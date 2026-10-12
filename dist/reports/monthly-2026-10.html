@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>لوحة المؤشرات الشهرية — أمن الملاحة 2026</title>
+<style>
+:root{--bg:#050a12;--panel:#0c1626;--line:#1d2e4a;--ink:#e9f0f9;--ink2:#b9c8dc;--muted:#7e93ab;--accent:#22c3b6}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif;line-height:1.9}
+.wrap{max-width:980px;margin:0 auto;padding:38px 20px 70px}
+h1{font-size:26px;margin:0 0 6px}h2{font-size:18px;color:var(--accent);margin:30px 0 12px}
+p.lede{color:var(--muted);margin:0 0 20px;font-size:14px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:22px 0}
+.k{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.k b{display:block;font-size:24px;font-family:"IBM Plex Mono",monospace}
+.k span{color:var(--muted);font-size:13px}
+.row{display:grid;grid-template-columns:150px 1fr 54px;gap:12px;align-items:center;margin:8px 0}
+.lbl{font-size:13.5px;color:var(--ink2)}
+.bar{height:9px;background:#101d31;border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent)}
+.bar.alt i{background:#4d9dff}
+.num{font-family:"IBM Plex Mono",monospace;font-size:13px;text-align:end}
+table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{padding:9px 12px;border-bottom:1px solid var(--line);font-size:14px;text-align:start}
+th{background:#0f1d33;color:var(--ink2);font-weight:600}
+td.num{text-align:end;font-family:"IBM Plex Mono",monospace}
+.foot{color:var(--muted);font-size:12.5px;margin-top:26px;border-top:1px solid var(--line);padding-top:14px}
+</style><style>
+:root{--sn-bg:#040810;--sn-panel:#0b1524;--sn-line:#1b2b45;--sn-ink:#e9f0f9;--sn-ink2:#b9c8dc;
+--sn-muted:#7f95ae;--sn-accent:#22c3b6;--sn-accent-ink:#04120f}
+html{scroll-behavior:smooth}
+body.daylight{--sn-bg:#eef3f9;--sn-panel:#ffffff;--sn-line:#d3dded;--sn-ink:#0d1a2b;--sn-ink2:#33475e;
+--sn-muted:#5d738c;--sn-accent:#0f8f86;--sn-accent-ink:#ffffff}
+.site-nav{position:sticky;top:0;z-index:60;background:var(--sn-bg);border-bottom:1px solid var(--sn-line);
+font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif}
+.site-nav .sn-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:9px 20px;flex-wrap:wrap}
+.site-nav a{color:var(--sn-ink2);text-decoration:none}
+.sn-brand{display:flex;align-items:center;gap:10px;color:var(--sn-ink)!important;font-weight:700}
+.sn-mark{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:0 0 auto;
+background:linear-gradient(150deg,var(--sn-accent),#0c8b83);color:#04120f}
+.sn-mark svg{width:17px;height:17px}
+.sn-name{display:flex;flex-direction:column;line-height:1.25}
+.sn-name em{font-style:normal;font-size:11.5px;font-weight:500;color:var(--sn-muted)}
+.sn-links{display:flex;gap:4px;margin-inline-start:auto;flex-wrap:wrap}
+.sn-links a{padding:6px 11px;border-radius:8px;font-size:13.5px;border:1px solid transparent}
+.sn-links a:hover{background:var(--sn-panel);border-color:var(--sn-line);color:var(--sn-ink)}
+.sn-links a[aria-current="page"]{background:var(--sn-panel);border-color:var(--sn-line);color:var(--sn-ink);font-weight:600}
+.sn-tools{display:flex;align-items:center;gap:8px}
+.sn-scale{display:flex;border:1px solid var(--sn-line);border-radius:9px;overflow:hidden}
+.sn-scale button{background:transparent;border:0;color:var(--sn-ink2);padding:5px 10px;cursor:pointer;font:inherit;font-size:13px}
+.sn-scale button.on{background:var(--sn-accent);color:var(--sn-accent-ink);font-weight:700}
+.sn-theme{background:var(--sn-panel);border:1px solid var(--sn-line);color:var(--sn-ink2);
+border-radius:9px;padding:6px 11px;cursor:pointer;font:inherit;font-size:13px}
+.sn-theme:hover{color:var(--sn-ink)}
+.sn-foot{margin-top:44px;border-top:1px solid var(--sn-line);background:var(--sn-bg);
+font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif}
+.sn-foot .sf-inner{max-width:1180px;margin:0 auto;padding:20px;color:var(--sn-muted);font-size:12.5px;
+display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
+.sn-foot a{color:var(--sn-ink2)}
+body.daylight .topbar{background:#ffffff!important;border-bottom-color:#d3dded!important}
+body.daylight .brand-title,body.daylight .brand-sub{color:#0d1a2b}
+@media print{.site-nav,.sn-foot{display:none!important}}
+</style></head><body><nav class="site-nav no-print" aria-label="تنقل الموقع">
+  <div class="sn-inner">
+    <a class="sn-brand" href="/">
+      <span class="sn-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/><path d="M12 11.5v4"/><path d="M9.6 13.2h4.8"/></svg></span>
+      <span class="sn-name">مركز الوعي البحري<em>تقارير أمن الملاحة — مملكة البحرين</em></span>
+    </a>
+    <div class="sn-links">
+      <a href="/">الرئيسية</a>
+      <a href="/#archive">الأرشيف</a>
+      <a href="/reports/monthly-2026-10.html" aria-current="page">اللوحة الشهرية</a>
+      <a href="/reports/cumulative-2026.html">السجل التراكمي</a>
+    </div>
+    <div class="sn-tools">
+      <div class="sn-scale" role="group" aria-label="حجم الخط">
+        <button type="button" data-scale="1" title="حجم عادي">أ</button>
+        <button type="button" data-scale="1.12" title="حجم أكبر">أ+</button>
+        <button type="button" data-scale="1.25" title="أكبر حجم">أ++</button>
+      </div>
+      <button type="button" class="sn-theme" id="sn-theme">المظهر</button>
+    </div>
+  </div>
+</nav><script>
+(function(){try{
+var b=document.body;if(!b)return;
+var t=localStorage.getItem('mn-theme');if(t==='light')b.classList.add('daylight');
+var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom=s;
+}catch(e){}})();
+</script><div class="wrap">
+<h1>لوحة المؤشرات الشهرية — أمن الملاحة 2026</h1>
+<p class="lede">لوحة مبنية من دفتر الأحداث التراكمي: 9 شهرًا، 145 سجلًا. لا تُقرأ الأعداد كهجمات مؤكدة.</p>
+<div class="kpis">
+<div class="k"><b class="bidi">145</b><span>إجمالي السجلات</span></div>
+<div class="k"><b class="bidi">9</b><span>الأشهر المغطاة</span></div>
+<div class="k"><b class="bidi">39</b><span>سجلات مضيق هرمز</span></div>
+<div class="k"><b class="bidi">86</b><span>أنواع تصنيف</span></div>
+</div>
+<h2>السجلات بحسب الشهر</h2><div class="row"><span class="lbl bidi">2026-02</span><span class="bar"><i style="width:12.5%"></i></span><span class="num bidi">4</span></div><div class="row"><span class="lbl bidi">2026-03</span><span class="bar"><i style="width:100.0%"></i></span><span class="num bidi">32</span></div><div class="row"><span class="lbl bidi">2026-04</span><span class="bar"><i style="width:62.5%"></i></span><span class="num bidi">20</span></div><div class="row"><span class="lbl bidi">2026-05</span><span class="bar"><i style="width:53.1%"></i></span><span class="num bidi">17</span></div><div class="row"><span class="lbl bidi">2026-06</span><span class="bar"><i style="width:53.1%"></i></span><span class="num bidi">17</span></div><div class="row"><span class="lbl bidi">2026-07</span><span class="bar"><i style="width:62.5%"></i></span><span class="num bidi">20</span></div><div class="row"><span class="lbl bidi">2026-08</span><span class="bar"><i style="width:46.9%"></i></span><span class="num bidi">15</span></div><div class="row"><span class="lbl bidi">2026-09</span><span class="bar"><i style="width:34.4%"></i></span><span class="num bidi">11</span></div><div class="row"><span class="lbl bidi">2026-10</span><span class="bar"><i style="width:28.1%"></i></span><span class="num bidi">9</span></div>
+<h2>التوزيع الجغرافي</h2><div class="row"><span class="lbl">مواقع أخرى</span><span class="bar alt"><i style="width:100.0%"></i></span><span class="num bidi">77</span></div><div class="row"><span class="lbl">مضيق هرمز</span><span class="bar alt"><i style="width:50.6%"></i></span><span class="num bidi">39</span></div><div class="row"><span class="lbl">الخليج العربي</span><span class="bar alt"><i style="width:11.7%"></i></span><span class="num bidi">9</span></div><div class="row"><span class="lbl">البحر الأحمر</span><span class="bar alt"><i style="width:9.1%"></i></span><span class="num bidi">7</span></div><div class="row"><span class="lbl">خليج عُمان</span><span class="bar alt"><i style="width:7.8%"></i></span><span class="num bidi">6</span></div><div class="row"><span class="lbl">بحر العرب</span><span class="bar alt"><i style="width:6.5%"></i></span><span class="num bidi">5</span></div><div class="row"><span class="lbl">باب المندب</span><span class="bar alt"><i style="width:2.6%"></i></span><span class="num bidi">2</span></div>
+<h2>التصنيف</h2><table><thead><tr><th>التصنيف</th><th>العدد</th></tr></thead><tbody><tr><td>غير مصنف</td><td class="num bidi">36</td></tr><tr><td>هجوم مؤكد</td><td class="num bidi">9</td></tr><tr><td>هجوم/إصابة بمقذوف غير محدد المصدر</td><td class="num bidi">6</td></tr><tr><td>هجوم مؤكد على ناقلة</td><td class="num bidi">5</td></tr><tr><td>هجوم مؤكد؛ المصدر غير محدد</td><td class="num bidi">3</td></tr><tr><td>تحذير/نشرة</td><td class="num bidi">2</td></tr><tr><td>تفاعل أمني/محاولة صعود</td><td class="num bidi">2</td></tr><tr><td>تفاعل عسكري</td><td class="num bidi">2</td></tr><tr><td>اختطاف مؤكد</td><td class="num bidi">2</td></tr><tr><td>هجوم مسلح</td><td class="num bidi">2</td></tr><tr><td>تحذير/نشرة أمنية بحرية</td><td class="num bidi">1</td></tr><tr><td>تحذير/نشرة — تفاعل عسكري غير محسوم</td><td class="num bidi">1</td></tr><tr><td>تحذير/نشرة — حالة عبور</td><td class="num bidi">1</td></tr><tr><td>تفاعل عسكري/نشرة حكومية</td><td class="num bidi">1</td></tr><tr><td>قرب إصابة/واقعة أمنية</td><td class="num bidi">1</td></tr><tr><td>هجوم مؤكد على منشأة/ناقلة، مع تعارض زمني</td><td class="num bidi">1</td></tr><tr><td>هجوم مؤكد على سفينة راسية</td><td class="num bidi">1</td></tr><tr><td>هجوم مؤكد على ناقلة راسية</td><td class="num bidi">1</td></tr><tr><td>قرب إصابة/نشاط جوي مريب</td><td class="num bidi">1</td></tr><tr><td>هجوم مؤكد أو واقعة انفجار على سفينة</td><td class="num bidi">1</td></tr><tr><td>قرب إصابة</td><td class="num bidi">1</td></tr><tr><td>نشرة تحذير عسكري، لا واقعة سفينة محددة</td><td class="num bidi">1</td></tr><tr><td>هجوم مؤكد على قاطرة</td><td class="num bidi">1</td></tr><tr><td>هجوم مؤكد على بنية تحتية بحرية</td><td class="num bidi">1</td></tr><tr><td>قرب إصابة/واقعة غير محسومة</td><td class="num bidi">1</td></tr><tr><td>هجوم مؤكد/إصابة مقذوف</td><td class="num bidi">1</td></tr><tr><td>هجوم مؤكد على ناقلة/إنقاذ</td><td class="num bidi">1</td></tr><tr><td>هجوم مؤكد على ناقلة سائبة راسية</td><td class="num bidi">1</td></tr><tr><td>هجوم مؤكد على بنية تحتية مينائية</td><td class="num bidi">1</td></tr><tr><td>هجوم مؤكد على ناقلتين وإنقاذ</td><td class="num bidi">1</td></tr><tr><td>هجوم مؤكد على سفينة حاويات</td><td class="num bidi">1</td></tr><tr><td>حادث حطام من اعتراض جوي، لا هجوم مثبت</td><td class="num bidi">1</td></tr><tr><td>نشرة أمنية/تفاعل عسكري عام، لا اشتباك بحري محدد</td><td class="num bidi">1</td></tr><tr><td>هجوم مؤكد/إصابة ناقلة كيماويات</td><td class="num bidi">1</td></tr><tr><td>نشاط مريب/حطام طائرة مسيّرة</td><td class="num bidi">1</td></tr><tr><td>تحذير/مؤشر نوايا، لا هجوم</td><td class="num bidi">1</td></tr><tr><td>نشاط مريب</td><td class="num bidi">1</td></tr><tr><td>نشرة تحذير MARAD، لا واقعة جديدة</td><td class="num bidi">1</td></tr><tr><td>هجوم مؤكد على بنية مينائية/إنقاذ</td><td class="num bidi">1</td></tr><tr><td>إصابة بمقذوف غير محدد المصدر/تصنيف مريب</td><td class="num bidi">1</td></tr><tr><td>نشاط مريب/قرب إصابة</td><td class="num bidi">1</td></tr><tr><td>إصابة بمقذوفين/تصنيف مريب</td><td class="num bidi">1</td></tr><tr><td>تحذير/نشاط مشبوه</td><td class="num bidi">1</td></tr><tr><td>هجوم مؤكد؛ ثم إنقاذ</td><td class="num bidi">1</td></tr><tr><td>قرصنة/ثم تصحيح تصنيف</td><td class="num bidi">1</td></tr><tr><td>تفاعل عسكري/حصار بحري</td><td class="num bidi">1</td></tr><tr><td>تفاعل عسكري/هجوم مؤكد</td><td class="num bidi">1</td></tr><tr><td>هجوم مؤكد/تفاعل عسكري</td><td class="num bidi">1</td></tr><tr><td>هجوم مؤكد/احتجاز</td><td class="num bidi">1</td></tr><tr><td>هجوم/إطلاق نار مبلّغ عنه؛ التفاصيل متعارضة</td><td class="num bidi">1</td></tr><tr><td>اختطاف ثم إنقاذ</td><td class="num bidi">1</td></tr><tr><td>تحذير/محاولة صعود</td><td class="num bidi">1</td></tr><tr><td>خلفية/غياب واقعة مؤكدة في السجل المتاح</td><td class="num bidi">1</td></tr><tr><td>تفاعل عسكري/عملية وقائية</td><td class="num bidi">1</td></tr><tr><td>نشاط مشبوه/اقترابان</td><td class="num bidi">1</td></tr><tr><td>تفاعل عسكري/إعاقة بالقوة وإنقاذ</td><td class="num bidi">1</td></tr><tr><td>نشاط مشبوه (أُعيد تصنيفه)</td><td class="num bidi">1</td></tr><tr><td>تفاعل عسكري/حادث وإنقاذ</td><td class="num bidi">1</td></tr><tr><td>تفاعل عسكري/إعاقة بالقوة وحريق</td><td class="num bidi">1</td></tr><tr><td>هجوم مسلح/محاولة اقتراب</td><td class="num bidi">1</td></tr><tr><td>بلاغ أولي أُسقط أمنيًا بعد التحقيق</td><td class="num bidi">1</td></tr><tr><td>نشرة/تحذير ملاحي</td><td class="num bidi">1</td></tr><tr><td>نشاط مشبوه/محاولة اقتراب</td><td class="num bidi">1</td></tr><tr><td>نشرة/تنظيم مرور وإنقاذ</td><td class="num bidi">1</td></tr><tr><td>هجوم/إصابة بطائرة مسيّرة أو مقذوف</td><td class="num bidi">1</td></tr><tr><td>هجوم مؤكد بمركبة سطحية غير مأهولة</td><td class="num bidi">1</td></tr><tr><td>تفاعل عسكري/حادث غير محسوم</td><td class="num bidi">1</td></tr><tr><td>سلسلة هجمات مؤكدة، وعدد الوقائع غير محسوم</td><td class="num bidi">1</td></tr><tr><td>اختطاف/قرصنة مؤكد</td><td class="num bidi">1</td></tr><tr><td>تفاعل عسكري/استعراض قوة</td><td class="num bidi">1</td></tr><tr><td>هجوم مؤكد، لكن السجل غير متسق</td><td class="num bidi">1</td></tr><tr><td>تفاعل عسكري/نشرة تحذيرية، لا تُصنف كهجوم مؤكد على كل سفينة</td><td class="num bidi">1</td></tr><tr><td>هجوم مؤكد من حيث البلاغ، مع واقعة ثانية غير محسومة</td><td class="num bidi">1</td></tr><tr><td>إصابات بمقذوفات غير محددة المصدر؛ نشاط مشبوه منفصل</td><td class="num bidi">1</td></tr><tr><td>عدة هجمات/بلاغات منفصلة، التفاصيل غير مكتملة</td><td class="num bidi">1</td></tr><tr><td>نشاط مشبوه/محاولة اعتراض بزورق صغير</td><td class="num bidi">1</td></tr><tr><td>هجوم/إصابة بمقذوفات؛ تعارض في حصيلة الإصابات</td><td class="num bidi">1</td></tr><tr><td>هجوم مؤكد؛ إنقاذ وإجلاء</td><td class="num bidi">1</td></tr><tr><td>سلسلة هجمات على ناقلات بمقذوفات غير محددة المصدر</td><td class="num bidi">1</td></tr><tr><td>سلسلة هجمات على ناقلات؛ تعارض في الترقيم والتوقيت المنشور</td><td class="num bidi">1</td></tr><tr><td>هجمات على ناقلات</td><td class="num bidi">1</td></tr><tr><td>نشاط مشبوه/تهديد جوي مرجح الاعتراض، لا هجوم مؤكد</td><td class="num bidi">1</td></tr><tr><td>تفاعل عسكري/تهديد مباشر، وهجوم على ناقلة</td><td class="num bidi">1</td></tr><tr><td>هجوم مؤكد/إصابة بمقذوف غير محدد المصدر</td><td class="num bidi">1</td></tr><tr><td>تفاعل عسكري، وهجوم منفصل</td><td class="num bidi">1</td></tr><tr><td>هجوم مؤكد؛ إجلاء محتمل للطاقم</td><td class="num bidi">1</td></tr></tbody></table>
+<h2>درجة الثقة المسجلة</h2><table><thead><tr><th>المستوى</th><th>العدد</th></tr></thead><tbody><tr><td>high</td><td class="num bidi">95</td></tr><tr><td>medium</td><td class="num bidi">42</td></tr><tr><td>low</td><td class="num bidi">8</td></tr></tbody></table>
+<div class="foot">المصدر: ledger.json — أُنشئت في 2026-10-12.</div>
+</div><footer class="sn-foot no-print">
+  <div class="sf-inner">
+    <span>مركز الوعي البحري — تقارير أمن الملاحة — مملكة البحرين · لوحة مبنية من دفتر الأحداث التراكمي</span>
+    <span>تُحدَّث الصفحات آليًا مع كل إصدار · <a href="/#archive">الأرشيف الكامل</a> · <a href="/feed.xml">تغذية الإصدارات</a></span>
+  </div>
+</footer><script>
+(function(){
+var LS=window.localStorage, body=document.body;
+function save(k,v){try{LS.setItem(k,v);}catch(e){}}
+var reportBtn=document.getElementById('btn-theme'), siteBtn=document.getElementById('sn-theme');
+// إزالة مستمع الزر الأصلي داخل التقرير بمضاعفة العقدة لمنع الازدواج
+if(reportBtn){var clone=reportBtn.cloneNode(true);reportBtn.parentNode.replaceChild(clone,reportBtn);reportBtn=clone;}
+function isLight(){return body.classList.contains('daylight');}
+function paint(){
+  if(reportBtn) reportBtn.textContent = isLight() ? 'النمط الليلي' : 'النمط النهاري';
+  if(siteBtn) siteBtn.textContent = isLight() ? 'المظهر: نهاري' : 'المظهر: ليلي';
+  document.querySelectorAll('[data-scale]').forEach(function(b){
+    b.classList.toggle('on', parseFloat(b.getAttribute('data-scale'))===currentScale());
+  });
+}
+function currentScale(){var s=parseFloat(LS.getItem('mn-scale')||'1');return (s&&s>0)?s:1;}
+function toggleTheme(){var on=body.classList.toggle('daylight');save('mn-theme',on?'light':'dark');paint();}
+if(reportBtn) reportBtn.addEventListener('click',function(e){e.preventDefault();toggleTheme();});
+if(siteBtn) siteBtn.addEventListener('click',function(e){e.preventDefault();toggleTheme();});
+document.querySelectorAll('[data-scale]').forEach(function(b){
+  b.addEventListener('click',function(e){e.preventDefault();
+    var s=parseFloat(b.getAttribute('data-scale'));save('mn-scale',s);
+    body.style.zoom=(s===1?'':s);paint();});
+});
+paint();
+// تذكّر آخر تقرير فُتح
+var p=location.pathname;
+if(p.indexOf('/reports/')===0){
+  var t=(document.title||'').split(/[|·]/)[0].trim();
+  save('mn-last',JSON.stringify({path:p,title:t,at:new Date().toISOString()}));
+}
+})();
+</script></body></html>

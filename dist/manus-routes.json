@@ -1,0 +1,24 @@
+{
+ "routes": [
+  {
+   "path": "/",
+   "title": "الرئيسية والأرشيف"
+  },
+  {
+   "path": "/reports/2026-10-12.html",
+   "title": "تقرير 12 أكتوبر 2026"
+  },
+  {
+   "path": "/reports/:date",
+   "title": "تقرير يومي"
+  },
+  {
+   "path": "/reports/monthly-2026-10.html",
+   "title": "اللوحة الشهرية"
+  },
+  {
+   "path": "/reports/cumulative-2026.html",
+   "title": "السجل التراكمي"
+  }
+ ]
+}
