@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-مولّد الموقع الدائم لمركز الوعي البحري.
+مولّد الموقع الدائم لمركز الوعي بالمجال البحري.
 
 الاستخدام:
   python3 generator/build_site.py [--site-root /path/to/site] [--check]
@@ -182,11 +182,11 @@ def build_index(dist: Path, reports, notfound: bool = False):
 
     return f"""<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="مركز الوعي البحري: تقارير أمن الملاحة اليومية في مضيق هرمز والخليج العربي وبحر العرب والبحر الأحمر.">
+<meta name="description" content="مركز الوعي بالمجال البحري: تقارير أمن الملاحة اليومية في مضيق هرمز والخليج العربي وبحر العرب والبحر الأحمر.">
 <meta name="theme-color" content="#040810">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="تغذية الإصدارات اليومية" href="/feed.xml">
-<title>مركز الوعي البحري — تقارير أمن الملاحة</title>
+<title>مركز الوعي بالمجال البحري — تقارير أمن الملاحة</title>
 <style>
 {site_chrome.SITE_CSS}
 :root{{--bg:#040810;--panel:#0b1524;--panel2:#0f1d33;--line:#1b2b45;--ink:#e9f0f9;--ink2:#b9c8dc;
@@ -246,7 +246,7 @@ ul.ar{{list-style:none;margin:0;padding:0}}
 PREFS_EARLY_PLACEHOLDER
 NAV_PLACEHOLDER
 <div class="wrap">
-  <h1>مركز الوعي البحري</h1>
+  <h1>مركز الوعي بالمجال البحري</h1>
   <p class="lede">منصة دائمة لتقارير أمن الملاحة: إصدار يومي بمؤشراته وخرائطه، ولوحة شهرية مبنية من دفتر أحداث تراكمي، وسجل تاريخي للمقارنة. كل إصدار يفصل الحقيقة عن التقدير ويربط الرقم بجهة قادرة على حسمه.</p>
 
   <div class="cont" id="cont">
@@ -413,7 +413,7 @@ def build_feed(dist: Path, reports):
         )
     xml = ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
            "<rss version=\"2.0\"><channel>\n"
-           "  <title>مركز الوعي البحري — تقارير أمن الملاحة</title>\n"
+           "  <title>مركز الوعي بالمجال البحري — تقارير أمن الملاحة</title>\n"
            f"  <link>{site}/</link>\n"
            "  <description>إصدار يومي لأمن الملاحة في مضيق هرمز والخليج العربي وبحر العرب والبحر الأحمر</description>\n"
            "  <language>ar</language>\n"
@@ -459,7 +459,7 @@ def notfound_panel(reports, visible: bool = False) -> str:
             "if(!K[p]){var nf=document.getElementById('nf404');"
             "var w=document.querySelector('.wrap');"
             "if(nf){if(w){w.setAttribute('hidden','');}nf.removeAttribute('hidden');"
-            "document.title='الصفحة غير موجودة — مركز الوعي البحري';}}})();</script>"
+            "document.title='الصفحة غير موجودة — مركز الوعي بالمجال البحري';}}})();</script>"
         )
     return (
         f'<section class="card nf" id="nf404"{hid}>'
@@ -504,8 +504,8 @@ def build_robots(dist: Path) -> None:
 
 def build_notfound(dist: Path, reports) -> None:
     html = build_index(dist, reports, notfound=True).replace(
-        "<title>مركز الوعي البحري — تقارير أمن الملاحة</title>",
-        "<title>الصفحة غير موجودة — مركز الوعي البحري</title>")
+        "<title>مركز الوعي بالمجال البحري — تقارير أمن الملاحة</title>",
+        "<title>الصفحة غير موجودة — مركز الوعي بالمجال البحري</title>")
     (dist / "404.html").write_text(html, encoding="utf-8")
 
 
