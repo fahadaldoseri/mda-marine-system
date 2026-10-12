@@ -329,6 +329,9 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 /* ---------- التذييل ---------- */
 .foot{margin-top:34px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);color:var(--muted);font-size:13.5px}
 .foot b{color:var(--ink-2)}
+/* قواعد العرض المعتمدة 12 أكتوبر 2026 (تعديلات المعاينة) — للتراجع: احذف السطرين التاليين */
+.foot{display:none}
+.method-note{display:none}
 
 /* ---------- الحركة: دخول لطيف بالـCSS فقط، والمحتوى مرئي دائمًا ---------- */
 @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -813,7 +816,10 @@ def render_section_body(title: str, lines, defs):
             ):
                 para.append(lines[i].strip())
                 i += 1
-            out.append(f"<p>{inline(' '.join(para), defs)}</p>")
+            text = " ".join(para)
+            # فقرة المنهج الداخلي تُعرض مخفية: تبقى في المصدر ولا تظهر للقارئ
+            cls = ' class="method-note"' if text.lstrip("*").startswith("منهج الحالة") else ""
+            out.append(f"<p{cls}>{inline(text, defs)}</p>")
             continue
 
         i += 1
