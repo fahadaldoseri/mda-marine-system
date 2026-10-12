@@ -131,6 +131,10 @@ def changes_block(items, inline):
 
 
 # ------------------------------------------------------------------ جداول موحدة
+class Raw(str):
+    """خلية HTML جاهزة: تُدرج كما هي ولا يعاد معالجتها في _table (وإلا ظهرت الوسوم نصًّا)."""
+
+
 def _table(headers, rows, inline, num_cols=()):
     if not rows:
         return ""
@@ -144,7 +148,9 @@ def _table(headers, rows, inline, num_cols=()):
         for i, c in enumerate(r):
             s = c if isinstance(c, str) else ""
             # خلية جاهزة بـHTML (مثل <bdi> أو شارة حالة) لا تُعاد معالجتها، وإلا ظهرت الوسوم نصًّا للقارئ
-            cell = s if i in num_cols else (s if s.lstrip().startswith("<") else inline(s))
+            # خلية تحتوي وسومًا HTML جاهزة لا تُعاد معالجتها، وإلا ظهرت الوسوم نصًّا للقارئ
+            ready = isinstance(c, Raw) or ("<" in s and ">" in s)
+            cell = s if i in num_cols else (s if ready else inline(s))
             cls = ' class="num"' if i in num_cols else ""
             tds.append(f"<td{cls}>{cell}</td>")
         body.append(f"<tr>{''.join(tds)}</tr>")
@@ -209,11 +215,11 @@ def event_keys_table(items, inline):
         st = str(it.get("status", "")).strip()
         cls = STATUS_CLASS.get(st, "s-stable")
         rows.append([
-            f'<bdi class="bidi ev-code">{esc(it.get("code", ""))}</bdi>',
-            inline(it.get("title", "")),
-            inline(it.get("area", "")),
-            f'<span class="st-badge {cls}">{esc(st)}</span>',
-            inline(it.get("note", "")),
+            Raw(f'<bdi class="bidi ev-code">{esc(it.get("code", ""))}</bdi>'),
+            Raw(inline(it.get("title", ""))),
+            Raw(inline(it.get("area", ""))),
+            Raw(f'<span class="st-badge {cls}">{esc(st)}</span>'),
+            Raw(inline(it.get("note", ""))),
         ])
     return (
         '<h3>مفاتيح الأحداث</h3>'
