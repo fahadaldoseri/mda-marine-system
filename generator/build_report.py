@@ -180,7 +180,8 @@ a.bidi{white-space:normal}
 .masthead{padding:34px 0 6px;display:flex;gap:22px;align-items:flex-end;flex-wrap:wrap}
 .masthead h1{
   font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;
-  font-size:clamp(26px,3.4vw,40px);line-height:1.3;margin:0 0 8px
+  font-size:clamp(26px,3.4vw,40px);line-height:1.3;margin:0 0 8px;
+  flex:0 0 100%;width:100%;text-align:center
 }
 .masthead .lede{color:var(--ink-2);font-size:15px;max-width:74ch;margin:0}
 .masthead-meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
@@ -1020,8 +1021,8 @@ def build(md_path: Path, out_path: Path, meta: dict):
 
 <div class="wrap">
   <header class="masthead">
+    <h1>{esc(meta.get("headline") or title)}</h1>
     <div>
-      <h1>{esc(meta.get("headline") or title)}</h1>
       <p class="lede">{esc(meta.get("lede") or "")}</p>
       <div class="masthead-meta">{"".join(chips)}</div>
     </div>
