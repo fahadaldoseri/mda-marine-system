@@ -917,7 +917,7 @@ def build(md_path: Path, out_path: Path, meta: dict):
 
     # كتل خاصة بكل قسم: خريطة عنوان القسم إلى اسم الكتلة
     blocks_map = meta.get("blocks") or {}
-    block_data = {k: meta.get(k) for k in ("indicators", "hypotheses", "gaps", "event_keys", "timeline")}
+    block_data = {k: meta.get(k) for k in ("indicators", "hypotheses", "gaps", "event_keys", "timeline", "source_reliability")}
     if not isinstance(blocks_map, dict):
         blocks_map = {}
 
