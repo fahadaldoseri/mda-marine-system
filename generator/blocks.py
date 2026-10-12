@@ -72,13 +72,13 @@ def kind_strip(kind):
 
 # ---------------------------------------------------------------- بطاقة القرار
 def decision_card(dc, inline):
-    """بطاقة القرار: ما تغيّر · الخطر · المطلوب فورًا · ما يُراقب."""
+    """بطاقة القرار: ما تغيّر · الخطر · التوصيات · ما يُراقب."""
     if not isinstance(dc, dict):
         return ""
     rows = [
         ("ما تغيّر", dc.get("changed"), None),
         ("مستوى الخطر", dc.get("risk"), dc.get("risk_kind")),
-        ("المطلوب فورًا", dc.get("action"), None),
+        ("التوصيات", dc.get("action"), None),
         ("ما يُراقب خلال 24 ساعة", dc.get("watch"), None),
     ]
     cells = []

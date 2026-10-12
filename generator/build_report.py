@@ -355,6 +355,12 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 
 /* ==================== نمط الطباعة A4 ==================== */
 @page{size:A4;margin:14mm 12mm}
+/* ---------- قواعد عرض معتمدة من تعديلات المعاينة (12 أكتوبر 2026) ---------- */
+.notice,
+.map-panel .src-note,
+.map-keys,
+.decision .dc-foot{display:none}
+
 @media print{
   :root{
     --ink:#0a1524;--ink-2:#20303f;--muted:#4b5e73;--faint:#5c728c;
