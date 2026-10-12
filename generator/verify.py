@@ -103,17 +103,19 @@ if pdf.exists():
     notes.append(f"PASS: أُنشئت نسخة الطباعة A4 ({pdf.stat().st_size} bytes، صفحات مكتشفة: {pages})")
 
 print("\n".join(notes))
+
+# فحص الوسوم المهرَّبة: أي وسم HTML يظهر نصًّا للقارئ = عيب مانع (المرحلة الرابعة)
+html_txt = Path(sys.argv[1]).read_text(encoding="utf-8")
+n_esc = html_txt.count("&lt;")
+if n_esc:
+    fails.append(f"FAIL: {n_esc} وسمًا مهرَّبًا يظهر نصًّا للقارئ في الصفحة")
+else:
+    notes.append("PASS: لا وسوم مهرَّبة تظهر نصًّا للقارئ")
+
+print("\n".join(notes))
 if fails:
     print("\n".join(fails))
     print(f"\nالنتيجة: فشل {len(fails)} فحصًا.")
     sys.exit(1)
 print("\nالنتيجة: نجحت جميع الفحوص.")
 sys.exit(0)
-
-    # فحص الوسوم المهرَّبة: أي وسم يظهر نصًّا للقارئ = عيب مانع
-    html_txt = Path(sys.argv[1]).read_text(encoding="utf-8")
-    n_esc = html_txt.count("&lt;")
-    if n_esc:
-        print(f"فشل: {n_esc} وسمًا مهرَّبًا يظهر نصًّا للقارئ")
-        sys.exit(1)
-    print("فحص الوسوم المهرَّبة: لا شيء")

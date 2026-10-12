@@ -62,6 +62,14 @@ def risk_of(meta: dict):
     return label or "غير محدد", kind or "med"
 
 
+RESTRICTED_CLASSES = {"مقيّد", "حساس"}
+
+
+def is_restricted(meta) -> bool:
+    """الإصدار المقيّد أو الحساس لا يُنشر على الموقع العام."""
+    return str((meta or {}).get("classification", "عام")).strip() in RESTRICTED_CLASSES
+
+
 def discover(site_root: Path):
     """يجمع أزواج التقارير اليومية من مجلد المصادر."""
     reports, warnings = [], []
@@ -505,6 +513,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--site-root", default=str(HERE.parent))
     ap.add_argument("--check", action="store_true", help="فحص المخرجات بعد البناء")
+    ap.add_argument("--allow-restricted", action="store_true",
+                    help="يسمح بنشر إصدار مقيّد أو حساس على الموقع العام (ممنوع افتراضيًا)")
     a = ap.parse_args()
 
     site_root = Path(a.site_root).resolve()
@@ -514,6 +524,15 @@ def main():
     warnings = []
     reports, w = discover(site_root)
     warnings += w
+    if not a.allow_restricted:
+        kept, blocked = [], []
+        for r in reports:
+            (blocked if is_restricted(r["meta"]) else kept).append(r)
+        for r in blocked:
+            warnings.append(f"لم يُنشر إصدار مقيّد أو حساس: {r['iso']} — يبقى داخل المحادثة فقط")
+        if blocked and not kept:
+            raise SystemExit("توقف البناء: كل الإصدارات مقيّدة أو حساسة، ولا يُنشر منها شيء على الموقع العام.")
+        reports = kept
     built = build_reports(site_root, dist, reports, warnings)
     cum = build_cumulative(site_root, dist, warnings)
     mon = build_monthly(site_root, dist, warnings)
