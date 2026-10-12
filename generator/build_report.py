@@ -183,10 +183,11 @@ a.bidi{white-space:normal}
   font-size:clamp(26px,3.4vw,40px);line-height:1.3;margin:0 0 8px;
   flex:0 0 100%;width:100%;text-align:center
 }
+.masthead > div:not(.threat){flex:1 0 100%}
 .masthead .lede{color:var(--ink-2);font-size:15px;max-width:74ch;margin:0}
 .masthead-meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
 .threat{
-  margin-inline-start:auto;text-align:center;border-radius:var(--radius);
+  margin-inline-start:0;margin-inline-end:auto;text-align:center;border-radius:var(--radius);
   border:1px solid var(--line-2);background:var(--panel);padding:14px 20px;min-width:172px
 }
 .threat .lbl{font-size:12px;color:var(--muted)}
@@ -1028,11 +1029,11 @@ def build(md_path: Path, out_path: Path, meta: dict):
 <div class="wrap">
   <header class="masthead">
     <h1>{esc(meta.get("headline") or title)}</h1>
+    {threat_html}
     <div>
       <p class="lede">{esc(meta.get("lede") or "")}</p>
       <div class="masthead-meta">{"".join(chips)}</div>
     </div>
-    {threat_html}
   </header>
 
   {cls_html}
