@@ -973,6 +973,10 @@ def build(md_path: Path, out_path: Path, meta: dict):
                 for _bn in str(bname).split('+'):
                     if block_data.get(_bn):
                         section_html += BLK.render_block(_bn, block_data[_bn], inline)
+            if "الحركة" in t:
+                section_html += '<p class="src-note">قراءة اتجاه من منصة رصد — تُراعى مهلة التحديث واحتمال انقطاع الإرسال أو spoofing.</p>'
+            if "التوزيع الجغرافي" in t:
+                section_html += '<p class="src-note">تحذيرات IHO/NAVAREA تُربط بإحداثياتها عند توفرها؛ والويب لا يستبدل البث الملاحي المعتمد.</p>'
                 break
         body.append(section_html)
         body.append("</section>")

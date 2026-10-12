@@ -340,6 +340,10 @@ def render_block(name, data, inline):
         return timeline(data, inline)
     if name == "source_reliability":
         return source_reliability_table(data, inline)
+    if name == "vessel_identity":
+        return vessel_identity_table(data, inline)
+    if name == "report_classes":
+        return report_classes_table(data, inline)
     return ""
 
 
@@ -485,15 +489,14 @@ def vessel_identity_table(data, inline):
     rows = data.get("rows") if isinstance(data, dict) else data
     if not rows:
         return ""
+    cols = (("name", "السفينة"), ("imo", "IMO"), ("mmsi", "MMSI"), ("flag", "الراية"), ("former", "أسماء سابقة"), ("src", "المصدر"))
     html = ['<h3 class="blk-h">هوية السفن المستشهد بها</h3>',
-            '<div class="tbl-scroll"><table class="tbl rel-tbl"><thead><tr>'
-            '<th>السفينة</th><th>IMO</th><th>MMSI</th><th>الراية</th><th>أسماء سابقة</th><th>المصدر</th>'
-            '</tr></thead><tbody>']
+            '<div class="tbl-scroll"><table class="tbl rel-tbl"><thead><tr>' +
+            "".join(f"<th>{h}</th>" for _, h in cols) + "</tr></thead><tbody>"]
     for r in rows:
-        html.append("<tr>" + "".join(
-            f'<td>{inline(str(r.get(k, "—")), {})}</td>'.replace('{}', 'DEF') for k in ("name", "imo", "mmsi", "flag", "former", "src")) + "</tr>")
+        html.append("<tr>" + "".join(f'<td>{inline(str(r.get(k, "—")))}</td>' for k, _ in cols) + "</tr>")
     html.append("</tbody></table></div>")
-    return "".join(html).replace('DEF', 'BLKDEF')
+    return "".join(html)
 
 
 def report_classes_table(data, inline):
