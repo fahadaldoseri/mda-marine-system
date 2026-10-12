@@ -140,6 +140,7 @@ a:focus-visible,.btn:focus-visible{outline:2px solid var(--accent);outline-offse
 /* عزل القيم اللاتينية والرقمية المركبة داخل سياق عربي */
 bdi,.bidi{direction:ltr;unicode-bidi:isolate}
 .k-v,.chip b,.cite-ref,.bar-row .bv,td.num,th.num{direction:ltr;unicode-bidi:isolate;white-space:nowrap}
+.ev-code,.bidi.ev-code{direction:ltr;unicode-bidi:isolate;white-space:nowrap}  /* رمز الحدث لا يُكسر بين سطرين */
 a.bidi{white-space:normal}
 .eng{direction:ltr;unicode-bidi:plaintext;overflow-wrap:anywhere}
 

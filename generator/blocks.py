@@ -142,9 +142,9 @@ def _table(headers, rows, inline, num_cols=()):
     for r in rows:
         tds = []
         for i, c in enumerate(r):
-            cell = inline(c if isinstance(c, str) else "") if i not in num_cols else (
-                c if isinstance(c, str) else ""
-            )
+            s = c if isinstance(c, str) else ""
+            # خلية جاهزة بـHTML (مثل <bdi> أو شارة حالة) لا تُعاد معالجتها، وإلا ظهرت الوسوم نصًّا للقارئ
+            cell = s if i in num_cols else (s if s.lstrip().startswith("<") else inline(s))
             cls = ' class="num"' if i in num_cols else ""
             tds.append(f"<td{cls}>{cell}</td>")
         body.append(f"<tr>{''.join(tds)}</tr>")
@@ -194,7 +194,7 @@ def hypotheses_table(items, inline):
 def gaps_table(items, inline):
     if not items:
         return ""
-    rows = [[inline(it.get("gap", "")), inline(it.get("owner", "")), inline(it.get("impact", ""))] for it in items]
+    rows = [[it.get("gap", ""), it.get("owner", ""), it.get("impact", "")] for it in items]
     return (
         '<h3>المجهولات كتكليفات</h3>'
         + _table(["الفجوة", "الجهة القادرة على الحسم", "أثر استمرارها"], rows, inline)
