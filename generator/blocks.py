@@ -96,8 +96,8 @@ def decision_card(dc, inline):
     if dc.get("basis"):
         foot = f'<div class="dc-foot">أساس التقدير: {esc(dc["basis"])}</div>'
     return (
-        '<section class="decision reveal" aria-label="بطاقة القرار">'
-        '<h2 class="dc-title">بطاقة القرار</h2>'
+        '<section class="decision reveal" aria-label="عام">'
+        '<h2 class="dc-title">عام</h2>'
         f'<div class="dc-grid">{"".join(cells)}</div>{foot}</section>'
     )
 
