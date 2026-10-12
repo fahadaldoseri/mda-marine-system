@@ -317,9 +317,9 @@ def source_reliability_table(data, inline):
             "</tr>"
         )
     table = (
-        '<table class="tbl rel-tbl"><thead><tr>'
+        '<div class="tbl-scroll"><table class="tbl rel-tbl"><thead><tr>'
         '<th>#</th><th>المصدر</th><th>الموثوقية</th><th>المصداقية</th><th>الأساس</th>'
-        '</tr></thead><tbody>' + "".join(trs) + "</tbody></table>"
+        '</tr></thead><tbody>' + "".join(trs) + "</tbody></table></div>"
     )
     return head + legend + note + table
 
@@ -471,6 +471,10 @@ STYLE_PRINT_BLOCKS = """
 
 STYLE_BLOCKS = STYLE_BLOCKS + """
 /* ---------- ملحق موثوقية المصادر ---------- */
+.tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+.tbl-scroll .rel-tbl{min-width:640px}
+.rel-tbl td:nth-child(5){max-width:420px}
+@media print{.tbl-scroll{overflow:visible}.tbl-scroll .rel-tbl{min-width:0}}
 .rel-tbl td.rel{
   font-family:"IBM Plex Mono",monospace;font-weight:600;text-align:center;color:var(--accent)
 }

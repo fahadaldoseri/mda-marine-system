@@ -460,6 +460,10 @@ ul.changes{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 }
 
 /* ---------- ملحق موثوقية المصادر ---------- */
+.tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+.tbl-scroll .rel-tbl{min-width:640px}
+.rel-tbl td:nth-child(5){max-width:420px}
+@media print{.tbl-scroll{overflow:visible}.tbl-scroll .rel-tbl{min-width:0}}
 .rel-tbl td.rel{
   font-family:"IBM Plex Mono",monospace;font-weight:600;text-align:center;color:var(--accent)
 }
