@@ -480,3 +480,32 @@ STYLE_BLOCKS = STYLE_BLOCKS + """
 }
 @media print{.rel-tbl{font-size:10.5px}.rel-tbl td,.rel-tbl th{padding:3px 5px}}
 """
+
+def vessel_identity_table(data, inline):
+    rows = data.get("rows") if isinstance(data, dict) else data
+    if not rows:
+        return ""
+    html = ['<h3 class="blk-h">هوية السفن المستشهد بها</h3>',
+            '<div class="tbl-scroll"><table class="tbl rel-tbl"><thead><tr>'
+            '<th>السفينة</th><th>IMO</th><th>MMSI</th><th>الراية</th><th>أسماء سابقة</th><th>المصدر</th>'
+            '</tr></thead><tbody>']
+    for r in rows:
+        html.append("<tr>" + "".join(
+            f'<td>{inline(str(r.get(k, "—")), {})}</td>'.replace('{}', 'DEF') for k in ("name", "imo", "mmsi", "flag", "former", "src")) + "</tr>")
+    html.append("</tbody></table></div>")
+    return "".join(html).replace('DEF', 'BLKDEF')
+
+
+def report_classes_table(data, inline):
+    rows = data.get("rows") if isinstance(data, dict) else data
+    if not rows:
+        return ""
+    html = ['<h3 class="blk-h">تصنيف البلاغات</h3>',
+            '<p class="src-note">الأصناف منفصلة ولا تُجمع في رقم واحد.</p>',
+            '<div class="tbl-scroll"><table class="tbl rel-tbl"><thead><tr>'
+            '<th>الصنف</th><th>العدد</th><th>التغير عن أمس</th></tr></thead><tbody>']
+    for r in rows:
+        html.append("<tr><td>" + str(r.get("class", "—")) + "</td><td>" + str(r.get("count", "—")) +
+                    "</td><td>" + str(r.get("delta", "—")) + "</td></tr>")
+    html.append("</tbody></table></div>")
+    return "".join(html)
