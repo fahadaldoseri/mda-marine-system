@@ -976,7 +976,7 @@ def build(md_path: Path, out_path: Path, meta: dict):
     threat_html = ""
     if threat:
         threat_html = (
-            f'<div class="threat {tcls}"><div class="lbl">تقدير مستوى التهديد</div>'
+            f'<div class="threat {tcls}"><div class="lbl">مستوى التهديد</div>'
             f'<div class="val">{esc(threat)}</div></div>'
         )
 
