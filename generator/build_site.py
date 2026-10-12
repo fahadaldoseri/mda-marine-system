@@ -148,8 +148,9 @@ def build_monthly(site_root: Path, dist: Path, warnings):
     return info
 
 
-def build_index(dist: Path, reports):
+def build_index(dist: Path, reports, notfound: bool = False):
     latest = reports[0] if reports else None
+    ledger_total = ledger_count(dist)
     rows = "".join(
         f'<li class="ar-row"><a class="ar-link" href="/reports/{r["iso"]}.html">'
         f'<span class="ar-date">{esc(r["label"])}</span>'
@@ -233,7 +234,7 @@ ul.ar{{list-style:none;margin:0;padding:0}}
 .tile span{{color:var(--muted);font-size:12.5px}}
 .foot-note{{color:var(--muted);font-size:12.5px;margin:26px 0 0;border-top:1px solid var(--line);padding-top:14px}}
 </style>
-</head><body>
+</head>NF_CSS_PLACEHOLDER<body>
 PREFS_EARLY_PLACEHOLDER
 NAV_PLACEHOLDER
 <div class="wrap">
@@ -249,7 +250,7 @@ NAV_PLACEHOLDER
 
   <div class="tiles">
     <div class="tile"><b>{len(reports)}</b><span>إصدار يومي منشور</span></div>
-    <div class="tile"><b>145</b><span>سجل في الدفتر التراكمي</span></div>
+    <div class="tile"><b>{ledger_total or "—"}</b><span>سجل في الدفتر التراكمي</span></div>
     <div class="tile"><b>37</b><span>مصدرًا مفحوصًا في كل تشغيل</span></div>
     <div class="tile"><b>07:00</b><span>توقيت الإصدار اليومي (البحرين)</span></div>
   </div>
@@ -350,24 +351,46 @@ if(last){{
 }}
 }})();
 </script>
+NOTFOUND_PLACEHOLDER
 </body></html>""".replace("PREFS_EARLY_PLACEHOLDER", site_chrome.PREFS_EARLY) \
+   .replace("NF_CSS_PLACEHOLDER", NF_STYLE) \
+   .replace("NOTFOUND_PLACEHOLDER", notfound_panel(reports, notfound)) \
    .replace("NAV_PLACEHOLDER", site_chrome.nav_html("home")) \
    .replace("FOOT_PLACEHOLDER", site_chrome.foot_html("الرئيسية")) \
    .replace("PREFS_LATE_PLACEHOLDER", site_chrome.PREFS_LATE)
 
 
-def build_feed(dist: Path, reports):
-    """تغذية RSS للإصدارات اليومية، لمتابعة الموقع دون زيارة يدوية."""
-    from xml.sax.saxutils import escape as xesc
+def site_base(dist: Path) -> str:
+    """نطاق الموقع المنشور. غيابه أو فساده يوقف البناء: لا نطاق احتياطي وهمي."""
     cfg_p = dist.parent / "sources" / "site.json"
     site = ""
     if cfg_p.exists():
         try:
-            site = str(json.loads(cfg_p.read_text(encoding="utf-8")).get("base_url") or "").rstrip("/")
-        except json.JSONDecodeError:
-            site = ""
+            site = str(json.loads(cfg_p.read_text(encoding="utf-8")).get("base_url") or "").strip().rstrip("/")
+        except json.JSONDecodeError as e:
+            raise SystemExit(f"توقف البناء: ملف sources/site.json غير صالح ({e})")
     if not site:
-        site = "https://marine-awareness.example"
+        raise SystemExit("توقف البناء: base_url مفقود في sources/site.json؛ لا يُبنى الموقع بنطاق احتياطي وهمي.")
+    if not site.startswith("https://") or "example" in site:
+        raise SystemExit(f"توقف البناء: base_url غير صالح ({site})؛ يجب رابطًا عامًا يبدأ بـ https://")
+    return site
+
+
+def ledger_count(dist: Path) -> int:
+    """عدد سجلات الدفتر التراكمي — يُقرأ ولا يُكتب يدويًا في الصفحة."""
+    f = dist.parent / "sources" / "ledger.json"
+    try:
+        d = json.loads(f.read_text(encoding="utf-8"))
+        ev = d.get("events") if isinstance(d, dict) else d
+        return len(ev) if isinstance(ev, list) else 0
+    except Exception:
+        return 0
+
+
+def build_feed(dist: Path, reports):
+    """تغذية RSS للإصدارات اليومية، لمتابعة الموقع دون زيارة يدوية."""
+    from xml.sax.saxutils import escape as xesc
+    site = site_base(dist)
     items = []
     for r in reports:
         link = f"{site}/reports/{r['iso']}.html"
@@ -403,6 +426,81 @@ def build_routes(dist: Path, reports):
     return len(routes)
 
 
+def known_paths(reports):
+    """المسارات المنشورة فعليًا: تُستخدم في صفحة «غير موجودة» وفي خريطة الموقع."""
+    ks = ["/", "/reports/cumulative-2026.html", "/reports/monthly-2026-10.html"]
+    ks += [f"/reports/{r['iso']}.html" for r in reports]
+    return ks
+
+
+def notfound_panel(reports, visible: bool = False) -> str:
+    """لوحة «الصفحة غير موجودة» + فاحص مسار في المتصفح.
+
+    الاستضافة تعيد صفحة الرئيسية لأي مسار غير معروف (soft-404)، فيعرض هذا الفاحص
+    اللوحة الصحيحة للزائر. رمز الاستجابة يبقى 200 لأن التوصيل ثابت بلا خادم.
+    """
+    ks = known_paths(reports)
+    items = "".join(f'<li><a href="{k}">{k}</a></li>' for k in ks)
+    keys = ",".join(f'"{k}":1' for k in ks)
+    hid = "" if visible else " hidden"
+    script = ""
+    if not visible:
+        script = (
+            "<script>(function(){var K={" + keys + "};"
+            r"var p=location.pathname.replace(/\/index\.html$/,'/');"
+            "if(!K[p]){var nf=document.getElementById('nf404');"
+            "var w=document.querySelector('.wrap');"
+            "if(nf){if(w){w.setAttribute('hidden','');}nf.removeAttribute('hidden');"
+            "document.title='الصفحة غير موجودة — مركز الوعي البحري';}}})();</script>"
+        )
+    return (
+        f'<section class="card nf" id="nf404"{hid}>'
+        "<h1>الصفحة غير موجودة</h1>"
+        "<p>الرابط المطلوب لا يقابل صفحة منشورة على هذا الموقع. هذه الروابط المتاحة الآن:</p>"
+        f'<ul class="nf-list">{items}</ul>'
+        '<p><a class="nf-back" href="/">العودة إلى الرئيسية والأرشيف</a></p></section>' + script
+    )
+
+
+NF_STYLE = """<style>
+.nf{max-width:760px;margin:26px auto}
+.nf h1{font-size:30px;margin:6px 0 10px}
+.nf-list{list-style:none;padding:0;margin:14px 0;display:grid;gap:8px}
+.nf-list a{display:block;padding:10px 12px;border:1px solid var(--line,#2b3b4e);border-radius:8px;
+  text-decoration:none;color:inherit;font-family:"IBM Plex Mono",monospace;direction:ltr;
+  unicode-bidi:isolate;overflow-wrap:anywhere}
+.nf-list a:hover{border-color:var(--accent,#2fd6c3)}
+.nf-back{display:inline-block;margin-top:6px;font-weight:700;text-decoration:none;color:var(--accent,#2fd6c3)}
+</style>"""
+
+
+def build_sitemap(dist: Path, reports) -> int:
+    site = site_base(dist)
+    urls = known_paths(reports)
+    last = reports[0]["iso"] if reports else ""
+    body = "".join(
+        f"  <url><loc>{site}{u}</loc>" + (f"<lastmod>{last}</lastmod>" if last else "") + "</url>\n"
+        for u in urls
+    )
+    xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + body + "</urlset>\n")
+    (dist / "sitemap.xml").write_text(xml, encoding="utf-8")
+    return len(urls)
+
+
+def build_robots(dist: Path) -> None:
+    site = site_base(dist)
+    (dist / "robots.txt").write_text(
+        f"User-agent: *\nAllow: /\nSitemap: {site}/sitemap.xml\n", encoding="utf-8")
+
+
+def build_notfound(dist: Path, reports) -> None:
+    html = build_index(dist, reports, notfound=True).replace(
+        "<title>مركز الوعي البحري — تقارير أمن الملاحة</title>",
+        "<title>الصفحة غير موجودة — مركز الوعي البحري</title>")
+    (dist / "404.html").write_text(html, encoding="utf-8")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--site-root", default=str(HERE.parent))
@@ -424,26 +522,34 @@ def main():
     (dist / "favicon.svg").write_text(FAVICON, encoding="utf-8")
     n_feed = build_feed(dist, built)
     n_routes = build_routes(dist, built)
+    n_sitemap = build_sitemap(dist, built)
+    build_robots(dist)
+    build_notfound(dist, built)
 
     print(f"الرئيسية: {len(built)} إصدار · السجل التراكمي: {'نعم' if cum else 'لا'} · "
-          f"اللوحة الشهرية: {'نعم' if mon else 'لا'} · المسارات: {n_routes} · التغذية: {n_feed}")
+          f"اللوحة الشهرية: {'نعم' if mon else 'لا'} · المسارات: {n_routes} · التغذية: {n_feed} · "
+          f"خريطة الموقع: {n_sitemap} · robots: نعم · 404: نعم")
     for w_ in warnings:
         print(f"تنبيه: {w_}")
 
     if a.check:
         pages = sorted(p for p in dist.rglob("*.html"))
         missing = []
+        escaped = []
         for p in pages:
             t = p.read_text(encoding="utf-8")
             if "site-nav" not in t:
                 missing.append(p.name)
             if len(t) < 3000:
                 missing.append(p.name + " (صغير)")
+            if "&lt;" in t:
+                escaped.append(f"{p.name} ({t.count('&lt;')})")
         print(f"فحص: {len(pages)} صفحة، بلا ترويسة أو غير مكتملة: {missing or 'لا شيء'}")
+        print(f"فحص الوسوم المهرَّبة (تظهر للقارئ نصًّا): {escaped or 'لا شيء'}")
         bad = [p.name for p in pages if not (dist / "manus-routes.json").exists()]
         if bad:
             print("تنبيه: بيان المسارات مفقود")
-        return 0 if not missing else 1
+        return 0 if not (missing or escaped) else 1
     return 0
 
 

@@ -95,7 +95,16 @@ ul.ar{list-style:none;margin:0;padding:0}
 .tile span{color:var(--muted);font-size:12.5px}
 .foot-note{color:var(--muted);font-size:12.5px;margin:26px 0 0;border-top:1px solid var(--line);padding-top:14px}
 </style>
-</head><body>
+</head><style>
+.nf{max-width:760px;margin:26px auto}
+.nf h1{font-size:30px;margin:6px 0 10px}
+.nf-list{list-style:none;padding:0;margin:14px 0;display:grid;gap:8px}
+.nf-list a{display:block;padding:10px 12px;border:1px solid var(--line,#2b3b4e);border-radius:8px;
+  text-decoration:none;color:inherit;font-family:"IBM Plex Mono",monospace;direction:ltr;
+  unicode-bidi:isolate;overflow-wrap:anywhere}
+.nf-list a:hover{border-color:var(--accent,#2fd6c3)}
+.nf-back{display:inline-block;margin-top:6px;font-weight:700;text-decoration:none;color:var(--accent,#2fd6c3)}
+</style><body>
 <script>
 (function(){try{
 var b=document.body;if(!b)return;
@@ -283,4 +292,5 @@ if(last){
 }
 })();
 </script>
+<section class="card nf" id="nf404" hidden><h1>الصفحة غير موجودة</h1><p>الرابط المطلوب لا يقابل صفحة منشورة على هذا الموقع. هذه الروابط المتاحة الآن:</p><ul class="nf-list"><li><a href="/">/</a></li><li><a href="/reports/cumulative-2026.html">/reports/cumulative-2026.html</a></li><li><a href="/reports/monthly-2026-10.html">/reports/monthly-2026-10.html</a></li><li><a href="/reports/2026-10-12.html">/reports/2026-10-12.html</a></li></ul><p><a class="nf-back" href="/">العودة إلى الرئيسية والأرشيف</a></p></section><script>(function(){var K={"/":1,"/reports/cumulative-2026.html":1,"/reports/monthly-2026-10.html":1,"/reports/2026-10-12.html":1};var p=location.pathname.replace(/\/index\.html$/,'/');if(!K[p]){var nf=document.getElementById('nf404');var w=document.querySelector('.wrap');if(nf){if(w){w.setAttribute('hidden','');}nf.removeAttribute('hidden');document.title='الصفحة غير موجودة — مركز الوعي البحري';}}})();</script>
 </body></html>

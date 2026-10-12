@@ -16,7 +16,7 @@ from pathlib import Path
 
 from shapely.geometry import LineString, MultiPolygon, Polygon, box
 
-DATA = Path("/home/ubuntu/brain-marine-news/web/data")
+DATA = Path(__file__).resolve().parent / "data"  # بيانات الخريطة بجوار الوحدة (مصدر واحد)
 
 MAIN_BBOX = (46.5, 21.2, 62.0, 30.2)
 INSET_BBOX_DEFAULT = (38.5, 10.5, 46.0, 20.0)
