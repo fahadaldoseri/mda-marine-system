@@ -236,7 +236,7 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
     legend_html = f'<ol class="map-legend">{"".join(legend)}</ol>' if legend else ""
     cap = f'<p class="src-note">{caption}</p>' if caption else ""
     return f"""<div class="map-panel">
-  <h3>{title}</h3>
+  <h3>{title}</h3><p class="blk-lede">مواقع الوقائع داخل نطاق التقرير.</p>
   <div class="map-wrap">
     <svg class="map-svg" viewBox="0 0 {WIDTH:.0f} {HEIGHT:.0f}" role="img"
          aria-label="{label_prefix}">
@@ -260,7 +260,7 @@ def build_map(points=None, caption=None, inset=None):
     _set_bbox(MAIN_BBOX)
     panels = [
         _panel(
-            "الخريطة التشغيلية — مواقع الوقائع في نطاق التقرير",
+            "خريطة الوقائع",
             points,
             "خريطة الخليج العربي ومضيق هرمز وخليج عمان مع مواقع وقائع التقرير",
             caption,
@@ -295,6 +295,6 @@ if __name__ == "__main__":
         {"label": "واقعة قرب مرسى صحار", "ref": "#165", "code": "MN-2026-10-11-02",
          "lat": 24.28, "lon": 56.95, "kind": "confirm"},
     ]
-    out = build_map(pts, "المصدر: جدول التوزيع الجغرافي.", inset={"points": []})
+    out = build_map(pts, "المصدر: جدول التوزيع الجغرافي للوقائع.", inset={"points": []})
     Path("/tmp/map_test.svg").write_text(out, encoding="utf-8")
     print("svg bytes:", len(out))

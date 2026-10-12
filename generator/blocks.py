@@ -126,6 +126,7 @@ def changes_block(items, inline):
     return (
         '<section class="doc pri reveal" id="sec-00" aria-labelledby="h-00">'
         '<h2 id="h-00">ما تغيّر منذ التقرير السابق</h2><div class="h-rule"></div>'
+        '<p class="sec-lede">ما استُجد، وما تغيّر تصنيفه، وما أُغلق.</p>'
         f'<ul class="changes">{"".join(rows)}</ul></section>'
     )
 
@@ -161,7 +162,7 @@ def _table(headers, rows, inline, num_cols=()):
 
 
 def indicators_table(items, inline):
-    """جدول المؤشرات الرقمية: المؤشر · الحالي · السابق · الاتجاه · الدلالة."""
+    """جدول المؤشرات: المؤشر · الحالي · السابق · الاتجاه · الدلالة."""
     if not items:
         return ""
     rows = []
@@ -175,7 +176,7 @@ def indicators_table(items, inline):
             it.get("meaning", ""),
         ])
     return (
-        '<h3>جدول المؤشرات الرقمية</h3>'
+        '<h3>جدول المؤشرات</h3><p class="blk-lede">المؤشر · اليوم · الأمس · الاتجاه · حدود الرقم.</p>'
         + _table(["المؤشر", "هذا التقرير", "تقرير أمس", "الاتجاه", "الدلالة"], rows, inline, num_cols=(1, 2))
     )
 
@@ -192,7 +193,7 @@ def hypotheses_table(items, inline):
             conf_chip(it.get("likelihood")) or esc(it.get("likelihood", "")),
         ])
     return (
-        '<h3>جدول الفرضيات المتنافسة</h3>'
+        '<h3>ترجيح الاحتمالات</h3><p class="blk-lede">الاحتمال · المؤيد · المعارض · النسبة.</p>'
         + _table(["الفرضية", "المؤيد", "المعارض", "درجة الاحتمال"], rows, inline)
     )
 
@@ -202,7 +203,7 @@ def gaps_table(items, inline):
         return ""
     rows = [[it.get("gap", ""), it.get("owner", ""), it.get("impact", "")] for it in items]
     return (
-        '<h3>المجهولات كتكليفات</h3>'
+        '<h3>تكليفات المتابعة</h3><p class="blk-lede">الفجوة · الجهة القادرة على حسمها · أثر استمرارها.</p>'
         + _table(["الفجوة", "الجهة القادرة على الحسم", "أثر استمرارها"], rows, inline)
     )
 
@@ -222,7 +223,7 @@ def event_keys_table(items, inline):
             Raw(inline(it.get("note", ""))),
         ])
     return (
-        '<h3>مفاتيح الأحداث</h3>'
+        '<h3>تتبع الوقائع</h3><p class="blk-lede">الرمز الثابت · المنطقة · الحالة.</p>'
         + _table(["الرمز الثابت", "الحدث", "المنطقة", "الحالة", "ملاحظة"], rows, inline)
     )
 

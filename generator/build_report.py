@@ -82,24 +82,41 @@ FONT_LINK = (
 
 SECTION_ICONS = {
     "الخلاصة": "flag",
-    "الوقائع الأمنية الجديدة": "alert",
-    "النشرات والتحذيرات الرسمية": "broadcast",
+    "الوقائع الجديدة": "alert",
+    "التحذيرات والنشرات الرسمية": "broadcast",
     "سجل IMO": "ledger",
-    "المؤشرات الرقمية": "gauge",
-    "التوزيع الجغرافي": "map",
-    "اتجاهات الحركة والتكدس الملاحي": "route",
-    "تقييم التهديد": "shield",
-    "الفرضيات المتنافسة والإسناد": "scale",
-    "الأثر التشغيلي": "gear",
-    "الخلفية المستمرة": "history",
-    "المجهولات والفجوات": "gap",
-    "المصادر وحالة الفحص": "source",
+    "مؤشرات الموقف": "gauge",
+    "التوزيع الجغرافي للوقائع": "map",
+    "خريطة الوقائع": "map",
+    "الحركة الملاحية والتكدس": "route",
+    "مستوى التهديد": "shield",
+    "الاحتمالات والإسناد": "scale",
+    "التوجيهات التشغيلية": "gear",
+    "الخلفية القائمة": "history",
+    "ما لم يُحسم": "gap",
+    "المصادر والمراجع": "source",
 }
 
+SECTION_HINTS = {
+    "ما تغيّر منذ التقرير السابق": "ما استُجد، وما تغيّر تصنيفه، وما أُغلق.",
+    "الخلاصة": "الموقف ومستوى الخطر والإجراء المقترح في ثلاثة أسطر.",
+    "التوزيع الجغرافي للوقائع": "أين تركّزت الوقائع، وحصيلة IMO على القطاعات.",
+    "مؤشرات الموقف": "الأرقام، ومقارنتها بتقرير أمس، وحدود كل رقم.",
+    "مستوى التهديد": "التقييم الرسمي، والتقدير التحليلي، وحدود الثقة.",
+    "التوجيهات التشغيلية": "ما يُنفَّذ قبل العبور والرسو وأثناء الحادث.",
+    "الوقائع الجديدة": "ما وقع داخل نافذة التقرير، مفصولًا عن الخلفية.",
+    "التحذيرات والنشرات الرسمية": "حالة الجهات الرسمية خلال نافذة التقرير.",
+    "سجل IMO": "الحصيلة الرسمية التراكمية، وآخر إدخال ظاهر.",
+    "الاحتمالات والإسناد": "من قد يكون مسؤولًا، بلا جزم وبلا نسبة بلا دليل.",
+    "الحركة الملاحية والتكدس": "حركة المضيق والرسو من مصادر معلنة فقط.",
+    "ما لم يُحسم": "ما يبقى مجهولًا، وما يلزم متابعته في التقرير التالي.",
+    "الخلفية القائمة": "وقائع أقدم ما زال أثرها مؤثرًا على التشغيل.",
+    "المصادر والمراجع": "حالة المصادر المفحوصة، وروابط المراجع المستشهد بها.",
+}
 # أقسام تُمنح تمييزًا بصريًا محسوبًا: خلاصة القرار + الإجراء المطلوب
-PRIORITY_SECTIONS = ("الخلاصة", "الأثر التشغيلي")
+PRIORITY_SECTIONS = ("الخلاصة", "التوجيهات التشغيلية")
 
-INCIDENT_SECTION_KEYS = ("الوقائع الأمنية الجديدة", "الوقائع", "الوقائع الأمنية")
+INCIDENT_SECTION_KEYS = ("الوقائع الجديدة", "الوقائع", "الوقائع الأمنية")
 
 ICON_PATHS = {
     "flag": "M4 3h9l-1.2 3H19v8h-8.2L9.6 11H6v9H4z",
@@ -289,7 +306,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .bar-row .bv{font-family:"IBM Plex Mono",monospace;font-size:12.5px;text-align:end;color:var(--ink);font-variant-numeric:tabular-nums}
 .viz .src-note{font-size:12.5px;color:var(--muted);margin:12px 0 0}
 
-/* ---------- الخريطة التشغيلية ---------- */
+/* ---------- خريطة الوقائع ---------- */
 .map-wrap{border:1px solid var(--line-2);border-radius:var(--radius-sm);overflow:hidden;background:var(--map-sea);margin-top:6px}
 .map-svg{display:block;width:100%;height:auto;max-width:100%}
 .mp-sea-bg{fill:var(--map-sea)}
@@ -361,6 +378,9 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .map-panel .src-note,
 .map-keys,
 .decision .dc-foot{display:none}
+
+.sec-lede{font-size:13px;color:var(--muted);margin:0 0 16px;line-height:1.7;max-width:76ch}
+.blk-lede{font-size:12.5px;color:var(--faint);margin:-6px 0 10px;line-height:1.6}
 
 @media print{
   :root{
@@ -634,7 +654,7 @@ def render_geo_viz(rows, defs):
         count = normalize_digits(re.sub(r"[^\d]", "", normalize_digits(r[1]))) or "—"
         data.append((r[0], pct, count))
     if not data:
-        raise BuildError("جدول التوزيع الجغرافي موجود لكن لا توجد صفوف رقمية قابلة للقراءة.")
+        raise BuildError("جدول التوزيع الجغرافي للوقائع موجود لكن لا توجد صفوف رقمية قابلة للقراءة.")
     mx = max(d[1] for d in data) or 1
     rows_html = []
     for label, pct, count in data:
@@ -647,9 +667,9 @@ def render_geo_viz(rows, defs):
             "</div>"
         )
     return (
-        '<div class="viz reveal"><h3>التوزيع الجغرافي — نسبة الحوادث المؤكدة لدى IMO بحسب المنطقة</h3>'
+        '<div class="viz reveal"><h3>حصيلة IMO حسب المنطقة</h3><p class="blk-lede">نسب الحوادث المؤكدة على قطاعات النطاق.</p>'
         + "\n".join(rows_html)
-        + '<p class="src-note">المصدر: جدول التوزيع الجغرافي في هذا التقرير. النسب لا تمثل أعداد هجمات مستقلة.</p></div>'
+        + '<p class="src-note">المصدر: جدول التوزيع الجغرافي للوقائع في هذا التقرير. النسب لا تمثل أعداد هجمات مستقلة.</p></div>'
     )
 
 
@@ -880,10 +900,10 @@ def build(md_path: Path, out_path: Path, meta: dict):
     # ترتيب الأقسام بالأهمية: القرار والصورة ← الوقائع ← التحليل ← الدعم
     # (الترتيب مستقر، والأقسام غير المعروفة تبقى في آخرها)
     order = [
-        "ما تغيّر",         "الخلاصة",         "بطاقة القرار",         "التوزيع الجغرافي",
-        "المؤشرات الرقمية",         "تقييم التهديد",         "الأثر التشغيلي",         "الوقائع الأمنية الجديدة",
-        "النشرات والتحذيرات",         "سجل IMO",         "الفرضيات المتنافسة",         "اتجاهات الحركة والتكدس",
-        "المجهولات والفجوات",         "المراقبة المستمرة",         "الخلفية المستمرة",         "المصادر وحالة الفحص",
+        "ما تغيّر",         "الخلاصة",         "بطاقة القرار",         "التوزيع الجغرافي للوقائع",
+        "مؤشرات الموقف",         "مستوى التهديد",         "التوجيهات التشغيلية",         "الوقائع الجديدة",
+        "التحذيرات والنشرات",         "سجل IMO",         "الاحتمالات",         "الحركة الملاحية والتكدس",
+        "ما لم يُحسم",         "المراقبة المستمرة",         "الخلفية القائمة",         "المصادر والمراجع",
 
     ]
 
@@ -901,7 +921,7 @@ def build(md_path: Path, out_path: Path, meta: dict):
     if not isinstance(blocks_map, dict):
         blocks_map = {}
 
-    # الخريطة التشغيلية: تُبنى من إحداثيات معلَنة في ملف الواجهة فقط
+    # خريطة الوقائع: تُبنى من إحداثيات معلَنة في ملف الواجهة فقط
     map_html = ""
     mp = meta.get("map") or {}
     if isinstance(mp, dict) and mp.get("points"):
@@ -943,9 +963,10 @@ def build(md_path: Path, out_path: Path, meta: dict):
         body.append(
             f'<h2 id="h-{idx + 1:02d}"><span class="ico">{icon(ic)}</span>{inline(t, defs)}</h2>'
             '<div class="h-rule"></div>'
+            + (f'<p class="sec-lede">{esc(SECTION_HINTS[t])}</p>' if SECTION_HINTS.get(t) else "")
         )
         section_html = render_section_body(t, sec["lines"], defs)
-        if map_html and "التوزيع الجغرافي" in t:
+        if map_html and "التوزيع الجغرافي للوقائع" in t:
             section_html = map_html + section_html
         for key, bname in blocks_map.items():
             if key in t and block_data.get(bname):
