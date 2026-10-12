@@ -459,6 +459,12 @@ ul.changes{list-style:none;padding:0;margin:0;display:grid;gap:9px}
   .tl-date{grid-area:d}.tl-track{grid-area:t}.tl-num{grid-area:n}.tl-lbl{grid-area:l}
 }
 
+/* ---------- ملحق موثوقية المصادر ---------- */
+.rel-tbl td.rel{
+  font-family:"IBM Plex Mono",monospace;font-weight:600;text-align:center;color:var(--accent)
+}
+@media print{.rel-tbl{font-size:10.5px}.rel-tbl td,.rel-tbl th{padding:3px 5px}}
+
 body.daylight{
   --bg:#eef2f7;--bg-2:#e7edf4;--panel:#ffffff;--panel-2:#ffffff;--panel-3:#eef2f7;
   --line:#d3dce7;--line-2:#b9c6d6;--ink:#0b1a2b;--ink-2:#31465c;--muted:#5a7086;--faint:#6b7f94;

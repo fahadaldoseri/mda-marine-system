@@ -287,6 +287,43 @@ def classification_banner(value):
     return f'<div class="cls-banner {kind}">تصنيف الإصدار: {esc(v)}</div>'
 
 
+def source_reliability_table(data, inline):
+    """ملحق موثوقية المصادر: المستشهد بها فقط، مع السلّمين والأساس."""
+    rows = data.get("rows") or []
+    if not rows:
+        return ""
+    checked = data.get("checked") or ""
+    cited = data.get("cited") or len(rows)
+    head = (
+        '<h3>موثوقية المصادر</h3>'
+        '<p class="blk-lede">الموثوقية للجهة، والمصداقية لدرجة التصديق، والأساس سبب الدرجة.</p>'
+    )
+    legend = (
+        '<p class="src-note">سلّم الموثوقية: <b>A</b> مطلق · <b>B</b> جيد · <b>C</b> متوسط · '
+        '<b>D</b> غير موثوق · <b>E</b> غير مؤكد · <b>F</b> لا يمكن الحكم عليه — '
+        'وسلّم المصداقية: <b>1</b> مؤكد من مصدر آخر · <b>2</b> يُرجَّح صدقه · <b>3</b> يُحتمل صدقه · '
+        '<b>4</b> مشكوك فيه · <b>5</b> غير مُرجَّح · <b>6</b> لا يمكن الحكم عليه.</p>'
+    )
+    note = f'<p class="src-note">يشمل الجدول <b>{cited}</b> مصدرًا مستشهدًا به من أصل <b>{checked}</b> مصدرًا مفحوصًا في هذا التشغيل؛ المصادر غير المستشهد بها لا تُدرج.</p>'
+    trs = []
+    for r in rows:
+        trs.append(
+            "<tr>"
+            f'<td>{inline(str(r.get("num","")))}</td>'
+            f'<td>{inline(str(r.get("name","")))}</td>'
+            f'<td class="rel">{inline(str(r.get("rel","")))}</td>'
+            f'<td class="rel">{inline(str(r.get("cred","")))}</td>'
+            f'<td>{inline(str(r.get("basis","")))}</td>'
+            "</tr>"
+        )
+    table = (
+        '<table class="tbl rel-tbl"><thead><tr>'
+        '<th>#</th><th>المصدر</th><th>الموثوقية</th><th>المصداقية</th><th>الأساس</th>'
+        '</tr></thead><tbody>' + "".join(trs) + "</tbody></table>"
+    )
+    return head + legend + note + table
+
+
 def render_block(name, data, inline):
     """موزّع كتل القسم. يرجع نصًا فارغًا عند غياب البيانات أو عدم معرفة الكتلة."""
     if not data:
@@ -301,6 +338,8 @@ def render_block(name, data, inline):
         return event_keys_table(data, inline)
     if name == "timeline":
         return timeline(data, inline)
+    if name == "source_reliability":
+        return source_reliability_table(data, inline)
     return ""
 
 
@@ -428,4 +467,12 @@ STYLE_PRINT_BLOCKS = """
   ul.d-kinds li::before{width:3px}
   .decision,.tl-viz,.glossary{break-inside:avoid;page-break-inside:avoid}
   .decision{animation:none}
+"""
+
+STYLE_BLOCKS = STYLE_BLOCKS + """
+/* ---------- ملحق موثوقية المصادر ---------- */
+.rel-tbl td.rel{
+  font-family:"IBM Plex Mono",monospace;font-weight:600;text-align:center;color:var(--accent)
+}
+@media print{.rel-tbl{font-size:10.5px}.rel-tbl td,.rel-tbl th{padding:3px 5px}}
 """
