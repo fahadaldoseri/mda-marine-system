@@ -969,8 +969,10 @@ def build(md_path: Path, out_path: Path, meta: dict):
         if map_html and "التوزيع الجغرافي للوقائع" in t:
             section_html = map_html + section_html
         for key, bname in blocks_map.items():
-            if key in t and block_data.get(bname):
-                section_html += BLK.render_block(bname, block_data[bname], inline)
+            if key in t:
+                for _bn in str(bname).split('+'):
+                    if block_data.get(_bn):
+                        section_html += BLK.render_block(_bn, block_data[_bn], inline)
                 break
         body.append(section_html)
         body.append("</section>")
