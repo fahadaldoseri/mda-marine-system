@@ -123,3 +123,18 @@ for m in fails: print(f"  ✘ {m}")
 print(f"----- النتيجة: نجح {len(oks)} · تحذير {len(warns)} · فشل {len(fails)} -----")
 print("الحكم: " + ("ممنوع التسليم — أصلح الفشل أولًا" if fails else "جاهز للتشغيل"))
 sys.exit(1 if fails else 0)
+# 6ب) مساعد اعتماد الدفع: مسار قديم بعد تحديث الإضافة = فشل دفع صامت = لا نقطة استعادة = نشر نسخة قديمة
+try:
+    helper = subprocess.run(['git', '-C', str(GEN.parent), 'config', '--get', 'credential.helper'],
+                            capture_output=True, text=True).stdout.strip()
+except Exception:
+    helper = ''
+if helper:
+    mh = re.search(r'"([^"]+\.mjs)"', helper)
+    check(bool(mh) and Path(mh.group(1)).exists(),
+          "مساعد اعتماد الدفع سليم",
+          f"مسار مساعد اعتماد الدفع قديم أو مفقود: {(mh.group(1) if mh else helper[:70])}")
+else:
+    warn(False, "", "لا مساعد اعتماد مضبوط لدفع نقطة الاستعادة")
+
+# 7) خادم المعاينة (تحذير لا فشل: مسار التسليم المعتمد هو الموقع الدائم)
