@@ -116,13 +116,6 @@ code = subprocess.run(['curl', '-s', '-o', '/dev/null', '-w', '%{http_code}', '-
 warn(code == '200', "خادم المعاينة يعمل (3000)",
      "خادم المعاينة متوقف (3000) — شغّل tools/ensure_devserver.sh")
 
-print(f"===== فحص ما قبل التشغيل — {DATE} =====")
-for m in oks:   print(f"  ✔ {m}")
-for m in warns: print(f"  ! {m}")
-for m in fails: print(f"  ✘ {m}")
-print(f"----- النتيجة: نجح {len(oks)} · تحذير {len(warns)} · فشل {len(fails)} -----")
-print("الحكم: " + ("ممنوع التسليم — أصلح الفشل أولًا" if fails else "جاهز للتشغيل"))
-sys.exit(1 if fails else 0)
 # 6ب) مساعد اعتماد الدفع: مسار قديم بعد تحديث الإضافة = فشل دفع صامت = لا نقطة استعادة = نشر نسخة قديمة
 try:
     helper = subprocess.run(['git', '-C', str(GEN.parent), 'config', '--get', 'credential.helper'],
@@ -137,4 +130,11 @@ if helper:
 else:
     warn(False, "", "لا مساعد اعتماد مضبوط لدفع نقطة الاستعادة")
 
+print(f"===== فحص ما قبل التشغيل — {DATE} =====")
+for m in oks:   print(f"  ✔ {m}")
+for m in warns: print(f"  ! {m}")
+for m in fails: print(f"  ✘ {m}")
+print(f"----- النتيجة: نجح {len(oks)} · تحذير {len(warns)} · فشل {len(fails)} -----")
+print("الحكم: " + ("ممنوع التسليم — أصلح الفشل أولًا" if fails else "جاهز للتشغيل"))
+sys.exit(1 if fails else 0)
 # 7) خادم المعاينة (تحذير لا فشل: مسار التسليم المعتمد هو الموقع الدائم)
