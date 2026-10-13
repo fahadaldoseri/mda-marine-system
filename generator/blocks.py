@@ -344,6 +344,8 @@ def render_block(name, data, inline):
         return vessel_identity_table(data, inline)
     if name == "report_classes":
         return report_classes_table(data, inline)
+    if name == "intel_analysis":
+        return intel_analysis(data, inline)
     return ""
 
 
@@ -484,6 +486,43 @@ STYLE_BLOCKS = STYLE_BLOCKS + """
 }
 @media print{.rel-tbl{font-size:10.5px}.rel-tbl td,.rel-tbl th{padding:3px 5px}}
 """
+
+def intel_analysis(data, inline):
+    """كتلة قسم «التحليل الاستخباري» (ح1–ح12): وسم الأسلوب · الاحتمال · الثقة · سند المصدر · الافتراضات · المؤشرات · تقييم دقة الأمس."""
+    if not data:
+        return ""
+    out = []
+    rows = []
+    for label, key in (("الأسلوب التحليلي", "method"), ("العبارة الاحتمالية", "probability"),
+                       ("درجة الثقة", "confidence"), ("سند المصدر", "source_grade")):
+        val = (data.get(key) or "").strip()
+        if val:
+            rows.append(f'<div class="dc-row"><div class="dc-l">{esc(label)}</div>'
+                        f'<div class="dc-v">{inline(val)}</div></div>')
+    if rows:
+        out.append('<div class="decision"><p class="dc-title">بطاقة التقدير التحليلي</p>'
+                   f'<div class="dc-grid">{"".join(rows)}</div></div>')
+
+    asm = data.get("assumptions") or []
+    if asm:
+        rws = [[a.get("assumption", ""), a.get("falsifier", "")] for a in asm]
+        out.append('<h3>الافتراضات المعلنة</h3><p class="blk-lede">كل افتراض معلن، وما ينقضه.</p>'
+                   + _table(["الافتراض", "ما ينقضه"], rws, inline))
+
+    inds = data.get("indicators") or []
+    if inds:
+        rws = [[i.get("indicator", ""), i.get("confirms", ""), i.get("refutes", ""), i.get("state", "")]
+               for i in inds]
+        out.append('<h3>مؤشرات التحذير المبكر</h3><p class="blk-lede">المؤشر · ما يؤكده · ما ينفيه · الحالة.</p>'
+                   + _table(["المؤشر", "ما يؤكده", "ما ينفيه", "الحالة"], rws, inline))
+
+    yr = data.get("yesterday_review") or []
+    if yr:
+        rws = [[y.get("estimate", ""), y.get("outcome", ""), y.get("cause", "")] for y in yr]
+        out.append('<h3>تقييم دقة تقديرات الأمس</h3><p class="blk-lede">التقدير · النتيجة · السبب.</p>'
+                   + _table(["التقدير السابق", "النتيجة", "السبب"], rws, inline))
+    return "".join(out)
+
 
 def vessel_identity_table(data, inline):
     rows = data.get("rows") if isinstance(data, dict) else data
