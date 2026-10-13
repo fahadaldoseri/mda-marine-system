@@ -66,19 +66,20 @@ cd /home/ubuntu/seawatch && git add -A && git commit -m "إصدار <التار�
 
 ## الخط اليومي الموحّد (معتمد 13 أكتوبر 2026 — دمج كامل)
 
-يُنفَّذ **قبل** كتابة التقرير، بأمر واحد:
-
+يُنفَّذ **قبل** كتابة التقرير، وبالترتيب:
 ```
-python3 /home/ubuntu/brain-marine-news/tools/daily_pipeline.sh $(date -u +%F) /tmp/ofac-targets.txt /tmp/originals.txt
+# 0) ضمان البيئة (إلزامي) — سبب اعتماده: حادثة 13 أكتوبر 2026
+bash /home/ubuntu/brain-marine-news/tools/ensure_devserver.sh 3000        # يعيد خادم المعاينة إن كان متوقفًا
+python3 /home/ubuntu/brain-marine-news/tools/preflight_check.py $(date -u +%F)   # فحص ما قبل التشغيل
+# 1) الخط الموحّد — يُستدعى بـbash لا بـpython3
+bash /home/ubuntu/brain-marine-news/tools/daily_pipeline.sh $(date -u +%F)
 ```
-
-- `/tmp/ofac-targets.txt` = أسماء السفن والوسطاء المرشحين للذكر (سطر لكل اسم).
-- `/tmp/originals.txt` = روابط البلاغات الرسمية المرشحة (UKMTO · MSCI · MSCIO · IMO · OFAC …).
-
+- قوائم المدخلات **دائمة في المستودع**: `watchlist/ofac-targets.txt` (أسماء السفن والوسطاء) و`watchlist/original-sources.txt` (روابط البلاغات الرسمية). لا تُستخدم ملفات `/tmp` لأنها تُمحى.
+- **لا تُكمل** إذا أظهر فحص ما قبل التشغيل أي **فشل** (رمز خروجه 1)؛ التحذيرات تُذكر في التقرير ولا توقف العمل.
+- الخط يكتب سجلًا `logs/pipeline-<التاريخ>.log` وعلامة نجاح `logs/pipeline-<التاريخ>.json`؛ **لا تسلّم** إصدارًا بلا علامة `overall = ok`.
 **ترتيب التنفيذ الإلزامي:**
 1. **التغذيات** (`tools/check_feeds.py`) → إنذار مبكر لمستجدات آخر 24 ساعة من 38 تغذية.
 2. **فحص OFAC** (`tools/ofac_screen.py`) → لكل سفينة/وسيط؛ النتيجة (تطابق/مراجعة يدوية/لا تطابق/تعذر) تُكتب في التقرير.
 3. **حفظ الأصول الرسمية** (`tools/archive_originals.py`) → HTML/PDF + UTC + `sha256` في `archive/originals/<التاريخ>/manifest.json`.
 4. كتابة التقرير، ثم بناء الصفحة والنشر الآلي.
-
-**ممنوع:** تسليم تقرير فيه سفينة بلا نتيجة فحص OFAC، أو بلاغ رسمي مستشهد به بلا أصل محفوظ أو سبب تعذر مكتوب.
+**ممنوع:** تسليم تقرير فيه سفينة بلا نتيجة فحص OFAC، أو بلاغ رسمي مستشهد به بلا أصل محفوظ أو سبب تعذر مكتوب، أو بلا علامة نجاح للخط اليومي.
