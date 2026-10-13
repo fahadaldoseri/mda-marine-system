@@ -130,6 +130,42 @@ if helper:
 else:
     warn(False, "", "لا مساعد اعتماد مضبوط لدفع نقطة الاستعادة")
 
+# 6ج) سلسلة الذاكرة التراكمية: الدفتر الجامع + خريطة الرموز + حلّ كل رموز التقرير
+master = B / 'cumulative-2026' / 'event-ledger-master.json'
+cmap = B / 'appendices' / 'event-code-map.json'
+check(master.exists(), "الدفتر الجامع موجود", f"الدفتر الجامع مفقود: {master.name} — شغّل tools/merge_ledger_daily.py")
+check(cmap.exists(), "خريطة رموز الأحداث موجودة", "خريطة رموز الأحداث مفقودة — شغّل tools/merge_ledger_daily.py")
+if master.exists() and report.exists():
+    try:
+        md = json.loads(master.read_text(encoding='utf-8'))
+        pe = md.get('period_end', '')
+        # الشرط: كل واقعة في ملفات اليوم مدمجة — أي period_end يغطي أحدث تاريخ واقعة مسجّلة
+        ev_dates = []
+        for df in (B / 'cumulative-2026' / 'daily').glob('*.json'):
+            try:
+                for ev in json.loads(df.read_text(encoding='utf-8')):
+                    if ev.get('date'):
+                        ev_dates.append(ev['date'])
+            except Exception:
+                pass
+        newest = max(ev_dates) if ev_dates else DATE
+        check(pe >= newest, f"الدفتر الجامع يغطي أحدث واقعة مسجّلة ({pe})",
+              f"الدفتر الجامع لا يغطي أحدث واقعة في ملفات اليوم ({pe} < {newest}) — دمج ملف اليوم لم يُنفَّذ")
+    except Exception as e:
+        fails.append(f"تعذّر قراءة الدفتر الجامع: {e}")
+if cmap.exists() and report.exists():
+    try:
+        known = set(json.loads(cmap.read_text(encoding='utf-8')).get('codes', {})) | \
+                set(json.loads(cmap.read_text(encoding='utf-8')).get('aliases', {}))
+        codes = sorted(set(re.findall(r'MN-\d{4}-\d{2}-\d{2}-\d{2}', report.read_text(encoding='utf-8'))))
+        unknown = [c for c in codes if c not in known]
+        check(not unknown, f"كل رموز التقرير مُحلّة ({len(codes)})",
+              f"رموز غير مُحلّة في خريطة الرموز: {unknown}")
+    except Exception as e:
+        fails.append(f"تعذّر فحص حلّ الرموز: {e}")
+
+# 7) خادم المعاينة (تحذير لا فشل: مسار التسليم المعتمد هو الموقع الدائم)
+
 print(f"===== فحص ما قبل التشغيل — {DATE} =====")
 for m in oks:   print(f"  ✔ {m}")
 for m in warns: print(f"  ! {m}")
@@ -137,4 +173,3 @@ for m in fails: print(f"  ✘ {m}")
 print(f"----- النتيجة: نجح {len(oks)} · تحذير {len(warns)} · فشل {len(fails)} -----")
 print("الحكم: " + ("ممنوع التسليم — أصلح الفشل أولًا" if fails else "جاهز للتشغيل"))
 sys.exit(1 if fails else 0)
-# 7) خادم المعاينة (تحذير لا فشل: مسار التسليم المعتمد هو الموقع الدائم)

@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
-# خط التشغيل الصباحي الموحّد — الإصدار 2 (اعتُمد 13 أكتوبر 2026 بعد حادثة توقف التقرير)
-# السبب: الإصدار 1 كان يُستدعى بـpython3 (SyntaxError)، ويقرأ مدخلات من /tmp غير دائمة،
-# ويُخفي كل الأخطاء بـ2>/dev/null بلا رمز خروج ولا سجل — أي فشل صامت لا يُكتشف.
+# خط التشغيل الصباحي الموحّد — الإصدار 3 (13 أكتوبر 2026)
+# v1: أمره كان يُستدعى بـpython3 (SyntaxError) + مدخلات /tmp + فشل صامت.
+# v2: سجل + رمز خروج + علامة نجاح + قوائم دائمة في watchlist/.
+# v3: أُضيفت خطوة دمج الذاكرة التراكمية (ملف اليوم → الدفتر الجامع + خريطة الرموز)،
+#     لأن ملف اليوم كان يُكتب ولا يُدمج أبدًا فتنقطع الذاكرة التراكمية.
 # الاستخدام: bash tools/daily_pipeline.sh [UTC_DATE] [OFAC_TARGETS_FILE] [ORIGINALS_URLS_FILE]
 set -uo pipefail
 B=/home/ubuntu/brain-marine-news
+SITE=/home/ubuntu/seawatch
 cd "$B" || exit 2
 D="${1:-$(date -u +%F)}"
 TARGETS="${2:-$B/watchlist/ofac-targets.txt}"
@@ -13,9 +16,10 @@ LOGDIR="$B/logs"; mkdir -p "$LOGDIR"
 LOG="$LOGDIR/pipeline-$D.log"
 MARK="$LOGDIR/pipeline-$D.json"
 
-echo "===== خط التشغيل الموحّد v2 — $D — $(date -u +%FT%TZ) =====" | tee -a "$LOG"
+echo "===== خط التشغيل الموحّد v3 — $D — $(date -u +%FT%TZ) =====" | tee -a "$LOG"
 
-S_FEEDS="failed"; S_OFAC="failed"; S_ARCH="failed"; NOTE_OFAC=""; NOTE_ARCH=""
+S_FEEDS="failed"; S_OFAC="failed"; S_ARCH="failed"; S_LEDGER="failed"
+NOTE_OFAC=""; NOTE_ARCH=""; NOTE_LEDGER=""
 
 # 1) التغذيات — إنذار مبكر من 38 تغذية
 echo "-- 1) التغذيات (38 تغذية) --" | tee -a "$LOG"
@@ -63,20 +67,30 @@ else
   fi
 fi
 
-# علامة نجاح قابلة للفحص آليًا (بوابة التسليم تقرأها)
+# 4) دمج الذاكرة التراكمية: ملف اليوم → الدفتر الجامع + خريطة الرموز
+echo "-- 4) دمج الذاكرة التراكمية --" | tee -a "$LOG"
+if python3 tools/merge_ledger_daily.py >>"$LOG" 2>&1; then
+  cp -f cumulative-2026/event-ledger-master.json "$SITE/sources/ledger.json" 2>>"$LOG"
+  S_LEDGER="ok"; NOTE_LEDGER="دُمج ملف اليوم في الدفتر الجامع وبُنيت خريطة الرموز ونُسخ الدفتر إلى الموقع"
+  echo "   ✔ $NOTE_LEDGER" | tee -a "$LOG"
+else
+  echo "   ✘ فشل دمج الدفتر التراكمي" | tee -a "$LOG"
+fi
+
 if [ -f "archive/originals/$D/manifest.json" ]; then MANIFEST="archive/originals/$D/manifest.json"; else MANIFEST=""; fi
-python3 - "$MARK" "$D" "$S_FEEDS" "$S_OFAC" "$S_ARCH" "$NOTE_OFAC" "$NOTE_ARCH" "$MANIFEST" <<'PY'
+python3 - "$MARK" "$D" "$S_FEEDS" "$S_OFAC" "$S_ARCH" "$S_LEDGER" "$NOTE_OFAC" "$NOTE_ARCH" "$NOTE_LEDGER" "$MANIFEST" <<'PY'
 import json, sys, datetime
-mark, d, f, o, a, no, na, man = sys.argv[1:9]
-ok = all(s == "ok" for s in (f, o, a))
+mark, d, f, o, a, l, no, na, nl, man = sys.argv[1:11]
+ok = all(s == "ok" for s in (f, o, a, l))
 json.dump({
-    "date": d, "pipeline_version": 2,
+    "date": d, "pipeline_version": 3,
     "finished_utc": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
     "overall": "ok" if ok else "failed",
     "feeds": {"status": f}, "ofac": {"status": o, "note": no},
     "originals": {"status": a, "note": na, "manifest": man},
+    "ledger_merge": {"status": l, "note": nl},
 }, open(mark, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-print(f"-- الخلاصة: تغذيات={f} · OFAC={o} · أصول={a} · العلامة: {mark}")
+print(f"-- الخلاصة: تغذيات={f} · OFAC={o} · أصول={a} · دمج الذاكرة={l} · العلامة: {mark}")
 sys.exit(0 if ok else 1)
 PY
 RC=$?
