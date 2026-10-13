@@ -48,6 +48,7 @@
 | `appendices/terminology.md` | 20-language | قاموس المصطلحات والاستبدالات الإلزامية والصيغ الثابتة |
 | `appendices/report-blocks.md` | 40-blocks | مخطط الكتل الكامل وحقول بطاقة القرار وبنية كل بند |
 | `appendices/web-delivery.md` | 70-delivery | تفاصيل إخراج الويب والموقع الدائم ومخطط ملف الواجهة 2.1 |
+| `appendices/version-numbering.md` | اصطلاح رقم النسخة «و ب YY/MM/NN»: اختصار الجهة، السنة، الشهر، والمتسلسل الشهري (يبدأ 1) |
 | `appendices/historical-baseline.md` | 10-sources | خط الأساس التاريخي التراكمي وفهرس الذاكرة |
 | `appendices/commander-style.md` | 20-language | أسلوب القائد والملخص التنفيذي |
 
