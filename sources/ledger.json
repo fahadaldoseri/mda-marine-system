@@ -1,8 +1,8 @@
 {
   "document_id": "marine-events-ledger-master",
-  "title": "دفتر الأحداث التراكمي — من 2026-02-28 إلى 2026-10-12",
+  "title": "دفتر الأحداث التراكمي — من 2026-02-28 إلى 2026-10-14",
   "period_start": "2026-02-28",
-  "period_end": "2026-10-12",
+  "period_end": "2026-10-14",
   "time_basis": "UTC عندما يورده المصدر؛ يفصل السجل بين تاريخ الواقعة وتاريخ النشر عند توفرهما.",
   "calendar_note": "2026-02-29 غير موجود تقويميًا؛ لا توجد وقائع مستقلة لذلك اليوم ولا أُدخلت وقائع 1 مارس في سجل فبراير.",
   "method": "دُمجت التقارير الشهرية المقدمة مع الدفتر التاريخي المهيكل. أزيلت النسخ الواضحة للواقعة نفسها، وحُفظت المصادر والتعارضات داخل السجل. السجل الذري يضم وقائع أمنية ونشرات وتفاعلات وخلفية؛ لا يمثل عدد هجمات.",
@@ -3254,7 +3254,7 @@
         "الوقائع الجديدة"
       ],
       "merged_from": "2026-10-12.json",
-      "merged_utc": "2026-10-13T11:59:46Z"
+      "merged_utc": "2026-10-14T03:54:34Z"
     },
     {
       "event_id": "EV-2026-10-11-013-e648dfab",
@@ -3277,7 +3277,7 @@
         "الوقائع الجديدة"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-10-13T11:59:46Z"
+      "merged_utc": "2026-10-14T03:54:34Z"
     },
     {
       "event_id": "EV-2026-10-11-148-5ced58be",
@@ -3323,7 +3323,7 @@
         "الوقائع الجديدة"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-10-13T11:59:46Z"
+      "merged_utc": "2026-10-14T03:54:34Z"
     },
     {
       "event_id": "EV-2026-10-12-002-5674c26e",
@@ -3346,7 +3346,7 @@
         "الوقائع الجديدة"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-10-13T11:59:46Z"
+      "merged_utc": "2026-10-14T03:54:34Z"
     },
     {
       "event_id": "EV-2026-10-12-003-81354af1",
@@ -3369,7 +3369,7 @@
         "الوقائع الجديدة"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-10-13T11:59:46Z"
+      "merged_utc": "2026-10-14T03:54:34Z"
     },
     {
       "event_id": "EV-2026-10-12-004-ab3ccc0a",
@@ -3392,7 +3392,7 @@
         "الوقائع الجديدة"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-10-13T11:59:46Z"
+      "merged_utc": "2026-10-14T03:54:34Z"
     },
     {
       "event_id": "EV-2026-10-12-005-8466c2a6",
@@ -3401,11 +3401,11 @@
       "date_label": "12 أكتوبر",
       "location": "المحيط الهندي",
       "classification": "عقوبات",
-      "evidence_status": "direct_official_confirmation",
+      "evidence_status": "unresolved_incident",
       "confidence_level": "high",
       "confidence": "عالية",
       "description": "ضبط الناقلة DF Peak المشمولة بعقوبات الاتحاد الأوروبي",
-      "operational_effect": "إنفاذ عقوبات في المحيط الهندي: مخاطر على الناقلات التي ترفع أعلامًا مزيّفة أو بلا تأمين معتمد — لا أثر مباشر على العبور أو الرسو في الخليج وهرمز.",
+      "operational_effect": "",
       "sources": [
         "TradeWinds"
       ],
@@ -3415,88 +3415,214 @@
         "الوقائع الجديدة"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-10-13T11:59:46Z",
-      "verification": "تأكيد رسمي مباشر: إعلان رئيس الجمهورية الفرنسية على منصة X + مؤتمر صحفي للمتحدث باسم الجيش العقيد كزافييه ريفال (12 أكتوبر 2026)؛ والرد الروسي الرسمي عبر سفارة روسيا في فرنسا.",
-      "vessel_identity": {
-        "vessel": "DF Peak",
-        "previous_name": "Kaliningrad",
-        "flag": "بنين (يشتبه برفع علم مزيّف)",
-        "manager": "Zheng Xin Marine (هونغ كونغ)",
-        "sanctions": "الولايات المتحدة والمملكة المتحدة والاتحاد الأوروبي (2024)",
-        "location": "نحو 450 ميلًا بحريًا جنوب ريونيون — المحيط الهندي",
-        "boarding_date": "2026-10-12",
-        "status": "تُقاد إلى ريونيون بقرار النيابة العامة لفحص ملفها",
-        "last_tracked": "قبالة مدغشقر 2026-10-12 04:29Z — آخر ميناء: غوانتا، فنزويلا",
-        "series": "خامس ناقلة مرتبطة بروسيا تضبطها فرنسا منذ 2024"
-      },
-      "updated_utc": "2026-10-13T14:39:10Z",
-      "history": [
-        {
-          "utc": "2026-10-13T14:39:10Z",
-          "change": "ترقية التحقق إلى تأكيد رسمي مباشر + تفاصيل هوية السفينة"
-        }
-      ]
+      "merged_utc": "2026-10-14T03:54:34Z"
     },
     {
-      "event_id": "EV-2026-10-13-007-fujairah",
+      "event_id": "EV-2026-10-13-001-fe9fa8b3",
       "display_code": "MN-2026-10-13-07",
-      "date": "2026-10-13",
-      "area": "خليج عُمان ومضيق هرمز — فجيرة",
-      "category": "اتجاه ملاحي",
-      "title": "تراجع ناقلات النفط العملاقة الفارغة عن التوجه إلى مركز النقل بين السفن قبالة فجيرة",
+      "date_start": "2026-10-13",
+      "date_label": "13 أكتوبر",
+      "location": "خليج عُمان ومضيق هرمز — فجيرة",
+      "classification": "اتجاه ملاحي",
+      "evidence_status": "unresolved_incident",
       "confidence_level": "medium",
       "confidence": "متوسطة",
-      "evidence_status": "market_tracking_partial",
-      "verification": "تحقق جزئي: لا تأكيد رسمي لتراجع الناقلات (البيانات من تتبع الناقلات الذي جمعته بلومبرغ). أما المحرّك المؤكد رسميًا فهو استمرار الهجمات في المضيق: بلاغات UKMTO الرسمية #164 و#165 و#166 و#167 و#168 و#169 (10–12 أكتوبر 2026).",
-      "details": {
-        "indicator": "ما لا يقل عن 10 ناقلات VLCC وعشرات من ناقلات سويزماكس توقفت أو عادت أدراجها أثناء توجهها إلى ميناء فجيرة",
-        "mechanism": "فجيرة تُسجَّل كمقصد مؤقت للناقلات المتوجهة إلى خليج عُمان لتحصيل الحمولة بالنقل بين السفن",
-        "meaning": "عدد السفن المتوجهة إلى فجيرة مؤشر على شهية مشغّلي الناقلات للاقتراب من المضيق",
-        "impact": "تراجع الناقلات الفارغة يربك آلية النقل بين السفن خارج هرمز: إطالة احتجاز ناقلات الشاتل وتباطؤ تصريف الخام مع شح سعة الناقلات",
-        "context": "الهجمات شبه اليومية قرب المضيق — بعضها قرب فجيرة نفسها",
-        "timestamp_utc": "2026-10-13T16:23Z (نشر المصدر الأول)"
-      },
-      "operational_effect": "خطر تعطّل المسار البديل للتصدير خارج المضيق، وتأخر الرسو والتصريف، وارتفاع كلف الشحن والتأمين — لا تغيير في حالة العبور الرسمي حتى الآن.",
-      "source": "Bloomberg (بيانات تتبع الناقلات) عبر gCaptain · Gulf Insider · ZeroHedge",
-      "first_seen_utc": "2026-10-13T16:39:38Z",
-      "updated_utc": "2026-10-13T16:39:38Z",
-      "history": [
-        {
-          "utc": "2026-10-13T16:39:38Z",
-          "change": "إدراج أولي من مُشغِّل التغذية (تحقق جزئي)"
-        }
-      ]
+      "description": "تراجع ناقلات النفط العملاقة الفارغة عن التوجه إلى مركز النقل بين السفن قبالة فجيرة",
+      "operational_effect": "",
+      "sources": [
+        "Bloomberg (بيانات تتبع الناقلات) عبر gCaptain · Gulf Insider · ZeroHedge"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "الوقائع الجديدة"
+      ],
+      "merged_from": "2026-10-13.json",
+      "merged_utc": "2026-10-14T03:54:34Z"
     },
     {
-      "event_id": "EV-2026-10-13-008-sanaa-strikes",
+      "event_id": "EV-2026-10-13-002-91b6b7e8",
       "display_code": "MN-2026-10-13-08",
-      "date": "2026-10-13",
-      "area": "اليمن — صنعاء والحديدة وذمار (أثر على البحر الأحمر وباب المندب)",
-      "category": "تصعيد عسكري",
-      "title": "التحالف بقيادة السعودية يضرب مواقع للحوثيين في صنعاء والحديدة وذمار",
+      "date_start": "2026-10-13",
+      "date_label": "13 أكتوبر",
+      "location": "اليمن — صنعاء والحديدة وذمار (أثر على البحر الأحمر وباب المندب)",
+      "classification": "تصعيد عسكري",
+      "evidence_status": "unresolved_incident",
       "confidence_level": "high",
       "confidence": "عالية",
-      "evidence_status": "direct_official_confirmation",
-      "verification": "تأكيد رسمي مباشر لبيان التحالف (مساء الثلاثاء 13 أكتوبر) وبيان مجلس الوزراء السعودي: استهداف محطة «صباح» التابعة لشركة النفط اليمنية في أطراف صنعاء ومواقع أخرى في الحديدة وذمار، بهدف «تحييد قدرات الحوثيين» على تهديد المملكة واليمن والممرات المائية الدولية. الحوثيون (قناة المسيرة) أعلنوا الضربات على صنعاء — إعلان طرف. لا يوجد رقم UKMTO؛ ولا تحذير بحري رسمي جديد للبحر الأحمر بعد الضربات.",
-      "details": {
-        "targets": "محطة صباح المركزية (مستودع وقود) في أطراف صنعاء + مواقع في الحديدة وذمار",
-        "coalition_rationale": "استخدام المواقع لإمداد ترسانة الصواريخ والمسيّرات لمهاجمة السعودية والسفن التجارية في البحر الأحمر",
-        "ypc_statement": "شركة النفط اليمنية: المنشأة لا تحوي مخزونًا حاليًا، ولم تتأثر الاحتياطات أو سلاسل التوريد",
-        "houthi_threat": "تهديد برد «قاسٍ ومؤلم» واستهداف مقرات أرامكو في الظهران ومصفاة في الرياض، وتحذير عمال النفط",
-        "context": "أسبوع من استهداف مطارات سعودية، منها ضربة باليستية على مطار الرياض السبت قتلت 13؛ واستئناف الحرب في اليمن بعد تقدم الحوثيين نحو باب المندب الشهر الماضي",
-        "diplomacy": "اتصال تركي واتصال أمريكي بولي العهد الثلاثاء؛ إيران عرضت الوساطة (تصريح وزير خارجيتها)",
-        "timestamp_utc": "2026-10-13T18:48Z (نشر المصدر)"
-      },
-      "operational_effect": "لا أثر مباشر على العبور أو الرسو حتى الآن؛ الأثر غير المباشر: ارتفاع خطر البحر الأحمر وباب المندب مع استمرار تبادل الضربات، وخطر تعرّض السفن المرتبطة بالمملكة أو بالتحالف للاستهداف.",
-      "source": "Reuters عبر gCaptain (13 أكتوبر 18:48Z)",
-      "first_seen_utc": "2026-10-13T20:38:29Z",
-      "updated_utc": "2026-10-13T20:38:29Z",
-      "history": [
-        {
-          "utc": "2026-10-13T20:38:29Z",
-          "change": "إدراج أولي من مُشغِّل التغذية (بيان التحالف الرسمي)"
-        }
-      ]
+      "description": "التحالف بقيادة السعودية يضرب مواقع للحوثيين في صنعاء والحديدة وذمار",
+      "operational_effect": "",
+      "sources": [
+        "Reuters عبر gCaptain (13 أكتوبر 18:48Z)"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "الوقائع الجديدة"
+      ],
+      "merged_from": "2026-10-13.json",
+      "merged_utc": "2026-10-14T03:54:34Z"
+    },
+    {
+      "event_id": "EV-2026-10-13-003-30084b33",
+      "display_code": "MN-2026-10-14-01",
+      "date_start": "2026-10-13",
+      "date_label": "13 أكتوبر",
+      "location": "مضيق هرمز",
+      "classification": "هجوم",
+      "evidence_status": "confirmed_effect_or_attack",
+      "confidence_level": "high",
+      "confidence": "عالية",
+      "description": "إصابة سفينة حاويات بمقذوف غير معروف (UKMTO #170)",
+      "operational_effect": "",
+      "sources": [
+        "UKMTO"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "الوقائع الجديدة"
+      ],
+      "merged_from": "2026-10-14.json",
+      "merged_utc": "2026-10-14T03:54:34Z"
+    },
+    {
+      "event_id": "EV-2026-10-13-004-74dbe74e",
+      "display_code": "MN-2026-10-14-02",
+      "date_start": "2026-10-13",
+      "date_label": "13 أكتوبر",
+      "location": "مضيق هرمز",
+      "classification": "هجوم",
+      "evidence_status": "confirmed_effect_or_attack",
+      "confidence_level": "high",
+      "confidence": "عالية",
+      "description": "إصابة ناقلة بمقذوف غير معروف (UKMTO #171)",
+      "operational_effect": "",
+      "sources": [
+        "UKMTO"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "الوقائع الجديدة"
+      ],
+      "merged_from": "2026-10-14.json",
+      "merged_utc": "2026-10-14T03:54:34Z"
+    },
+    {
+      "event_id": "EV-2026-10-13-005-7b73a2c6",
+      "display_code": "MN-2026-10-14-03",
+      "date_start": "2026-10-13",
+      "date_label": "13 أكتوبر",
+      "location": "البحر الأحمر وصنعاء والحديدة وذمار",
+      "classification": "تفاعل عسكري",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "medium",
+      "confidence": "عالية للوقائع",
+      "description": "ضربات التحالف على أهداف حوثية وتصعيد يهدد مسار باب المندب",
+      "operational_effect": "",
+      "sources": [
+        "Reuters عبر gCaptain"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "الوقائع الجديدة"
+      ],
+      "merged_from": "2026-10-14.json",
+      "merged_utc": "2026-10-14T03:54:34Z"
+    },
+    {
+      "event_id": "EV-2026-10-13-006-7a82c065",
+      "display_code": "MN-2026-10-14-04",
+      "date_start": "2026-10-13",
+      "date_label": "13 أكتوبر",
+      "location": "شرق مضيق هرمز",
+      "classification": "بيان رسمي غير مؤكد",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "low",
+      "confidence": "منخفضة",
+      "description": "إعلان البحرية الإيرانية عن ناقلة «غير ممتثلة» تضررت واشتعلت بعد إطفاء التتبّع",
+      "operational_effect": "",
+      "sources": [
+        "IRNA"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "الوقائع الجديدة"
+      ],
+      "merged_from": "2026-10-14.json",
+      "merged_utc": "2026-10-14T03:54:34Z"
+    },
+    {
+      "event_id": "EV-2026-10-13-007-5859b070",
+      "display_code": "MN-2026-10-14-06",
+      "date_start": "2026-10-13",
+      "date_label": "13 أكتوبر",
+      "location": "قرب مضيق هرمز",
+      "classification": "تقدير مهني",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "medium",
+      "confidence": "متوسطة",
+      "description": "خطر يهدد عمليات النقل من سفينة إلى سفينة وانصراف ناقلات عملاقة عن الخليج",
+      "operational_effect": "",
+      "sources": [
+        "gCaptain وتقرير معهد ملاحي"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "الوقائع الجديدة"
+      ],
+      "merged_from": "2026-10-14.json",
+      "merged_utc": "2026-10-14T03:54:34Z"
+    },
+    {
+      "event_id": "EV-2026-10-13-008-c6a593c0",
+      "display_code": "MN-2026-10-14-07",
+      "date_start": "2026-10-13",
+      "date_label": "13 أكتوبر",
+      "location": "النطاق كامل",
+      "classification": "تحديث مرجعي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "high",
+      "confidence": "عالية",
+      "description": "سجل IMO الرسمي: 106 حادثة مؤكدة و24 وفاة، وإدراج «ANGOLA PROSPERITY» و«PETRO DOLPHIN»",
+      "operational_effect": "",
+      "sources": [
+        "IMO"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "الوقائع الجديدة"
+      ],
+      "merged_from": "2026-10-14.json",
+      "merged_utc": "2026-10-14T03:54:34Z"
+    },
+    {
+      "event_id": "EV-2026-10-14-001-5288dfbb",
+      "display_code": "MN-2026-10-14-05",
+      "date_start": "2026-10-14",
+      "date_label": "14 أكتوبر",
+      "location": "مضيق هرمز",
+      "classification": "نقل إعلامي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "low",
+      "confidence": "منخفضة",
+      "description": "تهديد بإغلاق المضيق كاملًا وإعلان تغيير تكتيكي بلا أصل رسمي منشور",
+      "operational_effect": "",
+      "sources": [
+        "straits.live ووسائط"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "الوقائع الجديدة"
+      ],
+      "merged_from": "2026-10-14.json",
+      "merged_utc": "2026-10-14T03:54:34Z"
     }
   ],
   "imo_summary": {
@@ -6617,7 +6743,7 @@
         "الوقائع الجديدة"
       ],
       "merged_from": "2026-10-12.json",
-      "merged_utc": "2026-10-13T11:59:46Z"
+      "merged_utc": "2026-10-14T03:54:34Z"
     },
     {
       "event_id": "EV-2026-10-11-013-e648dfab",
@@ -6640,7 +6766,7 @@
         "الوقائع الجديدة"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-10-13T11:59:46Z"
+      "merged_utc": "2026-10-14T03:54:34Z"
     },
     {
       "event_id": "EV-2026-10-11-148-5ced58be",
@@ -6686,7 +6812,7 @@
         "الوقائع الجديدة"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-10-13T11:59:46Z"
+      "merged_utc": "2026-10-14T03:54:34Z"
     },
     {
       "event_id": "EV-2026-10-12-002-5674c26e",
@@ -6709,7 +6835,7 @@
         "الوقائع الجديدة"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-10-13T11:59:46Z"
+      "merged_utc": "2026-10-14T03:54:34Z"
     },
     {
       "event_id": "EV-2026-10-12-003-81354af1",
@@ -6732,7 +6858,7 @@
         "الوقائع الجديدة"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-10-13T11:59:46Z"
+      "merged_utc": "2026-10-14T03:54:34Z"
     },
     {
       "event_id": "EV-2026-10-12-004-ab3ccc0a",
@@ -6755,7 +6881,7 @@
         "الوقائع الجديدة"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-10-13T11:59:46Z"
+      "merged_utc": "2026-10-14T03:54:34Z"
     },
     {
       "event_id": "EV-2026-10-12-005-8466c2a6",
@@ -6778,13 +6904,220 @@
         "الوقائع الجديدة"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-10-13T11:59:46Z"
+      "merged_utc": "2026-10-14T03:54:34Z"
+    },
+    {
+      "event_id": "EV-2026-10-13-001-fe9fa8b3",
+      "display_code": "MN-2026-10-13-07",
+      "date_start": "2026-10-13",
+      "date_label": "13 أكتوبر",
+      "location": "خليج عُمان ومضيق هرمز — فجيرة",
+      "classification": "اتجاه ملاحي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "medium",
+      "confidence": "متوسطة",
+      "description": "تراجع ناقلات النفط العملاقة الفارغة عن التوجه إلى مركز النقل بين السفن قبالة فجيرة",
+      "operational_effect": "",
+      "sources": [
+        "Bloomberg (بيانات تتبع الناقلات) عبر gCaptain · Gulf Insider · ZeroHedge"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "الوقائع الجديدة"
+      ],
+      "merged_from": "2026-10-13.json",
+      "merged_utc": "2026-10-14T03:54:34Z"
+    },
+    {
+      "event_id": "EV-2026-10-13-002-91b6b7e8",
+      "display_code": "MN-2026-10-13-08",
+      "date_start": "2026-10-13",
+      "date_label": "13 أكتوبر",
+      "location": "اليمن — صنعاء والحديدة وذمار (أثر على البحر الأحمر وباب المندب)",
+      "classification": "تصعيد عسكري",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "high",
+      "confidence": "عالية",
+      "description": "التحالف بقيادة السعودية يضرب مواقع للحوثيين في صنعاء والحديدة وذمار",
+      "operational_effect": "",
+      "sources": [
+        "Reuters عبر gCaptain (13 أكتوبر 18:48Z)"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "الوقائع الجديدة"
+      ],
+      "merged_from": "2026-10-13.json",
+      "merged_utc": "2026-10-14T03:54:34Z"
+    },
+    {
+      "event_id": "EV-2026-10-13-003-30084b33",
+      "display_code": "MN-2026-10-14-01",
+      "date_start": "2026-10-13",
+      "date_label": "13 أكتوبر",
+      "location": "مضيق هرمز",
+      "classification": "هجوم",
+      "evidence_status": "confirmed_effect_or_attack",
+      "confidence_level": "high",
+      "confidence": "عالية",
+      "description": "إصابة سفينة حاويات بمقذوف غير معروف (UKMTO #170)",
+      "operational_effect": "",
+      "sources": [
+        "UKMTO"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "الوقائع الجديدة"
+      ],
+      "merged_from": "2026-10-14.json",
+      "merged_utc": "2026-10-14T03:54:34Z"
+    },
+    {
+      "event_id": "EV-2026-10-13-004-74dbe74e",
+      "display_code": "MN-2026-10-14-02",
+      "date_start": "2026-10-13",
+      "date_label": "13 أكتوبر",
+      "location": "مضيق هرمز",
+      "classification": "هجوم",
+      "evidence_status": "confirmed_effect_or_attack",
+      "confidence_level": "high",
+      "confidence": "عالية",
+      "description": "إصابة ناقلة بمقذوف غير معروف (UKMTO #171)",
+      "operational_effect": "",
+      "sources": [
+        "UKMTO"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "الوقائع الجديدة"
+      ],
+      "merged_from": "2026-10-14.json",
+      "merged_utc": "2026-10-14T03:54:34Z"
+    },
+    {
+      "event_id": "EV-2026-10-13-005-7b73a2c6",
+      "display_code": "MN-2026-10-14-03",
+      "date_start": "2026-10-13",
+      "date_label": "13 أكتوبر",
+      "location": "البحر الأحمر وصنعاء والحديدة وذمار",
+      "classification": "تفاعل عسكري",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "medium",
+      "confidence": "عالية للوقائع",
+      "description": "ضربات التحالف على أهداف حوثية وتصعيد يهدد مسار باب المندب",
+      "operational_effect": "",
+      "sources": [
+        "Reuters عبر gCaptain"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "الوقائع الجديدة"
+      ],
+      "merged_from": "2026-10-14.json",
+      "merged_utc": "2026-10-14T03:54:34Z"
+    },
+    {
+      "event_id": "EV-2026-10-13-006-7a82c065",
+      "display_code": "MN-2026-10-14-04",
+      "date_start": "2026-10-13",
+      "date_label": "13 أكتوبر",
+      "location": "شرق مضيق هرمز",
+      "classification": "بيان رسمي غير مؤكد",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "low",
+      "confidence": "منخفضة",
+      "description": "إعلان البحرية الإيرانية عن ناقلة «غير ممتثلة» تضررت واشتعلت بعد إطفاء التتبّع",
+      "operational_effect": "",
+      "sources": [
+        "IRNA"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "الوقائع الجديدة"
+      ],
+      "merged_from": "2026-10-14.json",
+      "merged_utc": "2026-10-14T03:54:34Z"
+    },
+    {
+      "event_id": "EV-2026-10-13-007-5859b070",
+      "display_code": "MN-2026-10-14-06",
+      "date_start": "2026-10-13",
+      "date_label": "13 أكتوبر",
+      "location": "قرب مضيق هرمز",
+      "classification": "تقدير مهني",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "medium",
+      "confidence": "متوسطة",
+      "description": "خطر يهدد عمليات النقل من سفينة إلى سفينة وانصراف ناقلات عملاقة عن الخليج",
+      "operational_effect": "",
+      "sources": [
+        "gCaptain وتقرير معهد ملاحي"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "الوقائع الجديدة"
+      ],
+      "merged_from": "2026-10-14.json",
+      "merged_utc": "2026-10-14T03:54:34Z"
+    },
+    {
+      "event_id": "EV-2026-10-13-008-c6a593c0",
+      "display_code": "MN-2026-10-14-07",
+      "date_start": "2026-10-13",
+      "date_label": "13 أكتوبر",
+      "location": "النطاق كامل",
+      "classification": "تحديث مرجعي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "high",
+      "confidence": "عالية",
+      "description": "سجل IMO الرسمي: 106 حادثة مؤكدة و24 وفاة، وإدراج «ANGOLA PROSPERITY» و«PETRO DOLPHIN»",
+      "operational_effect": "",
+      "sources": [
+        "IMO"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "الوقائع الجديدة"
+      ],
+      "merged_from": "2026-10-14.json",
+      "merged_utc": "2026-10-14T03:54:34Z"
+    },
+    {
+      "event_id": "EV-2026-10-14-001-5288dfbb",
+      "display_code": "MN-2026-10-14-05",
+      "date_start": "2026-10-14",
+      "date_label": "14 أكتوبر",
+      "location": "مضيق هرمز",
+      "classification": "نقل إعلامي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "low",
+      "confidence": "منخفضة",
+      "description": "تهديد بإغلاق المضيق كاملًا وإعلان تغيير تكتيكي بلا أصل رسمي منشور",
+      "operational_effect": "",
+      "sources": [
+        "straits.live ووسائط"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "الوقائع الجديدة"
+      ],
+      "merged_from": "2026-10-14.json",
+      "merged_utc": "2026-10-14T03:54:34Z"
     }
   ],
   "merge_log": {
-    "merged_utc": "2026-10-13T11:59:46Z",
+    "merged_utc": "2026-10-14T03:54:34Z",
     "frozen_source": "event-ledger-sectioned-2026-02-28-to-2026-10-11.json",
-    "records_total": 152,
+    "records_total": 161,
     "added": [
       "MN-2026-10-11-01 → EV-2026-10-11-012-22cc05a8",
       "MN-2026-10-13-01 → EV-2026-10-12-001-38cb3b41",
@@ -6792,7 +7125,16 @@
       "MN-2026-10-13-03 → EV-2026-10-12-003-81354af1",
       "MN-2026-10-13-04 → EV-2026-10-11-013-e648dfab",
       "MN-2026-10-13-05 → EV-2026-10-12-004-ab3ccc0a",
-      "MN-2026-10-13-06 → EV-2026-10-12-005-8466c2a6"
+      "MN-2026-10-13-06 → EV-2026-10-12-005-8466c2a6",
+      "MN-2026-10-13-07 → EV-2026-10-13-001-fe9fa8b3",
+      "MN-2026-10-13-08 → EV-2026-10-13-002-91b6b7e8",
+      "MN-2026-10-14-01 → EV-2026-10-13-003-30084b33",
+      "MN-2026-10-14-02 → EV-2026-10-13-004-74dbe74e",
+      "MN-2026-10-14-03 → EV-2026-10-13-005-7b73a2c6",
+      "MN-2026-10-14-04 → EV-2026-10-13-006-7a82c065",
+      "MN-2026-10-14-05 → EV-2026-10-14-001-5288dfbb",
+      "MN-2026-10-14-06 → EV-2026-10-13-007-5859b070",
+      "MN-2026-10-14-07 → EV-2026-10-13-008-c6a593c0"
     ],
     "aliased": [
       "MN-2026-10-11-02 → EV-2026-10-11-148-5ced58be"
