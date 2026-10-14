@@ -166,6 +166,28 @@ if cmap.exists() and report.exists():
 
 # 7) خادم المعاينة (تحذير لا فشل: مسار التسليم المعتمد هو الموقع الدائم)
 
+# 7) نظافة الخدمات: خدمة معاينة واحدة، وبلا خوادم قديمة معلّقة
+import subprocess as _sp
+
+def _listening(port):
+    r = _sp.run(['bash', '-lc', f"ss -ltn 2>/dev/null | grep -c ':{port} '"], capture_output=True, text=True)
+    try:
+        return int((r.stdout or '0').strip().splitlines()[-1]) > 0
+    except Exception:
+        return False
+
+_old_ports = [p for p in (8080, 8090) if _listening(p)]
+check(not _old_ports, "لا خوادم معاينة قديمة معلّقة (8080/8090)",
+      f"خوادم قديمة ما زالت تعمل على: {_old_ports} — أوقفها لتجنّب مهام خدمية عالقة في لوحة المهام")
+check(_listening(3000), "خادم المعاينة يعمل على المنفذ المعتمد (3000)",
+      "خادم المعاينة غير مستمع على 3000 — شغّل tools/ensure_devserver.sh 3000")
+_chr = int(_sp.run(['bash', '-lc', "pgrep -c chromium 2>/dev/null || echo 0"], capture_output=True, text=True).stdout.strip() or 0)
+if _chr > 25:
+    warns.append(f"عدد عمليات المتصفح مرتفع ({_chr}) — أغلق جلسات المتصفح غير المستخدمة")
+else:
+    oks.append(f"عدد عمليات المتصفح معقول ({_chr})")
+oks.append("تنبيه تشغيلي: مهام الخدمات (services) لا تنتهي بحكم تصميمها، وليست مهام عالقة")
+
 # 6د) رقم النسخة: الصيغة «و ب YY/MM/NN» والتسلسل اليومي
 import subprocess as _sp
 _r = _sp.run(['python3', str(B / 'tools' / 'next_version.py'), '--check'], capture_output=True, text=True)
