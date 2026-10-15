@@ -13,15 +13,17 @@ DIRS=(sections appendices validators tools docs reports web memory cumulative-20
 for d in "${DIRS[@]}"; do
   if [ -d "$SRC/$d" ]; then
     mkdir -p "$DST/$d"
-    cp -a "$SRC/$d/." "$DST/$d/" 2>/dev/null
+    cp -aL "$SRC/$d/." "$DST/$d/" 2>/dev/null
   fi
 done
 for f in INDEX.md; do
-  [ -f "$SRC/$f" ] && cp -a "$SRC/$f" "$DST/" 2>/dev/null
+  [ -f "$SRC/$f" ] && cp -aL "$SRC/$f" "$DST/" 2>/dev/null
 done
 # ملفات الجذر المفردة (سجلات ومخرجات يومية)
-find "$SRC" -maxdepth 1 -type f \( -name '*.json' -o -name '*.md' -o -name '*.txt' \) -exec cp -a {} "$DST/" \; 2>/dev/null
+find "$SRC" -maxdepth 1 -type f \( -name '*.json' -o -name '*.md' -o -name '*.txt' \) -exec cp -aL {} "$DST/" \; 2>/dev/null
 
+# إزالة أي روابط رمزية: تُفشل حزم النشر وتشير إلى مسارات خارج المستودع
+find "$DST" -type l -delete 2>/dev/null
 FILES=$(find "$DST" -type f 2>/dev/null | wc -l)
 echo "  ✔ النسخة الاحتياطية: $FILES ملفًا في $DST"
 
