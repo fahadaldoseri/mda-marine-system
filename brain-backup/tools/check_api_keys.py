@@ -47,7 +47,7 @@ def check_anthropic(deep: bool) -> bool:
         print(f"   ✘ فشل فحص المصادقة · الحالة {status} · {body[:160]}")
         return False
     models = [m["id"] for m in json.loads(body).get("data", [])]
-    print(f"   ✔ المصادقة سليمة · {len(models)} نموذجًا متاحًا · الأقوى: {models[0] if models else '—'}")
+    print(f"   ✔ المصادقة سليمة · {len(models)} نموذجًا متاحًا · نماذج: {', '.join(models[:3]) or '—'}")
     if not deep:
         return True
     payload = json.dumps(
@@ -77,7 +77,9 @@ def check_openai(deep: bool) -> bool:
         print("   ✘ OPENAI_API_KEY غير موجود")
         return False
     print(f"   · المفتاح: {mask(key)}")
-    base = os.environ.get("OPENAI_API_BASE", "https://api.openai.com/v1").rstrip("/")
+    base = (os.environ.get("OPENAI_API_BASE") or "https://api.openai.com/v1").rstrip("/")
+    if not base.startswith("http"):
+        base = "https://api.openai.com/v1"
     status, body = http(f"{base}/models", {"Authorization": f"Bearer {key}"})
     if status != 200:
         print(f"   ✘ فشل فحص المصادقة · الحالة {status} · {body[:160]}")

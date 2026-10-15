@@ -202,9 +202,9 @@ else:
 
 # 6د) رقم النسخة: الصيغة «و ب YY/MM/NN» والتسلسل اليومي
 import subprocess as _sp
-_r = _sp.run(['python3', str(B / 'tools' / 'next_version.py'), '--check'], capture_output=True, text=True)
+_r = _sp.run(['python3', str(B / 'tools' / 'next_version.py'), '--precheck'], capture_output=True, text=True)
 _line = ((_r.stdout or _r.stderr).strip().splitlines() or ['بلا مخرجات'])[-1].strip()
-check(_r.returncode == 0, f"رقم النسخة متسلسل وصحيح — {_line}", f"رقم النسخة غير مطابق أو غير متسلسل: {_line}")
+check(_r.returncode == 0, f"رقم النسخة متسلسل وصحيح (قبل الكتابة) — {_line}", f"رقم النسخة غير متسلسل: {_line}")
 
 print(f"===== فحص ما قبل التشغيل — {DATE} =====")
 for m in oks:   print(f"  ✔ {m}")

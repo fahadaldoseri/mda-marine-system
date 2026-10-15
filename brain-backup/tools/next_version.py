@@ -62,8 +62,32 @@ def check(date=None):
     return 0 if ok else 1
 
 
+def precheck(date=None):
+    """فحص قبل الكتابة: يتحقق أن الترقيم سيأتي متسلسلًا بلا فجوة (بلا حاجة لملف اليوم)."""
+    date = date or datetime.date.today().isoformat()
+    expect, nn = next_version(date)
+    eds = editions()
+    if any(e[0] == date for e in eds):
+        print(f'  ! إصدار مسجّل لتاريخ {date} بالفعل — تحقق من منع التكرار')
+        return 0
+    y, m = int(date[:4]) % 100, int(date[5:7])
+    same = [e for e in eds if (e[1], e[2]) == (y, m)]
+    if same:
+        last = max(same, key=lambda e: e[0])
+        if nn != last[3] + 1:
+            print(f'  ✘ المتسلسل غير متصل: آخر إصدار {last[3]} والمتوقع {nn}')
+            return 1
+    elif nn != 1:
+        print(f'  ✘ أول إصدار في الشهر يجب أن يكون 1 لا {nn}')
+        return 1
+    print(f'  ✔ الترقيم متسلسل · {len(eds)} إصدارًا مسجّلًا · التالي ليوم {date}: «{expect}»')
+    return 0
+
+
 if __name__ == '__main__':
-    args = [a for a in sys.argv[1:] if a != '--check']
+    args = [a for a in sys.argv[1:] if not a.startswith('--')]
+    if '--precheck' in sys.argv:
+        sys.exit(precheck(args[0] if args else None))
     if '--check' in sys.argv:
         sys.exit(check(args[0] if args else None))
     v, nn = next_version(args[0] if args else None)
