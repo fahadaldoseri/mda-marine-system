@@ -10,6 +10,27 @@
 import html
 import re
 
+from codes import label as _code_label, demote as _demote  # سياسة عرض الرموز (2+5)
+
+_CODE_CTX = {"date": None, "official": {}}
+
+
+def set_code_context(report_date=None, official=None):
+    """يضبط سياق عرض الرموز: تاريخ الإصدار وخريطة الأرقام الرسمية."""
+    _CODE_CTX["date"] = report_date
+    _CODE_CTX["official"] = official or {}
+
+
+def code_text(value):
+    """يبسّط أي رمز كامل داخل نص كتلة (بطاقة القرار، ما تغيّر، التحليل...)."""
+    return _demote(value or "", _CODE_CTX["date"], _CODE_CTX["official"])
+
+
+def code_label(code, ref="", note=""):
+    """صيغة العرض: مختصرة، ومدموجة برقم البلاغ الرسمي عند وجوده."""
+    off = _CODE_CTX["official"].get(str(code or ""), "")
+    return _code_label(code, ref, note or off, _CODE_CTX["date"])
+
 CONF_CLASS = {"عالية": "c-high", "متوسطة": "c-med", "منخفضة": "c-low"}
 CONF_CANON = {"عالية": "عالية", "مرتفعة": "عالية", "متوسطة": "متوسطة", "متوسط": "متوسطة",
               "منخفضة": "منخفضة", "ضعيفة": "منخفضة"}
@@ -88,7 +109,7 @@ def decision_card(dc, inline):
         cls = f" risk-{kind}" if kind in ("high", "med", "low") else ""
         cells.append(
             f'<div class="dc-row{cls}"><div class="dc-l">{esc(label)}</div>'
-            f'<div class="dc-v">{inline(value)}</div></div>'
+            f'<div class="dc-v">{inline(code_text(value))}</div></div>'
         )
     if not cells:
         return ""
@@ -115,12 +136,12 @@ def changes_block(items, inline):
         code = it.get("code") or ""
         meta_bits = []
         if code:
-            meta_bits.append(f'<bdi class="bidi ev-code">{esc(code)}</bdi>')
+            meta_bits.append(f'<bdi class="bidi ev-code">{esc(code_label(code, ref))}</bdi>')
         if ref:
             meta_bits.append(f'<bdi class="bidi">{esc(ref)}</bdi>')
         rows.append(
             f'<li class="chg c-{esc(kind)}"><span class="chg-tag">{esc(label)}</span>'
-            f'<span class="chg-txt">{inline(it.get("text", ""))} '
+            f'<span class="chg-txt">{inline(code_text(it.get("text", "")))} '
             f'{" ".join(meta_bits)}</span></li>'
         )
     return (
@@ -216,15 +237,15 @@ def event_keys_table(items, inline):
         st = str(it.get("status", "")).strip()
         cls = STATUS_CLASS.get(st, "s-stable")
         rows.append([
-            Raw(f'<bdi class="bidi ev-code">{esc(it.get("code", ""))}</bdi>'),
+            Raw(f'<bdi class="bidi ev-code">{esc(code_label(it.get("code", ""), it.get("ref", ""), it.get("note", "")))}</bdi>'),
             Raw(inline(it.get("title", ""))),
             Raw(inline(it.get("area", ""))),
             Raw(f'<span class="st-badge {cls}">{esc(st)}</span>'),
             Raw(inline(it.get("note", ""))),
         ])
     return (
-        '<h3>تتبع الوقائع</h3><p class="blk-lede">الرمز الثابت · المنطقة · الحالة.</p>'
-        + _table(["الرمز الثابت", "الحدث", "المنطقة", "الحالة", "ملاحظة"], rows, inline)
+        '<h3>تتبع الوقائع</h3><p class="blk-lede">الرمز المختصر (والكامل في «الوقائع الجديدة») · المنطقة · الحالة.</p>'
+        + _table(["الرمز", "الحدث", "المنطقة", "الحالة", "ملاحظة"], rows, inline)
     )
 
 
@@ -498,7 +519,7 @@ def intel_analysis(data, inline):
         val = (data.get(key) or "").strip()
         if val:
             rows.append(f'<div class="dc-row"><div class="dc-l">{esc(label)}</div>'
-                        f'<div class="dc-v">{inline(val)}</div></div>')
+                        f'<div class="dc-v">{inline(code_text(val))}</div></div>')
     if rows:
         out.append('<div class="decision"><p class="dc-title">بطاقة التقدير التحليلي</p>'
                    f'<div class="dc-grid">{"".join(rows)}</div></div>')

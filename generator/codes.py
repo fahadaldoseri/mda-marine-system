@@ -81,3 +81,45 @@ def demote(text, report_date=None, official=None):
     if not text:
         return text
     return CODE_RE.sub(lambda m: label(m.group(0), "", "", report_date, official), str(text))
+
+
+# ---------------------------------------------------------------- مستوى الصفحة
+_SECTION_OPEN = re.compile(r"<section\b[^>]*>")
+_SECTION_CLOSE = re.compile(r"</section>")
+_TAG = re.compile(r"<[^>]+>")
+_H2 = re.compile(r"<h2\b[^>]*>(.*?)</h2>", re.S)
+
+
+def _top_sections(doc):
+    """يُرجع مدى كل قسم من المستوى الأعلى (بلا تداخل)."""
+    spans, stack, open_at = [], 0, None
+    for m in re.finditer(r"<section\b[^>]*>|</section>", doc):
+        if m.group(0).startswith("</"):
+            if stack:
+                stack -= 1
+                if stack == 0 and open_at is not None:
+                    spans.append((open_at, m.end()))
+                    open_at = None
+        else:
+            if stack == 0:
+                open_at = m.start()
+            stack += 1
+    if open_at is not None:
+        spans.append((open_at, len(doc)))
+    return spans
+
+
+def demote_page(doc, report_date=None, official=None):
+    """يبسّط الرموز في كل ما هو خارج قسم الوقائع (كتل، جداول، خط زمني، مقدمة)."""
+    if not doc:
+        return doc
+    out, pos = [], 0
+    for a, b in _top_sections(doc):
+        out.append(demote(doc[pos:a], report_date, official))
+        blk = doc[a:b]
+        hm = _H2.search(blk)
+        title = _TAG.sub("", hm.group(1)).strip() if hm else ""
+        out.append(blk if is_primary(title) else demote(blk, report_date, official))
+        pos = b
+    out.append(demote(doc[pos:], report_date, official))
+    return "".join(out)

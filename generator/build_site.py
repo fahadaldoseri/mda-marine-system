@@ -565,6 +565,15 @@ def main():
                 escaped.append(f"{p.name} ({t.count('&lt;')})")
         print(f"فحص: {len(pages)} صفحة، بلا ترويسة أو غير مكتملة: {missing or 'لا شيء'}")
         print(f"فحص الوسوم المهرَّبة (تظهر للقارئ نصًّا): {escaped or 'لا شيء'}")
+        # فحص سياسة عرض رموز الأحداث (2+5): الرمز الكامل في قسم الوقائع فقط
+        try:
+            import subprocess as _sp
+            _r = _sp.run([sys.executable, "/home/ubuntu/brain-marine-news/validators/check_code_policy.py",
+                          str(DIST if "DIST" in dir() else Path("dist"))], capture_output=True, text=True)
+            _line = [l for l in _r.stdout.splitlines() if "النتيجة" in l]
+            print(f"فحص سياسة الرموز: {(_line[-1].strip() if _line else _r.stdout.strip()[-80:])}")
+        except Exception as _e:
+            print(f"تنبيه: تعذر فحص سياسة الرموز ({_e})")
         bad = [p.name for p in pages if not (dist / "manus-routes.json").exists()]
         if bad:
             print("تنبيه: بيان المسارات مفقود")

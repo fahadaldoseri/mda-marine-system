@@ -12,6 +12,10 @@
 
 import json
 import math
+
+from codes import short_code  # عرض مختصر لرموز الوقائع على الخريطة
+
+REPORT_DATE = None
 from pathlib import Path
 
 from shapely.geometry import LineString, MultiPolygon, Polygon, box
@@ -228,7 +232,7 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
         )
         bits = [f'<span class="lg-txt">{p.get("label","")}</span>']
         if code:
-            bits.append(f'<bdi class="bidi ev-code">{code}</bdi>')
+            bits.append(f'<bdi class="bidi ev-code">{short_code(code, REPORT_DATE)}</bdi>')
         if ref:
             bits.append(f'<bdi class="bidi">{ref}</bdi>')
         legend.append(f'<li><span class="lg-num" style="--mk:{color}">{i}</span>{" ".join(bits)}</li>')
