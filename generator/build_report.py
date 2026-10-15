@@ -33,7 +33,8 @@ class BuildError(Exception):
     pass
 
 
-import blocks as BLK  # كتل التوصيات: بطاقة القرار، الجداول، الخط الزمني، الشرائط
+import blocks as BLK
+import codes  # سياسة عرض رموز الأحداث (كامل مرة واحدة، ومختصر مدموج برقم البلاغ)
 
 
 # ----------------------------------------------------------------------------
@@ -899,6 +900,16 @@ def build(md_path: Path, out_path: Path, meta: dict):
             "تأكد من حفظ التقرير بأقسام بصيغة Markdown صحيحة."
         )
     validate_meta(meta)
+    # سياسة عرض الرموز (2+5): كامل مرة واحدة في «الوقائع الجديدة»، ومختصر مدموج برقم البلاغ الرسمي في بقية المواضع
+    _mdate = re.search(r"(\d{4}-\d{2}-\d{2})", md_path.name)
+    report_date = _mdate.group(1) if _mdate else ""
+    official = codes.official_map(meta)
+    BLK.set_code_context(report_date, official)
+    try:
+        import map_gulf as _mg
+        _mg.REPORT_DATE = report_date
+    except Exception:
+        pass
 
     # ترتيب الأقسام بالأهمية: القرار والصورة ← الوقائع ← التحليل ← الدعم
     # (الترتيب مستقر، والأقسام غير المعروفة تبقى في آخرها)
@@ -969,6 +980,8 @@ def build(md_path: Path, out_path: Path, meta: dict):
             + (f'<p class="sec-lede">{esc(SECTION_HINTS[t])}</p>' if SECTION_HINTS.get(t) else "")
         )
         section_html = render_section_body(t, sec["lines"], defs)
+        if not codes.is_primary(t):
+            section_html = codes.demote(section_html, report_date, official)
         if map_html and "التوزيع الجغرافي للوقائع" in t:
             section_html = map_html + section_html
         for key, bname in blocks_map.items():
@@ -1061,7 +1074,7 @@ def build(md_path: Path, out_path: Path, meta: dict):
     <h1>{esc(meta.get("headline") or title)}</h1>
     {threat_html}
     <div>
-      <p class="lede">{esc(meta.get("lede") or "")}</p>
+      <p class="lede">{codes.demote(esc(meta.get("lede") or ""), report_date, official)}</p>
       <div class="masthead-meta">{"".join(chips)}</div>
     </div>
   </header>
