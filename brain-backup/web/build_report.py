@@ -1100,6 +1100,8 @@ def build(md_path: Path, out_path: Path, meta: dict):
 <script>{SCRIPT}</script>
 </body>
 </html>"""
+    # سياسة عرض الرموز (2+5): تبسيط شامل لكل ما هو خارج قسم الوقائع
+    doc = codes.demote_page(doc, report_date, official)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(doc, encoding="utf-8")
     return out_path, len(sections)

@@ -237,7 +237,7 @@ def event_keys_table(items, inline):
         st = str(it.get("status", "")).strip()
         cls = STATUS_CLASS.get(st, "s-stable")
         rows.append([
-            Raw(f'<bdi class="bidi ev-code">{esc(code_label(it.get("code", ""), it.get("ref", ""), it.get("note", "")))}</bdi>'),
+            Raw(f'<bdi class="bidi ev-code">{esc(code_label(it.get("code", ""), it.get("ref", ""), f'{it.get("note", "")} {it.get("title", "")}'))}</bdi>'),
             Raw(inline(it.get("title", ""))),
             Raw(inline(it.get("area", ""))),
             Raw(f'<span class="st-badge {cls}">{esc(st)}</span>'),
