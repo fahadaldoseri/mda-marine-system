@@ -35,6 +35,9 @@ WATCH = {"قياس": "تقرير أمس", "قياسًا آنيًا": "قراءة
          "تكدس ملاحي متراكم": "تكدس ملاحي متزايد",
          "تأمين يرتفع": "أقساط التأمين ترتفع", "بسعة": "بحمولة"}
 
+# عبارات مشروعة تحتوي كلمة مرصودة، تُستثنى من التنبيه (منع الإنذار الكاذب)
+ALLOW = ["إنذار مبكر", "قياس الخطر", "قياس مستوى"]
+
 
 def analyze(text):
     clean = re.sub(r"\|.*\|", " ", text)
@@ -46,9 +49,14 @@ def analyze(text):
     lens = [len(re.findall(r"[\u0600-\u06FF]{2,}", s)) for s in sents]
     avg = sum(lens) / len(lens) if lens else 0.0
     long_ratio = (sum(1 for x in lens if x > LONG_WORDS) / len(lens)) if lens else 0.0
+    watch = {}
+    for w in WATCH:
+        n = clean.count(w) - sum(clean.count(a) for a in ALLOW if w in a)
+        if n > 0:
+            watch[w] = n
     return {"words": len(words), "sents": len(sents), "avg": avg,
             "long_ratio": long_ratio, "heavy": {h: clean.count(h) for h in HEAVY if clean.count(h)},
-            "watch": {w: clean.count(w) for w in WATCH if clean.count(w)}}
+            "watch": watch}
 
 
 def main():

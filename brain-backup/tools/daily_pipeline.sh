@@ -77,11 +77,33 @@ else
   echo "   ✘ فشل دمج الدفتر التراكمي" | tee -a "$LOG"
 fi
 
+# 5) خطوات النموذج المدمج (اختيارية — تُتخطى بصمت إن غاب المشغّل، بلا مفاتيح خارجية)
+echo "-- 5) النموذج المدمج: ترشيح التغذيات + مراجعة لغوية --" | tee -a "$LOG"
+S_LLM="skip"; NOTE_LLM="لم تُشغَّل (لا مشغّل متاح)"
+FEEDS_MD="feeds/feeds-$D.md"; REPORT_MD="reports/$D-sectioned.md"
+if command -v manus-node >/dev/null 2>&1; then
+  S_LLM="ok"; NOTE_LLM=""
+  if [ -f "$FEEDS_MD" ]; then
+    if ! python3 tools/llm_triage.py --input "$FEEDS_MD" >>"$LOG" 2>&1; then
+      S_LLM="failed"; NOTE_LLM="فشل ترشيح التغذيات"
+    fi
+  fi
+  if [ -f "$REPORT_MD" ]; then
+    if ! python3 tools/llm_review.py --report "$REPORT_MD" --limit 25 >>"$LOG" 2>&1; then
+      S_LLM="failed"; NOTE_LLM="${NOTE_LLM:+$NOTE_LLM · }فشل المراجعة اللغوية"
+    fi
+  fi
+  [ "$S_LLM" = "ok" ] && NOTE_LLM="رُشّحت التغذيات ورُوجعت اللغة آلياً بالنموذج المدمج"
+  echo "   ✔ $NOTE_LLM" | tee -a "$LOG"
+else
+  echo "   · تخطٍّ: manus-node غير متاح في هذه البيئة" | tee -a "$LOG"
+fi
+
 if [ -f "archive/originals/$D/manifest.json" ]; then MANIFEST="archive/originals/$D/manifest.json"; else MANIFEST=""; fi
-python3 - "$MARK" "$D" "$S_FEEDS" "$S_OFAC" "$S_ARCH" "$S_LEDGER" "$NOTE_OFAC" "$NOTE_ARCH" "$NOTE_LEDGER" "$MANIFEST" <<'PY'
+python3 - "$MARK" "$D" "$S_FEEDS" "$S_OFAC" "$S_ARCH" "$S_LEDGER" "$NOTE_OFAC" "$NOTE_ARCH" "$NOTE_LEDGER" "$MANIFEST" "$S_LLM" "$NOTE_LLM" <<'PY'
 import json, sys, datetime
-mark, d, f, o, a, l, no, na, nl, man = sys.argv[1:11]
-ok = all(s == "ok" for s in (f, o, a, l))
+mark, d, f, o, a, l, no, na, nl, man, sl, nlm = sys.argv[1:12]
+ok = all(s == "ok" for s in (f, o, a, l)) and sl != "failed"
 json.dump({
     "date": d, "pipeline_version": 3,
     "finished_utc": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -89,8 +111,9 @@ json.dump({
     "feeds": {"status": f}, "ofac": {"status": o, "note": no},
     "originals": {"status": a, "note": na, "manifest": man},
     "ledger_merge": {"status": l, "note": nl},
+    "builtin_llm": {"status": sl, "note": nlm},
 }, open(mark, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-print(f"-- الخلاصة: تغذيات={f} · OFAC={o} · أصول={a} · دمج الذاكرة={l} · العلامة: {mark}")
+print(f"-- الخلاصة: تغذيات={f} · OFAC={o} · أصول={a} · دمج الذاكرة={l} · النموذج المدمج={sl} · العلامة: {mark}")
 sys.exit(0 if ok else 1)
 PY
 RC=$?

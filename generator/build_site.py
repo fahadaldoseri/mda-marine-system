@@ -545,9 +545,17 @@ def main():
     build_robots(dist)
     build_notfound(dist, built)
 
+    # قسم «التقارير الخاصة» — يُبنى آليًا من sources/special
+    n_sp_items = 0
+    try:
+        import build_special
+        _, n_sp_items = build_special.build_all(dist)
+    except Exception as e:  # لا يُسقط بناء الموقع بسبب قسم فرعي
+        warnings.append(f"تعذّر بناء صفحة التقارير الخاصة: {e}")
+
     print(f"الرئيسية: {len(built)} إصدار · السجل التراكمي: {'نعم' if cum else 'لا'} · "
           f"اللوحة الشهرية: {'نعم' if mon else 'لا'} · المسارات: {n_routes} · التغذية: {n_feed} · "
-          f"خريطة الموقع: {n_sitemap} · robots: نعم · 404: نعم")
+          f"خريطة الموقع: {n_sitemap} · robots: نعم · 404: نعم · التقارير الخاصة: {n_sp_items}")
     for w_ in warnings:
         print(f"تنبيه: {w_}")
 
@@ -569,7 +577,7 @@ def main():
         try:
             import subprocess as _sp
             _r = _sp.run([sys.executable, "/home/ubuntu/brain-marine-news/validators/check_code_policy.py",
-                          str(DIST if "DIST" in dir() else Path("dist"))], capture_output=True, text=True)
+                          str(dist)], capture_output=True, text=True)
             _line = [l for l in _r.stdout.splitlines() if "النتيجة" in l]
             print(f"فحص سياسة الرموز: {(_line[-1].strip() if _line else _r.stdout.strip()[-80:])}")
         except Exception as _e:

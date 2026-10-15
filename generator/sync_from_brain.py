@@ -17,6 +17,7 @@
 
 import argparse
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -64,6 +65,81 @@ def copy_sources(date_iso: str, brain: Path) -> list:
     return log
 
 
+# ---------------------------------------------------------------------------
+# التقارير الخاصة: نسخ تلقائي + توليد بيانات واجهة عند غيابها
+# ---------------------------------------------------------------------------
+def auto_meta(md_path: Path) -> dict:
+    """يستخرج بيانات الواجهة من ترويسة التقرير الخاص: العنوان، الرقم، التاريخ، التصنيف، الملخص."""
+    text = md_path.read_text(encoding="utf-8")
+    title = ""
+    m = re.search(r"^#\s+(.+)$", text, flags=re.M)
+    if m:
+        title = re.sub(r"^تقرير\s*[—\-:]\s*", "", m.group(1).strip())
+
+    def field(name):
+        mm = re.search(rf"\*\*{name}:\*\*\s*(.+?)\s*$", text, flags=re.M)
+        return mm.group(1).strip() if mm else ""
+
+    code = field("الرقم المرجعي")
+    cls = field("التصنيف") or "عام"
+    date_raw = field("التاريخ")
+    iso = ""
+    md_date = re.search(r"(\d{4}-\d{2}-\d{2})", md_path.name)
+    if md_date:
+        iso = md_date.group(1)
+    elif date_raw:
+        dm = re.search(r"(\d{4})/(\d{1,2})/(\d{1,2})", date_raw)
+        if dm:
+            iso = f"{dm.group(1)}-{int(dm.group(2)):02d}-{int(dm.group(3)):02d}"
+
+    body = re.sub(r"^#.*$", "", text, flags=re.M)
+    paras = [p.strip() for p in body.split("\n")
+             if p.strip() and not p.strip().startswith(("|", "#", "**جدول", "---"))]
+    summary = ""
+    for p in paras:
+        if len(p) > 60:
+            summary = re.sub(r"^\d+\.\s*", "", p)
+            break
+
+    return {
+        "kind": "special",
+        "title": title or md_path.stem,
+        "headline": title or md_path.stem,
+        "code": code,
+        "date": iso,
+        "classification": cls,
+        "summary": summary,
+        "lede": summary,
+        "notice": "تقرير خاص مستقل عن الإصدار اليومي. يعتمد على المصادر المعلنة فقط، ولا يُنسب أي فعل إلى جهة إلا وفق مصدر رسمي مباشر.",
+        "footer_note": "تقرير خاص — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: UTC وتوقيت البحرين (UTC+3).",
+    }
+
+
+def sync_special(brain: Path) -> list:
+    """ينسخ تقارير Brain الخاصة إلى مصادر الموقع تلقائيًا مع كل تشغيل."""
+    log = []
+    src_dir = brain / "reports"
+    dst_dir = SITE / "sources" / "special"
+    if not src_dir.exists():
+        return log
+    dst_dir.mkdir(parents=True, exist_ok=True)
+    for md in sorted(src_dir.glob("special-*.md")):
+        stem = re.sub(r"^special-", "", md.stem)
+        stem = re.sub(r"-MACR$", "", stem)  # نسخة MACR هي المعتمدة للنشر
+        dst_md = dst_dir / f"{stem}.md"
+        if dst_md.exists() and dst_md.stat().st_mtime >= md.stat().st_mtime:
+            continue
+        shutil.copy2(md, dst_md)
+        log.append(f"تقرير خاص نُسخ: {dst_md.name}")
+        meta_path = dst_dir / f"{stem}.json"
+        if not meta_path.exists():
+            meta_path.write_text(
+                json.dumps(auto_meta(md), ensure_ascii=False, indent=2), encoding="utf-8"
+            )
+            log.append(f"وُلّدت بيانات الواجهة تلقائيًا: {meta_path.name} (راجعها إن أردت تحسين الملخص)")
+    return log
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", required=True, help="تاريخ التقرير YYYY-MM-DD")
@@ -73,6 +149,8 @@ def main():
 
     brain = Path(a.brain).resolve()
     for line in copy_sources(a.date, brain):
+        print(line)
+    for line in sync_special(brain):
         print(line)
 
     if a.skip_build:

@@ -114,6 +114,7 @@ def nav_html(active: str = "") -> str:
     </a>
     <div class="sn-links">
       {link('/', 'الرئيسية', 'home')}
+      {link('/reports/special.html', 'التقارير الخاصة', 'special')}
       {link('/#archive', 'الأرشيف', 'archive')}
       {link('/reports/monthly-2026-10.html', 'اللوحة الشهرية', 'monthly')}
       {link('/reports/cumulative-2026.html', 'السجل التراكمي', 'cumulative')}
