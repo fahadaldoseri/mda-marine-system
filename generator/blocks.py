@@ -556,6 +556,9 @@ def vessel_identity_table(data, inline):
     for r in rows:
         html.append("<tr>" + "".join(f'<td>{inline(str(r.get(k, "—")))}</td>' for k, _ in cols) + "</tr>")
     html.append("</tbody></table></div>")
+    note = data.get("note") if isinstance(data, dict) else None
+    if note:
+        html.append(f'<p class="src-note">{inline(str(note))}</p>')
     return "".join(html)
 
 
