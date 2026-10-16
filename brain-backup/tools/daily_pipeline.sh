@@ -102,7 +102,7 @@ fi
 if [ -f "archive/originals/$D/manifest.json" ]; then MANIFEST="archive/originals/$D/manifest.json"; else MANIFEST=""; fi
 python3 - "$MARK" "$D" "$S_FEEDS" "$S_OFAC" "$S_ARCH" "$S_LEDGER" "$NOTE_OFAC" "$NOTE_ARCH" "$NOTE_LEDGER" "$MANIFEST" "$S_LLM" "$NOTE_LLM" <<'PY'
 import json, sys, datetime
-mark, d, f, o, a, l, no, na, nl, man, sl, nlm = sys.argv[1:12]
+mark, d, f, o, a, l, no, na, nl, man, sl, nlm = sys.argv[1:13]
 ok = all(s == "ok" for s in (f, o, a, l)) and sl != "failed"
 json.dump({
     "date": d, "pipeline_version": 3,
