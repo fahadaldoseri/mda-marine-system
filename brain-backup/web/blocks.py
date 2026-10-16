@@ -549,7 +549,7 @@ def vessel_identity_table(data, inline):
     rows = data.get("rows") if isinstance(data, dict) else data
     if not rows:
         return ""
-    cols = (("name", "السفينة"), ("imo", "IMO"), ("mmsi", "MMSI"), ("flag", "الراية"), ("former", "أسماء سابقة"), ("src", "المصدر"))
+    cols = (("name", "السفينة"), ("imo", "IMO"), ("mmsi", "MMSI"), ("flag", "العلم"), ("former", "أسماء سابقة"), ("src", "المصدر"))
     html = ['<h3 class="blk-h">هوية السفن المستشهد بها</h3>',
             '<div class="tbl-scroll"><table class="tbl rel-tbl"><thead><tr>' +
             "".join(f"<th>{h}</th>" for _, h in cols) + "</tr></thead><tbody>"]
