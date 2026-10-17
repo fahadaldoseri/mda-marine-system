@@ -108,8 +108,14 @@ def scan(path):
                     })
             continue
         if pat["id"] == "separated_clock":
-            hits = [m.group(0) for m in re.finditer(pat["regex"], flat_collapsed)]
-            hits = [h for h in hits if not re.search(r"\d{6}Z", h)]
+            # لا إنذار إذا كان السطر يحمل DTG مطلقًا أو وقت البحرين المقابل
+            scope = "\n".join(
+                ln for ln in text.splitlines()
+                if not (re.search(r"\d{4,6}Z", ln) or "البحرين" in ln)
+            )
+            scope = re.sub(r"\s+", " ", scope)
+            hits = [m.group(0) for m in re.finditer(pat["regex"], scope)]
+            hits = [h for h in hits if not re.search(r"\d{4,6}Z", h)]
             if hits:
                 findings["warn"].append({
                     "type": "pattern", "term": "ساعة منفصلة بلا DTG",
