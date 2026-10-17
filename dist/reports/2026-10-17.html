@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>التقرير اليومي لأمن الملاحة — 17 أكتوبر 2026</title>
+<meta name="description" content="تقرير أمن الملاحة في الخليج العربي ومضيق هرمز وخليج عُمان وبحر العرب والبحر الأحمر وباب المندب وخليج عدن والمحيط الهندي والقرن الأفريقي، وفق بلاغات رسمية ومصادر موثّقة.">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<script>document.documentElement.className='js';</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>:root{
+  --bg:#050a12;
+  --bg-2:#08101c;
+  --panel:#0c1626;
+  --panel-2:#101d31;
+  --panel-3:#152441;
+  --line:#1d2e4a;
+  --line-2:#28405f;
+  --ink:#e9f0f9;
+  --ink-2:#c3d2e6;
+  --muted:#8ba0bd;
+  --faint:#5f7899;
+  --accent:#22c3b6;
+  --accent-ink:#04120f;
+  --info:#4d9dff;
+  --danger:#ff5d52;
+  --warn:#ffb02e;
+  --ok:#33d07a;
+  --shadow-2:0 10px 30px -14px rgba(0,0,0,.7);
+  --radius:12px;
+  --radius-sm:8px;
+  --map-sea:#06111f;
+  --map-land:#22375a;
+  --map-coast:#5b7ba6;
+  --map-border:#33507a;
+  --map-grid:#16273f;
+  --map-grid-lbl:#54749c;
+  --map-label:#dbe6f4;
+  --map-country:#7f97b8;
+  --map-sea-label:#4f6f96;
+  --map-strait:#ffd9d5;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:74px}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI","Tahoma",system-ui,sans-serif;
+  font-size:16.5px;line-height:1.95;text-rendering:optimizeLegibility;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(1100px 520px at 88% -12%, rgba(34,195,182,.09), transparent 60%),
+    radial-gradient(900px 480px at 6% 4%, rgba(77,157,255,.06), transparent 62%);
+}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+section.doc p,section.doc li,.card p,.src,.foot,.notice,blockquote{overflow-wrap:anywhere}
+a:focus-visible,.btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 22px 90px}
+
+/* عزل القيم اللاتينية والرقمية المركبة داخل سياق عربي */
+bdi,.bidi{direction:ltr;unicode-bidi:isolate}
+.k-v,.chip b,.cite-ref,.bar-row .bv,td.num,th.num{direction:ltr;unicode-bidi:isolate;white-space:nowrap}
+.ev-code,.bidi.ev-code{direction:ltr;unicode-bidi:isolate;white-space:nowrap}  /* رمز الحدث لا يُكسر بين سطرين */
+a.bidi{white-space:normal}
+.eng{direction:ltr;unicode-bidi:plaintext;overflow-wrap:anywhere}
+
+/* ---------- الشريط العلوي ---------- */
+.topbar{
+  position:sticky;top:0;z-index:30;backdrop-filter:blur(14px);
+  background:linear-gradient(180deg,rgba(6,11,20,.95),rgba(6,11,20,.82));
+  border-bottom:1px solid var(--line);
+}
+.topbar-inner{max-width:1180px;margin:0 auto;padding:11px 22px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px;min-width:0}
+.brand-mark{
+  width:34px;height:34px;border-radius:10px;flex:0 0 auto;display:grid;place-items:center;
+  background:rgba(34,195,182,.10);border:1px solid var(--line-2);color:var(--accent)
+}
+.brand-mark svg{width:19px;height:19px}
+.brand-title{font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:15px;line-height:1.4}
+.brand-sub{font-size:12px;color:var(--muted);line-height:1.4}
+.topbar-spacer{flex:1 1 auto}
+.tb-meta{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.chip{
+  font-size:12px;color:var(--ink-2);border:1px solid var(--line);
+  background:var(--panel);border-radius:999px;padding:5px 11px
+}
+.chip b{color:var(--ink);font-weight:600}
+.btn{
+  font:inherit;font-size:12.5px;cursor:pointer;color:var(--ink);
+  background:var(--panel-2);border:1px solid var(--line-2);border-radius:8px;
+  padding:7px 13px;transition:background .18s ease,transform .18s ease
+}
+.btn:hover{background:var(--panel-3)}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--accent);color:var(--accent-ink);border-color:transparent;font-weight:600}
+.btn-primary:hover{background:#2ad4c6}
+
+/* ---------- الترويسة ---------- */
+.masthead{padding:34px 0 6px;display:flex;gap:22px;align-items:flex-end;flex-wrap:wrap}
+.masthead h1{
+  font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;
+  font-size:clamp(26px,3.4vw,40px);line-height:1.3;margin:0 0 8px;
+  flex:0 0 100%;width:100%;text-align:center
+}
+.masthead > div:not(.threat){flex:1 0 100%}
+.masthead .lede{color:var(--ink-2);font-size:15px;max-width:74ch;margin:0}
+.masthead-meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+.threat{
+  margin-inline-start:0;margin-inline-end:auto;text-align:center;border-radius:var(--radius);
+  border:1px solid var(--line-2);background:var(--panel);padding:14px 20px;min-width:172px
+}
+.threat .lbl{font-size:12px;color:var(--muted)}
+.threat .val{font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;font-size:23px;line-height:1.45;margin-top:2px}
+.threat.risk-high .val{color:var(--danger)}
+.threat.risk-med .val{color:var(--warn)}
+.threat.risk-low .val{color:var(--ok)}
+
+/* ---------- شريط المؤشرات ---------- */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:24px 0 8px}
+.kpi{
+  background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);
+  padding:15px 16px;position:relative;overflow:hidden
+}
+.kpi em{position:absolute;inset-inline-start:0;top:0;bottom:0;width:3px;background:var(--accent)}
+.kpi.acc-info em{background:var(--info)}
+.kpi.acc-warn em{background:var(--warn)}
+.kpi.acc-danger em{background:var(--danger)}
+.kpi.acc-ok em{background:var(--ok)}
+.kpi .k-l{font-size:12.5px;color:var(--muted);line-height:1.6;min-height:2.6em}
+.kpi .k-v{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:30px;line-height:1.25;margin-top:3px;font-variant-numeric:tabular-nums}
+.kpi .k-n{font-size:12px;color:var(--muted);line-height:1.7;margin-top:4px}
+
+.notice{
+  display:flex;gap:12px;align-items:flex-start;margin:20px 0 6px;padding:13px 16px;
+  border:1px solid var(--line);border-inline-start:3px solid var(--accent);
+  border-radius:var(--radius-sm);background:rgba(34,195,182,.05);
+  font-size:13.5px;color:var(--ink-2)
+}
+.notice svg{width:18px;height:18px;color:var(--accent);flex:0 0 auto;margin-top:5px}
+
+/* ---------- الأقسام ---------- */
+main{margin-top:30px;display:grid;gap:22px;min-width:0}
+section.doc{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px 24px 10px;min-width:0;max-width:100%;scroll-margin-top:74px
+}
+section.doc.pri{box-shadow:inset 0 2px 0 0 rgba(34,195,182,.55)}
+section.doc > h2{
+  font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:21px;line-height:1.5;
+  margin:0 0 4px;display:flex;align-items:center;gap:11px
+}
+section.doc > h2 .ico{width:24px;height:24px;flex:0 0 auto;display:grid;place-items:center;color:var(--accent)}
+section.doc > h2 .ico svg{width:18px;height:18px}
+.h-rule{height:1px;background:var(--line);margin:14px 0 18px}
+section.doc h3{
+  font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:16.5px;
+  margin:22px 0 6px;line-height:1.6;color:var(--ink)
+}
+section.doc p{margin:10px 0;color:var(--ink-2)}
+section.doc strong{color:var(--ink);font-weight:600}
+section.doc code{font-family:"IBM Plex Mono",monospace;font-size:.92em;color:var(--ink);background:var(--panel-3);padding:1px 5px;border-radius:4px}
+ul,ol{margin:10px 0;padding-inline-start:22px;color:var(--ink-2)}
+li{margin:7px 0}
+li::marker{color:var(--accent)}
+blockquote{
+  margin:16px 0;padding:12px 16px;border-inline-start:3px solid var(--accent);
+  background:rgba(34,195,182,.055);border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  color:var(--ink-2);font-size:15px
+}
+hr{border:0;border-top:1px solid var(--line);margin:20px 0}
+
+/* ---------- بطاقات الوقائع ---------- */
+.cards{display:grid;gap:14px;margin:16px 0 20px}
+.card{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:16px 18px}
+.card-head{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px}
+.card-head h3{font-family:"Noto Kufi Arabic",sans-serif;font-size:16px;font-weight:600;margin:0;line-height:1.6;color:var(--ink)}
+.tag{font-size:11.5px;border-radius:999px;padding:3px 10px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--panel-3);white-space:nowrap}
+.tag.t-confirm{color:#ffd7d3;background:rgba(255,93,82,.16);border-color:rgba(255,93,82,.42)}
+.tag.t-suspect{color:#ffe6bd;background:rgba(255,176,46,.15);border-color:rgba(255,176,46,.40)}
+.tag.t-inter{color:#d5e6ff;background:rgba(77,157,255,.15);border-color:rgba(77,157,255,.40)}
+.card p{font-size:15px;margin:8px 0}
+
+/* ---------- الجداول ---------- */
+.tbl-wrap{overflow-x:auto;margin:16px 0 22px;border:1px solid var(--line);border-radius:var(--radius-sm);max-width:100%}
+table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:480px}
+thead th{
+  background:var(--panel-3);color:var(--ink);font-weight:600;text-align:start;
+  padding:11px 13px;border-bottom:1px solid var(--line-2);white-space:nowrap
+}
+tbody td{padding:10px 13px;border-bottom:1px solid var(--line);color:var(--ink-2);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:nth-child(even){background:rgba(255,255,255,.015)}
+tbody tr:hover{background:rgba(34,195,182,.05)}
+td.num,th.num{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;text-align:end;white-space:nowrap;color:var(--ink)}
+tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:600}
+
+/* ---------- المخططات ---------- */
+.viz{margin:18px 0 24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:18px}
+.viz h3{
+  margin:0 0 14px;font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;
+  font-size:15px;color:var(--ink-2)
+}
+.bar-row{display:grid;grid-template-columns:minmax(150px,1.05fr) 3fr 108px;gap:14px;align-items:center;margin:11px 0}
+.bar-row .bl{font-size:13.5px;color:var(--ink-2);line-height:1.55}
+.bar-track{height:9px;border-radius:999px;background:var(--panel-3);overflow:hidden}
+.bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#1fbfb2,#5ad6c8);width:var(--w,0);animation:grow 1s cubic-bezier(.22,.8,.28,1) both}
+@keyframes grow{from{width:0}}
+.bar-row .bv{font-family:"IBM Plex Mono",monospace;font-size:12.5px;text-align:end;color:var(--ink);font-variant-numeric:tabular-nums}
+.viz .src-note{font-size:12.5px;color:var(--muted);margin:12px 0 0}
+
+/* ---------- خريطة الوقائع ---------- */
+.map-wrap{border:1px solid var(--line-2);border-radius:var(--radius-sm);overflow:hidden;background:var(--map-sea);margin-top:6px}
+.map-svg{display:block;width:100%;height:auto;max-width:100%}
+.mp-sea-bg{fill:var(--map-sea)}
+.mp-grid line{stroke:var(--map-grid);stroke-width:.7;vector-effect:non-scaling-stroke}
+.mp-grid-lbl{font-family:"IBM Plex Mono",monospace;font-size:11px;fill:var(--map-grid-lbl);direction:ltr;unicode-bidi:isolate}
+.mp-land path{fill:var(--map-land);stroke:var(--map-coast);stroke-width:1.2;vector-effect:non-scaling-stroke}
+.mp-borders path{fill:none;stroke:var(--map-border);stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke}
+.mp-places text{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic",sans-serif;dominant-baseline:middle;text-anchor:middle}
+.mp-port-dot{fill:var(--map-label)}
+.mp-port-lbl{fill:var(--map-label);font-size:14px;direction:rtl;unicode-bidi:isolate}
+.mp-country{fill:var(--map-country);font-size:15px;letter-spacing:.5px}
+.mp-sea-lbl{fill:var(--map-sea-label);letter-spacing:.8px}
+.mp-sea-lg{font-size:19px}
+.mp-sea-sm{font-size:15px;font-weight:600;fill:var(--map-strait);letter-spacing:0}
+.mp-events .mp-halo{fill:var(--mk);opacity:.22}
+.mp-events .mp-dot{fill:var(--mk);stroke:var(--bg);stroke-width:2.2;vector-effect:non-scaling-stroke}
+.mp-events .mp-num{font-family:"IBM Plex Mono",monospace;font-size:9.5px;font-weight:600;fill:#fff;text-anchor:middle}
+.map-keys{font-size:12.5px;color:var(--faint);margin:12px 0 0}
+.map-legend{list-style:none;display:grid;gap:7px;margin:14px 0 0;padding:0}
+.map-legend li{display:flex;gap:10px;align-items:baseline;font-size:13.5px;color:var(--ink-2);margin:0}
+.lg-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;color:#fff;background:var(--mk);border-radius:999px;width:19px;height:19px;display:grid;place-items:center;flex:0 0 auto}
+/* ---------- الاستشهادات ---------- */
+.cite-ref{
+  display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:11.5px;
+  color:var(--accent);background:rgba(34,195,182,.10);border:1px solid rgba(34,195,182,.34);
+  border-radius:6px;padding:0 5px;margin-inline-start:3px;vertical-align:1px
+}
+.cite-ref:hover{background:rgba(34,195,182,.22);text-decoration:none}
+
+/* ---------- المصادر ---------- */
+.src-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin:14px 0 22px}
+.src{border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--panel-2);padding:11px 13px;font-size:13.5px;color:var(--ink-2)}
+.src b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-bottom:3px}
+.src .st{font-size:12px;color:var(--muted)}
+.src.s-ok{border-inline-start:3px solid var(--ok)}
+.src.s-none{border-inline-start:3px solid var(--info)}
+.src.s-fail{border-inline-start:3px solid var(--danger)}
+
+/* ---------- التذييل ---------- */
+.foot{margin-top:34px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);color:var(--muted);font-size:13.5px}
+.foot b{color:var(--ink-2)}
+/* قواعد العرض المعتمدة 12 أكتوبر 2026 (تعديلات المعاينة) — للتراجع: احذف السطرين التاليين */
+.foot{display:none}
+.method-note{display:none}
+
+/* ---------- الحركة: دخول لطيف بالـCSS فقط، والمحتوى مرئي دائمًا ---------- */
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.masthead,.kpis{animation:rise .55s cubic-bezier(.22,.8,.28,1) both}
+@media (prefers-reduced-motion: reduce){
+  .masthead,.kpis,.bar-fill{animation:none}
+}
+
+@media (max-width:760px){
+  body{font-size:16px}
+  .wrap{padding:0 14px 70px}
+  section.doc{padding:18px 15px 8px}
+  .threat{margin-inline-start:0;width:100%}
+  .bar-row{grid-template-columns:1fr auto;grid-template-areas:"l v" "t t";gap:6px 10px}
+  .bar-row .bl{grid-area:l}
+  .bar-row .bv{grid-area:v;text-align:start}
+  .bar-track{grid-area:t;width:100%}
+  table{font-size:14px}
+}
+
+/* ==================== نمط الطباعة A4 ==================== */
+@page{size:A4;margin:14mm 12mm}
+/* ---------- قواعد عرض معتمدة من تعديلات المعاينة (12 أكتوبر 2026) ---------- */
+.notice,
+.map-panel .src-note,
+.map-keys,
+.decision .dc-foot{display:none}
+
+.sec-lede{font-size:13px;color:var(--muted);margin:0 0 16px;line-height:1.7;max-width:76ch}
+.blk-lede{font-size:12.5px;color:var(--faint);margin:-6px 0 10px;line-height:1.6}
+
+@media print{
+  :root{
+    --ink:#0a1524;--ink-2:#20303f;--muted:#4b5e73;--faint:#5c728c;
+    --line:#b8c4d1;--line-2:#8a99ab;--panel:#fff;--panel-2:#fff;--panel-3:#eef2f7;
+    --accent:#0b6f66;--info:#1f5f9f;--danger:#9d2b25;--warn:#7d5200;--ok:#166b45;
+    --map-sea:#f7fafc;--map-land:#d6e0ea;--map-coast:#64809b;--map-border:#96a7b9;
+    --map-grid:#d3dce6;--map-grid-lbl:#6b7f94;--map-label:#20303f;--map-country:#6b7f94;
+    --map-sea-label:#5a7086;--map-strait:#8a2b25;
+  }
+  body{background:#fff;color:#111;font-size:10.8pt;line-height:1.75}
+  body::before{display:none}
+  .topbar,.no-print{display:none !important}
+  .wrap{max-width:none;padding:0}
+  a{color:#0a1524;text-decoration:none}
+  section.doc{background:#fff;border:0;border-top:1px solid #cfd8e3;border-radius:0;padding:0 0 5mm;box-shadow:none;break-inside:auto;page-break-inside:auto}
+  section.doc.pri{border-top:2px solid #0b6f66}
+  section.doc > h2{font-size:13pt;color:#0a1524;break-after:avoid;page-break-after:avoid}
+  section.doc > h2 .ico{display:none}
+  section.doc h3{color:#0a1524;font-size:11pt;break-after:avoid;page-break-after:avoid}
+  section.doc p,section.doc li,tbody td,.card p{color:#20303f}
+  .masthead h1{color:#0a1524;font-size:21pt}
+  .kpi,.viz,.src,.foot,.card,.notice{background:#fff;border-color:#cfd8e3;box-shadow:none}
+  .kpi .k-v{color:#0a1524}
+  .threat{background:#fff;border-color:#cfd8e3}
+  .chip{background:#f6f8fb;border-color:#cfd8e3;color:#31465c}
+  .chip b{color:#0a1524}
+  .cite-ref{color:#0a1524;background:#f2f5f9;border-color:#b8c4d1}
+  .tag{color:#31465c;background:#f6f8fb;border-color:#b8c4d1}
+  .tag.t-confirm{color:#7a1d1a;background:#fff1f0;border-color:#c77973}
+  .tag.t-suspect{color:#7c5000;background:#fff7e6;border-color:#c9a24f}
+  .tag.t-inter{color:#1d4f87;background:#edf4ff;border-color:#8bb1dd}
+  thead th{background:#eef2f7;color:#0a1524}
+  .viz{background:#fbfcfe}
+  .bar-track{background:#e6ecf3}
+  .bar-fill{background:#0f8f86;animation:none}
+  .masthead,.kpis{animation:none}
+  .map-wrap{border-color:#c3cedb}
+  .mp-events .mp-dot{stroke:#fff}
+  .map-viz{break-inside:avoid;page-break-inside:avoid}
+  .bar-row .bl,.bar-row .bv,.viz h3,.viz .src-note,.src,.src b,.src .st,.foot,.kpi .k-l,.kpi .k-n,.notice,.chip,.cite-ref,.tag{font-size:10.5pt;line-height:1.6}
+  .card,.viz,.src,.kpi,.table-row{break-inside:avoid;page-break-inside:avoid}
+  .tbl-wrap{overflow:visible;break-inside:auto;page-break-inside:auto}
+  table{min-width:0;font-size:10.5pt}
+  thead{display:table-header-group}
+  tbody tr{break-inside:avoid;page-break-inside:avoid}
+  html.js .reveal{opacity:1 !important;transform:none !important;transition:none !important}
+
+  .decision{background:#fff;border-color:#c3cedb}
+  .decision .dc-title{color:#0b6f66}
+  .dc-v{color:#0a1524}
+  .dc-row.risk-high .dc-v{color:#9d2b25}
+  .dc-row.risk-med .dc-v{color:#7d5200}
+  .dc-row.risk-low .dc-v{color:#166b45}
+  .dc-foot,.rkey,.glossary{color:#4b5e73}
+  .conf,.kstrip,.chg-tag,.st-badge,.ev-code,.cls-banner{font-size:10.5pt;background:#f6f8fb;border-color:#b8c4d1;color:#31465c}
+  .conf.c-high{color:#14603f;background:#edfaf3;border-color:#7cc4a0}
+  .conf.c-med{color:#7c5000;background:#fff8ea;border-color:#cfa95a}
+  .conf.c-low{color:#1d4f87;background:#eff5ff;border-color:#8bb1dd}
+  .kstrip.k-confirm,.st-badge.s-active{color:#7a1d1a;background:#fff1f0;border-color:#c77973}
+  .kstrip.k-inter,.chg.c-new .chg-tag{color:#1d4f87;background:#edf4ff;border-color:#8bb1dd}
+  .kstrip.k-suspect,.chg.c-reclassified .chg-tag,.cls-banner.c-restricted{color:#7c5000;background:#fff7e6;border-color:#c9a24f}
+  .chg.c-closed .chg-tag,.st-badge.s-stable{color:#14603f;background:#edfaf3;border-color:#7cc4a0}
+  .ev-code{color:#0b6f66;background:#effaf8;border-color:#7fc9c0}
+  .tl-track{background:#e6ecf3}
+  .tl-fill.k-confirm{background:#9d2b25}
+  .tl-fill.k-inter{background:#1f5f9f}
+  .tl-fill.k-suspect{background:#7d5200}
+  .tl-fill.k-bg{background:#7f92a8}
+  ul.d-kinds li::before{width:3px}
+  .decision,.tl-viz,.glossary{break-inside:avoid;page-break-inside:avoid}
+  .decision{animation:none}
+
+}
+
+/* ---------- بطاقة القرار ---------- */
+.decision{
+  margin:24px 0 6px;border:1px solid var(--line-2);border-radius:var(--radius);
+  background:linear-gradient(180deg,rgba(34,195,182,.07),rgba(12,22,38,.4));padding:18px 22px 16px
+}
+.decision .dc-title{
+  font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:17px;margin:0 0 12px;color:var(--accent)
+}
+.dc-grid{display:grid;gap:10px}
+.dc-row{display:grid;grid-template-columns:190px 1fr;gap:14px;align-items:start}
+.dc-l{font-size:13.5px;color:var(--muted);padding-top:2px}
+.dc-v{font-size:16px;color:var(--ink);font-weight:500}
+.dc-row.risk-high .dc-v{color:var(--danger)}
+.dc-row.risk-med .dc-v{color:var(--warn)}
+.dc-row.risk-low .dc-v{color:var(--ok)}
+.dc-foot{font-size:12.5px;color:var(--faint);margin-top:10px;border-top:1px solid var(--line);padding-top:8px}
+
+/* ---------- مفتاح القراءة ---------- */
+.rkey{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin:18px 0 0;font-size:12.5px;color:var(--muted)}
+.rkey-t{color:var(--faint)}
+.rk{display:inline-flex;align-items:center;gap:7px}
+.rk::before{content:"";width:3px;height:14px;border-radius:2px;background:var(--muted)}
+.rk.k-fact::before{background:var(--ok)}
+.rk.k-est::before{background:var(--info)}
+.rk.k-info::before{background:var(--muted)}
+.rk.k-bg::before{background:var(--line-2)}
+.rk.k-watch::before{background:var(--warn)}
+
+/* ---------- شرائط تمييز الحقيقة والتقدير ---------- */
+ul.d-kinds{list-style:none;padding-inline-start:0}
+ul.d-kinds li{position:relative;padding-inline-start:14px;margin:9px 0}
+ul.d-kinds li::before{content:"";position:absolute;inset-inline-start:0;top:.5em;bottom:.5em;width:3px;border-radius:2px;background:var(--line-2)}
+ul.d-kinds li.k-fact::before{background:var(--ok)}
+ul.d-kinds li.k-est::before{background:var(--info)}
+ul.d-kinds li.k-info::before{background:var(--muted)}
+ul.d-kinds li.k-bg::before{background:var(--line-2)}
+ul.d-kinds li.k-watch::before{background:var(--warn)}
+
+/* ---------- درجة الثقة ---------- */
+.conf{font-size:11.5px;border-radius:999px;padding:2px 9px;border:1px solid var(--line-2);white-space:nowrap;color:var(--ink-2)}
+.conf.c-high{color:#cdf6e2;background:rgba(51,208,122,.16);border-color:rgba(51,208,122,.42)}
+.conf.c-med{color:#ffe8c4;background:rgba(255,176,46,.15);border-color:rgba(255,176,46,.40)}
+.conf.c-low{color:#d7e7ff;background:rgba(77,157,255,.15);border-color:rgba(77,157,255,.40)}
+.kstrip{font-size:11.5px;border-radius:999px;padding:2px 9px;border:1px solid var(--line-2);color:var(--ink-2);margin-inline-end:7px;white-space:nowrap}
+.kstrip.k-confirm{color:#ffd9d5;background:rgba(255,93,82,.15);border-color:rgba(255,93,82,.40)}
+.kstrip.k-inter{color:#d7e7ff;background:rgba(77,157,255,.15);border-color:rgba(77,157,255,.40)}
+.kstrip.k-suspect{color:#ffe8c4;background:rgba(255,176,46,.15);border-color:rgba(255,176,46,.40)}
+
+/* ---------- ما تغيّر ---------- */
+ul.changes{list-style:none;padding:0;margin:0;display:grid;gap:9px}
+.changes li{display:flex;gap:11px;align-items:baseline}
+.chg-tag{font-size:11.5px;border-radius:999px;padding:2px 10px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--panel-3);flex:0 0 auto}
+.chg.c-new .chg-tag{color:#d7e7ff;background:rgba(77,157,255,.15);border-color:rgba(77,157,255,.40)}
+.chg.c-closed .chg-tag{color:#cdf6e2;background:rgba(51,208,122,.15);border-color:rgba(51,208,122,.40)}
+.chg.c-reclassified .chg-tag{color:#ffe8c4;background:rgba(255,176,46,.15);border-color:rgba(255,176,46,.40)}
+
+/* ---------- رموز الأحداث والحالات ---------- */
+.ev-code{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--accent);background:rgba(34,195,182,.10);border:1px solid rgba(34,195,182,.32);border-radius:6px;padding:0 5px}
+.st-badge{font-size:11.5px;border-radius:999px;padding:2px 10px;border:1px solid var(--line-2);color:var(--ink-2);white-space:nowrap}
+.st-badge.s-active{color:#ffd9d5;background:rgba(255,93,82,.14);border-color:rgba(255,93,82,.38)}
+.st-badge.s-stable{color:#cdf6e2;background:rgba(51,208,122,.14);border-color:rgba(51,208,122,.38)}
+.st-badge.s-closed{color:var(--muted);background:var(--panel-3)}
+.trend{font-size:14px}
+.trend.t-up{color:var(--danger)}
+.trend.t-down{color:var(--ok)}
+.trend.t-flat{color:var(--muted)}
+.kpi .k-d{font-size:12px;margin-top:2px;font-family:"IBM Plex Mono",monospace}
+
+/* ---------- الخط الزمني ---------- */
+.tl-viz .tl-row{display:grid;grid-template-columns:96px 1fr 46px minmax(180px,1.4fr);gap:12px;align-items:center;margin:9px 0}
+.tl-date{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted)}
+.tl-track{height:9px;border-radius:999px;background:var(--panel-3);overflow:hidden}
+.tl-fill{height:100%;border-radius:999px;width:var(--w,0);animation:tl-grow 1s cubic-bezier(.22,.8,.28,1) both}
+@keyframes tl-grow{from{width:0}to{width:var(--w,0)}}
+.tl-fill.k-confirm{background:var(--danger)}
+.tl-fill.k-inter{background:var(--info)}
+.tl-fill.k-suspect{background:var(--warn)}
+.tl-fill.k-bg{background:var(--muted)}
+.tl-num{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--ink);text-align:end}
+.tl-lbl{font-size:13px;color:var(--ink-2)}
+
+/* ---------- بانر التصنيف والتعريفات ---------- */
+.cls-banner{border:1px solid var(--line-2);border-radius:var(--radius-sm);padding:9px 14px;font-size:13px;margin:14px 0 0;background:var(--panel-2);color:var(--ink-2)}
+.cls-banner.c-restricted{color:#ffe8c4;background:rgba(255,176,46,.10);border-color:rgba(255,176,46,.42)}
+.cls-banner.c-sensitive{color:#ffd9d5;background:rgba(255,93,82,.10);border-color:rgba(255,93,82,.42)}
+.glossary{margin-top:12px;font-size:13px;color:var(--muted)}
+.glossary ul{margin:6px 0 0;padding-inline-start:20px}
+.glossary b{color:var(--ink-2)}
+@media (max-width:760px){
+  .dc-row{grid-template-columns:1fr;gap:2px}
+  .dc-l{font-size:12.5px}
+  .tl-viz .tl-row{grid-template-columns:74px 1fr 34px;grid-template-areas:"d t n" "l l l";gap:6px 10px}
+  .tl-date{grid-area:d}.tl-track{grid-area:t}.tl-num{grid-area:n}.tl-lbl{grid-area:l}
+}
+
+/* ---------- ملحق موثوقية المصادر ---------- */
+.tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+.tbl-scroll .rel-tbl{min-width:640px}
+.rel-tbl td:nth-child(5){max-width:420px}
+@media print{.tbl-scroll{overflow:visible}.tbl-scroll .rel-tbl{min-width:0}}
+.rel-tbl td.rel{
+  font-family:"IBM Plex Mono",monospace;font-weight:600;text-align:center;color:var(--accent)
+}
+@media print{.rel-tbl{font-size:10.5px}.rel-tbl td,.rel-tbl th{padding:3px 5px}}
+
+body.daylight{
+  --bg:#eef2f7;--bg-2:#e7edf4;--panel:#ffffff;--panel-2:#ffffff;--panel-3:#eef2f7;
+  --line:#d3dce7;--line-2:#b9c6d6;--ink:#0b1a2b;--ink-2:#31465c;--muted:#5a7086;--faint:#6b7f94;
+  --accent:#0b6f66;--info:#1f5f9f;--danger:#a32a24;--warn:#8a5a00;--ok:#176b46;
+}
+body.daylight::before{display:none}
+body.daylight .topbar{background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.85))}
+body.daylight .btn-primary{background:#0b6f66;color:#ffffff}
+body.daylight .cite-ref{color:#0b6f66;background:rgba(11,111,102,.07);border-color:rgba(11,111,102,.30)}
+body.daylight .tag{color:#31465c;background:#f2f5f9;border-color:#c4d0dd}
+body.daylight .tag.t-confirm{color:#7a1d1a;background:#fff1f0;border-color:#c77973}
+body.daylight .tag.t-suspect{color:#7c5000;background:#fff7e6;border-color:#c9a24f}
+body.daylight .tag.t-inter{color:#1d4f87;background:#edf4ff;border-color:#8bb1dd}
+body.daylight .threat.risk-high .val{color:#a32a24}
+body.daylight .map-legend li,body.daylight .lg-num{color:#31465c}
+body.daylight .lg-num{color:#ffffff}
+body.daylight .map-keys{color:#5a7086}
+body.daylight .kpi em{opacity:.95}
+</style>
+<style>
+:root{--sn-bg:#040810;--sn-panel:#0b1524;--sn-line:#1b2b45;--sn-ink:#e9f0f9;--sn-ink2:#b9c8dc;
+--sn-muted:#7f95ae;--sn-accent:#22c3b6;--sn-accent-ink:#04120f}
+html{scroll-behavior:smooth}
+body.daylight{--sn-bg:#eef3f9;--sn-panel:#ffffff;--sn-line:#d3dded;--sn-ink:#0d1a2b;--sn-ink2:#33475e;
+--sn-muted:#5d738c;--sn-accent:#0f8f86;--sn-accent-ink:#ffffff}
+.site-nav{position:sticky;top:0;z-index:60;background:var(--sn-bg);border-bottom:1px solid var(--sn-line);
+font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif}
+.site-nav .sn-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:9px 20px;flex-wrap:wrap}
+.site-nav a{color:var(--sn-ink2);text-decoration:none}
+.sn-brand{display:flex;align-items:center;gap:10px;color:var(--sn-ink)!important;font-weight:700}
+.sn-mark{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:0 0 auto;
+background:linear-gradient(150deg,var(--sn-accent),#0c8b83);color:#04120f}
+.sn-mark svg{width:17px;height:17px}
+.sn-name{display:flex;flex-direction:column;line-height:1.25}
+.sn-name em{font-style:normal;font-size:11.5px;font-weight:500;color:var(--sn-muted)}
+.sn-links{display:flex;gap:4px;margin-inline-start:auto;flex-wrap:wrap}
+.sn-links a{padding:6px 11px;border-radius:8px;font-size:13.5px;border:1px solid transparent}
+.sn-links a:hover{background:var(--sn-panel);border-color:var(--sn-line);color:var(--sn-ink)}
+.sn-links a[aria-current="page"]{background:var(--sn-panel);border-color:var(--sn-line);color:var(--sn-ink);font-weight:600}
+.sn-tools{display:flex;align-items:center;gap:8px}
+.sn-scale{display:flex;border:1px solid var(--sn-line);border-radius:9px;overflow:hidden}
+.sn-scale button{background:transparent;border:0;color:var(--sn-ink2);padding:5px 10px;cursor:pointer;font:inherit;font-size:13px}
+.sn-scale button.on{background:var(--sn-accent);color:var(--sn-accent-ink);font-weight:700}
+.sn-theme{background:var(--sn-panel);border:1px solid var(--sn-line);color:var(--sn-ink2);
+border-radius:9px;padding:6px 11px;cursor:pointer;font:inherit;font-size:13px}
+.sn-theme:hover{color:var(--sn-ink)}
+.sn-foot{margin-top:44px;border-top:1px solid var(--sn-line);background:var(--sn-bg);
+font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif}
+.sn-foot .sf-inner{max-width:1180px;margin:0 auto;padding:20px;color:var(--sn-muted);font-size:12.5px;
+display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
+.sn-foot a{color:var(--sn-ink2)}
+body.daylight .topbar{background:#ffffff!important;border-bottom-color:#d3dded!important}
+body.daylight .brand-title,body.daylight .brand-sub{color:#0d1a2b}
+@media print{.site-nav,.sn-foot{display:none!important}}
+</style></head>
+<body><nav class="site-nav no-print" aria-label="تنقل الموقع">
+  <div class="sn-inner">
+    <a class="sn-brand" href="/">
+      <span class="sn-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/><path d="M12 11.5v4"/><path d="M9.6 13.2h4.8"/></svg></span>
+      <span class="sn-name">مركز الوعي بالمجال البحري<em>تقارير أمن الملاحة — مملكة البحرين</em></span>
+    </a>
+    <div class="sn-links">
+      <a href="/">الرئيسية</a>
+      <a href="/reports/special.html">التقارير الخاصة</a>
+      <a href="/#archive">الأرشيف</a>
+      <a href="/reports/monthly-2026-10.html">اللوحة الشهرية</a>
+      <a href="/reports/cumulative-2026.html">السجل التراكمي</a>
+    </div>
+    <div class="sn-tools">
+      <div class="sn-scale" role="group" aria-label="حجم الخط">
+        <button type="button" data-scale="1" title="حجم عادي">أ</button>
+        <button type="button" data-scale="1.12" title="حجم أكبر">أ+</button>
+        <button type="button" data-scale="1.25" title="أكبر حجم">أ++</button>
+      </div>
+      <button type="button" class="sn-theme" id="sn-theme">المظهر</button>
+    </div>
+  </div>
+</nav><script>
+(function(){try{
+var b=document.body;if(!b)return;
+var t=localStorage.getItem('mn-theme');if(t==='light')b.classList.add('daylight');
+var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom=s;
+}catch(e){}})();
+</script>
+<div class="topbar no-print">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/></svg></div>
+      <div class="brand-txt">
+        <div class="brand-title">التقرير اليومي لأمن الملاحة</div>
+        <div class="brand-sub">مركز الوعي بالمجال البحري — مملكة البحرين</div>
+      </div>
+    </div>
+    <div class="topbar-spacer"></div>
+    <div class="tb-meta">
+      <span class="chip">17 أكتوبر 2026</span>
+      <button class="btn" id="btn-theme" type="button">النمط النهاري</button>
+      <button class="btn btn-primary" id="btn-print" type="button">طباعة / PDF</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="masthead">
+    <h1>التقرير اليومي</h1>
+    <div class="threat risk-high"><div class="lbl">مستوى التهديد</div><div class="val">مرتفع جدًا</div></div>
+    <div>
+      <p class="lede">غياب البلاغ الرسمي لم يعد مؤشر هدوء: مركز تنسيق العمليات البحرية البريطاني يُفيد بأن معظم هجمات السفن في مضيق هرمز لا تُبلَّغ، فيبقى كل عدّ رسمي حدًّا أدنى. وفي النافذة: إصابة ناقلة ضخمة مملوكة إماراتيًا «ST 3» بمقذوف و15 بحّارًا هنديًا سالمين، وعودة الرواية الإيرانية عن لغم بحري، وحصيلة أسبوعية قياسية بلغت 12 سفينة بين 5 و11 أكتوبر، وتراجع صادرات النفط إلى 12.6 مليون برميل يوميًا. وفي البحر الأحمر: صاروخان على مطار عدن واعتراض صاروخ متجه إلى ينبع. وتراجع التكدس إلى 157 سفينة، وبرنت 109.69 دولارًا.</p>
+      <div class="masthead-meta"><span class="chip">رقم النسخة <b>و ب 26/10/14</b></span><span class="chip">آخر تحديث <b class="bidi">2026-10-17T04:00:00Z</b></span><span class="chip">نافذة التغطية <b>16–17 أكتوبر 2026 (UTC)</b></span><span class="chip">مصادر مفحوصة <b class="bidi">40</b></span><span class="chip">مصادر مستشهد بها <b class="bidi">9</b></span></div>
+    </div>
+  </header>
+
+  <div class="cls-banner c-open">تصنيف الإصدار: عام</div>
+  <section class="decision reveal" aria-label="عام"><h2 class="dc-title">عام</h2><div class="dc-grid"><div class="dc-row"><div class="dc-l">ما تغيّر</div><div class="dc-v">إفادة رسمية منقولة بأن معظم هجمات السفن في المضيق لا تُبلَّغ (17-01)، وإصابة الناقلة الضخمة المملوكة إماراتيًا «ST 3» بمقذوف مع سلامة 15 بحّارًا هنديًا (17-02)، وعودة الرواية الإيرانية عن لغم بحري (17-03)، وحاويات وبضائع طافية في ممر العبور (17-04)، وحصيلة أسبوعية قياسية بلغت 12 سفينة بين 5 و11 أكتوبر مع تراجع صادرات النفط إلى 12.6 مليون برميل يوميًا (17-05)، وصاروخان على مطار عدن واعتراض صاروخ متجه إلى ينبع (17-06)، وتحديث رسمي لحوادث القرصنة وتمرين SPAR 2026 (17-07)، وتراجع التكدس إلى 157 سفينة وبرنت 109.69 دولارًا (17-08)، وسجل IMO بلا تحديث (17-09).</div></div><div class="dc-row risk-high"><div class="dc-l">مستوى الخطر</div><div class="dc-v">مرتفع جدًا</div></div><div class="dc-row"><div class="dc-l">التوصيات</div><div class="dc-v">لا تبنِ تقدير الخطر على عدد البلاغات المنشورة، فالمصدر الرسمي يقول إن أكثر الهجمات لا تُبلَّغ؛ وثبّت هوية الناقلة الضخمة «ST 3» ومالكها ومشغّلها وحالة بثّها؛ وأبقِ قائمة مخاطر الإبحار قرب مواقع الغرق قائمة بسبب الحطام الطافي؛ وارفع التأهب في البحر الأحمر وباب المندب بعد صواريخ عدن واعتراض الصاروخ المتجه إلى ينبع؛ وأبقِ التدابير المضادة للقرصنة في خليج عدن والمحيط الهندي؛ واحتسب ارتفاع برنت وكلفة التأمين في قرار الرحلة.</div></div><div class="dc-row"><div class="dc-l">ما يُراقب خلال 24 ساعة</div><div class="dc-v">صدور بلاغ بحري رسمي يربط إصابة الناقلة الضخمة برقم معروف، إعلان رسمي عن نسبة البلاغات غير المسجلة، إدراج واقعتي 16 و17 أكتوبر في سجل IMO، استهداف مباشر لسفينة تجارية في باب المندب، مصير مفقودَي «PETRO DOLPHIN»، وإعلان عن إزالة الحطام من موقع الغرق.</div></div></div><div class="dc-foot">أساس التقدير: إفادة مركز تنسيق العمليات البحرية البريطاني المنقولة عبر منصة مهنية، وإعلان وزارة الموانئ والملاحة الهندية، وسجل المنظمة البحرية الدولية للحوادث المؤكدة، والبيان الاستشاري لمركز المعلومات البحرية المشتركة (تحديث 105)، وتحديث رسمي لحوادث القرصنة، وتحذيرات NAVAREA IX، ومنصة رصد المضيق، ونقل إعلامي مهني.</div></section>
+  <div class="kpis"><div class="kpi acc-ok reveal"><em></em><div class="k-l">بلاغات إصابة رسمية (24 ساعة)</div><div class="k-v bidi">0</div><div class="k-d"><span class="trend t-flat">■</span> 0 عن النافذة السابقة</div><div class="k-n">نافذة ثانية بلا بلاغ رسمي جديد — أحدث بلاغ <bdi class="bidi">#173</bdi></div></div><div class="kpi acc-danger reveal"><em></em><div class="k-l">هجمات مُبلَّغة أسبوعيًا (5–11 أكتوبر)</div><div class="k-v bidi">12</div><div class="k-d"><span class="trend t-up">▲</span> +2 عن الأسبوع السابق</div><div class="k-n">أعلى حصيلة أسبوعية منذ بدء الحرب — بيانات بلاغات رسمية</div></div><div class="kpi acc-danger reveal"><em></em><div class="k-l">فجوة التبليغ (إفادة رسمية)</div><div class="k-v bidi">معظم الهجمات لا تُبلَّغ</div><div class="k-d"><span class="trend t-up">▲</span> معطى جديد يخفض موثوقية العدّ</div><div class="k-n">مركز تنسيق العمليات البحرية البريطاني — منقول</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">سفن واقفة في مواضعها بعيدًا عن المراسي</div><div class="k-v bidi">157</div><div class="k-d"><span class="trend t-down">▼</span> −61 داخل النافذة</div><div class="k-n">عند 03:22 UTC مقابل 218 عند 21:22 UTC</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">خام برنت</div><div class="k-v bidi">109.69 $</div><div class="k-d"><span class="trend t-up">▲</span> +3.56% في الجلسة الأخيرة</div><div class="k-n">عند 03:22 UTC</div></div></div>
+  <div class="notice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/></svg><div>نسخة ويب من التقرير اليومي. المصادر المفحوصة 40 مصدرًا، ويُعرض ملحق الموثوقية للمصادر المستشهد بها فقط.</div></div>
+  <div class="rkey no-print"><span class="rkey-t">مفتاح القراءة:</span><span class="rk k-fact">واقعة مؤكدة</span><span class="rk k-est">تقدير تحليلي</span><span class="rk k-info">بند إعلامي</span><span class="rk k-bg">خلفية مستمرة</span><span class="rk k-watch">مراقبة مستمرة</span></div>
+
+  <main>
+    <section class="doc pri reveal" id="sec-00" aria-labelledby="h-00"><h2 id="h-00">ما تغيّر منذ التقرير السابق</h2><div class="h-rule"></div><p class="sec-lede">ما استُجد، وما تغيّر تصنيفه، وما أُغلق.</p><ul class="changes"><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إفادة رسمية: معظم هجمات السفن في مضيق هرمز لا تُبلَّغ، وأن ما يُنشر من بلاغات لا يمثّل حجم الاستهداف الحقيقي — يُقرأ معها كل عدّ رسمي بوصفه حدًّا أدنى. <bdi class="bidi ev-code">17-01</bdi> <bdi class="bidi">UKMTO — منقول</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إصابة الناقلة الضخمة «ST 3» (IMO 9220964) بمقذوف في مضيق هرمز يوم 16 أكتوبر، و15 بحّارًا هنديًا سالمون — إعلان حكومي منقول بلا بلاغ بحري مباشر. <bdi class="bidi ev-code">17-02</bdi> <bdi class="bidi">وزارة الموانئ الهندية</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">رواية الحرس الثوري: ناقلة ضخمة تحمل أكثر من مليوني برميل أصابت لغمًا بحريًا في المضيق واشتعلت — بلا تأكيد من أي سلطة ملاحية. <bdi class="bidi ev-code">17-03</bdi> <bdi class="bidi">رواية طرف رسمي</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">حاويات وبضائع طافية في ممر العبور قرب موقع الغرق — خطر اصطدام قائم حتى إعلان رسمي بإزالة الحطام. <bdi class="bidi ev-code">17-04</bdi> <bdi class="bidi">نقل إعلامي</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">12 سفينة مُهاجَمة بين 5 و11 أكتوبر — أعلى حصيلة أسبوعية منذ بدء الحرب، وتراجع صادرات النفط إلى 12.6 مليون برميل يوميًا مقابل 15 مليونًا في نهاية سبتمبر. <bdi class="bidi ev-code">17-05</bdi> <bdi class="bidi">تحليل بيانات بلاغات رسمية</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">صاروخان حوثيان على مطار عدن واعتراض صاروخ متجه إلى ينبع — تصعيد يمس البنية التحتية النفطية على البحر الأحمر. <bdi class="bidi ev-code">17-06</bdi> <bdi class="bidi">الجزيرة · ستريتس تايمز</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تحديث رسمي لحوادث القرصنة قبالة الساحل الشمالي للصومال، وتمرين SPAR 2026 لمكافحة القرصنة والسطو المسلح. <bdi class="bidi ev-code">17-07</bdi> <bdi class="bidi">EUNAVFOR · القوات البحرية المشتركة</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">157 سفينة واقفة بعيدًا عن المراسي عند 03:22 UTC مقابل 218 في اليوم نفسه، وبرنت 109.69 دولارًا (+3.56%)، والعبور الرسمي عند عبورتين. <bdi class="bidi ev-code">17-08</bdi> <bdi class="bidi">منصة رصد مستقلة</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تحديث مرجعي: سجل IMO بلا تغيير (113 حادثة و24 وفاة كما في 14 أكتوبر)، ولا بلاغ رسمي جديد في المضيق. <bdi class="bidi ev-code">#173 · 17-09</bdi> <bdi class="bidi">IMO · UKMTO</bdi></span></li><li class="chg c-ongoing"><span class="chg-tag"></span><span class="chg-txt">ملف غرق سفينة الحاويات مفتوح: رواية اللغم تعود، وبضائع طافية في موقع الغرق — مرتبط بـ 15-01 و16-01. <bdi class="bidi ev-code">17-10</bdi> <bdi class="bidi">ربط تحليلي</bdi></span></li><li class="chg c-ongoing"><span class="chg-tag"></span><span class="chg-txt">«PETRO DOLPHIN» تنجرف ومفقودان لم يُعلن مصيرهما، مع إعلان هندي رسمي يثبّت إصابتها بمسيّرة في 11 أكتوبر. <bdi class="bidi ev-code">11-02</bdi> <bdi class="bidi">NAVAREA IX 372/26</bdi></span></li><li class="chg c-ongoing"><span class="chg-tag"></span><span class="chg-txt">بلاغان رسميان بلا هوية سفينة معلنة، ولا يُنسبان إلى سفينتي GFS بلا تأكيد رسمي. <bdi class="bidi ev-code">#172 · 15-03</bdi> <bdi class="bidi">UKMTO #172 · #173</bdi></span></li></ul></section>
+    <section class="doc reveal" id="sec-01" aria-labelledby="h-01"><h2 id="h-01"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5c5 0 9 4 9 7s-4 7-9 7-9-4-9-7 4-7 9-7zM12 9.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5z"/></svg></span>التحليل الاستخباري</h2><div class="h-rule"></div><p class="sec-lede">قراءة النمط والافتراضات والفرضيات ومؤشرات التحذير المبكر.</p><p><strong>الطريقة:</strong> تحليل الفرضيات المتنافسة مبسّط، وفحص افتراضات أساسية، ومؤشرات تحذير مبكر، وتقييم مخاطر الممرات، ومراجعة دقة تقديرات الأمس، بلغة عدم اليقين المعتمدة.</p>
+<p><strong>التقدير:</strong> <strong>يُرجَّح (55–80%)</strong> استمرار الاستهداف داخل مضيق هرمز بوتيرة عالية، لأن الحصيلة الأسبوعية القياسية والفجوة التبليغية يدعمان الاستمرار لا التوقف. و<strong>يُرجَّح (55–80%)</strong> أيضًا أن يكون الرقم الرسمي أدنى من الواقع الفعلي ما دام المصدر الرسمي نفسه يقول إن معظم الهجمات لا تُبلَّغ. و<strong>يُحتمل (25–40%)</strong> انتقال جزء من الضغط إلى البحر الأحمر وباب المندب بعد صواريخ عدن واعتراض الصاروخ المتجه إلى ينبع. و<strong>لا يُرجَّح (5–20%)</strong> عودة العبور الطبيعي في المضيق قبل تغيّر أمني أو سياسي ملموس.</p>
+<p><strong>درجة الثقة:</strong> عالية في غياب البلاغ الرسمي الجديد وفي ثبات السجل الرسمي. ومتوسطة في واقعة الناقلة الضخمة لأنها موثقة من جهة حكومية لا من بلاغ بحري مباشر. ومتوسطة في أرقام التكدس والسوق لأنها من منصة رصد واحدة. ومنخفضة في نسبة الفاعل وفي الروايات الإيرانية عن اللغم.</p>
+<p><strong>موثوقية الإسناد:</strong> UKMTO A/2 — IMO A/1 — وزارة الموانئ الهندية A/2 — EUNAVFOR A/2 — القوات البحرية المشتركة A/2 — منصة رصد C/3 — نقل إعلامي مهني B/2 — رواية طرف رسمي D/4.</p>
+<p><strong>الافتراضات وما ينقضها:</strong></p>
+<div class="tbl-wrap"><table>
+<thead><tr>
+<th scope="col">الافتراض</th>
+<th scope="col">ما ينقضه</th>
+</tr></thead><tbody>
+<tr>
+<td>فجوة التبليغ تجعل كل الأرقام الرسمية حدًّا أدنى لا حصيلة كاملة</td>
+<td>إعلان رسمي يفسّر نسبة البلاغات غير المسجلة أو يوحد منهجية العدّ</td>
+</tr>
+<tr>
+<td>واقعة الناقلة الضخمة «ST 3» لم تكن مشمولة ببلاغ بحري مباشر لأن السفينة كانت مطفأة البثّ</td>
+<td>صدور بلاغ رسمي بحري يربط الواقعة برقم معروف</td>
+</tr>
+<tr>
+<td>الرواية الإيرانية عن اللغم تبقى رواية طرف بلا إثبات</td>
+<td>إثبات رسمي مستقل من سلطة ملاحية أو جهة تحكيم</td>
+</tr>
+<tr>
+<td>الحاويات والبضائع الطافية تبقى خطرًا ملاحيًا أكثر من أسبوع</td>
+<td>إعلان رسمي بإزالة الحطام أو إغلاق منطقة الغرق</td>
+</tr>
+<tr>
+<td>التصعيد في البحر الأحمر يبقى على البنية التحتية ولا يتحول إلى استهداف سفن تجارية</td>
+<td>تسجيل استهداف مباشر لسفينة تجارية في باب المندب</td>
+</tr>
+</tbody></table></div>
+<p><strong>مؤشرات التحذير المبكر:</strong></p>
+<div class="src-grid">
+<div class="src s-none"><b>صدور بلاغ رسمي بحري يربط إصابة الناقلة الضخمة برقم معروف</b><span class="st">لا مستجد — غائب</span></div>
+<div class="src s-none"><b>إعلان رسمي عن نسبة البلاغات غير المسجلة</b><span class="st">لا مستجد — غائب</span></div>
+<div class="src s-none"><b>استهداف مباشر لسفينة تجارية في باب المندب</b><span class="st">لا مستجد — غائب</span></div>
+<div class="src s-none"><b>إعلان مسؤولية رسمي موثّق عن أي واقعة</b><span class="st">لا مستجد — غائب</span></div>
+<div class="src s-none"><b>حادثة قرصنة أو اختطاف جديد قبالة الصومال</b><span class="st">لا مستجد — غائب في هذه النافذة</span></div>
+</div>
+<p><strong>تقييم دقة تقديرات الأمس:</strong> تقدير «استمرار الاستهداف بوتيرة مشابهة» <strong>لم يظهر في السجل الرسمي</strong> (لا بلاغ جديد)، لكنه <strong>يميل إلى التحقق</strong> لأن الحصيلة الأسبوعية قياسية والفجوة التبليغية موثقة. وتقدير «انتقال جزء من الضغط إلى البحر الأحمر» <strong>تحقق جزئيًا</strong> بصواريخ عدن واعتراض الصاروخ المتجه إلى ينبع. وتقدير «لا عودة للعبور الطبيعي» <strong>تحقق</strong> (عبورتان فقط). وتقدير «لا يكون اللغم السبب الرئيسي» <strong>لم يُحسم</strong>، إذ عادت رواية اللغم من طرف رسمي.</p>
+<p><strong>المراجعة النظيرة:</strong> روجع القسم مقابل ملف التكيّف الذاتي، وفُصل بين ما هو <strong>بلاغ رسمي مباشر</strong> وما هو <strong>إعلان حكومي منقول</strong>، وضُبط الإسناد على أن الواقعة الجديدة موثقة من جهة حكومية لا من بلاغ بحري. ولم تُرفع أي درجة مصداقية إلى 1 بلا تأكيد مستقل.</p><div class="decision"><p class="dc-title">بطاقة التقدير التحليلي</p><div class="dc-grid"><div class="dc-row"><div class="dc-l">الأسلوب التحليلي</div><div class="dc-v">تحليل الفرضيات المتنافسة مبسّط + فحص افتراضات أساسية + مؤشرات تحذير مبكر + تقييم مخاطر الممرات + مراجعة دقة تقديرات الأمس</div></div><div class="dc-row"><div class="dc-l">العبارة الاحتمالية</div><div class="dc-v">يُرجَّح (55–80%) استمرار الاستهداف داخل المضيق بوتيرة عالية · ويُرجَّح (55–80%) أن يكون العدّ الرسمي حدًّا أدنى للواقع بسبب فجوة التبليغ · ويُحتمل (25–40%) انتقال جزء من الضغط إلى البحر الأحمر وباب المندب · ولا يُرجَّح (5–20%) عودة العبور الطبيعي قبل تغيّر أمني أو سياسي ملموس</div></div><div class="dc-row"><div class="dc-l">درجة الثقة</div><div class="dc-v">عالية في غياب البلاغ الرسمي الجديد وفي ثبات السجل الرسمي · متوسطة في واقعة الناقلة الضخمة (إعلان حكومي منقول لا بلاغ بحري) · متوسطة في أرقام التكدس والسوق (منصة رصد واحدة) · منخفضة في نسبة الفاعل وفي الروايات الإيرانية عن اللغم</div></div><div class="dc-row"><div class="dc-l">سند المصدر</div><div class="dc-v">UKMTO A/2 — IMO A/1 — وزارة الموانئ الهندية A/2 — EUNAVFOR A/2 — القوات البحرية المشتركة A/2 — منصة رصد C/3 — نقل إعلامي مهني B/2 — رواية طرف رسمي D/4</div></div></div></div><h3>الافتراضات المعلنة</h3><p class="blk-lede">كل افتراض معلن، وما ينقضه.</p><div class="tbl-wrap"><table><thead><tr><th scope="col">الافتراض</th><th scope="col">ما ينقضه</th></tr></thead><tbody><tr><td>فجوة التبليغ تجعل كل الأرقام الرسمية حدًّا أدنى لا حصيلة كاملة</td><td>إعلان رسمي يفسّر نسبة البلاغات غير المسجلة أو يوحّد منهجية العدّ</td></tr><tr><td>واقعة الناقلة الضخمة «ST 3» لم تكن مشمولة ببلاغ بحري مباشر لأن السفينة كانت مطفأة البثّ</td><td>صدور بلاغ رسمي بحري يربط الواقعة برقم معروف</td></tr><tr><td>الرواية الإيرانية عن اللغم تبقى رواية طرف بلا إثبات</td><td>إثبات رسمي مستقل من سلطة ملاحية أو جهة تحكيم</td></tr><tr><td>الحاويات والبضائع الطافية تبقى خطرًا ملاحيًا أكثر من أسبوع</td><td>إعلان رسمي بإزالة الحطام أو إغلاق منطقة الغرق</td></tr><tr><td>التصعيد في البحر الأحمر يبقى على البنية التحتية ولا يتحول إلى استهداف سفن تجارية</td><td>تسجيل استهداف مباشر لسفينة تجارية في باب المندب</td></tr></tbody></table></div><h3>مؤشرات التحذير المبكر</h3><p class="blk-lede">المؤشر · ما يؤكده · ما ينفيه · الحالة.</p><div class="tbl-wrap"><table><thead><tr><th scope="col">المؤشر</th><th scope="col">ما يؤكده</th><th scope="col">ما ينفيه</th><th scope="col">الحالة</th></tr></thead><tbody><tr><td>بلاغ رسمي بحري يربط إصابة الناقلة الضخمة برقم معروف</td><td>عودة البلاغ الرسمي لمجاراة الميدان</td><td>استمرار فجوة التبليغ</td><td>غائب</td></tr><tr><td>إعلان رسمي عن نسبة البلاغات غير المسجلة</td><td>حجم الفجوة وقابلية قياسها</td><td>بقاء الفجوة تقديرًا وصفيًا</td><td>غائب</td></tr><tr><td>استهداف مباشر لسفينة تجارية في باب المندب</td><td>انتقال الصراع إلى الممر البديل</td><td>بقاء التصعيد على البنية التحتية</td><td>غائب</td></tr><tr><td>إعلان مسؤولية رسمي موثّق عن أي واقعة</td><td>نسبة الفاعل بمصدر مباشر</td><td>بقاء النسبة روايات متبادلة</td><td>غائب</td></tr><tr><td>حادثة قرصنة أو اختطاف جديد قبالة الصومال</td><td>تصاعد المسار الجنوبي</td><td>استقرار خليج عدن</td><td>غائب في هذه النافذة</td></tr></tbody></table></div><h3>تقييم دقة تقديرات الأمس</h3><p class="blk-lede">التقدير · النتيجة · السبب.</p><div class="tbl-wrap"><table><thead><tr><th scope="col">التقدير السابق</th><th scope="col">النتيجة</th><th scope="col">السبب</th></tr></thead><tbody><tr><td>استمرار الاستهداف المنظم في المضيق بوتيرة مشابهة</td><td>يميل إلى التحقق</td><td>لا بلاغ رسمي جديد، لكن حصيلة أسبوعية قياسية وإفادة رسمية بفجوة تبليغ واسعة</td></tr><tr><td>انتقال جزء من الضغط إلى البحر الأحمر وباب المندب</td><td>تحقق جزئيًا</td><td>صاروخان على مطار عدن واعتراض صاروخ متجه إلى ينبع</td></tr><tr><td>لا عودة للعبور الطبيعي قبل تغيّر سياسي أو أمني</td><td>تحقق</td><td>العبور الرسمي المتاح بقي عند عبورتين مقابل 85</td></tr><tr><td>لا يكون اللغم السبب الرئيسي للغرق</td><td>لم يُحسم</td><td>عودة رواية اللغم من طرف رسمي بلا تأكيد ملاحي</td></tr></tbody></table></div></section><section class="doc reveal" id="sec-02" aria-labelledby="h-02"><h2 id="h-02"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 4v16M6 8h12M6 8l-3 6h6zM18 8l-3 6h6z"/></svg></span>الاحتمالات والإسناد</h2><div class="h-rule"></div><p class="sec-lede">من قد يكون مسؤولًا، بلا جزم وبلا نسبة بلا دليل.</p><div class="tbl-wrap"><table>
+<thead><tr>
+<th scope="col">الفرضية</th>
+<th scope="col">الإسناد المؤيد</th>
+<th scope="col">ما يناقضها</th>
+<th scope="col">الاحتمال</th>
+</tr></thead><tbody>
+<tr>
+<td>استمرار الاستهداف المنظم في المضيق بوتيرة عالية</td>
+<td>حصيلة أسبوعية قياسية وإصابة ناقلة ضخمة</td>
+<td>لا بلاغ رسمي جديد في النافذة</td>
+<td class="num">42%</td>
+</tr>
+<tr>
+<td>فجوة تبليغ واسعة: الواقع أعلى من السجل الرسمي</td>
+<td>إفادة رسمية بأن معظم الهجمات لا تُبلَّغ</td>
+<td>غياب رقم رسمي للفجوة</td>
+<td class="num">20%</td>
+</tr>
+<tr>
+<td>انتقال الضغط إلى البحر الأحمر وباب المندب</td>
+<td>صواريخ على عدن واعتراض متجه إلى ينبع</td>
+<td>لا استهداف مباشر لسفن تجارية هناك بعد</td>
+<td class="num">18%</td>
+</tr>
+<tr>
+<td>تصاعد القرصنة في خليج عدن والمحيط الهندي</td>
+<td>تحديث رسمي لحوادث القرصنة وتمرين مضاد</td>
+<td>عمليات مرافقة وتنسيق دولي معلن</td>
+<td class="num">12%</td>
+</tr>
+<tr>
+<td>تورط ألغام بحرية كسبب رئيسي للإصابات</td>
+<td>رواية طرف رسمي متكررة</td>
+<td>لا تأكيد من أي سلطة ملاحية ونفي سابق لدليل اللغم</td>
+<td class="num">5%</td>
+</tr>
+<tr>
+<td>نسبة موثقة لجهة منفذة في كل واقعة</td>
+<td>خطاب تصعيدي وإعلانات أطراف</td>
+<td>لا دليل رسمي مستقل لكل حادثة</td>
+<td class="num">3%</td>
+</tr>
+</tbody></table></div><h3>ترجيح الاحتمالات</h3><p class="blk-lede">الاحتمال · المؤيد · المعارض · النسبة.</p><div class="tbl-wrap"><table><thead><tr><th scope="col">الفرضية</th><th scope="col">المؤيد</th><th scope="col">المعارض</th><th scope="col">درجة الاحتمال</th></tr></thead><tbody><tr><td>استمرار الاستهداف المنظم في مضيق هرمز بوتيرة عالية</td><td>حصيلة أسبوعية قياسية وإصابة ناقلة ضخمة</td><td>لا بلاغ رسمي جديد في النافذة</td><td>42%</td></tr><tr><td>فجوة تبليغ واسعة: الواقع أعلى من السجل الرسمي</td><td>إفادة رسمية بأن معظم الهجمات لا تُبلَّغ</td><td>غياب رقم رسمي للفجوة</td><td>20%</td></tr><tr><td>انتقال الضغط إلى البحر الأحمر وباب المندب</td><td>صواريخ على عدن واعتراض متجه إلى ينبع</td><td>لا استهداف مباشر لسفن تجارية هناك بعد</td><td>18%</td></tr><tr><td>تصاعد القرصنة في خليج عدن والمحيط الهندي</td><td>تحديث رسمي لحوادث القرصنة وتمرين مضاد</td><td>عمليات مرافقة وتنسيق دولي معلن</td><td>12%</td></tr><tr><td>تورط ألغام بحرية كسبب رئيسي للإصابات</td><td>رواية طرف رسمي متكررة</td><td>لا تأكيد من سلطة ملاحية ونفي سابق لدليل اللغم</td><td>5%</td></tr><tr><td>نسبة موثقة لجهة منفذة في كل واقعة</td><td>خطاب تصعيدي وإعلانات أطراف</td><td>لا دليل رسمي مستقل لكل حادثة</td><td>3%</td></tr></tbody></table></div></section><section class="doc reveal" id="sec-03" aria-labelledby="h-03"><h2 id="h-03"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 4v9a4 4 0 004 4h5M15 17l-2-2M15 17l-2 2M18 4a2 2 0 11-.001 4.001A2 2 0 0118 4z"/></svg></span>الحركة الملاحية والتكدس</h2><div class="h-rule"></div><p class="sec-lede">حركة المضيق والرسو من مصادر معلنة فقط.</p><p>الحركة في هذه النافذة تُقرأ من مصدرين مختلفَي المنهجية. الرصد المستقل يعطي <strong>عبورتين</strong> في 11 أكتوبر مقابل خط أساس 85 يوميًا، ويعطي <strong>157 سفينة</strong> واقفة بعيدًا عن المراسي عند 03:22 UTC بعد أن كانت <strong>218</strong> عند 21:22 UTC من اليوم السابق، أي انخفاض 61 سفينة داخل النافذة نفسها. وتُقرأ هذه الحركة <strong>للاتجاه لا للحسم</strong>، مع احتمال تأخير التحديث واحتمال انقطاع البثّ.</p>
+<p>وفي السوق: برنت <strong>109.69 دولارًا</strong> (+3.56%) وخام غرب تكساس <strong>101.84 دولارًا</strong>، وتأمين مخاطر الحرب عند نحو <strong>30 ضعف</strong> مستواه قبل الأزمة. ويبقى أثر الكلفة على جدوى الرحلة، لا على سلامتها وحدها.</p>
+<div class="tbl-wrap"><table>
+<thead><tr>
+<th scope="col">اليوم (أكتوبر)</th>
+<th scope="col">عدد الوقائع المسجّلة</th>
+<th scope="col">النوع</th>
+<th scope="col">البيان</th>
+</tr></thead><tbody>
+<tr>
+<td>10-12</td>
+<td class="num">5</td>
+<td>قيد الإدراج</td>
+<td>بلاغات بانتظار الإدراج الرسمي</td>
+</tr>
+<tr>
+<td>10-13</td>
+<td class="num">9</td>
+<td>مؤكد</td>
+<td>غرق سفينة الحاويات · أضرار سفينتين قرب ساحل عُمان</td>
+</tr>
+<tr>
+<td>10-14</td>
+<td class="num">9</td>
+<td>مؤكد</td>
+<td>تأكيد الغرق وبلاغان رسميان بلا هوية سفينة</td>
+</tr>
+<tr>
+<td>10-15</td>
+<td class="num">1</td>
+<td>غير محسوم</td>
+<td>إعلان عن لغم بحري بلا تأكيد مستقل</td>
+</tr>
+<tr>
+<td>10-16</td>
+<td class="num">11</td>
+<td>مختلط</td>
+<td>إصابة ناقلة ضخمة إماراتية · تقييم رسمي · إعلان سيطرة · تصعيد البحر الأحمر</td>
+</tr>
+<tr>
+<td>10-17</td>
+<td class="num">6</td>
+<td>مختلط</td>
+<td>إفادة رسمية عن فجوة التبليغ · رواية لغم · حطام طافٍ · مؤشرات الممر</td>
+</tr>
+</tbody></table></div><p class="src-note">قراءة اتجاه من منصة رصد — تُراعى مهلة التحديث واحتمال انقطاع الإرسال أو spoofing.</p><p class="src-note">قراءة اتجاه من منصة رصد — تُراعى مهلة التحديث واحتمال انقطاع الإرسال أو spoofing.</p><div class="viz tl-viz reveal"><h3>الخط الزمني لمضيق هرمز</h3><div class="tl-row"><div class="tl-date bidi">10-12</div><div class="tl-track"><div class="tl-fill k-pending" style="--w:45.5%"></div></div><div class="tl-num bidi">5</div><div class="tl-lbl">بلاغات بانتظار الإدراج الرسمي</div></div><div class="tl-row"><div class="tl-date bidi">10-13</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:81.8%"></div></div><div class="tl-num bidi">9</div><div class="tl-lbl">غرق سفينة الحاويات · أضرار سفينتين قرب ساحل عُمان</div></div><div class="tl-row"><div class="tl-date bidi">10-14</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:81.8%"></div></div><div class="tl-num bidi">9</div><div class="tl-lbl">تأكيد الغرق وبلاغان رسميان بلا هوية سفينة</div></div><div class="tl-row"><div class="tl-date bidi">10-15</div><div class="tl-track"><div class="tl-fill k-pending" style="--w:9.1%"></div></div><div class="tl-num bidi">1</div><div class="tl-lbl">إعلان عن لغم بحري بلا تأكيد مستقل</div></div><div class="tl-row"><div class="tl-date bidi">10-16</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:100.0%"></div></div><div class="tl-num bidi">11</div><div class="tl-lbl">إصابة ناقلة ضخمة إماراتية · تقييم رسمي · إعلان سيطرة · تصعيد البحر الأحمر</div></div><div class="tl-row"><div class="tl-date bidi">10-17</div><div class="tl-track"><div class="tl-fill k-pending" style="--w:54.5%"></div></div><div class="tl-num bidi">6</div><div class="tl-lbl">إفادة عن فجوة التبليغ · رواية لغم · حطام طافٍ · مؤشرات الممر</div></div><p class="src-note">المصدر: دفتر الأحداث التراكمي. الأعداد تعني سجلات مرصودة لا هجمات مؤكدة.</p></div><p class="src-note">قراءة اتجاه من منصة رصد — تُراعى مهلة التحديث واحتمال انقطاع الإرسال أو spoofing.</p><p class="src-note">قراءة اتجاه من منصة رصد — تُراعى مهلة التحديث واحتمال انقطاع الإرسال أو spoofing.</p><p class="src-note">قراءة اتجاه من منصة رصد — تُراعى مهلة التحديث واحتمال انقطاع الإرسال أو spoofing.</p><p class="src-note">قراءة اتجاه من منصة رصد — تُراعى مهلة التحديث واحتمال انقطاع الإرسال أو spoofing.</p><p class="src-note">قراءة اتجاه من منصة رصد — تُراعى مهلة التحديث واحتمال انقطاع الإرسال أو spoofing.</p></section><section class="doc reveal" id="sec-04" aria-labelledby="h-04"><h2 id="h-04"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h5M15 12h5M12 4v5M12 15v5"/></svg></span>ما لم يُحسم</h2><div class="h-rule"></div><p class="sec-lede">ما يبقى مجهولًا، وما يلزم متابعته في التقرير التالي.</p><div class="tbl-wrap"><table>
+<thead><tr>
+<th scope="col">المجهول</th>
+<th scope="col">الجهة القادرة على الحسم</th>
+<th scope="col">الأثر</th>
+</tr></thead><tbody>
+<tr>
+<td>هل صدر بلاغ بحري رسمي عن إصابة الناقلة الضخمة «ST 3»؟</td>
+<td>مركز البلاغات الرسمي</td>
+<td>يحدد إن كانت الفجوة التبليغية تشمل ناقلات ضخمة</td>
+</tr>
+<tr>
+<td>نسبة البلاغات غير المسجلة من إجمالي الهجمات</td>
+<td>مركز البلاغات الرسمي والمنظمة البحرية الدولية</td>
+<td>يحدد حجم الخطأ في كل تقدير مبني على السجل</td>
+</tr>
+<tr>
+<td>اسم السفينة المصابة باللغم في الرواية الإيرانية</td>
+<td>سلطة ملاحية أو جهة تحكيم مستقلة</td>
+<td>يمنع نسبة الواقعة إلى سفينة بلا دليل</td>
+</tr>
+<tr>
+<td>مالك الحمولة ومصير الحاويات والبضائع الطافية</td>
+<td>الشركة المشغّلة والجهات الساحلية</td>
+<td>مسؤولية بيئية ومطالبات حمولة وخطر ملاحي</td>
+</tr>
+<tr>
+<td>مصير مفقودَي «PETRO DOLPHIN»</td>
+<td>خفر السواحل والجهات المعنية</td>
+<td>أثر إنساني مباشر</td>
+</tr>
+<tr>
+<td>نص قرار قناة السويس الرسمي ومدته</td>
+<td>هيئة قناة السويس</td>
+<td>يحدد حجم التأخير والتكلفة على الخطوط</td>
+</tr>
+</tbody></table></div><h3>تكليفات المتابعة</h3><p class="blk-lede">الفجوة · الجهة القادرة على حسمها · أثر استمرارها.</p><div class="tbl-wrap"><table><thead><tr><th scope="col">الفجوة</th><th scope="col">الجهة القادرة على الحسم</th><th scope="col">أثر استمرارها</th></tr></thead><tbody><tr><td>هل صدر بلاغ بحري رسمي عن إصابة الناقلة الضخمة «ST 3»؟</td><td>مركز البلاغات الرسمي</td><td>يحدد إن كانت فجوة التبليغ تشمل الناقلات الضخمة</td></tr><tr><td>نسبة البلاغات غير المسجلة من إجمالي الهجمات</td><td>مركز البلاغات الرسمي والمنظمة البحرية الدولية</td><td>يحدد حجم الخطأ في كل تقدير مبني على السجل</td></tr><tr><td>اسم السفينة المصابة باللغم في الرواية الإيرانية</td><td>سلطة ملاحية أو جهة تحكيم مستقلة</td><td>يمنع نسبة الواقعة إلى سفينة بلا دليل</td></tr><tr><td>مالك الحمولة ومصير الحاويات والبضائع الطافية</td><td>الشركة المشغّلة والجهات الساحلية</td><td>مسؤولية بيئية ومطالبات حمولة وخطر ملاحي</td></tr><tr><td>مصير مفقودَي «PETRO DOLPHIN»</td><td>خفر السواحل والجهات المعنية</td><td>أثر إنساني مباشر على الطواقم</td></tr><tr><td>نص قرار قناة السويس الرسمي ومدته</td><td>هيئة قناة السويس</td><td>يحدد حجم التأخير والتكلفة على الخطوط</td></tr></tbody></table></div></section><section class="doc reveal" id="sec-05" aria-labelledby="h-05"><h2 id="h-05"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>المراقبة المستمرة</h2><div class="h-rule"></div><p>التنبيه الفوري موقوف بطلب صاحب القرار، وكل مستجد يُجمع في هذا التقرير. ويُراقب في الساعات القادمة: صدور بلاغ بحري رسمي يربط إصابة الناقلة الضخمة برقم معروف، أي إعلان رسمي عن نسبة البلاغات غير المسجلة، إدراج واقعتي 16 و17 أكتوبر في سجل المنظمة البحرية الدولية، أي استهداف مباشر لسفينة تجارية في باب المندب، مصير مفقودَي «PETRO DOLPHIN»، وأي إعلان عن إزالة الحطام من موقع الغرق.</p></section><section class="doc reveal" id="sec-06" aria-labelledby="h-06"><h2 id="h-06"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 7v5l3 2M3.5 12a8.5 8.5 0 1 0 2.6-6.1M3 4v4h4"/></svg></span>الخلفية القائمة</h2><div class="h-rule"></div><p class="sec-lede">وقائع أقدم ما زال أثرها مؤثرًا على التشغيل.</p><p>الحرب على الملاحة في مضيق هرمز مستمرة، والممر يعمل بأقل من ربع طاقته الطبيعية، ومعه تكدس رسو مرتفع وكلفة تأمين تاريخية. وفي البحر الأحمر: تصعيد عسكري متبادل يهدد الممر البديل ويطال البنية النفطية الساحلية. وفي خليج عدن والمحيط الهندي: قرصنة عند مستوى نشط مع تنسيق دولي مضاد. ولا توجد نشرة بحرية أمريكية سارية، والبيان الاستشاري لمركز المعلومات البحرية المشتركة هو المرجع الرسمي الساري. وملف غرق سفينة الحاويات يبقى مفتوحًا: حطام وبضائع طافية، ورواية لغم متكررة بلا إثبات.</p></section><section class="doc reveal" id="sec-07" aria-labelledby="h-07"><h2 id="h-07"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>المصادر والمراجع</h2><div class="h-rule"></div><p class="sec-lede">حالة المصادر المفحوصة، وروابط المراجع المستشهد بها.</p><div class="src-grid">
+<div class="src s-none"><b>1</b><span class="st">لا مستجد — استُشهد به؛ لا بلاغ جديد، أحدث بلاغ <bdi class="bidi">#173</bdi> من 14 أكتوبر، وأصل الصفحة محفوظ</span></div>
+<div class="src s-ok"><b>2</b><span class="st">فُحص — فُحص — لا مستجد في النافذة</span></div>
+<div class="src s-none"><b>3</b><span class="st">لا مستجد — تعذّر الوصول — خطأ 404، ويُسجَّل سببًا لعدم التحقق</span></div>
+<div class="src s-ok"><b>4</b><span class="st">فُحص — فُحص — لا مستجد في النافذة</span></div>
+<div class="src s-none"><b>5</b><span class="st">لا مستجد — استُشهد به؛ 113 حادثة و24 وفاة كما في 14 أكتوبر بلا تحديث</span></div>
+<div class="src s-none"><b>6</b><span class="st">لا مستجد — استُشهد به؛ العبور والتكدس والسوق وعدد السفن الواقفة</span></div>
+<div class="src s-none"><b>7</b><span class="st">لا مستجد — استُشهد به؛ نقل إفادة UKMTO بأن معظم الهجمات لا تُبلَّغ</span></div>
+<div class="src s-none"><b>8</b><span class="st">لا مستجد — استُشهد به؛ إصابة الناقلة الضخمة المملوكة إماراتيًا</span></div>
+<div class="src s-ok"><b>9</b><span class="st">فُحص — فُحص — لا مستجد في النافذة</span></div>
+<div class="src s-ok"><b>10</b><span class="st">فُحص — فُحص — لا مستجد بحري في النافذة</span></div>
+<div class="src s-none"><b>11</b><span class="st">لا مستجد — استُشهد به؛ صاروخان على مطار عدن واعتراض صاروخ متجه إلى ينبع</span></div>
+<div class="src s-ok"><b>12</b><span class="st">فُحص — استُشهد به؛ فحص العقوبات: لا تطابق على «AL MAQAM»، وتطابق جزئي باسم شائع على «DF PEAK» يحتاج تحققًا يدويًا</span></div>
+<div class="src s-ok"><b>13</b><span class="st">فُحص — فُحص — لا مستجد في النافذة</span></div>
+<div class="src s-ok"><b>14</b><span class="st">فُحص — فُحص — لا مستجد بحري في النافذة</span></div>
+<div class="src s-ok"><b>15</b><span class="st">فُحص — فُحص — لا مستجد في النافذة</span></div>
+<div class="src s-ok"><b>16</b><span class="st">فُحص — فُحص — لا مستجد في النافذة</span></div>
+<div class="src s-ok"><b>17</b><span class="st">فُحص — فُحص — لا مستجد في النافذة</span></div>
+<div class="src s-ok"><b>18</b><span class="st">فُحص — فُحص — لا مستجد في النافذة</span></div>
+<div class="src s-ok"><b>19</b><span class="st">فُحص — فُحص — لا مستجد في النافذة</span></div>
+<div class="src s-ok"><b>20</b><span class="st">فُحص — فُحص — لا مستجد في النافذة</span></div>
+<div class="src s-ok"><b>21</b><span class="st">فُحص — فُحص — لا مستجد في النافذة</span></div>
+<div class="src s-ok"><b>22</b><span class="st">فُحص — فُحص — لا مستجد في النافذة</span></div>
+<div class="src s-ok"><b>23</b><span class="st">فُحص — فُحص — لا مستجد في النافذة</span></div>
+<div class="src s-ok"><b>24</b><span class="st">فُحص — فُحص — لا مستجد في النافذة</span></div>
+<div class="src s-ok"><b>25</b><span class="st">فُحص — فُحص — لا مستجد في النافذة</span></div>
+<div class="src s-ok"><b>26</b><span class="st">فُحص — فُحص — لا مستجد بحري في النافذة</span></div>
+<div class="src s-fail"><b>27</b><span class="st">تعذر الوصول — تعذر الاتصال بالفاحص — قُرئ بمسار بديل</span></div>
+<div class="src s-ok"><b>28</b><span class="st">فُحص — فُحص — لا مستجد في النافذة</span></div>
+<div class="src s-none"><b>29</b><span class="st">لا مستجد — محجوب للفاحص — لا مستجد مؤكد</span></div>
+<div class="src s-ok"><b>30</b><span class="st">فُحص — فُحص — لا بيان جديد في النافذة</span></div>
+<div class="src s-none"><b>31</b><span class="st">لا مستجد — استُشهد به؛ البيان الاستشاري (تحديث 105) سارٍ بلا تحديث جديد، وأصل الصفحة محفوظ</span></div>
+<div class="src s-fail"><b>32</b><span class="st">تعذر الوصول — تعذر الاتصال بالفاحص — لا مستجد مؤكد</span></div>
+<div class="src s-none"><b>33</b><span class="st">لا مستجد — استُشهد به؛ لا تحذيرات سارية وكل النشرات السابقة ملغاة أو منتهية</span></div>
+<div class="src s-ok"><b>34</b><span class="st">فُحص — فُحص — لا مستجد بحري في النافذة</span></div>
+<div class="src s-ok"><b>35</b><span class="st">فُحص — فُحص — لا مستجد في النافذة</span></div>
+<div class="src s-ok"><b>36</b><span class="st">فُحص — فُحص — لا مستجد في النافذة</span></div>
+<div class="src s-ok"><b>37</b><span class="st">فُحص — فُحص — لا مستجد في النافذة</span></div>
+<div class="src s-ok"><b>38</b><span class="st">فُحص — فُحص — لا مستجد بحري مؤكد في النافذة</span></div>
+<div class="src s-ok"><b>39</b><span class="st">فُحص — فُحص — لا مستجد في النافذة</span></div>
+<div class="src s-ok"><b>40</b><span class="st">فُحص — فُحص — للاتجاهات فقط، مع تأخير التحديث واحتمال الانقطاع</span></div>
+</div>
+<blockquote>لا تُجمع البلاغات كعدد هجمات، ولا يُنسب فعل إلى جهة إلا وفق مصدر رسمي مباشر، والنقل الإعلامي موسوم إعلاميًا. وانتهاء النشرات الرسمية لا يعني سلامة النطاق. وتُذكر أوقات كل واقعة بتوقيت UTC، وما يقابلها بتوقيت البحرين عند التسليم.</blockquote>
+<p><strong>تنبيه إسناد (D-02):</strong> البلاغان الرسميان <strong><bdi class="bidi">#172</bdi> و#173 لا يُنسبان قطعيًا إلى سفينتي GFS</strong>. وصفهما «سفينتا حاويات بضرر طفيف واصلتا العبور» لا يطابق غرق سفينة الحاويات. ويبقى احتمال مطابقة أحدهما <strong>مُرجَّحًا لا مؤكدًا</strong>.</p>
+<p><strong>تنبيه فجوة تبليغ (جديد):</strong> إفادة مركز تنسيق العمليات البحرية البريطاني بأن معظم الهجمات لا تُبلَّغ تعني أن <strong>كل عدّ رسمي في هذا التقرير حدّ أدنى</strong>. ويُقرأ معها سجل المنظمة البحرية الدولية بوصفه سجلًا للإدراجات المؤكدة لا لحصيلة الاستهداف الكاملة.</p>
+<p><strong>خلاصة الخط اليومي:</strong> نُفِّذ الخط الموحّد بتاريخ 2026-10-17 وعلامته <code>overall = ok</code> (تغذيات · فحص عقوبات · حفظ أصول رسمية · دمج ذاكرة تراكمية · مراجعة لغوية آلية). ونُفِّذ دمج الذاكرة التراكمية: الدفتر الجامع <strong>188 سجلًا</strong> حتى 17 أكتوبر، وخريطة الرموز <strong>44 رمزًا</strong> بلا رمز غير مُحلّ. وفي هذا الإصدار استُكملت <strong>فجوة ذاكرة</strong> لأحداث 16 أكتوبر التي نُشرت بلا دمج في الدفتر.</p><h3>موثوقية المصادر</h3><p class="blk-lede">الموثوقية للجهة، والمصداقية لدرجة التصديق، والأساس سبب الدرجة.</p><p class="src-note">سلّم الموثوقية: <b>A</b> مطلق · <b>B</b> جيد · <b>C</b> متوسط · <b>D</b> غير موثوق · <b>E</b> غير مؤكد · <b>F</b> لا يمكن الحكم عليه — وسلّم المصداقية: <b>1</b> مؤكد من مصدر آخر · <b>2</b> يُرجَّح صدقه · <b>3</b> يُحتمل صدقه · <b>4</b> مشكوك فيه · <b>5</b> غير مُرجَّح · <b>6</b> لا يمكن الحكم عليه.</p><p class="src-note">يشمل الجدول <b>9</b> مصدرًا مستشهدًا به من أصل <b>40</b> مصدرًا مفحوصًا في هذا التشغيل؛ المصادر غير المستشهد بها لا تُدرج.</p><div class="tbl-scroll"><table class="tbl rel-tbl"><thead><tr><th>#</th><th>المصدر</th><th>الموثوقية</th><th>المصداقية</th><th>الأساس</th></tr></thead><tbody><tr><td>1</td><td>UKMTO — الحوادث الأخيرة</td><td class="rel">A</td><td class="rel">2</td><td>المصدر الرسمي المعتمد لبلاغات الحوادث في المنطقة؛ بلاغاته أولية وتُحدَّث لاحقًا، فيبقى 2 حتى تأكيد مستقل ثم يصبح 1. · حالة التشغيل: لا بلاغ جديد، أحدث بلاغ <bdi class="bidi">#173</bdi> من 14 أكتوبر، وأصل الصفحة محفوظ</td></tr><tr><td>5</td><td>IMO — سجل الحوادث المؤكدة</td><td class="rel">A</td><td class="rel">1</td><td>حصيلة رسمية للحوادث المؤكدة والوفيات؛ أعلى مرجعية إحصائية في التقرير. · حالة التشغيل: 113 حادثة و24 وفاة كما في 14 أكتوبر بلا تحديث</td></tr><tr><td>6</td><td>straits.live</td><td class="rel">C</td><td class="rel">3</td><td>منصة رصد خاصة غير رسمية؛ أرقام الانتظار والتصنيف التأميني تقديرية ومتغيرة. · حالة التشغيل: العبور والتكدس والسوق وعدد السفن الواقفة</td></tr><tr><td>7</td><td>gCaptain</td><td class="rel">B</td><td class="rel">2</td><td>إعلام متخصص ينشر تفاصيل تشغيلية؛ لا يوثّق بمعيار رسمي. · حالة التشغيل: نقل إفادة UKMTO بأن معظم الهجمات لا تُبلَّغ</td></tr><tr><td>8</td><td>TradeWinds</td><td class="rel">B</td><td class="rel">2</td><td>إعلام شحن مهني موثوق؛ جزء من محتواه خلف اشتراك. · حالة التشغيل: إصابة الناقلة الضخمة المملوكة إماراتيًا</td></tr><tr><td>11</td><td>الجزيرة الإنجليزية</td><td class="rel">B</td><td class="rel">2</td><td>النسخة الإنجليزية للجهة نفسها؛ لا تُعد مصدرًا مستقلًا عن الجزيرة نت. · حالة التشغيل: صاروخان على مطار عدن واعتراض صاروخ متجه إلى ينبع</td></tr><tr><td>12</td><td>OFAC — الإجراءات الأخيرة</td><td class="rel">A</td><td class="rel">1</td><td>إجراءات عقوبات رسمية منشورة بحق كيانات وأفراد. · حالة التشغيل: فحص العقوبات: لا تطابق على «AL MAQAM»، وتطابق جزئي باسم شائع على «DF PEAK» يحتاج تحققًا يدويًا</td></tr><tr><td>31</td><td>JMIC — المنظمة البحرية المشتركة</td><td class="rel">A</td><td class="rel">2</td><td>منتج رسمي مشترك بين القوات؛ النشر غير منتظم. · حالة التشغيل: البيان الاستشاري (تحديث 105) سارٍ بلا تحديث جديد، وأصل الصفحة محفوظ</td></tr><tr><td>33</td><td>MARAD/MSCI</td><td class="rel">A</td><td class="rel">1</td><td>تنبيهات أمن الملاحة الأمريكية الرسمية. · حالة التشغيل: لا تحذيرات سارية وكل النشرات السابقة ملغاة أو منتهية</td></tr></tbody></table></div></section>
+  </main>
+
+  <footer class="foot">
+    <b>ملاحظة مهنية:</b> لا تُجمع البلاغات كعدد هجمات، ولا يُنسب أي فعل إلى جهة إلا وفق مصدر رسمي مباشر. انتهاء النشرات الرسمية لا يعني سلامة النطاق. وإفادة المصدر الرسمي بأن معظم الهجمات لا تُبلَّغ تجعل كل عدّ في هذا التقرير حدًّا أدنى.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-17T04:00:00Z</bdi> — <b>المرجع الزمني:</b> UTC.
+    <div class="glossary">السجل التراكمي: <a class="bidi" href="/reports/cumulative-2026.html" target="_blank" rel="noopener noreferrer">/reports/cumulative-2026.html</a></div>
+    <div class="glossary"><b>تعريف المصطلحات:</b><ul><li><b>الهجوم</b>: فعل مؤكد بإصابة أو ضرر موثّق من مصدر رسمي مباشر.</li><li><b>الواقعة</b>: بلاغ أمني لم يثبت كونه هجومًا بعد.</li><li><b>النشرة</b>: إشعار رسمي للملاحة يصدر عن جهة مختصة، وله نافذة سريان وانتهاء.</li><li><b>فجوة التبليغ</b>: فرق بين ما وقع فعلًا وما أُبلغ عنه رسميًا؛ وتُجعل كل عدّ رسمي حدًّا أدنى.</li><li><b>درجة الثقة</b>: عالية أو متوسطة أو منخفضة، وتصف قوة الإسناد لا حجم الخطر.</li><li><b>عدّادان لا يُجمعان</b>: عدّاد JMIC وعدّاد IMO يقيسان مجموعتين بمنهجيتين مختلفتين، فلا يُدمجان في رقم واحد.</li></ul></div>
+  </footer>
+</div>
+<script>
+(function(){
+  var pb = document.getElementById('btn-print');
+  if(pb) pb.addEventListener('click', function(){ window.print(); });
+  var tb = document.getElementById('btn-theme');
+  if(tb) tb.addEventListener('click', function(){
+    var on = document.body.classList.toggle('daylight');
+    tb.textContent = on ? 'النمط الليلي' : 'النمط النهاري';
+  });
+})();
+</script>
+<footer class="sn-foot no-print">
+  <div class="sf-inner">
+    <span>مركز الوعي بالمجال البحري — تقارير أمن الملاحة — مملكة البحرين · إصدار 17 أكتوبر 2026</span>
+    <span>تُحدَّث الصفحات آليًا مع كل إصدار · <a href="/#archive">الأرشيف الكامل</a> · <a href="/feed.xml">تغذية الإصدارات</a></span>
+  </div>
+</footer><script>
+(function(){
+var LS=window.localStorage, body=document.body;
+function save(k,v){try{LS.setItem(k,v);}catch(e){}}
+var reportBtn=document.getElementById('btn-theme'), siteBtn=document.getElementById('sn-theme');
+// إزالة مستمع الزر الأصلي داخل التقرير بمضاعفة العقدة لمنع الازدواج
+if(reportBtn){var clone=reportBtn.cloneNode(true);reportBtn.parentNode.replaceChild(clone,reportBtn);reportBtn=clone;}
+function isLight(){return body.classList.contains('daylight');}
+function paint(){
+  if(reportBtn) reportBtn.textContent = isLight() ? 'النمط الليلي' : 'النمط النهاري';
+  if(siteBtn) siteBtn.textContent = isLight() ? 'المظهر: نهاري' : 'المظهر: ليلي';
+  document.querySelectorAll('[data-scale]').forEach(function(b){
+    b.classList.toggle('on', parseFloat(b.getAttribute('data-scale'))===currentScale());
+  });
+}
+function currentScale(){var s=parseFloat(LS.getItem('mn-scale')||'1');return (s&&s>0)?s:1;}
+function toggleTheme(){var on=body.classList.toggle('daylight');save('mn-theme',on?'light':'dark');paint();}
+if(reportBtn) reportBtn.addEventListener('click',function(e){e.preventDefault();toggleTheme();});
+if(siteBtn) siteBtn.addEventListener('click',function(e){e.preventDefault();toggleTheme();});
+document.querySelectorAll('[data-scale]').forEach(function(b){
+  b.addEventListener('click',function(e){e.preventDefault();
+    var s=parseFloat(b.getAttribute('data-scale'));save('mn-scale',s);
+    body.style.zoom=(s===1?'':s);paint();});
+});
+paint();
+// تذكّر آخر تقرير فُتح
+var p=location.pathname;
+if(p.indexOf('/reports/')===0){
+  var t=(document.title||'').split(/[|·]/)[0].trim();
+  save('mn-last',JSON.stringify({path:p,title:t,at:new Date().toISOString()}));
+}
+})();
+</script></body>
+</html>
