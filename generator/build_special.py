@@ -95,7 +95,7 @@ def discover() -> list:
 
 def build_one(item: dict, dist: Path) -> Path:
     out = dist / "reports" / f"special-{item['slug']}.html"
-    path, _ = BR.build(item["md"], out, item["meta"])
+    path, _ = BR.build(item["md"], out, item["meta"], doc_mode=True)
     html = path.read_text(encoding="utf-8")
     html = CH.inject(html, "special", "تقرير خاص — مستقل عن الإصدار اليومي")
     path.write_text(html, encoding="utf-8")
