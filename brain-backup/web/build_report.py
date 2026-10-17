@@ -733,7 +733,7 @@ def is_incident_section(title: str) -> bool:
     return any(k in title for k in INCIDENT_SECTION_KEYS)
 
 
-def render_section_body(title: str, lines, defs):
+def render_section_body(title: str, lines, defs, doc_mode: bool = False):
     out, cards = [], []
     incident = is_incident_section(title)
 
@@ -755,6 +755,10 @@ def render_section_body(title: str, lines, defs):
                 rows.append(split_table_row(lines[i]))
                 i += 1
             htxt = " ".join(rows[0])
+            if doc_mode:
+                # وضع الوثيقة (التقارير الخاصة): يُعرض الجدول جدولًا كاملًا بكل أعمدته
+                out.append(render_table(rows, defs))
+                continue
             if "القطاع" in htxt or re.search(r"النسبة", htxt):
                 out.append(render_geo_viz(rows, defs))
             sc = render_source_cards(rows, defs)
@@ -890,7 +894,7 @@ def threat_class(threat: str) -> str:
 # ----------------------------------------------------------------------------
 # البناء
 # ----------------------------------------------------------------------------
-def build(md_path: Path, out_path: Path, meta: dict):
+def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
     md = md_path.read_text(encoding="utf-8")
     defs = parse_ref_defs(md)
     sections = parse_sections(md)
@@ -979,7 +983,7 @@ def build(md_path: Path, out_path: Path, meta: dict):
             '<div class="h-rule"></div>'
             + (f'<p class="sec-lede">{esc(SECTION_HINTS[t])}</p>' if SECTION_HINTS.get(t) else "")
         )
-        section_html = render_section_body(t, sec["lines"], defs)
+        section_html = render_section_body(t, sec["lines"], defs, doc_mode)
         if not codes.is_primary(t):
             section_html = codes.demote(section_html, report_date, official)
         if map_html and "التوزيع الجغرافي للوقائع" in t:
