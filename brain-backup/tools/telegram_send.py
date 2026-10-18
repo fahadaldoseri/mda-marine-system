@@ -5,8 +5,13 @@
   python3 tools/telegram_send.py --file /tmp/digest.html
   python3 tools/telegram_send.py --text "نص قصير"
 
-المسار: الشبكة المباشرة إلى نطاقات تلغرام محجوبة في بيئة التنفيذ (مهلة في مصافحة TLS)،
-لذلك تُجرَّب المباشرة أولًا ثم يُستعمل الوسيط النصي r.jina.ai الذي يصل بنجاح.
+المسارات (تُجرَّب بالترتيب):
+  1) مباشر: curl إلى api.telegram.org — محجوب في بيئة التنفيذ (مهلة في مصافحة TLS).
+  2) وسيط نصي عبر طلب POST: يُرسَل رابط الواجهة داخل JSON إلى https://r.jina.ai/
+     وهذا المسار **يحفظ فواصل الأسطر** بخلاف تمرير الرابط في مسار GET الذي يحذفها،
+     ولذلك هو المسار المعتمد. (فُحص 18 أكتوبر 2026 بخدمة صدى: AAA\\nBBB\\nCCC).
+  3) احتياطي: تمرير الرابط في مسار GET للوسيط (يحذف فواصل الأسطر، يُستعمل عند الحاجة فقط).
+
 الرمز يُقرأ من متغير البيئة TELEGRAM_BOT_TOKEN (موصل Telegram Bot API) ولا يُطبع أبدًا.
 """
 from __future__ import annotations
@@ -17,11 +22,13 @@ import os
 import re
 import subprocess
 import sys
+import tempfile
 import urllib.parse
 from pathlib import Path
 
 B = Path(__file__).resolve().parent.parent
 CHAT_FILE = B / "appendices" / "telegram-chat.json"
+RELAY = "https://r.jina.ai/"
 
 
 def chat_id(explicit: str | None) -> str:
@@ -34,8 +41,8 @@ def chat_id(explicit: str | None) -> str:
     raise SystemExit("لا يوجد معرّف محادثة: مرّر --chat أو أنشئ appendices/telegram-chat.json")
 
 
-def send(url: str, timeout: int = 40) -> str:
-    p = subprocess.run(["curl", "-s", "--max-time", str(timeout), url],
+def curl(args: list[str], timeout: int = 60) -> str:
+    p = subprocess.run(["curl", "-s", "--max-time", str(timeout)] + args,
                        capture_output=True, text=True)
     return (p.stdout or "") + (p.stderr or "")
 
@@ -49,6 +56,8 @@ def main() -> int:
     ap.add_argument("--text")
     ap.add_argument("--file")
     ap.add_argument("--chat")
+    ap.add_argument("--keep-newlines", action="store_true", default=True,
+                    help="مُعطَّل فعليًا: الأسطر تُحفظ دائمًا في المسار المعتمد")
     args = ap.parse_args()
 
     token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
@@ -72,12 +81,29 @@ def main() -> int:
             f"?chat_id={cid}&parse_mode=HTML&disable_web_page_preview=true"
             f"&text={urllib.parse.quote(text, safe='')}")
 
-    body = send(base, timeout=25)
+    # 1) مباشر
+    body = curl(["--max-time", "25", base], timeout=30)
     route = "مباشر"
     if not ok_of(body):
-        relay = "https://r.jina.ai/" + base
-        body = send(relay, timeout=60)
-        route = "وسيط نصي"
+        # 2) الوسيط عبر POST (يحفظ الأسطر)
+        payload = json.dumps({"url": base}, ensure_ascii=False)
+        with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False,
+                                         encoding="utf-8") as fh:
+            fh.write(payload)
+            tmp = fh.name
+        try:
+            body = curl(["-X", "POST", RELAY, "-H", "Content-Type: application/json",
+                         "--data-binary", "@" + tmp], timeout=90)
+        finally:
+            try:
+                os.unlink(tmp)
+            except OSError:
+                pass
+        route = "وسيط POST"
+        if not ok_of(body):
+            # 3) احتياطي: GET للوسيط (قد يحذف الأسطر)
+            body = curl([RELAY + base], timeout=90)
+            route = "وسيط GET (احتياطي)"
 
     ok = ok_of(body)
     print(f"[تلغرام] المسار: {route} · النتيجة: {'ok:true — تم التسليم' if ok else 'فشل'}")
