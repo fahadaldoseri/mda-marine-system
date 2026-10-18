@@ -134,9 +134,6 @@ a.bidi{white-space:normal}
 .kpi.acc-ok em{background:var(--ok)}
 .kpi .k-l{font-size:12.5px;color:var(--muted);line-height:1.6;min-height:2.6em}
 .kpi .k-v{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-weight:600;font-size:30px;line-height:1.25;margin-top:3px;font-variant-numeric:tabular-nums}
-.kpis-more{font-size:12.5px;color:var(--muted);line-height:1.75;margin:0 0 8px}
-.kpis-more .km-i{white-space:nowrap}
-.kpis-more .km-i b{color:var(--ink)}
 .kpi .k-n{font-size:12px;color:var(--muted);line-height:1.7;margin-top:4px}
 
 .notice{
@@ -309,7 +306,6 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   /* اقتصاد الورق: تُقاس الخريطة على ارتفاع صفحة واحدة مع عنوانها */
   /* الخريطة ينقسم إطارها فقط بين الرسم والمفتاح، فلا تبقى ورقة شبه فارغة */
   .map-viz{break-inside:auto;page-break-inside:auto}
-  .map-viz svg{max-height:100mm;height:auto;break-inside:avoid;page-break-inside:avoid}
   .map-legend{break-inside:auto}
   /* إجبار: كتلة الخريطة تنقسم بين الرسم والمفتاح مهما وردت قاعدة أخصّ */
   #sec-03 .map-viz, .map-viz{break-inside:auto !important;page-break-inside:auto !important}
@@ -409,42 +405,47 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .tl-viz .tl-row,.viz svg,.card .kpi{break-inside:avoid;page-break-inside:avoid}
   .decision{animation:none}
 
-    /* ===== إصلاحات الطباعة المعتمدة (18 أكتوبر 2026) =====
-     الهيئة البصرية المعتمدة لا تتغيّر: لا تصغير خطوط ولا تغيير مقاسات العناوين.
-     الإصلاح يقتصر على منع دفع الكتل الكبيرة، وتكرار رؤوس الجداول، وعزل المعرفات. */
-  /* (١) الحاويات الطويلة تتدفّق فتُقسَّم بدل أن تُدفع وتُفرّغ الورقة */
-  .map-panel,.map-viz,.dc-grid,.changes,.glossary,.tl-viz,.src-grid{display:block !important;overflow:visible !important}
-  .dc-grid > *{display:inline-block !important;width:48.5% !important;vertical-align:top !important;
-               margin:0 0 2mm 1% !important;box-sizing:border-box !important}
-  .changes > *,.src-grid > *{display:block !important;width:100% !important}
-  .map-legend > li{display:inline-block !important;width:48.5% !important;vertical-align:top !important;
-                   margin:0 0 1.2mm 1% !important;box-sizing:border-box !important}
-  /* (٢) الذرّات القصيرة محمية من الانقسام */
-  tr,.kpi,.dc-row,.map-legend li{break-inside:avoid !important;page-break-inside:avoid !important}
-  /* (٣) رأس الجدول يتكرر في كل صفحة ينقسم إليها الجدول */
-  thead{display:table-header-group !important}
-  /* (٤) لا عنوان يتيم في أسفل صفحة */
+  /* ===== سياسة التدفّق الموحّدة: تمنع الفراغات الداخلية (قرار 18 أكتوبر 2026) =====
+     القاعدة: القِطَع الصغيرة محمية من الانقسام، والحاويات الكبيرة تتدفّق بحرية.
+     فتُملأ كل ورقة قبل الانتقال، ولا تُدفع الكتل الكبيرة لإفراغ نصف ورقة. */
+  *{break-inside:auto !important;page-break-inside:auto !important}
+  tr,.kpi,.map-legend li,.glossary li,.dc-row,.ev-item,.chg-item{break-inside:avoid !important;page-break-inside:avoid !important}
   section.doc > h2,section.doc h3,section.doc h4,.h-rule,.sec-lede{break-after:avoid !important;page-break-after:avoid !important}
-  /* (٥) الخريطة بعرضها الكامل وارتفاع يدخل في الورقة */
-  .map-viz svg{max-height:60mm !important;break-inside:avoid !important}
-  /* (٦ب) ضغط الكتل غير النصية (لا يمسّ المتن): لإزالة الصفحة الزائدة بلا تصغير خطوط */
-  section.doc{padding-bottom:3.5mm !important}
-  section.doc > h2{margin:0 0 2.6mm !important}
-  .kpis{gap:8px !important;margin:16px 0 6px !important}
-  .kpi{padding:8px 10px !important}
-  .kpi .k-v{font-size:26px !important}
-  .dc-grid{gap:1.4mm !important}
-  .dc-grid > *{margin-bottom:1.4mm !important}
-  .tbl td,.tbl th{padding:1.5mm 2mm !important;line-height:1.5 !important}
-  .tl-viz li,.src-grid li{margin-bottom:0.8mm !important}
-  /* (٧) مقاسات القراءة المقرّة: متن 11.5pt بتباعد 1.65 */
-  .doc p,.doc li,.doc .lede,.doc blockquote{font-size:11.5pt !important;line-height:1.6 !important}
-  /* (٨) تعبئات مسطّحة: لا تدرّجات في الطباعة */
-  *{background-image:none !important}
-  /* (٩) مفتاح القراءة يُطبع ليكون الوسم لفظيًا لا لونيًا فقط */
-  .rkey{display:block !important}
-  /* (٦) عزل اتجاهي للمعرفات والأوقات والإحداثيات: يمنع انقلاب ترتيبها في <span class="ltr">RTL</span> */
-  .ltr{direction:ltr !important;unicode-bidi:isolate !important;white-space:nowrap !important;display:inline-block}
+  thead{display:table-header-group}
+  thead tr{break-after:avoid;page-break-after:avoid}
+  p,li{orphans:2;widows:2}
+  .map-legend,.map-viz,.tbl-wrap,.changes,.decision,.viz,.card{break-inside:auto !important;page-break-inside:auto !important}
+  /* Chromium لا يجزّئ حاويات grid/flex بين الصفحات، فتتدفّق هنا بترتيب inline-block
+     يحفظ هيئة العمودين/البطاقات نفسها، مع السماح بالانقسام بين الصفحات */
+  .wrap,.changes,.dc-grid,.kpis,.masthead,.map-legend,.src-grid,.glossary,.tl-viz,.viz,.card,.decision{display:block !important}
+  .kpis > *,.masthead > *,.map-legend > li,.glossary > li,.src-grid > *{display:inline-block !important;vertical-align:top !important;width:48.5% !important;margin:0 0 2.5mm 1% !important;box-sizing:border-box !important}
+  .dc-grid > *,.dc-row{display:block !important;width:100% !important}
+  .dc-row > *:first-child{display:inline-block !important;width:26% !important;vertical-align:top !important}
+  .dc-row > *:last-child{display:inline-block !important;width:72% !important;vertical-align:top !important}
+  .changes > *{display:block !important;width:100% !important}
+  .viz > *,.card > *{box-sizing:border-box}
+  /* ضغط تباعد الأقسام: يوفّر نحو 40 مم فتنتقل نهاية التقرير إلى صفحتها السابقة */
+  section.doc{padding:0 0 2.5mm !important}
+  section.doc > h2{margin:3mm 0 1.5mm !important}
+  .sec-lede{margin:0 0 2mm !important}
+  .h-rule{margin:1mm 0 2mm !important}
+  /* تشخيص: إلغاء كل قواعد منع الكسر لتحديد مصدر الفراغات */
+  *{break-after:auto !important;break-before:auto !important}
+  body,p,li,td,th{line-height:1.36 !important}
+  /* overflow مخفي يمنع Chromium من تقسيم الحاوية بين الصفحات فتُدفع كاملة وتُفرّغ الورقة */
+  *{overflow:visible !important}
+  .map-panel{padding:2mm 2.5mm !important}
+  .map-legend{margin-top:1.5mm !important}
+  .map-legend li{margin:0 0 1mm !important;font-size:8.4pt !important;line-height:1.3 !important}
+  .kpis > *{width:32% !important;padding:1.6mm 2mm !important;margin:0 0 1.5mm 1% !important}
+  .kpis .k-v{font-size:14pt !important;margin:0.5mm 0 !important}
+  .kpis .k-l{font-size:8.6pt !important;line-height:1.25 !important;min-height:0 !important}
+  .kpis .k-m{font-size:7.6pt !important;line-height:1.25 !important}
+  .dc-grid{gap:1.5mm !important}
+  section.doc{font-size:10.2pt !important}
+
+}
+
 }
 
 /* ---------- بطاقة القرار ---------- */
@@ -666,12 +667,12 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <div class="cls-banner c-open">تصنيف الإصدار: عام</div>
   <section class="decision reveal" aria-label="عام"><h2 class="dc-title">عام</h2><div class="dc-grid"><div class="dc-row"><div class="dc-l">ما تغيّر</div><div class="dc-v">غرق سفينتين تجاريتين قرب مضيق هرمز (15-01 · 15-02)، وبلاغان رسميان جديدان (<bdi class="bidi">#172</bdi> و#173)، وتحديث سجل <span class="ltr">IMO</span> إلى 113 حادثة و24 وفاة (15-05)، وإعلان أمريكي عن إنفاذ الحصار البحري بأرقام تشغيلية (15-07)، وتصعيد حرب الممرات في البحر الأحمر (15-08)، وتصاعد القرصنة في خليج عدن (15-09).</div></div><div class="dc-row risk-high"><div class="dc-l">مستوى الخطر</div><div class="dc-v">مرتفع جدًا</div></div><div class="dc-row"><div class="dc-l">التوصيات</div><div class="dc-v">تقييد العبور غير الضروري في مضيق هرمز، وعدم الاعتماد على المراسي القريبة من الساحل كملاذ آمن، وإبقاء التتبّع عاملاً ورفع تقارير الوضع إلى مركز البلاغات كل ساعتين، ورفع التدابير المضادة للقرصنة في خليج عدن والمحيط الهندي.</div></div><div class="dc-row"><div class="dc-l">ما يُراقب خلال 24 ساعة</div><div class="dc-v">بلاغات الاستهداف الرسمية التالية، وإدراج واقعتي 12 أكتوبر في سجل <span class="ltr">IMO</span>، ومصير المفقودَين من «<span class="ltr">PETRO DOLPHIN</span>»، وتطورات جبهة البحر الأحمر ومصير باب المندب، وأي نشرة بحرية سارية جديدة، وحوادث القرصنة القادمة.</div></div></div><div class="dc-foot">أساس التقدير: سجل المنظمة البحرية الدولية للحوادث المؤكدة، وبلاغات مركز البلاغات الرسمية #172 و#173، وبيان هيئة الموانئ والملاحة بسنغافورة، وبيان القوات الأمريكية الوسطى، وصفحة التحذيرات البحرية الرسمية، ومنصة رصد المضيق، وتقارير مهنية وقطاعية.</div></section>
-  <div class="kpis"><div class="kpi acc-danger reveal"><em></em><div class="k-l">بلاغات إصابة رسمية (24 ساعة)</div><div class="k-v bidi">2</div><div class="k-d"><span class="trend t-flat">■</span> بلا تغيّر عن النافذة السابقة</div><div class="k-n"><span class="ltr">UKMTO</span> <bdi class="bidi">#172</bdi> · <bdi class="bidi">#173</bdi></div></div><div class="kpi acc-danger reveal"><em></em><div class="k-l">سفن تجارية غرقت في النافذة</div><div class="k-v bidi">2</div><div class="k-d"><span class="trend t-up">▲</span> +2 — أول غرق منذ مارس</div><div class="k-n"><span class="ltr">GFS PRIDE</span> · <span class="ltr">CAPE DAO</span></div></div><div class="kpi acc-danger reveal"><em></em><div class="k-l">حوادث مؤكدة لدى <span class="ltr">IMO</span> (تراكمي)</div><div class="k-v bidi">113</div><div class="k-d"><span class="trend t-up">▲</span> +7 عن أمس</div><div class="k-n">ومقتل 24 بحّارًا — تحديث 14 أكتوبر</div></div></div><div class="kpis-more reveal">باقي المؤشرات: <span class="km-i">سفن واقفة في مواضعها بعيدًا عن المراسي: <b class="bidi">151</b></span> · <span class="km-i">خام برنت: <b class="bidi">105.38 $</b></span></div>
+  <div class="kpis"><div class="kpi acc-danger reveal"><em></em><div class="k-l">بلاغات إصابة رسمية (24 ساعة)</div><div class="k-v bidi">2</div><div class="k-d"><span class="trend t-flat">■</span> بلا تغيّر عن النافذة السابقة</div><div class="k-n"><span class="ltr">UKMTO</span> <bdi class="bidi">#172</bdi> · <bdi class="bidi">#173</bdi></div></div><div class="kpi acc-danger reveal"><em></em><div class="k-l">سفن تجارية غرقت في النافذة</div><div class="k-v bidi">2</div><div class="k-d"><span class="trend t-up">▲</span> +2 — أول غرق منذ مارس</div><div class="k-n"><span class="ltr">GFS PRIDE</span> · <span class="ltr">CAPE DAO</span></div></div><div class="kpi acc-danger reveal"><em></em><div class="k-l">حوادث مؤكدة لدى <span class="ltr">IMO</span> (تراكمي)</div><div class="k-v bidi">113</div><div class="k-d"><span class="trend t-up">▲</span> +7 عن أمس</div><div class="k-n">ومقتل 24 بحّارًا — تحديث 14 أكتوبر</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">سفن واقفة في مواضعها بعيدًا عن المراسي</div><div class="k-v bidi">151</div><div class="k-d"><span class="trend t-up">▲</span> +31 عن أمس</div><div class="k-n">سفن ظاهرة على التتبّع عند 00:22 <span class="ltr">UTC</span></div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">خام برنت</div><div class="k-v bidi">105.38 $</div><div class="k-d"><span class="trend t-down">▼</span> -0.86% خلال 24 ساعة</div><div class="k-n">عند 00:16 <span class="ltr">UTC</span></div></div></div>
   <div class="notice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/></svg><div>نسخة ويب من التقرير اليومي. المصادر المفحوصة 40 مصدرًا، ويُعرض ملحق الموثوقية للمصادر المستشهد بها فقط.</div></div>
-  <div class="rkey"><span class="rkey-t">مفتاح القراءة:</span><span class="rk k-fact">واقعة مؤكدة</span><span class="rk k-est">تقدير تحليلي</span><span class="rk k-info">بند إعلامي</span><span class="rk k-bg">خلفية مستمرة</span><span class="rk k-watch">مراقبة مستمرة</span><span class="rk k-up">▲ ارتفاع</span><span class="rk k-down">▼ انخفاض</span><span class="rk k-flat">■ ثبات</span></div>
+  <div class="rkey no-print"><span class="rkey-t">مفتاح القراءة:</span><span class="rk k-fact">واقعة مؤكدة</span><span class="rk k-est">تقدير تحليلي</span><span class="rk k-info">بند إعلامي</span><span class="rk k-bg">خلفية مستمرة</span><span class="rk k-watch">مراقبة مستمرة</span></div>
 
   <main>
-    <section class="doc pri reveal" id="sec-00" aria-labelledby="h-00"><h2 id="h-00">ملخّص ما تغيّر عن التقرير السابق</h2><div class="h-rule"></div><p class="sec-lede">ما استُجد، وما تغيّر تصنيفه، وما أُغلق.</p><ul class="changes"><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">غرق سفينة الحاويات «<span class="ltr">GFS PRIDE</span>» في مضيق هرمز بعد إصابة بمقذوف وحريق، وإخلاء 21 بحّارًا بسلام. <bdi class="bidi ev-code">15-01</bdi> <bdi class="bidi">بيان سنغافوري رسمي · <span class="ltr">IMO</span></bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تأكيد غرق سفينة البضائع الجافة «<span class="ltr">CAPE DAO</span>» بعد إصابتها في 23 سبتمبر، بوفاة بحّار واحد — ثالث سفينة تغرق منذ بدء الحرب. <bdi class="bidi ev-code">15-02</bdi> <bdi class="bidi"><span class="ltr">IMO</span> · رويترز</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إصابة سفينة حاويات 19,000 طن بمقذوف غير محدد المصدر أثناء عبور خارجي بضرر طفيف. <bdi class="bidi ev-code">#173 · 15-03</bdi> <bdi class="bidi"><span class="ltr">UKMTO</span> #173</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إصابة سفينة حاويات 50,000 طن بمقذوف غير محدد المصدر أثناء عبور داخلي بضرر طفيف. <bdi class="bidi ev-code">#172 · 15-04</bdi> <bdi class="bidi"><span class="ltr">UKMTO</span> #172</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تحديث رسمي: 113 حادثة مؤكدة (+7) و24 وفاة، مع إدراج الغرق الجديد وأضرار سفينتين قرب ساحل عُمان. <bdi class="bidi ev-code">15-05</bdi> <bdi class="bidi"><span class="ltr">IMO</span></bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إدراج أضرار «<span class="ltr">GFS GISELLE</span>» على 6 أميال و«AL <span class="ltr">SAADIYAT</span>» على ميل واحد من ساحل عُمان — لا مسافة ساحلية آمنة بالضرورة. <bdi class="bidi ev-code">15-06</bdi> <bdi class="bidi"><span class="ltr">IMO</span></bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إعلان إنفاذ الحصار البحري: تدمير قارب داو مرتبط بإيران، وتعطيل 4 سفن تجارية، وإعادة توجيه 135 سفينة، وتدمير 10 ناقلات مرتبطة بالحرس الثوري منذ يوليو. <bdi class="bidi ev-code">15-07</bdi> <bdi class="bidi">بيان أمريكي مباشر</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تصعيد البحر الأحمر: ضرب مخزن وقود في أطراف صنعاء، وتهديدات حوثية لمنشآت نفطية سعودية، مع ربط التحالف المواقع باستهداف السفن التجارية. <bdi class="bidi ev-code">15-08</bdi> <bdi class="bidi">رويترز · التحالف</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تصاعد القرصنة: ثلاثة اختطافات في الربع الثالث و15 هجومًا في 2026 — أعلى مستوى منذ 2013. <bdi class="bidi ev-code">15-09</bdi> <bdi class="bidi">تقارير قطاعية · <span class="ltr">CMF</span></bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إعلان غير مؤكد عن إصابة سفينة شحن بلغم بحري وغرقها — لم يتأكد من مصدر رسمي مستقل. <bdi class="bidi ev-code">15-10</bdi> <bdi class="bidi">نقل إعلامي</bdi></span></li><li class="chg c-ongoing"><span class="chg-tag"></span><span class="chg-txt">«<span class="ltr">PETRO DOLPHIN</span>» في مرسى صحار: مفقودان لم يُعلن مصيرهما في السجل الرسمي. <bdi class="bidi ev-code">#165 · 11-02</bdi> <bdi class="bidi"><span class="ltr">IMO</span></bdi></span></li><li class="chg c-ongoing"><span class="chg-tag"></span><span class="chg-txt">بلاغ إصابة سفينة حاويات في المضيق — بانتظار الإدراج الرسمي في سجل الحوادث المؤكدة. <bdi class="bidi ev-code">#170 · 14-01</bdi> <bdi class="bidi"><span class="ltr">UKMTO</span> #170</bdi></span></li></ul></section>
+    <section class="doc pri reveal" id="sec-00" aria-labelledby="h-00"><h2 id="h-00">ما تغيّر منذ التقرير السابق</h2><div class="h-rule"></div><p class="sec-lede">ما استُجد، وما تغيّر تصنيفه، وما أُغلق.</p><ul class="changes"><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">غرق سفينة الحاويات «<span class="ltr">GFS PRIDE</span>» في مضيق هرمز بعد إصابة بمقذوف وحريق، وإخلاء 21 بحّارًا بسلام. <bdi class="bidi ev-code">15-01</bdi> <bdi class="bidi">بيان سنغافوري رسمي · <span class="ltr">IMO</span></bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تأكيد غرق سفينة البضائع الجافة «<span class="ltr">CAPE DAO</span>» بعد إصابتها في 23 سبتمبر، بوفاة بحّار واحد — ثالث سفينة تغرق منذ بدء الحرب. <bdi class="bidi ev-code">15-02</bdi> <bdi class="bidi"><span class="ltr">IMO</span> · رويترز</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إصابة سفينة حاويات 19,000 طن بمقذوف غير محدد المصدر أثناء عبور خارجي بضرر طفيف. <bdi class="bidi ev-code">#173 · 15-03</bdi> <bdi class="bidi"><span class="ltr">UKMTO</span> #173</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إصابة سفينة حاويات 50,000 طن بمقذوف غير محدد المصدر أثناء عبور داخلي بضرر طفيف. <bdi class="bidi ev-code">#172 · 15-04</bdi> <bdi class="bidi"><span class="ltr">UKMTO</span> #172</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تحديث رسمي: 113 حادثة مؤكدة (+7) و24 وفاة، مع إدراج الغرق الجديد وأضرار سفينتين قرب ساحل عُمان. <bdi class="bidi ev-code">15-05</bdi> <bdi class="bidi"><span class="ltr">IMO</span></bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إدراج أضرار «<span class="ltr">GFS GISELLE</span>» على 6 أميال و«AL <span class="ltr">SAADIYAT</span>» على ميل واحد من ساحل عُمان — لا مسافة ساحلية آمنة بالضرورة. <bdi class="bidi ev-code">15-06</bdi> <bdi class="bidi"><span class="ltr">IMO</span></bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إعلان إنفاذ الحصار البحري: تدمير قارب داو مرتبط بإيران، وتعطيل 4 سفن تجارية، وإعادة توجيه 135 سفينة، وتدمير 10 ناقلات مرتبطة بالحرس الثوري منذ يوليو. <bdi class="bidi ev-code">15-07</bdi> <bdi class="bidi">بيان أمريكي مباشر</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تصعيد البحر الأحمر: ضرب مخزن وقود في أطراف صنعاء، وتهديدات حوثية لمنشآت نفطية سعودية، مع ربط التحالف المواقع باستهداف السفن التجارية. <bdi class="bidi ev-code">15-08</bdi> <bdi class="bidi">رويترز · التحالف</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تصاعد القرصنة: ثلاثة اختطافات في الربع الثالث و15 هجومًا في 2026 — أعلى مستوى منذ 2013. <bdi class="bidi ev-code">15-09</bdi> <bdi class="bidi">تقارير قطاعية · <span class="ltr">CMF</span></bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إعلان غير مؤكد عن إصابة سفينة شحن بلغم بحري وغرقها — لم يتأكد من مصدر رسمي مستقل. <bdi class="bidi ev-code">15-10</bdi> <bdi class="bidi">نقل إعلامي</bdi></span></li><li class="chg c-ongoing"><span class="chg-tag"></span><span class="chg-txt">«<span class="ltr">PETRO DOLPHIN</span>» في مرسى صحار: مفقودان لم يُعلن مصيرهما في السجل الرسمي. <bdi class="bidi ev-code">#165 · 11-02</bdi> <bdi class="bidi"><span class="ltr">IMO</span></bdi></span></li><li class="chg c-ongoing"><span class="chg-tag"></span><span class="chg-txt">بلاغ إصابة سفينة حاويات في المضيق — بانتظار الإدراج الرسمي في سجل الحوادث المؤكدة. <bdi class="bidi ev-code">#170 · 14-01</bdi> <bdi class="bidi"><span class="ltr">UKMTO</span> #170</bdi></span></li></ul></section>
     <section class="doc reveal" id="sec-01" aria-labelledby="h-01"><h2 id="h-01"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>ما تغيّر منذ التقرير السابق</h2><div class="h-rule"></div><p class="sec-lede">ما استُجد، وما تغيّر تصنيفه، وما أُغلق.</p><p>غرق سفينتين تجاريتين قرب مضيق هرمز في نافذة واحدة: سفينة الحاويات السنغافورية «<span class="ltr">GFS PRIDE</span>» بعد إصابة بمقذوف وحريق، وسفينة البضائع الجافة «<span class="ltr">CAPE DAO</span>» التي غرقت بعد أسابيع من إصابتها في 23 سبتمبر. وبذلك يرتفع سجل المنظمة البحرية الدولية إلى <strong>113 حادثة مؤكدة</strong> بعد أن كان 106، مع ثبات عدد الوفيات المؤكدة عند <strong>24 بحّارًا</strong>.</p>
 <p>وتسجّل هذه النافذة أول إعلان رسمي أمريكي مباشر منذ أيام عن إنفاذ الحصار البحري، مع أرقام تشغيلية معلنة. كما يظهر مسار ثالث كان غائبًا: <strong>تصاعد القرصنة</strong> في خليج عدن والمحيط الهندي الغربي إلى أعلى مستوى منذ 2013، وهو مسار خطر لا يظهر في بلاغات الاستهداف بالصواريخ والمسيّرات.</p></section><section class="doc pri reveal" id="sec-02" aria-labelledby="h-02"><h2 id="h-02"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 3h9l-1.2 3H19v8h-8.2L9.6 11H6v9H4z"/></svg></span>الخلاصة</h2><div class="h-rule"></div><p class="sec-lede">الموقف ومستوى الخطر والإجراء المقترح في ثلاثة أسطر.</p><p>الوضع عند حدود القطع: التهديد في مضيق هرمز <strong>مرتفع جدًا</strong> ومستمر بلا انقطاع، مع تحوّل مهم في طبيعة الأثر — لم تبقَ الإصابات أضرارًا سطحية، بل صارت <strong>غرقًا فعليًا لسفن تجارية</strong> في ممر ضيق شبه مغلق (عبورتان في 11 أكتوبر مقابل 85 قبل الأزمة). في المقابل، الوتيرة اليومية للبلاغات الرسمية الجديدة في النافذة <strong>هابطة</strong> (بلاغان مقابل بلاغين أمس)، ما يعني أن الخطر الأكبر اليوم ليس في عدد الحوادث بل في <strong>ثقل النتيجة</strong>: سفينة تغرق كل يومين تقريبًا، وطواقم تنجو بصعوبة، وأقساط التأمين ترتفع، وعبور يقترب من الصفر.</p>
 <p>وخارج المضيق: جبهة البحر الأحمر تتحول من تهديد إلى <strong>حرب مفتوحة على الممرات المائية</strong>. ويتبادل التحالف بقيادة السعودية والحوثيون الضربات، مع تهديدات مباشرة لمنشآت النفط السعودية — أي ضغط على البديل الوحيد لهرمز. وفي خليج عدن: القرصنة تعود بقوة.</p></section><section class="doc reveal" id="sec-03" aria-labelledby="h-03"><h2 id="h-03"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 4l6 2 5-2v14l-5 2-6-2-5 2V6zM9 4v14M15 6v14"/></svg></span>التوزيع الجغرافي للوقائع</h2><div class="h-rule"></div><p class="sec-lede">أين تركّزت الوقائع، وحصيلة <span class="ltr">IMO</span> على القطاعات.</p><div class="viz map-viz reveal"><div class="map-panel">

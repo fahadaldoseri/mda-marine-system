@@ -146,7 +146,7 @@ def changes_block(items, inline):
         )
     return (
         '<section class="doc pri reveal" id="sec-00" aria-labelledby="h-00">'
-        '<h2 id="h-00">ملخّص ما تغيّر عن التقرير السابق</h2><div class="h-rule"></div>'
+        '<h2 id="h-00">ما تغيّر منذ التقرير السابق</h2><div class="h-rule"></div>'
         '<p class="sec-lede">ما استُجد، وما تغيّر تصنيفه، وما أُغلق.</p>'
         f'<ul class="changes">{"".join(rows)}</ul></section>'
     )
@@ -284,16 +284,13 @@ def glossary(items):
 
 def reading_key():
     return (
-        '<div class="rkey">'
+        '<div class="rkey no-print">'
         '<span class="rkey-t">مفتاح القراءة:</span>'
         '<span class="rk k-fact">واقعة مؤكدة</span>'
         '<span class="rk k-est">تقدير تحليلي</span>'
         '<span class="rk k-info">بند إعلامي</span>'
         '<span class="rk k-bg">خلفية مستمرة</span>'
         '<span class="rk k-watch">مراقبة مستمرة</span>'
-        '<span class="rk k-up">▲ ارتفاع</span>'
-        '<span class="rk k-down">▼ انخفاض</span>'
-        '<span class="rk k-flat">■ ثبات</span>'
         "</div>"
     )
 

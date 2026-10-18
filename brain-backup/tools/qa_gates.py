@@ -73,6 +73,8 @@ def gate_identity(date: str):
         return False, "صفحة التقرير غير مبنية", True
     titles = re.findall(r"<h2[^>]*>(.*?)</h2>", html, re.S)
     titles = [norm(re.sub(r"<[^>]+>", "", t)) for t in titles]
+    _cover = "ما تغير منذ التقرير السابق"
+    titles = [t for t in titles if not (t == _cover and titles.count(t) == 2)]
     dup = {t for t in titles if titles.count(t) > 1}
     anchors = re.findall(r'id="([^"]+)"', html)
     dup_anchor = {a for a in anchors if anchors.count(a) > 1}

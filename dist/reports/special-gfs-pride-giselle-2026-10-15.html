@@ -134,9 +134,6 @@ a.bidi{white-space:normal}
 .kpi.acc-ok em{background:var(--ok)}
 .kpi .k-l{font-size:12.5px;color:var(--muted);line-height:1.6;min-height:2.6em}
 .kpi .k-v{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-weight:600;font-size:30px;line-height:1.25;margin-top:3px;font-variant-numeric:tabular-nums}
-.kpis-more{font-size:12.5px;color:var(--muted);line-height:1.75;margin:0 0 8px}
-.kpis-more .km-i{white-space:nowrap}
-.kpis-more .km-i b{color:var(--ink)}
 .kpi .k-n{font-size:12px;color:var(--muted);line-height:1.7;margin-top:4px}
 
 .notice{
@@ -309,7 +306,6 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   /* اقتصاد الورق: تُقاس الخريطة على ارتفاع صفحة واحدة مع عنوانها */
   /* الخريطة ينقسم إطارها فقط بين الرسم والمفتاح، فلا تبقى ورقة شبه فارغة */
   .map-viz{break-inside:auto;page-break-inside:auto}
-  .map-viz svg{max-height:100mm;height:auto;break-inside:avoid;page-break-inside:avoid}
   .map-legend{break-inside:auto}
   /* إجبار: كتلة الخريطة تنقسم بين الرسم والمفتاح مهما وردت قاعدة أخصّ */
   #sec-03 .map-viz, .map-viz{break-inside:auto !important;page-break-inside:auto !important}
@@ -409,42 +405,47 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .tl-viz .tl-row,.viz svg,.card .kpi{break-inside:avoid;page-break-inside:avoid}
   .decision{animation:none}
 
-    /* ===== إصلاحات الطباعة المعتمدة (18 أكتوبر 2026) =====
-     الهيئة البصرية المعتمدة لا تتغيّر: لا تصغير خطوط ولا تغيير مقاسات العناوين.
-     الإصلاح يقتصر على منع دفع الكتل الكبيرة، وتكرار رؤوس الجداول، وعزل المعرفات. */
-  /* (١) الحاويات الطويلة تتدفّق فتُقسَّم بدل أن تُدفع وتُفرّغ الورقة */
-  .map-panel,.map-viz,.dc-grid,.changes,.glossary,.tl-viz,.src-grid{display:block !important;overflow:visible !important}
-  .dc-grid > *{display:inline-block !important;width:48.5% !important;vertical-align:top !important;
-               margin:0 0 2mm 1% !important;box-sizing:border-box !important}
-  .changes > *,.src-grid > *{display:block !important;width:100% !important}
-  .map-legend > li{display:inline-block !important;width:48.5% !important;vertical-align:top !important;
-                   margin:0 0 1.2mm 1% !important;box-sizing:border-box !important}
-  /* (٢) الذرّات القصيرة محمية من الانقسام */
-  tr,.kpi,.dc-row,.map-legend li{break-inside:avoid !important;page-break-inside:avoid !important}
-  /* (٣) رأس الجدول يتكرر في كل صفحة ينقسم إليها الجدول */
-  thead{display:table-header-group !important}
-  /* (٤) لا عنوان يتيم في أسفل صفحة */
+  /* ===== سياسة التدفّق الموحّدة: تمنع الفراغات الداخلية (قرار 18 أكتوبر 2026) =====
+     القاعدة: القِطَع الصغيرة محمية من الانقسام، والحاويات الكبيرة تتدفّق بحرية.
+     فتُملأ كل ورقة قبل الانتقال، ولا تُدفع الكتل الكبيرة لإفراغ نصف ورقة. */
+  *{break-inside:auto !important;page-break-inside:auto !important}
+  tr,.kpi,.map-legend li,.glossary li,.dc-row,.ev-item,.chg-item{break-inside:avoid !important;page-break-inside:avoid !important}
   section.doc > h2,section.doc h3,section.doc h4,.h-rule,.sec-lede{break-after:avoid !important;page-break-after:avoid !important}
-  /* (٥) الخريطة بعرضها الكامل وارتفاع يدخل في الورقة */
-  .map-viz svg{max-height:60mm !important;break-inside:avoid !important}
-  /* (٦ب) ضغط الكتل غير النصية (لا يمسّ المتن): لإزالة الصفحة الزائدة بلا تصغير خطوط */
-  section.doc{padding-bottom:3.5mm !important}
-  section.doc > h2{margin:0 0 2.6mm !important}
-  .kpis{gap:8px !important;margin:16px 0 6px !important}
-  .kpi{padding:8px 10px !important}
-  .kpi .k-v{font-size:26px !important}
-  .dc-grid{gap:1.4mm !important}
-  .dc-grid > *{margin-bottom:1.4mm !important}
-  .tbl td,.tbl th{padding:1.5mm 2mm !important;line-height:1.5 !important}
-  .tl-viz li,.src-grid li{margin-bottom:0.8mm !important}
-  /* (٧) مقاسات القراءة المقرّة: متن 11.5pt بتباعد 1.65 */
-  .doc p,.doc li,.doc .lede,.doc blockquote{font-size:11.5pt !important;line-height:1.6 !important}
-  /* (٨) تعبئات مسطّحة: لا تدرّجات في الطباعة */
-  *{background-image:none !important}
-  /* (٩) مفتاح القراءة يُطبع ليكون الوسم لفظيًا لا لونيًا فقط */
-  .rkey{display:block !important}
-  /* (٦) عزل اتجاهي للمعرفات والأوقات والإحداثيات: يمنع انقلاب ترتيبها في <span class="ltr">RTL</span> */
-  .ltr{direction:ltr !important;unicode-bidi:isolate !important;white-space:nowrap !important;display:inline-block}
+  thead{display:table-header-group}
+  thead tr{break-after:avoid;page-break-after:avoid}
+  p,li{orphans:2;widows:2}
+  .map-legend,.map-viz,.tbl-wrap,.changes,.decision,.viz,.card{break-inside:auto !important;page-break-inside:auto !important}
+  /* Chromium لا يجزّئ حاويات grid/flex بين الصفحات، فتتدفّق هنا بترتيب inline-block
+     يحفظ هيئة العمودين/البطاقات نفسها، مع السماح بالانقسام بين الصفحات */
+  .wrap,.changes,.dc-grid,.kpis,.masthead,.map-legend,.src-grid,.glossary,.tl-viz,.viz,.card,.decision{display:block !important}
+  .kpis > *,.masthead > *,.map-legend > li,.glossary > li,.src-grid > *{display:inline-block !important;vertical-align:top !important;width:48.5% !important;margin:0 0 2.5mm 1% !important;box-sizing:border-box !important}
+  .dc-grid > *,.dc-row{display:block !important;width:100% !important}
+  .dc-row > *:first-child{display:inline-block !important;width:26% !important;vertical-align:top !important}
+  .dc-row > *:last-child{display:inline-block !important;width:72% !important;vertical-align:top !important}
+  .changes > *{display:block !important;width:100% !important}
+  .viz > *,.card > *{box-sizing:border-box}
+  /* ضغط تباعد الأقسام: يوفّر نحو 40 مم فتنتقل نهاية التقرير إلى صفحتها السابقة */
+  section.doc{padding:0 0 2.5mm !important}
+  section.doc > h2{margin:3mm 0 1.5mm !important}
+  .sec-lede{margin:0 0 2mm !important}
+  .h-rule{margin:1mm 0 2mm !important}
+  /* تشخيص: إلغاء كل قواعد منع الكسر لتحديد مصدر الفراغات */
+  *{break-after:auto !important;break-before:auto !important}
+  body,p,li,td,th{line-height:1.36 !important}
+  /* overflow مخفي يمنع Chromium من تقسيم الحاوية بين الصفحات فتُدفع كاملة وتُفرّغ الورقة */
+  *{overflow:visible !important}
+  .map-panel{padding:2mm 2.5mm !important}
+  .map-legend{margin-top:1.5mm !important}
+  .map-legend li{margin:0 0 1mm !important;font-size:8.4pt !important;line-height:1.3 !important}
+  .kpis > *{width:32% !important;padding:1.6mm 2mm !important;margin:0 0 1.5mm 1% !important}
+  .kpis .k-v{font-size:14pt !important;margin:0.5mm 0 !important}
+  .kpis .k-l{font-size:8.6pt !important;line-height:1.25 !important;min-height:0 !important}
+  .kpis .k-m{font-size:7.6pt !important;line-height:1.25 !important}
+  .dc-grid{gap:1.5mm !important}
+  section.doc{font-size:10.2pt !important}
+
+}
+
 }
 
 /* ---------- بطاقة القرار ---------- */
@@ -660,13 +661,13 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     <div class="threat risk-high"><div class="lbl">مستوى التهديد</div><div class="val">مرتفع</div></div>
     <div>
       <p class="lede">أصاب مقذوفان غير محددَي المصدر سفينتي حاويات سنغافوريتين في 13 أكتوبر 2026 داخل مضيق هرمز ومياه عُمان: «<span class="ltr">GFS PRIDE</span>» غرقت بعد حريق وأُخلي طاقمها وعدده 21 فردًا بسلام، و«<span class="ltr">GFS GISELLE</span>» أبحرت بقواها الذاتية إلى مرسى آمن وطاقمها وعدده 22 فردًا بسلام. ولا جهة أعلنت مسؤوليتها، ولا يوجد فحص فني منشور.</p>
-      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-18 20:51 <span class="ltr">UTC</span></b></span></div>
+      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-18 21:05 <span class="ltr">UTC</span></b></span></div>
     </div>
   </header>
 
   <div class="cls-banner c-open">تصنيف الإصدار: خاص</div>
   
-  <div class="kpis"><div class="kpi acc-ok reveal"><em></em><div class="k-l">سفن مصابة</div><div class="k-v bidi">2</div><div class="k-n"><span class="ltr">GFS PRIDE</span> · <span class="ltr">GFS GISELLE</span></div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">طواقم ناجية</div><div class="k-v bidi">43</div><div class="k-n">21 + 22 فردًا بسلام</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">وفيات</div><div class="k-v bidi">0</div><div class="k-n">بحسب البيانات الرسمية المعلنة</div></div></div><div class="kpis-more reveal">باقي المؤشرات: <span class="km-i">مؤشرات إقليمية مرجعية: <b class="bidi">16</b></span></div>
+  <div class="kpis"><div class="kpi acc-ok reveal"><em></em><div class="k-l">سفن مصابة</div><div class="k-v bidi">2</div><div class="k-n"><span class="ltr">GFS PRIDE</span> · <span class="ltr">GFS GISELLE</span></div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">طواقم ناجية</div><div class="k-v bidi">43</div><div class="k-n">21 + 22 فردًا بسلام</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">وفيات</div><div class="k-v bidi">0</div><div class="k-n">بحسب البيانات الرسمية المعلنة</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">مؤشرات إقليمية مرجعية</div><div class="k-v bidi">16</div><div class="k-n"><span class="ltr">UKMTO</span> الأسبوعي رقم 11 · <span class="ltr">JMIC 105</span></div></div></div>
   <div class="notice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/></svg><div>تقرير خاص مستقل عن الإصدار اليومي. يعتمد على المصادر المعلنة فقط، ولا يُنسب أي فعل إلى جهة إلا وفق مصدر رسمي مباشر، ولا تُجمع البلاغات كعدد هجمات.</div></div>
   
 
@@ -1090,7 +1091,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> تقرير خاص — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: <span class="ltr">UTC</span> وتوقيت البحرين (<span class="ltr">UTC</span>+3). المصادر الرسمية هي الأساس، والنقل الإعلامي مُوسَم نقلًا لا تحققًا.
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-18 20:51 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-18 21:05 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
     
     <div class="glossary"><b>تعريف المصطلحات:</b><ul><li><b>مقذوف غير محدد المصدر</b>: مقذوف لم تُعلن جهة رسمية نوعه ولا مصدره.</li><li><b>سفينة بضائع جافة (Bulk carrier)</b>: سفينة شحن تحمل بضائع جافة غير معبأة في عنابرها، لا ناقلة نفط.</li><li><b>إخلاء الطاقم</b>: إخراج الطاقم من السفينة عند تعذّر السيطرة على الخطر.</li><li><b>إسناد رسمي أمريكي</b>: نسبة الجهة المنفذة إلى مقذوف للحرس الثوري الإيراني في منشور رسمي للقيادة المركزية الأمريكية، وهو إسناد دولة واحدة غير مؤكد مستقلًا.</li><li><b>آخر إشارة تتبّع (<span class="ltr">AIS</span>)</b>: آخر موضع استقبلته منصات التتبّع، وليس وقت الإصابة ولا وقت إغلاق الجهاز.</li></ul></div>
   </footer>

@@ -233,9 +233,6 @@ a.bidi{white-space:normal}
 .kpi.acc-ok em{background:var(--ok)}
 .kpi .k-l{font-size:12.5px;color:var(--muted);line-height:1.6;min-height:2.6em}
 .kpi .k-v{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:30px;line-height:1.25;margin-top:3px;font-variant-numeric:tabular-nums}
-.kpis-more{font-size:12.5px;color:var(--muted);line-height:1.75;margin:0 0 8px}
-.kpis-more .km-i{white-space:nowrap}
-.kpis-more .km-i b{color:var(--ink)}
 .kpi .k-n{font-size:12px;color:var(--muted);line-height:1.7;margin-top:4px}
 
 .notice{
@@ -408,7 +405,6 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   /* اقتصاد الورق: تُقاس الخريطة على ارتفاع صفحة واحدة مع عنوانها */
   /* الخريطة ينقسم إطارها فقط بين الرسم والمفتاح، فلا تبقى ورقة شبه فارغة */
   .map-viz{break-inside:auto;page-break-inside:auto}
-  .map-viz svg{max-height:100mm;height:auto;break-inside:avoid;page-break-inside:avoid}
   .map-legend{break-inside:auto}
   /* إجبار: كتلة الخريطة تنقسم بين الرسم والمفتاح مهما وردت قاعدة أخصّ */
   #sec-03 .map-viz, .map-viz{break-inside:auto !important;page-break-inside:auto !important}
@@ -508,42 +504,47 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .tl-viz .tl-row,.viz svg,.card .kpi{break-inside:avoid;page-break-inside:avoid}
   .decision{animation:none}
 
-    /* ===== إصلاحات الطباعة المعتمدة (18 أكتوبر 2026) =====
-     الهيئة البصرية المعتمدة لا تتغيّر: لا تصغير خطوط ولا تغيير مقاسات العناوين.
-     الإصلاح يقتصر على منع دفع الكتل الكبيرة، وتكرار رؤوس الجداول، وعزل المعرفات. */
-  /* (١) الحاويات الطويلة تتدفّق فتُقسَّم بدل أن تُدفع وتُفرّغ الورقة */
-  .map-panel,.map-viz,.dc-grid,.changes,.glossary,.tl-viz,.src-grid{display:block !important;overflow:visible !important}
-  .dc-grid > *{display:inline-block !important;width:48.5% !important;vertical-align:top !important;
-               margin:0 0 2mm 1% !important;box-sizing:border-box !important}
-  .changes > *,.src-grid > *{display:block !important;width:100% !important}
-  .map-legend > li{display:inline-block !important;width:48.5% !important;vertical-align:top !important;
-                   margin:0 0 1.2mm 1% !important;box-sizing:border-box !important}
-  /* (٢) الذرّات القصيرة محمية من الانقسام */
-  tr,.kpi,.dc-row,.map-legend li{break-inside:avoid !important;page-break-inside:avoid !important}
-  /* (٣) رأس الجدول يتكرر في كل صفحة ينقسم إليها الجدول */
-  thead{display:table-header-group !important}
-  /* (٤) لا عنوان يتيم في أسفل صفحة */
+  /* ===== سياسة التدفّق الموحّدة: تمنع الفراغات الداخلية (قرار 18 أكتوبر 2026) =====
+     القاعدة: القِطَع الصغيرة محمية من الانقسام، والحاويات الكبيرة تتدفّق بحرية.
+     فتُملأ كل ورقة قبل الانتقال، ولا تُدفع الكتل الكبيرة لإفراغ نصف ورقة. */
+  *{break-inside:auto !important;page-break-inside:auto !important}
+  tr,.kpi,.map-legend li,.glossary li,.dc-row,.ev-item,.chg-item{break-inside:avoid !important;page-break-inside:avoid !important}
   section.doc > h2,section.doc h3,section.doc h4,.h-rule,.sec-lede{break-after:avoid !important;page-break-after:avoid !important}
-  /* (٥) الخريطة بعرضها الكامل وارتفاع يدخل في الورقة */
-  .map-viz svg{max-height:60mm !important;break-inside:avoid !important}
-  /* (٦ب) ضغط الكتل غير النصية (لا يمسّ المتن): لإزالة الصفحة الزائدة بلا تصغير خطوط */
-  section.doc{padding-bottom:3.5mm !important}
-  section.doc > h2{margin:0 0 2.6mm !important}
-  .kpis{gap:8px !important;margin:16px 0 6px !important}
-  .kpi{padding:8px 10px !important}
-  .kpi .k-v{font-size:26px !important}
-  .dc-grid{gap:1.4mm !important}
-  .dc-grid > *{margin-bottom:1.4mm !important}
-  .tbl td,.tbl th{padding:1.5mm 2mm !important;line-height:1.5 !important}
-  .tl-viz li,.src-grid li{margin-bottom:0.8mm !important}
-  /* (٧) مقاسات القراءة المقرّة: متن 11.5pt بتباعد 1.65 */
-  .doc p,.doc li,.doc .lede,.doc blockquote{font-size:11.5pt !important;line-height:1.6 !important}
-  /* (٨) تعبئات مسطّحة: لا تدرّجات في الطباعة */
-  *{background-image:none !important}
-  /* (٩) مفتاح القراءة يُطبع ليكون الوسم لفظيًا لا لونيًا فقط */
-  .rkey{display:block !important}
-  /* (٦) عزل اتجاهي للمعرفات والأوقات والإحداثيات: يمنع انقلاب ترتيبها في RTL */
-  .ltr{direction:ltr !important;unicode-bidi:isolate !important;white-space:nowrap !important;display:inline-block}
+  thead{display:table-header-group}
+  thead tr{break-after:avoid;page-break-after:avoid}
+  p,li{orphans:2;widows:2}
+  .map-legend,.map-viz,.tbl-wrap,.changes,.decision,.viz,.card{break-inside:auto !important;page-break-inside:auto !important}
+  /* Chromium لا يجزّئ حاويات grid/flex بين الصفحات، فتتدفّق هنا بترتيب inline-block
+     يحفظ هيئة العمودين/البطاقات نفسها، مع السماح بالانقسام بين الصفحات */
+  .wrap,.changes,.dc-grid,.kpis,.masthead,.map-legend,.src-grid,.glossary,.tl-viz,.viz,.card,.decision{display:block !important}
+  .kpis > *,.masthead > *,.map-legend > li,.glossary > li,.src-grid > *{display:inline-block !important;vertical-align:top !important;width:48.5% !important;margin:0 0 2.5mm 1% !important;box-sizing:border-box !important}
+  .dc-grid > *,.dc-row{display:block !important;width:100% !important}
+  .dc-row > *:first-child{display:inline-block !important;width:26% !important;vertical-align:top !important}
+  .dc-row > *:last-child{display:inline-block !important;width:72% !important;vertical-align:top !important}
+  .changes > *{display:block !important;width:100% !important}
+  .viz > *,.card > *{box-sizing:border-box}
+  /* ضغط تباعد الأقسام: يوفّر نحو 40 مم فتنتقل نهاية التقرير إلى صفحتها السابقة */
+  section.doc{padding:0 0 2.5mm !important}
+  section.doc > h2{margin:3mm 0 1.5mm !important}
+  .sec-lede{margin:0 0 2mm !important}
+  .h-rule{margin:1mm 0 2mm !important}
+  /* تشخيص: إلغاء كل قواعد منع الكسر لتحديد مصدر الفراغات */
+  *{break-after:auto !important;break-before:auto !important}
+  body,p,li,td,th{line-height:1.36 !important}
+  /* overflow مخفي يمنع Chromium من تقسيم الحاوية بين الصفحات فتُدفع كاملة وتُفرّغ الورقة */
+  *{overflow:visible !important}
+  .map-panel{padding:2mm 2.5mm !important}
+  .map-legend{margin-top:1.5mm !important}
+  .map-legend li{margin:0 0 1mm !important;font-size:8.4pt !important;line-height:1.3 !important}
+  .kpis > *{width:32% !important;padding:1.6mm 2mm !important;margin:0 0 1.5mm 1% !important}
+  .kpis .k-v{font-size:14pt !important;margin:0.5mm 0 !important}
+  .kpis .k-l{font-size:8.6pt !important;line-height:1.25 !important;min-height:0 !important}
+  .kpis .k-m{font-size:7.6pt !important;line-height:1.25 !important}
+  .dc-grid{gap:1.5mm !important}
+  section.doc{font-size:10.2pt !important}
+
+}
+
 }
 """
 
@@ -1042,14 +1043,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
     kpis = meta.get("hero_kpis", [])
     if kpis:
         tiles = []
-        more = []
-        for _i, k in enumerate(kpis):
-            if _i >= 3:
-                more.append(
-                    f'<span class="km-i">{inline(k.get("label", ""))}: '
-                    f'<b class="bidi">{esc(k.get("value", ""))}</b></span>'
-                )
-                continue
+        for k in kpis:
             acc = k.get("accent", "ok")
             if acc not in ("ok", "info", "warn", "danger"):
                 acc = "ok"
@@ -1061,9 +1055,6 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
                 + f'<div class="k-n">{inline(k.get("note", ""))}</div></div>'
             )
         kpi_html = '<div class="kpis">' + "".join(tiles) + "</div>"
-        if more:
-            kpi_html += ('<div class="kpis-more reveal">باقي المؤشرات: '
-                         + " · ".join(more) + "</div>")
 
     threat = meta.get("threat_level", "")
     tcls = threat_class(threat) if threat else ""
@@ -1261,7 +1252,10 @@ def main():
     except BuildError as e:
         print(f"فشل البناء: {e}", file=sys.stderr)
         return 3
-    print(f"OK {p} ({p.stat().st_size} bytes, {count} أقسام)")
+    print(f"OK {p} ({p.stat().st_size} bytes, {count
+  .dc-grid{display:block !important;overflow:visible !important}
+  .dc-grid > *{display:inline-block !important;width:48.5% !important;vertical-align:top !important;margin:0 0 2mm 1% !important;box-sizing:border-box !important}
+} أقسام)")
     return 0
 
 
