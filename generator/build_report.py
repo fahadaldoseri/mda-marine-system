@@ -403,14 +403,18 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   #sec-16{display:none !important}
   p,li,blockquote{orphans:3;widows:3}
   /* اقتصاد الورق: تُقاس الخريطة على ارتفاع صفحة واحدة مع عنوانها */
-  .map-viz svg{max-height:72mm;height:auto}
+  .map-viz svg{max-height:118mm;height:auto}
   .rmk,.glossary{break-inside:avoid;page-break-inside:avoid}
   /* انضباط بصري: خطوط فاصلة رقيقة بدل تظليل الصفوف */
   tbody tr:nth-child(even){background:#fff !important}
   tbody td{border-bottom:.4pt solid #e2e8f0}
   .kpi,.viz,.src,.card,.notice,.threat,.chip,.decision,.bar-track{border-radius:2.4mm}
   .threat{display:inline-block;min-width:52mm}
-  .mp-events text{font-size:12px}
+  .mp-events text{font-size:13.5px}
+  /* أرقام علامات الخريطة: لا بد من تخصيص أعلى لأن قاعدة الشاشة أخصّ */
+  .mp-events .mp-num{font-size:13px}
+  /* لا تباعد أحرف على العربية داخل الخريطة (يفكّ الاتصال) */
+  .mp-country,.mp-sea-lbl,.mp-port-lbl{letter-spacing:0}
   /* لا يُترك عنوان قسم في نهاية صفحة ومحتواه في التالية */
   .h-rule,.sec-lede{break-after:avoid;page-break-after:avoid}
   /* ضغط الغلاف: تقليل الفراغ في الصفحة الأولى */

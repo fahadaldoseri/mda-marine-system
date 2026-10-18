@@ -304,14 +304,18 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   #sec-16{display:none !important}
   p,li,blockquote{orphans:3;widows:3}
   /* اقتصاد الورق: تُقاس الخريطة على ارتفاع صفحة واحدة مع عنوانها */
-  .map-viz svg{max-height:72mm;height:auto}
+  .map-viz svg{max-height:118mm;height:auto}
   .rmk,.glossary{break-inside:avoid;page-break-inside:avoid}
   /* انضباط بصري: خطوط فاصلة رقيقة بدل تظليل الصفوف */
   tbody tr:nth-child(even){background:#fff !important}
   tbody td{border-bottom:.4pt solid #e2e8f0}
   .kpi,.viz,.src,.card,.notice,.threat,.chip,.decision,.bar-track{border-radius:2.4mm}
   .threat{display:inline-block;min-width:52mm}
-  .mp-events text{font-size:12px}
+  .mp-events text{font-size:13.5px}
+  /* أرقام علامات الخريطة: لا بد من تخصيص أعلى لأن قاعدة الشاشة أخصّ */
+  .mp-events .mp-num{font-size:13px}
+  /* لا تباعد أحرف على العربية داخل الخريطة (يفكّ الاتصال) */
+  .mp-country,.mp-sea-lbl,.mp-port-lbl{letter-spacing:0}
   /* لا يُترك عنوان قسم في نهاية صفحة ومحتواه في التالية */
   .h-rule,.sec-lede{break-after:avoid;page-break-after:avoid}
   /* ضغط الغلاف: تقليل الفراغ في الصفحة الأولى */
@@ -597,7 +601,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     <div class="threat risk-high"><div class="lbl">مستوى التهديد</div><div class="val">مرتفع</div></div>
     <div>
       <p class="lede">أصاب مقذوفان غير محددَي المصدر سفينتي حاويات سنغافوريتين في 13 أكتوبر 2026 داخل مضيق هرمز ومياه عُمان: «GFS PRIDE» غرقت بعد حريق وأُخلي طاقمها وعدده 21 فردًا بسلام، و«GFS GISELLE» أبحرت بقواها الذاتية إلى مرسى آمن وطاقمها وعدده 22 فردًا بسلام. ولا جهة أعلنت مسؤوليتها، ولا يوجد فحص فني منشور.</p>
-      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-18 16:03 UTC</b></span></div>
+      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-18 16:31 UTC</b></span></div>
     </div>
   </header>
 
@@ -1027,7 +1031,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> تقرير خاص — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: UTC وتوقيت البحرين (UTC+3). المصادر الرسمية هي الأساس، والنقل الإعلامي مُوسَم نقلًا لا تحققًا.
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-18 16:03 UTC</bdi> — <b>المرجع الزمني:</b> UTC.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-18 16:31 UTC</bdi> — <b>المرجع الزمني:</b> UTC.
     
     <div class="glossary"><b>تعريف المصطلحات:</b><ul><li><b>مقذوف غير محدد المصدر</b>: مقذوف لم تُعلن جهة رسمية نوعه ولا مصدره.</li><li><b>سفينة بضائع جافة (Bulk carrier)</b>: سفينة شحن تحمل بضائع جافة غير معبأة في عنابرها، لا ناقلة نفط.</li><li><b>إخلاء الطاقم</b>: إخراج الطاقم من السفينة عند تعذّر السيطرة على الخطر.</li><li><b>إسناد رسمي أمريكي</b>: نسبة الجهة المنفذة إلى مقذوف للحرس الثوري الإيراني في منشور رسمي للقيادة المركزية الأمريكية، وهو إسناد دولة واحدة غير مؤكد مستقلًا.</li><li><b>آخر إشارة تتبّع (AIS)</b>: آخر موضع استقبلته منصات التتبّع، وليس وقت الإصابة ولا وقت إغلاق الجهاز.</li></ul></div>
   </footer>

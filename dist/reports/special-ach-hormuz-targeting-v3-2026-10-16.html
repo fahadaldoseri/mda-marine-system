@@ -304,14 +304,18 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   #sec-16{display:none !important}
   p,li,blockquote{orphans:3;widows:3}
   /* اقتصاد الورق: تُقاس الخريطة على ارتفاع صفحة واحدة مع عنوانها */
-  .map-viz svg{max-height:72mm;height:auto}
+  .map-viz svg{max-height:118mm;height:auto}
   .rmk,.glossary{break-inside:avoid;page-break-inside:avoid}
   /* انضباط بصري: خطوط فاصلة رقيقة بدل تظليل الصفوف */
   tbody tr:nth-child(even){background:#fff !important}
   tbody td{border-bottom:.4pt solid #e2e8f0}
   .kpi,.viz,.src,.card,.notice,.threat,.chip,.decision,.bar-track{border-radius:2.4mm}
   .threat{display:inline-block;min-width:52mm}
-  .mp-events text{font-size:12px}
+  .mp-events text{font-size:13.5px}
+  /* أرقام علامات الخريطة: لا بد من تخصيص أعلى لأن قاعدة الشاشة أخصّ */
+  .mp-events .mp-num{font-size:13px}
+  /* لا تباعد أحرف على العربية داخل الخريطة (يفكّ الاتصال) */
+  .mp-country,.mp-sea-lbl,.mp-port-lbl{letter-spacing:0}
   /* لا يُترك عنوان قسم في نهاية صفحة ومحتواه في التالية */
   .h-rule,.sec-lede{break-after:avoid;page-break-after:avoid}
   /* ضغط الغلاف: تقليل الفراغ في الصفحة الأولى */
@@ -597,7 +601,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     <div class="threat risk-high"><div class="lbl">مستوى التهديد</div><div class="val">مرتفع</div></div>
     <div>
       <p class="lede">من العدّ الثنائي للتناقضات إلى مجموع موزون: وزن موثوقية المصدر × القوة التشخيصية، مع نسبة عدم التناسب R كوزن في دليل المقام. النتيجة بعد تدقيق مستقل: فرضية الانتماء أولًا (19.35) والخط الملاحي ثانيًا (14.32)، والعلم السنغافوري ساقطة بصافي سالب. والترتيب صمد في تسعة من عشرة سيناريوهات حساسية.</p>
-      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-18 16:03 UTC</b></span></div>
+      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-18 16:31 UTC</b></span></div>
     </div>
   </header>
 
@@ -1248,7 +1252,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> مصفوفة ACH نسخة 3 — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: UTC وتوقيت البحرين (UTC+3).
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-18 16:03 UTC</bdi> — <b>المرجع الزمني:</b> UTC.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-18 16:31 UTC</bdi> — <b>المرجع الزمني:</b> UTC.
     
     <div class="glossary"><b>تعريف المصطلحات:</b><ul><li><b>الترجيح الكمّي الموزون</b>: إعطاء كل دليل وزنًا بحسب موثوقية مصدره وقوّته التشخيصية، ثم جمع الإشارات بدل عدّ التناقضات.</li><li><b>القوة التشخيصية</b>: مقدار قدرة الدليل على التمييز بين الفرضيات المتنافسة، لا مجرد صحته.</li><li><b>نسبة عدم التناسب (R)</b>: حصة الإصابات مقسومة على حصة التعرّض؛ 1 تعني أن التعرّض وحده يفسّر الإصابات.</li><li><b>التغطية</b>: نصيب الأدلة الداعمة من وزن الأدلة الكلي — كم من الأدلة يفسّره هذا التفسير.</li><li><b>النقاء</b>: وزن الدعم مقسومًا على الدعم والتناقض معًا؛ 100% تعني بلا أي دليل مناقض.</li><li><b>التدقيق المستقل</b>: مراجعة نموذج الترجيح وأوزانه وإشاراته بجهة منفصلة، وإعلان ما طُبِّق من اعتراضاتها.</li></ul></div>
   </footer>
