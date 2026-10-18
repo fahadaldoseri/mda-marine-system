@@ -68,6 +68,32 @@ def db():
     return cn
 
 
+_STATE: dict = {}
+WEBHOOK: dict = {}
+
+
+def secrets_cfg() -> dict:
+    """يقرأ سر الويب هوك ومعرّف صاحب القرار من البيئة، وإلا من جدول bot_state."""
+    if _STATE:
+        return _STATE
+    hook, owner = HOOK_SECRET, OWNER
+    if not hook or not owner:
+        try:
+            cn = connect()
+            with cn.cursor() as cur:
+                cur.execute("SELECT k,v FROM bot_state WHERE k IN ('webhook_secret','owner_chat_id')")
+                for k, v in cur.fetchall():
+                    if k == "webhook_secret" and not hook:
+                        hook = (v or "").strip()
+                    if k == "owner_chat_id" and not owner:
+                        owner = (v or "").strip()
+            cn.close()
+        except Exception as e:
+            print(f"[mda-bot] state read failed: {str(e)[:120]}", flush=True)
+    _STATE.update({"hook": hook, "owner": owner})
+    return _STATE
+
+
 def now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
 
@@ -130,7 +156,8 @@ def handle_update(cn, upd: dict) -> None:
     ctype = chat.get("type") or "private"
     row = find(cn, cid)
     status = row[4] if row else None
-    is_owner = bool(OWNER) and cid == OWNER
+    _cfg = secrets_cfg()
+    is_owner = bool(_cfg.get("owner")) and cid == _cfg["owner"]
 
     if low.startswith("/approve") or low.startswith("/deny"):
         if not is_owner:
@@ -205,8 +232,8 @@ def handle_update(cn, upd: dict) -> None:
                         "username=VALUES(username), chat_type=VALUES(chat_type), status='pending', requested_utc=VALUES(requested_utc)",
                         (cid, label, uname, ctype, now()))
         send(cid, "سُجِّل طلبك. لا يُفعَّل الاشتراك إلا بموافقة المركز، وستُبلَّغ عند الاعتماد.")
-        if OWNER:
-            send(OWNER, "<b>طلب اشتراك جديد</b>\n"
+        if _cfg.get("owner"):
+            send(_cfg["owner"], "<b>طلب اشتراك جديد</b>\n"
                         f"الجهة: {label or 'بدون اسم'} {('@'+uname) if uname else ''}\n"
                         f"النوع: {ctype}\nالمعرّف: <code>{cid}</code>\n"
                         f"للموافقة: /approve {cid}\nللرفض: /deny {cid}")
@@ -234,7 +261,7 @@ class Handler(BaseHTTPRequestHandler):
                     cur.execute("SELECT COUNT(*) FROM subscribers WHERE status='approved'")
                     n = cur.fetchone()[0]
                 cn.close()
-                self._send(200, {"ok": True, "approved": n, "ts": now()})
+                self._send(200, {"ok": True, "approved": n, "webhook": WEBHOOK.get("ok"), "ts": now()})
             except Exception as e:
                 self._send(503, {"ok": False, "error": str(e)[:200]})
             return
@@ -245,7 +272,8 @@ class Handler(BaseHTTPRequestHandler):
         if path != "/api/telegram/webhook":
             self._send(404, {"ok": False, "error": "not found"})
             return
-        if HOOK_SECRET and self.headers.get("X-Telegram-Bot-Api-Secret-Token", "") != HOOK_SECRET:
+        _hook = secrets_cfg().get("hook") or ""
+        if _hook and self.headers.get("X-Telegram-Bot-Api-Secret-Token", "") != _hook:
             self._send(401, {"ok": False, "error": "unauthorized"})
             return
         try:
@@ -269,8 +297,19 @@ class Handler(BaseHTTPRequestHandler):
 def main() -> None:
     cn = db()  # تهيئة الجداول قبل الإقلاع
     cn.close()
+    c = secrets_cfg()
     print(f"[mda-bot] ready on 0.0.0.0:{PORT} · owner={'set' if OWNER else 'unset'} "
           f"· token={'set' if TOKEN else 'unset'} · site={SITE}", flush=True)
+    if TOKEN and c.get("hook"):
+        r = tg("setWebhook", {"url": f"{SITE}/api/telegram/webhook",
+                              "secret_token": c["hook"],
+                              "allowed_updates": ["message", "channel_post"],
+                              "drop_pending_updates": True})
+        WEBHOOK["ok"] = bool(r.get("ok"))
+        print(f"[mda-bot] setWebhook: {r.get('ok')} {str(r.get('description') or r.get('error') or '')[:90]}", flush=True)
+    else:
+        WEBHOOK["ok"] = None
+        print("[mda-bot] setWebhook: skipped (token or secret unset)", flush=True)
     ThreadingHTTPServer(("0.0.0.0", PORT), Handler).serve_forever()
 
 
