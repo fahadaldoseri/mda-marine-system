@@ -27,6 +27,16 @@ from datetime import date
 from html import escape as esc
 from pathlib import Path
 
+# الاسم المعتمد للتقرير اليومي (قرار صاحب القرار — 18 أكتوبر 2026)
+DAILY_TITLE = "التقرير اليومي لأمن الملاحة والأوضاع الراهنة في المنطقة"
+DAILY_PLACEHOLDERS = ['التقرير الصباحي اليومي', 'التقرير اليومي', 'التقرير اليومي لأمن الملاحة', 'تقرير أمن الملاحة']
+
+def daily_headline(meta: dict) -> str:
+    """عنوان الإصدار اليومي المعتمد، مع احترام أي عنوان مخصّص غير عام."""
+    value = (meta.get("headline") or meta.get("subtitle") or "").strip()
+    return value if value not in DAILY_PLACEHOLDERS else DAILY_TITLE
+
+
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
@@ -112,7 +122,7 @@ def build_reports(site_root: Path, dist: Path, reports, warnings):
         built.append({
             "iso": r["iso"], "label": r["meta"].get("date_label") or ar_date(r["iso"]),
             "risk": risk, "risk_kind": kind,
-            "headline": (r["meta"].get("headline") or r["meta"].get("subtitle") or "").strip(),
+            "headline": daily_headline(r["meta"]),
             "changed": ((r["meta"].get("decision_card") or {}).get("changed") or "").strip(),
             "action": ((r["meta"].get("decision_card") or {}).get("action") or "").strip(),
             "sections": count, "size": target.stat().st_size,
@@ -163,7 +173,7 @@ def build_index(dist: Path, reports, notfound: bool = False):
         f'<li class="ar-row"><a class="ar-link" href="/reports/{r["iso"]}.html">'
         f'<span class="ar-date">{esc(r["label"])}</span>'
         f'<span class="ar-risk rk-{esc(r["risk_kind"])}">{esc(r["risk"])}</span>'
-        f'<span class="ar-note">{esc((r["headline"] or "تقرير أمن الملاحة")[:88])}</span>'
+        f'<span class="ar-note">{esc((r["headline"] or DAILY_TITLE)[:88])}</span>'
         f'</a></li>'
         for r in reports
     ) or '<li class="ar-empty">لا توجد تقارير منشورة بعد.</li>'

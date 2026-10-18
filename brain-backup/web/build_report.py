@@ -26,6 +26,9 @@ import json
 import re
 import sys
 from datetime import datetime, timezone
+
+# الاسم المعتمد للتقرير اليومي
+DAILY_TITLE = "التقرير اليومي لأمن الملاحة والأوضاع الراهنة في المنطقة"
 from pathlib import Path
 
 
@@ -1001,7 +1004,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
         body.append(section_html)
         body.append("</section>")
 
-    title = meta.get("title") or "التقرير الصباحي اليومي"
+    title = meta.get("title") or DAILY_TITLE
     sub = meta.get("subtitle") or ""
     generated = meta.get("generated_label") or datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
