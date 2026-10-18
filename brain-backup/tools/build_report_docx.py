@@ -18,6 +18,69 @@ from pathlib import Path
 ROOT = Path("/home/ubuntu/brain-marine-news")
 MAP_PNG = Path("/home/ubuntu/seawatch/dist/reports/img")
 HIDDEN_SECTIONS = ("المصادر والمراجع", "موثوقية المصادر")
+WEB_META = ROOT / "web" / "meta"
+HTML_DIR = Path("/home/ubuntu/seawatch/dist/reports")
+
+
+def load_meta(date: str) -> dict:
+    f = WEB_META / f"{date}.json"
+    if not f.exists():
+        return {}
+    import json
+    return json.loads(f.read_text(encoding="utf-8"))
+
+
+def map_legend(date: str) -> list[str]:
+    """عناصر مفتاح الخريطة كما في نسخة الطباعة (لضمان التطابق)."""
+    f = HTML_DIR / f"{date}.html"
+    if not f.exists():
+        return []
+    html = f.read_text(encoding="utf-8")
+    m = re.search(r'<ol class="map-legend">(.*?)</ol>', html, re.S)
+    if not m:
+        return []
+    out = []
+    for it in re.findall(r"<li>(.*?)</li>", m.group(1), re.S):
+        t = re.sub(r"<[^>]+>", " ", it)
+        out.append(re.sub(r"\s+", " ", t).strip())
+    return out
+
+
+def shade(cell, hex_fill: str = "EEF2F7"):
+    from docx.oxml.ns import qn
+    tcpr = cell._tc.get_or_add_tcPr()
+    el = tcpr.makeelement(qn("w:shd"), {qn("w:val"): "clear", qn("w:fill"): hex_fill})
+    tcpr.append(el)
+
+
+def cover_blocks(doc, meta: dict):
+    """ترويسة تشغيلية مطابقة لنسخة PDF: مستوى الخطر وبطاقة القرار."""
+    from docx.shared import Pt
+    dc = meta.get("decision_card") or {}
+    rows = [("مستوى الخطر", dc.get("risk", "")),
+            ("ما تغيّر", dc.get("changed", "")),
+            ("الإجراء المطلوب", dc.get("action", "")),
+            ("ما نراقبه", dc.get("watch", "")),
+            ("السند", dc.get("basis", ""))]
+    rows = [(k, v) for k, v in rows if v]
+    if not rows:
+        return
+    t = doc.add_table(rows=0, cols=2)
+    t.style = "Table Grid"
+    from docx.oxml.ns import qn
+    tblpr = t._tbl.tblPr
+    if tblpr.find(qn("w:bidiVisual")) is None:
+        tblpr.append(tblpr.makeelement(qn("w:bidiVisual"), {}))
+    for k, v in rows:
+        cells = t.add_row().cells
+        for c, val, bold in ((cells[0], k, True), (cells[1], v, False)):
+            c.text = ""
+            p = c.paragraphs[0]
+            set_rtl(p)
+            rich(p, val, base_bold=bold, size=9.5)
+            p.paragraph_format.space_after = Pt(0)
+        shade(cells[0])
+    doc.add_paragraph()
 
 
 def set_rtl(par, align_right: bool = True):
@@ -96,6 +159,8 @@ def build(date: str, include_hidden: bool) -> Path:
 
     src = ROOT / "reports" / f"{date}-sectioned.md"
     lines = src.read_text(encoding="utf-8").split("\n")
+    meta = load_meta(date)
+    legend = map_legend(date)
 
     doc = Document()
     st = doc.styles["Normal"]
@@ -109,6 +174,7 @@ def build(date: str, include_hidden: bool) -> Path:
 
     i = 0
     inserted_map = False
+    cover_done = False
     while i < len(lines):
         line = lines[i].rstrip()
         s = line.strip()
@@ -144,6 +210,15 @@ def build(date: str, include_hidden: bool) -> Path:
                     cap = doc.add_paragraph()
                     set_rtl(cap)
                     add_run(cap, "خريطة الوقائع — مواقع الوقائع داخل نطاق التقرير.", size=8.5)
+                    if legend:
+                        hp = doc.add_paragraph()
+                        set_rtl(hp)
+                        add_run(hp, "مفتاح الخريطة", bold=True, size=10)
+                        for n, item in enumerate(legend, 1):
+                            lp = doc.add_paragraph()
+                            set_rtl(lp)
+                            lp.paragraph_format.space_after = Pt(1)
+                            rich(lp, f"{n}. {item}", size=8.5)
                     inserted_map = True
             continue
 
@@ -162,6 +237,9 @@ def build(date: str, include_hidden: bool) -> Path:
             p = doc.add_paragraph()
             set_rtl(p)
             rich(p, s.lstrip("> ").strip(), size=9)
+            if not cover_done:
+                cover_blocks(doc, meta)
+                cover_done = True
             i += 1
             continue
 
@@ -198,8 +276,10 @@ def main() -> int:
     ap.add_argument("--date", required=True)
     ap.add_argument("--no-hidden", action="store_true",
                     help="استبعاد قسمي المصادر والموثوقية كليًا")
+    ap.add_argument("--with-hidden", action="store_true",
+                    help="إدراج قسمي المصادر والموثوقية (افتراضيًا محجوبان كنسخة الطباعة)")
     a = ap.parse_args()
-    out = build(a.date, include_hidden=not a.no_hidden)
+    out = build(a.date, include_hidden=a.with_hidden and not a.no_hidden)
     print(f"[docx] {out} ({out.stat().st_size/1024:.0f} ك.ب)")
     # تحقق الاكتمال: تحويل إلى PDF وعدّ الأقسام
     r = subprocess.run(["libreoffice", "--headless", "--convert-to", "pdf",

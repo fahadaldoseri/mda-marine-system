@@ -162,3 +162,8 @@
 
 ## سياسة قناة تلغرام
 - `appendices/telegram-policy.md` — القناة للتقرير الصباحي الرسمي فقط، والحاجز في `tools/telegram_send.py`، والسجل في `logs/telegram-sends.jsonl`.
+
+## شكل PDF المعتمد
+- `templates/approved-pdf/print-profile.json` — بصمة الشكل المعتمد v3 وقواعده.
+- `templates/approved-pdf/print-css-frozen.css` — نمط الطباعة المجمّد.
+- `validators/check_pdf_format.py` — البوابة التي ترفض أي PDF مخالف.

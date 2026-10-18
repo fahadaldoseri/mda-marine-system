@@ -151,3 +151,9 @@ python3 validators/check_code_policy.py /home/ubuntu/seawatch/dist
 12. سلّم النص العربي داخل المحادثة، وولّد نسخة صفحة الويب وارفعها لتسليم رابط HTTPS مباشر وفق `appendices/web-delivery.md`. لا تسلّم الرابط قبل نجاح الفحص الآلي. **ثم أرسل رسالة تلغرام** وفق `appendices/telegram-delivery.md`: النص (وفيه رابط التقرير) ثم نسخة PDF للتقرير اليومي كمستند مرفق، والأمر:
     `python3 tools/telegram_send.py --file <ملف_الملخص.html> --document /home/ubuntu/seawatch/dist/reports/pdf/<التاريخ>.pdf`
     ولا يُعلَن التسليم على تلغرام إلا بعد ظهور `ok:true`. وإن تعذّر المرفق يبقى النص والرابط كافيَين ويُسجَّل السبب. وصورة الخريطة تُرفق فقط بأمر صريح.
+
+## أ15 — بوابة شكل PDF المعتمد
+
+1. بعد توليد PDF التقرير، شغّل: `python3 validators/check_pdf_format.py --pdf <pdf> --date <التاريخ>`.
+2. عند النجاح: تابع إلى التسليم. وعند الفشل (رمز 4): **أوقف التسليم**، وأصلح السبب، ولا ترسل نسخة مخالفة.
+3. لا تغيّر نمط الطباعة إلا بأمر صريح من صاحب القرار، ثم أعد تجميد البصمة في `templates/approved-pdf/print-profile.json`.

@@ -36,6 +36,8 @@ import tempfile
 import threading
 from pathlib import Path
 
+B = Path(__file__).resolve().parent.parent
+
 DIST = Path("/home/ubuntu/seawatch/dist")
 PORT = 8799
 
@@ -248,6 +250,15 @@ def main() -> int:
 
     for k, v in result.items():
         print(f"[{k}] {v}")
+    # بوابة إلزامية: لا يُقبل PDF مخالف للشكل المعتمد (v3) الذي اعتمده صاحب القرار
+    if out_pdf.exists():
+        gate = subprocess.run([sys.executable, str(B / "validators" / "check_pdf_format.py"),
+                               "--pdf", str(out_pdf), "--date", args.date],
+                              capture_output=True, text=True)
+        print(gate.stdout.strip())
+        if gate.returncode != 0:
+            print("!! الشكل مخالف للمعتمد — لا يُسلَّم هذا الملف حتى يُصلح أو يُعتمد تغييرًا جديدًا")
+            return gate.returncode
     return 0
 
 
