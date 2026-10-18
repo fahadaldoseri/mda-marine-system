@@ -405,6 +405,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   /* اقتصاد الورق: تُقاس الخريطة على ارتفاع صفحة واحدة مع عنوانها */
   /* الخريطة ينقسم إطارها فقط بين الرسم والمفتاح، فلا تبقى ورقة شبه فارغة */
   .map-viz{break-inside:auto;page-break-inside:auto}
+  .map-viz svg{max-height:100mm;height:auto;break-inside:avoid;page-break-inside:avoid}
   .map-legend{break-inside:auto}
   /* إجبار: كتلة الخريطة تنقسم بين الرسم والمفتاح مهما وردت قاعدة أخصّ */
   #sec-03 .map-viz, .map-viz{break-inside:auto !important;page-break-inside:auto !important}
@@ -513,6 +514,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   thead{display:table-header-group}
   thead tr{break-after:avoid;page-break-after:avoid}
   p,li{orphans:2;widows:2}
+  .map-viz svg{max-height:70mm !important;break-inside:avoid !important}
   .map-legend,.map-viz,.tbl-wrap,.changes,.decision,.viz,.card{break-inside:auto !important;page-break-inside:auto !important}
   /* Chromium لا يجزّئ حاويات grid/flex بين الصفحات، فتتدفّق هنا بترتيب inline-block
      يحفظ هيئة العمودين/البطاقات نفسها، مع السماح بالانقسام بين الصفحات */
@@ -533,6 +535,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   body,p,li,td,th{line-height:1.36 !important}
   /* overflow مخفي يمنع Chromium من تقسيم الحاوية بين الصفحات فتُدفع كاملة وتُفرّغ الورقة */
   *{overflow:visible !important}
+  .map-viz svg{max-height:46mm !important}
   .map-panel{padding:2mm 2.5mm !important}
   .map-legend{margin-top:1.5mm !important}
   .map-legend li{margin:0 0 1mm !important;font-size:8.4pt !important;line-height:1.3 !important}
@@ -542,7 +545,6 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .kpis .k-m{font-size:7.6pt !important;line-height:1.25 !important}
   .dc-grid{gap:1.5mm !important}
   section.doc{font-size:10.2pt !important}
-
 }
 
 }
