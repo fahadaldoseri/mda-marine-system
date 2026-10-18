@@ -76,21 +76,23 @@ def secrets_cfg() -> dict:
     """يقرأ سر الويب هوك ومعرّف صاحب القرار من البيئة، وإلا من جدول bot_state."""
     if _STATE:
         return _STATE
-    hook, owner = HOOK_SECRET, OWNER
-    if not hook or not owner:
+    hook, owner, tok = HOOK_SECRET, OWNER, TOKEN
+    if not hook or not owner or not tok:
         try:
             cn = connect()
             with cn.cursor() as cur:
-                cur.execute("SELECT k,v FROM bot_state WHERE k IN ('webhook_secret','owner_chat_id')")
+                cur.execute("SELECT k,v FROM bot_state WHERE k IN ('webhook_secret','owner_chat_id','bot_token')")
                 for k, v in cur.fetchall():
                     if k == "webhook_secret" and not hook:
                         hook = (v or "").strip()
                     if k == "owner_chat_id" and not owner:
                         owner = (v or "").strip()
+                    if k == "bot_token" and not tok:
+                        tok = (v or "").strip()
             cn.close()
         except Exception as e:
             print(f"[mda-bot] state read failed: {str(e)[:120]}", flush=True)
-    _STATE.update({"hook": hook, "owner": owner})
+    _STATE.update({"hook": hook, "owner": owner, "token": tok})
     return _STATE
 
 
@@ -99,9 +101,10 @@ def now() -> str:
 
 
 def tg(method: str, payload: dict) -> dict:
-    if not TOKEN:
+    tok = TOKEN or (secrets_cfg().get("token") or "")
+    if not tok:
         return {"ok": False, "error": "no token"}
-    req = urllib.request.Request(f"https://api.telegram.org/bot{TOKEN}/{method}",
+    req = urllib.request.Request(f"https://api.telegram.org/bot{tok}/{method}",
                                 data=json.dumps(payload).encode(),
                                 headers={"Content-Type": "application/json"})
     try:
@@ -299,8 +302,8 @@ def main() -> None:
     cn.close()
     c = secrets_cfg()
     print(f"[mda-bot] ready on 0.0.0.0:{PORT} · owner={'set' if OWNER else 'unset'} "
-          f"· token={'set' if TOKEN else 'unset'} · site={SITE}", flush=True)
-    if TOKEN and c.get("hook"):
+          f"· token={'set' if c.get('token') else 'unset'} · site={SITE}", flush=True)
+    if c.get("token") and c.get("hook"):
         r = tg("setWebhook", {"url": f"{SITE}/api/telegram/webhook",
                               "secret_token": c["hook"],
                               "allowed_updates": ["message", "channel_post"],
