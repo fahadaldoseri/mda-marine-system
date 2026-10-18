@@ -77,22 +77,20 @@ def secrets_cfg() -> dict:
     if _STATE:
         return _STATE
     hook, owner, tok = HOOK_SECRET, OWNER, TOKEN
-    if not hook or not owner or not tok:
-        try:
-            cn = connect()
-            with cn.cursor() as cur:
-                cur.execute("SELECT k,v FROM bot_state WHERE k IN ('webhook_secret','owner_chat_id','bot_token')")
-                for k, v in cur.fetchall():
-                    if k == "webhook_secret" and not hook:
-                        hook = (v or "").strip()
-                    if k == "owner_chat_id" and not owner:
-                        owner = (v or "").strip()
-                    if k == "bot_token" and not tok:
-                        tok = (v or "").strip()
-            cn.close()
-        except Exception as e:
-            print(f"[mda-bot] state read failed: {str(e)[:120]}", flush=True)
+    try:
+        cn = connect()
+        with cn.cursor() as cur:
+            cur.execute("SELECT k,v FROM bot_state WHERE k IN ('webhook_secret','owner_chat_id','bot_token')")
+            db = {k: (v or "").strip() for k, v in cur.fetchall()}
+        cn.close()
+        hook = db.get("webhook_secret") or hook
+        owner = db.get("owner_chat_id") or owner
+        tok = db.get("bot_token") or tok
+    except Exception as e:
+        print(f"[mda-bot] state read failed: {str(e)[:120]}", flush=True)
     _STATE.update({"hook": hook, "owner": owner, "token": tok})
+    src = "db" if tok and tok != TOKEN else ("env" if TOKEN else "none")
+    print(f"[mda-bot] secrets: token={src} · hook={'set' if hook else 'unset'} · owner={'set' if owner else 'unset'}", flush=True)
     return _STATE
 
 
