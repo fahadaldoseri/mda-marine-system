@@ -123,6 +123,26 @@ def scan(path):
                     "sample": "، ".join(sorted(set(hits))[:8]),
                 })
             continue
+        if pat["id"] in ("coord_dashed", "coord_decimal"):
+            # الصيغة المعتمدة: الدرجات والدقائق. تُستثنى الكتل الكودية والاقتباسات المعلّمة.
+            scope_lines, in_fence = [], False
+            for ln in text.splitlines():
+                if ln.lstrip().startswith("```"):
+                    in_fence = not in_fence
+                    continue
+                if in_fence or "استثناء-إحداثيات" in ln:
+                    continue
+                scope_lines.append(ln)
+            hits = [m.group(0).strip() for m in re.finditer(pat["regex"], "\n".join(scope_lines))]
+            if hits:
+                label = ("صيغة إحداثيات مفصولة بشرطات" if pat["id"] == "coord_dashed"
+                         else "درجات عشرية غير معتمدة")
+                findings["blocked" if pat.get("blocking", True) else "warn"].append({
+                    "type": "pattern", "term": label,
+                    "reason": pat["reason"], "replacement": pat["replacement"],
+                    "count": len(hits), "sample": "، ".join(sorted(set(hits))[:6]),
+                })
+            continue
         hits = re.findall(pat["regex"], flat_collapsed)
         if hits:
             bucket = "blocked" if pat.get("blocking") else "warn"
