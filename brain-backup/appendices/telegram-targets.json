@@ -1,0 +1,20 @@
+{
+  "note": "جهات تسليم التقرير اليومي على تلغرام. تُقرأ آليًا من tools/telegram_send.py. enabled=false معطَّلة حتى تُعتمد. لا يُكتب أي رمز ولا معرّف داخل تقرير أو ملف عام.",
+  "targets": [
+    {
+      "label": "المحادثة الشخصية",
+      "chat_id": "7792142387",
+      "type": "private",
+      "enabled": true,
+      "confirmed_utc": "2026-10-18"
+    },
+    {
+      "label": "مجموعة العمل",
+      "chat_id": "",
+      "type": "group",
+      "enabled": false,
+      "confirmed_utc": "",
+      "requirement": "أضِف البوت @MDA_BH_bot إلى المجموعة، ثم أرسل أي رسالة داخل المجموعة ليُقرأ معرّفها تلقائيًا."
+    }
+  ]
+}
