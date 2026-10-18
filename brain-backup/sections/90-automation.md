@@ -39,6 +39,8 @@ python3 tools/estimate_accuracy.py
 # تحديث الموقع الدائم ونشره
 python3 /home/ubuntu/seawatch/generator/sync_from_brain.py --date <التاريخ>
 python3 /home/ubuntu/seawatch/generator/build_site.py --check   # يفشل عند أي وسم مهرَّب أو صفحة ناقصة
+# توليد نسخة PDF للإصدار (مخرج منشور مع الموقع) — قبل الحفظ والنشر
+python3 tools/export_report_assets.py --date <التاريخ> --only pdf
 cd /home/ubuntu/seawatch && git add -A && git commit -m "إصدار <التاريخ>" && git fetch origin main && git push origin main
 # ثم النشر عبر أداة الاستضافة: webdev.config {"method":"POST","path":"publish","body":{}}
 ```
@@ -146,3 +148,6 @@ python3 validators/check_code_policy.py /home/ubuntu/seawatch/dist
 4. التقارير الخاصة: نفس الفحص قبل التسليم، مع التأكد من وجود «الإجراء المطلوب» و«مجهولات مؤثرة في التقدير» (ط13).
 5. أسبوعيًا: `python3 tools/style_learn.py --apply` لاستخراج مرشحين جدد من سجل التعلم، ثم `--promote` بعد اعتماد المستخدم.
 6. عند ورود لفظ ممنوع جديد من تصحيح المستخدم: `python3 validators/check_style.py --add "العبارة" --reason "السبب" --replacement "البديل"` فورًا.
+12. سلّم النص العربي داخل المحادثة، وولّد نسخة صفحة الويب وارفعها لتسليم رابط HTTPS مباشر وفق `appendices/web-delivery.md`. لا تسلّم الرابط قبل نجاح الفحص الآلي. **ثم أرسل رسالة تلغرام** وفق `appendices/telegram-delivery.md`: النص (وفيه رابط التقرير) ثم نسخة PDF للتقرير اليومي كمستند مرفق، والأمر:
+    `python3 tools/telegram_send.py --file <ملف_الملخص.html> --document /home/ubuntu/seawatch/dist/reports/pdf/<التاريخ>.pdf`
+    ولا يُعلَن التسليم على تلغرام إلا بعد ظهور `ok:true`. وإن تعذّر المرفق يبقى النص والرابط كافيَين ويُسجَّل السبب. وصورة الخريطة تُرفق فقط بأمر صريح.
