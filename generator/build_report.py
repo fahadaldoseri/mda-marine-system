@@ -505,46 +505,26 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .tl-viz .tl-row,.viz svg,.card .kpi{break-inside:avoid;page-break-inside:avoid}
   .decision{animation:none}
 
-  /* ===== سياسة التدفّق الموحّدة: تمنع الفراغات الداخلية (قرار 18 أكتوبر 2026) =====
-     القاعدة: القِطَع الصغيرة محمية من الانقسام، والحاويات الكبيرة تتدفّق بحرية.
-     فتُملأ كل ورقة قبل الانتقال، ولا تُدفع الكتل الكبيرة لإفراغ نصف ورقة. */
-  *{break-inside:auto !important;page-break-inside:auto !important}
-  tr,.kpi,.map-legend li,.glossary li,.dc-row,.ev-item,.chg-item{break-inside:avoid !important;page-break-inside:avoid !important}
+    /* ===== إصلاحات الطباعة المعتمدة (18 أكتوبر 2026) =====
+     الهيئة البصرية المعتمدة لا تتغيّر: لا تصغير خطوط ولا تغيير مقاسات العناوين.
+     الإصلاح يقتصر على منع دفع الكتل الكبيرة، وتكرار رؤوس الجداول، وعزل المعرفات. */
+  /* (١) الحاويات الطويلة تتدفّق فتُقسَّم بدل أن تُدفع وتُفرّغ الورقة */
+  .map-panel,.map-viz,.dc-grid,.changes,.glossary,.tl-viz,.src-grid{display:block !important;overflow:visible !important}
+  .dc-grid > *{display:inline-block !important;width:48.5% !important;vertical-align:top !important;
+               margin:0 0 2mm 1% !important;box-sizing:border-box !important}
+  .changes > *,.src-grid > *{display:block !important;width:100% !important}
+  .map-legend > li{display:inline-block !important;width:48.5% !important;vertical-align:top !important;
+                   margin:0 0 1.2mm 1% !important;box-sizing:border-box !important}
+  /* (٢) الذرّات القصيرة محمية من الانقسام */
+  tr,.kpi,.dc-row,.map-legend li{break-inside:avoid !important;page-break-inside:avoid !important}
+  /* (٣) رأس الجدول يتكرر في كل صفحة ينقسم إليها الجدول */
+  thead{display:table-header-group !important}
+  /* (٤) لا عنوان يتيم في أسفل صفحة */
   section.doc > h2,section.doc h3,section.doc h4,.h-rule,.sec-lede{break-after:avoid !important;page-break-after:avoid !important}
-  thead{display:table-header-group}
-  thead tr{break-after:avoid;page-break-after:avoid}
-  p,li{orphans:2;widows:2}
-  .map-viz svg{max-height:70mm !important;break-inside:avoid !important}
-  .map-legend,.map-viz,.tbl-wrap,.changes,.decision,.viz,.card{break-inside:auto !important;page-break-inside:auto !important}
-  /* Chromium لا يجزّئ حاويات grid/flex بين الصفحات، فتتدفّق هنا بترتيب inline-block
-     يحفظ هيئة العمودين/البطاقات نفسها، مع السماح بالانقسام بين الصفحات */
-  .wrap,.changes,.dc-grid,.kpis,.masthead,.map-legend,.src-grid,.glossary,.tl-viz,.viz,.card,.decision{display:block !important}
-  .kpis > *,.masthead > *,.map-legend > li,.glossary > li,.src-grid > *{display:inline-block !important;vertical-align:top !important;width:48.5% !important;margin:0 0 2.5mm 1% !important;box-sizing:border-box !important}
-  .dc-grid > *,.dc-row{display:block !important;width:100% !important}
-  .dc-row > *:first-child{display:inline-block !important;width:26% !important;vertical-align:top !important}
-  .dc-row > *:last-child{display:inline-block !important;width:72% !important;vertical-align:top !important}
-  .changes > *{display:block !important;width:100% !important}
-  .viz > *,.card > *{box-sizing:border-box}
-  /* ضغط تباعد الأقسام: يوفّر نحو 40 مم فتنتقل نهاية التقرير إلى صفحتها السابقة */
-  section.doc{padding:0 0 2.5mm !important}
-  section.doc > h2{margin:3mm 0 1.5mm !important}
-  .sec-lede{margin:0 0 2mm !important}
-  .h-rule{margin:1mm 0 2mm !important}
-  /* تشخيص: إلغاء كل قواعد منع الكسر لتحديد مصدر الفراغات */
-  *{break-after:auto !important;break-before:auto !important}
-  body,p,li,td,th{line-height:1.36 !important}
-  /* overflow مخفي يمنع Chromium من تقسيم الحاوية بين الصفحات فتُدفع كاملة وتُفرّغ الورقة */
-  *{overflow:visible !important}
-  .map-viz svg{max-height:46mm !important}
-  .map-panel{padding:2mm 2.5mm !important}
-  .map-legend{margin-top:1.5mm !important}
-  .map-legend li{margin:0 0 1mm !important;font-size:8.4pt !important;line-height:1.3 !important}
-  .kpis > *{width:32% !important;padding:1.6mm 2mm !important;margin:0 0 1.5mm 1% !important}
-  .kpis .k-v{font-size:14pt !important;margin:0.5mm 0 !important}
-  .kpis .k-l{font-size:8.6pt !important;line-height:1.25 !important;min-height:0 !important}
-  .kpis .k-m{font-size:7.6pt !important;line-height:1.25 !important}
-  .dc-grid{gap:1.5mm !important}
-  section.doc{font-size:10.2pt !important}
+  /* (٥) الخريطة بعرضها الكامل وارتفاع يدخل في الورقة */
+  .map-viz svg{max-height:74mm !important;break-inside:avoid !important}
+  /* (٦) عزل اتجاهي للمعرفات والأوقات والإحداثيات: يمنع انقلاب ترتيبها في RTL */
+  .ltr{direction:ltr !important;unicode-bidi:isolate !important;white-space:nowrap !important;display:inline-block}
 }
 """
 
@@ -1194,8 +1174,38 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
     # سياسة عرض الرموز (2+5): تبسيط شامل لكل ما هو خارج قسم الوقائع
     doc = codes.demote_page(doc, report_date, official)
     out_path.parent.mkdir(parents=True, exist_ok=True)
+    doc = isolate_ltr(doc)
     out_path.write_text(doc, encoding="utf-8")
     return out_path, len(sections)
+
+
+LTR_PATTERNS = [
+    r"\b\d{4,6}Z(?:\s+[A-Z]{3}\s*\d{2})?\b",                       # DTG: 180400Z OCT 26
+    r"\b\d{1,3}[-°]\d{1,2}(?:\.\d+)?['′]?\s*[NS]\b",               # 26-16.8N
+    r"\b[NS]\s?\d{1,3}[°-]\d{1,2}(?:\.\d+)?['′]?",                  # N 057°40.65′
+    r"\b\d{1,3}[-°]\d{1,2}(?:\.\d+)?['′]?\s*[EW]\b",               # 056-08.6E
+    r"\b[EW]\s?\d{1,3}[°-]\d{1,2}(?:\.\d+)?['′]?",                  # E 21.48°
+    r"\bIMO\s?\d{6,7}\b", r"\bMMSI\s?\d{8,9}\b",
+    r"\bUKMTO\s?\d{2,3}\s?[-–]\s?\d{2}\b", r"\bNAVAREA\s+[IVX]+\s+\d{2,3}/\d{2}\b",
+    r"\b\d{2,3}/\d{2}\b", r"\b[A-Z][A-Z0-9]{2,}(?:\s+[A-Z0-9]{2,})*\b",
+]
+_LTR_RE = None
+
+
+def isolate_ltr(html: str) -> str:
+    """يغلّف المعرّفات والأوقات والإحداثيات والأسماء اللاتينية بكتلة LTR معزولة.
+
+    يمنع انقلاب ترتيب الإحداثيات والرموز عند العرض في سياق عربي RTL.
+    """
+    global _LTR_RE
+    if _LTR_RE is None:
+        _LTR_RE = re.compile("|".join(f"(?:{p})" for p in LTR_PATTERNS))
+    parts = re.split(r"(<[^>]+>)", html)
+    for k, part in enumerate(parts):
+        if not part or part.startswith("<"):
+            continue
+        parts[k] = _LTR_RE.sub(lambda m: f'<span class="ltr">{m.group(0)}</span>', part)
+    return "".join(parts)
 
 
 def main():
