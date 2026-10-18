@@ -32,6 +32,64 @@ B = Path(__file__).resolve().parent.parent
 TARGETS_FILE = B / "appendices" / "telegram-targets.json"
 LEGACY_CHAT = B / "appendices" / "telegram-chat.json"
 RELAY = "https://r.jina.ai/"
+SEND_LOG = B / "logs" / "telegram-sends.jsonl"
+
+
+def _log(entry: dict) -> None:
+    """سجل تدقيق لكل محاولة إرسال: مسموحة أو مرفوضة."""
+    import datetime as _dt
+    SEND_LOG.parent.mkdir(parents=True, exist_ok=True)
+    entry = {"ts": _dt.datetime.now().astimezone().isoformat(timespec="seconds"), **entry}
+    with SEND_LOG.open("a", encoding="utf-8") as fh:
+        fh.write(json.dumps(entry, ensure_ascii=False) + "\n")
+
+
+def _sent_today(target_label: str, date: str) -> bool:
+    """هل أُرسل تقرير هذا اليوم فعلًا؟ (منع التكرار والرسائل الجانبية)"""
+    if not SEND_LOG.exists():
+        return False
+    for line in SEND_LOG.read_text(encoding="utf-8").splitlines():
+        try:
+            e = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if e.get("decision") == "sent" and e.get("date") == date and e.get("target") == target_label:
+            return True
+    return False
+
+
+def guard(args, text: str, targets: list[dict]) -> tuple[bool, str]:
+    """سياسة قناة تلغرام الملزمة: القناة للتقارير الصباحية الرسمية فقط.
+
+    تُرفض الرسائل الجانبية والتحديثات والمعاينات ورسائل الاختبار والملفات المؤقتة،
+    وأي مرفق لا يخصّ تقرير اليوم (PDF التقرير أو خريطته).
+    """
+    if args.owner_approved:
+        if not (args.reason or "").strip():
+            return False, "الاستثناء يتطلب --reason مكتوبًا (أمر صريح من صاحب القرار)"
+        return True, f"استثناء بأمر صاحب القرار: {args.reason.strip()}"
+    if not args.daily_report:
+        return False, ("القناة مخصّصة للتقرير الصباحي الرسمي فقط. لا يُرسَل أي محتوى آخر "
+                       "(تحديثات، معاينات، ملفات جانبية، اختبارات). "
+                       "للتقرير الرسمي: --daily-report --date YYYY-MM-DD")
+    if not re.match(r"^\d{4}-\d{2}-\d{2}$", args.date or ""):
+        return False, "التقرير الرسمي يتطلب --date بصيغة YYYY-MM-DD"
+    if "و ب" not in text:
+        return False, "نص التقرير الرسمي يجب أن يحمل رقم الإصدار «و ب»"
+    if not any(k in text for k in ("النافذة", "الفترة", "توقيت البحرين")):
+        return False, "نص التقرير الرسمي يجب أن يحمل النافذة الزمنية وتوقيت البحرين"
+    for path, kind in ((args.document, "مستند"), (args.photo, "صورة")):
+        if not path:
+            continue
+        p = Path(path)
+        allowed = [f"{args.date}.pdf", f"map-{args.date}.png", f"التقرير-اليومي-{args.date}.pdf"]
+        if p.name not in allowed:
+            return False, f"{kind} غير مسموح: {p.name} (المسموح: PDF تقرير اليوم أو خريطته)"
+    for t in targets:
+        if _sent_today(t.get("label", "?"), args.date):
+            return False, (f"أُرسل تقرير {args.date} إلى «{t.get('label')}» سابقًا. "
+                           "لا تكرار ولا تحديثات بعد الإرسال.")
+    return True, "تقرير صباحي رسمي — مطابق للسياسة"
 
 
 def load_targets(selector: str | None) -> list[dict]:
@@ -128,6 +186,12 @@ def main() -> int:
     ap.add_argument("--caption", default="")
     ap.add_argument("--targets")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--daily-report", action="store_true",
+                    help="إرسال التقرير الصباحي الرسمي (الاستخدام الوحيد المسموح)")
+    ap.add_argument("--date", help="تاريخ التقرير YYYY-MM-DD")
+    ap.add_argument("--owner-approved", action="store_true",
+                    help="استثناء بأمر صريح من صاحب القرار، ويتطلب --reason")
+    ap.add_argument("--reason", default="", help="سبب الاستثناء المكتوب")
     args = ap.parse_args()
 
     token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
@@ -147,10 +211,20 @@ def main() -> int:
         return 2
 
     targets = load_targets(args.targets)
+    allowed, verdict = guard(args, text, targets)
+    if not allowed:
+        _log({"decision": "refused", "date": args.date, "reason": verdict,
+              "targets": [t.get("label") for t in targets],
+              "document": args.document, "photo": args.photo})
+        print(f"[تلغرام] مرفوض — {verdict}")
+        return 3
     if args.dry_run:
+        _log({"decision": "dry-run", "date": args.date, "reason": verdict,
+              "targets": [t.get("label") for t in targets]})
         print("اختبار جاف — الجهات المستهدفة:")
         for t in targets:
             print(f"  · {t['label']} ({t['type']}) · enabled={t.get('enabled')}")
+        print(f"السياسة: {verdict}")
         print(f"نص: {len(text)} حرف · صورة: {args.photo or 'لا'} · مستند: {args.document or 'لا'}")
         return 0
 
@@ -171,6 +245,10 @@ def main() -> int:
         else:
             failures += 1
         print(f"[تلغرام] {t['label']}: " + " · ".join(log))
+        if ok_text:
+            _log({"decision": "sent", "date": args.date, "target": t.get("label"),
+                  "kind": "daily-report" if args.daily_report else "owner-approved",
+                  "reason": verdict, "detail": " · ".join(log)})
     return 1 if failures else 0
 
 
