@@ -299,7 +299,27 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
     --map-grid:#d3dce6;--map-grid-lbl:#6b7f94;--map-label:#20303f;--map-country:#6b7f94;
     --map-sea-label:#5a7086;--map-strait:#8a2b25;
   }
-  body{background:#fff;color:#111;font-size:10.8pt;line-height:1.75}
+  body{background:#fff;color:#111;font-size:10.8pt;line-height:1.62}
+  /* لا تُطبع المصادر والمراجع ولا ملحق موثوقية المصادر في نسخة PDF */
+  #sec-16{display:none !important}
+  p,li,blockquote{orphans:3;widows:3}
+  /* اقتصاد الورق: تُقاس الخريطة على ارتفاع صفحة واحدة مع عنوانها */
+  .map-viz svg{max-height:72mm;height:auto}
+  .rmk,.glossary{break-inside:avoid;page-break-inside:avoid}
+  /* انضباط بصري: خطوط فاصلة رقيقة بدل تظليل الصفوف */
+  tbody tr:nth-child(even){background:#fff !important}
+  tbody td{border-bottom:.4pt solid #e2e8f0}
+  .kpi,.viz,.src,.card,.notice,.threat,.chip,.decision,.bar-track{border-radius:2.4mm}
+  .threat{display:inline-block;min-width:52mm}
+  .mp-events text{font-size:12px}
+  /* لا يُترك عنوان قسم في نهاية صفحة ومحتواه في التالية */
+  .h-rule,.sec-lede{break-after:avoid;page-break-after:avoid}
+  /* ضغط الغلاف: تقليل الفراغ في الصفحة الأولى */
+  .masthead{padding:0 0 4mm}
+  .masthead h1{margin:0 0 3mm}
+  .threat{padding:4mm 6mm}
+  .kpis{margin-top:3mm}
+  .cls-banner{margin-top:3mm}
   body::before{display:none}
   .topbar,.no-print{display:none !important}
   .wrap{max-width:none;padding:0}
