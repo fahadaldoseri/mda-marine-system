@@ -241,7 +241,7 @@ def handle_update(cn, upd: dict) -> None:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "MDA-Bot/1.0"
+    server_version = "MDA-Bot/1.1"
 
     def _send(self, code: int, payload: dict) -> None:
         body = json.dumps(payload, ensure_ascii=False).encode()
