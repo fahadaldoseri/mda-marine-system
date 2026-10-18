@@ -134,6 +134,9 @@ a.bidi{white-space:normal}
 .kpi.acc-ok em{background:var(--ok)}
 .kpi .k-l{font-size:12.5px;color:var(--muted);line-height:1.6;min-height:2.6em}
 .kpi .k-v{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-weight:600;font-size:30px;line-height:1.25;margin-top:3px;font-variant-numeric:tabular-nums}
+.kpis-more{font-size:12.5px;color:var(--muted);line-height:1.75;margin:0 0 8px}
+.kpis-more .km-i{white-space:nowrap}
+.kpis-more .km-i b{color:var(--ink)}
 .kpi .k-n{font-size:12px;color:var(--muted);line-height:1.7;margin-top:4px}
 
 .notice{
@@ -423,7 +426,23 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   /* (٤) لا عنوان يتيم في أسفل صفحة */
   section.doc > h2,section.doc h3,section.doc h4,.h-rule,.sec-lede{break-after:avoid !important;page-break-after:avoid !important}
   /* (٥) الخريطة بعرضها الكامل وارتفاع يدخل في الورقة */
-  .map-viz svg{max-height:74mm !important;break-inside:avoid !important}
+  .map-viz svg{max-height:60mm !important;break-inside:avoid !important}
+  /* (٦ب) ضغط الكتل غير النصية (لا يمسّ المتن): لإزالة الصفحة الزائدة بلا تصغير خطوط */
+  section.doc{padding-bottom:3.5mm !important}
+  section.doc > h2{margin:0 0 2.6mm !important}
+  .kpis{gap:8px !important;margin:16px 0 6px !important}
+  .kpi{padding:8px 10px !important}
+  .kpi .k-v{font-size:26px !important}
+  .dc-grid{gap:1.4mm !important}
+  .dc-grid > *{margin-bottom:1.4mm !important}
+  .tbl td,.tbl th{padding:1.5mm 2mm !important;line-height:1.5 !important}
+  .tl-viz li,.src-grid li{margin-bottom:0.8mm !important}
+  /* (٧) مقاسات القراءة المقرّة: متن 11.5pt بتباعد 1.65 */
+  .doc p,.doc li,.doc .lede,.doc blockquote{font-size:11.5pt !important;line-height:1.6 !important}
+  /* (٨) تعبئات مسطّحة: لا تدرّجات في الطباعة */
+  *{background-image:none !important}
+  /* (٩) مفتاح القراءة يُطبع ليكون الوسم لفظيًا لا لونيًا فقط */
+  .rkey{display:block !important}
   /* (٦) عزل اتجاهي للمعرفات والأوقات والإحداثيات: يمنع انقلاب ترتيبها في <span class="ltr">RTL</span> */
   .ltr{direction:ltr !important;unicode-bidi:isolate !important;white-space:nowrap !important;display:inline-block}
 }
@@ -647,9 +666,9 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   
   
-  <div class="kpis"><div class="kpi acc-info reveal"><em></em><div class="k-l">سجلات الأحداث الذرية</div><div class="k-v bidi">145</div><div class="k-n">بعد الدمج والتفكيك — ليس عدد هجمات</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">المسجلات المجمعة من البحث</div><div class="k-v bidi">121</div><div class="k-n">من نتائج الفحص الشهري الموثق</div></div><div class="kpi acc-warn reveal"><em></em><div class="k-l">فترات الفحص</div><div class="k-v bidi">8</div><div class="k-n">من 28 فبراير إلى 11 أكتوبر 2026</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">المصادر المعتمدة المفحوصة</div><div class="k-v bidi">37</div><div class="k-n">مسجلة باسمها ورابطها وحالة فحصها</div></div></div>
+  <div class="kpis"><div class="kpi acc-info reveal"><em></em><div class="k-l">سجلات الأحداث الذرية</div><div class="k-v bidi">145</div><div class="k-n">بعد الدمج والتفكيك — ليس عدد هجمات</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">المسجلات المجمعة من البحث</div><div class="k-v bidi">121</div><div class="k-n">من نتائج الفحص الشهري الموثق</div></div><div class="kpi acc-warn reveal"><em></em><div class="k-l">فترات الفحص</div><div class="k-v bidi">8</div><div class="k-n">من 28 فبراير إلى 11 أكتوبر 2026</div></div></div><div class="kpis-more reveal">باقي المؤشرات: <span class="km-i">المصادر المعتمدة المفحوصة: <b class="bidi">37</b></span></div>
   <div class="notice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/></svg><div>هذا السجل ذاكرة تراكمية للمرجع، وليس حصيلة هجمات. الرقم 145 يمثل سجلات ذرية بعد الدمج والتفكيك، ويلزم قراءته مع التعارضات والفجوات المسجلة.</div></div>
-  <div class="rkey no-print"><span class="rkey-t">مفتاح القراءة:</span><span class="rk k-fact">واقعة مؤكدة</span><span class="rk k-est">تقدير تحليلي</span><span class="rk k-info">بند إعلامي</span><span class="rk k-bg">خلفية مستمرة</span><span class="rk k-watch">مراقبة مستمرة</span></div>
+  <div class="rkey"><span class="rkey-t">مفتاح القراءة:</span><span class="rk k-fact">واقعة مؤكدة</span><span class="rk k-est">تقدير تحليلي</span><span class="rk k-info">بند إعلامي</span><span class="rk k-bg">خلفية مستمرة</span><span class="rk k-watch">مراقبة مستمرة</span><span class="rk k-up">▲ ارتفاع</span><span class="rk k-down">▼ انخفاض</span><span class="rk k-flat">■ ثبات</span></div>
 
   <main>
     

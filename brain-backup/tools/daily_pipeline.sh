@@ -117,5 +117,9 @@ print(f"-- الخلاصة: تغذيات={f} · OFAC={o} · أصول={a} · دم�
 sys.exit(0 if ok else 1)
 PY
 RC=$?
+# بوابة الفحص العشري — فشل مغلق (إن كان ملف PDF قد بُني)
+if [ -f "/home/ubuntu/seawatch/dist/reports/pdf/$D.pdf" ]; then
+  python3 tools/qa_gates.py --date "$D" || RC=$?
+fi
 echo "===== نهاية الخط (رمز الخروج: $RC) =====" | tee -a "$LOG"
 exit $RC

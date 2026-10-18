@@ -47,25 +47,35 @@ def current_print_css() -> str:
     return s[i:]
 
 
-def page_gaps_mm(pdf: Path) -> list[float]:
-    """فراغ أسفل كل صفحة بالمليمتر (قياس حبر فعلي)."""
+def page_metrics(pdf: Path) -> tuple[list[float], list[tuple[int, float]]]:
+    """تعبئة كل صفحة (نسبة منطقة المحتوى المملوءة) وأطول فجوة داخلية بالمليمتر.
+
+    تُقاس منطقة المحتوى بين الترويسة (9 مم) والتذييل (12 مم)، فلا يُحسب التذييل محتوى.
+    """
     from PIL import Image
-    out: list[float] = []
+    fills: list[float] = []
+    voids: list[tuple[int, float]] = []
     with tempfile.TemporaryDirectory() as d:
         subprocess.run(["pdftoppm", "-r", "80", "-png", str(pdf), f"{d}/p"],
-                       capture_output=True, timeout=600)
+                       capture_output=True, timeout=900)
         for f in sorted(Path(d).glob("p-*.png")):
+            n = int(re.search(r"p-(\d+)", f.name).group(1))
             im = Image.open(f).convert("L")
             w, h = im.size
             px = im.load()
-            lowest = 0
-            for y in range(h - 1, -1, -1):
-                dark = sum(1 for x in range(0, w, 4) if px[x, y] < 225)
-                if dark > 2:
-                    lowest = y
-                    break
-            out.append(round((h - lowest) / (80 / 25.4), 1))
-    return out
+            top, bot = int(9 / 25.4 * 80), h - int(12 / 25.4 * 80)
+            rows = [any(px[x, y] < 245 for x in range(0, w, 3)) for y in range(top, bot)]
+            last = max([i for i, v in enumerate(rows) if v] or [0])
+            fills.append((last + 1) / len(rows) * 100)
+            best = cur = 0
+            for v in rows:
+                if not v:
+                    cur += 1
+                    best = max(best, cur)
+                else:
+                    cur = 0
+            voids.append((n, round(best / 80 * 25.4, 1)))
+    return fills, voids
 
 
 def main() -> int:
@@ -133,15 +143,29 @@ def main() -> int:
     else:
         notes.append(f"تذييل الترقيم على {foot} صفحة")
 
-    # ٦) الفراغات أسفل الصفحات
-    gaps = page_gaps_mm(pdf)
-    bad_gaps = [(i + 1, g) for i, g in enumerate(gaps)
-                if g > MAX_GAP_MM and i + 1 not in (1, 2, pages)]
-    if bad_gaps:
-        fails.append("فراغ أسفل ورقة يتجاوز الحد: "
-                     + " · ".join(f"ص{p} = {g} مم" for p, g in bad_gaps))
+    # ٦) تعبئة الصفحات والفجوات الداخلية (قياس منطقة المحتوى لا التذييل)
+    fills, voids = page_metrics(pdf)
+    gate = prof.get("gates", {})
+    avg = sum(fills) / len(fills)
+    if avg < gate.get("avg_fill_min", 92):
+        fails.append(f"متوسط تعبئة الصفحات {avg:.1f}% دون الحد {gate.get('avg_fill_min')}%")
     else:
-        notes.append(f"أقصى فراغ داخلي: {max([g for i, g in enumerate(gaps) if i + 1 not in (1, 2, pages)] + [0])} مم")
+        notes.append(f"متوسط التعبئة {avg:.1f}%")
+    low = [(i + 1, round(f)) for i, f in enumerate(fills) if f < gate.get("min_page_fill", 70)]
+    if low:
+        fails.append(f"صفحات قليلة التعبئة: {low}")
+    body = [(n, g) for n, g in voids if 1 < n < len(voids)]  # دون الغلاف والصفحة الأخيرة
+    big = [(n, g) for n, g in body if g >= gate.get("max_internal_void_mm", 45)]
+    if big:
+        fails.append("فجوات داخلية كبيرة في متن التقرير: " + " · ".join(f"ص{n}={g} مم" for n, g in big))
+    else:
+        notes.append(f"لا فجوة داخلية ≥ {gate.get('max_internal_void_mm')} مم في متن التقرير")
+    edge = [(n, round(fills[n - 1]), g) for n, g in voids if n == 1 or n == len(voids)]
+    low_edge = [(n, f) for n, f, _ in edge if f < gate.get("edge_page_fill_min", 55)]
+    if low_edge:
+        fails.append(f"الغلاف/الصفحة الأخيرة تعبئتها منخفضة: {low_edge}")
+    else:
+        notes.append("الغلاف والصفحة الأخيرة فوق حدّ التعبئة الأدنى")
 
     # ٧) بصمة نمط الطباعة (قفل الشكل)
     if FROZEN_CSS.exists() and not a.allow_css_change:

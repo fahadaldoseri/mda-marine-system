@@ -134,6 +134,9 @@ a.bidi{white-space:normal}
 .kpi.acc-ok em{background:var(--ok)}
 .kpi .k-l{font-size:12.5px;color:var(--muted);line-height:1.6;min-height:2.6em}
 .kpi .k-v{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-weight:600;font-size:30px;line-height:1.25;margin-top:3px;font-variant-numeric:tabular-nums}
+.kpis-more{font-size:12.5px;color:var(--muted);line-height:1.75;margin:0 0 8px}
+.kpis-more .km-i{white-space:nowrap}
+.kpis-more .km-i b{color:var(--ink)}
 .kpi .k-n{font-size:12px;color:var(--muted);line-height:1.7;margin-top:4px}
 
 .notice{
@@ -423,7 +426,23 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   /* (٤) لا عنوان يتيم في أسفل صفحة */
   section.doc > h2,section.doc h3,section.doc h4,.h-rule,.sec-lede{break-after:avoid !important;page-break-after:avoid !important}
   /* (٥) الخريطة بعرضها الكامل وارتفاع يدخل في الورقة */
-  .map-viz svg{max-height:74mm !important;break-inside:avoid !important}
+  .map-viz svg{max-height:60mm !important;break-inside:avoid !important}
+  /* (٦ب) ضغط الكتل غير النصية (لا يمسّ المتن): لإزالة الصفحة الزائدة بلا تصغير خطوط */
+  section.doc{padding-bottom:3.5mm !important}
+  section.doc > h2{margin:0 0 2.6mm !important}
+  .kpis{gap:8px !important;margin:16px 0 6px !important}
+  .kpi{padding:8px 10px !important}
+  .kpi .k-v{font-size:26px !important}
+  .dc-grid{gap:1.4mm !important}
+  .dc-grid > *{margin-bottom:1.4mm !important}
+  .tbl td,.tbl th{padding:1.5mm 2mm !important;line-height:1.5 !important}
+  .tl-viz li,.src-grid li{margin-bottom:0.8mm !important}
+  /* (٧) مقاسات القراءة المقرّة: متن 11.5pt بتباعد 1.65 */
+  .doc p,.doc li,.doc .lede,.doc blockquote{font-size:11.5pt !important;line-height:1.6 !important}
+  /* (٨) تعبئات مسطّحة: لا تدرّجات في الطباعة */
+  *{background-image:none !important}
+  /* (٩) مفتاح القراءة يُطبع ليكون الوسم لفظيًا لا لونيًا فقط */
+  .rkey{display:block !important}
   /* (٦) عزل اتجاهي للمعرفات والأوقات والإحداثيات: يمنع انقلاب ترتيبها في <span class="ltr">RTL</span> */
   .ltr{direction:ltr !important;unicode-bidi:isolate !important;white-space:nowrap !important;display:inline-block}
 }
@@ -641,13 +660,13 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     <div class="threat risk-high"><div class="lbl">مستوى التهديد</div><div class="val">مرتفع</div></div>
     <div>
       <p class="lede">من العدّ الثنائي للتناقضات إلى مجموع موزون: وزن موثوقية المصدر × القوة التشخيصية، مع نسبة عدم التناسب R كوزن في دليل المقام. النتيجة بعد تدقيق مستقل: فرضية الانتماء أولًا (19.35) والخط الملاحي ثانيًا (14.32)، والعلم السنغافوري ساقطة بصافي سالب. والترتيب صمد في تسعة من عشرة سيناريوهات حساسية.</p>
-      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-18 20:39 <span class="ltr">UTC</span></b></span></div>
+      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-18 20:51 <span class="ltr">UTC</span></b></span></div>
     </div>
   </header>
 
   <div class="cls-banner c-open">تصنيف الإصدار: خاص</div>
   
-  <div class="kpis"><div class="kpi acc-ok reveal"><em></em><div class="k-l">الفرضية الأولى</div><div class="k-v bidi">الانتماء</div><div class="k-n">19.35 نقطة · تغطية 52.7% · نقاء 100%</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">الفرضية الثانية</div><div class="k-v bidi">الخط الملاحي</div><div class="k-n">14.32 نقطة · تغطية 39% · نقاء 100%</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">الفرضية الساقطة</div><div class="k-v bidi">العلم السنغافوري</div><div class="k-n">‎−1.48 صافي سالب</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">ثبات الترتيب</div><div class="k-v bidi">9 من 10</div><div class="k-n">سيناريوهات حساسية</div></div></div>
+  <div class="kpis"><div class="kpi acc-ok reveal"><em></em><div class="k-l">الفرضية الأولى</div><div class="k-v bidi">الانتماء</div><div class="k-n">19.35 نقطة · تغطية 52.7% · نقاء 100%</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">الفرضية الثانية</div><div class="k-v bidi">الخط الملاحي</div><div class="k-n">14.32 نقطة · تغطية 39% · نقاء 100%</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">الفرضية الساقطة</div><div class="k-v bidi">العلم السنغافوري</div><div class="k-n">‎−1.48 صافي سالب</div></div></div><div class="kpis-more reveal">باقي المؤشرات: <span class="km-i">ثبات الترتيب: <b class="bidi">9 من 10</b></span></div>
   <div class="notice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/></svg><div>تقرير تحليلي خاص. النموذج يرتّب قوة التفسير ولا يُثبت نيّة ولا يسمّي جهة منفّذة. الأوزان والقوى التشخيصية والاحتمالات اجتهاد معلن قابل للمراجعة، والترتيب صمد بتدقيق مستقل.</div></div>
   
 
@@ -1292,7 +1311,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> مصفوفة <span class="ltr">ACH</span> نسخة 3 — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: <span class="ltr">UTC</span> وتوقيت البحرين (<span class="ltr">UTC</span>+3).
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-18 20:39 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-18 20:51 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
     
     <div class="glossary"><b>تعريف المصطلحات:</b><ul><li><b>الترجيح الكمّي الموزون</b>: إعطاء كل دليل وزنًا بحسب موثوقية مصدره وقوّته التشخيصية، ثم جمع الإشارات بدل عدّ التناقضات.</li><li><b>القوة التشخيصية</b>: مقدار قدرة الدليل على التمييز بين الفرضيات المتنافسة، لا مجرد صحته.</li><li><b>نسبة عدم التناسب (R)</b>: حصة الإصابات مقسومة على حصة التعرّض؛ 1 تعني أن التعرّض وحده يفسّر الإصابات.</li><li><b>التغطية</b>: نصيب الأدلة الداعمة من وزن الأدلة الكلي — كم من الأدلة يفسّره هذا التفسير.</li><li><b>النقاء</b>: وزن الدعم مقسومًا على الدعم والتناقض معًا؛ 100% تعني بلا أي دليل مناقض.</li><li><b>التدقيق المستقل</b>: مراجعة نموذج الترجيح وأوزانه وإشاراته بجهة منفصلة، وإعلان ما طُبِّق من اعتراضاتها.</li></ul></div>
   </footer>

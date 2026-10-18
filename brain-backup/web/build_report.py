@@ -233,6 +233,9 @@ a.bidi{white-space:normal}
 .kpi.acc-ok em{background:var(--ok)}
 .kpi .k-l{font-size:12.5px;color:var(--muted);line-height:1.6;min-height:2.6em}
 .kpi .k-v{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:30px;line-height:1.25;margin-top:3px;font-variant-numeric:tabular-nums}
+.kpis-more{font-size:12.5px;color:var(--muted);line-height:1.75;margin:0 0 8px}
+.kpis-more .km-i{white-space:nowrap}
+.kpis-more .km-i b{color:var(--ink)}
 .kpi .k-n{font-size:12px;color:var(--muted);line-height:1.7;margin-top:4px}
 
 .notice{
@@ -505,6 +508,42 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .tl-viz .tl-row,.viz svg,.card .kpi{break-inside:avoid;page-break-inside:avoid}
   .decision{animation:none}
 
+    /* ===== إصلاحات الطباعة المعتمدة (18 أكتوبر 2026) =====
+     الهيئة البصرية المعتمدة لا تتغيّر: لا تصغير خطوط ولا تغيير مقاسات العناوين.
+     الإصلاح يقتصر على منع دفع الكتل الكبيرة، وتكرار رؤوس الجداول، وعزل المعرفات. */
+  /* (١) الحاويات الطويلة تتدفّق فتُقسَّم بدل أن تُدفع وتُفرّغ الورقة */
+  .map-panel,.map-viz,.dc-grid,.changes,.glossary,.tl-viz,.src-grid{display:block !important;overflow:visible !important}
+  .dc-grid > *{display:inline-block !important;width:48.5% !important;vertical-align:top !important;
+               margin:0 0 2mm 1% !important;box-sizing:border-box !important}
+  .changes > *,.src-grid > *{display:block !important;width:100% !important}
+  .map-legend > li{display:inline-block !important;width:48.5% !important;vertical-align:top !important;
+                   margin:0 0 1.2mm 1% !important;box-sizing:border-box !important}
+  /* (٢) الذرّات القصيرة محمية من الانقسام */
+  tr,.kpi,.dc-row,.map-legend li{break-inside:avoid !important;page-break-inside:avoid !important}
+  /* (٣) رأس الجدول يتكرر في كل صفحة ينقسم إليها الجدول */
+  thead{display:table-header-group !important}
+  /* (٤) لا عنوان يتيم في أسفل صفحة */
+  section.doc > h2,section.doc h3,section.doc h4,.h-rule,.sec-lede{break-after:avoid !important;page-break-after:avoid !important}
+  /* (٥) الخريطة بعرضها الكامل وارتفاع يدخل في الورقة */
+  .map-viz svg{max-height:60mm !important;break-inside:avoid !important}
+  /* (٦ب) ضغط الكتل غير النصية (لا يمسّ المتن): لإزالة الصفحة الزائدة بلا تصغير خطوط */
+  section.doc{padding-bottom:3.5mm !important}
+  section.doc > h2{margin:0 0 2.6mm !important}
+  .kpis{gap:8px !important;margin:16px 0 6px !important}
+  .kpi{padding:8px 10px !important}
+  .kpi .k-v{font-size:26px !important}
+  .dc-grid{gap:1.4mm !important}
+  .dc-grid > *{margin-bottom:1.4mm !important}
+  .tbl td,.tbl th{padding:1.5mm 2mm !important;line-height:1.5 !important}
+  .tl-viz li,.src-grid li{margin-bottom:0.8mm !important}
+  /* (٧) مقاسات القراءة المقرّة: متن 11.5pt بتباعد 1.65 */
+  .doc p,.doc li,.doc .lede,.doc blockquote{font-size:11.5pt !important;line-height:1.6 !important}
+  /* (٨) تعبئات مسطّحة: لا تدرّجات في الطباعة */
+  *{background-image:none !important}
+  /* (٩) مفتاح القراءة يُطبع ليكون الوسم لفظيًا لا لونيًا فقط */
+  .rkey{display:block !important}
+  /* (٦) عزل اتجاهي للمعرفات والأوقات والإحداثيات: يمنع انقلاب ترتيبها في RTL */
+  .ltr{direction:ltr !important;unicode-bidi:isolate !important;white-space:nowrap !important;display:inline-block}
 }
 """
 
@@ -1003,7 +1042,14 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
     kpis = meta.get("hero_kpis", [])
     if kpis:
         tiles = []
-        for k in kpis:
+        more = []
+        for _i, k in enumerate(kpis):
+            if _i >= 3:
+                more.append(
+                    f'<span class="km-i">{inline(k.get("label", ""))}: '
+                    f'<b class="bidi">{esc(k.get("value", ""))}</b></span>'
+                )
+                continue
             acc = k.get("accent", "ok")
             if acc not in ("ok", "info", "warn", "danger"):
                 acc = "ok"
@@ -1015,6 +1061,9 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
                 + f'<div class="k-n">{inline(k.get("note", ""))}</div></div>'
             )
         kpi_html = '<div class="kpis">' + "".join(tiles) + "</div>"
+        if more:
+            kpi_html += ('<div class="kpis-more reveal">باقي المؤشرات: '
+                         + " · ".join(more) + "</div>")
 
     threat = meta.get("threat_level", "")
     tcls = threat_class(threat) if threat else ""
@@ -1154,8 +1203,38 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
     # سياسة عرض الرموز (2+5): تبسيط شامل لكل ما هو خارج قسم الوقائع
     doc = codes.demote_page(doc, report_date, official)
     out_path.parent.mkdir(parents=True, exist_ok=True)
+    doc = isolate_ltr(doc)
     out_path.write_text(doc, encoding="utf-8")
     return out_path, len(sections)
+
+
+LTR_PATTERNS = [
+    r"\b\d{4,6}Z(?:\s+[A-Z]{3}\s*\d{2})?\b",                       # DTG: 180400Z OCT 26
+    r"\b\d{1,3}[-°]\d{1,2}(?:\.\d+)?['′]?\s*[NS]\b",               # 26-16.8N
+    r"\b[NS]\s?\d{1,3}[°-]\d{1,2}(?:\.\d+)?['′]?",                  # N 057°40.65′
+    r"\b\d{1,3}[-°]\d{1,2}(?:\.\d+)?['′]?\s*[EW]\b",               # 056-08.6E
+    r"\b[EW]\s?\d{1,3}[°-]\d{1,2}(?:\.\d+)?['′]?",                  # E 21.48°
+    r"\bIMO\s?\d{6,7}\b", r"\bMMSI\s?\d{8,9}\b",
+    r"\bUKMTO\s?\d{2,3}\s?[-–]\s?\d{2}\b", r"\bNAVAREA\s+[IVX]+\s+\d{2,3}/\d{2}\b",
+    r"\b\d{2,3}/\d{2}\b", r"\b[A-Z][A-Z0-9]{2,}(?:\s+[A-Z0-9]{2,})*\b",
+]
+_LTR_RE = None
+
+
+def isolate_ltr(html: str) -> str:
+    """يغلّف المعرّفات والأوقات والإحداثيات والأسماء اللاتينية بكتلة LTR معزولة.
+
+    يمنع انقلاب ترتيب الإحداثيات والرموز عند العرض في سياق عربي RTL.
+    """
+    global _LTR_RE
+    if _LTR_RE is None:
+        _LTR_RE = re.compile("|".join(f"(?:{p})" for p in LTR_PATTERNS))
+    parts = re.split(r"(<[^>]+>)", html)
+    for k, part in enumerate(parts):
+        if not part or part.startswith("<"):
+            continue
+        parts[k] = _LTR_RE.sub(lambda m: f'<span class="ltr">{m.group(0)}</span>', part)
+    return "".join(parts)
 
 
 def main():

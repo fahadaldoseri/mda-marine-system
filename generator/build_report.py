@@ -233,6 +233,9 @@ a.bidi{white-space:normal}
 .kpi.acc-ok em{background:var(--ok)}
 .kpi .k-l{font-size:12.5px;color:var(--muted);line-height:1.6;min-height:2.6em}
 .kpi .k-v{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:30px;line-height:1.25;margin-top:3px;font-variant-numeric:tabular-nums}
+.kpis-more{font-size:12.5px;color:var(--muted);line-height:1.75;margin:0 0 8px}
+.kpis-more .km-i{white-space:nowrap}
+.kpis-more .km-i b{color:var(--ink)}
 .kpi .k-n{font-size:12px;color:var(--muted);line-height:1.7;margin-top:4px}
 
 .notice{
@@ -522,7 +525,23 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   /* (٤) لا عنوان يتيم في أسفل صفحة */
   section.doc > h2,section.doc h3,section.doc h4,.h-rule,.sec-lede{break-after:avoid !important;page-break-after:avoid !important}
   /* (٥) الخريطة بعرضها الكامل وارتفاع يدخل في الورقة */
-  .map-viz svg{max-height:74mm !important;break-inside:avoid !important}
+  .map-viz svg{max-height:60mm !important;break-inside:avoid !important}
+  /* (٦ب) ضغط الكتل غير النصية (لا يمسّ المتن): لإزالة الصفحة الزائدة بلا تصغير خطوط */
+  section.doc{padding-bottom:3.5mm !important}
+  section.doc > h2{margin:0 0 2.6mm !important}
+  .kpis{gap:8px !important;margin:16px 0 6px !important}
+  .kpi{padding:8px 10px !important}
+  .kpi .k-v{font-size:26px !important}
+  .dc-grid{gap:1.4mm !important}
+  .dc-grid > *{margin-bottom:1.4mm !important}
+  .tbl td,.tbl th{padding:1.5mm 2mm !important;line-height:1.5 !important}
+  .tl-viz li,.src-grid li{margin-bottom:0.8mm !important}
+  /* (٧) مقاسات القراءة المقرّة: متن 11.5pt بتباعد 1.65 */
+  .doc p,.doc li,.doc .lede,.doc blockquote{font-size:11.5pt !important;line-height:1.6 !important}
+  /* (٨) تعبئات مسطّحة: لا تدرّجات في الطباعة */
+  *{background-image:none !important}
+  /* (٩) مفتاح القراءة يُطبع ليكون الوسم لفظيًا لا لونيًا فقط */
+  .rkey{display:block !important}
   /* (٦) عزل اتجاهي للمعرفات والأوقات والإحداثيات: يمنع انقلاب ترتيبها في RTL */
   .ltr{direction:ltr !important;unicode-bidi:isolate !important;white-space:nowrap !important;display:inline-block}
 }
@@ -1023,7 +1042,14 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
     kpis = meta.get("hero_kpis", [])
     if kpis:
         tiles = []
-        for k in kpis:
+        more = []
+        for _i, k in enumerate(kpis):
+            if _i >= 3:
+                more.append(
+                    f'<span class="km-i">{inline(k.get("label", ""))}: '
+                    f'<b class="bidi">{esc(k.get("value", ""))}</b></span>'
+                )
+                continue
             acc = k.get("accent", "ok")
             if acc not in ("ok", "info", "warn", "danger"):
                 acc = "ok"
@@ -1035,6 +1061,9 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
                 + f'<div class="k-n">{inline(k.get("note", ""))}</div></div>'
             )
         kpi_html = '<div class="kpis">' + "".join(tiles) + "</div>"
+        if more:
+            kpi_html += ('<div class="kpis-more reveal">باقي المؤشرات: '
+                         + " · ".join(more) + "</div>")
 
     threat = meta.get("threat_level", "")
     tcls = threat_class(threat) if threat else ""
