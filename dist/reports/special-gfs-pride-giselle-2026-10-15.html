@@ -302,9 +302,25 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   body{background:#fff;color:#111;font-size:10.8pt;line-height:1.62}
   /* لا تُطبع المصادر والمراجع ولا ملحق موثوقية المصادر في نسخة PDF */
   #sec-16{display:none !important}
-  p,li,blockquote{orphans:3;widows:3}
+  p,li,blockquote,.sec-lede,.blk-lede,.note{orphans:3;widows:3}
   /* اقتصاد الورق: تُقاس الخريطة على ارتفاع صفحة واحدة مع عنوانها */
-  .map-viz svg{max-height:118mm;height:auto}
+  /* الخريطة ينقسم إطارها فقط بين الرسم والمفتاح، فلا تبقى ورقة شبه فارغة */
+  .map-viz{break-inside:auto;page-break-inside:auto}
+  .map-viz svg{max-height:100mm;height:auto;break-inside:avoid;page-break-inside:avoid}
+  .map-legend{break-inside:auto}
+  /* إجبار: كتلة الخريطة تنقسم بين الرسم والمفتاح مهما وردت قاعدة أخصّ */
+  #sec-03 .map-viz, .map-viz{break-inside:auto !important;page-break-inside:auto !important}
+  .map-viz svg{break-inside:avoid !important;page-break-inside:avoid !important}
+  .map-viz{padding:3mm 3.5mm}
+  /* مفتاح الخريطة في عمودين: يوفّر نحو 55 مم فيستقر القسم داخل ورقة واحدة */
+  .map-legend{columns:2;column-gap:8mm}
+  .map-legend li{break-inside:avoid;margin:0 0 1.4mm;font-size:9pt;line-height:1.45}
+  .map-legend .lg-txt{font-size:9pt}
+  .map-caption,.map-viz figcaption{margin-top:1.5mm;line-height:1.4}
+  /* كثافة الصفحة: تقليل حشو الخلايا لتصبح الكتلة على مقاس الورقة */
+  tbody td{padding:1.5mm 2.2mm !important}
+  .sec-lede{margin:0 0 10px;line-height:1.55}
+  section.doc{padding:0 0 3mm}
   .rmk,.glossary{break-inside:avoid;page-break-inside:avoid}
   /* انضباط بصري: خطوط فاصلة رقيقة بدل تظليل الصفوف */
   tbody tr:nth-child(even){background:#fff !important}
@@ -313,7 +329,8 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .threat{display:inline-block;min-width:52mm}
   .mp-events text{font-size:13.5px}
   /* أرقام علامات الخريطة: لا بد من تخصيص أعلى لأن قاعدة الشاشة أخصّ */
-  .mp-events .mp-num{font-size:13px}
+  .mp-events .mp-num{font-size:15px}
+  .mp-events text{font-size:15px}
   /* لا تباعد أحرف على العربية داخل الخريطة (يفكّ الاتصال) */
   .mp-country,.mp-sea-lbl,.mp-port-lbl{letter-spacing:0}
   /* لا يُترك عنوان قسم في نهاية صفحة ومحتواه في التالية */
@@ -352,7 +369,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .masthead,.kpis{animation:none}
   .map-wrap{border-color:#c3cedb}
   .mp-events .mp-dot{stroke:#fff}
-  .map-viz{break-inside:avoid;page-break-inside:avoid}
+  .map-viz{break-inside:auto;page-break-inside:auto}
   .bar-row .bl,.bar-row .bv,.viz h3,.viz .src-note,.src,.src b,.src .st,.foot,.kpi .k-l,.kpi .k-n,.notice,.chip,.cite-ref,.tag{font-size:10.5pt;line-height:1.6}
   .card,.viz,.src,.kpi,.table-row{break-inside:avoid;page-break-inside:avoid}
   .tbl-wrap{overflow:visible;break-inside:auto;page-break-inside:auto}
@@ -383,7 +400,10 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .tl-fill.k-suspect{background:#7d5200}
   .tl-fill.k-bg{background:#7f92a8}
   ul.d-kinds li::before{width:3px}
-  .decision,.tl-viz,.glossary{break-inside:avoid;page-break-inside:avoid}
+  .decision,.glossary{break-inside:avoid;page-break-inside:avoid}
+  /* كتل التحليل الطويلة تُقسَّم بدل إفراغ ورقة كاملة */
+  .tl-viz,.viz,.card{break-inside:auto !important;page-break-inside:auto !important}
+  .tl-viz .tl-row,.viz svg,.card .kpi{break-inside:avoid;page-break-inside:avoid}
   .decision{animation:none}
 
 }
@@ -601,7 +621,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     <div class="threat risk-high"><div class="lbl">مستوى التهديد</div><div class="val">مرتفع</div></div>
     <div>
       <p class="lede">أصاب مقذوفان غير محددَي المصدر سفينتي حاويات سنغافوريتين في 13 أكتوبر 2026 داخل مضيق هرمز ومياه عُمان: «GFS PRIDE» غرقت بعد حريق وأُخلي طاقمها وعدده 21 فردًا بسلام، و«GFS GISELLE» أبحرت بقواها الذاتية إلى مرسى آمن وطاقمها وعدده 22 فردًا بسلام. ولا جهة أعلنت مسؤوليتها، ولا يوجد فحص فني منشور.</p>
-      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-18 16:31 UTC</b></span></div>
+      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-18 18:48 UTC</b></span></div>
     </div>
   </header>
 
@@ -1031,7 +1051,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> تقرير خاص — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: UTC وتوقيت البحرين (UTC+3). المصادر الرسمية هي الأساس، والنقل الإعلامي مُوسَم نقلًا لا تحققًا.
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-18 16:31 UTC</bdi> — <b>المرجع الزمني:</b> UTC.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-18 18:48 UTC</bdi> — <b>المرجع الزمني:</b> UTC.
     
     <div class="glossary"><b>تعريف المصطلحات:</b><ul><li><b>مقذوف غير محدد المصدر</b>: مقذوف لم تُعلن جهة رسمية نوعه ولا مصدره.</li><li><b>سفينة بضائع جافة (Bulk carrier)</b>: سفينة شحن تحمل بضائع جافة غير معبأة في عنابرها، لا ناقلة نفط.</li><li><b>إخلاء الطاقم</b>: إخراج الطاقم من السفينة عند تعذّر السيطرة على الخطر.</li><li><b>إسناد رسمي أمريكي</b>: نسبة الجهة المنفذة إلى مقذوف للحرس الثوري الإيراني في منشور رسمي للقيادة المركزية الأمريكية، وهو إسناد دولة واحدة غير مؤكد مستقلًا.</li><li><b>آخر إشارة تتبّع (AIS)</b>: آخر موضع استقبلته منصات التتبّع، وليس وقت الإصابة ولا وقت إغلاق الجهاز.</li></ul></div>
   </footer>
