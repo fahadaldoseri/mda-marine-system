@@ -9,6 +9,8 @@ __pycache__/
 state/webhook-secret.txt
 .env
 .env.*
+# قوالب البيئة تُرفع: بلا قيم سرية — والقيمة الحقيقية تُوضع في .env المحلي فقط
+!.env.example
 *.key
 *.pem
 secrets/
