@@ -52,7 +52,14 @@ ADVISORY = [
     B / 'notes',
 ]
 
-COUNT_RE = re.compile(r'(\d{2,3})\s*مصدر(?:ًا|اً|ا)?')
+_AR_D = str.maketrans("٠١٢٣٤٥٦٧٨٩", "0123456789")
+COUNT_RE = re.compile(r"([0-9٠-٩]{2,3})\s*مصدر(?:ًا|اً|ا)?")
+# أرقام مكتوبة بالكلمات (كانت تمرّ من البوابة: «السبعة والثلاثون» بدل 40) — عطل ك-08
+_W_ONES = {"السبعة": 7, "سبعة": 7, "الثمانية": 8, "ثمانية": 8, "التسعة": 9, "تسعة": 9}
+_W_TENS = {"الثلاثون": 30, "ثلاثون": 30, "الأربعون": 40, "أربعون": 40, "الخمسون": 50, "خمسون": 50}
+WORD_RE = re.compile(
+    "(" + "|".join(_W_ONES) + r")\s+و(?:ال)?(" + "|".join(k.lstrip("ال") for k in _W_TENS) + ")")
+WORD_TENS_RE = re.compile("(?:ال)?(" + "|".join(k.lstrip("ال") for k in _W_TENS) + r")\s+(?:مصدرًا|مصدرا|مصدر|المصادر)")
 
 
 def count_mentions(path: Path, approved: int) -> list[tuple[str, int]]:
@@ -62,11 +69,24 @@ def count_mentions(path: Path, approved: int) -> list[tuple[str, int]]:
         return []
     bad = []
     for m in COUNT_RE.finditer(text):
-        n = int(m.group(1))
+        n = int(m.group(1).translate(_AR_D))
         if n == approved or n == 0:
             continue
         line = text[:m.start()].count('\n') + 1
         bad.append((f"{path}:{line} ← {n} مصدرًا", n))
+    # أرقام مكتوبة بالكلمات: «السبعة والثلاثون» = 37
+    for m in WORD_RE.finditer(text):
+        n = _W_ONES[m.group(1)] + _W_TENS.get("ال" + m.group(2), _W_TENS.get(m.group(2), 0))
+        if n == approved or n == 0:
+            continue
+        line = text[:m.start()].count('\n') + 1
+        bad.append((f"{path}:{line} ← «{m.group(0)}» = {n} مصدرًا", n))
+    for m in WORD_TENS_RE.finditer(text):
+        n = _W_TENS.get("ال" + m.group(1), _W_TENS.get(m.group(1), 0))
+        if n == approved or n == 0:
+            continue
+        line = text[:m.start()].count('\n') + 1
+        bad.append((f"{path}:{line} ← «{m.group(0)}» = {n} مصدرًا", n))
     return bad
 
 
@@ -75,7 +95,8 @@ def main() -> int:
         print(f"  ✘ ملف المصدر الواحد مفقود: {MANIFEST}")
         return 2
     try:
-        approved = int(json.loads(MANIFEST.read_text(encoding='utf-8'))['approved_source_count'])
+        _man = json.loads(MANIFEST.read_text(encoding='utf-8'))
+        approved = int(_man['approved_source_count'])
     except (json.JSONDecodeError, KeyError, ValueError) as e:
         print(f"  ✘ ملف المصدر الواحد غير صالح ({e})")
         return 2
@@ -83,6 +104,20 @@ def main() -> int:
     print(f"=== بوابة عدد المصادر — المعتمد: {approved} ===")
     blockers: list[str] = []
     warnings: list[str] = []
+
+    # (أ) ملف القائمة المشار إليه في البيان يجب أن يكون موجودًا — عطل ك-08 (مرجع ميت)
+    _slf = _man.get('source_list_file')
+    if _slf and not (B / _slf).exists():
+        blockers.append(f"ملف قائمة المصادر المشار إليه في البيان مفقود: {_slf}")
+    # (ب) إن كانت القائمة ملف JSON بسجلات، فعددها يجب أن يطابق الرقم المعتمد
+    _slj = _man.get('source_list_json')
+    if _slj and (B / _slj).exists():
+        try:
+            _recs = json.loads((B / _slj).read_text(encoding='utf-8'))
+            if isinstance(_recs, list) and len(_recs) != approved:
+                blockers.append(f"عدد سجلات {_slj} = {len(_recs)} بينما المعتمد {approved}")
+        except (json.JSONDecodeError, OSError):
+            warnings.append(f"تعذّرت قراءة قائمة المصادر {_slj}")
     for p in MANDATORY:
         if not p.exists():
             continue
