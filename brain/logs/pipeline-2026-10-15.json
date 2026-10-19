@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-15",
+  "pipeline_version": 3,
+  "finished_utc": "2026-10-15T03:45:29Z",
+  "overall": "ok",
+  "feeds": {
+    "status": "ok"
+  },
+  "ofac": {
+    "status": "ok",
+    "note": "فُحص 2 مستهدفًا"
+  },
+  "originals": {
+    "status": "ok",
+    "note": "حُفظت الأصول في archive/originals/2026-10-15/",
+    "manifest": "archive/originals/2026-10-15/manifest.json"
+  },
+  "ledger_merge": {
+    "status": "ok",
+    "note": "دُمج ملف اليوم في الدفتر الجامع وبُنيت خريطة الرموز ونُسخ الدفتر إلى الموقع"
+  }
+}

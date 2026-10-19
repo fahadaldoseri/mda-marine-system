@@ -1,0 +1,202 @@
+{
+  "kind": "vessel-register",
+  "title": "سجل السفن المستهدفة في مضيق هرمز ونطاق التقرير",
+  "date": "2026-10-16",
+  "window": "2026-07-11 إلى 2026-10-15",
+  "count": 20,
+  "flags_summary": {
+    "سنغافورة": 3,
+    "قبرص": 1,
+    "جزر مارشال": 3,
+    "ليبيريا": 4,
+    "الهند": 1,
+    "بنما": 3,
+    "أنتيغوا وبربودا": 2,
+    "اليونان": 1,
+    "باهاما": 1,
+    "متنازع": 1
+  },
+  "scope_note": "مبني على مصادر مفتوحة فقط؛ الحقول غير المعلنة مكتوبة «غير معلن» ولا تُخمَّن، وصلة الانتماء تُثبت بأصل.",
+  "vessels": [
+    {
+      "name": "GFS PRIDE",
+      "imo": "9349045",
+      "flag": "سنغافورة",
+      "owner_operator": "GFS — AD Ports 81%",
+      "type": "حاويات",
+      "incident": "13 أكتوبر — غرقت",
+      "affiliation": "**إماراتي (ملكية)**"
+    },
+    {
+      "name": "GFS GISELLE",
+      "imo": "9704661",
+      "flag": "سنغافورة",
+      "owner_operator": "GFS — AD Ports 81%",
+      "type": "حاويات",
+      "incident": "13 أكتوبر — أضرار",
+      "affiliation": "**إماراتي (ملكية)**"
+    },
+    {
+      "name": "GFS GALAXY",
+      "imo": "9401271",
+      "flag": "قبرص",
+      "owner_operator": "GFS — AD Ports 81%",
+      "type": "حاويات",
+      "incident": "11 يوليو — أضرار جسيمة",
+      "affiliation": "**إماراتي (ملكية)**"
+    },
+    {
+      "name": "ST1",
+      "imo": "9256999",
+      "flag": "جزر مارشال",
+      "owner_operator": "**SAFEEN Tankers 38 Ltd** — Horizon Shipping (أبوظبي)",
+      "type": "ناقلة خام VLCC",
+      "incident": "6 أكتوبر",
+      "affiliation": "**إماراتي (ملكية وإدارة)**"
+    },
+    {
+      "name": "CAMEROON PROSPERITY",
+      "imo": "9315159",
+      "flag": "ليبيريا",
+      "owner_operator": "Trondheim Prosperity — Sinokor (كوريا) — **ADNOC L&S مدير فني**",
+      "type": "ناقلة خام VLCC",
+      "incident": "4 أكتوبر",
+      "affiliation": "**إماراتي (إدارة)**"
+    },
+    {
+      "name": "AL MAQAM",
+      "imo": "9732577",
+      "flag": "ليبيريا",
+      "owner_operator": "**إدارة أدنوك**",
+      "type": "ناقلة خام VLCC",
+      "incident": "11 أكتوبر (إعلان إيراني)",
+      "affiliation": "**إماراتي (إدارة)**"
+    },
+    {
+      "name": "DP WORLD KAVERI",
+      "imo": "9363429",
+      "flag": "الهند",
+      "owner_operator": "**DP World (الإمارات)**",
+      "type": "حاويات",
+      "incident": "11 أكتوبر",
+      "affiliation": "**إماراتي (ملكية)**"
+    },
+    {
+      "name": "ON PEACE",
+      "imo": "9893204",
+      "flag": "بنما",
+      "owner_operator": "ONEX PEACE INC — **ONEX DMCC (دبي)**",
+      "type": "ناقلة خام Aframax",
+      "incident": "5 أكتوبر — 12 مصابًا",
+      "affiliation": "**إماراتي (تشغيل)**"
+    },
+    {
+      "name": "VALTHERA",
+      "imo": "9296389",
+      "flag": "جزر مارشال",
+      "owner_operator": "Celeris Wavecourse — **Zeythra Group LLC-FZ (الإمارات) مدير ISM**",
+      "type": "ناقلة خام Suezmax",
+      "incident": "10–11 أكتوبر",
+      "affiliation": "إماراتي (إدارة)"
+    },
+    {
+      "name": "AL SAADIYAT",
+      "imo": "9760598",
+      "flag": "جزر مارشال",
+      "owner_operator": "غير معلن",
+      "type": "حاويات",
+      "incident": "11 أكتوبر",
+      "affiliation": "غير مثبت"
+    },
+    {
+      "name": "CAPE DAO",
+      "imo": "9219020",
+      "flag": "أنتيغوا وبربودا",
+      "owner_operator": "غير معلن",
+      "type": "بضائع جافة",
+      "incident": "23 سبتمبر — غرقت",
+      "affiliation": "غير مثبت"
+    },
+    {
+      "name": "MARAN GAS MYSTRAS",
+      "imo": "9658238",
+      "flag": "اليونان",
+      "owner_operator": "Maran Gas (اليونان)",
+      "type": "ناقلة غاز",
+      "incident": "7 أكتوبر",
+      "affiliation": "يوناني"
+    },
+    {
+      "name": "GAS VELA",
+      "imo": "9969845",
+      "flag": "سنغافورة",
+      "owner_operator": "Huizhang Tianjin — Sinogas Maritime",
+      "type": "ناقلة غاز LPG",
+      "incident": "4 أكتوبر",
+      "affiliation": "صيني/هونغ كونغ"
+    },
+    {
+      "name": "LIPSI",
+      "imo": "1025033",
+      "flag": "ليبيريا",
+      "owner_operator": "مالك مرتبط بتمويل صيني — Dynacom (اليونان)",
+      "type": "ناقلة خام Aframax",
+      "incident": "4 أكتوبر",
+      "affiliation": "يوناني/صيني"
+    },
+    {
+      "name": "ACERS",
+      "imo": "9301902",
+      "flag": "أنتيغوا وبربودا",
+      "owner_operator": "Valvoria Shipping — Med & Baltic (اليونان)",
+      "type": "ناقلة منتجات LR1",
+      "incident": "7 أكتوبر — مصاب واحد",
+      "affiliation": "يوناني/تركي"
+    },
+    {
+      "name": "GEM NO. 2",
+      "imo": "9735373",
+      "flag": "بنما",
+      "owner_operator": "Gem No 2 Maritime — Fleet Management (هونغ كونغ)",
+      "type": "ناقلة خام VLCC",
+      "incident": "9 أكتوبر",
+      "affiliation": "تايوان/هونغ كونغ"
+    },
+    {
+      "name": "KITION M",
+      "imo": "9321160",
+      "flag": "بنما",
+      "owner_operator": "Kition Trading — Benetech (اليونان)",
+      "type": "ناقلة منتجات LR1",
+      "incident": "11 أكتوبر",
+      "affiliation": "يوناني — على قائمة عدم الامتثال الإيرانية"
+    },
+    {
+      "name": "EVER VICT",
+      "imo": "9266774",
+      "flag": "باهاما",
+      "owner_operator": "New Treasure Shipping — Speedlink Marine",
+      "type": "ناقلة منتجات LR1",
+      "incident": "11 أكتوبر",
+      "affiliation": "على قائمة عدم الامتثال الإيرانية"
+    },
+    {
+      "name": "ANGOLA PROSPERITY",
+      "imo": "9896414",
+      "flag": "ليبيريا",
+      "owner_operator": "Haut Brion 50 — Sinokor (كوريا) — Columbia (ألمانيا)",
+      "type": "ناقلة خام VLCC",
+      "incident": "11 أكتوبر",
+      "affiliation": "كوري/ألماني"
+    },
+    {
+      "name": "PETRO DOLPHIN",
+      "imo": "1072294",
+      "flag": "متنازع",
+      "owner_operator": "غير معلن",
+      "type": "ناقلة منتجات صغيرة",
+      "incident": "11 أكتوبر — مفقودان",
+      "affiliation": "غير مثبت"
+    }
+  ]
+}

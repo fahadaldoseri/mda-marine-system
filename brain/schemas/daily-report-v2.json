@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Marine Morning Report v2",
+  "type": "object",
+  "required": ["date", "generated_at_utc", "kpis", "incidents", "analysis", "cited_sources", "checked_sources"],
+  "properties": {
+    "date": {"type": "string", "format": "date"},
+    "generated_at_utc": {"type": "string", "format": "date-time"},
+    "kpis": {
+      "type": "object",
+      "required": ["new_ukmto_reports_24h", "new_warnings_24h", "new_advisories_24h", "confirmed_attacks_24h"],
+      "properties": {
+        "new_ukmto_reports_24h": {"type": "integer", "minimum": 0},
+        "new_warnings_24h": {"type": "integer", "minimum": 0},
+        "new_advisories_24h": {"type": "integer", "minimum": 0},
+        "confirmed_attacks_24h": {"type": "integer", "minimum": 0}
+      }
+    },
+    "incidents": {"type": "array"},
+    "analysis": {"type": "object"},
+    "cited_sources": {"type": "array"},
+    "checked_sources": {"type": "array"}
+  }
+}
