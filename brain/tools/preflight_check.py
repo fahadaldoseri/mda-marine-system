@@ -206,7 +206,8 @@ else:
 oks.append("تنبيه تشغيلي: مهام الخدمات (services) لا تنتهي بحكم تصميمها، وليست مهام عالقة")
 
 # 7ب) النسخة الاحتياطية على GitHub (المصدر الوحيد — لا نسخة مكرّرة داخل مستودع الموقع)
-_bk = Path(_os.environ.get("BACKUP_REPO_DIR") or Path(SITE).parent / "mda-marine-system")
+_bk_cands = [_os.environ.get("BACKUP_REPO_DIR"), Path(SITE).parent / "mda-marine-system", B.parent if (B.parent / "brain").is_dir() and B.name == "brain" else None]
+_bk = next((Path(c) for c in _bk_cands if c and Path(c).is_dir()), Path(SITE).parent / "mda-marine-system")
 if _bk.exists() and report.exists():
     _t = _bk / 'brain' / 'reports' / report.name
     check(_t.exists() and _t.stat().st_size == report.stat().st_size,
