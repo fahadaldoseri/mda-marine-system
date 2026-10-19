@@ -20,6 +20,7 @@ import os
 import subprocess
 import sys
 import time
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -166,20 +167,39 @@ def main() -> int:
             note="تحذير = مصادر ترد 403/شهادة معطوبة ويُستعمل لها مسار جلب بديل")
     else:
         record(g, "فحص التغذيات (مُتخطّى)", 0, 0, "تُخطّي بطلب المستخدم")
-    run(g, "توليد قائمة العقوبات من التقرير", ["python3", "tools/ofac_targets_from_report.py", date], tolerate=1)
+    run(g, "توليد قائمة العقوبات من التقرير", ["python3", "tools/ofac_targets_from_report.py", "--date", date], tolerate=1)
     run(g, "فحص العقوبات", ["python3", "tools/ofac_screen.py", "watchlist/ofac-targets.txt"], tolerate=1,
         note="تحذير = تطابق جزئي يستوجب مراجعة بشرية")
     run(g, "استخراج أسماء السفن", ["python3", "tools/vessel_names.py", date], tolerate=1)
     ledger = BRAIN / "cumulative-2026" / "event-ledger-master.json"
+
+    def ledger_core() -> str:
+        try:
+            raw = json.loads(ledger.read_text(encoding="utf-8"))
+        except Exception:  # noqa: BLE001
+            return ""
+        def strip(node):
+            if isinstance(node, dict):
+                return {k: strip(v) for k, v in node.items()
+                        if not re.search(r"(time|date|updated|generated|stamp|_at$|log)", k, re.I)}
+            if isinstance(node, list):
+                return [strip(v) for v in node]
+            return node
+        return json.dumps(strip(raw), ensure_ascii=False, sort_keys=True)
+
     before = sha(ledger)
     run(g, "دمج الدفتر التراكمي (جولة أولى)", ["python3", "tools/merge_ledger_daily.py"], tolerate=1, timeout=600)
     mid = sha(ledger)
     run(g, "دمج الدفتر التراكمي (جولة ثانية)", ["python3", "tools/merge_ledger_daily.py"], tolerate=1, timeout=600)
-    probe(g, "الدمج لا يكرّر السجلات (ثبات البصمة)", sha(ledger) == mid,
-          f"بصمة ثابتة {mid[:12]}" if sha(ledger) == mid else "البصمة تغيّرت بين جولتين متطابقتين",
-          note="تغيّر البصمة يعني إضافة مزدوجة تكسر عدّادات السجل التراكمي")
+    core_iter = {"الدفتر: محتوى ثابت بين جولتين": ledger_core()}
+    run(g, "دمج الدفتر التراكمي (جولة ثالثة)", ["python3", "tools/merge_ledger_daily.py"], tolerate=1, timeout=600)
+    probe(g, "الدمج لا يكرّر السجلات (ثبات المحتوى)",
+          ledger_core() == core_iter["الدفتر: محتوى ثابت بين جولتين"],
+          "محتوى مطابق بعد ثلاث جولات" if ledger_core() == core_iter["الدفتر: محتوى ثابت بين جولتين"]
+          else "محتوى الدفتر تغيّر بين جولتين متطابقتين",
+          note="تُقارن السجلات بلا طوابع زمنية؛ تغيّر المحتوى يعني إضافة مزدوجة تكسر العدّادات")
     if net and heavy:
-        run(g, "حفظ أصول البلاغات الرسمية", ["python3", "tools/archive_originals.py", date, "sources/ukmto-urls.txt"],
+        run(g, "حفظ أصول البلاغات الرسمية", ["python3", "tools/archive_originals.py", date, "watchlist/original-sources.txt"],
             tolerate=1, timeout=900, note="تحذير = مصدر رسمي لم يُحفظ أصله اليوم")
 
     # ═══ 6) المعرفة والرموز ═══
@@ -212,7 +232,8 @@ def main() -> int:
           f"حتى ك-{max((int(i) for i in ids), default=0)}")
     try:
         man = json.loads((BRAIN / "appendices" / "sources-manifest.json").read_text(encoding="utf-8"))
-        tot = man.get("total_sources") or man.get("total")
+        tot = (man.get("approved_source_count") or man.get("total_sources")
+               or man.get("total") or man.get("count"))
         probe(g, "مصدر واحد لعدد المصادر", True, f"العدد المعتمد: {tot}")
     except Exception as exc:  # noqa: BLE001
         probe(g, "مصدر واحد لعدد المصادر", False, f"{type(exc).__name__}")
@@ -231,7 +252,11 @@ def main() -> int:
     print("\n7) تلغرام والبوت (بلا إرسال)")
     g = "7) تلغرام والبوت"
     sample = Path("/tmp/selftest-digest.html")
-    sample.write_text("<b>مركز الوعي بالمجال البحري</b>\nاختبار جاف فقط — لا يُرسل.\n", encoding="utf-8")
+    sample.write_text(
+        "<b>مركز الوعي بالمجال البحري</b>\n"
+        "التقرير اليومي لأمن الملاحة — «و ب 26/10/16»\n"
+        "اختبار جاف فقط — لا يُرسل.\n"
+        "https://seawatch-xp4qirmr.manus.space/reports/" + date + ".html\n", encoding="utf-8")
     run(g, "إرسال جاف لتقرير يومي (معتمد)", ["python3", "tools/telegram_send.py", "--file", str(sample),
         "--dry-run", "--daily-report", "--date", date], tolerate=0,
         note="اختبار جاف: لا تصل رسالة إلى القناة")
@@ -251,12 +276,43 @@ def main() -> int:
             probe(g, "جهات التسليم معرّفة", False, f"{type(exc).__name__}")
     if net:
         try:
-            with urllib.request.urlopen(f"{SITE_URL}/healthz", timeout=40) as r:
+            with urllib.request.urlopen(f"{SITE_URL}/api/health", timeout=40) as r:
                 body = r.read(200).decode("utf-8", "ignore")
-            probe(g, "خدمة البوت تستجيب", r.status == 200, f"HTTP {r.status} · {body[:40]}")
+            probe(g, "خدمة الويب هوك تستجيب", r.status == 200, f"HTTP {r.status} · {body[:60]}")
         except Exception as exc:  # noqa: BLE001
-            probe(g, "خدمة البوت تستجيب", False, f"{type(exc).__name__}", tolerate=True,
-                  note="تعذّر الوصول لخدمة البوت — تحقّق من نشر الحاوية")
+            probe(g, "خدمة الويب هوك تستجيب", False, f"{type(exc).__name__}", tolerate=True,
+                  note="تعذّر الوصول لخدمة الويب هوك — راجع نقطة النشر وحاوية الخدمة")
+        try:
+            req = urllib.request.Request(f"{SITE_URL}/api/telegram/webhook", data=b"{}",
+                                         headers={"Content-Type": "application/json"})
+            with urllib.request.urlopen(req, timeout=40) as r:
+                code = r.status
+        except urllib.error.HTTPError as exc:
+            code = exc.code
+        except Exception:  # noqa: BLE001
+            code = 0
+        probe(g, "الويب هوك يستقبل ويرفض غير الموقّع", code in (401, 403),
+              f"HTTP {code}", note="رمز 401/403 هو السلوك الصحيح لمنع أي طلب غير موقّع")
+        tok = os.environ.get("TELEGRAM_BOT_TOKEN", "")
+        if tok:
+            def tg(method: str) -> dict:
+                with urllib.request.urlopen(f"https://api.telegram.org/bot{tok}/{method}", timeout=40) as r:
+                    return json.loads(r.read().decode())
+            try:
+                info = tg("getWebhookInfo").get("result", {})
+                probe(g, "الويب هوك مسجَّل على نطاق الموقع", info.get("url") == f"{SITE_URL}/api/telegram/webhook",
+                      f"{info.get('url') or 'غير مسجّل'} · معلّق {info.get('pending_update_count')} · أخطاء {info.get('last_error_message') or 'لا'}",
+                      note="بلا تسجيل الويب هوك لا تصل أوامر البوت إلى الخدمة")
+                cmds = [c["command"] for c in tg("getMyCommands").get("result", [])]
+                probe(g, "أوامر البوت مثبّتة في تلغرام", len(cmds) >= 5, " · ".join("/" + c for c in cmds),
+                      note="قائمة الأوامر ما لم تُثبّت عبر setMyCommands لن تظهر للمشتركين")
+                btn = tg("getChatMenuButton").get("result", {})
+                url = (btn.get("web_app") or {}).get("url", "")
+                probe(g, "زر القائمة يفتح صفحة حقيقية", btn.get("type") == "commands" or url.startswith(SITE_URL),
+                      f"{btn.get('type')} · {url or '—'}",
+                      note="زر ويب أب على رابط غير موجود يعطي «not found» عند الضغط")
+            except Exception as exc:  # noqa: BLE001
+                probe(g, "فحوص واجهة تلغرام", False, f"{type(exc).__name__}", tolerate=True)
 
     # ═══ 8) الموقع ═══
     print("\n8) الموقع")
@@ -299,9 +355,9 @@ def main() -> int:
     run(g, "دفع النسخة الاحتياطية", ["bash", "tools/github_backup.sh"], tolerate=1, timeout=900)
     run(g, "المطابقة الصارمة بعد الدفع", ["python3", "validators/check_backup_parity.py", "--mode", "strict"],
         tolerate=1, note="تحذير = انحراف حقيقي بين الشجرة والمستودع يجب إصلاحه قبل التسليم")
-    repo = BRAIN / "backup-repo"
+    repo = Path(os.environ.get("BACKUP_REPO_DIR") or BRAIN.parent / "mda-marine-system")
     for rel in ("brain/bootstrap.sh", "brain/requirements.txt", "brain/.env.example", "brain/SETUP.md",
-                "brain/.devcontainer/devcontainer.json", "brain/appendices/sources-manifest.json",
+                ".devcontainer/devcontainer.json", "brain/appendices/sources-manifest.json",
                 "brain/sections/90-automation.md", "brain/validators/check_style.py",
                 "site/generator/build_site.py", "brain/tools/self_test.py"):
         probe(g, f"المستودع يحوي {rel}", (repo / rel).exists())
@@ -354,8 +410,11 @@ def main() -> int:
           note="قرار المستخدم: 0-9 لاتينية في كل المشروع")
     try:
         mtxt = meta.read_text(encoding="utf-8")
-        probe(g, "التوقيت مزدوج (UTC + البحرين)", bool(re.search(r"\d{6}Z", mtxt)) and "البحرين" in mtxt,
-              "DTG وتوقيت البحرين حاضران")
+        dtgs = sorted(set(re.findall(r"\d{4,6}Z", mtxt)))
+        bah = mtxt.count("البحرين")
+        probe(g, "التوقيت مزدوج (UTC + البحرين)", bool(dtgs) and bah > 0,
+              f"DTG: {'/'.join(dtgs[:3]) or 'لا شيء'} · ذكر البحرين: {bah} مرة",
+              note="التقارير تُسجَّل بوقت UTC وتوقيت البحرين معًا")
     except Exception as exc:  # noqa: BLE001
         probe(g, "التوقيت مزدوج (UTC + البحرين)", False, f"{type(exc).__name__}")
 

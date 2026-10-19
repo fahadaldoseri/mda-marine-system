@@ -6,7 +6,7 @@
  "failed": 4,
  "fail_ratio": 0.105,
  "fail_ratio_limit": 0.2,
- "items": 1043,
+ "items": 1063,
  "checked_feeds": [
   {
    "num": 6,
@@ -71,7 +71,7 @@
    "via": "primary",
    "fetched_url": "https://www.ajnet.me/rss",
    "items_count": 25,
-   "content_chars": 9954,
+   "content_chars": 9947,
    "tls_verification": "verified"
   },
   {
@@ -123,10 +123,10 @@
    "name": "قناة العربية",
    "primary_url": "https://www.alarabiya.net/feed/rss2/ar/aswaq.xml",
    "ok": true,
-   "via": "fallback:jina.ai/alarabiya-rss",
-   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
-   "items_count": 30,
-   "content_chars": 121892,
+   "via": "fallback:jina.ai/alarabiya-home",
+   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/",
+   "items_count": 50,
+   "content_chars": 65506,
    "tls_verification": "verified"
   },
   {
@@ -192,7 +192,7 @@
    "via": "primary",
    "fetched_url": "https://www.albiladpress.com/rss",
    "items_count": 100,
-   "content_chars": 16844,
+   "content_chars": 16832,
    "tls_verification": "verified"
   },
   {
@@ -372,7 +372,7 @@
    "via": "primary",
    "fetched_url": "https://www.lloydslist.com/rss/lloyds-list",
    "items_count": 20,
-   "content_chars": 16954,
+   "content_chars": 16956,
    "tls_verification": "verified"
   },
   {
@@ -497,5 +497,5 @@
    ]
   }
  ],
- "written_utc": "2026-10-19T22:23:11Z"
+ "written_utc": "2026-10-19T22:29:10Z"
 }
