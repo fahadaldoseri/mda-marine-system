@@ -10,8 +10,15 @@ import os
 import sys
 from pathlib import Path
 
-ROOTS = ["brain-marine-news", "seawatch"]
-SKIP_DIRS = {"__pycache__", ".git", "node_modules", ".pytest_cache", "shots"}
+HERE = Path(__file__).resolve().parent.parent          # مجلد brain
+BASE = HERE.parent                                      # جذر مساحة العمل
+ROOTS = [str(BASE / "brain-marine-news"), str(BASE / "seawatch")]
+if not Path(ROOTS[0]).exists():                          # عند التشغيل داخل نسخة مستنسخة
+    ROOTS = [str(HERE)] + ([str(HERE.parent / "site")] if (HERE.parent / "site").exists() else [])
+SKIP_DIRS = {"__pycache__", ".git", "node_modules", ".pytest_cache", "shots", "logs",
+             "archive", "originals", "templates", ".history", ".manus-jobs",
+             "terminal_full_output", "backup-repo", "web"}
+SKIP_FILES = {"tools/normalize_digits.py", "validators/check_numerals.py"}
 BINARY = {".pdf", ".docx", ".png", ".jpg", ".jpeg", ".webp", ".zip", ".gz", ".tgz", ".woff", ".woff2",
           ".ttf", ".mp4", ".ico", ".xlsx", ".db", ".pyc"}
 TABLE = {0x0660 + i: str(i) for i in range(10)}          # \\u0660..\\u0669 → 0-9
@@ -29,6 +36,10 @@ def targets(roots):
             for f in files:
                 p = Path(d, f)
                 if p.suffix.lower() in BINARY:
+                    continue
+                if any(str(p).endswith(x) for x in SKIP_FILES):
+                    continue
+                if "/archive/" in p.as_posix() or "/originals/" in p.as_posix():
                     continue
                 yield p
 

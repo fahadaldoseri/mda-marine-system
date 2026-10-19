@@ -31,6 +31,8 @@ NOTE_OFAC=""; NOTE_ARCH=""; NOTE_LEDGER=""
 # 1) التغذيات — إنذار مبكر من 38 تغذية (رمز خروج حقيقي: 0/1/2)
 echo "-- 1) التغذيات --" | tee -a "$LOG"
 python3 tools/check_feeds.py >>"$LOG" 2>&1; RC=$?
+python3 tools/normalize_digits.py >/dev/null 2>&1 || true
+#            ↑ قرار الأرقام الإنجليزية: التغذيات المولّدة تُكتب بأرقام لاتينية
 S_FEEDS="$(classify $RC)"
 if [ -f "feeds/feeds-$D.md" ] && [ "$S_FEEDS" != "failed" ]; then
   echo "   ✔ مستجدات التغذيات: feeds/feeds-$D.md (الحالة: $S_FEEDS)" | tee -a "$LOG"

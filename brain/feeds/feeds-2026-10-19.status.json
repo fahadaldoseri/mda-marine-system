@@ -2,11 +2,11 @@
  "date": "2026-10-19",
  "status": "degraded",
  "checked": 38,
- "ok": 34,
- "failed": 4,
- "fail_ratio": 0.105,
+ "ok": 33,
+ "failed": 5,
+ "fail_ratio": 0.132,
  "fail_ratio_limit": 0.2,
- "items": 1063,
+ "items": 1059,
  "checked_feeds": [
   {
    "num": 6,
@@ -101,10 +101,10 @@
    "name": "قناة العربية",
    "primary_url": "https://www.alarabiya.net/feed/rss2/ar.xml",
    "ok": true,
-   "via": "fallback:jina.ai/alarabiya-rss",
-   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
-   "items_count": 30,
-   "content_chars": 121892,
+   "via": "fallback:jina.ai/alarabiya-home",
+   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/",
+   "items_count": 50,
+   "content_chars": 65319,
    "tls_verification": "verified"
   },
   {
@@ -126,7 +126,7 @@
    "via": "fallback:jina.ai/alarabiya-home",
    "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/",
    "items_count": 50,
-   "content_chars": 65506,
+   "content_chars": 65505,
    "tls_verification": "verified"
   },
   {
@@ -144,12 +144,13 @@
    "num": 17,
    "name": "حساب @bna_en على X",
    "primary_url": "https://web.archive.org/web/20260108135704/https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
-   "ok": true,
-   "via": "fallback:jina.ai/bna-en-x",
-   "fetched_url": "https://r.jina.ai/http://x.com/bna_en",
-   "items_count": 24,
-   "content_chars": 1716,
-   "tls_verification": "verified"
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: HTTP Error 403: Forbidden | fallback:jina.ai/bna-en-x: proxy reported target error | fallback:jina.ai/bna-rss: blocked page: Human Verification"
   },
   {
    "num": 20,
@@ -181,7 +182,7 @@
    "via": "fallback:jina.ai/alayam-home",
    "fetched_url": "https://r.jina.ai/http://www.alayam.com/",
    "items_count": 50,
-   "content_chars": 7721,
+   "content_chars": 6868,
    "tls_verification": "verified"
   },
   {
@@ -192,7 +193,7 @@
    "via": "primary",
    "fetched_url": "https://www.albiladpress.com/rss",
    "items_count": 100,
-   "content_chars": 16832,
+   "content_chars": 16870,
    "tls_verification": "verified"
   },
   {
@@ -433,6 +434,36 @@
  ],
  "failed_feeds": [
   {
+   "num": 17,
+   "name": "حساب @bna_en على X",
+   "primary_url": "https://web.archive.org/web/20260108135704/https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
+   "error": "blocked page: Human Verification",
+   "block_reason": "all routes failed: primary: HTTP Error 403: Forbidden | fallback:jina.ai/bna-en-x: proxy reported target error | fallback:jina.ai/bna-rss: blocked page: Human Verification",
+   "attempts": [
+    {
+     "url": "https://web.archive.org/web/20260108135704/https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
+     "via": "primary",
+     "ok": false,
+     "error": "HTTP Error 403: Forbidden",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://r.jina.ai/http://x.com/bna_en",
+     "via": "fallback:jina.ai/bna-en-x",
+     "ok": false,
+     "error": "proxy reported target error",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://r.jina.ai/http://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
+     "via": "fallback:jina.ai/bna-rss",
+     "ok": false,
+     "error": "blocked page: Human Verification",
+     "tls_verification": "verified"
+    }
+   ]
+  },
+  {
    "num": 25,
    "name": "وكالة أنباء الإمارات (وام)",
    "primary_url": "https://www.wam.ae/ar/rss",
@@ -497,5 +528,5 @@
    ]
   }
  ],
- "written_utc": "2026-10-19T22:29:10Z"
+ "written_utc": "2026-10-19T22:34:03Z"
 }

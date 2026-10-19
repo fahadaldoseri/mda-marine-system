@@ -104,6 +104,8 @@ def guard(args, text: str, targets: list[dict]) -> tuple[bool, str]:
         allowed = [f"{args.date}.pdf", f"map-{args.date}.png", f"التقرير-اليومي-{args.date}.pdf"]
         if p.name not in allowed:
             return False, f"{kind} غير مسموح: {p.name} (المسموح: PDF تقرير اليوم أو خريطته)"
+    if getattr(args, "validate_only", False):
+        return True, "تحقق مطابق للسياسة (بلا إرسال)"
     for t in targets:
         if _sent_today(t.get("label", "?"), args.date):
             return False, (f"أُرسل تقرير {args.date} إلى «{t.get('label')}» سابقًا. "
@@ -205,6 +207,8 @@ def main() -> int:
     ap.add_argument("--caption", default="")
     ap.add_argument("--targets")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--validate-only", action="store_true",
+                    help="يفحص النص وفق السياسة ويطبع الحكم بلا إرسال ولا ضبط سجل")
     ap.add_argument("--daily-report", action="store_true",
                     help="إرسال التقرير الصباحي الرسمي (الاستخدام الوحيد المسموح)")
     ap.add_argument("--date", help="تاريخ التقرير YYYY-MM-DD")
@@ -231,6 +235,10 @@ def main() -> int:
 
     targets = load_targets(args.targets)
     allowed, verdict = guard(args, text, targets)
+    if getattr(args, "validate_only", False):
+        verdict_label = "صالح" if allowed else "مرفوض"
+        print(f"[تلغرام] {verdict_label} — {verdict}")
+        return 0 if allowed else 3
     if not allowed:
         _log({"decision": "refused", "date": args.date, "reason": verdict,
               "targets": [t.get("label") for t in targets],

@@ -254,12 +254,16 @@ def main() -> int:
     sample = Path("/tmp/selftest-digest.html")
     sample.write_text(
         "<b>مركز الوعي بالمجال البحري</b>\n"
-        "التقرير اليومي لأمن الملاحة — «و ب 26/10/16»\n"
+        "التقرير اليومي لأمن الملاحة والأوضاع الراهنة في المنطقة\n"
+        "تقرير رقم: «و ب 26/10/16» — تاريخ: 20 أكتوبر 2026\n"
+        "الفترة: 180400Z–190400Z أكتوبر 2026\n"
+        "الوقت: 0400Z (0700C بتوقيت البحرين)\n"
+        "مستوى الخطر: مرتفع جدًا\n"
         "اختبار جاف فقط — لا يُرسل.\n"
         "https://seawatch-xp4qirmr.manus.space/reports/" + date + ".html\n", encoding="utf-8")
-    run(g, "إرسال جاف لتقرير يومي (معتمد)", ["python3", "tools/telegram_send.py", "--file", str(sample),
-        "--dry-run", "--daily-report", "--date", date], tolerate=0,
-        note="اختبار جاف: لا تصل رسالة إلى القناة")
+    run(g, "قدح تقرير يومي يمرّ من الحاجز (بلا إرسال)", ["python3", "tools/telegram_send.py", "--file", str(sample),
+        "--validate-only", "--daily-report", "--date", date], tolerate=0,
+        note="وضع التحقق يفحص النص وفق سياسة القناة بلا إرسال ولا ضبط سجل الإرسال")
     rc_ref = subprocess.run(["python3", "tools/telegram_send.py", "--text", "رسالة جانبية ليست تقريرًا يوميًا",
                              "--dry-run"], cwd=str(BRAIN), capture_output=True, text=True).returncode
     probe(g, "الحاجز يرفض غير التقارير اليومية", rc_ref != 0, f"رمز الرفض {rc_ref}",
