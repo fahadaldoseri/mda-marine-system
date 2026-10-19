@@ -167,3 +167,7 @@
 - `templates/approved-pdf/print-profile.json` — بصمة الشكل المعتمد v3 وقواعده.
 - `templates/approved-pdf/print-css-frozen.css` — نمط الطباعة المجمّد.
 - `validators/check_pdf_format.py` — البوابة التي ترفض أي PDF مخالف.
+
+## النسخة الاحتياطية
+
+- `tools/github_backup.sh` — نسخة كاملة على GitHub (مستودع خاص): تُبنى الشجرة النظيفة `brain/` + `site/` وتُدفع بعد كل إصدار (الخطوة أ16).
