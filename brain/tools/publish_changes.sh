@@ -29,6 +29,7 @@ fi
 
 echo
 echo "٣) الحصيلة"
-echo "  النظام:  $(git -C "$_B" rev-parse --short HEAD 2>/dev/null || echo '-')  (المستودع الخاص)"
+_OUT="${BACKUP_REPO_DIR:-$(dirname "$_B")/mda-marine-system}"
+echo "  النظام:  $(git -C "$_OUT" rev-parse --short HEAD 2>/dev/null || echo '-')  (المستودع الخاص — النسخة الوحيدة)"
 echo "  الموقع:  $(git -C "$_S" rev-parse --short HEAD 2>/dev/null || echo '-')"
 exit $FAIL
