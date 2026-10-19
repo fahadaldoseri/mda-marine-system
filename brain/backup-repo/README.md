@@ -6,8 +6,9 @@
 
 ```
 mda-marine-system/
-├── brain/        نظام «Brain»: القواعد والبوابات والأدوات والبيانات والتقارير
-└── site/         مشروع الموقع: المولّد والخدمة والأصول والخطة
+├── .devcontainer/  تهيئة البيئة السحابية (GitHub Codespaces) — تُبنى تلقائيًا من المستودع
+├── brain/          نظام «Brain»: القواعد والبوابات والأدوات والبيانات والتقارير
+└── site/           مشروع الموقع: المولّد والخدمة والأصول والخطة
 ```
 
 ### `brain/` — النظام
@@ -65,6 +66,7 @@ mda-marine-system/
 | الشكل المطبوع المعتمد | `validators/check_pdf_format.py` | 2 |
 | تغطية فحص العقوبات | `validators/check_ofac_coverage.py` | 1 |
 | عدد المصادر (مصدر واحد للحقيقة) | `validators/check_sources_count.py` | 1 |
+| قابلية النقل (لا مسار مطلق في الشيفرة) | `validators/check_portable_paths.py` | 2 |
 | بوابات المخرج (12) | `tools/qa_gates.py` | 2 |
 
 ## سجل الأعطال
@@ -96,3 +98,24 @@ for line in pathlib.Path("docs/فهرس-الملفات.tsv").read_text(encoding=
 print("النتيجة:", "مطابق ✓" if bad == 0 else f"{bad} اختلافًا")
 PY
 ```
+## التشغيل من أي جهاز
+
+النظام **محمول بالكامل**: لا مسار مطلق مكتوب في أي ملف تنفيذي، وكل ملف يستنتج جذره من موقع الملف أو يقبله من `BRAIN_DIR`/`SITE_DIR`.
+
+```bash
+# ١) استنساخ
+git clone https://github.com/fahadaldoseri/mda-marine-system.git   # الرابط كما في زر Code بالمستودع
+cd mda-marine-system
+
+# ٢) تهيئة كاملة بأمر واحد (حزم النظام · بايثون · متصفح Playwright · خطوط عربية)
+bash brain/bootstrap.sh
+
+# ٣) فحص أن كل شيء جاهز
+bash brain/bootstrap.sh --verify-only
+```
+
+الأدلة: `brain/SETUP.md` (التهيئة التفصيلية) · `brain/docs/تشغيل-Codespaces.md` (تشغيل سحابي من أي جهاز بلا تثبيت).
+
+**على GitHub Codespaces:** زر **Code** ← **Codespaces** ← **Create codespace on main**، وتُبنى البيئة تلقائيًا من `.devcontainer/devcontainer.json` في ٥–٨ دقائق. ملاحظة: النشر على الموقع وخدمة الويب هوك والمهام المجدولة تبقى على المنصة، وCodespaces بيئة تشغيل وتحرير.
+
+## كيف يعمل النظام يوميًا

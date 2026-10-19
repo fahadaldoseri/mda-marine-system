@@ -64,11 +64,12 @@ python3 -m pip install -r requirements.txt && python3 -m playwright install chro
 
 **ويندوز:** استخدم **WSL** (Ubuntu) واتبع خطوات Ubuntu أعلاه. التشغيل الأصلي على ويندوز غير مُختبَر بسبب اعتماد توليد PDF على LibreOffice ومتصفح Playwright.
 
-**GitHub Codespaces:** بعد فتح المستودع في Codespaces شغّل:
+**GitHub Codespaces:** البيئة تُبنى تلقائيًا من `.devcontainer/devcontainer.json` عند إنشاء الـCodespace (تشغيل `bootstrap.sh` ضمن التهيئة)، ثم:
 ```bash
-bash brain/bootstrap.sh
+bash brain/bootstrap.sh --verify-only     # تأكيد أن كل شيء جاهز
+bash brain/bootstrap.sh                   # إعادة التهيئة إن ظهر نقص
 ```
-(المسارات تُستنتج تلقائيًا من موقع الملفات، فلا حاجة لتعديل أي شيء.)
+الدليل الكامل خطوة بخطوة: `docs/تشغيل-Codespaces.md`. والمسارات تُستنتج تلقائيًا من موقع الملفات، فلا حاجة لتعديل أي شيء.
 
 ---
 
@@ -89,6 +90,12 @@ bash brain/bootstrap.sh
 | `DATABASE_URL` | — | قاعدة بيانات مشتركي تلغرام (تُوفَّرها المنصة) |
 
 القالب الكامل: `.env.example` في كل شجرة.
+
+**ملف البيئة المحلي:** انسخ القالب إلى `.env` في الشجرة نفسها وضع القيم الحقيقية فيه (لا يُرفع إلى المستودع):
+```bash
+cp .env.example .env && chmod 600 .env
+```
+أدوات التسليم تقرأ `brain/.env` تلقائيًا عند غياب المتغيّر من بيئة التشغيل — وهذا ما يجعل تسليم تلغرام يعمل في بيئة سحابية مثل Codespaces.
 
 ---
 
@@ -155,6 +162,7 @@ bash tools/final_gate.sh 2026-10-19
 | المستثنى | السبب |
 |---|---|
 | `.env` · `state/webhook-secret.txt` | أسرار — وجودها في مستودع يعني كشفها |
+| `.env.example` | **مُضمَّن** في المستودع (قالب بلا قيم سرية)، وتُستثنى منه استثناءً صريحًا قاعدة `.env.*` |
 | معرّفات تلغرام (`chat_id` · `bot_id`) | تُحجب قيمتها داخل الملف مع بقاء البنية |
 | `site/dist/` · `shots/` | مخرجات مولّدة تُعاد بأمر واحد |
 | `__pycache__/` · `node_modules/` | مخلفات تشغيل |
