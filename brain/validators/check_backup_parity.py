@@ -93,6 +93,9 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--mode", choices=["strict", "advisory"], default="advisory")
     a = ap.parse_args()
+    if _inside_repo():
+        print("  ℹ أنت داخل نسخة من المستودع نفسه — لا مقارنة (المطلوب هنا: بوابات المحتوى)")
+        return 0
     if not REPO.exists():
         print(f"  ⚠ لا مستودع نسخ احتياطي في: {REPO} (يُتخطّى الفحص)")
         return 3
