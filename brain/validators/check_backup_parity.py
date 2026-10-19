@@ -83,6 +83,12 @@ def repo_manifest():
     return out
 
 
+def _inside_repo() -> bool:
+    """يكتشف التشغيل من داخل نسخة من المستودع نفسه (استنساخ/Codespaces)."""
+    here = Path(__file__).resolve()
+    return (here.parent.parent / "brain").is_dir() and (here.parent.parent / "site").is_dir()
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--mode", choices=["strict", "advisory"], default="advisory")
