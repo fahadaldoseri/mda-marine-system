@@ -36,7 +36,7 @@ run() {
   local name="$1" tolerate="$2"; shift 2
   local out rc
   out=$("$@" 2>&1); rc=$?
-  printf '%-34s' "  $name"
+  printf '  %s → ' "$name"
   if [ "$rc" -eq 0 ]; then echo "✔ نجح"; PASS=$((PASS+1))
   elif [ "$rc" -eq "$tolerate" ]; then echo "• تحذير (رمز $rc)"; WARN=$((WARN+1))
   else echo "✘ فشل (رمز $rc)"; FAILN=$((FAILN+1))
