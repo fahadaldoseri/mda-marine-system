@@ -51,7 +51,7 @@ SOURCES_MANIFEST = Path(f'{BRAIN}/appendices/sources-manifest.json')
 
 
 def approved_source_count(fallback: int = 40) -> int:
-    """عدد المصادر المعتمد — مصدر واحد للحقيقة (بند ٨ من تدقيق 19 أكتوبر 2026)."""
+    """عدد المصادر المعتمد — مصدر واحد للحقيقة (بند 8 من تدقيق 19 أكتوبر 2026)."""
     try:
         return int(json.loads(SOURCES_MANIFEST.read_text(encoding='utf-8'))['approved_source_count'])
     except (OSError, json.JSONDecodeError, KeyError, ValueError):
