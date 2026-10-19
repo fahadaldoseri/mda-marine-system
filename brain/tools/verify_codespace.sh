@@ -10,7 +10,11 @@
 set -u
 
 B="${BRAIN_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
-SITE="${SITE_DIR:-$(dirname "$B")/seawatch}"
+# مسار الموقع: SITE_DIR ← seawatch ← site (نفس منطق tools/export_report_assets.py)
+if [ -n "${SITE_DIR:-}" ]; then SITE="$SITE_DIR"
+elif [ -d "$(dirname "$B")/seawatch" ]; then SITE="$(dirname "$B")/seawatch"
+elif [ -d "$(dirname "$B")/site" ]; then SITE="$(dirname "$B")/site"
+else SITE="$(dirname "$B")/seawatch"; fi
 PY="${PYTHON_BIN:-python3}"
 DATE="${1:-}"
 
@@ -38,7 +42,9 @@ run() {
   out=$("$@" 2>&1); rc=$?
   printf '  %s → ' "$name"
   if [ "$rc" -eq 0 ]; then echo "✔ نجح"; PASS=$((PASS+1))
-  elif [ "$rc" -eq "$tolerate" ]; then echo "• تحذير (رمز $rc)"; WARN=$((WARN+1))
+  elif [ "$rc" -eq "$tolerate" ]; then
+    echo "• تحذير (رمز $rc)"; WARN=$((WARN+1))
+    [ "$rc" -ne 0 ] && echo "$out" | tail -3 | sed 's/^/      │ /' >&2
   else
     echo "✘ فشل (رمز $rc)"; FAILN=$((FAILN+1))
     echo "$out" | tail -3 | sed 's/^/      │ /'
