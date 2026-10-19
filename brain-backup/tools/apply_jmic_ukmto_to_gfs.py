@@ -2,6 +2,11 @@
 """تطبيق مادة UKMTO VRA No.11 وJMIC 105 على تقرير سفينتي الحاويات (ملف المستخدم).
 يبدأ من نسخة المستخدم كما هي، ويحافظ على القالب والمسافات والترقيم.
 """
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
 from copy import deepcopy
 from pathlib import Path
 
@@ -12,7 +17,7 @@ from docx.text.paragraph import Paragraph
 from docx.table import Table
 
 SRC = "/home/ubuntu/upload/pasted_file_FxdqHX_تقرير-GFS-PRIDE-GFS-GISELLE-نهائي-2026-10-17.docx"
-DST = "/home/ubuntu/brain-marine-news/reports/docx/تقرير-GFS-PRIDE-GFS-GISELLE-مدقق-2026-10-17.docx"
+DST = f"{BRAIN}/reports/docx/تقرير-GFS-PRIDE-GFS-GISELLE-مدقق-2026-10-17.docx"
 
 doc = Document(SRC)
 log = []

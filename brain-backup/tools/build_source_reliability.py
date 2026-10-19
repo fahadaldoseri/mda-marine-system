@@ -2,10 +2,15 @@
 # -*- coding: utf-8 -*-
 """يبني بيانات ملحق موثوقية المصادر من جدول مصادر التقرير + سجل الموثوقية الثابت.
 الاستخدام: python3 tools/build_source_reliability.py <تقرير.md> <ملف-الواجهة.json> [<ملف-الواجهة2.json> ...]"""
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
 import json, re, sys
 from pathlib import Path
 
-ROOT = Path('/home/ubuntu/brain-marine-news')
+ROOT = Path(f'{BRAIN}')
 REG = {r[0]: r for r in json.loads((ROOT / 'appendices/source-reliability-40.json').read_text(encoding='utf-8'))}
 
 def main():

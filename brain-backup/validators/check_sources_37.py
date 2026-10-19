@@ -14,6 +14,11 @@
   خطأ خادم        : 5xx
   رابط محوّل      : تحويل إلى صفحة أخرى تُسجَّل معه
 """
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
 
 import argparse
 import json
@@ -139,7 +144,7 @@ def classify(res):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--out", default="/home/ubuntu/brain-marine-news/validators/sources-37-result.json")
+    ap.add_argument("--out", default=f"{BRAIN}/validators/sources-37-result.json")
     ap.add_argument("--workers", type=int, default=8)
     a = ap.parse_args()
 

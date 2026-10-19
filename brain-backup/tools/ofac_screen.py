@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """فحص أسماء السفن والوسطاء مقابل قائمة OFAC SDN، مع قيد قاعدة 50%."""
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
 import csv, io, json, re, sys, urllib.request, datetime as dt
 from pathlib import Path
 URLS = ['https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/SDN.CSV',
@@ -38,7 +43,7 @@ def main():
     src, names = load()
     if not names:
         print("  ✘ تعذر تحميل قائمة SDN — تُسجَّل النتيجة (تعذر) ولا يُدَّعى فحص")
-        (Path('/home/ubuntu/brain-marine-news/archive') / 'ofac-screen-latest.json').write_text(
+        (Path(f'{BRAIN}/archive') / 'ofac-screen-latest.json').write_text(
             json.dumps({'utc': dt.datetime.now(dt.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
                         'list': None, 'names': 0, 'status': 'list_unavailable',
                         'rule_note': 'تعذر تحميل قائمة SDN — لا يُدَّعى فحص',
@@ -70,7 +75,7 @@ def main():
             res, m = 'no_match', []
             print(f"   ✔ لا تطابق · {t}")
         hits.append({'target': t, 'match': m[:5], 'result': res})
-    out = Path('/home/ubuntu/brain-marine-news/archive'); out.mkdir(exist_ok=True)
+    out = Path(f'{BRAIN}/archive'); out.mkdir(exist_ok=True)
     (out / 'ofac-screen-latest.json').write_text(json.dumps(
         {'utc': dt.datetime.now(dt.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
          'list': src, 'names': len(names),

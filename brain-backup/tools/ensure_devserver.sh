@@ -5,9 +5,11 @@
 # الحل: يُستدعى هذا السكربت في بداية كل تشغيل (صباحي أو تفاعلي) فيعيد الخادم إن كان متوقفًا.
 set -uo pipefail
 P="${1:-3000}"
-DIST=/home/ubuntu/seawatch/dist
-LOG=/home/ubuntu/brain-marine-news/logs/devserver-$P.log
-mkdir -p /home/ubuntu/brain-marine-news/logs
+B="${BRAIN_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
+SITE="${SITE_DIR:-$(dirname "$B")/seawatch}"
+DIST="$SITE/dist"
+LOG="$B/logs/devserver-$P.log"
+mkdir -p "$B/logs"
 
 probe() { curl -s -o /dev/null -w '%{http_code}' --max-time 6 "http://127.0.0.1:$P/" 2>/dev/null || true; }
 

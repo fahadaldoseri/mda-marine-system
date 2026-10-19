@@ -8,6 +8,11 @@
 
 الاستخدام: python3 validators/check_sources_37_browser.py [--out file.json] [--conc 4]
 """
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
 
 import argparse
 import asyncio
@@ -88,7 +93,7 @@ async def run(conc, out_path):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--out", default="/home/ubuntu/brain-marine-news/validators/sources-37-browser.json")
+    ap.add_argument("--out", default=f"{BRAIN}/validators/sources-37-browser.json")
     ap.add_argument("--conc", type=int, default=4)
     a = ap.parse_args()
     return asyncio.run(run(a.conc, a.out))

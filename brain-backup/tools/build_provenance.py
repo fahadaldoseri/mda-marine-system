@@ -5,6 +5,11 @@
 ويخرج: audit/provenance-<case>.json/.md و audit/discrepancies-<case>.json/.md
 البصمات والأحجام تُقرأ من البيان لا تُكتب يدويًا.
 """
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
 import datetime as dt
 import hashlib
 import json
@@ -12,7 +17,7 @@ from pathlib import Path
 
 DAY = '2026-10-16'
 CASE = '2026-10-13-14'
-BASE = Path('/home/ubuntu/brain-marine-news')
+BASE = Path(f'{BRAIN}')
 ARCH = BASE / 'archive/originals' / DAY
 OUT = BASE / 'audit'
 OUT.mkdir(exist_ok=True)

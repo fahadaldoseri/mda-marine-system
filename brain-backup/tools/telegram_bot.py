@@ -11,6 +11,22 @@
     python3 tools/telegram_bot.py             # استمرار بالاستقصاء الطويل
 """
 from __future__ import annotations
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+
+def _tree(_env, _base, *_names):
+    """جذر الشجرة المجاورة: من متغيّر البيئة أو من مجلد شقيق."""
+    _v = _os.environ.get(_env)
+    if _v:
+        return _Path(_v)
+    for _n in _names:
+        _c = _base.parent / _n
+        if _c.is_dir():
+            return _c
+    return _base.parent / _names[0]
+SITE = _tree("SITE_DIR", _ROOT, "seawatch", "site")
 
 import argparse
 import json
@@ -111,7 +127,7 @@ def cmd_report(tok: str, chat: str) -> None:
 
 
 def cmd_pdf(tok: str, chat: str) -> None:
-    pair = sorted(Path("/home/ubuntu/seawatch/dist/reports/pdf").glob("*.pdf"))
+    pair = sorted(Path(f"{SITE}/dist/reports/pdf").glob("*.pdf"))
     if not pair:
         api("sendMessage", {"chat_id": chat, "text": "لا توجد نسخة PDF منشورة بعد."}, tok)
         return

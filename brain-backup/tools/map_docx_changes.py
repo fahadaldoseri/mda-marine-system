@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """يبني خريطة حرفية لتغييرات المصطلحات في تقرير GFS: القسم ← الفقرة/الصف ← النص الحالي ← النص الجديد."""
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
 import json, re, sys
 from pathlib import Path
 from docx import Document
 
-DOC = Path('/home/ubuntu/brain-marine-news/reports/docx/تقرير-GFS-PRIDE-GFS-GISELLE-المصحح-2026-10-16.docx')
+DOC = Path(f'{BRAIN}/reports/docx/تقرير-GFS-PRIDE-GFS-GISELLE-المصحح-2026-10-16.docx')
 
 # (القديم، الجديد، الوسم)
 RULES = [
@@ -72,7 +77,7 @@ def main():
                 ctx = txt[max(0, i - 45): i + len(old) + 45].replace('\n', ' ')
                 hits.append({'kind': kind, 'ref': ref, 'section': sec, 'old': old,
                              'new': new, 'tag': tag, 'context': ctx, 'cell': txt[:120]})
-    out = Path('/home/ubuntu/brain-marine-news/audit/خريطة-تطبيق-المصطلحات-GFS.json')
+    out = Path(f'{BRAIN}/audit/خريطة-تطبيق-المصطلحات-GFS.json')
     out.write_text(json.dumps(hits, ensure_ascii=False, indent=1), encoding='utf-8')
     print(f'الوحدات: {len(us)} · مواضع مطابقة: {len(hits)}')
     print(f'حُفظت في: {out}')

@@ -8,6 +8,23 @@
   reports/docx/التقرير-اليومي-<التاريخ>.docx
 """
 from __future__ import annotations
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
+
+def _tree(_env, _base, *_names):
+    """جذر الشجرة المجاورة: من متغيّر البيئة أو من مجلد شقيق."""
+    _v = _os.environ.get(_env)
+    if _v:
+        return _Path(_v)
+    for _n in _names:
+        _c = _base.parent / _n
+        if _c.is_dir():
+            return _c
+    return _base.parent / _names[0]
+SITE = _tree("SITE_DIR", _ROOT, "seawatch", "site")
 
 import argparse
 import re
@@ -15,11 +32,11 @@ import subprocess
 import sys
 from pathlib import Path
 
-ROOT = Path("/home/ubuntu/brain-marine-news")
-MAP_PNG = Path("/home/ubuntu/seawatch/dist/reports/img")
+ROOT = Path(f"{BRAIN}")
+MAP_PNG = Path(f"{SITE}/dist/reports/img")
 HIDDEN_SECTIONS = ("المصادر والمراجع", "موثوقية المصادر")
 WEB_META = ROOT / "web" / "meta"
-HTML_DIR = Path("/home/ubuntu/seawatch/dist/reports")
+HTML_DIR = Path(f"{SITE}/dist/reports")
 
 
 def load_meta(date: str) -> dict:

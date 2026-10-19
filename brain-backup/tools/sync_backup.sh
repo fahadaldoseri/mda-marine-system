@@ -4,8 +4,10 @@
 # الاعتماد على cp فقط، مع تحقق نهائي من حداثة الملفات.
 set -u
 
-SRC="${1:-/home/ubuntu/brain-marine-news}"
-DST="${2:-/home/ubuntu/seawatch/brain-backup}"
+_B="${BRAIN_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
+_S="${SITE_DIR:-$(dirname "$_B")/seawatch}"
+SRC="${1:-$_B}"
+DST="${2:-$_S/brain-backup}"
 DATE="${3:-$(date -u +%F)}"
 
 mkdir -p "$DST"

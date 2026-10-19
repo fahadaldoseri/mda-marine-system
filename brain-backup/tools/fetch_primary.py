@@ -7,6 +7,11 @@
   python3 tools/fetch_primary.py --day 2026-10-16 --batch urls.txt
 سطر الملف: <المعرّف>|<الرابط>
 """
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
 import argparse
 import datetime as dt
 import hashlib
@@ -15,7 +20,7 @@ import re
 import urllib.request
 from pathlib import Path
 
-BASE = Path('/home/ubuntu/brain-marine-news/archive/originals')
+BASE = Path(f'{BRAIN}/archive/originals')
 UA = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
                     '(KHTML, like Gecko) Chrome/124 Safari/537.36',
       'Accept': 'text/html,application/xhtml+xml,application/pdf,*/*',

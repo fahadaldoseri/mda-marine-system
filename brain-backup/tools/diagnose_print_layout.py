@@ -7,6 +7,22 @@
   python3 tools/diagnose_print_layout.py --date 2026-10-18 [--pdf <pdf>]
 """
 from __future__ import annotations
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+
+def _tree(_env, _base, *_names):
+    """جذر الشجرة المجاورة: من متغيّر البيئة أو من مجلد شقيق."""
+    _v = _os.environ.get(_env)
+    if _v:
+        return _Path(_v)
+    for _n in _names:
+        _c = _base.parent / _n
+        if _c.is_dir():
+            return _c
+    return _base.parent / _names[0]
+SITE = _tree("SITE_DIR", _ROOT, "seawatch", "site")
 
 import argparse
 import re
@@ -15,7 +31,7 @@ import tempfile
 from pathlib import Path
 
 B = Path(__file__).resolve().parent.parent
-DIST = Path("/home/ubuntu/seawatch/dist/reports")
+DIST = Path(f"{SITE}/dist/reports")
 MM_PER_PX = 25.4 / 96  # قياس CSS في وضع الطباعة
 
 

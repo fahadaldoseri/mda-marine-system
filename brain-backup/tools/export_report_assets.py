@@ -8,8 +8,8 @@
   python3 tools/export_report_assets.py --date 2026-10-18 --no-toc
 
 المخرجات (داخل مشروع الموقع لتُنشر مع الصفحة):
-  /home/ubuntu/seawatch/dist/reports/pdf/<التاريخ>.pdf
-  /home/ubuntu/seawatch/dist/reports/img/map-<التاريخ>.png
+  $SITE_DIR/dist/reports/pdf/<التاريخ>.pdf
+  $SITE_DIR/dist/reports/img/map-<التاريخ>.png
 
 قواعد PDF المعتمدة (قرار 18 أكتوبر 2026):
   1. لا يُعرض قسم «المصادر والمراجع» ولا ملحق «موثوقية المصادر» (كلاهما داخل #sec-16) في نسخة PDF.
@@ -23,6 +23,22 @@ Chromium (Playwright) لطباعة A4 بالوسائط print، ولتصوير ع
 لا يُعدَّل أي ملف مصدر؛ الأصول مخرجات مشتقة.
 """
 from __future__ import annotations
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+
+def _tree(_env, _base, *_names):
+    """جذر الشجرة المجاورة: من متغيّر البيئة أو من مجلد شقيق."""
+    _v = _os.environ.get(_env)
+    if _v:
+        return _Path(_v)
+    for _n in _names:
+        _c = _base.parent / _n
+        if _c.is_dir():
+            return _c
+    return _base.parent / _names[0]
+SITE = _tree("SITE_DIR", _ROOT, "seawatch", "site")
 
 import argparse
 import contextlib
@@ -38,7 +54,7 @@ from pathlib import Path
 
 B = Path(__file__).resolve().parent.parent
 
-DIST = Path("/home/ubuntu/seawatch/dist")
+DIST = Path(f"{SITE}/dist")
 PORT = 8799
 
 # أنماط PDF فقط: تُحقن أثناء التصدير ولا تمسّ صفحة الموقع

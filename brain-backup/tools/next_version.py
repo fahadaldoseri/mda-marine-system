@@ -11,10 +11,15 @@
   python3 tools/next_version.py [التاريخ]            # يطبع رقم النسخة المتوقع
   python3 tools/next_version.py --check [التاريخ]    # يتحقق أن رقم نسخة اليوم صحيح (رمز خروج 1 عند الفشل)
 """
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
 import json, re, sys, datetime
 from pathlib import Path
 
-B = Path('/home/ubuntu/brain-marine-news')
+B = Path(f'{BRAIN}')
 PREFIX = 'و ب '
 PAT = re.compile(r'^و ب (\d{2})/(\d{2})/(\d+)(?:\s*—.*)?$')
 

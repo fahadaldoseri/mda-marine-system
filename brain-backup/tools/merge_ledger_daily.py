@@ -16,13 +16,18 @@
 الاستخدام: python3 tools/merge_ledger_daily.py
 المخرجات: cumulative-2026/event-ledger-master.json + appendices/event-code-map.json
 """
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
 import datetime
 import hashlib
 import json
 from collections import Counter
 from pathlib import Path
 
-B = Path('/home/ubuntu/brain-marine-news')
+B = Path(f'{BRAIN}')
 FROZEN = B / 'cumulative-2026' / 'event-ledger-sectioned-2026-02-28-to-2026-10-11.json'
 MASTER = B / 'cumulative-2026' / 'event-ledger-master.json'
 CODEMAP = B / 'appendices' / 'event-code-map.json'

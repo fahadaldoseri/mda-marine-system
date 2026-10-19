@@ -4,13 +4,30 @@
 
 يطبّق الترتيب في: المولّد الموحّد · مرجع الأقسام · مرجع الكتل · قاعدة ك1 · أرشيف تقرير 12 أكتوبر.
 """
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
+
+def _tree(_env, _base, *_names):
+    """جذر الشجرة المجاورة: من متغيّر البيئة أو من مجلد شقيق."""
+    _v = _os.environ.get(_env)
+    if _v:
+        return _Path(_v)
+    for _n in _names:
+        _c = _base.parent / _n
+        if _c.is_dir():
+            return _c
+    return _base.parent / _names[0]
+SITE = _tree("SITE_DIR", _ROOT, "seawatch", "site")
 
 import ast
 import re
 from pathlib import Path
 
-G = Path("/home/ubuntu/seawatch/generator")
-B = Path("/home/ubuntu/brain-marine-news")
+G = Path(f"{SITE}/generator")
+B = Path(f"{BRAIN}")
 
 # الترتيب الجديد: (مفتاح المولّد، العنوان الكامل، الإلزام)
 ORDER = [
@@ -87,7 +104,7 @@ s = s.replace(
     "**ترتيب الأقسام المعتمد، ويطبّقه المولّد آليًا:**",
     "**ترتيب الأقسام المعتمد بالأهمية، ويطبّقه المولّد آليًا:**\n\n"
     "> مبدأ الترتيب: ما يحتاجه القارئ أولًا يأتي أولًا. القرار والصورة العامة (الخلاصة · الخريطة التشغيلية · المؤشرات · التهديد · الأثر) ثم الوقائع ثم التحليل ثم الدعم. "
-    "الخريطة التشغيلية تفتح الصورة الجغرافية قبل سرد الوقائع. الترتيب قابل للتعديل من موضع واحد: قائمة `order` في `/home/ubuntu/seawatch/generator/build_report.py`.",
+    f"الخريطة التشغيلية تفتح الصورة الجغرافية قبل سرد الوقائع. الترتيب قابل للتعديل من موضع واحد: قائمة `order` في `{SITE}/generator/build_report.py`.",
 )
 p.write_text(s, encoding="utf-8")
 applied.append("30-structure: جدول الطبقات الأربع")

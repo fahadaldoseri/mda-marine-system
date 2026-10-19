@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """يضيف مصدرًا جديدًا بعد مسحه: السجل + الموثوقية + الفهرس (الأسلوب المعتمد)."""
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
 import argparse, json, re
 from pathlib import Path
-R = Path('/home/ubuntu/brain-marine-news')
+R = Path(f'{BRAIN}')
 
 def main():
     a = argparse.ArgumentParser()

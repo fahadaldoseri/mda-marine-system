@@ -1,10 +1,27 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """تطبيق سياسة عرض رموز الأحداث (2 + 5) على مولّد الموقع وتعليمات العقل."""
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+SITE = _Path(_os.environ.get("SITE_DIR") or _ROOT)
+
+def _tree(_env, _base, *_names):
+    """جذر الشجرة المجاورة: من متغيّر البيئة أو من مجلد شقيق."""
+    _v = _os.environ.get(_env)
+    if _v:
+        return _Path(_v)
+    for _n in _names:
+        _c = _base.parent / _n
+        if _c.is_dir():
+            return _c
+    return _base.parent / _names[0]
+BRAIN = _tree("BRAIN_DIR", _ROOT, "brain-marine-news", "brain")
 from pathlib import Path
 
-GEN = Path("/home/ubuntu/seawatch/generator")
-BRAIN = Path("/home/ubuntu/brain-marine-news")
+GEN = Path(f"{SITE}/generator")
+BRAIN = Path(f"{BRAIN}")
 done, missed = [], []
 
 

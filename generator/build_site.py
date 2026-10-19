@@ -18,6 +18,22 @@
 قاعدة المصادر: كل تقرير يومي يحتاج زوجًا: sources/reports/<التاريخ>-sectioned.md
 و sources/meta/<التاريخ>.json. أي زوج ناقص يُسجَّل ويُتجاوز بلا إسقاط البناء.
 """
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+
+def _tree(_env, _base, *_names):
+    """جذر الشجرة المجاورة: من متغيّر البيئة أو من مجلد شقيق."""
+    _v = _os.environ.get(_env)
+    if _v:
+        return _Path(_v)
+    for _n in _names:
+        _c = _base.parent / _n
+        if _c.is_dir():
+            return _c
+    return _base.parent / _names[0]
+BRAIN = _tree("BRAIN_DIR", _ROOT, "brain-marine-news", "brain")
 
 import argparse
 import json
@@ -31,7 +47,7 @@ from pathlib import Path
 DAILY_TITLE = "التقرير اليومي لأمن الملاحة والأوضاع الراهنة في المنطقة"
 DAILY_PLACEHOLDERS = ['التقرير الصباحي اليومي', 'التقرير اليومي', 'التقرير اليومي لأمن الملاحة', 'تقرير أمن الملاحة']
 
-SOURCES_MANIFEST = Path('/home/ubuntu/brain-marine-news/appendices/sources-manifest.json')
+SOURCES_MANIFEST = Path(f'{BRAIN}/appendices/sources-manifest.json')
 
 
 def approved_source_count(fallback: int = 40) -> int:
@@ -604,7 +620,7 @@ def main():
         # فحص سياسة عرض رموز الأحداث (2+5): الرمز الكامل في قسم الوقائع فقط
         try:
             import subprocess as _sp
-            _r = _sp.run([sys.executable, "/home/ubuntu/brain-marine-news/validators/check_code_policy.py",
+            _r = _sp.run([sys.executable, f"{BRAIN}/validators/check_code_policy.py",
                           str(dist)], capture_output=True, text=True)
             _line = [l for l in _r.stdout.splitlines() if "النتيجة" in l]
             print(f"فحص سياسة الرموز: {(_line[-1].strip() if _line else _r.stdout.strip()[-80:])}")
