@@ -54,13 +54,14 @@ def _mirror_symlink(src: Path, dst: Path, prefix: str):
     if not rel_target:
         EXCLUDED_LOG.append((f"{prefix}/{src.as_posix()}", "رابط خارج الشجرتين — لا يُنقل"))
         return
-    depth = len(dst.relative_to(OUT).parts) - 1
+    rel_repo = dst.relative_to(OUT)          # مسار الرابط داخل المستودع
+    depth = len(rel_repo.parent.parts)       # عدد درجات الصعود حتى جذر المستودع
     link = Path(*[".."] * depth) / rel_target
     dst.parent.mkdir(parents=True, exist_ok=True)
     if dst.is_symlink() or dst.exists():
         dst.unlink() if dst.is_symlink() or dst.is_file() else shutil.rmtree(dst)
     dst.symlink_to(link)
-    SYMLINKS_LOG.append((f"{prefix}/{src.as_posix()}", f"→ {link.as_posix()}"))
+    SYMLINKS_LOG.append((f"{prefix}/{rel_repo.as_posix()}", f"→ {link.as_posix()}"))
 
 
 
