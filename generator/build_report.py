@@ -208,7 +208,7 @@ a.bidi{white-space:normal}
   flex:0 0 100%;width:100%;text-align:center
 }
 .masthead > div:not(.threat){flex:1 0 100%}
-.masthead .lede{color:var(--ink-2);font-size:15px;max-width:74ch;margin:0}
+.masthead .lede{color:var(--ink-2);font-size:15px;max-width:none;margin:0}
 .masthead-meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
 .threat{
   margin-inline-start:0;margin-inline-end:auto;text-align:center;border-radius:var(--radius);
@@ -244,7 +244,7 @@ a.bidi{white-space:normal}
 .notice svg{width:18px;height:18px;color:var(--accent);flex:0 0 auto;margin-top:5px}
 
 /* ---------- الأقسام ---------- */
-main{margin-top:30px;display:grid;gap:22px;min-width:0}
+main{margin-top:30px;display:grid;gap:18px;min-width:0}
 section.doc{
   background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
   padding:22px 24px 10px;min-width:0;max-width:100%;scroll-margin-top:74px
@@ -256,7 +256,7 @@ section.doc > h2{
 }
 section.doc > h2 .ico{width:24px;height:24px;flex:0 0 auto;display:grid;place-items:center;color:var(--accent)}
 section.doc > h2 .ico svg{width:18px;height:18px}
-.h-rule{height:1px;background:var(--line);margin:14px 0 18px}
+.h-rule{height:1px;background:var(--line);margin:8px 0 12px}
 section.doc h3{
   font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:16.5px;
   margin:22px 0 6px;line-height:1.6;color:var(--ink)
@@ -266,6 +266,8 @@ section.doc strong{color:var(--ink);font-weight:600}
 section.doc code{font-family:"IBM Plex Mono",monospace;font-size:.92em;color:var(--ink);background:var(--panel-3);padding:1px 5px;border-radius:4px}
 ul,ol{margin:10px 0;padding-inline-start:22px;color:var(--ink-2)}
 li{margin:7px 0}
+section.doc ul ul{margin:6px 0;padding-inline-start:18px}
+section.doc ul ul li{margin:4px 0;font-size:.96em;color:var(--ink-2)}
 li::marker{color:var(--accent)}
 blockquote{
   margin:16px 0;padding:12px 16px;border-inline-start:3px solid var(--accent);
@@ -885,8 +887,15 @@ def render_section_body(title: str, lines, defs, doc_mode: bool = False):
 
         if re.match(r"^\s*[-*]\s+", ln):
             flush()
-            items, kinds = [], False
+            items, kinds, sub = [], False, []
+
+            def _close_sub():
+                if items and sub:
+                    items[-1] = items[-1][:-5] + "<ul>" + "".join(sub) + "</ul></li>"
+                    sub.clear()
+
             while i < n and re.match(r"^\s*[-*]\s+", lines[i]):
+                indent = len(lines[i]) - len(lines[i].lstrip())
                 raw = re.sub(r"^\s*[-*]\s+", "", lines[i].strip())
                 mk = re.match(r"^\[(حقيقة|واقعة|تقدير تحليلي|تقدير|إعلامي|إعلام|خلفية|مراقبة)\]\s*", raw)
                 cls = ""
@@ -894,8 +903,14 @@ def render_section_body(title: str, lines, defs, doc_mode: bool = False):
                     cls = ' class="' + BLK.MARK_KIND.get(mk.group(1), "") + '"'
                     kinds = True
                     raw = raw[mk.end():]
-                items.append(f"<li{cls}>{inline(raw, defs)}</li>")
+                item = f"<li{cls}>{inline(raw, defs)}</li>"
+                if indent >= 2 and items:
+                    sub.append(item)
+                else:
+                    _close_sub()
+                    items.append(item)
                 i += 1
+            _close_sub()
             cls_ul = ' class="d-kinds"' if kinds else ""
             out.append(f"<ul{cls_ul}>" + "".join(items) + "</ul>")
             continue

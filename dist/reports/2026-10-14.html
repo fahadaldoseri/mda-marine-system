@@ -109,7 +109,7 @@ a.bidi{white-space:normal}
   flex:0 0 100%;width:100%;text-align:center
 }
 .masthead > div:not(.threat){flex:1 0 100%}
-.masthead .lede{color:var(--ink-2);font-size:15px;max-width:74ch;margin:0}
+.masthead .lede{color:var(--ink-2);font-size:15px;max-width:none;margin:0}
 .masthead-meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
 .threat{
   margin-inline-start:0;margin-inline-end:auto;text-align:center;border-radius:var(--radius);
@@ -145,7 +145,7 @@ a.bidi{white-space:normal}
 .notice svg{width:18px;height:18px;color:var(--accent);flex:0 0 auto;margin-top:5px}
 
 /* ---------- الأقسام ---------- */
-main{margin-top:30px;display:grid;gap:22px;min-width:0}
+main{margin-top:30px;display:grid;gap:18px;min-width:0}
 section.doc{
   background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
   padding:22px 24px 10px;min-width:0;max-width:100%;scroll-margin-top:74px
@@ -157,7 +157,7 @@ section.doc > h2{
 }
 section.doc > h2 .ico{width:24px;height:24px;flex:0 0 auto;display:grid;place-items:center;color:var(--accent)}
 section.doc > h2 .ico svg{width:18px;height:18px}
-.h-rule{height:1px;background:var(--line);margin:14px 0 18px}
+.h-rule{height:1px;background:var(--line);margin:8px 0 12px}
 section.doc h3{
   font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:16.5px;
   margin:22px 0 6px;line-height:1.6;color:var(--ink)
@@ -167,6 +167,8 @@ section.doc strong{color:var(--ink);font-weight:600}
 section.doc code{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:.92em;color:var(--ink);background:var(--panel-3);padding:1px 5px;border-radius:4px}
 ul,ol{margin:10px 0;padding-inline-start:22px;color:var(--ink-2)}
 li{margin:7px 0}
+section.doc ul ul{margin:6px 0;padding-inline-start:18px}
+section.doc ul ul li{margin:4px 0;font-size:.96em;color:var(--ink-2)}
 li::marker{color:var(--accent)}
 blockquote{
   margin:16px 0;padding:12px 16px;border-inline-start:3px solid var(--accent);
@@ -458,9 +460,11 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .decision .dc-title{
   font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:17px;margin:0 0 12px;color:var(--accent)
 }
-.dc-grid{display:grid;gap:10px}
-.dc-row{display:grid;grid-template-columns:190px 1fr;gap:14px;align-items:start}
-.dc-l{font-size:13.5px;color:var(--muted);padding-top:2px}
+.dc-grid{display:grid;gap:8px}
+.dc-row{display:grid;grid-template-columns:1fr;gap:2px;align-items:start}
+.dc-l{font-size:12.5px;line-height:1.35;color:var(--muted);padding-top:0}
+.dc-list{margin:4px 0 0;padding-inline-start:20px}
+.dc-list li{margin:4px 0;line-height:1.75}
 .dc-v{font-size:16px;color:var(--ink);font-weight:500}
 .dc-row.risk-high .dc-v{color:var(--danger)}
 .dc-row.risk-med .dc-v{color:var(--warn)}
@@ -505,6 +509,7 @@ ul.changes{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 .chg.c-new .chg-tag{color:#d7e7ff;background:rgba(77,157,255,.15);border-color:rgba(77,157,255,.40)}
 .chg.c-closed .chg-tag{color:#cdf6e2;background:rgba(51,208,122,.15);border-color:rgba(51,208,122,.40)}
 .chg.c-reclassified .chg-tag{color:#ffe8c4;background:rgba(255,176,46,.15);border-color:rgba(255,176,46,.40)}
+.chg.c-ongoing .chg-tag{color:#cfd8e3;background:rgba(148,163,184,.14);border-color:rgba(148,163,184,.38)}
 
 /* ---------- رموز الأحداث والحالات ---------- */
 .ev-code{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:11.5px;color:var(--accent);background:rgba(34,195,182,.10);border:1px solid rgba(34,195,182,.32);border-radius:6px;padding:0 5px}
@@ -674,7 +679,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
   <div class="rkey no-print"><span class="rkey-t">مفتاح القراءة:</span><span class="rk k-fact">واقعة مؤكدة</span><span class="rk k-est">تقدير تحليلي</span><span class="rk k-info">بند إعلامي</span><span class="rk k-bg">خلفية مستمرة</span><span class="rk k-watch">مراقبة مستمرة</span></div>
 
   <main>
-    <section class="doc pri reveal" id="sec-00" aria-labelledby="h-00"><h2 id="h-00">ما تغيّر منذ التقرير السابق</h2><div class="h-rule"></div><p class="sec-lede">ما استُجد، وما تغيّر تصنيفه، وما أُغلق.</p><ul class="changes"><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إصابة سفينة حاويات بمقذوف غير معروف داخل مضيق هرمز. <bdi class="bidi ev-code">#170 · 14-01</bdi> <bdi class="bidi"><span class="ltr">UKMTO</span> #170</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إصابة ناقلة بمقذوف غير معروف داخل مضيق هرمز. <bdi class="bidi ev-code">#171 · 14-02</bdi> <bdi class="bidi"><span class="ltr">UKMTO</span> #171</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تحديث رسمي: 106 حادثة مؤكدة و24 وفاة، وإدراج «<span class="ltr">ANGOLA PROSPERITY</span>» و«<span class="ltr">PETRO DOLPHIN</span>». <bdi class="bidi ev-code">14-07</bdi> <bdi class="bidi"><span class="ltr">IMO</span></bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">ضربات التحالف على أهداف حوثية في صنعاء والحديدة وذمار، وتصعيد في البحر الأحمر. <bdi class="bidi ev-code">14-03</bdi> <bdi class="bidi">Reuters عبر gCaptain</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إعلان البحرية الإيرانية عن ناقلة «غير ممتثلة» تضررت واشتعلت شرق المضيق بعد إطفاء التتبّع. <bdi class="bidi ev-code">14-04</bdi> <bdi class="bidi"><span class="ltr">IRNA</span></bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تصعيد في الخطاب: تهديد بإغلاق المضيق كاملًا، بلا أصل رسمي منشور. <bdi class="bidi ev-code">14-05</bdi> <bdi class="bidi">نقل إعلامي</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">خطر يهدد عمليات النقل من سفينة إلى سفينة قرب المضيق، وانصراف ناقلات عملاقة عن الخليج. <bdi class="bidi ev-code">14-06</bdi> <bdi class="bidi">تقرير مهني</bdi></span></li><li class="chg c-ongoing"><span class="chg-tag"></span><span class="chg-txt">تثبيت اسم الناقلة «<span class="ltr">PETRO DOLPHIN</span>» ورقمها، ومفقودان ما زالا في عداد المفقودين. <bdi class="bidi ev-code">#165 · 11-02</bdi> <bdi class="bidi"><span class="ltr">IMO</span></bdi></span></li></ul></section>
+    <section class="doc pri reveal" id="sec-00" aria-labelledby="h-00"><h2 id="h-00">ما تغيّر منذ التقرير السابق</h2><div class="h-rule"></div><p class="sec-lede">ما استُجد، وما تغيّر تصنيفه، وما أُغلق.</p><ul class="changes"><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إصابة سفينة حاويات بمقذوف غير معروف داخل مضيق هرمز. <bdi class="bidi ev-code">#170 · 14-01</bdi> <bdi class="bidi"><span class="ltr">UKMTO</span> #170</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إصابة ناقلة بمقذوف غير معروف داخل مضيق هرمز. <bdi class="bidi ev-code">#171 · 14-02</bdi> <bdi class="bidi"><span class="ltr">UKMTO</span> #171</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تحديث رسمي: 106 حادثة مؤكدة و24 وفاة، وإدراج «<span class="ltr">ANGOLA PROSPERITY</span>» و«<span class="ltr">PETRO DOLPHIN</span>». <bdi class="bidi ev-code">14-07</bdi> <bdi class="bidi"><span class="ltr">IMO</span></bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">ضربات التحالف على أهداف حوثية في صنعاء والحديدة وذمار، وتصعيد في البحر الأحمر. <bdi class="bidi ev-code">14-03</bdi> <bdi class="bidi">Reuters عبر gCaptain</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إعلان البحرية الإيرانية عن ناقلة «غير ممتثلة» تضررت واشتعلت شرق المضيق بعد إطفاء التتبّع. <bdi class="bidi ev-code">14-04</bdi> <bdi class="bidi"><span class="ltr">IRNA</span></bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تصعيد في الخطاب: تهديد بإغلاق المضيق كاملًا، بلا أصل رسمي منشور. <bdi class="bidi ev-code">14-05</bdi> <bdi class="bidi">نقل إعلامي</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">خطر يهدد عمليات النقل من سفينة إلى سفينة قرب المضيق، وانصراف ناقلات عملاقة عن الخليج. <bdi class="bidi ev-code">14-06</bdi> <bdi class="bidi">تقرير مهني</bdi></span></li><li class="chg c-ongoing"><span class="chg-tag">مستمر</span><span class="chg-txt">تثبيت اسم الناقلة «<span class="ltr">PETRO DOLPHIN</span>» ورقمها، ومفقودان ما زالا في عداد المفقودين. <bdi class="bidi ev-code">#165 · 11-02</bdi> <bdi class="bidi"><span class="ltr">IMO</span></bdi></span></li></ul></section>
     <section class="doc reveal" id="sec-01" aria-labelledby="h-01"><h2 id="h-01"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>ما تغيّر منذ التقرير السابق</h2><div class="h-rule"></div><p class="sec-lede">ما استُجد، وما تغيّر تصنيفه، وما أُغلق.</p><ul><li><strong>جديد:</strong> بلاغان هجوم رسميان من <span class="ltr">UKMTO</span> في مضيق هرمز داخل النافذة (#170 · 14-01 · #171 · 14-02).</li><li><strong>جديد:</strong> تحديث سجل <span class="ltr">IMO</span> الرسمي للحوادث المؤكدة: <strong>106 حادثة مؤكدة</strong> و<strong>24 وفاة بحّارًا</strong>، وإدراج واقعتي 11 أكتوبر بالناقلتين «<span class="ltr">ANGOLA PROSPERITY</span>» و«<span class="ltr">PETRO DOLPHIN</span>» (14-07).</li><li><strong>جديد:</strong> ضربات التحالف بقيادة السعودية على أهداف حوثية في صنعاء والحديدة وذمار، وتصعيد متبادل في البحر الأحمر (14-03).</li><li><strong>جديد:</strong> إعلان البحرية الإيرانية عن ناقلة «غير ممتثلة» تضررت واشتعلت شرق المضيق بعد إطفاء أنظمة التتبّع (14-04).</li><li><strong>جديد:</strong> تصعيد في الخطاب الرسمي غير المُوثَّق: تهديد بإغلاق المضيق كاملًا، وإعلان نقل إعلامي بتغيير التكتيك قبل الانتخابات الأميركية (14-05).</li><li><strong>جديد:</strong> خطر على مركز النقل من سفينة إلى سفينة قرب المضيق، وانصراف ناقلات عملاقة فارغة عن الخليج (14-06).</li><li><strong>متابعة:</strong> مصير مفقودَين من طاقم الناقلة «<span class="ltr">PETRO DOLPHIN</span>» في واقعة مرسى صحار (#165 · 11-02) — الاسم والرقم صارا مثبتين في سجل <span class="ltr">IMO</span>.</li><li><strong>بلا تغيير:</strong> آخر نشرة استشارية معلنة من <span class="ltr">JMIC</span> تبقى تصنيف <strong>«شديد»</strong> لمضيق هرمز؛ لا نشرة جديدة في النافذة.</li></ul></section><section class="doc pri reveal" id="sec-02" aria-labelledby="h-02"><h2 id="h-02"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 3h9l-1.2 3H19v8h-8.2L9.6 11H6v9H4z"/></svg></span>الخلاصة</h2><div class="h-rule"></div><p class="sec-lede">الموقف ومستوى الخطر والإجراء المقترح في ثلاثة أسطر.</p><p>التصعيد في مضيق هرمز مستمر بوتيرة ثابتة: بلاغان هجوم رسميان في النافذة، وتراكم الحوادث المؤكدة لدى <span class="ltr">IMO</span> إلى 106. العنصر الجديد في النافذة ليس عدد الوقائع بل <strong>أثرها على طرق الإمداد</strong>: ضربات في البحر الأحمر، وخطر يهدد مركز النقل من سفينة إلى سفينة قرب المضيق. العبور التجاري في المضيق ما زال معطّلًا فعليًا، والتكدس الملاحي مرتفع لكنه تراجع قليلًا عن أمس. الحكم العام: خطر مرتفع جدًا على السفن والطواقم في مضيق هرمز وخليج عُمان، ومرتفع في البحر الأحمر ومحيط إنفاذ العقوبات.</p></section><section class="doc reveal" id="sec-03" aria-labelledby="h-03"><h2 id="h-03"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 4l6 2 5-2v14l-5 2-6-2-5 2V6zM9 4v14M15 6v14"/></svg></span>التوزيع الجغرافي للوقائع</h2><div class="h-rule"></div><p class="sec-lede">أين تركّزت الوقائع، وحصيلة <span class="ltr">IMO</span> على القطاعات.</p><div class="viz map-viz reveal"><div class="map-panel">
   <h3>خريطة الوقائع</h3><p class="blk-lede">مواقع الوقائع داخل نطاق التقرير.</p>
   <div class="map-wrap">

@@ -109,7 +109,7 @@ a.bidi{white-space:normal}
   flex:0 0 100%;width:100%;text-align:center
 }
 .masthead > div:not(.threat){flex:1 0 100%}
-.masthead .lede{color:var(--ink-2);font-size:15px;max-width:74ch;margin:0}
+.masthead .lede{color:var(--ink-2);font-size:15px;max-width:none;margin:0}
 .masthead-meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
 .threat{
   margin-inline-start:0;margin-inline-end:auto;text-align:center;border-radius:var(--radius);
@@ -145,7 +145,7 @@ a.bidi{white-space:normal}
 .notice svg{width:18px;height:18px;color:var(--accent);flex:0 0 auto;margin-top:5px}
 
 /* ---------- الأقسام ---------- */
-main{margin-top:30px;display:grid;gap:22px;min-width:0}
+main{margin-top:30px;display:grid;gap:18px;min-width:0}
 section.doc{
   background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
   padding:22px 24px 10px;min-width:0;max-width:100%;scroll-margin-top:74px
@@ -157,7 +157,7 @@ section.doc > h2{
 }
 section.doc > h2 .ico{width:24px;height:24px;flex:0 0 auto;display:grid;place-items:center;color:var(--accent)}
 section.doc > h2 .ico svg{width:18px;height:18px}
-.h-rule{height:1px;background:var(--line);margin:14px 0 18px}
+.h-rule{height:1px;background:var(--line);margin:8px 0 12px}
 section.doc h3{
   font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:16.5px;
   margin:22px 0 6px;line-height:1.6;color:var(--ink)
@@ -167,6 +167,8 @@ section.doc strong{color:var(--ink);font-weight:600}
 section.doc code{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:.92em;color:var(--ink);background:var(--panel-3);padding:1px 5px;border-radius:4px}
 ul,ol{margin:10px 0;padding-inline-start:22px;color:var(--ink-2)}
 li{margin:7px 0}
+section.doc ul ul{margin:6px 0;padding-inline-start:18px}
+section.doc ul ul li{margin:4px 0;font-size:.96em;color:var(--ink-2)}
 li::marker{color:var(--accent)}
 blockquote{
   margin:16px 0;padding:12px 16px;border-inline-start:3px solid var(--accent);
@@ -458,9 +460,11 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .decision .dc-title{
   font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:17px;margin:0 0 12px;color:var(--accent)
 }
-.dc-grid{display:grid;gap:10px}
-.dc-row{display:grid;grid-template-columns:190px 1fr;gap:14px;align-items:start}
-.dc-l{font-size:13.5px;color:var(--muted);padding-top:2px}
+.dc-grid{display:grid;gap:8px}
+.dc-row{display:grid;grid-template-columns:1fr;gap:2px;align-items:start}
+.dc-l{font-size:12.5px;line-height:1.35;color:var(--muted);padding-top:0}
+.dc-list{margin:4px 0 0;padding-inline-start:20px}
+.dc-list li{margin:4px 0;line-height:1.75}
 .dc-v{font-size:16px;color:var(--ink);font-weight:500}
 .dc-row.risk-high .dc-v{color:var(--danger)}
 .dc-row.risk-med .dc-v{color:var(--warn)}
@@ -505,6 +509,7 @@ ul.changes{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 .chg.c-new .chg-tag{color:#d7e7ff;background:rgba(77,157,255,.15);border-color:rgba(77,157,255,.40)}
 .chg.c-closed .chg-tag{color:#cdf6e2;background:rgba(51,208,122,.15);border-color:rgba(51,208,122,.40)}
 .chg.c-reclassified .chg-tag{color:#ffe8c4;background:rgba(255,176,46,.15);border-color:rgba(255,176,46,.40)}
+.chg.c-ongoing .chg-tag{color:#cfd8e3;background:rgba(148,163,184,.14);border-color:rgba(148,163,184,.38)}
 
 /* ---------- رموز الأحداث والحالات ---------- */
 .ev-code{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:11.5px;color:var(--accent);background:rgba(34,195,182,.10);border:1px solid rgba(34,195,182,.32);border-radius:6px;padding:0 5px}
@@ -674,7 +679,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
   <div class="rkey no-print"><span class="rkey-t">مفتاح القراءة:</span><span class="rk k-fact">واقعة مؤكدة</span><span class="rk k-est">تقدير تحليلي</span><span class="rk k-info">بند إعلامي</span><span class="rk k-bg">خلفية مستمرة</span><span class="rk k-watch">مراقبة مستمرة</span></div>
 
   <main>
-    <section class="doc pri reveal" id="sec-00" aria-labelledby="h-00"><h2 id="h-00">ما تغيّر منذ التقرير السابق</h2><div class="h-rule"></div><p class="sec-lede">ما استُجد، وما تغيّر تصنيفه، وما أُغلق.</p><ul class="changes"><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تقييم رسمي مجمّع: تهديد «شديد» في المضيق، وثماني هجمات بمقذوفات في 11 و13 أكتوبر (4 ناقلات و4 سفن حاويات)، و149 حادثة سفن منذ 1 مارس، ونفي وجود دليل على رواية اللغم مع تحذير من احتمال ألغام قرب مسار الفصل. <bdi class="bidi ev-code">16-01</bdi> <bdi class="bidi"><span class="ltr">JMIC</span> — تحديث 105</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إعلان أمريكي بأن الولايات المتحدة والشركاء الإقليميين يسيطرون على المضيق، مع عبور أكثر من 40 سفينة تجارية في 24 ساعة، ونفي رواية اللغم، وتأكيد أن «<span class="ltr">GFS PRIDE</span>» أُصيبت بمقذوف وغرقها أثناء قطرها إلى الساحل. <bdi class="bidi ev-code">16-02</bdi> <bdi class="bidi">سنتكوم</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">قائد الجيش الإيراني: المضيق «يبقى مغلقًا» حتى احترام حقوق الشعب الإيراني — رواية طرف تُذكر كرواية ولا تُعد واقعة مثبتة. <bdi class="bidi ev-code">16-03</bdi> <bdi class="bidi">رواية طرف رسمي</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">فحص كامل وتجارب بحرية إلزامية لكل سفينة عمرها 25 سنة أو أكثر قبل العبور، مع رسوم مسبقة — عبء تنظيمي إضافي على الممر البديل. <bdi class="bidi ev-code">16-04</bdi> <bdi class="bidi">قرار هيئة قناة السويس</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تصحيح مرجعي: «<span class="ltr">GFS GISELLE</span>» تضررت على 6 أميال من ساحل عُمان ولم تغرق، وعلمها سنغافوري — يُصحَّح بذلك وصف سابق ووسم إعلامي عن «غرق سفينتين». <bdi class="bidi ev-code">16-05</bdi> <bdi class="bidi"><span class="ltr">IMO</span> · بيان سنغافوري</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">أرقام الممر: 188 سفينة واقفة بعيدًا عن المراسي (السابق 151)، وبرنت 105.54 دولارًا، وتأمين مخاطر الحرب 30 ضعف مستواه قبل الأزمة، وتكدس عند الفجيرة وخورفكان ودبي ورأس الخيمة ومسندم وصحار. <bdi class="bidi ev-code">16-06</bdi> <bdi class="bidi"><span class="ltr">JMIC</span> · منصة رصد</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تغطية واسعة تصف تصاعد الهجمات في المضيق بأنه الأعلى منذ بداية الحرب، مع ظهور حاويات طافية في الماء — الرقم الرسمي المعتمد هو رقم <span class="ltr">JMIC</span> لا حصائل الإعلام. <bdi class="bidi ev-code">16-07</bdi> <bdi class="bidi">نقل إعلامي</bdi></span></li><li class="chg c-ongoing"><span class="chg-tag"></span><span class="chg-txt">«<span class="ltr">PETRO DOLPHIN</span>» تنجرف في موقعها شرق خليج عُمان ومفقودان لم يُعلن مصيرهما. <bdi class="bidi ev-code">11-02</bdi> <bdi class="bidi"><span class="ltr">NAVAREA IX 372/26</span></bdi></span></li><li class="chg c-ongoing"><span class="chg-tag"></span><span class="chg-txt">بلاغان رسميان بلا هوية سفينة معلنة، ولا يُنسبان إلى سفينتي <span class="ltr">GFS</span> بلا تأكيد رسمي. <bdi class="bidi ev-code">#172 · 15-03</bdi> <bdi class="bidi"><span class="ltr">UKMTO</span> #172 · #173</bdi></span></li></ul></section>
+    <section class="doc pri reveal" id="sec-00" aria-labelledby="h-00"><h2 id="h-00">ما تغيّر منذ التقرير السابق</h2><div class="h-rule"></div><p class="sec-lede">ما استُجد، وما تغيّر تصنيفه، وما أُغلق.</p><ul class="changes"><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تقييم رسمي مجمّع: تهديد «شديد» في المضيق، وثماني هجمات بمقذوفات في 11 و13 أكتوبر (4 ناقلات و4 سفن حاويات)، و149 حادثة سفن منذ 1 مارس، ونفي وجود دليل على رواية اللغم مع تحذير من احتمال ألغام قرب مسار الفصل. <bdi class="bidi ev-code">16-01</bdi> <bdi class="bidi"><span class="ltr">JMIC</span> — تحديث 105</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إعلان أمريكي بأن الولايات المتحدة والشركاء الإقليميين يسيطرون على المضيق، مع عبور أكثر من 40 سفينة تجارية في 24 ساعة، ونفي رواية اللغم، وتأكيد أن «<span class="ltr">GFS PRIDE</span>» أُصيبت بمقذوف وغرقها أثناء قطرها إلى الساحل. <bdi class="bidi ev-code">16-02</bdi> <bdi class="bidi">سنتكوم</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">قائد الجيش الإيراني: المضيق «يبقى مغلقًا» حتى احترام حقوق الشعب الإيراني — رواية طرف تُذكر كرواية ولا تُعد واقعة مثبتة. <bdi class="bidi ev-code">16-03</bdi> <bdi class="bidi">رواية طرف رسمي</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">فحص كامل وتجارب بحرية إلزامية لكل سفينة عمرها 25 سنة أو أكثر قبل العبور، مع رسوم مسبقة — عبء تنظيمي إضافي على الممر البديل. <bdi class="bidi ev-code">16-04</bdi> <bdi class="bidi">قرار هيئة قناة السويس</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تصحيح مرجعي: «<span class="ltr">GFS GISELLE</span>» تضررت على 6 أميال من ساحل عُمان ولم تغرق، وعلمها سنغافوري — يُصحَّح بذلك وصف سابق ووسم إعلامي عن «غرق سفينتين». <bdi class="bidi ev-code">16-05</bdi> <bdi class="bidi"><span class="ltr">IMO</span> · بيان سنغافوري</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">أرقام الممر: 188 سفينة واقفة بعيدًا عن المراسي (السابق 151)، وبرنت 105.54 دولارًا، وتأمين مخاطر الحرب 30 ضعف مستواه قبل الأزمة، وتكدس عند الفجيرة وخورفكان ودبي ورأس الخيمة ومسندم وصحار. <bdi class="bidi ev-code">16-06</bdi> <bdi class="bidi"><span class="ltr">JMIC</span> · منصة رصد</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تغطية واسعة تصف تصاعد الهجمات في المضيق بأنه الأعلى منذ بداية الحرب، مع ظهور حاويات طافية في الماء — الرقم الرسمي المعتمد هو رقم <span class="ltr">JMIC</span> لا حصائل الإعلام. <bdi class="bidi ev-code">16-07</bdi> <bdi class="bidi">نقل إعلامي</bdi></span></li><li class="chg c-ongoing"><span class="chg-tag">مستمر</span><span class="chg-txt">«<span class="ltr">PETRO DOLPHIN</span>» تنجرف في موقعها شرق خليج عُمان ومفقودان لم يُعلن مصيرهما. <bdi class="bidi ev-code">11-02</bdi> <bdi class="bidi"><span class="ltr">NAVAREA IX 372/26</span></bdi></span></li><li class="chg c-ongoing"><span class="chg-tag">مستمر</span><span class="chg-txt">بلاغان رسميان بلا هوية سفينة معلنة، ولا يُنسبان إلى سفينتي <span class="ltr">GFS</span> بلا تأكيد رسمي. <bdi class="bidi ev-code">#172 · 15-03</bdi> <bdi class="bidi"><span class="ltr">UKMTO</span> #172 · #173</bdi></span></li></ul></section>
     <section class="doc reveal" id="sec-01" aria-labelledby="h-01"><h2 id="h-01"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>ما تغيّر منذ التقرير السابق</h2><div class="h-rule"></div><p class="sec-lede">ما استُجد، وما تغيّر تصنيفه، وما أُغلق.</p><p>لم تُسجَّل واقعة إصابة جديدة في النافذة، لكن ظهر فيها ما هو أهم من واقعة: <strong>أول تقييم رسمي مجمّع</strong> يُصدره مركز المعلومات البحرية المشترك (<span class="ltr">JMIC</span>) في 15 أكتوبر. ويثبّت <strong>ثماني هجمات بمقذوفات</strong> في المضيق يومي 11 و13 أكتوبر. ويرفع عدّاده إلى <strong>149 حادثة سفن مؤكدة منذ 1 مارس</strong>، ويُبقي تقييم التهديد في المضيق على <strong>«شديد»</strong>.</p>
 <p>وظهر تباين معلن بين طرفين: القيادة المركزية الأمريكية تقول إن الولايات المتحدة والشركاء الإقليميين <strong>يسيطرون على المضيق</strong> وأن أكثر من 40 سفينة تجارية عبرت خلال 24 ساعة. بينما قائد الجيش الإيراني يقول إن المضيق <strong>يبقى مغلقًا</strong>. وفي الوقت نفسه تقدّم <span class="ltr">JMIC</span> رقمًا مختلفًا: 121 عبورًا مُيسَّرًا أمريكيًا بين 11 و14 أكتوبر، أي نحو 22% من المتوسط قبل الحرب. أي أن المضيق اليوم <strong>مفتوح جزئيًا بحكم الواقع، ومغلق بحكم الخطاب</strong>.</p>
 <p>وأضيف عبء تنظيمي على الممر البديل: هيئة قناة السويس فرضت <strong>فحصًا كاملًا وتجارب بحرية</strong> على كل سفينة عمرها 25 سنة أو أكثر قبل العبور. وفي هذه النافذة صُحّح أيضًا خطأ في بياناتنا: «<span class="ltr">GFS GISELLE</span>» <strong>لم تغرق</strong>، بل تضررت — بحسب سجل المنظمة البحرية الدولية.</p></section><section class="doc pri reveal" id="sec-02" aria-labelledby="h-02"><h2 id="h-02"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 3h9l-1.2 3H19v8h-8.2L9.6 11H6v9H4z"/></svg></span>الخلاصة</h2><div class="h-rule"></div><p class="sec-lede">الموقف ومستوى الخطر والإجراء المقترح في ثلاثة أسطر.</p><p>الوضع عند حدود القطع: التهديد في مضيق هرمز <strong>مرتفع جدًا</strong>، والمفارقة هي سمة النافذة. لا بلاغ إصابة جديد، لكن التقييم الرسمي يقول إن ثماني هجمات وقعت في يومين قبلها، وإن الخطر «شديد» ويبقى مرجّحًا. وعدد السفن الواقفة بعيدًا عن المراسي يرتفع إلى <strong>188 سفينة</strong> (السابق 151)، وهو أعلى مستوى سُجّل في نافذة هذا التقرير. في وقت لا يتجاوز فيه العبور <strong>عبورتين</strong> في أحدث يوم رسمي متاح.</p>

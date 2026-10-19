@@ -109,6 +109,23 @@ def kind_strip(kind):
 
 
 # ---------------------------------------------------------------- بطاقة القرار
+_PT_CODE = re.compile(r"\(\d{2}-\d{2}\)")
+
+
+def _points(value: str):
+    """قائمة بنود إذا كانت القيمة تعدادًا واضحًا (أكواد 19-01 أو فواصل منقوطة)، وإلا None."""
+    v = (value or "").strip()
+    if len(_PT_CODE.findall(v)) >= 3 and "،" in v:
+        parts = [p.strip() for p in re.split(r"\s*،\s+(?=و?\s*)", v) if p.strip()]
+        if len(parts) >= 3:
+            return parts
+    if v.count("؛") >= 2:
+        parts = [p.strip() for p in re.split(r"\s*؛\s*", v) if p.strip()]
+        if len(parts) >= 2:
+            return parts
+    return None
+
+
 def decision_card(dc, inline):
     """بطاقة القرار: ما تغيّر · الخطر · التوصيات · ما يُراقب."""
     if not isinstance(dc, dict):
@@ -124,9 +141,16 @@ def decision_card(dc, inline):
         if not value:
             continue
         cls = f" risk-{kind}" if kind in ("high", "med", "low") else ""
+        pts = _points(value)
+        if pts:
+            body = '<ul class="dc-list">' + "".join(
+                f"<li>{inline(code_text(p))}</li>" for p in pts
+            ) + "</ul>"
+        else:
+            body = inline(code_text(value))
         cells.append(
             f'<div class="dc-row{cls}"><div class="dc-l">{esc(label)}</div>'
-            f'<div class="dc-v">{inline(code_text(value))}</div></div>'
+            f'<div class="dc-v">{body}</div></div>'
         )
     if not cells:
         return ""
@@ -148,7 +172,7 @@ def changes_block(items, inline):
     for it in items:
         kind = it.get("kind", "info")
         label = KIND_LABEL.get(kind) or {"new": "جديد", "closed": "أُغلق", "reclassified": "تصنيف تغيّر",
-                                         "info": "متابعة"}.get(kind, "")
+                                         "info": "متابعة", "ongoing": "مستمر"}.get(kind, "")
         ref = it.get("ref") or ""
         code = it.get("code") or ""
         meta_bits = []
@@ -397,9 +421,11 @@ STYLE_BLOCKS = """
 .decision .dc-title{
   font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:17px;margin:0 0 12px;color:var(--accent)
 }
-.dc-grid{display:grid;gap:10px}
-.dc-row{display:grid;grid-template-columns:190px 1fr;gap:14px;align-items:start}
-.dc-l{font-size:13.5px;color:var(--muted);padding-top:2px}
+.dc-grid{display:grid;gap:8px}
+.dc-row{display:grid;grid-template-columns:1fr;gap:2px;align-items:start}
+.dc-l{font-size:12.5px;line-height:1.35;color:var(--muted);padding-top:0}
+.dc-list{margin:4px 0 0;padding-inline-start:20px}
+.dc-list li{margin:4px 0;line-height:1.75}
 .dc-v{font-size:16px;color:var(--ink);font-weight:500}
 .dc-row.risk-high .dc-v{color:var(--danger)}
 .dc-row.risk-med .dc-v{color:var(--warn)}
@@ -444,6 +470,7 @@ ul.changes{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 .chg.c-new .chg-tag{color:#d7e7ff;background:rgba(77,157,255,.15);border-color:rgba(77,157,255,.40)}
 .chg.c-closed .chg-tag{color:#cdf6e2;background:rgba(51,208,122,.15);border-color:rgba(51,208,122,.40)}
 .chg.c-reclassified .chg-tag{color:#ffe8c4;background:rgba(255,176,46,.15);border-color:rgba(255,176,46,.40)}
+.chg.c-ongoing .chg-tag{color:#cfd8e3;background:rgba(148,163,184,.14);border-color:rgba(148,163,184,.38)}
 
 /* ---------- رموز الأحداث والحالات ---------- */
 .ev-code{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--accent);background:rgba(34,195,182,.10);border:1px solid rgba(34,195,182,.32);border-radius:6px;padding:0 5px}

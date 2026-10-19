@@ -43,11 +43,11 @@ PORT = 8799
 
 # أنماط PDF فقط: تُحقن أثناء التصدير ولا تمسّ صفحة الموقع
 PDF_CSS = """
-#sec-16{display:none !important}
+{HIDE_SOURCES}
 main{gap:0 !important}
 section.doc > h2{break-after:avoid;page-break-after:avoid}
 p,li,blockquote{orphans:3;widows:3}
-.map-viz svg{max-height:118mm;height:auto}
+.map-viz svg{max-height:106mm;height:auto}
 tbody tr:nth-child(even){background:#fff !important}
 tbody td{border-bottom:.4pt solid #e2e8f0}
 .mp-events text{font-size:12px}
@@ -55,6 +55,15 @@ tbody td{border-bottom:.4pt solid #e2e8f0}
 #sec-toc ol{margin:0;padding-inline-start:6mm;column-count:2;column-gap:12mm}
 #sec-toc li{font-size:10pt;line-height:1.75;break-inside:avoid}
 #sec-toc .toc-n{font-family:"IBM Plex Mono",monospace;font-size:9.5pt;color:#4b5e73}
+/* ضغط الورق فقط: قوائم البطاقة في عمودين وهوامش فقرات أقصر — لا يمسّ هيئة الشكل المعتمد */
+.dc-list{column-count:2;column-gap:10mm}
+.dc-list li{break-inside:avoid}
+section.doc h3{margin:3mm 0 1.2mm !important}
+section.doc h3 + p,section.doc h3 + ul,section.doc h3 + ol{margin-top:.8mm !important}
+section.doc p{margin:1.5mm 0}
+section.doc ul,section.doc ol{margin:1mm 0}
+section.doc li{margin:.45mm 0}
+section.doc ul ul{margin:.6mm 0}
 """
 
 HEADER_TPL = """<div style="font-family:'Noto Kufi Arabic','IBM Plex Sans Arabic',sans-serif;font-size:7.6px;
@@ -96,16 +105,24 @@ def identity_of(html: str, date: str) -> str:
     return " · ".join(x for x in (num, date, "تصنيف: عام") if x)
 
 
-def sections_of(page) -> list[dict]:
-    return page.evaluate("""()=>{
+def sections_of(page, hide_id: str = "") -> list[dict]:
+    return page.evaluate("""(hideId)=>{
       const out=[];
       document.querySelectorAll('section.doc').forEach(s=>{
-        if(s.id==='sec-16' || getComputedStyle(s).display==='none') return;
+        if(s.id===hideId || getComputedStyle(s).display==='none') return;
         const h=s.querySelector('h2'); if(!h) return;
         const t=(h.textContent||'').replace(/\\s+/g,' ').trim();
         if(t) out.push({id:s.id, title:t});
       });
-      return out;}""")
+      return out;}""", hide_id)
+
+
+def sources_section_id(html: str, heading: str = "المصادر والمراجع") -> str:
+    """معرّف قسم المصادر من الصفحة نفسها — لا رقم ثابت يتغير بترتيب الأقسام."""
+    for m in re.finditer(r'<section[^>]*id="(sec-\d+)"', html):
+        if heading in html[m.end(): m.end() + 700]:
+            return m.group(1)
+    return ""
 
 
 def inject_toc(page, sections: list[dict], pages_map: dict[str, str] | None) -> None:
@@ -194,6 +211,8 @@ def main() -> int:
         date_label = f"{m.group(1)} {m.group(2)} {m.group(3)}"
     ident = identity_of(html_src, date_label)
     print(f"هوية الترويسة: {ident}")
+    hide_id = sources_section_id(html_src)
+    print(f"حجب قسم المصادر: {hide_id or 'لم يُعثر على القسم'}")
 
     from playwright.sync_api import sync_playwright
 
@@ -209,9 +228,11 @@ def main() -> int:
             pg.wait_for_timeout(1200)
             if args.only in ("pdf", "both"):
                 pg.emulate_media(media="print")
-                pg.add_style_tag(content=PDF_CSS)
+                pg.add_style_tag(content=PDF_CSS.replace(
+                    "{HIDE_SOURCES}",
+                    f"#{hide_id}{{display:none !important}}" if hide_id else ""))
 
-                sections = sections_of(pg)
+                sections = sections_of(pg, hide_id)
                 kwargs = dict(format="A4", print_background=True, margin=margins,
                               tagged=True, outline=True)
                 if not args.no_header:
