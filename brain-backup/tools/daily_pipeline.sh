@@ -192,3 +192,6 @@ fi
 
 echo "===== نهاية الخط (رمز الخروج: $RC) =====" | tee -a "$LOG"
 exit $RC
+
+# بوابة قاعدة النقاط في المصدر (19 أكتوبر 2026)
+python3 "$B/validators/check_points_rule.py" --md "$B/reports/$D-sectioned.md" --meta "$B/web/meta/$D.json" || echo "! بوابة النقاط أعادت تحذيرًا"

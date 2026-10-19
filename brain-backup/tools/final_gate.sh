@@ -55,6 +55,7 @@ step "تغطية فحص العقوبات" 2 python3 "$B/validators/check_ofac_co
 step "عدد المصادر (مصدر واحد)" 2 python3 "$B/validators/check_sources_count.py"
 step "سياسة الرموز في المخرجات" 2 python3 "$B/validators/check_code_policy.py" "$SITE/dist"
 step "فصل فضاءات الرموز MN-/EST-" 2 python3 "$B/validators/check_code_spaces.py" --date "$D"
+step "قاعدة النقاط في المصدر" 2 python3 "$B/validators/check_points_rule.py" --md "$B/reports/$D-sectioned.md" --meta "$B/web/meta/$D.json"
 step "بوابات المخرج العشر" 2 python3 "$B/tools/qa_gates.py" --date "$D"
 
 echo "----- الخلاصة -----" | tee -a "$REP"

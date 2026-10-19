@@ -254,6 +254,8 @@ def main() -> int:
         ("٨ الفهرس والاتجاه والترقيم", gate_toc_rtl_footer),
         ("٩ مطابقة نسخة Word", gate_docx),
         ("١٠ الحزمة والتسليم", gate_package),
+        ("١١ عناوين الأقسام بلا تكرار", gate_unique_sections),
+        ("١٢ لا وسوم تصنيف فارغة", gate_no_empty_tags),
     ]
     print(f"خط فحص الجودة العشري — {a.date}")
     fails, missing = [], []
@@ -275,5 +277,34 @@ def main() -> int:
     return 0
 
 
+def gate_unique_sections(date: str):
+    """لا عنوان قسم مكرر في الصفحة المبنية (عطل 19 أكتوبر 2026: قسم «ما تغيّر» ظهر مرتين)."""
+    page = SITE / "dist" / "reports" / f"{date}.html"
+    if not page.exists():
+        return False, "الصفحة غير مبنية", True
+    html = page.read_text(encoding="utf-8")
+    titles = re.findall(r'<h2[^>]*>(.*?)</h2>', html, re.S)
+    clean = [re.sub(r"<[^>]+>", " ", t) for t in titles]
+    clean = [re.sub(r"\s+", " ", t).strip() for t in clean]
+    clean = [t for t in clean if t]
+    dup = sorted({t for t in clean if clean.count(t) > 1})
+    if dup:
+        return False, f"عنوان قسم مكرر: {dup}", True
+    return True, f"{len(clean)} عنوانًا بلا تكرار", False
+
+
+def gate_no_empty_tags(date: str):
+    """لا وسوم تصنيف فارغة تظهر للقارئ (عطل 19 أكتوبر 2026: وسم «جديد» فارغ لحالة مستمرة)."""
+    page = SITE / "dist" / "reports" / f"{date}.html"
+    if not page.exists():
+        return False, "الصفحة غير مبنية", True
+    html = page.read_text(encoding="utf-8")
+    bad = re.findall(r'<span class="(chg-tag|kstrip|conf|rk)[^"]*">\s*</span>', html)
+    if bad:
+        return False, f"وسم فارغ: {sorted(set(bad))}", True
+    return True, "لا وسوم فارغة", False
+
+
 if __name__ == "__main__":
     sys.exit(main())
+

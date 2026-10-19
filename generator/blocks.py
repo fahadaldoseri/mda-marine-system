@@ -113,7 +113,10 @@ _PT_CODE = re.compile(r"\(\d{2}-\d{2}\)")
 
 
 def _points(value: str):
-    """قائمة بنود إذا كانت القيمة تعدادًا واضحًا (أكواد 19-01 أو فواصل منقوطة)، وإلا None."""
+    """قائمة بنود: قائمة صريحة من المصدر، أو تعداد واضح (أكواد 19-01 أو فواصل منقوطة)، وإلا None."""
+    if isinstance(value, list):
+        pts = [str(x).strip() for x in value if str(x).strip()]
+        return pts or None
     v = (value or "").strip()
     if len(_PT_CODE.findall(v)) >= 3 and "،" in v:
         parts = [p.strip() for p in re.split(r"\s*،\s+(?=و?\s*)", v) if p.strip()]

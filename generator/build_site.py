@@ -115,6 +115,13 @@ def discover(site_root: Path):
     return reports, warnings
 
 
+def _flat(value) -> str:
+    """حقول بطاقة القرار قد تكون نصًّا أو قائمة نقاط — تُسطَّح للعرض المختصر."""
+    if isinstance(value, list):
+        return " · ".join(str(x).strip() for x in value if str(x).strip())
+    return (value or "").strip()
+
+
 def build_reports(site_root: Path, dist: Path, reports, warnings):
     out_dir = dist / "reports"
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -134,8 +141,8 @@ def build_reports(site_root: Path, dist: Path, reports, warnings):
             "iso": r["iso"], "label": r["meta"].get("date_label") or ar_date(r["iso"]),
             "risk": risk, "risk_kind": kind,
             "headline": daily_headline(r["meta"]),
-            "changed": ((r["meta"].get("decision_card") or {}).get("changed") or "").strip(),
-            "action": ((r["meta"].get("decision_card") or {}).get("action") or "").strip(),
+            "changed": _flat((r["meta"].get("decision_card") or {}).get("changed")),
+            "action": _flat((r["meta"].get("decision_card") or {}).get("action")),
             "sections": count, "size": target.stat().st_size,
         })
     return built
