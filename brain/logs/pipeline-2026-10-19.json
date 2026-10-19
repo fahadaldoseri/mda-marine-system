@@ -88,10 +88,12 @@
   },
   "report_present_at_pipeline_end": true,
   "final_gate": {
-    "status": "warn",
-    "exit_code": 1,
+    "status": "block",
+    "exit_code": 2,
     "dir": "logs/gate-2026-10-19",
-    "blocked_steps": [],
+    "blocked_steps": [
+      "مطابقة النسخة الاحتياطية (تنبيهي)"
+    ],
     "note": "نتيجة بوابة التسليم النهائية — مسجّلة بعد كتابة التقرير."
   }
 }
