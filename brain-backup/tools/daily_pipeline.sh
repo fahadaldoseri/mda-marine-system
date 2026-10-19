@@ -195,3 +195,6 @@ exit $RC
 
 # بوابة قاعدة النقاط في المصدر (19 أكتوبر 2026)
 python3 "$B/validators/check_points_rule.py" --md "$B/reports/$D-sectioned.md" --meta "$B/web/meta/$D.json" || echo "! بوابة النقاط أعادت تحذيرًا"
+
+# نسخة احتياطية على GitHub (غير مُعطِّلة)
+bash "$B/tools/github_backup.sh" || echo "! النسخة الاحتياطية لم تكتمل — راجع logs/github-backup-*.log"
