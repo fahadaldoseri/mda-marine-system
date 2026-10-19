@@ -98,6 +98,11 @@ PY
 for c in soffice pdftoppm pdftotext pdfinfo; do
   command -v "$c" >/dev/null && ok "$c" || { bad "$c غير مثبّت"; FAIL=1; }
 done
+if ls "$HOME"/.cache/ms-playwright/chromium* >/dev/null 2>&1; then
+  ok "متصفح Playwright مثبّت"
+else
+  bad "متصفح Playwright غير مثبّت — نفّذ: python3 -m playwright install chromium --with-deps"; FAIL=1
+fi
 if command -v fc-list >/dev/null; then
   if fc-list :lang=ar family 2>/dev/null | grep -q .; then
     ok "خطوط عربية متاحة: $(fc-list :lang=ar family 2>/dev/null | sort -u | head -3 | paste -sd', ')"
@@ -126,10 +131,10 @@ if [ "$FAIL" -eq 0 ]; then
   ✔ التهيئة مكتملة.
   الخطوات التالية:
     1) الأسرار:  cp brain/.env.example brain/.env   ثم املأ القيم (أو مرّرها كمتغيّرات بيئة)
-    2) فحص سريع: python3 brain/validators/check_sources_count.py
-    3) بناء الموقع: python3 site/generator/build_site.py
-    4) توليد PDF:  python3 brain/tools/export_report_assets.py --date <YYYY-MM-DD> --only pdf
-    5) خط كامل:    bash brain/tools/final_gate.sh <YYYY-MM-DD>
+    2) إثبات وظيفي كامل بأمر واحد:  bash brain/tools/verify_codespace.sh
+       (تصريف كل الملفات · البوابات العامة وبوابات الإصدار · بناء الموقع · PDF المعتمد · Word)
+    3) فحص سريع: python3 brain/validators/check_sources_count.py
+    4) بناء الموقع: python3 site/generator/build_site.py
   التفاصيل في brain/SETUP.md
 NEXT
 else
