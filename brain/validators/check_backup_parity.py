@@ -85,8 +85,8 @@ def repo_manifest():
 
 def _inside_repo() -> bool:
     """يكتشف التشغيل من داخل نسخة من المستودع نفسه (استنساخ/Codespaces)."""
-    here = Path(__file__).resolve()
-    return (here.parent.parent / "brain").is_dir() and (here.parent.parent / "site").is_dir()
+    repo = Path(__file__).resolve().parents[2]      # <repo>/brain/validators/<file>
+    return (repo / "brain" / "validators").is_dir() and (repo / "site" / "generator").is_dir()
 
 
 def main() -> int:
