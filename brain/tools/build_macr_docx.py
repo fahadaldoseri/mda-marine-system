@@ -196,7 +196,7 @@ def build(md_path, out_path):
     doc = Document()
     doc_defaults(doc)
 
-    # ===== قسم ١: الغلاف =====
+    # ===== قسم 1: الغلاف =====
     s1 = doc.sections[0]
     s1.page_width, s1.page_height = Cm(21), Cm(29.7)
     for m in ('top_margin', 'bottom_margin', 'left_margin', 'right_margin'):
@@ -211,7 +211,7 @@ def build(md_path, out_path):
     para(doc, f"{meta.get('التصنيف','')} · {meta.get('النطاق','')}", size=14, align='center', space_after=6)
     para(doc, f"مملكة البحرين — {meta.get('التاريخ','').replace('/', ' / ')}", size=18, align='center', space_after=0)
 
-    # ===== قسم ٢: المتن =====
+    # ===== قسم 2: المتن =====
     s2 = doc.add_section(WD_SECTION.NEW_PAGE)
     s2.page_width, s2.page_height = Cm(21), Cm(29.7)
     s2.top_margin, s2.bottom_margin = Cm(1.25), Cm(0.75)
@@ -268,7 +268,7 @@ def build(md_path, out_path):
             para(doc, ln.strip(), size=14, space_after=6)
         i += 1
 
-    # ===== قسم ٣: الملاحق =====
+    # ===== قسم 3: الملاحق =====
     s3 = doc.add_section(WD_SECTION.NEW_PAGE)
     s3.page_width, s3.page_height = Cm(21), Cm(29.7)
     s3.top_margin, s3.bottom_margin = Cm(1.25), Cm(0.75)

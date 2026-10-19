@@ -601,7 +601,7 @@ def bdi(t: str) -> str:
 
 def normalize_digits(s: str) -> str:
     """توحيد الأرقام العربية-الهندية والفارسية إلى أرقام لاتينية."""
-    ar = "٠١٢٣٤٥٦٧٨٩"
+    ar = "0123456789"
     fa = "۰۱۲۳۴۵۶۷۸۹"
     for i, d in enumerate(ar):
         s = s.replace(d, str(i))
@@ -741,7 +741,7 @@ def render_geo_viz(rows, defs):
     for r in rows[1:]:
         if len(r) < 3 or "المجموع" in r[0]:
             continue
-        pct_raw = normalize_digits(r[2]).replace("٫", ".").replace(",", ".")
+        pct_raw = normalize_digits(r[2]).replace(".", ".").replace(",", ".")
         m = re.search(r"\d+(?:\.\d+)?", pct_raw)
         if not m:
             continue

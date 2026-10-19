@@ -30,7 +30,7 @@ bad() { printf '  ✘ %s\n' "$*"; }
 log() { printf '\n\033[1m%s\033[0m\n' "$*"; }
 
 FAIL=0
-log "١) فحص بايثون"
+log "1) فحص بايثون"
 if command -v python3 >/dev/null; then
   PYV=$(python3 -c 'import sys;print("%d.%d"%sys.version_info[:2])')
   ok "بايثون $PYV"
@@ -42,7 +42,7 @@ else
 fi
 
 if [ "$VERIFY_ONLY" -eq 0 ] && [ "$SKIP_SYS" -eq 0 ]; then
-  log "٢) حزم النظام (LibreOffice · poppler · خطوط عربية · أدوات المتصفح)"
+  log "2) حزم النظام (LibreOffice · poppler · خطوط عربية · أدوات المتصفح)"
   SUDO=""
   command -v sudo >/dev/null && SUDO="sudo -n"
   if [ -n "$SUDO" ] && ! $SUDO true 2>/dev/null; then
@@ -63,11 +63,11 @@ if [ "$VERIFY_ONLY" -eq 0 ] && [ "$SKIP_SYS" -eq 0 ]; then
     bad "لا مدير حزم معروف — ثبّت يدويًا: LibreOffice + poppler-utils + خط عربي"
   fi
 else
-  log "٢) تخطّي حزم النظام"
+  log "2) تخطّي حزم النظام"
 fi
 
 if [ "$VERIFY_ONLY" -eq 0 ]; then
-  log "٣) حزم بايثون"
+  log "3) حزم بايثون"
   if [ -f "$B/requirements.txt" ]; then
     python3 -m pip install -q --disable-pip-version-check -r "$B/requirements.txt" \
       || python3 -m pip install -q --break-system-packages -r "$B/requirements.txt" \
@@ -77,14 +77,14 @@ if [ "$VERIFY_ONLY" -eq 0 ]; then
     bad "requirements.txt غير موجود في $B"; FAIL=1
   fi
 
-  log "٤) متصفح Playwright (لتوليد PDF والتدقيق البصري)"
+  log "4) متصفح Playwright (لتوليد PDF والتدقيق البصري)"
   python3 -m playwright install chromium >/dev/null 2>&1 \
     || python3 -m playwright install --with-deps chromium >/dev/null 2>&1 \
     || bad "تثبيت متصفح Playwright لم يكتمل — ثبّته يدويًا"
   [ -d "$HOME/.cache/ms-playwright" ] && ok "متصفح Playwright جاهز"
 fi
 
-log "٥) التحقق"
+log "5) التحقق"
 python3 - <<PY
 import sys
 mods = {"docx": "python-docx", "playwright": "playwright", "PIL": "Pillow",
@@ -107,7 +107,7 @@ if command -v fc-list >/dev/null; then
 fi
 
 if [ "$LINK" -eq 1 ]; then
-  log "٦) إنشاء المسارات الافتراضية كروابط"
+  log "6) إنشاء المسارات الافتراضية كروابط"
   SUDO=""; command -v sudo >/dev/null && SUDO="sudo -n"
   $SUDO mkdir -p /home/ubuntu 2>/dev/null
   for pair in "$B:/home/ubuntu/brain-marine-news" "$SITE:/home/ubuntu/seawatch"; do   # مسار مقصود: هو غرض هذا الخيار

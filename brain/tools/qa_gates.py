@@ -261,18 +261,18 @@ def main() -> int:
     pdf = SITE / "dist" / "reports" / "pdf" / f"{a.date}.pdf"
     Path("/tmp/_qa_toc.txt").write_text(pdf_text(pdf), encoding="utf-8")
     gates = [
-        ("١ المصدر والمخطط", gate_schema),
-        ("٢ الهوية والمعرّفات", gate_identity),
-        ("٣ الأرقام والمصادر", gate_numbers),
-        ("٤ الصفحة والمسارات", gate_html),
-        ("٥ تطابق المصدر وPDF", gate_parity),
-        ("٦ حجب المصادر والموثوقية", gate_hidden),
-        ("٧ التعبئة والفجوات", gate_format),
-        ("٨ الفهرس والاتجاه والترقيم", gate_toc_rtl_footer),
-        ("٩ مطابقة نسخة Word", gate_docx),
-        ("١٠ الحزمة والتسليم", gate_package),
-        ("١١ عناوين الأقسام بلا تكرار", gate_unique_sections),
-        ("١٢ لا وسوم تصنيف فارغة", gate_no_empty_tags),
+        ("1 المصدر والمخطط", gate_schema),
+        ("2 الهوية والمعرّفات", gate_identity),
+        ("3 الأرقام والمصادر", gate_numbers),
+        ("4 الصفحة والمسارات", gate_html),
+        ("5 تطابق المصدر وPDF", gate_parity),
+        ("6 حجب المصادر والموثوقية", gate_hidden),
+        ("7 التعبئة والفجوات", gate_format),
+        ("8 الفهرس والاتجاه والترقيم", gate_toc_rtl_footer),
+        ("9 مطابقة نسخة Word", gate_docx),
+        ("10 الحزمة والتسليم", gate_package),
+        ("11 عناوين الأقسام بلا تكرار", gate_unique_sections),
+        ("12 لا وسوم تصنيف فارغة", gate_no_empty_tags),
     ]
     print(f"خط فحص الجودة العشري — {a.date}")
     fails, missing = [], []

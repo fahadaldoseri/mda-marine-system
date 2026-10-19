@@ -6,7 +6,7 @@
 ولا توجد خريطة تربط رموز التقرير (MN-...) بمعرّفات الدفتر (EV-...). النتيجة: انقطاع
 الذاكرة التراكمية، وعدم إمكانية إسناد أي إشارة إلى حدث سابق.
 
-إصلاحات 19 أكتوبر 2026 (بنود ١٠ و١١ و١٢ و١٣ من التدقيق المستقل):
+إصلاحات 19 أكتوبر 2026 (بنود 10 و11 و12 و13 من التدقيق المستقل):
   · قائمة سجلات واحدة (`events`) بدل تخزين القائمة نفسها مرتين.
   · إعادة بناء الأقسام الرأسية القابلة للحساب من السجلات، ووسم كل قسم تاريخي
     لا يُعاد بناؤه آليًا بـ`_state: point_in_time` و`_as_of` صريحين.
@@ -76,11 +76,11 @@ def utcnow():
 
 
 frozen = load_json(FROZEN)
-# سجل الجولة السابقة: أساس حساب «ما تغيّر في هذه الجولة» (بند ١٢ — لا خلط بين المضاف اليومي والإجمالي)
+# سجل الجولة السابقة: أساس حساب «ما تغيّر في هذه الجولة» (بند 12 — لا خلط بين المضاف اليومي والإجمالي)
 prev_master = load_json(MASTER) if MASTER.exists() else {}
 prev_codes = {r.get('display_code') for r in (prev_master.get('events') or []) if r.get('display_code')}
 prev_merged_utc = (prev_master.get('merge_log') or {}).get('merged_utc', '')
-# قائمة سجلات واحدة: `events` — المفتاح المكرر `records` أُزيل (بند ١٠)
+# قائمة سجلات واحدة: `events` — المفتاح المكرر `records` أُزيل (بند 10)
 records = list(frozen.get('events') or frozen.get('records') or [])
 by_id = {r['event_id']: r for r in records}
 max_seq = {}
@@ -153,7 +153,7 @@ master['document_id'] = 'marine-events-ledger-master'
 master['title'] = f"دفتر الأحداث التراكمي — من {master.get('period_start')} إلى {master.get('period_end')}"
 master['schema_note'] = 'قائمة السجلات الوحيدة هي `events`. أُزيل المفتاح المكرر `records` في 19 أكتوبر 2026 (بند 10 من التدقيق المستقل).'
 
-# ── إعادة بناء الأقسام الرأسية القابلة للحساب (بند ١١) ──────────────────────────
+# ── إعادة بناء الأقسام الرأسية القابلة للحساب (بند 11) ──────────────────────────
 counts = dict(master.get('counts') or {})
 counts.update({
     'total_records': len(records),
@@ -196,7 +196,7 @@ master['vertical_rebuild'] = {
     'rule': 'كل قسم رأسي إمّا مُعاد بناؤه من السجلات، أو موسوم بتاريخه (`_state: point_in_time` + `_as_of`). لا قسم يبدو حديثًا بلا سند.',
 }
 
-# ── حالة الدمج: مضاف هذه الجولة مقابل إجمالي المضاف (بند ١٢) ─────────────────────
+# ── حالة الدمج: مضاف هذه الجولة مقابل إجمالي المضاف (بند 12) ─────────────────────
 merged_from_frozen = [r for r in records if r.get('merged_from')]
 current_codes = {r['display_code'] for r in records if r.get('display_code')}
 added_this_run = sorted(current_codes - prev_codes)

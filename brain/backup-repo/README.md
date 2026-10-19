@@ -111,19 +111,19 @@ PY
 النظام **محمول بالكامل**: لا مسار مطلق مكتوب في أي ملف تنفيذي، وكل ملف يستنتج جذره من موقع الملف أو يقبله من `BRAIN_DIR`/`SITE_DIR`.
 
 ```bash
-# ١) استنساخ
+# 1) استنساخ
 git clone https://github.com/fahadaldoseri/mda-marine-system.git   # الرابط كما في زر Code بالمستودع
 cd mda-marine-system
 
-# ٢) تهيئة كاملة بأمر واحد (حزم النظام · بايثون · متصفح Playwright · خطوط عربية)
+# 2) تهيئة كاملة بأمر واحد (حزم النظام · بايثون · متصفح Playwright · خطوط عربية)
 bash brain/bootstrap.sh
 
-# ٣) فحص أن كل شيء جاهز
+# 3) فحص أن كل شيء جاهز
 bash brain/bootstrap.sh --verify-only
 ```
 
 الأدلة: `brain/SETUP.md` (التهيئة التفصيلية) · `brain/docs/تشغيل-Codespaces.md` (تشغيل سحابي من أي جهاز بلا تثبيت).
 
-**على GitHub Codespaces:** زر **Code** ← **Codespaces** ← **Create codespace on main**، وتُبنى البيئة تلقائيًا من `.devcontainer/devcontainer.json` في ٥–٨ دقائق. ملاحظة: النشر على الموقع وخدمة الويب هوك والمهام المجدولة تبقى على المنصة، وCodespaces بيئة تشغيل وتحرير.
+**على GitHub Codespaces:** زر **Code** ← **Codespaces** ← **Create codespace on main**، وتُبنى البيئة تلقائيًا من `.devcontainer/devcontainer.json` في 5–8 دقائق. ملاحظة: النشر على الموقع وخدمة الويب هوك والمهام المجدولة تبقى على المنصة، وCodespaces بيئة تشغيل وتحرير.
 
 ## كيف يعمل النظام يوميًا

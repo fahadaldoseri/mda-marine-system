@@ -8,11 +8,11 @@ _S="${SITE_DIR:-$(dirname "$_B")/seawatch}"
 MSG="${1:-تحديث النظام $(date -u +%F)}"
 FAIL=0
 
-echo "١) النسخة الاحتياطية للنظام → المستودع الخاص"
+echo "1) النسخة الاحتياطية للنظام → المستودع الخاص"
 bash "$_B/tools/github_backup.sh" || FAIL=1
 
 echo
-echo "٢) تغييرات الموقع → مستودع الموقع"
+echo "2) تغييرات الموقع → مستودع الموقع"
 if [ -d "$_S/.git" ]; then
   cd "$_S"
   if [ -n "$(git status --porcelain)" ]; then
@@ -28,7 +28,7 @@ else
 fi
 
 echo
-echo "٣) الحصيلة"
+echo "3) الحصيلة"
 _OUT="${BACKUP_REPO_DIR:-$(dirname "$_B")/mda-marine-system}"
 echo "  النظام:  $(git -C "$_OUT" rev-parse --short HEAD 2>/dev/null || echo '-')  (المستودع الخاص — النسخة الوحيدة)"
 echo "  الموقع:  $(git -C "$_S" rev-parse --short HEAD 2>/dev/null || echo '-')"

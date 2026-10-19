@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # بوابة التسليم النهائية — فشل مغلق
-# بند ٥ و٦ من التدقيق المستقل (19 أكتوبر 2026): بوابات الفحص كانت خارج خط التشغيل،
+# بند 5 و6 من التدقيق المستقل (19 أكتوبر 2026): بوابات الفحص كانت خارج خط التشغيل،
 # وكانت معلّقة بوجود ملف PDF مبنٍ من جولة سابقة. هذه البوابة تجمعها في مسار واحد
 # بترتيب صحيح: يبني ← يُصدّر PDF ← يفحص، وأي مخالفة مانعة تُسقط التسليم.
 #
@@ -54,6 +54,7 @@ step "بوابة التحليل الاستخباري" 2 python3 "$B/validators/c
 step "تغطية فحص العقوبات" 2 python3 "$B/validators/check_ofac_coverage.py" --date "$D"
 step "عدد المصادر (مصدر واحد)" 2 python3 "$B/validators/check_sources_count.py"
 step "قابلية النقل (مسارات)" 2 python3 "$B/validators/check_portable_paths.py"
+step "الأرقام (0-9 لاتينية)" 2 python3 "$B/validators/check_numerals.py"
 step "سياسة الرموز في المخرجات" 2 python3 "$B/validators/check_code_policy.py" "$SITE/dist"
 step "فصل فضاءات الرموز MN-/EST-" 2 python3 "$B/validators/check_code_spaces.py" --date "$D"
 step "قاعدة النقاط في المصدر" 2 python3 "$B/validators/check_points_rule.py" --md "$B/reports/$D-sectioned.md" --meta "$B/web/meta/$D.json"

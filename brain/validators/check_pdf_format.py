@@ -119,17 +119,17 @@ def main() -> int:
     nrm = lambda t: re.sub(r"[^\u0621-\u064A0-9]", "", t)
     flat = nrm(text)
 
-    # ١) عدد الصفحات في النطاق المعتمد
+    # 1) عدد الصفحات في النطاق المعتمد
     lo, hi = prof.get("pages_range", [17, 22])
     if not (lo <= pages <= hi):
         fails.append(f"عدد الصفحات {pages} خارج النطاق المعتمد {lo}–{hi}")
 
-    # ٢) قسم المصادر والموثوقية محجوبان تمامًا (لا نص ولا إشارة حجب)
+    # 2) قسم المصادر والموثوقية محجوبان تمامًا (لا نص ولا إشارة حجب)
     for bad in ("المصادر والمراجع", "موثوقية المصادر", "محجوبمننسخةالطباعة"):
         if nrm(bad) in flat:
             fails.append(f"ظهر ما يجب حجبه: «{bad}»")
 
-    # ٣) أقسام المصدر كاملة
+    # 3) أقسام المصدر كاملة
     if a.date:
         src = B / "reports" / f"{a.date}-sectioned.md"
         if src.exists():
@@ -143,14 +143,14 @@ def main() -> int:
             else:
                 notes.append(f"أقسام المصدر: {len(heads)} — كلها حاضرة")
 
-    # ٤) مفتاح الخريطة
+    # 4) مفتاح الخريطة
     codes = {c for c in re.findall(r"\b\d{2}-\d{2}\b", text)}
     if len(codes) >= MIN_LEGEND_ITEMS:
         notes.append(f"مفتاح الخريطة حاضر ({len(codes)} رمزًا)")
     else:
         fails.append(f"مفتاح الخريطة غائب أو ناقص (رموز: {len(codes)})")
 
-    # ٥) تذييل الترقيم
+    # 5) تذييل الترقيم
     # استخراج العربية من PDF يعكس ترتيب التذييل، فيُقاس بوجود كلمة «صفحة» ورقم في الصفحة نفسها
     foot = sum(1 for pg in text.split("\f")
                if "صفحة" in pg and re.search(r"\d", pg[-260:]))
@@ -159,7 +159,7 @@ def main() -> int:
     else:
         notes.append(f"تذييل الترقيم على {foot} صفحة")
 
-    # ٦) تعبئة الصفحات والفجوات الداخلية (قياس منطقة المحتوى لا التذييل)
+    # 6) تعبئة الصفحات والفجوات الداخلية (قياس منطقة المحتوى لا التذييل)
     fills, voids = page_metrics(pdf)
     gate = prof.get("gates", {})
     avg = sum(fills) / len(fills)
@@ -183,7 +183,7 @@ def main() -> int:
     else:
         notes.append("الغلاف والصفحة الأخيرة فوق حدّ التعبئة الأدنى")
 
-    # ٧) بصمة نمط الطباعة (قفل الشكل)
+    # 7) بصمة نمط الطباعة (قفل الشكل)
     if FROZEN_CSS.exists() and not a.allow_css_change:
         frozen = sha(FROZEN_CSS.read_text(encoding="utf-8"))
         now = sha(current_print_css())
