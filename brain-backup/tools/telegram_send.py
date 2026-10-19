@@ -35,6 +35,25 @@ RELAY = "https://r.jina.ai/"
 SEND_LOG = B / "logs" / "telegram-sends.jsonl"
 
 
+def _token_from_env_file() -> str:
+    """الرمز من ملف البيئة المحلي عند غيابه من بيئة التشغيل (للبيئات السحابية مثل Codespaces).
+    يُقرأ سطر واحد فقط مفتاحه TELEGRAM_BOT_TOKEN؛ ولا يُطبع الرمز ولا أي قيمة سرية."""
+    for cand in (Path(os.environ.get("BRAIN_DIR", B)) / ".env", B / ".env"):
+        try:
+            if not cand.is_file():
+                continue
+            for line in cand.read_text(encoding="utf-8").splitlines():
+                line = line.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                key, val = line.split("=", 1)
+                if key.strip() == "TELEGRAM_BOT_TOKEN":
+                    return val.strip().strip("'\"")
+        except OSError:
+            continue
+    return ""
+
+
 def _log(entry: dict) -> None:
     """سجل تدقيق لكل محاولة إرسال: مسموحة أو مرفوضة."""
     import datetime as _dt
@@ -194,9 +213,9 @@ def main() -> int:
     ap.add_argument("--reason", default="", help="سبب الاستثناء المكتوب")
     args = ap.parse_args()
 
-    token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
+    token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip() or _token_from_env_file()
     if not token and not args.dry_run:
-        print("فشل: متغير TELEGRAM_BOT_TOKEN غير متاح (تفعيل موصل Telegram Bot API)")
+        print("فشل: متغير TELEGRAM_BOT_TOKEN غير متاح (فعّل موصل Telegram Bot API أو ضع الرمز في brain/.env)")
         return 2
 
     if args.file:
