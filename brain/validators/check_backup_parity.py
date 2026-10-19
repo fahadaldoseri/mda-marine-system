@@ -50,9 +50,9 @@ def manifest(root: Path, skip_dirs, skip_files, prefix: str):
                 continue
             if p.is_symlink():
                 tgt = p.resolve()
-                for root, rp in ((B, "brain"), (S, "site")):
+                for _tree, rp in ((B, "brain"), (S, "site")):
                     try:
-                        out[f"{prefix}/{rel}"] = ("link", f"{rp}/{tgt.relative_to(root.resolve()).as_posix()}")
+                        out[f"{prefix}/{rel}"] = ("link", f"{rp}/{tgt.relative_to(_tree.resolve()).as_posix()}")
                         break
                     except ValueError:
                         continue
