@@ -63,7 +63,7 @@ def _mirror_symlink(src: Path, dst: Path, prefix: str):
     if dst.is_symlink() or dst.exists():
         dst.unlink() if dst.is_symlink() or dst.is_file() else shutil.rmtree(dst)
     dst.symlink_to(link)
-    SYMLINKS_LOG.append((f"{prefix}/{rel_repo.as_posix()}", f"→ {link.as_posix()}"))
+    SYMLINKS_LOG.append((rel_repo.as_posix(), f"→ {link.as_posix()}"))
 
 
 

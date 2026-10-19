@@ -21,6 +21,7 @@ SSKIP_DIRS = {"__pycache__", ".git", "brain-backup", "dist", "shots", "node_modu
 BSKIP_FILES = {"state/webhook-secret.txt", ".env", ".env.local"}
 SSKIP_FILES = {".env", ".env.local", ".env.production"}
 SANITIZED = {"brain/appendices/telegram-chat.json", "brain/appendices/telegram-subscriptions.json",
+             "brain/appendices/telegram-targets.json",
              "brain/research/styles/sources/archive-reports.html"}
 # سجلّات تنمو باستمرار بعد النسخ: لا تُحسب انحرافًا
 VOLATILE = ("brain/logs/",)
@@ -47,7 +48,18 @@ def manifest(root: Path, skip_dirs, skip_files, prefix: str):
                 rel = rel[2:]
             if rel in skip_files or p.suffix == ".pyc":
                 continue
-            out[f"{prefix}/{rel}"] = ("link", os.readlink(p)) if p.is_symlink() else ("file", sha(p))
+            if p.is_symlink():
+                tgt = p.resolve()
+                for root, rp in ((B, "brain"), (S, "site")):
+                    try:
+                        out[f"{prefix}/{rel}"] = ("link", f"{rp}/{tgt.relative_to(root.resolve()).as_posix()}")
+                        break
+                    except ValueError:
+                        continue
+                else:
+                    out[f"{prefix}/{rel}"] = ("link", f"خارج الشجرتين: {tgt}")
+            else:
+                out[f"{prefix}/{rel}"] = ("file", sha(p))
     return out
 
 
