@@ -205,18 +205,17 @@ else:
     oks.append(f"عدد عمليات المتصفح معقول ({_chr})")
 oks.append("تنبيه تشغيلي: مهام الخدمات (services) لا تنتهي بحكم تصميمها، وليست مهام عالقة")
 
-# 7ب) النسخة الاحتياطية للعقل داخل مستودع الموقع (تُحفظ مع نقطة الاستعادة)
-_bk = Path(f'{SITE}/brain-backup')
+# 7ب) النسخة الاحتياطية على GitHub (المصدر الوحيد — لا نسخة مكرّرة داخل مستودع الموقع)
+_bk = Path(os.environ.get("BACKUP_REPO_DIR") or Path(SITE).parent / "mda-marine-system")
 if _bk.exists() and report.exists():
-    _t = _bk / 'reports' / report.name
+    _t = _bk / 'brain' / 'reports' / report.name
     check(_t.exists() and _t.stat().st_size == report.stat().st_size,
-          "النسخة الاحتياطية تضم تقرير اليوم بحجم مطابق",
-          "النسخة الاحتياطية لا تضم تقرير اليوم أو حجمه مختلف — شغّل tools/sync_backup.sh")
+          "النسخة الاحتياطية على GitHub تضم تقرير اليوم بحجم مطابق",
+          "النسخة الاحتياطية لا تضم تقرير اليوم — شغّل tools/github_backup.sh")
 elif not _bk.exists():
-    warns.append("مجلد النسخة الاحتياطية غير موجود — شغّل tools/sync_backup.sh")
+    warns.append("مستودع النسخة الاحتياطية غير موجود محليًا — شغّل tools/github_backup.sh")
 else:
     warns.append("لا تقرير لليوم لفحص النسخة الاحتياطية")
-
 # 6د) رقم النسخة: الصيغة «و ب YY/MM/NN» والتسلسل اليومي
 import subprocess as _sp
 _r = _sp.run(['python3', str(B / 'tools' / 'next_version.py'), '--precheck'], capture_output=True, text=True)
