@@ -208,3 +208,14 @@ fatal: not a git repository (or any of the parent directories): .git
 تم الدفع: cdced79
 === انتهى: 2026-10-19T20:30:19Z ===
 === بدء النسخ الاحتياطي: 2026-10-19T20:38:00Z ===
+/home/ubuntu/brain-marine-news/tools/github_backup.py:113: DeprecationWarning: datetime.datetime.utcfromtimestamp() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.fromtimestamp(timestamp, datetime.UTC).
+  f"{__import__('datetime').datetime.utcfromtimestamp(st.st_mtime).strftime('%Y-%m-%d %H:%M')}\t"
+  حُجبت قيم سرية في: brain/appendices/telegram-chat.json
+  حُجبت قيم سرية في: brain/appendices/telegram-subscriptions.json
+  حُجبت قيم سرية في: brain/research/styles/sources/archive-reports.html
+الملفات: 724 · الحجم: 112.4 م.ب · الفهرس: docs/فهرس-الملفات.tsv
+  استُثني: brain/web/data — رابط رمزي — لا يُنقل
+  استُثني: brain/state/webhook-secret.txt — سرّي — لا يُنقل
+تم الدفع: 896174d
+=== انتهى: 2026-10-19T20:38:04Z ===
+=== بدء النسخ الاحتياطي: 2026-10-19T20:38:49Z ===
