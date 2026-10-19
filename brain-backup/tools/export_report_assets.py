@@ -44,6 +44,7 @@ PORT = 8799
 # أنماط PDF فقط: تُحقن أثناء التصدير ولا تمسّ صفحة الموقع
 PDF_CSS = """
 #sec-16{display:none !important}
+main{gap:0 !important}
 section.doc > h2{break-after:avoid;page-break-after:avoid}
 p,li,blockquote{orphans:3;widows:3}
 .map-viz svg{max-height:118mm;height:auto}

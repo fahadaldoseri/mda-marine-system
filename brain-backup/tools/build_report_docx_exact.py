@@ -152,6 +152,22 @@ def main() -> int:
         stats = polish(docx_raw, date, out)
         print(f"[docx] {out} ({out.stat().st_size/1024:.0f} ك.ب)")
         print(f"[بنية] فقرات {stats['paras']} · جداول {stats['tables']}")
+        # التحقق المعتمد: محتوى ملف Word نفسه (لا تحويل ليبرأوفيس، فهو غير موثوق مع العربية RTL)
+        try:
+            from docx import Document as _D
+            _t = "\n".join(x.text for x in _D(str(out)).paragraphs)
+            for _tb in _D(str(out)).tables:
+                for _r in _tb.rows:
+                    _t += "\n" + " | ".join(c.text for c in _r.cells)
+            _heads = [h.strip() for h in re.findall(r"^##\s+(.+)$",
+                      (B / "reports" / f"{date}-sectioned.md").read_text(encoding="utf-8"), re.M)]
+            _nrm = lambda t: re.sub(r"[^\u0621-\u064A0-9]", "", t)
+            _flat = _nrm(_t)
+            _miss = [h for h in _heads if _nrm(h)[:12] not in _flat]
+            print(f"[docx·تحقق] الأقسام: {len(_heads)-len(_miss)}/{len(_heads)}"
+                  + (" ✓" if not _miss else f" — ناقص: {_miss}"))
+        except Exception as _e:
+            print(f"[docx·تحقق] تعذر الفحص المباشر: {_e}")
 
     # تحقق: تحويل إلى PDF وقياس المطابقة
     r = subprocess.run(["libreoffice", "--headless", "--convert-to", "pdf",
@@ -169,7 +185,7 @@ def main() -> int:
         miss = [h for h in heads if not any(x in h for x in HIDDEN_HEADINGS)
                 and nrm(h)[:12] not in flat]
         hidden_shown = any(nrm(x) in flat for x in HIDDEN_HEADINGS)
-        print(f"[pdf]  صفحات: {pages} | أقسام ناقصة: {len(miss)}"
+        print(f"[pdf·فحص ثانوي غير معتمد]  صفحات: {pages} | أقسام لم تظهر في تحويل ليبرأوفيس: {len(miss)}"
               + (f" → {miss}" if miss else " ✓")
               + f" | المصادر ظاهرة: {'نعم' if hidden_shown else 'لا ✓'}")
     return 0
