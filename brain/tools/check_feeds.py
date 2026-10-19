@@ -8,6 +8,11 @@
   · حدّ الفشل المقبول: 20% من التغذيات
   · تُكتب حالة تفصيلية: feeds/feeds-<التاريخ>.status.json
 """
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
 import argparse
 import datetime as dt
 import html
@@ -19,8 +24,8 @@ import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-SRC = Path('/home/ubuntu/brain-marine-news/sections/10-sources.md')
-OUT = Path('/home/ubuntu/brain-marine-news/feeds')
+SRC = Path(f'{BRAIN}/sections/10-sources.md')
+OUT = Path(f'{BRAIN}/feeds')
 UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124 Safari/537.36'
 HEADERS = {
     'User-Agent': UA,

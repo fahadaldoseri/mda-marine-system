@@ -3,8 +3,8 @@
 # يبني الشجرة النظيفة (brain + site) ثم يدفعها إلى المستودع الخاص.
 # غير مُعطِّل للخط اليومي: فشله يُسجَّل ولا يوقف التسليم.
 set -u
-B="/home/ubuntu/brain-marine-news"
-REPO="/home/ubuntu/mda-marine-system"
+B="${BRAIN_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
+REPO="${BACKUP_REPO_DIR:-$(dirname "$B")/mda-marine-system}"
 LOG="$B/logs/github-backup-$(date -u +%F).log"
 mkdir -p "$B/logs"
 {

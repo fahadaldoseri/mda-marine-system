@@ -12,8 +12,8 @@
 # سلّم رموز الخروج: 0 = نجاح · 1 = متدهور · 2 = فاشل.
 # الاستخدام: bash tools/daily_pipeline.sh [UTC_DATE] [OFAC_TARGETS_FILE] [ORIGINALS_URLS_FILE]
 set -uo pipefail
-B=/home/ubuntu/brain-marine-news
-SITE=/home/ubuntu/seawatch
+B="${BRAIN_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
+SITE="${SITE_DIR:-$(dirname "$B")/seawatch}"
 cd "$B" || exit 2
 D="${1:-$(date -u +%F)}"
 TARGETS="${2:-$B/watchlist/ofac-targets.txt}"
@@ -109,11 +109,11 @@ else
 fi
 
 if [ -f "archive/originals/$D/manifest.json" ]; then MANIFEST="archive/originals/$D/manifest.json"; else MANIFEST=""; fi
-python3 - "$MARK" "$D" "$S_FEEDS" "$S_OFAC" "$S_ARCH" "$S_LEDGER" "$NOTE_OFAC" "$NOTE_ARCH" "$NOTE_LEDGER" "$MANIFEST" "$S_LLM" "$NOTE_LLM" <<'PY'
+python3 - "$MARK" "$D" "$S_FEEDS" "$S_OFAC" "$S_ARCH" "$S_LEDGER" "$NOTE_OFAC" "$NOTE_ARCH" "$NOTE_LEDGER" "$MANIFEST" "$S_LLM" "$NOTE_LLM" "$B" <<'PY'
 import json, sys, datetime
 from pathlib import Path
-mark, d, f, o, a, l, no, na, nl, man, sl, nlm = sys.argv[1:13]
-B = Path('/home/ubuntu/brain-marine-news')
+mark, d, f, o, a, l, no, na, nl, man, sl, nlm, b = sys.argv[1:14]
+B = Path(b)
 
 def jload(p, default=None):
     try:

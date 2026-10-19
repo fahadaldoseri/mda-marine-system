@@ -7,20 +7,37 @@
 يستثني ملفات القاعدة نفسها (المعجم ومدقّق اللغة) حتى لا تُمحى القاعدة.
 الاستخدام: python3 tools/normalize_terms.py [--apply]
 """
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
+
+def _tree(_env, _base, *_names):
+    """جذر الشجرة المجاورة: من متغيّر البيئة أو من مجلد شقيق."""
+    _v = _os.environ.get(_env)
+    if _v:
+        return _Path(_v)
+    for _n in _names:
+        _c = _base.parent / _n
+        if _c.is_dir():
+            return _c
+    return _base.parent / _names[0]
+SITE = _tree("SITE_DIR", _ROOT, "seawatch", "site")
 import re
 import sys
 from pathlib import Path
 
 ROOTS = [
-    Path("/home/ubuntu/brain-marine-news/reports"),
-    Path("/home/ubuntu/brain-marine-news/web"),
-    Path("/home/ubuntu/brain-marine-news/cumulative-2026"),
-    Path("/home/ubuntu/brain-marine-news/historical"),
-    Path("/home/ubuntu/brain-marine-news/docs"),
-    Path("/home/ubuntu/brain-marine-news/feeds"),
-    Path("/home/ubuntu/brain-marine-news/sources"),
-    Path("/home/ubuntu/seawatch/sources"),
-    Path("/home/ubuntu/seawatch/generator"),
+    Path(f"{BRAIN}/reports"),
+    Path(f"{BRAIN}/web"),
+    Path(f"{BRAIN}/cumulative-2026"),
+    Path(f"{BRAIN}/historical"),
+    Path(f"{BRAIN}/docs"),
+    Path(f"{BRAIN}/feeds"),
+    Path(f"{BRAIN}/sources"),
+    Path(f"{SITE}/sources"),
+    Path(f"{SITE}/generator"),
 ]
 SKIP_PARTS = ("/backups/", "/brain-backup/", "/audit/", "/docx/", "/__pycache__/",
               "/reports/latest/", "/validators/")

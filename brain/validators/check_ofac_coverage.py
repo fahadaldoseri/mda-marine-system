@@ -6,6 +6,11 @@
 الاستخدام: python3 validators/check_ofac_coverage.py --date 2026-10-19
 """
 from __future__ import annotations
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
 
 import argparse
 import json
@@ -15,7 +20,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'tools'))
 from vessel_names import from_report  # noqa: E402
 
-B = Path('/home/ubuntu/brain-marine-news')
+B = Path(f'{BRAIN}')
 SCREEN = B / 'archive' / 'ofac-screen-latest.json'
 
 

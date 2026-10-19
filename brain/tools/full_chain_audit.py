@@ -4,11 +4,28 @@
 المنهج: فحص كل حلقة في السلسلة — المخرجات، الروابط بينها، الصفحة المنشورة، الأتمتة.
 الاستخدام: python3 tools/full_chain_audit.py [DATE]  → يكتب audit/full-chain-<DATE>.json
 """
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
+
+def _tree(_env, _base, *_names):
+    """جذر الشجرة المجاورة: من متغيّر البيئة أو من مجلد شقيق."""
+    _v = _os.environ.get(_env)
+    if _v:
+        return _Path(_v)
+    for _n in _names:
+        _c = _base.parent / _n
+        if _c.is_dir():
+            return _c
+    return _base.parent / _names[0]
+SITE = _tree("SITE_DIR", _ROOT, "seawatch", "site")
 import json, re, subprocess, sys, time
 from pathlib import Path
 
-B = Path('/home/ubuntu/brain-marine-news')
-S = Path('/home/ubuntu/seawatch')
+B = Path(f'{BRAIN}')
+S = Path(f'{SITE}')
 D = sys.argv[1] if len(sys.argv) > 1 else subprocess.run(['date', '-u', '+%F'], capture_output=True, text=True).stdout.strip()
 BASE = 'https://seawatch-xp4qirmr.manus.space'
 MORNING_END = f'{D}T05:30:00Z'          # نافذة التشغيل الصباحي (07:00–08:30 بتوقيت البحرين)

@@ -4,6 +4,11 @@
 
 الاستخدام: python3 tools/visual_audit.py [--base https://seawatch-xp4qirmr.manus.space]
 """
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
 
 import argparse
 import json
@@ -12,7 +17,7 @@ from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
-OUT = Path("/home/ubuntu/brain-marine-news/audit/visual")
+OUT = Path(f"{BRAIN}/audit/visual")
 PAGES = [
     ("report", "/reports/2026-10-12.html"),
     ("home", "/"),

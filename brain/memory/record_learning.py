@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """Append a normalized adaptive-learning event to the Brain JSONL log."""
 from __future__ import annotations
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
 import argparse, hashlib, json
 from datetime import datetime, timezone
 from pathlib import Path
@@ -14,7 +19,7 @@ def main() -> int:
     parser.add_argument("--replacement", default="")
     parser.add_argument("--evidence", default="")
     parser.add_argument("--status", choices=["candidate", "confirmed", "rejected", "promoted"], default="candidate")
-    parser.add_argument("--log", default="/home/ubuntu/brain-marine-news/memory/learning-log.jsonl")
+    parser.add_argument("--log", default=f"{BRAIN}/memory/learning-log.jsonl")
     args = parser.parse_args()
 
     normalized = " ".join(args.lesson.split()).casefold()

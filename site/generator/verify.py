@@ -8,13 +8,29 @@
 الاستخدام: python3 verify.py <صفحة.html> [مجلد_المخرجات]
 يعيد 0 عند النجاح، و1 عند وجود إخفاق.
 """
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+
+def _tree(_env, _base, *_names):
+    """جذر الشجرة المجاورة: من متغيّر البيئة أو من مجلد شقيق."""
+    _v = _os.environ.get(_env)
+    if _v:
+        return _Path(_v)
+    for _n in _names:
+        _c = _base.parent / _n
+        if _c.is_dir():
+            return _c
+    return _base.parent / _names[0]
+BRAIN = _tree("BRAIN_DIR", _ROOT, "brain-marine-news", "brain")
 import re
 import sys
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 src = Path(sys.argv[1]).resolve()
-outdir = Path(sys.argv[2] if len(sys.argv) > 2 else "/home/ubuntu/brain-marine-news/audit/visual")
+outdir = Path(sys.argv[2] if len(sys.argv) > 2 else f"{BRAIN}/audit/visual")
 outdir.mkdir(parents=True, exist_ok=True)
 raw = src.read_text(encoding="utf-8")
 

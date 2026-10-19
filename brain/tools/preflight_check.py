@@ -11,11 +11,28 @@
 الاستخدام: python3 tools/preflight_check.py [REPORT_DATE]
 رمز الخروج: 0 = كل الفحوص الحرجة نجحت · 1 = يوجد فشل حرج يمنع التسليم.
 """
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
+
+def _tree(_env, _base, *_names):
+    """جذر الشجرة المجاورة: من متغيّر البيئة أو من مجلد شقيق."""
+    _v = _os.environ.get(_env)
+    if _v:
+        return _Path(_v)
+    for _n in _names:
+        _c = _base.parent / _n
+        if _c.is_dir():
+            return _c
+    return _base.parent / _names[0]
+SITE = _tree("SITE_DIR", _ROOT, "seawatch", "site")
 import json, re, subprocess, sys
 from pathlib import Path
 
-B = Path('/home/ubuntu/brain-marine-news')
-GEN = Path('/home/ubuntu/seawatch/generator')
+B = Path(f'{BRAIN}')
+GEN = Path(f'{SITE}/generator')
 DATE = sys.argv[1] if len(sys.argv) > 1 else subprocess.run(['date', '-u', '+%F'], capture_output=True, text=True).stdout.strip()
 
 fails, warns, oks = [], [], []
@@ -189,7 +206,7 @@ else:
 oks.append("تنبيه تشغيلي: مهام الخدمات (services) لا تنتهي بحكم تصميمها، وليست مهام عالقة")
 
 # 7ب) النسخة الاحتياطية للعقل داخل مستودع الموقع (تُحفظ مع نقطة الاستعادة)
-_bk = Path('/home/ubuntu/seawatch/brain-backup')
+_bk = Path(f'{SITE}/brain-backup')
 if _bk.exists() and report.exists():
     _t = _bk / 'reports' / report.name
     check(_t.exists() and _t.stat().st_size == report.stat().st_size,

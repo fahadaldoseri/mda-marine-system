@@ -7,8 +7,8 @@
 # سلّم رموز الخروج الموحّد: 0 = نجاح · 1 = نجاح مع تحذير · 2 = مانع (يوقف التسليم)
 # الاستخدام: bash tools/final_gate.sh <YYYY-MM-DD> [--no-build]
 set -uo pipefail
-B=/home/ubuntu/brain-marine-news
-SITE=/home/ubuntu/seawatch
+B="${BRAIN_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
+SITE="${SITE_DIR:-$(dirname "$B")/seawatch}"
 D="${1:-$(date -u +%F)}"
 BUILD=1
 for a in "$@"; do [ "$a" = "--no-build" ] && BUILD=0; done
@@ -53,6 +53,7 @@ step "بوابة اللغة" 2 python3 "$B/validators/check_language.py" "$B/rep
 step "بوابة التحليل الاستخباري" 2 python3 "$B/validators/check_intel.py" "$B/reports/$D-sectioned.md" "$B/web/meta/$D.json"
 step "تغطية فحص العقوبات" 2 python3 "$B/validators/check_ofac_coverage.py" --date "$D"
 step "عدد المصادر (مصدر واحد)" 2 python3 "$B/validators/check_sources_count.py"
+step "قابلية النقل (مسارات)" 2 python3 "$B/validators/check_portable_paths.py"
 step "سياسة الرموز في المخرجات" 2 python3 "$B/validators/check_code_policy.py" "$SITE/dist"
 step "فصل فضاءات الرموز MN-/EST-" 2 python3 "$B/validators/check_code_spaces.py" --date "$D"
 step "قاعدة النقاط في المصدر" 2 python3 "$B/validators/check_points_rule.py" --md "$B/reports/$D-sectioned.md" --meta "$B/web/meta/$D.json"
@@ -60,11 +61,11 @@ step "بوابات المخرج العشر" 2 python3 "$B/tools/qa_gates.py" --d
 
 echo "----- الخلاصة -----" | tee -a "$REP"
 cat "$REP" | tail -14
-python3 - "$D" "$WORST" "$LOGDIR" <<'PY'
+python3 - "$D" "$WORST" "$LOGDIR" "$B" <<'PY'
 import json, sys, datetime
 from pathlib import Path
 d, worst, logdir = sys.argv[1], int(sys.argv[2]), Path(sys.argv[3])
-B = Path('/home/ubuntu/brain-marine-news')
+B = Path(sys.argv[4])
 status = {0: 'ok', 1: 'warn', 2: 'block'}[worst]
 steps = []
 for line in (logdir / 'report.txt').read_text(encoding='utf-8').splitlines():

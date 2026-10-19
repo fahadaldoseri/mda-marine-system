@@ -9,6 +9,22 @@
 المخرجات: تقرير فحص، ورمز الخروج 0 عند المطابقة و4 عند المخالفة.
 """
 from __future__ import annotations
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+
+def _tree(_env, _base, *_names):
+    """جذر الشجرة المجاورة: من متغيّر البيئة أو من مجلد شقيق."""
+    _v = _os.environ.get(_env)
+    if _v:
+        return _Path(_v)
+    for _n in _names:
+        _c = _base.parent / _n
+        if _c.is_dir():
+            return _c
+    return _base.parent / _names[0]
+SITE = _tree("SITE_DIR", _ROOT, "seawatch", "site")
 
 import argparse
 import hashlib
@@ -21,7 +37,7 @@ from pathlib import Path
 B = Path(__file__).resolve().parent.parent
 PROFILE = B / "templates" / "approved-pdf" / "print-profile.json"
 FROZEN_CSS = B / "templates" / "approved-pdf" / "print-css-frozen.css"
-BUILD_REPORT = Path("/home/ubuntu/seawatch/generator/build_report.py")
+BUILD_REPORT = Path(f"{SITE}/generator/build_report.py")
 MAX_GAP_MM = 60          # أقصى فراغ أسفل ورقة مقبول (غير الغلاف والصفحة الأخيرة)
 MIN_LEGEND_ITEMS = 8     # مفتاح الخريطة لا يقل عن ثمانية عناصر
 

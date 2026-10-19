@@ -1,10 +1,27 @@
 #!/usr/bin/env python3
 """نشر صفحة ACH نسخة 3 على الموقع الدائم + ربط النسخة 2 بالنسخة 3."""
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
+
+def _tree(_env, _base, *_names):
+    """جذر الشجرة المجاورة: من متغيّر البيئة أو من مجلد شقيق."""
+    _v = _os.environ.get(_env)
+    if _v:
+        return _Path(_v)
+    for _n in _names:
+        _c = _base.parent / _n
+        if _c.is_dir():
+            return _c
+    return _base.parent / _names[0]
+SITE = _tree("SITE_DIR", _ROOT, "seawatch", "site")
 import json, shutil
 from pathlib import Path
 
-BN = Path('/home/ubuntu/brain-marine-news')
-SW = Path('/home/ubuntu/seawatch')
+BN = Path(f'{BRAIN}')
+SW = Path(f'{SITE}')
 
 # 1) نسخ متن النسخة 3
 shutil.copy(BN/'appendices/ach-hormuz-targeting-v3-2026-10-16.md',

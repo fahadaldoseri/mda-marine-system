@@ -3,6 +3,11 @@
 """تطبيق التدقيق الشامل على تقرير GFS PRIDE / GFS GISELLE (ملف Word).
 يحافظ على القالب والترقيم، ويضمن الاتجاه من اليمين إلى اليسار.
 """
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
 import copy
 import sys
 from docx import Document
@@ -11,7 +16,7 @@ from docx.table import Table
 from docx.text.paragraph import Paragraph
 
 SRC = '/tmp/src.docx'
-OUT = '/home/ubuntu/brain-marine-news/reports/docx/تقرير-GFS-PRIDE-GFS-GISELLE-محدث-2026-10-17.docx'
+OUT = f'{BRAIN}/reports/docx/تقرير-GFS-PRIDE-GFS-GISELLE-محدث-2026-10-17.docx'
 
 log = []
 

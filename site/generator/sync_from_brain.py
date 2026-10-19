@@ -4,7 +4,7 @@
 تحديث الموقع الدائم من مخرجات Brain اليومية.
 
 الاستخدام:
-  python3 generator/sync_from_brain.py --date 2026-10-12 [--brain /home/ubuntu/brain-marine-news]
+  python3 generator/sync_from_brain.py --date 2026-10-12 [--brain $BRAIN_DIR]
 
 ما يفعله بالترتيب:
 1. ينسخ تقرير اليوم وملف واجهته من مساحة Brain إلى مصادر الموقع.
@@ -14,6 +14,22 @@
 
 لا ينشر ولا يرفع: النشر يبقى خطوة منفصلة عبر مشروع الاستضافة.
 """
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+
+def _tree(_env, _base, *_names):
+    """جذر الشجرة المجاورة: من متغيّر البيئة أو من مجلد شقيق."""
+    _v = _os.environ.get(_env)
+    if _v:
+        return _Path(_v)
+    for _n in _names:
+        _c = _base.parent / _n
+        if _c.is_dir():
+            return _c
+    return _base.parent / _names[0]
+BRAIN = _tree("BRAIN_DIR", _ROOT, "brain-marine-news", "brain")
 
 import argparse
 import json
@@ -143,7 +159,7 @@ def sync_special(brain: Path) -> list:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", required=True, help="تاريخ التقرير YYYY-MM-DD")
-    ap.add_argument("--brain", default="/home/ubuntu/brain-marine-news")
+    ap.add_argument("--brain", default=f"{BRAIN}")
     ap.add_argument("--skip-build", action="store_true")
     a = ap.parse_args()
 

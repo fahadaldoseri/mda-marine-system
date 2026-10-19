@@ -14,10 +14,11 @@ import re
 import shutil
 from pathlib import Path
 
-HOME = Path("/home/ubuntu")
-BRAIN = HOME / "brain-marine-news"
-SITE = HOME / "seawatch"
-OUT = HOME / "mda-marine-system"
+# ── مسارات محمولة: تُقرأ من متغيّرات البيئة، والافتراضي جذر الشجرة ──
+BRAIN = Path(os.environ.get("BRAIN_DIR") or Path(__file__).resolve().parents[1])
+SITE = Path(os.environ.get("SITE_DIR") or BRAIN.parent / "seawatch")
+HOME = BRAIN.parent
+OUT = Path(os.environ.get("BACKUP_REPO_DIR") or HOME / "mda-marine-system")
 
 # مجلدات لا تُنقل (نسبةً إلى جذر كل شجرة)
 BRAIN_SKIP_DIRS = {"__pycache__", ".git", "shots", "node_modules", ".pytest_cache"}

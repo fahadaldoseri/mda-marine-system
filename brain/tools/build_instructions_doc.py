@@ -10,6 +10,11 @@
   reports/docx/الأوامر-والتعليمات-الكاملة.pdf
 """
 from __future__ import annotations
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
 
 import re
 import subprocess
@@ -17,7 +22,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-ROOT = Path("/home/ubuntu/brain-marine-news")
+ROOT = Path(f"{BRAIN}")
 DOCS = ROOT / "docs"
 DOCX_DIR = ROOT / "reports" / "docx"
 TITLE = "الأوامر والتعليمات — نظام مركز الوعي بالمجال البحري (Brain)"

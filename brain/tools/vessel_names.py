@@ -6,12 +6,17 @@
 أدوات توليد قائمة فحص العقوبات وبوابة تغطية الفحص، فلا تبقى سفينة بلا فحص.
 """
 from __future__ import annotations
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
 
 import json
 import re
 from pathlib import Path
 
-B = Path('/home/ubuntu/brain-marine-news')
+B = Path(f'{BRAIN}')
 
 # كلمات وظيفية لا تُكوِّن اسم سفينة
 STOP = {

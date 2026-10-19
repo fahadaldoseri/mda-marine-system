@@ -11,6 +11,22 @@
 
 الاستخدام: python3 validators/check_code_policy.py [مجلد الموقع أو ملف]
 """
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+
+def _tree(_env, _base, *_names):
+    """جذر الشجرة المجاورة: من متغيّر البيئة أو من مجلد شقيق."""
+    _v = _os.environ.get(_env)
+    if _v:
+        return _Path(_v)
+    for _n in _names:
+        _c = _base.parent / _n
+        if _c.is_dir():
+            return _c
+    return _base.parent / _names[0]
+SITE = _tree("SITE_DIR", _ROOT, "seawatch", "site")
 import re
 import sys
 from pathlib import Path
@@ -53,7 +69,7 @@ def check_file(path: Path):
 
 
 def main():
-    target = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("/home/ubuntu/seawatch/dist")
+    target = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(f"{SITE}/dist")
     files = sorted(target.glob("reports/*.html")) if target.is_dir() else [target]
     fails = 0
     print("  فحص سياسة عرض الرموز (2+5):")

@@ -9,6 +9,11 @@
   · رمز الخروج: 0 = كل الأصول صالحة · 1 = متدهور (بعضها فشل أو هيكلي فارغ) · 2 = لا أصل صالح.
   · تُكتب حالة تفصيلية: archive/originals/<اليوم>/status.json
 """
+# ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
+import os as _os
+from pathlib import Path as _Path
+_ROOT = _Path(__file__).resolve().parents[1]
+BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
 import datetime as dt
 import hashlib
 import json
@@ -18,7 +23,7 @@ import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-B = Path('/home/ubuntu/brain-marine-news')
+B = Path(f'{BRAIN}')
 UA = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124 Safari/537.36'}
 MIN_TEXT_CHARS = 400
 

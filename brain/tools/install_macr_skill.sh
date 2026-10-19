@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 # يعيد تثبيت مهارة MACR المعتمدة (النسخة المرفقة 2026-10-15) بعد أي تزامن من المنصة.
 set -e
-KEEP=/home/ubuntu/brain-marine-news/skills/macr-system
-DEST=/home/ubuntu/skills/macr-system
+B="${BRAIN_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
+SKILLS_HOME="${SKILLS_HOME:-$(dirname "$B")}"
+KEEP="$B/skills/macr-system"
+DEST="$SKILLS_HOME/skills/macr-system"
 mkdir -p "$DEST"
 cp -f "$KEEP/SKILL.md" "$DEST/SKILL.md"
 cp -f "$KEEP"/fonts/*.ttf "$DEST/fonts/" 2>/dev/null || { mkdir -p "$DEST/fonts"; cp -f "$KEEP"/fonts/*.ttf "$DEST/fonts/"; }
