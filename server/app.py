@@ -274,7 +274,14 @@ class Handler(BaseHTTPRequestHandler):
             self._send(404, {"ok": False, "error": "not found"})
             return
         _hook = secrets_cfg().get("hook") or ""
-        if _hook and self.headers.get("X-Telegram-Bot-Api-Secret-Token", "") != _hook:
+        # بند 16 من التدقيق المستقل (19 أكتوبر 2026): كان الشرط «فشلًا مفتوحًا» —
+        # إذا غاب السر كان كل POST مقبولًا. الآن: لا سر ⇒ لا استقبال (503)،
+        # وسر غير مطابق ⇒ 401. المسار العام لا يستقبل تحديثًا واحدًا بلا توقيع.
+        if not _hook:
+            print("[mda-bot] webhook rejected: secret unset", flush=True)
+            self._send(503, {"ok": False, "error": "webhook secret unset — receiving disabled"})
+            return
+        if self.headers.get("X-Telegram-Bot-Api-Secret-Token", "") != _hook:
             self._send(401, {"ok": False, "error": "unauthorized"})
             return
         try:

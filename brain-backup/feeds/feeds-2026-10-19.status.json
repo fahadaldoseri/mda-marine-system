@@ -1,0 +1,53 @@
+{
+ "date": "2026-10-19",
+ "status": "failed",
+ "checked": 38,
+ "ok": 30,
+ "failed": 8,
+ "fail_ratio": 0.211,
+ "fail_ratio_limit": 0.2,
+ "items": 756,
+ "failed_feeds": [
+  {
+   "num": 14,
+   "name": "قناة العربية",
+   "error": "HTTP Error 403: Forbidden"
+  },
+  {
+   "num": 14,
+   "name": "قناة العربية",
+   "error": "HTTP Error 403: Forbidden"
+  },
+  {
+   "num": 14,
+   "name": "قناة العربية",
+   "error": "HTTP Error 403: Forbidden"
+  },
+  {
+   "num": 17,
+   "name": "حساب @bna_en على X",
+   "error": "HTTP Error 403: Forbidden"
+  },
+  {
+   "num": 20,
+   "name": "جريدة الأيام",
+   "error": "HTTP Error 403: Forbidden"
+  },
+  {
+   "num": 28,
+   "name": "وكالة الأنباء العُمانية",
+   "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unabl"
+  },
+  {
+   "num": 28,
+   "name": "وكالة الأنباء العُمانية",
+   "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unabl"
+  },
+  {
+   "num": 33,
+   "name": "MARAD/MSCI",
+   "error": "HTTP Error 403: Forbidden"
+  }
+ ],
+ "written_utc": "2026-10-19T17:51:14Z"
+}

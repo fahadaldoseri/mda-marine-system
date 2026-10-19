@@ -26,11 +26,25 @@ def load():
     return None, []
 
 def main():
-    targets = [l.strip() for l in Path(sys.argv[1]).read_text(encoding='utf-8').splitlines() if l.strip()]
+    seen, targets = set(), []
+    for l in Path(sys.argv[1]).read_text(encoding='utf-8').splitlines():
+        t = l.strip()
+        if t and t.upper() not in seen:
+            seen.add(t.upper())
+            targets.append(t)
+    if not targets:
+        print("  · لا مستهدف في القائمة — لا فحص مطلوب")
+        return 0
     src, names = load()
     if not names:
         print("  ✘ تعذر تحميل قائمة SDN — تُسجَّل النتيجة (تعذر) ولا يُدَّعى فحص")
-        return 1
+        (Path('/home/ubuntu/brain-marine-news/archive') / 'ofac-screen-latest.json').write_text(
+            json.dumps({'utc': dt.datetime.now(dt.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
+                        'list': None, 'names': 0, 'status': 'list_unavailable',
+                        'rule_note': 'تعذر تحميل قائمة SDN — لا يُدَّعى فحص',
+                        'results': [{'target': t, 'match': [], 'result': 'no_result'} for t in targets]},
+                       ensure_ascii=False, indent=1), encoding='utf-8')
+        return 2
     print(f"  قائمة SDN: {len(names)} اسمًا · المصدر: {src[:70]}")
     hits = []
     for t in targets:
@@ -40,7 +54,12 @@ def main():
         toks = tk(tu)
         exact = [n for n in names if n == tu]
         strong = [n for n in names if len(toks) >= 2 and all(x in tk(n) for x in toks)]
-        partial = [n for n in names if not strong and toks and any(x in tk(n) for x in toks)]
+        def near(n):
+            """التطابق الجزئي لا يُحتسب على كلمة قصيرة شائعة: يلزم رمز مميّز (6 محارف+) أو رمزان مشتركان."""
+            nt = set(tk(n))
+            sh = [x for x in toks if x in nt]
+            return len(sh) >= 2 or any(len(x) >= 6 for x in sh)
+        partial = [n for n in names if not strong and toks and near(n)]
         if exact or strong:
             res, m = 'match', (exact or strong)
             print(f"   ⚠ تطابق · {t} → {m[:2]}")
@@ -53,9 +72,19 @@ def main():
         hits.append({'target': t, 'match': m[:5], 'result': res})
     out = Path('/home/ubuntu/brain-marine-news/archive'); out.mkdir(exist_ok=True)
     (out / 'ofac-screen-latest.json').write_text(json.dumps(
-        {'list': src, 'names': len(names), 'rule_note': 'قاعدة 50%: تُعد الكيانات المملوكة 50% أو أكثر من كيان مُدرج مُدرجة حكمًا',
+        {'utc': dt.datetime.now(dt.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
+         'list': src, 'names': len(names),
+         'rule_note': 'قاعدة 50%: تُعد الكيانات المملوكة 50% أو أكثر من كيان مُدرج مُدرجة حكمًا',
          'results': hits}, ensure_ascii=False, indent=1), encoding='utf-8')
-    print("  ✔ حُفظ: archive/ofac-screen-latest.json")
+    matches = [h for h in hits if h['result'] == 'match']
+    reviews = [h for h in hits if h['result'] == 'review']
+    print(f"  ✔ حُفظ: archive/ofac-screen-latest.json · تطابق: {len(matches)} · جزئي: {len(reviews)} · لا تطابق: {len(hits)-len(matches)-len(reviews)}")
+    if matches:
+        print("  ✘ مانع — تطابق إدراج صريح يحتاج قرارًا قبل النشر: " + " · ".join(h['target'] for h in matches))
+        return 2
+    if reviews:
+        print("  ◐ تحذير — تطابق جزئي يحتاج تحققًا يدويًا")
+        return 1
     return 0
 
 if __name__ == '__main__':

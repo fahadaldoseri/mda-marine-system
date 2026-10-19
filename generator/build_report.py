@@ -1254,6 +1254,10 @@ def main():
     except BuildError as e:
         print(f"فشل البناء: {e}", file=sys.stderr)
         return 3
+    finally:
+        # بند 15 (19 أكتوبر 2026): تفريغ سياق الرموز بعد كل جولة بناء،
+        # فلا يتسرّب تاريخ إصدار إلى جولة تالية عند بناء عدة تقارير في العملية نفسها.
+        BLK.reset_code_context()
     print(f"OK {p} ({p.stat().st_size} bytes, {count} أقسام)")
     return 0
 

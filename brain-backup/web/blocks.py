@@ -10,26 +10,43 @@
 import html
 import re
 
+import contextvars
+
 from codes import label as _code_label, demote as _demote  # سياسة عرض الرموز (2+5)
 
-_CODE_CTX = {"date": None, "official": {}}
+# بند 15 من التدقيق المستقل (19 أكتوبر 2026): كان السياق قاموسًا عالميًا على مستوى الوحدة،
+# فيتسرّب بين جولات البناء أو الخيوط ويُنتج عرضًا لرمز بتاريخ جولة سابقة.
+# البديل: ContextVar معزول لكل جولة، مع تفريغ صريح بعد البناء.
+_EMPTY_CTX = {"date": None, "official": {}}
+_CODE_CTX = contextvars.ContextVar("mda_code_ctx", default=_EMPTY_CTX)
 
 
 def set_code_context(report_date=None, official=None):
     """يضبط سياق عرض الرموز: تاريخ الإصدار وخريطة الأرقام الرسمية."""
-    _CODE_CTX["date"] = report_date
-    _CODE_CTX["official"] = official or {}
+    _CODE_CTX.set({"date": report_date, "official": dict(official or {})})
+
+
+def reset_code_context():
+    """يُفرّغ سياق الرموز بعد انتهاء الجولة، فلا يُستعمل في جولة تالية."""
+    _CODE_CTX.set(dict(_EMPTY_CTX))
+
+
+def code_context():
+    """السياق الفعّال في هذه الجولة (للقراءة والتشخيص)."""
+    return _CODE_CTX.get()
 
 
 def code_text(value):
     """يبسّط أي رمز كامل داخل نص كتلة (بطاقة القرار، ما تغيّر، التحليل...)."""
-    return _demote(value or "", _CODE_CTX["date"], _CODE_CTX["official"])
+    ctx = _CODE_CTX.get()
+    return _demote(value or "", ctx["date"], ctx["official"])
 
 
 def code_label(code, ref="", note=""):
     """صيغة العرض: مختصرة، ومدموجة برقم البلاغ الرسمي عند وجوده."""
-    off = _CODE_CTX["official"].get(str(code or ""), "")
-    return _code_label(code, ref, note or off, _CODE_CTX["date"])
+    ctx = _CODE_CTX.get()
+    off = ctx["official"].get(str(code or ""), "")
+    return _code_label(code, ref, note or off, ctx["date"])
 
 CONF_CLASS = {"عالية": "c-high", "متوسطة": "c-med", "منخفضة": "c-low"}
 CONF_CANON = {"عالية": "عالية", "مرتفعة": "عالية", "متوسطة": "متوسطة", "متوسط": "متوسطة",

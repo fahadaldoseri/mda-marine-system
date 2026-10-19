@@ -31,6 +31,17 @@ from pathlib import Path
 DAILY_TITLE = "التقرير اليومي لأمن الملاحة والأوضاع الراهنة في المنطقة"
 DAILY_PLACEHOLDERS = ['التقرير الصباحي اليومي', 'التقرير اليومي', 'التقرير اليومي لأمن الملاحة', 'تقرير أمن الملاحة']
 
+SOURCES_MANIFEST = Path('/home/ubuntu/brain-marine-news/appendices/sources-manifest.json')
+
+
+def approved_source_count(fallback: int = 40) -> int:
+    """عدد المصادر المعتمد — مصدر واحد للحقيقة (بند ٨ من تدقيق 19 أكتوبر 2026)."""
+    try:
+        return int(json.loads(SOURCES_MANIFEST.read_text(encoding='utf-8'))['approved_source_count'])
+    except (OSError, json.JSONDecodeError, KeyError, ValueError):
+        return fallback
+
+
 def daily_headline(meta: dict) -> str:
     """عنوان الإصدار اليومي المعتمد، مع احترام أي عنوان مخصّص غير عام."""
     value = (meta.get("headline") or meta.get("subtitle") or "").strip()
@@ -269,7 +280,7 @@ NAV_PLACEHOLDER
   <div class="tiles">
     <div class="tile"><b>{len(reports)}</b><span>إصدار يومي منشور</span></div>
     <div class="tile"><b>{ledger_total or "—"}</b><span>سجل في الدفتر التراكمي</span></div>
-    <div class="tile"><b>37</b><span>مصدرًا مفحوصًا في كل تشغيل</span></div>
+    <div class="tile"><b>{approved_source_count()}</b><span>مصدرًا مفحوصًا في كل تشغيل</span></div>
     <div class="tile"><b>07:00</b><span>توقيت الإصدار اليومي (البحرين)</span></div>
   </div>
 
