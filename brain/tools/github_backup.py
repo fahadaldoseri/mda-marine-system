@@ -30,6 +30,8 @@ SITE_SKIP_FILES = {".env", ".env.local", ".env.production"}
 SANITIZE = {
     "brain/appendices/telegram-chat.json": [(r'"chat_id"\s*:\s*"\d+"', '"chat_id": "[محجوب]"'),
                                             (r'"bot_id"\s*:\s*"\d+"', '"bot_id": "[محجوب]"')],
+    "brain/appendices/telegram-targets.json": [(r'"chat_id"\s*:\s*"?-?\d+"?', '"chat_id": "[محجوب]"'),
+                                               (r'"user_id"\s*:\s*"?\d+"?', '"user_id": "[محجوب]"')],
     "brain/appendices/telegram-subscriptions.json": [(r'"chat_id"\s*:\s*"\d+"', '"chat_id": "[محجوب]"'),
                                                      (r'"user_id"\s*:\s*"\d+"', '"user_id": "[محجوب]"')],
     "brain/research/styles/sources/archive-reports.html": [(r'token="[^"]{20,}"', 'token="[محجوب]"')],
@@ -91,10 +93,10 @@ def copy_tree(src: Path, dst: Path, prefix: str, skip_dirs: set[str], skip_files
                 continue
             if p.suffix == ".pyc":
                 continue
-            if p.is_symlink():
+            target = dst / rel_dir / fn
+            if p.is_symlink():                 # يُنشأ الرابط في مساره الصحيح
                 _mirror_symlink(p, target, prefix)
                 continue
-            target = dst / rel_dir / fn
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(p, target)
 

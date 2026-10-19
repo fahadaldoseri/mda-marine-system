@@ -62,7 +62,9 @@ def repo_manifest():
             if rel.startswith(ALLOW_REPO_ONLY):
                 continue
             if p.is_symlink():
-                tgt = os.path.normpath((Path(rel).parent / os.readlink(p)).as_posix()).lstrip("./")
+                tgt = os.path.normpath((Path(rel).parent / os.readlink(p)).as_posix())
+                while tgt.startswith("./"):
+                    tgt = tgt[2:]
                 out[rel] = ("link", tgt)
             else:
                 out[rel] = ("file", sha(p))
