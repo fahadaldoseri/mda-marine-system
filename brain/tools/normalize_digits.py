@@ -26,6 +26,11 @@ TABLE.update({0x066B: ".", 0x066C: ",", 0x066A: "%"})     # \\u066B  \\u066C  \\
 ARABIC_ANY = [chr(0x0660 + i) for i in range(10)] + [chr(0x066B), chr(0x066C), chr(0x066A)]
 
 
+def to_latin(text: str) -> str:
+    """يحوّل الأرقام العربية الهندية والفواصل العربية إلى نظيرها اللاتيني (قرار 20 أكتوبر 2026)."""
+    return text.translate(TABLE)
+
+
 def targets(roots):
     for root in roots:
         rp = Path(root)

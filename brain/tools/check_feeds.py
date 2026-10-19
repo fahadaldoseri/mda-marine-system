@@ -17,6 +17,9 @@ import argparse
 import datetime as dt
 import html
 import json
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from normalize_digits import to_latin  # الأرقام عند المصدر: المولَّد يُكتب لاتينيًا
 import re
 import ssl
 import sys
@@ -270,7 +273,8 @@ def main():
         status = 'ok'
 
     OUT.mkdir(exist_ok=True)
-    (OUT / f'feeds-{stamp}.json').write_text(json.dumps(ok, ensure_ascii=False, indent=1), encoding='utf-8')
+    (OUT / f'feeds-{stamp}.json').write_text(
+        to_latin(json.dumps(ok, ensure_ascii=False, indent=1)), encoding='utf-8')
     lines = [f"# مستجدات التغذيات — {stamp} UTC", "",
              f"تغذيات مفحوصة: {len(res)} · ناجحة: {len(ok)} · فاشلة: {len(failed)} · عناصر: {total}", ""]
     for r in ok:
@@ -278,7 +282,7 @@ def main():
         for it in r['items'][:5]:
             lines.append(f"- {it['date'][:25]} · {it['title'][:110]}")
         lines.append("")
-    (OUT / f'feeds-{stamp}.md').write_text("\n".join(lines), encoding='utf-8')
+    (OUT / f'feeds-{stamp}.md').write_text(to_latin("\n".join(lines)), encoding='utf-8')
     checked_feeds = [{
         'num': r['num'], 'name': r['name'], 'primary_url': r['url'],
         'ok': r['ok'], 'via': r.get('via'), 'fetched_url': r.get('fetched_url'),
@@ -286,7 +290,7 @@ def main():
         'tls_verification': r.get('tls_verification', 'verified'),
         **({'block_reason': r['block_reason']} if not r['ok'] else {}),
     } for r in res]
-    (OUT / f'feeds-{stamp}.status.json').write_text(json.dumps({
+    (OUT / f'feeds-{stamp}.status.json').write_text(to_latin(json.dumps({
         'date': stamp, 'status': status, 'checked': len(res), 'ok': len(ok), 'failed': len(failed),
         'fail_ratio': round(ratio, 3), 'fail_ratio_limit': FAIL_RATIO_LIMIT, 'items': total,
         'checked_feeds': checked_feeds,
@@ -295,7 +299,7 @@ def main():
             'error': r['error'], 'block_reason': r['block_reason'], 'attempts': r['attempts'],
         } for r in failed],
         'written_utc': dt.datetime.now(dt.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
-    }, ensure_ascii=False, indent=1), encoding='utf-8')
+    }, ensure_ascii=False, indent=1)), encoding='utf-8')
     print(f"  ✔ حُفظ: feeds-{stamp}.json / .md / .status.json — الحالة: {status}")
     return {'ok': 0, 'degraded': 1, 'failed': 2}[status]
 

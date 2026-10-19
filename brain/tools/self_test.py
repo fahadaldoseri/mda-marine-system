@@ -280,15 +280,18 @@ def main() -> int:
             probe(g, "جهات التسليم معرّفة", False, f"{type(exc).__name__}")
     if net:
         try:
+            # مسار curl: طلبات python تُرد 403 من حماية الموقع، وcurl يمرّ (قاعدة 20 أكتوبر 2026)
             status, body = 0, ""
             for _attempt in range(3):
-                try:
-                    with urllib.request.urlopen(f"{SITE_URL}/api/health", timeout=40) as r:
-                        status, body = r.status, r.read(200).decode("utf-8", "ignore")
+                probe_run = subprocess.run(
+                    ["curl", "-s", "-w", "\n%{http_code}", "--max-time", "40",
+                     f"{SITE_URL}/api/health"], capture_output=True, text=True)
+                out = (probe_run.stdout or "").rsplit("\n", 1)
+                if len(out) == 2 and out[1].strip().isdigit():
+                    status, body = int(out[1].strip()), out[0][:200]
+                if status == 200:
                     break
-                except Exception:  # noqa: BLE001
-                    status = 0
-                    time.sleep(5)
+                time.sleep(5)
             probe(g, "خدمة الويب هوك تستجيب", status == 200,
                   f"HTTP {status} · {body[:60]}" if status else "لا استجابة بعد ثلاث محاولات",
                   note="حاوية الخدمة تبرد بعد خمود؛ تُعاد المحاولة ثلاث مرات قبل التحذير")
