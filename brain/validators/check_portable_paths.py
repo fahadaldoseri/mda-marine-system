@@ -17,8 +17,20 @@ import re
 import sys
 from pathlib import Path
 
-BRAIN = Path(os.environ.get("BRAIN_DIR") or Path(__file__).resolve().parents[1])
-SITE = Path(os.environ.get("SITE_DIR") or BRAIN.parent / "seawatch")
+def _root(env: str, base: Path, *names: str) -> Path:
+    """جذر الشجرة: من متغيّر البيئة، أو من مجلد شقيق بأي من التسميتين المعتمدتين."""
+    v = os.environ.get(env)
+    if v:
+        return Path(v)
+    for n in names:
+        if (base / n).is_dir():
+            return base / n
+    return base / names[0]
+
+
+_HOME = Path(__file__).resolve().parents[1].parent
+BRAIN = _root("BRAIN_DIR", _HOME, "brain-marine-news", "brain")
+SITE = _root("SITE_DIR", _HOME, "seawatch", "site")
 
 LITERALS = (BRAIN.as_posix(), SITE.as_posix(), "/home/ubuntu/brain-marine-news", "/home/ubuntu/seawatch")
 SKIP_PARTS = {"brain-backup", "__pycache__", "_oneoff", "legacy", "dist", "shots", "node_modules", ".git", "archive"}
