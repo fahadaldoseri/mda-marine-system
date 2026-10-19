@@ -36,6 +36,11 @@ SANITIZE = {
                                                      (r'"user_id"\s*:\s*"\d+"', '"user_id": "[محجوب]"')],
     "brain/research/styles/sources/archive-reports.html": [(r'token="[^"]{20,}"', 'token="[محجوب]"')],
 }
+# أنماط لا تُتعقَّب: مخرجات يُعاد توليدها آليًا فتتعارض عند كل سحب
+SKIP_GLOBS = {
+    "brain": ("reports/docx/التقرير-اليومي-*.docx", "reports/docx/التقرير-اليومي-*.pdf",
+              "reports/pdf/*"),
+}
 EXCLUDED_LOG: list[tuple[str, str]] = []
 SYMLINKS_LOG: list[tuple[str, str]] = []
 
@@ -76,6 +81,7 @@ def sha256(p: Path) -> str:
 
 
 def copy_tree(src: Path, dst: Path, prefix: str, skip_dirs: set[str], skip_files: set[str]):
+    import fnmatch
     for dp, dns, fns in os.walk(src):
         dns[:] = [d for d in dns if d not in skip_dirs]
         rel_dir = Path(dp).relative_to(src)
@@ -92,6 +98,9 @@ def copy_tree(src: Path, dst: Path, prefix: str, skip_dirs: set[str], skip_files
                 EXCLUDED_LOG.append((f"{prefix}/{rel}", "سرّي — لا يُنقل"))
                 continue
             if p.suffix == ".pyc":
+                continue
+            if any(fnmatch.fnmatch(rel, _g) for _g in SKIP_GLOBS.get(prefix, ())):
+                EXCLUDED_LOG.append((f"{prefix}/{rel}", "مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب"))
                 continue
             target = dst / rel_dir / fn
             if p.is_symlink():                 # يُنشأ الرابط في مساره الصحيح

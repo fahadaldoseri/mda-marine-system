@@ -25,6 +25,8 @@ SANITIZED = {"brain/appendices/telegram-chat.json", "brain/appendices/telegram-s
              "brain/research/styles/sources/archive-reports.html"}
 # سجلّات تنمو باستمرار بعد النسخ: لا تُحسب انحرافًا
 VOLATILE = ("brain/logs/",)
+# مخرجات مولّدة آليًا: تُستثنى من النسخ فلا تُحسب انحرافًا (عطل ك-18)
+SKIP_GLOBS = ("brain/reports/docx/التقرير-اليومي-", "brain/reports/pdf/")
 ALLOW_REPO_ONLY = ("docs/فهرس-الملفات.tsv",)
 
 
@@ -43,6 +45,8 @@ def manifest(root: Path, skip_dirs, skip_files, prefix: str):
         rd = Path(dp).relative_to(root)
         for fn in fns:
             p = Path(dp) / fn
+            if any((prefix + '/' + (rd / fn).as_posix()).startswith(g) for g in SKIP_GLOBS):
+                continue
             rel = (rd / fn).as_posix()
             if rel.startswith("./"):
                 rel = rel[2:]
