@@ -15,7 +15,8 @@ PY="${PYTHON_BIN:-python3}"
 DATE="${1:-}"
 
 if [ -z "$DATE" ]; then
-  DATE=$(ls -1 "$B/web/meta"/*.json 2>/dev/null | sed 's/.*\///;s/\.json$//' | sort | tail -1)
+  # ملفات الإصدارات اليومية فقط: YYYY-MM-DD.json (تستثني cumulative وmonthly وغيرها)
+  DATE=$(ls -1 "$B/web/meta" 2>/dev/null | grep -E '^[0-9]{4}-[0-9]{2}-[0-9]{2}\.json$' | sed 's/\.json$//' | sort | tail -1)
 fi
 [ -z "$DATE" ] && { echo "✘ لا إصدارات في web/meta — مرّر تاريخًا صريحًا"; exit 2; }
 
@@ -30,7 +31,7 @@ warn() { printf '  • %s\n' "$*"; WARN=$((WARN+1)); }
 bad()  { printf '  ✘ %s\n' "$*"; FAILN=$((FAILN+1)); }
 log()  { printf '\n\033[1m%s\033[0m\n' "$*"; }
 
-# run <اسم> <رمز مخالفة مانع|تنبيه> <أمر...>
+# run <اسم> <رمز التنبيه المسموح (عادًة 1)> <أمر...> — أي رمز آخر يُعدّ فشلًا مانعًا
 run() {
   local name="$1" tolerate="$2"; shift 2
   local out rc
@@ -83,25 +84,25 @@ PY
 log "2) البوابات العامة"
 run "عدد المصادر"                 1 "$PY" "$B/validators/check_sources_count.py"
 run "الأرقام الإنجليزية"          1 "$PY" "$B/validators/check_numerals.py"
-run "قابلية النقل (لا مسار مطلق)" 2 "$PY" "$B/validators/check_portable_paths.py"
-run "سياسة الرموز"               2 "$PY" "$B/validators/check_code_policy.py" "$SITE"
+run "قابلية النقل (لا مسار مطلق)" 1 "$PY" "$B/validators/check_portable_paths.py"
+run "سياسة الرموز"               1 "$PY" "$B/validators/check_code_policy.py" "$SITE"
 
 log "3) بوابات الإصدار $DATE"
-run "بوابة الأسلوب"      2 "$PY" "$B/validators/check_style.py" "$MD"
-run "بوابة اللغة"        2 "$PY" "$B/validators/check_language.py" "$MD"
-run "مدقق التقرير"       2 "$PY" "$B/validators/validate_report.py" "$META" --md "$MD"
-run "التحليل الاستخباري" 2 "$PY" "$B/validators/check_intel.py" "$MD" "$META"
-run "قاعدة النقاط"       2 "$PY" "$B/validators/check_points_rule.py" --md "$MD" --meta "$META"
-run "فضاء الرموز"        2 "$PY" "$B/validators/check_code_spaces.py" --date "$DATE" --report "$MD" --meta "$META"
-run "تغطية فحص العقوبات" 2 "$PY" "$B/validators/check_ofac_coverage.py" --date "$DATE" --report "$MD"
+run "بوابة الأسلوب"      1 "$PY" "$B/validators/check_style.py" "$MD"
+run "بوابة اللغة"        1 "$PY" "$B/validators/check_language.py" "$MD"
+run "مدقق التقرير"       1 "$PY" "$B/validators/validate_report.py" "$META" --md "$MD"
+run "التحليل الاستخباري" 1 "$PY" "$B/validators/check_intel.py" "$MD" "$META"
+run "قاعدة النقاط"       1 "$PY" "$B/validators/check_points_rule.py" --md "$MD" --meta "$META"
+run "فضاء الرموز"        1 "$PY" "$B/validators/check_code_spaces.py" --date "$DATE" --report "$MD" --meta "$META"
+run "تغطية فحص العقوبات" 1 "$PY" "$B/validators/check_ofac_coverage.py" --date "$DATE" --report "$MD"
 
 log "4) بناء الموقع من البيانات"
-run "بناء الموقع" 2 "$PY" "$SITE/generator/build_site.py"
+run "بناء الموقع" 1 "$PY" "$SITE/generator/build_site.py"
 PAGES=$(ls -1 "$SITE"/dist/reports/*.html 2>/dev/null | wc -l)
 [ "$PAGES" -gt 0 ] && ok "صفحات الإصدارات المبنية: $PAGES" || bad "لم تُبنَ أي صفحة إصدار"
 
 log "5) توليد PDF المعتمد (يشمل بوابة الشكل)"
-run "تصدير PDF" 2 "$PY" "$B/tools/export_report_assets.py" --date "$DATE" --only pdf
+run "تصدير PDF" 1 "$PY" "$B/tools/export_report_assets.py" --date "$DATE" --only pdf
 if [ -f "$PDF" ]; then
   ok "ملف PDF: $(du -h "$PDF" | cut -f1) · $(pdfinfo "$PDF" 2>/dev/null | awk '/^Pages/{print $2" صفحة"}')"
 else
@@ -109,7 +110,7 @@ else
 fi
 
 log "6) نسخة Word طبق الأصل"
-run "توليد Word" 2 "$PY" "$B/tools/build_report_docx_exact.py" --date "$DATE"
+run "توليد Word" 1 "$PY" "$B/tools/build_report_docx_exact.py" --date "$DATE"
 DOCX=$(ls -1t "$B/reports/docx/"*"$DATE"*.docx 2>/dev/null | head -1)
 [ -n "$DOCX" ] && ok "ملف Word: $(basename "$DOCX") · $(du -h "$DOCX" | cut -f1)" || warn "لم يُعثر على ملف Word لهذا التاريخ"
 
