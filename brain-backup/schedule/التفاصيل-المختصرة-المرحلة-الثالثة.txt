@@ -1,6 +1,0 @@
-نفّذ التقرير الإخباري البحري الصباحي يوميًا.
-المرجع الملزم الوحيد: اقرأ /home/ubuntu/brain-marine-news/INDEX.md أولًا، ثم نفّذ سلسلة sections/90-automation.md (القاعدة أ1) بترتيبها، والتزم بوابة التحقق sections/60-validation.md (ف1–ف4) وبوابة التسليم sections/70-delivery.md (س1–س2). استدعِ مهارة Marine News Brain للتنفيذ، وراجع النص قبل التسليم بمهارة military-arabic-editing.
-بيانات التشغيل: دفتر الأحداث والتقرير التراكمي في /home/ubuntu/brain-marine-news/cumulative-2026/، وسجل التعلم في /home/ubuntu/brain-marine-news/memory/learning-log.jsonl، واحفظ التقرير في reports/<التاريخ>-sectioned.md وأنشئ ملف واجهة الإصدار 2.1 بجانبه.
-النشر: نفّذ python3 /home/ubuntu/seawatch/generator/sync_from_brain.py --date <التاريخ>، ثم ادفع التغييرات إلى الفرع الرئيسي في مشروع الموقع /home/ubuntu/seawatch، ثم انشر عبر webdev.config POST publish للمشروع wdp_5c2c28191f64a1c0d4b4e154، واربط المشروع أولًا عبر webdev.attach_project إن لم يكن مرتبطًا في الجلسة.
-التسليم: التقرير النصي داخل المحادثة، ورابط الموقع الدائم من نطاق seawatch-xp4qirmr.manus.space، وملخص من أربعة أسطر: ما تغيّر · مستوى الخطر · المطلوب فورًا · ما يُراقب خلال 24 ساعة. جهّز PDF عند الطلب فقط. لا تنشر إصدارًا مقيّدًا أو حساسًا على الموقع العام.
-بعد التشغيل: أضف وقائع اليوم إلى الدفتر التراكمي، وأعد توليد اللوحة الشهرية، وسجّل أي تصحيح أو خطأ متكرر عبر /home/ubuntu/brain-marine-news/memory/record_learning.py.
