@@ -17,8 +17,9 @@ import argparse
 import datetime as dt
 import html
 import json
-import sys
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+import os as _os
+import sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
 from normalize_digits import to_latin  # الأرقام عند المصدر: المولَّد يُكتب لاتينيًا
 import re
 import ssl
