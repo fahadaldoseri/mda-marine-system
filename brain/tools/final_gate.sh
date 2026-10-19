@@ -55,7 +55,8 @@ step "تغطية فحص العقوبات" 2 python3 "$B/validators/check_ofac_co
 step "عدد المصادر (مصدر واحد)" 2 python3 "$B/validators/check_sources_count.py"
 step "قابلية النقل (مسارات)" 2 python3 "$B/validators/check_portable_paths.py"
 step "الأرقام (0-9 لاتينية)" 2 python3 "$B/validators/check_numerals.py"
-step "مطابقة النسخة الاحتياطية (تنبيهي)" 1 python3 "$B/validators/check_backup_parity.py" --mode advisory
+# تنبيهي فعليًا: الانحراف (رمز 1) تحذير قبل الدفع؛ ولا يوقف إلا فقدان المستودع (رمز 3)
+step "مطابقة النسخة الاحتياطية (تنبيهي)" 3 python3 "$B/validators/check_backup_parity.py" --mode advisory
 step "سياسة الرموز في المخرجات" 2 python3 "$B/validators/check_code_policy.py" "$SITE/dist"
 step "فصل فضاءات الرموز MN-/EST-" 2 python3 "$B/validators/check_code_spaces.py" --date "$D"
 step "قاعدة النقاط في المصدر" 2 python3 "$B/validators/check_points_rule.py" --md "$B/reports/$D-sectioned.md" --meta "$B/web/meta/$D.json"

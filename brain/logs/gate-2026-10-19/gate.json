@@ -1,7 +1,7 @@
 {
  "date": "2026-10-19",
- "status": "block",
- "exit_code": 2,
+ "status": "warn",
+ "exit_code": 1,
  "steps": [
   {
    "step": "بناء الصفحة (مزامنة + بناء)",
@@ -71,7 +71,7 @@
   },
   {
    "step": "مطابقة النسخة الاحتياطية (تنبيهي)",
-   "status": "block",
+   "status": "warn",
    "exit_code": "1)",
    "log": "12-مطابقة_النسخة_الاحتياطية_(تنبيهي).log"
   },
@@ -101,5 +101,5 @@
   }
  ],
  "log_dir": "/home/ubuntu/brain-marine-news/logs/gate-2026-10-19",
- "finished_utc": "2026-10-19T22:12:54Z"
+ "finished_utc": "2026-10-19T22:14:58Z"
 }

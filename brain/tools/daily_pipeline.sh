@@ -199,4 +199,7 @@ python3 validators/check_numerals.py || { echo "✘ بوابة الأرقام: �
 
 # نسخة احتياطية على GitHub (غير مُعطِّلة)
 bash "$B/tools/github_backup.sh" || echo "! النسخة الاحتياطية لم تكتمل — راجع logs/github-backup-*.log"
-python3 "$B/validators/check_backup_parity.py" --mode strict || echo "✘ النسخة الاحتياطية غير مطابقة للشجرة المحلية — راجع الأسباب أعلاه"
+if ! python3 "$B/validators/check_backup_parity.py" --mode strict; then
+  echo "✘ النسخة الاحتياطية غير مطابقة للشجرة المحلية — التسليم موقوف حتى تُصلح الأسباب أعلاه"
+  exit 2
+fi
