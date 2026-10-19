@@ -1254,10 +1254,7 @@ def main():
     except BuildError as e:
         print(f"فشل البناء: {e}", file=sys.stderr)
         return 3
-    print(f"OK {p} ({p.stat().st_size} bytes, {count
-  .dc-grid{display:block !important;overflow:visible !important}
-  .dc-grid > *{display:inline-block !important;width:48.5% !important;vertical-align:top !important;margin:0 0 2mm 1% !important;box-sizing:border-box !important}
-} أقسام)")
+    print(f"OK {p} ({p.stat().st_size} bytes, {count} أقسام)")
     return 0
 
 
