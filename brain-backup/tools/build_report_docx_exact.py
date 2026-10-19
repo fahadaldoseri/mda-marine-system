@@ -163,6 +163,7 @@ def main() -> int:
                       (B / "reports" / f"{date}-sectioned.md").read_text(encoding="utf-8"), re.M)]
             _nrm = lambda t: re.sub(r"[^\u0621-\u064A0-9]", "", t)
             _flat = _nrm(_t)
+            _heads = [h for h in _heads if not any(x in h for x in HIDDEN_HEADINGS)]
             _miss = [h for h in _heads if _nrm(h)[:12] not in _flat]
             print(f"[docx·تحقق] الأقسام: {len(_heads)-len(_miss)}/{len(_heads)}"
                   + (" ✓" if not _miss else f" — ناقص: {_miss}"))
