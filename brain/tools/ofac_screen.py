@@ -30,6 +30,21 @@ def load():
             print(f"  تعذر {u[:60]} → {str(e)[:60]}")
     return None, []
 
+def partial_strength(vessel: str, names: list[str]) -> tuple[str, str]:
+    """تصنيف المطابقة الجزئية: كلمة شائعة واحدة = إعلامي؛ اسم متعدد الكلمات = تحذير يستوجب تحققًا.
+
+    تصنيف المطابقة الجزئية — قاعدة 20 أكتوبر 2026: ظهور كلمة واحدة شائعة (مثل DOLPHIN) لا يعني
+    تطابقًا محتملًا؛ أما احتواء اسم مُدرج من كلمتين أو أكثر داخل اسم السفينة فيبقى تحذيرًا حتى تحقق يدوي.
+    """
+    norm = lambda x: re.sub(r"[^A-Z]", "", x.upper())
+    vessel_c = norm(vessel)
+    strong = [n for n in names
+              if len(re.sub(r"[^A-Za-z ]", " ", n).split()) >= 2 and norm(n) in vessel_c]
+    if strong:
+        return "warning", " · ".join(strong)
+    return "info", " · ".join(names)
+
+
 def main():
     seen, targets = set(), []
     for l in Path(sys.argv[1]).read_text(encoding='utf-8').splitlines():
@@ -69,8 +84,13 @@ def main():
             res, m = 'match', (exact or strong)
             print(f"   ⚠ تطابق · {t} → {m[:2]}")
         elif partial:
-            res, m = 'review', partial
-            print(f"   ◐ تطابق جزئي باسم شائع — يحتاج تحقق يدوي · {t} → {m[:2]}")
+            strength, detail = partial_strength(t, partial)
+            if strength == 'info':
+                res, m = 'no_match', partial
+                print(f"   · مطابقة كلمة شائعة — إعلامي بلا تحذير · {t} → {detail[:2]}")
+            else:
+                res, m = 'review', partial
+                print(f"   ◐ تطابق جزئي باسم مؤثر — يحتاج تحقق يدوي · {t} → {detail[:2]}")
         else:
             res, m = 'no_match', []
             print(f"   ✔ لا تطابق · {t}")

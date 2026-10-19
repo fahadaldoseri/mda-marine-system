@@ -24,7 +24,16 @@ SANITIZED = {"brain/appendices/telegram-chat.json", "brain/appendices/telegram-s
              "brain/appendices/telegram-targets.json",
              "brain/research/styles/sources/archive-reports.html"}
 # سجلّات تنمو باستمرار بعد النسخ: لا تُحسب انحرافًا
-VOLATILE = ("brain/logs/",)
+# ملفات تشغيلية تُولَّد في كل تشغيل: تُقارَن بالوجود لا بالمحتوى (قاعدة 20 أكتوبر 2026)
+VOLATILE = (
+    "brain/logs/",
+    "brain/archive/ofac-screen-latest.json",
+    "brain/audit/self-test-",
+    "brain/audit/llm-review-",
+    "brain/audit/llm-triage-",
+    "brain/feeds/feeds-",
+    "brain/state/",
+)
 # مخرجات مولّدة آليًا: تُستثنى من النسخ فلا تُحسب انحرافًا (عطل ك-18)
 SKIP_GLOBS = ("brain/reports/docx/التقرير-اليومي-", "brain/reports/pdf/")
 ALLOW_REPO_ONLY = ("docs/فهرس-الملفات.tsv",)

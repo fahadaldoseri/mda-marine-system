@@ -280,9 +280,18 @@ def main() -> int:
             probe(g, "جهات التسليم معرّفة", False, f"{type(exc).__name__}")
     if net:
         try:
-            with urllib.request.urlopen(f"{SITE_URL}/api/health", timeout=40) as r:
-                body = r.read(200).decode("utf-8", "ignore")
-            probe(g, "خدمة الويب هوك تستجيب", r.status == 200, f"HTTP {r.status} · {body[:60]}")
+            status, body = 0, ""
+            for _attempt in range(3):
+                try:
+                    with urllib.request.urlopen(f"{SITE_URL}/api/health", timeout=40) as r:
+                        status, body = r.status, r.read(200).decode("utf-8", "ignore")
+                    break
+                except Exception:  # noqa: BLE001
+                    status = 0
+                    time.sleep(5)
+            probe(g, "خدمة الويب هوك تستجيب", status == 200,
+                  f"HTTP {status} · {body[:60]}" if status else "لا استجابة بعد ثلاث محاولات",
+                  note="حاوية الخدمة تبرد بعد خمود؛ تُعاد المحاولة ثلاث مرات قبل التحذير")
         except Exception as exc:  # noqa: BLE001
             probe(g, "خدمة الويب هوك تستجيب", False, f"{type(exc).__name__}", tolerate=True,
                   note="تعذّر الوصول لخدمة الويب هوك — راجع نقطة النشر وحاوية الخدمة")

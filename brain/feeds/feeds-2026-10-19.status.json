@@ -6,7 +6,7 @@
  "failed": 5,
  "fail_ratio": 0.132,
  "fail_ratio_limit": 0.2,
- "items": 1059,
+ "items": 1039,
  "checked_feeds": [
   {
    "num": 6,
@@ -71,7 +71,7 @@
    "via": "primary",
    "fetched_url": "https://www.ajnet.me/rss",
    "items_count": 25,
-   "content_chars": 9947,
+   "content_chars": 9928,
    "tls_verification": "verified"
   },
   {
@@ -101,17 +101,6 @@
    "name": "قناة العربية",
    "primary_url": "https://www.alarabiya.net/feed/rss2/ar.xml",
    "ok": true,
-   "via": "fallback:jina.ai/alarabiya-home",
-   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/",
-   "items_count": 50,
-   "content_chars": 65319,
-   "tls_verification": "verified"
-  },
-  {
-   "num": 14,
-   "name": "قناة العربية",
-   "primary_url": "https://www.alarabiya.net/feed/rss2/ar/arab-and-world.xml",
-   "ok": true,
    "via": "fallback:jina.ai/alarabiya-rss",
    "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
    "items_count": 30,
@@ -121,12 +110,23 @@
   {
    "num": 14,
    "name": "قناة العربية",
-   "primary_url": "https://www.alarabiya.net/feed/rss2/ar/aswaq.xml",
+   "primary_url": "https://www.alarabiya.net/feed/rss2/ar/arab-and-world.xml",
    "ok": true,
    "via": "fallback:jina.ai/alarabiya-home",
    "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/",
    "items_count": 50,
    "content_chars": 65505,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 14,
+   "name": "قناة العربية",
+   "primary_url": "https://www.alarabiya.net/feed/rss2/ar/aswaq.xml",
+   "ok": true,
+   "via": "fallback:jina.ai/alarabiya-rss",
+   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
+   "items_count": 30,
+   "content_chars": 121892,
    "tls_verification": "verified"
   },
   {
@@ -193,7 +193,7 @@
    "via": "primary",
    "fetched_url": "https://www.albiladpress.com/rss",
    "items_count": 100,
-   "content_chars": 16870,
+   "content_chars": 16885,
    "tls_verification": "verified"
   },
   {
@@ -428,7 +428,7 @@
    "via": "primary",
    "fetched_url": "https://www.jpost.com/rss/rssfeedsmiddleeastnews.aspx",
    "items_count": 30,
-   "content_chars": 35998,
+   "content_chars": 35999,
    "tls_verification": "verified"
   }
  ],
@@ -528,5 +528,5 @@
    ]
   }
  ],
- "written_utc": "2026-10-19T22:34:03Z"
+ "written_utc": "2026-10-19T22:41:15Z"
 }
