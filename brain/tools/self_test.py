@@ -80,7 +80,8 @@ def main() -> int:
 
     date = args.date or subprocess.run(
         ["bash", "-c", "ls -1 reports/*-sectioned.md | tail -1"],
-        cwd=str(BRAIN), capture_output=True, text=True).stdout.strip().replace("-sectioned.md", "")
+        cwd=str(BRAIN), capture_output=True, text=True).stdout.strip()
+    date = Path(date).name.replace("-sectioned.md", "") if date else ""
     if not date:
         print("تعذّر تحديد تاريخ الإصدار — مرّر --date")
         return 2
@@ -299,9 +300,10 @@ def main() -> int:
     run(g, "المطابقة الصارمة بعد الدفع", ["python3", "validators/check_backup_parity.py", "--mode", "strict"],
         tolerate=1, note="تحذير = انحراف حقيقي بين الشجرة والمستودع يجب إصلاحه قبل التسليم")
     repo = BRAIN / "backup-repo"
-    for rel in ("bootstrap.sh", "requirements.txt", ".env.example", "SETUP.md",
-                ".devcontainer/devcontainer.json", "appendices/sources-manifest.json",
-                "sections/90-automation.md", "validators/check_style.py"):
+    for rel in ("brain/bootstrap.sh", "brain/requirements.txt", "brain/.env.example", "brain/SETUP.md",
+                "brain/.devcontainer/devcontainer.json", "brain/appendices/sources-manifest.json",
+                "brain/sections/90-automation.md", "brain/validators/check_style.py",
+                "site/generator/build_site.py", "brain/tools/self_test.py"):
         probe(g, f"المستودع يحوي {rel}", (repo / rel).exists())
 
     # ═══ 10) الأمن والأرقام ═══
@@ -313,9 +315,19 @@ def main() -> int:
         (re.compile(r"(?i)(password|passwd|api[_\-]?key)\s*[=:]\s*[\"'][^\"']{10,}[\"']"), "كلمة سر/مفتاح"),
     ]
     hits: list[str] = []
+    archived: list[str] = []
     for tree in (BRAIN, SITE):
         for p in tree.rglob("*"):
-            if not p.is_file() or any(x in p.parts for x in (".git", "node_modules", "__pycache__", "backup-repo", "dist")):
+            if not p.is_file():
+                continue
+            if "archive" in p.parts and "originals" in p.parts:
+                try:
+                    if secret_pats[2][0].search(p.read_text(encoding="utf-8", errors="ignore")):
+                        archived.append(p.name)
+                except Exception:  # noqa: BLE001
+                    pass
+                continue
+            if any(x in p.parts for x in (".git", "node_modules", "__pycache__", "backup-repo", "dist")):
                 continue
             if p.suffix.lower() in {".png", ".jpg", ".jpeg", ".pdf", ".docx", ".zip", ".gz", ".woff", ".woff2", ".ttf"}:
                 continue
@@ -327,6 +339,9 @@ def main() -> int:
                 if pat.search(txt):
                     hits.append(f"{p.relative_to(tree.parent)} ({label})")
                     break
+    probe(g, "مفاتيح صفحات عامة داخل الأصول المؤرشفة", True,
+          f"{len(archived)} ملفًا — تُحفظ بايتًا ببايت كما نُشرت" if archived else "لا نتائج",
+          note="مفاتيح قياس أداء لمصادر عامة (مثل Akamai mPulse) تُحفظ كما هي احترامًا لمبدأ الأصل الحرفي، وليست بيانات اعتماد للمركز")
     probe(g, "لا أسرار في ملفات المشروعين", not hits,
           "لا نتائج" if not hits else f"{len(hits)} ملفًا: {', '.join(hits[:3])}",
           note="أي نتيجة تعني تسرّبًا محتملًا يجب تجديده فورًا")

@@ -2,11 +2,11 @@
  "date": "2026-10-19",
  "status": "degraded",
  "checked": 38,
- "ok": 33,
- "failed": 5,
- "fail_ratio": 0.132,
+ "ok": 34,
+ "failed": 4,
+ "fail_ratio": 0.105,
  "fail_ratio_limit": 0.2,
- "items": 1034,
+ "items": 1043,
  "checked_feeds": [
   {
    "num": 6,
@@ -15,8 +15,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://straits.live/feed.xml",
-   "items_count": 54,
-   "content_chars": 26079,
+   "items_count": 53,
+   "content_chars": 24977,
    "tls_verification": "verified"
   },
   {
@@ -27,7 +27,7 @@
    "via": "primary",
    "fetched_url": "https://straits.live/briefs/feed.xml",
    "items_count": 60,
-   "content_chars": 106711,
+   "content_chars": 106883,
    "tls_verification": "verified"
   },
   {
@@ -38,7 +38,7 @@
    "via": "primary",
    "fetched_url": "https://gcaptain.com/feed/",
    "items_count": 12,
-   "content_chars": 2809,
+   "content_chars": 2796,
    "tls_verification": "verified"
   },
   {
@@ -48,8 +48,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://services.tradewindsnews.com/api/feed/rss",
-   "items_count": 171,
-   "content_chars": 103374,
+   "items_count": 172,
+   "content_chars": 104141,
    "tls_verification": "verified"
   },
   {
@@ -71,7 +71,7 @@
    "via": "primary",
    "fetched_url": "https://www.ajnet.me/rss",
    "items_count": 25,
-   "content_chars": 10143,
+   "content_chars": 9954,
    "tls_verification": "verified"
   },
   {
@@ -82,7 +82,7 @@
    "via": "primary",
    "fetched_url": "https://www.aljazeera.com/xml/rss/all.xml",
    "items_count": 25,
-   "content_chars": 7650,
+   "content_chars": 7586,
    "tls_verification": "verified"
   },
   {
@@ -104,7 +104,7 @@
    "via": "fallback:jina.ai/alarabiya-rss",
    "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
    "items_count": 30,
-   "content_chars": 136154,
+   "content_chars": 121892,
    "tls_verification": "verified"
   },
   {
@@ -115,7 +115,7 @@
    "via": "fallback:jina.ai/alarabiya-rss",
    "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
    "items_count": 30,
-   "content_chars": 136154,
+   "content_chars": 121892,
    "tls_verification": "verified"
   },
   {
@@ -126,7 +126,7 @@
    "via": "fallback:jina.ai/alarabiya-rss",
    "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
    "items_count": 30,
-   "content_chars": 136154,
+   "content_chars": 121892,
    "tls_verification": "verified"
   },
   {
@@ -137,7 +137,7 @@
    "via": "primary",
    "fetched_url": "https://www.bahrain.bh/wps/portal/en/BNP/RssFeedReader",
    "items_count": 17,
-   "content_chars": 3158,
+   "content_chars": 3159,
    "tls_verification": "verified"
   },
   {
@@ -148,7 +148,7 @@
    "via": "fallback:jina.ai/bna-en-x",
    "fetched_url": "https://r.jina.ai/http://x.com/bna_en",
    "items_count": 24,
-   "content_chars": 1715,
+   "content_chars": 1716,
    "tls_verification": "verified"
   },
   {
@@ -181,7 +181,7 @@
    "via": "fallback:jina.ai/alayam-home",
    "fetched_url": "https://r.jina.ai/http://www.alayam.com/",
    "items_count": 50,
-   "content_chars": 7854,
+   "content_chars": 7721,
    "tls_verification": "verified"
   },
   {
@@ -192,7 +192,7 @@
    "via": "primary",
    "fetched_url": "https://www.albiladpress.com/rss",
    "items_count": 100,
-   "content_chars": 16655,
+   "content_chars": 16844,
    "tls_verification": "verified"
   },
   {
@@ -203,7 +203,7 @@
    "via": "primary",
    "fetched_url": "https://qna.org.qa/en/RSS-Feeds",
    "items_count": 3,
-   "content_chars": 2306,
+   "content_chars": 2368,
    "tls_verification": "verified"
   },
   {
@@ -213,8 +213,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://qna.org.qa/en/Pages/RSS-Feeds/Analysis-and-Reports",
-   "items_count": 43,
-   "content_chars": 26134,
+   "items_count": 42,
+   "content_chars": 25626,
    "tls_verification": "verified"
   },
   {
@@ -225,7 +225,7 @@
    "via": "primary",
    "fetched_url": "https://qna.org.qa/en/Pages/RSS-Feeds/Qatar",
    "items_count": 50,
-   "content_chars": 26984,
+   "content_chars": 26923,
    "tls_verification": "verified"
   },
   {
@@ -295,7 +295,7 @@
    "via": "fallback:omannews-home",
    "fetched_url": "https://omannews.gov.om/",
    "items_count": 50,
-   "content_chars": 8091,
+   "content_chars": 8032,
    "tls_verification": "disabled_source_28_only"
   },
   {
@@ -317,20 +317,19 @@
    "via": "primary",
    "fetched_url": "https://combinedmaritimeforces.com/feed/",
    "items_count": 15,
-   "content_chars": 47288,
+   "content_chars": 47696,
    "tls_verification": "verified"
   },
   {
    "num": 32,
    "name": "IMB/ICC — القرصنة",
    "primary_url": "https://icc-ccs.org/feed/",
-   "ok": false,
-   "via": null,
-   "fetched_url": null,
-   "items_count": 0,
-   "content_chars": 0,
-   "tls_verification": "verified",
-   "block_reason": "all routes failed: primary: HTTP Error 403: Forbidden"
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://icc-ccs.org/feed/",
+   "items_count": 10,
+   "content_chars": 50781,
+   "tls_verification": "verified"
   },
   {
    "num": 33,
@@ -351,7 +350,7 @@
    "via": "primary",
    "fetched_url": "https://splash247.com/feed/",
    "items_count": 10,
-   "content_chars": 7677,
+   "content_chars": 7668,
    "tls_verification": "verified"
   },
   {
@@ -362,7 +361,7 @@
    "via": "primary",
    "fetched_url": "https://splash247.com/feed/atom/",
    "items_count": 10,
-   "content_chars": 5292,
+   "content_chars": 5245,
    "tls_verification": "verified"
   },
   {
@@ -395,7 +394,7 @@
    "via": "primary",
    "fetched_url": "https://www.marinelink.com/news/rss",
    "items_count": 10,
-   "content_chars": 4286,
+   "content_chars": 4390,
    "tls_verification": "verified"
   },
   {
@@ -428,7 +427,7 @@
    "via": "primary",
    "fetched_url": "https://www.jpost.com/rss/rssfeedsmiddleeastnews.aspx",
    "items_count": 30,
-   "content_chars": 35922,
+   "content_chars": 35998,
    "tls_verification": "verified"
   }
  ],
@@ -496,23 +495,7 @@
      "tls_verification": "verified"
     }
    ]
-  },
-  {
-   "num": 32,
-   "name": "IMB/ICC — القرصنة",
-   "primary_url": "https://icc-ccs.org/feed/",
-   "error": "HTTP Error 403: Forbidden",
-   "block_reason": "all routes failed: primary: HTTP Error 403: Forbidden",
-   "attempts": [
-    {
-     "url": "https://icc-ccs.org/feed/",
-     "via": "primary",
-     "ok": false,
-     "error": "HTTP Error 403: Forbidden",
-     "tls_verification": "verified"
-    }
-   ]
   }
  ],
- "written_utc": "2026-10-19T18:14:16Z"
+ "written_utc": "2026-10-19T22:23:11Z"
 }
