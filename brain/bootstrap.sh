@@ -15,6 +15,10 @@ SITE="${SITE_DIR:-$(dirname "$B")/seawatch}"
 SKIP_SYS=0
 LINK=0
 VERIFY_ONLY=0
+# sudo بلا كلمة مرور إن توفّر (Codespaces/devcontainer يوفر ذلك افتراضيًا)
+SUDO=""
+command -v sudo >/dev/null 2>&1 && SUDO="sudo -n"
+if [ -n "$SUDO" ] && ! $SUDO true 2>/dev/null; then SUDO=""; fi
 for a in "$@"; do
   case "$a" in
     --skip-system) SKIP_SYS=1 ;;
@@ -43,16 +47,15 @@ fi
 
 if [ "$VERIFY_ONLY" -eq 0 ] && [ "$SKIP_SYS" -eq 0 ]; then
   log "2) حزم النظام (LibreOffice · poppler · خطوط عربية · أدوات المتصفح)"
-  SUDO=""
-  command -v sudo >/dev/null && SUDO="sudo -n"
-  if [ -n "$SUDO" ] && ! $SUDO true 2>/dev/null; then
-    SUDO=""
-    bad "sudo يحتاج كلمة مرور — شغّل الحزم يدويًا أو استخدم --skip-system"
-  fi
+  [ -z "$SUDO" ] && bad "لا sudo متاح — ثبّت الحزم يدويًا أو استخدم --skip-system"
   if command -v apt-get >/dev/null; then
-    $SUDO apt-get update -qq && $SUDO apt-get install -y -qq \
-      libreoffice poppler-utils fonts-hosny-amiri fonts-noto-core fontconfig \
-      python3-pip python3-venv curl unzip || bad "تثبيت حزم apt لم يكتمل"
+    APT_OK=1
+    $SUDO apt-get update -qq 2>&1 | tail -2
+    $SUDO apt-get install -y -qq --no-install-recommends poppler-utils fontconfig curl unzip python3-pip 2>&1 | tail -3 || APT_OK=0
+    $SUDO apt-get install -y -qq --no-install-recommends fonts-hosny-amiri fonts-noto-core 2>&1 | tail -3 || APT_OK=0
+    $SUDO apt-get install -y -qq libreoffice 2>&1 | tail -3 || APT_OK=0
+    command -v fc-cache >/dev/null && $SUDO fc-cache -f >/dev/null 2>&1
+    [ "$APT_OK" -eq 1 ] && ok "حزم النظام: poppler · خطوط عربية · libreoffice" || bad "بعض حزم النظام لم تُثبَّت — راجع الرسائل أعلاه"
   elif command -v dnf >/dev/null; then
     $SUDO dnf install -y libreoffice poppler-utils google-noto-sans-arabic-fonts \
       python3-pip curl unzip || bad "تثبيت حزم dnf لم يكتمل"
@@ -79,8 +82,12 @@ if [ "$VERIFY_ONLY" -eq 0 ]; then
 
   log "4) متصفح Playwright (لتوليد PDF والتدقيق البصري)"
   python3 -m playwright install chromium >/dev/null 2>&1 \
-    || python3 -m playwright install --with-deps chromium >/dev/null 2>&1 \
-    || bad "تثبيت متصفح Playwright لم يكتمل — ثبّته يدويًا"
+    || bad "تنزيل متصفح Playwright لم يكتمل — نفّذ: python3 -m playwright install chromium"
+  # تبعيات Chromium على مستوى النظام (libnss3 وغيره) — لازمة ليعمل التشغيل بلا فشل صامت
+  if [ -n "$SUDO" ]; then
+    $SUDO python3 -m playwright install-deps chromium >/dev/null 2>&1 \
+      || bad "تبعيات Chromium لم تُثبَّت — نفّذ: sudo python3 -m playwright install-deps chromium"
+  fi
   [ -d "$HOME/.cache/ms-playwright" ] && ok "متصفح Playwright جاهز"
 fi
 
@@ -113,7 +120,6 @@ fi
 
 if [ "$LINK" -eq 1 ]; then
   log "6) إنشاء المسارات الافتراضية كروابط"
-  SUDO=""; command -v sudo >/dev/null && SUDO="sudo -n"
   $SUDO mkdir -p /home/ubuntu 2>/dev/null
   for pair in "$B:/home/ubuntu/brain-marine-news" "$SITE:/home/ubuntu/seawatch"; do   # مسار مقصود: هو غرض هذا الخيار
     src="${pair%%:*}"; dst="${pair##*:}"

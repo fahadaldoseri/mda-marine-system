@@ -23,6 +23,7 @@ Chromium (Playwright) لطباعة A4 بالوسائط print، ولتصوير ع
 لا يُعدَّل أي ملف مصدر؛ الأصول مخرجات مشتقة.
 """
 from __future__ import annotations
+import shutil
 # ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
 import os as _os
 from pathlib import Path as _Path
@@ -202,7 +203,36 @@ def locate_titles(pages_norm: list[str], sections: list[dict]) -> dict[str, str]
     return out
 
 
+def _require_system_tools() -> int:
+    """فحص متطلبات النظام قبل الطباعة — برسائل علاج صريحة (2 = فشل مانع)."""
+    miss = [c for c in ("pdftoppm", "pdftotext", "pdfinfo") if not shutil.which(c)]
+    if miss:
+        print("✘ متطلبات نظام ناقصة: " + ", ".join(miss))
+        print("  العلاج: sudo apt-get update && sudo apt-get install -y poppler-utils")
+        return 2
+    try:
+        from playwright.sync_api import sync_playwright
+        with sync_playwright() as pw:
+            b = pw.chromium.launch()
+            b.close()
+    except Exception as exc:
+        print("✘ تعذّر تشغيل Chromium: " + str(exc).splitlines()[0][:150])
+        print("  العلاج: sudo python3 -m playwright install-deps chromium")
+        return 2
+    try:
+        fam = subprocess.run(["fc-list", ":lang=ar", "family"], capture_output=True, text=True).stdout
+        if not fam.strip():
+            print("• لا خط عربي متاح — قد يخرج النص العربي مربعات في PDF")
+            print("  العلاج: sudo apt-get install -y fonts-hosny-amiri fonts-noto-core fontconfig && sudo fc-cache -f")
+    except FileNotFoundError:
+        pass
+    return 0
+
+
 def main() -> int:
+    _rc = _require_system_tools()
+    if _rc:
+        return _rc
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", required=True, help="تاريخ الإصدار YYYY-MM-DD")
     ap.add_argument("--only", choices=["pdf", "map", "both"], default="both")

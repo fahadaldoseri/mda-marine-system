@@ -39,7 +39,9 @@ run() {
   printf '  %s → ' "$name"
   if [ "$rc" -eq 0 ]; then echo "✔ نجح"; PASS=$((PASS+1))
   elif [ "$rc" -eq "$tolerate" ]; then echo "• تحذير (رمز $rc)"; WARN=$((WARN+1))
-  else echo "✘ فشل (رمز $rc)"; FAILN=$((FAILN+1))
+  else
+    echo "✘ فشل (رمز $rc)"; FAILN=$((FAILN+1))
+    echo "$out" | tail -3 | sed 's/^/      │ /'
   fi
   printf '%s\t%s\t%s\n' "$name" "$rc" "$(echo "$out" | tail -1 | cut -c1-120)" >> "$RESULT_LOG"
 }
@@ -47,18 +49,25 @@ run() {
 log "0) بيئة التشغيل"
 echo "  المسار: $B"
 echo "  التاريخ: $DATE"
+REMEDY=""
 for c in soffice pdftoppm pdftotext pdfinfo; do
-  command -v "$c" >/dev/null && ok "$c" || bad "$c غير مثبّت (يحتاجه Word/PDF)"
+  if command -v "$c" >/dev/null; then ok "$c"; else
+    case "$c" in
+      soffice) bad "$c غير مثبّت (يحتاجه Word) → sudo apt-get install -y libreoffice"; REMEDY="$REMEDY soffice" ;;
+      *)       bad "$c غير مثبّت (يحتاجه PDF) → sudo apt-get install -y poppler-utils"; REMEDY="$REMEDY $c" ;;
+    esac
+  fi
 done
 if command -v fc-list >/dev/null && fc-list :lang=ar family 2>/dev/null | grep -q .; then
   ok "خطوط عربية: $(fc-list :lang=ar family 2>/dev/null | sort -u | head -2 | paste -sd', ')"
 else
-  bad "لا خط عربي — PDF العربي سيخرج بمربعات"
+  bad "لا خط عربي — PDF العربي سيخرج بمربعات → sudo apt-get install -y fonts-hosny-amiri fonts-noto-core fontconfig && sudo fc-cache -f"
 fi
 if ls "$HOME"/.cache/ms-playwright/chromium* >/dev/null 2>&1; then
   ok "متصفح Playwright مثبّت"
 else
-  bad "متصفح Playwright غير مثبّت — نفّذ: $PY -m playwright install chromium --with-deps"
+  bad "متصفح Playwright غير مثبّت → $PY -m playwright install chromium"
+  bad "ولازم تبعيات النظام → sudo $PY -m playwright install-deps chromium"
 fi
 [ -f "$MD" ] && ok "مصدر التقرير موجود: $DATE" || bad "مصدر التقرير مفقود: $MD"
 
@@ -122,4 +131,16 @@ if [ "$FAILN" -eq 0 ]; then
   exit 0
 fi
 echo "  ✘ راجع البنود المعلّمة بـ ✘ أعلاه قبل الاعتماد على هذه البيئة."
+  if [ -n "$REMEDY" ] || ! command -v pdfinfo >/dev/null; then
+    cat <<'FIX'
+
+  ── الإصلاح الفوري (انسخه كما هو) ──
+  sudo apt-get update
+  sudo apt-get install -y --no-install-recommends poppler-utils libreoffice fontconfig \
+       fonts-hosny-amiri fonts-noto-core
+  sudo fc-cache -f
+  sudo python3 -m playwright install-deps chromium
+  bash brain/bootstrap.sh --skip-system
+FIX
+  fi
 exit 2

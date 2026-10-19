@@ -131,3 +131,29 @@ chmod 600 brain/.env
 2. `bash brain/tools/verify_codespace.sh` — `فشل مانع: 0`.
 3. `python3 brain/validators/check_backup_parity.py --mode strict` — **مطابق** (في الشجرة المحلية، لا داخل المستنسخ).
 4. راجع أن مخرجات PDF وWord تحمل الشكل المعتمد نفسه: عدد الصفحات وترقيمها وبطاقة القرار في الصفحة الأولى.
+
+---
+
+## 8. إن ظهر نقص حزم النظام (الحالة التي وقعت فعلًا)
+
+إن رأيت في التحقق: `✘ soffice غير مثبّت` · `✘ pdftoppm غير مثبّت` · `✘ لا خط عربي` — فالورشة أُنشئت قبل تحديث صورة الورشة، أو فشل تثبيت الحزم وقت الإنشاء. الإصلاح الفوري:
+
+```bash
+sudo apt-get update
+sudo apt-get install -y --no-install-recommends poppler-utils libreoffice fontconfig \
+     fonts-hosny-amiri fonts-noto-core
+sudo fc-cache -f
+sudo python3 -m playwright install-deps chromium     # تبعيات تشغيل المتصفح
+bash brain/bootstrap.sh --skip-system
+bash brain/tools/verify_codespace.sh                 # المطلوب: فشل مانع: 0
+```
+
+**وللمستقبل — الطريقة الأنظف:** أعد بناء الحاوية من الصورة المحدَّثة:
+
+> `Ctrl+Shift+P` ← **Codespaces: Rebuild Container**
+
+الصورة في `.devcontainer/Dockerfile` تُثبّت `poppler-utils` و`libreoffice` و`fonts-hosny-amiri` و`fonts-noto-core` وتبعيات Chromium (`libnss3` وغيرها)، فلا يعتمد التشغيل على تثبيت وقت الإنشاء.
+
+### لماذا كان PDF يفشل تحديدًا؟
+
+تشغيل Chromium يحتاج مكتبات نظام (`libnss3` وأخواتها)، وترقيم PDF وفهرسه يحتاج `poppler`، والنص العربي يحتاج خطًا عربيًا. مع غياب الثلاثة كان التصدير يسقط قبل كتابة الملف بلا رسالة واضحة. الآن **أداة التصدير تفحص المتطلبات أولًا**، وتذكر ما ينقص وأمر علاجه، وترجع «فشل مانع» لا تحذيرًا صامتًا.
