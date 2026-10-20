@@ -45,6 +45,9 @@ fi
 # التنظيف لا يمنع التسليم (رمز 3)؛ والبوابة أدناه هي التي تمنع الجديد فقط.
 step "تنظيف المحتوى الداخلي" 3 python3 "$B/tools/scrub_internal.py" --date "$D" --apply
 
+# دمج بنك التعريفات المعياري: يضمن أن كل رمز مستخدم له تعريف يراه القارئ،
+# ويسبق البناء حتى يصل التعريف إلى الصفحة وPDF وبوابة الفهم معًا.
+step "دمج بنك التعريفات" 2 python3 "$B/tools/merge_glossary.py" --date "$D"
 if [ "$BUILD" = "1" ]; then
   step "بناء الصفحة (مزامنة + بناء)" 2 python3 "$SITE/generator/sync_from_brain.py" --date "$D"
   step "تصدير PDF المعتمد" 2 python3 "$B/tools/export_report_assets.py" --date "$D" --only pdf
