@@ -168,10 +168,13 @@ def ng_info(text: str, n: int = 5) -> Counter:
 def run_gate(cmd: list[str]) -> dict:
     try:
         r = subprocess.run(cmd, capture_output=True, text=True, timeout=180, cwd=str(ROOT))
-        return {"cmd": " ".join(cmd[1:]), "code": r.returncode,
+        # عطل ك-53: كان الأمر يُسجَّل بمسار مطلق فينكسر نقل المكتبة. الصحيح: نسبي.
+        shown = " ".join(str(c).replace(str(ROOT) + "/", "") for c in cmd[1:])
+        return {"cmd": shown, "code": r.returncode,
                 "out": (r.stdout + r.stderr).strip()[-1200:]}
     except Exception as e:  # noqa: BLE001
-        return {"cmd": " ".join(cmd[1:]), "code": 2, "out": f"تعذّر التشغيل: {e}"}
+        shown = " ".join(str(c).replace(str(ROOT) + "/", "") for c in cmd[1:])
+        return {"cmd": shown, "code": 2, "out": f"تعذّر التشغيل: {e}"}
 
 
 def main() -> int:

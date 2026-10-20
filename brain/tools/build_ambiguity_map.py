@@ -11,7 +11,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 LIB = ROOT / "appendices" / "libraries"
-DEST = Path("/home/ubuntu/skills/military-arabic-editing/references/ambiguity-map.md")
+import os
+SKILLS_DIR = Path(os.environ.get("SKILLS_DIR", "/home/ubuntu/skills"))
+DEST = SKILLS_DIR / "military-arabic-editing" / "references" / "ambiguity-map.md"
 
 D = json.loads((LIB / "findings-2026-10-20.json").read_text(encoding="utf-8"))
 lex = D["lexicon"]

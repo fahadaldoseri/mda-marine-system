@@ -65,6 +65,7 @@ COMP_STAGE=$(python3 -c "import json;print(json.load(open('$B/appendices/compreh
 step "بوابة الفهم (مرحلة $COMP_STAGE)" 2 python3 "$B/validators/check_comprehension.py" --date "$D"
 step "بوابة التحليل الاستخباري" 2 python3 "$B/validators/check_intel.py" "$B/reports/$D-sectioned.md" "$B/web/meta/$D.json"
 step "تغطية فحص العقوبات" 2 python3 "$B/validators/check_ofac_coverage.py" --date "$D"
+step "استعمال المكتبات (المعجم والبنك والفجوات)" 1 python3 "$B/validators/check_library_use.py" --date "$D"
 step "عدد المصادر (مصدر واحد)" 2 python3 "$B/validators/check_sources_count.py"
 step "قابلية النقل (مسارات)" 2 python3 "$B/validators/check_portable_paths.py"
 step "الأرقام (0-9 لاتينية)" 2 python3 "$B/validators/check_numerals.py"

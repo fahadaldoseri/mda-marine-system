@@ -51,6 +51,7 @@ done
 # شواهد القواعد المعتمدة — عطل ك-48: فُقدت قواعد معتمدة ثم نُسخ النقص فوق المستودع.
 # القاعدة: ما نقص يُستعاد من المستودع، ولا يُدفع نقص فوقه.
 SK_OUT=$(python3 "$_B/validators/check_skills_integrity.py" 2>&1); SK_RC=$?
+python3 "$_B/validators/check_libraries_skills.py" || echo "  • تدقيق المكتبات والمهارات: تحذير"
 echo "$SK_OUT" | tail -4
 if [ "$SK_RC" = "2" ]; then
   echo "  ↩ استعادة المهارات من المستودع قبل الدفع"
