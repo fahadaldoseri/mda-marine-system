@@ -153,7 +153,7 @@ body::before{
 a{color:var(--accent);text-decoration:none}
 /* عطل ك-74: روابط المتن كانت تتميّز باللون وحده (تباين 1.43 مع النص المحيط)،
    وهو مخالف WCAG 2.1 AA — 1.4.1. الخط السفلي يمنح تمييزًا غير لوني. */
-p a,li a,td a,.src a,.src-note a,.cite-ref{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+p a,li a,td a,.src a,.src-note a,.cite-ref,.sn-links a,.foot a,footer a,span a{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
 a:hover{text-decoration:underline}
 section.doc p,section.doc li,.card p,.src,.foot,.notice,blockquote{overflow-wrap:anywhere}
 a:focus-visible,.btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}

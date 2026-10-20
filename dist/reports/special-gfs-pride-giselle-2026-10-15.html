@@ -57,7 +57,7 @@ body::before{
 a{color:var(--accent);text-decoration:none}
 /* عطل ك-74: روابط المتن كانت تتميّز باللون وحده (تباين 1.43 مع النص المحيط)،
    وهو مخالف <span class="ltr">WCAG</span> 2.1 AA — 1.4.1. الخط السفلي يمنح تمييزًا غير لوني. */
-p a,li a,td a,.src a,.src-note a,.cite-ref{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+p a,li a,td a,.src a,.src-note a,.cite-ref,.sn-links a,.foot a,footer a,span a{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
 a:hover{text-decoration:underline}
 section.doc p,section.doc li,.card p,.src,.foot,.notice,blockquote{overflow-wrap:anywhere}
 a:focus-visible,.btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
@@ -669,7 +669,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     <div class="threat risk-high"><div class="lbl">مستوى التهديد</div><div class="val">مرتفع</div></div>
     <div>
       <p class="lede">أصاب مقذوفان غير محددَي المصدر سفينتي حاويات سنغافوريتين في 13 أكتوبر 2026 داخل مضيق هرمز ومياه عُمان: «<span class="ltr">GFS PRIDE</span>» غرقت بعد حريق وأُخلي طاقمها وعدده 21 فردًا بسلام، و«<span class="ltr">GFS GISELLE</span>» أبحرت بقواها الذاتية إلى مرسى آمن وطاقمها وعدده 22 فردًا بسلام. ولا جهة أعلنت مسؤوليتها، ولا يوجد فحص فني منشور.</p>
-      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-20 21:42 <span class="ltr">UTC</span></b></span></div>
+      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-20 21:53 <span class="ltr">UTC</span></b></span></div>
     </div>
   </header>
 
@@ -1099,7 +1099,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> تقرير خاص — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: <span class="ltr">UTC</span> وتوقيت البحرين (<span class="ltr">UTC</span>+3). المصادر الرسمية هي الأساس، والنقل الإعلامي مُوسَم نقلًا لا تحققًا.
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-20 21:42 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-20 21:53 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
     
   </footer>
 </div>
