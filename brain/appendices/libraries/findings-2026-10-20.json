@@ -827,7 +827,7 @@
       "kind": "خاص",
       "date": "special-2026-10-17-Jubail-incidents",
       "file": "reports/special-2026-10-17-Jubail-incidents.md",
-      "bytes": 28064,
+      "bytes": 28017,
       "sentences": 383,
       "long_sentences": 1,
       "arabic_digits": 0,
@@ -865,7 +865,7 @@
           },
           {
             "count": 0,
-            "sample": "بيانات التتبّع تُظهر  SAFEEN PRINCIPAL  في الخليج العربي قرب  26.6° شمالًا · 50.27° شرقًا  يوم 17 أكتوبر، في رحلة من محط"
+            "sample": "بيانات التتبّع تُظهر  SAFEEN PRINCIPAL  في الخليج العربي قرب  26°36.0′ N · 050°16.2′ E  يوم 17 أكتوبر، في رحلة من محطة خ"
           },
           {
             "count": 0,
@@ -1957,7 +1957,7 @@
       "نوع": "جملة طويلة (بوابة الأسلوب)",
       "الملف": "special-2026-10-17-Jubail-incidents",
       "المقياس": "0",
-      "النص": "بيانات التتبّع تُظهر  SAFEEN PRINCIPAL  في الخليج العربي قرب  26.6° شمالًا · 50.27° شرقًا  يوم 17 أكتوبر، في رحلة من محط",
+      "النص": "بيانات التتبّع تُظهر  SAFEEN PRINCIPAL  في الخليج العربي قرب  26°36.0′ N · 050°16.2′ E  يوم 17 أكتوبر، في رحلة من محطة خ",
       "القاعدة": "ق-جمل: حتى 20 كلمة",
       "الحالة": "يحتاج قرارًا"
     },
@@ -2649,18 +2649,6 @@
       ],
       "defined_in_terminology": true
     },
-    "شرقًا": {
-      "kind": "مشكول",
-      "count": 23,
-      "documents": [
-        "2026-10-18",
-        "GFS-MACR-المعتمد-2026-10-17",
-        "special-2026-10-15-GFS",
-        "special-2026-10-17-Jubail-incidents",
-        "التقرير-التراكمي-الواسع-28-فبراير-الى-11-أكتوبر-2026"
-      ],
-      "defined_in_terminology": true
-    },
     "المشغّل": {
       "kind": "مشكول",
       "count": 21,
@@ -2763,6 +2751,17 @@
       ],
       "defined_in_terminology": false
     },
+    "شرقًا": {
+      "kind": "مشكول",
+      "count": 19,
+      "documents": [
+        "2026-10-18",
+        "GFS-MACR-المعتمد-2026-10-17",
+        "special-2026-10-15-GFS",
+        "التقرير-التراكمي-الواسع-28-فبراير-الى-11-أكتوبر-2026"
+      ],
+      "defined_in_terminology": true
+    },
     "فعليًا": {
       "kind": "مشكول",
       "count": 18,
@@ -2808,17 +2807,6 @@
         "2026-10-19",
         "2026-10-20",
         "special-2026-10-15-GFS"
-      ],
-      "defined_in_terminology": true
-    },
-    "شمالًا": {
-      "kind": "مشكول",
-      "count": 18,
-      "documents": [
-        "GFS-MACR-المعتمد-2026-10-17",
-        "special-2026-10-15-GFS",
-        "special-2026-10-17-Jubail-incidents",
-        "التقرير-التراكمي-الواسع-28-فبراير-الى-11-أكتوبر-2026"
       ],
       "defined_in_terminology": true
     },
@@ -2997,6 +2985,16 @@
         "GFS-MACR-المعتمد-2026-10-17",
         "special-2026-10-15-GFS",
         "special-2026-10-15-GFS-MACR"
+      ],
+      "defined_in_terminology": true
+    },
+    "شمالًا": {
+      "kind": "مشكول",
+      "count": 14,
+      "documents": [
+        "GFS-MACR-المعتمد-2026-10-17",
+        "special-2026-10-15-GFS",
+        "التقرير-التراكمي-الواسع-28-فبراير-الى-11-أكتوبر-2026"
       ],
       "defined_in_terminology": true
     },

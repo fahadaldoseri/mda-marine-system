@@ -82,7 +82,7 @@ prev_codes = {r.get('display_code') for r in (prev_master.get('events') or []) i
 prev_merged_utc = (prev_master.get('merge_log') or {}).get('merged_utc', '')
 # قائمة سجلات واحدة: `events` — المفتاح المكرر `records` أُزيل (بند 10)
 records = list(frozen.get('events') or frozen.get('records') or [])
-# ── عطل ك-74: الدمج كان تراكميًا لا استبداليًا، فكل جولة تُضيف سجلات اليوم نفسه
+# ── عطل ك-75: الدمج كان تراكميًا لا استبداليًا، فكل جولة تُضيف سجلات اليوم نفسه
 #    برموز جديدة فيتضخم الدفتر وتكسر العدّادات. القاعدة: الدمج استبدال بالتاريخ
 #    واسم الملف اليومي معًا — يُزال ما جاء منه ثم يُعاد إدراجه مرة واحدة.
 _before = len(records)
