@@ -89,6 +89,12 @@ else
   echo "  ! مجلد الموقع ليس مستودع git: $_S"
 fi
 
+# 4ب) ميزانية الصفحات — تُعلن في كل إغلاق حتى يُعرف الحد قبل أي تعديل نصي
+if [ -n "$D" ] && [ -f "$_S/dist/reports/pdf/$D.pdf" ]; then
+  say "4ب) ميزانية الصفحات — $D"
+  python3 "$_B/tools/page_budget.py" --date "$D" 2>&1 | tail -4
+fi
+
 # 5) تحقق نهائي
 say "5) الحصيلة"
 echo "  النظام:  $(git -C "$_OUT" rev-parse --short HEAD 2>/dev/null || echo '-')"
