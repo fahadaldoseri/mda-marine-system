@@ -136,6 +136,12 @@ ICON_PATHS = {
     "source": "M4 6h16M4 12h16M4 18h10",
 }
 
+LINK_RULE = """
+/* ── تمييز الروابط داخل النص (WCAG 2.1 AA — 1.4.1) ──
+   عطل ك-79: تساوي الخصوصية يُحسم بالترتيب، فالقاعدة تُركَّب آخر كل الأنماط لتفوز. */
+.site-nav a,.sn-links a,.sn-foot a,.foot a,footer a,.glossary a,p a,li a,td a,
+.src a,.src-note a,.cite-ref{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+"""
 STYLE = """
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-padding-top:74px}
@@ -546,11 +552,6 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 
 }
 
-/* ── تمييز الروابط داخل النص (WCAG 2.1 AA — 1.4.1) ──
-   عطل ك-79: كُتبت هذه القاعدة أولًا فأبطلتها قواعد التنقل اللاحقة (.site-nav a)
-   لأن تساوي الخصوصية يُحسم بالترتيب. موضعها الآن نهاية ورقة الأنماط. */
-.site-nav a,.sn-links a,.sn-foot a,.foot a,footer a,.glossary a,p a,li a,td a,
-.src a,.src-note a,.cite-ref{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
 """
 
 SCRIPT = """
@@ -1166,7 +1167,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
 <meta name="referrer" content="no-referrer">
 <script>document.documentElement.className='js';</script>
 <link rel="stylesheet" href="{FONT_LINK}">
-<style>{DESIGN_TOKENS}{STYLE}{BLK.STYLE_BLOCKS}{DAYLIGHT}</style>
+<style>{DESIGN_TOKENS}{STYLE}{BLK.STYLE_BLOCKS}{DAYLIGHT}{LINK_RULE}</style>
 </head>
 <body>
 <div class="topbar no-print">
