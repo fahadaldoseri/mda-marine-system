@@ -70,6 +70,15 @@ step "مطابقة النسخة الاحتياطية (تنبيهي)" 3 python3 "
 step "سياسة الرموز في المخرجات" 2 python3 "$B/validators/check_code_policy.py" "$SITE/dist"
 step "فصل فضاءات الرموز MN-/EST-" 2 python3 "$B/validators/check_code_spaces.py" --date "$D"
 step "قاعدة النقاط في المصدر" 2 python3 "$B/validators/check_points_rule.py" --md "$B/reports/$D-sectioned.md" --meta "$B/web/meta/$D.json"
+# ── تدقيق المكتبات اللغوية — أسبوعيًا (تنبيهي، لا يوقف النشر) ──────────────
+AUDIT_STAMP="$B/logs/.audit-last"
+if [ ! -f "$AUDIT_STAMP" ] || [ $(( ( $(date -u +%s) - $(date -u -r "$AUDIT_STAMP" +%s 2>/dev/null || echo 0) ) / 86400 )) -ge 6 ]; then
+  step "تدقيق المكتبات اللغوية (أسبوعي)" 3 python3 "$B/tools/audit_corpus.py" --date "$D"
+  date -u +%FT%TZ > "$AUDIT_STAMP" 2>/dev/null || true
+else
+  echo "  • تدقيق المكتبات: أُجري خلال آخر 6 أيام — تخطٍّ" | tee -a "$REP"
+fi
+
 step "بوابات المخرج العشر" 2 python3 "$B/tools/qa_gates.py" --date "$D"
 
 echo "----- الخلاصة -----" | tee -a "$REP"

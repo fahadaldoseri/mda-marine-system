@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T17:54:11.046419+00:00",
+  "generated_utc": "2026-10-20T18:58:39.573172+00:00",
   "documents": 14,
   "orthography": [
     {
@@ -29,7 +29,7 @@
     {
       "بالشكل": "رسميًا",
       "بلا تشكيل": "رسميا",
-      "الأول": 31,
+      "الأول": 42,
       "الثاني": 26
     },
     {
@@ -81,22 +81,28 @@
       "الثاني": 6
     },
     {
-      "بالشكل": "مشغّل",
-      "بلا تشكيل": "مشغل",
-      "الأول": 17,
-      "الثاني": 2
-    },
-    {
       "بالشكل": "مفقودَي",
       "بلا تشكيل": "مفقودي",
       "الأول": 16,
       "الثاني": 4
     },
     {
+      "بالشكل": "أُبلغ",
+      "بلا تشكيل": "أبلغ",
+      "الأول": 15,
+      "الثاني": 32
+    },
+    {
       "بالشكل": "تتبّع",
       "بلا تشكيل": "تتبع",
       "الأول": 15,
       "الثاني": 27
+    },
+    {
+      "بالشكل": "مشغّل",
+      "بلا تشكيل": "مشغل",
+      "الأول": 15,
+      "الثاني": 2
     },
     {
       "بالشكل": "هجومًا",
@@ -114,13 +120,7 @@
       "بالشكل": "العدّ",
       "بلا تشكيل": "العد",
       "الأول": 13,
-      "الثاني": 37
-    },
-    {
-      "بالشكل": "أُبلغ",
-      "بلا تشكيل": "أبلغ",
-      "الأول": 12,
-      "الثاني": 32
+      "الثاني": 36
     },
     {
       "بالشكل": "يُحسم",
@@ -144,7 +144,7 @@
       "بالشكل": "يُنسب",
       "بلا تشكيل": "ينسب",
       "الأول": 11,
-      "الثاني": 4
+      "الثاني": 5
     },
     {
       "بالشكل": "البحّارة",
@@ -520,7 +520,7 @@
   "lexicon": {
     "UKMTO": {
       "kind": "لاتيني",
-      "count": 250,
+      "count": 252,
       "documents": [
         "2026-10-12",
         "2026-10-13",
@@ -575,22 +575,9 @@
       ],
       "defined_in_terminology": true
     },
-    "GFS": {
-      "kind": "لاتيني",
-      "count": 154,
-      "documents": [
-        "2026-10-15",
-        "2026-10-16",
-        "2026-10-17",
-        "GFS-MACR-المعتمد-2026-10-17",
-        "special-2026-10-15-GFS",
-        "special-2026-10-15-GFS-MACR"
-      ],
-      "defined_in_terminology": true
-    },
     "IMO": {
       "kind": "لاتيني",
-      "count": 152,
+      "count": 156,
       "documents": [
         "2026-10-12",
         "2026-10-13",
@@ -606,6 +593,19 @@
         "special-2026-10-15-GFS-MACR",
         "special-2026-10-17-Jubail-incidents",
         "التقرير-التراكمي-الواسع-28-فبراير-الى-11-أكتوبر-2026"
+      ],
+      "defined_in_terminology": true
+    },
+    "GFS": {
+      "kind": "لاتيني",
+      "count": 153,
+      "documents": [
+        "2026-10-15",
+        "2026-10-16",
+        "2026-10-17",
+        "GFS-MACR-المعتمد-2026-10-17",
+        "special-2026-10-15-GFS",
+        "special-2026-10-15-GFS-MACR"
       ],
       "defined_in_terminology": true
     },
@@ -717,7 +717,7 @@
     },
     "PRIDE": {
       "kind": "لاتيني",
-      "count": 61,
+      "count": 60,
       "documents": [
         "2026-10-15",
         "2026-10-16",
@@ -787,6 +787,23 @@
         "التقرير-التراكمي-الواسع-28-فبراير-الى-11-أكتوبر-2026"
       ],
       "defined_in_terminology": true
+    },
+    "رسميًا": {
+      "kind": "مشكول",
+      "count": 42,
+      "documents": [
+        "2026-10-12",
+        "2026-10-14",
+        "2026-10-18",
+        "2026-10-19",
+        "2026-10-20",
+        "GFS-MACR-المعتمد-2026-10-17",
+        "special-2026-10-15-GFS",
+        "special-2026-10-15-GFS-MACR",
+        "special-2026-10-17-Jubail-incidents",
+        "التقرير-التراكمي-الواسع-28-فبراير-الى-11-أكتوبر-2026"
+      ],
+      "defined_in_terminology": false
     },
     "IX": {
       "kind": "لاتيني",
@@ -890,23 +907,6 @@
         "التقرير-التراكمي-الواسع-28-فبراير-الى-11-أكتوبر-2026"
       ],
       "defined_in_terminology": true
-    },
-    "رسميًا": {
-      "kind": "مشكول",
-      "count": 31,
-      "documents": [
-        "2026-10-12",
-        "2026-10-14",
-        "2026-10-18",
-        "2026-10-19",
-        "2026-10-20",
-        "GFS-MACR-المعتمد-2026-10-17",
-        "special-2026-10-15-GFS",
-        "special-2026-10-15-GFS-MACR",
-        "special-2026-10-17-Jubail-incidents",
-        "التقرير-التراكمي-الواسع-28-فبراير-الى-11-أكتوبر-2026"
-      ],
-      "defined_in_terminology": false
     },
     "PETRO": {
       "kind": "لاتيني",
@@ -1028,18 +1028,6 @@
       ],
       "defined_in_terminology": false
     },
-    "شرقًا": {
-      "kind": "مشكول",
-      "count": 24,
-      "documents": [
-        "2026-10-18",
-        "GFS-MACR-المعتمد-2026-10-17",
-        "special-2026-10-15-GFS",
-        "special-2026-10-17-Jubail-incidents",
-        "التقرير-التراكمي-الواسع-28-فبراير-الى-11-أكتوبر-2026"
-      ],
-      "defined_in_terminology": true
-    },
     "عُماني": {
       "kind": "مشكول",
       "count": 24,
@@ -1069,19 +1057,6 @@
       ],
       "defined_in_terminology": false
     },
-    "المشغّل": {
-      "kind": "مشكول",
-      "count": 23,
-      "documents": [
-        "2026-10-13",
-        "2026-10-17",
-        "2026-10-18",
-        "GFS-MACR-المعتمد-2026-10-17",
-        "special-2026-10-15-GFS",
-        "special-2026-10-15-GFS-MACR"
-      ],
-      "defined_in_terminology": false
-    },
     "جدًا": {
       "kind": "مشكول",
       "count": 23,
@@ -1100,6 +1075,18 @@
         "التقرير-التراكمي-الواسع-28-فبراير-الى-11-أكتوبر-2026"
       ],
       "defined_in_terminology": false
+    },
+    "شرقًا": {
+      "kind": "مشكول",
+      "count": 23,
+      "documents": [
+        "2026-10-18",
+        "GFS-MACR-المعتمد-2026-10-17",
+        "special-2026-10-15-GFS",
+        "special-2026-10-17-Jubail-incidents",
+        "التقرير-التراكمي-الواسع-28-فبراير-الى-11-أكتوبر-2026"
+      ],
+      "defined_in_terminology": true
     },
     "التتبّع": {
       "kind": "مشكول",
@@ -1131,6 +1118,19 @@
         "special-2026-10-15-GFS-MACR",
         "special-2026-10-17-Jubail-incidents",
         "التقرير-التراكمي-الواسع-28-فبراير-الى-11-أكتوبر-2026"
+      ],
+      "defined_in_terminology": false
+    },
+    "المشغّل": {
+      "kind": "مشكول",
+      "count": 21,
+      "documents": [
+        "2026-10-13",
+        "2026-10-17",
+        "2026-10-18",
+        "GFS-MACR-المعتمد-2026-10-17",
+        "special-2026-10-15-GFS",
+        "special-2026-10-15-GFS-MACR"
       ],
       "defined_in_terminology": false
     },
@@ -1190,17 +1190,6 @@
       ],
       "defined_in_terminology": false
     },
-    "شمالًا": {
-      "kind": "مشكول",
-      "count": 19,
-      "documents": [
-        "GFS-MACR-المعتمد-2026-10-17",
-        "special-2026-10-15-GFS",
-        "special-2026-10-17-Jubail-incidents",
-        "التقرير-التراكمي-الواسع-28-فبراير-الى-11-أكتوبر-2026"
-      ],
-      "defined_in_terminology": true
-    },
     "فعليًا": {
       "kind": "مشكول",
       "count": 18,
@@ -1249,6 +1238,17 @@
       ],
       "defined_in_terminology": true
     },
+    "شمالًا": {
+      "kind": "مشكول",
+      "count": 18,
+      "documents": [
+        "GFS-MACR-المعتمد-2026-10-17",
+        "special-2026-10-15-GFS",
+        "special-2026-10-17-Jubail-incidents",
+        "التقرير-التراكمي-الواسع-28-فبراير-الى-11-أكتوبر-2026"
+      ],
+      "defined_in_terminology": true
+    },
     "يُرجَّح": {
       "kind": "مشكول",
       "count": 17,
@@ -1289,16 +1289,6 @@
       ],
       "defined_in_terminology": false
     },
-    "مشغّل": {
-      "kind": "مشكول",
-      "count": 17,
-      "documents": [
-        "special-2026-10-15-GFS",
-        "special-2026-10-15-GFS-MACR",
-        "special-2026-10-17-Jubail-incidents"
-      ],
-      "defined_in_terminology": true
-    },
     "MARAD": {
       "kind": "لاتيني",
       "count": 16,
@@ -1322,6 +1312,17 @@
       ],
       "defined_in_terminology": false
     },
+    "MPA": {
+      "kind": "لاتيني",
+      "count": 16,
+      "documents": [
+        "GFS-MACR-المعتمد-2026-10-17",
+        "special-2026-10-15-GFS",
+        "special-2026-10-15-GFS-MACR",
+        "special-2026-10-17-Jubail-incidents"
+      ],
+      "defined_in_terminology": false
+    },
     "OFAC": {
       "kind": "لاتيني",
       "count": 15,
@@ -1339,6 +1340,19 @@
       ],
       "defined_in_terminology": true
     },
+    "أُبلغ": {
+      "kind": "مشكول",
+      "count": 15,
+      "documents": [
+        "2026-10-12",
+        "2026-10-20",
+        "GFS-MACR-المعتمد-2026-10-17",
+        "special-2026-10-15-GFS",
+        "special-2026-10-15-GFS-MACR",
+        "التقرير-التراكمي-الواسع-28-فبراير-الى-11-أكتوبر-2026"
+      ],
+      "defined_in_terminology": false
+    },
     "تتبّع": {
       "kind": "مشكول",
       "count": 15,
@@ -1347,6 +1361,16 @@
         "GFS-MACR-المعتمد-2026-10-17",
         "special-2026-10-15-GFS",
         "special-2026-10-15-GFS-MACR"
+      ],
+      "defined_in_terminology": true
+    },
+    "مشغّل": {
+      "kind": "مشكول",
+      "count": 15,
+      "documents": [
+        "special-2026-10-15-GFS",
+        "special-2026-10-15-GFS-MACR",
+        "special-2026-10-17-Jubail-incidents"
       ],
       "defined_in_terminology": true
     },
@@ -1485,17 +1509,6 @@
       ],
       "defined_in_terminology": true
     },
-    "أُبلغ": {
-      "kind": "مشكول",
-      "count": 12,
-      "documents": [
-        "2026-10-12",
-        "2026-10-20",
-        "GFS-MACR-المعتمد-2026-10-17",
-        "التقرير-التراكمي-الواسع-28-فبراير-الى-11-أكتوبر-2026"
-      ],
-      "defined_in_terminology": false
-    },
     "يُحسم": {
       "kind": "مشكول",
       "count": 12,
@@ -1560,17 +1573,6 @@
         "2026-10-18",
         "2026-10-19",
         "2026-10-20"
-      ],
-      "defined_in_terminology": false
-    },
-    "MPA": {
-      "kind": "لاتيني",
-      "count": 12,
-      "documents": [
-        "GFS-MACR-المعتمد-2026-10-17",
-        "special-2026-10-15-GFS",
-        "special-2026-10-15-GFS-MACR",
-        "special-2026-10-17-Jubail-incidents"
       ],
       "defined_in_terminology": false
     },
@@ -2769,6 +2771,16 @@
         "special-2026-10-15-GFS-MACR"
       ],
       "defined_in_terminology": false
+    },
+    "غيّرت": {
+      "kind": "مشكول",
+      "count": 5,
+      "documents": [
+        "GFS-MACR-المعتمد-2026-10-17",
+        "special-2026-10-15-GFS-MACR",
+        "التقرير-التراكمي-الواسع-28-فبراير-الى-11-أكتوبر-2026"
+      ],
+      "defined_in_terminology": true
     },
     "مسارًا": {
       "kind": "مشكول",
@@ -3982,6 +3994,16 @@
       ],
       "defined_in_terminology": false
     },
+    "فغيّرت": {
+      "kind": "مشكول",
+      "count": 3,
+      "documents": [
+        "GFS-MACR-المعتمد-2026-10-17",
+        "special-2026-10-15-GFS",
+        "التقرير-التراكمي-الواسع-28-فبراير-الى-11-أكتوبر-2026"
+      ],
+      "defined_in_terminology": false
+    },
     "يُدرج": {
       "kind": "مشكول",
       "count": 3,
@@ -4058,15 +4080,6 @@
         "GFS-MACR-المعتمد-2026-10-17"
       ],
       "defined_in_terminology": false
-    },
-    "غيّرت": {
-      "kind": "مشكول",
-      "count": 3,
-      "documents": [
-        "GFS-MACR-المعتمد-2026-10-17",
-        "التقرير-التراكمي-الواسع-28-فبراير-الى-11-أكتوبر-2026"
-      ],
-      "defined_in_terminology": true
     },
     "BMP": {
       "kind": "لاتيني",
@@ -7507,14 +7520,6 @@
       ],
       "defined_in_terminology": false
     },
-    "موجّه": {
-      "kind": "مشكول",
-      "count": 1,
-      "documents": [
-        "special-2026-10-15-GFS-MACR"
-      ],
-      "defined_in_terminology": false
-    },
     "وتعذّرت": {
       "kind": "مشكول",
       "count": 1,
@@ -7564,14 +7569,6 @@
       "defined_in_terminology": false
     },
     "يضلّل": {
-      "kind": "مشكول",
-      "count": 1,
-      "documents": [
-        "special-2026-10-15-GFS-MACR"
-      ],
-      "defined_in_terminology": false
-    },
-    "يوفّر": {
       "kind": "مشكول",
       "count": 1,
       "documents": [
@@ -7812,14 +7809,6 @@
       "defined_in_terminology": false
     },
     "وخطِر": {
-      "kind": "مشكول",
-      "count": 1,
-      "documents": [
-        "special-2026-10-15-GFS"
-      ],
-      "defined_in_terminology": false
-    },
-    "وطُلب": {
       "kind": "مشكول",
       "count": 1,
       "documents": [
@@ -8452,14 +8441,6 @@
       "defined_in_terminology": false
     },
     "فعلًا": {
-      "kind": "مشكول",
-      "count": 1,
-      "documents": [
-        "GFS-MACR-المعتمد-2026-10-17"
-      ],
-      "defined_in_terminology": false
-    },
-    "فغيّرت": {
       "kind": "مشكول",
       "count": 1,
       "documents": [
@@ -9484,6 +9465,14 @@
       "defined_in_terminology": false
     },
     "قصيراً": {
+      "kind": "مشكول",
+      "count": 1,
+      "documents": [
+        "التقرير-التراكمي-الواسع-28-فبراير-الى-11-أكتوبر-2026"
+      ],
+      "defined_in_terminology": false
+    },
+    "لتغيّر": {
       "kind": "مشكول",
       "count": 1,
       "documents": [

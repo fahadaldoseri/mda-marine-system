@@ -127,7 +127,7 @@ def sanitize_all():
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
-    for part in ("brain", "site"):
+    for part in ("brain", "site", "skills"):
         if (OUT / part).exists():
             shutil.rmtree(OUT / part)
         (OUT / part).mkdir(parents=True)
@@ -143,6 +143,11 @@ def main():
             shutil.copy2(src, dst)
     copy_tree(BRAIN, OUT / "brain", "brain", BRAIN_SKIP_DIRS, BRAIN_SKIP_FILES)
     copy_tree(SITE, OUT / "site", "site", SITE_SKIP_DIRS, SITE_SKIP_FILES)
+    # المهارتان الحاكمتان للتشغيل — تُنسخان مع النظام ليبقى المرجع حديثًا على أي جهاز
+    for sk in ("marine-news-brain", "military-arabic-editing"):
+        src = Path("/home/ubuntu/skills") / sk
+        if src.exists():
+            copy_tree(src, OUT / "skills" / sk, "skills", {"__pycache__", ".git"}, set())
     sanitize_all()
 
     files = sorted(p for p in OUT.rglob("*") if p.is_file() and ".git/" not in p.as_posix())
