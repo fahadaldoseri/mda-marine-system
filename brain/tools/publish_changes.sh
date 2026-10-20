@@ -48,6 +48,17 @@ done
 for sk in marine-news-brain military-arabic-editing; do
   [ -f "$_SK/$sk/SKILL.md" ] || { echo "  ✘ مهارة مفقودة: $sk"; FAIL=1; }
 done
+# شواهد القواعد المعتمدة — عطل ك-48: فُقدت قواعد معتمدة ثم نُسخ النقص فوق المستودع.
+# القاعدة: ما نقص يُستعاد من المستودع، ولا يُدفع نقص فوقه.
+SK_OUT=$(python3 "$_B/validators/check_skills_integrity.py" 2>&1); SK_RC=$?
+echo "$SK_OUT" | tail -4
+if [ "$SK_RC" = "2" ]; then
+  echo "  ↩ استعادة المهارات من المستودع قبل الدفع"
+  bash "$_B/tools/restore_skills.sh" 2>&1 | tail -3
+  SK_OUT=$(python3 "$_B/validators/check_skills_integrity.py" 2>&1); SK_RC=$?
+  echo "$SK_OUT" | tail -3
+  [ "$SK_RC" = "2" ] && { echo "  ✘ نقص قواعد لم يُستعد — أوقف الدفع"; FAIL=1; }
+fi
 
 # 3) فحص الأسرار — فشل مغلق
 say "3) فحص الأسرار"
