@@ -1076,6 +1076,10 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
     threat = meta.get("threat_level", "")
     tcls = threat_class(threat) if threat else ""
 
+    # قاموس الرموز والمصطلحات: يُطبع قسمًا مستقلًا بعد الخلاصة.
+    # عطل ك-36: كان في تذييل الصفحة، وأنماط الطباعة تخفي التذييل، فغاب عن PDF تمامًا.
+    glossary_html = BLK.glossary(meta.get("glossary"))
+
     body = []
     for idx, sec in enumerate(sections):
         t = sec["title"]
@@ -1104,6 +1108,13 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
                 break
         body.append(section_html)
         body.append("</section>")
+        if "الخلاصة" in t and glossary_html:
+            body.append(
+                '<section class="doc reveal" id="sec-glossary" aria-labelledby="h-glossary">'
+                '<h2 id="h-glossary"><span class="ico">' + icon("source") + '</span>قاموس الرموز والمصطلحات</h2>'
+                '<div class="h-rule"></div>'
+                '<p class="sec-lede">تعريفات الرموز والمصطلحات المستخدمة في هذا التقرير.</p>'
+                + glossary_html + "</section>")
 
     title = meta.get("title") or DAILY_TITLE
     sub = meta.get("subtitle") or ""
@@ -1137,7 +1148,6 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
     decision_html = BLK.decision_card(meta.get("decision_card"), inline)
     rkey_html = BLK.reading_key() if any("[" in l and "]" in l for l in md.split("\n")) else ""
     changes_html = BLK.changes_block(meta.get("changes"), inline)
-    glossary_html = BLK.glossary(meta.get("glossary"))
     ledger_html = (
         f'<div class="glossary">السجل التراكمي: '
         f'<a class="bidi" href="{esc(meta["ledger_url"])}" target="_blank" rel="noopener noreferrer">{esc(meta["ledger_url"])}</a></div>'
@@ -1202,7 +1212,6 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
     <b>ملاحظة مهنية:</b> {inline(meta.get("footer_note") or "هذا التقرير يعتمد على المصادر المعلنة فقط. لا تُجمع البلاغات كعدد هجمات، ولا يُنسب أي فعل إلى جهة إلا وفق مصدر رسمي مباشر.", defs)}
     <br><b>وقت الإصدار:</b> <bdi class="bidi">{esc(generated)}</bdi> — <b>المرجع الزمني:</b> UTC.
     {ledger_html}
-    {glossary_html}
   </footer>
 </div>
 <script>{SCRIPT}</script>
