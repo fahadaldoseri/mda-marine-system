@@ -151,9 +151,6 @@ body::before{
     radial-gradient(900px 480px at 6% 4%, rgba(77,157,255,.06), transparent 62%);
 }
 a{color:var(--accent);text-decoration:none}
-/* عطل ك-74: روابط المتن كانت تتميّز باللون وحده (تباين 1.43 مع النص المحيط)،
-   وهو مخالف WCAG 2.1 AA — 1.4.1. الخط السفلي يمنح تمييزًا غير لوني. */
-p a,li a,td a,.src a,.src-note a,.cite-ref,.sn-links a,.foot a,footer a,span a{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
 a:hover{text-decoration:underline}
 section.doc p,section.doc li,.card p,.src,.foot,.notice,blockquote{overflow-wrap:anywhere}
 a:focus-visible,.btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
@@ -548,6 +545,12 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 }
 
 }
+
+/* ── تمييز الروابط داخل النص (WCAG 2.1 AA — 1.4.1) ──
+   عطل ك-79: كُتبت هذه القاعدة أولًا فأبطلتها قواعد التنقل اللاحقة (.site-nav a)
+   لأن تساوي الخصوصية يُحسم بالترتيب. موضعها الآن نهاية ورقة الأنماط. */
+.site-nav a,.sn-links a,.sn-foot a,.foot a,footer a,.glossary a,p a,li a,td a,
+.src a,.src-note a,.cite-ref{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
 """
 
 SCRIPT = """
