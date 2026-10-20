@@ -94,16 +94,26 @@ def main() -> int:
     (d / 'manifest.json').write_text(json.dumps(recs, ensure_ascii=False, indent=1), encoding='utf-8')
 
     healthy = sum(1 for r in recs if r['status'] == 'saved')
+    browser = sum(1 for r in recs if r['status'] == 'browser_only')
     shells = sum(1 for r in recs if r['status'] == 'empty_shell')
     failed = sum(1 for r in recs if r['status'] == 'failed')
-    status = 'ok' if healthy == len(recs) else ('failed' if healthy == 0 else 'degraded')
-    print(f"  أصول صالحة: {healthy}/{len(recs)} · هيكلية فارغة: {shells} · فشل: {failed} · البيان: {d/'manifest.json'}")
+    # عطل ك-71: المتعذّر بحماية بشرية كان يجعل اليوم «متعذّرًا» بلا حاجة.
+    # الحالة متعذّرة فقط عند فشل حقيقي أو هيكل فارغ.
+    healthy_total = healthy + browser
+    # «مُثبَت» = أصل محفوظ أو متعذّر بسبب موثّق (حماية بشرية) — لا فشل ولا هيكل فارغ
+    status = 'ok' if (healthy_total == len(recs) and failed == 0 and shells == 0) \
+        else ('failed' if healthy == 0 and browser == 0 else 'degraded')
+    print(f"  أصول مثبتة: {healthy_total}/{len(recs)} (محفوظ {healthy} · حماية بشرية {browser})"
+          f" · هيكلية فارغة: {shells} · فشل: {failed} · البيان: {d/'manifest.json'}")
     for r in recs:
-        if r['status'] != 'saved':
+        if r['status'] == 'browser_only':
+            print(f"   ◐ [يُفحص بالمتصفح] {r['url'][:58]}")
+        elif r['status'] != 'saved':
             print(f"   ✘ [{r['status']}] {r['url'][:64]} → {r.get('error','')[:60]}")
     (d / 'status.json').write_text(json.dumps({
         'date': day, 'status': status, 'checked': len(recs), 'healthy': healthy,
-        'empty_shell': shells, 'failed': failed, 'min_text_chars': MIN_TEXT_CHARS,
+        'empty_shell': shells, 'failed': failed, 'browser_only': browser,
+        'min_text_chars': MIN_TEXT_CHARS,
         'urls_not_proven': [r['url'] for r in recs if r['status'] != 'saved'],
         'written_utc': dt.datetime.now(dt.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
     }, ensure_ascii=False, indent=1), encoding='utf-8')

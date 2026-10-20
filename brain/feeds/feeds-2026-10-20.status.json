@@ -9,7 +9,7 @@
  ],
  "fail_ratio": 0.0,
  "fail_ratio_limit": 0.2,
- "items": 1108,
+ "items": 1089,
  "checked_feeds": [
   {
    "num": 6,
@@ -19,7 +19,7 @@
    "via": "primary",
    "fetched_url": "https://straits.live/feed.xml",
    "items_count": 57,
-   "content_chars": 25527,
+   "content_chars": 25159,
    "tls_verification": "verified"
   },
   {
@@ -30,7 +30,7 @@
    "via": "primary",
    "fetched_url": "https://straits.live/briefs/feed.xml",
    "items_count": 60,
-   "content_chars": 106940,
+   "content_chars": 106951,
    "tls_verification": "verified"
   },
   {
@@ -41,7 +41,7 @@
    "via": "primary",
    "fetched_url": "https://gcaptain.com/feed/",
    "items_count": 12,
-   "content_chars": 2834,
+   "content_chars": 2884,
    "tls_verification": "verified"
   },
   {
@@ -51,8 +51,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://services.tradewindsnews.com/api/feed/rss",
-   "items_count": 178,
-   "content_chars": 107930,
+   "items_count": 179,
+   "content_chars": 108624,
    "tls_verification": "verified"
   },
   {
@@ -74,7 +74,7 @@
    "via": "primary",
    "fetched_url": "https://www.ajnet.me/rss",
    "items_count": 25,
-   "content_chars": 10013,
+   "content_chars": 10073,
    "tls_verification": "verified"
   },
   {
@@ -85,7 +85,7 @@
    "via": "primary",
    "fetched_url": "https://www.aljazeera.com/xml/rss/all.xml",
    "items_count": 25,
-   "content_chars": 7338,
+   "content_chars": 7391,
    "tls_verification": "verified"
   },
   {
@@ -104,10 +104,10 @@
    "name": "قناة العربية",
    "primary_url": "https://www.alarabiya.net/feed/rss2/ar.xml",
    "ok": true,
-   "via": "fallback:jina.ai/alarabiya-rss",
-   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
-   "items_count": 30,
-   "content_chars": 122289,
+   "via": "fallback:jina.ai/alarabiya-home",
+   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/",
+   "items_count": 50,
+   "content_chars": 70893,
    "tls_verification": "verified"
   },
   {
@@ -115,10 +115,10 @@
    "name": "قناة العربية",
    "primary_url": "https://www.alarabiya.net/feed/rss2/ar/arab-and-world.xml",
    "ok": true,
-   "via": "fallback:jina.ai/alarabiya-home",
-   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/",
-   "items_count": 50,
-   "content_chars": 70893,
+   "via": "fallback:jina.ai/alarabiya-rss",
+   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
+   "items_count": 30,
+   "content_chars": 122770,
    "tls_verification": "verified"
   },
   {
@@ -126,10 +126,10 @@
    "name": "قناة العربية",
    "primary_url": "https://www.alarabiya.net/feed/rss2/ar/aswaq.xml",
    "ok": true,
-   "via": "fallback:jina.ai/alarabiya-home",
-   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/",
-   "items_count": 50,
-   "content_chars": 70893,
+   "via": "fallback:jina.ai/alarabiya-rss",
+   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
+   "items_count": 30,
+   "content_chars": 122770,
    "tls_verification": "verified"
   },
   {
@@ -206,7 +206,7 @@
    "via": "primary",
    "fetched_url": "https://qna.org.qa/en/RSS-Feeds",
    "items_count": 3,
-   "content_chars": 2319,
+   "content_chars": 2253,
    "tls_verification": "verified"
   },
   {
@@ -228,7 +228,7 @@
    "via": "primary",
    "fetched_url": "https://qna.org.qa/en/Pages/RSS-Feeds/Qatar",
    "items_count": 50,
-   "content_chars": 27945,
+   "content_chars": 27733,
    "tls_verification": "verified"
   },
   {
@@ -296,7 +296,7 @@
    "via": "fallback:omannews-home",
    "fetched_url": "https://omannews.gov.om/",
    "items_count": 50,
-   "content_chars": 7842,
+   "content_chars": 7828,
    "tls_verification": "disabled_source_28_only"
   },
   {
@@ -373,7 +373,7 @@
    "via": "primary",
    "fetched_url": "https://www.lloydslist.com/rss/lloyds-list",
    "items_count": 20,
-   "content_chars": 17350,
+   "content_chars": 17348,
    "tls_verification": "verified"
   },
   {
@@ -428,10 +428,10 @@
    "via": "primary",
    "fetched_url": "https://www.jpost.com/rss/rssfeedsmiddleeastnews.aspx",
    "items_count": 30,
-   "content_chars": 35464,
+   "content_chars": 35543,
    "tls_verification": "verified"
   }
  ],
  "failed_feeds": [],
- "written_utc": "2026-10-20T21:28:56Z"
+ "written_utc": "2026-10-20T21:57:41Z"
 }

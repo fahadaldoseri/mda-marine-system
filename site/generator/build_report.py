@@ -77,12 +77,7 @@ DESIGN_TOKENS = """
 """
 DESIGN_TOKENS = ":root{" + DESIGN_TOKENS + "}"
 
-FONT_LINK = (
-    "https://fonts.googleapis.com/css2"
-    "?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700"
-    "&family=Noto+Kufi+Arabic:wght@400;500;600;700"
-    "&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
-)
+FONT_LINK = "/assets/fonts/fonts.css"
 
 SECTION_ICONS = {
     "الخلاصة": "flag",
@@ -141,6 +136,12 @@ ICON_PATHS = {
     "source": "M4 6h16M4 12h16M4 18h10",
 }
 
+LINK_RULE = """
+/* ── تمييز الروابط داخل النص (WCAG 2.1 AA — 1.4.1) ──
+   عطل ك-79: تساوي الخصوصية يُحسم بالترتيب، فالقاعدة تُركَّب آخر كل الأنماط لتفوز. */
+.site-nav a,.sn-links a,.sn-foot a,.foot a,footer a,.glossary a,p a,li a,td a,
+.src a,.src-note a,.cite-ref{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+"""
 STYLE = """
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-padding-top:74px}
@@ -550,6 +551,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 }
 
 }
+
 """
 
 SCRIPT = """
@@ -1101,11 +1103,12 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
                 for _bn in str(bname).split('+'):
                     if block_data.get(_bn):
                         section_html += BLK.render_block(_bn, block_data[_bn], inline)
-            if "الحركة" in t:
-                section_html += '<p class="src-note">قراءة اتجاه من منصة رصد — تُراعى مهلة التحديث واحتمال انقطاع الإرسال أو spoofing.</p>'
-            if "التوزيع الجغرافي" in t:
-                section_html += '<p class="src-note">تحذيرات IHO/NAVAREA تُربط بإحداثياتها عند توفرها؛ والويب لا يستبدل البث الملاحي المعتمد.</p>'
-                break
+        # عطل ك-72: تنبيه القسم كان داخل حلقة كتل المؤشرات فيتكرر بعددها (6 مرات في إصدار 20 أكتوبر).
+        # القاعدة: تنبيه القسم يُكتب مرة واحدة في مستوى القسم لا داخل حلقة عناصره.
+        if "الحركة" in t:
+            section_html += '<p class="src-note">قراءة اتجاه من منصة رصد — تُراعى مهلة التحديث واحتمال انقطاع الإرسال أو spoofing.</p>'
+        if "التوزيع الجغرافي" in t:
+            section_html += '<p class="src-note">تحذيرات IHO/NAVAREA تُربط بإحداثياتها عند توفرها؛ والويب لا يستبدل البث الملاحي المعتمد.</p>'
         body.append(section_html)
         body.append("</section>")
         if "الخلاصة" in t and glossary_html:
@@ -1163,10 +1166,8 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="referrer" content="no-referrer">
 <script>document.documentElement.className='js';</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="{FONT_LINK}">
-<style>{DESIGN_TOKENS}{STYLE}{BLK.STYLE_BLOCKS}{DAYLIGHT}</style>
+<style>{DESIGN_TOKENS}{STYLE}{BLK.STYLE_BLOCKS}{DAYLIGHT}{LINK_RULE}</style>
 </head>
 <body>
 <div class="topbar no-print">
