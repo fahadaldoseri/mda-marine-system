@@ -99,7 +99,17 @@ def main() -> int:
     g = "0) البيئة"
     v = subprocess.run(["python3", "--version"], capture_output=True, text=True).stdout.strip()
     ENV_FACTS.append(f"بايثون: {v}")
-    for mod in ("docx", "PIL", "requests", "playwright", "shapely", "pymysql", "lxml"):
+    # عطل ك-66: القائمة اليدوية طلبت حزمة لا يستعملها النظام (pymysql) فأنذرت بلا سبب.
+    # القاعدة: الفحص يقرأ requirements.txt نفسها — مصدر واحد للحقيقة.
+    _req = BRAIN / "requirements.txt"
+    _mods = []
+    if _req.exists():
+        for _ln in _req.read_text(encoding="utf-8").splitlines():
+            _ln = _ln.split("#")[0].strip()
+            if _ln and "==" in _ln:
+                _mods.append(_ln.split("==")[0].strip().split("[")[0])
+    _mods = sorted(set(_mods)) or ["docx", "PIL", "requests", "playwright", "shapely", "lxml"]
+    for mod in _mods:
         try:
             __import__(mod)
             probe(g, f"حزمة بايثون: {mod}", True, "متوفرة")

@@ -19,6 +19,7 @@ import html
 import json
 import os as _os
 import sys as _sys
+import time
 _sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
 from normalize_digits import to_latin  # الأرقام عند المصدر: المولَّد يُكتب لاتينيًا
 import re
@@ -36,6 +37,11 @@ HEADERS = {
     'Accept': 'application/rss+xml, application/atom+xml, application/xml, text/xml, text/html;q=0.9, */*;q=0.1',
     'Referer': 'https://www.google.com/',
 }
+# مصادر بلا تغذية آلية رسمية (موقعها JS ولا تغذية معلنة): تُقيَّد «يُفحص بالمتصفح»
+# ولا تُحسب فشلًا — لا نبني مسارًا يتجاوز الحماية (سياسة المستخدم).
+BROWSER_ONLY = {
+    26: 'موقع JS بلا تغذية رسمية معلنة — يُفحص بالمتصفح',
+}
 FAIL_RATIO_LIMIT = 0.20
 MIN_CONTENT_CHARS = 400
 MIN_ITEMS = 1
@@ -47,6 +53,12 @@ UNVERIFIED_TLS_CONTEXT = ssl._create_unverified_context()
 # substitute news sources.  Keep the via labels stable: they are written to the
 # status file for auditability.
 FALLBACK_ROUTES = {
+    # عطل ك-65: وام (25) وواس (26) مواقع JS بلا تغذية RSS، فتُسجَّلان فشلًا كل يوم.
+    # وام لها قناة رسمية معلنة على تلغرام (t.me/wamnews_en) — قناة مملوكة للجهة، لا تجاوز حماية.
+    25: [
+        {'url': 'https://t.me/s/wamnews_en',
+         'via': 'official-telegram:wamnews_en'},
+    ],
     14: [
         {'url': 'https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml',
          'via': 'fallback:jina.ai/alarabiya-rss'},
@@ -256,11 +268,24 @@ def main():
         return 2
     with ThreadPoolExecutor(max_workers=10) as ex:
         res = list(ex.map(fetch, F))
+    # عطل ك-68: انقطاع اتصال عابر لمصدر واحد كان يُسجَّل فشلًا نهائيًا. إعادة محاولة واحدة.
+    retry = [r for r in res if not r['ok'] and r['num'] not in BROWSER_ONLY
+             and 'timed out' in str(r.get('error', '')).lower()]
+    if retry:
+        time.sleep(5)
+        again = {r['num']: r for r in [fetch(x) for x in retry]}
+        res = [again.get(r['num'], r) if (not r['ok'] and r['num'] in again) else r for r in res]
     ok = [r for r in res if r['ok']]
-    failed = [r for r in res if not r['ok']]
+    browser_only = [r for r in res if not r['ok'] and r['num'] in BROWSER_ONLY]
+    failed = [r for r in res if not r['ok'] and r['num'] not in BROWSER_ONLY]
     total = sum(len(r['items']) for r in ok)
-    ratio = len(failed) / len(res)
-    print(f"  نجح: {len(ok)} · فشل: {len(failed)} · عناصر مقروءة: {total}")
+    # القياس بعدد المصادر لا بعدد المسارات: المسار الواحد بسطرين لا يعني مصدرين فاشلين (عطل ك-64)
+    n_src = len({r['num'] for r in res})
+    n_fail = len({r['num'] for r in failed})
+    ratio = n_fail / n_src if n_src else 1.0
+    print(f"  نجح: {len(ok)} · فشل: {n_fail} مصدرًا · يُفحص بالمتصفح: {len({r['num'] for r in browser_only})} · عناصر مقروءة: {total}")
+    for r in browser_only:
+        print(f"   ◐ {r['num']} {r['name'][:34]}: {BROWSER_ONLY[r['num']]}")
     for r in failed:
         print(f"   ✘ {r['num']} {r['name'][:34]}: {r['block_reason']}")
 
@@ -292,7 +317,8 @@ def main():
         **({'block_reason': r['block_reason']} if not r['ok'] else {}),
     } for r in res]
     (OUT / f'feeds-{stamp}.status.json').write_text(to_latin(json.dumps({
-        'date': stamp, 'status': status, 'checked': len(res), 'ok': len(ok), 'failed': len(failed),
+        'date': stamp, 'status': status, 'checked': n_src, 'ok': len({r['num'] for r in ok}),
+        'failed': n_fail, 'browser_only': sorted({r['num'] for r in browser_only}),
         'fail_ratio': round(ratio, 3), 'fail_ratio_limit': FAIL_RATIO_LIMIT, 'items': total,
         'checked_feeds': checked_feeds,
         'failed_feeds': [{

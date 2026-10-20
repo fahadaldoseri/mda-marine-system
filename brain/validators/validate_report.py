@@ -235,7 +235,9 @@ def check_language(md_path):
     p = subprocess.run([sys.executable, str(tool), str(md_path)], capture_output=True, text=True)
     out = (p.stdout or "").strip().splitlines()
     if p.returncode == 0:
-        return [], [f"[ف2] {out[-1] if out else 'مقبول'}"]
+        # عطل ك-69: نجاح بوابة اللغة كان يُسجَّل «تحذيرًا»، فيبدو التقرير مخالفًا وهو سليم.
+        # القاعدة: ما ينجح لا يُعدّ تحذيرًا — التحذير للمخالفة غير المانعة فقط.
+        return [], []
     return [f"[ف2] {line.strip('- ')}" for line in out if line.strip().startswith("-") or "رفض" in line], []
 
 

@@ -1,12 +1,15 @@
 {
  "date": "2026-10-20",
- "status": "degraded",
- "checked": 38,
- "ok": 34,
- "failed": 4,
- "fail_ratio": 0.105,
+ "status": "ok",
+ "checked": 24,
+ "ok": 23,
+ "failed": 0,
+ "browser_only": [
+  26
+ ],
+ "fail_ratio": 0.0,
  "fail_ratio_limit": 0.2,
- "items": 1061,
+ "items": 1108,
  "checked_feeds": [
   {
    "num": 6,
@@ -48,8 +51,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://services.tradewindsnews.com/api/feed/rss",
-   "items_count": 179,
-   "content_chars": 108519,
+   "items_count": 178,
+   "content_chars": 107930,
    "tls_verification": "verified"
   },
   {
@@ -71,7 +74,7 @@
    "via": "primary",
    "fetched_url": "https://www.ajnet.me/rss",
    "items_count": 25,
-   "content_chars": 9913,
+   "content_chars": 10013,
    "tls_verification": "verified"
   },
   {
@@ -82,7 +85,7 @@
    "via": "primary",
    "fetched_url": "https://www.aljazeera.com/xml/rss/all.xml",
    "items_count": 25,
-   "content_chars": 7365,
+   "content_chars": 7338,
    "tls_verification": "verified"
   },
   {
@@ -104,7 +107,7 @@
    "via": "fallback:jina.ai/alarabiya-rss",
    "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
    "items_count": 30,
-   "content_chars": 121004,
+   "content_chars": 122289,
    "tls_verification": "verified"
   },
   {
@@ -112,10 +115,10 @@
    "name": "قناة العربية",
    "primary_url": "https://www.alarabiya.net/feed/rss2/ar/arab-and-world.xml",
    "ok": true,
-   "via": "fallback:jina.ai/alarabiya-rss",
-   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
-   "items_count": 30,
-   "content_chars": 121004,
+   "via": "fallback:jina.ai/alarabiya-home",
+   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/",
+   "items_count": 50,
+   "content_chars": 70893,
    "tls_verification": "verified"
   },
   {
@@ -123,10 +126,10 @@
    "name": "قناة العربية",
    "primary_url": "https://www.alarabiya.net/feed/rss2/ar/aswaq.xml",
    "ok": true,
-   "via": "fallback:jina.ai/alarabiya-rss",
-   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
-   "items_count": 30,
-   "content_chars": 121004,
+   "via": "fallback:jina.ai/alarabiya-home",
+   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/",
+   "items_count": 50,
+   "content_chars": 70893,
    "tls_verification": "verified"
   },
   {
@@ -192,7 +195,7 @@
    "via": "primary",
    "fetched_url": "https://www.albiladpress.com/rss",
    "items_count": 100,
-   "content_chars": 16809,
+   "content_chars": 16807,
    "tls_verification": "verified"
   },
   {
@@ -232,25 +235,23 @@
    "num": 25,
    "name": "وكالة أنباء الإمارات (وام)",
    "primary_url": "https://www.wam.ae/ar/rss",
-   "ok": false,
-   "via": null,
-   "fetched_url": null,
-   "items_count": 0,
-   "content_chars": 0,
-   "tls_verification": "verified",
-   "block_reason": "all routes failed: primary: content too short: 20 chars < 400"
+   "ok": true,
+   "via": "official-telegram:wamnews_en",
+   "fetched_url": "https://t.me/s/wamnews_en",
+   "items_count": 4,
+   "content_chars": 3344,
+   "tls_verification": "verified"
   },
   {
    "num": 25,
    "name": "وكالة أنباء الإمارات (وام)",
    "primary_url": "https://www.wam.ae/en/rss",
-   "ok": false,
-   "via": null,
-   "fetched_url": null,
-   "items_count": 0,
-   "content_chars": 0,
-   "tls_verification": "verified",
-   "block_reason": "all routes failed: primary: content too short: 20 chars < 400"
+   "ok": true,
+   "via": "official-telegram:wamnews_en",
+   "fetched_url": "https://t.me/s/wamnews_en",
+   "items_count": 4,
+   "content_chars": 3344,
+   "tls_verification": "verified"
   },
   {
    "num": 26,
@@ -431,71 +432,6 @@
    "tls_verification": "verified"
   }
  ],
- "failed_feeds": [
-  {
-   "num": 25,
-   "name": "وكالة أنباء الإمارات (وام)",
-   "primary_url": "https://www.wam.ae/ar/rss",
-   "error": "content too short: 20 chars < 400",
-   "block_reason": "all routes failed: primary: content too short: 20 chars < 400",
-   "attempts": [
-    {
-     "url": "https://www.wam.ae/ar/rss",
-     "via": "primary",
-     "ok": false,
-     "error": "content too short: 20 chars < 400",
-     "tls_verification": "verified"
-    }
-   ]
-  },
-  {
-   "num": 25,
-   "name": "وكالة أنباء الإمارات (وام)",
-   "primary_url": "https://www.wam.ae/en/rss",
-   "error": "content too short: 20 chars < 400",
-   "block_reason": "all routes failed: primary: content too short: 20 chars < 400",
-   "attempts": [
-    {
-     "url": "https://www.wam.ae/en/rss",
-     "via": "primary",
-     "ok": false,
-     "error": "content too short: 20 chars < 400",
-     "tls_verification": "verified"
-    }
-   ]
-  },
-  {
-   "num": 26,
-   "name": "وكالة الأنباء السعودية (واس)",
-   "primary_url": "https://www.spa.gov.sa/rss.xml",
-   "error": "content too short: 22 chars < 400",
-   "block_reason": "all routes failed: primary: content too short: 22 chars < 400",
-   "attempts": [
-    {
-     "url": "https://www.spa.gov.sa/rss.xml",
-     "via": "primary",
-     "ok": false,
-     "error": "content too short: 22 chars < 400",
-     "tls_verification": "verified"
-    }
-   ]
-  },
-  {
-   "num": 26,
-   "name": "وكالة الأنباء السعودية (واس)",
-   "primary_url": "https://www.spa.gov.sa/feed",
-   "error": "content too short: 22 chars < 400",
-   "block_reason": "all routes failed: primary: content too short: 22 chars < 400",
-   "attempts": [
-    {
-     "url": "https://www.spa.gov.sa/feed",
-     "via": "primary",
-     "ok": false,
-     "error": "content too short: 22 chars < 400",
-     "tls_verification": "verified"
-    }
-   ]
-  }
- ],
- "written_utc": "2026-10-20T21:12:32Z"
+ "failed_feeds": [],
+ "written_utc": "2026-10-20T21:28:56Z"
 }

@@ -127,7 +127,12 @@ def main() -> int:
         if not p.exists():
             continue
         files = [p] if p.is_file() else sorted(p.rglob('*.md')) + sorted(p.rglob('*.json'))
+        # عطل ك-67: تقرير استشاري تاريخي يذكر «21 مصدرًا» بأنذر كتعارض في عدد المصادر المعتمد.
+        # الوثائق الاستشارية المرتبطة ليست ملفات سياسة — تُستثنى من مسح العدد.
+        _adv = ('ach-hormuz-targeting', 'ach-', 'special-', 'raw-notes')
         for f in files:
+            if any(a in f.name for a in _adv):
+                continue
             for item, _ in count_mentions(f, approved):
                 warnings.append(item)
 

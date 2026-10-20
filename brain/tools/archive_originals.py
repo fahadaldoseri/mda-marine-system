@@ -25,6 +25,11 @@ from pathlib import Path
 
 B = Path(f'{BRAIN}')
 UA = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124 Safari/537.36'}
+BROWSER_ONLY_URLS = {
+    'https://www.ukmto.org/recent-incidents',
+    'https://www.ukmto.org/advisories',
+}
+BROWSER_ONLY_REASON = 'محمي بتحقق بشري — لا يُجلب آليًا (سياسة: لا تجاوز للحماية) · يُفحص بالمتصفح'
 MIN_TEXT_CHARS = 400
 
 
@@ -40,6 +45,11 @@ def grab(url: str, day: str) -> dict:
     d = B / 'archive' / 'originals' / day
     d.mkdir(parents=True, exist_ok=True)
     rec = {'url': url, 'utc': dt.datetime.now(dt.timezone.utc).isoformat(timespec='seconds') + 'Z'}
+    # عطل ك-63: مصادر محمية بتحقق بشري (UKMTO) تفشل آليًا فيُسجَّل فشل يومي بلا معنى.
+    # السياسة: لا نبني مسارًا يتجاوز الحماية. يُقيَّد السبب ويُصنَّف «يُفحص بالمتصفح».
+    if url in BROWSER_ONLY_URLS:
+        rec.update({'status': 'browser_only', 'error': BROWSER_ONLY_REASON})
+        return rec
     try:
         r = urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=40)
         body = r.read()
