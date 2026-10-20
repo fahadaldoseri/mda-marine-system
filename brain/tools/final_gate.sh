@@ -56,6 +56,10 @@ step "فحص ما قبل التشغيل" 2 python3 "$B/tools/preflight_check.py"
 step "مدقق التقرير (الواجهة)" 2 python3 "$B/validators/validate_report.py" "$B/web/meta/$D.json" --md "$B/reports/$D-sectioned.md"
 step "بوابة الأسلوب" 2 python3 "$B/validators/check_style.py" "$B/reports/$D-sectioned.md"
 step "بوابة اللغة" 2 python3 "$B/validators/check_language.py" "$B/reports/$D-sectioned.md"
+# بوابة الفهم: رموز بلا تعريف · اصطلاحات حاجبة · محتوى داخلي منشور · التباس «قُطر/قطر» · تعارض أرقام
+# المرحلة تُقرأ من appendices/comprehension-stages.json: 0 تحذيري · 1 يمنع ف3 · 2 يضيف ف4+ف5 · 3 يضيف ف1 · 4 يمنع الكل
+COMP_STAGE=$(python3 -c "import json;print(json.load(open('$B/appendices/comprehension-stages.json'))['stage'])" 2>/dev/null || echo 0)
+step "بوابة الفهم (مرحلة $COMP_STAGE)" 2 python3 "$B/validators/check_comprehension.py" --date "$D"
 step "بوابة التحليل الاستخباري" 2 python3 "$B/validators/check_intel.py" "$B/reports/$D-sectioned.md" "$B/web/meta/$D.json"
 step "تغطية فحص العقوبات" 2 python3 "$B/validators/check_ofac_coverage.py" --date "$D"
 step "عدد المصادر (مصدر واحد)" 2 python3 "$B/validators/check_sources_count.py"
@@ -102,7 +106,3 @@ PY
 echo "===== نهاية البوابة: $([ "$WORST" = "0" ] && echo 'نجاح' || { [ "$WORST" = "1" ] && echo 'نجاح مع تحذير' || echo 'مانع — التسليم موقوف'; }) (رمز $WORST) ====="
 echo "السجلات: $LOGDIR"
 exit "$WORST"
-# بوابة الفهم: رموز بلا تعريف · اصطلاحات حاجبة · محتوى داخلي منشور · التباس «قُطر/قطر» · تعارض أرقام
-# المرحلة تُقرأ من appendices/comprehension-stages.json: 0 تحذيري · 1 يمنع ف3 · 2 يضيف ف4+ف5 · 3 يضيف ف1 · 4 يمنع الكل
-COMP_STAGE=$(python3 -c "import json;print(json.load(open('$B/appendices/comprehension-stages.json'))['stage'])" 2>/dev/null || echo 0)
-step "بوابة الفهم (مرحلة $COMP_STAGE)" 2 python3 "$B/validators/check_comprehension.py" --date "$D"

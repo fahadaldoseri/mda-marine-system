@@ -128,6 +128,17 @@ def scrub(text: str) -> str:
         return text
 
 
+def glossary_text(meta: str) -> str:
+    """قاموس الرموز والمصطلحات المنشور في ملف الواجهة — يراه القارئ مع المتن."""
+    if not meta:
+        return ""
+    try:
+        g = json.loads(meta).get("glossary") or {}
+        return "\n".join(f"{k}: {v}" for k, v in g.items())
+    except Exception:
+        return ""
+
+
 def check_symbols(text: str) -> list:
     found = []
     for sym, keys in REQUIRED_SYMBOLS.items():
@@ -195,7 +206,8 @@ def check_summary_numbers(md: str, meta: str) -> list:
 def run_checks(md: str, meta: str = "") -> dict:
     body = strip_markup(md)
     return {
-        "ف1": check_symbols(body),
+        # ف1 يفحص المتن + قاموس الرموز المنشور في ملف الواجهة، لأن القارئ يراهما معًا
+        "ف1": check_symbols(body + "\n" + glossary_text(meta)),
         "ف2": check_ambiguous(body),
         "ف3": check_internal(md),
         "ف4": check_tug_confusion(body),

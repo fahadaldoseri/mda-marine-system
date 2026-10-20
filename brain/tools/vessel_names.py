@@ -39,6 +39,8 @@ DENY = {
     'ISPS', 'MARSEC', 'NAVWARN', 'MRCC', 'SAR', 'OIL', 'LNG', 'LPG', 'VLCC', 'SBM',
     'ADNOC', 'AD', 'DPA', 'JWC', 'LMA', 'IUMI', 'BIMCO', 'DWT', 'TEU', 'AIS', 'MMSI',
     'CH-', 'REV', 'NO', 'WARNING', 'SUMMARY', 'ANNEX', 'NATO', 'EUCENTCOM', 'CPI',
+    # رموز ومصطلحات تحليلية تُكتب لاتينية في القاموس فلا تُقرأ أسماء سفن
+    'ICD', 'DTG', 'EST', 'ACH', 'UTC', 'TZ', 'MDA', 'RTL',
 }
 
 _TOKEN = r'[A-Z][A-Z0-9]*(?:[- ][A-Z0-9]+){0,3}'
@@ -98,8 +100,10 @@ def from_report(day: str) -> list[str]:
     meta = B / 'web' / 'meta' / f'{day}.json'
     if meta.exists():
         try:
-            txt = json.dumps(json.loads(meta.read_text(encoding='utf-8')), ensure_ascii=False)
-            names += extract(txt)
+            data = json.loads(meta.read_text(encoding='utf-8'))
+            # القاموس يشرح رموزًا لاتينية (ICD · DTG · EST) وليست أسماء سفن، فيُستثنى من الاستخراج
+            data.pop('glossary', None)
+            names += extract(json.dumps(data, ensure_ascii=False))
         except json.JSONDecodeError:
             pass
     seen, out = set(), []
