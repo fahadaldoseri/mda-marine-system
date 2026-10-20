@@ -191,7 +191,7 @@ def main() -> int:
         def strip(node):
             if isinstance(node, dict):
                 return {k: strip(v) for k, v in node.items()
-                        if not re.search(r"(time|date|updated|generated|stamp|_at$|log)", k, re.I)}
+                        if not re.search(r"(time|date|updated|generated|stamp|_at$|log|_utc$|rebuilt)", k, re.I)}
             if isinstance(node, list):
                 return [strip(v) for v in node]
             return node

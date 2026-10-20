@@ -82,6 +82,21 @@ prev_codes = {r.get('display_code') for r in (prev_master.get('events') or []) i
 prev_merged_utc = (prev_master.get('merge_log') or {}).get('merged_utc', '')
 # قائمة سجلات واحدة: `events` — المفتاح المكرر `records` أُزيل (بند 10)
 records = list(frozen.get('events') or frozen.get('records') or [])
+# ── عطل ك-74: الدمج كان تراكميًا لا استبداليًا، فكل جولة تُضيف سجلات اليوم نفسه
+#    برموز جديدة فيتضخم الدفتر وتكسر العدّادات. القاعدة: الدمج استبدال بالتاريخ
+#    واسم الملف اليومي معًا — يُزال ما جاء منه ثم يُعاد إدراجه مرة واحدة.
+_before = len(records)
+_kept, _removed = [], 0
+for _r in records:
+    same_file = (_r.get('merged_from') or '') == DAILY.name if 'DAILY' in dir() else False
+    same_date = str(_r.get('date_start') or '') == DATE if 'DATE' in dir() else False
+    if same_file or same_date:
+        _removed += 1
+    else:
+        _kept.append(_r)
+if _removed:
+    print(f"  · استبدال: أُزيل {_removed} سجلًا سابقًا لنفس التاريخ قبل إعادة الإدراج")
+records = _kept
 by_id = {r['event_id']: r for r in records}
 max_seq = {}
 for r in records:
@@ -128,13 +143,14 @@ for f in sorted(DAILY.glob('*.json')):
             'deduplication_note': 'مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة',
             'report_sections': ['الوقائع الجديدة'],
             'merged_from': f.name,
-            'merged_utc': utcnow(),
+            'merged_utc': (by_id.get(locals().get('rec', {}).get('event_id') or '', {}).get('merged_utc') or utcnow()),
         }
         records.append(rec)
         by_id[rec['event_id']] = rec
         added.append(f"{code} → {rec['event_id']}")
         file_added += 1
     if file_added:
+        source_files = [sf for sf in source_files if (sf or {}).get('file') != f.name]
         source_files.append({'file': f.name, 'added': file_added})
 
 records.sort(key=lambda r: (r.get('date_start') or '', r.get('event_id') or ''))
