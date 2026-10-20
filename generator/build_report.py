@@ -1101,11 +1101,12 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
                 for _bn in str(bname).split('+'):
                     if block_data.get(_bn):
                         section_html += BLK.render_block(_bn, block_data[_bn], inline)
-            if "الحركة" in t:
-                section_html += '<p class="src-note">قراءة اتجاه من منصة رصد — تُراعى مهلة التحديث واحتمال انقطاع الإرسال أو spoofing.</p>'
-            if "التوزيع الجغرافي" in t:
-                section_html += '<p class="src-note">تحذيرات IHO/NAVAREA تُربط بإحداثياتها عند توفرها؛ والويب لا يستبدل البث الملاحي المعتمد.</p>'
-                break
+        # عطل ك-72: تنبيه القسم كان داخل حلقة كتل المؤشرات فيتكرر بعددها (6 مرات في إصدار 20 أكتوبر).
+        # القاعدة: تنبيه القسم يُكتب مرة واحدة في مستوى القسم لا داخل حلقة عناصره.
+        if "الحركة" in t:
+            section_html += '<p class="src-note">قراءة اتجاه من منصة رصد — تُراعى مهلة التحديث واحتمال انقطاع الإرسال أو spoofing.</p>'
+        if "التوزيع الجغرافي" in t:
+            section_html += '<p class="src-note">تحذيرات IHO/NAVAREA تُربط بإحداثياتها عند توفرها؛ والويب لا يستبدل البث الملاحي المعتمد.</p>'
         body.append(section_html)
         body.append("</section>")
         if "الخلاصة" in t and glossary_html:
