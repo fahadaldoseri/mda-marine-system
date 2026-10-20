@@ -41,6 +41,10 @@ if [ ! -f "$B/reports/$D-sectioned.md" ] || [ ! -f "$B/web/meta/$D.json" ]; then
   WORST=2
 fi
 
+# تنظيف المحتوى الداخلي آليًا قبل البناء — يضمن ألا يتوقف النشر بسبب صنف معروف.
+# التنظيف لا يمنع التسليم (رمز 3)؛ والبوابة أدناه هي التي تمنع الجديد فقط.
+step "تنظيف المحتوى الداخلي" 3 python3 "$B/tools/scrub_internal.py" --date "$D" --apply
+
 if [ "$BUILD" = "1" ]; then
   step "بناء الصفحة (مزامنة + بناء)" 2 python3 "$SITE/generator/sync_from_brain.py" --date "$D"
   step "تصدير PDF المعتمد" 2 python3 "$B/tools/export_report_assets.py" --date "$D" --only pdf
@@ -99,5 +103,6 @@ echo "===== نهاية البوابة: $([ "$WORST" = "0" ] && echo 'نجاح' |
 echo "السجلات: $LOGDIR"
 exit "$WORST"
 # بوابة الفهم: رموز بلا تعريف · اصطلاحات حاجبة · محتوى داخلي منشور · التباس «قُطر/قطر» · تعارض أرقام
-# تُشغَّل تحذيرًا (رمز 1) حتى يعتمد صاحب القرار ترقيتها إلى مانع (رمز 2)
-step "بوابة الفهم (تحذيري)" 1 python3 "$B/validators/check_comprehension.py" --date "$D"
+# المرحلة تُقرأ من appendices/comprehension-stages.json: 0 تحذيري · 1 يمنع ف3 · 2 يضيف ف4+ف5 · 3 يضيف ف1 · 4 يمنع الكل
+COMP_STAGE=$(python3 -c "import json;print(json.load(open('$B/appendices/comprehension-stages.json'))['stage'])" 2>/dev/null || echo 0)
+step "بوابة الفهم (مرحلة $COMP_STAGE)" 2 python3 "$B/validators/check_comprehension.py" --date "$D"

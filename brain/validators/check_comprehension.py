@@ -1,26 +1,31 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""بوابة الفهم — تسدّ الفجوة التي لم تكن أي بوابة سابقة تقيسها.
+"""بوابة الفهم — تقيس فهم القارئ، لا شكل الكتابة.
 
-لماذا وُجدت هذه البوابة؟
-كل البوابات السابقة تقيس **شكل الكتابة**: طول الجملة، والأرقام، والنقاط،
-والرموز، والقائمة السوداء اللفظية. ولا واحدة منها تسأل السؤال الوحيد المهم:
-**هل يفهم القارئ هذه الجملة؟** ولذلك مرّت مصطلحات مبهمة ورموز بلا تعريف
-ومسارات ملفات داخلية، وهي كلها شكلها سليم وطولها مقبول.
+لماذا وُجدت؟
+كل البوابات السابقة تقيس شكل الكتابة: الطول والأرقام والنقاط والرموز وقائمة
+أسود معروفة. ولا واحدة تسأل: **هل يفهم القارئ هذه الجملة؟** ولذلك مرّت مصطلحات
+حاجبة ورموز بلا تعريف ومسارات ملفات داخلية إلى النص المنشور.
 
-ما تقيسه هذه البوابة:
+الفحوص الخمسة:
   ف1 — رمز أو اختصار بلا تعريف داخل النص (A–F / 1–6 · EST- · DTG · ICD …).
-  ف2 — اصطلاح مجرّد أو إداري يحجب المعنى عن القارئ (خط أساس · نافذة · وقت القطع …).
+  ف2 — اصطلاح مجرّد أو إداري يحجب المعنى (خط أساس · وقت القطع · فجوة التبليغ …).
   ف3 — محتوى داخلي منشور: مسارات ملفات وأسماء أدوات وعبارات إجراءات.
-  ف4 — التباس دلالي: «قُطر» (سفينة سحب) مع «قطر» (الدولة) في السطر نفسه.
-  ف5 — رقم في بطاقة الملخص لا أثر له في المتن.
+  ف4 — التباس دلالي: «قُطر» سفينة السحب مع «قطر» الدولة في السطر نفسه.
+  ف5 — تعارض بين أرقام بطاقة الملخص وأرقام المتن.
 
-رموز الخروج: 0 = مكتمل · 1 = تحذيرات · 2 = مانع (محتوى داخلي منشور)
+الترقية المرحلية (appendices/comprehension-stages.json):
+  مرحلة 0 تحذيري · 1 يمنع ف3 · 2 يمنع ف3+ف4+ف5 · 3 يضيف ف1 · 4 يمنع الكل
+  ولا تُرقّى مرحلة إلا إذا اجتازت آخر تقريرين متاحين فحوصها الجديدة، بعد
+  تطبيق المُنظّف الآلي tools/scrub_internal.py — فلا يوقف النشر إلا ما هو جديد.
+
+رموز الخروج: 0 مكتمل · 1 تحذير · 2 مانع
 
 الاستخدام:
   python3 validators/check_comprehension.py --date 2026-10-20
-  python3 validators/check_comprehension.py --md reports/2026-10-20-sectioned.md
   python3 validators/check_comprehension.py --date 2026-10-20 --json
+  python3 validators/check_comprehension.py --status
+  python3 validators/check_comprehension.py --promote
 """
 from __future__ import annotations
 
@@ -37,9 +42,10 @@ import sys
 from pathlib import Path
 
 B = Path(f"{BRAIN}")
+STAGES_FILE = B / "appendices" / "comprehension-stages.json"
+MAX_STAGE = 4
 
 # ── ف1: الرموز التي لا يجوز أن تمرّ بلا تعريف ───────────────────────────────
-# المفتاح: الرمز كما يظهر · القيمة: عبارات تدل على أن تعريفه موجود في النص
 REQUIRED_SYMBOLS = {
     "A–F / 1–6": ["موثوقية المصدر", "درجة موثوقية", "مصداقية المعلومة", "درجة المصدر"],
     "EST-": ["رمز التقدير", "رموز التقديرات", "تقدير تحليلي مرقّم"],
@@ -51,7 +57,7 @@ REQUIRED_SYMBOLS = {
     "ACH": ["تحليل الفرضيات المتنافسة", "الفرضيات المتنافسة"],
 }
 
-# ── ف2: اصطلاحات تحجب المعنى (تُبلَّغ للتعديل؛ تُرقّى بأمر صاحب القرار) ───────
+# ── ف2: اصطلاحات تحجب المعنى ───────────────────────────────────────────────
 AMBIGUOUS = {
     "خط أساس": "المعدل الطبيعي قبل الأزمة",
     "وقت القطع": "وقت إقفال المعلومات",
@@ -68,12 +74,13 @@ AMBIGUOUS = {
     "مسار الفصل الملاحي": "ممرات الفصل الملاحي الرسمية",
     "غير حاسم": "لم يُحسم بعد",
     "الإسناد": "المصدر",
+    "وقت القطع": "وقت إقفال المعلومات",
 }
 
-# ── ف3: محتوى داخلي لا يُنشر (يُنفّذ القاعدتين 14 و19 في sections/60-validation) ─
+# ── ف3: محتوى داخلي لا يُنشر ───────────────────────────────────────────────
 INTERNAL_PATTERNS = [
     (r"`[^`]*\b(?:archive|logs|appendices|cumulative-\d{4}|tools|validators)\b[^`]*`",
-     "مسار ملف داخلي بين علامتي اقتباس"),
+     "مسار ملف داخلي"),
     (r"(?<![A-Za-z0-9_/])(?:archive|logs|appendices|cumulative-\d{4})/[A-Za-z0-9_./\-]+",
      "مسار ملف داخلي"),
     (r"\.(?:json|md|docx|py)\b", "امتداد ملف داخلي"),
@@ -83,7 +90,6 @@ INTERNAL_PATTERNS = [
      "عبارة إجراء داخلي"),
 ]
 
-# ── ف5: كلمات العدد المزدوجة في الملخص ──────────────────────────────────────
 DUAL_FORMS = {
     "تحذيران": "تحذير", "تحذيرين": "تحذير",
     "حادثتان": "حادثة", "حادثتين": "حادثة",
@@ -93,41 +99,44 @@ DUAL_FORMS = {
 }
 
 
+# ── التحميل والفحوص ────────────────────────────────────────────────────────
+def load_stages() -> dict:
+    if STAGES_FILE.exists():
+        return json.loads(STAGES_FILE.read_text(encoding="utf-8"))
+    return {"stage": 0, "blocking": {"0": []}, "stage_names": {"0": "تحذيري"}}
+
+
+def save_stages(cfg: dict) -> None:
+    cfg["updated"] = __import__("datetime").date.today().isoformat()
+    STAGES_FILE.write_text(json.dumps(cfg, ensure_ascii=False, indent=2) + "\n",
+                           encoding="utf-8")
+
+
 def strip_markup(text: str) -> str:
     t = re.sub(r"<!--.*?-->", " ", text, flags=re.S)
     t = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", t)
     return t
 
 
-def load_texts(date: str, md_path: str) -> dict:
-    out = {}
-    if md_path:
-        p = Path(md_path)
-        if p.exists():
-            out["md"] = p.read_text(encoding="utf-8")
-    elif date:
-        p = B / "reports" / f"{date}-sectioned.md"
-        if p.exists():
-            out["md"] = p.read_text(encoding="utf-8")
-    if date:
-        m = B / "web" / "meta" / f"{date}.json"
-        if m.exists():
-            out["meta"] = m.read_text(encoding="utf-8")
-    return out
+def scrub(text: str) -> str:
+    """يطبّق المُنظّف الآلي إن وُجد — حتى تُقاس الحالة التي ستُنشر فعلًا."""
+    try:
+        sys.path.insert(0, str(B / "tools"))
+        from scrub_internal import scrub_text
+        return scrub_text(text)[0]
+    except Exception:
+        return text
 
 
 def check_symbols(text: str) -> list:
-    """ف1: رمز حاضر في النص بلا تعريف في أي موضع منه."""
     found = []
     for sym, keys in REQUIRED_SYMBOLS.items():
         probe = sym.replace("–", "-")
         present = (probe in text) or (sym in text)
+        if not present and sym.startswith("A–F"):
+            present = bool(re.search(r"\b[A-F]/\d\b", text))
         if not present:
-            # أنماط بديلة لدرجات الموثوقية مثل A/2 و C/3
-            if sym.startswith("A–F"):
-                present = bool(re.search(r"\b[A-F]/\d\b", text))
-            if not present:
-                continue
+            continue
         if not any(k in text for k in keys):
             found.append({"symbol": sym, "hint": keys[0]})
     return found
@@ -142,27 +151,24 @@ def check_internal(text: str) -> list:
     out = []
     for pat, label in INTERNAL_PATTERNS:
         for m in re.finditer(pat, text):
-            frag = m.group(0).strip()
-            out.append({"label": label, "sample": frag[:90]})
+            out.append({"label": label, "sample": m.group(0).strip()[:90]})
     return out
 
 
 def check_tug_confusion(text: str) -> list:
-    """ف4: سطر يجمع «قُطر» سفينة السحب مع «قطر» الدولة."""
     out = []
     for ln in text.splitlines():
         if "دولة قطر" in ln:
             continue
-        tug_context = bool(re.search(r"قُطر|خرطوم|سحب", ln))
-        country_context = bool(re.search(r"قطري|قبالة قطر|قطر\)|\(قطر", ln))
-        if tug_context and country_context:
+        tug = bool(re.search(r"قُطر|خرطوم|سحب", ln))
+        country = bool(re.search(r"قطري|قبالة قطر|قطر\)|\(قطر", ln))
+        if tug and country:
             out.append({"sample": ln.strip()[:150],
                         "why": "«قُطر» سفينة سحب و«قطر» الدولة في السطر نفسه"})
     return out
 
 
 def check_summary_numbers(md: str, meta: str) -> list:
-    """ف5: رقم في بطاقة الملخص لا أثر له في المتن."""
     out = []
     card = ""
     if meta:
@@ -173,16 +179,12 @@ def check_summary_numbers(md: str, meta: str) -> list:
         except json.JSONDecodeError:
             card = ""
     scope = (card + " " + md).strip()
-
-    # عدد بنود التحذيرات الجديدة المسرودة في المتن
     warn_bullets = len(re.findall(r"^-\s+\*\*\d+/\d+\*\*", md, flags=re.M))
-
     for word, base in DUAL_FORMS.items():
         if word not in scope:
             continue
         if base == "تحذير" and warn_bullets and warn_bullets != 2:
-            out.append({"kind": "تعارض عدد في الملخص",
-                        "term": word,
+            out.append({"kind": "تعارض عدد في الملخص", "term": word,
                         "hint": f"الملخص يقول «{word}» والمتن يسرد {warn_bullets} تحذيرات"})
         elif word not in md and card and word in card:
             out.append({"kind": "عدد مزدوج في الملخص لا نظير له في المتن",
@@ -190,63 +192,157 @@ def check_summary_numbers(md: str, meta: str) -> list:
     return out
 
 
+def run_checks(md: str, meta: str = "") -> dict:
+    body = strip_markup(md)
+    return {
+        "ف1": check_symbols(body),
+        "ف2": check_ambiguous(body),
+        "ف3": check_internal(md),
+        "ف4": check_tug_confusion(body),
+        "ف5": check_summary_numbers(body, meta),
+    }
+
+
+def read_report(date: str) -> tuple:
+    md_p = B / "reports" / f"{date}-sectioned.md"
+    meta_p = B / "web" / "meta" / f"{date}.json"
+    md = md_p.read_text(encoding="utf-8") if md_p.exists() else ""
+    meta = meta_p.read_text(encoding="utf-8") if meta_p.exists() else ""
+    return md, meta
+
+
+def available_dates(limit: int = 2) -> list:
+    d = B / "reports"
+    if not d.exists():
+        return []
+    dates = sorted({p.name[:10] for p in d.glob("*-sectioned.md")}, reverse=True)
+    return dates[:limit]
+
+
+# ── الأوامر ────────────────────────────────────────────────────────────────
+def cmd_status(cfg: dict) -> int:
+    stage = int(cfg.get("stage", 0))
+    names = cfg.get("stage_names", {})
+    blocking = cfg.get("blocking", {}).get(str(stage), [])
+    print(f"=== بوابة الفهم — الحالة ===")
+    print(f"  المرحلة الحالية: {stage} — {names.get(str(stage), '')}")
+    print(f"  المانع الآن: {'، '.join(blocking) if blocking else 'لا شيء (تحذيري بالكامل)'}")
+    print(f"  المرحلة التالية: {stage + 1} — {names.get(str(stage + 1), 'مكتمل')}")
+    if stage < MAX_STAGE:
+        nxt = cfg.get("blocking", {}).get(str(stage + 1), [])
+        print(f"  ستُصبح مانعة: {'، '.join(nxt)}")
+    print("  ── ما ترصده البوابة في آخر إصدارين ──")
+    for date in available_dates(2):
+        md, meta = read_report(date)
+        res = run_checks(scrub(md), meta)
+        counts = " · ".join(f"{k}={len(v)}" for k, v in res.items())
+        print(f"    {date}: {counts}")
+    return 0
+
+
+def cmd_promote(cfg: dict) -> int:
+    stage = int(cfg.get("stage", 0))
+    if stage >= MAX_STAGE:
+        print("المرحلة النهائية مُفعّلة بالفعل (4).")
+        return 0
+    target = stage + 1
+    new_blocking = cfg.get("blocking", {}).get(str(target), [])
+    names = cfg.get("stage_names", {})
+    dates = available_dates(2)
+    print(f"=== طلب ترقية: {stage} ← {target} ({names.get(str(target), '')}) ===")
+    print(f"  شرط الترقية: أن تكون {new_blocking} نظيفة في آخر {len(dates)} إصدار، بعد التنظيف الآلي")
+
+    if not dates:
+        print("  ✘ لا إصدارات متاحة للتحقق — الترقية مرفوضة")
+        return 2
+
+    problems = []
+    for date in dates:
+        md, meta = read_report(date)
+        res = run_checks(scrub(md), meta)
+        for chk in new_blocking:
+            if res.get(chk):
+                problems.append((date, chk, res[chk]))
+        counts = " · ".join(f"{k}={len(res[k])}" for k in new_blocking)
+        print(f"    {date}: {counts}")
+
+    if problems:
+        print("  ✘ الترقية مرفوضة — الشرط المُسبق غير محقق:")
+        for date, chk, items in problems:
+            print(f"    {date} · {chk}: {len(items)} بندًا يحتاج إصلاحًا")
+            for it in items[:4]:
+                s = it.get("sample") or it.get("term") or it.get("symbol") or ""
+                print(f"       - {s}")
+        print("  الإجراء: أصلح البنود أعلاه ثم أعد الطلب.")
+        return 2
+
+    cfg["stage"] = target
+    cfg.setdefault("history", []).append({
+        "date": __import__("datetime").date.today().isoformat(),
+        "from": stage, "to": target, "by": "صاحب القرار",
+        "evidence": f"اجتازت {new_blocking} في آخر {len(dates)} إصدار بعد التنظيف الآلي",
+    })
+    save_stages(cfg)
+    print(f"  ✔ رُقّيت إلى المرحلة {target} — المانع الآن: {'، '.join(new_blocking)}")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", default="")
     ap.add_argument("--md", default="")
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("--status", action="store_true")
+    ap.add_argument("--promote", action="store_true")
     a = ap.parse_args()
 
-    texts = load_texts(a.date, a.md)
-    if "md" not in texts:
-        print("✘ لا نص للفحص — مرّر --date أو --md")
+    cfg = load_stages()
+    if a.status:
+        return cmd_status(cfg)
+    if a.promote:
+        return cmd_promote(cfg)
+
+    if a.md:
+        md = Path(a.md).read_text(encoding="utf-8")
+        meta, label = "", Path(a.md).name
+    elif a.date:
+        md, meta = read_report(a.date)
+        label = a.date
+    else:
+        print("مرّر --date أو --md أو --status أو --promote")
         return 2
 
-    raw = texts["md"]
-    body = strip_markup(raw)
-    meta = texts.get("meta", "")
+    if not md:
+        print(f"✘ لا نص للفحص: {label}")
+        return 2
 
-    symbols = check_symbols(body)
-    ambiguous = check_ambiguous(body)
-    internal = check_internal(raw)
-    tug = check_tug_confusion(body)
-    numbers = check_summary_numbers(body, meta)
-
-    label = a.date or Path(a.md).name
-    result = {
-        "date": label,
-        "undefined_symbols": symbols,
-        "ambiguous_terms": ambiguous,
-        "internal_content": internal,
-        "tug_confusion": tug,
-        "summary_numbers": numbers,
-    }
+    res = run_checks(md, meta)
+    stage = int(cfg.get("stage", 0))
+    blocking = cfg.get("blocking", {}).get(str(stage), [])
+    names = cfg.get("check_names", {})
 
     if a.json:
-        print(json.dumps(result, ensure_ascii=False, indent=2))
+        print(json.dumps({"date": label, "stage": stage, "blocking": blocking,
+                          "results": res}, ensure_ascii=False, indent=2))
     else:
-        print(f"=== بوابة الفهم — {label} ===")
-        print(f"  ف1 رموز بلا تعريف: {len(symbols)}")
-        for s in symbols:
-            print(f"     ✗ {s['symbol']} — يُضاف تعريفه (مثال: {s['hint']})")
-        print(f"  ف2 اصطلاحات تحجب المعنى: {len(ambiguous)}")
-        for s in ambiguous[:12]:
-            print(f"     · {s['term']} ×{s['count']} → {s['replacement']}")
-        print(f"  ف3 محتوى داخلي منشور: {len(internal)}")
-        for s in internal[:12]:
-            print(f"     ✗ {s['label']}: {s['sample']}")
-        print(f"  ف4 التباس «قُطر/قطر»: {len(tug)}")
-        for s in tug[:6]:
-            print(f"     ✗ {s['sample']}")
-        print(f"  ف5 أرقام الملخص: {len(numbers)}")
-        for s in numbers:
-            print(f"     ✗ {s['term']} — {s['hint']}")
+        print(f"=== بوابة الفهم — {label} — المرحلة {stage} ===")
+        for chk in ("ف1", "ف2", "ف3", "ف4", "ف5"):
+            items = res[chk]
+            mark = "✘ مانع" if chk in blocking else ("· تحذير" if items else "✔ نظيف")
+            print(f"  {chk} {names.get(chk, '')}: {len(items)} — {mark}")
+            for it in items[:6]:
+                s = (it.get("sample") or it.get("term") or it.get("symbol") or "")
+                extra = f" → {it['replacement']}" if it.get("replacement") else ""
+                hint = f" ({it['hint']})" if it.get("hint") else ""
+                print(f"       {s}{extra}{hint}")
 
-    if internal:
-        print("  النتيجة: مانع — محتوى داخلي في نص منشور")
+    blocking_hits = sum(len(res[c]) for c in blocking)
+    total = sum(len(v) for v in res.values())
+    if blocking_hits:
+        print(f"  النتيجة: مانع — {blocking_hits} بندًا في الفحوص المانعة (المرحلة {stage})")
         return 2
-    if symbols or tug or numbers:
-        print("  النتيجة: تحذير — بنود تحتاج معالجة قبل النشر")
+    if total:
+        print(f"  النتيجة: تحذير — {total} بندًا في فحوص لم تُرقَّ بعد إلى مانعة")
         return 1
     print("  النتيجة: مكتمل — لا رمز بلا تعريف ولا اصطلاح حاجب ولا محتوى داخلي")
     return 0
