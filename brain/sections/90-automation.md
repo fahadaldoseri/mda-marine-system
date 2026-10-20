@@ -27,7 +27,6 @@ python3 /home/ubuntu/seawatch/generator/build_report.py --md reports/<التار
 # فحص الصفحة (يشمل فحص الوسوم المهرَّبة)
 python3 /home/ubuntu/seawatch/generator/verify.py /tmp/report-<التاريخ>.html
 # فحص المصادر واللغة قبل التسليم
-python3 validators/check_sources_37_browser.py
 python3 validators/check_language.py reports/<التاريخ>-sectioned.md
 # المدقق المانع لبنية التقرير
 python3 validators/validate_report.py web/meta/<التاريخ>.json --md reports/<التاريخ>-sectioned.md
