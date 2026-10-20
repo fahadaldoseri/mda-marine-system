@@ -240,7 +240,9 @@ def main() -> int:
     corpus = "\n".join(
         p.read_text(encoding="utf-8", errors="ignore")
         for p in list(BRAIN.rglob("*.md")) + list(BRAIN.rglob("*.sh")) + list(BRAIN.rglob("*.py"))
-        if p.is_file() and not any(x in p.parts for x in (".git", "__pycache__", "backup-repo", "tools"))
+        # عطل ك-62: كان المجلد tools مستثنى كاملًا، والمشغّلات (publish_changes/final_gate) فيه،
+        # فتظهر بوابات مرجعية كأنها مهجورة. الصحيح: استثناء السكربتات التاريخية فقط.
+        if p.is_file() and not any(x in p.parts for x in (".git", "__pycache__", "backup-repo", "_oneoff"))
     )
     orphans = sorted(p.name for p in (BRAIN / "validators").glob("*.py")
                      if p.name not in corpus and p.name != Path(__file__).name)

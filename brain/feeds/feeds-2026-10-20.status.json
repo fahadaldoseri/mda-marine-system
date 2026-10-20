@@ -6,7 +6,7 @@
  "failed": 4,
  "fail_ratio": 0.105,
  "fail_ratio_limit": 0.2,
- "items": 1081,
+ "items": 1061,
  "checked_feeds": [
   {
    "num": 6,
@@ -93,7 +93,7 @@
    "via": "primary",
    "fetched_url": "https://ofac.treasury.gov/rss.xml",
    "items_count": 10,
-   "content_chars": 201731,
+   "content_chars": 201936,
    "tls_verification": "verified"
   },
   {
@@ -123,10 +123,10 @@
    "name": "قناة العربية",
    "primary_url": "https://www.alarabiya.net/feed/rss2/ar/aswaq.xml",
    "ok": true,
-   "via": "fallback:jina.ai/alarabiya-home",
-   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/",
-   "items_count": 50,
-   "content_chars": 70893,
+   "via": "fallback:jina.ai/alarabiya-rss",
+   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
+   "items_count": 30,
+   "content_chars": 121004,
    "tls_verification": "verified"
   },
   {
@@ -192,7 +192,7 @@
    "via": "primary",
    "fetched_url": "https://www.albiladpress.com/rss",
    "items_count": 100,
-   "content_chars": 16841,
+   "content_chars": 16809,
    "tls_verification": "verified"
   },
   {
@@ -497,5 +497,5 @@
    ]
   }
  ],
- "written_utc": "2026-10-20T21:10:19Z"
+ "written_utc": "2026-10-20T21:12:32Z"
 }
