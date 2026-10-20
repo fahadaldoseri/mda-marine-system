@@ -323,7 +323,7 @@ def glossary(items):
     if not items:
         return ""
     lines = "".join(f"<li><b>{esc(k)}</b>: {esc(v)}</li>" for k, v in items.items())
-    return f'<div class="glossary"><b>تعريف المصطلحات:</b><ul>{lines}</ul></div>'
+    return f'<div class="glossary"><b>قاموس الرموز والمصطلحات:</b><ul>{lines}</ul></div>'
 
 
 def reading_key():
