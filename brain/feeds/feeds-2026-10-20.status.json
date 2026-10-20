@@ -1,15 +1,15 @@
 {
  "date": "2026-10-20",
- "status": "ok",
+ "status": "degraded",
  "checked": 24,
  "ok": 23,
- "failed": 0,
+ "failed": 1,
  "browser_only": [
   26
  ],
- "fail_ratio": 0.0,
+ "fail_ratio": 0.042,
  "fail_ratio_limit": 0.2,
- "items": 1089,
+ "items": 1065,
  "checked_feeds": [
   {
    "num": 6,
@@ -104,10 +104,10 @@
    "name": "قناة العربية",
    "primary_url": "https://www.alarabiya.net/feed/rss2/ar.xml",
    "ok": true,
-   "via": "fallback:jina.ai/alarabiya-home",
-   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/",
-   "items_count": 50,
-   "content_chars": 70893,
+   "via": "fallback:jina.ai/alarabiya-rss",
+   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
+   "items_count": 30,
+   "content_chars": 122770,
    "tls_verification": "verified"
   },
   {
@@ -246,12 +246,13 @@
    "num": 25,
    "name": "وكالة أنباء الإمارات (وام)",
    "primary_url": "https://www.wam.ae/en/rss",
-   "ok": true,
-   "via": "official-telegram:wamnews_en",
-   "fetched_url": "https://t.me/s/wamnews_en",
-   "items_count": 4,
-   "content_chars": 3344,
-   "tls_verification": "verified"
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: content too short: 20 chars < 400 | official-telegram:wamnews_en: IncompleteRead(97884 bytes read, 2020 more expected)"
   },
   {
    "num": 26,
@@ -296,7 +297,7 @@
    "via": "fallback:omannews-home",
    "fetched_url": "https://omannews.gov.om/",
    "items_count": 50,
-   "content_chars": 7828,
+   "content_chars": 7831,
    "tls_verification": "disabled_source_28_only"
   },
   {
@@ -373,7 +374,7 @@
    "via": "primary",
    "fetched_url": "https://www.lloydslist.com/rss/lloyds-list",
    "items_count": 20,
-   "content_chars": 17348,
+   "content_chars": 17350,
    "tls_verification": "verified"
   },
   {
@@ -432,6 +433,30 @@
    "tls_verification": "verified"
   }
  ],
- "failed_feeds": [],
- "written_utc": "2026-10-20T21:57:41Z"
+ "failed_feeds": [
+  {
+   "num": 25,
+   "name": "وكالة أنباء الإمارات (وام)",
+   "primary_url": "https://www.wam.ae/en/rss",
+   "error": "IncompleteRead(97884 bytes read, 2020 more expected)",
+   "block_reason": "all routes failed: primary: content too short: 20 chars < 400 | official-telegram:wamnews_en: IncompleteRead(97884 bytes read, 2020 more expected)",
+   "attempts": [
+    {
+     "url": "https://www.wam.ae/en/rss",
+     "via": "primary",
+     "ok": false,
+     "error": "content too short: 20 chars < 400",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://t.me/s/wamnews_en",
+     "via": "official-telegram:wamnews_en",
+     "ok": false,
+     "error": "IncompleteRead(97884 bytes read, 2020 more expected)",
+     "tls_verification": "verified"
+    }
+   ]
+  }
+ ],
+ "written_utc": "2026-10-20T22:00:41Z"
 }

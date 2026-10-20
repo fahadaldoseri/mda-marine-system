@@ -66,7 +66,7 @@ async def overflow(page) -> dict:
     return await page.evaluate("""() => {
       const vw = window.innerWidth, de = document.documentElement;
       const bad = [];
-      // عطل ك-75: كان المقياس يعدّ محتوى داخل وعاء قابل للتمرير (جدول .tbl-wrap) خارجًا عن الحدود.
+      // عطل ك-68: كان المقياس يعدّ محتوى داخل وعاء قابل للتمرير (جدول .tbl-wrap) خارجًا عن الحدود.
       // القاعدة: العنصر لا يُعدّ تجاوزًا إن كان أحد أسلافه قابلاً للتمرير أفقيًا.
       const inScroller = (el) => {
         let n = el.parentElement;
