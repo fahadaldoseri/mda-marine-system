@@ -90,6 +90,20 @@ REQUIRED_SYMBOLS = {
 }
 
 # ── ف2: اصطلاحات تحجب المعنى ───────────────────────────────────────────────
+
+def _defined(term: str) -> bool:
+    """هل المصطلح معرَّف في القاموس المنشور؟ (عطل ك-52: ف2 كان يُنذر على معرَّف)"""
+    import json as _j
+    from pathlib import Path as _P
+    for f in sorted(_P("web/meta").glob("*.json"), reverse=True)[:3]:
+        try:
+            g = _j.loads(f.read_text(encoding="utf-8")).get("glossary", {})
+        except Exception:
+            continue
+        if any(term in k or k in term for k in g):
+            return True
+    return False
+
 AMBIGUOUS = {
     "خط أساس": "المعدل الطبيعي قبل الأزمة",
     "وقت القطع": "وقت إقفال المعلومات",
@@ -187,7 +201,8 @@ def check_symbols(text: str) -> list:
 
 def check_ambiguous(text: str) -> list:
     return [{"term": t, "replacement": r, "count": text.count(t)}
-            for t, r in AMBIGUOUS.items() if t in text]
+            for t, r in AMBIGUOUS.items()
+            if t in text and not _defined(t)]
 
 
 def check_internal(text: str) -> list:
