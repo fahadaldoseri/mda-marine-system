@@ -12,7 +12,7 @@
 الرمز: 0 متّسع · 1 ضيق (تحذير) · 2 لا يتّسع (مانع)
 """
 from __future__ import annotations
-import argparse, sys, re
+import argparse, sys, re, subprocess
 from pathlib import Path
 
 B = Path(__file__).resolve().parent.parent
@@ -20,6 +20,10 @@ sys.path.insert(0, str(B / "validators"))
 from check_pdf_format import page_metrics  # noqa: E402
 
 SAFETY = 0.80       # هامش الأمان: لا يُستهلك أكثر من 80% من المساحة الحرّة
+# عطل ك-51: أعلنت الأداة «لا يتّسع» لإضافة 588 حرفًا، ثم بنى المخرج واستوعبها في
+# 16 صفحة ورفع تعبئة الأخيرة من 80.4% إلى 97.0%. السبب: القاموس يُعرض بخط مدمج
+# فكلفته المساحية ليست ككلفة المتن. المعامل المقيس: 0.36 من كثافة المتن.
+GLOSSARY_DENSITY = 0.36
 TIGHT = 0.25        # أقل من ربع الميزانية المتاحة = ضيق
 
 
@@ -41,7 +45,19 @@ def main() -> int:
     pages = len(fills)
     last = fills[-1]
     avg = sum(fills) / pages
-    body = len(re.sub(r"\s+", " ", md.read_text(encoding="utf-8")))
+    # عطل ك-50: كان العدد يُحسب من ملف المصدر كاملًا وفيه «المصادر وموثوقية المصادر»
+    # وهي محجوبة في PDF، فكانت السعة لكل صفحة مبالغًا فيها فتصير الميزانية أسخى من
+    # الحقيقة. والقياس من نص PDF نفسه بالغ أيضًا لأن كل صفحة تحمل ترويسة وتذييلًا.
+    # الصحيح: متن المصدر قبل قسم المصادر + ما يُبنى من الواجهة (القاموس وبطاقة القرار).
+    def visible_md(text: str) -> str:
+        cut = text.find("## المصادر والمراجع")
+        return text if cut < 0 else text[:cut]
+    body = len(re.sub(r"\s+", " ", visible_md(md.read_text(encoding="utf-8"))))
+    meta_f = B / "web" / "meta" / f"{a.date}.json"
+    if meta_f.exists():
+        import json as _j
+        mm = _j.loads(meta_f.read_text(encoding="utf-8"))
+        body += sum(len(str(k)) + len(str(v)) for k, v in mm.get("glossary", {}).items())
     content_pages = sum(fills) / 100.0
     chars_per_page = body / content_pages if content_pages else 0
     free_page = max(0.0, 1.0 - last / 100.0)
@@ -49,17 +65,19 @@ def main() -> int:
 
     print(f"=== ميزانية الصفحات — {a.date} ===")
     print(f"  الصفحات: {pages} · متوسط التعبئة: {avg:.1f}% · تعبئة الأخيرة: {last:.1f}%")
-    print(f"  أحرف المتن: {body:,} · أحرف لكل صفحة: {chars_per_page:,.0f}")
+    print(f"  أحرف PDF المرئية: {body:,} · أحرف لكل صفحة: {chars_per_page:,.0f}")
     print(f"  المساحة الحرّة في الأخيرة: {free_page*100:.1f}% من صفحة")
-    print(f"  الميزانية الآمنة (هامش {SAFETY:.0%}): {budget:,.0f} حرفًا")
+    print(f"  الميزانية الآمنة لمتن عادي (هامش {SAFETY:.0%}): {budget:,.0f} حرفًا")
+    print(f"  ما يعادلها في القاموس المدمج: {budget / GLOSSARY_DENSITY:,.0f} حرفًا")
 
     rc = 0
     if a.adding:
         left = budget - a.adding
         print(f"  المزمع إضافته: {a.adding:,} حرفًا → المتبقي: {left:,.0f}")
         if a.adding > budget:
-            print("  النتيجة: لا يتّسع — الإضافة تدفع الترقيم فيسقط الشكل  ✘ مانع")
-            rc = 2
+            print("  النتيجة التقديرية: يبدو متجاوزًا — والحكم النهائي بعد البناء لا قبله")
+            print("     القاعدة: الحكم النهائي = عدد الصفحات ثابتًا + تعبئة الأخيرة فوق الحدّ")
+            rc = 1
         elif left < budget * TIGHT:
             print("  النتيجة: يتّسع بهامش ضيق — قسّم الإضافة  · تحذير")
             rc = 1
