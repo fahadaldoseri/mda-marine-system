@@ -28,6 +28,11 @@ STOP = {
 }
 
 # مختصرات لاتينية ليست أسماء سفن (جهات ومصطلحات ونطاقات)
+# أسماء الأشهر واختصاراتها: تُظهرها صيغة DTG فلا تُقرأ أسماء سفن
+MONTHS = {
+    'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'SEPT', 'OCT',
+    'NOV', 'DEC',
+}
 DENY = {
     'UKMTO', 'NAVAREA', 'JMIC', 'MSCIO', 'IMO', 'AIS', 'OFAC', 'SDN', 'UN', 'UNSC',
     'IRGC', 'CENTCOM', 'CMPC', 'CSIS', 'SOH', 'EEZ', 'GPS', 'VHF', 'SOLAS', 'ISM',
@@ -51,6 +56,8 @@ def _plausible(cand: str) -> bool:
     if any(re.fullmatch(r'(19|20)\d\d', t) for t in toks):
         return False
     if any(t in DENY for t in toks):
+        return False
+    if any(t in MONTHS for t in toks):
         return False
     letters = [t for t in toks if t.isalpha() and len(t) >= 3 and t not in STOP]
     if not letters:

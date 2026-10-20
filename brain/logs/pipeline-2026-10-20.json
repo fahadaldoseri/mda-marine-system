@@ -1,0 +1,181 @@
+{
+  "date": "2026-10-20",
+  "pipeline_version": 4,
+  "finished_utc": "2026-10-20T03:45:04Z",
+  "overall": "degraded",
+  "ladder_note": "سلّم موحّد: ok / degraded / failed — لكل مكوّن رمز خروج حقيقي، ولا تُعلن نجاحًا برمز صفري",
+  "feeds": {
+    "status": "degraded",
+    "checked": 38,
+    "ok": 32,
+    "failed": 6,
+    "fail_ratio": 0.158,
+    "failed_feeds": [
+      {
+        "num": 14,
+        "name": "قناة العربية",
+        "primary_url": "https://www.alarabiya.net/feed/rss2/ar/arab-and-world.xml",
+        "error": "blocked page: Just a moment",
+        "block_reason": "all routes failed: primary: HTTP Error 403: Forbidden | fallback:jina.ai/alarabiya-rss: blocked page: Just a moment | fallback:jina.ai/alarabiya-home: blocked page: Just a moment",
+        "attempts": [
+          {
+            "url": "https://www.alarabiya.net/feed/rss2/ar/arab-and-world.xml",
+            "via": "primary",
+            "ok": false,
+            "error": "HTTP Error 403: Forbidden",
+            "tls_verification": "verified"
+          },
+          {
+            "url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
+            "via": "fallback:jina.ai/alarabiya-rss",
+            "ok": false,
+            "error": "blocked page: Just a moment",
+            "tls_verification": "verified"
+          },
+          {
+            "url": "https://r.jina.ai/http://www.alarabiya.net/",
+            "via": "fallback:jina.ai/alarabiya-home",
+            "ok": false,
+            "error": "blocked page: Just a moment",
+            "tls_verification": "verified"
+          }
+        ]
+      },
+      {
+        "num": 17,
+        "name": "حساب @bna_en على X",
+        "primary_url": "https://web.archive.org/web/20260108135704/https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
+        "error": "blocked page: Human Verification",
+        "block_reason": "all routes failed: primary: HTTP Error 403: Forbidden | fallback:jina.ai/bna-en-x: proxy reported target error | fallback:jina.ai/bna-rss: blocked page: Human Verification",
+        "attempts": [
+          {
+            "url": "https://web.archive.org/web/20260108135704/https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
+            "via": "primary",
+            "ok": false,
+            "error": "HTTP Error 403: Forbidden",
+            "tls_verification": "verified"
+          },
+          {
+            "url": "https://r.jina.ai/http://x.com/bna_en",
+            "via": "fallback:jina.ai/bna-en-x",
+            "ok": false,
+            "error": "proxy reported target error",
+            "tls_verification": "verified"
+          },
+          {
+            "url": "https://r.jina.ai/http://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
+            "via": "fallback:jina.ai/bna-rss",
+            "ok": false,
+            "error": "blocked page: Human Verification",
+            "tls_verification": "verified"
+          }
+        ]
+      },
+      {
+        "num": 25,
+        "name": "وكالة أنباء الإمارات (وام)",
+        "primary_url": "https://www.wam.ae/ar/rss",
+        "error": "content too short: 20 chars < 400",
+        "block_reason": "all routes failed: primary: content too short: 20 chars < 400",
+        "attempts": [
+          {
+            "url": "https://www.wam.ae/ar/rss",
+            "via": "primary",
+            "ok": false,
+            "error": "content too short: 20 chars < 400",
+            "tls_verification": "verified"
+          }
+        ]
+      },
+      {
+        "num": 25,
+        "name": "وكالة أنباء الإمارات (وام)",
+        "primary_url": "https://www.wam.ae/en/rss",
+        "error": "content too short: 20 chars < 400",
+        "block_reason": "all routes failed: primary: content too short: 20 chars < 400",
+        "attempts": [
+          {
+            "url": "https://www.wam.ae/en/rss",
+            "via": "primary",
+            "ok": false,
+            "error": "content too short: 20 chars < 400",
+            "tls_verification": "verified"
+          }
+        ]
+      },
+      {
+        "num": 26,
+        "name": "وكالة الأنباء السعودية (واس)",
+        "primary_url": "https://www.spa.gov.sa/rss.xml",
+        "error": "content too short: 22 chars < 400",
+        "block_reason": "all routes failed: primary: content too short: 22 chars < 400",
+        "attempts": [
+          {
+            "url": "https://www.spa.gov.sa/rss.xml",
+            "via": "primary",
+            "ok": false,
+            "error": "content too short: 22 chars < 400",
+            "tls_verification": "verified"
+          }
+        ]
+      },
+      {
+        "num": 26,
+        "name": "وكالة الأنباء السعودية (واس)",
+        "primary_url": "https://www.spa.gov.sa/feed",
+        "error": "content too short: 22 chars < 400",
+        "block_reason": "all routes failed: primary: content too short: 22 chars < 400",
+        "attempts": [
+          {
+            "url": "https://www.spa.gov.sa/feed",
+            "via": "primary",
+            "ok": false,
+            "error": "content too short: 22 chars < 400",
+            "tls_verification": "verified"
+          }
+        ]
+      }
+    ]
+  },
+  "ofac": {
+    "status": "ok",
+    "note": "فُحص 4 مستهدفًا — الحالة: ok",
+    "targets": 4,
+    "matches": [],
+    "reviews": [],
+    "list": "https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exp",
+    "results_file": "archive/ofac-screen-latest.json"
+  },
+  "originals": {
+    "status": "degraded",
+    "note": "حُفظت الأصول في archive/originals/2026-10-20/ — الحالة: degraded",
+    "manifest": "archive/originals/2026-10-20/manifest.json",
+    "healthy": 1,
+    "empty_shell": 1,
+    "failed": 1,
+    "status_file": "archive/originals/2026-10-20/status.json"
+  },
+  "ledger_merge": {
+    "status": "ok",
+    "note": "دُمج ملف اليوم في الدفتر الجامع وبُنيت خريطة الرموز ونُسخ الدفتر إلى الموقع",
+    "records_total": 208,
+    "added_this_run_count": 0,
+    "period_end": "2026-10-19",
+    "merged_utc": "2026-10-20T03:44:02Z",
+    "merged_before_marker": true
+  },
+  "builtin_llm": {
+    "status": "ok",
+    "note": "رُشّحت التغذيات ورُوجعت اللغة آلياً بالنموذج المدمج"
+  },
+  "report_present_at_pipeline_end": false,
+  "final_gate": {
+    "status": "block",
+    "exit_code": 2,
+    "dir": "logs/gate-2026-10-20",
+    "blocked_steps": [
+      "بوابات المخرج العشر"
+    ],
+    "note": "نتيجة بوابة التسليم النهائية — مسجّلة بعد كتابة التقرير."
+  }
+}
