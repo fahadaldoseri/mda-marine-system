@@ -44,6 +44,8 @@ fi
 if [ "$BUILD" = "1" ]; then
   step "بناء الصفحة (مزامنة + بناء)" 2 python3 "$SITE/generator/sync_from_brain.py" --date "$D"
   step "تصدير PDF المعتمد" 2 python3 "$B/tools/export_report_assets.py" --date "$D" --only pdf
+  # نسخة Word طبق الأصل: بوابة المخرج 9 تمنع التسليم بلا نسخة Word، فتُبنى هنا آليًا
+  step "نسخة Word طبق الأصل" 2 python3 "$B/tools/build_report_docx_exact.py" --date "$D"
 fi
 
 step "فحص ما قبل التشغيل" 2 python3 "$B/tools/preflight_check.py" "$D"

@@ -1,7 +1,7 @@
 {
  "date": "2026-10-20",
- "status": "block",
- "exit_code": 2,
+ "status": "warn",
+ "exit_code": 1,
  "steps": [
   {
    "step": "بناء الصفحة (مزامنة + بناء)",
@@ -71,8 +71,8 @@
   },
   {
    "step": "مطابقة النسخة الاحتياطية (تنبيهي)",
-   "status": "warn",
-   "exit_code": "1)",
+   "status": "ok",
+   "exit_code": "0)",
    "log": "12-مطابقة_النسخة_الاحتياطية_(تنبيهي).log"
   },
   {
@@ -95,11 +95,11 @@
   },
   {
    "step": "بوابات المخرج العشر",
-   "status": "block",
-   "exit_code": "3)",
+   "status": "ok",
+   "exit_code": "0)",
    "log": "16-بوابات_المخرج_العشر.log"
   }
  ],
  "log_dir": "/home/ubuntu/brain-marine-news/logs/gate-2026-10-20",
- "finished_utc": "2026-10-20T03:51:36Z"
+ "finished_utc": "2026-10-20T03:53:05Z"
 }
