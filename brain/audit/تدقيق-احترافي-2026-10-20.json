@@ -25,79 +25,10 @@
  ],
  "axe": {
   "home": [],
-  "reports/2026-10-20.html": [
-   {
-    "id": "link-in-text-block",
-    "impact": "serious",
-    "help": "Links must be distinguishable without relying on color",
-    "count": 2,
-    "nodes": [
-     {
-      "target": [
-       "span:nth-child(2) > a[href$=\"/#archive\"]"
-      ],
-      "html": "<a href=\"/#archive\">الأرشيف الكامل</a>",
-      "failure": "Fix any of the following:\n  The link has insufficient color contrast of 1.81:1 with the surrounding text. (Minimum contrast is 3:1, link text: #b9c8dc, surrounding text: #7f95ae)\n  The link has no styling (such as underl"
-     },
-     {
-      "target": [
-       "a[href$=\"feed.xml\"]"
-      ],
-      "html": "<a href=\"/feed.xml\">تغذية الإصدارات</a>",
-      "failure": "Fix any of the following:\n  The link has insufficient color contrast of 1.81:1 with the surrounding text. (Minimum contrast is 3:1, link text: #b9c8dc, surrounding text: #7f95ae)\n  The link has no styling (such as underl"
-     }
-    ]
-   }
-  ],
-  "reports/cumulative-2026.html": [
-   {
-    "id": "link-in-text-block",
-    "impact": "serious",
-    "help": "Links must be distinguishable without relying on color",
-    "count": 2,
-    "nodes": [
-     {
-      "target": [
-       "span:nth-child(2) > a[href$=\"/#archive\"]"
-      ],
-      "html": "<a href=\"/#archive\">الأرشيف الكامل</a>",
-      "failure": "Fix any of the following:\n  The link has insufficient color contrast of 1.81:1 with the surrounding text. (Minimum contrast is 3:1, link text: #b9c8dc, surrounding text: #7f95ae)\n  The link has no styling (such as underl"
-     },
-     {
-      "target": [
-       "a[href$=\"feed.xml\"]"
-      ],
-      "html": "<a href=\"/feed.xml\">تغذية الإصدارات</a>",
-      "failure": "Fix any of the following:\n  The link has insufficient color contrast of 1.81:1 with the surrounding text. (Minimum contrast is 3:1, link text: #b9c8dc, surrounding text: #7f95ae)\n  The link has no styling (such as underl"
-     }
-    ]
-   }
-  ],
+  "reports/2026-10-20.html": [],
+  "reports/cumulative-2026.html": [],
   "reports/monthly-2026-10.html": [],
-  "reports/special-2026-10-17-Jubail-incidents.html": [
-   {
-    "id": "link-in-text-block",
-    "impact": "serious",
-    "help": "Links must be distinguishable without relying on color",
-    "count": 2,
-    "nodes": [
-     {
-      "target": [
-       "span:nth-child(2) > a[href$=\"/#archive\"]"
-      ],
-      "html": "<a href=\"/#archive\">الأرشيف الكامل</a>",
-      "failure": "Fix any of the following:\n  The link has insufficient color contrast of 1.81:1 with the surrounding text. (Minimum contrast is 3:1, link text: #b9c8dc, surrounding text: #7f95ae)\n  The link has no styling (such as underl"
-     },
-     {
-      "target": [
-       "a[href$=\"feed.xml\"]"
-      ],
-      "html": "<a href=\"/feed.xml\">تغذية الإصدارات</a>",
-      "failure": "Fix any of the following:\n  The link has insufficient color contrast of 1.81:1 with the surrounding text. (Minimum contrast is 3:1, link text: #b9c8dc, surrounding text: #7f95ae)\n  The link has no styling (such as underl"
-     }
-    ]
-   }
-  ]
+  "reports/special-2026-10-17-Jubail-incidents.html": []
  },
  "network": {
   "total": 51,
@@ -105,48 +36,7 @@
    "manus-analytics.com",
    "plausible.io"
   ],
-  "failed": [
-   {
-    "url": "https://seawatch-xp4qirmr.manus.space/assets/fonts/fonts/IBM-Plex-Sans-Arabic-21",
-    "status": 404
-   },
-   {
-    "url": "https://seawatch-xp4qirmr.manus.space/assets/fonts/fonts/IBM-Plex-Sans-Arabic-9d",
-    "status": 404
-   },
-   {
-    "url": "https://seawatch-xp4qirmr.manus.space/assets/fonts/fonts/IBM-Plex-Sans-Arabic-e5",
-    "status": 404
-   },
-   {
-    "url": "https://seawatch-xp4qirmr.manus.space/assets/fonts/fonts/IBM-Plex-Sans-Arabic-9b",
-    "status": 404
-   },
-   {
-    "url": "https://seawatch-xp4qirmr.manus.space/assets/fonts/fonts/IBM-Plex-Sans-Arabic-cc",
-    "status": 404
-   },
-   {
-    "url": "https://seawatch-xp4qirmr.manus.space/assets/fonts/fonts/IBM-Plex-Sans-Arabic-5d",
-    "status": 404
-   },
-   {
-    "url": "https://seawatch-xp4qirmr.manus.space/assets/fonts/fonts/Noto-Kufi-Arabic-0eac78",
-    "status": 404
-   },
-   {
-    "url": "https://seawatch-xp4qirmr.manus.space/assets/fonts/fonts/Noto-Kufi-Arabic-8bb3f6",
-    "status": 404
-   },
-   {
-    "url": "https://seawatch-xp4qirmr.manus.space/assets/fonts/fonts/IBM-Plex-Sans-Arabic-9b",
-    "status": 404
-   },
-   {
-    "url": "https://seawatch-xp4qirmr.manus.space/assets/fonts/fonts/IBM-Plex-Sans-Arabic-9d",
-    "status": 404
-   }
-  ]
+  "failed": []
  },
  "keyboard": {
   "steps": 21,
@@ -412,21 +302,8 @@
   ]
  },
  "console": {
-  "count": 28,
-  "items": [
-   "error: Failed to load resource: the server responded with a status of 404 ()",
-   "error: Failed to load resource: the server responded with a status of 404 ()",
-   "error: Failed to load resource: the server responded with a status of 404 ()",
-   "error: Failed to load resource: the server responded with a status of 404 ()",
-   "error: Failed to load resource: the server responded with a status of 404 ()",
-   "error: Failed to load resource: the server responded with a status of 404 ()",
-   "error: Failed to load resource: the server responded with a status of 404 ()",
-   "error: Failed to load resource: the server responded with a status of 404 ()",
-   "error: Failed to load resource: the server responded with a status of 404 ()",
-   "error: Failed to load resource: the server responded with a status of 404 ()",
-   "error: Failed to load resource: the server responded with a status of 404 ()",
-   "error: Failed to load resource: the server responded with a status of 404 ()"
-  ]
+  "count": 0,
+  "items": []
  },
  "a11y_tree": {
   "nodes": 0,
