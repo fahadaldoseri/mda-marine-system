@@ -50,8 +50,20 @@ def main() -> int:
         + "\n" + json.dumps(meta, ensure_ascii=False)
 
     glossary = meta.setdefault("glossary", {})
+    # عطل ك-45: البنك صار يحمل مصدر كل تعريف وتصنيفه. ولا يدخل تعريف بلا مصدر.
+    # البنية المقبولة: {"تعريف": نص, "المصدر": نص, "التصنيف": "منشور"|"داخلي"}
+    # ويُقبل النص المجرد توافقًا مع البنك القديم، لكنه يُعلَن ناقص التوثيق.
+    def _defn(entry):
+        return entry["تعريف"] if isinstance(entry, dict) else entry
+
+    def _src(entry):
+        return (entry.get("المصدر", ""), entry.get("التصنيف", "")) if isinstance(entry, dict) else ("", "")
+
+    untraced = [s for s, e in bank["symbols"].items()
+                if not _src(e)[0] or _src(e)[1] not in ("منشور", "داخلي")]
     added, skipped_defined, skipped_absent = [], [], []
-    for sym, definition in bank["symbols"].items():
+    for sym, entry in bank["symbols"].items():
+        definition = _defn(entry)
         if sym in glossary:
             if a.force and glossary[sym] != definition:
                 glossary[sym] = definition
@@ -70,6 +82,9 @@ def main() -> int:
 
     print(f"قاموس {a.date}: {len(glossary)} بندًا · أُضيف {len(added)} · "
           f"معرَّف سابقًا {len(skipped_defined)} · غير وارد {len(skipped_absent)}")
+    if untraced:
+        print(f"  ✘ بنود بلا مصدر أو تصنيف صحيح: {len(untraced)} — " + " · ".join(untraced[:6]))
+        return 2
     for s in added:
         print(f"  + {s}")
     if a.dry_run:
