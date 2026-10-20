@@ -138,7 +138,7 @@ ICON_PATHS = {
 
 LINK_RULE = """
 /* ── تمييز الروابط داخل النص (WCAG 2.1 AA — 1.4.1) ──
-   عطل ك-79: تساوي الخصوصية يُحسم بالترتيب، فالقاعدة تُركَّب آخر كل الأنماط لتفوز. */
+   عطل ك-72: تساوي الخصوصية يُحسم بالترتيب، فالقاعدة تُركَّب آخر كل الأنماط لتفوز. */
 .site-nav a,.sn-links a,.sn-foot a,.foot a,footer a,.glossary a,p a,li a,td a,
 .src a,.src-note a,.cite-ref{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
 """
