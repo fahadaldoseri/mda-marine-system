@@ -322,8 +322,11 @@ def timeline(items, inline):
 def glossary(items):
     if not items:
         return ""
-    lines = "".join(f"<li><b>{esc(k)}</b>: {esc(v)}</li>" for k, v in items.items())
-    return f'<div class="glossary"><b>قاموس الرموز والمصطلحات:</b><ul>{lines}</ul></div>'
+    # عطل ك-43: صيغة البند الواحد في كل سطر جعلت القاموس يمتد صفحة كاملة عند
+    # إضافة التعريفات المعيارية، فخالف حدّ تعبئة الصفحة الأخيرة. الصيغة المدمجة
+    # تحفظ كل تعريف وترشّد المساحة: البنود متتابعة تفصلها علامة ·.
+    parts = " · ".join(f"<b>{esc(k)}</b>: {esc(v)}" for k, v in items.items())
+    return f'<div class="glossary"><b>قاموس الرموز والمصطلحات:</b> {parts}</div>'
 
 
 def reading_key():
