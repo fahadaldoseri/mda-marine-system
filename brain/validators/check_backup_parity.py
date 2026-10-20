@@ -114,6 +114,13 @@ def main() -> int:
         return 3
     local = manifest(B, BSKIP_DIRS, BSKIP_FILES, "brain")
     local.update(manifest(S, SSKIP_DIRS, SSKIP_FILES, "site"))
+    # عطل ك-60: المقارنة أغفلت جذر المهارات، فظهرت ملفات المستودع «زائدة» كذبًا.
+    # القاعدة: كل جذر ينسخه github_backup يجب أن تدخله المقارنة بالنفس.
+    sk_root = Path(os.environ.get("SKILLS_DIR", "/home/ubuntu/skills"))
+    for sk in ("marine-news-brain", "military-arabic-editing", "macr-system"):
+        d = sk_root / sk
+        if d.is_dir():
+            local.update(manifest(d, {"__pycache__", ".git"}, set(), f"skills/{sk}"))
     static = B / "backup-repo"
     if static.exists():
         for dp, dns, fns in os.walk(static):

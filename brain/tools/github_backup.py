@@ -144,7 +144,7 @@ def main():
     copy_tree(BRAIN, OUT / "brain", "brain", BRAIN_SKIP_DIRS, BRAIN_SKIP_FILES)
     copy_tree(SITE, OUT / "site", "site", SITE_SKIP_DIRS, SITE_SKIP_FILES)
     # المهارتان الحاكمتان للتشغيل — تُنسخان مع النظام ليبقى المرجع حديثًا على أي جهاز
-    for sk in ("marine-news-brain", "military-arabic-editing"):
+    for sk in ("marine-news-brain", "military-arabic-editing", "macr-system"):
         src = Path("/home/ubuntu/skills") / sk
         if src.exists():
             copy_tree(src, OUT / "skills" / sk, "skills", {"__pycache__", ".git"}, set())
