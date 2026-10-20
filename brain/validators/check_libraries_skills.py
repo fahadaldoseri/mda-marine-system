@@ -26,7 +26,9 @@ B = Path(__file__).resolve().parent.parent
 LIBS = B / "appendices" / "libraries"
 SKILLS = Path("/home/ubuntu/skills")
 SKILL_NAMES = ("marine-news-brain", "military-arabic-editing")
-REPO_SKILLS = Path("/home/ubuntu/mda-marine-system/skills")
+SITE = Path(os.environ.get("SITE_DIR") or B.parent / "seawatch")
+REPO_SKILLS = Path(os.environ.get("BACKUP_REPO_DIR")
+                   or B.parent / "mda-marine-system") / "skills"
 
 PLACEHOLDERS = ("TODO", "FIXME", "XXX", "۱۸", "lorem", "placeholder", "غير معروف بعد")
 SECRET_PAT = re.compile(r"8949347226:|sk-[A-Za-z0-9]{20,}|bot\d{8,}:|chat_id\"\s*:\s*\"-?\d+")
@@ -228,7 +230,7 @@ def check_wiring() -> None:
         a_txt = auto.read_text(encoding="utf-8")
         for r in sorted(set(re.findall(r"([A-Za-z0-9_\-]+\.(?:sh|py))", a_txt))):
             if not any((B / d / r).is_file() for d in ("tools", "validators", "memory")) \
-               and not any((Path("/home/ubuntu/seawatch") / d / r).is_file()
+               and not any((SITE / d / r).is_file()
                            for d in (".", "generator", "scripts", "tools")):
                 add("تحذير", "الترابط", f"سلسلة التشغيل تذكر ملفًا غير موجود: {r}")
     lib_audit = "audit_libraries_skills" in fg_txt or "audit_corpus" in fg_txt

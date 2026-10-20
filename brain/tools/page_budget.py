@@ -13,9 +13,11 @@
 """
 from __future__ import annotations
 import argparse, sys, re, subprocess
+import os
 from pathlib import Path
 
 B = Path(__file__).resolve().parent.parent
+S = Path(os.environ.get("SITE_DIR") or B.parent / "seawatch")
 sys.path.insert(0, str(B / "validators"))
 from check_pdf_format import page_metrics  # noqa: E402
 
@@ -34,7 +36,7 @@ def main() -> int:
                     help="عدد الأحرف المزمع إضافتها")
     a = ap.parse_args()
 
-    pdf = Path(f"/home/ubuntu/seawatch/dist/reports/pdf/{a.date}.pdf")
+    pdf = S / "dist" / "reports" / "pdf" / f"{a.date}.pdf"
     md = B / "reports" / f"{a.date}-sectioned.md"
     if not pdf.exists():
         print(f"✘ لا ملف PDF: {pdf}"); return 2

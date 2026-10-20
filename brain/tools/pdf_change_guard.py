@@ -12,13 +12,15 @@
 """
 from __future__ import annotations
 import argparse, hashlib, json, re, subprocess, sys, datetime
+import os
 from pathlib import Path
 
 B = Path(__file__).resolve().parent.parent
+S = Path(os.environ.get("SITE_DIR") or B.parent / "seawatch")
 sys.path.insert(0, str(B / "validators"))
 from check_pdf_format import page_metrics  # noqa: E402
 SNAP = B / "logs" / ".pdf-snapshot"
-PDF = Path("/home/ubuntu/seawatch/dist/reports/pdf")
+PDF = S / "dist" / "reports" / "pdf"
 
 
 def digest(p: Path) -> dict:
