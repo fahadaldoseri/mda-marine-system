@@ -98,7 +98,7 @@ def copy_sources(date_iso: str, brain: Path) -> list:
             log.append(f"تحذير: تعذّرت قراءة حالة التغذيات ({e})")
     else:
         log.append("تحذير: لا ملف حالة تغذيات")
-
+    return log
 
 # ---------------------------------------------------------------------------
 # التقارير الخاصة: نسخ تلقائي + توليد بيانات واجهة عند غيابها
@@ -172,7 +172,6 @@ def sync_special(brain: Path) -> list:
                 json.dumps(auto_meta(md), ensure_ascii=False, indent=2), encoding="utf-8"
             )
             log.append(f"وُلّدت بيانات الواجهة تلقائيًا: {meta_path.name} (راجعها إن أردت تحسين الملخص)")
-    return log
     return log
 
 
