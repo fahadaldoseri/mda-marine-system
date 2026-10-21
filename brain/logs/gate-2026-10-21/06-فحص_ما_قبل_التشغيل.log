@@ -1,0 +1,42 @@
+===== فحص ما قبل التشغيل — 2026-10-21 =====
+  ✔ كتل العرض المدعومة: 9
+  ✔ ملف الواجهة صالح (JSON)
+  ✔ كل أسماء الكتل مدعومة (8)
+  ✔ كل مفاتيح الكتل تطابق عنوانًا (7)
+  ✔ عدد أقسام التقرير 16
+  ✔ حقول ملف الواجهة مكتملة
+  ✔ watchlist/ofac-targets.txt موجود
+  ✔ watchlist/original-sources.txt موجود
+  ✔ tools/check_feeds.py موجود
+  ✔ tools/ofac_screen.py موجود
+  ✔ tools/archive_originals.py موجود
+  ✔ tools/daily_pipeline.sh موجود
+  ✔ tools/build_source_reliability.py موجود
+  ✔ tools/ensure_devserver.sh موجود
+  ✔ validators/check_language.py موجود
+  ✔ validators/validate_report.py موجود
+  ✔ المولّد: build_report.py
+  ✔ المولّد: blocks.py
+  ✔ المولّد: map_gulf.py
+  ✔ المولّد: verify.py
+  ✔ المولّد: build_site.py
+  ✔ المولّد: sync_from_brain.py
+  ✔ سجل موثوقية المصادر الأربعين موجود
+  ✔ sources/site.json موجود
+  ✔ base_url مضبوط: https://seawatch-xp4qirmr.manus.space
+  ✔ خادم المعاينة يعمل (3000)
+  ✔ مساعد اعتماد الدفع سليم
+  ✔ الدفتر الجامع موجود
+  ✔ خريطة رموز الأحداث موجودة
+  ✔ الدفتر الجامع يغطي أحدث واقعة مسجّلة (2026-10-21)
+  ✔ كل رموز التقرير مُحلّة (5)
+  ✔ لا خوادم معاينة قديمة معلّقة (8080/8090)
+  ✔ خادم المعاينة يعمل على المنفذ المعتمد (3000)
+  ✔ عدد عمليات المتصفح معقول (10)
+  ✔ تنبيه تشغيلي: مهام الخدمات (services) لا تنتهي بحكم تصميمها، وليست مهام عالقة
+  ✔ رقم النسخة متسلسل وصحيح (قبل الكتابة) — ! إصدار مسجّل لتاريخ 2026-10-21 بالفعل — تحقق من منع التكرار
+  ! أقسام بلا كتلة عرض (تحقّق أنها مقصودة): ['ما تغيّر منذ التقرير السابق', 'الخلاصة', 'التوزيع الجغرافي للوقائع', 'مستوى التهديد', 'التوجيهات التشغيلية', 'التحذيرات والنشرات الرسمية', 'سجل IMO والحوادث المؤكدة', 'المراقبة المستمرة', 'الخلفية القائمة']
+  ✘ الخط اليومي لم ينجح: {'status': 'degraded', 'checked': 24, 'ok': 22, 'failed': 1, 'fail_ratio': 0.042, 'failed_feeds': [{'num': 17, 'name': 'حساب @bna_en على X', 'primary_url': 'https://web.archive.org/web/20260108135704/https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa', 'error': 'blocked page: Human Verification', 'block_reason': 'all routes failed: primary: HTTP Error 403: Forbidden | fallback:jina.ai/bna-en-x: HTTP Error 403: Forbidden | fallback:jina.ai/bna-rss: blocked page: Human Verification', 'attempts': [{'url': 'https://web.archive.org/web/20260108135704/https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa', 'via': 'primary', 'ok': False, 'error': 'HTTP Error 403: Forbidden', 'tls_verification': 'verified'}, {'url': 'https://r.jina.ai/http://x.com/bna_en', 'via': 'fallback:jina.ai/bna-en-x', 'ok': False, 'error': 'HTTP Error 403: Forbidden', 'tls_verification': 'verified'}, {'url': 'https://r.jina.ai/http://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa', 'via': 'fallback:jina.ai/bna-rss', 'ok': False, 'error': 'blocked page: Human Verification', 'tls_verification': 'verified'}]}]} · {'status': 'ok', 'note': 'فُحص 7 مستهدفًا — الحالة: ok', 'targets': 7, 'matches': [], 'reviews': [], 'list': 'https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exp', 'results_file': 'archive/ofac-screen-latest.json'} · {'status': 'ok', 'note': 'حُفظت الأصول في archive/originals/2026-10-21/ — الحالة: ok', 'manifest': 'archive/originals/2026-10-21/manifest.json', 'healthy': 1, 'empty_shell': 0, 'failed': 0, 'status_file': 'archive/originals/2026-10-21/status.json'}
+  ✘ النسخة الاحتياطية لا تضم تقرير اليوم — شغّل tools/github_backup.sh
+----- النتيجة: نجح 36 · تحذير 1 · فشل 2 -----
+الحكم: ممنوع التسليم — أصلح الفشل أولًا
