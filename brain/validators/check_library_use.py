@@ -45,6 +45,19 @@ def gaps_list() -> list[tuple[str, str]]:
     return out
 
 
+def recurring_phrases() -> list[str]:
+    """مكتبة العبارات المتكررة: كل عبارة فيها تُفحَص على الإصدار (عطل ك-78)."""
+    f = B / "appendices" / "libraries" / "recurring-phrases.md"
+    if not f.exists():
+        return []
+    out = []
+    for line in f.read_text(encoding="utf-8").splitlines():
+        m = re.match(r"^[-*]\s+[«\"](.+?)[»\"]", line.strip())
+        if m and 6 <= len(m.group(1)) <= 60:
+            out.append(m.group(1))
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="بوابة استعمال المكتبات")
     ap.add_argument("--date", required=True)

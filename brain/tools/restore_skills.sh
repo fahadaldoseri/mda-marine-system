@@ -1,21 +1,30 @@
 #!/usr/bin/env bash
-# استعادة المهارات من المستودع عند نقص القواعد المعتمدة (عطل ك-48).
-# لا يُدفع نقص فوق المستودع؛ يُستعاد المستودع إلى المجلد المحلي أولًا.
+# استعادة المهارات من المستودع إلى النسخة المحلية — تصحيح التماثل (عطل ك-77).
+# القاعدة: المصدر الموثوق هو المستودع، والنسخة المحلية في /home/ubuntu/skills مرآة
+# تُستعاد آليًا قبل أي تشغيل وقبل أي دفع؛ لأن مجلد المهارات الرسمي قد يُعاد من المنصة.
 set -uo pipefail
 B="$(cd "$(dirname "$0")/.." && pwd)"
-REPO="$B/../mda-marine-system/skills"
-SK="/home/ubuntu/skills"
+REPO_DIR="${REPO_DIR:-$B/../mda-marine-system}"
+REPO="$REPO_DIR/skills"
+SK="${SKILLS_DIR:-/home/ubuntu/skills}"
+CHECK_ONLY=0; [ "${1:-}" = "--check" ] && CHECK_ONLY=1
 [ -d "$REPO" ] || { echo "✘ لا مستودع مهارات في $REPO"; exit 3; }
-cd "$B/../mda-marine-system" && git fetch -q origin 2>/dev/null && git checkout -q origin/main -- skills 2>/dev/null || true
-restored=0
+if [ -d "$REPO_DIR/.git" ]; then
+  git -C "$REPO_DIR" fetch -q origin 2>/dev/null && git -C "$REPO_DIR" checkout -q origin/main -- skills 2>/dev/null || true
+fi
+diff_list=(); restored=0
 while IFS= read -r f; do
-  rel="${f#$REPO/}"
+  rel="${f#"$REPO"/}"
   if [ ! -f "$SK/$rel" ] || ! cmp -s "$f" "$SK/$rel"; then
-    if python3 "$B/validators/check_skills_integrity.py" >/dev/null 2>&1; then break; fi
-    mkdir -p "$(dirname "$SK/$rel")"
-    cp "$f" "$SK/$rel"
-    echo "  ↑ استُعيد: $rel"
-    restored=$((restored+1))
+    diff_list+=("$rel")
+    if [ "$CHECK_ONLY" -eq 0 ]; then
+      mkdir -p "$(dirname "$SK/$rel")"; cp "$f" "$SK/$rel"
+      echo "  ↑ استُعيد من المستودع: $rel"; restored=$((restored + 1))
+    fi
   fi
-done < <(find "$REPO" -type f -name "*.md")
-echo "  عدد المستعاد: $restored"
+done < <(find "$REPO" -type f \( -name "*.md" -o -name "*.json" -o -name "*.py" -o -name "*.txt" \) | sort)
+echo "  ملفات المستودع: $(find "$REPO" -type f | wc -l) · مختلفة قبل الاستعادة: ${#diff_list[@]} · مستعاد: $restored"
+if [ "$CHECK_ONLY" -eq 1 ] && [ "${#diff_list[@]}" -gt 0 ]; then
+  echo "  ✘ التماثل مكسور: ${diff_list[*]:0:5}"; exit 1
+fi
+echo "  ✔ التماثل سليم: المحلي = المستودع"

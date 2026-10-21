@@ -22,6 +22,7 @@ LOGDIR="$B/logs"; mkdir -p "$LOGDIR"
 LOG="$LOGDIR/pipeline-$D.log"
 MARK="$LOGDIR/pipeline-$D.json"
 
+bash "$B/tools/restore_skills.sh" 2>&1 | tail -3
 echo "===== خط التشغيل الموحّد v4 — $D — $(date -u +%FT%TZ) =====" | tee -a "$LOG"
 
 classify() { case "${1:-9}" in 0) echo ok ;; 1) echo degraded ;; *) echo failed ;; esac; }
@@ -192,8 +193,6 @@ else
   echo "   شغّلها بعد كتابة التقرير: bash tools/final_gate.sh $D" | tee -a "$LOG"
 fi
 
-echo "===== نهاية الخط (رمز الخروج: $RC) =====" | tee -a "$LOG"
-exit $RC
 
 # بوابة قاعدة النقاط في المصدر (19 أكتوبر 2026)
 python3 "$B/validators/check_points_rule.py" --md "$B/reports/$D-sectioned.md" --meta "$B/web/meta/$D.json" || echo "! بوابة النقاط أعادت تحذيرًا"
@@ -209,3 +208,10 @@ if ! python3 "$B/validators/check_backup_parity.py" --mode strict; then
   echo "✘ النسخة الاحتياطية غير مطابقة للشجرة المحلية — التسليم موقوف حتى تُصلح الأسباب أعلاه"
   exit 2
 fi
+# ── التعلّم الذاتي: يُقاس التعلّم بعدد الدروس المُفعَّلة لا المسجّلة (عطل ك-79)
+echo "-- التعلّم الذاتي --" | tee -a "$LOG"
+python3 tools/self_improve.py --date "$D" --window 7 >>"$LOG" 2>&1 || true
+echo "   ✔ موجز التحسين: audit/موجز-التحسين-$D.md" | tee -a "$LOG"
+
+echo "===== نهاية الخط (رمز الخروج: $RC) =====" | tee -a "$LOG"
+exit $RC
