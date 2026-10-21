@@ -708,7 +708,7 @@ def classify(text: str):
         if re.search(r"هجوم\s*(مؤكد|مثبت)", seg):
             return ("هجوم مؤكد", "t-confirm")
         if re.search(r"تفاعل عسكري|تعطيل", seg):
-            return ("تفاعل عسكري", "t-inter")
+            return ("واقعة عسكرية", "t-inter")
         if re.search(r"غير محسوم|نشاط مشبوه|غير مؤكد|غير مثبت", seg):
             return ("غير محسوم", "t-suspect")
         if re.search(r"خلفية|ليست واقعة", seg):
@@ -716,7 +716,7 @@ def classify(text: str):
     if re.search(r"هجوم\s*(مؤكد|مثبت)", text):
         return ("هجوم مؤكد", "t-confirm")
     if re.search(r"تفاعل عسكري|قوات عسكرية|تعطيل", text):
-        return ("تفاعل عسكري", "t-inter")
+        return ("واقعة عسكرية", "t-inter")
     if re.search(r"نشاط مشبوه|غير محسوم|مجهول", text):
         return ("غير محسوم", "t-suspect")
     return ("خلفية", "t-bg")
