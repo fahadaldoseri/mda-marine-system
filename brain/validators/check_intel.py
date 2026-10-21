@@ -78,19 +78,31 @@ def main() -> int:
         return 1
 
     body = sec.split("\n", 1)[1] if "\n" in sec else ""
+    
+    # ── قرار المالك: الفقرات السردية محذوفة بقرار موثّق في السياسة ──
+    _pol = {}
+    try:
+        import json as _json
+        _pol = _json.loads((Path(__file__).resolve().parents[1] / "appendices" /
+                            "report-sections-policy.json").read_text(encoding="utf-8"))
+    except Exception:
+        _pol = {}
+    _narr = bool(_pol.get("intel_narrative_removed"))
+    if _narr:
+        print("  · ح1/ح2/ح3/ح5: الفقرات السردية محذوفة بقرار المالك — يُشترط ما بقي:")
     paras = [p for p in re.split(r"\n\s*\n", body) if len(p.strip()) > 40 and not p.strip().startswith("|")]
 
     print(f"===== بوابة التحليل الاستخباري — {md.name} =====")
 
     # ح1 — الحد الأدنى ثلاث فقرات
-    if len(paras) < 3:
+    if len(paras) < 3 and not _narr:
         errors.append(f"ح1: فقرات القسم {len(paras)} والصقب الأدنى 3")
     else:
         print(f"  ✔ ح1: فقرات القسم = {len(paras)}")
 
     # ح2 — لغة عدم اليقين
     hits = [t for t in LEXICON if t in body]
-    if not hits:
+    if not hits and not _narr:
         errors.append("ح2: لا عبارة احتمالية معتمدة من سلّم ICD 203")
     else:
         print(f"  ✔ ح2: عبارات الاحتمال المعتمدة = {len(hits)} → {', '.join(hits[:4])}")
@@ -104,7 +116,7 @@ def main() -> int:
         print("  ✔ ح2: لا عبارات مبهمة في القسم")
 
     # ح3 — درجة الثقة
-    if "درجة الثقة" not in body:
+    if "درجة الثقة" not in body and not _narr:
         errors.append("ح3: لا سطر «درجة الثقة»")
     else:
         print("  ✔ ح3: درجة الثقة معلنة")
@@ -122,7 +134,11 @@ def main() -> int:
         "الفرضيات": ("فرضية", "الفرضيات", "الفرضية", "المتنافسة"),
         "تقييم دقة الأمس": ("تحقق", "لم يتحقق", "غير محسوم"),
     }
+    NARRATIVE_STYLES = {"الافتراضات", "الفرضيات", "تقييم دقة الأمس"}
     for label, keys in checks.items():
+        if _narr and label in NARRATIVE_STYLES:
+            print(f"  · ح5: {label} — محذوف بقرار المالك")
+            continue
         if not any(k in body for k in keys):
             errors.append(f"ح5: الأسلوب «{label}» غير ظاهر في القسم")
         else:
@@ -140,6 +156,21 @@ def main() -> int:
     leaked = [f for f in FIELD_LEAK if f in body]
     if leaked:
         errors.append("ح1/ك1: تسرب أسماء حقول برمجية → " + " · ".join(leaked))
+
+    # ── ما يجب أن يبقى داخل القسم بعد إزالة الفقرات السردية ──
+    if _narr:
+        if "مؤشرات الإنذار المبكر" not in body:
+            errors.append("بقاء-1: «مؤشرات الإنذار المبكر» غير ظاهرة بعد الحذف الجزئي")
+        else:
+            print("  ✔ بقاء-1: مؤشرات الإنذار المبكر")
+        if not re.search(r"EST-\d{4}-\d{2}-\d{2}-\d{2}", body):
+            errors.append("بقاء-2: جدول رموز التقدير EST غير ظاهر بعد الحذف الجزئي")
+        else:
+            print("  ✔ بقاء-2: جدول رموز التقدير EST")
+        if "المراجعة الداخلية" not in body:
+            warns.append("بقاء-3: سطر المراجعة الداخلية غير ظاهر")
+        else:
+            print("  ✔ بقاء-3: سطر المراجعة الداخلية")
 
     # ح12 — وسم الأسلوب في ملف الواجهة
     if meta_path and meta_path.exists():

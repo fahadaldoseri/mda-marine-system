@@ -136,6 +136,12 @@ def main() -> int:
             heads = [h.strip() for h in re.findall(r"^##\s+(.+)$",
                                                     src.read_text(encoding="utf-8"), re.M)]
             hidden = ("المصادر والمراجع", "موثوقية المصادر")
+            try:
+                import json as _json
+                _pol = _json.loads((B / "appendices" / "report-sections-policy.json").read_text(encoding="utf-8"))
+                hidden = tuple(hidden) + tuple(_pol.get("hidden_sections", []))
+            except Exception:
+                pass
             miss = [h for h in heads
                     if not any(x in h for x in hidden) and nrm(h)[:12] not in flat]
             if miss:
