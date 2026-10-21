@@ -120,17 +120,8 @@ PRIORITY_SECTIONS = ("الخلاصة", "التوجيهات التشغيلية")
 # ── إخفاء أقسام من إصدار التقرير (الويب والطباعة معًا) — قرار المالك 2026-10-21 ──
 # القاعدة: الإخفاء يُنفَّذ هنا مرة واحدة فيخدم الويب وPDF وWord، ولا تُحذف البيانات
 # من ملف الواجهة ولا من دفتر الأحداث (تبقى للأرشيف والفحوص).
-HIDDEN_SECTIONS = {
-    "قاموس الرموز والمصطلحات",
-    "مؤشرات الموقف",
-    "مستوى التهديد",
-    "التوجيهات التشغيلية",
-    "التحليل الاستخباري",
-    "الاحتمالات والإسناد",
-    "المراقبة المستمرة",
-    "المصادر والمراجع",
-}
-HIDDEN_BLOCKS = {"gaps"}  # «تكليفات المتابعة» داخل قسم «ما لم يُحسم»
+HIDDEN_SECTIONS = set()  # تُقرأ من سياسة Brain وحدها (ك-86/ك-91) — لا قائمة مزدوجة
+HIDDEN_BLOCKS = set()  # تُقرأ من السياسة
 
 
 def load_section_policy(meta_path=None):
@@ -149,14 +140,21 @@ def load_section_policy(meta_path=None):
         try:
             if c.is_file():
                 d = json.loads(c.read_text(encoding="utf-8"))
-                if d.get("hidden_sections"):
-                    HIDDEN_SECTIONS = set(d["hidden_sections"])
-                if d.get("hidden_blocks") is not None:
-                    HIDDEN_BLOCKS = set(d["hidden_blocks"])
+                HIDDEN_SECTIONS = set(d.get("hidden_sections") or [])
+                HIDDEN_BLOCKS = set(d.get("hidden_blocks") or [])
+                print(f"سياسة الأقسام: {c} · محذوف {len(HIDDEN_SECTIONS)} · كتل {len(HIDDEN_BLOCKS)}",
+                      file=sys.stderr)
                 return c
         except Exception:
             continue
     return None
+
+
+# _POLICY_LOADED_AT_IMPORT: تحميل السياسة عند الاستيراد، فلا يبقى أي افتراضي مزدوج
+try:
+    load_section_policy()
+except Exception as _e:  # noqa: BLE001
+    print(f"تعذّر تحميل سياسة الأقسام: {_e}", file=sys.stderr)
 
 
 def _hidden(title: str) -> bool:

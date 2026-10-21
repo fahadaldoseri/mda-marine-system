@@ -142,8 +142,12 @@ def main() -> int:
                 hidden = tuple(hidden) + tuple(_pol.get("hidden_sections", []))
             except Exception:
                 pass
+            flat_tight = "".join(flat.split())
+            def _seen(hh):
+                tight = "".join(nrm(hh).split())
+                return tight[:12] in flat_tight or tight[:18] in flat_tight
             miss = [h for h in heads
-                    if not any(x in h for x in hidden) and nrm(h)[:12] not in flat]
+                    if not any(x in h for x in hidden) and not _seen(h)]
             if miss:
                 fails.append(f"أقسام ناقصة في PDF: {miss}")
             else:

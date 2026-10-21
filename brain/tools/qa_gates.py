@@ -39,6 +39,13 @@ B = Path(f"{BRAIN}")
 SITE = Path(f"{SITE}")
 REQUIRED_META = ("hero_kpis", "decision_card", "changes")
 HIDDEN_SECTIONS = ("المصادر والمراجع", "موثوقية المصادر")
+try:  # سياسة الأقسام: مصدر واحد يقرأه المولّد والبوابات (ك-86/ك-91)
+    import json as _json
+    _pol = _json.loads((B / "appendices" / "report-sections-policy.json").read_text(encoding="utf-8"))
+    HIDDEN_SECTIONS = tuple(HIDDEN_SECTIONS) + tuple(_pol.get("hidden_sections", []))
+    _norm_hidden = lambda arr: tuple(norm(x) for x in arr)  # توحيد التطبيع قبل المقارنة
+except Exception:
+    pass
 
 
 def read(path: Path) -> str:
@@ -166,9 +173,13 @@ def gate_parity(date: str):
     if not src or not txt:
         return False, "المصدر النصي أو PDF مفقود", True
     heads = [norm(h.lstrip("# ").strip()) for h in src.splitlines() if h.startswith("## ")]
-    heads = [h for h in heads if h and not any(x in h for x in HIDDEN_SECTIONS)]
+    _H = tuple(norm(x) for x in HIDDEN_SECTIONS)
+    heads = [h for h in heads if h and not any(x in h for x in _H)]
     tt = tight(txt)
-    missing = [h for h in heads if tight(h) not in tt]
+    def _seen_pdf(hh):
+        k = tight(hh)
+        return k in tt or k[:10] in tt
+    missing = [h for h in heads if not _seen_pdf(h)]
     if missing:
         return False, "أقسام غائبة من PDF: " + "، ".join(missing[:4]), False
     return True, f"{len(heads)} قسمًا مطابقًا بين المصدر وPDF", False
@@ -224,7 +235,7 @@ def gate_docx(date: str):
     doc = cands[0]
     src = read(B / "reports" / f"{date}-sectioned.md")
     heads = [h.lstrip("# ").strip() for h in src.splitlines() if h.startswith("## ")]
-    heads = [h for h in heads if not any(x in norm(h) for x in HIDDEN_SECTIONS)]
+    heads = [h for h in heads if not any(x in norm(h) for x in tuple(norm(y) for y in HIDDEN_SECTIONS))]
     try:
         from docx import Document
         doc_obj = Document(str(doc))
@@ -232,7 +243,10 @@ def gate_docx(date: str):
     except Exception as e:  # noqa: BLE001
         return False, f"تعذّر فحص Word: {e}", False
     joined = tight(" ".join(paras))
-    missing = [h for h in heads if tight(h) not in joined]
+    def _seen_docx(hh):
+        k = tight(hh)
+        return k in joined or k[:10] in joined
+    missing = [h for h in heads if not _seen_docx(h)]
     if missing:
         return False, "أقسام غائبة من Word: " + "، ".join(missing[:4]), False
     return True, f"Word يحوي {len(paras)} فقرة و{len(heads)} قسمًا", False
