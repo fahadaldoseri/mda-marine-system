@@ -676,6 +676,29 @@ section.doc{scroll-margin-top:0 !important}
 /* رقم المعلّم: نص داكن على معلّم فاتح، ومقلوب في الوضع النهاري */
 body:not(.daylight) .lg-num{color:#04120f}
 body.daylight .lg-num{color:#ffffff}
+
+/* بطاقات الجوال للجداول — البند المعتمد 21 أكتوبر 2026 */
+@media (max-width:560px){
+  table.cardified{display:block;border:0;background:transparent;border-radius:0}
+  table.cardified.cardified{width:100%;max-width:100%;min-width:0}
+  table.cardified thead{display:none}
+  table.cardified tbody{display:block;max-width:100%}
+  table.cardified tr{display:block;max-width:100%;box-sizing:border-box;background:var(--panel);
+    border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin:0 0 10px}
+  table.cardified td{display:grid;grid-template-columns:minmax(72px,auto) minmax(0,1fr);gap:8px;
+    border:0;padding:5px 0;align-items:baseline;text-align:start;
+    overflow-wrap:anywhere;word-break:break-word;min-width:0}
+  table.cardified td::before{content:attr(data-label);color:var(--muted);font-size:12.5px;font-weight:600}
+  table.cardified td:empty{display:none}
+  .tbl-wrap:has(table.cardified),.tbl-scroll:has(table.cardified){overflow:visible;border:0}
+  .tbl-hint{display:none}
+}
+/* بانر النسخة المستبدلة — البند المعتمد 21 أكتوبر 2026 */
+.sup-banner{margin:0 0 20px;padding:12px 16px;border:1px solid #c9a24f;border-radius:10px;
+  background:#2a2210;color:#ffd88a;font-size:14px}
+body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
+.sup-banner a{color:inherit;font-weight:700;text-decoration:underline}
+.sp-dim{opacity:.72}
 </style></head>
 <body><nav class="site-nav no-print" aria-label="تنقل الموقع">
   <div class="sn-inner">
@@ -729,13 +752,13 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
   </div>
 </div>
 
-<div class="wrap">
+<div class="wrap"><div class="sup-banner" role="note">نسخة مستبدلة — اعتمد الإصدار المحدّث: <a href="/reports/special-ach-hormuz-targeting-v3-2026-10-16.html">افتح الإصدار المعتمد ←</a></div>
   <header class="masthead">
     <h1>مصفوفة <span class="ltr">ACH</span> نسخة 2: نمط الاستهداف في هرمز</h1>
     <div class="threat risk-high"><div class="lbl">مستوى التهديد</div><div class="val">مرتفع</div></div>
     <div>
       <p class="lede">نسخة ثانية بعد استكمال بيانات الأعلام والمشغّلين لأحد عشر ضحية، وجمع مقام الاحتمال. النتيجة: الاستهداف يتبع الانتماء أولًا والممر ثانيًا، وأقوى دليل هو إعلان أدنوك الرسمي أن 15 من سفنها استُهدفت، وسقوط فرضية العلم السنغافوري بثلاثة ضحايا من عشرين وبتوزيع أعلام يطابق السجلات المفتوحة العالمية. وقد حلّت محلّها نسخة 3 بالترجيح الكمّي الموزون بعد تدقيق مستقل.</p>
-      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-21 14:33 <span class="ltr">UTC</span></b></span></div>
+      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-21 15:23 <span class="ltr">UTC</span></b></span></div>
     </div>
   </header>
 
@@ -748,34 +771,34 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
   <main>
     
     <section class="doc reveal" id="sec-01" aria-labelledby="h-01"><h2 id="h-01"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>ما تغيّر عن النسخة الأولى</h2><div class="h-rule"></div><p>النسخة الأولى اختبرت ثلاث فرضيات باثني عشر دليلًا، وخلصت إلى أن الاستهداف يتبع الممر لا العلم، مع فرضية رابعة مرشّحة (الانتماء) بلا بيانات كافية. النسخة الثانية تستكمل الحاجزين: <strong>بيانات الأعلام والمشغّلين لأحد عشر ضحية</strong>، و<strong>مقام الاحتمال</strong>. والنتيجة تغيّرت جوهريًا: الفرضية الرابعة لم تعد مرشّحة، بل صارت من أقوى فرضيتين، وأصبحت الفرضيتان الأولى (الأسطول) والثانية (الخط) <strong>متكاملتين لا متنافستين</strong>.</p></section><section class="doc pri reveal" id="sec-02" aria-labelledby="h-02"><h2 id="h-02"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 3h9l-1.2 3H19v8h-8.2L9.6 11H6v9H4z"/></svg></span>الخلاصة</h2><div class="h-rule"></div><p class="sec-lede">الموقف ومستوى الخطر والإجراء المقترح في ثلاثة أسطر.</p><p><strong>الترجيح النهائي:</strong> الاستهداف يتبع <strong>الانتماء</strong> أولًا و<strong>الممر</strong> ثانيًا، ويعملان معًا: الهدف هو السفن المرتبطة بالإمارات أو الولايات المتحدة أو إسرائيل، ومكان الإصابة هو ممر هرمز ومسارات الخليج المغذية. وقد اختُبر هذا الترجيح باختبار المقام فنجا: نسبة عدم التناسب لإصابات أسطول أدنوك <strong>R بين 2.3 و12.2 ضعفًا</strong>، أي لا يفسّرها التعرّض وحده. والفرضية التي سقطت هي العلم السنغافوري.</p>
-<p><strong>درجة الثقة:</strong> <strong>متوسطة إلى مرتفعة</strong> — ارتفعت بفضل إعلان أدنوك الرسمي، ثم باختبار المقام الذي رجّح الاستهداف على التعرّض. ولم تبلغ المرتفعة لسببين: قائمة الإصابات الـ15 غير منشورة بالاسم والتاريخ، ومقام الانتماء الإماراتي الإجمالي غير معلوم. <strong>تصحيح:</strong> الرقم «15 من 32 ≈ 47%» الوارد في هذه النسخة مسحوب ومصحّح؛ الرقم 32 يخص أسطول Navig8 المملوك لا إجمالي أسطول أدنوك. التفصيل في ملحق مقام التعرّض.</p></section><section class="doc reveal" id="sec-glossary" aria-labelledby="h-glossary"><h2 id="h-glossary"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>قاموس الرموز والمصطلحات</h2><div class="h-rule"></div><p class="sec-lede">تعريفات الرموز والمصطلحات المستخدمة في هذا التقرير.</p><div class="glossary"><b>قاموس الرموز والمصطلحات:</b> <b>تحليل الفرضيات المتنافسة (<span class="ltr">ACH</span>)</b>: طريقة تُقارن فرضيات متعددة مع أدلة معلنة، وتُرجّح الأقل تناقضًا لا الأكثر تأييدًا. · <b>مقام الاحتمال</b>: العدد الكلي للسفن أو العبورات الذي تُقاس عليه نسبة الإصابات، وبلا هذا المقام لا يُقاس إن كان التكرار أعلى من الصدفة. · <b>فرضية مسمّاة بالأسطول</b>: استهداف المشغّل بعينه، أيّ سفينة ترفع رايته معرّضة. · <b>فرضية الخط الملاحي</b>: استهداف يتبع المسار أو الممر، بصرف النظر عن المشغّل أو العلم.</div></section><section class="doc reveal" id="sec-03" aria-labelledby="h-03"><h2 id="h-03"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>الفرضيات</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<p><strong>درجة الثقة:</strong> <strong>متوسطة إلى مرتفعة</strong> — ارتفعت بفضل إعلان أدنوك الرسمي، ثم باختبار المقام الذي رجّح الاستهداف على التعرّض. ولم تبلغ المرتفعة لسببين: قائمة الإصابات الـ15 غير منشورة بالاسم والتاريخ، ومقام الانتماء الإماراتي الإجمالي غير معلوم. <strong>تصحيح:</strong> الرقم «15 من 32 ≈ 47%» الوارد في هذه النسخة مسحوب ومصحّح؛ الرقم 32 يخص أسطول Navig8 المملوك لا إجمالي أسطول أدنوك. التفصيل في ملحق مقام التعرّض.</p></section><section class="doc reveal" id="sec-glossary" aria-labelledby="h-glossary"><h2 id="h-glossary"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>قاموس الرموز والمصطلحات</h2><div class="h-rule"></div><p class="sec-lede">تعريفات الرموز والمصطلحات المستخدمة في هذا التقرير.</p><div class="glossary"><b>قاموس الرموز والمصطلحات:</b> <b>تحليل الفرضيات المتنافسة (<span class="ltr">ACH</span>)</b>: طريقة تُقارن فرضيات متعددة مع أدلة معلنة، وتُرجّح الأقل تناقضًا لا الأكثر تأييدًا. · <b>مقام الاحتمال</b>: العدد الكلي للسفن أو العبورات الذي تُقاس عليه نسبة الإصابات، وبلا هذا المقام لا يُقاس إن كان التكرار أعلى من الصدفة. · <b>فرضية مسمّاة بالأسطول</b>: استهداف المشغّل بعينه، أيّ سفينة ترفع رايته معرّضة. · <b>فرضية الخط الملاحي</b>: استهداف يتبع المسار أو الممر، بصرف النظر عن المشغّل أو العلم.</div></section><section class="doc reveal" id="sec-03" aria-labelledby="h-03"><h2 id="h-03"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>الفرضيات</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">#</th>
 <th scope="col">الفرضية</th>
 <th scope="col">معيار الاختيار المفترض</th>
 </tr></thead><tbody>
 <tr>
-<td>H1</td>
-<td>استهداف مسمّى بالأسطول</td>
-<td>المشغّل بعينه (مثل <span class="ltr">GFS</span>) مستهدف بالاسم.</td>
+<td data-label="#">H1</td>
+<td data-label="الفرضية">استهداف مسمّى بالأسطول</td>
+<td data-label="معيار الاختيار المفترض">المشغّل بعينه (مثل <span class="ltr">GFS</span>) مستهدف بالاسم.</td>
 </tr>
 <tr>
-<td>H2</td>
-<td>استهداف بالخط الملاحي</td>
-<td>كل ما يعبر المضيق أو يعمل على مسارات الخليج المغذية معرّض.</td>
+<td data-label="#">H2</td>
+<td data-label="الفرضية">استهداف بالخط الملاحي</td>
+<td data-label="معيار الاختيار المفترض">كل ما يعبر المضيق أو يعمل على مسارات الخليج المغذية معرّض.</td>
 </tr>
 <tr>
-<td>H3</td>
-<td>استهداف بالعلم السنغافوري</td>
-<td>العلم نفسه معيار استهداف.</td>
+<td data-label="#">H3</td>
+<td data-label="الفرضية">استهداف بالعلم السنغافوري</td>
+<td data-label="معيار الاختيار المفترض">العلم نفسه معيار استهداف.</td>
 </tr>
 <tr>
-<td>H4</td>
-<td>استهداف بالانتماء</td>
-<td>الملكية أو الإدارة المرتبطة بالإمارات أو الولايات المتحدة أو إسرائيل هي المعيار.</td>
+<td data-label="#">H4</td>
+<td data-label="الفرضية">استهداف بالانتماء</td>
+<td data-label="معيار الاختيار المفترض">الملكية أو الإدارة المرتبطة بالإمارات أو الولايات المتحدة أو إسرائيل هي المعيار.</td>
 </tr>
 </tbody></table></div>
-<p><strong>الدرجات:</strong> ++ اتساق قوي · + اتساق · 0 محايد · − تناقض · −− تناقض قوي. والترجيح <strong>بعدد التناقضات</strong> لا بعدد أدلة الاتساق.</p></section><section class="doc reveal" id="sec-04" aria-labelledby="h-04"><h2 id="h-04"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>سجل السفن المستهدفة (20 اسمًا موثقًا)</h2><div class="h-rule"></div><span class="tbl-hint">اسحب الجدول أفقيًا لرؤية بقية الأعمدة</span><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول يحتاج تمريرًا أفقيًا"><table>
+<p><strong>الدرجات:</strong> ++ اتساق قوي · + اتساق · 0 محايد · − تناقض · −− تناقض قوي. والترجيح <strong>بعدد التناقضات</strong> لا بعدد أدلة الاتساق.</p></section><section class="doc reveal" id="sec-04" aria-labelledby="h-04"><h2 id="h-04"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>سجل السفن المستهدفة (20 اسمًا موثقًا)</h2><div class="h-rule"></div><span class="tbl-hint">اسحب الجدول أفقيًا لرؤية بقية الأعمدة</span><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول يحتاج تمريرًا أفقيًا"><table class="cardified">
 <thead><tr>
 <th scope="col">السفينة</th>
 <th scope="col"><span class="ltr">IMO</span></th>
@@ -786,304 +809,304 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <th scope="col">صلة الانتماء</th>
 </tr></thead><tbody>
 <tr>
-<td><span class="ltr">GFS PRIDE</span></td>
-<td class="num">9349045</td>
-<td>سنغافورة</td>
-<td><span class="ltr">GFS</span> — AD Ports 81%</td>
-<td>حاويات</td>
-<td>13 أكتوبر — غرقت</td>
-<td><strong>إماراتي (ملكية)</strong></td>
+<td data-label="السفينة"><span class="ltr">GFS PRIDE</span></td>
+<td class="num" data-label="IMO">9349045</td>
+<td data-label="العلم">سنغافورة</td>
+<td data-label="المالك / المشغّل"><span class="ltr">GFS</span> — AD Ports 81%</td>
+<td data-label="النوع">حاويات</td>
+<td data-label="الإصابة">13 أكتوبر — غرقت</td>
+<td data-label="صلة الانتماء"><strong>إماراتي (ملكية)</strong></td>
 </tr>
 <tr>
-<td><span class="ltr">GFS GISELLE</span></td>
-<td class="num">9704661</td>
-<td>سنغافورة</td>
-<td><span class="ltr">GFS</span> — AD Ports 81%</td>
-<td>حاويات</td>
-<td>13 أكتوبر — أضرار</td>
-<td><strong>إماراتي (ملكية)</strong></td>
+<td data-label="السفينة"><span class="ltr">GFS GISELLE</span></td>
+<td class="num" data-label="IMO">9704661</td>
+<td data-label="العلم">سنغافورة</td>
+<td data-label="المالك / المشغّل"><span class="ltr">GFS</span> — AD Ports 81%</td>
+<td data-label="النوع">حاويات</td>
+<td data-label="الإصابة">13 أكتوبر — أضرار</td>
+<td data-label="صلة الانتماء"><strong>إماراتي (ملكية)</strong></td>
 </tr>
 <tr>
-<td><span class="ltr">GFS GALAXY</span></td>
-<td class="num">9401271</td>
-<td>قبرص</td>
-<td><span class="ltr">GFS</span> — AD Ports 81%</td>
-<td>حاويات</td>
-<td>11 يوليو — أضرار جسيمة</td>
-<td><strong>إماراتي (ملكية)</strong></td>
+<td data-label="السفينة"><span class="ltr">GFS GALAXY</span></td>
+<td class="num" data-label="IMO">9401271</td>
+<td data-label="العلم">قبرص</td>
+<td data-label="المالك / المشغّل"><span class="ltr">GFS</span> — AD Ports 81%</td>
+<td data-label="النوع">حاويات</td>
+<td data-label="الإصابة">11 يوليو — أضرار جسيمة</td>
+<td data-label="صلة الانتماء"><strong>إماراتي (ملكية)</strong></td>
 </tr>
 <tr>
-<td><span class="ltr">ST1</span></td>
-<td class="num">9256999</td>
-<td>جزر مارشال</td>
-<td><strong><span class="ltr">SAFEEN</span> Tankers 38 Ltd</strong> — Horizon Shipping (أبوظبي)</td>
-<td>ناقلة خام <span class="ltr">VLCC</span></td>
-<td>6 أكتوبر</td>
-<td><strong>إماراتي (ملكية وإدارة)</strong></td>
+<td data-label="السفينة"><span class="ltr">ST1</span></td>
+<td class="num" data-label="IMO">9256999</td>
+<td data-label="العلم">جزر مارشال</td>
+<td data-label="المالك / المشغّل"><strong><span class="ltr">SAFEEN</span> Tankers 38 Ltd</strong> — Horizon Shipping (أبوظبي)</td>
+<td data-label="النوع">ناقلة خام <span class="ltr">VLCC</span></td>
+<td data-label="الإصابة">6 أكتوبر</td>
+<td data-label="صلة الانتماء"><strong>إماراتي (ملكية وإدارة)</strong></td>
 </tr>
 <tr>
-<td><span class="ltr">CAMEROON PROSPERITY</span></td>
-<td class="num">9315159</td>
-<td>ليبيريا</td>
-<td>Trondheim Prosperity — Sinokor (كوريا) — <strong><span class="ltr">ADNOC</span> L&amp;S مدير فني</strong></td>
-<td>ناقلة خام <span class="ltr">VLCC</span></td>
-<td>4 أكتوبر</td>
-<td><strong>إماراتي (إدارة)</strong></td>
+<td data-label="السفينة"><span class="ltr">CAMEROON PROSPERITY</span></td>
+<td class="num" data-label="IMO">9315159</td>
+<td data-label="العلم">ليبيريا</td>
+<td data-label="المالك / المشغّل">Trondheim Prosperity — Sinokor (كوريا) — <strong><span class="ltr">ADNOC</span> L&amp;S مدير فني</strong></td>
+<td data-label="النوع">ناقلة خام <span class="ltr">VLCC</span></td>
+<td data-label="الإصابة">4 أكتوبر</td>
+<td data-label="صلة الانتماء"><strong>إماراتي (إدارة)</strong></td>
 </tr>
 <tr>
-<td>AL <span class="ltr">MAQAM</span></td>
-<td class="num">9732577</td>
-<td>ليبيريا</td>
-<td><strong>إدارة أدنوك</strong></td>
-<td>ناقلة خام <span class="ltr">VLCC</span></td>
-<td>11 أكتوبر (إعلان إيراني)</td>
-<td><strong>إماراتي (إدارة)</strong></td>
+<td data-label="السفينة">AL <span class="ltr">MAQAM</span></td>
+<td class="num" data-label="IMO">9732577</td>
+<td data-label="العلم">ليبيريا</td>
+<td data-label="المالك / المشغّل"><strong>إدارة أدنوك</strong></td>
+<td data-label="النوع">ناقلة خام <span class="ltr">VLCC</span></td>
+<td data-label="الإصابة">11 أكتوبر (إعلان إيراني)</td>
+<td data-label="صلة الانتماء"><strong>إماراتي (إدارة)</strong></td>
 </tr>
 <tr>
-<td>DP <span class="ltr">WORLD KAVERI</span></td>
-<td class="num">9363429</td>
-<td>الهند</td>
-<td><strong>DP World (الإمارات)</strong></td>
-<td>حاويات</td>
-<td>11 أكتوبر</td>
-<td><strong>إماراتي (ملكية)</strong></td>
+<td data-label="السفينة">DP <span class="ltr">WORLD KAVERI</span></td>
+<td class="num" data-label="IMO">9363429</td>
+<td data-label="العلم">الهند</td>
+<td data-label="المالك / المشغّل"><strong>DP World (الإمارات)</strong></td>
+<td data-label="النوع">حاويات</td>
+<td data-label="الإصابة">11 أكتوبر</td>
+<td data-label="صلة الانتماء"><strong>إماراتي (ملكية)</strong></td>
 </tr>
 <tr>
-<td>ON <span class="ltr">PEACE</span></td>
-<td class="num">9893204</td>
-<td>بنما</td>
-<td><span class="ltr">ONEX PEACE INC</span> — <strong><span class="ltr">ONEX DMCC</span> (دبي)</strong></td>
-<td>ناقلة خام Aframax</td>
-<td>5 أكتوبر — 12 مصابًا</td>
-<td><strong>إماراتي (تشغيل)</strong></td>
+<td data-label="السفينة">ON <span class="ltr">PEACE</span></td>
+<td class="num" data-label="IMO">9893204</td>
+<td data-label="العلم">بنما</td>
+<td data-label="المالك / المشغّل"><span class="ltr">ONEX PEACE INC</span> — <strong><span class="ltr">ONEX DMCC</span> (دبي)</strong></td>
+<td data-label="النوع">ناقلة خام Aframax</td>
+<td data-label="الإصابة">5 أكتوبر — 12 مصابًا</td>
+<td data-label="صلة الانتماء"><strong>إماراتي (تشغيل)</strong></td>
 </tr>
 <tr>
-<td><span class="ltr">VALTHERA</span></td>
-<td class="num">9296389</td>
-<td>جزر مارشال</td>
-<td>Celeris Wavecourse — <strong>Zeythra Group <span class="ltr">LLC-FZ</span> (الإمارات) مدير <span class="ltr">ISM</span></strong></td>
-<td>ناقلة خام Suezmax</td>
-<td>10–11 أكتوبر</td>
-<td>إماراتي (إدارة)</td>
+<td data-label="السفينة"><span class="ltr">VALTHERA</span></td>
+<td class="num" data-label="IMO">9296389</td>
+<td data-label="العلم">جزر مارشال</td>
+<td data-label="المالك / المشغّل">Celeris Wavecourse — <strong>Zeythra Group <span class="ltr">LLC-FZ</span> (الإمارات) مدير <span class="ltr">ISM</span></strong></td>
+<td data-label="النوع">ناقلة خام Suezmax</td>
+<td data-label="الإصابة">10–11 أكتوبر</td>
+<td data-label="صلة الانتماء">إماراتي (إدارة)</td>
 </tr>
 <tr>
-<td>AL <span class="ltr">SAADIYAT</span></td>
-<td class="num">9760598</td>
-<td>جزر مارشال</td>
-<td>غير معلن</td>
-<td>حاويات</td>
-<td>11 أكتوبر</td>
-<td>غير مثبت</td>
+<td data-label="السفينة">AL <span class="ltr">SAADIYAT</span></td>
+<td class="num" data-label="IMO">9760598</td>
+<td data-label="العلم">جزر مارشال</td>
+<td data-label="المالك / المشغّل">غير معلن</td>
+<td data-label="النوع">حاويات</td>
+<td data-label="الإصابة">11 أكتوبر</td>
+<td data-label="صلة الانتماء">غير مثبت</td>
 </tr>
 <tr>
-<td><span class="ltr">CAPE DAO</span></td>
-<td class="num">9219020</td>
-<td>أنتيغوا وبربودا</td>
-<td>غير معلن</td>
-<td>بضائع جافة</td>
-<td>23 سبتمبر — غرقت</td>
-<td>غير مثبت</td>
+<td data-label="السفينة"><span class="ltr">CAPE DAO</span></td>
+<td class="num" data-label="IMO">9219020</td>
+<td data-label="العلم">أنتيغوا وبربودا</td>
+<td data-label="المالك / المشغّل">غير معلن</td>
+<td data-label="النوع">بضائع جافة</td>
+<td data-label="الإصابة">23 سبتمبر — غرقت</td>
+<td data-label="صلة الانتماء">غير مثبت</td>
 </tr>
 <tr>
-<td><span class="ltr">MARAN GAS MYSTRAS</span></td>
-<td class="num">9658238</td>
-<td>اليونان</td>
-<td>Maran Gas (اليونان)</td>
-<td>ناقلة غاز</td>
-<td>7 أكتوبر</td>
-<td>يوناني</td>
+<td data-label="السفينة"><span class="ltr">MARAN GAS MYSTRAS</span></td>
+<td class="num" data-label="IMO">9658238</td>
+<td data-label="العلم">اليونان</td>
+<td data-label="المالك / المشغّل">Maran Gas (اليونان)</td>
+<td data-label="النوع">ناقلة غاز</td>
+<td data-label="الإصابة">7 أكتوبر</td>
+<td data-label="صلة الانتماء">يوناني</td>
 </tr>
 <tr>
-<td><span class="ltr">GAS VELA</span></td>
-<td class="num">9969845</td>
-<td>سنغافورة</td>
-<td>Huizhang Tianjin — Sinogas Maritime</td>
-<td>ناقلة غاز <span class="ltr">LPG</span></td>
-<td>4 أكتوبر</td>
-<td>صيني/هونغ كونغ</td>
+<td data-label="السفينة"><span class="ltr">GAS VELA</span></td>
+<td class="num" data-label="IMO">9969845</td>
+<td data-label="العلم">سنغافورة</td>
+<td data-label="المالك / المشغّل">Huizhang Tianjin — Sinogas Maritime</td>
+<td data-label="النوع">ناقلة غاز <span class="ltr">LPG</span></td>
+<td data-label="الإصابة">4 أكتوبر</td>
+<td data-label="صلة الانتماء">صيني/هونغ كونغ</td>
 </tr>
 <tr>
-<td><span class="ltr">LIPSI</span></td>
-<td class="num">1025033</td>
-<td>ليبيريا</td>
-<td>مالك مرتبط بتمويل صيني — Dynacom (اليونان)</td>
-<td>ناقلة خام Aframax</td>
-<td>4 أكتوبر</td>
-<td>يوناني/صيني</td>
+<td data-label="السفينة"><span class="ltr">LIPSI</span></td>
+<td class="num" data-label="IMO">1025033</td>
+<td data-label="العلم">ليبيريا</td>
+<td data-label="المالك / المشغّل">مالك مرتبط بتمويل صيني — Dynacom (اليونان)</td>
+<td data-label="النوع">ناقلة خام Aframax</td>
+<td data-label="الإصابة">4 أكتوبر</td>
+<td data-label="صلة الانتماء">يوناني/صيني</td>
 </tr>
 <tr>
-<td><span class="ltr">ACERS</span></td>
-<td class="num">9301902</td>
-<td>أنتيغوا وبربودا</td>
-<td>Valvoria Shipping — Med &amp; Baltic (اليونان)</td>
-<td>ناقلة منتجات <span class="ltr">LR1</span></td>
-<td>7 أكتوبر — مصاب واحد</td>
-<td>يوناني/تركي</td>
+<td data-label="السفينة"><span class="ltr">ACERS</span></td>
+<td class="num" data-label="IMO">9301902</td>
+<td data-label="العلم">أنتيغوا وبربودا</td>
+<td data-label="المالك / المشغّل">Valvoria Shipping — Med &amp; Baltic (اليونان)</td>
+<td data-label="النوع">ناقلة منتجات <span class="ltr">LR1</span></td>
+<td data-label="الإصابة">7 أكتوبر — مصاب واحد</td>
+<td data-label="صلة الانتماء">يوناني/تركي</td>
 </tr>
 <tr>
-<td><span class="ltr">GEM NO</span>. 2</td>
-<td class="num">9735373</td>
-<td>بنما</td>
-<td>Gem No 2 Maritime — Fleet Management (هونغ كونغ)</td>
-<td>ناقلة خام <span class="ltr">VLCC</span></td>
-<td>9 أكتوبر</td>
-<td>تايوان/هونغ كونغ</td>
+<td data-label="السفينة"><span class="ltr">GEM NO</span>. 2</td>
+<td class="num" data-label="IMO">9735373</td>
+<td data-label="العلم">بنما</td>
+<td data-label="المالك / المشغّل">Gem No 2 Maritime — Fleet Management (هونغ كونغ)</td>
+<td data-label="النوع">ناقلة خام <span class="ltr">VLCC</span></td>
+<td data-label="الإصابة">9 أكتوبر</td>
+<td data-label="صلة الانتماء">تايوان/هونغ كونغ</td>
 </tr>
 <tr>
-<td><span class="ltr">KITION</span> M</td>
-<td class="num">9321160</td>
-<td>بنما</td>
-<td>Kition Trading — Benetech (اليونان)</td>
-<td>ناقلة منتجات <span class="ltr">LR1</span></td>
-<td>11 أكتوبر</td>
-<td>يوناني — على قائمة عدم الامتثال الإيرانية</td>
+<td data-label="السفينة"><span class="ltr">KITION</span> M</td>
+<td class="num" data-label="IMO">9321160</td>
+<td data-label="العلم">بنما</td>
+<td data-label="المالك / المشغّل">Kition Trading — Benetech (اليونان)</td>
+<td data-label="النوع">ناقلة منتجات <span class="ltr">LR1</span></td>
+<td data-label="الإصابة">11 أكتوبر</td>
+<td data-label="صلة الانتماء">يوناني — على قائمة عدم الامتثال الإيرانية</td>
 </tr>
 <tr>
-<td><span class="ltr">EVER VICT</span></td>
-<td class="num">9266774</td>
-<td>باهاما</td>
-<td>New Treasure Shipping — Speedlink Marine</td>
-<td>ناقلة منتجات <span class="ltr">LR1</span></td>
-<td>11 أكتوبر</td>
-<td>على قائمة عدم الامتثال الإيرانية</td>
+<td data-label="السفينة"><span class="ltr">EVER VICT</span></td>
+<td class="num" data-label="IMO">9266774</td>
+<td data-label="العلم">باهاما</td>
+<td data-label="المالك / المشغّل">New Treasure Shipping — Speedlink Marine</td>
+<td data-label="النوع">ناقلة منتجات <span class="ltr">LR1</span></td>
+<td data-label="الإصابة">11 أكتوبر</td>
+<td data-label="صلة الانتماء">على قائمة عدم الامتثال الإيرانية</td>
 </tr>
 <tr>
-<td><span class="ltr">ANGOLA PROSPERITY</span></td>
-<td class="num">9896414</td>
-<td>ليبيريا</td>
-<td>Haut Brion 50 — Sinokor (كوريا) — Columbia (ألمانيا)</td>
-<td>ناقلة خام <span class="ltr">VLCC</span></td>
-<td>11 أكتوبر</td>
-<td>كوري/ألماني</td>
+<td data-label="السفينة"><span class="ltr">ANGOLA PROSPERITY</span></td>
+<td class="num" data-label="IMO">9896414</td>
+<td data-label="العلم">ليبيريا</td>
+<td data-label="المالك / المشغّل">Haut Brion 50 — Sinokor (كوريا) — Columbia (ألمانيا)</td>
+<td data-label="النوع">ناقلة خام <span class="ltr">VLCC</span></td>
+<td data-label="الإصابة">11 أكتوبر</td>
+<td data-label="صلة الانتماء">كوري/ألماني</td>
 </tr>
 <tr>
-<td><span class="ltr">PETRO DOLPHIN</span></td>
-<td class="num">1072294</td>
-<td>متنازع</td>
-<td>غير معلن</td>
-<td>ناقلة منتجات صغيرة</td>
-<td>11 أكتوبر — مفقودان</td>
-<td>غير مثبت</td>
+<td data-label="السفينة"><span class="ltr">PETRO DOLPHIN</span></td>
+<td class="num" data-label="IMO">1072294</td>
+<td data-label="العلم">متنازع</td>
+<td data-label="المالك / المشغّل">غير معلن</td>
+<td data-label="النوع">ناقلة منتجات صغيرة</td>
+<td data-label="الإصابة">11 أكتوبر — مفقودان</td>
+<td data-label="صلة الانتماء">غير مثبت</td>
 </tr>
 </tbody></table></div>
 <p><strong>حصيلة الأعلام:</strong> ليبيريا 4 · بنما 3 · جزر مارشال 3 · سنغافورة 3 · أنتيغوا وبربودا 2 · قبرص 1 · الهند 1 · اليونان 1 · باهاما 1 · متنازع 1. وهذا توزيع سجلات مفتوحة عالمي، لا توزيع علم واحد.</p>
-<p><strong>حصيلة الانتماء الإماراتي المثبت بأصل:</strong> ثماني سفن من عشرين لها صلة إماراتية موثّقة في الملكية أو الإدارة أو التشغيل (<span class="ltr">GFS PRIDE</span> · <span class="ltr">GFS GISELLE</span> · <span class="ltr">GFS GALAXY</span> · <span class="ltr">ST1</span> · <span class="ltr">CAMEROON PROSPERITY</span> · AL <span class="ltr">MAQAM</span> · DP <span class="ltr">WORLD KAVERI</span> · ON <span class="ltr">PEACE</span>)، وسفينة تاسعة بصلة إدارية أضعف (<span class="ltr">VALTHERA</span>).</p></section><section class="doc reveal" id="sec-05" aria-labelledby="h-05"><h2 id="h-05"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>الأدلة</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<p><strong>حصيلة الانتماء الإماراتي المثبت بأصل:</strong> ثماني سفن من عشرين لها صلة إماراتية موثّقة في الملكية أو الإدارة أو التشغيل (<span class="ltr">GFS PRIDE</span> · <span class="ltr">GFS GISELLE</span> · <span class="ltr">GFS GALAXY</span> · <span class="ltr">ST1</span> · <span class="ltr">CAMEROON PROSPERITY</span> · AL <span class="ltr">MAQAM</span> · DP <span class="ltr">WORLD KAVERI</span> · ON <span class="ltr">PEACE</span>)، وسفينة تاسعة بصلة إدارية أضعف (<span class="ltr">VALTHERA</span>).</p></section><section class="doc reveal" id="sec-05" aria-labelledby="h-05"><h2 id="h-05"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>الأدلة</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">#</th>
 <th scope="col">الدليل</th>
 <th scope="col">المصدر ودرجته</th>
 </tr></thead><tbody>
 <tr>
-<td>E1</td>
-<td>ثلاث إصابات لأسطول واحد في ثلاثة أشهر، كلها داخل هرمز وصفر خارجه</td>
-<td><span class="ltr">MPA</span> · WorldCargo · TradeWinds — A/1 · B/2</td>
+<td data-label="#">E1</td>
+<td data-label="الدليل">ثلاث إصابات لأسطول واحد في ثلاثة أشهر، كلها داخل هرمز وصفر خارجه</td>
+<td data-label="المصدر ودرجته"><span class="ltr">MPA</span> · WorldCargo · TradeWinds — A/1 · B/2</td>
 </tr>
 <tr>
-<td>E2</td>
-<td>ثلاثة ضحايا يرفعون علم سنغافورة (<span class="ltr">GFS PRIDE</span> · <span class="ltr">GFS GISELLE</span> · <span class="ltr">GAS VELA</span>)</td>
-<td><span class="ltr">MPA</span> · سجل VesselFinder — A/1 · C/3</td>
+<td data-label="#">E2</td>
+<td data-label="الدليل">ثلاثة ضحايا يرفعون علم سنغافورة (<span class="ltr">GFS PRIDE</span> · <span class="ltr">GFS GISELLE</span> · <span class="ltr">GAS VELA</span>)</td>
+<td data-label="المصدر ودرجته"><span class="ltr">MPA</span> · سجل VesselFinder — A/1 · C/3</td>
 </tr>
 <tr>
-<td>E3</td>
-<td>بقية الضحايا بأعلام ومشغّلين مختلفين (ليبيريا · بنما · جزر مارشال · أنتيغوا · باهاما · الهند · اليونان)</td>
-<td>سجلات التسجيل — C/3</td>
+<td data-label="#">E3</td>
+<td data-label="الدليل">بقية الضحايا بأعلام ومشغّلين مختلفين (ليبيريا · بنما · جزر مارشال · أنتيغوا · باهاما · الهند · اليونان)</td>
+<td data-label="المصدر ودرجته">سجلات التسجيل — C/3</td>
 </tr>
 <tr>
-<td>E4</td>
-<td>التقييم الرسمي: ثماني هجمات بمقذوفات 11–13 أكتوبر، أربع ناقلات وأربع سفن حاويات</td>
-<td><span class="ltr">JMIC</span> تحديث 105 — A/2</td>
+<td data-label="#">E4</td>
+<td data-label="الدليل">التقييم الرسمي: ثماني هجمات بمقذوفات 11–13 أكتوبر، أربع ناقلات وأربع سفن حاويات</td>
+<td data-label="المصدر ودرجته"><span class="ltr">JMIC</span> تحديث 105 — A/2</td>
 </tr>
 <tr>
-<td>E5</td>
-<td>تنوع أنواع السفن: خام ومنتجات وغاز وحاويات وبضائع جافة</td>
-<td><span class="ltr">IMO</span> · <span class="ltr">JMIC</span> — A/1</td>
+<td data-label="#">E5</td>
+<td data-label="الدليل">تنوع أنواع السفن: خام ومنتجات وغاز وحاويات وبضائع جافة</td>
+<td data-label="المصدر ودرجته"><span class="ltr">IMO</span> · <span class="ltr">JMIC</span> — A/1</td>
 </tr>
 <tr>
-<td>E6</td>
-<td>التمركز الجغرافي داخل المضيق ومياه عُمان فقط</td>
-<td><span class="ltr">JMIC</span> · <span class="ltr">NAVAREA IX</span> — A/1</td>
+<td data-label="#">E6</td>
+<td data-label="الدليل">التمركز الجغرافي داخل المضيق ومياه عُمان فقط</td>
+<td data-label="المصدر ودرجته"><span class="ltr">JMIC</span> · <span class="ltr">NAVAREA IX</span> — A/1</td>
 </tr>
 <tr>
-<td>E7</td>
-<td>خطوط مغذية في الخليج (خورفكان · الفجيرة · نافا شيفا · كراتشي)</td>
-<td>نقل قطاعي — B/2</td>
+<td data-label="#">E7</td>
+<td data-label="الدليل">خطوط مغذية في الخليج (خورفكان · الفجيرة · نافا شيفا · كراتشي)</td>
+<td data-label="المصدر ودرجته">نقل قطاعي — B/2</td>
 </tr>
 <tr>
-<td>E8</td>
-<td>إسناد أمريكي مباشر لإصابة <span class="ltr">GFS PRIDE</span> بمقذوف إيراني</td>
-<td>القيادة المركزية — A/2</td>
+<td data-label="#">E8</td>
+<td data-label="الدليل">إسناد أمريكي مباشر لإصابة <span class="ltr">GFS PRIDE</span> بمقذوف إيراني</td>
+<td data-label="المصدر ودرجته">القيادة المركزية — A/2</td>
 </tr>
 <tr>
-<td>E9</td>
-<td>رواية إيرانية: لغم بحري وناقلة «غير ممتثلة»</td>
-<td>رواية طرف — D/4</td>
+<td data-label="#">E9</td>
+<td data-label="الدليل">رواية إيرانية: لغم بحري وناقلة «غير ممتثلة»</td>
+<td data-label="المصدر ودرجته">رواية طرف — D/4</td>
 </tr>
 <tr>
-<td><span class="ltr">E10</span></td>
-<td>إطفاء التتبّع قبل الإصابة (<span class="ltr">GFS 11</span> و6 أيام · <span class="ltr">GAS VELA</span> عبور «مظلم»)</td>
-<td>تسجيل تتبّع · Windward — C/3</td>
+<td data-label="#"><span class="ltr">E10</span></td>
+<td data-label="الدليل">إطفاء التتبّع قبل الإصابة (<span class="ltr">GFS 11</span> و6 أيام · <span class="ltr">GAS VELA</span> عبور «مظلم»)</td>
+<td data-label="المصدر ودرجته">تسجيل تتبّع · Windward — C/3</td>
 </tr>
 <tr>
-<td><span class="ltr">E11</span></td>
-<td>الخطاب الإيراني المعلن يستهدف سفنًا مرتبطة بإسرائيل والولايات المتحدة والإمارات و«غير الممتثلة»</td>
-<td>رواية طرف — D/4</td>
+<td data-label="#"><span class="ltr">E11</span></td>
+<td data-label="الدليل">الخطاب الإيراني المعلن يستهدف سفنًا مرتبطة بإسرائيل والولايات المتحدة والإمارات و«غير الممتثلة»</td>
+<td data-label="المصدر ودرجته">رواية طرف — D/4</td>
 </tr>
 <tr>
-<td><span class="ltr">E12</span></td>
-<td>لا إصابات مماثلة خارج المضيق في النافذة</td>
-<td>دفتر الأحداث · <span class="ltr">IMO</span> — B/2</td>
+<td data-label="#"><span class="ltr">E12</span></td>
+<td data-label="الدليل">لا إصابات مماثلة خارج المضيق في النافذة</td>
+<td data-label="المصدر ودرجته">دفتر الأحداث · <span class="ltr">IMO</span> — B/2</td>
 </tr>
 <tr>
-<td><span class="ltr">E13</span></td>
-<td><strong>إعلان رسمي: 15 سفينة تابعة لأدنوك استُهدفت منذ بدء النزاع، وقتيل و20 جريحًا</strong></td>
-<td>Reuters عن بيان أدنوك — A/1</td>
+<td data-label="#"><span class="ltr">E13</span></td>
+<td data-label="الدليل"><strong>إعلان رسمي: 15 سفينة تابعة لأدنوك استُهدفت منذ بدء النزاع، وقتيل و20 جريحًا</strong></td>
+<td data-label="المصدر ودرجته">Reuters عن بيان أدنوك — A/1</td>
 </tr>
 <tr>
-<td><span class="ltr">E14</span></td>
-<td>إفصاح أدنوك الرسمي: 87 سفينة شحن مملوكة (53 ناقلة) و340+ مؤسسية؛ ونسبة عدم التناسب R بين 2.3 و12.2</td>
-<td><span class="ltr">ADNOC</span> L&amp;S · Lloyd&#x27;s List · <span class="ltr">JMIC</span> — A/1</td>
+<td data-label="#"><span class="ltr">E14</span></td>
+<td data-label="الدليل">إفصاح أدنوك الرسمي: 87 سفينة شحن مملوكة (53 ناقلة) و340+ مؤسسية؛ ونسبة عدم التناسب R بين 2.3 و12.2</td>
+<td data-label="المصدر ودرجته"><span class="ltr">ADNOC</span> L&amp;S · Lloyd&#x27;s List · <span class="ltr">JMIC</span> — A/1</td>
 </tr>
 <tr>
-<td><span class="ltr">E15</span></td>
-<td><span class="ltr">ST1</span> مملوكة لـSAFEEN Tankers 38 Ltd، وهي ذراع الناقلات لأدنوك لوجستيات</td>
-<td>MagicPort — C/3</td>
+<td data-label="#"><span class="ltr">E15</span></td>
+<td data-label="الدليل"><span class="ltr">ST1</span> مملوكة لـSAFEEN Tankers 38 Ltd، وهي ذراع الناقلات لأدنوك لوجستيات</td>
+<td data-label="المصدر ودرجته">MagicPort — C/3</td>
 </tr>
 <tr>
-<td><span class="ltr">E16</span></td>
-<td><span class="ltr">CAMEROON PROSPERITY</span> مديرها الفني أدنوك لوجستيات</td>
-<td>Seatrade · MagicPort — B/2</td>
+<td data-label="#"><span class="ltr">E16</span></td>
+<td data-label="الدليل"><span class="ltr">CAMEROON PROSPERITY</span> مديرها الفني أدنوك لوجستيات</td>
+<td data-label="المصدر ودرجته">Seatrade · MagicPort — B/2</td>
 </tr>
 <tr>
-<td><span class="ltr">E17</span></td>
-<td>ON <span class="ltr">PEACE</span> مالكها ومشغّلها <span class="ltr">ONEX DMCC</span> (دبي) · <span class="ltr">VALTHERA</span> مدير <span class="ltr">ISM</span> شركة إماراتية</td>
-<td>MagicPort · MarineLink — C/3</td>
+<td data-label="#"><span class="ltr">E17</span></td>
+<td data-label="الدليل">ON <span class="ltr">PEACE</span> مالكها ومشغّلها <span class="ltr">ONEX DMCC</span> (دبي) · <span class="ltr">VALTHERA</span> مدير <span class="ltr">ISM</span> شركة إماراتية</td>
+<td data-label="المصدر ودرجته">MagicPort · MarineLink — C/3</td>
 </tr>
 <tr>
-<td><span class="ltr">E18</span></td>
-<td><span class="ltr">GFS</span>: AD Ports تملك 81%، و23 سفينة مملوكة</td>
-<td>AD Ports · TradeWinds — A/1 · C/3</td>
+<td data-label="#"><span class="ltr">E18</span></td>
+<td data-label="الدليل"><span class="ltr">GFS</span>: AD Ports تملك 81%، و23 سفينة مملوكة</td>
+<td data-label="المصدر ودرجته">AD Ports · TradeWinds — A/1 · C/3</td>
 </tr>
 <tr>
-<td><span class="ltr">E19</span></td>
-<td>توزيع الأعلام على 20 ضحية: ليبيريا 4 · بنما 3 · جزر مارشال 3 · سنغافورة 3 · أنتيغوا 2 · غيرها 1</td>
-<td>سجلات التسجيل — C/3</td>
+<td data-label="#"><span class="ltr">E19</span></td>
+<td data-label="الدليل">توزيع الأعلام على 20 ضحية: ليبيريا 4 · بنما 3 · جزر مارشال 3 · سنغافورة 3 · أنتيغوا 2 · غيرها 1</td>
+<td data-label="المصدر ودرجته">سجلات التسجيل — C/3</td>
 </tr>
 <tr>
-<td><span class="ltr">E20</span></td>
-<td>المقام: 121 عبورًا ميسّرًا في 96 ساعة (30.25 يوميًا) · أكثر من 40 سفينة يوميًا · خط أساس 85–138 · 432 سفينة منتظرة · لا تفصيل معلن بحسب العلم</td>
-<td><span class="ltr">JMIC</span> · سنتكوم · PortWatch · Lloyd&#x27;s List — B/2</td>
+<td data-label="#"><span class="ltr">E20</span></td>
+<td data-label="الدليل">المقام: 121 عبورًا ميسّرًا في 96 ساعة (30.25 يوميًا) · أكثر من 40 سفينة يوميًا · خط أساس 85–138 · 432 سفينة منتظرة · لا تفصيل معلن بحسب العلم</td>
+<td data-label="المصدر ودرجته"><span class="ltr">JMIC</span> · سنتكوم · PortWatch · Lloyd&#x27;s List — B/2</td>
 </tr>
 <tr>
-<td><span class="ltr">E21</span></td>
-<td>62.7% من عبور أغسطس مظلم أو غير مصنّف المسار</td>
-<td>Kpler عبر الجزيرة — C/3</td>
+<td data-label="#"><span class="ltr">E21</span></td>
+<td data-label="الدليل">62.7% من عبور أغسطس مظلم أو غير مصنّف المسار</td>
+<td data-label="المصدر ودرجته">Kpler عبر الجزيرة — C/3</td>
 </tr>
 <tr>
-<td><span class="ltr">E22</span></td>
-<td>إيران أدرجت <span class="ltr">KITION</span> M وEVER <span class="ltr">VICT</span> في قائمة عدم الامتثال</td>
-<td>Riviera — C/3</td>
+<td data-label="#"><span class="ltr">E22</span></td>
+<td data-label="الدليل">إيران أدرجت <span class="ltr">KITION</span> M وEVER <span class="ltr">VICT</span> في قائمة عدم الامتثال</td>
+<td data-label="المصدر ودرجته">Riviera — C/3</td>
 </tr>
-</tbody></table></div></section><section class="doc reveal" id="sec-06" aria-labelledby="h-06"><h2 id="h-06"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>المصفوفة</h2><div class="h-rule"></div><span class="tbl-hint">اسحب الجدول أفقيًا لرؤية بقية الأعمدة</span><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول يحتاج تمريرًا أفقيًا"><table>
+</tbody></table></div></section><section class="doc reveal" id="sec-06" aria-labelledby="h-06"><h2 id="h-06"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>المصفوفة</h2><div class="h-rule"></div><span class="tbl-hint">اسحب الجدول أفقيًا لرؤية بقية الأعمدة</span><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول يحتاج تمريرًا أفقيًا"><table class="cardified">
 <thead><tr>
 <th scope="col">#</th>
 <th scope="col">الدليل</th>
@@ -1093,284 +1116,284 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <th scope="col">H4 الانتماء</th>
 </tr></thead><tbody>
 <tr>
-<td>E1</td>
-<td>ثلاث إصابات لأسطول واحد، وصفر خارجه</td>
-<td><strong>++</strong></td>
-<td>+</td>
-<td>+</td>
-<td><strong>++</strong></td>
+<td data-label="#">E1</td>
+<td data-label="الدليل">ثلاث إصابات لأسطول واحد، وصفر خارجه</td>
+<td data-label="H1 الأسطول"><strong>++</strong></td>
+<td data-label="H2 الخط">+</td>
+<td data-label="H3 العلم">+</td>
+<td data-label="H4 الانتماء"><strong>++</strong></td>
 </tr>
 <tr>
-<td>E2</td>
-<td>ثلاثة ضحايا بعلم سنغافوري</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td><strong>++</strong></td>
-<td class="num">0</td>
+<td data-label="#">E2</td>
+<td data-label="الدليل">ثلاثة ضحايا بعلم سنغافوري</td>
+<td class="num" data-label="H1 الأسطول">0</td>
+<td class="num" data-label="H2 الخط">0</td>
+<td data-label="H3 العلم"><strong>++</strong></td>
+<td class="num" data-label="H4 الانتماء">0</td>
 </tr>
 <tr>
-<td>E3</td>
-<td>ضحايا بأعلام ومشغّلين مختلفين</td>
-<td><strong>−−</strong></td>
-<td><strong>++</strong></td>
-<td><strong>−−</strong></td>
-<td class="num">0</td>
+<td data-label="#">E3</td>
+<td data-label="الدليل">ضحايا بأعلام ومشغّلين مختلفين</td>
+<td data-label="H1 الأسطول"><strong>−−</strong></td>
+<td data-label="H2 الخط"><strong>++</strong></td>
+<td data-label="H3 العلم"><strong>−−</strong></td>
+<td class="num" data-label="H4 الانتماء">0</td>
 </tr>
 <tr>
-<td>E4</td>
-<td>أربع ناقلات وأربع حاويات</td>
-<td class="num">0</td>
-<td>+</td>
-<td>−</td>
-<td class="num">0</td>
+<td data-label="#">E4</td>
+<td data-label="الدليل">أربع ناقلات وأربع حاويات</td>
+<td class="num" data-label="H1 الأسطول">0</td>
+<td data-label="H2 الخط">+</td>
+<td data-label="H3 العلم">−</td>
+<td class="num" data-label="H4 الانتماء">0</td>
 </tr>
 <tr>
-<td>E5</td>
-<td>تنوع أنواع السفن</td>
-<td class="num">0</td>
-<td>+</td>
-<td class="num">0</td>
-<td>+</td>
+<td data-label="#">E5</td>
+<td data-label="الدليل">تنوع أنواع السفن</td>
+<td class="num" data-label="H1 الأسطول">0</td>
+<td data-label="H2 الخط">+</td>
+<td class="num" data-label="H3 العلم">0</td>
+<td data-label="H4 الانتماء">+</td>
 </tr>
 <tr>
-<td>E6</td>
-<td>التمركز داخل المضيق ومياه عُمان</td>
-<td class="num">0</td>
-<td><strong>++</strong></td>
-<td class="num">0</td>
-<td class="num">0</td>
+<td data-label="#">E6</td>
+<td data-label="الدليل">التمركز داخل المضيق ومياه عُمان</td>
+<td class="num" data-label="H1 الأسطول">0</td>
+<td data-label="H2 الخط"><strong>++</strong></td>
+<td class="num" data-label="H3 العلم">0</td>
+<td class="num" data-label="H4 الانتماء">0</td>
 </tr>
 <tr>
-<td>E7</td>
-<td>خطوط مغذية في الخليج</td>
-<td>+</td>
-<td><strong>++</strong></td>
-<td class="num">0</td>
-<td class="num">0</td>
+<td data-label="#">E7</td>
+<td data-label="الدليل">خطوط مغذية في الخليج</td>
+<td data-label="H1 الأسطول">+</td>
+<td data-label="H2 الخط"><strong>++</strong></td>
+<td class="num" data-label="H3 العلم">0</td>
+<td class="num" data-label="H4 الانتماء">0</td>
 </tr>
 <tr>
-<td>E8</td>
-<td>إسناد مباشر لإصابة <span class="ltr">GFS PRIDE</span></td>
-<td><strong>++</strong></td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td>+</td>
+<td data-label="#">E8</td>
+<td data-label="الدليل">إسناد مباشر لإصابة <span class="ltr">GFS PRIDE</span></td>
+<td data-label="H1 الأسطول"><strong>++</strong></td>
+<td class="num" data-label="H2 الخط">0</td>
+<td class="num" data-label="H3 العلم">0</td>
+<td data-label="H4 الانتماء">+</td>
 </tr>
 <tr>
-<td>E9</td>
-<td>رواية اللغم والناقلة «غير الممتثلة»</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">0</td>
+<td data-label="#">E9</td>
+<td data-label="الدليل">رواية اللغم والناقلة «غير الممتثلة»</td>
+<td class="num" data-label="H1 الأسطول">0</td>
+<td class="num" data-label="H2 الخط">0</td>
+<td class="num" data-label="H3 العلم">0</td>
+<td class="num" data-label="H4 الانتماء">0</td>
 </tr>
 <tr>
-<td><span class="ltr">E10</span></td>
-<td>إطفاء التتبّع والعبور المظلم</td>
-<td>+</td>
-<td>+</td>
-<td class="num">0</td>
-<td class="num">0</td>
+<td data-label="#"><span class="ltr">E10</span></td>
+<td data-label="الدليل">إطفاء التتبّع والعبور المظلم</td>
+<td data-label="H1 الأسطول">+</td>
+<td data-label="H2 الخط">+</td>
+<td class="num" data-label="H3 العلم">0</td>
+<td class="num" data-label="H4 الانتماء">0</td>
 </tr>
 <tr>
-<td><span class="ltr">E11</span></td>
-<td>الخطاب الإيراني يستهدف بالانتماء لا بالعلم</td>
-<td>+</td>
-<td>+</td>
-<td>−</td>
-<td><strong>++</strong></td>
+<td data-label="#"><span class="ltr">E11</span></td>
+<td data-label="الدليل">الخطاب الإيراني يستهدف بالانتماء لا بالعلم</td>
+<td data-label="H1 الأسطول">+</td>
+<td data-label="H2 الخط">+</td>
+<td data-label="H3 العلم">−</td>
+<td data-label="H4 الانتماء"><strong>++</strong></td>
 </tr>
 <tr>
-<td><span class="ltr">E12</span></td>
-<td>لا إصابات خارج المضيق</td>
-<td class="num">0</td>
-<td><strong>++</strong></td>
-<td class="num">0</td>
-<td>+</td>
+<td data-label="#"><span class="ltr">E12</span></td>
+<td data-label="الدليل">لا إصابات خارج المضيق</td>
+<td class="num" data-label="H1 الأسطول">0</td>
+<td data-label="H2 الخط"><strong>++</strong></td>
+<td class="num" data-label="H3 العلم">0</td>
+<td data-label="H4 الانتماء">+</td>
 </tr>
 <tr>
-<td><span class="ltr">E13</span></td>
-<td>إعلان أدنوك: 15 سفينة استُهدفت</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td><strong>++</strong></td>
+<td data-label="#"><span class="ltr">E13</span></td>
+<td data-label="الدليل">إعلان أدنوك: 15 سفينة استُهدفت</td>
+<td class="num" data-label="H1 الأسطول">0</td>
+<td class="num" data-label="H2 الخط">0</td>
+<td class="num" data-label="H3 العلم">0</td>
+<td data-label="H4 الانتماء"><strong>++</strong></td>
 </tr>
 <tr>
-<td><span class="ltr">E14</span></td>
-<td>نسبة استهداف مرتفعة داخل أسطول أدنوك</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td><strong>++</strong></td>
+<td data-label="#"><span class="ltr">E14</span></td>
+<td data-label="الدليل">نسبة استهداف مرتفعة داخل أسطول أدنوك</td>
+<td class="num" data-label="H1 الأسطول">0</td>
+<td class="num" data-label="H2 الخط">0</td>
+<td class="num" data-label="H3 العلم">0</td>
+<td data-label="H4 الانتماء"><strong>++</strong></td>
 </tr>
 <tr>
-<td><span class="ltr">E15</span></td>
-<td><span class="ltr">ST1</span> مملوكة لذراع أدنوك</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td><strong>++</strong></td>
+<td data-label="#"><span class="ltr">E15</span></td>
+<td data-label="الدليل"><span class="ltr">ST1</span> مملوكة لذراع أدنوك</td>
+<td class="num" data-label="H1 الأسطول">0</td>
+<td class="num" data-label="H2 الخط">0</td>
+<td class="num" data-label="H3 العلم">0</td>
+<td data-label="H4 الانتماء"><strong>++</strong></td>
 </tr>
 <tr>
-<td><span class="ltr">E16</span></td>
-<td><span class="ltr">CAMEROON PROSPERITY</span> بإدارة أدنوك</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td><strong>++</strong></td>
+<td data-label="#"><span class="ltr">E16</span></td>
+<td data-label="الدليل"><span class="ltr">CAMEROON PROSPERITY</span> بإدارة أدنوك</td>
+<td class="num" data-label="H1 الأسطول">0</td>
+<td class="num" data-label="H2 الخط">0</td>
+<td class="num" data-label="H3 العلم">0</td>
+<td data-label="H4 الانتماء"><strong>++</strong></td>
 </tr>
 <tr>
-<td><span class="ltr">E17</span></td>
-<td>ON <span class="ltr">PEACE</span> وVALTHERA بإدارة إماراتية</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td>+</td>
+<td data-label="#"><span class="ltr">E17</span></td>
+<td data-label="الدليل">ON <span class="ltr">PEACE</span> وVALTHERA بإدارة إماراتية</td>
+<td class="num" data-label="H1 الأسطول">0</td>
+<td class="num" data-label="H2 الخط">0</td>
+<td class="num" data-label="H3 العلم">0</td>
+<td data-label="H4 الانتماء">+</td>
 </tr>
 <tr>
-<td><span class="ltr">E18</span></td>
-<td><span class="ltr">GFS</span>: AD Ports 81%</td>
-<td><strong>++</strong></td>
-<td>+</td>
-<td class="num">0</td>
-<td><strong>++</strong></td>
+<td data-label="#"><span class="ltr">E18</span></td>
+<td data-label="الدليل"><span class="ltr">GFS</span>: AD Ports 81%</td>
+<td data-label="H1 الأسطول"><strong>++</strong></td>
+<td data-label="H2 الخط">+</td>
+<td class="num" data-label="H3 العلم">0</td>
+<td data-label="H4 الانتماء"><strong>++</strong></td>
 </tr>
 <tr>
-<td><span class="ltr">E19</span></td>
-<td>توزيع الأعلام على 20 ضحية</td>
-<td class="num">0</td>
-<td>+</td>
-<td><strong>−−</strong></td>
-<td class="num">0</td>
+<td data-label="#"><span class="ltr">E19</span></td>
+<td data-label="الدليل">توزيع الأعلام على 20 ضحية</td>
+<td class="num" data-label="H1 الأسطول">0</td>
+<td data-label="H2 الخط">+</td>
+<td data-label="H3 العلم"><strong>−−</strong></td>
+<td class="num" data-label="H4 الانتماء">0</td>
 </tr>
 <tr>
-<td><span class="ltr">E20</span></td>
-<td>المقام: 30.25–40 عبورًا يوميًا</td>
-<td class="num">0</td>
-<td>+</td>
-<td class="num">0</td>
-<td class="num">0</td>
+<td data-label="#"><span class="ltr">E20</span></td>
+<td data-label="الدليل">المقام: 30.25–40 عبورًا يوميًا</td>
+<td class="num" data-label="H1 الأسطول">0</td>
+<td data-label="H2 الخط">+</td>
+<td class="num" data-label="H3 العلم">0</td>
+<td class="num" data-label="H4 الانتماء">0</td>
 </tr>
 <tr>
-<td><span class="ltr">E21</span></td>
-<td>62.7% عبور مظلم</td>
-<td class="num">0</td>
-<td>+</td>
-<td class="num">0</td>
-<td class="num">0</td>
+<td data-label="#"><span class="ltr">E21</span></td>
+<td data-label="الدليل">62.7% عبور مظلم</td>
+<td class="num" data-label="H1 الأسطول">0</td>
+<td data-label="H2 الخط">+</td>
+<td class="num" data-label="H3 العلم">0</td>
+<td class="num" data-label="H4 الانتماء">0</td>
 </tr>
 <tr>
-<td><span class="ltr">E22</span></td>
-<td>قائمة عدم الامتثال الإيرانية</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">0</td>
+<td data-label="#"><span class="ltr">E22</span></td>
+<td data-label="الدليل">قائمة عدم الامتثال الإيرانية</td>
+<td class="num" data-label="H1 الأسطول">0</td>
+<td class="num" data-label="H2 الخط">0</td>
+<td class="num" data-label="H3 العلم">0</td>
+<td class="num" data-label="H4 الانتماء">0</td>
 </tr>
 <tr>
-<td>—</td>
-<td><strong>عدد التناقضات</strong></td>
-<td><strong>1</strong></td>
-<td><strong>0</strong></td>
-<td><strong>4</strong></td>
-<td><strong>0</strong></td>
+<td data-label="#">—</td>
+<td data-label="الدليل"><strong>عدد التناقضات</strong></td>
+<td data-label="H1 الأسطول"><strong>1</strong></td>
+<td data-label="H2 الخط"><strong>0</strong></td>
+<td data-label="H3 العلم"><strong>4</strong></td>
+<td data-label="H4 الانتماء"><strong>0</strong></td>
 </tr>
 <tr>
-<td>—</td>
-<td><strong>عدد أدلة الاتساق</strong></td>
-<td class="num">6</td>
-<td class="num">13</td>
-<td class="num">2</td>
-<td class="num">11</td>
+<td data-label="#">—</td>
+<td data-label="الدليل"><strong>عدد أدلة الاتساق</strong></td>
+<td class="num" data-label="H1 الأسطول">6</td>
+<td class="num" data-label="H2 الخط">13</td>
+<td class="num" data-label="H3 العلم">2</td>
+<td class="num" data-label="H4 الانتماء">11</td>
 </tr>
 </tbody></table></div></section><section class="doc reveal" id="sec-07" aria-labelledby="h-07"><h2 id="h-07"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>قراءة المصفوفة</h2><div class="h-rule"></div><p>الفرضيتان <strong>H2 (الخط)</strong> و<strong>H4 (الانتماء)</strong> تتعادلان بصفر تناقض، ولا تتنافسان بل تتكاملان:</p>
 <blockquote><strong>المعيار المرجّح: استهداف السفن المرتبطة بانتماء معادي — وبالأخص الإمارات — أثناء عبورها ممر هرمز ومسارات الخليج المغذية.</strong> الانتماء يحدّد الهدف، والممر يحدّد مكان الإصابة وزمنها.</blockquote>
 <p><strong>أقوى ثلاث وقائع تدعم هذا الترجيح:</strong></p>
 <ol><li><strong>إعلان أدنوك الرسمي:</strong> 15 سفينة تابعة لها استُهدفت منذ بدء النزاع، وقتيل و20 جريحًا. هذا إقرار من الجهة نفسها بأن أسطولها هدف.</li><li><strong>عدم التناسب بين الإصابات والتعرّض:</strong> إفصاح أدنوك الرسمي يبيّن <strong>87 سفينة شحن مملوكة</strong> (منها 53 ناقلة)، وتعرّضها في الممر نحو <strong>5 عبورات أسبوعيًا</strong> أي <strong>≈ 2.3%</strong> من العبور. ونسبة إصاباتها من الوقائع المسجّلة بين <strong>15% و28%</strong>، فتكون النسبة الموحّدة <strong>R بين 2.3 و12.2 ضعفًا</strong> — أي إصابات تتجاوز المتوقع بأكثر من الضعف حتى في أشد الفروض تحفّظًا. التفصيل الكامل في ملحق مقام التعرّض.</li><li><strong>تركّز الإمارات في سجل الضحايا:</strong> ثماني سفن من عشرين بصلة إماراتية موثّقة، بينها سفينتان مملوكتان لذراع أدنوك (<span class="ltr">ST1</span> وGFS) وسفينة تديرها أدنوك (<span class="ltr">CAMEROON PROSPERITY</span>) وسفينة لموانئ دبي (DP <span class="ltr">WORLD KAVERI</span>).</li></ol>
 <p><strong>أما H3 (العلم السنغافوري) فقد سقطت:</strong> ثلاثة ضحايا فقط من عشرين، وتوزيع الأعلام يطابق السجلات المفتوحة العالمية (ليبيريا وبنما وجزر مارشال في المقدمة)، ولا يوجد أي بيان رسمي يقول إن العلم معيار اختيار. ووجود ضحيتين سنغافوريتين في أسطول إماراتي يجعل العلم <strong>صفة عرضية</strong> لا معيارًا.</p>
-<p><strong>وH1 (الأسطول المسمّى) تبقى جزئية:</strong> تناقضها الوحيد هو وجود ضحايا كثيرين من خارج أسطول <span class="ltr">GFS</span>، لكنها تتقاطع مع H4 في أن الأسطول المسمّى إماراتي الملكية.</p></section><section class="doc reveal" id="sec-08" aria-labelledby="h-08"><h2 id="h-08"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>أثر المقام — الحساب التقريبي</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<p><strong>وH1 (الأسطول المسمّى) تبقى جزئية:</strong> تناقضها الوحيد هو وجود ضحايا كثيرين من خارج أسطول <span class="ltr">GFS</span>، لكنها تتقاطع مع H4 في أن الأسطول المسمّى إماراتي الملكية.</p></section><section class="doc reveal" id="sec-08" aria-labelledby="h-08"><h2 id="h-08"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>أثر المقام — الحساب التقريبي</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">المقارنة</th>
 <th scope="col">الرقم</th>
 <th scope="col">القابلية</th>
 </tr></thead><tbody>
 <tr>
-<td>عبور ميسّر أمريكيًا 11–14 أكتوبر</td>
-<td>121 عبورًا في 96 ساعة = <strong>30.25 يوميًا</strong></td>
-<td>B/2 — يشمل سفنًا غير ظاهرة على <span class="ltr">AIS</span></td>
+<td data-label="المقارنة">عبور ميسّر أمريكيًا 11–14 أكتوبر</td>
+<td data-label="الرقم">121 عبورًا في 96 ساعة = <strong>30.25 يوميًا</strong></td>
+<td data-label="القابلية">B/2 — يشمل سفنًا غير ظاهرة على <span class="ltr">AIS</span></td>
 </tr>
 <tr>
-<td>عبور في 24 ساعة (سنتكوم)</td>
-<td><strong>أكثر من 40 سفينة</strong></td>
-<td>A/1 — فئة مختلفة</td>
+<td data-label="المقارنة">عبور في 24 ساعة (سنتكوم)</td>
+<td data-label="الرقم"><strong>أكثر من 40 سفينة</strong></td>
+<td data-label="القابلية">A/1 — فئة مختلفة</td>
 </tr>
 <tr>
-<td>خط الأساس قبل الأزمة</td>
-<td><strong>85</strong> (PortWatch) و<strong>138</strong> (متوسط تاريخي)</td>
-<td>B/2 — منهجيتان مختلفتان</td>
+<td data-label="المقارنة">خط الأساس قبل الأزمة</td>
+<td data-label="الرقم"><strong>85</strong> (PortWatch) و<strong>138</strong> (متوسط تاريخي)</td>
+<td data-label="القابلية">B/2 — منهجيتان مختلفتان</td>
 </tr>
 <tr>
-<td>السفن المنتظرة 15 أكتوبر</td>
-<td><strong>432</strong> سفينة</td>
-<td>B/2 — لقطة تكدس لا عبور</td>
+<td data-label="المقارنة">السفن المنتظرة 15 أكتوبر</td>
+<td data-label="الرقم"><strong>432</strong> سفينة</td>
+<td data-label="القابلية">B/2 — لقطة تكدس لا عبور</td>
 </tr>
 <tr>
-<td>إصابات موثّقة مقابل عبورات تراكمية</td>
-<td><strong>0.094% – 0.124%</strong></td>
-<td>حساب تقريبي لا رسمي</td>
+<td data-label="المقارنة">إصابات موثّقة مقابل عبورات تراكمية</td>
+<td data-label="الرقم"><strong>0.094% – 0.124%</strong></td>
+<td data-label="القابلية">حساب تقريبي لا رسمي</td>
 </tr>
 <tr>
-<td>استهداف داخل أسطول أدنوك</td>
-<td><strong>≈ 47%</strong> (<span class="ltr">15/32</span>)</td>
-<td>تقدير تقريبي — قد يشمل سفنًا مستأجرة</td>
+<td data-label="المقارنة">استهداف داخل أسطول أدنوك</td>
+<td data-label="الرقم"><strong>≈ 47%</strong> (<span class="ltr">15/32</span>)</td>
+<td data-label="القابلية">تقدير تقريبي — قد يشمل سفنًا مستأجرة</td>
 </tr>
 </tbody></table></div>
-<p><strong>القيد المعلن:</strong> لا يوجد تفصيل منشور للعبور بحسب العلم أو بحسب الانتماء، لذلك لا يمكن حساب معدل إصابة لكل علم أو لكل انتماء بدقة. وهذا هو الحاجز الأخير أمام ترجيح حاسم بين H2 وH4.</p></section><section class="doc reveal" id="sec-09" aria-labelledby="h-09"><h2 id="h-09"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>ما يقلب الترجيح</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<p><strong>القيد المعلن:</strong> لا يوجد تفصيل منشور للعبور بحسب العلم أو بحسب الانتماء، لذلك لا يمكن حساب معدل إصابة لكل علم أو لكل انتماء بدقة. وهذا هو الحاجز الأخير أمام ترجيح حاسم بين H2 وH4.</p></section><section class="doc reveal" id="sec-09" aria-labelledby="h-09"><h2 id="h-09"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>ما يقلب الترجيح</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">الدليل المرتقب</th>
 <th scope="col">الأثر</th>
 </tr></thead><tbody>
 <tr>
-<td>إصابة سفينة إماراتية الانتماء <strong>خارج</strong> المضيق (خليج عدن أو المحيط الهندي)</td>
-<td>يحسم H4 فوق H2</td>
+<td data-label="الدليل المرتقب">إصابة سفينة إماراتية الانتماء <strong>خارج</strong> المضيق (خليج عدن أو المحيط الهندي)</td>
+<td data-label="الأثر">يحسم H4 فوق H2</td>
 </tr>
 <tr>
-<td>إصابة سفينة غير مرتبطة بأي انتماء معادي داخل المضيق</td>
-<td>يعيد H2 إلى المقدمة وحدها</td>
+<td data-label="الدليل المرتقب">إصابة سفينة غير مرتبطة بأي انتماء معادي داخل المضيق</td>
+<td data-label="الأثر">يعيد H2 إلى المقدمة وحدها</td>
 </tr>
 <tr>
-<td>تفصيل منشور للعبور بحسب العلم والانتماء</td>
-<td>يحوّل الحساب من تقريبي إلى حاسم</td>
+<td data-label="الدليل المرتقب">تفصيل منشور للعبور بحسب العلم والانتماء</td>
+<td data-label="الأثر">يحوّل الحساب من تقريبي إلى حاسم</td>
 </tr>
 <tr>
-<td>قائمة أدنوك الخمس عشرة بالاسم والتاريخ</td>
-<td>يحدد إن كانت إصاباتنا هي نفسها أم إضافية</td>
+<td data-label="الدليل المرتقب">قائمة أدنوك الخمس عشرة بالاسم والتاريخ</td>
+<td data-label="الأثر">يحدد إن كانت إصاباتنا هي نفسها أم إضافية</td>
 </tr>
 <tr>
-<td>بيان رسمي يسمّي معيار الاختيار</td>
-<td>يُلغي الترجيح الاحتمالي</td>
+<td data-label="الدليل المرتقب">بيان رسمي يسمّي معيار الاختيار</td>
+<td data-label="الأثر">يُلغي الترجيح الاحتمالي</td>
 </tr>
-</tbody></table></div></section><section class="doc reveal" id="sec-10" aria-labelledby="h-10"><h2 id="h-10"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>الفراغات المتبقية</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+</tbody></table></div></section><section class="doc reveal" id="sec-10" aria-labelledby="h-10"><h2 id="h-10"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>الفراغات المتبقية</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">الفجوة</th>
 <th scope="col">الأثر</th>
 </tr></thead><tbody>
 <tr>
-<td>تفصيل العبور بحسب العلم والانتماء</td>
-<td>يمنع حساب معدل إصابة لكل فئة</td>
+<td data-label="الفجوة">تفصيل العبور بحسب العلم والانتماء</td>
+<td data-label="الأثر">يمنع حساب معدل إصابة لكل فئة</td>
 </tr>
 <tr>
-<td>أسماء سفن أدنوك الخمس عشرة</td>
-<td>يمنع فصل الإصابات المتقاطعة عن الإضافية</td>
+<td data-label="الفجوة">أسماء سفن أدنوك الخمس عشرة</td>
+<td data-label="الأثر">يمنع فصل الإصابات المتقاطعة عن الإضافية</td>
 </tr>
 <tr>
-<td>الملكية الفعلية لـAL <span class="ltr">SAADIYAT</span> وCAPE <span class="ltr">DAO</span> وPETRO <span class="ltr">DOLPHIN</span></td>
-<td>تُبقي ثلاث سفن بلا تصنيف انتماء</td>
+<td data-label="الفجوة">الملكية الفعلية لـAL <span class="ltr">SAADIYAT</span> وCAPE <span class="ltr">DAO</span> وPETRO <span class="ltr">DOLPHIN</span></td>
+<td data-label="الأثر">تُبقي ثلاث سفن بلا تصنيف انتماء</td>
 </tr>
 <tr>
-<td>هوية الجهة المنفّذة ببيان رسمي</td>
-<td>يُبقي الإسناد على مستوى النمط لا الفعل</td>
+<td data-label="الفجوة">هوية الجهة المنفّذة ببيان رسمي</td>
+<td data-label="الأثر">يُبقي الإسناد على مستوى النمط لا الفعل</td>
 </tr>
 </tbody></table></div></section><section class="doc reveal" id="sec-11" aria-labelledby="h-11"><h2 id="h-11"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>ملحق مرتبط</h2><div class="h-rule"></div><ul><li><strong>مقام التعرّض بحسب الانتماء</strong> — <code>appendices/exposure-denominator-2026-10-16.md</code>: اختبار عدم التناسب (R) وتصحيح رقم الأسطول.</li></ul></section><section class="doc reveal" id="sec-12" aria-labelledby="h-12"><h2 id="h-12"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>المصادر</h2><div class="h-rule"></div><ul><li>بيان أدنوك عبر Reuters، 7 أغسطس 2026 — استهداف 15 سفينة.</li><li><span class="ltr">ADNOC</span> Logistics &amp; Services — بيانات الأسطول والخدمات البحرية.</li><li>AD Ports Group — رفع الملكية في Global Feeder Shipping إلى 81%.</li><li>هيئة الموانئ والملاحة بسنغافورة (<span class="ltr">MPA</span>) — إصابة السفينتين السنغافوريتين.</li><li><span class="ltr">JMIC</span> — البيان الاستشاري تحديث 105، 15 أكتوبر 2026 · تحذيرات <span class="ltr">NAVAREA IX</span>.</li><li>القيادة المركزية الأمريكية · المنظمة البحرية الدولية (<span class="ltr">IMO</span>).</li><li>سجلات تسجيل السفن: VesselFinder · MarineTraffic · Maritime Optima · MagicPort · Equasis.</li><li>Lloyd&#x27;s List · TradeWinds · Seatrade · Riviera · The Loadstar · Windward · Kpler.</li></ul>
 <blockquote><strong>حدود التحليل:</strong> <span class="ltr">ACH</span> ترتّب قوة التفسير ولا تُثبت نيّة. وكل خلية تقييم تحليلي مبني على أدلة معلنة، وليست وثيقة من جهة منفّذة. وسجل السفن مبني على مصادر مفتوحة، وحقوله الناقصة معلنة لا مُخمّنة.</blockquote></section>
@@ -1378,7 +1401,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> مصفوفة <span class="ltr">ACH</span> — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: <span class="ltr">UTC</span> وتوقيت البحرين (<span class="ltr">UTC</span>+3).
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-21 14:33 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-21 15:23 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
     
   </footer>
 </div>

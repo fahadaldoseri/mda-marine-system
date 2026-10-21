@@ -676,6 +676,29 @@ section.doc{scroll-margin-top:0 !important}
 /* رقم المعلّم: نص داكن على معلّم فاتح، ومقلوب في الوضع النهاري */
 body:not(.daylight) .lg-num{color:#04120f}
 body.daylight .lg-num{color:#ffffff}
+
+/* بطاقات الجوال للجداول — البند المعتمد 21 أكتوبر 2026 */
+@media (max-width:560px){
+  table.cardified{display:block;border:0;background:transparent;border-radius:0}
+  table.cardified.cardified{width:100%;max-width:100%;min-width:0}
+  table.cardified thead{display:none}
+  table.cardified tbody{display:block;max-width:100%}
+  table.cardified tr{display:block;max-width:100%;box-sizing:border-box;background:var(--panel);
+    border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin:0 0 10px}
+  table.cardified td{display:grid;grid-template-columns:minmax(72px,auto) minmax(0,1fr);gap:8px;
+    border:0;padding:5px 0;align-items:baseline;text-align:start;
+    overflow-wrap:anywhere;word-break:break-word;min-width:0}
+  table.cardified td::before{content:attr(data-label);color:var(--muted);font-size:12.5px;font-weight:600}
+  table.cardified td:empty{display:none}
+  .tbl-wrap:has(table.cardified),.tbl-scroll:has(table.cardified){overflow:visible;border:0}
+  .tbl-hint{display:none}
+}
+/* بانر النسخة المستبدلة — البند المعتمد 21 أكتوبر 2026 */
+.sup-banner{margin:0 0 20px;padding:12px 16px;border:1px solid #c9a24f;border-radius:10px;
+  background:#2a2210;color:#ffd88a;font-size:14px}
+body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
+.sup-banner a{color:inherit;font-weight:700;text-decoration:underline}
+.sp-dim{opacity:.72}
 </style></head>
 <body><nav class="site-nav no-print" aria-label="تنقل الموقع">
   <div class="sn-inner">
@@ -735,7 +758,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     <div class="threat risk-high"><div class="lbl">مستوى التهديد</div><div class="val">مرتفع</div></div>
     <div>
       <p class="lede">اختبار عدم التناسب بين حصة الإصابات وحصة التعرّض في مضيق هرمز. النتيجة: إصابات أسطول أدنوك تتجاوز المتوقع بأكثر من الضعف حتى في أشد الفروض تحفّظًا، فنسبة عدم التناسب بين 2.3 و12.2 ضعفًا — ما يميل بالترجيح إلى الاستهداف لا إلى التعرّض المرتفع وحده. ويُصحّح التقرير رقمًا سابقًا: 32 ناقلة تخص أسطول Navig8 لا إجمالي أدنوك.</p>
-      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-21 14:33 <span class="ltr">UTC</span></b></span></div>
+      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-21 15:23 <span class="ltr">UTC</span></b></span></div>
     </div>
   </header>
 
@@ -748,140 +771,140 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
   <main>
     
     <section class="doc pri reveal" id="sec-01" aria-labelledby="h-01"><h2 id="h-01"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>6. الخلاصة</h2><div class="h-rule"></div><ol><li><strong>الرقم السابق (47%) مسحوب ومصحّح</strong> إلى 17% نسبةً إلى الأسطول المملوك، والمقياس الصحيح هو مقام العبور لا حجم الأسطول.</li><li><strong>إصابات أسطول أدنوك غير متناسبة مع تعرّضه:</strong> R بين <strong>2.3 و12.2 ضعفًا</strong>، وأدنى سيناريو يبقى فوق عتبة عدم التناسب القوي.</li><li><strong>الترجيح:</strong> <strong>الاستهداف</strong> — لا التعرّض المرتفع وحده — في تفسير تركّز الإصابات في الأسطول الإماراتي. وهذا يرفع فرضية الانتماء (H4) من «مشاركة في المقدمة» إلى <strong>الفرضية الأقوى</strong>، مع بقاء الخط (H2) شرطًا مكانيًا لازمًا لا معيار اختيار.</li><li><strong>درجة الثقة: متوسطة إلى مرتفعة.</strong> لم تبلغ المرتفعة لسببين: قائمة الإصابات الـ15 غير منشورة بالاسم والتاريخ، ومقام الانتماء الإماراتي الإجمالي غير معلوم.</li><li><strong>ما يقلب الحكم:</strong> إثبات أن عددًا معتبرًا من الإصابات الـ15 وقع خارج المضيق، أو نشر تفصيل عبور يُظهر حصة أدنوك أعلى بكثير من 2.3%.</li></ol></section><section class="doc reveal" id="sec-glossary" aria-labelledby="h-glossary"><h2 id="h-glossary"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>قاموس الرموز والمصطلحات</h2><div class="h-rule"></div><p class="sec-lede">تعريفات الرموز والمصطلحات المستخدمة في هذا التقرير.</p><div class="glossary"><b>قاموس الرموز والمصطلحات:</b> <b>مقام التعرّض</b>: العدد الكلي للعبورات أو أيام السفينة في نطاق الخطر، الذي تُقاس عليه نسبة الإصابات. · <b>نسبة عدم التناسب (R)</b>: حصة الإصابات مقسومة على حصة التعرّض؛ تساوي 1 إذا كان التعرّض وحده يفسّر الإصابات. · <b>أيام السفينة في نطاق الخطر</b>: مجموع الساعات التي تقضيها السفينة داخل نطاق الخطر مقسومة على 24؛ أدق من عدد السفن للمقارنة الزمنية. · <b>السفن المظلمة</b>: سفن تعبر بإطفاء أو تعطيل بث التتبّع، فتُنقص المقام المرئي وتُضعف دقة النسبة.</div></section><section class="doc reveal" id="sec-02" aria-labelledby="h-02"><h2 id="h-02"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>1. تصحيح خطأ سابق — إلزامي قبل أي حساب</h2><div class="h-rule"></div><p>في نسخة المصفوفة الثانية استُخدم رقم «15 من نحو 32 ناقلة ≈ 47%» لتقدير نسبة الاستهداف داخل أسطول أدنوك. <strong>هذا الرقم غير صحيح ويُسحب.</strong> الرقم 32 يخص <strong>أسطول Navig8 المملوك</strong> المنقول إلى أدنوك، وليس إجمالي أسطول أدنوك لوجستيات. والصحيح من الإفصاح الرسمي للشركة:</p>
-<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">البند</th>
 <th scope="col">الرقم</th>
 <th scope="col">الدرجة</th>
 </tr></thead><tbody>
 <tr>
-<td>إجمالي أسطول الشحن المملوك (31 ديسمبر 2025)</td>
-<td><strong>87 سفينة</strong></td>
-<td>A/1</td>
+<td data-label="البند">إجمالي أسطول الشحن المملوك (31 ديسمبر 2025)</td>
+<td data-label="الرقم"><strong>87 سفينة</strong></td>
+<td data-label="الدرجة">A/1</td>
 </tr>
 <tr>
-<td>منها ناقلات</td>
-<td><strong>53</strong> (MR 16 · <span class="ltr">LR1</span> 9 · <span class="ltr">LR2 17</span> · <span class="ltr">VLCC</span> 9 · Handysize 2)</td>
-<td>A/1</td>
+<td data-label="البند">منها ناقلات</td>
+<td data-label="الرقم"><strong>53</strong> (MR 16 · <span class="ltr">LR1</span> 9 · <span class="ltr">LR2 17</span> · <span class="ltr">VLCC</span> 9 · Handysize 2)</td>
+<td data-label="الدرجة">A/1</td>
 </tr>
 <tr>
-<td>منها ناقلات غاز</td>
-<td><strong>20</strong> (<span class="ltr">LNG 10</span> · <span class="ltr">VLGC</span> 7 · <span class="ltr">VLEC</span> 2 · كبريت مصهور 1)</td>
-<td>A/1</td>
+<td data-label="البند">منها ناقلات غاز</td>
+<td data-label="الرقم"><strong>20</strong> (<span class="ltr">LNG 10</span> · <span class="ltr">VLGC</span> 7 · <span class="ltr">VLEC</span> 2 · كبريت مصهور 1)</td>
+<td data-label="الدرجة">A/1</td>
 </tr>
 <tr>
-<td>منها بضائع جافة وسفن حاويات</td>
-<td><strong>11</strong> و<strong>3</strong></td>
-<td>A/1</td>
+<td data-label="البند">منها بضائع جافة وسفن حاويات</td>
+<td data-label="الرقم"><strong>11</strong> و<strong>3</strong></td>
+<td data-label="الدرجة">A/1</td>
 </tr>
 <tr>
-<td>سفن مؤسسية مملوكة</td>
-<td><strong>أكثر من 340</strong></td>
-<td>A/1</td>
+<td data-label="البند">سفن مؤسسية مملوكة</td>
+<td data-label="الرقم"><strong>أكثر من 340</strong></td>
+<td data-label="الدرجة">A/1</td>
 </tr>
 <tr>
-<td>سفن مشغّلة ومستأجرة سنويًا</td>
-<td><strong>أكثر من 600</strong></td>
-<td>A/1</td>
+<td data-label="البند">سفن مشغّلة ومستأجرة سنويًا</td>
+<td data-label="الرقم"><strong>أكثر من 600</strong></td>
+<td data-label="الدرجة">A/1</td>
 </tr>
 <tr>
-<td>«32 ناقلة»</td>
-<td><strong>أسطول Navig8 المملوك — ليست إجمالي أدنوك</strong></td>
-<td>A/1</td>
+<td data-label="البند">«32 ناقلة»</td>
+<td data-label="الرقم"><strong>أسطول Navig8 المملوك — ليست إجمالي أدنوك</strong></td>
+<td data-label="الدرجة">A/1</td>
 </tr>
 </tbody></table></div>
 <p><strong>الأثر:</strong> نسبة الإصابات إلى حجم الأسطول المملوك هي <strong>15 من 87 ≈ 17%</strong>، لا 47%. وهذا الرقم — مع ذلك — <strong>ليس المقياس الصحيح</strong>، لأن الأسطول يعمل عالميًا وليس كله في نطاق الخطر. المقياس الصحيح هو مقام التعرّض في الممر نفسه.</p></section><section class="doc reveal" id="sec-03" aria-labelledby="h-03"><h2 id="h-03"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>2. المنهجية المعتمدة</h2><div class="h-rule"></div><p>المقياس القياسي في تحليل المخاطر هو <strong>مقارنة حصة الإصابات بحصة التعرّض</strong> (نسبة موحّدة على نمط <span class="ltr">SIR</span> المعتمد في تحليل المخاطر الوبائية)، لا مقارنة الإصابات بحجم الأسطول:</p>
-<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">الخطوة</th>
 <th scope="col">الصيغة</th>
 </tr></thead><tbody>
 <tr>
-<td>حصة الإصابات</td>
-<td>I = إصابات الفئة ÷ إجمالي الإصابات</td>
+<td data-label="الخطوة">حصة الإصابات</td>
+<td data-label="الصيغة">I = إصابات الفئة ÷ إجمالي الإصابات</td>
 </tr>
 <tr>
-<td>حصة التعرّض</td>
-<td>X = عبور الفئة ÷ إجمالي العبور</td>
+<td data-label="الخطوة">حصة التعرّض</td>
+<td data-label="الصيغة">X = عبور الفئة ÷ إجمالي العبور</td>
 </tr>
 <tr>
-<td>نسبة عدم التناسب</td>
-<td><strong>R = I ÷ X</strong></td>
+<td data-label="الخطوة">نسبة عدم التناسب</td>
+<td data-label="الصيغة"><strong>R = I ÷ X</strong></td>
 </tr>
 </tbody></table></div>
 <p><strong>عتبات التفسير</strong> (عتبات تشغيلية مقترحة، لا معيار رسمي منشور):</p>
-<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">قيمة R</th>
 <th scope="col">التفسير</th>
 </tr></thead><tbody>
 <tr>
-<td>أقل من 0.8</td>
-<td>أقل من المتوقع — لا استهداف</td>
+<td data-label="قيمة R">أقل من 0.8</td>
+<td data-label="التفسير">أقل من المتوقع — لا استهداف</td>
 </tr>
 <tr>
-<td>0.8 – 1.25</td>
-<td>متناسب — تعرّض يفسّر الإصابات</td>
+<td data-label="قيمة R">0.8 – 1.25</td>
+<td data-label="التفسير">متناسب — تعرّض يفسّر الإصابات</td>
 </tr>
 <tr>
-<td>1.25 – 2</td>
-<td>زيادة محتملة تحتاج فحصًا</td>
+<td data-label="قيمة R">1.25 – 2</td>
+<td data-label="التفسير">زيادة محتملة تحتاج فحصًا</td>
 </tr>
 <tr>
-<td><strong>2 وأكثر</strong></td>
-<td><strong>عدم تناسب قوي — يميل إلى الاستهداف ويستوجب فحصًا</strong></td>
+<td data-label="قيمة R"><strong>2 وأكثر</strong></td>
+<td data-label="التفسير"><strong>عدم تناسب قوي — يميل إلى الاستهداف ويستوجب فحصًا</strong></td>
 </tr>
 </tbody></table></div>
 <p><strong>تنبيه منهجي:</strong> لا توجد عتبة عالمية تجعل R = 2 إثباتًا للاستهداف. والنتيجة تُقرأ مع قرائن انتقائية مستقلة (نوع الهدف، نمط الأعلام، الخطاب الرسمي).</p>
-<p><strong>مقام التعرّض الأنسب:</strong> عدد العبورات المكتملة في الممر خلال الفترة (تعريف <span class="ltr">UKMTO</span>: حركة سفينة ذات رقم <span class="ltr">IMO</span> بين الخليج العربي وخليج عُمان في نافذة 24 ساعة)، ويُدعَّم بمقياس <strong>أيام السفينة في نطاق الخطر</strong> حيث تتوفر بيانات المكوث.</p></section><section class="doc reveal" id="sec-04" aria-labelledby="h-04"><h2 id="h-04"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>3. مقام أدنوك — وهو الوحيد القابل للحساب</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<p><strong>مقام التعرّض الأنسب:</strong> عدد العبورات المكتملة في الممر خلال الفترة (تعريف <span class="ltr">UKMTO</span>: حركة سفينة ذات رقم <span class="ltr">IMO</span> بين الخليج العربي وخليج عُمان في نافذة 24 ساعة)، ويُدعَّم بمقياس <strong>أيام السفينة في نطاق الخطر</strong> حيث تتوفر بيانات المكوث.</p></section><section class="doc reveal" id="sec-04" aria-labelledby="h-04"><h2 id="h-04"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>3. مقام أدنوك — وهو الوحيد القابل للحساب</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">البند</th>
 <th scope="col">الرقم</th>
 <th scope="col">المصدر والدرجة</th>
 </tr></thead><tbody>
 <tr>
-<td>عبور ناقلات أدنوك المملوكة لهرمز</td>
-<td><strong>نحو 5 سفن أسبوعيًا</strong> (متوسط 1 يناير 2025 – 24 فبراير 2026)</td>
-<td>Lloyd&#x27;s List — A/2</td>
+<td data-label="البند">عبور ناقلات أدنوك المملوكة لهرمز</td>
+<td data-label="الرقم"><strong>نحو 5 سفن أسبوعيًا</strong> (متوسط 1 يناير 2025 – 24 فبراير 2026)</td>
+<td data-label="المصدر والدرجة">Lloyd&#x27;s List — A/2</td>
 </tr>
 <tr>
-<td>ما يعادل يوميًا</td>
-<td><strong>≈ 0.71 عبور/يوم</strong></td>
-<td>حساب</td>
+<td data-label="البند">ما يعادل يوميًا</td>
+<td data-label="الرقم"><strong>≈ 0.71 عبور/يوم</strong></td>
+<td data-label="المصدر والدرجة">حساب</td>
 </tr>
 <tr>
-<td>إجمالي عبور الممر</td>
-<td><strong>30.25/يوم</strong> (121 عبورًا في 96 ساعة) · وأكثر من 40/يوم في نافذة أخرى</td>
-<td><span class="ltr">JMIC</span> — A/1 · سنتكوم</td>
+<td data-label="البند">إجمالي عبور الممر</td>
+<td data-label="الرقم"><strong>30.25/يوم</strong> (121 عبورًا في 96 ساعة) · وأكثر من 40/يوم في نافذة أخرى</td>
+<td data-label="المصدر والدرجة"><span class="ltr">JMIC</span> — A/1 · سنتكوم</td>
 </tr>
 <tr>
-<td><strong>حصة تعرّض أدنوك</strong></td>
-<td><strong>≈ 2.3%</strong> من العبور (بنطاق 1.8% – 2.9% حسب خط الأساس 30.25 أو 40)</td>
-<td>حساب</td>
+<td data-label="البند"><strong>حصة تعرّض أدنوك</strong></td>
+<td data-label="الرقم"><strong>≈ 2.3%</strong> من العبور (بنطاق 1.8% – 2.9% حسب خط الأساس 30.25 أو 40)</td>
+<td data-label="المصدر والدرجة">حساب</td>
 </tr>
 <tr>
-<td>سفن أدنوك المستهدفة (إعلان الشركة)</td>
-<td><strong>15</strong> منذ بدء النزاع · وقتيل و20 جريحًا</td>
-<td>بيان منقول عبر رويترز — B/2</td>
+<td data-label="البند">سفن أدنوك المستهدفة (إعلان الشركة)</td>
+<td data-label="الرقم"><strong>15</strong> منذ بدء النزاع · وقتيل و20 جريحًا</td>
+<td data-label="المصدر والدرجة">بيان منقول عبر رويترز — B/2</td>
 </tr>
 <tr>
-<td>إجمالي الوقائع في عبور هرمز منذ 28 فبراير 2026</td>
-<td><strong>53 واقعة</strong> مُبلَّغ عنها أثناء العبور</td>
-<td><span class="ltr">UKMTO</span> — A/1</td>
+<td data-label="البند">إجمالي الوقائع في عبور هرمز منذ 28 فبراير 2026</td>
+<td data-label="الرقم"><strong>53 واقعة</strong> مُبلَّغ عنها أثناء العبور</td>
+<td data-label="المصدر والدرجة"><span class="ltr">UKMTO</span> — A/1</td>
 </tr>
 <tr>
-<td>إجمالي الحوادث المؤكدة في سجل المنظمة البحرية الدولية حتى 9 أكتوبر</td>
-<td><strong>100 حادثة</strong> (لا 100 سفينة)</td>
-<td><span class="ltr">IMO</span> — A/1</td>
+<td data-label="البند">إجمالي الحوادث المؤكدة في سجل المنظمة البحرية الدولية حتى 9 أكتوبر</td>
+<td data-label="الرقم"><strong>100 حادثة</strong> (لا 100 سفينة)</td>
+<td data-label="المصدر والدرجة"><span class="ltr">IMO</span> — A/1</td>
 </tr>
 <tr>
-<td><strong>حصة إصابات أدنوك</strong></td>
-<td><strong>≈ 28%</strong> (15 من 53) · و<strong>≈ 15%</strong> (15 من 100)</td>
-<td>حساب</td>
+<td data-label="البند"><strong>حصة إصابات أدنوك</strong></td>
+<td data-label="الرقم"><strong>≈ 28%</strong> (15 من 53) · و<strong>≈ 15%</strong> (15 من 100)</td>
+<td data-label="المصدر والدرجة">حساب</td>
 </tr>
 </tbody></table></div>
 <h3>نتيجة الحساب</h3>
-<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">سيناريو المقام</th>
 <th scope="col">حصة الإصابات</th>
@@ -890,37 +913,37 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <th scope="col">التفسير</th>
 </tr></thead><tbody>
 <tr>
-<td>مقابل وقائع <span class="ltr">UKMTO</span> أثناء العبور (53)</td>
-<td class="num">28%</td>
-<td class="num">2.3%</td>
-<td><strong>≈ 12.2×</strong></td>
-<td>عدم تناسب قوي جدًا</td>
+<td data-label="سيناريو المقام">مقابل وقائع <span class="ltr">UKMTO</span> أثناء العبور (53)</td>
+<td class="num" data-label="حصة الإصابات">28%</td>
+<td class="num" data-label="حصة التعرّض">2.3%</td>
+<td data-label="R"><strong>≈ 12.2×</strong></td>
+<td data-label="التفسير">عدم تناسب قوي جدًا</td>
 </tr>
 <tr>
-<td>مقابل سجل <span class="ltr">IMO</span> المؤكد (100)</td>
-<td class="num">15%</td>
-<td class="num">2.3%</td>
-<td><strong>≈ 6.5×</strong></td>
-<td>عدم تناسب قوي</td>
+<td data-label="سيناريو المقام">مقابل سجل <span class="ltr">IMO</span> المؤكد (100)</td>
+<td class="num" data-label="حصة الإصابات">15%</td>
+<td class="num" data-label="حصة التعرّض">2.3%</td>
+<td data-label="R"><strong>≈ 6.5×</strong></td>
+<td data-label="التفسير">عدم تناسب قوي</td>
 </tr>
 <tr>
-<td>مقابل وقائع <span class="ltr">UKMTO</span> + تعرّض أعلى أثناء الأزمة (2 عبور/يوم)</td>
-<td class="num">28%</td>
-<td class="num">6.6%</td>
-<td><strong>≈ 4.2×</strong></td>
-<td>عدم تناسب قوي</td>
+<td data-label="سيناريو المقام">مقابل وقائع <span class="ltr">UKMTO</span> + تعرّض أعلى أثناء الأزمة (2 عبور/يوم)</td>
+<td class="num" data-label="حصة الإصابات">28%</td>
+<td class="num" data-label="حصة التعرّض">6.6%</td>
+<td data-label="R"><strong>≈ 4.2×</strong></td>
+<td data-label="التفسير">عدم تناسب قوي</td>
 </tr>
 <tr>
-<td>مقابل سجل <span class="ltr">IMO</span> + تعرّض أعلى (2 عبور/يوم)</td>
-<td class="num">15%</td>
-<td class="num">6.6%</td>
-<td><strong>≈ 2.3×</strong></td>
-<td>عدم تناسب قوي</td>
+<td data-label="سيناريو المقام">مقابل سجل <span class="ltr">IMO</span> + تعرّض أعلى (2 عبور/يوم)</td>
+<td class="num" data-label="حصة الإصابات">15%</td>
+<td class="num" data-label="حصة التعرّض">6.6%</td>
+<td data-label="R"><strong>≈ 2.3×</strong></td>
+<td data-label="التفسير">عدم تناسب قوي</td>
 </tr>
 </tbody></table></div>
 <p><strong>النطاق المعتمد: R يتراوح بين 2.3 و12.2 ضعفًا.</strong> وأدنى قيمة في السيناريو الأكثر تحفّظًا تبقى فوق عتبة عدم التناسب القوي.</p>
 <p><strong>الخلاصة الكمّية:</strong> إصابات أسطول أدنوك <strong>لا يفسّرها التعرّض</strong>. حتى بأكثر الفروض تحفّظًا — احتساب أقل عدد وقائع، وأعلى تقدير لعبور أدنوك — تبقى الإصابات <strong>أكثر من ضعف</strong> ما يتوقعه التعرّض وحده. وهذا يميل بالترجيح إلى <strong>الاستهداف</strong> لا إلى مجرد التعرّض المرتفع.</p></section><section class="doc reveal" id="sec-05" aria-labelledby="h-05"><h2 id="h-05"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>4. الامتداد إلى «الانتماء الإماراتي» عمومًا — لماذا لا يكتمل</h2><div class="h-rule"></div><p>المطلوب التالي كان حساب R للأساطيل الإماراتية كلها لا أدنوك وحدها. الحاجز: <strong>لا يوجد تفصيل منشور للعبور بحسب الملكية أو الانتماء</strong>، والأرقام المتاحة عن الأساطيل الإماراتية عددُ سفنٍ لا عبورات:</p>
-<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">الجهة</th>
 <th scope="col">السفن المعدودة</th>
@@ -928,131 +951,131 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <th scope="col">الدرجة</th>
 </tr></thead><tbody>
 <tr>
-<td>Global Feeder Shipping (AD Ports 80–81%)</td>
-<td>26 (آخر رقم رسمي مباشر 2022؛ الحالي غير معلن)</td>
-<td>غير معلن — قرينة إعلامية على 3 سفن دخلت الخليج في يونيو 2026</td>
-<td>A/1 للتاريخي · F/6 للحالي</td>
+<td data-label="الجهة">Global Feeder Shipping (AD Ports 80–81%)</td>
+<td data-label="السفن المعدودة">26 (آخر رقم رسمي مباشر 2022؛ الحالي غير معلن)</td>
+<td data-label="داخل النطاق">غير معلن — قرينة إعلامية على 3 سفن دخلت الخليج في يونيو 2026</td>
+<td data-label="الدرجة">A/1 للتاريخي · F/6 للحالي</td>
 </tr>
 <tr>
-<td>Al Seer Marine</td>
-<td class="num">17</td>
-<td>غير معلن</td>
-<td>A/1</td>
+<td data-label="الجهة">Al Seer Marine</td>
+<td class="num" data-label="السفن المعدودة">17</td>
+<td data-label="داخل النطاق">غير معلن</td>
+<td data-label="الدرجة">A/1</td>
 </tr>
 <tr>
-<td>Gulf Navigation Holding</td>
-<td class="num">10</td>
-<td>غير معلن (4 دعم بحري ومهمة معالجة آبار مرتبطة بمياه الإمارات)</td>
-<td>A/1</td>
+<td data-label="الجهة">Gulf Navigation Holding</td>
+<td class="num" data-label="السفن المعدودة">10</td>
+<td data-label="داخل النطاق">غير معلن (4 دعم بحري ومهمة معالجة آبار مرتبطة بمياه الإمارات)</td>
+<td data-label="الدرجة">A/1</td>
 </tr>
 <tr>
-<td>Fujairah National Shipping</td>
-<td class="num">4</td>
-<td>غير معلن</td>
-<td>C/3</td>
+<td data-label="الجهة">Fujairah National Shipping</td>
+<td class="num" data-label="السفن المعدودة">4</td>
+<td data-label="داخل النطاق">غير معلن</td>
+<td data-label="الدرجة">C/3</td>
 </tr>
 <tr>
-<td>DP World / Unifeeder / P&amp;O Maritime</td>
-<td>60+ عالميًا</td>
-<td><strong>غير معلن خليجيًا</strong></td>
-<td>A/1 عالميًا · F/6 خليجيًا</td>
+<td data-label="الجهة">DP World / Unifeeder / P&amp;O Maritime</td>
+<td data-label="السفن المعدودة">60+ عالميًا</td>
+<td data-label="داخل النطاق"><strong>غير معلن خليجيًا</strong></td>
+<td data-label="الدرجة">A/1 عالميًا · F/6 خليجيًا</td>
 </tr>
 <tr>
-<td><span class="ltr">SAFEEN</span> Group (ذراع موانئ أبوظبي — لا أدنوك)</td>
-<td>غير معلن (15 قاطرة معلنة)</td>
-<td>غير معلن</td>
-<td>A/1 للقاطرات</td>
+<td data-label="الجهة"><span class="ltr">SAFEEN</span> Group (ذراع موانئ أبوظبي — لا أدنوك)</td>
+<td data-label="السفن المعدودة">غير معلن (15 قاطرة معلنة)</td>
+<td data-label="داخل النطاق">غير معلن</td>
+<td data-label="الدرجة">A/1 للقاطرات</td>
 </tr>
 <tr>
-<td>شركات الإدارة: Noatum <span class="ltr">CSM 31</span> · Zeythra 17 · Horizon 2 · <span class="ltr">ONEX</span> غير معلن</td>
-<td>50+ مدارة (لا تُجمع مع الملكية)</td>
-<td>غير معلن</td>
-<td>C/3</td>
+<td data-label="الجهة">شركات الإدارة: Noatum <span class="ltr">CSM 31</span> · Zeythra 17 · Horizon 2 · <span class="ltr">ONEX</span> غير معلن</td>
+<td data-label="السفن المعدودة">50+ مدارة (لا تُجمع مع الملكية)</td>
+<td data-label="داخل النطاق">غير معلن</td>
+<td data-label="الدرجة">C/3</td>
 </tr>
 <tr>
-<td><strong>الإجمالي المعدود (بلا إزدواج)</strong></td>
-<td><strong>57 سفينة</strong></td>
-<td><strong>تقدير محافظ: 10</strong></td>
-<td>مختلط</td>
+<td data-label="الجهة"><strong>الإجمالي المعدود (بلا إزدواج)</strong></td>
+<td data-label="السفن المعدودة"><strong>57 سفينة</strong></td>
+<td data-label="داخل النطاق"><strong>تقدير محافظ: 10</strong></td>
+<td data-label="الدرجة">مختلط</td>
 </tr>
 </tbody></table></div>
 <p><strong>الحكم:</strong> نسبة تعرّض «الانتماء الإماراتي» الإجمالية <strong>غير قابلة للحساب من المصادر المفتوحة</strong>. ولذلك يبقى الحساب الكمّي محصورًا في أدنوك — وهو كافٍ للحكم، لأن أدنوك هي أكبر كتلة إماراتية في الممر وأكثرها إفصاحًا.</p>
-<p><strong>ملاحظة حاكمة:</strong> ثماني سفن من عشرين في سجل الضحايا بصلة إماراتية موثّقة (40%). ومقارنة هذه النسبة بحصة تعرّض إماراتية غير معلومة <strong>لا يجوز</strong>؛ ومن يفعل ذلك يستنتج استهدافًا بلا مقام. الالتزام بالقاعدة ح14 هنا إلزامي.</p></section><section class="doc reveal" id="sec-06" aria-labelledby="h-06"><h2 id="h-06"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>5. حساسية النتيجة — ما الذي قد يقلبها</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<p><strong>ملاحظة حاكمة:</strong> ثماني سفن من عشرين في سجل الضحايا بصلة إماراتية موثّقة (40%). ومقارنة هذه النسبة بحصة تعرّض إماراتية غير معلومة <strong>لا يجوز</strong>؛ ومن يفعل ذلك يستنتج استهدافًا بلا مقام. الالتزام بالقاعدة ح14 هنا إلزامي.</p></section><section class="doc reveal" id="sec-06" aria-labelledby="h-06"><h2 id="h-06"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>5. حساسية النتيجة — ما الذي قد يقلبها</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">المتغير</th>
 <th scope="col">أثره على R</th>
 </tr></thead><tbody>
 <tr>
-<td>عبور أدنوك الحقيقي أثناء الأزمة أعلى من 0.71/يوم (قوافل ميسّرة، زيادة عبور)</td>
-<td>يخفض R — لكنه يبقى فوق 2 حتى عند 2 عبور/يوم</td>
+<td data-label="المتغير">عبور أدنوك الحقيقي أثناء الأزمة أعلى من 0.71/يوم (قوافل ميسّرة، زيادة عبور)</td>
+<td data-label="أثره على R">يخفض R — لكنه يبقى فوق 2 حتى عند 2 عبور/يوم</td>
 </tr>
 <tr>
-<td>إجمالي الوقائع أكبر من 53 (لو ضُمّت وقائع خارج نطاق العبور)</td>
-<td>يخفض R — عند 100 واقعة يبقى ≈ 6.5×</td>
+<td data-label="المتغير">إجمالي الوقائع أكبر من 53 (لو ضُمّت وقائع خارج نطاق العبور)</td>
+<td data-label="أثره على R">يخفض R — عند 100 واقعة يبقى ≈ 6.5×</td>
 </tr>
 <tr>
-<td>الإعلان الرسمي «15 سفينة» يشمل سفنًا مستأجرة لا مملوكة</td>
-<td>لا يغير الحساب، لأن المقام مقام عبور لا ملكية</td>
+<td data-label="المتغير">الإعلان الرسمي «15 سفينة» يشمل سفنًا مستأجرة لا مملوكة</td>
+<td data-label="أثره على R">لا يغير الحساب، لأن المقام مقام عبور لا ملكية</td>
 </tr>
 <tr>
-<td>جزء من الإصابات الـ15 وقع خارج هرمز</td>
-<td><strong>يخفض R بدرجة كبيرة</strong> — وهو أكبر مصدر شك</td>
+<td data-label="المتغير">جزء من الإصابات الـ15 وقع خارج هرمز</td>
+<td data-label="أثره على R"><strong>يخفض R بدرجة كبيرة</strong> — وهو أكبر مصدر شك</td>
 </tr>
 <tr>
-<td>السفن المظلمة (62.7% في أغسطس، درجة D/4)</td>
-<td>توسيع المقام يخفض R؛ الرقم غير متحقق من مصدر أولي مفتوح</td>
+<td data-label="المتغير">السفن المظلمة (62.7% في أغسطس، درجة D/4)</td>
+<td data-label="أثره على R">توسيع المقام يخفض R؛ الرقم غير متحقق من مصدر أولي مفتوح</td>
 </tr>
 </tbody></table></div>
-<p><strong>أكبر مصدر شك واحد:</strong> هل الإصابات الـ15 كلها داخل نطاق هرمز؟ إعلان أدنوك يقول «أثناء عبور مضيق هرمز»، وهو ما يدعم الحساب — لكن قائمة الأسماء والتواريخ غير منشورة، فلا يمكن التحقق سطرًا بسطر.</p></section><section class="doc reveal" id="sec-07" aria-labelledby="h-07"><h2 id="h-07"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>7. ما أُضيف إلى النظام</h2><div class="h-rule"></div><ul><li><strong>قاعدة تحقق جديدة:</strong> لا يُحسب أي معدل إصابة قبل التحقق من حجم الأسطول من الإفصاح الرسمي (التقرير السنوي)، لا من خبر صحافي. مصدر خطأ اليوم: الخلط بين أسطول Navig8 المملوك وإجمالي أسطول أدنوك.</li><li><strong>عتبات R</strong> وعتبة عدم التناسب القوي (≥2) مضافة إلى قواعد التحليل الاستخباري.</li><li><strong>ملفات المقام الخمسة</strong> محفوظة كمرجع دائم في <code>audit/denominators/</code>.</li></ul></section><section class="doc reveal" id="sec-08" aria-labelledby="h-08"><h2 id="h-08"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>المصادر</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<p><strong>أكبر مصدر شك واحد:</strong> هل الإصابات الـ15 كلها داخل نطاق هرمز؟ إعلان أدنوك يقول «أثناء عبور مضيق هرمز»، وهو ما يدعم الحساب — لكن قائمة الأسماء والتواريخ غير منشورة، فلا يمكن التحقق سطرًا بسطر.</p></section><section class="doc reveal" id="sec-07" aria-labelledby="h-07"><h2 id="h-07"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>7. ما أُضيف إلى النظام</h2><div class="h-rule"></div><ul><li><strong>قاعدة تحقق جديدة:</strong> لا يُحسب أي معدل إصابة قبل التحقق من حجم الأسطول من الإفصاح الرسمي (التقرير السنوي)، لا من خبر صحافي. مصدر خطأ اليوم: الخلط بين أسطول Navig8 المملوك وإجمالي أسطول أدنوك.</li><li><strong>عتبات R</strong> وعتبة عدم التناسب القوي (≥2) مضافة إلى قواعد التحليل الاستخباري.</li><li><strong>ملفات المقام الخمسة</strong> محفوظة كمرجع دائم في <code>audit/denominators/</code>.</li></ul></section><section class="doc reveal" id="sec-08" aria-labelledby="h-08"><h2 id="h-08"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>المصادر</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">المصدر</th>
 <th scope="col">الاستخدام</th>
 <th scope="col">الدرجة</th>
 </tr></thead><tbody>
 <tr>
-<td><span class="ltr">ADNOC</span> L&amp;S — الإفصاح الرسمي وأسطول الشحن</td>
-<td>87 مملوكة · 53 ناقلة · 340+ مؤسسية · 600+ مشغّلة ومستأجرة</td>
-<td>A/1</td>
+<td data-label="المصدر"><span class="ltr">ADNOC</span> L&amp;S — الإفصاح الرسمي وأسطول الشحن</td>
+<td data-label="الاستخدام">87 مملوكة · 53 ناقلة · 340+ مؤسسية · 600+ مشغّلة ومستأجرة</td>
+<td data-label="الدرجة">A/1</td>
 </tr>
 <tr>
-<td><span class="ltr">ADNOC</span> L&amp;S — بيان حادثتي AL <span class="ltr">BAHYAH</span> وMOMBASA B (14 يوليو 2026)</td>
-<td>أول تأكيد رسمي مسمّى: <span class="ltr">VLCC</span> مملوكة وVLCC مستأجرة</td>
-<td>A/1</td>
+<td data-label="المصدر"><span class="ltr">ADNOC</span> L&amp;S — بيان حادثتي AL <span class="ltr">BAHYAH</span> وMOMBASA B (14 يوليو 2026)</td>
+<td data-label="الاستخدام">أول تأكيد رسمي مسمّى: <span class="ltr">VLCC</span> مملوكة وVLCC مستأجرة</td>
+<td data-label="الدرجة">A/1</td>
 </tr>
 <tr>
-<td>Reuters — إعلان استهداف 15 سفينة (7 أغسطس 2026)</td>
-<td>15 سفينة · قتيل · 20 جريحًا</td>
-<td>B/2</td>
+<td data-label="المصدر">Reuters — إعلان استهداف 15 سفينة (7 أغسطس 2026)</td>
+<td data-label="الاستخدام">15 سفينة · قتيل · 20 جريحًا</td>
+<td data-label="الدرجة">B/2</td>
 </tr>
 <tr>
-<td>Lloyd&#x27;s List — عبور ناقلات أدنوك</td>
-<td>نحو 5 عبورات أسبوعيًا</td>
-<td>A/2</td>
+<td data-label="المصدر">Lloyd&#x27;s List — عبور ناقلات أدنوك</td>
+<td data-label="الاستخدام">نحو 5 عبورات أسبوعيًا</td>
+<td data-label="الدرجة">A/2</td>
 </tr>
 <tr>
-<td><span class="ltr">JMIC</span> — تحديث 105</td>
-<td>121 عبورًا ميسّرًا في 96 ساعة</td>
-<td>A/1</td>
+<td data-label="المصدر"><span class="ltr">JMIC</span> — تحديث 105</td>
+<td data-label="الاستخدام">121 عبورًا ميسّرًا في 96 ساعة</td>
+<td data-label="الدرجة">A/1</td>
 </tr>
 <tr>
-<td><span class="ltr">UKMTO</span> — النظرة الأسبوعية 2 أكتوبر 2026</td>
-<td>53 واقعة أثناء عبور هرمز منذ 28 فبراير 2026</td>
-<td>A/1</td>
+<td data-label="المصدر"><span class="ltr">UKMTO</span> — النظرة الأسبوعية 2 أكتوبر 2026</td>
+<td data-label="الاستخدام">53 واقعة أثناء عبور هرمز منذ 28 فبراير 2026</td>
+<td data-label="الدرجة">A/1</td>
 </tr>
 <tr>
-<td>المنظمة البحرية الدولية (<span class="ltr">IMO</span>)</td>
-<td>100 حادثة مؤكدة حتى 9 أكتوبر</td>
-<td>A/1</td>
+<td data-label="المصدر">المنظمة البحرية الدولية (<span class="ltr">IMO</span>)</td>
+<td data-label="الاستخدام">100 حادثة مؤكدة حتى 9 أكتوبر</td>
+<td data-label="الدرجة">A/1</td>
 </tr>
 <tr>
-<td>مركز السيطرة على الأمراض (<span class="ltr">CDC</span>) — نسبة الوقوع الموحّدة</td>
-<td>منهجية مقارنة الملاحظ مقابل المتوقع</td>
-<td>A/1</td>
+<td data-label="المصدر">مركز السيطرة على الأمراض (<span class="ltr">CDC</span>) — نسبة الوقوع الموحّدة</td>
+<td data-label="الاستخدام">منهجية مقارنة الملاحظ مقابل المتوقع</td>
+<td data-label="الدرجة">A/1</td>
 </tr>
 <tr>
-<td>Congressional Research Service — هرمز في سطور</td>
-<td>سياق الحاويات المغذية في جبل علي</td>
-<td>A/1</td>
+<td data-label="المصدر">Congressional Research Service — هرمز في سطور</td>
+<td data-label="الاستخدام">سياق الحاويات المغذية في جبل علي</td>
+<td data-label="الدرجة">A/1</td>
 </tr>
 </tbody></table></div>
 <blockquote><strong>حدود:</strong> هذا الملحق يقيس <strong>عدم التناسب</strong> ولا يُثبت نيّة، ولا يسمّي جهة منفّذة. وكل رقم يحمل درجته، وكل تقدير يحمل افتراضه، وكل ما هو غير معلن مكتوب «غير معلن» لا مُخمَّنًا.</blockquote></section>
@@ -1060,7 +1083,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> مقام التعرّض — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: <span class="ltr">UTC</span> وتوقيت البحرين (<span class="ltr">UTC</span>+3).
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-21 14:33 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-21 15:23 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
     
   </footer>
 </div>

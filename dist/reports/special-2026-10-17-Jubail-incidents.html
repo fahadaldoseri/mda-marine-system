@@ -676,6 +676,29 @@ section.doc{scroll-margin-top:0 !important}
 /* رقم المعلّم: نص داكن على معلّم فاتح، ومقلوب في الوضع النهاري */
 body:not(.daylight) .lg-num{color:#04120f}
 body.daylight .lg-num{color:#ffffff}
+
+/* بطاقات الجوال للجداول — البند المعتمد 21 أكتوبر 2026 */
+@media (max-width:560px){
+  table.cardified{display:block;border:0;background:transparent;border-radius:0}
+  table.cardified.cardified{width:100%;max-width:100%;min-width:0}
+  table.cardified thead{display:none}
+  table.cardified tbody{display:block;max-width:100%}
+  table.cardified tr{display:block;max-width:100%;box-sizing:border-box;background:var(--panel);
+    border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin:0 0 10px}
+  table.cardified td{display:grid;grid-template-columns:minmax(72px,auto) minmax(0,1fr);gap:8px;
+    border:0;padding:5px 0;align-items:baseline;text-align:start;
+    overflow-wrap:anywhere;word-break:break-word;min-width:0}
+  table.cardified td::before{content:attr(data-label);color:var(--muted);font-size:12.5px;font-weight:600}
+  table.cardified td:empty{display:none}
+  .tbl-wrap:has(table.cardified),.tbl-scroll:has(table.cardified){overflow:visible;border:0}
+  .tbl-hint{display:none}
+}
+/* بانر النسخة المستبدلة — البند المعتمد 21 أكتوبر 2026 */
+.sup-banner{margin:0 0 20px;padding:12px 16px;border:1px solid #c9a24f;border-radius:10px;
+  background:#2a2210;color:#ffd88a;font-size:14px}
+body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
+.sup-banner a{color:inherit;font-weight:700;text-decoration:underline}
+.sp-dim{opacity:.72}
 </style></head>
 <body><nav class="site-nav no-print" aria-label="تنقل الموقع">
   <div class="sn-inner">
@@ -735,7 +758,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     
     <div>
       <p class="lede"><strong>تاريخ الإصدار:</strong> 17 أكتوبر 2026 · <strong>وقت القطع:</strong> 18:45 بتوقيت البحرين (15:45 <span class="ltr">UTC</span>)</p>
-      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-21 14:33 <span class="ltr">UTC</span></b></span></div>
+      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-21 15:23 <span class="ltr">UTC</span></b></span></div>
     </div>
   </header>
 
@@ -778,41 +801,41 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <h3>قراءة الفرق بين البلاغين</h3></div>
 </div>
 </div>
-<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">العنصر</th>
 <th scope="col"><bdi class="bidi">#174</bdi></th>
 <th scope="col"><bdi class="bidi">#175</bdi></th>
 </tr></thead><tbody>
 <tr>
-<td>الزمن</td>
-<td>09:00 <span class="ltr">UTC</span></td>
-<td>19:22 <span class="ltr">UTC</span></td>
+<td data-label="العنصر">الزمن</td>
+<td data-label="#174">09:00 <span class="ltr">UTC</span></td>
+<td data-label="#175">19:22 <span class="ltr">UTC</span></td>
 </tr>
 <tr>
-<td>المصدر</td>
-<td>ضابط أمن الشركة</td>
-<td>الربان</td>
+<td data-label="العنصر">المصدر</td>
+<td data-label="#174">ضابط أمن الشركة</td>
+<td data-label="#175">الربان</td>
 </tr>
 <tr>
-<td>المسافة</td>
-<td>68 ميلًا بحريًا</td>
-<td>78 ميلًا بحريًا</td>
+<td data-label="العنصر">المسافة</td>
+<td data-label="#174">68 ميلًا بحريًا</td>
+<td data-label="#175">78 ميلًا بحريًا</td>
 </tr>
 <tr>
-<td>الوسيلة</td>
-<td>مقذوف مجهول</td>
-<td><span class="ltr">RPG</span> من قارب صغير</td>
+<td data-label="العنصر">الوسيلة</td>
+<td data-label="#174">مقذوف مجهول</td>
+<td data-label="#175"><span class="ltr">RPG</span> من قارب صغير</td>
 </tr>
 <tr>
-<td>حالة الطاقم</td>
-<td>أُجلي</td>
-<td>بخير على السفينة</td>
+<td data-label="العنصر">حالة الطاقم</td>
+<td data-label="#174">أُجلي</td>
+<td data-label="#175">بخير على السفينة</td>
 </tr>
 <tr>
-<td>الموضع المستهدف</td>
-<td>غير معلن</td>
-<td>الربع الخلفي الأيسر</td>
+<td data-label="العنصر">الموضع المستهدف</td>
+<td data-label="#174">غير معلن</td>
+<td data-label="#175">الربع الخلفي الأيسر</td>
 </tr>
 </tbody></table></div>
 <p><strong>الحكم:</strong> اختلاف الزمن (أكثر من عشر ساعات) والمصدر والوسيلة والمسافة وحالة الطاقم يجعل <strong>الأرجح أنهما واقعتان منفصلتان</strong>، وهما كذلك <strong>منفصلان في السجل الرسمي برقمين</strong>. لكن رويترز صرّحت: «لم تستطع تحديد ما إذا كان البلاغان يشيران إلى الحادث نفسه». لذلك <strong>لا يُدمجان ولا يُجزم بانفصالهما ميدانيًا</strong> — الصياغة الدقيقة: <strong>بلاغان رسميان منفصلان، ووحدة الواقعة ميدانيًا غير محسومة.</strong></p>
@@ -843,42 +866,42 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <h3>ملاحظة ضبط إلزامية</h3>
 <p>يجب <strong>عدم الخلط</strong> بين «<span class="ltr">ST3</span>» وسفن مشابهة الاسم في سجل <span class="ltr">IMO</span> (مثل <strong>«<span class="ltr">ST1</span>»</strong>، <span class="ltr">IMO 9256999</span>، واقعة 6 أكتوبر). تشابه الأسماء في أساطيل الناقلات مصدر خطأ متكرر؛ ولا يُنسب خبر إلى سفينة إلا بـ<strong><span class="ltr">IMO</span> + <span class="ltr">MMSI</span> + العلم + المالك</strong>.</p>
 <hr></section><section class="doc reveal" id="sec-07" aria-labelledby="h-07"><h2 id="h-07"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>6. ما لم يُثبت — الفراغات الصريحة</h2><div class="h-rule"></div><p>وفق سلّم الفروق الثلاثة المعتمد:</p>
-<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">الفراغ</th>
 <th scope="col">نوعه</th>
 </tr></thead><tbody>
 <tr>
-<td>اسم السفينة المصابة وعلمها ومالكها <strong>رسميًا</strong></td>
-<td><strong>لم يُثبت</strong> — لا سند رسمي</td>
+<td data-label="الفراغ">اسم السفينة المصابة وعلمها ومالكها <strong>رسميًا</strong></td>
+<td data-label="نوعه"><strong>لم يُثبت</strong> — لا سند رسمي</td>
 </tr>
 <tr>
-<td>هوية السفينة في بلاغ <bdi class="bidi">#175</bdi> وعلمها</td>
-<td><strong>لم يُثبت</strong></td>
+<td data-label="الفراغ">هوية السفينة في بلاغ <bdi class="bidi">#175</bdi> وعلمها</td>
+<td data-label="نوعه"><strong>لم يُثبت</strong></td>
 </tr>
 <tr>
-<td>الجهة المنفذة ونوع المقذوف في <bdi class="bidi">#174</bdi></td>
-<td><strong>لم يُثبت</strong></td>
+<td data-label="الفراغ">الجهة المنفذة ونوع المقذوف في <bdi class="bidi">#174</bdi></td>
+<td data-label="نوعه"><strong>لم يُثبت</strong></td>
 </tr>
 <tr>
-<td>نوع القارب الصغير في <bdi class="bidi">#175</bdi> وانتماؤه</td>
-<td><strong>لم يُعثر عليه</strong> في المصادر المفحوصة</td>
+<td data-label="الفراغ">نوع القارب الصغير في <bdi class="bidi">#175</bdi> وانتماؤه</td>
+<td data-label="نوعه"><strong>لم يُعثر عليه</strong> في المصادر المفحوصة</td>
 </tr>
 <tr>
-<td>الحمولة ووجهتها وحالة الإبحار</td>
-<td><strong>لم يُعثر عليه</strong></td>
+<td data-label="الفراغ">الحمولة ووجهتها وحالة الإبحار</td>
+<td data-label="نوعه"><strong>لم يُعثر عليه</strong></td>
 </tr>
 <tr>
-<td>وجود تسرّب بيئي</td>
-<td><strong>غير معلوم</strong> وقت البلاغين</td>
+<td data-label="الفراغ">وجود تسرّب بيئي</td>
+<td data-label="نوعه"><strong>غير معلوم</strong> وقت البلاغين</td>
 </tr>
 <tr>
-<td>وجود خسائر بشرية</td>
-<td><strong>لا دليل</strong> على وفيات؛ <span class="ltr">UKMTO</span> ذكر أن الطاقم بخير</td>
+<td data-label="الفراغ">وجود خسائر بشرية</td>
+<td data-label="نوعه"><strong>لا دليل</strong> على وفيات؛ <span class="ltr">UKMTO</span> ذكر أن الطاقم بخير</td>
 </tr>
 <tr>
-<td>التبنّي الرسمي للمسؤولية</td>
-<td><strong>لم يُثبت</strong> من أي جهة</td>
+<td data-label="الفراغ">التبنّي الرسمي للمسؤولية</td>
+<td data-label="نوعه"><strong>لم يُثبت</strong> من أي جهة</td>
 </tr>
 </tbody></table></div>
 <p><strong>فرق ملزم:</strong> «لم يُعثر عليه» ليس نفيًا، و«غير محسوم» يعني تعارضًا بين مصدرين، و«لم يُثبت» يعني غياب السند لا بطلان الواقعة.</p>
@@ -898,73 +921,73 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <p><strong>القراءة التشغيلية:</strong> واقعتا الجبيل <strong>داخل</strong> الخليج تزيدان ضغط الخطر في المساحة التي ينتظر فيها العدد الأكبر من السفن العالقة. فالسفينة التي تنتظر قرب ميناء التحميل ليست في مأمن أكبر من السفينة العابرة في المضيق.</p>
 <hr><p class="src-note">قراءة اتجاه من منصة رصد — تُراعى مهلة التحديث واحتمال انقطاع الإرسال أو spoofing.</p></section><section class="doc reveal" id="sec-10" aria-labelledby="h-10"><h2 id="h-10"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>9. تناقضات ومناهج تحذيرية</h2><div class="h-rule"></div><ol><li><strong>نصوص معاد تدويرها:</strong> نُقل في التغطية وصف حادث <strong>«BW <span class="ltr">RHINE</span>»</strong> (استهداف بمدفع رشاش وقذائف <span class="ltr">RPG</span> عام 2019) على أنه وصف لواقعتي الجبيل. هذا <strong>نص قديم مُعاد استخدامه</strong>، ولا يخص الواقعتين. <strong>قاعدة:</strong> يُطابَق كل وصف «سلاح/تكتيك» بعام الحادث الأصلي قبل نقله.</li><li><strong>وصف السفينة:</strong> <span class="ltr">UKMTO</span> وصفها «ناقلة» في <bdi class="bidi">#174</bdi>، ونقل <span class="ltr">AFP</span> أنها سفينة حاويات. <strong>التعارض محسوم لصالح الوصف الرسمي</strong> (ناقلة)؛ ونقل <span class="ltr">AFP</span> مُرجَّح أنه خطأ في هوية السفينة.</li><li><strong>الزمن:</strong> البلاغ <bdi class="bidi">#174</bdi> مُعلن كـ«متأخر» — أي أن زمن الإبلاغ قد يكون لاحقًا لزمن الحادث، ويُعتمد <strong>زمن الحادث</strong> المذكور (0900 <span class="ltr">UTC</span>) لا زمن الإصدار.</li><li><strong>مصدر البلاغ الأول تجاري</strong> (ضابط أمن الشركة) لا عسكري — وهذا يُصنّف درجة الدقة، ويحتاج تأكيدًا مستقلًا وقد حصل من <span class="ltr">MSCIO</span>.</li><li><strong>لا بيان سعودي رسمي</strong> منشور حتى وقت القطع — لا من وزارة النقل ولا من «أرامكو». غياب البيان <strong>فراغ</strong>، ولا يُقرأ كتجاهل أو إخفاء.</li></ol>
 <hr></section><section class="doc reveal" id="sec-11" aria-labelledby="h-11"><h2 id="h-11"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>10. جدول المصادر المفحوصة (المصادر الأربعون)</h2><div class="h-rule"></div><p><strong>المصادر الرسمية المباشرة</strong></p>
-<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">المصدر</th>
 <th scope="col">النتيجة</th>
 </tr></thead><tbody>
 <tr>
-<td><span class="ltr">UKMTO</span> (1)</td>
-<td><strong>الأصل الأساسي</strong>: البلاغان <bdi class="bidi">#174</bdi> و#175 بنصّيهما وزمنيهما وموضعيهما</td>
+<td data-label="المصدر"><span class="ltr">UKMTO</span> (1)</td>
+<td data-label="النتيجة"><strong>الأصل الأساسي</strong>: البلاغان <bdi class="bidi">#174</bdi> و#175 بنصّيهما وزمنيهما وموضعيهما</td>
 </tr>
 <tr>
-<td><span class="ltr">MSCIO</span> (34)</td>
-<td><strong>تأكيد مستقل فعلي</strong> للبلاغين (<span class="ltr">147/26</span> و148/26)</td>
+<td data-label="المصدر"><span class="ltr">MSCIO</span> (34)</td>
+<td data-label="النتيجة"><strong>تأكيد مستقل فعلي</strong> للبلاغين (<span class="ltr">147/26</span> و148/26)</td>
 </tr>
 <tr>
-<td><span class="ltr">NAVAREA IX</span> — الهيدروغرافي الباكستاني</td>
-<td><strong>تحذير <span class="ltr">382/26</span></strong> قارب نجاة منجرف <span class="ltr">27°46.9′ N</span> <span class="ltr">050°36.0′ E</span> + تحذيرات <span class="ltr">380/26</span> و371/26</td>
+<td data-label="المصدر"><span class="ltr">NAVAREA IX</span> — الهيدروغرافي الباكستاني</td>
+<td data-label="النتيجة"><strong>تحذير <span class="ltr">382/26</span></strong> قارب نجاة منجرف <span class="ltr">27°46.9′ N</span> <span class="ltr">050°36.0′ E</span> + تحذيرات <span class="ltr">380/26</span> و371/26</td>
 </tr>
 <tr>
-<td><span class="ltr">IMO</span> (2)</td>
-<td>العدّاد ثابت عند 113؛ سابقة <strong>الجبيل 7 مارس 2026</strong> (<span class="ltr">ARABIA III</span>)</td>
+<td data-label="المصدر"><span class="ltr">IMO</span> (2)</td>
+<td data-label="النتيجة">العدّاد ثابت عند 113؛ سابقة <strong>الجبيل 7 مارس 2026</strong> (<span class="ltr">ARABIA III</span>)</td>
 </tr>
 <tr>
-<td><span class="ltr">JMIC</span> (35)</td>
-<td>تحديث 105: لا هجمات مؤكدة في الخليج العربي حتى 15 أكتوبر</td>
+<td data-label="المصدر"><span class="ltr">JMIC</span> (35)</td>
+<td data-label="النتيجة">تحديث 105: لا هجمات مؤكدة في الخليج العربي حتى 15 أكتوبر</td>
 </tr>
 <tr>
-<td>هيئة الموانئ السنغافورية (<span class="ltr">MPA</span>)</td>
-<td>لا بيان عن هذه الواقعة</td>
+<td data-label="المصدر">هيئة الموانئ السنغافورية (<span class="ltr">MPA</span>)</td>
+<td data-label="النتيجة">لا بيان عن هذه الواقعة</td>
 </tr>
 <tr>
-<td><span class="ltr">NGA</span>/مسارات ملاحية</td>
-<td>لا تعديل مسار معلن خاص بالموقع</td>
+<td data-label="المصدر"><span class="ltr">NGA</span>/مسارات ملاحية</td>
+<td data-label="النتيجة">لا تعديل مسار معلن خاص بالموقع</td>
 </tr>
 </tbody></table></div>
 <p><strong>المصادر المهنية والإعلامية</strong></p>
-<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">المصدر</th>
 <th scope="col">النتيجة</th>
 </tr></thead><tbody>
 <tr>
-<td>رويترز</td>
-<td><strong>أول من نشر</strong>: «ناقلة أُصيبت بمقذوف مجهول قبالة السعودية»؛ وأعلنت عدم قدرتها على تحديد وحدة الواقعة</td>
+<td data-label="المصدر">رويترز</td>
+<td data-label="النتيجة"><strong>أول من نشر</strong>: «ناقلة أُصيبت بمقذوف مجهول قبالة السعودية»؛ وأعلنت عدم قدرتها على تحديد وحدة الواقعة</td>
 </tr>
 <tr>
-<td>Le Marin</td>
-<td><strong>الأدق</strong>: نقل عن Vanguard هوية «<span class="ltr">ST3</span>» وتفاصيل الحريق والإجلاء</td>
+<td data-label="المصدر">Le Marin</td>
+<td data-label="النتيجة"><strong>الأدق</strong>: نقل عن Vanguard هوية «<span class="ltr">ST3</span>» وتفاصيل الحريق والإجلاء</td>
 </tr>
 <tr>
-<td><span class="ltr">AFP</span> / L&#x27;Orient-Le Jour</td>
-<td>نقلت روايتي «<span class="ltr">ST3</span>» و«<span class="ltr">SAFEEN PRINCIPAL</span>» — <strong>مصدر التناقض</strong></td>
+<td data-label="المصدر"><span class="ltr">AFP</span> / L&#x27;Orient-Le Jour</td>
+<td data-label="النتيجة">نقلت روايتي «<span class="ltr">ST3</span>» و«<span class="ltr">SAFEEN PRINCIPAL</span>» — <strong>مصدر التناقض</strong></td>
 </tr>
 <tr>
-<td>TradeWinds</td>
-<td>توقّف المحرّك وفقدان القدرة، إجلاء الطاقم إلى سفينة حاويات إماراتية</td>
+<td data-label="المصدر">TradeWinds</td>
+<td data-label="النتيجة">توقّف المحرّك وفقدان القدرة، إجلاء الطاقم إلى سفينة حاويات إماراتية</td>
 </tr>
 <tr>
-<td>gCaptain / The Maritime Executive / Splash247</td>
-<td>تغطية مستفيضة؛ أعادت وصف حادث BW <span class="ltr">RHINE</span> القديم</td>
+<td data-label="المصدر">gCaptain / The Maritime Executive / Splash247</td>
+<td data-label="النتيجة">تغطية مستفيضة؛ أعادت وصف حادث BW <span class="ltr">RHINE</span> القديم</td>
 </tr>
 <tr>
-<td>Al Jazeera / Reuters / TradeWinds Arabic</td>
-<td>تأكيد إضافي، بلا معلومة جديدة</td>
+<td data-label="المصدر">Al Jazeera / Reuters / TradeWinds Arabic</td>
+<td data-label="النتيجة">تأكيد إضافي، بلا معلومة جديدة</td>
 </tr>
 <tr>
-<td><strong>Vanguard</strong> (مصدر دعم مهني)</td>
-<td><strong>المصدر الأصلي لهوية السفينة</strong> عبر Le Marin وAFP</td>
+<td data-label="المصدر"><strong>Vanguard</strong> (مصدر دعم مهني)</td>
+<td data-label="النتيجة"><strong>المصدر الأصلي لهوية السفينة</strong> عبر Le Marin وAFP</td>
 </tr>
 </tbody></table></div>
 <p><strong>الخلاصة المنهجية:</strong> المصدر الحاكم هو <strong><span class="ltr">UKMTO</span></strong>، والتأكيد المستقل من <strong><span class="ltr">MSCIO</span></strong>، والتفاصيل الفنية من <strong>مصادر مهنية</strong>. و<strong>لم يُعثر</strong> على أي بيان مالك أو مشغّل أو سلطة ميناء أو جهة عسكرية تسمّي السفينة أو الجهة المنفذة.</p>
@@ -972,51 +995,51 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <ul><li><strong>مؤكد:</strong> وقع بلاغان رسميان منفصلان داخل الخليج العربي شمال شرق الجبيل في 16 أكتوبر 2026.</li><li><strong>مرجّح:</strong> السفينة المستهدفة في البلاغ <bdi class="bidi">#174</bdi> هي <strong>«<span class="ltr">ST3</span>»</strong> (ناقلة خام، جزر مارشال).</li><li><strong>مرجّح:</strong> تحذير <span class="ltr">NAVAREA 382/26</span> (قارب النجاة) متصل بعملية إجلاء طاقم الواقعة الأولى.</li><li><strong>مرجّح:</strong> وقوع الاستهدافين خارج مضيق هرمز وداخل المياه الداخلية للخليج.</li><li><strong>ممكن:</strong> أن الواقعتين جزء من حملة موجّهة إلى محور التصدير السعودي الشرقي.</li><li><strong>غير حاسم:</strong> الجهة المنفذة، ونوع المقذوف في الواقعة الأولى.</li></ul>
 <p><strong>التوصيات التشغيلية:</strong></p>
 <ol><li><strong>رفع تصنيف الخطر</strong> في محور <strong>الجبيل — رأس تنورة</strong> إلى المستوى نفسه المعطى لمضيق هرمز، لا أقل منه.</li><li><strong>تعميم قاعدة الإبلاغ الفوري</strong> على السفن الراسية والمناورة داخل الخليج، لا العابرة فقط؛ فالواقعتان وقعتا في منطقة انتظار واقتراب.</li><li><strong>إلزام سفن الأسطول</strong> بالإبلاغ عن أي قارب صغير يقترب دون مبرر تجاري، وتصويره وتوثيق مساره وسرعته وعدد أفراده فورًا.</li><li><strong>فحص الأقمار والصور</strong> لموقع الواقعة: رصد الحطام أو التلوث أو القارب المنجرف بالصورة، لا بالخبر.</li><li><strong>التحقق من هوية السفينة قبل أي بيان علني</strong>: يُشترط <strong><span class="ltr">IMO</span> + <span class="ltr">MMSI</span> + العلم + المالك</strong>، ولا يُنسب خبر إلى سفينة بالاسم وحده.</li><li><strong>مطابقة تحذيرات <span class="ltr">NAVAREA</span> بالمواقع الأمنية</strong> أسبوعيًا؛ فقد أثبتت هذه المرة قيمتها في ربط بلاغ ملاحي بواقعة أمنية.</li><li><strong>مراقبة محور الجبيل — رأس تنورة</strong> ضمن النطاق اليومي، وإدراج الواقعتين في خلفية التقرير الصباحي إلى أن يُحسم الإسناد.</li><li><strong>عدم إدراج الحادث في العدّاد الداخلي كمؤكد دوليًا</strong> حتى يظهر في سجل <span class="ltr">IMO</span>، مع الاحتفاظ به كـ«بلاغ رسمي مؤكد» بدرجة مصداقية 1.</li></ol>
-<hr></section><section class="doc reveal" id="sec-13" aria-labelledby="h-13"><h2 id="h-13"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>12. الملحق — قواعد مستخلصة من هذه الواقعة</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<hr></section><section class="doc reveal" id="sec-13" aria-labelledby="h-13"><h2 id="h-13"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>12. الملحق — قواعد مستخلصة من هذه الواقعة</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">#</th>
 <th scope="col">القاعدة</th>
 <th scope="col">السبب</th>
 </tr></thead><tbody>
 <tr>
-<td>ق1</td>
-<td>«البلاغ الرسمي ≠ الحادث المؤكد دوليًا»</td>
-<td>العدّاد الدولي متأخر إجرائيًا، وغياب الإدراج ليس نفيًا</td>
+<td data-label="#">ق1</td>
+<td data-label="القاعدة">«البلاغ الرسمي ≠ الحادث المؤكد دوليًا»</td>
+<td data-label="السبب">العدّاد الدولي متأخر إجرائيًا، وغياب الإدراج ليس نفيًا</td>
 </tr>
 <tr>
-<td>ق2</td>
-<td>تحقق مستقل من جهة ثانية يرفع مصداقية البلاغ من 2 إلى 1 مع تسجيل السبب</td>
-<td>تحقق فعليًا مع <span class="ltr">MSCIO</span></td>
+<td data-label="#">ق2</td>
+<td data-label="القاعدة">تحقق مستقل من جهة ثانية يرفع مصداقية البلاغ من 2 إلى 1 مع تسجيل السبب</td>
+<td data-label="السبب">تحقق فعليًا مع <span class="ltr">MSCIO</span></td>
 </tr>
 <tr>
-<td>ق3</td>
-<td>تمييز <strong>سفينة الإصابة</strong> عن <strong>سفينة الإجلاء</strong> قبل نسبة أي اسم</td>
-<td>خطأ <span class="ltr">AFP</span> بنسبة «<span class="ltr">SAFEEN PRINCIPAL</span>»</td>
+<td data-label="#">ق3</td>
+<td data-label="القاعدة">تمييز <strong>سفينة الإصابة</strong> عن <strong>سفينة الإجلاء</strong> قبل نسبة أي اسم</td>
+<td data-label="السبب">خطأ <span class="ltr">AFP</span> بنسبة «<span class="ltr">SAFEEN PRINCIPAL</span>»</td>
 </tr>
 <tr>
-<td>ق4</td>
-<td>عدم نسبة خبر إلى سفينة بلا <strong><span class="ltr">IMO</span> + <span class="ltr">MMSI</span> + العلم + المالك</strong></td>
-<td>تشابه أسماء <span class="ltr">ST3</span> وST1</td>
+<td data-label="#">ق4</td>
+<td data-label="القاعدة">عدم نسبة خبر إلى سفينة بلا <strong><span class="ltr">IMO</span> + <span class="ltr">MMSI</span> + العلم + المالك</strong></td>
+<td data-label="السبب">تشابه أسماء <span class="ltr">ST3</span> وST1</td>
 </tr>
 <tr>
-<td>ق5</td>
-<td>مطابقة أي وصف سلاح أو تكتيك بعام الحادث الأصلي قبل نقله</td>
-<td>إعادة تدوير نص BW <span class="ltr">RHINE 2019</span></td>
+<td data-label="#">ق5</td>
+<td data-label="القاعدة">مطابقة أي وصف سلاح أو تكتيك بعام الحادث الأصلي قبل نقله</td>
+<td data-label="السبب">إعادة تدوير نص BW <span class="ltr">RHINE 2019</span></td>
 </tr>
 <tr>
-<td>ق6</td>
-<td>مطابقة تحذيرات <span class="ltr">NAVAREA</span> الرسمية بإحداثيات الوقائع الأمنية</td>
-<td>ربط قارب النجاة <span class="ltr">382/26</span> بموقع <bdi class="bidi">#174</bdi></td>
+<td data-label="#">ق6</td>
+<td data-label="القاعدة">مطابقة تحذيرات <span class="ltr">NAVAREA</span> الرسمية بإحداثيات الوقائع الأمنية</td>
+<td data-label="السبب">ربط قارب النجاة <span class="ltr">382/26</span> بموقع <bdi class="bidi">#174</bdi></td>
 </tr>
 <tr>
-<td>ق7</td>
-<td>الوصف الرسمي (<span class="ltr">UKMTO</span>) يسبق التوصيف الإعلامي عند التعارض</td>
-<td>«ناقلة» مقابل «سفينة حاويات»</td>
+<td data-label="#">ق7</td>
+<td data-label="القاعدة">الوصف الرسمي (<span class="ltr">UKMTO</span>) يسبق التوصيف الإعلامي عند التعارض</td>
+<td data-label="السبب">«ناقلة» مقابل «سفينة حاويات»</td>
 </tr>
 <tr>
-<td>ق8</td>
-<td>لا يُدمج بلاغان رسميان في واقعة واحدة بلا حسم ميداني</td>
-<td>تصريح رويترز بعدم تحديد وحدة الواقعة</td>
+<td data-label="#">ق8</td>
+<td data-label="القاعدة">لا يُدمج بلاغان رسميان في واقعة واحدة بلا حسم ميداني</td>
+<td data-label="السبب">تصريح رويترز بعدم تحديد وحدة الواقعة</td>
 </tr>
 </tbody></table></div>
 <hr></section><section class="doc reveal" id="sec-14" aria-labelledby="h-14"><h2 id="h-14"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>13. حالة الإدراج في التقرير الصباحي</h2><div class="h-rule"></div><p><strong>يُدرج في تقرير 18 أكتوبر 2026 كالتالي:</strong></p>
@@ -1029,7 +1052,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> تقرير خاص — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: <span class="ltr">UTC</span> وتوقيت البحرين (<span class="ltr">UTC</span>+3).
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-21 14:33 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-21 15:23 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
     
   </footer>
 </div>

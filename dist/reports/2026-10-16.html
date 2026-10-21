@@ -676,6 +676,29 @@ section.doc{scroll-margin-top:0 !important}
 /* رقم المعلّم: نص داكن على معلّم فاتح، ومقلوب في الوضع النهاري */
 body:not(.daylight) .lg-num{color:#04120f}
 body.daylight .lg-num{color:#ffffff}
+
+/* بطاقات الجوال للجداول — البند المعتمد 21 أكتوبر 2026 */
+@media (max-width:560px){
+  table.cardified{display:block;border:0;background:transparent;border-radius:0}
+  table.cardified.cardified{width:100%;max-width:100%;min-width:0}
+  table.cardified thead{display:none}
+  table.cardified tbody{display:block;max-width:100%}
+  table.cardified tr{display:block;max-width:100%;box-sizing:border-box;background:var(--panel);
+    border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin:0 0 10px}
+  table.cardified td{display:grid;grid-template-columns:minmax(72px,auto) minmax(0,1fr);gap:8px;
+    border:0;padding:5px 0;align-items:baseline;text-align:start;
+    overflow-wrap:anywhere;word-break:break-word;min-width:0}
+  table.cardified td::before{content:attr(data-label);color:var(--muted);font-size:12.5px;font-weight:600}
+  table.cardified td:empty{display:none}
+  .tbl-wrap:has(table.cardified),.tbl-scroll:has(table.cardified){overflow:visible;border:0}
+  .tbl-hint{display:none}
+}
+/* بانر النسخة المستبدلة — البند المعتمد 21 أكتوبر 2026 */
+.sup-banner{margin:0 0 20px;padding:12px 16px;border:1px solid #c9a24f;border-radius:10px;
+  background:#2a2210;color:#ffd88a;font-size:14px}
+body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
+.sup-banner a{color:inherit;font-weight:700;text-decoration:underline}
+.sp-dim{opacity:.72}
 </style></head>
 <body><nav class="site-nav no-print" aria-label="تنقل الموقع">
   <div class="sn-inner">
@@ -767,7 +790,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
   </div>
   <ol class="map-legend"><li><span class="lg-num" style="--mk:var(--danger)">1</span><span class="lg-txt">حطام وحاويات طافية — موقع غرق «<span class="ltr">GFS PRIDE</span>» شمال غرب رأس الشيخ مسعود</span> <bdi class="bidi ev-code">15-01</bdi> <bdi class="bidi"><span class="ltr">NAVAREA IX 373/26</span></bdi></li><li><span class="lg-num" style="--mk:var(--danger)">2</span><span class="lg-txt">تقييم رسمي «شديد» وثماني هجمات بمقذوفات في المضيق</span> <bdi class="bidi ev-code">16-01</bdi> <bdi class="bidi"><span class="ltr">JMIC 105</span></bdi></li><li><span class="lg-num" style="--mk:var(--danger)">3</span><span class="lg-txt">أضرار «<span class="ltr">GFS GISELLE</span>» على 6 أميال من ساحل عُمان — تضررت ولم تغرق</span> <bdi class="bidi ev-code">15-06</bdi> <bdi class="bidi"><span class="ltr">IMO</span></bdi></li><li><span class="lg-num" style="--mk:var(--danger)">4</span><span class="lg-txt">أضرار «AL <span class="ltr">SAADIYAT</span>» على ميل واحد من ساحل عُمان</span> <bdi class="bidi ev-code">15-06</bdi> <bdi class="bidi"><span class="ltr">IMO</span></bdi></li><li><span class="lg-num" style="--mk:var(--danger)">5</span><span class="lg-txt">غرق «<span class="ltr">CAPE DAO</span>» — 15 ميلًا شمال شرق خصب</span> <bdi class="bidi ev-code">15-02</bdi> <bdi class="bidi"><span class="ltr">NAVAREA IX 370/26</span></bdi></li><li><span class="lg-num" style="--mk:var(--muted)">6</span><span class="lg-txt">«<span class="ltr">PETRO DOLPHIN</span>» تنجرف ومفقودان</span> <bdi class="bidi ev-code">11-02</bdi> <bdi class="bidi"><span class="ltr">NAVAREA IX 372/26</span></bdi></li><li><span class="lg-num" style="--mk:var(--muted)">7</span><span class="lg-txt">تكدس: نحو 180 سفينة قرب الفجيرة وخورفكان</span> <bdi class="bidi ev-code">16-06</bdi> <bdi class="bidi"><span class="ltr">JMIC</span></bdi></li><li><span class="lg-num" style="--mk:var(--muted)">8</span><span class="lg-txt">تكدس: 178 سفينة بين دبي وجبل علي ورأس الخيمة</span> <bdi class="bidi ev-code">16-06</bdi> <bdi class="bidi"><span class="ltr">JMIC</span></bdi></li><li><span class="lg-num" style="--mk:var(--muted)">9</span><span class="lg-txt">تكدس: 74 سفينة حول مسندم وصحار</span> <bdi class="bidi ev-code">16-06</bdi> <bdi class="bidi"><span class="ltr">JMIC</span></bdi></li><li><span class="lg-num" style="--mk:var(--muted)">10</span><span class="lg-txt">قناة السويس: فحص إلزامي وتجارب بحرية للسفن 25 سنة وأكثر</span> <bdi class="bidi ev-code">16-04</bdi> <bdi class="bidi">قرار الهيئة</bdi></li></ol>
   <p class="src-note">المصدر: وقائع التقرير وجدول التوزيع الجغرافي. المواقع تقديرية للمنطقة المذكورة في المصدر ولا تُعد إحداثيات دقيقة.</p>
-</div><p class="map-keys">السواحل والجزر والحدود: بيانات Natural Earth. الشبكة: خطوط الطول والعرض. العلامات المرقمة: وقائع هذا التقرير.</p></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+</div><p class="map-keys">السواحل والجزر والحدود: بيانات Natural Earth. الشبكة: خطوط الطول والعرض. العلامات المرقمة: وقائع هذا التقرير.</p></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">المنطقة</th>
 <th scope="col">الوقائع في هذه النافذة</th>
@@ -775,48 +798,48 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <th scope="col">القراءة</th>
 </tr></thead><tbody>
 <tr>
-<td>مضيق هرمز</td>
-<td>تقييم «شديد» · 8 هجمات مؤكدة في 11 و13 أكتوبر · حطام وحاويات طافية</td>
-<td><span class="ltr">JMIC</span> · <span class="ltr">IMO</span></td>
-<td>مركز الثقل: استهداف مستمر وعقبة ملاحية جديدة</td>
+<td data-label="المنطقة">مضيق هرمز</td>
+<td data-label="الوقائع في هذه النافذة">تقييم «شديد» · 8 هجمات مؤكدة في 11 و13 أكتوبر · حطام وحاويات طافية</td>
+<td data-label="أهم مرجع"><span class="ltr">JMIC</span> · <span class="ltr">IMO</span></td>
+<td data-label="القراءة">مركز الثقل: استهداف مستمر وعقبة ملاحية جديدة</td>
 </tr>
 <tr>
-<td>الفجيرة وخورفكان</td>
-<td>نحو 180 سفينة واقفة</td>
-<td><span class="ltr">JMIC</span></td>
-<td>أعلى تكدس في النطاق</td>
+<td data-label="المنطقة">الفجيرة وخورفكان</td>
+<td data-label="الوقائع في هذه النافذة">نحو 180 سفينة واقفة</td>
+<td data-label="أهم مرجع"><span class="ltr">JMIC</span></td>
+<td data-label="القراءة">أعلى تكدس في النطاق</td>
 </tr>
 <tr>
-<td>دبي وجبل علي ورأس الخيمة</td>
-<td>178 سفينة واقفة</td>
-<td><span class="ltr">JMIC</span></td>
-<td>تكدس ثانٍ بحجم مماثل</td>
+<td data-label="المنطقة">دبي وجبل علي ورأس الخيمة</td>
+<td data-label="الوقائع في هذه النافذة">178 سفينة واقفة</td>
+<td data-label="أهم مرجع"><span class="ltr">JMIC</span></td>
+<td data-label="القراءة">تكدس ثانٍ بحجم مماثل</td>
 </tr>
 <tr>
-<td>مسندم وصحار (خليج عُمان)</td>
-<td>74 سفينة واقفة · انجراف «<span class="ltr">PETRO DOLPHIN</span>» ومفقودان</td>
-<td><span class="ltr">JMIC</span> · <span class="ltr">NAVAREA IX</span></td>
-<td>خط ساحلي مكشوف وضغط رسو</td>
+<td data-label="المنطقة">مسندم وصحار (خليج عُمان)</td>
+<td data-label="الوقائع في هذه النافذة">74 سفينة واقفة · انجراف «<span class="ltr">PETRO DOLPHIN</span>» ومفقودان</td>
+<td data-label="أهم مرجع"><span class="ltr">JMIC</span> · <span class="ltr">NAVAREA IX</span></td>
+<td data-label="القراءة">خط ساحلي مكشوف وضغط رسو</td>
 </tr>
 <tr>
-<td>خليج عُمان (وسط)</td>
-<td>إعلان أمريكي بالسيطرة وعبور أكثر من 40 سفينة في 24 ساعة</td>
-<td>سنتكوم</td>
-<td>خطاب سيطرة يقابله رقم عبور أدنى</td>
+<td data-label="المنطقة">خليج عُمان (وسط)</td>
+<td data-label="الوقائع في هذه النافذة">إعلان أمريكي بالسيطرة وعبور أكثر من 40 سفينة في 24 ساعة</td>
+<td data-label="أهم مرجع">سنتكوم</td>
+<td data-label="القراءة">خطاب سيطرة يقابله رقم عبور أدنى</td>
 </tr>
 <tr>
-<td>البحر الأحمر والسويس</td>
-<td>فحص إلزامي وتجارب بحرية للسفن 25 سنة وأكثر</td>
-<td>نقل عن قرار الهيئة</td>
-<td>عبء تنظيمي على الممر البديل</td>
+<td data-label="المنطقة">البحر الأحمر والسويس</td>
+<td data-label="الوقائع في هذه النافذة">فحص إلزامي وتجارب بحرية للسفن 25 سنة وأكثر</td>
+<td data-label="أهم مرجع">نقل عن قرار الهيئة</td>
+<td data-label="القراءة">عبء تنظيمي على الممر البديل</td>
 </tr>
 <tr>
-<td>خليج عدن والمحيط الهندي</td>
-<td>لا مستجد في النافذة</td>
-<td><span class="ltr">IMB</span> · <span class="ltr">CMF</span></td>
-<td>مستوى مرتفع ثابت بلا حادث جديد</td>
+<td data-label="المنطقة">خليج عدن والمحيط الهندي</td>
+<td data-label="الوقائع في هذه النافذة">لا مستجد في النافذة</td>
+<td data-label="أهم مرجع"><span class="ltr">IMB</span> · <span class="ltr">CMF</span></td>
+<td data-label="القراءة">مستوى مرتفع ثابت بلا حادث جديد</td>
 </tr>
-</tbody></table></div><p class="src-note">تحذيرات <span class="ltr">IHO/NAVAREA</span> تُربط بإحداثياتها عند توفرها؛ والويب لا يستبدل البث الملاحي المعتمد.</p></section><section class="doc reveal" id="sec-04" aria-labelledby="h-04"><h2 id="h-04"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 20a8 8 0 110-16 8 8 0 010 16zM12 12l4-3"/></svg></span>مؤشرات الموقف</h2><div class="h-rule"></div><p class="sec-lede">الأرقام، ومقارنتها بتقرير أمس، وحدود كل رقم.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+</tbody></table></div><p class="src-note">تحذيرات <span class="ltr">IHO/NAVAREA</span> تُربط بإحداثياتها عند توفرها؛ والويب لا يستبدل البث الملاحي المعتمد.</p></section><section class="doc reveal" id="sec-04" aria-labelledby="h-04"><h2 id="h-04"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 20a8 8 0 110-16 8 8 0 010 16zM12 12l4-3"/></svg></span>مؤشرات الموقف</h2><div class="h-rule"></div><p class="sec-lede">الأرقام، ومقارنتها بتقرير أمس، وحدود كل رقم.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">المؤشر</th>
 <th scope="col">القيمة الحالية</th>
@@ -825,76 +848,76 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <th scope="col">الدلالة</th>
 </tr></thead><tbody>
 <tr>
-<td>بلاغات إصابة رسمية في المضيق (24 ساعة)</td>
-<td class="num">0</td>
-<td class="num">2</td>
-<td>−2</td>
-<td>أول نافذة بلا بلاغ رسمي جديد منذ أيام</td>
+<td data-label="المؤشر">بلاغات إصابة رسمية في المضيق (24 ساعة)</td>
+<td class="num" data-label="القيمة الحالية">0</td>
+<td class="num" data-label="النافذة السابقة">2</td>
+<td data-label="الاتجاه">−2</td>
+<td data-label="الدلالة">أول نافذة بلا بلاغ رسمي جديد منذ أيام</td>
 </tr>
 <tr>
-<td>هجمات بمقذوفات مؤكدة في المضيق (11–13 أكتوبر)</td>
-<td class="num">8</td>
-<td>—</td>
-<td>جديد</td>
-<td>أول رقم رسمي مجمّع للهجمات بدل عدّ البلاغات</td>
+<td data-label="المؤشر">هجمات بمقذوفات مؤكدة في المضيق (11–13 أكتوبر)</td>
+<td class="num" data-label="القيمة الحالية">8</td>
+<td data-label="النافذة السابقة">—</td>
+<td data-label="الاتجاه">جديد</td>
+<td data-label="الدلالة">أول رقم رسمي مجمّع للهجمات بدل عدّ البلاغات</td>
 </tr>
 <tr>
-<td>حوادث سفن مؤكدة لدى <span class="ltr">JMIC</span> (منذ 1 مارس)</td>
-<td class="num">149</td>
-<td>—</td>
-<td>جديد</td>
-<td>عدّاد رسمي مستقل لا يُدمج مع عدّاد <span class="ltr">IMO</span></td>
+<td data-label="المؤشر">حوادث سفن مؤكدة لدى <span class="ltr">JMIC</span> (منذ 1 مارس)</td>
+<td class="num" data-label="القيمة الحالية">149</td>
+<td data-label="النافذة السابقة">—</td>
+<td data-label="الاتجاه">جديد</td>
+<td data-label="الدلالة">عدّاد رسمي مستقل لا يُدمج مع عدّاد <span class="ltr">IMO</span></td>
 </tr>
 <tr>
-<td>حوادث مؤكدة لدى <span class="ltr">IMO</span> (تراكمي)</td>
-<td class="num">113</td>
-<td class="num">113</td>
-<td>ثابت</td>
-<td>لا إدراج جديد في هذه النافذة</td>
+<td data-label="المؤشر">حوادث مؤكدة لدى <span class="ltr">IMO</span> (تراكمي)</td>
+<td class="num" data-label="القيمة الحالية">113</td>
+<td class="num" data-label="النافذة السابقة">113</td>
+<td data-label="الاتجاه">ثابت</td>
+<td data-label="الدلالة">لا إدراج جديد في هذه النافذة</td>
 </tr>
 <tr>
-<td>وفيات البحّارة المؤكدة</td>
-<td class="num">24</td>
-<td class="num">24</td>
-<td>ثابت</td>
-<td>حصيلة بشرية ثابتة في السجل الرسمي</td>
+<td data-label="المؤشر">وفيات البحّارة المؤكدة</td>
+<td class="num" data-label="القيمة الحالية">24</td>
+<td class="num" data-label="النافذة السابقة">24</td>
+<td data-label="الاتجاه">ثابت</td>
+<td data-label="الدلالة">حصيلة بشرية ثابتة في السجل الرسمي</td>
 </tr>
 <tr>
-<td>سفن واقفة في مواضعها بعيدًا عن المراسي</td>
-<td class="num">188</td>
-<td class="num">151</td>
-<td class="num">+37</td>
-<td>أعلى تكدس في نافذة هذا التقرير</td>
+<td data-label="المؤشر">سفن واقفة في مواضعها بعيدًا عن المراسي</td>
+<td class="num" data-label="القيمة الحالية">188</td>
+<td class="num" data-label="النافذة السابقة">151</td>
+<td class="num" data-label="الاتجاه">+37</td>
+<td data-label="الدلالة">أعلى تكدس في نافذة هذا التقرير</td>
 </tr>
 <tr>
-<td>عبور المضيق اليومي (رصد مستقل)</td>
-<td class="num">2</td>
-<td class="num">2</td>
-<td>ثابت</td>
-<td>ممر شبه مغلق تجاريًا</td>
+<td data-label="المؤشر">عبور المضيق اليومي (رصد مستقل)</td>
+<td class="num" data-label="القيمة الحالية">2</td>
+<td class="num" data-label="النافذة السابقة">2</td>
+<td data-label="الاتجاه">ثابت</td>
+<td data-label="الدلالة">ممر شبه مغلق تجاريًا</td>
 </tr>
 <tr>
-<td>عبور مُيسَّر أمريكيًا (11–14 أكتوبر)</td>
-<td class="num">121</td>
-<td>—</td>
-<td>جديد</td>
-<td>نحو 30 يوميًا مقابل 138 قبل الحرب (22%)</td>
+<td data-label="المؤشر">عبور مُيسَّر أمريكيًا (11–14 أكتوبر)</td>
+<td class="num" data-label="القيمة الحالية">121</td>
+<td data-label="النافذة السابقة">—</td>
+<td data-label="الاتجاه">جديد</td>
+<td data-label="الدلالة">نحو 30 يوميًا مقابل 138 قبل الحرب (22%)</td>
 </tr>
 <tr>
-<td>خام برنت</td>
-<td>105.54 دولارًا</td>
-<td>105.38 دولارًا</td>
-<td class="num">+0.15%</td>
-<td>استقرار عند سعر مرتفع</td>
+<td data-label="المؤشر">خام برنت</td>
+<td data-label="القيمة الحالية">105.54 دولارًا</td>
+<td data-label="النافذة السابقة">105.38 دولارًا</td>
+<td class="num" data-label="الاتجاه">+0.15%</td>
+<td data-label="الدلالة">استقرار عند سعر مرتفع</td>
 </tr>
 <tr>
-<td>تحذيرات بحرية أمريكية سارية</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td>ثابت</td>
-<td>لا نشرة سارية اليوم</td>
+<td data-label="المؤشر">تحذيرات بحرية أمريكية سارية</td>
+<td class="num" data-label="القيمة الحالية">0</td>
+<td class="num" data-label="النافذة السابقة">0</td>
+<td data-label="الاتجاه">ثابت</td>
+<td data-label="الدلالة">لا نشرة سارية اليوم</td>
 </tr>
-</tbody></table></div><h3>جدول المؤشرات</h3><p class="blk-lede">المؤشر · اليوم · الأمس · الاتجاه · حدود الرقم.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table><thead><tr><th scope="col">المؤشر</th><th scope="col" class="num">هذا التقرير</th><th scope="col" class="num">تقرير أمس</th><th scope="col">الاتجاه</th><th scope="col">الدلالة</th></tr></thead><tbody><tr><td>بلاغات إصابة رسمية في المضيق (24 ساعة)</td><td class="num">0</td><td class="num">2</td><td><span class="trend t-down">▼</span> −2</td><td>أول نافذة بلا بلاغ رسمي جديد منذ أيام.</td></tr><tr><td>هجمات بمقذوفات مؤكدة في المضيق (11–13 أكتوبر)</td><td class="num">8</td><td class="num">—</td><td><span class="trend t-flat">■</span> جديد</td><td>أول رقم رسمي مجمّع للهجمات بدل عدّ البلاغات.</td></tr><tr><td>حوادث سفن مؤكدة لدى <span class="ltr">JMIC</span> (منذ 1 مارس)</td><td class="num">149</td><td class="num">—</td><td><span class="trend t-flat">■</span> جديد</td><td>عدّاد رسمي مستقل لا يُدمج مع عدّاد <span class="ltr">IMO</span>.</td></tr><tr><td>حوادث مؤكدة لدى <span class="ltr">IMO</span> (تراكمي)</td><td class="num">113</td><td class="num">113</td><td><span class="trend t-flat">■</span> 0</td><td>لا إدراج جديد في هذه النافذة.</td></tr><tr><td>وفيات البحّارة المؤكدة</td><td class="num">24</td><td class="num">24</td><td><span class="trend t-flat">■</span> 0</td><td>حصيلة بشرية ثابتة في السجل الرسمي.</td></tr><tr><td>سفن واقفة في مواضعها بعيدًا عن المراسي</td><td class="num">188</td><td class="num">151</td><td><span class="trend t-up">▲</span> +37</td><td>أعلى تكدس في نافذة هذا التقرير.</td></tr><tr><td>عبور المضيق اليومي (رصد مستقل)</td><td class="num">2</td><td class="num">2</td><td><span class="trend t-flat">■</span> 0</td><td>ممر شبه مغلق تجاريًا مقابل خط أساس 85 عبورًا.</td></tr><tr><td>عبور مُيسَّر أمريكيًا (11–14 أكتوبر)</td><td class="num">121</td><td class="num">—</td><td><span class="trend t-flat">■</span> جديد</td><td>نحو 30 يوميًا مقابل 138 قبل الحرب (22%).</td></tr><tr><td>خام برنت</td><td class="num">105.54 $</td><td class="num">105.38 $</td><td><span class="trend t-up">▲</span> +0.15%</td><td>استقرار عند سعر مرتفع لا تراجع.</td></tr><tr><td>تحذيرات بحرية أمريكية سارية</td><td class="num">0</td><td class="num">0</td><td><span class="trend t-flat">■</span> 0</td><td>لا نشرة سارية؛ المرجع الساري هو بيان <span class="ltr">JMIC</span>.</td></tr></tbody></table></div></section><section class="doc reveal" id="sec-05" aria-labelledby="h-05"><h2 id="h-05"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/></svg></span>مستوى التهديد</h2><div class="h-rule"></div><p class="sec-lede">التقييم الرسمي، والتقدير التحليلي، وحدود الثقة.</p><p><strong>مرتفع جدًا</strong> — بلا تغيير في التصنيف، مع تبدّل في نوع الخطر لا في مقداره: من خطر استهداف بحت إلى خطر مركّب يجمع الاستهداف. والحطام الطافي في ممر العبور، والتكدس، وارتفاع كلفة التأمين والانتظار.</p>
+</tbody></table></div><h3>جدول المؤشرات</h3><p class="blk-lede">المؤشر · اليوم · الأمس · الاتجاه · حدود الرقم.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified"><thead><tr><th scope="col">المؤشر</th><th scope="col" class="num">هذا التقرير</th><th scope="col" class="num">تقرير أمس</th><th scope="col">الاتجاه</th><th scope="col">الدلالة</th></tr></thead><tbody><tr><td data-label="المؤشر">بلاغات إصابة رسمية في المضيق (24 ساعة)</td><td class="num" data-label="هذا التقرير">0</td><td class="num" data-label="تقرير أمس">2</td><td data-label="الاتجاه"><span class="trend t-down">▼</span> −2</td><td data-label="الدلالة">أول نافذة بلا بلاغ رسمي جديد منذ أيام.</td></tr><tr><td data-label="المؤشر">هجمات بمقذوفات مؤكدة في المضيق (11–13 أكتوبر)</td><td class="num" data-label="هذا التقرير">8</td><td class="num" data-label="تقرير أمس">—</td><td data-label="الاتجاه"><span class="trend t-flat">■</span> جديد</td><td data-label="الدلالة">أول رقم رسمي مجمّع للهجمات بدل عدّ البلاغات.</td></tr><tr><td data-label="المؤشر">حوادث سفن مؤكدة لدى <span class="ltr">JMIC</span> (منذ 1 مارس)</td><td class="num" data-label="هذا التقرير">149</td><td class="num" data-label="تقرير أمس">—</td><td data-label="الاتجاه"><span class="trend t-flat">■</span> جديد</td><td data-label="الدلالة">عدّاد رسمي مستقل لا يُدمج مع عدّاد <span class="ltr">IMO</span>.</td></tr><tr><td data-label="المؤشر">حوادث مؤكدة لدى <span class="ltr">IMO</span> (تراكمي)</td><td class="num" data-label="هذا التقرير">113</td><td class="num" data-label="تقرير أمس">113</td><td data-label="الاتجاه"><span class="trend t-flat">■</span> 0</td><td data-label="الدلالة">لا إدراج جديد في هذه النافذة.</td></tr><tr><td data-label="المؤشر">وفيات البحّارة المؤكدة</td><td class="num" data-label="هذا التقرير">24</td><td class="num" data-label="تقرير أمس">24</td><td data-label="الاتجاه"><span class="trend t-flat">■</span> 0</td><td data-label="الدلالة">حصيلة بشرية ثابتة في السجل الرسمي.</td></tr><tr><td data-label="المؤشر">سفن واقفة في مواضعها بعيدًا عن المراسي</td><td class="num" data-label="هذا التقرير">188</td><td class="num" data-label="تقرير أمس">151</td><td data-label="الاتجاه"><span class="trend t-up">▲</span> +37</td><td data-label="الدلالة">أعلى تكدس في نافذة هذا التقرير.</td></tr><tr><td data-label="المؤشر">عبور المضيق اليومي (رصد مستقل)</td><td class="num" data-label="هذا التقرير">2</td><td class="num" data-label="تقرير أمس">2</td><td data-label="الاتجاه"><span class="trend t-flat">■</span> 0</td><td data-label="الدلالة">ممر شبه مغلق تجاريًا مقابل خط أساس 85 عبورًا.</td></tr><tr><td data-label="المؤشر">عبور مُيسَّر أمريكيًا (11–14 أكتوبر)</td><td class="num" data-label="هذا التقرير">121</td><td class="num" data-label="تقرير أمس">—</td><td data-label="الاتجاه"><span class="trend t-flat">■</span> جديد</td><td data-label="الدلالة">نحو 30 يوميًا مقابل 138 قبل الحرب (22%).</td></tr><tr><td data-label="المؤشر">خام برنت</td><td class="num" data-label="هذا التقرير">105.54 $</td><td class="num" data-label="تقرير أمس">105.38 $</td><td data-label="الاتجاه"><span class="trend t-up">▲</span> +0.15%</td><td data-label="الدلالة">استقرار عند سعر مرتفع لا تراجع.</td></tr><tr><td data-label="المؤشر">تحذيرات بحرية أمريكية سارية</td><td class="num" data-label="هذا التقرير">0</td><td class="num" data-label="تقرير أمس">0</td><td data-label="الاتجاه"><span class="trend t-flat">■</span> 0</td><td data-label="الدلالة">لا نشرة سارية؛ المرجع الساري هو بيان <span class="ltr">JMIC</span>.</td></tr></tbody></table></div></section><section class="doc reveal" id="sec-05" aria-labelledby="h-05"><h2 id="h-05"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/></svg></span>مستوى التهديد</h2><div class="h-rule"></div><p class="sec-lede">التقييم الرسمي، والتقدير التحليلي، وحدود الثقة.</p><p><strong>مرتفع جدًا</strong> — بلا تغيير في التصنيف، مع تبدّل في نوع الخطر لا في مقداره: من خطر استهداف بحت إلى خطر مركّب يجمع الاستهداف. والحطام الطافي في ممر العبور، والتكدس، وارتفاع كلفة التأمين والانتظار.</p>
 <ul><li><strong>درجة الثقة:</strong> عالية في وقائع المضيق (تقييم رسمي وسجل رسمي مباشر)، ومتوسطة في أرقام العبور لأنها من مصادر ومنهجيات عدّ مختلفة.</li></ul></section><section class="doc pri reveal" id="sec-06" aria-labelledby="h-06"><h2 id="h-06"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 15.5a3.5 3.5 0 100-7 3.5 3.5 0 000 7zM12 2l1.6 2.3 2.8-.4.5 2.7 2.6 1.2-1.1 2.6 1.1 2.6-2.6 1.2-.5 2.7-2.8-.4L12 22l-1.6-2.3-2.8.4-.5-2.7-2.6-1.2L5.6 13 4.5 10.4l2.6-1.2.5-2.7 2.8.4z"/></svg></span>التوجيهات التشغيلية</h2><div class="h-rule"></div><p class="sec-lede">ما يُنفَّذ قبل العبور والرسو وأثناء الحادث.</p><ul><li>تقييد العبور غير الضروري في مضيق هرمز، وعدم اعتبار خطاب «السيطرة» ضمانًا لسلامة العبور ما دام تقييم الخطر الرسمي «شديدًا».</li><li>إضافة <strong>الحطام والحاويات الطافية</strong> إلى قائمة مخاطر الإبحار قرب موقع غرق «<span class="ltr">GFS PRIDE</span>» شمال غرب رأس الشيخ مسعود، مع تخفيف السرعة وتغيير المسار عند الاقتضاء.</li><li>عند البث عبر <span class="ltr">AIS</span>: الموازنة بين الالتزام بالتتبّع وبين ما تفيده <span class="ltr">JMIC</span> من أن البث يرفع خطر الاستهداف — القرار يُتخذ على مستوى الشركة لا على مستوى الربّان وحده.</li><li>عدم الاعتماد على المراسي القريبة من المضيق أو الساحل العُماني كملاذ آمن: التكدس مرتفع (نحو 180 سفينة عند الفجيرة وخورفكان)، والقدرة على المناورة تتراجع.</li><li>لمن يخطط عبر السويس: احتساب زمن الفحص الإلزامي وتجارب البحرية ورسومه المسبقة ضمن خطة الرحلة، لا بعد وصول السفينة.</li><li>في خليج عدن والمحيط الهندي: إبقاء التدابير المضادة للقرصنة على مستواها المرتفع، فالمستوى الحالي ثابت ولا يعني تراجعًا.</li></ul></section><section class="doc reveal" id="sec-07" aria-labelledby="h-07"><h2 id="h-07"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l9 16H3zM12 8v6M12 16.4v1.2"/></svg></span>الوقائع الجديدة</h2><div class="h-rule"></div><p class="sec-lede">ما وقع داخل نافذة التقرير، مفصولًا عن الخلفية.</p><p><strong><span class="ltr">MN-2026-10-16-01</span> · تقييم رسمي مجمّع: تهديد «شديد» وثماني هجمات مؤكدة</strong> — أصدر مركز المعلومات البحرية المشترك (<span class="ltr">JMIC</span>) بيانه الاستشاري (تحديث 105) في 15 أكتوبر. وأبقى تقييم التهديد في مضيق هرمز على درجة <strong>«شديد»</strong>. ووثّق <strong>ثماني هجمات بمقذوفات</strong> في المضيق يومي 11 و13 أكتوبر شملت أربع ناقلات وأربع سفن حاويات. وأفاد بأن <strong>149 حادثة سفن</strong> تأكدت لديه منذ 1 مارس، منها تسع وثّقت حديثًا. وأكد أن <strong>لا دليل</strong> يدعم رواية إيران بأن لغمًا بحريًا سبب غرق السفينة، مع استمرار التحذير من احتمال وجود ألغام قرب مسار الفصل الملاحي. وحذّر من استمرار مراقبة الحرس الثوري وتحليق المسيّرات والنداء اللاسلكي ومحاولة توجيه السفن إلى المسار الإيراني الشمالي، ومن أن البث عبر نظام التتبّع يرفع خطر الاستهداف. <strong>الأصل:</strong> بيان <span class="ltr">JMIC</span> الرسمي (<strong>مصدر رسمي مباشر</strong>)، محفوظ في أرشيفنا، ومنقول تفصيلًا عبر منصة مهنية.</p>
 <p><strong><span class="ltr">MN-2026-10-16-02</span> · إعلان أمريكي بالسيطرة على المضيق</strong> — أعلنت القيادة المركزية الأمريكية أن الولايات المتحدة والشركاء الإقليميين <strong>يسيطرون على مضيق هرمز</strong>. وأن <strong>أكثر من 40 سفينة تجارية</strong> عبرت الممر خلال 24 ساعة، ونفت ثلاث روايات إيرانية. وأكدت أن <strong>«<span class="ltr">GFS PRIDE</span>» أُصيبت بمقذوف من الحرس الثوري</strong> وأن غرقها وقع <strong>أثناء قطرها إلى الساحل</strong>، وأن مسارات العبور الرئيسية <strong>خالية من الألغام</strong>. (<strong>بيان رسمي مباشر</strong>، نُقل إعلاميًا؛ يُوسم النقل.) ويُقرأ الرقم الأمريكي مقابل رقم <span class="ltr">JMIC</span> (121 عبورًا في أربعة أيام) ومقابل الرصد المستقل (عبورتان في 11 أكتوبر): <strong>ثلاثة أرقام بثلاث منهجيات، لا تُدمج في رقم واحد.</strong></p>
 <p><strong><span class="ltr">MN-2026-10-16-03</span> · رواية الطرف الإيراني: المضيق «يبقى مغلقًا»</strong> — قال قائد الجيش الإيراني أمير حاتمي في 15 أكتوبر إن المضيق «أُغلق فورًا ويبقى مغلقًا حتى احترام حقوق الشعب الإيراني». (<strong>رواية طرف رسمي</strong> — تُذكر كرواية، ولا تُعد واقعة مثبتة ولا تُعتمد أساسًا لقرار عبور.)</p>
@@ -902,37 +925,37 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <p><strong><span class="ltr">MN-2026-10-16-05</span> · تصحيح مرجعي: «<span class="ltr">GFS GISELLE</span>» تضررت ولم تغرق</strong> — يثبت سجل المنظمة البحرية الدولية أن «<span class="ltr">GFS GISELLE</span>» (<span class="ltr">IMO 9704661</span>) في 13 أكتوبر كانت <strong>«متضررة»</strong> على <strong>6 أميال من ساحل عُمان</strong>. لا غارقة، وأن العلم <strong>سنغافوري</strong> بموجب بيان هيئة الموانئ والملاحة بسنغافورة. ويُصحَّح بذلك وصف سابق في تقاريرنا ووسوم إعلامية تحدثت عن «غرق سفينتين». (<strong>سجل رسمي مباشر.</strong>)</p>
 <p><strong><span class="ltr">MN-2026-10-16-06</span> · أرقام الممر والتكدس والسوق</strong> — عند 00:22 <span class="ltr">UTC</span> بلغ عدد السفن الظاهرة على التتبّع <strong>188 سفينة واقفة في مواضعها بعيدًا عن المراسي</strong> (السابق 151). وبلغ خام برنت <strong>105.54 دولارًا</strong> (+0.15%). ويُقدَّر تأمين مخاطر الحرب بنحو <strong>30 ضعف</strong> مستواه قبل الأزمة. ووثّقت <span class="ltr">JMIC</span> تكدسًا عند <strong>نحو 180 سفينة</strong> قرب الفجيرة وخورفكان، و<strong>178</strong> بين دبي وجبل علي ورأس الخيمة، و<strong>74</strong> حول مسندم وصحار. (<strong>منصة رصد مستقلة C/3 + تقييم رسمي A/2.</strong>)</p>
 <p><strong><span class="ltr">MN-2026-10-16-07</span> · تصاعد الهجمات في التغطية الإعلامية</strong> — نقلت صحف ووكالات (نيويورك تايمز، سي إن إن. إيه بي سي) تصاعد الهجمات على السفن في المضيق ووصفته بأنه الأعلى منذ بداية الحرب، مع ظهور <strong>حاويات طافية</strong> في الماء. (<strong>نقل إعلامي</strong> يُوسم؛ والرقم الرسمي المعتمد للهجمات هو رقم <span class="ltr">JMIC</span> أعلاه، لا حصائل الإعلام.)</p>
-<p><strong>مستمر:</strong> «<span class="ltr">PETRO DOLPHIN</span>» (<span class="ltr">IMO 1072294</span>) — <strong>مفقودان</strong> لم يُعلن مصيرهما، والناقلة تنجرف في موقعها شرق خليج عُمان. و<strong>حطام وحاويات طافية</strong> قرب موقع غرق «<span class="ltr">GFS PRIDE</span>» تبقى خطرًا ملاحيًا قائمًا. وبلاغا <bdi class="bidi">#172</bdi> و#173 (<strong>15-04 · 15-05</strong>) يبقيان <strong>بلا هوية سفينة معلنة</strong>، ولا يُنسبان إلى سفينتي <span class="ltr">GFS</span> بلا تأكيد رسمي.</p><h3>تتبع الوقائع</h3><p class="blk-lede">الرمز المختصر (والكامل في «الوقائع الجديدة») · المنطقة · الحالة.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table><thead><tr><th scope="col">الرمز</th><th scope="col">الحدث</th><th scope="col">المنطقة</th><th scope="col">الحالة</th><th scope="col">ملاحظة</th></tr></thead><tbody><tr><td><bdi class="bidi ev-code">16-01</bdi></td><td>تقييم رسمي: «شديد» وثماني هجمات و149 حادثة</td><td>مضيق هرمز</td><td><span class="st-badge s-active">نشط</span></td><td><span class="ltr">JMIC</span> — تحديث 105 · نفي رواية اللغم · تحذير من حطام وحاويات طافية</td></tr><tr><td><bdi class="bidi ev-code">16-02</bdi></td><td>إعلان أمريكي بالسيطرة على المضيق</td><td>مضيق هرمز</td><td><span class="st-badge s-active">نشط</span></td><td>بيان رسمي مباشر · أكثر من 40 سفينة في 24 ساعة · يُقرأ مقابل رقم <span class="ltr">JMIC</span></td></tr><tr><td><bdi class="bidi ev-code">16-03</bdi></td><td>رواية إيرانية: المضيق يبقى مغلقًا</td><td>مضيق هرمز</td><td><span class="st-badge s-stable">رواية طرف</span></td><td>تُذكر كرواية ولا تُعتمد أساسًا لقرار عبور</td></tr><tr><td><bdi class="bidi ev-code">16-04</bdi></td><td>السويس: فحص إلزامي وتجارب للسفن 25 سنة وأكثر</td><td>قناة السويس والبحر الأحمر</td><td><span class="st-badge s-active">نشط</span></td><td>نقل عن قرار الهيئة · نص التعميم لم يُسحب</td></tr><tr><td><bdi class="bidi ev-code">16-05</bdi></td><td>تصحيح: «<span class="ltr">GFS GISELLE</span>» تضررت ولم تغرق</td><td>ساحل عُمان</td><td><span class="st-badge s-stable">مرجعي</span></td><td><span class="ltr">IMO 9704661</span> · 6 أميال من الساحل · علم سنغافوري</td></tr><tr><td><bdi class="bidi ev-code">16-06</bdi></td><td>التكدس يرتفع إلى 188 سفينة</td><td>النطاق كامل</td><td><span class="st-badge s-active">نشط</span></td><td>188 عند 00:22 <span class="ltr">UTC</span> · برنت 105.54$ · تأمين 30×</td></tr><tr><td><bdi class="bidi ev-code">16-07</bdi></td><td>تصاعد الهجمات في التغطية الإعلامية</td><td>مضيق هرمز</td><td><span class="st-badge s-stable">إعلامي</span></td><td>يُوسم إعلاميًا · الرقم المعتمد رقم <span class="ltr">JMIC</span></td></tr><tr><td><bdi class="bidi ev-code">15-01</bdi></td><td>حطام وحاويات طافية قرب موقع غرق «<span class="ltr">GFS PRIDE</span>»</td><td>مضيق هرمز</td><td><span class="st-badge s-stable">خلفية</span></td><td><span class="ltr">NAVAREA IX 373/26</span> · خطر ملاحي قائم</td></tr><tr><td><bdi class="bidi ev-code">11-02</bdi></td><td>«<span class="ltr">PETRO DOLPHIN</span>» — مفقودان وتنجرف</td><td>شرق خليج عُمان</td><td><span class="st-badge s-stable">خلفية</span></td><td><span class="ltr">NAVAREA IX 372/26</span> · <span class="ltr">IMO 1072294</span></td></tr><tr><td><bdi class="bidi ev-code">#172 · 15-03</bdi></td><td>بلاغا <bdi class="bidi">#172</bdi> و#173 بلا هوية سفينة</td><td>مضيق هرمز</td><td><span class="st-badge s-stable">بانتظار الإدراج</span></td><td>لا يُنسبان إلى سفينتي <span class="ltr">GFS</span> بلا تأكيد رسمي</td></tr></tbody></table></div><h3 class="blk-h">هوية السفن المستشهد بها</h3><span class="tbl-hint">اسحب الجدول أفقيًا لرؤية بقية الأعمدة</span><div class="tbl-scroll" tabindex="0" role="region" aria-label="جدول يحتاج تمريرًا أفقيًا"><table class="tbl rel-tbl"><thead><tr><th>السفينة</th><th><span class="ltr">IMO</span></th><th><span class="ltr">MMSI</span></th><th>العلم</th><th>أسماء سابقة</th><th>المصدر</th></tr></thead><tbody><tr><td><span class="ltr">GFS PRIDE</span></td><td>9349045</td><td>—</td><td>سنغافورة</td><td>—</td><td><span class="ltr">IMO</span> — سجل الحوادث المؤكدة (ثابت) · بيان سنغافوري رسمي</td></tr><tr><td><span class="ltr">GFS GISELLE</span></td><td>9704661</td><td>—</td><td>سنغافورة</td><td>—</td><td><span class="ltr">IMO</span> — تضررت على 6 أميال من ساحل عُمان · العلم مصحَّح من بيان سنغافوري رسمي</td></tr><tr><td>AL <span class="ltr">SAADIYAT</span></td><td>9760598</td><td>—</td><td>جزر مارشال</td><td>—</td><td><span class="ltr">IMO</span> — سجل الحوادث المؤكدة · سجلات تسجيل السفن: جزر مارشال، حاويات 2016</td></tr><tr><td><span class="ltr">CAPE DAO</span></td><td>9219020</td><td>—</td><td>أنتيغوا وبربودا</td><td>—</td><td><span class="ltr">IMO</span> — سجل الحوادث المؤكدة (ثابت) · <span class="ltr">NAVAREA IX 370/26</span></td></tr><tr><td><span class="ltr">PETRO DOLPHIN</span></td><td>1072294</td><td>—</td><td>متناقض بين سجلات التسجيل</td><td>—</td><td><span class="ltr">IMO</span> — مفقودان · <span class="ltr">NAVAREA IX 372/26</span> · سجلات التسجيل: نيكاراغوا/الغابون/سانت كيتس (تعارض)</td></tr></tbody></table></div><p class="src-note">البلاغان الرسميان <bdi class="bidi">#172</bdi> و#173 لا يُنسبان قطعيًا إلى سفينتي <span class="ltr">GFS</span>: وصفهما «سفينتا حاويات بضرر طفيف واصلتا العبور» لا يطابق غرق «<span class="ltr">GFS PRIDE</span>»، ويبقى احتمال مطابقة أحدهما «<span class="ltr">GFS GISELLE</span>» مُرجَّحًا لا مؤكدًا (سجل التناقضات D-02). ولا يُدمج البلاغان مع واقعتَي <span class="ltr">GFS</span> في أي عدّ.</p></section><section class="doc reveal" id="sec-08" aria-labelledby="h-08"><h2 id="h-08"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 10.5a2 2 0 100 4 2 2 0 000-4zM7.8 7.6a6.2 6.2 0 000 8.8M16.2 7.6a6.2 6.2 0 010 8.8M5 4.8a10 10 0 000 14.4M19 4.8a10 10 0 010 14.4"/></svg></span>التحذيرات والنشرات الرسمية</h2><div class="h-rule"></div><p class="sec-lede">حالة الجهات الرسمية خلال نافذة التقرير.</p><p>لا تحذيرات بحرية أمريكية <strong>سارية</strong> اليوم؛ صفحة التحذيرات الرسمية تفيد بخلوها من أي تحذير سارٍ، والنشرات السابقة الخاصة بالبحر الأحمر وباب المندب وخليج عدن وهرمز <strong>منتهية أو ملغاة</strong>. وتُقرأ توصياتها كخلفية تصرّف لا كتعليمات سارية: إطفاء التتبّع عند تقدير الخطر، تفادي تكرار المسارات والسرعات، العبور ليلًا، وتجاهل أوامر التحويل، والتواصل مع مركز الملاحة المعني.</p>
+<p><strong>مستمر:</strong> «<span class="ltr">PETRO DOLPHIN</span>» (<span class="ltr">IMO 1072294</span>) — <strong>مفقودان</strong> لم يُعلن مصيرهما، والناقلة تنجرف في موقعها شرق خليج عُمان. و<strong>حطام وحاويات طافية</strong> قرب موقع غرق «<span class="ltr">GFS PRIDE</span>» تبقى خطرًا ملاحيًا قائمًا. وبلاغا <bdi class="bidi">#172</bdi> و#173 (<strong>15-04 · 15-05</strong>) يبقيان <strong>بلا هوية سفينة معلنة</strong>، ولا يُنسبان إلى سفينتي <span class="ltr">GFS</span> بلا تأكيد رسمي.</p><h3>تتبع الوقائع</h3><p class="blk-lede">الرمز المختصر (والكامل في «الوقائع الجديدة») · المنطقة · الحالة.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified"><thead><tr><th scope="col">الرمز</th><th scope="col">الحدث</th><th scope="col">المنطقة</th><th scope="col">الحالة</th><th scope="col">ملاحظة</th></tr></thead><tbody><tr><td data-label="الرمز"><bdi class="bidi ev-code">16-01</bdi></td><td data-label="الحدث">تقييم رسمي: «شديد» وثماني هجمات و149 حادثة</td><td data-label="المنطقة">مضيق هرمز</td><td data-label="الحالة"><span class="st-badge s-active">نشط</span></td><td data-label="ملاحظة"><span class="ltr">JMIC</span> — تحديث 105 · نفي رواية اللغم · تحذير من حطام وحاويات طافية</td></tr><tr><td data-label="الرمز"><bdi class="bidi ev-code">16-02</bdi></td><td data-label="الحدث">إعلان أمريكي بالسيطرة على المضيق</td><td data-label="المنطقة">مضيق هرمز</td><td data-label="الحالة"><span class="st-badge s-active">نشط</span></td><td data-label="ملاحظة">بيان رسمي مباشر · أكثر من 40 سفينة في 24 ساعة · يُقرأ مقابل رقم <span class="ltr">JMIC</span></td></tr><tr><td data-label="الرمز"><bdi class="bidi ev-code">16-03</bdi></td><td data-label="الحدث">رواية إيرانية: المضيق يبقى مغلقًا</td><td data-label="المنطقة">مضيق هرمز</td><td data-label="الحالة"><span class="st-badge s-stable">رواية طرف</span></td><td data-label="ملاحظة">تُذكر كرواية ولا تُعتمد أساسًا لقرار عبور</td></tr><tr><td data-label="الرمز"><bdi class="bidi ev-code">16-04</bdi></td><td data-label="الحدث">السويس: فحص إلزامي وتجارب للسفن 25 سنة وأكثر</td><td data-label="المنطقة">قناة السويس والبحر الأحمر</td><td data-label="الحالة"><span class="st-badge s-active">نشط</span></td><td data-label="ملاحظة">نقل عن قرار الهيئة · نص التعميم لم يُسحب</td></tr><tr><td data-label="الرمز"><bdi class="bidi ev-code">16-05</bdi></td><td data-label="الحدث">تصحيح: «<span class="ltr">GFS GISELLE</span>» تضررت ولم تغرق</td><td data-label="المنطقة">ساحل عُمان</td><td data-label="الحالة"><span class="st-badge s-stable">مرجعي</span></td><td data-label="ملاحظة"><span class="ltr">IMO 9704661</span> · 6 أميال من الساحل · علم سنغافوري</td></tr><tr><td data-label="الرمز"><bdi class="bidi ev-code">16-06</bdi></td><td data-label="الحدث">التكدس يرتفع إلى 188 سفينة</td><td data-label="المنطقة">النطاق كامل</td><td data-label="الحالة"><span class="st-badge s-active">نشط</span></td><td data-label="ملاحظة">188 عند 00:22 <span class="ltr">UTC</span> · برنت 105.54$ · تأمين 30×</td></tr><tr><td data-label="الرمز"><bdi class="bidi ev-code">16-07</bdi></td><td data-label="الحدث">تصاعد الهجمات في التغطية الإعلامية</td><td data-label="المنطقة">مضيق هرمز</td><td data-label="الحالة"><span class="st-badge s-stable">إعلامي</span></td><td data-label="ملاحظة">يُوسم إعلاميًا · الرقم المعتمد رقم <span class="ltr">JMIC</span></td></tr><tr><td data-label="الرمز"><bdi class="bidi ev-code">15-01</bdi></td><td data-label="الحدث">حطام وحاويات طافية قرب موقع غرق «<span class="ltr">GFS PRIDE</span>»</td><td data-label="المنطقة">مضيق هرمز</td><td data-label="الحالة"><span class="st-badge s-stable">خلفية</span></td><td data-label="ملاحظة"><span class="ltr">NAVAREA IX 373/26</span> · خطر ملاحي قائم</td></tr><tr><td data-label="الرمز"><bdi class="bidi ev-code">11-02</bdi></td><td data-label="الحدث">«<span class="ltr">PETRO DOLPHIN</span>» — مفقودان وتنجرف</td><td data-label="المنطقة">شرق خليج عُمان</td><td data-label="الحالة"><span class="st-badge s-stable">خلفية</span></td><td data-label="ملاحظة"><span class="ltr">NAVAREA IX 372/26</span> · <span class="ltr">IMO 1072294</span></td></tr><tr><td data-label="الرمز"><bdi class="bidi ev-code">#172 · 15-03</bdi></td><td data-label="الحدث">بلاغا <bdi class="bidi">#172</bdi> و#173 بلا هوية سفينة</td><td data-label="المنطقة">مضيق هرمز</td><td data-label="الحالة"><span class="st-badge s-stable">بانتظار الإدراج</span></td><td data-label="ملاحظة">لا يُنسبان إلى سفينتي <span class="ltr">GFS</span> بلا تأكيد رسمي</td></tr></tbody></table></div><h3 class="blk-h">هوية السفن المستشهد بها</h3><span class="tbl-hint">اسحب الجدول أفقيًا لرؤية بقية الأعمدة</span><div class="tbl-scroll" tabindex="0" role="region" aria-label="جدول يحتاج تمريرًا أفقيًا"><table class="tbl rel-tbl cardified"><thead><tr><th>السفينة</th><th><span class="ltr">IMO</span></th><th><span class="ltr">MMSI</span></th><th>العلم</th><th>أسماء سابقة</th><th>المصدر</th></tr></thead><tbody><tr><td data-label="السفينة"><span class="ltr">GFS PRIDE</span></td><td data-label="IMO">9349045</td><td data-label="MMSI">—</td><td data-label="العلم">سنغافورة</td><td data-label="أسماء سابقة">—</td><td data-label="المصدر"><span class="ltr">IMO</span> — سجل الحوادث المؤكدة (ثابت) · بيان سنغافوري رسمي</td></tr><tr><td data-label="السفينة"><span class="ltr">GFS GISELLE</span></td><td data-label="IMO">9704661</td><td data-label="MMSI">—</td><td data-label="العلم">سنغافورة</td><td data-label="أسماء سابقة">—</td><td data-label="المصدر"><span class="ltr">IMO</span> — تضررت على 6 أميال من ساحل عُمان · العلم مصحَّح من بيان سنغافوري رسمي</td></tr><tr><td data-label="السفينة">AL <span class="ltr">SAADIYAT</span></td><td data-label="IMO">9760598</td><td data-label="MMSI">—</td><td data-label="العلم">جزر مارشال</td><td data-label="أسماء سابقة">—</td><td data-label="المصدر"><span class="ltr">IMO</span> — سجل الحوادث المؤكدة · سجلات تسجيل السفن: جزر مارشال، حاويات 2016</td></tr><tr><td data-label="السفينة"><span class="ltr">CAPE DAO</span></td><td data-label="IMO">9219020</td><td data-label="MMSI">—</td><td data-label="العلم">أنتيغوا وبربودا</td><td data-label="أسماء سابقة">—</td><td data-label="المصدر"><span class="ltr">IMO</span> — سجل الحوادث المؤكدة (ثابت) · <span class="ltr">NAVAREA IX 370/26</span></td></tr><tr><td data-label="السفينة"><span class="ltr">PETRO DOLPHIN</span></td><td data-label="IMO">1072294</td><td data-label="MMSI">—</td><td data-label="العلم">متناقض بين سجلات التسجيل</td><td data-label="أسماء سابقة">—</td><td data-label="المصدر"><span class="ltr">IMO</span> — مفقودان · <span class="ltr">NAVAREA IX 372/26</span> · سجلات التسجيل: نيكاراغوا/الغابون/سانت كيتس (تعارض)</td></tr></tbody></table></div><p class="src-note">البلاغان الرسميان <bdi class="bidi">#172</bdi> و#173 لا يُنسبان قطعيًا إلى سفينتي <span class="ltr">GFS</span>: وصفهما «سفينتا حاويات بضرر طفيف واصلتا العبور» لا يطابق غرق «<span class="ltr">GFS PRIDE</span>»، ويبقى احتمال مطابقة أحدهما «<span class="ltr">GFS GISELLE</span>» مُرجَّحًا لا مؤكدًا (سجل التناقضات D-02). ولا يُدمج البلاغان مع واقعتَي <span class="ltr">GFS</span> في أي عدّ.</p></section><section class="doc reveal" id="sec-08" aria-labelledby="h-08"><h2 id="h-08"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 10.5a2 2 0 100 4 2 2 0 000-4zM7.8 7.6a6.2 6.2 0 000 8.8M16.2 7.6a6.2 6.2 0 010 8.8M5 4.8a10 10 0 000 14.4M19 4.8a10 10 0 010 14.4"/></svg></span>التحذيرات والنشرات الرسمية</h2><div class="h-rule"></div><p class="sec-lede">حالة الجهات الرسمية خلال نافذة التقرير.</p><p>لا تحذيرات بحرية أمريكية <strong>سارية</strong> اليوم؛ صفحة التحذيرات الرسمية تفيد بخلوها من أي تحذير سارٍ، والنشرات السابقة الخاصة بالبحر الأحمر وباب المندب وخليج عدن وهرمز <strong>منتهية أو ملغاة</strong>. وتُقرأ توصياتها كخلفية تصرّف لا كتعليمات سارية: إطفاء التتبّع عند تقدير الخطر، تفادي تكرار المسارات والسرعات، العبور ليلًا، وتجاهل أوامر التحويل، والتواصل مع مركز الملاحة المعني.</p>
 <p>النشرة السارية فعليًا هي <strong>البيان الاستشاري لـJMIC (تحديث 105، 15 أكتوبر)</strong>، وهو المرجع الرسمي الأول اليوم: تقييم «شديد». وتحذير من احتمال وجود ألغام قرب مسار الفصل الملاحي، ومن حطام وحاويات طافية قرب موقع الغرق. ومن مراقبة الحرس الثوري والمسيّرات والنداء اللاسلكي، ومن أن الممر العُماني الجنوبي مكشوف للهجمات.</p>
 <p>وتعذّر فحص صفحة «النشرات» في مركز تنسيق المعلومات البحرية التابع للملاحة البريطانية (خطأ 404)، ويُسجَّل ذلك <strong>سببًا لعدم التحقق لا نتيجة مطمئنة</strong>.</p></section><section class="doc reveal" id="sec-09" aria-labelledby="h-09"><h2 id="h-09"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>سجل <span class="ltr">IMO</span> والحوادث المؤكدة</h2><div class="h-rule"></div><p><strong>113 حادثة مؤكدة · مقتل 24 بحّارًا</strong> بحسب 14 أكتوبر 2026 — بلا تغيير عن التقرير السابق. أحدث الإدراجات تخصّ 13 أكتوبر: غرق «<span class="ltr">GFS PRIDE</span>» في المضيق، وأضرار «<span class="ltr">GFS GISELLE</span>» على 6 أميال و«AL <span class="ltr">SAADIYAT</span>» على ميل واحد من ساحل عُمان. ويُضاف إلى السجل عدّاد <span class="ltr">JMIC</span> المستقل (<strong>149 حادثة سفن منذ 1 مارس</strong>)، وهما <strong>عدّادان بمنهجيتين مختلفتين ولا يُجمعان</strong>.</p></section><section class="doc reveal" id="sec-10" aria-labelledby="h-10"><h2 id="h-10"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5c5 0 9 4 9 7s-4 7-9 7-9-4-9-7 4-7 9-7zM12 9.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5z"/></svg></span>التحليل الاستخباري</h2><div class="h-rule"></div><p class="sec-lede">قراءة النمط والافتراضات والفرضيات ومؤشرات التحذير المبكر.</p><p><strong>الطريقة:</strong> تحليل الفرضيات المتنافسة مبسّط + فحص الافتراضات الأساسية + مؤشرات تحذير مبكر + تقييم مخاطر الممرات، مع سلّم عبارات عدم اليقين المعتمد، ومراجعة دقة تقديرات الأمس.</p>
 <p><strong>التقدير:</strong> <strong>يُرجَّح (55–80%)</strong> استمرار الاستهداف داخل مضيق هرمز بوتيرة مشابهة في الأيام القادمة، فالرقم الرسمي (ثماني هجمات في يومين) والتقييم «شديد» يدعمان الاستمرار لا التوقف. و<strong>يُحتمل (25–40%)</strong> أن ينتقل جزء من الضغط إلى البحر الأحمر وباب المندب خلال أسبوعين. ويقوّي هذا الاحتمال أن عبء السويس التنظيمي الجديد يدفع بعض الخطوط إلى إعادة تقييم المسارات. و<strong>لا يُرجَّح (5–20%)</strong> أن يعود العبور الطبيعي في المضيق قبل تغيّر سياسي أو أمني ملموس. ولا أن يكون لغم بحري هو السبب الرئيسي للغرق، لأن <span class="ltr">JMIC</span> ينفي وجود دليل على ذلك.</p>
 <p><strong>درجة الثقة:</strong> عالية في وقائع المضيق (تقييم رسمي وسجل رسمي مباشر)، ومتوسطة في أرقام العبور لأن ثلاثة مصادر بثلاث منهجيات تعطي ثلاثة أرقام مختلفة. ومنخفضة في أي نسبة للفاعل لأنها تصدر عن أطراف متخاصمة لا عن جهة تحكيم مستقلة.</p>
 <p><strong>موثوقية الإسناد:</strong> <span class="ltr">JMIC</span> A/2 — <span class="ltr">IMO</span> A/1 — سنتكوم A/2 — بيان سنغافورة A/1 — منصات رصد C/3 — نقل إعلامي B/2 — رواية طرف رسمي D/4.</p>
 <p><strong>الافتراضات وما ينقضها:</strong></p>
-<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">الافتراض</th>
 <th scope="col">ما ينقضه</th>
 </tr></thead><tbody>
 <tr>
-<td>عدّاد <span class="ltr">JMIC</span> (149) وعدّاد <span class="ltr">IMO</span> (113) يقيسان مجموعتين مختلفتين ولا يُجمعان</td>
-<td>بيان رسمي يوحّد المنهجيتين أو يشرح الفارق</td>
+<td data-label="الافتراض">عدّاد <span class="ltr">JMIC</span> (149) وعدّاد <span class="ltr">IMO</span> (113) يقيسان مجموعتين مختلفتين ولا يُجمعان</td>
+<td data-label="ما ينقضه">بيان رسمي يوحّد المنهجيتين أو يشرح الفارق</td>
 </tr>
 <tr>
-<td>رقم «40+ سفينة» يعني تحسّنًا في العبور</td>
-<td>قراءة تالية أدنى، أو توضيح أن العدّ يشمل أنواعًا مختلفة من الحركة</td>
+<td data-label="الافتراض">رقم «40+ سفينة» يعني تحسّنًا في العبور</td>
+<td data-label="ما ينقضه">قراءة تالية أدنى، أو توضيح أن العدّ يشمل أنواعًا مختلفة من الحركة</td>
 </tr>
 <tr>
-<td>الحطام والحاويات الطافية تبقى خطرًا ملاحيًا أكثر من أسبوع</td>
-<td>إعلان رسمي عن إزالة الحطام أو إغلاق منطقة الغرق</td>
+<td data-label="الافتراض">الحطام والحاويات الطافية تبقى خطرًا ملاحيًا أكثر من أسبوع</td>
+<td data-label="ما ينقضه">إعلان رسمي عن إزالة الحطام أو إغلاق منطقة الغرق</td>
 </tr>
 <tr>
-<td>لا تغيّر في تصنيف شركات التأمين خلال النافذة</td>
-<td>إعلان إلغاء تغطية أو رفع قسط حاد أو انسحاب نادٍ من السوق</td>
+<td data-label="الافتراض">لا تغيّر في تصنيف شركات التأمين خلال النافذة</td>
+<td data-label="ما ينقضه">إعلان إلغاء تغطية أو رفع قسط حاد أو انسحاب نادٍ من السوق</td>
 </tr>
 <tr>
-<td>السويس يبقى بديلًا متاحًا رغم الفحوص الجديدة</td>
-<td>إعلان خطوط كبرى توقف العبور بسبب الفحوص أو الرسوم</td>
+<td data-label="الافتراض">السويس يبقى بديلًا متاحًا رغم الفحوص الجديدة</td>
+<td data-label="ما ينقضه">إعلان خطوط كبرى توقف العبور بسبب الفحوص أو الرسوم</td>
 </tr>
 </tbody></table></div>
 <p><strong>مؤشرات التحذير المبكر:</strong></p>
@@ -944,7 +967,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <div class="src s-none"><b>إعلان مسؤولية رسمي موثّق عن أي واقعة</b><span class="st">لا مستجد — غائب</span></div>
 </div>
 <p><strong>تقييم دقة تقديرات الأمس:</strong> تقدير «استمرار الاستهداف المنظم في المضيق» <strong>تحقق</strong> بثماني هجمات مؤكدة وثّقها البيان الرسمي. وتقدير «تورط ألغام بحرية» <strong>يميل إلى النفي</strong> بعد أن أفاد <span class="ltr">JMIC</span> بأن لا دليل يدعم رواية اللغم، مع بقاء التحذير من احتمال وجود ألغام. وتقدير «انتقال الضغط إلى باب المندب خلال أسبوعين» <strong>لم يتحقق</strong> حتى الآن؛ الذي ظهر هو ضغط تنظيمي على السويس لا استهداف مباشر للسفن. وتقدير «إصابة قادمة تنتهي بغرق جديد» <strong>لم يتحقق</strong> في هذه النافذة.</p>
-<p><strong>المراجعة النظيرة:</strong> روجع القسم مقابل سجل التكيّف الذاتي، وصُحّح فيه إسناد علم «<span class="ltr">GFS GISELLE</span>» إلى سنغافورة، وفُصل عدّاد <span class="ltr">JMIC</span> عن عدّاد <span class="ltr">IMO</span>. وأُلغي أي ربط بين بلاغي <bdi class="bidi">#172</bdi> و#173 وسفينتي <span class="ltr">GFS</span> بلا تأكيد رسمي.</p><div class="decision"><p class="dc-title">بطاقة التقدير التحليلي</p><div class="dc-grid"><div class="dc-row"><div class="dc-l">الأسلوب التحليلي</div><div class="dc-v">تحليل الفرضيات المتنافسة مبسّط + فحص افتراضات أساسية + مؤشرات تحذير مبكر + تقييم مخاطر الممرات + مراجعة دقة تقديرات الأمس</div></div><div class="dc-row"><div class="dc-l">العبارة الاحتمالية</div><div class="dc-v">يُرجَّح (55–80%) استمرار الاستهداف داخل المضيق بوتيرة مشابهة · ويُحتمل (25–40%) انتقال جزء من الضغط إلى البحر الأحمر وباب المندب · ولا يُرجَّح (5–20%) عودة العبور الطبيعي قبل تغيّر سياسي أو أمني، ولا أن يكون اللغم سبب الغرق الرئيسي</div></div><div class="dc-row"><div class="dc-l">درجة الثقة</div><div class="dc-v">عالية في وقائع المضيق (تقييم رسمي وسجل رسمي مباشر) · متوسطة في أرقام العبور (ثلاث منهجيات عدّ مختلفة) · منخفضة في نسبة الفاعل (روايات أطراف متخاصمة)</div></div><div class="dc-row"><div class="dc-l">سند المصدر</div><div class="dc-v"><span class="ltr">JMIC</span> A/2 — <span class="ltr">IMO</span> A/1 — سنتكوم A/2 — بيان سنغافورة A/1 — منصات رصد C/3 — نقل إعلامي B/2 — رواية طرف رسمي D/4</div></div></div></div><h3>الافتراضات المعلنة</h3><p class="blk-lede">كل افتراض معلن، وما ينقضه.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table><thead><tr><th scope="col">الافتراض</th><th scope="col">ما ينقضه</th></tr></thead><tbody><tr><td>عدّاد <span class="ltr">JMIC</span> (149) وعدّاد <span class="ltr">IMO</span> (113) يقيسان مجموعتين مختلفتين ولا يُجمعان</td><td>بيان رسمي يوحّد المنهجيتين أو يشرح الفارق</td></tr><tr><td>رقم «40+ سفينة» لا يعني تحسّنًا مستقرًا في العبور</td><td>قراءة تالية أعلى مع منهجية موحّدة</td></tr><tr><td>الحطام والحاويات الطافية تبقى خطرًا ملاحيًا أكثر من أسبوع</td><td>إعلان رسمي عن إزالة الحطام أو إغلاق منطقة الغرق</td></tr><tr><td>لا تغيّر في تصنيف شركات التأمين خلال النافذة</td><td>إعلان إلغاء تغطية أو رفع قسط حاد أو انسحاب نادٍ من السوق</td></tr><tr><td>السويس يبقى بديلًا متاحًا رغم الفحوص الجديدة</td><td>إعلان خطوط كبرى توقف العبور بسبب الفحوص أو الرسوم</td></tr></tbody></table></div><h3>مؤشرات التحذير المبكر</h3><p class="blk-lede">المؤشر · ما يؤكده · ما ينفيه · الحالة.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table><thead><tr><th scope="col">المؤشر</th><th scope="col">ما يؤكده</th><th scope="col">ما ينفيه</th><th scope="col">الحالة</th></tr></thead><tbody><tr><td>بلاغ رسمي جديد عن إصابة في المضيق خلال 24 ساعة</td><td>استمرار التسلسل</td><td>تراجع الوتيرة</td><td>غائب في هذه النافذة</td></tr><tr><td>إعلان رسمي عن إزالة الحطام أو إغلاق منطقة الغرق</td><td>تحوّل الخطر إلى ملاحي بحت</td><td>بقاء الحطام خطرًا ممتدًا</td><td>غائب</td></tr><tr><td>توقف شركة ملاحة كبرى عن عبور المضيق أو السويس</td><td>انتقال الأثر من السفينة إلى التجارة</td><td>استمرار العبور مع القيود</td><td>غائب</td></tr><tr><td>حادثة قرصنة أو اختطاف جديد قبالة الصومال</td><td>تصاعد المسار الجنوبي</td><td>استقرار خليج عدن</td><td>غائب في هذه النافذة</td></tr><tr><td>إعلان مسؤولية رسمي موثّق عن أي واقعة</td><td>نسبة الفاعل بمصدر مباشر</td><td>بقاء النسبة روايات متبادلة</td><td>غائب</td></tr></tbody></table></div><h3>تقييم دقة تقديرات الأمس</h3><p class="blk-lede">التقدير · النتيجة · السبب.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table><thead><tr><th scope="col">التقدير السابق</th><th scope="col">النتيجة</th><th scope="col">السبب</th></tr></thead><tbody><tr><td>استمرار الاستهداف المنظم في المضيق</td><td>تحقق</td><td>ثماني هجمات بمقذوفات وثّقها البيان الرسمي في 11 و13 أكتوبر</td></tr><tr><td>تورط ألغام بحرية</td><td>يميل إلى النفي</td><td><span class="ltr">JMIC</span>: لا دليل يدعم رواية اللغم، مع استمرار التحذير من احتمال ألغام</td></tr><tr><td>انتقال الضغط إلى باب المندب خلال أسبوعين</td><td>لم يتحقق بعد</td><td>ظهر ضغط تنظيمي على السويس لا استهداف مباشر لسفن</td></tr><tr><td>إصابة قادمة تنتهي بغرق جديد</td><td>لم يتحقق</td><td>لا واقعة إصابة ولا غرق جديد في هذه النافذة</td></tr></tbody></table></div></section><section class="doc reveal" id="sec-11" aria-labelledby="h-11"><h2 id="h-11"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 4v16M6 8h12M6 8l-3 6h6zM18 8l-3 6h6z"/></svg></span>الاحتمالات والإسناد</h2><div class="h-rule"></div><p class="sec-lede">من قد يكون مسؤولًا، بلا جزم وبلا نسبة بلا دليل.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<p><strong>المراجعة النظيرة:</strong> روجع القسم مقابل سجل التكيّف الذاتي، وصُحّح فيه إسناد علم «<span class="ltr">GFS GISELLE</span>» إلى سنغافورة، وفُصل عدّاد <span class="ltr">JMIC</span> عن عدّاد <span class="ltr">IMO</span>. وأُلغي أي ربط بين بلاغي <bdi class="bidi">#172</bdi> و#173 وسفينتي <span class="ltr">GFS</span> بلا تأكيد رسمي.</p><div class="decision"><p class="dc-title">بطاقة التقدير التحليلي</p><div class="dc-grid"><div class="dc-row"><div class="dc-l">الأسلوب التحليلي</div><div class="dc-v">تحليل الفرضيات المتنافسة مبسّط + فحص افتراضات أساسية + مؤشرات تحذير مبكر + تقييم مخاطر الممرات + مراجعة دقة تقديرات الأمس</div></div><div class="dc-row"><div class="dc-l">العبارة الاحتمالية</div><div class="dc-v">يُرجَّح (55–80%) استمرار الاستهداف داخل المضيق بوتيرة مشابهة · ويُحتمل (25–40%) انتقال جزء من الضغط إلى البحر الأحمر وباب المندب · ولا يُرجَّح (5–20%) عودة العبور الطبيعي قبل تغيّر سياسي أو أمني، ولا أن يكون اللغم سبب الغرق الرئيسي</div></div><div class="dc-row"><div class="dc-l">درجة الثقة</div><div class="dc-v">عالية في وقائع المضيق (تقييم رسمي وسجل رسمي مباشر) · متوسطة في أرقام العبور (ثلاث منهجيات عدّ مختلفة) · منخفضة في نسبة الفاعل (روايات أطراف متخاصمة)</div></div><div class="dc-row"><div class="dc-l">سند المصدر</div><div class="dc-v"><span class="ltr">JMIC</span> A/2 — <span class="ltr">IMO</span> A/1 — سنتكوم A/2 — بيان سنغافورة A/1 — منصات رصد C/3 — نقل إعلامي B/2 — رواية طرف رسمي D/4</div></div></div></div><h3>الافتراضات المعلنة</h3><p class="blk-lede">كل افتراض معلن، وما ينقضه.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified"><thead><tr><th scope="col">الافتراض</th><th scope="col">ما ينقضه</th></tr></thead><tbody><tr><td data-label="الافتراض">عدّاد <span class="ltr">JMIC</span> (149) وعدّاد <span class="ltr">IMO</span> (113) يقيسان مجموعتين مختلفتين ولا يُجمعان</td><td data-label="ما ينقضه">بيان رسمي يوحّد المنهجيتين أو يشرح الفارق</td></tr><tr><td data-label="الافتراض">رقم «40+ سفينة» لا يعني تحسّنًا مستقرًا في العبور</td><td data-label="ما ينقضه">قراءة تالية أعلى مع منهجية موحّدة</td></tr><tr><td data-label="الافتراض">الحطام والحاويات الطافية تبقى خطرًا ملاحيًا أكثر من أسبوع</td><td data-label="ما ينقضه">إعلان رسمي عن إزالة الحطام أو إغلاق منطقة الغرق</td></tr><tr><td data-label="الافتراض">لا تغيّر في تصنيف شركات التأمين خلال النافذة</td><td data-label="ما ينقضه">إعلان إلغاء تغطية أو رفع قسط حاد أو انسحاب نادٍ من السوق</td></tr><tr><td data-label="الافتراض">السويس يبقى بديلًا متاحًا رغم الفحوص الجديدة</td><td data-label="ما ينقضه">إعلان خطوط كبرى توقف العبور بسبب الفحوص أو الرسوم</td></tr></tbody></table></div><h3>مؤشرات التحذير المبكر</h3><p class="blk-lede">المؤشر · ما يؤكده · ما ينفيه · الحالة.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified"><thead><tr><th scope="col">المؤشر</th><th scope="col">ما يؤكده</th><th scope="col">ما ينفيه</th><th scope="col">الحالة</th></tr></thead><tbody><tr><td data-label="المؤشر">بلاغ رسمي جديد عن إصابة في المضيق خلال 24 ساعة</td><td data-label="ما يؤكده">استمرار التسلسل</td><td data-label="ما ينفيه">تراجع الوتيرة</td><td data-label="الحالة">غائب في هذه النافذة</td></tr><tr><td data-label="المؤشر">إعلان رسمي عن إزالة الحطام أو إغلاق منطقة الغرق</td><td data-label="ما يؤكده">تحوّل الخطر إلى ملاحي بحت</td><td data-label="ما ينفيه">بقاء الحطام خطرًا ممتدًا</td><td data-label="الحالة">غائب</td></tr><tr><td data-label="المؤشر">توقف شركة ملاحة كبرى عن عبور المضيق أو السويس</td><td data-label="ما يؤكده">انتقال الأثر من السفينة إلى التجارة</td><td data-label="ما ينفيه">استمرار العبور مع القيود</td><td data-label="الحالة">غائب</td></tr><tr><td data-label="المؤشر">حادثة قرصنة أو اختطاف جديد قبالة الصومال</td><td data-label="ما يؤكده">تصاعد المسار الجنوبي</td><td data-label="ما ينفيه">استقرار خليج عدن</td><td data-label="الحالة">غائب في هذه النافذة</td></tr><tr><td data-label="المؤشر">إعلان مسؤولية رسمي موثّق عن أي واقعة</td><td data-label="ما يؤكده">نسبة الفاعل بمصدر مباشر</td><td data-label="ما ينفيه">بقاء النسبة روايات متبادلة</td><td data-label="الحالة">غائب</td></tr></tbody></table></div><h3>تقييم دقة تقديرات الأمس</h3><p class="blk-lede">التقدير · النتيجة · السبب.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified"><thead><tr><th scope="col">التقدير السابق</th><th scope="col">النتيجة</th><th scope="col">السبب</th></tr></thead><tbody><tr><td data-label="التقدير السابق">استمرار الاستهداف المنظم في المضيق</td><td data-label="النتيجة">تحقق</td><td data-label="السبب">ثماني هجمات بمقذوفات وثّقها البيان الرسمي في 11 و13 أكتوبر</td></tr><tr><td data-label="التقدير السابق">تورط ألغام بحرية</td><td data-label="النتيجة">يميل إلى النفي</td><td data-label="السبب"><span class="ltr">JMIC</span>: لا دليل يدعم رواية اللغم، مع استمرار التحذير من احتمال ألغام</td></tr><tr><td data-label="التقدير السابق">انتقال الضغط إلى باب المندب خلال أسبوعين</td><td data-label="النتيجة">لم يتحقق بعد</td><td data-label="السبب">ظهر ضغط تنظيمي على السويس لا استهداف مباشر لسفن</td></tr><tr><td data-label="التقدير السابق">إصابة قادمة تنتهي بغرق جديد</td><td data-label="النتيجة">لم يتحقق</td><td data-label="السبب">لا واقعة إصابة ولا غرق جديد في هذه النافذة</td></tr></tbody></table></div></section><section class="doc reveal" id="sec-11" aria-labelledby="h-11"><h2 id="h-11"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 4v16M6 8h12M6 8l-3 6h6zM18 8l-3 6h6z"/></svg></span>الاحتمالات والإسناد</h2><div class="h-rule"></div><p class="sec-lede">من قد يكون مسؤولًا، بلا جزم وبلا نسبة بلا دليل.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">الفرضية</th>
 <th scope="col">الإسناد المؤيد</th>
@@ -952,44 +975,44 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <th scope="col">الاحتمال</th>
 </tr></thead><tbody>
 <tr>
-<td>استمرار الاستهداف في المضيق بوتيرة عالية</td>
-<td>ثماني هجمات مؤكدة وتقييم رسمي «شديد»</td>
-<td>لا بلاغ جديد في هذه النافذة</td>
-<td class="num">45%</td>
+<td data-label="الفرضية">استمرار الاستهداف في المضيق بوتيرة عالية</td>
+<td data-label="الإسناد المؤيد">ثماني هجمات مؤكدة وتقييم رسمي «شديد»</td>
+<td data-label="ما يناقضها">لا بلاغ جديد في هذه النافذة</td>
+<td class="num" data-label="الاحتمال">45%</td>
 </tr>
 <tr>
-<td>انفصال الخطاب عن الواقع: المضيق مغلق سياسيًا ومفتوح جزئيًا عمليًا</td>
-<td>إعلان أمريكي بالسيطرة مع أرقام عبور · رواية إيرانية بالإغلاق</td>
-<td>غياب إحصاء رسمي موحّد للعبور</td>
-<td class="num">20%</td>
+<td data-label="الفرضية">انفصال الخطاب عن الواقع: المضيق مغلق سياسيًا ومفتوح جزئيًا عمليًا</td>
+<td data-label="الإسناد المؤيد">إعلان أمريكي بالسيطرة مع أرقام عبور · رواية إيرانية بالإغلاق</td>
+<td data-label="ما يناقضها">غياب إحصاء رسمي موحّد للعبور</td>
+<td class="num" data-label="الاحتمال">20%</td>
 </tr>
 <tr>
-<td>انتقال الضغط إلى البحر الأحمر وباب المندب</td>
-<td>قيود السويس الجديدة وضغط الممر البديل</td>
-<td>عدم استهداف سفن تجارية هناك بعد</td>
-<td class="num">15%</td>
+<td data-label="الفرضية">انتقال الضغط إلى البحر الأحمر وباب المندب</td>
+<td data-label="الإسناد المؤيد">قيود السويس الجديدة وضغط الممر البديل</td>
+<td data-label="ما يناقضها">عدم استهداف سفن تجارية هناك بعد</td>
+<td class="num" data-label="الاحتمال">15%</td>
 </tr>
 <tr>
-<td>تصاعد القرصنة في خليج عدن والمحيط الهندي</td>
-<td>مستوى مرتفع ثابت وتقارير قطاعية</td>
-<td>عمليات المرافقة الدولية</td>
-<td class="num">12%</td>
+<td data-label="الفرضية">تصاعد القرصنة في خليج عدن والمحيط الهندي</td>
+<td data-label="الإسناد المؤيد">مستوى مرتفع ثابت وتقارير قطاعية</td>
+<td data-label="ما يناقضها">عمليات المرافقة الدولية</td>
+<td class="num" data-label="الاحتمال">12%</td>
 </tr>
 <tr>
-<td>تورط ألغام بحرية كسبب رئيسي للغرق</td>
-<td>رواية إيرانية وطبيعة بعض الأضرار</td>
-<td>نفي <span class="ltr">JMIC</span> وجود دليل · تأكيد سنتكوم أن المسارات خالية من الألغام</td>
-<td class="num">5%</td>
+<td data-label="الفرضية">تورط ألغام بحرية كسبب رئيسي للغرق</td>
+<td data-label="الإسناد المؤيد">رواية إيرانية وطبيعة بعض الأضرار</td>
+<td data-label="ما يناقضها">نفي <span class="ltr">JMIC</span> وجود دليل · تأكيد سنتكوم أن المسارات خالية من الألغام</td>
+<td class="num" data-label="الاحتمال">5%</td>
 </tr>
 <tr>
-<td>نسبة موثقة لجهة منفذة في كل واقعة</td>
-<td>خطاب تصعيدي متبادل</td>
-<td>لا دليل رسمي مستقل لكل حادثة</td>
-<td class="num">3%</td>
+<td data-label="الفرضية">نسبة موثقة لجهة منفذة في كل واقعة</td>
+<td data-label="الإسناد المؤيد">خطاب تصعيدي متبادل</td>
+<td data-label="ما يناقضها">لا دليل رسمي مستقل لكل حادثة</td>
+<td class="num" data-label="الاحتمال">3%</td>
 </tr>
-</tbody></table></div><h3>ترجيح الاحتمالات</h3><p class="blk-lede">الاحتمال · المؤيد · المعارض · النسبة.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table><thead><tr><th scope="col">الفرضية</th><th scope="col">المؤيد</th><th scope="col">المعارض</th><th scope="col">درجة الاحتمال</th></tr></thead><tbody><tr><td>استمرار الاستهداف في مضيق هرمز بوتيرة عالية</td><td>ثماني هجمات مؤكدة في 11 و13 أكتوبر وتقييم رسمي «شديد»</td><td>لا بلاغ إصابة جديد في هذه النافذة</td><td>45%</td></tr><tr><td>انفصال الخطاب عن الواقع: المضيق مغلق سياسيًا ومفتوح جزئيًا عمليًا</td><td>إعلان أمريكي بالسيطرة مع أرقام عبور مقابل رواية إيرانية بالإغلاق</td><td>غياب إحصاء رسمي موحّد للعبور</td><td>20%</td></tr><tr><td>انتقال الضغط إلى البحر الأحمر وباب المندب</td><td>قيود السويس الجديدة وضغط الممر البديل</td><td>لا استهداف لسفن تجارية هناك حتى الآن</td><td>15%</td></tr><tr><td>تصاعد القرصنة في خليج عدن والمحيط الهندي</td><td>مستوى مرتفع ثابت وتقارير قطاعية</td><td>عمليات مرافقة وتنسيق دولي معلن</td><td>12%</td></tr><tr><td>تورط ألغام بحرية كسبب رئيسي للغرق</td><td>رواية إيرانية وطبيعة أضرار بعض السفن</td><td>نفي <span class="ltr">JMIC</span> وجود دليل، وتأكيد أن المسارات خالية من الألغام</td><td>5%</td></tr><tr><td>نسبة موثقة لجهة منفذة في كل واقعة</td><td>خطاب تصعيدي متبادل وإعلانات أطراف</td><td>لا دليل رسمي مستقل لكل حادثة</td><td>3%</td></tr></tbody></table></div></section><section class="doc reveal" id="sec-12" aria-labelledby="h-12"><h2 id="h-12"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 4v9a4 4 0 004 4h5M15 17l-2-2M15 17l-2 2M18 4a2 2 0 11-.001 4.001A2 2 0 0118 4z"/></svg></span>الحركة الملاحية والتكدس</h2><div class="h-rule"></div><p class="sec-lede">حركة المضيق والرسو من مصادر معلنة فقط.</p><p>الحركة في النافذة تُقرأ من ثلاثة مصادر متباينة المنهجية: رصد مستقل يعطي <strong>عبورتين</strong> في 11 أكتوبر مقابل خط أساس 85 يوميًا قبل الأزمة. تقييم رسمي يعطي <strong>121 عبورًا مُيسَّرًا أمريكيًا</strong> بين 11 و14 أكتوبر (نحو 30 يوميًا. أي 22% من متوسط 138 يوميًا في 2025)؛ وإعلان عسكري يعطي <strong>أكثر من 40 سفينة في 24 ساعة</strong>. الأرقام الثلاثة لا تُدمج، لكنها تتفق على نتيجة واحدة: <strong>العبور أدنى بكثير من وضعه الطبيعي</strong>.</p>
+</tbody></table></div><h3>ترجيح الاحتمالات</h3><p class="blk-lede">الاحتمال · المؤيد · المعارض · النسبة.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified"><thead><tr><th scope="col">الفرضية</th><th scope="col">المؤيد</th><th scope="col">المعارض</th><th scope="col">درجة الاحتمال</th></tr></thead><tbody><tr><td data-label="الفرضية">استمرار الاستهداف في مضيق هرمز بوتيرة عالية</td><td data-label="المؤيد">ثماني هجمات مؤكدة في 11 و13 أكتوبر وتقييم رسمي «شديد»</td><td data-label="المعارض">لا بلاغ إصابة جديد في هذه النافذة</td><td data-label="درجة الاحتمال">45%</td></tr><tr><td data-label="الفرضية">انفصال الخطاب عن الواقع: المضيق مغلق سياسيًا ومفتوح جزئيًا عمليًا</td><td data-label="المؤيد">إعلان أمريكي بالسيطرة مع أرقام عبور مقابل رواية إيرانية بالإغلاق</td><td data-label="المعارض">غياب إحصاء رسمي موحّد للعبور</td><td data-label="درجة الاحتمال">20%</td></tr><tr><td data-label="الفرضية">انتقال الضغط إلى البحر الأحمر وباب المندب</td><td data-label="المؤيد">قيود السويس الجديدة وضغط الممر البديل</td><td data-label="المعارض">لا استهداف لسفن تجارية هناك حتى الآن</td><td data-label="درجة الاحتمال">15%</td></tr><tr><td data-label="الفرضية">تصاعد القرصنة في خليج عدن والمحيط الهندي</td><td data-label="المؤيد">مستوى مرتفع ثابت وتقارير قطاعية</td><td data-label="المعارض">عمليات مرافقة وتنسيق دولي معلن</td><td data-label="درجة الاحتمال">12%</td></tr><tr><td data-label="الفرضية">تورط ألغام بحرية كسبب رئيسي للغرق</td><td data-label="المؤيد">رواية إيرانية وطبيعة أضرار بعض السفن</td><td data-label="المعارض">نفي <span class="ltr">JMIC</span> وجود دليل، وتأكيد أن المسارات خالية من الألغام</td><td data-label="درجة الاحتمال">5%</td></tr><tr><td data-label="الفرضية">نسبة موثقة لجهة منفذة في كل واقعة</td><td data-label="المؤيد">خطاب تصعيدي متبادل وإعلانات أطراف</td><td data-label="المعارض">لا دليل رسمي مستقل لكل حادثة</td><td data-label="درجة الاحتمال">3%</td></tr></tbody></table></div></section><section class="doc reveal" id="sec-12" aria-labelledby="h-12"><h2 id="h-12"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 4v9a4 4 0 004 4h5M15 17l-2-2M15 17l-2 2M18 4a2 2 0 11-.001 4.001A2 2 0 0118 4z"/></svg></span>الحركة الملاحية والتكدس</h2><div class="h-rule"></div><p class="sec-lede">حركة المضيق والرسو من مصادر معلنة فقط.</p><p>الحركة في النافذة تُقرأ من ثلاثة مصادر متباينة المنهجية: رصد مستقل يعطي <strong>عبورتين</strong> في 11 أكتوبر مقابل خط أساس 85 يوميًا قبل الأزمة. تقييم رسمي يعطي <strong>121 عبورًا مُيسَّرًا أمريكيًا</strong> بين 11 و14 أكتوبر (نحو 30 يوميًا. أي 22% من متوسط 138 يوميًا في 2025)؛ وإعلان عسكري يعطي <strong>أكثر من 40 سفينة في 24 ساعة</strong>. الأرقام الثلاثة لا تُدمج، لكنها تتفق على نتيجة واحدة: <strong>العبور أدنى بكثير من وضعه الطبيعي</strong>.</p>
 <p>والتكدس في ارتفاع: <strong>188 سفينة</strong> واقفة في مواضعها بعيدًا عن المراسي عند 00:22 <span class="ltr">UTC</span>، مقابل 151 في القراءة السابقة. وأعلى كثافة عند الفجيرة وخورفكان (نحو 180) ثم دبي وجبل علي ورأس الخيمة (178) ثم مسندم وصحار (74). وخام برنت عند <strong>105.54 دولارًا</strong> (+0.15%)، وتأمين مخاطر الحرب عند نحو <strong>30 ضعف</strong> مستواه قبل الأزمة، و<strong>49 ناقلة</strong> أطفأت بثّها في 24 ساعة من أصل 158 خضعت للفحص — مع التنبيه أن هذا الرقم لا يميّز بين التهرب المتعمد وانقطاع التغطية.</p>
-<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">اليوم (أكتوبر)</th>
 <th scope="col">عدد الوقائع المسجّلة</th>
@@ -997,119 +1020,119 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <th scope="col">البيان</th>
 </tr></thead><tbody>
 <tr>
-<td>10-04</td>
-<td class="num">3</td>
-<td>مؤكد</td>
-<td><span class="ltr">GAS VELA</span> · <span class="ltr">CAMEROON PROSPERITY</span> · <span class="ltr">LIPSI</span></td>
+<td data-label="اليوم (أكتوبر)">10-04</td>
+<td class="num" data-label="عدد الوقائع المسجّلة">3</td>
+<td data-label="النوع">مؤكد</td>
+<td data-label="البيان"><span class="ltr">GAS VELA</span> · <span class="ltr">CAMEROON PROSPERITY</span> · <span class="ltr">LIPSI</span></td>
 </tr>
 <tr>
-<td>10-05</td>
-<td class="num">2</td>
-<td>مؤكد</td>
-<td><span class="ltr">MARAN GAS MYSTRAS</span> · ON <span class="ltr">PEACE</span> (12 مصابًا)</td>
+<td data-label="اليوم (أكتوبر)">10-05</td>
+<td class="num" data-label="عدد الوقائع المسجّلة">2</td>
+<td data-label="النوع">مؤكد</td>
+<td data-label="البيان"><span class="ltr">MARAN GAS MYSTRAS</span> · ON <span class="ltr">PEACE</span> (12 مصابًا)</td>
 </tr>
 <tr>
-<td>10-06</td>
-<td class="num">1</td>
-<td>مؤكد</td>
-<td><span class="ltr">ST1</span> — قرب الساحل العُماني</td>
+<td data-label="اليوم (أكتوبر)">10-06</td>
+<td class="num" data-label="عدد الوقائع المسجّلة">1</td>
+<td data-label="النوع">مؤكد</td>
+<td data-label="البيان"><span class="ltr">ST1</span> — قرب الساحل العُماني</td>
 </tr>
 <tr>
-<td>10-07</td>
-<td class="num">1</td>
-<td>مؤكد</td>
-<td><span class="ltr">ACERS</span> — شمال مدينة الشمال بقطر</td>
+<td data-label="اليوم (أكتوبر)">10-07</td>
+<td class="num" data-label="عدد الوقائع المسجّلة">1</td>
+<td data-label="النوع">مؤكد</td>
+<td data-label="البيان"><span class="ltr">ACERS</span> — شمال مدينة الشمال بقطر</td>
 </tr>
 <tr>
-<td>10-09</td>
-<td class="num">1</td>
-<td>مؤكد</td>
-<td><span class="ltr">GEM NO</span>. 2 — غرب الجزيرة بالإمارات</td>
+<td data-label="اليوم (أكتوبر)">10-09</td>
+<td class="num" data-label="عدد الوقائع المسجّلة">1</td>
+<td data-label="النوع">مؤكد</td>
+<td data-label="البيان"><span class="ltr">GEM NO</span>. 2 — غرب الجزيرة بالإمارات</td>
 </tr>
 <tr>
-<td>10-10</td>
-<td class="num">1</td>
-<td>مؤكد</td>
-<td><span class="ltr">VALTHERA</span> — مضيق هرمز</td>
+<td data-label="اليوم (أكتوبر)">10-10</td>
+<td class="num" data-label="عدد الوقائع المسجّلة">1</td>
+<td data-label="النوع">مؤكد</td>
+<td data-label="البيان"><span class="ltr">VALTHERA</span> — مضيق هرمز</td>
 </tr>
 <tr>
-<td>10-11</td>
-<td class="num">6</td>
-<td>مؤكد</td>
-<td>AL <span class="ltr">MAQAM</span> · DP <span class="ltr">WORLD KAVERI</span> · <span class="ltr">KITION</span> M · <span class="ltr">EVER VICT</span> · <span class="ltr">ANGOLA PROSPERITY</span> · <span class="ltr">PETRO DOLPHIN</span></td>
+<td data-label="اليوم (أكتوبر)">10-11</td>
+<td class="num" data-label="عدد الوقائع المسجّلة">6</td>
+<td data-label="النوع">مؤكد</td>
+<td data-label="البيان">AL <span class="ltr">MAQAM</span> · DP <span class="ltr">WORLD KAVERI</span> · <span class="ltr">KITION</span> M · <span class="ltr">EVER VICT</span> · <span class="ltr">ANGOLA PROSPERITY</span> · <span class="ltr">PETRO DOLPHIN</span></td>
 </tr>
 <tr>
-<td>10-12</td>
-<td class="num">4</td>
-<td>قيد الإدراج</td>
-<td>بلاغات بانتظار الإدراج الرسمي</td>
+<td data-label="اليوم (أكتوبر)">10-12</td>
+<td class="num" data-label="عدد الوقائع المسجّلة">4</td>
+<td data-label="النوع">قيد الإدراج</td>
+<td data-label="البيان">بلاغات بانتظار الإدراج الرسمي</td>
 </tr>
 <tr>
-<td>10-13</td>
-<td class="num">3</td>
-<td>مؤكد</td>
-<td><span class="ltr">GFS PRIDE</span> (غرق) · <span class="ltr">GFS GISELLE</span> (أضرار) · AL <span class="ltr">SAADIYAT</span> (أضرار)</td>
+<td data-label="اليوم (أكتوبر)">10-13</td>
+<td class="num" data-label="عدد الوقائع المسجّلة">3</td>
+<td data-label="النوع">مؤكد</td>
+<td data-label="البيان"><span class="ltr">GFS PRIDE</span> (غرق) · <span class="ltr">GFS GISELLE</span> (أضرار) · AL <span class="ltr">SAADIYAT</span> (أضرار)</td>
 </tr>
 <tr>
-<td>10-14</td>
-<td class="num">2</td>
-<td>مؤكد</td>
-<td>غرق «<span class="ltr">GFS PRIDE</span>» و«<span class="ltr">CAPE DAO</span>» — تأكيد رسمي</td>
+<td data-label="اليوم (أكتوبر)">10-14</td>
+<td class="num" data-label="عدد الوقائع المسجّلة">2</td>
+<td data-label="النوع">مؤكد</td>
+<td data-label="البيان">غرق «<span class="ltr">GFS PRIDE</span>» و«<span class="ltr">CAPE DAO</span>» — تأكيد رسمي</td>
 </tr>
 <tr>
-<td>10-15</td>
-<td class="num">1</td>
-<td>غير محسوم</td>
-<td>إعلان عن لغم بحري — بلا تأكيد رسمي مستقل</td>
+<td data-label="اليوم (أكتوبر)">10-15</td>
+<td class="num" data-label="عدد الوقائع المسجّلة">1</td>
+<td data-label="النوع">غير محسوم</td>
+<td data-label="البيان">إعلان عن لغم بحري — بلا تأكيد رسمي مستقل</td>
 </tr>
 <tr>
-<td>10-16</td>
-<td class="num">0</td>
-<td>—</td>
-<td>لا واقعة جديدة في هذه النافذة</td>
+<td data-label="اليوم (أكتوبر)">10-16</td>
+<td class="num" data-label="عدد الوقائع المسجّلة">0</td>
+<td data-label="النوع">—</td>
+<td data-label="البيان">لا واقعة جديدة في هذه النافذة</td>
 </tr>
-</tbody></table></div><div class="viz tl-viz reveal"><h3>الخط الزمني لمضيق هرمز</h3><div class="tl-row"><div class="tl-date bidi">10-04</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:50.0%"></div></div><div class="tl-num bidi">3</div><div class="tl-lbl"><span class="ltr">GAS VELA</span> · <span class="ltr">CAMEROON PROSPERITY</span> · <span class="ltr">LIPSI</span></div></div><div class="tl-row"><div class="tl-date bidi">10-05</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:33.3%"></div></div><div class="tl-num bidi">2</div><div class="tl-lbl"><span class="ltr">MARAN GAS MYSTRAS</span> · ON <span class="ltr">PEACE</span> (12 مصابًا)</div></div><div class="tl-row"><div class="tl-date bidi">10-06</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:16.7%"></div></div><div class="tl-num bidi">1</div><div class="tl-lbl"><span class="ltr">ST1</span> — قرب الساحل العُماني</div></div><div class="tl-row"><div class="tl-date bidi">10-07</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:16.7%"></div></div><div class="tl-num bidi">1</div><div class="tl-lbl"><span class="ltr">ACERS</span> — شمال مدينة الشمال بقطر</div></div><div class="tl-row"><div class="tl-date bidi">10-09</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:16.7%"></div></div><div class="tl-num bidi">1</div><div class="tl-lbl"><span class="ltr">GEM NO</span>. 2 — غرب الجزيرة بالإمارات</div></div><div class="tl-row"><div class="tl-date bidi">10-10</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:16.7%"></div></div><div class="tl-num bidi">1</div><div class="tl-lbl"><span class="ltr">VALTHERA</span> — مضيق هرمز</div></div><div class="tl-row"><div class="tl-date bidi">10-11</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:100.0%"></div></div><div class="tl-num bidi">6</div><div class="tl-lbl">AL <span class="ltr">MAQAM</span> · DP <span class="ltr">WORLD KAVERI</span> · <span class="ltr">KITION</span> M · <span class="ltr">EVER VICT</span> · <span class="ltr">ANGOLA PROSPERITY</span> · <span class="ltr">PETRO DOLPHIN</span></div></div><div class="tl-row"><div class="tl-date bidi">10-12</div><div class="tl-track"><div class="tl-fill k-pending" style="--w:66.7%"></div></div><div class="tl-num bidi">4</div><div class="tl-lbl">بلاغات بانتظار الإدراج الرسمي</div></div><div class="tl-row"><div class="tl-date bidi">10-13</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:50.0%"></div></div><div class="tl-num bidi">3</div><div class="tl-lbl"><span class="ltr">GFS PRIDE</span> (غرق) · <span class="ltr">GFS GISELLE</span> (أضرار) · AL <span class="ltr">SAADIYAT</span> (أضرار)</div></div><div class="tl-row"><div class="tl-date bidi">10-14</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:33.3%"></div></div><div class="tl-num bidi">2</div><div class="tl-lbl">غرق «<span class="ltr">GFS PRIDE</span>» و«<span class="ltr">CAPE DAO</span>» — تأكيد رسمي</div></div><div class="tl-row"><div class="tl-date bidi">10-15</div><div class="tl-track"><div class="tl-fill k-pending" style="--w:16.7%"></div></div><div class="tl-num bidi">1</div><div class="tl-lbl">إعلان عن لغم بحري — بلا تأكيد رسمي مستقل</div></div><div class="tl-row"><div class="tl-date bidi">10-16</div><div class="tl-track"><div class="tl-fill k-flat" style="--w:6.0%"></div></div><div class="tl-num bidi">0</div><div class="tl-lbl">لا واقعة جديدة في هذه النافذة</div></div><p class="src-note">المصدر: دفتر الأحداث التراكمي. الأعداد تعني سجلات مرصودة لا هجمات مؤكدة.</p></div><p class="src-note">قراءة اتجاه من منصة رصد — تُراعى مهلة التحديث واحتمال انقطاع الإرسال أو spoofing.</p></section><section class="doc reveal" id="sec-13" aria-labelledby="h-13"><h2 id="h-13"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h5M15 12h5M12 4v5M12 15v5"/></svg></span>ما لم يُحسم</h2><div class="h-rule"></div><p class="sec-lede">ما يبقى مجهولًا، وما يلزم متابعته في التقرير التالي.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+</tbody></table></div><div class="viz tl-viz reveal"><h3>الخط الزمني لمضيق هرمز</h3><div class="tl-row"><div class="tl-date bidi">10-04</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:50.0%"></div></div><div class="tl-num bidi">3</div><div class="tl-lbl"><span class="ltr">GAS VELA</span> · <span class="ltr">CAMEROON PROSPERITY</span> · <span class="ltr">LIPSI</span></div></div><div class="tl-row"><div class="tl-date bidi">10-05</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:33.3%"></div></div><div class="tl-num bidi">2</div><div class="tl-lbl"><span class="ltr">MARAN GAS MYSTRAS</span> · ON <span class="ltr">PEACE</span> (12 مصابًا)</div></div><div class="tl-row"><div class="tl-date bidi">10-06</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:16.7%"></div></div><div class="tl-num bidi">1</div><div class="tl-lbl"><span class="ltr">ST1</span> — قرب الساحل العُماني</div></div><div class="tl-row"><div class="tl-date bidi">10-07</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:16.7%"></div></div><div class="tl-num bidi">1</div><div class="tl-lbl"><span class="ltr">ACERS</span> — شمال مدينة الشمال بقطر</div></div><div class="tl-row"><div class="tl-date bidi">10-09</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:16.7%"></div></div><div class="tl-num bidi">1</div><div class="tl-lbl"><span class="ltr">GEM NO</span>. 2 — غرب الجزيرة بالإمارات</div></div><div class="tl-row"><div class="tl-date bidi">10-10</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:16.7%"></div></div><div class="tl-num bidi">1</div><div class="tl-lbl"><span class="ltr">VALTHERA</span> — مضيق هرمز</div></div><div class="tl-row"><div class="tl-date bidi">10-11</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:100.0%"></div></div><div class="tl-num bidi">6</div><div class="tl-lbl">AL <span class="ltr">MAQAM</span> · DP <span class="ltr">WORLD KAVERI</span> · <span class="ltr">KITION</span> M · <span class="ltr">EVER VICT</span> · <span class="ltr">ANGOLA PROSPERITY</span> · <span class="ltr">PETRO DOLPHIN</span></div></div><div class="tl-row"><div class="tl-date bidi">10-12</div><div class="tl-track"><div class="tl-fill k-pending" style="--w:66.7%"></div></div><div class="tl-num bidi">4</div><div class="tl-lbl">بلاغات بانتظار الإدراج الرسمي</div></div><div class="tl-row"><div class="tl-date bidi">10-13</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:50.0%"></div></div><div class="tl-num bidi">3</div><div class="tl-lbl"><span class="ltr">GFS PRIDE</span> (غرق) · <span class="ltr">GFS GISELLE</span> (أضرار) · AL <span class="ltr">SAADIYAT</span> (أضرار)</div></div><div class="tl-row"><div class="tl-date bidi">10-14</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:33.3%"></div></div><div class="tl-num bidi">2</div><div class="tl-lbl">غرق «<span class="ltr">GFS PRIDE</span>» و«<span class="ltr">CAPE DAO</span>» — تأكيد رسمي</div></div><div class="tl-row"><div class="tl-date bidi">10-15</div><div class="tl-track"><div class="tl-fill k-pending" style="--w:16.7%"></div></div><div class="tl-num bidi">1</div><div class="tl-lbl">إعلان عن لغم بحري — بلا تأكيد رسمي مستقل</div></div><div class="tl-row"><div class="tl-date bidi">10-16</div><div class="tl-track"><div class="tl-fill k-flat" style="--w:6.0%"></div></div><div class="tl-num bidi">0</div><div class="tl-lbl">لا واقعة جديدة في هذه النافذة</div></div><p class="src-note">المصدر: دفتر الأحداث التراكمي. الأعداد تعني سجلات مرصودة لا هجمات مؤكدة.</p></div><p class="src-note">قراءة اتجاه من منصة رصد — تُراعى مهلة التحديث واحتمال انقطاع الإرسال أو spoofing.</p></section><section class="doc reveal" id="sec-13" aria-labelledby="h-13"><h2 id="h-13"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h5M15 12h5M12 4v5M12 15v5"/></svg></span>ما لم يُحسم</h2><div class="h-rule"></div><p class="sec-lede">ما يبقى مجهولًا، وما يلزم متابعته في التقرير التالي.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">المجهول</th>
 <th scope="col">الجهة المسؤولة عن الحسم</th>
 <th scope="col">الأثر</th>
 </tr></thead><tbody>
 <tr>
-<td>هوية سفينتي بلاغي <bdi class="bidi">#172</bdi> و#173 (لا أسماء ولا أرقام تعريف)</td>
-<td>مركز البلاغات الرسمي وسجل <span class="ltr">IMO</span></td>
-<td>يمنع تثبيت الهوية ومنع إسناد خاطئ لسفينتي <span class="ltr">GFS</span></td>
+<td data-label="المجهول">هوية سفينتي بلاغي <bdi class="bidi">#172</bdi> و#173 (لا أسماء ولا أرقام تعريف)</td>
+<td data-label="الجهة المسؤولة عن الحسم">مركز البلاغات الرسمي وسجل <span class="ltr">IMO</span></td>
+<td data-label="الأثر">يمنع تثبيت الهوية ومنع إسناد خاطئ لسفينتي <span class="ltr">GFS</span></td>
 </tr>
 <tr>
-<td>تعارض روايتي الغرق: لغم إيراني مقابل مقذوف إيراني أمريكي</td>
-<td>جهة تحكيم رسمية مستقلة</td>
-<td>يحدد نوع السلاح وتقييم التهديد اللاحق</td>
+<td data-label="المجهول">تعارض روايتي الغرق: لغم إيراني مقابل مقذوف إيراني أمريكي</td>
+<td data-label="الجهة المسؤولة عن الحسم">جهة تحكيم رسمية مستقلة</td>
+<td data-label="الأثر">يحدد نوع السلاح وتقييم التهديد اللاحق</td>
 </tr>
 <tr>
-<td>مصير مفقودَي «<span class="ltr">PETRO DOLPHIN</span>»</td>
-<td>خفر السواحل والجهات المعنية</td>
-<td>أثر إنساني مباشر</td>
+<td data-label="المجهول">مصير مفقودَي «<span class="ltr">PETRO DOLPHIN</span>»</td>
+<td data-label="الجهة المسؤولة عن الحسم">خفر السواحل والجهات المعنية</td>
+<td data-label="الأثر">أثر إنساني مباشر</td>
 </tr>
 <tr>
-<td>زمن إصابة «<span class="ltr">GFS PRIDE</span>» بالدقيقة (بلاغ بلا وقت معلن)</td>
-<td>مركز البلاغات الرسمي</td>
-<td>يمنع مطابقة الزمن مع الحاويات الطافية والمسارات</td>
+<td data-label="المجهول">زمن إصابة «<span class="ltr">GFS PRIDE</span>» بالدقيقة (بلاغ بلا وقت معلن)</td>
+<td data-label="الجهة المسؤولة عن الحسم">مركز البلاغات الرسمي</td>
+<td data-label="الأثر">يمنع مطابقة الزمن مع الحاويات الطافية والمسارات</td>
 </tr>
 <tr>
-<td>نص تعميم قناة السويس الرسمي ومدته</td>
-<td>هيئة قناة السويس</td>
-<td>يحدد حجم التأخير والتكلفة على الخطوط</td>
+<td data-label="المجهول">نص تعميم قناة السويس الرسمي ومدته</td>
+<td data-label="الجهة المسؤولة عن الحسم">هيئة قناة السويس</td>
+<td data-label="الأثر">يحدد حجم التأخير والتكلفة على الخطوط</td>
 </tr>
 <tr>
-<td>مالك الحمولة ومصير الحاويات الطافية قرب موقع الغرق</td>
-<td>الشركة المشغّلة والجهات الساحلية</td>
-<td>مسؤولية بيئية ومطالبات حمولة وخطر ملاحي</td>
+<td data-label="المجهول">مالك الحمولة ومصير الحاويات الطافية قرب موقع الغرق</td>
+<td data-label="الجهة المسؤولة عن الحسم">الشركة المشغّلة والجهات الساحلية</td>
+<td data-label="الأثر">مسؤولية بيئية ومطالبات حمولة وخطر ملاحي</td>
 </tr>
 <tr>
-<td>الأثر البيئي لغرقي النافذة السابقة</td>
-<td>الجهات البيئية والسجل الرسمي</td>
-<td>يحدد مخاطر التلوث على الممر</td>
+<td data-label="المجهول">الأثر البيئي لغرقي النافذة السابقة</td>
+<td data-label="الجهة المسؤولة عن الحسم">الجهات البيئية والسجل الرسمي</td>
+<td data-label="الأثر">يحدد مخاطر التلوث على الممر</td>
 </tr>
-</tbody></table></div><h3>تكليفات المتابعة</h3><p class="blk-lede">الفجوة · الجهة القادرة على حسمها · أثر استمرارها.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table><thead><tr><th scope="col">الفجوة</th><th scope="col">الجهة القادرة على الحسم</th><th scope="col">أثر استمرارها</th></tr></thead><tbody><tr><td>هوية سفينتي بلاغي <bdi class="bidi">#172</bdi> و#173: لا أسماء ولا أرقام تعريف</td><td>مركز البلاغات الرسمي وسجل <span class="ltr">IMO</span></td><td>يمنع تثبيت الهوية ومنع إسناد خاطئ لسفينتي <span class="ltr">GFS</span></td></tr><tr><td>تعارض روايتي الغرق: لغم إيراني مقابل مقذوف إيراني أمريكي</td><td>جهة تحكيم رسمية مستقلة</td><td>يحدد نوع السلاح وتقييم التهديد اللاحق</td></tr><tr><td>مصير مفقودَي «<span class="ltr">PETRO DOLPHIN</span>»</td><td>خفر السواحل والجهات المعنية</td><td>أثر إنساني مباشر على الطواقم</td></tr><tr><td>زمن إصابة «<span class="ltr">GFS PRIDE</span>» بالدقيقة</td><td>مركز البلاغات الرسمي</td><td>يمنع مطابقة الزمن مع الحاويات الطافية والمسارات</td></tr><tr><td>نص تعميم قناة السويس الرسمي ومدته</td><td>هيئة قناة السويس</td><td>يحدد حجم التأخير والتكلفة على الخطوط</td></tr><tr><td>مالك الحمولة ومصير الحاويات الطافية قرب موقع الغرق</td><td>الشركة المشغّلة والجهات الساحلية</td><td>مسؤولية بيئية ومطالبات حمولة وخطر ملاحي</td></tr></tbody></table></div></section><section class="doc reveal" id="sec-14" aria-labelledby="h-14"><h2 id="h-14"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>المراقبة المستمرة</h2><div class="h-rule"></div><p>أُوقف التنبيه الفوري بطلب من المستخدم، ويُجمع كل مستجد في هذا التقرير الصباحي. وتُراقب في الساعات القادمة: صدور بلاغ رسمي جديد في المضيق، أي إعلان عن إزالة الحطام أو إغلاق منطقة الغرق. أي إعلان مسؤولية موثّق، تحديث عدّاد <span class="ltr">IMO</span> بإدراج واقعتي 13 أكتوبر. مصير مفقودَي «<span class="ltr">PETRO DOLPHIN</span>»، أي حادثة قرصنة جديدة في خليج عدن، وأي تعديل رسمي على شروط العبور في السويس.</p></section><section class="doc reveal" id="sec-15" aria-labelledby="h-15"><h2 id="h-15"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 7v5l3 2M3.5 12a8.5 8.5 0 1 0 2.6-6.1M3 4v4h4"/></svg></span>الخلفية القائمة</h2><div class="h-rule"></div><p class="sec-lede">وقائع أقدم ما زال أثرها مؤثرًا على التشغيل.</p><p>الحرب على الملاحة في مضيق هرمز مستمرة منذ بداية الأزمة، والممر يعمل بأقل من ربع طاقته الطبيعية، ومعه تكدس رسو مرتفع وكلفة تأمين تاريخية. وفي البحر الأحمر: تصعيد عسكري متبادل يهدد الممر البديل. وفي خليج عدن والمحيط الهندي: قرصنة عند مستوى مرتفع لم يتراجع. ولا توجد حاليًا أي نشرة بحرية أمريكية سارية، والبيان الاستشاري لـJMIC هو المرجع الرسمي الساري.</p></section><section class="doc reveal" id="sec-16" aria-labelledby="h-16"><h2 id="h-16"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>المصادر والمراجع</h2><div class="h-rule"></div><p class="sec-lede">حالة المصادر المفحوصة، وروابط المراجع المستشهد بها.</p><div class="src-grid">
+</tbody></table></div><h3>تكليفات المتابعة</h3><p class="blk-lede">الفجوة · الجهة القادرة على حسمها · أثر استمرارها.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified"><thead><tr><th scope="col">الفجوة</th><th scope="col">الجهة القادرة على الحسم</th><th scope="col">أثر استمرارها</th></tr></thead><tbody><tr><td data-label="الفجوة">هوية سفينتي بلاغي <bdi class="bidi">#172</bdi> و#173: لا أسماء ولا أرقام تعريف</td><td data-label="الجهة القادرة على الحسم">مركز البلاغات الرسمي وسجل <span class="ltr">IMO</span></td><td data-label="أثر استمرارها">يمنع تثبيت الهوية ومنع إسناد خاطئ لسفينتي <span class="ltr">GFS</span></td></tr><tr><td data-label="الفجوة">تعارض روايتي الغرق: لغم إيراني مقابل مقذوف إيراني أمريكي</td><td data-label="الجهة القادرة على الحسم">جهة تحكيم رسمية مستقلة</td><td data-label="أثر استمرارها">يحدد نوع السلاح وتقييم التهديد اللاحق</td></tr><tr><td data-label="الفجوة">مصير مفقودَي «<span class="ltr">PETRO DOLPHIN</span>»</td><td data-label="الجهة القادرة على الحسم">خفر السواحل والجهات المعنية</td><td data-label="أثر استمرارها">أثر إنساني مباشر على الطواقم</td></tr><tr><td data-label="الفجوة">زمن إصابة «<span class="ltr">GFS PRIDE</span>» بالدقيقة</td><td data-label="الجهة القادرة على الحسم">مركز البلاغات الرسمي</td><td data-label="أثر استمرارها">يمنع مطابقة الزمن مع الحاويات الطافية والمسارات</td></tr><tr><td data-label="الفجوة">نص تعميم قناة السويس الرسمي ومدته</td><td data-label="الجهة القادرة على الحسم">هيئة قناة السويس</td><td data-label="أثر استمرارها">يحدد حجم التأخير والتكلفة على الخطوط</td></tr><tr><td data-label="الفجوة">مالك الحمولة ومصير الحاويات الطافية قرب موقع الغرق</td><td data-label="الجهة القادرة على الحسم">الشركة المشغّلة والجهات الساحلية</td><td data-label="أثر استمرارها">مسؤولية بيئية ومطالبات حمولة وخطر ملاحي</td></tr></tbody></table></div></section><section class="doc reveal" id="sec-14" aria-labelledby="h-14"><h2 id="h-14"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>المراقبة المستمرة</h2><div class="h-rule"></div><p>أُوقف التنبيه الفوري بطلب من المستخدم، ويُجمع كل مستجد في هذا التقرير الصباحي. وتُراقب في الساعات القادمة: صدور بلاغ رسمي جديد في المضيق، أي إعلان عن إزالة الحطام أو إغلاق منطقة الغرق. أي إعلان مسؤولية موثّق، تحديث عدّاد <span class="ltr">IMO</span> بإدراج واقعتي 13 أكتوبر. مصير مفقودَي «<span class="ltr">PETRO DOLPHIN</span>»، أي حادثة قرصنة جديدة في خليج عدن، وأي تعديل رسمي على شروط العبور في السويس.</p></section><section class="doc reveal" id="sec-15" aria-labelledby="h-15"><h2 id="h-15"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 7v5l3 2M3.5 12a8.5 8.5 0 1 0 2.6-6.1M3 4v4h4"/></svg></span>الخلفية القائمة</h2><div class="h-rule"></div><p class="sec-lede">وقائع أقدم ما زال أثرها مؤثرًا على التشغيل.</p><p>الحرب على الملاحة في مضيق هرمز مستمرة منذ بداية الأزمة، والممر يعمل بأقل من ربع طاقته الطبيعية، ومعه تكدس رسو مرتفع وكلفة تأمين تاريخية. وفي البحر الأحمر: تصعيد عسكري متبادل يهدد الممر البديل. وفي خليج عدن والمحيط الهندي: قرصنة عند مستوى مرتفع لم يتراجع. ولا توجد حاليًا أي نشرة بحرية أمريكية سارية، والبيان الاستشاري لـJMIC هو المرجع الرسمي الساري.</p></section><section class="doc reveal" id="sec-16" aria-labelledby="h-16"><h2 id="h-16"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>المصادر والمراجع</h2><div class="h-rule"></div><p class="sec-lede">حالة المصادر المفحوصة، وروابط المراجع المستشهد بها.</p><div class="src-grid">
 <div class="src s-none"><b>1</b><span class="st">لا مستجد — استُشهد به؛ البلاغات الرسمية <bdi class="bidi">#170</bdi>–<bdi class="bidi">#173</bdi> وبيان <span class="ltr">JMIC</span> (تحديث 105)</span></div>
 <div class="src s-ok"><b>2</b><span class="st">فُحص — فُحص — لا مستجد في النافذة</span></div>
 <div class="src s-none"><b>3</b><span class="st">لا مستجد — تعذّر الوصول — الصفحة غير متوفرة (خطأ 404)</span></div>
@@ -1153,7 +1176,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 </div>
 <blockquote>لا تُجمع البلاغات كعدد هجمات، ولا يُنسب فعل إلى جهة إلا وفق مصدر رسمي مباشر، والنقل الإعلامي موسوم إعلاميًا. وانتهاء النشرات الرسمية لا يعني سلامة النطاق. وتُذكر أوقات كل واقعة بتوقيت <span class="ltr">UTC</span>، وما يقابلها بتوقيت البحرين عند التسليم.</blockquote>
 <p><strong>تنبيه إسناد (D-02):</strong> البلاغان الرسميان <strong><bdi class="bidi">#172</bdi> و#173 لا يُنسبان قطعيًا إلى سفينتي <span class="ltr">GFS</span></strong>. وصفهما «سفينتا حاويات بضرر طفيف واصلتا العبور» لا يطابق غرق «<span class="ltr">GFS PRIDE</span>». ويبقى احتمال مطابقة أحدهما «<span class="ltr">GFS GISELLE</span>» <strong>مُرجَّحًا لا مؤكدًا</strong>. ولا يُدمج البلاغان مع واقعتَي <span class="ltr">GFS</span> في أي عدّ.</p>
-<p><strong>تصحيح مرجعي (D-03):</strong> علم «<span class="ltr">GFS GISELLE</span>» <strong>سنغافوري</strong> بحسب بيان هيئة الموانئ والملاحة بسنغافورة، وقد صُحّح في جدول هوية السفن في إصدار اليوم وإصدار أمس.</p><h3>موثوقية المصادر</h3><p class="blk-lede">الموثوقية للجهة، والمصداقية لدرجة التصديق، والأساس سبب الدرجة.</p><p class="src-note">سلّم الموثوقية: <b>A</b> مطلق · <b>B</b> جيد · <b>C</b> متوسط · <b>D</b> غير موثوق · <b>E</b> غير مؤكد · <b>F</b> لا يمكن الحكم عليه — وسلّم المصداقية: <b>1</b> مؤكد من مصدر آخر · <b>2</b> يُرجَّح صدقه · <b>3</b> يُحتمل صدقه · <b>4</b> مشكوك فيه · <b>5</b> غير مُرجَّح · <b>6</b> لا يمكن الحكم عليه.</p><p class="src-note">يشمل الجدول <b>11</b> مصدرًا مستشهدًا به من أصل <b>40</b> مصدرًا مفحوصًا في هذا التشغيل؛ المصادر غير المستشهد بها لا تُدرج.</p><div class="tbl-scroll" tabindex="0" role="region" aria-label="جدول"><table class="tbl rel-tbl"><thead><tr><th>#</th><th>المصدر</th><th>الموثوقية</th><th>المصداقية</th><th>الأساس</th></tr></thead><tbody><tr><td>1</td><td><span class="ltr">UKMTO</span> — الحوادث الأخيرة</td><td class="rel">A</td><td class="rel">2</td><td>المصدر الرسمي المعتمد لبلاغات الحوادث في المنطقة؛ بلاغاته أولية وتُحدَّث لاحقًا، فيبقى 2 حتى تأكيد مستقل ثم يصبح 1. · حالة التشغيل: البلاغات الرسمية <bdi class="bidi">#170</bdi>–<bdi class="bidi">#173</bdi> وبيان <span class="ltr">JMIC</span> (تحديث 105)</td></tr><tr><td>5</td><td><span class="ltr">IMO</span> — سجل الحوادث المؤكدة</td><td class="rel">A</td><td class="rel">1</td><td>حصيلة رسمية للحوادث المؤكدة والوفيات؛ أعلى مرجعية إحصائية في التقرير. · حالة التشغيل: 113 حادثة و24 وفاة، وتثبيت أن «<span class="ltr">GFS GISELLE</span>» تضررت لا غرقت</td></tr><tr><td>6</td><td>straits.live</td><td class="rel">C</td><td class="rel">3</td><td>منصة رصد خاصة غير رسمية؛ أرقام الانتظار والتصنيف التأميني تقديرية ومتغيرة. · حالة التشغيل: العبور والتكدس والسوق وعدد السفن الواقفة في مواضعها</td></tr><tr><td>7</td><td>gCaptain</td><td class="rel">B</td><td class="rel">2</td><td>إعلام متخصص ينشر تفاصيل تشغيلية؛ لا يوثّق بمعيار رسمي. · حالة التشغيل: نقل بيان <span class="ltr">JMIC</span> وتفاصيل إعلان السيطرة الأمريكي</td></tr><tr><td>8</td><td>TradeWinds</td><td class="rel">B</td><td class="rel">2</td><td>إعلام شحن مهني موثوق؛ جزء من محتواه خلف اشتراك. · حالة التشغيل: أرقام العبور ومتابعة أثر الأزمة على الشحن</td></tr><tr><td>12</td><td><span class="ltr">OFAC</span> — الإجراءات الأخيرة</td><td class="rel">A</td><td class="rel">1</td><td>إجراءات عقوبات رسمية منشورة بحق كيانات وأفراد. · حالة التشغيل: فحص العقوبات: لا تطابق على المستهدفين في هذه النافذة</td></tr><tr><td>30</td><td>القيادة المركزية الأمريكية (سنتكوم)</td><td class="rel">A</td><td class="rel">2</td><td>بيانات عسكرية رسمية؛ النشر بطيء وقد يتعذر التحميل. · حالة التشغيل: بيان السيطرة على المضيق ورفض الروايات الإيرانية (قُرئ منقولًا)</td></tr><tr><td>31</td><td><span class="ltr">JMIC</span> — المنظمة البحرية المشتركة</td><td class="rel">A</td><td class="rel">2</td><td>منتج رسمي مشترك بين القوات؛ النشر غير منتظم. · حالة التشغيل: البيان الاستشاري (تحديث 105): تقييم «شديد» وثماني هجمات</td></tr><tr><td>33</td><td><span class="ltr">MARAD/MSCI</span></td><td class="rel">A</td><td class="rel">1</td><td>تنبيهات أمن الملاحة الأمريكية الرسمية. · حالة التشغيل: لا تحذيرات سارية وكل النشرات السابقة ملغاة أو منتهية</td></tr><tr><td>35</td><td>Splash 247</td><td class="rel">B</td><td class="rel">2</td><td>إعلام بحري مهني؛ تغطيته للخليج متقطعة. · حالة التشغيل: قرار قناة السويس بالفحص الإلزامي للسفن 25 سنة وأكثر</td></tr><tr><td>36</td><td>Lloyd&#x27;s List</td><td class="rel">B</td><td class="rel">3</td><td>إعلام بحري مهني عريق؛ موثوقية الجهة B، لكن جوهر محتواه خلف اشتراك ويخلط الخبر بالتحليل ورأي السوق فتبقى المصداقية 3. · حالة التشغيل: متابعة أثر الاستهداف على السفن والخطوط</td></tr></tbody></table></div></section>
+<p><strong>تصحيح مرجعي (D-03):</strong> علم «<span class="ltr">GFS GISELLE</span>» <strong>سنغافوري</strong> بحسب بيان هيئة الموانئ والملاحة بسنغافورة، وقد صُحّح في جدول هوية السفن في إصدار اليوم وإصدار أمس.</p><h3>موثوقية المصادر</h3><p class="blk-lede">الموثوقية للجهة، والمصداقية لدرجة التصديق، والأساس سبب الدرجة.</p><p class="src-note">سلّم الموثوقية: <b>A</b> مطلق · <b>B</b> جيد · <b>C</b> متوسط · <b>D</b> غير موثوق · <b>E</b> غير مؤكد · <b>F</b> لا يمكن الحكم عليه — وسلّم المصداقية: <b>1</b> مؤكد من مصدر آخر · <b>2</b> يُرجَّح صدقه · <b>3</b> يُحتمل صدقه · <b>4</b> مشكوك فيه · <b>5</b> غير مُرجَّح · <b>6</b> لا يمكن الحكم عليه.</p><p class="src-note">يشمل الجدول <b>11</b> مصدرًا مستشهدًا به من أصل <b>40</b> مصدرًا مفحوصًا في هذا التشغيل؛ المصادر غير المستشهد بها لا تُدرج.</p><div class="tbl-scroll" tabindex="0" role="region" aria-label="جدول"><table class="tbl rel-tbl cardified"><thead><tr><th>#</th><th>المصدر</th><th>الموثوقية</th><th>المصداقية</th><th>الأساس</th></tr></thead><tbody><tr><td data-label="#">1</td><td data-label="المصدر"><span class="ltr">UKMTO</span> — الحوادث الأخيرة</td><td class="rel" data-label="الموثوقية">A</td><td class="rel" data-label="المصداقية">2</td><td data-label="الأساس">المصدر الرسمي المعتمد لبلاغات الحوادث في المنطقة؛ بلاغاته أولية وتُحدَّث لاحقًا، فيبقى 2 حتى تأكيد مستقل ثم يصبح 1. · حالة التشغيل: البلاغات الرسمية <bdi class="bidi">#170</bdi>–<bdi class="bidi">#173</bdi> وبيان <span class="ltr">JMIC</span> (تحديث 105)</td></tr><tr><td data-label="#">5</td><td data-label="المصدر"><span class="ltr">IMO</span> — سجل الحوادث المؤكدة</td><td class="rel" data-label="الموثوقية">A</td><td class="rel" data-label="المصداقية">1</td><td data-label="الأساس">حصيلة رسمية للحوادث المؤكدة والوفيات؛ أعلى مرجعية إحصائية في التقرير. · حالة التشغيل: 113 حادثة و24 وفاة، وتثبيت أن «<span class="ltr">GFS GISELLE</span>» تضررت لا غرقت</td></tr><tr><td data-label="#">6</td><td data-label="المصدر">straits.live</td><td class="rel" data-label="الموثوقية">C</td><td class="rel" data-label="المصداقية">3</td><td data-label="الأساس">منصة رصد خاصة غير رسمية؛ أرقام الانتظار والتصنيف التأميني تقديرية ومتغيرة. · حالة التشغيل: العبور والتكدس والسوق وعدد السفن الواقفة في مواضعها</td></tr><tr><td data-label="#">7</td><td data-label="المصدر">gCaptain</td><td class="rel" data-label="الموثوقية">B</td><td class="rel" data-label="المصداقية">2</td><td data-label="الأساس">إعلام متخصص ينشر تفاصيل تشغيلية؛ لا يوثّق بمعيار رسمي. · حالة التشغيل: نقل بيان <span class="ltr">JMIC</span> وتفاصيل إعلان السيطرة الأمريكي</td></tr><tr><td data-label="#">8</td><td data-label="المصدر">TradeWinds</td><td class="rel" data-label="الموثوقية">B</td><td class="rel" data-label="المصداقية">2</td><td data-label="الأساس">إعلام شحن مهني موثوق؛ جزء من محتواه خلف اشتراك. · حالة التشغيل: أرقام العبور ومتابعة أثر الأزمة على الشحن</td></tr><tr><td data-label="#">12</td><td data-label="المصدر"><span class="ltr">OFAC</span> — الإجراءات الأخيرة</td><td class="rel" data-label="الموثوقية">A</td><td class="rel" data-label="المصداقية">1</td><td data-label="الأساس">إجراءات عقوبات رسمية منشورة بحق كيانات وأفراد. · حالة التشغيل: فحص العقوبات: لا تطابق على المستهدفين في هذه النافذة</td></tr><tr><td data-label="#">30</td><td data-label="المصدر">القيادة المركزية الأمريكية (سنتكوم)</td><td class="rel" data-label="الموثوقية">A</td><td class="rel" data-label="المصداقية">2</td><td data-label="الأساس">بيانات عسكرية رسمية؛ النشر بطيء وقد يتعذر التحميل. · حالة التشغيل: بيان السيطرة على المضيق ورفض الروايات الإيرانية (قُرئ منقولًا)</td></tr><tr><td data-label="#">31</td><td data-label="المصدر"><span class="ltr">JMIC</span> — المنظمة البحرية المشتركة</td><td class="rel" data-label="الموثوقية">A</td><td class="rel" data-label="المصداقية">2</td><td data-label="الأساس">منتج رسمي مشترك بين القوات؛ النشر غير منتظم. · حالة التشغيل: البيان الاستشاري (تحديث 105): تقييم «شديد» وثماني هجمات</td></tr><tr><td data-label="#">33</td><td data-label="المصدر"><span class="ltr">MARAD/MSCI</span></td><td class="rel" data-label="الموثوقية">A</td><td class="rel" data-label="المصداقية">1</td><td data-label="الأساس">تنبيهات أمن الملاحة الأمريكية الرسمية. · حالة التشغيل: لا تحذيرات سارية وكل النشرات السابقة ملغاة أو منتهية</td></tr><tr><td data-label="#">35</td><td data-label="المصدر">Splash 247</td><td class="rel" data-label="الموثوقية">B</td><td class="rel" data-label="المصداقية">2</td><td data-label="الأساس">إعلام بحري مهني؛ تغطيته للخليج متقطعة. · حالة التشغيل: قرار قناة السويس بالفحص الإلزامي للسفن 25 سنة وأكثر</td></tr><tr><td data-label="#">36</td><td data-label="المصدر">Lloyd&#x27;s List</td><td class="rel" data-label="الموثوقية">B</td><td class="rel" data-label="المصداقية">3</td><td data-label="الأساس">إعلام بحري مهني عريق؛ موثوقية الجهة B، لكن جوهر محتواه خلف اشتراك ويخلط الخبر بالتحليل ورأي السوق فتبقى المصداقية 3. · حالة التشغيل: متابعة أثر الاستهداف على السفن والخطوط</td></tr></tbody></table></div></section>
   </main>
 
   <footer class="foot">

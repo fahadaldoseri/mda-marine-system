@@ -676,6 +676,29 @@ section.doc{scroll-margin-top:0 !important}
 /* رقم المعلّم: نص داكن على معلّم فاتح، ومقلوب في الوضع النهاري */
 body:not(.daylight) .lg-num{color:#04120f}
 body.daylight .lg-num{color:#ffffff}
+
+/* بطاقات الجوال للجداول — البند المعتمد 21 أكتوبر 2026 */
+@media (max-width:560px){
+  table.cardified{display:block;border:0;background:transparent;border-radius:0}
+  table.cardified.cardified{width:100%;max-width:100%;min-width:0}
+  table.cardified thead{display:none}
+  table.cardified tbody{display:block;max-width:100%}
+  table.cardified tr{display:block;max-width:100%;box-sizing:border-box;background:var(--panel);
+    border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin:0 0 10px}
+  table.cardified td{display:grid;grid-template-columns:minmax(72px,auto) minmax(0,1fr);gap:8px;
+    border:0;padding:5px 0;align-items:baseline;text-align:start;
+    overflow-wrap:anywhere;word-break:break-word;min-width:0}
+  table.cardified td::before{content:attr(data-label);color:var(--muted);font-size:12.5px;font-weight:600}
+  table.cardified td:empty{display:none}
+  .tbl-wrap:has(table.cardified),.tbl-scroll:has(table.cardified){overflow:visible;border:0}
+  .tbl-hint{display:none}
+}
+/* بانر النسخة المستبدلة — البند المعتمد 21 أكتوبر 2026 */
+.sup-banner{margin:0 0 20px;padding:12px 16px;border:1px solid #c9a24f;border-radius:10px;
+  background:#2a2210;color:#ffd88a;font-size:14px}
+body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
+.sup-banner a{color:inherit;font-weight:700;text-decoration:underline}
+.sp-dim{opacity:.72}
 </style></head>
 <body><nav class="site-nav no-print" aria-label="تنقل الموقع">
   <div class="sn-inner">
@@ -729,13 +752,13 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
   </div>
 </div>
 
-<div class="wrap">
+<div class="wrap"><div class="sup-banner" role="note">نسخة مستبدلة — اعتمد الإصدار المحدّث: <a href="/reports/special-gfs-pride-giselle-2026-10-15.html">افتح الإصدار المعتمد ←</a></div>
   <header class="masthead">
     <h1>إصابة سفينتي حاويات في مضيق هرمز: «<span class="ltr">GFS PRIDE</span>» و«<span class="ltr">GFS GISELLE</span>»</h1>
     
     <div>
       <p class="lede"><strong>الجهة المُصدِرة:</strong> مركز الوعي بالمجال البحري — مملكة البحرين</p>
-      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-21 14:33 <span class="ltr">UTC</span></b></span></div>
+      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-21 15:23 <span class="ltr">UTC</span></b></span></div>
     </div>
   </header>
 
@@ -760,113 +783,113 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <p><strong>هوية السفينتين</strong></p>
 <ol><li>السفينتان من أسطول واحد ومشغّل واحد وخطّين متقاربين. وهذا يرفع احتمال أن نمط الاختيار لا يقتصر على سفينة بعينها؛ والقصد غير مثبت. والبيانات الفنية في جدول 1.</li></ol>
 <p><strong>جدول 1 — البيانات الفنية وبيانات الرحلة والشحنة</strong></p>
-<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">البيان</th>
 <th scope="col"><span class="ltr">GFS PRIDE</span></th>
 <th scope="col"><span class="ltr">GFS GISELLE</span></th>
 </tr></thead><tbody>
 <tr>
-<td>النوع</td>
-<td>سفينة حاويات</td>
-<td>سفينة حاويات</td>
+<td data-label="البيان">النوع</td>
+<td data-label="GFS PRIDE">سفينة حاويات</td>
+<td data-label="GFS GISELLE">سفينة حاويات</td>
 </tr>
 <tr>
-<td>رقم <span class="ltr">IMO</span></td>
-<td class="num">9349045</td>
-<td class="num">9704661</td>
+<td data-label="البيان">رقم <span class="ltr">IMO</span></td>
+<td class="num" data-label="GFS PRIDE">9349045</td>
+<td class="num" data-label="GFS GISELLE">9704661</td>
 </tr>
 <tr>
-<td>رقم <span class="ltr">MMSI</span></td>
-<td class="num">563115400</td>
-<td class="num">566456000</td>
+<td data-label="البيان">رقم <span class="ltr">MMSI</span></td>
+<td class="num" data-label="GFS PRIDE">563115400</td>
+<td class="num" data-label="GFS GISELLE">566456000</td>
 </tr>
 <tr>
-<td>إشارة النداء</td>
-<td>9V6902</td>
-<td>9V2812</td>
+<td data-label="البيان">إشارة النداء</td>
+<td data-label="GFS PRIDE">9V6902</td>
+<td data-label="GFS GISELLE">9V2812</td>
 </tr>
 <tr>
-<td>العلم</td>
-<td>سنغافورة</td>
-<td>سنغافورة</td>
+<td data-label="البيان">العلم</td>
+<td data-label="GFS PRIDE">سنغافورة</td>
+<td data-label="GFS GISELLE">سنغافورة</td>
 </tr>
 <tr>
-<td>سنة البناء ومكانه</td>
-<td>2008 — هيونداي ميبو، أولسان، كوريا الجنوبية</td>
-<td>2015 — كوان لبناء السفن، تايتشو، الصين</td>
+<td data-label="البيان">سنة البناء ومكانه</td>
+<td data-label="GFS PRIDE">2008 — هيونداي ميبو، أولسان، كوريا الجنوبية</td>
+<td data-label="GFS GISELLE">2015 — كوان لبناء السفن، تايتشو، الصين</td>
 </tr>
 <tr>
-<td>الحمولة الإجمالية (GT)</td>
-<td class="num">28,340</td>
-<td class="num">44,887</td>
+<td data-label="البيان">الحمولة الإجمالية (GT)</td>
+<td class="num" data-label="GFS PRIDE">28,340</td>
+<td class="num" data-label="GFS GISELLE">44,887</td>
 </tr>
 <tr>
-<td>الحمولة الساكنة (<span class="ltr">DWT</span>)</td>
-<td>39,446 طنًا</td>
-<td>54,117 طنًا</td>
+<td data-label="البيان">الحمولة الساكنة (<span class="ltr">DWT</span>)</td>
+<td data-label="GFS PRIDE">39,446 طنًا</td>
+<td data-label="GFS GISELLE">54,117 طنًا</td>
 </tr>
 <tr>
-<td>الحمولة الصافية (NT)</td>
-<td class="num">14,289</td>
-<td class="num">18,358</td>
+<td data-label="البيان">الحمولة الصافية (NT)</td>
+<td class="num" data-label="GFS PRIDE">14,289</td>
+<td class="num" data-label="GFS GISELLE">18,358</td>
 </tr>
 <tr>
-<td>الطول الكلي / العرض</td>
-<td>222.2 م / 30.0 م</td>
-<td>239.82 م / 37.38 م</td>
+<td data-label="البيان">الطول الكلي / العرض</td>
+<td data-label="GFS PRIDE">222.2 م / 30.0 م</td>
+<td data-label="GFS GISELLE">239.82 م / 37.38 م</td>
 </tr>
 <tr>
-<td>السعة</td>
-<td>2,824 وحدة مكافئة (<span class="ltr">TEU</span>)</td>
-<td>4,350 وحدة مكافئة (<span class="ltr">TEU</span>)</td>
+<td data-label="البيان">السعة</td>
+<td data-label="GFS PRIDE">2,824 وحدة مكافئة (<span class="ltr">TEU</span>)</td>
+<td data-label="GFS GISELLE">4,350 وحدة مكافئة (<span class="ltr">TEU</span>)</td>
 </tr>
 <tr>
-<td>الأسماء السابقة</td>
-<td>«<span class="ltr">MAERSK JUBAIL</span>» ثم «<span class="ltr">GISELE</span> A» ثم الاسم الحالي في سبتمبر 2020</td>
-<td>لم يُسجَّل تغيير اسم بعد 2015</td>
+<td data-label="البيان">الأسماء السابقة</td>
+<td data-label="GFS PRIDE">«<span class="ltr">MAERSK JUBAIL</span>» ثم «<span class="ltr">GISELE</span> A» ثم الاسم الحالي في سبتمبر 2020</td>
+<td data-label="GFS GISELLE">لم يُسجَّل تغيير اسم بعد 2015</td>
 </tr>
 <tr>
-<td>المدير الفني</td>
-<td><span class="ltr">GFS</span> Ship Management <span class="ltr">FZE</span> — الإمارات</td>
-<td><span class="ltr">GFS</span> Ship Management <span class="ltr">FZE</span> — الإمارات</td>
+<td data-label="البيان">المدير الفني</td>
+<td data-label="GFS PRIDE"><span class="ltr">GFS</span> Ship Management <span class="ltr">FZE</span> — الإمارات</td>
+<td data-label="GFS GISELLE"><span class="ltr">GFS</span> Ship Management <span class="ltr">FZE</span> — الإمارات</td>
 </tr>
 <tr>
-<td>المشغّل</td>
-<td>Global Feeder Shipping — دبي</td>
-<td>Global Feeder Shipping — سنغافورة</td>
+<td data-label="البيان">المشغّل</td>
+<td data-label="GFS PRIDE">Global Feeder Shipping — دبي</td>
+<td data-label="GFS GISELLE">Global Feeder Shipping — سنغافورة</td>
 </tr>
 <tr>
-<td>خط العمل (الخدمة)</td>
-<td>خورفكان – الفجيرة – كراتشي</td>
-<td>نافا شيفا – خورفكان – الفجيرة</td>
+<td data-label="البيان">خط العمل (الخدمة)</td>
+<td data-label="GFS PRIDE">خورفكان – الفجيرة – كراتشي</td>
+<td data-label="GFS GISELLE">نافا شيفا – خورفكان – الفجيرة</td>
 </tr>
 <tr>
-<td>آخر إشارة تتبّع مستقبَلة قبل الإصابة (<span class="ltr">UTC</span>)</td>
-<td><span class="ltr">032231Z OCT 26</span></td>
-<td><span class="ltr">120431Z OCT 26</span></td>
+<td data-label="البيان">آخر إشارة تتبّع مستقبَلة قبل الإصابة (<span class="ltr">UTC</span>)</td>
+<td data-label="GFS PRIDE"><span class="ltr">032231Z OCT 26</span></td>
+<td data-label="GFS GISELLE"><span class="ltr">120431Z OCT 26</span></td>
 </tr>
 <tr>
-<td>بيان الحمولة الرسمي</td>
-<td>لم يُعلن</td>
-<td>لم يُعلن</td>
+<td data-label="البيان">بيان الحمولة الرسمي</td>
+<td data-label="GFS PRIDE">لم يُعلن</td>
+<td data-label="GFS GISELLE">لم يُعلن</td>
 </tr>
 <tr>
-<td>الحمولة في موقع الغرق</td>
-<td>حاويات طافية — فقدان جزء من الحمولة</td>
-<td>لا حطام مسجَّل</td>
+<td data-label="البيان">الحمولة في موقع الغرق</td>
+<td data-label="GFS PRIDE">حاويات طافية — فقدان جزء من الحمولة</td>
+<td data-label="GFS GISELLE">لا حطام مسجَّل</td>
 </tr>
 <tr>
-<td>الحمولة المتداولة إعلاميًا</td>
-<td>رواية إيرانية غير مؤكدة بأكثر من ألفين وخمسمئة حاوية</td>
-<td>لا بيانات</td>
+<td data-label="البيان">الحمولة المتداولة إعلاميًا</td>
+<td data-label="GFS PRIDE">رواية إيرانية غير مؤكدة بأكثر من ألفين وخمسمئة حاوية</td>
+<td data-label="GFS GISELLE">لا بيانات</td>
 </tr>
 </tbody></table></div>
 <ol><li>تملك مجموعة AD Ports نسبة واحد وثمانين في المئة من الأسطول، وتشغيله إماراتي. ولذلك تصنّف المصادر المهنية الحادثين ضمن استهداف السفن المرتبطة بالإمارات.</li></ol>
 <p><strong>التسلسل الزمني</strong></p>
 <ol><li>تسلسل الحركة والإصابة في جدول 2، وكل وقت مذكور بتوقيت <span class="ltr">UTC</span> وبعده توقيت البحرين.</li></ol>
 <p><strong>جدول 2 — التسلسل الزمني</strong></p>
-<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">التاريخ</th>
 <th scope="col">الوقت (<span class="ltr">UTC</span>)</th>
@@ -875,95 +898,95 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <th scope="col">حالة التحقق</th>
 </tr></thead><tbody>
 <tr>
-<td>1 أكتوبر 2026</td>
-<td>07:40</td>
-<td>10:40</td>
-<td>«<span class="ltr">GFS PRIDE</span>» تُبحر من كراتشي</td>
-<td>مؤكد — بيانات التتبع</td>
+<td data-label="التاريخ">1 أكتوبر 2026</td>
+<td data-label="الوقت (UTC)">07:40</td>
+<td data-label="الوقت (البحرين)">10:40</td>
+<td data-label="الحدث">«<span class="ltr">GFS PRIDE</span>» تُبحر من كراتشي</td>
+<td data-label="حالة التحقق">مؤكد — بيانات التتبع</td>
 </tr>
 <tr>
-<td>3 أكتوبر 2026</td>
-<td>16:16</td>
-<td>19:16</td>
-<td>«<span class="ltr">GFS PRIDE</span>» تصل مرسى الفجيرة</td>
-<td>مؤكد — بيانات التتبع</td>
+<td data-label="التاريخ">3 أكتوبر 2026</td>
+<td data-label="الوقت (UTC)">16:16</td>
+<td data-label="الوقت (البحرين)">19:16</td>
+<td data-label="الحدث">«<span class="ltr">GFS PRIDE</span>» تصل مرسى الفجيرة</td>
+<td data-label="حالة التحقق">مؤكد — بيانات التتبع</td>
 </tr>
 <tr>
-<td>1 أكتوبر 2026</td>
-<td>—</td>
-<td>—</td>
-<td>«<span class="ltr">GFS GISELLE</span>» تُبحر من نافا شيفا</td>
-<td>مؤكد — بيانات التتبع</td>
+<td data-label="التاريخ">1 أكتوبر 2026</td>
+<td data-label="الوقت (UTC)">—</td>
+<td data-label="الوقت (البحرين)">—</td>
+<td data-label="الحدث">«<span class="ltr">GFS GISELLE</span>» تُبحر من نافا شيفا</td>
+<td data-label="حالة التحقق">مؤكد — بيانات التتبع</td>
 </tr>
 <tr>
-<td>8 أكتوبر 2026</td>
-<td>—</td>
-<td>—</td>
-<td>الوصول المتوقع لـ«<span class="ltr">GFS GISELLE</span>» إلى الفجيرة</td>
-<td>مؤكد — بيانات التتبع</td>
+<td data-label="التاريخ">8 أكتوبر 2026</td>
+<td data-label="الوقت (UTC)">—</td>
+<td data-label="الوقت (البحرين)">—</td>
+<td data-label="الحدث">الوصول المتوقع لـ«<span class="ltr">GFS GISELLE</span>» إلى الفجيرة</td>
+<td data-label="حالة التحقق">مؤكد — بيانات التتبع</td>
 </tr>
 <tr>
-<td>13 أكتوبر 2026</td>
-<td>16:40–17:00</td>
-<td>19:40–20:00</td>
-<td>إصابة «<span class="ltr">GFS PRIDE</span>» على مسافة ميل بحري واحد شرق رأس مخبوق، عُمان</td>
-<td>مؤكد — بلاغ رسمي وتحليل مهني</td>
+<td data-label="التاريخ">13 أكتوبر 2026</td>
+<td data-label="الوقت (UTC)">16:40–17:00</td>
+<td data-label="الوقت (البحرين)">19:40–20:00</td>
+<td data-label="الحدث">إصابة «<span class="ltr">GFS PRIDE</span>» على مسافة ميل بحري واحد شرق رأس مخبوق، عُمان</td>
+<td data-label="حالة التحقق">مؤكد — بلاغ رسمي وتحليل مهني</td>
 </tr>
 <tr>
-<td>13 أكتوبر 2026</td>
-<td>16:40</td>
-<td>19:40</td>
-<td>إصابة «<span class="ltr">GFS GISELLE</span>» أثناء عبور قادم</td>
-<td>مؤكد — الجهة الرسمية</td>
+<td data-label="التاريخ">13 أكتوبر 2026</td>
+<td data-label="الوقت (UTC)">16:40</td>
+<td data-label="الوقت (البحرين)">19:40</td>
+<td data-label="الحدث">إصابة «<span class="ltr">GFS GISELLE</span>» أثناء عبور قادم</td>
+<td data-label="حالة التحقق">مؤكد — الجهة الرسمية</td>
 </tr>
 <tr>
-<td>13 أكتوبر 2026</td>
-<td>17:00</td>
-<td>20:00</td>
-<td>إصابة «AL <span class="ltr">SAADIYAT</span>» أثناء عبور مغادر، بأضرار طفيفة بلا إصابات وواصلت الرحلة</td>
-<td>مؤكد — تحليل مهني</td>
+<td data-label="التاريخ">13 أكتوبر 2026</td>
+<td data-label="الوقت (UTC)">17:00</td>
+<td data-label="الوقت (البحرين)">20:00</td>
+<td data-label="الحدث">إصابة «AL <span class="ltr">SAADIYAT</span>» أثناء عبور مغادر، بأضرار طفيفة بلا إصابات وواصلت الرحلة</td>
+<td data-label="حالة التحقق">مؤكد — تحليل مهني</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td data-label="التاريخ"></td>
+<td data-label="الوقت (UTC)"></td>
+<td data-label="الوقت (البحرين)"></td>
+<td data-label="الحدث"></td>
+<td data-label="حالة التحقق"></td>
 </tr>
 <tr>
-<td>13 أكتوبر 2026</td>
-<td>17:55</td>
-<td>20:55</td>
-<td>اعتراض الحرس الثوري ناقلة النفط «<span class="ltr">GOL</span>» قرب المدخل، فعدلت عن العبور</td>
-<td>نقل مهني موثوق</td>
+<td data-label="التاريخ">13 أكتوبر 2026</td>
+<td data-label="الوقت (UTC)">17:55</td>
+<td data-label="الوقت (البحرين)">20:55</td>
+<td data-label="الحدث">اعتراض الحرس الثوري ناقلة النفط «<span class="ltr">GOL</span>» قرب المدخل، فعدلت عن العبور</td>
+<td data-label="حالة التحقق">نقل مهني موثوق</td>
 </tr>
 <tr>
-<td>14 أكتوبر 2026</td>
-<td>03:00</td>
-<td>06:00</td>
-<td><span class="ltr">NAVAREA IX</span>: أُبلغ عن حريق في «<span class="ltr">GFS PRIDE</span>» وانجرافها</td>
-<td>مؤكد — تحذير ملاحي رسمي</td>
+<td data-label="التاريخ">14 أكتوبر 2026</td>
+<td data-label="الوقت (UTC)">03:00</td>
+<td data-label="الوقت (البحرين)">06:00</td>
+<td data-label="الحدث"><span class="ltr">NAVAREA IX</span>: أُبلغ عن حريق في «<span class="ltr">GFS PRIDE</span>» وانجرافها</td>
+<td data-label="حالة التحقق">مؤكد — تحذير ملاحي رسمي</td>
 </tr>
 <tr>
-<td>14 أكتوبر 2026</td>
-<td>—</td>
-<td>—</td>
-<td>الجهة الرسمية السنغافورية تؤكد الغرق وسلامة الطواقم</td>
-<td>مؤكد رسميًا من <span class="ltr">MPA</span></td>
+<td data-label="التاريخ">14 أكتوبر 2026</td>
+<td data-label="الوقت (UTC)">—</td>
+<td data-label="الوقت (البحرين)">—</td>
+<td data-label="الحدث">الجهة الرسمية السنغافورية تؤكد الغرق وسلامة الطواقم</td>
+<td data-label="حالة التحقق">مؤكد رسميًا من <span class="ltr">MPA</span></td>
 </tr>
 <tr>
-<td>14 أكتوبر 2026</td>
-<td>—</td>
-<td>—</td>
-<td>تحذير الملّاحين الباكستاني: موضع الغرق أربعة أميال بحرية شمال غرب رأس الشيخ مسعود</td>
-<td>رسمي ملاحي</td>
+<td data-label="التاريخ">14 أكتوبر 2026</td>
+<td data-label="الوقت (UTC)">—</td>
+<td data-label="الوقت (البحرين)">—</td>
+<td data-label="الحدث">تحذير الملّاحين الباكستاني: موضع الغرق أربعة أميال بحرية شمال غرب رأس الشيخ مسعود</td>
+<td data-label="حالة التحقق">رسمي ملاحي</td>
 </tr>
 <tr>
-<td>14 أكتوبر 2026</td>
-<td>—</td>
-<td>—</td>
-<td>إدراج الحادثين في سجل المنظمة البحرية الدولية</td>
-<td>مؤكد رسميًا من <span class="ltr">IMO</span></td>
+<td data-label="التاريخ">14 أكتوبر 2026</td>
+<td data-label="الوقت (UTC)">—</td>
+<td data-label="الوقت (البحرين)">—</td>
+<td data-label="الحدث">إدراج الحادثين في سجل المنظمة البحرية الدولية</td>
+<td data-label="حالة التحقق">مؤكد رسميًا من <span class="ltr">IMO</span></td>
 </tr>
 </tbody></table></div>
 <ol><li>اعتماد التوقيتين يزيل أي التباس في التواريخ: بعض المصادر تؤرّخ بتوقيتها المحلي، والإصابة التي وقعت الساعة 16:40 <span class="ltr">UTC</span> يوم 13 أكتوبر 2026 توافق 19:40 بتوقيت البحرين في اليوم نفسه.</li></ol>
@@ -977,41 +1000,41 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <p><strong>السفن المتصلة بالحادث</strong></p>
 <ol><li>جدول 3 يبيّن السفن المتصلة، وترتيبها بحسب قوة الصلة.</li></ol>
 <p><strong>جدول 3 — السفن المتصلة مباشرة</strong></p>
-<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">السفينة</th>
 <th scope="col">نوع الصلة</th>
 <th scope="col">الحالة</th>
 </tr></thead><tbody>
 <tr>
-<td>«<span class="ltr">GFS GISELLE</span>»</td>
-<td>سفينة شقيقة في الأسطول نفسه، أُصيبت في النافذة نفسها</td>
-<td>تضرر البدن · أبحرت لمرسى آمن</td>
+<td data-label="السفينة">«<span class="ltr">GFS GISELLE</span>»</td>
+<td data-label="نوع الصلة">سفينة شقيقة في الأسطول نفسه، أُصيبت في النافذة نفسها</td>
+<td data-label="الحالة">تضرر البدن · أبحرت لمرسى آمن</td>
 </tr>
 <tr>
-<td>«AL <span class="ltr">SAADIYAT</span>»</td>
-<td>سفينة حاويات في الأسطول نفسه، أُصيبت أثناء عبور مغادر</td>
-<td>لا خسائر ولا أضرار جسيمة</td>
+<td data-label="السفينة">«AL <span class="ltr">SAADIYAT</span>»</td>
+<td data-label="نوع الصلة">سفينة حاويات في الأسطول نفسه، أُصيبت أثناء عبور مغادر</td>
+<td data-label="الحالة">لا خسائر ولا أضرار جسيمة</td>
 </tr>
 <tr>
-<td>«<span class="ltr">ALFONSO</span>»</td>
-<td>ناقلة أُصيبت في النافذة نفسها (بلاغ <span class="ltr">UKMTO</span> رقم 171)</td>
-<td>الحالة غير واضحة · مُدرجة في القائمة الإيرانية</td>
+<td data-label="السفينة">«<span class="ltr">ALFONSO</span>»</td>
+<td data-label="نوع الصلة">ناقلة أُصيبت في النافذة نفسها (بلاغ <span class="ltr">UKMTO</span> رقم 171)</td>
+<td data-label="الحالة">الحالة غير واضحة · مُدرجة في القائمة الإيرانية</td>
 </tr>
 <tr>
-<td>«<span class="ltr">GOL</span>»</td>
-<td>ناقلة نفط ناداها الحرس الثوري وضغط عليها عند المدخل</td>
-<td>غيّرت مسارها ولم تُصب</td>
+<td data-label="السفينة">«<span class="ltr">GOL</span>»</td>
+<td data-label="نوع الصلة">ناقلة نفط ناداها الحرس الثوري وضغط عليها عند المدخل</td>
+<td data-label="الحالة">غيّرت مسارها ولم تُصب</td>
 </tr>
 <tr>
-<td>«<span class="ltr">CAPE DAO</span>»</td>
-<td>سفينة بضائع جافة أُصيبت في 23 سبتمبر ثم غرقت في 13 أكتوبر</td>
-<td>غرقت · قتيل واحد · إدارة إماراتية</td>
+<td data-label="السفينة">«<span class="ltr">CAPE DAO</span>»</td>
+<td data-label="نوع الصلة">سفينة بضائع جافة أُصيبت في 23 سبتمبر ثم غرقت في 13 أكتوبر</td>
+<td data-label="الحالة">غرقت · قتيل واحد · إدارة إماراتية</td>
 </tr>
 <tr>
-<td>«<span class="ltr">GFS GALAXY</span>»</td>
-<td>سفينة في الأسطول نفسه، أُصيبت في 11 يوليو</td>
-<td>أضرار في غرفة المحركات وحريق · قتيل واحد</td>
+<td data-label="السفينة">«<span class="ltr">GFS GALAXY</span>»</td>
+<td data-label="نوع الصلة">سفينة في الأسطول نفسه، أُصيبت في 11 يوليو</td>
+<td data-label="الحالة">أضرار في غرفة المحركات وحريق · قتيل واحد</td>
 </tr>
 </tbody></table></div>
 <ol><li><strong>الأثر:</strong> تكرار استهداف الأسطول نفسه في يوليو وأكتوبر مؤشر استخباري يستوجب رفع درجة التهديد لهذا المشغّل ولسفنه كلها، لا الاكتفاء بتقييم السفينة الواحدة.</li></ol>
@@ -1051,7 +1074,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <ol><li>ثبّت رمزي الحادثين في الدفتر التراكمي، واربطهما بخلفيتهما: «<span class="ltr">GFS GALAXY</span>» في يوليو و«<span class="ltr">CAPE DAO</span>» في سبتمبر. <strong>المنفذ:</strong> خلية الذاكرة. <strong>السبب:</strong> حفظ الترابط التحليلي. <strong>الأثر المتوقع:</strong> قراءة الاتجاه لا الخبر المفرد.</li></ol>
 <ol><li>تابع ثلاثة بنود مفتوحة: تقرير السلامة الرسمي، وحالة «<span class="ltr">ALFONSO</span>»، ومصير الحطام. <strong>المنفذ:</strong> خلية الرصد. <strong>السبب:</strong> بنود تؤثر في التصنيف النهائي. <strong>الأثر المتوقع:</strong> تحديث التقدير عند ورود معطى جديد.</li></ol>
 <ol><li>أبقِ تقييم رواية اللغم عند «لا يمكن الحكم» حتى ورود تحقق مستقل. <strong>المنفذ:</strong> خلية التوثيق. <strong>السبب:</strong> حماية درجة الإثبات. <strong>الأثر المتوقع:</strong> منع تسرب ادعاء إلى سجل الوقائع.</li></ol>
-<p><strong>الرتبة والاسم:</strong> (بانتظار تأكيد الرتبة) فهد الدوسري</p></section><section class="doc reveal" id="sec-06" aria-labelledby="h-06"><h2 id="h-06"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>ملحق &quot;أ&quot; — المصادر ودرجة التحقق</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<p><strong>الرتبة والاسم:</strong> (بانتظار تأكيد الرتبة) فهد الدوسري</p></section><section class="doc reveal" id="sec-06" aria-labelledby="h-06"><h2 id="h-06"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>ملحق &quot;أ&quot; — المصادر ودرجة التحقق</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">المصدر</th>
 <th scope="col">النوع</th>
@@ -1059,70 +1082,70 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <th scope="col">ما استُخدم منه</th>
 </tr></thead><tbody>
 <tr>
-<td>هيئة الموانئ والملاحة بسنغافورة (<span class="ltr">MPA</span>)</td>
-<td>مؤكد رسميًا من <span class="ltr">MPA</span></td>
-<td>A/1</td>
-<td>تاريخ الإصابة، أرقام الطواقم، الغرق، الأضرار</td>
+<td data-label="المصدر">هيئة الموانئ والملاحة بسنغافورة (<span class="ltr">MPA</span>)</td>
+<td data-label="النوع">مؤكد رسميًا من <span class="ltr">MPA</span></td>
+<td data-label="الموثوقية/المصداقية">A/1</td>
+<td data-label="ما استُخدم منه">تاريخ الإصابة، أرقام الطواقم، الغرق، الأضرار</td>
 </tr>
 <tr>
-<td><span class="ltr">UKMTO</span></td>
-<td>مؤكد رسميًا من <span class="ltr">UKMTO</span></td>
-<td>A/2</td>
-<td>نافذة الإصابة، نمط «مقذوف غير معروف»</td>
+<td data-label="المصدر"><span class="ltr">UKMTO</span></td>
+<td data-label="النوع">مؤكد رسميًا من <span class="ltr">UKMTO</span></td>
+<td data-label="الموثوقية/المصداقية">A/2</td>
+<td data-label="ما استُخدم منه">نافذة الإصابة، نمط «مقذوف غير معروف»</td>
 </tr>
 <tr>
-<td>المنظمة البحرية الدولية (<span class="ltr">IMO</span>)</td>
-<td>مؤكد رسميًا من <span class="ltr">IMO</span></td>
-<td>A/1</td>
-<td>إدراج السفينتين، العدّاد الرسمي، «لا تلوث»</td>
+<td data-label="المصدر">المنظمة البحرية الدولية (<span class="ltr">IMO</span>)</td>
+<td data-label="النوع">مؤكد رسميًا من <span class="ltr">IMO</span></td>
+<td data-label="الموثوقية/المصداقية">A/1</td>
+<td data-label="ما استُخدم منه">إدراج السفينتين، العدّاد الرسمي، «لا تلوث»</td>
 </tr>
 <tr>
-<td><span class="ltr">NAVAREA IX</span></td>
-<td>رسمي ملاحي</td>
-<td>A/1</td>
-<td>اشتعال السفينة وانجرافها ثم الغرق</td>
+<td data-label="المصدر"><span class="ltr">NAVAREA IX</span></td>
+<td data-label="النوع">رسمي ملاحي</td>
+<td data-label="الموثوقية/المصداقية">A/1</td>
+<td data-label="ما استُخدم منه">اشتعال السفينة وانجرافها ثم الغرق</td>
 </tr>
 <tr>
-<td>الهيدروغرافي الباكستاني</td>
-<td>رسمي ملاحي</td>
-<td>A/1</td>
-<td>موضع الغرق</td>
+<td data-label="المصدر">الهيدروغرافي الباكستاني</td>
+<td data-label="النوع">رسمي ملاحي</td>
+<td data-label="الموثوقية/المصداقية">A/1</td>
+<td data-label="ما استُخدم منه">موضع الغرق</td>
 </tr>
 <tr>
-<td>رويترز</td>
-<td>نقل إعلامي مهني</td>
-<td>B/2</td>
-<td>تأكيد الغرق، السياق</td>
+<td data-label="المصدر">رويترز</td>
+<td data-label="النوع">نقل إعلامي مهني</td>
+<td data-label="الموثوقية/المصداقية">B/2</td>
+<td data-label="ما استُخدم منه">تأكيد الغرق، السياق</td>
 </tr>
 <tr>
-<td>Marisks · Ambrey · Vanguard</td>
-<td>مهني أمن بحري</td>
-<td>B/2</td>
-<td>موقع الإصابة، هوية السفن، التوقيتات</td>
+<td data-label="المصدر">Marisks · Ambrey · Vanguard</td>
+<td data-label="النوع">مهني أمن بحري</td>
+<td data-label="الموثوقية/المصداقية">B/2</td>
+<td data-label="ما استُخدم منه">موقع الإصابة، هوية السفن، التوقيتات</td>
 </tr>
 <tr>
-<td>Loadstar · Seatrade · Riviera · WorldCargo · Ship&amp;Bunker</td>
-<td>مهني قطاعي</td>
-<td>B/2</td>
-<td>تفاصيل الأسطول والخطوط والملكية</td>
+<td data-label="المصدر">Loadstar · Seatrade · Riviera · WorldCargo · Ship&amp;Bunker</td>
+<td data-label="النوع">مهني قطاعي</td>
+<td data-label="الموثوقية/المصداقية">B/2</td>
+<td data-label="ما استُخدم منه">تفاصيل الأسطول والخطوط والملكية</td>
 </tr>
 <tr>
-<td>VesselFinder · MarineTraffic · Equasis</td>
-<td>تسجيل وتتبع سفن</td>
-<td>C/3</td>
-<td>المواصفات والرحلات</td>
+<td data-label="المصدر">VesselFinder · MarineTraffic · Equasis</td>
+<td data-label="النوع">تسجيل وتتبع سفن</td>
+<td data-label="الموثوقية/المصداقية">C/3</td>
+<td data-label="ما استُخدم منه">المواصفات والرحلات</td>
 </tr>
 <tr>
-<td>بيانات الحرس الثوري</td>
-<td>رواية طرف</td>
-<td>D/4</td>
-<td>رواية اللغم — تُذكر كرواية</td>
+<td data-label="المصدر">بيانات الحرس الثوري</td>
+<td data-label="النوع">رواية طرف</td>
+<td data-label="الموثوقية/المصداقية">D/4</td>
+<td data-label="ما استُخدم منه">رواية اللغم — تُذكر كرواية</td>
 </tr>
 <tr>
-<td>تداولات اجتماعية</td>
-<td>غير رسمي</td>
-<td>E/6</td>
-<td>صور الدخان والحاويات — لا تُعد تحققًا</td>
+<td data-label="المصدر">تداولات اجتماعية</td>
+<td data-label="النوع">غير رسمي</td>
+<td data-label="الموثوقية/المصداقية">E/6</td>
+<td data-label="ما استُخدم منه">صور الدخان والحاويات — لا تُعد تحققًا</td>
 </tr>
 </tbody></table></div></section><section class="doc reveal" id="sec-07" aria-labelledby="h-07"><h2 id="h-07"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>ملحق &quot;ب&quot; — المجهولات</h2><div class="h-rule"></div><ol><li>لا مصدر رسمي للجهة المنفذة، ولا نوع محدد للمقذوف، ولا فحص فني منشور للحطام.</li></ol>
 <ol><li>رواية اللغم غير محسومة، وبيان الحمولة الرسمي غير منشور، وعدد الحاويات المفقودة غير معلوم رسميًا.</li></ol>
@@ -1132,7 +1155,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> تقرير خاص — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: <span class="ltr">UTC</span> وتوقيت البحرين (<span class="ltr">UTC</span>+3).
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-21 14:33 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-21 15:23 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
     
   </footer>
 </div>

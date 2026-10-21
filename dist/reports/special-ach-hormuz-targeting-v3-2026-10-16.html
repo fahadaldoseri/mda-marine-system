@@ -676,6 +676,29 @@ section.doc{scroll-margin-top:0 !important}
 /* رقم المعلّم: نص داكن على معلّم فاتح، ومقلوب في الوضع النهاري */
 body:not(.daylight) .lg-num{color:#04120f}
 body.daylight .lg-num{color:#ffffff}
+
+/* بطاقات الجوال للجداول — البند المعتمد 21 أكتوبر 2026 */
+@media (max-width:560px){
+  table.cardified{display:block;border:0;background:transparent;border-radius:0}
+  table.cardified.cardified{width:100%;max-width:100%;min-width:0}
+  table.cardified thead{display:none}
+  table.cardified tbody{display:block;max-width:100%}
+  table.cardified tr{display:block;max-width:100%;box-sizing:border-box;background:var(--panel);
+    border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin:0 0 10px}
+  table.cardified td{display:grid;grid-template-columns:minmax(72px,auto) minmax(0,1fr);gap:8px;
+    border:0;padding:5px 0;align-items:baseline;text-align:start;
+    overflow-wrap:anywhere;word-break:break-word;min-width:0}
+  table.cardified td::before{content:attr(data-label);color:var(--muted);font-size:12.5px;font-weight:600}
+  table.cardified td:empty{display:none}
+  .tbl-wrap:has(table.cardified),.tbl-scroll:has(table.cardified){overflow:visible;border:0}
+  .tbl-hint{display:none}
+}
+/* بانر النسخة المستبدلة — البند المعتمد 21 أكتوبر 2026 */
+.sup-banner{margin:0 0 20px;padding:12px 16px;border:1px solid #c9a24f;border-radius:10px;
+  background:#2a2210;color:#ffd88a;font-size:14px}
+body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
+.sup-banner a{color:inherit;font-weight:700;text-decoration:underline}
+.sp-dim{opacity:.72}
 </style></head>
 <body><nav class="site-nav no-print" aria-label="تنقل الموقع">
   <div class="sn-inner">
@@ -735,7 +758,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     <div class="threat risk-high"><div class="lbl">مستوى التهديد</div><div class="val">مرتفع</div></div>
     <div>
       <p class="lede">من العدّ الثنائي للتناقضات إلى مجموع موزون: وزن موثوقية المصدر × القوة التشخيصية، مع نسبة عدم التناسب R كوزن في دليل المقام. النتيجة بعد تدقيق مستقل: فرضية الانتماء أولًا (19.35) والخط الملاحي ثانيًا (14.32)، والعلم السنغافوري ساقطة بصافي سالب. والترتيب صمد في تسعة من عشرة سيناريوهات حساسية.</p>
-      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-21 14:33 <span class="ltr">UTC</span></b></span></div>
+      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-21 15:23 <span class="ltr">UTC</span></b></span></div>
     </div>
   </header>
 
@@ -747,67 +770,67 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <main>
     
-    <section class="doc reveal" id="sec-01" aria-labelledby="h-01"><h2 id="h-01"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>1. ما تغيّر</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+    <section class="doc reveal" id="sec-01" aria-labelledby="h-01"><h2 id="h-01"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>1. ما تغيّر</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">البند</th>
 <th scope="col">النسخة 2</th>
 <th scope="col">النسخة 3</th>
 </tr></thead><tbody>
 <tr>
-<td>طريقة الترجيح</td>
-<td>عدّ التناقضات</td>
-<td><strong>مجموع موزون:</strong> وزن الدرجة × القوة التشخيصية، مع زيادة مستقلة لمعامل R</td>
+<td data-label="البند">طريقة الترجيح</td>
+<td data-label="النسخة 2">عدّ التناقضات</td>
+<td data-label="النسخة 3"><strong>مجموع موزون:</strong> وزن الدرجة × القوة التشخيصية، مع زيادة مستقلة لمعامل R</td>
 </tr>
 <tr>
-<td>قيمة الأدلة</td>
-<td>متساوية</td>
-<td>متفاوتة بحسب موثوقية المصدر وقوّته التشخيصية</td>
+<td data-label="البند">قيمة الأدلة</td>
+<td data-label="النسخة 2">متساوية</td>
+<td data-label="النسخة 3">متفاوتة بحسب موثوقية المصدر وقوّته التشخيصية</td>
 </tr>
 <tr>
-<td>دليل المقام</td>
-<td>خلية إشارة فقط</td>
-<td><strong>معامل كمّي</strong> مشتق من R (2.3–12.2)</td>
+<td data-label="البند">دليل المقام</td>
+<td data-label="النسخة 2">خلية إشارة فقط</td>
+<td data-label="النسخة 3"><strong>معامل كمّي</strong> مشتق من R (2.3–12.2)</td>
 </tr>
 <tr>
-<td>المخرجات</td>
-<td>ترتيب وصفي</td>
-<td>ترتيب رقمي + <strong>تغطية</strong> و<strong>نقاء</strong> و<strong>كتلة تناقض</strong> لكل فرضية</td>
+<td data-label="البند">المخرجات</td>
+<td data-label="النسخة 2">ترتيب وصفي</td>
+<td data-label="النسخة 3">ترتيب رقمي + <strong>تغطية</strong> و<strong>نقاء</strong> و<strong>كتلة تناقض</strong> لكل فرضية</td>
 </tr>
 <tr>
-<td>الاختبار</td>
-<td>مصفوفة واحدة</td>
-<td>مصفوفة + <strong>تسعة سيناريوهات حساسية</strong> + <strong>فحص بايزي</strong> بين الفرصيتين الأوليين + <strong>تدقيق مستقل</strong></td>
+<td data-label="البند">الاختبار</td>
+<td data-label="النسخة 2">مصفوفة واحدة</td>
+<td data-label="النسخة 3">مصفوفة + <strong>تسعة سيناريوهات حساسية</strong> + <strong>فحص بايزي</strong> بين الفرصيتين الأوليين + <strong>تدقيق مستقل</strong></td>
 </tr>
 </tbody></table></div></section><section class="doc reveal" id="sec-02" aria-labelledby="h-02"><h2 id="h-02"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>2. النموذج</h2><div class="h-rule"></div><blockquote><strong>الناتج = Σ (وزن الدرجة × القوة التشخيصية + معامل R) × قيمة الإشارة</strong></blockquote>
-<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">العنصر</th>
 <th scope="col">القيم</th>
 </tr></thead><tbody>
 <tr>
-<td>وزن الدرجة</td>
-<td>A/1 = 1.00 · A/2 = 0.90 · B/2 = 0.70 · C/3 = 0.45 · D/4 = 0.20 · F/6 = 0.05</td>
+<td data-label="العنصر">وزن الدرجة</td>
+<td data-label="القيم">A/1 = 1.00 · A/2 = 0.90 · B/2 = 0.70 · C/3 = 0.45 · D/4 = 0.20 · F/6 = 0.05</td>
 </tr>
 <tr>
-<td>القوة التشخيصية</td>
-<td>0.5 ضعيف · 1.0 عادي · 1.25–1.5 قوي · 2.0 حاسم</td>
+<td data-label="العنصر">القوة التشخيصية</td>
+<td data-label="القيم">0.5 ضعيف · 1.0 عادي · 1.25–1.5 قوي · 2.0 حاسم</td>
 </tr>
 <tr>
-<td>معامل R</td>
-<td><strong>زيادة مستقلة</strong> = clamp(log₂ R، 0، 2) — لا مضاعفة للتشخيصية (تعديل التدقيق)</td>
+<td data-label="العنصر">معامل R</td>
+<td data-label="القيم"><strong>زيادة مستقلة</strong> = clamp(log₂ R، 0، 2) — لا مضاعفة للتشخيصية (تعديل التدقيق)</td>
 </tr>
 <tr>
-<td>قيمة الإشارة</td>
-<td>++ = +2 · + = +1 · 0 = 0 · − =</td>
+<td data-label="العنصر">قيمة الإشارة</td>
+<td data-label="القيم">++ = +2 · + = +1 · 0 = 0 · − =</td>
 </tr>
 <tr>
-<td>قيمة الإشارة</td>
-<td>++ = +2 · + = +1 · 0 = 0 · − = −1 · −− = −2</td>
+<td data-label="العنصر">قيمة الإشارة</td>
+<td data-label="القيم">++ = +2 · + = +1 · 0 = 0 · − = −1 · −− = −2</td>
 </tr>
 </tbody></table></div>
 <p><strong>مقاييس المخرجات:</strong></p>
 <ul><li><strong>الصافي الموزون:</strong> مجموع الإشارات الموزونة — مقياس الترتيب الأساسي.</li><li><strong>التغطية:</strong> نصيب الأدلة الداعمة من وزن الأدلة الكلي — كم من الأدلة يفسّره هذا التفسير.</li><li><strong>النقاء:</strong> وزن الدعم ÷ (الدعم + التناقض) — 100% تعني بلا أي دليل مناقض.</li><li><strong>كتلة التناقض:</strong> مجموع أوزان الأدلة المعارضة.</li></ul>
-<p><strong>تحذير إلزامي:</strong> الأوزان والقوى التشخيصية <strong>اجتهاد معلن</strong> لا معيار منشور. النموذج يرتّب قوة التفسير ولا يُنتج احتمالًا مضبوطًا؛ ولهذا أُرفق بتحليل حساسية وفحص بايزي وتدقيق مستقل.</p></section><section class="doc reveal" id="sec-03" aria-labelledby="h-03"><h2 id="h-03"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>3. الأدلة والأوزان (نسخة 3.1 — بعد التدقيق)</h2><div class="h-rule"></div><span class="tbl-hint">اسحب الجدول أفقيًا لرؤية بقية الأعمدة</span><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول يحتاج تمريرًا أفقيًا"><table>
+<p><strong>تحذير إلزامي:</strong> الأوزان والقوى التشخيصية <strong>اجتهاد معلن</strong> لا معيار منشور. النموذج يرتّب قوة التفسير ولا يُنتج احتمالًا مضبوطًا؛ ولهذا أُرفق بتحليل حساسية وفحص بايزي وتدقيق مستقل.</p></section><section class="doc reveal" id="sec-03" aria-labelledby="h-03"><h2 id="h-03"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>3. الأدلة والأوزان (نسخة 3.1 — بعد التدقيق)</h2><div class="h-rule"></div><span class="tbl-hint">اسحب الجدول أفقيًا لرؤية بقية الأعمدة</span><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول يحتاج تمريرًا أفقيًا"><table class="cardified">
 <thead><tr>
 <th scope="col">#</th>
 <th scope="col">الدليل</th>
@@ -820,312 +843,312 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <th scope="col">H4</th>
 </tr></thead><tbody>
 <tr>
-<td>E1</td>
-<td>ثلاث إصابات لأسطول واحد في ثلاثة أشهر وصفر خارجه</td>
-<td>B/2</td>
-<td class="num">1.5</td>
-<td class="num">1.05</td>
-<td class="num">+2.10</td>
-<td class="num">+1.05</td>
-<td class="num">+1.05</td>
-<td class="num">+2.10</td>
+<td data-label="#">E1</td>
+<td data-label="الدليل">ثلاث إصابات لأسطول واحد في ثلاثة أشهر وصفر خارجه</td>
+<td data-label="الدرجة">B/2</td>
+<td class="num" data-label="القوة">1.5</td>
+<td class="num" data-label="الوزن">1.05</td>
+<td class="num" data-label="H1">+2.10</td>
+<td class="num" data-label="H2">+1.05</td>
+<td class="num" data-label="H3">+1.05</td>
+<td class="num" data-label="H4">+2.10</td>
 </tr>
 <tr>
-<td>E2</td>
-<td>ثلاثة ضحايا يرفعون علم سنغافورة</td>
-<td>A/1</td>
-<td class="num">1.0</td>
-<td class="num">1.00</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td><strong>+1.00</strong></td>
-<td class="num">0</td>
+<td data-label="#">E2</td>
+<td data-label="الدليل">ثلاثة ضحايا يرفعون علم سنغافورة</td>
+<td data-label="الدرجة">A/1</td>
+<td class="num" data-label="القوة">1.0</td>
+<td class="num" data-label="الوزن">1.00</td>
+<td class="num" data-label="H1">0</td>
+<td class="num" data-label="H2">0</td>
+<td data-label="H3"><strong>+1.00</strong></td>
+<td class="num" data-label="H4">0</td>
 </tr>
 <tr>
-<td>E3</td>
-<td>ضحايا بأعلام ومشغّلين متنوعين</td>
-<td>C/3</td>
-<td class="num">1.5</td>
-<td class="num">0.68</td>
-<td><strong>−0.68</strong></td>
-<td class="num">+1.35</td>
-<td>−1.35</td>
-<td class="num">0</td>
+<td data-label="#">E3</td>
+<td data-label="الدليل">ضحايا بأعلام ومشغّلين متنوعين</td>
+<td data-label="الدرجة">C/3</td>
+<td class="num" data-label="القوة">1.5</td>
+<td class="num" data-label="الوزن">0.68</td>
+<td data-label="H1"><strong>−0.68</strong></td>
+<td class="num" data-label="H2">+1.35</td>
+<td data-label="H3">−1.35</td>
+<td class="num" data-label="H4">0</td>
 </tr>
 <tr>
-<td>E4</td>
-<td>التقييم الرسمي: أربع ناقلات وأربع حاويات</td>
-<td>A/2</td>
-<td class="num">1.0</td>
-<td class="num">0.90</td>
-<td class="num">0</td>
-<td class="num">+0.90</td>
-<td>−0.90</td>
-<td class="num">0</td>
+<td data-label="#">E4</td>
+<td data-label="الدليل">التقييم الرسمي: أربع ناقلات وأربع حاويات</td>
+<td data-label="الدرجة">A/2</td>
+<td class="num" data-label="القوة">1.0</td>
+<td class="num" data-label="الوزن">0.90</td>
+<td class="num" data-label="H1">0</td>
+<td class="num" data-label="H2">+0.90</td>
+<td data-label="H3">−0.90</td>
+<td class="num" data-label="H4">0</td>
 </tr>
 <tr>
-<td>E5</td>
-<td>تنوع أنواع السفن المستهدفة</td>
-<td>A/1</td>
-<td class="num">0.5</td>
-<td class="num">0.50</td>
-<td class="num">0</td>
-<td class="num">+0.50</td>
-<td class="num">0</td>
-<td class="num">+0.50</td>
+<td data-label="#">E5</td>
+<td data-label="الدليل">تنوع أنواع السفن المستهدفة</td>
+<td data-label="الدرجة">A/1</td>
+<td class="num" data-label="القوة">0.5</td>
+<td class="num" data-label="الوزن">0.50</td>
+<td class="num" data-label="H1">0</td>
+<td class="num" data-label="H2">+0.50</td>
+<td class="num" data-label="H3">0</td>
+<td class="num" data-label="H4">+0.50</td>
 </tr>
 <tr>
-<td>E6</td>
-<td>التمركز داخل المضيق ومياه عُمان</td>
-<td>A/1</td>
-<td class="num">1.5</td>
-<td class="num">1.50</td>
-<td class="num">0</td>
-<td class="num">+3.00</td>
-<td class="num">0</td>
-<td class="num">0</td>
+<td data-label="#">E6</td>
+<td data-label="الدليل">التمركز داخل المضيق ومياه عُمان</td>
+<td data-label="الدرجة">A/1</td>
+<td class="num" data-label="القوة">1.5</td>
+<td class="num" data-label="الوزن">1.50</td>
+<td class="num" data-label="H1">0</td>
+<td class="num" data-label="H2">+3.00</td>
+<td class="num" data-label="H3">0</td>
+<td class="num" data-label="H4">0</td>
 </tr>
 <tr>
-<td>E7</td>
-<td>خطوط مغذية في الخليج</td>
-<td>B/2</td>
-<td class="num">1.0</td>
-<td class="num">0.70</td>
-<td class="num">+0.70</td>
-<td class="num">+1.40</td>
-<td class="num">0</td>
-<td class="num">0</td>
+<td data-label="#">E7</td>
+<td data-label="الدليل">خطوط مغذية في الخليج</td>
+<td data-label="الدرجة">B/2</td>
+<td class="num" data-label="القوة">1.0</td>
+<td class="num" data-label="الوزن">0.70</td>
+<td class="num" data-label="H1">+0.70</td>
+<td class="num" data-label="H2">+1.40</td>
+<td class="num" data-label="H3">0</td>
+<td class="num" data-label="H4">0</td>
 </tr>
 <tr>
-<td>E8</td>
-<td>إسناد أمريكي مباشر لإصابة <span class="ltr">GFS PRIDE</span></td>
-<td>A/2</td>
-<td class="num">1.0</td>
-<td class="num">0.90</td>
-<td><strong>+0.90</strong></td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">+0.90</td>
+<td data-label="#">E8</td>
+<td data-label="الدليل">إسناد أمريكي مباشر لإصابة <span class="ltr">GFS PRIDE</span></td>
+<td data-label="الدرجة">A/2</td>
+<td class="num" data-label="القوة">1.0</td>
+<td class="num" data-label="الوزن">0.90</td>
+<td data-label="H1"><strong>+0.90</strong></td>
+<td class="num" data-label="H2">0</td>
+<td class="num" data-label="H3">0</td>
+<td class="num" data-label="H4">+0.90</td>
 </tr>
 <tr>
-<td>E9</td>
-<td>رواية اللغم البحري الإيرانية</td>
-<td>D/4</td>
-<td class="num">0.5</td>
-<td class="num">0.10</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">0</td>
+<td data-label="#">E9</td>
+<td data-label="الدليل">رواية اللغم البحري الإيرانية</td>
+<td data-label="الدرجة">D/4</td>
+<td class="num" data-label="القوة">0.5</td>
+<td class="num" data-label="الوزن">0.10</td>
+<td class="num" data-label="H1">0</td>
+<td class="num" data-label="H2">0</td>
+<td class="num" data-label="H3">0</td>
+<td class="num" data-label="H4">0</td>
 </tr>
 <tr>
-<td><span class="ltr">E10</span></td>
-<td>إطفاء التتبّع قبل الإصابة والعبور المظلم</td>
-<td>C/3</td>
-<td class="num">1.0</td>
-<td class="num">0.45</td>
-<td class="num">+0.45</td>
-<td class="num">+0.45</td>
-<td class="num">0</td>
-<td class="num">0</td>
+<td data-label="#"><span class="ltr">E10</span></td>
+<td data-label="الدليل">إطفاء التتبّع قبل الإصابة والعبور المظلم</td>
+<td data-label="الدرجة">C/3</td>
+<td class="num" data-label="القوة">1.0</td>
+<td class="num" data-label="الوزن">0.45</td>
+<td class="num" data-label="H1">+0.45</td>
+<td class="num" data-label="H2">+0.45</td>
+<td class="num" data-label="H3">0</td>
+<td class="num" data-label="H4">0</td>
 </tr>
 <tr>
-<td><span class="ltr">E11</span></td>
-<td>الخطاب الإيراني يستهدف بالانتماء لا بالعلم</td>
-<td>D/4</td>
-<td class="num">1.5</td>
-<td class="num">0.30</td>
-<td class="num">+0.30</td>
-<td class="num">+0.30</td>
-<td>−0.30</td>
-<td class="num">+0.60</td>
+<td data-label="#"><span class="ltr">E11</span></td>
+<td data-label="الدليل">الخطاب الإيراني يستهدف بالانتماء لا بالعلم</td>
+<td data-label="الدرجة">D/4</td>
+<td class="num" data-label="القوة">1.5</td>
+<td class="num" data-label="الوزن">0.30</td>
+<td class="num" data-label="H1">+0.30</td>
+<td class="num" data-label="H2">+0.30</td>
+<td data-label="H3">−0.30</td>
+<td class="num" data-label="H4">+0.60</td>
 </tr>
 <tr>
-<td><span class="ltr">E12</span></td>
-<td>لا إصابات مماثلة خارج المضيق في النافذة</td>
-<td>B/2</td>
-<td class="num">1.5</td>
-<td class="num">1.05</td>
-<td class="num">0</td>
-<td class="num">+2.10</td>
-<td class="num">0</td>
-<td class="num">+1.05</td>
+<td data-label="#"><span class="ltr">E12</span></td>
+<td data-label="الدليل">لا إصابات مماثلة خارج المضيق في النافذة</td>
+<td data-label="الدرجة">B/2</td>
+<td class="num" data-label="القوة">1.5</td>
+<td class="num" data-label="الوزن">1.05</td>
+<td class="num" data-label="H1">0</td>
+<td class="num" data-label="H2">+2.10</td>
+<td class="num" data-label="H3">0</td>
+<td class="num" data-label="H4">+1.05</td>
 </tr>
 <tr>
-<td><span class="ltr">E13</span></td>
-<td>إعلان أدنوك الرسمي: 15 سفينة استُهدفت</td>
-<td>A/1</td>
-<td><strong>1.25</strong></td>
-<td class="num">1.25</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">+2.50</td>
+<td data-label="#"><span class="ltr">E13</span></td>
+<td data-label="الدليل">إعلان أدنوك الرسمي: 15 سفينة استُهدفت</td>
+<td data-label="الدرجة">A/1</td>
+<td data-label="القوة"><strong>1.25</strong></td>
+<td class="num" data-label="الوزن">1.25</td>
+<td class="num" data-label="H1">0</td>
+<td class="num" data-label="H2">0</td>
+<td class="num" data-label="H3">0</td>
+<td class="num" data-label="H4">+2.50</td>
 </tr>
 <tr>
-<td><span class="ltr">E14</span></td>
-<td>اختبار المقام: عدم تناسب إصابات أدنوك R 2.3–12.2</td>
-<td>A/1</td>
-<td><strong>1.25</strong></td>
-<td>1.25 <strong>+ 1.20 (R)</strong></td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">+4.90</td>
+<td data-label="#"><span class="ltr">E14</span></td>
+<td data-label="الدليل">اختبار المقام: عدم تناسب إصابات أدنوك R 2.3–12.2</td>
+<td data-label="الدرجة">A/1</td>
+<td data-label="القوة"><strong>1.25</strong></td>
+<td data-label="الوزن">1.25 <strong>+ 1.20 (R)</strong></td>
+<td class="num" data-label="H1">0</td>
+<td class="num" data-label="H2">0</td>
+<td class="num" data-label="H3">0</td>
+<td class="num" data-label="H4">+4.90</td>
 </tr>
 <tr>
-<td><span class="ltr">E15</span></td>
-<td><span class="ltr">ST1</span> مملوكة لـSAFEEN (ذراع أدنوك)</td>
-<td>C/3</td>
-<td class="num">1.5</td>
-<td class="num">0.68</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">+1.35</td>
+<td data-label="#"><span class="ltr">E15</span></td>
+<td data-label="الدليل"><span class="ltr">ST1</span> مملوكة لـSAFEEN (ذراع أدنوك)</td>
+<td data-label="الدرجة">C/3</td>
+<td class="num" data-label="القوة">1.5</td>
+<td class="num" data-label="الوزن">0.68</td>
+<td class="num" data-label="H1">0</td>
+<td class="num" data-label="H2">0</td>
+<td class="num" data-label="H3">0</td>
+<td class="num" data-label="H4">+1.35</td>
 </tr>
 <tr>
-<td><span class="ltr">E16</span></td>
-<td><span class="ltr">CAMEROON PROSPERITY</span> بإدارة أدنوك الفنية</td>
-<td>B/2</td>
-<td class="num">1.0</td>
-<td class="num">0.70</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">+1.40</td>
+<td data-label="#"><span class="ltr">E16</span></td>
+<td data-label="الدليل"><span class="ltr">CAMEROON PROSPERITY</span> بإدارة أدنوك الفنية</td>
+<td data-label="الدرجة">B/2</td>
+<td class="num" data-label="القوة">1.0</td>
+<td class="num" data-label="الوزن">0.70</td>
+<td class="num" data-label="H1">0</td>
+<td class="num" data-label="H2">0</td>
+<td class="num" data-label="H3">0</td>
+<td class="num" data-label="H4">+1.40</td>
 </tr>
 <tr>
-<td><span class="ltr">E17</span></td>
-<td>ON <span class="ltr">PEACE</span> (<span class="ltr">ONEX</span> دبي) وVALTHERA (<span class="ltr">ISM</span> إماراتي)</td>
-<td>C/3</td>
-<td class="num">1.0</td>
-<td class="num">0.45</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">+0.45</td>
+<td data-label="#"><span class="ltr">E17</span></td>
+<td data-label="الدليل">ON <span class="ltr">PEACE</span> (<span class="ltr">ONEX</span> دبي) وVALTHERA (<span class="ltr">ISM</span> إماراتي)</td>
+<td data-label="الدرجة">C/3</td>
+<td class="num" data-label="القوة">1.0</td>
+<td class="num" data-label="الوزن">0.45</td>
+<td class="num" data-label="H1">0</td>
+<td class="num" data-label="H2">0</td>
+<td class="num" data-label="H3">0</td>
+<td class="num" data-label="H4">+0.45</td>
 </tr>
 <tr>
-<td><span class="ltr">E18</span></td>
-<td><span class="ltr">GFS</span>: AD Ports تملك 80–81%</td>
-<td>A/1</td>
-<td class="num">1.5</td>
-<td class="num">1.50</td>
-<td class="num">+3.00</td>
-<td class="num">+1.50</td>
-<td class="num">0</td>
-<td class="num">+3.00</td>
+<td data-label="#"><span class="ltr">E18</span></td>
+<td data-label="الدليل"><span class="ltr">GFS</span>: AD Ports تملك 80–81%</td>
+<td data-label="الدرجة">A/1</td>
+<td class="num" data-label="القوة">1.5</td>
+<td class="num" data-label="الوزن">1.50</td>
+<td class="num" data-label="H1">+3.00</td>
+<td class="num" data-label="H2">+1.50</td>
+<td class="num" data-label="H3">0</td>
+<td class="num" data-label="H4">+3.00</td>
 </tr>
 <tr>
-<td><span class="ltr">E19</span></td>
-<td>توزيع الأعلام على عشرين ضحية</td>
-<td>C/3</td>
-<td class="num">1.5</td>
-<td class="num">0.68</td>
-<td class="num">0</td>
-<td class="num">+0.68</td>
-<td><strong>−0.68</strong></td>
-<td class="num">0</td>
+<td data-label="#"><span class="ltr">E19</span></td>
+<td data-label="الدليل">توزيع الأعلام على عشرين ضحية</td>
+<td data-label="الدرجة">C/3</td>
+<td class="num" data-label="القوة">1.5</td>
+<td class="num" data-label="الوزن">0.68</td>
+<td class="num" data-label="H1">0</td>
+<td class="num" data-label="H2">+0.68</td>
+<td data-label="H3"><strong>−0.68</strong></td>
+<td class="num" data-label="H4">0</td>
 </tr>
 <tr>
-<td><span class="ltr">E20</span></td>
-<td>المقام: 30.25–40 عبورًا يوميًا</td>
-<td>B/2</td>
-<td class="num">1.0</td>
-<td class="num">0.70</td>
-<td class="num">0</td>
-<td class="num">+0.70</td>
-<td class="num">0</td>
-<td class="num">0</td>
+<td data-label="#"><span class="ltr">E20</span></td>
+<td data-label="الدليل">المقام: 30.25–40 عبورًا يوميًا</td>
+<td data-label="الدرجة">B/2</td>
+<td class="num" data-label="القوة">1.0</td>
+<td class="num" data-label="الوزن">0.70</td>
+<td class="num" data-label="H1">0</td>
+<td class="num" data-label="H2">+0.70</td>
+<td class="num" data-label="H3">0</td>
+<td class="num" data-label="H4">0</td>
 </tr>
 <tr>
-<td><span class="ltr">E21</span></td>
-<td>62.7% من عبور أغسطس مظلم</td>
-<td>D/4</td>
-<td><strong>0.5</strong></td>
-<td class="num">0.10</td>
-<td class="num">0</td>
-<td class="num">+0.10</td>
-<td class="num">0</td>
-<td class="num">0</td>
+<td data-label="#"><span class="ltr">E21</span></td>
+<td data-label="الدليل">62.7% من عبور أغسطس مظلم</td>
+<td data-label="الدرجة">D/4</td>
+<td data-label="القوة"><strong>0.5</strong></td>
+<td class="num" data-label="الوزن">0.10</td>
+<td class="num" data-label="H1">0</td>
+<td class="num" data-label="H2">+0.10</td>
+<td class="num" data-label="H3">0</td>
+<td class="num" data-label="H4">0</td>
 </tr>
 <tr>
-<td><span class="ltr">E22</span></td>
-<td>إيران أدرجت <span class="ltr">KITION</span> M وEVER <span class="ltr">VICT</span> في قائمة عدم الامتثال</td>
-<td>C/3</td>
-<td class="num">1.0</td>
-<td class="num">0.45</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">0</td>
+<td data-label="#"><span class="ltr">E22</span></td>
+<td data-label="الدليل">إيران أدرجت <span class="ltr">KITION</span> M وEVER <span class="ltr">VICT</span> في قائمة عدم الامتثال</td>
+<td data-label="الدرجة">C/3</td>
+<td class="num" data-label="القوة">1.0</td>
+<td class="num" data-label="الوزن">0.45</td>
+<td class="num" data-label="H1">0</td>
+<td class="num" data-label="H2">0</td>
+<td class="num" data-label="H3">0</td>
+<td class="num" data-label="H4">0</td>
 </tr>
 <tr>
-<td><span class="ltr">E23</span></td>
-<td>معيار «غير الممتثلة» يستهدف المرتبط بأمريكا وإسرائيل</td>
-<td>D/4</td>
-<td class="num">1.5</td>
-<td class="num">0.30</td>
-<td class="num">0</td>
-<td class="num">+0.30</td>
-<td>−0.30</td>
-<td class="num">+0.60</td>
+<td data-label="#"><span class="ltr">E23</span></td>
+<td data-label="الدليل">معيار «غير الممتثلة» يستهدف المرتبط بأمريكا وإسرائيل</td>
+<td data-label="الدرجة">D/4</td>
+<td class="num" data-label="القوة">1.5</td>
+<td class="num" data-label="الوزن">0.30</td>
+<td class="num" data-label="H1">0</td>
+<td class="num" data-label="H2">+0.30</td>
+<td data-label="H3">−0.30</td>
+<td class="num" data-label="H4">+0.60</td>
 </tr>
 <tr class="total">
-<td>—</td>
-<td><strong>المجموع (مجموع الأوزان 18.38)</strong></td>
-<td>—</td>
-<td>—</td>
-<td>—</td>
-<td><strong>6.77</strong></td>
-<td><strong>14.32</strong></td>
-<td><strong>−1.48</strong></td>
-<td><strong>19.35</strong></td>
+<td data-label="#">—</td>
+<td data-label="الدليل"><strong>المجموع (مجموع الأوزان 18.38)</strong></td>
+<td data-label="الدرجة">—</td>
+<td data-label="القوة">—</td>
+<td data-label="الوزن">—</td>
+<td data-label="H1"><strong>6.77</strong></td>
+<td data-label="H2"><strong>14.32</strong></td>
+<td data-label="H3"><strong>−1.48</strong></td>
+<td data-label="H4"><strong>19.35</strong></td>
 </tr>
 </tbody></table></div>
-<blockquote>الغامق = خلية عُدِّلت بعد التدقيق المستقل.</blockquote></section><section class="doc reveal" id="sec-04" aria-labelledby="h-04"><h2 id="h-04"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>4. التدقيق المستقل — ما اعترض عليه المدقّق وما طُبِّق</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<blockquote>الغامق = خلية عُدِّلت بعد التدقيق المستقل.</blockquote></section><section class="doc reveal" id="sec-04" aria-labelledby="h-04"><h2 id="h-04"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>4. التدقيق المستقل — ما اعترض عليه المدقّق وما طُبِّق</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">الاعتراض</th>
 <th scope="col">الإجراء المطبَّق</th>
 </tr></thead><tbody>
 <tr>
-<td><span class="ltr">E14</span> يضاعف التشخيصية بمعامل R المشتق من النتيجة نفسها</td>
-<td>خُفّضت تشخيصيته إلى 1.25، وصار R <strong>زيادة مستقلة</strong> بحد أقصى 2</td>
+<td data-label="الاعتراض"><span class="ltr">E14</span> يضاعف التشخيصية بمعامل R المشتق من النتيجة نفسها</td>
+<td data-label="الإجراء المطبَّق">خُفّضت تشخيصيته إلى 1.25، وصار R <strong>زيادة مستقلة</strong> بحد أقصى 2</td>
 </tr>
 <tr>
-<td><span class="ltr">E13</span> لا يثبت معيار الاختيار قبل نشر الأسماء والتواريخ</td>
-<td>خُفّضت تشخيصيته من 2.0 إلى 1.25</td>
+<td data-label="الاعتراض"><span class="ltr">E13</span> لا يثبت معيار الاختيار قبل نشر الأسماء والتواريخ</td>
+<td data-label="الإجراء المطبَّق">خُفّضت تشخيصيته من 2.0 إلى 1.25</td>
 </tr>
 <tr>
-<td>E2 «++» للعلم السنغافوري مبالغ فيه (حالتان من الثلاث مرتبطتان بالإمارات)</td>
-<td>صارت «+»</td>
+<td data-label="الاعتراض">E2 «++» للعلم السنغافوري مبالغ فيه (حالتان من الثلاث مرتبطتان بالإمارات)</td>
+<td data-label="الإجراء المطبَّق">صارت «+»</td>
 </tr>
 <tr>
-<td><span class="ltr">E19</span> «−−» ضد العلم السنغافوري بلا مقام عبور حسب العلم</td>
-<td>صارت «−»</td>
+<td data-label="الاعتراض"><span class="ltr">E19</span> «−−» ضد العلم السنغافوري بلا مقام عبور حسب العلم</td>
+<td data-label="الإجراء المطبَّق">صارت «−»</td>
 </tr>
 <tr>
-<td>E3 «−−» ضد فرضية الأسطول أقوى من اللازم</td>
-<td>صارت «−»</td>
+<td data-label="الاعتراض">E3 «−−» ضد فرضية الأسطول أقوى من اللازم</td>
+<td data-label="الإجراء المطبَّق">صارت «−»</td>
 </tr>
 <tr>
-<td>E8 «++» تخلط إسناد إصابة سفينة بإثبات معيار الأسطول</td>
-<td>صارت «+»</td>
+<td data-label="الاعتراض">E8 «++» تخلط إسناد إصابة سفينة بإثبات معيار الأسطول</td>
+<td data-label="الإجراء المطبَّق">صارت «+»</td>
 </tr>
 <tr>
-<td><span class="ltr">E21</span> مصدر ضعيف وقياس مظلم/غير مصنف</td>
-<td>خُفّضت قوته إلى 0.5</td>
+<td data-label="الاعتراض"><span class="ltr">E21</span> مصدر ضعيف وقياس مظلم/غير مصنف</td>
+<td data-label="الإجراء المطبَّق">خُفّضت قوته إلى 0.5</td>
 </tr>
 <tr>
-<td>الضرب البايزي يفترض استقلالًا غير واقعي</td>
-<td>أُضيف نطاق عدم يقين كامل للاحتمال الناتج (27%–98%)</td>
+<td data-label="الاعتراض">الضرب البايزي يفترض استقلالًا غير واقعي</td>
+<td data-label="الإجراء المطبَّق">أُضيف نطاق عدم يقين كامل للاحتمال الناتج (27%–98%)</td>
 </tr>
 <tr>
-<td>عنقود أدلة <span class="ltr">GFS</span>/أدنوك غير مستقل</td>
-<td>أُعلن كأول حد من حدود النموذج، وأُجري سيناريو حذف الكتلة</td>
+<td data-label="الاعتراض">عنقود أدلة <span class="ltr">GFS</span>/أدنوك غير مستقل</td>
+<td data-label="الإجراء المطبَّق">أُعلن كأول حد من حدود النموذج، وأُجري سيناريو حذف الكتلة</td>
 </tr>
-</tbody></table></div></section><section class="doc reveal" id="sec-05" aria-labelledby="h-05"><h2 id="h-05"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>5. النتيجة بعد التدقيق</h2><div class="h-rule"></div><span class="tbl-hint">اسحب الجدول أفقيًا لرؤية بقية الأعمدة</span><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول يحتاج تمريرًا أفقيًا"><table>
+</tbody></table></div></section><section class="doc reveal" id="sec-05" aria-labelledby="h-05"><h2 id="h-05"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>5. النتيجة بعد التدقيق</h2><div class="h-rule"></div><span class="tbl-hint">اسحب الجدول أفقيًا لرؤية بقية الأعمدة</span><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول يحتاج تمريرًا أفقيًا"><table class="cardified">
 <thead><tr>
 <th scope="col">الترتيب</th>
 <th scope="col">الفرضية</th>
@@ -1135,40 +1158,40 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <th scope="col">كتلة التناقض</th>
 </tr></thead><tbody>
 <tr>
-<td><strong>1</strong></td>
-<td><strong>H4 — الانتماء</strong></td>
-<td><strong>19.35</strong></td>
-<td><strong>52.7%</strong></td>
-<td><strong>100%</strong></td>
-<td class="num">0.00</td>
+<td data-label="الترتيب"><strong>1</strong></td>
+<td data-label="الفرضية"><strong>H4 — الانتماء</strong></td>
+<td data-label="الصافي الموزون"><strong>19.35</strong></td>
+<td data-label="التغطية"><strong>52.7%</strong></td>
+<td data-label="النقاء"><strong>100%</strong></td>
+<td class="num" data-label="كتلة التناقض">0.00</td>
 </tr>
 <tr>
-<td>2</td>
-<td>H2 — الخط الملاحي</td>
-<td class="num">14.32</td>
-<td class="num">39.0%</td>
-<td class="num">100%</td>
-<td class="num">0.00</td>
+<td data-label="الترتيب">2</td>
+<td data-label="الفرضية">H2 — الخط الملاحي</td>
+<td class="num" data-label="الصافي الموزون">14.32</td>
+<td class="num" data-label="التغطية">39.0%</td>
+<td class="num" data-label="النقاء">100%</td>
+<td class="num" data-label="كتلة التناقض">0.00</td>
 </tr>
 <tr>
-<td>3</td>
-<td>H1 — الأسطول المسمّى</td>
-<td class="num">6.77</td>
-<td class="num">20.3%</td>
-<td class="num">91.7%</td>
-<td class="num">0.68</td>
+<td data-label="الترتيب">3</td>
+<td data-label="الفرضية">H1 — الأسطول المسمّى</td>
+<td class="num" data-label="الصافي الموزون">6.77</td>
+<td class="num" data-label="التغطية">20.3%</td>
+<td class="num" data-label="النقاء">91.7%</td>
+<td class="num" data-label="كتلة التناقض">0.68</td>
 </tr>
 <tr>
-<td>4</td>
-<td>H3 — العلم السنغافوري</td>
-<td><strong>−1.48</strong></td>
-<td class="num">5.6%</td>
-<td class="num">41.8%</td>
-<td class="num">2.85</td>
+<td data-label="الترتيب">4</td>
+<td data-label="الفرضية">H3 — العلم السنغافوري</td>
+<td data-label="الصافي الموزون"><strong>−1.48</strong></td>
+<td class="num" data-label="التغطية">5.6%</td>
+<td class="num" data-label="النقاء">41.8%</td>
+<td class="num" data-label="كتلة التناقض">2.85</td>
 </tr>
 </tbody></table></div>
 <p><strong>مقارنة قبل التدقيق وبعده:</strong> H4 نزل من 22.35 إلى <strong>19.35</strong>، وH2 من 14.42 إلى <strong>14.32</strong>، وH3 من −1.15 إلى <strong>−1.48</strong>. أي أن التدقيق <strong>قلّص تضخيم H4</strong> ولم يغيّر المتصدر. والفارق بين H4 وH2 بعد التدقيق <strong>5.03 نقطة</strong> (كان 7.93 قبل التدقيق) — فارق أقرب إلى واقع البيانات.</p>
-<p><strong>القراءة:</strong> H4 في المقدمة بتغطية 52.7% ونقاء تام، وH2 ثانيًا بتغطية 39.0% ونقاء تام. وH3 هي الفرضية الوحيدة ذات الصافي <strong>السالب</strong>، أي أن وزن أدلتها المعارضة يفوق الداعمة.</p></section><section class="doc reveal" id="sec-06" aria-labelledby="h-06"><h2 id="h-06"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>6. تحليل الحساسية — تسعة سيناريوهات</h2><div class="h-rule"></div><span class="tbl-hint">اسحب الجدول أفقيًا لرؤية بقية الأعمدة</span><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول يحتاج تمريرًا أفقيًا"><table>
+<p><strong>القراءة:</strong> H4 في المقدمة بتغطية 52.7% ونقاء تام، وH2 ثانيًا بتغطية 39.0% ونقاء تام. وH3 هي الفرضية الوحيدة ذات الصافي <strong>السالب</strong>، أي أن وزن أدلتها المعارضة يفوق الداعمة.</p></section><section class="doc reveal" id="sec-06" aria-labelledby="h-06"><h2 id="h-06"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>6. تحليل الحساسية — تسعة سيناريوهات</h2><div class="h-rule"></div><span class="tbl-hint">اسحب الجدول أفقيًا لرؤية بقية الأعمدة</span><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول يحتاج تمريرًا أفقيًا"><table class="cardified">
 <thead><tr>
 <th scope="col">السيناريو</th>
 <th scope="col">H1</th>
@@ -1178,89 +1201,89 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <th scope="col">المتصدر</th>
 </tr></thead><tbody>
 <tr>
-<td><strong>الأساسي (R = 2.3، أشد الفروض تحفّظًا)</strong></td>
-<td class="num">6.77</td>
-<td class="num">14.32</td>
-<td>−1.48</td>
-<td><strong>19.35</strong></td>
-<td>H4</td>
+<td data-label="السيناريو"><strong>الأساسي (R = 2.3، أشد الفروض تحفّظًا)</strong></td>
+<td class="num" data-label="H1">6.77</td>
+<td class="num" data-label="H2">14.32</td>
+<td data-label="H3">−1.48</td>
+<td data-label="H4"><strong>19.35</strong></td>
+<td data-label="المتصدر">H4</td>
 </tr>
 <tr>
-<td>R مرتفع (12.2)</td>
-<td class="num">6.77</td>
-<td class="num">14.32</td>
-<td>−1.48</td>
-<td><strong>20.90</strong></td>
-<td>H4</td>
+<td data-label="السيناريو">R مرتفع (12.2)</td>
+<td class="num" data-label="H1">6.77</td>
+<td class="num" data-label="H2">14.32</td>
+<td data-label="H3">−1.48</td>
+<td data-label="H4"><strong>20.90</strong></td>
+<td data-label="المتصدر">H4</td>
 </tr>
 <tr>
-<td>بلا أدلة D/4</td>
-<td class="num">6.50</td>
-<td class="num">13.60</td>
-<td>−0.90</td>
-<td><strong>18.10</strong></td>
-<td>H4</td>
+<td data-label="السيناريو">بلا أدلة D/4</td>
+<td class="num" data-label="H1">6.50</td>
+<td class="num" data-label="H2">13.60</td>
+<td data-label="H3">−0.90</td>
+<td data-label="H4"><strong>18.10</strong></td>
+<td data-label="المتصدر">H4</td>
 </tr>
 <tr>
-<td>بلا C/3 وD/4 (المستوى A وB فقط)</td>
-<td class="num">6.70</td>
-<td class="num">11.20</td>
-<td class="num">+1.10</td>
-<td><strong>16.40</strong></td>
-<td>H4</td>
+<td data-label="السيناريو">بلا C/3 وD/4 (المستوى A وB فقط)</td>
+<td class="num" data-label="H1">6.70</td>
+<td class="num" data-label="H2">11.20</td>
+<td class="num" data-label="H3">+1.10</td>
+<td data-label="H4"><strong>16.40</strong></td>
+<td data-label="المتصدر">H4</td>
 </tr>
 <tr>
-<td><strong>بلا معامل R أصلًا</strong></td>
-<td class="num">6.77</td>
-<td class="num">14.32</td>
-<td>−1.48</td>
-<td><strong>16.90</strong></td>
-<td>H4</td>
+<td data-label="السيناريو"><strong>بلا معامل R أصلًا</strong></td>
+<td class="num" data-label="H1">6.77</td>
+<td class="num" data-label="H2">14.32</td>
+<td data-label="H3">−1.48</td>
+<td data-label="H4"><strong>16.90</strong></td>
+<td data-label="المتصدر">H4</td>
 </tr>
 <tr>
-<td>أوزان متساوية</td>
-<td class="num">7.00</td>
-<td class="num">18.00</td>
-<td>−4.00</td>
-<td><strong>22.40</strong></td>
-<td>H4</td>
+<td data-label="السيناريو">أوزان متساوية</td>
+<td class="num" data-label="H1">7.00</td>
+<td class="num" data-label="H2">18.00</td>
+<td data-label="H3">−4.00</td>
+<td data-label="H4"><strong>22.40</strong></td>
+<td data-label="المتصدر">H4</td>
 </tr>
 <tr>
-<td>أوزان متساوية بلا D/4</td>
-<td class="num">6.00</td>
-<td class="num">15.00</td>
-<td>−2.00</td>
-<td><strong>18.40</strong></td>
-<td>H4</td>
+<td data-label="السيناريو">أوزان متساوية بلا D/4</td>
+<td class="num" data-label="H1">6.00</td>
+<td class="num" data-label="H2">15.00</td>
+<td data-label="H3">−2.00</td>
+<td data-label="H4"><strong>18.40</strong></td>
+<td data-label="المتصدر">H4</td>
 </tr>
 <tr>
-<td>حذف عنقود <span class="ltr">GFS</span> (E1 وE18)</td>
-<td class="num">1.70</td>
-<td class="num">11.80</td>
-<td>−2.50</td>
-<td><strong>14.20</strong></td>
-<td>H4 (فارق 2.4)</td>
+<td data-label="السيناريو">حذف عنقود <span class="ltr">GFS</span> (E1 وE18)</td>
+<td class="num" data-label="H1">1.70</td>
+<td class="num" data-label="H2">11.80</td>
+<td data-label="H3">−2.50</td>
+<td data-label="H4"><strong>14.20</strong></td>
+<td data-label="المتصدر">H4 (فارق 2.4)</td>
 </tr>
 <tr>
-<td>حذف الإسناد الأمريكي (E8)</td>
-<td class="num">5.90</td>
-<td class="num">14.30</td>
-<td>−1.48</td>
-<td><strong>18.40</strong></td>
-<td>H4</td>
+<td data-label="السيناريو">حذف الإسناد الأمريكي (E8)</td>
+<td class="num" data-label="H1">5.90</td>
+<td class="num" data-label="H2">14.30</td>
+<td data-label="H3">−1.48</td>
+<td data-label="H4"><strong>18.40</strong></td>
+<td data-label="المتصدر">H4</td>
 </tr>
 <tr>
-<td><strong>بلا كتلة أدلة الانتماء (<span class="ltr">E13</span>–<span class="ltr">E18</span>)</strong></td>
-<td class="num">3.80</td>
-<td><strong>12.80</strong></td>
-<td>−1.48</td>
-<td class="num">5.80</td>
-<td><strong>H2</strong></td>
+<td data-label="السيناريو"><strong>بلا كتلة أدلة الانتماء (<span class="ltr">E13</span>–<span class="ltr">E18</span>)</strong></td>
+<td class="num" data-label="H1">3.80</td>
+<td data-label="H2"><strong>12.80</strong></td>
+<td data-label="H3">−1.48</td>
+<td class="num" data-label="H4">5.80</td>
+<td data-label="المتصدر"><strong>H2</strong></td>
 </tr>
 </tbody></table></div>
 <p><strong>الحكم:</strong> H4 متصدّرة في <strong>تسعة من عشرة</strong> سيناريوهات، بينها سيناريو <strong>حذف معامل R كاملًا</strong> (16.90 مقابل 14.32) — أي أن تصدّرها <strong>لا يعتمد على دليل المقام وحده</strong>. وينكسر الترتيب في سيناريو واحد فقط: <strong>حذف كتلة أدلة الانتماء</strong> — وهو اختبار مقصود لا سيناريو واقعي، لأن الكتلة أدلة قائمة لا محذوفة.</p>
 <p><strong>الاستنتاج الصريح:</strong> تقدّم H4 <strong>مشروط بكتلة أدلة الانتماء</strong>؛ وبلاها يعود الخط الملاحي إلى المقدمة. ولهذا يُعلن أن <strong>H4 وH2 متقاربان ومتكاملان</strong>، لا متنافسان.</p></section><section class="doc reveal" id="sec-07" aria-labelledby="h-07"><h2 id="h-07"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>7. الفحص البايزي بين الفرصيتين الأوليين</h2><div class="h-rule"></div><p>المصفوفة ترتّب ولا تُنتج احتمالًا. لذلك أُجري فحص بايزي منفصل بين H4 وH2 بأربعة أدلة حاكمة و<strong>احتمالات شرطية معلنة واجتهادية</strong> (فرضان مسبقان متساويان):</p>
-<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">الدليل</th>
 <th scope="col">لو كان H4 صحيحًا</th>
@@ -1268,117 +1291,117 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <th scope="col">نسبة الإمكان</th>
 </tr></thead><tbody>
 <tr>
-<td>اختبار المقام (R ≥ 2 لإصابات أسطول إماراتي)</td>
-<td class="num">0.80</td>
-<td class="num">0.15</td>
-<td><strong>5.33</strong></td>
+<td data-label="الدليل">اختبار المقام (R ≥ 2 لإصابات أسطول إماراتي)</td>
+<td class="num" data-label="لو كان H4 صحيحًا">0.80</td>
+<td class="num" data-label="لو كان H2 صحيحًا">0.15</td>
+<td data-label="نسبة الإمكان"><strong>5.33</strong></td>
 </tr>
 <tr>
-<td>ثلاث إصابات لأسطول إماراتي واحد (<span class="ltr">GFS</span>)</td>
-<td class="num">0.60</td>
-<td class="num">0.15</td>
-<td><strong>4.00</strong></td>
+<td data-label="الدليل">ثلاث إصابات لأسطول إماراتي واحد (<span class="ltr">GFS</span>)</td>
+<td class="num" data-label="لو كان H4 صحيحًا">0.60</td>
+<td class="num" data-label="لو كان H2 صحيحًا">0.15</td>
+<td data-label="نسبة الإمكان"><strong>4.00</strong></td>
 </tr>
 <tr>
-<td>تنوّع الضحايا خارج الإمارات وأمريكا وإسرائيل</td>
-<td class="num">0.35</td>
-<td class="num">0.85</td>
-<td><strong>0.41</strong></td>
+<td data-label="الدليل">تنوّع الضحايا خارج الإمارات وأمريكا وإسرائيل</td>
+<td class="num" data-label="لو كان H4 صحيحًا">0.35</td>
+<td class="num" data-label="لو كان H2 صحيحًا">0.85</td>
+<td data-label="نسبة الإمكان"><strong>0.41</strong></td>
 </tr>
 <tr>
-<td>حصر الإصابات داخل المضيق (صفر خارجه)</td>
-<td class="num">0.50</td>
-<td class="num">0.95</td>
-<td><strong>0.53</strong></td>
+<td data-label="الدليل">حصر الإصابات داخل المضيق (صفر خارجه)</td>
+<td class="num" data-label="لو كان H4 صحيحًا">0.50</td>
+<td class="num" data-label="لو كان H2 صحيحًا">0.95</td>
+<td data-label="نسبة الإمكان"><strong>0.53</strong></td>
 </tr>
 </tbody></table></div>
 <p><strong>الناتج الأساسي:</strong> نسبة الأرجحية = 5.33 × 4.00 × 0.41 × 0.53 = <strong>4.63</strong> → <strong>P(H4) ≈ 82%</strong> مقابل P(H2) ≈ 18%.</p>
 <p><strong>ولكن — وهذا هو الأهم:</strong> المدقّق المستقل أعد الحساب ببدائل معقولة للاحتمالات فوجد <strong>نطاقًا واسعًا</strong>:</p>
-<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">السيناريو</th>
 <th scope="col">P(H4)</th>
 <th scope="col">P(H2)</th>
 </tr></thead><tbody>
 <tr>
-<td>أدنى تقدير (احتمالات متحفّظة لـH4 ومتساهلة لـH2)</td>
-<td><strong>27%</strong></td>
-<td class="num">73%</td>
+<td data-label="السيناريو">أدنى تقدير (احتمالات متحفّظة لـH4 ومتساهلة لـH2)</td>
+<td data-label="P(H4)"><strong>27%</strong></td>
+<td class="num" data-label="P(H2)">73%</td>
 </tr>
 <tr>
-<td>الأساسي</td>
-<td><strong>82%</strong></td>
-<td class="num">18%</td>
+<td data-label="السيناريو">الأساسي</td>
+<td data-label="P(H4)"><strong>82%</strong></td>
+<td class="num" data-label="P(H2)">18%</td>
 </tr>
 <tr>
-<td>أعلى تقدير (احتمالات متساهلة لـH4 ومتحفّظة لـH2)</td>
-<td><strong>98%</strong></td>
-<td class="num">2%</td>
+<td data-label="السيناريو">أعلى تقدير (احتمالات متساهلة لـH4 ومتحفّظة لـH2)</td>
+<td data-label="P(H4)"><strong>98%</strong></td>
+<td class="num" data-label="P(H2)">2%</td>
 </tr>
 </tbody></table></div>
 <p><strong>الحكم على الطبقة البايزية:</strong> النطاق الواسع (27%–98%) يعني أن هذه الطبقة <strong>لا تحسم وحدها</strong>، وأن الرقم المفرد 82% <strong>حد إرشادي لا احتمال مضبوط</strong>، لأن الضرب المباشر يفترض استقلالًا غير واقعي بين أدلة مترابطة. الطبقة التي تحمل الوزن الحقيقي هي <strong>المصفوفة الموزونة</strong> لثباتها في تسعة من عشرة سيناريوهات.</p></section><section class="doc reveal" id="sec-08" aria-labelledby="h-08"><h2 id="h-08"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>8. القراءة النهائية</h2><div class="h-rule"></div><blockquote><strong>H4 — الانتماء — هي الفرضية الأولى بترجيح كمّي موزون (19.35 مقابل 14.32 بعد التدقيق)، وتليها H2 — الخط الملاحي — بقوة. والفرضيتان متكاملتان: الانتماء يحدّد الهدف، والممر يحدّد مكان الإصابة. وH3 — العلم السنغافوري — ساقطة بصافي سالب.</strong></blockquote>
 <p><strong>درجة الثقة: متوسطة.</strong> (نزلت من «متوسطة إلى مرتفعة» بعد التدقيق المستقل.) ترتفع بفضل: إعلان أدنوك الرسمي، ونجاح اختبار المقام (R بين 2.3 و12.2)، وثبات الترتيب في تسعة من عشرة سيناريوهات. وتبقى عند المتوسطة لأربعة قيود:</p>
-<ol><li>تقدّم H4 مشروط بكتلة أدلة الانتماء، وبلاها يتقدّم الخط الملاحي.</li><li>قائمة سفن أدنوك الـ15 غير منشورة بالاسم والتاريخ.</li><li>الأوزان اجتهادية، وعنقود أدلة الانتماء غير مستقل (يضخّم أثره).</li><li>الطبقة البايزية بنطاق واسع (27%–98%) ولا تحسم وحدها.</li></ol></section><section class="doc reveal" id="sec-09" aria-labelledby="h-09"><h2 id="h-09"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>9. حدود النموذج — معلنة لا مخفيّة</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+<ol><li>تقدّم H4 مشروط بكتلة أدلة الانتماء، وبلاها يتقدّم الخط الملاحي.</li><li>قائمة سفن أدنوك الـ15 غير منشورة بالاسم والتاريخ.</li><li>الأوزان اجتهادية، وعنقود أدلة الانتماء غير مستقل (يضخّم أثره).</li><li>الطبقة البايزية بنطاق واسع (27%–98%) ولا تحسم وحدها.</li></ol></section><section class="doc reveal" id="sec-09" aria-labelledby="h-09"><h2 id="h-09"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>9. حدود النموذج — معلنة لا مخفيّة</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">الحد</th>
 <th scope="col">الأثر</th>
 </tr></thead><tbody>
 <tr>
-<td><strong>ترابط الأدلة (العدّ المزدوج)</strong></td>
-<td><span class="ltr">E13</span> · <span class="ltr">E14</span> · <span class="ltr">E15</span> · <span class="ltr">E16</span> · <span class="ltr">E18</span> كلها من الكتلة الإماراتية، فتُضخّم H4 بأكثر من وزنها الحقيقي — أُعلن ولم يُصحَّح بالكامل لصعوبة تقدير معامل الترابط</td>
+<td data-label="الحد"><strong>ترابط الأدلة (العدّ المزدوج)</strong></td>
+<td data-label="الأثر"><span class="ltr">E13</span> · <span class="ltr">E14</span> · <span class="ltr">E15</span> · <span class="ltr">E16</span> · <span class="ltr">E18</span> كلها من الكتلة الإماراتية، فتُضخّم H4 بأكثر من وزنها الحقيقي — أُعلن ولم يُصحَّح بالكامل لصعوبة تقدير معامل الترابط</td>
 </tr>
 <tr>
-<td><strong>القطع في التصنيف</strong></td>
-<td>كل دليل صُنّف قطعيًا (++ إلى −−) بلا احتمال وسيط</td>
+<td data-label="الحد"><strong>القطع في التصنيف</strong></td>
+<td data-label="الأثر">كل دليل صُنّف قطعيًا (++ إلى −−) بلا احتمال وسيط</td>
 </tr>
 <tr>
-<td><strong>الأوزان اجتهادية</strong></td>
-<td>لا معيار رسمي منشور لأوزان الأدلة؛ والحساسية هي الضمانة</td>
+<td data-label="الحد"><strong>الأوزان اجتهادية</strong></td>
+<td data-label="الأثر">لا معيار رسمي منشور لأوزان الأدلة؛ والحساسية هي الضمانة</td>
 </tr>
 <tr>
-<td><strong>معامل R</strong></td>
-<td>خُفّض إلى زيادة مستقلة بحد أقصى 2، ومع ذلك يبقى مشتقًا من مقام غير مكتمل</td>
+<td data-label="الحد"><strong>معامل R</strong></td>
+<td data-label="الأثر">خُفّض إلى زيادة مستقلة بحد أقصى 2، ومع ذلك يبقى مشتقًا من مقام غير مكتمل</td>
 </tr>
 <tr>
-<td><strong>عدم معالجة عدم اليقين في المصادر</strong></td>
-<td>درجات A–F دخلت كأوزان لا كتوزيعات</td>
+<td data-label="الحد"><strong>عدم معالجة عدم اليقين في المصادر</strong></td>
+<td data-label="الأثر">درجات A–F دخلت كأوزان لا كتوزيعات</td>
 </tr>
 <tr>
-<td><strong>تجميد الزمن</strong></td>
-<td>النموذج لقطة 16 أكتوبر 2026؛ أي دليل جديد يستوجب إعادة تشغيل</td>
+<td data-label="الحد"><strong>تجميد الزمن</strong></td>
+<td data-label="الأثر">النموذج لقطة 16 أكتوبر 2026؛ أي دليل جديد يستوجب إعادة تشغيل</td>
 </tr>
 <tr>
-<td><strong>عدم استقلال الطبقة البايزية</strong></td>
-<td>الضرب المباشر يفترض استقلالًا شرطيًا غير متحقق</td>
+<td data-label="الحد"><strong>عدم استقلال الطبقة البايزية</strong></td>
+<td data-label="الأثر">الضرب المباشر يفترض استقلالًا شرطيًا غير متحقق</td>
 </tr>
-</tbody></table></div></section><section class="doc reveal" id="sec-10" aria-labelledby="h-10"><h2 id="h-10"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>10. التوصية التشغيلية</h2><div class="h-rule"></div><ol><li><strong>يُحدَّث النموذج لا المصفوفة اليدوية:</strong> أي دليل جديد يُضاف إلى <code>tools/ach_v3_model.py</code> بوزنه وقوته التشخيصية، ثم يُعاد التشغيل ويُقارن الترتيب.</li><li><strong>يُعرض النطاق لا الرقم المفرد:</strong> R وP(H4) يُعرضان كنطاق مع سيناريو أدنى وأعلى.</li><li><strong>يُعاد الفحص عند أي من هذه:</strong> نشر قائمة إصابات أدنوك بالاسم · إصابة سفينة إماراتية خارج المضيق · تفصيل عبور بحسب الانتماء.</li><li><strong>يُعاد التدقيق المستقل</strong> عند أي تعديل جوهري في الأوزان أو الإشارات أو عند إضافة عنقود أدلة جديد.</li></ol></section><section class="doc reveal" id="sec-11" aria-labelledby="h-11"><h2 id="h-11"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>المصادر والملفات</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
+</tbody></table></div></section><section class="doc reveal" id="sec-10" aria-labelledby="h-10"><h2 id="h-10"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>10. التوصية التشغيلية</h2><div class="h-rule"></div><ol><li><strong>يُحدَّث النموذج لا المصفوفة اليدوية:</strong> أي دليل جديد يُضاف إلى <code>tools/ach_v3_model.py</code> بوزنه وقوته التشخيصية، ثم يُعاد التشغيل ويُقارن الترتيب.</li><li><strong>يُعرض النطاق لا الرقم المفرد:</strong> R وP(H4) يُعرضان كنطاق مع سيناريو أدنى وأعلى.</li><li><strong>يُعاد الفحص عند أي من هذه:</strong> نشر قائمة إصابات أدنوك بالاسم · إصابة سفينة إماراتية خارج المضيق · تفصيل عبور بحسب الانتماء.</li><li><strong>يُعاد التدقيق المستقل</strong> عند أي تعديل جوهري في الأوزان أو الإشارات أو عند إضافة عنقود أدلة جديد.</li></ol></section><section class="doc reveal" id="sec-11" aria-labelledby="h-11"><h2 id="h-11"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>المصادر والملفات</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">المرجع</th>
 <th scope="col">المسار</th>
 </tr></thead><tbody>
 <tr>
-<td>ملحق مقام التعرّض (منهجية R وحساباتها)</td>
-<td><code>appendices/exposure-denominator-2026-10-16.md</code></td>
+<td data-label="المرجع">ملحق مقام التعرّض (منهجية R وحساباتها)</td>
+<td data-label="المسار"><code>appendices/exposure-denominator-2026-10-16.md</code></td>
 </tr>
 <tr>
-<td>مصفوفة <span class="ltr">ACH</span> نسخة 2 (الأدلة وسجل العشرين سفينة)</td>
-<td><code>appendices/ach-hormuz-targeting-v2-2026-10-16.md</code></td>
+<td data-label="المرجع">مصفوفة <span class="ltr">ACH</span> نسخة 2 (الأدلة وسجل العشرين سفينة)</td>
+<td data-label="المسار"><code>appendices/ach-hormuz-targeting-v2-2026-10-16.md</code></td>
 </tr>
 <tr>
-<td>النموذج ومخرجاته الرقمية</td>
-<td><code>tools/ach_v3_model.py</code> · <code>appendices/ach-v3-model.json</code></td>
+<td data-label="المرجع">النموذج ومخرجاته الرقمية</td>
+<td data-label="المسار"><code>tools/ach_v3_model.py</code> · <code>appendices/ach-v3-model.json</code></td>
 </tr>
 <tr>
-<td>تقرير التدقيق المستقل</td>
-<td><code>audit/ach-v3-verification.md</code></td>
+<td data-label="المرجع">تقرير التدقيق المستقل</td>
+<td data-label="المسار"><code>audit/ach-v3-verification.md</code></td>
 </tr>
 <tr>
-<td>ملفات المقام الخمسة</td>
-<td><code>audit/denominators/</code></td>
+<td data-label="المرجع">ملفات المقام الخمسة</td>
+<td data-label="المسار"><code>audit/denominators/</code></td>
 </tr>
 <tr>
-<td>سجل السفن المستهدفة</td>
-<td><code>appendices/vessel-register-2026-10-16.json</code></td>
+<td data-label="المرجع">سجل السفن المستهدفة</td>
+<td data-label="المسار"><code>appendices/vessel-register-2026-10-16.json</code></td>
 </tr>
 </tbody></table></div>
 <blockquote><strong>حدود التحليل:</strong> <span class="ltr">ACH</span> تُرتّب قوة التفسير ولا تُثبت نيّة ولا تسمّي جهة منفّذة. وكل خلية تقييم تحليلي مبني على أدلة معلنة، والأوزان والاحتمالات اجتهاد معلن قابل للمراجعة.</blockquote></section>
@@ -1386,7 +1409,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> مصفوفة <span class="ltr">ACH</span> نسخة 3 — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: <span class="ltr">UTC</span> وتوقيت البحرين (<span class="ltr">UTC</span>+3).
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-21 14:33 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-21 15:23 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
     
   </footer>
 </div>
