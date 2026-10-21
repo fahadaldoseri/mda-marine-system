@@ -78,7 +78,26 @@ def copy_sources(date_iso: str, brain: Path) -> list:
         newest = max(cum_md, key=lambda p: p.stat().st_mtime)
         shutil.copy2(newest, SITE / "sources" / "reports" / "cumulative.md")
         log.append(f"حُدّث السجل التراكمي: {newest.name}")
-    return log
+    # صفحة «المصادر والمراجع»: سجل الموثوقية + أحدث فحص للتغذيات
+    rel = brain / "appendices" / "source-reliability-40.md"
+    if rel.exists():
+        shutil.copy2(rel, SITE / "sources" / "source-reliability.md")
+        log.append("حُدّث سجل الموثوقية والمصداقية (40 مصدرًا)")
+    else:
+        log.append("تحذير: سجل الموثوقية غير موجود")
+    statuses = sorted((brain / "feeds").glob("feeds-*.status.json"))
+    if statuses:
+        newest = max(statuses, key=lambda x: x.stat().st_mtime)
+        try:
+            data = json.loads(newest.read_text(encoding="utf-8"))
+            data.setdefault("date", newest.name.replace("feeds-", "").replace(".status.json", ""))
+            (SITE / "sources" / "feeds-status.json").write_text(
+                json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
+            log.append(f"حُدّثت حالة التغذيات: {newest.name}")
+        except Exception as e:
+            log.append(f"تحذير: تعذّرت قراءة حالة التغذيات ({e})")
+    else:
+        log.append("تحذير: لا ملف حالة تغذيات")
 
 
 # ---------------------------------------------------------------------------
@@ -153,6 +172,7 @@ def sync_special(brain: Path) -> list:
                 json.dumps(auto_meta(md), ensure_ascii=False, indent=2), encoding="utf-8"
             )
             log.append(f"وُلّدت بيانات الواجهة تلقائيًا: {meta_path.name} (راجعها إن أردت تحسين الملخص)")
+    return log
     return log
 
 
