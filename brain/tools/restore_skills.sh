@@ -1,35 +1,72 @@
 #!/usr/bin/env bash
-# استعادة المهارات من المستودع إلى النسخة المحلية — تصحيح التماثل (عطل ك-77).
-# القاعدة: المصدر الموثوق هو المستودع، والنسخة المحلية في /home/ubuntu/skills مرآة
-# تُستعاد آليًا قبل أي تشغيل وقبل أي دفع؛ لأن مجلد المهارات الرسمي قد يُعاد من المنصة.
+# مزامنة المهارات ثنائية الاتجاه — إصلاح عطل ك-86.
+# السبب الجذري: الأداة كانت تعتبر المستودع المصدر الوحيد، وتُنفّذ checkout عليه
+# قبل المقارنة، فيُمحى ما نُسخ محليًا ولم يُدفع بعد، ويُعلن التماثل مكسورًا.
+# القاعدة الجديدة: الأحدث زمنًا يفوز، والنقص يُكمَل من الجهة الأخرى،
+# و`checkout` لا يُنفَّذ إلا إذا كانت شجرة المستودع نظيفة (بلا تعديل غير مدفوع).
 set -uo pipefail
 B="$(cd "$(dirname "$0")/.." && pwd)"
 REPO_DIR="${REPO_DIR:-$B/../mda-marine-system}"
 REPO="$REPO_DIR/skills"
 SK="${SKILLS_DIR:-/home/ubuntu/skills}"
 CHECK_ONLY=0; [ "${1:-}" = "--check" ] && CHECK_ONLY=1
+
 [ -d "$REPO" ] || { echo "✘ لا مستودع مهارات في $REPO"; exit 3; }
-if [ -d "$REPO_DIR/.git" ]; then
-  git -C "$REPO_DIR" fetch -q origin 2>/dev/null && git -C "$REPO_DIR" checkout -q origin/main -- skills 2>/dev/null || true
+
+# ── تحديث المستودع بلا محو تعديلات غير مدفوعة ──
+dirty="$(git -C "$REPO_DIR" status --porcelain -- skills 2>/dev/null | head -1 || true)"
+if [ -d "$REPO_DIR/.git" ] && [ -z "$dirty" ]; then
+  git -C "$REPO_DIR" fetch -q origin 2>/dev/null \
+    && git -C "$REPO_DIR" checkout -q origin/main -- skills 2>/dev/null || true
 fi
-diff_list=(); restored=0; newer=0
+
+to_local=0; to_repo=0; equal=0
+mkdir -p "$REPO"
+
+# ── 1) ملفات المستودع: تُقارن وتُنقل حسب الأحدث ──
+OUR_SKILLS="marine-news-brain military-arabic-editing macr-system"
+in_scope() {  # مهارات المشروع فقط، لا كل مهارات المنصة
+  case "$1" in marine-news-brain/*|military-arabic-editing/*|macr-system/*) return 0 ;; *) return 1 ;; esac
+}
+
 while IFS= read -r f; do
   rel="${f#"$REPO"/}"
-  if [ ! -f "$SK/$rel" ] || ! cmp -s "$f" "$SK/$rel"; then
-    diff_list+=("$rel")
-    if [ "$CHECK_ONLY" -eq 0 ]; then
-      # حاجز ك-79: لا يُستبدل ملف محلي أحدث من نسخة المستودع، لئلا تُفقد تعديلات لم تُدفع.
-      if [ -f "$SK/$rel" ] && [ "$SK/$rel" -nt "$f" ]; then
-        echo "  ⚠ محلي أحدث ولم يُستبدل (يحتاج دفعًا): $rel"; newer=$((newer + 1))
-      else
-        mkdir -p "$(dirname "$SK/$rel")"; cp "$f" "$SK/$rel"
-        echo "  ↑ استُعيد من المستودع: $rel"; restored=$((restored + 1))
-      fi
-    fi
+  in_scope "$rel" || continue
+  lf="$SK/$rel"
+  [ -f "$lf" ] || { mkdir -p "$(dirname "$lf")"; cp "$f" "$lf"; to_local=$((to_local+1)); echo "  ↓ نُزّل: $rel"; continue; }
+  if cmp -s "$f" "$lf"; then equal=$((equal+1)); continue; fi
+  if [ "$lf" -nt "$f" ]; then
+    cp "$lf" "$f"; to_repo=$((to_repo+1)); echo "  ↑ رُفع (المحلي أحدث): $rel"
+  else
+    cp "$f" "$lf"; to_local=$((to_local+1)); echo "  ↓ نُزّل (المستودع أحدث): $rel"
   fi
 done < <(find "$REPO" -type f \( -name "*.md" -o -name "*.json" -o -name "*.py" -o -name "*.txt" \) | sort)
-echo "  ملفات المستودع: $(find "$REPO" -type f | wc -l) · مختلفة قبل الاستعادة: ${#diff_list[@]} · مستعاد: $restored · محلي أحدث: $newer"
-if [ "$CHECK_ONLY" -eq 1 ] && [ "${#diff_list[@]}" -gt 0 ]; then
-  echo "  ✘ التماثل مكسور: ${diff_list[*]:0:5}"; exit 1
+
+# ── 2) ملفات محلية غير موجودة في المستودع: تُرفع ──
+while IFS= read -r f; do
+  rel="${f#"$SK"/}"
+  in_scope "$rel" || continue
+  case "$(basename "$rel")" in *.md|*.json|*.py|*.txt) ;; *) continue ;; esac
+  if [ ! -f "$REPO/$rel" ]; then
+    mkdir -p "$(dirname "$REPO/$rel")"; cp "$f" "$REPO/$rel"
+    to_repo=$((to_repo+1)); echo "  ＋ رُفع ملف مفقود: $rel"
+  fi
+done < <(find "$SK" -type f | sort)
+
+echo "  ملفات المستودع: $(find "$REPO" -type f | wc -l) · نُزّل: $to_local · رُفع: $to_repo · مطابق: $equal"
+
+# ── 3) تحقق نهائي بالبصمة لا بالزمن ──
+broken=()
+while IFS= read -r f; do
+  rel="${f#"$REPO"/}"
+  [ -f "$SK/$rel" ] && cmp -s "$f" "$SK/$rel" || broken+=("$rel")
+done < <(find "$REPO" -type f \( -name "*.md" -o -name "*.json" -o -name "*.py" -o -name "*.txt" \) | sort)
+
+if [ "${#broken[@]}" -gt 0 ]; then
+  echo "  ✘ التماثل مكسور: ${broken[*]:0:5}"; exit 1
+fi
+if [ "$CHECK_ONLY" -eq 1 ] && { [ "$to_local" -gt 0 ] || [ "$to_repo" -gt 0 ]; }; then
+  echo "  ✔ التماثل أُصلح الآن (مزامنة فورية)"
+  exit 0
 fi
 echo "  ✔ التماثل سليم: المحلي = المستودع"

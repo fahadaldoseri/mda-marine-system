@@ -250,6 +250,30 @@ def check_summary_numbers(md: str, meta: str) -> list:
     return out
 
 
+def check_direct_style(meta: str) -> list:
+    """ف6: الصيغة المباشرة — كل تعريف ≤ 65 حرفًا وبلا وصل إنشائي."""
+    LIMIT = 65
+    FILLERS = ("وهو ", "وهي ", "ويُفصل عن", "وهذا يعني", "في هذا النظام", "مثل ", "لا على ")
+    out = []
+    if not meta:
+        return out
+    try:
+        g = (json.loads(meta).get("glossary") or {})
+    except json.JSONDecodeError:
+        return out
+    for k, v in g.items():
+        d = v if isinstance(v, str) else (v.get("تعريف") or "")
+        if not d:
+            continue
+        long_ = len(d) > LIMIT
+        fill = [f.strip() for f in FILLERS if f in d]
+        if long_ or fill:
+            out.append({"kind": "صيغة غير مباشرة", "term": k, "length": len(d),
+                        "hint": f"عند {len(d)} حرفًا (الحد {LIMIT})" +
+                                (f" · وصل إنشائي: {'، '.join(fill)}" if fill else "")})
+    return out
+
+
 def run_checks(md: str, meta: str = "") -> dict:
     body = strip_markup(md)
     return {
@@ -259,6 +283,7 @@ def run_checks(md: str, meta: str = "") -> dict:
         "ف3": check_internal(md),
         "ف4": check_tug_confusion(body),
         "ف5": check_summary_numbers(body, meta),
+        "ف6": check_direct_style(meta),
     }
 
 
@@ -385,7 +410,7 @@ def main() -> int:
                           "results": res}, ensure_ascii=False, indent=2))
     else:
         print(f"=== بوابة الفهم — {label} — المرحلة {stage} ===")
-        for chk in ("ف1", "ف2", "ف3", "ف4", "ف5"):
+        for chk in ("ف1", "ف2", "ف3", "ف4", "ف5", "ف6"):
             items = res[chk]
             if items and chk in blocking:
                 mark = "✘ مانع"
