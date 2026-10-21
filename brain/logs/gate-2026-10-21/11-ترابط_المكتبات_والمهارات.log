@@ -1,9 +1,9 @@
 === تدقيق المكتبات والمهارات والترابط ===
   1) المكتبات — 8 ملفًا
      ✔ findings-2026-10-20.json · 329,537 حرفًا
-     ✔ findings-2026-10-21.json · 329,537 حرفًا
+     ✔ findings-2026-10-21.json · 329,536 حرفًا
      ✔ findings-register.md · 1,486 حرفًا
-     ✔ lexicon-library.json · 231,705 حرفًا
+     ✔ lexicon-library.json · 231,704 حرفًا
      ✔ lexicon-library.md · 6,078 حرفًا
      ✔ orthography-consistency.md · 3,231 حرفًا
      ✔ recurring-phrases.md · 2,621 حرفًا
@@ -22,12 +22,10 @@
      ✔ marine-news-brain → references/source-policy.md
      ✔ marine-news-brain → references/terminology.md
      ✔ marine-news-brain → references/validation.md
-     ✔ marine-news-brain مطابقة لنسخة المستودع (5 ملفًا)
      ✔ military-arabic-editing → references/adaptive-learning.md
      ✔ military-arabic-editing → references/ambiguity-map.md
      ✔ military-arabic-editing → references/commander-style.md
      ✔ military-arabic-editing → references/terminology-map.md
-     ✔ military-arabic-editing مطابقة لنسخة المستودع (5 ملفًا)
   4) إنفاذ القواعد الملزمة
      ✔ كل نص ثابت يدخل مدى بوابة الأسلوب ← check_style (مُشغَّل في البوابة)
      ✔ الرموز تُعرَّف في القاموس ← check_comprehension (مُشغَّل في البوابة)
@@ -48,5 +46,7 @@
      ✔ telegram-subscriptions.json سرّي ومُستثنى/مُنقّى في النسخة الاحتياطية
      ملفات بأسرار محتملة: 3
 
-النتيجة: 0 عائق · 1 تحذير
+النتيجة: 2 عائق · 1 تحذير
+  ✘ [التماثل] marine-news-brain: المستودع ناقص [] · متغيّر ['SKILL.md']
+  ✘ [التماثل] military-arabic-editing: المستودع ناقص [] · متغيّر ['references/commander-style.md', 'SKILL.md']
   • [النقل] 28 ملفًا بمسار مطلق (يكسر النقل): ['tools/apply_jmic_ukmto_to_gfs.py (1)', 'tools/telegram_bot.py (1)', 'tools/_oneoff/finalize_2026-10-18.py (1)']

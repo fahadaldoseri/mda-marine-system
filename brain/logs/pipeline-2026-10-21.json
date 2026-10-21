@@ -76,10 +76,13 @@
   },
   "report_present_at_pipeline_end": false,
   "final_gate": {
-    "status": "warn",
-    "exit_code": 1,
+    "status": "block",
+    "exit_code": 2,
     "dir": "logs/gate-2026-10-21",
-    "blocked_steps": [],
+    "blocked_steps": [
+      "ترابط المكتبات والمهارات",
+      "تماثل المهارات والمكتبات (مزامنة فورية)"
+    ],
     "note": "نتيجة بوابة التسليم النهائية — مسجّلة بعد كتابة التقرير."
   }
 }
