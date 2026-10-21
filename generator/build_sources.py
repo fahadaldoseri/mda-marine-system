@@ -94,7 +94,7 @@ def source_cards(status: dict, rows: list) -> tuple:
         group = by_num.get(num) or []
         if not group:
             cards.append({'num': num, 'name': r['name'], 'kind': 'none',
-                          'state': 'بلا تغذية آلية — يُراجع بالمتصفح أو الأرشيف'})
+                          'state': 'لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف'})
             continue
         oks = [f for f in group if f.get('ok')]
         if oks:
@@ -214,8 +214,10 @@ def build(dist: Path, quiet: bool = False) -> dict:
     <span><b style="background:#1f9d6b"></b>نجح الفحص</span>
     <span><b style="background:#c99a2e"></b>قيد حماية موثق</span>
     <span><b style="background:#c8402f"></b>متعذّر</span>
-    <span><b style="background:#5a6b86"></b>بلا تغذية آلية</span>
+    <span><b style="background:#5a6b86"></b>لا تغذية RSS</span>
   </div>
+  <div class="sx-note">الرمادي: مصدر مُدرج في سجل الـ40 ولا تغذية آلية له في فحص التغذيات اليومي؛
+  ويُتابع بمسار آخر — فتح مباشر بالمتصفح، أو حفظ أصل رسمي، أو مراجعة يدوية. ولا يعني أنه غير مُتحقَّق منه.</div>
   <div class="sx-grid">
 {chr(10).join(card_html(c) for c in cards) if cards else '<div class="sx-note">لا بيانات فحص بعد.</div>'}
   </div>
