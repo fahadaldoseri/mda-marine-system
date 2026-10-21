@@ -1,10 +1,10 @@
 === تدقيق المكتبات والمهارات والترابط ===
   1) المكتبات — 7 ملفًا
-     ✔ findings-2026-10-20.json · 312,351 حرفًا
+     ✔ findings-2026-10-20.json · 312,072 حرفًا
      ✔ findings-register.md · 1,467 حرفًا
-     ✔ lexicon-library.json · 220,004 حرفًا
+     ✔ lexicon-library.json · 220,217 حرفًا
      ✔ lexicon-library.md · 6,064 حرفًا
-     ✔ orthography-consistency.md · 2,978 حرفًا
+     ✔ orthography-consistency.md · 3,004 حرفًا
      ✔ recurring-phrases.md · 2,615 حرفًا
      ✔ terminology-gaps.md · 620 حرفًا
   2) ارتباط المكتبات بمن يقرؤها
@@ -39,14 +39,13 @@
      أدوات تستدعيها البوابة: 10 · كلها موجودة
      تدقيق المكتبات في البوابة: ✔
   6) النقل والسرية
-     مسارات مطلقة: 29
+     مسارات مطلقة: 28
      ✔ telegram-chat.json سرّي ومُستثنى/مُنقّى في النسخة الاحتياطية
      ✔ telegram-targets.json سرّي ومُستثنى/مُنقّى في النسخة الاحتياطية
      ✔ telegram-subscriptions.json سرّي ومُستثنى/مُنقّى في النسخة الاحتياطية
      ملفات بأسرار محتملة: 3
 
-النتيجة: 0 عائق · 4 تحذير
-  • [المكتبات] findings-2026-10-20.json يحمل مسارًا مطلقًا (9) يكسر النقل: ['/home/ubuntu/brain-marine-news/web/meta/2026-10-12.json', '/home/ubuntu/brain-marine-news/web/meta/2026-10-13.json']
+النتيجة: 0 عائق · 3 تحذير
   • [الارتباط] findings-2026-10-20.json: يقرؤه أداة توليد فقط (tools/build_audit_report.py, tools/build_ambiguity_map.py) ولا يصل إلى بوابة ولا تعليمة
   • [الارتباط] findings-2026-10-20.json: لا بوابة تقرؤه — لا يُنفَّذ على الإصدار
-  • [النقل] 29 ملفًا بمسار مطلق (يكسر النقل): ['tools/apply_jmic_ukmto_to_gfs.py (1)', 'tools/telegram_bot.py (1)', 'tools/_oneoff/finalize_2026-10-18.py (1)']
+  • [النقل] 28 ملفًا بمسار مطلق (يكسر النقل): ['tools/apply_jmic_ukmto_to_gfs.py (1)', 'tools/telegram_bot.py (1)', 'tools/_oneoff/finalize_2026-10-18.py (1)']
