@@ -94,7 +94,7 @@ def source_cards(status: dict, rows: list) -> tuple:
         group = by_num.get(num) or []
         if not group:
             cards.append({'num': num, 'name': r['name'], 'kind': 'none',
-                          'state': 'بلا تغذية آلية — يُراجع بالمتصفح أو الأرشيف'})
+                          'state': 'لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف'})
             continue
         oks = [f for f in group if f.get('ok')]
         if oks:
@@ -104,9 +104,8 @@ def source_cards(status: dict, rows: list) -> tuple:
             cards.append({'num': num, 'name': r['name'], 'kind': 'ok', 'state': state})
         else:
             err = str(group[0].get('error') or group[0].get('block_reason') or '')
-            kind = 'lim' if ('403' in err or '405' in err or 'ssl' in err.lower()) else 'bad'
-            cards.append({'num': num, 'name': r['name'], 'kind': kind,
-                          'state': short_error(err)})
+            cards.append({'num': num, 'name': r['name'], 'kind': 'bad',
+                          'state': 'تعذّر — ' + short_error(err)})
     # مصادر في فحص اليوم ولا رقم لها في السجل
     for num, group in sorted(by_num.items()):
         if num in seen:
@@ -115,7 +114,7 @@ def source_cards(status: dict, rows: list) -> tuple:
         cards.append({'num': num, 'name': group[0].get('name') or '',
                       'kind': 'ok' if oks else 'bad',
                       'state': f"نجح · {sum(int(f.get('items_count') or 0) for f in oks)} عنصرًا"
-                               if oks else short_error(str(group[0].get('error') or ''))})
+                               if oks else 'تعذّر — ' + short_error(str(group[0].get('error') or ''))})
     cards.sort(key=lambda c: c['num'] if isinstance(c['num'], int) else 999)
     return cards, status
 
@@ -165,6 +164,9 @@ def build(dist: Path, quiet: bool = False) -> dict:
     feeds_n = len(status.get('checked_feeds') or [])
     items_n = status.get('items') or 0
     stamp = status.get('date') or status.get('stamp') or ''
+    ok_c = len([c for c in cards if c['kind'] == 'ok'])
+    bad_c = len([c for c in cards if c['kind'] == 'bad'])
+    none_c = len([c for c in cards if c['kind'] == 'none'])
 
     official = [r for r in rows if 'رسمي' in r['type']]
 
@@ -211,11 +213,12 @@ def build(dist: Path, quiet: bool = False) -> dict:
 
   <h2 class="sx-h2">حالة المصادر المفحوصة</h2>
   <div class="sx-legend">
-    <span><b style="background:#1f9d6b"></b>نجح الفحص</span>
-    <span><b style="background:#c99a2e"></b>قيد حماية موثق</span>
-    <span><b style="background:#c8402f"></b>متعذّر</span>
-    <span><b style="background:#5a6b86"></b>بلا تغذية آلية</span>
+    <span><b style="background:#1f9d6b"></b>نجح الفحص ({ok_c})</span>
+    <span><b style="background:#c8402f"></b>متعذّر ({bad_c})</span>
+    <span><b style="background:#5a6b86"></b>لا تغذية RSS ({none_c})</span>
   </div>
+  <div class="sx-note">الرمادي: مصدر مُدرج في سجل الـ40 ولا تغذية آلية له في فحص التغذيات اليومي؛
+  ويُتابع بمسار آخر — فتح مباشر بالمتصفح، أو حفظ أصل رسمي، أو مراجعة يدوية. ولا يعني أنه غير مُتحقَّق منه.</div>
   <div class="sx-grid">
 {chr(10).join(card_html(c) for c in cards) if cards else '<div class="sx-note">لا بيانات فحص بعد.</div>'}
   </div>
