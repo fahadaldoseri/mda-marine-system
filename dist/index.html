@@ -104,6 +104,13 @@ ul.ar{list-style:none;margin:0;padding:0}
   unicode-bidi:isolate;overflow-wrap:anywhere}
 .nf-list a:hover{border-color:var(--accent,#2fd6c3)}
 .nf-back{display:inline-block;margin-top:6px;font-weight:700;text-decoration:none;color:var(--accent,#2fd6c3)}
+
+/* اتجاه النصوص اللاتينية والإحداثيات — يمنع انقلابها في السياق العربي */
+.ltr{direction:ltr;unicode-bidi:isolate}
+
+/* رقم المعلّم: نص داكن على معلّم فاتح، ومقلوب في الوضع النهاري */
+body:not(.daylight) .lg-num{color:#04120f}
+body.daylight .lg-num{color:#ffffff}
 </style><body>
 <script>
 (function(){try{
@@ -118,6 +125,10 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
       <span class="sn-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/><path d="M12 11.5v4"/><path d="M9.6 13.2h4.8"/></svg></span>
       <span class="sn-name">مركز الوعي بالمجال البحري<em>تقارير أمن الملاحة — مملكة البحرين</em></span>
     </a>
+    <button type="button" class="sn-menu no-print" aria-expanded="false" aria-controls="sn-panel">
+      <span class="sn-menu-icon" aria-hidden="true"></span><span>القائمة</span>
+    </button>
+    <div class="sn-panel" id="sn-panel">
     <div class="sn-links">
       <a href="/" aria-current="page">الرئيسية</a>
       <a href="/reports/special.html">التقارير الخاصة</a>
@@ -132,6 +143,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
         <button type="button" data-scale="1.25" title="أكبر حجم">أ++</button>
       </div>
       <button type="button" class="sn-theme" id="sn-theme">المظهر</button>
+    </div>
     </div>
   </div>
 </nav>

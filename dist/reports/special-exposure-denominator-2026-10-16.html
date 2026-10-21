@@ -448,7 +448,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   section.doc{font-size:10.2pt !important}
 }
 
-}
+
 
 
 /* ---------- بطاقة القرار ---------- */
@@ -618,6 +618,64 @@ display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
 body.daylight .topbar{background:#ffffff!important;border-bottom-color:#d3dded!important}
 body.daylight .brand-title,body.daylight .brand-sub{color:#0d1a2b}
 @media print{.site-nav,.sn-foot{display:none!important}}
+
+/* قائمة الجوال — تضغط شريطي الموقع والصفحة إلى ارتفاع صغير */
+.sn-menu{display:none}
+@media (max-width:760px){
+  .site-nav .sn-inner{flex-wrap:nowrap;padding:8px 14px;gap:10px;position:relative}
+  .sn-name em{display:none}
+  .sn-menu{
+    display:inline-flex;align-items:center;gap:8px;margin-inline-start:auto;
+    min-height:44px;padding:0 14px;border-radius:10px;cursor:pointer;
+    background:var(--sn-panel);border:1px solid var(--sn-line);color:var(--sn-ink);font:inherit;font-size:14px
+  }
+  .sn-menu-icon,.sn-menu-icon::before,.sn-menu-icon::after{
+    display:block;width:16px;height:2px;background:currentColor;border-radius:2px;position:relative;
+    transition:transform .2s ease,background-color .2s ease
+  }
+  .sn-menu-icon::before,.sn-menu-icon::after{content:"";position:absolute;inset-inline:0}
+  .sn-menu-icon::before{top:-5px}
+  .sn-menu-icon::after{top:5px}
+  .site-nav.open .sn-menu-icon{background:transparent}
+  .site-nav.open .sn-menu-icon::before{top:0;transform:rotate(45deg)}
+  .site-nav.open .sn-menu-icon::after{top:0;transform:rotate(-45deg)}
+  .sn-panel{
+    display:none;position:absolute;inset-inline:0;top:100%;
+    background:var(--sn-bg);border-bottom:1px solid var(--sn-line);padding:10px 14px 16px;
+    flex-direction:column;gap:12px;box-shadow:0 0 0 100vh rgba(0,0,0,.45);z-index:5
+  }
+  .site-nav.open .sn-panel{display:flex}
+  .site-nav .sn-links{flex-direction:column;margin:0;gap:2px}
+  .site-nav .sn-links a{min-height:44px;display:flex;align-items:center}
+  .topbar-inner{flex-wrap:nowrap !important;padding:6px 14px !important;gap:8px !important}
+  .topbar .brand-sub,.topbar .tb-meta .chip,.topbar .brand-mark{display:none}
+  .topbar .brand-title{font-size:13.5px;line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+  .topbar .tb-meta{display:flex;gap:6px;flex:0 0 auto}
+  .topbar .btn{min-height:40px;padding:6px 10px}
+}
+html{scroll-padding-top:calc(var(--nav-h, 60px) + var(--bar-h, 0px) + 12px);scroll-padding-bottom:80px}
+section.doc{scroll-margin-top:0 !important}
+
+/* اتجاه النصوص اللاتينية والإحداثيات — يمنع انقلابها في السياق العربي */
+.ltr{direction:ltr;unicode-bidi:isolate}
+
+/* ألوان الشارات في الوضع النهاري (نفس منطق ألوان نسخة الطباعة) */
+@media screen{
+  body.daylight .st-badge.s-stable,body.daylight .chg.c-closed .chg-tag,body.daylight .conf.c-high,
+  body.daylight .tag.t-confirm{color:#14603f;background:#edfaf3;border-color:#7cc4a0}
+  body.daylight .st-badge.s-active,body.daylight .kstrip.k-confirm,body.daylight .cls-banner.c-sensitive
+    {color:#7a1d1a;background:#fff1f0;border-color:#c77973}
+  body.daylight .conf.c-med,body.daylight .kstrip.k-suspect,body.daylight .chg.c-reclassified .chg-tag,
+  body.daylight .cls-banner.c-restricted,body.daylight .tag.t-suspect{color:#7c5000;background:#fff7e6;border-color:#c9a24f}
+  body.daylight .conf.c-low,body.daylight .kstrip.k-inter,body.daylight .chg.c-new .chg-tag
+    {color:#1d4f87;background:#edf4ff;border-color:#8bb1dd}
+  body.daylight .chg.c-ongoing .chg-tag{color:#31465c;background:#f6f8fb;border-color:#b8c4d1}
+  body.daylight .ev-code{color:#31465c;background:#f2f5f9;border-color:#c4d0dd}
+}
+
+/* رقم المعلّم: نص داكن على معلّم فاتح، ومقلوب في الوضع النهاري */
+body:not(.daylight) .lg-num{color:#04120f}
+body.daylight .lg-num{color:#ffffff}
 </style></head>
 <body><nav class="site-nav no-print" aria-label="تنقل الموقع">
   <div class="sn-inner">
@@ -625,6 +683,10 @@ body.daylight .brand-title,body.daylight .brand-sub{color:#0d1a2b}
       <span class="sn-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/><path d="M12 11.5v4"/><path d="M9.6 13.2h4.8"/></svg></span>
       <span class="sn-name">مركز الوعي بالمجال البحري<em>تقارير أمن الملاحة — مملكة البحرين</em></span>
     </a>
+    <button type="button" class="sn-menu no-print" aria-expanded="false" aria-controls="sn-panel">
+      <span class="sn-menu-icon" aria-hidden="true"></span><span>القائمة</span>
+    </button>
+    <div class="sn-panel" id="sn-panel">
     <div class="sn-links">
       <a href="/">الرئيسية</a>
       <a href="/reports/special.html" aria-current="page">التقارير الخاصة</a>
@@ -639,6 +701,7 @@ body.daylight .brand-title,body.daylight .brand-sub{color:#0d1a2b}
         <button type="button" data-scale="1.25" title="أكبر حجم">أ++</button>
       </div>
       <button type="button" class="sn-theme" id="sn-theme">المظهر</button>
+    </div>
     </div>
   </div>
 </nav><script>
@@ -672,7 +735,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     <div class="threat risk-high"><div class="lbl">مستوى التهديد</div><div class="val">مرتفع</div></div>
     <div>
       <p class="lede">اختبار عدم التناسب بين حصة الإصابات وحصة التعرّض في مضيق هرمز. النتيجة: إصابات أسطول أدنوك تتجاوز المتوقع بأكثر من الضعف حتى في أشد الفروض تحفّظًا، فنسبة عدم التناسب بين 2.3 و12.2 ضعفًا — ما يميل بالترجيح إلى الاستهداف لا إلى التعرّض المرتفع وحده. ويُصحّح التقرير رقمًا سابقًا: 32 ناقلة تخص أسطول Navig8 لا إجمالي أدنوك.</p>
-      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-21 03:56 <span class="ltr">UTC</span></b></span></div>
+      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-21 14:33 <span class="ltr">UTC</span></b></span></div>
     </div>
   </header>
 
@@ -685,7 +748,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
   <main>
     
     <section class="doc pri reveal" id="sec-01" aria-labelledby="h-01"><h2 id="h-01"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>6. الخلاصة</h2><div class="h-rule"></div><ol><li><strong>الرقم السابق (47%) مسحوب ومصحّح</strong> إلى 17% نسبةً إلى الأسطول المملوك، والمقياس الصحيح هو مقام العبور لا حجم الأسطول.</li><li><strong>إصابات أسطول أدنوك غير متناسبة مع تعرّضه:</strong> R بين <strong>2.3 و12.2 ضعفًا</strong>، وأدنى سيناريو يبقى فوق عتبة عدم التناسب القوي.</li><li><strong>الترجيح:</strong> <strong>الاستهداف</strong> — لا التعرّض المرتفع وحده — في تفسير تركّز الإصابات في الأسطول الإماراتي. وهذا يرفع فرضية الانتماء (H4) من «مشاركة في المقدمة» إلى <strong>الفرضية الأقوى</strong>، مع بقاء الخط (H2) شرطًا مكانيًا لازمًا لا معيار اختيار.</li><li><strong>درجة الثقة: متوسطة إلى مرتفعة.</strong> لم تبلغ المرتفعة لسببين: قائمة الإصابات الـ15 غير منشورة بالاسم والتاريخ، ومقام الانتماء الإماراتي الإجمالي غير معلوم.</li><li><strong>ما يقلب الحكم:</strong> إثبات أن عددًا معتبرًا من الإصابات الـ15 وقع خارج المضيق، أو نشر تفصيل عبور يُظهر حصة أدنوك أعلى بكثير من 2.3%.</li></ol></section><section class="doc reveal" id="sec-glossary" aria-labelledby="h-glossary"><h2 id="h-glossary"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>قاموس الرموز والمصطلحات</h2><div class="h-rule"></div><p class="sec-lede">تعريفات الرموز والمصطلحات المستخدمة في هذا التقرير.</p><div class="glossary"><b>قاموس الرموز والمصطلحات:</b> <b>مقام التعرّض</b>: العدد الكلي للعبورات أو أيام السفينة في نطاق الخطر، الذي تُقاس عليه نسبة الإصابات. · <b>نسبة عدم التناسب (R)</b>: حصة الإصابات مقسومة على حصة التعرّض؛ تساوي 1 إذا كان التعرّض وحده يفسّر الإصابات. · <b>أيام السفينة في نطاق الخطر</b>: مجموع الساعات التي تقضيها السفينة داخل نطاق الخطر مقسومة على 24؛ أدق من عدد السفن للمقارنة الزمنية. · <b>السفن المظلمة</b>: سفن تعبر بإطفاء أو تعطيل بث التتبّع، فتُنقص المقام المرئي وتُضعف دقة النسبة.</div></section><section class="doc reveal" id="sec-02" aria-labelledby="h-02"><h2 id="h-02"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>1. تصحيح خطأ سابق — إلزامي قبل أي حساب</h2><div class="h-rule"></div><p>في نسخة المصفوفة الثانية استُخدم رقم «15 من نحو 32 ناقلة ≈ 47%» لتقدير نسبة الاستهداف داخل أسطول أدنوك. <strong>هذا الرقم غير صحيح ويُسحب.</strong> الرقم 32 يخص <strong>أسطول Navig8 المملوك</strong> المنقول إلى أدنوك، وليس إجمالي أسطول أدنوك لوجستيات. والصحيح من الإفصاح الرسمي للشركة:</p>
-<div class="tbl-wrap"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
 <thead><tr>
 <th scope="col">البند</th>
 <th scope="col">الرقم</th>
@@ -728,7 +791,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 </tr>
 </tbody></table></div>
 <p><strong>الأثر:</strong> نسبة الإصابات إلى حجم الأسطول المملوك هي <strong>15 من 87 ≈ 17%</strong>، لا 47%. وهذا الرقم — مع ذلك — <strong>ليس المقياس الصحيح</strong>، لأن الأسطول يعمل عالميًا وليس كله في نطاق الخطر. المقياس الصحيح هو مقام التعرّض في الممر نفسه.</p></section><section class="doc reveal" id="sec-03" aria-labelledby="h-03"><h2 id="h-03"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>2. المنهجية المعتمدة</h2><div class="h-rule"></div><p>المقياس القياسي في تحليل المخاطر هو <strong>مقارنة حصة الإصابات بحصة التعرّض</strong> (نسبة موحّدة على نمط <span class="ltr">SIR</span> المعتمد في تحليل المخاطر الوبائية)، لا مقارنة الإصابات بحجم الأسطول:</p>
-<div class="tbl-wrap"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
 <thead><tr>
 <th scope="col">الخطوة</th>
 <th scope="col">الصيغة</th>
@@ -747,7 +810,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 </tr>
 </tbody></table></div>
 <p><strong>عتبات التفسير</strong> (عتبات تشغيلية مقترحة، لا معيار رسمي منشور):</p>
-<div class="tbl-wrap"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
 <thead><tr>
 <th scope="col">قيمة R</th>
 <th scope="col">التفسير</th>
@@ -770,7 +833,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 </tr>
 </tbody></table></div>
 <p><strong>تنبيه منهجي:</strong> لا توجد عتبة عالمية تجعل R = 2 إثباتًا للاستهداف. والنتيجة تُقرأ مع قرائن انتقائية مستقلة (نوع الهدف، نمط الأعلام، الخطاب الرسمي).</p>
-<p><strong>مقام التعرّض الأنسب:</strong> عدد العبورات المكتملة في الممر خلال الفترة (تعريف <span class="ltr">UKMTO</span>: حركة سفينة ذات رقم <span class="ltr">IMO</span> بين الخليج العربي وخليج عُمان في نافذة 24 ساعة)، ويُدعَّم بمقياس <strong>أيام السفينة في نطاق الخطر</strong> حيث تتوفر بيانات المكوث.</p></section><section class="doc reveal" id="sec-04" aria-labelledby="h-04"><h2 id="h-04"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>3. مقام أدنوك — وهو الوحيد القابل للحساب</h2><div class="h-rule"></div><div class="tbl-wrap"><table>
+<p><strong>مقام التعرّض الأنسب:</strong> عدد العبورات المكتملة في الممر خلال الفترة (تعريف <span class="ltr">UKMTO</span>: حركة سفينة ذات رقم <span class="ltr">IMO</span> بين الخليج العربي وخليج عُمان في نافذة 24 ساعة)، ويُدعَّم بمقياس <strong>أيام السفينة في نطاق الخطر</strong> حيث تتوفر بيانات المكوث.</p></section><section class="doc reveal" id="sec-04" aria-labelledby="h-04"><h2 id="h-04"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>3. مقام أدنوك — وهو الوحيد القابل للحساب</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
 <thead><tr>
 <th scope="col">البند</th>
 <th scope="col">الرقم</th>
@@ -818,7 +881,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 </tr>
 </tbody></table></div>
 <h3>نتيجة الحساب</h3>
-<div class="tbl-wrap"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
 <thead><tr>
 <th scope="col">سيناريو المقام</th>
 <th scope="col">حصة الإصابات</th>
@@ -857,7 +920,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 </tbody></table></div>
 <p><strong>النطاق المعتمد: R يتراوح بين 2.3 و12.2 ضعفًا.</strong> وأدنى قيمة في السيناريو الأكثر تحفّظًا تبقى فوق عتبة عدم التناسب القوي.</p>
 <p><strong>الخلاصة الكمّية:</strong> إصابات أسطول أدنوك <strong>لا يفسّرها التعرّض</strong>. حتى بأكثر الفروض تحفّظًا — احتساب أقل عدد وقائع، وأعلى تقدير لعبور أدنوك — تبقى الإصابات <strong>أكثر من ضعف</strong> ما يتوقعه التعرّض وحده. وهذا يميل بالترجيح إلى <strong>الاستهداف</strong> لا إلى مجرد التعرّض المرتفع.</p></section><section class="doc reveal" id="sec-05" aria-labelledby="h-05"><h2 id="h-05"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>4. الامتداد إلى «الانتماء الإماراتي» عمومًا — لماذا لا يكتمل</h2><div class="h-rule"></div><p>المطلوب التالي كان حساب R للأساطيل الإماراتية كلها لا أدنوك وحدها. الحاجز: <strong>لا يوجد تفصيل منشور للعبور بحسب الملكية أو الانتماء</strong>، والأرقام المتاحة عن الأساطيل الإماراتية عددُ سفنٍ لا عبورات:</p>
-<div class="tbl-wrap"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
 <thead><tr>
 <th scope="col">الجهة</th>
 <th scope="col">السفن المعدودة</th>
@@ -914,7 +977,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 </tr>
 </tbody></table></div>
 <p><strong>الحكم:</strong> نسبة تعرّض «الانتماء الإماراتي» الإجمالية <strong>غير قابلة للحساب من المصادر المفتوحة</strong>. ولذلك يبقى الحساب الكمّي محصورًا في أدنوك — وهو كافٍ للحكم، لأن أدنوك هي أكبر كتلة إماراتية في الممر وأكثرها إفصاحًا.</p>
-<p><strong>ملاحظة حاكمة:</strong> ثماني سفن من عشرين في سجل الضحايا بصلة إماراتية موثّقة (40%). ومقارنة هذه النسبة بحصة تعرّض إماراتية غير معلومة <strong>لا يجوز</strong>؛ ومن يفعل ذلك يستنتج استهدافًا بلا مقام. الالتزام بالقاعدة ح14 هنا إلزامي.</p></section><section class="doc reveal" id="sec-06" aria-labelledby="h-06"><h2 id="h-06"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>5. حساسية النتيجة — ما الذي قد يقلبها</h2><div class="h-rule"></div><div class="tbl-wrap"><table>
+<p><strong>ملاحظة حاكمة:</strong> ثماني سفن من عشرين في سجل الضحايا بصلة إماراتية موثّقة (40%). ومقارنة هذه النسبة بحصة تعرّض إماراتية غير معلومة <strong>لا يجوز</strong>؛ ومن يفعل ذلك يستنتج استهدافًا بلا مقام. الالتزام بالقاعدة ح14 هنا إلزامي.</p></section><section class="doc reveal" id="sec-06" aria-labelledby="h-06"><h2 id="h-06"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>5. حساسية النتيجة — ما الذي قد يقلبها</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
 <thead><tr>
 <th scope="col">المتغير</th>
 <th scope="col">أثره على R</th>
@@ -940,7 +1003,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <td>توسيع المقام يخفض R؛ الرقم غير متحقق من مصدر أولي مفتوح</td>
 </tr>
 </tbody></table></div>
-<p><strong>أكبر مصدر شك واحد:</strong> هل الإصابات الـ15 كلها داخل نطاق هرمز؟ إعلان أدنوك يقول «أثناء عبور مضيق هرمز»، وهو ما يدعم الحساب — لكن قائمة الأسماء والتواريخ غير منشورة، فلا يمكن التحقق سطرًا بسطر.</p></section><section class="doc reveal" id="sec-07" aria-labelledby="h-07"><h2 id="h-07"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>7. ما أُضيف إلى النظام</h2><div class="h-rule"></div><ul><li><strong>قاعدة تحقق جديدة:</strong> لا يُحسب أي معدل إصابة قبل التحقق من حجم الأسطول من الإفصاح الرسمي (التقرير السنوي)، لا من خبر صحافي. مصدر خطأ اليوم: الخلط بين أسطول Navig8 المملوك وإجمالي أسطول أدنوك.</li><li><strong>عتبات R</strong> وعتبة عدم التناسب القوي (≥2) مضافة إلى قواعد التحليل الاستخباري.</li><li><strong>ملفات المقام الخمسة</strong> محفوظة كمرجع دائم في <code>audit/denominators/</code>.</li></ul></section><section class="doc reveal" id="sec-08" aria-labelledby="h-08"><h2 id="h-08"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>المصادر</h2><div class="h-rule"></div><div class="tbl-wrap"><table>
+<p><strong>أكبر مصدر شك واحد:</strong> هل الإصابات الـ15 كلها داخل نطاق هرمز؟ إعلان أدنوك يقول «أثناء عبور مضيق هرمز»، وهو ما يدعم الحساب — لكن قائمة الأسماء والتواريخ غير منشورة، فلا يمكن التحقق سطرًا بسطر.</p></section><section class="doc reveal" id="sec-07" aria-labelledby="h-07"><h2 id="h-07"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>7. ما أُضيف إلى النظام</h2><div class="h-rule"></div><ul><li><strong>قاعدة تحقق جديدة:</strong> لا يُحسب أي معدل إصابة قبل التحقق من حجم الأسطول من الإفصاح الرسمي (التقرير السنوي)، لا من خبر صحافي. مصدر خطأ اليوم: الخلط بين أسطول Navig8 المملوك وإجمالي أسطول أدنوك.</li><li><strong>عتبات R</strong> وعتبة عدم التناسب القوي (≥2) مضافة إلى قواعد التحليل الاستخباري.</li><li><strong>ملفات المقام الخمسة</strong> محفوظة كمرجع دائم في <code>audit/denominators/</code>.</li></ul></section><section class="doc reveal" id="sec-08" aria-labelledby="h-08"><h2 id="h-08"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>المصادر</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
 <thead><tr>
 <th scope="col">المصدر</th>
 <th scope="col">الاستخدام</th>
@@ -997,7 +1060,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> مقام التعرّض — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: <span class="ltr">UTC</span> وتوقيت البحرين (<span class="ltr">UTC</span>+3).
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-21 03:56 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-21 14:33 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
     
   </footer>
 </div>
@@ -1049,5 +1112,36 @@ if(p.indexOf('/reports/')===0){
   save('mn-last',JSON.stringify({path:p,title:t,at:new Date().toISOString()}));
 }
 })();
-</script></body>
+</script>
+<script>
+(function(){
+  var nav = document.querySelector('.site-nav'); if (!nav) return;
+  var btn = nav.querySelector('.sn-menu'), panel = nav.querySelector('.sn-panel');
+  var root = document.documentElement;
+  function measure(){
+    root.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+    var b = document.querySelector('.topbar');
+    root.style.setProperty('--bar-h', (b && getComputedStyle(b).display !== 'none' ? b.offsetHeight : 0) + 'px');
+  }
+  if (btn && panel){
+    btn.addEventListener('click', function(){
+      var open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && nav.classList.contains('open')){
+        nav.classList.remove('open'); btn.setAttribute('aria-expanded','false'); btn.focus();
+      }
+    });
+    nav.addEventListener('focusout', function(e){
+      if (nav.classList.contains('open') && !nav.contains(e.relatedTarget)){
+        nav.classList.remove('open'); btn.setAttribute('aria-expanded','false');
+      }
+    });
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(measure).observe(nav);
+  addEventListener('resize', measure); measure();
+})();
+</script>
+</body>
 </html>

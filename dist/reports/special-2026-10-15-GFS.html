@@ -448,7 +448,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   section.doc{font-size:10.2pt !important}
 }
 
-}
+
 
 
 /* ---------- بطاقة القرار ---------- */
@@ -618,6 +618,64 @@ display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
 body.daylight .topbar{background:#ffffff!important;border-bottom-color:#d3dded!important}
 body.daylight .brand-title,body.daylight .brand-sub{color:#0d1a2b}
 @media print{.site-nav,.sn-foot{display:none!important}}
+
+/* قائمة الجوال — تضغط شريطي الموقع والصفحة إلى ارتفاع صغير */
+.sn-menu{display:none}
+@media (max-width:760px){
+  .site-nav .sn-inner{flex-wrap:nowrap;padding:8px 14px;gap:10px;position:relative}
+  .sn-name em{display:none}
+  .sn-menu{
+    display:inline-flex;align-items:center;gap:8px;margin-inline-start:auto;
+    min-height:44px;padding:0 14px;border-radius:10px;cursor:pointer;
+    background:var(--sn-panel);border:1px solid var(--sn-line);color:var(--sn-ink);font:inherit;font-size:14px
+  }
+  .sn-menu-icon,.sn-menu-icon::before,.sn-menu-icon::after{
+    display:block;width:16px;height:2px;background:currentColor;border-radius:2px;position:relative;
+    transition:transform .2s ease,background-color .2s ease
+  }
+  .sn-menu-icon::before,.sn-menu-icon::after{content:"";position:absolute;inset-inline:0}
+  .sn-menu-icon::before{top:-5px}
+  .sn-menu-icon::after{top:5px}
+  .site-nav.open .sn-menu-icon{background:transparent}
+  .site-nav.open .sn-menu-icon::before{top:0;transform:rotate(45deg)}
+  .site-nav.open .sn-menu-icon::after{top:0;transform:rotate(-45deg)}
+  .sn-panel{
+    display:none;position:absolute;inset-inline:0;top:100%;
+    background:var(--sn-bg);border-bottom:1px solid var(--sn-line);padding:10px 14px 16px;
+    flex-direction:column;gap:12px;box-shadow:0 0 0 100vh rgba(0,0,0,.45);z-index:5
+  }
+  .site-nav.open .sn-panel{display:flex}
+  .site-nav .sn-links{flex-direction:column;margin:0;gap:2px}
+  .site-nav .sn-links a{min-height:44px;display:flex;align-items:center}
+  .topbar-inner{flex-wrap:nowrap !important;padding:6px 14px !important;gap:8px !important}
+  .topbar .brand-sub,.topbar .tb-meta .chip,.topbar .brand-mark{display:none}
+  .topbar .brand-title{font-size:13.5px;line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+  .topbar .tb-meta{display:flex;gap:6px;flex:0 0 auto}
+  .topbar .btn{min-height:40px;padding:6px 10px}
+}
+html{scroll-padding-top:calc(var(--nav-h, 60px) + var(--bar-h, 0px) + 12px);scroll-padding-bottom:80px}
+section.doc{scroll-margin-top:0 !important}
+
+/* اتجاه النصوص اللاتينية والإحداثيات — يمنع انقلابها في السياق العربي */
+.ltr{direction:ltr;unicode-bidi:isolate}
+
+/* ألوان الشارات في الوضع النهاري (نفس منطق ألوان نسخة الطباعة) */
+@media screen{
+  body.daylight .st-badge.s-stable,body.daylight .chg.c-closed .chg-tag,body.daylight .conf.c-high,
+  body.daylight .tag.t-confirm{color:#14603f;background:#edfaf3;border-color:#7cc4a0}
+  body.daylight .st-badge.s-active,body.daylight .kstrip.k-confirm,body.daylight .cls-banner.c-sensitive
+    {color:#7a1d1a;background:#fff1f0;border-color:#c77973}
+  body.daylight .conf.c-med,body.daylight .kstrip.k-suspect,body.daylight .chg.c-reclassified .chg-tag,
+  body.daylight .cls-banner.c-restricted,body.daylight .tag.t-suspect{color:#7c5000;background:#fff7e6;border-color:#c9a24f}
+  body.daylight .conf.c-low,body.daylight .kstrip.k-inter,body.daylight .chg.c-new .chg-tag
+    {color:#1d4f87;background:#edf4ff;border-color:#8bb1dd}
+  body.daylight .chg.c-ongoing .chg-tag{color:#31465c;background:#f6f8fb;border-color:#b8c4d1}
+  body.daylight .ev-code{color:#31465c;background:#f2f5f9;border-color:#c4d0dd}
+}
+
+/* رقم المعلّم: نص داكن على معلّم فاتح، ومقلوب في الوضع النهاري */
+body:not(.daylight) .lg-num{color:#04120f}
+body.daylight .lg-num{color:#ffffff}
 </style></head>
 <body><nav class="site-nav no-print" aria-label="تنقل الموقع">
   <div class="sn-inner">
@@ -625,6 +683,10 @@ body.daylight .brand-title,body.daylight .brand-sub{color:#0d1a2b}
       <span class="sn-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/><path d="M12 11.5v4"/><path d="M9.6 13.2h4.8"/></svg></span>
       <span class="sn-name">مركز الوعي بالمجال البحري<em>تقارير أمن الملاحة — مملكة البحرين</em></span>
     </a>
+    <button type="button" class="sn-menu no-print" aria-expanded="false" aria-controls="sn-panel">
+      <span class="sn-menu-icon" aria-hidden="true"></span><span>القائمة</span>
+    </button>
+    <div class="sn-panel" id="sn-panel">
     <div class="sn-links">
       <a href="/">الرئيسية</a>
       <a href="/reports/special.html" aria-current="page">التقارير الخاصة</a>
@@ -639,6 +701,7 @@ body.daylight .brand-title,body.daylight .brand-sub{color:#0d1a2b}
         <button type="button" data-scale="1.25" title="أكبر حجم">أ++</button>
       </div>
       <button type="button" class="sn-theme" id="sn-theme">المظهر</button>
+    </div>
     </div>
   </div>
 </nav><script>
@@ -671,8 +734,8 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     <h1>إصابة سفينتي حاويات في مضيق هرمز: «<span class="ltr">GFS PRIDE</span>» و«<span class="ltr">GFS GISELLE</span>»</h1>
     
     <div>
-      <p class="lede">**الجهة المُصدِرة:** مركز الوعي بالمجال البحري — مملكة البحرين</p>
-      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-21 03:56 <span class="ltr">UTC</span></b></span></div>
+      <p class="lede"><strong>الجهة المُصدِرة:</strong> مركز الوعي بالمجال البحري — مملكة البحرين</p>
+      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-21 14:33 <span class="ltr">UTC</span></b></span></div>
     </div>
   </header>
 
@@ -697,7 +760,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <p><strong>هوية السفينتين</strong></p>
 <ol><li>السفينتان من أسطول واحد ومشغّل واحد وخطّين متقاربين. وهذا يرفع احتمال أن نمط الاختيار لا يقتصر على سفينة بعينها؛ والقصد غير مثبت. والبيانات الفنية في جدول 1.</li></ol>
 <p><strong>جدول 1 — البيانات الفنية وبيانات الرحلة والشحنة</strong></p>
-<div class="tbl-wrap"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
 <thead><tr>
 <th scope="col">البيان</th>
 <th scope="col"><span class="ltr">GFS PRIDE</span></th>
@@ -803,7 +866,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <p><strong>التسلسل الزمني</strong></p>
 <ol><li>تسلسل الحركة والإصابة في جدول 2، وكل وقت مذكور بتوقيت <span class="ltr">UTC</span> وبعده توقيت البحرين.</li></ol>
 <p><strong>جدول 2 — التسلسل الزمني</strong></p>
-<div class="tbl-wrap"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
 <thead><tr>
 <th scope="col">التاريخ</th>
 <th scope="col">الوقت (<span class="ltr">UTC</span>)</th>
@@ -914,7 +977,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <p><strong>السفن المتصلة بالحادث</strong></p>
 <ol><li>جدول 3 يبيّن السفن المتصلة، وترتيبها بحسب قوة الصلة.</li></ol>
 <p><strong>جدول 3 — السفن المتصلة مباشرة</strong></p>
-<div class="tbl-wrap"><table>
+<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
 <thead><tr>
 <th scope="col">السفينة</th>
 <th scope="col">نوع الصلة</th>
@@ -988,7 +1051,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <ol><li>ثبّت رمزي الحادثين في الدفتر التراكمي، واربطهما بخلفيتهما: «<span class="ltr">GFS GALAXY</span>» في يوليو و«<span class="ltr">CAPE DAO</span>» في سبتمبر. <strong>المنفذ:</strong> خلية الذاكرة. <strong>السبب:</strong> حفظ الترابط التحليلي. <strong>الأثر المتوقع:</strong> قراءة الاتجاه لا الخبر المفرد.</li></ol>
 <ol><li>تابع ثلاثة بنود مفتوحة: تقرير السلامة الرسمي، وحالة «<span class="ltr">ALFONSO</span>»، ومصير الحطام. <strong>المنفذ:</strong> خلية الرصد. <strong>السبب:</strong> بنود تؤثر في التصنيف النهائي. <strong>الأثر المتوقع:</strong> تحديث التقدير عند ورود معطى جديد.</li></ol>
 <ol><li>أبقِ تقييم رواية اللغم عند «لا يمكن الحكم» حتى ورود تحقق مستقل. <strong>المنفذ:</strong> خلية التوثيق. <strong>السبب:</strong> حماية درجة الإثبات. <strong>الأثر المتوقع:</strong> منع تسرب ادعاء إلى سجل الوقائع.</li></ol>
-<p><strong>الرتبة والاسم:</strong> (بانتظار تأكيد الرتبة) فهد الدوسري</p></section><section class="doc reveal" id="sec-06" aria-labelledby="h-06"><h2 id="h-06"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>ملحق &quot;أ&quot; — المصادر ودرجة التحقق</h2><div class="h-rule"></div><div class="tbl-wrap"><table>
+<p><strong>الرتبة والاسم:</strong> (بانتظار تأكيد الرتبة) فهد الدوسري</p></section><section class="doc reveal" id="sec-06" aria-labelledby="h-06"><h2 id="h-06"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>ملحق &quot;أ&quot; — المصادر ودرجة التحقق</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table>
 <thead><tr>
 <th scope="col">المصدر</th>
 <th scope="col">النوع</th>
@@ -1069,7 +1132,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> تقرير خاص — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: <span class="ltr">UTC</span> وتوقيت البحرين (<span class="ltr">UTC</span>+3).
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-21 03:56 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-21 14:33 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
     
   </footer>
 </div>
@@ -1121,5 +1184,36 @@ if(p.indexOf('/reports/')===0){
   save('mn-last',JSON.stringify({path:p,title:t,at:new Date().toISOString()}));
 }
 })();
-</script></body>
+</script>
+<script>
+(function(){
+  var nav = document.querySelector('.site-nav'); if (!nav) return;
+  var btn = nav.querySelector('.sn-menu'), panel = nav.querySelector('.sn-panel');
+  var root = document.documentElement;
+  function measure(){
+    root.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+    var b = document.querySelector('.topbar');
+    root.style.setProperty('--bar-h', (b && getComputedStyle(b).display !== 'none' ? b.offsetHeight : 0) + 'px');
+  }
+  if (btn && panel){
+    btn.addEventListener('click', function(){
+      var open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && nav.classList.contains('open')){
+        nav.classList.remove('open'); btn.setAttribute('aria-expanded','false'); btn.focus();
+      }
+    });
+    nav.addEventListener('focusout', function(e){
+      if (nav.classList.contains('open') && !nav.contains(e.relatedTarget)){
+        nav.classList.remove('open'); btn.setAttribute('aria-expanded','false');
+      }
+    });
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(measure).observe(nav);
+  addEventListener('resize', measure); measure();
+})();
+</script>
+</body>
 </html>
