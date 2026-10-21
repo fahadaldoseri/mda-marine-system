@@ -117,6 +117,51 @@ SECTION_HINTS = {
 # أقسام تُمنح تمييزًا بصريًا محسوبًا: خلاصة القرار + الإجراء المطلوب
 PRIORITY_SECTIONS = ("الخلاصة", "التوجيهات التشغيلية")
 
+# ── إخفاء أقسام من إصدار التقرير (الويب والطباعة معًا) — قرار المالك 2026-10-21 ──
+# القاعدة: الإخفاء يُنفَّذ هنا مرة واحدة فيخدم الويب وPDF وWord، ولا تُحذف البيانات
+# من ملف الواجهة ولا من دفتر الأحداث (تبقى للأرشيف والفحوص).
+HIDDEN_SECTIONS = {
+    "قاموس الرموز والمصطلحات",
+    "مؤشرات الموقف",
+    "مستوى التهديد",
+    "التوجيهات التشغيلية",
+    "التحليل الاستخباري",
+    "الاحتمالات والإسناد",
+    "المراقبة المستمرة",
+    "المصادر والمراجع",
+}
+HIDDEN_BLOCKS = {"gaps"}  # «تكليفات المتابعة» داخل قسم «ما لم يُحسم»
+
+
+def load_section_policy(meta_path=None):
+    """سياسة الأقسام من مصادرها الواحدة في Brain؛ تُنسخ إلى sources/ عند المزامنة."""
+    global HIDDEN_SECTIONS, HIDDEN_BLOCKS
+    cands = []
+    if meta_path:
+        mp = Path(meta_path).resolve()
+        ps = list(mp.parents)
+        if len(ps) > 2:
+            cands.append(ps[2] / "sources" / "report-sections-policy.json")
+        if len(ps) > 1:
+            cands.append(ps[1] / "appendices" / "report-sections-policy.json")
+    cands.append(Path(__file__).resolve().parent.parent / "sources" / "report-sections-policy.json")
+    for c in cands:
+        try:
+            if c.is_file():
+                d = json.loads(c.read_text(encoding="utf-8"))
+                if d.get("hidden_sections"):
+                    HIDDEN_SECTIONS = set(d["hidden_sections"])
+                if d.get("hidden_blocks") is not None:
+                    HIDDEN_BLOCKS = set(d["hidden_blocks"])
+                return c
+        except Exception:
+            continue
+    return None
+
+
+def _hidden(title: str) -> bool:
+    return any(h in title for h in HIDDEN_SECTIONS)
+
 INCIDENT_SECTION_KEYS = ("الوقائع الجديدة", "الوقائع", "الوقائع الأمنية")
 
 ICON_PATHS = {
@@ -1037,6 +1082,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
                 return i
         return len(order)
 
+    sections = [x for x in sections if not _hidden(x["title"])]
     sections = sorted(sections, key=_order_key)
 
     # كتل خاصة بكل قسم: خريطة عنوان القسم إلى اسم الكتلة
@@ -1080,7 +1126,12 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
 
     # قاموس الرموز والمصطلحات: يُطبع قسمًا مستقلًا بعد الخلاصة.
     # عطل ك-36: كان في تذييل الصفحة، وأنماط الطباعة تخفي التذييل، فغاب عن PDF تمامًا.
-    glossary_html = BLK.glossary(meta.get("glossary"))
+    glossary_html = ("" if _hidden("قاموس الرموز والمصطلحات")
+                     else BLK.glossary(meta.get("glossary")))
+
+    # قائمة الأقسام المخفية تُطبع للسجل مرة واحدة (تتبّع القرار لا التخمين)
+    _hid = sorted(HIDDEN_SECTIONS)
+    print("أقسام مُخفاة من الإصدار: " + " · ".join(_hid), file=sys.stderr)
 
     body = []
     for idx, sec in enumerate(sections):
@@ -1101,6 +1152,8 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
         for key, bname in blocks_map.items():
             if key in t:
                 for _bn in str(bname).split('+'):
+                    if _bn in HIDDEN_BLOCKS:
+                        continue
                     if block_data.get(_bn):
                         section_html += BLK.render_block(_bn, block_data[_bn], inline)
         # عطل ك-72: تنبيه القسم كان داخل حلقة كتل المؤشرات فيتكرر بعددها (6 مرات في إصدار 20 أكتوبر).
@@ -1270,6 +1323,7 @@ def main():
     if not meta_path.exists():
         print(f"خطأ: ملف الواجهة غير موجود: {meta_path}", file=sys.stderr)
         return 2
+    load_section_policy(meta_path)
     try:
         meta = json.loads(meta_path.read_text(encoding="utf-8"))
     except json.JSONDecodeError as e:

@@ -43,6 +43,18 @@ HERE = Path(__file__).resolve().parent
 SITE = HERE.parent
 
 
+
+def copy_section_policy(src_brain, dst_sources):
+    """نسخ سياسة الأقسام إلى بيانات الموقع: مصدر واحد يقرأه المولّد والبوابات."""
+    f = Path(src_brain) / 'appendices' / 'report-sections-policy.json'
+    if f.is_file():
+        Path(dst_sources).mkdir(parents=True, exist_ok=True)
+        (Path(dst_sources) / 'report-sections-policy.json').write_text(
+            f.read_text(encoding='utf-8'), encoding='utf-8')
+        return True
+    return False
+
+
 def copy_sources(date_iso: str, brain: Path) -> list:
     log = []
     src_md = brain / "reports" / f"{date_iso}-sectioned.md"
@@ -183,6 +195,7 @@ def main():
     a = ap.parse_args()
 
     brain = Path(a.brain).resolve()
+    copy_section_policy(brain, _ROOT / 'sources')
     for line in copy_sources(a.date, brain):
         print(line)
     for line in sync_special(brain):
