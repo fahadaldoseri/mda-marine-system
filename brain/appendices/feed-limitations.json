@@ -1,0 +1,30 @@
+{
+  "note": "قيود مصادر موثقة بالأدلة. سياسة النظام تمنع تجاوز حماية المواقع، فيُسجَّل التعذّر قيدًا معروفًا يُذكر في حدّ البحث، لا فشلًا يُسقط الإصدار. أي مصدر غير مدرج هنا يبقى فشلًا حقيقيًا.",
+  "updated": "2026-10-21",
+  "limits": [
+    {
+      "num": 17,
+      "name": "حساب @bna_en على X",
+      "match": [
+        "403",
+        "forbidden",
+        "405"
+      ],
+      "evidence": "HTTP 403 على حساب X · HTTP 405 على واجهة RSS الرسمية لموقع BNA",
+      "alternative": "قناة وكالة أنباء البحرين الرسمية على تلغرام (t.me/s/bna_ar)",
+      "documented": "2026-10-21"
+    },
+    {
+      "num": 32,
+      "name": "IMB/ICC — القرصنة",
+      "match": [
+        "ssl",
+        "eof",
+        "unexpected_eof"
+      ],
+      "evidence": "SSL: UNEXPECTED_EOF_WHILE_READING على icc-ccs.org — حجب على مستوى النقل",
+      "alternative": "بيان ATALANTA وتقارير JMIC الرسمية لتغطية القرصنة",
+      "documented": "2026-10-21"
+    }
+  ]
+}

@@ -112,16 +112,24 @@ if site.exists():
         fails.append(f"تعذّر قراءة sources/site.json: {e}")
 
 def _known_block(feeds):
-    """قيود الحماية المعروفة: مصادر متعذّرة بحجب تحقق بشري أو 403.
+    """قيود المصادر الموثقة في appendices/feed-limitations.json.
 
-    سياسة النظام تمنع تجاوز الحماية، فيُصنَّف التعذّر قيدًا معروفًا لا فشلًا،
-    ويُذكر صريحًا في التقرير ضمن حدّ البحث.
+    سياسة النظام تمنع تجاوز حماية المواقع. يُصنَّف التعذّر قيدًا معروفًا فقط إن
+    كان المصدر مُدرجًا في السجل ومطابقًا لدليل الخطأ المسجَّل؛ وإلا فهو فشل حقيقي.
     """
+    try:
+        register = json.loads((B / 'appendices' / 'feed-limitations.json')
+                              .read_text(encoding='utf-8'))
+    except Exception:
+        return "لا شيء"
     out = []
     for f in (feeds or {}).get("failed_feeds", []) or []:
         reason = f"{f.get('error', '')} {f.get('block_reason', '')}".lower()
-        if any(k in reason for k in ("human verification", "403", "forbidden", "captcha")):
-            out.append(f.get("name") or f.get("num"))
+        for item in register.get("limits", []):
+            if f.get("num") == item.get("num") and any(
+                    k.lower() in reason for k in item.get("match", [])):
+                out.append(f.get("name") or f.get("num"))
+                break
     return out or "لا شيء"
 
 

@@ -1,11 +1,13 @@
 === تدقيق المكتبات والمهارات والترابط ===
-  1) المكتبات — 8 ملفًا
+  1) المكتبات — 10 ملفًا
      ✔ findings-2026-10-20.json · 329,537 حرفًا
-     ✔ findings-2026-10-21.json · 329,536 حرفًا
-     ✔ findings-register.md · 1,486 حرفًا
-     ✔ lexicon-library.json · 231,704 حرفًا
-     ✔ lexicon-library.md · 6,078 حرفًا
-     ✔ orthography-consistency.md · 3,231 حرفًا
+     ✔ findings-2026-10-21.json · 341,797 حرفًا
+     ✔ findings-register.md · 1,796 حرفًا
+     ✔ lexicon-library.json · 229,891 حرفًا
+     ✔ lexicon-library.md · 6,084 حرفًا
+     ✔ new-terms-register.json · 16,121 حرفًا
+     ✔ new-terms-register.md · 11,586 حرفًا
+     ✔ orthography-consistency.md · 3,072 حرفًا
      ✔ recurring-phrases.md · 2,621 حرفًا
      ✔ terminology-gaps.md · 569 حرفًا
   2) ارتباط المكتبات بمن يقرؤها
@@ -39,7 +41,7 @@
      ✔ تغطية فحص العقوبات ← check_ofac_coverage (مُشغَّل في البوابة)
      ✔ سلامة المهارات ← check_skills_integrity (مُشغَّل في البوابة)
   5) ترابط البوابات والأدوات والإجراء
-     أدوات تستدعيها البوابة: 10 · كلها موجودة
+     أدوات تستدعيها البوابة: 11 · كلها موجودة
      تدقيق المكتبات في البوابة: ✔
   6) النقل والسرية
      مسارات مطلقة: 28
@@ -48,5 +50,9 @@
      ✔ telegram-subscriptions.json سرّي ومُستثنى/مُنقّى في النسخة الاحتياطية
      ملفات بأسرار محتملة: 3
 
-النتيجة: 0 عائق · 1 تحذير
+النتيجة: 0 عائق · 5 تحذير
+  • [الارتباط] new-terms-register.json: يقرؤه أداة توليد فقط (tools/harvest_terms.py) ولا يصل إلى بوابة ولا تعليمة
+  • [الارتباط] new-terms-register.json: لا بوابة تقرؤه — لا يُنفَّذ على الإصدار
+  • [الارتباط] new-terms-register.md: يقرؤه أداة توليد فقط (tools/harvest_terms.py) ولا يصل إلى بوابة ولا تعليمة
+  • [الارتباط] new-terms-register.md: لا بوابة تقرؤه — لا يُنفَّذ على الإصدار
   • [النقل] 28 ملفًا بمسار مطلق (يكسر النقل): ['tools/apply_jmic_ukmto_to_gfs.py (1)', 'tools/telegram_bot.py (1)', 'tools/_oneoff/finalize_2026-10-18.py (1)']

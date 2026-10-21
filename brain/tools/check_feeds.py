@@ -39,9 +39,7 @@ HEADERS = {
 }
 # مصادر بلا تغذية آلية رسمية (موقعها JS ولا تغذية معلنة): تُقيَّد «يُفحص بالمتصفح»
 # ولا تُحسب فشلًا — لا نبني مسارًا يتجاوز الحماية (سياسة المستخدم).
-BROWSER_ONLY = {
-    26: 'موقع JS بلا تغذية رسمية معلنة — يُفحص بالمتصفح',
-}
+BROWSER_ONLY = {}  # ك-81: واس صار له مسار رسمي (بيانات الصفحة المُضمَّنة)
 FAIL_RATIO_LIMIT = 0.20
 MIN_CONTENT_CHARS = 400
 MIN_ITEMS = 1
@@ -58,6 +56,11 @@ FALLBACK_ROUTES = {
     25: [
         {'url': 'https://t.me/s/wamnews_en',
          'via': 'official-telegram:wamnews_en'},
+    ],
+    # ك-81: واس (26) موقع Next.js؛ بياناته الرسمية مُضمَّنة في الصفحة نفسها.
+    26: [
+        {'url': 'https://www.spa.gov.sa/ar', 'via': 'official:spa-next-data'},
+        {'url': 'https://www.spa.gov.sa/', 'via': 'official:spa-home-next-data'},
     ],
     14: [
         {'url': 'https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml',
@@ -140,6 +143,52 @@ def parse(xml):
     return [item for item in items if item['title'] or item['link']]
 
 
+def _next_data_items(raw):
+    """يقرأ محتوى المواقع الحديثة من __NEXT_DATA__ المُضمَّن في الصفحة الرسمية.
+
+    مسار رسمي: الصفحة نفسها تحمل بياناتها في HTML، فلا حاجة لتجاوز أي حماية.
+    """
+    match = re.search(
+        r'<script[^>]*id=["\']__NEXT_DATA__["\'][^>]*>(.*?)</script>', raw, re.S | re.I
+    )
+    if not match:
+        return []
+    try:
+        data = json.loads(match.group(1))
+    except Exception:
+        return []
+    found = []
+
+    def walk(node, depth=0):
+        if depth > 8 or len(found) >= 60:
+            return
+        if isinstance(node, dict):
+            title = node.get('title') or node.get('headline') or node.get('name')
+            if isinstance(title, str) and len(title.strip()) >= 8:
+                link = (node.get('url') or node.get('link') or node.get('slug')
+                        or node.get('uuid') or '')
+                found.append({
+                    'title': _clean(title),
+                    'link': str(link),
+                    'date': str(node.get('published_at') or node.get('publishedAt')
+                                or node.get('date') or ''),
+                })
+            for value in node.values():
+                walk(value, depth + 1)
+        elif isinstance(node, list):
+            for value in node:
+                walk(value, depth + 1)
+
+    walk(data)
+    seen, items = set(), []
+    for item in found:
+        key = item['title']
+        if key not in seen:
+            seen.add(key)
+            items.append(item)
+    return items
+
+
 def _derived_items(text, source_url):
     """Turn a valid proxy-rendered page into auditable, non-empty feed items."""
     items = []
@@ -190,12 +239,31 @@ def _payload_items(payload, source_url):
     blocked = _blocked_reason(raw)
     if blocked:
         raise ValueError(blocked)
-    if len(text) < MIN_CONTENT_CHARS:
-        raise ValueError(f'content too short: {len(text)} chars < {MIN_CONTENT_CHARS}')
-    items = parse(raw) or _derived_items(raw, source_url)
-    if len(items) < MIN_ITEMS:
+    items = parse(raw)
+    method = 'rss'
+    if not items:
+        items = _next_data_items(raw)
+        method = 'next-data'
+    if not items:
+        items = _derived_items(raw, source_url)
+        method = 'derived'
+    # عطل ك-82: هيكل تطبيق JS يُنتج «عنصرًا» واحدًا وهميًا من عنوان، فيظهر المصدر ناجحًا
+    # بلا محتوى حقيقي. الشرط: أي استخراج مشتق من هيكل تطبيق يلزمه 3 عناصر على الأقل.
+    shell = bool(re.search(r'polyfills\.[0-9a-f]{8}|runtime\.[0-9a-f]{8}|/_next/static/', raw, re.I))
+    if method == 'derived' and shell and len(items) < 3:
+        raise ValueError(f'app shell without real feed items ({len(items)} derived)')
+    # عطل ك-81: مواقع Next.js تحمل بياناتها في <script>، فالنص المرئي قصير بطبعه.
+    # القياس الصحيح: إن وُجدت عناصر مقروءة فالمحتوى كافٍ؛ وإلا يُقاس النص المرئي.
+    if not items:
+        if len(text) < MIN_CONTENT_CHARS:
+            raise ValueError(f'content too short: {len(text)} chars < {MIN_CONTENT_CHARS}')
         raise ValueError(f'no feed items found (minimum {MIN_ITEMS})')
-    return items, len(text)
+    content_chars = len(text) if len(text) >= MIN_CONTENT_CHARS else len(raw)
+    return items, content_chars
+
+
+# مسار رسمي يُقدَّم على العنوان الأساسي لأنه أنقى محتوى (عطل ك-82).
+PREFERRED_ROUTE = {25: 'https://t.me/s/wamnews_en'}
 
 
 def _routes_for(feed):
@@ -205,6 +273,9 @@ def _routes_for(feed):
         if route['url'] not in seen:
             routes.append(route)
             seen.add(route['url'])
+    preferred = PREFERRED_ROUTE.get(feed['num'])
+    if preferred:
+        routes.sort(key=lambda r: 0 if r['url'] == preferred else 1)
     return routes
 
 
@@ -270,7 +341,8 @@ def main():
         res = list(ex.map(fetch, F))
     # عطل ك-68: انقطاع اتصال عابر لمصدر واحد كان يُسجَّل فشلًا نهائيًا. إعادة محاولة واحدة.
     retry = [r for r in res if not r['ok'] and r['num'] not in BROWSER_ONLY
-             and 'timed out' in str(r.get('error', '')).lower()]
+             and any(k in str(r.get('error', '')).lower()
+                     for k in ('timed out', 'incompleteread', 'connection reset', 'remote end closed'))]
     if retry:
         time.sleep(5)
         again = {r['num']: r for r in [fetch(x) for x in retry]}
