@@ -160,6 +160,30 @@ def _prose_only(text):
     return '\n'.join(keep)
 
 
+# كلمات تدل على جملة وصفية لا مصطلح: أفعال وروابط وحالات.
+SENTENCE_WORDS = set("""صدر ورد لا بلا ولا لم لن غياب استمرار توسيع تحديث فرق محاولة إعلان
+الرواية تصنيف مغلق مراجعة فرق في عدّ حطام طافية وغارقة غرق إصابة تضرر شرق غرب شمال
+جنوب قرب بعد قبل خلال داخل خارج وفق حسب مقابل بشأن عن مع بين أيّ أي أن إن وقد وكان
+قال قالت أعلن أعلنت وقع وقعت حدث حدثت يعد تعد يذكر تذكر بقي بقيت ظل ظلت""".split())
+
+
+def _is_noise(piece):
+    """جملة وصفية أو اسم سفينة أو عنوان واقعة — ليست مصطلحًا."""
+    n = norm(piece)
+    words = n.split()
+    if len(words) > 3:
+        return True
+    if any(w in SENTENCE_WORDS for w in words):
+        return True
+    if re.search(r'«[^»]*[A-Za-z][^»]*»', piece):
+        return True
+    if re.search(r'MN-\d{4}', piece):
+        return True
+    if re.search(r'[A-Za-z]', piece):
+        return True
+    return False
+
+
 def _split_bold(match):
     for piece in re.split(r'[·،,؛:()/]', match):
         piece = piece.strip(' .«»"\'')
@@ -169,6 +193,8 @@ def _split_bold(match):
             continue
         words = norm(piece).split()
         if len(words) < 2 or not any(w in MARKERS for w in words):
+            continue
+        if _is_noise(piece):
             continue
         yield piece
 
@@ -202,9 +228,20 @@ def candidates(date):
             phrases.append(piece)
 
     no_urls = URL_SPAN.sub(' ', prose + ' ' + meta_text)
-    latin = [t for t in LATIN_TOKEN.findall(no_urls)
-             if '_' not in t and '/' not in t and t.rstrip('.').lower() not in EN_COMMON
-             and len(t.rstrip('.')) >= 3]
+    # اسم سفينة أو شركة أو رمز داخل علامات تنصيص: ليس رمزًا يحتاج تعريفًا.
+    ship_ctx = re.compile(r'(?:سفينة|ناقلة|السفينة|الناقلة|سفن|ناقلات|شركة|بارجة|الواقعة)\s*«?\s*$')
+    latin = []
+    for t in LATIN_TOKEN.findall(no_urls):
+        if '_' in t or '/' in t:
+            continue
+        clean = t.rstrip('.')
+        if len(clean) < 3 or clean.lower() in EN_COMMON:
+            continue
+        idx = no_urls.find(t)
+        before = no_urls[max(0, idx - 22):idx]
+        if ship_ctx.search(before) or re.search(r'«\s*$', before):
+            continue
+        latin.append(clean)
     return prose, meta_text, full, phrases, latin
 
 
@@ -215,6 +252,8 @@ def harvest(date):
         return 2
     prose, meta_text, full, phrases, latin = got
 
+    bank = read_json(B / 'appendices' / 'glossary-standard.json') or {}
+    bank_keys = set((bank.get('symbols') or {}).keys())
     known = library_terms()
     known_norm = {norm(t) for t in known}
     known_lat = known_latin(known)
@@ -251,7 +290,8 @@ def harvest(date):
             'term': term, 'kind': kind, 'first_seen': date,
             'occurrences_in_edition': full.count(term),
             'context': re.sub(r'\s+', ' ', ctx.group(0).strip()) if ctx else '',
-            'status': 'بانتظار مراجعة المالك',
+            'status': ('مُدرَج في بنك التعريفات' if term in bank_keys
+                       else 'بانتظار مراجعة المالك'),
         })
         seen.add(term)
         added.append(term)
