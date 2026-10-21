@@ -75,6 +75,10 @@ fi
 # 4) الدفع
 say "4) الدفع إلى GitHub"
 bash "$_B/tools/github_backup.sh" 2>&1 | tail -3 || FAIL=1
+
+echo "── تماثل المهارات بعد الدفع ──"
+bash "$_B/tools/restore_skills.sh" --check 2>&1 | tail -2 || \
+  echo "  • تماثل المهارات: يحتاج مراجعة (المحلي أحدث — ادفعه)"
 if [ -d "$_S/.git" ]; then
   cd "$_S"
   if [ -n "$(git status --porcelain)" ]; then
