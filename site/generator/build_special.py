@@ -98,6 +98,11 @@ def build_one(item: dict, dist: Path) -> Path:
     path, _ = BR.build(item["md"], out, item["meta"], doc_mode=True)
     html = path.read_text(encoding="utf-8")
     html = CH.inject(html, "special", "تقرير خاص — مستقل عن الإصدار اليومي")
+    sup = item["meta"].get("superseded_by")
+    if sup:
+        banner = ('<div class="sup-banner" role="note">نسخة مستبدلة — اعتمد الإصدار المحدّث: '
+                  f'<a href="/reports/special-{sup}.html">افتح الإصدار المعتمد ←</a></div>')
+        html = html.replace('<div class="wrap">', '<div class="wrap">' + banner, 1)
     path.write_text(html, encoding="utf-8")
     return path
 
@@ -108,13 +113,17 @@ def build_index(items: list, dist: Path) -> Path:
         m = it["meta"]
         cls = str(m.get("classification") or "عام")
         tag_cls = "sp-tag sp-hot" if cls in ("مقيّد", "حساس") else "sp-tag"
+        sup = m.get("superseded_by")
+        sup_tag = '<span class="sp-tag sp-hot">نسخة مستبدلة</span>' if sup else ''
+        card_cls = "sp-card sp-dim" if sup else "sp-card"
         kpis = m.get("hero_kpis") or []
         kpi_txt = " · ".join(f'{esc(k.get("label",""))}: {esc(str(k.get("value","")))}' for k in kpis[:3])
-        cards.append(f"""<a class="sp-card" href="/reports/special-{esc(it['slug'])}.html">
+        cards.append(f"""<a class="{card_cls}" href="/reports/special-{esc(it['slug'])}.html">
       <div class="sp-top">
         <span class="{tag_cls}">{esc(cls)}</span>
         <span class="sp-tag sp-code">{esc(m.get('code') or '')}</span>
         <span class="sp-tag">{esc(ar_date(m.get('date')))}</span>
+        {sup_tag}
       </div>
       <h2>{esc(m.get('title') or it['slug'])}</h2>
       <p>{esc(m.get('summary') or m.get('lede') or '')}</p>

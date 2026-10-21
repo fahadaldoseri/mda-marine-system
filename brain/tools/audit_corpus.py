@@ -308,9 +308,17 @@ def main() -> int:
            "repeated_phrases": shared}
     (LIB / "lexicon-library.json").write_text(
         json.dumps(lib, ensure_ascii=False, indent=2), encoding="utf-8")
+    def _rel(x):
+        if isinstance(x, str):
+            return x.replace(str(ROOT), ".").replace(str(Path.home()), "~")
+        if isinstance(x, list):
+            return [_rel(i) for i in x]
+        if isinstance(x, dict):
+            return {k: _rel(v) for k, v in x.items()}
+        return x
     (LIB / f"findings-{a.date}.json").write_text(
-        json.dumps({"per_document": per_doc, "findings": findings, "lexicon": lib["lexicon"],
-                    "orthography": ortho, "repeated_phrases": shared},
+        json.dumps(_rel({"per_document": per_doc, "findings": findings, "lexicon": lib["lexicon"],
+                    "orthography": ortho, "repeated_phrases": shared}),
                    ensure_ascii=False, indent=2), encoding="utf-8")
 
     md = ["# مكتبة المعجم والمصطلحات — مبنية بالقياس على كل الإصدارات", "",

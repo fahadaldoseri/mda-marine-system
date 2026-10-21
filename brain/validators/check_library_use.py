@@ -119,7 +119,9 @@ def main() -> int:
     orth_f = B / "appendices" / "libraries" / "orthography-consistency.md"
     clashes = []
     if orth_f.is_file():
-        pairs = re.findall(r"\|\s*([^|\s]+)\s*\|\s*([^|\s]+)\s*\|", orth_f.read_text(encoding="utf-8"))
+        rows = [l.split("|") for l in orth_f.read_text(encoding="utf-8").splitlines() if l.startswith("|")]
+        pairs = [(r[1].strip(), r[2].strip()) for r in rows
+                 if len(r) > 3 and r[1].strip().startswith("«") and r[2].strip().startswith("«")]
         clashes = [f"{a}/{b}" for a, b in pairs if a != b and a in text and b in text]
     print(f"  ل4 مكتبة الإملاء: {len(clashes)} رسم مزدوج في الإصدار"
           + (f" → {' · '.join(clashes[:4])}" if clashes else ""))
@@ -134,9 +136,22 @@ def main() -> int:
             if isinstance(v, dict) and v.get("term"):
                 known.add(v["term"])
         known |= set(lex.get("lexicon") or {}) if isinstance(lex.get("lexicon"), dict) else set()
+        tfile = B / "appendices" / "terminology.md"
+        if tfile.is_file():
+            known |= set(re.findall(r"[A-Z][A-Z0-9]{2,}", tfile.read_text(encoding="utf-8")))
         syms = set(re.findall(r"\b[A-Z][A-Z0-9]{2,}(?:/[A-Z]+)?\b", text))
+        # أسماء السفن ليست رموزًا: تُستثنى من قياس المعجم (وإلا ظهرت أجزاء الأسماء رموزًا)
+        try:
+            sys.path.insert(0, str(B / "tools"))
+            import vessel_names as vn                                  # noqa: PLC0415
+            vessels = set()
+            for v in (vn.from_report(date) or []):
+                vessels |= {w for w in re.split(r"[^A-Za-z0-9]+", v) if w}
+        except Exception:                                              # noqa: BLE001
+            vessels = set()
         unknown = sorted(s for s in syms
-                         if s not in known and not any(s in k for k in glossary))[:6]
+                         if s not in known and s not in vessels
+                         and not any(s in k for k in glossary))[:6]
     print(f"  ل5 مكتبة المعجم: {len(unknown)} رمزًا في الإصدار خارج المعجم"
           + (f" → {' · '.join(unknown)}" if unknown else ""))
 

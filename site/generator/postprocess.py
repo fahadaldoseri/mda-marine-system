@@ -49,6 +49,32 @@ body.daylight .lg-num{color:#ffffff}
 
 TRUST_AR = {"high": "عالية", "medium": "متوسطة", "low": "منخفضة"}
 
+EXTRA_CSS = """
+/* بطاقات الجوال للجداول — البند المعتمد 21 أكتوبر 2026 */
+@media (max-width:560px){
+  table.cardified{display:block;border:0;background:transparent;border-radius:0}
+  table.cardified.cardified{width:100%;max-width:100%;min-width:0}
+  table.cardified thead{display:none}
+  table.cardified tbody{display:block;max-width:100%}
+  table.cardified tr{display:block;max-width:100%;box-sizing:border-box;background:var(--panel);
+    border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin:0 0 10px}
+  table.cardified td{display:grid;grid-template-columns:minmax(72px,auto) minmax(0,1fr);gap:8px;
+    border:0;padding:5px 0;align-items:baseline;text-align:start;
+    overflow-wrap:anywhere;word-break:break-word;min-width:0}
+  table.cardified td::before{content:attr(data-label);color:var(--muted);font-size:12.5px;font-weight:600}
+  table.cardified td:empty{display:none}
+  .tbl-wrap:has(table.cardified),.tbl-scroll:has(table.cardified){overflow:visible;border:0}
+  .tbl-hint{display:none}
+}
+/* بانر النسخة المستبدلة — البند المعتمد 21 أكتوبر 2026 */
+.sup-banner{margin:0 0 20px;padding:12px 16px;border:1px solid #c9a24f;border-radius:10px;
+  background:#2a2210;color:#ffd88a;font-size:14px}
+body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
+.sup-banner a{color:inherit;font-weight:700;text-decoration:underline}
+.sp-dim{opacity:.72}
+"""
+
+
 
 def _outside_code(html: str, fn):
     return "".join(p if CODE.match(p) else fn(p) for p in CODE.split(html))
@@ -133,6 +159,40 @@ def _tables(part: str) -> str:
     return re.sub(r'<div class="(?:tbl-wrap|tbl-scroll)"[^>]*>\s*<table.*?</table>', one, part, flags=re.S)
 
 
+def _cardify(part: str) -> str:
+    """يحوّل كل جدول إلى بطاقات على الجوال: ينسخ رأس الجدول إلى data-label لكل خلية."""
+    import html as html_mod
+
+    def one(m):
+        tbl = m.group(0)
+        heads = [html_mod.unescape(re.sub(r"<[^>]+>", "", h)).strip()
+                 for h in re.findall(r"<th\b[^>]*>(.*?)</th>", tbl, re.S)]
+        if not heads:
+            return tbl
+
+        def row(mr):
+            idx = [0]
+
+            def cell(mc):
+                i = idx[0]
+                idx[0] += 1
+                lab = heads[i] if i < len(heads) else ""
+                if not lab or "data-label" in mc.group(0):
+                    return mc.group(0)
+                return mc.group(1) + f' data-label="{lab}"' + mc.group(2)
+            return re.sub(r"(<td\b[^>]*)(>)", cell, mr.group(0))
+
+        tbl = re.sub(r"<tr\b[^>]*>.*?</tr>", row, tbl, flags=re.S)
+        head_tag = tbl.split(">", 1)[0]
+        if 'class="' in head_tag:
+            tbl = re.sub(r'^(<table\b[^>]*?)class="([^"]*)"', r'\1class="\2 cardified"', tbl, count=1)
+        else:
+            tbl = re.sub(r"^<table\b", '<table class="cardified"', tbl, count=1)
+        return tbl
+
+    return re.sub(r"<table\b[^>]*>.*?</table>", one, part, flags=re.S)
+
+
 def _stars(part: str) -> str:
     part = re.sub(r"\*\*([^*<>]{1,120}?)\*\*", r"<strong>\1</strong>", part)
     part = re.sub(r"<strong>\*\*([؛.\s]*)</strong>", r"\1", part)
@@ -168,6 +228,7 @@ def sanitize(html: str) -> str:
         part = _stars(part)
         part = _trust(part)
         part = _tables(part)
+        part = _cardify(part)
         return _empty_tags(part)
 
     html = _outside_code(html, body_fix)
@@ -181,6 +242,8 @@ def sanitize(html: str) -> str:
             add += DAYLIGHT_BADGES
         if ".lg-num" not in css:
             add += LEGEND_NUM
+        if "table.cardified" not in css:
+            add += EXTRA_CSS
         return css + add
 
     blocks = list(STYLE.finditer(html))

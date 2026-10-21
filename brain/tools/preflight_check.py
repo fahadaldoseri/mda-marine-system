@@ -111,15 +111,44 @@ if site.exists():
     except Exception as e:
         fails.append(f"تعذّر قراءة sources/site.json: {e}")
 
+def _known_block(feeds):
+    """قيود الحماية المعروفة: مصادر متعذّرة بحجب تحقق بشري أو 403.
+
+    سياسة النظام تمنع تجاوز الحماية، فيُصنَّف التعذّر قيدًا معروفًا لا فشلًا،
+    ويُذكر صريحًا في التقرير ضمن حدّ البحث.
+    """
+    out = []
+    for f in (feeds or {}).get("failed_feeds", []) or []:
+        reason = f"{f.get('error', '')} {f.get('block_reason', '')}".lower()
+        if any(k in reason for k in ("human verification", "403", "forbidden", "captcha")):
+            out.append(f.get("name") or f.get("num"))
+    return out or "لا شيء"
+
+
 # 6) علامة الخط اليومي: إن وُجد تقرير اليوم وجب أن يكون الخط قد نجح
 mark = B / 'logs' / f'pipeline-{DATE}.json'
 if report.exists():
     if mark.exists():
         try:
             st = json.loads(mark.read_text(encoding='utf-8'))
-            check(st.get('overall') == 'ok',
-                  f"الخط اليومي نجح ({st.get('overall')})",
-                  f"الخط اليومي لم ينجح: {st.get('feeds')} · {st.get('ofac')} · {st.get('originals')} · قيود الحماية المعروفة: {_known_block(st.get('feeds'))}")
+            overall = st.get('overall')
+            known = _known_block(st.get('feeds'))
+            failed = [f.get("name") or f.get("num")
+                      for f in ((st.get('feeds') or {}).get('failed_feeds') or [])]
+            only_known = bool(failed) and isinstance(known, list) and all(n in known for n in failed)
+            others_ok = all((st.get(k) or {}).get('status') == 'ok'
+                            for k in ('ofac', 'originals'))
+            if overall == 'ok':
+                check(True, f"الخط اليومي نجح ({overall})", "")
+            elif overall == 'degraded' and only_known and others_ok:
+                warn(True, "",
+                     f"الخط اليومي degraded بقيود حماية معروفة فقط ({', '.join(map(str, failed))}) "
+                     "— سياسة النظام تمنع تجاوز الحماية، وتُذكر القيود في حدّ البحث")
+            else:
+                fails.append(f"الخط اليومي لم ينجح ({overall}): "
+                             f"مصادر متعذرة {failed} · قيود معروفة {known} · "
+                             f"OFAC {(st.get('ofac') or {}).get('status')} · "
+                             f"الأصول {(st.get('originals') or {}).get('status')}")
         except Exception as e:
             fails.append(f"علامة الخط غير صالحة: {e}")
     else:
@@ -231,15 +260,4 @@ print(f"----- النتيجة: نجح {len(oks)} · تحذير {len(warns)} · ف
 print("الحكم: " + ("ممنوع التسليم — أصلح الفشل أولًا" if fails else "جاهز للتشغيل"))
 sys.exit(1 if fails else 0)
 
-def _known_block(feeds):
-    """قيود الحماية المعروفة: مصادر متعذّرة بحجب تحقق بشري أو 403.
 
-    سياسة النظام تمنع تجاوز الحماية، فيُصنَّف التعذّر قيدًا معروفًا لا فشلًا،
-    ويُذكر صريحًا في التقرير ضمن حدّ البحث.
-    """
-    out = []
-    for f in (feeds or {}).get("failed_feeds", []) or []:
-        reason = f"{f.get('error', '')} {f.get('block_reason', '')}".lower()
-        if any(k in reason for k in ("human verification", "403", "forbidden", "captcha")):
-            out.append(f.get("name") or f.get("num"))
-    return out or "لا شيء"

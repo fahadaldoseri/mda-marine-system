@@ -95,6 +95,8 @@ def check_lib_links() -> None:
                     pass
     for f in sorted(p for p in LIBS.iterdir() if p.is_file()) if LIBS.is_dir() else []:
         stem = f.stem
+        family = re.sub(r"-\d{4}-\d{2}-\d{2}$", "", stem)
+        family = family if len(family) >= 4 else ""
         readers = []
         for c in consumers:
             scope = [c] if c.is_file() else list(c.rglob("*")) if c.exists() else []
@@ -104,7 +106,9 @@ def check_lib_links() -> None:
                 if p.parent == LIBS:
                     continue
                 try:
-                    if stem in p.read_text(encoding="utf-8", errors="ignore"):
+                    txt = p.read_text(encoding="utf-8", errors="ignore")
+                    hit = stem in txt or (family and f"{family}-" in txt)
+                    if hit:
                         readers.append(p.relative_to(B).as_posix())
                 except Exception:                                # noqa: BLE001
                     pass

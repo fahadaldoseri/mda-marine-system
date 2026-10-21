@@ -66,10 +66,10 @@ FALLBACK_ROUTES = {
          'via': 'fallback:jina.ai/alarabiya-home'},
     ],
     17: [
-        {'url': 'https://r.jina.ai/http://x.com/bna_en',
-         'via': 'fallback:jina.ai/bna-en-x'},
-        {'url': 'https://r.jina.ai/http://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa',
-         'via': 'fallback:jina.ai/bna-rss'},
+        {'url': 'https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa',
+         'via': 'official:bna-en-rss'},
+        {'url': 'https://web.archive.org/web/20260108135704/https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa',
+         'via': 'archive:bna-en-rss'},
     ],
     20: [
         {'url': 'https://r.jina.ai/http://www.alayam.com/',

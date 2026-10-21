@@ -159,6 +159,12 @@ def build_reports(site_root: Path, dist: Path, reports, warnings):
             "headline": daily_headline(r["meta"]),
             "changed": _flat((r["meta"].get("decision_card") or {}).get("changed")),
             "action": _flat((r["meta"].get("decision_card") or {}).get("action")),
+            "changed_list": [str(x).strip() for x in ((r["meta"].get("decision_card") or {}).get("changed") or [])
+                             if str(x).strip()] if isinstance((r["meta"].get("decision_card") or {}).get("changed"), list)
+                            else [],
+            "version": r["meta"].get("version") or "", "window": r["meta"].get("window") or "",
+            "sources": r["meta"].get("sources_checked") or "", "cited": r["meta"].get("sources_cited") or "",
+            "generated": r["meta"].get("generated_label") or "",
             "sections": count, "size": target.stat().st_size,
         })
     return built
@@ -213,14 +219,24 @@ def build_index(dist: Path, reports, notfound: bool = False):
     ) or '<li class="ar-empty">لا توجد تقارير منشورة بعد.</li>'
 
     if latest:
-        hero_card = f"""<a class="hero-card" href="/reports/{latest['iso']}.html">
+        chg = latest.get("changed_list") or [latest.get("changed") or latest.get("headline") or ""]
+        chg_items = "".join(f"<li>{esc(x)}</li>" for x in [c for c in chg if c][:3])
+        meta_bits = [
+            f"نافذة التغطية {esc(latest['window'])}" if latest.get("window") else "",
+            f"{esc(str(latest['sources']))} مصدرًا مفحوصًا" if latest.get("sources") else "",
+            f"{esc(str(latest['cited']))} مُستشهدًا" if latest.get("cited") else "",
+            f"آخر تحديث {esc(latest['generated'])}" if latest.get("generated") else "",
+        ]
+        hero_card = f"""<article class="hero-card">
       <div class="hc-top"><span class="hc-tag">آخر إصدار</span>
-        <span class="hc-risk rk-{esc(latest['risk_kind'])}">مستوى الخطر: {esc(latest['risk'])}</span></div>
+        <span class="hc-risk rk-{esc(latest['risk_kind'])}">مستوى الخطر: {esc(latest['risk'])}</span>
+        {f'<span class="hc-code">رقم النسخة <b>{esc(latest["version"])}</b></span>' if latest.get('version') else ''}</div>
       <h2>{esc(latest['label'])}</h2>
-      <p class="hc-changed">{esc(latest['changed'] or latest['headline'] or '')}</p>
-      <p class="hc-action"><b>المطلوب فورًا:</b> {esc(latest['action'] or '—')}</p>
-      <span class="hc-open">افتح التقرير كاملًا ←</span>
-    </a>"""
+      <p class="hc-meta">{' · '.join(b for b in meta_bits if b)}</p>
+      <div class="hc-changes"><b>ما تغيّر:</b><ul>{chg_items}</ul></div>
+      <p class="hc-action"><b>نفّذوا:</b> {esc(latest['action'] or '—')}</p>
+      <a class="hc-open" href="/reports/{latest['iso']}.html">افتح التقرير كاملًا ←</a>
+    </article>"""
     else:
         hero_card = '<div class="hero-card"><h2>لا يوجد إصدار بعد</h2></div>'
 
@@ -244,16 +260,24 @@ font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif}}
 h1{{font-size:30px;margin:0 0 8px;line-height:1.4}}
 .lede{{color:var(--muted);margin:0 0 24px;font-size:14.5px;max-width:70ch}}
 .hero-card{{display:block;background:linear-gradient(150deg,var(--panel2),var(--panel));border:1px solid var(--line);
-border-radius:14px;padding:22px;text-decoration:none;color:inherit;margin:0 0 22px;transition:border-color .2s}}
-.hero-card:hover{{border-color:var(--accent)}}
+border-radius:14px;padding:22px;color:inherit;margin:0 0 22px}}
 .hc-top{{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}}
 .hc-tag{{font-size:12px;background:var(--accent);color:var(--accent-ink);padding:3px 10px;border-radius:99px;font-weight:700}}
 .hc-risk{{font-size:12.5px;border:1px solid var(--line);padding:3px 10px;border-radius:99px}}
+.hc-code{{font-size:12.5px;color:var(--muted)}}
+.hc-code b{{color:var(--ink2);font-family:"IBM Plex Mono",monospace}}
 .hero-card h2{{margin:0 0 8px;font-size:20px}}
-.hc-changed{{color:var(--ink2);font-size:14.5px;margin:0 0 10px}}
+.hc-meta{{color:var(--muted);font-size:13px;margin:0 0 14px}}
+.hc-changes{{border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:0 0 12px}}
+.hc-changes b{{color:var(--ink2);font-size:14px}}
+.hc-changes ul{{margin:8px 0 0;padding-inline-start:20px}}
+.hc-changes li{{font-size:14.5px;color:var(--ink2);margin:0 0 6px}}
 .hc-action{{color:var(--muted);font-size:14px;margin:0 0 14px}}
 .hc-action b{{color:var(--ink2)}}
-.hc-open{{color:var(--accent);font-size:13.5px;font-weight:600}}
+.hc-open{{display:inline-block;color:var(--accent);font-size:13.5px;font-weight:600;
+text-decoration:none;border-bottom:1px solid transparent;padding:6px 2px}}
+.hc-open:hover,.hc-open:focus-visible{{border-bottom-color:var(--accent)}}
+.hc-open:focus-visible{{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}}
 .grid{{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;align-items:start}}
 @media(max-width:900px){{.grid{{grid-template-columns:1fr}}}}
 .card{{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}}

@@ -387,7 +387,14 @@ def main() -> int:
         print(f"=== بوابة الفهم — {label} — المرحلة {stage} ===")
         for chk in ("ف1", "ف2", "ف3", "ف4", "ف5"):
             items = res[chk]
-            mark = "✘ مانع" if chk in blocking else ("· تحذير" if items else "✔ نظيف")
+            if items and chk in blocking:
+                mark = "✘ مانع"
+            elif items:
+                mark = "· تحذير"
+            elif chk in blocking:
+                mark = "✔ نظيف (مانع عند الرصد)"
+            else:
+                mark = "✔ نظيف"
             print(f"  {chk} {names.get(chk, '')}: {len(items)} — {mark}")
             for it in items[:6]:
                 s = (it.get("sample") or it.get("term") or it.get("symbol") or "")

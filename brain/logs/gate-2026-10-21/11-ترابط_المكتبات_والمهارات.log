@@ -1,14 +1,17 @@
 === تدقيق المكتبات والمهارات والترابط ===
-  1) المكتبات — 7 ملفًا
-     ✔ findings-2026-10-20.json · 312,072 حرفًا
-     ✔ findings-register.md · 1,467 حرفًا
-     ✔ lexicon-library.json · 220,217 حرفًا
-     ✔ lexicon-library.md · 6,064 حرفًا
-     ✔ orthography-consistency.md · 3,004 حرفًا
-     ✔ recurring-phrases.md · 2,615 حرفًا
-     ✔ terminology-gaps.md · 620 حرفًا
+  1) المكتبات — 8 ملفًا
+     ✔ findings-2026-10-20.json · 329,537 حرفًا
+     ✔ findings-2026-10-21.json · 329,537 حرفًا
+     ✔ findings-register.md · 1,486 حرفًا
+     ✔ lexicon-library.json · 231,705 حرفًا
+     ✔ lexicon-library.md · 6,078 حرفًا
+     ✔ orthography-consistency.md · 3,231 حرفًا
+     ✔ recurring-phrases.md · 2,621 حرفًا
+     ✔ terminology-gaps.md · 569 حرفًا
   2) ارتباط المكتبات بمن يقرؤها
-     ✔ findings-register.md ← validators/check_findings_closed.py, tools/build_audit_report.py
+     ✔ findings-2026-10-20.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ findings-2026-10-21.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ findings-register.md ← validators/check_findings_closed.py, validators/check_library_use.py, tools/build_audit_report.py
      ✔ lexicon-library.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
      ✔ lexicon-library.md ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
      ✔ orthography-consistency.md ← sections/75-style.md, validators/check_findings_closed.py, validators/check_library_use.py
@@ -45,7 +48,5 @@
      ✔ telegram-subscriptions.json سرّي ومُستثنى/مُنقّى في النسخة الاحتياطية
      ملفات بأسرار محتملة: 3
 
-النتيجة: 0 عائق · 3 تحذير
-  • [الارتباط] findings-2026-10-20.json: يقرؤه أداة توليد فقط (tools/build_audit_report.py, tools/build_ambiguity_map.py) ولا يصل إلى بوابة ولا تعليمة
-  • [الارتباط] findings-2026-10-20.json: لا بوابة تقرؤه — لا يُنفَّذ على الإصدار
+النتيجة: 0 عائق · 1 تحذير
   • [النقل] 28 ملفًا بمسار مطلق (يكسر النقل): ['tools/apply_jmic_ukmto_to_gfs.py (1)', 'tools/telegram_bot.py (1)', 'tools/_oneoff/finalize_2026-10-18.py (1)']

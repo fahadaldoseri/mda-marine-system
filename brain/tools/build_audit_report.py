@@ -12,6 +12,7 @@
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 import sys
 from collections import Counter, defaultdict
@@ -22,6 +23,16 @@ LIB = ROOT / "appendices" / "libraries"
 DATE = sys.argv[1] if len(sys.argv) > 1 else "2026-10-20"
 D = json.loads((LIB / f"findings-{DATE}.json").read_text(encoding="utf-8"))
 
+
+def _name_part(term: str, corpus: str) -> bool:
+    """جزء من اسم سفينة لاتيني متعدد الكلمات — ليس مصطلحًا ولا رمزًا."""
+    return bool(re.search(rf"(?<![A-Za-z0-9]){re.escape(term)}\s+[A-Z][A-Za-z0-9]{{2,}}", corpus)
+                or re.search(rf"[A-Z][A-Za-z0-9]{{2,}}\s+{re.escape(term)}(?![A-Za-z0-9])", corpus))
+
+
+CORPUS = "\n".join(p.read_text(encoding="utf-8", errors="ignore")
+                   for p in sorted((ROOT / "reports").glob("*.md")))
+
 per_doc = {r["date"]: r for r in D["per_document"]}
 daily = [r for r in D["per_document"] if r["kind"] == "يومي"]
 lex = D["lexicon"]
@@ -29,7 +40,8 @@ shared = D["repeated_phrases"]
 
 # ── 1) فجوات المعجم: رموز ومصطلحات مستخدمة وغير معرَّفة في القاموس ──────────
 gaps = [(k, v) for k, v in lex.items()
-        if not v["defined_in_terminology"] and v["kind"] == "لاتيني" and v["count"] >= 3]
+        if not v["defined_in_terminology"] and v["kind"] == "لاتيني" and v["count"] >= 3
+        and not _name_part(k, CORPUS)]
 gaps.sort(key=lambda x: -x[1]["count"])
 lines = ["# فجوات المعجم — مصطلحات ورموز مستخدمة وغير معرَّفة", "",
          "مأخوذة بعدّ فعلي في كل الإصدارات، ومقارنتها بملف `appendices/terminology.md`.",

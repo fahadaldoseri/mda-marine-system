@@ -69,9 +69,14 @@ def build(ledger_path, out_path, title):
         f'<span class="num bidi">{c}</span></div>'
         for a, c in per_area.most_common()
     )
+    top_class = per_class.most_common(10)
     rows_class = "".join(
-        f'<tr><td>{esc(k)}</td><td class="num bidi">{v}</td></tr>' for k, v in per_class.most_common()
+        f'<tr><td>{esc(k)}</td><td class="num bidi">{v}</td></tr>' for k, v in top_class
     )
+    class_note = (f'<p class="lede">تُعرض أعلى 10 تصنيفات من {len(per_class)} تصنيفًا؛ '
+                  f'والباقي ({len(per_class) - 10}) مجموعها '
+                  f'{sum(v for _, v in per_class.most_common()[10:])} سجلًا.</p>'
+                  if len(per_class) > 10 else '')
     rows_conf = "".join(
         f'<tr><td>{esc(k)}</td><td class="num bidi">{v}</td></tr>' for k, v in conf.most_common()
     )
@@ -112,7 +117,7 @@ td.num{{text-align:end;font-family:"IBM Plex Mono",monospace}}
 </div>
 <h2>السجلات بحسب الشهر</h2>{rows_month}
 <h2>التوزيع الجغرافي</h2>{rows_area}
-<h2>التصنيف</h2><table><thead><tr><th>التصنيف</th><th>العدد</th></tr></thead><tbody>{rows_class}</tbody></table>
+<h2>التصنيف</h2>{class_note}<table><thead><tr><th>التصنيف</th><th>العدد</th></tr></thead><tbody>{rows_class}</tbody></table>
 <h2>درجة الثقة المسجلة</h2><table><thead><tr><th>المستوى</th><th>العدد</th></tr></thead><tbody>{rows_conf}</tbody></table>
 <div class="foot">المصدر: {esc(Path(ledger_path).name)} — أُنشئت في {date.today().isoformat()}.</div>
 </div></body></html>"""
