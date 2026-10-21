@@ -126,6 +126,12 @@ def main() -> int:
     print(f"  ل4 مكتبة الإملاء: {len(clashes)} رسم مزدوج في الإصدار"
           + (f" → {' · '.join(clashes[:4])}" if clashes else ""))
 
+    # ── ل0: مكتبة الألفاظ الجديدة مربوطة بالبنك وبوابة التسليم
+    reg_problems = check_new_terms_registry(B)
+    print(f"  ل0 مكتبة الألفاظ الجديدة: {'سليمة' if not reg_problems else str(len(reg_problems)) + ' ملاحظة'}")
+    for pr in reg_problems[:5]:
+        print(f"       · {pr}")
+
     # ── ل5: رموز الإصدار مقابل مكتبة المعجم المبنية
     lex_f = B / "appendices" / "libraries" / "lexicon-library.json"
     unknown = []
@@ -178,3 +184,25 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
+def check_new_terms_registry(root):
+    """يربط مكتبة الألفاظ الجديدة ببوابة: كل بند إمّا مُدرَج في البنك أو موثَّق كمستبعد."""
+    import json
+    reg = root / "appendices" / "libraries" / "new-terms-register.json"
+    bank = root / "appendices" / "glossary-standard.json"
+    if not reg.exists():
+        return ["مكتبة الألفاظ الجديدة غير موجودة"]
+    try:
+        data = json.loads(reg.read_text(encoding="utf-8"))
+        symbols = set(json.loads(bank.read_text(encoding="utf-8")).get("symbols", {})) if bank.exists() else set()
+    except Exception as e:
+        return [f"تعذّرت قراءة المكتبة أو البنك ({e})"]
+    out = []
+    for t in data.get("terms", []):
+        name = t.get("term") or t.get("symbol") or ""
+        if name and name not in symbols:
+            out.append(f"بند في المكتبة بلا تعريف في البنك: {name}")
+    for t in data.get("terms", []):
+        if str(t.get("status", "")).startswith("بانتظار") and not t.get("source"):
+            out.append(f"بند بلا مصدر: {t.get('term')}")
+    return out

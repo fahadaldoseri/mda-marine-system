@@ -1,7 +1,7 @@
 === تدقيق المكتبات والمهارات والترابط ===
   1) المكتبات — 10 ملفًا
      ✔ findings-2026-10-20.json · 329,537 حرفًا
-     ✔ findings-2026-10-21.json · 341,797 حرفًا
+     ✔ findings-2026-10-21.json · 342,977 حرفًا
      ✔ findings-register.md · 1,796 حرفًا
      ✔ lexicon-library.json · 229,891 حرفًا
      ✔ lexicon-library.md · 6,084 حرفًا
@@ -16,6 +16,8 @@
      ✔ findings-register.md ← validators/check_findings_closed.py, validators/check_library_use.py, tools/build_audit_report.py
      ✔ lexicon-library.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
      ✔ lexicon-library.md ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ new-terms-register.json ← validators/check_library_use.py, tools/harvest_terms.py
+     ✔ new-terms-register.md ← validators/check_library_use.py, tools/harvest_terms.py
      ✔ orthography-consistency.md ← sections/75-style.md, validators/check_findings_closed.py, validators/check_library_use.py
      ✔ recurring-phrases.md ← validators/check_findings_closed.py, validators/check_library_use.py, tools/build_audit_report.py
      ✔ terminology-gaps.md ← validators/check_findings_closed.py, validators/check_library_use.py, tools/build_audit_report.py
@@ -50,9 +52,5 @@
      ✔ telegram-subscriptions.json سرّي ومُستثنى/مُنقّى في النسخة الاحتياطية
      ملفات بأسرار محتملة: 3
 
-النتيجة: 0 عائق · 5 تحذير
-  • [الارتباط] new-terms-register.json: يقرؤه أداة توليد فقط (tools/harvest_terms.py) ولا يصل إلى بوابة ولا تعليمة
-  • [الارتباط] new-terms-register.json: لا بوابة تقرؤه — لا يُنفَّذ على الإصدار
-  • [الارتباط] new-terms-register.md: يقرؤه أداة توليد فقط (tools/harvest_terms.py) ولا يصل إلى بوابة ولا تعليمة
-  • [الارتباط] new-terms-register.md: لا بوابة تقرؤه — لا يُنفَّذ على الإصدار
+النتيجة: 0 عائق · 1 تحذير
   • [النقل] 28 ملفًا بمسار مطلق (يكسر النقل): ['tools/apply_jmic_ukmto_to_gfs.py (1)', 'tools/telegram_bot.py (1)', 'tools/_oneoff/finalize_2026-10-18.py (1)']
