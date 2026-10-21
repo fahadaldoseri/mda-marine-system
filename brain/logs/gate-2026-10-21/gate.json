@@ -1,7 +1,7 @@
 {
  "date": "2026-10-21",
- "status": "warn",
- "exit_code": 1,
+ "status": "ok",
+ "exit_code": 0,
  "steps": [
   {
    "step": "تنظيف المحتوى الداخلي",
@@ -35,8 +35,8 @@
   },
   {
    "step": "فحص ما قبل التشغيل",
-   "status": "warn",
-   "exit_code": "1)",
+   "status": "ok",
+   "exit_code": "0)",
    "log": "06-فحص_ما_قبل_التشغيل.log"
   },
   {
@@ -65,8 +65,8 @@
   },
   {
    "step": "ترابط المكتبات والمهارات",
-   "status": "warn",
-   "exit_code": "1)",
+   "status": "ok",
+   "exit_code": "0)",
    "log": "11-ترابط_المكتبات_والمهارات.log"
   },
   {
@@ -89,8 +89,8 @@
   },
   {
    "step": "بوابة التحليل الاستخباري",
-   "status": "warn",
-   "exit_code": "1)",
+   "status": "ok",
+   "exit_code": "0)",
    "log": "15-بوابة_التحليل_الاستخباري.log"
   },
   {
@@ -101,8 +101,8 @@
   },
   {
    "step": "استعمال المكتبات (المعجم والبنك والفجوات)",
-   "status": "warn",
-   "exit_code": "1)",
+   "status": "ok",
+   "exit_code": "0)",
    "log": "17-استعمال_المكتبات_(المعجم_والبنك_والفجوات).log"
   },
   {
@@ -161,5 +161,5 @@
   }
  ],
  "log_dir": "/home/ubuntu/brain-marine-news/logs/gate-2026-10-21",
- "finished_utc": "2026-10-21T20:24:22Z"
+ "finished_utc": "2026-10-21T20:33:38Z"
 }

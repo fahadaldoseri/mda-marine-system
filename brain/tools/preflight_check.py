@@ -55,7 +55,7 @@ def _policy():
 
 _pol = _policy()
 _HID = set(_pol.get('hidden_sections') or [])
-_REQ = list(_pol.get('required_sections') or [])
+_REQ = list(_pol.get('required_in_md') or _pol.get('required_sections') or [])
 
 bp = GEN / 'blocks.py'
 if bp.exists():

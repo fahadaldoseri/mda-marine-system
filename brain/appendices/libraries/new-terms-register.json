@@ -1,19 +1,20 @@
 {
   "note": "مكتبة الألفاظ والرموز الجديدة — مرجع دائم يُغذّى آليًا قبل كل تسليم. بُنيت بعد مراجعة المالك في 21 أكتوبر 2026: بنود مُدرَجة في بنك التعريفات، وبنود مستبعدة لأنها جمل وصفية لا مصطلحات (محفوظة في excluded_noise للأمانة).",
-  "updated": "2026-10-21T20:24:19Z",
+  "updated": "2026-10-21T20:33:34Z",
   "count": 16,
   "terms": [
     {
-      "term": "IMO-MSI",
+      "term": "MSI",
       "kind": "رمز أو مصطلح أجنبي",
       "first_seen": "2026-10-12",
       "occurrences_in_edition": 1,
       "context": "لان إغلاق قانوني. القرار النهائي يعتمد على أحدث UKMTO وJMIC وNAVAREA وIMO-MSI وتعليمات سلطات الميناء.",
       "status": "مُدرَج في بنك التعريفات",
-      "review": "معلومات السلامة البحرية (MSI)"
+      "review": "معلومات السلامة البحرية (MSI)",
+      "note": "يُكتب في النص العربي «معلومات السلامة البحرية» (قرار 2026-10-21)"
     },
     {
-      "term": "NAVAREA.",
+      "term": "NAVAREA",
       "kind": "رمز أو مصطلح أجنبي",
       "first_seen": "2026-10-12",
       "occurrences_in_edition": 2,
@@ -22,7 +23,7 @@
       "review": "NAVAREA"
     },
     {
-      "term": "JMIC.",
+      "term": "JMIC",
       "kind": "رمز أو مصطلح أجنبي",
       "first_seen": "2026-10-13",
       "occurrences_in_edition": 1,
@@ -58,7 +59,7 @@
       "review": "خطر تشغيلي"
     },
     {
-      "term": "IMO.",
+      "term": "IMO",
       "kind": "رمز أو مصطلح أجنبي",
       "first_seen": "2026-10-14",
       "occurrences_in_edition": 1,
@@ -67,7 +68,7 @@
       "review": "IMO"
     },
     {
-      "term": "IMB.",
+      "term": "IMB",
       "kind": "رمز أو مصطلح أجنبي",
       "first_seen": "2026-10-14",
       "occurrences_in_edition": 1,
@@ -117,8 +118,9 @@
       "first_seen": "2026-10-18",
       "occurrences_in_edition": 8,
       "context": "**وصدر تحذير ملاحي جديد.** وهو **NAVAREA IX 380/26** عن السفينة **«CAPE DAO»** التي تُبل",
-      "status": "مُدرَج في بنك التعريفات",
-      "review": "NAVAREA"
+      "status": "مدموج في «NAVAREA»",
+      "review": "NAVAREA",
+      "note": "قرار المالك 2026-10-21: لا يستقل بتعريف."
     },
     {
       "term": "UANI",
@@ -135,8 +137,9 @@
       "first_seen": "2026-10-21",
       "occurrences_in_edition": 1,
       "context": "NAVAREA IX — منسّق التحذيرات (Hydrographer of Pakistan)",
-      "status": "مُدرَج في بنك التعريفات",
-      "review": "NAVAREA"
+      "status": "مدموج في «NAVAREA»",
+      "review": "NAVAREA",
+      "note": "قرار المالك 2026-10-21: لا يستقل بتعريف."
     },
     {
       "term": "Pakistan",
@@ -144,8 +147,9 @@
       "first_seen": "2026-10-21",
       "occurrences_in_edition": 1,
       "context": "NAVAREA IX — منسّق التحذيرات (Hydrographer of Pakistan)",
-      "status": "مُدرَج في بنك التعريفات",
-      "review": "NAVAREA"
+      "status": "مدموج في «NAVAREA»",
+      "review": "NAVAREA",
+      "note": "قرار المالك 2026-10-21: لا يستقل بتعريف."
     }
   ],
   "excluded_noise": [
@@ -315,5 +319,6 @@
       "first_seen": "2026-10-21"
     }
   ],
-  "reviewed": "2026-10-21"
+  "reviewed": "2026-10-21",
+  "normalization": "أُزيلت النقاط الملحقة بالرموز ودُمجت مع نظيراتها، وحُوّل IMO-MSI إلى التسمية العربية — قرار المالك 2026-10-21."
 }

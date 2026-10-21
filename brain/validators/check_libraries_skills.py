@@ -246,27 +246,19 @@ def check_wiring() -> None:
 # ─────────────────────────── 6) النقل والسرية
 def check_portability() -> None:
     print("  6) النقل والسرية")
+    # قياس واحد لقابلية النقل: يُقرأ من بوابته المستقلة (check_portable_paths)
+    # بدل نسخة ثانية هنا تختلف عنها في النطاق — عطل ك-88.
     abs_hits = []
-    for d in ("tools", "validators", "sections", "appendices"):
-        for p in (B / d).rglob("*"):
-            if p.is_file() and p.suffix in (".py", ".sh", ".md", ".json"):
-                try:
-                    t = p.read_text(encoding="utf-8", errors="ignore")
-                except Exception:                                # noqa: BLE001
-                    continue
-                if d == "tools" and p.name == "github_backup.py":
-                    continue
-                # تُستثنى الأدوات التي تعمل على المستودع نفسه (مسارها مطلق بطبيعته)
-                if p.name in ("publish_changes.sh", "github_backup.py", "portable_paths.py",
-                              "restore_skills.sh", "self_test.py"):
-                    continue
-                hits = [h for h in ABS_PATH_PAT.findall(t)
-                        if "mda-marine-system" not in h and "/seawatch" not in h]
-                # مسار مجلد المهارات مقبول إن كان قابلًا للتجاوز بمتغيّر بيئة
-                if hits and "SKILLS_DIR" in t:
-                    hits = []
-                if hits:
-                    abs_hits.append(f"{p.relative_to(B).as_posix()} ({len(hits)})")
+    try:
+        import importlib.util
+        _spec = importlib.util.spec_from_file_location(
+            "portable_paths_mod", B / "validators" / "check_portable_paths.py")
+        _mod = importlib.util.module_from_spec(_spec)
+        _spec.loader.exec_module(_mod)                                  # noqa: PLC0415
+        abs_hits = list(_mod.scan())
+    except Exception as e:                                             # noqa: BLE001
+        abs_hits = [f"تعذّر تشغيل بوابة قابلية النقل ({e})"]
+
     if abs_hits:
         add("تحذير", "النقل", f"{len(abs_hits)} ملفًا بمسار مطلق (يكسر النقل): {abs_hits[:3]}")
     print(f"     مسارات مطلقة: {len(abs_hits)}")

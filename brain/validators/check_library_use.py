@@ -195,10 +195,14 @@ def check_new_terms_registry(root):
         symbols = set(json.loads(bank.read_text(encoding="utf-8")).get("symbols", {})) if bank.exists() else set()
     except Exception as e:
         return [f"تعذّرت قراءة المكتبة أو البنك ({e})"]
+    def norm_name(x):
+        return (x or "").strip().rstrip(". ").strip()
+
+    symbols_n = {norm_name(x) for x in symbols}
     out = []
     for t in data.get("terms", []):
-        name = t.get("term") or t.get("symbol") or ""
-        if name and name not in symbols:
+        name = norm_name(t.get("term") or t.get("symbol") or "")
+        if name and name not in symbols_n:
             out.append(f"بند في المكتبة بلا تعريف في البنك: {name}")
     for t in data.get("terms", []):
         if str(t.get("status", "")).startswith("بانتظار") and not t.get("source"):
