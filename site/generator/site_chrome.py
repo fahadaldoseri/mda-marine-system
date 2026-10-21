@@ -112,6 +112,10 @@ def nav_html(active: str = "") -> str:
       <span class="sn-mark">{MARK_SVG}</span>
       <span class="sn-name">{BRAND}<em>{BRAND_SUB}</em></span>
     </a>
+    <button type="button" class="sn-menu no-print" aria-expanded="false" aria-controls="sn-panel">
+      <span class="sn-menu-icon" aria-hidden="true"></span><span>القائمة</span>
+    </button>
+    <div class="sn-panel" id="sn-panel">
     <div class="sn-links">
       {link('/', 'الرئيسية', 'home')}
       {link('/reports/special.html', 'التقارير الخاصة', 'special')}
@@ -126,6 +130,7 @@ def nav_html(active: str = "") -> str:
         <button type="button" data-scale="1.25" title="أكبر حجم">أ++</button>
       </div>
       <button type="button" class="sn-theme" id="sn-theme">المظهر</button>
+    </div>
     </div>
   </div>
 </nav>"""
@@ -145,7 +150,7 @@ def inject(html: str, active: str, note: str = "") -> str:
     """حقن الترويسة والتفضيلات في صفحة مُولَّدة."""
     if "</head>" not in html:
         return html
-    style = f"<style>{SITE_CSS}</style>"
+    style = f"<style>{SITE_CSS}{MOBILE_NAV_CSS}</style>"
     html = html.replace("</head>", style + "</head>", 1)
 
     # سكربت المظهر المبكر بعد فتح الجسم مباشرة
@@ -168,5 +173,85 @@ def inject(html: str, active: str, note: str = "") -> str:
         html = html[: close + 1] + nav + html[close + 1 :]
 
     if "</body>" in html:
-        html = html.replace("</body>", foot_html(note) + PREFS_LATE + "</body>", 1)
+        html = html.replace("</body>", foot_html(note) + PREFS_LATE + MOBILE_NAV_JS + "</body>", 1)
     return html
+
+MOBILE_NAV_CSS = """
+/* قائمة الجوال — تضغط شريطي الموقع والصفحة إلى ارتفاع صغير */
+.sn-menu{display:none}
+@media (max-width:760px){
+  .site-nav .sn-inner{flex-wrap:nowrap;padding:8px 14px;gap:10px;position:relative}
+  .sn-name em{display:none}
+  .sn-menu{
+    display:inline-flex;align-items:center;gap:8px;margin-inline-start:auto;
+    min-height:44px;padding:0 14px;border-radius:10px;cursor:pointer;
+    background:var(--sn-panel);border:1px solid var(--sn-line);color:var(--sn-ink);font:inherit;font-size:14px
+  }
+  .sn-menu-icon,.sn-menu-icon::before,.sn-menu-icon::after{
+    display:block;width:16px;height:2px;background:currentColor;border-radius:2px;position:relative;
+    transition:transform .2s ease,background-color .2s ease
+  }
+  .sn-menu-icon::before,.sn-menu-icon::after{content:"";position:absolute;inset-inline:0}
+  .sn-menu-icon::before{top:-5px}
+  .sn-menu-icon::after{top:5px}
+  .site-nav.open .sn-menu-icon{background:transparent}
+  .site-nav.open .sn-menu-icon::before{top:0;transform:rotate(45deg)}
+  .site-nav.open .sn-menu-icon::after{top:0;transform:rotate(-45deg)}
+  .sn-panel{
+    display:none;position:absolute;inset-inline:0;top:100%;
+    background:var(--sn-bg);border-bottom:1px solid var(--sn-line);padding:10px 14px 16px;
+    flex-direction:column;gap:12px;box-shadow:0 0 0 100vh rgba(0,0,0,.45);z-index:5
+  }
+  .site-nav.open .sn-panel{display:flex}
+  .site-nav .sn-links{flex-direction:column;margin:0;gap:2px}
+  .site-nav .sn-links a{min-height:44px;display:flex;align-items:center}
+  .topbar-inner{flex-wrap:nowrap !important;padding:6px 14px !important;gap:8px !important}
+  .topbar .brand-sub,.topbar .tb-meta .chip,.topbar .brand-mark{display:none}
+  .topbar .brand-title{font-size:13.5px;line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+  .topbar .tb-meta{display:flex;gap:6px;flex:0 0 auto}
+  .topbar .btn{min-height:40px;padding:6px 10px}
+}
+html{scroll-padding-top:calc(var(--nav-h, 60px) + var(--bar-h, 0px) + 12px);scroll-padding-bottom:80px}
+section.doc{scroll-margin-top:0 !important}
+"""
+
+MOBILE_NAV_JS = """
+<script>
+(function(){
+  var nav = document.querySelector('.site-nav'); if (!nav) return;
+  var btn = nav.querySelector('.sn-menu'), panel = nav.querySelector('.sn-panel');
+  var root = document.documentElement;
+  function measure(){
+    root.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+    var b = document.querySelector('.topbar');
+    root.style.setProperty('--bar-h', (b && getComputedStyle(b).display !== 'none' ? b.offsetHeight : 0) + 'px');
+  }
+  if (btn && panel){
+    btn.addEventListener('click', function(){
+      var open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && nav.classList.contains('open')){
+        nav.classList.remove('open'); btn.setAttribute('aria-expanded','false'); btn.focus();
+      }
+    });
+    nav.addEventListener('focusout', function(e){
+      if (nav.classList.contains('open') && !nav.contains(e.relatedTarget)){
+        nav.classList.remove('open'); btn.setAttribute('aria-expanded','false');
+      }
+    });
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(measure).observe(nav);
+  addEventListener('resize', measure); measure();
+})();
+</script>
+"""
+
+
+def mobile_nav_css() -> str:
+    return MOBILE_NAV_CSS
+
+
+def mobile_nav_js() -> str:
+    return MOBILE_NAV_JS

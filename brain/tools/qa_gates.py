@@ -254,6 +254,47 @@ def gate_package(date: str):
     return True, f"الحزمة كاملة · بصمات في {log.name}", False
 
 
+def gate_site_output(date: str):
+    """فحص مخرجات كل صفحات الموقع: أقواس كود التنسيق · قاعدة الاتجاه · نجوم خام ·
+    مستويات ثقة معرّبة · وسوم اتجاه مقطّعة · حاويات جداول قابلة للتركيز."""
+    pages = sorted((SITE / "dist").rglob("*.html"))
+    if not pages:
+        return False, "لا صفحات مبنية في dist", True
+    prob = []
+    for pg in pages:
+        h = read(pg)
+        css = "\n".join(m.group(1) for m in re.finditer(r"<style[^>]*>(.*?)</style>", h, re.S))
+        depth = 0
+        stray = 0
+        for ch in css:
+            if ch == "{":
+                depth += 1
+            elif ch == "}":
+                if depth == 0:
+                    stray += 1
+                else:
+                    depth -= 1
+        if stray:
+            prob.append(f"{pg.name}: قوس زائد في كود التنسيق ({stray})")
+        if not re.search(r"\.ltr\s*\{", css):
+            prob.append(f"{pg.name}: قاعدة .ltr للإحداثيات غائبة")
+        if re.search(r"</span>([/\-.:])<span class=\"ltr\">", h):
+            prob.append(f"{pg.name}: وسم اتجاه مقطّع")
+        body = re.sub(r"<(style|script)[^>]*>.*?</\1>", "", h.split("<body", 1)[-1], flags=re.S)
+        if "**" in body:
+            prob.append(f"{pg.name}: علامات نجوم ظاهرة ({body.count('**')})")
+        for w in ("high", "medium", "low"):
+            if f"<td>{w}</td>" in h:
+                prob.append(f"{pg.name}: مستوى ثقة بالإنجليزية ({w})")
+        for m in re.finditer(r'<div class="(?:tbl-wrap|tbl-scroll)"[^>]*>\s*<table', h):
+            if "tabindex=" not in m.group(0):
+                prob.append(f"{pg.name}: حاوية جدول غير قابلة للتركيز")
+                break
+    if prob:
+        return False, " · ".join(prob[:4]) + (f" · +{len(prob) - 4}" if len(prob) > 4 else ""), False
+    return True, f"{len(pages)} صفحة سليمة: أقواس · اتجاه · نجوم · ثقة · جداول", False
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", required=True)
@@ -273,6 +314,7 @@ def main() -> int:
         ("10 الحزمة والتسليم", gate_package),
         ("11 عناوين الأقسام بلا تكرار", gate_unique_sections),
         ("12 لا وسوم تصنيف فارغة", gate_no_empty_tags),
+        ("13 مخرجات الموقع (اتجاه وأقواس وجداول)", gate_site_output),
     ]
     print(f"خط فحص الجودة العشري — {a.date}")
     fails, missing = [], []
@@ -324,4 +366,3 @@ def gate_no_empty_tags(date: str):
 
 if __name__ == "__main__":
     sys.exit(main())
-

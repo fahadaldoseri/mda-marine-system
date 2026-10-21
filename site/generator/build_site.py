@@ -597,6 +597,17 @@ def main():
     except Exception as e:  # لا يُسقط بناء الموقع بسبب قسم فرعي
         warnings.append(f"تعذّر بناء صفحة التقارير الخاصة: {e}")
 
+    # طبقة إصلاح المخرجات — تعمل على كل صفحة مبنية قبل النشر (idempotent)
+    try:
+        try:
+            import postprocess
+        except ImportError:  # عند التشغيل من جذر المشروع
+            from generator import postprocess
+        st = postprocess.run(dist)
+        print(f"طبقة الإصلاح: {st['changed']} من {st['pages']} صفحة عُدّلت")
+    except Exception as e:  # لا تُسقط البناء، لكن تُعلن في التنبيهات
+        warnings.append(f"تعذّر تشغيل طبقة الإصلاح: {e}")
+
     print(f"الرئيسية: {len(built)} إصدار · السجل التراكمي: {'نعم' if cum else 'لا'} · "
           f"اللوحة الشهرية: {'نعم' if mon else 'لا'} · المسارات: {n_routes} · التغذية: {n_feed} · "
           f"خريطة الموقع: {n_sitemap} · robots: نعم · 404: نعم · التقارير الخاصة: {n_sp_items}")
