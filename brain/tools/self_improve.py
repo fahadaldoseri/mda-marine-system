@@ -21,11 +21,12 @@ from datetime import date as _date
 from pathlib import Path
 
 B = Path(__file__).resolve().parent.parent
+SKILLS_ROOT = Path(__import__("os").environ.get("SKILLS_DIR", str(Path.home() / "skills")))
 FAULTS = B / "audit" / "سجل-الأعطال-والثغرات.md"
 LESSONS = B / "memory" / "learning-log.jsonl"
 QUEUE = B / "memory" / "improvement-queue.jsonl"
 GATES = B / "logs"
-ENFORCERS = [B / "validators", B / "tools", B / "sections", B / "appendices", Path("/home/ubuntu/skills/marine-news-brain"), Path("/home/ubuntu/skills/military-arabic-editing")]
+ENFORCERS = [B / "validators", B / "tools", B / "sections", B / "appendices", SKILLS_ROOT / "marine-news-brain", SKILLS_ROOT / "military-arabic-editing"]
 
 
 def fault_rows() -> list[dict]:

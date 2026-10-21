@@ -62,7 +62,13 @@ step "بوابة اللغة" 2 python3 "$B/validators/check_language.py" "$B/rep
 # بوابة الفهم: رموز بلا تعريف · اصطلاحات حاجبة · محتوى داخلي منشور · التباس «قُطر/قطر» · تعارض أرقام
 # المرحلة تُقرأ من appendices/comprehension-stages.json: 0 تحذيري · 1 يمنع ف3 · 2 يضيف ف4+ف5 · 3 يضيف ف1 · 4 يمنع الكل
 COMP_STAGE=$(python3 -c "import json;print(json.load(open('$B/appendices/comprehension-stages.json'))['stage'])" 2>/dev/null || echo 0)
-step "بوابة إغلاق المكتبات (مرحلة 1 — تحذير)" python3 validators/check_findings_closed.py --date "$D" || true
+# ── بوابات ملزمة: الترابط والتماثل (قرار المستخدم — مانع لا تحذير) ──────────
+# القاعدة: كل مكتبة وكل مهارة مرتبطة ببوابة تنفيذ، ولا اختلاف بين النسخ.
+# مقياس blockrc: 1 = أي فشل يوقف · 2 = الفشل المانع فقط.
+step "بوابة إغلاق المكتبات" 1 python3 validators/check_findings_closed.py --date "$D"
+step "ترابط المكتبات والمهارات" 2 python3 validators/check_libraries_skills.py
+step "تماثل المهارات والمكتبات (مزامنة فورية)" 1 bash tools/restore_skills.sh --check
+step "سلامة المهارات" 1 python3 validators/check_skills_integrity.py
 step "بوابة الفهم (مرحلة $COMP_STAGE)" 2 python3 "$B/validators/check_comprehension.py" --date "$D"
 step "بوابة التحليل الاستخباري" 2 python3 "$B/validators/check_intel.py" "$B/reports/$D-sectioned.md" "$B/web/meta/$D.json"
 step "تغطية فحص العقوبات" 2 python3 "$B/validators/check_ofac_coverage.py" --date "$D"

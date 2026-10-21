@@ -20,6 +20,7 @@ import re
 from pathlib import Path
 
 B = Path(__file__).resolve().parent.parent
+SKILLS_ROOT = Path(__import__("os").environ.get("SKILLS_DIR", str(Path.home() / "skills")))
 LIB = B / "appendices" / "libraries"
 GATES = [B / "tools" / "final_gate.sh", B / "tools" / "daily_pipeline.sh"]
 CONSUMERS = [B / "validators", B / "tools", B / "sections"]
@@ -33,7 +34,7 @@ def consumers_of(name: str) -> list[str]:
     """المستهلك يُعرَف بالاسم الصريح أو بنمط مُعمَّم للتاريخ (findings-<date>.json → findings-*.json)."""
     pats = {name, re.sub(r"\d{4}-\d{2}-\d{2}", "*", name)}
     hits = []
-    for root in CONSUMERS + [Path("/home/ubuntu/skills/marine-news-brain"), Path("/home/ubuntu/skills/military-arabic-editing")]:
+    for root in CONSUMERS + [SKILLS_ROOT / "marine-news-brain", SKILLS_ROOT / "military-arabic-editing"]:
         if not root.exists():
             continue
         for f in root.rglob("*"):
