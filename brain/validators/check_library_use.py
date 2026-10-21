@@ -182,8 +182,6 @@ def main() -> int:
     return 0
 
 
-if __name__ == "__main__":
-    sys.exit(main())
 
 def check_new_terms_registry(root):
     """يربط مكتبة الألفاظ الجديدة ببوابة: كل بند إمّا مُدرَج في البنك أو موثَّق كمستبعد."""
@@ -206,3 +204,7 @@ def check_new_terms_registry(root):
         if str(t.get("status", "")).startswith("بانتظار") and not t.get("source"):
             out.append(f"بند بلا مصدر: {t.get('term')}")
     return out
+
+
+if __name__ == "__main__":
+    sys.exit(main())

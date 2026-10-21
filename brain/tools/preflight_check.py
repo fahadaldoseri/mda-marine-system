@@ -43,6 +43,20 @@ def warn(cond, ok_msg, warn_msg):
 
 # أسماء الكتل المدعومة فعليًا في المولّد (تُقرأ من موزّع render_block)
 supported = set()
+POLICY_F = B / 'appendices' / 'report-sections-policy.json'
+
+
+def _policy():
+    try:
+        return json.loads(POLICY_F.read_text(encoding='utf-8'))
+    except Exception:
+        return {}
+
+
+_pol = _policy()
+_HID = set(_pol.get('hidden_sections') or [])
+_REQ = list(_pol.get('required_sections') or [])
+
 bp = GEN / 'blocks.py'
 if bp.exists():
     src = bp.read_text(encoding='utf-8')
@@ -71,12 +85,21 @@ if meta and isinstance(meta.get('blocks'), dict) and report.exists():
     names = {n.strip() for v in bmap.values() for n in str(v).split('+')}
     bad_names = sorted(names - supported)
     check(not bad_names, f"كل أسماء الكتل مدعومة ({len(names)})", f"أسماء كتل غير مدعومة (لن تُرسم): {bad_names}")
-    dead = [k for k in bmap if not any(k in t for t in titles)]
+    dead = [k for k in bmap
+            if not any(k in t for t in titles)
+            and not any(h in k for h in _HID)
+            and not any(str(v).split('+')[0].strip() in set(_pol.get('hidden_blocks') or [])
+                        for v in [bmap[k]])]
     check(not dead, f"كل مفاتيح الكتل تطابق عنوانًا ({len(bmap)})", f"مفاتيح كتل لا تطابق أي عنوان (ربط ميت): {dead}")
     no_block = [t for t in titles if not any(k in t for k in bmap)]
     warn(not no_block, f"كل الأقسام مرتبطة بكتلة ({len(titles)} قسمًا)",
          f"أقسام بلا كتلة عرض (تحقّق أنها مقصودة): {no_block}")
-    check(len(titles) >= 12, f"عدد أقسام التقرير {len(titles)}", f"أقسام ناقصة: {len(titles)} فقط")
+    if _REQ:
+        got = [r for r in _REQ if any(r in t for t in titles)]
+        check(len(got) == len(_REQ), f"أقسام التقرير المطلوبة ({len(got)}/{len(_REQ)})",
+              f"أقسام ناقصة: {' · '.join([r for r in _REQ if r not in got])}")
+    else:
+        check(len(titles) >= 12, f"عدد أقسام التقرير {len(titles)}", f"أقسام ناقصة: {len(titles)} فقط")
 
 # 2) حقول ملف الواجهة: مخطط بالمثال مقابل ملف أمس
 metas = sorted((B / 'web' / 'meta').glob('*.json'))

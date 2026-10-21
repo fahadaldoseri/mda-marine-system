@@ -35,8 +35,8 @@
   },
   {
    "step": "فحص ما قبل التشغيل",
-   "status": "ok",
-   "exit_code": "0)",
+   "status": "warn",
+   "exit_code": "1)",
    "log": "06-فحص_ما_قبل_التشغيل.log"
   },
   {
@@ -89,8 +89,8 @@
   },
   {
    "step": "بوابة التحليل الاستخباري",
-   "status": "ok",
-   "exit_code": "0)",
+   "status": "warn",
+   "exit_code": "1)",
    "log": "15-بوابة_التحليل_الاستخباري.log"
   },
   {
@@ -161,5 +161,5 @@
   }
  ],
  "log_dir": "/home/ubuntu/brain-marine-news/logs/gate-2026-10-21",
- "finished_utc": "2026-10-21T20:10:54Z"
+ "finished_utc": "2026-10-21T20:24:22Z"
 }

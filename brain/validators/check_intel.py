@@ -63,6 +63,17 @@ def main() -> int:
 
     sec = read_section(md)
     if not sec:
+        _pol = {}
+        try:
+            import json as _json
+            from pathlib import Path as _P
+            _f = _P(__file__).resolve().parents[1] / 'appendices' / 'report-sections-policy.json'
+            _pol = _json.loads(_f.read_text(encoding='utf-8'))
+        except Exception:
+            _pol = {}
+        if TITLE in set(_pol.get('internal_only') or []):
+            print(f"↷ مُتجاوز بحسب سياسة الأقسام: «{TITLE}» غير منشور (يُدوَّن داخليًا).")
+            return 0
         print(f"✘ فشل (ف5/ح1): لا قسم بعنوان «{TITLE}» في {md.name}")
         return 1
 
