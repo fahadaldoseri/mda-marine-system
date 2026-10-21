@@ -497,6 +497,7 @@ def build_routes(dist: Path, reports):
     routes.append({"path": "/reports/:date", "title": "تقرير يومي"})
     routes.append({"path": "/reports/monthly-2026-10.html", "title": "اللوحة الشهرية"})
     routes.append({"path": "/reports/cumulative-2026.html", "title": "السجل التراكمي"})
+    routes.append({"path": "/sources.html", "title": "المصادر والمراجع"})
     (dist / "manus-routes.json").write_text(
         json.dumps({"routes": routes}, ensure_ascii=False, indent=1), encoding="utf-8")
     return len(routes)
@@ -504,7 +505,7 @@ def build_routes(dist: Path, reports):
 
 def known_paths(reports):
     """المسارات المنشورة فعليًا: تُستخدم في صفحة «غير موجودة» وفي خريطة الموقع."""
-    ks = ["/", "/reports/cumulative-2026.html", "/reports/monthly-2026-10.html"]
+    ks = ["/", "/reports/cumulative-2026.html", "/reports/monthly-2026-10.html", "/sources.html"]
     ks += [f"/reports/{r['iso']}.html" for r in reports]
     return ks
 
@@ -605,6 +606,12 @@ def main():
     cum = build_cumulative(site_root, dist, warnings)
     mon = build_monthly(site_root, dist, warnings)
 
+    # صفحة «المصادر والمراجع» — مرجع دائم في الشريط العلوي
+    try:
+        import build_sources
+        build_sources.build(dist)
+    except Exception as e:
+        warnings.append(f"تعذّر بناء صفحة المصادر والمراجع: {e}")
     (dist / "index.html").write_text(build_index(dist, built), encoding="utf-8")
     (dist / "favicon.svg").write_text(FAVICON, encoding="utf-8")
     n_feed = build_feed(dist, built)
