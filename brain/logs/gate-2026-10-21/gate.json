@@ -1,7 +1,7 @@
 {
  "date": "2026-10-21",
- "status": "block",
- "exit_code": 2,
+ "status": "warn",
+ "exit_code": 1,
  "steps": [
   {
    "step": "تنظيف المحتوى الداخلي",
@@ -23,8 +23,8 @@
   },
   {
    "step": "تصدير PDF المعتمد",
-   "status": "block",
-   "exit_code": "4)",
+   "status": "ok",
+   "exit_code": "0)",
    "log": "04-تصدير_PDF_المعتمد.log"
   },
   {
@@ -149,11 +149,11 @@
   },
   {
    "step": "بوابات المخرج العشر",
-   "status": "block",
-   "exit_code": "2)",
+   "status": "ok",
+   "exit_code": "0)",
    "log": "25-بوابات_المخرج_العشر.log"
   }
  ],
  "log_dir": "/home/ubuntu/brain-marine-news/logs/gate-2026-10-21",
- "finished_utc": "2026-10-21T03:56:17Z"
+ "finished_utc": "2026-10-21T03:57:23Z"
 }

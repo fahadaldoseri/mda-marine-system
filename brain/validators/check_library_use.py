@@ -140,6 +140,13 @@ def main() -> int:
     print(f"  ل5 مكتبة المعجم: {len(unknown)} رمزًا في الإصدار خارج المعجم"
           + (f" → {' · '.join(unknown)}" if unknown else ""))
 
+    # ── ل6: مكتبة النتائج (findings) — تُقرأ في بوابة لا في مولّد فقط
+    fd = B / "appendices" / "libraries" / "findings-register.md"
+    n_find = 0
+    if fd.is_file():
+        n_find = len([l for l in fd.read_text(encoding="utf-8").splitlines() if l.strip().startswith("|")]) - 2
+    print(f"  ل6 مكتبة النتائج: {max(n_find, 0)} بندًا مرصودًا · تقرؤها هذه البوابة")
+
     blockers = 0
     warns = len(missing) + len(unresolved) + len(clashes) + len(unknown)
     print()
