@@ -1,15 +1,15 @@
 {
  "date": "2026-10-21",
- "status": "ok",
+ "status": "degraded",
  "checked": 24,
- "ok": 23,
- "failed": 0,
+ "ok": 22,
+ "failed": 1,
  "browser_only": [
   26
  ],
- "fail_ratio": 0.0,
+ "fail_ratio": 0.042,
  "fail_ratio_limit": 0.2,
- "items": 1075,
+ "items": 1038,
  "checked_feeds": [
   {
    "num": 6,
@@ -19,7 +19,7 @@
    "via": "primary",
    "fetched_url": "https://straits.live/feed.xml",
    "items_count": 57,
-   "content_chars": 25166,
+   "content_chars": 25082,
    "tls_verification": "verified"
   },
   {
@@ -30,7 +30,7 @@
    "via": "primary",
    "fetched_url": "https://straits.live/briefs/feed.xml",
    "items_count": 60,
-   "content_chars": 106697,
+   "content_chars": 106532,
    "tls_verification": "verified"
   },
   {
@@ -85,7 +85,7 @@
    "via": "primary",
    "fetched_url": "https://www.aljazeera.com/xml/rss/all.xml",
    "items_count": 25,
-   "content_chars": 7520,
+   "content_chars": 7523,
    "tls_verification": "verified"
   },
   {
@@ -147,12 +147,13 @@
    "num": 17,
    "name": "حساب @bna_en على X",
    "primary_url": "https://web.archive.org/web/20260108135704/https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
-   "ok": true,
-   "via": "fallback:jina.ai/bna-en-x",
-   "fetched_url": "https://r.jina.ai/http://x.com/bna_en",
-   "items_count": 37,
-   "content_chars": 1833,
-   "tls_verification": "verified"
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: HTTP Error 403: Forbidden | fallback:jina.ai/bna-en-x: HTTP Error 403: Forbidden | fallback:jina.ai/bna-rss: blocked page: Human Verification"
   },
   {
    "num": 20,
@@ -432,6 +433,37 @@
    "tls_verification": "verified"
   }
  ],
- "failed_feeds": [],
- "written_utc": "2026-10-21T03:24:15Z"
+ "failed_feeds": [
+  {
+   "num": 17,
+   "name": "حساب @bna_en على X",
+   "primary_url": "https://web.archive.org/web/20260108135704/https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
+   "error": "blocked page: Human Verification",
+   "block_reason": "all routes failed: primary: HTTP Error 403: Forbidden | fallback:jina.ai/bna-en-x: HTTP Error 403: Forbidden | fallback:jina.ai/bna-rss: blocked page: Human Verification",
+   "attempts": [
+    {
+     "url": "https://web.archive.org/web/20260108135704/https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
+     "via": "primary",
+     "ok": false,
+     "error": "HTTP Error 403: Forbidden",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://r.jina.ai/http://x.com/bna_en",
+     "via": "fallback:jina.ai/bna-en-x",
+     "ok": false,
+     "error": "HTTP Error 403: Forbidden",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://r.jina.ai/http://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
+     "via": "fallback:jina.ai/bna-rss",
+     "ok": false,
+     "error": "blocked page: Human Verification",
+     "tls_verification": "verified"
+    }
+   ]
+  }
+ ],
+ "written_utc": "2026-10-21T03:44:14Z"
 }
