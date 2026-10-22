@@ -94,6 +94,19 @@ def page_metrics(pdf: Path) -> tuple[list[float], list[tuple[int, float]]]:
     return fills, voids
 
 
+
+def orphan_titles(pages_text, headings):
+    """ك-103: يكشف عنوانًا (قسم أو بطاقة) بقي وحده آخر ورقة بلا مضمون."""
+    bad = []
+    for i, t in enumerate(pages_text, 1):
+        lines = [l.strip() for l in t.splitlines() if l.strip()]
+        lines = [l for l in lines if 'صفحة' not in l and 'مركز الوعي' not in l
+                 and 'التقرير اليومي' not in l and 'MDA.BH' not in l]
+        if lines and lines[-1] in headings:
+            bad.append((i, lines[-1]))
+    return bad
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--pdf", required=True)
@@ -180,6 +193,23 @@ def main() -> int:
     low = [(i + 1, round(f)) for i, f in enumerate(fills) if f < gate.get("min_page_fill", 70)]
     if low:
         fails.append(f"صفحات قليلة التعبئة: {low}")
+    # ك-103: لا يُترك عنوان قسم أو بطاقة وحده آخر ورقة بلا مضمون
+    try:
+        import subprocess as _sp
+        txt = _sp.run(["pdftotext", "-layout", str(pdf), "-"], capture_output=True, text=True).stdout
+        pgs = txt.split("\f")
+        heads = set()
+        for md in sorted(Path("/home/ubuntu/brain-marine-news/reports").glob(f"{pdf.stem}-sectioned.md")):
+            heads = {l.strip()[3:].strip() for l in md.read_text(encoding="utf-8").splitlines() if l.startswith("## ")}
+        heads |= {"عام"}
+        orph = orphan_titles(pgs, heads)
+        if orph:
+            problems.append("عنوان يتيم آخر ورقة: " + "، ".join(f"ص{n}: {t}" for n, t in orph))
+        else:
+            notes.append("لا عنوان قسم أو بطاقة يتيم آخر ورقة")
+    except Exception as e:
+        notes.append(f"تعذّر فحص العنوان اليتيم: {type(e).__name__}")
+
     body = [(n, g) for n, g in voids if 1 < n < len(voids)]  # دون الغلاف والصفحة الأخيرة
     big = [(n, g) for n, g in body if g >= gate.get("max_internal_void_mm", 45)]
     if big:
