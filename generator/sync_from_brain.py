@@ -101,6 +101,12 @@ def copy_sources(date_iso: str, brain: Path) -> list:
         except Exception:
             _n = 0
         log.append(f"حُدّث سجل الموثوقية والمصداقية ({_n or '؟'} مصدرًا — من ملف المصدر الواحد)")
+
+    # تشخيص المصادر (أداة tools/diagnose_sources.py) — أحدث ملف يُنسخ للموقع
+    diag_files = sorted((brain / 'docs').glob('source-diagnosis-*.json'))
+    if diag_files:
+        shutil.copy2(diag_files[-1], SITE / 'sources' / 'source-diagnosis.json')
+        log.append(f"حُدّث تشخيص المصادر ({diag_files[-1].name})")
     else:
         log.append("تحذير: سجل الموثوقية غير موجود")
     statuses = sorted((brain / "feeds").glob("feeds-*.status.json"))

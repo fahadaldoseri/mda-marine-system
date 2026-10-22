@@ -38,6 +38,11 @@ CSS = """
 .sx-card.bad::before{background:#c8402f}
 .sx-card.lim::before{background:#c99a2e}
 .sx-card.none::before{background:#5a6b86}
+.dx-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:9px;margin:10px 0 12px}
+.dx-tile{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:10px 12px;text-align:center}
+.dx-tile b{display:block;font-size:22px;line-height:1.25}
+.dx-tile span{font-size:11.5px;color:var(--muted)}
+.dx-ok b{color:#3fbf8f}.dx-lim b{color:#d8a83a}.dx-bad b{color:#e0604c}.dx-none b{color:#8fa2bd}
 .sx-top{display:flex;align-items:center;gap:8px}
 .sx-num{background:var(--bg);border:1px solid var(--line);border-radius:8px;
   min-width:26px;text-align:center;font-size:12.5px;padding:2px 6px;color:var(--ink2)}
@@ -146,6 +151,55 @@ def parse_reliability(md_path: Path) -> list:
     return rows
 
 
+
+def _diag_kind(state: str) -> str:
+    if state.startswith('يعمل آليًا') or state.startswith('صفحة تُقرأ'):
+        return 'ok'
+    if state.startswith('متصفح') or state.startswith('معاينة'):
+        return 'lim'
+    if state.startswith('محجوب') or state.startswith('مسار مكسور') or state.startswith('خطأ شبكي'):
+        return 'bad'
+    return 'none'
+
+
+def diagnosis_section(diag: list, esc) -> str:
+    """قسم التشخيص الحي لكل المصادر — يُبنى من ملف التشخيص المنسوخ من النظام."""
+    if not diag:
+        return ''
+    import datetime as _dt
+    groups = {}
+    for row in diag:
+        groups.setdefault(_diag_kind(row.get('state', '')), []).append(row)
+    labels = [('ok', 'يعمل آليًا'), ('lim', 'يحتاج متصفح/معاينة'),
+              ('bad', 'محجوب أو معطوب'), ('none', 'يحتاج مراجعة مسار')]
+    tiles = ''.join(
+        f'<div class="dx-tile dx-{k}"><b>{len(groups.get(k, []))}</b><span>{lab}</span></div>'
+        for k, lab in labels)
+    needs = sorted([r for r in diag if r.get('action') and r['action'] != 'لا إجراء'],
+                   key=lambda r: r['num'])
+    if needs:
+        body = '\n'.join(
+            f'<tr><td class="n">{r["num"]}</td>'
+            f'<td><a href="{esc(r["url"])}" target="_blank" rel="noopener">{esc(r["name"])}</a></td>'
+            f'<td>{esc(r["state"])}</td><td>{esc(r["action"])}</td></tr>' for r in needs)
+    else:
+        body = '<tr><td colspan="4">كل المصادر تعمل بلا إجراء مطلوب.</td></tr>'
+    stamp = _dt.datetime.utcnow().strftime('%Y-%m-%d')
+    return f"""
+  <h2 class="sx-h2">التشخيص الحي لكل المصادر ({len(diag)} مصدرًا · {stamp})</h2>
+  <div class="dx-tiles">{tiles}</div>
+  <div class="sx-note">التشخيص يقيس لكل مصدر مسار التغذية وحداثتها، وقراءة الصفحة المباشرة، ثم يصنّف المسار الفعلي.
+  «يعمل آليًا» يعني قراءة المادة فعلًا داخل حدّ الحداثة المعتمد (14 يومًا). و«يحتاج متصفح» يعني أن الحجب أو بنية الصفحة تمنع القراءة الآلية.
+  و«محجوب أو معطوب» قيد معروف لا يُتجاوز بحماية المواقع.</div>
+  <table class="sx-tbl">
+    <thead><tr><th>#</th><th>المصدر</th><th>الحالة المقيسة</th><th>الإجراء المطلوب</th></tr></thead>
+    <tbody>
+{body}
+    </tbody>
+  </table>
+"""
+
+
 def build(dist: Path, quiet: bool = False) -> dict:
     status_p = SITE / 'sources' / 'feeds-status.json'
     rel_p = SITE / 'sources' / 'source-reliability.md'
@@ -157,6 +211,13 @@ def build(dist: Path, quiet: bool = False) -> dict:
             status = {}
     rows = parse_reliability(rel_p)
     cards, status = source_cards(status, rows)
+    diag_p = SITE / 'sources' / 'source-diagnosis.json'
+    diag = []
+    if diag_p.exists():
+        try:
+            diag = json.loads(diag_p.read_text(encoding='utf-8'))
+        except Exception:
+            diag = []
 
     checked = status.get('checked') or len(cards)
     ok_n = status.get('ok') or len([c for c in cards if c['kind'] == 'ok'])
@@ -211,13 +272,14 @@ def build(dist: Path, quiet: bool = False) -> dict:
   {('· عناصر مجمَّعة <b>' + esc(items_n) + '</b>') if items_n else ''}.
   والتعذّر يُسجَّل قيدًا معروفًا؛ وسياسة النظام تمنع تجاوز حماية المواقع.</div>
 
+{diagnosis_section(diag, esc)}
   <h2 class="sx-h2">حالة المصادر المفحوصة</h2>
   <div class="sx-legend">
     <span><b style="background:#1f9d6b"></b>نجح الفحص ({ok_c})</span>
     <span><b style="background:#c8402f"></b>متعذّر ({bad_c})</span>
     <span><b style="background:#5a6b86"></b>لا تغذية RSS ({none_c})</span>
   </div>
-  <div class="sx-note">الرمادي: مصدر مُدرج في سجل الـ40 ولا تغذية آلية له في فحص التغذيات اليومي؛
+  <div class="sx-note">الرمادي: مصدر مُدرج في سجل المصادر المعتمد ولا تغذية آلية له في فحص التغذيات اليومي؛
   ويُتابع بمسار آخر — فتح مباشر بالمتصفح، أو حفظ أصل رسمي، أو مراجعة يدوية. ولا يعني أنه غير مُتحقَّق منه.</div>
   <div class="sx-grid">
 {chr(10).join(card_html(c) for c in cards) if cards else '<div class="sx-note">لا بيانات فحص بعد.</div>'}

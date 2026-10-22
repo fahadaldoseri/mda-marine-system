@@ -503,6 +503,11 @@ body.daylight .kpi em{opacity:.95}
 .sx-card.bad::before{background:#c8402f}
 .sx-card.lim::before{background:#c99a2e}
 .sx-card.none::before{background:#5a6b86}
+.dx-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:9px;margin:10px 0 12px}
+.dx-tile{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:10px 12px;text-align:center}
+.dx-tile b{display:block;font-size:22px;line-height:1.25}
+.dx-tile span{font-size:11.5px;color:var(--muted)}
+.dx-ok b{color:#3fbf8f}.dx-lim b{color:#d8a83a}.dx-bad b{color:#e0604c}.dx-none b{color:#8fa2bd}
 .sx-top{display:flex;align-items:center;gap:8px}
 .sx-num{background:var(--bg);border:1px solid var(--line);border-radius:8px;
   min-width:26px;text-align:center;font-size:12.5px;padding:2px 6px;color:var(--ink2)}
@@ -687,13 +692,53 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
   · عناصر مجمَّعة <b>1281</b>.
   والتعذّر يُسجَّل قيدًا معروفًا؛ وسياسة النظام تمنع تجاوز حماية المواقع.</div>
 
+
+  <h2 class="sx-h2">التشخيص الحي لكل المصادر (62 مصدرًا · 2026-10-22)</h2>
+  <div class="dx-tiles"><div class="dx-tile dx-ok"><b>34</b><span>يعمل آليًا</span></div><div class="dx-tile dx-lim"><b>11</b><span>يحتاج متصفح/معاينة</span></div><div class="dx-tile dx-bad"><b>11</b><span>محجوب أو معطوب</span></div><div class="dx-tile dx-none"><b>6</b><span>يحتاج مراجعة مسار</span></div></div>
+  <div class="sx-note">التشخيص يقيس لكل مصدر مسار التغذية وحداثتها، وقراءة الصفحة المباشرة، ثم يصنّف المسار الفعلي.
+  «يعمل آليًا» يعني قراءة المادة فعلًا داخل حدّ الحداثة المعتمد (14 يومًا). و«يحتاج متصفح» يعني أن الحجب أو بنية الصفحة تمنع القراءة الآلية.
+  و«محجوب أو معطوب» قيد معروف لا يُتجاوز بحماية المواقع.</div>
+  <table class="sx-tbl cardified">
+    <thead><tr><th>#</th><th>المصدر</th><th>الحالة المقيسة</th><th>الإجراء المطلوب</th></tr></thead>
+    <tbody>
+<tr><td class="n" data-label="#">1</td><td data-label="المصدر"><a href="https://www.ukmto.org/recent-incidents" target="_blank" rel="noopener">UKMTO — الحوادث الأخيرة</a></td><td data-label="الحالة المقيسة">محجوب آليًا (403)</td><td data-label="الإجراء المطلوب">لا يُتجاوز الحجب — مسار متصفح أو استبعاد</td></tr>
+<tr><td class="n" data-label="#">2</td><td data-label="المصدر"><a href="https://www.ukmto.org/ukmto-products/warnings/2026" target="_blank" rel="noopener">UKMTO — التحذيرات 2026</a></td><td data-label="الحالة المقيسة">محجوب آليًا (403)</td><td data-label="الإجراء المطلوب">لا يُتجاوز الحجب — مسار متصفح أو استبعاد</td></tr>
+<tr><td class="n" data-label="#">3</td><td data-label="المصدر"><a href="https://www.ukmto.org/ukmto-products/advisories/2026" target="_blank" rel="noopener">UKMTO — النشرات الاستشارية 2026</a></td><td data-label="الحالة المقيسة">محجوب آليًا (403)</td><td data-label="الإجراء المطلوب">لا يُتجاوز الحجب — مسار متصفح أو استبعاد</td></tr>
+<tr><td class="n" data-label="#">4</td><td data-label="المصدر"><a href="https://www.ukmto.org/ukmto-products/weekly-reports/2026" target="_blank" rel="noopener">UKMTO — التقارير الأسبوعية 2026</a></td><td data-label="الحالة المقيسة">محجوب آليًا (403)</td><td data-label="الإجراء المطلوب">لا يُتجاوز الحجب — مسار متصفح أو استبعاد</td></tr>
+<tr><td class="n" data-label="#">12</td><td data-label="المصدر"><a href="https://ofac.treasury.gov/recent-actions" target="_blank" rel="noopener">OFAC — الإجراءات الأخيرة</a></td><td data-label="الحالة المقيسة">تغذية متقادمة (616 يومًا)</td><td data-label="الإجراء المطلوب">تغيير مسار التغذية أو تقييد المصدر بالمتصفح</td></tr>
+<tr><td class="n" data-label="#">14</td><td data-label="المصدر"><a href="https://www.alarabiya.net/" target="_blank" rel="noopener">قناة العربية</a></td><td data-label="الحالة المقيسة">محجوب آليًا (403)</td><td data-label="الإجراء المطلوب">لا يُتجاوز الحجب — مسار متصفح أو استبعاد</td></tr>
+<tr><td class="n" data-label="#">15</td><td data-label="المصدر"><a href="https://x.com/UK_MTO" target="_blank" rel="noopener">حساب @UK_MTO على X</a></td><td data-label="الحالة المقيسة">متصفح إلزامي</td><td data-label="الإجراء المطلوب">يُفتح بمتصفح في كل تشغيل</td></tr>
+<tr><td class="n" data-label="#">16</td><td data-label="المصدر"><a href="https://x.com/bna_ar" target="_blank" rel="noopener">حساب @bna_ar على X</a></td><td data-label="الحالة المقيسة">متصفح إلزامي</td><td data-label="الإجراء المطلوب">يُفتح بمتصفح في كل تشغيل</td></tr>
+<tr><td class="n" data-label="#">17</td><td data-label="المصدر"><a href="https://x.com/bna_en" target="_blank" rel="noopener">حساب @bna_en على X</a></td><td data-label="الحالة المقيسة">متصفح إلزامي</td><td data-label="الإجراء المطلوب">يُفتح بمتصفح في كل تشغيل</td></tr>
+<tr><td class="n" data-label="#">18</td><td data-label="المصدر"><a href="https://x.com/bahdiplomatic" target="_blank" rel="noopener">حساب @bahdiplomatic على X</a></td><td data-label="الحالة المقيسة">متصفح إلزامي</td><td data-label="الإجراء المطلوب">يُفتح بمتصفح في كل تشغيل</td></tr>
+<tr><td class="n" data-label="#">19</td><td data-label="المصدر"><a href="https://x.com/us5thfleet" target="_blank" rel="noopener">حساب @US5thFleet على X</a></td><td data-label="الحالة المقيسة">متصفح إلزامي</td><td data-label="الإجراء المطلوب">يُفتح بمتصفح في كل تشغيل</td></tr>
+<tr><td class="n" data-label="#">20</td><td data-label="المصدر"><a href="https://www.alayam.com/" target="_blank" rel="noopener">جريدة الأيام</a></td><td data-label="الحالة المقيسة">تغذية متقادمة (1012 يومًا)</td><td data-label="الإجراء المطلوب">تغيير مسار التغذية أو تقييد المصدر بالمتصفح</td></tr>
+<tr><td class="n" data-label="#">25</td><td data-label="المصدر"><a href="https://www.wam.ae/ar" target="_blank" rel="noopener">وكالة أنباء الإمارات (وام)</a></td><td data-label="الحالة المقيسة">تغذية فارغة · صفحة هيكلية</td><td data-label="الإجراء المطلوب">يُراجع مسار الوصول أو يُرفع للمتصفح</td></tr>
+<tr><td class="n" data-label="#">26</td><td data-label="المصدر"><a href="https://www.spa.gov.sa" target="_blank" rel="noopener">وكالة الأنباء السعودية (واس)</a></td><td data-label="الحالة المقيسة">تغذية فارغة · صفحة هيكلية</td><td data-label="الإجراء المطلوب">يُراجع مسار الوصول أو يُرفع للمتصفح</td></tr>
+<tr><td class="n" data-label="#">27</td><td data-label="المصدر"><a href="https://www.kuna.net.kw" target="_blank" rel="noopener">وكالة الأنباء الكويتية (كونا)</a></td><td data-label="الحالة المقيسة">خطأ شبكي (URLError)</td><td data-label="الإجراء المطلوب">إعادة الفحص ثم قرار</td></tr>
+<tr><td class="n" data-label="#">29</td><td data-label="المصدر"><a href="https://www.royalnavy.mod.uk/news" target="_blank" rel="noopener">البحرية الملكية البريطانية</a></td><td data-label="الحالة المقيسة">محجوب آليًا (403)</td><td data-label="الإجراء المطلوب">لا يُتجاوز الحجب — مسار متصفح أو استبعاد</td></tr>
+<tr><td class="n" data-label="#">30</td><td data-label="المصدر"><a href="https://www.centcom.mil/MEDIA/PRESS-RELEASES/" target="_blank" rel="noopener">القيادة المركزية الأمريكية (سنتكوم)</a></td><td data-label="الحالة المقيسة">تغذية متقادمة (259 يومًا)</td><td data-label="الإجراء المطلوب">تغيير مسار التغذية أو تقييد المصدر بالمتصفح</td></tr>
+<tr><td class="n" data-label="#">33</td><td data-label="المصدر"><a href="https://www.maritime.dot.gov/msci" target="_blank" rel="noopener">MARAD/MSCI</a></td><td data-label="الحالة المقيسة">محجوب آليًا (403)</td><td data-label="الإجراء المطلوب">لا يُتجاوز الحجب — مسار متصفح أو استبعاد</td></tr>
+<tr><td class="n" data-label="#">39</td><td data-label="المصدر"><a href="https://iho.int/" target="_blank" rel="noopener">IHO — المنظمة الهيدروغرافية الدولية</a></td><td data-label="الحالة المقيسة">صفحة هيكلية (تحتاج متصفح)</td><td data-label="الإجراء المطلوب">يُرفع للمتصفح</td></tr>
+<tr><td class="n" data-label="#">40</td><td data-label="المصدر"><a href="https://www.marinetraffic.com/" target="_blank" rel="noopener">MarineTraffic</a></td><td data-label="الحالة المقيسة">محجوب آليًا (403)</td><td data-label="الإجراء المطلوب">لا يُتجاوز الحجب — مسار متصفح أو استبعاد</td></tr>
+<tr><td class="n" data-label="#">44</td><td data-label="المصدر"><a href="https://www.windward.ai/" target="_blank" rel="noopener">Windward</a></td><td data-label="الحالة المقيسة">محجوب آليًا (403)</td><td data-label="الإجراء المطلوب">لا يُتجاوز الحجب — مسار متصفح أو استبعاد</td></tr>
+<tr><td class="n" data-label="#">48</td><td data-label="المصدر"><a href="https://www.understandingwar.org/" target="_blank" rel="noopener">Institute for the Study of War</a></td><td data-label="الحالة المقيسة">محجوب آليًا (403)</td><td data-label="الإجراء المطلوب">لا يُتجاوز الحجب — مسار متصفح أو استبعاد</td></tr>
+<tr><td class="n" data-label="#">56</td><td data-label="المصدر"><a href="https://x.com/YemenResistanc1" target="_blank" rel="noopener">المجلس الأعلى للمقاومة الشعبية — اليمن</a></td><td data-label="الحالة المقيسة">متصفح إلزامي</td><td data-label="الإجراء المطلوب">يُفتح بمتصفح في كل تشغيل</td></tr>
+<tr><td class="n" data-label="#">57</td><td data-label="المصدر"><a href="https://x.com/spokespersonyem" target="_blank" rel="noopener">الناطق الرسمي للقوات المسلحة اليمنية</a></td><td data-label="الحالة المقيسة">متصفح إلزامي</td><td data-label="الإجراء المطلوب">يُفتح بمتصفح في كل تشغيل</td></tr>
+<tr><td class="n" data-label="#">59</td><td data-label="المصدر"><a href="https://t.me/army21ye" target="_blank" rel="noopener">المتحدث العسكري للطرف المقابل (تليغرام)</a></td><td data-label="الحالة المقيسة">معاينة عامة</td><td data-label="الإجراء المطلوب">تُقرأ بالمعاينة العامة</td></tr>
+<tr><td class="n" data-label="#">60</td><td data-label="المصدر"><a href="https://x.com/CJFCSpox" target="_blank" rel="noopener">المتحدث الرسمي باسم قوات التحالف (X)</a></td><td data-label="الحالة المقيسة">متصفح إلزامي</td><td data-label="الإجراء المطلوب">يُفتح بمتصفح في كل تشغيل</td></tr>
+<tr><td class="n" data-label="#">61</td><td data-label="المصدر"><a href="https://x.com/ERYANIM" target="_blank" rel="noopener">معمر الإرياني — وزير الإعلام اليمني (X)</a></td><td data-label="الحالة المقيسة">متصفح إلزامي</td><td data-label="الإجراء المطلوب">يُفتح بمتصفح في كل تشغيل</td></tr>
+<tr><td class="n" data-label="#">62</td><td data-label="المصدر"><a href="https://x.com/Yemenarmyeng" target="_blank" rel="noopener">المركز الإعلامي للقوات المسلحة اليمنية — إنجليزي (X)</a></td><td data-label="الحالة المقيسة">متصفح إلزامي</td><td data-label="الإجراء المطلوب">يُفتح بمتصفح في كل تشغيل</td></tr>
+    </tbody>
+  </table>
+
   <h2 class="sx-h2">حالة المصادر المفحوصة</h2>
   <div class="sx-legend">
     <span><b style="background:#1f9d6b"></b>نجح الفحص (28)</span>
     <span><b style="background:#c8402f"></b>متعذّر (1)</span>
     <span><b style="background:#5a6b86"></b>لا تغذية RSS (33)</span>
   </div>
-  <div class="sx-note">الرمادي: مصدر مُدرج في سجل الـ40 ولا تغذية آلية له في فحص التغذيات اليومي؛
+  <div class="sx-note">الرمادي: مصدر مُدرج في سجل المصادر المعتمد ولا تغذية آلية له في فحص التغذيات اليومي؛
   ويُتابع بمسار آخر — فتح مباشر بالمتصفح، أو حفظ أصل رسمي، أو مراجعة يدوية. ولا يعني أنه غير مُتحقَّق منه.</div>
   <div class="sx-grid">
 <div class="sx-card none"><div class="sx-top"><span class="sx-num">1</span><span class="sx-name">UKMTO — الحوادث الأخيرة</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
