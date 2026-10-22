@@ -199,7 +199,7 @@ def main() -> int:
         txt = _sp.run(["pdftotext", "-layout", str(pdf), "-"], capture_output=True, text=True).stdout
         pgs = txt.split("\f")
         heads = set()
-        for md in sorted(Path("/home/ubuntu/brain-marine-news/reports").glob(f"{pdf.stem}-sectioned.md")):
+        for md in sorted((B / "reports").glob(f"{pdf.stem}-sectioned.md")):
             heads = {l.strip()[3:].strip() for l in md.read_text(encoding="utf-8").splitlines() if l.startswith("## ")}
         heads |= {"عام"}
         orph = orphan_titles(pgs, heads)

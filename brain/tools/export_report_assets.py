@@ -337,6 +337,20 @@ def main() -> int:
                 # بند 5 (19 أكتوبر 2026): مخالفة الشكل مانع برمز 2 في السلّم الموحّد
                 # (0 نجاح · 1 تحذير · 2 مانع) — كانت تُصنَّف «تحذيرًا» فيُمرّ التسليم.
                 return max(2, gate.returncode)
+        # جودة الطباعة (ك-104 · ك-105): عرض/ارتفاع كتلة الخريطة وتصفير المتن.
+        # تُقاس على ملف PDF المولَّد نفسه وبوسائط print التي بُني بها، وتمنع الإفراج.
+        if os.environ.get("SKIP_PRINT_QUALITY") == "1":
+            print("!! بوابة جودة الطباعة مُتجاوزة (SKIP_PRINT_QUALITY=1) — للمعايرة فقط")
+        else:
+            page_html = DIST / "reports" / f"{args.date}.html"
+            pq = subprocess.run([sys.executable, str(B / "validators" / "check_print_quality.py"),
+                                 "--pdf", str(out_pdf), "--page", str(page_html),
+                                 "--date", args.date],
+                                capture_output=True, text=True)
+            print(pq.stdout.strip())
+            if pq.returncode != 0:
+                print("!! جودة الطباعة مخالفة — لا يُسلَّم هذا الملف ولا يُنشر ولا يُرسل")
+                return max(2, pq.returncode)
 
     return 0
 
