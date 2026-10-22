@@ -424,8 +424,10 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .wrap,.changes,.dc-grid,.kpis,.masthead,.map-legend,.src-grid,.glossary,.tl-viz,.viz,.card,.decision{display:block !important}
   .kpis > *,.masthead > *,.map-legend > li,.glossary > li,.src-grid > *{display:inline-block !important;vertical-align:top !important;width:48.5% !important;margin:0 0 2.5mm 1% !important;box-sizing:border-box !important}
   .dc-grid > *,.dc-row{display:block !important;width:100% !important}
-  .dc-row > *:first-child{display:inline-block !important;width:26% !important;vertical-align:top !important}
-  .dc-row > *:last-child{display:inline-block !important;width:72% !important;vertical-align:top !important}
+  /* ك-103: الوسم يُعوَّم والمحتوى كتلة قابلة للانقسام — فلا يُترك عنوان أو بطاقة يتيمة ولا فراغ أسفل الغلاف */
+  .dc-row::after{content:"";display:block;clear:both}
+  .dc-row > *:first-child{float:inline-start !important;display:block !important;width:26% !important}
+  .dc-row > *:last-child{display:block !important;width:auto !important;margin-inline-start:27% !important}
   .changes > *{display:block !important;width:100% !important}
   .viz > *,.card > *{box-sizing:border-box}
   /* ضغط تباعد الأقسام: يوفّر نحو 40 مم فتنتقل نهاية التقرير إلى صفحتها السابقة */
@@ -448,6 +450,10 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   section.doc p,section.doc li,.sec-lede,.masthead .lede,.glossary li,.src-grid li,
   /* تصفير فقرات المتن والعناوين التمهيدية (قرار المالك 2026-10-22): يمنع الفراغ الجانبي */
   .sec-lede,section.doc p,.masthead p,.blk-lede,.note{text-align:justify !important;text-align-last:start !important;hyphens:none !important}
+  /* لا يُترك عنوان بطاقة أو قسم وحده أسفل ورقة بلا مضمون (عطل ك-103) */
+  section.decision > .dc-title,.card > h3,.viz > h3,section.doc > h2{break-after:avoid !important;page-break-after:avoid !important}
+  .dc-grid,.dc-row,.dc-v,.dc-v ul{break-inside:auto !important;page-break-inside:auto !important}
+  .dc-list li{break-inside:avoid !important;page-break-inside:avoid !important}
   .dc-list li,.chg-list li,.ev-list li,.map-caption,footer.foot{text-align:justify !important;
     text-align-last:start !important;hyphens:none !important;word-spacing:normal !important}
   section.doc h2,section.doc h3,section.doc h4,.h-rule,.chip,.kpi,.tag,.st-badge,
@@ -774,7 +780,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     <div class="threat risk-high"><div class="lbl">مستوى التهديد</div><div class="val">مرتفع</div></div>
     <div>
       <p class="lede">اختبار عدم التناسب بين حصة الإصابات وحصة التعرّض في مضيق هرمز. النتيجة: إصابات أسطول أدنوك تتجاوز المتوقع بأكثر من الضعف حتى في أشد الفروض تحفّظًا، فنسبة عدم التناسب بين 2.3 و12.2 ضعفًا — ما يميل بالترجيح إلى الاستهداف لا إلى التعرّض المرتفع وحده. ويُصحّح التقرير رقمًا سابقًا: 32 ناقلة تخص أسطول Navig8 لا إجمالي أدنوك.</p>
-      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-22 06:00 <span class="ltr">UTC</span></b></span></div>
+      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-22 06:09 <span class="ltr">UTC</span></b></span></div>
     </div>
   </header>
 
@@ -1099,7 +1105,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> مقام التعرّض — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: <span class="ltr">UTC</span> وتوقيت البحرين (<span class="ltr">UTC</span>+3).
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-22 06:00 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-22 06:09 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
     
   </footer>
 </div>
