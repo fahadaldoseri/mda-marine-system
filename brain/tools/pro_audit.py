@@ -107,7 +107,7 @@ async def contrast_from_pixels(page, shot_path: Path) -> list[dict]:
         box = await el.bounding_box()
         if not box or box["width"] < 20 or box["height"] < 8:
             continue
-        # عنصر أسفل الشاشة لا يُلتقط بقصّ النافذة — نمرّره للعرض ثم نصوّر العنصر نفسه
+        # عنصر أسفل الشاشة لا يُلتقط بقصّ الفترة — نمرّره للعرض ثم نصوّر العنصر نفسه
         try:
             await el.scroll_into_view_if_needed(timeout=5000)
             await el.screenshot(path=str(shot_path), timeout=15000)
@@ -300,7 +300,7 @@ def to_markdown(r: dict) -> str:
     bad = {k: v for k, v in r["overflow"].items() if v.get("h_scroll") or v.get("total")}
     for k, v in r["overflow"].items():
         flag = "✘" if (v.get("h_scroll") or v.get("total")) else "✔"
-        L.append(f"- {flag} {k}: عرض المستند {v.get('doc_scroll')} · النافذة {v.get('viewport')} · خارج الحدود {v.get('total')}")
+        L.append(f"- {flag} {k}: عرض المستند {v.get('doc_scroll')} · الفترة {v.get('viewport')} · خارج الحدود {v.get('total')}")
     L += ["", "## الخلاصة", "",
           f"- مخالفات axe: {sum(len(v) for v in r['axe'].values())} · تمرير أفقي: {len(bad)} حالة · "
           f"طلبات فاشلة: {len(r['network'].get('failed', []))} · أخطاء طرفية: {r['console'].get('count')}"]

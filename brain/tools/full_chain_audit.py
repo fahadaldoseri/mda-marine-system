@@ -28,7 +28,7 @@ B = Path(f'{BRAIN}')
 S = Path(f'{SITE}')
 D = sys.argv[1] if len(sys.argv) > 1 else subprocess.run(['date', '-u', '+%F'], capture_output=True, text=True).stdout.strip()
 BASE = 'https://seawatch-xp4qirmr.manus.space'
-MORNING_END = f'{D}T05:30:00Z'          # نافذة التشغيل الصباحي (07:00–08:30 بتوقيت البحرين)
+MORNING_END = f'{D}T05:30:00Z'          # فترة التشغيل الصباحي (07:00–08:30 بتوقيت البحرين)
 R = {'date': D, 'sections': {}}
 
 def sec(name, items):
@@ -54,7 +54,7 @@ for rel in [f'reports/{D}-sectioned.md', f'web/meta/{D}.json', f'feeds/feeds-{D}
     t = mtime(p)
     late = t > MORNING_END and not rel.startswith('logs/')
     art.append({'level': 'warn' if late else 'ok',
-                'text': f"{rel} — {t} — {p.stat().st_size} بايت" + ('  ← أُنشئ بعد نافذة التشغيل الصباحي' if late else '')})
+                'text': f"{rel} — {t} — {p.stat().st_size} بايت" + ('  ← أُنشئ بعد فترة التشغيل الصباحي' if late else '')})
 sec('1) مخرجات التشغيل وأوقات إنشائها', art)
 
 # ---------------------------------------------------------------- 2) تقرير اليوم: الأقسام والكتل

@@ -87,7 +87,7 @@ step "حصاد الألفاظ الجديدة" 2 python3 "$B/tools/harvest_terms.
 step "سياسة الرموز في المخرجات" 2 python3 "$B/validators/check_code_policy.py" "$SITE/dist"
 step "فصل فضاءات الرموز MN-/EST-" 2 python3 "$B/validators/check_code_spaces.py" --date "$D"
 step "قاعدة النقاط في المصدر" 2 python3 "$B/validators/check_points_rule.py" --md "$B/reports/$D-sectioned.md" --meta "$B/web/meta/$D.json"
-# فاحص النقل بين الإصدارات: سنة أو اسم سفينة خارج النافذة · نقل حرفي · حقل إسناد وزمن
+# فاحص النقل بين الإصدارات: سنة أو اسم سفينة خارج الفترة · نقل حرفي · حقل إسناد وزمن
 # الأساس: حادثة BW RHINE (وصف 2019 نُقل كواقعة 2026) — الاعتماد على السجل التراكمي لا على الحدس
 step "فاحص النقل بين الإصدارات" 2 python3 "$B/validators/check_carryover.py" --date "$D"
 # ── تدقيق المكتبات اللغوية — أسبوعيًا (تنبيهي، لا يوقف النشر) ──────────────

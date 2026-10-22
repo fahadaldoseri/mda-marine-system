@@ -51,7 +51,7 @@ if [ ! -f "$TARGETS" ]; then
   echo "   ✘ قائمة المستهدفات مفقودة: $TARGETS (خطأ إعداد — لا يُعتبر نجاحًا)" | tee -a "$LOG"
   NOTE_OFAC="قائمة المستهدفات مفقودة"
 elif [ ! -s "$TARGETS" ]; then
-  S_OFAC="ok"; NOTE_OFAC="لا سفينة في نافذة اليوم — لا فحص مطلوب"
+  S_OFAC="ok"; NOTE_OFAC="لا سفينة في فترة اليوم — لا فحص مطلوب"
   echo "   ○ $NOTE_OFAC" | tee -a "$LOG"
 else
   python3 tools/ofac_screen.py "$TARGETS" >>"$LOG" 2>&1; RC=$?
@@ -67,7 +67,7 @@ if [ ! -f "$URLS" ]; then
   NOTE_ARCH="قائمة الأصول مفقودة"
 elif [ ! -s "$URLS" ]; then
   python3 tools/archive_originals.py "$D" "$URLS" >>"$LOG" 2>&1; RC=$?
-  S_ARCH="$(classify $RC)"; NOTE_ARCH="لا بلاغ رسمي في نافذة اليوم — لا أصل مطلوب"
+  S_ARCH="$(classify $RC)"; NOTE_ARCH="لا بلاغ رسمي في فترة اليوم — لا أصل مطلوب"
   echo "   ○ $NOTE_ARCH" | tee -a "$LOG"
 else
   python3 tools/archive_originals.py "$D" "$URLS" >>"$LOG" 2>&1; RC=$?
