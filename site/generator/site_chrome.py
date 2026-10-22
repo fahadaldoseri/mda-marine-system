@@ -27,7 +27,7 @@ body.daylight{--sn-bg:#eef3f9;--sn-panel:#ffffff;--sn-line:#d3dded;--sn-ink:#0d1
 --sn-muted:#5d738c;--sn-accent:#0f8f86;--sn-accent-ink:#ffffff}
 .site-nav{position:sticky;top:0;z-index:60;background:var(--sn-bg);border-bottom:1px solid var(--sn-line);
 font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif}
-.site-nav .sn-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:9px 20px;flex-wrap:wrap}
+.site-nav .sn-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:9px 20px;flex-wrap:wrap}
 .site-nav a{color:var(--sn-ink2);text-decoration:none}
 .sn-brand{display:flex;align-items:center;gap:10px;color:var(--sn-ink)!important;font-weight:700}
 .sn-mark{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:0 0 auto;
@@ -36,16 +36,18 @@ background:linear-gradient(150deg,var(--sn-accent),#0c8b83);color:#04120f}
 .sn-name{display:flex;flex-direction:column;line-height:1.25}
 .sn-name em{font-style:normal;font-size:11.5px;font-weight:500;color:var(--sn-muted)}
 .sn-links{display:flex;gap:4px;margin-inline-start:auto;flex-wrap:wrap}
-.sn-links a{padding:6px 11px;border-radius:8px;font-size:13.5px;border:1px solid transparent}
+.sn-links a{padding:6px 8px;border-radius:8px;font-size:13.5px;border:1px solid transparent}
 .sn-links a:hover{background:var(--sn-panel);border-color:var(--sn-line);color:var(--sn-ink)}
 .sn-links a[aria-current="page"]{background:var(--sn-panel);border-color:var(--sn-line);color:var(--sn-ink);font-weight:600}
 .sn-tools{display:flex;align-items:center;gap:8px}
 .sn-scale{display:flex;border:1px solid var(--sn-line);border-radius:9px;overflow:hidden}
-.sn-scale button{background:transparent;border:0;color:var(--sn-ink2);padding:5px 10px;cursor:pointer;font:inherit;font-size:13px}
+.sn-scale button{background:transparent;border:0;color:var(--sn-ink2);padding:5px 8px;cursor:pointer;font:inherit;font-size:13px}
 .sn-scale button.on{background:var(--sn-accent);color:var(--sn-accent-ink);font-weight:700}
 .sn-theme{background:var(--sn-panel);border:1px solid var(--sn-line);color:var(--sn-ink2);
 border-radius:9px;padding:6px 11px;cursor:pointer;font:inherit;font-size:13px}
 .sn-theme:hover{color:var(--sn-ink)}
+.sn-print{background:var(--sn-accent);color:var(--sn-accent-ink);border-color:transparent;font-weight:700}
+.sn-print:hover{color:var(--sn-accent-ink);filter:brightness(1.08)}
 .sn-foot{margin-top:44px;border-top:1px solid var(--sn-line);background:var(--sn-bg);
 font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif}
 .sn-foot .sf-inner{max-width:1180px;margin:0 auto;padding:20px;color:var(--sn-muted);font-size:12.5px;
@@ -85,6 +87,8 @@ function currentScale(){var s=parseFloat(LS.getItem('mn-scale')||'1');return (s&
 function toggleTheme(){var on=body.classList.toggle('daylight');save('mn-theme',on?'light':'dark');paint();}
 if(reportBtn) reportBtn.addEventListener('click',function(e){e.preventDefault();toggleTheme();});
 if(siteBtn) siteBtn.addEventListener('click',function(e){e.preventDefault();toggleTheme();});
+var printBtn=document.getElementById('sn-print');
+if(printBtn) printBtn.addEventListener('click',function(e){e.preventDefault();window.print();});
 document.querySelectorAll('[data-scale]').forEach(function(b){
   b.addEventListener('click',function(e){e.preventDefault();
     var s=parseFloat(b.getAttribute('data-scale'));save('mn-scale',s);
@@ -106,6 +110,8 @@ def nav_html(active: str = "") -> str:
     def link(href, label, key):
         cur = ' aria-current="page"' if key == active else ""
         return f'<a href="{href}"{cur}>{label}</a>'
+    # زر الطباعة في الشريط الواحد لصفحات الإصدار فقط (يحلّ محل زر الشريط العلوي المخفي على الشاشة)
+    print_btn = '<button type="button" class="sn-theme sn-print" id="sn-print">طباعة / PDF</button>' if active == "report" else ""
     return f"""<nav class="site-nav no-print" aria-label="تنقل الموقع">
   <div class="sn-inner">
     <a class="sn-brand" href="/">
@@ -131,6 +137,7 @@ def nav_html(active: str = "") -> str:
         <button type="button" data-scale="1.25" title="أكبر حجم">أ++</button>
       </div>
       <button type="button" class="sn-theme" id="sn-theme">المظهر</button>
+      {print_btn}
     </div>
     </div>
   </div>
@@ -180,6 +187,12 @@ def inject(html: str, active: str, note: str = "") -> str:
 MOBILE_NAV_CSS = """
 /* قائمة الجوال — تضغط شريطي الموقع والصفحة إلى ارتفاع صغير */
 .sn-menu{display:none}
+/* سطح المكتب: الروابط والأدوات في صف واحد بجانب الشعار (كانت تتراصّ صفين داخل اللوحة) */
+@media (min-width:761px){
+  .sn-panel{display:flex;align-items:center;gap:12px;flex:1 1 auto;min-width:0}
+  .sn-panel .sn-links{margin-inline-start:0}
+  .sn-panel .sn-tools{margin-inline-start:auto}
+}
 @media (max-width:760px){
   .site-nav .sn-inner{flex-wrap:nowrap;padding:8px 14px;gap:10px;position:relative}
   .sn-name em{display:none}

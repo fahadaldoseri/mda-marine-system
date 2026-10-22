@@ -153,6 +153,8 @@ SCREEN_CSS = """
 .masthead,.decision,.kpis,.rkey{display:none}
 .topbar{position:static}
 .topbar-inner{padding-block:7px}
+/* شريط واحد: مع شريط الموقع تنتقل أزرار الطباعة والمظهر وحجم الخط إليه ويُخفى شريط الإصدار */
+body:has(.site-nav) .topbar{display:none}
 .sc-hero{margin:20px 0 6px}
 .sc-eyebrow{font-size:14.5px;color:var(--muted);margin:0 0 6px}
 .sc-h1{font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;font-size:clamp(23px,2.7vw,32px);line-height:1.6;margin:0 0 12px;text-wrap:balance}
