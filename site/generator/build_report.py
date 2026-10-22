@@ -38,6 +38,7 @@ class BuildError(Exception):
 
 import blocks as BLK
 import codes  # سياسة عرض رموز الأحداث (كامل مرة واحدة، ومختصر مدموج برقم البلاغ)
+import screen_layer as SCR  # طبقة الشاشة: القرار فوق الطيّ، للشاشة فقط (لا تمسّ الطباعة)
 
 
 # ----------------------------------------------------------------------------
@@ -386,7 +387,11 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .hmap{margin:0;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:18px}
 .hmap h3{margin:0 0 14px;font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:15px;color:var(--ink-2)}
 .hmap .blk-lede,.hmap-keys,.hmap-panel .src-note{display:none}
-.hmap-wrap{border:1px solid var(--line-2);border-radius:var(--radius-sm);overflow:hidden;background:var(--map-sea)}
+.hmap-wrap{position:relative;border:1px solid var(--line-2);border-radius:var(--radius-sm);overflow:hidden;background:var(--map-sea)}
+.hmap-zoom{position:absolute;left:5.5%;bottom:5%;width:31%;border:1.5px solid var(--accent);border-radius:6px;overflow:hidden;background:var(--map-sea);box-shadow:0 8px 24px -10px rgba(0,0,0,.6)}
+.hmap-zsvg{display:block;width:100%;height:auto}
+.hz-cap{font-size:12.5px;color:var(--ink-2);background:var(--panel);padding:2px 8px;border-top:1px solid var(--line-2)}
+@media (max-width:1000px){.hmap-zoom{position:static;width:100%;border-width:1px 0 0;border-radius:0;box-shadow:none}}
 .hmap-svg{display:block;width:100%;height:auto;max-width:100%}
 .hmap-legend{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 22px;margin:14px 0 0;padding:0}
 .hmap-legend li{display:flex;gap:10px;align-items:baseline;font-size:13.5px;color:var(--ink-2);margin:0}
@@ -1126,7 +1131,14 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
             print(f"تنبيه: تعذر توليد الخريطة ({e})", file=sys.stderr)
             map_html = ""
 
-    hero_map_html = hero_map(map_html) if (map_html and not doc_mode) else ""
+    hero_map_html = ""
+    if map_html and not doc_mode:
+        try:
+            from map_gulf import build_map as _build_map_hero
+
+            hero_map_html = hero_map(_build_map_hero(mp["points"], mp.get("caption"), mp.get("inset"), zoom=True))
+        except Exception as e:  # لا يُسقط فشل خريطة الشاشة بناء التقرير
+            print(f"تنبيه: تعذر توليد خريطة الشاشة العليا ({e})", file=sys.stderr)
 
     # شريط المؤشرات
     kpi_html = ""
@@ -1229,6 +1241,9 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
     decision_html = BLK.decision_card(meta.get("decision_card"), inline)
     rkey_html = BLK.reading_key() if any("[" in l and "]" in l for l in md.split("\n")) else ""
     changes_html = BLK.changes_block(meta.get("changes"), inline)
+    screen_hero_html = "" if doc_mode else SCR.screen_hero(
+        meta, esc=esc, inline=inline, report_date=report_date, official=official,
+        threat_cls=tcls, rkey_html=rkey_html)
     ledger_html = (
         f'<div class="glossary">السجل التراكمي: '
         f'<a class="bidi" href="{esc(meta["ledger_url"])}" target="_blank" rel="noopener noreferrer">{esc(meta["ledger_url"])}</a></div>'
@@ -1279,6 +1294,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
   {cls_html}
   {decision_html}
   {kpi_html}
+  {screen_hero_html}
   {hero_map_html}
   {notice_html}
   {rkey_html}
@@ -1301,6 +1317,9 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
     doc = codes.demote_page(doc, report_date, official)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     doc = isolate_ltr(doc)
+    # طبقة الشاشة تُحقن بعد العزل: isolate_ltr يعمل على نص كل ما بين الوسوم فيفسد CSS وJS (مثل UTC وأسماء الخطوط)
+    doc = doc.replace("</style>", SCR.SCREEN_CSS + "</style>", 1)
+    doc = doc.replace("</body>", f"<script>{SCR.SCREEN_JS}</script>\n</body>", 1)
     out_path.write_text(doc, encoding="utf-8")
     return out_path, len(sections)
 

@@ -273,7 +273,70 @@ def _place_labels(specs, avoid_pts, step=7, tries=10):
 
 
 
-def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lon, grid_lat):
+def _esc(v):
+    import html as _h
+    return _h.escape(str(v if v is not None else ""), quote=True)
+
+
+# ---------------------------------------------------------------- تكبير هرمز (لخريطة الشاشة العليا فقط)
+ZOOM_BBOX = (54.6, 24.0, 58.0, 27.0)     # مضيق هرمز وخورفكان وشرق الفجيرة
+ZOOM_WIDTH = 520.0
+ZOOM_MIN_POINTS = 2                      # لا يظهر التكبير إلا إن تجمّعت وقائع فيه
+ZOOM_TITLE = "تكبير: مضيق هرمز وخورفكان"
+
+
+def _zoom_parts(points):
+    """(مستطيل المنطقة على اللوحة الرئيسية، لوحة التكبير) أو ("", "") عند قلة الوقائع فيها.
+
+    يُستدعى واللوحة الرئيسية هي النطاق الحالي، ويعيدها قبل الرجوع.
+    """
+    inside = [(i, p) for i, p in enumerate(points, start=1)
+              if ZOOM_BBOX[0] <= float(p["lon"]) <= ZOOM_BBOX[2] and ZOOM_BBOX[1] <= float(p["lat"]) <= ZOOM_BBOX[3]]
+    if len(inside) < ZOOM_MIN_POINTS:
+        return "", ""
+    x0, y0 = pt(ZOOM_BBOX[0], ZOOM_BBOX[3])
+    x1, y1 = pt(ZOOM_BBOX[2], ZOOM_BBOX[1])
+    rect = (f'<rect class="mp-zoomrect" x="{x0:.1f}" y="{y0:.1f}" width="{x1 - x0:.1f}" height="{y1 - y0:.1f}" '
+            f'rx="4" style="fill:none;stroke:var(--accent);stroke-width:1.6;stroke-dasharray:7 5"/>')
+    _set_bbox(ZOOM_BBOX, ZOOM_WIDTH)
+    try:
+        land_svg = "".join(f'<path d="{d}"/>' for d in _land_paths())
+        border_svg = "".join(f'<path d="{d}"/>' for d in _border_paths())
+        grid = []
+        for lon in range(math.ceil(ZOOM_BBOX[0]), math.floor(ZOOM_BBOX[2]) + 1):
+            x, _ = pt(lon, ZOOM_BBOX[1])
+            grid.append(f'<line x1="{x:.1f}" y1="0" x2="{x:.1f}" y2="{HEIGHT:.0f}"/>')
+        for lat in range(math.ceil(ZOOM_BBOX[1]), math.floor(ZOOM_BBOX[3]) + 1):
+            _, y = pt(ZOOM_BBOX[0], lat)
+            grid.append(f'<line x1="0" y1="{y:.1f}" x2="{WIDTH:.0f}" y2="{y:.1f}"/>')
+        true_xy = [pt(float(p["lon"]), float(p["lat"])) for _, p in inside]
+        shown = _spread_markers(true_xy, sep=2 * MARK_SEP)
+        marks = []
+        for (i, p), (x, y), (tx, ty) in zip(inside, shown, true_xy):
+            color = KIND_COLOR.get(p.get("kind", "bg"), "var(--muted)")
+            if math.hypot(x - tx, y - ty) > 3:
+                marks.append(
+                    f'<g class="mp-leader"><line x1="{tx:.1f}" y1="{ty:.1f}" x2="{x:.1f}" y2="{y:.1f}" '
+                    f'style="stroke:var(--map-label);stroke-width:1;opacity:.75"/>'
+                    f'<circle cx="{tx:.1f}" cy="{ty:.1f}" r="3" style="fill:var(--map-label)"/></g>')
+            marks.append(
+                f'<g class="mp-event" transform="translate({x:.1f},{y:.1f})" style="--mk:{color}">'
+                f'<circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/>'
+                f'<text class="mp-num" y="6" style="font-size:17px">{i}</text></g>')
+        svg = (f'<svg class="hmap-zsvg" viewBox="0 0 {WIDTH:.0f} {HEIGHT:.0f}" role="img" aria-label="{_esc(ZOOM_TITLE)}">'
+               f'<rect class="mp-sea-bg" x="0" y="0" width="{WIDTH:.0f}" height="{HEIGHT:.0f}"/>'
+               f'<g class="mp-grid">{"".join(grid)}</g>'
+               f'<g class="mp-land" fill-rule="evenodd">{land_svg}</g>'
+               f'<g class="mp-borders">{border_svg}</g>'
+               f'<g class="mp-events">{"".join(marks)}</g></svg>')
+    finally:
+        _set_bbox(MAIN_BBOX)
+    return rect, f'<div class="hmap-zoom">{svg}<div class="hz-cap">{_esc(ZOOM_TITLE)}</div></div>'
+
+
+
+def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lon, grid_lat,
+           extra_svg="", overlay=""):
     land_svg = "".join(f'<path d="{d}"/>' for d in _land_paths())
     border_svg = "".join(f'<path d="{d}"/>' for d in _border_paths())
 
@@ -361,18 +424,21 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
       <g class="mp-borders">{border_svg}</g>
       <g class="mp-places">{countries_svg}{ports_svg}{seas_svg}</g>
       <g class="mp-grid-labels">{"".join(grid_labels)}</g>
+      {extra_svg}
       <g class="mp-events">{"".join(marks)}</g>
     </svg>
+    {overlay}
   </div>
   {legend_html}
   {cap}
 </div>"""
 
 
-def build_map(points=None, caption=None, inset=None):
+def build_map(points=None, caption=None, inset=None, zoom=False):
     """لوحة رئيسية + لوحة مصغّرة اختيارية لباب المندب."""
     points = points or []
     _set_bbox(MAIN_BBOX)
+    zrect, zhtml = _zoom_parts(points) if zoom else ("", "")
     panels = [
         _panel(
             "خريطة الوقائع",
@@ -380,6 +446,7 @@ def build_map(points=None, caption=None, inset=None):
             "خريطة الخليج العربي ومضيق هرمز وخليج عمان مع مواقع وقائع التقرير",
             caption,
             SEAS, PORTS, COUNTRIES, GRID_LON, GRID_LAT,
+            extra_svg=zrect, overlay=zhtml,
         )
     ]
 
