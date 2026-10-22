@@ -1,0 +1,110 @@
+/* ==========================================================================
+   print.css — كل قواعد الطباعة وحدها (A4 · 7–12 صفحة). بعد tokens.css وcomponents.css.
+   الآلية: tokens.css يعيد ربط الرموز في @media print (ورق أبيض مسطّح، أحجام pt/mm، بلا ظلال)،
+           وهذا الملف يضيف ما لا تقدر عليه الرموز: التقسيم بين الصفحات، المحاذاة، الإخفاء، التذييل.
+   لكل قاعدة تعليل "لماذا" حتى لا تُكسر عند التعديل. لا تحذف قاعدة قبل قراءة سببها.
+   استثناءان معلنان لقيم حرفية: @page (لا يرث من :root) وشروط @media.
+   ========================================================================== */
+
+/* [لماذا] A4 بهوامش 14/12 مم: هي هوامش الشكل المعتمد v3. التذييل داخل الهامش السفلي (14 مم). */
+@page{size:A4;margin:14mm 12mm}
+
+/* [لماذا] موضع التذييل وشكله فقط. الترقيم الفعلي يُولَّد برمجيًا؛ هذا الصندوق يبيّن للمُصدِّر أين يقع وما مقاسه
+   (≥ 7pt، لون واحد، بعيد ≥ 8 مم من حافة الورق). إن ولّد المُصدِّر ترقيمه بنفسه فاحذف الصندوقين التاليين فقط. */
+@page{
+  @bottom-center{content:"صفحة " counter(page) " من " counter(pages);font-family:"IBM Plex Sans Arabic",sans-serif;font-size:9pt;color:#4b5e73}
+  @bottom-right{content:"تصنيف الإصدار: عام";font-family:"IBM Plex Sans Arabic",sans-serif;font-size:9pt;color:#4b5e73}
+}
+
+@media print{
+
+  /* [لماذا] الخلفيات الملوّنة (وسوم الحالات) يجب أن تُطبع؛ وإلا يضيع الوسم اللفظي المرافق للّون في بعض الطابعات. */
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+  /* [لماذا] المتن على الورق بلا فراغ داخلي زائد: العرض كله للمحتوى. */
+  html,body{background:var(--bg);color:var(--ink)}
+  .page{max-inline-size:none;padding:0;margin:0}
+
+  /* ---- ما يُخفى: كل ما ليس محتوى (المعيار 15) ---- */
+  /* [لماذا] التنقّل والأزرار والمصادر الحيّة والتكبير لا معنى لها على ورق؛ والمصادر (17) تُعرض على الموقع فقط. */
+  .no-print,.site-nav,.skip,.btn,.map-zoom,.map-zoom__cap,.src-grid{display:none !important}
+
+  /* [لماذا] أسطر التمهيد (.sec__lede) إرشاد للقارئ على الشاشة وتكرّر ما في العنوان؛ إسقاطها في الورق يوفّر ~6 مم لكل قسم. */
+  .sec__lede{display:none}
+
+  /* ---- الأقسام ---- */
+  /* [لماذا] القسم قد يمتد صفحات، فيُسمح بتقسيمه؛ المنع يقع على الكتل الصغيرة بداخله، لا على القسم كله،
+     وإلا ظهرت فراغات كبيرة (البوابة: لا فراغ داخلي > 45 مم). */
+  .sec{border:0;border-radius:0;background:transparent;padding:0;margin-block:var(--sp-5);break-inside:auto}
+
+  /* [لماذا] لا عنوان يتيم: العنوان وسطر التمهيد يلحقان بأول كتلة من محتواهما (المعيار 6). */
+  .sec__head,.sec__lede,.sec h3,.sub-h,.toc__title,.decision__row h3,.tbl caption{break-after:avoid;page-break-after:avoid}
+
+  /* [لماذا] ما لا يُقسَّم بين صفحتين (المعيار 5): كل بطاقة وكتلة صغيرة وسطر جدول وبند قائمة. */
+  .kpi,.threat,.chg,.event,.stat,.directives li,.prob__row,.map-legend li,.list-justified>li,.toc li,.chips,.cls-banner,.decision__row,.empty-note,.more-note,
+  .tbl tr,.level{break-inside:avoid;page-break-inside:avoid}
+
+  /* [لماذا] كتلة الخريطة كاملة على ورقة واحدة (الرسم + المفتاح + التعليق، شرط البوابة 1) ومعها عنوانها.
+     أما بطاقة القرار فتُقسَّم بين صفوفها لا داخل صف: منعها كلها يترك فراغًا يكسر تعبئة الصفحة (قياس: ص3 تعبئتها 34%). */
+  .map-block,.sec--map{break-inside:avoid;page-break-inside:avoid}
+
+  /* [لماذا] بنود القوائم أقرب في الورق: 24 بندًا في «الخلفية» وحدها كانت تأكل أكثر من 2 سم. */
+  .list-justified{margin-block:var(--sp-1)}
+  .list-justified>li{margin-block:var(--sp-1)}
+
+  /* [لماذا] سطران على الأقل من الفقرة في آخر الصفحة وأولها: لا سطر وحيد معلّق. */
+  p,li,dd{orphans:3;widows:3}
+
+  /* [لماذا] مخرج مرن لما يتجاوز 12 صفحة: ملف الطباعة المختصر. لا يُفعَّل افتراضيًا؛ يضبطه المولّد بـ data-print-profile="brief" على html
+     (القرار التحريري لصاحب القرار، لا للتصميم: الخط لا يُصغَّر والكتل لا تُضغط). */
+  html[data-print-profile="brief"] .print-optional{display:none !important}
+
+  /* [لماذا] استثناء معلن من «لا كتلة تُقسَّم»: بطاقة واقعة أطول من صفحة كاملة (>250 مم) لا تُوضع في صفحة واحدة مهما فعلنا،
+     فيُسمح بتقسيمها بين أسطر لا داخل سطر. يضيف المولّد الصنف عند تجاوز الطول. */
+  .event--split{break-inside:auto;page-break-inside:auto}
+
+  /* ---- الجداول ---- */
+  /* [لماذا] رأس الجدول يتكرّر عند الانقسام فيبقى مفهومًا في الصفحة التالية (المعيار 13). */
+  .tbl thead{display:table-header-group}
+  .tbl tfoot{display:table-footer-group}
+  /* [لماذا] overflow:auto يقصّ الجدول في الطباعة ويكسر تكرار الرأس. */
+  .tbl-wrap{overflow:visible;border-radius:0}
+  .tbl{font-size:var(--fs-sm)}
+
+  /* ---- التصفير (بوابة 2: صفر كتلة متن غير مصفّرة) ---- */
+  /* [لماذا] المتن مصفّر بلا فراغ جانبي. الأصناف المقيسة صراحة: .body-text · .list-justified · .table-cell. */
+  .body-text,.list-justified,.list-justified>li,.table-cell{
+    text-align:justify;text-justify:inter-word;hyphens:manual}
+  /* [لماذا] المستثنى من التصفير (يفسده التصفير أو لا معنى له): الخلايا القصيرة والأرقام (.cell-short · .num)،
+     وما يحمل .nj صراحة. أما العناوين وأرقام الصفحات والتذييل والفهرس والوسوم والأرقام الكبيرة وتسميات الخريطة
+     فليست أصناف متن أصلًا (لا تحمل أيًّا من الأصناف الثلاثة)، فلا حاجة لاستثنائها بقاعدة.
+     والسطر الأخير من الفقرة يبقى عند البداية تلقائيًا (text-align-last: auto). */
+  .nj,.table-cell.cell-short,.table-cell.num{text-align:start;text-justify:auto}
+
+  /* ---- الخريطة ---- */
+  /* [لماذا] عرض كتلة الخريطة كاملًا (≥ 70% من عرض الورقة، المطلوب 147 مم من 210) وارتفاعها ≥ 32% من الورقة (≥ 95 مم). */
+  .map-block__stage{grid-template-columns:minmax(0,1fr)}
+  .map-svg{inline-size:100%;min-block-size:0;border-radius:0}
+  /* [لماذا] المفتاح بعمودين لتوفير الارتفاع دون تصغير الخط (≥ 9pt). */
+  .map-legend{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--sp-1) var(--sp-5)}
+
+  /* ---- الفهرس والغلاف ---- */
+  /* [لماذا] الفهرس يأخذ مكانه في الصفحة الأولى؛ أرقام الصفحات (.toc__pg) تُملأ برمجيًا. */
+  .toc{border:var(--bw) solid var(--line);border-radius:0}
+  /* [لماذا] ثلاثة أعمدة للفهرس بدل عمودين: يوفّر ~15 مم في الصفحة الأولى فلا ينزلق سطر التذييل وحده إلى صفحة جديدة. */
+  .toc ol{columns:3;column-gap:var(--sp-4)}
+
+  /* ---- أحادي اللون (المعيار: يبقى مقروءًا بلون واحد) ---- */
+  /* [لماذا] الحدود وحدها لا تكفي بالرمادي: حدّ الوسم أغمق من الحدود العامة. */
+  .tag,.code,.chip{border-color:var(--line-2)}
+  /* [لماذا] الاتجاه والحالة يُقرآن من النص (+/−/بلا تغيير، مؤكد/مرجّح) لا من اللون. */
+  .trend{font-weight:var(--fw-strong)}
+
+  /* ---- روابط ---- */
+  /* [لماذا] لا فائدة من لون الرابط على الورق، ولا يُطبع عنوانه. */
+  a{color:inherit;text-decoration:none}
+
+  /* ---- حركة وظلال ---- */
+  /* [لماذا] الظلال شاشة فقط (قاعدة المشروع)؛ والحركة لا تُلتقط ناقصة في PDF. */
+  *{box-shadow:none !important;text-shadow:none !important;transition:none !important;animation:none !important}
+}
