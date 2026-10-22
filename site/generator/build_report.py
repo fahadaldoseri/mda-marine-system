@@ -381,6 +381,16 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .map-legend{list-style:none;display:grid;gap:7px;margin:14px 0 0;padding:0}
 .map-legend li{display:flex;gap:10px;align-items:baseline;font-size:13.5px;color:var(--ink-2);margin:0}
 .lg-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;color:#fff;background:var(--mk);border-radius:999px;width:19px;height:19px;display:grid;place-items:center;flex:0 0 auto}
+/* ---------- خريطة الشاشة العليا: للشاشة فقط، تُحجب في الطباعة وWord بصنف no-print ---------- */
+.hero-map{margin:22px 0 6px}
+.hmap{margin:0;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:18px}
+.hmap h3{margin:0 0 14px;font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:15px;color:var(--ink-2)}
+.hmap .blk-lede,.hmap-keys,.hmap-panel .src-note{display:none}
+.hmap-wrap{border:1px solid var(--line-2);border-radius:var(--radius-sm);overflow:hidden;background:var(--map-sea)}
+.hmap-svg{display:block;width:100%;height:auto;max-width:100%}
+.hmap-legend{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 22px;margin:14px 0 0;padding:0}
+.hmap-legend li{display:flex;gap:10px;align-items:baseline;font-size:13.5px;color:var(--ink-2);margin:0}
+@media (max-width:760px){.hmap-legend{grid-template-columns:minmax(0,1fr)}}
 /* ---------- الاستشهادات ---------- */
 .cite-ref{
   display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:11.5px;
@@ -1043,6 +1053,21 @@ def threat_class(threat: str) -> str:
 # ----------------------------------------------------------------------------
 # البناء
 # ----------------------------------------------------------------------------
+def hero_map(map_html: str) -> str:
+    """نسخة خريطة الوقائع للشاشة فقط، تظهر أعلى الصفحة (قرار فهد 22 أكتوبر 2026).
+
+    الصنف no-print يحجبها في PDF، وWord يحذفه (STRIP_SELECTORS). أصنافها مغايرة لأصناف
+    الخريطة الأصلية (hmap بدل map-viz/map-wrap/map-legend) حتى لا تلتقطها أدوات الطباعة
+    والتصدير التي تختار بتلك الأصناف أول عنصر في الصفحة. تُخفى عن قارئ الشاشة
+    (aria-hidden) لأن الخريطة الأصلية في قسمها هي المرجع.
+    """
+    h = map_html
+    for old, new in (("viz map-viz reveal", "hmap"), ("map-panel", "hmap-panel"), ("map-wrap", "hmap-wrap"),
+                     ("map-svg", "hmap-svg"), ("map-legend", "hmap-legend"), ("map-keys", "hmap-keys")):
+        h = h.replace(old, new)
+    return f'<section class="hero-map no-print" aria-hidden="true">{h}</section>'
+
+
 def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
     md = md_path.read_text(encoding="utf-8")
     defs = parse_ref_defs(md)
@@ -1100,6 +1125,8 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
         except Exception as e:  # لا يُسقط فشل الخريطة بناء التقرير
             print(f"تنبيه: تعذر توليد الخريطة ({e})", file=sys.stderr)
             map_html = ""
+
+    hero_map_html = hero_map(map_html) if (map_html and not doc_mode) else ""
 
     # شريط المؤشرات
     kpi_html = ""
@@ -1252,6 +1279,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
   {cls_html}
   {decision_html}
   {kpi_html}
+  {hero_map_html}
   {notice_html}
   {rkey_html}
 

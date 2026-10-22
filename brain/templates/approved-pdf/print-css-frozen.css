@@ -20,8 +20,8 @@
   #sec-03 .map-viz, .map-viz{break-inside:auto !important;page-break-inside:auto !important}
   .map-viz svg{break-inside:avoid !important;page-break-inside:avoid !important}
   .map-viz{padding:3mm 3.5mm}
-  /* مفتاح الخريطة في عمودين: يوفّر نحو 55 مم فيستقر القسم داخل ورقة واحدة */
-  .map-legend{columns:2;column-gap:8mm}
+  /* مفتاح الخريطة في عمودين بترتيب الأرقام صفًّا صفًّا (ك-109): العمودان يأتيان من عرض 48.5% لكل بند
+     في آخر الكتلة؛ وقاعدة columns السابقة كانت تقسّم الحاوية فتظهر الأرقام 1 · 2 · 5 · 6 ثم 3 · 4 */
   .map-legend li{break-inside:avoid;margin:0 0 1.4mm;font-size:9pt;line-height:1.45}
   .map-legend .lg-txt{font-size:9pt}
   .map-caption,.map-viz figcaption{margin-top:1.5mm;line-height:1.4}
