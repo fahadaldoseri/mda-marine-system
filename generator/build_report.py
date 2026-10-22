@@ -560,8 +560,10 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   thead{display:table-header-group}
   thead tr{break-after:avoid;page-break-after:avoid}
   p,li{orphans:2;widows:2}
-  .map-viz svg{max-height:70mm !important;break-inside:avoid !important}
+  .map-viz svg{max-height:145mm !important;width:100%;height:auto;break-inside:avoid !important}
   .map-legend,.map-viz,.tbl-wrap,.changes,.decision,.viz,.card{break-inside:auto !important;page-break-inside:auto !important}
+  /* كتلة الخريطة (الرسم + المفتاح + التعليق) تبقى كاملة على ورقة واحدة */
+  .map-viz{break-inside:avoid !important;page-break-inside:avoid !important}
   /* Chromium لا يجزّئ حاويات grid/flex بين الصفحات، فتتدفّق هنا بترتيب inline-block
      يحفظ هيئة العمودين/البطاقات نفسها، مع السماح بالانقسام بين الصفحات */
   .wrap,.changes,.dc-grid,.kpis,.masthead,.map-legend,.src-grid,.glossary,.tl-viz,.viz,.card,.decision{display:block !important}
@@ -581,7 +583,20 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   body,p,li,td,th{line-height:1.36 !important}
   /* overflow مخفي يمنع Chromium من تقسيم الحاوية بين الصفحات فتُدفع كاملة وتُفرّغ الورقة */
   *{overflow:visible !important}
-  .map-viz svg{max-height:46mm !important}
+  .map-viz svg{max-height:145mm !important;width:100%;height:auto}
+  .masthead > div:not(.threat){display:block !important;width:100% !important;margin:0 !important}
+  .masthead h1{width:100% !important}
+  /* الغلاف ينتهي عند شريط التصنيف: بطاقة القرار تبدأ صفحة جديدة (يمنع العنوان اليتيم والفراغ) */
+  .decision{break-inside:avoid !important;page-break-inside:avoid !important}
+  .map-viz svg{max-height:145mm !important;width:100%;height:auto}
+  /* محاذاة مضبوطة: تُغلق فراغات الجانبين في الفقرات والقوائم، ولا تمسّ العناوين والبطاقات */
+  section.doc p,section.doc li,.sec-lede,.masthead .lede,.glossary li,.src-grid li,
+  /* تصفير فقرات المتن والعناوين التمهيدية (قرار المالك 2026-10-22): يمنع الفراغ الجانبي */
+  .sec-lede,section.doc p,.masthead p,.blk-lede,.note{text-align:justify !important;text-align-last:start !important;hyphens:none !important}
+  .dc-list li,.chg-list li,.ev-list li,.map-caption,footer.foot{text-align:justify !important;
+    text-align-last:start !important;hyphens:none !important;word-spacing:normal !important}
+  section.doc h2,section.doc h3,section.doc h4,.h-rule,.chip,.kpi,.tag,.st-badge,
+  .map-legend li,.conf,.cls-banner,.threat,.toc li,.ev-code{text-align:start !important}
   .map-panel{padding:2mm 2.5mm !important}
   .map-legend{margin-top:1.5mm !important}
   .map-legend li{margin:0 0 1mm !important;font-size:8.4pt !important;line-height:1.3 !important}
@@ -1146,7 +1161,8 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
         if not codes.is_primary(t):
             section_html = codes.demote(section_html, report_date, official)
         if map_html and "التوزيع الجغرافي للوقائع" in t:
-            section_html = map_html + section_html
+            # جدول التوزيع أولًا ثم الخريطة: الجدول يمتدّ فيمتلئ الفراغ، والخريطة تأخذ مساحتها كاملة
+            section_html = section_html + map_html
         for key, bname in blocks_map.items():
             if key in t:
                 for _bn in str(bname).split('+'):
