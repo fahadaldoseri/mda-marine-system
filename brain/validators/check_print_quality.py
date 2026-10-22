@@ -134,7 +134,12 @@ def _components(mask, min_cells: int):
 
 
 def map_block_report(pdf: Path, dpi: int = DPI) -> dict:
-    """يقيس كتلة الخريطة هندسيًا: أكبر تعبئة مصمتة بعرض وارتفاع معتبرين."""
+    """يقيس كتلة الخريطة هندسيًا بلا افتراض لون بحر.
+
+    الخطوات: أكبر كتلة تعبئة مصمتة (بحر ملوّن أو يابسة)، ثم تمديد عرضها إلى حدّي
+    الخريطة الرأسيين إن وُجدا قريبين — فيُقاس البحر الأبيض بحدود الخريطة لا بمساحة
+    اليابسة وحدها. تعمل مع أي لوحة فاتحة أو داكنة (ك-122).
+    """
     try:
         import numpy as np
         from PIL import Image
@@ -142,7 +147,7 @@ def map_block_report(pdf: Path, dpi: int = DPI) -> dict:
         return {"error": "numpy/PIL غير متوفرة"}
     mm = 25.4 / dpi
     res = {"w_mm": -1.0, "h_mm": -1.0, "page_w": 0.0, "page_h": 0.0, "page": "",
-           "share": 0.0, "color": None, "pages": 0}
+           "share": 0.0, "color": None, "pages": 0, "method": "", "extended": 0}
     try:
         pages = _render_pages(pdf, dpi)
     except Exception as exc:
@@ -151,6 +156,15 @@ def map_block_report(pdf: Path, dpi: int = DPI) -> dict:
         return {"error": "لا صفحات في ملف PDF"}
     res["pages"] = len(pages)
     best = None
+
+    def _vrun(col) -> int:
+        bl = cl = 0
+        for v in col:
+            cl = cl + 1 if v else 0
+            if cl > bl:
+                bl = cl
+        return bl
+
     for img_path in pages:
         im = Image.open(img_path).convert("RGB")
         W, H = im.size
@@ -164,7 +178,6 @@ def map_block_report(pdf: Path, dpi: int = DPI) -> dict:
         mx = g.max(axis=3)
         mn = g.min(axis=3)
         mean = g.mean(axis=3)
-        # تعبئة مصمتة: خلايا معظمها لون فاتح ملوّن (بحر/يابسة) أو خلايا داكنة مصمتة
         light = (((mx - mn) >= 5) & (mean >= 115)).mean(axis=2) > 0.55
         dark = (mean < 110).mean(axis=2) > 0.80
         mask = light | dark
@@ -181,12 +194,28 @@ def map_block_report(pdf: Path, dpi: int = DPI) -> dict:
             share = float(counts.max()) / len(key)
             if share < MIN_DOMINANT_SHARE:
                 continue
-            area = bw * bh
+            # تمديد إلى حدود الخريطة الرأسية القريبة (حتى 12 مم)
+            ink = a.mean(axis=2) < 235
+            need = int(0.70 * (y1 - y0))
+            band = int(12 / mm)
+            nx0, nx1 = x0, x1
+            for dx in range(1, band + 1):
+                if x0 - dx >= 0 and _vrun(ink[y0:y1, x0 - dx]) >= need:
+                    nx0 = x0 - dx
+                    break
+            for dx in range(1, band + 1):
+                if x1 + dx < W and _vrun(ink[y0:y1, x1 + dx]) >= need:
+                    nx1 = x1 + dx
+                    break
+            ext = 1 if (nx0 != x0 or nx1 != x1) else 0
+            ebw = (nx1 - nx0) * mm
+            area = ebw * bh
             if best is None or area > best[0]:
-                best = (area, bw, bh, img_path.name, share,
-                        (int(k // 10000) * 24, int((k // 100) % 100) * 24, int(k % 100) * 24))
+                best = (area, ebw, bh, img_path.name, share,
+                        (int(k // 10000) * 24, int((k // 100) % 100) * 24, int(k % 100) * 24), ext)
     if best:
-        res.update(w_mm=best[1], h_mm=best[2], page=best[3], share=best[4], color=best[5])
+        res.update(w_mm=best[1], h_mm=best[2], page=best[3], share=best[4], color=best[5],
+                   extended=best[6], method="تعبئة مصمتة" + (" + حدود الخريطة" if best[6] else ""))
     return res
 
 
@@ -295,8 +324,8 @@ def main() -> int:
         ok = fw >= min_frac and fh >= min_h_frac
         print(f"  {'✓' if ok else '✘'} كتلة الخريطة {m['w_mm']:.0f}×{m['h_mm']:.0f} مم من "
               f"{m['page_w']:.0f}×{m['page_h']:.0f} مم = عرض {fw*100:.0f}% (الحد {min_frac*100:.0f}%) · "
-              f"ارتفاع {fh*100:.0f}% (الحد {min_h_frac*100:.0f}%) · {m['page']} · لون غالب "
-              f"{m['color']} ({m['share']*100:.0f}%)")
+              f"ارتفاع {fh*100:.0f}% (الحد {min_h_frac*100:.0f}%) · {m['page']} · "
+              f"الطريقة: {m.get('method','—')}")
         if fw < min_frac:
             problems.append(f"عرض الخريطة {fw*100:.0f}% أقل من الحد {min_frac*100:.0f}%")
         if fh < min_h_frac:

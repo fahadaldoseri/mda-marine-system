@@ -438,11 +438,12 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 @media print{
   :root{
     --ink:#0a1524;--ink-2:#20303f;--muted:#4b5e73;--faint:#5c728c;
-    --line:#b8c4d1;--line-2:#8a99ab;--panel:#fff;--panel-2:#fff;--panel-3:#eef2f7;
+    --line:#8d9bad;--line-2:#5d6f84;--panel:#fff;--panel-2:#fff;--panel-3:#eef2f7;
     --accent:#0b6f66;--info:#1f5f9f;--danger:#9d2b25;--warn:#7d5200;--ok:#166b45;
-    --map-sea:#f7fafc;--map-land:#d6e0ea;--map-coast:#64809b;--map-border:#96a7b9;
-    --map-grid:#d3dce6;--map-grid-lbl:#6b7f94;--map-label:#20303f;--map-country:#6b7f94;
-    --map-sea-label:#5a7086;--map-strait:#8a2b25;
+    /* لوحة خريطة الطباعة المعتمدة (حزمة design-v1 — قرار المالك 2026-10-23): بحر أبيض ويابسة رمادية */
+    --map-sea:#ffffff;--map-land:#dfe4ea;--map-coast:#3f4f63;--map-border:#7b8796;
+    --map-grid:#d3d9e0;--map-grid-lbl:#4b5e73;--map-label:#0a1524;--map-country:#4b5e73;
+    --map-sea-label:#4b5e73;--map-strait:#9d2b25;--map-marker-ring:#ffffff;--map-marker-ink:#ffffff;
   }
   body{background:#fff;color:#111;font-size:10.8pt;line-height:1.62}
   /* لا تُطبع المصادر والمراجع ولا ملحق موثوقية المصادر في نسخة PDF */
@@ -456,7 +457,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   /* إجبار: كتلة الخريطة تنقسم بين الرسم والمفتاح مهما وردت قاعدة أخصّ */
   #sec-03 .map-viz, .map-viz{break-inside:auto !important;page-break-inside:auto !important}
   .map-viz svg{break-inside:avoid !important;page-break-inside:avoid !important}
-  .map-viz{padding:3mm 3.5mm}
+  .map-viz{padding:1.2mm 1.2mm}
   /* مفتاح الخريطة في عمودين: يوفّر نحو 55 مم فيستقر القسم داخل ورقة واحدة */
   .map-legend{columns:2;column-gap:8mm}
   .map-legend li{break-inside:avoid;margin:0 0 1.4mm;font-size:9pt;line-height:1.45}
