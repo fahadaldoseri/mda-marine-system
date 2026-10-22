@@ -41,7 +41,7 @@ python3 "$_B/validators/check_pdf_format.py" --pdf "$_S/dist/reports/pdf/$D.pdf"
 [ "${PIPESTATUS[0]}" = "2" ] && FAIL=1
 
 say "7) ميزانية الصفحات"
-python3 "$_B/tools/page_budget.py" --date "$D" 2>&1 | tail -5
+python3 "$_B/tools/page_budget.py" --date "$D" --adding "${ADDING:-0}" 2>&1 | tail -5
 
 [ "$FAIL" = "0" ] && echo -e "\n✔ إعادة البناء مكتملة ومثبتة بالأثر" || echo -e "\n✘ إعادة البناء ناقصة"
 exit "$FAIL"

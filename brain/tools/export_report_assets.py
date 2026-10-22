@@ -64,7 +64,7 @@ PDF_CSS = """
 main{gap:0 !important}
 section.doc > h2{break-after:avoid;page-break-after:avoid}
 p,li,blockquote{orphans:3;widows:3}
-.map-viz svg{max-height:106mm;height:auto}
+.map-viz svg{max-height:145mm;width:100%;height:auto}
 tbody tr:nth-child(even){background:#fff !important}
 tbody td{border-bottom:.4pt solid #e2e8f0}
 .mp-events text{font-size:12px}
@@ -81,6 +81,11 @@ section.doc p{margin:1.5mm 0}
 section.doc ul,section.doc ol{margin:1mm 0}
 section.doc li{margin:.45mm 0}
 section.doc ul ul{margin:.6mm 0}
+.decision{break-before:page;page-break-before:page}
+section.doc p,section.doc li,.sec-lede,.masthead .lede,.glossary li,.src-grid li,
+.dc-list li,.chg-list li,.ev-list li,.map-caption,footer.foot{text-align:justify;text-align-last:start;hyphens:none}
+section.doc h2,section.doc h3,section.doc h4,.h-rule,.chip,.kpi,.tag,.st-badge,
+.map-legend li,.conf,.cls-banner,.threat,.toc li,.ev-code{text-align:start}
 """
 
 HEADER_TPL = """<div style="font-family:'Noto Kufi Arabic','IBM Plex Sans Arabic',sans-serif;font-size:7.6px;
