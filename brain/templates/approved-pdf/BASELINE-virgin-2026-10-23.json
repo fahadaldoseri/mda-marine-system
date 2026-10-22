@@ -37,8 +37,8 @@
    "bytes": 16671
   },
   "tools/final_gate.sh": {
-   "sha256": "d60b584243cdadb6697e07fdc152e035161c4beb6baf27bb0b48c9ef49e8f832",
-   "bytes": 10925
+   "sha256": "2760db6e9b76d92043b0a42a802797d64060f925c88ffd159b591d1fe0cce166",
+   "bytes": 11291
   },
   "tools/rebuild_report.sh": {
    "sha256": "f87f0eb4c98c82d2098773e2749fc01bd6f8abfc7037fff7f24fe649055d35ee",
@@ -48,9 +48,17 @@
    "sha256": "916f178fa15d2d3cf00d4932f73a6909237bb8e233461ef901e40235d9edd48d",
    "bytes": 5790
   },
+  "tools/check_baseline.py": {
+   "sha256": "729c58d56bbbf290d241450ca964f5c7b06365c34b5a228607d17102c6cac75f",
+   "bytes": 2824
+  },
+  "tools/make_baseline.py": {
+   "sha256": "a166800813a52af11355290b1988aed22c8813b59a7b9687c23c036cc0341ed3",
+   "bytes": 4687
+  },
   "templates/approved-pdf/print-profile.json": {
-   "sha256": "45d5333a14182bbaac7043e97e66d38b5cc5f43f5e8d1672f647eeefecb0bdf3",
-   "bytes": 9610
+   "sha256": "adbc32830d125ccf6b1121b3e605300a39169d05de3928e74e8f2422c176a993",
+   "bytes": 9848
   },
   "templates/approved-pdf/print-css-frozen.css": {
    "sha256": "ac05b43f996ae9f0eca5f2d29e0bafe6ad77c7ce3fde35cd15a6bae7506266ac",
@@ -95,14 +103,30 @@
   "generator/site_chrome.py": {
    "sha256": "2d0b8f24d7b7935900b9f5ae5092c5408091e716447f39e95bce003da792b2c9",
    "bytes": 12833
-  },
-  "dist/reports/pdf/2026-10-22.pdf": {
-   "sha256": "a81d76ba6d4d5204e65670a53839cce2d84b18dc76fb6581d53fc02a051dad85",
-   "bytes": 840325
   }
  },
  "commits": {
-  "backup_repo": "3739cac (قبل الدفع)",
-  "site_repo": "b60a8dfdcc3aed71d67357835dfb6edf4c522bee"
+  "site_repo": "b60a8df",
+  "brain_backup": "3b10474"
+ },
+ "blessings": [
+  {
+   "at": "2026-10-22T23:31:04Z",
+   "reason": "تثبيت خط الأساس الرسمي virgin — هيئة v3 معتمدة رسميًا وحيدة للعمل (قرار صاحب القرار 23 أكتوبر 2026)",
+   "files": 21
+  },
+  {
+   "at": "2026-10-22T23:31:32Z",
+   "reason": "ربط فاحص خط الأساس الرسمي (virgin) ببوابة التسليم + إضافة أداتي الفحص والتجديد",
+   "files": 21
+  },
+  {
+   "at": "2026-10-22T23:34:16Z",
+   "reason": "استثناء ملف PDF المولَّد من البصمات (ك-127) — يُقاس بالبوابات لا بالبصمة",
+   "files": 20
+  }
+ ],
+ "artifacts": {
+  "dist/reports/pdf/2026-10-22.pdf": "يُقاس ببوابتي الشكل وجودة الطباعة (10 صفحات · خريطة 74% · تصفير 41%) لا بالبصمة"
  }
 }

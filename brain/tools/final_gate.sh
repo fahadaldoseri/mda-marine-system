@@ -55,6 +55,9 @@ if [ "$BUILD" = "1" ]; then
   # عرض/ارتفاع كتلة الخريطة وتصفير كل كتل المتن = بند مانع يوقف النشر وتلغرام.
   step "جودة الطباعة (الخريطة والتصفير على PDF)" 2 python3 "$B/validators/check_print_quality.py" \
     --pdf "$SITE/dist/reports/pdf/$D.pdf" --page "$SITE/dist/reports/$D.html" --date "$D"
+  # خط الأساس الرسمي (virgin): تنبيهي — يُعلن أي انحراف في ملفات الشكل والبوابات عن
+  # النسخة المعتمدة، فلا يتغيّر الشكل الرسمي دون قرار موثَّق وتجديد للبيان.
+  step "خط الأساس الرسمي (virgin)" 2 python3 "$B/tools/check_baseline.py"
   # نسخة Word طبق الأصل: بوابة المخرج 9 تمنع التسليم بلا نسخة Word، فتُبنى هنا آليًا
   step "نسخة Word طبق الأصل" 2 python3 "$B/tools/build_report_docx_exact.py" --date "$D"
 fi
