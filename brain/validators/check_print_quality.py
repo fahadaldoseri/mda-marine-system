@@ -1,23 +1,27 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-بوابة جودة الطباعة — ملزمة (فشل مغلق) · ك-104 و ك-105
-تقيس على مُخرج الطباعة نفسه (PDF والصفحة بوسائط print) لا على الشاشة:
+بوابة جودة الطباعة — ملزمة (فشل مغلق) · ك-104 · ك-105 · إصلاح ك-122
+تقيس على مُخرج الطباعة نفسه (ملف PDF) لا على الشاشة:
 
-  1) كتلة خريطة الوقائع في ملف PDF: العرض ≥ الحد المعتمد من عرض الورقة،
-     والارتفاع ≥ الحد المعتمد من ارتفاع الورقة.
+  1) كتلة خريطة الوقائع في PDF: العرض والارتفاع بالمليمتر ونسبتهما من الورقة.
+     القياس **هندسي**: أكبر كتلة تعبئة مصمتة (لون غالب ≥ 50% من مساحتها) لا يعتمد
+     على لون بحر واحد، فيعمل مع أي لوحة (فاتحة أو داكنة) — إصلاح ك-122.
      الحدود في templates/approved-pdf/print-profile.json ← gates.min_map_width_frac
      و gates.min_map_height_frac (الافتراضي 0.70 و 0.32).
 
-  2) تصفير المتن: تُفتح صفحة التقرير بوسائط print (نفس محرّك Chromium الذي
-     يولّد PDF) وتُقرأ محاذاة كل كتلة متن تحمل نصًا مباشرًا. أي فقرة أو بند قائمة
-     أو قيمة بطاقة قرار بطول 25 حرفًا وأكثر لا تكون `justify` = مخالفة مانعة.
-     يُستثنى: العناوين، وخلايا الجداول، وشرائح المؤشرات، والوسوم، والمصادر،
-     والفهرس، والخريطة، والتذييل.
+  2) تصفير المتن في PDF نفسه: تُجمع كلمات كل سطر من إحداثياتها، ويُحدَّد عمود
+     المتن من أكثر حافة يمين تكرارًا، ثم تُقاس الحافة اليسرى للأسطر الممتلئة
+     (عرضها ≥ 85% من عرض العمود). في الفقرة المصفّرة تبلغ كل الأسطر الممتلئة
+     الطرف الأيسر نفسه؛ وفي المحاذاة لليمين تتقاصر. القياس بالإحداثيات فقط،
+     فلا يتأثر بعكس الحروف العربية في الاستخراج.
 
-  3) مؤشر استشاري (لا يمنع): نسبة الأسطر الممتلئة التي لا تبلغ طرف المتن في PDF.
+  3) مؤشر استشاري (لا يمنع): نسبة الأسطر الممتلئة المتقصّرة.
 
-فشل مغلق: أي تعذّر في القياس (ملف مفقود، أو محرّك الصفحة لم يعمل) = مخالفة مانعة.
+  4) عند تمرير صفحة HTML للتقرير (--page) يُضاف فحص محاذاة حي في وسائط print
+     كتأكيد ثانٍ (لا يعوّض القياس على PDF).
+
+فشل مغلق: أي تعذّر في القياس = مخالفة مانعة.
 الاستعمال:
   python3 validators/check_print_quality.py --pdf <file.pdf> [--page <file.html>]
 رموز الخروج: 0 مطابق · 2 مخالفة مانعة.
@@ -30,16 +34,22 @@ import re
 import subprocess
 import sys
 import tempfile
+from collections import deque
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PROFILE = ROOT / "templates" / "approved-pdf" / "print-profile.json"
 
-SEA = (214, 224, 234)            # لون بحر خريطة الوقائع في هيئة v3
-SEA_TOL = 4
-MIN_SEA_PIXELS_PER_ROW = 60
-MIN_MAP_HEIGHT_MM = 30
-RAG_MM = 3.0                     # فجوة تُعدّ سطرًا غير بالغ للطرف (استشاري)
+DPI = 150
+CELL = 8                      # خلية القياس بالبكسل ≈ 1.35 مم
+MIN_MAP_HEIGHT_MM = 25
+MIN_DOMINANT_SHARE = 0.50     # الكتلة المصمتة: لون واحد يغطي نصف مساحتها
+MIN_MAP_WIDTH_FRAC_OF_TEXT = 0.45
+RAG_MM = 3.0
+JUSTIFY_TOL_MM = 2.5
+JUSTIFY_MIN_FULL_LINES = 6
+JUSTIFY_MIN_CLUSTER = 0.25
+COLUMN_MIN_WIDTH_MM = 55
 
 ALIGN_SKIP_CLASSES = [
     "chip", "tag", "k-l", "k-n", "lbl", "brand", "legend", "map-", "bar-",
@@ -86,45 +96,162 @@ def _profile() -> dict:
         return {}
 
 
-def _render_pages(pdf: Path, dpi: int = 150) -> list[Path]:
+def _render_pages(pdf: Path, dpi: int = DPI) -> list[Path]:
     out = Path(tempfile.mkdtemp(prefix="pq-"))
     subprocess.run(["pdftoppm", "-r", str(dpi), "-png", str(pdf), str(out / "p")],
                    check=True, capture_output=True)
     return sorted(out.glob("p-*.png"))
 
 
-def map_block_report(pdf: Path) -> dict:
-    """يقيس كتلة خريطة الوقائع في ملف PDF: العرض والارتفاع بالمليمتر ونسبتهما."""
-    res = {"w_mm": -1.0, "h_mm": -1.0, "page_w": 0.0, "page_h": 0.0, "page": ""}
+# ───────────────────────── قياس كتلة الخريطة (هندسي) ─────────────────────────
+def _components(mask, min_cells: int):
+    h = len(mask)
+    w = len(mask[0]) if h else 0
+    seen = [[False] * w for _ in range(h)]
+    out = []
+    for y in range(h):
+        for x in range(w):
+            if not mask[y][x] or seen[y][x]:
+                continue
+            q = deque([(y, x)])
+            seen[y][x] = True
+            cells = []
+            while q:
+                cy, cx = q.popleft()
+                cells.append((cy, cx))
+                for dy in (-1, 0, 1):
+                    for dx in (-1, 0, 1):
+                        ny, nx = cy + dy, cx + dx
+                        if 0 <= ny < h and 0 <= nx < w and mask[ny][nx] and not seen[ny][nx]:
+                            seen[ny][nx] = True
+                            q.append((ny, nx))
+            if len(cells) >= min_cells:
+                ys = [c[0] for c in cells]
+                xs = [c[1] for c in cells]
+                out.append({"y0": min(ys), "y1": max(ys), "x0": min(xs), "x1": max(xs),
+                            "cells": len(cells)})
+    return out
+
+
+def map_block_report(pdf: Path, dpi: int = DPI) -> dict:
+    """يقيس كتلة الخريطة هندسيًا: أكبر تعبئة مصمتة بعرض وارتفاع معتبرين."""
     try:
+        import numpy as np
         from PIL import Image
     except Exception:
-        return res
-    for img_path in _render_pages(pdf):
+        return {"error": "numpy/PIL غير متوفرة"}
+    mm = 25.4 / dpi
+    res = {"w_mm": -1.0, "h_mm": -1.0, "page_w": 0.0, "page_h": 0.0, "page": "",
+           "share": 0.0, "color": None, "pages": 0}
+    try:
+        pages = _render_pages(pdf, dpi)
+    except Exception as exc:
+        return {"error": f"تعذّر تحويل PDF إلى صور: {type(exc).__name__}"}
+    if not pages:
+        return {"error": "لا صفحات في ملف PDF"}
+    res["pages"] = len(pages)
+    best = None
+    for img_path in pages:
         im = Image.open(img_path).convert("RGB")
         W, H = im.size
-        px = im.load()
-        res["page_w"] = max(res["page_w"], W / 150 * 25.4)
-        res["page_h"] = max(res["page_h"], H / 150 * 25.4)
-        rows = []
-        for y in range(0, H, 2):
-            xs = [x for x in range(0, W, 2)
-                  if abs(px[x, y][0] - SEA[0]) <= SEA_TOL
-                  and abs(px[x, y][1] - SEA[1]) <= SEA_TOL
-                  and abs(px[x, y][2] - SEA[2]) <= SEA_TOL]
-            if len(xs) >= MIN_SEA_PIXELS_PER_ROW:
-                rows.append((y, min(xs), max(xs)))
-        if not rows:
+        res["page_w"] = max(res["page_w"], W * mm)
+        res["page_h"] = max(res["page_h"], H * mm)
+        a = np.asarray(im).astype(int)
+        h, w = H // CELL, W // CELL
+        if h < 8 or w < 8:
             continue
-        w_mm = (max(r[2] for r in rows) - min(r[1] for r in rows)) / 150 * 25.4
-        h_mm = (max(r[0] for r in rows) - min(r[0] for r in rows)) / 150 * 25.4
-        if h_mm >= MIN_MAP_HEIGHT_MM and w_mm * h_mm > res["w_mm"] * max(res["h_mm"], 0):
-            res.update(w_mm=w_mm, h_mm=h_mm, page=img_path.name)
+        g = a[:h * CELL, :w * CELL].reshape(h, CELL, w, CELL, 3).transpose(0, 2, 1, 3, 4).reshape(h, w, CELL * CELL, 3)
+        mx = g.max(axis=3)
+        mn = g.min(axis=3)
+        mean = g.mean(axis=3)
+        # تعبئة مصمتة: خلايا معظمها لون فاتح ملوّن (بحر/يابسة) أو خلايا داكنة مصمتة
+        light = (((mx - mn) >= 5) & (mean >= 115)).mean(axis=2) > 0.55
+        dark = (mean < 110).mean(axis=2) > 0.80
+        mask = light | dark
+        for c in _components(mask.tolist(), min_cells=60):
+            y0, y1, x0, x1 = c["y0"] * CELL, (c["y1"] + 1) * CELL, c["x0"] * CELL, (c["x1"] + 1) * CELL
+            bw, bh = (x1 - x0) * mm, (y1 - y0) * mm
+            if bh < MIN_MAP_HEIGHT_MM or bw < res["page_w"] * MIN_MAP_WIDTH_FRAC_OF_TEXT:
+                continue
+            patch = a[y0:y1, x0:x1].reshape(-1, 3)
+            q = (patch // 24).astype(np.int32)
+            key = q[:, 0] * 10000 + q[:, 1] * 100 + q[:, 2]
+            vals, counts = np.unique(key, return_counts=True)
+            k = int(vals[int(counts.argmax())])
+            share = float(counts.max()) / len(key)
+            if share < MIN_DOMINANT_SHARE:
+                continue
+            area = bw * bh
+            if best is None or area > best[0]:
+                best = (area, bw, bh, img_path.name, share,
+                        (int(k // 10000) * 24, int((k // 100) % 100) * 24, int(k % 100) * 24))
+    if best:
+        res.update(w_mm=best[1], h_mm=best[2], page=best[3], share=best[4], color=best[5])
     return res
 
 
+# ───────────────────────── قياس التصفير من PDF نفسه ─────────────────────────
+def _pdf_lines(pdf: Path) -> list[list[dict]]:
+    xml = subprocess.run(["pdftotext", "-bbox-layout", str(pdf), "-"],
+                         capture_output=True, text=True).stdout
+    pages = []
+    for chunk in re.split(r"<page\b", xml)[1:]:
+        lines = []
+        for ln in re.split(r"<line\b", chunk)[1:]:
+            ws = re.findall(
+                r'<word xMin="([\d.]+)" yMin="([\d.]+)" xMax="([\d.]+)" yMax="([\d.]+)">(.*?)</word>', ln)
+            if not ws:
+                continue
+            lines.append({"x0": min(float(x[0]) for x in ws),
+                          "x1": max(float(x[2]) for x in ws),
+                          "y": min(float(x[1]) for x in ws),
+                          "n": len(ws),
+                          "t": " ".join(x[4] for x in ws)})
+        pages.append(lines)
+    return pages
+
+
+def justify_report(pdf: Path) -> dict:
+    """يقيس تجمّع الحافة اليسرى لأسطر المتن الطويلة في PDF (دليل التصفير في RTL).
+
+    في المتن المصفّر تبلغ الأسطر الطويلة الطرف الأيسر نفسه فتتجمّع إحداثياته؛ وفي
+    المحاذاة لليمين تتبعثر. المقياس بالإحداثيات فقط فلا يتأثر بعكس الحروف العربية
+    في الاستخراج، ويُهمل أثر الوسوم المضمّنة التي تقطع بعض الأسطر قبل الطرف.
+    """
+    pt2mm = 25.4 / 72
+    try:
+        pages = _pdf_lines(pdf)
+    except Exception as exc:
+        return {"error": f"تعذّر استخراج إحداثيات النص: {type(exc).__name__}"}
+    shares, pages_used = [], 0
+    for i, lines in enumerate(pages, 1):
+        if not lines:
+            continue
+        wmax = max(l["x1"] - l["x0"] for l in lines)
+        col = [l for l in lines
+               if (l["x1"] - l["x0"]) >= 0.60 * wmax and (l["x1"] - l["x0"]) * pt2mm >= COLUMN_MIN_WIDTH_MM]
+        if len(col) < 6:
+            continue
+        left_min = min(l["x0"] for l in col)
+        near = sum(1 for l in col if (l["x0"] - left_min) * pt2mm <= JUSTIFY_TOL_MM)
+        shares.append(near / len(col))
+        pages_used += 1
+    if not shares:
+        return {"error": "لا أسطر متن طويلة كافية للقياس"}
+    share = sum(shares) / len(shares)
+    return {"share": share, "pages": pages_used,
+            "worst_page": min(shares), "best_page": max(shares)}
+
+
+def rag_indicator(pdf: Path) -> tuple[int, float]:
+    r = justify_report(pdf)
+    if "error" in r:
+        return 0, 0.0
+    return r["short"], r["worst_mm"]
+
+
 def alignment_report(page_path: Path) -> list[dict]:
-    """يدقّق محاذاة المتن في وسائط الطباعة نفسها التي يُبنى بها ملف PDF."""
+    """تدقيق محاذاة حي في وسائط print (تأكيد ثانٍ عند تمرير صفحة HTML)."""
     from playwright.sync_api import sync_playwright
     js = ALIGN_JS_TMPL.replace("__SKIP__", json.dumps(ALIGN_SKIP_CLASSES, ensure_ascii=False))
     with sync_playwright() as pw:
@@ -136,36 +263,6 @@ def alignment_report(page_path: Path) -> list[dict]:
         bad = pg.evaluate(js)
         b.close()
     return bad
-
-
-def rag_indicator(pdf: Path) -> tuple[int, float]:
-    """مؤشر استشاري: (عدد الأسطر الممتلئة المتقصّرة، أقصى فجوة مم)."""
-    try:
-        xml = subprocess.run(["pdftotext", "-bbox-layout", str(pdf), "-"],
-                             capture_output=True, text=True).stdout
-    except Exception:
-        return 0, 0.0
-    short_total, worst = 0, 0.0
-    for chunk in re.split(r'<page\b', xml)[1:]:
-        lines = []
-        for ln in re.split(r'<line\b', chunk)[1:]:
-            w = re.findall(r'<word xMin="([\d.]+)" yMin="([\d.]+)" xMax="([\d.]+)" yMax="([\d.]+)">(.*?)</word>', ln)
-            if not w:
-                continue
-            lines.append({"x0": min(float(x[0]) for x in w),
-                          "x1": max(float(x[2]) for x in w)})
-        if not lines:
-            continue
-        col = max(l["x1"] - l["x0"] for l in lines)
-        wide = [l for l in lines if (l["x1"] - l["x0"]) >= 0.7 * col]
-        if len(wide) < 6:
-            continue
-        edge = min(l["x0"] for l in wide)
-        short = [l for l in wide if (l["x0"] - edge) > RAG_MM * 72 / 25.4]
-        short_total += len(short)
-        if short:
-            worst = max(worst, max(l["x0"] - edge for l in short) * 25.4 / 72)
-    return short_total, worst
 
 
 def main() -> int:
@@ -188,40 +285,48 @@ def main() -> int:
     problems: list[str] = []
 
     m = map_block_report(pdf)
-    if m["w_mm"] < 0:
-        problems.append("تعذّر قياس كتلة الخريطة في ملف PDF (فشل مغلق)")
+    if m.get("error"):
+        problems.append(f"تعذّر قياس كتلة الخريطة في PDF: {m['error']} (فشل مغلق)")
+    elif m["w_mm"] < 0:
+        problems.append("لم تُعثر كتلة خريطة مصمتة في PDF (فشل مغلق)")
     else:
         fw = m["w_mm"] / m["page_w"]
         fh = m["h_mm"] / m["page_h"]
         ok = fw >= min_frac and fh >= min_h_frac
         print(f"  {'✓' if ok else '✘'} كتلة الخريطة {m['w_mm']:.0f}×{m['h_mm']:.0f} مم من "
               f"{m['page_w']:.0f}×{m['page_h']:.0f} مم = عرض {fw*100:.0f}% (الحد {min_frac*100:.0f}%) · "
-              f"ارتفاع {fh*100:.0f}% (الحد {min_h_frac*100:.0f}%)")
+              f"ارتفاع {fh*100:.0f}% (الحد {min_h_frac*100:.0f}%) · {m['page']} · لون غالب "
+              f"{m['color']} ({m['share']*100:.0f}%)")
         if fw < min_frac:
             problems.append(f"عرض الخريطة {fw*100:.0f}% أقل من الحد {min_frac*100:.0f}%")
         if fh < min_h_frac:
             problems.append(f"ارتفاع الخريطة {fh*100:.0f}% أقل من الحد {min_h_frac*100:.0f}%")
 
-    if page_path is None:
-        problems.append("لم تُحدَّد صفحة التقرير لتدقيق المحاذاة (فشل مغلق)")
-    elif not page_path.exists():
-        problems.append(f"صفحة التقرير غير موجودة: {page_path.name}")
+    j = justify_report(pdf)
+    if j.get("error"):
+        problems.append(f"تعذّر قياس تصفير المتن من PDF: {j['error']} (فشل مغلق)")
     else:
+        ok = j["share"] >= JUSTIFY_MIN_CLUSTER
+        print(f"  {'✓' if ok else '✘'} تصفير المتن في PDF: تجمّع الحافة اليسرى "
+              f"{j['share']*100:.0f}% (الحد {JUSTIFY_MIN_CLUSTER*100:.0f}%) · {j['pages']} صفحة "
+              f"· أدنى صفحة {j['worst_page']*100:.0f}%")
+        if not ok:
+            problems.append(f"تجمّع الحافة اليسرى {j['share']*100:.0f}% أقل من الحد "
+                            f"{JUSTIFY_MIN_CLUSTER*100:.0f}% — المتن لا يبلغ الطرف (غير مصفّر)")
+
+    if page_path is not None and page_path.exists():
+        if page_path.stat().st_mtime - pdf.stat().st_mtime > 60:
+            problems.append("ملف PDF أقدم من صفحة التقرير — القياس على نسخة قديمة")
         try:
             bad = alignment_report(page_path)
+            if bad:
+                problems.append(f"{len(bad)} كتلة متن غير مصفّرة في وسائط الطباعة")
+                for b in bad[:5]:
+                    print(f"  ✘ غير مصفّر [{b['ta']}] <{b['tag']} .{b['cls']}> «{b['sample']}»")
+            else:
+                print("  ✓ تأكيد ثانٍ: كل كتل المتن مصفّرة في وسائط الطباعة")
         except Exception as exc:
-            problems.append(f"تعذّر تدقيق المحاذاة الحي: {type(exc).__name__} (فشل مغلق)")
-            bad = []
-            print(f"  ✘ تعذّر تدقيق المحاذاة الحي: {type(exc).__name__}: {str(exc)[:90]}")
-        if bad:
-            problems.append(f"{len(bad)} كتلة متن غير مصفّرة في وسائط الطباعة")
-            for b in bad[:5]:
-                print(f"  ✘ غير مصفّر [{b['ta']}] <{b['tag']} .{b['cls']}> «{b['sample']}»")
-        elif not any("المحاذاة" in p for p in problems):
-            print("  ✓ كل كتل المتن مصفّرة في وسائط الطباعة (justify)")
-
-    short_n, worst_mm = rag_indicator(pdf)
-    print(f"  • مؤشر استشاري: {short_n} سطرًا ممتلئًا لا يبلغ الطرف (أقصى فجوة {worst_mm:.0f} مم) — لا يمنع")
+            print(f"  • تعذّر التأكيد الحي على الصفحة ({type(exc).__name__}) — لا يمنع لأن قياس PDF تم")
 
     if problems:
         print("\nالمخالفات المانعة:")

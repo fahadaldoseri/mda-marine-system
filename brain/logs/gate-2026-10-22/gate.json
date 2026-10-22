@@ -113,8 +113,8 @@
   },
   {
    "step": "عدد المصادر (مصدر واحد)",
-   "status": "ok",
-   "exit_code": "0)",
+   "status": "warn",
+   "exit_code": "1)",
    "log": "19-عدد_المصادر_(مصدر_واحد).log"
   },
   {
@@ -125,8 +125,8 @@
   },
   {
    "step": "الأرقام (0-9 لاتينية)",
-   "status": "ok",
-   "exit_code": "0)",
+   "status": "warn",
+   "exit_code": "1)",
    "log": "21-الأرقام_(0-9_لاتينية).log"
   },
   {
@@ -167,5 +167,5 @@
   }
  ],
  "log_dir": "/home/ubuntu/brain-marine-news/logs/gate-2026-10-22",
- "finished_utc": "2026-10-22T11:58:56Z"
+ "finished_utc": "2026-10-22T22:35:18Z"
 }

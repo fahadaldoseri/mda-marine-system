@@ -241,9 +241,9 @@
     "error": null
    }
   ],
-  "page_status": 200,
-  "page_chars": 25035,
-  "page_error": null,
+  "page_status": null,
+  "page_chars": 0,
+  "page_error": "TimeoutError",
   "state": "يعمل آليًا · حديث (0 يومًا)",
   "path": "تغذية",
   "action": "لا إجراء"
@@ -298,7 +298,7 @@
    }
   ],
   "page_status": 200,
-  "page_chars": 29426,
+  "page_chars": 29398,
   "page_error": null,
   "state": "تغذية متقادمة (1012 يومًا)",
   "path": "تغذية",
@@ -315,7 +315,7 @@
   "feed_registered": 0,
   "feeds": [],
   "page_status": 200,
-  "page_chars": 6528,
+  "page_chars": 6535,
   "page_error": null,
   "state": "صفحة تُقرأ آليًا",
   "path": "صفحة",
@@ -389,7 +389,7 @@
    }
   ],
   "page_status": 200,
-  "page_chars": 9854,
+  "page_chars": 9849,
   "page_error": null,
   "state": "يعمل آليًا · حديث (0 يومًا)",
   "path": "تغذية",
@@ -421,7 +421,7 @@
    }
   ],
   "page_status": 200,
-  "page_chars": 7718,
+  "page_chars": 8036,
   "page_error": null,
   "state": "يعمل آليًا · حديث (0 يومًا)",
   "path": "تغذية",
@@ -846,17 +846,17 @@
   "feeds": [
    {
     "url": "https://www.ajnet.me/rss",
-    "status": 200,
-    "items": 25,
-    "latest_age_days": 0,
-    "error": null
+    "status": null,
+    "items": 0,
+    "latest_age_days": null,
+    "error": "URLError"
    }
   ],
-  "page_status": null,
-  "page_chars": 0,
-  "page_error": "RemoteDisconnected",
-  "state": "يعمل آليًا · حديث (0 يومًا)",
-  "path": "تغذية",
+  "page_status": 200,
+  "page_chars": 211410,
+  "page_error": null,
+  "state": "صفحة تُقرأ آليًا",
+  "path": "صفحة",
   "action": "لا إجراء"
  },
  {
@@ -1404,7 +1404,7 @@
    }
   ],
   "page_status": 200,
-  "page_chars": 8057,
+  "page_chars": 8058,
   "page_error": null,
   "state": "يعمل آليًا · حديث (0 يومًا)",
   "path": "تغذية",
