@@ -69,8 +69,10 @@
   },
   "report_present_at_pipeline_end": false,
   "final_gate": {
-    "status": "pending",
+    "status": "warn",
+    "exit_code": 1,
     "dir": "logs/gate-2026-10-22",
-    "note": "تُشغَّل بوابة التسليم بعد كتابة التقرير: bash tools/final_gate.sh <التاريخ>"
+    "blocked_steps": [],
+    "note": "نتيجة بوابة التسليم النهائية — مسجّلة بعد كتابة التقرير."
   }
 }

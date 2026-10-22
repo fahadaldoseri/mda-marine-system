@@ -1,5 +1,5 @@
 {
- "utc": "2026-10-22T03:46:03Z",
+ "utc": "2026-10-22T03:54:57Z",
  "list": "https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/SDN.CSV",
  "names": 19425,
  "rule_note": "قاعدة 50%: تُعد الكيانات المملوكة 50% أو أكثر من كيان مُدرج مُدرجة حكمًا",
@@ -41,6 +41,16 @@
   },
   {
    "target": "AHTS ACCOMPLISH",
+   "match": [],
+   "result": "no_match"
+  },
+  {
+   "target": "AL DASMA",
+   "match": [],
+   "result": "no_match"
+  },
+  {
+   "target": "GFS PRIDE",
    "match": [],
    "result": "no_match"
   }

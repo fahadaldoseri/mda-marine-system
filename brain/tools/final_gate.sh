@@ -71,6 +71,9 @@ step "تماثل المهارات والمكتبات (مزامنة فورية)" 
 step "سلامة المهارات" 1 python3 validators/check_skills_integrity.py
 step "بوابة الفهم (مرحلة $COMP_STAGE)" 2 python3 "$B/validators/check_comprehension.py" --date "$D"
 step "بوابة التحليل الاستخباري" 2 python3 "$B/validators/check_intel.py" "$B/reports/$D-sectioned.md" "$B/web/meta/$D.json"
+# فحص العقوبات يُحدَّث لحظة البوابة، فالتقرير قد يُكتب أو يُعدَّل بعد الخط اليومي
+python3 "$B/tools/ofac_targets_from_report.py" --date "$D" >/dev/null 2>&1 || true
+python3 "$B/tools/ofac_screen.py" "$B/watchlist/ofac-targets.txt" >/dev/null 2>&1 || true
 step "تغطية فحص العقوبات" 2 python3 "$B/validators/check_ofac_coverage.py" --date "$D"
 step "استعمال المكتبات (المعجم والبنك والفجوات)" 2 python3 "$B/validators/check_library_use.py" --date "$D"
 step "عدد المصادر (مصدر واحد)" 2 python3 "$B/validators/check_sources_count.py"
