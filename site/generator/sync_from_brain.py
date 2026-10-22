@@ -94,7 +94,13 @@ def copy_sources(date_iso: str, brain: Path) -> list:
     rel = brain / "appendices" / "source-reliability-40.md"
     if rel.exists():
         shutil.copy2(rel, SITE / "sources" / "source-reliability.md")
-        log.append("حُدّث سجل الموثوقية والمصداقية (48 مصدرًا)")
+        _n = 0
+        try:
+            _n = int(json.loads((brain / "appendices" / "sources-manifest.json")
+                                .read_text(encoding="utf-8"))["approved_source_count"])
+        except Exception:
+            _n = 0
+        log.append(f"حُدّث سجل الموثوقية والمصداقية ({_n or '؟'} مصدرًا — من ملف المصدر الواحد)")
     else:
         log.append("تحذير: سجل الموثوقية غير موجود")
     statuses = sorted((brain / "feeds").glob("feeds-*.status.json"))
