@@ -243,6 +243,7 @@ def main() -> int:
     ap.add_argument("--only", choices=["pdf", "map", "both"], default="both")
     ap.add_argument("--no-toc", action="store_true", help="بلا فهرس محتويات")
     ap.add_argument("--no-header", action="store_true", help="بلا ترويسة وتذييل")
+    ap.add_argument("--extra-css", help="ملف CSS اختباري يُحقن بعد أنماط PDF (للمعاينة التجريبية فقط)")
     args = ap.parse_args()
 
     page_path = DIST / "reports" / f"{args.date}.html"
@@ -279,6 +280,10 @@ def main() -> int:
             pg.wait_for_timeout(1200)
             if args.only in ("pdf", "both"):
                 pg.emulate_media(media="print")
+                if args.extra_css:
+                    _extra = Path(args.extra_css).read_text(encoding="utf-8")
+                    pg.add_style_tag(content=_extra)
+                    print(f"أنماط اختبارية مُحقونة: {args.extra_css}")
                 pg.add_style_tag(content=PDF_CSS.replace(
                     "{HIDE_SOURCES}",
                     f"#{hide_id}{{display:none !important}}" if hide_id else ""))
