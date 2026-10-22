@@ -388,14 +388,31 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .hmap h3{margin:0 0 14px;font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:15px;color:var(--ink-2)}
 .hmap .blk-lede,.hmap-keys,.hmap-panel .src-note{display:none}
 .hmap-wrap{position:relative;border:1px solid var(--line-2);border-radius:var(--radius-sm);overflow:hidden;background:var(--map-sea)}
-.hmap-zoom{position:absolute;left:5.5%;bottom:5%;width:31%;border:1.5px solid var(--accent);border-radius:6px;overflow:hidden;background:var(--map-sea);box-shadow:0 8px 24px -10px rgba(0,0,0,.6)}
+/* التكبير بجانب الخريطة لا فوقها: الشريحة كانت تحجب الخليج العربي (البحرين وقطر) */
+.hmap-wrap{display:grid;grid-template-columns:minmax(0,2.4fr) minmax(0,1fr);align-items:start}
+.hmap-zoom{border-inline-start:1.5px solid var(--accent);background:var(--map-sea);min-width:0;align-self:stretch;display:flex;flex-direction:column}
 .hmap-zsvg{display:block;width:100%;height:auto}
-.hz-cap{font-size:12.5px;color:var(--ink-2);background:var(--panel);padding:2px 8px;border-top:1px solid var(--line-2)}
-@media (max-width:1000px){.hmap-zoom{position:static;width:100%;border-width:1px 0 0;border-radius:0;box-shadow:none}}
+.hz-cap{font-size:13px;color:var(--ink-2);background:var(--panel);padding:4px 10px;border-top:1px solid var(--line-2);margin-top:auto}
+@media (max-width:1000px){.hmap-wrap{grid-template-columns:minmax(0,1fr)}.hmap-zoom{border-inline-start:0;border-top:1.5px solid var(--accent)}}
 .hmap-svg{display:block;width:100%;height:auto;max-width:100%}
-.hmap-legend{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 22px;margin:14px 0 0;padding:0}
-.hmap-legend li{display:flex;gap:10px;align-items:baseline;font-size:13.5px;color:var(--ink-2);margin:0}
+/* خريطة الشاشة: علامات وتسميات أكبر قليلًا للقراءة من مسافة */
+.hmap-svg .mp-dot{r:9.5px}
+.hmap-svg .mp-halo{r:17px}
+.hmap-svg .mp-events .mp-num{font-size:12.5px}
+.hmap .mp-grid-lbl{font-size:12.5px}
+.hmap .mp-port-lbl{font-size:15.5px}
+.hmap .mp-country{font-size:16.5px}
+.hmap-legend{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 30px;margin:16px 0 0;padding:0}
+.hmap-legend li{display:block;position:relative;padding-inline-start:34px;font-size:14px;line-height:1.85;color:var(--ink-2);margin:0}
+.hmap-legend .lg-num{position:absolute;inset-inline-start:0;top:3px}
+.hmap-legend .bidi{color:var(--muted);font-size:13px;white-space:nowrap}
 @media (max-width:760px){.hmap-legend{grid-template-columns:minmax(0,1fr)}}
+/* الجوال: الخريطة الرئيسية تُصغَّر كثيرًا فتكبر العلامات والتسميات لتبقى مقروءة (التفصيل في لوحة التكبير) */
+@media (max-width:700px){
+  .hmap-svg .mp-dot{r:13px}.hmap-svg .mp-halo{r:20px}.hmap-svg .mp-events .mp-num{font-size:15px}
+  .hmap-svg .mp-port-lbl{font-size:25px}.hmap-svg .mp-country{font-size:27px}
+  .hmap-svg .mp-sea-lg{font-size:31px}.hmap-svg .mp-sea-sm{font-size:25px}.hmap-svg .mp-grid-lbl{display:none}
+}
 /* ---------- الاستشهادات ---------- */
 .cite-ref{
   display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:11.5px;
@@ -1241,9 +1258,10 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
     decision_html = BLK.decision_card(meta.get("decision_card"), inline)
     rkey_html = BLK.reading_key() if any("[" in l and "]" in l for l in md.split("\n")) else ""
     changes_html = BLK.changes_block(meta.get("changes"), inline)
-    screen_hero_html = "" if doc_mode else SCR.screen_hero(
+    screen_hero_html = SCR.screen_hero(
         meta, esc=esc, inline=inline, report_date=report_date, official=official,
-        threat_cls=tcls, rkey_html=rkey_html)
+        threat_cls=tcls, rkey_html=rkey_html, doc_mode=doc_mode,
+        archived=meta.get("screen_archived") or False)
     ledger_html = (
         f'<div class="glossary">السجل التراكمي: '
         f'<a class="bidi" href="{esc(meta["ledger_url"])}" target="_blank" rel="noopener noreferrer">{esc(meta["ledger_url"])}</a></div>'
@@ -1319,6 +1337,9 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
     doc = isolate_ltr(doc)
     # طبقة الشاشة تُحقن بعد العزل: isolate_ltr يعمل على نص كل ما بين الوسوم فيفسد CSS وJS (مثل UTC وأسماء الخطوط)
     doc = doc.replace("</style>", SCR.SCREEN_CSS + "</style>", 1)
+    # العنوان في وسم title نص صرف: isolate_ltr يلفّ الأسماء اللاتينية فيه بوسوم span فتظهر وسومًا في تبويب المتصفح
+    doc = re.sub(r"<title>.*?</title>",
+                 lambda m: re.sub(r'</?span[^>]*>', "", m.group(0)), doc, count=1, flags=re.S)
     doc = doc.replace("</body>", f"<script>{SCR.SCREEN_JS}</script>\n</body>", 1)
     out_path.write_text(doc, encoding="utf-8")
     return out_path, len(sections)

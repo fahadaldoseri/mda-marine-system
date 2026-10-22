@@ -46,20 +46,35 @@ def _chip(label, value_html, extra=""):
     return f'<span class="sc-chip{extra}">{label} <b>{value_html}</b></span>'
 
 
-def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_html=""):
-    """كتلة القرار فوق الطيّ: العنوان والشرائح وحالة التهديد والمؤشرات وبطاقة القرار."""
+def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_html="",
+                doc_mode=False, archived=False):
+    """كتلة القرار فوق الطيّ: العنوان والشرائح وحالة التهديد والمؤشرات وبطاقة القرار.
+
+    doc_mode: التقارير الخاصة، وعنوانها الكامل هو العنوان الظاهر (كانت بلا عنوان على الشاشة).
+    archived: إصدار غير الأحدث، فلا شارة عمر تنذر بالقِدم بل وسم أرشيفي محايد.
+    """
     title = meta.get("title") or ""
-    headline = meta.get("screen_headline") or first_sentence(meta.get("lede") or "") \
-        or meta.get("headline") or title
+    if doc_mode:
+        headline = meta.get("headline") or title
+    else:
+        headline = meta.get("screen_headline") or first_sentence(meta.get("lede") or "") \
+            or meta.get("headline") or title
     h1 = codes.demote(esc(headline), report_date, official)
+    eyebrow = "تقرير خاص" if doc_mode else title
 
     chips = []
     gen = meta.get("generated_label") or ""
-    if gen:
+    if gen and archived == "none":
+        pass  # السجل التراكمي: لا عمر إصدار يُقاس، وشريحة «آخر تحديث» تكفي
+    elif gen and archived:
+        chips.append(f'<span class="sc-chip sc-arch">إصدار أرشيفي · صدر <b class="bidi">{esc(gen)}</b></span>')
+    elif gen and not doc_mode:
         chips.append(f'<span class="sc-chip sc-fresh" data-gen="{esc(gen)}" hidden>عمر الإصدار <b class="sc-age"></b></span>')
     if meta.get("version"):
         chips.append(_chip("رقم النسخة", f'<span class="bidi">{esc(meta["version"])}</span>'))
-    if gen:
+    if gen and (not archived or archived == "none"):
+        chips.append(_chip("آخر تحديث", f'<span class="bidi">{esc(gen)}</span>'))
+    elif gen and doc_mode:
         chips.append(_chip("آخر تحديث", f'<span class="bidi">{esc(gen)}</span>'))
     if meta.get("window"):
         chips.append(_chip("فترة التغطية", esc(meta["window"])))
@@ -139,10 +154,14 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
 
     grid = ""
     if side or card:
-        grid = (f'<div class="sc-grid"><div class="sc-side">{"".join(side)}</div>{card}</div>')
+        solo = "" if card else " sc-solo"
+        grid = (f'<div class="sc-grid{solo}"><div class="sc-side">{"".join(side)}</div>{card}</div>')
+    lede = ""
+    if doc_mode and meta.get("lede"):
+        lede = f'<p class="sc-lede">{inline(meta["lede"])}</p>'
     return (
         '<div class="sc-hero no-print">'
-        f'<p class="sc-eyebrow">{esc(title)}</p><h1 class="sc-h1">{h1}</h1>'
+        f'<p class="sc-eyebrow">{esc(eyebrow)}</p><h1 class="sc-h1">{h1}</h1>{lede}'
         f'<div class="sc-chips">{"".join(chips)}</div>{grid}</div>'
     )
 
@@ -157,7 +176,9 @@ SCREEN_CSS = """
 body:has(.site-nav) .topbar{display:none}
 .sc-hero{margin:20px 0 6px}
 .sc-eyebrow{font-size:14.5px;color:var(--muted);margin:0 0 6px}
-.sc-h1{font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;font-size:clamp(23px,2.7vw,32px);line-height:1.6;margin:0 0 12px;text-wrap:balance}
+.sc-h1{font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;font-size:clamp(21px,2.05vw,28px);line-height:1.65;margin:0 0 12px;text-wrap:balance}
+.sc-h1 .ltr{white-space:nowrap}
+.sc-lede{font-size:15.5px;line-height:1.9;color:var(--ink-2);margin:0 0 12px;max-width:none}
 .sc-chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px}
 .sc-chip{font-size:14px;color:var(--ink-2);border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:3px 12px}
 .sc-chip b{color:var(--ink);font-weight:600}
@@ -167,7 +188,12 @@ body:has(.site-nav) .topbar{display:none}
 .sc-fresh.f-warn b{color:var(--warn)}
 .sc-fresh.f-old{border-color:var(--danger);color:var(--danger)}
 .sc-fresh.f-old b{color:var(--danger)}
+.sc-arch{color:var(--muted)}
 .sc-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:22px;align-items:start}
+/* بلا بطاقة قرار (السجل التراكمي): مستوى التهديد والمؤشرات في صف واحد بدل عمود يترك نصف العرض فارغًا */
+.sc-grid.sc-solo{grid-template-columns:minmax(0,1fr)}
+.sc-solo .sc-side{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));align-items:stretch}
+.sc-solo .sc-kpis{display:contents}
 .sc-side{display:grid;gap:12px;min-width:0}
 .sc-threat{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:inset 0 2px 0 0 rgba(34,195,182,.55)}
 .sc-tl{font-size:13.5px;color:var(--muted)}
@@ -202,34 +228,63 @@ body:has(.site-nav) .topbar{display:none}
 .sc-acts li i{font-style:normal;font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:12.5px;background:var(--accent);color:var(--accent-ink);border-radius:6px;width:24px;height:24px;display:grid;place-items:center;margin-top:4px}
 .sc-watch li{padding:5px 0;line-height:1.8}
 .sc-more{font-size:14px;margin:6px 0 0}
-.sc-more a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.sc-more a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:3px 0;min-height:24px}
+.sup-banner a{display:inline-block;padding:3px 0;min-height:24px}
 .sc-rkey{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--muted);margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
-.sc-rkey .rkey-t{color:var(--faint)}
+.sc-rkey .rkey-t{color:var(--muted)}
 /* الأقسام القابلة للطي */
 .sc-toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:26px 0 14px}
 .sc-jump{display:flex;gap:6px;flex-wrap:wrap;flex:1 1 360px}
-.sc-jump a{font-size:14px;color:var(--ink-2);text-decoration:none;border:1px solid var(--line);background:var(--panel);padding:2px 12px;border-radius:999px}
+.sc-jump a{font-size:14px;color:var(--ink-2);text-decoration:none;border:1px solid var(--line);background:var(--panel);padding:3px 12px;border-radius:999px;min-height:28px;display:inline-flex;align-items:center}
 .sc-jump a:hover,.sc-jump a:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
 .sc-all{display:flex;gap:6px}
-.sc-all button{font:inherit;font-size:13.5px;cursor:pointer;color:var(--ink);background:var(--panel-2);border:1px solid var(--line-2);border-radius:8px;padding:4px 12px}
-.sc-toggle{position:absolute;top:20px;inset-inline-end:22px;font:inherit;font-size:18px;line-height:1;cursor:pointer;color:var(--accent);background:var(--panel-3);border:1px solid var(--line-2);border-radius:8px;width:30px;height:30px;padding:0}
+.sc-all button{font:inherit;font-size:13.5px;cursor:pointer;color:var(--ink);background:var(--panel-2);border:1px solid var(--line-2);border-radius:8px;padding:4px 14px;min-height:32px}
+.sc-toggle{position:absolute;top:18px;inset-inline-end:22px;font:inherit;font-size:20px;line-height:1;cursor:pointer;color:var(--accent);background:var(--panel-3);border:1px solid var(--line-2);border-radius:8px;width:34px;height:34px;padding:0}
 .sc-toggle:before{content:"−"}
 .sc-toggle[aria-expanded="false"]:before{content:"+"}
 section.doc{position:relative}
 .sc-toggle:focus-visible,.sc-all button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-section.doc.sc-collapsed > *:not(h2):not(.sc-toggle){display:none}
+section.doc.sc-collapsed > *:not(h2):not(.sc-toggle):not(.sc-peek){display:none}
 section.doc.sc-collapsed{padding-bottom:12px}
-section.doc > h2{cursor:default}
+section.doc > h2{cursor:pointer}
+/* معاينة القسم المطوي: عدّ البنود وأول سطر، بلا مساس بنص العنوان (فهرس PDF) */
+.sc-peek{display:none}
+section.doc.sc-collapsed > .sc-peek{display:flex;gap:10px;align-items:baseline;margin:4px 0 0;padding-inline-end:48px;color:var(--muted);font-size:14.5px;line-height:1.8}
+.sc-peek b{flex:0 0 auto;font-weight:600;font-size:13px;color:var(--accent);border:1px solid var(--line-2);background:var(--panel-3);border-radius:999px;padding:0 10px}
+.sc-peek span{min-width:0;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+/* المظهر النهاري للخريطة والأرقام: قيم الخريطة النهارية كانت معرّفة للطباعة فقط فتبقى الخريطة داكنة وتسمياتها غير مقروءة */
+body.daylight{
+  --map-sea:#f7fafc;--map-land:#d6e0ea;--map-coast:#64809b;--map-border:#96a7b9;
+  --map-grid:#d3dce6;--map-grid-lbl:#5a7086;--map-label:#20303f;--map-country:#5a7086;
+  --map-sea-label:#4f657c;--map-strait:#8a2b25;
+}
+body.daylight .sc-acts li i{color:#ffffff}
+body.daylight .sc-tag{color:#31465c}
+/* إصلاح الخطوط على الشاشة: isolate_ltr يلفّ IBM داخل CSS فيبطل الإعلان ويسقط النص إلى Times New Roman */
+body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,system-ui,sans-serif}
+.kpi .k-v,section.doc code,td.num,th.num,.bar-row .bv,.mp-grid-lbl,.mp-events .mp-num,.lg-num,.cite-ref,.ev-code,.kpi .k-d,.tl-date,.tl-num,.rel-tbl td.rel{font-family:"IBM Plex Mono",ui-monospace,monospace}
+.mp-places text{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic",sans-serif}
 /* قراءة أوضح بكثافة معتدلة */
 .chip,.tag,.ev-code,.conf,.kstrip,.chg-tag,.st-badge{font-size:13.5px}
 .kpi .k-l,.kpi .k-n,.brand-sub{font-size:13.5px}
+.lg-num{font-size:12.5px;width:22px;height:22px}
+.cite-ref{font-size:12.5px}
+.sn-name em,.ar-risk,.hc-tag{font-size:12.5px}
+.foot a,.foot-note a,.sc-foot a,.glossary a{display:inline-block;padding:3px 0}
 @media (max-width:1000px){
-  .sc-grid{grid-template-columns:minmax(0,1fr)}
+  /* الجوال: مستوى التهديد ثم بطاقة القرار ثم المؤشرات (القرار قبل الأرقام) */
+  .sc-grid,.sc-grid.sc-solo{display:flex;flex-direction:column;gap:14px}
+  .sc-side{display:contents}
+  .sc-threat{order:1}.sc-card{order:2}.sc-kpis{order:3;display:grid;gap:10px}
+  .sc-solo .sc-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
   .sc-row{grid-template-columns:minmax(0,1fr);gap:2px}
   .sc-list li{grid-template-columns:minmax(0,1fr);gap:3px}
   .sc-list li .sc-code{justify-self:start}
 }
 @media (max-width:700px){
+  /* شريط الأقسام صفّ واحد قابل للتمرير بدل كتلة من الأزرار تدفع المحتوى */
+  .sc-jump{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+  .sc-jump a{flex:0 0 auto;white-space:nowrap}
   .sc-card{padding:18px 16px}
   .sc-threat{padding:16px}
   .sc-tv{font-size:28px}
@@ -263,30 +318,63 @@ SCREEN_JS = r"""
   // الأقسام القابلة للطي: بلا سكربت تبقى كلها مفتوحة
   var main = d.querySelector('main'); if (!main) return;
   var secs = [].slice.call(main.querySelectorAll(':scope > section.doc'));
-  var openRe = /التوجيهات التشغيلية|مؤشرات الموقف/;
+  // تُفتح الخلاصة والتوجيهات في كل نوع من الصفحات، فإن لم يوجد شيء منها فُتح القسم الأول
+  var openRe = /الخلاصة|التوجيهات التشغيلية|مؤشرات الموقف/;
   function setState(sec, btn, collapsed) {
     sec.classList.toggle('sc-collapsed', collapsed);
     btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
   }
-  var items = [];
+  // نص العنصر بمسافة بين أجزائه، وما كان رمزًا أو معرّفًا لاتينيًا يُعزل اتجاهيًا فلا ينقلب ترتيبه
+  function flat(el) {
+    var w = d.createTreeWalker(el, NodeFilter.SHOW_TEXT), out = [], n;
+    while ((n = w.nextNode())) {
+      var tx = n.textContent.replace(/\s+/g, ' ').trim(); if (!tx) continue;
+      var iso = n.parentElement && n.parentElement.closest('bdi,.ltr,.bidi,.ev-code');
+      out.push(iso ? '\u2066' + tx + '\u2069' : tx);
+    }
+    return out.join(' ');
+  }
+  // معاينة القسم المطوي: عدّ البنود وأول سطر من نص القسم نفسه، بلا استنتاج
+  function peekOf(sec) {
+    var n = sec.querySelectorAll(':scope > ul > li, :scope > ol > li, :scope > .tbl-wrap tbody tr, :scope > table tbody tr').length;
+    var first = sec.querySelector(':scope > p:not(.sec-lede), :scope > ul > li, :scope > ol > li, :scope > .tbl-wrap tbody tr, :scope > table tbody tr');
+    var t = first ? flat(first) : '';
+    if (!n && !t) return null;
+    var el = d.createElement('div'); el.className = 'sc-peek no-print';
+    if (n > 1) { var b = d.createElement('b'); b.textContent = n === 2 ? 'بندان' : (n <= 10 ? n + ' بنود' : n + ' بندًا'); el.appendChild(b); }
+    if (t) { var sp = d.createElement('span'); sp.textContent = t; el.appendChild(sp); }
+    return el;
+  }
+  var items = [], seen = {};
   secs.forEach(function (sec) {
     var h = sec.querySelector('h2'); if (!h) return;
+    var title = h.textContent.trim();
     var b = d.createElement('button');
     b.type = 'button'; b.className = 'sc-toggle no-print';
-    b.setAttribute('aria-label', 'طيّ القسم أو فتحه');
+    b.setAttribute('aria-label', 'طيّ قسم «' + title + '» أو فتحه');
+    if (sec.id) b.setAttribute('aria-controls', sec.id);
+    var pk = peekOf(sec); if (pk) sec.appendChild(pk);
     sec.appendChild(b);
     b.addEventListener('click', function () { setState(sec, b, !sec.classList.contains('sc-collapsed')); });
-    setState(sec, b, !openRe.test(h.textContent));
-    items.push({sec: sec, btn: b, title: h.textContent.trim()});
+    h.addEventListener('click', function (e) {
+      if (e.target.closest && e.target.closest('a,button')) return;
+      setState(sec, b, !sec.classList.contains('sc-collapsed'));
+    });
+    setState(sec, b, !openRe.test(title));
+    seen[title] = (seen[title] || 0) + 1;
+    items.push({sec: sec, btn: b, title: title, label: seen[title] > 1 ? title + ' (' + seen[title] + ')' : title});
   });
   function openSec(sec) {
     items.forEach(function (it) { if (it.sec === sec) setState(sec, it.btn, false); });
+  }
+  if (items.length && !items.some(function (it) { return !it.sec.classList.contains('sc-collapsed'); })) {
+    setState(items[0].sec, items[0].btn, false);
   }
   if (items.length) {
     var bar = d.createElement('div'); bar.className = 'sc-toolbar no-print';
     var nav = d.createElement('nav'); nav.className = 'sc-jump'; nav.setAttribute('aria-label', 'انتقال إلى الأقسام');
     items.forEach(function (it) {
-      var a = d.createElement('a'); a.href = '#' + it.sec.id; a.textContent = it.title;
+      var a = d.createElement('a'); a.href = '#' + it.sec.id; a.textContent = it.label;
       a.addEventListener('click', function () { openSec(it.sec); });
       nav.appendChild(a);
     });

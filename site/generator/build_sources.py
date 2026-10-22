@@ -42,18 +42,19 @@ CSS = """
 .sx-num{background:var(--bg);border:1px solid var(--line);border-radius:8px;
   min-width:26px;text-align:center;font-size:12.5px;padding:2px 6px;color:var(--ink2)}
 .sx-name{font-size:13.5px;font-weight:600;line-height:1.5}
-.sx-state{font-size:12.5px;color:var(--ink2);line-height:1.6}
-.sx-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--ink2);margin:6px 0 0}
+.sx-state{font-size:13px;color:var(--ink2);line-height:1.6}
+.sx-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--ink2);margin:6px 0 0}
 .sx-legend b{display:inline-block;width:10px;height:10px;border-radius:3px;margin-inline-end:5px}
 .sx-refs{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:7px}
 .sx-ref{background:var(--panel);border:1px solid var(--line);border-radius:10px;
   padding:8px 11px;font-size:13px;line-height:1.7;word-break:break-word}
-.sx-ref a{color:var(--accent);text-decoration:none}
-.sx-ref span{display:block;color:var(--ink2);font-size:12px;margin-top:3px}
+.sx-ref a{color:var(--accent);text-decoration:none;display:inline-block;padding:3px 0;min-height:24px}
+.sx-ref span{display:block;color:var(--ink2);font-size:13px;margin-top:3px}
 .sx-tbl{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
 .sx-tbl th,.sx-tbl td{border:1px solid var(--line);padding:7px 9px;text-align:start;vertical-align:top}
 .sx-tbl th{background:var(--panel);font-size:12.5px}
 .sx-tbl td.n{text-align:center;white-space:nowrap}
+.sx-tbl td a{display:inline-block;padding:3px 0;min-height:24px}
 .sx-tbl td.g{text-align:center;font-weight:700}
 @media(max-width:760px){.sx-grid{grid-template-columns:1fr}.sx-tbl{display:block;overflow-x:auto}}
 """
@@ -198,7 +199,7 @@ def build(dist: Path, quiet: bool = False) -> dict:
 <style>{BR.DESIGN_TOKENS}{BR.STYLE}{BR.DAYLIGHT}{CSS}</style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap" role="main">
   <header class="sp-head">
     <h1>المصادر والمراجع</h1>
     <p>مرجع دائم لكل ما بُني عليه التقرير اليومي. تُحذف هاتان القائمتان من نسخة الطباعة وPDF،
