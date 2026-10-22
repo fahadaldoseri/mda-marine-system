@@ -222,7 +222,7 @@ def build_index(dist: Path, reports, notfound: bool = False):
         chg = latest.get("changed_list") or [latest.get("changed") or latest.get("headline") or ""]
         chg_items = "".join(f"<li>{esc(x)}</li>" for x in [c for c in chg if c][:3])
         meta_bits = [
-            f"نافذة التغطية {esc(latest['window'])}" if latest.get("window") else "",
+            f"فترة التغطية {esc(latest['window'])}" if latest.get("window") else "",
             f"{esc(str(latest['sources']))} مصدرًا مفحوصًا" if latest.get("sources") else "",
             f"{esc(str(latest['cited']))} مُستشهدًا" if latest.get("cited") else "",
             f"آخر تحديث {esc(latest['generated'])}" if latest.get("generated") else "",
