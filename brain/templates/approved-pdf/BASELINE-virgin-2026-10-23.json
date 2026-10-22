@@ -1,0 +1,108 @@
+{
+ "baseline": "virgin",
+ "on": "2026-10-23",
+ "status": "النسخة الرسمية المعتمدة الوحيدة — كل العمل عليها",
+ "print_shape": {
+  "name": "v3",
+  "pages": 10,
+  "page_range": "7–12",
+  "body_pt": 10.8,
+  "line_height": 1.62,
+  "table_pt": 9.5,
+  "map_print": "نموذج الحزمة: بحر #ffffff · يابسة #dfe4ea · ساحل #3f4f63",
+  "print_css_sha16": "ac05b43f996ae9f0"
+ },
+ "gates": {
+  "final_gate": "33 ناجحة · 6 تحذيرات وصفية · 0 فشل مانع",
+  "format_v3": "مطابق",
+  "print_quality": {
+   "map_width": "74%",
+   "justify_cluster": "41%"
+  },
+  "page_budget": "10 داخل 7–12",
+  "void": "لا فجوة داخلية ≥ 45 مم"
+ },
+ "owner_decisions_source": "templates/approved-pdf/print-profile.json",
+ "files": {
+  "tools/export_report_assets.py": {
+   "sha256": "227dfbadc363a59e5f58ada634329854fa25ee16e40435db086ea7c4ccf6fec8",
+   "bytes": 17798
+  },
+  "validators/check_pdf_format.py": {
+   "sha256": "38cc20542384b4b241131601c750ce45bdf097c860fc11500d35e2d4b554a06a",
+   "bytes": 10881
+  },
+  "validators/check_print_quality.py": {
+   "sha256": "45581d8564b978e7ade5cf11dcb997a6c5f218983da8b618d9dce7ddae3883de",
+   "bytes": 16671
+  },
+  "tools/final_gate.sh": {
+   "sha256": "d60b584243cdadb6697e07fdc152e035161c4beb6baf27bb0b48c9ef49e8f832",
+   "bytes": 10925
+  },
+  "tools/rebuild_report.sh": {
+   "sha256": "f87f0eb4c98c82d2098773e2749fc01bd6f8abfc7037fff7f24fe649055d35ee",
+   "bytes": 2565
+  },
+  "tools/publish_changes.sh": {
+   "sha256": "916f178fa15d2d3cf00d4932f73a6909237bb8e233461ef901e40235d9edd48d",
+   "bytes": 5790
+  },
+  "templates/approved-pdf/print-profile.json": {
+   "sha256": "45d5333a14182bbaac7043e97e66d38b5cc5f43f5e8d1672f647eeefecb0bdf3",
+   "bytes": 9610
+  },
+  "templates/approved-pdf/print-css-frozen.css": {
+   "sha256": "ac05b43f996ae9f0eca5f2d29e0bafe6ad77c7ce3fde35cd15a6bae7506266ac",
+   "bytes": 13192
+  },
+  "sections/30-structure.md": {
+   "sha256": "d345086703d00b89ecfa622771eab17b280f81a8f939d8479d7fbf1b237fa34d",
+   "bytes": 12736
+  },
+  "sections/60-validation.md": {
+   "sha256": "6a4bf17f6878563642eac184a3b212cf13d95711e9f9645aa84a29e586f253fc",
+   "bytes": 25619
+  },
+  "sections/70-delivery.md": {
+   "sha256": "c0816d8f5aeba076df2aabf0efad7cb3685482d50d0ce182c8627d632de22779",
+   "bytes": 16846
+  },
+  "sections/75-style.md": {
+   "sha256": "5ae73aa2bf9f1226005a551ddfb135e3b36a66e6956a8223cac2d52eaa1189c4",
+   "bytes": 24710
+  },
+  "sections/90-automation.md": {
+   "sha256": "aaddec9cd48f4fde5acb1892f9d08e7a6088bff8251219059670834fc0fcd89d",
+   "bytes": 20685
+  },
+  "generator/build_report.py": {
+   "sha256": "6d58bb126faae7f5ca069b9123c120fa80441f3f5b8779e2b27ca531e6e01181",
+   "bytes": 69643
+  },
+  "generator/map_gulf.py": {
+   "sha256": "cee0ed9e00e49ce0f5b6fecff0587a33827a00d513134a2ffd7c6a46a09c5708",
+   "bytes": 11299
+  },
+  "generator/build_site.py": {
+   "sha256": "04bf0cb46532a1b98b2dfd317b94a0a6ebb6e3ff5c844f9f883e512a6190453b",
+   "bytes": 35389
+  },
+  "generator/build_sources.py": {
+   "sha256": "9c649e1bd5dcb6d35cfe13d210058f2553dacfe91f31c9ae68d88741f2228a19",
+   "bytes": 16675
+  },
+  "generator/site_chrome.py": {
+   "sha256": "2d0b8f24d7b7935900b9f5ae5092c5408091e716447f39e95bce003da792b2c9",
+   "bytes": 12833
+  },
+  "dist/reports/pdf/2026-10-22.pdf": {
+   "sha256": "a81d76ba6d4d5204e65670a53839cce2d84b18dc76fb6581d53fc02a051dad85",
+   "bytes": 840325
+  }
+ },
+ "commits": {
+  "backup_repo": "3739cac (قبل الدفع)",
+  "site_repo": "b60a8dfdcc3aed71d67357835dfb6edf4c522bee"
+ }
+}
