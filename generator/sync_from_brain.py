@@ -94,7 +94,7 @@ def copy_sources(date_iso: str, brain: Path) -> list:
     rel = brain / "appendices" / "source-reliability-40.md"
     if rel.exists():
         shutil.copy2(rel, SITE / "sources" / "source-reliability.md")
-        log.append("حُدّث سجل الموثوقية والمصداقية (40 مصدرًا)")
+        log.append("حُدّث سجل الموثوقية والمصداقية (48 مصدرًا)")
     else:
         log.append("تحذير: سجل الموثوقية غير موجود")
     statuses = sorted((brain / "feeds").glob("feeds-*.status.json"))
