@@ -71,6 +71,7 @@ ALIGN_JS_TMPL = """
   for (const el of document.querySelectorAll(sel)) {
     if (direct(el) < 25) continue;
     if (SKIP_TAGS.has(el.tagName)) continue;
+    if (el.getClientRects().length === 0) continue;   // محجوب في الطباعة (no-print / display:none): لا يُطبع فلا يُقاس
     let skip = false;
     for (const c of SKIP_CLASSES) {
       if (el.closest('[class*="' + c + '"]')) { skip = true; break; }

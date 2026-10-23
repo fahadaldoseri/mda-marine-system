@@ -19,7 +19,7 @@ python3 "$B/tools/runbook.py" handbook >/dev/null 2>&1
 _B="${BRAIN_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 _S="${SITE_DIR:-$(dirname "$_B")/seawatch}"
 _OUT="${BACKUP_REPO_DIR:-$(dirname "$_B")/mda-marine-system}"
-_SK="${SKILLS_DIR:-/home/ubuntu/skills}"
+if [ -n "${SKILLS_DIR:-}" ]; then _SK="$SKILLS_DIR"; elif [ -d /home/ubuntu/skills ]; then _SK=/home/ubuntu/skills; else _SK="$_B/../skills"; fi
 MSG="${1:-تحديث النظام $(date -u +%F)}"
 SKIP_LIBS=0
 for a in "$@"; do [ "$a" = "--no-libs" ] && SKIP_LIBS=1; done

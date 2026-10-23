@@ -28,9 +28,12 @@ sync_skills = set(m.group(1).split())
 if 'OUR_SKILLS' not in backup and 'restore_skills.sh' not in backup:
     fails.append('github_backup.py لا يقرأ قائمة المهارات من restore_skills.sh (قائمة ثانية مكتوبة بيده)')
 
+import os
+SKILLS = Path(os.environ['SKILLS_DIR']) if os.environ.get('SKILLS_DIR') else (
+    Path('/home/ubuntu/skills') if Path('/home/ubuntu/skills').is_dir() else Path(__file__).resolve().parent.parent.parent / 'skills')
 # 2) كل مهارة في المزامنة موجودة فعلًا في مجلد المهارات
 for sk in sorted(sync_skills):
-    if not (Path('/home/ubuntu/skills') / sk).is_dir():
+    if not (SKILLS / sk).is_dir():
         fails.append(f'المهارة {sk} مذكورة في المزامنة وغير موجودة في مجلد المهارات')
 
 # 3) المهارات المذكورة حرفيًا في النسخ الاحتياطي لا تتجاوز قائمة المزامنة

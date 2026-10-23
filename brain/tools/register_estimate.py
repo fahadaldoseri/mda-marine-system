@@ -41,10 +41,26 @@ def main() -> int:
     ap.add_argument("--reliability", default="")
     ap.add_argument("--support", default="")
     ap.add_argument("--list", action="store_true")
+    ap.add_argument("--check", action="store_true", help="يتحقق أن كل رمز EST- في تقرير --date مسجَّل (رمز 2 إن وُجد رمز غير مسجَّل)")
     a = ap.parse_args()
 
     d = load()
     codes = d.setdefault("codes", {})
+
+    if a.check:
+        import re
+        md = B / "reports" / f"{a.date}-sectioned.md"
+        if not a.date or not md.is_file():
+            print(f"✘ لا تقرير للفحص: {md}")
+            return 2
+        used = sorted(set(re.findall(r"EST-\d{4}-\d{2}-\d{2}-\d{2}", md.read_text(encoding="utf-8"))))
+        missing = [c for c in used if c not in codes]
+        for c in missing:
+            print(f"✘ رمز تقدير غير مسجَّل: {c}")
+        if missing:
+            return 2
+        print(f"✔ {len(used)} رمز تقدير مسجّل في تقرير {a.date}")
+        return 0
 
     if a.list or not (a.date and a.seq and a.statement):
         print(f"=== فضاء التقديرات EST- — {len(codes)} رمزًا مسجَّلًا ===")

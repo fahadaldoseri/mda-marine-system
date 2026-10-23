@@ -155,14 +155,45 @@ python3 tests/test_skill_lessons.py && ok "حلقة التعلم صحيحة" || 
 echo "12) قائمة المهارات موحّدة (ك-150): النسخ الاحتياطي يقرأها من المزامنة"
 python3 tests/test_backup_skills.py && ok "قائمة المهارات موحّدة" || bad "قائمتا المهارات مختلفتان"
 
+# ── مرحلة 24 أكتوبر 2026: أدوات اللغة · المحرّك · التسليم · PDF · البنية على GitHub ─────────────
+t() {  # t "الوصف" أمر...  — يمرّ إن كان رمز الخروج 0
+  local name="$1"; shift
+  if "$@" >"$TMP/t.out" 2>&1; then ok "$name"; else bad "$name"; sed 's/^/      /' "$TMP/t.out" | tail -6; fi
+}
+cd "$B" || exit 1
+echo "13) أدوات اللغة: حارس الحفظ · الإملاء · التحرير الآلي"
+t "أدوات اللغة (اختبار قديم)" python3 tests/test_language_tools.py
+t "حارس الحفظ: ترقيم ملاصق · عناوين · مسموح الحذف" python3 tests/test_preserve_check.py
+t "فاحص الإملاء بلا إنذار كاذب" python3 tests/test_orthography.py
+t "التحرير الآلي يحفظ التمهيد ويرفض تغيّر الأرقام" python3 tests/test_edit_pass.py
+
+echo "14) محرّك الكتيب والمانيفست"
+t "تقوية المحرّك (مسارات · ترتيب · gate-json · إتمام بالدليل)" python3 tests/test_runbook_hardening.py
+t "اختبارات المحرّك الأصلية" bash tests/test_runbook_engine.sh
+t "إضافة قسم ثم حذفه على نسخة مؤقتة" bash tests/test_section_registry.sh
+t "سجل الأقسام متسق مع التقرير والسياسة" python3 tests/test_sections_registry_vs_report.py --selftest
+t "السجل مقابل أحدث تقرير" python3 tests/test_sections_registry_vs_report.py
+t "برومت الكتابة يحمل المعجم والأمثلة والأقسام" python3 tests/test_write_prompt.py
+t "final_gate.sh متسق مع المانيفست" python3 tests/test_final_gate_vs_manifest.py
+t "أوامر المانيفست: سكربتات وخيارات موجودة" python3 tests/test_manifest_commands.py
+t "verify على المانيفست الحقيقي" python3 tools/runbook.py verify
+
+echo "15) التسليم: النشر وتلغرام والتقدير"
+t "سكربتات التسليم (بلا إرسال)" bash tests/test_delivery_scripts.sh
+t "لا نشر خارج المحرّك" bash tests/test_no_publish_without_runbook.sh
+t "رموز EST- مسجَّلة" python3 tests/test_register_estimate_check.py
+
+echo "16) مطابقة عناوين PDF (قلب لام-ألف)"
+t "heading_present" python3 tests/test_pdf_heading_match.py
+t "المحاذاة في الطباعة تتجاهل المحجوب (no-print)" python3 tests/test_print_alignment_hidden.py
+
+echo "17) GitHub مصدر الشيفرة"
+t "كل مسار مصنَّف code/data" python3 tools/code_paths.py check --root "$B/.."
+t "apply_from_github: تعارض · أرشفة · استعادة" python3 tests/test_apply_from_github.py
+t "النسخ الاحتياطي لا يكتب الشيفرة فوق GitHub" python3 tests/test_backup_code_safety.py
+t "فهرس التقارير" python3 tests/test_reports_index.py
+
 echo "----- الحصيلة -----"
 printf '  نجح: %s · فشل: %s\n' "$PASS" "$FAIL"
 [ "$FAIL" -eq 0 ] || exit 1
 exit 0
-
-# 11) أدوات محور اللغة: حارس الحفظ · تدريج البوابة · التحرير بلا كتابة
-echo "11) أدوات محور اللغة"
-python3 "$B/tests/test_language_tools.py" > /tmp/rc-lang.log 2>&1
-rc_lang=$?
-tail -3 /tmp/rc-lang.log
-if [ $rc_lang -ne 0 ]; then echo "  ✘ أدوات اللغة"; FAILED=$((FAILED+1)); else echo "  ✔ أدوات اللغة"; fi

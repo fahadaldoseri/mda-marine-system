@@ -13,8 +13,17 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-SK = Path("/home/ubuntu/skills")
-REPO = Path("/home/ubuntu/mda-marine-system/skills")
+def _skills_dir(brain: Path) -> Path:
+    """مجلد المهارات: SKILLS_DIR ← مسار الخادم إن وُجد ← skills/ في جذر المستودع (محمول)."""
+    import os
+    if os.environ.get("SKILLS_DIR"):
+        return Path(os.environ["SKILLS_DIR"])
+    if Path("/home/ubuntu/skills").is_dir():
+        return Path("/home/ubuntu/skills")
+    return brain.parent / "skills"
+
+SK = _skills_dir(Path(__file__).resolve().parent.parent)
+REPO = Path(__import__("os").environ.get("BACKUP_REPO_DIR") or Path(__file__).resolve().parent.parent.parent) / "skills"
 
 # شواهد إلزامية: (المسار النسبي، نص الشاهد، وصف القاعدة)
 REQUIRED = [

@@ -107,6 +107,22 @@ def orphan_titles(pages_text, headings):
     return bad
 
 
+def heading_present(heading: str, flat: str) -> bool:
+    """هل عنوان القسم موجود في نص PDF المستخرج (مُسوَّى الحروف)؟
+
+    pdftotext يقلب لام-ألف المتصلة داخل الكلمة إلى «ال» في بعض الإصدارات (الملاحية ← المالحية،
+    الخلاصة ← الخالصة). فيُجرَّب العنوان كما هو ثم بعد قلب «لا» داخل كل كلمة (لا عبر حدود الكلمات).
+    المطابقة على أول 12 أو 18 حرفًا.
+    """
+    clean = lambda w: re.sub(r"[^\u0621-\u064A0-9]", "", w)
+    words = [clean(w) for w in heading.split() if clean(w)]
+    flat_tight = "".join(flat.split())
+    for variant in ("".join(words), "".join(w.replace("\u0644\u0627", "\u0627\u0644") for w in words)):
+        if variant[:12] in flat_tight or variant[:18] in flat_tight:
+            return True
+    return False
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--pdf", required=True)
@@ -155,12 +171,8 @@ def main() -> int:
                 hidden = tuple(hidden) + tuple(_pol.get("hidden_sections", []))
             except Exception:
                 raise  # فشل مغلق: خطأ يخصّ حكم البوابة ⇒ رمز 70 (البند د)
-            flat_tight = "".join(flat.split())
-            def _seen(hh):
-                tight = "".join(nrm(hh).split())
-                return tight[:12] in flat_tight or tight[:18] in flat_tight
             miss = [h for h in heads
-                    if not any(x in h for x in hidden) and not _seen(h)]
+                    if not any(x in h for x in hidden) and not heading_present(h, flat)]
             if miss:
                 fails.append(f"أقسام ناقصة في PDF: {miss}")
             else:
