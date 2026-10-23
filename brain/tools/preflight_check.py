@@ -166,7 +166,18 @@ if report.exists():
             known = _known_block(st.get('feeds'))
             failed = [f.get("name") or f.get("num")
                       for f in ((st.get('feeds') or {}).get('failed_feeds') or [])]
-            only_known = bool(failed) and isinstance(known, list) and all(n in known for n in failed)
+            # مرجع واحد للأعطال المعروفة: tools/known_faults.py (البند هـ/و من مراجعة 23 أكتوبر)
+            try:
+                import sys as _sys
+                _sys.path.insert(0, str(B / "tools"))
+                from known_faults import classify_component as _cls
+                _reasons = [(f.get("block_reason") or f.get("reason") or "") for f in
+                            ((st.get("feeds") or {}).get("failed_feeds") or [])]
+                _r = _cls("feeds", (st.get("feeds") or {}).get("status") or "degraded",
+                          " ".join(_reasons), _reasons) if _reasons else {"allowed": True}
+                only_known = bool(_r.get("allowed"))
+            except Exception:
+                only_known = bool(failed) and isinstance(known, list) and all(n in known for n in failed)
             others_ok = all((st.get(k) or {}).get('status') == 'ok'
                             for k in ('ofac', 'originals'))
             if overall == 'ok':

@@ -147,3 +147,4 @@ echo "----- الحصيلة -----"
 printf '  نجح: %s · فشل: %s\n' "$PASS" "$FAIL"
 [ "$FAIL" -eq 0 ] || exit 1
 exit 0
+bash "$(dirname "${BASH_SOURCE[0]}")/test_review2.sh" "$(date -u +%F)" 2>&1 | tail -22

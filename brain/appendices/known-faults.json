@@ -1,1 +1,104 @@
-{"version": 1, "decision": "قرار صاحب القرار 2026-10-23 (البند ح-4): التشغيل المنقوص قاعدة آلية لا حكمًا. كل عطل معروف في هذه القائمة يُفصح عنه آليًا في متن التقرير ويمضي التسليم؛ وكل ما ليس فيها يمنع.", "allowed": [{"id": "blocked-source", "reason_ar": "حجب مصدر رسمي يمنع الجلب الآلي", "applies_to": ["feeds"], "reason_patterns": ["403", "401", "429", "forbidden", "حجب", "cloudflare", "تحقق بشري", "captcha", "bot"], "max_items": null, "note": "سياسة المشروع تمنع تجاوز الحماية، فالحجب حدّ معروف لا فشل.", "since": "2026-10-23", "expires": "2026-12-31", "fault_ref": "ك-63", "reason_ar_full": "حجب مصدر رسمي يمنع الجلب الآلي — مرجع العطل ك-63 · صالح حتى 2026-12-31"}, {"id": "transport-transient", "reason_ar": "عطل اتصال مؤقت في جلب مصدرين أو أقل", "applies_to": ["feeds"], "reason_patterns": ["timeout", "مهلة", "timed out", "connection", "اتصال", "ssl", "tls", "reset", "refused", "dns"], "max_items": 2, "note": "إن زاد العدد عن اثنين يصير نقصًا مؤثرًا ويمنع.", "since": "2026-10-23", "expires": "2026-11-30", "fault_ref": "ك-137", "reason_ar_full": "عطل اتصال مؤقت في جلب مصدرين أو أقل — مرجع العطل ك-137 · صالح حتى 2026-11-30"}, {"id": "delayed-measure", "reason_ar": "تأخر قياس غير مؤثر", "applies_to": ["ofac", "originals", "ledger_merge", "builtin_llm", "attachment"], "reason_patterns": ["تأخر", "delayed", "غير متاح", "unavailable", "مؤجل", "deferred", "غير مثبّت", "not installed"], "max_items": null, "note": "قياس مؤجّل لا يمسّ وقائع التقرير ولا حكمه.", "since": "2026-10-23", "expires": "2026-11-30", "fault_ref": "ك-138", "reason_ar_full": "تأخر قياس غير مؤثر — مرجع العطل ك-138 · صالح حتى 2026-11-30"}, {"id": "attachment-failure", "reason_ar": "فشل إرفاق الملف مع نجاح النص", "applies_to": ["attachment", "telegram"], "reason_patterns": ["مرفق", "attachment", "document", "ارسال", "إرسال"], "max_items": null, "note": "لا يسقط الإصدار: النص والرابط يصلان، ويُسجّل الفشل.", "since": "2026-10-23", "expires": "2026-11-30", "fault_ref": "ك-138", "reason_ar_full": "فشل إرفاق الملف مع نجاح النص — مرجع العطل ك-138 · صالح حتى 2026-11-30"}], "rule_expiry": "البند المنتهي لا يُفصح عنه: انتهاء الصلاحية يجعله عطلًا غير مسموح فيمنع التسليم. التجديد قرار صاحب القرار لا النظام."}
+{
+ "version": 1,
+ "decision": "قرار صاحب القرار 2026-10-23 (البند ح-4): التشغيل المنقوص قاعدة آلية لا حكمًا. كل عطل معروف في هذه القائمة يُفصح عنه آليًا في متن التقرير ويمضي التسليم؛ وكل ما ليس فيها يمنع.",
+ "allowed": [
+  {
+   "id": "blocked-source",
+   "reason_ar": "حجب مصدر رسمي يمنع الجلب الآلي",
+   "applies_to": [
+    "feeds"
+   ],
+   "reason_patterns": [
+    "403",
+    "401",
+    "429",
+    "forbidden",
+    "حجب",
+    "cloudflare",
+    "تحقق بشري",
+    "captcha",
+    "bot"
+   ],
+   "max_items": 4,
+   "note": "سياسة المشروع تمنع تجاوز الحماية، فالحجب حدّ معروف لا فشل.",
+   "since": "2026-10-23",
+   "expires": "2026-12-31",
+   "fault_ref": "ك-63",
+   "reason_ar_full": "حجب مصدر رسمي يمنع الجلب الآلي — مرجع العطل ك-63 · صالح حتى 2026-12-31"
+  },
+  {
+   "id": "transport-transient",
+   "reason_ar": "عطل اتصال مؤقت في جلب مصدرين أو أقل",
+   "applies_to": [
+    "feeds"
+   ],
+   "reason_patterns": [
+    "timeout",
+    "مهلة",
+    "timed out",
+    "connection",
+    "اتصال",
+    "ssl",
+    "tls",
+    "reset",
+    "refused",
+    "dns"
+   ],
+   "max_items": 2,
+   "note": "إن زاد العدد عن اثنين يصير نقصًا مؤثرًا ويمنع.",
+   "since": "2026-10-23",
+   "expires": "2026-11-30",
+   "fault_ref": "ك-137",
+   "reason_ar_full": "عطل اتصال مؤقت في جلب مصدرين أو أقل — مرجع العطل ك-137 · صالح حتى 2026-11-30"
+  },
+  {
+   "id": "delayed-measure",
+   "reason_ar": "تأخر قياس غير مؤثر",
+   "applies_to": [
+    "ofac",
+    "originals",
+    "ledger_merge",
+    "builtin_llm",
+    "attachment"
+   ],
+   "reason_patterns": [
+    "تأخر",
+    "delayed",
+    "غير متاح",
+    "unavailable",
+    "مؤجل",
+    "deferred",
+    "غير مثبّت",
+    "not installed"
+   ],
+   "max_items": 3,
+   "note": "قياس مؤجّل لا يمسّ وقائع التقرير ولا حكمه.",
+   "since": "2026-10-23",
+   "expires": "2026-11-30",
+   "fault_ref": "ك-138",
+   "reason_ar_full": "تأخر قياس غير مؤثر — مرجع العطل ك-138 · صالح حتى 2026-11-30"
+  },
+  {
+   "id": "attachment-failure",
+   "reason_ar": "فشل إرفاق الملف مع نجاح النص",
+   "applies_to": [
+    "attachment",
+    "telegram"
+   ],
+   "reason_patterns": [
+    "مرفق",
+    "attachment",
+    "document",
+    "ارسال",
+    "إرسال"
+   ],
+   "max_items": 1,
+   "note": "لا يسقط الإصدار: النص والرابط يصلان، ويُسجّل الفشل.",
+   "since": "2026-10-23",
+   "expires": "2026-11-30",
+   "fault_ref": "ك-138",
+   "reason_ar_full": "فشل إرفاق الملف مع نجاح النص — مرجع العطل ك-138 · صالح حتى 2026-11-30"
+  }
+ ],
+ "rule_expiry": "البند المنتهي لا يُفصح عنه: انتهاء الصلاحية يجعله عطلًا غير مسموح فيمنع التسليم. التجديد قرار صاحب القرار لا النظام."
+}

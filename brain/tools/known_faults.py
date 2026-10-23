@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 B = Path(__file__).resolve().parent.parent
@@ -32,8 +33,14 @@ def _match(entry: dict, component: str, text: str) -> bool:
         return False  # البند المنتهي صلاحيته لا يُفصح عنه ⇒ يبقى العطل غير مسموح فيمنع
     if component not in (entry.get("applies_to") or []):
         return False
+    # (و) المطابقة بحدود كلمة: «bot» لا تطابق robots، و«401» لا تطابق 4011
     pats = entry.get("reason_patterns") or []
-    return any(p.lower() in text.lower() for p in pats)
+    hay = text.lower()
+    for pat in pats:
+        # حدود كلمة: لا تطابق داخل كلمة أخرى (bot ≠ robots · 401 ≠ 4011)
+        if re.search(r"(?<![\w\u0600-\u06FF])" + re.escape(pat.lower()) + r"(?![\w\u0600-\u06FF])", hay):
+            return True
+    return False
 
 
 def classify_component(component: str, status: str, text: str, items: list[str] | None = None) -> dict:
@@ -61,7 +68,10 @@ def classify_component(component: str, status: str, text: str, items: list[str] 
                 continue
             per_entry[hit["id"]] = per_entry.get(hit["id"], 0) + 1
             cap = hit.get("max_items")
-            if cap is not None and per_entry[hit["id"]] > int(cap):
+            if cap is None:
+                uncovered.append(f"{it} (بند «{hit['id']}» بلا حدّ أعلى — مرفوض)")
+                continue
+            if per_entry[hit["id"]] > int(cap):
                 uncovered.append(f"{it} (تجاوز حدّ «{hit['id']}» = {cap})")
                 continue
             covered += 1

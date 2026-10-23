@@ -378,52 +378,16 @@ def main():
         time.sleep(5)
         again = {r['num']: r for r in [fetch(x) for x in retry]}
         res = [again.get(r['num'], r) if (not r['ok'] and r['num'] in again) else r for r in res]
+    # الثابت الملزم (البند هـ): مفحوصة = ناجحة + متعذّرة، وتُحسب المسارات الثلاثة كلها
+    attempted = {r['num'] for r in res} | {r['num'] for r in browser_only}
+    ok_nums = {r['num'] for r in res if r['ok']}
+    failed_nums = attempted - ok_nums
     ok = [r for r in res if r['ok']]
-    browser_only = [r for r in res if not r['ok'] and r['num'] in BROWSER_ONLY]
-    failed = [r for r in res if not r['ok'] and r['num'] not in BROWSER_ONLY]
-    total = sum(len(r['items']) for r in ok)
-    # القياس بعدد المصادر لا بعدد المسارات: المسار الواحد بسطرين لا يعني مصدرين فاشلين (عطل ك-64)
-    n_src = len({r['num'] for r in res})
-    n_fail = len({r['num'] for r in failed})
-    ratio = n_fail / n_src if n_src else 1.0
-    print(f"  نجح: {len(ok)} · فشل: {n_fail} مصدرًا · يُفحص بالمتصفح: {len({r['num'] for r in browser_only})} · عناصر مقروءة: {total}")
-    for r in browser_only:
-        print(f"   ◐ {r['num']} {r['name'][:34]}: {BROWSER_ONLY[r['num']]}")
-    for r in failed:
-        print(f"   ✘ {r['num']} {r['name'][:34]}: {r['block_reason']}")
-    # ك-117: نجاح الاتصال لا يعني حداثة المحتوى — تُقاس حداثة أحدث مادة وعدد عناصر كل تغذية.
-    STALE_DAYS_LIMIT = 14
-    empty = [r for r in ok if (r.get('items_count') or 0) == 0]
-    stale = []
-    for r in ok:
-        r['latest_age_days'] = _newest_age_days(r)
-        if r['latest_age_days'] is not None and r['latest_age_days'] > STALE_DAYS_LIMIT:
-            stale.append(r)
-    for r in empty:
-        print(f"   ◐ {r['num']} {r['name'][:34]}: تغذية فارغة (صفر عنصر) — تُوسم ولا تُحسب فشلًا")
-    for r in stale:
-        print(f"   ◐ {r['num']} {r['name'][:34]}: محتوى متقادم — عمر أحدث مادة {r['latest_age_days']} يومًا")
-
-    if not ok:
-        status = 'failed'
-    elif ratio > FAIL_RATIO_LIMIT:
-        status = 'failed'
-    elif failed:
-        status = 'degraded'
-    else:
-        status = 'ok'
-
-    OUT.mkdir(exist_ok=True)
-    (OUT / f'feeds-{stamp}.json').write_text(
-        to_latin(json.dumps(ok, ensure_ascii=False, indent=1)), encoding='utf-8')
-    lines = [f"# مستجدات التغذيات — {stamp} UTC", "",
-             f"تغذيات مفحوصة: {len(res)} · ناجحة: {len(ok)} · فاشلة: {len(failed)} · عناصر: {total}", ""]
-    for r in ok:
-        lines.append(f"## {r['num']}. {r['name']} — via: {r['via']} · عناصر: {r['items_count']} · محتوى: {r['content_chars']} حرف")
-        for it in r['items'][:5]:
-            lines.append(f"- {it['date'][:25]} · {it['title'][:110]}")
-        lines.append("")
-    (OUT / f'feeds-{stamp}.md').write_text(to_latin("\n".join(lines)), encoding='utf-8')
+    failed = [r for r in res if not r['ok'] and r['num'] in failed_nums]
+    n_src = len(attempted)
+    n_ok = len(ok_nums)
+    n_fail = len(failed_nums)
+    assert n_src == n_ok + n_fail, f'عدادات التغذيات غير متسقة: {n_src} != {n_ok}+{n_fail}'
     checked_feeds = [{
         'num': r['num'], 'name': r['name'], 'primary_url': r['url'],
         'ok': r['ok'], 'via': r.get('via'), 'fetched_url': r.get('fetched_url'),
@@ -433,7 +397,7 @@ def main():
         **({'block_reason': r['block_reason']} if not r['ok'] else {}),
     } for r in res]
     (OUT / f'feeds-{stamp}.status.json').write_text(to_latin(json.dumps({
-        'date': stamp, 'status': status, 'checked': n_src, 'ok': len({r['num'] for r in ok}),
+        'date': stamp, 'status': status, 'checked': n_src, 'ok': n_ok,
         'failed': n_fail, 'browser_only': sorted({r['num'] for r in browser_only}),
         'stale': sorted({r['num'] for r in stale}), 'empty': sorted({r['num'] for r in empty}),
         'stale_days_limit': STALE_DAYS_LIMIT,

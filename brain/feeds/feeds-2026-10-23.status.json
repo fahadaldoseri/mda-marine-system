@@ -3,7 +3,7 @@
  "status": "degraded",
  "checked": 35,
  "ok": 33,
- "failed": 3,
+ "failed": 2,
  "browser_only": [],
  "stale": [
   12,
@@ -12,7 +12,7 @@
  ],
  "empty": [],
  "stale_days_limit": 14,
- "fail_ratio": 0.086,
+ "fail_ratio": 0.0571,
  "fail_ratio_limit": 0.2,
  "items": 1425,
  "checked_feeds": [
@@ -715,5 +715,6 @@
    ]
   }
  ],
- "written_utc": "2026-10-23T03:47:42Z"
+ "written_utc": "2026-10-23T03:47:42Z",
+ "counts_note": "العدادات مُشتقّة من بيانات الجولات نفسها بعد إصلاح العدّ (البند هـ): مصدر نجح على مسار وفشل على آخر كان يُحسب في الناجحة والمتعذّرة معًا."
 }

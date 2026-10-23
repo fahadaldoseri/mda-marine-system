@@ -44,7 +44,7 @@ def consumers_of(name: str) -> list[str]:
                 try:
                     body = f.read_text(encoding="utf-8", errors="ignore")
                 except Exception:
-                    continue
+                    raise  # فشل مغلق: خطأ يخصّ حكم البوابة ⇒ رمز 70 (البند د)
                 if any(pt in body for pt in pats):
                     hits.append(str(f.relative_to(B)) if str(f).startswith(str(B)) else f.name)
     return hits

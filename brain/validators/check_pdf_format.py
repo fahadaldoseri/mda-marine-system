@@ -154,7 +154,7 @@ def main() -> int:
                 _pol = _json.loads((B / "appendices" / "report-sections-policy.json").read_text(encoding="utf-8"))
                 hidden = tuple(hidden) + tuple(_pol.get("hidden_sections", []))
             except Exception:
-                pass
+                raise  # فشل مغلق: خطأ يخصّ حكم البوابة ⇒ رمز 70 (البند د)
             flat_tight = "".join(flat.split())
             def _seen(hh):
                 tight = "".join(nrm(hh).split())

@@ -60,6 +60,14 @@ step "تنظيف المحتوى الداخلي" 3 python3 "$B/tools/scrub_intern
 # دمج بنك التعريفات المعياري: يضمن أن كل رمز مستخدم له تعريف يراه القارئ،
 # ويسبق البناء حتى يصل التعريف إلى الصفحة وPDF وبوابة الفهم معًا.
 step "دمج بنك التعريفات" 2 python3 "$B/tools/merge_glossary.py" --date "$D"
+# ── كل خطوة تعدّل نص التقرير تسبق البناء (البند أ — مراجعة 23 أكتوبر) ────────
+# ── أرقام المصادر الثلاثة (ح-3): تُولَّد من بيانات التشغيل وتُكتب في متن التقرير والواجهة ──
+step "أرقام المصادر (معتمدة/مفحوصة/ناجحة)" 2 python3 "$B/tools/source_counts.py" --date "$D" --write
+step "تطابق أرقام المصادر في كل المواضع" 2 python3 "$B/tools/source_counts.py" --date "$D" --check
+# إصلاح الصياغة الآلي الواحد (البند 8): يعدّل النص، فوجب أن يسبق البناء (البند أ).
+step "إصلاح الصياغة الآلي (خطوة واحدة)" 2 python3 "$B/tools/repair_prose.py" --date "$D"
+# بصمة النص النهائي قبل البناء: أي تعديل بعده = منع
+step "بصمة النص قبل البناء" 2 python3 "$B/tools/text_hash_guard.py" --date "$D" --stage record
 if [ "$BUILD" = "1" ]; then
   step "بناء الصفحة (مزامنة + بناء)" 2 python3 "$SITE/generator/sync_from_brain.py" --date "$D"
   step "تصدير PDF المعتمد" 2 python3 "$B/tools/export_report_assets.py" --date "$D" --only pdf
@@ -111,15 +119,11 @@ step "قاعدة النقاط في المصدر" 2 python3 "$B/validators/check_
 step "فاحص النقل بين الإصدارات" 2 python3 "$B/validators/check_carryover.py" --date "$D"
 # ── تدقيق المكتبات اللغوية — أسبوعيًا (تنبيهي، لا يوقف النشر) ──────────────
 AUDIT_STAMP="$B/logs/.audit-last"
-# ── أرقام المصادر الثلاثة (ح-3): تُولَّد من بيانات التشغيل وتُكتب في متن التقرير والواجهة ──
-step "أرقام المصادر (معتمدة/مفحوصة/ناجحة)" 2 python3 "$B/tools/source_counts.py" --date "$D" --write
-step "تطابق أرقام المصادر في كل المواضع" 2 python3 "$B/tools/source_counts.py" --date "$D" --check
 # ── اكتمال التشغيل (ح-4): تشغيل منقوص بأعطال معروفة يُفصح عنه ويمضي؛ وغيره يمنع ──
 step "اكتمال التشغيل (الأعطال المعروفة)" 2 python3 "$B/validators/check_run_completeness.py" --date "$D"
 # ── محور اللغة (طلب صاحب القرار 2026-10-23): عيوب الكتابة والتسرب الداخلي ──────
 # قياس العيوب على النص النهائي: ترقيم متجاور · مسافة قبل الترقيم · حروف مكررة لا تصح ·
 # ألفاظ مصطنعة ممنوعة · قالب متكرر أكثر من مرتين. والكلمات خارج المعجم تنبيهية.
-step "إصلاح الصياغة الآلي (خطوة واحدة)" 2 python3 "$B/tools/repair_prose.py" --date "$D"
 step "عيوب الكتابة (الصياغة والترقيم)" 2 python3 "$B/validators/check_prose_defects.py" --md "$B/reports/$D-sectioned.md"
 step "تسرّب المحتوى الداخلي إلى المتن" 2 python3 "$B/validators/check_internal_leak.py" --md "$B/reports/$D-sectioned.md"
 # المفردات المبسطة: تنبيهي حتى الموافقة الصريحة على القائمة (قرار صاحب القرار).
@@ -133,6 +137,12 @@ fi
 
 step "بوابات المخرج العشر" 2 python3 "$B/tools/qa_gates.py" --date "$D"
 
+# العلامة تُكتب قبل الخلاصة كي تدخل خطواتها في gate.json وفي تنبيه الإيقاف (البند ح)
+step "كتابة العلامة بعد البوابة" 2 python3 "$B/tools/write_mark.py" --date "$D" --stage final
+step "مخطط العلامة الثابت" 2 python3 "$B/validators/check_mark_schema.py" --date "$D"
+# ── بصمة النص بعد البناء: تثبت أن المنشور بُني من النص النهائي (البند أ) ──────
+step "اختبارات المراجعة الثانية (أ · ب · ج · د · هـ · ز)" 2 bash "$B/tests/test_review2.sh" "$D"
+step "تطابق النص المبني مع النص النهائي" 2 python3 "$B/tools/text_hash_guard.py" --date "$D" --stage verify
 echo "----- الخلاصة -----" | tee -a "$REP"
 cat "$REP" | tail -14
 python3 - "$D" "$WORST" "$LOGDIR" "$B" <<'PY'
@@ -147,7 +157,8 @@ for line in (logdir / 'report.txt').read_text(encoding='utf-8').splitlines():
     idx = next((i for i, t in enumerate(parts) if t in ('ok', 'warn', 'block', 'crash')), None)
     if idx:  # اسم الفحص قد يحوي مسافات — الموضع يُحدَّد بأول رمز حالة
         steps.append({'step': ' '.join(parts[:idx]), 'status': parts[idx],
-                      'exit_code': parts[idx + 2] if len(parts) > idx + 2 and parts[idx + 1] == '(رمز' else None,
+                      'exit_code': (lambda x: int(x) if x and x.isdigit() else None)(
+                          (parts[idx + 2].rstrip(')') if len(parts) > idx + 2 and parts[idx + 1] == '(رمز' else None)),
                       'log': parts[-1]})
 result = {'date': d, 'status': status, 'exit_code': worst, 'steps': steps,
           'log_dir': str(logdir), 'finished_utc': datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')}
@@ -188,6 +199,4 @@ echo "السجلات: $LOGDIR"
 
 # ── العلامة بعد البوابة بمخطط ثابت (ع-1 · قرار 2026-10-23) ──────────────────
 # لا تُكتب العلامة قبل وجود النص ونتيجة البوابة، فلا تدّعي حالة غير حقيقية.
-step "كتابة العلامة بعد البوابة" 2 python3 "$B/tools/write_mark.py" --date "$D" --stage final
-step "مخطط العلامة الثابت" 2 python3 "$B/validators/check_mark_schema.py" --date "$D"
 exit "$WORST"

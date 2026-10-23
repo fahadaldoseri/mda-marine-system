@@ -108,7 +108,7 @@ def ledger_names() -> dict[str, list[str]]:
         try:
             recs = json.loads(f.read_text(encoding="utf-8"))
         except Exception:
-            continue
+            raise  # فشل مغلق: خطأ يخصّ حكم البوابة ⇒ رمز 70 (البند د)
         if not isinstance(recs, list):
             continue
         for r in recs:

@@ -70,12 +70,12 @@ def line_ar(c: dict) -> str:
     txt = (f"المصادر: {c['approved']} معتمدة · {c['checked']} مفحوصة في هذا التشغيل · "
            f"{c['ok']} ناجحة")
     if c["failed"]:
-        names = " · ".join(n.replace("حساب ", "").replace(" على X", "") for n in c["failed_names"][:3])
-        labels: dict[str, int] = {}
-        for r in c["reasons"]:
-            labels[reason_label(r)] = labels.get(reason_label(r), 0) + len(c["reasons"][r])
-        why = "، ".join(f"{k} ({v})" for k, v in labels.items())
-        txt += f" · تعذّر {c['failed']} ({names}) — السبب: {why}"
+        # (و) كل مصدر متعذّر باسمه وسببه، لا أسماء مختصرة ولا أسباب مجمّعة
+        pairs = []
+        for r, ns in c["reasons"].items():
+            for n in ns:
+                pairs.append(f"{n.replace('حساب ', '').replace(' على X', '')} — {reason_label(r)}")
+        txt += f" · تعذّر {c['failed']}: " + " · ".join(pairs)
     return txt + "."
 
 
@@ -127,8 +127,10 @@ def inject(date: str, c: dict) -> tuple[bool, str]:
         return False, "قسم «ما لم يُحسم» غير موجود — لا يُكتب الرقم في مكان غير معتمد"
     nxt = re.search(r"^##\s+", t[m.end():], re.M)
     end = m.end() + (nxt.start() if nxt else len(t[m.end():]))
-    body = t[m.end():end].rstrip("\n")
-    t = t[:m.end()] + "\n" + body + "\n\n" + "\n".join(gen) + "\n" + t[end:]
+    body = t[m.end():end].strip("\n")
+    body = re.sub(r"\n{3,}", "\n\n", body)
+    # لا أسطر فارغة محقونة (البند ط): فاصل واحد ثابت بين المتن والسطور المُولَّدة
+    t = t[:m.end()] + ("\n\n" + body if body else "") + "\n\n" + "\n".join(gen) + "\n" + t[end:]
     p.write_text(t, encoding="utf-8")
     return True, str(p)
 
@@ -153,6 +155,9 @@ def write_meta(date: str, c: dict) -> tuple[bool, str]:
 def check(date: str, c: dict) -> list[str]:
     """يتحقق من تطابق كل المواضع الظاهرة — أي اختلاف مخالفة مانعة."""
     bad: list[str] = []
+    # الثابت الملزم (البند هـ): مفحوصة = ناجحة + متعذّرة
+    if c["checked"] != c["ok"] + c["failed"]:
+        bad.append(f"الثابت مفحوصة = ناجحة + متعذّرة مخالف: {c['checked']} ≠ {c['ok']} + {c['failed']}")
     md = report_path(date)
     if md.exists() and line_ar(c).split("·")[0].strip() not in md.read_text(encoding="utf-8"):
         bad.append(f"متن التقرير لا يحمل سطر الأرقام المعتمد: {line_ar(c)}")
