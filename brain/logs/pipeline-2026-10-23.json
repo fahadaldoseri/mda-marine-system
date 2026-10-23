@@ -1,42 +1,28 @@
 {
   "date": "2026-10-23",
   "pipeline_version": 4,
-  "finished_utc": "2026-10-23T03:44:27Z",
+  "finished_utc": "2026-10-23T03:49:14Z",
   "overall": "degraded",
   "ladder_note": "سلّم موحّد: ok / degraded / failed — لكل مكوّن رمز خروج حقيقي، ولا تُعلن نجاحًا برمز صفري",
   "feeds": {
     "status": "degraded",
     "checked": 35,
-    "ok": 34,
-    "failed": 2,
-    "fail_ratio": 0.057,
+    "ok": 33,
+    "failed": 3,
+    "fail_ratio": 0.086,
     "failed_feeds": [
       {
-        "num": 14,
-        "name": "قناة العربية",
-        "primary_url": "https://www.alarabiya.net/feed/rss2/ar/aswaq.xml",
-        "error": "blocked page: Just a moment",
-        "block_reason": "all routes failed: primary: HTTP Error 403: Forbidden | fallback:jina.ai/alarabiya-rss: blocked page: Just a moment | fallback:jina.ai/alarabiya-home: blocked page: Just a moment",
+        "num": 10,
+        "name": "الجزيرة نت",
+        "primary_url": "https://www.ajnet.me/rss",
+        "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
+        "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
         "attempts": [
           {
-            "url": "https://www.alarabiya.net/feed/rss2/ar/aswaq.xml",
+            "url": "https://www.ajnet.me/rss",
             "via": "primary",
             "ok": false,
-            "error": "HTTP Error 403: Forbidden",
-            "tls_verification": "verified"
-          },
-          {
-            "url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
-            "via": "fallback:jina.ai/alarabiya-rss",
-            "ok": false,
-            "error": "blocked page: Just a moment",
-            "tls_verification": "verified"
-          },
-          {
-            "url": "https://r.jina.ai/http://www.alarabiya.net/",
-            "via": "fallback:jina.ai/alarabiya-home",
-            "ok": false,
-            "error": "blocked page: Just a moment",
+            "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
             "tls_verification": "verified"
           }
         ]
@@ -60,6 +46,36 @@
             "via": "official:bna-en-rss",
             "ok": false,
             "error": "HTTP Error 405: Not Allowed",
+            "tls_verification": "verified"
+          }
+        ]
+      },
+      {
+        "num": 20,
+        "name": "جريدة الأيام",
+        "primary_url": "https://www.alayam.com/pages/rss",
+        "error": "blocked page: Attention Required",
+        "block_reason": "all routes failed: primary: HTTP Error 403: Forbidden | fallback:jina.ai/alayam-home: Remote end closed connection without response | fallback:jina.ai/alayam-rss: blocked page: Attention Required",
+        "attempts": [
+          {
+            "url": "https://www.alayam.com/pages/rss",
+            "via": "primary",
+            "ok": false,
+            "error": "HTTP Error 403: Forbidden",
+            "tls_verification": "verified"
+          },
+          {
+            "url": "https://r.jina.ai/http://www.alayam.com/",
+            "via": "fallback:jina.ai/alayam-home",
+            "ok": false,
+            "error": "Remote end closed connection without response",
+            "tls_verification": "verified"
+          },
+          {
+            "url": "https://r.jina.ai/http://www.alayam.com/pages/rss",
+            "via": "fallback:jina.ai/alayam-rss",
+            "ok": false,
+            "error": "blocked page: Attention Required",
             "tls_verification": "verified"
           }
         ]
@@ -90,7 +106,7 @@
     "records_total": 227,
     "added_this_run_count": 0,
     "period_end": "2026-10-22",
-    "merged_utc": "2026-10-23T03:43:05Z",
+    "merged_utc": "2026-10-23T03:47:57Z",
     "merged_before_marker": true
   },
   "builtin_llm": {
