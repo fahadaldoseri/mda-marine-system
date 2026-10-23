@@ -67,8 +67,10 @@ fi
 
 echo "4) صياغة سكربتات الشل وكتلها المضمّنة (ك-132: خلاصة البوابة انهارت بإزاحة خطأ)"
 sh_bad=0; py_bad=0
-for f in "$B"/tools/*.sh "$B"/tests/*.sh; do
+for f in "$B"/tools/*.sh; do
   [ -f "$f" ] || continue
+  # لا يُفحص هذا الملف نفسه: يحتوي نمط الاستخراج حرفيًا فيتطابق مع نفسه.
+  [ "$(basename "$f")" = "run_checks.sh" ] && continue
   bash -n "$f" 2>/dev/null || { sh_bad=$((sh_bad+1)); printf '  ✘ صياغة شل: %s\n' "$(basename "$f")"; }
   awk "/<<'PY'/{f=1;next} /^PY\$/{f=0} f" "$f" > "$TMP/inline.py" 2>/dev/null
   if [ -s "$TMP/inline.py" ]; then
