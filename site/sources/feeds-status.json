@@ -1,21 +1,20 @@
 {
- "date": "2026-10-22",
+ "date": "2026-10-23",
  "status": "degraded",
- "checked": 29,
- "ok": 28,
- "failed": 1,
+ "checked": 35,
+ "ok": 33,
+ "failed": 3,
  "browser_only": [],
  "stale": [
   12,
   20,
-  30,
-  33
+  30
  ],
  "empty": [],
  "stale_days_limit": 14,
- "fail_ratio": 0.034,
+ "fail_ratio": 0.086,
  "fail_ratio_limit": 0.2,
- "items": 1281,
+ "items": 1425,
  "checked_feeds": [
   {
    "num": 6,
@@ -24,8 +23,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://straits.live/feed.xml",
-   "items_count": 36,
-   "content_chars": 16649,
+   "items_count": 38,
+   "content_chars": 17146,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -37,7 +36,7 @@
    "via": "primary",
    "fetched_url": "https://straits.live/briefs/feed.xml",
    "items_count": 60,
-   "content_chars": 106756,
+   "content_chars": 106967,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -49,7 +48,7 @@
    "via": "primary",
    "fetched_url": "https://gcaptain.com/feed/",
    "items_count": 12,
-   "content_chars": 2994,
+   "content_chars": 3003,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -60,8 +59,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://services.tradewindsnews.com/api/feed/rss",
-   "items_count": 182,
-   "content_chars": 111662,
+   "items_count": 187,
+   "content_chars": 114930,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -73,7 +72,7 @@
    "via": "primary",
    "fetched_url": "https://www.seatrade-maritime.com/rss.xml",
    "items_count": 50,
-   "content_chars": 3971,
+   "content_chars": 3999,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -81,13 +80,14 @@
    "num": 10,
    "name": "الجزيرة نت",
    "primary_url": "https://www.ajnet.me/rss",
-   "ok": true,
-   "via": "primary",
-   "fetched_url": "https://www.ajnet.me/rss",
-   "items_count": 25,
-   "content_chars": 10047,
-   "latest_age_days": 0,
-   "tls_verification": "verified"
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "latest_age_days": null,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>"
   },
   {
    "num": 11,
@@ -97,7 +97,7 @@
    "via": "primary",
    "fetched_url": "https://www.aljazeera.com/xml/rss/all.xml",
    "items_count": 25,
-   "content_chars": 7583,
+   "content_chars": 7581,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -110,7 +110,7 @@
    "fetched_url": "https://ofac.treasury.gov/rss.xml",
    "items_count": 10,
    "content_chars": 201934,
-   "latest_age_days": 616,
+   "latest_age_days": 617,
    "tls_verification": "verified"
   },
   {
@@ -121,7 +121,7 @@
    "via": "fallback:jina.ai/alarabiya-rss",
    "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
    "items_count": 30,
-   "content_chars": 118227,
+   "content_chars": 121700,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -133,7 +133,7 @@
    "via": "fallback:jina.ai/alarabiya-rss",
    "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
    "items_count": 30,
-   "content_chars": 118227,
+   "content_chars": 121700,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -145,7 +145,7 @@
    "via": "fallback:jina.ai/alarabiya-rss",
    "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
    "items_count": 30,
-   "content_chars": 118227,
+   "content_chars": 121700,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -157,7 +157,7 @@
    "via": "primary",
    "fetched_url": "https://www.bahrain.bh/wps/portal/en/BNP/RssFeedReader",
    "items_count": 17,
-   "content_chars": 3161,
+   "content_chars": 3159,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -183,7 +183,7 @@
    "fetched_url": "http://feeds.feedburner.com/alayam-news-list-all",
    "items_count": 15,
    "content_chars": 7042,
-   "latest_age_days": 1012,
+   "latest_age_days": 1013,
    "tls_verification": "verified"
   },
   {
@@ -195,20 +195,21 @@
    "fetched_url": "http://feeds.feedburner.com/alayam-online-international-news",
    "items_count": 8,
    "content_chars": 3675,
-   "latest_age_days": 1012,
+   "latest_age_days": 1013,
    "tls_verification": "verified"
   },
   {
    "num": 20,
    "name": "جريدة الأيام",
    "primary_url": "https://www.alayam.com/pages/rss",
-   "ok": true,
-   "via": "fallback:jina.ai/alayam-home",
-   "fetched_url": "https://r.jina.ai/http://www.alayam.com/",
-   "items_count": 50,
-   "content_chars": 8562,
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
    "latest_age_days": null,
-   "tls_verification": "verified"
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: HTTP Error 403: Forbidden | fallback:jina.ai/alayam-home: Remote end closed connection without response | fallback:jina.ai/alayam-rss: blocked page: Attention Required"
   },
   {
    "num": 22,
@@ -218,7 +219,7 @@
    "via": "primary",
    "fetched_url": "https://www.albiladpress.com/rss",
    "items_count": 100,
-   "content_chars": 16592,
+   "content_chars": 16815,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -230,7 +231,7 @@
    "via": "primary",
    "fetched_url": "https://qna.org.qa/en/RSS-Feeds",
    "items_count": 3,
-   "content_chars": 2243,
+   "content_chars": 2256,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -254,8 +255,8 @@
    "via": "primary",
    "fetched_url": "https://qna.org.qa/en/Pages/RSS-Feeds/Qatar",
    "items_count": 50,
-   "content_chars": 28221,
-   "latest_age_days": -1,
+   "content_chars": 27988,
+   "latest_age_days": 0,
    "tls_verification": "verified"
   },
   {
@@ -289,8 +290,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://www.spa.gov.sa/rss.xml",
-   "items_count": 10,
-   "content_chars": 134714,
+   "items_count": 9,
+   "content_chars": 134710,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -301,8 +302,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://www.spa.gov.sa/feed",
-   "items_count": 10,
-   "content_chars": 134714,
+   "items_count": 9,
+   "content_chars": 134710,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -326,7 +327,7 @@
    "via": "fallback:omannews-home",
    "fetched_url": "https://omannews.gov.om/",
    "items_count": 50,
-   "content_chars": 8040,
+   "content_chars": 8094,
    "latest_age_days": null,
    "tls_verification": "disabled_source_28_only"
   },
@@ -373,9 +374,9 @@
    "ok": true,
    "via": "fallback:jina.ai/marad-rss",
    "fetched_url": "https://r.jina.ai/http://www.maritime.dot.gov/rss.xml",
-   "items_count": 8,
-   "content_chars": 9790,
-   "latest_age_days": 2422,
+   "items_count": 27,
+   "content_chars": 1973,
+   "latest_age_days": null,
    "tls_verification": "verified"
   },
   {
@@ -410,8 +411,8 @@
    "via": "primary",
    "fetched_url": "https://www.lloydslist.com/rss/lloyds-list",
    "items_count": 20,
-   "content_chars": 16750,
-   "latest_age_days": -1,
+   "content_chars": 16562,
+   "latest_age_days": 0,
    "tls_verification": "verified"
   },
   {
@@ -434,7 +435,7 @@
    "via": "primary",
    "fetched_url": "https://www.marinelink.com/news/rss",
    "items_count": 10,
-   "content_chars": 4450,
+   "content_chars": 4344,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -470,7 +471,7 @@
    "via": "primary",
    "fetched_url": "https://www.jpost.com/rss/rssfeedsmiddleeastnews.aspx",
    "items_count": 30,
-   "content_chars": 34828,
+   "content_chars": 34720,
    "latest_age_days": -1,
    "tls_verification": "verified"
   },
@@ -482,7 +483,7 @@
    "via": "primary",
    "fetched_url": "https://news.usni.org/feed",
    "items_count": 30,
-   "content_chars": 174308,
+   "content_chars": 175927,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -494,7 +495,7 @@
    "via": "primary",
    "fetched_url": "https://www.navalnews.com/feed/",
    "items_count": 10,
-   "content_chars": 41304,
+   "content_chars": 41946,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -506,7 +507,7 @@
    "via": "primary",
    "fetched_url": "https://www.iribnews.ir/fa/rss/allnews",
    "items_count": 100,
-   "content_chars": 32692,
+   "content_chars": 33492,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -518,7 +519,7 @@
    "via": "primary",
    "fetched_url": "https://www.isna.ir/rss",
    "items_count": 30,
-   "content_chars": 28067,
+   "content_chars": 28280,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -530,7 +531,7 @@
    "via": "primary",
    "fetched_url": "https://en.isna.ir/rss",
    "items_count": 30,
-   "content_chars": 15177,
+   "content_chars": 14907,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -542,7 +543,7 @@
    "via": "primary",
    "fetched_url": "https://ar.mehrnews.com/rss",
    "items_count": 30,
-   "content_chars": 27848,
+   "content_chars": 28175,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -557,9 +558,109 @@
    "content_chars": 14190,
    "latest_age_days": 0,
    "tls_verification": "verified"
+  },
+  {
+   "num": 49,
+   "name": "Sanaa Center",
+   "primary_url": "https://sanaacenter.org/feed/",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://sanaacenter.org/feed/",
+   "items_count": 20,
+   "content_chars": 6162,
+   "latest_age_days": 8,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 50,
+   "name": "Navy Times",
+   "primary_url": "https://www.navytimes.com/feed/",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.navytimes.com/feed/",
+   "items_count": 10,
+   "content_chars": 44066,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 51,
+   "name": "Baird Maritime",
+   "primary_url": "https://www.bairdmaritime.com/feed/",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.bairdmaritime.com/feed/",
+   "items_count": 4,
+   "content_chars": 9376,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 53,
+   "name": "New York Times — الشرق الأوسط",
+   "primary_url": "https://rss.nytimes.com/services/xml/rss/nyt/MiddleEast.xml",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://rss.nytimes.com/services/xml/rss/nyt/MiddleEast.xml",
+   "items_count": 21,
+   "content_chars": 16846,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 54,
+   "name": "Bloomberg",
+   "primary_url": "https://feeds.bloomberg.com/markets/news.rss",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://feeds.bloomberg.com/markets/news.rss",
+   "items_count": 20,
+   "content_chars": 3305,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 54,
+   "name": "Bloomberg",
+   "primary_url": "https://feeds.bloomberg.com/politics/news.rss",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://feeds.bloomberg.com/politics/news.rss",
+   "items_count": 20,
+   "content_chars": 3276,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 55,
+   "name": "Axios",
+   "primary_url": "https://api.axios.com/feed/",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://api.axios.com/feed/",
+   "items_count": 100,
+   "content_chars": 834899,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
   }
  ],
  "failed_feeds": [
+  {
+   "num": 10,
+   "name": "الجزيرة نت",
+   "primary_url": "https://www.ajnet.me/rss",
+   "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
+   "attempts": [
+    {
+     "url": "https://www.ajnet.me/rss",
+     "via": "primary",
+     "ok": false,
+     "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
+     "tls_verification": "verified"
+    }
+   ]
+  },
   {
    "num": 17,
    "name": "حساب @bna_en على X",
@@ -582,7 +683,37 @@
      "tls_verification": "verified"
     }
    ]
+  },
+  {
+   "num": 20,
+   "name": "جريدة الأيام",
+   "primary_url": "https://www.alayam.com/pages/rss",
+   "error": "blocked page: Attention Required",
+   "block_reason": "all routes failed: primary: HTTP Error 403: Forbidden | fallback:jina.ai/alayam-home: Remote end closed connection without response | fallback:jina.ai/alayam-rss: blocked page: Attention Required",
+   "attempts": [
+    {
+     "url": "https://www.alayam.com/pages/rss",
+     "via": "primary",
+     "ok": false,
+     "error": "HTTP Error 403: Forbidden",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://r.jina.ai/http://www.alayam.com/",
+     "via": "fallback:jina.ai/alayam-home",
+     "ok": false,
+     "error": "Remote end closed connection without response",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://r.jina.ai/http://www.alayam.com/pages/rss",
+     "via": "fallback:jina.ai/alayam-rss",
+     "ok": false,
+     "error": "blocked page: Attention Required",
+     "tls_verification": "verified"
+    }
+   ]
   }
  ],
- "written_utc": "2026-10-22T17:55:08Z"
+ "written_utc": "2026-10-23T03:47:42Z"
 }
