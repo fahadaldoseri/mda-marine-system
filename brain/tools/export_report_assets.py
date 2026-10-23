@@ -64,7 +64,7 @@ PDF_CSS = """
 main{gap:0 !important}
 section.doc > h2{break-after:avoid;page-break-after:avoid}
 p,li,blockquote{orphans:3;widows:3}
-.map-viz svg{max-height:106mm;height:auto}
+.map-viz svg{max-height:145mm;width:100%;height:auto}
 tbody tr:nth-child(even){background:#fff !important}
 tbody td{border-bottom:.4pt solid #e2e8f0}
 .mp-events text{font-size:12px}
@@ -81,6 +81,11 @@ section.doc p{margin:1.5mm 0}
 section.doc ul,section.doc ol{margin:1mm 0}
 section.doc li{margin:.45mm 0}
 section.doc ul ul{margin:.6mm 0}
+.decision{break-before:page;page-break-before:page}
+section.doc p,section.doc li,.sec-lede,.masthead .lede,.glossary li,.src-grid li,
+.dc-list li,.chg-list li,.ev-list li,.map-caption,footer.foot{text-align:justify;text-align-last:start;hyphens:none}
+section.doc h2,section.doc h3,section.doc h4,.h-rule,.chip,.kpi,.tag,.st-badge,
+.map-legend li,.conf,.cls-banner,.threat,.toc li,.ev-code{text-align:start}
 """
 
 HEADER_TPL = """<div style="font-family:'Noto Kufi Arabic','IBM Plex Sans Arabic',sans-serif;font-size:7.6px;
@@ -238,6 +243,7 @@ def main() -> int:
     ap.add_argument("--only", choices=["pdf", "map", "both"], default="both")
     ap.add_argument("--no-toc", action="store_true", help="بلا فهرس محتويات")
     ap.add_argument("--no-header", action="store_true", help="بلا ترويسة وتذييل")
+    ap.add_argument("--extra-css", help="ملف CSS اختباري يُحقن بعد أنماط PDF (للمعاينة التجريبية فقط)")
     args = ap.parse_args()
 
     page_path = DIST / "reports" / f"{args.date}.html"
@@ -274,6 +280,10 @@ def main() -> int:
             pg.wait_for_timeout(1200)
             if args.only in ("pdf", "both"):
                 pg.emulate_media(media="print")
+                if args.extra_css:
+                    _extra = Path(args.extra_css).read_text(encoding="utf-8")
+                    pg.add_style_tag(content=_extra)
+                    print(f"أنماط اختبارية مُحقونة: {args.extra_css}")
                 pg.add_style_tag(content=PDF_CSS.replace(
                     "{HIDE_SOURCES}",
                     f"#{hide_id}{{display:none !important}}" if hide_id else ""))
@@ -332,6 +342,20 @@ def main() -> int:
                 # بند 5 (19 أكتوبر 2026): مخالفة الشكل مانع برمز 2 في السلّم الموحّد
                 # (0 نجاح · 1 تحذير · 2 مانع) — كانت تُصنَّف «تحذيرًا» فيُمرّ التسليم.
                 return max(2, gate.returncode)
+        # جودة الطباعة (ك-104 · ك-105): عرض/ارتفاع كتلة الخريطة وتصفير المتن.
+        # تُقاس على ملف PDF المولَّد نفسه وبوسائط print التي بُني بها، وتمنع الإفراج.
+        if os.environ.get("SKIP_PRINT_QUALITY") == "1":
+            print("!! بوابة جودة الطباعة مُتجاوزة (SKIP_PRINT_QUALITY=1) — للمعايرة فقط")
+        else:
+            page_html = DIST / "reports" / f"{args.date}.html"
+            pq = subprocess.run([sys.executable, str(B / "validators" / "check_print_quality.py"),
+                                 "--pdf", str(out_pdf), "--page", str(page_html),
+                                 "--date", args.date],
+                                capture_output=True, text=True)
+            print(pq.stdout.strip())
+            if pq.returncode != 0:
+                print("!! جودة الطباعة مخالفة — لا يُسلَّم هذا الملف ولا يُنشر ولا يُرسل")
+                return max(2, pq.returncode)
 
     return 0
 

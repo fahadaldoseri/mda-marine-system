@@ -14,6 +14,8 @@
 """
 from __future__ import annotations
 
+import sys
+
 import argparse
 import json
 import re
@@ -42,7 +44,7 @@ def consumers_of(name: str) -> list[str]:
                 try:
                     body = f.read_text(encoding="utf-8", errors="ignore")
                 except Exception:
-                    continue
+                    raise  # فشل مغلق: خطأ يخصّ حكم البوابة ⇒ رمز 70 (البند د)
                 if any(pt in body for pt in pats):
                     hits.append(str(f.relative_to(B)) if str(f).startswith(str(B)) else f.name)
     return hits
@@ -148,4 +150,7 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    # ك-133: كل مدقق يمرّ عبر الحارس الموحّد — الانهيار يخرج بالرمز 70 ويمنع التسليم.
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)

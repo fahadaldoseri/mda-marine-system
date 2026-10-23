@@ -1,0 +1,76 @@
+#!/usr/bin/env python3
+"""بوابة اكتمال التشغيل — التشغيل المنقوص قاعدة آلية لا حكم (ح-4 · قرار 2026-10-23).
+
+القاعدة:
+  • overall = ok ⇒ نجاح.
+  • overall = degraded/failed ⇒ كل عطل يجب أن يكون في قائمة الأعطال المعروفة
+    (appendices/known-faults.json) وأن يكون مُفصحًا عنه في متن التقرير نفسه.
+  • أي عطل خارج القائمة، أو عطل معروف غير مُفصح ⇒ منع (رمز 2).
+
+الاستخدام: python3 validators/check_run_completeness.py --date 2026-10-23
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+B = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(B / "tools"))
+from known_faults import classify_component, degraded_components  # noqa: E402
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--date", required=True)
+    a = ap.parse_args()
+    mark_p = B / "logs" / f"pipeline-{a.date}.json"
+    if not mark_p.exists():
+        print(f"  ✘ لا علامة تشغيل لليوم: {mark_p} — لا تسليم بلا علامة")
+        return 2
+    mark = json.loads(mark_p.read_text(encoding="utf-8"))
+    overall = str(mark.get("overall") or "")
+    comps = degraded_components(mark)
+
+    md = B / "reports" / f"{a.date}-sectioned.md"
+    body = md.read_text(encoding="utf-8") if md.exists() else ""
+    if not body:
+        print(f"  ✘ لا نص تقرير: {md}")
+        return 2
+
+    if overall == "ok" and not comps:
+        print("  ✓ التشغيل مكتمل (overall = ok) ولا أعطال")
+        return 0
+
+    blockers: list[str] = []
+    allowed: list[str] = []
+    for comp, st, text, items in comps:
+        r = classify_component(comp, st, text, items)
+        if not r["allowed"]:
+            blockers.append(f"{comp} ({st}): " + "؛ ".join(r["uncovered"])[:200])
+            continue
+        # الإفصاح: نصّه في متن التقرير (السطر المُولَّد آليًا يحمل سبب النقص)
+        tag = r.get("reason_ar_full") or r["reason_ar"] or st
+        short = r["reason_ar"] or st
+        disclosed = (short in body) or (tag in body) or (f"{comp}" in body and "تعذّر" in body)
+        if not disclosed:
+            blockers.append(f"{comp} ({st}): عطل معروف لكنه غير مُفصح عنه في متن التقرير")
+        else:
+            allowed.append(f"{comp} ({st}) — {tag}")
+
+    if blockers:
+        for x in blockers:
+            print(f"  ✘ {x}")
+        print(f"النتيجة: تشغيل منقوص بأعطال غير مسموح بها — مانع ({len(blockers)})")
+        return 2
+    for x in allowed:
+        print(f"  ✓ عطل معروف مُفصح: {x}")
+    print(f"  · الحالة العامة: {overall} — يُسلَّم بإفصاح مكتوب في المتن")
+    return 1
+
+
+if __name__ == "__main__":
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)

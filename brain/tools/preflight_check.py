@@ -49,8 +49,11 @@ POLICY_F = B / 'appendices' / 'report-sections-policy.json'
 def _policy():
     try:
         return json.loads(POLICY_F.read_text(encoding='utf-8'))
-    except Exception:
-        return {}
+    except FileNotFoundError as e:
+        # غياب ملف سياسة الأقسام = لا سياسة ⇒ تمنع البوابة (البند ثانيًا-4)
+        raise RuntimeError(f"ملف سياسة الأقسام مفقود: {POLICY_F}") from e
+    except (json.JSONDecodeError, OSError) as e:
+        raise RuntimeError(f"ملف سياسة الأقسام غير مقروء: {type(e).__name__}") from e
 
 
 _pol = _policy()
@@ -166,7 +169,18 @@ if report.exists():
             known = _known_block(st.get('feeds'))
             failed = [f.get("name") or f.get("num")
                       for f in ((st.get('feeds') or {}).get('failed_feeds') or [])]
-            only_known = bool(failed) and isinstance(known, list) and all(n in known for n in failed)
+            # مرجع واحد للأعطال المعروفة: tools/known_faults.py (البند هـ/و من مراجعة 23 أكتوبر)
+            try:
+                import sys as _sys
+                _sys.path.insert(0, str(B / "tools"))
+                from known_faults import classify_component as _cls
+                _reasons = [(f.get("block_reason") or f.get("reason") or "") for f in
+                            ((st.get("feeds") or {}).get("failed_feeds") or [])]
+                _r = _cls("feeds", (st.get("feeds") or {}).get("status") or "degraded",
+                          " ".join(_reasons), _reasons) if _reasons else {"allowed": True}
+                only_known = bool(_r.get("allowed"))
+            except ImportError:  # المرجع الواحد غير متاح: لا نتجاهل، نمنع (فشل مغلق)
+                only_known = False
             others_ok = all((st.get(k) or {}).get('status') == 'ok'
                             for k in ('ofac', 'originals'))
             if overall == 'ok':
@@ -197,8 +211,10 @@ warn(code == '200', "خادم المعاينة يعمل (3000)",
 try:
     helper = subprocess.run(['git', '-C', str(GEN.parent), 'config', '--get', 'credential.helper'],
                             capture_output=True, text=True).stdout.strip()
-except Exception:
+except (subprocess.SubprocessError, OSError) as e:
+    # لا ابتلاع: تعذّر قراءة مساعد الاعتماد يعني أننا لا نعرف كيف يُعتمد الدفع ⇒ مانع
     helper = ''
+    fails.append(f"تعذّر قراءة مساعد اعتماد الدفع: {type(e).__name__}")
 if helper:
     mh = re.search(r'"([^"]+\.mjs)"', helper)
     check(bool(mh) and Path(mh.group(1)).exists(),
@@ -223,8 +239,9 @@ if master.exists() and report.exists():
                 for ev in json.loads(df.read_text(encoding='utf-8')):
                     if ev.get('date'):
                         ev_dates.append(ev['date'])
-            except Exception:
-                pass
+            except (json.JSONDecodeError, OSError, TypeError, AttributeError) as e:
+                # ملف يوم غير مقروء = الدفتر لا يُثبت تغطيته ⇒ مانع (لا تخطٍّ صامت)
+                fails.append(f"ملف يوم غير مقروء ({df.name}): {type(e).__name__}")
         newest = max(ev_dates) if ev_dates else DATE
         check(pe >= newest, f"الدفتر الجامع يغطي أحدث واقعة مسجّلة ({pe})",
               f"الدفتر الجامع لا يغطي أحدث واقعة في ملفات اليوم ({pe} < {newest}) — دمج ملف اليوم لم يُنفَّذ")

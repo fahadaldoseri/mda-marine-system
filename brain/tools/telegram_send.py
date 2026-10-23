@@ -95,8 +95,8 @@ def guard(args, text: str, targets: list[dict]) -> tuple[bool, str]:
         return False, "التقرير الرسمي يتطلب --date بصيغة YYYY-MM-DD"
     if "و ب" not in text:
         return False, "نص التقرير الرسمي يجب أن يحمل رقم الإصدار «و ب»"
-    if not any(k in text for k in ("النافذة", "الفترة", "توقيت البحرين")):
-        return False, "نص التقرير الرسمي يجب أن يحمل النافذة الزمنية وتوقيت البحرين"
+    if not any(k in text for k in ("الفترة", "الفترة", "توقيت البحرين")):
+        return False, "نص التقرير الرسمي يجب أن يحمل الفترة الزمنية وتوقيت البحرين"
     for path, kind in ((args.document, "مستند"), (args.photo, "صورة")):
         if not path:
             continue

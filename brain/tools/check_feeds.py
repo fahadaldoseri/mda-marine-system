@@ -326,6 +326,51 @@ def fetch(f):
     }
 
 
+def _parse_date(value):
+    """يحوّل تاريخ مادة التغذية إلى كائن زمني (RFC-822 أو ISO)، وإلا None."""
+    import email.utils as _eu
+    text = (value or '').strip()
+    if not text:
+        return None
+    try:
+        parsed = _eu.parsedate_to_datetime(text)
+        if parsed:
+            return (parsed if parsed.tzinfo else parsed.replace(tzinfo=dt.timezone.utc))
+    except Exception:
+        pass
+    try:
+        parsed = dt.datetime.fromisoformat(text.replace('Z', '+00:00'))
+        return (parsed if parsed.tzinfo else parsed.replace(tzinfo=dt.timezone.utc))
+    except Exception:
+        return None
+
+
+def _newest_age_days(entry):
+    """عمر أحدث مادة في التغذية بالأيام، أو None إذا تعذّر الاستخراج (عطل ك-117)."""
+    newest = None
+    for item in entry.get('items', []):
+        stamp = _parse_date(item.get('date', ''))
+        if stamp and (newest is None or stamp > newest):
+            newest = stamp
+    if not newest:
+        return None
+    return (dt.datetime.now(dt.timezone.utc) - newest).days
+
+
+def count_sources(res, browser_only_nums=()):
+    """عدّ المصادر لا الصفوف (البند هـ): مصدر نجح على مسار وفشل على آخر لا يُحسب مرتين.
+
+    ك-146: كان المنطق مضمَّنًا في main بمتغيّر غير معرّف فانهار الفحص على الشبكة؛ صار دالة
+    تُختبر بلا شبكة في tests/test_feed_counters.py.
+    """
+    attempted = {r['num'] for r in res} | set(browser_only_nums or ())
+    ok_nums = {r['num'] for r in res if r['ok']}
+    failed_nums = attempted - ok_nums
+    assert len(attempted) == len(ok_nums) + len(failed_nums), (
+        f"عدادات التغذيات غير متسقة: {len(attempted)} != {len(ok_nums)}+{len(failed_nums)}")
+    return attempted, ok_nums, failed_nums
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--date', default='', help='تاريخ ISO للتسمية (افتراضيًا تاريخ UTC اليوم)')
@@ -352,14 +397,31 @@ def main():
     failed = [r for r in res if not r['ok'] and r['num'] not in BROWSER_ONLY]
     total = sum(len(r['items']) for r in ok)
     # القياس بعدد المصادر لا بعدد المسارات: المسار الواحد بسطرين لا يعني مصدرين فاشلين (عطل ك-64)
-    n_src = len({r['num'] for r in res})
-    n_fail = len({r['num'] for r in failed})
+    # البند هـ: مصدر نجح على مسار وفشل على آخر كان يُحسب ناجحًا ومتعذّرًا معًا. فالعدّ بالمجموعات:
+    # مفحوصة = المصادر التي جُربت · ناجحة = ما نجح على مسار واحد على الأقل · متعذّرة = الباقي.
+    attempted, ok_nums, failed_nums = count_sources(res, BROWSER_ONLY)
+    n_src = len(attempted)
+    n_ok = len(ok_nums)
+    n_fail = len(failed_nums)
+    assert n_src == n_ok + n_fail, f'عدادات التغذيات غير متسقة: {n_src} != {n_ok}+{n_fail}'
     ratio = n_fail / n_src if n_src else 1.0
     print(f"  نجح: {len(ok)} · فشل: {n_fail} مصدرًا · يُفحص بالمتصفح: {len({r['num'] for r in browser_only})} · عناصر مقروءة: {total}")
     for r in browser_only:
         print(f"   ◐ {r['num']} {r['name'][:34]}: {BROWSER_ONLY[r['num']]}")
     for r in failed:
         print(f"   ✘ {r['num']} {r['name'][:34]}: {r['block_reason']}")
+    # ك-117: نجاح الاتصال لا يعني حداثة المحتوى — تُقاس حداثة أحدث مادة وعدد عناصر كل تغذية.
+    STALE_DAYS_LIMIT = 14
+    empty = [r for r in ok if (r.get('items_count') or 0) == 0]
+    stale = []
+    for r in ok:
+        r['latest_age_days'] = _newest_age_days(r)
+        if r['latest_age_days'] is not None and r['latest_age_days'] > STALE_DAYS_LIMIT:
+            stale.append(r)
+    for r in empty:
+        print(f"   ◐ {r['num']} {r['name'][:34]}: تغذية فارغة (صفر عنصر) — تُوسم ولا تُحسب فشلًا")
+    for r in stale:
+        print(f"   ◐ {r['num']} {r['name'][:34]}: محتوى متقادم — عمر أحدث مادة {r['latest_age_days']} يومًا")
 
     if not ok:
         status = 'failed'
@@ -385,12 +447,15 @@ def main():
         'num': r['num'], 'name': r['name'], 'primary_url': r['url'],
         'ok': r['ok'], 'via': r.get('via'), 'fetched_url': r.get('fetched_url'),
         'items_count': r.get('items_count', 0), 'content_chars': r.get('content_chars', 0),
+        'latest_age_days': r.get('latest_age_days'),
         'tls_verification': r.get('tls_verification', 'verified'),
         **({'block_reason': r['block_reason']} if not r['ok'] else {}),
     } for r in res]
     (OUT / f'feeds-{stamp}.status.json').write_text(to_latin(json.dumps({
         'date': stamp, 'status': status, 'checked': n_src, 'ok': len({r['num'] for r in ok}),
         'failed': n_fail, 'browser_only': sorted({r['num'] for r in browser_only}),
+        'stale': sorted({r['num'] for r in stale}), 'empty': sorted({r['num'] for r in empty}),
+        'stale_days_limit': STALE_DAYS_LIMIT,
         'fail_ratio': round(ratio, 3), 'fail_ratio_limit': FAIL_RATIO_LIMIT, 'items': total,
         'checked_feeds': checked_feeds,
         'failed_feeds': [{

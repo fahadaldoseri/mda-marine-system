@@ -90,7 +90,7 @@ SECTION_ICONS = {
     "خريطة الوقائع": "map",
     "الحركة الملاحية والتكدس": "route",
     "مستوى التهديد": "shield",
-    "الاحتمالات والإسناد": "scale",
+    "الاحتمالات ونسبة الحوادث إلى جهات": "scale",
     "التحليل الاستخباري": "intel",
     "التوجيهات التشغيلية": "gear",
     "الخلفية القائمة": "history",
@@ -105,11 +105,11 @@ SECTION_HINTS = {
     "مؤشرات الموقف": "الأرقام، ومقارنتها بتقرير أمس، وحدود كل رقم.",
     "مستوى التهديد": "التقييم الرسمي، والتقدير التحليلي، وحدود الثقة.",
     "التوجيهات التشغيلية": "ما يُنفَّذ قبل العبور والرسو وأثناء الحادث.",
-    "الوقائع الجديدة": "ما وقع داخل نافذة التقرير، مفصولًا عن الخلفية.",
-    "التحذيرات والنشرات الرسمية": "حالة الجهات الرسمية خلال نافذة التقرير.",
+    "الوقائع الجديدة": "ما وقع داخل فترة التقرير، مفصولًا عن الخلفية.",
+    "التحذيرات والنشرات الرسمية": "حالة الجهات الرسمية خلال فترة التقرير.",
     "سجل IMO": "الحصيلة الرسمية التراكمية، وآخر إدخال ظاهر.",
-    "التحليل الاستخباري": "قراءة النمط والافتراضات والفرضيات ومؤشرات التحذير المبكر.",
-    "الاحتمالات والإسناد": "من قد يكون مسؤولًا، بلا جزم وبلا نسبة بلا دليل.",
+    "التحليل الاستخباري": "وصف النمط والافتراضات والفرضيات ومؤشرات التحذير المبكر.",
+    "الاحتمالات ونسبة الحوادث إلى جهات": "من قد يكون مسؤولًا، بلا جزم وبلا نسبة بلا دليل.",
     "الحركة الملاحية والتكدس": "حركة المضيق والرسو من مصادر معلنة فقط.",
     "ما لم يُحسم": "ما يبقى مجهولًا، وما يلزم متابعته في التقرير التالي.",
     "الخلفية القائمة": "وقائع أقدم ما زال أثرها مؤثرًا على التشغيل.",
@@ -470,11 +470,12 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 @media print{
   :root{
     --ink:#0a1524;--ink-2:#20303f;--muted:#4b5e73;--faint:#5c728c;
-    --line:#b8c4d1;--line-2:#8a99ab;--panel:#fff;--panel-2:#fff;--panel-3:#eef2f7;
+    --line:#8d9bad;--line-2:#5d6f84;--panel:#fff;--panel-2:#fff;--panel-3:#eef2f7;
     --accent:#0b6f66;--info:#1f5f9f;--danger:#9d2b25;--warn:#7d5200;--ok:#166b45;
-    --map-sea:#f7fafc;--map-land:#d6e0ea;--map-coast:#64809b;--map-border:#96a7b9;
-    --map-grid:#d3dce6;--map-grid-lbl:#6b7f94;--map-label:#20303f;--map-country:#6b7f94;
-    --map-sea-label:#5a7086;--map-strait:#8a2b25;
+    /* لوحة خريطة الطباعة المعتمدة (حزمة design-v1 — قرار المالك 2026-10-23): بحر أبيض ويابسة رمادية */
+    --map-sea:#ffffff;--map-land:#dfe4ea;--map-coast:#3f4f63;--map-border:#7b8796;
+    --map-grid:#d3d9e0;--map-grid-lbl:#4b5e73;--map-label:#0a1524;--map-country:#4b5e73;
+    --map-sea-label:#4b5e73;--map-strait:#9d2b25;--map-marker-ring:#ffffff;--map-marker-ink:#ffffff;
   }
   body{background:#fff;color:#111;font-size:10.8pt;line-height:1.62}
   /* لا تُطبع المصادر والمراجع ولا ملحق موثوقية المصادر في نسخة PDF */
@@ -488,15 +489,15 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   /* إجبار: كتلة الخريطة تنقسم بين الرسم والمفتاح مهما وردت قاعدة أخصّ */
   #sec-03 .map-viz, .map-viz{break-inside:auto !important;page-break-inside:auto !important}
   .map-viz svg{break-inside:avoid !important;page-break-inside:avoid !important}
-  .map-viz{padding:3mm 3.5mm}
-  /* مفتاح الخريطة في عمودين بترتيب الأرقام صفًّا صفًّا (ك-109): العمودان يأتيان من عرض 48.5% لكل بند
-     في آخر الكتلة؛ وقاعدة columns السابقة كانت تقسّم الحاوية فتظهر الأرقام 1 · 2 · 5 · 6 ثم 3 · 4 */
+  .map-viz{padding:1.2mm 1.2mm}
+  /* مفتاح الخريطة في عمودين: يوفّر نحو 55 مم فيستقر القسم داخل ورقة واحدة */
+  .map-legend{columns:2;column-gap:8mm}
   .map-legend li{break-inside:avoid;margin:0 0 1.4mm;font-size:9pt;line-height:1.45}
   .map-legend .lg-txt{font-size:9pt}
   .map-caption,.map-viz figcaption{margin-top:1.5mm;line-height:1.4}
   /* كثافة الصفحة: تقليل حشو الخلايا لتصبح الكتلة على مقاس الورقة */
   tbody td{padding:1.5mm 2.2mm !important}
-  .sec-lede{margin:0 0 10px;line-height:1.55}
+  .sec-lede{margin:0 0 7px;line-height:1.55}
   section.doc{padding:0 0 3mm}
   .rmk,.glossary{break-inside:avoid;page-break-inside:avoid}
   /* انضباط بصري: خطوط فاصلة رقيقة بدل تظليل الصفوف */
@@ -592,19 +593,23 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   thead{display:table-header-group}
   thead tr{break-after:avoid;page-break-after:avoid}
   p,li{orphans:2;widows:2}
-  .map-viz svg{max-height:70mm !important;break-inside:avoid !important}
+  .map-viz svg{max-height:145mm !important;width:100%;height:auto;break-inside:avoid !important}
   .map-legend,.map-viz,.tbl-wrap,.changes,.decision,.viz,.card{break-inside:auto !important;page-break-inside:auto !important}
+  /* كتلة الخريطة (الرسم + المفتاح + التعليق) تبقى كاملة على ورقة واحدة */
+  .map-viz{break-inside:avoid !important;page-break-inside:avoid !important}
   /* Chromium لا يجزّئ حاويات grid/flex بين الصفحات، فتتدفّق هنا بترتيب inline-block
      يحفظ هيئة العمودين/البطاقات نفسها، مع السماح بالانقسام بين الصفحات */
   .wrap,.changes,.dc-grid,.kpis,.masthead,.map-legend,.src-grid,.glossary,.tl-viz,.viz,.card,.decision{display:block !important}
   .kpis > *,.masthead > *,.map-legend > li,.glossary > li,.src-grid > *{display:inline-block !important;vertical-align:top !important;width:48.5% !important;margin:0 0 2.5mm 1% !important;box-sizing:border-box !important}
   .dc-grid > *,.dc-row{display:block !important;width:100% !important}
-  .dc-row > *:first-child{display:inline-block !important;width:26% !important;vertical-align:top !important}
-  .dc-row > *:last-child{display:inline-block !important;width:72% !important;vertical-align:top !important}
+  /* ك-103: الوسم يُعوَّم والمحتوى كتلة قابلة للانقسام — فلا يُترك عنوان أو بطاقة يتيمة ولا فراغ أسفل الغلاف */
+  .dc-row::after{content:"";display:block;clear:both}
+  .dc-row > *:first-child{float:inline-start !important;display:block !important;width:26% !important}
+  .dc-row > *:last-child{display:block !important;width:auto !important;margin-inline-start:27% !important}
   .changes > *{display:block !important;width:100% !important}
   .viz > *,.card > *{box-sizing:border-box}
   /* ضغط تباعد الأقسام: يوفّر نحو 40 مم فتنتقل نهاية التقرير إلى صفحتها السابقة */
-  section.doc{padding:0 0 2.5mm !important}
+  section.doc{padding:0 0 1.5mm !important}
   section.doc > h2{margin:3mm 0 1.5mm !important}
   .sec-lede{margin:0 0 2mm !important}
   .h-rule{margin:1mm 0 2mm !important}
@@ -613,7 +618,26 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   body,p,li,td,th{line-height:1.36 !important}
   /* overflow مخفي يمنع Chromium من تقسيم الحاوية بين الصفحات فتُدفع كاملة وتُفرّغ الورقة */
   *{overflow:visible !important}
-  .map-viz svg{max-height:46mm !important}
+  .map-viz svg{max-height:145mm !important;width:100%;height:auto}
+  .masthead > div:not(.threat){display:block !important;width:100% !important;margin:0 !important}
+  .masthead h1{width:100% !important}
+  /* الغلاف ينتهي عند شريط التصنيف: بطاقة القرار تبدأ صفحة جديدة (يمنع العنوان اليتيم والفراغ) */
+  .decision{break-inside:avoid !important;page-break-inside:avoid !important}
+  .map-viz svg{max-height:145mm !important;width:100%;height:auto}
+  /* محاذاة مضبوطة: تُغلق فراغات الجانبين في الفقرات والقوائم، ولا تمسّ العناوين والبطاقات */
+  section.doc p,section.doc li,.sec-lede,.masthead .lede,.glossary li,.src-grid li,
+  /* تصفير فقرات المتن والعناوين التمهيدية (قرار المالك 2026-10-22): يمنع الفراغ الجانبي */
+  .sec-lede,section.doc p,.masthead p,.blk-lede,.note{text-align:justify !important;text-align-last:start !important;hyphens:none !important}
+  /* لا يُترك عنوان بطاقة أو قسم وحده أسفل ورقة بلا مضمون (عطل ك-103) */
+  section.decision > .dc-title,.card > h3,.viz > h3,section.doc > h2{break-after:avoid !important;page-break-after:avoid !important}
+  .dc-grid,.dc-row,.dc-v,.dc-v ul{break-inside:auto !important;page-break-inside:auto !important}
+  .dc-list li{break-inside:avoid !important;page-break-inside:avoid !important}
+  /* تصفير كامل المتن بما فيه قيم بطاقة القرار (ك-105): البوابة تفحص الصفحة بوسائط print */
+  .dc-list li,.chg-list li,.ev-list li,.map-caption,footer.foot,
+  .dc-v,.dc-row,.dc-grid,.kv-v,.glossary li,.src-grid li{text-align:justify !important;
+    text-align-last:start !important;hyphens:none !important;word-spacing:normal !important}
+  section.doc h2,section.doc h3,section.doc h4,.h-rule,.chip,.kpi,.tag,.st-badge,
+  .map-legend li,.conf,.cls-banner,.threat,.toc li,.ev-code{text-align:start !important}
   .map-panel{padding:2mm 2.5mm !important}
   .map-legend{margin-top:1.5mm !important}
   .map-legend li{margin:0 0 1mm !important;font-size:8.4pt !important;line-height:1.3 !important}
@@ -1202,7 +1226,8 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
         if not codes.is_primary(t):
             section_html = codes.demote(section_html, report_date, official)
         if map_html and "التوزيع الجغرافي للوقائع" in t:
-            section_html = map_html + section_html
+            # جدول التوزيع أولًا ثم الخريطة: الجدول يمتدّ فيمتلئ الفراغ، والخريطة تأخذ مساحتها كاملة
+            section_html = section_html + map_html
         for key, bname in blocks_map.items():
             if key in t:
                 for _bn in str(bname).split('+'):
@@ -1236,7 +1261,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
     if generated:
         chips.append(f'<span class="chip">آخر تحديث <b class="bidi">{esc(generated)}</b></span>')
     if meta.get("window"):
-        chips.append(f'<span class="chip">نافذة التغطية <b>{esc(meta["window"])}</b></span>')
+        chips.append(f'<span class="chip">فترة التغطية <b>{esc(meta["window"])}</b></span>')
     if meta.get("sources_checked") not in (None, ""):
         chips.append(f'<span class="chip">مصادر مفحوصة <b class="bidi">{esc(meta["sources_checked"])}</b></span>')
     if meta.get("sources_cited") not in (None, ""):

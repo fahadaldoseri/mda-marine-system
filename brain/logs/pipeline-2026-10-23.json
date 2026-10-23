@@ -1,0 +1,131 @@
+{
+  "builtin_llm": {
+    "note": "رُشّحت التغذيات ورُوجعت اللغة آلياً بالنموذج المدمج",
+    "status": "ok"
+  },
+  "date": "2026-10-23",
+  "feeds": {
+    "checked": 35,
+    "counts_note": "مصدر نجح على مسار وفشل على آخر لا يُحسب متعذّرًا (عطل ك-137)",
+    "fail_ratio": 0.086,
+    "failed": 2,
+    "failed_feeds": [
+      {
+        "attempts": [
+          {
+            "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
+            "ok": false,
+            "tls_verification": "verified",
+            "url": "https://www.ajnet.me/rss",
+            "via": "primary"
+          }
+        ],
+        "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
+        "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
+        "name": "الجزيرة نت",
+        "num": 10,
+        "primary_url": "https://www.ajnet.me/rss"
+      },
+      {
+        "attempts": [
+          {
+            "error": "HTTP Error 403: Forbidden",
+            "ok": false,
+            "tls_verification": "verified",
+            "url": "https://web.archive.org/web/20260108135704/https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
+            "via": "primary"
+          },
+          {
+            "error": "HTTP Error 405: Not Allowed",
+            "ok": false,
+            "tls_verification": "verified",
+            "url": "https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
+            "via": "official:bna-en-rss"
+          }
+        ],
+        "block_reason": "all routes failed: primary: HTTP Error 403: Forbidden | official:bna-en-rss: HTTP Error 405: Not Allowed",
+        "error": "HTTP Error 405: Not Allowed",
+        "name": "حساب @bna_en على X",
+        "num": 17,
+        "primary_url": "https://web.archive.org/web/20260108135704/https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa"
+      }
+    ],
+    "ok": 33,
+    "recovered_via_fallback": [
+      "جريدة الأيام"
+    ],
+    "status": "degraded"
+  },
+  "final_gate": {
+    "status": "warn",
+    "exit_code": 1,
+    "dir": "logs/gate-2026-10-23",
+    "blocked_steps": [],
+    "note": "نتيجة بوابة التسليم النهائية — مسجّلة بعد كتابة التقرير."
+  },
+  "finished_utc": "2026-10-23T03:49:14Z",
+  "gate_finished_utc": "2026-10-23T10:54:02Z",
+  "ladder_note": "سلّم موحّد: ok / degraded / failed — لكل مكوّن رمز خروج حقيقي، ولا تُعلن نجاحًا برمز صفري",
+  "language": {
+    "banned_terms": 21,
+    "edit_pass": {
+      "applied": false,
+      "by_category": {
+        "أسلوب": 22,
+        "ترجمة حرفية": 1,
+        "مفردة": 19
+      },
+      "changes": 42,
+      "edited": 5,
+      "model": "gpt-5-mini",
+      "rejected": 9,
+      "sections": 15
+    },
+    "long_sentences": 6,
+    "orthography_errors": 1,
+    "waw_pct": 21.7,
+    "waw_runs3": 3
+  },
+  "ledger_merge": {
+    "added_this_run_count": 0,
+    "merged_before_marker": true,
+    "merged_utc": "2026-10-23T03:47:57Z",
+    "note": "دُمج ملف اليوم في الدفتر الجامع وبُنيت خريطة الرموز ونُسخ الدفتر إلى الموقع",
+    "period_end": "2026-10-22",
+    "records_total": 227,
+    "status": "ok"
+  },
+  "ofac": {
+    "list": "https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exp",
+    "matches": [],
+    "note": "فُحص 9 مستهدفًا — الحالة: ok",
+    "results_file": "archive/ofac-screen-latest.json",
+    "reviews": [],
+    "status": "ok",
+    "targets": 9
+  },
+  "originals": {
+    "empty_shell": 0,
+    "failed": 0,
+    "healthy": 1,
+    "manifest": "archive/originals/2026-10-23/manifest.json",
+    "note": "حُفظت الأصول في archive/originals/2026-10-23/ — الحالة: ok",
+    "status": "ok",
+    "status_file": "archive/originals/2026-10-23/status.json"
+  },
+  "overall": "degraded",
+  "pipeline_version": 4,
+  "report_present_at_pipeline_end": true,
+  "schema_version": 1,
+  "sources": {
+    "approved": 62,
+    "checked": 35,
+    "failed": 1,
+    "failed_names": [
+      "حساب @bna_en على X"
+    ],
+    "ok": 34,
+    "status_file": "feeds/feeds-2026-10-23.status.json"
+  },
+  "written_stage": "final"
+}

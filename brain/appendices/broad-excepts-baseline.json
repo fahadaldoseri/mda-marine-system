@@ -1,0 +1,406 @@
+{
+ "version": 1,
+ "note": "مواقع استثناء عام مقبولة بحد ذاتها لأن نتيجتها تمنع (فشل مغلق) أو لأنها لا تحكم التسليم. أي موقع جديد = منع حتى يُصنَّف. · 23 أكتوبر 2026: مطابقة بالمفتاح (ملف + نص) بدل رقم السطر؛ والمواقع بلا تعليل تُدرج في unclassified وتمنع. · 23 أكتوبر 2026: المفتاح = الملف + أول سطر من كتلة try؛ والحكم يُقارن بالقائمة المقبولة.",
+ "accepted": [
+  {
+   "site": "validators/check_comprehension.py:99",
+   "file": "validators/check_comprehension.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "g = _j.loads(f.read_text(encoding=\"utf-8\")).get(\"glossary\", {})",
+   "reason": "قراءة القاموس من ملفات الواجهة؛ الفشل يدفع نحو الإبلاغ لا نحو السماح — الميل فشل مغلق."
+  },
+  {
+   "site": "validators/check_intel.py:84",
+   "file": "validators/check_intel.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "import json as _json",
+   "reason": "قراءة سياسة الأقسام داخل الفحص — الميل فشل مغلق."
+  },
+  {
+   "site": "validators/check_intel.py:67",
+   "file": "validators/check_intel.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "import json as _json",
+   "reason": "سياسة الأقسام: غيابها يجعل شروط السرد مطبَّقة ⇒ أشدّ لا أرخى."
+  },
+  {
+   "site": "validators/check_intel.py:177",
+   "file": "validators/check_intel.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "meta = json.loads(meta_path.read_text(encoding=\"utf-8\"))",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "validators/check_libraries_skills.py:252",
+   "file": "validators/check_libraries_skills.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "import importlib.util",
+   "reason": "يُسجَّل عائق صريح في نتيجة بوابة قابلية النقل ⇒ يمنع."
+  },
+  {
+   "site": "validators/check_libraries_skills.py:55",
+   "file": "validators/check_libraries_skills.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "text = f.read_text(encoding=\"utf-8\")",
+   "reason": "يُسجَّل «عائق» في نتيجة البوابة ⇒ يمنع."
+  },
+  {
+   "site": "validators/check_libraries_skills.py:62",
+   "file": "validators/check_libraries_skills.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "data = json.loads(text)",
+   "reason": "يُسجَّل «عائق» في نتيجة البوابة ⇒ يمنع."
+  },
+  {
+   "site": "validators/check_pdf_format.py:197",
+   "file": "validators/check_pdf_format.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "import subprocess as _sp",
+   "reason": "فشل فحص العنوان اليتيم يُسجَّل في المخالفات ⇒ يمنع (ك-130)."
+  },
+  {
+   "site": "validators/check_print_quality.py:349",
+   "file": "validators/check_print_quality.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "bad = alignment_report(page_path)",
+   "reason": "تأكيد ثانٍ على الصفحة بعد قياس PDF المعتمد — القياس الأساسي على PDF هو المانع، وهذا تكرار له؛ يُذكر في الملاحظات."
+  },
+  {
+   "site": "validators/validate_report.py:111",
+   "file": "validators/validate_report.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "dt = datetime.fromisoformat(str(d[\"generated_label\"]).replace(\"Z\", \"+00:00\"))",
+   "reason": "خطأ تنسيق وقت التوليد يُسجَّل في الأخطاء ⇒ يمنع."
+  },
+  {
+   "site": "tools/apply_audit_gfs_docx.py:291",
+   "file": "tools/apply_audit_gfs_docx.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "containers.append(hf.paragraphs)",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/apply_audit_gfs_docx.py:311",
+   "file": "tools/apply_audit_gfs_docx.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "for p in hf.paragraphs:",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/archive_originals.py:53",
+   "file": "tools/archive_originals.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "r = urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=40)",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/build_report_docx_exact.py:172",
+   "file": "tools/build_report_docx_exact.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "from docx import Document as _D",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/check_feeds.py:335",
+   "file": "tools/check_feeds.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "parsed = _eu.parsedate_to_datetime(text)",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/check_feeds.py:289",
+   "file": "tools/check_feeds.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "headers = {**HEADERS, 'Referer': f['url']}",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/diagnose_sources.py:102",
+   "file": "tools/diagnose_sources.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "stamp = parser(text)",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/diagnose_sources.py:84",
+   "file": "tools/diagnose_sources.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "raw = gzip.decompress(raw)",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/fetch_primary.py:50",
+   "file": "tools/fetch_primary.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "r = urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=45)",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/full_chain_audit.py:157",
+   "file": "tools/full_chain_audit.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "import hashlib",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/full_chain_audit.py:183",
+   "file": "tools/full_chain_audit.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "sc = json.loads(sch)['schedules'][0]",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/full_chain_audit.py:118",
+   "file": "tools/full_chain_audit.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "o = json.loads(ofac.read_text(encoding='utf-8'))",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/harvest_terms.py:98",
+   "file": "tools/harvest_terms.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "text = p.read_text(encoding='utf-8', errors='ignore')",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/harvest_terms.py:121",
+   "file": "tools/harvest_terms.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "text = p.read_text(encoding='utf-8', errors='ignore')",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/llm_review.py:132",
+   "file": "tools/llm_review.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "data = json.loads(r['output'])",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/llm_triage.py:85",
+   "file": "tools/llm_triage.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "d = json.loads(r['output'])",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/measure_filter_savings.py:122",
+   "file": "tools/measure_filter_savings.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "raw = subprocess.run(",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/merge_ledger_daily.py:108",
+   "file": "tools/merge_ledger_daily.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "max_seq[r.get('date_start')] = max(max_seq.get(r.get('date_start'), 0), int(parts[3]))",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/ofac_screen.py:138",
+   "file": "tools/ofac_screen.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "raw = urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=60).read()",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/pdf_change_guard.py:38",
+   "file": "tools/pdf_change_guard.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "fills, _ = page_metrics(p)",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/preflight_check.py:76",
+   "file": "tools/preflight_check.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "meta = json.loads(meta_today.read_text(encoding='utf-8'))",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/preflight_check.py:134",
+   "file": "tools/preflight_check.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "bu = json.loads(site.read_text(encoding='utf-8')).get('base_url', '')",
+   "reason": "قراءة sources/site.json؛ الفشل يُضاف إلى fails ⇒ منع."
+  },
+  {
+   "site": "tools/preflight_check.py:232",
+   "file": "tools/preflight_check.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "md = json.loads(master.read_text(encoding='utf-8'))",
+   "reason": "قراءة الدفتر الجامع؛ الفشل يُضاف إلى fails ⇒ منع."
+  },
+  {
+   "site": "tools/preflight_check.py:251",
+   "file": "tools/preflight_check.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "known = set(json.loads(cmap.read_text(encoding='utf-8')).get('codes', {})) | \\",
+   "reason": "فحص حلّ الرموز؛ الفشل يُضاف إلى fails ⇒ منع."
+  },
+  {
+   "site": "tools/preflight_check.py:166",
+   "file": "tools/preflight_check.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "st = json.loads(mark.read_text(encoding='utf-8'))",
+   "reason": "قراءة الدفتر الجامع؛ الفشل يُضاف إلى fails ⇒ منع."
+  },
+  {
+   "site": "tools/pro_audit.py:111",
+   "file": "tools/pro_audit.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "await el.scroll_into_view_if_needed(timeout=5000)",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/pro_audit.py:116",
+   "file": "tools/pro_audit.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "im = Image.open(shot_path).convert(\"L\")",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/pro_audit.py:189",
+   "file": "tools/pro_audit.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "snap = None  # واجهة الشجرة صارت لا تُعيد شيئًا في هذا الإصدار — نُكمل بفحص DOM مباشر",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/pro_audit.py:218",
+   "file": "tools/pro_audit.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "await page.emulate_media(media=\"print\")",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/qa_gates.py:42",
+   "file": "tools/qa_gates.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "import json as _json",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/self_improve.py:50",
+   "file": "tools/self_improve.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "out.append(json.loads(line))",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/self_improve.py:77",
+   "file": "tools/self_improve.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "text = log.read_text(encoding=\"utf-8\", errors=\"ignore\")",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/self_improve.py:65",
+   "file": "tools/self_improve.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "buf.append(f.read_text(encoding=\"utf-8\", errors=\"ignore\"))",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/self_test.py:218",
+   "file": "tools/self_test.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "codemap = json.loads((BRAIN / \"appendices\" / \"event-code-map.json\").read_text(encoding=\"utf-8\"))",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/self_test.py:227",
+   "file": "tools/self_test.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "log = [json.loads(l) for l in (BRAIN / \"memory\" / \"learning-log.jsonl\").read_text(encoding=\"utf-8\").splitlines",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/self_test.py:232",
+   "file": "tools/self_test.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "bl = json.loads((BRAIN / \"appendices\" / \"style-blacklist.json\").read_text(encoding=\"utf-8\"))",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/self_test.py:243",
+   "file": "tools/self_test.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "man = json.loads((BRAIN / \"appendices\" / \"sources-manifest.json\").read_text(encoding=\"utf-8\"))",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/self_test.py:359",
+   "file": "tools/self_test.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "rj = json.loads(routes.read_text(encoding=\"utf-8\"))",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/self_test.py:439",
+   "file": "tools/self_test.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "mtxt = meta.read_text(encoding=\"utf-8\")",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/self_test.py:113",
+   "file": "tools/self_test.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "__import__(mod)",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/self_test.py:287",
+   "file": "tools/self_test.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "tgj = json.loads(tg.read_text(encoding=\"utf-8\"))",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/self_test.py:294",
+   "file": "tools/self_test.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "# مسار curl: طلبات python تُرد 403 من حماية الموقع، وcurl يمرّ (قاعدة 20 أكتوبر 2026)",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/self_test.py:329",
+   "file": "tools/self_test.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "info = tg(\"getWebhookInfo\").get(\"result\", {})",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/self_test.py:373",
+   "file": "tools/self_test.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "req = urllib.request.Request(SITE_URL + path, headers={\"User-Agent\": \"Mozilla/5.0 selftest\"})",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/self_test.py:418",
+   "file": "tools/self_test.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "txt = p.read_text(encoding=\"utf-8\", errors=\"ignore\")",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/self_test.py:408",
+   "file": "tools/self_test.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "if secret_pats[2][0].search(p.read_text(encoding=\"utf-8\", errors=\"ignore\")):",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "tools/telegram_bot.py:257",
+   "file": "tools/telegram_bot.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "handle(tok, u)",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  }
+ ],
+ "unclassified": []
+}

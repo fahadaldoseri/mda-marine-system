@@ -85,7 +85,7 @@ def main() -> int:
         print("  · لا روابط في قائمة الأصول — لا حفظ مطلوب")
         (d / 'status.json').write_text(json.dumps(
             {'date': day, 'status': 'ok', 'checked': 0, 'healthy': 0, 'empty_shell': 0, 'failed': 0,
-             'note': 'لا أصل مطلوب في نافذة اليوم'},
+             'note': 'لا أصل مطلوب في فترة اليوم'},
             ensure_ascii=False, indent=1), encoding='utf-8')
         return 0
 

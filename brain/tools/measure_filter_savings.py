@@ -97,7 +97,7 @@ def strip_html(html: str) -> str:
 
 
 def extract_matches(text: str, window: int = 400) -> str:
-    """يستبقي المقاطع التي فيها كلمة دالة، بنافذة سياق محدودة."""
+    """يستبقي المقاطع التي فيها كلمة دالة، بفترة سياق محدودة."""
     keep: list[str] = []
     for para in text.split("\n"):
         para = para.strip()

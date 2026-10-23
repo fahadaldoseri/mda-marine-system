@@ -92,7 +92,7 @@ def check_lib_links() -> None:
                 try:
                     blob += p.read_text(encoding="utf-8", errors="ignore")
                 except Exception:                                # noqa: BLE001
-                    pass
+                    raise  # فشل مغلق: خطأ يخصّ حكم البوابة ⇒ رمز 70 (البند د)
     for f in sorted(p for p in LIBS.iterdir() if p.is_file()) if LIBS.is_dir() else []:
         stem = f.stem
         family = re.sub(r"-\d{4}-\d{2}-\d{2}$", "", stem)
@@ -111,7 +111,7 @@ def check_lib_links() -> None:
                     if hit:
                         readers.append(p.relative_to(B).as_posix())
                 except Exception:                                # noqa: BLE001
-                    pass
+                    raise  # فشل مغلق: خطأ يخصّ حكم البوابة ⇒ رمز 70 (البند د)
         readers = [r for r in readers if "libraries" not in r]
         gate_readers = [r for r in readers if r.startswith("validators/") or "final_gate" in r]
         skill_readers = [r for r in readers if "skills" in r or r.startswith("sections/")]
@@ -269,7 +269,7 @@ def check_portability() -> None:
                 if SECRET_PAT.search(p.read_text(encoding="utf-8", errors="ignore")):
                     secrets.append(p.name)
             except Exception:                                    # noqa: BLE001
-                pass
+                raise  # فشل مغلق: خطأ يخصّ حكم البوابة ⇒ رمز 70 (البند د)
     backup = (B / "tools" / "github_backup.py")
     sanitized = backup.read_text(encoding="utf-8") if backup.is_file() else ""
     for s in secrets:
@@ -303,4 +303,7 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    # ك-133: كل مدقق يمرّ عبر الحارس الموحّد — الانهيار يخرج بالرمز 70 ويمنع التسليم.
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)

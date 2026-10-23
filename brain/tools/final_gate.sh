@@ -18,6 +18,15 @@ REP="$LOGDIR/report.txt"; : > "$REP"
 WORST=0
 N=0
 
+step_strict() {     # خطوة اختبار: أي فشل يمنع (مراجعة 23 أكتوبر 2026، أولًا)
+  local name="$1"; shift
+  # ك-148: كان STRICT=1 بادئةً للاستدعاء فتتسرّب إلى بيئة العملية الابنة، فترى اختبارات
+  # داخلية لوضع الصرامة وتفشل. الآن متغيّر داخلي غير مُصدَّر.
+  STRICT_LOCAL=1
+  step "$name" 1 "$@"
+  STRICT_LOCAL=0
+}
+
 step() {            # step "<اسم الفحص>" <رمز المانع عند الفشل> <الأمر...>
   local name="$1"; shift
   local blockrc="$1"; shift
@@ -26,7 +35,18 @@ step() {            # step "<اسم الفحص>" <رمز المانع عند ا�
   "$@" >"$log" 2>&1
   local rc=$?
   local status="ok"
-  if [ "$rc" -ge "$blockrc" ]; then status="block"; WORST=2
+  # ك-131 (البند ح-1 من التدقيق المستقل): انهيار المدقق ليس تحذيرًا.
+  # ك-133 (قرار صاحب القرار 2026-10-23): رمز الانهيار المعتمد 70 يمنع ولو بلا أي نص مخرج.
+  if [ "$rc" -eq 70 ]; then
+    status="crash"; WORST=2
+  # وأي أثر انهيار مع رمز خارج العقد (0 نجاح · 1 تحذير · رمز المانع) = «انهيار» أيضًا.
+  elif [ "$rc" -ne 0 ] && [ "$rc" -ne "$blockrc" ] && \
+     grep -qE "Traceback \(most recent call last\)|^[A-Za-z_]*Error:" "$log" 2>/dev/null; then
+    status="crash"; WORST=2
+  elif [ "${STRICT_LOCAL:-0}" -eq 1 ] && [ "$rc" -ne 0 ]; then
+    # مراجعة 23 أكتوبر 2026 (أولًا): أي خطوة اختبار تمنع عند أي رمز غير صفري
+    status="block"; WORST=2
+  elif [ "$rc" -ge "$blockrc" ]; then status="block"; WORST=2
   elif [ "$rc" -gt 0 ]; then status="warn"; [ "$WORST" -lt 1 ] && WORST=1; fi
   printf '%-34s %-6s (رمز %s) %s\n' "$name" "$status" "$rc" "$(basename "$log")" >> "$REP"
   printf '  %-34s %-6s (رمز %s)\n' "$name" "$status" "$rc"
@@ -35,6 +55,10 @@ step() {            # step "<اسم الفحص>" <رمز المانع عند ا�
 
 echo "===== بوابة التسليم النهائية — $D — $(date -u +%FT%TZ) ====="
 echo "السلّم: 0 نجاح · 1 تحذير · 2 مانع" | tee -a "$REP"
+
+# اختبارات البوابات نفسها: تُثبت أن الحارس يعمل (انهيار = منع · الفحوص المانعة تُنفَّذ فعلًا).
+# طلب التدقيق المستقل 2026-10-23 (البندان ح-1 وح-2): لا إصلاح بلا اختبار دائم.
+step_strict "اختبارات البوابات (tests)" bash "$B/tests/run_checks.sh"
 
 if [ ! -f "$B/reports/$D-sectioned.md" ] || [ ! -f "$B/web/meta/$D.json" ]; then
   echo "  ✘ ناقص: reports/$D-sectioned.md أو web/meta/$D.json — لا تسليم بلا نص وواجهة." | tee -a "$REP"
@@ -48,9 +72,31 @@ step "تنظيف المحتوى الداخلي" 3 python3 "$B/tools/scrub_intern
 # دمج بنك التعريفات المعياري: يضمن أن كل رمز مستخدم له تعريف يراه القارئ،
 # ويسبق البناء حتى يصل التعريف إلى الصفحة وPDF وبوابة الفهم معًا.
 step "دمج بنك التعريفات" 2 python3 "$B/tools/merge_glossary.py" --date "$D"
+# ── كل خطوة تعدّل نص التقرير تسبق البناء (البند أ — مراجعة 23 أكتوبر) ────────
+# ── أرقام المصادر الثلاثة (ح-3): تُولَّد من بيانات التشغيل وتُكتب في متن التقرير والواجهة ──
+step "أرقام المصادر (معتمدة/مفحوصة/ناجحة)" 2 python3 "$B/tools/source_counts.py" --date "$D" --write
+step "تطابق أرقام المصادر في كل المواضع" 2 python3 "$B/tools/source_counts.py" --date "$D" --check
+# إصلاح الصياغة الآلي الواحد (البند 8): يعدّل النص، فوجب أن يسبق البناء (البند أ).
+step "إصلاح الصياغة الآلي (خطوة واحدة)" 2 python3 "$B/tools/repair_prose.py" --date "$D"
+# ── محور اللغة (أمر 23 أكتوبر 2026): تحرير لغوي آلي لكل قسم بجدول قبل/بعد، وحارسه
+#    `preserve_check.py` يرفض أي تعديل يمسّ رقمًا أو رمزًا أو اسمًا لاتينيًا أو بنية عنوان/جدول.
+step "تحرير لغوي آلي (قبل/بعد لكل قسم)" 2 python3 "$B/tools/edit_pass.py" --report "$B/reports/$D-sectioned.md" --out-dir "$B/audit" $( [ "${EDIT_PASS_APPLY:-1}" = "1" ] && echo --apply )
+# بوابات اللغة المتدرجة: إملاء ونحو (ط13أ) + نسبة الجمل المبدوءة بـ«و» — تنبيهي حتى 2026-10-30 ومانع بعده.
+step "بوابات اللغة المتدرجة (إملاء ونحو وأسلوب)" 2 python3 "$B/tools/language_gates.py" --date "$D"
+# أصل نص كل واقعة من الأصول المحفوظة — يمكّن الفحص العكسي للترجمة بالمعنى.
+step "أصل نص كل واقعة (للفحص العكسي)" 1 python3 "$B/tools/ledger_source_excerpt.py" --date "$D"
+# بصمة النص النهائي قبل البناء: أي تعديل بعده = منع
+step "بصمة النص قبل البناء" 2 python3 "$B/tools/text_hash_guard.py" --date "$D" --stage record
 if [ "$BUILD" = "1" ]; then
   step "بناء الصفحة (مزامنة + بناء)" 2 python3 "$SITE/generator/sync_from_brain.py" --date "$D"
   step "تصدير PDF المعتمد" 2 python3 "$B/tools/export_report_assets.py" --date "$D" --only pdf
+  # جودة الطباعة (ك-104 · ك-105): تُقاس على PDF النهائي وبوسائط print نفسها التي يُبنى بها.
+  # عرض/ارتفاع كتلة الخريطة وتصفير كل كتل المتن = بند مانع يوقف النشر وتلغرام.
+  step "جودة الطباعة (الخريطة والتصفير على PDF)" 2 python3 "$B/validators/check_print_quality.py" \
+    --pdf "$SITE/dist/reports/pdf/$D.pdf" --page "$SITE/dist/reports/$D.html" --date "$D"
+  # خط الأساس الرسمي (virgin): تنبيهي — يُعلن أي انحراف في ملفات الشكل والبوابات عن
+  # النسخة المعتمدة، فلا يتغيّر الشكل الرسمي دون قرار موثَّق وتجديد للبيان.
+  step "خط الأساس الرسمي (virgin)" 2 python3 "$B/tools/check_baseline.py"
   # نسخة Word طبق الأصل: بوابة المخرج 9 تمنع التسليم بلا نسخة Word، فتُبنى هنا آليًا
   step "نسخة Word طبق الأصل" 2 python3 "$B/tools/build_report_docx_exact.py" --date "$D"
 fi
@@ -71,6 +117,9 @@ step "تماثل المهارات والمكتبات (مزامنة فورية)" 
 step "سلامة المهارات" 1 python3 validators/check_skills_integrity.py
 step "بوابة الفهم (مرحلة $COMP_STAGE)" 2 python3 "$B/validators/check_comprehension.py" --date "$D"
 step "بوابة التحليل الاستخباري" 2 python3 "$B/validators/check_intel.py" "$B/reports/$D-sectioned.md" "$B/web/meta/$D.json"
+# فحص العقوبات يُحدَّث لحظة البوابة، فالتقرير قد يُكتب أو يُعدَّل بعد الخط اليومي
+step "استخراج أهداف OFAC" 2 python3 "$B/tools/ofac_targets_from_report.py" --date "$D"
+step "فحص OFAC" 2 python3 "$B/tools/ofac_screen.py" "$B/watchlist/ofac-targets.txt"
 step "تغطية فحص العقوبات" 2 python3 "$B/validators/check_ofac_coverage.py" --date "$D"
 step "استعمال المكتبات (المعجم والبنك والفجوات)" 2 python3 "$B/validators/check_library_use.py" --date "$D"
 step "عدد المصادر (مصدر واحد)" 2 python3 "$B/validators/check_sources_count.py"
@@ -84,11 +133,20 @@ step "حصاد الألفاظ الجديدة" 2 python3 "$B/tools/harvest_terms.
 step "سياسة الرموز في المخرجات" 2 python3 "$B/validators/check_code_policy.py" "$SITE/dist"
 step "فصل فضاءات الرموز MN-/EST-" 2 python3 "$B/validators/check_code_spaces.py" --date "$D"
 step "قاعدة النقاط في المصدر" 2 python3 "$B/validators/check_points_rule.py" --md "$B/reports/$D-sectioned.md" --meta "$B/web/meta/$D.json"
-# فاحص النقل بين الإصدارات: سنة أو اسم سفينة خارج النافذة · نقل حرفي · حقل إسناد وزمن
+# فاحص النقل بين الإصدارات: سنة أو اسم سفينة خارج الفترة · نقل حرفي · حقل إسناد وزمن
 # الأساس: حادثة BW RHINE (وصف 2019 نُقل كواقعة 2026) — الاعتماد على السجل التراكمي لا على الحدس
 step "فاحص النقل بين الإصدارات" 2 python3 "$B/validators/check_carryover.py" --date "$D"
 # ── تدقيق المكتبات اللغوية — أسبوعيًا (تنبيهي، لا يوقف النشر) ──────────────
 AUDIT_STAMP="$B/logs/.audit-last"
+# ── اكتمال التشغيل (ح-4): تشغيل منقوص بأعطال معروفة يُفصح عنه ويمضي؛ وغيره يمنع ──
+step "اكتمال التشغيل (الأعطال المعروفة)" 2 python3 "$B/validators/check_run_completeness.py" --date "$D"
+# ── محور اللغة (طلب صاحب القرار 2026-10-23): عيوب الكتابة والتسرب الداخلي ──────
+# قياس العيوب على النص النهائي: ترقيم متجاور · مسافة قبل الترقيم · حروف مكررة لا تصح ·
+# ألفاظ مصطنعة ممنوعة · قالب متكرر أكثر من مرتين. والكلمات خارج المعجم تنبيهية.
+step "عيوب الكتابة (الصياغة والترقيم)" 2 python3 "$B/validators/check_prose_defects.py" --md "$B/reports/$D-sectioned.md"
+step "تسرّب المحتوى الداخلي إلى المتن" 2 python3 "$B/validators/check_internal_leak.py" --md "$B/reports/$D-sectioned.md"
+# المفردات المبسطة: تنبيهي حتى الموافقة الصريحة على القائمة (قرار صاحب القرار).
+step "المفردات المبسطة (تنبيهي حتى الموافقة)" 2 python3 "$B/validators/check_vocabulary.py" --md "$B/reports/$D-sectioned.md"
 if [ ! -f "$AUDIT_STAMP" ] || [ $(( ( $(date -u +%s) - $(date -u -r "$AUDIT_STAMP" +%s 2>/dev/null || echo 0) ) / 86400 )) -ge 6 ]; then
   step "تدقيق المكتبات اللغوية (أسبوعي)" 3 python3 "$B/tools/audit_corpus.py" --date "$D"
   date -u +%FT%TZ > "$AUDIT_STAMP" 2>/dev/null || true
@@ -98,6 +156,13 @@ fi
 
 step "بوابات المخرج العشر" 2 python3 "$B/tools/qa_gates.py" --date "$D"
 
+# العلامة تُكتب قبل الخلاصة كي تدخل خطواتها في gate.json وفي تنبيه الإيقاف (البند ح)
+step "كتابة العلامة بعد البوابة" 2 python3 "$B/tools/write_mark.py" --date "$D" --stage final
+step "مخطط العلامة الثابت" 2 python3 "$B/validators/check_mark_schema.py" --date "$D"
+# ── بصمة النص بعد البناء: تثبت أن المنشور بُني من النص النهائي (البند أ) ──────
+step_strict "اختبارات المراجعة الثانية (أ · ب · ج · د · هـ · ز)" bash "$B/tests/test_review2.sh" "$D"
+step_strict "اختبار انحدار المصلح (12→23)" bash "$B/tests/test_repair_regression.sh"
+step "تطابق النص المبني مع النص النهائي" 2 python3 "$B/tools/text_hash_guard.py" --date "$D" --stage verify
 echo "----- الخلاصة -----" | tee -a "$REP"
 cat "$REP" | tail -14
 python3 - "$D" "$WORST" "$LOGDIR" "$B" <<'PY'
@@ -109,10 +174,11 @@ status = {0: 'ok', 1: 'warn', 2: 'block'}[worst]
 steps = []
 for line in (logdir / 'report.txt').read_text(encoding='utf-8').splitlines():
     parts = line.split()
-    idx = next((i for i, t in enumerate(parts) if t in ('ok', 'warn', 'block')), None)
+    idx = next((i for i, t in enumerate(parts) if t in ('ok', 'warn', 'block', 'crash')), None)
     if idx:  # اسم الفحص قد يحوي مسافات — الموضع يُحدَّد بأول رمز حالة
         steps.append({'step': ' '.join(parts[:idx]), 'status': parts[idx],
-                      'exit_code': parts[idx + 2] if len(parts) > idx + 2 and parts[idx + 1] == '(رمز' else None,
+                      'exit_code': (lambda x: int(x) if x and x.isdigit() else None)(
+                          (parts[idx + 2].rstrip(')') if len(parts) > idx + 2 and parts[idx + 1] == '(رمز' else None)),
                       'log': parts[-1]})
 result = {'date': d, 'status': status, 'exit_code': worst, 'steps': steps,
           'log_dir': str(logdir), 'finished_utc': datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')}
@@ -129,6 +195,29 @@ if mark.exists():
     except Exception as e:
         print(f"  · تعذر تحديث العلامة ({e}) — النتيجة محفوظة في gate.json")
 PY
+# ── تنبيه إيقاف التسليم (طلب صاحب القرار — البند 8) ───────────────────────
+if [ "$WORST" = "2" ]; then
+  mkdir -p "$B/logs/alerts"
+  ALERT="$B/logs/alerts/$D-إيقاف-التسليم.md"
+  {
+    echo "# إيقاف التسليم — $D"
+    echo
+    echo "الزمن (UTC): $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+    echo
+    echo "## الخطوات المانعة"
+    grep -E "block|crash" "$LOGDIR/report.txt" | sed "s/^/- /"
+    echo
+    echo "## ما يلزم قبل إعادة التشغيل"
+    echo "- يُصلح السبب أعلاه، ثم: bash tools/final_gate.sh $D"
+    echo "- لا نشر ولا إرسال إلى تلغرام بلا أمر صاحب القرار."
+  } > "$ALERT"
+  echo "  • تنبيه إيقاف مكتوب: logs/alerts/$D-إيقاف-التسليم.md"
+fi
+
 echo "===== نهاية البوابة: $([ "$WORST" = "0" ] && echo 'نجاح' || { [ "$WORST" = "1" ] && echo 'نجاح مع تحذير' || echo 'مانع — التسليم موقوف'; }) (رمز $WORST) ====="
 echo "السجلات: $LOGDIR"
+# ── العلامة بعد البوابة بمخطط ثابت (ع-1 · قرار 2026-10-23) ──────────────────
+# لا تُكتب العلامة قبل وجود النص ونتيجة البوابة، فلا تدّعي حالة غير حقيقية.
+# ── حلقة التعلم الذاتي (مهارة superpowers-method) — لا تمنع، وتسجّل في كل تشغيل ──
+python3 "$B/tools/skill_lessons.py" --date "$D" || true
 exit "$WORST"

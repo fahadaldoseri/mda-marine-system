@@ -22,6 +22,9 @@ LOGDIR="$B/logs"; mkdir -p "$LOGDIR"
 LOG="$LOGDIR/pipeline-$D.log"
 MARK="$LOGDIR/pipeline-$D.json"
 
+# 0) فحص المانيفست (S000) — فشله يمنع التشغيل كله (أمر الكتيب التنفيذي)
+python3 "$B/tools/runbook.py" verify >>"$LOG" 2>&1 || { echo "✘ verify فشل: المانيفست غير متسق — لا تشغيل ولا نشر" | tee -a "$LOG"; exit 2; }
+
 bash "$B/tools/restore_skills.sh" 2>&1 | tail -3
 echo "===== خط التشغيل الموحّد v4 — $D — $(date -u +%FT%TZ) =====" | tee -a "$LOG"
 
@@ -45,13 +48,16 @@ fi
 
 # 2) قائمة فحص العقوبات تُولَّد آليًا من سفن إصدار اليوم، ثم يُجرى الفحص
 echo "-- 2) فحص OFAC (قائمة مُولَّدة من سفن التقرير) --" | tee -a "$LOG"
-python3 tools/ofac_targets_from_report.py --date "$D" >>"$LOG" 2>&1 \
-  || echo "   ◐ تعذر توليد القائمة من التقرير (قد لا يكون تقرير اليوم مكتوبًا بعد)" | tee -a "$LOG"
-if [ ! -f "$TARGETS" ]; then
+python3 tools/ofac_targets_from_report.py --date "$D" >>"$LOG" 2>&1
+OFAC_EXTRACT_RC=$?
+if [ "$OFAC_EXTRACT_RC" -ne 0 ]; then
+  S_OFAC="failed"; NOTE_OFAC="فشل استخراج قائمة المستهدفات (تشغيل منقوص — التسليم موقوف)"
+  echo "   ✘ $NOTE_OFAC" | tee -a "$LOG"
+elif [ ! -f "$TARGETS" ]; then
   echo "   ✘ قائمة المستهدفات مفقودة: $TARGETS (خطأ إعداد — لا يُعتبر نجاحًا)" | tee -a "$LOG"
   NOTE_OFAC="قائمة المستهدفات مفقودة"
 elif [ ! -s "$TARGETS" ]; then
-  S_OFAC="ok"; NOTE_OFAC="لا سفينة في نافذة اليوم — لا فحص مطلوب"
+  S_OFAC="ok"; NOTE_OFAC="لا سفينة في فترة اليوم — لا فحص مطلوب"
   echo "   ○ $NOTE_OFAC" | tee -a "$LOG"
 else
   python3 tools/ofac_screen.py "$TARGETS" >>"$LOG" 2>&1; RC=$?
@@ -67,7 +73,7 @@ if [ ! -f "$URLS" ]; then
   NOTE_ARCH="قائمة الأصول مفقودة"
 elif [ ! -s "$URLS" ]; then
   python3 tools/archive_originals.py "$D" "$URLS" >>"$LOG" 2>&1; RC=$?
-  S_ARCH="$(classify $RC)"; NOTE_ARCH="لا بلاغ رسمي في نافذة اليوم — لا أصل مطلوب"
+  S_ARCH="$(classify $RC)"; NOTE_ARCH="لا بلاغ رسمي في فترة اليوم — لا أصل مطلوب"
   echo "   ○ $NOTE_ARCH" | tee -a "$LOG"
 else
   python3 tools/archive_originals.py "$D" "$URLS" >>"$LOG" 2>&1; RC=$?
@@ -199,6 +205,7 @@ python3 "$B/validators/check_points_rule.py" --md "$B/reports/$D-sectioned.md" -
 python3 validators/check_numerals.py || { echo "✘ بوابة الأرقام: أرقام عربية في ملف ملزم — التسليم موقوف"; exit 2; }
 
 # نسخة احتياطية على GitHub (غير مُعطِّلة)
+python3 "$B/tools/runbook.py" gates-status --date "$D" --root "$B" >>"$LOG" 2>&1 || { echo "✘ رُفض النسخ الاحتياطي: بوابات المحرّك غير مكتملة" | tee -a "$LOG"; exit 2; }
 bash "$B/tools/github_backup.sh" || echo "! النسخة الاحتياطية لم تكتمل — راجع logs/github-backup-*.log"
 # تحقق حقيقي بعد النسخ (عطل ك-70): هل المستودع يعكس الشجرة المحلية؟
 python3 "$B/validators/check_backup_parity.py" --mode strict >>"$LOG" 2>&1 \

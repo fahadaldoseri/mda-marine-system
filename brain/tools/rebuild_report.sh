@@ -40,8 +40,13 @@ say "6) مطابقة الشكل v3"
 python3 "$_B/validators/check_pdf_format.py" --pdf "$_S/dist/reports/pdf/$D.pdf" 2>&1 | tail -3
 [ "${PIPESTATUS[0]}" = "2" ] && FAIL=1
 
-say "7) ميزانية الصفحات"
-python3 "$_B/tools/page_budget.py" --date "$D" 2>&1 | tail -5
+say "7) جودة الطباعة — عرض الخريطة وتصفير المتن (ك-104 · ك-105)"
+python3 "$_B/validators/check_print_quality.py" --pdf "$_S/dist/reports/pdf/$D.pdf" \
+  --page "$_S/dist/reports/$D.html" --date "$D" 2>&1 | tail -5
+[ "${PIPESTATUS[0]}" = "2" ] && FAIL=1
+
+say "8) ميزانية الصفحات"
+python3 "$_B/tools/page_budget.py" --date "$D" --adding "${ADDING:-0}" 2>&1 | tail -5
 
 [ "$FAIL" = "0" ] && echo -e "\n✔ إعادة البناء مكتملة ومثبتة بالأثر" || echo -e "\n✘ إعادة البناء ناقصة"
 exit "$FAIL"

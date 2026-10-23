@@ -1,0 +1,3161 @@
+{
+ "version": 1,
+ "ledger_dir": "logs/runbook",
+ "sections": [
+  {
+   "id": "what-changed",
+   "title": "ما تغيّر منذ التقرير السابق",
+   "order": 1,
+   "block": "/home/ubuntu/seawatch/generator/blocks.py",
+   "validator": "validators/check_carryover.py",
+   "prompt_snippet": "runbook/prompts/sections/what-changed.md",
+   "tests": [
+    "tests/sections/test_what-changed.sh"
+   ],
+   "files": []
+  },
+  {
+   "id": "summary",
+   "title": "الخلاصة",
+   "order": 2,
+   "block": "/home/ubuntu/seawatch/generator/blocks.py",
+   "validator": "validators/validate_report.py",
+   "prompt_snippet": "runbook/prompts/sections/summary.md",
+   "tests": [
+    "tests/sections/test_summary.sh"
+   ],
+   "files": []
+  },
+  {
+   "id": "general",
+   "title": "عام (بطاقة القرار)",
+   "order": 3,
+   "block": "/home/ubuntu/seawatch/generator/blocks.py",
+   "validator": "validators/check_comprehension.py",
+   "prompt_snippet": "runbook/prompts/sections/general.md",
+   "tests": [
+    "tests/sections/test_general.sh"
+   ],
+   "files": []
+  },
+  {
+   "id": "incident-map",
+   "title": "خريطة الوقائع",
+   "order": 4,
+   "block": "/home/ubuntu/seawatch/generator/blocks.py",
+   "validator": "validators/check_pdf_format.py",
+   "prompt_snippet": "runbook/prompts/sections/incident-map.md",
+   "tests": [
+    "tests/sections/test_incident-map.sh"
+   ],
+   "files": []
+  },
+  {
+   "id": "indicators",
+   "title": "مؤشرات الموقف",
+   "order": 5,
+   "block": "/home/ubuntu/seawatch/generator/blocks.py",
+   "validator": "validators/check_style.py",
+   "prompt_snippet": "runbook/prompts/sections/indicators.md",
+   "tests": [
+    "tests/sections/test_indicators.sh"
+   ],
+   "files": []
+  },
+  {
+   "id": "threat-level",
+   "title": "مستوى التهديد",
+   "order": 6,
+   "block": "/home/ubuntu/seawatch/generator/blocks.py",
+   "validator": "validators/check_intel.py",
+   "prompt_snippet": "runbook/prompts/sections/threat-level.md",
+   "tests": [
+    "tests/sections/test_threat-level.sh"
+   ],
+   "files": []
+  },
+  {
+   "id": "directives",
+   "title": "التوجيهات التشغيلية",
+   "order": 7,
+   "block": "/home/ubuntu/seawatch/generator/blocks.py",
+   "validator": "validators/check_points_rule.py",
+   "prompt_snippet": "runbook/prompts/sections/directives.md",
+   "tests": [
+    "tests/sections/test_directives.sh"
+   ],
+   "files": []
+  },
+  {
+   "id": "new-incidents",
+   "title": "الوقائع الجديدة",
+   "order": 8,
+   "block": "/home/ubuntu/seawatch/generator/blocks.py",
+   "validator": "validators/check_language.py",
+   "prompt_snippet": "runbook/prompts/sections/new-incidents.md",
+   "tests": [
+    "tests/sections/test_new-incidents.sh"
+   ],
+   "files": []
+  },
+  {
+   "id": "warnings",
+   "title": "التحذيرات والنشرات الرسمية",
+   "order": 9,
+   "block": "/home/ubuntu/seawatch/generator/blocks.py",
+   "validator": "validators/check_code_spaces.py",
+   "prompt_snippet": "runbook/prompts/sections/warnings.md",
+   "tests": [
+    "tests/sections/test_warnings.sh"
+   ],
+   "files": []
+  },
+  {
+   "id": "imo-log",
+   "title": "سجل IMO والحوادث المؤكدة",
+   "order": 10,
+   "block": "/home/ubuntu/seawatch/generator/blocks.py",
+   "validator": "validators/check_carryover.py",
+   "prompt_snippet": "runbook/prompts/sections/imo-log.md",
+   "tests": [
+    "tests/sections/test_imo-log.sh"
+   ],
+   "files": []
+  },
+  {
+   "id": "intel-analysis",
+   "title": "التحليل الاستخباري",
+   "order": 11,
+   "block": "/home/ubuntu/seawatch/generator/blocks.py",
+   "validator": "validators/check_intel.py",
+   "prompt_snippet": "runbook/prompts/sections/intel-analysis.md",
+   "tests": [
+    "tests/sections/test_intel-analysis.sh"
+   ],
+   "files": []
+  },
+  {
+   "id": "attribution",
+   "title": "الاحتمالات ونسبة الحوادث إلى جهات",
+   "order": 12,
+   "block": "/home/ubuntu/seawatch/generator/blocks.py",
+   "validator": "validators/check_comprehension.py",
+   "prompt_snippet": "runbook/prompts/sections/attribution.md",
+   "tests": [
+    "tests/sections/test_attribution.sh"
+   ],
+   "files": []
+  },
+  {
+   "id": "traffic",
+   "title": "اتجاهات الحركة والرسو والتكدس الملاحي",
+   "order": 13,
+   "block": "/home/ubuntu/seawatch/generator/blocks.py",
+   "validator": "validators/check_style.py",
+   "prompt_snippet": "runbook/prompts/sections/traffic.md",
+   "tests": [
+    "tests/sections/test_traffic.sh"
+   ],
+   "files": []
+  },
+  {
+   "id": "open-questions",
+   "title": "ما لم يُحسم",
+   "order": 14,
+   "block": "/home/ubuntu/seawatch/generator/blocks.py",
+   "validator": "validators/check_comprehension.py",
+   "prompt_snippet": "runbook/prompts/sections/open-questions.md",
+   "tests": [
+    "tests/sections/test_open-questions.sh"
+   ],
+   "files": []
+  },
+  {
+   "id": "monitoring",
+   "title": "المراقبة المستمرة",
+   "order": 15,
+   "block": "/home/ubuntu/seawatch/generator/blocks.py",
+   "validator": "validators/check_style.py",
+   "prompt_snippet": "runbook/prompts/sections/monitoring.md",
+   "tests": [
+    "tests/sections/test_monitoring.sh"
+   ],
+   "files": []
+  },
+  {
+   "id": "background",
+   "title": "الخلفية القائمة",
+   "order": 16,
+   "block": "/home/ubuntu/seawatch/generator/blocks.py",
+   "validator": "validators/check_carryover.py",
+   "prompt_snippet": "runbook/prompts/sections/background.md",
+   "tests": [
+    "tests/sections/test_background.sh"
+   ],
+   "files": []
+  },
+  {
+   "id": "sources",
+   "title": "المصادر والمراجع",
+   "order": 17,
+   "block": "/home/ubuntu/seawatch/generator/blocks.py",
+   "validator": "validators/check_sources_count.py",
+   "prompt_snippet": "runbook/prompts/sections/sources.md",
+   "tests": [
+    "tests/sections/test_sources.sh"
+   ],
+   "files": []
+  }
+ ],
+ "exempt": [
+  "reports/*",
+  "web/*",
+  "feeds/*",
+  "archive/*",
+  "cumulative-2026/*",
+  "memory/*",
+  "notes/*",
+  "audit/*",
+  "docs/*",
+  "watchlist/*",
+  "logs/*",
+  "templates/*",
+  "appendices/*",
+  "skills/*",
+  "tools/_oneoff/*",
+  "runbook/*",
+  "design/*",
+  "*.txt",
+  "*.pdf",
+  "*.docx",
+  "*.png",
+  "*.jpg",
+  "SETUP.md",
+  "PROJECT-DELTA.md",
+  "مخرجات-الجولة-23-10-2026.md",
+  "شيفرة-الجولة-23-10-2026.md",
+  "فرق-تصحيح-تقرير-23.md",
+  "معايرة-البوابات-11-تقريرًا.md",
+  "رد-مانوس-2026-10-23.md",
+  "تحليل-لغة-مرشحات-المفردات.md",
+  "تحليل-ترجمة-حرفية.md",
+  "مقتطف-قسم-الترجمة-بالمعنى.md",
+  "حزمة-الشيفرة-الجولة-2-23-10-2026.md",
+  "رد-مانوس-الجولة-2-23-10-2026.md",
+  "مخرجات-الجولة-23-10-2026-الثالثة.md",
+  "تقرير-محور-اللغة-23-10-2026.md",
+  "brain/mission.md",
+  "brain/operating-rules.md",
+  "brain/validation-rules.md",
+  "brain/terminology.md",
+  "brain/adaptive-learning.md",
+  "brain/historical-baseline.md",
+  "brain/approved-sources-37.md",
+  "brain/daily-report-sections.md",
+  "brain/web-delivery.md",
+  "brain/report-blocks.md",
+  "schemas/daily-report-v2.json",
+  "validators/sources-37-result.json",
+  "validators/sources-37-browser.json",
+  "validators/sources-retry.json",
+  "historical/event-ledger-2026-02-28-to-2026-10-11.json",
+  "historical/cumulative-baseline-2026-02-28-to-2026-10-11.md",
+  "historical/monthly/2026-02-28-02-29.md",
+  "historical/monthly/2026-09-10-01-11.md",
+  "historical/monthly/2026-03.md",
+  "historical/monthly/2026-05.md",
+  "historical/monthly/2026-08.md",
+  "historical/monthly/2026-04.md",
+  "historical/monthly/2026-06.md",
+  "historical/monthly/2026-07.md",
+  "sections/00-identity.md",
+  "sections/10-sources.md",
+  "sections/30-structure.md",
+  "sections/40-blocks.md",
+  "sections/50-analysis.md",
+  "sections/60-validation.md",
+  "sections/70-delivery.md",
+  "sections/80-learning.md",
+  "sections/55-intelligence.md",
+  "schedule/التفاصيل-الكاملة-قبل-المرحلة-الثالثة.md",
+  "backups/macr-system-old-2026-10-15/SKILL.md",
+  "backups/macr-system-old-2026-10-15/references/api_reference.md",
+  "research/styles/E-arabic-admin-military.md",
+  "research/styles/D-military-writing.md",
+  "research/styles/C-writing-modes.md",
+  "research/styles/B-arabic-syntax.md",
+  "research/styles/A-arabic-rhetoric.md",
+  "research/styles/sources/meta.json",
+  "state/telegram-offset.json",
+  "backup-repo/README.md",
+  "backup-repo/docs/نقل-إلى-جيت-هب.md",
+  "backup-repo/.devcontainer/devcontainer.json",
+  "رد-مانوس*",
+  "مخرجات-*",
+  "شيفرة-*",
+  "فرق-*",
+  "معايرة-*",
+  "تحليل-*",
+  "مقتطف-*",
+  "حزمة-*",
+  "bootstrap.sh",
+  ".devcontainer/*",
+  "runbook-result.md"
+ ],
+ "exempt_reasons": {
+  "reports/*": "مخرجات: نصوص التقارير المولَّدة (يكتبها محرّك/الوكيل في خطوة W010)",
+  "web/*": "مخرجات: ملفات واجهة التقارير",
+  "feeds/*": "بيانات: خلاصات المصادر الخام",
+  "archive/*": "بيانات: أصول رسمية محفوظة",
+  "cumulative-2026/*": "بيانات: الدفتر التراكمي",
+  "memory/*": "بيانات: سجلات التعلم والذاكرة",
+  "notes/*": "سجلات عمل مؤقتة",
+  "audit/*": "سجلات: الأعطال والتدقيق",
+  "docs/*": "وثائق مولَّدة (منها الكتيب)",
+  "watchlist/*": "بيانات: قوائم المراقبة",
+  "logs/*": "مخرجات تشغيل",
+  "templates/*": "قوالب: مرتبطة بالخطوات التي تستعملها",
+  "appendices/*": "ملاحق مرجعية: مربوطة بالخطوات عبر links.files",
+  "skills/*": "نسخة المهارات داخل المستودع",
+  "tools/_oneoff/*": "أدوات تاريخية لمرة واحدة (مُبقاة للسجل)",
+  "runbook/runbook.json": "المصدر الوحيد للحقيقة (يستثني نفسه من التغطية)",
+  "tools/runbook.py": "المحرّك نفسه",
+  "docs/runbook.md": "الكتيب المولَّد من المانيفست",
+  "*.txt": "ملفات نصية مساعدة",
+  "*.pdf": "مخرجات",
+  "*.docx": "مخرجات",
+  "*.png": "صور",
+  "*.jpg": "صور",
+  "INDEX.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "bootstrap.sh": "تهيئة بيئة",
+  "SETUP.md": "دليل تهيئة",
+  "PROJECT-DELTA.md": "بيان تغييرات مولَّد",
+  "مخرجات-الجولة-23-10-2026.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "شيفرة-الجولة-23-10-2026.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "فرق-تصحيح-تقرير-23.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "معايرة-البوابات-11-تقريرًا.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "رد-مانوس-2026-10-23.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "تحليل-لغة-مرشحات-المفردات.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "تحليل-ترجمة-حرفية.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "مقتطف-قسم-الترجمة-بالمعنى.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "حزمة-الشيفرة-الجولة-2-23-10-2026.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "رد-مانوس-الجولة-2-23-10-2026.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "CLAUDE.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "مخرجات-الجولة-23-10-2026-الثالثة.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "تقرير-محور-اللغة-23-10-2026.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "brain/mission.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "brain/operating-rules.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "brain/validation-rules.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "brain/terminology.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "brain/adaptive-learning.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "brain/historical-baseline.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "brain/approved-sources-37.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "brain/daily-report-sections.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "brain/web-delivery.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "brain/report-blocks.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "schemas/daily-report-v2.json": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "validators/sources-37-result.json": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "validators/sources-37-browser.json": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "validators/sources-retry.json": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "validators/check_orthography.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "historical/event-ledger-2026-02-28-to-2026-10-11.json": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "historical/cumulative-baseline-2026-02-28-to-2026-10-11.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "historical/monthly/2026-02-28-02-29.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "historical/monthly/2026-09-10-01-11.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "historical/monthly/2026-03.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "historical/monthly/2026-05.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "historical/monthly/2026-08.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "historical/monthly/2026-04.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "historical/monthly/2026-06.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "historical/monthly/2026-07.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/reorder_sections.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/visual_audit.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/build_source_reliability.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/add_source.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/daily_pipeline.sh": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/ensure_devserver.sh": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/full_chain_audit.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/next_version.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/intel_self_review.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/github_backup.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/sync_backup.sh": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/measure_filter_savings.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/check_api_keys.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/install_macr_skill.sh": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/build_macr_docx.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/llm.mjs": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/llm.sh": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/check_builtin_llm.sh": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/claude_check.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/read_user_docx.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/normalize_terms.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/fetch_primary.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/build_provenance.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/shorten_sentences.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/ach_v3_model.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/_publish_v3.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/map_docx_changes.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/apply_audit_gfs_docx.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/build_styles_docx.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/style_learn.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/publish_changes.sh": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/verify_codespace.sh": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/self_test.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/audit_corpus.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/build_audit_report.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/fix_legacy_reports.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/build_ambiguity_map.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/apply_jmic_ukmto_to_gfs.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/rebuild_report.sh": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/pdf_change_guard.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/page_budget.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/audit_pdf_layout.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/build_instructions_doc.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/audit_pagination.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/build_report_docx.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/build_report_docx_exact.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/diagnose_print_layout.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/sync_profile_hash.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/telegram_bot.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/live_visual_audit.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/vessel_names.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/pro_audit.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/diagnose_sources.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/check_baseline.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/make_baseline.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/known_faults.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/audit_broad_excepts.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/style_metrics.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/preserve_check.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/meaning_compare.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/extract_ui_strings.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "tools/alert_monitor.sh": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "sections/00-identity.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "sections/10-sources.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "sections/30-structure.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "sections/40-blocks.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "sections/50-analysis.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "sections/60-validation.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "sections/70-delivery.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "sections/80-learning.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "sections/55-intelligence.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "schedule/التفاصيل-الكاملة-قبل-المرحلة-الثالثة.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "backups/macr-system-old-2026-10-15/SKILL.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "backups/macr-system-old-2026-10-15/references/api_reference.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "backups/macr-system-old-2026-10-15/scripts/example.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "research/styles/E-arabic-admin-military.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "research/styles/D-military-writing.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "research/styles/C-writing-modes.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "research/styles/B-arabic-syntax.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "research/styles/A-arabic-rhetoric.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "research/styles/sources/meta.json": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "state/telegram-offset.json": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "backup-repo/README.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "backup-repo/docs/نقل-إلى-جيت-هب.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "backup-repo/.devcontainer/devcontainer.json": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
+  "رد-مانوس*": "مخرجات جولة (تقارير ردّ)",
+  "مخرجات-*": "مخرجات جولة",
+  "شيفرة-*": "مخرجات جولة",
+  "فرق-*": "مخرجات جولة",
+  "معايرة-*": "مخرجات جولة",
+  "تحليل-*": "مخرجات تحليل",
+  "مقتطف-*": "مقتطف مرجعي",
+  "حزمة-*": "حزم تسليم",
+  ".devcontainer/*": "تهيئة بيئة",
+  "runbook-result.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)"
+ },
+ "steps": [
+  {
+   "id": "S000",
+   "title": "فحص المانيفست (verify) قبل أي خطوة",
+   "kind": "script",
+   "phase": "verify",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s docs/runbook.md"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "الأمر التنفيذي: كتيب الإجراءات"
+    ],
+    "files": [
+     "tools/runbook.py",
+     "runbook/runbook.json",
+     "docs/runbook.md",
+     "INDEX.md",
+     "CLAUDE.md",
+     "bootstrap.sh",
+     "validators/check_orthography.py",
+     "tools/reorder_sections.py",
+     "tools/visual_audit.py",
+     "tools/add_source.py",
+     "tools/ensure_devserver.sh",
+     "tools/full_chain_audit.py",
+     "tools/next_version.py",
+     "tools/measure_filter_savings.py",
+     "tools/check_api_keys.py",
+     "tools/install_macr_skill.sh",
+     "tools/llm.mjs",
+     "tools/llm.sh",
+     "tools/check_builtin_llm.sh",
+     "tools/claude_check.py",
+     "tools/read_user_docx.py",
+     "tools/fetch_primary.py",
+     "tools/shorten_sentences.py",
+     "tools/ach_v3_model.py",
+     "tools/_publish_v3.py",
+     "tools/map_docx_changes.py",
+     "tools/verify_codespace.sh",
+     "tools/fix_legacy_reports.py",
+     "tools/rebuild_report.sh",
+     "tools/page_budget.py",
+     "tools/diagnose_print_layout.py",
+     "tools/vessel_names.py",
+     "tools/diagnose_sources.py",
+     "tools/check_baseline.py",
+     "tools/make_baseline.py",
+     "tools/known_faults.py",
+     "tools/preserve_check.py",
+     "tools/meaning_compare.py",
+     "tools/extract_ui_strings.py",
+     "tools/alert_monitor.sh",
+     "backups/macr-system-old-2026-10-15/scripts/example.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": [
+     "tests/test_runbook_engine.sh",
+     "tests/test_ofac.sh",
+     "tests/test_language.sh",
+     "tests/test_feed_counters.py",
+     "tests/test_orphan_rule.py",
+     "tests/test_backup_skills.py",
+     "tests/test_language_tools.py",
+     "tests/test_section_registry.sh",
+     "tests/demo_prod_copy.sh",
+     "tests/test_sections_single_source.py"
+    ]
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 tools/runbook.py verify; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  },
+  {
+   "id": "S010",
+   "title": "استعادة المهارات وفحص التماثل",
+   "kind": "script",
+   "phase": "ingest",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/S010.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "أ1 — سلسلة التشغيل اليومي"
+    ],
+    "files": [
+     "tools/restore_skills.sh",
+     "sections/90-automation.md"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; bash tools/restore_skills.sh; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  },
+  {
+   "id": "S020",
+   "title": "فحص التغذيات (40 مصدرًا)",
+   "kind": "script",
+   "phase": "ingest",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/S020.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "أ1 — سلسلة التشغيل اليومي"
+    ],
+    "files": [
+     "tools/check_feeds.py",
+     "sections/90-automation.md"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 tools/check_feeds.py --date {date}; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ]
+  },
+  {
+   "id": "S030",
+   "title": "ترقيم التغذيات (أرقام لاتينية)",
+   "kind": "script",
+   "phase": "ingest",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/S030.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "أ1 — سلسلة التشغيل اليومي"
+    ],
+    "files": [
+     "tools/normalize_digits.py",
+     "sections/90-automation.md",
+     "tools/normalize_terms.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 tools/normalize_digits.py; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  },
+  {
+   "id": "S040",
+   "title": "توليد أهداف العقوبات من التقرير",
+   "kind": "script",
+   "phase": "ingest",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/S040.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "أ1 — سلسلة التشغيل اليومي"
+    ],
+    "files": [
+     "tools/ofac_targets_from_report.py",
+     "sections/90-automation.md"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 tools/ofac_targets_from_report.py --date {date}; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  },
+  {
+   "id": "S050",
+   "title": "فحص العقوبات (OFAC)",
+   "kind": "script",
+   "phase": "ingest",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/S050.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "أ1 — سلسلة التشغيل اليومي"
+    ],
+    "files": [
+     "tools/ofac_screen.py",
+     "sections/90-automation.md"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 tools/ofac_screen.py watchlist/ofac-targets.txt; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ]
+  },
+  {
+   "id": "S060",
+   "title": "حفظ الأصول الرسمية",
+   "kind": "script",
+   "phase": "ingest",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/S060.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "أ1 — سلسلة التشغيل اليومي"
+    ],
+    "files": [
+     "tools/archive_originals.py",
+     "sections/90-automation.md"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 tools/archive_originals.py {date} watchlist/originals-urls.txt; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ]
+  },
+  {
+   "id": "S070",
+   "title": "دمج الذاكرة التراكمية (دفتر اليوم)",
+   "kind": "script",
+   "phase": "ingest",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/S070.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "أ1 — سلسلة التشغيل اليومي"
+    ],
+    "files": [
+     "tools/merge_ledger_daily.py",
+     "sections/90-automation.md",
+     "tools/daily_pipeline.sh"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 tools/merge_ledger_daily.py; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  },
+  {
+   "id": "S080",
+   "title": "فرز التغذيات بالنموذج (اختياري)",
+   "kind": "script",
+   "phase": "ingest",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "true"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "أ1 — سلسلة التشغيل اليومي"
+    ],
+    "files": [
+     "tools/llm_triage.py",
+     "sections/90-automation.md"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "continue",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 tools/llm_triage.py --input feeds/feeds-{date}.md; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [],
+   "optional": true
+  },
+  {
+   "id": "S090",
+   "title": "مراجعة التقرير بالنموذج (اختياري)",
+   "kind": "script",
+   "phase": "ingest",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "true"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "أ1 — سلسلة التشغيل اليومي"
+    ],
+    "files": [
+     "tools/llm_review.py",
+     "sections/90-automation.md"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "continue",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 tools/llm_review.py --report reports/{date}-sectioned.md --limit 25; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [],
+   "optional": true
+  },
+  {
+   "id": "W010",
+   "title": "كتابة التقرير اليومي",
+   "kind": "agent",
+   "phase": "write",
+   "assert": [
+    {
+     "type": "min_bytes",
+     "path": "reports/{date}-sectioned.md",
+     "n": 6000
+    },
+    {
+     "type": "contains",
+     "path": "reports/{date}-sectioned.md",
+     "text": "## "
+    }
+   ],
+   "links": {
+    "rules": [
+     "أ2 — قواعد الكتابة",
+     "ل1 — أسلوب اللغة"
+    ],
+    "files": [
+     "sections/20-writing-brief.md",
+     "sections/20-lexicon.md"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": [
+     "tests/test_runbook_engine.sh"
+    ]
+   },
+   "on_fail": "stop",
+   "prompt": "runbook/prompts/write-report.md",
+   "reads": [
+    "sections/20-writing-brief.md",
+    "sections/20-lexicon.md",
+    "sections/20-examples.md",
+    "sections/20-language.md",
+    "sections/75-style.md",
+    "appendices/editor-prompt.md",
+    "cumulative-2026/daily/{date}.json",
+    "feeds/feeds-{date}.md"
+   ],
+   "writes": [
+    "reports/{date}-sectioned.md"
+   ]
+  },
+  {
+   "id": "W020",
+   "title": "بناء ملف واجهة التقرير",
+   "kind": "agent",
+   "phase": "write",
+   "assert": [
+    {
+     "type": "min_bytes",
+     "path": "web/meta/{date}.json",
+     "n": 1500
+    }
+   ],
+   "links": {
+    "rules": [
+     "ب2 — ترتيب الأقسام"
+    ],
+    "files": [
+     "templates/mark-schema.json"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "prompt": "runbook/prompts/write-meta.md",
+   "reads": [
+    "reports/{date}-sectioned.md",
+    "templates/mark-schema.json"
+   ],
+   "writes": [
+    "web/meta/{date}.json"
+   ]
+  },
+  {
+   "id": "G001",
+   "title": "اختبارات البوابات (tests)",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G001.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "tests/run_checks.sh"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; bash \"$B/tests/run_checks.sh\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [],
+   "gate_title": "اختبارات البوابات (tests)"
+  },
+  {
+   "id": "G002",
+   "title": "تنظيف المحتوى الداخلي",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G002.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "tools/scrub_internal.py",
+     "tools/apply_audit_gfs_docx.py",
+     "tools/apply_jmic_ukmto_to_gfs.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/tools/scrub_internal.py\" --date \"$D\" --apply; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "تنظيف المحتوى الداخلي"
+  },
+  {
+   "id": "G003",
+   "title": "دمج بنك التعريفات",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G003.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "tools/merge_glossary.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/tools/merge_glossary.py\" --date \"$D\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "دمج بنك التعريفات"
+  },
+  {
+   "id": "G004",
+   "title": "أرقام المصادر (معتمدة/مفحوصة/ناجحة)",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G004.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "tools/source_counts.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/tools/source_counts.py\" --date \"$D\" --write; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "أرقام المصادر (معتمدة/مفحوصة/ناجحة)"
+  },
+  {
+   "id": "G005",
+   "title": "تطابق أرقام المصادر في كل المواضع",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G005.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/tools/source_counts.py\" --date \"$D\" --check; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "تطابق أرقام المصادر في كل المواضع"
+  },
+  {
+   "id": "G006",
+   "title": "إصلاح الصياغة الآلي (خطوة واحدة)",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G006.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "tools/repair_prose.py",
+     "tools/pro_audit.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/tools/repair_prose.py\" --date \"$D\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "إصلاح الصياغة الآلي (خطوة واحدة)"
+  },
+  {
+   "id": "G007",
+   "title": "تحرير لغوي آلي (قبل/بعد لكل قسم)",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G007.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "tools/edit_pass.py",
+     "tools/audit_corpus.py",
+     "tools/audit_pdf_layout.py",
+     "tools/audit_pagination.py",
+     "tools/audit_broad_excepts.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/tools/edit_pass.py\" --report \"$B/reports/$D-sectioned.md\" --out-dir \"$B/audit\" $( [ \"${EDIT_PASS_APPLY:-1}\" = \"1\" ] && echo --apply ); rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "تحرير لغوي آلي (قبل/بعد لكل قسم)"
+  },
+  {
+   "id": "G008",
+   "title": "بوابات اللغة المتدرجة (إملاء ونحو وأسلوب)",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G008.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "tools/language_gates.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/tools/language_gates.py\" --date \"$D\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "بوابات اللغة المتدرجة (إملاء ونحو وأسلوب)"
+  },
+  {
+   "id": "G009",
+   "title": "أصل نص كل واقعة (للفحص العكسي)",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G009.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "tools/ledger_source_excerpt.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/tools/ledger_source_excerpt.py\" --date \"$D\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [],
+   "gate_title": "أصل نص كل واقعة (للفحص العكسي)"
+  },
+  {
+   "id": "G010",
+   "title": "بصمة النص قبل البناء",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G010.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "validators/_guard.py",
+     "tools/text_hash_guard.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/tools/text_hash_guard.py\" --date \"$D\" --stage record; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "بصمة النص قبل البناء"
+  },
+  {
+   "id": "G011",
+   "title": "فحص ما قبل التشغيل",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G011.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "tools/preflight_check.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/tools/preflight_check.py\" \"$D\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "فحص ما قبل التشغيل"
+  },
+  {
+   "id": "G012",
+   "title": "مدقق التقرير (الواجهة)",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G012.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/validators/validate_report.py\" \"$B/web/meta/$D.json\" --md \"$B/reports/$D-sectioned.md\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "مدقق التقرير (الواجهة)"
+  },
+  {
+   "id": "G013",
+   "title": "بوابة الأسلوب",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G013.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "tools/style_learn.py",
+     "tools/style_metrics.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/validators/check_style.py\" \"$B/reports/$D-sectioned.md\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "بوابة الأسلوب"
+  },
+  {
+   "id": "G014",
+   "title": "بوابة اللغة",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G014.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/validators/check_language.py\" \"$B/reports/$D-sectioned.md\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "بوابة اللغة"
+  },
+  {
+   "id": "G015",
+   "title": "بوابة إغلاق المكتبات",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G015.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "validators/check_findings_closed.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 validators/check_findings_closed.py --date \"$D\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [],
+   "gate_title": "بوابة إغلاق المكتبات"
+  },
+  {
+   "id": "G016",
+   "title": "ترابط المكتبات والمهارات",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G016.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 validators/check_libraries_skills.py; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "ترابط المكتبات والمهارات"
+  },
+  {
+   "id": "G017",
+   "title": "تماثل المهارات والمكتبات (مزامنة فورية)",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G017.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; bash tools/restore_skills.sh --check; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [],
+   "gate_title": "تماثل المهارات والمكتبات (مزامنة فورية)"
+  },
+  {
+   "id": "G018",
+   "title": "سلامة المهارات",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G018.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "validators/check_skills_integrity.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 validators/check_skills_integrity.py; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [],
+   "gate_title": "سلامة المهارات"
+  },
+  {
+   "id": "G019",
+   "title": "بوابة الفهم (مرحلة $COMP_STAGE)",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G019.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/validators/check_comprehension.py\" --date \"$D\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "بوابة الفهم (مرحلة $COMP_STAGE)"
+  },
+  {
+   "id": "G020",
+   "title": "بوابة التحليل الاستخباري",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G020.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "tools/intel_self_review.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/validators/check_intel.py\" \"$B/reports/$D-sectioned.md\" \"$B/web/meta/$D.json\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "بوابة التحليل الاستخباري"
+  },
+  {
+   "id": "G021",
+   "title": "استخراج أهداف OFAC",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G021.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/tools/ofac_targets_from_report.py\" --date \"$D\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "استخراج أهداف OFAC"
+  },
+  {
+   "id": "G022",
+   "title": "فحص OFAC",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G022.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/tools/ofac_screen.py\" \"$B/watchlist/ofac-targets.txt\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "فحص OFAC"
+  },
+  {
+   "id": "G023",
+   "title": "تغطية فحص العقوبات",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G023.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "validators/check_ofac_coverage.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/validators/check_ofac_coverage.py\" --date \"$D\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "تغطية فحص العقوبات"
+  },
+  {
+   "id": "G024",
+   "title": "استعمال المكتبات (المعجم والبنك والفجوات)",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G024.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/validators/check_library_use.py\" --date \"$D\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "استعمال المكتبات (المعجم والبنك والفجوات)"
+  },
+  {
+   "id": "G025",
+   "title": "عدد المصادر (مصدر واحد)",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G025.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/validators/check_sources_count.py\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "عدد المصادر (مصدر واحد)"
+  },
+  {
+   "id": "G026",
+   "title": "قابلية النقل (مسارات)",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G026.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "validators/check_portable_paths.py",
+     "tools/portable_paths.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/validators/check_portable_paths.py\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "قابلية النقل (مسارات)"
+  },
+  {
+   "id": "G027",
+   "title": "الأرقام (0-9 لاتينية)",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G027.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "validators/check_numerals.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/validators/check_numerals.py\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "الأرقام (0-9 لاتينية)"
+  },
+  {
+   "id": "G028",
+   "title": "حصاد الألفاظ الجديدة",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G028.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "tools/harvest_terms.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/tools/harvest_terms.py\" --date \"$D\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "حصاد الألفاظ الجديدة"
+  },
+  {
+   "id": "G029",
+   "title": "سياسة الرموز في المخرجات",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G029.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "validators/check_code_policy.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/validators/check_code_policy.py\" \"$SITE/dist\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "سياسة الرموز في المخرجات"
+  },
+  {
+   "id": "G030",
+   "title": "فصل فضاءات الرموز MN-/EST-",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G030.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/validators/check_code_spaces.py\" --date \"$D\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "فصل فضاءات الرموز MN-/EST-"
+  },
+  {
+   "id": "G031",
+   "title": "قاعدة النقاط في المصدر",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G031.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/validators/check_points_rule.py\" --md \"$B/reports/$D-sectioned.md\" --meta \"$B/web/meta/$D.json\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "قاعدة النقاط في المصدر"
+  },
+  {
+   "id": "G032",
+   "title": "فاحص النقل بين الإصدارات",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G032.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/validators/check_carryover.py\" --date \"$D\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "فاحص النقل بين الإصدارات"
+  },
+  {
+   "id": "G033",
+   "title": "اكتمال التشغيل (الأعطال المعروفة)",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G033.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "validators/check_run_completeness.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/validators/check_run_completeness.py\" --date \"$D\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "اكتمال التشغيل (الأعطال المعروفة)"
+  },
+  {
+   "id": "G034",
+   "title": "عيوب الكتابة (الصياغة والترقيم)",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G034.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "validators/check_prose_defects.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/validators/check_prose_defects.py\" --md \"$B/reports/$D-sectioned.md\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "عيوب الكتابة (الصياغة والترقيم)"
+  },
+  {
+   "id": "G035",
+   "title": "تسرّب المحتوى الداخلي إلى المتن",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G035.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "validators/check_internal_leak.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/validators/check_internal_leak.py\" --md \"$B/reports/$D-sectioned.md\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "تسرّب المحتوى الداخلي إلى المتن"
+  },
+  {
+   "id": "G036",
+   "title": "المفردات المبسطة (تنبيهي حتى الموافقة)",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G036.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "validators/check_vocabulary.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/validators/check_vocabulary.py\" --md \"$B/reports/$D-sectioned.md\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "المفردات المبسطة (تنبيهي حتى الموافقة)"
+  },
+  {
+   "id": "G037",
+   "title": "بوابات المخرج العشر",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G037.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "tools/qa_gates.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/tools/qa_gates.py\" --date \"$D\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "بوابات المخرج العشر"
+  },
+  {
+   "id": "G038",
+   "title": "كتابة العلامة بعد البوابة",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G038.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "tools/write_mark.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/tools/write_mark.py\" --date \"$D\" --stage final; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "كتابة العلامة بعد البوابة"
+  },
+  {
+   "id": "G039",
+   "title": "مخطط العلامة الثابت",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G039.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "validators/check_mark_schema.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/validators/check_mark_schema.py\" --date \"$D\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "مخطط العلامة الثابت"
+  },
+  {
+   "id": "G040",
+   "title": "اختبارات المراجعة الثانية (أ · ب · ج · د · هـ · ز)",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G040.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "tests/test_review2.sh"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; bash \"$B/tests/test_review2.sh\" \"$D\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [],
+   "gate_title": "اختبارات المراجعة الثانية (أ · ب · ج · د · هـ · ز)"
+  },
+  {
+   "id": "G041",
+   "title": "اختبار انحدار المصلح (12→23)",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G041.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "tests/test_repair_regression.sh"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; bash \"$B/tests/test_repair_regression.sh\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [],
+   "gate_title": "اختبار انحدار المصلح (12→23)"
+  },
+  {
+   "id": "G042",
+   "title": "تطابق النص المبني مع النص النهائي",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G042.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/final_gate.sh"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 \"$B/tools/text_hash_guard.py\" --date \"$D\" --stage verify; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "تطابق النص المبني مع النص النهائي"
+  },
+  {
+   "id": "B010",
+   "title": "بناء الموقع من البيانات",
+   "kind": "script",
+   "phase": "build",
+   "assert": [
+    {
+     "type": "file_exists",
+     "path": "/home/ubuntu/seawatch/dist/reports/{date}.html"
+    }
+   ],
+   "links": {
+    "rules": [
+     "س1 — النشر"
+    ],
+    "files": [
+     "/home/ubuntu/seawatch/generator/build_site.py",
+     "/home/ubuntu/seawatch/generator/sync_from_brain.py",
+     "tools/build_source_reliability.py",
+     "tools/sync_backup.sh",
+     "tools/build_macr_docx.py",
+     "tools/build_provenance.py",
+     "tools/build_styles_docx.py",
+     "tools/build_audit_report.py",
+     "tools/build_ambiguity_map.py",
+     "tools/build_instructions_doc.py",
+     "tools/build_report_docx.py",
+     "tools/build_report_docx_exact.py",
+     "tools/sync_profile_hash.py"
+    ],
+    "folders": [
+     "/home/ubuntu/seawatch/generator"
+    ],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; cd \"$SITE\" && python3 generator/sync_from_brain.py --date {date} && python3 generator/build_site.py; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  },
+  {
+   "id": "B020",
+   "title": "تصدير PDF المعتمد",
+   "kind": "script",
+   "phase": "build",
+   "assert": [
+    {
+     "type": "min_bytes",
+     "path": "/home/ubuntu/seawatch/dist/reports/pdf/{date}.pdf",
+     "n": 100000
+    }
+   ],
+   "links": {
+    "rules": [
+     "س1 — النشر"
+    ],
+    "files": [
+     "tools/export_report_assets.py",
+     "tools/pdf_change_guard.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 tools/export_report_assets.py --date {date} --only pdf; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  },
+  {
+   "id": "B030",
+   "title": "بوابتا جودة الطباعة على PDF نفسه",
+   "kind": "script",
+   "phase": "build",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/B030.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف5 — شكل PDF وجودة الطباعة"
+    ],
+    "files": [
+     "validators/check_pdf_format.py",
+     "validators/check_print_quality.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 validators/check_pdf_format.py --pdf /home/ubuntu/seawatch/dist/reports/pdf/{date}.pdf && python3 validators/check_print_quality.py --pdf /home/ubuntu/seawatch/dist/reports/pdf/{date}.pdf --date {date}; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  },
+  {
+   "id": "B040",
+   "title": "نسخة Word طبق الأصل (اختيارية)",
+   "kind": "script",
+   "phase": "build",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "true"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "س1 — النشر"
+    ],
+    "files": [
+     "tools/export_report_assets.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "continue",
+   "optional": true,
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 tools/export_report_assets.py --date {date} --only word; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  },
+  {
+   "id": "D010",
+   "title": "نشر الموقع (بعد كل البوابات)",
+   "kind": "script",
+   "phase": "deliver",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/publish-{date}.json"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "س2 — الإغلاق والدفع"
+    ],
+    "files": [
+     "tools/publish_site.sh",
+     "tools/publish_changes.sh"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": [
+     "tests/test_no_publish_without_runbook.sh"
+    ]
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; bash tools/publish_site.sh {date}; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  },
+  {
+   "id": "D020",
+   "title": "التحقق الحي من النشر (قراءة فقط)",
+   "kind": "script",
+   "phase": "deliver",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/live-{date}.json"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "س2 — الإغلاق والدفع"
+    ],
+    "files": [
+     "tools/check_live.sh",
+     "tools/live_visual_audit.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; bash tools/check_live.sh {date}; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  },
+  {
+   "id": "D030",
+   "title": "إرسال الملخص وPDF على تلغرام",
+   "kind": "script",
+   "phase": "deliver",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "true"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "س4 — قناة التسليم"
+    ],
+    "files": [
+     "tools/telegram_send.py",
+     "tools/telegram_bot.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": [
+     "tests/test_no_publish_without_runbook.sh"
+    ]
+   },
+   "on_fail": "continue",
+   "optional": true,
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; bash tools/publish_site.sh --telegram {date}; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  },
+  {
+   "id": "D040",
+   "title": "النسخة الاحتياطية والتحقق من التماثل",
+   "kind": "script",
+   "phase": "deliver",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/D040.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "س2 — الإغلاق والدفع"
+    ],
+    "files": [
+     "tools/github_backup.sh",
+     "validators/check_backup_parity.py",
+     "tools/github_backup.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; bash tools/github_backup.sh && python3 validators/check_backup_parity.py --mode strict; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  },
+  {
+   "id": "D050",
+   "title": "التعلم الذاتي وتسجيل الدروس",
+   "kind": "script",
+   "phase": "deliver",
+   "assert": [
+    {
+     "type": "file_exists",
+     "path": "memory/learning-log.jsonl"
+    }
+   ],
+   "links": {
+    "rules": [
+     "س2 — الإغلاق والدفع"
+    ],
+    "files": [
+     "tools/self_improve.py",
+     "tools/skill_lessons.py",
+     "tools/self_test.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": [
+     "tests/test_skill_lessons.py"
+    ]
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 tools/self_improve.py --date {date} --window 7; python3 tools/skill_lessons.py --date {date}; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  },
+  {
+   "id": "D060",
+   "title": "تسجيل رموز التقدير والأحداث",
+   "kind": "script",
+   "phase": "deliver",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "true"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ب2 — ترتيب الأقسام"
+    ],
+    "files": [
+     "tools/register_estimate.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 tools/register_estimate.py --date {date} --check; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  },
+  {
+   "id": "Q010",
+   "title": "تدقيق المكتبات والمهارات (أسبوعي)",
+   "kind": "script",
+   "phase": "maintenance",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/Q010.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف3 — بوابات المكتبات"
+    ],
+    "files": [
+     "validators/check_library_use.py",
+     "validators/check_libraries_skills.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "schedule": "weekly",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 validators/check_library_use.py --date {date}; python3 validators/check_libraries_skills.py; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  },
+  {
+   "id": "Q020",
+   "title": "قياس دقة التقدير (ربع سنوي)",
+   "kind": "script",
+   "phase": "maintenance",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "true"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف4 — التحليل الاستخباري"
+    ],
+    "files": [
+     "tools/estimate_accuracy.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "schedule": "quarterly",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; SITE=/home/ubuntu/seawatch; export B SITE; python3 tools/estimate_accuracy.py; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  }
+ ]
+}

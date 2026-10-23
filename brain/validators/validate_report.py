@@ -106,7 +106,7 @@ def check_schema(d):
 
 
 def check_time(d):
-    """ف4.1 — التاريخ والوقت والنافذة."""
+    """ف4.1 — التاريخ والوقت والفترة."""
     errs, warns = [], []
     try:
         dt = datetime.fromisoformat(str(d["generated_label"]).replace("Z", "+00:00"))
@@ -119,7 +119,7 @@ def check_time(d):
     if not re.search(r"\d{4}", str(d.get("date_label", ""))):
         errs.append("[ف4.1] وسم التاريخ بلا سنة")
     if not re.search(r"UTC|غرينتش", str(d.get("window", "")) + str(d.get("lede", ""))):
-        warns.append("[ف4.1] النافذة الزمنية لا تذكر UTC صراحة")
+        warns.append("[ف4.1] الفترة الزمنية لا تذكر UTC صراحة")
     return errs, warns
 
 
@@ -179,7 +179,7 @@ def check_events(d):
 
 
 def check_timeline(d):
-    """ف4.4 — الخط الزمني يغطي أيام النافذة بلا تكرار."""
+    """ف4.4 — الخط الزمني يغطي أيام الفترة بلا تكرار."""
     errs, warns = [], []
     tl = d.get("timeline") or []
     dates = [str(t.get("date", "")) for t in tl]
@@ -191,7 +191,7 @@ def check_timeline(d):
     elif len(days) >= 2:
         expected = abs(int(days[0]) - int(days[1])) + 1
         if len(tl) < expected:
-            warns.append(f"[ف4.4] الخط الزمني لا يغطي كل أيام النافذة ({len(tl)} من {expected})")
+            warns.append(f"[ف4.4] الخط الزمني لا يغطي كل أيام الفترة ({len(tl)} من {expected})")
     return errs, warns
 
 
@@ -292,4 +292,7 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    # ك-133: كل مدقق يمرّ عبر الحارس الموحّد — الانهيار يخرج بالرمز 70 ويمنع التسليم.
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)

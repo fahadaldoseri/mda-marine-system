@@ -1,0 +1,296 @@
+/* ==========================================================================
+   tokens.css — المصدر الوحيد لكل لون وحجم وتباعد وحدّ ونصف قطر ومدة.
+   لا تُكتب قيمة لونية ولا طولية (px · pt · mm · rem) خارج هذا الملف؛ يفحص ذلك tools/measure_gates.py.
+   استثناءان معلنان فقط: شروط @media (لا تقبل var) و@page (لا وراثة من :root) — موثّقان في print.css.
+   البنية: 1) ألوان ليلية (الافتراضي) 2) نهارية 3) ألوان الطباعة 4) أحجام الشاشة 5) أحجام الطباعة
+           6) إعادة ربط الرموز في وسائط print (تنقلب الشاشة إلى ورق أبيض مسطّح بلا تغيير في components.css).
+   ========================================================================== */
+
+:root{
+  /* ---- 1) ألوان: الوضع الليلي (الافتراضي) ---- */
+  --bg:#050a12;
+  --bg-2:#08101c;
+  --panel:#0c1626;
+  --panel-2:#101d31;
+  --panel-3:#152441;
+  --line:#2a3f5e;
+  --line-2:#3a5578;
+  --ink:#e9f0f9;
+  --ink-2:#c3d2e6;
+  --muted:#93a7c3;
+  --accent:#22c3b6;
+  --accent-ink:#04120f;
+  --info:#6aaeff;
+  --danger:#ff7a70;
+  --warn:#ffb02e;
+  --ok:#33d07a;
+  /* خلفيات الحالات (وسم لفظي يرافق كل لون دالّ) */
+  --danger-bg:#2b1517;
+  --warn-bg:#2b2111;
+  --info-bg:#112038;
+  --ok-bg:#0f2a1e;
+  --focus:#ffd166;
+  /* الخريطة */
+  --map-sea:#06111f;
+  --map-land:#22375a;
+  --map-coast:#6a8ab5;
+  --map-border:#4a6a96;
+  --map-grid:#16273f;
+  --map-grid-lbl:#8aa3c6;
+  --map-label:#dbe6f4;
+  --map-country:#9db3d1;
+  --map-sea-label:#7f9cc4;
+  --map-strait:#ffd9d5;
+  --map-marker-ring:#050a12;
+  --map-marker-ink:#04120f;
+
+  /* ---- 3) ألوان الطباعة (تُربط بالرموز الدلالية في القسم 6) ---- */
+  --p-bg:#ffffff;
+  --p-panel-3:#eef2f7;
+  --p-line:#8d9bad;
+  --p-line-2:#5d6f84;
+  --p-ink:#0a1524;
+  --p-ink-2:#20303f;
+  --p-muted:#4b5e73;
+  --p-accent:#0b6f66;
+  --p-info:#1f5f9f;
+  --p-danger:#9d2b25;
+  --p-warn:#7d5200;
+  --p-ok:#166b45;
+  --p-danger-bg:#fff1f0;
+  --p-warn-bg:#fff7e6;
+  --p-info-bg:#edf4ff;
+  --p-ok-bg:#edfaf3;
+  --p-map-sea:#ffffff;
+  --p-map-land:#dfe4ea;
+  --p-map-coast:#3f4f63;
+  --p-map-border:#7b8796;
+  --p-map-grid:#d3d9e0;
+  --p-map-grid-lbl:#4b5e73;
+  --p-map-label:#0a1524;
+  --p-map-country:#4b5e73;
+  --p-map-sea-label:#4b5e73;
+  --p-map-strait:#9d2b25;
+  --p-map-marker-ring:#ffffff;
+  --p-map-marker-ink:#ffffff;
+
+  /* ---- 4) خطوط ---- */
+  --font-body:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,system-ui,sans-serif;
+  --font-head:"Noto Kufi Arabic","IBM Plex Sans Arabic","Segoe UI",Tahoma,system-ui,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+
+  /* ---- 4) أحجام الشاشة ---- */
+  --fs-xs:13px;
+  --fs-legend:13.5px;
+  --fs-sm:14.5px;
+  --fs-body:16px;
+  --fs-lg:18px;
+  --fs-h3:18px;
+  --fs-h2:23px;
+  --fs-h1:clamp(24px,3.2vw,34px);
+  --fs-num:30px;
+  --fs-num-lg:44px;
+  --lh-body:1.85;
+  --lh-tight:1.5;
+  --lh-head:1.55;
+  --fw-body:400;
+  --fw-strong:600;
+  --fw-head:700;
+
+  /* تباعد (سلّم واحد) */
+  --sp-1:4px;
+  --sp-2:8px;
+  --sp-3:12px;
+  --sp-4:16px;
+  --sp-5:24px;
+  --sp-6:32px;
+  --sp-7:48px;
+
+  /* حدود وأنصاف أقطار وظلال */
+  --bw:1px;
+  --bw-2:2px;
+  --bw-3:4px;
+  --r-sm:6px;
+  --r-md:10px;
+  --r-lg:14px;
+  --r-pill:999px;
+  --shadow:0 10px 30px -14px rgba(0,0,0,.7);
+
+  /* مقاسات تخطيط */
+  --w-page:1120px;
+  --w-label:148px;
+  --w-kpi-min:200px;
+  --w-chip-min:96px;
+  --w-legend-col:420px;
+  --w-bar-label:300px;
+  --w-code:84px;
+  --w-trend:130px;
+  --h-bar:10px;
+  --h-target:44px;
+  --h-map-min:320px;
+  --size-icon:18px;
+  --size-marker:22px;
+  --measure:80ch;
+  /* الخريطة: أحجام نص بوحدات إحداثيات الرسم (viewBox)، فالحجم الفعلي = القيمة × (عرض العرض ÷ عرض viewBox). تضمن ≥ 7pt فعليًا في الطباعة */
+  --mp-fs-xs:15px;
+  --mp-fs-sm:17px;
+  --mp-fs-lg:22px;
+  --mp-fs-num:15px;
+  --mp-fs-num-zoom:20px;
+
+  /* حركة */
+  --dur:160ms;
+  --dur-0:0ms;
+
+  /* ---- 5) أحجام الطباعة (A4) ---- */
+  --p-fs-body:11.5pt;
+  --p-fs-list:11.5pt;
+  --p-fs-table:9.5pt;
+  --p-fs-small:9pt;
+  --p-fs-tag:8.5pt;
+  --p-fs-legend:8.5pt;
+  --p-fs-h1:21pt;
+  --p-fs-h2:14pt;
+  --p-fs-h3:12pt;
+  --p-fs-num:18pt;
+  --p-fs-num-lg:30pt;
+  --p-lh:1.65;
+  --p-lh-tight:1.4;
+  --p-sp-1:1mm;
+  --p-sp-2:2mm;
+  --p-sp-3:3mm;
+  --p-sp-4:4.5mm;
+  --p-sp-5:5.5mm;
+  --p-sp-6:9mm;
+  --p-bw:0.25mm;
+  --p-bw-2:0.5mm;
+  --p-bw-3:1mm;
+  --p-r:2.4mm;
+  --p-size-marker:5.4mm;
+  --p-w-label:34mm;
+  --p-w-code:16mm;
+  --p-w-trend:24mm;
+  --p-w-bar-label:70mm;
+  --p-h-bar:2.2mm;
+  --p-map-gap:3mm;
+}
+
+/* ---- 2) ألوان: الوضع النهاري (data-theme="light" على عنصر html) ---- */
+:root[data-theme="light"]{
+  --bg:#eef2f7;
+  --bg-2:#e7edf4;
+  --panel:#ffffff;
+  --panel-2:#f7f9fc;
+  --panel-3:#eef2f7;
+  --line:#b8c4d1;
+  --line-2:#8a99ab;
+  --ink:#0a1524;
+  --ink-2:#26384c;
+  --muted:#4b5e73;
+  --accent:#0b6f66;
+  --accent-ink:#ffffff;
+  --info:#1f5f9f;
+  --danger:#9d2b25;
+  --warn:#7d5200;
+  --ok:#166b45;
+  --danger-bg:#fff1f0;
+  --warn-bg:#fff7e6;
+  --info-bg:#edf4ff;
+  --ok-bg:#edfaf3;
+  --focus:#8a4b00;
+  --shadow:0 10px 30px -18px rgba(10,21,36,.35);
+  --map-sea:#f7fafc;
+  --map-land:#d6e0ea;
+  --map-coast:#64809b;
+  --map-border:#96a7b9;
+  --map-grid:#d3dce6;
+  --map-grid-lbl:#4b5e73;
+  --map-label:#20303f;
+  --map-country:#4b5e73;
+  --map-sea-label:#4b5e73;
+  --map-strait:#9d2b25;
+  --map-marker-ring:#ffffff;
+  --map-marker-ink:#ffffff;
+}
+
+/* ---- 6) الطباعة: إعادة ربط الرموز الدلالية بقيم الورق (أبيض مسطّح بلا ظلال) ---- */
+@media print{
+  :root,
+  :root[data-theme="light"],
+  :root[data-theme="dark"]{
+    --bg:var(--p-bg);
+    --bg-2:var(--p-bg);
+    --panel:var(--p-bg);
+    --panel-2:var(--p-bg);
+    --panel-3:var(--p-panel-3);
+    --line:var(--p-line);
+    --line-2:var(--p-line-2);
+    --ink:var(--p-ink);
+    --ink-2:var(--p-ink-2);
+    --muted:var(--p-muted);
+    --accent:var(--p-accent);
+    --accent-ink:var(--p-bg);
+    --info:var(--p-info);
+    --danger:var(--p-danger);
+    --warn:var(--p-warn);
+    --ok:var(--p-ok);
+    --danger-bg:var(--p-danger-bg);
+    --warn-bg:var(--p-warn-bg);
+    --info-bg:var(--p-info-bg);
+    --ok-bg:var(--p-ok-bg);
+    --map-sea:var(--p-map-sea);
+    --map-land:var(--p-map-land);
+    --map-coast:var(--p-map-coast);
+    --map-border:var(--p-map-border);
+    --map-grid:var(--p-map-grid);
+    --map-grid-lbl:var(--p-map-grid-lbl);
+    --map-label:var(--p-map-label);
+    --map-country:var(--p-map-country);
+    --map-sea-label:var(--p-map-sea-label);
+    --map-strait:var(--p-map-strait);
+    --map-marker-ring:var(--p-map-marker-ring);
+    --map-marker-ink:var(--p-map-marker-ink);
+
+    --font-head:var(--font-body);
+    --fs-xs:var(--p-fs-small);
+    --fs-sm:var(--p-fs-table);
+    --fs-legend:var(--p-fs-legend);
+    --fs-body:var(--p-fs-body);
+    --fs-lg:var(--p-fs-body);
+    --fs-h3:var(--p-fs-h3);
+    --fs-h2:var(--p-fs-h2);
+    --fs-h1:var(--p-fs-h1);
+    --fs-num:var(--p-fs-num);
+    --fs-num-lg:var(--p-fs-num-lg);
+    --lh-body:var(--p-lh);
+    --lh-tight:var(--p-lh-tight);
+    --lh-head:var(--p-lh-tight);
+
+    --sp-1:var(--p-sp-1);
+    --sp-2:var(--p-sp-2);
+    --sp-3:var(--p-sp-3);
+    --sp-4:var(--p-sp-4);
+    --sp-5:var(--p-sp-5);
+    --sp-6:var(--p-sp-6);
+    --sp-7:var(--p-sp-6);
+    --bw:var(--p-bw);
+    --bw-2:var(--p-bw-2);
+    --bw-3:var(--p-bw-3);
+    --r-sm:var(--p-r);
+    --r-md:var(--p-r);
+    --r-lg:var(--p-r);
+    --shadow:none;
+    --w-label:var(--p-w-label);
+    --w-code:var(--p-w-code);
+    --w-trend:var(--p-w-trend);
+    --w-bar-label:var(--p-w-bar-label);
+    --h-bar:var(--p-h-bar);
+    --size-marker:var(--p-size-marker);
+    --dur:var(--dur-0);
+  }
+}
+
+/* حركة: تُلغى كليًا عند طلب المستخدم تقليلها */
+@media (prefers-reduced-motion:reduce){
+  :root{--dur:var(--dur-0)}
+}

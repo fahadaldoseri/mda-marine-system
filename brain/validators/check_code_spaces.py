@@ -29,7 +29,7 @@ EST_RE = re.compile(r"EST-\d{4}-\d{2}-\d{2}-\d{2}")
 MN_RE = re.compile(r"MN-\d{4}-\d{2}-\d{2}-\d{2}")
 
 FACTS_HEAD = "الوقائع الجديدة"
-ANALYSIS_HEADS = ("التحليل الاستخباري", "الاحتمالات والإسناد", "الخلاصة", "مؤشرات الموقف")
+ANALYSIS_HEADS = ("التحليل الاستخباري", "الاحتمالات ونسبة الحوادث إلى جهات", "الاحتمالات والإسناد", "الخلاصة", "مؤشرات الموقف")
 
 
 def load(p: Path, default=None):
@@ -117,4 +117,7 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    # ك-133: كل مدقق يمرّ عبر الحارس الموحّد — الانهيار يخرج بالرمز 70 ويمنع التسليم.
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)
