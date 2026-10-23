@@ -12,6 +12,9 @@
 #
 # الاستخدام: bash tools/publish_changes.sh ["رسالة الالتزام"] [--no-libs]
 set -u
+B="$(cd "$(dirname "$0")/.." && pwd)"
+python3 "$B/tools/runbook.py" verify >/dev/null 2>&1 || { echo "✘ رُفض الدفع: المانيفست غير متسق (verify فشل)"; exit 2; }
+python3 "$B/tools/runbook.py" handbook >/dev/null 2>&1
 
 _B="${BRAIN_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 _S="${SITE_DIR:-$(dirname "$_B")/seawatch}"

@@ -1,0 +1,8 @@
+شغّل كتيب الإجراءات التشغيلية ولا تتجاوزه:
+python3 /home/ubuntu/brain-marine-news/tools/runbook.py run --date $(date -u +%F)
+- إن خرج برمز 10: اقرأ برومت الخطوة المطبوع ونفّذه وحده، ثم:
+  python3 /home/ubuntu/brain-marine-news/tools/runbook.py complete STEP --date DATE
+  ثم أعد أمر التشغيل نفسه. لا تتجاوز خطوة، ولا تعتمد على ذاكرتك في أي خطوة.
+- إن خرج برمز 2: توقف فورًا واكتب سبب التوقف، ولا تنشر ولا ترسل إلى تلغرام.
+- لا نشر ولا تلغرام ولا نسخة احتياطية إلا من خطوة داخل المانيفست.
+المرجع الوحيد: /home/ubuntu/brain-marine-news/runbook/runbook.json والكتيب المولَّد docs/runbook.md

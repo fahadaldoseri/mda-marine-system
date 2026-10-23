@@ -22,6 +22,9 @@ LOGDIR="$B/logs"; mkdir -p "$LOGDIR"
 LOG="$LOGDIR/pipeline-$D.log"
 MARK="$LOGDIR/pipeline-$D.json"
 
+# 0) فحص المانيفست (S000) — فشله يمنع التشغيل كله (أمر الكتيب التنفيذي)
+python3 "$B/tools/runbook.py" verify >>"$LOG" 2>&1 || { echo "✘ verify فشل: المانيفست غير متسق — لا تشغيل ولا نشر" | tee -a "$LOG"; exit 2; }
+
 bash "$B/tools/restore_skills.sh" 2>&1 | tail -3
 echo "===== خط التشغيل الموحّد v4 — $D — $(date -u +%FT%TZ) =====" | tee -a "$LOG"
 
@@ -202,6 +205,7 @@ python3 "$B/validators/check_points_rule.py" --md "$B/reports/$D-sectioned.md" -
 python3 validators/check_numerals.py || { echo "✘ بوابة الأرقام: أرقام عربية في ملف ملزم — التسليم موقوف"; exit 2; }
 
 # نسخة احتياطية على GitHub (غير مُعطِّلة)
+python3 "$B/tools/runbook.py" gates-status --date "$D" --root "$B" >>"$LOG" 2>&1 || { echo "✘ رُفض النسخ الاحتياطي: بوابات المحرّك غير مكتملة" | tee -a "$LOG"; exit 2; }
 bash "$B/tools/github_backup.sh" || echo "! النسخة الاحتياطية لم تكتمل — راجع logs/github-backup-*.log"
 # تحقق حقيقي بعد النسخ (عطل ك-70): هل المستودع يعكس الشجرة المحلية؟
 python3 "$B/validators/check_backup_parity.py" --mode strict >>"$LOG" 2>&1 \
