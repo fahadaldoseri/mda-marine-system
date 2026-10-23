@@ -17,6 +17,7 @@ from __future__ import annotations
 import argparse
 import ast
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -48,6 +49,12 @@ def swallowed(node: ast.Try) -> bool:
     return True
 
 
+def site_key(row: dict) -> str:
+    """مفتاح الموقع: الملف + أول سطر ذي معنى من كتلة try — لا رقم السطر (يتزحزح)."""
+    snip = re.sub(r"\s+", " ", (row.get("snippet") or "")).strip()
+    return f"{row.get('file')}::{snip[:70]}"
+
+
 def scan_file(p: Path) -> list[dict]:
     try:
         tree = ast.parse(p.read_text(encoding="utf-8"))
@@ -57,8 +64,10 @@ def scan_file(p: Path) -> list[dict]:
     for n in ast.walk(tree):
         if isinstance(n, ast.Try) and swallowed(n):
             seg = ast.get_source_segment(p.read_text(encoding="utf-8"), n) or ""
+            first = next((l.strip() for l in seg.splitlines()[1:] if l.strip()), "")
             out.append({"file": str(p.relative_to(B)), "line": n.lineno,
-                        "kind": "except يبتلع الخطأ", "text": seg.splitlines()[0].strip()})
+                        "kind": "except يبتلع الخطأ", "text": seg.splitlines()[0].strip(),
+                        "snippet": first})
     return out
 
 
@@ -70,16 +79,23 @@ def main() -> int:
     for d in SCAN_DIRS:
         for p in sorted((B / d).glob("*.py")):
             rows += scan_file(p)
+    base_f = B / "appendices" / "broad-excepts-baseline.json"
+    known = set()
+    if base_f.exists():
+        bs = json.loads(base_f.read_text(encoding="utf-8"))
+        known = {site_key(r) for r in (bs.get("accepted") or []) if r.get("snippet")}
+    fresh = [r for r in rows if site_key(r) not in known] if known else rows
     if a.json:
         print(json.dumps(rows, ensure_ascii=False, indent=1))
+        return 0
     else:
         if not rows:
             print("  ✓ لا استثناء عام يبتلع الخطأ في validators و tools")
         else:
-            print(f"  · استثناءات عامة تبتلع الخطأ: {len(rows)}")
+            print(f"  · استثناءات عامة تبتلع الخطأ: {len(rows)} — غير مصنّفة: {len(fresh)}")
             for r in rows:
                 print(f"    - {r['file']}:{r['line']} — {r['text'][:80]}")
-    return 1 if rows else 0
+    return 1 if fresh else 0
 
 
 if __name__ == "__main__":

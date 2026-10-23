@@ -20,6 +20,7 @@ from pathlib import Path
 
 B = Path(__file__).resolve().parent.parent
 RULES = B / "appendices" / "writing-rules.json"
+DOUBLED = B / "appendices" / "doubled-letters.json"
 
 
 def load_rules() -> dict:
@@ -27,30 +28,56 @@ def load_rules() -> dict:
 
 
 def fix_punctuation(text: str) -> tuple[str, int]:
-    """الترقيم داخل السطر فقط — لا يعبر نهايات الأسطر (البند ز-3)."""
+    """الترقيم داخل السطر فقط — لا يعبر نهايات الأسطر (البند ز-3).
+
+    صفوف الجداول المُنشئة (| :--- | · | --- |) لا تُمسّ: تغييرها يُفسد الجدول (مراجعة ثالثًا-6).
+    """
     n = 0
+    header = re.compile(r"^\s*\|[\s:|-]*\|[\s:|-]*\|?\s*$")
     pats = [
         (r"[ \t]+([،؛:.!؟])", r"\1"),          # مسافة/مسافات قبل علامة ترقيم
         (r"([،؛!؟])\1+", r"\1"),               # علامة مكرّرة
         (r"([،؛])[ \t]*([.،؛])", r"\1"),       # علامتان متجاورتان
         (r"\.{2,}(?!\.)", r"."),               # نقاط متعددة
     ]
-    for pat, rep in pats:
-        text, k = re.subn(pat, rep, text)
-        n += k
-    return text, n
+    out = []
+    for line in text.splitlines(keepends=True):
+        body = line.rstrip("\n")
+        if header.match(body):
+            out.append(line)
+            continue
+        for pat, rep in pats:
+            body, k = re.subn(pat, rep, body)
+            n += k
+        out.append(body + ("\n" if line.endswith("\n") else ""))
+    return "".join(out), n
 
 
 def fix_doubled_letters(text: str, rules: dict) -> tuple[str, int]:
-    """حروف مضاعفة لا تصح في العربية: «معلنةة» ← «معلنة» · «الةة» ← «الة»."""
-    allow = set(rules.get("doubled_letters_allowed") or ["ةة"])
+    """الحروف المضاعفة: «ةة» فقط، وأي حرف عربي تكرّر ثلاثًا فأكثر (اللاتيني لا يُمسّ: www في الروابط).
+
+    «دد» و«يي» و«وو» و«اا» لا تُمسّ: تكرارات صحيحة في كلمات شائعة
+    («عدد» · «تقييم» · «تهدد» · «الالتزامات») — مراجعة 23 أكتوبر 2026 ثالثًا-1.
+    والقائمة المشتركة واحدة يقرأها المصلح والكاشف من appendices/doubled-letters.json.
+    """
+    sh = json.loads(DOUBLED.read_text(encoding="utf-8"))
+    wl = set(sh["whitelist"])
+    fixed = sh.get("forbidden_fixed") or ["ةة"]
+    minrep = int(sh.get("forbidden_repeat_min") or 3)
     n = 0
-    for d in rules.get("doubled_letters_forbidden") or ["ةة", "اا", "يي", "وو"]:
-        if d in allow:
+    out = []
+    for word in re.split(r"(\s+)", text):
+        if not word.strip() or word in wl:
+            out.append(word)
             continue
-        text, k = re.subn(re.escape(d) + r"+", d[0], text)
-        n += k
-    return text, n
+        new = word
+        for f in fixed:
+            new, k = re.subn(re.escape(f) + r"+", f[0], new)
+            n += k
+        new, k2 = re.subn(r"([\u0600-\u06FF])\1{" + str(minrep - 1) + r",}", r"\1", new)
+        n += k2
+        out.append(new)
+    return "".join(out), n
 
 
 def fix_fixed_terms(text: str, rules: dict) -> tuple[str, int]:

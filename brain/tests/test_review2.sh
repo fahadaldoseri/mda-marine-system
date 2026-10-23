@@ -8,36 +8,67 @@ pass=0; fail=0
 ok()   { echo "  ✔ $1"; pass=$((pass+1)); }
 bad()  { echo "  ✘ $1"; fail=$((fail+1)); }
 
-echo "── (ب) كل مدقق يمرّ مدخله عبر الحارس"
-python3 - <<'PY' && ok "ربط الحارس: كل المدققات موصولة" || bad "ربط الحارس: مدقق غير موصول"
-import re, sys
+echo "── (ب) ربط الحارس الموحّد: تحليل شيفرة (ast) لا بحث نصي"
+python3 - <<'PY'
+import ast, sys
 from pathlib import Path
-bad = []
+bad, good = [], 0
 for p in sorted(Path('validators').glob('*.py')):
     if p.name == '_guard.py':
         continue
-    t = p.read_text(encoding='utf-8')
-    if '__main__' in t and not re.search(r'_guard|guard\.run\(|\brun\(main\)', t):
-        bad.append(p.name)
+    src = p.read_text(encoding='utf-8')
+    try:
+        tree = ast.parse(src)
+    except SyntaxError as e:
+        bad.append(f"{p.name}: خطأ صياغة {e}"); continue
+    if not any(isinstance(n, ast.If) and "__main__" in ast.dump(n.test) for n in tree.body):
+        continue                                    # لا كتلة تنفيذ: لا يُشترط
+    ok = False
+    for n in tree.body:
+        if not (isinstance(n, ast.If) and "__main__" in ast.dump(n.test)):
+            continue
+        for sub in ast.walk(n):
+            # استيراد run من _guard فعلًا
+            if isinstance(sub, ast.ImportFrom) and (sub.module or '').endswith('_guard'):
+                if any(a.name == 'run' for a in sub.names):
+                    # ثم نداء run(...) داخل الكتلة
+                    ok = any(isinstance(c, ast.Call) and getattr(c.func, 'id', '') == 'run'
+                             for c in ast.walk(n))
+    if ok:
+        good += 1
+    else:
+        bad.append(f"{p.name}: كتلة التنفيذ لا تستدعي run من _guard فعليًا")
 print('مخالفات:', bad)
+print(f'ملفات موصولة فعليًا: {good}')
 sys.exit(1 if bad else 0)
 PY
-# إثبات أن الاختبار يكشف ملفًا غير موصول (حالة مصطنعة)
+if [ $? -ne 0 ]; then bad "ملف مدقق غير موصول بالحارس"; else ok "كل المدققات موصولة بالحارس (ast)"; fi
+# إثبات أن الاختبار يكشف ملفًا غير موصول (حالة مصطنعة) + ملفًا يذكر الحارس في تعليق فقط
 cat > validators/_tmp_nowire.py <<'PY'
+#!/usr/bin/env python3
+# سنربطه بـ _guard لاحقًا (تعليق لا يستدعي الحارس)
+import sys
 def main():
     return 0
 if __name__ == "__main__":
-    raise SystemExit(main())
+    sys.exit(main())
 PY
-if python3 - <<'PY'
-import re, sys
+python3 - <<'PY'
+import ast, sys
 from pathlib import Path
-bad = [p.name for p in sorted(Path('validators').glob('*.py'))
-       if p.name != '_guard.py' and '__main__' in p.read_text(encoding='utf-8')
-       and not re.search(r'_guard|guard\.run\(|\brun\(main\)', p.read_text(encoding='utf-8'))]
-sys.exit(1 if bad else 0)
+src = Path('validators/_tmp_nowire.py').read_text(encoding='utf-8')
+tree = ast.parse(src)
+ok = False
+for n in tree.body:
+    if isinstance(n, ast.If) and "__main__" in ast.dump(n.test):
+        for sub in ast.walk(n):
+            if isinstance(sub, ast.ImportFrom) and (sub.module or '').endswith('_guard') \
+               and any(a.name == 'run' for a in sub.names):
+                ok = any(isinstance(c, ast.Call) and getattr(c.func, 'id', '') == 'run' for c in ast.walk(n))
+print('  · الحالة المصطنعة (تعليق فقط):', 'كُشفت ✘' if not ok else 'مرّت خطأً')
+sys.exit(0 if not ok else 2)
 PY
-then bad "الاختبار لم يكشف ملفًا غير موصول (حالة مصطنعة)"; else ok "الاختبار يكشف الملف غير الموصول (حالة مصطنعة)"; fi
+if [ $? -eq 0 ]; then ok "الاختبار يكشف التعليق الكاذب (استيراد لم يحدث)"; else bad "الاختبار لم يكشف التعليق الكاذب"; fi
 rm -f validators/_tmp_nowire.py
 
 echo "── (د) حصر الاستثناءات العامة: لا موقع جديد بلا تصنيف"

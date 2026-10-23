@@ -143,8 +143,13 @@ import json;d=json.load(open('logs/pipeline-${D}.json'))
 print('     الحقول:', len(d), '· نص التقرير موجود:', d.get('report_present_at_pipeline_end'), '· المصادر:', d.get('sources',{}).get('approved'),'/',d.get('sources',{}).get('checked'),'/',d.get('sources',{}).get('ok'))"
 fi
 
+echo "9) عدّادات التغذيات (ك-146): تُحسب بعدد المصادر ولا تفقد مصدرًا"
+python3 tests/test_feed_counters.py && ok "عدّادات التغذيات متسقة" || bad "عدّادات التغذيات غير متسقة"
+
+echo "10) قاعدة العنوان اليتيم (ك-148): تكتشف عنوان ذيل الصفحة وتتجاهل التذييل"
+python3 tests/test_orphan_rule.py && ok "قاعدة العنوان اليتيم صحيحة" || bad "قاعدة العنوان اليتيم لا تعمل"
+
 echo "----- الحصيلة -----"
 printf '  نجح: %s · فشل: %s\n' "$PASS" "$FAIL"
 [ "$FAIL" -eq 0 ] || exit 1
 exit 0
-bash "$(dirname "${BASH_SOURCE[0]}")/test_review2.sh" "$(date -u +%F)" 2>&1 | tail -22

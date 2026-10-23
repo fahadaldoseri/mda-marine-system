@@ -18,6 +18,15 @@ REP="$LOGDIR/report.txt"; : > "$REP"
 WORST=0
 N=0
 
+step_strict() {     # خطوة اختبار: أي فشل يمنع (مراجعة 23 أكتوبر 2026، أولًا)
+  local name="$1"; shift
+  # ك-148: كان STRICT=1 بادئةً للاستدعاء فتتسرّب إلى بيئة العملية الابنة، فترى اختبارات
+  # داخلية لوضع الصرامة وتفشل. الآن متغيّر داخلي غير مُصدَّر.
+  STRICT_LOCAL=1
+  step "$name" 1 "$@"
+  STRICT_LOCAL=0
+}
+
 step() {            # step "<اسم الفحص>" <رمز المانع عند الفشل> <الأمر...>
   local name="$1"; shift
   local blockrc="$1"; shift
@@ -34,6 +43,9 @@ step() {            # step "<اسم الفحص>" <رمز المانع عند ا�
   elif [ "$rc" -ne 0 ] && [ "$rc" -ne "$blockrc" ] && \
      grep -qE "Traceback \(most recent call last\)|^[A-Za-z_]*Error:" "$log" 2>/dev/null; then
     status="crash"; WORST=2
+  elif [ "${STRICT_LOCAL:-0}" -eq 1 ] && [ "$rc" -ne 0 ]; then
+    # مراجعة 23 أكتوبر 2026 (أولًا): أي خطوة اختبار تمنع عند أي رمز غير صفري
+    status="block"; WORST=2
   elif [ "$rc" -ge "$blockrc" ]; then status="block"; WORST=2
   elif [ "$rc" -gt 0 ]; then status="warn"; [ "$WORST" -lt 1 ] && WORST=1; fi
   printf '%-34s %-6s (رمز %s) %s\n' "$name" "$status" "$rc" "$(basename "$log")" >> "$REP"
@@ -46,7 +58,7 @@ echo "السلّم: 0 نجاح · 1 تحذير · 2 مانع" | tee -a "$REP"
 
 # اختبارات البوابات نفسها: تُثبت أن الحارس يعمل (انهيار = منع · الفحوص المانعة تُنفَّذ فعلًا).
 # طلب التدقيق المستقل 2026-10-23 (البندان ح-1 وح-2): لا إصلاح بلا اختبار دائم.
-step "اختبارات البوابات (tests)" 2 bash "$B/tests/run_checks.sh"
+step_strict "اختبارات البوابات (tests)" bash "$B/tests/run_checks.sh"
 
 if [ ! -f "$B/reports/$D-sectioned.md" ] || [ ! -f "$B/web/meta/$D.json" ]; then
   echo "  ✘ ناقص: reports/$D-sectioned.md أو web/meta/$D.json — لا تسليم بلا نص وواجهة." | tee -a "$REP"
@@ -141,7 +153,8 @@ step "بوابات المخرج العشر" 2 python3 "$B/tools/qa_gates.py" --d
 step "كتابة العلامة بعد البوابة" 2 python3 "$B/tools/write_mark.py" --date "$D" --stage final
 step "مخطط العلامة الثابت" 2 python3 "$B/validators/check_mark_schema.py" --date "$D"
 # ── بصمة النص بعد البناء: تثبت أن المنشور بُني من النص النهائي (البند أ) ──────
-step "اختبارات المراجعة الثانية (أ · ب · ج · د · هـ · ز)" 2 bash "$B/tests/test_review2.sh" "$D"
+step_strict "اختبارات المراجعة الثانية (أ · ب · ج · د · هـ · ز)" bash "$B/tests/test_review2.sh" "$D"
+step_strict "اختبار انحدار المصلح (12→23)" bash "$B/tests/test_repair_regression.sh"
 step "تطابق النص المبني مع النص النهائي" 2 python3 "$B/tools/text_hash_guard.py" --date "$D" --stage verify
 echo "----- الخلاصة -----" | tee -a "$REP"
 cat "$REP" | tail -14

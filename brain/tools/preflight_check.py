@@ -49,8 +49,11 @@ POLICY_F = B / 'appendices' / 'report-sections-policy.json'
 def _policy():
     try:
         return json.loads(POLICY_F.read_text(encoding='utf-8'))
-    except Exception:
-        return {}
+    except FileNotFoundError as e:
+        # غياب ملف سياسة الأقسام = لا سياسة ⇒ تمنع البوابة (البند ثانيًا-4)
+        raise RuntimeError(f"ملف سياسة الأقسام مفقود: {POLICY_F}") from e
+    except (json.JSONDecodeError, OSError) as e:
+        raise RuntimeError(f"ملف سياسة الأقسام غير مقروء: {type(e).__name__}") from e
 
 
 _pol = _policy()
@@ -208,8 +211,10 @@ warn(code == '200', "خادم المعاينة يعمل (3000)",
 try:
     helper = subprocess.run(['git', '-C', str(GEN.parent), 'config', '--get', 'credential.helper'],
                             capture_output=True, text=True).stdout.strip()
-except Exception:
+except (subprocess.SubprocessError, OSError) as e:
+    # لا ابتلاع: تعذّر قراءة مساعد الاعتماد يعني أننا لا نعرف كيف يُعتمد الدفع ⇒ مانع
     helper = ''
+    fails.append(f"تعذّر قراءة مساعد اعتماد الدفع: {type(e).__name__}")
 if helper:
     mh = re.search(r'"([^"]+\.mjs)"', helper)
     check(bool(mh) and Path(mh.group(1)).exists(),
@@ -234,8 +239,9 @@ if master.exists() and report.exists():
                 for ev in json.loads(df.read_text(encoding='utf-8')):
                     if ev.get('date'):
                         ev_dates.append(ev['date'])
-            except Exception:
-                pass
+            except (json.JSONDecodeError, OSError, TypeError, AttributeError) as e:
+                # ملف يوم غير مقروء = الدفتر لا يُثبت تغطيته ⇒ مانع (لا تخطٍّ صامت)
+                fails.append(f"ملف يوم غير مقروء ({df.name}): {type(e).__name__}")
         newest = max(ev_dates) if ev_dates else DATE
         check(pe >= newest, f"الدفتر الجامع يغطي أحدث واقعة مسجّلة ({pe})",
               f"الدفتر الجامع لا يغطي أحدث واقعة في ملفات اليوم ({pe} < {newest}) — دمج ملف اليوم لم يُنفَّذ")
