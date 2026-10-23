@@ -3,7 +3,7 @@
  "status": "degraded",
  "checked": 35,
  "ok": 33,
- "failed": 3,
+ "failed": 2,
  "browser_only": [],
  "stale": [
   12,
@@ -12,7 +12,7 @@
  ],
  "empty": [],
  "stale_days_limit": 14,
- "fail_ratio": 0.086,
+ "fail_ratio": 0.0571,
  "fail_ratio_limit": 0.2,
  "items": 1425,
  "checked_feeds": [
@@ -683,37 +683,11 @@
      "tls_verification": "verified"
     }
    ]
-  },
-  {
-   "num": 20,
-   "name": "جريدة الأيام",
-   "primary_url": "https://www.alayam.com/pages/rss",
-   "error": "blocked page: Attention Required",
-   "block_reason": "all routes failed: primary: HTTP Error 403: Forbidden | fallback:jina.ai/alayam-home: Remote end closed connection without response | fallback:jina.ai/alayam-rss: blocked page: Attention Required",
-   "attempts": [
-    {
-     "url": "https://www.alayam.com/pages/rss",
-     "via": "primary",
-     "ok": false,
-     "error": "HTTP Error 403: Forbidden",
-     "tls_verification": "verified"
-    },
-    {
-     "url": "https://r.jina.ai/http://www.alayam.com/",
-     "via": "fallback:jina.ai/alayam-home",
-     "ok": false,
-     "error": "Remote end closed connection without response",
-     "tls_verification": "verified"
-    },
-    {
-     "url": "https://r.jina.ai/http://www.alayam.com/pages/rss",
-     "via": "fallback:jina.ai/alayam-rss",
-     "ok": false,
-     "error": "blocked page: Attention Required",
-     "tls_verification": "verified"
-    }
-   ]
   }
  ],
- "written_utc": "2026-10-23T03:47:42Z"
+ "written_utc": "2026-10-23T03:47:42Z",
+ "counts_note": "العدادات مُشتقّة من بيانات الجولات نفسها بعد إصلاح العدّ (البند هـ): مصدر نجح على مسار وفشل على آخر كان يُحسب في الناجحة والمتعذّرة معًا.",
+ "recovered_via_fallback": [
+  "جريدة الأيام"
+ ]
 }
