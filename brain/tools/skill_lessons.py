@@ -110,7 +110,18 @@ def build_block(date: str, summ: dict, new_faults: list[str], history: list[str]
         lines.append(f'- **{date}** — أعطال جديدة دخلت السجل: {" · ".join(new_faults)} — القاعدة المطلوبة: لكل عطل منها قاعدة مانعة في بوابة أو مكتبة.')
     else:
         lines.append(f'- **{date}** — لا عطل جديد في السجل.')
-    lines += ['', '<details><summary>سجل الدروس السابق</summary>', ''] + history + ['', '</details>']
+    # ك-149: لا يُعاد درس اليوم داخل «سجل الدروس السابق»، والتكرار يُزال.
+    seen: set[str] = set()
+    prev: list[str] = []
+    for h in history:
+        s = h.strip()
+        if s.startswith(f'- **{date}**') or s in seen or not s:
+            continue
+        seen.add(s)
+        prev.append(h)
+    lines += ['', '<details><summary>سجل الدروس السابق</summary>', '']
+    lines += prev or ['_لا دروس سابقة._']
+    lines += ['', '</details>']
     return '\n'.join(lines)
 
 
