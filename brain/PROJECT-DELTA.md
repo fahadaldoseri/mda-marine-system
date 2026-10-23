@@ -1,79 +1,100 @@
-# PROJECT-DELTA — تغييرات جولة أمر التنفيذ (23 أكتوبر 2026)
+# PROJECT-DELTA — جولة 23 أكتوبر 2026 (ب): الشيفرة والمخرجات
 
-التاريخ: 2026-10-23 08:11Z · التزام المستودع الخاص عند توليد البيان: `9462146` · وأحدث التزام بعد تثبيت قواعد الكتابة: `7b9b61d`
-عدد الملفات المتغيّرة المعروضة: **62** — البصمة = أول 12 حرفًا من sha256.
+البيان الأول حمل بصمات وشروحًا بلا شيفرة. هذا يحمل الشيفرة الكاملة في `شيفرة-الجولة-23-10-2026.md` والمخرجات الكاملة في `مخرجات-الجولة-23-10-2026.md`.
 
-| # | الملف | البصمة | الشرح |
-|---:|---|---|---|
-| 1 | `brain/PROJECT-DELTA.md` | `88ff5ee0bf30` | تعديل مرتبط بهذه الجولة |
-| 2 | `brain/appendices/forbidden-coinages.json` | `33a97676ae3a` | الألفاظ المصطنعة الممنوعة |
-| 3 | `brain/appendices/known-faults.json` | `38dbfa69dd31` | الأعطال المعروفة المسموح إفصاحها |
-| 4 | `brain/appendices/libraries/new-terms-register.json` | `3e25d658e427` | تعديل مرتبط بهذه الجولة |
-| 5 | `brain/appendices/libraries/new-terms-register.md` | `8381f6de1f2f` | تعديل مرتبط بهذه الجولة |
-| 6 | `brain/appendices/simplified-vocabulary.json` | `3b3bf2c2fc6b` | المفردات المبسطة (معلّقة حتى الموافقة) |
-| 7 | `brain/memory/learning-log.jsonl` | `8a894d3b8f19` | دروس الجولة |
-| 8 | `brain/reports/2026-10-23-sectioned.md` | `f4d094340a0c` | سطر الأرقام وسطر الإفصاح في «ما لم يُحسم» |
-| 9 | `brain/sections/20-language.md` | `e747b7cb7164` | قواعد الترجمة بالمعنى (معلّقة) |
-| 10 | `brain/sections/60-validation.md` | `ab8f898ca6b7` | توثيق بوابات أمر التنفيذ |
-| 11 | `brain/templates/mark-schema.json` | `74f394f91064` | مخطط العلامة الثابت |
-| 12 | `brain/tests/run_checks.sh` | `fd75d675f327` | اختبارات 5–8 |
-| 13 | `brain/tests/test_language.sh` | `0ff73f87e650` | اختبارات اللغة والتسرب (بلا مسار مطلق) |
-| 14 | `brain/tests/test_ofac.sh` | `0f01bf87a2fa` | اختبارات العقوبات |
-| 15 | `brain/tools/daily_pipeline.sh` | `50f9fa353da8` | عدم ابتلاع فشل أهداف العقوبات |
-| 16 | `brain/tools/final_gate.sh` | `f075ac4653df` | ربط البوابات السبع + قاعدة 70 + العلامة بعد البوابة |
-| 17 | `brain/tools/known_faults.py` | `0b84c9633603` | تصنيف الأعطال المعروفة |
-| 18 | `brain/tools/merge_ledger_daily.py` | `3913f2552dae` | تعريف DATE (ع-4) |
-| 19 | `brain/tools/ofac_screen.py` | `49fbfd38ac4f` | مطابقة IMO ثم الاسم الكامل (ع-3) |
-| 20 | `brain/tools/ofac_targets_from_report.py` | `1e66324e1ee5` | فشل الاستخراج يمنع (ع-2) |
-| 21 | `brain/tools/source_counts.py` | `3cddb99ec28f` | أرقام المصادر الثلاثة + حقن السطر في المتن والواجهة |
-| 22 | `brain/tools/write_mark.py` | `21751a2d5079` | كتابة العلامة بعد البوابة بمخطط ثابت |
-| 23 | `brain/validators/_guard.py` | `6207157bab10` | حارس الانهيار الموحّد — رمز 70 لكل مدقق |
-| 24 | `brain/validators/check_backup_parity.py` | `81cdbca4c93c` | ربط الحارس الموحّد (رمز 70) |
-| 25 | `brain/validators/check_carryover.py` | `91d67ca92316` | إضافة `import sys` (كشفه رمز 70) |
-| 26 | `brain/validators/check_code_policy.py` | `8d3eb15457c7` | ربط الحارس الموحّد (رمز 70) |
-| 27 | `brain/validators/check_code_spaces.py` | `f54a0c4936bf` | ربط الحارس الموحّد (رمز 70) |
-| 28 | `brain/validators/check_comprehension.py` | `e27f39629c01` | ربط الحارس الموحّد (رمز 70) |
-| 29 | `brain/validators/check_findings_closed.py` | `7549868dae14` | إضافة `import sys` (كشفه رمز 70) |
-| 30 | `brain/validators/check_intel.py` | `e71ba7b350e0` | ربط الحارس الموحّد (رمز 70) |
-| 31 | `brain/validators/check_internal_leak.py` | `4ed7c9b0b426` | بوابة منع تسرّب المحتوى الداخلي (تصحيح ك-136) |
-| 32 | `brain/validators/check_language.py` | `aebb65070ef2` | ربط الحارس الموحّد (رمز 70) |
-| 33 | `brain/validators/check_libraries_skills.py` | `e4f8eba3774a` | ربط الحارس الموحّد (رمز 70) |
-| 34 | `brain/validators/check_library_use.py` | `1333f53031d3` | إصلاح `date` غير المعرّف (ع-4) |
-| 35 | `brain/validators/check_mark_schema.py` | `1a82f99de7aa` | بوابة مخطط العلامة الثابت |
-| 36 | `brain/validators/check_numerals.py` | `909ea9767dcb` | ربط الحارس الموحّد (رمز 70) |
-| 37 | `brain/validators/check_ofac_coverage.py` | `6cbfd210963e` | إكمال الربط بالحارس الموحّد |
-| 38 | `brain/validators/check_pdf_format.py` | `d53707d870d4` | ربط الحارس الموحّد (رمز 70) |
-| 39 | `brain/validators/check_points_rule.py` | `ffea0730f01f` | ربط الحارس الموحّد (رمز 70) |
-| 40 | `brain/validators/check_portable_paths.py` | `5952d8a71bc4` | ربط الحارس الموحّد (رمز 70) |
-| 41 | `brain/validators/check_print_quality.py` | `d794e3657deb` | ربط الحارس الموحّد (رمز 70) |
-| 42 | `brain/validators/check_prose_defects.py` | `e0f39a9aaf8e` | بوابة عيوب الكتابة (تصحيح ك-134 داخل الملف) |
-| 43 | `brain/validators/check_run_completeness.py` | `0cb9ea151af6` | بوابة اكتمال التشغيل (الأعطال المعروفة) |
-| 44 | `brain/validators/check_skills_integrity.py` | `9b6556d7a6cc` | ربط الحارس الموحّد (رمز 70) |
-| 45 | `brain/validators/check_sources_count.py` | `a6a3ce056e29` | ربط الحارس الموحّد (رمز 70) |
-| 46 | `brain/validators/check_style.py` | `71ebc124a14e` | ربط الحارس الموحّد (رمز 70) |
-| 47 | `brain/validators/check_vocabulary.py` | `53e65f229705` | بوابة المفردات المبسطة (تنبيهية) |
-| 48 | `brain/validators/validate_report.py` | `1ebc74f16efc` | ربط الحارس الموحّد (رمز 70) |
-| 49 | `brain/web/meta/2026-10-23.json` | `814e2e04efb3` | حقول أرقام المصادر الثلاثة |
-| 50 | `site/dist/404.html` | `a5c91e5dc725` | تعديل مرتبط بهذه الجولة |
-| 51 | `site/dist/index.html` | `6b6ac0406896` | تعديل مرتبط بهذه الجولة |
-| 52 | `site/dist/reports/2026-10-23.html` | `aec363d048d6` | تعديل مرتبط بهذه الجولة |
-| 53 | `site/dist/reports/pdf/2026-10-23.pdf` | `950ce2cd949e` | تعديل مرتبط بهذه الجولة |
-| 54 | `site/dist/reports/special-2026-10-15-GFS.html` | `b1d20042da6c` | تعديل مرتبط بهذه الجولة |
-| 55 | `site/dist/reports/special-2026-10-17-Jubail-incidents.html` | `af66bf15c8e3` | تعديل مرتبط بهذه الجولة |
-| 56 | `site/dist/reports/special-ach-hormuz-targeting-2026-10-16.html` | `960343268bd4` | تعديل مرتبط بهذه الجولة |
-| 57 | `site/dist/reports/special-ach-hormuz-targeting-v3-2026-10-16.html` | `8968ece99104` | تعديل مرتبط بهذه الجولة |
-| 58 | `site/dist/reports/special-exposure-denominator-2026-10-16.html` | `4117fd141cc1` | تعديل مرتبط بهذه الجولة |
-| 59 | `site/dist/reports/special-gfs-pride-giselle-2026-10-15.html` | `95d7d4b3655e` | تعديل مرتبط بهذه الجولة |
-| 60 | `site/generator/build_site.py` | `4329cbae2fdb` | تصحيح تسمية أرقام المصادر |
-| 61 | `site/sources/meta/2026-10-23.json` | `814e2e04efb3` | تعديل مرتبط بهذه الجولة |
-| 62 | `site/sources/reports/2026-10-23-sectioned.md` | `d049dd4a3fb2` | تعديل مرتبط بهذه الجولة |
+## 1) ملفات النظام والشيفرة والوثائق
 
-## ما لم يُختبر
-- لم تُشغَّل مهمة تلغرام ولم يُنشر الموقع (بطلب صاحب القرار).
-- البوابة شُغّلت على 2026-10-23 فقط.
-- مطابقة قائمة OFAC الحيّة عبر الشبكة لم تُختبر؛ المنطق اختُبر ببيانات اختبارية.
-- المفردات المبسطة وقواعد الترجمة بالمعنى معلّقة ولم تُطبَّق على أي تقرير.
+| المسار | sha256 (16) | بايت | الشرح |
+|---|---|---:|---|
+| `PROJECT-DELTA.md` | `13e167bfd3041190` | 12459 | تحديث مرتبط بهذه الجولة. |
+| `appendices/forbidden-coinages.json` | `33a97676ae3aca36` | 1256 | تحديث مرتبط بهذه الجولة. |
+| `appendices/known-faults.json` | `0b632cce4c6e0914` | 2897 | لكل بند تاريخ بدء وانتهاء ومرجع عطل؛ والمنتهي يمنع. |
+| `appendices/libraries/findings-2026-10-23.json` | `363617711ba1bb52` | 441476 | تحديث مرتبط بهذه الجولة. |
+| `appendices/libraries/findings-register.md` | `ad9285ebd0d71c1b` | 2373 | تحديث مرتبط بهذه الجولة. |
+| `appendices/libraries/lexicon-library.json` | `6b5e795ac02d59b0` | 269407 | تحديث مرتبط بهذه الجولة. |
+| `appendices/libraries/lexicon-library.md` | `5c7291652797bb80` | 8784 | تحديث مرتبط بهذه الجولة. |
+| `appendices/libraries/new-terms-register.json` | `64848dda9c085910` | 17219 | تحديث مرتبط بهذه الجولة. |
+| `appendices/libraries/new-terms-register.md` | `38b67ff235a2bc55` | 8147 | تحديث مرتبط بهذه الجولة. |
+| `appendices/libraries/orthography-consistency.md` | `e146a0a9d98b4609` | 4965 | تحديث مرتبط بهذه الجولة. |
+| `appendices/libraries/recurring-phrases.md` | `ba83589a07b1b75f` | 4172 | تحديث مرتبط بهذه الجولة. |
+| `appendices/libraries/terminology-gaps.md` | `ef11e8e4c67cd786` | 938 | تحديث مرتبط بهذه الجولة. |
+| `appendices/simplified-vocabulary.json` | `3b3bf2c2fc6b8c9a` | 1795 | تحديث مرتبط بهذه الجولة. |
+| `appendices/writing-rules.json` | `80f7d597699390cb` | 1193 | جديد — قواعد ما قبل الكتابة: حدّ القالب وبدائله والألفاظ التي تُستبدل آليًا. |
+| `audit/تدقيق-شامل-كل-الإصدارات-2026-10-23.md` | `d409f07312e87af1` | 10818 | تحديث مرتبط بهذه الجولة. |
+| `audit/سجل-الأعطال-والثغرات.md` | `1228610d314f7af0` | 123001 | تحديث مرتبط بهذه الجولة. |
+| `memory/learning-log.jsonl` | `8a894d3b8f19ea38` | 230375 | تحديث مرتبط بهذه الجولة. |
+| `notes/ع-2-ع-3-ع-4-2026-10-23.md` | `1f86407de33216b4` | 4253 | تحديث مرتبط بهذه الجولة. |
+| `reports/2026-10-23-sectioned.md` | `82d785afe7b9ebf7` | 31011 | تصحيح لغوي لتقرير 23 (لغة فقط: لفظ مصطنع وقالب متكرر). |
+| `sections/20-language.md` | `2a34d88ef3bf45f4` | 6916 | تحديث مرتبط بهذه الجولة. |
+| `sections/60-validation.md` | `ab8f898ca6b77bb0` | 27460 | تحديث مرتبط بهذه الجولة. |
+| `skills/marine-news-brain/SKILL.md` | `650aa6f665249a53` | 8499 | قواعد ما قبل الكتابة الملزمة في مهارة التشغيل. |
+| `templates/mark-schema.json` | `74f394f91064d11d` | 731 | تحديث مرتبط بهذه الجولة. |
+| `tests/run_checks.sh` | `fd75d675f327cf6f` | 9151 | تحديث مرتبط بهذه الجولة. |
+| `tests/test_language.sh` | `0ff73f87e650768a` | 4640 | تحديث مرتبط بهذه الجولة. |
+| `tests/test_ofac.sh` | `0f01bf87a2fad268` | 2686 | تحديث مرتبط بهذه الجولة. |
+| `tools/daily_pipeline.sh` | `50f9fa353da8b483` | 13255 | تحديث مرتبط بهذه الجولة. |
+| `tools/final_gate.sh` | `3f663984e2a8b9a1` | 15576 | ربط خطوة الإصلاح الآلي، وتنبيه إيقاف التسليم في logs/alerts/. |
+| `tools/known_faults.py` | `212e007667f57dfd` | 4609 | انتهاء صلاحية العطل المعروف يمنع التسليم؛ وفصل النص المختصر عن الكامل. |
+| `tools/merge_ledger_daily.py` | `3913f2552dae6c6f` | 15853 | تحديث مرتبط بهذه الجولة. |
+| `tools/ofac_screen.py` | `49fbfd38ac4f4255` | 9977 | تحديث مرتبط بهذه الجولة. |
+| `tools/ofac_targets_from_report.py` | `1e66324e1ee523e6` | 2892 | تحديث مرتبط بهذه الجولة. |
+| `tools/repair_prose.py` | `d07e712e698c3b3b` | 4033 | جديد — خطوة الإصلاح الآلي الواحدة قبل إعادة البوابة (البند 8). |
+| `tools/source_counts.py` | `9d8edf3f78bf5429` | 10154 | سطر الإفصاح في المتن يحمل مرجع العطل وتاريخ انتهاء صلاحيته. |
+| `tools/write_mark.py` | `21751a2d5079556f` | 4194 | تحديث مرتبط بهذه الجولة. |
+| `validators/_guard.py` | `6207157bab105f14` | 1898 | تحديث مرتبط بهذه الجولة. |
+| `validators/check_backup_parity.py` | `81cdbca4c93c7100` | 9318 | تحديث مرتبط بهذه الجولة. |
+| `validators/check_carryover.py` | `91d67ca92316105c` | 10978 | تحديث مرتبط بهذه الجولة. |
+| `validators/check_code_policy.py` | `8d3eb15457c70cd8` | 3884 | تحديث مرتبط بهذه الجولة. |
+| `validators/check_code_spaces.py` | `f54a0c4936bfede9` | 5795 | تحديث مرتبط بهذه الجولة. |
+| `validators/check_comprehension.py` | `e27f39629c01c154` | 20869 | تحديث مرتبط بهذه الجولة. |
+| `validators/check_findings_closed.py` | `7549868dae14d128` | 7118 | تحديث مرتبط بهذه الجولة. |
+| `validators/check_intel.py` | `e71ba7b350e080ca` | 9352 | تحديث مرتبط بهذه الجولة. |
+| `validators/check_internal_leak.py` | `4ed7c9b0b4264d52` | 5491 | تحديث مرتبط بهذه الجولة. |
+| `validators/check_language.py` | `aebb65070ef229d2` | 5248 | تحديث مرتبط بهذه الجولة. |
+| `validators/check_libraries_skills.py` | `e4f8eba3774aa4d2` | 16526 | تحديث مرتبط بهذه الجولة. |
+| `validators/check_library_use.py` | `1333f53031d39000` | 10660 | تحديث مرتبط بهذه الجولة. |
+| `validators/check_mark_schema.py` | `1a82f99de7aa8093` | 3180 | تحديث مرتبط بهذه الجولة. |
+| `validators/check_numerals.py` | `909ea9767dcbdbff` | 3953 | تحديث مرتبط بهذه الجولة. |
+| `validators/check_ofac_coverage.py` | `6cbfd210963e26b8` | 3243 | تحديث مرتبط بهذه الجولة. |
+| `validators/check_pdf_format.py` | `d53707d870d440c0` | 11300 | تحديث مرتبط بهذه الجولة. |
+| `validators/check_points_rule.py` | `ffea0730f01fd04b` | 4512 | تحديث مرتبط بهذه الجولة. |
+| `validators/check_portable_paths.py` | `5952d8a71bc4f118` | 3775 | تحديث مرتبط بهذه الجولة. |
+| `validators/check_print_quality.py` | `d794e3657debe620` | 16897 | تحديث مرتبط بهذه الجولة. |
+| `validators/check_prose_defects.py` | `425224eae6fdfcb2` | 17647 | إصلاح إنذار كاذب: أسطر الجداول تُستثنى من قاعدة القالب المتكرر. |
+| `validators/check_run_completeness.py` | `2da64d62e3ffa150` | 3102 | الإفصاح بالنص المختصر، والعرض في المتن بالنص الكامل مع مرجع العطل وتاريخ الانتهاء. |
+| `validators/check_skills_integrity.py` | `9b6556d7a6ccd9c0` | 3769 | تحديث مرتبط بهذه الجولة. |
+| `validators/check_sources_count.py` | `a6a3ce056e299511` | 7242 | تحديث مرتبط بهذه الجولة. |
+| `validators/check_style.py` | `71ebc124a14ea419` | 13789 | تحديث مرتبط بهذه الجولة. |
+| `validators/check_vocabulary.py` | `53e65f22970512c4` | 2599 | تحديث مرتبط بهذه الجولة. |
+| `validators/validate_report.py` | `1ebc74f16efcee34` | 14744 | تحديث مرتبط بهذه الجولة. |
+| `watchlist/ofac-targets.txt` | `9f694820b9708e24` | 102 | تحديث مرتبط بهذه الجولة. |
+| `شيفرة-الجولة-23-10-2026.md` | `4a79cb07f1deeb94` | 104346 | الشيفرة الكاملة للملفات المتغيّرة والجديدة. |
+| `فرق-تصحيح-تقرير-23.md` | `9b393f60e356577d` | 7893 | فرق النص قبل/بعد لتصحيح تقرير 23. |
+| `مخرجات-الجولة-23-10-2026.md` | `fa0b4736c8abef15` | 24511 | مخرجات كاملة: الاختبارات والبوابة وgate.json والعلامة. |
+| `معايرة-البوابات-11-تقريرًا.md` | `36fb391e11c90e0b` | 3230 | معايرة البوابتين على التقارير الإحدى عشر والإنذارات الكاذبة. |
 
-## الحالة الفعلية للبوابة
-الخطوة المانعة الوحيدة: **عيوب الكتابة** — التقرير المنشور نفسه يحمل «عبورات» 6 مرات،
-وقالب «- نفّذوا —» 8 مرات، ولم يُعدَّل النص المُسلَّم بلا موافقة صريحة.
+## 2) ملفات مُنتَجة آليًا بإعادة البناء (بيانات ومزامنة، لا شيفرة)
+
+| المسار | sha256 (16) | بايت |
+|---|---|---:|
+| `archive/ofac-screen-latest.json` | `d3a2726c301b9eb3` | 2242 |
+| `web/meta/2026-10-23.json` | `814e2e04efb34e30` | 32063 |
+
+## 3) أرقام الالتزامات — ما يغطيه كل رقم
+
+| الالتزام | ما يغطيه |
+|---|---|
+| `9462146` | نسخة الاحتياط بعد إصلاحات ح-1..ح-4 وع-2..ع-4 (قبل قواعد ما قبل الكتابة). |
+| `7b9b61d` | إضافة قواعد الكتابة الملزمة في `sections/20-language.md` وتحديث البيان. |
+| `d69d9ae` | تحديث سطر الالتزامات داخل `PROJECT-DELTA.md` نفسه. |
+| التزام هذه الجولة | `tools/repair_prose.py` · `appendices/writing-rules.json` · انتهاء صلاحية الأعطال · إصلاح قاعدة الجداول · تصحيح لغة تقرير 23 · ملفات المخرجات والشيفرة والمعايرة والفرق. |
+
+سبب الخلط في البيان الأول: بصماته قِيست على شجرة عمل تغيّرت بعده. هذا البيان مقيس بعد آخر تعديل.
+
+## 4) ملفات الموقع المنشورة: تغيّر الملف لا النص
+
+- 24 صفحة HTML متعقّبة · **21 صفحة متنها مطابق تمامًا** بين `HEAD` وشجرة العمل.
+- 3 صفحات تغيّر متنها: `index.html` و`404.html` (بطاقة «آخر إصدار») و`reports/2026-10-23.html` (تصحيح لغة اليوم).
+- الصفحات الخاصة الست تغيّر ملفها فقط (هيكل مشترك) ونصّها مطابق حرفيًا.
+- **لا نشر ولا إرسال إلى تلغرام**: صفر التزامات غير مدفوعة في مستودع الموقع، والتغييرات غير مُلتزمة، ولم يُشغَّل أمر الإغلاق.
+

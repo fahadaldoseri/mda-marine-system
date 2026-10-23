@@ -208,8 +208,10 @@ def normalize_sentence(sentence: str) -> str:
 def find_repeated_templates(text: str) -> list[dict]:
     candidates = []
     for line_no, line in enumerate(text.splitlines(), 1):
+        if "|" in line:
+            continue  # أسطر الجداول: تكرار الخلية بنية جدول لا قالب جملة (معايرة 23 أكتوبر)
         clean_line = strip_markup(line).strip()
-        if not clean_line or clean_line.startswith("#") or "|" in clean_line:
+        if not clean_line or clean_line.startswith("#"):
             continue
         # bullets تمثل جملًا مستقلة حتى إن لم تنته بعلامة ترقيم.
         for sentence in re.split(r"(?<=[.!؟؛])\s+|\s*\n\s*", clean_line):

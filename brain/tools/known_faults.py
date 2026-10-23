@@ -13,11 +13,23 @@ B = Path(__file__).resolve().parent.parent
 CONFIG = B / "appendices" / "known-faults.json"
 
 
+def expired(item: dict, today: str | None = None) -> bool:
+    """البند المنتهي صلاحيته لا يُفصح عنه: يصير عطلًا غير مسموح فيمنع التسليم."""
+    exp = (item or {}).get("expires")
+    if not exp:
+        return False
+    import datetime as _dt
+    d = today or _dt.datetime.now(_dt.timezone.utc).strftime("%Y-%m-%d")
+    return exp < d
+
+
 def load() -> dict:
     return json.loads(CONFIG.read_text(encoding="utf-8"))
 
 
 def _match(entry: dict, component: str, text: str) -> bool:
+    if expired(entry):
+        return False  # البند المنتهي صلاحيته لا يُفصح عنه ⇒ يبقى العطل غير مسموح فيمنع
     if component not in (entry.get("applies_to") or []):
         return False
     pats = entry.get("reason_patterns") or []
@@ -33,7 +45,8 @@ def classify_component(component: str, status: str, text: str, items: list[str] 
     cfg = load()
     items = items or []
     if status == "ok":
-        return {"allowed": True, "entry_id": None, "reason_ar": "", "uncovered": [], "covered": 0}
+        return {"allowed": True, "entry_id": None, "reason_ar": "", "reason_ar_full": "",
+                "uncovered": [], "covered": 0}
 
     if items:
         covered = 0
@@ -54,14 +67,17 @@ def classify_component(component: str, status: str, text: str, items: list[str] 
             covered += 1
             entry_id = entry_id or hit["id"]
             reason_ar = reason_ar or hit["reason_ar"]
+        hit0 = next((e for e in cfg["allowed"] if e["id"] == entry_id), None) if entry_id else None
         return {"allowed": not uncovered, "entry_id": entry_id, "reason_ar": reason_ar,
+                "reason_ar_full": (hit0.get("reason_ar_full") if hit0 else reason_ar) or reason_ar,
                 "uncovered": uncovered, "covered": covered}
 
     hit = next((e for e in cfg["allowed"] if _match(e, component, f"{status} {text}")), None)
     if hit:
         return {"allowed": True, "entry_id": hit["id"], "reason_ar": hit["reason_ar"],
+                "reason_ar_full": hit.get("reason_ar_full") or hit["reason_ar"],
                 "uncovered": [], "covered": 1}
-    return {"allowed": False, "entry_id": None, "reason_ar": "",
+    return {"allowed": False, "entry_id": None, "reason_ar": "", "reason_ar_full": "",
             "uncovered": [f"{component}: {status} — {text[:120]}"], "covered": 0}
 
 

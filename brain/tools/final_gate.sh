@@ -119,6 +119,7 @@ step "اكتمال التشغيل (الأعطال المعروفة)" 2 python3 "
 # ── محور اللغة (طلب صاحب القرار 2026-10-23): عيوب الكتابة والتسرب الداخلي ──────
 # قياس العيوب على النص النهائي: ترقيم متجاور · مسافة قبل الترقيم · حروف مكررة لا تصح ·
 # ألفاظ مصطنعة ممنوعة · قالب متكرر أكثر من مرتين. والكلمات خارج المعجم تنبيهية.
+step "إصلاح الصياغة الآلي (خطوة واحدة)" 2 python3 "$B/tools/repair_prose.py" --date "$D"
 step "عيوب الكتابة (الصياغة والترقيم)" 2 python3 "$B/validators/check_prose_defects.py" --md "$B/reports/$D-sectioned.md"
 step "تسرّب المحتوى الداخلي إلى المتن" 2 python3 "$B/validators/check_internal_leak.py" --md "$B/reports/$D-sectioned.md"
 # المفردات المبسطة: تنبيهي حتى الموافقة الصريحة على القائمة (قرار صاحب القرار).
@@ -163,6 +164,25 @@ if mark.exists():
     except Exception as e:
         print(f"  · تعذر تحديث العلامة ({e}) — النتيجة محفوظة في gate.json")
 PY
+# ── تنبيه إيقاف التسليم (طلب صاحب القرار — البند 8) ───────────────────────
+if [ "$WORST" = "2" ]; then
+  mkdir -p "$B/logs/alerts"
+  ALERT="$B/logs/alerts/$D-إيقاف-التسليم.md"
+  {
+    echo "# إيقاف التسليم — $D"
+    echo
+    echo "الزمن (UTC): $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+    echo
+    echo "## الخطوات المانعة"
+    grep -E "block|crash" "$LOGDIR/report.txt" | sed "s/^/- /"
+    echo
+    echo "## ما يلزم قبل إعادة التشغيل"
+    echo "- يُصلح السبب أعلاه، ثم: bash tools/final_gate.sh $D"
+    echo "- لا نشر ولا إرسال إلى تلغرام بلا أمر صاحب القرار."
+  } > "$ALERT"
+  echo "  • تنبيه إيقاف مكتوب: logs/alerts/$D-إيقاف-التسليم.md"
+fi
+
 echo "===== نهاية البوابة: $([ "$WORST" = "0" ] && echo 'نجاح' || { [ "$WORST" = "1" ] && echo 'نجاح مع تحذير' || echo 'مانع — التسليم موقوف'; }) (رمز $WORST) ====="
 echo "السجلات: $LOGDIR"
 

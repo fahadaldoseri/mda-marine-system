@@ -98,7 +98,7 @@ def faults_line(date: str) -> str:
                  "ledger_merge": "دمج الدفتر", "builtin_llm": "المراجعة الآلية",
                  "attachment": "إرفاق الملف"}.get(comp, comp)
         if r["allowed"]:
-            parts.append(f"{label}: {r['reason_ar']}")
+            parts.append(f"{label}: {r.get('reason_ar_full') or r['reason_ar']}")
         else:
             parts.append(f"{label}: عطل غير مسموح — يمنع التسليم")
     if not parts:

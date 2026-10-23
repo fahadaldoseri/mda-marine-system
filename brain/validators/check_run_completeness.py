@@ -51,8 +51,9 @@ def main() -> int:
             blockers.append(f"{comp} ({st}): " + "؛ ".join(r["uncovered"])[:200])
             continue
         # الإفصاح: نصّه في متن التقرير (السطر المُولَّد آليًا يحمل سبب النقص)
-        tag = r["reason_ar"] or st
-        disclosed = (tag in body) or (f"{comp}" in body and "تعذّر" in body)
+        tag = r.get("reason_ar_full") or r["reason_ar"] or st
+        short = r["reason_ar"] or st
+        disclosed = (short in body) or (tag in body) or (f"{comp}" in body and "تعذّر" in body)
         if not disclosed:
             blockers.append(f"{comp} ({st}): عطل معروف لكنه غير مُفصح عنه في متن التقرير")
         else:
