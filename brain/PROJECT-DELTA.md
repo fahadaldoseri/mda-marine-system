@@ -1,23 +1,23 @@
 # PROJECT-DELTA — الجولة الثالثة · 23 أكتوبر 2026
 
-**نطاق الجولة:** `85ba3c9^..HEAD` · آخر التزام: `[33m4192ce4[m` · نسخة احتياطية 2026-10-23 — تحديث النظام والبيانات
+**نطاق الجولة:** `85ba3c9^..HEAD` · آخر التزام: `[33m04538ed[m` · نسخة احتياطية 2026-10-23 — تحديث النظام والبيانات
 
 ## 1) الملفات المتغيّرة فقط (بصيغة +added/−removed)
 
 | المسار | الحالة | +سطر | −سطر | بصمة sha256 (16) |
 | --- | --- | --- | --- | --- |
 | `brain/CLAUDE.md` | ملف جديد | 18 | 0 | `895903a698952c5d` |
-| `brain/PROJECT-DELTA.md` | معدَّل (-removed/+added) | 94 | 37 | `c2769bd03b78751f` |
+| `brain/PROJECT-DELTA.md` | معدَّل (-removed/+added) | 94 | 37 | `ee76562d92386d96` |
 | `brain/appendices/broad-excepts-baseline.json` | معدَّل (-removed/+added) | 126 | 21 | `2794a2a4825322eb` |
 | `brain/appendices/doubled-letters.json` | ملف جديد | 176 | 0 | `1582992cbb6ac898` |
 | `brain/appendices/libraries/findings-2026-10-23.json` | معدَّل (-removed/+added) | 1 | 1 | `03d0e6c778688482` |
-| `brain/appendices/libraries/lexicon-library.json` | معدَّل (-removed/+added) | 1 | 1 | `329ff76bd05bdedb` |
-| `brain/appendices/libraries/lexicon-library.md` | معدَّل (-removed/+added) | 1 | 1 | `9f2fe07c311a3c28` |
+| `brain/appendices/libraries/lexicon-library.json` | معدَّل (-removed/+added) | 1 | 1 | `f86a70bf8f588829` |
+| `brain/appendices/libraries/lexicon-library.md` | معدَّل (-removed/+added) | 1 | 1 | `f642d75a67fdade1` |
 | `brain/appendices/libraries/new-terms-register.json` | معدَّل (-removed/+added) | 1 | 1 | `364cd893a3b83b3e` |
 | `brain/appendices/libraries/new-terms-register.md` | معدَّل (-removed/+added) | 1 | 1 | `334160cf158f8ea7` |
 | `brain/appendices/writing-rules.json` | معدَّل (-removed/+added) | 20 | 7 | `58aa3ee3ae8e18f2` |
 | `brain/archive/ofac-screen-latest.json` | معدَّل (-removed/+added) | 1 | 1 | `22c47cf2034a680a` |
-| `"brain/audit/\330\263\330\254\331\204-\330\247\331\204\330\243\330\271\330\267\330\247\331\204-\331\210\330\247\331\204\330\253\330\272\330\261\330\247\330\252.md"` | معدَّل (-removed/+added) | 5 | 0 | `—` |
+| `"brain/audit/\330\263\330\254\331\204-\330\247\331\204\330\243\330\271\330\267\330\247\331\204-\331\210\330\247\331\204\330\253\330\272\330\261\330\247\330\252.md"` | معدَّل (-removed/+added) | 6 | 0 | `—` |
 | `brain/feeds/feeds-2026-10-23.json` | معدَّل (-removed/+added) | 1901 | 1413 | `06fc5a350393519f` |
 | `brain/feeds/feeds-2026-10-23.md` | معدَّل (-removed/+added) | 168 | 154 | `96a4e22686f56960` |
 | `brain/feeds/feeds-2026-10-23.status.json` | معدَّل (-removed/+added) | 58 | 80 | `244153f9a580e86b` |
@@ -43,10 +43,10 @@
 | `"brain/logs/gate-2026-10-23/44-\330\252\330\267\330\247\330\250\331\202_\330\247\331\204\331\206\330\265_\330\247\331\204\331\205\330\250\331\206\331\212_\331\205\330\271_\330\247\331\204\331\206\330\265_\330\247\331\204\331\206\331\207\330\247\330\246\331\212.log"` | ملف جديد | 1 | 0 | `—` |
 | `brain/logs/gate-2026-10-23/gate.json` | معدَّل (-removed/+added) | 10 | 4 | `b9a3380d793df5d3` |
 | `brain/logs/gate-2026-10-23/report.txt` | معدَّل (-removed/+added) | 3 | 2 | `b68d144ea1a183e6` |
-| `brain/logs/github-backup-2026-10-23.log` | معدَّل (-removed/+added) | 96 | 0 | `1bc14eba1b3b1de8` |
+| `brain/logs/github-backup-2026-10-23.log` | معدَّل (-removed/+added) | 128 | 0 | `46de4c676f3bdfa0` |
 | `brain/logs/pipeline-2026-10-23.json` | معدَّل (-removed/+added) | 3 | 4 | `45f35e4191ed978b` |
 | `brain/logs/qa-2026-10-23.json` | معدَّل (-removed/+added) | 4 | 4 | `ee9a73b593b940ae` |
-| `brain/memory/learning-log.jsonl` | معدَّل (-removed/+added) | 5 | 0 | `5bb3320a8fca271a` |
+| `brain/memory/learning-log.jsonl` | معدَّل (-removed/+added) | 6 | 0 | `064856c795711416` |
 | `brain/reports/2026-10-23-sectioned.md` | معدَّل (-removed/+added) | 21 | 5 | `e29fb8418385631c` |
 | `brain/sections/20-language.md` | معدَّل (-removed/+added) | 3 | 2 | `116145d34fe7c7a7` |
 | `brain/sections/90-automation.md` | معدَّل (-removed/+added) | 8 | 0 | `fd08079659b016a5` |
