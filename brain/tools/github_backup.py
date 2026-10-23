@@ -72,6 +72,25 @@ def _mirror_symlink(src: Path, dst: Path, prefix: str):
 
 
 
+def project_skills() -> tuple[str, ...]:
+    """قائمة مهارات المشروع من مصدرها الواحد (restore_skills.sh) — إصلاح ك-150.
+
+    كانت هنا قائمة مكتوبة بيد تختلف عن قائمة المزامنة، ومجلد skills يُمحى قبل النسخ،
+    فحُذفت مهارة أُضيفت حديثًا من المستودع. القاعدة: قائمة واحدة ومصدر واحد.
+    """
+    fallback = ("marine-news-brain", "military-arabic-editing", "macr-system", "superpowers-method")
+    try:
+        txt = (Path(__file__).resolve().parent / "restore_skills.sh").read_text(encoding="utf-8")
+        m = re.search(r'OUR_SKILLS="([^"]+)"', txt)
+        if m:
+            names = tuple(m.group(1).split())
+            if names:
+                return names
+    except OSError:
+        pass
+    return fallback
+
+
 def sha256(p: Path) -> str:
     h = hashlib.sha256()
     with p.open("rb") as f:
@@ -143,8 +162,9 @@ def main():
             shutil.copy2(src, dst)
     copy_tree(BRAIN, OUT / "brain", "brain", BRAIN_SKIP_DIRS, BRAIN_SKIP_FILES)
     copy_tree(SITE, OUT / "site", "site", SITE_SKIP_DIRS, SITE_SKIP_FILES)
-    # المهارتان الحاكمتان للتشغيل — تُنسخان مع النظام ليبقى المرجع حديثًا على أي جهاز
-    for sk in ("marine-news-brain", "military-arabic-editing", "macr-system"):
+    # مهارات المشروع — تُنسخ مع النظام ليبقى المرجع حديثًا على أي جهاز.
+    # القائمة تُقرأ من restore_skills.sh (مصدر واحد) لا من قائمة ثانية هنا (ك-150).
+    for sk in project_skills():
         src = Path("/home/ubuntu/skills") / sk
         if src.exists():
             copy_tree(src, OUT / "skills" / sk, "skills", {"__pycache__", ".git"}, set())
