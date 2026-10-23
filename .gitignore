@@ -13,7 +13,7 @@ state/webhook-secret.txt
 !.env.example
 *.key
 *.pem
-secrets/
+# مجلد brain/secrets/ يُتتبَّع عمدًا بقرار المالك 2026-10-24 (المستودع خاص)؛ ملف القيم الحقيقية: brain/secrets/secrets.env
 
 # مخرجات مولّدة
 site/dist/

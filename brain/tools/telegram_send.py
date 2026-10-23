@@ -38,7 +38,8 @@ SEND_LOG = B / "logs" / "telegram-sends.jsonl"
 def _token_from_env_file() -> str:
     """الرمز من ملف البيئة المحلي عند غيابه من بيئة التشغيل (للبيئات السحابية مثل Codespaces).
     يُقرأ سطر واحد فقط مفتاحه TELEGRAM_BOT_TOKEN؛ ولا يُطبع الرمز ولا أي قيمة سرية."""
-    for cand in (Path(os.environ.get("BRAIN_DIR", B)) / ".env", B / ".env"):
+    for cand in (Path(os.environ.get("BRAIN_DIR", B)) / ".env", B / ".env",
+                 Path(os.environ.get("BRAIN_DIR", B)) / "secrets" / "secrets.env", B / "secrets" / "secrets.env"):
         try:
             if not cand.is_file():
                 continue

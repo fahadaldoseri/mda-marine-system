@@ -69,7 +69,9 @@
     "site/.gitignore",
     "site/.env.example",
     "site/sources/report-sections-policy.json",
-    "site/sources/site.json"
+    "site/sources/site.json",
+    "brain/secrets/README.md",
+    "brain/secrets/secrets.env.example"
   ],
   "data": [
     "brain/reports/**",
@@ -88,6 +90,7 @@
     "brain/research/**",
     "brain/brain/**",
     "brain/appendices/**",
+    "brain/secrets/**",
     "brain/*.md",
     "brain/*.zip",
     "brain/*.txt",

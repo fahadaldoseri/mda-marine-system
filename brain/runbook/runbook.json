@@ -3067,13 +3067,16 @@
      "tools/publish_site.sh",
      "tools/make_tg_digest.py",
      "tools/telegram_send.py",
-     "tools/telegram_bot.py"
+     "tools/telegram_bot.py",
+     "secrets/secrets.env.example",
+     "secrets/README.md"
     ],
     "folders": [],
     "gates": [],
     "tests": [
      "tests/test_no_publish_without_runbook.sh",
-     "tests/test_delivery_scripts.sh"
+     "tests/test_delivery_scripts.sh",
+     "tests/test_secrets_file.py"
     ]
    },
    "on_fail": "continue",
