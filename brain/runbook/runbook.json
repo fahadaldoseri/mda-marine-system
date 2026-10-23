@@ -564,7 +564,8 @@
      "tests/test_language_tools.py",
      "tests/test_section_registry.sh",
      "tests/demo_prod_copy.sh",
-     "tests/test_sections_single_source.py"
+     "tests/test_sections_single_source.py",
+     "tests/sections/*"
     ]
    },
    "on_fail": "stop",
