@@ -1,0 +1,8 @@
+{
+  "policy": "retired-paths",
+  "updated": "2026-10-24",
+  "note": "ملفات شيفرة أُلغيت عمدًا في GitHub. apply_from_github يؤرشف نسخها على الخادم ثم يحذفها (لا يحذف غيرها أبدًا). النمط نسبةً إلى جذر المستودع.",
+  "paths": {
+    "brain/tests/sections/*": "استُبدلت بـ tests/test_sections_registry_vs_report.py (كانت تفحص جملة ثابتة وتقرأ مسار /home/ubuntu)"
+  }
+}
