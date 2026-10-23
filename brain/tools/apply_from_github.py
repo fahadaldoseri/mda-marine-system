@@ -15,6 +15,7 @@
 """
 import argparse
 import datetime as dt
+import fnmatch
 import hashlib
 import json
 import os
@@ -73,6 +74,20 @@ def main():
             plan.append((rel, src, dst, rsha, "تحديث"))
         else:
             conflicts.append((rel, src, dst, rsha))
+    # مسارات مُلغاة عمدًا في GitHub (appendices/retired-paths.json): موجودة على الخادم وغائبة من المستودع
+    retired = []
+    rp = repo / "brain" / "appendices" / "retired-paths.json"
+    if rp.is_file():
+        pats = list(json.loads(rp.read_text(encoding="utf-8")).get("paths", {}))
+        for top, root in roots.items():
+            if not root.is_dir():
+                continue
+            for f in root.rglob("*"):
+                if not f.is_file() or "logs" in f.relative_to(root).parts[:1]:
+                    continue
+                rel = f"{top}/{f.relative_to(root).as_posix()}"
+                if any(fnmatch.fnmatchcase(rel, p) for p in pats) and not (repo / rel).exists():
+                    retired.append((rel, f))
     for rel, *_ in conflicts:
         print(f"⚠ تعارض (عُدّل على الخادم خارج GitHub): {rel}")
     if conflicts and not a.accept_repo:
@@ -83,7 +98,9 @@ def main():
     print(f"· مطابق: {same} · للتطبيق: {len(plan)}")
     for rel, _, _, _, why in plan:
         print(f"  {why}: {rel}")
-    if a.dry_run or not plan:
+    for rel, _ in retired:
+        print(f"  إلغاء (مسار مُلغى في GitHub): {rel}")
+    if a.dry_run or not (plan or retired):
         return 0
 
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
@@ -98,6 +115,12 @@ def main():
             dst.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(src, dst)
             done.append((rel, dst, why))
+        for rel, f in retired:
+            bak = arch / rel
+            bak.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(f, bak)
+            f.unlink()
+            done.append((rel, f, "إلغاء"))
         if not a.no_verify and (brain / "tools" / "runbook.py").is_file():
             r = subprocess.run([sys.executable, str(brain / "tools" / "runbook.py"), "verify", "--root", str(brain)],
                                capture_output=True, text=True, env=dict(os.environ, BRAIN_DIR=str(brain), SITE_DIR=str(site)))

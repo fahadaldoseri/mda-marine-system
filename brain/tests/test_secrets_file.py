@@ -18,7 +18,7 @@ def ok(c, n):
 ok(m._token_from_env_file() == "tok-123", "الرمز يُقرأ من secrets/secrets.env")
 ex = (HERE / "secrets" / "secrets.env.example").read_text(encoding="utf-8")
 ok(all(l.split("=", 1)[1].strip() == "" for l in ex.splitlines() if "=" in l and not l.startswith("#")), "القالب بلا قيم")
-sys.path.insert(0, str(HERE / "tools")); import code_paths
-spec2 = code_paths.load_spec(HERE.parent)
+sys.path.insert(0, str(HERE / "tools")); import code_paths, json
+spec2 = json.loads((HERE / "appendices" / "code-paths.json").read_text(encoding="utf-8"))  # لا يعتمد تخطيط المستودع
 ok(code_paths.classify("brain/secrets/secrets.env", spec2) == "data" and code_paths.classify("brain/secrets/README.md", spec2) == "code", "التصنيف: القيم data والتوثيق code")
 sys.exit(1 if f else 0)
