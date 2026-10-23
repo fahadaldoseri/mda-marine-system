@@ -27,8 +27,11 @@ step() {            # step "<اسم الفحص>" <رمز المانع عند ا�
   local rc=$?
   local status="ok"
   # ك-131 (البند ح-1 من التدقيق المستقل): انهيار المدقق ليس تحذيرًا.
-  # أي أثر انهيار مع رمز خارج العقد (0 نجاح · 1 تحذير · رمز المانع) = «انهيار» يوقف التسليم.
-  if [ "$rc" -ne 0 ] && [ "$rc" -ne "$blockrc" ] && \
+  # ك-133 (قرار صاحب القرار 2026-10-23): رمز الانهيار المعتمد 70 يمنع ولو بلا أي نص مخرج.
+  if [ "$rc" -eq 70 ]; then
+    status="crash"; WORST=2
+  # وأي أثر انهيار مع رمز خارج العقد (0 نجاح · 1 تحذير · رمز المانع) = «انهيار» أيضًا.
+  elif [ "$rc" -ne 0 ] && [ "$rc" -ne "$blockrc" ] && \
      grep -qE "Traceback \(most recent call last\)|^[A-Za-z_]*Error:" "$log" 2>/dev/null; then
     status="crash"; WORST=2
   elif [ "$rc" -ge "$blockrc" ]; then status="block"; WORST=2
@@ -88,8 +91,8 @@ step "سلامة المهارات" 1 python3 validators/check_skills_integrity.p
 step "بوابة الفهم (مرحلة $COMP_STAGE)" 2 python3 "$B/validators/check_comprehension.py" --date "$D"
 step "بوابة التحليل الاستخباري" 2 python3 "$B/validators/check_intel.py" "$B/reports/$D-sectioned.md" "$B/web/meta/$D.json"
 # فحص العقوبات يُحدَّث لحظة البوابة، فالتقرير قد يُكتب أو يُعدَّل بعد الخط اليومي
-python3 "$B/tools/ofac_targets_from_report.py" --date "$D" >/dev/null 2>&1 || true
-python3 "$B/tools/ofac_screen.py" "$B/watchlist/ofac-targets.txt" >/dev/null 2>&1 || true
+step "استخراج أهداف OFAC" 2 python3 "$B/tools/ofac_targets_from_report.py" --date "$D"
+step "فحص OFAC" 2 python3 "$B/tools/ofac_screen.py" "$B/watchlist/ofac-targets.txt"
 step "تغطية فحص العقوبات" 2 python3 "$B/validators/check_ofac_coverage.py" --date "$D"
 step "استعمال المكتبات (المعجم والبنك والفجوات)" 2 python3 "$B/validators/check_library_use.py" --date "$D"
 step "عدد المصادر (مصدر واحد)" 2 python3 "$B/validators/check_sources_count.py"
@@ -108,6 +111,18 @@ step "قاعدة النقاط في المصدر" 2 python3 "$B/validators/check_
 step "فاحص النقل بين الإصدارات" 2 python3 "$B/validators/check_carryover.py" --date "$D"
 # ── تدقيق المكتبات اللغوية — أسبوعيًا (تنبيهي، لا يوقف النشر) ──────────────
 AUDIT_STAMP="$B/logs/.audit-last"
+# ── أرقام المصادر الثلاثة (ح-3): تُولَّد من بيانات التشغيل وتُكتب في متن التقرير والواجهة ──
+step "أرقام المصادر (معتمدة/مفحوصة/ناجحة)" 2 python3 "$B/tools/source_counts.py" --date "$D" --write
+step "تطابق أرقام المصادر في كل المواضع" 2 python3 "$B/tools/source_counts.py" --date "$D" --check
+# ── اكتمال التشغيل (ح-4): تشغيل منقوص بأعطال معروفة يُفصح عنه ويمضي؛ وغيره يمنع ──
+step "اكتمال التشغيل (الأعطال المعروفة)" 2 python3 "$B/validators/check_run_completeness.py" --date "$D"
+# ── محور اللغة (طلب صاحب القرار 2026-10-23): عيوب الكتابة والتسرب الداخلي ──────
+# قياس العيوب على النص النهائي: ترقيم متجاور · مسافة قبل الترقيم · حروف مكررة لا تصح ·
+# ألفاظ مصطنعة ممنوعة · قالب متكرر أكثر من مرتين. والكلمات خارج المعجم تنبيهية.
+step "عيوب الكتابة (الصياغة والترقيم)" 2 python3 "$B/validators/check_prose_defects.py" --md "$B/reports/$D-sectioned.md"
+step "تسرّب المحتوى الداخلي إلى المتن" 2 python3 "$B/validators/check_internal_leak.py" --md "$B/reports/$D-sectioned.md"
+# المفردات المبسطة: تنبيهي حتى الموافقة الصريحة على القائمة (قرار صاحب القرار).
+step "المفردات المبسطة (تنبيهي حتى الموافقة)" 2 python3 "$B/validators/check_vocabulary.py" --md "$B/reports/$D-sectioned.md"
 if [ ! -f "$AUDIT_STAMP" ] || [ $(( ( $(date -u +%s) - $(date -u -r "$AUDIT_STAMP" +%s 2>/dev/null || echo 0) ) / 86400 )) -ge 6 ]; then
   step "تدقيق المكتبات اللغوية (أسبوعي)" 3 python3 "$B/tools/audit_corpus.py" --date "$D"
   date -u +%FT%TZ > "$AUDIT_STAMP" 2>/dev/null || true
@@ -150,4 +165,9 @@ if mark.exists():
 PY
 echo "===== نهاية البوابة: $([ "$WORST" = "0" ] && echo 'نجاح' || { [ "$WORST" = "1" ] && echo 'نجاح مع تحذير' || echo 'مانع — التسليم موقوف'; }) (رمز $WORST) ====="
 echo "السجلات: $LOGDIR"
+
+# ── العلامة بعد البوابة بمخطط ثابت (ع-1 · قرار 2026-10-23) ──────────────────
+# لا تُكتب العلامة قبل وجود النص ونتيجة البوابة، فلا تدّعي حالة غير حقيقية.
+step "كتابة العلامة بعد البوابة" 2 python3 "$B/tools/write_mark.py" --date "$D" --stage final
+step "مخطط العلامة الثابت" 2 python3 "$B/validators/check_mark_schema.py" --date "$D"
 exit "$WORST"

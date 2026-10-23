@@ -33,6 +33,10 @@ MASTER = B / 'cumulative-2026' / 'event-ledger-master.json'
 CODEMAP = B / 'appendices' / 'event-code-map.json'
 SOURCES_MANIFEST = B / 'appendices' / 'sources-manifest.json'
 DAILY = B / 'cumulative-2026' / 'daily'
+DAILY_FILES = sorted(DAILY.glob('*.json'))
+DAILY_FILE_NAMES = {f.name for f in DAILY_FILES}
+# تاريخ الجولة هو أحدث ملف يومي متاح؛ لا يُقرأ من نطاق عام أو من متغير غير معرّف.
+DATE = max((f.stem for f in DAILY_FILES), default='')
 
 # الرموز المُسنَدة لوقائع سابقة بأثر رجعي في إصدار 13 أكتوبر — تُربط صراحةً بمعرّفات الدفتر
 ALIASES = {
@@ -88,8 +92,8 @@ records = list(frozen.get('events') or frozen.get('records') or [])
 _before = len(records)
 _kept, _removed = [], 0
 for _r in records:
-    same_file = (_r.get('merged_from') or '') == DAILY.name if 'DAILY' in dir() else False
-    same_date = str(_r.get('date_start') or '') == DATE if 'DATE' in dir() else False
+    same_file = (_r.get('merged_from') or '') in DAILY_FILE_NAMES
+    same_date = bool(DATE) and str(_r.get('date_start') or '') == DATE
     if same_file or same_date:
         _removed += 1
     else:
@@ -107,7 +111,7 @@ for r in records:
         pass
 
 added, aliased, skipped, source_files = [], [], [], []
-for f in sorted(DAILY.glob('*.json')):
+for f in DAILY_FILES:
     file_added = 0
     for ev in load_json(f):
         code = ev.get('code')

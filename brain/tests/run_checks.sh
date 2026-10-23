@@ -81,6 +81,68 @@ done
 check "$sh_bad" "0" "صياغة كل سكربتات الشل سليمة"
 check "$py_bad" "0" "كل كتل بايثون المضمّنة في السكربتات سليمة الصياغة"
 
+echo "5) رمز الانهيار 70 (حارس موحّد) يمنع التسليم"
+cd "$B" || exit 1
+R=$(ls reports/*-sectioned.md 2>/dev/null | tail -1)
+crash_rc=$(REPORT="$R" python3 - <<'PY2' 2>/dev/null
+import importlib.util, os, pathlib, sys
+spec = importlib.util.spec_from_file_location("cs", "validators/check_style.py")
+m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+_o = pathlib.Path.read_text
+pathlib.Path.read_text = lambda *a, **k: (_ for _ in ()).throw(RuntimeError("انهيار مصطنع"))
+sys.path.insert(0, "validators")
+from _guard import guard
+sys.argv = ["check_style.py", os.environ["REPORT"]]
+try:
+    rc = guard(m.main)
+finally:
+    pathlib.Path.read_text = _o
+print(rc)
+PY2
+)
+check "$crash_rc" "70" "انهيار مصطنع داخل check_style يُخرج رمز 70"
+if [ -s "$TMP/step.sh" ]; then
+  LOGDIR="$TMP/log-c70"; mkdir -p "$LOGDIR"; REP="$LOGDIR/report.txt"; : > "$REP"; N=0; WORST=0
+  ( set -uo pipefail; source "$TMP/step.sh"; step "فحص تجريبي" 2 python3 -c "import sys; sys.exit(70)" ) >/dev/null 2>&1
+  s70=$(awk '{for(i=1;i<=NF;i++) if($i=="ok"||$i=="warn"||$i=="block"||$i=="crash"){print $i; exit}}' "$REP" | head -1)
+  check "$s70" "crash" "خطوة برمز 70 بلا أي نص مخرج تُصنّف انهيارًا (منع)"
+fi
+
+echo "6) أرقام المصادر الثلاثة (معتمدة · مفحوصة · ناجحة)"
+D=$(basename "$R" | sed 's/-sectioned.md//')
+if [ -n "$D" ] && [ -f "feeds/feeds-$D.status.json" ]; then
+  python3 tools/source_counts.py --date "$D" --write >"$TMP/sc.txt" 2>&1
+  check "$?" "0" "كتابة سطر الأرقام في متن التقرير وملف الواجهة"
+  python3 tools/source_counts.py --date "$D" --check >"$TMP/scc.txt" 2>&1
+  check "$?" "0" "تطابق الأرقام في كل المواضع (متن · واجهة)"
+  printf '     %s\n' "$(tail -1 "$TMP/sc.txt")"
+else
+  printf '  • تخطٍّ: لا ملف تغذيات لتاريخ %s\n' "$D"
+fi
+
+echo "7) قاعدة الأعطال المعروفة (التشغيل المنقوص قاعدة آلية)"
+FD=1999-01-01
+printf '{"date":"%s","overall":"failed","weird_component":{"status":"failed","note":"عطل غريب"}}\n' "$FD" > "logs/pipeline-$FD.json"
+printf '## ما لم يُحسم\n- اختبار\n' > "reports/$FD-sectioned.md"
+python3 validators/check_run_completeness.py --date "$FD" >/dev/null 2>&1
+check "$?" "2" "عطل غير معروف في القائمة يمنع التسليم"
+printf '{"date":"%s","overall":"degraded","feeds":{"status":"degraded","failed_feeds":[{"name":"وام","block_reason":"403 حجب"}]}}\n' "$FD" > "logs/pipeline-$FD.json"
+printf '## ما لم يُحسم\n- المصادر: 62 معتمدة · 35 مفحوصة في هذا التشغيل · 33 ناجحة.\n- تشغيل منقوص مُفصح: التغذيات: حجب مصدر رسمي يمنع الجلب الآلي.\n' > "reports/$FD-sectioned.md"
+python3 validators/check_run_completeness.py --date "$FD" >/dev/null 2>&1
+check "$?" "1" "عطل معروف مُفصح عنه يمرّ بتحذير لا بمنع"
+rm -f "logs/pipeline-$FD.json" "reports/$FD-sectioned.md"
+
+echo "8) مخطط العلامة الثابت وكاتب العلامة"
+if [ -f "logs/pipeline-${D}.json" ]; then
+  python3 tools/write_mark.py --date "$D" --stage final >"$TMP/wm.txt" 2>&1
+  check "$?" "0" "كتابة العلامة بعد البوابة"
+  python3 validators/check_mark_schema.py --date "$D" >"$TMP/cms.txt" 2>&1
+  check "$?" "0" "مخطط العلامة مطابق (حقول وأنواع وأرقام)"
+  python3 -c "
+import json;d=json.load(open('logs/pipeline-${D}.json'))
+print('     الحقول:', len(d), '· نص التقرير موجود:', d.get('report_present_at_pipeline_end'), '· المصادر:', d.get('sources',{}).get('approved'),'/',d.get('sources',{}).get('checked'),'/',d.get('sources',{}).get('ok'))"
+fi
+
 echo "----- الحصيلة -----"
 printf '  نجح: %s · فشل: %s\n' "$PASS" "$FAIL"
 [ "$FAIL" -eq 0 ] || exit 1

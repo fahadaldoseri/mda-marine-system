@@ -14,6 +14,7 @@ _ROOT = _Path(__file__).resolve().parents[1]
 BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
 
 import argparse
+import json
 import sys
 from pathlib import Path
 
@@ -35,8 +36,23 @@ def main() -> int:
     ap.add_argument('--date', required=True)
     a = ap.parse_args()
 
+    report_md = B / 'reports' / f'{a.date}-sectioned.md'
+    report_meta = B / 'web' / 'meta' / f'{a.date}.json'
+    if not report_md.exists() and not report_meta.exists():
+        print(f"  ✘ تعذر استخراج أهداف OFAC: لا يوجد تقرير أو واجهة للإصدار {a.date}")
+        return 2
+    if report_meta.exists():
+        try:
+            json.loads(report_meta.read_text(encoding='utf-8'))
+        except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+            print(f"  ✘ تعذر استخراج أهداف OFAC: واجهة الإصدار غير صالحة ({exc})")
+            return 2
     existing = load_existing()
-    vessels = from_report(a.date)
+    try:
+        vessels = from_report(a.date)
+    except (OSError, UnicodeError, ValueError) as exc:
+        print(f"  ✘ تعذر استخراج أهداف OFAC من الإصدار {a.date} ({exc})")
+        return 2
     if not vessels:
         print(f"  · لا سفن مُعرَّفة في إصدار {a.date} — لا إضافة")
     added = [v for v in vessels if v not in existing]

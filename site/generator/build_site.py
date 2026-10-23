@@ -223,7 +223,7 @@ def build_index(dist: Path, reports, notfound: bool = False):
         chg_items = "".join(f"<li>{esc(x)}</li>" for x in [c for c in chg if c][:3])
         meta_bits = [
             f"فترة التغطية {esc(latest['window'])}" if latest.get("window") else "",
-            f"{esc(str(latest['sources']))} مصدرًا مفحوصًا" if latest.get("sources") else "",
+            f"{esc(str(latest['sources']))} مصدرًا مفحوصًا في ذلك التشغيل" if latest.get("sources") else "",
             f"{esc(str(latest['cited']))} مُستشهدًا" if latest.get("cited") else "",
             f"آخر تحديث {esc(latest['generated'])}" if latest.get("generated") else "",
         ]
@@ -327,7 +327,7 @@ NAV_PLACEHOLDER
   <div class="tiles">
     <div class="tile"><b>{len(reports)}</b><span>إصدار يومي منشور</span></div>
     <div class="tile"><b>{ledger_total or "—"}</b><span>سجل في الدفتر التراكمي</span></div>
-    <div class="tile"><b>{approved_source_count()}</b><span>مصدرًا مفحوصًا في كل تشغيل</span></div>
+    <div class="tile"><b>{approved_source_count()}</b><span>مصدرًا معتمدًا في السجل</span></div>
     <div class="tile"><b>07:00</b><span>توقيت الإصدار اليومي (البحرين)</span></div>
   </div>
 

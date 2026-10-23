@@ -45,9 +45,12 @@ fi
 
 # 2) قائمة فحص العقوبات تُولَّد آليًا من سفن إصدار اليوم، ثم يُجرى الفحص
 echo "-- 2) فحص OFAC (قائمة مُولَّدة من سفن التقرير) --" | tee -a "$LOG"
-python3 tools/ofac_targets_from_report.py --date "$D" >>"$LOG" 2>&1 \
-  || echo "   ◐ تعذر توليد القائمة من التقرير (قد لا يكون تقرير اليوم مكتوبًا بعد)" | tee -a "$LOG"
-if [ ! -f "$TARGETS" ]; then
+python3 tools/ofac_targets_from_report.py --date "$D" >>"$LOG" 2>&1
+OFAC_EXTRACT_RC=$?
+if [ "$OFAC_EXTRACT_RC" -ne 0 ]; then
+  S_OFAC="failed"; NOTE_OFAC="فشل استخراج قائمة المستهدفات (تشغيل منقوص — التسليم موقوف)"
+  echo "   ✘ $NOTE_OFAC" | tee -a "$LOG"
+elif [ ! -f "$TARGETS" ]; then
   echo "   ✘ قائمة المستهدفات مفقودة: $TARGETS (خطأ إعداد — لا يُعتبر نجاحًا)" | tee -a "$LOG"
   NOTE_OFAC="قائمة المستهدفات مفقودة"
 elif [ ! -s "$TARGETS" ]; then

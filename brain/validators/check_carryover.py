@@ -15,6 +15,8 @@
 الرمز: 0 نجاح · 1 تحذير · 2 مانع
 """
 from __future__ import annotations
+
+import sys
 import argparse, json, re, unicodedata, difflib
 from pathlib import Path
 
@@ -225,4 +227,7 @@ def main() -> int:
 
 
 if __name__ == "__main__":
+    # ك-133: كل مدقق يمرّ عبر الحارس الموحّد — الانهيار يخرج بالرمز 70 ويمنع التسليم.
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from _guard import run
     raise SystemExit(main())

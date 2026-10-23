@@ -147,14 +147,11 @@ def main() -> int:
             known |= set(re.findall(r"[A-Z][A-Z0-9]{2,}", tfile.read_text(encoding="utf-8")))
         syms = set(re.findall(r"\b[A-Z][A-Z0-9]{2,}(?:/[A-Z]+)?\b", text))
         # أسماء السفن ليست رموزًا: تُستثنى من قياس المعجم (وإلا ظهرت أجزاء الأسماء رموزًا)
-        try:
-            sys.path.insert(0, str(B / "tools"))
-            import vessel_names as vn                                  # noqa: PLC0415
-            vessels = set()
-            for v in (vn.from_report(date) or []):
-                vessels |= {w for w in re.split(r"[^A-Za-z0-9]+", v) if w}
-        except Exception:                                              # noqa: BLE001
-            vessels = set()
+        sys.path.insert(0, str(B / "tools"))
+        import vessel_names as vn                                      # noqa: PLC0415
+        vessels = set()
+        for v in (vn.from_report(a.date) or []):
+            vessels |= {w for w in re.split(r"[^A-Za-z0-9]+", v) if w}
         unknown = sorted(s for s in syms
                          if s not in known and s not in vessels
                          and not any(s in k for k in glossary))[:6]
@@ -211,4 +208,7 @@ def check_new_terms_registry(root):
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    # ك-133: كل مدقق يمرّ عبر الحارس الموحّد — الانهيار يخرج بالرمز 70 ويمنع التسليم.
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)
