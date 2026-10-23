@@ -149,19 +149,23 @@ def load_forbidden() -> list[dict]:
     return data.get("entries", []) if isinstance(data, dict) else []
 
 
-def find_forbidden(text: str) -> list[dict]:
+def find_forbidden(text: str, report_date: str | None = None) -> list[dict]:
     found = []
     lines = text.splitlines()
     for entry in load_forbidden():
         term = str(entry.get("term", "")).strip()
         if not term:
             continue
+        # تاريخ السريان: لفظ أُضيف اليوم لا يمنع نصًا منشورًا قبله (قرار صاحب القرار 2026-10-23).
+        since = str(entry.get("since", "") or "")
+        blocking = not (report_date and since and report_date < since)
         for line_no, line in enumerate(lines, 1):
             for match in re.finditer(re.escape(term), line):
                 found.append({
-                    "line": line_no, "term": term,
+                    "line": line_no, "term": term, "blocking": blocking,
                     "replacement": entry.get("replacement", "راجع قائمة المفردات المبسطة"),
-                    "reason": entry.get("reason", "لفظ مصطنع ممنوع"),
+                    "reason": entry.get("reason", "لفظ مصطنع ممنوع")
+                              + ("" if blocking else f" — ساري من {since} (نص أقدم منه: تنبيهي)"),
                 })
     return found
 
@@ -247,14 +251,16 @@ def main() -> int:
     text = path.read_text(encoding="utf-8")
     punctuation = find_punctuation_defects(text)
     duplicates = find_duplicate_letters(text)
-    forbidden = find_forbidden(text)
+    _m = re.search(r"(\d{4}-\d{2}-\d{2})", path.name)
+    forbidden = find_forbidden(text, _m.group(1) if _m else None)
     templates = find_repeated_templates(text)
     unknown = find_unknown_words(text)
     counts = {
         "علامات ترقيم متجاورة": len(punctuation.get("علامات ترقيم متجاورة", [])),
         "مسافة قبل علامة ترقيم": len(punctuation.get("مسافة قبل علامة ترقيم", [])),
         "حرف عربي مضاعف": sum(1 for d in duplicates if d.get("blocking")),
-        "ألفاظ مصطنعة ممنوعة": len(forbidden),
+        "ألفاظ مصطنعة ممنوعة": sum(1 for f in forbidden if f.get("blocking")),
+        "ألفاظ أُضيفت اليوم (تحذير)": sum(1 for f in forbidden if not f.get("blocking")),
         "قالب جملة متكرر أكثر من مرتين": len([x for x in templates if x["count"] > 2]),
         "كلمات خارج المعجم (تحذير)": len(unknown),
     }
@@ -263,20 +269,21 @@ def main() -> int:
     print("| النوع | العدد | الحكم |")
     print("|---|---:|---|")
     for name, count in counts.items():
-        الحكم = "تحذير" if name == "كلمات خارج المعجم (تحذير)" else ("مانع" if count else "سليم")
+        الحكم = "تحذير" if "(تحذير)" in name else ("مانع" if count else "سليم")
         print(f"| {name} | {count} | {الحكم} |")
     print_findings("علامات الترقيم المتجاورة", punctuation.get("علامات ترقيم متجاورة", []))
     print_findings("المسافات قبل الترقيم", punctuation.get("مسافة قبل علامة ترقيم", []))
     print_findings("الحروف العربية المضاعفة (مانع)", [d for d in duplicates if d.get("blocking")])
     print_findings("حروف مضاعفة مشروعة (تنبيهي)", [d for d in duplicates if not d.get("blocking")])
-    print_findings("الألفاظ المصطنعة", forbidden)
+    print_findings("الألفاظ المصطنعة (مانع)", [f for f in forbidden if f.get("blocking")])
+    print_findings("ألفاظ أُضيفت اليوم (تنبيهي)", [f for f in forbidden if not f.get("blocking")])
     if templates:
         print(f"قوالب الجمل المتكررة: {len(templates)}")
         for item in templates[:20]:
             print(f"  - {item['count']}× «{item['template']}»؛ أول موضع السطر {item['occurrences'][0]['line']}")
     if unknown:
         print(f"تحذير المعجم: {len(unknown)} كلمة مشتبهة — " + "، ".join(unknown[:40]))
-    blocking = sum(counts[name] for name in list(counts)[:5])
+    blocking = sum(v for k, v in counts.items() if "(تحذير)" not in k)
     if blocking:
         print("النتيجة: مانع — لا يُسلَّم التقرير قبل المعالجة (لا تعديل آلي).")
         return 2

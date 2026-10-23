@@ -89,7 +89,7 @@ SECTION_ICONS = {
     "خريطة الوقائع": "map",
     "الحركة الملاحية والتكدس": "route",
     "مستوى التهديد": "shield",
-    "الاحتمالات والإسناد": "scale",
+    "الاحتمالات ونسبة الحوادث إلى جهات": "scale",
     "التحليل الاستخباري": "intel",
     "التوجيهات التشغيلية": "gear",
     "الخلفية القائمة": "history",
@@ -107,8 +107,8 @@ SECTION_HINTS = {
     "الوقائع الجديدة": "ما وقع داخل فترة التقرير، مفصولًا عن الخلفية.",
     "التحذيرات والنشرات الرسمية": "حالة الجهات الرسمية خلال فترة التقرير.",
     "سجل IMO": "الحصيلة الرسمية التراكمية، وآخر إدخال ظاهر.",
-    "التحليل الاستخباري": "قراءة النمط والافتراضات والفرضيات ومؤشرات التحذير المبكر.",
-    "الاحتمالات والإسناد": "من قد يكون مسؤولًا، بلا جزم وبلا نسبة بلا دليل.",
+    "التحليل الاستخباري": "وصف النمط والافتراضات والفرضيات ومؤشرات التحذير المبكر.",
+    "الاحتمالات ونسبة الحوادث إلى جهات": "من قد يكون مسؤولًا، بلا جزم وبلا نسبة بلا دليل.",
     "الحركة الملاحية والتكدس": "حركة المضيق والرسو من مصادر معلنة فقط.",
     "ما لم يُحسم": "ما يبقى مجهولًا، وما يلزم متابعته في التقرير التالي.",
     "الخلفية القائمة": "وقائع أقدم ما زال أثرها مؤثرًا على التشغيل.",
@@ -465,7 +465,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .map-caption,.map-viz figcaption{margin-top:1.5mm;line-height:1.4}
   /* كثافة الصفحة: تقليل حشو الخلايا لتصبح الكتلة على مقاس الورقة */
   tbody td{padding:1.5mm 2.2mm !important}
-  .sec-lede{margin:0 0 10px;line-height:1.55}
+  .sec-lede{margin:0 0 7px;line-height:1.55}
   section.doc{padding:0 0 3mm}
   .rmk,.glossary{break-inside:avoid;page-break-inside:avoid}
   /* انضباط بصري: خطوط فاصلة رقيقة بدل تظليل الصفوف */
@@ -577,7 +577,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .changes > *{display:block !important;width:100% !important}
   .viz > *,.card > *{box-sizing:border-box}
   /* ضغط تباعد الأقسام: يوفّر نحو 40 مم فتنتقل نهاية التقرير إلى صفحتها السابقة */
-  section.doc{padding:0 0 2.5mm !important}
+  section.doc{padding:0 0 1.5mm !important}
   section.doc > h2{margin:3mm 0 1.5mm !important}
   .sec-lede{margin:0 0 2mm !important}
   .h-rule{margin:1mm 0 2mm !important}

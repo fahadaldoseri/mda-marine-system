@@ -57,15 +57,35 @@
     "status": "degraded"
   },
   "final_gate": {
-    "blocked_steps": [],
-    "dir": "logs/gate-2026-10-23",
+    "status": "warn",
     "exit_code": 1,
-    "note": "نتيجة بوابة التسليم النهائية — كُتبت العلامة بعدها.",
-    "status": "warn"
+    "dir": "logs/gate-2026-10-23",
+    "blocked_steps": [],
+    "note": "نتيجة بوابة التسليم النهائية — مسجّلة بعد كتابة التقرير."
   },
   "finished_utc": "2026-10-23T03:49:14Z",
   "gate_finished_utc": "2026-10-23T10:54:02Z",
   "ladder_note": "سلّم موحّد: ok / degraded / failed — لكل مكوّن رمز خروج حقيقي، ولا تُعلن نجاحًا برمز صفري",
+  "language": {
+    "banned_terms": 21,
+    "edit_pass": {
+      "applied": false,
+      "by_category": {
+        "أسلوب": 22,
+        "ترجمة حرفية": 1,
+        "مفردة": 19
+      },
+      "changes": 42,
+      "edited": 5,
+      "model": "gpt-5-mini",
+      "rejected": 9,
+      "sections": 15
+    },
+    "long_sentences": 6,
+    "orthography_errors": 1,
+    "waw_pct": 21.7,
+    "waw_runs3": 3
+  },
   "ledger_merge": {
     "added_this_run_count": 0,
     "merged_before_marker": true,

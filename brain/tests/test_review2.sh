@@ -174,5 +174,5 @@ else
   if grep -q "يتيم" /tmp/orphan.log; then ok "العنوان اليتيم يمنع (وذُكر في المخرج)"; else bad "منع بلا ذكر العنوان اليتيم"; fi
 fi
 
-echo "── الحصيلة: نجح $pass · فشل $fail"
+echo "── الأثر: نجح $pass · فشل $fail"
 [ "$fail" -eq 0 ]

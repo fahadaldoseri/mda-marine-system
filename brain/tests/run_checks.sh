@@ -159,3 +159,10 @@ echo "----- الحصيلة -----"
 printf '  نجح: %s · فشل: %s\n' "$PASS" "$FAIL"
 [ "$FAIL" -eq 0 ] || exit 1
 exit 0
+
+# 11) أدوات محور اللغة: حارس الحفظ · تدريج البوابة · التحرير بلا كتابة
+echo "11) أدوات محور اللغة"
+python3 "$B/tests/test_language_tools.py" > /tmp/rc-lang.log 2>&1
+rc_lang=$?
+tail -3 /tmp/rc-lang.log
+if [ $rc_lang -ne 0 ]; then echo "  ✘ أدوات اللغة"; FAILED=$((FAILED+1)); else echo "  ✔ أدوات اللغة"; fi

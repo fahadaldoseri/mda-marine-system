@@ -28,7 +28,7 @@
   .map-caption,.map-viz figcaption{margin-top:1.5mm;line-height:1.4}
   /* كثافة الصفحة: تقليل حشو الخلايا لتصبح الكتلة على مقاس الورقة */
   tbody td{padding:1.5mm 2.2mm !important}
-  .sec-lede{margin:0 0 10px;line-height:1.55}
+  .sec-lede{margin:0 0 7px;line-height:1.55}
   section.doc{padding:0 0 3mm}
   .rmk,.glossary{break-inside:avoid;page-break-inside:avoid}
   /* انضباط بصري: خطوط فاصلة رقيقة بدل تظليل الصفوف */
@@ -140,7 +140,7 @@
   .changes > *{display:block !important;width:100% !important}
   .viz > *,.card > *{box-sizing:border-box}
   /* ضغط تباعد الأقسام: يوفّر نحو 40 مم فتنتقل نهاية التقرير إلى صفحتها السابقة */
-  section.doc{padding:0 0 2.5mm !important}
+  section.doc{padding:0 0 1.5mm !important}
   section.doc > h2{margin:3mm 0 1.5mm !important}
   .sec-lede{margin:0 0 2mm !important}
   .h-rule{margin:1mm 0 2mm !important}

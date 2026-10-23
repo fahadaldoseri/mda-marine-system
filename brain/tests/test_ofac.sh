@@ -68,5 +68,5 @@ else
   bad "مسار التشغيل لا يثبت تصنيف فشل استخراج OFAC كتشغيل منقوص"
 fi
 
-printf 'الحصيلة: نجح %s · فشل %s\n' "$PASS" "$FAIL"
+printf 'الأثر: نجح %s · فشل %s\n' "$PASS" "$FAIL"
 [ "$FAIL" -eq 0 ]

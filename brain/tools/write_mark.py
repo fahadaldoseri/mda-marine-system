@@ -63,7 +63,32 @@ def main() -> int:
                                        "note": "لا ملف بوابة بعد — علامة مرحلة الخط اليومي."})
         mark.setdefault("gate_finished_utc", "")
 
-    # 4) المخطط الثابت
+    # 4) حقول اللغة (أمر 23 أكتوبر 2026): تُقرأ من ملفات القياس لا من الذاكرة
+    def _read(name: str):
+        fp = B / "logs" / f"{name}-{a.date}.json"
+        if not fp.exists():
+            return None
+        try:
+            d = json.loads(fp.read_text(encoding="utf-8"))
+            return d[0] if isinstance(d, list) and d else (d if isinstance(d, dict) else None)
+        except (OSError, json.JSONDecodeError):
+            return None
+
+    _ep, _sm, _or = _read("edit-pass"), _read("style-metrics"), _read("orthography")
+    mark["language"] = {
+        "edit_pass": ({"model": _ep.get("model"), "sections": _ep.get("sections"),
+                       "edited": _ep.get("edited"), "rejected": _ep.get("rejected"),
+                       "changes": _ep.get("changes"), "by_category": _ep.get("by_category"),
+                       "applied": _ep.get("applied")} if _ep else None),
+        "waw_pct": (_sm.get("waw_pct") if _sm else None),
+        "waw_runs3": (_sm.get("waw_runs3") if _sm else None),
+        "long_sentences": (_sm.get("long") if _sm else None),
+        "banned_terms": (sum(int(v) for v in (_sm.get("banned") or {}).values())
+                         if _sm and isinstance(_sm.get("banned"), dict) else None),
+        "orthography_errors": (_or.get("total") if _or else None),
+    }
+
+    # 5) المخطط الثابت
     mark["schema_version"] = SCHEMA_VERSION
     mark["date"] = a.date
     mark.setdefault("pipeline_version", 4)

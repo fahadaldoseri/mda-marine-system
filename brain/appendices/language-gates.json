@@ -1,0 +1,28 @@
+{
+  "_comment": "تدريج بوابات اللغة — القاعدة أ9 من الأمر التنفيذي 23 أكتوبر 2026. التاريخ مثبّت هنا لا في الشيفرة.",
+  "advisory_until": "2026-10-30",
+  "enforce_from": "2026-10-31",
+  "advisory_exit_code": 1,
+  "enforce_exit_code": 2,
+  "gates": {
+    "banned_terms_max": 0,
+    "orthography_errors_max": 0,
+    "internal_phrases_max": 0,
+    "waw_sentence_pct_max": 25,
+    "meaning_major_diff_max": 0
+  },
+  "targets": {
+    "waw_sentence_pct": 15
+  },
+  "alerts": {
+    "dir": "logs/alerts",
+    "waw_worse_than_median_pct": 30,
+    "median_days": 7,
+    "channel": "ملف محلي فقط — لا تلغرام"
+  },
+  "metrics": {
+    "style_json": "logs/style-metrics-<التاريخ>.json",
+    "orthography_json": "logs/orthography-<التاريخ>.json",
+    "daily_numbers_in_chat": true
+  }
+}

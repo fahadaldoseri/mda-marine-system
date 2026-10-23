@@ -10,7 +10,7 @@
   "line_height": 1.62,
   "table_pt": 9.5,
   "map_print": "نموذج الحزمة: بحر #ffffff · يابسة #dfe4ea · ساحل #3f4f63",
-  "print_css_sha16": "ac05b43f996ae9f0"
+  "print_css_sha16": "562735900a11d806"
  },
  "gates": {
   "final_gate": "33 ناجحة · 6 تحذيرات وصفية · 0 فشل مانع",
@@ -37,8 +37,8 @@
    "bytes": 16897
   },
   "tools/final_gate.sh": {
-   "sha256": "fe5c7d2e48a11fcfc41ee1a569aeec3046df7bb728272a5a0f2881b90263996f",
-   "bytes": 17702
+   "sha256": "ba65515beecaaf949ae70809d4f286035743d794bdbcb4d22e89f924b1c566c9",
+   "bytes": 18776
   },
   "tools/rebuild_report.sh": {
    "sha256": "f87f0eb4c98c82d2098773e2749fc01bd6f8abfc7037fff7f24fe649055d35ee",
@@ -57,16 +57,16 @@
    "bytes": 4687
   },
   "templates/approved-pdf/print-profile.json": {
-   "sha256": "adbc32830d125ccf6b1121b3e605300a39169d05de3928e74e8f2422c176a993",
+   "sha256": "ee8def172e396a4b5a637890e1a19412570f2e0e5fabfcab2db8a04a274b1101",
    "bytes": 9848
   },
   "templates/approved-pdf/print-css-frozen.css": {
-   "sha256": "ac05b43f996ae9f0eca5f2d29e0bafe6ad77c7ce3fde35cd15a6bae7506266ac",
-   "bytes": 13192
+   "sha256": "562735900a11d8068d4883a345d48bff66f9a58ac14c0401b9b5c32e538fd528",
+   "bytes": 13191
   },
   "sections/30-structure.md": {
-   "sha256": "d345086703d00b89ecfa622771eab17b280f81a8f939d8479d7fbf1b237fa34d",
-   "bytes": 12736
+   "sha256": "73aee231ef1214a30330dadbfb8e845ef5c0ace25f074688b2f575938c6d3c0c",
+   "bytes": 12836
   },
   "sections/60-validation.md": {
    "sha256": "ab8f898ca6b77bb007e8f1f22ef0cf100003647243d204de6999e81bb9b969eb",
@@ -77,16 +77,16 @@
    "bytes": 16846
   },
   "sections/75-style.md": {
-   "sha256": "5ae73aa2bf9f1226005a551ddfb135e3b36a66e6956a8223cac2d52eaa1189c4",
-   "bytes": 24710
+   "sha256": "c7689ce8bb64f1fcf0ecad44d5a6c85f4f6a0e13a4c0314116cfe16f28257fcc",
+   "bytes": 24735
   },
   "sections/90-automation.md": {
-   "sha256": "fd08079659b016a5e08b88ed419505a1f03c094cd80a95aef75bf97bdc79c8b7",
-   "bytes": 22412
+   "sha256": "581ad95a24d36241f2d4b4804a453ff740774a1f2d24eb2033ef22aa95518716",
+   "bytes": 22437
   },
   "generator/build_report.py": {
-   "sha256": "6d58bb126faae7f5ca069b9123c120fa80441f3f5b8779e2b27ca531e6e01181",
-   "bytes": 69643
+   "sha256": "3204b0fbf5e47ad11b9e5d93b8840897411f049af289c2754eaa7885e3a25bea",
+   "bytes": 69688
   },
   "generator/map_gulf.py": {
    "sha256": "cee0ed9e00e49ce0f5b6fecff0587a33827a00d513134a2ffd7c6a46a09c5708",
@@ -106,8 +106,8 @@
   }
  },
  "commits": {
-  "site_repo": "fed41f8",
-  "brain_backup": "29b9046"
+  "site_repo": "1fd5a9b",
+  "brain_backup": "45204a1"
  },
  "blessings": [
   {
@@ -128,6 +128,11 @@
   {
    "at": "2026-10-23T10:54:51Z",
    "reason": "اعتماد مهارة superpowers-method + حلقة التعلم الذاتية في البوابة (23 أكتوبر 2026) وتحديث بوابتَي جودة الطباعة ومسار البناء",
+   "files": 20
+  },
+  {
+   "at": "2026-10-23T11:55:28Z",
+   "reason": "جولة محور اللغة (23 أكتوبر 2026): التحرير اللغوي الآلي + بوابات اللغة المتدرجة + أصل نص كل واقعة + حقول اللغة في العلامة + تقليص فراغ الطباعة وإعادة تجميد الهيئة + ك-151..ك-154",
    "files": 20
   }
  ],
