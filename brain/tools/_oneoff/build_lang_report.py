@@ -27,7 +27,7 @@ L.append('الأمر: ملف «الأوامر الإلزامية» المرفق 
 
 # ── البند 1 ──
 files = ['sections/20-writing-brief.md', 'sections/20-lexicon.md', 'sections/20-examples.md',
-         'sections/20-translation-rules.md', 'appendices/editor-prompt.md',
+         'sections/20-language.md', 'appendices/editor-prompt.md',
          'appendices/forbidden-coinages.json', 'appendices/writing-rules.json',
          'appendices/owner-style-samples.md', 'appendices/lexicon-candidates.md']
 L.append('## 1) الملفات التسعة والثلاثة القوالب\n')
