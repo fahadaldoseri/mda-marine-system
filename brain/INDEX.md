@@ -62,16 +62,16 @@
 |---|---|---|
 | `validators/check_language.py` | ف2 | بوابة بساطة اللغة قبل التسليم |
 | `validators/validate_report.py` | ف1 | التحقق من بنية التقرير والحقول |
-| `validators/check_sources_37.py` | ص2 | الفحص الشبكي للمصادر |
-| `validators/check_sources_37_browser.py` | ص2 | الفحص بالمتصفح — الحكم المعتمد |
+| `tools/check_feeds.py` | ص2 | فحص تغذيات المصادر (يكتب `feeds/feeds-<التاريخ>.status.json`، ورمز الخروج 0 مكتمل · 1 متدهور · 2 فاشل) |
+| `validators/check_sources_count.py` | ص2 | رقم المصادر الواحد: يقرؤه كل شيء من ملف واحد |
 | `memory/record_learning.py` | ع2 | تسجيل درس في سجل التعلم |
 | `validators/check_style.py` | ف8 | بوابة الأسلوب المانعة + إدارة القائمة السوداء (`--add` · `--suggest` · `--promote`) |
 | `tools/style_learn.py` | ط10 | التطوير الذاتي للقائمة السوداء من سجل التعلم |
 | `validators/check_intel.py` | ف5 | بوابة التحليل الاستخباري (اللغة الاحتمالية · الافتراضات · المؤشرات · وسم الأسلوب) |
 | `tools/intel_self_review.py` | ح12 | بناء `memory/intel-adaptation.md` قبل كتابة القسم — التعلم الذاتي |
 | `tools/estimate_accuracy.py` | ح10 | قياس دقة التقديرات وتحديث سجلها الربعي |
-| `/home/ubuntu/seawatch/generator/build_report.py` | س2 | بناء صفحة التقرير — **المصدر الواحد** للمولّد |
-| `/home/ubuntu/seawatch/generator/sync_from_brain.py` | أ2 | تحديث الموقع الدائم من مخرجات اليوم |
+| `site/generator/build_report.py` (مجلد `SITE_DIR`) | س2 | بناء صفحة التقرير — **المصدر الواحد** للمولّد |
+| `site/generator/sync_from_brain.py` (مجلد `SITE_DIR`) | أ2 | تحديث الموقع الدائم من مخرجات اليوم |
 
 ## ما يتغير عند أي تعديل
 
@@ -107,7 +107,7 @@
 ## تعديلات الدفعة الثانية (12 أكتوبر 2026)
 - النطاق الجغرافي: + المحيط الهندي + القرن الأفريقي → `sections/30-structure.md`
 - النطاق الموضوعي: + القرصنة والاستهداف والسطو المسلح والهجمات والتأثير غير المباشر → `sections/30-structure.md`
-- الربط بالأحداث السابقة ونافذتا 48 و72 ساعة الماضيتان → `sections/30-structure.md`
+- الربط بالأحداث السابقة وفترتا 48 و72 ساعة الماضيتان → `sections/30-structure.md`
 - الاستدلال الزمني المستقبلي: **مؤجّل** → `sections/50-analysis.md`
 - التحقيق متعدد المصادر (مبحث المعلومة في الـ37) → `sections/10-sources.md`
 - الإعلام المعتمد: بانتظار قائمة القرار → `docs/قائمة-الجهات-الإعلامية-للاعتماد.md`
@@ -165,10 +165,10 @@
 
 ## منهجية التطوير والتشخيص (اعتماد 23 أكتوبر 2026)
 - المهارة: `superpowers-method` (مُكيّفة من `obra/superpowers` برخصة MIT) — نظام فرامل للنظام نفسه، لا لكتابة الخبر.
-- الملف: `/home/ubuntu/skills/superpowers-method/SKILL.md` ونسختها في المستودع `skills/superpowers-method/`.
+- الملف: `skills/superpowers-method/SKILL.md` في المستودع (مصدره GitHub؛ ويُطبَّق على الخادم بـ`tools/apply_from_github.sh`).
 - المهارات الخمس المعتمدة: التحقق قبل الإتمام · التشخيص المنهجي · التطوير المبني على اختبار · كتابة الخطة · تشخيص الجلسة.
 - حلقة التعلم الذاتي: `tools/skill_lessons.py` تُستدعى في نهاية `tools/final_gate.sh` وتُحدّث كتلة الدروس في المهارة و`memory/learning-log.jsonl` في كل تشغيل.
-- تقرير المطابقة الكامل (15 مهارة: ما يُعتمد وما لا يُعتمد): `language-pack-01/10-superpowers-mapping.md` في الحزمة وأرشيف النسخة الاحتياطية.
+- تقرير المطابقة الكامل (15 مهارة) كان في حزمة خارجية غير موجودة في المستودع؛ المعتمد منه مدوّن في المهارة نفسها.
 
 ## شكل PDF المعتمد
 - `templates/approved-pdf/print-profile.json` — بصمة الشكل المعتمد v3 وقواعده.
@@ -178,3 +178,9 @@
 ## النسخة الاحتياطية
 
 - `tools/github_backup.sh` — نسخة كاملة على GitHub (مستودع خاص): تُبنى الشجرة النظيفة `brain/` + `site/` وتُدفع بعد كل إصدار (الخطوة أ16).
+
+## GitHub مصدر الشيفرة (قرار المالك 24 أكتوبر 2026)
+- الشيفرة والقواعد والأقسام والملاحق والقوالب والاختبارات والمولّد والمهارات مصدرها GitHub (فرع main) وتتغير بفرع وطلب دمج. التفاصيل في `AGENTS.md` بجذر المستودع، والحدود في `appendices/code-paths.json`.
+- البيانات (السجلات والتقارير والذاكرة والدفاتر) مصدرها الخادم وتُنسخ احتياطيًا. الخادم يأخذ الشيفرة بـ`tools/apply_from_github.sh`، ولا يكتب `tools/github_backup.py` الشيفرة فوق المستودع.
+- الأرشيف الطويل للتقارير على جهاز المالك: `appendices/reports-archive.json` وفهرسه `docs/reports-index.md` (يولّده `tools/reports_index.py`).
+- سجل ما أُثبت بالتشغيل في كل تغيير: `CHANGELOG.md`.

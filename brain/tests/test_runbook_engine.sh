@@ -14,7 +14,7 @@ cat > "$T/runbook/prompts/w.md" <<'EOF'
 اكتب التقرير في reports/{date}-sectioned.md
 EOF
 cat > "$T/runbook/runbook.json" <<'EOF'
-{"version":1,"ledger_dir":"logs/runbook","exempt":["reports/*","runbook/*","docs/*","tools/runbook.py"],
+{"version":1,"ledger_dir":"logs/runbook","exempt":["reports/*","runbook/*","docs/*","tools/runbook.py"],"exempt_reasons":{"reports/*":"مخرجات","runbook/*":"ملفات المحرّك","docs/*":"كتيب مولَّد","tools/runbook.py":"المحرّك نفسه"},
  "steps":[
   {"id":"S1","title":"تحضير","kind":"script","command":["bash","-lc","echo ok; rc=$?; exit $rc"],
    "assert":[{"type":"cmd","command":["bash","-lc","test -s logs/runbook/{date}/S1.log"]}],
@@ -22,8 +22,8 @@ cat > "$T/runbook/runbook.json" <<'EOF'
   {"id":"S2","title":"كتابة","kind":"agent","prompt":"runbook/prompts/w.md","writes":["reports/{date}-sectioned.md"],
    "assert":[{"type":"min_bytes","path":"reports/{date}-sectioned.md","n":50}],
    "links":{"rules":["ق2"],"files":["runbook/prompts/w.md"],"folders":[],"gates":[],"tests":[]},"on_fail":"stop"},
-  {"id":"S3","title":"بوابة تفشل","kind":"script","command":["bash","-lc","exit 2"],
-   "assert":[{"type":"cmd","command":["bash","-lc","true"]}],
+  {"id":"S3","title":"بوابة تفشل","kind":"script","command":["bash","-lc","echo blocked; exit 2"],
+   "assert":[{"type":"cmd","command":["bash","-lc","test -s logs/runbook/{date}/S3.log"]}],
    "links":{"rules":["ق3"],"files":["tools/runbook.py"],"folders":[],"gates":[],"tests":[]},"on_fail":"stop"},
   {"id":"S4","title":"نشر","kind":"script","command":["bash","-lc","echo published; rc=$?; exit $rc"],
    "assert":[{"type":"cmd","command":["bash","-lc","test -s logs/runbook/{date}/S4.log"]}],

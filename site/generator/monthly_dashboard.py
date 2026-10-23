@@ -84,6 +84,7 @@ def build(ledger_path, out_path, title):
     html_out = f"""<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(title)}</title>
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
 <style>
 :root{{--bg:#050a12;--panel:#0c1626;--line:#1d2e4a;--ink:#e9f0f9;--ink2:#b9c8dc;--muted:#7e93ab;--accent:#22c3b6}}
 *{{box-sizing:border-box}}
@@ -97,7 +98,9 @@ p.lede{{color:var(--muted);margin:0 0 20px;font-size:14px}}
 .k span{{color:var(--muted);font-size:13px}}
 .row{{display:grid;grid-template-columns:150px 1fr 54px;gap:12px;align-items:center;margin:8px 0}}
 .lbl{{font-size:13.5px;color:var(--ink2)}}
-.bar{{height:9px;background:#101d31;border-radius:99px;overflow:hidden}}
+.bar{{height:9px;background:#101d31;border-radius:99px;overflow:hidden;position:relative}}
+/* خط أساس مشترك: تدريج عند 25% و50% و75% من أعلى قيمة */
+.bar::after{{content:"";position:absolute;inset:0;background:linear-gradient(to right,transparent 24.6%,rgba(255,255,255,.16) 24.6%,rgba(255,255,255,.16) 25.2%,transparent 25.2%,transparent 49.7%,rgba(255,255,255,.16) 49.7%,rgba(255,255,255,.16) 50.3%,transparent 50.3%,transparent 74.8%,rgba(255,255,255,.16) 74.8%,rgba(255,255,255,.16) 75.4%,transparent 75.4%);pointer-events:none}}
 .bar i{{display:block;height:100%;background:var(--accent)}}
 .bar.alt i{{background:#4d9dff}}
 .num{{font-family:"IBM Plex Mono",monospace;font-size:13px;text-align:end}}
@@ -105,8 +108,14 @@ table{{width:100%;border-collapse:collapse;background:var(--panel);border:1px so
 th,td{{padding:9px 12px;border-bottom:1px solid var(--line);font-size:14px;text-align:start}}
 th{{background:#0f1d33;color:var(--ink2);font-weight:600}}
 td.num{{text-align:end;font-family:"IBM Plex Mono",monospace}}
-.foot{{color:var(--muted);font-size:12.5px;margin-top:26px;border-top:1px solid var(--line);padding-top:14px}}
-</style></head><body><div class="wrap">
+.foot{{color:var(--muted);font-size:13px;margin-top:26px;border-top:1px solid var(--line);padding-top:14px}}
+/* المظهر النهاري: كانت الصفحة تبقى داكنة مع شريط فاتح */
+body.daylight{{--bg:#eef3f9;--panel:#ffffff;--line:#d3dded;--ink:#0d1a2b;--ink2:#33475e;--muted:#4f657c;--accent:#0b7a72}}
+body.daylight .bar{{background:#dbe5f0}}
+body.daylight th{{background:#eef3f9}}
+body.daylight .bar.alt i{{background:#1d5fa8}}
+body.daylight .bar::after{{filter:invert(1);opacity:.35}}
+</style></head><body><div class="wrap" role="main">
 <h1>{esc(title)}</h1>
 <p class="lede">لوحة مبنية من دفتر الأحداث التراكمي: {len(months)} شهرًا، {total} سجلًا. لا تُقرأ الأعداد كهجمات مؤكدة.</p>
 <div class="kpis">

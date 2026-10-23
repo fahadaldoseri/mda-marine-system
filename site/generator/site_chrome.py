@@ -24,33 +24,38 @@ SITE_CSS = """
 --sn-muted:#7f95ae;--sn-accent:#22c3b6;--sn-accent-ink:#04120f}
 html{scroll-behavior:smooth}
 body.daylight{--sn-bg:#eef3f9;--sn-panel:#ffffff;--sn-line:#d3dded;--sn-ink:#0d1a2b;--sn-ink2:#33475e;
---sn-muted:#5d738c;--sn-accent:#0f8f86;--sn-accent-ink:#ffffff}
+--sn-muted:#4f657c;--sn-accent:#0b7a72;--sn-accent-ink:#ffffff}
 .site-nav{position:sticky;top:0;z-index:60;background:var(--sn-bg);border-bottom:1px solid var(--sn-line);
 font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif}
-.site-nav .sn-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:9px 20px;flex-wrap:wrap}
+.site-nav .sn-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:9px 20px;flex-wrap:wrap}
 .site-nav a{color:var(--sn-ink2);text-decoration:none}
 .sn-brand{display:flex;align-items:center;gap:10px;color:var(--sn-ink)!important;font-weight:700}
 .sn-mark{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:0 0 auto;
 background:linear-gradient(150deg,var(--sn-accent),#0c8b83);color:#04120f}
 .sn-mark svg{width:17px;height:17px}
 .sn-name{display:flex;flex-direction:column;line-height:1.25}
-.sn-name em{font-style:normal;font-size:11.5px;font-weight:500;color:var(--sn-muted)}
+.sn-name em{font-style:normal;font-size:12.5px;font-weight:500;color:var(--sn-muted)}
 .sn-links{display:flex;gap:4px;margin-inline-start:auto;flex-wrap:wrap}
-.sn-links a{padding:6px 11px;border-radius:8px;font-size:13.5px;border:1px solid transparent}
+.sn-links a{padding:6px 8px;min-height:32px;display:inline-flex;align-items:center;border-radius:8px;font-size:13.5px;border:1px solid transparent}
 .sn-links a:hover{background:var(--sn-panel);border-color:var(--sn-line);color:var(--sn-ink)}
 .sn-links a[aria-current="page"]{background:var(--sn-panel);border-color:var(--sn-line);color:var(--sn-ink);font-weight:600}
 .sn-tools{display:flex;align-items:center;gap:8px}
 .sn-scale{display:flex;border:1px solid var(--sn-line);border-radius:9px;overflow:hidden}
-.sn-scale button{background:transparent;border:0;color:var(--sn-ink2);padding:5px 10px;cursor:pointer;font:inherit;font-size:13px}
+.sn-scale button{background:transparent;border:0;color:var(--sn-ink2);padding:5px 8px;min-width:34px;min-height:32px;cursor:pointer;font:inherit;font-size:13px}
 .sn-scale button.on{background:var(--sn-accent);color:var(--sn-accent-ink);font-weight:700}
 .sn-theme{background:var(--sn-panel);border:1px solid var(--sn-line);color:var(--sn-ink2);
 border-radius:9px;padding:6px 11px;cursor:pointer;font:inherit;font-size:13px}
 .sn-theme:hover{color:var(--sn-ink)}
+.sn-skip{position:absolute;inset-inline-start:12px;top:-80px;z-index:70;background:var(--sn-accent);color:var(--sn-accent-ink)!important;
+padding:9px 16px;border-radius:9px;font-weight:700;font-size:14px}
+.sn-skip:focus{top:8px;outline:2px solid var(--sn-ink);outline-offset:2px}
+.sn-print{background:var(--sn-accent);color:var(--sn-accent-ink);border-color:transparent;font-weight:700}
+.sn-print:hover{color:var(--sn-accent-ink);filter:brightness(1.08)}
 .sn-foot{margin-top:44px;border-top:1px solid var(--sn-line);background:var(--sn-bg);
 font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif}
-.sn-foot .sf-inner{max-width:1180px;margin:0 auto;padding:20px;color:var(--sn-muted);font-size:12.5px;
+.sn-foot .sf-inner{max-width:1180px;margin:0 auto;padding:20px;color:var(--sn-muted);font-size:13px;
 display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
-.sn-foot a{color:var(--sn-ink2)}
+.sn-foot a{color:var(--sn-ink2);display:inline-block;padding:4px 2px;min-height:24px}
 body.daylight .topbar{background:#ffffff!important;border-bottom-color:#d3dded!important}
 body.daylight .brand-title,body.daylight .brand-sub{color:#0d1a2b}
 @media print{.site-nav,.sn-foot{display:none!important}}
@@ -85,12 +90,22 @@ function currentScale(){var s=parseFloat(LS.getItem('mn-scale')||'1');return (s&
 function toggleTheme(){var on=body.classList.toggle('daylight');save('mn-theme',on?'light':'dark');paint();}
 if(reportBtn) reportBtn.addEventListener('click',function(e){e.preventDefault();toggleTheme();});
 if(siteBtn) siteBtn.addEventListener('click',function(e){e.preventDefault();toggleTheme();});
+var printBtn=document.getElementById('sn-print');
+if(printBtn) printBtn.addEventListener('click',function(e){e.preventDefault();window.print();});
 document.querySelectorAll('[data-scale]').forEach(function(b){
   b.addEventListener('click',function(e){e.preventDefault();
     var s=parseFloat(b.getAttribute('data-scale'));save('mn-scale',s);
     body.style.zoom=(s===1?'':s);paint();});
 });
 paint();
+// رابط التخطي: أول عنوان ظاهر في الصفحة (أو المتن)، فلا يمرّ قارئ لوحة المفاتيح على الشريط كله في كل صفحة
+var skip=document.getElementById('sn-skip');
+if(skip){
+  var hs=[].slice.call(document.querySelectorAll('h1')).filter(function(h){return h.offsetParent!==null;});
+  var tg=hs[0]||document.querySelector('main,[role=main]');
+  if(tg){ if(!tg.id) tg.id='sn-main'; tg.setAttribute('tabindex','-1'); skip.setAttribute('href','#'+tg.id); }
+  else { skip.parentNode.removeChild(skip); }
+}
 // تذكّر آخر تقرير فُتح
 var p=location.pathname;
 if(p.indexOf('/reports/')===0){
@@ -106,7 +121,10 @@ def nav_html(active: str = "") -> str:
     def link(href, label, key):
         cur = ' aria-current="page"' if key == active else ""
         return f'<a href="{href}"{cur}>{label}</a>'
+    # زر الطباعة في الشريط الواحد لصفحات الإصدار فقط (يحلّ محل زر الشريط العلوي المخفي على الشاشة)
+    print_btn = '<button type="button" class="sn-theme sn-print" id="sn-print">طباعة / PDF</button>' if active == "report" else ""
     return f"""<nav class="site-nav no-print" aria-label="تنقل الموقع">
+  <a class="sn-skip" href="#" id="sn-skip">الانتقال إلى المحتوى</a>
   <div class="sn-inner">
     <a class="sn-brand" href="/">
       <span class="sn-mark">{MARK_SVG}</span>
@@ -131,6 +149,7 @@ def nav_html(active: str = "") -> str:
         <button type="button" data-scale="1.25" title="أكبر حجم">أ++</button>
       </div>
       <button type="button" class="sn-theme" id="sn-theme">المظهر</button>
+      {print_btn}
     </div>
     </div>
   </div>
@@ -180,7 +199,23 @@ def inject(html: str, active: str, note: str = "") -> str:
 MOBILE_NAV_CSS = """
 /* قائمة الجوال — تضغط شريطي الموقع والصفحة إلى ارتفاع صغير */
 .sn-menu{display:none}
-@media (max-width:760px){
+/* سطح المكتب: الروابط والأدوات في صف واحد بجانب الشعار (كانت تتراصّ صفين داخل اللوحة) */
+@media (min-width:1041px){
+  .sn-panel{display:flex;align-items:center;gap:12px;flex:1 1 auto;min-width:0}
+  .sn-panel .sn-links{margin-inline-start:0}
+  .sn-panel .sn-tools{margin-inline-start:auto}
+}
+/* عرض متوسط (لوحي): يبقى الشريط صفًّا واحدًا حتى مع زر الطباعة */
+@media (min-width:1041px) and (max-width:1180px){
+  .sn-name em{display:none}
+  .site-nav .sn-inner{gap:8px;padding-inline:14px}
+  .sn-links{gap:0}
+  .sn-links a{padding:6px 5px;font-size:13px}
+  .sn-panel{gap:6px}
+  .sn-tools{gap:6px}
+  .sn-theme{padding:6px 8px}
+}
+@media (max-width:1040px){
   .site-nav .sn-inner{flex-wrap:nowrap;padding:8px 14px;gap:10px;position:relative}
   .sn-name em{display:none}
   .sn-menu{

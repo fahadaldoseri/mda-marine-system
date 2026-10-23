@@ -1,12 +1,17 @@
 #!/usr/bin/env python3
 """فحص حفظ الحقائق والبنية بين نصين (قبل التحرير وبعده). يمنع إذا تغيّر ما لا يجوز تغييره.
 
-الاستعمال:  python3 preserve_check.py قبل.md بعد.md
+الاستعمال:  python3 preserve_check.py قبل.md بعد.md [--removable ملف.json]
+            الملف الاختياري: {"مصطلح لاتيني": "سبب مكتوب"} — حذف هذه الألفاظ مسموح (قرار مالك موثَّق)؛ وما سواها يُمنع حذفه.
+            الافتراضي: appendices/removable-latin.json إن وُجد.
 الخروج:     0 = محفوظ · 2 = فرق (يُطبع).
 يفحص: الأرقام، الرموز MN-/EST-، الأسماء اللاتينية، الروابط، ألفاظ الإسناد واليقين،
       عدد العناوين ومستوياتها، شكل كل جدول (عدد الصفوف والأعمدة).
 القياس بتعبيرات نمطية: يكشف التغيّر لا صحة المعنى.
 """
+import argparse
+import json
+import os
 import re
 import signal
 import sys
@@ -34,7 +39,8 @@ def facts(t):
     urls = Counter(re.findall(r"https?://[^\s)>\]]+", t))
     t_nourl = re.sub(r"https?://[^\s)>\]]+", " ", t)
     nums = Counter(re.findall(r"\d+(?:[.,:/-]\d+)*", t_nourl))
-    latin = Counter(w.upper() for w in re.findall(r"[A-Za-z][A-Za-z0-9'’./-]*", t_nourl))
+    # علامات الترقيم الملاصقة (نقطة الجملة وغيرها) ليست من الكلمة: «0400Z.» هي «0400Z»
+    latin = Counter(w.rstrip("./-'’").upper() for w in re.findall(r"[A-Za-z][A-Za-z0-9'’./-]*", t_nourl))
     codes = Counter(re.findall(r"(?:MN|EST)-\d{4}-\d{2}-\d{2}-\d{2}", t_nourl))
     hedges = Counter()
     for k, pat in HEDGES.items():
@@ -66,16 +72,32 @@ def diff(a, b, title):
     return out
 
 
+def heading_texts(t):
+    return [norm(m.group(2)).strip() for m in re.finditer(r"^(#{1,6})\s+(.+?)\s*$", t, re.M)]
+
+
 def main():
-    if len(sys.argv) != 3:
-        print(__doc__)
-        return 0
-    before = open(sys.argv[1], encoding="utf-8").read()
-    after = open(sys.argv[2], encoding="utf-8").read()
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("before")
+    ap.add_argument("after")
+    ap.add_argument("--removable")
+    a = ap.parse_args()
+    here = os.path.dirname(os.path.abspath(__file__))
+    rem_path = a.removable or os.path.join(here, "..", "appendices", "removable-latin.json")
+    removable = {}
+    if os.path.isfile(rem_path):
+        removable = {k.upper() for k in json.load(open(rem_path, encoding="utf-8"))}
+    before = open(a.before, encoding="utf-8").read()
+    after = open(a.after, encoding="utf-8").read()
     fb, fa = facts(before), facts(after)
     problems = []
     problems += diff(fb[0], fa[0], "رقم")
-    problems += diff(fb[1], fa[1], "لاتيني")
+    lat_b, lat_a = Counter(fb[1]), Counter(fa[1])
+    for w in removable:  # المسموح حذفه: يُسقَط من المقارنة إن نقص فقط (الإضافة تبقى ممنوعة)
+        if lat_a.get(w, 0) <= lat_b.get(w, 0):
+            lat_b.pop(w, None)
+            lat_a.pop(w, None)
+    problems += diff(lat_b, lat_a, "لاتيني")
     problems += diff(fb[2], fa[2], "رمز")
     problems += diff(fb[4], fa[4], "رابط")
     for k in sorted(set(fb[3]) | set(fa[3])):
@@ -85,6 +107,8 @@ def main():
     ha, ta = structure(after)
     if hb != ha:
         problems.append(f"  عناوين: عددها/مستوياتها تغيّرت ({len(hb)} ← {len(ha)})")
+    if heading_texts(before) != heading_texts(after):
+        problems.append("  عنوان: نص عنوان تغيّر (العناوين عقد مع المولّد والمدققات)")
     if tb != ta:
         problems.append(f"  جداول: شكلها تغيّر (صفوف/أعمدة): قبل={[t[0] for t in tb]} بعد={[t[0] for t in ta]}")
     if problems:

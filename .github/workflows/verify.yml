@@ -1,0 +1,30 @@
+name: verify
+
+on:
+  pull_request:
+  push:
+    branches-ignore: [main]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    env:
+      BRAIN_DIR: ${{ github.workspace }}/brain
+      SITE_DIR: ${{ github.workspace }}/site
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: حزم النظام
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+      - name: حزم بايثون
+        run: pip install -r brain/requirements.txt
+      - name: متصفح Chromium (تدقيق الطباعة)
+        run: python3 -m playwright install --with-deps chromium
+      - name: اتساق المانيفست والكتيب
+        run: python3 brain/tools/runbook.py verify --root brain
+      - name: تصنيف مسارات المستودع
+        run: python3 brain/tools/code_paths.py check --root .
+      - name: الاختبارات
+        run: bash brain/tests/run_checks.sh

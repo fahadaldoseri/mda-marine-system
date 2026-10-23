@@ -24,11 +24,21 @@ from pathlib import Path
 
 B = Path(__file__).resolve().parent.parent
 LIBS = B / "appendices" / "libraries"
-SKILLS = Path("/home/ubuntu/skills")
+def _skills_dir(brain: Path) -> Path:
+    """مجلد المهارات: SKILLS_DIR ← مسار الخادم إن وُجد ← skills/ في جذر المستودع (محمول)."""
+    import os
+    if os.environ.get("SKILLS_DIR"):
+        return Path(os.environ["SKILLS_DIR"])
+    if Path("/home/ubuntu/skills").is_dir():
+        return Path("/home/ubuntu/skills")
+    return brain.parent / "skills"
+
+SKILLS = _skills_dir(B)
 SKILL_NAMES = ("marine-news-brain", "military-arabic-editing")
 SITE = Path(os.environ.get("SITE_DIR") or B.parent / "seawatch")
-REPO_SKILLS = Path(os.environ.get("BACKUP_REPO_DIR")
-                   or B.parent / "mda-marine-system") / "skills"
+REPO_SKILLS = (Path(os.environ["BACKUP_REPO_DIR"]) / "skills" if os.environ.get("BACKUP_REPO_DIR")
+               else (B.parent / "skills" if (B.parent / "skills").is_dir() and (B.parent / ".git").exists()
+                     else B.parent / "mda-marine-system" / "skills"))
 
 PLACEHOLDERS = ("TODO", "FIXME", "XXX", "۱۸", "lorem", "placeholder", "غير معروف بعد")
 SECRET_PAT = re.compile(r"8949347226:|sk-[A-Za-z0-9]{20,}|bot\d{8,}:|chat_id\"\s*:\s*\"-?\d+")
@@ -189,6 +199,11 @@ def check_enforcement() -> None:
         f = B / "tools" / r
         if f.is_file():
             fg_txt += f.read_text(encoding="utf-8")
+    # مدقّقات تُشغَّل عبر وسيط تستدعيه البوابة (language_gates.py) أو عبر خطوات المانيفست تُعدّ مُشغَّلة
+    for extra in ("tools/language_gates.py", "runbook/runbook.json"):
+        ep = B / extra
+        if ep.is_file():
+            fg_txt += "\n" + ep.read_text(encoding="utf-8")
     RULES = {
         "كل نص ثابت يدخل مدى بوابة الأسلوب": "check_style",
         "الرموز تُعرَّف في القاموس": "check_comprehension",

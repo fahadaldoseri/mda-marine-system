@@ -15,6 +15,7 @@
   runbook.py section-remove --id ID [--root .]
   runbook.py step-add --id ID --title T --kind script|llm|agent --after ID2 [--root .]   يسجّل خطوة جديدة
   runbook.py step-remove --id ID [--root .]
+  runbook.py gate-json --date D [--through STEP] [--root .]   يكتب logs/gate-D/gate.json من سجل المحرّك
   runbook.py gates --date D [--root .]            ينفّذ خطوات مرحلة البوابات وحدها (بديل final_gate.sh)
 رموز الخروج: 0 تم · 2 فشل/مخالفة · 10 بانتظار الوكيل
 """
@@ -53,8 +54,77 @@ def sha(path):
     return h.hexdigest()
 
 
-def sub(s, date):
-    return s.replace("{date}", date) if isinstance(s, str) else s
+def site_dir(root):
+    """مجلد الموقع: SITE_DIR ← seawatch الشقيق ← site الشقيق (نفس منطق بقية الأدوات)."""
+    if os.environ.get("SITE_DIR"):
+        return os.environ["SITE_DIR"]
+    parent = os.path.dirname(os.path.abspath(root))
+    for name in ("seawatch", "site"):
+        if os.path.isdir(os.path.join(parent, name)):
+            return os.path.join(parent, name)
+    return os.path.join(parent, "seawatch")
+
+
+def sub(s, date, root=None):
+    """يستبدل {date} و{site} و{brain}. بلا root لا يحلّ {site} و{brain}."""
+    if not isinstance(s, str):
+        return s
+    s = s.replace("{date}", date or "{date}")
+    if root is not None:
+        s = s.replace("{site}", site_dir(root)).replace("{brain}", os.path.abspath(root))
+    return s
+
+
+def step_env(root, date):
+    """متغيرات البيئة التي يراها كل أمر خطوة: D و DATE و B و BRAIN_DIR و SITE و SITE_DIR."""
+    e = dict(os.environ)
+    sd = site_dir(root)
+    e.update({"D": date or "", "DATE": date or "", "B": os.path.abspath(root), "BRAIN_DIR": os.path.abspath(root),
+              "SITE": sd, "SITE_DIR": sd})
+    return e
+
+
+def resolve(root, p, date):
+    """مسار من المانيفست → مسار فعلي (نسبي إلى root أو مطلق بعد حل {site})."""
+    p = sub(p, date, root)
+    return p if os.path.isabs(p) else os.path.join(root, p)
+
+
+INCLUDE_RE = re.compile(r"\{\{include\s+([^}]+?)\s*\}\}")
+
+
+def render_prompt(root, rel, date, depth=0):
+    """يقرأ برومت خطوة الوكيل ويضمّن الملفات المشار إليها بـ {{include مسار}} (حتى عمقين)."""
+    txt = open(resolve(root, rel, date), encoding="utf-8").read()
+    txt = sub(txt, date, None)
+
+    def rep(m):
+        target = m.group(1).strip()
+        if depth >= 2:
+            return m.group(0)
+        return render_prompt(root, target, date, depth + 1).rstrip("\n")
+    txt = INCLUDE_RE.sub(rep, txt)
+    if "{{sections}}" in txt:
+        txt = txt.replace("{{sections}}", render_sections(root, date))
+    return txt
+
+
+def render_sections(root, date):
+    """أقسام التقرير من السجل بترتيبها، ومعها مقتطف برومت كل قسم (فتُضاف الأقسام الجديدة تلقائيًا)."""
+    m = load(root)
+    parts = []
+    for sec in sorted(m.get("sections", []), key=lambda x: x["order"]):
+        head = sec.get("heading") or sec["title"]
+        snippet = ""
+        sp = sec.get("prompt_snippet")
+        if sp and os.path.exists(resolve(root, sp, date)):
+            lines = open(resolve(root, sp, date), encoding="utf-8").read().splitlines()
+            snippet = "\n".join(l for l in lines if not l.startswith("# ")).strip()
+        if not sec.get("heading"):
+            parts.append(f"### {sec['order']}. {sec['title']}\n(تُركَّب آليًا من ملف الواجهة — لا تكتبها في النص)")
+            continue
+        parts.append(f"### {sec['order']}. {head}\n{snippet}")
+    return "\n\n".join(parts)
 
 
 def ledger_path(root, m, date):
@@ -86,17 +156,17 @@ def check_asserts(root, step, date):
     for a in step.get("assert", []):
         t = a.get("type")
         if t in ("file_exists", "min_bytes", "contains"):
-            p = os.path.join(root, sub(a["path"], date))
+            p = resolve(root, a["path"], date)
             if not os.path.exists(p):
-                problems.append(f"ملف غائب: {sub(a['path'], date)}")
+                problems.append(f"ملف غائب: {sub(a['path'], date, root)}")
                 continue
             if t == "min_bytes" and os.path.getsize(p) < a["n"]:
-                problems.append(f"حجم أصغر من {a['n']}: {sub(a['path'], date)}")
+                problems.append(f"حجم أصغر من {a['n']}: {sub(a['path'], date, root)}")
             if t == "contains" and a["text"] not in open(p, encoding="utf-8", errors="replace").read():
-                problems.append(f"النص المطلوب غير موجود في {sub(a['path'], date)}")
+                problems.append(f"النص المطلوب غير موجود في {sub(a['path'], date, root)}")
         elif t == "cmd":
-            cmd = [sub(c, date) for c in a["command"]]
-            r = subprocess.run(cmd, cwd=root, capture_output=True, text=True)
+            cmd = [sub(c, date, root) for c in a["command"]]
+            r = subprocess.run(cmd, cwd=root, capture_output=True, text=True, env=step_env(root, date))
             if r.returncode not in a.get("ok_rc", [0]):
                 problems.append(f"فحص فشل (رمز {r.returncode}): {' '.join(cmd)}")
         else:
@@ -107,9 +177,9 @@ def check_asserts(root, step, date):
 def outputs_hash(root, step, date):
     out = {}
     for w in step.get("writes", []):
-        p = os.path.join(root, sub(w, date))
+        p = resolve(root, w, date)
         if os.path.isfile(p):
-            out[sub(w, date)] = sha(p)
+            out[sub(w, date, root)] = sha(p)
     return out
 
 
@@ -139,7 +209,11 @@ def run(root, date, only_phase=None):
             return 2
         print(f"▶ {s['id']} — {s['title']}  [{s['kind']}]")
         if s["kind"] == "agent":
-            prompt = open(os.path.join(root, s["prompt"]), encoding="utf-8").read().replace("{date}", date)
+            try:
+                prompt = render_prompt(root, s["prompt"], date)
+            except OSError as exc:
+                print(f"✘ تعذّر قراءة برومت {s['id']} أو أحد الملفات المضمّنة فيه: {exc}")
+                return 2
             append(root, m, date, {"step": s["id"], "status": "waiting_agent"})
             print("─" * 60)
             print(prompt)
@@ -147,10 +221,10 @@ def run(root, date, only_phase=None):
             print(f"عند الانتهاء: python3 tools/runbook.py complete {s['id']} --date {date}")
             return 10
         # script / llm: ينفّذ الأمر
-        cmd = [sub(c, date) for c in s["command"]]
+        cmd = [sub(c, date, root) for c in s["command"]]
         attempts = 1 + (int(s["on_fail"].split(":")[1]) if str(s.get("on_fail", "")).startswith("retry:") else 0)
         for n in range(1, attempts + 1):
-            r = subprocess.run(cmd, cwd=root, capture_output=True, text=True)
+            r = subprocess.run(cmd, cwd=root, capture_output=True, text=True, env=step_env(root, date))
             logdir = os.path.join(root, "logs/runbook", date)
             os.makedirs(logdir, exist_ok=True)
             logf = os.path.join(logdir, f"{s['id']}.log")
@@ -219,7 +293,7 @@ def gates_status(root, date):
     ledger = read_ledger(root, m, date)
     pend = []
     for s in m["steps"]:
-        if s.get("phase") != "gates":
+        if s.get("phase") not in m.get("gate_phases", ["gates"]):
             continue
         e = ledger.get(s["id"])
         if not e or e["status"] not in ("done", "done_warn"):
@@ -231,7 +305,50 @@ def gates_status(root, date):
     return 0
 
 
+def gate_json(root, date, through=None):
+    """يكتب logs/gate-<date>/gate.json من سجل المحرّك (يقرؤه write_mark وskill_lessons) — لا من الذاكرة."""
+    import datetime
+    m = load(root)
+    ledger = read_ledger(root, m, date)
+    steps, blocked, worst = [], [], 0
+    for s in m["steps"]:
+        if s.get("phase") not in m.get("gate_phases", ["gates"]):
+            continue
+        e = ledger.get(s["id"])
+        name = s.get("gate_title") or s["title"]
+        if e and e["status"] == "done":
+            st, rc = "ok", 0
+        elif e and e["status"] == "done_warn":
+            st, rc = "warn", 1
+        else:
+            st = "block"
+            rc = 2
+        if e and e.get("rc") is not None and st != "ok":
+            rc = e["rc"]
+        if st == "block":
+            blocked.append(name)
+        worst = max(worst, {"ok": 0, "warn": 1, "block": 2}[st])
+        steps.append({"step": name, "id": s["id"], "status": st, "exit_code": rc, "log": (e or {}).get("log")})
+        if through and s["id"] == through:
+            break
+    out = {"date": date, "status": {0: "ok", 1: "warn", 2: "block"}[worst], "exit_code": worst, "steps": steps,
+           "blocked_steps": blocked, "source": "runbook-ledger", "dir": f"logs/gate-{date}", "log_dir": f"logs/gate-{date}",
+           "finished_utc": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}
+    d = os.path.join(root, "logs", f"gate-{date}")
+    os.makedirs(d, exist_ok=True)
+    with open(os.path.join(d, "gate.json"), "w", encoding="utf-8") as f:
+        json.dump(out, f, ensure_ascii=False, indent=1)
+    print(f"gate.json: {out['status']} ({len(steps)} بوابة، مانعة: {len(blocked)})")
+    return 0
+
+
 # ───────────────────────── verify ─────────────────────────
+PATH_RE = re.compile(r"(?<![\w/.-])((?:[\w\u0600-\u06FF.-]+/)+[\w\u0600-\u06FF.-]+\.[A-Za-z0-9]{1,6})(?![\w])")
+CODE_EXT = {".py", ".sh", ".mjs", ".js", ".ts", ".yaml", ".yml"}
+EXEC_DIRS = ("tools/", "validators/", "generator/")
+ROOT_SEEDS = ("INDEX.md", "CLAUDE.md", "SETUP.md", "README.md")
+
+
 def static_paths(s):
     for key in ("reads", "writes"):
         for p in s.get(key, []):
@@ -248,13 +365,155 @@ def static_paths(s):
                 yield "command", c
 
 
+def tracked_files(root):
+    out = []
+    for d, dirs, files in os.walk(root):
+        dirs[:] = [x for x in dirs if x not in SKIP_DIRS]
+        for f in files:
+            rel = os.path.relpath(os.path.join(d, f), root).replace(os.sep, "/")
+            if os.path.splitext(f)[1] in TRACKED_EXT:
+                out.append(rel)
+    return out
+
+
+class RefIndex:
+    """فهرس يحوّل نصًّا إلى ملفات يحيل إليها: بالمسار، أو باسم الملف الفريد، أو باستيراد بايثون محلي."""
+
+    def __init__(self, files):
+        self.files = set(files)
+        self.suffix = {}
+        self.by_name = {}
+        self.by_stem = {}
+        for f in files:
+            parts = f.split("/")
+            for i in range(len(parts)):
+                self.suffix.setdefault("/".join(parts[i:]), []).append(f)
+            self.by_name.setdefault(parts[-1], []).append(f)
+            if f.endswith(".py"):
+                self.by_stem.setdefault(parts[-1][:-3], []).append(f)
+
+    def refs(self, text, src):
+        found = set()
+        for m in PATH_RE.finditer(text):
+            for h in self.suffix.get(m.group(1).lstrip("./"), []):
+                found.add(h)
+        for name, fs in self.by_name.items():
+            if len(fs) == 1 and len(name) >= 6 and name in text:
+                found.add(fs[0])
+        if src.endswith(".py"):
+            for m in re.finditer(r"^\s*(?:from|import)\s+([A-Za-z_][\w]*)", text, re.M):
+                fs = self.by_stem.get(m.group(1), [])
+                same = [f for f in fs if os.path.dirname(f) == os.path.dirname(src)]
+                for h in (same or (fs if len(fs) == 1 else [])):
+                    found.add(h)
+        found.discard(src)
+        return found
+
+
+def read_text(root, rel):
+    try:
+        if os.path.getsize(os.path.join(root, rel)) > 2_000_000:
+            return ""
+        return open(os.path.join(root, rel), encoding="utf-8", errors="replace").read()
+    except OSError:
+        return ""
+
+
+def step_seed_texts(root, m):
+    """نصوص تُستخرج منها الإحالات من المانيفست نفسه: الأوامر والشروط والروابط والبرومتات المضمّنة."""
+    texts = []
+    for s in m["steps"]:
+        texts.append(" ".join(s.get("command") or []))
+        for a in s.get("assert", []):
+            texts.append(" ".join(a.get("command", [])) + " " + str(a.get("path", "")))
+        texts.append(" ".join(p for _, p in static_paths(s)))
+        if s.get("prompt"):
+            texts.append(s["prompt"])
+    for sec in m.get("sections", []):
+        texts.append(" ".join(str(sec.get(k, "")) for k in ("block", "validator", "prompt_snippet")) + " " +
+                     " ".join(sec.get("tests", []) + sec.get("files", [])))
+    return texts
+
+
+def reachability(root, m, files):
+    """يعيد (متصل بالكود والمانيفست، متصل عبر الوثائق أيضًا)."""
+    idx = RefIndex(files)
+
+    def to_rel(p):
+        p = sub(p, "{date}", root)
+        if os.path.isabs(p):
+            ap = os.path.abspath(root)
+            p = os.path.relpath(p, ap) if p.startswith(ap + os.sep) else p
+        return p.lstrip("./")
+
+    seeds = set()
+    for txt in step_seed_texts(root, m):
+        seeds |= idx.refs(txt, "")
+    for s in m["steps"]:
+        for _, p in static_paths(s):
+            r = to_rel(p)
+            if r in idx.files:
+                seeds.add(r)
+            elif os.path.isdir(os.path.join(root, r)):
+                seeds |= {f for f in idx.files if f.startswith(r.rstrip("/") + "/")}
+        if s.get("prompt") and s["prompt"] in idx.files:
+            for inc in INCLUDE_RE.findall(read_text(root, s["prompt"])):
+                if to_rel(inc) in idx.files:
+                    seeds.add(to_rel(inc))
+    for sec in m.get("sections", []):
+        for k in ("block", "validator", "prompt_snippet"):
+            if sec.get(k) and to_rel(sec[k]) in idx.files:
+                seeds.add(to_rel(sec[k]))
+        for p in sec.get("tests", []) + sec.get("files", []):
+            if to_rel(p) in idx.files:
+                seeds.add(to_rel(p))
+
+    def bfs(start, code_only):
+        seen, queue = set(start), list(start)
+        while queue:
+            cur = queue.pop()
+            ext = os.path.splitext(cur)[1]
+            if code_only and ext not in CODE_EXT and ext not in (".json", ".md"):
+                continue
+            if code_only and ext in (".md",) and not cur.startswith("runbook/prompts/"):
+                continue  # الوثائق لا تُعدّ «استدعاءً» في المرحلة الأولى
+            for h in idx.refs(read_text(root, cur), cur):
+                if h not in seen:
+                    seen.add(h)
+                    queue.append(h)
+        return seen
+
+    code_seen = bfs(seeds, True)
+    doc_seeds = set(seeds) | {f for f in ROOT_SEEDS if f in idx.files}
+    all_seen = bfs(doc_seeds | code_seen, False)
+    return code_seen, all_seen
+
+
 def verify(root):
     errs, warns = [], []
     m = load(root)
     ids = [s["id"] for s in m["steps"]]
     if len(ids) != len(set(ids)):
         errs.append("معرّفات خطوات مكررة")
-    referenced = set()
+    # ترتيب المراحل
+    order = m.get("phase_order")
+    if order:
+        last = -1
+        for s in m["steps"]:
+            ph = s.get("phase")
+            if ph not in order:
+                errs.append(f"{s['id']}: مرحلة غير معروفة «{ph}» (المراحل: {'، '.join(order)})")
+                continue
+            i = order.index(ph)
+            if i < last:
+                errs.append(f"ترتيب المراحل: {s['id']} (مرحلة {ph}) جاءت بعد مرحلة أحدث منها")
+            last = max(last, i)
+    # برومتات: التضمينات
+    for s in m["steps"]:
+        if s.get("kind") == "agent" and s.get("prompt") and os.path.exists(os.path.join(root, s["prompt"])):
+            for inc in INCLUDE_RE.findall(read_text(root, s["prompt"])):
+                if not os.path.exists(resolve(root, inc.strip(), None)):
+                    errs.append(f"{s['id']}: البرومت يضمّن ملفًا غير موجود: {inc.strip()}")
     for s in m["steps"]:
         for fld in ("id", "title", "kind"):
             if not s.get(fld):
@@ -267,13 +526,22 @@ def verify(root):
             errs.append(f"{s['id']}: بلا أمر")
         if not s.get("assert") and not s.get("optional"):
             errs.append(f"{s['id']}: بلا شرط نجاح بالدليل (assert)")
+        for a in s.get("assert", []):
+            if a.get("type") == "cmd":
+                tail = (a.get("command") or [""])[-1].strip()
+                if tail in ("true", ":", "") or a.get("command") == ["true"]:
+                    errs.append(f"{s['id']}: شرط تافه لا يثبت شيئًا ({tail or 'فارغ'})")
+        if s.get("phase") == "deliver" and not s.get("optional"):
+            real = [a for a in s.get("assert", []) if not (a.get("type") == "cmd" and "test -s logs/runbook/" in " ".join(a.get("command", [])))]
+            if not real:
+                errs.append(f"{s['id']}: خطوة تسليم تحتاج شرطًا من ناتج حقيقي (ملف أو ردّ مُسجَّل)، لا مجرد وجود السجل")
         if not s.get("links", {}).get("rules") and not s.get("optional"):
             warns.append(f"{s['id']}: غير مربوطة بقاعدة (links.rules)")
         for kind, p in static_paths(s):
-            referenced.add(p)
-            if "{" in p or "*" in p:
+            q = sub(p, "{date}", root)
+            if "{" in q or "*" in q:
                 continue
-            if not os.path.exists(os.path.join(root, p)):
+            if not os.path.exists(q if os.path.isabs(q) else os.path.join(root, q)):
                 errs.append(f"{s['id']}: {kind} يحيل إلى مسار غير موجود: {p}")
     # الأقسام
     for sec in m.get("sections", []):
@@ -282,30 +550,38 @@ def verify(root):
             if not p:
                 errs.append(f"قسم {sec['id']}: رابط ناقص {key}")
                 continue
-            referenced.add(p)
-            if not os.path.exists(os.path.join(root, p)):
+            q = sub(p, "{date}", root)
+            if not os.path.exists(q if os.path.isabs(q) else os.path.join(root, q)):
                 errs.append(f"قسم {sec['id']}: {key} يحيل إلى غير موجود: {p}")
         for p in sec.get("tests", []) + sec.get("files", []):
-            referenced.add(p)
-            if not os.path.exists(os.path.join(root, p)):
+            q = sub(p, "{date}", root)
+            if not os.path.exists(q if os.path.isabs(q) else os.path.join(root, q)):
                 errs.append(f"قسم {sec['id']}: مسار غير موجود: {p}")
         if not sec.get("tests"):
             errs.append(f"قسم {sec['id']}: بلا اختبار")
-    # تغطية: كل ملف متتبَّع إما مذكور أو مستثنى
-    exempt = [e for e in m.get("exempt", [])]
+    # كل استثناء بسبب مكتوب
+    exempt = list(m.get("exempt", []))
+    reasons = m.get("exempt_reasons", {})
+    for g in exempt:
+        if not str(reasons.get(g, "")).strip():
+            errs.append(f"استثناء بلا سبب مكتوب: {g}")
+
     def is_exempt(rel):
         return any(fnmatch.fnmatch(rel, g) for g in exempt)
-    refs_norm = {r.lstrip("./") for r in referenced}
-    for d, dirs, files in os.walk(root):
-        dirs[:] = [x for x in dirs if x not in SKIP_DIRS]
-        for f in files:
-            rel = os.path.relpath(os.path.join(d, f), root).replace(os.sep, "/")
-            if os.path.splitext(f)[1] not in TRACKED_EXT or is_exempt(rel) or rel == MANIFEST or rel == HANDBOOK:
-                continue
-            # يُعدّ متصلًا إذا ذُكر مباشرة أو داخل مجلد مذكور
-            if rel in refs_norm or any(rel.startswith(r.rstrip("/") + "/") for r in refs_norm):
-                continue
-            errs.append(f"ملف غير مربوط بأي خطوة أو قسم: {rel}")
+    files = tracked_files(root)
+    code_seen, all_seen = reachability(root, m, files)
+    manual = m.get("manual_tools", {})
+    for rel in sorted(files):
+        if rel in (MANIFEST, HANDBOOK) or is_exempt(rel):
+            continue
+        if rel not in all_seen:
+            errs.append(f"ملف غير متصل بأي خطوة أو قسم أو وثيقة: {rel}")
+        elif rel.startswith(EXEC_DIRS) and rel.endswith(tuple(CODE_EXT)) and rel not in code_seen:
+            if not str(manual.get(rel, "")).strip():
+                errs.append(f"أداة تذكرها الوثائق فقط ولا يستدعيها كود ولا خطوة (تعتمد على تذكّر الوكيل): {rel}")
+    for k in manual:
+        if k not in files:
+            errs.append(f"manual_tools يحيل إلى ملف غير موجود: {k}")
     # الكتيب المولَّد مطابق للمانيفست
     hb = os.path.join(root, HANDBOOK)
     if not os.path.exists(hb):
@@ -319,7 +595,7 @@ def verify(root):
     if errs:
         print(f"\nنتيجة التحقق: {len(errs)} خلل")
         return 2
-    print("✔ المانيفست متسق: كل خطوة مربوطة بملفاتها وقواعدها وكل ملف مربوط بخطوة أو قسم")
+    print("✔ المانيفست متسق: كل خطوة مربوطة، وكل ملف متصل بخطوة أو قسم أو وثيقة، وكل أداة يستدعيها كود أو مسجَّلة يدوية بسبب")
     return 0
 
 
@@ -439,6 +715,7 @@ def main():
     ap.add_argument("--title")
     ap.add_argument("--kind")
     ap.add_argument("--after", default="START")
+    ap.add_argument("--through", help="gate-json: آخر خطوة تُحسب (ما بعدها لم يحن وقته)")
     a = ap.parse_args()
     c = a.cmd
     if c == "verify":
@@ -447,6 +724,8 @@ def main():
         return run(a.root, a.date)
     if c == "gates":
         return run(a.root, a.date, only_phase="gates")
+    if c == "gate-json":
+        return gate_json(a.root, a.date, a.through)
     if c == "gates-status":
         return gates_status(a.root, a.date)
     if c == "complete":

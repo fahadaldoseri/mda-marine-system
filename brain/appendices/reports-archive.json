@@ -1,0 +1,14 @@
+{
+  "policy": "reports-archive",
+  "updated": "2026-10-24",
+  "retain_days_in_repo": 30,
+  "retain_note": "اعتمده المالك في 2026-10-24: آخر 30 يومًا من التقارير تبقى في المستودع؛ ما سواها يُنقل إلى الأرشيف الخاص على جهاز المالك ويُفهرس.",
+  "device_archive": {
+    "os": null,
+    "path": null,
+    "how_reports_arrive": null,
+    "status": "غير محدد — يستخرجه مانوس من سجلاته (نظام الجهاز، المسار، طريقة وصول التقارير) بأمر مكتوب، لا يُخمَّن",
+    "naming": "التقرير-اليومي-YYYY-MM-DD.pdf و YYYY-MM-DD-sectioned.md و .docx"
+  },
+  "for_ai_agents": "عند الحاجة إلى تقرير أقدم من retain_days_in_repo: ليس في المستودع. ابحث في device_archive.path على جهاز المالك (اطلبه منه إن كان path فارغًا). فهرس ما في المستودع وما انتقل: docs/reports-index.md."
+}

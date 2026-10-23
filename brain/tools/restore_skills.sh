@@ -6,9 +6,11 @@
 # و`checkout` لا يُنفَّذ إلا إذا كانت شجرة المستودع نظيفة (بلا تعديل غير مدفوع).
 set -uo pipefail
 B="$(cd "$(dirname "$0")/.." && pwd)"
-REPO_DIR="${REPO_DIR:-$B/../mda-marine-system}"
+if [ -z "${REPO_DIR:-}" ]; then   # داخل نسخة المستودع نفسها: جذره أب brain/ ؛ وعلى الخادم: المستودع شقيق
+  if [ -d "$B/../skills" ] && [ -e "$B/../.git" ]; then REPO_DIR="$B/.."; else REPO_DIR="$B/../mda-marine-system"; fi
+fi
 REPO="$REPO_DIR/skills"
-SK="${SKILLS_DIR:-/home/ubuntu/skills}"
+if [ -n "${SKILLS_DIR:-}" ]; then SK="$SKILLS_DIR"; elif [ -d /home/ubuntu/skills ]; then SK=/home/ubuntu/skills; else SK="$B/../skills"; fi
 CHECK_ONLY=0; [ "${1:-}" = "--check" ] && CHECK_ONLY=1
 
 [ -d "$REPO" ] || { echo "✘ لا مستودع مهارات في $REPO"; exit 3; }

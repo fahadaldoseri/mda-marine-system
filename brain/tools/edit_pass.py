@@ -13,15 +13,19 @@
 """
 import argparse
 import json
+import os
 import re
+import shlex
 import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
-NODE = 'manus-node'
-CLIENT = str(ROOT / 'tools' / 'llm.mjs')
+ROOT = Path(os.environ.get('BRAIN_DIR') or Path(__file__).resolve().parent.parent)
+TOOLS = Path(__file__).resolve().parent
+# عميل النموذج قابل للضبط: LLM_CLIENT_CMD يستبدل «node llm.mjs» (الافتراضي مشغِّل Manus)؛ والنموذج من EDIT_PASS_MODEL
+CLIENT_CMD = shlex.split(os.environ.get('LLM_CLIENT_CMD') or f"manus-node {TOOLS / 'llm.mjs'}")
+DEFAULT_MODEL = os.environ.get('EDIT_PASS_MODEL', 'gpt-5-mini')
 CATEGORIES = ('أسلوب', 'بنية', 'مفردة', 'ترقيم', 'ترجمة حرفية')
 
 
@@ -97,7 +101,7 @@ def run_batch(texts, system, model, workers, tmpdir):
     inp, out, sch = tmpdir / 'items.jsonl', tmpdir / 'out.jsonl', tmpdir / 'schema.json'
     inp.write_text('\n'.join(json.dumps(t, ensure_ascii=False) for t in texts) + '\n', encoding='utf-8')
     sch.write_text(json.dumps(SCHEMA, ensure_ascii=False), encoding='utf-8')
-    cmd = [NODE, CLIENT, 'batch', '--input', str(inp), '--out', str(out),
+    cmd = [*CLIENT_CMD, 'batch', '--input', str(inp), '--out', str(out),
            '--template', 'حرّر هذا القسم تحريرًا لغويًا فقط، وأعد JSON:\n{input}',
            '--system', system, '--schema', str(sch),
            '--model', model, '--workers', str(workers), '--max-tokens', '6000']
@@ -120,7 +124,7 @@ def preserved(before: str, after: str, tmp: Path):
     bp, ap = tmp / 'before.txt', tmp / 'after.txt'
     bp.write_text(before, encoding='utf-8')
     ap.write_text(after, encoding='utf-8')
-    r = subprocess.run([sys.executable, str(ROOT / 'tools' / 'preserve_check.py'), str(bp), str(ap)],
+    r = subprocess.run([sys.executable, str(TOOLS / 'preserve_check.py'), str(bp), str(ap)],
                        capture_output=True, text=True)
     return r.returncode == 0, (r.stdout or '').strip()
 
@@ -129,7 +133,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--report', required=True)
     ap.add_argument('--out-dir', default=str(ROOT / 'audit'))
-    ap.add_argument('--model', default='gpt-5-mini')
+    ap.add_argument('--model', default=DEFAULT_MODEL)
     ap.add_argument('--workers', type=int, default=4)
     ap.add_argument('--apply', action='store_true')
     ap.add_argument('--min-chars', type=int, default=300)
@@ -144,7 +148,8 @@ def main():
         print('  ✘ لا أقسام للتحرير'); return 1
 
     stamp = datetime.now(timezone.utc).strftime('%Y-%m-%d-%H%M')
-    tmp = Path('/tmp/edit-pass'); tmp.mkdir(parents=True, exist_ok=True)
+    import tempfile
+    tmp = Path(tempfile.mkdtemp(prefix='edit-pass-'))
     rows = run_batch([sections[i][1] for i in idxs], build_system(), a.model, a.workers, tmp)
     if rows is None:
         return 1
@@ -224,20 +229,29 @@ def main():
 
     if a.apply and accepted:
         lines = text.splitlines()
-        rebuilt, cur, buf = [], None, []
+        preamble, rebuilt, cur, buf = [], [], None, []
         for ln in lines:
             if ln.startswith('## '):
                 if cur is not None:
                     rebuilt.append((cur, buf))
                 cur, buf = ln, [ln]
+            elif cur is None:
+                preamble.append(ln)          # ما قبل أول `##` (العنوان الرئيسي والتمهيد) يُحفظ كما هو
             else:
                 buf.append(ln)
         if cur is not None:
             rebuilt.append((cur, buf))
         out_lines = []
+        if any(l.strip() for l in preamble):
+            out_lines.append('\n'.join(preamble).strip('\n'))
         for i, (title, body) in enumerate(rebuilt):
             out_lines.append(accepted[i] if i in accepted else '\n'.join(body).strip('\n'))
-        rep.write_text('\n\n'.join(out_lines) + '\n', encoding='utf-8')
+        new_text = '\n\n'.join(out_lines) + '\n'
+        okw, msgw = preserved(text, new_text, tmp)   # فحص التقرير كاملًا قبل أي كتابة
+        if not okw:
+            print('  ✘ رُفض التطبيق: تغيّرت حقائق على مستوى التقرير كاملًا —', msgw.splitlines()[-1][:200] if msgw else '')
+            return 2
+        rep.write_text(new_text, encoding='utf-8')
         print(f'  ✔ طُبِّق على {rep} ({len(accepted)} قسمًا)')
 
     print(f'  ✔ الأقسام المقبولة: {len(accepted)} · المرفوضة: {len(rejected)} · التغييرات: {len(changes)} · أخطاء: {errors}')

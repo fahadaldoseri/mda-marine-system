@@ -69,7 +69,8 @@ if command -v fc-list >/dev/null && fc-list :lang=ar family 2>/dev/null | grep -
 else
   bad "لا خط عربي — PDF العربي سيخرج بمربعات → sudo apt-get install -y fonts-hosny-amiri fonts-noto-core fontconfig && sudo fc-cache -f"
 fi
-if ls "$HOME"/.cache/ms-playwright/chromium* >/dev/null 2>&1; then
+PW_DIR="${PLAYWRIGHT_BROWSERS_PATH:-$HOME/.cache/ms-playwright}"   # يحترم PLAYWRIGHT_BROWSERS_PATH
+if ls "$PW_DIR"/chromium* >/dev/null 2>&1; then
   ok "متصفح Playwright مثبّت"
 else
   bad "متصفح Playwright غير مثبّت → $PY -m playwright install chromium"
