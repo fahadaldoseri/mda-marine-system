@@ -29,16 +29,16 @@
    "bytes": 17798
   },
   "validators/check_pdf_format.py": {
-   "sha256": "38cc20542384b4b241131601c750ce45bdf097c860fc11500d35e2d4b554a06a",
-   "bytes": 10881
+   "sha256": "86e8ebe5c6bb86e8e17e80926802564a1eda0c16c656401337c22a8e4142af9a",
+   "bytes": 11389
   },
   "validators/check_print_quality.py": {
-   "sha256": "45581d8564b978e7ade5cf11dcb997a6c5f218983da8b618d9dce7ddae3883de",
-   "bytes": 16671
+   "sha256": "d794e3657debe620c3d57f2207cb99a632780e8ed7b069cd83c34bb27b14da40",
+   "bytes": 16897
   },
   "tools/final_gate.sh": {
-   "sha256": "2760db6e9b76d92043b0a42a802797d64060f925c88ffd159b591d1fe0cce166",
-   "bytes": 11291
+   "sha256": "fe5c7d2e48a11fcfc41ee1a569aeec3046df7bb728272a5a0f2881b90263996f",
+   "bytes": 17702
   },
   "tools/rebuild_report.sh": {
    "sha256": "f87f0eb4c98c82d2098773e2749fc01bd6f8abfc7037fff7f24fe649055d35ee",
@@ -69,8 +69,8 @@
    "bytes": 12736
   },
   "sections/60-validation.md": {
-   "sha256": "6a4bf17f6878563642eac184a3b212cf13d95711e9f9645aa84a29e586f253fc",
-   "bytes": 25619
+   "sha256": "ab8f898ca6b77bb007e8f1f22ef0cf100003647243d204de6999e81bb9b969eb",
+   "bytes": 27460
   },
   "sections/70-delivery.md": {
    "sha256": "c0816d8f5aeba076df2aabf0efad7cb3685482d50d0ce182c8627d632de22779",
@@ -81,8 +81,8 @@
    "bytes": 24710
   },
   "sections/90-automation.md": {
-   "sha256": "aaddec9cd48f4fde5acb1892f9d08e7a6088bff8251219059670834fc0fcd89d",
-   "bytes": 20685
+   "sha256": "fd08079659b016a5e08b88ed419505a1f03c094cd80a95aef75bf97bdc79c8b7",
+   "bytes": 22412
   },
   "generator/build_report.py": {
    "sha256": "6d58bb126faae7f5ca069b9123c120fa80441f3f5b8779e2b27ca531e6e01181",
@@ -93,8 +93,8 @@
    "bytes": 11299
   },
   "generator/build_site.py": {
-   "sha256": "04bf0cb46532a1b98b2dfd317b94a0a6ebb6e3ff5c844f9f883e512a6190453b",
-   "bytes": 35389
+   "sha256": "4329cbae2fdb0898029b3a888d8ddb5009acb0fde6af01dfb0d7b5c9badda96d",
+   "bytes": 35411
   },
   "generator/build_sources.py": {
    "sha256": "9c649e1bd5dcb6d35cfe13d210058f2553dacfe91f31c9ae68d88741f2228a19",
@@ -106,8 +106,8 @@
   }
  },
  "commits": {
-  "site_repo": "b60a8df",
-  "brain_backup": "3b10474"
+  "site_repo": "fed41f8",
+  "brain_backup": "29b9046"
  },
  "blessings": [
   {
@@ -123,6 +123,11 @@
   {
    "at": "2026-10-22T23:34:16Z",
    "reason": "استثناء ملف PDF المولَّد من البصمات (ك-127) — يُقاس بالبوابات لا بالبصمة",
+   "files": 20
+  },
+  {
+   "at": "2026-10-23T10:54:51Z",
+   "reason": "اعتماد مهارة superpowers-method + حلقة التعلم الذاتية في البوابة (23 أكتوبر 2026) وتحديث بوابتَي جودة الطباعة ومسار البناء",
    "files": 20
   }
  ],

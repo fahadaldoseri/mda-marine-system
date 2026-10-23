@@ -163,6 +163,13 @@
 ## سياسة قناة تلغرام
 - `appendices/telegram-policy.md` — القناة للتقرير الصباحي الرسمي فقط، والحاجز في `tools/telegram_send.py`، والسجل في `logs/telegram-sends.jsonl`.
 
+## منهجية التطوير والتشخيص (اعتماد 23 أكتوبر 2026)
+- المهارة: `superpowers-method` (مُكيّفة من `obra/superpowers` برخصة MIT) — نظام فرامل للنظام نفسه، لا لكتابة الخبر.
+- الملف: `/home/ubuntu/skills/superpowers-method/SKILL.md` ونسختها في المستودع `skills/superpowers-method/`.
+- المهارات الخمس المعتمدة: التحقق قبل الإتمام · التشخيص المنهجي · التطوير المبني على اختبار · كتابة الخطة · تشخيص الجلسة.
+- حلقة التعلم الذاتي: `tools/skill_lessons.py` تُستدعى في نهاية `tools/final_gate.sh` وتُحدّث كتلة الدروس في المهارة و`memory/learning-log.jsonl` في كل تشغيل.
+- تقرير المطابقة الكامل (15 مهارة: ما يُعتمد وما لا يُعتمد): `language-pack-01/10-superpowers-mapping.md` في الحزمة وأرشيف النسخة الاحتياطية.
+
 ## شكل PDF المعتمد
 - `templates/approved-pdf/print-profile.json` — بصمة الشكل المعتمد v3 وقواعده.
 - `templates/approved-pdf/print-css-frozen.css` — نمط الطباعة المجمّد.
