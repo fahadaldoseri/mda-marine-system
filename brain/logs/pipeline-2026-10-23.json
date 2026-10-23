@@ -1,0 +1,106 @@
+{
+  "date": "2026-10-23",
+  "pipeline_version": 4,
+  "finished_utc": "2026-10-23T03:44:27Z",
+  "overall": "degraded",
+  "ladder_note": "سلّم موحّد: ok / degraded / failed — لكل مكوّن رمز خروج حقيقي، ولا تُعلن نجاحًا برمز صفري",
+  "feeds": {
+    "status": "degraded",
+    "checked": 35,
+    "ok": 34,
+    "failed": 2,
+    "fail_ratio": 0.057,
+    "failed_feeds": [
+      {
+        "num": 14,
+        "name": "قناة العربية",
+        "primary_url": "https://www.alarabiya.net/feed/rss2/ar/aswaq.xml",
+        "error": "blocked page: Just a moment",
+        "block_reason": "all routes failed: primary: HTTP Error 403: Forbidden | fallback:jina.ai/alarabiya-rss: blocked page: Just a moment | fallback:jina.ai/alarabiya-home: blocked page: Just a moment",
+        "attempts": [
+          {
+            "url": "https://www.alarabiya.net/feed/rss2/ar/aswaq.xml",
+            "via": "primary",
+            "ok": false,
+            "error": "HTTP Error 403: Forbidden",
+            "tls_verification": "verified"
+          },
+          {
+            "url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
+            "via": "fallback:jina.ai/alarabiya-rss",
+            "ok": false,
+            "error": "blocked page: Just a moment",
+            "tls_verification": "verified"
+          },
+          {
+            "url": "https://r.jina.ai/http://www.alarabiya.net/",
+            "via": "fallback:jina.ai/alarabiya-home",
+            "ok": false,
+            "error": "blocked page: Just a moment",
+            "tls_verification": "verified"
+          }
+        ]
+      },
+      {
+        "num": 17,
+        "name": "حساب @bna_en على X",
+        "primary_url": "https://web.archive.org/web/20260108135704/https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
+        "error": "HTTP Error 405: Not Allowed",
+        "block_reason": "all routes failed: primary: HTTP Error 403: Forbidden | official:bna-en-rss: HTTP Error 405: Not Allowed",
+        "attempts": [
+          {
+            "url": "https://web.archive.org/web/20260108135704/https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
+            "via": "primary",
+            "ok": false,
+            "error": "HTTP Error 403: Forbidden",
+            "tls_verification": "verified"
+          },
+          {
+            "url": "https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
+            "via": "official:bna-en-rss",
+            "ok": false,
+            "error": "HTTP Error 405: Not Allowed",
+            "tls_verification": "verified"
+          }
+        ]
+      }
+    ]
+  },
+  "ofac": {
+    "status": "ok",
+    "note": "فُحص 9 مستهدفًا — الحالة: ok",
+    "targets": 9,
+    "matches": [],
+    "reviews": [],
+    "list": "https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exp",
+    "results_file": "archive/ofac-screen-latest.json"
+  },
+  "originals": {
+    "status": "ok",
+    "note": "حُفظت الأصول في archive/originals/2026-10-23/ — الحالة: ok",
+    "manifest": "archive/originals/2026-10-23/manifest.json",
+    "healthy": 1,
+    "empty_shell": 0,
+    "failed": 0,
+    "status_file": "archive/originals/2026-10-23/status.json"
+  },
+  "ledger_merge": {
+    "status": "ok",
+    "note": "دُمج ملف اليوم في الدفتر الجامع وبُنيت خريطة الرموز ونُسخ الدفتر إلى الموقع",
+    "records_total": 227,
+    "added_this_run_count": 0,
+    "period_end": "2026-10-22",
+    "merged_utc": "2026-10-23T03:43:05Z",
+    "merged_before_marker": true
+  },
+  "builtin_llm": {
+    "status": "ok",
+    "note": "رُشّحت التغذيات ورُوجعت اللغة آلياً بالنموذج المدمج"
+  },
+  "report_present_at_pipeline_end": false,
+  "final_gate": {
+    "status": "pending",
+    "dir": "logs/gate-2026-10-23",
+    "note": "تُشغَّل بوابة التسليم بعد كتابة التقرير: bash tools/final_gate.sh <التاريخ>"
+  }
+}

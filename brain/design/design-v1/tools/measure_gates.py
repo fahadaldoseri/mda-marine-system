@@ -83,7 +83,7 @@ def check_static():
     h = (ROOT / "index.html").read_text(encoding="utf-8")
     text = re.sub(r"<[^>]+>", " ", re.sub(r"<(style|script)\b.*?</\1>", "", h, flags=re.S))
     sem = []
-    if re.search(r"[٠-٩۰-۹]", text): sem.append("أرقام هندية")
+    if re.search(r"[0-9۰-۹]", text): sem.append("أرقام هندية")
     if "النافذة" in text: sem.append("كلمة «النافذة»")
     res["sem"] = (not sem, "، ".join(sem) or "لا أرقام هندية ولا «النافذة»")
     return res
