@@ -152,6 +152,9 @@ python3 tests/test_orphan_rule.py && ok "قاعدة العنوان اليتيم 
 echo "11) حلقة التعلم الذاتي (ك-149): لا تكرار لدرس اليوم · والدليل في الكتلة"
 python3 tests/test_skill_lessons.py && ok "حلقة التعلم صحيحة" || bad "حلقة التعلم لا تعمل"
 
+echo "12) قائمة المهارات موحّدة (ك-150): النسخ الاحتياطي يقرأها من المزامنة"
+python3 tests/test_backup_skills.py && ok "قائمة المهارات موحّدة" || bad "قائمتا المهارات مختلفتان"
+
 echo "----- الحصيلة -----"
 printf '  نجح: %s · فشل: %s\n' "$PASS" "$FAIL"
 [ "$FAIL" -eq 0 ] || exit 1
