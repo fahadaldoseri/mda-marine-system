@@ -1,12 +1,12 @@
 {
  "date": "2026-10-23",
- "status": "block",
- "exit_code": 2,
+ "status": "warn",
+ "exit_code": 1,
  "steps": [
   {
    "step": "اختبارات البوابات (tests)",
-   "status": "warn",
-   "exit_code": 1,
+   "status": "ok",
+   "exit_code": 0,
    "log": "01-اختبارات_البوابات_(tests).log"
   },
   {
@@ -29,8 +29,8 @@
   },
   {
    "step": "تطابق أرقام المصادر في كل المواضع",
-   "status": "block",
-   "exit_code": 2,
+   "status": "ok",
+   "exit_code": 0,
    "log": "05-تطابق_أرقام_المصادر_في_كل_المواضع.log"
   },
   {
@@ -263,5 +263,5 @@
   }
  ],
  "log_dir": "/home/ubuntu/brain-marine-news/logs/gate-2026-10-23",
- "finished_utc": "2026-10-23T09:20:58Z"
+ "finished_utc": "2026-10-23T09:23:10Z"
 }
