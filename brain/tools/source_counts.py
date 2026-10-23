@@ -36,6 +36,7 @@ def feeds_state(date: str) -> dict:
         return {"checked": 0, "ok": 0, "failed": 0, "reasons": {}, "failed_names": [], "present": False}
     d = json.loads(p.read_text(encoding="utf-8"))
     failed = d.get("failed_feeds") or []
+    failed_n = d.get("failed") if isinstance(d.get("failed"), int) else len(failed)
     reasons: dict[str, list[str]] = {}
     names: list[str] = []
     for f in failed:
@@ -44,7 +45,7 @@ def feeds_state(date: str) -> dict:
         reasons.setdefault(reason, []).append(name)
         names.append(name)
     return {"checked": int(d.get("checked") or 0), "ok": int(d.get("ok") or 0),
-            "failed": len(failed), "reasons": reasons, "failed_names": names, "present": True}
+            "failed": failed_n, "reasons": reasons, "failed_names": names, "present": True}
 
 
 def counts(date: str) -> dict:

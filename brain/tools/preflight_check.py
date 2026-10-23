@@ -176,8 +176,8 @@ if report.exists():
                 _r = _cls("feeds", (st.get("feeds") or {}).get("status") or "degraded",
                           " ".join(_reasons), _reasons) if _reasons else {"allowed": True}
                 only_known = bool(_r.get("allowed"))
-            except Exception:
-                only_known = bool(failed) and isinstance(known, list) and all(n in known for n in failed)
+            except ImportError:  # المرجع الواحد غير متاح: لا نتجاهل، نمنع (فشل مغلق)
+                only_known = False
             others_ok = all((st.get(k) or {}).get('status') == 'ok'
                             for k in ('ofac', 'originals'))
             if overall == 'ok':
