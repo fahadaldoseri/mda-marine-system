@@ -204,11 +204,12 @@ def main() -> int:
         heads |= {"عام"}
         orph = orphan_titles(pgs, heads)
         if orph:
-            problems.append("عنوان يتيم آخر ورقة: " + "، ".join(f"ص{n}: {t}" for n, t in orph))
+            fails.append("عنوان يتيم آخر ورقة: " + "، ".join(f"ص{n}: {t}" for n, t in orph))
         else:
             notes.append("لا عنوان قسم أو بطاقة يتيم آخر ورقة")
     except Exception as e:
-        notes.append(f"تعذّر فحص العنوان اليتيم: {type(e).__name__}")
+        # ك-130: شرط مانع لا يُتحقَّق منه لا يُعدّ ناجحًا — فشل مغلق لا ملاحظة صامتة.
+        fails.append(f"تعذّر فحص العنوان اليتيم (بند مانع غير مُتحقَّق منه): {type(e).__name__}: {e}")
 
     body = [(n, g) for n, g in voids if 1 < n < len(voids)]  # دون الغلاف والصفحة الأخيرة
     big = [(n, g) for n, g in body if g >= gate.get("max_internal_void_mm", 45)]

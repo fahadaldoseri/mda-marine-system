@@ -26,7 +26,12 @@ step() {            # step "<اسم الفحص>" <رمز المانع عند ا�
   "$@" >"$log" 2>&1
   local rc=$?
   local status="ok"
-  if [ "$rc" -ge "$blockrc" ]; then status="block"; WORST=2
+  # ك-131 (البند ح-1 من التدقيق المستقل): انهيار المدقق ليس تحذيرًا.
+  # أي أثر انهيار مع رمز خارج العقد (0 نجاح · 1 تحذير · رمز المانع) = «انهيار» يوقف التسليم.
+  if [ "$rc" -ne 0 ] && [ "$rc" -ne "$blockrc" ] && \
+     grep -qE "Traceback \(most recent call last\)|^[A-Za-z_]*Error:" "$log" 2>/dev/null; then
+    status="crash"; WORST=2
+  elif [ "$rc" -ge "$blockrc" ]; then status="block"; WORST=2
   elif [ "$rc" -gt 0 ]; then status="warn"; [ "$WORST" -lt 1 ] && WORST=1; fi
   printf '%-34s %-6s (رمز %s) %s\n' "$name" "$status" "$rc" "$(basename "$log")" >> "$REP"
   printf '  %-34s %-6s (رمز %s)\n' "$name" "$status" "$rc"
@@ -119,7 +124,7 @@ status = {0: 'ok', 1: 'warn', 2: 'block'}[worst]
 steps = []
 for line in (logdir / 'report.txt').read_text(encoding='utf-8').splitlines():
     parts = line.split()
-    idx = next((i for i, t in enumerate(parts) if t in ('ok', 'warn', 'block')), None)
+    idx = next((i for i, t in enumerate(parts) if t in ('ok', 'warn', 'block', 'crash')), None)
     if idx:  # اسم الفحص قد يحوي مسافات — الموضع يُحدَّد بأول رمز حالة
         steps.append({'step': ' '.join(parts[:idx]), 'status': parts[idx],
                       'exit_code': parts[idx + 2] if len(parts) > idx + 2 and parts[idx + 1] == '(رمز' else None,
