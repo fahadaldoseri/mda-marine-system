@@ -7,12 +7,12 @@
 ### أُثبت بالتشغيل
 | الادعاء | الأمر | النتيجة |
 |---|---|---|
-| كل الاختبارات تنجح | `bash tests/run_checks.sh` | نجح 42 · فشل 0 |
+| كل الاختبارات تنجح | `bash tests/run_checks.sh` | نجح 42 · فشل 0 (أيضًا على نسخة مستنسخة جديدة من الفرع) |
 | المانيفست متسق على الشجرة الحقيقية | `python3 tools/runbook.py verify` | 0 خلل (كان 29 خللًا قبل الإصلاح) |
 | 71 استدعاء سكربت في المانيفست موجود وخياراته معرَّفة | `python3 tests/test_manifest_commands.py` | سليم |
 | البيئة تبني الموقع وPDF وWord وتجتاز البوابتين | `bash tools/verify_codespace.sh` (مع `PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers`) | نجح 22 · تحذير 3 · فشل مانع 0 |
 | بصمة كتلة الطباعة = المعتمدة | `python3 -c` على `build_report.py` | `ac05b43f996ae9f0` |
-| كل مسار في المستودع مصنَّف | `python3 tools/code_paths.py check --root ..` | 1384+ مسارًا مصنَّفًا |
+| كل مسار في المستودع مصنَّف | `python3 tools/code_paths.py check --root ..` | 1412 مسارًا مصنَّفًا (من نسخة مستنسخة جديدة) |
 
 ### ما تغيّر
 - **محرّك الكتيب** (`tools/runbook.py`): مسارات محمولة (`BRAIN_DIR` و`SITE_DIR`)، متغيرات `{date} {site} {brain}`، تضمين `{{include}}` و`{{sections}}` في البرومت، فحص ربط بالوصول من المانيفست (الملف غير المتصل خطأ)، ترتيب المراحل، رفض شرط الإتمام التافه، `gates-status` يغطي `gate_phases`، والأمر الجديد `gate-json` (يكتب `logs/gate-D/gate.json` من سجل المحرّك).
