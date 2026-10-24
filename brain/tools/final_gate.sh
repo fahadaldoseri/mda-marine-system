@@ -63,6 +63,7 @@ step_strict "اختبارات البوابات (tests)" bash "$B/tests/run_check
 # بوابة الأسرار (ك-162 — طلب فهد 2026-10-24): أي سرّ في الشجرة = منع التسليم.
 # سببها: رمز بوت تلغرام وُجد في brain/secrets/secrets.env في تاريخ المستودع.
 step_strict "بوابة الأسرار (لا سرّ في الشجرة)" python3 "$B/validators/check_secrets.py" --root "$B"
+step_strict "بوابة الأسرار (لا سرّ في الشجرة)" python3 "$B/validators/check_server_code_tracking.py" --root "$B"
 
 if [ ! -f "$B/reports/$D-sectioned.md" ] || [ ! -f "$B/web/meta/$D.json" ]; then
   echo "  ✘ ناقص: reports/$D-sectioned.md أو web/meta/$D.json — لا تسليم بلا نص وواجهة." | tee -a "$REP"
