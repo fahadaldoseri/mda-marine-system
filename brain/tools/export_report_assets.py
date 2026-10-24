@@ -315,12 +315,21 @@ def main() -> int:
                     result["toc"] = f"{len(pages_map)} قسمًا · أرقام صفحات مُثبتة لـ{found}"
 
             if args.only in ("map", "both"):
+                # ك-174: الخريطة تظهر في وضع الطباعة لا على الشاشة — نلتقطها في وضعها الصحيح
+                pg.emulate_media(media="print")
+                pg.wait_for_timeout(300)
                 el = pg.query_selector(".map-wrap") or pg.query_selector(".map-svg")
                 if el:
-                    el.scroll_into_view_if_needed()
-                    pg.wait_for_timeout(400)
-                    el.screenshot(path=str(out_png))
-                    result["map"] = f"{out_png} ({out_png.stat().st_size/1024:.0f} ك.ب)"
+                    try:
+                        pg.evaluate("(e)=>{e.style.display='block';e.style.visibility='visible';e.style.overflow='visible';e.scrollIntoView({block:'center'});}", el)
+                        pg.wait_for_timeout(600)
+                        box = el.bounding_box()
+                        if not box or box.get("width", 0) < 50 or box.get("height", 0) < 50:
+                            raise RuntimeError("صندوق الخريطة غير صالح")
+                        pg.screenshot(path=str(out_png), clip=box)
+                        result["map"] = f"{out_png} ({out_png.stat().st_size/1024:.0f} ك.ب)"
+                    except Exception as exc:
+                        result["map"] = f"تعذّر تصوير الخريطة: {type(exc).__name__}: {exc}"
                 else:
                     result["map"] = "لم يُعثر على عنصر الخريطة في الصفحة"
         finally:

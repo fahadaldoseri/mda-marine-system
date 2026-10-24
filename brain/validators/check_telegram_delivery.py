@@ -1,3 +1,4 @@
+import sys
 #!/usr/bin/env python3
 """قناة تنبيه: هل وصل تقرير اليوم على تلغرام؟ (طلب فهد 2026-10-24، البند 14)
 
@@ -65,4 +66,6 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)

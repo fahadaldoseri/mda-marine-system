@@ -1,0 +1,977 @@
+{
+ "version": 1,
+ "note": "مواقع استثناء عام مقبولة بحد ذاتها لأن نتيجتها تمنع (فشل مغلق) أو لأنها لا تحكم التسليم. أي موقع جديد = منع حتى يُصنَّف. · 23 أكتوبر 2026: مطابقة بالمفتاح (ملف + نص) بدل رقم السطر؛ والمواقع بلا تعليل تُدرج في unclassified وتمنع. · 23 أكتوبر 2026: المفتاح = الملف + أول سطر من كتلة try؛ والحكم يُقارن بالقائمة المقبولة. · 24 أكتوبر 2026 (طلب فهد، البند 7): المفتاح = (ملف + دالة حاضنة + بصمة كتلة try) بدل (ملف + أول سطر)؛ أي تغيّر في منطق الاستثناء يُسقط الموقع من القبول فيصير منعًا.",
+ "accepted": [
+  {
+   "file": "validators/check_backup_parity.py",
+   "func": "repo_manifest",
+   "fingerprint": "89f79045",
+   "line_at_generation": 106,
+   "snippet": "tracked = subprocess.run([\"git\", \"-C\", str(REPO), \"ls-files\", \"-z\"],",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "validators/check_code_spaces.py",
+   "func": "load",
+   "fingerprint": "6940bb4b",
+   "line_at_generation": 36,
+   "snippet": "return json.loads(p.read_text(encoding=\"utf-8\"))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": ""
+  },
+  {
+   "file": "validators/check_comprehension.py",
+   "func": "scrub",
+   "fingerprint": "c5e44cb4",
+   "line_at_generation": 169,
+   "snippet": "sys.path.insert(0, str(B / \"tools\"))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": ""
+  },
+  {
+   "file": "validators/check_comprehension.py",
+   "func": "glossary_text",
+   "fingerprint": "8e360aff",
+   "line_at_generation": 181,
+   "snippet": "g = json.loads(meta).get(\"glossary\") or {}",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": ""
+  },
+  {
+   "file": "validators/check_comprehension.py",
+   "func": "_defined",
+   "fingerprint": "b936ef4f",
+   "line_at_generation": 99,
+   "snippet": "g = _j.loads(f.read_text(encoding=\"utf-8\")).get(\"glossary\", {})",
+   "handler_kind": "متابعة",
+   "category": "تنظيف ثانوي",
+   "reason": "قراءة القاموس من ملفات الواجهة؛ الفشل يدفع نحو الإبلاغ لا نحو السماح — الميل فشل مغلق."
+  },
+  {
+   "file": "validators/check_intel.py",
+   "func": "main",
+   "fingerprint": "31b37a12",
+   "line_at_generation": 84,
+   "snippet": "import json as _json",
+   "handler_kind": "تجاهل",
+   "category": "منطق البوابة",
+   "reason": "قراءة سياسة الأقسام داخل الفحص — الميل فشل مغلق."
+  },
+  {
+   "file": "validators/check_intel.py",
+   "func": "main",
+   "fingerprint": "462c4873",
+   "line_at_generation": 67,
+   "snippet": "import json as _json",
+   "handler_kind": "تجاهل",
+   "category": "منطق البوابة",
+   "reason": "قراءة سياسة الأقسام داخل الفحص — الميل فشل مغلق."
+  },
+  {
+   "file": "validators/check_intel.py",
+   "func": "main",
+   "fingerprint": "50add3aa",
+   "line_at_generation": 177,
+   "snippet": "meta = json.loads(meta_path.read_text(encoding=\"utf-8\"))",
+   "handler_kind": "تجاهل",
+   "category": "منطق البوابة",
+   "reason": "قراءة سياسة الأقسام داخل الفحص — الميل فشل مغلق."
+  },
+  {
+   "file": "validators/check_libraries_skills.py",
+   "func": "check_portability",
+   "fingerprint": "247d663c",
+   "line_at_generation": 267,
+   "snippet": "import importlib.util",
+   "handler_kind": "تجاهل",
+   "category": "منطق البوابة",
+   "reason": "يُسجَّل عائق صريح في نتيجة بوابة قابلية النقل ⇒ يمنع."
+  },
+  {
+   "file": "validators/check_libraries_skills.py",
+   "func": "check_libs",
+   "fingerprint": "a21f54c9",
+   "line_at_generation": 65,
+   "snippet": "text = f.read_text(encoding=\"utf-8\")",
+   "handler_kind": "متابعة",
+   "category": "منطق البوابة",
+   "reason": "يُسجَّل عائق صريح في نتيجة بوابة قابلية النقل ⇒ يمنع."
+  },
+  {
+   "file": "validators/check_libraries_skills.py",
+   "func": "check_libs",
+   "fingerprint": "35aa1fc4",
+   "line_at_generation": 72,
+   "snippet": "data = json.loads(text)",
+   "handler_kind": "متابعة",
+   "category": "منطق البوابة",
+   "reason": "يُسجَّل عائق صريح في نتيجة بوابة قابلية النقل ⇒ يمنع."
+  },
+  {
+   "file": "validators/check_library_use.py",
+   "func": "load",
+   "fingerprint": "7f821f88",
+   "line_at_generation": 30,
+   "snippet": "return json.loads(path.read_text(encoding=\"utf-8\"))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": ""
+  },
+  {
+   "file": "validators/check_library_use.py",
+   "func": "check_new_terms_registry",
+   "fingerprint": "0a29df66",
+   "line_at_generation": 190,
+   "snippet": "data = json.loads(reg.read_text(encoding=\"utf-8\"))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": ""
+  },
+  {
+   "file": "validators/check_pdf_format.py",
+   "func": "main",
+   "fingerprint": "e3a29688",
+   "line_at_generation": 209,
+   "snippet": "import subprocess as _sp",
+   "handler_kind": "تجاهل",
+   "category": "منطق البوابة",
+   "reason": "فشل فحص العنوان اليتيم يُسجَّل في المخالفات ⇒ يمنع (ك-130)."
+  },
+  {
+   "file": "validators/check_print_quality.py",
+   "func": "_profile",
+   "fingerprint": "20f3e736",
+   "line_at_generation": 94,
+   "snippet": "return json.loads(PROFILE.read_text(encoding=\"utf-8\"))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": ""
+  },
+  {
+   "file": "validators/check_print_quality.py",
+   "func": "map_block_report",
+   "fingerprint": "82d4240a",
+   "line_at_generation": 144,
+   "snippet": "import numpy as np",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": ""
+  },
+  {
+   "file": "validators/check_print_quality.py",
+   "func": "map_block_report",
+   "fingerprint": "be15b166",
+   "line_at_generation": 152,
+   "snippet": "pages = _render_pages(pdf, dpi)",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": ""
+  },
+  {
+   "file": "validators/check_print_quality.py",
+   "func": "justify_report",
+   "fingerprint": "c5899604",
+   "line_at_generation": 252,
+   "snippet": "pages = _pdf_lines(pdf)",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": ""
+  },
+  {
+   "file": "validators/check_print_quality.py",
+   "func": "main",
+   "fingerprint": "77e9918d",
+   "line_at_generation": 350,
+   "snippet": "bad = alignment_report(page_path)",
+   "handler_kind": "تجاهل",
+   "category": "منطق البوابة",
+   "reason": "تأكيد ثانٍ على الصفحة بعد قياس PDF المعتمد — القياس الأساسي على PDF هو المانع، وهذا تكرار له؛ يُذكر في الملاحظات."
+  },
+  {
+   "file": "validators/check_run_completeness.py",
+   "func": "main",
+   "fingerprint": "5e531cda",
+   "line_at_generation": 36,
+   "snippet": "from mark_components import DERIVERS  # noqa: E402",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": ""
+  },
+  {
+   "file": "validators/check_secrets.py",
+   "func": "iter_tree",
+   "fingerprint": "bcfef964",
+   "line_at_generation": 73,
+   "snippet": "tracked = subprocess.run([\"git\", \"-C\", str(root), \"ls-files\"],",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "validators/check_server_code_tracking.py",
+   "func": "load_allowlist",
+   "fingerprint": "42e55220",
+   "line_at_generation": 37,
+   "snippet": "data = json.loads(p.read_text(encoding=\"utf-8\"))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": ""
+  },
+  {
+   "file": "validators/check_telegram_delivery.py",
+   "func": "entries",
+   "fingerprint": "840e4873",
+   "line_at_generation": 31,
+   "snippet": "e = json.loads(line)",
+   "handler_kind": "متابعة",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "validators/validate_report.py",
+   "func": "check_time",
+   "fingerprint": "0d525b33",
+   "line_at_generation": 111,
+   "snippet": "dt = datetime.fromisoformat(str(d[\"generated_label\"]).replace(\"Z\", \"+00:00\"))",
+   "handler_kind": "تجاهل",
+   "category": "منطق البوابة",
+   "reason": "خطأ تنسيق وقت التوليد يُسجَّل في الأخطاء ⇒ يمنع."
+  },
+  {
+   "file": "validators/validate_report.py",
+   "func": "main",
+   "fingerprint": "733ce997",
+   "line_at_generation": 254,
+   "snippet": "d = json.loads(path.read_text(encoding=\"utf-8\"))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": ""
+  },
+  {
+   "file": "tools/apply_audit_gfs_docx.py",
+   "func": "main",
+   "fingerprint": "34042174",
+   "line_at_generation": 291,
+   "snippet": "containers.append(hf.paragraphs)",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/apply_audit_gfs_docx.py",
+   "func": "main",
+   "fingerprint": "e3ef8905",
+   "line_at_generation": 311,
+   "snippet": "for p in hf.paragraphs:",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/apply_from_github.py",
+   "func": "main",
+   "fingerprint": "dec3a20f",
+   "line_at_generation": 92,
+   "snippet": "for rel, src, dst, rsha, why in plan:",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/archive_originals.py",
+   "func": "grab",
+   "fingerprint": "70c3273f",
+   "line_at_generation": 53,
+   "snippet": "r = urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=40)",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/archive_tg_digest.py",
+   "func": "sent_meta",
+   "fingerprint": "840e4873",
+   "line_at_generation": 43,
+   "snippet": "e = json.loads(line)",
+   "handler_kind": "متابعة",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/audit_broad_excepts.py",
+   "func": "scan_all",
+   "fingerprint": "fe371481",
+   "line_at_generation": 185,
+   "snippet": "rows += scan_file(p)",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/audit_corpus.py",
+   "func": "style_scan",
+   "fingerprint": "dd539559",
+   "line_at_generation": 137,
+   "snippet": "import check_style as CS  # type: ignore",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/audit_corpus.py",
+   "func": "run_gate",
+   "fingerprint": "aac59672",
+   "line_at_generation": 169,
+   "snippet": "r = subprocess.run(cmd, capture_output=True, text=True, timeout=180, cwd=str(ROOT))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/build_report_docx_exact.py",
+   "func": "main",
+   "fingerprint": "2d72b901",
+   "line_at_generation": 172,
+   "snippet": "from docx import Document as _D",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/check_feeds.py",
+   "func": "_next_data_items",
+   "fingerprint": "78e92f34",
+   "line_at_generation": 156,
+   "snippet": "data = json.loads(match.group(1))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/check_feeds.py",
+   "func": "_parse_date",
+   "fingerprint": "eca720bf",
+   "line_at_generation": 351,
+   "snippet": "parsed = _eu.parsedate_to_datetime(text)",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/check_feeds.py",
+   "func": "_parse_date",
+   "fingerprint": "954682a8",
+   "line_at_generation": 357,
+   "snippet": "parsed = dt.datetime.fromisoformat(text.replace('Z', '+00:00'))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/check_feeds.py",
+   "func": "fetch",
+   "fingerprint": "27d64644",
+   "line_at_generation": 291,
+   "snippet": "headers = {**HEADERS, 'Referer': f['url']}",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/check_feeds.py",
+   "func": "fetch",
+   "fingerprint": "05c69e21",
+   "line_at_generation": 320,
+   "snippet": "body_text = error.read().decode(\"utf-8\", \"replace\")[:4000]",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/diagnose_sources.py",
+   "func": "parse_age",
+   "fingerprint": "c316c0da",
+   "line_at_generation": 102,
+   "snippet": "stamp = parser(text)",
+   "handler_kind": "متابعة",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/diagnose_sources.py",
+   "func": "fetch",
+   "fingerprint": "b013f462",
+   "line_at_generation": 84,
+   "snippet": "raw = gzip.decompress(raw)",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/export_report_assets.py",
+   "func": "_require_system_tools",
+   "fingerprint": "f48c9d18",
+   "line_at_generation": 218,
+   "snippet": "from playwright.sync_api import sync_playwright",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/export_report_assets.py",
+   "func": "main",
+   "fingerprint": "8c9158d7",
+   "line_at_generation": 320,
+   "snippet": "pg.evaluate(\"(e)=>{e.style.display='block';e.style.visibility='visible';e.style.overflow='visible';e.scrollIntoView({block:'center'});}\", el)",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/extract_ui_strings.py",
+   "func": "py_strings",
+   "fingerprint": "7dee55bf",
+   "line_at_generation": 19,
+   "snippet": "tree = ast.parse(open(path, encoding=\"utf-8\").read())",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/fetch_primary.py",
+   "func": "text_of",
+   "fingerprint": "e68991da",
+   "line_at_generation": 33,
+   "snippet": "s = body.decode('utf-8', 'ignore')",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/fetch_primary.py",
+   "func": "grab",
+   "fingerprint": "41b1fdcb",
+   "line_at_generation": 50,
+   "snippet": "r = urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=45)",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/full_chain_audit.py",
+   "func": "<module>",
+   "fingerprint": "f16633e9",
+   "line_at_generation": 157,
+   "snippet": "import hashlib",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/full_chain_audit.py",
+   "func": "<module>",
+   "fingerprint": "0a1194f1",
+   "line_at_generation": 183,
+   "snippet": "sc = json.loads(sch)['schedules'][0]",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/full_chain_audit.py",
+   "func": "<module>",
+   "fingerprint": "eb62d169",
+   "line_at_generation": 118,
+   "snippet": "o = json.loads(ofac.read_text(encoding='utf-8'))",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/harvest_terms.py",
+   "func": "read_json",
+   "fingerprint": "0d87444d",
+   "line_at_generation": 70,
+   "snippet": "return json.loads(path.read_text(encoding='utf-8'))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/harvest_terms.py",
+   "func": "library_terms",
+   "fingerprint": "37bd6ae3",
+   "line_at_generation": 98,
+   "snippet": "text = p.read_text(encoding='utf-8', errors='ignore')",
+   "handler_kind": "متابعة",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/harvest_terms.py",
+   "func": "known_latin",
+   "fingerprint": "37bd6ae3",
+   "line_at_generation": 121,
+   "snippet": "text = p.read_text(encoding='utf-8', errors='ignore')",
+   "handler_kind": "متابعة",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/live_visual_audit.py",
+   "func": "fetch",
+   "fingerprint": "b97816b8",
+   "line_at_generation": 53,
+   "snippet": "with urllib.request.urlopen(req, timeout=40) as r:",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/llm_review.py",
+   "func": "main",
+   "fingerprint": "12b68a52",
+   "line_at_generation": 132,
+   "snippet": "data = json.loads(r['output'])",
+   "handler_kind": "متابعة",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/llm_triage.py",
+   "func": "main",
+   "fingerprint": "725d1186",
+   "line_at_generation": 85,
+   "snippet": "d = json.loads(r['output'])",
+   "handler_kind": "متابعة",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/make_baseline.py",
+   "func": "git_head",
+   "fingerprint": "3bee1121",
+   "line_at_generation": 64,
+   "snippet": "return subprocess.run([\"git\", \"-C\", str(repo), \"rev-parse\", \"HEAD\"],",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/mark_components.py",
+   "func": "_read_json",
+   "fingerprint": "eb404b7f",
+   "line_at_generation": 27,
+   "snippet": "return json.loads(p.read_text(encoding=\"utf-8\"))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/measure_filter_savings.py",
+   "func": "analyse_pages",
+   "fingerprint": "a9c0f672",
+   "line_at_generation": 122,
+   "snippet": "raw = subprocess.run(",
+   "handler_kind": "متابعة",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/merge_ledger_daily.py",
+   "func": "<module>",
+   "fingerprint": "b8b68e31",
+   "line_at_generation": 108,
+   "snippet": "max_seq[r.get('date_start')] = max(max_seq.get(r.get('date_start'), 0), int(parts[3]))",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/ofac_screen.py",
+   "func": "load",
+   "fingerprint": "7aa0812e",
+   "line_at_generation": 138,
+   "snippet": "raw = urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=60).read()",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/pdf_change_guard.py",
+   "func": "digest",
+   "fingerprint": "a900d9ac",
+   "line_at_generation": 38,
+   "snippet": "fills, _ = page_metrics(p)",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/preflight_check.py",
+   "func": "<module>",
+   "fingerprint": "97e4061a",
+   "line_at_generation": 76,
+   "snippet": "meta = json.loads(meta_today.read_text(encoding='utf-8'))",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/preflight_check.py",
+   "func": "<module>",
+   "fingerprint": "567d0ce1",
+   "line_at_generation": 134,
+   "snippet": "bu = json.loads(site.read_text(encoding='utf-8')).get('base_url', '')",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/preflight_check.py",
+   "func": "_known_block",
+   "fingerprint": "d1731317",
+   "line_at_generation": 146,
+   "snippet": "register = json.loads((B / 'appendices' / 'feed-limitations.json')",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/preflight_check.py",
+   "func": "<module>",
+   "fingerprint": "b3049a16",
+   "line_at_generation": 232,
+   "snippet": "md = json.loads(master.read_text(encoding='utf-8'))",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/preflight_check.py",
+   "func": "<module>",
+   "fingerprint": "5d731a55",
+   "line_at_generation": 251,
+   "snippet": "known = set(json.loads(cmap.read_text(encoding='utf-8')).get('codes', {})) | \\",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/preflight_check.py",
+   "func": "_listening",
+   "fingerprint": "d5f6023b",
+   "line_at_generation": 268,
+   "snippet": "return int((r.stdout or '0').strip().splitlines()[-1]) > 0",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/preflight_check.py",
+   "func": "<module>",
+   "fingerprint": "e0cc70f4",
+   "line_at_generation": 166,
+   "snippet": "st = json.loads(mark.read_text(encoding='utf-8'))",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/pro_audit.py",
+   "func": "axe_scan",
+   "fingerprint": "d1fd98ff",
+   "line_at_generation": 49,
+   "snippet": "await page.add_script_tag(url=AXE_URL)",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/pro_audit.py",
+   "func": "contrast_from_pixels",
+   "fingerprint": "1fdfd844",
+   "line_at_generation": 98,
+   "snippet": "from PIL import Image",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/pro_audit.py",
+   "func": "contrast_from_pixels",
+   "fingerprint": "9a2d62cc",
+   "line_at_generation": 111,
+   "snippet": "await el.scroll_into_view_if_needed(timeout=5000)",
+   "handler_kind": "متابعة",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/pro_audit.py",
+   "func": "contrast_from_pixels",
+   "fingerprint": "8c0331b9",
+   "line_at_generation": 116,
+   "snippet": "im = Image.open(shot_path).convert(\"L\")",
+   "handler_kind": "متابعة",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/pro_audit.py",
+   "func": "run",
+   "fingerprint": "1e8acd38",
+   "line_at_generation": 189,
+   "snippet": "snap = None  # واجهة الشجرة صارت لا تُعيد شيئًا في هذا الإصدار — نُكمل بفحص DOM مباشر",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/pro_audit.py",
+   "func": "run",
+   "fingerprint": "5e201022",
+   "line_at_generation": 218,
+   "snippet": "await page.emulate_media(media=\"print\")",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/qa_gates.py",
+   "func": "<module>",
+   "fingerprint": "876748a1",
+   "line_at_generation": 42,
+   "snippet": "import json as _json",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/qa_gates.py",
+   "func": "gate_docx",
+   "fingerprint": "87a2f81a",
+   "line_at_generation": 239,
+   "snippet": "from docx import Document",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/runbook.py",
+   "func": "run",
+   "fingerprint": "361fb9f5",
+   "line_at_generation": 248,
+   "snippet": "from redact import redact  # type: ignore",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/self_improve.py",
+   "func": "lessons",
+   "fingerprint": "faf753a0",
+   "line_at_generation": 50,
+   "snippet": "out.append(json.loads(line))",
+   "handler_kind": "متابعة",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/self_improve.py",
+   "func": "gate_warnings",
+   "fingerprint": "96162b42",
+   "line_at_generation": 77,
+   "snippet": "text = log.read_text(encoding=\"utf-8\", errors=\"ignore\")",
+   "handler_kind": "متابعة",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/self_improve.py",
+   "func": "enforcement_index",
+   "fingerprint": "8dc23ec2",
+   "line_at_generation": 65,
+   "snippet": "buf.append(f.read_text(encoding=\"utf-8\", errors=\"ignore\"))",
+   "handler_kind": "متابعة",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/self_test.py",
+   "func": "main",
+   "fingerprint": "c3c5f9a4",
+   "line_at_generation": 218,
+   "snippet": "codemap = json.loads((BRAIN / \"appendices\" / \"event-code-map.json\").read_text(encoding=\"utf-8\"))",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/self_test.py",
+   "func": "main",
+   "fingerprint": "fec13c36",
+   "line_at_generation": 227,
+   "snippet": "log = [json.loads(l) for l in (BRAIN / \"memory\" / \"learning-log.jsonl\").read_text(encoding=\"utf-8\").splitlines() if l.strip()]",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/self_test.py",
+   "func": "main",
+   "fingerprint": "1bfc334b",
+   "line_at_generation": 232,
+   "snippet": "bl = json.loads((BRAIN / \"appendices\" / \"style-blacklist.json\").read_text(encoding=\"utf-8\"))",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/self_test.py",
+   "func": "main",
+   "fingerprint": "4bf4b6d8",
+   "line_at_generation": 243,
+   "snippet": "man = json.loads((BRAIN / \"appendices\" / \"sources-manifest.json\").read_text(encoding=\"utf-8\"))",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/self_test.py",
+   "func": "main",
+   "fingerprint": "865559b8",
+   "line_at_generation": 359,
+   "snippet": "rj = json.loads(routes.read_text(encoding=\"utf-8\"))",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/self_test.py",
+   "func": "main",
+   "fingerprint": "f1b72665",
+   "line_at_generation": 439,
+   "snippet": "mtxt = meta.read_text(encoding=\"utf-8\")",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/self_test.py",
+   "func": "main",
+   "fingerprint": "0c5398f0",
+   "line_at_generation": 113,
+   "snippet": "__import__(mod)",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/self_test.py",
+   "func": "ledger_core",
+   "fingerprint": "c7421a32",
+   "line_at_generation": 187,
+   "snippet": "raw = json.loads(ledger.read_text(encoding=\"utf-8\"))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/self_test.py",
+   "func": "main",
+   "fingerprint": "f1124f75",
+   "line_at_generation": 287,
+   "snippet": "tgj = json.loads(tg.read_text(encoding=\"utf-8\"))",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/self_test.py",
+   "func": "main",
+   "fingerprint": "5aa4740d",
+   "line_at_generation": 294,
+   "snippet": "# مسار curl: طلبات python تُرد 403 من حماية الموقع، وcurl يمرّ (قاعدة 20 أكتوبر 2026)",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/self_test.py",
+   "func": "main",
+   "fingerprint": "02bf3717",
+   "line_at_generation": 329,
+   "snippet": "info = tg(\"getWebhookInfo\").get(\"result\", {})",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/self_test.py",
+   "func": "main",
+   "fingerprint": "5f7e4342",
+   "line_at_generation": 373,
+   "snippet": "req = urllib.request.Request(SITE_URL + path, headers={\"User-Agent\": \"Mozilla/5.0 selftest\"})",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/self_test.py",
+   "func": "main",
+   "fingerprint": "11a0eda7",
+   "line_at_generation": 418,
+   "snippet": "txt = p.read_text(encoding=\"utf-8\", errors=\"ignore\")",
+   "handler_kind": "متابعة",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/self_test.py",
+   "func": "main",
+   "fingerprint": "57e35592",
+   "line_at_generation": 408,
+   "snippet": "if secret_pats[2][0].search(p.read_text(encoding=\"utf-8\", errors=\"ignore\")):",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/telegram_bot.py",
+   "func": "load_json",
+   "fingerprint": "4a651581",
+   "line_at_generation": 83,
+   "snippet": "return json.loads(path.read_text(encoding=\"utf-8\"))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/telegram_bot.py",
+   "func": "main",
+   "fingerprint": "871f2005",
+   "line_at_generation": 257,
+   "snippet": "handle(tok, u)",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "file": "tools/telegram_send.py",
+   "func": "main",
+   "fingerprint": "d8a40560",
+   "line_at_generation": 287,
+   "snippet": "import shutil",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  }
+ ],
+ "unclassified": []
+}

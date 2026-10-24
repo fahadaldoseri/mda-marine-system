@@ -75,11 +75,13 @@ echo "── (د) حصر الاستثناءات العامة: لا موقع جد
 python3 - <<'PY' && ok "لا استثناء عام جديد خارج القائمة المقبولة" || bad "استثناء عام جديد خارج القائمة المقبولة"
 import json, subprocess, sys
 from pathlib import Path
-rows = json.loads(subprocess.run(['python3','tools/audit_broad_excepts.py','--json'],
+d = json.loads(subprocess.run(['python3','tools/audit_broad_excepts.py','--json'],
                                  capture_output=True, text=True).stdout)
-acc = {x['site'] for x in json.loads(Path('appendices/broad-excepts-baseline.json').read_text(encoding='utf-8'))['accepted']}
-new = [f"{r['file']}:{r['line']}" for r in rows if f"{r['file']}:{r['line']}" not in acc]
-print('جديدة:', new)
+base = json.loads(Path('appendices/broad-excepts-baseline.json').read_text(encoding='utf-8'))
+acc = set(base.get('unclassified') or [])
+un = list(d.get('unclassified') or [])
+new = [x for x in un if x not in acc]
+print('غير مصنّف:', len(un), '· جديد:', new)
 sys.exit(1 if new else 0)
 PY
 
@@ -144,7 +146,7 @@ python3 tools/text_hash_guard.py --date "$D" --stage record >/dev/null 2>&1
 if python3 tools/text_hash_guard.py --date "$D" --stage verify >/dev/null 2>&1; then
   bad "مخرجات أقدم من النص لم تُمنع (يجب إعادة البناء)"
 else ok "المخرجات الأقدم من النص تمنع حتى يُعاد البناء"; fi
-S="${SITE_DIR:-$B/../seawatch}/dist"
+S="${SITE_DIR:-${SITE:-$B/../seawatch}}/dist"
 touch "$S/reports/$D.html" "$S/reports/pdf/$D.pdf" "reports/docx/التقرير-اليومي-$D-طبق-الأصل.docx" 2>/dev/null
 python3 tools/text_hash_guard.py --date "$D" --stage verify >/dev/null 2>&1 && ok "بعد إعادة البناء يمرّ الحارس" || bad "بعد إعادة البناء لا يمرّ"
 
