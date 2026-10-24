@@ -30,15 +30,18 @@
     "status": "degraded"
   },
   "final_gate": {
-    "blocked_steps": [],
+    "status": "block",
+    "exit_code": 2,
     "dir": "logs/gate-2026-10-24",
-    "exit_code": 1,
-    "note": "نتيجة بوابة التسليم النهائية — كُتبت العلامة بعدها.",
-    "status": "warn"
+    "blocked_steps": [
+      "اختبارات البوابات (tests)",
+      "بوابات المخرج العشر"
+    ],
+    "note": "نتيجة بوابة التسليم النهائية — مسجّلة بعد كتابة التقرير."
   },
   "finished_utc": "2026-10-23T22:58:01Z",
   "gate_dir": "logs/gate-2026-10-24",
-  "gate_finished_utc": "2026-10-24T06:07:16Z",
+  "gate_finished_utc": "2026-10-24T13:01:17Z",
   "gate_note": "تُشغَّل بوابة التسليم بعد كتابة التقرير — أُصلح الحقل المخالف (status=pending) في 24 أكتوبر 2026.",
   "gate_state": "not_run",
   "ladder_note": "سلّم موحّد: ok / degraded / failed — لكل مكوّن رمز خروج حقيقي، ولا تُعلن نجاحًا برمز صفري",
@@ -47,19 +50,19 @@
     "edit_pass": {
       "applied": true,
       "by_category": {
-        "أسلوب": 58,
-        "ترجمة حرفية": 3,
-        "مفردة": 21
+        "أسلوب": 27,
+        "ترقيم": 1,
+        "مفردة": 43
       },
-      "changes": 82,
-      "edited": 8,
+      "changes": 71,
+      "edited": 9,
       "model": "gpt-5-mini",
-      "rejected": 5,
+      "rejected": 3,
       "sections": 15
     },
     "long_sentences": 3,
     "orthography_errors": 0,
-    "waw_pct": 4.8,
+    "waw_pct": 2.5,
     "waw_runs3": 0
   },
   "ledger_merge": {
