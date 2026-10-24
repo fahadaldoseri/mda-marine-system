@@ -10,7 +10,7 @@
 
 ## المتبقّي
 1. **توكن البوت** سرًّا في المشروع (`TELEGRAM_BOT_TOKEN`) — بانتظار تجديده من BotFather (`/revoke`) ثم إدخاله في بطاقة السر.
-2. **سر الويب هوك** (`TELEGRAM_WEBHOOK_SECRET`) و**معرّف صاحب القرار** (`TELEGRAM_OWNER_CHAT_ID=7792142387`).
+2. **سر الويب هوك** (`TELEGRAM_WEBHOOK_SECRET`) و**معرّف صاحب القرار** (`TELEGRAM_OWNER_CHAT_ID=[محجوب]`).
 3. `setWebhook` على `https://seawatch-xp4qirmr.manus.space/api/telegram/webhook` مع `secret_token` و`allowed_updates=[message,channel_post]`، ثم `deleteWebhook` لإنهاء مسار الاستقصاء القديم.
 4. إعادة نشر بعد إضافة الأسرار (الحاوية تقرأها وقت التشغيل).
 5. تحديث الموصل (connector) بالتوكن الجديد.
