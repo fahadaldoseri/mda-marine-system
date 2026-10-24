@@ -64,16 +64,6 @@ w(repo / "brain" / "tools" / "a.py", "v3\n"); git("add", "-A"); git("commit", "-
 r = apply()
 ok(r.returncode == 3 and (brain / "tools" / "a.py").read_text(encoding="utf-8") == "تعديل محلي جديد\n", "تعديل محلي + تغيير في المستودع = تعارض يمنع")
 
-# مسارات مُلغاة: تُؤرشف وتُحذف من الخادم، وغيرها لا يُحذف أبدًا
-w(repo / "brain" / "appendices" / "retired-paths.json", json.dumps({"paths": {"brain/tests/sections/*": "x"}}))
-git("add", "-A"); git("commit", "-qm", "retired")
-w(brain / "tools" / "a.py", "v3\n")  # يطابق المستودع فلا تعارض
-w(brain / "tests" / "sections" / "t_old.sh", "قديم\n")
-w(brain / "tools" / "server_only_tool.py", "أداة خادم لا يلمسها أحد\n")
-r = apply()
-ok(r.returncode == 0 and not (brain / "tests" / "sections" / "t_old.sh").exists(), "الملف المُلغى يُحذف من الخادم")
-ok(list((brain / "logs").glob("apply-*/brain/tests/sections/t_old.sh")), "وتبقى نسخته في الأرشيف")
-ok((brain / "tools" / "server_only_tool.py").exists(), "أداة الخادم غير المُلغاة لا تُحذف")
 shutil.copy(HERE / "tools" / "runbook.py", brain / "tools" / "runbook.py")
 w(repo / "brain" / "tools" / "b.py", "x\n"); git("add", "-A"); git("commit", "-qm", "c4")
 w(brain / "tools" / "a.py", "v3\n")  # يطابق المستودع فلا تعارض

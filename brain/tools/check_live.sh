@@ -12,6 +12,7 @@ for a in "$@"; do case "$a" in --compare) CMP=1 ;; *) D="$a" ;; esac; done
 BASE="${LIVE_BASE_URL:-$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['base_url'])" "$SITE/sources/site.json" 2>/dev/null)}"
 [ -n "$BASE" ] || { echo "✘ لا رابط للموقع المنشور (sources/site.json:base_url)"; exit 2; }
 mkdir -p "$B/logs"
+for attempt in 1 2 3; do
 python3 - "$B" "$SITE" "$BASE" "$D" "$CMP" <<'PY'
 import hashlib, json, sys, datetime, urllib.request, urllib.error
 B, SITE, BASE, D, CMP = sys.argv[1:6]
@@ -51,3 +52,12 @@ open(f"{B}/logs/live-{D}.json", "w", encoding="utf-8").write(json.dumps(doc, ens
 print("  ✔ كل المسارات ترد 200" + (" وPDF مطابق للمحلي" if CMP == "1" else "") if not bad else f"  ✘ خلل: {bad}")
 sys.exit(2 if bad else 0)
 PY
+rc=$?
+if [ "$rc" -eq 0 ]; then exit 0; fi
+if [ "$attempt" -lt 3 ]; then
+  echo "  · محاولة $attempt: الانتشار لم يكتمل — انتظار 45 ثانية ثم إعادة"
+  sleep 45
+else
+  exit "$rc"
+fi
+done

@@ -31,6 +31,24 @@ def main() -> int:
         return 2
     mark = json.loads(mark_p.read_text(encoding="utf-8"))
     overall = str(mark.get("overall") or "")
+    # ك-XX: لا يُحكم على علامة قديمة — تُقارن أولًا بالمخرجات الفعلية (مصدر واحد للحقيقة)
+    sys.path.insert(0, str(B / "tools"))
+    try:
+        from mark_components import DERIVERS  # noqa: E402
+        stale: list[str] = []
+        for c, fn in DERIVERS.items():
+            status, _note, _items, _detail = fn(a.date)
+            cur = str((mark.get(c) or {}).get("status") or "")
+            if cur and cur != status:
+                stale.append(f"{c}: العلامة «{cur}» والمخرجات «{status}»")
+        if stale:
+            for s in stale:
+                print(f"  ✘ علامة قديمة — {s}")
+            print("  ✘ حدّث العلامة: python3 tools/mark_components.py --date " + a.date)
+            return 2
+    except Exception as exc:  # انهيار التحقق = منع (لا ابتلاع)
+        print(f"  ✘ تعذّر التحقق من مطابقة العلامة للمخرجات: {type(exc).__name__}: {exc}")
+        return 2
     comps = degraded_components(mark)
 
     md = B / "reports" / f"{a.date}-sectioned.md"

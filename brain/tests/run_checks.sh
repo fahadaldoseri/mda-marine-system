@@ -134,8 +134,13 @@ rm -f "logs/pipeline-$FD.json" "reports/$FD-sectioned.md"
 
 echo "8) مخطط العلامة الثابت وكاتب العلامة"
 if [ -f "logs/pipeline-${D}.json" ]; then
-  python3 tools/write_mark.py --date "$D" --stage final >"$TMP/wm.txt" 2>&1
-  check "$?" "0" "كتابة العلامة بعد البوابة"
+  if [ -f "logs/gate-${D}/gate.json" ]; then
+    python3 tools/write_mark.py --date "$D" --stage final >"$TMP/wm.txt" 2>&1
+    check "$?" "0" "كتابة العلامة بعد البوابة"
+  else
+    python3 tools/write_mark.py --date "$D" --stage final >"$TMP/wm.txt" 2>&1
+    check "$?" "70" "رفض كتابة علامة نهائية قبل تشغيل بوابة التسليم"
+  fi
   python3 validators/check_mark_schema.py --date "$D" >"$TMP/cms.txt" 2>&1
   check "$?" "0" "مخطط العلامة مطابق (حقول وأنواع وأرقام)"
   python3 -c "
@@ -188,11 +193,7 @@ t "heading_present" python3 tests/test_pdf_heading_match.py
 t "المحاذاة في الطباعة تتجاهل المحجوب (no-print)" python3 tests/test_print_alignment_hidden.py
 
 echo "17) GitHub مصدر الشيفرة"
-if [ -e "$B/../.git" ] && [ -f "$B/../brain/appendices/code-paths.json" ]; then
-  t "كل مسار مصنَّف code/data" python3 tools/code_paths.py check --root "$B/.."
-else
-  ok "تصنيف المسارات: تخطٍّ مقصود (الشجرة ليست نسخة المستودع، كتخطيط الخادم)"
-fi
+t "كل مسار مصنَّف code/data" python3 tools/code_paths.py check
 t "apply_from_github: تعارض · أرشفة · استعادة" python3 tests/test_apply_from_github.py
 t "النسخ الاحتياطي لا يكتب الشيفرة فوق GitHub" python3 tests/test_backup_code_safety.py
 t "فهرس التقارير" python3 tests/test_reports_index.py

@@ -170,9 +170,9 @@ json.dump({
                      'merged_before_marker': bool(mlog.get('merged_utc'))},
     'builtin_llm': {'status': sl, 'note': nlm},
     'report_present_at_pipeline_end': report_present,
-    'final_gate': {'status': 'pending' if not (gate_dir / 'gate.json').exists() else 'recorded',
-                   'dir': str(gate_dir.relative_to(B)),
-                   'note': 'تُشغَّل بوابة التسليم بعد كتابة التقرير: bash tools/final_gate.sh <التاريخ>'},
+    'gate_state': 'recorded' if (gate_dir / 'gate.json').exists() else 'not_run',
+    'gate_dir': str(gate_dir.relative_to(B)),
+    'gate_note': 'تُشغَّل بوابة التسليم بعد كتابة التقرير: bash tools/final_gate.sh <التاريخ>   # لا تُكتب علامة نهائية قبلها',
 }, open(mark, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
 print(f"-- الخلاصة: تغذيات={f} · OFAC={o} · أصول={a} · دمج الذاكرة={l} · النموذج المدمج={sl} · الحالة العامة={overall}")
 print(f"-- العلامة: {mark}")
