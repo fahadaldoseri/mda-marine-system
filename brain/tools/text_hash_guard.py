@@ -1,4 +1,3 @@
-import os
 #!/usr/bin/env python3
 """حارس بصمة النص — البند (أ) من مراجعة صاحب القرار 2026-10-23.
 
@@ -11,6 +10,7 @@ import os
      فإن كان المخرج أقدم فمعناه أنه بُني قبل آخر تعديل ⇒ منع.
 """
 from __future__ import annotations
+import os
 
 import argparse
 import datetime
