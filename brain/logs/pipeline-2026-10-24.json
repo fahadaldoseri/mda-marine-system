@@ -1,0 +1,115 @@
+{
+  "builtin_llm": {
+    "note": "رُشّحت التغذيات ورُوجعت اللغة آلياً بالنموذج المدمج",
+    "status": "ok"
+  },
+  "date": "2026-10-24",
+  "feeds": {
+    "browser_only": [],
+    "checked": 35,
+    "derived_from": "feeds/feeds-2026-10-24.status.json",
+    "empty": [],
+    "fail_ratio": 0.029,
+    "failed": 1,
+    "failed_feeds": [
+      {
+        "block_reason": "all routes failed: primary: حجب مصدر — رفض الخادم الطلب (HTTP 403) | official:bna-en-rss: حجب مصدر — human verification page (HTTP 405)",
+        "error": "حجب مصدر — human verification page (HTTP 405)",
+        "name": "حساب @bna_en على X",
+        "num": 17
+      }
+    ],
+    "note": "مصدر نجح على مسار وفشل على آخر لا يُحسب متعذّرًا (عطل ك-137)",
+    "ok": 34,
+    "source": "feeds/feeds-2026-10-24.status.json",
+    "stale": [
+      12,
+      20,
+      30
+    ],
+    "status": "degraded"
+  },
+  "final_gate": {
+    "blocked_steps": [],
+    "dir": "logs/gate-2026-10-24",
+    "exit_code": 1,
+    "note": "نتيجة بوابة التسليم النهائية — كُتبت العلامة بعدها.",
+    "status": "warn"
+  },
+  "finished_utc": "2026-10-23T22:58:01Z",
+  "gate_dir": "logs/gate-2026-10-24",
+  "gate_finished_utc": "2026-10-24T06:07:16Z",
+  "gate_note": "تُشغَّل بوابة التسليم بعد كتابة التقرير — أُصلح الحقل المخالف (status=pending) في 24 أكتوبر 2026.",
+  "gate_state": "not_run",
+  "ladder_note": "سلّم موحّد: ok / degraded / failed — لكل مكوّن رمز خروج حقيقي، ولا تُعلن نجاحًا برمز صفري",
+  "language": {
+    "banned_terms": 0,
+    "edit_pass": {
+      "applied": true,
+      "by_category": {
+        "أسلوب": 58,
+        "ترجمة حرفية": 3,
+        "مفردة": 21
+      },
+      "changes": 82,
+      "edited": 8,
+      "model": "gpt-5-mini",
+      "rejected": 5,
+      "sections": 15
+    },
+    "long_sentences": 3,
+    "orthography_errors": 0,
+    "waw_pct": 4.8,
+    "waw_runs3": 0
+  },
+  "ledger_merge": {
+    "added_this_run_count": 4,
+    "derived_from": "cumulative-2026/daily/2026-10-24.json",
+    "incidents": 0,
+    "merged_before_marker": true,
+    "merged_utc": "2026-10-23T22:58:01Z",
+    "note": "دُمج ملف اليوم في الدفتر الجامع (4 واقعة)",
+    "period_end": "2026-10-23",
+    "records_total": 234,
+    "source": "cumulative-2026/daily/2026-10-24.json",
+    "status": "ok"
+  },
+  "ofac": {
+    "derived_from": "watchlist/ofac-targets.txt + archive/ofac-screen-latest.json",
+    "list": "https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/SDN.CSV",
+    "matches": [],
+    "note": "فُحص 9 مستهدفًا — الحالة: ok",
+    "results_file": "archive/ofac-screen-latest.json",
+    "reviews": [],
+    "source": "watchlist/ofac-targets.txt + archive/ofac-screen-latest.json",
+    "status": "ok",
+    "targets": 9
+  },
+  "originals": {
+    "count": 3,
+    "derived_from": "archive/originals/2026-10-24/",
+    "empty_shell": 0,
+    "failed": 0,
+    "healthy": 3,
+    "manifest": "archive/originals/2026-10-24/manifest.json",
+    "note": "حُفظت الأصول في archive/originals/2026-10-24",
+    "source": "archive/originals/2026-10-24/",
+    "status": "ok",
+    "status_file": "archive/originals/2026-10-24/status.json"
+  },
+  "overall": "degraded",
+  "pipeline_version": 4,
+  "report_present_at_pipeline_end": true,
+  "schema_version": 1,
+  "sources": {
+    "approved": 62,
+    "checked": 35,
+    "failed": 1,
+    "failed_names": [
+      "حساب @bna_en على X"
+    ],
+    "ok": 34,
+    "status_file": "feeds/feeds-2026-10-24.status.json"
+  },
+  "written_stage": "final"
+}

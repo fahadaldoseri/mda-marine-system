@@ -57,14 +57,14 @@
     "status": "degraded"
   },
   "final_gate": {
-    "status": "warn",
-    "exit_code": 1,
-    "dir": "logs/gate-2026-10-23",
     "blocked_steps": [],
-    "note": "نتيجة بوابة التسليم النهائية — مسجّلة بعد كتابة التقرير."
+    "dir": "logs/gate-2026-10-23",
+    "exit_code": 1,
+    "note": "نتيجة بوابة التسليم النهائية — كُتبت العلامة بعدها.",
+    "status": "warn"
   },
   "finished_utc": "2026-10-23T03:49:14Z",
-  "gate_finished_utc": "2026-10-23T10:54:02Z",
+  "gate_finished_utc": "2026-10-23T11:52:47Z",
   "ladder_note": "سلّم موحّد: ok / degraded / failed — لكل مكوّن رمز خروج حقيقي، ولا تُعلن نجاحًا برمز صفري",
   "language": {
     "banned_terms": 21,
