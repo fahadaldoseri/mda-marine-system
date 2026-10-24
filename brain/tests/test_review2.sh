@@ -77,7 +77,7 @@ import json, subprocess, sys
 from pathlib import Path
 rows = json.loads(subprocess.run(['python3','tools/audit_broad_excepts.py','--json'],
                                  capture_output=True, text=True).stdout)
-acc = {x['site'] for x in json.loads(Path('appendices/broad-excepts-baseline.json').read_text(encoding='utf-8'))['accepted']}
+acc = {(x.get('site') or f"{x.get('file')}:{x.get('line_at_generation')}") for x in json.loads(Path('appendices/broad-excepts-baseline.json').read_text(encoding='utf-8'))['accepted']}
 new = [f"{r['file']}:{r['line']}" for r in rows if f"{r['file']}:{r['line']}" not in acc]
 print('جديدة:', new)
 sys.exit(1 if new else 0)
@@ -144,7 +144,7 @@ python3 tools/text_hash_guard.py --date "$D" --stage record >/dev/null 2>&1
 if python3 tools/text_hash_guard.py --date "$D" --stage verify >/dev/null 2>&1; then
   bad "مخرجات أقدم من النص لم تُمنع (يجب إعادة البناء)"
 else ok "المخرجات الأقدم من النص تمنع حتى يُعاد البناء"; fi
-S="${SITE_DIR:-$B/../seawatch}/dist"
+S="${SITE_DIR:-${SITE:-$B/../seawatch}}/dist"
 touch "$S/reports/$D.html" "$S/reports/pdf/$D.pdf" "reports/docx/التقرير-اليومي-$D-طبق-الأصل.docx" 2>/dev/null
 python3 tools/text_hash_guard.py --date "$D" --stage verify >/dev/null 2>&1 && ok "بعد إعادة البناء يمرّ الحارس" || bad "بعد إعادة البناء لا يمرّ"
 

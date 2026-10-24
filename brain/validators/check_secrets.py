@@ -142,4 +142,8 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        from _guard import run
+    except ImportError:
+        from validators._guard import run
+    raise SystemExit(run(main))
