@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 """حارس بصمة النص — البند (أ) من مراجعة صاحب القرار 2026-10-23.
 
@@ -19,7 +20,8 @@ import sys
 from pathlib import Path
 
 B = Path(__file__).resolve().parent.parent
-SITE = B.parent / "seawatch"
+SITE = Path(os.environ.get("SITE_DIR") or os.environ.get("SITE")
+            or str(Path(__file__).resolve().parents[1].parent / "seawatch")) / "dist"
 CRASH = 70
 
 
