@@ -232,6 +232,37 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .map-legend{list-style:none;display:grid;gap:7px;margin:14px 0 0;padding:0}
 .map-legend li{display:flex;gap:10px;align-items:baseline;font-size:13.5px;color:var(--ink-2);margin:0}
 .lg-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;color:#fff;background:var(--mk);border-radius:999px;width:19px;height:19px;display:grid;place-items:center;flex:0 0 auto}
+/* ---------- خريطة الشاشة العليا: للشاشة فقط، تُحجب في الطباعة وWord بصنف no-print ---------- */
+.hero-map{margin:22px 0 6px}
+.hmap{margin:0;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:18px}
+.hmap h3{margin:0 0 14px;font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:15px;color:var(--ink-2)}
+.hmap .blk-lede,.hmap-keys,.hmap-panel .src-note{display:none}
+.hmap-wrap{position:relative;border:1px solid var(--line-2);border-radius:var(--radius-sm);overflow:hidden;background:var(--map-sea)}
+/* التكبير بجانب الخريطة لا فوقها: الشريحة كانت تحجب الخليج العربي (البحرين وقطر) */
+.hmap-wrap{display:grid;grid-template-columns:minmax(0,2.4fr) minmax(0,1fr);align-items:start}
+.hmap-zoom{border-inline-start:1.5px solid var(--accent);background:var(--map-sea);min-width:0;align-self:stretch;display:flex;flex-direction:column}
+.hmap-zsvg{display:block;width:100%;height:auto}
+.hz-cap{font-size:13px;color:var(--ink-2);background:var(--panel);padding:4px 10px;border-top:1px solid var(--line-2);margin-top:auto}
+@media (max-width:1000px){.hmap-wrap{grid-template-columns:minmax(0,1fr)}.hmap-zoom{border-inline-start:0;border-top:1.5px solid var(--accent)}}
+.hmap-svg{display:block;width:100%;height:auto;max-width:100%}
+/* خريطة الشاشة: علامات وتسميات أكبر قليلًا للقراءة من مسافة */
+.hmap-svg .mp-dot{r:9.5px}
+.hmap-svg .mp-halo{r:17px}
+.hmap-svg .mp-events .mp-num{font-size:12.5px}
+.hmap .mp-grid-lbl{font-size:12.5px}
+.hmap .mp-port-lbl{font-size:15.5px}
+.hmap .mp-country{font-size:16.5px}
+.hmap-legend{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 30px;margin:16px 0 0;padding:0}
+.hmap-legend li{display:block;position:relative;padding-inline-start:34px;font-size:14px;line-height:1.85;color:var(--ink-2);margin:0}
+.hmap-legend .lg-num{position:absolute;inset-inline-start:0;top:3px}
+.hmap-legend .bidi{color:var(--muted);font-size:13px;white-space:nowrap}
+@media (max-width:760px){.hmap-legend{grid-template-columns:minmax(0,1fr)}}
+/* الجوال: الخريطة الرئيسية تُصغَّر كثيرًا فتكبر العلامات والتسميات لتبقى مقروءة (التفصيل في لوحة التكبير) */
+@media (max-width:700px){
+  .hmap-svg .mp-dot{r:13px}.hmap-svg .mp-halo{r:20px}.hmap-svg .mp-events .mp-num{font-size:15px}
+  .hmap-svg .mp-port-lbl{font-size:25px}.hmap-svg .mp-country{font-size:27px}
+  .hmap-svg .mp-sea-lg{font-size:31px}.hmap-svg .mp-sea-sm{font-size:25px}.hmap-svg .mp-grid-lbl{display:none}
+}
 /* ---------- الاستشهادات ---------- */
 .cite-ref{
   display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:11.5px;
@@ -316,7 +347,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .map-caption,.map-viz figcaption{margin-top:1.5mm;line-height:1.4}
   /* كثافة الصفحة: تقليل حشو الخلايا لتصبح الكتلة على مقاس الورقة */
   tbody td{padding:1.5mm 2.2mm !important}
-  .sec-lede{margin:0 0 7px;line-height:1.55}
+  .sec-lede{margin:0 0 10px;line-height:1.55}
   section.doc{padding:0 0 3mm}
   .rmk,.glossary{break-inside:avoid;page-break-inside:avoid}
   /* انضباط بصري: خطوط فاصلة رقيقة بدل تظليل الصفوف */
@@ -428,7 +459,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .changes > *{display:block !important;width:100% !important}
   .viz > *,.card > *{box-sizing:border-box}
   /* ضغط تباعد الأقسام: يوفّر نحو 40 مم فتنتقل نهاية التقرير إلى صفحتها السابقة */
-  section.doc{padding:0 0 1.5mm !important}
+  section.doc{padding:0 0 2.5mm !important}
   section.doc > h2{margin:3mm 0 1.5mm !important}
   .sec-lede{margin:0 0 2mm !important}
   .h-rule{margin:1mm 0 2mm !important}
@@ -515,40 +546,61 @@ body.daylight .kpi em{opacity:.95}
 --sn-muted:#7f95ae;--sn-accent:#22c3b6;--sn-accent-ink:#04120f}
 html{scroll-behavior:smooth}
 body.daylight{--sn-bg:#eef3f9;--sn-panel:#ffffff;--sn-line:#d3dded;--sn-ink:#0d1a2b;--sn-ink2:#33475e;
---sn-muted:#5d738c;--sn-accent:#0f8f86;--sn-accent-ink:#ffffff}
+--sn-muted:#4f657c;--sn-accent:#0b7a72;--sn-accent-ink:#ffffff}
 .site-nav{position:sticky;top:0;z-index:60;background:var(--sn-bg);border-bottom:1px solid var(--sn-line);
 font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif}
-.site-nav .sn-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:9px 20px;flex-wrap:wrap}
+.site-nav .sn-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:9px 20px;flex-wrap:wrap}
 .site-nav a{color:var(--sn-ink2);text-decoration:none}
 .sn-brand{display:flex;align-items:center;gap:10px;color:var(--sn-ink)!important;font-weight:700}
 .sn-mark{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:0 0 auto;
 background:linear-gradient(150deg,var(--sn-accent),#0c8b83);color:#04120f}
 .sn-mark svg{width:17px;height:17px}
 .sn-name{display:flex;flex-direction:column;line-height:1.25}
-.sn-name em{font-style:normal;font-size:11.5px;font-weight:500;color:var(--sn-muted)}
+.sn-name em{font-style:normal;font-size:12.5px;font-weight:500;color:var(--sn-muted)}
 .sn-links{display:flex;gap:4px;margin-inline-start:auto;flex-wrap:wrap}
-.sn-links a{padding:6px 11px;border-radius:8px;font-size:13.5px;border:1px solid transparent}
+.sn-links a{padding:6px 8px;min-height:32px;display:inline-flex;align-items:center;border-radius:8px;font-size:13.5px;border:1px solid transparent}
 .sn-links a:hover{background:var(--sn-panel);border-color:var(--sn-line);color:var(--sn-ink)}
 .sn-links a[aria-current="page"]{background:var(--sn-panel);border-color:var(--sn-line);color:var(--sn-ink);font-weight:600}
 .sn-tools{display:flex;align-items:center;gap:8px}
 .sn-scale{display:flex;border:1px solid var(--sn-line);border-radius:9px;overflow:hidden}
-.sn-scale button{background:transparent;border:0;color:var(--sn-ink2);padding:5px 10px;cursor:pointer;font:inherit;font-size:13px}
+.sn-scale button{background:transparent;border:0;color:var(--sn-ink2);padding:5px 8px;min-width:34px;min-height:32px;cursor:pointer;font:inherit;font-size:13px}
 .sn-scale button.on{background:var(--sn-accent);color:var(--sn-accent-ink);font-weight:700}
 .sn-theme{background:var(--sn-panel);border:1px solid var(--sn-line);color:var(--sn-ink2);
 border-radius:9px;padding:6px 11px;cursor:pointer;font:inherit;font-size:13px}
 .sn-theme:hover{color:var(--sn-ink)}
+.sn-skip{position:absolute;inset-inline-start:12px;top:-80px;z-index:70;background:var(--sn-accent);color:var(--sn-accent-ink)!important;
+padding:9px 16px;border-radius:9px;font-weight:700;font-size:14px}
+.sn-skip:focus{top:8px;outline:2px solid var(--sn-ink);outline-offset:2px}
+.sn-print{background:var(--sn-accent);color:var(--sn-accent-ink);border-color:transparent;font-weight:700}
+.sn-print:hover{color:var(--sn-accent-ink);filter:brightness(1.08)}
 .sn-foot{margin-top:44px;border-top:1px solid var(--sn-line);background:var(--sn-bg);
 font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif}
-.sn-foot .sf-inner{max-width:1180px;margin:0 auto;padding:20px;color:var(--sn-muted);font-size:12.5px;
+.sn-foot .sf-inner{max-width:1180px;margin:0 auto;padding:20px;color:var(--sn-muted);font-size:13px;
 display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
-.sn-foot a{color:var(--sn-ink2)}
+.sn-foot a{color:var(--sn-ink2);display:inline-block;padding:4px 2px;min-height:24px}
 body.daylight .topbar{background:#ffffff!important;border-bottom-color:#d3dded!important}
 body.daylight .brand-title,body.daylight .brand-sub{color:#0d1a2b}
 @media print{.site-nav,.sn-foot{display:none!important}}
 
 /* قائمة الجوال — تضغط شريطي الموقع والصفحة إلى ارتفاع صغير */
 .sn-menu{display:none}
-@media (max-width:760px){
+/* سطح المكتب: الروابط والأدوات في صف واحد بجانب الشعار (كانت تتراصّ صفين داخل اللوحة) */
+@media (min-width:1041px){
+  .sn-panel{display:flex;align-items:center;gap:12px;flex:1 1 auto;min-width:0}
+  .sn-panel .sn-links{margin-inline-start:0}
+  .sn-panel .sn-tools{margin-inline-start:auto}
+}
+/* عرض متوسط (لوحي): يبقى الشريط صفًّا واحدًا حتى مع زر الطباعة */
+@media (min-width:1041px) and (max-width:1180px){
+  .sn-name em{display:none}
+  .site-nav .sn-inner{gap:8px;padding-inline:14px}
+  .sn-links{gap:0}
+  .sn-links a{padding:6px 5px;font-size:13px}
+  .sn-panel{gap:6px}
+  .sn-tools{gap:6px}
+  .sn-theme{padding:6px 8px}
+}
+@media (max-width:1040px){
   .site-nav .sn-inner{flex-wrap:nowrap;padding:8px 14px;gap:10px;position:relative}
   .sn-name em{display:none}
   .sn-menu{
@@ -628,6 +680,7 @@ body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
 .sp-dim{opacity:.72}
 </style></head>
 <body><nav class="site-nav no-print" aria-label="تنقل الموقع">
+  <a class="sn-skip" href="#" id="sn-skip">الانتقال إلى المحتوى</a>
   <div class="sn-inner">
     <a class="sn-brand" href="/">
       <span class="sn-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/><path d="M12 11.5v4"/><path d="M9.6 13.2h4.8"/></svg></span>
@@ -652,6 +705,7 @@ body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
         <button type="button" data-scale="1.25" title="أكبر حجم">أ++</button>
       </div>
       <button type="button" class="sn-theme" id="sn-theme">المظهر</button>
+      
     </div>
     </div>
   </div>
@@ -787,12 +841,22 @@ function currentScale(){var s=parseFloat(LS.getItem('mn-scale')||'1');return (s&
 function toggleTheme(){var on=body.classList.toggle('daylight');save('mn-theme',on?'light':'dark');paint();}
 if(reportBtn) reportBtn.addEventListener('click',function(e){e.preventDefault();toggleTheme();});
 if(siteBtn) siteBtn.addEventListener('click',function(e){e.preventDefault();toggleTheme();});
+var printBtn=document.getElementById('sn-print');
+if(printBtn) printBtn.addEventListener('click',function(e){e.preventDefault();window.print();});
 document.querySelectorAll('[data-scale]').forEach(function(b){
   b.addEventListener('click',function(e){e.preventDefault();
     var s=parseFloat(b.getAttribute('data-scale'));save('mn-scale',s);
     body.style.zoom=(s===1?'':s);paint();});
 });
 paint();
+// رابط التخطي: أول عنوان ظاهر في الصفحة (أو المتن)، فلا يمرّ قارئ لوحة المفاتيح على الشريط كله في كل صفحة
+var skip=document.getElementById('sn-skip');
+if(skip){
+  var hs=[].slice.call(document.querySelectorAll('h1')).filter(function(h){return h.offsetParent!==null;});
+  var tg=hs[0]||document.querySelector('main,[role=main]');
+  if(tg){ if(!tg.id) tg.id='sn-main'; tg.setAttribute('tabindex','-1'); skip.setAttribute('href','#'+tg.id); }
+  else { skip.parentNode.removeChild(skip); }
+}
 // تذكّر آخر تقرير فُتح
 var p=location.pathname;
 if(p.indexOf('/reports/')===0){

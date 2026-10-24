@@ -145,7 +145,9 @@ def build_reports(site_root: Path, dist: Path, reports, warnings):
     for r in reports:
         target = out_dir / f"{r['iso']}.html"
         try:
-            _, count = build_report.build(r["md"], target, r["meta"])
+            # غير الأحدث يُوسم أرشيفيًا على الشاشة بدل شارة «قديم» المنذرة
+            _meta = dict(r["meta"], screen_archived=(r is not reports[0]))
+            _, count = build_report.build(r["md"], target, _meta)
         except Exception as e:  # بناء تقرير واحد لا يُسقط الموقع
             warnings.append(f"فشل بناء {r['iso']}: {e}")
             continue
@@ -179,6 +181,7 @@ def build_cumulative(site_root: Path, dist: Path, warnings):
     target = dist / "reports" / "cumulative-2026.html"
     try:
         meta = json.loads(meta_p.read_text(encoding="utf-8"))
+        meta["screen_archived"] = "none"  # سجل تراكمي: بلا شارة عمر
         _, count = build_report.build(md, target, meta)
     except Exception as e:
         warnings.append(f"فشل بناء السجل التراكمي: {e}")
@@ -247,12 +250,13 @@ def build_index(dist: Path, reports, notfound: bool = False):
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate" type="application/rss+xml" title="تغذية الإصدارات اليومية" href="/feed.xml">
 <title>مركز الوعي بالمجال البحري — تقارير أمن الملاحة</title>
+<link rel="stylesheet" href="{build_report.FONT_LINK}">
 <style>
-{site_chrome.SITE_CSS}
+{site_chrome.SITE_CSS}{site_chrome.MOBILE_NAV_CSS}
 :root{{--bg:#040810;--panel:#0b1524;--panel2:#0f1d33;--line:#1b2b45;--ink:#e9f0f9;--ink2:#b9c8dc;
 --muted:#7f95ae;--accent:#22c3b6;--accent-ink:#04120f;--danger:#ff5d52;--warn:#ffb02e;--ok:#33d07a;--info:#4d9dff}}
 body.daylight{{--bg:#eef3f9;--panel:#ffffff;--panel2:#f5f8fc;--line:#d3dded;--ink:#0d1a2b;--ink2:#33475e;
---muted:#5d738c;--accent:#0f8f86;--accent-ink:#ffffff;--danger:#c2352c;--warn:#a86b00;--ok:#1d7a4c;--info:#1d5fa8}}
+--muted:#4f657c;--accent:#0b7a72;--accent-ink:#ffffff;--danger:#c2352c;--warn:#a86b00;--ok:#1d7a4c;--info:#1d5fa8}}
 *{{box-sizing:border-box}}
 body{{margin:0;background:var(--bg);color:var(--ink);line-height:1.95;
 font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif}}
@@ -262,7 +266,7 @@ h1{{font-size:30px;margin:0 0 8px;line-height:1.4}}
 .hero-card{{display:block;background:linear-gradient(150deg,var(--panel2),var(--panel));border:1px solid var(--line);
 border-radius:14px;padding:22px;color:inherit;margin:0 0 22px}}
 .hc-top{{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}}
-.hc-tag{{font-size:12px;background:var(--accent);color:var(--accent-ink);padding:3px 10px;border-radius:99px;font-weight:700}}
+.hc-tag{{font-size:13px;background:var(--accent);color:var(--accent-ink);padding:3px 10px;border-radius:99px;font-weight:700}}
 .hc-risk{{font-size:12.5px;border:1px solid var(--line);padding:3px 10px;border-radius:99px}}
 .hc-code{{font-size:12.5px;color:var(--muted)}}
 .hc-code b{{color:var(--ink2);font-family:"IBM Plex Mono",monospace}}
@@ -299,7 +303,7 @@ ul.ar{{list-style:none;margin:0;padding:0}}
 .ar-link{{display:grid;grid-template-columns:1fr auto;gap:6px 12px;padding:13px 2px;text-decoration:none;color:inherit}}
 .ar-link:hover .ar-date{{color:var(--accent)}}
 .ar-date{{font-weight:600;font-size:15px}}
-.ar-risk{{font-size:12px;border:1px solid var(--line);border-radius:99px;padding:2px 10px;align-self:start}}
+.ar-risk{{font-size:13px;border:1px solid var(--line);border-radius:99px;padding:2px 10px;align-self:start}}
 .ar-note{{grid-column:1/-1;color:var(--muted);font-size:13px}}
 .rk-high{{color:var(--danger);border-color:var(--danger)}}
 .rk-med{{color:var(--warn);border-color:var(--warn)}}
@@ -307,13 +311,13 @@ ul.ar{{list-style:none;margin:0;padding:0}}
 .tiles{{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 22px}}
 .tile{{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}}
 .tile b{{display:block;font-size:22px;font-family:"IBM Plex Mono",monospace}}
-.tile span{{color:var(--muted);font-size:12.5px}}
-.foot-note{{color:var(--muted);font-size:12.5px;margin:26px 0 0;border-top:1px solid var(--line);padding-top:14px}}
+.tile span{{color:var(--muted);font-size:13px}}
+.foot-note{{color:var(--muted);font-size:13px;margin:26px 0 0;border-top:1px solid var(--line);padding-top:14px}}
 </style>
 </head>NF_CSS_PLACEHOLDER<body>
 PREFS_EARLY_PLACEHOLDER
 NAV_PLACEHOLDER
-<div class="wrap">
+<div class="wrap" role="main">
   <h1>مركز الوعي بالمجال البحري</h1>
   <p class="lede">منصة دائمة لتقارير أمن الملاحة: إصدار يومي بمؤشراته وخرائطه، ولوحة شهرية مبنية من دفتر أحداث تراكمي، وسجل تاريخي للمقارنة. كل إصدار يفصل الحقيقة عن التقدير ويربط الرقم بجهة قادرة على حسمه.</p>
 
@@ -375,6 +379,7 @@ NAV_PLACEHOLDER
 
   <p class="foot-note">تصنيف الإصدار: عام · لا تُنشر الإصدارات المقيّدة أو الحساسة على هذا الموقع · المصادر الرسمية: UKMTO وIMO والنشرات الاستشارية.</p>
 </div>
+NOTFOUND_PLACEHOLDER
 FOOT_PLACEHOLDER
 PREFS_LATE_PLACEHOLDER
 <script>
@@ -427,8 +432,9 @@ if(last){{
 }}
 }})();
 </script>
-NOTFOUND_PLACEHOLDER
-</body></html>""".replace("PREFS_EARLY_PLACEHOLDER", site_chrome.PREFS_EARLY) \
+MOBILE_NAV_JS_PLACEHOLDER
+</body></html>""".replace("MOBILE_NAV_JS_PLACEHOLDER", site_chrome.MOBILE_NAV_JS) \
+   .replace("PREFS_EARLY_PLACEHOLDER", site_chrome.PREFS_EARLY) \
    .replace("NF_CSS_PLACEHOLDER", NF_STYLE) \
    .replace("NOTFOUND_PLACEHOLDER", notfound_panel(reports, notfound)) \
    .replace("NAV_PLACEHOLDER", site_chrome.nav_html("home")) \
@@ -517,7 +523,11 @@ def notfound_panel(reports, visible: bool = False) -> str:
     اللوحة الصحيحة للزائر. رمز الاستجابة يبقى 200 لأن التوصيل ثابت بلا خادم.
     """
     ks = known_paths(reports)
-    items = "".join(f'<li><a href="{k}">{k}</a></li>' for k in ks)
+    names = {"/": "الرئيسية والأرشيف", "/reports/cumulative-2026.html": "السجل التراكمي",
+             "/reports/monthly-2026-10.html": "اللوحة الشهرية", "/sources.html": "المصادر والمراجع"}
+    names.update({f"/reports/{r['iso']}.html": f"التقرير اليومي — {r['label']}" for r in reports})
+    items = "".join(f'<li><a href="{k}"><span class="nf-t">{esc(names.get(k, k))}</span>'
+                    f'<span class="nf-p">{k}</span></a></li>' for k in ks)
     keys = ",".join(f'"{k}":1' for k in ks)
     hid = "" if visible else " hidden"
     script = ""
@@ -543,8 +553,10 @@ NF_STYLE = """<style>
 .nf{max-width:760px;margin:26px auto}
 .nf h1{font-size:30px;margin:6px 0 10px}
 .nf-list{list-style:none;padding:0;margin:14px 0;display:grid;gap:8px}
-.nf-list a{display:block;padding:10px 12px;border:1px solid var(--line,#2b3b4e);border-radius:8px;
-  text-decoration:none;color:inherit;font-family:"IBM Plex Mono",monospace;direction:ltr;
+.nf-list a{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:10px 14px;
+  border:1px solid var(--line,#2b3b4e);border-radius:8px;text-decoration:none;color:inherit;min-height:44px}
+.nf-t{font-weight:600}
+.nf-p{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--muted,#7f95ae);direction:ltr;
   unicode-bidi:isolate;overflow-wrap:anywhere}
 .nf-list a:hover{border-color:var(--accent,#2fd6c3)}
 .nf-back{display:inline-block;margin-top:6px;font-weight:700;text-decoration:none;color:var(--accent,#2fd6c3)}
@@ -573,6 +585,7 @@ def build_robots(dist: Path) -> None:
 
 def build_notfound(dist: Path, reports) -> None:
     html = build_index(dist, reports, notfound=True).replace(
+        '<div class="wrap" role="main">', '<div class="wrap" role="main" hidden>', 1).replace(
         "<title>مركز الوعي بالمجال البحري — تقارير أمن الملاحة</title>",
         "<title>الصفحة غير موجودة — مركز الوعي بالمجال البحري</title>")
     (dist / "404.html").write_text(html, encoding="utf-8")

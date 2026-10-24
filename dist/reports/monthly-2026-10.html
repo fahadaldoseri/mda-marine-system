@@ -1,6 +1,7 @@
 <!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>لوحة المؤشرات الشهرية — أمن الملاحة 2026</title>
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
 <style>
 :root{--bg:#050a12;--panel:#0c1626;--line:#1d2e4a;--ink:#e9f0f9;--ink2:#b9c8dc;--muted:#7e93ab;--accent:#22c3b6}
 *{box-sizing:border-box}
@@ -14,7 +15,9 @@ p.lede{color:var(--muted);margin:0 0 20px;font-size:14px}
 .k span{color:var(--muted);font-size:13px}
 .row{display:grid;grid-template-columns:150px 1fr 54px;gap:12px;align-items:center;margin:8px 0}
 .lbl{font-size:13.5px;color:var(--ink2)}
-.bar{height:9px;background:#101d31;border-radius:99px;overflow:hidden}
+.bar{height:9px;background:#101d31;border-radius:99px;overflow:hidden;position:relative}
+/* خط أساس مشترك: تدريج عند 25% و50% و75% من أعلى قيمة */
+.bar::after{content:"";position:absolute;inset:0;background:linear-gradient(to right,transparent 24.6%,rgba(255,255,255,.16) 24.6%,rgba(255,255,255,.16) 25.2%,transparent 25.2%,transparent 49.7%,rgba(255,255,255,.16) 49.7%,rgba(255,255,255,.16) 50.3%,transparent 50.3%,transparent 74.8%,rgba(255,255,255,.16) 74.8%,rgba(255,255,255,.16) 75.4%,transparent 75.4%);pointer-events:none}
 .bar i{display:block;height:100%;background:var(--accent)}
 .bar.alt i{background:#4d9dff}
 .num{font-family:"IBM Plex Mono",monospace;font-size:13px;text-align:end}
@@ -22,46 +25,73 @@ table{width:100%;border-collapse:collapse;background:var(--panel);border:1px sol
 th,td{padding:9px 12px;border-bottom:1px solid var(--line);font-size:14px;text-align:start}
 th{background:#0f1d33;color:var(--ink2);font-weight:600}
 td.num{text-align:end;font-family:"IBM Plex Mono",monospace}
-.foot{color:var(--muted);font-size:12.5px;margin-top:26px;border-top:1px solid var(--line);padding-top:14px}
+.foot{color:var(--muted);font-size:13px;margin-top:26px;border-top:1px solid var(--line);padding-top:14px}
+/* المظهر النهاري: كانت الصفحة تبقى داكنة مع شريط فاتح */
+body.daylight{--bg:#eef3f9;--panel:#ffffff;--line:#d3dded;--ink:#0d1a2b;--ink2:#33475e;--muted:#4f657c;--accent:#0b7a72}
+body.daylight .bar{background:#dbe5f0}
+body.daylight th{background:#eef3f9}
+body.daylight .bar.alt i{background:#1d5fa8}
+body.daylight .bar::after{filter:invert(1);opacity:.35}
 </style><style>
 :root{--sn-bg:#040810;--sn-panel:#0b1524;--sn-line:#1b2b45;--sn-ink:#e9f0f9;--sn-ink2:#b9c8dc;
 --sn-muted:#7f95ae;--sn-accent:#22c3b6;--sn-accent-ink:#04120f}
 html{scroll-behavior:smooth}
 body.daylight{--sn-bg:#eef3f9;--sn-panel:#ffffff;--sn-line:#d3dded;--sn-ink:#0d1a2b;--sn-ink2:#33475e;
---sn-muted:#5d738c;--sn-accent:#0f8f86;--sn-accent-ink:#ffffff}
+--sn-muted:#4f657c;--sn-accent:#0b7a72;--sn-accent-ink:#ffffff}
 .site-nav{position:sticky;top:0;z-index:60;background:var(--sn-bg);border-bottom:1px solid var(--sn-line);
 font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif}
-.site-nav .sn-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:9px 20px;flex-wrap:wrap}
+.site-nav .sn-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:9px 20px;flex-wrap:wrap}
 .site-nav a{color:var(--sn-ink2);text-decoration:none}
 .sn-brand{display:flex;align-items:center;gap:10px;color:var(--sn-ink)!important;font-weight:700}
 .sn-mark{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:0 0 auto;
 background:linear-gradient(150deg,var(--sn-accent),#0c8b83);color:#04120f}
 .sn-mark svg{width:17px;height:17px}
 .sn-name{display:flex;flex-direction:column;line-height:1.25}
-.sn-name em{font-style:normal;font-size:11.5px;font-weight:500;color:var(--sn-muted)}
+.sn-name em{font-style:normal;font-size:12.5px;font-weight:500;color:var(--sn-muted)}
 .sn-links{display:flex;gap:4px;margin-inline-start:auto;flex-wrap:wrap}
-.sn-links a{padding:6px 11px;border-radius:8px;font-size:13.5px;border:1px solid transparent}
+.sn-links a{padding:6px 8px;min-height:32px;display:inline-flex;align-items:center;border-radius:8px;font-size:13.5px;border:1px solid transparent}
 .sn-links a:hover{background:var(--sn-panel);border-color:var(--sn-line);color:var(--sn-ink)}
 .sn-links a[aria-current="page"]{background:var(--sn-panel);border-color:var(--sn-line);color:var(--sn-ink);font-weight:600}
 .sn-tools{display:flex;align-items:center;gap:8px}
 .sn-scale{display:flex;border:1px solid var(--sn-line);border-radius:9px;overflow:hidden}
-.sn-scale button{background:transparent;border:0;color:var(--sn-ink2);padding:5px 10px;cursor:pointer;font:inherit;font-size:13px}
+.sn-scale button{background:transparent;border:0;color:var(--sn-ink2);padding:5px 8px;min-width:34px;min-height:32px;cursor:pointer;font:inherit;font-size:13px}
 .sn-scale button.on{background:var(--sn-accent);color:var(--sn-accent-ink);font-weight:700}
 .sn-theme{background:var(--sn-panel);border:1px solid var(--sn-line);color:var(--sn-ink2);
 border-radius:9px;padding:6px 11px;cursor:pointer;font:inherit;font-size:13px}
 .sn-theme:hover{color:var(--sn-ink)}
+.sn-skip{position:absolute;inset-inline-start:12px;top:-80px;z-index:70;background:var(--sn-accent);color:var(--sn-accent-ink)!important;
+padding:9px 16px;border-radius:9px;font-weight:700;font-size:14px}
+.sn-skip:focus{top:8px;outline:2px solid var(--sn-ink);outline-offset:2px}
+.sn-print{background:var(--sn-accent);color:var(--sn-accent-ink);border-color:transparent;font-weight:700}
+.sn-print:hover{color:var(--sn-accent-ink);filter:brightness(1.08)}
 .sn-foot{margin-top:44px;border-top:1px solid var(--sn-line);background:var(--sn-bg);
 font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif}
-.sn-foot .sf-inner{max-width:1180px;margin:0 auto;padding:20px;color:var(--sn-muted);font-size:12.5px;
+.sn-foot .sf-inner{max-width:1180px;margin:0 auto;padding:20px;color:var(--sn-muted);font-size:13px;
 display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
-.sn-foot a{color:var(--sn-ink2)}
+.sn-foot a{color:var(--sn-ink2);display:inline-block;padding:4px 2px;min-height:24px}
 body.daylight .topbar{background:#ffffff!important;border-bottom-color:#d3dded!important}
 body.daylight .brand-title,body.daylight .brand-sub{color:#0d1a2b}
 @media print{.site-nav,.sn-foot{display:none!important}}
 
 /* قائمة الجوال — تضغط شريطي الموقع والصفحة إلى ارتفاع صغير */
 .sn-menu{display:none}
-@media (max-width:760px){
+/* سطح المكتب: الروابط والأدوات في صف واحد بجانب الشعار (كانت تتراصّ صفين داخل اللوحة) */
+@media (min-width:1041px){
+  .sn-panel{display:flex;align-items:center;gap:12px;flex:1 1 auto;min-width:0}
+  .sn-panel .sn-links{margin-inline-start:0}
+  .sn-panel .sn-tools{margin-inline-start:auto}
+}
+/* عرض متوسط (لوحي): يبقى الشريط صفًّا واحدًا حتى مع زر الطباعة */
+@media (min-width:1041px) and (max-width:1180px){
+  .sn-name em{display:none}
+  .site-nav .sn-inner{gap:8px;padding-inline:14px}
+  .sn-links{gap:0}
+  .sn-links a{padding:6px 5px;font-size:13px}
+  .sn-panel{gap:6px}
+  .sn-tools{gap:6px}
+  .sn-theme{padding:6px 8px}
+}
+@media (max-width:1040px){
   .site-nav .sn-inner{flex-wrap:nowrap;padding:8px 14px;gap:10px;position:relative}
   .sn-name em{display:none}
   .sn-menu{
@@ -140,6 +170,7 @@ body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
 .sup-banner a{color:inherit;font-weight:700;text-decoration:underline}
 .sp-dim{opacity:.72}
 </style></head><body><nav class="site-nav no-print" aria-label="تنقل الموقع">
+  <a class="sn-skip" href="#" id="sn-skip">الانتقال إلى المحتوى</a>
   <div class="sn-inner">
     <a class="sn-brand" href="/">
       <span class="sn-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/><path d="M12 11.5v4"/><path d="M9.6 13.2h4.8"/></svg></span>
@@ -164,6 +195,7 @@ body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
         <button type="button" data-scale="1.25" title="أكبر حجم">أ++</button>
       </div>
       <button type="button" class="sn-theme" id="sn-theme">المظهر</button>
+      
     </div>
     </div>
   </div>
@@ -173,20 +205,20 @@ var b=document.body;if(!b)return;
 var t=localStorage.getItem('mn-theme');if(t==='light')b.classList.add('daylight');
 var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom=s;
 }catch(e){}})();
-</script><div class="wrap">
+</script><div class="wrap" role="main">
 <h1>لوحة المؤشرات الشهرية — أمن الملاحة 2026</h1>
-<p class="lede">لوحة مبنية من دفتر الأحداث التراكمي: 9 شهرًا، 234 سجلًا. لا تُقرأ الأعداد كهجمات مؤكدة.</p>
+<p class="lede">لوحة مبنية من دفتر الأحداث التراكمي: 9 شهرًا، 238 سجلًا. لا تُقرأ الأعداد كهجمات مؤكدة.</p>
 <div class="kpis">
-<div class="k"><b class="bidi">234</b><span>إجمالي السجلات</span></div>
+<div class="k"><b class="bidi">238</b><span>إجمالي السجلات</span></div>
 <div class="k"><b class="bidi">9</b><span>الأشهر المغطاة</span></div>
-<div class="k"><b class="bidi">81</b><span>سجلات مضيق هرمز</span></div>
-<div class="k"><b class="bidi">125</b><span>أنواع تصنيف</span></div>
+<div class="k"><b class="bidi">83</b><span>سجلات مضيق هرمز</span></div>
+<div class="k"><b class="bidi">128</b><span>أنواع تصنيف</span></div>
 </div>
-<h2>السجلات بحسب الشهر</h2><div class="row"><span class="lbl bidi">2026-02</span><span class="bar"><i style="width:4.1%"></i></span><span class="num bidi">4</span></div><div class="row"><span class="lbl bidi">2026-03</span><span class="bar"><i style="width:32.7%"></i></span><span class="num bidi">32</span></div><div class="row"><span class="lbl bidi">2026-04</span><span class="bar"><i style="width:20.4%"></i></span><span class="num bidi">20</span></div><div class="row"><span class="lbl bidi">2026-05</span><span class="bar"><i style="width:17.3%"></i></span><span class="num bidi">17</span></div><div class="row"><span class="lbl bidi">2026-06</span><span class="bar"><i style="width:17.3%"></i></span><span class="num bidi">17</span></div><div class="row"><span class="lbl bidi">2026-07</span><span class="bar"><i style="width:20.4%"></i></span><span class="num bidi">20</span></div><div class="row"><span class="lbl bidi">2026-08</span><span class="bar"><i style="width:15.3%"></i></span><span class="num bidi">15</span></div><div class="row"><span class="lbl bidi">2026-09</span><span class="bar"><i style="width:11.2%"></i></span><span class="num bidi">11</span></div><div class="row"><span class="lbl bidi">2026-10</span><span class="bar"><i style="width:100.0%"></i></span><span class="num bidi">98</span></div>
-<h2>التوزيع الجغرافي</h2><div class="row"><span class="lbl">مواقع أخرى</span><span class="bar alt"><i style="width:100.0%"></i></span><span class="num bidi">103</span></div><div class="row"><span class="lbl">مضيق هرمز</span><span class="bar alt"><i style="width:78.6%"></i></span><span class="num bidi">81</span></div><div class="row"><span class="lbl">البحر الأحمر</span><span class="bar alt"><i style="width:12.6%"></i></span><span class="num bidi">13</span></div><div class="row"><span class="lbl">خليج عُمان</span><span class="bar alt"><i style="width:11.7%"></i></span><span class="num bidi">12</span></div><div class="row"><span class="lbl">الخليج العربي</span><span class="bar alt"><i style="width:10.7%"></i></span><span class="num bidi">11</span></div><div class="row"><span class="lbl">بحر العرب</span><span class="bar alt"><i style="width:5.8%"></i></span><span class="num bidi">6</span></div><div class="row"><span class="lbl">خليج عدن</span><span class="bar alt"><i style="width:5.8%"></i></span><span class="num bidi">6</span></div><div class="row"><span class="lbl">باب المندب</span><span class="bar alt"><i style="width:1.9%"></i></span><span class="num bidi">2</span></div>
-<h2>التصنيف</h2><p class="lede">تُعرض أعلى 10 تصنيفات من 125 تصنيفًا؛ والباقي (115) مجموعها 139 سجلًا.</p><table class="cardified"><thead><tr><th>التصنيف</th><th>العدد</th></tr></thead><tbody><tr><td data-label="التصنيف">غير مصنف</td><td class="num bidi" data-label="العدد">36</td></tr><tr><td data-label="التصنيف">هجوم</td><td class="num bidi" data-label="العدد">12</td></tr><tr><td data-label="التصنيف">هجوم مؤكد</td><td class="num bidi" data-label="العدد">9</td></tr><tr><td data-label="التصنيف">تحديث التحذيرات</td><td class="num bidi" data-label="العدد">9</td></tr><tr><td data-label="التصنيف">هجوم/إصابة بمقذوف غير محدد المصدر</td><td class="num bidi" data-label="العدد">6</td></tr><tr><td data-label="التصنيف">هجوم مؤكد على ناقلة</td><td class="num bidi" data-label="العدد">5</td></tr><tr><td data-label="التصنيف">نقل إعلامي</td><td class="num bidi" data-label="العدد">5</td></tr><tr><td data-label="التصنيف">مؤشر تشغيلي</td><td class="num bidi" data-label="العدد">5</td></tr><tr><td data-label="التصنيف">رواية غير مؤكدة من طرف واحد</td><td class="num bidi" data-label="العدد">4</td></tr><tr><td data-label="التصنيف">بيان رسمي منقول</td><td class="num bidi" data-label="العدد">4</td></tr></tbody></table>
-<h2>درجة الثقة المسجلة</h2><table class="cardified"><thead><tr><th>المستوى</th><th>العدد</th></tr></thead><tbody><tr><td data-label="المستوى">عالية</td><td class="num bidi" data-label="العدد">133</td></tr><tr><td data-label="المستوى">متوسطة</td><td class="num bidi" data-label="العدد">75</td></tr><tr><td data-label="المستوى">منخفضة</td><td class="num bidi" data-label="العدد">26</td></tr></tbody></table>
-<div class="foot">المصدر: ledger.json — أُنشئت في 2026-10-23.</div>
+<h2>السجلات بحسب الشهر</h2><div class="row"><span class="lbl bidi">2026-02</span><span class="bar"><i style="width:3.9%"></i></span><span class="num bidi">4</span></div><div class="row"><span class="lbl bidi">2026-03</span><span class="bar"><i style="width:31.4%"></i></span><span class="num bidi">32</span></div><div class="row"><span class="lbl bidi">2026-04</span><span class="bar"><i style="width:19.6%"></i></span><span class="num bidi">20</span></div><div class="row"><span class="lbl bidi">2026-05</span><span class="bar"><i style="width:16.7%"></i></span><span class="num bidi">17</span></div><div class="row"><span class="lbl bidi">2026-06</span><span class="bar"><i style="width:16.7%"></i></span><span class="num bidi">17</span></div><div class="row"><span class="lbl bidi">2026-07</span><span class="bar"><i style="width:19.6%"></i></span><span class="num bidi">20</span></div><div class="row"><span class="lbl bidi">2026-08</span><span class="bar"><i style="width:14.7%"></i></span><span class="num bidi">15</span></div><div class="row"><span class="lbl bidi">2026-09</span><span class="bar"><i style="width:10.8%"></i></span><span class="num bidi">11</span></div><div class="row"><span class="lbl bidi">2026-10</span><span class="bar"><i style="width:100.0%"></i></span><span class="num bidi">102</span></div>
+<h2>التوزيع الجغرافي</h2><div class="row"><span class="lbl">مواقع أخرى</span><span class="bar alt"><i style="width:100.0%"></i></span><span class="num bidi">104</span></div><div class="row"><span class="lbl">مضيق هرمز</span><span class="bar alt"><i style="width:79.8%"></i></span><span class="num bidi">83</span></div><div class="row"><span class="lbl">البحر الأحمر</span><span class="bar alt"><i style="width:12.5%"></i></span><span class="num bidi">13</span></div><div class="row"><span class="lbl">الخليج العربي</span><span class="bar alt"><i style="width:11.5%"></i></span><span class="num bidi">12</span></div><div class="row"><span class="lbl">خليج عُمان</span><span class="bar alt"><i style="width:11.5%"></i></span><span class="num bidi">12</span></div><div class="row"><span class="lbl">بحر العرب</span><span class="bar alt"><i style="width:5.8%"></i></span><span class="num bidi">6</span></div><div class="row"><span class="lbl">خليج عدن</span><span class="bar alt"><i style="width:5.8%"></i></span><span class="num bidi">6</span></div><div class="row"><span class="lbl">باب المندب</span><span class="bar alt"><i style="width:1.9%"></i></span><span class="num bidi">2</span></div>
+<h2>التصنيف</h2><p class="lede">تُعرض أعلى 10 تصنيفات من 128 تصنيفًا؛ والباقي (118) مجموعها 143 سجلًا.</p><table class="cardified"><thead><tr><th>التصنيف</th><th>العدد</th></tr></thead><tbody><tr><td data-label="التصنيف">غير مصنف</td><td class="num bidi" data-label="العدد">36</td></tr><tr><td data-label="التصنيف">هجوم</td><td class="num bidi" data-label="العدد">12</td></tr><tr><td data-label="التصنيف">هجوم مؤكد</td><td class="num bidi" data-label="العدد">9</td></tr><tr><td data-label="التصنيف">تحديث التحذيرات</td><td class="num bidi" data-label="العدد">9</td></tr><tr><td data-label="التصنيف">هجوم/إصابة بمقذوف غير محدد المصدر</td><td class="num bidi" data-label="العدد">6</td></tr><tr><td data-label="التصنيف">هجوم مؤكد على ناقلة</td><td class="num bidi" data-label="العدد">5</td></tr><tr><td data-label="التصنيف">نقل إعلامي</td><td class="num bidi" data-label="العدد">5</td></tr><tr><td data-label="التصنيف">مؤشر تشغيلي</td><td class="num bidi" data-label="العدد">5</td></tr><tr><td data-label="التصنيف">رواية غير مؤكدة من طرف واحد</td><td class="num bidi" data-label="العدد">4</td></tr><tr><td data-label="التصنيف">بيان رسمي منقول</td><td class="num bidi" data-label="العدد">4</td></tr></tbody></table>
+<h2>درجة الثقة المسجلة</h2><table class="cardified"><thead><tr><th>المستوى</th><th>العدد</th></tr></thead><tbody><tr><td data-label="المستوى">عالية</td><td class="num bidi" data-label="العدد">133</td></tr><tr><td data-label="المستوى">متوسطة</td><td class="num bidi" data-label="العدد">75</td></tr><tr><td data-label="المستوى">منخفضة</td><td class="num bidi" data-label="العدد">30</td></tr></tbody></table>
+<div class="foot">المصدر: ledger.json — أُنشئت في 2026-10-24.</div>
 </div><footer class="sn-foot no-print">
   <div class="sf-inner">
     <span>مركز الوعي بالمجال البحري — تقارير أمن الملاحة — مملكة البحرين · لوحة مبنية من دفتر الأحداث التراكمي</span>
@@ -211,12 +243,22 @@ function currentScale(){var s=parseFloat(LS.getItem('mn-scale')||'1');return (s&
 function toggleTheme(){var on=body.classList.toggle('daylight');save('mn-theme',on?'light':'dark');paint();}
 if(reportBtn) reportBtn.addEventListener('click',function(e){e.preventDefault();toggleTheme();});
 if(siteBtn) siteBtn.addEventListener('click',function(e){e.preventDefault();toggleTheme();});
+var printBtn=document.getElementById('sn-print');
+if(printBtn) printBtn.addEventListener('click',function(e){e.preventDefault();window.print();});
 document.querySelectorAll('[data-scale]').forEach(function(b){
   b.addEventListener('click',function(e){e.preventDefault();
     var s=parseFloat(b.getAttribute('data-scale'));save('mn-scale',s);
     body.style.zoom=(s===1?'':s);paint();});
 });
 paint();
+// رابط التخطي: أول عنوان ظاهر في الصفحة (أو المتن)، فلا يمرّ قارئ لوحة المفاتيح على الشريط كله في كل صفحة
+var skip=document.getElementById('sn-skip');
+if(skip){
+  var hs=[].slice.call(document.querySelectorAll('h1')).filter(function(h){return h.offsetParent!==null;});
+  var tg=hs[0]||document.querySelector('main,[role=main]');
+  if(tg){ if(!tg.id) tg.id='sn-main'; tg.setAttribute('tabindex','-1'); skip.setAttribute('href','#'+tg.id); }
+  else { skip.parentNode.removeChild(skip); }
+}
 // تذكّر آخر تقرير فُتح
 var p=location.pathname;
 if(p.indexOf('/reports/')===0){

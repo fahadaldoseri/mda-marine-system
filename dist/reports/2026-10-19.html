@@ -236,6 +236,37 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .map-legend{list-style:none;display:grid;gap:7px;margin:14px 0 0;padding:0}
 .map-legend li{display:flex;gap:10px;align-items:baseline;font-size:13.5px;color:var(--ink-2);margin:0}
 .lg-num{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:11px;font-weight:600;color:#fff;background:var(--mk);border-radius:999px;width:19px;height:19px;display:grid;place-items:center;flex:0 0 auto}
+/* ---------- خريطة الشاشة العليا: للشاشة فقط، تُحجب في الطباعة وWord بصنف no-print ---------- */
+.hero-map{margin:22px 0 6px}
+.hmap{margin:0;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:18px}
+.hmap h3{margin:0 0 14px;font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:15px;color:var(--ink-2)}
+.hmap .blk-lede,.hmap-keys,.hmap-panel .src-note{display:none}
+.hmap-wrap{position:relative;border:1px solid var(--line-2);border-radius:var(--radius-sm);overflow:hidden;background:var(--map-sea)}
+/* التكبير بجانب الخريطة لا فوقها: الشريحة كانت تحجب الخليج العربي (البحرين وقطر) */
+.hmap-wrap{display:grid;grid-template-columns:minmax(0,2.4fr) minmax(0,1fr);align-items:start}
+.hmap-zoom{border-inline-start:1.5px solid var(--accent);background:var(--map-sea);min-width:0;align-self:stretch;display:flex;flex-direction:column}
+.hmap-zsvg{display:block;width:100%;height:auto}
+.hz-cap{font-size:13px;color:var(--ink-2);background:var(--panel);padding:4px 10px;border-top:1px solid var(--line-2);margin-top:auto}
+@media (max-width:1000px){.hmap-wrap{grid-template-columns:minmax(0,1fr)}.hmap-zoom{border-inline-start:0;border-top:1.5px solid var(--accent)}}
+.hmap-svg{display:block;width:100%;height:auto;max-width:100%}
+/* خريطة الشاشة: علامات وتسميات أكبر قليلًا للقراءة من مسافة */
+.hmap-svg .mp-dot{r:9.5px}
+.hmap-svg .mp-halo{r:17px}
+.hmap-svg .mp-events .mp-num{font-size:12.5px}
+.hmap .mp-grid-lbl{font-size:12.5px}
+.hmap .mp-port-lbl{font-size:15.5px}
+.hmap .mp-country{font-size:16.5px}
+.hmap-legend{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 30px;margin:16px 0 0;padding:0}
+.hmap-legend li{display:block;position:relative;padding-inline-start:34px;font-size:14px;line-height:1.85;color:var(--ink-2);margin:0}
+.hmap-legend .lg-num{position:absolute;inset-inline-start:0;top:3px}
+.hmap-legend .bidi{color:var(--muted);font-size:13px;white-space:nowrap}
+@media (max-width:760px){.hmap-legend{grid-template-columns:minmax(0,1fr)}}
+/* الجوال: الخريطة الرئيسية تُصغَّر كثيرًا فتكبر العلامات والتسميات لتبقى مقروءة (التفصيل في لوحة التكبير) */
+@media (max-width:700px){
+  .hmap-svg .mp-dot{r:13px}.hmap-svg .mp-halo{r:20px}.hmap-svg .mp-events .mp-num{font-size:15px}
+  .hmap-svg .mp-port-lbl{font-size:25px}.hmap-svg .mp-country{font-size:27px}
+  .hmap-svg .mp-sea-lg{font-size:31px}.hmap-svg .mp-sea-sm{font-size:25px}.hmap-svg .mp-grid-lbl{display:none}
+}
 /* ---------- الاستشهادات ---------- */
 .cite-ref{
   display:inline-block;font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:11.5px;
@@ -320,7 +351,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .map-caption,.map-viz figcaption{margin-top:1.5mm;line-height:1.4}
   /* كثافة الصفحة: تقليل حشو الخلايا لتصبح الكتلة على مقاس الورقة */
   tbody td{padding:1.5mm 2.2mm !important}
-  .sec-lede{margin:0 0 7px;line-height:1.55}
+  .sec-lede{margin:0 0 10px;line-height:1.55}
   section.doc{padding:0 0 3mm}
   .rmk,.glossary{break-inside:avoid;page-break-inside:avoid}
   /* انضباط بصري: خطوط فاصلة رقيقة بدل تظليل الصفوف */
@@ -432,7 +463,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .changes > *{display:block !important;width:100% !important}
   .viz > *,.card > *{box-sizing:border-box}
   /* ضغط تباعد الأقسام: يوفّر نحو 40 مم فتنتقل نهاية التقرير إلى صفحتها السابقة */
-  section.doc{padding:0 0 1.5mm !important}
+  section.doc{padding:0 0 2.5mm !important}
   section.doc > h2{margin:3mm 0 1.5mm !important}
   .sec-lede{margin:0 0 2mm !important}
   .h-rule{margin:1mm 0 2mm !important}
@@ -606,46 +637,194 @@ body.daylight .kpi em{opacity:.95}
    عطل ك-72: تساوي الخصوصية يُحسم بالترتيب، فالقاعدة تُركَّب آخر كل الأنماط لتفوز. */
 .site-nav a,.sn-links a,.sn-foot a,.foot a,footer a,.glossary a,p a,li a,td a,
 .src a,.src-note a,.cite-ref{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+
+/* ===== طبقة الشاشة: لا تُطبَّق في وسائط الطباعة ===== */
+@media screen{
+.masthead,.decision,.kpis,.rkey{display:none}
+.topbar{position:static}
+.topbar-inner{padding-block:7px}
+/* شريط واحد: مع شريط الموقع تنتقل أزرار الطباعة والمظهر وحجم الخط إليه ويُخفى شريط الإصدار */
+body:has(.site-nav) .topbar{display:none}
+.sc-hero{margin:20px 0 6px}
+.sc-eyebrow{font-size:14.5px;color:var(--muted);margin:0 0 6px}
+.sc-h1{font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;font-size:clamp(21px,2.05vw,28px);line-height:1.65;margin:0 0 12px;text-wrap:balance}
+.sc-h1 .ltr{white-space:nowrap}
+.sc-lede{font-size:15.5px;line-height:1.9;color:var(--ink-2);margin:0 0 12px;max-width:none}
+.sc-chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px}
+.sc-chip{font-size:14px;color:var(--ink-2);border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:3px 12px}
+.sc-chip b{color:var(--ink);font-weight:600}
+.sc-fresh.f-ok{border-color:var(--ok);color:var(--ok)}
+.sc-fresh.f-ok b{color:var(--ok)}
+.sc-fresh.f-warn{border-color:var(--warn);color:var(--warn)}
+.sc-fresh.f-warn b{color:var(--warn)}
+.sc-fresh.f-old{border-color:var(--danger);color:var(--danger)}
+.sc-fresh.f-old b{color:var(--danger)}
+.sc-arch{color:var(--muted)}
+.sc-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:22px;align-items:start}
+/* بلا بطاقة قرار (السجل التراكمي): مستوى التهديد والمؤشرات في صف واحد بدل عمود يترك نصف العرض فارغًا */
+.sc-grid.sc-solo{grid-template-columns:minmax(0,1fr)}
+.sc-solo .sc-side{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));align-items:stretch}
+.sc-solo .sc-kpis{display:contents}
+.sc-side{display:grid;gap:12px;min-width:0}
+.sc-threat{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:inset 0 2px 0 0 rgba(34,195,182,.55)}
+.sc-tl{font-size:13.5px;color:var(--muted)}
+.sc-tv{font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;font-size:32px;line-height:1.45}
+.sc-threat.risk-high .sc-tv{color:var(--danger)}
+.sc-threat.risk-med .sc-tv{color:var(--warn)}
+.sc-threat.risk-low .sc-tv{color:var(--ok)}
+.sc-basis{margin-top:8px;font-size:13.5px;color:var(--muted)}
+.sc-basis summary{cursor:pointer;color:var(--ink-2)}
+.sc-basis p{margin:6px 0 0;line-height:1.8}
+.sc-kpis{display:grid;gap:10px}
+.sc-kpi{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;position:relative;overflow:hidden}
+.sc-kpi:before{content:"";position:absolute;inset-inline-start:0;top:0;bottom:0;width:3px;background:var(--accent)}
+.sc-kpi.acc-info:before{background:var(--info)}.sc-kpi.acc-warn:before{background:var(--warn)}
+.sc-kpi.acc-danger:before{background:var(--danger)}.sc-kpi.acc-ok:before{background:var(--ok)}
+.sc-kl{font-size:14px;color:var(--muted);line-height:1.6}
+.sc-kv{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:26px;line-height:1.3}
+.sc-kd{font-size:14px;color:var(--ink-2)}
+.sc-kn{font-size:13px;color:var(--muted);line-height:1.7;margin-top:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sc-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 26px;min-width:0;box-shadow:inset 0 2px 0 0 rgba(34,195,182,.55)}
+.sc-h2{font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:19px;margin:0 0 6px;color:var(--accent)}
+.sc-row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;padding:14px 0;border-top:1px solid var(--line)}
+.sc-row:first-of-type{border-top:0}
+.sc-l{font-size:13.5px;color:var(--muted);line-height:1.6;padding-top:3px}
+.sc-v{font-size:15.5px;color:var(--ink);min-width:0}
+.sc-list,.sc-acts,.sc-watch{list-style:none;margin:0;padding:0}
+.sc-list li{display:grid;grid-template-columns:118px minmax(0,1fr);gap:12px;padding:6px 0;line-height:1.8}
+.sc-code{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--accent);background:rgba(34,195,182,.10);border:1px solid rgba(34,195,182,.32);border-radius:6px;padding:0 6px;white-space:nowrap;height:fit-content;text-align:center}
+.sc-nocode{visibility:hidden}
+.sc-tag{display:inline-block;font-size:13px;border-radius:999px;padding:0 9px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--panel-3);margin-inline-end:4px;line-height:1.7}
+.sc-acts li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px;padding:5px 0;line-height:1.8}
+.sc-acts li i{font-style:normal;font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:12.5px;background:var(--accent);color:var(--accent-ink);border-radius:6px;width:24px;height:24px;display:grid;place-items:center;margin-top:4px}
+.sc-watch li{padding:5px 0;line-height:1.8}
+.sc-more{font-size:14px;margin:6px 0 0}
+.sc-more a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:3px 0;min-height:24px}
+.sup-banner a{display:inline-block;padding:3px 0;min-height:24px}
+.sc-rkey{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--muted);margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.sc-rkey .rkey-t{color:var(--muted)}
+/* الأقسام القابلة للطي */
+.sc-toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:26px 0 14px}
+.sc-jump{display:flex;gap:6px;flex-wrap:wrap;flex:1 1 360px}
+.sc-jump a{font-size:14px;color:var(--ink-2);text-decoration:none;border:1px solid var(--line);background:var(--panel);padding:3px 12px;border-radius:999px;min-height:28px;display:inline-flex;align-items:center}
+.sc-jump a:hover,.sc-jump a:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
+.sc-all{display:flex;gap:6px}
+.sc-all button{font:inherit;font-size:13.5px;cursor:pointer;color:var(--ink);background:var(--panel-2);border:1px solid var(--line-2);border-radius:8px;padding:4px 14px;min-height:32px}
+.sc-toggle{position:absolute;top:18px;inset-inline-end:22px;font:inherit;font-size:20px;line-height:1;cursor:pointer;color:var(--accent);background:var(--panel-3);border:1px solid var(--line-2);border-radius:8px;width:34px;height:34px;padding:0}
+.sc-toggle:before{content:"−"}
+.sc-toggle[aria-expanded="false"]:before{content:"+"}
+section.doc{position:relative}
+.sc-toggle:focus-visible,.sc-all button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+section.doc.sc-collapsed > *:not(h2):not(.sc-toggle):not(.sc-peek){display:none}
+section.doc.sc-collapsed{padding-bottom:12px}
+section.doc > h2{cursor:pointer}
+/* معاينة القسم المطوي: عدّ البنود وأول سطر، بلا مساس بنص العنوان (فهرس PDF) */
+.sc-peek{display:none}
+section.doc.sc-collapsed > .sc-peek{display:flex;gap:10px;align-items:baseline;margin:4px 0 0;padding-inline-end:48px;color:var(--muted);font-size:14.5px;line-height:1.8}
+.sc-peek b{flex:0 0 auto;font-weight:600;font-size:13px;color:var(--accent);border:1px solid var(--line-2);background:var(--panel-3);border-radius:999px;padding:0 10px}
+.sc-peek span{min-width:0;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+/* المظهر النهاري للخريطة والأرقام: قيم الخريطة النهارية كانت معرّفة للطباعة فقط فتبقى الخريطة داكنة وتسمياتها غير مقروءة */
+body.daylight{
+  --map-sea:#f7fafc;--map-land:#d6e0ea;--map-coast:#64809b;--map-border:#96a7b9;
+  --map-grid:#d3dce6;--map-grid-lbl:#5a7086;--map-label:#20303f;--map-country:#5a7086;
+  --map-sea-label:#4f657c;--map-strait:#8a2b25;
+}
+body.daylight .sc-acts li i{color:#ffffff}
+body.daylight .sc-tag{color:#31465c}
+/* إصلاح الخطوط على الشاشة: isolate_ltr يلفّ IBM داخل CSS فيبطل الإعلان ويسقط النص إلى Times New Roman */
+body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,system-ui,sans-serif}
+.kpi .k-v,section.doc code,td.num,th.num,.bar-row .bv,.mp-grid-lbl,.mp-events .mp-num,.lg-num,.cite-ref,.ev-code,.kpi .k-d,.tl-date,.tl-num,.rel-tbl td.rel{font-family:"IBM Plex Mono",ui-monospace,monospace}
+.mp-places text{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic",sans-serif}
+/* قراءة أوضح بكثافة معتدلة */
+.chip,.tag,.ev-code,.conf,.kstrip,.chg-tag,.st-badge{font-size:13.5px}
+.kpi .k-l,.kpi .k-n,.brand-sub{font-size:13.5px}
+.lg-num{font-size:12.5px;width:22px;height:22px}
+.cite-ref{font-size:12.5px}
+.sn-name em,.ar-risk,.hc-tag{font-size:12.5px}
+.foot a,.foot-note a,.sc-foot a,.glossary a{display:inline-block;padding:3px 0}
+@media (max-width:1000px){
+  /* الجوال: مستوى التهديد ثم بطاقة القرار ثم المؤشرات (القرار قبل الأرقام) */
+  .sc-grid,.sc-grid.sc-solo{display:flex;flex-direction:column;gap:14px}
+  .sc-side{display:contents}
+  .sc-threat{order:1}.sc-card{order:2}.sc-kpis{order:3;display:grid;gap:10px}
+  .sc-solo .sc-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+  .sc-row{grid-template-columns:minmax(0,1fr);gap:2px}
+  .sc-list li{grid-template-columns:minmax(0,1fr);gap:3px}
+  .sc-list li .sc-code{justify-self:start}
+}
+@media (max-width:700px){
+  /* شريط الأقسام صفّ واحد قابل للتمرير بدل كتلة من الأزرار تدفع المحتوى */
+  .sc-jump{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+  .sc-jump a{flex:0 0 auto;white-space:nowrap}
+  .sc-card{padding:18px 16px}
+  .sc-threat{padding:16px}
+  .sc-tv{font-size:28px}
+}
+}
+/* الحركة: عند طيّ الأقسام على الشاشة يبدأ الرسم المتحرّك لحظة التحويل إلى الطباعة فيلتقطه PDF ناقصًا
+   (شريط الخط الزمني). الحالة النهائية هي المقصودة، وهي ما كانت تُلتقط قبل الطيّ. */
+@media print{.tl-fill{animation:none}}
 </style>
 <style>
 :root{--sn-bg:#040810;--sn-panel:#0b1524;--sn-line:#1b2b45;--sn-ink:#e9f0f9;--sn-ink2:#b9c8dc;
 --sn-muted:#7f95ae;--sn-accent:#22c3b6;--sn-accent-ink:#04120f}
 html{scroll-behavior:smooth}
 body.daylight{--sn-bg:#eef3f9;--sn-panel:#ffffff;--sn-line:#d3dded;--sn-ink:#0d1a2b;--sn-ink2:#33475e;
---sn-muted:#5d738c;--sn-accent:#0f8f86;--sn-accent-ink:#ffffff}
+--sn-muted:#4f657c;--sn-accent:#0b7a72;--sn-accent-ink:#ffffff}
 .site-nav{position:sticky;top:0;z-index:60;background:var(--sn-bg);border-bottom:1px solid var(--sn-line);
 font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif}
-.site-nav .sn-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:9px 20px;flex-wrap:wrap}
+.site-nav .sn-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:9px 20px;flex-wrap:wrap}
 .site-nav a{color:var(--sn-ink2);text-decoration:none}
 .sn-brand{display:flex;align-items:center;gap:10px;color:var(--sn-ink)!important;font-weight:700}
 .sn-mark{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:0 0 auto;
 background:linear-gradient(150deg,var(--sn-accent),#0c8b83);color:#04120f}
 .sn-mark svg{width:17px;height:17px}
 .sn-name{display:flex;flex-direction:column;line-height:1.25}
-.sn-name em{font-style:normal;font-size:11.5px;font-weight:500;color:var(--sn-muted)}
+.sn-name em{font-style:normal;font-size:12.5px;font-weight:500;color:var(--sn-muted)}
 .sn-links{display:flex;gap:4px;margin-inline-start:auto;flex-wrap:wrap}
-.sn-links a{padding:6px 11px;border-radius:8px;font-size:13.5px;border:1px solid transparent}
+.sn-links a{padding:6px 8px;min-height:32px;display:inline-flex;align-items:center;border-radius:8px;font-size:13.5px;border:1px solid transparent}
 .sn-links a:hover{background:var(--sn-panel);border-color:var(--sn-line);color:var(--sn-ink)}
 .sn-links a[aria-current="page"]{background:var(--sn-panel);border-color:var(--sn-line);color:var(--sn-ink);font-weight:600}
 .sn-tools{display:flex;align-items:center;gap:8px}
 .sn-scale{display:flex;border:1px solid var(--sn-line);border-radius:9px;overflow:hidden}
-.sn-scale button{background:transparent;border:0;color:var(--sn-ink2);padding:5px 10px;cursor:pointer;font:inherit;font-size:13px}
+.sn-scale button{background:transparent;border:0;color:var(--sn-ink2);padding:5px 8px;min-width:34px;min-height:32px;cursor:pointer;font:inherit;font-size:13px}
 .sn-scale button.on{background:var(--sn-accent);color:var(--sn-accent-ink);font-weight:700}
 .sn-theme{background:var(--sn-panel);border:1px solid var(--sn-line);color:var(--sn-ink2);
 border-radius:9px;padding:6px 11px;cursor:pointer;font:inherit;font-size:13px}
 .sn-theme:hover{color:var(--sn-ink)}
+.sn-skip{position:absolute;inset-inline-start:12px;top:-80px;z-index:70;background:var(--sn-accent);color:var(--sn-accent-ink)!important;
+padding:9px 16px;border-radius:9px;font-weight:700;font-size:14px}
+.sn-skip:focus{top:8px;outline:2px solid var(--sn-ink);outline-offset:2px}
+.sn-print{background:var(--sn-accent);color:var(--sn-accent-ink);border-color:transparent;font-weight:700}
+.sn-print:hover{color:var(--sn-accent-ink);filter:brightness(1.08)}
 .sn-foot{margin-top:44px;border-top:1px solid var(--sn-line);background:var(--sn-bg);
 font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif}
-.sn-foot .sf-inner{max-width:1180px;margin:0 auto;padding:20px;color:var(--sn-muted);font-size:12.5px;
+.sn-foot .sf-inner{max-width:1180px;margin:0 auto;padding:20px;color:var(--sn-muted);font-size:13px;
 display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
-.sn-foot a{color:var(--sn-ink2)}
+.sn-foot a{color:var(--sn-ink2);display:inline-block;padding:4px 2px;min-height:24px}
 body.daylight .topbar{background:#ffffff!important;border-bottom-color:#d3dded!important}
 body.daylight .brand-title,body.daylight .brand-sub{color:#0d1a2b}
 @media print{.site-nav,.sn-foot{display:none!important}}
 
 /* قائمة الجوال — تضغط شريطي الموقع والصفحة إلى ارتفاع صغير */
 .sn-menu{display:none}
-@media (max-width:760px){
+/* سطح المكتب: الروابط والأدوات في صف واحد بجانب الشعار (كانت تتراصّ صفين داخل اللوحة) */
+@media (min-width:1041px){
+  .sn-panel{display:flex;align-items:center;gap:12px;flex:1 1 auto;min-width:0}
+  .sn-panel .sn-links{margin-inline-start:0}
+  .sn-panel .sn-tools{margin-inline-start:auto}
+}
+/* عرض متوسط (لوحي): يبقى الشريط صفًّا واحدًا حتى مع زر الطباعة */
+@media (min-width:1041px) and (max-width:1180px){
+  .sn-name em{display:none}
+  .site-nav .sn-inner{gap:8px;padding-inline:14px}
+  .sn-links{gap:0}
+  .sn-links a{padding:6px 5px;font-size:13px}
+  .sn-panel{gap:6px}
+  .sn-tools{gap:6px}
+  .sn-theme{padding:6px 8px}
+}
+@media (max-width:1040px){
   .site-nav .sn-inner{flex-wrap:nowrap;padding:8px 14px;gap:10px;position:relative}
   .sn-name em{display:none}
   .sn-menu{
@@ -725,6 +904,7 @@ body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
 .sp-dim{opacity:.72}
 </style></head>
 <body><nav class="site-nav no-print" aria-label="تنقل الموقع">
+  <a class="sn-skip" href="#" id="sn-skip">الانتقال إلى المحتوى</a>
   <div class="sn-inner">
     <a class="sn-brand" href="/">
       <span class="sn-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/><path d="M12 11.5v4"/><path d="M9.6 13.2h4.8"/></svg></span>
@@ -749,6 +929,7 @@ body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
         <button type="button" data-scale="1.25" title="أكبر حجم">أ++</button>
       </div>
       <button type="button" class="sn-theme" id="sn-theme">المظهر</button>
+      <button type="button" class="sn-theme sn-print" id="sn-print">طباعة / PDF</button>
     </div>
     </div>
   </div>
@@ -790,6 +971,26 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
   <div class="cls-banner c-open">تصنيف الإصدار: عام</div>
   <section class="decision reveal" aria-label="عام"><h2 class="dc-title">عام</h2><div class="dc-grid"><div class="dc-row"><div class="dc-l">ما تغيّر</div><div class="dc-v"><ul class="dc-list"><li>بلاغ رسمي جديد بإصابة قُطر بمقذوفين شمال شرق خورفكان بأضرار وإصابة طفيفة (19-01)</li><li>ورواية غير مؤكدة من طرف واحد بإصابة ناقلة «غير ممتثلة» بلغم جنوب المضيق بلا تأكيد مستقل (19-02)</li><li>وعرض إيراني لإعادة فتح المضيق سبعة أيام (19-03)</li><li>وبيان الأمم المتحدة البحري عن احتجاز نحو 6,000 بحّار (19-04)</li><li>وتراجع السفن الواقفة إلى 124 مع برنت 108.02 دولارًا (19-05)</li><li>وعبور نادر لناقلة غاز قطرية في البحر الأحمر (19-06)</li><li>وتصاعد القلق الصومالي (19-07)</li><li>وطلب مصري رسمي لنشر قوات دعمًا للسعودية (19-08)</li><li>وثبات السجل الرسمي وعدم صدور تحذير ملاحي جديد (19-09).</li></ul></div></div><div class="dc-row risk-high"><div class="dc-l">مستوى الخطر</div><div class="dc-v">مرتفع جدًا</div></div><div class="dc-row"><div class="dc-l">التوصيات</div><div class="dc-v"><ul class="dc-list"><li>ادخل القُطُر وسفن الخدمة في تقدير الخطر وارفع التأهب في خط الاقتراب الشرقي (خورفكان وخليج عُمان)</li><li>وثبّت حماية السفينة والمراقبة البصرية قبل العبور</li><li>وأبقِ قائمة مخاطر الحطام قرب <span class="ltr">24°21.48′ N</span> <span class="ltr">057°40.65′ E</span> و26°16.8′ <span class="ltr">N 056°08.6′</span> E</li><li>ولا تبنِ تقدير الخطر على عدد البلاغات المنشورة</li><li>واحتسب تأمين مخاطر الحرب عند 30 ضعف مستواه قبل الأزمة</li><li>ولا تُقرأ تراجع أرقام التكدس تحسّنًا بلا دليل</li><li>والتزم مسار الفصل الملاحي وتجنّب إطفاء أنظمة التتبّع.</li></ul></div></div><div class="dc-row"><div class="dc-l">ما يُراقب خلال 24 ساعة</div><div class="dc-v"><ul class="dc-list"><li>بلاغ رسمي يسمّي سفينة من رواية اللغم الثالثة.</li><li>بلاغ رسمي بحادثة داخل ممر العبور، أو إعلان رسمي عن عبور منظّم أو رفع القيود.</li><li>إعلان عن إزالة حطام «<span class="ltr">CAPE DAO</span>» أو حطام سفينة الحاويات.</li><li>مصير المفقودَين «<span class="ltr">PETRO DOLPHIN</span>» والبحّارة المحتجزين، وثبات التكدس على مستوى منخفض.</li></ul></div></div></div><div class="dc-foot">أساس التقدير: بلاغ <span class="ltr">UKMTO WARNING 177-26</span>، وبلاغا 176-26 و174-26 و175-26، وتحذيرات <span class="ltr">NAVAREA IX</span> (<span class="ltr">382/26</span> و381/26 و380/26 و373/26 و372/26)، وسجل المنظمة البحرية الدولية للحوادث المؤكدة، وبيان المنظمة البحرية الدولية المنقول، ورواية غير مؤكدة من طرف واحد رسمي، ومنصة رصد مستقلة، ونقل إعلامي مهني.</div></section>
   <div class="kpis"><div class="kpi acc-danger reveal"><em></em><div class="k-l">بلاغات هجوم رسمية جديدة (24 ساعة)</div><div class="k-v bidi">1</div><div class="k-d"><span class="trend t-flat">■</span> بلاغ واحد كما في الفترة السابقة</div><div class="k-n">البلاغ 177-26 — إصابة قُطر بمقذوفين شمال شرق خورفكان، بأضرار وإصابة طفيفة</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">سفن واقفة في مواضعها بعيدًا عن المراسي</div><div class="k-v bidi">124</div><div class="k-d"><span class="trend t-down">▼</span> −48 عن الفترة السابقة</div><div class="k-n">عند <span class="ltr">0022Z</span> من 19 أكتوبر (03:22 بتوقيت البحرين)، مقابل 172 عند <span class="ltr">0022Z</span> من 18 أكتوبر</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">خام برنت</div><div class="k-v bidi">108.02 $</div><div class="k-d"><span class="trend t-down">▼</span> −1.84 عن الإغلاق السابق</div><div class="k-n">عند <span class="ltr">0017Z</span> من 19 أكتوبر، بتراجع 1.67% عن إغلاق الجمعة</div></div></div>
+  <div class="sc-hero no-print"><p class="sc-eyebrow">التقرير اليومي لأمن الملاحة والأوضاع الراهنة في المنطقة</p><h1 class="sc-h1">خرج الاستهداف من الناقلات إلى سفن الخدمة: بلاغ رسمي بإصابة قُطر بمقذوفين شمال شرق خورفكان، بأضرار وإصابة طفيفة واحدة، مع متابعة المسار</h1><div class="sc-chips"><span class="sc-chip sc-arch">إصدار أرشيفي · صدر <b class="bidi">2026-10-19T04:00:00Z</b></span><span class="sc-chip">رقم النسخة <b><span class="bidi">و ب <span class="ltr">26/10/16</span></span></b></span><span class="sc-chip">فترة التغطية <b>18–19 أكتوبر 2026 (<span class="ltr">UTC</span>)</b></span><span class="sc-chip">المصادر <b><span class="bidi">12</span> من <span class="bidi">40</span></b></span></div><div class="sc-grid"><div class="sc-side"><div class="sc-threat risk-high"><div class="sc-tl">مستوى التهديد</div><div class="sc-tv">مرتفع جدًا</div><details class="sc-basis"><summary>أساس التقدير</summary><p>بلاغ <span class="ltr">UKMTO WARNING 177-26</span>، وبلاغا 176-26 و174-26 و175-26، وتحذيرات <span class="ltr">NAVAREA IX</span> (<span class="ltr">382/26</span> و381/26 و380/26 و373/26 و372/26)، وسجل المنظمة البحرية الدولية للحوادث المؤكدة، وبيان المنظمة البحرية الدولية المنقول، ورواية غير مؤكدة من طرف واحد رسمي، ومنصة رصد مستقلة، ونقل إعلامي مهني.</p></details></div><div class="sc-kpis"><div class="sc-kpi acc-danger"><div class="sc-kl">بلاغات هجوم رسمية جديدة (24 ساعة)</div><div class="sc-kv bidi">1</div><div class="sc-kd"><span class="trend t-flat">■</span> بلاغ واحد كما في الفترة السابقة</div><div class="sc-kn">البلاغ 177-26 — إصابة قُطر بمقذوفين شمال شرق خورفكان، بأضرار وإصابة طفيفة</div></div><div class="sc-kpi acc-ok"><div class="sc-kl">سفن واقفة في مواضعها بعيدًا عن المراسي</div><div class="sc-kv bidi">124</div><div class="sc-kd"><span class="trend t-down">▼</span> −48 عن الفترة السابقة</div><div class="sc-kn">عند <span class="ltr">0022Z</span> من 19 أكتوبر (03:22 بتوقيت البحرين)، مقابل 172 عند <span class="ltr">0022Z</span> من 18 أكتوبر</div></div><div class="sc-kpi acc-ok"><div class="sc-kl">خام برنت</div><div class="sc-kv bidi">108.02 $</div><div class="sc-kd"><span class="trend t-down">▼</span> −1.84 عن الإغلاق السابق</div><div class="sc-kn">عند <span class="ltr">0017Z</span> من 19 أكتوبر، بتراجع 1.67% عن إغلاق الجمعة</div></div></div></div><section class="sc-card" aria-label="بطاقة القرار"><h2 class="sc-h2">بطاقة القرار</h2><div class="sc-row"><div class="sc-l">ما تغيّر</div><div class="sc-v"><ul class="sc-list"><li><bdi class="sc-code bidi">19-01</bdi><span><span class="sc-tag sc-k-new">جديد</span> قُطر يسير جنوبًا أصابه مقذوفان مجهولان شمال شرق خورفكان بالإمارات، مع أضرار في السفينة وإصابة طفيفة واحدة، وبقي في مساره. ووقت الحادثة غير معلن.</span></li><li><bdi class="sc-code bidi">19-02</bdi><span><span class="sc-tag sc-k-new">جديد</span> بحرية الحرس الثوري: ناقلة نفط «غير ممتثلة» أصابها لغم بحري جنوب مضيق هرمز مع حريق في غرفة المحرّك — لا تأكيد مستقل، ولا اسم سفينة ولا علم.</span></li><li><bdi class="sc-code bidi">19-03</bdi><span><span class="sc-tag sc-k-new">جديد</span> إيران تطلب من الولايات المتحدة قبول عرضها لإعادة فتح مضيق هرمز لمدة سبعة أيام، وتصف العرض بأنه لا يزال قائمًا.</span></li><li><bdi class="sc-code bidi">19-04</bdi><span><span class="sc-tag sc-k-new">جديد</span> مسؤول الأمم المتحدة البحري: نحو 6,000 بحّار محتجزون في نحو 400 سفينة في نطاق المضيق مع تصاعد الهجمات على السفن.</span></li><li><bdi class="sc-code bidi">19-05</bdi><span><span class="sc-tag sc-k-new">جديد</span> 124 سفينة واقفة بعيدًا عن المراسي عند <span class="ltr">0022Z</span> من 19 أكتوبر (03:22 بتوقيت البحرين) مقابل 172 في الفترة السابقة، وبرنت 108.02 دولارًا (−1.67%)، وغرب تكساس 100.88 دولارًا، والعبور عند عبورتين في 11 أكتوبر.</span></li></ul><p class="sc-more"><a href="#sec-00" data-goto="ما تغيّر">كل ما تغيّر (13)</a></p></div></div><div class="sc-row"><div class="sc-l">التوجيهات التشغيلية</div><div class="sc-v"><ol class="sc-acts"><li><i>1</i><span>ادخل القُطُر وسفن الخدمة في تقدير الخطر وارفع التأهب في خط الاقتراب الشرقي (خورفكان وخليج عُمان)</span></li><li><i>2</i><span>وثبّت حماية السفينة والمراقبة البصرية قبل العبور</span></li><li><i>3</i><span>وأبقِ قائمة مخاطر الحطام قرب <span class="ltr">24°21.48′ N</span> <span class="ltr">057°40.65′ E</span> و26°16.8′ <span class="ltr">N 056°08.6′</span> E</span></li></ol><p class="sc-more"><a href="#" data-goto="التوجيهات التشغيلية">التوجيهات كاملة (7)</a></p></div></div><div class="sc-row"><div class="sc-l">ما يُراقب خلال 24 ساعة</div><div class="sc-v"><ul class="sc-watch"><li>بلاغ رسمي يسمّي سفينة من رواية اللغم الثالثة.</li><li>بلاغ رسمي بحادثة داخل ممر العبور، أو إعلان رسمي عن عبور منظّم أو رفع القيود.</li><li>إعلان عن إزالة حطام «<span class="ltr">CAPE DAO</span>» أو حطام سفينة الحاويات.</li><li>مصير المفقودَين «<span class="ltr">PETRO DOLPHIN</span>» والبحّارة المحتجزين، وثبات التكدس على مستوى منخفض.</li></ul></div></div><div class="sc-rkey"><span class="rkey-t">مفتاح القراءة:</span><span class="rk k-fact">واقعة مؤكدة</span><span class="rk k-est">تقدير تحليلي</span><span class="rk k-info">بند إعلامي</span><span class="rk k-bg">خلفية مستمرة</span><span class="rk k-watch">مراقبة مستمرة</span></div></section></div></div>
+  <section class="hero-map no-print" aria-hidden="true"><div class="hmap"><div class="hmap-panel">
+  <h3>خريطة الوقائع</h3><p class="blk-lede">مواقع الوقائع داخل نطاق التقرير.</p>
+  <div class="hmap-wrap">
+    <svg class="hmap-svg" viewBox="0 0 1120 722" role="img"
+         aria-label="خريطة الخليج العربي ومضيق هرمز وخليج عمان مع مواقع وقائع التقرير">
+      <rect class="mp-sea-bg" x="0" y="0" width="1120" height="722"/>
+      <g class="mp-grid"><line x1="108.4" y1="0" x2="108.4" y2="722"/><line x1="397.4" y1="0" x2="397.4" y2="722"/><line x1="686.5" y1="0" x2="686.5" y2="722"/><line x1="975.5" y1="0" x2="975.5" y2="722"/><line x1="0" y1="657.6" x2="1120" y2="657.6"/><line x1="0" y1="497.2" x2="1120" y2="497.2"/><line x1="0" y1="336.8" x2="1120" y2="336.8"/><line x1="0" y1="176.4" x2="1120" y2="176.4"/></g>
+      <g class="mp-land" fill-rule="evenodd"><path d="M488.3,476.9 483.5,473.9 493.7,469.8 499.5,464.2 501.9,467.4 497.3,474.7 493.7,476.4 488.3,476.9Z"/><path d="M440.8,474.6 439.6,468.9 442.9,467.0 444.9,470.5 440.8,474.6Z"/><path d="M693.3,272.6 683.1,280.6 678.8,278.1 675.4,278.2 668.2,281.3 662.9,281.8 653.4,287.3 644.8,290.0 636.7,289.3 635.5,285.5 635.6,284.1 639.3,284.8 652.6,279.9 669.3,271.7 670.9,268.1 668.2,262.1 668.9,260.8 679.7,263.8 691.8,257.9 701.9,256.3 706.6,260.5 700.0,262.9 693.3,272.6Z"/><path d="M536.7,485.7 529.4,484.9 527.4,486.3 515.5,483.6 519.5,480.3 529.9,476.4 536.7,483.0 536.7,485.7Z"/><path d="M294.4,352.3 292.2,350.2 286.6,339.6 288.3,332.1 285.6,321.5 286.9,318.4 293.7,317.0 295.2,317.5 293.2,320.9 297.0,326.8 297.5,336.6 296.8,346.2 294.4,352.3Z"/><path d="M124.2,48.0 121.4,47.2 114.3,32.2 116.7,28.2 117.1,25.2 118.4,24.3 119.8,19.3 121.7,17.7 133.6,33.5 133.0,40.5 128.3,46.2 124.2,48.0Z"/><path d="M1113.3,406.5 1101.5,405.9 1086.3,401.3 1077.5,408.8 1055.6,402.2 1023.5,394.4 1019.9,390.5 1017.9,383.8 1012.4,381.9 1004.4,392.0 977.3,386.2 968.0,388.0 962.4,384.8 947.7,384.7 936.2,378.4 919.6,382.7 906.6,383.5 888.6,372.5 869.3,369.5 853.7,370.4 845.6,369.6 832.6,365.6 826.4,361.5 816.2,364.6 811.6,358.9 782.9,353.5 773.6,333.8 773.3,324.1 766.2,307.0 763.9,282.3 761.3,272.6 757.4,264.2 745.2,249.4 739.1,246.4 712.2,240.6 695.0,245.1 682.2,253.6 661.2,258.4 656.9,262.1 651.7,270.2 644.8,275.0 635.4,273.8 625.4,278.6 606.7,292.2 596.8,296.3 588.5,296.0 579.7,289.6 559.8,280.9 546.9,278.1 529.1,280.0 520.7,278.6 506.3,268.5 502.6,261.2 494.4,256.3 468.4,245.2 447.4,230.7 443.5,225.2 441.0,217.0 431.8,207.2 411.3,199.1 399.6,190.5 386.0,188.6 373.3,188.9 367.7,187.3 362.6,183.6 345.3,165.9 345.1,158.9 334.4,141.5 331.9,135.4 329.6,118.2 326.7,113.7 315.6,106.6 313.8,102.0 316.2,95.9 316.2,91.2 310.4,86.8 301.7,84.5 299.6,79.2 301.2,69.0 299.8,62.5 292.2,52.3 280.9,41.8 269.5,26.2 265.1,22.4 258.1,0.1 257.2,0.0 1120.0,0.0 1120.0,405.5 1113.3,406.5Z"/><path d="M220.7,13.7 211.7,5.6 201.0,0.0 250.1,0.0 220.7,13.7Z"/><path d="M174.8,6.3 168.5,13.2 156.9,13.8 151.4,18.0 141.2,21.0 134.0,19.5 118.6,12.8 113.6,12.6 107.1,15.1 106.5,20.4 108.8,29.2 118.2,46.7 118.8,50.3 106.2,46.8 88.5,62.8 88.3,64.7 97.2,66.9 103.7,66.8 108.3,65.3 112.1,67.7 121.7,97.9 126.7,104.1 132.9,115.2 136.5,125.8 144.4,140.4 146.2,147.9 153.6,165.8 164.3,179.7 166.8,184.8 168.6,192.4 166.7,195.2 166.0,198.5 173.9,206.2 197.8,217.1 193.3,221.5 209.9,242.1 219.5,244.4 232.4,260.2 251.9,270.3 263.7,283.7 254.8,280.7 253.5,282.4 254.9,294.6 266.3,304.3 268.4,312.1 264.1,328.7 256.8,326.9 255.2,327.9 258.8,339.9 262.3,349.1 266.6,356.4 270.2,367.0 273.2,371.6 285.8,382.9 289.6,392.4 293.2,410.0 301.1,419.9 305.3,427.5 311.0,433.9 314.1,425.9 309.1,402.8 307.4,385.0 308.0,381.3 315.7,367.9 325.4,338.3 333.0,330.3 344.1,324.5 353.3,335.9 364.4,344.6 366.5,354.4 363.2,362.3 360.2,374.9 368.7,405.1 369.2,412.8 367.6,419.8 363.7,425.7 356.1,443.6 353.8,445.5 344.5,448.5 349.6,451.9 354.9,451.4 355.4,454.6 351.9,458.9 347.6,469.9 363.8,474.2 366.2,474.2 368.9,470.0 373.2,477.1 378.3,476.1 380.6,476.8 382.4,491.2 386.1,496.3 390.6,498.4 406.0,499.5 415.5,497.6 434.4,488.2 444.3,484.8 471.6,485.4 493.5,489.3 527.6,491.6 534.2,491.0 552.6,483.5 563.9,476.8 570.6,474.9 575.1,468.5 580.6,454.6 583.9,452.0 587.0,447.4 589.6,439.8 595.9,432.2 621.3,413.7 636.1,398.0 637.4,393.0 645.5,385.4 652.0,377.0 682.2,353.3 688.3,343.5 691.8,332.6 698.3,320.2 700.7,318.4 703.0,319.2 708.5,317.9 713.8,308.2 716.3,308.6 717.5,310.6 716.5,328.1 713.4,352.5 708.7,360.1 708.0,364.8 712.7,371.3 713.4,415.5 721.8,439.7 732.7,459.5 742.4,470.4 752.4,485.1 767.6,498.7 774.6,503.4 802.9,512.9 839.7,519.9 854.4,527.3 859.4,527.8 867.1,525.6 872.7,525.8 886.8,535.9 891.0,545.5 896.8,550.6 902.0,558.6 905.4,566.9 917.3,579.6 925.7,593.9 934.3,604.6 941.9,611.2 962.7,616.7 963.7,623.8 962.8,633.1 961.0,639.9 952.4,653.2 950.4,661.5 940.6,675.0 930.1,697.8 925.2,702.8 908.2,714.6 901.9,721.7 0.0,721.7 0.0,0.0 174.3,0.0 174.8,6.3Z"/><path d="M574.9,463.2 567.8,461.7 566.1,459.4 570.7,456.6 575.6,461.7 574.9,463.2Z"/></g>
+      <g class="mp-borders"><path d="M627.6,601.1L628.6,574.6L650.9,519.3L652.6,511.7L651.7,506.4L648.0,501.9L653.8,497.9L664.5,495.2L670.5,495.8L685.4,492.1L685.9,489.7L681.3,479.9L672.0,479.3L669.2,477.7L672.4,469.1L669.7,457.8L670.4,450.9L672.3,446.2L671.7,427.6L673.7,424.1L680.4,419.3L683.8,419.4L686.5,420.7L687.7,424.4L686.9,426.9L684.3,428.3L691.1,437.9L694.1,437.1L701.2,430.4L705.8,427.7L712.0,419.1L714.5,418.7"/><path d="M344.5,448.5L331.9,451.9L322.7,451.2L320.0,449.5L314.7,442.7L311.0,433.9"/><path d="M2.3,88.5L19.5,68.4L29.3,53.1L43.5,20.9L46.8,16.0L60.1,9.6L82.6,8.2L90.6,9.9L106.8,17.4"/><path d="M140.4,132.9L84.6,133.7L78.3,126.1L73.8,109.2L67.4,97.1L2.3,88.5"/><path d="M137.0,0.0L136.4,3.2L137.2,7.2L139.8,13.0L147.9,19.1"/><path d="M627.6,601.1L660.5,657.4L641.3,721.7"/><path d="M627.6,601.1L622.8,607.5L621.7,607.7L437.5,582.8L368.0,490.9L366.5,486.9L366.2,474.2"/><path d="M2.3,88.5L0.0,89.0"/><path d="M1090.2,400.8L1092.2,394.0L1094.0,370.1L1096.3,361.5L1095.6,356.7L1102.3,349.4L1106.3,323.5L1108.6,318.7L1120.0,313.7"/><path d="M1120.0,136.0L1112.0,132.6L1092.8,112.9L1088.8,106.6L1084.5,95.7L1072.2,75.0L1072.3,69.6L1070.7,66.3L1036.4,27.4"/><path d="M1036.4,27.4L1060.3,0.0"/><path d="M1036.4,27.4L1120.0,53.7"/><path d="M692.3,331.8L694.9,331.3L698.6,333.0L698.9,341.2L696.9,361.6L699.7,365.3L704.5,366.8L706.6,366.7L708.0,364.8"/><path d="M703.4,392.6L701.7,399.9L703.8,400.2L706.8,398.1L707.2,394.7L706.5,392.9L703.4,392.6"/></g>
+      <g class="mp-places"><text class="mp-country" x="491.4" y="152.4">إيران</text><text class="mp-country" x="187.9" y="613.5">السعودية</text><text class="mp-country" x="585.3" y="541.3">الإمارات</text><text class="mp-country" x="708.1" y="641.5">عُمان</text><g transform="translate(106.9,66.6)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="0.0" y="21.0">الكويت</text></g><g transform="translate(706.7,242.2)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="48.0" y="-13.0">بندر عباس</text></g><g transform="translate(633.7,401.0)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="-38.0" y="4.0">دبي</text></g><g transform="translate(363.5,392.9)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="-34.0" y="4.0">الدوحة</text></g><g transform="translate(737.8,469.9)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="-48.0" y="-10.0">صحار</text></g><g transform="translate(873.6,528.5)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="40.0" y="4.0">مسقط</text></g><g transform="translate(294.8,318.4)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="0.0" y="-13.0">المنامة</text></g><text class="mp-sea-lbl mp-sea-sm" x="682.8" y="258.2">مضيق هرمز</text><text class="mp-sea-lbl mp-sea-lg" x="346.8" y="272.7">الخليج العربي</text><text class="mp-sea-lbl mp-sea-lg" x="946.6" y="501.2">خليج عمان</text><text class="mp-sea-lbl mp-sea-lg" x="859.9" y="681.6">بحر العرب</text></g>
+      <g class="mp-grid-labels"><text class="mp-grid-lbl" x="113.4" y="715">48°E</text><text class="mp-grid-lbl" x="402.4" y="715">52°E</text><text class="mp-grid-lbl" x="691.5" y="715">56°E</text><text class="mp-grid-lbl" x="980.5" y="715">60°E</text><text class="mp-grid-lbl" x="7" y="651.6" text-anchor="start">22°N</text><text class="mp-grid-lbl" x="7" y="491.2" text-anchor="start">24°N</text><text class="mp-grid-lbl" x="7" y="330.8" text-anchor="start">26°N</text><text class="mp-grid-lbl" x="7" y="170.4" text-anchor="start">28°N</text></g>
+      <rect class="mp-zoomrect" x="585.3" y="256.6" width="245.7" height="288.7" rx="4" style="fill:none;stroke:var(--accent);stroke-width:1.6;stroke-dasharray:7 5"/>
+      <g class="mp-events"><g class="mp-event" transform="translate(729.8,376.9)" style="--mk:var(--danger)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">1</text></g><g class="mp-event" transform="translate(722.6,328.8)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">2</text></g><g class="mp-event" transform="translate(808.6,468.9)" style="--mk:var(--danger)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">3</text></g><g class="mp-event" transform="translate(696.6,314.3)" style="--mk:var(--danger)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">4</text></g><g class="mp-event" transform="translate(281.8,184.4)" style="--mk:var(--danger)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">5</text></g><g class="mp-event" transform="translate(65.0,1387.3)" style="--mk:var(--danger)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">6</text></g><g class="mp-event" transform="translate(790.4,455.7)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">7</text></g><g class="mp-event" transform="translate(-354.1,1170.8)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">8</text></g></g>
+    </svg>
+    <div class="hmap-zoom"><svg class="hmap-zsvg" viewBox="0 0 520 609" role="img" aria-label="تكبير: مضيق هرمز وخورفكان"><rect class="mp-sea-bg" x="0" y="0" width="520" height="609"/><g class="mp-grid"><line x1="61.2" y1="0" x2="61.2" y2="609"/><line x1="214.1" y1="0" x2="214.1" y2="609"/><line x1="367.1" y1="0" x2="367.1" y2="609"/><line x1="520.0" y1="0" x2="520.0" y2="609"/><line x1="0" y1="507.1" x2="520" y2="507.1"/><line x1="0" y1="338.1" x2="520" y2="338.1"/><line x1="0" y1="169.0" x2="520" y2="169.0"/><line x1="0" y1="0.0" x2="520" y2="0.0"/></g><g class="mp-land" fill-rule="evenodd"><path d="M228.6,33.6 207.1,50.5 197.9,45.3 190.8,45.5 175.5,52.0 164.4,53.1 144.2,64.6 126.0,70.5 108.8,68.9 106.3,61.0 106.5,57.9 114.2,59.5 142.5,49.0 177.8,31.8 181.2,24.1 175.5,11.7 177.0,8.8 199.9,15.2 225.5,2.8 243.3,0.0 247.5,0.0 256.8,8.1 242.9,13.3 228.6,33.6Z"/><path d="M510.3,221.1 488.8,227.7 479.1,215.5 418.2,204.3 398.5,162.7 397.9,142.2 383.0,106.2 378.1,54.1 372.6,33.7 364.3,16.0 352.5,0.0 520.0,0.0 520.0,227.5 510.3,221.1Z"/><path d="M160.6,3.8 151.7,11.5 140.5,28.7 126.0,38.8 106.2,36.2 84.8,46.4 45.2,74.9 24.4,83.7 6.9,83.0 0.0,78.0 0.0,0.0 177.3,0.0 160.6,3.8Z"/><path d="M3.7,402.1 9.0,386.1 22.4,370.1 76.2,331.0 107.6,298.0 110.4,287.4 127.5,271.4 141.1,253.9 205.1,203.8 218.0,183.2 225.5,160.1 239.3,134.0 244.3,130.3 249.1,131.9 260.9,129.3 272.0,108.8 277.3,109.7 279.8,113.7 277.8,150.6 271.3,202.1 261.1,218.2 259.7,228.1 269.7,241.8 271.1,335.0 289.0,386.0 312.1,427.6 332.5,450.5 353.7,481.7 385.9,510.3 400.7,520.1 460.6,540.3 520.0,552.1 520.0,608.5 0.0,608.5 0.0,407.5 3.7,402.1Z"/></g><g class="mp-borders"><path d="M116.1,608.5L139.0,553.6L142.5,537.7L140.6,526.4L132.8,517.0L145.0,508.5L167.7,503.0L180.3,504.2L211.8,496.4L212.9,491.4L203.2,470.7L183.5,469.5L177.5,466.1L184.4,448.0L178.7,424.2L180.1,409.5L184.1,399.5L182.9,360.4L187.0,353.1L201.2,342.8L208.5,343.1L214.2,346.0L216.7,353.7L215.1,358.9L209.6,361.9L223.9,382.2L230.4,380.5L245.4,366.2L255.1,360.6L268.1,342.6L273.5,341.6"/><path d="M226.4,158.4L231.9,157.5L239.7,161.0L240.5,178.3L236.2,221.3L242.2,229.0L252.3,232.3L256.7,232.0L259.7,228.1"/><path d="M249.9,286.7L246.3,302.0L250.9,302.8L257.2,298.2L258.1,291.0L256.5,287.2L249.9,286.7"/></g><g class="mp-events"><g class="mp-event" transform="translate(305.9,253.5)" style="--mk:var(--danger)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">1</text></g><g class="mp-event" transform="translate(290.6,152.1)" style="--mk:var(--muted)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">2</text></g><g class="mp-event" transform="translate(471.5,446.6)" style="--mk:var(--danger)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">3</text></g><g class="mp-event" transform="translate(235.5,121.7)" style="--mk:var(--danger)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">4</text></g><g class="mp-event" transform="translate(435.4,420.5)" style="--mk:var(--muted)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">7</text></g></g></svg><div class="hz-cap">تكبير: مضيق هرمز وخورفكان</div></div>
+  </div>
+  <ol class="hmap-legend"><li><span class="lg-num" style="--mk:var(--danger)">1</span><span class="lg-txt">إصابة قُطر بمقذوفين مجهولين شمال شرق خورفكان — أضرار وإصابة طفيفة</span> <bdi class="bidi ev-code">19-01</bdi> <bdi class="bidi"><span class="ltr">UKMTO WARNING 177-26</span></bdi></li><li><span class="lg-num" style="--mk:var(--muted)">2</span><span class="lg-txt">رواية غير مؤكدة من طرف واحد: ناقلة «غير ممتثلة» أصابها لغم بحري جنوب المضيق وحريق في غرفة المحرّك</span> <bdi class="bidi ev-code">19-02</bdi> <bdi class="bidi">رواية غير مؤكدة من طرف واحد رسمي</bdi></li><li><span class="lg-num" style="--mk:var(--danger)">3</span><span class="lg-txt">حطام «<span class="ltr">CAPE DAO</span>» يغرق وينجرف شرقًا بسرعة نصف عقدة — 33 ميلًا بحريًا شمال شرق ميناء السويق</span> <bdi class="bidi ev-code">18-03</bdi> <bdi class="bidi"><span class="ltr">NAVAREA IX 380/26</span></bdi></li><li><span class="lg-num" style="--mk:var(--danger)">4</span><span class="lg-txt">حطام سفينة الحاويات الغارقة وحاويات طافية في <span class="ltr">26°16.8′ N</span> <span class="ltr">056°08.6′ E</span></span> <bdi class="bidi ev-code">18-08</bdi> <bdi class="bidi"><span class="ltr">NAVAREA IX 373/26</span></bdi></li><li><span class="lg-num" style="--mk:var(--danger)">5</span><span class="lg-txt">بلاغان رسميان بإصابة ناقلتين شمال شرق الجبيل — 68 و78 ميلًا بحريًا</span> <bdi class="bidi"><span class="ltr">UKMTO 174-26</span> و175-26</bdi></li><li><span class="lg-num" style="--mk:var(--danger)">6</span><span class="lg-txt">إطلاق نار على ناقلة غاز مسال 140 ميلًا بحريًا جنوب غرب المكلا</span> <bdi class="bidi ev-code">18-01</bdi> <bdi class="bidi"><span class="ltr">UKMTO WARNING 176-26</span></bdi></li><li><span class="lg-num" style="--mk:var(--muted)">7</span><span class="lg-txt">«<span class="ltr">PETRO DOLPHIN</span>» تنجرف ومفقودان</span> <bdi class="bidi ev-code">11-02</bdi> <bdi class="bidi"><span class="ltr">NAVAREA IX 372/26</span></bdi></li><li><span class="lg-num" style="--mk:var(--muted)">8</span><span class="lg-txt">عبور نادر لناقلة غاز مسال قطرية في البحر الأحمر</span> <bdi class="bidi ev-code">19-06</bdi> <bdi class="bidi">TradeWinds</bdi></li></ol>
+  <p class="src-note">المصدر: وقائع التقرير وجدول التوزيع الجغرافي. المواقع تقديرية للمنطقة المذكورة في المصدر ولا تُعد إحداثيات دقيقة.</p>
+</div><p class="hmap-keys">السواحل والجزر والحدود: بيانات Natural Earth. الشبكة: خطوط الطول والعرض. العلامات المرقمة: وقائع هذا التقرير.</p></div></section>
   <div class="notice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/></svg><div>نسخة ويب من التقرير اليومي. المصادر المفحوصة 40 مصدرًا، ويُعرض ملحق الموثوقية للمصادر المستشهد بها فقط.</div></div>
   <div class="rkey no-print"><span class="rkey-t">مفتاح القراءة:</span><span class="rk k-fact">واقعة مؤكدة</span><span class="rk k-est">تقدير تحليلي</span><span class="rk k-info">بند إعلامي</span><span class="rk k-bg">خلفية مستمرة</span><span class="rk k-watch">مراقبة مستمرة</span></div>
 
@@ -847,10 +1048,12 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
       <g class="mp-grid"><line x1="108.4" y1="0" x2="108.4" y2="722"/><line x1="397.4" y1="0" x2="397.4" y2="722"/><line x1="686.5" y1="0" x2="686.5" y2="722"/><line x1="975.5" y1="0" x2="975.5" y2="722"/><line x1="0" y1="657.6" x2="1120" y2="657.6"/><line x1="0" y1="497.2" x2="1120" y2="497.2"/><line x1="0" y1="336.8" x2="1120" y2="336.8"/><line x1="0" y1="176.4" x2="1120" y2="176.4"/></g>
       <g class="mp-land" fill-rule="evenodd"><path d="M488.3,476.9 483.5,473.9 493.7,469.8 499.5,464.2 501.9,467.4 497.3,474.7 493.7,476.4 488.3,476.9Z"/><path d="M440.8,474.6 439.6,468.9 442.9,467.0 444.9,470.5 440.8,474.6Z"/><path d="M693.3,272.6 683.1,280.6 678.8,278.1 675.4,278.2 668.2,281.3 662.9,281.8 653.4,287.3 644.8,290.0 636.7,289.3 635.5,285.5 635.6,284.1 639.3,284.8 652.6,279.9 669.3,271.7 670.9,268.1 668.2,262.1 668.9,260.8 679.7,263.8 691.8,257.9 701.9,256.3 706.6,260.5 700.0,262.9 693.3,272.6Z"/><path d="M536.7,485.7 529.4,484.9 527.4,486.3 515.5,483.6 519.5,480.3 529.9,476.4 536.7,483.0 536.7,485.7Z"/><path d="M294.4,352.3 292.2,350.2 286.6,339.6 288.3,332.1 285.6,321.5 286.9,318.4 293.7,317.0 295.2,317.5 293.2,320.9 297.0,326.8 297.5,336.6 296.8,346.2 294.4,352.3Z"/><path d="M124.2,48.0 121.4,47.2 114.3,32.2 116.7,28.2 117.1,25.2 118.4,24.3 119.8,19.3 121.7,17.7 133.6,33.5 133.0,40.5 128.3,46.2 124.2,48.0Z"/><path d="M1113.3,406.5 1101.5,405.9 1086.3,401.3 1077.5,408.8 1055.6,402.2 1023.5,394.4 1019.9,390.5 1017.9,383.8 1012.4,381.9 1004.4,392.0 977.3,386.2 968.0,388.0 962.4,384.8 947.7,384.7 936.2,378.4 919.6,382.7 906.6,383.5 888.6,372.5 869.3,369.5 853.7,370.4 845.6,369.6 832.6,365.6 826.4,361.5 816.2,364.6 811.6,358.9 782.9,353.5 773.6,333.8 773.3,324.1 766.2,307.0 763.9,282.3 761.3,272.6 757.4,264.2 745.2,249.4 739.1,246.4 712.2,240.6 695.0,245.1 682.2,253.6 661.2,258.4 656.9,262.1 651.7,270.2 644.8,275.0 635.4,273.8 625.4,278.6 606.7,292.2 596.8,296.3 588.5,296.0 579.7,289.6 559.8,280.9 546.9,278.1 529.1,280.0 520.7,278.6 506.3,268.5 502.6,261.2 494.4,256.3 468.4,245.2 447.4,230.7 443.5,225.2 441.0,217.0 431.8,207.2 411.3,199.1 399.6,190.5 386.0,188.6 373.3,188.9 367.7,187.3 362.6,183.6 345.3,165.9 345.1,158.9 334.4,141.5 331.9,135.4 329.6,118.2 326.7,113.7 315.6,106.6 313.8,102.0 316.2,95.9 316.2,91.2 310.4,86.8 301.7,84.5 299.6,79.2 301.2,69.0 299.8,62.5 292.2,52.3 280.9,41.8 269.5,26.2 265.1,22.4 258.1,0.1 257.2,0.0 1120.0,0.0 1120.0,405.5 1113.3,406.5Z"/><path d="M220.7,13.7 211.7,5.6 201.0,0.0 250.1,0.0 220.7,13.7Z"/><path d="M174.8,6.3 168.5,13.2 156.9,13.8 151.4,18.0 141.2,21.0 134.0,19.5 118.6,12.8 113.6,12.6 107.1,15.1 106.5,20.4 108.8,29.2 118.2,46.7 118.8,50.3 106.2,46.8 88.5,62.8 88.3,64.7 97.2,66.9 103.7,66.8 108.3,65.3 112.1,67.7 121.7,97.9 126.7,104.1 132.9,115.2 136.5,125.8 144.4,140.4 146.2,147.9 153.6,165.8 164.3,179.7 166.8,184.8 168.6,192.4 166.7,195.2 166.0,198.5 173.9,206.2 197.8,217.1 193.3,221.5 209.9,242.1 219.5,244.4 232.4,260.2 251.9,270.3 263.7,283.7 254.8,280.7 253.5,282.4 254.9,294.6 266.3,304.3 268.4,312.1 264.1,328.7 256.8,326.9 255.2,327.9 258.8,339.9 262.3,349.1 266.6,356.4 270.2,367.0 273.2,371.6 285.8,382.9 289.6,392.4 293.2,410.0 301.1,419.9 305.3,427.5 311.0,433.9 314.1,425.9 309.1,402.8 307.4,385.0 308.0,381.3 315.7,367.9 325.4,338.3 333.0,330.3 344.1,324.5 353.3,335.9 364.4,344.6 366.5,354.4 363.2,362.3 360.2,374.9 368.7,405.1 369.2,412.8 367.6,419.8 363.7,425.7 356.1,443.6 353.8,445.5 344.5,448.5 349.6,451.9 354.9,451.4 355.4,454.6 351.9,458.9 347.6,469.9 363.8,474.2 366.2,474.2 368.9,470.0 373.2,477.1 378.3,476.1 380.6,476.8 382.4,491.2 386.1,496.3 390.6,498.4 406.0,499.5 415.5,497.6 434.4,488.2 444.3,484.8 471.6,485.4 493.5,489.3 527.6,491.6 534.2,491.0 552.6,483.5 563.9,476.8 570.6,474.9 575.1,468.5 580.6,454.6 583.9,452.0 587.0,447.4 589.6,439.8 595.9,432.2 621.3,413.7 636.1,398.0 637.4,393.0 645.5,385.4 652.0,377.0 682.2,353.3 688.3,343.5 691.8,332.6 698.3,320.2 700.7,318.4 703.0,319.2 708.5,317.9 713.8,308.2 716.3,308.6 717.5,310.6 716.5,328.1 713.4,352.5 708.7,360.1 708.0,364.8 712.7,371.3 713.4,415.5 721.8,439.7 732.7,459.5 742.4,470.4 752.4,485.1 767.6,498.7 774.6,503.4 802.9,512.9 839.7,519.9 854.4,527.3 859.4,527.8 867.1,525.6 872.7,525.8 886.8,535.9 891.0,545.5 896.8,550.6 902.0,558.6 905.4,566.9 917.3,579.6 925.7,593.9 934.3,604.6 941.9,611.2 962.7,616.7 963.7,623.8 962.8,633.1 961.0,639.9 952.4,653.2 950.4,661.5 940.6,675.0 930.1,697.8 925.2,702.8 908.2,714.6 901.9,721.7 0.0,721.7 0.0,0.0 174.3,0.0 174.8,6.3Z"/><path d="M574.9,463.2 567.8,461.7 566.1,459.4 570.7,456.6 575.6,461.7 574.9,463.2Z"/></g>
       <g class="mp-borders"><path d="M627.6,601.1L628.6,574.6L650.9,519.3L652.6,511.7L651.7,506.4L648.0,501.9L653.8,497.9L664.5,495.2L670.5,495.8L685.4,492.1L685.9,489.7L681.3,479.9L672.0,479.3L669.2,477.7L672.4,469.1L669.7,457.8L670.4,450.9L672.3,446.2L671.7,427.6L673.7,424.1L680.4,419.3L683.8,419.4L686.5,420.7L687.7,424.4L686.9,426.9L684.3,428.3L691.1,437.9L694.1,437.1L701.2,430.4L705.8,427.7L712.0,419.1L714.5,418.7"/><path d="M344.5,448.5L331.9,451.9L322.7,451.2L320.0,449.5L314.7,442.7L311.0,433.9"/><path d="M2.3,88.5L19.5,68.4L29.3,53.1L43.5,20.9L46.8,16.0L60.1,9.6L82.6,8.2L90.6,9.9L106.8,17.4"/><path d="M140.4,132.9L84.6,133.7L78.3,126.1L73.8,109.2L67.4,97.1L2.3,88.5"/><path d="M137.0,0.0L136.4,3.2L137.2,7.2L139.8,13.0L147.9,19.1"/><path d="M627.6,601.1L660.5,657.4L641.3,721.7"/><path d="M627.6,601.1L622.8,607.5L621.7,607.7L437.5,582.8L368.0,490.9L366.5,486.9L366.2,474.2"/><path d="M2.3,88.5L0.0,89.0"/><path d="M1090.2,400.8L1092.2,394.0L1094.0,370.1L1096.3,361.5L1095.6,356.7L1102.3,349.4L1106.3,323.5L1108.6,318.7L1120.0,313.7"/><path d="M1120.0,136.0L1112.0,132.6L1092.8,112.9L1088.8,106.6L1084.5,95.7L1072.2,75.0L1072.3,69.6L1070.7,66.3L1036.4,27.4"/><path d="M1036.4,27.4L1060.3,0.0"/><path d="M1036.4,27.4L1120.0,53.7"/><path d="M692.3,331.8L694.9,331.3L698.6,333.0L698.9,341.2L696.9,361.6L699.7,365.3L704.5,366.8L706.6,366.7L708.0,364.8"/><path d="M703.4,392.6L701.7,399.9L703.8,400.2L706.8,398.1L707.2,394.7L706.5,392.9L703.4,392.6"/></g>
-      <g class="mp-places"><text class="mp-country" x="491.4" y="152.4">إيران</text><text class="mp-country" x="187.9" y="613.5">السعودية</text><text class="mp-country" x="585.3" y="541.3">الإمارات</text><text class="mp-country" x="708.1" y="641.5">عُمان</text><g transform="translate(106.9,66.6)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="0" y="21">الكويت</text></g><g transform="translate(706.7,242.2)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="48" y="1">بندر عباس</text></g><g transform="translate(633.7,401.0)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="-38" y="4">دبي</text></g><g transform="translate(363.5,392.9)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="-34" y="4">الدوحة</text></g><g transform="translate(737.8,469.9)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="-48" y="-10">صحار</text></g><g transform="translate(873.6,528.5)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="40" y="4">مسقط</text></g><text class="mp-sea-lbl mp-sea-lg" x="346.8" y="300.7">الخليج العربي</text><text class="mp-sea-lbl mp-sea-lg" x="946.6" y="501.2">خليج عمان</text><text class="mp-sea-lbl mp-sea-lg" x="859.9" y="681.6">بحر العرب</text><text class="mp-sea-lbl mp-sea-sm" x="682.8" y="258.2">مضيق هرمز</text></g>
+      <g class="mp-places"><text class="mp-country" x="491.4" y="152.4">إيران</text><text class="mp-country" x="187.9" y="613.5">السعودية</text><text class="mp-country" x="585.3" y="541.3">الإمارات</text><text class="mp-country" x="708.1" y="641.5">عُمان</text><g transform="translate(106.9,66.6)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="0.0" y="21.0">الكويت</text></g><g transform="translate(706.7,242.2)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="48.0" y="-13.0">بندر عباس</text></g><g transform="translate(633.7,401.0)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="-38.0" y="4.0">دبي</text></g><g transform="translate(363.5,392.9)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="-34.0" y="4.0">الدوحة</text></g><g transform="translate(737.8,469.9)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="-48.0" y="-10.0">صحار</text></g><g transform="translate(873.6,528.5)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="40.0" y="4.0">مسقط</text></g><text class="mp-sea-lbl mp-sea-sm" x="682.8" y="258.2">مضيق هرمز</text><text class="mp-sea-lbl mp-sea-lg" x="346.8" y="300.7">الخليج العربي</text><text class="mp-sea-lbl mp-sea-lg" x="946.6" y="501.2">خليج عمان</text><text class="mp-sea-lbl mp-sea-lg" x="859.9" y="681.6">بحر العرب</text></g>
       <g class="mp-grid-labels"><text class="mp-grid-lbl" x="113.4" y="715">48°E</text><text class="mp-grid-lbl" x="402.4" y="715">52°E</text><text class="mp-grid-lbl" x="691.5" y="715">56°E</text><text class="mp-grid-lbl" x="980.5" y="715">60°E</text><text class="mp-grid-lbl" x="7" y="651.6" text-anchor="start">22°N</text><text class="mp-grid-lbl" x="7" y="491.2" text-anchor="start">24°N</text><text class="mp-grid-lbl" x="7" y="330.8" text-anchor="start">26°N</text><text class="mp-grid-lbl" x="7" y="170.4" text-anchor="start">28°N</text></g>
-      <g class="mp-events"><g class="mp-event" transform="translate(729.8,376.9)" style="--mk:var(--danger)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">1</text></g><g class="mp-event" transform="translate(722.6,328.8)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">2</text></g><g class="mp-event" transform="translate(807.8,468.3)" style="--mk:var(--danger)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">3</text></g><g class="mp-event" transform="translate(696.6,314.3)" style="--mk:var(--danger)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">4</text></g><g class="mp-event" transform="translate(281.8,184.4)" style="--mk:var(--danger)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">5</text></g><g class="mp-event" transform="translate(65.0,1387.3)" style="--mk:var(--danger)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">6</text></g><g class="mp-event" transform="translate(791.2,456.3)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">7</text></g><g class="mp-event" transform="translate(-354.1,1170.8)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">8</text></g></g>
+      
+      <g class="mp-events"><g class="mp-event" transform="translate(729.8,376.9)" style="--mk:var(--danger)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">1</text></g><g class="mp-event" transform="translate(722.6,328.8)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">2</text></g><g class="mp-event" transform="translate(808.6,468.9)" style="--mk:var(--danger)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">3</text></g><g class="mp-event" transform="translate(696.6,314.3)" style="--mk:var(--danger)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">4</text></g><g class="mp-event" transform="translate(281.8,184.4)" style="--mk:var(--danger)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">5</text></g><g class="mp-event" transform="translate(65.0,1387.3)" style="--mk:var(--danger)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">6</text></g><g class="mp-event" transform="translate(790.4,455.7)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">7</text></g><g class="mp-event" transform="translate(-354.1,1170.8)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">8</text></g></g>
     </svg>
+    
   </div>
   <ol class="map-legend"><li><span class="lg-num" style="--mk:var(--danger)">1</span><span class="lg-txt">إصابة قُطر بمقذوفين مجهولين شمال شرق خورفكان — أضرار وإصابة طفيفة</span> <bdi class="bidi ev-code">19-01</bdi> <bdi class="bidi"><span class="ltr">UKMTO WARNING 177-26</span></bdi></li><li><span class="lg-num" style="--mk:var(--muted)">2</span><span class="lg-txt">رواية غير مؤكدة من طرف واحد: ناقلة «غير ممتثلة» أصابها لغم بحري جنوب المضيق وحريق في غرفة المحرّك</span> <bdi class="bidi ev-code">19-02</bdi> <bdi class="bidi">رواية غير مؤكدة من طرف واحد رسمي</bdi></li><li><span class="lg-num" style="--mk:var(--danger)">3</span><span class="lg-txt">حطام «<span class="ltr">CAPE DAO</span>» يغرق وينجرف شرقًا بسرعة نصف عقدة — 33 ميلًا بحريًا شمال شرق ميناء السويق</span> <bdi class="bidi ev-code">18-03</bdi> <bdi class="bidi"><span class="ltr">NAVAREA IX 380/26</span></bdi></li><li><span class="lg-num" style="--mk:var(--danger)">4</span><span class="lg-txt">حطام سفينة الحاويات الغارقة وحاويات طافية في <span class="ltr">26°16.8′ N</span> <span class="ltr">056°08.6′ E</span></span> <bdi class="bidi ev-code">18-08</bdi> <bdi class="bidi"><span class="ltr">NAVAREA IX 373/26</span></bdi></li><li><span class="lg-num" style="--mk:var(--danger)">5</span><span class="lg-txt">بلاغان رسميان بإصابة ناقلتين شمال شرق الجبيل — 68 و78 ميلًا بحريًا</span> <bdi class="bidi"><span class="ltr">UKMTO 174-26</span> و175-26</bdi></li><li><span class="lg-num" style="--mk:var(--danger)">6</span><span class="lg-txt">إطلاق نار على ناقلة غاز مسال 140 ميلًا بحريًا جنوب غرب المكلا</span> <bdi class="bidi ev-code">18-01</bdi> <bdi class="bidi"><span class="ltr">UKMTO WARNING 176-26</span></bdi></li><li><span class="lg-num" style="--mk:var(--muted)">7</span><span class="lg-txt">«<span class="ltr">PETRO DOLPHIN</span>» تنجرف ومفقودان</span> <bdi class="bidi ev-code">11-02</bdi> <bdi class="bidi"><span class="ltr">NAVAREA IX 372/26</span></bdi></li><li><span class="lg-num" style="--mk:var(--muted)">8</span><span class="lg-txt">عبور نادر لناقلة غاز مسال قطرية في البحر الأحمر</span> <bdi class="bidi ev-code">19-06</bdi> <bdi class="bidi">TradeWinds</bdi></li></ol>
   <p class="src-note">المصدر: وقائع التقرير وجدول التوزيع الجغرافي. المواقع تقديرية للمنطقة المذكورة في المصدر ولا تُعد إحداثيات دقيقة.</p>
@@ -977,50 +1180,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 </tbody></table></div>
 <p><strong>المراجعة النظيرة:</strong> روجع القسم مقابل ملف التكيّف الذاتي. وفُصل البلاغ الرسمي عن الرواية والإفادات المنقولة. ولم تُرفع أي درجة مصداقية إلى 1 بلا تأكيد مستقل. ووُسمت رواية اللغم بأنها بلا إثبات.</p>
 <p><strong>رموز التقديرات:</strong></p>
-<ul><li><strong><span class="ltr">EST-2026-10-19-01</span></strong> استمرار الاستهداف خارج ممر العبور</li><li><strong><span class="ltr">EST-2026-10-19-02</span></strong> فجوة التبليغ تجعل العدّ حدًّا أدنى</li><li><strong><span class="ltr">EST-2026-10-19-03</span></strong> لغم بحري وراء بعض الإصابات</li><li><strong><span class="ltr">EST-2026-10-19-04</span></strong> لا عودة للعبور قبل تسوية سياسية</li><li><strong><span class="ltr">EST-2026-10-19-05</span></strong> التكدس 124 لا انفراجًا</li><li><strong><span class="ltr">EST-2026-10-19-06</span></strong> ألغام سبب رئيسي (غير مرجّح)</li><li><strong><span class="ltr">EST-2026-10-19-07</span></strong> عودة الاستهداف داخل الممر</li><li><strong><span class="ltr">EST-2026-10-19-08</span></strong> تصاعد خط الاقتراب الشرقي</li><li><strong><span class="ltr">EST-2026-10-19-09</span></strong> نسبة موثقة لجهة منفذة</li></ul><div class="decision"><p class="dc-title">بطاقة التقدير التحليلي</p><div class="dc-grid"><div class="dc-row"><div class="dc-l">الأسلوب التحليلي</div><div class="dc-v">اختبار الافتراضات · مؤشرات التغيّر · تحليل الفرضيات المتنافسة (<span class="ltr">ACH</span> مصغّر) · تقييم دقة تقديرات الأمس · تقييم مخاطر الممرات</div></div><div class="dc-row"><div class="dc-l">العبارة الاحتمالية</div><div class="dc-v">يُرجَّح استمرار الاستهداف المنظم خارج ممر العبور · ويُرجَّح أن يكون العدّ الرسمي دون الواقع · وممكن أن يكون لغم بحري وراء بعض الإصابات · وغير مُرجَّح عودة العبور الطبيعي قبل تسوية سياسية · وغير حاسم في صحة إفادة سلامة العبور وفي مصير البحّارة المحتجزين</div></div><div class="dc-row"><div class="dc-l">درجة الثقة</div><div class="dc-v">عالية في البلاغ الرسمي 177-26 وفي ثبات السجل الرسمي · متوسطة في أرقام الممر والسوق (منصة رصد واحدة) وفي النقل المهني للبحر الأحمر · منخفضة في رواية اللغم الإيرانية وفي الإفادات المنقولة عن سلامة العبور</div></div><div class="dc-row"><div class="dc-l">سند المصدر</div><div class="dc-v"><span class="ltr">UKMTO</span> A/2 — <span class="ltr">IMO</span> A/1 — <span class="ltr">NAVAREA IX</span> A/1 — منصة رصد C/3 — نقل إعلامي مهني B/2 — رواية غير مؤكدة من طرف واحد رسمي D/4 — رسمي منقول C/3</div></div></div></div><h3>الافتراضات المعلنة</h3><p class="blk-lede">كل افتراض معلن، وما ينقضه.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified"><thead><tr><th scope="col">الافتراض</th><th scope="col">ما ينقضه</th></tr></thead><tbody><tr><td data-label="الافتراض">الاستهداف ما زال خارج ممر العبور ولا يعود إلى داخله</td><td data-label="ما ينقضه">بلاغ رسمي بحادثة داخل مسار الفصل الملاحي</td></tr><tr><td data-label="الافتراض">العدّ الرسمي أدنى من الواقع لأن البلاغات متأخرة</td><td data-label="ما ينقضه">إعلان رسمي يوحّد منهجية العدّ أو ينشر نسبة غير المبلَّغ</td></tr><tr><td data-label="الافتراض">رواية اللغم الثالث تبقى بلا إثبات مستقل</td><td data-label="ما ينقضه">إثبات من سلطة ملاحية مستقلة أو جهة تحكيم</td></tr><tr><td data-label="الافتراض">تراجع التكدس إلى 124 سفينة نتيجة مغادرة أو تغيير مواضع</td><td data-label="ما ينقضه">ثبات الرقم على 124 لثلاث فترات مع استمرار الإغلاق</td></tr><tr><td data-label="الافتراض">عرض إعادة الفتح لا يُنفَّذ خلال الفترة القادمة</td><td data-label="ما ينقضه">إعلان رسمي عن بدء عبور منظّم أو رفع القيود</td></tr></tbody></table></div><h3>مؤشرات التحذير المبكر</h3><p class="blk-lede">المؤشر · ما يؤكده · ما ينفيه · الحالة.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified"><thead><tr><th scope="col">المؤشر</th><th scope="col">ما يؤكده</th><th scope="col">ما ينفيه</th><th scope="col">الحالة</th></tr></thead><tbody><tr><td data-label="المؤشر">بلاغ رسمي يسمّي سفينة من رواية اللغم</td><td data-label="ما يؤكده">صحة الرواية الإيرانية</td><td data-label="ما ينفيه">بقاء الرواية بلا إثبات</td><td data-label="الحالة">غائب</td></tr><tr><td data-label="المؤشر">بلاغ رسمي بحادثة داخل ممر العبور</td><td data-label="ما يؤكده">عودة الاستهداف إلى الممر</td><td data-label="ما ينفيه">بقاء الاستهداف خارج الممر</td><td data-label="الحالة">غائب</td></tr><tr><td data-label="المؤشر">إعلان رسمي عن بدء عبور منظّم أو رفع القيود</td><td data-label="ما يؤكده">تنفيذ عرض إعادة الفتح</td><td data-label="ما ينفيه">بقاء العبور عند عبورتين</td><td data-label="الحالة">غائب</td></tr><tr><td data-label="المؤشر">ثبات التكدس عند مستوى منخفض لنافذتين متتاليتين</td><td data-label="ما يؤكده">انفراج تشغيلي جزئي</td><td data-label="ما ينفيه">قراءة التراجع كمغادرة مؤقتة</td><td data-label="الحالة">مرصود جزئيًا</td></tr><tr><td data-label="المؤشر">حادثة قرصنة أو اختطاف جديدة قبالة الصومال</td><td data-label="ما يؤكده">تصاعد المسار الجنوبي</td><td data-label="ما ينفيه">استقرار خليج عدن</td><td data-label="الحالة">غائب في هذه الفترة</td></tr></tbody></table></div><h3>تقييم دقة تقديرات الأمس</h3><p class="blk-lede">التقدير · النتيجة · السبب.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified"><thead><tr><th scope="col">التقدير السابق</th><th scope="col">النتيجة</th><th scope="col">السبب</th></tr></thead><tbody><tr><td data-label="التقدير السابق">استمرار الاستهداف المنظم</td><td data-label="النتيجة">تحقق</td><td data-label="السبب">بلاغ رسمي جديد بتاريخ 18 أكتوبر</td></tr><tr><td data-label="التقدير السابق">انتقال ثقل الاستهداف إلى خط الاقتراب</td><td data-label="النتيجة">تحقق جزئيًا</td><td data-label="السبب">البلاغ على الخط الشرقي لا الجنوبي</td></tr><tr><td data-label="التقدير السابق">لا عودة للعبور الطبيعي</td><td data-label="النتيجة">تحقق</td><td data-label="السبب">العبور بقي عند عبورتين</td></tr><tr><td data-label="التقدير السابق">اللغم ليس السبب الرئيسي</td><td data-label="النتيجة">غير محسوم</td><td data-label="السبب">عادت الرواية بصيغة ثالثة</td></tr><tr><td data-label="التقدير السابق">فجوة التبليغ تجعل العدّ حدًّا أدنى</td><td data-label="النتيجة">غير محسوم</td><td data-label="السبب">لا رقم رسمي للفجوة</td></tr></tbody></table></div></section><section class="doc reveal" id="sec-08" aria-labelledby="h-08"><h2 id="h-08"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>الاحتمالات والإسناد</h2><div class="h-rule"></div><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
-<thead><tr>
-<th scope="col">الفرضية</th>
-<th scope="col">الإسناد المؤيد</th>
-<th scope="col">ما يناقضها</th>
-<th scope="col">الاحتمال</th>
-</tr></thead><tbody>
-<tr>
-<td data-label="الفرضية">استمرار الاستهداف المنظم خارج ممر العبور (<span class="ltr">EST-2026-10-19-01</span>)</td>
-<td data-label="الإسناد المؤيد">بلاغان رسميان متتاليان وعبور عند 2%</td>
-<td data-label="ما يناقضها">بلا بلاغ داخل الممر في الفترة</td>
-<td class="num" data-label="الاحتمال">38%</td>
-</tr>
-<tr>
-<td data-label="الفرضية">فجوة تبليغ واسعة تجعل كل عدّ حدًّا أدنى (<span class="ltr">EST-2026-10-19-02</span>)</td>
-<td data-label="الإسناد المؤيد">بلاغات متأخرة وروايات متعارضة</td>
-<td data-label="ما يناقضها">غياب رقم رسمي للفجوة</td>
-<td class="num" data-label="الاحتمال">22%</td>
-</tr>
-<tr>
-<td data-label="الفرضية">تورط ألغام بحرية في بعض الإصابات (<span class="ltr">EST-2026-10-19-03</span>)</td>
-<td data-label="الإسناد المؤيد">رواية غير مؤكدة من طرف واحد رسمي متكررة</td>
-<td data-label="ما يناقضها">لا تأكيد ملاحي ولا هوية سفينة</td>
-<td class="num" data-label="الاحتمال">16%</td>
-</tr>
-<tr>
-<td data-label="الفرضية">تصاعد خط الاقتراب الشرقي (خورفكان وخليج عُمان) (<span class="ltr">EST-2026-10-19-08</span>)</td>
-<td data-label="الإسناد المؤيد">إصابة قُطر بمقذوفين وحطام منجرف</td>
-<td data-label="ما يناقضها">غياب بلاغات متكررة في الخط نفسه</td>
-<td class="num" data-label="الاحتمال">14%</td>
-</tr>
-<tr>
-<td data-label="الفرضية">عودة العبور الطبيعي قبل تسوية سياسية (<span class="ltr">EST-2026-10-19-04</span>)</td>
-<td data-label="الإسناد المؤيد">ضغط اقتصادي وعرض إعادة الفتح</td>
-<td data-label="ما يناقضها">ثبات العبور عند عبورتين</td>
-<td class="num" data-label="الاحتمال">5%</td>
-</tr>
-<tr>
-<td data-label="الفرضية">نسبة موثقة لجهة منفذة في كل واقعة (<span class="ltr">EST-2026-10-19-09</span>)</td>
-<td data-label="الإسناد المؤيد">خطاب تصعيدي وإعلانات أطراف</td>
-<td data-label="ما يناقضها">لا دليل رسمي مستقل لكل حادثة</td>
-<td class="num" data-label="الاحتمال">5%</td>
-</tr>
-</tbody></table></div></section><section class="doc reveal" id="sec-09" aria-labelledby="h-09"><h2 id="h-09"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 4v9a4 4 0 004 4h5M15 17l-2-2M15 17l-2 2M18 4a2 2 0 11-.001 4.001A2 2 0 0118 4z"/></svg></span>الحركة الملاحية والتكدس</h2><div class="h-rule"></div><p class="sec-lede">حركة المضيق والرسو من مصادر معلنة فقط.</p><ul><li>الحركة في هذه الفترة تُقرأ من مصدرين مختلفَي المنهجية.</li><li>الرصد المستقل يعطي <strong>عبورتين</strong> في 11 أكتوبر مقابل خط أساس 85 يوميًا.</li><li>ويعطي <strong>124 سفينة</strong> واقفة بعيدًا عن المراسي عند <strong><span class="ltr">0022Z</span> من 19 أكتوبر (03:22 بتوقيت البحرين)</strong>، مقابل <strong>172</strong> في الفترة السابقة.</li><li>وتُقرأ هذه الأرقام <strong>للاتجاه فقط</strong>، مع احتمال تأخير التحديث واحتمال انقطاع التبليغ.</li><li>وفي السوق: برنت <strong>108.02 دولارًا</strong> (−1.67%) وغرب تكساس <strong>100.88 دولارًا</strong>، وتأمين مخاطر الحرب عند نحو <strong>30 ضعف</strong> مستواه قبل الأزمة.</li><li>ويبقى أثر الكلفة على جدوى الرحلة، لا على سلامتها وحدها.</li></ul>
+<ul><li><strong><span class="ltr">EST-2026-10-19-01</span></strong> استمرار الاستهداف خارج ممر العبور</li><li><strong><span class="ltr">EST-2026-10-19-02</span></strong> فجوة التبليغ تجعل العدّ حدًّا أدنى</li><li><strong><span class="ltr">EST-2026-10-19-03</span></strong> لغم بحري وراء بعض الإصابات</li><li><strong><span class="ltr">EST-2026-10-19-04</span></strong> لا عودة للعبور قبل تسوية سياسية</li><li><strong><span class="ltr">EST-2026-10-19-05</span></strong> التكدس 124 لا انفراجًا</li><li><strong><span class="ltr">EST-2026-10-19-06</span></strong> ألغام سبب رئيسي (غير مرجّح)</li><li><strong><span class="ltr">EST-2026-10-19-07</span></strong> عودة الاستهداف داخل الممر</li><li><strong><span class="ltr">EST-2026-10-19-08</span></strong> تصاعد خط الاقتراب الشرقي</li><li><strong><span class="ltr">EST-2026-10-19-09</span></strong> نسبة موثقة لجهة منفذة</li></ul><div class="decision"><p class="dc-title">بطاقة التقدير التحليلي</p><div class="dc-grid"><div class="dc-row"><div class="dc-l">الأسلوب التحليلي</div><div class="dc-v">اختبار الافتراضات · مؤشرات التغيّر · تحليل الفرضيات المتنافسة (<span class="ltr">ACH</span> مصغّر) · تقييم دقة تقديرات الأمس · تقييم مخاطر الممرات</div></div><div class="dc-row"><div class="dc-l">العبارة الاحتمالية</div><div class="dc-v">يُرجَّح استمرار الاستهداف المنظم خارج ممر العبور · ويُرجَّح أن يكون العدّ الرسمي دون الواقع · وممكن أن يكون لغم بحري وراء بعض الإصابات · وغير مُرجَّح عودة العبور الطبيعي قبل تسوية سياسية · وغير حاسم في صحة إفادة سلامة العبور وفي مصير البحّارة المحتجزين</div></div><div class="dc-row"><div class="dc-l">درجة الثقة</div><div class="dc-v">عالية في البلاغ الرسمي 177-26 وفي ثبات السجل الرسمي · متوسطة في أرقام الممر والسوق (منصة رصد واحدة) وفي النقل المهني للبحر الأحمر · منخفضة في رواية اللغم الإيرانية وفي الإفادات المنقولة عن سلامة العبور</div></div><div class="dc-row"><div class="dc-l">سند المصدر</div><div class="dc-v"><span class="ltr">UKMTO</span> A/2 — <span class="ltr">IMO</span> A/1 — <span class="ltr">NAVAREA IX</span> A/1 — منصة رصد C/3 — نقل إعلامي مهني B/2 — رواية غير مؤكدة من طرف واحد رسمي D/4 — رسمي منقول C/3</div></div></div></div><h3>الافتراضات المعلنة</h3><p class="blk-lede">كل افتراض معلن، وما ينقضه.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified"><thead><tr><th scope="col">الافتراض</th><th scope="col">ما ينقضه</th></tr></thead><tbody><tr><td data-label="الافتراض">الاستهداف ما زال خارج ممر العبور ولا يعود إلى داخله</td><td data-label="ما ينقضه">بلاغ رسمي بحادثة داخل مسار الفصل الملاحي</td></tr><tr><td data-label="الافتراض">العدّ الرسمي أدنى من الواقع لأن البلاغات متأخرة</td><td data-label="ما ينقضه">إعلان رسمي يوحّد منهجية العدّ أو ينشر نسبة غير المبلَّغ</td></tr><tr><td data-label="الافتراض">رواية اللغم الثالث تبقى بلا إثبات مستقل</td><td data-label="ما ينقضه">إثبات من سلطة ملاحية مستقلة أو جهة تحكيم</td></tr><tr><td data-label="الافتراض">تراجع التكدس إلى 124 سفينة نتيجة مغادرة أو تغيير مواضع</td><td data-label="ما ينقضه">ثبات الرقم على 124 لثلاث فترات مع استمرار الإغلاق</td></tr><tr><td data-label="الافتراض">عرض إعادة الفتح لا يُنفَّذ خلال الفترة القادمة</td><td data-label="ما ينقضه">إعلان رسمي عن بدء عبور منظّم أو رفع القيود</td></tr></tbody></table></div><h3>مؤشرات التحذير المبكر</h3><p class="blk-lede">المؤشر · ما يؤكده · ما ينفيه · الحالة.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified"><thead><tr><th scope="col">المؤشر</th><th scope="col">ما يؤكده</th><th scope="col">ما ينفيه</th><th scope="col">الحالة</th></tr></thead><tbody><tr><td data-label="المؤشر">بلاغ رسمي يسمّي سفينة من رواية اللغم</td><td data-label="ما يؤكده">صحة الرواية الإيرانية</td><td data-label="ما ينفيه">بقاء الرواية بلا إثبات</td><td data-label="الحالة">غائب</td></tr><tr><td data-label="المؤشر">بلاغ رسمي بحادثة داخل ممر العبور</td><td data-label="ما يؤكده">عودة الاستهداف إلى الممر</td><td data-label="ما ينفيه">بقاء الاستهداف خارج الممر</td><td data-label="الحالة">غائب</td></tr><tr><td data-label="المؤشر">إعلان رسمي عن بدء عبور منظّم أو رفع القيود</td><td data-label="ما يؤكده">تنفيذ عرض إعادة الفتح</td><td data-label="ما ينفيه">بقاء العبور عند عبورتين</td><td data-label="الحالة">غائب</td></tr><tr><td data-label="المؤشر">ثبات التكدس عند مستوى منخفض لنافذتين متتاليتين</td><td data-label="ما يؤكده">انفراج تشغيلي جزئي</td><td data-label="ما ينفيه">قراءة التراجع كمغادرة مؤقتة</td><td data-label="الحالة">مرصود جزئيًا</td></tr><tr><td data-label="المؤشر">حادثة قرصنة أو اختطاف جديدة قبالة الصومال</td><td data-label="ما يؤكده">تصاعد المسار الجنوبي</td><td data-label="ما ينفيه">استقرار خليج عدن</td><td data-label="الحالة">غائب في هذه الفترة</td></tr></tbody></table></div><h3>تقييم دقة تقديرات الأمس</h3><p class="blk-lede">التقدير · النتيجة · السبب.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified"><thead><tr><th scope="col">التقدير السابق</th><th scope="col">النتيجة</th><th scope="col">السبب</th></tr></thead><tbody><tr><td data-label="التقدير السابق">استمرار الاستهداف المنظم</td><td data-label="النتيجة">تحقق</td><td data-label="السبب">بلاغ رسمي جديد بتاريخ 18 أكتوبر</td></tr><tr><td data-label="التقدير السابق">انتقال ثقل الاستهداف إلى خط الاقتراب</td><td data-label="النتيجة">تحقق جزئيًا</td><td data-label="السبب">البلاغ على الخط الشرقي لا الجنوبي</td></tr><tr><td data-label="التقدير السابق">لا عودة للعبور الطبيعي</td><td data-label="النتيجة">تحقق</td><td data-label="السبب">العبور بقي عند عبورتين</td></tr><tr><td data-label="التقدير السابق">اللغم ليس السبب الرئيسي</td><td data-label="النتيجة">غير محسوم</td><td data-label="السبب">عادت الرواية بصيغة ثالثة</td></tr><tr><td data-label="التقدير السابق">فجوة التبليغ تجعل العدّ حدًّا أدنى</td><td data-label="النتيجة">غير محسوم</td><td data-label="السبب">لا رقم رسمي للفجوة</td></tr></tbody></table></div></section><section class="doc reveal" id="sec-08" aria-labelledby="h-08"><h2 id="h-08"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 4v9a4 4 0 004 4h5M15 17l-2-2M15 17l-2 2M18 4a2 2 0 11-.001 4.001A2 2 0 0118 4z"/></svg></span>الحركة الملاحية والتكدس</h2><div class="h-rule"></div><p class="sec-lede">حركة المضيق والرسو من مصادر معلنة فقط.</p><ul><li>الحركة في هذه الفترة تُقرأ من مصدرين مختلفَي المنهجية.</li><li>الرصد المستقل يعطي <strong>عبورتين</strong> في 11 أكتوبر مقابل خط أساس 85 يوميًا.</li><li>ويعطي <strong>124 سفينة</strong> واقفة بعيدًا عن المراسي عند <strong><span class="ltr">0022Z</span> من 19 أكتوبر (03:22 بتوقيت البحرين)</strong>، مقابل <strong>172</strong> في الفترة السابقة.</li><li>وتُقرأ هذه الأرقام <strong>للاتجاه فقط</strong>، مع احتمال تأخير التحديث واحتمال انقطاع التبليغ.</li><li>وفي السوق: برنت <strong>108.02 دولارًا</strong> (−1.67%) وغرب تكساس <strong>100.88 دولارًا</strong>، وتأمين مخاطر الحرب عند نحو <strong>30 ضعف</strong> مستواه قبل الأزمة.</li><li>ويبقى أثر الكلفة على جدوى الرحلة، لا على سلامتها وحدها.</li></ul>
 <div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">اليوم</th>
@@ -1076,7 +1236,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <td data-label="النوع">مرجعي</td>
 <td data-label="البيان">تحديث المؤشرات وثبات السجل الرسمي</td>
 </tr>
-</tbody></table></div><div class="viz tl-viz reveal"><h3>الخط الزمني لمضيق هرمز</h3><div class="tl-row"><div class="tl-date bidi">10-13</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:81.8%"></div></div><div class="tl-num bidi">9</div><div class="tl-lbl">غرق سفينة الحاويات · أضرار سفينتين قرب ساحل عُمان</div></div><div class="tl-row"><div class="tl-date bidi">10-14</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:81.8%"></div></div><div class="tl-num bidi">9</div><div class="tl-lbl">تأكيد الغرق وبلاغان رسميان بلا هوية سفينة</div></div><div class="tl-row"><div class="tl-date bidi">10-15</div><div class="tl-track"><div class="tl-fill k-pending" style="--w:9.1%"></div></div><div class="tl-num bidi">1</div><div class="tl-lbl">إعلان عن لغم بحري بلا تأكيد مستقل</div></div><div class="tl-row"><div class="tl-date bidi">10-16</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:100.0%"></div></div><div class="tl-num bidi">11</div><div class="tl-lbl">واقعتا شمال شرق الجبيل · تقييم رسمي · تصعيد البحر الأحمر</div></div><div class="tl-row"><div class="tl-date bidi">10-17</div><div class="tl-track"><div class="tl-fill k-pending" style="--w:36.4%"></div></div><div class="tl-num bidi">4</div><div class="tl-lbl">إطلاق نار على ناقلة الغاز · رواية الناقلتين بالألغام · تحذير الحطام</div></div><div class="tl-row"><div class="tl-date bidi">10-18</div><div class="tl-track"><div class="tl-fill k-pending" style="--w:27.3%"></div></div><div class="tl-num bidi">3</div><div class="tl-lbl">إصابة قُطر بمقذوفين شمال شرق خورفكان · رواية لغم ثالث · عرض إعادة الفتح</div></div><div class="tl-row"><div class="tl-date bidi">10-19</div><div class="tl-track"><div class="tl-fill k-pending" style="--w:9.1%"></div></div><div class="tl-num bidi">1</div><div class="tl-lbl">تحديث المؤشرات وتراجع التكدس إلى 124 سفينة</div></div><p class="src-note">المصدر: دفتر الأحداث التراكمي. الأعداد تعني سجلات مرصودة لا هجمات مؤكدة.</p></div><p class="src-note">قراءة اتجاه من منصة رصد — تُراعى مهلة التحديث واحتمال انقطاع الإرسال أو spoofing.</p></section><section class="doc reveal" id="sec-10" aria-labelledby="h-10"><h2 id="h-10"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h5M15 12h5M12 4v5M12 15v5"/></svg></span>ما لم يُحسم</h2><div class="h-rule"></div><p class="sec-lede">ما يبقى مجهولًا، وما يلزم متابعته في التقرير التالي.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
+</tbody></table></div><div class="viz tl-viz reveal"><h3>الخط الزمني لمضيق هرمز</h3><div class="tl-row"><div class="tl-date bidi">10-13</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:81.8%"></div></div><div class="tl-num bidi">9</div><div class="tl-lbl">غرق سفينة الحاويات · أضرار سفينتين قرب ساحل عُمان</div></div><div class="tl-row"><div class="tl-date bidi">10-14</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:81.8%"></div></div><div class="tl-num bidi">9</div><div class="tl-lbl">تأكيد الغرق وبلاغان رسميان بلا هوية سفينة</div></div><div class="tl-row"><div class="tl-date bidi">10-15</div><div class="tl-track"><div class="tl-fill k-pending" style="--w:9.1%"></div></div><div class="tl-num bidi">1</div><div class="tl-lbl">إعلان عن لغم بحري بلا تأكيد مستقل</div></div><div class="tl-row"><div class="tl-date bidi">10-16</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:100.0%"></div></div><div class="tl-num bidi">11</div><div class="tl-lbl">واقعتا شمال شرق الجبيل · تقييم رسمي · تصعيد البحر الأحمر</div></div><div class="tl-row"><div class="tl-date bidi">10-17</div><div class="tl-track"><div class="tl-fill k-pending" style="--w:36.4%"></div></div><div class="tl-num bidi">4</div><div class="tl-lbl">إطلاق نار على ناقلة الغاز · رواية الناقلتين بالألغام · تحذير الحطام</div></div><div class="tl-row"><div class="tl-date bidi">10-18</div><div class="tl-track"><div class="tl-fill k-pending" style="--w:27.3%"></div></div><div class="tl-num bidi">3</div><div class="tl-lbl">إصابة قُطر بمقذوفين شمال شرق خورفكان · رواية لغم ثالث · عرض إعادة الفتح</div></div><div class="tl-row"><div class="tl-date bidi">10-19</div><div class="tl-track"><div class="tl-fill k-pending" style="--w:9.1%"></div></div><div class="tl-num bidi">1</div><div class="tl-lbl">تحديث المؤشرات وتراجع التكدس إلى 124 سفينة</div></div><p class="src-note">المصدر: دفتر الأحداث التراكمي. الأعداد تعني سجلات مرصودة لا هجمات مؤكدة.</p></div><p class="src-note">قراءة اتجاه من منصة رصد — تُراعى مهلة التحديث واحتمال انقطاع الإرسال أو spoofing.</p></section><section class="doc reveal" id="sec-09" aria-labelledby="h-09"><h2 id="h-09"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h5M15 12h5M12 4v5M12 15v5"/></svg></span>ما لم يُحسم</h2><div class="h-rule"></div><p class="sec-lede">ما يبقى مجهولًا، وما يلزم متابعته في التقرير التالي.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
 <thead><tr>
 <th scope="col">المجهول</th>
 <th scope="col">الجهة القادرة على الحسم</th>
@@ -1122,7 +1282,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <td data-label="الجهة القادرة على الحسم">الأطراف المتفاوضة وإعلان رسمي</td>
 <td data-label="الأثر">يحدد مسار العبور في الأيام القادمة</td>
 </tr>
-</tbody></table></div></section><section class="doc reveal" id="sec-11" aria-labelledby="h-11"><h2 id="h-11"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>الخلفية</h2><div class="h-rule"></div><ul><li>الحرب على الملاحة في مضيق هرمز مستمرة.</li><li>والممر يعمل بأقل من ربع طاقته الطبيعية، ومعه كلفة تأمين تاريخية.</li><li>والاستهداف صار يشمل سفن الخدمة والقُطُر لا الناقلات وحدها.</li><li>وفي الوقت نفسه يجري مسار دبلوماسي معلن لإعادة الفتح.</li><li>وفي البحر الأحمر تخترقه مسارات نادرة لناقلات الغاز مع إطلاق نار مسجّل.</li><li>وفي خليج عدن والمحيط الهندي: قرصنة عند مستوى نشط مع قلق صومالي معلن وتنسيق دولي مضاد.</li><li>ولا توجد نشرة بحرية أمريكية سارية، والنشرة الاستشارية لمركز المعلومات البحرية المشترك هو المرجع الرسمي الساري.</li><li>وملف غرق سفينة الحاويات ما زال مفتوحًا: حطام وبضائع طافية ورواية ألغام متكررة بلا إثبات.</li></ul></section>
+</tbody></table></div></section><section class="doc reveal" id="sec-10" aria-labelledby="h-10"><h2 id="h-10"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>الخلفية</h2><div class="h-rule"></div><ul><li>الحرب على الملاحة في مضيق هرمز مستمرة.</li><li>والممر يعمل بأقل من ربع طاقته الطبيعية، ومعه كلفة تأمين تاريخية.</li><li>والاستهداف صار يشمل سفن الخدمة والقُطُر لا الناقلات وحدها.</li><li>وفي الوقت نفسه يجري مسار دبلوماسي معلن لإعادة الفتح.</li><li>وفي البحر الأحمر تخترقه مسارات نادرة لناقلات الغاز مع إطلاق نار مسجّل.</li><li>وفي خليج عدن والمحيط الهندي: قرصنة عند مستوى نشط مع قلق صومالي معلن وتنسيق دولي مضاد.</li><li>ولا توجد نشرة بحرية أمريكية سارية، والنشرة الاستشارية لمركز المعلومات البحرية المشترك هو المرجع الرسمي الساري.</li><li>وملف غرق سفينة الحاويات ما زال مفتوحًا: حطام وبضائع طافية ورواية ألغام متكررة بلا إثبات.</li></ul></section>
   </main>
 
   <footer class="foot">
@@ -1140,6 +1300,113 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     var on = document.body.classList.toggle('daylight');
     tb.textContent = on ? 'النمط الليلي' : 'النمط النهاري';
   });
+})();
+</script>
+<script>
+(function(){
+  var d = document;
+  // عمر الإصدار: كلمة ولون معًا، ويُحسب عند فتح الصفحة
+  var f = d.querySelector('[data-gen]');
+  if (f) {
+    var s = (f.getAttribute('data-gen') || '').trim();
+    var m = s.match(/^(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2})(?::\d{2})?\s*(?:UTC|Z)?$/);
+    var t = Date.parse(m ? m[1] + 'T' + m[2] + ':00Z' : s);
+    if (isNaN(t)) { f.parentNode.removeChild(f); }
+    else {
+      var h = Math.max(0, (Date.now() - t) / 36e5), cls, word, txt;
+      if (h <= 30) { cls = 'f-ok'; word = 'حديث'; }
+      else if (h <= 54) { cls = 'f-warn'; word = 'متأخر'; }
+      else { cls = 'f-old'; word = 'قديم'; }
+      txt = h < 1 ? 'أقل من ساعة' : (h < 48 ? Math.round(h) + ' ساعة' : Math.round(h / 24) + ' يومًا');
+      f.querySelector('.sc-age').textContent = word + ' · قبل ' + txt;
+      f.className += ' ' + cls; f.hidden = false;
+    }
+  }
+  // الأقسام القابلة للطي: بلا سكربت تبقى كلها مفتوحة
+  var main = d.querySelector('main'); if (!main) return;
+  var secs = [].slice.call(main.querySelectorAll(':scope > section.doc'));
+  // تُفتح الخلاصة والتوجيهات في كل نوع من الصفحات، فإن لم يوجد شيء منها فُتح القسم الأول
+  var openRe = /الخلاصة|التوجيهات التشغيلية|مؤشرات الموقف/;
+  function setState(sec, btn, collapsed) {
+    sec.classList.toggle('sc-collapsed', collapsed);
+    btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+  }
+  // نص العنصر بمسافة بين أجزائه، وما كان رمزًا أو معرّفًا لاتينيًا يُعزل اتجاهيًا فلا ينقلب ترتيبه
+  function flat(el) {
+    var w = d.createTreeWalker(el, NodeFilter.SHOW_TEXT), out = [], n;
+    while ((n = w.nextNode())) {
+      var tx = n.textContent.replace(/\s+/g, ' ').trim(); if (!tx) continue;
+      var iso = n.parentElement && n.parentElement.closest('bdi,.ltr,.bidi,.ev-code');
+      out.push(iso ? '\u2066' + tx + '\u2069' : tx);
+    }
+    return out.join(' ');
+  }
+  // معاينة القسم المطوي: عدّ البنود وأول سطر من نص القسم نفسه، بلا استنتاج
+  function peekOf(sec) {
+    var n = sec.querySelectorAll(':scope > ul > li, :scope > ol > li, :scope > .tbl-wrap tbody tr, :scope > table tbody tr').length;
+    var first = sec.querySelector(':scope > p:not(.sec-lede), :scope > ul > li, :scope > ol > li, :scope > .tbl-wrap tbody tr, :scope > table tbody tr');
+    var t = first ? flat(first) : '';
+    if (!n && !t) return null;
+    var el = d.createElement('div'); el.className = 'sc-peek no-print';
+    if (n > 1) { var b = d.createElement('b'); b.textContent = n === 2 ? 'بندان' : (n <= 10 ? n + ' بنود' : n + ' بندًا'); el.appendChild(b); }
+    if (t) { var sp = d.createElement('span'); sp.textContent = t; el.appendChild(sp); }
+    return el;
+  }
+  var items = [], seen = {};
+  secs.forEach(function (sec) {
+    var h = sec.querySelector('h2'); if (!h) return;
+    var title = h.textContent.trim();
+    var b = d.createElement('button');
+    b.type = 'button'; b.className = 'sc-toggle no-print';
+    b.setAttribute('aria-label', 'طيّ قسم «' + title + '» أو فتحه');
+    if (sec.id) b.setAttribute('aria-controls', sec.id);
+    var pk = peekOf(sec); if (pk) sec.appendChild(pk);
+    sec.appendChild(b);
+    b.addEventListener('click', function () { setState(sec, b, !sec.classList.contains('sc-collapsed')); });
+    h.addEventListener('click', function (e) {
+      if (e.target.closest && e.target.closest('a,button')) return;
+      setState(sec, b, !sec.classList.contains('sc-collapsed'));
+    });
+    setState(sec, b, !openRe.test(title));
+    seen[title] = (seen[title] || 0) + 1;
+    items.push({sec: sec, btn: b, title: title, label: seen[title] > 1 ? title + ' (' + seen[title] + ')' : title});
+  });
+  function openSec(sec) {
+    items.forEach(function (it) { if (it.sec === sec) setState(sec, it.btn, false); });
+  }
+  if (items.length && !items.some(function (it) { return !it.sec.classList.contains('sc-collapsed'); })) {
+    setState(items[0].sec, items[0].btn, false);
+  }
+  if (items.length) {
+    var bar = d.createElement('div'); bar.className = 'sc-toolbar no-print';
+    var nav = d.createElement('nav'); nav.className = 'sc-jump'; nav.setAttribute('aria-label', 'انتقال إلى الأقسام');
+    items.forEach(function (it) {
+      var a = d.createElement('a'); a.href = '#' + it.sec.id; a.textContent = it.label;
+      a.addEventListener('click', function () { openSec(it.sec); });
+      nav.appendChild(a);
+    });
+    var all = d.createElement('div'); all.className = 'sc-all';
+    [['فتح الكل', false], ['طيّ الكل', true]].forEach(function (p) {
+      var b = d.createElement('button'); b.type = 'button'; b.textContent = p[0];
+      b.addEventListener('click', function () { items.forEach(function (it) { setState(it.sec, it.btn, p[1]); }); });
+      all.appendChild(b);
+    });
+    bar.appendChild(nav); bar.appendChild(all);
+    main.parentNode.insertBefore(bar, main);
+  }
+  // روابط «كاملة» في بطاقة القرار
+  [].forEach.call(d.querySelectorAll('[data-goto]'), function (a) {
+    var key = a.getAttribute('data-goto');
+    var hit = items.filter(function (it) { return it.title.indexOf(key) >= 0; })[0];
+    if (!hit) { a.parentNode.removeChild(a); return; }
+    a.href = '#' + hit.sec.id;
+    a.addEventListener('click', function () { openSec(hit.sec); });
+  });
+  // رابط مباشر إلى قسم مطوي: يُفتح
+  if (location.hash) {
+    var tg = d.getElementById(location.hash.slice(1));
+    items.forEach(function (it) { if (it.sec === tg || (tg && it.sec.contains(tg))) openSec(it.sec); });
+  }
 })();
 </script>
 <footer class="sn-foot no-print">
@@ -1166,12 +1433,22 @@ function currentScale(){var s=parseFloat(LS.getItem('mn-scale')||'1');return (s&
 function toggleTheme(){var on=body.classList.toggle('daylight');save('mn-theme',on?'light':'dark');paint();}
 if(reportBtn) reportBtn.addEventListener('click',function(e){e.preventDefault();toggleTheme();});
 if(siteBtn) siteBtn.addEventListener('click',function(e){e.preventDefault();toggleTheme();});
+var printBtn=document.getElementById('sn-print');
+if(printBtn) printBtn.addEventListener('click',function(e){e.preventDefault();window.print();});
 document.querySelectorAll('[data-scale]').forEach(function(b){
   b.addEventListener('click',function(e){e.preventDefault();
     var s=parseFloat(b.getAttribute('data-scale'));save('mn-scale',s);
     body.style.zoom=(s===1?'':s);paint();});
 });
 paint();
+// رابط التخطي: أول عنوان ظاهر في الصفحة (أو المتن)، فلا يمرّ قارئ لوحة المفاتيح على الشريط كله في كل صفحة
+var skip=document.getElementById('sn-skip');
+if(skip){
+  var hs=[].slice.call(document.querySelectorAll('h1')).filter(function(h){return h.offsetParent!==null;});
+  var tg=hs[0]||document.querySelector('main,[role=main]');
+  if(tg){ if(!tg.id) tg.id='sn-main'; tg.setAttribute('tabindex','-1'); skip.setAttribute('href','#'+tg.id); }
+  else { skip.parentNode.removeChild(skip); }
+}
 // تذكّر آخر تقرير فُتح
 var p=location.pathname;
 if(p.indexOf('/reports/')===0){
