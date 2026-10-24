@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة 6b7c2416bec4e080). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة 7505efa5d013aae7). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -78,6 +78,7 @@
 | Q010 | تدقيق المكتبات والمهارات (أسبوعي) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/Q010.log | ف3 — بوابات المكتبات | validators/check_library_use.py، validators/check_libraries_skills.py | stop |
 | Q015 | تدقيق المكتبات اللغوية (أسبوعي) (اختيارية) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/Q015.log | ف1–ف5 — بوابة التحقق | tools/audit_corpus.py | continue |
 | Q020 | قياس دقة التقدير (ربع سنوي) | script |  |  | cmd:bash -lc grep -q 'نسبة التحقق' logs/runbook/{date}/Q020.log | ف4 — التحليل الاستخباري | tools/estimate_accuracy.py | stop |
+| D070 | النسخة الاحتياطية الختامية والتماثل بعد كل خطوات اليوم | script |  |  | cmd:bash -lc grep -q 'النتيجة: مطابق' logs/runbook/{date}/D070.log | س2 — الإغلاق والدفع | tools/github_backup.sh، validators/check_backup_parity.py، tools/github_backup.py، tools/apply_from_github.sh، tools/apply_from_github.py، tools/code_paths.py | stop |
 
 ## أقسام التقرير وارتباطاتها
 
