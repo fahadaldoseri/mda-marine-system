@@ -205,6 +205,7 @@ t "ملف الأسرار: قراءة وقالب وتصنيف" python3 tests/test
 echo "18) مدقّقات الجولة الجديدة (طلب فهد 2026-10-24)"
 t "بوابة الأسرار: الأنواع الثلاثة + إعفاء مكتوب السبب" python3 tests/test_new_validators.py
 t "نطاق التماثل وأسبابه وأرضيته" python3 tests/test_parity_scope.py
+t "منع التركيب المعلّق (ك-173)" python3 tests/test_hanging_opener.py
 
 echo "----- الحصيلة -----"
 printf '  نجح: %s · فشل: %s\n' "$PASS" "$FAIL"
