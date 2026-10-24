@@ -24,11 +24,19 @@ mkdir -p "$B/logs"
   fi
   # 2) بناء الشجرة: بيانات فقط (الشيفرة تبقى كما في GitHub)
   python3 "$B/tools/github_backup.py" || { echo "فشل بناء الشجرة"; exit 1; }
+  # 2.5) بوابة الأسرار (ك-162 — طلب فهد 2026-10-24): لا سرّ في الشجرة ولا في الالتزام القادم.
+  # سببها: رمز بوت تلغرام دخل brain/secrets/secrets.env في تاريخ المستودع. لا يتكرر.
+  python3 "$B/validators/check_secrets.py" --root "$REPO" || { echo "✘ بوابة الأسرار: مُنع النسخ الاحتياطي والدفع"; exit 70; }
+  # 2.6) فحص مكمّل (البند 6): لا ملف شيفرة على الخادم خارج المستودع — منع.
+  python3 "$B/validators/check_server_code_tracking.py" --root "$B" --repo "$REPO" || { echo "✘ ملفات شيفرة غير متتبَّعة على الخادم: مُنع النسخ الاحتياطي والدفع"; exit 70; }
   git add -A
   if git diff --cached --quiet; then
     echo "لا تغيير منذ آخر نسخة"
   else
-    git commit -q -m "نسخة احتياطية $(date -u +%F) — تحديث البيانات"
+    # هوية خادم منفصلة + سطر تفويض صريح (طلب فهد 2026-10-24، البند 19).
+    git -c user.name="MDA Backup" -c user.email="mda-backup@localhost" commit -q \
+      -m "نسخة احتياطية $(date -u +%F) — تحديث البيانات" \
+      -m "هوية الخادم: MDA Backup · دُمج بتفويض فهد الدوسري (تفويض 2026-10-24)."
     if ! git push -q origin main 2>/dev/null; then   # تقدّم origin بين الجلب والدفع (دمج PR مثلًا): إعادة تأسيس ثم دفع
       git pull -q --rebase origin main && git push -q origin main
     fi && echo "تم الدفع: $(git rev-parse --short HEAD)" || echo "✘ فشل الدفع"

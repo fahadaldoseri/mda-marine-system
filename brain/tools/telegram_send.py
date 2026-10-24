@@ -223,6 +223,31 @@ def main() -> int:
         print("فشل: متغير TELEGRAM_BOT_TOKEN غير متاح (فعّل موصل Telegram Bot API أو ضع الرمز في brain/.env)")
         return 2
 
+    # ── حاجز الإرسال (طلب فهد 2026-10-24، البند 15) ─────────────────────────
+    # سبب وجوده: أُرسلت رسالة بالخطأ (رقم 36) لتاريخ 2026-10-25 من تشغيل اختباري.
+    # القاعدة: لا إرسال بلا تفويض، ولا بتاريخ ليس تاريخ اليوم، ولا مع مفتاح إيقاف.
+    import time as _time
+    today = _time.strftime("%Y-%m-%d", _time.gmtime())
+    if not args.dry_run and not getattr(args, "validate_only", False):
+        if os.environ.get("TELEGRAM_DISABLED") == "1":
+            _log({"decision": "refused", "date": args.date, "reason": "TELEGRAM_DISABLED=1 (مفتاح إيقاف)"})
+            print("[تلغرام] مرفوض — مفتاح الإيقاف TELEGRAM_DISABLED=1 مفعّل")
+            return 3
+        if not (args.daily_report or args.owner_approved):
+            _log({"decision": "refused", "date": args.date,
+                  "reason": "إرسال يدوي بلا تفويض (يلزم --daily-report أو --owner-approved)"})
+            print("[تلغرام] مرفوض — إرسال يدوي بلا تفويض")
+            return 3
+        if args.daily_report and args.date and args.date != today and not args.owner_approved:
+            _log({"decision": "refused", "date": args.date,
+                  "reason": f"تاريخ التقرير {args.date} ليس تاريخ اليوم {today}"})
+            print(f"[تلغرام] مرفوض — تاريخ {args.date} ليس تاريخ اليوم {today}")
+            return 3
+        if args.owner_approved and not args.reason.strip():
+            _log({"decision": "refused", "date": args.date, "reason": "استثناء بلا سبب مكتوب"})
+            print("[تلغرام] مرفوض — --owner-approved يتطلب --reason")
+            return 3
+
     if args.file:
         text = Path(args.file).read_text(encoding="utf-8")
     elif args.text:
@@ -257,6 +282,18 @@ def main() -> int:
         return 0
 
     failures = 0
+    # أرشفة نص الملخص قبل الإرسال (البند 13): لا يُحذف النص المرسل مع الملف المؤقت.
+    if args.file:
+        try:
+            import shutil
+            arch = Path(__file__).resolve().parent.parent / "logs" / "telegram-archive"
+            arch.mkdir(parents=True, exist_ok=True)
+            stamp = _time.strftime("%Y-%m-%dT%H%M%SZ", _time.gmtime())
+            dst = arch / f"{(args.date or 'undated')}-{stamp}.html"
+            shutil.copyfile(args.file, dst)
+            print(f"[تلغرام] أُرشف نص الملخص: {dst}")
+        except Exception as exc:  # noqa: BLE001
+            print(f"[تلغرام] ⚠ تعذّرت أرشفة نص الملخص: {exc}")
     for t in targets:
         log: list[str] = []
         cid = str(t["chat_id"])

@@ -67,26 +67,33 @@ def main():
     outdir = ROOT / 'archive' / 'source-text' / a.date
     outdir.mkdir(parents=True, exist_ok=True)
     found = 0
+    written = 0
     for e in events:
         code = e.get('code', 'MN-?')
         if e.get('source_excerpt'):
             found += 1
-            continue
-        seg, src = excerpt_for(e.get('title', ''), corpus)
-        if seg:
-            e['source_excerpt'] = seg
-            e['source_excerpt_from'] = src
-            found += 1
         else:
-            e['source_excerpt'] = 'لم يُعثر على نص مطابق في الأصول المحفوظة'
-            e['source_excerpt_from'] = ''
+            seg, src = excerpt_for(e.get('title', ''), corpus)
+            if seg:
+                e['source_excerpt'] = seg
+                e['source_excerpt_from'] = src
+                found += 1
+            else:
+                e['source_excerpt'] = 'لم يُعثر على نص مطابق في الأصول المحفوظة'
+                e['source_excerpt_from'] = ''
+        # ك-163 (طلب فهد 2026-10-24، البند 10): كان الخلل أن الوقائع ذات المقتطف
+        # المحفوظ تُتخطّى بـcontinue، فيبقى مجلد أرشيف النص فارغًا مع رسالة نجاح.
+        # الآن يُكتب ملف أصل لكل واقعة في كل تشغيل.
         (outdir / f'{code}.txt').write_text(
             f'الرمز: {code}\nالتاريخ: {e.get("date")}\nالعنوان: {e.get("title")}\n'
             f'المصدر: {e.get("source")}\nأصل النص من: {e.get("source_excerpt_from") or "—"}\n\n'
             + e['source_excerpt'] + '\n', encoding='utf-8')
+        written += 1
     led.write_text(json.dumps(events, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
-    print(f'  ✔ أصل نص لكل واقعة: {found}/{len(events)} · الملفات: {outdir}')
-    missing = [e['code'] for e in events if not e.get('source_excerpt_from')]
+    print(f'  ✔ أصل نص لكل واقعة: {found}/{len(events)} · ملفات أُصلحت: {written} في {outdir}')
+    origins = sorted({e.get('source_excerpt_from') or '—' for e in events})
+    print('  • أصول النصوص المستعملة: ' + ' · '.join(o[:60] for o in origins))
+    missing = [e.get('code') for e in events if not e.get('source_excerpt_from')]
     if missing:
         print('  • بلا نص مطابق: ' + ' · '.join(missing[:8]))
     return 0

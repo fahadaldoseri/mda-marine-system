@@ -208,6 +208,21 @@ def run(root, date, only_phase=None):
             print(f"✘ لا يجوز تنفيذ {s['id']} قبل اكتمال {blocker}")
             return 2
         print(f"▶ {s['id']} — {s['title']}  [{s['kind']}]")
+        # وضع الاختبار المعزول (طلب فهد 2026-10-24، البند 9): خطوات النشر والإرسال
+        # تُسجَّل فقط ولا تُنفَّذ — لا نشر ولا تلغرام في أي اختبار.
+        dry_ids = {x.strip() for x in os.environ.get("RUNBOOK_DRY_STEPS", "").split(",") if x.strip()}
+        if s["id"] in dry_ids:
+            logdir = os.path.join(root, "logs/runbook", date)
+            os.makedirs(logdir, exist_ok=True)
+            logf = os.path.join(logdir, f"{s['id']}.log")
+            open(logf, "w", encoding="utf-8").write(
+                "سُجّل فقط — لم يُنفَّذ (RUNBOOK_DRY_STEPS: وضع معزول)\n"
+                "الأمر المعتاد: " + " ".join(str(sub(c, date, root)) for c in s.get("command", [])) + "\n")
+            append(root, m, date, {"step": s["id"], "status": "done", "dry": True,
+                                   "log": os.path.relpath(logf, root)})
+            print("  ⏸ سُجّل فقط (وضع معزول) — لم يُنفَّذ")
+            ledger = read_ledger(root, m, date)
+            continue
         if s["kind"] == "agent":
             try:
                 prompt = render_prompt(root, s["prompt"], date)
@@ -228,7 +243,14 @@ def run(root, date, only_phase=None):
             logdir = os.path.join(root, "logs/runbook", date)
             os.makedirs(logdir, exist_ok=True)
             logf = os.path.join(logdir, f"{s['id']}.log")
-            open(logf, "w", encoding="utf-8").write((r.stdout or "") + (r.stderr or ""))
+            # ك-162 (طلب فهد 2026-10-24): لا يُكتب سرّ في أي سجل خطوة.
+            # المخرج يمرّ على مرشّح الإخفاء tools/redact.py قبل الكتابة.
+            try:
+                from redact import redact  # type: ignore
+            except Exception:  # noqa: BLE001
+                def redact(text: str) -> str:  # احتياط: لا إخفاء إن غاب المرشّح
+                    return text
+            open(logf, "w", encoding="utf-8").write(redact((r.stdout or "") + (r.stderr or "")))
             ok_rc, warn_rc = s.get("ok_rc", [0]), s.get("warn_rc", [])
             probs = check_asserts(root, s, date) if (r.returncode in ok_rc or r.returncode in warn_rc) else [f"رمز الخروج {r.returncode}"]
             if not probs:
