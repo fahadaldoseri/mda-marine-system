@@ -3418,6 +3418,43 @@
       "warn_rc": []
     },
     {
+      "id": "D071",
+      "title": "تتبّع ملفات الشيفرة على الخادم",
+      "kind": "script",
+      "command": [
+        "bash",
+        "-lc",
+        "B=\"$PWD\"; export B; python3 \"$B/validators/check_server_code_tracking.py\""
+      ],
+      "why": "ك-172/ك-175: كل ملف شيفرة على الخادم يجب أن يكون متتبَّعًا في المستودع قبل أي نسخ احتياطي أو دفع.",
+      "phase": "deliver",
+      "assert": [
+        {
+          "type": "cmd",
+          "command": [
+            "bash",
+            "-lc",
+            "grep -q '✔ كل ملفات الشيفرة' logs/runbook/{date}/D071.log"
+          ]
+        }
+      ],
+      "links": {
+        "rules": [
+          "س2 — الإغلاق والدفع"
+        ],
+        "files": [
+          "validators/check_secrets.py",
+          "tools/redact.py",
+          "tools/github_backup.sh"
+        ]
+      },
+      "on_fail": "stop",
+      "ok_rc": [
+        0
+      ],
+      "warn_rc": []
+    },
+    {
       "id": "Q010",
       "title": "تدقيق المكتبات والمهارات (أسبوعي)",
       "kind": "script",
@@ -3575,43 +3612,6 @@
         "-lc",
         "B=\"$PWD\"; export B SITE; bash tools/github_backup.sh && python3 validators/check_backup_parity.py --mode strict; rc=$?; exit $rc"
       ],
-      "ok_rc": [
-        0
-      ],
-      "warn_rc": []
-    },
-    {
-      "id": "D071",
-      "title": "تتبّع ملفات الشيفرة على الخادم",
-      "kind": "script",
-      "command": [
-        "bash",
-        "-lc",
-        "B=\"$PWD\"; export B; python3 \"$B/validators/check_server_code_tracking.py\""
-      ],
-      "why": "ك-172/ك-175: كل ملف شيفرة على الخادم يجب أن يكون متتبَّعًا في المستودع قبل أي نسخ احتياطي أو دفع.",
-      "phase": "deliver",
-      "assert": [
-        {
-          "type": "cmd",
-          "command": [
-            "bash",
-            "-lc",
-            "grep -q '✔ كل ملفات الشيفرة' logs/runbook/{date}/D071.log"
-          ]
-        }
-      ],
-      "links": {
-        "rules": [
-          "س2 — الإغلاق والدفع"
-        ],
-        "files": [
-          "validators/check_secrets.py",
-          "tools/redact.py",
-          "tools/github_backup.sh"
-        ]
-      },
-      "on_fail": "stop",
       "ok_rc": [
         0
       ],

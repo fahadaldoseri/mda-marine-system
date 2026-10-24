@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة de91a31b6c535841). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة 95435d4c1ab43c47). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -79,11 +79,11 @@
 | D045 | فهرس التقارير (المستودع مقابل الأرشيف الخاص) (اختيارية) | script |  |  | cmd:bash -lc grep -q '{date}' docs/reports-index.md | س2 — الإغلاق والدفع | tools/reports_index.py، appendices/reports-archive.json | continue |
 | D050 | التعلم الذاتي وتسجيل الدروس | script |  |  | file_exists:memory/learning-log.jsonl | س2 — الإغلاق والدفع | tools/self_improve.py، tools/skill_lessons.py، tools/self_test.py | stop |
 | D060 | تسجيل رموز التقدير والأحداث | script |  |  | cmd:bash -lc grep -q 'رمز تقدير مسجّل' logs/runbook/{date}/D060.log | ب2 — ترتيب الأقسام | tools/register_estimate.py | stop |
+| D071 | تتبّع ملفات الشيفرة على الخادم | script |  |  | cmd:bash -lc grep -q '✔ كل ملفات الشيفرة' logs/runbook/{date}/D071.log | س2 — الإغلاق والدفع | validators/check_secrets.py، tools/redact.py، tools/github_backup.sh | stop |
 | Q010 | تدقيق المكتبات والمهارات (أسبوعي) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/Q010.log | ف3 — بوابات المكتبات | validators/check_library_use.py، validators/check_libraries_skills.py | stop |
 | Q015 | تدقيق المكتبات اللغوية (أسبوعي) (اختيارية) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/Q015.log | ف1–ف5 — بوابة التحقق | tools/audit_corpus.py | continue |
 | Q020 | قياس دقة التقدير (ربع سنوي) | script |  |  | cmd:bash -lc grep -q 'نسبة التحقق' logs/runbook/{date}/Q020.log | ف4 — التحليل الاستخباري | tools/estimate_accuracy.py | stop |
 | D070 | النسخة الاحتياطية الختامية والتماثل بعد كل خطوات اليوم | script |  |  | cmd:bash -lc grep -q 'النتيجة: مطابق' logs/runbook/{date}/D070.log | س2 — الإغلاق والدفع | tools/github_backup.sh، validators/check_backup_parity.py، tools/github_backup.py، tools/apply_from_github.sh، tools/apply_from_github.py، tools/code_paths.py | stop |
-| D071 | تتبّع ملفات الشيفرة على الخادم | script |  |  | cmd:bash -lc grep -q '✔ كل ملفات الشيفرة' logs/runbook/{date}/D071.log | س2 — الإغلاق والدفع | validators/check_secrets.py، tools/redact.py، tools/github_backup.sh | stop |
 
 ## أقسام التقرير وارتباطاتها
 
