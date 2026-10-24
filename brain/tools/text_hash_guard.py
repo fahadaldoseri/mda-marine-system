@@ -21,11 +21,11 @@ from pathlib import Path
 
 B = Path(__file__).resolve().parent.parent
 def _pick_site() -> Path:
-    """ك-174/ك-175: اختيار مسار الموقع من أول مرشّح يحمل dist/reports فعليًا."""
+    """ك-175: جذر الموقع (بلا dist) من أول مرشّح يحمل dist/reports فعليًا."""
     for c in (os.environ.get("SITE_DIR"), os.environ.get("SITE"), str(B.parent / "seawatch")):
         if c and (Path(c) / "dist" / "reports").is_dir():
-            return Path(c) / "dist"
-    return B.parent / "seawatch" / "dist"
+            return Path(c)
+    return B.parent / "seawatch"
 
 
 SITE = _pick_site()
