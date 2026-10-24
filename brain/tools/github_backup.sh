@@ -29,6 +29,13 @@ mkdir -p "$B/logs"
   python3 "$B/validators/check_secrets.py" --root "$REPO" || { echo "✘ بوابة الأسرار: مُنع النسخ الاحتياطي والدفع"; exit 70; }
   # 2.6) فحص مكمّل (البند 6): لا ملف شيفرة على الخادم خارج المستودع — منع.
   python3 "$B/validators/check_server_code_tracking.py" --root "$B" --repo "$REPO" || { echo "✘ ملفات شيفرة غير متتبَّعة على الخادم: مُنع النسخ الاحتياطي والدفع"; exit 70; }
+  # 2.7) حماية ملف الأسرار المعتمد: لا يُحذف ولا يُفرَّغ بالنسخ الاحتياطي (ك-168 — حذفه الالتزام eac53cd).
+  PROT="$REPO/brain/secrets/secrets.env"
+  if [ ! -s "$PROT" ]; then
+    if git -C "$REPO" show HEAD:brain/secrets/secrets.env > "$PROT" 2>/dev/null; then
+      echo "  ↺ أُعيد ملف الأسرار المعتمد من المستودع (لا يُحذف بالنسخ)"
+    fi
+  fi
   git add -A
   if git diff --cached --quiet; then
     echo "لا تغيير منذ آخر نسخة"
