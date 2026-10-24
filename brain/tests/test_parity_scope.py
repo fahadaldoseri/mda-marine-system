@@ -40,8 +40,13 @@ def main() -> int:
         return 1
     print(f"  ✔ كل مجموعات الاستثناء لها سبب مكتوب: {len(declared)}")
 
-    out = subprocess.run([sys.executable, str(V), "--mode", "strict"],
-                         capture_output=True, text=True, timeout=600).stdout
+    r = subprocess.run([sys.executable, str(V), "--mode", "strict"],
+                       capture_output=True, text=True, timeout=600)
+    out = r.stdout
+    if r.returncode == 3:
+        # بيئة بلا مستودع نسخ (مثل النسخة المعزولة): لا نطاق للمقارنة — ليس تضييقًا
+        print("  · لا مستودع نسخ احتياطي في هذه البيئة — يُتخطّى فحص النطاق")
+        return 0
     m = re.search(r"الشجرة المحلية:\s*(\d+)", out)
     if not m:
         print("  ✘ لم يطبع الفاحص عدد ملفات النطاق")
