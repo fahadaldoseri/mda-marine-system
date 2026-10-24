@@ -40,6 +40,11 @@ def main() -> int:
         return 1
     print(f"  ✔ كل مجموعات الاستثناء لها سبب مكتوب: {len(declared)}")
 
+    repo = Path(__import__("os").environ.get("BACKUP_REPO_DIR") or V.resolve().parents[1].parent / "mda-marine-system")
+    if not (repo / "brain" / "validators").is_dir():
+        # مستودع وهمي أو غائب (بيئة معزولة/اختبار): لا نطاق حقيقي للمقارنة
+        print("  · لا مستودع مرآة صالح في هذه البيئة — يُتخطّى فحص النطاق")
+        return 0
     r = subprocess.run([sys.executable, str(V), "--mode", "strict"],
                        capture_output=True, text=True, timeout=600)
     out = r.stdout
