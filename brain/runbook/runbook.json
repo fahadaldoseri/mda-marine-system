@@ -3114,6 +3114,111 @@
    "warn_rc": []
   },
   {
+   "id": "D032",
+   "title": "أرشفة نص ملخص تلغرام المرسل",
+   "kind": "script",
+   "phase": "deliver",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -d logs/telegram-archive"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "س4 — قناة التسليم"
+    ],
+    "files": [
+     "tools/archive_tg_digest.py",
+     "tools/telegram_send.py"
+    ]
+   },
+   "on_fail": "continue",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; export B; python3 tools/archive_tg_digest.py --date {date}; rc=$?; [ $rc -eq 3 ] && exit 1; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ]
+  },
+  {
+   "id": "D033",
+   "title": "تنبيه وصول التقرير على تلغرام",
+   "kind": "script",
+   "phase": "deliver",
+   "assert": [
+    {
+     "type": "file_exists",
+     "path": "logs/telegram-delivery-{date}.json"
+    }
+   ],
+   "links": {
+    "rules": [
+     "س4 — قناة التسليم"
+    ],
+    "files": [
+     "validators/check_telegram_delivery.py"
+    ]
+   },
+   "on_fail": "continue",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; export B; python3 validators/check_telegram_delivery.py --date {date}; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ]
+  },
+  {
+   "id": "D035",
+   "title": "بوابة الأسرار قبل النسخ الاحتياطي والدفع",
+   "kind": "script",
+   "phase": "deliver",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "grep -q 'بوابة الأسرار: لا سرّ' logs/runbook/{date}/D035.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "س2 — الإغلاق والدفع"
+    ],
+    "files": [
+     "validators/check_secrets.py",
+     "tools/redact.py",
+     "tools/github_backup.sh"
+    ]
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; export B; python3 validators/check_secrets.py --root \"$B\" && python3 validators/check_secrets.py --root \"$(dirname \"$B\")/mda-marine-system\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  },
+  {
    "id": "D040",
    "title": "النسخة الاحتياطية والتحقق من التماثل",
    "kind": "script",

@@ -60,6 +60,10 @@ echo "السلّم: 0 نجاح · 1 تحذير · 2 مانع" | tee -a "$REP"
 # طلب التدقيق المستقل 2026-10-23 (البندان ح-1 وح-2): لا إصلاح بلا اختبار دائم.
 step_strict "اختبارات البوابات (tests)" bash "$B/tests/run_checks.sh"
 
+# بوابة الأسرار (ك-162 — طلب فهد 2026-10-24): أي سرّ في الشجرة = منع التسليم.
+# سببها: رمز بوت تلغرام وُجد في brain/secrets/secrets.env في تاريخ المستودع.
+step_strict "بوابة الأسرار (لا سرّ في الشجرة)" python3 "$B/validators/check_secrets.py" --root "$B"
+
 if [ ! -f "$B/reports/$D-sectioned.md" ] || [ ! -f "$B/web/meta/$D.json" ]; then
   echo "  ✘ ناقص: reports/$D-sectioned.md أو web/meta/$D.json — لا تسليم بلا نص وواجهة." | tee -a "$REP"
   WORST=2
