@@ -28,6 +28,13 @@ ALLOWLIST = {
     "tests/fixtures/dummy-secrets.txt",
 }
 
+# إعفاء واحد مكتوب السبب (قرار المالك 2026-10-24: «تُحفظ الأسرار نصًّا صريحًا في المستودع الخاص»
+# و«الأسرار الأخرى في secrets.env تبقى كما هي») — موثَّق في ك-166 وك-168.
+# الإعفاء لهذا المسار وحده؛ أي سرّ في أي ملف آخر يبقى مانعًا، ويُثبته اختبار في tests/run_checks.sh.
+OWNER_APPROVED = {
+    "secrets/secrets.env": "قرار المالك 2026-10-24: حفظ الأسرار نصًّا في المستودع الخاص — مخاطرة مقبولة موثَّقة",
+}
+
 PATTERNS = {
     "رمز بوت تلغرام": r"\b\d{8,12}:[A-Za-z0-9_-]{30,}\b",
     "مفتاح OpenAI": r"\bsk-(?:proj-)?[A-Za-z0-9]{32,}\b",
@@ -36,6 +43,7 @@ PATTERNS = {
     "مفتاح AWS": r"\bAKIA[0-9A-Z]{16}\b",
     "مفتاح Google": r"\bAIza[0-9A-Za-z_\-]{30,}\b",
     "تعيين سرّي بقيمة": r"(?i)\b(TOKEN|API_KEY|APIKEY|SECRET|PASSWORD|BOT_TOKEN)\b\s*[=:]\s*[\"']?([A-Za-z0-9_\-]{24,})",
+    "معرّف محادثة تلغرام": r"(?i)\b(?:TELEGRAM_)?(?:OWNER_)?CHAT_ID\b\s*[=:]\s*[\"']?-?\d{6,}",
 }
 
 TEXT_SUFFIXES = {".py", ".sh", ".md", ".json", ".jsonl", ".txt", ".html", ".css", ".js",
@@ -86,7 +94,7 @@ def main() -> int:
     if args.root:
         ROOT = Path(args.root).resolve()
     env_vals = env_secret_values()
-    allow = set(ALLOWLIST) | set(args.allow)
+    allow = set(ALLOWLIST) | set(OWNER_APPROVED) | set(args.allow)
     hits: list[tuple[str, str]] = []
 
     if args.staged:
