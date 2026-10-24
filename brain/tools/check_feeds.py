@@ -226,6 +226,8 @@ def _blocked_reason(text):
         'access denied': 'blocked page: Access Denied',
         'just a moment': 'blocked page: Just a moment',
         'error 403': 'proxy reported HTTP 403',
+        'human verification': 'human verification page',
+        'are you a human': 'human verification page',
     }
     for marker, reason in markers.items():
         if marker in sample:
@@ -310,6 +312,20 @@ def fetch(f):
             }
         except Exception as error:
             message = _error_text(error)
+            # ك-XX: رفض الخادم (401/403/405/429) أو صفحة تحقق بشري = «حجب مصدر» لا عطل مجهول.
+            # سياسة المالك تمنع تجاوز الحجب، فيُسجَّل العطل بلفظ الحجب ليُصنَّف عطلًا معروفًا.
+            code = getattr(error, "code", None)
+            body_text = ""
+            if code in (401, 403, 405, 429):
+                try:
+                    body_text = error.read().decode("utf-8", "replace")[:4000]
+                except Exception:
+                    body_text = ""
+            blocked = _blocked_reason(body_text) if body_text else ""
+            if blocked:
+                message = f"حجب مصدر — {blocked} (HTTP {code})"
+            elif code in (401, 403, 405, 429):
+                message = f"حجب مصدر — رفض الخادم الطلب (HTTP {code})"
             attempts.append({
                 'url': route['url'], 'via': route['via'], 'ok': False,
                 'error': message, 'tls_verification': tls_verification,
@@ -400,6 +416,10 @@ def main():
     # البند هـ: مصدر نجح على مسار وفشل على آخر كان يُحسب ناجحًا ومتعذّرًا معًا. فالعدّ بالمجموعات:
     # مفحوصة = المصادر التي جُربت · ناجحة = ما نجح على مسار واحد على الأقل · متعذّرة = الباقي.
     attempted, ok_nums, failed_nums = count_sources(res, BROWSER_ONLY)
+    # ك-XX: «failed_feeds» كانت تحمل مسارات فاشلة لمصادر نجحت على مسار آخر، فيظهر
+    # مصدر ناجح في قائمة المتعذّرين ويخالف العدّاد. الصحيح: المتعذّر = مصدر فشلت كل مساراته.
+    failed_attempts = [r for r in res if not r['ok']]
+    failed = [r for r in res if not r['ok'] and r['num'] in failed_nums]
     n_src = len(attempted)
     n_ok = len(ok_nums)
     n_fail = len(failed_nums)
@@ -462,6 +482,10 @@ def main():
             'num': r['num'], 'name': r['name'], 'primary_url': r['url'],
             'error': r['error'], 'block_reason': r['block_reason'], 'attempts': r['attempts'],
         } for r in failed],
+        'failed_attempts': [{
+            'num': r['num'], 'name': r['name'], 'via': None,
+            'error': r['error'], 'block_reason': r['block_reason'],
+        } for r in failed_attempts],
         'written_utc': dt.datetime.now(dt.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
     }, ensure_ascii=False, indent=1)), encoding='utf-8')
     print(f"  ✔ حُفظ: feeds-{stamp}.json / .md / .status.json — الحالة: {status}")

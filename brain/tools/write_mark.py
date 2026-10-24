@@ -31,6 +31,12 @@ def main() -> int:
     ap.add_argument("--stage", default="final", choices=["pipeline", "final"])
     a = ap.parse_args()
 
+    # ع-1 (24 أكتوبر 2026): لا علامة نهائية قبل تشغيل بوابة التسليم — فشل مغلق برمز 70
+    gate_p = B / "logs" / f"gate-{a.date}" / "gate.json"
+    if a.stage == "final" and not gate_p.exists():
+        print(f"  ✘ رفض كتابة علامة نهائية: بوابة التسليم لم تُشغَّل بعد ({gate_p.relative_to(B)} مفقود)")
+        return 70
+
     p = B / "logs" / f"pipeline-{a.date}.json"
     mark = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
 
@@ -49,19 +55,23 @@ def main() -> int:
                                                   and mp.exists() and mp.stat().st_size > 200)
 
     # 3) نتيجة البوابة من ملفها الرسمي
-    gp = B / "logs" / f"gate-{a.date}" / "gate.json"
+    gp = gate_p
     if gp.exists():
         g = json.loads(gp.read_text(encoding="utf-8"))
-        mark["final_gate"] = {"status": g.get("status"), "exit_code": int(g.get("exit_code") or 0),
-                              "dir": g.get("dir") or f"logs/gate-{a.date}",
+        st, ec = g.get("status"), g.get("exit_code")
+        if st not in ("ok", "warn", "block") or not isinstance(ec, int):
+            print(f"  ✘ رفض: نتيجة بوابة غير مطابقة للمخطط (status={st!r} · exit_code={ec!r})")
+            return 70
+        mark["final_gate"] = {"status": st, "exit_code": ec, "dir": f"logs/gate-{a.date}",
                               "blocked_steps": g.get("blocked_steps") or [],
                               "note": "نتيجة بوابة التسليم النهائية — كُتبت العلامة بعدها."}
         mark["gate_finished_utc"] = g.get("finished_utc") or now()
     else:
-        mark.setdefault("final_gate", {"status": "warn", "exit_code": 1,
-                                       "dir": f"logs/gate-{a.date}",
-                                       "note": "لا ملف بوابة بعد — علامة مرحلة الخط اليومي."})
-        mark.setdefault("gate_finished_utc", "")
+        # مرحلة الخط اليومي: لا حقل final_gate إطلاقًا (كان يُكتب سابقًا status=pending وهو مخالف للمخطط)
+        mark.pop("final_gate", None)
+        mark["gate_state"] = "not_run"
+        mark["gate_note"] = "علامة مرحلة الخط اليومي — بوابة التسليم لم تُشغَّل بعد."
+        mark["gate_finished_utc"] = ""
 
     # 4) حقول اللغة (أمر 23 أكتوبر 2026): تُقرأ من ملفات القياس لا من الذاكرة
     def _read(name: str):
@@ -99,9 +109,10 @@ def main() -> int:
 
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(mark, ensure_ascii=False, indent=2, sort_keys=True), encoding="utf-8")
+    gate_txt = (mark.get("final_gate") or {}).get("status") or mark.get("gate_state") or "—"
     print(f"  ✔ العلامة ({a.stage}): {p} · المخطط v{SCHEMA_VERSION} · "
           f"نص التقرير موجود: {mark['report_present_at_pipeline_end']} · "
-          f"المصادر: {c['approved']}/{c['checked']}/{c['ok']} · البوابة: {mark['final_gate'].get('status')}")
+          f"المصادر: {c['approved']}/{c['checked']}/{c['ok']} · البوابة: {gate_txt}")
     return 0
 
 

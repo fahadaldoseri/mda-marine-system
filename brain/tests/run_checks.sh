@@ -127,15 +127,22 @@ printf '## ما لم يُحسم\n- اختبار\n' > "reports/$FD-sectioned.md"
 python3 validators/check_run_completeness.py --date "$FD" >/dev/null 2>&1
 check "$?" "2" "عطل غير معروف في القائمة يمنع التسليم"
 printf '{"date":"%s","overall":"degraded","feeds":{"status":"degraded","failed_feeds":[{"name":"وام","block_reason":"403 حجب"}]}}\n' "$FD" > "logs/pipeline-$FD.json"
-printf '## ما لم يُحسم\n- المصادر: 62 معتمدة · 35 مفحوصة في هذا التشغيل · 33 ناجحة.\n- تشغيل منقوص مُفصح: التغذيات: حجب مصدر رسمي يمنع الجلب الآلي.\n' > "reports/$FD-sectioned.md"
+printf '{"date":"%s","status":"degraded","checked":35,"ok":34,"failed":1,"failed_feeds":[{"num":37,"name":"وام","error":"حجب مصدر — رفض الخادم الطلب (HTTP 403)","block_reason":"all routes failed: primary: حجب مصدر (HTTP 403)"}]}\n' "$FD" > "feeds/feeds-$FD.status.json"
+printf '## ما لم يُحسم\n- المصادر: 62 معتمدة · 35 مفحوصة في هذا التشغيل · 33 ناجحة · تعذّر 1: وام — حجب المصدر · مرجع العطل ك-63.\n- تشغيل منقوص مُفصح: التغذيات: حجب مصدر رسمي يمنع الجلب الآلي.\n' > "reports/$FD-sectioned.md"
 python3 validators/check_run_completeness.py --date "$FD" >/dev/null 2>&1
 check "$?" "1" "عطل معروف مُفصح عنه يمرّ بتحذير لا بمنع"
+rm -f "feeds/feeds-$FD.status.json"
 rm -f "logs/pipeline-$FD.json" "reports/$FD-sectioned.md"
 
 echo "8) مخطط العلامة الثابت وكاتب العلامة"
 if [ -f "logs/pipeline-${D}.json" ]; then
-  python3 tools/write_mark.py --date "$D" --stage final >"$TMP/wm.txt" 2>&1
-  check "$?" "0" "كتابة العلامة بعد البوابة"
+  if [ -f "logs/gate-${D}/gate.json" ]; then
+    python3 tools/write_mark.py --date "$D" --stage final >"$TMP/wm.txt" 2>&1
+    check "$?" "0" "كتابة العلامة بعد البوابة"
+  else
+    python3 tools/write_mark.py --date "$D" --stage final >"$TMP/wm.txt" 2>&1
+    check "$?" "70" "رفض كتابة علامة نهائية قبل تشغيل بوابة التسليم"
+  fi
   python3 validators/check_mark_schema.py --date "$D" >"$TMP/cms.txt" 2>&1
   check "$?" "0" "مخطط العلامة مطابق (حقول وأنواع وأرقام)"
   python3 -c "
@@ -188,11 +195,7 @@ t "heading_present" python3 tests/test_pdf_heading_match.py
 t "المحاذاة في الطباعة تتجاهل المحجوب (no-print)" python3 tests/test_print_alignment_hidden.py
 
 echo "17) GitHub مصدر الشيفرة"
-if [ -e "$B/../.git" ] && [ -f "$B/../brain/appendices/code-paths.json" ]; then
-  t "كل مسار مصنَّف code/data" python3 tools/code_paths.py check --root "$B/.."
-else
-  ok "تصنيف المسارات: تخطٍّ مقصود (الشجرة ليست نسخة المستودع، كتخطيط الخادم)"
-fi
+t "كل مسار مصنَّف code/data" python3 tools/code_paths.py check
 t "apply_from_github: تعارض · أرشفة · استعادة" python3 tests/test_apply_from_github.py
 t "النسخ الاحتياطي لا يكتب الشيفرة فوق GitHub" python3 tests/test_backup_code_safety.py
 t "فهرس التقارير" python3 tests/test_reports_index.py

@@ -400,6 +400,55 @@
    "kind": "except يبتلع الخطأ",
    "snippet": "handle(tok, u)",
    "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+  },
+  {
+   "site": "validators/check_libraries_skills.py:267",
+   "file": "validators/check_libraries_skills.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "import importlib.util",
+   "reason": "استيراد أداة قابلية النقل داخل الدالة (import محلي) — ليس ابتلاع خطأ"
+  },
+  {
+   "site": "validators/check_libraries_skills.py:65",
+   "file": "validators/check_libraries_skills.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "text = f.read_text(encoding=\"utf-8\")",
+   "reason": "قراءة ملف مكتبة: الفشل يُسجَّل «عائق» مانعًا ويُتخطّى الملف — لا ابتلاع صامت"
+  },
+  {
+   "site": "validators/check_libraries_skills.py:72",
+   "file": "validators/check_libraries_skills.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "data = json.loads(text)",
+   "reason": "تحليل JSON مكتبة: الفشل يُسجَّل «عائق» مانعًا"
+  },
+  {
+   "site": "validators/check_pdf_format.py:209",
+   "file": "validators/check_pdf_format.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "import subprocess as _sp",
+   "reason": "استيراد subprocess داخل الدالة لقياس العناوين اليتيمة — ليس ابتلاع خطأ"
+  },
+  {
+   "site": "validators/check_print_quality.py:350",
+   "file": "validators/check_print_quality.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "bad = alignment_report(page_path)",
+   "reason": "قياس التصفير: أي خطأ يُضاف إلى problems فيُعلن (لا يمرّ صامتًا)"
+  },
+  {
+   "site": "tools/check_feeds.py:351",
+   "file": "tools/check_feeds.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "parsed = _eu.parsedate_to_datetime(text)",
+   "reason": "تحويل تاريخ مادة التغذية؛ الفشل يترك الحقل فارغًا ويبقى قياس التقادم مقيسًا"
+  },
+  {
+   "site": "tools/check_feeds.py:320",
+   "file": "tools/check_feeds.py",
+   "kind": "except يبتلع الخطأ",
+   "snippet": "body_text = error.read().decode(\"utf-8\", \"replace\")[:4000]",
+   "reason": "قراءة جسم استجابة الحجب لتصنيف السبب؛ الفشل يبقي السبب عامًّا معلنًا"
   }
  ],
  "unclassified": []

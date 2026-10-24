@@ -33,8 +33,8 @@ BRAIN = _root("BRAIN_DIR", _HOME, "brain-marine-news", "brain")
 SITE = _root("SITE_DIR", _HOME, "seawatch", "site")
 
 LITERALS = (BRAIN.as_posix(), SITE.as_posix(), "/home/ubuntu/brain-marine-news", "/home/ubuntu/seawatch")
-SKIP_PARTS = {"brain-backup", "__pycache__", "_oneoff", "legacy", "dist", "shots", "node_modules", ".git", "archive"}
-# ملفات مسموح لها حمل النص الحرفي: أداة الكشف نفسها
+SKIP_PARTS = {"brain-backup", "__pycache__", "_oneoff", "legacy", "dist", "shots", "node_modules", ".git", "archive", "logs"}
+# ملفات مسموح لها حمل النص الحرفي: أداة الكشف نفسها: النسخ المؤرشفة والاحتياطية لا تُفحص
 ALLOW = {"portable_paths.py", "check_portable_paths.py"}
 # سطر يحمل النص الحرفي بوصفه توثيقًا لا شيفرة
 ALLOW_LINE_MARKERS = ("الافتراضي عند", "المصادر:", "مثال:", "usage:", "Usage:", "مقصود")

@@ -37,10 +37,20 @@ while IFS= read -r f; do
   lf="$SK/$rel"
   [ -f "$lf" ] || { mkdir -p "$(dirname "$lf")"; cp "$f" "$lf"; to_local=$((to_local+1)); echo "  ↓ نُزّل: $rel"; continue; }
   if cmp -s "$f" "$lf"; then equal=$((equal+1)); continue; fi
-  if [ "$lf" -nt "$f" ]; then
-    cp "$lf" "$f"; to_repo=$((to_repo+1)); echo "  ↑ رُفع (المحلي أحدث): $rel"
+  # قاعدة إصلاح (ك-XX): لا يُحكم بالتاريخ وحده — فسحب git يعطي الملف طابعًا زمنيًا حديثًا
+  # فيقطع نسخة محلية أغنى بالمحتوى. الحكم: عدد الأسطر أولًا، ثم التاريخ، وبنسخة احتياطية دائمًا.
+  BK="${B:-.}/logs/skills-sync-$(date -u +%Y%m%d-%H%M%S)"
+  mkdir -p "$BK/$(dirname "$rel")"
+  cp -f "$lf" "$BK/$rel.local.bak" 2>/dev/null || true
+  ln_f=$(wc -l < "$f"); ln_lf=$(wc -l < "$lf")
+  if [ "$ln_f" -gt "$ln_lf" ]; then
+    cp "$f" "$lf"; to_local=$((to_local+1)); echo "  ↓ نُزّل (المستودع أكثر محتوى $ln_f>$ln_lf): $rel"
+  elif [ "$ln_lf" -gt "$ln_f" ]; then
+    cp "$lf" "$f"; to_repo=$((to_repo+1)); echo "  ↑ رُفع (المحلي أكثر محتوى $ln_lf>$ln_f · نسخة احتياطية في $BK): $rel"
+  elif [ "$lf" -nt "$f" ]; then
+    cp "$lf" "$f"; to_repo=$((to_repo+1)); echo "  ↑ رُفع (المحلي أحدث · نسخة احتياطية في $BK): $rel"
   else
-    cp "$f" "$lf"; to_local=$((to_local+1)); echo "  ↓ نُزّل (المستودع أحدث): $rel"
+    cp "$f" "$lf"; to_local=$((to_local+1)); echo "  ↓ نُزّل (المستودع أحدث · نسخة احتياطية في $BK): $rel"
   fi
 done < <(find "$REPO" -type f \( -name "*.md" -o -name "*.json" -o -name "*.py" -o -name "*.txt" \) | sort)
 
