@@ -696,6 +696,13 @@ def esc(t) -> str:
     return html.escape(str(t), quote=True)
 
 
+def isolate_dtg(t: str) -> str:
+    """ك-171: عزل نطاقات DTG داخل bdi فلا ينعكس ترتيبها في سياق RTL."""
+    import re as _re
+    return _re.sub(r"(?<![\w\d])(\d{6}Z\s*[–-]\s*\d{6}Z)(?![\w])",
+                   lambda m: f'<bdi class="bidi">{m.group(1)}</bdi>', t)
+
+
 def bdi(t: str) -> str:
     return f'<bdi class="bidi">{esc(t)}</bdi>'
 
@@ -713,6 +720,7 @@ def normalize_digits(s: str) -> str:
 
 def inline(text: str, defs: dict = None) -> str:
     """تحويل العناصر المضمّنة: عريض، مائل، كود، روابط، استشهادات."""
+    t = isolate_dtg(t)
     t = esc(text)
     t = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", t)
     t = re.sub(r"(?<!\*)\*(?!\s)([^*\n]+?)\*(?!\*)", r"<em>\1</em>", t)
@@ -1261,7 +1269,11 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
     if generated:
         chips.append(f'<span class="chip">آخر تحديث <b class="bidi">{esc(generated)}</b></span>')
     if meta.get("window"):
-        chips.append(f'<span class="chip">فترة التغطية <b>{esc(meta["window"])}</b></span>')
+        win = esc(meta["window"])
+        _m = re.match(r'^(\S+Z\s*[–-]\s*\S+Z)\s*(.*)$', win)
+        if _m:
+            win = f'<bdi class="bidi">{_m.group(1)}</bdi> {_m.group(2)}'
+        chips.append(f'<span class="chip">فترة التغطية <b>{win}</b></span>')
     if meta.get("sources_checked") not in (None, ""):
         chips.append(f'<span class="chip">مصادر مفحوصة <b class="bidi">{esc(meta["sources_checked"])}</b></span>')
     if meta.get("sources_cited") not in (None, ""):
@@ -1274,7 +1286,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
     threat_html = ""
     if threat:
         threat_html = (
-            f'<div class="threat {tcls}"><div class="lbl">مستوى التهديد</div>'
+            f'<div class="threat {tcls}"><div class="lbl">مستوى الخطر</div>'
             f'<div class="val">{esc(threat)}</div></div>'
         )
 
