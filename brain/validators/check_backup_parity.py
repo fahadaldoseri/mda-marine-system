@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import os
+import subprocess
 import sys
 from pathlib import Path
 
@@ -36,7 +37,13 @@ VOLATILE = (
 )
 # مخرجات مولّدة آليًا: تُستثنى من النسخ فلا تُحسب انحرافًا (عطل ك-18)
 SKIP_GLOBS = ("brain/reports/docx/التقرير-اليومي-", "brain/reports/pdf/")
-ALLOW_REPO_ONLY = ("docs/فهرس-الملفات.tsv",)
+ALLOW_REPO_ONLY = (
+    "docs/فهرس-الملفات.tsv",
+    # ملفات تقيم في المستودع وحده بحكم وظيفتها، ولا نظير لها على الخادم (تسمح بذلك):
+    ".gitignore",              # إعداد المستودع لا إعداد التشغيل
+    "AGENTS.md",               # تعليمات الوكلاء على GitHub؛ نسخة الخادم هي CLAUDE.md
+    ".github/",                # سير عمل الفحص على GitHub
+)
 
 
 def sha(p: Path) -> str:
@@ -78,6 +85,40 @@ def manifest(root: Path, skip_dirs, skip_files, prefix: str):
 
 def repo_manifest():
     out = {}
+    # ك-160: كان المسح يعتمد مجلد العمل فيحسب ملفات غير متتبَّعة (مثل __pycache__)
+    # «زائدة في المستودع». المصدر الآن ما يتتبعه Git فعلًا.
+    try:
+        tracked = subprocess.run(["git", "-C", str(REPO), "ls-files", "-z"],
+                                 capture_output=True, check=True).stdout.decode("utf-8")
+        files = [f for f in tracked.split("\0") if f]
+    except Exception:
+        files = None
+    if files is None:
+        for dp, dns, fns in os.walk(REPO):
+            dns[:] = [d for d in dns if d != ".git"]
+            rd = Path(dp).relative_to(REPO)
+            for fn in fns:
+                files = (files or []) ; break
+        files = []
+    if files:
+        for rel in files:
+            if rel.startswith(ALLOW_REPO_ONLY):
+                continue
+            p = REPO / rel
+            if p.is_symlink():
+                # رابط إلى مجلد = اسم شجرة لا ملف محتوى؛ الشجرة المحلية لا تُدرجه
+                try:
+                    if p.resolve().is_dir():
+                        continue
+                except OSError:
+                    pass
+                tgt = os.path.normpath((Path(rel).parent / os.readlink(p)).as_posix())
+                while tgt.startswith("./"):
+                    tgt = tgt[2:]
+                out[rel] = ("link", tgt)
+            elif p.is_file():
+                out[rel] = ("file", sha(p))
+        return out
     for dp, dns, fns in os.walk(REPO):
         dns[:] = [d for d in dns if d != ".git"]
         rd = Path(dp).relative_to(REPO)
@@ -117,7 +158,7 @@ def main() -> int:
     # عطل ك-60: المقارنة أغفلت جذر المهارات، فظهرت ملفات المستودع «زائدة» كذبًا.
     # القاعدة: كل جذر ينسخه github_backup يجب أن تدخله المقارنة بالنفس.
     sk_root = Path(os.environ["SKILLS_DIR"]) if os.environ.get("SKILLS_DIR") else (Path("/home/ubuntu/skills") if Path("/home/ubuntu/skills").is_dir() else B.parent / "skills")
-    for sk in ("marine-news-brain", "military-arabic-editing", "macr-system"):
+    for sk in ("marine-news-brain", "military-arabic-editing", "macr-system", "superpowers-method"):
         d = sk_root / sk
         if d.is_dir():
             local.update(manifest(d, {"__pycache__", ".git"}, set(), f"skills/{sk}"))
@@ -127,6 +168,8 @@ def main() -> int:
             for fn in fns:
                 p = Path(dp) / fn
                 rel = (Path(dp).relative_to(static) / fn).as_posix()
+                if rel.startswith(ALLOW_REPO_ONLY):
+                    continue
                 local[rel] = ("file", sha(p))
     repo = repo_manifest()
 
