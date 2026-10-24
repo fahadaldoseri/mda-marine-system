@@ -26,6 +26,7 @@ ALLOWLIST = {
     "secrets/secrets.env.example",
     "secrets/README.md",
     "tests/fixtures/dummy-secrets.txt",
+    "tests/test_new_validators.py",   # اختبار زرع صناعي: قيم وهمية لا حقيقية
 }
 
 # إعفاء واحد مكتوب السبب (قرار المالك 2026-10-24: «تُحفظ الأسرار نصًّا صريحًا في المستودع الخاص»
@@ -95,6 +96,10 @@ def main() -> int:
         ROOT = Path(args.root).resolve()
     env_vals = env_secret_values()
     allow = set(ALLOWLIST) | set(OWNER_APPROVED) | set(args.allow)
+    # المسار يُعفى بالاسم أو بذيله: brain/secrets/secrets.env وsecrets/secrets.env مسار واحد (عطل ك-172).
+    # عطل ك-172: المستودع يسمّي المسار brain/secrets/secrets.env والخادم secrets/secrets.env —
+    # الإعفاء يشمل الاسم وبادئة brain/ معًا، وإلا مُنع الدفع بلا سبب.
+    allow = allow | {("brain/" + a) for a in list(allow) if "/" in a and not a.startswith("brain/")}
     hits: list[tuple[str, str]] = []
 
     if args.staged:
