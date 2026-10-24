@@ -101,10 +101,11 @@ def code_tracking() -> None:
         check("فاحص تتبّع شيفرة الخادم موجود", False)
         return
     with tempfile.TemporaryDirectory() as td:
-        root = Path(td)
+        root = Path(td) / "brain"
+        repo = Path(td) / "repo"          # المستودع شقيق لجذر الخادم كما في الواقع، لا داخله
+        root.mkdir(parents=True)
         (root / "tools").mkdir()
         (root / "tools" / "rogue.py").write_text("print(1)\n", encoding="utf-8")
-        repo = root / "repo"
         repo.mkdir()
         subprocess.run(["git", "init", "-q", str(repo)], capture_output=True)
         (repo / "brain" / "tools").mkdir(parents=True)
