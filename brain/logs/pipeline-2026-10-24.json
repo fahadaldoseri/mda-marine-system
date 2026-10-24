@@ -41,7 +41,7 @@
   },
   "finished_utc": "2026-10-23T22:58:01Z",
   "gate_dir": "logs/gate-2026-10-24",
-  "gate_finished_utc": "2026-10-24T13:01:17Z",
+  "gate_finished_utc": "2026-10-24T13:08:37Z",
   "gate_note": "تُشغَّل بوابة التسليم بعد كتابة التقرير — أُصلح الحقل المخالف (status=pending) في 24 أكتوبر 2026.",
   "gate_state": "not_run",
   "ladder_note": "سلّم موحّد: ok / degraded / failed — لكل مكوّن رمز خروج حقيقي، ولا تُعلن نجاحًا برمز صفري",
@@ -50,12 +50,12 @@
     "edit_pass": {
       "applied": true,
       "by_category": {
-        "أسلوب": 27,
-        "ترقيم": 1,
-        "مفردة": 43
+        "أسلوب": 40,
+        "ترجمة حرفية": 3,
+        "مفردة": 55
       },
-      "changes": 71,
-      "edited": 9,
+      "changes": 98,
+      "edited": 10,
       "model": "gpt-5-mini",
       "rejected": 3,
       "sections": 15
