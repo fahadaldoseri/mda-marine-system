@@ -127,9 +127,11 @@ printf '## ما لم يُحسم\n- اختبار\n' > "reports/$FD-sectioned.md"
 python3 validators/check_run_completeness.py --date "$FD" >/dev/null 2>&1
 check "$?" "2" "عطل غير معروف في القائمة يمنع التسليم"
 printf '{"date":"%s","overall":"degraded","feeds":{"status":"degraded","failed_feeds":[{"name":"وام","block_reason":"403 حجب"}]}}\n' "$FD" > "logs/pipeline-$FD.json"
-printf '## ما لم يُحسم\n- المصادر: 62 معتمدة · 35 مفحوصة في هذا التشغيل · 33 ناجحة.\n- تشغيل منقوص مُفصح: التغذيات: حجب مصدر رسمي يمنع الجلب الآلي.\n' > "reports/$FD-sectioned.md"
+printf '{"date":"%s","status":"degraded","checked":35,"ok":34,"failed":1,"failed_feeds":[{"num":37,"name":"وام","error":"حجب مصدر — رفض الخادم الطلب (HTTP 403)","block_reason":"all routes failed: primary: حجب مصدر (HTTP 403)"}]}\n' "$FD" > "feeds/feeds-$FD.status.json"
+printf '## ما لم يُحسم\n- المصادر: 62 معتمدة · 35 مفحوصة في هذا التشغيل · 33 ناجحة · تعذّر 1: وام — حجب المصدر · مرجع العطل ك-63.\n- تشغيل منقوص مُفصح: التغذيات: حجب مصدر رسمي يمنع الجلب الآلي.\n' > "reports/$FD-sectioned.md"
 python3 validators/check_run_completeness.py --date "$FD" >/dev/null 2>&1
 check "$?" "1" "عطل معروف مُفصح عنه يمرّ بتحذير لا بمنع"
+rm -f "feeds/feeds-$FD.status.json"
 rm -f "logs/pipeline-$FD.json" "reports/$FD-sectioned.md"
 
 echo "8) مخطط العلامة الثابت وكاتب العلامة"
