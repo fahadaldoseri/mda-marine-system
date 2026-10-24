@@ -20,8 +20,15 @@ import sys
 from pathlib import Path
 
 B = Path(__file__).resolve().parent.parent
-SITE = Path(os.environ.get("SITE_DIR") or os.environ.get("SITE")
-            or str(Path(__file__).resolve().parents[1].parent / "seawatch")) / "dist"
+def _pick_site() -> Path:
+    """ك-174/ك-175: اختيار مسار الموقع من أول مرشّح يحمل dist/reports فعليًا."""
+    for c in (os.environ.get("SITE_DIR"), os.environ.get("SITE"), str(B.parent / "seawatch")):
+        if c and (Path(c) / "dist" / "reports").is_dir():
+            return Path(c) / "dist"
+    return B.parent / "seawatch" / "dist"
+
+
+SITE = _pick_site()
 CRASH = 70
 
 
