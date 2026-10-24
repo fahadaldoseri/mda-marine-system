@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة 71d35b42cde32a5f). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة 329b9802897487b5). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -74,7 +74,6 @@
 | D032 | أرشفة نص ملخص تلغرام المرسل | script |  |  | cmd:bash -lc test -d logs/telegram-archive | س4 — قناة التسليم | tools/archive_tg_digest.py، tools/telegram_send.py | continue |
 | D033 | تنبيه وصول التقرير على تلغرام | script |  |  | file_exists:logs/telegram-delivery-{date}.json | س4 — قناة التسليم | validators/check_telegram_delivery.py | continue |
 | D035 | بوابة الأسرار قبل النسخ الاحتياطي والدفع | script |  |  | cmd:bash -lc grep -q 'بوابة الأسرار: لا سرّ' logs/runbook/{date}/D035.log | س2 — الإغلاق والدفع | validators/check_secrets.py، tools/redact.py، tools/github_backup.sh | stop |
-| D037 | تتبّع ملفات الشيفرة على الخادم | script |  |  |  |  |  | stop |
 | D036 | اختبارات المدقّقات الجديدة (أسرار · استثناءات · إرسال · تتبّع · نطاق) | script |  |  | cmd:bash -lc test -s logs/checks/new-validators-{date}.json && test -s logs/checks/new-validators-{date}.txt && test -s logs/checks/parity-scope-{date}.txt | س2 — الإغلاق والدفع | tests/test_new_validators.py، tests/test_parity_scope.py، tools/audit_broad_excepts.py، validators/check_secrets.py | stop |
 | D040 | النسخة الاحتياطية والتحقق من التماثل | script |  |  | cmd:bash -lc grep -q 'النتيجة: مطابق' logs/runbook/{date}/D040.log | س2 — الإغلاق والدفع | tools/github_backup.sh، validators/check_backup_parity.py، tools/github_backup.py، tools/apply_from_github.sh، tools/apply_from_github.py، tools/code_paths.py | stop |
 | D045 | فهرس التقارير (المستودع مقابل الأرشيف الخاص) (اختيارية) | script |  |  | cmd:bash -lc grep -q '{date}' docs/reports-index.md | س2 — الإغلاق والدفع | tools/reports_index.py، appendices/reports-archive.json | continue |
@@ -84,6 +83,7 @@
 | Q015 | تدقيق المكتبات اللغوية (أسبوعي) (اختيارية) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/Q015.log | ف1–ف5 — بوابة التحقق | tools/audit_corpus.py | continue |
 | Q020 | قياس دقة التقدير (ربع سنوي) | script |  |  | cmd:bash -lc grep -q 'نسبة التحقق' logs/runbook/{date}/Q020.log | ف4 — التحليل الاستخباري | tools/estimate_accuracy.py | stop |
 | D070 | النسخة الاحتياطية الختامية والتماثل بعد كل خطوات اليوم | script |  |  | cmd:bash -lc grep -q 'النتيجة: مطابق' logs/runbook/{date}/D070.log | س2 — الإغلاق والدفع | tools/github_backup.sh، validators/check_backup_parity.py، tools/github_backup.py، tools/apply_from_github.sh، tools/apply_from_github.py، tools/code_paths.py | stop |
+| D71 | تتبّع ملفات الشيفرة على الخادم | script |  |  |  |  |  | stop |
 
 ## أقسام التقرير وارتباطاتها
 
