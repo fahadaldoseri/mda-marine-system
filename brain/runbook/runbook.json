@@ -3219,6 +3219,43 @@
    "warn_rc": []
   },
   {
+   "id": "D036",
+   "title": "اختبارات المدقّقات الجديدة (أسرار · استثناءات · إرسال · تتبّع · نطاق)",
+   "kind": "script",
+   "phase": "deliver",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/checks/new-validators-{date}.json && test -s logs/checks/new-validators-{date}.txt && test -s logs/checks/parity-scope-{date}.txt"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "س2 — الإغلاق والدفع"
+    ],
+    "files": [
+     "tests/test_new_validators.py",
+     "tests/test_parity_scope.py",
+     "tools/audit_broad_excepts.py",
+     "validators/check_secrets.py"
+    ]
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; export B; mkdir -p logs/checks; python3 tests/test_new_validators.py > logs/checks/new-validators-{date}.txt 2>&1; r1=$?; python3 tests/test_parity_scope.py > logs/checks/parity-scope-{date}.txt 2>&1; r2=$?; cat logs/checks/new-validators-{date}.txt logs/checks/parity-scope-{date}.txt; python3 -c \"import json,sys;json.dump({'new_validators_rc':$r1,'parity_scope_rc':$r2},open('logs/checks/new-validators-{date}.json','w'))\"; exit $(( r1 || r2 ))"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  },
+  {
    "id": "D040",
    "title": "النسخة الاحتياطية والتحقق من التماثل",
    "kind": "script",

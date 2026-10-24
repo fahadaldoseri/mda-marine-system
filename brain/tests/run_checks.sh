@@ -201,6 +201,11 @@ t "النسخ الاحتياطي لا يكتب الشيفرة فوق GitHub" pyt
 t "فهرس التقارير" python3 tests/test_reports_index.py
 t "ملف الأسرار: قراءة وقالب وتصنيف" python3 tests/test_secrets_file.py
 
+
+echo "18) مدقّقات الجولة الجديدة (طلب فهد 2026-10-24)"
+t "بوابة الأسرار: الأنواع الثلاثة + إعفاء مكتوب السبب" python3 tests/test_new_validators.py
+t "نطاق التماثل وأسبابه وأرضيته" python3 tests/test_parity_scope.py
+
 echo "----- الحصيلة -----"
 printf '  نجح: %s · فشل: %s\n' "$PASS" "$FAIL"
 [ "$FAIL" -eq 0 ] || exit 1
