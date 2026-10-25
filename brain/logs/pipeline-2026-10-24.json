@@ -30,18 +30,15 @@
     "status": "degraded"
   },
   "final_gate": {
-    "status": "block",
-    "exit_code": 2,
+    "status": "warn",
+    "exit_code": 1,
     "dir": "logs/gate-2026-10-24",
-    "blocked_steps": [
-      "اختبارات البوابات (tests)",
-      "بوابات المخرج العشر"
-    ],
+    "blocked_steps": [],
     "note": "نتيجة بوابة التسليم النهائية — مسجّلة بعد كتابة التقرير."
   },
   "finished_utc": "2026-10-23T22:58:01Z",
   "gate_dir": "logs/gate-2026-10-24",
-  "gate_finished_utc": "2026-10-24T13:08:37Z",
+  "gate_finished_utc": "2026-10-24T15:50:53Z",
   "gate_note": "تُشغَّل بوابة التسليم بعد كتابة التقرير — أُصلح الحقل المخالف (status=pending) في 24 أكتوبر 2026.",
   "gate_state": "not_run",
   "ladder_note": "سلّم موحّد: ok / degraded / failed — لكل مكوّن رمز خروج حقيقي، ولا تُعلن نجاحًا برمز صفري",
@@ -50,14 +47,13 @@
     "edit_pass": {
       "applied": true,
       "by_category": {
-        "أسلوب": 40,
-        "ترجمة حرفية": 3,
-        "مفردة": 55
+        "أسلوب": 20,
+        "مفردة": 16
       },
-      "changes": 98,
-      "edited": 10,
+      "changes": 36,
+      "edited": 4,
       "model": "gpt-5-mini",
-      "rejected": 3,
+      "rejected": 6,
       "sections": 15
     },
     "long_sentences": 3,
