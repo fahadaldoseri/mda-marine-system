@@ -147,7 +147,7 @@
     },
     {
       "id": "attribution",
-      "title": "الاحتمالات والإسناد",
+      "title": "الاحتمالات ونسبة الحوادث إلى جهات",
       "order": 12,
       "block": "{site}/generator/blocks.py",
       "validator": "validators/check_comprehension.py",
@@ -156,7 +156,7 @@
         "tests/test_sections_registry_vs_report.py"
       ],
       "files": [],
-      "heading": "الاحتمالات والإسناد",
+      "heading": "الاحتمالات ونسبة الحوادث إلى جهات",
       "heading_aliases": [
         "الاحتمالات ونسبة الحوادث إلى جهات"
       ],
@@ -715,85 +715,6 @@
       "warn_rc": []
     },
     {
-      "id": "S040",
-      "title": "توليد أهداف العقوبات من التقرير",
-      "kind": "script",
-      "phase": "ingest",
-      "assert": [
-        {
-          "type": "cmd",
-          "command": [
-            "bash",
-            "-lc",
-            "test -s logs/runbook/{date}/S040.log"
-          ]
-        }
-      ],
-      "links": {
-        "rules": [
-          "أ1 — سلسلة التشغيل اليومي"
-        ],
-        "files": [
-          "tools/ofac_targets_from_report.py",
-          "sections/90-automation.md"
-        ],
-        "folders": [],
-        "gates": [],
-        "tests": []
-      },
-      "on_fail": "stop",
-      "command": [
-        "bash",
-        "-lc",
-        "B=\"$PWD\"; export B SITE; python3 tools/ofac_targets_from_report.py --date {date}; rc=$?; exit $rc"
-      ],
-      "ok_rc": [
-        0
-      ],
-      "warn_rc": []
-    },
-    {
-      "id": "S050",
-      "title": "فحص العقوبات (OFAC)",
-      "kind": "script",
-      "phase": "ingest",
-      "assert": [
-        {
-          "type": "cmd",
-          "command": [
-            "bash",
-            "-lc",
-            "test -s logs/runbook/{date}/S050.log"
-          ]
-        }
-      ],
-      "links": {
-        "rules": [
-          "أ1 — سلسلة التشغيل اليومي"
-        ],
-        "files": [
-          "tools/ofac_screen.py",
-          "sections/90-automation.md"
-        ],
-        "folders": [],
-        "gates": [],
-        "tests": []
-      },
-      "on_fail": "stop",
-      "command": [
-        "bash",
-        "-lc",
-        "B=\"$PWD\"; export B SITE; python3 tools/ofac_screen.py watchlist/ofac-targets.txt; rc=$?; exit $rc",
-        "B=\"$PWD\"; export B; python3 \"$B/tools/mark_components.py\" --date \"$D\" --component ofac; rc=$?; exit $rc"
-      ],
-      "ok_rc": [
-        0
-      ],
-      "warn_rc": [
-        1
-      ]
-    },
-    {
       "id": "S060",
       "title": "حفظ الأصول الرسمية",
       "kind": "script",
@@ -824,8 +745,55 @@
       "command": [
         "bash",
         "-lc",
-        "B=\"$PWD\"; export B SITE; python3 tools/archive_originals.py {date} watchlist/originals-urls.txt; rc=$?; exit $rc",
-        "B=\"$PWD\"; export B; python3 \"$B/tools/mark_components.py\" --date \"$D\" --component originals; rc=$?; exit $rc"
+        "B=\"$PWD\";",
+        "export",
+        "B",
+        "SITE;",
+        "[",
+        "-f",
+        "watchlist/original-sources.txt",
+        "]",
+        "||",
+        "{",
+        "echo",
+        "\"",
+        "·",
+        "لا",
+        "ينطبق:",
+        "لا",
+        "قائمة",
+        "أصول",
+        "لليوم",
+        "—",
+        "لا",
+        "توقف",
+        "التسليم\";",
+        "exit",
+        "1;",
+        "};",
+        "B=\"$PWD\";",
+        "export",
+        "B",
+        "SITE;",
+        "python3",
+        "tools/archive_originals.py",
+        "{date}",
+        "watchlist/original-sources.txt;",
+        "rc=$?;",
+        "exit",
+        "$rc",
+        "B=\"$PWD\";",
+        "export",
+        "B;",
+        "python3",
+        "\"$B/tools/mark_components.py\"",
+        "--date",
+        "\"$D\"",
+        "--component",
+        "originals;",
+        "rc=$?;",
+        "exit",
+        "$rc"
       ],
       "ok_rc": [
         0
@@ -998,6 +966,85 @@
       ],
       "writes": [
         "reports/{date}-sectioned.md"
+      ]
+    },
+    {
+      "id": "S040",
+      "title": "توليد أهداف العقوبات من التقرير",
+      "kind": "script",
+      "phase": "write",
+      "assert": [
+        {
+          "type": "cmd",
+          "command": [
+            "bash",
+            "-lc",
+            "test -s logs/runbook/{date}/S040.log"
+          ]
+        }
+      ],
+      "links": {
+        "rules": [
+          "أ1 — سلسلة التشغيل اليومي"
+        ],
+        "files": [
+          "tools/ofac_targets_from_report.py",
+          "sections/90-automation.md"
+        ],
+        "folders": [],
+        "gates": [],
+        "tests": []
+      },
+      "on_fail": "stop",
+      "command": [
+        "bash",
+        "-lc",
+        "B=\"$PWD\"; export B SITE; python3 tools/ofac_targets_from_report.py --date {date}; rc=$?; exit $rc"
+      ],
+      "ok_rc": [
+        0
+      ],
+      "warn_rc": []
+    },
+    {
+      "id": "S050",
+      "title": "فحص العقوبات (OFAC)",
+      "kind": "script",
+      "phase": "write",
+      "assert": [
+        {
+          "type": "cmd",
+          "command": [
+            "bash",
+            "-lc",
+            "test -s logs/runbook/{date}/S050.log"
+          ]
+        }
+      ],
+      "links": {
+        "rules": [
+          "أ1 — سلسلة التشغيل اليومي"
+        ],
+        "files": [
+          "tools/ofac_screen.py",
+          "sections/90-automation.md"
+        ],
+        "folders": [],
+        "gates": [],
+        "tests": []
+      },
+      "on_fail": "stop",
+      "command": [
+        "bash",
+        "-lc",
+        "B=\"$PWD\"; export B SITE; python3 tools/ofac_screen.py watchlist/ofac-targets.txt; rc=$?; exit $rc",
+        "B=\"$PWD\"; export B; python3 \"$B/tools/mark_components.py\" --date \"$D\" --component ofac; rc=$?; exit $rc"
+      ],
+      "ok_rc": [
+        0
+      ],
+      "warn_rc": [
+        1
       ]
     },
     {

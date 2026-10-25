@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة 95435d4c1ab43c47). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة c4055201e4ab4d67). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -12,13 +12,13 @@
 | S010 | استعادة المهارات وفحص التماثل | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S010.log | أ1 — سلسلة التشغيل اليومي | tools/restore_skills.sh، sections/90-automation.md | stop |
 | S020 | فحص التغذيات (40 مصدرًا) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S020.log | أ1 — سلسلة التشغيل اليومي | tools/check_feeds.py، sections/90-automation.md | stop |
 | S030 | ترقيم التغذيات (أرقام لاتينية) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S030.log | أ1 — سلسلة التشغيل اليومي | tools/normalize_digits.py، sections/90-automation.md، tools/normalize_terms.py | stop |
-| S040 | توليد أهداف العقوبات من التقرير | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S040.log | أ1 — سلسلة التشغيل اليومي | tools/ofac_targets_from_report.py، sections/90-automation.md | stop |
-| S050 | فحص العقوبات (OFAC) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S050.log | أ1 — سلسلة التشغيل اليومي | tools/ofac_screen.py، sections/90-automation.md | stop |
 | S060 | حفظ الأصول الرسمية | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S060.log | أ1 — سلسلة التشغيل اليومي | tools/archive_originals.py، sections/90-automation.md | stop |
 | S070 | دمج الذاكرة التراكمية (دفتر اليوم) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S070.log | أ1 — سلسلة التشغيل اليومي | tools/merge_ledger_daily.py، sections/90-automation.md، tools/daily_pipeline.sh | stop |
 | S080 | فرز التغذيات بالنموذج (اختياري) (اختيارية) | script |  |  | cmd:bash -lc test -e logs/runbook/{date}/S080.log | أ1 — سلسلة التشغيل اليومي | tools/llm_triage.py، sections/90-automation.md | continue |
 | S090 | مراجعة التقرير بالنموذج (اختياري) (اختيارية) | script |  |  | cmd:bash -lc test -e logs/runbook/{date}/S090.log | أ1 — سلسلة التشغيل اليومي | tools/llm_review.py، sections/90-automation.md | continue |
 | W010 | كتابة التقرير اليومي | agent | sections/20-writing-brief.md، sections/20-lexicon.md، sections/20-examples.md، cumulative-2026/daily/{date}.json، feeds/feeds-{date}.md | reports/{date}-sectioned.md | min_bytes:reports/{date}-sectioned.md؛ contains:reports/{date}-sectioned.md | أ2 — قواعد الكتابة، ل1 — أسلوب اللغة | sections/20-writing-brief.md، sections/20-lexicon.md، sections/20-examples.md، runbook/prompts/write-report.md | stop |
+| S040 | توليد أهداف العقوبات من التقرير | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S040.log | أ1 — سلسلة التشغيل اليومي | tools/ofac_targets_from_report.py، sections/90-automation.md | stop |
+| S050 | فحص العقوبات (OFAC) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S050.log | أ1 — سلسلة التشغيل اليومي | tools/ofac_screen.py، sections/90-automation.md | stop |
 | W020 | بناء ملف واجهة التقرير | agent | reports/{date}-sectioned.md، templates/mark-schema.json | web/meta/{date}.json | min_bytes:web/meta/{date}.json | ب2 — ترتيب الأقسام | templates/mark-schema.json | stop |
 | G001 | اختبارات البوابات (tests) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G001.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tests/run_checks.sh | stop |
 | G002 | تنظيف المحتوى الداخلي | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G002.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/scrub_internal.py، tools/apply_audit_gfs_docx.py، tools/apply_jmic_ukmto_to_gfs.py | stop |
@@ -100,7 +100,7 @@
 | 9 | التحذيرات والنشرات الرسمية (warnings) | {site}/generator/blocks.py | validators/check_code_spaces.py | runbook/prompts/sections/warnings.md | tests/test_sections_registry_vs_report.py |  |
 | 10 | سجل IMO والحوادث المؤكدة (imo-log) | {site}/generator/blocks.py | validators/check_carryover.py | runbook/prompts/sections/imo-log.md | tests/test_sections_registry_vs_report.py |  |
 | 11 | التحليل الاستخباري (intel-analysis) | {site}/generator/blocks.py | validators/check_intel.py | runbook/prompts/sections/intel-analysis.md | tests/test_sections_registry_vs_report.py |  |
-| 12 | الاحتمالات والإسناد (attribution) | {site}/generator/blocks.py | validators/check_comprehension.py | runbook/prompts/sections/attribution.md | tests/test_sections_registry_vs_report.py |  |
+| 12 | الاحتمالات ونسبة الحوادث إلى جهات (attribution) | {site}/generator/blocks.py | validators/check_comprehension.py | runbook/prompts/sections/attribution.md | tests/test_sections_registry_vs_report.py |  |
 | 13 | الحركة الملاحية والتكدس (traffic) | {site}/generator/blocks.py | validators/check_style.py | runbook/prompts/sections/traffic.md | tests/test_sections_registry_vs_report.py |  |
 | 14 | ما لم يُحسم (open-questions) | {site}/generator/blocks.py | validators/check_comprehension.py | runbook/prompts/sections/open-questions.md | tests/test_sections_registry_vs_report.py |  |
 | 15 | المراقبة المستمرة (monitoring) | {site}/generator/blocks.py | validators/check_style.py | runbook/prompts/sections/monitoring.md | tests/test_sections_registry_vs_report.py |  |
