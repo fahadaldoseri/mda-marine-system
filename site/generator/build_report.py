@@ -720,7 +720,7 @@ def normalize_digits(s: str) -> str:
 
 def inline(text: str, defs: dict = None) -> str:
     """تحويل العناصر المضمّنة: عريض، مائل، كود، روابط، استشهادات."""
-    t = isolate_dtg(t)
+    t = isolate_dtg(text)
     t = esc(text)
     t = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", t)
     t = re.sub(r"(?<!\*)\*(?!\s)([^*\n]+?)\*(?!\*)", r"<em>\1</em>", t)

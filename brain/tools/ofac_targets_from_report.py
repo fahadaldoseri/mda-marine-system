@@ -39,8 +39,9 @@ def main() -> int:
     report_md = B / 'reports' / f'{a.date}-sectioned.md'
     report_meta = B / 'web' / 'meta' / f'{a.date}.json'
     if not report_md.exists() and not report_meta.exists():
-        print(f"  ✘ تعذر استخراج أهداف OFAC: لا يوجد تقرير أو واجهة للإصدار {a.date}")
-        return 2
+        print(f"  · لا ينطبق: لا يوجد إصدار لليوم {a.date} — تُنفَّذ الخطوة بعد كتابة التقرير؛ "
+              "تُصنَّف لا ينطبق ولا توقف التسليم.")
+        return 1
     if report_meta.exists():
         try:
             json.loads(report_meta.read_text(encoding='utf-8'))

@@ -1,3 +1,4 @@
+from __future__ import annotations
 import sys
 #!/usr/bin/env python3
 """قناة تنبيه: هل وصل تقرير اليوم على تلغرام؟ (طلب فهد 2026-10-24، البند 14)
@@ -10,7 +11,6 @@ import sys
 
 رموز الخروج: 0 أُرسل · 1 تحذير (لم يُرسل) · 2 خطأ.
 """
-from __future__ import annotations
 
 import argparse
 import json
