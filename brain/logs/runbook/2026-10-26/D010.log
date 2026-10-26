@@ -1,5 +1,2 @@
-── بوابة المحرّك قبل publish (2026-10-26) ──
-✔ كل بوابات 2026-10-26 مكتملة في سجل المحرّك
-remote: Processing objects: 58% (24/41)        
-remote: Processing objects: 100% (41/41)        
-✔ نُشر عبر المحرّك — 2026-10-26 (86bebae)
+سُجّل فقط — لم يُنفَّذ (RUNBOOK_DRY_STEPS: وضع معزول)
+الأمر المعتاد: bash -lc B="$PWD"; export B SITE; bash tools/publish_site.sh 2026-10-26; rc=$?; exit $rc

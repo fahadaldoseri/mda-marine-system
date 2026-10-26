@@ -2,8 +2,8 @@
  "date": "2026-10-26",
  "status": "degraded",
  "checked": 35,
- "ok": 33,
- "failed": 2,
+ "ok": 34,
+ "failed": 1,
  "browser_only": [],
  "stale": [
   12,
@@ -12,9 +12,9 @@
  ],
  "empty": [],
  "stale_days_limit": 14,
- "fail_ratio": 0.057,
+ "fail_ratio": 0.029,
  "fail_ratio_limit": 0.2,
- "items": 1506,
+ "items": 1532,
  "checked_feeds": [
   {
    "num": 6,
@@ -59,8 +59,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://services.tradewindsnews.com/api/feed/rss",
-   "items_count": 186,
-   "content_chars": 114059,
+   "items_count": 185,
+   "content_chars": 113414,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -84,7 +84,7 @@
    "via": "primary",
    "fetched_url": "https://www.ajnet.me/rss",
    "items_count": 25,
-   "content_chars": 9681,
+   "content_chars": 9671,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -92,14 +92,13 @@
    "num": 11,
    "name": "الجزيرة الإنجليزية",
    "primary_url": "https://www.aljazeera.com/xml/rss/all.xml",
-   "ok": false,
-   "via": null,
-   "fetched_url": null,
-   "items_count": 0,
-   "content_chars": 0,
-   "latest_age_days": null,
-   "tls_verification": "verified",
-   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>"
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.aljazeera.com/xml/rss/all.xml",
+   "items_count": 25,
+   "content_chars": 7672,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
   },
   {
    "num": 12,
@@ -121,7 +120,7 @@
    "via": "fallback:jina.ai/alarabiya-rss",
    "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
    "items_count": 30,
-   "content_chars": 128533,
+   "content_chars": 124741,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -133,7 +132,7 @@
    "via": "fallback:jina.ai/alarabiya-rss",
    "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
    "items_count": 30,
-   "content_chars": 128533,
+   "content_chars": 124741,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -145,7 +144,7 @@
    "via": "fallback:jina.ai/alarabiya-rss",
    "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
    "items_count": 30,
-   "content_chars": 128533,
+   "content_chars": 124741,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -218,7 +217,7 @@
    "via": "primary",
    "fetched_url": "https://www.albiladpress.com/rss",
    "items_count": 100,
-   "content_chars": 17219,
+   "content_chars": 17196,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -230,7 +229,7 @@
    "via": "primary",
    "fetched_url": "https://qna.org.qa/en/RSS-Feeds",
    "items_count": 3,
-   "content_chars": 2374,
+   "content_chars": 2311,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -254,7 +253,7 @@
    "via": "primary",
    "fetched_url": "https://qna.org.qa/en/Pages/RSS-Feeds/Qatar",
    "items_count": 50,
-   "content_chars": 27654,
+   "content_chars": 27761,
    "latest_age_days": -1,
    "tls_verification": "verified"
   },
@@ -262,14 +261,13 @@
    "num": 25,
    "name": "وكالة أنباء الإمارات (وام)",
    "primary_url": "https://www.wam.ae/ar/rss",
-   "ok": false,
-   "via": null,
-   "fetched_url": null,
-   "items_count": 0,
-   "content_chars": 0,
+   "ok": true,
+   "via": "official-telegram:wamnews_en",
+   "fetched_url": "https://t.me/s/wamnews_en",
+   "items_count": 4,
+   "content_chars": 3206,
    "latest_age_days": null,
-   "tls_verification": "verified",
-   "block_reason": "all routes failed: official-telegram:wamnews_en: <urlopen error _ssl.c:983: The handshake operation timed out> | primary: app shell without real feed items (1 derived)"
+   "tls_verification": "verified"
   },
   {
    "num": 25,
@@ -327,7 +325,7 @@
    "via": "fallback:omannews-home",
    "fetched_url": "https://omannews.gov.om/",
    "items_count": 50,
-   "content_chars": 8059,
+   "content_chars": 8163,
    "latest_age_days": null,
    "tls_verification": "disabled_source_28_only"
   },
@@ -387,7 +385,7 @@
    "via": "primary",
    "fetched_url": "https://splash247.com/feed/",
    "items_count": 10,
-   "content_chars": 7852,
+   "content_chars": 7828,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -399,7 +397,7 @@
    "via": "primary",
    "fetched_url": "https://splash247.com/feed/atom/",
    "items_count": 10,
-   "content_chars": 5155,
+   "content_chars": 5222,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -411,7 +409,7 @@
    "via": "primary",
    "fetched_url": "https://www.lloydslist.com/rss/lloyds-list",
    "items_count": 20,
-   "content_chars": 16463,
+   "content_chars": 16997,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -471,7 +469,7 @@
    "via": "primary",
    "fetched_url": "https://www.jpost.com/rss/rssfeedsmiddleeastnews.aspx",
    "items_count": 30,
-   "content_chars": 35388,
+   "content_chars": 35552,
    "latest_age_days": -1,
    "tls_verification": "verified"
   },
@@ -495,7 +493,7 @@
    "via": "primary",
    "fetched_url": "https://www.navalnews.com/feed/",
    "items_count": 10,
-   "content_chars": 61993,
+   "content_chars": 60635,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -507,7 +505,7 @@
    "via": "primary",
    "fetched_url": "https://www.iribnews.ir/fa/rss/allnews",
    "items_count": 100,
-   "content_chars": 35475,
+   "content_chars": 34619,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -519,7 +517,7 @@
    "via": "primary",
    "fetched_url": "https://www.isna.ir/rss",
    "items_count": 30,
-   "content_chars": 29727,
+   "content_chars": 28590,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -555,7 +553,7 @@
    "via": "primary",
    "fetched_url": "https://en.mehrnews.com/rss",
    "items_count": 30,
-   "content_chars": 14202,
+   "content_chars": 14138,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -590,8 +588,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://www.bairdmaritime.com/feed/",
-   "items_count": 13,
-   "content_chars": 52401,
+   "items_count": 12,
+   "content_chars": 48130,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -602,8 +600,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://rss.nytimes.com/services/xml/rss/nyt/MiddleEast.xml",
-   "items_count": 30,
-   "content_chars": 23445,
+   "items_count": 29,
+   "content_chars": 22723,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -615,7 +613,7 @@
    "via": "primary",
    "fetched_url": "https://feeds.bloomberg.com/markets/news.rss",
    "items_count": 20,
-   "content_chars": 3316,
+   "content_chars": 3312,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -627,7 +625,7 @@
    "via": "primary",
    "fetched_url": "https://feeds.bloomberg.com/politics/news.rss",
    "items_count": 20,
-   "content_chars": 3631,
+   "content_chars": 3621,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -639,28 +637,12 @@
    "via": "primary",
    "fetched_url": "https://api.axios.com/feed/",
    "items_count": 100,
-   "content_chars": 873514,
+   "content_chars": 877027,
    "latest_age_days": 0,
    "tls_verification": "verified"
   }
  ],
  "failed_feeds": [
-  {
-   "num": 11,
-   "name": "الجزيرة الإنجليزية",
-   "primary_url": "https://www.aljazeera.com/xml/rss/all.xml",
-   "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
-   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
-   "attempts": [
-    {
-     "url": "https://www.aljazeera.com/xml/rss/all.xml",
-     "via": "primary",
-     "ok": false,
-     "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
-     "tls_verification": "verified"
-    }
-   ]
-  },
   {
    "num": 17,
    "name": "حساب @bna_en على X",
@@ -687,26 +669,12 @@
  ],
  "failed_attempts": [
   {
-   "num": 11,
-   "name": "الجزيرة الإنجليزية",
-   "via": null,
-   "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
-   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>"
-  },
-  {
    "num": 17,
    "name": "حساب @bna_en على X",
    "via": null,
    "error": "حجب مصدر — human verification page (HTTP 405)",
    "block_reason": "all routes failed: primary: حجب مصدر — رفض الخادم الطلب (HTTP 403) | official:bna-en-rss: حجب مصدر — human verification page (HTTP 405)"
-  },
-  {
-   "num": 25,
-   "name": "وكالة أنباء الإمارات (وام)",
-   "via": null,
-   "error": "app shell without real feed items (1 derived)",
-   "block_reason": "all routes failed: official-telegram:wamnews_en: <urlopen error _ssl.c:983: The handshake operation timed out> | primary: app shell without real feed items (1 derived)"
   }
  ],
- "written_utc": "2026-10-26T11:36:53Z"
+ "written_utc": "2026-10-26T12:11:36Z"
 }

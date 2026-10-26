@@ -48,8 +48,8 @@
   {
    "step": "بوابات اللغة المتدرجة (إملاء ونحو وأسلوب)",
    "id": "G008",
-   "status": "ok",
-   "exit_code": 0,
+   "status": "warn",
+   "exit_code": 1,
    "log": "logs/runbook/2026-10-26/G008.log"
   },
   {
@@ -125,15 +125,15 @@
   {
    "step": "بوابة الفهم (مرحلة $COMP_STAGE)",
    "id": "G019",
-   "status": "warn",
-   "exit_code": 1,
+   "status": "ok",
+   "exit_code": 0,
    "log": "logs/runbook/2026-10-26/G019.log"
   },
   {
    "step": "بوابة التحليل الاستخباري",
    "id": "G020",
-   "status": "warn",
-   "exit_code": 1,
+   "status": "ok",
+   "exit_code": 0,
    "log": "logs/runbook/2026-10-26/G020.log"
   },
   {
@@ -160,8 +160,8 @@
   {
    "step": "استعمال المكتبات (المعجم والبنك والفجوات)",
    "id": "G024",
-   "status": "warn",
-   "exit_code": 1,
+   "status": "ok",
+   "exit_code": 0,
    "log": "logs/runbook/2026-10-26/G024.log"
   },
   {
@@ -195,8 +195,8 @@
   {
    "step": "قاعدة النقاط في المصدر",
    "id": "G031",
-   "status": "ok",
-   "exit_code": 0,
+   "status": "warn",
+   "exit_code": 1,
    "log": "logs/runbook/2026-10-26/G031.log"
   },
   {
@@ -288,5 +288,5 @@
  "source": "runbook-ledger",
  "dir": "logs/gate-2026-10-26",
  "log_dir": "logs/gate-2026-10-26",
- "finished_utc": "2026-10-26T04:38:33Z"
+ "finished_utc": "2026-10-26T12:47:00Z"
 }

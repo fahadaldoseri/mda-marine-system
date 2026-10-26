@@ -1,16 +1,18 @@
 === تدقيق المكتبات والمهارات والترابط ===
-  1) المكتبات — 14 ملفًا
+  1) المكتبات — 16 ملفًا
      ✔ findings-2026-10-20.json · 329,495 حرفًا
      ✔ findings-2026-10-21.json · 341,644 حرفًا
      ✔ findings-2026-10-22.json · 349,405 حرفًا
      ✔ findings-2026-10-23.json · 359,570 حرفًا
      ✔ findings-2026-10-24.json · 363,037 حرفًا
      ✔ findings-2026-10-25.json · 377,183 حرفًا
+     ✔ findings-2026-10-26.json · 381,800 حرفًا
      ✔ findings-register.md · 1,796 حرفًا
-     ✔ lexicon-library.json · 248,429 حرفًا
-     ✔ lexicon-library.md · 5,466 حرفًا
-     ✔ new-terms-register.json · 14,246 حرفًا
-     ✔ new-terms-register.md · 5,974 حرفًا
+     ✔ lexicon-exceptions.json · 36,436 حرفًا
+     ✔ lexicon-library.json · 250,513 حرفًا
+     ✔ lexicon-library.md · 5,144 حرفًا
+     ✔ new-terms-register.json · 12,387 حرفًا
+     ✔ new-terms-register.md · 3,796 حرفًا
      ✔ orthography-consistency.md · 3,343 حرفًا
      ✔ recurring-phrases.md · 2,661 حرفًا
      ✔ terminology-gaps.md · 598 حرفًا
@@ -21,7 +23,9 @@
      ✔ findings-2026-10-23.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
      ✔ findings-2026-10-24.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
      ✔ findings-2026-10-25.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ findings-2026-10-26.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
      ✔ findings-register.md ← validators/check_findings_closed.py, validators/check_library_use.py, tools/build_audit_report.py
+     ✔ lexicon-exceptions.json ← validators/check_prose_defects.py
      ✔ lexicon-library.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
      ✔ lexicon-library.md ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
      ✔ new-terms-register.json ← validators/check_library_use.py, tools/harvest_terms.py

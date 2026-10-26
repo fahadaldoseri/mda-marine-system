@@ -1,4 +1,2 @@
-الإصدارات المفحوصة: 20 · مدى: 2026-10-12 → التقرير-التراكمي-الواسع-28-فبراير-الى-11-أكتوبر-2026
-بنود المعجم: 1165 · نتائج: 171 · عبارات متكررة: 13
-المكتبة: /home/ubuntu/brain-marine-news/appendices/libraries/lexicon-library.json
-النتائج: /home/ubuntu/brain-marine-news/appendices/libraries/findings-2026-10-26.json
+سُجّل فقط — لم يُنفَّذ (RUNBOOK_DRY_STEPS: وضع معزول)
+الأمر المعتاد: bash -lc B="$PWD"; export B SITE; python3 tools/audit_corpus.py --date 2026-10-26; rc=$?; exit $rc

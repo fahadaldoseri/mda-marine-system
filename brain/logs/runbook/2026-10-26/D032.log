@@ -1,1 +1,2 @@
-✔ أُرشف نص الملخص: logs/telegram-archive/2026-10-26-2026-10-26T050839Z.html (1846 بايت)
+سُجّل فقط — لم يُنفَّذ (RUNBOOK_DRY_STEPS: وضع معزول)
+الأمر المعتاد: bash -lc B="$PWD"; export B; python3 tools/archive_tg_digest.py --date 2026-10-26; rc=$?; [ $rc -eq 3 ] && exit 1; exit $rc
