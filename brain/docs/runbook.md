@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة 5519649d4b7693f5). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة dce9065116e0a231). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -66,7 +66,7 @@
 | G037 | بوابات المخرج العشر | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G037.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/qa_gates.py | stop |
 | G042 | تطابق النص المبني مع النص النهائي | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G042.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh | stop |
 | G043 | سجل البوابات gate.json من سجل المحرّك | script |  |  | cmd:bash -lc grep -q 'runbook-ledger' logs/gate-{date}/gate.json | ف1–ف5 — بوابة التحقق | tools/runbook.py، tools/write_mark.py | stop |
-| G038 | كتابة العلامة بعد البوابة | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G038.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/write_mark.py | stop |
+| G038 | كتابة العلامة بعد البوابة | script |  | logs/pipeline-{date}.json | cmd:bash -lc test -s logs/runbook/{date}/G038.log؛ file_exists:logs/pipeline-{date}.json؛ cmd:bash -lc grep -q 'العلامة (final)' logs/runbook/{date}/G038.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/write_mark.py | stop |
 | G039 | مخطط العلامة الثابت | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G039.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_mark_schema.py | stop |
 | D010 | نشر الموقع (بعد كل البوابات) | script |  |  | cmd:python3 -c import json,sys;d=json.load(open('logs/publish-{date}.json'));sys.exit(0 if d.get('status')=='ok' else 1) | س2 — الإغلاق والدفع | tools/publish_site.sh، tools/publish_changes.sh | stop |
 | D020 | التحقق الحي من النشر (قراءة فقط) | script |  |  | cmd:python3 -c import json,sys;d=json.load(open('logs/live-{date}.json'));sys.exit(0 if d.get('status')=='ok' else 1) | س2 — الإغلاق والدفع | tools/check_live.sh، tools/live_visual_audit.py | stop |

@@ -36,9 +36,43 @@ COMMON_ARABIC_WORDS = {
     "الله", "المشروع", "كلمة", "هذه", "وخلل",
 }
 
+# سوابق ولواحق عربية شائعة لا تغيّر أصل الكلمة عند البحث في المعجم.
+# لا تُقبل الصيغة الملحقة إلا إذا وُجدت الصيغة الناتجة نفسها في القاموس؛
+# فلا يتحول التطبيع إلى قائمة سماح عامة أو إلى خفض لصرامة الفحص.
+LEXICON_PREFIXES = ("ال", "و", "ف", "ب", "ك", "ل")
+LEXICON_SUFFIXES = ("يا", "ها", "هم", "نا", "ي")
+LEXICON_MIN_BASE_LENGTH = 3
+
 
 def normalize_word(word: str) -> str:
     return "".join(ch for ch in unicodedata.normalize("NFC", word) if ch not in ARABIC_DIACRITICS)
+
+
+def lexicon_variants(word: str) -> set[str]:
+    """يعيد الصيغة الأصلية وصيغًا ناتجة عن إزالة لواصق عربية محددة فقط.
+
+    يسمح بعمليتي إزالة كحد أقصى حتى تُقرأ صيغ مثل «والتأمين» بوصفها
+    «و» + «ال» + الأصل، ويمنع التوسع غير المنضبط في الاشتقاق. لا تكفي
+    الصيغة الناتجة وحدها؛ إذ تُقارن لاحقًا بمجموعة القاموس الفعلية.
+    """
+    normalized = normalize_word(word)
+    variants = {normalized}
+    frontier = {normalized}
+    for _ in range(2):
+        next_frontier: set[str] = set()
+        for current in frontier:
+            for prefix in LEXICON_PREFIXES:
+                if current.startswith(prefix) and len(current) - len(prefix) >= LEXICON_MIN_BASE_LENGTH:
+                    next_frontier.add(current[len(prefix):])
+            for suffix in LEXICON_SUFFIXES:
+                if current.endswith(suffix) and len(current) - len(suffix) >= LEXICON_MIN_BASE_LENGTH:
+                    next_frontier.add(current[:-len(suffix)])
+        next_frontier -= variants
+        if not next_frontier:
+            break
+        variants.update(next_frontier)
+        frontier = next_frontier
+    return variants
 
 
 def strip_markup(text: str) -> str:
@@ -63,7 +97,17 @@ def load_project_dictionary() -> set[str]:
             continue
         if path.suffix.lower() == ".json":
             try:
-                raw = json.dumps(json.loads(raw), ensure_ascii=False)
+                data = json.loads(raw)
+                # ملف الاستثناءات المعتمد يحمل سببًا بشريًا لكل مدخل؛ لا
+                # نضيف كلمات التعليل نفسها إلى المعجم، بل المصطلح المراجع فقط.
+                if path.name == "lexicon-exceptions.json" and isinstance(data, dict):
+                    for entry in data.get("entries", []):
+                        if isinstance(entry, dict):
+                            term = normalize_word(str(entry.get("term", "")))
+                            if len(term) >= LEXICON_MIN_BASE_LENGTH:
+                                known.add(term)
+                    continue
+                raw = json.dumps(data, ensure_ascii=False)
             except json.JSONDecodeError:
                 pass
         for word in ARABIC_WORD.findall(raw):
@@ -130,8 +174,9 @@ def find_duplicate_letters(text: str) -> list[dict]:
                 # المانع: تسلسلات لا تصحّ عربيًا («ةة» · «اا» · «وو» · «ىى» · «ئئ» · «ؤؤ»)
                 # أو حرف تكرّر ثلاث مرات. أما تضاعف حرفين في كلمة عربية سليمة
                 # («عدده» · «مخطط» · «وتحقق» · «وتغيير») فتنبيهي لا مانع — تصحيح ك-134.
+                # ك-200: كان العدّ كليًا فيُعلن «اختتمت» عيبًا وهي سليمة. الصواب: ثلاثية متتالية فقط.
                 blocking = (repeated in {"ةة", "اا", "وو", "ىى", "ئئ", "ؤؤ"}
-                            or word.count(word[pos]) >= 3)
+                            or (pos + 2 < len(word) and word[pos] == word[pos + 1] == word[pos + 2]))
                 found.append({
                     "line": line_no, "word": raw, "blocking": blocking,
                     "reason": f"تكرار الحرف «{word[pos]}» داخل الكلمة"
@@ -215,6 +260,8 @@ def find_unknown_words(text: str) -> list[str]:
     for raw in ARABIC_WORD.findall(strip_markup(text)):
         word = normalize_word(raw)
         if len(word) < 3 or word in known:
+            continue
+        if any(variant in known for variant in lexicon_variants(word)):
             continue
         # الكلمات ذات الأعلام والأرقام والمصطلحات الأجنبية لا تدخل هذا التحذير.
         if any(ch.isdigit() for ch in raw):

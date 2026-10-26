@@ -31,6 +31,18 @@ LATIN_TOKEN = re.compile(r'[A-Za-z][A-Za-z0-9.\-/]{1,14}')
 BOLD = re.compile(r'\*\*(.+?)\*\*', re.S)
 URL_SPAN = re.compile(r'https?://\S+')
 ARABIC = re.compile(r'[\u0621-\u064A]')
+NOISE_PREFIXES = ('لا يوجد', 'ولا', 'وبلا', 'بلا بلاغ')
+
+# أسماء كيانات/عمليات تظهر كرموز منفصلة بسبب الحصاد اللاتيني، وليست مصطلحات
+# معجمية مستقلة. تُنقل إلى excluded_noise مع السبب بدل حذفها من سجل المراجعة.
+EXCLUDED_NOISE_TERMS = {
+    'DASMA': 'اسم سفينة/هدف (AL DASMA) لا مصطلح بحري مستقل',
+    'Tidal': 'جزء من اسم العملية «Tidal Wave» لا مصطلح مستقل',
+    'Wave': 'جزء من اسم العملية «Tidal Wave» لا مصطلح مستقل',
+    'SOYIA': 'اسم سفينة (MT SOYIA) لا مصطلح بحري مستقل',
+    'Holger': 'جزء من اسم جهة/مدير (Holger Navigation) لا مصطلح مستقل',
+    'Shafaq': 'اسم مصدر إخباري (Shafaq News) لا مصطلح بحري مستقل',
+}
 
 STOP = set("""نافذة النافذة نوافذ فترات فترةالتي الذي الذين وهذا وهذه وكان وكانت وقد فقد لكن ولكن حيث بين بعد قبل
 عند لدى خلال ضمن دون سوى إلا إذا كما أيضا أيضًا كذلك لذلك بينما حينما عندما أن إن بأن
@@ -64,6 +76,12 @@ def norm(text):
     text = re.sub(r'[\u064B-\u0652\u0640]', '', str(text))
     text = text.replace('أ', 'ا').replace('إ', 'ا').replace('آ', 'ا').replace('ى', 'ي')
     return re.sub(r'\s+', ' ', text).strip()
+
+
+def is_extraction_noise(text):
+    """الجملة الوصفية التي تبدأ بسابقة نفي ليست بندًا معجميًا مستقلًا."""
+    value = norm(text)
+    return any(value == prefix or value.startswith(prefix + ' ') for prefix in NOISE_PREFIXES)
 
 
 def read_json(path):
@@ -189,6 +207,8 @@ def _split_bold(match):
         piece = piece.strip(' .«»"\'')
         if not (4 <= len(piece) <= 48) or not ARABIC.search(piece):
             continue
+        if is_extraction_noise(piece):
+            continue
         if any(ch.isdigit() for ch in piece) or '—' in piece:
             continue
         words = norm(piece).split()
@@ -279,6 +299,33 @@ def harvest(date):
         'updated': '', 'count': 0, 'terms': [],
     }
     register.setdefault('terms', [])
+    register.setdefault('excluded_noise', [])
+    excluded_seen = {str(item.get('term')) for item in register['excluded_noise']
+                     if isinstance(item, dict)}
+    kept_terms = []
+    for entry in register['terms']:
+        term = str(entry.get('term') or '').strip()
+        status = str(entry.get('status') or '')
+        reason = ''
+        if term in EXCLUDED_NOISE_TERMS:
+            reason = EXCLUDED_NOISE_TERMS[term]
+        elif re.fullmatch(r'(?:EST|MN)-\d{4}-\d{2}-\d{2}-\d*', term):
+            reason = 'جزء مبتور من رمز إصدار كامل، لا بند معجمي مستقل'
+        elif is_extraction_noise(term):
+            reason = 'أثر استخراج من عبارة نفي وصفية، لا مصطلح مستقل'
+        elif status.startswith('مدموج في') and term not in bank_keys:
+            reason = f'جزء مدموج في {entry.get("review") or "مصطلح آخر"} وليس بندًا مستقلًا'
+        if reason:
+            if term and term not in excluded_seen:
+                register['excluded_noise'].append({
+                    'term': term,
+                    'reason': reason,
+                    'first_seen': entry.get('first_seen', ''),
+                })
+                excluded_seen.add(term)
+            continue
+        kept_terms.append(entry)
+    register['terms'] = kept_terms
     seen = {t['term'] for t in register['terms']}
     added = []
     for term, kind in ([(p, 'عبارة مميّزة بلا تعريف') for p in new_phrases]

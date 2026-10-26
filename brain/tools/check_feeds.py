@@ -419,13 +419,18 @@ def main():
     # ك-XX: «failed_feeds» كانت تحمل مسارات فاشلة لمصادر نجحت على مسار آخر، فيظهر
     # مصدر ناجح في قائمة المتعذّرين ويخالف العدّاد. الصحيح: المتعذّر = مصدر فشلت كل مساراته.
     failed_attempts = [r for r in res if not r['ok']]
-    failed = [r for r in res if not r['ok'] and r['num'] in failed_nums]
+    failed = []
+    failed_seen = set()
+    for r in res:
+        if not r['ok'] and r['num'] in failed_nums and r['num'] not in failed_seen:
+            failed.append(r)
+            failed_seen.add(r['num'])
     n_src = len(attempted)
     n_ok = len(ok_nums)
     n_fail = len(failed_nums)
     assert n_src == n_ok + n_fail, f'عدادات التغذيات غير متسقة: {n_src} != {n_ok}+{n_fail}'
     ratio = n_fail / n_src if n_src else 1.0
-    print(f"  نجح: {len(ok)} · فشل: {n_fail} مصدرًا · يُفحص بالمتصفح: {len({r['num'] for r in browser_only})} · عناصر مقروءة: {total}")
+    print(f"  نجح: {n_ok} مصدرًا ({len(ok)} مسارًا) · فشل: {n_fail} مصدرًا · يُفحص بالمتصفح: {len({r['num'] for r in browser_only})} · عناصر مقروءة: {total}")
     for r in browser_only:
         print(f"   ◐ {r['num']} {r['name'][:34]}: {BROWSER_ONLY[r['num']]}")
     for r in failed:
@@ -453,14 +458,20 @@ def main():
         status = 'ok'
 
     OUT.mkdir(exist_ok=True)
+    # JSON اليومي هو سجل المسارات الكامل: لا تُحذف صفوف ok=false؛ فحذفها كان
+    # يترك الملف بلا دليل على الفشل بينما يعلن status.json عددًا غير صفري.
+    # المستهلكون الذين يريدون المحتوى يرشحون items غير الفارغة، كما يفعل measure_filter_savings.
     (OUT / f'feeds-{stamp}.json').write_text(
-        to_latin(json.dumps(ok, ensure_ascii=False, indent=1)), encoding='utf-8')
+        to_latin(json.dumps(res, ensure_ascii=False, indent=1)), encoding='utf-8')
     lines = [f"# مستجدات التغذيات — {stamp} UTC", "",
              f"تغذيات مفحوصة: {len(res)} · ناجحة: {len(ok)} · فاشلة: {len(failed)} · عناصر: {total}", ""]
     for r in ok:
         lines.append(f"## {r['num']}. {r['name']} — via: {r['via']} · عناصر: {r['items_count']} · محتوى: {r['content_chars']} حرف")
         for it in r['items'][:5]:
             lines.append(f"- {it['date'][:25]} · {it['title'][:110]}")
+        lines.append("")
+    for r in failed:
+        lines.append(f"## {r['num']}. {r['name']} — الحالة: فشل · السبب: {r['block_reason']}")
         lines.append("")
     (OUT / f'feeds-{stamp}.md').write_text(to_latin("\n".join(lines)), encoding='utf-8')
     checked_feeds = [{

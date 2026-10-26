@@ -59,6 +59,11 @@ def _policy():
 _pol = _policy()
 _HID = set(_pol.get('hidden_sections') or [])
 _REQ = list(_pol.get('required_in_md') or _pol.get('required_sections') or [])
+_ALLOWED_NO_BLOCK = _pol.get('allowed_no_block_sections') or {}
+if not isinstance(_ALLOWED_NO_BLOCK, dict) or any(
+        not isinstance(k, str) or not isinstance(v, str) or not v.strip()
+        for k, v in _ALLOWED_NO_BLOCK.items()):
+    raise RuntimeError("قائمة الأقسام بلا كتلة العرض المسموحة غير صالحة أو بلا أسباب")
 
 bp = GEN / 'blocks.py'
 if bp.exists():
@@ -95,8 +100,14 @@ if meta and isinstance(meta.get('blocks'), dict) and report.exists():
                         for v in [bmap[k]])]
     check(not dead, f"كل مفاتيح الكتل تطابق عنوانًا ({len(bmap)})", f"مفاتيح كتل لا تطابق أي عنوان (ربط ميت): {dead}")
     no_block = [t for t in titles if not any(k in t for k in bmap)]
-    warn(not no_block, f"كل الأقسام مرتبطة بكتلة ({len(titles)} قسمًا)",
-         f"أقسام بلا كتلة عرض (تحقّق أنها مقصودة): {no_block}")
+    unapproved_no_block = [t for t in no_block if t not in _ALLOWED_NO_BLOCK]
+    if unapproved_no_block:
+        warn(False, "", "أقسام بلا كتلة عرض غير مدرجة في سياسة الأقسام النصية: "
+             f"{unapproved_no_block}")
+    elif no_block:
+        warn(True, f"أقسام نصية بلا كتلة عرض مسموحة ومعللة ({len(no_block)})", "")
+    else:
+        warn(True, f"كل الأقسام مرتبطة بكتلة ({len(titles)} قسمًا)", "")
     if _REQ:
         got = [r for r in _REQ if any(r in t for t in titles)]
         check(len(got) == len(_REQ), f"أقسام التقرير المطلوبة ({len(got)}/{len(_REQ)})",
@@ -160,6 +171,60 @@ def _known_block(feeds):
 
 
 # 6) علامة الخط اليومي: إن وُجد تقرير اليوم وجب أن يكون الخط قد نجح
+def _runbook_mark_evidence():
+    """دليل مكافئ للعلامة صادر عن G038 ثم G039 في سجل الكتيب.
+
+    لا يُقبل السجل بالاسم وحده: يجب أن تكون الخطوتان ناجحتين، وأن يعلن G038
+    ملف العلامة كمخرج ذي بصمة، وأن يثبت سجلاهما الكتابة والتحقق بعد البوابة.
+    """
+    ledger_p = B / 'logs' / 'runbook' / DATE / f'{DATE}.jsonl'
+    if not ledger_p.is_file():
+        return ""
+    last = {}
+    try:
+        for line in ledger_p.read_text(encoding='utf-8').splitlines():
+            if line.strip():
+                entry = json.loads(line)
+                if entry.get('step'):
+                    last[entry['step']] = entry
+    except (OSError, json.JSONDecodeError, TypeError):
+        return ""
+    writer, schema = last.get('G038') or {}, last.get('G039') or {}
+    if writer.get('status') not in ('done', 'done_warn') or writer.get('rc') != 0:
+        return ""
+    if schema.get('status') not in ('done', 'done_warn') or schema.get('rc') != 0:
+        return ""
+    mark_rel = f'logs/pipeline-{DATE}.json'
+    mark_hash = (writer.get('outputs') or {}).get(mark_rel)
+    if not re.fullmatch(r'[0-9a-f]{64}', str(mark_hash or '')):
+        return ""
+    gate_p = B / 'logs' / f'gate-{DATE}' / 'gate.json'
+    if not gate_p.is_file():
+        return ""
+    try:
+        gate = json.loads(gate_p.read_text(encoding='utf-8'))
+        if gate.get('status') not in ('ok', 'warn') or not isinstance(gate.get('exit_code'), int):
+            return ""
+    except (OSError, json.JSONDecodeError, TypeError):
+        return ""
+    def _log(entry):
+        rel = entry.get('log')
+        if not rel:
+            return ''
+        p = Path(rel)
+        if not p.is_absolute():
+            p = B / p
+        try:
+            return p.read_text(encoding='utf-8')
+        except OSError:
+            return ''
+    writer_log, schema_log = _log(writer), _log(schema)
+    if 'العلامة (final)' not in writer_log or 'مخطط العلامة' not in schema_log:
+        return ""
+    return (f"علامة التشغيل موثقة من الكتيب (G038 كتب {mark_rel} ثم G039 تحقّق منها)"
+            " — البوابة النهائية ناجحة أو ناجحة مع تحذير")
+
+
 mark = B / 'logs' / f'pipeline-{DATE}.json'
 if report.exists():
     if mark.exists():
@@ -197,7 +262,10 @@ if report.exists():
         except Exception as e:
             fails.append(f"علامة الخط غير صالحة: {e}")
     else:
-        fails.append(f"لا علامة نجاح للخط اليومي ({mark.name}) — لم يُنفَّذ الخط أو فشل قبل الكتابة")
+        equivalent = _runbook_mark_evidence()
+        check(bool(equivalent), equivalent,
+              f"لا علامة نجاح للخط اليومي ({mark.name}) ولا دليل مكافئ مكتمل من الكتيب "
+              "— لم يُنفَّذ الخط أو فشل قبل الكتابة")
 else:
     warn(False, "", f"لا تقرير لهذا اليوم بعد ({report.name}) — طبيعي قبل الكتابة")
 
@@ -307,5 +375,4 @@ for m in fails: print(f"  ✘ {m}")
 print(f"----- النتيجة: نجح {len(oks)} · تحذير {len(warns)} · فشل {len(fails)} -----")
 print("الحكم: " + ("ممنوع التسليم — أصلح الفشل أولًا" if fails else "جاهز للتشغيل"))
 sys.exit(1 if fails else 0)
-
 

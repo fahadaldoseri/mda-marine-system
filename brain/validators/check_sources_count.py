@@ -34,6 +34,7 @@ from pathlib import Path
 
 B = Path(f'{BRAIN}')
 MANIFEST = B / 'appendices' / 'sources-manifest.json'
+HISTORICAL_EXEMPTIONS = B / 'appendices' / 'source-count-historical-exemptions.json'
 SITE_GEN = Path(f'{SITE}/generator')
 
 # ملفات يجب أن تطابق الرقم المعتمد (مانع)
@@ -62,31 +63,70 @@ WORD_RE = re.compile(
 WORD_TENS_RE = re.compile("(?:ال)?(" + "|".join(k.lstrip("ال") for k in _W_TENS) + r")\s+(?:مصدرًا|مصدرا|مصدر|المصادر)")
 
 
-def count_mentions(path: Path, approved: int) -> list[tuple[str, int]]:
+def load_historical_exemptions() -> list[dict]:
+    """يقرأ قائمة الاستثناءات المعللة؛ فسادها لا يفتح باب تجاوز صامت."""
+    data = json.loads(HISTORICAL_EXEMPTIONS.read_text(encoding='utf-8'))
+    entries = data.get('entries') if isinstance(data, dict) else None
+    if not isinstance(entries, list):
+        raise ValueError('قائمة الاستثناءات لا تحتوي entries')
+    return [entry for entry in entries if isinstance(entry, dict)]
+
+
+def historical_exemption(path: Path, line_no: int, number: int, line_text: str,
+                         full_text: str, entries: list[dict]) -> str | None:
+    """لا يتجاوز إلا موضعًا مطابقًا نصًا وعددًا وله علامة تاريخية داخل الملف."""
+    try:
+        relative = path.relative_to(B).as_posix()
+    except ValueError:
+        return None
+    for entry in entries:
+        if entry.get('path') != relative:
+            continue
+        if int(entry.get('line', -1)) != line_no or int(entry.get('number', -1)) != number:
+            continue
+        needle = str(entry.get('line_contains') or '')
+        marker = str(entry.get('historical_marker') or '')
+        if needle and needle not in line_text:
+            continue
+        if marker and marker not in full_text:
+            continue
+        return str(entry.get('reason') or 'استثناء تاريخي موثق')
+    return None
+
+
+def count_mentions(path: Path, approved: int) -> list[tuple[str, int, int, str]]:
     try:
         text = path.read_text(encoding='utf-8')
     except (OSError, UnicodeDecodeError):
         return []
     bad = []
+
+    lines = text.splitlines()
+
+    def add_bad(display: str, number: int, start: int) -> None:
+        line_no = text[:start].count('\n') + 1
+        line_text = lines[line_no - 1] if 0 < line_no <= len(lines) else ''
+        bad.append((display, number, line_no, line_text))
+
     for m in COUNT_RE.finditer(text):
         n = int(m.group(1).translate(_AR_D))
         if n == approved or n == 0:
             continue
         line = text[:m.start()].count('\n') + 1
-        bad.append((f"{path}:{line} ← {n} مصدرًا", n))
+        add_bad(f"{path}:{line} ← {n} مصدرًا", n, m.start())
     # أرقام مكتوبة بالكلمات: «السبعة والثلاثون» = 37
     for m in WORD_RE.finditer(text):
         n = _W_ONES[m.group(1)] + _W_TENS.get("ال" + m.group(2), _W_TENS.get(m.group(2), 0))
         if n == approved or n == 0:
             continue
         line = text[:m.start()].count('\n') + 1
-        bad.append((f"{path}:{line} ← «{m.group(0)}» = {n} مصدرًا", n))
+        add_bad(f"{path}:{line} ← «{m.group(0)}» = {n} مصدرًا", n, m.start())
     for m in WORD_TENS_RE.finditer(text):
         n = _W_TENS.get("ال" + m.group(1), _W_TENS.get(m.group(1), 0))
         if n == approved or n == 0:
             continue
         line = text[:m.start()].count('\n') + 1
-        bad.append((f"{path}:{line} ← «{m.group(0)}» = {n} مصدرًا", n))
+        add_bad(f"{path}:{line} ← «{m.group(0)}» = {n} مصدرًا", n, m.start())
     return bad
 
 
@@ -104,6 +144,12 @@ def main() -> int:
     print(f"=== بوابة عدد المصادر — المعتمد: {approved} ===")
     blockers: list[str] = []
     warnings: list[str] = []
+    historical_skips: list[str] = []
+    try:
+        historical_entries = load_historical_exemptions()
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError) as e:
+        blockers.append(f"قائمة الاستثناءات التاريخية غير صالحة: {e}")
+        historical_entries = []
 
     # (أ) ملف القائمة المشار إليه في البيان يجب أن يكون موجودًا — عطل ك-08 (مرجع ميت)
     _slf = _man.get('source_list_file')
@@ -121,7 +167,7 @@ def main() -> int:
     for p in MANDATORY:
         if not p.exists():
             continue
-        for item, _ in count_mentions(p, approved):
+        for item, _, _, _ in count_mentions(p, approved):
             blockers.append(item)
     for p in ADVISORY:
         if not p.exists():
@@ -133,9 +179,20 @@ def main() -> int:
         for f in files:
             if any(a in f.name for a in _adv):
                 continue
-            for item, _ in count_mentions(f, approved):
-                warnings.append(item)
+            try:
+                full_text = f.read_text(encoding='utf-8')
+            except (OSError, UnicodeDecodeError):
+                full_text = ''
+            for item, number, line_no, line_text in count_mentions(f, approved):
+                reason = historical_exemption(f, line_no, number, line_text,
+                                              full_text, historical_entries)
+                if reason:
+                    historical_skips.append(f"{item} — {reason}")
+                else:
+                    warnings.append(item)
 
+    for item in historical_skips:
+        print(f"   ↷ تجاهل تاريخي معلل: {item}")
     for w in warnings:
         print(f"   ◐ تنبيه (سياق وصفي): {w}")
     for b in blockers:

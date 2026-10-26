@@ -167,10 +167,15 @@ def main() -> int:
             errors.append("بقاء-2: جدول رموز التقدير EST غير ظاهر بعد الحذف الجزئي")
         else:
             print("  ✔ بقاء-2: جدول رموز التقدير EST")
-        if "المراجعة الداخلية" not in body:
-            warns.append("بقاء-3: سطر المراجعة الداخلية غير ظاهر")
+        # ك-196: تعارض مع G035 (منع ذكر العمل الداخلي في المتن). السجل صار في الواجهة.
+        _mp = Path(sys.argv[2]) if len(sys.argv) > 2 else None
+        _meta_rev = ""
+        if _mp is not None and _mp.is_file():
+            _meta_rev = str((json.loads(_mp.read_text(encoding="utf-8")).get("intel_analysis") or {}).get("internal_review", "") or "")
+        if not _meta_rev:
+            warns.append("بقاء-3: سجل المراجعة الداخلية غير ظاهر في الواجهة")
         else:
-            print("  ✔ بقاء-3: سطر المراجعة الداخلية")
+            print("  ✔ بقاء-3: سجل المراجعة الداخلية في الواجهة")
 
     # ح12 — وسم الأسلوب في ملف الواجهة
     if meta_path and meta_path.exists():
