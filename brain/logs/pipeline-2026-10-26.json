@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-26",
+  "feeds": {},
+  "final_gate": {
+    "blocked_steps": [],
+    "dir": "logs/gate-2026-10-26",
+    "exit_code": 1,
+    "note": "نتيجة بوابة التسليم النهائية — كُتبت العلامة بعدها.",
+    "status": "warn"
+  },
+  "finished_utc": "2026-10-26T04:04:06Z",
+  "gate_finished_utc": "2026-10-26T04:38:33Z",
+  "gate_note": "علامة مرحلة الخط اليومي — بوابة التسليم لم تُشغَّل بعد.",
+  "gate_state": "not_run",
+  "language": {
+    "banned_terms": 0,
+    "edit_pass": {
+      "applied": true,
+      "by_category": {
+        "أسلوب": 35,
+        "ترجمة حرفية": 3,
+        "مفردة": 21
+      },
+      "changes": 59,
+      "edited": 6,
+      "model": "gpt-5-mini",
+      "rejected": 4,
+      "sections": 15
+    },
+    "long_sentences": 1,
+    "orthography_errors": 0,
+    "waw_pct": 1.7,
+    "waw_runs3": 0
+  },
+  "ofac": {
+    "derived_from": "watchlist/ofac-targets.txt + archive/ofac-screen-latest.json",
+    "list": "https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/SDN.CSV",
+    "matches": [],
+    "note": "فُحص 9 مستهدفًا — الحالة: ok",
+    "results_file": "archive/ofac-screen-latest.json",
+    "status": "ok",
+    "targets": 9
+  },
+  "overall": "ok",
+  "pipeline_version": 4,
+  "report_present_at_pipeline_end": true,
+  "schema_version": 1,
+  "sources": {
+    "approved": 62,
+    "checked": 35,
+    "failed": 1,
+    "failed_names": [
+      "حساب @bna_en على X"
+    ],
+    "ok": 34,
+    "status_file": "feeds/feeds-2026-10-26.status.json"
+  },
+  "written_stage": "final"
+}
