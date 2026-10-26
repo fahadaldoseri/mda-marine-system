@@ -1,3 +1,5 @@
+drift brain/validators/check_intel.py
+drift brain/validators/check_sources_count.py
 drift brain/validators/check_prose_defects.py
 drift brain/docs/دليل-التقرير-اليومي-النوع-والتغطية-والإجراءات.md
 drift brain/docs/ملاحق-التقرير-المعتمدة.md
@@ -19,3 +21,4 @@ drift brain/templates/approved-pdf/BASELINE-virgin-2026-10-23.json
 drift brain/templates/approved-pdf/BASELINE-virgin-2026-10-23.md
 drift brain/runbook/runbook.json
 drift site/generator/build_report.py
+drift site/sources/report-sections-policy.json
