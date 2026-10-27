@@ -130,6 +130,25 @@ def count_mentions(path: Path, approved: int) -> list[tuple[str, int, int, str]]
     return bad
 
 
+def channel_identity(_approved: int) -> list[str]:
+    """كل مصدر معتمد له قناة واحدة ومجموعها = المعتمد (ك-212)."""
+    bad: list[str] = []
+    try:
+        import sys as _sys
+        _sys.path.insert(0, str(BRAIN / "tools"))
+        import source_channels as _sc  # noqa: WPS433
+        total, approved, gap, dup = _sc.identity()
+        if gap:
+            bad.append(f"مصادر معتمدة بلا قناة (تسقط من العدّاد): {gap}")
+        if dup:
+            bad.append(f"مصادر في أكثر من قناة: {dup}")
+        if total != approved:
+            bad.append(f"مجموع القنوات {total} لا يساوي المعتمد {approved}")
+    except Exception as e:  # لا يبتلع الخطأ: يُعلن الانهيار مانعًا
+        bad.append(f"تعذّر تحميل خريطة القنوات: {type(e).__name__}: {e}")
+    return bad
+
+
 def main() -> int:
     if not MANIFEST.exists():
         print(f"  ✘ ملف المصدر الواحد مفقود: {MANIFEST}")
@@ -143,6 +162,7 @@ def main() -> int:
 
     print(f"=== بوابة عدد المصادر — المعتمد: {approved} ===")
     blockers: list[str] = []
+    blockers.extend(channel_identity(approved))  # ك-212: لا مصدر معتمد بلا قناة
     warnings: list[str] = []
     historical_skips: list[str] = []
     try:

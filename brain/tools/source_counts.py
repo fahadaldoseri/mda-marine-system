@@ -75,9 +75,25 @@ def reason_label(block_reason: str) -> str:
     return "تغذية معطوبة"
 
 
+def channels_declared() -> dict:
+    """القنوات المُعلنة (مصدر واحد للحقيقة) — تُقرأ من tools/source_channels.py."""
+    sys.path.insert(0, str(B / "tools"))
+    import source_channels  # noqa: WPS433
+    ch = source_channels.channels()
+    return {"rss": sorted(ch["rss"]), "manual": sorted(ch["browser"]), "proxy": sorted(ch["proxy"])}
+
+
+def identity_ar(c: dict) -> str:
+    """هوية العدّاد: المعتمد = المسار الآلي + المرجعية اليدوية (+ البديل). أي فرق = مانع."""
+    ch = channels_declared()
+    parts = [f"{c['approved']} معتمدة = {len(ch['rss'])} بالمسار الآلي + {len(ch['manual'])} بالمرجعية اليدوية"]
+    if ch["proxy"]:
+        parts.append(f"{len(ch['proxy'])} بمسار رسمي بديل")
+    return "المصادر: " + " + ".join(parts)
+
+
 def line_ar(c: dict) -> str:
-    txt = (f"المصادر: {c['approved']} معتمدة · {c['checked']} مرصودة آليًا · "
-           f"{c['ok']} ناجحة")
+    txt = (f"{identity_ar(c)} · {c['ok']} ناجحة")
     if c["failed"]:
         # (و) كل مصدر متعذّر باسمه وسببه، لا أسماء مختصرة ولا أسباب مجمّعة
         pairs = []
@@ -190,6 +206,18 @@ def check(date: str, c: dict) -> list[str]:
     # الثابت الملزم (البند هـ): المصادر المرصودة آليًا = ناجحة + متعذّرة.
     if c["checked"] != c["ok"] + c["failed"]:
         bad.append(f"الثابت مفحوصة = ناجحة + متعذّرة مخالف: {c['checked']} ≠ {c['ok']} + {c['failed']}")
+    # هوية القنوات (ك-212): كل مصدر معتمد له قناة واحدة، والمجموع = المعتمد.
+    ch = channels_declared()
+    flat = ch["rss"] + ch["manual"] + ch["proxy"]
+    dup = sorted({n for n in flat if flat.count(n) > 1})
+    if dup:
+        bad.append(f"مصادر في أكثر من قناة: {dup}")
+    declared = len(set(flat))
+    if declared != c["approved"]:
+        bad.append(f"مجموع قنوات المصادر {declared} لا يساوي المعتمد {c['approved']} — مصدر بلا قناة")
+    if c.get("manual_reference_present") and len(ch["manual"]) != len(c.get("manual_reference") or []):
+        bad.append(f"قائمة المرجعية اليدوية في ملف الحالة {len(c.get('manual_reference') or [])} "
+                   f"تخالف إعلان القنوات {len(ch['manual'])} — أعد تشغيل فحص التغذيات")
     md = report_path(date)
     if md.exists() and line_ar(c).split("·")[0].strip() not in md.read_text(encoding="utf-8"):
         bad.append(f"متن التقرير لا يحمل سطر الأرقام المعتمد: {line_ar(c)}")

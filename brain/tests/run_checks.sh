@@ -209,6 +209,7 @@ t "منع التركيب المعلّق (ك-173)" python3 tests/test_hanging_ope
 
 echo "19) السجل الحاكم للمفردات وتغطية الأسطح (طلب فهد 2026-10-27)"
 t "السجل الحاكم: صلاحية · إنفاذ كل بند · سبب ومصدر · منع التعديل اليدوي · تغطية الأسطح" python3 tests/test_vocab_registry.py
+python3 tests/test_source_channels.py
 
 echo "----- الحصيلة -----"
 printf '  نجح: %s · فشل: %s\n' "$PASS" "$FAIL"
