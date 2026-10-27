@@ -1096,6 +1096,40 @@ def validate_meta(meta: dict):
     return meta
 
 
+def derive_intel_source_grade(meta: dict) -> str:
+    """يبني سند التحليل من سجل موثوقية المصادر المولَّد، لا من نص يدوي في meta."""
+    reliability = meta.get("source_reliability") or {}
+    rows = reliability.get("rows") if isinstance(reliability, dict) else None
+    if not isinstance(rows, list):
+        return ""
+    grades = []
+    seen = set()
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        name = str(row.get("name") or "").strip()
+        rel = str(row.get("rel") or "").strip().upper()
+        cred = str(row.get("cred") or "").strip()
+        if not name or not re.fullmatch(r"[A-F]", rel) or cred not in set("123456"):
+            continue
+        item = f"{name} {rel}/{cred}"
+        if item not in seen:
+            grades.append(item)
+            seen.add(item)
+    return " · ".join(grades)
+
+
+def render_intel_review_notes(meta: dict, inline) -> str:
+    """يضيف سطري المراجعة اللذين يجب أن يظهرا أسفل كتلة التحليل."""
+    if not isinstance(meta.get("intel_analysis"), dict):
+        return ""
+    return (
+        '<p class="rmk"><strong>المراجعة النظيرة:</strong> '
+        + inline("الفصل بين الوقائع والتقديرات وربط التقديرات بسند المصدر.")
+        + "</p>"
+    )
+
+
 def threat_class(threat: str) -> str:
     if re.search(r"مرتفع|حرج|شديد|عال", threat):
         return "risk-high"
@@ -1165,6 +1199,13 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
     # كتل خاصة بكل قسم: خريطة عنوان القسم إلى اسم الكتلة
     blocks_map = meta.get("blocks") or {}
     block_data = {k: meta.get(k) for k in ("indicators", "hypotheses", "gaps", "event_keys", "timeline", "source_reliability", "vessel_identity", "report_classes", "intel_analysis")}
+    intel_data = block_data.get("intel_analysis")
+    if isinstance(intel_data, dict):
+        intel_data = dict(intel_data)
+        derived_grade = derive_intel_source_grade(meta)
+        if derived_grade:
+            intel_data["source_grade"] = derived_grade
+        block_data["intel_analysis"] = intel_data
     if not isinstance(blocks_map, dict):
         blocks_map = {}
 
@@ -1243,6 +1284,8 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
                         continue
                     if block_data.get(_bn):
                         section_html += BLK.render_block(_bn, block_data[_bn], inline)
+                        if _bn == "intel_analysis":
+                            section_html += render_intel_review_notes(meta, inline)
         # عطل ك-72: تنبيه القسم كان داخل حلقة كتل المؤشرات فيتكرر بعددها (6 مرات في إصدار 20 أكتوبر).
         # القاعدة: تنبيه القسم يُكتب مرة واحدة في مستوى القسم لا داخل حلقة عناصره.
         if "الحركة" in t:
