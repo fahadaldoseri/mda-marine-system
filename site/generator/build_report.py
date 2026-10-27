@@ -1318,7 +1318,9 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
             win = f'<bdi class="bidi">{_m.group(1)}</bdi> {_m.group(2)}'
         chips.append(f'<span class="chip">فترة التغطية <b>{win}</b></span>')
     if meta.get("sources_checked") not in (None, ""):
-        chips.append(f'<span class="chip">مصادر مفحوصة <b class="bidi">{esc(meta["sources_checked"])}</b></span>')
+        chips.append(f'<span class="chip">مصادر مرصودة آليًا <b class="bidi">{esc(meta["sources_checked"])}</b></span>')
+    if meta.get("sources_manual_reference_count") not in (None, ""):
+        chips.append(f'<span class="chip">مرجعية تُراجع يدويًا <b class="bidi">{esc(meta["sources_manual_reference_count"])}</b></span>')
     if meta.get("sources_cited") not in (None, ""):
         chips.append(f'<span class="chip">مصادر مستشهد بها <b class="bidi">{esc(meta["sources_cited"])}</b></span>')
 

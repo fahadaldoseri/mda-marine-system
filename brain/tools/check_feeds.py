@@ -40,6 +40,16 @@ HEADERS = {
 # مصادر بلا تغذية آلية رسمية (موقعها JS ولا تغذية معلنة): تُقيَّد «يُفحص بالمتصفح»
 # ولا تُحسب فشلًا — لا نبني مسارًا يتجاوز الحماية (سياسة المستخدم).
 BROWSER_ONLY = {}  # ك-81: واس صار له مسار رسمي (بيانات الصفحة المُضمَّنة)
+# مرجعية تُراجع يدويًا ولا تُجلب آليًا:
+#   JS/محتوى غير مستخرج: 1، 5، 13، 39، 40، 59
+#   ضجيج تنقّل/تسويق: 21، 23، 34، 44، 52
+#   حجب/وصول رسمي أو جلسة: 15، 18، 19، 48، 56، 57، 60، 61، 62
+#   فشل TLS مع كونا: 27
+# القائمة هي الأرقام التي اعتمدها المالك؛ لا تُنتج هذه المصادر عناصر وهمية.
+MANUAL_REFERENCE = {
+    1, 5, 13, 15, 18, 19, 21, 23, 27, 34, 39,
+    40, 44, 48, 52, 56, 57, 59, 60, 61, 62,
+}
 FAIL_RATIO_LIMIT = 0.20
 MIN_CONTENT_CHARS = 400
 MIN_ITEMS = 1
@@ -373,14 +383,15 @@ def _newest_age_days(entry):
     return (dt.datetime.now(dt.timezone.utc) - newest).days
 
 
-def count_sources(res, browser_only_nums=()):
+def count_sources(res, browser_only_nums=(), manual_reference_nums=()):
     """عدّ المصادر لا الصفوف (البند هـ): مصدر نجح على مسار وفشل على آخر لا يُحسب مرتين.
 
     ك-146: كان المنطق مضمَّنًا في main بمتغيّر غير معرّف فانهار الفحص على الشبكة؛ صار دالة
     تُختبر بلا شبكة في tests/test_feed_counters.py.
     """
-    attempted = {r['num'] for r in res} | set(browser_only_nums or ())
-    ok_nums = {r['num'] for r in res if r['ok']}
+    manual = set(manual_reference_nums or ())
+    attempted = ({r['num'] for r in res} | set(browser_only_nums or ())) - manual
+    ok_nums = {r['num'] for r in res if r['ok'] and r['num'] not in manual}
     failed_nums = attempted - ok_nums
     assert len(attempted) == len(ok_nums) + len(failed_nums), (
         f"عدادات التغذيات غير متسقة: {len(attempted)} != {len(ok_nums)}+{len(failed_nums)}")
@@ -393,7 +404,7 @@ def main():
     a = ap.parse_args()
     stamp = a.date or dt.datetime.now(dt.timezone.utc).strftime('%Y-%m-%d')
 
-    F = feeds()
+    F = [f for f in feeds() if f['num'] not in MANUAL_REFERENCE]
     print(f"  تغذيات مرصودة: {len(F)}")
     if not F:
         print("  ✘ لا تغذيات في sections/10-sources.md — خطأ إعداد")
@@ -415,7 +426,7 @@ def main():
     # القياس بعدد المصادر لا بعدد المسارات: المسار الواحد بسطرين لا يعني مصدرين فاشلين (عطل ك-64)
     # البند هـ: مصدر نجح على مسار وفشل على آخر كان يُحسب ناجحًا ومتعذّرًا معًا. فالعدّ بالمجموعات:
     # مفحوصة = المصادر التي جُربت · ناجحة = ما نجح على مسار واحد على الأقل · متعذّرة = الباقي.
-    attempted, ok_nums, failed_nums = count_sources(res, BROWSER_ONLY)
+    attempted, ok_nums, failed_nums = count_sources(res, BROWSER_ONLY, MANUAL_REFERENCE)
     # ك-XX: «failed_feeds» كانت تحمل مسارات فاشلة لمصادر نجحت على مسار آخر، فيظهر
     # مصدر ناجح في قائمة المتعذّرين ويخالف العدّاد. الصحيح: المتعذّر = مصدر فشلت كل مساراته.
     failed_attempts = [r for r in res if not r['ok']]
@@ -431,6 +442,7 @@ def main():
     assert n_src == n_ok + n_fail, f'عدادات التغذيات غير متسقة: {n_src} != {n_ok}+{n_fail}'
     ratio = n_fail / n_src if n_src else 1.0
     print(f"  نجح: {n_ok} مصدرًا ({len(ok)} مسارًا) · فشل: {n_fail} مصدرًا · يُفحص بالمتصفح: {len({r['num'] for r in browser_only})} · عناصر مقروءة: {total}")
+    print(f"  ◻ مرجعية تُراجع يدويًا: {len(MANUAL_REFERENCE)} مصدرًا · الأرقام: {sorted(MANUAL_REFERENCE)}")
     for r in browser_only:
         print(f"   ◐ {r['num']} {r['name'][:34]}: {BROWSER_ONLY[r['num']]}")
     for r in failed:
@@ -464,7 +476,8 @@ def main():
     (OUT / f'feeds-{stamp}.json').write_text(
         to_latin(json.dumps(res, ensure_ascii=False, indent=1)), encoding='utf-8')
     lines = [f"# مستجدات التغذيات — {stamp} UTC", "",
-             f"تغذيات مفحوصة: {len(res)} · ناجحة: {len(ok)} · فاشلة: {len(failed)} · عناصر: {total}", ""]
+             f"تغذيات مفحوصة: {n_src} · ناجحة: {n_ok} · فاشلة: {n_fail} · عناصر: {total}",
+             f"◻ مرجعية تُراجع يدويًا: {len(MANUAL_REFERENCE)} مصدرًا · الأرقام: {sorted(MANUAL_REFERENCE)}", ""]
     for r in ok:
         lines.append(f"## {r['num']}. {r['name']} — via: {r['via']} · عناصر: {r['items_count']} · محتوى: {r['content_chars']} حرف")
         for it in r['items'][:5]:
@@ -485,6 +498,7 @@ def main():
     (OUT / f'feeds-{stamp}.status.json').write_text(to_latin(json.dumps({
         'date': stamp, 'status': status, 'checked': n_src, 'ok': len({r['num'] for r in ok}),
         'failed': n_fail, 'browser_only': sorted({r['num'] for r in browser_only}),
+        'manual_reference': sorted(MANUAL_REFERENCE),
         'stale': sorted({r['num'] for r in stale}), 'empty': sorted({r['num'] for r in empty}),
         'stale_days_limit': STALE_DAYS_LIMIT,
         'fail_ratio': round(ratio, 3), 'fail_ratio_limit': FAIL_RATIO_LIMIT, 'items': total,
