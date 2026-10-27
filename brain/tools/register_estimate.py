@@ -5,7 +5,7 @@
 القاعدة: الرمز يُمنح مرة واحدة ومعناه ثابت (لا إعادة إسناد).
 الاستخدام:
     python3 tools/register_estimate.py --date 2026-10-20 --seq 1 \
-        --section "التحليل الاستخباري" --statement "…" --confidence "مرجّح (55–80%)" \
+        --section "قراءة الموقف وتحليل المؤشرات" --statement "…" --confidence "مرجّح (55–80%)" \
         --reliability "UKMTO A/2" --support "…"
     python3 tools/register_estimate.py --list
 رموز الخروج: 0 نجاح · 2 رفض (تعارض أو إعادة إسناد)
@@ -35,7 +35,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--date")
     ap.add_argument("--seq", type=int)
-    ap.add_argument("--section", default="التحليل الاستخباري")
+    ap.add_argument("--section", default="قراءة الموقف وتحليل المؤشرات")
     ap.add_argument("--statement", default="")
     ap.add_argument("--confidence", default="")
     ap.add_argument("--reliability", default="")

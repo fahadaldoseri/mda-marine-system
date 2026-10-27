@@ -23,7 +23,7 @@ def entries() -> tuple[list[dict], str]:
         return [], "missing"
     d = json.loads(VOCAB.read_text(encoding="utf-8"))
     items = d.get("items") or d.get("entries") or d.get("terms") or []
-    status = str(d.get("status") or "proposed")
+    status = "approved" if str(d.get("status")) in ("canonical", "approved") else str(d.get("status") or "proposed")
     return items, status
 
 

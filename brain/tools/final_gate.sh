@@ -121,7 +121,7 @@ step "ترابط المكتبات والمهارات" 2 python3 validators/check
 step "تماثل المهارات والمكتبات (مزامنة فورية)" 1 bash tools/restore_skills.sh --check
 step "سلامة المهارات" 1 python3 validators/check_skills_integrity.py
 step "بوابة الفهم (مرحلة $COMP_STAGE)" 2 python3 "$B/validators/check_comprehension.py" --date "$D"
-step "بوابة التحليل الاستخباري" 2 python3 "$B/validators/check_intel.py" "$B/reports/$D-sectioned.md" "$B/web/meta/$D.json"
+step "بوابة قراءة الموقف وتحليل المؤشرات" 2 python3 "$B/validators/check_intel.py" "$B/reports/$D-sectioned.md" "$B/web/meta/$D.json"
 # فحص العقوبات يُحدَّث لحظة البوابة، فالتقرير قد يُكتب أو يُعدَّل بعد الخط اليومي
 step "استخراج أهداف OFAC" 2 python3 "$B/tools/ofac_targets_from_report.py" --date "$D"
 step "فحص OFAC" 2 python3 "$B/tools/ofac_screen.py" "$B/watchlist/ofac-targets.txt"

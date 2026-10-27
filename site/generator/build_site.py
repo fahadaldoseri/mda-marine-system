@@ -232,7 +232,7 @@ def build_index(dist: Path, reports, notfound: bool = False):
         ]
         hero_card = f"""<article class="hero-card">
       <div class="hc-top"><span class="hc-tag">آخر إصدار</span>
-        <span class="hc-risk rk-{esc(latest['risk_kind'])}">مستوى الخطر: {esc(latest['risk'])}</span>
+        <span class="hc-risk rk-{esc(latest['risk_kind'])}">مستوى التهديد: {esc(latest['risk'])}</span>
         {f'<span class="hc-code">رقم النسخة <b>{esc(latest["version"])}</b></span>' if latest.get('version') else ''}</div>
       <h2>{esc(latest['label'])}</h2>
       <p class="hc-meta">{' · '.join(b for b in meta_bits if b)}</p>
@@ -338,7 +338,7 @@ NAV_PLACEHOLDER
   <div class="grid">
     <section class="card" id="archive">
       <h3>أرشيف الإصدارات</h3>
-      <p class="hint">كل إصدار متاح بالرابط الخاص به، ومفتاح اللون يبيّن مستوى الخطر المسجل في بطاقة القرار.</p>
+      <p class="hint">كل إصدار متاح بالرابط الخاص به، ومفتاح اللون يبيّن مستوى التهديد المسجل في بطاقة القرار.</p>
       <ul class="ar">{rows}</ul>
     </section>
     <div>
@@ -479,7 +479,7 @@ def build_feed(dist: Path, reports):
         desc = r["changed"] or r["headline"] or ""
         items.append(
             "  <item>\n"
-            f"    <title>{xesc(r['label'])} — مستوى الخطر: {xesc(r['risk'])}</title>\n"
+            f"    <title>{xesc(r['label'])} — مستوى التهديد: {xesc(r['risk'])}</title>\n"
             f"    <link>{link}</link>\n"
             f"    <guid isPermaLink=\"false\">mn-{r['iso']}</guid>\n"
             f"    <description>{xesc(desc)}</description>\n"

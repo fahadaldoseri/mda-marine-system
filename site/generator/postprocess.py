@@ -153,7 +153,7 @@ def _tables(part: str) -> str:
                             lambda x: f'<div class="{x.group(1)}" tabindex="0" role="region" aria-label="{label}"',
                             holder, count=1)
         if wide and 'class="tbl-hint"' not in holder:
-            holder = ('<span class="tbl-hint">اسحب الجدول أفقيًا لرؤية بقية الأعمدة</span>'
+            holder = ('<span class="tbl-hint">أكمل الجدول أفقيًا (بقية الأعمدة)</span>'
                       + holder)
         return holder
     return re.sub(r'<div class="(?:tbl-wrap|tbl-scroll)"[^>]*>\s*<table.*?</table>', one, part, flags=re.S)
