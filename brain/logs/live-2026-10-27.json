@@ -1,31 +1,29 @@
 {
  "date": "2026-10-27",
- "checked_at": "2026-10-27T12:46:34Z",
+ "checked_at": "2026-10-27T20:18:03Z",
  "paths": {
   "/": {
    "code": 200,
-   "bytes": 38965
+   "bytes": 38952
   },
   "/reports/2026-10-27.html": {
    "code": 200,
-   "bytes": 158624
+   "bytes": 159048
   },
   "/reports/pdf/2026-10-27.pdf": {
    "code": 200,
-   "bytes": 716701
+   "bytes": 719895
   },
   "/sources.html": {
    "code": 200,
-   "bytes": 120799
+   "bytes": 120759
   }
  },
  "pdf_sha256": {
-  "local": "1b8bd5b433b11546741e1ca0d91f99df20d7a9229ac8228068124981b96b9aee",
-  "live": "b71804fedb6c9ac4dffa34280432035ee501eae1fbeadba7cb7251ac3540db50",
-  "match": false
+  "local": "5b260a482c2a1d5a796ac4619d97652c62b5b69a1a49cf4786fc2848376c1c7c",
+  "live": "5b260a482c2a1d5a796ac4619d97652c62b5b69a1a49cf4786fc2848376c1c7c",
+  "match": true
  },
- "status": "failed",
- "bad": [
-  "pdf-differs-from-local"
- ]
+ "status": "ok",
+ "bad": []
 }
