@@ -56,8 +56,8 @@ KIND_LABEL = {
     "confirm": "هجوم مؤكد",
     "inter": "واقعة عسكرية",
     "suspect": "غير محسوم",
-    "bg": "خلفية مستمرة",
-    "watch": "مراقبة مستمرة",
+    "bg": "لا جديد",
+    "watch": "تحت المراقبة",
 }
 
 STATUS_CLASS = {"نشط": "s-active", "مستقر": "s-stable", "مغلق": "s-closed", "قائم": "s-active"}
@@ -336,8 +336,8 @@ def reading_key():
         '<span class="rk k-fact">واقعة مؤكدة</span>'
         '<span class="rk k-est">تقدير تحليلي</span>'
         '<span class="rk k-info">بند إعلامي</span>'
-        '<span class="rk k-bg">خلفية مستمرة</span>'
-        '<span class="rk k-watch">مراقبة مستمرة</span>'
+        '<span class="rk k-bg">لا جديد</span>'
+        '<span class="rk k-watch">تحت المراقبة</span>'
         "</div>"
     )
 
