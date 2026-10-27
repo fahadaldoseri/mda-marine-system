@@ -11,8 +11,11 @@
 # ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
 import os as _os
 from pathlib import Path as _Path
+import sys
 _ROOT = _Path(__file__).resolve().parents[1]
 BRAIN = _Path(_os.environ.get("BRAIN_DIR") or _ROOT)
+if str(_Path(__file__).resolve().parent) not in sys.path:
+    sys.path.insert(0, str(_Path(__file__).resolve().parent))
 import argparse
 import datetime as dt
 import html
@@ -24,6 +27,7 @@ _sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
 from normalize_digits import to_latin  # الأرقام عند المصدر: المولَّد يُكتب لاتينيًا
 import re
 import ssl
+import sys
 import sys
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
@@ -39,17 +43,7 @@ HEADERS = {
 }
 # مصادر بلا تغذية آلية رسمية (موقعها JS ولا تغذية معلنة): تُقيَّد «يُفحص بالمتصفح»
 # ولا تُحسب فشلًا — لا نبني مسارًا يتجاوز الحماية (سياسة المستخدم).
-BROWSER_ONLY = {}  # ك-81: واس صار له مسار رسمي (بيانات الصفحة المُضمَّنة)
-# مرجعية تُراجع يدويًا ولا تُجلب آليًا:
-#   JS/محتوى غير مستخرج: 1، 5، 13، 39، 40، 59
-#   ضجيج تنقّل/تسويق: 21، 23، 34، 44، 52
-#   حجب/وصول رسمي أو جلسة: 15، 18، 19، 48، 56، 57، 60، 61، 62
-#   فشل TLS مع كونا: 27
-# القائمة هي الأرقام التي اعتمدها المالك؛ لا تُنتج هذه المصادر عناصر وهمية.
-MANUAL_REFERENCE = {
-    1, 5, 13, 15, 18, 19, 21, 23, 27, 34, 39,
-    40, 44, 48, 52, 56, 57, 59, 60, 61, 62,
-}
+from source_channels import BROWSER_ONLY, MANUAL_REFERENCE  # ك-212: مصدر واحد لقنوات المصادر
 FAIL_RATIO_LIMIT = 0.20
 MIN_CONTENT_CHARS = 400
 MIN_ITEMS = 1
