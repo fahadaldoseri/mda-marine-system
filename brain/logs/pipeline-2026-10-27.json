@@ -2,14 +2,14 @@
   "date": "2026-10-27",
   "feeds": {},
   "final_gate": {
-    "status": "warn",
-    "exit_code": 1,
-    "dir": "logs/gate-2026-10-27",
     "blocked_steps": [],
-    "note": "نتيجة بوابة التسليم النهائية — مسجّلة بعد كتابة التقرير."
+    "dir": "logs/gate-2026-10-27",
+    "exit_code": 1,
+    "note": "نتيجة بوابة التسليم النهائية — كُتبت العلامة بعدها.",
+    "status": "warn"
   },
   "finished_utc": "2026-10-27T04:01:07Z",
-  "gate_finished_utc": "2026-10-27T19:50:45Z",
+  "gate_finished_utc": "2026-10-27T22:19:12Z",
   "gate_note": "علامة مرحلة الخط اليومي — بوابة التسليم لم تُشغَّل بعد.",
   "gate_state": "not_run",
   "language": {
