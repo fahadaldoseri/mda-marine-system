@@ -293,7 +293,7 @@ cd /home/ubuntu/seawatch && git add -A && git commit -m "إصدار <التار�
 - حقل البيانات: `source_reliability` = `{checked, cited, rows:[{num,name,url,rel,cred,basis}]}`.
 - أداة البناء: `/home/ubuntu/brain-marine-news/tools/build_source_reliability.py` (تُشغَّل قبل بناء الصفحة).
 - السجل الثابت: `appendices/source-reliability-40.md` و`appendices/source-reliability-40.json`.
-- القائمة المعتمدة صارت **40 مصدرًا** (أُضيفت: Jerusalem Post · IHO · MarineTraffic).
+- القائمة المعتمدة الحالية **62 مصدرًا** (وتبقى إضافة Jerusalem Post · IHO · MarineTraffic موثقة في سجل التوسيع التاريخي).
 
 ### الخط اليومي الموحّد قبل البناء (13 أكتوبر 2026)
 `tools/daily_pipeline.sh` → تغذيات + فحص OFAC + حفظ الأصول الرسمية، ثم بناء الصفحة والنشر. أي تعذر يُذكر في التقرير ولا يُخفى.

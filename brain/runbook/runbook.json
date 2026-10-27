@@ -1033,6 +1033,75 @@
    ]
   },
   {
+   "id": "W030",
+   "title": "بناء دفتر اليوم (وقائع ومقتطفات الأصل)",
+   "kind": "agent",
+   "phase": "write",
+   "assert": [
+    {
+     "type": "min_bytes",
+     "path": "cumulative-2026/daily/{date}.json",
+     "n": 400
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/ledger_source_excerpt.py",
+     "cumulative-2026/daily/"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "prompt": "runbook/prompts/write-ledger.md",
+   "reads": [
+    "reports/{date}-sectioned.md",
+    "feeds/feeds-{date}.json"
+   ],
+   "writes": [
+    "cumulative-2026/daily/{date}.json"
+   ]
+  },
+  {
+   "id": "W040",
+   "title": "علامة التشغيل اليومية (pipeline mark)",
+   "kind": "script",
+   "phase": "write",
+   "assert": [
+    {
+     "type": "min_bytes",
+     "path": "logs/pipeline-{date}.json",
+     "n": 80
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/write_mark.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; export B SITE; python3 \"$B/tools/write_mark.py\" --date \"$D\" --stage pipeline; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [],
+   "gate_title": "علامة التشغيل اليومية"
+  },
+  {
    "id": "G001",
    "title": "اختبارات البوابات (tests)",
    "kind": "script",
@@ -2907,6 +2976,9 @@
    "title": "كتابة العلامة بعد البوابة",
    "kind": "script",
    "phase": "finalize",
+   "writes": [
+    "logs/pipeline-{date}.json"
+   ],
    "assert": [
     {
      "type": "cmd",
@@ -2914,6 +2986,18 @@
       "bash",
       "-lc",
       "test -s logs/runbook/{date}/G038.log"
+     ]
+    },
+    {
+     "type": "file_exists",
+     "path": "logs/pipeline-{date}.json"
+    },
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "grep -q 'العلامة (final)' logs/runbook/{date}/G038.log"
      ]
     }
    ],

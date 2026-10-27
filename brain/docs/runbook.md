@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة dce9065116e0a231). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة 137289086b1b4fa3). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -20,6 +20,8 @@
 | S040 | توليد أهداف العقوبات من التقرير | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S040.log | أ1 — سلسلة التشغيل اليومي | tools/ofac_targets_from_report.py، sections/90-automation.md | stop |
 | S050 | فحص العقوبات (OFAC) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S050.log | أ1 — سلسلة التشغيل اليومي | tools/ofac_screen.py، sections/90-automation.md | stop |
 | W020 | بناء ملف واجهة التقرير | agent | reports/{date}-sectioned.md، templates/mark-schema.json | web/meta/{date}.json | min_bytes:web/meta/{date}.json | ب2 — ترتيب الأقسام | templates/mark-schema.json | stop |
+| W030 | بناء دفتر اليوم (وقائع ومقتطفات الأصل) | agent | reports/{date}-sectioned.md، feeds/feeds-{date}.json | cumulative-2026/daily/{date}.json | min_bytes:cumulative-2026/daily/{date}.json | ف1–ف5 — بوابة التحقق | tools/ledger_source_excerpt.py، cumulative-2026/daily/ | stop |
+| W040 | علامة التشغيل اليومية (pipeline mark) | script |  |  | min_bytes:logs/pipeline-{date}.json | ف1–ف5 — بوابة التحقق | tools/write_mark.py | stop |
 | G001 | اختبارات البوابات (tests) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G001.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tests/run_checks.sh | stop |
 | G002 | تنظيف المحتوى الداخلي | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G002.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/scrub_internal.py، tools/apply_audit_gfs_docx.py، tools/apply_jmic_ukmto_to_gfs.py | stop |
 | G003 | دمج بنك التعريفات | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G003.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/merge_glossary.py | stop |
