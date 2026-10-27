@@ -1126,8 +1126,6 @@ def render_intel_review_notes(meta: dict, inline) -> str:
     return (
         '<p class="rmk"><strong>المراجعة النظيرة:</strong> '
         + inline("الفصل بين الوقائع والتقديرات وربط التقديرات بسند المصدر.")
-        + '</p><p class="rmk"><strong>المراجعة الداخلية:</strong> '
-        + inline("اتساق القسم مع نص التقرير وسلامة الإسناد.")
         + "</p>"
     )
 
