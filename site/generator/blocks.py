@@ -288,7 +288,7 @@ def event_keys_table(items, inline):
             Raw(inline(it.get("note", ""))),
         ])
     return (
-        '<h3>تتبع الوقائع</h3><p class="blk-lede">الرمز المختصر (والكامل في «الوقائع الجديدة») · المنطقة · الحالة.</p>'
+        '<h3>تتبع الوقائع</h3><p class="blk-lede">رقم البلاغ (والكامل في «الوقائع الجديدة») · المنطقة · الحالة.</p>'
         + _table(["الرمز", "الحدث", "المنطقة", "الحالة", "ملاحظة"], rows, inline)
     )
 
@@ -577,8 +577,8 @@ def intel_analysis(data, inline):
     asm = data.get("assumptions") or []
     if asm:
         rws = [[a.get("assumption", ""), a.get("falsifier", "")] for a in asm]
-        out.append('<h3>الافتراضات المعلنة</h3><p class="blk-lede">كل افتراض معلن، وما ينقضه.</p>'
-                   + _table(["الافتراض", "ما ينقضه"], rws, inline))
+        out.append('<h3>الافتراضات المعلنة</h3><p class="blk-lede">كل افتراض معلن، وما يخالفه.</p>'
+                   + _table(["الافتراض", "ما يخالفه"], rws, inline))
 
     inds = data.get("indicators") or []
     if inds:

@@ -152,6 +152,12 @@ step "عيوب الكتابة (الصياغة والترقيم)" 2 python3 "$B/v
 step "تسرّب المحتوى الداخلي إلى المتن" 2 python3 "$B/validators/check_internal_leak.py" --md "$B/reports/$D-sectioned.md"
 # المفردات المبسطة: تنبيهي حتى الموافقة الصريحة على القائمة (قرار صاحب القرار).
 step "المفردات المبسطة (تنبيهي حتى الموافقة)" 2 python3 "$B/validators/check_vocabulary.py" --md "$B/reports/$D-sectioned.md"
+# السجل الحاكم للمفردات: مصدر واحد للإنفاذ (appendices/simplified-vocabulary.json)
+# ومُولَّده (appendices/forbidden-coinages.json) لا يُحرَّر يدويًا. فشل هذه الخطوة = تعارض السجلين.
+step "السجل الحاكم للمفردات ومُولَّده" 2 python3 "$B/tools/build_vocab_gate.py" --check
+# تغطية بوابة الأسلوب: كل سطح يقرأه القارئ (المتن · القاموس · تلغرام · صفحة التقرير ·
+# صفحة المصادر · الرئيسية) يُقاس، وPDF يُثبت بالإسناد لأن الاستخراج العربي يعكس الحروف.
+step "تغطية بوابة الأسلوب لكل سطح يقرأه القارئ" 2 python3 "$B/tools/audit_style_coverage.py" --date "$D"
 if [ ! -f "$AUDIT_STAMP" ] || [ $(( ( $(date -u +%s) - $(date -u -r "$AUDIT_STAMP" +%s 2>/dev/null || echo 0) ) / 86400 )) -ge 6 ]; then
   step "تدقيق المكتبات اللغوية (أسبوعي)" 3 python3 "$B/tools/audit_corpus.py" --date "$D"
   date -u +%FT%TZ > "$AUDIT_STAMP" 2>/dev/null || true
