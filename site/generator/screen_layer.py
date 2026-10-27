@@ -82,7 +82,7 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
     if chk not in (None, "") and cit not in (None, ""):
         chips.append(_chip("المصادر", f'<span class="bidi">{esc(cit)}</span> من <span class="bidi">{esc(chk)}</span>'))
     elif chk not in (None, ""):
-        chips.append(_chip("مصادر مفحوصة", f'<span class="bidi">{esc(chk)}</span>'))
+        chips.append(_chip("مصادر مرصودة آليًا", f'<span class="bidi">{esc(chk)}</span>'))
 
     # العمود الجانبي: مستوى التهديد ثم المؤشرات
     side = []

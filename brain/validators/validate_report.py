@@ -269,7 +269,7 @@ def main():
 
     print(f"الملف: {path} · الإصدار: {d.get('report_schema_version')} · التصنيف: {d.get('classification')}")
     print(f"الوقائع: {len(d.get('event_keys') or [])} · المؤشرات: {len(d.get('indicators') or [])} "
-          f"· الفرضيات: {len(d.get('hypotheses') or [])} · المصادر: {d.get('sources_checked')} مفحوص / "
+          f"· الفرضيات: {len(d.get('hypotheses') or [])} · المصادر: {d.get('sources_checked')} مرصودة آليًا / "
           f"{d.get('sources_cited')} مستشهد")
     if warnings:
         print(f"\nتحذيرات ({len(warnings)}):")
