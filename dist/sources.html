@@ -743,9 +743,10 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
   </header>
 
   <div class="sx-note">حالة آخر فحص للتغذيات — 2026-10-27:
-  مصادر مفحوصة <b>35</b> · ناجحة <b>34</b> · متعذرة <b>1</b>
-  · تغذيات مفحوصة <b>52</b>
-  · عناصر مجمَّعة <b>1551</b>.
+  المصادر: <b>62</b> معتمدة · <b>40</b> مرصودة آليًا ·
+  <b>38</b> ناجحة · <b>2</b> متعذّر · <b>21</b> مرجعية تُراجع يدويًا
+  · تغذيات مفحوصة <b>57</b>
+  · عناصر مجمَّعة <b>1602</b>.
   والتعذّر يُسجَّل قيدًا معروفًا؛ وسياسة النظام تمنع تجاوز حماية المواقع.</div>
 
 
@@ -790,75 +791,76 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <h2 class="sx-h2">حالة المصادر المفحوصة</h2>
   <div class="sx-legend">
-    <span><b style="background:#1f9d6b"></b>نجح الفحص (34)</span>
-    <span><b style="background:#c8402f"></b>متعذّر (1)</span>
-    <span><b style="background:#5a6b86"></b>لا تغذية RSS (27)</span>
+    <span><b style="background:#1f9d6b"></b>نجح الفحص (38)</span>
+    <span><b style="background:#c8402f"></b>متعذّر (2)</span>
+    <span><b style="background:#5a6b86"></b>لا تغذية RSS (22)</span>
   </div>
   <div class="sx-note">الرمادي: مصدر مُدرج في سجل المصادر المعتمد ولا تغذية آلية له في فحص التغذيات اليومي؛
-  ويُتابع بمسار آخر — فتح مباشر بالمتصفح، أو حفظ أصل رسمي، أو مراجعة يدوية. ولا يعني أنه غير مُتحقَّق منه.</div>
+  ويُتابع بمسار آخر — فتح مباشر بالمتصفح، أو حفظ أصل رسمي، أو مراجعة يدوية. ولا يعني أنه غير مُتحقَّق منه.
+  المصادر الموسومة «مرجعية تُراجع يدويًا» مستثناة من عداد الفحص الآلي ولا تُنتج عناصر وهمية.</div>
   <div class="sx-grid">
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">1</span><span class="sx-name">UKMTO — الحوادث الأخيرة</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">2</span><span class="sx-name">UKMTO — التحذيرات 2026</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">3</span><span class="sx-name">UKMTO — النشرات الاستشارية 2026</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">4</span><span class="sx-name">UKMTO — التقارير الأسبوعية 2026</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">5</span><span class="sx-name">IMO — سجل الحوادث المؤكدة</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
-<div class="sx-card ok"><div class="sx-top"><span class="sx-num">6</span><span class="sx-name">straits.live</span></div><div class="sx-state">نجح · 116 عنصرًا · primary</div></div>
+<div class="sx-card none"><div class="sx-top"><span class="sx-num">1</span><span class="sx-name">UKMTO — الحوادث الأخيرة</span></div><div class="sx-state">مرجعية تُراجع يدويًا — لا تُفحص آليًا</div></div>
+<div class="sx-card ok"><div class="sx-top"><span class="sx-num">2</span><span class="sx-name">UKMTO — التحذيرات 2026</span></div><div class="sx-state">نجح · 12 عنصرًا · primary</div></div>
+<div class="sx-card ok"><div class="sx-top"><span class="sx-num">3</span><span class="sx-name">UKMTO — النشرات الاستشارية 2026</span></div><div class="sx-state">نجح · 2 عنصرًا · primary</div></div>
+<div class="sx-card ok"><div class="sx-top"><span class="sx-num">4</span><span class="sx-name">UKMTO — التقارير الأسبوعية 2026</span></div><div class="sx-state">نجح · 2 عنصرًا · primary</div></div>
+<div class="sx-card none"><div class="sx-top"><span class="sx-num">5</span><span class="sx-name">IMO — سجل الحوادث المؤكدة</span></div><div class="sx-state">مرجعية تُراجع يدويًا — لا تُفحص آليًا</div></div>
+<div class="sx-card ok"><div class="sx-top"><span class="sx-num">6</span><span class="sx-name">straits.live</span></div><div class="sx-state">نجح · 112 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">7</span><span class="sx-name">gCaptain</span></div><div class="sx-state">نجح · 12 عنصرًا · primary</div></div>
-<div class="sx-card ok"><div class="sx-top"><span class="sx-num">8</span><span class="sx-name">TradeWinds</span></div><div class="sx-state">نجح · 188 عنصرًا · primary</div></div>
+<div class="sx-card ok"><div class="sx-top"><span class="sx-num">8</span><span class="sx-name">TradeWinds</span></div><div class="sx-state">نجح · 182 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">9</span><span class="sx-name">Seatrade Maritime</span></div><div class="sx-state">نجح · 50 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">10</span><span class="sx-name">الجزيرة نت</span></div><div class="sx-state">نجح · 25 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">11</span><span class="sx-name">الجزيرة الإنجليزية</span></div><div class="sx-state">نجح · 25 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">12</span><span class="sx-name">OFAC — الإجراءات الأخيرة</span></div><div class="sx-state">نجح · 10 عنصرًا · primary</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">13</span><span class="sx-name">ShipNext — التحقق من السفن</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
-<div class="sx-card ok"><div class="sx-top"><span class="sx-num">14</span><span class="sx-name">قناة العربية</span></div><div class="sx-state">نجح · 110 عنصرًا · fallback:jina.ai/alarabiya-home, fallback:jina.ai/alarabiya-rss</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">15</span><span class="sx-name">حساب @UK_MTO على X</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
+<div class="sx-card none"><div class="sx-top"><span class="sx-num">13</span><span class="sx-name">ShipNext — التحقق من السفن</span></div><div class="sx-state">مرجعية تُراجع يدويًا — لا تُفحص آليًا</div></div>
+<div class="sx-card ok"><div class="sx-top"><span class="sx-num">14</span><span class="sx-name">قناة العربية</span></div><div class="sx-state">نجح · 90 عنصرًا · fallback:jina.ai/alarabiya-rss</div></div>
+<div class="sx-card none"><div class="sx-top"><span class="sx-num">15</span><span class="sx-name">حساب @UK_MTO على X</span></div><div class="sx-state">مرجعية تُراجع يدويًا — لا تُفحص آليًا</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">16</span><span class="sx-name">حساب @bna_ar على X</span></div><div class="sx-state">نجح · 17 عنصرًا · primary</div></div>
 <div class="sx-card bad"><div class="sx-top"><span class="sx-num">17</span><span class="sx-name">حساب @bna_en على X</span></div><div class="sx-state">تعذّر — قيد حماية موثق · 403</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">18</span><span class="sx-name">حساب @bahdiplomatic على X</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">19</span><span class="sx-name">حساب @US5thFleet على X</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
+<div class="sx-card none"><div class="sx-top"><span class="sx-num">18</span><span class="sx-name">حساب @bahdiplomatic على X</span></div><div class="sx-state">مرجعية تُراجع يدويًا — لا تُفحص آليًا</div></div>
+<div class="sx-card none"><div class="sx-top"><span class="sx-num">19</span><span class="sx-name">حساب @US5thFleet على X</span></div><div class="sx-state">مرجعية تُراجع يدويًا — لا تُفحص آليًا</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">20</span><span class="sx-name">جريدة الأيام</span></div><div class="sx-state">نجح · 73 عنصرًا · fallback:jina.ai/alayam-home, primary</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">21</span><span class="sx-name">جريدة أخبار الخليج</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
+<div class="sx-card none"><div class="sx-top"><span class="sx-num">21</span><span class="sx-name">جريدة أخبار الخليج</span></div><div class="sx-state">مرجعية تُراجع يدويًا — لا تُفحص آليًا</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">22</span><span class="sx-name">جريدة البلاد</span></div><div class="sx-state">نجح · 100 عنصرًا · primary</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">23</span><span class="sx-name">Gulf Daily News</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
+<div class="sx-card none"><div class="sx-top"><span class="sx-num">23</span><span class="sx-name">Gulf Daily News</span></div><div class="sx-state">مرجعية تُراجع يدويًا — لا تُفحص آليًا</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">24</span><span class="sx-name">وكالة الأنباء القطرية (قنا)</span></div><div class="sx-state">نجح · 96 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">25</span><span class="sx-name">وكالة أنباء الإمارات (وام)</span></div><div class="sx-state">نجح · 8 عنصرًا · official-telegram:wamnews_en</div></div>
-<div class="sx-card ok"><div class="sx-top"><span class="sx-num">26</span><span class="sx-name">وكالة الأنباء السعودية (واس)</span></div><div class="sx-state">نجح · 18 عنصرًا · primary</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">27</span><span class="sx-name">وكالة الأنباء الكويتية (كونا)</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
+<div class="sx-card ok"><div class="sx-top"><span class="sx-num">26</span><span class="sx-name">وكالة الأنباء السعودية (واس)</span></div><div class="sx-state">نجح · 22 عنصرًا · primary</div></div>
+<div class="sx-card none"><div class="sx-top"><span class="sx-num">27</span><span class="sx-name">وكالة الأنباء الكويتية (كونا)</span></div><div class="sx-state">مرجعية تُراجع يدويًا — لا تُفحص آليًا</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">28</span><span class="sx-name">وكالة الأنباء العُمانية</span></div><div class="sx-state">نجح · 65 عنصرًا · fallback:omannews-home, fallback:omannews-rssinfo</div></div>
 <div class="sx-card none"><div class="sx-top"><span class="sx-num">29</span><span class="sx-name">البحرية الملكية البريطانية</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">30</span><span class="sx-name">القيادة المركزية الأمريكية (سنتكوم)</span></div><div class="sx-state">نجح · 20 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">31</span><span class="sx-name">JMIC — المنظمة البحرية المشتركة</span></div><div class="sx-state">نجح · 15 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">32</span><span class="sx-name">IMB/ICC — القرصنة</span></div><div class="sx-state">نجح · 10 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">33</span><span class="sx-name">MARAD/MSCI</span></div><div class="sx-state">نجح · 27 عنصرًا · fallback:jina.ai/marad-rss</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">34</span><span class="sx-name">MSCIO</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
+<div class="sx-card none"><div class="sx-top"><span class="sx-num">34</span><span class="sx-name">MSCIO</span></div><div class="sx-state">مرجعية تُراجع يدويًا — لا تُفحص آليًا</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">35</span><span class="sx-name">Splash 247</span></div><div class="sx-state">نجح · 20 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">36</span><span class="sx-name">Lloyd&#x27;s List</span></div><div class="sx-state">نجح · 26 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">37</span><span class="sx-name">MarineLink</span></div><div class="sx-state">نجح · 20 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">38</span><span class="sx-name">Jerusalem Post</span></div><div class="sx-state">نجح · 34 عنصرًا · primary</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">39</span><span class="sx-name">IHO — المنظمة الهيدروغرافية الدولية</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">40</span><span class="sx-name">MarineTraffic</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
-<div class="sx-card ok"><div class="sx-top"><span class="sx-num">41</span><span class="sx-name">USNI News</span></div><div class="sx-state">نجح · 30 عنصرًا · primary</div></div>
+<div class="sx-card none"><div class="sx-top"><span class="sx-num">39</span><span class="sx-name">IHO — المنظمة الهيدروغرافية الدولية</span></div><div class="sx-state">مرجعية تُراجع يدويًا — لا تُفحص آليًا</div></div>
+<div class="sx-card none"><div class="sx-top"><span class="sx-num">40</span><span class="sx-name">MarineTraffic</span></div><div class="sx-state">مرجعية تُراجع يدويًا — لا تُفحص آليًا</div></div>
+<div class="sx-card bad"><div class="sx-top"><span class="sx-num">41</span><span class="sx-name">USNI News</span></div><div class="sx-state">تعذّر — قيد حماية موثق · 403</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">42</span><span class="sx-name">Naval News</span></div><div class="sx-state">نجح · 10 عنصرًا · primary</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">43</span><span class="sx-name">The Maritime Executive</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">44</span><span class="sx-name">Windward</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
+<div class="sx-card ok"><div class="sx-top"><span class="sx-num">43</span><span class="sx-name">The Maritime Executive</span></div><div class="sx-state">نجح · 31 عنصرًا · primary</div></div>
+<div class="sx-card none"><div class="sx-top"><span class="sx-num">44</span><span class="sx-name">Windward</span></div><div class="sx-state">مرجعية تُراجع يدويًا — لا تُفحص آليًا</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">45</span><span class="sx-name">IRIB News</span></div><div class="sx-state">نجح · 100 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">46</span><span class="sx-name">ISNA</span></div><div class="sx-state">نجح · 60 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">47</span><span class="sx-name">Mehr — العربي</span></div><div class="sx-state">نجح · 60 عنصرًا · primary</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">48</span><span class="sx-name">Institute for the Study of War</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
+<div class="sx-card none"><div class="sx-top"><span class="sx-num">48</span><span class="sx-name">Institute for the Study of War</span></div><div class="sx-state">مرجعية تُراجع يدويًا — لا تُفحص آليًا</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">49</span><span class="sx-name">Sanaa Center</span></div><div class="sx-state">نجح · 20 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">50</span><span class="sx-name">Navy Times</span></div><div class="sx-state">نجح · 10 عنصرًا · primary</div></div>
-<div class="sx-card ok"><div class="sx-top"><span class="sx-num">51</span><span class="sx-name">Baird Maritime</span></div><div class="sx-state">نجح · 6 عنصرًا · primary</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">52</span><span class="sx-name">Synmax</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
-<div class="sx-card ok"><div class="sx-top"><span class="sx-num">53</span><span class="sx-name">New York Times — الشرق الأوسط</span></div><div class="sx-state">نجح · 30 عنصرًا · primary</div></div>
+<div class="sx-card ok"><div class="sx-top"><span class="sx-num">51</span><span class="sx-name">Baird Maritime</span></div><div class="sx-state">نجح · 12 عنصرًا · primary</div></div>
+<div class="sx-card none"><div class="sx-top"><span class="sx-num">52</span><span class="sx-name">Synmax</span></div><div class="sx-state">مرجعية تُراجع يدويًا — لا تُفحص آليًا</div></div>
+<div class="sx-card ok"><div class="sx-top"><span class="sx-num">53</span><span class="sx-name">New York Times — الشرق الأوسط</span></div><div class="sx-state">نجح · 34 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">54</span><span class="sx-name">Bloomberg</span></div><div class="sx-state">نجح · 40 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">55</span><span class="sx-name">Axios</span></div><div class="sx-state">نجح · 100 عنصرًا · primary</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">56</span><span class="sx-name">المجلس الأعلى للمقاومة الشعبية — اليمن</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">57</span><span class="sx-name">الناطق الرسمي للقوات المسلحة اليمنية</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">58</span><span class="sx-name">المركز الإعلامي للقوات المسلحة اليمنية</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">59</span><span class="sx-name">المتحدث العسكري للطرف المقابل (تليغرام)</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">60</span><span class="sx-name">المتحدث الرسمي باسم قوات التحالف (X)</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">61</span><span class="sx-name">معمر الإرياني — وزير الإعلام اليمني (X)</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
-<div class="sx-card none"><div class="sx-top"><span class="sx-num">62</span><span class="sx-name">المركز الإعلامي للقوات المسلحة اليمنية — إنجليزي (X)</span></div><div class="sx-state">لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف</div></div>
+<div class="sx-card none"><div class="sx-top"><span class="sx-num">56</span><span class="sx-name">المجلس الأعلى للمقاومة الشعبية — اليمن</span></div><div class="sx-state">مرجعية تُراجع يدويًا — لا تُفحص آليًا</div></div>
+<div class="sx-card none"><div class="sx-top"><span class="sx-num">57</span><span class="sx-name">الناطق الرسمي للقوات المسلحة اليمنية</span></div><div class="sx-state">مرجعية تُراجع يدويًا — لا تُفحص آليًا</div></div>
+<div class="sx-card ok"><div class="sx-top"><span class="sx-num">58</span><span class="sx-name">المركز الإعلامي للقوات المسلحة اليمنية</span></div><div class="sx-state">نجح · 50 عنصرًا · primary</div></div>
+<div class="sx-card none"><div class="sx-top"><span class="sx-num">59</span><span class="sx-name">المتحدث العسكري للطرف المقابل (تليغرام)</span></div><div class="sx-state">مرجعية تُراجع يدويًا — لا تُفحص آليًا</div></div>
+<div class="sx-card none"><div class="sx-top"><span class="sx-num">60</span><span class="sx-name">المتحدث الرسمي باسم قوات التحالف (X)</span></div><div class="sx-state">مرجعية تُراجع يدويًا — لا تُفحص آليًا</div></div>
+<div class="sx-card none"><div class="sx-top"><span class="sx-num">61</span><span class="sx-name">معمر الإرياني — وزير الإعلام اليمني (X)</span></div><div class="sx-state">مرجعية تُراجع يدويًا — لا تُفحص آليًا</div></div>
+<div class="sx-card none"><div class="sx-top"><span class="sx-num">62</span><span class="sx-name">المركز الإعلامي للقوات المسلحة اليمنية — إنجليزي (X)</span></div><div class="sx-state">مرجعية تُراجع يدويًا — لا تُفحص آليًا</div></div>
   </div>
 
   <h2 class="sx-h2">المراجع الرسمية</h2>

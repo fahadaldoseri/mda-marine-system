@@ -87,6 +87,8 @@ def short_error(err: str) -> str:
 def source_cards(status: dict, rows: list) -> tuple:
     """بطاقة لكل مصدر من الـ40: حالة تغذيته من فحص اليوم، أو أنه بلا تغذية آلية."""
     feeds = status.get('checked_feeds') or status.get('feeds') or []
+    manual_reference = {int(n) for n in (status.get('manual_reference') or [])
+                        if str(n).isdigit()}
     by_num = {}
     for f in feeds:
         num = f.get('num')
@@ -100,7 +102,9 @@ def source_cards(status: dict, rows: list) -> tuple:
         group = by_num.get(num) or []
         if not group:
             cards.append({'num': num, 'name': r['name'], 'kind': 'none',
-                          'state': 'لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف'})
+                          'state': ('مرجعية تُراجع يدويًا — لا تُفحص آليًا'
+                                    if num in manual_reference
+                                    else 'لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف')})
             continue
         oks = [f for f in group if f.get('ok')]
         if oks:
@@ -223,6 +227,8 @@ def build(dist: Path, quiet: bool = False) -> dict:
     checked = status.get('checked') or len(cards)
     ok_n = status.get('ok') or len([c for c in cards if c['kind'] == 'ok'])
     fail_n = status.get('failed') or len([c for c in cards if c['kind'] in ('bad', 'lim')])
+    approved_n = status.get('approved') or len(rows)
+    manual_n = len(status.get('manual_reference') or [])
     feeds_n = len(status.get('checked_feeds') or [])
     items_n = status.get('items') or 0
     stamp = status.get('date') or status.get('stamp') or ''
@@ -268,7 +274,8 @@ def build(dist: Path, quiet: bool = False) -> dict:
   </header>
 
   <div class="sx-note">حالة آخر فحص للتغذيات{(' — ' + esc(stamp)) if stamp else ''}:
-  مصادر مفحوصة <b>{esc(checked)}</b> · ناجحة <b>{esc(ok_n)}</b> · متعذرة <b>{esc(fail_n)}</b>
+  المصادر: <b>{esc(approved_n)}</b> معتمدة · <b>{esc(checked)}</b> مرصودة آليًا ·
+  <b>{esc(ok_n)}</b> ناجحة · <b>{esc(fail_n)}</b> متعذّر · <b>{esc(manual_n)}</b> مرجعية تُراجع يدويًا
   {('· تغذيات مفحوصة <b>' + esc(feeds_n) + '</b>') if feeds_n else ''}
   {('· عناصر مجمَّعة <b>' + esc(items_n) + '</b>') if items_n else ''}.
   والتعذّر يُسجَّل قيدًا معروفًا؛ وسياسة النظام تمنع تجاوز حماية المواقع.</div>
@@ -281,7 +288,8 @@ def build(dist: Path, quiet: bool = False) -> dict:
     <span><b style="background:#5a6b86"></b>لا تغذية RSS ({none_c})</span>
   </div>
   <div class="sx-note">الرمادي: مصدر مُدرج في سجل المصادر المعتمد ولا تغذية آلية له في فحص التغذيات اليومي؛
-  ويُتابع بمسار آخر — فتح مباشر بالمتصفح، أو حفظ أصل رسمي، أو مراجعة يدوية. ولا يعني أنه غير مُتحقَّق منه.</div>
+  ويُتابع بمسار آخر — فتح مباشر بالمتصفح، أو حفظ أصل رسمي، أو مراجعة يدوية. ولا يعني أنه غير مُتحقَّق منه.
+  المصادر الموسومة «مرجعية تُراجع يدويًا» مستثناة من عداد الفحص الآلي ولا تُنتج عناصر وهمية.</div>
   <div class="sx-grid">
 {chr(10).join(card_html(c) for c in cards) if cards else '<div class="sx-note">لا بيانات فحص بعد.</div>'}
   </div>
