@@ -134,7 +134,7 @@
   },
   {
    "id": "intel-analysis",
-   "title": "التحليل الاستخباري",
+   "title": "قراءة الموقف وتحليل المؤشرات",
    "order": 11,
    "block": "{site}/generator/blocks.py",
    "validator": "validators/check_intel.py",
@@ -143,7 +143,7 @@
     "tests/test_sections_registry_vs_report.py"
    ],
    "files": [],
-   "heading": "التحليل الاستخباري"
+   "heading": "قراءة الموقف وتحليل المؤشرات"
   },
   {
    "id": "attribution",
@@ -1843,7 +1843,7 @@
   },
   {
    "id": "G020",
-   "title": "بوابة التحليل الاستخباري",
+   "title": "بوابة قراءة الموقف وتحليل المؤشرات",
    "kind": "script",
    "phase": "gates",
    "assert": [
@@ -1880,7 +1880,7 @@
    "warn_rc": [
     1
    ],
-   "gate_title": "بوابة التحليل الاستخباري"
+   "gate_title": "بوابة قراءة الموقف وتحليل المؤشرات"
   },
   {
    "id": "G021",
@@ -3718,7 +3718,7 @@
    ],
    "links": {
     "rules": [
-     "ف4 — التحليل الاستخباري"
+     "ف4 — قراءة الموقف وتحليل المؤشرات"
     ],
     "files": [
      "tools/estimate_accuracy.py"

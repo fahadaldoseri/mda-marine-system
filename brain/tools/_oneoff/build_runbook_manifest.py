@@ -228,7 +228,7 @@ steps.append(st('Q010', 'تدقيق المكتبات والمهارات (أسب�
 steps.append(st('Q020', 'قياس دقة التقدير (ربع سنوي)', 'script', 'maintenance', schedule='quarterly',
     **cmd('python3 tools/estimate_accuracy.py'),
     **{'assert': [{'type': 'cmd', 'command': ['bash', '-lc', 'true']}]},
-    links={'rules': ['ف4 — التحليل الاستخباري'], 'files': ['tools/estimate_accuracy.py'],
+    links={'rules': ['ف4 — قراءة الموقف وتحليل المؤشرات'], 'files': ['tools/estimate_accuracy.py'],
            'folders': [], 'gates': [], 'tests': []}))
 
 manifest = {

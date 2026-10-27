@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""بوابة التحقق من قسم «التحليل الاستخباري» — تنفّذ القاعدة ف5 وقواعد ح1–ح12.
+"""بوابة التحقق من قسم «قراءة الموقف وتحليل المؤشرات» — تنفّذ القاعدة ف5 وقواعد ح1–ح12.
 
 الاستخدام:
     python3 validators/check_intel.py reports/<التاريخ>-sectioned.md [web/meta/<التاريخ>.json]
@@ -14,7 +14,7 @@ import re
 import sys
 from pathlib import Path
 
-TITLE = "التحليل الاستخباري"
+TITLE = "قراءة الموقف وتحليل المؤشرات"
 
 LEXICON = [
     "فرصة تكاد تكون معدومة",
@@ -92,7 +92,7 @@ def main() -> int:
         print("  · ح1/ح2/ح3/ح5: الفقرات السردية محذوفة بقرار المالك — يُشترط ما بقي:")
     paras = [p for p in re.split(r"\n\s*\n", body) if len(p.strip()) > 40 and not p.strip().startswith("|")]
 
-    print(f"===== بوابة التحليل الاستخباري — {md.name} =====")
+    print(f"===== بوابة قراءة الموقف وتحليل المؤشرات — {md.name} =====")
 
     # ح1 — الحد الأدنى ثلاث فقرات
     if len(paras) < 3 and not _narr:

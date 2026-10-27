@@ -55,7 +55,7 @@ CONF_CANON = {"عالية": "عالية", "مرتفعة": "عالية", "متو�
 KIND_LABEL = {
     "confirm": "هجوم مؤكد",
     "inter": "واقعة عسكرية",
-    "suspect": "غير محسوم",
+    "suspect": "لم يتم التأكيد بعد",
     "bg": "لا جديد",
     "watch": "تحت المراقبة",
 }
@@ -135,7 +135,7 @@ def decision_card(dc, inline):
         return ""
     rows = [
         ("ما تغيّر", dc.get("changed"), None),
-        ("مستوى الخطر", dc.get("risk"), dc.get("risk_kind")),
+        ("مستوى التهديد", dc.get("risk"), dc.get("risk_kind")),
         ("التوصيات", dc.get("action"), None),
         ("ما يُراقب خلال 24 ساعة", dc.get("watch"), None),
     ]
@@ -559,7 +559,7 @@ STYLE_BLOCKS = STYLE_BLOCKS + """
 """
 
 def intel_analysis(data, inline):
-    """كتلة قسم «التحليل الاستخباري» (ح1–ح12): وسم الأسلوب · الاحتمال · الثقة · سند المصدر · الافتراضات · المؤشرات · تقييم دقة الأمس."""
+    """كتلة قسم «قراءة الموقف وتحليل المؤشرات» (ح1–ح12): وسم الأسلوب · الاحتمال · الثقة · سند المصدر · الافتراضات · المؤشرات · تقييم دقة الأمس."""
     if not data:
         return ""
     out = []
@@ -577,7 +577,7 @@ def intel_analysis(data, inline):
     asm = data.get("assumptions") or []
     if asm:
         rws = [[a.get("assumption", ""), a.get("falsifier", "")] for a in asm]
-        out.append('<h3>الافتراضات المعلنة</h3><p class="blk-lede">كل افتراض معلن، وما يخالفه.</p>'
+        out.append('<h3>افتراضات العمل</h3><p class="blk-lede">كل افتراض معلن، وما يخالفه.</p>'
                    + _table(["الافتراض", "ما يخالفه"], rws, inline))
 
     inds = data.get("indicators") or []

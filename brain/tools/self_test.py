@@ -156,7 +156,7 @@ def main() -> int:
         "--md", str(report_md)], tolerate=1, note="تحذير = تنبيه تنسيقي غير مانع")
     run(g, "بوابة الأسلوب", ["python3", "validators/check_style.py", str(report_md)])
     run(g, "بوابة اللغة", ["python3", "validators/check_language.py", str(report_md)])
-    run(g, "بوابة التحليل الاستخباري", ["python3", "validators/check_intel.py", str(report_md), str(meta)])
+    run(g, "بوابة قراءة الموقف وتحليل المؤشرات", ["python3", "validators/check_intel.py", str(report_md), str(meta)])
     run(g, "قاعدة النقاط في المصدر", ["python3", "validators/check_points_rule.py", "--md", str(report_md), "--meta", str(meta)])
     run(g, "فصل فضاءات الرموز", ["python3", "validators/check_code_spaces.py", "--date", date])
     run(g, "تغطية فحص العقوبات", ["python3", "validators/check_ofac_coverage.py", "--date", date], tolerate=1,
