@@ -209,14 +209,16 @@ t "منع التركيب المعلّق (ك-173)" python3 tests/test_hanging_ope
 
 echo "19) السجل الحاكم للمفردات وتغطية الأسطح (طلب فهد 2026-10-27)"
 t "السجل الحاكم: صلاحية · إنفاذ كل بند · سبب ومصدر · منع التعديل اليدوي · تغطية الأسطح" python3 tests/test_vocab_registry.py
-python3 tests/test_source_channels.py
+echo "20) قنوات المصادر (ك-237): الفحص كان يُشغَّل بلا احتساب رمز خروجه"
+t "قنوات المصادر: الهوية والمسارات والفجوة وعدم التراجع" python3 tests/test_source_channels.py
+
+echo "21) سطح «إضافات» (ك-234): سطح قارئ جديد بلا حارس = خطر فقد أو تكرار"
+t "سطح إضافات: العناوين المنقولة في صفحتها وحدها" python3 validators/check_additions_surface.py --date "$(date -u +%F)"
+
+echo "22) اقتراحات البوابة (كانت بعد exit 0 = كود ميت)"
+t "اقتراحات البوابة" python3 tests/test_gate_suggestions.py
 
 echo "----- الحصيلة -----"
 printf '  نجح: %s · فشل: %s\n' "$PASS" "$FAIL"
 [ "$FAIL" -eq 0 ] || exit 1
 exit 0
-python3 "$ROOT/tests/test_gate_suggestions.py" 2>&1 | sed "s/^/    /" || FAIL=$((FAIL+1))
-
-# بوابة سطح «إضافات» (ك-234) — تُثبت أن العناوين المنقولة في صفحتها وحدها
-run_case "سطح إضافات: العناوين المنقولة في صفحتها وحدها" \
-  python3 validators/check_additions_surface.py --date "$(date -u +%F)"
