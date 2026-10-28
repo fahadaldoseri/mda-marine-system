@@ -181,6 +181,7 @@ t "إضافة قسم ثم حذفه على نسخة مؤقتة" bash tests/test_s
 t "سجل الأقسام متسق مع التقرير والسياسة" python3 tests/test_sections_registry_vs_report.py --selftest
 t "السجل مقابل أحدث تقرير" python3 tests/test_sections_registry_vs_report.py
 t "برومت الكتابة يحمل المعجم والأمثلة والأقسام" python3 tests/test_write_prompt.py
+t "نطاق فحص الحجب (المتن مقابل الملحق والفهرس)" python3 tests/test_hidden_scope.py
 t "final_gate.sh متسق مع المانيفست" python3 tests/test_final_gate_vs_manifest.py
 t "أوامر المانيفست: سكربتات وخيارات موجودة" python3 tests/test_manifest_commands.py
 t "verify على المانيفست الحقيقي" python3 tools/runbook.py verify

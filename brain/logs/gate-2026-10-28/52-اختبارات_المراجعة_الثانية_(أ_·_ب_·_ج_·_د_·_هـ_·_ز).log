@@ -1,0 +1,25 @@
+── (ب) ربط الحارس الموحّد: تحليل شيفرة (ast) لا بحث نصي
+مخالفات: ['check_additions_surface.py: كتلة التنفيذ لا تستدعي run من _guard فعليًا', 'check_closure.py: كتلة التنفيذ لا تستدعي run من _guard فعليًا', 'check_decision_card.py: كتلة التنفيذ لا تستدعي run من _guard فعليًا']
+ملفات موصولة فعليًا: 29
+  ✘ ملف مدقق غير موصول بالحارس
+  · الحالة المصطنعة (تعليق فقط): كُشفت ✘
+  ✔ الاختبار يكشف التعليق الكاذب (استيراد لم يحدث)
+── (د) حصر الاستثناءات العامة: لا موقع جديد بلا تصنيف
+غير مصنّف: 4 · جديد: [{'file': 'validators/check_backup_parity.py', 'line': 184, 'kind': 'except يبتلع الخطأ', 'text': 'try:', 'snippet': '_tracked = subprocess.run(["git", "-C", str(REPO), "ls-files", "-z", "skills"],', 'func': 'main', 'handler_kind': 'تجاهل', 'fingerprint': '9d0b25f3'}, {'file': 'validators/check_closure.py', 'line': 155, 'kind': 'except يبتلع الخطأ', 'text': 'try:', 'snippet': 'counts, fails, notes = check(Path(a.brain))', 'func': 'main', 'handler_kind': 'إرجاع قيمة', 'fingerprint': '667d1476'}, {'file': 'validators/check_intel.py', 'line': 182, 'kind': 'except يبتلع الخطأ', 'text': 'try:', 'snippet': 'meta = json.loads(meta_path.read_text(encoding="utf-8"))', 'func': 'main', 'handler_kind': 'تجاهل', 'fingerprint': 'ae0a0f48'}, {'file': 'tools/rotate_webhook_secret.py', 'line': 61, 'kind': 'except يبتلع الخطأ', 'text': 'try:', 'snippet': 'with urllib.request.urlopen(req, timeout=30) as r:', 'func': 'api', 'handler_kind': 'إرجاع قيمة', 'fingerprint': '022c1bca'}]
+  ✘ استثناء عام جديد خارج القائمة المقبولة
+── (د) حقن خطأ: المدقق لا يُخرج نجاحًا ولا تحذيرًا
+  ✔ حقن خطأ ⇒ رمز 2 (فشل مغلق)
+── (هـ) الثابت: مفحوصة = ناجحة + متعذّرة
+النتيجة: ['الثابت مفحوصة = ناجحة + متعذّرة مخالف: 35 ≠ 33 + 3', 'متن التقرير لا يحمل سطر الأرقام المعتمد: المصادر: 62 معتمدة = 40 بالمسار الآلي + 22 بالمرجعية اليدوية · 33 ناجحة · تعذّر 3: .']
+  ✔ الثابت يُكشف عند اختلافه
+── (ز) الإصلاح الآلي: لا مساس بالنحو ولا عبور لنهايات الأسطر
+المخالفات: []
+  ✔ الإصلاح الآلي لا يعبر الأسطر ولا يستبدل ما يتأثر بالنحو
+  ✔ تكرار القالب يوقف التسليم (رمز 2)
+── (أ) حارس بصمة النص: اختلاف النص بعد البناء = منع
+  ✔ اختلاف النص ⇒ منع (70)
+  ✔ المخرجات الأقدم من النص تمنع حتى يُعاد البناء
+  ✔ بعد إعادة البناء يمرّ الحارس
+── (ج) عنوان يتيم في PDF اصطناعي
+  ✔ العنوان اليتيم يمنع (وذُكر في المخرج)
+── الأثر: نجح 9 · فشل 2

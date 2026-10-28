@@ -197,7 +197,8 @@ def main() -> int:
                 errors.append(f"ح13: جدول التوزيع الجغرافي فيه {len(evs)} واقعة والخريطة بلا نقاط (فشل مغلق)")
             else:
                 print(f"  ✔ ح13: نقاط الخريطة = {len(mpts)} من {len(evs)} واقعة ذات منطقة")
-        except Exception as e:  # noqa: BLE001
+        # تضييق مقصود (2026-10-28): أعطال القراءة/التحليل المتوقعة فقط — ما عداها يظهر ولا يُبتلع.
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError, AttributeError, TypeError) as e:
             errors.append(f"تعذر قراءة ملف الواجهة: {e}")
     else:
         warns.append("لم يُمرَّر ملف الواجهة — لم يُفحص وسم الأسلوب (ح12)")

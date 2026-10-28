@@ -185,12 +185,49 @@ def gate_parity(date: str):
     return True, f"{len(heads)} قسمًا مطابقًا بين المصدر وPDF", False
 
 
+# ── قياس الحجب: ما يراه القارئ في المتن، لا ما يمكن عدّه في الملف ──────────
+# عطل 2026-10-28: القياس القديم كان يعدّ سطر الفهرس (‏«.10 الوقائع الجديدة ص 6») وإحالة
+# داخل المتن إظهارًا للقسم، فيمنع تسليمًا سليمًا. القاعدة الآن:
+#   1) يُقاس المتن وحده — الملحق (المجموعة المنقولة) هو موضعها المعتمد.
+#   2) سطر الفهرس (يحمل «ص» ورقم صفحة) ليس إظهارًا للقسم.
+#   3) يُعدّ القسم ظاهرًا فقط إذا جاء عنوانًا قائمًا بذاته، لا إحالة داخل جملة.
+APPENDIX_MARKERS = ("المجموعة المنقولة من التقرير اليومي", "ملحق إضافات")
+_INDEX_LINE = re.compile(r"ص\s*[0-9]+")
+
+
+def _is_index_line(line: str) -> bool:
+    """سطر فهرس: يحمل رقم صفحة أو نقاط قيادة — ليس عنوانًا في المتن."""
+    return bool(_INDEX_LINE.search(line)) or "..." in line or "…" in line
+
+
+def _body_before_appendix(txt: str) -> str:
+    """المتن حتى بداية الملحق؛ وما بعده لا يُحسب إظهارًا."""
+    marks = [txt.find(m) for m in APPENDIX_MARKERS]
+    marks = [m for m in marks if m > 0]
+    return txt[:min(marks)] if marks else txt
+
+
+def _heading_shown(text: str, title: str) -> bool:
+    """يظهر القسم فقط إن كان عنوانًا قائمًا بذاته في المتن."""
+    t = norm(title).strip()
+    for line in text.splitlines():
+        if _is_index_line(line):
+            continue
+        n = norm(line).strip()
+        if not n or not n.startswith(t):
+            continue
+        if len(n[len(t):].strip()) <= 8:
+            return True
+    return False
+
+
 def gate_hidden(date: str):
-    txt = norm(pdf_text(SITE / "dist" / "reports" / "pdf" / f"{date}.pdf"))
-    shown = [s for s in HIDDEN_SECTIONS if s in txt]
+    raw = pdf_text(SITE / "dist" / "reports" / "pdf" / f"{date}.pdf")
+    body = _body_before_appendix(raw)
+    shown = [s for s in HIDDEN_SECTIONS if _heading_shown(body, s)]
     if shown:
-        return False, "أقسام يجب حجبها ظاهرة في PDF: " + "، ".join(shown), False
-    return True, "المصادر والموثوقية محجوبتان", False
+        return False, "أقسام يجب حجبها ظاهرة في متن PDF: " + "، ".join(shown), False
+    return True, "الأقسام المنقولة محجوبة عن المتن وموضعها المعتمد الملحق", False
 
 
 def gate_format(date: str):

@@ -152,12 +152,8 @@ def check(brain: Path):
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--brain', default=str(BRAIN))
     ap.add_argument('--json', action='store_true'); a = ap.parse_args()
-    try:
-        counts, fails, notes = check(Path(a.brain))
-    except Exception:
-        print('✗ انهيار داخلي في بوابة الإغلاق — منع')
-        traceback.print_exc()
-        return 70
+    # ك-133: لا ابتلاع للخطأ هنا — الحارس الموحّد يلتقط الانهيار ويُخرج 70.
+    counts, fails, notes = check(Path(a.brain))
     if a.json:
         print(json.dumps({'counts': counts, 'fails': fails, 'notes': notes}, ensure_ascii=False))
     else:
@@ -172,5 +168,8 @@ def main():
     return 0 if not fails else 2
 
 
-if __name__ == '__main__':
-    raise SystemExit(main())
+if __name__ == "'__main__'":
+    # ك-133: كل مدقق يمرّ عبر الحارس الموحّد — الانهيار يخرج بالرمز 70 ولا يُبتلع.
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)

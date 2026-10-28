@@ -2,34 +2,37 @@
   "date": "2026-10-28",
   "feeds": {},
   "final_gate": {
-    "blocked_steps": [],
+    "status": "block",
+    "exit_code": 2,
     "dir": "logs/gate-2026-10-28",
-    "exit_code": 1,
-    "note": "نتيجة بوابة التسليم النهائية — كُتبت العلامة بعدها.",
-    "status": "warn"
+    "blocked_steps": [
+      "بوابات المخرج العشر",
+      "اختبارات المراجعة الثانية (أ · ب · ج · د · هـ · ز)"
+    ],
+    "note": "نتيجة بوابة التسليم النهائية — مسجّلة بعد كتابة التقرير."
   },
   "finished_utc": "2026-10-28T04:01:09Z",
   "gate_finished_utc": "2026-10-28T04:44:34Z",
   "gate_note": "علامة مرحلة الخط اليومي — بوابة التسليم لم تُشغَّل بعد.",
   "gate_state": "not_run",
   "language": {
-    "banned_terms": 2,
+    "banned_terms": 1,
     "edit_pass": {
       "applied": true,
       "by_category": {
-        "أسلوب": 22,
-        "ترجمة حرفية": 10,
-        "مفردة": 14
+        "أسلوب": 13,
+        "ترجمة حرفية": 1,
+        "مفردة": 10
       },
-      "changes": 46,
-      "edited": 7,
+      "changes": 24,
+      "edited": 6,
       "model": "gpt-5-mini",
-      "rejected": 8,
+      "rejected": 9,
       "sections": 15
     },
-    "long_sentences": 14,
+    "long_sentences": 11,
     "orthography_errors": 0,
-    "waw_pct": 5.1,
+    "waw_pct": 5.8,
     "waw_runs3": 0
   },
   "overall": "ok",

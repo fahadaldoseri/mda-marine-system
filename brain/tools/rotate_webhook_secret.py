@@ -2,7 +2,7 @@
 """تدوير TELEGRAM_WEBHOOK_SECRET بأمان: توليد · تحديث المخزن · إعادة تسجيل الويب هوك · تحقق.
 لا تُطبع أي قيمة سرية في أي مخرج — البصمات فقط.
 الاستخدام: python3 tools/rotate_webhook_secret.py [--dry-run] [--skip-telegram]"""
-import argparse, hashlib, json, os, re, secrets, sys, urllib.parse, urllib.request
+import argparse, hashlib, json, os, re, secrets, sys, urllib.error, urllib.parse, urllib.request
 from pathlib import Path
 
 # ── جذر محمول (بوابة قابلية النقل) ──
@@ -61,7 +61,9 @@ def api(token: str, method: str, params: dict | None = None):
     try:
         with urllib.request.urlopen(req, timeout=30) as r:
             return json.loads(r.read().decode())
-    except Exception as e:  # noqa: BLE001
+    # تضييق مقصود: أعطال الشبكة/التحليل المتوقعة — أي خطأ آخر يظهر ولا يُبتلع.
+    except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, OSError,
+            json.JSONDecodeError, ValueError) as e:
         return {'ok': False, 'error': type(e).__name__, 'detail': str(e)[:120]}
 
 

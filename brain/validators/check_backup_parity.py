@@ -187,7 +187,8 @@ def main() -> int:
         for _f in _tracked.split("\0"):
             if _f.startswith("skills/") and _f.count("/") >= 2:
                 _sk_names.add(_f.split("/")[1])
-    except Exception:
+    # تضييق مقصود: أعطال git المتوقعة فقط — أي خطأ آخر يظهر ولا يُبتلع.
+    except (subprocess.CalledProcessError, subprocess.TimeoutExpired, OSError, UnicodeDecodeError):
         _sk_names = set()
     if not _sk_names:
         _sk_names = {"marine-news-brain", "military-arabic-editing", "macr-system", "superpowers-method"}

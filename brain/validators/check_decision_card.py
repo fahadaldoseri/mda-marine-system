@@ -146,8 +146,7 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    try:
-        raise SystemExit(main())
-    except ImportError as exc:  # pragma: no cover
-        print(f"مانع: تعذّر تشغيل المتصفح: {exc}")
-        raise SystemExit(2)
+    # ك-133: كل مدقق يمرّ عبر الحارس الموحّد — الانهيار يخرج بالرمز 70 ولا يُبتلع.
+    sys.path.insert(0, str(_Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)
