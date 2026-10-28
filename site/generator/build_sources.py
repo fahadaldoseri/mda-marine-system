@@ -10,6 +10,7 @@
 المصادر: sources/feeds-status.json (فحص التغذيات) و sources/source-reliability.md (سجل الموثوقية).
 """
 import html
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -28,6 +29,7 @@ CSS = """
 .sp-head{margin:18px 0 6px}
 .sp-head h1{font-size:clamp(22px,3.4vw,32px);margin:0 0 8px}
 .sp-head p{color:var(--ink2);font-size:14.5px;line-height:1.8;margin:0}
+.sx-badge{font-size:11px;padding:1px 6px;border:1px solid var(--line);border-radius:999px;white-space:nowrap;opacity:.85}
 .sx-note{background:var(--panel);border:1px solid var(--line);border-radius:12px;
   padding:10px 14px;margin:14px 0;font-size:13.5px;color:var(--ink2)}
 .sx-h2{font-size:17px;margin:26px 0 10px;padding-inline-start:10px;border-inline-start:3px solid var(--accent)}
@@ -250,6 +252,15 @@ def diagnosis_section(diag: list, esc) -> str:
 """
 
 
+BLOCKS_AUTOMATED_CHECK = {'www.ukmto.org'}
+
+
+def _browser_badge(url: str) -> str:
+    host = url.split('/')[2] if '//' in url else ''
+    return (' <span class="sx-badge" title="حماية Cloudflare ترفض الفحص الآلي؛ الرابط يعمل في المتصفح">يُفتح بالمتصفح</span>'
+            if host in BLOCKS_AUTOMATED_CHECK else '')
+
+
 def build(dist: Path, quiet: bool = False) -> dict:
     status_p = SITE / 'sources' / 'feeds-status.json'
     rel_p = SITE / 'sources' / 'source-reliability.md'
@@ -272,6 +283,12 @@ def build(dist: Path, quiet: bool = False) -> dict:
     routes_ok = len([f for f in (status.get('checked_feeds') or []) if f.get('ok')])
     items_n = status.get('items') or 0
     stamp = status.get('date') or status.get('stamp') or ''
+    # بصمة ملف الفحص: تتيح لمدقّق خارجي إعادة حساب الأرقام المعروضة والتحقق منها.
+    status_hash = ''
+    try:
+        status_hash = hashlib.sha256(status_p.read_bytes()).hexdigest()[:12]
+    except Exception:
+        status_hash = ''
     ok_c = len([c for c in cards if c['kind'] == 'ok'])
     bad_c = len([c for c in cards if c['kind'] == 'bad'])
     none_c = len([c for c in cards if c['kind'] == 'none'])
@@ -291,7 +308,7 @@ def build(dist: Path, quiet: bool = False) -> dict:
 
     table_html = '\n'.join(
         f'<tr><td class="n">{r["num"]}</td>'
-        f'<td><a href="{esc(r["url"])}" target="_blank" rel="noopener">{esc(r["name"])}</a></td>'
+        f'<td><a href="{esc(r["url"])}" target="_blank" rel="noopener">{esc(r["name"])}</a>{_browser_badge(r["url"])}</td>'
         f'<td>{esc(r["type"])}</td><td class="g">{esc(r["rel"])}</td>'
         f'<td class="g">{esc(r["cred"])}</td><td>{esc(r["basis"])}</td></tr>'
         for r in rows)
@@ -320,7 +337,8 @@ def build(dist: Path, quiet: bool = False) -> dict:
    if routes_all else ''}
   {('· عناصر مجمَّعة <b>' + esc(items_n) + '</b>') if items_n else ''}.
   المصدر الواحد قد تكون له عدة مسارات؛ وعدد المسارات لا يُقرأ عددًا للمصادر.
-  والتعذّر يُسجَّل قيدًا معروفًا؛ وسياسة النظام تمنع تجاوز حماية المواقع.</div>
+  والتعذّر يُسجَّل قيدًا معروفًا؛ وسياسة النظام تمنع تجاوز حماية المواقع.
+  {(' بصمة ملف الفحص: <code>' + esc(status_hash) + '</code> — تُعاد الأرقام بحساب sha256 للملف sources/feeds-status.json.') if status_hash else ''}</div>
 
 {diagnosis_live(cards, status, esc)}
   <h2 class="sx-h2">حالة المصادر المفحوصة</h2>

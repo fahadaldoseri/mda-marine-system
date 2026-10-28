@@ -1,9 +1,9 @@
 {
  "date": "2026-10-28",
- "status": "degraded",
+ "status": "ok",
  "checked": 60,
- "ok": 59,
- "failed": 1,
+ "ok": 60,
+ "failed": 0,
  "browser_only": [],
  "manual_reference": [
   39,
@@ -17,9 +17,9 @@
  ],
  "empty": [],
  "stale_days_limit": 14,
- "fail_ratio": 0.017,
+ "fail_ratio": 0.0,
  "fail_ratio_limit": 0.2,
- "items": 1787,
+ "items": 1826,
  "checked_feeds": [
   {
    "num": 1,
@@ -89,7 +89,7 @@
    "via": "primary",
    "fetched_url": "https://straits.live/feed.xml",
    "items_count": 59,
-   "content_chars": 35792,
+   "content_chars": 35681,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -149,7 +149,7 @@
    "via": "primary",
    "fetched_url": "https://www.ajnet.me/rss",
    "items_count": 25,
-   "content_chars": 10088,
+   "content_chars": 10010,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -161,7 +161,7 @@
    "via": "primary",
    "fetched_url": "https://www.aljazeera.com/xml/rss/all.xml",
    "items_count": 25,
-   "content_chars": 7410,
+   "content_chars": 7432,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -297,7 +297,7 @@
    "via": "primary",
    "fetched_url": "https://akhbar-alkhaleej.com/",
    "items_count": 47,
-   "content_chars": 6684,
+   "content_chars": 7342,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -391,8 +391,8 @@
    "name": "وكالة الأنباء السعودية (واس)",
    "primary_url": "https://www.spa.gov.sa/rss.xml",
    "ok": true,
-   "via": "official:spa-next-data",
-   "fetched_url": "https://www.spa.gov.sa/ar",
+   "via": "primary",
+   "fetched_url": "https://www.spa.gov.sa/rss.xml",
    "items_count": 7,
    "content_chars": 133305,
    "latest_age_days": null,
@@ -534,14 +534,13 @@
    "num": 35,
    "name": "Splash 247",
    "primary_url": "https://splash247.com/feed/atom/",
-   "ok": false,
-   "via": null,
-   "fetched_url": null,
-   "items_count": 0,
-   "content_chars": 0,
-   "latest_age_days": null,
-   "tls_verification": "verified",
-   "block_reason": "all routes failed: primary: HTTP Error 415: Unsupported Media Type"
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://splash247.com/feed/atom/",
+   "items_count": 10,
+   "content_chars": 5277,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
   },
   {
    "num": 36,
@@ -551,7 +550,7 @@
    "via": "primary",
    "fetched_url": "https://www.lloydslist.com/rss/lloyds-list",
    "items_count": 20,
-   "content_chars": 16384,
+   "content_chars": 16386,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -611,7 +610,7 @@
    "via": "primary",
    "fetched_url": "https://www.jpost.com/rss/rssfeedsmiddleeastnews.aspx",
    "items_count": 30,
-   "content_chars": 35370,
+   "content_chars": 35363,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -631,14 +630,13 @@
    "num": 41,
    "name": "USNI News",
    "primary_url": "https://news.usni.org/feed",
-   "ok": false,
-   "via": null,
-   "fetched_url": null,
-   "items_count": 0,
-   "content_chars": 0,
-   "latest_age_days": null,
-   "tls_verification": "verified",
-   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | official-page:jina.ai/usni-news: حجب مصدر — رفض الخادم الطلب (HTTP 403)"
+   "ok": true,
+   "via": "browser",
+   "fetched_url": "https://news.usni.org/feed",
+   "items_count": 30,
+   "content_chars": 200831,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
   },
   {
    "num": 42,
@@ -661,7 +659,7 @@
    "via": "primary",
    "fetched_url": "https://maritime-executive.com/",
    "items_count": 31,
-   "content_chars": 19611,
+   "content_chars": 19563,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -697,7 +695,7 @@
    "via": "primary",
    "fetched_url": "https://www.isna.ir/rss",
    "items_count": 30,
-   "content_chars": 28511,
+   "content_chars": 28572,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -769,7 +767,7 @@
    "via": "primary",
    "fetched_url": "https://www.navytimes.com/feed/",
    "items_count": 10,
-   "content_chars": 39616,
+   "content_chars": 38325,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -793,7 +791,7 @@
    "via": "primary",
    "fetched_url": "https://rss.nytimes.com/services/xml/rss/nyt/MiddleEast.xml",
    "items_count": 45,
-   "content_chars": 32507,
+   "content_chars": 32605,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -805,7 +803,7 @@
    "via": "primary",
    "fetched_url": "https://feeds.bloomberg.com/markets/news.rss",
    "items_count": 20,
-   "content_chars": 3377,
+   "content_chars": 3378,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -817,7 +815,7 @@
    "via": "primary",
    "fetched_url": "https://feeds.bloomberg.com/politics/news.rss",
    "items_count": 20,
-   "content_chars": 3590,
+   "content_chars": 3578,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -829,7 +827,7 @@
    "via": "primary",
    "fetched_url": "https://api.axios.com/feed/",
    "items_count": 100,
-   "content_chars": 881141,
+   "content_chars": 877200,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -889,7 +887,7 @@
    "via": "primary",
    "fetched_url": "https://x.com/us5thfleet",
    "items_count": 5,
-   "content_chars": 1873,
+   "content_chars": 1871,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -925,7 +923,7 @@
    "via": "primary",
    "fetched_url": "https://t.me/s/army21ye",
    "items_count": 19,
-   "content_chars": 8875,
+   "content_chars": 8881,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -937,8 +935,8 @@
    "via": "primary",
    "fetched_url": "https://x.com/CJFCSpox",
    "items_count": 5,
-   "content_chars": 1492,
-   "latest_age_days": 0,
+   "content_chars": 1495,
+   "latest_age_days": 1,
    "tls_verification": "verified"
   },
   {
@@ -948,8 +946,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://x.com/ERYANIM",
-   "items_count": 4,
-   "content_chars": 2406,
+   "items_count": 3,
+   "content_chars": 2376,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -973,7 +971,7 @@
    "via": "primary",
    "fetched_url": "https://x.com/AlArabiya",
    "items_count": 5,
-   "content_chars": 1624,
+   "content_chars": 1614,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -988,7 +986,7 @@
    "content_chars": 0,
    "latest_age_days": null,
    "tls_verification": "verified",
-   "block_reason": "all routes failed: primary: حجب مصدر — رفض الخادم الطلب (HTTP 403) | official-page:jina.ai/usni-news: حجب مصدر — رفض الخادم الطلب (HTTP 403)"
+   "block_reason": "all routes failed: primary: حجب مصدر — رفض الخادم الطلب (HTTP 403) | official-page:jina.ai/usni-news: حجب مصدر — رفض الخادم الطلب (HTTP 403) | browser: مسار المتصفح فشل — Error: BrowserType.launch_persistent_context: Opening in existing browser session. This usually means that the profile is already in use by another"
   },
   {
    "num": 42,
@@ -1003,31 +1001,7 @@
    "tls_verification": "verified"
   }
  ],
- "failed_feeds": [
-  {
-   "num": 41,
-   "name": "USNI News",
-   "primary_url": "https://news.usni.org/feed",
-   "error": "حجب مصدر — رفض الخادم الطلب (HTTP 403)",
-   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | official-page:jina.ai/usni-news: حجب مصدر — رفض الخادم الطلب (HTTP 403)",
-   "attempts": [
-    {
-     "url": "https://news.usni.org/feed",
-     "via": "primary",
-     "ok": false,
-     "error": "حجب مصدر — blocked page: Just a moment (HTTP 403)",
-     "tls_verification": "verified"
-    },
-    {
-     "url": "https://r.jina.ai/https://news.usni.org/",
-     "via": "official-page:jina.ai/usni-news",
-     "ok": false,
-     "error": "حجب مصدر — رفض الخادم الطلب (HTTP 403)",
-     "tls_verification": "verified"
-    }
-   ]
-  }
- ],
+ "failed_feeds": [],
  "failed_attempts": [
   {
    "num": 14,
@@ -1065,20 +1039,6 @@
    "block_reason": "all routes failed: primary: derived items without real content (2)"
   },
   {
-   "num": 35,
-   "name": "Splash 247",
-   "via": null,
-   "error": "HTTP Error 415: Unsupported Media Type",
-   "block_reason": "all routes failed: primary: HTTP Error 415: Unsupported Media Type"
-  },
-  {
-   "num": 41,
-   "name": "USNI News",
-   "via": null,
-   "error": "حجب مصدر — رفض الخادم الطلب (HTTP 403)",
-   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | official-page:jina.ai/usni-news: حجب مصدر — رفض الخادم الطلب (HTTP 403)"
-  },
-  {
    "num": 42,
    "name": "Naval News",
    "via": null,
@@ -1089,9 +1049,9 @@
    "num": 41,
    "name": "USNI News — تغذية عبر وسيط قراءة",
    "via": null,
-   "error": "حجب مصدر — رفض الخادم الطلب (HTTP 403)",
-   "block_reason": "all routes failed: primary: حجب مصدر — رفض الخادم الطلب (HTTP 403) | official-page:jina.ai/usni-news: حجب مصدر — رفض الخادم الطلب (HTTP 403)"
+   "error": "مسار المتصفح فشل — Error: BrowserType.launch_persistent_context: Opening in existing browser session. This usually means that the profile is already in use by another",
+   "block_reason": "all routes failed: primary: حجب مصدر — رفض الخادم الطلب (HTTP 403) | official-page:jina.ai/usni-news: حجب مصدر — رفض الخادم الطلب (HTTP 403) | browser: مسار المتصفح فشل — Error: BrowserType.launch_persistent_context: Opening in existing browser session. This usually means that the profile is already in use by another"
   }
  ],
- "written_utc": "2026-10-28T22:59:18Z"
+ "written_utc": "2026-10-28T23:33:00Z"
 }
