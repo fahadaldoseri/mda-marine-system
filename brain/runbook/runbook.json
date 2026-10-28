@@ -13,7 +13,11 @@
     "tests/test_sections_registry_vs_report.py"
    ],
    "files": [],
-   "heading": null
+   "heading": null,
+   "aliases": [
+    "ما تغيّر",
+    "ما تغيّر منذ التقرير السابق"
+   ]
   },
   {
    "id": "summary",
@@ -323,7 +327,8 @@
   "حزمة-*",
   "bootstrap.sh",
   ".devcontainer/*",
-  "runbook-result.md"
+  "runbook-result.md",
+  "backup-repo/*"
  ],
  "exempt_reasons": {
   "reports/*": "مخرجات: نصوص التقارير المولَّدة (يكتبها محرّك/الوكيل في خطوة W010)",
@@ -487,7 +492,8 @@
   ".devcontainer/*": "تهيئة بيئة",
   "runbook-result.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
   "runbook/*": "ملفات المانيفست والبرومتات: يقرؤها المحرّك نفسه (runbook.py) ولا تُنفَّذ بخطوة مستقلة",
-  "design/*": "مرجع تصميم محفوظ (design-v1) للقراءة فقط، لا تنفيذ فيه"
+  "design/*": "مرجع تصميم محفوظ (design-v1) للقراءة فقط، لا تنفيذ فيه",
+  "backup-repo/*": "شجرة مرآة الملفات التي تعيش في المستودع وحده (فهرس المستودع ومستندات الجلسة)؛ لا نظير لها على الخادم، ومقارنة التماثل تعتمدها من هذا المسار (ك-232)."
  },
  "steps": [
   {
@@ -2573,6 +2579,48 @@
    "gate_title": "اختبار انحدار المصلح (12→23)"
   },
   {
+   "id": "G045",
+   "title": "تغطية بوابة الأسلوب لكل سطح يقرأه القارئ",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G045.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق",
+     "ط15 — مدى بوابة الأسلوب"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "tools/audit_style_coverage.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": [
+     "tests/test_vocab_registry.py"
+    ]
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; export B SITE; python3 \"$B/tools/make_tg_digest.py\" --date \"$D\" >/dev/null 2>&1 || true; python3 \"$B/tools/audit_style_coverage.py\" --date \"$D\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [],
+   "gate_title": "التسليم"
+  },
+  {
    "id": "B010",
    "title": "بناء الموقع من البيانات",
    "kind": "script",
@@ -2694,48 +2742,6 @@
     0
    ],
    "warn_rc": []
-  },
-  {
-   "id": "G045",
-   "title": "تغطية بوابة الأسلوب لكل سطح يقرأه القارئ",
-   "kind": "script",
-   "phase": "gates",
-   "assert": [
-    {
-     "type": "cmd",
-     "command": [
-      "bash",
-      "-lc",
-      "test -s logs/runbook/{date}/G045.log"
-     ]
-    }
-   ],
-   "links": {
-    "rules": [
-     "ف1–ف5 — بوابة التحقق",
-     "ط15 — مدى بوابة الأسلوب"
-    ],
-    "files": [
-     "tools/final_gate.sh",
-     "tools/audit_style_coverage.py"
-    ],
-    "folders": [],
-    "gates": [],
-    "tests": [
-     "tests/test_vocab_registry.py"
-    ]
-   },
-   "on_fail": "stop",
-   "command": [
-    "bash",
-    "-lc",
-    "B=\"$PWD\"; export B SITE; python3 \"$B/tools/make_tg_digest.py\" --date \"$D\" >/dev/null 2>&1 || true; python3 \"$B/tools/audit_style_coverage.py\" --date \"$D\"; rc=$?; exit $rc"
-   ],
-   "ok_rc": [
-    0
-   ],
-   "warn_rc": [],
-   "gate_title": "التسليم"
   },
   {
    "id": "B035",

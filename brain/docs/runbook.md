@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة f422d089b6b8769a). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة c17a2e13611c43e2). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -58,10 +58,10 @@
 | G044 | السجل الحاكم للمفردات ومُولَّده | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G044.log | ف1–ف5 — بوابة التحقق، ط15 — مدى بوابة الأسلوب | tools/final_gate.sh، tools/build_vocab_gate.py، appendices/simplified-vocabulary.json، tools/vocab_review.py | stop |
 | G040 | اختبارات المراجعة الثانية (أ · ب · ج · د · هـ · ز) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G040.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tests/test_review2.sh | stop |
 | G041 | اختبار انحدار المصلح (12→23) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G041.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tests/test_repair_regression.sh | stop |
+| G045 | تغطية بوابة الأسلوب لكل سطح يقرأه القارئ | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G045.log | ف1–ف5 — بوابة التحقق، ط15 — مدى بوابة الأسلوب | tools/final_gate.sh، tools/audit_style_coverage.py | stop |
 | B010 | بناء الموقع من البيانات | script |  |  | file_exists:{site}/dist/reports/{date}.html | س1 — النشر | {site}/generator/build_site.py، {site}/generator/sync_from_brain.py، tools/build_source_reliability.py، tools/sync_backup.sh، tools/build_macr_docx.py، tools/build_provenance.py، tools/build_styles_docx.py، tools/build_audit_report.py، tools/build_ambiguity_map.py، tools/build_instructions_doc.py، tools/build_report_docx.py، tools/build_report_docx_exact.py، tools/sync_profile_hash.py، {site}/generator | stop |
 | B020 | تصدير PDF المعتمد | script |  |  | min_bytes:{site}/dist/reports/pdf/{date}.pdf | س1 — النشر | tools/export_report_assets.py، tools/pdf_change_guard.py | stop |
 | B030 | بوابتا جودة الطباعة على PDF نفسه | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/B030.log | ف5 — شكل PDF وجودة الطباعة | validators/check_pdf_format.py، validators/check_print_quality.py | stop |
-| G045 | تغطية بوابة الأسلوب لكل سطح يقرأه القارئ | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G045.log | ف1–ف5 — بوابة التحقق، ط15 — مدى بوابة الأسلوب | tools/final_gate.sh، tools/audit_style_coverage.py | stop |
 | B035 | خط الأساس الرسمي (virgin) — تنبيهي | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/B035.log | س1 — النشر | tools/check_baseline.py | stop |
 | B040 | نسخة Word طبق الأصل (بوابة المخرج 9 تمنع التسليم بدونها) | script |  |  | cmd:bash -lc ls reports/docx/*{date}*.docx >/dev/null 2>&1 | س1 — النشر | tools/build_report_docx_exact.py | stop |
 | G005 | تطابق أرقام المصادر في كل المواضع | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G005.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh | stop |
