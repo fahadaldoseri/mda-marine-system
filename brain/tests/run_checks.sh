@@ -212,6 +212,7 @@ t "السجل الحاكم: صلاحية · إنفاذ كل بند · سبب و�
 echo "20) قنوات المصادر (ك-237): الفحص كان يُشغَّل بلا احتساب رمز خروجه"
 t "قنوات المصادر: الهوية والمسارات والفجوة وعدم التراجع" python3 validators/check_closure.py --brain "$B" || fail "بوابة الإغلاق: الحلقة غير مغلقة"
 python3 tests/test_closure_gate.py || fail "اختبار بوابة الإغلاق"
+python3 "$B/tests/test_sync_guard.py" || fail=1
 python3 tests/test_source_channels.py
 
 echo "21) سطح «إضافات» (ك-234): سطح قارئ جديد بلا حارس = خطر فقد أو تكرار"
