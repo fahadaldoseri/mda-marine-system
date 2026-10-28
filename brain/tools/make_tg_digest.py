@@ -49,7 +49,7 @@ def build(meta, date, base, detail=True):
              f"التاريخ: {cut.day} {MONTHS[cut.month - 1]} {cut.year}",
              f"الفترة: {dtg(start)}–{dtg(cut)} {MONTHS[cut.month - 1]} {cut.year}",
              f"الوقت: {cut.hour:02d}{cut.minute:02d}Z ({bh.hour:02d}{bh.minute:02d}C بتوقيت البحرين)", "",
-             f"<b>مستوى الخطر:</b> {meta['threat_level']}", "", "<b>ما تغيّر عن التقرير السابق:</b>"]
+             f"<b>مستوى التهديد:</b> {meta['threat_level']}", "", "<b>ما تغيّر عن التقرير السابق:</b>"]
     for i, c in enumerate(meta.get("changes", [])[:3], 1):
         title = (codes.get(c["code"]) or {}).get("title") or short(c["text"], 70)
         lines += [f"{i}) {short(title, 70)} ({c['code']})" + (":" if detail else "")]
