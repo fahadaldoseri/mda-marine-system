@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-28T22:10:17.636772+00:00",
+  "generated_at": "2026-10-28T23:02:13.435007+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -2207,6 +2207,76 @@
       "lesson_id": "ك-280",
       "barrier_id": "B-cda44d61",
       "run_evidence": null
+    },
+    {
+      "fault_id": "ك-281",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-281",
+      "barrier_id": "B-9dd00163",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-282",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-282",
+      "barrier_id": "B-4dfc2354",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-283",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-283",
+      "barrier_id": "B-7ec937cb",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-284",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-284",
+      "barrier_id": "B-a05d6ccb",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-285",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-285",
+      "barrier_id": "B-792c40d6",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-286",
+      "state": "مغلق",
+      "lesson_id": "ك-286",
+      "barrier_id": "B-79339a1d",
+      "run_evidence": "python3 validators/check_source_route_coverage.py --date 2026-10-28 → خرج 0 (نجح 59 · فشل 0)"
+    },
+    {
+      "fault_id": "ك-287",
+      "state": "مغلق",
+      "lesson_id": "ك-287",
+      "barrier_id": "B-dd4c0158",
+      "run_evidence": "python3 validators/check_source_route_coverage.py --date 2026-10-28 → خرج 0 (نجح 59 · فشل 0)"
+    },
+    {
+      "fault_id": "ك-288",
+      "state": "مغلق",
+      "lesson_id": "ك-288",
+      "barrier_id": "B-2218a178",
+      "run_evidence": "python3 validators/check_source_route_coverage.py --date 2026-10-28 → خرج 0 (نجح 59 · فشل 0)"
+    },
+    {
+      "fault_id": "ك-289",
+      "state": "مغلق",
+      "lesson_id": "ك-289",
+      "barrier_id": "B-1e3cf307",
+      "run_evidence": "python3 validators/check_source_route_coverage.py --date 2026-10-28 → خرج 0 (نجح 59 · فشل 0)"
+    },
+    {
+      "fault_id": "ك-290",
+      "state": "مغلق",
+      "lesson_id": "ك-290",
+      "barrier_id": "B-e1644216",
+      "run_evidence": "python3 validators/check_source_route_coverage.py --date 2026-10-28 → خرج 0 (نجح 59 · فشل 0)"
     }
   ]
 }
