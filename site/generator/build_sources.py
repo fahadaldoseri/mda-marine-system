@@ -24,6 +24,7 @@ except ImportError:  # عند التشغيل من جذر المشروع
 SITE = Path(__file__).resolve().parents[1]
 
 CSS = """
+.sx-tblwrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px}
 .sp-head{margin:18px 0 6px}
 .sp-head h1{font-size:clamp(22px,3.4vw,32px);margin:0 0 8px}
 .sp-head p{color:var(--ink2);font-size:14.5px;line-height:1.8;margin:0}
@@ -59,7 +60,7 @@ CSS = """
 .sx-tbl th,.sx-tbl td{border:1px solid var(--line);padding:7px 9px;text-align:start;vertical-align:top}
 .sx-tbl th{background:var(--panel);font-size:12.5px}
 .sx-tbl td.n{text-align:center;white-space:nowrap}
-.sx-tbl td a{display:inline-block;padding:3px 0;min-height:24px}
+.sx-tbl td a{display:inline-flex;align-items:center;padding:3px 0;min-height:44px;min-width:44px}
 .sx-tbl td.g{text-align:center;font-weight:700}
 @media(max-width:760px){.sx-grid{grid-template-columns:1fr}.sx-tbl{display:block;overflow-x:auto}}
 """
@@ -167,6 +168,49 @@ def _diag_kind(state: str) -> str:
     return 'none'
 
 
+def diagnosis_live(cards: list, status: dict, esc) -> str:
+    """التشخيص الحي — يُبنى من قياس التشغيل نفسه لا من ملف منسوخ قديم.
+
+    عطل مُصلح: كان القسم يُقرأ من `sources/source-diagnosis.json` (لقطة قديمة) فيُعرض
+    كأنه حي، ويذكر مصادر «محجوبة آليًا» وهي تعمل. الآن كل رقم وكل صف يُشتقّ من
+    `feeds-<date>.status.json` الذي كتبه فحص اليوم نفسه، مع تاريخ القياس ظاهرًا.
+    """
+    manual = [int(n) for n in (status.get('manual_reference') or []) if str(n).isdigit()]
+    ok_n = len([c for c in cards if c['kind'] == 'ok'])
+    bad = [c for c in cards if c['kind'] == 'bad']
+    none_c = len([c for c in cards if c['kind'] == 'none' and c['num'] not in manual])
+    labels = [('ok', ok_n, 'ناجحة آليًا'), ('bad', len(bad), 'متعذّرة الآن'),
+              ('lim', len(manual), 'بلا مسار آلي مُثبت'), ('none', none_c, 'بلا تغذية معلنة')]
+    tiles = ''.join(f'<div class="dx-tile dx-{k}"><b>{n}</b><span>{lab}</span></div>'
+                    for k, n, lab in labels)
+    rows = [('bad', c['num'], c['name'], c['state'], 'إصلاح المسار أو إضافة مسار بديل') for c in bad]
+    rows += [('lim', n, next((c['name'] for c in cards if c['num'] == n), ''),
+              'بلا مسار آلي مُثبت بعد', 'قراءة يدوية أو حفظ أصل رسمي حتى يُثبت مسار آلي')
+             for n in sorted(manual)]
+    if rows:
+        body = '\n'.join(
+            f'<tr class="dx-{k}"><td class="n">{num}</td><td>{esc(name)}</td>'
+            f'<td>{esc(state)}</td><td>{esc(action)}</td></tr>'
+            for k, num, name, state, action in rows)
+    else:
+        body = '<tr><td colspan="4">كل المصادر لها مسار آلي ناجح في آخر قياس.</td></tr>'
+    stamp = status.get('date') or ''
+    total = len(cards)
+    return f"""
+  <h2 class="sx-h2">التشخيص الحي: {len(bad)} مصدرًا متعذّرًا و{len(manual)} بلا مسار آلي، من أصل {total} معتمدة</h2>
+  <div class="dx-tiles">{tiles}</div>
+  <div class="sx-note">هذا القسم يُبنى من قياس فحص التغذيات نفسه{(' بتاريخ ' + esc(stamp)) if stamp else ''}، لا من لقطة محفوظة.
+  «ناجحة آليًا» يعني أن المسار قرأ محتوى حقيقيًا (عنوان مادة أو نصّ منشور) لا روابط صور أو قوائم تنقّل.
+  و«بلا مسار آلي مُثبت» مصدر معتمد يُقرأ يدويًا أو من أرشيف رسمي حتى يُثبت مسار آلي له.</div>
+  <div class="sx-tblwrap"><table class="sx-tbl">
+    <thead><tr><th>#</th><th>المصدر</th><th>الحالة المقيسة</th><th>الإجراء</th></tr></thead>
+    <tbody>
+{body}
+    </tbody>
+  </table></div>
+"""
+
+
 def diagnosis_section(diag: list, esc) -> str:
     """قسم التشخيص الحي لكل المصادر — يُبنى من ملف التشخيص المنسوخ من النظام."""
     if not diag:
@@ -197,12 +241,12 @@ def diagnosis_section(diag: list, esc) -> str:
   <div class="sx-note">الجدول أدناه يعرض المصادر التي تحتاج إجراءً فقط، والتوزيع الكامل في المربعات أعلاه. التشخيص يقيس لكل مصدر مسار التغذية وحداثتها، وقراءة الصفحة المباشرة، ثم يصنّف المسار الفعلي.
   «يعمل آليًا» يعني قراءة المادة فعلًا داخل حدّ الحداثة المعتمد (14 يومًا). و«يحتاج متصفح» يعني أن الحجب أو بنية الصفحة تمنع القراءة الآلية.
   و«محجوب أو معطوب» قيد معروف لا يُتجاوز بحماية المواقع.</div>
-  <table class="sx-tbl">
+  <div class="sx-tblwrap"><table class="sx-tbl">
     <thead><tr><th>#</th><th>المصدر</th><th>الحالة المقيسة</th><th>الإجراء المطلوب</th></tr></thead>
     <tbody>
 {body}
     </tbody>
-  </table>
+  </table></div>
 """
 
 
@@ -217,20 +261,15 @@ def build(dist: Path, quiet: bool = False) -> dict:
             status = {}
     rows = parse_reliability(rel_p)
     cards, status = source_cards(status, rows)
-    diag_p = SITE / 'sources' / 'source-diagnosis.json'
-    diag = []
-    if diag_p.exists():
-        try:
-            diag = json.loads(diag_p.read_text(encoding='utf-8'))
-        except Exception:
-            diag = []
-
     checked = status.get('checked') or len(cards)
     ok_n = status.get('ok') or len([c for c in cards if c['kind'] == 'ok'])
     fail_n = status.get('failed') or len([c for c in cards if c['kind'] in ('bad', 'lim')])
     approved_n = status.get('approved') or len(rows)
     manual_n = len(status.get('manual_reference') or [])
-    feeds_n = len(status.get('checked_feeds') or [])
+    # عدد المسارات المفحوصة (صفوف جدول التغذيات) — يُسمّى مسارات صراحةً، فليس عدد مصادر:
+    # مصدر واحد قد يكون له ثلاثة مسارات. التسمية القديمة «تغذيات مفحوصة» أوهمت بتعارض مع عدد المصادر.
+    routes_all = len(status.get('checked_feeds') or [])
+    routes_ok = len([f for f in (status.get('checked_feeds') or []) if f.get('ok')])
     items_n = status.get('items') or 0
     stamp = status.get('date') or status.get('stamp') or ''
     ok_c = len([c for c in cards if c['kind'] == 'ok'])
@@ -275,13 +314,15 @@ def build(dist: Path, quiet: bool = False) -> dict:
   </header>
 
   <div class="sx-note">حالة آخر فحص للتغذيات{(' — ' + esc(stamp)) if stamp else ''}:
-  المصادر: <b>{esc(approved_n)}</b> معتمدة · <b>{esc(checked)}</b> مرصودة آليًا ·
-  <b>{esc(ok_n)}</b> ناجحة · <b>{esc(fail_n)}</b> متعذّر · <b>{esc(manual_n)}</b> مفحوصة يدويًا
-  {('· تغذيات مفحوصة <b>' + esc(feeds_n) + '</b>') if feeds_n else ''}
+  المصادر المعتمدة: <b>{esc(approved_n)}</b> · لها مسار آلي: <b>{esc(checked)}</b>
+  (ناجحة <b>{esc(ok_n)}</b> · متعذّرة <b>{esc(fail_n)}</b>) · بلا مسار آلي بعد: <b>{esc(manual_n)}</b>
+  {('· مسارات معلنة <b>' + esc(routes_all) + '</b> نجح منها <b>' + esc(routes_ok) + '</b>')
+   if routes_all else ''}
   {('· عناصر مجمَّعة <b>' + esc(items_n) + '</b>') if items_n else ''}.
+  المصدر الواحد قد تكون له عدة مسارات؛ وعدد المسارات لا يُقرأ عددًا للمصادر.
   والتعذّر يُسجَّل قيدًا معروفًا؛ وسياسة النظام تمنع تجاوز حماية المواقع.</div>
 
-{diagnosis_section(diag, esc)}
+{diagnosis_live(cards, status, esc)}
   <h2 class="sx-h2">حالة المصادر المفحوصة</h2>
   <div class="sx-legend">
     <span><b style="background:#1f9d6b"></b>نجح الفحص ({ok_c})</span>
@@ -303,12 +344,12 @@ def build(dist: Path, quiet: bool = False) -> dict:
   <h2 class="sx-h2">موثوقية المصادر ومصداقيتها</h2>
   <div class="sx-note">الموثوقية تقيس الجهة (A مطلق · B جيد · C متوسط · D غير موثوق · E غير مؤكد · F لا يمكن الحكم).
   والمصداقية تقيس درجة التصديق (1 مؤكد من مصدر آخر · 2 يُرجَّح · 3 يُحتمل · 4 مشكوك · 5 غير مُرجَّح · 6 لا يمكن الحكم).</div>
-  <table class="sx-tbl">
+  <div class="sx-tblwrap"><table class="sx-tbl">
     <thead><tr><th>#</th><th>المصدر</th><th>النوع</th><th>الموثوقية</th><th>المصداقية</th><th>الأساس</th></tr></thead>
     <tbody>
 {table_html if table_html else '<tr><td colspan="6">لا سجل موثوقية بعد.</td></tr>'}
     </tbody>
-  </table>
+  </table></div>
 </div>
 </body></html>
 """

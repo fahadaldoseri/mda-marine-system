@@ -103,12 +103,12 @@ def copy_sources(date_iso: str, brain: Path) -> list:
         log.append(f"حُدّث سجل الموثوقية والمصداقية ({_n or '؟'} مصدرًا — من ملف المصدر الواحد)")
 
     # تشخيص المصادر (أداة tools/diagnose_sources.py) — أحدث ملف يُنسخ للموقع
+    # عطل مُصلح: كان يُنسخ أحدث ملف `docs/source-diagnosis-*.json` (لقطة يوم 22 أكتوبر)
+    # ويُعرض في صفحة المصادر كأنه «تشخيص حي»، فيذكر مصادر محجوبة وهي تعمل. القسم الآن
+    # يُبنى في build_sources من ملف حالة فحص التغذيات نفسه؛ ويُكتب هنا ملخّص حي للتوثيق فقط.
     diag_files = sorted((brain / 'docs').glob('source-diagnosis-*.json'))
     if diag_files:
-        shutil.copy2(diag_files[-1], SITE / 'sources' / 'source-diagnosis.json')
-        log.append(f"حُدّث تشخيص المصادر ({diag_files[-1].name})")
-    else:
-        log.append("تحذير: سجل الموثوقية غير موجود")
+        log.append(f"ملاحظة: لقطة تشخيص قديمة موجودة ({diag_files[-1].name}) ولم تُنسخ — القسم حيّ الآن")
     statuses = sorted((brain / "feeds").glob("feeds-*.status.json"))
     if statuses:
         newest = max(statuses, key=lambda x: x.stat().st_mtime)
