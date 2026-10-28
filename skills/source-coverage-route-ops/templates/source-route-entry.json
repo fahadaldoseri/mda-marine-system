@@ -1,0 +1,19 @@
+{
+  "num": 0,
+  "name": "اسم المصدر كما في السجل الحاكم",
+  "category": "رسمي دولي | منصة تجارية | حساب رسمي | صحافة | مركز أبحاث",
+  "grade": "A | B | C",
+  "route_kind": "rss | wp-json | json-api | markdown-table | x-profile | telegram | proxy-text | browser-route",
+  "url": "الرابط الحرفي المُقاس",
+  "measured": {
+    "date": "YYYY-MM-DD",
+    "command": "python3 scripts/probe_source_routes.py <url>",
+    "http_status": 200,
+    "bytes": 0,
+    "items": 0,
+    "first_title": "أول عنوان حقيقي — دليل أن المحتوى ليس قشرة",
+    "seconds": 0
+  },
+  "fallback_of": null,
+  "notes": "سبب الاختيار، وأي غلاف فُتح، وأي قيد زمني (تحديث يومي/أسبوعي)"
+}
