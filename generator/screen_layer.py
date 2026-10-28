@@ -323,6 +323,7 @@ body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,sys
   #cont-link, .num, bdi { min-height:44px; }
   a, button, [role="button"], summary { display:inline-flex; align-items:center; }
   .sc-toggle, .sc-toggle.no-print { width:44px; height:44px; min-width:44px; }
+  .sc-kn, .sc-peek span, .src .st, .sc-note,
   .sc-gist, .sc-sum, [class*="clamp"], [class*="gist"] { -webkit-line-clamp:unset !important;
     overflow:visible !important; max-height:none !important; display:block !important;
     white-space:normal !important; text-overflow:clip !important; }

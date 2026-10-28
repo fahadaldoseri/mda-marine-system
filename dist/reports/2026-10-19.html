@@ -342,7 +342,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   /* الخريطة ينقسم إطارها فقط بين الرسم والمفتاح، فلا تبقى ورقة شبه فارغة */
   .map-viz{break-inside:auto;page-break-inside:auto}
   .map-viz svg{max-height:100mm;height:auto;break-inside:avoid;page-break-inside:avoid}
-  .map-legend{break-inside:auto}
+  .map-legend{break-inside:avoid;page-break-inside:avoid}
   /* إجبار: كتلة الخريطة تنقسم بين الرسم والمفتاح مهما وردت قاعدة أخصّ */
   #sec-03 .map-viz, .map-viz{break-inside:auto !important;page-break-inside:auto !important}
   .map-viz svg{break-inside:avoid !important;page-break-inside:avoid !important}
@@ -778,6 +778,7 @@ body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,sys
   #cont-link, .num, bdi { min-height:44px; }
   a, button, [role="button"], summary { display:inline-flex; align-items:center; }
   .sc-toggle, .sc-toggle.no-print { width:44px; height:44px; min-width:44px; }
+  .sc-kn, .sc-peek span, .src .st, .sc-note,
   .sc-gist, .sc-sum, [class*="clamp"], [class*="gist"] { -webkit-line-clamp:unset !important;
     overflow:visible !important; max-height:none !important; display:block !important;
     white-space:normal !important; text-overflow:clip !important; }
@@ -1375,11 +1376,11 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <p><strong>تقييم دقة تقديرات الأمس:</strong> تقدير «استمرار الاستهداف المنظم» <strong>تحقق</strong> ببلاغ رسمي جديد يوم 18 أكتوبر. وتقدير «انتقال ثقل الاستهداف إلى خط الاقتراب» <strong>تحقق جزئيًا</strong>، فالبلاغ على الخط الشرقي لا الجنوبي. وتقدير «لا عودة للعبور الطبيعي» <strong>تحقق</strong>، فالعبور بقي عند عبورتين. وتقدير «اللغم ليس السبب الرئيسي» <strong>غير محسوم</strong>، إذ عادت الرواية بصيغة ثالثة. وتقدير «فجوة التبليغ تجعل العدّ حدًّا أدنى» <strong>غير محسوم</strong>.</p>
 <p><strong>مؤشرات التحذير المبكر:</strong></p>
 <div class="src-grid">
-<div class="src s-none"><b>بلاغ رسمي يسمّي سفينة من رواية اللغم</b><span class="st">لا مستجد — غائب</span></div>
-<div class="src s-none"><b>بلاغ رسمي بحادثة داخل ممر العبور</b><span class="st">لا مستجد — غائب</span></div>
-<div class="src s-none"><b>إعلان رسمي عن بدء عبور منظّم أو رفع القيود</b><span class="st">لا مستجد — غائب</span></div>
-<div class="src s-none"><b>ثبات التكدس عند مستوى منخفض لنافذتين متتاليتين</b><span class="st">لا مستجد — مرصود جزئيًا</span></div>
-<div class="src s-none"><b>حادثة قرصنة أو اختطاف جديدة مقابل السواحل الصومالية</b><span class="st">لا مستجد — غائب في هذه الفترة</span></div>
+<div class="src s-none"><b>بلاغ رسمي يسمّي سفينة من رواية اللغم</b><span class="st">لا واقعة جديدة خلال الفترة — غائب</span></div>
+<div class="src s-none"><b>بلاغ رسمي بحادثة داخل ممر العبور</b><span class="st">لا واقعة جديدة خلال الفترة — غائب</span></div>
+<div class="src s-none"><b>إعلان رسمي عن بدء عبور منظّم أو رفع القيود</b><span class="st">لا واقعة جديدة خلال الفترة — غائب</span></div>
+<div class="src s-none"><b>ثبات التكدس عند مستوى منخفض لنافذتين متتاليتين</b><span class="st">لا واقعة جديدة خلال الفترة — مرصود جزئيًا</span></div>
+<div class="src s-none"><b>حادثة قرصنة أو اختطاف جديدة مقابل السواحل الصومالية</b><span class="st">لا واقعة جديدة خلال الفترة — غائب في هذه الفترة</span></div>
 </div>
 <p><strong>تقييم مخاطر الممرات:</strong></p>
 <span class="tbl-hint">أكمل الجدول أفقيًا (بقية الأعمدة)</span><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول يحتاج تمريرًا أفقيًا"><table class="cardified">

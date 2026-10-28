@@ -492,7 +492,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   /* الخريطة ينقسم إطارها فقط بين الرسم والمفتاح، فلا تبقى ورقة شبه فارغة */
   .map-viz{break-inside:auto;page-break-inside:auto}
   .map-viz svg{max-height:100mm;height:auto;break-inside:avoid;page-break-inside:avoid}
-  .map-legend{break-inside:auto}
+  .map-legend{break-inside:avoid;page-break-inside:avoid}
   /* إجبار: كتلة الخريطة تنقسم بين الرسم والمفتاح مهما وردت قاعدة أخصّ */
   #sec-03 .map-viz, .map-viz{break-inside:auto !important;page-break-inside:auto !important}
   .map-viz svg{break-inside:avoid !important;page-break-inside:avoid !important}
@@ -902,7 +902,7 @@ def render_source_cards(rows, defs):
         elif re.search(r"مفحوص|فُحص|فحص", joined):
             cls, status = "s-ok", "فُحص"
         else:
-            cls, status = "s-none", "لا مستجد"
+            cls, status = "s-none", "لا واقعة جديدة خلال الفترة"
         note = r[-1] if len(r) > 2 else ""
         cards.append(
             f'<div class="src {cls}"><b>{inline(r[0], defs)}</b>'

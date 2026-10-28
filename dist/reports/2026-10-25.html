@@ -342,7 +342,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   /* الخريطة ينقسم إطارها فقط بين الرسم والمفتاح، فلا تبقى ورقة شبه فارغة */
   .map-viz{break-inside:auto;page-break-inside:auto}
   .map-viz svg{max-height:100mm;height:auto;break-inside:avoid;page-break-inside:avoid}
-  .map-legend{break-inside:auto}
+  .map-legend{break-inside:avoid;page-break-inside:avoid}
   /* إجبار: كتلة الخريطة تنقسم بين الرسم والمفتاح مهما وردت قاعدة أخصّ */
   #sec-03 .map-viz, .map-viz{break-inside:auto !important;page-break-inside:auto !important}
   .map-viz svg{break-inside:avoid !important;page-break-inside:avoid !important}
@@ -778,6 +778,7 @@ body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,sys
   #cont-link, .num, bdi { min-height:44px; }
   a, button, [role="button"], summary { display:inline-flex; align-items:center; }
   .sc-toggle, .sc-toggle.no-print { width:44px; height:44px; min-width:44px; }
+  .sc-kn, .sc-peek span, .src .st, .sc-note,
   .sc-gist, .sc-sum, [class*="clamp"], [class*="gist"] { -webkit-line-clamp:unset !important;
     overflow:visible !important; max-height:none !important; display:block !important;
     white-space:normal !important; text-overflow:clip !important; }
@@ -1019,13 +1020,13 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     <section class="doc pri reveal" id="sec-00" aria-labelledby="h-00"><h2 id="h-00">ما تغيّر منذ التقرير السابق</h2><div class="h-rule"></div><p class="sec-lede">ما استُجد، وما تغيّر تصنيفه، وما أُغلق.</p><ul class="changes"><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">نقلت التغذية أن سبع ناقلات نفط أصيبت في مضيق هرمز في ليلة واحدة، بلا تأكيد مستقل. <bdi class="bidi ev-code">25-01</bdi> <bdi class="bidi">straits.live عن الحرس الثوري · D/4</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إعلان عن وقف كامل لحركة السفن «غير الممتثلة» في المضيق. <bdi class="bidi ev-code">25-02</bdi> <bdi class="bidi">نقل عن البحرية الإيرانية · D/4</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">وصول التسرب النفطي إلى شواطئ أم القيوين مع إغلاق شواطئ، بلا أصل رسمي في المادة. <bdi class="bidi ev-code">25-03</bdi> <bdi class="bidi">تقارير إماراتية منقولة · B/3</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">عرض بفتح المضيق مقابل رفع الحصار، مع تمسّك طهران بشروط قبل التنفيذ. <bdi class="bidi ev-code">25-05</bdi> <bdi class="bidi">نقل عن طهران · B/3</bdi></span></li></ul></section>
     <section class="doc pri reveal" id="sec-01" aria-labelledby="h-01"><h2 id="h-01"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 3h9l-1.2 3H19v8h-8.2L9.6 11H6v9H4z"/></svg></span>الخلاصة</h2><div class="h-rule"></div><p class="sec-lede">الموقف ومستوى التهديد والإجراء المقترح في ثلاثة أسطر.</p><ul><li>الحالة عند <span class="ltr">0400Z</span>: التهديد لا يزال مرتفعًا جدًا. ظهرت روايات إيرانية ترفع عدد الناقلات المصابة في مضيق هرمز إلى سبع في ليلة واحدة، مع إعلان وقف حركة السفن «غير الممتثلة»، وامتداد تسرب نفطي إلى شواطئ أم القيوين، وحديث عن فتح المضيق مقابل رفع الحصار.</li></ul>
 <div class="src-grid">
-<div class="src s-none"><b>25-01 · سبع ناقلات مصابة في ليلة واحدة</b><span class="st">لا مستجد — رواية من طرف واحد؛ بلا هوية ناقلة أو تحقق ملاحي مستقل</span></div>
-<div class="src s-none"><b>25-02 · وقف حركة السفن «غير الممتثلة»</b><span class="st">لا مستجد — إعلان من جهة منفذة؛ غير مؤكد مستقلًا</span></div>
-<div class="src s-none"><b>25-03 · امتداد التسرب إلى أم القيوين</b><span class="st">لا مستجد — نقل مهني وإعلامي؛ بلا أصل رسمي أو هوية ناقلة في التغذية</span></div>
-<div class="src s-none"><b>25-04 · إصابة ناقلة بمقذوف غير محدد</b><span class="st">لا مستجد — نقل إعلامي؛ لا يعد تحققًا</span></div>
-<div class="src s-none"><b>25-05 · عرض فتح المضيق مقابل رفع الحصار</b><span class="st">لا مستجد — عرض سياسي منقول؛ لا تنفيذ مثبت</span></div>
-<div class="src s-none"><b>25-06 · ستة آلاف بحّار محتجزون في الممر</b><span class="st">لا مستجد — نقل مهني؛ بلا أصل رسمي</span></div>
-<div class="src s-none"><b>25-07 · ضربات سعودية على ساحل اليمن</b><span class="st">لا مستجد — نقل إعلامي؛ لا يثبت تهديدًا جديدًا للملاحة</span></div>
+<div class="src s-none"><b>25-01 · سبع ناقلات مصابة في ليلة واحدة</b><span class="st">لا واقعة جديدة خلال الفترة — رواية من طرف واحد؛ بلا هوية ناقلة أو تحقق ملاحي مستقل</span></div>
+<div class="src s-none"><b>25-02 · وقف حركة السفن «غير الممتثلة»</b><span class="st">لا واقعة جديدة خلال الفترة — إعلان من جهة منفذة؛ غير مؤكد مستقلًا</span></div>
+<div class="src s-none"><b>25-03 · امتداد التسرب إلى أم القيوين</b><span class="st">لا واقعة جديدة خلال الفترة — نقل مهني وإعلامي؛ بلا أصل رسمي أو هوية ناقلة في التغذية</span></div>
+<div class="src s-none"><b>25-04 · إصابة ناقلة بمقذوف غير محدد</b><span class="st">لا واقعة جديدة خلال الفترة — نقل إعلامي؛ لا يعد تحققًا</span></div>
+<div class="src s-none"><b>25-05 · عرض فتح المضيق مقابل رفع الحصار</b><span class="st">لا واقعة جديدة خلال الفترة — عرض سياسي منقول؛ لا تنفيذ مثبت</span></div>
+<div class="src s-none"><b>25-06 · ستة آلاف بحّار محتجزون في الممر</b><span class="st">لا واقعة جديدة خلال الفترة — نقل مهني؛ بلا أصل رسمي</span></div>
+<div class="src s-none"><b>25-07 · ضربات سعودية على ساحل اليمن</b><span class="st">لا واقعة جديدة خلال الفترة — نقل إعلامي؛ لا يثبت تهديدًا جديدًا للملاحة</span></div>
 </div>
 <ul><li>البلاغات الرسمية: لم يرد في التغذية بلاغ جديد من <span class="ltr">UKMTO</span> ولا تحديث جديد من <span class="ltr">NAVAREA IX</span> خلال الفترة.</li><li>الهجمات المؤكدة: التغذية لم تثبت هجومًا بحريًا جديدًا بأصل رسمي. العدد المنقول عن أكتوبر 27 ما زال قائمًا.</li><li>الحركة: آخر قياس مثبت سجل 4 سفن في 18 أكتوبر، مقارنةً بـ85 سفينة يوميًا قبل الأزمة.</li></ul>
 <h3>ما لم يُحسم</h3>

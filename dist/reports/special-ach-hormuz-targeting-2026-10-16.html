@@ -342,7 +342,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   /* الخريطة ينقسم إطارها فقط بين الرسم والمفتاح، فلا تبقى ورقة شبه فارغة */
   .map-viz{break-inside:auto;page-break-inside:auto}
   .map-viz svg{max-height:100mm;height:auto;break-inside:avoid;page-break-inside:avoid}
-  .map-legend{break-inside:auto}
+  .map-legend{break-inside:avoid;page-break-inside:avoid}
   /* إجبار: كتلة الخريطة تنقسم بين الرسم والمفتاح مهما وردت قاعدة أخصّ */
   #sec-03 .map-viz, .map-viz{break-inside:auto !important;page-break-inside:auto !important}
   .map-viz svg{break-inside:avoid !important;page-break-inside:avoid !important}
@@ -778,6 +778,7 @@ body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,sys
   #cont-link, .num, bdi { min-height:44px; }
   a, button, [role="button"], summary { display:inline-flex; align-items:center; }
   .sc-toggle, .sc-toggle.no-print { width:44px; height:44px; min-width:44px; }
+  .sc-kn, .sc-peek span, .src .st, .sc-note,
   .sc-gist, .sc-sum, [class*="clamp"], [class*="gist"] { -webkit-line-clamp:unset !important;
     overflow:visible !important; max-height:none !important; display:block !important;
     white-space:normal !important; text-overflow:clip !important; }
@@ -985,7 +986,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     <div class="threat risk-high"><div class="lbl">مستوى التهديد</div><div class="val">مرتفع</div></div>
     <div>
       <p class="lede">نسخة ثانية بعد استكمال بيانات الأعلام والمشغّلين لأحد عشر ضحية، وجمع مقام الاحتمال. النتيجة: الاستهداف يتبع الانتماء أولًا والممر ثانيًا، وأقوى دليل هو إعلان أدنوك الرسمي أن 15 من سفنها استُهدفت، وسقوط فرضية العلم السنغافوري بثلاثة ضحايا من عشرين وبتوزيع أعلام يطابق السجلات المفتوحة العالمية. وقد حلّت محلّها نسخة 3 بالترجيح الكمّي الموزون بعد تدقيق مستقل.</p>
-      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-28 09:35 <span class="ltr">UTC</span></b></span></div>
+      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-28 10:19 <span class="ltr">UTC</span></b></span></div>
     </div>
   </header>
 
@@ -1630,7 +1631,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> مصفوفة <span class="ltr">ACH</span> — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: <span class="ltr">UTC</span> وتوقيت البحرين (<span class="ltr">UTC</span>+3).
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-28 09:35 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-28 10:19 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
     
   </footer>
 </div>
