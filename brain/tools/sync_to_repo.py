@@ -19,6 +19,7 @@ from pathlib import Path
 EXCLUDE_DIRS = {'.git', 'secrets', 'state', '__pycache__', 'shots', '.pytest_cache'}
 EXCLUDE_FILES = {'telegram-chat.json', 'telegram-targets.json', 'telegram-subscriptions.json'}
 EXCLUDE_GLOBS = ('*.pyc', '*.tmp', 'telegram*.json')
+JUNK_FILES = {'.DS_Store', '.skill_versions.json'}   # ك-271: يُستثنى في المزامن والمقيّم معًا
 DELETE_MAX = 20          # سقف الحذف في التشغيل العادي
 SITE_EXCLUDE_DIRS = {'.git', '__pycache__', 'node_modules', '.venv', 'logs'}
 SKILLS_EXCLUDE_DIRS = {'.git', '__pycache__'}
@@ -30,7 +31,7 @@ def skip(p: Path, dirs: set, files: set = EXCLUDE_FILES, globs=EXCLUDE_GLOBS) ->
         return True
     if p.is_dir():
         return False
-    if p.name in files:
+    if p.name in files or p.name in JUNK_FILES:
         return True
     return any(p.match(g) for g in globs)
 

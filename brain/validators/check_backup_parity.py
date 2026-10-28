@@ -73,6 +73,11 @@ def sha(p: Path) -> str:
     return h.hexdigest()
 
 
+# ملفات مهملة لا تُقارَن ولا تُزامَن في أي جذر (ك-271): يجب أن تكون الاستثناءات متناظرة
+# بين المزامن والمقيّم، وإلا ظهر «انحراف مانع» كاذب.
+JUNK_FILES = {".DS_Store", ".skill_versions.json"}
+
+
 def manifest(root: Path, skip_dirs, skip_files, prefix: str):
     out = {}
     for dp, dns, fns in os.walk(root):
@@ -85,7 +90,7 @@ def manifest(root: Path, skip_dirs, skip_files, prefix: str):
             rel = (rd / fn).as_posix()
             if rel.startswith("./"):
                 rel = rel[2:]
-            if rel in skip_files or p.suffix == ".pyc":
+            if rel in skip_files or p.suffix == ".pyc" or fn in JUNK_FILES:
                 continue
             if p.is_symlink():
                 tgt = p.resolve()
