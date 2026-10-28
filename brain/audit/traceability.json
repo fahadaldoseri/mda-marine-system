@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-28T21:45:31.954886+00:00",
+  "generated_at": "2026-10-28T22:02:28.876998+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -2193,6 +2193,13 @@
       "lesson_id": "ك-278",
       "barrier_id": "B-6373aded",
       "run_evidence": "منفَّذ: حارس فشل مغلق في final_gate.sh (يتحقق YYYY-MM-DD ويخرج 2 برسالة صريحة) وحارس مثله"
+    },
+    {
+      "fault_id": "ك-279",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-279",
+      "barrier_id": "B-6c15648d",
+      "run_evidence": null
     }
   ]
 }
