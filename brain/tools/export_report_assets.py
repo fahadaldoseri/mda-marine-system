@@ -60,6 +60,8 @@ PORT = 8799
 
 # أنماط PDF فقط: تُحقن أثناء التصدير ولا تمسّ صفحة الموقع
 PDF_CSS = """
+.additions-annex{break-before:page;page-break-before:always}
+.annex-note{font-size:11.5pt;color:#555}
 {HIDE_SOURCES}
 main{gap:0 !important}
 section.doc > h2{break-after:avoid;page-break-after:avoid}
@@ -164,6 +166,11 @@ def inject_toc(page, sections: list[dict], pages_map: dict[str, str] | None) -> 
       return document.querySelectorAll('#sec-toc li').length;}""", html)
     print(f"إدراج الفهرس: {n} بندًا")
     if not n:
+        # ك-228: تقرير بلا أقسام مستندية (بعد نقل 11 قسمًا إلى «إضافات») لا يحتاج فهرسًا،
+        # والتخطي مصرَّح به لا صامتًا. الفشل يبقى ممنوعًا إذا كانت هناك أقسام ولم يُدرج فهرسها.
+        if not sections:
+            print("  ℹ لا أقسام مستندية في هذه الصفحة ⇒ يُتخطّى الفهرس بلا فشل")
+            return
         raise SystemExit("فشل إدراج الفهرس في الصفحة")
 
 
@@ -243,6 +250,8 @@ def main() -> int:
     ap.add_argument("--only", choices=["pdf", "map", "both"], default="both")
     ap.add_argument("--no-toc", action="store_true", help="بلا فهرس محتويات")
     ap.add_argument("--no-header", action="store_true", help="بلا ترويسة وتذييل")
+    ap.add_argument("--no-additions", action="store_true",
+                    help="يبني PDF التقرير وحده بلا ملحق «إضافات» (للمقارنة والقياس)")
     ap.add_argument("--extra-css", help="ملف CSS اختباري يُحقن بعد أنماط PDF (للمعاينة التجريبية فقط)")
     args = ap.parse_args()
 
@@ -280,6 +289,23 @@ def main() -> int:
             pg.wait_for_timeout(1200)
             if args.only in ("pdf", "both"):
                 pg.emulate_media(media="print")
+                if not args.no_additions:
+                    _add = DIST / "additions.html"
+                    if _add.exists():
+                        _src = _add.read_text(encoding="utf-8")
+                        _m = re.search(r"<main[^>]*>(.*?)</main>", _src, re.S)
+                        _html = _m.group(1) if _m else ""
+                        # منع تصادم المعرّفات مع أقسام التقرير (المصدر واحد)
+                        _html = re.sub(r'id="sec-(\d+)"', r'id="sec-add-\1"', _html)
+                        _n = pg.evaluate("""(html)=>{const host=document.querySelector('.wrap');
+                          if(!host) return 0;
+                          document.querySelectorAll('.additions-annex').forEach(e=>e.remove());
+                          const d=document.createElement('div'); d.className='additions-annex';
+                          d.innerHTML='<section class="doc" id="sec-additions"><h2>إضافات</h2><div class="h-rule"></div>'
+                            +'<p class="annex-note">المجموعة المنقولة من التقرير اليومي — مرجعها الدائم صفحة «إضافات» على الموقع.</p></section>'+html;
+                          const foot=host.querySelector('.foot'); host.insertBefore(d, foot||null);
+                          return d.querySelectorAll('section.doc').length;}""", _html)
+                        print(f"ملحق إضافات: {_n} قسمًا")
                 if args.extra_css:
                     _extra = Path(args.extra_css).read_text(encoding="utf-8")
                     pg.add_style_tag(content=_extra)

@@ -209,6 +209,45 @@ def build_monthly(site_root: Path, dist: Path, warnings):
     return info
 
 
+def build_additions(site_root: Path, dist: Path, reports, warnings):
+    """صفحة «إضافات» — قرار المالك 2026-10-28: المجموعة المزاحة من التقرير اليومي تُنشر هنا.
+
+    المصدر نفسه: متن أحدث إصدار. الأقسام تأتي من سياسة الأقسام (additions_sections) التي
+    يقرأها المولّد، فلا تُخفَّض صلاحية أي حارس ولا تُفقد بيانات.
+    """
+    if not reports:
+        warnings.append("تعذّر بناء «إضافات»: لا إصدار منشور")
+        return 0
+    r = reports[0]
+    meta = dict(r["meta"])
+    # صفحة عرض فقط: تُكتم بطاقات التقرير ويبقى متن الأقسام المزاحة
+    # «ما تغيّر» يبقى: هو أول الأقسام المنقولة، وبطاقات التقرير الأخرى تُكتم
+    # الخريطة تُبنى مع وقائع التوزيع الجغرافي المنقول، فتبقى في «إضافات»
+    for k in ("decision_card", "hero_kpis", "notice", "threat_level", "timeline",
+              "event_keys", "glossary", "source_reliability", "vessel_identity", "intel_analysis",
+              "indicators", "hypotheses", "gaps", "blocks", "classification"):
+        meta.pop(k, None)
+    meta["title"] = "إضافات"
+    meta["headline"] = "إضافات"
+    _label = r["meta"].get("date_label") or ar_date(r["iso"])
+    meta["subtitle"] = f"المجموعة المنقولة من التقرير اليومي — إصدار {_label}"
+    meta["lede"] = ("الأقسام التفصيلية التي كانت داخل التقرير اليومي. متن التقرير اليومي في صفحته، "
+                    "وهذه الصفحة مرجعها الدائم المحدَّث مع كل إصدار.")
+    meta["date_label"] = _label
+    meta["footer_note"] = ("هذه الصفحة مرجع دائم للإصدار الحالي. البيانات نفسها في دفتر الأحداث، "
+                           "والتقرير اليومي في صفحته وفي PDF.")
+    target = dist / "additions.html"
+    try:
+        _, count = build_report.build(r["md"], target, meta, mode="additions")
+    except Exception as e:
+        warnings.append(f"فشل بناء صفحة إضافات: {e}")
+        return 0
+    html = target.read_text(encoding="utf-8")
+    html = site_chrome.inject(html, active="additions", note=f"إضافات إصدار {ar_date(r['iso'])}")
+    target.write_text(html, encoding="utf-8")
+    return count
+
+
 def build_index(dist: Path, reports, notfound: bool = False):
     latest = reports[0] if reports else None
     ledger_total = ledger_count(dist)
@@ -504,6 +543,7 @@ def build_routes(dist: Path, reports):
     routes.append({"path": "/reports/monthly-2026-10.html", "title": "اللوحة الشهرية"})
     routes.append({"path": "/reports/cumulative-2026.html", "title": "السجل التراكمي"})
     routes.append({"path": "/sources.html", "title": "المصادر والمراجع"})
+    routes.append({"path": "/additions.html", "title": "إضافات"})
     (dist / "manus-routes.json").write_text(
         json.dumps({"routes": routes}, ensure_ascii=False, indent=1), encoding="utf-8")
     return len(routes)
@@ -511,7 +551,7 @@ def build_routes(dist: Path, reports):
 
 def known_paths(reports):
     """المسارات المنشورة فعليًا: تُستخدم في صفحة «غير موجودة» وفي خريطة الموقع."""
-    ks = ["/", "/reports/cumulative-2026.html", "/reports/monthly-2026-10.html", "/sources.html"]
+    ks = ["/", "/reports/cumulative-2026.html", "/reports/monthly-2026-10.html", "/sources.html", "/additions.html"]
     ks += [f"/reports/{r['iso']}.html" for r in reports]
     return ks
 
@@ -524,7 +564,8 @@ def notfound_panel(reports, visible: bool = False) -> str:
     """
     ks = known_paths(reports)
     names = {"/": "الرئيسية والأرشيف", "/reports/cumulative-2026.html": "السجل التراكمي",
-             "/reports/monthly-2026-10.html": "اللوحة الشهرية", "/sources.html": "المصادر والمراجع"}
+             "/reports/monthly-2026-10.html": "اللوحة الشهرية", "/sources.html": "المصادر والمراجع",
+             "/additions.html": "إضافات"}
     names.update({f"/reports/{r['iso']}.html": f"التقرير اليومي — {r['label']}" for r in reports})
     items = "".join(f'<li><a href="{k}"><span class="nf-t">{esc(names.get(k, k))}</span>'
                     f'<span class="nf-p">{k}</span></a></li>' for k in ks)
@@ -625,6 +666,7 @@ def main():
         build_sources.build(dist)
     except Exception as e:
         warnings.append(f"تعذّر بناء صفحة المصادر والمراجع: {e}")
+    n_add = build_additions(site_root, dist, reports, warnings)  # ك-227: يحتاج سجل الإصدار الأم (meta+md) لا قائمة البناء
     (dist / "index.html").write_text(build_index(dist, built), encoding="utf-8")
     (dist / "favicon.svg").write_text(FAVICON, encoding="utf-8")
     n_feed = build_feed(dist, built)

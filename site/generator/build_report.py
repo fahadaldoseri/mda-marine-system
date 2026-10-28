@@ -123,11 +123,13 @@ PRIORITY_SECTIONS = ("الخلاصة", "التوجيهات التشغيلية")
 # من ملف الواجهة ولا من دفتر الأحداث (تبقى للأرشيف والفحوص).
 HIDDEN_SECTIONS = set()  # تُقرأ من سياسة Brain وحدها (ك-86/ك-91) — لا قائمة مزدوجة
 HIDDEN_BLOCKS = set()  # تُقرأ من السياسة
+ADDITIONS_SECTIONS = []  # أقسام صفحة «إضافات» (قرار المالك 2026-10-28) بترتيبها المعتمد
+ADDITIONS_FROM = ""  # تاريخ سريان النقل؛ الإصدارات الأقدم في الأرشيف لا تتأثر
 
 
 def load_section_policy(meta_path=None):
     """سياسة الأقسام من مصادرها الواحدة في Brain؛ تُنسخ إلى sources/ عند المزامنة."""
-    global HIDDEN_SECTIONS, HIDDEN_BLOCKS
+    global HIDDEN_SECTIONS, HIDDEN_BLOCKS, ADDITIONS_SECTIONS, ADDITIONS_FROM
     cands = []
     if meta_path:
         mp = Path(meta_path).resolve()
@@ -143,6 +145,8 @@ def load_section_policy(meta_path=None):
                 d = json.loads(c.read_text(encoding="utf-8"))
                 HIDDEN_SECTIONS = set(d.get("hidden_sections") or [])
                 HIDDEN_BLOCKS = set(d.get("hidden_blocks") or [])
+                ADDITIONS_SECTIONS = list(d.get("additions_sections") or [])
+                ADDITIONS_FROM = str(d.get("additions_effective_from") or "")
                 print(f"سياسة الأقسام: {c} · محذوف {len(HIDDEN_SECTIONS)} · كتل {len(HIDDEN_BLOCKS)}",
                       file=sys.stderr)
                 return c
@@ -1156,7 +1160,8 @@ def hero_map(map_html: str) -> str:
     return f'<section class="hero-map no-print" aria-hidden="true">{h}</section>'
 
 
-def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
+def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mode: str = "report"):
+    """mode='report' يُخفي أقسام «إضافات» (السياسة الحاكمة) · mode='additions' يعرضها وحدها بترتيبها."""
     md = md_path.read_text(encoding="utf-8")
     defs = parse_ref_defs(md)
     sections = parse_sections(md)
@@ -1193,9 +1198,20 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
                 return i
         return len(order)
 
-    sections = [x for x in sections if not _hidden(x["title"])]
-    sections = sorted(sections, key=_order_key)
-
+    if mode == "additions":
+        # قرار المالك 2026-10-28: هذه الأقسام تُعرض في صفحة «إضافات» وحدها بترتيب السياسة
+        _add = ADDITIONS_SECTIONS or []
+        sections = [x for x in sections if any(k in x["title"] for k in _add)]
+        _key = lambda sec: next((i for i, k in enumerate(_add) if k in sec["title"]), len(_add))
+        sections = sorted(sections, key=_key)
+    else:
+        # ك-229: نقل الأقسام يسري من تاريخ القرار؛ الأرشيف قبله يبقى كما نُشر بلا فقد محتوى
+        _hidset = set(HIDDEN_SECTIONS)
+        if ADDITIONS_FROM and report_date and report_date < ADDITIONS_FROM:
+            for _a in ADDITIONS_SECTIONS:
+                _hidset.discard(_a)
+        sections = [x for x in sections if not any(h in x["title"] for h in _hidset)]
+        sections = sorted(sections, key=_order_key)
     # كتل خاصة بكل قسم: خريطة عنوان القسم إلى اسم الكتلة
     blocks_map = meta.get("blocks") or {}
     block_data = {k: meta.get(k) for k in ("indicators", "hypotheses", "gaps", "event_keys", "timeline", "source_reliability", "vessel_identity", "report_classes", "intel_analysis")}
@@ -1337,10 +1353,17 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
 
     date_label = meta.get("date_label") or ""
     cls_html = BLK.classification_banner(meta.get("classification"))
-    decision_html = BLK.decision_card(meta.get("decision_card"), inline)
+    decision_html = "" if mode == "additions" else BLK.decision_card(meta.get("decision_card"), inline)
     rkey_html = BLK.reading_key() if any("[" in l and "]" in l for l in md.split("\n")) else ""
-    changes_html = BLK.changes_block(meta.get("changes"), inline)
-    screen_hero_html = SCR.screen_hero(
+    # سياسة الأقسام 2026-10-28: «ما تغيّر» منقول إلى صفحة «إضافات»
+    if mode == "additions":
+        changes_html = BLK.changes_block(meta.get("changes"), inline)
+    else:
+        _adds_live = bool(ADDITIONS_SECTIONS) and (not ADDITIONS_FROM or not report_date
+                                              or report_date >= ADDITIONS_FROM)
+        changes_html = ("" if (_adds_live and _hidden("ما تغيّر"))
+                        else BLK.changes_block(meta.get("changes"), inline))
+    screen_hero_html = "" if mode == "additions" else SCR.screen_hero(
         meta, esc=esc, inline=inline, report_date=report_date, official=official,
         threat_cls=tcls, rkey_html=rkey_html, doc_mode=doc_mode,
         archived=meta.get("screen_archived") or False)
