@@ -4,8 +4,8 @@
 الاستخدام:
   python3 tools/sync_to_repo.py --brain <dir> --repo <dir>/brain [--dry-run] [--allow-delete]
   python3 tools/sync_to_repo.py --brain <dir> --repo <dir>/brain \
-      --site /home/ubuntu/seawatch --repo-site <dir>/site \
-      --skills /home/ubuntu/skills --repo-skills <dir>/skills
+      --site "$SITE_DIR" --repo-site <dir>/site \
+      --skills "$SKILLS_DIR" --repo-skills <dir>/skills
 
 حارس فشل مغلق (ك-269): لا حذف جماعي ولا حذف خارج نطاق المصدر بلا --allow-delete.
 
