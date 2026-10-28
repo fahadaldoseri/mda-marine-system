@@ -8,8 +8,7 @@ import argparse, json, re, sys
 from pathlib import Path
 
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
-CLOSED = ("مغلق", "closed", "اغلق", "done", "تم", "مكتمل", "مكتملة", "ثبت", "منجز", "verified")
-DIAC = dict.fromkeys(map(ord, "\u064b\u064c\u064d\u064e\u064f\u0650\u0651\u0652\u0640"), None)
+CLOSED = ("مغلق", "closed", "أُغلق", "done", "تم", "مكتمل", "أُثبت", "منجز")
 
 
 def parse(line):
@@ -22,7 +21,7 @@ def parse(line):
                    axis=f[2] if len(f) > 2 else "",
                    symptom=f[3] if len(f) > 3 else "",
                    cause=f[4] if len(f) > 4 else "",
-                   fix_status=(f[5] if len(f) > 5 else "") + " " + (f[6] if len(f) > 6 else ""))
+                   fix_status=f[5] if len(f) > 5 else "")
     else:
         rec.update(layout="legacy", date="",
                    surface=f[1] if len(f) > 1 else "",
@@ -31,10 +30,9 @@ def parse(line):
                    cause="",
                    fix_status=f[4] if len(f) > 4 else "",
                    status_tail=f[5] if len(f) > 5 else "")
-    tail = (rec.get("fix_status", "") + " " + rec.get("status_tail", "")).translate(DIAC)
+    tail = rec.get("fix_status", "") + " " + rec.get("status_tail", "")
+    rec["closed"] = any(m in tail for m in CLOSED)
     rec["fields"] = len(f)
-    _status_cols = next((x for x in reversed(f[-2:]) if x and x not in ("—", "-")), "").translate(DIAC)
-    rec["closed"] = bool(re.search(r"(?:^|[^\u0621-\u064A])(مغلق|منجز|مكتمل|closed|done|verified)(?:[^\u0621-\u064A]|$)", _status_cols))
     return rec
 
 
