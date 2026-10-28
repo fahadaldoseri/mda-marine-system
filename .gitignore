@@ -19,3 +19,7 @@ state/webhook-secret.txt
 site/dist/
 site/shots/
 brain/shots/
+
+# أسرار وقت التشغيل: لا تُتتبَّع أبدًا
+brain/state/webhook-secret.txt
+brain/state/*.txt
