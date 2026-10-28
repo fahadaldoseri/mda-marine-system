@@ -449,8 +449,10 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   p,li{orphans:2;widows:2}
   .map-viz svg{max-height:145mm !important;width:100%;height:auto;break-inside:avoid !important}
   .map-legend,.map-viz,.tbl-wrap,.changes,.decision,.viz,.card{break-inside:auto !important;page-break-inside:auto !important}
-  /* كتلة الخريطة (الرسم + المفتاح + التعليق) تبقى كاملة على ورقة واحدة */
-  .map-viz{break-inside:avoid !important;page-break-inside:avoid !important}
+  /* ك-235: قاعدة مكرّرة كانت تنقض السطر 601 (auto) وتُعيد avoid، فتُنقل كتلة الخريطة كاملة فتُخلّف
+     فراغًا قد يبلغ 206 مم في الصفحة السابقة. الرسم نفسه يبقى غير قابل للتجزئة (avoid على svg)،
+     والحاوية والمفتاح يتدفّقان فيكتمل امتلاء الورقة. */
+  .map-viz{break-inside:auto !important;page-break-inside:auto !important}
   /* Chromium لا يجزّئ حاويات grid/flex بين الصفحات، فتتدفّق هنا بترتيب inline-block
      يحفظ هيئة العمودين/البطاقات نفسها، مع السماح بالانقسام بين الصفحات */
   .wrap,.changes,.dc-grid,.kpis,.masthead,.map-legend,.src-grid,.glossary,.tl-viz,.viz,.card,.decision{display:block !important}
@@ -660,7 +662,7 @@ body:has(.site-nav) .topbar{display:none}
 .sc-fresh.f-old{border-color:var(--danger);color:var(--danger)}
 .sc-fresh.f-old b{color:var(--danger)}
 .sc-arch{color:var(--muted)}
-.sc-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:22px;align-items:start}
+.sc-grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:22px;align-items:start}
 /* بلا بطاقة قرار (السجل التراكمي): مستوى التهديد والمؤشرات في صف واحد بدل عمود يترك نصف العرض فارغًا */
 .sc-grid.sc-solo{grid-template-columns:minmax(0,1fr)}
 .sc-solo .sc-side{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));align-items:stretch}
@@ -965,7 +967,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     
     <div>
       <p class="lede"><strong>تاريخ الإصدار:</strong> 17 أكتوبر 2026 · <strong>وقت القطع:</strong> 18:45 بتوقيت البحرين (15:45 <span class="ltr">UTC</span>)</p>
-      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-28 05:50 <span class="ltr">UTC</span></b></span></div>
+      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-28 06:29 <span class="ltr">UTC</span></b></span></div>
     </div>
   </header>
 
@@ -1261,7 +1263,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> تقرير خاص — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: <span class="ltr">UTC</span> وتوقيت البحرين (<span class="ltr">UTC</span>+3).
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-28 05:50 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-28 06:29 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
     
   </footer>
 </div>

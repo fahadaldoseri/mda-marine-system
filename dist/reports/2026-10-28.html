@@ -449,8 +449,10 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   p,li{orphans:2;widows:2}
   .map-viz svg{max-height:145mm !important;width:100%;height:auto;break-inside:avoid !important}
   .map-legend,.map-viz,.tbl-wrap,.changes,.decision,.viz,.card{break-inside:auto !important;page-break-inside:auto !important}
-  /* كتلة الخريطة (الرسم + المفتاح + التعليق) تبقى كاملة على ورقة واحدة */
-  .map-viz{break-inside:avoid !important;page-break-inside:avoid !important}
+  /* ك-235: قاعدة مكرّرة كانت تنقض السطر 601 (auto) وتُعيد avoid، فتُنقل كتلة الخريطة كاملة فتُخلّف
+     فراغًا قد يبلغ 206 مم في الصفحة السابقة. الرسم نفسه يبقى غير قابل للتجزئة (avoid على svg)،
+     والحاوية والمفتاح يتدفّقان فيكتمل امتلاء الورقة. */
+  .map-viz{break-inside:auto !important;page-break-inside:auto !important}
   /* Chromium لا يجزّئ حاويات grid/flex بين الصفحات، فتتدفّق هنا بترتيب inline-block
      يحفظ هيئة العمودين/البطاقات نفسها، مع السماح بالانقسام بين الصفحات */
   .wrap,.changes,.dc-grid,.kpis,.masthead,.map-legend,.src-grid,.glossary,.tl-viz,.viz,.card,.decision{display:block !important}
@@ -660,7 +662,7 @@ body:has(.site-nav) .topbar{display:none}
 .sc-fresh.f-old{border-color:var(--danger);color:var(--danger)}
 .sc-fresh.f-old b{color:var(--danger)}
 .sc-arch{color:var(--muted)}
-.sc-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:22px;align-items:start}
+.sc-grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:22px;align-items:start}
 /* بلا بطاقة قرار (السجل التراكمي): مستوى التهديد والمؤشرات في صف واحد بدل عمود يترك نصف العرض فارغًا */
 .sc-grid.sc-solo{grid-template-columns:minmax(0,1fr)}
 .sc-solo .sc-side{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));align-items:stretch}
@@ -972,7 +974,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
   <div class="cls-banner c-open">تصنيف الإصدار: عام</div>
   <section class="decision reveal" aria-label="عام"><h2 class="dc-title">عام</h2><div class="dc-grid"><div class="dc-row"><div class="dc-l">ما تغيّر</div><div class="dc-v"><ul class="dc-list"><li>ظهرت تقارير مهنية ومنقولة عن تهديد سفن مرتبطة بـ Sinokor في مضيق هرمز.</li><li>أُبلغ عن اشتعال ناقلة بعد ملامستها لغمًا بحريًا في شرق مضيق هرمز من دون تأكيد ملاحي رسمي داخل الفترة.</li></ul><p class="dc-note">و4 بنود أخرى في قسم «ما تغيّر».</p></div></div><div class="dc-row risk-high"><div class="dc-l">مستوى التهديد</div><div class="dc-v">مرتفع</div></div><div class="dc-row"><div class="dc-l">التوصيات</div><div class="dc-v"><ul class="dc-list"><li>ارفعوا المراقبة البصرية واللاسلكية عند الاقتراب من مضيق هرمز والخليج العربي.</li><li>لا تدخلوا مناطق نقل الحمولة بين السفن في الخليج قبل فحص آخر تحذير ملاحي ومراجعة خطة الطوارئ.</li></ul><p class="dc-note">و2 بنود أخرى في قسم «التوصيات».</p></div></div><div class="dc-row"><div class="dc-l">ما يُراقب خلال 24 ساعة</div><div class="dc-v"><p class="dc-note">عدد البنود: 4 · وتفصيلها في قسم «مؤشرات التحذير المبكر».</p></div></div></div><div class="dc-foot">أساس التقدير: تقارير عن حريق ناقلة ولغم بحري وتهديدات منسوبة إلى جهات إيرانية في هرمز والخليج. وترد تقارير مهنية عن صاروخ ومنشأة سعودية في باب المندب والبحر الأحمر، مع غياب تأكيد ملاحي رسمي جديد داخل الفترة.</div></section>
   <div class="kpis"><div class="kpi acc-warn reveal"><em></em><div class="k-l">تقارير مهنية عن حوادث أو تهديدات في هرمز والخليج خلال الفترة</div><div class="k-v bidi">6</div><div class="k-d"><span class="trend t-up">▲</span> ارتفع من 0 إلى 6</div><div class="k-n">ضغط ملاحي متزايد، مع تفاوت في التأكيد</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">وقائع مؤكدة من بلاغ ملاحي رسمي داخل الفترة</div><div class="k-v bidi">0</div><div class="k-d"><span class="trend t-flat">■</span> بلا تغيير</div><div class="k-n">لا تأكيد رسمي جديد في المواد المتاحة</div></div><div class="kpi acc-warn reveal"><em></em><div class="k-l">تقارير عن وقائع مرتبطة بالحوثيين في باب المندب والسعودية</div><div class="k-v bidi">2</div><div class="k-d"><span class="trend t-up">▲</span> ارتفع من 0 إلى 2</div><div class="k-n">استمرار الخطر على خط البحر الأحمر</div></div></div>
-  <div class="sc-hero no-print"><p class="sc-eyebrow">التقرير اليومي لأمن الملاحة والأوضاع الراهنة في المنطقة</p><h1 class="sc-h1">خلال الفترة <span class="ltr">270400Z</span>–<span class="ltr">280400Z</span> أكتوبر 2026، ارتفع مستوى التهديد في مضيق هرمز والخليج العربي والبحر الأحمر وباب المندب</h1><div class="sc-chips"><span class="sc-chip sc-fresh" data-gen="2026-10-28T04:00:00Z" hidden>عمر الإصدار <b class="sc-age"></b></span><span class="sc-chip">رقم الإصدار <b><span class="bidi">و ب <span class="ltr">28/10/26</span></span></b></span><span class="sc-chip">آخر تحديث <b><span class="bidi">2026-10-28T04:00:00Z</span></b></span><span class="sc-chip">فترة التغطية <b><span class="ltr">270400Z</span>–<span class="ltr">280400Z</span> <span class="ltr">UTC</span> أكتوبر 2026</b></span><span class="sc-chip">المصادر <b><span class="bidi">15</span> من <span class="bidi">40</span></b></span></div><div class="sc-grid"><div class="sc-side"><div class="sc-threat risk-high"><div class="sc-tl">مستوى التهديد</div><div class="sc-tv">مرتفع</div><details class="sc-basis"><summary>أساس التقدير</summary><p>تقارير عن حريق ناقلة ولغم بحري وتهديدات منسوبة إلى جهات إيرانية في هرمز والخليج. وترد تقارير مهنية عن صاروخ ومنشأة سعودية في باب المندب والبحر الأحمر، مع غياب تأكيد ملاحي رسمي جديد داخل الفترة.</p></details></div><div class="sc-kpis"><div class="sc-kpi acc-warn"><div class="sc-kl">تقارير مهنية عن حوادث أو تهديدات في هرمز والخليج خلال الفترة</div><div class="sc-kv bidi">6</div><div class="sc-kd"><span class="trend t-up">▲</span> ارتفع من 0 إلى 6</div><div class="sc-kn">ضغط ملاحي متزايد، مع تفاوت في التأكيد</div></div><div class="sc-kpi acc-ok"><div class="sc-kl">وقائع مؤكدة من بلاغ ملاحي رسمي داخل الفترة</div><div class="sc-kv bidi">0</div><div class="sc-kd"><span class="trend t-flat">■</span> بلا تغيير</div><div class="sc-kn">لا تأكيد رسمي جديد في المواد المتاحة</div></div><div class="sc-kpi acc-warn"><div class="sc-kl">تقارير عن وقائع مرتبطة بالحوثيين في باب المندب والسعودية</div><div class="sc-kv bidi">2</div><div class="sc-kd"><span class="trend t-up">▲</span> ارتفع من 0 إلى 2</div><div class="sc-kn">استمرار الخطر على خط البحر الأحمر</div></div></div></div><section class="sc-card" aria-label="بطاقة القرار"><h2 class="sc-h2">بطاقة القرار</h2><div class="sc-row"><div class="sc-l">ما تغيّر</div><div class="sc-v"><p class="sc-more"><a href="#sec-00" data-goto="ما تغيّر">عرض كل ما تغيّر (15)</a></p></div></div><div class="sc-row"><div class="sc-l">التوجيهات التشغيلية</div><div class="sc-v"><p class="sc-more">عدد البنود: 4 · <a href="#" data-goto="التوجيهات التشغيلية">انتقل إلى القسم</a></p></div></div><div class="sc-row"><div class="sc-l">ما يُراقب خلال 24 ساعة</div><div class="sc-v"><p class="sc-more">عدد البنود: 4 · <a href="#" data-goto="مؤشرات التحذير المبكر">انتقل إلى المؤشرات</a></p></div></div></section></div></div>
+  <div class="sc-hero no-print"><p class="sc-eyebrow">التقرير اليومي لأمن الملاحة والأوضاع الراهنة في المنطقة</p><h1 class="sc-h1">خلال الفترة <span class="ltr">270400Z</span>–<span class="ltr">280400Z</span> أكتوبر 2026، ارتفع مستوى التهديد في مضيق هرمز والخليج العربي والبحر الأحمر وباب المندب</h1><div class="sc-chips"><span class="sc-chip sc-fresh" data-gen="2026-10-28T04:00:00Z" hidden>عمر الإصدار <b class="sc-age"></b></span><span class="sc-chip">رقم الإصدار <b><span class="bidi">و ب <span class="ltr">28/10/26</span></span></b></span><span class="sc-chip">آخر تحديث <b><span class="bidi">2026-10-28T04:00:00Z</span></b></span><span class="sc-chip">فترة التغطية <b><span class="ltr">270400Z</span>–<span class="ltr">280400Z</span> <span class="ltr">UTC</span> أكتوبر 2026</b></span><span class="sc-chip">المصادر <b><span class="bidi">15</span> من <span class="bidi">40</span></b></span></div><div class="sc-grid"><section class="sc-card" aria-label="بطاقة القرار"><h2 class="sc-h2">بطاقة القرار</h2><div class="sc-row"><div class="sc-l">ما تغيّر</div><div class="sc-v"><p class="sc-more"><a href="#sec-00" data-goto="ما تغيّر">عرض كل ما تغيّر (15)</a></p></div></div><div class="sc-row"><div class="sc-l">التوجيهات التشغيلية</div><div class="sc-v"><p class="sc-more">عدد البنود: 4 · <a href="#" data-goto="التوجيهات التشغيلية">انتقل إلى القسم</a></p></div></div><div class="sc-row"><div class="sc-l">ما يُراقب خلال 24 ساعة</div><div class="sc-v"><p class="sc-more">عدد البنود: 4 · <a href="#" data-goto="مؤشرات التحذير المبكر">انتقل إلى المؤشرات</a></p></div></div></section><div class="sc-side"><div class="sc-threat risk-high"><div class="sc-tl">مستوى التهديد</div><div class="sc-tv">مرتفع</div><details class="sc-basis"><summary>أساس التقدير</summary><p>تقارير عن حريق ناقلة ولغم بحري وتهديدات منسوبة إلى جهات إيرانية في هرمز والخليج. وترد تقارير مهنية عن صاروخ ومنشأة سعودية في باب المندب والبحر الأحمر، مع غياب تأكيد ملاحي رسمي جديد داخل الفترة.</p></details></div><div class="sc-kpis"><div class="sc-kpi acc-warn"><div class="sc-kl">تقارير مهنية عن حوادث أو تهديدات في هرمز والخليج خلال الفترة</div><div class="sc-kv bidi">6</div><div class="sc-kd"><span class="trend t-up">▲</span> ارتفع من 0 إلى 6</div><div class="sc-kn">ضغط ملاحي متزايد، مع تفاوت في التأكيد</div></div><div class="sc-kpi acc-ok"><div class="sc-kl">وقائع مؤكدة من بلاغ ملاحي رسمي داخل الفترة</div><div class="sc-kv bidi">0</div><div class="sc-kd"><span class="trend t-flat">■</span> بلا تغيير</div><div class="sc-kn">لا تأكيد رسمي جديد في المواد المتاحة</div></div><div class="sc-kpi acc-warn"><div class="sc-kl">تقارير عن وقائع مرتبطة بالحوثيين في باب المندب والسعودية</div><div class="sc-kv bidi">2</div><div class="sc-kd"><span class="trend t-up">▲</span> ارتفع من 0 إلى 2</div><div class="sc-kn">استمرار الخطر على خط البحر الأحمر</div></div></div></div></div></div>
   <section class="hero-map no-print" aria-hidden="true"><div class="hmap"><div class="hmap-panel">
   <h3>خريطة الوقائع</h3><p class="blk-lede">مواقع الوقائع داخل نطاق التقرير.</p>
   <div class="hmap-wrap">
@@ -997,7 +999,66 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <main>
     
-    
+    <section class="doc reveal" id="sec-01" aria-labelledby="h-01"><h2 id="h-01"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 20a8 8 0 110-16 8 8 0 010 16zM12 12l4-3"/></svg></span>مؤشرات الموقف</h2><div class="h-rule"></div><p class="sec-lede">الأرقام، ومقارنتها بتقرير أمس، وحدود كل رقم.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
+<thead><tr>
+<th scope="col">المؤشر</th>
+<th scope="col">الحالي</th>
+<th scope="col">السابق</th>
+<th scope="col">الاتجاه</th>
+<th scope="col">الدلالة</th>
+</tr></thead><tbody>
+<tr>
+<td data-label="المؤشر">تقارير مهنية عن حوادث أو تهديدات في هرمز والخليج خلال الفترة</td>
+<td class="num" data-label="الحالي">6</td>
+<td class="num" data-label="السابق">0</td>
+<td data-label="الاتجاه">ارتفاع</td>
+<td data-label="الدلالة">ضغط ملاحي متزايد مع تفاوت في مستوى التأكيد</td>
+</tr>
+<tr>
+<td data-label="المؤشر">وقائع مؤكدة من بلاغ ملاحي رسمي داخل الفترة</td>
+<td class="num" data-label="الحالي">0</td>
+<td class="num" data-label="السابق">0</td>
+<td data-label="الاتجاه">بلا تغيير</td>
+<td data-label="الدلالة">لم يرد بلاغ رسمي جديد بين المواد المتاحة</td>
+</tr>
+<tr>
+<td data-label="المؤشر">تهديدات منسوبة إلى جهات إيرانية بشأن العبور</td>
+<td class="num" data-label="الحالي">3</td>
+<td class="num" data-label="السابق">0</td>
+<td data-label="الاتجاه">ارتفاع</td>
+<td data-label="الدلالة">يزيد الخطر على السفن ويزيد الضغط الملاحي</td>
+</tr>
+<tr>
+<td data-label="المؤشر">تقارير عن وقائع مرتبطة بالحوثيين في باب المندب والسعودية</td>
+<td class="num" data-label="الحالي">2</td>
+<td class="num" data-label="السابق">0</td>
+<td data-label="الاتجاه">ارتفاع</td>
+<td data-label="الدلالة">استمرار خطر على خط البحر الأحمر</td>
+</tr>
+<tr>
+<td data-label="المؤشر">إشارات سياسية إلى فتح هرمز أو إنشاء إطار أمني</td>
+<td class="num" data-label="الحالي">3</td>
+<td class="num" data-label="السابق">0</td>
+<td data-label="الاتجاه">ارتفاع</td>
+<td data-label="الدلالة">مسار تفاوضي قائم لكنه لم يتحول إلى إجراء ملاحي</td>
+</tr>
+<tr>
+<td data-label="المؤشر">خدمات بحرية جديدة على خط البحر الأحمر</td>
+<td class="num" data-label="الحالي">1</td>
+<td class="num" data-label="السابق">0</td>
+<td data-label="الاتجاه">ارتفاع محدود</td>
+<td data-label="الدلالة">عودة تشغيلية جزئية لا تكفي لخفض مستوى التهديد</td>
+</tr>
+</tbody></table></div>
+<p>الأرقام في الجدول تمثل عدد العناوين والوقائع المنقولة ولا تساوي عدد الهجمات. المصدر المهني أو الإعلامي لا يثبت الواقعة رسميًا من دون بلاغ مستقل.</p></section><section class="doc reveal" id="sec-02" aria-labelledby="h-02"><h2 id="h-02"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/></svg></span>مستوى التهديد</h2><div class="h-rule"></div><p class="sec-lede">التقييم الرسمي، والتقدير التحليلي، وحدود الثقة.</p><p>مستوى التهديد في مضيق هرمز والخليج العربي: مرتفع. يستند التقدير إلى تكرار روايات عن حريق ناقلة ولغم بحري، وإلى تهديدات منسوبة إلى جهات إيرانية تستهدف سفناً عابرة أو سفناً مرتبطة بمشغلين محددين، مع نقص في التأكيد الملاحي المستقل.</p>
+<p>مستوى التهديد في البحر الأحمر وباب المندب: مرتفع. يقوم التقدير على تقرير من Naval News عن اعتراض صاروخ قرب كاسحة ألغام، وعلى تقرير من MarineLink عن إصابة مصفاة سعودية بصاروخ، وعلى تقرير من Splash 247 عن خدمة بحرية جديدة لا يثبت أنها خففت مستوى التهديد.</p>
+<p>مستوى التهديد في بحر العرب: متوسط، مع نقص في الوقائع الجديدة خلال الفترة.</p>
+<p>في شرق المتوسط: متوسط بناءً على هذه التغطية، لأن المواد المفحوصة لم ترد فيها واقعة بحرية جديدة تخص المنطقة. هذا التقدير لا يعني أن العبور آمن، ولا يشمل تغيُّرات قد ترد بعد <span class="ltr">0400Z</span>.</p></section><section class="doc reveal" id="sec-03" aria-labelledby="h-03"><h2 id="h-03"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 4v16M6 8h12M6 8l-3 6h6zM18 8l-3 6h6z"/></svg></span>الاحتمالات ونسبة الحوادث إلى جهات</h2><div class="h-rule"></div><p class="sec-lede">من قد يكون مسؤولًا، بلا جزم وبلا نسبة بلا دليل.</p><p>النسب التالية تقديرية ومتكاملة ومجموعها 100%. لا تعني أي نسبة تأكيد جهة منفذة.</p>
+<ul><li>30% — استمرار الضغط على سفن العبور في مضيق هرمز: تكررت التهديدات المنقولة وتقارير Sinokor.</li><li>25% — بقاء رواية اللغم والحريق بلا تأكيد ملاحي: العنوان المنقول عن الناقلة لا يرافقه بلاغ من <span class="ltr">UKMTO</span> أو من <span class="ltr">JMIC</span> داخل الفترة.</li><li>20% — استمرار خطر الصواريخ على خط البحر الأحمر: تَحدّثت تقارير مهنية عن حالات في باب المندب والمقابل السعودي.</li><li>15% — تحرّك سياسي بين قطر وإيران من دون أثر فوري على العبور: لقاءات ودعوات إلى إطار أمني وإعادة فتح المضيق.</li><li>10% — عودة تشغيل جزئية على خط البحر الأحمر من دون خفض مماثل في مستوى التهديد: خدمة بحرية جديدة واستعداد الموانئ لزيادة الواردات.</li></ul>
+<p>المصدر والدرجة: نُسبت التهديدات في 28-02 و28-03 و28-13 إلى مواقف إيرانية كما نقلت straits.live، ولا يثبت ذلك تنفيذ فعل ضد سفينة. ونُسبت تقارير 28-05 و28-07 و28-08 إلى الحوثيين في عناوين TradeWinds وNaval News وMarineLink، ولا تتوافر في المواد الحالية مصادقة رسمية مستقلة على كل واقعة.</p></section><section class="doc reveal" id="sec-04" aria-labelledby="h-04"><h2 id="h-04"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>المراقبة المستمرة</h2><div class="h-rule"></div><p>تحت المراقبة تحديثات <span class="ltr">UKMTO</span> وJMIC وأي تحذير ملاحي يحدد سفينة أو موقعًا أو جسمًا خطرا في هرمز وباب المندب.</p>
+<p>تحت المراقبة أي إعلان رسمي عن فتح مضيق هرمز أو تعديل شروط العبور، وأي أثر عملي للقاءات قطر وإيران على حركة السفن.</p>
+<p>تحت المراقبة تقارير التسرب النفطي قرب السواحل الإماراتية وتقارير المنشآت السعودية، مع فصل كل واقعة عن الأخرى إلى أن يرد تأكيد مستقل.</p>
+<p>تحت المراقبة انتظام خدمة البحر الأحمر الجديدة وحركة الموانئ السعودية، من دون اعتبارها دليلًا على خفض التهديد.</p></section>
   </main>
 
   <footer class="foot">

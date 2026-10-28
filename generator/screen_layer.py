@@ -142,7 +142,8 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
     grid = ""
     if side or card:
         solo = "" if card else " sc-solo"
-        grid = (f'<div class="sc-grid{solo}"><div class="sc-side">{"".join(side)}</div>{card}</div>')
+        # قرار المالك 2026-10-28: بطاقة القرار في يمين الشاشة والبطاقات في اليسار (تبديل مواضع)
+        grid = (f'<div class="sc-grid{solo}">{card}<div class="sc-side">{"".join(side)}</div></div>')
     lede = ""
     if doc_mode and meta.get("lede"):
         lede = f'<p class="sc-lede">{inline(meta["lede"])}</p>'
@@ -176,7 +177,7 @@ body:has(.site-nav) .topbar{display:none}
 .sc-fresh.f-old{border-color:var(--danger);color:var(--danger)}
 .sc-fresh.f-old b{color:var(--danger)}
 .sc-arch{color:var(--muted)}
-.sc-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:22px;align-items:start}
+.sc-grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:22px;align-items:start}
 /* بلا بطاقة قرار (السجل التراكمي): مستوى التهديد والمؤشرات في صف واحد بدل عمود يترك نصف العرض فارغًا */
 .sc-grid.sc-solo{grid-template-columns:minmax(0,1fr)}
 .sc-solo .sc-side{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));align-items:stretch}
