@@ -102,7 +102,7 @@ def source_cards(status: dict, rows: list) -> tuple:
         group = by_num.get(num) or []
         if not group:
             cards.append({'num': num, 'name': r['name'], 'kind': 'none',
-                          'state': ('مرجعية تُراجع يدويًا — لا تُفحص آليًا'
+                          'state': ('مفحوصة يدويًا — لا تُفحص آليًا'
                                     if num in manual_reference
                                     else 'لا تغذية RSS — يُتابع بالمتصفح أو الأرشيف')})
             continue
@@ -275,7 +275,7 @@ def build(dist: Path, quiet: bool = False) -> dict:
 
   <div class="sx-note">حالة آخر فحص للتغذيات{(' — ' + esc(stamp)) if stamp else ''}:
   المصادر: <b>{esc(approved_n)}</b> معتمدة · <b>{esc(checked)}</b> مرصودة آليًا ·
-  <b>{esc(ok_n)}</b> ناجحة · <b>{esc(fail_n)}</b> متعذّر · <b>{esc(manual_n)}</b> مرجعية تُراجع يدويًا
+  <b>{esc(ok_n)}</b> ناجحة · <b>{esc(fail_n)}</b> متعذّر · <b>{esc(manual_n)}</b> مفحوصة يدويًا
   {('· تغذيات مفحوصة <b>' + esc(feeds_n) + '</b>') if feeds_n else ''}
   {('· عناصر مجمَّعة <b>' + esc(items_n) + '</b>') if items_n else ''}.
   والتعذّر يُسجَّل قيدًا معروفًا؛ وسياسة النظام تمنع تجاوز حماية المواقع.</div>
@@ -289,7 +289,7 @@ def build(dist: Path, quiet: bool = False) -> dict:
   </div>
   <div class="sx-note">الرمادي: مصدر مُدرج في سجل المصادر المعتمد ولا تغذية آلية له في فحص التغذيات اليومي؛
   ويُتابع بمسار آخر — فتح مباشر بالمتصفح، أو حفظ أصل رسمي، أو مراجعة يدوية. ولا يعني أنه غير مُتحقَّق منه.
-  المصادر الموسومة «مرجعية تُراجع يدويًا» مستثناة من عداد الفحص الآلي ولا تُنتج عناصر وهمية.</div>
+  المصادر الموسومة «مفحوصة يدويًا» مستثناة من عداد الفحص الآلي ولا تُنتج عناصر وهمية.</div>
   <div class="sx-grid">
 {chr(10).join(card_html(c) for c in cards) if cards else '<div class="sx-note">لا بيانات فحص بعد.</div>'}
   </div>

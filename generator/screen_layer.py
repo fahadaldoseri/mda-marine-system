@@ -19,8 +19,8 @@ import codes
 
 _NO_PREFIX_CHANGE = {"new": "جديد", "closed": "أُغلق", "reclassified": "تصنيف تغيّر",
                      "info": "متابعة", "ongoing": "مستمر"}
-HERO_MAX_CHANGES = 5
-HERO_MAX_ACTIONS = 3
+HERO_MAX_CHANGES = 2
+HERO_MAX_ACTIONS = 2
 
 
 def first_sentence(text: str) -> str:
@@ -71,7 +71,7 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
     elif gen and not doc_mode:
         chips.append(f'<span class="sc-chip sc-fresh" data-gen="{esc(gen)}" hidden>عمر الإصدار <b class="sc-age"></b></span>')
     if meta.get("version"):
-        chips.append(_chip("رقم النسخة", f'<span class="bidi">{esc(meta["version"])}</span>'))
+        chips.append(_chip("رقم الإصدار", f'<span class="bidi">{esc(meta["version"])}</span>'))
     if gen and (not archived or archived == "none"):
         chips.append(_chip("آخر تحديث", f'<span class="bidi">{esc(gen)}</span>'))
     elif gen and doc_mode:
@@ -82,7 +82,7 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
     if chk not in (None, "") and cit not in (None, ""):
         chips.append(_chip("المصادر", f'<span class="bidi">{esc(cit)}</span> من <span class="bidi">{esc(chk)}</span>'))
     elif chk not in (None, ""):
-        chips.append(_chip("مصادر مرصودة آليًا", f'<span class="bidi">{esc(chk)}</span>'))
+        chips.append(_chip("إجمالي المصادر المعتمدة", f'<span class="bidi">{esc(chk)}</span>'))
 
     # العمود الجانبي: مستوى التهديد ثم المؤشرات
     side = []
@@ -111,39 +111,26 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
     if kp:
         side.append(f'<div class="sc-kpis">{"".join(kp)}</div>')
 
-    # بطاقة القرار
+    # بطاقة القرار (شاشة): أعداد وروابط للقسم — لا تكرار حرفي لنصوص المتن
     rows = []
     changes = meta.get("changes") or []
     if changes:
-        lis = []
-        for it in changes[:HERO_MAX_CHANGES]:
-            kind = it.get("kind", "info")
-            lab = BLK.KIND_LABEL.get(kind) or _NO_PREFIX_CHANGE.get(kind, "")
-            ref, code = it.get("ref") or "", it.get("code") or ""
-            code_html = (f'<bdi class="sc-code bidi">{esc(BLK.code_label(code, ref))}</bdi>'
-                         if code else '<span class="sc-code sc-nocode"></span>')
-            tag = f'<span class="sc-tag sc-k-{esc(kind)}">{esc(lab)}</span> ' if lab else ""
-            lis.append(f'<li>{code_html}<span>{tag}{inline(BLK.code_text(it.get("text", "")))}</span></li>')
-        more = ""
-        if len(changes) > HERO_MAX_CHANGES:
-            more = f'<p class="sc-more"><a href="#sec-00" data-goto="ما تغيّر">كل ما تغيّر ({len(changes)})</a></p>'
-        rows.append(f'<div class="sc-row"><div class="sc-l">ما تغيّر</div>'
-                    f'<div class="sc-v"><ul class="sc-list">{"".join(lis)}</ul>{more}</div></div>')
+        rows.append(
+            '<div class="sc-row"><div class="sc-l">ما تغيّر</div>'
+            f'<div class="sc-v"><p class="sc-more"><a href="#sec-00" data-goto="ما تغيّر">'
+            f'عرض كل ما تغيّر ({len(changes)})</a></p></div></div>')
     acts = _list_items(dc.get("action"))
     if acts:
-        lis = "".join(f'<li><i>{n}</i><span>{inline(BLK.code_text(a))}</span></li>'
-                      for n, a in enumerate(acts[:HERO_MAX_ACTIONS], 1))
-        more = ""
-        if len(acts) > HERO_MAX_ACTIONS:
-            more = (f'<p class="sc-more"><a href="#" data-goto="التوجيهات التشغيلية">'
-                    f'التوجيهات كاملة ({len(acts)})</a></p>')
-        rows.append(f'<div class="sc-row"><div class="sc-l">التوجيهات التشغيلية</div>'
-                    f'<div class="sc-v"><ol class="sc-acts">{lis}</ol>{more}</div></div>')
+        rows.append(
+            '<div class="sc-row"><div class="sc-l">التوجيهات التشغيلية</div>'
+            f'<div class="sc-v"><p class="sc-more">عدد البنود: {len(acts)} · '
+            '<a href="#" data-goto="التوجيهات التشغيلية">انتقل إلى القسم</a></p></div></div>')
     watch = _list_items(dc.get("watch"))
     if watch:
-        lis = "".join(f'<li>{inline(BLK.code_text(w))}</li>' for w in watch)
-        rows.append(f'<div class="sc-row"><div class="sc-l">ما يُراقب خلال 24 ساعة</div>'
-                    f'<div class="sc-v"><ul class="sc-watch">{lis}</ul></div></div>')
+        rows.append(
+            '<div class="sc-row"><div class="sc-l">ما يُراقب خلال 24 ساعة</div>'
+            f'<div class="sc-v"><p class="sc-more">عدد البنود: {len(watch)} · '
+            '<a href="#" data-goto="مؤشرات التحذير المبكر">انتقل إلى المؤشرات</a></p></div></div>')
     key = ""
     if rkey_html:
         key = rkey_html.replace('class="rkey no-print"', 'class="sc-rkey"')

@@ -55,7 +55,7 @@ CONF_CANON = {"عالية": "عالية", "مرتفعة": "عالية", "متو�
 KIND_LABEL = {
     "confirm": "هجوم مؤكد",
     "inter": "واقعة عسكرية",
-    "suspect": "غير محسوم",
+    "suspect": "لم يتم التأكيد بعد",
     "bg": "لا جديد",
     "watch": "تحت المراقبة",
 }
@@ -135,7 +135,7 @@ def decision_card(dc, inline):
         return ""
     rows = [
         ("ما تغيّر", dc.get("changed"), None),
-        ("مستوى الخطر", dc.get("risk"), dc.get("risk_kind")),
+        ("مستوى التهديد", dc.get("risk"), dc.get("risk_kind")),
         ("التوصيات", dc.get("action"), None),
         ("ما يُراقب خلال 24 ساعة", dc.get("watch"), None),
     ]
@@ -145,10 +145,17 @@ def decision_card(dc, inline):
             continue
         cls = f" risk-{kind}" if kind in ("high", "med", "low") else ""
         pts = _points(value)
-        if pts:
+        if pts and label == "ما يُراقب خلال 24 ساعة":
+            # صف المراقبة يُعرض عددًا وإحالة: النصوص الكاملة في قسم المؤشرات (منع التكرار الحرفي)
+            body = (f'<p class="dc-note">عدد البنود: {len(pts)} · وتفصيلها في قسم «مؤشرات التحذير المبكر».</p>')
+        elif pts:
+            # الاقتصار على بندين في البطاقة (الباقي في القسم الكامل) — يمنع التكرار الحرفي
+            shown, extra = pts[:2], max(0, len(pts) - 2)
             body = '<ul class="dc-list">' + "".join(
-                f"<li>{inline(code_text(p))}</li>" for p in pts
+                f"<li>{inline(code_text(p))}</li>" for p in shown
             ) + "</ul>"
+            if extra:
+                body += f'<p class="dc-note">و{extra} بنود أخرى في قسم «{label}».</p>'
         else:
             body = inline(code_text(value))
         cells.append(
@@ -559,7 +566,7 @@ STYLE_BLOCKS = STYLE_BLOCKS + """
 """
 
 def intel_analysis(data, inline):
-    """كتلة قسم «التحليل الاستخباري» (ح1–ح12): وسم الأسلوب · الاحتمال · الثقة · سند المصدر · الافتراضات · المؤشرات · تقييم دقة الأمس."""
+    """كتلة قسم «قراءة الموقف وتحليل المؤشرات» (ح1–ح12): وسم الأسلوب · الاحتمال · الثقة · سند المصدر · الافتراضات · المؤشرات · تقييم دقة الأمس."""
     if not data:
         return ""
     out = []
@@ -577,7 +584,7 @@ def intel_analysis(data, inline):
     asm = data.get("assumptions") or []
     if asm:
         rws = [[a.get("assumption", ""), a.get("falsifier", "")] for a in asm]
-        out.append('<h3>الافتراضات المعلنة</h3><p class="blk-lede">كل افتراض معلن، وما يخالفه.</p>'
+        out.append('<h3>الاحتمالات</h3><p class="blk-lede">كل افتراض معلن، وما يخالفه.</p>'
                    + _table(["الافتراض", "ما يخالفه"], rws, inline))
 
     inds = data.get("indicators") or []

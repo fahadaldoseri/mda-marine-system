@@ -91,7 +91,7 @@ SECTION_ICONS = {
     "الحركة الملاحية والتكدس": "route",
     "مستوى التهديد": "shield",
     "الاحتمالات ونسبة الحوادث إلى جهات": "scale",
-    "التحليل الاستخباري": "intel",
+    "قراءة الموقف وتحليل المؤشرات": "intel",
     "التوجيهات التشغيلية": "gear",
     "الخلفية القائمة": "history",
     "ما لم يُحسم": "gap",
@@ -100,7 +100,7 @@ SECTION_ICONS = {
 
 SECTION_HINTS = {
     "ما تغيّر منذ التقرير السابق": "ما استُجد، وما تغيّر تصنيفه، وما أُغلق.",
-    "الخلاصة": "الموقف ومستوى الخطر والإجراء المقترح في ثلاثة أسطر.",
+    "الخلاصة": "الموقف ومستوى التهديد والإجراء المقترح في ثلاثة أسطر.",
     "التوزيع الجغرافي للوقائع": "أين تركّزت الوقائع، وحصيلة IMO حسب القطاعات.",
     "مؤشرات الموقف": "الأرقام، ومقارنتها بتقرير أمس، وحدود كل رقم.",
     "مستوى التهديد": "التقييم الرسمي، والتقدير التحليلي، وحدود الثقة.",
@@ -108,11 +108,11 @@ SECTION_HINTS = {
     "الوقائع الجديدة": "الوقائع الأمنية الجديدة خلال فترة التغطية، مفصولًا عن الخلفية.",
     "التحذيرات والنشرات الرسمية": "حالة الجهات الرسمية خلال فترة التقرير.",
     "سجل IMO": "الحصيلة الرسمية التراكمية، وآخر إدخال ظاهر.",
-    "التحليل الاستخباري": "وصف النمط والافتراضات والفرضيات ومؤشرات التحذير المبكر.",
+    "قراءة الموقف وتحليل المؤشرات": "وصف النمط والافتراضات والفرضيات ومؤشرات التحذير المبكر.",
     "الاحتمالات ونسبة الحوادث إلى جهات": "من قد يكون مسؤولًا، بلا جزم وبلا نسبة بلا دليل.",
     "الحركة الملاحية والتكدس": "حركة المضيق والرسو من مصادر معلنة فقط.",
     "ما لم يُحسم": "ما لا يزال مجهولًا، وما يلزم متابعته في التقرير التالي.",
-    "الخلفية القائمة": "وقائع أقدم ما زال أثرها مؤثرًا على التشغيل.",
+    "الخلفية القائمة": "وقائع أقدم لا يزال أثرها مؤثرًا على التشغيل.",
     "المصادر والمراجع": "حالة المصادر المفحوصة، وروابط المراجع المستشهد بها.",
 }
 # أقسام تُمنح تمييزًا بصريًا محسوبًا: خلاصة القرار + الإجراء المطلوب
@@ -816,16 +816,16 @@ def classify(text: str):
             return ("هجوم مؤكد", "t-confirm")
         if re.search(r"تفاعل عسكري|تعطيل", seg):
             return ("واقعة عسكرية", "t-inter")
-        if re.search(r"غير محسوم|نشاط مشبوه|غير مؤكد|غير مثبت", seg):
-            return ("غير محسوم", "t-suspect")
+        if re.search(r"لم يتم التأكيد بعد|نشاط مشبوه|غير مؤكد|غير مثبت", seg):
+            return ("لم يتم التأكيد بعد", "t-suspect")
         if re.search(r"خلفية|ليست واقعة", seg):
             return ("لا جديد", "t-bg")
     if re.search(r"هجوم\s*(مؤكد|مثبت)", text):
         return ("هجوم مؤكد", "t-confirm")
     if re.search(r"تفاعل عسكري|قوات عسكرية|تعطيل", text):
         return ("واقعة عسكرية", "t-inter")
-    if re.search(r"نشاط مشبوه|غير محسوم|مجهول", text):
-        return ("غير محسوم", "t-suspect")
+    if re.search(r"نشاط مشبوه|لم يتم التأكيد بعد|مجهول", text):
+        return ("لم يتم التأكيد بعد", "t-suspect")
     return ("خلفية", "t-bg")
 
 
@@ -1182,7 +1182,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
     order = [
         "ما تغيّر",         "الخلاصة",         "بطاقة القرار",         "التوزيع الجغرافي للوقائع",
         "مؤشرات الموقف",         "مستوى التهديد",         "التوجيهات التشغيلية",         "الوقائع الجديدة",
-        "التحذيرات والنشرات",         "سجل IMO",         "التحليل الاستخباري",         "الاحتمالات",         "الحركة الملاحية والتكدس",
+        "التحذيرات والنشرات",         "سجل IMO",         "قراءة الموقف وتحليل المؤشرات",         "الاحتمالات",         "الحركة الملاحية والتكدس",
         "ما لم يُحسم",         "المراقبة المستمرة",         "الخلفية القائمة",         "المصادر والمراجع",
 
     ]
@@ -1289,7 +1289,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
         # عطل ك-72: تنبيه القسم كان داخل حلقة كتل المؤشرات فيتكرر بعددها (6 مرات في إصدار 20 أكتوبر).
         # القاعدة: تنبيه القسم يُكتب مرة واحدة في مستوى القسم لا داخل حلقة عناصره.
         if "الحركة" in t:
-            section_html += '<p class="src-note">قراءة اتجاه من منصة رصد — يُؤخذ في الحساب مدة التحديث (20 دقيقة) واحتمال انقطاع الإرسال أو spoofing.</p>'
+            section_html += '<p class="src-note">قراءة اتجاه من منصة (يُذكر اسم المصدر) — يُؤخذ في الحساب مدة التحديث (20 دقيقة) واحتمال انقطاع الإرسال أو spoofing.</p>'
         if "التوزيع الجغرافي" in t:
             section_html += '<p class="src-note">تحذيرات IHO/NAVAREA تُربط بإحداثياتها عند توفرها؛ والويب لا يستبدل البث الملاحي المعتمد.</p>'
         body.append(section_html)
@@ -1308,7 +1308,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
 
     chips = []
     if meta.get("version"):
-        chips.append(f'<span class="chip">رقم النسخة <b>{esc(meta["version"])}</b></span>')
+        chips.append(f'<span class="chip">رقم الإصدار <b>{esc(meta["version"])}</b></span>')
     if generated:
         chips.append(f'<span class="chip">آخر تحديث <b class="bidi">{esc(generated)}</b></span>')
     if meta.get("window"):
@@ -1318,9 +1318,9 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
             win = f'<bdi class="bidi">{_m.group(1)}</bdi> {_m.group(2)}'
         chips.append(f'<span class="chip">فترة التغطية <b>{win}</b></span>')
     if meta.get("sources_checked") not in (None, ""):
-        chips.append(f'<span class="chip">مصادر مرصودة آليًا <b class="bidi">{esc(meta["sources_checked"])}</b></span>')
+        chips.append(f'<span class="chip">إجمالي المصادر المعتمدة <b class="bidi">{esc(meta["sources_checked"])}</b></span>')
     if meta.get("sources_manual_reference_count") not in (None, ""):
-        chips.append(f'<span class="chip">مرجعية تُراجع يدويًا <b class="bidi">{esc(meta["sources_manual_reference_count"])}</b></span>')
+        chips.append(f'<span class="chip">مفحوصة يدويًا <b class="bidi">{esc(meta["sources_manual_reference_count"])}</b></span>')
     if meta.get("sources_cited") not in (None, ""):
         chips.append(f'<span class="chip">مصادر مستشهد بها <b class="bidi">{esc(meta["sources_cited"])}</b></span>')
 
@@ -1331,7 +1331,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
     threat_html = ""
     if threat:
         threat_html = (
-            f'<div class="threat {tcls}"><div class="lbl">مستوى الخطر</div>'
+            f'<div class="threat {tcls}"><div class="lbl">مستوى التهديد</div>'
             f'<div class="val">{esc(threat)}</div></div>'
         )
 
