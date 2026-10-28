@@ -9,8 +9,11 @@ EXCLUDE_FILES = {'telegram-chat.json', 'telegram-targets.json', 'telegram-subscr
 EXCLUDE_GLOBS = ('*.pyc', '*.tmp', 'telegram*.json')
 
 def skip(p: Path) -> bool:
+    """استثناء بالمسار لا بالاسم فقط: أي مجلد محظور في أي مستوى يُستثنى بمحتواه."""
+    if any(part in EXCLUDE_DIRS for part in p.parts):
+        return True
     if p.is_dir():
-        return p.name in EXCLUDE_DIRS
+        return False
     if p.name in EXCLUDE_FILES:
         return True
     return any(p.match(g) for g in EXCLUDE_GLOBS)
