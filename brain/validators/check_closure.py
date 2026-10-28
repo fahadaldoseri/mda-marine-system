@@ -78,8 +78,12 @@ def check(brain: Path):
         if r['state'] not in STATES:
             fails.append(f'{ident}: حالة غير معروفة «{r["state"]}»')
         if r['state'] == 'مغلق':
-            if r['verify'] != 'تحقق تشغيلي ناجح' or r['barrier'] not in ('مطبَّق', 'فعّال'):
-                fails.append(f'{ident}: حالة «مغلق» بلا حاجز فعّال وتحقق تشغيلي')
+            if r['repair'] != 'منفَّذ':
+                fails.append(f'{ident}: حالة «مغلق» وإصلاحه ليس «منفَّذ»')
+            if r['verify'] != 'تحقق تشغيلي ناجح':
+                fails.append(f'{ident}: حالة «مغلق» بلا تحقق تشغيلي')
+            if r['barrier'] not in ('مطبَّق', 'فعّال'):
+                fails.append(f'{ident}: حالة «مغلق» بلا حاجز مطبَّق')
         else:
             e = exc.get(ident)
             if not e:
@@ -103,8 +107,17 @@ def check(brain: Path):
             row = idx.get(ident)
             if not row:
                 fails.append(f'{ident}: لا صف في مصفوفة التتبع')
-            elif r['state'] == 'مغلق' and not (row.get('lesson_id') and row.get('barrier_id') and row.get('run_evidence')):
-                fails.append(f'{ident}: مغلق بسلسلة تتبع ناقصة')
+            elif r['state'] == 'مغلق':
+                base = ident.split('/')[0]
+                lis = (row.get('lesson_id') or '').split('/')[0]
+                bid = row.get('barrier_id') or ''
+                ev = (row.get('run_evidence') or '').strip()
+                if lis != base:
+                    fails.append(f'{ident}: مغلق بلا درس مطابق')
+                if not re.match(r'^B-[0-9a-f]{8}$', bid):
+                    fails.append(f'{ident}: مغلق بمعرّف حاجز غير صالح')
+                if ev in ('', 'غير محدد', 'مفتوح', '—', 'لا دليل'):
+                    fails.append(f'{ident}: مغلق بدليل تسجيل غير معتبر')
         notes.append(f'مصفوفة التتبع: {len(idx)} صفًا')
     closed = sum(1 for r in rows.values() if r.get('state') == 'مغلق')
     counts = {'مفحوص': len(rows), 'مغلق': closed, 'مستثنى': len(exc), 'فاشل': len(fails)}

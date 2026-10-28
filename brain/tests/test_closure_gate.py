@@ -68,13 +68,32 @@ def main():
              'created_at': now.isoformat(), 'expires_at': (now + timedelta(days=30)).isoformat(),
              'compensating_control': 'c', 'replacement_plan': 'p', 'evidence': 'e'}
         fixture(t, [row('ك-1', 'مفتوح'), row('ك-2', 'مغلق', 'تحقق تشغيلي ناجح', 'فعّال')], [e],
-                [{'fault_id': 'ك-1', 'lesson_id': 'ك-1', 'barrier_id': 'B-1', 'run_evidence': 'r'},
-                 {'fault_id': 'ك-2', 'lesson_id': 'ك-2', 'barrier_id': 'B-2', 'run_evidence': 'r'}])
+                [{'fault_id': 'ك-1', 'lesson_id': 'ك-1', 'barrier_id': 'B-1234abcd', 'run_evidence': 'خرج 0'},
+                 {'fault_id': 'ك-2', 'lesson_id': 'ك-2', 'barrier_id': 'B-5678ef01', 'run_evidence': 'خرج 0'}])
         rc = run(t); print(f'  4) سجل مطابق كامل → {rc} {"✔" if rc == 0 else "✘"}'); ok &= rc == 0
 
     with tempfile.TemporaryDirectory() as d:
         rc = run(Path(d) / 'missing')
         print(f'  5) سجل غير موجود (انهيار) → {rc} {"✔" if rc == 70 else "✘"}'); ok &= rc == 70
+
+
+    with tempfile.TemporaryDirectory() as d:   # انحدار الهجوم 6: مغلق وإصلاحه لم يبدأ
+        t = Path(d) / 'f'
+        r = row('ك-1', 'مغلق', 'تحقق تشغيلي ناجح', 'فعّال'); r[8] = 'لم يبدأ'
+        fixture(t, [r], [], [{'fault_id': 'ك-1', 'lesson_id': 'ك-1', 'barrier_id': 'B-1234abcd', 'run_evidence': 'خرج 0'}])
+        rc = run(t); print(f'  6) مغلق وإصلاحه لم يبدأ → {rc} {"✔" if rc == 2 else "✘"}'); ok &= rc == 2
+
+    with tempfile.TemporaryDirectory() as d:   # انحدار: دليل غير معتبر
+        t = Path(d) / 'g'
+        fixture(t, [row('ك-1', 'مغلق', 'تحقق تشغيلي ناجح', 'فعّال')], [],
+                [{'fault_id': 'ك-1', 'lesson_id': 'ك-1', 'barrier_id': 'B-1234abcd', 'run_evidence': 'غير محدد'}])
+        rc = run(t); print(f'  7) مغلق بدليل «غير محدد» → {rc} {"✔" if rc == 2 else "✘"}'); ok &= rc == 2
+
+    with tempfile.TemporaryDirectory() as d:   # انحدار: معرّف حاجز غير صالح
+        t = Path(d) / 'h'
+        fixture(t, [row('ك-1', 'مغلق', 'تحقق تشغيلي ناجح', 'فعّال')], [],
+                [{'fault_id': 'ك-1', 'lesson_id': 'ك-1', 'barrier_id': 'X', 'run_evidence': 'خرج 0'}])
+        rc = run(t); print(f'  8) معرّف حاجز غير صالح → {rc} {"✔" if rc == 2 else "✘"}'); ok &= rc == 2
 
     print('  الحصيلة: كل الاختبارات نجحت ✔' if ok else '  الحصيلة: فشل ✘')
     return 0 if ok else 1
