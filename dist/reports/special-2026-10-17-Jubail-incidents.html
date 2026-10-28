@@ -327,13 +327,23 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .card, .decision, .dc{background:#fff !important}
   /* ك-245: منع انقسام مفتاح الخريطة بين صفحتين في <span class="ltr">PDF</span> */
   .map-key, .map-legend, .key-box, .mx-key,
-  .print-map, .print-map .hmap, .print-map .hmap-wrap { break-inside: avoid !important; page-break-inside: avoid !important; }
+  /* عطل 2026-10-28: كتلة الخريطة+المفتاح (~130–215مم) لا تجتمع في صفحة فتترك فراغًا مانعًا.
+     الحكم: الكتلة تنقسم بين الرسم والمفتاح، وكلٌّ منهما لا ينقسم. */
+  .print-map{break-inside:auto !important;page-break-inside:auto !important}
+  /* الإطار نفسه ينقسم: الرسم (95مم) يبقى صحيحًا، والمفتاح يبقى كاملًا في صفحة واحدة */
+  .print-map .hmap-wrap{break-inside:auto !important;page-break-inside:auto !important;overflow:visible !important}
+  .print-map .hmap-svg{break-inside:avoid !important;page-break-inside:avoid !important}
+  .print-map .hmap-legend{break-inside:avoid !important;page-break-inside:avoid !important}
   /* ك-245: المفتاح كامل في عمود واحد، وتلتصق كتلة الخريطة بذيل المحتوى */
   .print-map{display:block !important}
   .print-map .hmap-wrap{overflow:hidden !important}
+  /* لا يُقيَّد ارتفاع الخريطة: القيد يقلّص عرضها فيسقط فحص العرض (70%) — ك-256 */
   .print-map .hmap-keys{display:block !important;margin:2mm 0 0;font-size:8.4pt;line-height:1.3}
-  .print-map .hmap-legend{grid-template-columns:minmax(0,1fr) !important;columns:1 !important;gap:0 !important;margin:1.5mm 0 0}
-  .print-map .hmap-legend li{break-inside:avoid !important;page-break-inside:avoid !important;margin:0 0 1mm !important;font-size:8.4pt !important;line-height:1.3 !important}
+  /* عطل 2026-10-28: المفتاح بعمود واحد بلغ 95مم فلم تجتمع الخريطة معه في صفحة،
+     فبقي فراغ مانع (176مم). القرار: عمودان في الطباعة — المفتاح يبقى كاملًا وغير منقسم
+     داخل الكتلة (break-inside:avoid) وتنخفض كتلته إلى ما يقارب النصف. */
+  .print-map .hmap-legend{grid-template-columns:repeat(4,minmax(0,1fr)) !important;columns:4 !important;column-gap:3.5mm !important;gap:0 !important;margin:1.2mm 0 0}
+  .print-map .hmap-legend li{break-inside:avoid !important;page-break-inside:avoid !important;margin:0 0 .2mm !important;font-size:7pt !important;line-height:1.18 !important}
   .print-map-distribution{break-inside:avoid !important;page-break-inside:avoid !important;margin-top:2mm}
   .print-map-distribution h3{font-size:10pt;margin:1.5mm 0 1mm}
   .print-map-distribution .dist-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5mm}
@@ -504,7 +514,9 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .print-map .hmap-wrap{break-inside:avoid !important;page-break-inside:avoid !important;overflow:hidden !important}
   .print-map .hmap-wrap{grid-template-columns:minmax(0,6fr) minmax(0,1fr) !important}
   .print-map .hmap-zoom{border-inline-start:1.5px solid var(--accent) !important;border-top:0 !important}
-  .print-map .hmap-legend{grid-template-columns:minmax(0,1fr) !important;columns:1 !important}
+  /* عطل 2026-10-28: قاعدتان متعارضتان للمفتاح (عمود/عمودان) — أُلغيت الثانية.
+     الحكم الواحد: عمودان في الطباعة، والكتلة لا تنقسم. */
+  .print-map .hmap-legend{grid-template-columns:repeat(4,minmax(0,1fr)) !important;columns:4 !important;column-gap:3.5mm !important}
   .print-map .hmap-keys{display:block !important}
   /* محاذاة مضبوطة: تُغلق فراغات الجانبين في الفقرات والقوائم، ولا تمسّ العناوين والبطاقات */
   section.doc p,section.doc li,.sec-lede,.masthead .lede,.glossary li,.src-grid li,
@@ -1037,7 +1049,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     
     <div>
       <p class="lede"><strong>تاريخ الإصدار:</strong> 17 أكتوبر 2026 · <strong>وقت القطع:</strong> 18:45 بتوقيت البحرين (15:45 <span class="ltr">UTC</span>)</p>
-      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-28 12:11 <span class="ltr">UTC</span></b></span></div>
+      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-28 20:36 <span class="ltr">UTC</span></b></span></div>
     </div>
   </header>
 
@@ -1329,11 +1341,12 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <hr>
 <p><strong>نهاية التقرير</strong></p>
 <p>مركز الوعي بالمجال البحري — نسخة رقم: و ب <span class="ltr">26/10/2</span> · تقرير خاص رقم: و ع 2 / 10 / 26 جميع الأوقات بتوقيت <span class="ltr">UTC</span> مع مقابلها بتوقيت البحرين. الأصول الرسمية محفوظة في <code>archive/originals/2026-10-17/</code>.</p></section>
+    
   </main>
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> تقرير خاص — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: <span class="ltr">UTC</span> وتوقيت البحرين (<span class="ltr">UTC</span>+3).
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-28 12:11 UTC</bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-28 20:36 UTC</bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
     
   </footer>
 </div>

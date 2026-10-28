@@ -477,13 +477,23 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .card, .decision, .dc{background:#fff !important}
   /* ك-245: منع انقسام مفتاح الخريطة بين صفحتين في PDF */
   .map-key, .map-legend, .key-box, .mx-key,
-  .print-map, .print-map .hmap, .print-map .hmap-wrap { break-inside: avoid !important; page-break-inside: avoid !important; }
+  /* عطل 2026-10-28: كتلة الخريطة+المفتاح (~130–215مم) لا تجتمع في صفحة فتترك فراغًا مانعًا.
+     الحكم: الكتلة تنقسم بين الرسم والمفتاح، وكلٌّ منهما لا ينقسم. */
+  .print-map{break-inside:auto !important;page-break-inside:auto !important}
+  /* الإطار نفسه ينقسم: الرسم (95مم) يبقى صحيحًا، والمفتاح يبقى كاملًا في صفحة واحدة */
+  .print-map .hmap-wrap{break-inside:auto !important;page-break-inside:auto !important;overflow:visible !important}
+  .print-map .hmap-svg{break-inside:avoid !important;page-break-inside:avoid !important}
+  .print-map .hmap-legend{break-inside:avoid !important;page-break-inside:avoid !important}
   /* ك-245: المفتاح كامل في عمود واحد، وتلتصق كتلة الخريطة بذيل المحتوى */
   .print-map{display:block !important}
   .print-map .hmap-wrap{overflow:hidden !important}
+  /* لا يُقيَّد ارتفاع الخريطة: القيد يقلّص عرضها فيسقط فحص العرض (70%) — ك-256 */
   .print-map .hmap-keys{display:block !important;margin:2mm 0 0;font-size:8.4pt;line-height:1.3}
-  .print-map .hmap-legend{grid-template-columns:minmax(0,1fr) !important;columns:1 !important;gap:0 !important;margin:1.5mm 0 0}
-  .print-map .hmap-legend li{break-inside:avoid !important;page-break-inside:avoid !important;margin:0 0 1mm !important;font-size:8.4pt !important;line-height:1.3 !important}
+  /* عطل 2026-10-28: المفتاح بعمود واحد بلغ 95مم فلم تجتمع الخريطة معه في صفحة،
+     فبقي فراغ مانع (176مم). القرار: عمودان في الطباعة — المفتاح يبقى كاملًا وغير منقسم
+     داخل الكتلة (break-inside:avoid) وتنخفض كتلته إلى ما يقارب النصف. */
+  .print-map .hmap-legend{grid-template-columns:repeat(4,minmax(0,1fr)) !important;columns:4 !important;column-gap:3.5mm !important;gap:0 !important;margin:1.2mm 0 0}
+  .print-map .hmap-legend li{break-inside:avoid !important;page-break-inside:avoid !important;margin:0 0 .2mm !important;font-size:7pt !important;line-height:1.18 !important}
   .print-map-distribution{break-inside:avoid !important;page-break-inside:avoid !important;margin-top:2mm}
   .print-map-distribution h3{font-size:10pt;margin:1.5mm 0 1mm}
   .print-map-distribution .dist-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5mm}
@@ -654,7 +664,9 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .print-map .hmap-wrap{break-inside:avoid !important;page-break-inside:avoid !important;overflow:hidden !important}
   .print-map .hmap-wrap{grid-template-columns:minmax(0,6fr) minmax(0,1fr) !important}
   .print-map .hmap-zoom{border-inline-start:1.5px solid var(--accent) !important;border-top:0 !important}
-  .print-map .hmap-legend{grid-template-columns:minmax(0,1fr) !important;columns:1 !important}
+  /* عطل 2026-10-28: قاعدتان متعارضتان للمفتاح (عمود/عمودان) — أُلغيت الثانية.
+     الحكم الواحد: عمودان في الطباعة، والكتلة لا تنقسم. */
+  .print-map .hmap-legend{grid-template-columns:repeat(4,minmax(0,1fr)) !important;columns:4 !important;column-gap:3.5mm !important}
   .print-map .hmap-keys{display:block !important}
   /* محاذاة مضبوطة: تُغلق فراغات الجانبين في الفقرات والقوائم، ولا تمسّ العناوين والبطاقات */
   section.doc p,section.doc li,.sec-lede,.masthead .lede,.glossary li,.src-grid li,
@@ -1335,6 +1347,11 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
             )
         kpi_html = '<div class="kpis">' + "".join(tiles) + "</div>"
 
+    # خريطة الملحق: تُلحق في نهاية «إضافات» فقط (صفحتها الكاملة بلا فراغ قبلها).
+    appendix_map = print_map_html if mode == "additions" else ""
+    # عطل 2026-10-28 (فراغ 176مم في الصفحة السابقة للخريطة): تُدرج خريطة الملحق قبل
+    # «ما لم يُحسم» فتشارك صفحتها بقيّة المحتوى، ويستقرّ الذيل في الصفحة الأخيرة بلا فراغ.
+    _appendix_map_marker = "\u0000"  # لا يطابق شيئًا: الخريطة تُلحق آخر الملحق
     threat = meta.get("threat_level", "")
     tcls = threat_class(threat) if threat else ""
 
@@ -1353,6 +1370,9 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
         ic = SECTION_ICONS.get(t, "source")
         pri = " pri" if any(p in t for p in PRIORITY_SECTIONS) else ""
         body.append(f'<section class="doc{pri} reveal" id="sec-{idx + 1:02d}" aria-labelledby="h-{idx + 1:02d}">')
+        if appendix_map and _appendix_map_marker in t:
+            body.append(appendix_map)
+            appendix_map = ""
         body.append(
             f'<h2 id="h-{idx + 1:02d}"><span class="ico">{icon(ic)}</span>{inline(t, defs)}</h2>'
             '<div class="h-rule"></div>'
@@ -1371,7 +1391,10 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
                 if m:
                     tail_para = m.group(1)
                     section_html = section_html[:m.start()]
-                section_html = section_html + print_map_html + tail_para
+                # عطل 2026-10-28: إدراج الخريطة داخل القسم يترك فراغًا كبيرًا في الصفحة
+                # السابقة لها (الخريطة تحتاج صفحة كاملة). القرار: تُلحق الخريطة ومفتاحها في
+                # نهاية ملحق الإضافات (صفحتها الكاملة)، ويُستكمل ما قبلها بمحتوى الأقسام.
+                section_html = section_html + tail_para
             else:
                 section_html = section_html + map_html
         for key, bname in blocks_map.items():
@@ -1508,6 +1531,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
   <main>
     {changes_html}
     {"".join(body)}
+    {appendix_map}
   </main>
 
   <footer class="foot">

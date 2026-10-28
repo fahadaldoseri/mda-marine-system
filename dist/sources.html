@@ -323,13 +323,23 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .card, .decision, .dc{background:#fff !important}
   /* ك-245: منع انقسام مفتاح الخريطة بين صفحتين في PDF */
   .map-key, .map-legend, .key-box, .mx-key,
-  .print-map, .print-map .hmap, .print-map .hmap-wrap { break-inside: avoid !important; page-break-inside: avoid !important; }
+  /* عطل 2026-10-28: كتلة الخريطة+المفتاح (~130–215مم) لا تجتمع في صفحة فتترك فراغًا مانعًا.
+     الحكم: الكتلة تنقسم بين الرسم والمفتاح، وكلٌّ منهما لا ينقسم. */
+  .print-map{break-inside:auto !important;page-break-inside:auto !important}
+  /* الإطار نفسه ينقسم: الرسم (95مم) يبقى صحيحًا، والمفتاح يبقى كاملًا في صفحة واحدة */
+  .print-map .hmap-wrap{break-inside:auto !important;page-break-inside:auto !important;overflow:visible !important}
+  .print-map .hmap-svg{break-inside:avoid !important;page-break-inside:avoid !important}
+  .print-map .hmap-legend{break-inside:avoid !important;page-break-inside:avoid !important}
   /* ك-245: المفتاح كامل في عمود واحد، وتلتصق كتلة الخريطة بذيل المحتوى */
   .print-map{display:block !important}
   .print-map .hmap-wrap{overflow:hidden !important}
+  /* لا يُقيَّد ارتفاع الخريطة: القيد يقلّص عرضها فيسقط فحص العرض (70%) — ك-256 */
   .print-map .hmap-keys{display:block !important;margin:2mm 0 0;font-size:8.4pt;line-height:1.3}
-  .print-map .hmap-legend{grid-template-columns:minmax(0,1fr) !important;columns:1 !important;gap:0 !important;margin:1.5mm 0 0}
-  .print-map .hmap-legend li{break-inside:avoid !important;page-break-inside:avoid !important;margin:0 0 1mm !important;font-size:8.4pt !important;line-height:1.3 !important}
+  /* عطل 2026-10-28: المفتاح بعمود واحد بلغ 95مم فلم تجتمع الخريطة معه في صفحة،
+     فبقي فراغ مانع (176مم). القرار: عمودان في الطباعة — المفتاح يبقى كاملًا وغير منقسم
+     داخل الكتلة (break-inside:avoid) وتنخفض كتلته إلى ما يقارب النصف. */
+  .print-map .hmap-legend{grid-template-columns:repeat(4,minmax(0,1fr)) !important;columns:4 !important;column-gap:3.5mm !important;gap:0 !important;margin:1.2mm 0 0}
+  .print-map .hmap-legend li{break-inside:avoid !important;page-break-inside:avoid !important;margin:0 0 .2mm !important;font-size:7pt !important;line-height:1.18 !important}
   .print-map-distribution{break-inside:avoid !important;page-break-inside:avoid !important;margin-top:2mm}
   .print-map-distribution h3{font-size:10pt;margin:1.5mm 0 1mm}
   .print-map-distribution .dist-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5mm}
@@ -500,7 +510,9 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .print-map .hmap-wrap{break-inside:avoid !important;page-break-inside:avoid !important;overflow:hidden !important}
   .print-map .hmap-wrap{grid-template-columns:minmax(0,6fr) minmax(0,1fr) !important}
   .print-map .hmap-zoom{border-inline-start:1.5px solid var(--accent) !important;border-top:0 !important}
-  .print-map .hmap-legend{grid-template-columns:minmax(0,1fr) !important;columns:1 !important}
+  /* عطل 2026-10-28: قاعدتان متعارضتان للمفتاح (عمود/عمودان) — أُلغيت الثانية.
+     الحكم الواحد: عمودان في الطباعة، والكتلة لا تنقسم. */
+  .print-map .hmap-legend{grid-template-columns:repeat(4,minmax(0,1fr)) !important;columns:4 !important;column-gap:3.5mm !important}
   .print-map .hmap-keys{display:block !important}
   /* محاذاة مضبوطة: تُغلق فراغات الجانبين في الفقرات والقوائم، ولا تمسّ العناوين والبطاقات */
   section.doc p,section.doc li,.sec-lede,.masthead .lede,.glossary li,.src-grid li,
@@ -814,9 +826,9 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <div class="sx-note">حالة آخر فحص للتغذيات — 2026-10-28:
   المصادر: <b>62</b> معتمدة · <b>40</b> مرصودة آليًا ·
-  <b>38</b> ناجحة · <b>2</b> متعذّر · <b>22</b> مفحوصة يدويًا
+  <b>39</b> ناجحة · <b>1</b> متعذّر · <b>22</b> مفحوصة يدويًا
   · تغذيات مفحوصة <b>57</b>
-  · عناصر مجمَّعة <b>1644</b>.
+  · عناصر مجمَّعة <b>1687</b>.
   والتعذّر يُسجَّل قيدًا معروفًا؛ وسياسة النظام تمنع تجاوز حماية المواقع.</div>
 
 
@@ -861,8 +873,8 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <h2 class="sx-h2">حالة المصادر المفحوصة</h2>
   <div class="sx-legend">
-    <span><b style="background:#1f9d6b"></b>نجح الفحص (38)</span>
-    <span><b style="background:#c8402f"></b>متعذّر (2)</span>
+    <span><b style="background:#1f9d6b"></b>نجح الفحص (39)</span>
+    <span><b style="background:#c8402f"></b>متعذّر (1)</span>
     <span><b style="background:#5a6b86"></b>لا تغذية RSS (22)</span>
   </div>
   <div class="sx-note">الرمادي: مصدر مُدرج في سجل المصادر المعتمد ولا تغذية آلية له في فحص التغذيات اليومي؛
@@ -876,7 +888,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <div class="sx-card none"><div class="sx-top"><span class="sx-num">5</span><span class="sx-name">IMO — سجل الحوادث المؤكدة</span></div><div class="sx-state">مفحوصة يدويًا — لا تُفحص آليًا</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">6</span><span class="sx-name">straits.live</span></div><div class="sx-state">نجح · 119 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">7</span><span class="sx-name">gCaptain</span></div><div class="sx-state">نجح · 12 عنصرًا · primary</div></div>
-<div class="sx-card ok"><div class="sx-top"><span class="sx-num">8</span><span class="sx-name">TradeWinds</span></div><div class="sx-state">نجح · 181 عنصرًا · primary</div></div>
+<div class="sx-card ok"><div class="sx-top"><span class="sx-num">8</span><span class="sx-name">TradeWinds</span></div><div class="sx-state">نجح · 179 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">9</span><span class="sx-name">Seatrade Maritime</span></div><div class="sx-state">نجح · 50 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">10</span><span class="sx-name">الجزيرة نت</span></div><div class="sx-state">نجح · 25 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">11</span><span class="sx-name">الجزيرة الإنجليزية</span></div><div class="sx-state">نجح · 25 عنصرًا · primary</div></div>
@@ -894,7 +906,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <div class="sx-card none"><div class="sx-top"><span class="sx-num">23</span><span class="sx-name">Gulf Daily News</span></div><div class="sx-state">مفحوصة يدويًا — لا تُفحص آليًا</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">24</span><span class="sx-name">وكالة الأنباء القطرية (قنا)</span></div><div class="sx-state">نجح · 95 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">25</span><span class="sx-name">وكالة أنباء الإمارات (وام)</span></div><div class="sx-state">نجح · 8 عنصرًا · official-telegram:wamnews_en</div></div>
-<div class="sx-card ok"><div class="sx-top"><span class="sx-num">26</span><span class="sx-name">وكالة الأنباء السعودية (واس)</span></div><div class="sx-state">نجح · 18 عنصرًا · primary</div></div>
+<div class="sx-card ok"><div class="sx-top"><span class="sx-num">26</span><span class="sx-name">وكالة الأنباء السعودية (واس)</span></div><div class="sx-state">نجح · 20 عنصرًا · primary</div></div>
 <div class="sx-card none"><div class="sx-top"><span class="sx-num">27</span><span class="sx-name">وكالة الأنباء الكويتية (كونا)</span></div><div class="sx-state">مفحوصة يدويًا — لا تُفحص آليًا</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">28</span><span class="sx-name">وكالة الأنباء العُمانية</span></div><div class="sx-state">نجح · 65 عنصرًا · fallback:omannews-home, fallback:omannews-rssinfo</div></div>
 <div class="sx-card none"><div class="sx-top"><span class="sx-num">29</span><span class="sx-name">البحرية الملكية البريطانية</span></div><div class="sx-state">مفحوصة يدويًا — لا تُفحص آليًا</div></div>
@@ -909,9 +921,9 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">38</span><span class="sx-name">Jerusalem Post</span></div><div class="sx-state">نجح · 34 عنصرًا · primary</div></div>
 <div class="sx-card none"><div class="sx-top"><span class="sx-num">39</span><span class="sx-name">IHO — المنظمة الهيدروغرافية الدولية</span></div><div class="sx-state">مفحوصة يدويًا — لا تُفحص آليًا</div></div>
 <div class="sx-card none"><div class="sx-top"><span class="sx-num">40</span><span class="sx-name">MarineTraffic</span></div><div class="sx-state">مفحوصة يدويًا — لا تُفحص آليًا</div></div>
-<div class="sx-card bad"><div class="sx-top"><span class="sx-num">41</span><span class="sx-name">USNI News</span></div><div class="sx-state">تعذّر — قيد حماية موثق · 403</div></div>
+<div class="sx-card ok"><div class="sx-top"><span class="sx-num">41</span><span class="sx-name">USNI News</span></div><div class="sx-state">نجح · 30 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">42</span><span class="sx-name">Naval News</span></div><div class="sx-state">نجح · 10 عنصرًا · primary</div></div>
-<div class="sx-card ok"><div class="sx-top"><span class="sx-num">43</span><span class="sx-name">The Maritime Executive</span></div><div class="sx-state">نجح · 32 عنصرًا · primary</div></div>
+<div class="sx-card ok"><div class="sx-top"><span class="sx-num">43</span><span class="sx-name">The Maritime Executive</span></div><div class="sx-state">نجح · 33 عنصرًا · primary</div></div>
 <div class="sx-card none"><div class="sx-top"><span class="sx-num">44</span><span class="sx-name">Windward</span></div><div class="sx-state">مفحوصة يدويًا — لا تُفحص آليًا</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">45</span><span class="sx-name">IRIB News</span></div><div class="sx-state">نجح · 100 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">46</span><span class="sx-name">ISNA</span></div><div class="sx-state">نجح · 60 عنصرًا · primary</div></div>
@@ -919,7 +931,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <div class="sx-card none"><div class="sx-top"><span class="sx-num">48</span><span class="sx-name">Institute for the Study of War</span></div><div class="sx-state">مفحوصة يدويًا — لا تُفحص آليًا</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">49</span><span class="sx-name">Sanaa Center</span></div><div class="sx-state">نجح · 20 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">50</span><span class="sx-name">Navy Times</span></div><div class="sx-state">نجح · 10 عنصرًا · primary</div></div>
-<div class="sx-card ok"><div class="sx-top"><span class="sx-num">51</span><span class="sx-name">Baird Maritime</span></div><div class="sx-state">نجح · 3 عنصرًا · primary</div></div>
+<div class="sx-card ok"><div class="sx-top"><span class="sx-num">51</span><span class="sx-name">Baird Maritime</span></div><div class="sx-state">نجح · 15 عنصرًا · primary</div></div>
 <div class="sx-card none"><div class="sx-top"><span class="sx-num">52</span><span class="sx-name">Synmax</span></div><div class="sx-state">مفحوصة يدويًا — لا تُفحص آليًا</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">53</span><span class="sx-name">New York Times — الشرق الأوسط</span></div><div class="sx-state">نجح · 43 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">54</span><span class="sx-name">Bloomberg</span></div><div class="sx-state">نجح · 40 عنصرًا · primary</div></div>
