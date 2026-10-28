@@ -80,6 +80,10 @@ def run_gate(cmd: list[str], text_file: Path) -> tuple[int, list[str]]:
 
 
 def surfaces(day: str) -> list[dict]:
+    _tg = BASE / "tools" / "make_tg_digest.py"
+    if _tg.exists():      # سطح مشتقٌّ من المتن والواجهة: يُبنى من المصدر قبل الفحص، فلا يُحكم على نسخة قديمة
+        subprocess.run([sys.executable, str(_tg), "--date", day], capture_output=True, text=True)
+
     return [
         {"label": "المتن (التقرير)", "kind": "text", "path": BASE / "reports" / f"{day}-sectioned.md"},
         {"label": "ملف الواجهة (القاموس وبطاقة القرار)", "kind": "json",
