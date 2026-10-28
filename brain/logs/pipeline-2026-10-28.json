@@ -2,11 +2,11 @@
   "date": "2026-10-28",
   "feeds": {},
   "final_gate": {
-    "blocked_steps": [],
+    "status": "warn",
+    "exit_code": 1,
     "dir": "logs/gate-2026-10-28",
-    "exit_code": 2,
-    "note": "نتيجة بوابة التسليم النهائية — كُتبت العلامة بعدها.",
-    "status": "block"
+    "blocked_steps": [],
+    "note": "نتيجة بوابة التسليم النهائية — مسجّلة بعد كتابة التقرير."
   },
   "finished_utc": "2026-10-28T04:01:09Z",
   "gate_finished_utc": "2026-10-28T21:41:57Z",
@@ -17,17 +17,17 @@
     "edit_pass": {
       "applied": true,
       "by_category": {
-        "أسلوب": 8,
-        "ترقيم": 1,
-        "مفردة": 6
+        "أسلوب": 11,
+        "ترجمة حرفية": 1,
+        "مفردة": 12
       },
-      "changes": 15,
-      "edited": 4,
+      "changes": 24,
+      "edited": 6,
       "model": "gpt-5-mini",
-      "rejected": 9,
+      "rejected": 8,
       "sections": 15
     },
-    "long_sentences": 11,
+    "long_sentences": 12,
     "orthography_errors": 0,
     "waw_pct": 5.0,
     "waw_runs3": 0
