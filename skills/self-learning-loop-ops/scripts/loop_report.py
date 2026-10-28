@@ -36,11 +36,18 @@ def main():
             return ""
         same = [e for e in entries if e.get("date") == date]
         sym_ok = [e for e in same if sym and v(e, "symptom", "defect", "issue")[:12] == sym[:12]]
-        m = sym_ok or same
+        m = sym_ok
+        weak = False
+        if not m:
+            m = same
+            weak = True
         for e in m[-2:]:
             act = e.get("action") or e.get("hardening") or e.get("lesson") or e.get("fix") or ""
             ev = e.get("evidence") or e.get("proof") or e.get("verification") or ""
             tag = "" if e.get("action") else " (موروث)"
+            if weak:
+                out += ["- ⚠ لا درس مطابق بالعَرَض — الموجود مدخلات اليوم نفسها (لا تُنسب إليه)"]
+                break
             out += [f"- الدرس{tag}: {act}", f"- الدليل: {ev}"]
         if not m:
             out += ["- ⚠ لا مدخل تعلم مطابق"]
