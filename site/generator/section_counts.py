@@ -2,7 +2,22 @@
 import re
 from pathlib import Path
 
-BRAIN = Path("/home/ubuntu/brain-marine-news")
+import os
+_P = Path(__file__).resolve()
+_CAND = [_P.parents[i] for i in range(1, min(5, len(_P.parents)))]
+def _brain_root() -> Path:
+    env = os.environ.get("BRAIN_DIR")
+    if env and Path(env).is_dir():
+        return Path(env)
+    for r in _CAND:
+        c = r / "brain-marine-news"
+        if (c / "reports").is_dir():
+            return c
+    for r in _CAND:
+        if (r / "reports").is_dir():
+            return r
+    return _CAND[0] / "brain-marine-news"
+BRAIN = _brain_root()
 
 def counts(date: str) -> dict:
     if not date:
