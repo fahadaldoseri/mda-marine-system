@@ -1,1 +1,0 @@
-../../site/generator/verify.py
