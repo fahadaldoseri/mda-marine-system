@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""بوابة بطاقة القرار — تمنع إفراغ صفوف البطاقة على أي سطح قارئ (عطل ك-239).
+"""بوابة أهم الأخبار المتعلقة بالأمن البحري — تمنع إفراغ صفوف البطاقة على أي سطح قارئ (عطل ك-239).
 
 تُشغَّل على الصفحة المبنية فعليًا بمتصفح حقيقي، لأن الإفراغ كان يحدث في المتصفح
 (سكربت الروابط كان يحذف الرابط عند غياب القسم من الصفحة، فيبقى الصف فارغًا)
 ولا يظهر في نص HTML المصدر.
 
 المعايير:
-1. كل صف في بطاقة القرار يحمل نصًّا فعليًّا (≥ 40 حرفًا) في خليّة القيمة.
+1. كل صف في أهم الأخبار المتعلقة بالأمن البحري يحمل نصًّا فعليًّا (≥ 40 حرفًا) في خليّة القيمة.
 2. لكل صف إمّا رابط داخلي/خارجي صالح، وإمّا نص بديل ظاهر (sc-plain) — لا خلوّ.
 3. لا خلوّ في أي <p class="sc-more"> من نص.
 4. كل وجهة خارجية (/additions.html#sec-NN) تشير إلى ملف موجود وقسم موجود داخله.
@@ -52,7 +52,7 @@ def _check_page(page_path: pathlib.Path, dist_root: pathlib.Path, required: bool
 
     if not rows:
         if required:
-            return [f"{page_path.name}: لا صفوف في بطاقة القرار (بطاقة غائبة أو فارغة)"]
+            return [f"{page_path.name}: لا صفوف في أهم الأخبار المتعلقة بالأمن البحري (بطاقة غائبة أو فارغة)"]
         print(f"ملاحظة: لا بطاقة قرار على {page_path.name} — يُتخطّى")
         return []
 
@@ -80,7 +80,7 @@ def _check_page(page_path: pathlib.Path, dist_root: pathlib.Path, required: bool
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="فحص بطاقة القرار على السطح المبني")
+    ap = argparse.ArgumentParser(description="فحص أهم الأخبار المتعلقة بالأمن البحري على السطح المبني")
     ap.add_argument("--page", help="مسار صفحة التقرير المبنية (يُستنتج من --date)")
     ap.add_argument("--additions", help="مسار صفحة إضافات المبنية (يُستنتج من --date)")
     ap.add_argument("--dist-root", default="/home/ubuntu/seawatch/dist", help="جذر dist لحلّ الروابط المطلقة")
@@ -106,11 +106,11 @@ def main() -> int:
             problems += _check_page(add_path, dist_root, required=False)
 
     if problems:
-        print("مانع: بطاقة القرار غير مكتملة:")
+        print("مانع: أهم الأخبار المتعلقة بالأمن البحري غير مكتملة:")
         for item in problems:
             print(f"  ✗ {item}")
         return 2
-    print("بطاقة القرار: مطابقة ✓ — كل صف يحمل نصًّا ورابطًا صالحًا على السطحين")
+    print("أهم الأخبار المتعلقة بالأمن البحري: مطابقة ✓ — كل صف يحمل نصًّا ورابطًا صالحًا على السطحين")
     return 0
 
 

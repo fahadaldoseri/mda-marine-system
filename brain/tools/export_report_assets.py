@@ -149,6 +149,38 @@ def sources_section_id(html: str, heading: str = "المصادر والمراج�
     return ""
 
 
+def isolate_numbers(page) -> int:
+    """فرض اتجاه LTR على النطاقات الرقمية والنسب لمنع انعكاسها في PDF (ك-242)."""
+    return page.evaluate(r"""() => {
+                  const RE = /(?:\d+(?:[.,]\d+)?\s*[–—‑-]\s*\d+(?:[.,]\d+)?(?:\s*[–—‑-]\s*\d+(?:[.,]\d+)?)*%?)|(?:\d+(?:[.,]\d+)?%)/g;
+                  const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+                  const nodes = []; while (walk.nextNode()) nodes.push(walk.currentNode);
+                  let n = 0;
+                  const RRE = /(?:\d+(?:[.,]\d+)?\s*[–—‑-]\s*\d+(?:[.,]\d+)?)|(?:\d+(?:[.,]\d+)?%)/;
+                  document.querySelectorAll('bdi, .ev-code, .num').forEach(el => {
+                    if (RRE.test(el.textContent || '')) { el.setAttribute('dir', 'ltr'); n++; }
+                  });
+                  for (const node of nodes) {
+                    const p = node.parentElement; if (!p) continue;
+                    const tag = p.tagName;
+                    if (tag === 'SCRIPT' || tag === 'STYLE') continue;
+                    const t = node.nodeValue || ''; if (!RE.test(t)) continue;
+                    RE.lastIndex = 0;
+                    const frag = document.createDocumentFragment(); let last = 0, m;
+                    while ((m = RE.exec(t))) {
+                      if (m.index > last) frag.appendChild(document.createTextNode(t.slice(last, m.index)));
+                      const sp = document.createElement('span');
+                      sp.setAttribute('dir', 'ltr'); sp.className = 'num-ltr';
+                      sp.textContent = m[0].replace(/\s*([–—‑-])\s*/g, '$1');
+                      frag.appendChild(sp); last = m.index + m[0].length;
+                    }
+                    if (last < t.length) frag.appendChild(document.createTextNode(t.slice(last)));
+                    node.parentNode.replaceChild(frag, node); n++;
+                  }
+                  return n;
+                }""")
+
+
 def inject_toc(page, sections: list[dict], pages_map: dict[str, str] | None) -> None:
     items = "".join(
         f'<li>{s["title"]} <span class="toc-n">{("ص " + pages_map.get(s["title"], "—")) if pages_map else "ص 0"}</span></li>'
@@ -174,19 +206,21 @@ def inject_toc(page, sections: list[dict], pages_map: dict[str, str] | None) -> 
         raise SystemExit("فشل إدراج الفهرس في الصفحة")
 
 
-def page_index(pdf: Path) -> dict[str, str]:
+def page_index(pdf: Path) -> list[list[str]]:
+    """أسطر كل صفحة مُوحَّدة — تُحذف أسطر الفهرس حتى لا تُحتسب مواضع للأقسام."""
     txt = subprocess.run(["pdftotext", "-layout", str(pdf), "-"],
                          capture_output=True, text=True).stdout
-    pages = []
+    pages: list[list[str]] = []
     for p in txt.split("\f"):
-        # تُحذف أسطر الفهرس (تحوي «ص N») حتى لا تُحسب أرقام الفهرس مواضع للأقسام
-        kept = []
+        lines = []
         for ln in p.split("\n"):
             clean = re.sub(r"[\u200e\u200f\u202a-\u202e\u2066-\u2069]", "", ln)
             if re.search(r"ص\s?\d+\s*$", clean.strip()):
                 continue
-            kept.append(clean)
-        pages.append(norm("\n".join(kept)))
+            n = re.sub(r"^\d+", "", norm(clean))
+            if n:
+                lines.append(n)
+        pages.append(lines)
     return pages
 
 
@@ -196,19 +230,26 @@ def norm(s: str) -> str:
     return re.sub(r"[^\u0621-\u064A0-9A-Za-z]", "", s)
 
 
-def locate_titles(pages_norm: list[str], sections: list[dict]) -> dict[str, str]:
-    """رقم أول صفحة يظهر فيها عنوان القسم، بمطابقة مُوحَّدة."""
+def locate_titles(pages_lines: list[list[str]], sections: list[dict]) -> dict[str, str]:
+    """صفحة العنوان بشرط أن يكون العنوان **سطرًا مستقلًا** لا ذكرًا داخل فقرة.
+
+    عطل ك-241: المطابقة السابقة كانت تقبل أول صفحة يرد فيها نص العنوان داخل أي فقرة،
+    فسُجّل «الوقائع الجديدة ص 3» و«الخلفية ص 6» وهما في ص 6 و ص 9 فعلًا.
+    """
     out: dict[str, str] = {}
     seen: set[str] = set()
     for s in sections:
-        t = norm(s["title"])
+        t = re.sub(r"^\d+", "", norm(s["title"]))
         if len(t) < 4 or t in seen:
             out[s["title"]] = "—"
             continue
         seen.add(t)
         found = "—"
-        for i, p in enumerate(pages_norm, 1):
-            if t in p:
+        for i, lines in enumerate(pages_lines, 1):
+            if i == 1:            # ك-241: الغلاف/الفهرس ليس موضعًا لعنوان قسم
+                continue
+            hit = any(l == t or (l.startswith(t) and len(l) <= len(t) + 3) for l in lines)
+            if hit:
                 found = str(i)
                 break
         out[s["title"]] = found
@@ -289,6 +330,9 @@ def main() -> int:
             pg.wait_for_timeout(1200)
             if args.only in ("pdf", "both"):
                 pg.emulate_media(media="print")
+
+                # ك-242: عزل النطاقات الرقمية والنسب في الطباعة لمنع انعكاس «24–72» إلى «72–24»
+
                 if not args.no_additions:
                     _add = DIST / "additions.html"
                     if _add.exists():
@@ -325,13 +369,16 @@ def main() -> int:
                 with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as fh:
                     pass1 = Path(fh.name)
                 if args.no_toc:
+                    print(f"عزل النطاقات: {isolate_numbers(pg)} موضعًا")
                     pg.pdf(path=str(out_pdf), **kwargs)
                     pages_map = None
                 else:
                     inject_toc(pg, sections, None)
+                    print(f"عزل النطاقات: {isolate_numbers(pg)} موضعًا")
                     pg.pdf(path=str(pass1), **kwargs)
                     pages_map = locate_titles(page_index(pass1), sections)
                     inject_toc(pg, sections, pages_map)
+                    print(f"عزل النطاقات: {isolate_numbers(pg)} موضعًا")
                     pg.pdf(path=str(out_pdf), **kwargs)
                     pass1.unlink(missing_ok=True)
                 pg.emulate_media(media="screen")
@@ -397,3 +444,10 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
+def _isolate_period(html):
+    """ك-256: عزل نطاق الفترة الزمنية كوحدة LTR واحدة قبل الطباعة."""
+    import re as _re
+    pat = _re.compile(r"(\d{6}Z)\s*[\u2013\u2014-]\s*(\d{6}Z)")
+    return pat.sub(lambda m: '<bdi class="bidi" dir="ltr">%s\u2013%s</bdi>' % (m.group(1), m.group(2)), html)
