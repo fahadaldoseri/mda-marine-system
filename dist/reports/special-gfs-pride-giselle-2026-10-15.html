@@ -322,6 +322,9 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .blk-lede{font-size:12.5px;color:var(--faint);margin:-6px 0 10px;line-height:1.6}
 
 @media print{
+  /* ك-255: بطاقة القرار على خلفية بيضاء في الطباعة */
+  .card, .decision, .dc, .blk, .blk *{background-image:none !important}
+  .card, .decision, .dc{background:#fff !important}
   /* ك-245: منع انقسام مفتاح الخريطة بين صفحتين في <span class="ltr">PDF</span> */
   .map-key, .map-legend, .key-box, .mx-key { break-inside: avoid !important; page-break-inside: avoid !important; }
 
@@ -777,8 +780,11 @@ body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,sys
   a, button, [role="button"], summary, .sc-toggle, .sn-brand, .sn-link, .hc-open,
   #cont-link, .num, bdi { min-height:44px; }
   a, button, [role="button"], summary { display:inline-flex; align-items:center; }
+  nav a, .sn-link, .p-btn, .sc-jump a, button, summary, .sc-toggle{ min-height:44px !important; min-width:44px !important; box-sizing:border-box; }
   .sc-toggle, .sc-toggle.no-print { width:44px; height:44px; min-width:44px; }
-  .sc-kn, .sc-peek span, .src .st, .sc-note,
+  .sc-peek, .sc-peek span, .sc-kn, .src .st, .sc-note,
+  nav a, .sn-link, .p-btn, .chip a, .sc-jump a, button, summary,
+  .sc-toggle, .hc-open, #cont-link {
   .sc-gist, .sc-sum, [class*="clamp"], [class*="gist"] { -webkit-line-clamp:unset !important;
     overflow:visible !important; max-height:none !important; display:block !important;
     white-space:normal !important; text-overflow:clip !important; }
@@ -986,7 +992,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     <div class="threat risk-high"><div class="lbl">مستوى التهديد</div><div class="val">مرتفع</div></div>
     <div>
       <p class="lede">أصاب مقذوفان غير محددَي المصدر سفينتي حاويات سنغافوريتين في 13 أكتوبر 2026 داخل مضيق هرمز ومياه عُمان: «<span class="ltr">GFS PRIDE</span>» غرقت بعد حريق وأُخلي طاقمها وعدده 21 فردًا بسلام، و«<span class="ltr">GFS GISELLE</span>» أبحرت بقواها الذاتية إلى مرسى آمن وطاقمها وعدده 22 فردًا بسلام. ولا جهة أعلنت مسؤوليتها، ولا يوجد فحص فني منشور.</p>
-      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-28 10:22 <span class="ltr">UTC</span></b></span></div>
+      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-28 10:39 <span class="ltr">UTC</span></b></span></div>
     </div>
   </header>
 
@@ -1418,7 +1424,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> تقرير خاص — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: <span class="ltr">UTC</span> وتوقيت البحرين (<span class="ltr">UTC</span>+3). المصادر الرسمية هي الأساس، والنقل الإعلامي مُوسَم نقلًا لا تحققًا.
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-28 10:22 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-28 10:39 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
     
   </footer>
 </div>

@@ -322,6 +322,9 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .blk-lede{font-size:12.5px;color:var(--faint);margin:-6px 0 10px;line-height:1.6}
 
 @media print{
+  /* ك-255: بطاقة القرار على خلفية بيضاء في الطباعة */
+  .card, .decision, .dc, .blk, .blk *{background-image:none !important}
+  .card, .decision, .dc{background:#fff !important}
   /* ك-245: منع انقسام مفتاح الخريطة بين صفحتين في <span class="ltr">PDF</span> */
   .map-key, .map-legend, .key-box, .mx-key { break-inside: avoid !important; page-break-inside: avoid !important; }
 
@@ -777,8 +780,11 @@ body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,sys
   a, button, [role="button"], summary, .sc-toggle, .sn-brand, .sn-link, .hc-open,
   #cont-link, .num, bdi { min-height:44px; }
   a, button, [role="button"], summary { display:inline-flex; align-items:center; }
+  nav a, .sn-link, .p-btn, .sc-jump a, button, summary, .sc-toggle{ min-height:44px !important; min-width:44px !important; box-sizing:border-box; }
   .sc-toggle, .sc-toggle.no-print { width:44px; height:44px; min-width:44px; }
-  .sc-kn, .sc-peek span, .src .st, .sc-note,
+  .sc-peek, .sc-peek span, .sc-kn, .src .st, .sc-note,
+  nav a, .sn-link, .p-btn, .chip a, .sc-jump a, button, summary,
+  .sc-toggle, .hc-open, #cont-link {
   .sc-gist, .sc-sum, [class*="clamp"], [class*="gist"] { -webkit-line-clamp:unset !important;
     overflow:visible !important; max-height:none !important; display:block !important;
     white-space:normal !important; text-overflow:clip !important; }
@@ -986,7 +992,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     <div class="threat risk-high"><div class="lbl">مستوى التهديد</div><div class="val">مرتفع جدًا</div></div>
     <div>
       <p class="lede">خلال الفترة <span class="ltr">240400Z</span>–<span class="ltr">250400Z</span> أكتوبر 2026، نقلت تغذية straits.live عن الحرس الثوري أن سبع ناقلات نفط أصيبت في مضيق هرمز في ليلة واحدة، وإعلانًا عن وقف حركة السفن «غير الممتثلة». ووصل تسرب نفطي إلى شواطئ أم القيوين، مع عرض إيراني بفتح المضيق مقابل رفع الحصار. لا بلاغ رسمي جديد من <span class="ltr">UKMTO</span> ولا من <span class="ltr">NAVAREA IX</span>.</p>
-      <div class="masthead-meta"><span class="chip">رقم الإصدار <b>و ب <span class="ltr">26/10/21</span></b></span><span class="chip">آخر تحديث <b class="bidi">2026-10-25T04:00:00Z</b></span><span class="chip">فترة التغطية <b><bdi class="bidi"><span class="ltr">240400Z</span>–<span class="ltr">250400Z</span></bdi> <span class="ltr">UTC</span> أكتوبر 2026</b></span><span class="chip">المصادر المعتمدة <b class="bidi">62</b></span><span class="chip">بالمسار الآلي <b class="bidi">35</b></span><span class="chip">مصادر مستشهد بها <b class="bidi">8</b></span></div>
+      <div class="masthead-meta"><span class="chip">رقم الإصدار <b>و ب <span class="ltr">26/10/21</span></b></span><span class="chip">آخر تحديث <b class="bidi">2026-10-25T04:00:00Z</b></span><span class="chip">فترة التغطية <b><bdi class="bidi" dir="ltr"><span class="ltr">240400Z</span>–<span class="ltr">250400Z</span></bdi> <span class="ltr">UTC</span> أكتوبر 2026</b></span><span class="chip">المصادر المعتمدة <b class="bidi">62</b></span><span class="chip">بالمسار الآلي <b class="bidi">35</b></span><span class="chip">مصادر مستشهد بها <b class="bidi">8</b></span></div>
     </div>
   </header>
 

@@ -472,6 +472,9 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .blk-lede{font-size:12.5px;color:var(--faint);margin:-6px 0 10px;line-height:1.6}
 
 @media print{
+  /* ك-255: بطاقة القرار على خلفية بيضاء في الطباعة */
+  .card, .decision, .dc, .blk, .blk *{background-image:none !important}
+  .card, .decision, .dc{background:#fff !important}
   /* ك-245: منع انقسام مفتاح الخريطة بين صفحتين في PDF */
   .map-key, .map-legend, .key-box, .mx-key { break-inside: avoid !important; page-break-inside: avoid !important; }
 
@@ -1336,7 +1339,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
         win = esc(meta["window"])
         _m = re.match(r'^(\S+Z\s*[–-]\s*\S+Z)\s*(.*)$', win)
         if _m:
-            win = f'<bdi class="bidi">{_m.group(1)}</bdi> {_m.group(2)}'
+            win = f'<bdi class="bidi" dir="ltr">{_m.group(1)}</bdi> {_m.group(2)}'
         chips.append(f'<span class="chip">فترة التغطية <b>{win}</b></span>')
     if meta.get("sources_approved") not in (None, ""):
         chips.append(f'<span class="chip">المصادر المعتمدة <b class="bidi">{esc(meta["sources_approved"])}</b></span>')

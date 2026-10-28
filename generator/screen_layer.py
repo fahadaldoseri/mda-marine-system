@@ -322,8 +322,11 @@ body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,sys
   a, button, [role="button"], summary, .sc-toggle, .sn-brand, .sn-link, .hc-open,
   #cont-link, .num, bdi { min-height:44px; }
   a, button, [role="button"], summary { display:inline-flex; align-items:center; }
+  nav a, .sn-link, .p-btn, .sc-jump a, button, summary, .sc-toggle{ min-height:44px !important; min-width:44px !important; box-sizing:border-box; }
   .sc-toggle, .sc-toggle.no-print { width:44px; height:44px; min-width:44px; }
-  .sc-kn, .sc-peek span, .src .st, .sc-note,
+  .sc-peek, .sc-peek span, .sc-kn, .src .st, .sc-note,
+  nav a, .sn-link, .p-btn, .chip a, .sc-jump a, button, summary,
+  .sc-toggle, .hc-open, #cont-link {
   .sc-gist, .sc-sum, [class*="clamp"], [class*="gist"] { -webkit-line-clamp:unset !important;
     overflow:visible !important; max-height:none !important; display:block !important;
     white-space:normal !important; text-overflow:clip !important; }
