@@ -902,7 +902,7 @@ def render_source_cards(rows, defs):
         elif re.search(r"مفحوص|فُحص|فحص", joined):
             cls, status = "s-ok", "فُحص"
         else:
-            cls, status = "s-none", "لا واقعة جديدة خلال الفترة"
+            cls, status = "s-none", "لا واقعة جديدة"
         note = r[-1] if len(r) > 2 else ""
         cards.append(
             f'<div class="src {cls}"><b>{inline(r[0], defs)}</b>'
