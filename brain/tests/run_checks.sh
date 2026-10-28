@@ -216,3 +216,7 @@ printf '  نجح: %s · فشل: %s\n' "$PASS" "$FAIL"
 [ "$FAIL" -eq 0 ] || exit 1
 exit 0
 python3 "$ROOT/tests/test_gate_suggestions.py" 2>&1 | sed "s/^/    /" || FAIL=$((FAIL+1))
+
+# بوابة سطح «إضافات» (ك-234) — تُثبت أن العناوين المنقولة في صفحتها وحدها
+run_case "سطح إضافات: العناوين المنقولة في صفحتها وحدها" \
+  python3 validators/check_additions_surface.py --date "$(date -u +%F)"
