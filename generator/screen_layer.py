@@ -111,26 +111,48 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
     if kp:
         side.append(f'<div class="sc-kpis">{"".join(kp)}</div>')
 
-    # بطاقة القرار (شاشة): أعداد وروابط للقسم — لا تكرار حرفي لنصوص المتن
+    # بطاقة القرار (شاشة): خلاصة مُركّزة لكل صف + العدد + رابط إلى القسم في صفحته.
+    # إصلاح ك-239 (2026-10-28): كانت الصفوف تُفرَغ لأن سكربت الروابط كان يحذف الرابط عند غياب
+    # القسم من الصفحة بعد نقله إلى «إضافات». القاعدة الآن: لا يُحذف أي عنصر، ويُوجَّه الرابط للصفحة البديلة.
     rows = []
-    changes = meta.get("changes") or []
+
+    def _gist(items, limit=2, width=64):
+        out = []
+        for raw in items[:limit]:
+            t = re.split(r"[.،؛]", str(raw).strip())[0].strip()
+            t = re.sub(r"\s+", " ", t)
+            if len(t) > width:
+                t = t[:width].rsplit(" ", 1)[0] + "…"
+            if t:
+                out.append(t)
+        return " · ".join(out)
+
+    # مصدر «ما تغيّر»: نصوص بطاقة القرار (سلاسل)، لا سجل التغييرات البنيوي
+    changes = [c for c in (dc.get("changed") or []) if isinstance(c, str)]
+    if not changes:
+        changes = [c for c in (meta.get("changes") or []) if isinstance(c, str)]
     if changes:
+        gist = _gist(changes, limit=2)
+        total = len(meta.get("changes") or []) or len(changes)
         rows.append(
             '<div class="sc-row"><div class="sc-l">ما تغيّر</div>'
-            f'<div class="sc-v"><p class="sc-more"><a href="#sec-00" data-goto="ما تغيّر">'
-            f'عرض كل ما تغيّر ({len(changes)})</a></p></div></div>')
+            f'<div class="sc-v"><p class="sc-gist">{inline(gist)}</p>'
+            f'<p class="sc-more">{total} بندًا · '
+            '<a href="/additions.html#sec-00" data-goto="ما تغيّر" data-alt="/additions.html#sec-00">التفاصيل</a></p></div></div>')
     acts = _list_items(dc.get("action"))
     if acts:
         rows.append(
             '<div class="sc-row"><div class="sc-l">التوجيهات التشغيلية</div>'
-            f'<div class="sc-v"><p class="sc-more">عدد البنود: {len(acts)} · '
-            '<a href="#" data-goto="التوجيهات التشغيلية">انتقل إلى القسم</a></p></div></div>')
+            f'<div class="sc-v"><p class="sc-gist">{inline(_gist(acts, limit=2))}</p>'
+            f'<p class="sc-more">{len(acts)} بنود · '
+            '<a href="/additions.html#sec-03" data-goto="التوجيهات التشغيلية" data-alt="/additions.html#sec-03">القسم الكامل</a></p></div></div>')
     watch = _list_items(dc.get("watch"))
     if watch:
         rows.append(
             '<div class="sc-row"><div class="sc-l">ما يُراقب خلال 24 ساعة</div>'
-            f'<div class="sc-v"><p class="sc-more">عدد البنود: {len(watch)} · '
-            '<a href="#" data-goto="مؤشرات التحذير المبكر">انتقل إلى المؤشرات</a></p></div></div>')
+            f'<div class="sc-v"><p class="sc-gist">{inline(_gist(watch, limit=2))}</p>'
+            f'<p class="sc-more">{len(watch)} بنود · '
+            '<a href="/additions.html#sec-07" data-goto="مؤشرات التحذير المبكر" data-alt="/additions.html#sec-07">المؤشرات الكاملة</a></p></div></div>')
     key = ""
     if rkey_html:
         key = rkey_html.replace('class="rkey no-print"', 'class="sc-rkey"')
@@ -215,6 +237,8 @@ body:has(.site-nav) .topbar{display:none}
 .sc-acts li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px;padding:5px 0;line-height:1.8}
 .sc-acts li i{font-style:normal;font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:12.5px;background:var(--accent);color:var(--accent-ink);border-radius:6px;width:24px;height:24px;display:grid;place-items:center;margin-top:4px}
 .sc-watch li{padding:5px 0;line-height:1.8}
+.sc-gist{font-size:15.5px;line-height:1.75;color:var(--ink);margin:0 0 4px}
+.sc-plain{color:var(--accent);display:inline-block;padding:3px 0;min-height:24px}
 .sc-more{font-size:14px;margin:6px 0 0}
 .sc-more a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:3px 0;min-height:24px}
 .sup-banner a{display:inline-block;padding:3px 0;min-height:24px}
@@ -375,13 +399,21 @@ SCREEN_JS = r"""
     bar.appendChild(nav); bar.appendChild(all);
     main.parentNode.insertBefore(bar, main);
   }
-  // روابط «كاملة» في بطاقة القرار
+  // روابط «كاملة» في بطاقة القرار — القاعدة: لا يُحذف أي عنصر (منع إفراغ الصف)
   [].forEach.call(d.querySelectorAll('[data-goto]'), function (a) {
     var key = a.getAttribute('data-goto');
     var hit = items.filter(function (it) { return it.title.indexOf(key) >= 0; })[0];
-    if (!hit) { a.parentNode.removeChild(a); return; }
-    a.href = '#' + hit.sec.id;
-    a.addEventListener('click', function () { openSec(hit.sec); });
+    if (hit) {
+      a.href = '#' + hit.sec.id;
+      a.addEventListener('click', function () { openSec(hit.sec); });
+      return;
+    }
+    var alt = a.getAttribute('data-alt');
+    if (alt) { a.href = alt; return; }
+    var plain = d.createElement('span');
+    plain.className = 'sc-plain';
+    plain.textContent = a.textContent;
+    a.parentNode.replaceChild(plain, a);
   });
   // رابط مباشر إلى قسم مطوي: يُفتح
   if (location.hash) {

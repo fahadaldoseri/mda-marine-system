@@ -700,6 +700,8 @@ body:has(.site-nav) .topbar{display:none}
 .sc-acts li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px;padding:5px 0;line-height:1.8}
 .sc-acts li i{font-style:normal;font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:12.5px;background:var(--accent);color:var(--accent-ink);border-radius:6px;width:24px;height:24px;display:grid;place-items:center;margin-top:4px}
 .sc-watch li{padding:5px 0;line-height:1.8}
+.sc-gist{font-size:15.5px;line-height:1.75;color:var(--ink);margin:0 0 4px}
+.sc-plain{color:var(--accent);display:inline-block;padding:3px 0;min-height:24px}
 .sc-more{font-size:14px;margin:6px 0 0}
 .sc-more a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:3px 0;min-height:24px}
 .sup-banner a{display:inline-block;padding:3px 0;min-height:24px}
@@ -967,7 +969,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     
     <div>
       <p class="lede"><strong>تاريخ الإصدار:</strong> 17 أكتوبر 2026 · <strong>وقت القطع:</strong> 18:45 بتوقيت البحرين (15:45 <span class="ltr">UTC</span>)</p>
-      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-28 06:29 <span class="ltr">UTC</span></b></span></div>
+      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-28 07:39 <span class="ltr">UTC</span></b></span></div>
     </div>
   </header>
 
@@ -1263,7 +1265,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> تقرير خاص — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: <span class="ltr">UTC</span> وتوقيت البحرين (<span class="ltr">UTC</span>+3).
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-28 06:29 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-28 07:39 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
     
   </footer>
 </div>
@@ -1370,13 +1372,21 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     bar.appendChild(nav); bar.appendChild(all);
     main.parentNode.insertBefore(bar, main);
   }
-  // روابط «كاملة» في بطاقة القرار
+  // روابط «كاملة» في بطاقة القرار — القاعدة: لا يُحذف أي عنصر (منع إفراغ الصف)
   [].forEach.call(d.querySelectorAll('[data-goto]'), function (a) {
     var key = a.getAttribute('data-goto');
     var hit = items.filter(function (it) { return it.title.indexOf(key) >= 0; })[0];
-    if (!hit) { a.parentNode.removeChild(a); return; }
-    a.href = '#' + hit.sec.id;
-    a.addEventListener('click', function () { openSec(hit.sec); });
+    if (hit) {
+      a.href = '#' + hit.sec.id;
+      a.addEventListener('click', function () { openSec(hit.sec); });
+      return;
+    }
+    var alt = a.getAttribute('data-alt');
+    if (alt) { a.href = alt; return; }
+    var plain = d.createElement('span');
+    plain.className = 'sc-plain';
+    plain.textContent = a.textContent;
+    a.parentNode.replaceChild(plain, a);
   });
   // رابط مباشر إلى قسم مطوي: يُفتح
   if (location.hash) {
