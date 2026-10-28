@@ -43,7 +43,7 @@ HEADERS = {
 }
 # مصادر بلا تغذية آلية رسمية (موقعها JS ولا تغذية معلنة): تُقيَّد «يُفحص بالمتصفح»
 # ولا تُحسب فشلًا — لا نبني مسارًا يتجاوز الحماية (سياسة المستخدم).
-from source_channels import BROWSER_ONLY, MANUAL_REFERENCE  # ك-212: مصدر واحد لقنوات المصادر
+from source_channels import BROWSER_ONLY, BROWSER_ROUTES, MANUAL_REFERENCE  # ك-212: مصدر واحد لقنوات المصادر
 FAIL_RATIO_LIMIT = 0.20
 MIN_CONTENT_CHARS = 400
 MIN_ITEMS = 1
@@ -404,6 +404,28 @@ def fetch(f):
                 'url': route['url'], 'via': route['via'], 'ok': False,
                 'error': message, 'tls_verification': tls_verification,
             })
+    # مسار المتصفح الثابت: بديل أخير لمصدر يحجب الطلب الآلي ويستجيب لمتصفح حقيقي.
+    browser_route = BROWSER_ROUTES.get(f['num'])
+    if browser_route:
+        try:
+            from browser_fetch import fetch_via_browser
+            payload, note = fetch_via_browser(browser_route['url'])
+            if payload is not None:
+                items, content_chars = _payload_items(payload, browser_route['url'])
+                attempts.append({'url': browser_route['url'], 'via': 'browser',
+                                 'ok': True, 'items_count': len(items),
+                                 'content_chars': content_chars, 'note': note})
+                return {
+                    **f, 'ok': True, 'items': items, 'items_count': len(items),
+                    'content_chars': content_chars, 'via': 'browser',
+                    'fetched_url': browser_route['url'], 'attempts': attempts,
+                    'tls_verification': 'verified', 'browser_note': note,
+                }
+            attempts.append({'url': browser_route['url'], 'via': 'browser', 'ok': False,
+                             'error': note, 'tls_verification': 'verified'})
+        except Exception as error:
+            attempts.append({'url': browser_route['url'], 'via': 'browser', 'ok': False,
+                             'error': _error_text(error), 'tls_verification': 'verified'})
     block_reason = 'all routes failed: ' + ' | '.join(
         f"{attempt['via']}: {attempt.get('error', 'invalid content')}" for attempt in attempts
     )

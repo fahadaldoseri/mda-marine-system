@@ -19,6 +19,9 @@ import sys
 from pathlib import Path
 
 B = Path(__file__).resolve().parents[1]
+for _i, _a in enumerate(sys.argv):
+    if _a == '--brain' and _i + 1 < len(sys.argv):
+        B = Path(sys.argv[_i + 1]).resolve()
 sys.path.insert(0, str(B / 'tools'))
 
 
