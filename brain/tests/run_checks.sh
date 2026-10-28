@@ -218,6 +218,9 @@ t "سطح إضافات: العناوين المنقولة في صفحتها وح
 echo "22) اقتراحات البوابة (كانت بعد exit 0 = كود ميت)"
 t "اقتراحات البوابة" python3 tests/test_gate_suggestions.py
 
+echo "23) بطاقة القرار (ك-239): سكربت الروابط كان يُفرغ الصف عند غياب القسم"
+t "بطاقة القرار: كل صف نصًّا ورابطًا صالحًا على السطحين" python3 validators/check_decision_card.py --date "$(date -u +%F)"
+
 echo "----- الحصيلة -----"
 printf '  نجح: %s · فشل: %s\n' "$PASS" "$FAIL"
 [ "$FAIL" -eq 0 ] || exit 1
