@@ -38,19 +38,28 @@ t("المصدر 29 له قناة", 29 in ch["browser"], "29 غير مُسند")
 # ── عدم التراجع: حذف قناة مصدر ⇒ البوابة تمنع باسمه ──
 with tempfile.TemporaryDirectory() as td:
     td = Path(td)
-    (td / "tools").mkdir(); (td / "validators").mkdir(); (td / "appendices").mkdir()
-    (td / "sections").mkdir()
-    src = (B / "tools" / "source_channels.py").read_text(encoding="utf-8")
-    src = src.replace("    40, 44, 48, 52, 56, 57, 59, 60, 61, 62,\n", "    40, 44, 48, 52, 56, 57, 59, 60, 61, 62,\n").replace("1, 5, 13, 15, 18, 19, 21, 23, 27, 29, 34, 39,", "1, 5, 13, 15, 18, 19, 21, 23, 27, 34, 39,")
-    assert "27, 34, 39," in src, "لم أستطع بناء نسخة الاختبار"
-    (td / "tools" / "source_channels.py").write_text(src, encoding="utf-8")
-    (td / "appendices" / "source-reliability-40.json").write_text(
-        (B / "appendices" / "source-reliability-40.json").read_text(encoding="utf-8"), encoding="utf-8")
+    # ك-237: النسخة السابقة كانت تنسخ ملفًا واحدًا فقط، فينهار الاستيراد في المجلد المؤقت (rc=1 بلا مخرج)
+    # وتبقى الحالة السلبية بلا إثبات. الآن تُنسخ شجرة الأدوات والبيانات كاملة ثم يُحذف الرمز 29.
+    import shutil
+    shutil.copytree(B / "tools", td / "tools")
+    # جداول المسارات تُقرأ من sections/ وappendices/ داخل المجلد المؤقت، فتُنسخ كاملة
+    for d in ("sections", "appendices"):
+        if (B / d).exists():
+            shutil.copytree(B / d, td / d, dirs_exist_ok=True)
+    (td / "validators").mkdir(exist_ok=True)
+    f = td / "tools" / "source_channels.py"
+    src = f.read_text(encoding="utf-8")
+    before = "1, 5, 13, 15, 18, 19, 21, 23, 27, 29, 34, 39,"
+    after = "1, 5, 13, 15, 18, 19, 21, 23, 27, 34, 39,"
+    assert before in src, "لم أستطع بناء نسخة الاختبار (تعذّر حذف الرمز 29)"
+    f.write_text(src.replace(before, after), encoding="utf-8")
+    assert after in f.read_text(encoding="utf-8"), "لم أستطع بناء نسخة الاختبار"
     code = ("import sys; sys.path.insert(0, r'%s/tools'); import source_channels as s; "
             "t,a,g,d = s.identity(); print(g); raise SystemExit(0 if g else 3)" % td)
-    r = sp.run([sys.executable, "-c", code], capture_output=True, text=True)
-    t("اختبار عدم تراجع: المصدر 29 يُكشف فجوة عند الإزالة", r.returncode == 0 and "29" in r.stdout,
-      f"rc={r.returncode} out={r.stdout.strip()[:60]}")
+    r = sp.run([sys.executable, "-c", code], capture_output=True, text=True, cwd=str(td))
+    t("اختبار عدم تراجع: المصدر 29 يُكشف فجوة عند الإزالة",
+      r.returncode == 0 and "29" in r.stdout,
+      f"rc={r.returncode} out={r.stdout.strip()[:60]} err={r.stderr.strip()[-80:]}")
 
 print(f"\n  النتيجة: {'نجح' if not FAIL else f'فشل {len(FAIL)}'}")
 raise SystemExit(0 if not FAIL else 2)

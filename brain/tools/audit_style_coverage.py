@@ -92,6 +92,7 @@ def surfaces(day: str) -> list[dict]:
         {"label": "صفحة التقرير", "kind": "html", "path": SITE / "dist" / "reports" / f"{day}.html"},
         {"label": "صفحة المصادر", "kind": "html", "path": SITE / "dist" / "sources.html"},
         {"label": "الصفحة الرئيسية", "kind": "html", "path": SITE / "dist" / "index.html"},
+        {"label": "صفحة إضافات (ك-234)", "kind": "html", "path": SITE / "dist" / "additions.html"},
         {"label": "PDF (قياس محدود)", "kind": "pdf", "path": SITE / "dist" / "reports" / "pdf" / f"{day}.pdf"},
     ]
 
