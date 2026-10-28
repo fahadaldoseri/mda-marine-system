@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-28T23:02:13.435007+00:00",
+  "generated_at": "2026-10-28T23:36:11.035926+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -2277,6 +2277,41 @@
       "lesson_id": "ك-290",
       "barrier_id": "B-e1644216",
       "run_evidence": "python3 validators/check_source_route_coverage.py --date 2026-10-28 → خرج 0 (نجح 59 · فشل 0)"
+    },
+    {
+      "fault_id": "ك-291",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-291",
+      "barrier_id": "B-ff83695d",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-292",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-292",
+      "barrier_id": "B-a7c4cc9c",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-293",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-293",
+      "barrier_id": "B-72b6f3e4",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-294",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-294",
+      "barrier_id": "B-1f9b8528",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-295",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-295",
+      "barrier_id": "B-9aa4c178",
+      "run_evidence": null
     }
   ]
 }

@@ -26,7 +26,7 @@ to_local=0; to_repo=0; equal=0
 mkdir -p "$REPO"
 
 # ── 1) ملفات المستودع: تُقارن وتُنقل حسب الأحدث ──
-OUR_SKILLS="marine-news-brain military-arabic-editing macr-system superpowers-method self-learning-loop-ops vocabulary-guard-ops fault-closure-ops server-repo-parity-ops secret-rotation-ops site-publish-live-verify-ops report-surface-policy-ops multi-agent-audit-ops live-visual-audit-ops print-freeze-verify-ops approved-output-change-ops runbook-execution-ops destructive-op-guard-ops tool-contract-check-ops gate-authoring-ops print-layout-gate-ops"
+OUR_SKILLS="marine-news-brain military-arabic-editing macr-system superpowers-method self-learning-loop-ops vocabulary-guard-ops fault-closure-ops server-repo-parity-ops secret-rotation-ops site-publish-live-verify-ops report-surface-policy-ops multi-agent-audit-ops live-visual-audit-ops print-freeze-verify-ops approved-output-change-ops runbook-execution-ops destructive-op-guard-ops tool-contract-check-ops gate-authoring-ops print-layout-gate-ops source-coverage-route-ops"
 in_scope() {  # مهارات المشروع فقط، لا كل مهارات المنصة
   case "$1" in marine-news-brain/*|military-arabic-editing/*|macr-system/*|superpowers-method/*|self-learning-loop-ops/*|vocabulary-guard-ops/*) return 0 ;; print-layout-gate-ops/*) return 0 ;; *) return 1 ;; esac
 }
