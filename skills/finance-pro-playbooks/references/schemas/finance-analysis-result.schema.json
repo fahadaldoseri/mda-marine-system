@@ -1,0 +1,3066 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "finance-analysis-result.schema.json",
+  "title": "Finance Analysis Pro Result",
+  "description": "Canonical machine-readable result for the finance-pro-playbooks framework and its corporate-finance plugin.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "skill_financial_transaction_possible",
+    "request_id",
+    "subject",
+    "primary_module",
+    "module_chain",
+    "as_of",
+    "data_cutoff",
+    "status",
+    "presentation",
+    "summary",
+    "payload",
+    "facts",
+    "assumptions",
+    "metrics",
+    "scores",
+    "risks",
+    "invalidation_conditions",
+    "data_gaps",
+    "source_manifest",
+    "privacy",
+    "execution",
+    "artifacts"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "finance-analysis-pro/1.2"
+    },
+    "skill_financial_transaction_possible": {
+      "description": "Whether this SKILL can place, modify, cancel, sign, broadcast, submit, or otherwise execute a real financial transaction. This field is always false and does not restrict a user's independent activity outside the SKILL.",
+      "const": false
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subject": {
+      "type": "string",
+      "minLength": 1
+    },
+    "primary_module": {
+      "$ref": "#/$defs/module"
+    },
+    "module_chain": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/module"
+      }
+    },
+    "governance_tier": {
+      "description": "Input-side governance tier from module-catalog.json governance_tier rules. light: no professional editable artifacts (xlsx/docx/pptx) and no external side effects allowed; full: complete governance. Omitted means full.",
+      "enum": [
+        "light",
+        "full"
+      ]
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "data_cutoff": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date"
+        },
+        {
+          "type": "string",
+          "format": "date-time"
+        }
+      ]
+    },
+    "status": {
+      "enum": [
+        "complete",
+        "provisional",
+        "insufficient_data",
+        "failed",
+        "blocked"
+      ]
+    },
+    "presentation": {
+      "$ref": "#/$defs/presentation"
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "payload": {
+      "type": "object"
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/fact"
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/assumption"
+      }
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/metric"
+      }
+    },
+    "scores": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/score"
+      }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/risk"
+      }
+    },
+    "invalidation_conditions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/invalidationCondition"
+      }
+    },
+    "data_gaps": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/dataGap"
+      }
+    },
+    "source_manifest": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "privacy": {
+      "$ref": "#/$defs/privacy"
+    },
+    "execution": {
+      "$ref": "#/$defs/execution"
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/artifact"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "primary_module": {
+            "const": "equity-research"
+          }
+        },
+        "required": [
+          "primary_module"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/equityPayload"
+          },
+          "presentation": {
+            "properties": {
+              "profile": {
+                "const": "equity-research"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "primary_module": {
+            "const": "fund-etf"
+          }
+        },
+        "required": [
+          "primary_module"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/fundPayload"
+          },
+          "presentation": {
+            "properties": {
+              "profile": {
+                "const": "fund-etf"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "primary_module": {
+            "const": "options-strategy"
+          }
+        },
+        "required": [
+          "primary_module"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/optionsPayload"
+          },
+          "presentation": {
+            "properties": {
+              "profile": {
+                "const": "options-strategy"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "primary_module": {
+            "const": "crypto-analysis"
+          }
+        },
+        "required": [
+          "primary_module"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/cryptoPayload"
+          },
+          "presentation": {
+            "properties": {
+              "profile": {
+                "const": "crypto-analysis"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "primary_module": {
+            "const": "portfolio-management"
+          }
+        },
+        "required": [
+          "primary_module"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/portfolioPayload"
+          },
+          "presentation": {
+            "properties": {
+              "profile": {
+                "const": "portfolio-management"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "primary_module": {
+            "const": "quant-backtesting"
+          }
+        },
+        "required": [
+          "primary_module"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/quantPayload"
+          },
+          "presentation": {
+            "properties": {
+              "profile": {
+                "const": "quant-backtesting"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "primary_module": {
+            "const": "trade-planning"
+          }
+        },
+        "required": [
+          "primary_module"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/tradePayload"
+          },
+          "presentation": {
+            "properties": {
+              "profile": {
+                "const": "trade-planning"
+              }
+            }
+          },
+          "execution": {
+            "type": "object",
+            "required": [
+              "external_side_effect",
+              "confirmation_status"
+            ],
+            "properties": {
+              "external_side_effect": {
+                "const": false
+              },
+              "confirmation_status": {
+                "const": "not_applicable"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "primary_module": {
+            "const": "corporate-finance"
+          }
+        },
+        "required": [
+          "primary_module"
+        ]
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "$ref": "#/$defs/corporateFinancePayload"
+          },
+          "presentation": {
+            "properties": {
+              "profile": {
+                "const": "corporate-finance"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "module": {
+      "enum": [
+        "equity-research",
+        "fund-etf",
+        "options-strategy",
+        "crypto-analysis",
+        "portfolio-management",
+        "quant-backtesting",
+        "trade-planning",
+        "corporate-finance"
+      ]
+    },
+    "nullableNumber": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "nullableString": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "stringList": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "presentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile",
+        "language",
+        "detail_level",
+        "audience",
+        "formats"
+      ],
+      "properties": {
+        "profile": {
+          "$ref": "#/$defs/module"
+        },
+        "language": {
+          "type": "string",
+          "minLength": 2
+        },
+        "detail_level": {
+          "enum": [
+            "brief",
+            "standard",
+            "deep"
+          ]
+        },
+        "audience": {
+          "enum": [
+            "retail",
+            "professional",
+            "trader",
+            "investment_committee",
+            "management",
+            "buyer",
+            "seller",
+            "custom"
+          ]
+        },
+        "formats": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "markdown",
+              "json",
+              "yaml",
+              "csv",
+              "xlsx",
+              "png",
+              "html",
+              "pptx",
+              "docx",
+              "pdf",
+              "txt"
+            ]
+          }
+        }
+      }
+    },
+    "fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fact_id",
+        "statement",
+        "source_ref",
+        "observation_time"
+      ],
+      "properties": {
+        "fact_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "observation_time": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "assumption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assumption_id",
+        "statement",
+        "impact",
+        "status"
+      ],
+      "properties": {
+        "assumption_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "impact": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "explicit",
+            "estimated",
+            "user_provided",
+            "overridden"
+          ]
+        },
+        "source_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "overridable": {
+          "type": "boolean"
+        },
+        "domain": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "value",
+        "unit",
+        "method",
+        "window",
+        "status",
+        "source_refs"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "$ref": "#/$defs/nullableNumber"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "window": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "ok",
+            "estimated",
+            "stale",
+            "insufficient_data",
+            "not_meaningful",
+            "undefined"
+          ]
+        },
+        "source_refs": {
+          "$ref": "#/$defs/stringList"
+        }
+      }
+    },
+    "score": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "score",
+        "scale_min",
+        "scale_max",
+        "weight",
+        "rationale",
+        "confidence"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "score": {
+          "$ref": "#/$defs/nullableNumber"
+        },
+        "scale_min": {
+          "type": "number"
+        },
+        "scale_max": {
+          "type": "number"
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            "not_scored"
+          ]
+        }
+      }
+    },
+    "risk": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "risk_id",
+        "category",
+        "description",
+        "severity",
+        "likelihood",
+        "mitigation"
+      ],
+      "properties": {
+        "risk_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "category": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "severity": {
+          "enum": [
+            "critical",
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "likelihood": {
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            "unknown"
+          ]
+        },
+        "mitigation": {
+          "type": "string"
+        }
+      }
+    },
+    "invalidationCondition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "condition",
+        "observable_evidence",
+        "action"
+      ],
+      "properties": {
+        "condition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "observable_evidence": {
+          "type": "string",
+          "minLength": 1
+        },
+        "action": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "dataGap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "field",
+        "reason",
+        "impact",
+        "remediation"
+      ],
+      "properties": {
+        "field": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "impact": {
+          "type": "string",
+          "minLength": 1
+        },
+        "remediation": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_ref",
+        "title",
+        "publisher",
+        "url",
+        "retrieved_at",
+        "data_as_of"
+      ],
+      "properties": {
+        "source_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publisher": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "retrieved_at": {
+          "type": "string"
+        },
+        "data_as_of": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "source_type": {
+          "enum": [
+            "primary_filing",
+            "regulatory",
+            "company_material",
+            "market_data",
+            "research_database",
+            "user_provided",
+            "derived",
+            "other"
+          ]
+        },
+        "period": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "original_or_derived": {
+          "enum": [
+            "original",
+            "derived",
+            "mixed"
+          ]
+        }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "data_classes_used",
+        "redactions_applied",
+        "retention_status"
+      ],
+      "properties": {
+        "data_classes_used": {
+          "$ref": "#/$defs/stringList"
+        },
+        "redactions_applied": {
+          "$ref": "#/$defs/stringList"
+        },
+        "retention_status": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "external_side_effect",
+        "confirmation_status"
+      ],
+      "properties": {
+        "external_side_effect": {
+          "type": "boolean"
+        },
+        "confirmation_status": {
+          "enum": [
+            "not_applicable",
+            "pending",
+            "confirmed",
+            "expired"
+          ]
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "path",
+        "format",
+        "purpose",
+        "sensitivity"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "format": {
+          "enum": [
+            "markdown",
+            "json",
+            "yaml",
+            "csv",
+            "xlsx",
+            "png",
+            "html",
+            "pptx",
+            "python",
+            "docx",
+            "pdf",
+            "txt"
+          ]
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sensitivity": {
+          "enum": [
+            "public",
+            "internal",
+            "confidential",
+            "restricted"
+          ]
+        },
+        "artifact_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "task_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/corporateFinanceTaskId"
+          }
+        },
+        "status": {
+          "enum": [
+            "planned",
+            "draft",
+            "ready",
+            "blocked",
+            "superseded"
+          ]
+        },
+        "editable": {
+          "type": "boolean"
+        },
+        "mime_type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "checksum": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_artifact_refs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "argument": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement",
+        "evidence_refs",
+        "impact"
+      ],
+      "properties": {
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_refs": {
+          "$ref": "#/$defs/stringList"
+        },
+        "impact": {
+          "enum": [
+            "positive",
+            "negative",
+            "mixed",
+            "uncertain"
+          ]
+        }
+      }
+    },
+    "equityPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "paradigm",
+        "investment_view",
+        "confidence",
+        "valuation",
+        "key_arguments",
+        "counter_evidence",
+        "catalysts",
+        "monitoring_items"
+      ],
+      "properties": {
+        "paradigm": {
+          "type": "string",
+          "minLength": 1
+        },
+        "investment_view": {
+          "enum": [
+            "bullish",
+            "neutral",
+            "bearish",
+            "conditional",
+            "insufficient_data"
+          ]
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "valuation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "method",
+            "currency",
+            "bear",
+            "base",
+            "bull",
+            "as_of"
+          ],
+          "properties": {
+            "method": {
+              "type": "string",
+              "minLength": 1
+            },
+            "currency": {
+              "type": "string",
+              "minLength": 3
+            },
+            "bear": {
+              "$ref": "#/$defs/nullableNumber"
+            },
+            "base": {
+              "$ref": "#/$defs/nullableNumber"
+            },
+            "bull": {
+              "$ref": "#/$defs/nullableNumber"
+            },
+            "as_of": {
+              "$ref": "#/$defs/nullableString"
+            }
+          }
+        },
+        "key_arguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/argument"
+          }
+        },
+        "counter_evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/argument"
+          }
+        },
+        "catalysts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "event",
+              "expected_window",
+              "observable_signal"
+            ],
+            "properties": {
+              "event": {
+                "type": "string",
+                "minLength": 1
+              },
+              "expected_window": {
+                "type": "string",
+                "minLength": 1
+              },
+              "observable_signal": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "monitoring_items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "item",
+              "trigger",
+              "response"
+            ],
+            "properties": {
+              "item": {
+                "type": "string",
+                "minLength": 1
+              },
+              "trigger": {
+                "type": "string",
+                "minLength": 1
+              },
+              "response": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "fundPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "comparison_scope",
+        "candidates",
+        "recommendations",
+        "decision_band",
+        "constraints"
+      ],
+      "properties": {
+        "comparison_scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "candidates": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "symbol",
+              "name",
+              "exposure_fit",
+              "structural_risks",
+              "cost_summary",
+              "liquidity_summary",
+              "performance_summary"
+            ],
+            "properties": {
+              "symbol": {
+                "type": "string",
+                "minLength": 1
+              },
+              "name": {
+                "$ref": "#/$defs/nullableString"
+              },
+              "exposure_fit": {
+                "type": "string",
+                "minLength": 1
+              },
+              "structural_risks": {
+                "$ref": "#/$defs/stringList"
+              },
+              "cost_summary": {
+                "type": "string",
+                "minLength": 1
+              },
+              "liquidity_summary": {
+                "type": "string",
+                "minLength": 1
+              },
+              "performance_summary": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "recommendations": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "overall",
+            "lowest_cost",
+            "strongest_structure"
+          ],
+          "properties": {
+            "overall": {
+              "$ref": "#/$defs/nullableString"
+            },
+            "lowest_cost": {
+              "$ref": "#/$defs/nullableString"
+            },
+            "strongest_structure": {
+              "$ref": "#/$defs/nullableString"
+            }
+          }
+        },
+        "decision_band": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "add",
+            "initiate",
+            "hold",
+            "watch",
+            "avoid",
+            null
+          ]
+        },
+        "constraints": {
+          "$ref": "#/$defs/stringList"
+        }
+      }
+    },
+    "optionsPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "underlying_view",
+        "volatility_regime",
+        "recommended_strategy",
+        "alternatives",
+        "scenario_results",
+        "management_rules",
+        "roll_conditions",
+        "no_trade_conditions"
+      ],
+      "properties": {
+        "underlying_view": {
+          "type": "string",
+          "minLength": 1
+        },
+        "volatility_regime": {
+          "enum": [
+            "low",
+            "normal",
+            "high",
+            "event_driven",
+            "unknown"
+          ]
+        },
+        "recommended_strategy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "structure",
+            "legs",
+            "currency",
+            "net_premium",
+            "premium_convention",
+            "max_profit",
+            "max_loss",
+            "breakevens",
+            "margin_or_capital"
+          ],
+          "properties": {
+            "structure": {
+              "type": "string",
+              "minLength": 1
+            },
+            "legs": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "side",
+                  "option_type",
+                  "quantity",
+                  "strike",
+                  "expiration",
+                  "premium"
+                ],
+                "properties": {
+                  "side": {
+                    "enum": [
+                      "long",
+                      "short"
+                    ]
+                  },
+                  "option_type": {
+                    "enum": [
+                      "call",
+                      "put"
+                    ]
+                  },
+                  "quantity": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "strike": {
+                    "$ref": "#/$defs/nullableNumber"
+                  },
+                  "expiration": {
+                    "$ref": "#/$defs/nullableString"
+                  },
+                  "premium": {
+                    "$ref": "#/$defs/nullableNumber"
+                  }
+                }
+              }
+            },
+            "currency": {
+              "type": "string",
+              "minLength": 3
+            },
+            "net_premium": {
+              "$ref": "#/$defs/nullableNumber"
+            },
+            "premium_convention": {
+              "enum": [
+                "debit_positive",
+                "credit_positive"
+              ]
+            },
+            "max_profit": {
+              "$ref": "#/$defs/nullableNumber"
+            },
+            "max_loss": {
+              "$ref": "#/$defs/nullableNumber"
+            },
+            "breakevens": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "margin_or_capital": {
+              "$ref": "#/$defs/nullableNumber"
+            }
+          }
+        },
+        "alternatives": {
+          "$ref": "#/$defs/stringList"
+        },
+        "scenario_results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "scenario",
+              "underlying_price",
+              "pnl",
+              "unit"
+            ],
+            "properties": {
+              "scenario": {
+                "type": "string",
+                "minLength": 1
+              },
+              "underlying_price": {
+                "$ref": "#/$defs/nullableNumber"
+              },
+              "pnl": {
+                "$ref": "#/$defs/nullableNumber"
+              },
+              "unit": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "management_rules": {
+          "$ref": "#/$defs/stringList"
+        },
+        "roll_conditions": {
+          "$ref": "#/$defs/stringList"
+        },
+        "no_trade_conditions": {
+          "$ref": "#/$defs/stringList"
+        }
+      }
+    },
+    "cryptoSignal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "value",
+        "interpretation",
+        "as_of",
+        "source_refs"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "type": [
+            "number",
+            "string",
+            "null"
+          ]
+        },
+        "interpretation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "as_of": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "source_refs": {
+          "$ref": "#/$defs/stringList"
+        }
+      }
+    },
+    "cryptoPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assets",
+        "market_context",
+        "structure",
+        "derivatives_signals",
+        "onchain_signals",
+        "strategy_candidates",
+        "position_risk",
+        "lp_analysis",
+        "fact_check"
+      ],
+      "properties": {
+        "assets": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "symbol",
+              "network",
+              "venue"
+            ],
+            "properties": {
+              "symbol": {
+                "type": "string",
+                "minLength": 1
+              },
+              "network": {
+                "$ref": "#/$defs/nullableString"
+              },
+              "venue": {
+                "$ref": "#/$defs/nullableString"
+              }
+            }
+          }
+        },
+        "market_context": {
+          "type": "string",
+          "minLength": 1
+        },
+        "structure": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "trend",
+            "key_levels",
+            "liquidity_zones"
+          ],
+          "properties": {
+            "trend": {
+              "enum": [
+                "up",
+                "down",
+                "range",
+                "mixed",
+                "unknown"
+              ]
+            },
+            "key_levels": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "price",
+                  "rationale"
+                ],
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "support",
+                      "resistance",
+                      "pivot",
+                      "liquidation"
+                    ]
+                  },
+                  "price": {
+                    "$ref": "#/$defs/nullableNumber"
+                  },
+                  "rationale": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            },
+            "liquidity_zones": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "lower",
+                  "upper",
+                  "interpretation"
+                ],
+                "properties": {
+                  "lower": {
+                    "$ref": "#/$defs/nullableNumber"
+                  },
+                  "upper": {
+                    "$ref": "#/$defs/nullableNumber"
+                  },
+                  "interpretation": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "derivatives_signals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/cryptoSignal"
+          }
+        },
+        "onchain_signals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/cryptoSignal"
+          }
+        },
+        "strategy_candidates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "setup",
+              "entry_condition",
+              "invalidation",
+              "risk"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "setup": {
+                "type": "string",
+                "minLength": 1
+              },
+              "entry_condition": {
+                "type": "string",
+                "minLength": 1
+              },
+              "invalidation": {
+                "type": "string",
+                "minLength": 1
+              },
+              "risk": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "position_risk": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "lp_analysis": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "fact_check": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "evidence_refs"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "verified",
+                "contradicted",
+                "unverified",
+                "not_applicable"
+              ]
+            },
+            "evidence_refs": {
+              "$ref": "#/$defs/stringList"
+            }
+          }
+        }
+      }
+    },
+    "portfolioAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "instrument",
+        "action",
+        "current_weight",
+        "target_weight",
+        "rationale",
+        "priority"
+      ],
+      "properties": {
+        "instrument": {
+          "type": "string",
+          "minLength": 1
+        },
+        "action": {
+          "enum": [
+            "add",
+            "reduce",
+            "exit",
+            "hold",
+            "hedge",
+            "review"
+          ]
+        },
+        "current_weight": {
+          "$ref": "#/$defs/nullableNumber"
+        },
+        "target_weight": {
+          "$ref": "#/$defs/nullableNumber"
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "priority": {
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        }
+      }
+    },
+    "portfolioPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "portfolio_summary",
+        "constraint_status",
+        "risk_metrics",
+        "concentration_exposures",
+        "research_conflicts",
+        "recommended_actions",
+        "allocation_scenarios",
+        "post_trade_comparison",
+        "monitoring_triggers"
+      ],
+      "properties": {
+        "portfolio_summary": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "currency",
+            "nav",
+            "holdings_count",
+            "cash_weight"
+          ],
+          "properties": {
+            "currency": {
+              "type": "string",
+              "minLength": 3
+            },
+            "nav": {
+              "$ref": "#/$defs/nullableNumber"
+            },
+            "holdings_count": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "cash_weight": {
+              "$ref": "#/$defs/nullableNumber"
+            }
+          }
+        },
+        "constraint_status": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "constraint",
+              "status",
+              "evidence"
+            ],
+            "properties": {
+              "constraint": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "enum": [
+                  "met",
+                  "breached",
+                  "unknown"
+                ]
+              },
+              "evidence": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "risk_metrics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/metric"
+          }
+        },
+        "concentration_exposures": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "dimension",
+              "name",
+              "weight",
+              "limit",
+              "status"
+            ],
+            "properties": {
+              "dimension": {
+                "type": "string",
+                "minLength": 1
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "weight": {
+                "$ref": "#/$defs/nullableNumber"
+              },
+              "limit": {
+                "$ref": "#/$defs/nullableNumber"
+              },
+              "status": {
+                "enum": [
+                  "within_limit",
+                  "near_limit",
+                  "breached",
+                  "unknown"
+                ]
+              }
+            }
+          }
+        },
+        "research_conflicts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "instrument",
+              "conflict",
+              "resolution"
+            ],
+            "properties": {
+              "instrument": {
+                "type": "string",
+                "minLength": 1
+              },
+              "conflict": {
+                "type": "string",
+                "minLength": 1
+              },
+              "resolution": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "recommended_actions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "primary",
+            "alternatives",
+            "do_not_do"
+          ],
+          "properties": {
+            "primary": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/portfolioAction"
+              }
+            },
+            "alternatives": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/portfolioAction"
+              }
+            },
+            "do_not_do": {
+              "$ref": "#/$defs/stringList"
+            }
+          }
+        },
+        "allocation_scenarios": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "assumptions",
+              "target_weights",
+              "expected_effect"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "assumptions": {
+                "$ref": "#/$defs/stringList"
+              },
+              "target_weights": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "number"
+                }
+              },
+              "expected_effect": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "post_trade_comparison": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "metric",
+              "before",
+              "after",
+              "unit",
+              "status"
+            ],
+            "properties": {
+              "metric": {
+                "type": "string",
+                "minLength": 1
+              },
+              "before": {
+                "$ref": "#/$defs/nullableNumber"
+              },
+              "after": {
+                "$ref": "#/$defs/nullableNumber"
+              },
+              "unit": {
+                "type": "string"
+              },
+              "status": {
+                "enum": [
+                  "improved",
+                  "unchanged",
+                  "worsened",
+                  "unknown"
+                ]
+              }
+            }
+          }
+        },
+        "monitoring_triggers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "trigger",
+              "threshold",
+              "response"
+            ],
+            "properties": {
+              "trigger": {
+                "type": "string",
+                "minLength": 1
+              },
+              "threshold": {
+                "type": "string",
+                "minLength": 1
+              },
+              "response": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "quantPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "strategy_spec",
+        "data_manifest",
+        "benchmark",
+        "performance_metrics",
+        "robustness_tests",
+        "parameter_results",
+        "trade_log_path",
+        "script_path",
+        "chart_paths",
+        "validation_status",
+        "failure_reasons"
+      ],
+      "properties": {
+        "strategy_spec": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "universe",
+            "frequency",
+            "signal",
+            "entry_rule",
+            "exit_rule",
+            "sizing_rule",
+            "risk_rule"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "universe": {
+              "$ref": "#/$defs/stringList"
+            },
+            "frequency": {
+              "type": "string",
+              "minLength": 1
+            },
+            "signal": {
+              "type": "string",
+              "minLength": 1
+            },
+            "entry_rule": {
+              "type": "string",
+              "minLength": 1
+            },
+            "exit_rule": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sizing_rule": {
+              "type": "string",
+              "minLength": 1
+            },
+            "risk_rule": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "data_manifest": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "start",
+            "end",
+            "frequency",
+            "adjustment",
+            "timezone",
+            "sources"
+          ],
+          "properties": {
+            "start": {
+              "type": "string",
+              "minLength": 1
+            },
+            "end": {
+              "type": "string",
+              "minLength": 1
+            },
+            "frequency": {
+              "type": "string",
+              "minLength": 1
+            },
+            "adjustment": {
+              "type": "string",
+              "minLength": 1
+            },
+            "timezone": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sources": {
+              "$ref": "#/$defs/stringList"
+            }
+          }
+        },
+        "benchmark": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "performance_metrics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/metric"
+          }
+        },
+        "robustness_tests": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "method",
+              "result",
+              "status"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "method": {
+                "type": "string",
+                "minLength": 1
+              },
+              "result": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "enum": [
+                  "passed",
+                  "failed",
+                  "inconclusive"
+                ]
+              }
+            }
+          }
+        },
+        "parameter_results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "parameters",
+              "in_sample",
+              "out_of_sample",
+              "selected"
+            ],
+            "properties": {
+              "parameters": {
+                "type": "object"
+              },
+              "in_sample": {
+                "type": "object"
+              },
+              "out_of_sample": {
+                "type": "object"
+              },
+              "selected": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "trade_log_path": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "script_path": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "chart_paths": {
+          "$ref": "#/$defs/stringList"
+        },
+        "validation_status": {
+          "enum": [
+            "validated",
+            "provisional",
+            "failed"
+          ]
+        },
+        "failure_reasons": {
+          "$ref": "#/$defs/stringList"
+        }
+      }
+    },
+    "tradePayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "signal_card",
+        "order_plan",
+        "plan_checks",
+        "simulation",
+        "user_action_steps",
+        "manual_execution_notice",
+        "transaction_request_disposition",
+        "errors"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "analysis",
+            "paper",
+            "manual_plan"
+          ]
+        },
+        "signal_card": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "instrument",
+            "direction",
+            "entry_condition",
+            "stop_condition",
+            "take_profit_condition",
+            "horizon",
+            "invalidation"
+          ],
+          "properties": {
+            "instrument": {
+              "type": "string",
+              "minLength": 1
+            },
+            "direction": {
+              "enum": [
+                "long",
+                "short",
+                "flat",
+                "conditional"
+              ]
+            },
+            "entry_condition": {
+              "type": "string",
+              "minLength": 1
+            },
+            "stop_condition": {
+              "type": "string",
+              "minLength": 1
+            },
+            "take_profit_condition": {
+              "type": "string",
+              "minLength": 1
+            },
+            "horizon": {
+              "type": "string",
+              "minLength": 1
+            },
+            "invalidation": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "order_plan": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "manual_intent",
+                "status",
+                "instrument",
+                "side",
+                "order_type",
+                "quantity",
+                "quantity_unit",
+                "limit_price",
+                "stop_price",
+                "time_in_force",
+                "expiry",
+                "risk_budget",
+                "estimated_notional",
+                "currency",
+                "estimated_fees",
+                "maximum_modeled_loss",
+                "platform_verification_required"
+              ],
+              "properties": {
+                "manual_intent": {
+                  "enum": [
+                    "new_order_plan",
+                    "revision_plan",
+                    "cancellation_instructions"
+                  ]
+                },
+                "status": {
+                  "const": "proposed_unsubmitted"
+                },
+                "instrument": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "side": {
+                  "enum": [
+                    "buy",
+                    "sell",
+                    null
+                  ]
+                },
+                "order_type": {
+                  "enum": [
+                    "market",
+                    "limit",
+                    "stop",
+                    "stop_limit",
+                    "other",
+                    null
+                  ]
+                },
+                "quantity": {
+                  "$ref": "#/$defs/nullableNumber"
+                },
+                "quantity_unit": {
+                  "enum": [
+                    "shares",
+                    "contracts",
+                    "units",
+                    "notional",
+                    "other",
+                    null
+                  ]
+                },
+                "limit_price": {
+                  "$ref": "#/$defs/nullableNumber"
+                },
+                "stop_price": {
+                  "$ref": "#/$defs/nullableNumber"
+                },
+                "time_in_force": {
+                  "$ref": "#/$defs/nullableString"
+                },
+                "expiry": {
+                  "$ref": "#/$defs/nullableString"
+                },
+                "risk_budget": {
+                  "$ref": "#/$defs/nullableNumber"
+                },
+                "estimated_notional": {
+                  "$ref": "#/$defs/nullableNumber"
+                },
+                "currency": {
+                  "$ref": "#/$defs/nullableString"
+                },
+                "estimated_fees": {
+                  "$ref": "#/$defs/nullableNumber"
+                },
+                "maximum_modeled_loss": {
+                  "$ref": "#/$defs/nullableNumber"
+                },
+                "platform_verification_required": {
+                  "const": true
+                }
+              }
+            }
+          ]
+        },
+        "plan_checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "status",
+              "evidence"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "enum": [
+                  "passed",
+                  "failed",
+                  "user_verification_required",
+                  "not_applicable"
+                ]
+              },
+              "evidence": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "simulation": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "assumptions",
+                "modeled_outcome",
+                "estimated_costs",
+                "maximum_modeled_loss"
+              ],
+              "properties": {
+                "assumptions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "modeled_outcome": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "estimated_costs": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "maximum_modeled_loss": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          ]
+        },
+        "user_action_steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "manual_execution_notice": {
+          "const": "The SKILL did not and cannot perform this financial transaction. This capability limit applies only to the SKILL and the tools or agents operating within it; it does not restrict the user's independent activity outside the SKILL. If the user chooses to transact, they may do so independently on the relevant platform."
+        },
+        "transaction_request_disposition": {
+          "enum": [
+            "no_transaction_requested",
+            "redirected_to_manual_plan"
+          ]
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "code",
+              "message",
+              "remediation"
+            ],
+            "properties": {
+              "code": {
+                "type": "string",
+                "minLength": 1
+              },
+              "message": {
+                "type": "string",
+                "minLength": 1
+              },
+              "remediation": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "transaction_request_disposition": {
+                "const": "redirected_to_manual_plan"
+              }
+            },
+            "required": [
+              "transaction_request_disposition"
+            ]
+          },
+          "then": {
+            "properties": {
+              "mode": {
+                "const": "manual_plan"
+              },
+              "user_action_steps": {
+                "minItems": 3
+              },
+              "plan_checks": {
+                "contains": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "const": "user_verification_required"
+                    }
+                  },
+                  "required": [
+                    "status"
+                  ]
+                },
+                "minContains": 1
+              }
+            },
+            "anyOf": [
+              {
+                "properties": {
+                  "order_plan": {
+                    "type": "object"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "errors": {
+                    "minItems": 1
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "materialsReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_type",
+        "materials_reviewed",
+        "verified_fact_refs",
+        "scorecard",
+        "inconsistencies",
+        "red_flags",
+        "open_questions",
+        "deliverables",
+        "publication_status"
+      ],
+      "properties": {
+        "task_type": {
+          "enum": [
+            "deal-screening-scorecard",
+            "pre-ic-consistency-review",
+            "meeting-minutes"
+          ]
+        },
+        "materials_reviewed": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "source_ref",
+              "role",
+              "version_or_date"
+            ],
+            "properties": {
+              "source_ref": {
+                "type": "string",
+                "minLength": 1
+              },
+              "role": {
+                "type": "string",
+                "minLength": 1
+              },
+              "version_or_date": {
+                "$ref": "#/$defs/nullableString"
+              }
+            }
+          }
+        },
+        "verified_fact_refs": {
+          "$ref": "#/$defs/stringList"
+        },
+        "scorecard": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "inconsistencies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "topic",
+              "sources",
+              "description",
+              "severity",
+              "recommended_resolution"
+            ],
+            "properties": {
+              "topic": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sources": {
+                "$ref": "#/$defs/stringList"
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1
+              },
+              "severity": {
+                "enum": [
+                  "critical",
+                  "high",
+                  "medium",
+                  "low"
+                ]
+              },
+              "recommended_resolution": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "red_flags": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "flag",
+              "evidence_refs",
+              "impact",
+              "status"
+            ],
+            "properties": {
+              "flag": {
+                "type": "string",
+                "minLength": 1
+              },
+              "evidence_refs": {
+                "$ref": "#/$defs/stringList"
+              },
+              "impact": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "enum": [
+                  "open",
+                  "mitigated",
+                  "resolved",
+                  "unverified"
+                ]
+              }
+            }
+          }
+        },
+        "open_questions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "question",
+              "owner",
+              "due",
+              "priority"
+            ],
+            "properties": {
+              "question": {
+                "type": "string",
+                "minLength": 1
+              },
+              "owner": {
+                "$ref": "#/$defs/nullableString"
+              },
+              "due": {
+                "$ref": "#/$defs/nullableString"
+              },
+              "priority": {
+                "enum": [
+                  "high",
+                  "medium",
+                  "low"
+                ]
+              }
+            }
+          }
+        },
+        "deliverables": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "format",
+              "path",
+              "status"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "format": {
+                "enum": [
+                  "markdown",
+                  "json",
+                  "yaml",
+                  "csv",
+                  "xlsx",
+                  "png",
+                  "html",
+                  "pptx"
+                ]
+              },
+              "path": {
+                "$ref": "#/$defs/nullableString"
+              },
+              "status": {
+                "enum": [
+                  "planned",
+                  "draft",
+                  "ready",
+                  "blocked"
+                ]
+              }
+            }
+          }
+        },
+        "publication_status": {
+          "enum": [
+            "draft",
+            "approved",
+            "not_applicable"
+          ]
+        }
+      }
+    },
+    "corporateEntityCard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "legal_name",
+        "aliases",
+        "ticker",
+        "exchange",
+        "country",
+        "industry",
+        "currency",
+        "fiscal_year_end",
+        "reporting_standard",
+        "period_basis",
+        "valuation_date",
+        "transaction_context"
+      ],
+      "properties": {
+        "legal_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aliases": {
+          "$ref": "#/$defs/stringList"
+        },
+        "ticker": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "exchange": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "country": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "industry": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "currency": {
+          "type": "string",
+          "minLength": 3
+        },
+        "fiscal_year_end": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "reporting_standard": {
+          "enum": [
+            "GAAP",
+            "IFRS",
+            "local",
+            "mixed",
+            "unknown"
+          ]
+        },
+        "period_basis": {
+          "enum": [
+            "FY",
+            "LTM",
+            "NTM",
+            "quarterly",
+            "mixed",
+            "unknown"
+          ]
+        },
+        "valuation_date": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "transaction_context": {
+          "$ref": "#/$defs/nullableString"
+        }
+      }
+    },
+    "corporateTaskResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_id",
+        "status",
+        "summary",
+        "key_outputs",
+        "open_items",
+        "source_refs",
+        "artifact_refs"
+      ],
+      "properties": {
+        "task_id": {
+          "$ref": "#/$defs/corporateFinanceTaskId"
+        },
+        "status": {
+          "enum": [
+            "complete",
+            "provisional",
+            "blocked",
+            "failed"
+          ]
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "key_outputs": {
+          "type": "object"
+        },
+        "open_items": {
+          "$ref": "#/$defs/stringList"
+        },
+        "source_refs": {
+          "$ref": "#/$defs/stringList"
+        },
+        "artifact_refs": {
+          "$ref": "#/$defs/stringList"
+        }
+      }
+    },
+    "modelCheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "status",
+        "evidence",
+        "impact"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "passed",
+            "failed",
+            "warning",
+            "not_applicable"
+          ]
+        },
+        "evidence": {
+          "type": "string",
+          "minLength": 1
+        },
+        "impact": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "corporateDeliverable": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "deliverable_type",
+        "format",
+        "path",
+        "status",
+        "task_ids",
+        "sensitivity"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "deliverable_type": {
+          "enum": [
+            "analysis",
+            "model",
+            "workbook",
+            "memo",
+            "report",
+            "presentation",
+            "data_book",
+            "checklist",
+            "tracker",
+            "other"
+          ]
+        },
+        "format": {
+          "enum": [
+            "markdown",
+            "json",
+            "yaml",
+            "csv",
+            "xlsx",
+            "png",
+            "html",
+            "pptx",
+            "python",
+            "docx",
+            "pdf",
+            "txt"
+          ]
+        },
+        "path": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "status": {
+          "enum": [
+            "planned",
+            "draft",
+            "ready",
+            "blocked"
+          ]
+        },
+        "task_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/corporateFinanceTaskId"
+          }
+        },
+        "sensitivity": {
+          "enum": [
+            "public",
+            "internal",
+            "confidential",
+            "restricted"
+          ]
+        }
+      }
+    },
+    "corporateReviewStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "financial_integrity",
+        "period_consistency",
+        "source_traceability",
+        "format_quality",
+        "overall",
+        "reviewer_notes"
+      ],
+      "properties": {
+        "financial_integrity": {
+          "enum": [
+            "passed",
+            "failed",
+            "warning",
+            "not_run"
+          ]
+        },
+        "period_consistency": {
+          "enum": [
+            "passed",
+            "failed",
+            "warning",
+            "not_run"
+          ]
+        },
+        "source_traceability": {
+          "enum": [
+            "passed",
+            "failed",
+            "warning",
+            "not_run"
+          ]
+        },
+        "format_quality": {
+          "enum": [
+            "passed",
+            "failed",
+            "warning",
+            "not_run"
+          ]
+        },
+        "overall": {
+          "enum": [
+            "ready",
+            "provisional",
+            "blocked",
+            "failed"
+          ]
+        },
+        "reviewer_notes": {
+          "$ref": "#/$defs/stringList"
+        }
+      }
+    },
+    "corporateFinancePayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scope",
+        "decision_context",
+        "entity_card",
+        "specialist_tasks",
+        "task_results",
+        "model_checks",
+        "deliverables",
+        "review_status",
+        "scope_limitations"
+      ],
+      "properties": {
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "decision_context": {
+          "enum": [
+            "market_research",
+            "company_analysis",
+            "valuation",
+            "financial_modeling",
+            "transaction_analysis",
+            "due_diligence",
+            "investment_committee",
+            "deal_marketing",
+            "credit_analysis",
+            "other"
+          ]
+        },
+        "entity_card": {
+          "$ref": "#/$defs/corporateEntityCard"
+        },
+        "specialist_tasks": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/corporateFinanceTaskId"
+          }
+        },
+        "task_results": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/corporateTaskResult"
+          }
+        },
+        "model_checks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/modelCheck"
+          }
+        },
+        "deliverables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/corporateDeliverable"
+          }
+        },
+        "review_status": {
+          "$ref": "#/$defs/corporateReviewStatus"
+        },
+        "scope_limitations": {
+          "$ref": "#/$defs/stringList"
+        },
+        "materials_review": {
+          "description": "Optional evidence-processing payload for existing-material tasks (deal-screening-scorecard, pre-ic-consistency-review, meeting-minutes), migrated from schema 1.0 irPayload.",
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/materialsReview"
+            }
+          ]
+        }
+      }
+    },
+    "corporateFinanceTaskId": {
+      "enum": [
+        "industry-primer",
+        "tam-top-down",
+        "tam-bottom-up",
+        "market-map",
+        "earnings-update",
+        "public-information-book",
+        "adverse-media-screen",
+        "private-company-screening",
+        "ai-disruption-assessment",
+        "deal-teaser",
+        "cim-executive-summary",
+        "buyer-list-development",
+        "cross-holder-analysis",
+        "initiating-coverage-report",
+        "business-quality-scorecard",
+        "project-overview",
+        "ecm-company-profile",
+        "research-materials-pack",
+        "dd-request-list",
+        "dd-tracker",
+        "vdr-gap-analysis",
+        "buy-side-qoe-review",
+        "revenue-data-cleanup-audit",
+        "customer-level-revenue-analytics",
+        "retention-cohort-analysis",
+        "management-meeting-questions",
+        "expert-call-guide",
+        "credit-agreement-summary",
+        "deal-screening-scorecard",
+        "pre-ic-consistency-review",
+        "meeting-minutes",
+        "three-statement-model",
+        "merger-model",
+        "synergy-analysis",
+        "ipo-model",
+        "model-audit",
+        "live-model-editing",
+        "lbo-model",
+        "lbo-debt-schedule",
+        "sources-and-uses",
+        "structured-equity-modeling",
+        "earnout-modeling",
+        "bolt-on-acquisition-modeling",
+        "dividend-recap-modeling",
+        "sale-leaseback-modeling",
+        "irr-attribution",
+        "value-creation-bridge",
+        "liquidation-waterfall",
+        "mip-modeling",
+        "dcf-model",
+        "public-comps",
+        "precedent-transactions",
+        "sotp-valuation",
+        "fully-diluted-share-count"
+      ]
+    }
+  }
+}

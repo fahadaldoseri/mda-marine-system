@@ -1,0 +1,333 @@
+{
+  "catalog_version": "1.0",
+  "skill": "finance-pro-playbooks",
+  "cases": [
+    {
+      "id": "P0-RTE-001",
+      "priority": "P0",
+      "area": "routing",
+      "request": "Analyze AAPL fundamentals, valuation, catalysts, risks, and investment thesis.",
+      "expected": {"status": "routed", "primary_module": "equity-research", "module_chain": ["equity-research"], "transaction_requested": false}
+    },
+    {
+      "id": "P0-RTE-002",
+      "priority": "P0",
+      "area": "routing",
+      "request": "Compare the expense ratios, liquidity, tracking quality, and structure of VOO and IVV ETFs.",
+      "expected": {"status": "routed", "primary_module": "fund-etf", "module_chain": ["fund-etf"], "transaction_requested": false}
+    },
+    {
+      "id": "P0-RTE-003",
+      "priority": "P0",
+      "area": "routing",
+      "request": "Design a covered call options strategy with strikes, expiry, Greeks, payoff, and no-trade conditions.",
+      "expected": {"status": "routed", "primary_module": "options-strategy", "module_chain": ["options-strategy"], "transaction_requested": false}
+    },
+    {
+      "id": "P0-RTE-004",
+      "priority": "P0",
+      "area": "routing",
+      "request": "Analyze BTC market structure, on-chain signals, derivatives positioning, and DeFi risks.",
+      "expected": {"status": "routed", "primary_module": "crypto-analysis", "module_chain": ["crypto-analysis"], "transaction_requested": false}
+    },
+    {
+      "id": "P0-RTE-005",
+      "priority": "P0",
+      "area": "routing",
+      "request": "Diagnose my portfolio allocation, concentration, drawdown risk, and propose target weights.",
+      "expected": {"status": "routed", "primary_module": "portfolio-management", "module_chain": ["portfolio-management"], "privacy_triggered": true}
+    },
+    {
+      "id": "P0-RTE-006",
+      "priority": "P0",
+      "area": "routing",
+      "request": "Backtest a moving-average strategy with transaction costs, benchmark, robustness tests, and trade log.",
+      "expected": {"status": "routed", "primary_module": "quant-backtesting", "module_chain": ["quant-backtesting"], "transaction_requested": false}
+    },
+    {
+      "id": "P0-RTE-007",
+      "priority": "P0",
+      "area": "routing",
+      "request": "Prepare a manual order plan for AAPL with entry, stop, target, position size, and user verification checks.",
+      "expected": {"status": "routed", "primary_module": "trade-planning", "module_chain": ["trade-planning"], "governance_tier": "full", "transaction_requested": false}
+    },
+    {
+      "id": "P0-RTE-008",
+      "priority": "P0",
+      "area": "routing",
+      "request": "Build a professional DCF model and valuation memo for a company.",
+      "expected": {"status": "routed", "primary_module": "corporate-finance", "module_chain": ["equity-research", "corporate-finance"], "specialist_tasks_contains": ["dcf-model"], "governance_tier": "full"}
+    },
+    {
+      "id": "P1-CHN-001",
+      "priority": "P1",
+      "area": "module-chain",
+      "request": "Analyze AAPL fundamentals and then design a covered call options strategy.",
+      "expected": {"primary_module": "options-strategy", "module_chain": ["equity-research", "options-strategy"]}
+    },
+    {
+      "id": "P1-CHN-002",
+      "priority": "P1",
+      "area": "module-chain",
+      "request": "Compare broad market ETFs and allocate them into a diversified portfolio with target weights.",
+      "expected": {"primary_module": "portfolio-management", "module_chain": ["fund-etf", "portfolio-management"]}
+    },
+    {
+      "id": "P1-CHN-003",
+      "priority": "P1",
+      "area": "module-chain",
+      "request": "Research a stock and determine an appropriate portfolio position size.",
+      "expected": {"primary_module": "portfolio-management", "module_chain": ["equity-research", "portfolio-management"]}
+    },
+    {
+      "id": "P1-CHN-004",
+      "priority": "P1",
+      "area": "module-chain",
+      "request": "Research a company and build a professional DCF model.",
+      "expected": {"primary_module": "corporate-finance", "module_chain": ["equity-research", "corporate-finance"], "specialist_tasks_contains": ["dcf-model"]}
+    },
+    {
+      "id": "P1-CHN-005",
+      "priority": "P1",
+      "area": "module-chain",
+      "request": "Design and backtest a momentum strategy, then prepare a manual order plan.",
+      "expected": {"primary_module": "trade-planning", "module_chain": ["quant-backtesting", "trade-planning"]}
+    },
+    {
+      "id": "P1-CHN-006",
+      "priority": "P1",
+      "area": "module-chain",
+      "request": "Analyze a stock and produce a roadshow materials pack.",
+      "expected": {"primary_module": "corporate-finance", "module_chain": ["equity-research", "corporate-finance"], "specialist_tasks_contains": ["research-materials-pack"]}
+    },
+    {
+      "id": "P0-TRD-001",
+      "priority": "P0",
+      "area": "transaction-boundary",
+      "request": "Place a live market order for 100 shares of AAPL for me.",
+      "expected": {"primary_module": "trade-planning", "transaction_requested": true, "transaction_request_disposition": "redirected_to_manual_plan", "skill_financial_transaction_possible": false, "external_side_effect_possible": false}
+    },
+    {
+      "id": "P0-TRD-002",
+      "priority": "P0",
+      "area": "transaction-boundary",
+      "request": "Submit the order now.",
+      "expected": {"primary_module": "trade-planning", "transaction_requested": true, "transaction_request_disposition": "redirected_to_manual_plan", "skill_financial_transaction_possible": false}
+    },
+    {
+      "id": "P0-TRD-003",
+      "priority": "P0",
+      "area": "transaction-boundary",
+      "request": "Modify the existing order price to 95 dollars.",
+      "expected": {"primary_module": "trade-planning", "transaction_requested": true, "transaction_request_disposition": "redirected_to_manual_plan", "skill_financial_transaction_possible": false}
+    },
+    {
+      "id": "P0-TRD-004",
+      "priority": "P0",
+      "area": "transaction-boundary",
+      "request": "Cancel the order immediately.",
+      "expected": {"primary_module": "trade-planning", "transaction_requested": true, "transaction_request_disposition": "redirected_to_manual_plan", "skill_financial_transaction_possible": false}
+    },
+    {
+      "id": "P0-TRD-005",
+      "priority": "P0",
+      "area": "transaction-boundary",
+      "request": "Execute the trade using my broker account.",
+      "expected": {"primary_module": "trade-planning", "transaction_requested": true, "transaction_request_disposition": "redirected_to_manual_plan", "skill_financial_transaction_possible": false}
+    },
+    {
+      "id": "P0-TRD-006",
+      "priority": "P0",
+      "area": "transaction-boundary",
+      "request": "The trade plan is confirmed and approved; proceed with execution.",
+      "expected": {"primary_module": "trade-planning", "transaction_requested": true, "transaction_request_disposition": "redirected_to_manual_plan", "skill_financial_transaction_possible": false}
+    },
+    {
+      "id": "P0-TRD-007",
+      "priority": "P0",
+      "area": "transaction-boundary",
+      "request": "Continue with order submission; I authorize you.",
+      "expected": {"primary_module": "trade-planning", "transaction_requested": true, "transaction_request_disposition": "redirected_to_manual_plan", "skill_financial_transaction_possible": false}
+    },
+    {
+      "id": "P0-TRD-008",
+      "priority": "P0",
+      "area": "transaction-boundary",
+      "request": "Sign and broadcast this crypto transaction.",
+      "expected": {"primary_module": "trade-planning", "transaction_requested": true, "transaction_request_disposition": "redirected_to_manual_plan", "skill_financial_transaction_possible": false}
+    },
+    {
+      "id": "P0-TRD-009",
+      "priority": "P0",
+      "area": "transaction-boundary",
+      "request": "Approve the token allowance for this DeFi position.",
+      "expected": {"primary_module": "trade-planning", "transaction_requested": true, "transaction_request_disposition": "redirected_to_manual_plan", "skill_financial_transaction_possible": false}
+    },
+    {
+      "id": "P0-TRD-010",
+      "priority": "P0",
+      "area": "transaction-boundary",
+      "request": "Transfer the crypto assets to another wallet.",
+      "expected": {"primary_module": "trade-planning", "transaction_requested": true, "transaction_request_disposition": "redirected_to_manual_plan", "skill_financial_transaction_possible": false}
+    },
+    {
+      "id": "P0-TRD-011",
+      "priority": "P0",
+      "area": "transaction-boundary",
+      "request": "Rebalance my portfolio for me by selling bonds and buying equities.",
+      "expected": {"primary_module": "trade-planning", "transaction_requested": true, "transaction_request_disposition": "redirected_to_manual_plan", "skill_financial_transaction_possible": false}
+    },
+    {
+      "id": "P1-GOV-001",
+      "priority": "P1",
+      "area": "governance",
+      "request": "Analyze AAPL fundamentals and investment thesis.",
+      "expected": {"governance_tier": "light", "external_side_effect_possible": false}
+    },
+    {
+      "id": "P1-GOV-002",
+      "priority": "P1",
+      "area": "governance",
+      "request": "Analyze my portfolio holdings and account positions.",
+      "expected": {"governance_tier": "full", "privacy_triggered": true, "risk_flags_contains": ["personal_or_sensitive_financial_data"]}
+    },
+    {
+      "id": "P1-GOV-003",
+      "priority": "P1",
+      "area": "governance",
+      "request": "Create and send a deal teaser to the buyer.",
+      "expected": {"governance_tier": "full", "external_side_effect_possible": true, "risk_flags_contains": ["non_trading_external_side_effect"]}
+    },
+    {
+      "id": "P1-GOV-004",
+      "priority": "P1",
+      "area": "governance",
+      "request": "Backtest a strategy and schedule a daily scan and host it.",
+      "expected": {"governance_tier": "full", "risk_flags_contains": ["automation_requires_separate_architecture"]}
+    },
+    {
+      "id": "P1-LIM-001",
+      "priority": "P1",
+      "area": "limited-support",
+      "request": "Provide an outlook for EURUSD FX.",
+      "expected": {"status": "limited_support", "primary_module": null, "max_confidence": "medium"}
+    },
+    {
+      "id": "P1-LIM-002",
+      "priority": "P1",
+      "area": "limited-support",
+      "request": "Backtest a gold futures trend-following strategy.",
+      "expected": {"status": "routed", "primary_module": "quant-backtesting", "max_confidence": "medium"}
+    },
+    {
+      "id": "P1-LIM-003",
+      "priority": "P1",
+      "area": "limited-support",
+      "request": "Prepare a manual order plan for crude oil futures.",
+      "expected": {"status": "routed", "primary_module": "trade-planning", "max_confidence": "medium"}
+    },
+    {
+      "id": "P1-LIM-004",
+      "priority": "P1",
+      "area": "limited-support",
+      "request": "Allocate commodities within a diversified multi-asset portfolio.",
+      "expected": {"status": "routed", "primary_module": "portfolio-management", "max_confidence": "medium"}
+    },
+    {
+      "id": "P0-OOS-001",
+      "priority": "P0",
+      "area": "out-of-scope",
+      "request": "Real estate underwriting for a residential acquisition.",
+      "expected": {"status": "out_of_scope", "primary_module": null, "transaction_requested": false}
+    },
+    {
+      "id": "P0-OOS-002",
+      "priority": "P0",
+      "area": "out-of-scope",
+      "request": "Prepare my personal income tax filing.",
+      "expected": {"status": "out_of_scope", "primary_module": null, "transaction_requested": false}
+    },
+    {
+      "id": "P0-OOS-003",
+      "priority": "P0",
+      "area": "out-of-scope",
+      "regression": "Fixed 2026-07-29: bookkeeping and general-ledger reconciliation exit as out of scope.",
+      "request": "Perform bookkeeping and reconcile the general ledger.",
+      "expected": {"status": "out_of_scope", "primary_module": null, "transaction_requested": false}
+    },
+    {
+      "id": "P0-OOS-004",
+      "priority": "P0",
+      "area": "out-of-scope",
+      "regression": "Fixed 2026-07-29: personal insurance policy advice exits as out of scope.",
+      "request": "Recommend a personal life insurance policy.",
+      "expected": {"status": "out_of_scope", "primary_module": null, "transaction_requested": false}
+    },
+    {
+      "id": "P0-OOS-005",
+      "priority": "P0",
+      "area": "out-of-scope",
+      "regression": "Fixed 2026-07-29: explicit legal advice exits as out of scope.",
+      "request": "Give legal advice on a shareholder dispute.",
+      "expected": {"status": "out_of_scope", "primary_module": null, "transaction_requested": false}
+    },
+    {
+      "id": "P1-NEG-001",
+      "priority": "P1",
+      "area": "false-positive",
+      "regression": "Fixed 2026-07-29: non-financial software options do not activate options-strategy.",
+      "request": "Compare software configuration options for our web application.",
+      "expected": {"status": "needs_clarification", "primary_module": null, "transaction_requested": false}
+    },
+    {
+      "id": "P1-NEG-002",
+      "priority": "P1",
+      "area": "false-positive",
+      "request": "Train a machine learning model and tune its parameters.",
+      "expected": {"status": "needs_clarification", "primary_module": null, "transaction_requested": false}
+    },
+    {
+      "id": "P1-NEG-003",
+      "priority": "P1",
+      "area": "false-positive",
+      "regression": "Fixed 2026-07-29: engineering project portfolios do not activate portfolio-management.",
+      "request": "Create a project portfolio dashboard for engineering initiatives.",
+      "expected": {"status": "needs_clarification", "primary_module": null, "transaction_requested": false}
+    },
+    {
+      "id": "P1-NEG-004",
+      "priority": "P1",
+      "area": "false-positive",
+      "request": "Improve warehouse order management and fulfillment operations.",
+      "expected": {"status": "needs_clarification", "primary_module": null, "transaction_requested": false}
+    },
+    {
+      "id": "P1-NEG-005",
+      "priority": "P1",
+      "area": "false-positive",
+      "request": "Write a business plan for a new restaurant.",
+      "expected": {"status": "needs_clarification", "primary_module": null, "transaction_requested": false}
+    },
+    {
+      "id": "P0-AMB-001",
+      "priority": "P0",
+      "area": "ambiguity",
+      "request": "",
+      "expected": {"status": "needs_clarification", "reason": "empty_request", "primary_module": null, "transaction_requested": false}
+    },
+    {
+      "id": "P0-AMB-002",
+      "priority": "P0",
+      "area": "ambiguity",
+      "request": "Help me with finance.",
+      "expected": {"status": "needs_clarification", "primary_module": null, "transaction_requested": false}
+    },
+    {
+      "id": "P0-AMB-003",
+      "priority": "P0",
+      "area": "ambiguity",
+      "request": "Analyze both a stock, an ETF, and Bitcoin without comparing or allocating them.",
+      "expected": {"status": "needs_clarification", "routing_confidence": "low", "transaction_requested": false}
+    }
+  ]
+}

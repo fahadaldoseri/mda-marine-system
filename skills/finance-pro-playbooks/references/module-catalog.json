@@ -1,0 +1,442 @@
+{
+  "catalog_version": "1.2",
+  "description": "Single source of truth for framework module routing. scripts/route_request.py loads patterns, priority, ordering, and dependency declarations from this file; references/routing-catalog.md is the human-readable narrative of the same rules. Change this file first, then sync the narrative.",
+  "dependency_order": [
+    "equity-research",
+    "fund-etf",
+    "crypto-analysis",
+    "options-strategy",
+    "corporate-finance",
+    "quant-backtesting",
+    "portfolio-management",
+    "trade-planning"
+  ],
+  "primary_priority": [
+    "trade-planning",
+    "portfolio-management",
+    "quant-backtesting",
+    "options-strategy",
+    "corporate-finance",
+    "crypto-analysis",
+    "fund-etf",
+    "equity-research"
+  ],
+  "modules": {
+    "equity-research": {
+      "reference": "references/equity-research.md",
+      "patterns": [
+        "Individual stock",
+        "Fundamentals",
+        "Financial reports",
+        "Valuation",
+        "Earnings forecast",
+        "Company research",
+        "(research|analysis).{0,8}(company|stock|individual stock)",
+        "analysis.{0,8}(financial report|performance)",
+        "earnings",
+        "fundamental",
+        "valuation",
+        "10-k",
+        "10-q",
+        "stock research",
+        "(research|analy[sz]e) .{0,24}(stock|company|equity)",
+        "(this|this|the) stock",
+        "stock.{0,6}(analysis|research|worth it|how is it)",
+        "(is it worth|should).{0,4}(follow|buy|invest)",
+        "\\bstock\\b.{0,32}\\battention\\b",
+        "(analy[sz]e|review).{0,40}(financial report|earnings|results)"
+      ],
+      "required_references": [
+        "references/data-source-policy.md",
+        "references/metric-dictionary.md",
+        "references/scoring-standard.md",
+        "references/output-contracts.md"
+      ],
+      "conditional_references": {
+        "privacy": [
+          "references/privacy-security.md"
+        ],
+        "execution": [
+          "references/execution-safety.md"
+        ]
+      }
+    },
+    "fund-etf": {
+      "reference": "references/fund-etf.md",
+      "patterns": [
+        "\\betfs?\\b",
+        "\\bfund\\b",
+        "Index fund",
+        "Public fund",
+        "Mutual fund",
+        "Share class",
+        "expense ratio",
+        "tracking error",
+        "fund comparison",
+        "(?<![a-z0-9])spy(?![a-z0-9])",
+        "(?<![a-z0-9])voo(?![a-z0-9])",
+        "(?<![a-z0-9])qqq(?![a-z0-9])",
+        "(?<![a-z0-9])ivv(?![a-z0-9])",
+        "(?<![a-z0-9])arkk(?![a-z0-9])"
+      ],
+      "required_references": [
+        "references/data-source-policy.md",
+        "references/metric-dictionary.md",
+        "references/scoring-standard.md",
+        "references/output-contracts.md"
+      ],
+      "conditional_references": {
+        "privacy": [
+          "references/privacy-security.md"
+        ],
+        "execution": [
+          "references/execution-safety.md"
+        ]
+      }
+    },
+    "options-strategy": {
+      "reference": "references/options-strategy.md",
+      "patterns": [
+        "\\boptions?\\s+(?:strategy|trading|contracts?|chain|pricing|market|positions?|portfolio|payoff|greeks?)\\b",
+        "\\b(?:strategy|trading|contracts?|chain|pricing|market|positions?|portfolio|payoff|greeks?)\\b.{0,24}\\boptions?\\b",
+        "\\b(?:stock|equity|index|etf)\\s+options?\\b",
+        "\\b(?:fundamentals?|stock|equity|security|underlying|backtest|trading plan|trade plan)\\b(?=[^\\n.!?]{0,96}\\boptions?\\b)",
+        "\\boptions?\\b(?=[^\\n.!?]{0,96}\\b(?:fundamentals?|stock|equity|security|underlying|backtest|trading plan|trade plan)\\b)",
+        "\\boptions?\\b(?=[^\\n.!?]{0,64}\\b(?:strike|expiry|expiration|premium|underlying|greeks?|implied volatility|iv|call|put)\\b)",
+        "\\b(?:strike|expiry|expiration|premium|underlying|greeks?|implied volatility|iv|call|put)\\b(?=[^\\n.!?]{0,64}\\boptions?\\b)",
+        "Covered",
+        "Protective put",
+        "Cash-secured",
+        "Spread",
+        "Straddle",
+        "Strangle",
+        "\\bcall\\s+options?\\b",
+        "\\bcall\\b(?=[^\\n.!?]{0,64}\\b(?:strike|expiry|expiration|premium|underlying|greeks?|implied volatility|iv)\\b)",
+        "\\b(?:strike|expiry|expiration|premium|underlying|greeks?|implied volatility|iv)\\b(?=[^\\n.!?]{0,64}\\bcall\\b)",
+        "\\bput\\b",
+        "covered call",
+        "cash[- ]secured",
+        "greeks?",
+        "iv rank"
+      ],
+      "required_references": [
+        "references/data-source-policy.md",
+        "references/metric-dictionary.md",
+        "references/output-contracts.md"
+      ],
+      "conditional_references": {
+        "scoring": [
+          "references/scoring-standard.md"
+        ],
+        "privacy": [
+          "references/privacy-security.md"
+        ],
+        "execution": [
+          "references/execution-safety.md"
+        ]
+      }
+    },
+    "crypto-analysis": {
+      "reference": "references/crypto-analysis.md",
+      "patterns": [
+        "Crypto",
+        "Digital currency",
+        "Bitcoin",
+        "Ethereum",
+        "\\bbtc\\b",
+        "\\beth\\b",
+        "\\bdefi\\b",
+        "Liquidity pool",
+        "Impermanent loss",
+        "On-chain",
+        "Perpetual swap",
+        "Funding rate",
+        "Token",
+        "crypto"
+      ],
+      "required_references": [
+        "references/data-source-policy.md",
+        "references/metric-dictionary.md",
+        "references/output-contracts.md"
+      ],
+      "conditional_references": {
+        "scoring": [
+          "references/scoring-standard.md"
+        ],
+        "privacy": [
+          "references/privacy-security.md"
+        ],
+        "execution": [
+          "references/execution-safety.md"
+        ]
+      }
+    },
+    "portfolio-management": {
+      "reference": "references/portfolio-management.md",
+      "patterns": [
+        "My holdings",
+        "\\b(?:my|investment|asset|securities|fund|stock|crypto|multi[- ]asset)\\s+portfolio\\b",
+        "\\bportfolio\\b(?=[^\\n.!?]{0,64}\\b(?:holdings?|allocation|rebalanc(?:e|ing)|risk|return|weight|exposure|concentration|position|benchmark|investment|asset|securities|fund|stock|crypto)\\b)",
+        "\\b(?:holdings?|allocation|rebalanc(?:e|ing)|risk|return|weight|exposure|concentration|position|benchmark|investment|asset|securities|fund|stock|crypto)\\b(?=[^\\n.!?]{0,64}\\bportfolio\\b)",
+        "Portfolio diagnostics",
+        "Asset allocation",
+        "Rebalancing",
+        "Target weight",
+        "Portfolio risk",
+        "Concentration",
+        "Risk budget",
+        "rebalanc",
+        "position sizing",
+        "(add|allocate to|include).{0,6}portfolio",
+        "My portfolio",
+        "How much to buy",
+        "add to .{0,12}portfolio"
+      ],
+      "required_references": [
+        "references/data-source-policy.md",
+        "references/metric-dictionary.md",
+        "references/scoring-standard.md",
+        "references/privacy-security.md",
+        "references/output-contracts.md"
+      ],
+      "conditional_references": {
+        "execution": [
+          "references/execution-safety.md"
+        ]
+      }
+    },
+    "quant-backtesting": {
+      "reference": "references/quant-backtesting.md",
+      "patterns": [
+        "Backtest",
+        "Strategy validation",
+        "Factor",
+        "Parameter optimization",
+        "Out-of-sample",
+        "Rolling validation",
+        "walk[- ]forward",
+        "backtest",
+        "factor model",
+        "monte carlo"
+      ],
+      "required_references": [
+        "references/data-source-policy.md",
+        "references/metric-dictionary.md",
+        "references/scoring-standard.md",
+        "references/output-contracts.md"
+      ],
+      "conditional_references": {
+        "privacy": [
+          "references/privacy-security.md"
+        ],
+        "execution": [
+          "references/execution-safety.md"
+        ]
+      }
+    },
+    "trade-planning": {
+      "reference": "references/trade-planning.md",
+      "transaction_policy": "plan_only_user_executes_externally",
+      "patterns": [
+        "Place order",
+        "Modify order",
+        "Cancel order",
+        "Trading plan",
+        "Trade signal",
+        "Stop-loss",
+        "Take-profit",
+        "Order plan",
+        "Order draft",
+        "Manual order",
+        "Trade setup",
+        "place order",
+        "modify order",
+        "cancel order",
+        "order plan",
+        "order draft",
+        "place (?:an? )?order",
+        "place (?:real )?orders?",
+        "place (?:a )?(?:live|real) orders?",
+        "\\b(?:place|submit|route|modify|amend|replace|cancel|execute)\\b.{0,48}\\b(?:order|trade|transaction)\\b",
+        "\\b(?:sign|broadcast)\\b.{0,32}\\b(?:transaction|payload)\\b",
+        "\\bapprove\\b.{0,32}\\b(?:token|allowance|transaction)\\b",
+        "\\btransfer\\b.{0,32}\\b(?:funds|cash|assets|tokens|crypto)\\b",
+        "\\brebalance\\b.{0,32}\\bfor me\\b"
+      ],
+      "required_references": [
+        "references/data-source-policy.md",
+        "references/metric-dictionary.md",
+        "references/privacy-security.md",
+        "references/execution-safety.md",
+        "references/output-contracts.md"
+      ],
+      "conditional_references": {}
+    },
+    "corporate-finance": {
+      "reference": "references/corporate-finance.md",
+      "patterns": [
+        "Corporate finance",
+        "Investment banking",
+        "Private equity",
+        "M&A fund",
+        "Transaction due diligence",
+        "Financial due diligence",
+        "investment banking",
+        "private equity",
+        "corporate finance",
+        "transaction diligence",
+        "Investment decision document review",
+        "Investment decision materials",
+        "Investment committee materials",
+        "pre[- ]?ic",
+        "Meeting minutes",
+        "Consistency review",
+        "Financing materials review",
+        "\\bipo\\b",
+        "equity capital markets",
+        "roadshow (materials|deck|presentation)",
+        "(roadshow|meeting|conference call).{0,6}(recording|transcript|minutes)",
+        "meeting minutes",
+        "consistency review",
+        "\\bic materials\\b",
+        "investment committee materials",
+        "screening.{0,8}(investment)?opportunities",
+        "Opportunity screening",
+        "Initial project screening",
+        "deal screening",
+        "screen .{0,16}(deals|opportunities)",
+        "investment committee materials?"
+      ],
+      "required_references": [
+        "references/data-source-policy.md",
+        "references/metric-dictionary.md",
+        "references/output-contracts.md"
+      ],
+      "conditional_references": {
+        "scoring": [
+          "references/scoring-standard.md"
+        ],
+        "privacy": [
+          "references/privacy-security.md"
+        ],
+        "execution": [
+          "references/execution-safety.md"
+        ]
+      }
+    }
+  },
+  "merge_rules": {
+    "boundary_rule": "Existing material processing (investment decision review, meeting minutes, opportunity screening) and new material production (Teaser, ECM dossier, research materials) are both handled by the corporate-finance plugin; distinguish at the task level: existing material processing should use deal-screening-scorecard / pre-ic-consistency-review / meeting-minutes (materials_review payload), new material production should use the remaining tasks in the deal-materials group.",
+    "notes": "Task-level patterns in references/corporate-finance/task-catalog.json select the specialist task, and requires_research_upstream adds equity-research when a research verb is present."
+  },
+  "governance_tier": {
+    "default": "light",
+    "full_conditions": [
+      {
+        "id": "transaction-request",
+        "condition": "transaction_requested is true or any transaction-prohibition risk flag is triggered",
+        "reason": "A transaction request must be converted to a manual plan; no governance tier can authorize execution."
+      },
+      {
+        "id": "professional-artifact",
+        "condition": "Deliverable is an editable professional attachment (xlsx/docx/pptx model or transaction materials) or any specialist task is triggered.",
+        "reason": "Attachments must follow the full formatting and validation suite."
+      },
+      {
+        "id": "institutional-audience",
+        "condition": "audience is investment_committee / buyer / seller",
+        "reason": "Institutional use"
+      },
+      {
+        "id": "sensitive-materials",
+        "condition": "User uploaded sensitive materials (VDR, holdings, recordings) or privacy trigger words are matched.",
+        "reason": "Privacy is non-negotiable."
+      }
+    ],
+    "light_required_references": [
+      "Matched domain md",
+      "references/metric-dictionary.md (only when calculations are involved)",
+      "references/output-contracts.md (envelope subsection)"
+    ],
+    "light_restrictions": "Result objects with governance_tier=light must not contain xlsx/docx/pptx attachments and must not set execution.external_side_effect=true; on violation validate_result must raise an error and require reprocessing via the full channel."
+  },
+  "limited_support": {
+    "asset_patterns": [
+      "Foreign exchange",
+      "Exchange rate",
+      "(?<![a-z0-9])fx(?![a-z0-9])",
+      "forex",
+      "(USD|EUR|JPY|GBP|AUD|CNY) to",
+      "Currency pair",
+      "currency pair",
+      "(?<![a-z0-9])(eur|usd|jpy|gbp|aud)/(eur|usd|jpy|gbp|aud)(?![a-z0-9])",
+      "Futures",
+      "futures contract",
+      "Commodity futures",
+      "Commodities",
+      "commodit(y|ies)",
+      "Crude oil futures",
+      "Gold futures",
+      "crude oil futures"
+    ],
+    "note": "There are no dedicated analysis modules for FX, futures, and commodities: backtesting -> quant-backtesting; every trade or order request -> trade-planning for a manual user-executed plan only; multi-asset allocation -> portfolio-management; pure analysis must disclose limited support to the user, with confidence not higher than medium. The SKILL never accesses or operates a broker or venue transaction interface.",
+    "reroute": [
+      {
+        "intent_patterns": [
+          "Backtest",
+          "backtest",
+          "Strategy validation",
+          "Parameter optimization"
+        ],
+        "module": "quant-backtesting"
+      },
+      {
+        "intent_patterns": [
+          "Place order",
+          "Modify order",
+          "Cancel order",
+          "Trading plan",
+          "Trade signal",
+          "place order",
+          "order plan",
+          "place (?:an? )?order",
+          "place (?:real )?orders?",
+          "place (?:a )?(?:live|real) orders?"
+        ],
+        "module": "trade-planning"
+      },
+      {
+        "intent_patterns": [
+          "Portfolio",
+          "Asset allocation",
+          "portfolio",
+          "allocation"
+        ],
+        "module": "portfolio-management"
+      }
+    ]
+  },
+  "out_of_scope_patterns": [
+    "Property underwriting",
+    "Real estate underwriting",
+    "Real estate investment return",
+    "Rent estimation",
+    "cap rate.*property",
+    "Personal tax",
+    "Tax filing",
+    "Accounting and bookkeeping",
+    "\\bbookkeeping\\b",
+    "\\breconcile\\b.{0,32}\\b(?:general ledger|accounts?|books?)\\b",
+    "Insurance allocation",
+    "\\b(?:personal|life|health|home|auto)\\s+insurance\\b",
+    "\\binsurance\\b.{0,32}\\b(?:policy|coverage|allocation|arrangement|recommendation|advice)\\b",
+    "\\b(?:recommend|select|choose|arrange|advise on)\\b.{0,48}\\binsurance(?: policy| coverage)?\\b",
+    "Legal opinion",
+    "\\blegal\\s+(?:advice|opinion|counsel)\\b",
+    "Gambling",
+    "Workflow optimizer",
+    "agent workflow optimization",
+    "(house|property|apartment|premises).{0,10}(rent|return rate|loan|mortgage)",
+    "Rental yield"
+  ]
+}

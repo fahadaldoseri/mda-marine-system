@@ -1,0 +1,167 @@
+{
+  "schema_version": "finance-analysis-pro/1.2",
+  "skill_financial_transaction_possible": false,
+  "request_id": "example-cf-dcf-001",
+  "subject": "TargetCo valuation",
+  "primary_module": "corporate-finance",
+  "module_chain": [
+    "equity-research",
+    "corporate-finance"
+  ],
+  "as_of": "2026-07-23T12:00:00+08:00",
+  "data_cutoff": "2026-07-22",
+  "status": "provisional",
+  "presentation": {
+    "profile": "corporate-finance",
+    "language": "zh-CN",
+    "detail_level": "deep",
+    "audience": "investment_committee",
+    "formats": [
+      "markdown",
+      "json"
+    ]
+  },
+  "summary": "Established a structured framework for DCF and comparable company analysis; key assumptions and professional attachments remain to be populated with and verified using real data.",
+  "payload": {
+    "scope": "Build a DCF and Public Comps for TargetCo and produce valuation conclusions for Investment Committee review.",
+    "decision_context": "valuation",
+    "entity_card": {
+      "legal_name": "TargetCo",
+      "aliases": [],
+      "ticker": null,
+      "exchange": null,
+      "country": null,
+      "industry": null,
+      "currency": "USD",
+      "fiscal_year_end": null,
+      "reporting_standard": "unknown",
+      "period_basis": "LTM",
+      "valuation_date": "2026-07-22",
+      "transaction_context": "illustrative valuation example"
+    },
+    "specialist_tasks": [
+      "dcf-model",
+      "public-comps"
+    ],
+    "task_results": [
+      {
+        "task_id": "dcf-model",
+        "status": "provisional",
+        "summary": "DCF structure, period, and sensitivity framework defined; real forecasts and cost of capital inputs pending.",
+        "key_outputs": {
+          "valuation_status": "inputs_pending"
+        },
+        "open_items": [
+          "Provide management forecasts or independent operating forecasts.",
+          "Verify net debt and diluted share count."
+        ],
+        "source_refs": [],
+        "artifact_refs": []
+      },
+      {
+        "task_id": "public-comps",
+        "status": "provisional",
+        "summary": "Comparable company screening criteria defined; peer list and market data reference dates to be determined.",
+        "key_outputs": {
+          "peer_set_status": "pending"
+        },
+        "open_items": [
+          "Confirm business, scale, growth, and geographic screening criteria."
+        ],
+        "source_refs": [],
+        "artifact_refs": []
+      }
+    ],
+    "model_checks": [
+      {
+        "name": "period consistency",
+        "status": "warning",
+        "evidence": "Entity Card uses LTM, but fiscal year and quarterly data have not been provided.",
+        "impact": "Valuation periods cannot be fully aligned at this time."
+      },
+      {
+        "name": "source traceability",
+        "status": "warning",
+        "evidence": "Examples are not tied to real sources.",
+        "impact": "Do not mark any numeric outputs as verified."
+      }
+    ],
+    "deliverables": [
+      {
+        "name": "TargetCo DCF and Public Comps workbook",
+        "deliverable_type": "workbook",
+        "format": "xlsx",
+        "path": null,
+        "status": "planned",
+        "task_ids": [
+          "dcf-model",
+          "public-comps"
+        ],
+        "sensitivity": "internal"
+      }
+    ],
+    "review_status": {
+      "financial_integrity": "not_run",
+      "period_consistency": "warning",
+      "source_traceability": "warning",
+      "format_quality": "not_run",
+      "overall": "provisional",
+      "reviewer_notes": [
+        "This document only demonstrates integration conventions and does not contain investment conclusions."
+      ]
+    },
+    "scope_limitations": [
+      "No real company disclosures, market data, or management forecasts provided."
+    ]
+  },
+  "facts": [],
+  "assumptions": [
+    {
+      "assumption_id": "assumption-001",
+      "statement": "The example uses USD and LTM as placeholders.",
+      "impact": "Real projects must cover the Entity Card and fiscal periods.",
+      "status": "explicit",
+      "source_ref": null,
+      "overridable": true,
+      "domain": "corporate-finance"
+    }
+  ],
+  "metrics": [],
+  "scores": [],
+  "risks": [
+    {
+      "risk_id": "risk-001",
+      "category": "data_quality",
+      "description": "Missing real financial, market, and capital structure inputs.",
+      "severity": "high",
+      "likelihood": "high",
+      "mitigation": "Rerun the valuation after providing original disclosures, reference dates, and forecasting assumptions."
+    }
+  ],
+  "invalidation_conditions": [
+    {
+      "condition": "Entity Card, period, or capital structure have been updated.",
+      "observable_evidence": "New disclosures or user-confirmed values are inconsistent with the current placeholder settings.",
+      "action": "Rebuild valuation inputs and re-run checks."
+    }
+  ],
+  "data_gaps": [
+    {
+      "field": "financial_forecast",
+      "reason": "No real company data provided.",
+      "impact": "Unable to calculate a reliable DCF valuation.",
+      "remediation": "Obtain historical financials, operating forecasts, cost of capital, and net debt."
+    }
+  ],
+  "source_manifest": [],
+  "privacy": {
+    "data_classes_used": [],
+    "redactions_applied": [],
+    "retention_status": "no sensitive data retained"
+  },
+  "execution": {
+    "external_side_effect": false,
+    "confirmation_status": "not_applicable"
+  },
+  "artifacts": []
+}

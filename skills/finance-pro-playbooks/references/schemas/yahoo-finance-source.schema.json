@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://manus.ai/schemas/finance-analysis-pro/yahoo-finance-source/1.0",
+  "title": "Finance Analysis Pro Yahoo Finance Source Artifact",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "provider",
+    "operation",
+    "symbol",
+    "query",
+    "retrieved_at",
+    "data_as_of",
+    "source_manifest_entry",
+    "data",
+    "warnings",
+    "error"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "finance-analysis-pro/yahoo-finance-source/1.0"
+    },
+    "status": {
+      "enum": ["ok", "partial", "failed", "blocked"]
+    },
+    "provider": {
+      "const": "Yahoo Finance"
+    },
+    "operation": {
+      "enum": [
+        "YahooFinance/get_stock_chart",
+        "YahooFinance/get_stock_profile",
+        "YahooFinance/get_stock_holders",
+        "YahooFinance/get_stock_insights",
+        "YahooFinance/get_stock_sec_filing"
+      ]
+    },
+    "symbol": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9.^=_-]+$"
+    },
+    "query": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": ["string", "number", "integer", "boolean", "null"]
+      }
+    },
+    "retrieved_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "data_as_of": {
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "source_manifest_entry": {
+      "$ref": "#/$defs/source"
+    },
+    "data": {
+      "type": ["object", "array", "null"]
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "error": {
+      "type": ["object", "null"],
+      "required": ["code", "message"],
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": ["ok", "partial"]
+          }
+        },
+        "required": ["status"]
+      },
+      "then": {
+        "properties": {
+          "data": {
+            "type": ["object", "array"]
+          },
+          "error": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": ["failed", "blocked"]
+          }
+        },
+        "required": ["status"]
+      },
+      "then": {
+        "properties": {
+          "data": {
+            "type": "null"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_ref",
+        "title",
+        "publisher",
+        "url",
+        "retrieved_at",
+        "data_as_of",
+        "source_type",
+        "period",
+        "original_or_derived"
+      ],
+      "properties": {
+        "source_ref": {
+          "type": "string",
+          "pattern": "^yf-[a-z]+-[a-z0-9-]+-[0-9]{14}$"
+        },
+        "title": {
+          "type": "string",
+          "pattern": "^YahooFinance/get_stock_(chart|profile|holders|insights|sec_filing) for .+$"
+        },
+        "publisher": {
+          "const": "Yahoo Finance"
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https://finance\\.yahoo\\.com/quote/"
+        },
+        "retrieved_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "data_as_of": {
+          "oneOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "source_type": {
+          "const": "market_data"
+        },
+        "period": {
+          "type": ["string", "null"]
+        },
+        "original_or_derived": {
+          "const": "original"
+        }
+      }
+    }
+  }
+}
