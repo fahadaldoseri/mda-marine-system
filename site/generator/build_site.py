@@ -132,7 +132,7 @@ def discover(site_root: Path):
 
 
 def _flat(value) -> str:
-    """حقول بطاقة القرار قد تكون نصًّا أو قائمة نقاط — تُسطَّح للعرض المختصر."""
+    """حقول أهم الأخبار المتعلقة بالأمن البحري قد تكون نصًّا أو قائمة نقاط — تُسطَّح للعرض المختصر."""
     if isinstance(value, list):
         return " · ".join(str(x).strip() for x in value if str(x).strip())
     return (value or "").strip()
@@ -377,7 +377,7 @@ NAV_PLACEHOLDER
   <div class="grid">
     <section class="card" id="archive">
       <h3>أرشيف الإصدارات</h3>
-      <p class="hint">كل إصدار متاح بالرابط الخاص به، ومفتاح اللون يبيّن مستوى التهديد المسجل في بطاقة القرار.</p>
+      <p class="hint">كل إصدار متاح بالرابط الخاص به، ومفتاح اللون يبيّن مستوى التهديد المسجل في أهم الأخبار المتعلقة بالأمن البحري.</p>
       <ul class="ar">{rows}</ul>
     </section>
     <div>
@@ -508,6 +508,25 @@ def ledger_count(dist: Path) -> int:
         return 0
 
 
+def _enrich_feed_xml(xml: str) -> str:
+    """ك-252: pubDate لكل عنصر وlastBuildDate للقناة في تغذية RSS."""
+    import re as _re
+    from datetime import datetime, timezone
+    from email.utils import format_datetime
+    if not xml or "<item>" not in xml:
+        return xml
+    def _pub(m):
+        try:
+            dt = datetime.fromisoformat(m.group(2)).replace(tzinfo=timezone.utc)
+        except Exception:
+            dt = datetime.now(timezone.utc)
+        return m.group(0) + f"<pubDate>{format_datetime(dt)}</pubDate>"
+    xml = _re.sub(r'(<guid[^>]*>mn-(\d{4}-\d{2}-\d{2})[^<]*</guid>)', _pub, xml)
+    if "lastBuildDate" not in xml:
+        xml = xml.replace("<channel>", f"<channel><lastBuildDate>{format_datetime(datetime.now(timezone.utc))}</lastBuildDate>", 1)
+    return xml
+
+
 def build_feed(dist: Path, reports):
     """تغذية RSS للإصدارات اليومية، لمتابعة الموقع دون زيارة يدوية."""
     from xml.sax.saxutils import escape as xesc
@@ -531,7 +550,7 @@ def build_feed(dist: Path, reports):
            "  <description>إصدار يومي لأمن الملاحة في مضيق هرمز والخليج العربي وبحر العرب والبحر الأحمر</description>\n"
            "  <language>ar</language>\n"
            + ("\n".join(items) if items else "") + "\n</channel></rss>\n")
-    (dist / "feed.xml").write_text(xml, encoding="utf-8")
+    (dist / "feed.xml").write_text(_enrich_feed_xml(xml), encoding="utf-8")
     return len(items)
 
 
@@ -732,3 +751,36 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
+# ── إصلاح ك-252 (2026-10-28): pubDate لكل عنصر وlastBuildDate للقناة في تغذية RSS ──
+def _enrich_feed():
+    import re as _re, time as _time
+    from email.utils import format_datetime
+    from datetime import datetime, timezone
+    from pathlib import Path as _P
+    outs = list(_P(__file__).resolve().parent.parent.glob("dist/feed.xml")) + \
+           list(_P(__file__).resolve().parent.parent.glob("dist/**/feed.xml"))
+    for f in outs:
+        xml = f.read_text(encoding="utf-8")
+        if "lastBuildDate" in xml and "<pubDate>" in xml:
+            continue
+        def _pub(m):
+            iso = m.group(2)
+            try:
+                dt = datetime.fromisoformat(iso).replace(tzinfo=timezone.utc)
+            except Exception:
+                dt = datetime.now(timezone.utc)
+            return m.group(0) + f"<pubDate>{format_datetime(dt)}</pubDate>"
+        xml = _re.sub(r'(<guid[^>]*>mn-(\d{4}-\d{2}-\d{2})[^<]*</guid>)', _pub, xml)
+        if "lastBuildDate" not in xml:
+            xml = xml.replace("<channel>", f"<channel><lastBuildDate>{format_datetime(datetime.now(timezone.utc))}</lastBuildDate>", 1)
+        f.write_text(xml, encoding="utf-8")
+        print(f"تغذية RSS: أُضيف pubDate وlastBuildDate ({f.name})")
+
+
+if __name__ == "__main__":
+    try:
+        _enrich_feed()
+    except Exception as exc:
+        print("تنبيه: تعذّر إثراء التغذية:", exc)
