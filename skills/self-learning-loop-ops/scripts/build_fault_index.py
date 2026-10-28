@@ -32,8 +32,9 @@ def parse(line):
                    fix_status=f[4] if len(f) > 4 else "",
                    status_tail=f[5] if len(f) > 5 else "")
     tail = (rec.get("fix_status", "") + " " + rec.get("status_tail", "")).translate(DIAC)
-    rec["closed"] = "مُغلق" in rec.get("fix_status","") or any(m in tail for m in CLOSED)
     rec["fields"] = len(f)
+    _status_cols = next((x for x in reversed(f[-2:]) if x and x not in ("—", "-")), "").translate(DIAC)
+    rec["closed"] = bool(re.search(r"(?:^|[^\u0621-\u064A])(مغلق|منجز|مكتمل|closed|done|verified)(?:[^\u0621-\u064A]|$)", _status_cols))
     return rec
 
 
