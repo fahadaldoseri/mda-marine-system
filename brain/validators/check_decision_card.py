@@ -21,6 +21,37 @@ import pathlib
 import re
 import sys
 
+# ── جذر محمول (بوابة قابلية النقل) ──
+import os as _os
+from pathlib import Path as _Path
+_P = _Path(__file__).resolve()
+_C = [_P.parents[i] for i in range(1, min(6, len(_P.parents)))]
+def _brain_root():
+    e = _os.environ.get("BRAIN_DIR")
+    if e and _Path(e).is_dir():
+        return _Path(e)
+    for r in _C:
+        c = r / "brain-marine-news"
+        if (c / "reports").is_dir():
+            return c
+    for r in _C:
+        if (r / "reports").is_dir():
+            return r
+    return _C[0] / "brain-marine-news"
+BRAIN = _brain_root()
+def _site_root():
+    e = _os.environ.get("SITE_DIR")
+    if e and _Path(e).is_dir():
+        return _Path(e)
+    for r in _C:
+        c = r / "seawatch"
+        if (c / "generator").is_dir():
+            return c
+    return _C[0] / "seawatch"
+SITE = _site_root()
+
+
+
 MIN_CHARS = 40
 
 
@@ -83,7 +114,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="فحص أهم الأخبار المتعلقة بالأمن البحري على السطح المبني")
     ap.add_argument("--page", help="مسار صفحة التقرير المبنية (يُستنتج من --date)")
     ap.add_argument("--additions", help="مسار صفحة إضافات المبنية (يُستنتج من --date)")
-    ap.add_argument("--dist-root", default="/home/ubuntu/seawatch/dist", help="جذر dist لحلّ الروابط المطلقة")
+    ap.add_argument("--dist-root", default=str(SITE / "dist"), help="جذر dist لحلّ الروابط المطلقة")
     ap.add_argument("--date", default=__import__("datetime").datetime.now(__import__("datetime").timezone.utc).strftime("%Y-%m-%d"),
                     help="تاريخ التشغيل (افتراضيًا اليوم بتوقيت UTC)")
     args = ap.parse_args()

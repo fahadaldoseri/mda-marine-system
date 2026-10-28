@@ -12,7 +12,27 @@ import json, subprocess, sys, tempfile
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-GATE = '/home/ubuntu/brain-marine-news/validators/check_closure.py'
+# ── جذر محمول (بوابة قابلية النقل) ──
+import os as _os
+from pathlib import Path as _Path
+_P = _Path(__file__).resolve()
+_C = [_P.parents[i] for i in range(1, min(6, len(_P.parents)))]
+def _brain_root():
+    e = _os.environ.get("BRAIN_DIR")
+    if e and _Path(e).is_dir():
+        return _Path(e)
+    for r in _C:
+        c = r / "brain-marine-news"
+        if (c / "reports").is_dir():
+            return c
+    for r in _C:
+        if (r / "reports").is_dir():
+            return r
+    return _C[0] / "brain-marine-news"
+BRAIN = _brain_root()
+
+
+GATE = str(BRAIN / 'validators' / 'check_closure.py')
 CANON = ['الرقم', 'التاريخ', 'المحور', 'العَرَض', 'السبب الجذري', 'الإصلاح', 'التشديد والحالة',
          'الحالة الأصلية', 'حالة الإصلاح', 'حالة التحقق', 'حالة الحاجز', 'الحالة التشغيلية']
 

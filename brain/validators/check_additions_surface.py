@@ -9,7 +9,7 @@
 
 الفشل مغلق: أي نقص أو تكرار أو حضور في السطح الخطأ ⇒ رمز 2.
 
-الاستعمال: python3 validators/check_additions_surface.py [--date YYYY-MM-DD] [--site /home/ubuntu/seawatch]
+الاستعمال: python3 validators/check_additions_surface.py [--date YYYY-MM-DD] [--site $SITE]
 """
 import argparse
 import html
@@ -17,6 +17,37 @@ import json
 import re
 import sys
 from pathlib import Path
+
+# ── جذر محمول (بوابة قابلية النقل) ──
+import os as _os
+from pathlib import Path as _Path
+_P = _Path(__file__).resolve()
+_C = [_P.parents[i] for i in range(1, min(6, len(_P.parents)))]
+def _brain_root():
+    e = _os.environ.get("BRAIN_DIR")
+    if e and _Path(e).is_dir():
+        return _Path(e)
+    for r in _C:
+        c = r / "brain-marine-news"
+        if (c / "reports").is_dir():
+            return c
+    for r in _C:
+        if (r / "reports").is_dir():
+            return r
+    return _C[0] / "brain-marine-news"
+BRAIN = _brain_root()
+def _site_root():
+    e = _os.environ.get("SITE_DIR")
+    if e and _Path(e).is_dir():
+        return _Path(e)
+    for r in _C:
+        c = r / "seawatch"
+        if (c / "generator").is_dir():
+            return c
+    return _C[0] / "seawatch"
+SITE = _site_root()
+
+
 
 BRAIN = Path(__file__).resolve().parent.parent
 
@@ -54,7 +85,7 @@ def emit(errs, warns, n_add_head, n_req) -> int:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", default="")
-    ap.add_argument("--site", default="/home/ubuntu/seawatch")
+    ap.add_argument("--site", default=str(SITE))
     a = ap.parse_args()
     dist = Path(a.site) / "dist"
     pol = load_policy()

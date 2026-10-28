@@ -6,7 +6,27 @@ import argparse, json, re, shutil, time
 from collections import Counter
 from pathlib import Path
 
-B = Path('/home/ubuntu/brain-marine-news')
+# ── جذر محمول (بوابة قابلية النقل) ──
+import os as _os
+from pathlib import Path as _Path
+_P = _Path(__file__).resolve()
+_C = [_P.parents[i] for i in range(1, min(6, len(_P.parents)))]
+def _brain_root():
+    e = _os.environ.get("BRAIN_DIR")
+    if e and _Path(e).is_dir():
+        return _Path(e)
+    for r in _C:
+        c = r / "brain-marine-news"
+        if (c / "reports").is_dir():
+            return c
+    for r in _C:
+        if (r / "reports").is_dir():
+            return r
+    return _C[0] / "brain-marine-news"
+BRAIN = _brain_root()
+
+
+B = BRAIN
 F = B / 'audit' / 'سجل-الأعطال-والثغرات.md'
 L = B / 'memory' / 'learning-log.jsonl'
 CANON = ['الرقم', 'التاريخ', 'المحور', 'العَرَض', 'السبب الجذري', 'الإصلاح', 'التشديد والحالة', 'الحالة']

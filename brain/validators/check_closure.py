@@ -12,6 +12,26 @@ import argparse, json, re, sys, traceback
 from datetime import datetime, timezone
 from pathlib import Path
 
+# ── جذر محمول (بوابة قابلية النقل) ──
+import os as _os
+from pathlib import Path as _Path
+_P = _Path(__file__).resolve()
+_C = [_P.parents[i] for i in range(1, min(6, len(_P.parents)))]
+def _brain_root():
+    e = _os.environ.get("BRAIN_DIR")
+    if e and _Path(e).is_dir():
+        return _Path(e)
+    for r in _C:
+        c = r / "brain-marine-news"
+        if (c / "reports").is_dir():
+            return c
+    for r in _C:
+        if (r / "reports").is_dir():
+            return r
+    return _C[0] / "brain-marine-news"
+BRAIN = _brain_root()
+
+
 STATES = {'مغلق', 'مفتوح', 'بانتظار التحقق', 'موروث غير مثبت', 'أعيد فتحه'}
 EXC_FIELDS = ['fault_id', 'state', 'reason', 'owner', 'approved_by', 'created_at', 'expires_at',
               'compensating_control', 'replacement_plan', 'evidence']
@@ -130,7 +150,7 @@ def check(brain: Path):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument('--brain', default='/home/ubuntu/brain-marine-news')
+    ap = argparse.ArgumentParser(); ap.add_argument('--brain', default=str(BRAIN))
     ap.add_argument('--json', action='store_true'); a = ap.parse_args()
     try:
         counts, fails, notes = check(Path(a.brain))
