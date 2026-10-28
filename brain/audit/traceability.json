@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-28T17:45:40.080828+00:00",
+  "generated_at": "2026-10-28T17:50:12.287562+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -2032,6 +2032,20 @@
       "lesson_id": "ك-255",
       "barrier_id": "B-6fdb6176",
       "run_evidence": "منع بلا سبب"
+    },
+    {
+      "fault_id": "ك-256",
+      "state": "مغلق",
+      "lesson_id": "ك-256",
+      "barrier_id": "B-1413647c",
+      "run_evidence": "مرور كاذب"
+    },
+    {
+      "fault_id": "ك-257",
+      "state": "مغلق",
+      "lesson_id": "ك-257",
+      "barrier_id": "B-d54a96bd",
+      "run_evidence": "دليل صوريّ"
     }
   ]
 }
