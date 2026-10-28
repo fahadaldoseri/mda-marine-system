@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-28T18:52:45.774514+00:00",
+  "generated_at": "2026-10-28T19:01:47.884265+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -2123,6 +2123,13 @@
       "lesson_id": "ك-268",
       "barrier_id": "B-0917b4f4",
       "run_evidence": "اجهة كل بوابة قبل تشغيلها وتشغيلها بواجهتها الصحيحة مطبَّق: قاعدة: أي رمز 2 يُقرأ مع مخرجه الحرفي وي"
+    },
+    {
+      "fault_id": "ك-269",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-269",
+      "barrier_id": "B-e1b3797a",
+      "run_evidence": "نع · التجربة تمنع · ومع --allow-delete ينفّذ. النتيجة: نجح 4 · فشل 0 (خرج 0)"
     }
   ]
 }
