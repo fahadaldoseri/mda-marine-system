@@ -10,7 +10,7 @@
   7,
   12
  ],
- "print_css_sha16": "ac05b43f996ae9f0",
+ "print_css_sha16": "c7016e7d5fe20fb7",
  "gates": {
   "avg_fill_min": 90,
   "min_page_fill": 55,
@@ -106,5 +106,16 @@
   "on": "2026-10-23",
   "manifest": "templates/approved-pdf/BASELINE-virgin-2026-10-23.json",
   "status": "النسخة الرسمية المعتمدة الوحيدة — كل العمل عليها"
- }
+ },
+ "changes": [
+  {
+   "date": "2026-10-28",
+   "kind": "pagination_rule",
+   "from": "ac05b43f996ae9f0",
+   "to": "c7016e7d5fe20fb7",
+   "approved_by": "فهد الدوسري",
+   "reason": "إزالة قاعدة كسر مكرّرة متناقضة كانت تُخلّف فراغًا 206 مم في ورقة كاملة بعد إعادة الأقسام الأربعة. لا تغيير في أي حدّ من حدود الشكل: كل الحدود قائمة ومقيسة (تعبئة 96.6% · لا فجوة ≥45 مم · الخريطة 74%×38%).",
+   "evidence": "check_pdf_format: 0 مخالفة · check_print_quality: مطابق"
+  }
+ ]
 }
