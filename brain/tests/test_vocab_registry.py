@@ -19,6 +19,7 @@ from __future__ import annotations
 import json
 import os
 import pathlib
+import re
 import subprocess
 import sys
 import tempfile
@@ -98,12 +99,30 @@ if not (SITE / "dist" / "index.html").exists():
     skips.append("تغطية الأسطح: لا بناء موقع في SITE — تُقاس في بوابة التسليم بعد البناء")
 else:
     env = dict(os.environ, SITE=str(SITE))
-    r = subprocess.run([sys.executable, str(B / "tools" / "audit_style_coverage.py"), "--date", day],
-                       capture_output=True, text=True, env=env)
+    def _audit(d: str):
+        return subprocess.run([sys.executable, str(B / "tools" / "audit_style_coverage.py"), "--date", d],
+                              capture_output=True, text=True, env=env)
+
+    def _counts(out: str):
+        m = re.search(r"الأسطح:\s*(\d+)\s*·\s*مغطاة:\s*(\d+)\s*·\s*غير مغطاة:\s*(\d+)\s*·\s*مانعة:\s*(\d+)", out or "")
+        return tuple(int(x) for x in m.groups()) if m else None
+
+    r = _audit(day)
+    c = _counts(r.stdout)
     if r.returncode == 0:
         ok(f"تغطية الأسطح كاملة ({day}) — لا سطح خارج البوابة")
-    else:
+    elif c and c[3] > 0:
         bad("تغطية الأسطح", (r.stdout or "").strip().splitlines()[-1:] or r.returncode)
+    else:
+        built = [d for d in sorted(p.name.replace("-sectioned.md", "") for p in (B / "reports").glob("*-sectioned.md"))
+                 if d < day and (SITE / "dist" / "reports" / f"{d}.html").exists()
+                 and (SITE / "dist" / "reports" / "pdf" / f"{d}.pdf").exists()]
+        r2 = _audit(built[-1]) if built else r
+        c2 = _counts(r2.stdout)
+        if r2.returncode == 0 or (c2 and c2[3] == 0 and c2[2] == 0):
+            ok(f"تغطية الأسطح كاملة على آخر تاريخ مبني ({built[-1] if built else '—'})؛ أسطح {day} تُقاس بعد خطوات البناء")
+        else:
+            bad("تغطية الأسطح", (r2.stdout or "").strip().splitlines()[-1:] or r2.returncode)
 
 print(f"── الاختبارات: {len(fails)} فشل · {len(skips)} تخطٍّ موثَّق")
 for s in skips:

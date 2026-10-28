@@ -40,6 +40,6 @@ with out.open("a", encoding="utf-8") as fh:
             "estimate": statement,
             "probability": probability,
             "outcome": outcome,
-            "source_grade": "UKMTO A/2 · NAVAREA IX A/1 · منصة رصد C/3 · رواية طرف D/4",
+            "source_grade": "UKMTO A/2 · NAVAREA IX A/1 · منصة (يُذكر اسم المصدر) C/3 · رواية طرف D/4",
         }, ensure_ascii=False) + "\n")
 print(f"سُجّلت {len(estimates)} تقديرات في {out.name}")

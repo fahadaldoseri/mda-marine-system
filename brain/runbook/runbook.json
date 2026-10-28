@@ -2495,46 +2495,6 @@
    "gate_title": "التسليم"
   },
   {
-   "id": "G045",
-   "title": "تغطية بوابة الأسلوب لكل سطح يقرأه القارئ",
-   "kind": "script",
-   "phase": "gates",
-   "assert": [
-    {
-     "type": "cmd",
-     "command": [
-      "bash",
-      "-lc",
-      "test -s logs/runbook/{date}/G045.log"
-     ]
-    }
-   ],
-   "links": {
-    "rules": [
-     "ف1–ف5 — بوابة التحقق",
-     "ط15 — مدى بوابة الأسلوب"
-    ],
-    "files": [
-     "tools/final_gate.sh",
-     "tools/audit_style_coverage.py"
-    ],
-    "folders": [],
-    "gates": [],
-    "tests": [
-     "tests/test_vocab_registry.py"
-    ]
-   },
-   "on_fail": "stop",
-   "command": [
-    "bash -lc B=\"$PWD\"; export B SITE; python3 \"$B/tools/make_tg_digest.py\" --date \"$D\" >/dev/null 2>&1 || true; python3 \"$B/tools/audit_style_coverage.py\" --date \"$D\"; rc=$?; exit $rc"
-   ],
-   "ok_rc": [
-    0
-   ],
-   "warn_rc": [],
-   "gate_title": "التسليم"
-  },
-  {
    "id": "G040",
    "title": "اختبارات المراجعة الثانية (أ · ب · ج · د · هـ · ز)",
    "kind": "script",
@@ -2734,6 +2694,48 @@
     0
    ],
    "warn_rc": []
+  },
+  {
+   "id": "G045",
+   "title": "تغطية بوابة الأسلوب لكل سطح يقرأه القارئ",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G045.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق",
+     "ط15 — مدى بوابة الأسلوب"
+    ],
+    "files": [
+     "tools/final_gate.sh",
+     "tools/audit_style_coverage.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": [
+     "tests/test_vocab_registry.py"
+    ]
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; export B SITE; python3 \"$B/tools/make_tg_digest.py\" --date \"$D\" >/dev/null 2>&1 || true; python3 \"$B/tools/audit_style_coverage.py\" --date \"$D\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [],
+   "gate_title": "التسليم"
   },
   {
    "id": "B035",

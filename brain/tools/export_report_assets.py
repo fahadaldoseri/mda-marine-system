@@ -116,9 +116,9 @@ def serve(directory: Path, port: int = 0):
 
 
 def identity_of(html: str, date: str) -> str:
-    """هوية الترويسة: رقم النسخة والتاريخ والتصنيف، مستخرجة من الصفحة نفسها."""
+    """هوية الترويسة: رقم الإصدار والتاريخ والتصنيف، مستخرجة من الصفحة نفسها."""
     num = ""
-    m = re.search(r"رقم النسخة[^<]*<[^>]*>([^<]{3,40})", html)
+    m = re.search(r"رقم الإصدار[^<]*<[^>]*>([^<]{3,40})", html)
     if m:
         num = re.sub(r"\s+", " ", m.group(1)).strip()
     if not num:

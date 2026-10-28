@@ -144,7 +144,7 @@ def channel_identity(_approved: int) -> list[str]:
             bad.append(f"مصادر في أكثر من قناة: {dup}")
         if total != approved:
             bad.append(f"مجموع القنوات {total} لا يساوي المعتمد {approved}")
-    except Exception as e:  # لا يبتلع الخطأ: يُعلن الانهيار مانعًا
+    except (ImportError, AttributeError, OSError, ValueError, KeyError, TypeError, RuntimeError) as e:  # مُقيّد: لا يبتلع الخطأ، يُعلن التعذّر مانعًا
         bad.append(f"تعذّر تحميل خريطة القنوات: {type(e).__name__}: {e}")
     return bad
 

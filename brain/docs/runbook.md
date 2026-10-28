@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة 4fe288e31af6b4bd). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة f422d089b6b8769a). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -40,7 +40,7 @@
 | G017 | تماثل المهارات والمكتبات (مزامنة فورية) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G017.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh | stop |
 | G018 | سلامة المهارات | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G018.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_skills_integrity.py | stop |
 | G019 | بوابة الفهم (مرحلة $COMP_STAGE) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G019.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh | stop |
-| G020 | بوابة التحليل الاستخباري | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G020.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/intel_self_review.py | stop |
+| G020 | بوابة قراءة الموقف وتحليل المؤشرات | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G020.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/intel_self_review.py | stop |
 | G021 | استخراج أهداف OFAC | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G021.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh | stop |
 | G022 | فحص OFAC | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G022.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh | stop |
 | G023 | تغطية فحص العقوبات | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G023.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_ofac_coverage.py | stop |
@@ -56,12 +56,12 @@
 | G035 | تسرّب المحتوى الداخلي إلى المتن | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G035.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_internal_leak.py | stop |
 | G036 | المفردات المبسطة (تنبيهي حتى الموافقة) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G036.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_vocabulary.py | stop |
 | G044 | السجل الحاكم للمفردات ومُولَّده | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G044.log | ف1–ف5 — بوابة التحقق، ط15 — مدى بوابة الأسلوب | tools/final_gate.sh، tools/build_vocab_gate.py، appendices/simplified-vocabulary.json، tools/vocab_review.py | stop |
-| G045 | تغطية بوابة الأسلوب لكل سطح يقرأه القارئ | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G045.log | ف1–ف5 — بوابة التحقق، ط15 — مدى بوابة الأسلوب | tools/final_gate.sh، tools/audit_style_coverage.py | stop |
 | G040 | اختبارات المراجعة الثانية (أ · ب · ج · د · هـ · ز) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G040.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tests/test_review2.sh | stop |
 | G041 | اختبار انحدار المصلح (12→23) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G041.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tests/test_repair_regression.sh | stop |
 | B010 | بناء الموقع من البيانات | script |  |  | file_exists:{site}/dist/reports/{date}.html | س1 — النشر | {site}/generator/build_site.py، {site}/generator/sync_from_brain.py، tools/build_source_reliability.py، tools/sync_backup.sh، tools/build_macr_docx.py، tools/build_provenance.py، tools/build_styles_docx.py، tools/build_audit_report.py، tools/build_ambiguity_map.py، tools/build_instructions_doc.py، tools/build_report_docx.py، tools/build_report_docx_exact.py، tools/sync_profile_hash.py، {site}/generator | stop |
 | B020 | تصدير PDF المعتمد | script |  |  | min_bytes:{site}/dist/reports/pdf/{date}.pdf | س1 — النشر | tools/export_report_assets.py، tools/pdf_change_guard.py | stop |
 | B030 | بوابتا جودة الطباعة على PDF نفسه | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/B030.log | ف5 — شكل PDF وجودة الطباعة | validators/check_pdf_format.py، validators/check_print_quality.py | stop |
+| G045 | تغطية بوابة الأسلوب لكل سطح يقرأه القارئ | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G045.log | ف1–ف5 — بوابة التحقق، ط15 — مدى بوابة الأسلوب | tools/final_gate.sh، tools/audit_style_coverage.py | stop |
 | B035 | خط الأساس الرسمي (virgin) — تنبيهي | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/B035.log | س1 — النشر | tools/check_baseline.py | stop |
 | B040 | نسخة Word طبق الأصل (بوابة المخرج 9 تمنع التسليم بدونها) | script |  |  | cmd:bash -lc ls reports/docx/*{date}*.docx >/dev/null 2>&1 | س1 — النشر | tools/build_report_docx_exact.py | stop |
 | G005 | تطابق أرقام المصادر في كل المواضع | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G005.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh | stop |
@@ -86,7 +86,7 @@
 | D071 | تتبّع ملفات الشيفرة على الخادم | script |  |  | cmd:bash -lc grep -q '✔ كل ملفات الشيفرة' logs/runbook/{date}/D071.log | س2 — الإغلاق والدفع | validators/check_secrets.py، tools/redact.py، tools/github_backup.sh | stop |
 | Q010 | تدقيق المكتبات والمهارات (أسبوعي) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/Q010.log | ف3 — بوابات المكتبات | validators/check_library_use.py، validators/check_libraries_skills.py | stop |
 | Q015 | تدقيق المكتبات اللغوية (أسبوعي) (اختيارية) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/Q015.log | ف1–ف5 — بوابة التحقق | tools/audit_corpus.py | continue |
-| Q020 | قياس دقة التقدير (ربع سنوي) | script |  |  | cmd:bash -lc grep -q 'نسبة التحقق' logs/runbook/{date}/Q020.log | ف4 — التحليل الاستخباري | tools/estimate_accuracy.py | stop |
+| Q020 | قياس دقة التقدير (ربع سنوي) | script |  |  | cmd:bash -lc grep -q 'نسبة التحقق' logs/runbook/{date}/Q020.log | ف4 — قراءة الموقف وتحليل المؤشرات | tools/estimate_accuracy.py | stop |
 | D070 | النسخة الاحتياطية الختامية والتماثل بعد كل خطوات اليوم | script |  |  | cmd:bash -lc grep -q 'النتيجة: مطابق' logs/runbook/{date}/D070.log | س2 — الإغلاق والدفع | tools/github_backup.sh، validators/check_backup_parity.py، tools/github_backup.py، tools/apply_from_github.sh، tools/apply_from_github.py، tools/code_paths.py | stop |
 
 ## أقسام التقرير وارتباطاتها
@@ -103,7 +103,7 @@
 | 8 | الوقائع الجديدة (new-incidents) | {site}/generator/blocks.py | validators/check_language.py | runbook/prompts/sections/new-incidents.md | tests/test_sections_registry_vs_report.py |  |
 | 9 | التحذيرات والنشرات الرسمية (warnings) | {site}/generator/blocks.py | validators/check_code_spaces.py | runbook/prompts/sections/warnings.md | tests/test_sections_registry_vs_report.py |  |
 | 10 | سجل IMO والحوادث المؤكدة (imo-log) | {site}/generator/blocks.py | validators/check_carryover.py | runbook/prompts/sections/imo-log.md | tests/test_sections_registry_vs_report.py |  |
-| 11 | التحليل الاستخباري (intel-analysis) | {site}/generator/blocks.py | validators/check_intel.py | runbook/prompts/sections/intel-analysis.md | tests/test_sections_registry_vs_report.py |  |
+| 11 | قراءة الموقف وتحليل المؤشرات (intel-analysis) | {site}/generator/blocks.py | validators/check_intel.py | runbook/prompts/sections/intel-analysis.md | tests/test_sections_registry_vs_report.py |  |
 | 12 | الاحتمالات ونسبة الحوادث إلى جهات (attribution) | {site}/generator/blocks.py | validators/check_comprehension.py | runbook/prompts/sections/attribution.md | tests/test_sections_registry_vs_report.py |  |
 | 13 | الحركة الملاحية والتكدس (traffic) | {site}/generator/blocks.py | validators/check_style.py | runbook/prompts/sections/traffic.md | tests/test_sections_registry_vs_report.py |  |
 | 14 | ما لم يُحسم (open-questions) | {site}/generator/blocks.py | validators/check_comprehension.py | runbook/prompts/sections/open-questions.md | tests/test_sections_registry_vs_report.py |  |

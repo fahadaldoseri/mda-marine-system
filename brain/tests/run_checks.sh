@@ -215,3 +215,4 @@ echo "----- الحصيلة -----"
 printf '  نجح: %s · فشل: %s\n' "$PASS" "$FAIL"
 [ "$FAIL" -eq 0 ] || exit 1
 exit 0
+python3 "$ROOT/tests/test_gate_suggestions.py" 2>&1 | sed "s/^/    /" || FAIL=$((FAIL+1))

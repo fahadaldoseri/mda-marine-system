@@ -133,7 +133,9 @@ def pdf_link_proof(pdf_text: str, day: str) -> tuple[bool, str]:
     # الروابط لا تُطبع في PDF بنصها، فلا تُحسب مفقودة: تُستثنى أولًا.
     prose = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", src)
     prose = re.sub(r"https?://\S+", " ", prose)
-    toks = sorted(set(re.findall(r"[A-Za-z][A-Za-z0-9._/-]{3,}", prose)))
+    _raw = re.findall(r"[A-Za-z][A-Za-z0-9._/-]{3,}", prose)
+    # تجريد علامات الترقيم الختامية كي لا يُحسب الرمز ناقصًا بسبب نقطة نهاية الجملة
+    toks = sorted({x for x in (r.rstrip("./-") for r in _raw) if len(x) >= 4})
     miss_codes = [c for c in codes if c not in pdf_text]
     miss_toks = [t for t in toks if t not in pdf_text]
     ratio = 1 - len(miss_toks) / max(1, len(toks))

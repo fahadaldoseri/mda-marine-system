@@ -71,10 +71,10 @@ def shade(cell, hex_fill: str = "EEF2F7"):
 
 
 def cover_blocks(doc, meta: dict):
-    """ترويسة تشغيلية مطابقة لنسخة PDF: مستوى الخطر وبطاقة القرار."""
+    """ترويسة تشغيلية مطابقة لنسخة PDF: مستوى التهديد وبطاقة القرار."""
     from docx.shared import Pt
     dc = meta.get("decision_card") or {}
-    rows = [("مستوى الخطر", dc.get("risk", "")),
+    rows = [("مستوى التهديد", dc.get("risk", "")),
             ("ما تغيّر", dc.get("changed", "")),
             ("الإجراء المطلوب", dc.get("action", "")),
             ("ما نراقبه", dc.get("watch", "")),
