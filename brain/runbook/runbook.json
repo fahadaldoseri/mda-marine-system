@@ -3669,6 +3669,47 @@
    "warn_rc": []
   },
   {
+   "id": "Q012",
+   "title": "جولة إغلاق الأعطال والدروس (فحص بلا تعديل)",
+   "kind": "script",
+   "phase": "maintenance",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/Q012.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف3 — إغلاق الأعطال والدروس"
+    ],
+    "files": [
+     "tools/normalize_fault_log.py",
+     "tools/closure_round.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": [
+     "tests/test_closure_gate.py"
+    ]
+   },
+   "on_fail": "stop",
+   "schedule": "weekly",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; export B SITE; python3 tools/normalize_fault_log.py && python3 tools/closure_round.py; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  },
+  {
    "id": "Q015",
    "title": "تدقيق المكتبات اللغوية (أسبوعي)",
    "kind": "script",
@@ -3811,5 +3852,8 @@
  ],
  "retired_headings": [
   "قاموس الرموز والمصطلحات"
- ]
+ ],
+ "manual_tools": {
+  "tools/rotate_webhook_secret.py": "أداة على الطلب: تدوير سرّ الويب هوك يدويًا بقرار صاحب القرار بعد --dry-run؛ لا تُدرج في بوابة يومية لأنها تغيّر سرًّا مستهلكًا وتوقف الإرسال حتى تحديث المستهلكين."
+ }
 }

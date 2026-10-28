@@ -120,6 +120,12 @@ step "بوابة إغلاق المكتبات" 1 python3 validators/check_finding
 step "ترابط المكتبات والمهارات" 2 python3 validators/check_libraries_skills.py
 step "تماثل المهارات والمكتبات (مزامنة فورية)" 1 bash tools/restore_skills.sh --check
 step "سلامة المهارات" 1 python3 validators/check_skills_integrity.py
+# ── جولة تفعيل المهارات (2026-10-28): كل مدقّق في validators/ مُستدعى في بوابة التسليم ──
+# القاعدة الحاكمة: مدقّق لا تستدعيه بوابة التسليم = مدقّق معطّل (قياس بلا أثر).
+# العقود مقروءة من المدقّقات نفسها: check_closure يأخذ --brain، والباقي --date.
+step "بوابة الإغلاق (الأعطال والاستثناءات)" 2 python3 "$B/validators/check_closure.py" --brain "$B"
+step "سطح الإضافات (نقل الأقسام مرة واحدة)" 2 python3 "$B/validators/check_additions_surface.py" --date "$D" --site "$SITE"
+step "بطاقة القرار (لا إفراغ ولا رابط ميت)" 2 python3 "$B/validators/check_decision_card.py" --date "$D" --dist-root "$SITE/dist"
 step "بوابة الفهم (مرحلة $COMP_STAGE)" 2 python3 "$B/validators/check_comprehension.py" --date "$D"
 step "بوابة قراءة الموقف وتحليل المؤشرات" 2 python3 "$B/validators/check_intel.py" "$B/reports/$D-sectioned.md" "$B/web/meta/$D.json"
 # فحص العقوبات يُحدَّث لحظة البوابة، فالتقرير قد يُكتب أو يُعدَّل بعد الخط اليومي

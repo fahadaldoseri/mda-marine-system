@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة c17a2e13611c43e2). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة 0035ba297839f3f4). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -85,6 +85,7 @@
 | D060 | تسجيل رموز التقدير والأحداث | script |  |  | cmd:bash -lc grep -q 'رمز تقدير مسجّل' logs/runbook/{date}/D060.log | ب2 — ترتيب الأقسام | tools/register_estimate.py | stop |
 | D071 | تتبّع ملفات الشيفرة على الخادم | script |  |  | cmd:bash -lc grep -q '✔ كل ملفات الشيفرة' logs/runbook/{date}/D071.log | س2 — الإغلاق والدفع | validators/check_secrets.py، tools/redact.py، tools/github_backup.sh | stop |
 | Q010 | تدقيق المكتبات والمهارات (أسبوعي) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/Q010.log | ف3 — بوابات المكتبات | validators/check_library_use.py، validators/check_libraries_skills.py | stop |
+| Q012 | جولة إغلاق الأعطال والدروس (فحص بلا تعديل) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/Q012.log | ف3 — إغلاق الأعطال والدروس | tools/normalize_fault_log.py، tools/closure_round.py | stop |
 | Q015 | تدقيق المكتبات اللغوية (أسبوعي) (اختيارية) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/Q015.log | ف1–ف5 — بوابة التحقق | tools/audit_corpus.py | continue |
 | Q020 | قياس دقة التقدير (ربع سنوي) | script |  |  | cmd:bash -lc grep -q 'نسبة التحقق' logs/runbook/{date}/Q020.log | ف4 — قراءة الموقف وتحليل المؤشرات | tools/estimate_accuracy.py | stop |
 | D070 | النسخة الاحتياطية الختامية والتماثل بعد كل خطوات اليوم | script |  |  | cmd:bash -lc grep -q 'النتيجة: مطابق' logs/runbook/{date}/D070.log | س2 — الإغلاق والدفع | tools/github_backup.sh، validators/check_backup_parity.py، tools/github_backup.py، tools/apply_from_github.sh، tools/apply_from_github.py، tools/code_paths.py | stop |
