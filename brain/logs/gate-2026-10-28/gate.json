@@ -77,8 +77,8 @@
   },
   {
    "step": "بناء الصفحة (مزامنة + بناء)",
-   "status": "ok",
-   "exit_code": 0,
+   "status": "warn",
+   "exit_code": 1,
    "log": "13-بناء_الصفحة_(مزامنة_+_بناء).log"
   },
   {
@@ -137,8 +137,8 @@
   },
   {
    "step": "ترابط المكتبات والمهارات",
-   "status": "warn",
-   "exit_code": 1,
+   "status": "ok",
+   "exit_code": 0,
    "log": "23-ترابط_المكتبات_والمهارات.log"
   },
   {
@@ -215,8 +215,8 @@
   },
   {
    "step": "قابلية النقل (مسارات)",
-   "status": "block",
-   "exit_code": 2,
+   "status": "ok",
+   "exit_code": 0,
    "log": "36-قابلية_النقل_(مسارات).log"
   },
   {
@@ -293,8 +293,8 @@
   },
   {
    "step": "بوابات المخرج العشر",
-   "status": "ok",
-   "exit_code": 0,
+   "status": "block",
+   "exit_code": 2,
    "log": "49-بوابات_المخرج_العشر.log"
   },
   {
@@ -329,5 +329,5 @@
   }
  ],
  "log_dir": "/home/ubuntu/brain-marine-news/logs/gate-2026-10-28",
- "finished_utc": "2026-10-28T20:01:54Z"
+ "finished_utc": "2026-10-28T21:41:57Z"
 }
