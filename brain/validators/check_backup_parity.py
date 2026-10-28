@@ -174,7 +174,21 @@ def main() -> int:
     # عطل ك-60: المقارنة أغفلت جذر المهارات، فظهرت ملفات المستودع «زائدة» كذبًا.
     # القاعدة: كل جذر ينسخه github_backup يجب أن تدخله المقارنة بالنفس.
     sk_root = Path(os.environ["SKILLS_DIR"]) if os.environ.get("SKILLS_DIR") else (Path("/home/ubuntu/skills") if Path("/home/ubuntu/skills").is_dir() else B.parent / "skills")
-    for sk in ("marine-news-brain", "military-arabic-editing", "macr-system", "superpowers-method"):
+    # ك-224: كانت القائمة أسماءً ثابتة، فأي مهارة جديدة في المستودع تظهر «زائدة» كذبًا
+    # (vocabulary-guard-ops · self-learning-loop-ops). القاعدة الآن: كل مجلد مهارة يتتبعه
+    # المستودع يُقارَن بمقابله على الخادم — تُقوّي الحارس ولا تُضعفه.
+    _sk_names = set()
+    try:
+        _tracked = subprocess.run(["git", "-C", str(REPO), "ls-files", "-z", "skills"],
+                                  capture_output=True, check=True).stdout.decode("utf-8")
+        for _f in _tracked.split("\0"):
+            if _f.startswith("skills/") and _f.count("/") >= 2:
+                _sk_names.add(_f.split("/")[1])
+    except Exception:
+        _sk_names = set()
+    if not _sk_names:
+        _sk_names = {"marine-news-brain", "military-arabic-editing", "macr-system", "superpowers-method"}
+    for sk in sorted(_sk_names):
         d = sk_root / sk
         if d.is_dir():
             local.update(manifest(d, {"__pycache__", ".git"}, set(), f"skills/{sk}"))
