@@ -35,6 +35,69 @@ def pdf_text(path: Path) -> str:
     r=subprocess.run(["pdftotext", "-layout", str(path), "-"], capture_output=True, text=True)
     return r.stdout if r.returncode==0 else ""
 
+
+BIDI = re.compile(r"[\u202a-\u202e\u2066-\u2069\u200e\u200f]")
+TASHKEEL = re.compile(r"[\u064b-\u0652\u0640]")
+
+
+def norm(s: str) -> str:
+    """تطبيع نصّ عربي/لاتيني: بلا محارف اتجاه ولا تشكيل، ومسافات موحّدة."""
+    s = BIDI.sub("", s or "")
+    s = TASHKEEL.sub("", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def violating_pages(text: str, titles: list[str], min_index_hits: int = 3) -> dict:
+    """يرجع {العنوان: [صفحات مخالفة]} — مطابقة سطريّة لعناوين الأقسام فقط.
+
+    القواعد: تُطابق العناوين كأسطر مستقلة (لا داخل جملة) · تُستثنى صفحات الفهرس ·
+    وما يقع عند ملحق «إضافات» أو بعده مسموح.
+    """
+    raw = (text or "").split("\f")
+    if not raw:
+        return {}
+    # التقسيم إلى أسطر قبل التطبيع: التطبيع يدمج المسافات ومنها فاصل السطر
+    lines = [[norm(l) for l in p.splitlines() if norm(l)] for p in raw]
+
+    def is_heading(line: str, title: str) -> bool:
+        if not line or not title:
+            return False
+        bare = re.sub(r"^[\d\s.\-–—·]*", "", line)
+        bare = re.sub(r"[\s:·\-–—.]+$", "", bare)
+        return bare == title or line == title
+
+    titles = [x for x in titles if norm(x)]
+    hits = {x: [] for x in titles}
+    index_pages = set()
+    for i, ls in enumerate(lines):
+        n = sum(1 for x in titles if any(is_heading(l, norm(x)) for l in ls))
+        if n >= min_index_hits:
+            index_pages.add(i + 1)
+    annex = None
+    for i, ls in enumerate(lines):
+        if i + 1 in index_pages:
+            continue
+        for j, l in enumerate(ls):
+            if is_heading(l, "إضافات"):
+                annex = (i + 1, j)
+                break
+        if annex:
+            break
+    for i, ls in enumerate(lines):
+        for x in titles:
+            nx = norm(x)
+            for j, l in enumerate(ls):
+                if not is_heading(l, nx):
+                    continue
+                if (i + 1) in index_pages:
+                    continue
+                if annex and ((i + 1) > annex[0] or ((i + 1) == annex[0] and j > annex[1])):
+                    continue
+                hits[x].append(i + 1)
+                break
+    return {x: sorted(set(v)) for x, v in hits.items() if v}
+
+
 def report_date(a, site, brain):
     if a.date: return a.date
     candidates=sorted((site/"sources/reports").glob("*-sectioned.md")) or sorted((brain/"reports").glob("*-sectioned.md"))
@@ -98,12 +161,17 @@ def main():
     pdf=Path(a.pdf).expanduser().resolve() if a.pdf else dist/"reports/pdf"/f"{day}.pdf"
     if pdf.is_file():
         text=pdf_text(pdf)
-        if not text: (errors if a.strict_print else warnings).append("تعذر استخراج PDF")
-        elif effective and day >= effective:
-            for title in adds:
-                # استخراج العربية قد يعكس الحروف، لذلك سجّل عدم الإثبات كفشل فقط في النمط الصارم.
-                if title in text or title[::-1] in text:
-                    (errors if a.strict_print else warnings).append(f"قسم منقول ظاهر في PDF: «{title}»")
+        if not text:
+            (errors if a.strict_print else warnings).append("تعذر استخراج PDF")
+        else:
+            bad = violating_pages(text, adds)
+            if bad:
+                detail = " · ".join(f"«{k}» ص{','.join(map(str, v))}" for k, v in bad.items())
+                (errors if a.strict_print else warnings).append(
+                    f"قسم منقول ظاهر في متن التقرير المطبوع: {detail}")
+            else:
+                npg = len([p for p in text.split("\f") if p.strip()])
+                notes.append(f"لا قسم منقول في متن التقرير المطبوع (فُحص {npg} صفحة، باستثناء الفهرس والملحق)")
             notes.append(f"طباعة مفحوصة من {pdf.name} وفق السياسة")
     else:
         (errors if a.strict_print else warnings).append(f"PDF غير موجود للفحص: {pdf}")
