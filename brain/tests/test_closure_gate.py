@@ -95,6 +95,13 @@ def main():
                 [{'fault_id': 'ك-1', 'lesson_id': 'ك-1', 'barrier_id': 'X', 'run_evidence': 'خرج 0'}])
         rc = run(t); print(f'  8) معرّف حاجز غير صالح → {rc} {"✔" if rc == 2 else "✘"}'); ok &= rc == 2
 
+
+    with tempfile.TemporaryDirectory() as d:   # الهجوم 6-ب: دليل نصّي بلا نتيجة
+        t = Path(d) / 'i'
+        fixture(t, [row('ك-1', 'مغلق', 'تحقق تشغيلي ناجح', 'فعّال')], [],
+                [{'fault_id': 'ك-1', 'lesson_id': 'ك-1', 'barrier_id': 'B-1234abcd', 'run_evidence': 'مرور كاذب'}])
+        rc = run(t); print(f'  9) مغلق بدليل نصّي («مرور كاذب») → {rc} {"✔" if rc == 2 else "✘"}'); ok &= rc == 2
+
     print('  الحصيلة: كل الاختبارات نجحت ✔' if ok else '  الحصيلة: فشل ✘')
     return 0 if ok else 1
 
