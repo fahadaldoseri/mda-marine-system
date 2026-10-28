@@ -10,7 +10,22 @@ from collections import Counter
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-B = Path('/home/ubuntu/brain-marine-news')
+import os as _os
+_P = Path(__file__).resolve()
+_C = [_P.parents[i] for i in range(1, min(5, len(_P.parents)))]
+def _brain_root():
+    e = _os.environ.get("BRAIN_DIR")
+    if e and Path(e).is_dir():
+        return Path(e)
+    for r in _C:
+        c = r / "brain-marine-news"
+        if (c / "reports").is_dir():
+            return c
+    for r in _C:
+        if (r / "reports").is_dir():
+            return r
+    return _C[0] / "brain-marine-news"
+B = _brain_root()
 F = B / 'audit' / 'سجل-الأعطال-والثغرات.md'
 L = B / 'memory' / 'learning-log.jsonl'
 CANON = ['الرقم', 'التاريخ', 'المحور', 'العَرَض', 'السبب الجذري', 'الإصلاح', 'التشديد والحالة',
@@ -19,14 +34,15 @@ HDR = '| ' + ' | '.join(CANON) + ' |'
 SEP = '|' + '---|' * len(CANON)
 ID = re.compile(r'^\|\s*([كزعثم])-(\d+)(/[بج])?')
 DATE = re.compile(r'^\d{4}-\d{2}-\d{2}$')
+OUTCOME = re.compile(r'خرج\s*(?:0|2|70)|رمز\s*(?:0|2|70)|exit\s*(?:0|2)|فاشل\s*(?:0|صفر)'
+                     r'|\b(?:[1-9]|1[0-5])/(?:[1-9]|1[0-5])\b(?!\s*/)|صفر فاشل|مطابق تمامًا|بصمة\s*[0-9a-f]{6,}')
 OWNER = 'فهد الدوسري'
 UTC = timezone.utc
 
 POLICY = {
     'version': 1,
     'قاعدة_الإصلاح': {'لم يبدأ': ['—', '(الإصلاح مدمج', '(لا إصلاح', ''], 'قيد التنفيذ': ['لم ', 'بانتظار', 'قيد'], 'منفَّذ': ['*']},
-    'قاعدة_التحقق': {'تحقق تشغيلي ناجح': ['خرج 0', 'مطابق', 'أُثبت', 'أثبت', 'تحقّق', 'قاس'],
-                      'تحقق أولي': ['أولي'], 'غير متحقق': ['*']},
+    'قاعدة_التحقق': {'تحقق تشغيلي ناجح': ['مقياس OUTCOME (خرج/رمز/exit + رقم · فاشل 0 · n/n · بصمة)'], 'تحقق أولي': ['أولي'], 'غير متحقق': ['*']},
     'قاعدة_الحاجز': {'فعّال': ['أُثبت', 'مطابق', 'خرج 0'],
                       'مطبَّق': ['بوابة', 'اختبار', 'حارس', 'قاعدة', 'check_', 'فحص', 'قياس'], 'غير موثَّق': ['*']},
     'قاعدة_التشغيلية': ('مغلق = الإصلاح منفَّذ ∧ الحاجز مطبَّق/فعّال ∧ تحقق تشغيلي ناجح؛ وإلا: مفتوح إن نصّ السجل '
@@ -42,8 +58,9 @@ def pick(text: str, rules: dict) -> str:
 
 
 def derive(date, fix, barrier, status_raw) -> list:
-    blob = f'{fix} {barrier} {status_raw}'
-    f_fix, f_ver, f_bar = pick(fix, POLICY['قاعدة_الإصلاح']), pick(blob, POLICY['قاعدة_التحقق']), pick(barrier, POLICY['قاعدة_الحاجز'])
+    blob = f'{fix} {barrier}'   # الدليل من الإصلاح والحاجز فقط — لا من «الحالة الأصلية»
+    f_fix, f_bar = pick(fix, POLICY['قاعدة_الإصلاح']), pick(barrier, POLICY['قاعدة_الحاجز'])
+    f_ver = 'تحقق تشغيلي ناجح' if OUTCOME.search(blob) else pick(blob, POLICY['قاعدة_التحقق'])
     if f_fix == 'منفَّذ' and f_bar in ('مطبَّق', 'فعّال') and f_ver == 'تحقق تشغيلي ناجح':
         state = 'مغلق'
     elif re.search(r'مفتوح|لم يُصلح|بانتظار قرار', status_raw + barrier):
@@ -60,7 +77,7 @@ def to_canon(cells: list, ident: str, leftover: str = '') -> list | None:
     n = len(cells)
     if n >= 10:                      # مخطط قانوني سابق (11 خلية) → آخر 4 حقول موجودة
         date, axis, sym, cause, fix, barrier, status = cells[:7]
-        return [ident, date, axis, sym, cause, fix, barrier, status] + cells[7:11]
+        return [ident, date, axis, sym, cause, fix, barrier, status] + derive(date, fix, barrier, status)
     if n == 7 and DATE.match(cells[0] or ''):
         date, axis, sym, cause, fix, barrier, status = cells
     elif n == 7:                     # موروث: محور + سبب ثانوي
@@ -135,6 +152,15 @@ def main():
     recs_list, buckets, failed = parse(F.read_text(encoding='utf-8'))
     recs = buckets
     text, stats = rebuild(F.read_text(encoding='utf-8'), recs)
+    # ضمان الاتساق بالبناء: لا «مغلق» بلا دليل نتيجة في الإصلاح أو الحاجز
+    demoted = []
+    for ident, r in recs_list:
+        if r[11] == 'مغلق' and not OUTCOME.search(f'{r[5]} {r[6]}'):
+            r[9] = 'غير متحقق'
+            r[11] = 'موروث غير مثبت' if r[1] in ('—', '') else 'بانتظار التحقق'
+            demoted.append(ident)
+    if demoted:
+        print(f'  خُفّضت {len(demoted)} حالة «مغلق» بلا دليل نتيجة: {demoted[:8]}')
     states = Counter(r[11] for _, r in recs_list)
     print(f'  نسخة احتياطية: {bak}')
     print(f'  صفوف: {len(recs_list)} · تعذّر تحويلها: {failed or "لا شيء"} · إحصاء: {dict(stats)}')
@@ -164,13 +190,12 @@ def main():
                 pass
     by_fault = {}
     for e in entries:
-        for m in re.finditer(r'ك-(\d+)', json.dumps(e, ensure_ascii=False)):
-            by_fault.setdefault(f'ك-{int(m.group(1)):02d}', []).append(e)
+        for m in re.finditer(r'([كزعثم])-(\d+)', json.dumps(e, ensure_ascii=False)):
+            by_fault.setdefault(f'{m.group(1)}-{int(m.group(2))}', []).append(e)
     trace, derived = [], 0
     for ident, r in recs_list:
         key = ident.split('/')[0]
-        if key.startswith('ك-'):
-            key = f'ك-{int(key.split("-")[1]):02d}'
+        key = f'{key.split(chr(45))[0]}-{int(key.split(chr(45))[1])}'
         les = by_fault.get(key, [])
         if not les and re.search(r'بوابة|اختبار|قاس|قاعدة|حارس', r[6]):
             derived += 1
@@ -181,7 +206,8 @@ def main():
             entries.append(e); les = [e]; by_fault[key] = les
         trace.append({'fault_id': ident, 'state': r[11], 'lesson_id': les[0].get('fault_id', key) if les else None,
                       'barrier_id': 'B-' + hashlib.sha256((ident + r[6]).encode()).hexdigest()[:8],
-                      'run_evidence': ((r[7] or r[6] or '')[:120] or None)})
+                      '''run_evidence''': ((lambda m, ev: (ev[max(0, m.start()-70):m.end()+25] if m else None))(
+                          OUTCOME.search(f'{r[5]} {r[6]}'), f'{r[5]} {r[6]}'))})
     (B / 'audit' / 'traceability.json').write_text(
         json.dumps({'version': 1, 'generated_at': now.isoformat(),
                     'chain': 'fault_id ← lesson_id ← barrier_id ← run evidence', 'rows': trace},
@@ -197,7 +223,12 @@ def main():
         F.write_text(text, encoding='utf-8')
         L.write_text('\n'.join(json.dumps(e, ensure_ascii=False) for e in entries) + '\n', encoding='utf-8')
         t2, _ = rebuild(F.read_text(encoding='utf-8'), recs)
-        print(f'  ثبات الأداة: {"نعم ✔" if t2 == text else "لا ✘"} · التعلم: {len(entries)} مدخلًا')
+        L.write_text('\n'.join(json.dumps(e, ensure_ascii=False) for e in entries) + '\n', encoding='utf-8')
+        ents2 = [json.loads(x) for x in L.read_text(encoding='utf-8').splitlines() if x.strip()]
+        groups = Counter(x.split('/')[0] for x in recs)
+        stable = (rebuild(F.read_text(encoding='utf-8'), recs)[0] == text) and ents2 == entries
+        print(f'  ثبات كامل (سجل + تعلم): {'نعم ✔' if stable else 'لا ✘'} · التعلم: {len(entries)} مدخلًا')
+        print(f'  أرقام لها أكثر من صف: {sum(1 for v in groups.values() if v > 1)}')
     else:
         print('  (تجربة — أضف --apply)')
     return 0
