@@ -4,7 +4,7 @@
 import argparse, filecmp, shutil
 from pathlib import Path
 
-EXCLUDE_DIRS = {'.git', 'secrets', '__pycache__', 'shots', '.pytest_cache'}
+EXCLUDE_DIRS = {'.git', 'secrets', 'state', '__pycache__', 'shots', '.pytest_cache'}
 EXCLUDE_FILES = {'telegram-chat.json', 'telegram-targets.json', 'telegram-subscriptions.json'}
 EXCLUDE_GLOBS = ('*.pyc', '*.tmp', 'telegram*.json')
 
