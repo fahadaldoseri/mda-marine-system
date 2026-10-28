@@ -2501,6 +2501,119 @@
    "gate_title": "التسليم"
   },
   {
+   "id": "G047",
+   "title": "بطاقة القرار (لا إفراغ ولا رابط ميت)",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G047.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف4 — بطاقة القرار"
+    ],
+    "files": [
+     "validators/check_decision_card.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; export B SITE; python3 \"$B/validators/check_decision_card.py\" --date \"$D\" --dist-root \"$SITE/dist\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  },
+  {
+   "id": "G048",
+   "title": "بوابة الإغلاق (الأعطال والاستثناءات)",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G048.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف3 — إغلاق الأعطال"
+    ],
+    "files": [
+     "validators/check_closure.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": [
+     "tests/test_closure_gate.py"
+    ]
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; export B; python3 \"$B/validators/check_closure.py\" --brain \"$B\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  },
+  {
+   "id": "G046",
+   "title": "سطح الإضافات (نقل الأقسام مرة واحدة)",
+   "kind": "script",
+   "phase": "gates",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s logs/runbook/{date}/G046.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف4 — سياسة الأسطح"
+    ],
+    "files": [
+     "validators/check_additions_surface.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; export B SITE; python3 \"$B/validators/check_additions_surface.py\" --date \"$D\" --site \"$SITE\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  },
+  {
    "id": "G040",
    "title": "اختبارات المراجعة الثانية (أ · ب · ج · د · هـ · ز)",
    "kind": "script",
