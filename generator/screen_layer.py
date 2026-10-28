@@ -23,6 +23,9 @@ HERO_MAX_CHANGES = 2
 HERO_MAX_ACTIONS = 2
 
 
+from section_counts import for_title as _sec_count
+
+
 def first_sentence(text: str) -> str:
     """أول جملة من الفقرة التمهيدية: حتى أول نقطة يليها فراغ أو نهاية النص."""
     t = (text or "").strip()
@@ -78,11 +81,17 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
         chips.append(_chip("آخر تحديث", f'<span class="bidi">{esc(gen)}</span>'))
     if meta.get("window"):
         chips.append(_chip("فترة التغطية", esc(meta["window"])))
-    chk, cit = meta.get("sources_checked"), meta.get("sources_cited")
-    if chk not in (None, "") and cit not in (None, ""):
-        chips.append(_chip("المصادر", f'<span class="bidi">{esc(cit)}</span> من <span class="bidi">{esc(chk)}</span>'))
-    elif chk not in (None, ""):
-        chips.append(_chip("إجمالي المصادر المعتمدة", f'<span class="bidi">{esc(chk)}</span>'))
+    appr, auto, man, cit = (meta.get("sources_approved"), meta.get("sources_checked"),
+                            meta.get("sources_manual_reference_count"), meta.get("sources_cited"))
+    if appr not in (None, ""):
+        _parts = [f'<span class="bidi">{esc(appr)}</span> معتمدة']
+        if auto not in (None, ""):
+            _parts.append(f'<span class="bidi">{esc(auto)}</span> بالمسار الآلي')
+        if man not in (None, ""):
+            _parts.append(f'<span class="bidi">{esc(man)}</span> بالفحص اليدوي')
+        chips.append(_chip("المصادر", " · ".join(_parts)))
+    if cit not in (None, ""):
+        chips.append(_chip("مستشهد بها", f'<span class="bidi">{esc(cit)}</span>'))
 
     # العمود الجانبي: مستوى التهديد ثم المؤشرات
     side = []
@@ -133,25 +142,27 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
         changes = [c for c in (meta.get("changes") or []) if isinstance(c, str)]
     if changes:
         gist = _gist(changes, limit=2)
-        total = len(meta.get("changes") or []) or len(changes)
+        total = _sec_count(meta.get("date") or meta.get("iso") or meta.get("report_date") or "", "ما تغيّر منذ التقرير السابق", default=0) or len(meta.get("changes") or []) or len(changes)
         rows.append(
             '<div class="sc-row"><div class="sc-l">ما تغيّر</div>'
             f'<div class="sc-v"><p class="sc-gist">{inline(gist)}</p>'
             f'<p class="sc-more">{total} بندًا · '
             '<a href="/additions.html#sec-00" data-goto="ما تغيّر" data-alt="/additions.html#sec-00">التفاصيل</a></p></div></div>')
     acts = _list_items(dc.get("action"))
+    n_acts = _sec_count(meta.get("date") or meta.get("iso") or meta.get("report_date") or "", "التوجيهات التشغيلية", default=0) or len(acts)
     if acts:
         rows.append(
             '<div class="sc-row"><div class="sc-l">التوجيهات التشغيلية</div>'
             f'<div class="sc-v"><p class="sc-gist">{inline(_gist(acts, limit=2))}</p>'
-            f'<p class="sc-more">{len(acts)} بنود · '
+            f'<p class="sc-more">{n_acts} بنود · '
             '<a href="/additions.html#sec-03" data-goto="التوجيهات التشغيلية" data-alt="/additions.html#sec-03">القسم الكامل</a></p></div></div>')
     watch = _list_items(dc.get("watch"))
+    n_watch = _sec_count(meta.get("date") or meta.get("iso") or meta.get("report_date") or "", "مؤشرات التحذير المبكر", default=0) or len(watch)
     if watch:
         rows.append(
             '<div class="sc-row"><div class="sc-l">ما يُراقب خلال 24 ساعة</div>'
             f'<div class="sc-v"><p class="sc-gist">{inline(_gist(watch, limit=2))}</p>'
-            f'<p class="sc-more">{len(watch)} بنود · '
+            f'<p class="sc-more">{n_watch} بنود · '
             '<a href="/additions.html#sec-07" data-goto="مؤشرات التحذير المبكر" data-alt="/additions.html#sec-07">المؤشرات الكاملة</a></p></div></div>')
     key = ""
     if rkey_html:
@@ -305,6 +316,19 @@ body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,sys
 /* الحركة: عند طيّ الأقسام على الشاشة يبدأ الرسم المتحرّك لحظة التحويل إلى الطباعة فيلتقطه PDF ناقصًا
    (شريط الخط الزمني). الحالة النهائية هي المقصودة، وهي ما كانت تُلتقط قبل الطيّ. */
 @media print{.tl-fill{animation:none}}
+
+/* إصلاح ك-246/ك-247/ك-248 (2026-10-28): أهداف لمس ≥44px · إلغاء قص الملخصات · مؤشر شريط القفز */
+@media (max-width: 820px){
+  a, button, [role="button"], summary, .sc-toggle, .sn-brand, .sn-link, .hc-open,
+  #cont-link, .num, bdi { min-height:44px; }
+  a, button, [role="button"], summary { display:inline-flex; align-items:center; }
+  .sc-toggle, .sc-toggle.no-print { width:44px; height:44px; min-width:44px; }
+  .sc-gist, .sc-sum, [class*="clamp"], [class*="gist"] { -webkit-line-clamp:unset !important;
+    overflow:visible !important; max-height:none !important; display:block !important;
+    white-space:normal !important; text-overflow:clip !important; }
+  nav.sc-jump { -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 26px), transparent 100%);
+    mask-image:linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 26px), transparent 100%); }
+}
 """
 
 SCREEN_JS = r"""

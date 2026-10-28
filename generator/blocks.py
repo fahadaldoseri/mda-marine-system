@@ -21,6 +21,9 @@ _EMPTY_CTX = {"date": None, "official": {}}
 _CODE_CTX = contextvars.ContextVar("mda_code_ctx", default=_EMPTY_CTX)
 
 
+from section_counts import for_title as _sec_count
+
+
 def set_code_context(report_date=None, official=None):
     """يضبط سياق عرض الرموز: تاريخ الإصدار وخريطة الأرقام الرسمية."""
     _CODE_CTX.set({"date": report_date, "official": dict(official or {})})

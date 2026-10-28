@@ -180,6 +180,7 @@ def diagnosis_section(diag: list, esc) -> str:
     tiles = ''.join(
         f'<div class="dx-tile dx-{k}"><b>{len(groups.get(k, []))}</b><span>{lab}</span></div>'
         for k, lab in labels)
+    total_approved = sum(len(v) for v in groups.values())
     needs = sorted([r for r in diag if r.get('action') and r['action'] != 'لا إجراء'],
                    key=lambda r: r['num'])
     if needs:
@@ -191,7 +192,7 @@ def diagnosis_section(diag: list, esc) -> str:
         body = '<tr><td colspan="4">كل المصادر تعمل بلا إجراء مطلوب.</td></tr>'
     stamp = _dt.datetime.utcnow().strftime('%Y-%m-%d')
     return f"""
-  <h2 class="sx-h2">التشخيص الحي: {len(needs)} مصدرًا تحتاج إجراءً من أصل {len(diag)} ({stamp})</h2>
+  <h2 class="sx-h2">التشخيص الحي: {len(needs)} مصدرًا ذات مسار آلي تحتاج إجراءً من أصل {total_approved} معتمدة</h2>
   <div class="dx-tiles">{tiles}</div>
   <div class="sx-note">الجدول أدناه يعرض المصادر التي تحتاج إجراءً فقط، والتوزيع الكامل في المربعات أعلاه. التشخيص يقيس لكل مصدر مسار التغذية وحداثتها، وقراءة الصفحة المباشرة، ثم يصنّف المسار الفعلي.
   «يعمل آليًا» يعني قراءة المادة فعلًا داخل حدّ الحداثة المعتمد (14 يومًا). و«يحتاج متصفح» يعني أن الحجب أو بنية الصفحة تمنع القراءة الآلية.

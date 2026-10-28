@@ -472,6 +472,9 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .blk-lede{font-size:12.5px;color:var(--faint);margin:-6px 0 10px;line-height:1.6}
 
 @media print{
+  /* ك-245: منع انقسام مفتاح الخريطة بين صفحتين في PDF */
+  .map-key, .map-legend, .key-box, .mx-key { break-inside: avoid !important; page-break-inside: avoid !important; }
+
   :root{
     --ink:#0a1524;--ink-2:#20303f;--muted:#4b5e73;--faint:#5c728c;
     --line:#8d9bad;--line-2:#5d6f84;--panel:#fff;--panel-2:#fff;--panel-3:#eef2f7;
@@ -1335,10 +1338,12 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
         if _m:
             win = f'<bdi class="bidi">{_m.group(1)}</bdi> {_m.group(2)}'
         chips.append(f'<span class="chip">فترة التغطية <b>{win}</b></span>')
+    if meta.get("sources_approved") not in (None, ""):
+        chips.append(f'<span class="chip">المصادر المعتمدة <b class="bidi">{esc(meta["sources_approved"])}</b></span>')
     if meta.get("sources_checked") not in (None, ""):
-        chips.append(f'<span class="chip">إجمالي المصادر المعتمدة <b class="bidi">{esc(meta["sources_checked"])}</b></span>')
+        chips.append(f'<span class="chip">بالمسار الآلي <b class="bidi">{esc(meta["sources_checked"])}</b></span>')
     if meta.get("sources_manual_reference_count") not in (None, ""):
-        chips.append(f'<span class="chip">مفحوصة يدويًا <b class="bidi">{esc(meta["sources_manual_reference_count"])}</b></span>')
+        chips.append(f'<span class="chip">بالفحص اليدوي <b class="bidi">{esc(meta["sources_manual_reference_count"])}</b></span>')
     if meta.get("sources_cited") not in (None, ""):
         chips.append(f'<span class="chip">مصادر مستشهد بها <b class="bidi">{esc(meta["sources_cited"])}</b></span>')
 
