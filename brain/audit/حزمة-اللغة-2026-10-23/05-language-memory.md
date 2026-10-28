@@ -13616,7 +13616,7 @@ if __name__ == "__main__":
 ### السطر 65 — الحالة: confirmed
 
 ```json
-{"lesson_id": "f714ad24f95be5bd", "timestamp_utc": "2026-10-13T14:28:33.877923+00:00", "lesson": "اصطلاح رقم النسخة المعتمد: «و ب YY/MM/NN» — «و ب» اختصار اسم الجهة (مركز الوعي بالمجال البحري) لا رمز نوع أو تصنيف، وNN رقم الإصدار المتسلسل داخل الشهر ويبدأ من 1 عند كل شهر أو سنة جديدة", "replacement": "", "category": "formatting", "origin": "user", "evidence": "", "status": "confirmed"}
+{"lesson_id": "f714ad24f95be5bd", "timestamp_utc": "2026-10-13T14:28:33.877923+00:00", "lesson": "اصطلاح رقم الإصدار المعتمد: «و ب YY/MM/NN» — «و ب» اختصار اسم الجهة (مركز الوعي بالمجال البحري) لا رمز نوع أو تصنيف، وNN رقم الإصدار المتسلسل داخل الشهر ويبدأ من 1 عند كل شهر أو سنة جديدة", "replacement": "", "category": "formatting", "origin": "user", "evidence": "", "status": "confirmed"}
 ```
 ### السطر 75 — الحالة: confirmed
 

@@ -99,7 +99,7 @@ SECTION_ICONS = {
 
 SECTION_HINTS = {
     "ما تغيّر منذ التقرير السابق": "ما استُجد، وما تغيّر تصنيفه، وما أُغلق.",
-    "الخلاصة": "الموقف ومستوى الخطر والإجراء المقترح في ثلاثة أسطر.",
+    "الخلاصة": "الموقف ومستوى التهديد والإجراء المقترح في ثلاثة أسطر.",
     "التوزيع الجغرافي للوقائع": "أين تركّزت الوقائع، وحصيلة IMO على القطاعات.",
     "مؤشرات الموقف": "الأرقام، ومقارنتها بتقرير أمس، وحدود كل رقم.",
     "مستوى التهديد": "التقييم الرسمي، والتقدير التحليلي، وحدود الثقة.",
@@ -1182,7 +1182,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
         # عطل ك-72: تنبيه القسم كان داخل حلقة كتل المؤشرات فيتكرر بعددها (6 مرات في إصدار 20 أكتوبر).
         # القاعدة: تنبيه القسم يُكتب مرة واحدة في مستوى القسم لا داخل حلقة عناصره.
         if "الحركة" in t:
-            section_html += '<p class="src-note">قراءة اتجاه من منصة رصد — تُراعى مهلة التحديث واحتمال انقطاع الإرسال أو spoofing.</p>'
+            section_html += '<p class="src-note">قراءة اتجاه من منصة (يُذكر اسم المصدر) — تُراعى مهلة التحديث واحتمال انقطاع الإرسال أو spoofing.</p>'
         if "التوزيع الجغرافي" in t:
             section_html += '<p class="src-note">تحذيرات IHO/NAVAREA تُربط بإحداثياتها عند توفرها؛ والويب لا يستبدل البث الملاحي المعتمد.</p>'
         body.append(section_html)
@@ -1201,7 +1201,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
 
     chips = []
     if meta.get("version"):
-        chips.append(f'<span class="chip">رقم النسخة <b>{esc(meta["version"])}</b></span>')
+        chips.append(f'<span class="chip">رقم الإصدار <b>{esc(meta["version"])}</b></span>')
     if generated:
         chips.append(f'<span class="chip">آخر تحديث <b class="bidi">{esc(generated)}</b></span>')
     if meta.get("window"):
