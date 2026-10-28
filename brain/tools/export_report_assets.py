@@ -88,6 +88,13 @@ section.doc p,section.doc li,.sec-lede,.masthead .lede,.glossary li,.src-grid li
 .dc-list li,.chg-list li,.ev-list li,.map-caption,footer.foot{text-align:justify;text-align-last:start;hyphens:none}
 section.doc h2,section.doc h3,section.doc h4,.h-rule,.chip,.kpi,.tag,.st-badge,
 .map-legend li,.conf,.cls-banner,.threat,.toc li,.ev-code{text-align:start}
+
+/* عطل 2026-10-28: الملحق تجاوز الصفحة التاسعة بفقرة واحدة (صفحة عاشرة بتعبئة 7%).
+   الحكم: ضغط الملحق وحده (تباعد أسطر ومقاطع) — لا يمسّ متن التقرير ولا هيئة الغلاف. */
+.additions-annex section.doc{padding:0 0 2mm}
+.additions-annex section.doc p{line-height:1.36;margin:.9mm 0}
+.additions-annex section.doc h3{margin:2.2mm 0 1mm !important}
+.additions-annex section.doc h2{margin:2mm 0 1.4mm !important}
 """
 
 HEADER_TPL = """<div style="font-family:'Noto Kufi Arabic','IBM Plex Sans Arabic',sans-serif;font-size:7.6px;
