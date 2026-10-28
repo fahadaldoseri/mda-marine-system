@@ -248,6 +248,18 @@ MOBILE_NAV_CSS = """
   .topbar .tb-meta{display:flex;gap:6px;flex:0 0 auto}
   .topbar .btn{min-height:40px;padding:6px 10px}
 }
+  .topbar .btn{min-width:44px;display:inline-flex;align-items:center;justify-content:center}
+}
+/* أهداف لمس على سطح المكتب — الشاشة فقط (قياس 2026-10-29: 34×35.3 و93.9×39.3) */
+@media screen{
+  .topbar a, .topbar button, .topbar .btn, .sn-brand, .sn-links a,
+  .sc-toggle, .sc-jump a, .chip, .chip a, .tb-meta .btn,
+  .sn-tools button, .sn-tools a, .sn-scale button, .sc-more a,
+  .sc-all button, details.sc-basis summary, .sf-inner a{
+    min-height:44px; min-width:44px; display:inline-flex; align-items:center;
+    justify-content:center; box-sizing:border-box;
+  }
+}
 /* أهداف لمس وقص النص على الجوال — الشاشة فقط */
 @media screen and (max-width:820px){
   a, button, [role="button"], summary {

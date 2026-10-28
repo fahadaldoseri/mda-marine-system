@@ -565,6 +565,7 @@ body.daylight .kpi em{opacity:.95}
 .sp-head{margin:18px 0 6px}
 .sp-head h1{font-size:clamp(22px,3.4vw,32px);margin:0 0 8px}
 .sp-head p{color:var(--ink2);font-size:14.5px;line-height:1.8;margin:0}
+.sx-badge{font-size:11px;padding:1px 6px;border:1px solid var(--line);border-radius:999px;white-space:nowrap;opacity:.85}
 .sx-note{background:var(--panel);border:1px solid var(--line);border-radius:12px;
   padding:10px 14px;margin:14px 0;font-size:13.5px;color:var(--ink2)}
 .sx-h2{font-size:17px;margin:26px 0 10px;padding-inline-start:10px;border-inline-start:3px solid var(--accent)}
@@ -691,6 +692,18 @@ body.daylight .brand-title,body.daylight .brand-sub{color:#0d1a2b}
   .topbar .brand-title{font-size:13.5px;line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
   .topbar .tb-meta{display:flex;gap:6px;flex:0 0 auto}
   .topbar .btn{min-height:40px;padding:6px 10px}
+}
+  .topbar .btn{min-width:44px;display:inline-flex;align-items:center;justify-content:center}
+
+/* أهداف لمس على سطح المكتب — الشاشة فقط (قياس 2026-10-29: 34×35.3 و93.9×39.3) */
+@media screen{
+  .topbar a, .topbar button, .topbar .btn, .sn-brand, .sn-links a,
+  .sc-toggle, .sc-jump a, .chip, .chip a, .tb-meta .btn,
+  .sn-tools button, .sn-tools a, .sn-scale button, .sc-more a,
+  .sc-all button, details.sc-basis summary, .sf-inner a{
+    min-height:44px; min-width:44px; display:inline-flex; align-items:center;
+    justify-content:center; box-sizing:border-box;
+  }
 }
 /* أهداف لمس وقص النص على الجوال — الشاشة فقط */
 @media screen and (max-width:820px){
@@ -827,22 +840,22 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <div class="sx-note">حالة آخر فحص للتغذيات — 2026-10-28:
   المصادر المعتمدة: <b>62</b> · لها مسار آلي: <b>60</b>
-  (ناجحة <b>59</b> · متعذّرة <b>1</b>) · بلا مسار آلي بعد: <b>2</b>
-  · مسارات معلنة <b>81</b> نجح منها <b>72</b>
-  · عناصر مجمَّعة <b>1787</b>.
+  (ناجحة <b>60</b> · متعذّرة <b>0</b>) · بلا مسار آلي بعد: <b>2</b>
+  · مسارات معلنة <b>81</b> نجح منها <b>74</b>
+  · عناصر مجمَّعة <b>1826</b>.
   المصدر الواحد قد تكون له عدة مسارات؛ وعدد المسارات لا يُقرأ عددًا للمصادر.
-  والتعذّر يُسجَّل قيدًا معروفًا؛ وسياسة النظام تمنع تجاوز حماية المواقع.</div>
+  والتعذّر يُسجَّل قيدًا معروفًا؛ وسياسة النظام تمنع تجاوز حماية المواقع.
+   بصمة ملف الفحص: <code>462c30d3d05c</code> — تُعاد الأرقام بحساب sha256 للملف sources/feeds-status.json.</div>
 
 
-  <h2 class="sx-h2">التشخيص الحي: 1 مصدرًا متعذّرًا و2 بلا مسار آلي، من أصل 62 معتمدة</h2>
-  <div class="dx-tiles"><div class="dx-tile dx-ok"><b>59</b><span>ناجحة آليًا</span></div><div class="dx-tile dx-bad"><b>1</b><span>متعذّرة الآن</span></div><div class="dx-tile dx-lim"><b>2</b><span>بلا مسار آلي مُثبت</span></div><div class="dx-tile dx-none"><b>0</b><span>بلا تغذية معلنة</span></div></div>
+  <h2 class="sx-h2">التشخيص الحي: 0 مصدرًا متعذّرًا و2 بلا مسار آلي، من أصل 62 معتمدة</h2>
+  <div class="dx-tiles"><div class="dx-tile dx-ok"><b>60</b><span>ناجحة آليًا</span></div><div class="dx-tile dx-bad"><b>0</b><span>متعذّرة الآن</span></div><div class="dx-tile dx-lim"><b>2</b><span>بلا مسار آلي مُثبت</span></div><div class="dx-tile dx-none"><b>0</b><span>بلا تغذية معلنة</span></div></div>
   <div class="sx-note">هذا القسم يُبنى من قياس فحص التغذيات نفسه بتاريخ 2026-10-28، لا من لقطة محفوظة.
   «ناجحة آليًا» يعني أن المسار قرأ محتوى حقيقيًا (عنوان مادة أو نصّ منشور) لا روابط صور أو قوائم تنقّل.
   و«بلا مسار آلي مُثبت» مصدر معتمد يُقرأ يدويًا أو من أرشيف رسمي حتى يُثبت مسار آلي له.</div>
   <div class="sx-tblwrap"><table class="sx-tbl cardified">
     <thead><tr><th>#</th><th>المصدر</th><th>الحالة المقيسة</th><th>الإجراء</th></tr></thead>
     <tbody>
-<tr class="dx-bad"><td class="n" data-label="#">41</td><td data-label="المصدر">USNI News</td><td data-label="الحالة المقيسة">تعذّر — قيد حماية موثق · 403</td><td data-label="الإجراء">إصلاح المسار أو إضافة مسار بديل</td></tr>
 <tr class="dx-lim"><td class="n" data-label="#">39</td><td data-label="المصدر">IHO — المنظمة الهيدروغرافية الدولية</td><td data-label="الحالة المقيسة">بلا مسار آلي مُثبت بعد</td><td data-label="الإجراء">قراءة يدوية أو حفظ أصل رسمي حتى يُثبت مسار آلي</td></tr>
 <tr class="dx-lim"><td class="n" data-label="#">52</td><td data-label="المصدر">Synmax</td><td data-label="الحالة المقيسة">بلا مسار آلي مُثبت بعد</td><td data-label="الإجراء">قراءة يدوية أو حفظ أصل رسمي حتى يُثبت مسار آلي</td></tr>
     </tbody>
@@ -850,8 +863,8 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <h2 class="sx-h2">حالة المصادر المفحوصة</h2>
   <div class="sx-legend">
-    <span><b style="background:#1f9d6b"></b>نجح الفحص (59)</span>
-    <span><b style="background:#c8402f"></b>متعذّر (1)</span>
+    <span><b style="background:#1f9d6b"></b>نجح الفحص (60)</span>
+    <span><b style="background:#c8402f"></b>متعذّر (0)</span>
     <span><b style="background:#5a6b86"></b>لا تغذية RSS (2)</span>
   </div>
   <div class="sx-note">الرمادي: مصدر مُدرج في سجل المصادر المعتمد ولا تغذية آلية له في فحص التغذيات اليومي؛
@@ -883,7 +896,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">23</span><span class="sx-name">Gulf Daily News</span></div><div class="sx-state">نجح · 48 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">24</span><span class="sx-name">وكالة الأنباء القطرية (قنا)</span></div><div class="sx-state">نجح · 93 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">25</span><span class="sx-name">وكالة أنباء الإمارات (وام)</span></div><div class="sx-state">نجح · 38 عنصرًا · official-telegram:wamnews_en</div></div>
-<div class="sx-card ok"><div class="sx-top"><span class="sx-num">26</span><span class="sx-name">وكالة الأنباء السعودية (واس)</span></div><div class="sx-state">نجح · 14 عنصرًا · official:spa-next-data, primary</div></div>
+<div class="sx-card ok"><div class="sx-top"><span class="sx-num">26</span><span class="sx-name">وكالة الأنباء السعودية (واس)</span></div><div class="sx-state">نجح · 14 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">27</span><span class="sx-name">وكالة الأنباء الكويتية (كونا)</span></div><div class="sx-state">نجح · 60 عنصرًا · official-page:jina.ai/kuna</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">28</span><span class="sx-name">وكالة الأنباء العُمانية</span></div><div class="sx-state">نجح · 59 عنصرًا · fallback:omannews-home, fallback:omannews-rssinfo</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">29</span><span class="sx-name">البحرية الملكية البريطانية</span></div><div class="sx-state">نجح · 3 عنصرًا · primary</div></div>
@@ -892,13 +905,13 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">32</span><span class="sx-name">IMB/ICC — القرصنة</span></div><div class="sx-state">نجح · 10 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">33</span><span class="sx-name">MARAD/MSCI</span></div><div class="sx-state">نجح · 11 عنصرًا · fallback:jina.ai/marad-rss</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">34</span><span class="sx-name">MSCIO</span></div><div class="sx-state">نجح · 3 عنصرًا · primary</div></div>
-<div class="sx-card ok"><div class="sx-top"><span class="sx-num">35</span><span class="sx-name">Splash 247</span></div><div class="sx-state">نجح · 10 عنصرًا · primary</div></div>
+<div class="sx-card ok"><div class="sx-top"><span class="sx-num">35</span><span class="sx-name">Splash 247</span></div><div class="sx-state">نجح · 20 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">36</span><span class="sx-name">Lloyd&#x27;s List</span></div><div class="sx-state">نجح · 24 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">37</span><span class="sx-name">MarineLink</span></div><div class="sx-state">نجح · 20 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">38</span><span class="sx-name">Jerusalem Post</span></div><div class="sx-state">نجح · 33 عنصرًا · primary</div></div>
 <div class="sx-card none"><div class="sx-top"><span class="sx-num">39</span><span class="sx-name">IHO — المنظمة الهيدروغرافية الدولية</span></div><div class="sx-state">مفحوصة يدويًا — لا تُفحص آليًا</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">40</span><span class="sx-name">MarineTraffic</span></div><div class="sx-state">نجح · 27 عنصرًا · official-page:jina.ai/marinetraffic-news</div></div>
-<div class="sx-card bad"><div class="sx-top"><span class="sx-num">41</span><span class="sx-name">USNI News</span></div><div class="sx-state">تعذّر — قيد حماية موثق · 403</div></div>
+<div class="sx-card ok"><div class="sx-top"><span class="sx-num">41</span><span class="sx-name">USNI News</span></div><div class="sx-state">نجح · 30 عنصرًا · browser</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">42</span><span class="sx-name">Naval News</span></div><div class="sx-state">نجح · 5 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">43</span><span class="sx-name">The Maritime Executive</span></div><div class="sx-state">نجح · 31 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">44</span><span class="sx-name">Windward</span></div><div class="sx-state">نجح · 12 عنصرًا · primary</div></div>
@@ -918,7 +931,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">58</span><span class="sx-name">المركز الإعلامي للقوات المسلحة اليمنية</span></div><div class="sx-state">نجح · 47 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">59</span><span class="sx-name">المتحدث العسكري للطرف المقابل (تليغرام)</span></div><div class="sx-state">نجح · 19 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">60</span><span class="sx-name">المتحدث الرسمي باسم قوات التحالف (X)</span></div><div class="sx-state">نجح · 5 عنصرًا · primary</div></div>
-<div class="sx-card ok"><div class="sx-top"><span class="sx-num">61</span><span class="sx-name">معمر الإرياني — وزير الإعلام اليمني (X)</span></div><div class="sx-state">نجح · 4 عنصرًا · primary</div></div>
+<div class="sx-card ok"><div class="sx-top"><span class="sx-num">61</span><span class="sx-name">معمر الإرياني — وزير الإعلام اليمني (X)</span></div><div class="sx-state">نجح · 3 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">62</span><span class="sx-name">المركز الإعلامي للقوات المسلحة اليمنية — إنجليزي (X)</span></div><div class="sx-state">نجح · 5 عنصرًا · primary</div></div>
   </div>
 
@@ -964,10 +977,10 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
   <div class="sx-tblwrap"><table class="sx-tbl cardified">
     <thead><tr><th>#</th><th>المصدر</th><th>النوع</th><th>الموثوقية</th><th>المصداقية</th><th>الأساس</th></tr></thead>
     <tbody>
-<tr><td class="n" data-label="#">1</td><td data-label="المصدر"><a href="https://www.ukmto.org/recent-incidents" target="_blank" rel="noopener">UKMTO — الحوادث الأخيرة</a></td><td data-label="النوع">رسمي دولي</td><td class="g" data-label="الموثوقية">A</td><td class="g" data-label="المصداقية">2</td><td data-label="الأساس">المصدر الرسمي المعتمد لبلاغات الحوادث في المنطقة؛ بلاغاته أولية وتُحدَّث لاحقًا، وتبقى درجته 2 حتى تأكيد مستقل ثم يصبح 1.</td></tr>
-<tr><td class="n" data-label="#">2</td><td data-label="المصدر"><a href="https://www.ukmto.org/ukmto-products/warnings/2026" target="_blank" rel="noopener">UKMTO — التحذيرات 2026</a></td><td data-label="النوع">رسمي دولي</td><td class="g" data-label="الموثوقية">A</td><td class="g" data-label="المصداقية">2</td><td data-label="الأساس">تحذير رسمي موجه للملاحة، يُنشر بقناة رسمية مباشرة.</td></tr>
-<tr><td class="n" data-label="#">3</td><td data-label="المصدر"><a href="https://www.ukmto.org/ukmto-products/advisories/2026" target="_blank" rel="noopener">UKMTO — النشرات الاستشارية 2026</a></td><td data-label="النوع">رسمي دولي</td><td class="g" data-label="الموثوقية">A</td><td class="g" data-label="المصداقية">2</td><td data-label="الأساس">نشرة استشارية رسمية تصدر عن الجهة نفسها بلا وسيط.</td></tr>
-<tr><td class="n" data-label="#">4</td><td data-label="المصدر"><a href="https://www.ukmto.org/ukmto-products/weekly-reports/2026" target="_blank" rel="noopener">UKMTO — التقارير الأسبوعية 2026</a></td><td data-label="النوع">رسمي دولي</td><td class="g" data-label="الموثوقية">A</td><td class="g" data-label="المصداقية">2</td><td data-label="الأساس">تقرير دوري رسمي بحصيلة أسبوعية موثقة.</td></tr>
+<tr><td class="n" data-label="#">1</td><td data-label="المصدر"><a href="https://www.ukmto.org/recent-incidents" target="_blank" rel="noopener">UKMTO — الحوادث الأخيرة</a> <span class="sx-badge" title="حماية Cloudflare ترفض الفحص الآلي؛ الرابط يعمل في المتصفح">يُفتح بالمتصفح</span></td><td data-label="النوع">رسمي دولي</td><td class="g" data-label="الموثوقية">A</td><td class="g" data-label="المصداقية">2</td><td data-label="الأساس">المصدر الرسمي المعتمد لبلاغات الحوادث في المنطقة؛ بلاغاته أولية وتُحدَّث لاحقًا، وتبقى درجته 2 حتى تأكيد مستقل ثم يصبح 1.</td></tr>
+<tr><td class="n" data-label="#">2</td><td data-label="المصدر"><a href="https://www.ukmto.org/ukmto-products/warnings/2026" target="_blank" rel="noopener">UKMTO — التحذيرات 2026</a> <span class="sx-badge" title="حماية Cloudflare ترفض الفحص الآلي؛ الرابط يعمل في المتصفح">يُفتح بالمتصفح</span></td><td data-label="النوع">رسمي دولي</td><td class="g" data-label="الموثوقية">A</td><td class="g" data-label="المصداقية">2</td><td data-label="الأساس">تحذير رسمي موجه للملاحة، يُنشر بقناة رسمية مباشرة.</td></tr>
+<tr><td class="n" data-label="#">3</td><td data-label="المصدر"><a href="https://www.ukmto.org/ukmto-products/advisories/2026" target="_blank" rel="noopener">UKMTO — النشرات الاستشارية 2026</a> <span class="sx-badge" title="حماية Cloudflare ترفض الفحص الآلي؛ الرابط يعمل في المتصفح">يُفتح بالمتصفح</span></td><td data-label="النوع">رسمي دولي</td><td class="g" data-label="الموثوقية">A</td><td class="g" data-label="المصداقية">2</td><td data-label="الأساس">نشرة استشارية رسمية تصدر عن الجهة نفسها بلا وسيط.</td></tr>
+<tr><td class="n" data-label="#">4</td><td data-label="المصدر"><a href="https://www.ukmto.org/ukmto-products/weekly-reports/2026" target="_blank" rel="noopener">UKMTO — التقارير الأسبوعية 2026</a> <span class="sx-badge" title="حماية Cloudflare ترفض الفحص الآلي؛ الرابط يعمل في المتصفح">يُفتح بالمتصفح</span></td><td data-label="النوع">رسمي دولي</td><td class="g" data-label="الموثوقية">A</td><td class="g" data-label="المصداقية">2</td><td data-label="الأساس">تقرير دوري رسمي بحصيلة أسبوعية موثقة.</td></tr>
 <tr><td class="n" data-label="#">5</td><td data-label="المصدر"><a href="https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx" target="_blank" rel="noopener">IMO — سجل الحوادث المؤكدة</a></td><td data-label="النوع">رسمي دولي</td><td class="g" data-label="الموثوقية">A</td><td class="g" data-label="المصداقية">1</td><td data-label="الأساس">حصيلة رسمية للحوادث المؤكدة والوفيات؛ أعلى مرجعية إحصائية في التقرير.</td></tr>
 <tr><td class="n" data-label="#">6</td><td data-label="المصدر"><a href="https://straits.live/" target="_blank" rel="noopener">straits.live</a></td><td data-label="النوع">مرصد خاص</td><td class="g" data-label="الموثوقية">C</td><td class="g" data-label="المصداقية">3</td><td data-label="الأساس">منصة خاصة غير رسمية؛ أرقام الانتظار والتصنيف التأميني تقديرية ومتغيرة.</td></tr>
 <tr><td class="n" data-label="#">7</td><td data-label="المصدر"><a href="https://gcaptain.com" target="_blank" rel="noopener">gCaptain</a></td><td data-label="النوع">إعلام بحري</td><td class="g" data-label="الموثوقية">B</td><td class="g" data-label="المصداقية">2</td><td data-label="الأساس">إعلام متخصص ينشر تفاصيل تشغيلية؛ لا يوثّق بمعيار رسمي.</td></tr>
