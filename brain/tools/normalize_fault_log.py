@@ -49,9 +49,14 @@ def normalize_table(text: str):
             suffix = 'ب' if seen[num] == 2 else chr(ord('ب') + seen[num] - 2)
             cells[0] = f'{num}/{suffix}'
             fixed['dup'] += 1
-        status = derive_status(cells[1:])
+        KNOWN = {'مغلق', 'مفتوح', 'مفتوح (فيه عمل مُنجز)', 'غير محدد'}
+        if cells[-1] in KNOWN:            # الصف يحمل حالة صريحة مسبقًا: لا تُضاف ثانية (ثبات الأداة)
+            status = cells[-1]
+        else:
+            status = derive_status(cells[1:])
+            cells = cells + [status]
         fixed['status'][status] += 1
-        out.append('| ' + ' | '.join(cells + [status]) + ' |')
+        out.append('| ' + ' | '.join(cells) + ' |')
     return '\n'.join(out) + '\n', fixed
 
 
