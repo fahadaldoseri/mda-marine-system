@@ -477,7 +477,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .map-viz svg{max-height:145mm !important;width:100%;height:auto}
   .masthead > div:not(.threat){display:block !important;width:100% !important;margin:0 !important}
   .masthead h1{width:100% !important}
-  /* الغلاف ينتهي عند شريط التصنيف: بطاقة القرار تبدأ صفحة جديدة (يمنع العنوان اليتيم والفراغ) */
+  /* الغلاف ينتهي عند شريط التصنيف: أهم الأخبار المتعلقة بالأمن البحري تبدأ صفحة جديدة (يمنع العنوان اليتيم والفراغ) */
   .decision{break-inside:avoid !important;page-break-inside:avoid !important}
   .map-viz svg{max-height:145mm !important;width:100%;height:auto}
   /* محاذاة مضبوطة: تُغلق فراغات الجانبين في الفقرات والقوائم، ولا تمسّ العناوين والبطاقات */
@@ -488,7 +488,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   section.decision > .dc-title,.card > h3,.viz > h3,section.doc > h2{break-after:avoid !important;page-break-after:avoid !important}
   .dc-grid,.dc-row,.dc-v,.dc-v ul{break-inside:auto !important;page-break-inside:auto !important}
   .dc-list li{break-inside:avoid !important;page-break-inside:avoid !important}
-  /* تصفير كامل المتن بما فيه قيم بطاقة القرار (ك-105): البوابة تفحص الصفحة بوسائط print */
+  /* تصفير كامل المتن بما فيه قيم أهم الأخبار المتعلقة بالأمن البحري (ك-105): البوابة تفحص الصفحة بوسائط print */
   .dc-list li,.chg-list li,.ev-list li,.map-caption,footer.foot,
   .dc-v,.dc-row,.dc-grid,.kv-v,.glossary li,.src-grid li{text-align:justify !important;
     text-align-last:start !important;hyphens:none !important;word-spacing:normal !important}
@@ -508,7 +508,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 
 
 
-/* ---------- بطاقة القرار ---------- */
+/* ---------- أهم الأخبار المتعلقة بالأمن البحري ---------- */
 .decision{
   margin:24px 0 6px;border:1px solid var(--line-2);border-radius:var(--radius);
   background:linear-gradient(180deg,rgba(34,195,182,.07),rgba(12,22,38,.4));padding:18px 22px 16px
@@ -747,7 +747,7 @@ body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,sys
 .sn-name em,.ar-risk,.hc-tag{font-size:12.5px}
 .foot a,.foot-note a,.sc-foot a,.glossary a{display:inline-block;padding:3px 0}
 @media (max-width:1000px){
-  /* الجوال: مستوى التهديد ثم بطاقة القرار ثم المؤشرات (القرار قبل الأرقام) */
+  /* الجوال: مستوى التهديد ثم أهم الأخبار المتعلقة بالأمن البحري ثم المؤشرات (القرار قبل الأرقام) */
   .sc-grid,.sc-grid.sc-solo{display:flex;flex-direction:column;gap:14px}
   .sc-side{display:contents}
   .sc-threat{order:1}.sc-card{order:2}.sc-kpis{order:3;display:grid;gap:10px}
@@ -969,7 +969,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     <div class="threat risk-high"><div class="lbl">مستوى التهديد</div><div class="val">مرتفع</div></div>
     <div>
       <p class="lede">اختبار عدم التناسب بين حصة الإصابات وحصة التعرّض في مضيق هرمز. النتيجة: إصابات أسطول أدنوك تتجاوز المتوقع بأكثر من الضعف حتى في أشد الفروض تحفّظًا، فنسبة عدم التناسب بين 2.3 و12.2 ضعفًا — ما يميل بالترجيح إلى الاستهداف لا إلى التعرّض المرتفع وحده. ويُصحّح التقرير رقمًا سابقًا: 32 ناقلة تخص أسطول Navig8 لا إجمالي أدنوك.</p>
-      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-28 07:39 <span class="ltr">UTC</span></b></span></div>
+      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-28 08:14 <span class="ltr">UTC</span></b></span></div>
     </div>
   </header>
 
@@ -1296,7 +1296,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> مقام التعرّض — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: <span class="ltr">UTC</span> وتوقيت البحرين (<span class="ltr">UTC</span>+3).
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-28 07:39 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-28 08:14 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
     
   </footer>
 </div>
@@ -1403,7 +1403,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     bar.appendChild(nav); bar.appendChild(all);
     main.parentNode.insertBefore(bar, main);
   }
-  // روابط «كاملة» في بطاقة القرار — القاعدة: لا يُحذف أي عنصر (منع إفراغ الصف)
+  // روابط «كاملة» في أهم الأخبار المتعلقة بالأمن البحري — القاعدة: لا يُحذف أي عنصر (منع إفراغ الصف)
   [].forEach.call(d.querySelectorAll('[data-goto]'), function (a) {
     var key = a.getAttribute('data-goto');
     var hit = items.filter(function (it) { return it.title.indexOf(key) >= 0; })[0];

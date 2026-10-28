@@ -37,7 +37,7 @@ def code_context():
 
 
 def code_text(value):
-    """يبسّط أي رمز كامل داخل نص كتلة (بطاقة القرار، ما تغيّر، التحليل...)."""
+    """يبسّط أي رمز كامل داخل نص كتلة (أهم الأخبار المتعلقة بالأمن البحري، ما تغيّر، التحليل...)."""
     ctx = _CODE_CTX.get()
     return _demote(value or "", ctx["date"], ctx["official"])
 
@@ -108,7 +108,7 @@ def kind_strip(kind):
     return f'<span class="kstrip k-{kind}">{label}</span>'
 
 
-# ---------------------------------------------------------------- بطاقة القرار
+# ---------------------------------------------------------------- أهم الأخبار المتعلقة بالأمن البحري
 _PT_CODE = re.compile(r"\(\d{2}-\d{2}\)")
 
 
@@ -130,7 +130,7 @@ def _points(value: str):
 
 
 def decision_card(dc, inline):
-    """بطاقة القرار: ما تغيّر · الخطر · التوصيات · ما يُراقب."""
+    """أهم الأخبار المتعلقة بالأمن البحري: ما تغيّر · الخطر · التوصيات · ما يُراقب."""
     if not isinstance(dc, dict):
         return ""
     rows = [
@@ -426,7 +426,7 @@ def render_block(name, data, inline):
 
 # ------------------------------------------------------------------- أنماط الكتل
 STYLE_BLOCKS = """
-/* ---------- بطاقة القرار ---------- */
+/* ---------- أهم الأخبار المتعلقة بالأمن البحري ---------- */
 .decision{
   margin:24px 0 6px;border:1px solid var(--line-2);border-radius:var(--radius);
   background:linear-gradient(180deg,rgba(34,195,182,.07),rgba(12,22,38,.4));padding:18px 22px 16px

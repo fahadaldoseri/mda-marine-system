@@ -6,7 +6,7 @@
 قاعدة الأمان (قرار الشكل المجمّد v3): هذه الطبقة للشاشة فقط ولا تمسّ PDF ولا Word.
   1. كل HTML هنا بصنف no-print، فيُحجب في الطباعة ويحذفه محوّل Word.
   2. كل CSS هنا داخل @media screen، فلا أثر له على وسائط print.
-  3. العناصر الأصلية (الترويسة وبطاقة القرار والمؤشرات) تبقى في الصفحة كما هي للطباعة،
+  3. العناصر الأصلية (الترويسة وأهم الأخبار المتعلقة بالأمن البحري والمؤشرات) تبقى في الصفحة كما هي للطباعة،
      وتُخفى على الشاشة فقط.
   4. السكربت لا يعدّل إلا أصنافًا بالبادئة sc- وصنف sc-collapsed، وهذا الصنف لا يؤثر إلا داخل @media screen.
 المصدر الوحيد للبيانات ملف الواجهة (meta). لا استنتاج ولا تعبئة.
@@ -48,7 +48,7 @@ def _chip(label, value_html, extra=""):
 
 def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_html="",
                 doc_mode=False, archived=False):
-    """كتلة القرار فوق الطيّ: العنوان والشرائح وحالة التهديد والمؤشرات وبطاقة القرار.
+    """كتلة القرار فوق الطيّ: العنوان والشرائح وحالة التهديد والمؤشرات وأهم الأخبار المتعلقة بالأمن البحري.
 
     doc_mode: التقارير الخاصة، وعنوانها الكامل هو العنوان الظاهر (كانت بلا عنوان على الشاشة).
     archived: إصدار غير الأحدث، فلا شارة عمر تنذر بالقِدم بل وسم أرشيفي محايد.
@@ -111,7 +111,7 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
     if kp:
         side.append(f'<div class="sc-kpis">{"".join(kp)}</div>')
 
-    # بطاقة القرار (شاشة): خلاصة مُركّزة لكل صف + العدد + رابط إلى القسم في صفحته.
+    # أهم الأخبار المتعلقة بالأمن البحري (شاشة): خلاصة مُركّزة لكل صف + العدد + رابط إلى القسم في صفحته.
     # إصلاح ك-239 (2026-10-28): كانت الصفوف تُفرَغ لأن سكربت الروابط كان يحذف الرابط عند غياب
     # القسم من الصفحة بعد نقله إلى «إضافات». القاعدة الآن: لا يُحذف أي عنصر، ويُوجَّه الرابط للصفحة البديلة.
     rows = []
@@ -127,7 +127,7 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
                 out.append(t)
         return " · ".join(out)
 
-    # مصدر «ما تغيّر»: نصوص بطاقة القرار (سلاسل)، لا سجل التغييرات البنيوي
+    # مصدر «ما تغيّر»: نصوص أهم الأخبار المتعلقة بالأمن البحري (سلاسل)، لا سجل التغييرات البنيوي
     changes = [c for c in (dc.get("changed") or []) if isinstance(c, str)]
     if not changes:
         changes = [c for c in (meta.get("changes") or []) if isinstance(c, str)]
@@ -158,13 +158,13 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
         key = rkey_html.replace('class="rkey no-print"', 'class="sc-rkey"')
     card = ""
     if rows:
-        card = (f'<section class="sc-card" aria-label="بطاقة القرار"><h2 class="sc-h2">بطاقة القرار</h2>'
+        card = (f'<section class="sc-card" aria-label="أهم الأخبار المتعلقة بالأمن البحري"><h2 class="sc-h2">أهم الأخبار المتعلقة بالأمن البحري</h2>'
                 f'{"".join(rows)}{key}</section>')
 
     grid = ""
     if side or card:
         solo = "" if card else " sc-solo"
-        # قرار المالك 2026-10-28: بطاقة القرار في يمين الشاشة والبطاقات في اليسار (تبديل مواضع)
+        # قرار المالك 2026-10-28: أهم الأخبار المتعلقة بالأمن البحري في يمين الشاشة والبطاقات في اليسار (تبديل مواضع)
         grid = (f'<div class="sc-grid{solo}">{card}<div class="sc-side">{"".join(side)}</div></div>')
     lede = ""
     if doc_mode and meta.get("lede"):
@@ -284,7 +284,7 @@ body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,sys
 .sn-name em,.ar-risk,.hc-tag{font-size:12.5px}
 .foot a,.foot-note a,.sc-foot a,.glossary a{display:inline-block;padding:3px 0}
 @media (max-width:1000px){
-  /* الجوال: مستوى التهديد ثم بطاقة القرار ثم المؤشرات (القرار قبل الأرقام) */
+  /* الجوال: مستوى التهديد ثم أهم الأخبار المتعلقة بالأمن البحري ثم المؤشرات (القرار قبل الأرقام) */
   .sc-grid,.sc-grid.sc-solo{display:flex;flex-direction:column;gap:14px}
   .sc-side{display:contents}
   .sc-threat{order:1}.sc-card{order:2}.sc-kpis{order:3;display:grid;gap:10px}
@@ -399,7 +399,7 @@ SCREEN_JS = r"""
     bar.appendChild(nav); bar.appendChild(all);
     main.parentNode.insertBefore(bar, main);
   }
-  // روابط «كاملة» في بطاقة القرار — القاعدة: لا يُحذف أي عنصر (منع إفراغ الصف)
+  // روابط «كاملة» في أهم الأخبار المتعلقة بالأمن البحري — القاعدة: لا يُحذف أي عنصر (منع إفراغ الصف)
   [].forEach.call(d.querySelectorAll('[data-goto]'), function (a) {
     var key = a.getAttribute('data-goto');
     var hit = items.filter(function (it) { return it.title.indexOf(key) >= 0; })[0];

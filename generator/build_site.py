@@ -132,7 +132,7 @@ def discover(site_root: Path):
 
 
 def _flat(value) -> str:
-    """حقول بطاقة القرار قد تكون نصًّا أو قائمة نقاط — تُسطَّح للعرض المختصر."""
+    """حقول أهم الأخبار المتعلقة بالأمن البحري قد تكون نصًّا أو قائمة نقاط — تُسطَّح للعرض المختصر."""
     if isinstance(value, list):
         return " · ".join(str(x).strip() for x in value if str(x).strip())
     return (value or "").strip()
@@ -377,7 +377,7 @@ NAV_PLACEHOLDER
   <div class="grid">
     <section class="card" id="archive">
       <h3>أرشيف الإصدارات</h3>
-      <p class="hint">كل إصدار متاح بالرابط الخاص به، ومفتاح اللون يبيّن مستوى التهديد المسجل في بطاقة القرار.</p>
+      <p class="hint">كل إصدار متاح بالرابط الخاص به، ومفتاح اللون يبيّن مستوى التهديد المسجل في أهم الأخبار المتعلقة بالأمن البحري.</p>
       <ul class="ar">{rows}</ul>
     </section>
     <div>

@@ -473,7 +473,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .map-viz svg{max-height:145mm !important;width:100%;height:auto}
   .masthead > div:not(.threat){display:block !important;width:100% !important;margin:0 !important}
   .masthead h1{width:100% !important}
-  /* الغلاف ينتهي عند شريط التصنيف: بطاقة القرار تبدأ صفحة جديدة (يمنع العنوان اليتيم والفراغ) */
+  /* الغلاف ينتهي عند شريط التصنيف: أهم الأخبار المتعلقة بالأمن البحري تبدأ صفحة جديدة (يمنع العنوان اليتيم والفراغ) */
   .decision{break-inside:avoid !important;page-break-inside:avoid !important}
   .map-viz svg{max-height:145mm !important;width:100%;height:auto}
   /* محاذاة مضبوطة: تُغلق فراغات الجانبين في الفقرات والقوائم، ولا تمسّ العناوين والبطاقات */
@@ -484,7 +484,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   section.decision > .dc-title,.card > h3,.viz > h3,section.doc > h2{break-after:avoid !important;page-break-after:avoid !important}
   .dc-grid,.dc-row,.dc-v,.dc-v ul{break-inside:auto !important;page-break-inside:auto !important}
   .dc-list li{break-inside:avoid !important;page-break-inside:avoid !important}
-  /* تصفير كامل المتن بما فيه قيم بطاقة القرار (ك-105): البوابة تفحص الصفحة بوسائط print */
+  /* تصفير كامل المتن بما فيه قيم أهم الأخبار المتعلقة بالأمن البحري (ك-105): البوابة تفحص الصفحة بوسائط print */
   .dc-list li,.chg-list li,.ev-list li,.map-caption,footer.foot,
   .dc-v,.dc-row,.dc-grid,.kv-v,.glossary li,.src-grid li{text-align:justify !important;
     text-align-last:start !important;hyphens:none !important;word-spacing:normal !important}
@@ -753,9 +753,9 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
   والتعذّر يُسجَّل قيدًا معروفًا؛ وسياسة النظام تمنع تجاوز حماية المواقع.</div>
 
 
-  <h2 class="sx-h2">التشخيص الحي لكل المصادر (62 مصدرًا · 2026-10-28)</h2>
+  <h2 class="sx-h2">التشخيص الحي: 28 مصدرًا تحتاج إجراءً من أصل 62 (2026-10-28)</h2>
   <div class="dx-tiles"><div class="dx-tile dx-ok"><b>34</b><span>يعمل آليًا</span></div><div class="dx-tile dx-lim"><b>11</b><span>يحتاج متصفح/معاينة</span></div><div class="dx-tile dx-bad"><b>11</b><span>محجوب أو معطوب</span></div><div class="dx-tile dx-none"><b>6</b><span>يحتاج مراجعة مسار</span></div></div>
-  <div class="sx-note">التشخيص يقيس لكل مصدر مسار التغذية وحداثتها، وقراءة الصفحة المباشرة، ثم يصنّف المسار الفعلي.
+  <div class="sx-note">الجدول أدناه يعرض المصادر التي تحتاج إجراءً فقط، والتوزيع الكامل في المربعات أعلاه. التشخيص يقيس لكل مصدر مسار التغذية وحداثتها، وقراءة الصفحة المباشرة، ثم يصنّف المسار الفعلي.
   «يعمل آليًا» يعني قراءة المادة فعلًا داخل حدّ الحداثة المعتمد (14 يومًا). و«يحتاج متصفح» يعني أن الحجب أو بنية الصفحة تمنع القراءة الآلية.
   و«محجوب أو معطوب» قيد معروف لا يُتجاوز بحماية المواقع.</div>
   <table class="sx-tbl cardified">

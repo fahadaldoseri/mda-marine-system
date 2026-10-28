@@ -627,7 +627,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .map-viz svg{max-height:145mm !important;width:100%;height:auto}
   .masthead > div:not(.threat){display:block !important;width:100% !important;margin:0 !important}
   .masthead h1{width:100% !important}
-  /* الغلاف ينتهي عند شريط التصنيف: بطاقة القرار تبدأ صفحة جديدة (يمنع العنوان اليتيم والفراغ) */
+  /* الغلاف ينتهي عند شريط التصنيف: أهم الأخبار المتعلقة بالأمن البحري تبدأ صفحة جديدة (يمنع العنوان اليتيم والفراغ) */
   .decision{break-inside:avoid !important;page-break-inside:avoid !important}
   .map-viz svg{max-height:145mm !important;width:100%;height:auto}
   /* محاذاة مضبوطة: تُغلق فراغات الجانبين في الفقرات والقوائم، ولا تمسّ العناوين والبطاقات */
@@ -638,7 +638,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   section.decision > .dc-title,.card > h3,.viz > h3,section.doc > h2{break-after:avoid !important;page-break-after:avoid !important}
   .dc-grid,.dc-row,.dc-v,.dc-v ul{break-inside:auto !important;page-break-inside:auto !important}
   .dc-list li{break-inside:avoid !important;page-break-inside:avoid !important}
-  /* تصفير كامل المتن بما فيه قيم بطاقة القرار (ك-105): البوابة تفحص الصفحة بوسائط print */
+  /* تصفير كامل المتن بما فيه قيم أهم الأخبار المتعلقة بالأمن البحري (ك-105): البوابة تفحص الصفحة بوسائط print */
   .dc-list li,.chg-list li,.ev-list li,.map-caption,footer.foot,
   .dc-v,.dc-row,.dc-grid,.kv-v,.glossary li,.src-grid li{text-align:justify !important;
     text-align-last:start !important;hyphens:none !important;word-spacing:normal !important}
@@ -1187,7 +1187,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
     # ترتيب الأقسام بالأهمية: القرار والصورة ← الوقائع ← التحليل ← الدعم
     # (الترتيب مستقر، والأقسام غير المعروفة تبقى في آخرها)
     order = [
-        "ما تغيّر",         "الخلاصة",         "بطاقة القرار",         "التوزيع الجغرافي للوقائع",
+        "ما تغيّر",         "الخلاصة",         "أهم الأخبار المتعلقة بالأمن البحري",         "التوزيع الجغرافي للوقائع",
         "مؤشرات الموقف",         "مستوى التهديد",         "التوجيهات التشغيلية",         "الوقائع الجديدة",
         "التحذيرات والنشرات",         "سجل IMO",         "قراءة الموقف وتحليل المؤشرات",         "الاحتمالات",         "الحركة الملاحية والتكدس",
         "ما لم يُحسم",         "المراقبة المستمرة",         "الخلفية القائمة",         "المصادر والمراجع",
@@ -1307,7 +1307,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
         # عطل ك-72: تنبيه القسم كان داخل حلقة كتل المؤشرات فيتكرر بعددها (6 مرات في إصدار 20 أكتوبر).
         # القاعدة: تنبيه القسم يُكتب مرة واحدة في مستوى القسم لا داخل حلقة عناصره.
         if "الحركة" in t:
-            section_html += '<p class="src-note">قراءة اتجاه من منصة (يُذكر اسم المصدر) — يُؤخذ في الحساب مدة التحديث (20 دقيقة) واحتمال انقطاع الإرسال أو spoofing.</p>'
+            section_html += '<p class="src-note">قراءة اتجاه الحركة والتكدس من مسار المتابعة المعتمد؛ ويُعرض اسم المنصة ودقة بياناتها في مراجع التقرير على الموقع. يُؤخذ في الحساب مدة التحديث (20 دقيقة) واحتمال انقطاع الإرسال أو التزييف.</p>'
         if "التوزيع الجغرافي" in t:
             section_html += '<p class="src-note">تحذيرات IHO/NAVAREA تُربط بإحداثياتها عند توفرها؛ والويب لا يستبدل البث الملاحي المعتمد.</p>'
         body.append(section_html)
