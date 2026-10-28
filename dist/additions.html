@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>إضافات — 28 أكتوبر 2026</title>
+<meta name="description" content="تقرير أمن الملاحة في مضيق هرمز والخليج العربي والبحر الأحمر وباب المندب وبحر العرب وشرق المتوسط. الفترة 270400Z–280400Z أكتوبر 2026 حتى 0400Z.">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<script>document.documentElement.className='js';</script>
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<style>:root{
+  --bg:#050a12;
+  --bg-2:#08101c;
+  --panel:#0c1626;
+  --panel-2:#101d31;
+  --panel-3:#152441;
+  --line:#1d2e4a;
+  --line-2:#28405f;
+  --ink:#e9f0f9;
+  --ink-2:#c3d2e6;
+  --muted:#8ba0bd;
+  --faint:#5f7899;
+  --accent:#22c3b6;
+  --accent-ink:#04120f;
+  --info:#4d9dff;
+  --danger:#ff5d52;
+  --warn:#ffb02e;
+  --ok:#33d07a;
+  --shadow-2:0 10px 30px -14px rgba(0,0,0,.7);
+  --radius:12px;
+  --radius-sm:8px;
+  --map-sea:#06111f;
+  --map-land:#22375a;
+  --map-coast:#5b7ba6;
+  --map-border:#33507a;
+  --map-grid:#16273f;
+  --map-grid-lbl:#54749c;
+  --map-label:#dbe6f4;
+  --map-country:#7f97b8;
+  --map-sea-label:#4f6f96;
+  --map-strait:#ffd9d5;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:74px}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"<span class="ltr">IBM</span> Plex Sans Arabic","Noto Kufi Arabic","Segoe UI","Tahoma",system-ui,sans-serif;
+  font-size:16.5px;line-height:1.95;text-rendering:optimizeLegibility;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(1100px 520px at 88% -12%, rgba(34,195,182,.09), transparent 60%),
+    radial-gradient(900px 480px at 6% 4%, rgba(77,157,255,.06), transparent 62%);
+}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+section.doc p,section.doc li,.card p,.src,.foot,.notice,blockquote{overflow-wrap:anywhere}
+a:focus-visible,.btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 22px 90px}
+
+/* عزل القيم اللاتينية والرقمية المركبة داخل سياق عربي */
+bdi,.bidi{direction:ltr;unicode-bidi:isolate}
+.k-v,.chip b,.cite-ref,.bar-row .bv,td.num,th.num{direction:ltr;unicode-bidi:isolate;white-space:nowrap}
+.ev-code,.bidi.ev-code{direction:ltr;unicode-bidi:isolate;white-space:nowrap}  /* رمز الحدث لا يُكسر بين سطرين */
+a.bidi{white-space:normal}
+.eng{direction:ltr;unicode-bidi:plaintext;overflow-wrap:anywhere}
+
+/* ---------- الشريط العلوي ---------- */
+.topbar{
+  position:sticky;top:0;z-index:30;backdrop-filter:blur(14px);
+  background:linear-gradient(180deg,rgba(6,11,20,.95),rgba(6,11,20,.82));
+  border-bottom:1px solid var(--line);
+}
+.topbar-inner{max-width:1180px;margin:0 auto;padding:11px 22px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px;min-width:0}
+.brand-mark{
+  width:34px;height:34px;border-radius:10px;flex:0 0 auto;display:grid;place-items:center;
+  background:rgba(34,195,182,.10);border:1px solid var(--line-2);color:var(--accent)
+}
+.brand-mark svg{width:19px;height:19px}
+.brand-title{font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:15px;line-height:1.4}
+.brand-sub{font-size:12px;color:var(--muted);line-height:1.4}
+.topbar-spacer{flex:1 1 auto}
+.tb-meta{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.chip{
+  font-size:12px;color:var(--ink-2);border:1px solid var(--line);
+  background:var(--panel);border-radius:999px;padding:5px 11px
+}
+.chip b{color:var(--ink);font-weight:600}
+.btn{
+  font:inherit;font-size:12.5px;cursor:pointer;color:var(--ink);
+  background:var(--panel-2);border:1px solid var(--line-2);border-radius:8px;
+  padding:7px 13px;transition:background .18s ease,transform .18s ease
+}
+.btn:hover{background:var(--panel-3)}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--accent);color:var(--accent-ink);border-color:transparent;font-weight:600}
+.btn-primary:hover{background:#2ad4c6}
+
+/* ---------- الترويسة ---------- */
+.masthead{padding:34px 0 6px;display:flex;gap:22px;align-items:flex-end;flex-wrap:wrap}
+.masthead h1{
+  font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;
+  font-size:clamp(26px,3.4vw,40px);line-height:1.3;margin:0 0 8px;
+  flex:0 0 100%;width:100%;text-align:center
+}
+.masthead > div:not(.threat){flex:1 0 100%}
+.masthead .lede{color:var(--ink-2);font-size:15px;max-width:none;margin:0}
+.masthead-meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+.threat{
+  margin-inline-start:0;margin-inline-end:auto;text-align:center;border-radius:var(--radius);
+  border:1px solid var(--line-2);background:var(--panel);padding:14px 20px;min-width:172px
+}
+.threat .lbl{font-size:12px;color:var(--muted)}
+.threat .val{font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;font-size:23px;line-height:1.45;margin-top:2px}
+.threat.risk-high .val{color:var(--danger)}
+.threat.risk-med .val{color:var(--warn)}
+.threat.risk-low .val{color:var(--ok)}
+
+/* ---------- شريط المؤشرات ---------- */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:24px 0 8px}
+.kpi{
+  background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);
+  padding:15px 16px;position:relative;overflow:hidden
+}
+.kpi em{position:absolute;inset-inline-start:0;top:0;bottom:0;width:3px;background:var(--accent)}
+.kpi.acc-info em{background:var(--info)}
+.kpi.acc-warn em{background:var(--warn)}
+.kpi.acc-danger em{background:var(--danger)}
+.kpi.acc-ok em{background:var(--ok)}
+.kpi .k-l{font-size:12.5px;color:var(--muted);line-height:1.6;min-height:2.6em}
+.kpi .k-v{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-weight:600;font-size:30px;line-height:1.25;margin-top:3px;font-variant-numeric:tabular-nums}
+.kpi .k-n{font-size:12px;color:var(--muted);line-height:1.7;margin-top:4px}
+
+.notice{
+  display:flex;gap:12px;align-items:flex-start;margin:20px 0 6px;padding:13px 16px;
+  border:1px solid var(--line);border-inline-start:3px solid var(--accent);
+  border-radius:var(--radius-sm);background:rgba(34,195,182,.05);
+  font-size:13.5px;color:var(--ink-2)
+}
+.notice svg{width:18px;height:18px;color:var(--accent);flex:0 0 auto;margin-top:5px}
+
+/* ---------- الأقسام ---------- */
+main{margin-top:30px;display:grid;gap:18px;min-width:0}
+section.doc{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px 24px 10px;min-width:0;max-width:100%;scroll-margin-top:74px
+}
+section.doc.pri{box-shadow:inset 0 2px 0 0 rgba(34,195,182,.55)}
+section.doc > h2{
+  font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:21px;line-height:1.5;
+  margin:0 0 4px;display:flex;align-items:center;gap:11px
+}
+section.doc > h2 .ico{width:24px;height:24px;flex:0 0 auto;display:grid;place-items:center;color:var(--accent)}
+section.doc > h2 .ico svg{width:18px;height:18px}
+.h-rule{height:1px;background:var(--line);margin:8px 0 12px}
+section.doc h3{
+  font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:16.5px;
+  margin:22px 0 6px;line-height:1.6;color:var(--ink)
+}
+section.doc p{margin:10px 0;color:var(--ink-2)}
+section.doc strong{color:var(--ink);font-weight:600}
+section.doc code{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:.92em;color:var(--ink);background:var(--panel-3);padding:1px 5px;border-radius:4px}
+ul,ol{margin:10px 0;padding-inline-start:22px;color:var(--ink-2)}
+li{margin:7px 0}
+section.doc ul ul{margin:6px 0;padding-inline-start:18px}
+section.doc ul ul li{margin:4px 0;font-size:.96em;color:var(--ink-2)}
+li::marker{color:var(--accent)}
+blockquote{
+  margin:16px 0;padding:12px 16px;border-inline-start:3px solid var(--accent);
+  background:rgba(34,195,182,.055);border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  color:var(--ink-2);font-size:15px
+}
+hr{border:0;border-top:1px solid var(--line);margin:20px 0}
+
+/* ---------- بطاقات الوقائع ---------- */
+.cards{display:grid;gap:14px;margin:16px 0 20px}
+.card{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:16px 18px}
+.card-head{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px}
+.card-head h3{font-family:"Noto Kufi Arabic",sans-serif;font-size:16px;font-weight:600;margin:0;line-height:1.6;color:var(--ink)}
+.tag{font-size:11.5px;border-radius:999px;padding:3px 10px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--panel-3);white-space:nowrap}
+.tag.t-confirm{color:#ffd7d3;background:rgba(255,93,82,.16);border-color:rgba(255,93,82,.42)}
+.tag.t-suspect{color:#ffe6bd;background:rgba(255,176,46,.15);border-color:rgba(255,176,46,.40)}
+.tag.t-inter{color:#d5e6ff;background:rgba(77,157,255,.15);border-color:rgba(77,157,255,.40)}
+.card p{font-size:15px;margin:8px 0}
+
+/* ---------- الجداول ---------- */
+.tbl-wrap{overflow-x:auto;margin:16px 0 22px;border:1px solid var(--line);border-radius:var(--radius-sm);max-width:100%}
+table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:480px}
+thead th{
+  background:var(--panel-3);color:var(--ink);font-weight:600;text-align:start;
+  padding:11px 13px;border-bottom:1px solid var(--line-2);white-space:nowrap
+}
+tbody td{padding:10px 13px;border-bottom:1px solid var(--line);color:var(--ink-2);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:nth-child(even){background:rgba(255,255,255,.015)}
+tbody tr:hover{background:rgba(34,195,182,.05)}
+td.num,th.num{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-variant-numeric:tabular-nums;text-align:end;white-space:nowrap;color:var(--ink)}
+tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:600}
+
+/* ---------- المخططات ---------- */
+.viz{margin:18px 0 24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:18px}
+.viz h3{
+  margin:0 0 14px;font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;
+  font-size:15px;color:var(--ink-2)
+}
+.bar-row{display:grid;grid-template-columns:minmax(150px,1.05fr) 3fr 108px;gap:14px;align-items:center;margin:11px 0}
+.bar-row .bl{font-size:13.5px;color:var(--ink-2);line-height:1.55}
+.bar-track{height:9px;border-radius:999px;background:var(--panel-3);overflow:hidden}
+.bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#1fbfb2,#5ad6c8);width:var(--w,0);animation:grow 1s cubic-bezier(.22,.8,.28,1) both}
+@keyframes grow{from{width:0}}
+.bar-row .bv{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:12.5px;text-align:end;color:var(--ink);font-variant-numeric:tabular-nums}
+.viz .src-note{font-size:12.5px;color:var(--muted);margin:12px 0 0}
+
+/* ---------- خريطة الوقائع ---------- */
+.map-wrap{border:1px solid var(--line-2);border-radius:var(--radius-sm);overflow:hidden;background:var(--map-sea);margin-top:6px}
+.map-svg{display:block;width:100%;height:auto;max-width:100%}
+.mp-sea-bg{fill:var(--map-sea)}
+.mp-grid line{stroke:var(--map-grid);stroke-width:.7;vector-effect:non-scaling-stroke}
+.mp-grid-lbl{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:11px;fill:var(--map-grid-lbl);direction:ltr;unicode-bidi:isolate}
+.mp-land path{fill:var(--map-land);stroke:var(--map-coast);stroke-width:1.2;vector-effect:non-scaling-stroke}
+.mp-borders path{fill:none;stroke:var(--map-border);stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke}
+.mp-places text{font-family:"<span class="ltr">IBM</span> Plex Sans Arabic","Noto Kufi Arabic",sans-serif;dominant-baseline:middle;text-anchor:middle}
+.mp-port-dot{fill:var(--map-label)}
+.mp-port-lbl{fill:var(--map-label);font-size:14px;direction:rtl;unicode-bidi:isolate}
+.mp-country{fill:var(--map-country);font-size:15px;letter-spacing:.5px}
+.mp-sea-lbl{fill:var(--map-sea-label);letter-spacing:.8px}
+.mp-sea-lg{font-size:19px}
+.mp-sea-sm{font-size:15px;font-weight:600;fill:var(--map-strait);letter-spacing:0}
+.mp-events .mp-halo{fill:var(--mk);opacity:.22}
+.mp-events .mp-dot{fill:var(--mk);stroke:var(--bg);stroke-width:2.2;vector-effect:non-scaling-stroke}
+.mp-events .mp-num{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:9.5px;font-weight:600;fill:#fff;text-anchor:middle}
+.map-keys{font-size:12.5px;color:var(--faint);margin:12px 0 0}
+.map-legend{list-style:none;display:grid;gap:7px;margin:14px 0 0;padding:0}
+.map-legend li{display:flex;gap:10px;align-items:baseline;font-size:13.5px;color:var(--ink-2);margin:0}
+.lg-num{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:11px;font-weight:600;color:#fff;background:var(--mk);border-radius:999px;width:19px;height:19px;display:grid;place-items:center;flex:0 0 auto}
+/* ---------- خريطة الشاشة العليا: للشاشة فقط، تُحجب في الطباعة وWord بصنف no-print ---------- */
+.hero-map{margin:22px 0 6px}
+.hmap{margin:0;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:18px}
+.hmap h3{margin:0 0 14px;font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:15px;color:var(--ink-2)}
+.hmap .blk-lede,.hmap-keys,.hmap-panel .src-note{display:none}
+.hmap-wrap{position:relative;border:1px solid var(--line-2);border-radius:var(--radius-sm);overflow:hidden;background:var(--map-sea)}
+/* التكبير بجانب الخريطة لا فوقها: الشريحة كانت تحجب الخليج العربي (البحرين وقطر) */
+.hmap-wrap{display:grid;grid-template-columns:minmax(0,2.4fr) minmax(0,1fr);align-items:start}
+.hmap-zoom{border-inline-start:1.5px solid var(--accent);background:var(--map-sea);min-width:0;align-self:stretch;display:flex;flex-direction:column}
+.hmap-zsvg{display:block;width:100%;height:auto}
+.hz-cap{font-size:13px;color:var(--ink-2);background:var(--panel);padding:4px 10px;border-top:1px solid var(--line-2);margin-top:auto}
+@media (max-width:1000px){.hmap-wrap{grid-template-columns:minmax(0,1fr)}.hmap-zoom{border-inline-start:0;border-top:1.5px solid var(--accent)}}
+.hmap-svg{display:block;width:100%;height:auto;max-width:100%}
+/* خريطة الشاشة: علامات وتسميات أكبر قليلًا للقراءة من مسافة */
+.hmap-svg .mp-dot{r:9.5px}
+.hmap-svg .mp-halo{r:17px}
+.hmap-svg .mp-events .mp-num{font-size:12.5px}
+.hmap .mp-grid-lbl{font-size:12.5px}
+.hmap .mp-port-lbl{font-size:15.5px}
+.hmap .mp-country{font-size:16.5px}
+.hmap-legend{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 30px;margin:16px 0 0;padding:0}
+.hmap-legend li{display:block;position:relative;padding-inline-start:34px;font-size:14px;line-height:1.85;color:var(--ink-2);margin:0}
+.hmap-legend .lg-num{position:absolute;inset-inline-start:0;top:3px}
+.hmap-legend .bidi{color:var(--muted);font-size:13px;white-space:nowrap}
+@media (max-width:760px){.hmap-legend{grid-template-columns:minmax(0,1fr)}}
+/* الجوال: الخريطة الرئيسية تُصغَّر كثيرًا فتكبر العلامات والتسميات لتبقى مقروءة (التفصيل في لوحة التكبير) */
+@media (max-width:700px){
+  .hmap-svg .mp-dot{r:13px}.hmap-svg .mp-halo{r:20px}.hmap-svg .mp-events .mp-num{font-size:15px}
+  .hmap-svg .mp-port-lbl{font-size:25px}.hmap-svg .mp-country{font-size:27px}
+  .hmap-svg .mp-sea-lg{font-size:31px}.hmap-svg .mp-sea-sm{font-size:25px}.hmap-svg .mp-grid-lbl{display:none}
+}
+/* ---------- الاستشهادات ---------- */
+.cite-ref{
+  display:inline-block;font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:11.5px;
+  color:var(--accent);background:rgba(34,195,182,.10);border:1px solid rgba(34,195,182,.34);
+  border-radius:6px;padding:0 5px;margin-inline-start:3px;vertical-align:1px
+}
+.cite-ref:hover{background:rgba(34,195,182,.22);text-decoration:none}
+
+/* ---------- المصادر ---------- */
+.src-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin:14px 0 22px}
+.src{border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--panel-2);padding:11px 13px;font-size:13.5px;color:var(--ink-2)}
+.src b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-bottom:3px}
+.src .st{font-size:12px;color:var(--muted)}
+.src.s-ok{border-inline-start:3px solid var(--ok)}
+.src.s-none{border-inline-start:3px solid var(--info)}
+.src.s-fail{border-inline-start:3px solid var(--danger)}
+
+/* ---------- التذييل ---------- */
+.foot{margin-top:34px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);color:var(--muted);font-size:13.5px}
+.foot b{color:var(--ink-2)}
+/* قواعد العرض المعتمدة 12 أكتوبر 2026 (تعديلات المعاينة) — للتراجع: احذف السطرين التاليين */
+.foot{display:none}
+.method-note{display:none}
+
+/* ---------- الحركة: دخول لطيف بالـCSS فقط، والمحتوى مرئي دائمًا ---------- */
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.masthead,.kpis{animation:rise .55s cubic-bezier(.22,.8,.28,1) both}
+@media (prefers-reduced-motion: reduce){
+  .masthead,.kpis,.bar-fill{animation:none}
+}
+
+@media (max-width:760px){
+  body{font-size:16px}
+  .wrap{padding:0 14px 70px}
+  section.doc{padding:18px 15px 8px}
+  .threat{margin-inline-start:0;width:100%}
+  .bar-row{grid-template-columns:1fr auto;grid-template-areas:"l v" "t t";gap:6px 10px}
+  .bar-row .bl{grid-area:l}
+  .bar-row .bv{grid-area:v;text-align:start}
+  .bar-track{grid-area:t;width:100%}
+  table{font-size:14px}
+}
+
+/* ==================== نمط الطباعة A4 ==================== */
+@page{size:A4;margin:14mm 12mm}
+/* ---------- قواعد عرض معتمدة من تعديلات المعاينة (12 أكتوبر 2026) ---------- */
+.notice,
+.map-panel .src-note,
+.map-keys,
+.decision .dc-foot{display:none}
+
+.sec-lede{font-size:13px;color:var(--muted);margin:0 0 16px;line-height:1.7;max-width:76ch}
+.blk-lede{font-size:12.5px;color:var(--faint);margin:-6px 0 10px;line-height:1.6}
+
+@media print{
+  :root{
+    --ink:#0a1524;--ink-2:#20303f;--muted:#4b5e73;--faint:#5c728c;
+    --line:#8d9bad;--line-2:#5d6f84;--panel:#fff;--panel-2:#fff;--panel-3:#eef2f7;
+    --accent:#0b6f66;--info:#1f5f9f;--danger:#9d2b25;--warn:#7d5200;--ok:#166b45;
+    /* لوحة خريطة الطباعة المعتمدة (حزمة design-v1 — قرار المالك 2026-10-23): بحر أبيض ويابسة رمادية */
+    --map-sea:#ffffff;--map-land:#dfe4ea;--map-coast:#3f4f63;--map-border:#7b8796;
+    --map-grid:#d3d9e0;--map-grid-lbl:#4b5e73;--map-label:#0a1524;--map-country:#4b5e73;
+    --map-sea-label:#4b5e73;--map-strait:#9d2b25;--map-marker-ring:#ffffff;--map-marker-ink:#ffffff;
+  }
+  body{background:#fff;color:#111;font-size:10.8pt;line-height:1.62}
+  /* لا تُطبع المصادر والمراجع ولا ملحق موثوقية المصادر في نسخة <span class="ltr">PDF</span> */
+  #sec-16{display:none !important}
+  p,li,blockquote,.sec-lede,.blk-lede,.note{orphans:3;widows:3}
+  /* اقتصاد الورق: تُقاس الخريطة على ارتفاع صفحة واحدة مع عنوانها */
+  /* الخريطة ينقسم إطارها فقط بين الرسم والمفتاح، فلا تبقى ورقة شبه فارغة */
+  .map-viz{break-inside:auto;page-break-inside:auto}
+  .map-viz svg{max-height:100mm;height:auto;break-inside:avoid;page-break-inside:avoid}
+  .map-legend{break-inside:auto}
+  /* إجبار: كتلة الخريطة تنقسم بين الرسم والمفتاح مهما وردت قاعدة أخصّ */
+  #sec-03 .map-viz, .map-viz{break-inside:auto !important;page-break-inside:auto !important}
+  .map-viz svg{break-inside:avoid !important;page-break-inside:avoid !important}
+  .map-viz{padding:1.2mm 1.2mm}
+  /* مفتاح الخريطة في عمودين: يوفّر نحو 55 مم فيستقر القسم داخل ورقة واحدة */
+  .map-legend{columns:2;column-gap:8mm}
+  .map-legend li{break-inside:avoid;margin:0 0 1.4mm;font-size:9pt;line-height:1.45}
+  .map-legend .lg-txt{font-size:9pt}
+  .map-caption,.map-viz figcaption{margin-top:1.5mm;line-height:1.4}
+  /* كثافة الصفحة: تقليل حشو الخلايا لتصبح الكتلة على مقاس الورقة */
+  tbody td{padding:1.5mm 2.2mm !important}
+  .sec-lede{margin:0 0 10px;line-height:1.55}
+  section.doc{padding:0 0 3mm}
+  .rmk,.glossary{break-inside:avoid;page-break-inside:avoid}
+  /* انضباط بصري: خطوط فاصلة رقيقة بدل تظليل الصفوف */
+  tbody tr:nth-child(even){background:#fff !important}
+  tbody td{border-bottom:.4pt solid #e2e8f0}
+  .kpi,.viz,.src,.card,.notice,.threat,.chip,.decision,.bar-track{border-radius:2.4mm}
+  .threat{display:inline-block;min-width:52mm}
+  .mp-events text{font-size:13.5px}
+  /* أرقام علامات الخريطة: لا بد من تخصيص أعلى لأن قاعدة الشاشة أخصّ */
+  .mp-events .mp-num{font-size:15px}
+  .mp-events text{font-size:15px}
+  /* لا تباعد أحرف على العربية داخل الخريطة (يفكّ الاتصال) */
+  .mp-country,.mp-sea-lbl,.mp-port-lbl{letter-spacing:0}
+  /* لا يُترك عنوان قسم في نهاية صفحة ومحتواه في التالية */
+  .h-rule,.sec-lede{break-after:avoid;page-break-after:avoid}
+  /* ضغط الغلاف: تقليل الفراغ في الصفحة الأولى */
+  .masthead{padding:0 0 4mm}
+  .masthead h1{margin:0 0 3mm}
+  .threat{padding:4mm 6mm}
+  .kpis{margin-top:3mm}
+  .cls-banner{margin-top:3mm}
+  body::before{display:none}
+  .topbar,.no-print{display:none !important}
+  .wrap{max-width:none;padding:0}
+  a{color:#0a1524;text-decoration:none}
+  section.doc{background:#fff;border:0;border-top:1px solid #cfd8e3;border-radius:0;padding:0 0 5mm;box-shadow:none;break-inside:auto;page-break-inside:auto}
+  section.doc.pri{border-top:2px solid #0b6f66}
+  section.doc > h2{font-size:13pt;color:#0a1524;break-after:avoid;page-break-after:avoid}
+  section.doc > h2 .ico{display:none}
+  section.doc h3{color:#0a1524;font-size:11pt;break-after:avoid;page-break-after:avoid}
+  section.doc p,section.doc li,tbody td,.card p{color:#20303f}
+  .masthead h1{color:#0a1524;font-size:21pt}
+  .kpi,.viz,.src,.foot,.card,.notice{background:#fff;border-color:#cfd8e3;box-shadow:none}
+  .kpi .k-v{color:#0a1524}
+  .threat{background:#fff;border-color:#cfd8e3}
+  .chip{background:#f6f8fb;border-color:#cfd8e3;color:#31465c}
+  .chip b{color:#0a1524}
+  .cite-ref{color:#0a1524;background:#f2f5f9;border-color:#b8c4d1}
+  .tag{color:#31465c;background:#f6f8fb;border-color:#b8c4d1}
+  .tag.t-confirm{color:#7a1d1a;background:#fff1f0;border-color:#c77973}
+  .tag.t-suspect{color:#7c5000;background:#fff7e6;border-color:#c9a24f}
+  .tag.t-inter{color:#1d4f87;background:#edf4ff;border-color:#8bb1dd}
+  thead th{background:#eef2f7;color:#0a1524}
+  .viz{background:#fbfcfe}
+  .bar-track{background:#e6ecf3}
+  .bar-fill{background:#0f8f86;animation:none}
+  .masthead,.kpis{animation:none}
+  .map-wrap{border-color:#c3cedb}
+  .mp-events .mp-dot{stroke:#fff}
+  .map-viz{break-inside:auto;page-break-inside:auto}
+  .bar-row .bl,.bar-row .bv,.viz h3,.viz .src-note,.src,.src b,.src .st,.foot,.kpi .k-l,.kpi .k-n,.notice,.chip,.cite-ref,.tag{font-size:10.5pt;line-height:1.6}
+  .card,.viz,.src,.kpi,.table-row{break-inside:avoid;page-break-inside:avoid}
+  .tbl-wrap{overflow:visible;break-inside:auto;page-break-inside:auto}
+  table{min-width:0;font-size:10.5pt}
+  thead{display:table-header-group}
+  tbody tr{break-inside:avoid;page-break-inside:avoid}
+  html.js .reveal{opacity:1 !important;transform:none !important;transition:none !important}
+
+  .decision{background:#fff;border-color:#c3cedb}
+  .decision .dc-title{color:#0b6f66}
+  .dc-v{color:#0a1524}
+  .dc-row.risk-high .dc-v{color:#9d2b25}
+  .dc-row.risk-med .dc-v{color:#7d5200}
+  .dc-row.risk-low .dc-v{color:#166b45}
+  .dc-foot,.rkey,.glossary{color:#4b5e73}
+  .conf,.kstrip,.chg-tag,.st-badge,.ev-code,.cls-banner{font-size:10.5pt;background:#f6f8fb;border-color:#b8c4d1;color:#31465c}
+  .conf.c-high{color:#14603f;background:#edfaf3;border-color:#7cc4a0}
+  .conf.c-med{color:#7c5000;background:#fff8ea;border-color:#cfa95a}
+  .conf.c-low{color:#1d4f87;background:#eff5ff;border-color:#8bb1dd}
+  .kstrip.k-confirm,.st-badge.s-active{color:#7a1d1a;background:#fff1f0;border-color:#c77973}
+  .kstrip.k-inter,.chg.c-new .chg-tag{color:#1d4f87;background:#edf4ff;border-color:#8bb1dd}
+  .kstrip.k-suspect,.chg.c-reclassified .chg-tag,.cls-banner.c-restricted{color:#7c5000;background:#fff7e6;border-color:#c9a24f}
+  .chg.c-closed .chg-tag,.st-badge.s-stable{color:#14603f;background:#edfaf3;border-color:#7cc4a0}
+  .ev-code{color:#0b6f66;background:#effaf8;border-color:#7fc9c0}
+  .tl-track{background:#e6ecf3}
+  .tl-fill.k-confirm{background:#9d2b25}
+  .tl-fill.k-inter{background:#1f5f9f}
+  .tl-fill.k-suspect{background:#7d5200}
+  .tl-fill.k-bg{background:#7f92a8}
+  ul.d-kinds li::before{width:3px}
+  .decision,.glossary{break-inside:avoid;page-break-inside:avoid}
+  /* كتل التحليل الطويلة تُقسَّم بدل إفراغ ورقة كاملة */
+  .tl-viz,.viz,.card{break-inside:auto !important;page-break-inside:auto !important}
+  .tl-viz .tl-row,.viz svg,.card .kpi{break-inside:avoid;page-break-inside:avoid}
+  .decision{animation:none}
+
+  /* ===== سياسة التدفّق الموحّدة: تمنع الفراغات الداخلية (قرار 18 أكتوبر 2026) =====
+     القاعدة: القِطَع الصغيرة محمية من الانقسام، والحاويات الكبيرة تتدفّق بحرية.
+     فتُملأ كل ورقة قبل الانتقال، ولا تُدفع الكتل الكبيرة لإفراغ نصف ورقة. */
+  *{break-inside:auto !important;page-break-inside:auto !important}
+  tr,.kpi,.map-legend li,.glossary li,.dc-row,.ev-item,.chg-item{break-inside:avoid !important;page-break-inside:avoid !important}
+  section.doc > h2,section.doc h3,section.doc h4,.h-rule,.sec-lede{break-after:avoid !important;page-break-after:avoid !important}
+  thead{display:table-header-group}
+  thead tr{break-after:avoid;page-break-after:avoid}
+  p,li{orphans:2;widows:2}
+  .map-viz svg{max-height:145mm !important;width:100%;height:auto;break-inside:avoid !important}
+  .map-legend,.map-viz,.tbl-wrap,.changes,.decision,.viz,.card{break-inside:auto !important;page-break-inside:auto !important}
+  /* كتلة الخريطة (الرسم + المفتاح + التعليق) تبقى كاملة على ورقة واحدة */
+  .map-viz{break-inside:avoid !important;page-break-inside:avoid !important}
+  /* Chromium لا يجزّئ حاويات grid/flex بين الصفحات، فتتدفّق هنا بترتيب inline-block
+     يحفظ هيئة العمودين/البطاقات نفسها، مع السماح بالانقسام بين الصفحات */
+  .wrap,.changes,.dc-grid,.kpis,.masthead,.map-legend,.src-grid,.glossary,.tl-viz,.viz,.card,.decision{display:block !important}
+  .kpis > *,.masthead > *,.map-legend > li,.glossary > li,.src-grid > *{display:inline-block !important;vertical-align:top !important;width:48.5% !important;margin:0 0 2.5mm 1% !important;box-sizing:border-box !important}
+  .dc-grid > *,.dc-row{display:block !important;width:100% !important}
+  /* ك-103: الوسم يُعوَّم والمحتوى كتلة قابلة للانقسام — فلا يُترك عنوان أو بطاقة يتيمة ولا فراغ أسفل الغلاف */
+  .dc-row::after{content:"";display:block;clear:both}
+  .dc-row > *:first-child{float:inline-start !important;display:block !important;width:26% !important}
+  .dc-row > *:last-child{display:block !important;width:auto !important;margin-inline-start:27% !important}
+  .changes > *{display:block !important;width:100% !important}
+  .viz > *,.card > *{box-sizing:border-box}
+  /* ضغط تباعد الأقسام: يوفّر نحو 40 مم فتنتقل نهاية التقرير إلى صفحتها السابقة */
+  section.doc{padding:0 0 2.5mm !important}
+  section.doc > h2{margin:3mm 0 1.5mm !important}
+  .sec-lede{margin:0 0 2mm !important}
+  .h-rule{margin:1mm 0 2mm !important}
+  /* تشخيص: إلغاء كل قواعد منع الكسر لتحديد مصدر الفراغات */
+  *{break-after:auto !important;break-before:auto !important}
+  body,p,li,td,th{line-height:1.36 !important}
+  /* overflow مخفي يمنع Chromium من تقسيم الحاوية بين الصفحات فتُدفع كاملة وتُفرّغ الورقة */
+  *{overflow:visible !important}
+  .map-viz svg{max-height:145mm !important;width:100%;height:auto}
+  .masthead > div:not(.threat){display:block !important;width:100% !important;margin:0 !important}
+  .masthead h1{width:100% !important}
+  /* الغلاف ينتهي عند شريط التصنيف: بطاقة القرار تبدأ صفحة جديدة (يمنع العنوان اليتيم والفراغ) */
+  .decision{break-inside:avoid !important;page-break-inside:avoid !important}
+  .map-viz svg{max-height:145mm !important;width:100%;height:auto}
+  /* محاذاة مضبوطة: تُغلق فراغات الجانبين في الفقرات والقوائم، ولا تمسّ العناوين والبطاقات */
+  section.doc p,section.doc li,.sec-lede,.masthead .lede,.glossary li,.src-grid li,
+  /* تصفير فقرات المتن والعناوين التمهيدية (قرار المالك 2026-10-22): يمنع الفراغ الجانبي */
+  .sec-lede,section.doc p,.masthead p,.blk-lede,.note{text-align:justify !important;text-align-last:start !important;hyphens:none !important}
+  /* لا يُترك عنوان بطاقة أو قسم وحده أسفل ورقة بلا مضمون (عطل ك-103) */
+  section.decision > .dc-title,.card > h3,.viz > h3,section.doc > h2{break-after:avoid !important;page-break-after:avoid !important}
+  .dc-grid,.dc-row,.dc-v,.dc-v ul{break-inside:auto !important;page-break-inside:auto !important}
+  .dc-list li{break-inside:avoid !important;page-break-inside:avoid !important}
+  /* تصفير كامل المتن بما فيه قيم بطاقة القرار (ك-105): البوابة تفحص الصفحة بوسائط print */
+  .dc-list li,.chg-list li,.ev-list li,.map-caption,footer.foot,
+  .dc-v,.dc-row,.dc-grid,.kv-v,.glossary li,.src-grid li{text-align:justify !important;
+    text-align-last:start !important;hyphens:none !important;word-spacing:normal !important}
+  section.doc h2,section.doc h3,section.doc h4,.h-rule,.chip,.kpi,.tag,.st-badge,
+  .map-legend li,.conf,.cls-banner,.threat,.toc li,.ev-code{text-align:start !important}
+  .map-panel{padding:2mm 2.5mm !important}
+  .map-legend{margin-top:1.5mm !important}
+  .map-legend li{margin:0 0 1mm !important;font-size:8.4pt !important;line-height:1.3 !important}
+  .kpis > *{width:32% !important;padding:1.6mm 2mm !important;margin:0 0 1.5mm 1% !important}
+  .kpis .k-v{font-size:14pt !important;margin:0.5mm 0 !important}
+  .kpis .k-l{font-size:8.6pt !important;line-height:1.25 !important;min-height:0 !important}
+  .kpis .k-m{font-size:7.6pt !important;line-height:1.25 !important}
+  .dc-grid{gap:1.5mm !important}
+  section.doc{font-size:10.2pt !important}
+}
+
+
+
+
+/* ---------- بطاقة القرار ---------- */
+.decision{
+  margin:24px 0 6px;border:1px solid var(--line-2);border-radius:var(--radius);
+  background:linear-gradient(180deg,rgba(34,195,182,.07),rgba(12,22,38,.4));padding:18px 22px 16px
+}
+.decision .dc-title{
+  font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:17px;margin:0 0 12px;color:var(--accent)
+}
+.dc-grid{display:grid;gap:8px}
+.dc-row{display:grid;grid-template-columns:1fr;gap:2px;align-items:start}
+.dc-l{font-size:12.5px;line-height:1.35;color:var(--muted);padding-top:0}
+.dc-list{margin:4px 0 0;padding-inline-start:20px}
+.dc-list li{margin:4px 0;line-height:1.75}
+.dc-v{font-size:16px;color:var(--ink);font-weight:500}
+.dc-row.risk-high .dc-v{color:var(--danger)}
+.dc-row.risk-med .dc-v{color:var(--warn)}
+.dc-row.risk-low .dc-v{color:var(--ok)}
+.dc-foot{font-size:12.5px;color:var(--faint);margin-top:10px;border-top:1px solid var(--line);padding-top:8px}
+
+/* ---------- مفتاح القراءة ---------- */
+.rkey{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin:18px 0 0;font-size:12.5px;color:var(--muted)}
+.rkey-t{color:var(--faint)}
+.rk{display:inline-flex;align-items:center;gap:7px}
+.rk::before{content:"";width:3px;height:14px;border-radius:2px;background:var(--muted)}
+.rk.k-fact::before{background:var(--ok)}
+.rk.k-est::before{background:var(--info)}
+.rk.k-info::before{background:var(--muted)}
+.rk.k-bg::before{background:var(--line-2)}
+.rk.k-watch::before{background:var(--warn)}
+
+/* ---------- شرائط تمييز الحقيقة والتقدير ---------- */
+ul.d-kinds{list-style:none;padding-inline-start:0}
+ul.d-kinds li{position:relative;padding-inline-start:14px;margin:9px 0}
+ul.d-kinds li::before{content:"";position:absolute;inset-inline-start:0;top:.5em;bottom:.5em;width:3px;border-radius:2px;background:var(--line-2)}
+ul.d-kinds li.k-fact::before{background:var(--ok)}
+ul.d-kinds li.k-est::before{background:var(--info)}
+ul.d-kinds li.k-info::before{background:var(--muted)}
+ul.d-kinds li.k-bg::before{background:var(--line-2)}
+ul.d-kinds li.k-watch::before{background:var(--warn)}
+
+/* ---------- درجة الثقة ---------- */
+.conf{font-size:11.5px;border-radius:999px;padding:2px 9px;border:1px solid var(--line-2);white-space:nowrap;color:var(--ink-2)}
+.conf.c-high{color:#cdf6e2;background:rgba(51,208,122,.16);border-color:rgba(51,208,122,.42)}
+.conf.c-med{color:#ffe8c4;background:rgba(255,176,46,.15);border-color:rgba(255,176,46,.40)}
+.conf.c-low{color:#d7e7ff;background:rgba(77,157,255,.15);border-color:rgba(77,157,255,.40)}
+.kstrip{font-size:11.5px;border-radius:999px;padding:2px 9px;border:1px solid var(--line-2);color:var(--ink-2);margin-inline-end:7px;white-space:nowrap}
+.kstrip.k-confirm{color:#ffd9d5;background:rgba(255,93,82,.15);border-color:rgba(255,93,82,.40)}
+.kstrip.k-inter{color:#d7e7ff;background:rgba(77,157,255,.15);border-color:rgba(77,157,255,.40)}
+.kstrip.k-suspect{color:#ffe8c4;background:rgba(255,176,46,.15);border-color:rgba(255,176,46,.40)}
+
+/* ---------- ما تغيّر ---------- */
+ul.changes{list-style:none;padding:0;margin:0;display:grid;gap:9px}
+.changes li{display:flex;gap:11px;align-items:baseline}
+.chg-tag{font-size:11.5px;border-radius:999px;padding:2px 10px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--panel-3);flex:0 0 auto}
+.chg.c-new .chg-tag{color:#d7e7ff;background:rgba(77,157,255,.15);border-color:rgba(77,157,255,.40)}
+.chg.c-closed .chg-tag{color:#cdf6e2;background:rgba(51,208,122,.15);border-color:rgba(51,208,122,.40)}
+.chg.c-reclassified .chg-tag{color:#ffe8c4;background:rgba(255,176,46,.15);border-color:rgba(255,176,46,.40)}
+.chg.c-ongoing .chg-tag{color:#cfd8e3;background:rgba(148,163,184,.14);border-color:rgba(148,163,184,.38)}
+
+/* ---------- رموز الأحداث والحالات ---------- */
+.ev-code{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:11.5px;color:var(--accent);background:rgba(34,195,182,.10);border:1px solid rgba(34,195,182,.32);border-radius:6px;padding:0 5px}
+.st-badge{font-size:11.5px;border-radius:999px;padding:2px 10px;border:1px solid var(--line-2);color:var(--ink-2);white-space:nowrap}
+.st-badge.s-active{color:#ffd9d5;background:rgba(255,93,82,.14);border-color:rgba(255,93,82,.38)}
+.st-badge.s-stable{color:#cdf6e2;background:rgba(51,208,122,.14);border-color:rgba(51,208,122,.38)}
+.st-badge.s-closed{color:var(--muted);background:var(--panel-3)}
+.trend{font-size:14px}
+.trend.t-up{color:var(--danger)}
+.trend.t-down{color:var(--ok)}
+.trend.t-flat{color:var(--muted)}
+.kpi .k-d{font-size:12px;margin-top:2px;font-family:"<span class="ltr">IBM</span> Plex Mono",monospace}
+
+/* ---------- الخط الزمني ---------- */
+.tl-viz .tl-row{display:grid;grid-template-columns:96px 1fr 46px minmax(180px,1.4fr);gap:12px;align-items:center;margin:9px 0}
+.tl-date{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:12px;color:var(--muted)}
+.tl-track{height:9px;border-radius:999px;background:var(--panel-3);overflow:hidden}
+.tl-fill{height:100%;border-radius:999px;width:var(--w,0);animation:tl-grow 1s cubic-bezier(.22,.8,.28,1) both}
+@keyframes tl-grow{from{width:0}to{width:var(--w,0)}}
+.tl-fill.k-confirm{background:var(--danger)}
+.tl-fill.k-inter{background:var(--info)}
+.tl-fill.k-suspect{background:var(--warn)}
+.tl-fill.k-bg{background:var(--muted)}
+.tl-num{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:13px;color:var(--ink);text-align:end}
+.tl-lbl{font-size:13px;color:var(--ink-2)}
+
+/* ---------- بانر التصنيف والتعريفات ---------- */
+.cls-banner{border:1px solid var(--line-2);border-radius:var(--radius-sm);padding:9px 14px;font-size:13px;margin:14px 0 0;background:var(--panel-2);color:var(--ink-2)}
+.cls-banner.c-restricted{color:#ffe8c4;background:rgba(255,176,46,.10);border-color:rgba(255,176,46,.42)}
+.cls-banner.c-sensitive{color:#ffd9d5;background:rgba(255,93,82,.10);border-color:rgba(255,93,82,.42)}
+.glossary{margin-top:12px;font-size:13px;color:var(--muted)}
+.glossary ul{margin:6px 0 0;padding-inline-start:20px}
+.glossary b{color:var(--ink-2)}
+@media (max-width:760px){
+  .dc-row{grid-template-columns:1fr;gap:2px}
+  .dc-l{font-size:12.5px}
+  .tl-viz .tl-row{grid-template-columns:74px 1fr 34px;grid-template-areas:"d t n" "l l l";gap:6px 10px}
+  .tl-date{grid-area:d}.tl-track{grid-area:t}.tl-num{grid-area:n}.tl-lbl{grid-area:l}
+}
+
+/* ---------- ملحق موثوقية المصادر ---------- */
+.tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+.tbl-scroll .rel-tbl{min-width:640px}
+.rel-tbl td:nth-child(5){max-width:420px}
+@media print{.tbl-scroll{overflow:visible}.tbl-scroll .rel-tbl{min-width:0}}
+.rel-tbl td.rel{
+  font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-weight:600;text-align:center;color:var(--accent)
+}
+@media print{.rel-tbl{font-size:10.5px}.rel-tbl td,.rel-tbl th{padding:3px 5px}}
+
+body.daylight{
+  --bg:#eef2f7;--bg-2:#e7edf4;--panel:#ffffff;--panel-2:#ffffff;--panel-3:#eef2f7;
+  --line:#d3dce7;--line-2:#b9c6d6;--ink:#0b1a2b;--ink-2:#31465c;--muted:#5a7086;--faint:#6b7f94;
+  --accent:#0b6f66;--info:#1f5f9f;--danger:#a32a24;--warn:#8a5a00;--ok:#176b46;
+}
+body.daylight::before{display:none}
+body.daylight .topbar{background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.85))}
+body.daylight .btn-primary{background:#0b6f66;color:#ffffff}
+body.daylight .cite-ref{color:#0b6f66;background:rgba(11,111,102,.07);border-color:rgba(11,111,102,.30)}
+body.daylight .tag{color:#31465c;background:#f2f5f9;border-color:#c4d0dd}
+body.daylight .tag.t-confirm{color:#7a1d1a;background:#fff1f0;border-color:#c77973}
+body.daylight .tag.t-suspect{color:#7c5000;background:#fff7e6;border-color:#c9a24f}
+body.daylight .tag.t-inter{color:#1d4f87;background:#edf4ff;border-color:#8bb1dd}
+body.daylight .threat.risk-high .val{color:#a32a24}
+body.daylight .map-legend li,body.daylight .lg-num{color:#31465c}
+body.daylight .lg-num{color:#ffffff}
+body.daylight .map-keys{color:#5a7086}
+body.daylight .kpi em{opacity:.95}
+
+/* ── تمييز الروابط داخل النص (<span class="ltr">WCAG</span> 2.1 AA — 1.4.1) ──
+   عطل ك-72: تساوي الخصوصية يُحسم بالترتيب، فالقاعدة تُركَّب آخر كل الأنماط لتفوز. */
+.site-nav a,.sn-links a,.sn-foot a,.foot a,footer a,.glossary a,p a,li a,td a,
+.src a,.src-note a,.cite-ref{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+
+/* ===== طبقة الشاشة: لا تُطبَّق في وسائط الطباعة ===== */
+@media screen{
+.masthead,.decision,.kpis,.rkey{display:none}
+.topbar{position:static}
+.topbar-inner{padding-block:7px}
+/* شريط واحد: مع شريط الموقع تنتقل أزرار الطباعة والمظهر وحجم الخط إليه ويُخفى شريط الإصدار */
+body:has(.site-nav) .topbar{display:none}
+.sc-hero{margin:20px 0 6px}
+.sc-eyebrow{font-size:14.5px;color:var(--muted);margin:0 0 6px}
+.sc-h1{font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;font-size:clamp(21px,2.05vw,28px);line-height:1.65;margin:0 0 12px;text-wrap:balance}
+.sc-h1 .ltr{white-space:nowrap}
+.sc-lede{font-size:15.5px;line-height:1.9;color:var(--ink-2);margin:0 0 12px;max-width:none}
+.sc-chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px}
+.sc-chip{font-size:14px;color:var(--ink-2);border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:3px 12px}
+.sc-chip b{color:var(--ink);font-weight:600}
+.sc-fresh.f-ok{border-color:var(--ok);color:var(--ok)}
+.sc-fresh.f-ok b{color:var(--ok)}
+.sc-fresh.f-warn{border-color:var(--warn);color:var(--warn)}
+.sc-fresh.f-warn b{color:var(--warn)}
+.sc-fresh.f-old{border-color:var(--danger);color:var(--danger)}
+.sc-fresh.f-old b{color:var(--danger)}
+.sc-arch{color:var(--muted)}
+.sc-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:22px;align-items:start}
+/* بلا بطاقة قرار (السجل التراكمي): مستوى التهديد والمؤشرات في صف واحد بدل عمود يترك نصف العرض فارغًا */
+.sc-grid.sc-solo{grid-template-columns:minmax(0,1fr)}
+.sc-solo .sc-side{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));align-items:stretch}
+.sc-solo .sc-kpis{display:contents}
+.sc-side{display:grid;gap:12px;min-width:0}
+.sc-threat{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:inset 0 2px 0 0 rgba(34,195,182,.55)}
+.sc-tl{font-size:13.5px;color:var(--muted)}
+.sc-tv{font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;font-size:32px;line-height:1.45}
+.sc-threat.risk-high .sc-tv{color:var(--danger)}
+.sc-threat.risk-med .sc-tv{color:var(--warn)}
+.sc-threat.risk-low .sc-tv{color:var(--ok)}
+.sc-basis{margin-top:8px;font-size:13.5px;color:var(--muted)}
+.sc-basis summary{cursor:pointer;color:var(--ink-2)}
+.sc-basis p{margin:6px 0 0;line-height:1.8}
+.sc-kpis{display:grid;gap:10px}
+.sc-kpi{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;position:relative;overflow:hidden}
+.sc-kpi:before{content:"";position:absolute;inset-inline-start:0;top:0;bottom:0;width:3px;background:var(--accent)}
+.sc-kpi.acc-info:before{background:var(--info)}.sc-kpi.acc-warn:before{background:var(--warn)}
+.sc-kpi.acc-danger:before{background:var(--danger)}.sc-kpi.acc-ok:before{background:var(--ok)}
+.sc-kl{font-size:14px;color:var(--muted);line-height:1.6}
+.sc-kv{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:26px;line-height:1.3}
+.sc-kd{font-size:14px;color:var(--ink-2)}
+.sc-kn{font-size:13px;color:var(--muted);line-height:1.7;margin-top:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sc-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 26px;min-width:0;box-shadow:inset 0 2px 0 0 rgba(34,195,182,.55)}
+.sc-h2{font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:19px;margin:0 0 6px;color:var(--accent)}
+.sc-row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;padding:14px 0;border-top:1px solid var(--line)}
+.sc-row:first-of-type{border-top:0}
+.sc-l{font-size:13.5px;color:var(--muted);line-height:1.6;padding-top:3px}
+.sc-v{font-size:15.5px;color:var(--ink);min-width:0}
+.sc-list,.sc-acts,.sc-watch{list-style:none;margin:0;padding:0}
+.sc-list li{display:grid;grid-template-columns:118px minmax(0,1fr);gap:12px;padding:6px 0;line-height:1.8}
+.sc-code{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--accent);background:rgba(34,195,182,.10);border:1px solid rgba(34,195,182,.32);border-radius:6px;padding:0 6px;white-space:nowrap;height:fit-content;text-align:center}
+.sc-nocode{visibility:hidden}
+.sc-tag{display:inline-block;font-size:13px;border-radius:999px;padding:0 9px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--panel-3);margin-inline-end:4px;line-height:1.7}
+.sc-acts li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px;padding:5px 0;line-height:1.8}
+.sc-acts li i{font-style:normal;font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:12.5px;background:var(--accent);color:var(--accent-ink);border-radius:6px;width:24px;height:24px;display:grid;place-items:center;margin-top:4px}
+.sc-watch li{padding:5px 0;line-height:1.8}
+.sc-more{font-size:14px;margin:6px 0 0}
+.sc-more a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:3px 0;min-height:24px}
+.sup-banner a{display:inline-block;padding:3px 0;min-height:24px}
+.sc-rkey{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--muted);margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.sc-rkey .rkey-t{color:var(--muted)}
+/* الأقسام القابلة للطي */
+.sc-toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:26px 0 14px}
+.sc-jump{display:flex;gap:6px;flex-wrap:wrap;flex:1 1 360px}
+.sc-jump a{font-size:14px;color:var(--ink-2);text-decoration:none;border:1px solid var(--line);background:var(--panel);padding:3px 12px;border-radius:999px;min-height:28px;display:inline-flex;align-items:center}
+.sc-jump a:hover,.sc-jump a:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
+.sc-all{display:flex;gap:6px}
+.sc-all button{font:inherit;font-size:13.5px;cursor:pointer;color:var(--ink);background:var(--panel-2);border:1px solid var(--line-2);border-radius:8px;padding:4px 14px;min-height:32px}
+.sc-toggle{position:absolute;top:18px;inset-inline-end:22px;font:inherit;font-size:20px;line-height:1;cursor:pointer;color:var(--accent);background:var(--panel-3);border:1px solid var(--line-2);border-radius:8px;width:34px;height:34px;padding:0}
+.sc-toggle:before{content:"−"}
+.sc-toggle[aria-expanded="false"]:before{content:"+"}
+section.doc{position:relative}
+.sc-toggle:focus-visible,.sc-all button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+section.doc.sc-collapsed > *:not(h2):not(.sc-toggle):not(.sc-peek){display:none}
+section.doc.sc-collapsed{padding-bottom:12px}
+section.doc > h2{cursor:pointer}
+/* معاينة القسم المطوي: عدّ البنود وأول سطر، بلا مساس بنص العنوان (فهرس PDF) */
+.sc-peek{display:none}
+section.doc.sc-collapsed > .sc-peek{display:flex;gap:10px;align-items:baseline;margin:4px 0 0;padding-inline-end:48px;color:var(--muted);font-size:14.5px;line-height:1.8}
+.sc-peek b{flex:0 0 auto;font-weight:600;font-size:13px;color:var(--accent);border:1px solid var(--line-2);background:var(--panel-3);border-radius:999px;padding:0 10px}
+.sc-peek span{min-width:0;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+/* المظهر النهاري للخريطة والأرقام: قيم الخريطة النهارية كانت معرّفة للطباعة فقط فتبقى الخريطة داكنة وتسمياتها غير مقروءة */
+body.daylight{
+  --map-sea:#f7fafc;--map-land:#d6e0ea;--map-coast:#64809b;--map-border:#96a7b9;
+  --map-grid:#d3dce6;--map-grid-lbl:#5a7086;--map-label:#20303f;--map-country:#5a7086;
+  --map-sea-label:#4f657c;--map-strait:#8a2b25;
+}
+body.daylight .sc-acts li i{color:#ffffff}
+body.daylight .sc-tag{color:#31465c}
+/* إصلاح الخطوط على الشاشة: isolate_ltr يلفّ IBM داخل CSS فيبطل الإعلان ويسقط النص إلى Times New Roman */
+body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,system-ui,sans-serif}
+.kpi .k-v,section.doc code,td.num,th.num,.bar-row .bv,.mp-grid-lbl,.mp-events .mp-num,.lg-num,.cite-ref,.ev-code,.kpi .k-d,.tl-date,.tl-num,.rel-tbl td.rel{font-family:"IBM Plex Mono",ui-monospace,monospace}
+.mp-places text{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic",sans-serif}
+/* قراءة أوضح بكثافة معتدلة */
+.chip,.tag,.ev-code,.conf,.kstrip,.chg-tag,.st-badge{font-size:13.5px}
+.kpi .k-l,.kpi .k-n,.brand-sub{font-size:13.5px}
+.lg-num{font-size:12.5px;width:22px;height:22px}
+.cite-ref{font-size:12.5px}
+.sn-name em,.ar-risk,.hc-tag{font-size:12.5px}
+.foot a,.foot-note a,.sc-foot a,.glossary a{display:inline-block;padding:3px 0}
+@media (max-width:1000px){
+  /* الجوال: مستوى التهديد ثم بطاقة القرار ثم المؤشرات (القرار قبل الأرقام) */
+  .sc-grid,.sc-grid.sc-solo{display:flex;flex-direction:column;gap:14px}
+  .sc-side{display:contents}
+  .sc-threat{order:1}.sc-card{order:2}.sc-kpis{order:3;display:grid;gap:10px}
+  .sc-solo .sc-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+  .sc-row{grid-template-columns:minmax(0,1fr);gap:2px}
+  .sc-list li{grid-template-columns:minmax(0,1fr);gap:3px}
+  .sc-list li .sc-code{justify-self:start}
+}
+@media (max-width:700px){
+  /* شريط الأقسام صفّ واحد قابل للتمرير بدل كتلة من الأزرار تدفع المحتوى */
+  .sc-jump{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+  .sc-jump a{flex:0 0 auto;white-space:nowrap}
+  .sc-card{padding:18px 16px}
+  .sc-threat{padding:16px}
+  .sc-tv{font-size:28px}
+}
+}
+/* الحركة: عند طيّ الأقسام على الشاشة يبدأ الرسم المتحرّك لحظة التحويل إلى الطباعة فيلتقطه PDF ناقصًا
+   (شريط الخط الزمني). الحالة النهائية هي المقصودة، وهي ما كانت تُلتقط قبل الطيّ. */
+@media print{.tl-fill{animation:none}}
+</style>
+<style>
+:root{--sn-bg:#040810;--sn-panel:#0b1524;--sn-line:#1b2b45;--sn-ink:#e9f0f9;--sn-ink2:#b9c8dc;
+--sn-muted:#7f95ae;--sn-accent:#22c3b6;--sn-accent-ink:#04120f}
+html{scroll-behavior:smooth}
+body.daylight{--sn-bg:#eef3f9;--sn-panel:#ffffff;--sn-line:#d3dded;--sn-ink:#0d1a2b;--sn-ink2:#33475e;
+--sn-muted:#4f657c;--sn-accent:#0b7a72;--sn-accent-ink:#ffffff}
+.site-nav{position:sticky;top:0;z-index:60;background:var(--sn-bg);border-bottom:1px solid var(--sn-line);
+font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif}
+.site-nav .sn-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:9px 20px;flex-wrap:wrap}
+.site-nav a{color:var(--sn-ink2);text-decoration:none}
+.sn-brand{display:flex;align-items:center;gap:10px;color:var(--sn-ink)!important;font-weight:700}
+.sn-mark{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:0 0 auto;
+background:linear-gradient(150deg,var(--sn-accent),#0c8b83);color:#04120f}
+.sn-mark svg{width:17px;height:17px}
+.sn-name{display:flex;flex-direction:column;line-height:1.25}
+.sn-name em{font-style:normal;font-size:12.5px;font-weight:500;color:var(--sn-muted)}
+.sn-links{display:flex;gap:4px;margin-inline-start:auto;flex-wrap:wrap}
+.sn-links a{padding:6px 8px;min-height:32px;display:inline-flex;align-items:center;border-radius:8px;font-size:13.5px;border:1px solid transparent}
+.sn-links a:hover{background:var(--sn-panel);border-color:var(--sn-line);color:var(--sn-ink)}
+.sn-links a[aria-current="page"]{background:var(--sn-panel);border-color:var(--sn-line);color:var(--sn-ink);font-weight:600}
+.sn-tools{display:flex;align-items:center;gap:8px}
+.sn-scale{display:flex;border:1px solid var(--sn-line);border-radius:9px;overflow:hidden}
+.sn-scale button{background:transparent;border:0;color:var(--sn-ink2);padding:5px 8px;min-width:34px;min-height:32px;cursor:pointer;font:inherit;font-size:13px}
+.sn-scale button.on{background:var(--sn-accent);color:var(--sn-accent-ink);font-weight:700}
+.sn-theme{background:var(--sn-panel);border:1px solid var(--sn-line);color:var(--sn-ink2);
+border-radius:9px;padding:6px 11px;cursor:pointer;font:inherit;font-size:13px}
+.sn-theme:hover{color:var(--sn-ink)}
+.sn-skip{position:absolute;inset-inline-start:12px;top:-80px;z-index:70;background:var(--sn-accent);color:var(--sn-accent-ink)!important;
+padding:9px 16px;border-radius:9px;font-weight:700;font-size:14px}
+.sn-skip:focus{top:8px;outline:2px solid var(--sn-ink);outline-offset:2px}
+.sn-print{background:var(--sn-accent);color:var(--sn-accent-ink);border-color:transparent;font-weight:700}
+.sn-print:hover{color:var(--sn-accent-ink);filter:brightness(1.08)}
+.sn-foot{margin-top:44px;border-top:1px solid var(--sn-line);background:var(--sn-bg);
+font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif}
+.sn-foot .sf-inner{max-width:1180px;margin:0 auto;padding:20px;color:var(--sn-muted);font-size:13px;
+display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
+.sn-foot a{color:var(--sn-ink2);display:inline-block;padding:4px 2px;min-height:24px}
+body.daylight .topbar{background:#ffffff!important;border-bottom-color:#d3dded!important}
+body.daylight .brand-title,body.daylight .brand-sub{color:#0d1a2b}
+@media print{.site-nav,.sn-foot{display:none!important}}
+
+/* قائمة الجوال — تضغط شريطي الموقع والصفحة إلى ارتفاع صغير */
+.sn-menu{display:none}
+/* سطح المكتب: الروابط والأدوات في صف واحد بجانب الشعار (كانت تتراصّ صفين داخل اللوحة) */
+@media (min-width:1041px){
+  .sn-panel{display:flex;align-items:center;gap:12px;flex:1 1 auto;min-width:0}
+  .sn-panel .sn-links{margin-inline-start:0}
+  .sn-panel .sn-tools{margin-inline-start:auto}
+}
+/* عرض متوسط (لوحي): يبقى الشريط صفًّا واحدًا حتى مع زر الطباعة */
+@media (min-width:1041px) and (max-width:1180px){
+  .sn-name em{display:none}
+  .site-nav .sn-inner{gap:8px;padding-inline:14px}
+  .sn-links{gap:0}
+  .sn-links a{padding:6px 5px;font-size:13px}
+  .sn-panel{gap:6px}
+  .sn-tools{gap:6px}
+  .sn-theme{padding:6px 8px}
+}
+@media (max-width:1040px){
+  .site-nav .sn-inner{flex-wrap:nowrap;padding:8px 14px;gap:10px;position:relative}
+  .sn-name em{display:none}
+  .sn-menu{
+    display:inline-flex;align-items:center;gap:8px;margin-inline-start:auto;
+    min-height:44px;padding:0 14px;border-radius:10px;cursor:pointer;
+    background:var(--sn-panel);border:1px solid var(--sn-line);color:var(--sn-ink);font:inherit;font-size:14px
+  }
+  .sn-menu-icon,.sn-menu-icon::before,.sn-menu-icon::after{
+    display:block;width:16px;height:2px;background:currentColor;border-radius:2px;position:relative;
+    transition:transform .2s ease,background-color .2s ease
+  }
+  .sn-menu-icon::before,.sn-menu-icon::after{content:"";position:absolute;inset-inline:0}
+  .sn-menu-icon::before{top:-5px}
+  .sn-menu-icon::after{top:5px}
+  .site-nav.open .sn-menu-icon{background:transparent}
+  .site-nav.open .sn-menu-icon::before{top:0;transform:rotate(45deg)}
+  .site-nav.open .sn-menu-icon::after{top:0;transform:rotate(-45deg)}
+  .sn-panel{
+    display:none;position:absolute;inset-inline:0;top:100%;
+    background:var(--sn-bg);border-bottom:1px solid var(--sn-line);padding:10px 14px 16px;
+    flex-direction:column;gap:12px;box-shadow:0 0 0 100vh rgba(0,0,0,.45);z-index:5
+  }
+  .site-nav.open .sn-panel{display:flex}
+  .site-nav .sn-links{flex-direction:column;margin:0;gap:2px}
+  .site-nav .sn-links a{min-height:44px;display:flex;align-items:center}
+  .topbar-inner{flex-wrap:nowrap !important;padding:6px 14px !important;gap:8px !important}
+  .topbar .brand-sub,.topbar .tb-meta .chip,.topbar .brand-mark{display:none}
+  .topbar .brand-title{font-size:13.5px;line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+  .topbar .tb-meta{display:flex;gap:6px;flex:0 0 auto}
+  .topbar .btn{min-height:40px;padding:6px 10px}
+}
+html{scroll-padding-top:calc(var(--nav-h, 60px) + var(--bar-h, 0px) + 12px);scroll-padding-bottom:80px}
+section.doc{scroll-margin-top:0 !important}
+
+/* اتجاه النصوص اللاتينية والإحداثيات — يمنع انقلابها في السياق العربي */
+.ltr{direction:ltr;unicode-bidi:isolate}
+
+/* ألوان الشارات في الوضع النهاري (نفس منطق ألوان نسخة الطباعة) */
+@media screen{
+  body.daylight .st-badge.s-stable,body.daylight .chg.c-closed .chg-tag,body.daylight .conf.c-high,
+  body.daylight .tag.t-confirm{color:#14603f;background:#edfaf3;border-color:#7cc4a0}
+  body.daylight .st-badge.s-active,body.daylight .kstrip.k-confirm,body.daylight .cls-banner.c-sensitive
+    {color:#7a1d1a;background:#fff1f0;border-color:#c77973}
+  body.daylight .conf.c-med,body.daylight .kstrip.k-suspect,body.daylight .chg.c-reclassified .chg-tag,
+  body.daylight .cls-banner.c-restricted,body.daylight .tag.t-suspect{color:#7c5000;background:#fff7e6;border-color:#c9a24f}
+  body.daylight .conf.c-low,body.daylight .kstrip.k-inter,body.daylight .chg.c-new .chg-tag
+    {color:#1d4f87;background:#edf4ff;border-color:#8bb1dd}
+  body.daylight .chg.c-ongoing .chg-tag{color:#31465c;background:#f6f8fb;border-color:#b8c4d1}
+  body.daylight .ev-code{color:#31465c;background:#f2f5f9;border-color:#c4d0dd}
+}
+
+/* رقم المعلّم: نص داكن على معلّم فاتح، ومقلوب في الوضع النهاري */
+body:not(.daylight) .lg-num{color:#04120f}
+body.daylight .lg-num{color:#ffffff}
+
+/* بطاقات الجوال للجداول — البند المعتمد 21 أكتوبر 2026 */
+@media (max-width:560px){
+  table.cardified{display:block;border:0;background:transparent;border-radius:0}
+  table.cardified.cardified{width:100%;max-width:100%;min-width:0}
+  table.cardified thead{display:none}
+  table.cardified tbody{display:block;max-width:100%}
+  table.cardified tr{display:block;max-width:100%;box-sizing:border-box;background:var(--panel);
+    border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin:0 0 10px}
+  table.cardified td{display:grid;grid-template-columns:minmax(72px,auto) minmax(0,1fr);gap:8px;
+    border:0;padding:5px 0;align-items:baseline;text-align:start;
+    overflow-wrap:anywhere;word-break:break-word;min-width:0}
+  table.cardified td::before{content:attr(data-label);color:var(--muted);font-size:12.5px;font-weight:600}
+  table.cardified td:empty{display:none}
+  .tbl-wrap:has(table.cardified),.tbl-scroll:has(table.cardified){overflow:visible;border:0}
+  .tbl-hint{display:none}
+}
+/* بانر النسخة المستبدلة — البند المعتمد 21 أكتوبر 2026 */
+.sup-banner{margin:0 0 20px;padding:12px 16px;border:1px solid #c9a24f;border-radius:10px;
+  background:#2a2210;color:#ffd88a;font-size:14px}
+body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
+.sup-banner a{color:inherit;font-weight:700;text-decoration:underline}
+.sp-dim{opacity:.72}
+</style></head>
+<body><nav class="site-nav no-print" aria-label="تنقل الموقع">
+  <a class="sn-skip" href="#" id="sn-skip">الانتقال إلى المحتوى</a>
+  <div class="sn-inner">
+    <a class="sn-brand" href="/">
+      <span class="sn-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/><path d="M12 11.5v4"/><path d="M9.6 13.2h4.8"/></svg></span>
+      <span class="sn-name">مركز الوعي بالمجال البحري<em>تقارير أمن الملاحة — مملكة البحرين</em></span>
+    </a>
+    <button type="button" class="sn-menu no-print" aria-expanded="false" aria-controls="sn-panel">
+      <span class="sn-menu-icon" aria-hidden="true"></span><span>القائمة</span>
+    </button>
+    <div class="sn-panel" id="sn-panel">
+    <div class="sn-links">
+      <a href="/">الرئيسية</a>
+      <a href="/reports/special.html">التقارير الخاصة</a>
+      <a href="/#archive">الأرشيف</a>
+      <a href="/reports/monthly-2026-10.html">اللوحة الشهرية</a>
+      <a href="/reports/cumulative-2026.html">السجل التراكمي</a>
+      <a href="/sources.html">المصادر والمراجع</a>
+      <a href="/additions.html" aria-current="page">إضافات</a>
+    </div>
+    <div class="sn-tools">
+      <div class="sn-scale" role="group" aria-label="حجم الخط">
+        <button type="button" data-scale="1" title="حجم عادي">أ</button>
+        <button type="button" data-scale="1.12" title="حجم أكبر">أ+</button>
+        <button type="button" data-scale="1.25" title="أكبر حجم">أ++</button>
+      </div>
+      <button type="button" class="sn-theme" id="sn-theme">المظهر</button>
+      
+    </div>
+    </div>
+  </div>
+</nav><script>
+(function(){try{
+var b=document.body;if(!b)return;
+var t=localStorage.getItem('mn-theme');if(t==='light')b.classList.add('daylight');
+var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom=s;
+}catch(e){}})();
+</script>
+<div class="topbar no-print">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/></svg></div>
+      <div class="brand-txt">
+        <div class="brand-title">إضافات</div>
+        <div class="brand-sub">المجموعة المنقولة من التقرير اليومي — إصدار 28 أكتوبر 2026</div>
+      </div>
+    </div>
+    <div class="topbar-spacer"></div>
+    <div class="tb-meta">
+      <span class="chip">28 أكتوبر 2026</span>
+      <button class="btn" id="btn-theme" type="button">النمط النهاري</button>
+      <button class="btn btn-primary" id="btn-print" type="button">طباعة / <span class="ltr">PDF</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="masthead">
+    <h1>إضافات</h1>
+    
+    <div>
+      <p class="lede">الأقسام التفصيلية التي كانت داخل التقرير اليومي. متن التقرير اليومي في صفحته، وهذه الصفحة مرجعها الدائم المحدَّث مع كل إصدار.</p>
+      <div class="masthead-meta"><span class="chip">رقم الإصدار <b>و ب <span class="ltr">28/10/26</span></b></span><span class="chip">آخر تحديث <b class="bidi">2026-10-28T04:00:00Z</b></span><span class="chip">فترة التغطية <b><bdi class="bidi"><span class="ltr">270400Z</span>–<span class="ltr">280400Z</span></bdi> <span class="ltr">UTC</span> أكتوبر 2026</b></span><span class="chip">إجمالي المصادر المعتمدة <b class="bidi">40</b></span><span class="chip">مفحوصة يدويًا <b class="bidi">22</b></span><span class="chip">مصادر مستشهد بها <b class="bidi">15</b></span></div>
+    </div>
+  </header>
+
+  
+  
+  
+  
+  <section class="hero-map no-print" aria-hidden="true"><div class="hmap"><div class="hmap-panel">
+  <h3>خريطة الوقائع</h3><p class="blk-lede">مواقع الوقائع داخل نطاق التقرير.</p>
+  <div class="hmap-wrap">
+    <svg class="hmap-svg" viewBox="0 0 1120 722" role="img"
+         aria-label="خريطة الخليج العربي ومضيق هرمز وخليج عمان مع مواقع وقائع التقرير">
+      <rect class="mp-sea-bg" x="0" y="0" width="1120" height="722"/>
+      <g class="mp-grid"><line x1="108.4" y1="0" x2="108.4" y2="722"/><line x1="397.4" y1="0" x2="397.4" y2="722"/><line x1="686.5" y1="0" x2="686.5" y2="722"/><line x1="975.5" y1="0" x2="975.5" y2="722"/><line x1="0" y1="657.6" x2="1120" y2="657.6"/><line x1="0" y1="497.2" x2="1120" y2="497.2"/><line x1="0" y1="336.8" x2="1120" y2="336.8"/><line x1="0" y1="176.4" x2="1120" y2="176.4"/></g>
+      <g class="mp-land" fill-rule="evenodd"><path d="M488.3,476.9 483.5,473.9 493.7,469.8 499.5,464.2 501.9,467.4 497.3,474.7 493.7,476.4 488.3,476.9Z"/><path d="M440.8,474.6 439.6,468.9 442.9,467.0 444.9,470.5 440.8,474.6Z"/><path d="M693.3,272.6 683.1,280.6 678.8,278.1 675.4,278.2 668.2,281.3 662.9,281.8 653.4,287.3 644.8,290.0 636.7,289.3 635.5,285.5 635.6,284.1 639.3,284.8 652.6,279.9 669.3,271.7 670.9,268.1 668.2,262.1 668.9,260.8 679.7,263.8 691.8,257.9 701.9,256.3 706.6,260.5 700.0,262.9 693.3,272.6Z"/><path d="M536.7,485.7 529.4,484.9 527.4,486.3 515.5,483.6 519.5,480.3 529.9,476.4 536.7,483.0 536.7,485.7Z"/><path d="M294.4,352.3 292.2,350.2 286.6,339.6 288.3,332.1 285.6,321.5 286.9,318.4 293.7,317.0 295.2,317.5 293.2,320.9 297.0,326.8 297.5,336.6 296.8,346.2 294.4,352.3Z"/><path d="M124.2,48.0 121.4,47.2 114.3,32.2 116.7,28.2 117.1,25.2 118.4,24.3 119.8,19.3 121.7,17.7 133.6,33.5 133.0,40.5 128.3,46.2 124.2,48.0Z"/><path d="M1113.3,406.5 1101.5,405.9 1086.3,401.3 1077.5,408.8 1055.6,402.2 1023.5,394.4 1019.9,390.5 1017.9,383.8 1012.4,381.9 1004.4,392.0 977.3,386.2 968.0,388.0 962.4,384.8 947.7,384.7 936.2,378.4 919.6,382.7 906.6,383.5 888.6,372.5 869.3,369.5 853.7,370.4 845.6,369.6 832.6,365.6 826.4,361.5 816.2,364.6 811.6,358.9 782.9,353.5 773.6,333.8 773.3,324.1 766.2,307.0 763.9,282.3 761.3,272.6 757.4,264.2 745.2,249.4 739.1,246.4 712.2,240.6 695.0,245.1 682.2,253.6 661.2,258.4 656.9,262.1 651.7,270.2 644.8,275.0 635.4,273.8 625.4,278.6 606.7,292.2 596.8,296.3 588.5,296.0 579.7,289.6 559.8,280.9 546.9,278.1 529.1,280.0 520.7,278.6 506.3,268.5 502.6,261.2 494.4,256.3 468.4,245.2 447.4,230.7 443.5,225.2 441.0,217.0 431.8,207.2 411.3,199.1 399.6,190.5 386.0,188.6 373.3,188.9 367.7,187.3 362.6,183.6 345.3,165.9 345.1,158.9 334.4,141.5 331.9,135.4 329.6,118.2 326.7,113.7 315.6,106.6 313.8,102.0 316.2,95.9 316.2,91.2 310.4,86.8 301.7,84.5 299.6,79.2 301.2,69.0 299.8,62.5 292.2,52.3 280.9,41.8 269.5,26.2 265.1,22.4 258.1,0.1 257.2,0.0 1120.0,0.0 1120.0,405.5 1113.3,406.5Z"/><path d="M220.7,13.7 211.7,5.6 201.0,0.0 250.1,0.0 220.7,13.7Z"/><path d="M174.8,6.3 168.5,13.2 156.9,13.8 151.4,18.0 141.2,21.0 134.0,19.5 118.6,12.8 113.6,12.6 107.1,15.1 106.5,20.4 108.8,29.2 118.2,46.7 118.8,50.3 106.2,46.8 88.5,62.8 88.3,64.7 97.2,66.9 103.7,66.8 108.3,65.3 112.1,67.7 121.7,97.9 126.7,104.1 132.9,115.2 136.5,125.8 144.4,140.4 146.2,147.9 153.6,165.8 164.3,179.7 166.8,184.8 168.6,192.4 166.7,195.2 166.0,198.5 173.9,206.2 197.8,217.1 193.3,221.5 209.9,242.1 219.5,244.4 232.4,260.2 251.9,270.3 263.7,283.7 254.8,280.7 253.5,282.4 254.9,294.6 266.3,304.3 268.4,312.1 264.1,328.7 256.8,326.9 255.2,327.9 258.8,339.9 262.3,349.1 266.6,356.4 270.2,367.0 273.2,371.6 285.8,382.9 289.6,392.4 293.2,410.0 301.1,419.9 305.3,427.5 311.0,433.9 314.1,425.9 309.1,402.8 307.4,385.0 308.0,381.3 315.7,367.9 325.4,338.3 333.0,330.3 344.1,324.5 353.3,335.9 364.4,344.6 366.5,354.4 363.2,362.3 360.2,374.9 368.7,405.1 369.2,412.8 367.6,419.8 363.7,425.7 356.1,443.6 353.8,445.5 344.5,448.5 349.6,451.9 354.9,451.4 355.4,454.6 351.9,458.9 347.6,469.9 363.8,474.2 366.2,474.2 368.9,470.0 373.2,477.1 378.3,476.1 380.6,476.8 382.4,491.2 386.1,496.3 390.6,498.4 406.0,499.5 415.5,497.6 434.4,488.2 444.3,484.8 471.6,485.4 493.5,489.3 527.6,491.6 534.2,491.0 552.6,483.5 563.9,476.8 570.6,474.9 575.1,468.5 580.6,454.6 583.9,452.0 587.0,447.4 589.6,439.8 595.9,432.2 621.3,413.7 636.1,398.0 637.4,393.0 645.5,385.4 652.0,377.0 682.2,353.3 688.3,343.5 691.8,332.6 698.3,320.2 700.7,318.4 703.0,319.2 708.5,317.9 713.8,308.2 716.3,308.6 717.5,310.6 716.5,328.1 713.4,352.5 708.7,360.1 708.0,364.8 712.7,371.3 713.4,415.5 721.8,439.7 732.7,459.5 742.4,470.4 752.4,485.1 767.6,498.7 774.6,503.4 802.9,512.9 839.7,519.9 854.4,527.3 859.4,527.8 867.1,525.6 872.7,525.8 886.8,535.9 891.0,545.5 896.8,550.6 902.0,558.6 905.4,566.9 917.3,579.6 925.7,593.9 934.3,604.6 941.9,611.2 962.7,616.7 963.7,623.8 962.8,633.1 961.0,639.9 952.4,653.2 950.4,661.5 940.6,675.0 930.1,697.8 925.2,702.8 908.2,714.6 901.9,721.7 0.0,721.7 0.0,0.0 174.3,0.0 174.8,6.3Z"/><path d="M574.9,463.2 567.8,461.7 566.1,459.4 570.7,456.6 575.6,461.7 574.9,463.2Z"/></g>
+      <g class="mp-borders"><path d="M627.6,601.1L628.6,574.6L650.9,519.3L652.6,511.7L651.7,506.4L648.0,501.9L653.8,497.9L664.5,495.2L670.5,495.8L685.4,492.1L685.9,489.7L681.3,479.9L672.0,479.3L669.2,477.7L672.4,469.1L669.7,457.8L670.4,450.9L672.3,446.2L671.7,427.6L673.7,424.1L680.4,419.3L683.8,419.4L686.5,420.7L687.7,424.4L686.9,426.9L684.3,428.3L691.1,437.9L694.1,437.1L701.2,430.4L705.8,427.7L712.0,419.1L714.5,418.7"/><path d="M344.5,448.5L331.9,451.9L322.7,451.2L320.0,449.5L314.7,442.7L311.0,433.9"/><path d="M2.3,88.5L19.5,68.4L29.3,53.1L43.5,20.9L46.8,16.0L60.1,9.6L82.6,8.2L90.6,9.9L106.8,17.4"/><path d="M140.4,132.9L84.6,133.7L78.3,126.1L73.8,109.2L67.4,97.1L2.3,88.5"/><path d="M137.0,0.0L136.4,3.2L137.2,7.2L139.8,13.0L147.9,19.1"/><path d="M627.6,601.1L660.5,657.4L641.3,721.7"/><path d="M627.6,601.1L622.8,607.5L621.7,607.7L437.5,582.8L368.0,490.9L366.5,486.9L366.2,474.2"/><path d="M2.3,88.5L0.0,89.0"/><path d="M1090.2,400.8L1092.2,394.0L1094.0,370.1L1096.3,361.5L1095.6,356.7L1102.3,349.4L1106.3,323.5L1108.6,318.7L1120.0,313.7"/><path d="M1120.0,136.0L1112.0,132.6L1092.8,112.9L1088.8,106.6L1084.5,95.7L1072.2,75.0L1072.3,69.6L1070.7,66.3L1036.4,27.4"/><path d="M1036.4,27.4L1060.3,0.0"/><path d="M1036.4,27.4L1120.0,53.7"/><path d="M692.3,331.8L694.9,331.3L698.6,333.0L698.9,341.2L696.9,361.6L699.7,365.3L704.5,366.8L706.6,366.7L708.0,364.8"/><path d="M703.4,392.6L701.7,399.9L703.8,400.2L706.8,398.1L707.2,394.7L706.5,392.9L703.4,392.6"/></g>
+      <g class="mp-places"><text class="mp-country" x="491.4" y="152.4">إيران</text><text class="mp-country" x="187.9" y="613.5">السعودية</text><text class="mp-country" x="585.3" y="541.3">الإمارات</text><text class="mp-country" x="708.1" y="641.5">عُمان</text><g transform="translate(106.9,66.6)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="0.0" y="21.0">الكويت</text></g><g transform="translate(706.7,242.2)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="48.0" y="-27.0">بندر عباس</text></g><g transform="translate(633.7,401.0)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="-38.0" y="4.0">دبي</text></g><g transform="translate(363.5,392.9)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="-34.0" y="39.0">الدوحة</text></g><g transform="translate(737.8,469.9)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="-48.0" y="-10.0">صحار</text></g><g transform="translate(873.6,528.5)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="40.0" y="4.0">مسقط</text></g><g transform="translate(294.8,318.4)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="0.0" y="1.0">المنامة</text></g><text class="mp-sea-lbl mp-sea-sm" x="682.8" y="244.2">مضيق هرمز</text><text class="mp-sea-lbl mp-sea-lg" x="346.8" y="286.7">الخليج العربي</text><text class="mp-sea-lbl mp-sea-lg" x="946.6" y="501.2">خليج عمان</text><text class="mp-sea-lbl mp-sea-lg" x="859.9" y="681.6">بحر العرب</text></g>
+      <g class="mp-grid-labels"><text class="mp-grid-lbl" x="113.4" y="715">48°E</text><text class="mp-grid-lbl" x="402.4" y="715">52°E</text><text class="mp-grid-lbl" x="691.5" y="715">56°E</text><text class="mp-grid-lbl" x="980.5" y="715">60°E</text><text class="mp-grid-lbl" x="7" y="651.6" text-anchor="start">22°N</text><text class="mp-grid-lbl" x="7" y="491.2" text-anchor="start">24°N</text><text class="mp-grid-lbl" x="7" y="330.8" text-anchor="start">26°N</text><text class="mp-grid-lbl" x="7" y="170.4" text-anchor="start">28°N</text></g>
+      <rect class="mp-zoomrect" x="585.3" y="256.6" width="245.7" height="288.7" rx="4" style="fill:none;stroke:var(--accent);stroke-width:1.6;stroke-dasharray:7 5"/>
+      <g class="mp-events"><g class="mp-leader"><line x1="722.6" y1="288.7" x2="734.0" y2="276.0" style="stroke:var(--map-label);stroke-width:1;opacity:.75"/><circle cx="722.6" cy="288.7" r="2.4" style="fill:var(--map-label)"/></g><g class="mp-event" transform="translate(734.0,276.0)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">1</text></g><g class="mp-leader"><line x1="708.1" y1="304.7" x2="689.4" y2="325.5" style="stroke:var(--map-label);stroke-width:1;opacity:.75"/><circle cx="708.1" cy="304.7" r="2.4" style="fill:var(--map-label)"/></g><g class="mp-event" transform="translate(689.4,325.5)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">2</text></g><g class="mp-leader"><line x1="310.7" y1="240.6" x2="332.8" y2="244.5" style="stroke:var(--map-label);stroke-width:1;opacity:.75"/><circle cx="310.7" cy="240.6" r="2.4" style="fill:var(--map-label)"/></g><g class="mp-event" transform="translate(332.8,244.5)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">3</text></g><g class="mp-leader"><line x1="708.1" y1="304.7" x2="719.3" y2="292.4" style="stroke:var(--map-label);stroke-width:1;opacity:.75"/><circle cx="708.1" cy="304.7" r="2.4" style="fill:var(--map-label)"/></g><g class="mp-event" transform="translate(719.3,292.4)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">4</text></g><g class="mp-leader"><line x1="310.7" y1="240.6" x2="288.7" y2="236.7" style="stroke:var(--map-label);stroke-width:1;opacity:.75"/><circle cx="310.7" cy="240.6" r="2.4" style="fill:var(--map-label)"/></g><g class="mp-event" transform="translate(288.7,236.7)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">5</text></g><g class="mp-event" transform="translate(657.5,368.9)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">6</text></g><g class="mp-event" transform="translate(-224.0,1411.4)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">7</text></g><g class="mp-event" transform="translate(260.1,288.7)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">8</text></g><g class="mp-leader"><line x1="361.3" y1="392.9" x2="382.0" y2="384.4" style="stroke:var(--map-label);stroke-width:1;opacity:.75"/><circle cx="361.3" cy="392.9" r="2.4" style="fill:var(--map-label)"/></g><g class="mp-event" transform="translate(382.0,384.4)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">9</text></g><g class="mp-leader"><line x1="361.3" y1="392.9" x2="340.7" y2="401.4" style="stroke:var(--map-label);stroke-width:1;opacity:.75"/><circle cx="361.3" cy="392.9" r="2.4" style="fill:var(--map-label)"/></g><g class="mp-event" transform="translate(340.7,401.4)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">10</text></g><g class="mp-event" transform="translate(361.2,393.0)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">11</text></g><g class="mp-event" transform="translate(310.6,240.6)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">12</text></g><g class="mp-leader"><line x1="708.1" y1="304.7" x2="704.2" y2="309.1" style="stroke:var(--map-label);stroke-width:1;opacity:.75"/><circle cx="708.1" cy="304.7" r="2.4" style="fill:var(--map-label)"/></g><g class="mp-event" transform="translate(704.2,309.1)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">13</text></g><g class="mp-event" transform="translate(-534.7,697.7)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">14</text></g><g class="mp-event" transform="translate(-534.7,697.7)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">15</text></g></g>
+    </svg>
+    <div class="hmap-zoom"><svg class="hmap-zsvg" viewBox="0 0 520 609" role="img" aria-label="تكبير: مضيق هرمز وخورفكان"><rect class="mp-sea-bg" x="0" y="0" width="520" height="609"/><g class="mp-grid"><line x1="61.2" y1="0" x2="61.2" y2="609"/><line x1="214.1" y1="0" x2="214.1" y2="609"/><line x1="367.1" y1="0" x2="367.1" y2="609"/><line x1="520.0" y1="0" x2="520.0" y2="609"/><line x1="0" y1="507.1" x2="520" y2="507.1"/><line x1="0" y1="338.1" x2="520" y2="338.1"/><line x1="0" y1="169.0" x2="520" y2="169.0"/><line x1="0" y1="0.0" x2="520" y2="0.0"/></g><g class="mp-land" fill-rule="evenodd"><path d="M228.6,33.6 207.1,50.5 197.9,45.3 190.8,45.5 175.5,52.0 164.4,53.1 144.2,64.6 126.0,70.5 108.8,68.9 106.3,61.0 106.5,57.9 114.2,59.5 142.5,49.0 177.8,31.8 181.2,24.1 175.5,11.7 177.0,8.8 199.9,15.2 225.5,2.8 243.3,0.0 247.5,0.0 256.8,8.1 242.9,13.3 228.6,33.6Z"/><path d="M510.3,221.1 488.8,227.7 479.1,215.5 418.2,204.3 398.5,162.7 397.9,142.2 383.0,106.2 378.1,54.1 372.6,33.7 364.3,16.0 352.5,0.0 520.0,0.0 520.0,227.5 510.3,221.1Z"/><path d="M160.6,3.8 151.7,11.5 140.5,28.7 126.0,38.8 106.2,36.2 84.8,46.4 45.2,74.9 24.4,83.7 6.9,83.0 0.0,78.0 0.0,0.0 177.3,0.0 160.6,3.8Z"/><path d="M3.7,402.1 9.0,386.1 22.4,370.1 76.2,331.0 107.6,298.0 110.4,287.4 127.5,271.4 141.1,253.9 205.1,203.8 218.0,183.2 225.5,160.1 239.3,134.0 244.3,130.3 249.1,131.9 260.9,129.3 272.0,108.8 277.3,109.7 279.8,113.7 277.8,150.6 271.3,202.1 261.1,218.2 259.7,228.1 269.7,241.8 271.1,335.0 289.0,386.0 312.1,427.6 332.5,450.5 353.7,481.7 385.9,510.3 400.7,520.1 460.6,540.3 520.0,552.1 520.0,608.5 0.0,608.5 0.0,407.5 3.7,402.1Z"/></g><g class="mp-borders"><path d="M116.1,608.5L139.0,553.6L142.5,537.7L140.6,526.4L132.8,517.0L145.0,508.5L167.7,503.0L180.3,504.2L211.8,496.4L212.9,491.4L203.2,470.7L183.5,469.5L177.5,466.1L184.4,448.0L178.7,424.2L180.1,409.5L184.1,399.5L182.9,360.4L187.0,353.1L201.2,342.8L208.5,343.1L214.2,346.0L216.7,353.7L215.1,358.9L209.6,361.9L223.9,382.2L230.4,380.5L245.4,366.2L255.1,360.6L268.1,342.6L273.5,341.6"/><path d="M226.4,158.4L231.9,157.5L239.7,161.0L240.5,178.3L236.2,221.3L242.2,229.0L252.3,232.3L256.7,232.0L259.7,228.1"/><path d="M249.9,286.7L246.3,302.0L250.9,302.8L257.2,298.2L258.1,291.0L256.5,287.2L249.9,286.7"/></g><g class="mp-events"><g class="mp-leader"><line x1="290.6" y1="67.6" x2="298.9" y2="69.1" style="stroke:var(--map-label);stroke-width:1;opacity:.75"/><circle cx="290.6" cy="67.6" r="3" style="fill:var(--map-label)"/></g><g class="mp-event" transform="translate(298.9,69.1)" style="--mk:var(--muted)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">1</text></g><g class="mp-leader"><line x1="260.0" y1="101.4" x2="256.1" y2="145.0" style="stroke:var(--map-label);stroke-width:1;opacity:.75"/><circle cx="260.0" cy="101.4" r="3" style="fill:var(--map-label)"/></g><g class="mp-event" transform="translate(256.1,145.0)" style="--mk:var(--muted)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">2</text></g><g class="mp-leader"><line x1="260.0" y1="101.4" x2="254.5" y2="57.1" style="stroke:var(--map-label);stroke-width:1;opacity:.75"/><circle cx="260.0" cy="101.4" r="3" style="fill:var(--map-label)"/></g><g class="mp-event" transform="translate(254.5,57.1)" style="--mk:var(--muted)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">4</text></g><g class="mp-event" transform="translate(152.9,236.6)" style="--mk:var(--muted)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">6</text></g><g class="mp-event" transform="translate(261.1,100.7)" style="--mk:var(--muted)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">13</text></g></g></svg><div class="hz-cap">تكبير: مضيق هرمز وخورفكان</div></div>
+  </div>
+  <ol class="hmap-legend"><li><span class="lg-num" style="--mk:var(--muted)">1</span><span class="lg-txt">اشتعال ناقلة بعد ملامستها لغمًا بحريًا في شرق مضيق هرمز</span> <bdi class="bidi ev-code">28-01</bdi> <bdi class="bidi">straits.live</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">2</span><span class="lg-txt">تهديد السفن التي توصف بأنها مخالفة أثناء عبور مضيق هرمز</span> <bdi class="bidi ev-code">28-02</bdi> <bdi class="bidi">straits.live</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">3</span><span class="lg-txt">تحذير سفن Sino-Trans بشأن حركة السفن في الخليج العربي</span> <bdi class="bidi ev-code">28-03</bdi> <bdi class="bidi">straits.live</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">4</span><span class="lg-txt">تهديد سفن Sinokor بسبب عمليات عبور تحت حماية أمريكية</span> <bdi class="bidi ev-code">28-04</bdi> <bdi class="bidi">gCaptain · TradeWinds</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">5</span><span class="lg-txt">حريق في مركز تصدير نفطي سعودي بعد ضربة حوثية</span> <bdi class="bidi ev-code">28-05</bdi> <bdi class="bidi">TradeWinds</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">6</span><span class="lg-txt">اتساع تسرب من ناقلة نفط خام متضررة في واقعة منسوبة إلى إيران</span> <bdi class="bidi ev-code">28-06</bdi> <bdi class="bidi">TradeWinds</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">7</span><span class="lg-txt">اعتراض صاروخ باليستي قرب كاسحة ألغام بلجيكية في باب المندب</span> <bdi class="bidi ev-code">28-07</bdi> <bdi class="bidi">Naval News</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">8</span><span class="lg-txt">إصابة مصفاة نفط سعودية بصاروخ حوثي</span> <bdi class="bidi ev-code">28-08</bdi> <bdi class="bidi">MarineLink</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">9</span><span class="lg-txt">لقاء أمير قطر بالرئيس الإيراني</span> <bdi class="bidi ev-code">28-09</bdi> <bdi class="bidi">وكالة الأنباء القطرية (قنا)</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">10</span><span class="lg-txt">دعوة قطر إلى إطار أمني إقليمي يقوم على احترام سيادة الدول</span> <bdi class="bidi ev-code">28-10</bdi> <bdi class="bidi">وكالة الأنباء القطرية (قنا)</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">11</span><span class="lg-txt">محادثات خليجية عن خطوط النقل وارتفاع كلفة الشحن</span> <bdi class="bidi ev-code">28-11</bdi> <bdi class="bidi">وكالة الأنباء القطرية (قنا)</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">12</span><span class="lg-txt">دعوة قطر إيران إلى إنهاء التهديدات وإعادة فتح مضيق هرمز</span> <bdi class="bidi ev-code">28-12</bdi> <bdi class="bidi">straits.live</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">13</span><span class="lg-txt">إبقاء إيران مضيق هرمز مغلقًا مع تعثر التفاوض حول شروط عدة</span> <bdi class="bidi ev-code">28-13</bdi> <bdi class="bidi">straits.live</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">14</span><span class="lg-txt">استعداد موانئ البحر الأحمر السعودية لزيادة موسمية في الواردات</span> <bdi class="bidi ev-code">28-14</bdi> <bdi class="bidi">straits.live</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">15</span><span class="lg-txt">بدء خدمة بحرية جديدة على خط البحر الأحمر</span> <bdi class="bidi ev-code">28-15</bdi> <bdi class="bidi">Splash 247</bdi></li></ol>
+  <p class="src-note">المصدر: التوزيع الجغرافي للوقائع في التقرير. لا تُعرض إحداثيات لأن التقرير لا يعلنها.</p>
+</div><p class="hmap-keys">السواحل والجزر والحدود: بيانات Natural Earth. الشبكة: خطوط الطول والعرض. العلامات المرقمة: وقائع هذا التقرير.</p></div></section>
+  
+  
+
+  <main>
+    <section class="doc pri reveal" id="sec-00" aria-labelledby="h-00"><h2 id="h-00">ما تغيّر منذ التقرير السابق</h2><div class="h-rule"></div><p class="sec-lede">ما استُجد، وما تغيّر تصنيفه، وما أُغلق.</p><ul class="changes"><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">اشتعال ناقلة بعد ملامستها لغمًا بحريًا في شرق مضيق هرمز <bdi class="bidi ev-code">28-01</bdi> <bdi class="bidi">straits.live</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تهديد السفن التي توصف بأنها مخالفة أثناء عبور مضيق هرمز <bdi class="bidi ev-code">28-02</bdi> <bdi class="bidi">straits.live</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تحذير سفن Sino-Trans بشأن حركة السفن في الخليج العربي <bdi class="bidi ev-code">28-03</bdi> <bdi class="bidi">straits.live</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تهديد سفن Sinokor بسبب عمليات عبور تحت حماية أمريكية <bdi class="bidi ev-code">28-04</bdi> <bdi class="bidi">gCaptain · TradeWinds</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">حريق في مركز تصدير نفطي سعودي بعد ضربة حوثية <bdi class="bidi ev-code">28-05</bdi> <bdi class="bidi">TradeWinds</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">اتساع تسرب من ناقلة نفط خام متضررة في واقعة منسوبة إلى إيران <bdi class="bidi ev-code">28-06</bdi> <bdi class="bidi">TradeWinds</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">اعتراض صاروخ باليستي قرب كاسحة ألغام بلجيكية في باب المندب <bdi class="bidi ev-code">28-07</bdi> <bdi class="bidi">Naval News</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إصابة مصفاة نفط سعودية بصاروخ حوثي <bdi class="bidi ev-code">28-08</bdi> <bdi class="bidi">MarineLink</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">لقاء أمير قطر بالرئيس الإيراني <bdi class="bidi ev-code">28-09</bdi> <bdi class="bidi">وكالة الأنباء القطرية (قنا)</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">دعوة قطر إلى إطار أمني إقليمي يقوم على احترام سيادة الدول <bdi class="bidi ev-code">28-10</bdi> <bdi class="bidi">وكالة الأنباء القطرية (قنا)</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">محادثات خليجية عن خطوط النقل وارتفاع كلفة الشحن <bdi class="bidi ev-code">28-11</bdi> <bdi class="bidi">وكالة الأنباء القطرية (قنا)</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">دعوة قطر إيران إلى إنهاء التهديدات وإعادة فتح مضيق هرمز <bdi class="bidi ev-code">28-12</bdi> <bdi class="bidi">straits.live</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إبقاء إيران مضيق هرمز مغلقًا مع تعثر التفاوض حول شروط عدة <bdi class="bidi ev-code">28-13</bdi> <bdi class="bidi">straits.live</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">استعداد موانئ البحر الأحمر السعودية لزيادة موسمية في الواردات <bdi class="bidi ev-code">28-14</bdi> <bdi class="bidi">straits.live</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">بدء خدمة بحرية جديدة على خط البحر الأحمر <bdi class="bidi ev-code">28-15</bdi> <bdi class="bidi">Splash 247</bdi></span></li></ul></section>
+    <section class="doc pri reveal" id="sec-01" aria-labelledby="h-01"><h2 id="h-01"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 3h9l-1.2 3H19v8h-8.2L9.6 11H6v9H4z"/></svg></span>الخلاصة</h2><div class="h-rule"></div><p class="sec-lede">الموقف ومستوى التهديد والإجراء المقترح في ثلاثة أسطر.</p><ul><li>الحالة عند <span class="ltr">0400Z</span>: مستوى التهديد مرتفع في مضيق هرمز والخليج العربي، ومرتفع في البحر الأحمر وباب المندب، مع استمرار نقص التأكيد المستقل للوقائع المنقولة عن هجمات أو ألغام.</li><li>الجديد الأهم: تقارير مهنية ومنقولة عن تهديد سفن مرتبطة بـ Sinokor، ورواية عن اشتعال ناقلة بعد ملامسة لغم بحري في شرق هرمز، من دون تأكيد ملاحي رسمي داخل الفترة.</li><li>الأثر على العمل: لا يُفترض المرور الاعتيادي في هرمز وباب المندب؛ ارفعوا المراقبة، وأبقوا الاتصال مفتوحًا، ولا تغيّروا المسار أو تدخلوا منطقة نقل من سفينة إلى سفينة قبل تحديث تقييم المخاطر.</li></ul></section><section class="doc reveal" id="sec-02" aria-labelledby="h-02"><h2 id="h-02"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 4l6 2 5-2v14l-5 2-6-2-5 2V6zM9 4v14M15 6v14"/></svg></span>التوزيع الجغرافي للوقائع</h2><div class="h-rule"></div><p class="sec-lede">أين تركّزت الوقائع، وحصيلة <span class="ltr">IMO</span> حسب القطاعات.</p><div class="src-grid">
+<div class="src s-none"><b>شرق مضيق هرمز</b><span class="st">لا مستجد — بلاغ غير مؤكد من طرف واحد</span></div>
+<div class="src s-none"><b>مضيق هرمز</b><span class="st">لا مستجد — نقل إعلامي عن مسؤول إيراني</span></div>
+<div class="src s-none"><b>الخليج العربي</b><span class="st">لا مستجد — نقل إعلامي عن جهة إيرانية</span></div>
+<div class="src s-none"><b>مضيق هرمز</b><span class="st">لا مستجد — تقرير مهني غير رسمي</span></div>
+<div class="src s-none"><b>مركز تصدير نفطي سعودي في الخليج العربي</b><span class="st">لا مستجد — بلاغ غير مؤكد</span></div>
+<div class="src s-none"><b>مقابل السواحل الإماراتية</b><span class="st">لا مستجد — تقرير مهني غير رسمي</span></div>
+<div class="src s-none"><b>باب المندب</b><span class="st">لا مستجد — تقرير مهني غير رسمي</span></div>
+<div class="src s-none"><b>السعودية</b><span class="st">لا مستجد — تقرير مهني غير رسمي</span></div>
+<div class="src s-none"><b>الدوحة وطهران</b><span class="st">لا مستجد — خبر رسمي عن اللقاء</span></div>
+<div class="src s-none"><b>قطر</b><span class="st">لا مستجد — بيان رسمي</span></div>
+<div class="src s-none"><b>قطر ودول مجلس التعاون</b><span class="st">لا مستجد — خبر رسمي</span></div>
+<div class="src s-none"><b>البحر الأحمر</b><span class="st">لا مستجد — خبر مهني</span></div>
+</div>
+<p>تتركز الوقائع المبلَّغة أمنياً في مضيق هرمز والخليج العربي. وتظهر تقارير مهنية عن اعتراض صاروخ في باب المندب، لكن وجود تقرير مهني وحده لا يكفي لاعتبار الواقعة هجومًا مؤكدًا. أما لقاءات قطر وإيران ومحادثات النقل فتوفر سياقًا سياسيًا واقتصاديًا ولا تُثبت حدوث انفراج ملاحي.</p><div class="viz map-viz reveal"><div class="map-panel">
+  <h3>خريطة الوقائع</h3><p class="blk-lede">مواقع الوقائع داخل نطاق التقرير.</p>
+  <div class="map-wrap">
+    <svg class="map-svg" viewBox="0 0 1120 722" role="img"
+         aria-label="خريطة الخليج العربي ومضيق هرمز وخليج عمان مع مواقع وقائع التقرير">
+      <rect class="mp-sea-bg" x="0" y="0" width="1120" height="722"/>
+      <g class="mp-grid"><line x1="108.4" y1="0" x2="108.4" y2="722"/><line x1="397.4" y1="0" x2="397.4" y2="722"/><line x1="686.5" y1="0" x2="686.5" y2="722"/><line x1="975.5" y1="0" x2="975.5" y2="722"/><line x1="0" y1="657.6" x2="1120" y2="657.6"/><line x1="0" y1="497.2" x2="1120" y2="497.2"/><line x1="0" y1="336.8" x2="1120" y2="336.8"/><line x1="0" y1="176.4" x2="1120" y2="176.4"/></g>
+      <g class="mp-land" fill-rule="evenodd"><path d="M488.3,476.9 483.5,473.9 493.7,469.8 499.5,464.2 501.9,467.4 497.3,474.7 493.7,476.4 488.3,476.9Z"/><path d="M440.8,474.6 439.6,468.9 442.9,467.0 444.9,470.5 440.8,474.6Z"/><path d="M693.3,272.6 683.1,280.6 678.8,278.1 675.4,278.2 668.2,281.3 662.9,281.8 653.4,287.3 644.8,290.0 636.7,289.3 635.5,285.5 635.6,284.1 639.3,284.8 652.6,279.9 669.3,271.7 670.9,268.1 668.2,262.1 668.9,260.8 679.7,263.8 691.8,257.9 701.9,256.3 706.6,260.5 700.0,262.9 693.3,272.6Z"/><path d="M536.7,485.7 529.4,484.9 527.4,486.3 515.5,483.6 519.5,480.3 529.9,476.4 536.7,483.0 536.7,485.7Z"/><path d="M294.4,352.3 292.2,350.2 286.6,339.6 288.3,332.1 285.6,321.5 286.9,318.4 293.7,317.0 295.2,317.5 293.2,320.9 297.0,326.8 297.5,336.6 296.8,346.2 294.4,352.3Z"/><path d="M124.2,48.0 121.4,47.2 114.3,32.2 116.7,28.2 117.1,25.2 118.4,24.3 119.8,19.3 121.7,17.7 133.6,33.5 133.0,40.5 128.3,46.2 124.2,48.0Z"/><path d="M1113.3,406.5 1101.5,405.9 1086.3,401.3 1077.5,408.8 1055.6,402.2 1023.5,394.4 1019.9,390.5 1017.9,383.8 1012.4,381.9 1004.4,392.0 977.3,386.2 968.0,388.0 962.4,384.8 947.7,384.7 936.2,378.4 919.6,382.7 906.6,383.5 888.6,372.5 869.3,369.5 853.7,370.4 845.6,369.6 832.6,365.6 826.4,361.5 816.2,364.6 811.6,358.9 782.9,353.5 773.6,333.8 773.3,324.1 766.2,307.0 763.9,282.3 761.3,272.6 757.4,264.2 745.2,249.4 739.1,246.4 712.2,240.6 695.0,245.1 682.2,253.6 661.2,258.4 656.9,262.1 651.7,270.2 644.8,275.0 635.4,273.8 625.4,278.6 606.7,292.2 596.8,296.3 588.5,296.0 579.7,289.6 559.8,280.9 546.9,278.1 529.1,280.0 520.7,278.6 506.3,268.5 502.6,261.2 494.4,256.3 468.4,245.2 447.4,230.7 443.5,225.2 441.0,217.0 431.8,207.2 411.3,199.1 399.6,190.5 386.0,188.6 373.3,188.9 367.7,187.3 362.6,183.6 345.3,165.9 345.1,158.9 334.4,141.5 331.9,135.4 329.6,118.2 326.7,113.7 315.6,106.6 313.8,102.0 316.2,95.9 316.2,91.2 310.4,86.8 301.7,84.5 299.6,79.2 301.2,69.0 299.8,62.5 292.2,52.3 280.9,41.8 269.5,26.2 265.1,22.4 258.1,0.1 257.2,0.0 1120.0,0.0 1120.0,405.5 1113.3,406.5Z"/><path d="M220.7,13.7 211.7,5.6 201.0,0.0 250.1,0.0 220.7,13.7Z"/><path d="M174.8,6.3 168.5,13.2 156.9,13.8 151.4,18.0 141.2,21.0 134.0,19.5 118.6,12.8 113.6,12.6 107.1,15.1 106.5,20.4 108.8,29.2 118.2,46.7 118.8,50.3 106.2,46.8 88.5,62.8 88.3,64.7 97.2,66.9 103.7,66.8 108.3,65.3 112.1,67.7 121.7,97.9 126.7,104.1 132.9,115.2 136.5,125.8 144.4,140.4 146.2,147.9 153.6,165.8 164.3,179.7 166.8,184.8 168.6,192.4 166.7,195.2 166.0,198.5 173.9,206.2 197.8,217.1 193.3,221.5 209.9,242.1 219.5,244.4 232.4,260.2 251.9,270.3 263.7,283.7 254.8,280.7 253.5,282.4 254.9,294.6 266.3,304.3 268.4,312.1 264.1,328.7 256.8,326.9 255.2,327.9 258.8,339.9 262.3,349.1 266.6,356.4 270.2,367.0 273.2,371.6 285.8,382.9 289.6,392.4 293.2,410.0 301.1,419.9 305.3,427.5 311.0,433.9 314.1,425.9 309.1,402.8 307.4,385.0 308.0,381.3 315.7,367.9 325.4,338.3 333.0,330.3 344.1,324.5 353.3,335.9 364.4,344.6 366.5,354.4 363.2,362.3 360.2,374.9 368.7,405.1 369.2,412.8 367.6,419.8 363.7,425.7 356.1,443.6 353.8,445.5 344.5,448.5 349.6,451.9 354.9,451.4 355.4,454.6 351.9,458.9 347.6,469.9 363.8,474.2 366.2,474.2 368.9,470.0 373.2,477.1 378.3,476.1 380.6,476.8 382.4,491.2 386.1,496.3 390.6,498.4 406.0,499.5 415.5,497.6 434.4,488.2 444.3,484.8 471.6,485.4 493.5,489.3 527.6,491.6 534.2,491.0 552.6,483.5 563.9,476.8 570.6,474.9 575.1,468.5 580.6,454.6 583.9,452.0 587.0,447.4 589.6,439.8 595.9,432.2 621.3,413.7 636.1,398.0 637.4,393.0 645.5,385.4 652.0,377.0 682.2,353.3 688.3,343.5 691.8,332.6 698.3,320.2 700.7,318.4 703.0,319.2 708.5,317.9 713.8,308.2 716.3,308.6 717.5,310.6 716.5,328.1 713.4,352.5 708.7,360.1 708.0,364.8 712.7,371.3 713.4,415.5 721.8,439.7 732.7,459.5 742.4,470.4 752.4,485.1 767.6,498.7 774.6,503.4 802.9,512.9 839.7,519.9 854.4,527.3 859.4,527.8 867.1,525.6 872.7,525.8 886.8,535.9 891.0,545.5 896.8,550.6 902.0,558.6 905.4,566.9 917.3,579.6 925.7,593.9 934.3,604.6 941.9,611.2 962.7,616.7 963.7,623.8 962.8,633.1 961.0,639.9 952.4,653.2 950.4,661.5 940.6,675.0 930.1,697.8 925.2,702.8 908.2,714.6 901.9,721.7 0.0,721.7 0.0,0.0 174.3,0.0 174.8,6.3Z"/><path d="M574.9,463.2 567.8,461.7 566.1,459.4 570.7,456.6 575.6,461.7 574.9,463.2Z"/></g>
+      <g class="mp-borders"><path d="M627.6,601.1L628.6,574.6L650.9,519.3L652.6,511.7L651.7,506.4L648.0,501.9L653.8,497.9L664.5,495.2L670.5,495.8L685.4,492.1L685.9,489.7L681.3,479.9L672.0,479.3L669.2,477.7L672.4,469.1L669.7,457.8L670.4,450.9L672.3,446.2L671.7,427.6L673.7,424.1L680.4,419.3L683.8,419.4L686.5,420.7L687.7,424.4L686.9,426.9L684.3,428.3L691.1,437.9L694.1,437.1L701.2,430.4L705.8,427.7L712.0,419.1L714.5,418.7"/><path d="M344.5,448.5L331.9,451.9L322.7,451.2L320.0,449.5L314.7,442.7L311.0,433.9"/><path d="M2.3,88.5L19.5,68.4L29.3,53.1L43.5,20.9L46.8,16.0L60.1,9.6L82.6,8.2L90.6,9.9L106.8,17.4"/><path d="M140.4,132.9L84.6,133.7L78.3,126.1L73.8,109.2L67.4,97.1L2.3,88.5"/><path d="M137.0,0.0L136.4,3.2L137.2,7.2L139.8,13.0L147.9,19.1"/><path d="M627.6,601.1L660.5,657.4L641.3,721.7"/><path d="M627.6,601.1L622.8,607.5L621.7,607.7L437.5,582.8L368.0,490.9L366.5,486.9L366.2,474.2"/><path d="M2.3,88.5L0.0,89.0"/><path d="M1090.2,400.8L1092.2,394.0L1094.0,370.1L1096.3,361.5L1095.6,356.7L1102.3,349.4L1106.3,323.5L1108.6,318.7L1120.0,313.7"/><path d="M1120.0,136.0L1112.0,132.6L1092.8,112.9L1088.8,106.6L1084.5,95.7L1072.2,75.0L1072.3,69.6L1070.7,66.3L1036.4,27.4"/><path d="M1036.4,27.4L1060.3,0.0"/><path d="M1036.4,27.4L1120.0,53.7"/><path d="M692.3,331.8L694.9,331.3L698.6,333.0L698.9,341.2L696.9,361.6L699.7,365.3L704.5,366.8L706.6,366.7L708.0,364.8"/><path d="M703.4,392.6L701.7,399.9L703.8,400.2L706.8,398.1L707.2,394.7L706.5,392.9L703.4,392.6"/></g>
+      <g class="mp-places"><text class="mp-country" x="491.4" y="152.4">إيران</text><text class="mp-country" x="187.9" y="613.5">السعودية</text><text class="mp-country" x="585.3" y="541.3">الإمارات</text><text class="mp-country" x="708.1" y="641.5">عُمان</text><g transform="translate(106.9,66.6)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="0.0" y="21.0">الكويت</text></g><g transform="translate(706.7,242.2)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="48.0" y="-27.0">بندر عباس</text></g><g transform="translate(633.7,401.0)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="-38.0" y="4.0">دبي</text></g><g transform="translate(363.5,392.9)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="-34.0" y="39.0">الدوحة</text></g><g transform="translate(737.8,469.9)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="-48.0" y="-10.0">صحار</text></g><g transform="translate(873.6,528.5)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="40.0" y="4.0">مسقط</text></g><text class="mp-sea-lbl mp-sea-sm" x="682.8" y="244.2">مضيق هرمز</text><text class="mp-sea-lbl mp-sea-lg" x="346.8" y="300.7">الخليج العربي</text><text class="mp-sea-lbl mp-sea-lg" x="946.6" y="501.2">خليج عمان</text><text class="mp-sea-lbl mp-sea-lg" x="859.9" y="681.6">بحر العرب</text></g>
+      <g class="mp-grid-labels"><text class="mp-grid-lbl" x="113.4" y="715">48°E</text><text class="mp-grid-lbl" x="402.4" y="715">52°E</text><text class="mp-grid-lbl" x="691.5" y="715">56°E</text><text class="mp-grid-lbl" x="980.5" y="715">60°E</text><text class="mp-grid-lbl" x="7" y="651.6" text-anchor="start">22°N</text><text class="mp-grid-lbl" x="7" y="491.2" text-anchor="start">24°N</text><text class="mp-grid-lbl" x="7" y="330.8" text-anchor="start">26°N</text><text class="mp-grid-lbl" x="7" y="170.4" text-anchor="start">28°N</text></g>
+      
+      <g class="mp-events"><g class="mp-leader"><line x1="722.6" y1="288.7" x2="734.0" y2="276.0" style="stroke:var(--map-label);stroke-width:1;opacity:.75"/><circle cx="722.6" cy="288.7" r="2.4" style="fill:var(--map-label)"/></g><g class="mp-event" transform="translate(734.0,276.0)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">1</text></g><g class="mp-leader"><line x1="708.1" y1="304.7" x2="689.4" y2="325.5" style="stroke:var(--map-label);stroke-width:1;opacity:.75"/><circle cx="708.1" cy="304.7" r="2.4" style="fill:var(--map-label)"/></g><g class="mp-event" transform="translate(689.4,325.5)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">2</text></g><g class="mp-leader"><line x1="310.7" y1="240.6" x2="332.8" y2="244.5" style="stroke:var(--map-label);stroke-width:1;opacity:.75"/><circle cx="310.7" cy="240.6" r="2.4" style="fill:var(--map-label)"/></g><g class="mp-event" transform="translate(332.8,244.5)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">3</text></g><g class="mp-leader"><line x1="708.1" y1="304.7" x2="719.3" y2="292.4" style="stroke:var(--map-label);stroke-width:1;opacity:.75"/><circle cx="708.1" cy="304.7" r="2.4" style="fill:var(--map-label)"/></g><g class="mp-event" transform="translate(719.3,292.4)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">4</text></g><g class="mp-leader"><line x1="310.7" y1="240.6" x2="288.7" y2="236.7" style="stroke:var(--map-label);stroke-width:1;opacity:.75"/><circle cx="310.7" cy="240.6" r="2.4" style="fill:var(--map-label)"/></g><g class="mp-event" transform="translate(288.7,236.7)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">5</text></g><g class="mp-event" transform="translate(657.5,368.9)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">6</text></g><g class="mp-event" transform="translate(-224.0,1411.4)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">7</text></g><g class="mp-event" transform="translate(260.1,288.7)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">8</text></g><g class="mp-leader"><line x1="361.3" y1="392.9" x2="382.0" y2="384.4" style="stroke:var(--map-label);stroke-width:1;opacity:.75"/><circle cx="361.3" cy="392.9" r="2.4" style="fill:var(--map-label)"/></g><g class="mp-event" transform="translate(382.0,384.4)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">9</text></g><g class="mp-leader"><line x1="361.3" y1="392.9" x2="340.7" y2="401.4" style="stroke:var(--map-label);stroke-width:1;opacity:.75"/><circle cx="361.3" cy="392.9" r="2.4" style="fill:var(--map-label)"/></g><g class="mp-event" transform="translate(340.7,401.4)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">10</text></g><g class="mp-event" transform="translate(361.2,393.0)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">11</text></g><g class="mp-event" transform="translate(310.6,240.6)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">12</text></g><g class="mp-leader"><line x1="708.1" y1="304.7" x2="704.2" y2="309.1" style="stroke:var(--map-label);stroke-width:1;opacity:.75"/><circle cx="708.1" cy="304.7" r="2.4" style="fill:var(--map-label)"/></g><g class="mp-event" transform="translate(704.2,309.1)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">13</text></g><g class="mp-event" transform="translate(-534.7,697.7)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">14</text></g><g class="mp-event" transform="translate(-534.7,697.7)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">15</text></g></g>
+    </svg>
+    
+  </div>
+  <ol class="map-legend"><li><span class="lg-num" style="--mk:var(--muted)">1</span><span class="lg-txt">اشتعال ناقلة بعد ملامستها لغمًا بحريًا في شرق مضيق هرمز</span> <bdi class="bidi ev-code">28-01</bdi> <bdi class="bidi">straits.live</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">2</span><span class="lg-txt">تهديد السفن التي توصف بأنها مخالفة أثناء عبور مضيق هرمز</span> <bdi class="bidi ev-code">28-02</bdi> <bdi class="bidi">straits.live</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">3</span><span class="lg-txt">تحذير سفن Sino-Trans بشأن حركة السفن في الخليج العربي</span> <bdi class="bidi ev-code">28-03</bdi> <bdi class="bidi">straits.live</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">4</span><span class="lg-txt">تهديد سفن Sinokor بسبب عمليات عبور تحت حماية أمريكية</span> <bdi class="bidi ev-code">28-04</bdi> <bdi class="bidi">gCaptain · TradeWinds</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">5</span><span class="lg-txt">حريق في مركز تصدير نفطي سعودي بعد ضربة حوثية</span> <bdi class="bidi ev-code">28-05</bdi> <bdi class="bidi">TradeWinds</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">6</span><span class="lg-txt">اتساع تسرب من ناقلة نفط خام متضررة في واقعة منسوبة إلى إيران</span> <bdi class="bidi ev-code">28-06</bdi> <bdi class="bidi">TradeWinds</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">7</span><span class="lg-txt">اعتراض صاروخ باليستي قرب كاسحة ألغام بلجيكية في باب المندب</span> <bdi class="bidi ev-code">28-07</bdi> <bdi class="bidi">Naval News</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">8</span><span class="lg-txt">إصابة مصفاة نفط سعودية بصاروخ حوثي</span> <bdi class="bidi ev-code">28-08</bdi> <bdi class="bidi">MarineLink</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">9</span><span class="lg-txt">لقاء أمير قطر بالرئيس الإيراني</span> <bdi class="bidi ev-code">28-09</bdi> <bdi class="bidi">وكالة الأنباء القطرية (قنا)</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">10</span><span class="lg-txt">دعوة قطر إلى إطار أمني إقليمي يقوم على احترام سيادة الدول</span> <bdi class="bidi ev-code">28-10</bdi> <bdi class="bidi">وكالة الأنباء القطرية (قنا)</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">11</span><span class="lg-txt">محادثات خليجية عن خطوط النقل وارتفاع كلفة الشحن</span> <bdi class="bidi ev-code">28-11</bdi> <bdi class="bidi">وكالة الأنباء القطرية (قنا)</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">12</span><span class="lg-txt">دعوة قطر إيران إلى إنهاء التهديدات وإعادة فتح مضيق هرمز</span> <bdi class="bidi ev-code">28-12</bdi> <bdi class="bidi">straits.live</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">13</span><span class="lg-txt">إبقاء إيران مضيق هرمز مغلقًا مع تعثر التفاوض حول شروط عدة</span> <bdi class="bidi ev-code">28-13</bdi> <bdi class="bidi">straits.live</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">14</span><span class="lg-txt">استعداد موانئ البحر الأحمر السعودية لزيادة موسمية في الواردات</span> <bdi class="bidi ev-code">28-14</bdi> <bdi class="bidi">straits.live</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">15</span><span class="lg-txt">بدء خدمة بحرية جديدة على خط البحر الأحمر</span> <bdi class="bidi ev-code">28-15</bdi> <bdi class="bidi">Splash 247</bdi></li></ol>
+  <p class="src-note">المصدر: التوزيع الجغرافي للوقائع في التقرير. لا تُعرض إحداثيات لأن التقرير لا يعلنها.</p>
+</div><p class="map-keys">السواحل والجزر والحدود: بيانات Natural Earth. الشبكة: خطوط الطول والعرض. العلامات المرقمة: وقائع هذا التقرير.</p></div><p class="src-note">تحذيرات <span class="ltr">IHO/NAVAREA</span> تُربط بإحداثياتها عند توفرها؛ والويب لا يستبدل البث الملاحي المعتمد.</p></section><section class="doc pri reveal" id="sec-03" aria-labelledby="h-03"><h2 id="h-03"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 15.5a3.5 3.5 0 100-7 3.5 3.5 0 000 7zM12 2l1.6 2.3 2.8-.4.5 2.7 2.6 1.2-1.1 2.6 1.1 2.6-2.6 1.2-.5 2.7-2.8-.4L12 22l-1.6-2.3-2.8.4-.5-2.7-2.6-1.2L5.6 13 4.5 10.4l2.6-1.2.5-2.7 2.8.4z"/></svg></span>التوجيهات التشغيلية</h2><div class="h-rule"></div><p class="sec-lede">ما يُنفَّذ قبل العبور والرسو وأثناء الحادث.</p><ul><li>ارفعوا المراقبة البصرية واللاسلكية عند الاقتراب من مضيق هرمز والخليج العربي.</li><li>اعتبروا أي نداء يطلب تغيير المسار واقعة أمنية محتملة، وسجلوا هوية الجهة والوقت والموقع قبل الاستجابة.</li><li>لا تدخلوا مناطق النقل بين السفن في الخليج قبل فحص آخر تحذير ملاحي ومراجعة خطة الطوارئ.</li><li>أبقوا نظام التعريف الآلي (<span class="ltr">AIS</span>) والاتصالات عبر <span class="ltr">VHF</span> عامِلين، وأبلغوا عن أي انقطاع أو نداء غير معتاد.</li><li>في باب المندب والبحر الأحمر راقبوا التحذيرات المتعلقة بالصواريخ والمسيّرات ونسقوا المرور مع مركز بلاغات الملاحة.</li><li>فرّقوا بين التقارير المهنية والبلاغات الرسمية عند اتخاذ قرار تغيير المسار أو طلب الحماية.</li><li>لا تنسبوا أي واقعة إلى جهة منفذة في سجل السفينة قبل ورود تأكيد مستقل أو بيان رسمي صريح.</li></ul></section><section class="doc reveal" id="sec-04" aria-labelledby="h-04"><h2 id="h-04"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l9 16H3zM12 8v6M12 16.4v1.2"/></svg></span>الوقائع الجديدة</h2><div class="h-rule"></div><p class="sec-lede">الوقائع الأمنية الجديدة خلال فترة التغطية، مفصولًا عن الخلفية.</p><div class="src-grid">
+<div class="src s-none"><b><span class="ltr">MN-2026-10-28-01</span></b><span class="st">لا مستجد — بلاغ غير مؤكد من طرف واحد</span></div>
+<div class="src s-none"><b><span class="ltr">MN-2026-10-28-02</span></b><span class="st">لا مستجد — نقل إعلامي غير مؤكد</span></div>
+<div class="src s-none"><b><span class="ltr">MN-2026-10-28-03</span></b><span class="st">لا مستجد — نقل إعلامي غير مؤكد</span></div>
+<div class="src s-none"><b><span class="ltr">MN-2026-10-28-04</span></b><span class="st">لا مستجد — تقرير مهني غير رسمي</span></div>
+<div class="src s-none"><b><span class="ltr">MN-2026-10-28-05</span></b><span class="st">لا مستجد — بلاغ غير مؤكد</span></div>
+<div class="src s-none"><b><span class="ltr">MN-2026-10-28-06</span></b><span class="st">لا مستجد — تقرير مهني غير رسمي</span></div>
+<div class="src s-none"><b><span class="ltr">MN-2026-10-28-07</span></b><span class="st">لا مستجد — تقرير مهني غير رسمي</span></div>
+<div class="src s-none"><b><span class="ltr">MN-2026-10-28-08</span></b><span class="st">لا مستجد — تقرير مهني غير رسمي</span></div>
+<div class="src s-none"><b><span class="ltr">MN-2026-10-28-09</span></b><span class="st">لا مستجد — خبر رسمي عن اللقاء</span></div>
+<div class="src s-none"><b><span class="ltr">MN-2026-10-28-10</span></b><span class="st">لا مستجد — بيان رسمي</span></div>
+<div class="src s-none"><b><span class="ltr">MN-2026-10-28-11</span></b><span class="st">لا مستجد — خبر رسمي</span></div>
+<div class="src s-none"><b><span class="ltr">MN-2026-10-28-12</span></b><span class="st">لا مستجد — نقل إعلامي عن موقف قطري</span></div>
+<div class="src s-none"><b><span class="ltr">MN-2026-10-28-13</span></b><span class="st">لا مستجد — نقل إعلامي عن طرف واحد</span></div>
+<div class="src s-none"><b><span class="ltr">MN-2026-10-28-14</span></b><span class="st">لا مستجد — خبر اقتصادي منقول</span></div>
+<div class="src s-none"><b><span class="ltr">MN-2026-10-28-15</span></b><span class="st">لا مستجد — خبر مهني</span></div>
+</div>
+<p>تجتمع الوقائع من <span class="ltr">MN-2026-10-28-01</span> إلى <span class="ltr">MN-2026-10-28-06</span> حول هرمز والخليج العربي، لكن المصدرين gCaptain وTradeWinds لا يقدمان في العناوين المنشورة وحدها إثباتًا رسميًا لسبب الحريق أو لطبيعة الإجراء ضد السفن. وتظل <span class="ltr">MN-2026-10-28-07</span> وMN-2026-10-28-08 تقريريْن مهنييْن، ولا يؤكدان الواقعة رسميًا.</p></section><section class="doc reveal" id="sec-05" aria-labelledby="h-05"><h2 id="h-05"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 10.5a2 2 0 100 4 2 2 0 000-4zM7.8 7.6a6.2 6.2 0 000 8.8M16.2 7.6a6.2 6.2 0 010 8.8M5 4.8a10 10 0 000 14.4M19 4.8a10 10 0 010 14.4"/></svg></span>التحذيرات والنشرات الرسمية</h2><div class="h-rule"></div><p class="sec-lede">حالة الجهات الرسمية خلال فترة التقرير.</p><p>لم يصدر خلال الفترة بلاغ جديد من <span class="ltr">UKMTO</span> مؤرخ داخلها؛ آخر العناوين الظاهرة في نشرات <span class="ltr">UKMTO</span> تتعلق ببلاغ 23 أكتوبر عن واقعة في مضيق هرمز وبلاغ 26 أكتوبر عن سفينة أُبلغ عن اشتعالها. لذا لا تعتبر هذه العناوين القديمة وقائع جديدة في هذه الفترة.</p>
+<p>لم تصدر خلال الفترة نشرة استشارية رسمية جديدة تخص مضيق هرمز أو باب المندب. وتظل التهديدات المنقولة عن مسؤولين أو وسائل إعلام بحاجة إلى بلاغ ملاحي قبل اعتمادها تأكيدًا رسميًا.</p></section><section class="doc reveal" id="sec-06" aria-labelledby="h-06"><h2 id="h-06"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>سجل <span class="ltr">IMO</span> والحوادث المؤكدة</h2><div class="h-rule"></div><p>لم يُدرَج أي رقم جديد في سجل المنظمة البحرية الدولية خلال الفترة. لذلك لم يضاف رقم جديد إلى آخر سجل معروف في التقرير السابق.</p>
+<p>لا تُدرَج الوقائع 28-01 و28-05 و28-07 و28-08 في سجل الحوادث المؤكدة، لأن موادها مهنية أو إعلامية ولا تتضمّن تأكيدًا رسميًا موازياً. أمّا لقاءات قطر وإيران ومحادثات النقل فتصنّف وقائع سياسية واقتصادية وليست حوادث بحرية.</p></section><section class="doc reveal" id="sec-07" aria-labelledby="h-07"><h2 id="h-07"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5c5 0 9 4 9 7s-4 7-9 7-9-4-9-7 4-7 9-7zM12 9.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5z"/></svg></span>قراءة الموقف وتحليل المؤشرات</h2><div class="h-rule"></div><p class="sec-lede">وصف النمط والافتراضات والفرضيات ومؤشرات التحذير المبكر.</p><p>الموقف البحري خلال الفترة يميل إلى ارتفاع الضغط في هرمز والخليج العربي، مع انتقال جزء من الخطر من إصابة سفينة محددة إلى تهديدات عامة للسفن التي تُعد مخالفة أو المرتبطة بعمليات عبور تحت حماية أجنبية. لا تثبت العناوين وحدها تنفيذ تهديد، لكنها ترفع الحاجة إلى المراقبة وتوثيق النداءات.</p>
+<p>في باب المندب، يجمع التقرير بين رواية مهنية عن اعتراض صاروخ قرب كاسحة ألغام ورواية أخرى عن ضربة على منشأة نفطية سعودية. لا يكفي الجمع بينهما لإثبات نمط واحد، لكنه يبرر بقاء مستوى التهديد مرتفعًا على خط البحر الأحمر.</p>
+<p>الرسائل السياسية القطرية والإيرانية لا تعطي نتيجة ملاحيّة فورية. لقاء أمير قطر بالرئيس الإيراني، ودعوة قطر إلى إطار أمني إقليمي وإعادة فتح هرمز، تشير إلى قناة تفاوضية قائمة. في المقابل، استمرار نقل رواية إغلاق المضيق وشروط التفاوض يمنع اعتبار القناة السياسية عامل خفض للخطر قبل ظهور إجراء ميداني قابل للقياس.</p>
+<h3>مؤشرات التغيّر</h3>
+<ul><li>ارتفاع بلاغات الحريق في هرمز والخليج العربي إلى 6 وقائع مرمَّزة في الفترة، مقابل بلاغ واحد مسجَّل في تقرير الأمس.</li><li>لم يصدر بلاغ جديد من <span class="ltr">UKMTO</span> خلال الفترة ولا تسجيل دولي جديد لحادثة الناقلة، فالمؤشر التشغيلي بلا تأكيد رسمي.</li><li>ورود تقارير مهنية عن اعتراض صاروخ في باب المندب وعن ضربة على منشأة نفطية، بلا تأكيد ملاحي مستقل.</li></ul>
+<h3>علامات الإنذار المبكر (24–72 ساعة)</h3>
+<ul><li>صدور بلاغ <span class="ltr">UKMTO</span> أو <span class="ltr">JMIC</span> يثبت هوية الناقلة أو سبب اشتعالها في شرق هرمز.</li><li>صدور تحذير ملاحي يذكر لغمًا أو جسمًا خطرا في مسار الفصل الملاحي أو قربه.</li><li>ورود تأكيد مستقل لتقارير Sinokor أو Sino-Trans أو إعلان تغيير رسمي في شروط العبور.</li><li>تكرار تقارير الصواريخ في باب المندب مع تحديد موقع أو سفينة أو جهة رسمية.</li></ul>
+<h3>اختبار الفرضيات</h3>
+<ul><li>فرضية استمرار الضغط على العبور في هرمز: يؤيدها تكرر التهديدات وتقارير Sinokor، ويضعفها صدور بلاغ رسمي يعلن فتح الممر وعودة المرور الطبيعي. التقدير: مرجح.</li><li>فرضية وجود خطر ألغام بحري: يؤيدها عنوان اشتعال الناقلة بعد ملامسة لغم، ويضعفها غياب تأكيد من <span class="ltr">UKMTO</span> أو <span class="ltr">JMIC</span> أو تحذير ملاحي يحدد موقعًا. التقدير: لم يتم التحديد.</li><li>فرضية استمرار الخطر الصاروخي في باب المندب: يؤيدها تقرير Naval News وتقرير MarineLink، ويضعفها غياب تأكيد رسمي موحد يربط الوقعتين. التقدير: مرجح بدرجة متوسطة.</li><li>فرضية أن المسار السياسي سيخفض التهديد سريعًا: يؤيدها لقاء قطر وإيران والدعوة إلى إطار أمني، ويضعفها استمرار رواية الإغلاق والتهديدات. التقدير: ممكن، لا يكفي لاتخاذ قرار عبور.</li></ul>
+<p><span class="ltr">EST-2026-10-28-01</span>: استمرار مستوى التهديد المرتفع في هرمز والخليج العربي خلال 24–72 ساعة — مرجح (55–80%). الأساس: 28-02 و28-04 و28-13.</p>
+<p><span class="ltr">EST-2026-10-28-02</span>: صدور تأكيد رسمي لواقعة الناقلة أو اللغم البحري — ممكن (20–45%). الأساس: 28-01 مع غياب تأكيد <span class="ltr">UKMTO</span> أو <span class="ltr">JMIC</span> داخل الفترة.</p>
+<p><span class="ltr">EST-2026-10-28-03</span>: استمرار الضغط الصاروخي على خط البحر الأحمر — ممكن (20–45%). الأساس: 28-07 و28-08، وهما تقريران مهنيان غير رسميين.</p>
+<p><span class="ltr">EST-2026-10-28-04</span>: تحول الاتصالات القطرية الإيرانية إلى خطوة ملاحيّة قابلة للقياس — ممكن (20–45%). الأساس: 28-09 و28-10 و28-12.</p>
+<p>تقييم دقة تقديرات الأمس: لا توجد في مواد الفترة قراءة موحدة لعدد السفن المتوقفة أو لحركة العبور تسمح باختبار تقدير رقمي سابق. أما مستوى التهديد، فتدعمه زيادة العناوين عن التهديدات والتقارير المهنية، لذلك لا يخفض التقدير الحالي.</p>
+<p>المصدر والدرجة: <span class="ltr">UKMTO</span> A/2 · <span class="ltr">JMIC</span> A/2 · <span class="ltr">IMO</span> A/1 · وكالة الأنباء القطرية C/3 · straits.live C/3 · TradeWinds B/2 · Naval News B/2 · MarineLink C/3 · Splash 247 B/2 · gCaptain B/2 — من سجل درجات المصادر المعتمد.</p>
+<p>المراجعة النظيرة: فصل الوقائع عن التقديرات، وربط كل تقدير بمرمزه ومصدره.</p></section><section class="doc reveal" id="sec-08" aria-labelledby="h-08"><h2 id="h-08"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 4v9a4 4 0 004 4h5M15 17l-2-2M15 17l-2 2M18 4a2 2 0 11-.001 4.001A2 2 0 0118 4z"/></svg></span>الحركة الملاحية والتكدس</h2><div class="h-rule"></div><p class="sec-lede">حركة المضيق والرسو من مصادر معلنة فقط.</p><div class="src-grid">
+<div class="src s-none"><b>مضيق هرمز</b><span class="st">لا مستجد — straits.live · gCaptain · TradeWinds</span></div>
+<div class="src s-none"><b>الخليج العربي</b><span class="st">لا مستجد — straits.live</span></div>
+<div class="src s-none"><b>مقابل السواحل الإماراتية</b><span class="st">لا مستجد — TradeWinds</span></div>
+<div class="src s-none"><b>باب المندب</b><span class="st">لا مستجد — Naval News</span></div>
+<div class="src s-none"><b>البحر الأحمر</b><span class="st">لا مستجد — Splash 247 · straits.live</span></div>
+<div class="src s-ok"><b>بحر العرب</b><span class="st">فُحص — المواد المفحوصة</span></div>
+<div class="src s-ok"><b>شرق المتوسط</b><span class="st">فُحص — المواد المفحوصة</span></div>
+</div>
+<p>لا يتوفر في المواد الحالية رقم موحّد لعدد السفن المتوقفة خارج المراسي أو لعدد عمليات العبور اليومية. لذلك لا يضاف رقم تكدس، ولا تصح مقارنة مباشرة بين عناوين اقتصادية متفرقة وبين معدل عبور ملاحي.</p><p class="src-note">قراءة اتجاه من منصة (يُذكر اسم المصدر) — يُؤخذ في الحساب مدة التحديث (20 دقيقة) واحتمال انقطاع الإرسال أو spoofing.</p></section><section class="doc reveal" id="sec-09" aria-labelledby="h-09"><h2 id="h-09"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h5M15 12h5M12 4v5M12 15v5"/></svg></span>ما لم يُحسم</h2><div class="h-rule"></div><p class="sec-lede">ما لا يزال مجهولًا، وما يلزم متابعته في التقرير التالي.</p><p>لم يتم التحديد هوية الناقلة التي أُبلغ عن اشتعالها في شرق هرمز، ولا موقعها الدقيق، ولا سبب الحريق، ولا وجود لغم بحري في الموقع. الجهة التي تستطيع الحسم: <span class="ltr">UKMTO</span> أو <span class="ltr">JMIC</span> أو سلطة بحرية رسمية في المنطقة. الأثر: لا يمكن إصدار توجيه خاص باللغم أو تعديل خط السير الملاحي على أساس العنوان وحده.</p>
+<p>لم يتم التحديد ما إذا كانت تهديدات Sinokor وSino-Trans قد تحولت إلى إجراء مادي ضد سفينة، وما إذا كان هناك تغيير رسمي في شروط العبور. الجهة التي تستطيع الحسم: الجهة البحرية الإيرانية المعلنة أو بلاغ ملاحي. الأثر: يظل خطر النداء والضغط قائمًا، من دون إثبات احتجاز أو إصابة.</p>
+<p>لم يتم التوضيح هوية المنشأة السعودية التي قيل إنها تعرضت لضربة، وحجم الضرر، وما إذا كان التقرير عن حريق مركز تصدير نفطي يصف واقعة منفصلة عن تقرير المصفاة. الجهة التي تستطيع الحسم: السلطات السعودية أو بيان ملاحي أو أمني رسمي. الأثر: لا تُجمع الواقعتان في عدد واحد.</p>
+<p>لم يتم التحديد موقع التسرب النفطي مقابل السواحل الإماراتية، ومصدره، وحجمه، وما إذا كان ناتجًا عن الواقعة المنسوبة إلى إيران. الجهة التي تستطيع الحسم: السلطات البحرية والبيئية الإماراتية. الأثر: يقتصر التوجيه الحالي على رفع المراقبة وتجنب أي بقعة زيتية، لا على إعلان تلوث مؤكد.</p>
+<p>لم يتم التوضيح تفاصيل الصاروخ الذي قال Naval News إنه اعترض قرب كاسحة ألغام بلجيكية، والجهة التي أطلقته، وما إذا كان يطابق تقرير MarineLink عن منشأة سعودية. الجهة التي تستطيع الحسم: القوات البحرية أو سلطات الملاحة التي كانت في الموقع. الأثر: يظل مستوى التهديد مرتفعًا في باب المندب، من دون نسبة مؤكدة لجهة.</p>
+<ul><li>المصادر: 62 معتمدة = 40 بالمسار الآلي + 22 بالمرجعية اليدوية · 38 ناجحة · 2 متعذّر: @bna_en — حجب المصدر · <span class="ltr">USNI</span> News — حجب المصدر · 22 يُفحص يدويًا.</li></ul></section><section class="doc reveal" id="sec-10" aria-labelledby="h-10"><h2 id="h-10"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>الخلفية</h2><div class="h-rule"></div><p>تظل الأوضاع في مضيق هرمز مرتبطة بثلاثة مسارات متداخلة: تهديدات للسفن، روايات عن إصابات أو حريق، واتصالات سياسية بشأن فتح المضيق. عنوان اشتعال ناقلة بعد ملامسة لغم بحري يرفع حساسية الملاحة، لكن غياب تحديد السفينة والموقع والجهة المصدرة يمنع تحويله إلى واقعة مؤكدة.</p>
+<p>تظهر قضية Sinokor وSino-Trans في مادتي gCaptain وTradeWinds خلال الفترة. هذا التكرار يثبت أن التهديد أصبح موضوعًا متداولًا، لكنه لا يساوي تأكيدًا مستقلًا لوقوع إجراء ضد سفينة. لذلك تُعامل السفن المرتبطة بهذه الأسماء على أنها تحتاج إلى مراقبة خاصة، من دون إعلان احتجاز أو إصابة.</p>
+<p>في باب المندب، يكشف تقرير اعتراض صاروخ قرب كاسحة ألغام عن خطر صاروخي محتمل على الوحدات العسكرية والسفن التجارية القريبة، بينما يضيف تقرير آخر عن منشأة سعودية ضغطًا على العمق الساحلي. لا يثبت المصدران وحدهما أن الواقعتين جزء من عملية واحدة، ولا يحددان مسارًا بحريًا بعينه.</p>
+<p>في المقابل، تشير مواد قطرية إلى لقاء أمير قطر بالرئيس الإيراني، وإلى دعوة لإطار أمني إقليمي وإعادة فتح هرمز، كما تشير إلى محادثات خليجية عن خطوط النقل وكلفة الشحن. هذه الرسائل قد تفتح مجالًا لتخفيف الضغط، لكنها لا تعدل توجيه العبور قبل ظهور إعلان رسمي قابل للتحقق.</p>
+<p>تضيف عودة خدمة بحرية على خط البحر الأحمر واستعداد موانئ سعودية لزيادة الواردات عاملًا تشغيليًا محدودًا. لا يجوز قراءة هذا النشاط على أنه عودة إلى حركة طبيعية، لأن المادة نفسها لا تقدم عدد عمليات العبور ولا مستوى الحماية ولا تغير التحذيرات.</p></section>
+  </main>
+
+  <footer class="foot">
+    <b>ملاحظة مهنية:</b> هذه الصفحة مرجع دائم للإصدار الحالي. البيانات نفسها في دفتر الأحداث، والتقرير اليومي في صفحته وفي <span class="ltr">PDF</span>.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-28T04:00:00Z</bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
+    <div class="glossary">السجل التراكمي: <a class="bidi" href="/reports/cumulative-2026.html" target="_blank" rel="noopener noreferrer">/reports/cumulative-2026.html</a></div>
+  </footer>
+</div>
+<script>
+(function(){
+  var pb = document.getElementById('btn-print');
+  if(pb) pb.addEventListener('click', function(){ window.print(); });
+  var tb = document.getElementById('btn-theme');
+  if(tb) tb.addEventListener('click', function(){
+    var on = document.body.classList.toggle('daylight');
+    tb.textContent = on ? 'النمط الليلي' : 'النمط النهاري';
+  });
+})();
+</script>
+<script>
+(function(){
+  var d = document;
+  // عمر الإصدار: كلمة ولون معًا، ويُحسب عند فتح الصفحة
+  var f = d.querySelector('[data-gen]');
+  if (f) {
+    var s = (f.getAttribute('data-gen') || '').trim();
+    var m = s.match(/^(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2})(?::\d{2})?\s*(?:UTC|Z)?$/);
+    var t = Date.parse(m ? m[1] + 'T' + m[2] + ':00Z' : s);
+    if (isNaN(t)) { f.parentNode.removeChild(f); }
+    else {
+      var h = Math.max(0, (Date.now() - t) / 36e5), cls, word, txt;
+      if (h <= 30) { cls = 'f-ok'; word = 'حديث'; }
+      else if (h <= 54) { cls = 'f-warn'; word = 'متأخر'; }
+      else { cls = 'f-old'; word = 'قديم'; }
+      txt = h < 1 ? 'أقل من ساعة' : (h < 48 ? Math.round(h) + ' ساعة' : Math.round(h / 24) + ' يومًا');
+      f.querySelector('.sc-age').textContent = word + ' · قبل ' + txt;
+      f.className += ' ' + cls; f.hidden = false;
+    }
+  }
+  // الأقسام القابلة للطي: بلا سكربت تبقى كلها مفتوحة
+  var main = d.querySelector('main'); if (!main) return;
+  var secs = [].slice.call(main.querySelectorAll(':scope > section.doc'));
+  // تُفتح الخلاصة والتوجيهات في كل نوع من الصفحات، فإن لم يوجد شيء منها فُتح القسم الأول
+  var openRe = /الخلاصة|التوجيهات التشغيلية|مؤشرات الموقف/;
+  function setState(sec, btn, collapsed) {
+    sec.classList.toggle('sc-collapsed', collapsed);
+    btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+  }
+  // نص العنصر بمسافة بين أجزائه، وما كان رمزًا أو معرّفًا لاتينيًا يُعزل اتجاهيًا فلا ينقلب ترتيبه
+  function flat(el) {
+    var w = d.createTreeWalker(el, NodeFilter.SHOW_TEXT), out = [], n;
+    while ((n = w.nextNode())) {
+      var tx = n.textContent.replace(/\s+/g, ' ').trim(); if (!tx) continue;
+      var iso = n.parentElement && n.parentElement.closest('bdi,.ltr,.bidi,.ev-code');
+      out.push(iso ? '\u2066' + tx + '\u2069' : tx);
+    }
+    return out.join(' ');
+  }
+  // معاينة القسم المطوي: عدّ البنود وأول سطر من نص القسم نفسه، بلا استنتاج
+  function peekOf(sec) {
+    var n = sec.querySelectorAll(':scope > ul > li, :scope > ol > li, :scope > .tbl-wrap tbody tr, :scope > table tbody tr').length;
+    var first = sec.querySelector(':scope > p:not(.sec-lede), :scope > ul > li, :scope > ol > li, :scope > .tbl-wrap tbody tr, :scope > table tbody tr');
+    var t = first ? flat(first) : '';
+    if (!n && !t) return null;
+    var el = d.createElement('div'); el.className = 'sc-peek no-print';
+    if (n > 1) { var b = d.createElement('b'); b.textContent = n === 2 ? 'بندان' : (n <= 10 ? n + ' بنود' : n + ' بندًا'); el.appendChild(b); }
+    if (t) { var sp = d.createElement('span'); sp.textContent = t; el.appendChild(sp); }
+    return el;
+  }
+  var items = [], seen = {};
+  secs.forEach(function (sec) {
+    var h = sec.querySelector('h2'); if (!h) return;
+    var title = h.textContent.trim();
+    var b = d.createElement('button');
+    b.type = 'button'; b.className = 'sc-toggle no-print';
+    b.setAttribute('aria-label', 'طيّ قسم «' + title + '» أو فتحه');
+    if (sec.id) b.setAttribute('aria-controls', sec.id);
+    var pk = peekOf(sec); if (pk) sec.appendChild(pk);
+    sec.appendChild(b);
+    b.addEventListener('click', function () { setState(sec, b, !sec.classList.contains('sc-collapsed')); });
+    h.addEventListener('click', function (e) {
+      if (e.target.closest && e.target.closest('a,button')) return;
+      setState(sec, b, !sec.classList.contains('sc-collapsed'));
+    });
+    setState(sec, b, !openRe.test(title));
+    seen[title] = (seen[title] || 0) + 1;
+    items.push({sec: sec, btn: b, title: title, label: seen[title] > 1 ? title + ' (' + seen[title] + ')' : title});
+  });
+  function openSec(sec) {
+    items.forEach(function (it) { if (it.sec === sec) setState(sec, it.btn, false); });
+  }
+  if (items.length && !items.some(function (it) { return !it.sec.classList.contains('sc-collapsed'); })) {
+    setState(items[0].sec, items[0].btn, false);
+  }
+  if (items.length) {
+    var bar = d.createElement('div'); bar.className = 'sc-toolbar no-print';
+    var nav = d.createElement('nav'); nav.className = 'sc-jump'; nav.setAttribute('aria-label', 'انتقال إلى الأقسام');
+    items.forEach(function (it) {
+      var a = d.createElement('a'); a.href = '#' + it.sec.id; a.textContent = it.label;
+      a.addEventListener('click', function () { openSec(it.sec); });
+      nav.appendChild(a);
+    });
+    var all = d.createElement('div'); all.className = 'sc-all';
+    [['فتح الكل', false], ['طيّ الكل', true]].forEach(function (p) {
+      var b = d.createElement('button'); b.type = 'button'; b.textContent = p[0];
+      b.addEventListener('click', function () { items.forEach(function (it) { setState(it.sec, it.btn, p[1]); }); });
+      all.appendChild(b);
+    });
+    bar.appendChild(nav); bar.appendChild(all);
+    main.parentNode.insertBefore(bar, main);
+  }
+  // روابط «كاملة» في بطاقة القرار
+  [].forEach.call(d.querySelectorAll('[data-goto]'), function (a) {
+    var key = a.getAttribute('data-goto');
+    var hit = items.filter(function (it) { return it.title.indexOf(key) >= 0; })[0];
+    if (!hit) { a.parentNode.removeChild(a); return; }
+    a.href = '#' + hit.sec.id;
+    a.addEventListener('click', function () { openSec(hit.sec); });
+  });
+  // رابط مباشر إلى قسم مطوي: يُفتح
+  if (location.hash) {
+    var tg = d.getElementById(location.hash.slice(1));
+    items.forEach(function (it) { if (it.sec === tg || (tg && it.sec.contains(tg))) openSec(it.sec); });
+  }
+})();
+</script>
+<footer class="sn-foot no-print">
+  <div class="sf-inner">
+    <span>مركز الوعي بالمجال البحري — تقارير أمن الملاحة — مملكة البحرين · إضافات إصدار 28 أكتوبر 2026</span>
+    <span>تُحدَّث الصفحات آليًا مع كل إصدار · <a href="/#archive">الأرشيف الكامل</a> · <a href="/feed.xml">تغذية الإصدارات</a></span>
+  </div>
+</footer><script>
+(function(){
+var LS=window.localStorage, body=document.body;
+function save(k,v){try{LS.setItem(k,v);}catch(e){}}
+var reportBtn=document.getElementById('btn-theme'), siteBtn=document.getElementById('sn-theme');
+// إزالة مستمع الزر الأصلي داخل التقرير بمضاعفة العقدة لمنع الازدواج
+if(reportBtn){var clone=reportBtn.cloneNode(true);reportBtn.parentNode.replaceChild(clone,reportBtn);reportBtn=clone;}
+function isLight(){return body.classList.contains('daylight');}
+function paint(){
+  if(reportBtn) reportBtn.textContent = isLight() ? 'النمط الليلي' : 'النمط النهاري';
+  if(siteBtn) siteBtn.textContent = isLight() ? 'المظهر: نهاري' : 'المظهر: ليلي';
+  document.querySelectorAll('[data-scale]').forEach(function(b){
+    b.classList.toggle('on', parseFloat(b.getAttribute('data-scale'))===currentScale());
+  });
+}
+function currentScale(){var s=parseFloat(LS.getItem('mn-scale')||'1');return (s&&s>0)?s:1;}
+function toggleTheme(){var on=body.classList.toggle('daylight');save('mn-theme',on?'light':'dark');paint();}
+if(reportBtn) reportBtn.addEventListener('click',function(e){e.preventDefault();toggleTheme();});
+if(siteBtn) siteBtn.addEventListener('click',function(e){e.preventDefault();toggleTheme();});
+var printBtn=document.getElementById('sn-print');
+if(printBtn) printBtn.addEventListener('click',function(e){e.preventDefault();window.print();});
+document.querySelectorAll('[data-scale]').forEach(function(b){
+  b.addEventListener('click',function(e){e.preventDefault();
+    var s=parseFloat(b.getAttribute('data-scale'));save('mn-scale',s);
+    body.style.zoom=(s===1?'':s);paint();});
+});
+paint();
+// رابط التخطي: أول عنوان ظاهر في الصفحة (أو المتن)، فلا يمرّ قارئ لوحة المفاتيح على الشريط كله في كل صفحة
+var skip=document.getElementById('sn-skip');
+if(skip){
+  var hs=[].slice.call(document.querySelectorAll('h1')).filter(function(h){return h.offsetParent!==null;});
+  var tg=hs[0]||document.querySelector('main,[role=main]');
+  if(tg){ if(!tg.id) tg.id='sn-main'; tg.setAttribute('tabindex','-1'); skip.setAttribute('href','#'+tg.id); }
+  else { skip.parentNode.removeChild(skip); }
+}
+// تذكّر آخر تقرير فُتح
+var p=location.pathname;
+if(p.indexOf('/reports/')===0){
+  var t=(document.title||'').split(/[|·]/)[0].trim();
+  save('mn-last',JSON.stringify({path:p,title:t,at:new Date().toISOString()}));
+}
+})();
+</script>
+<script>
+(function(){
+  var nav = document.querySelector('.site-nav'); if (!nav) return;
+  var btn = nav.querySelector('.sn-menu'), panel = nav.querySelector('.sn-panel');
+  var root = document.documentElement;
+  function measure(){
+    root.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+    var b = document.querySelector('.topbar');
+    root.style.setProperty('--bar-h', (b && getComputedStyle(b).display !== 'none' ? b.offsetHeight : 0) + 'px');
+  }
+  if (btn && panel){
+    btn.addEventListener('click', function(){
+      var open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && nav.classList.contains('open')){
+        nav.classList.remove('open'); btn.setAttribute('aria-expanded','false'); btn.focus();
+      }
+    });
+    nav.addEventListener('focusout', function(e){
+      if (nav.classList.contains('open') && !nav.contains(e.relatedTarget)){
+        nav.classList.remove('open'); btn.setAttribute('aria-expanded','false');
+      }
+    });
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(measure).observe(nav);
+  addEventListener('resize', measure); measure();
+})();
+</script>
+</body>
+</html>
