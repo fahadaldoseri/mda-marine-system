@@ -42,6 +42,33 @@ MANUAL_REFERENCE: set[int] = {
     40, 44, 48, 52, 56, 57, 59, 60, 61, 62,
 }
 
+# مسار كل مصدر بلا تغذية آلية: browser + الرابط المرجعي المعلن في سجل الموثوقية.
+# تبقى MANUAL_REFERENCE هي مجموعة القنوات التي تدخل العدّاد، وهذا السجل يضيف عنوان المسار فقط.
+BROWSER_ROUTES: dict[int, dict[str, str]] = {
+    1: {"path": "browser", "url": "https://www.ukmto.org/recent-incidents"},
+    5: {"path": "browser", "url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx"},
+    13: {"path": "browser", "url": "https://shipnext.com/vessel/9315159-cameroon-prosperity"},
+    15: {"path": "browser", "url": "https://x.com/UK_MTO"},
+    18: {"path": "browser", "url": "https://x.com/bahdiplomatic"},
+    19: {"path": "browser", "url": "https://x.com/us5thfleet"},
+    21: {"path": "browser", "url": "https://akhbar-alkhaleej.com/"},
+    23: {"path": "browser", "url": "https://www.gdnonline.com"},
+    27: {"path": "browser", "url": "https://www.kuna.net.kw"},
+    29: {"path": "browser", "url": "https://www.royalnavy.mod.uk/news"},
+    34: {"path": "browser", "url": "https://www.mscio.eu"},
+    39: {"path": "browser", "url": "https://iho.int/"},
+    40: {"path": "browser", "url": "https://www.marinetraffic.com/"},
+    44: {"path": "browser", "url": "https://www.windward.ai/"},
+    48: {"path": "browser", "url": "https://www.understandingwar.org/"},
+    52: {"path": "browser", "url": "https://synmax.com/"},
+    56: {"path": "browser", "url": "https://x.com/YemenResistanc1"},
+    57: {"path": "browser", "url": "https://x.com/spokespersonyem"},
+    59: {"path": "browser", "url": "https://t.me/army21ye"},
+    60: {"path": "browser", "url": "https://x.com/CJFCSpox"},
+    61: {"path": "browser", "url": "https://x.com/ERYANIM"},
+    62: {"path": "browser", "url": "https://x.com/Yemenarmyeng"},
+}
+
 # ── قناة المسار الرسمي البديل للجهة نفسها ──
 PROXY_ROUTES: set[int] = set()
 
