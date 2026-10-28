@@ -68,7 +68,7 @@ def main():
           f" · مدخلات موروثة ناقصة: {sum(1 for e in entries if not val(e,'symptom'))}")
     for ln, err in bad_lines[:3]:
         print(f"  ✘ سطر JSON غير صالح: {ln} — {err}")
-    for p in problems[:10]:
+    for p in problems:
         print(f"  ✘ {p}")
     if not problems and not bad_lines:
         print("  ✓ الحلقة مغلقة: كل عطل حديث مُغلق له درس وتشديد")
