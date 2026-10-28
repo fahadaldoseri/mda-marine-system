@@ -78,9 +78,12 @@ from pathlib import Path
 d = json.loads(subprocess.run(['python3','tools/audit_broad_excepts.py','--json'],
                                  capture_output=True, text=True).stdout)
 base = json.loads(Path('appendices/broad-excepts-baseline.json').read_text(encoding='utf-8'))
-acc = set(base.get('unclassified') or [])
+def key(x):
+    # ك-: عناصر «غير مصنّف» صارت قواميس (ملف/سطر/سبب) بدل نصوص، فالمقارنة بالمفتاح لا بالكائن.
+    return json.dumps(x, sort_keys=True, ensure_ascii=False)
+acc = {key(x) for x in (base.get('unclassified') or [])}
 un = list(d.get('unclassified') or [])
-new = [x for x in un if x not in acc]
+new = [x for x in un if key(x) not in acc]
 print('غير مصنّف:', len(un), '· جديد:', new)
 sys.exit(1 if new else 0)
 PY

@@ -4,7 +4,7 @@
 
 يقرأ سجل التقديرات: memory/intel-estimates.jsonl
 كل سطر: {"date": "...", "code": "MN-...", "statement": "...", "probability": "يُرجَّح (55–80%)",
-        "outcome": "تحقق" | "لم يتحقق" | "غير محسوم", "cause": "سبب الخطأ إن وُجد"}
+        "outcome": "تحقق" | "لم يتحقق" | "لم يتم التأكيد بعد", "cause": "سبب الخطأ إن وُجد"}
 
 يكتب ملخصًا في: appendices/estimate-accuracy-log.md (الربع الجاري) ويطبع النتيجة.
 
@@ -55,13 +55,13 @@ def main() -> int:
     total = len(rows)
     confirmed = sum(1 for r in rows if r.get("outcome") == "تحقق")
     refuted = sum(1 for r in rows if r.get("outcome") == "لم يتحقق")
-    opened = sum(1 for r in rows if r.get("outcome") == "غير محسوم")
+    opened = sum(1 for r in rows if r.get("outcome") == "لم يتم التأكيد بعد")
     causes = Counter((r.get("cause") or "").strip() for r in rows if (r.get("cause") or "").strip())
     top_cause = causes.most_common(1)[0][0] if causes else "غير مسجل بعد"
     rate = f"{confirmed / total * 100:.0f}%" if total else "لا يوجد قياس بعد"
 
     print(f"===== قياس دقة التقديرات — {args.quarter} =====")
-    print(f"  · عدد التقديرات: {total} · تحقق: {confirmed} · لم يتحقق: {refuted} · غير محسوم: {opened}")
+    print(f"  · عدد التقديرات: {total} · تحقق: {confirmed} · لم يتحقق: {refuted} · لم يتم التأكيد بعد: {opened}")
     print(f"  · نسبة التحقق: {rate}")
     print(f"  · أكثر سبب للخطأ: {top_cause}")
     if causes:
@@ -74,7 +74,7 @@ def main() -> int:
             f"| عدد التقديرات | {total} |\n"
             f"| ما تحقق | {confirmed} |\n"
             f"| ما لم يتحقق | {refuted} |\n"
-            f"| ما بقي غير محسوم | {opened} |\n"
+            f"| ما بقي لم يتم التأكيد بعد | {opened} |\n"
             f"| أكثر سبب للخطأ | {top_cause} |"
         )
         new = re.sub(

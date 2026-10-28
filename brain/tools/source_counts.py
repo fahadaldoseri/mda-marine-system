@@ -106,7 +106,7 @@ def line_ar(c: dict) -> str:
             txt += f" · تعذّر {c['failed']}: " + " · ".join(pairs)
     if c.get("manual_reference_present"):
         manual_n = int(c.get("manual_reference_count") or len(c.get("manual_reference") or []))
-        return txt + f" · {manual_n} مرجعية تُراجع يدويًا."
+        return txt + f" · {manual_n} يُفحص يدويًا."
     return txt + "."
 
 
@@ -189,7 +189,7 @@ def write_meta(date: str, c: dict) -> tuple[bool, str]:
         manual_n = int(c.get("manual_reference_count") or len(c.get("manual_reference") or []))
         d["notice"] = (f"نسخة ويب من التقرير اليومي. المصادر المعتمدة {c['approved']} مصدرًا؛ "
                         f"{c['checked']} مرصودة آليًا، {c['ok']} ناجحة، {c['failed']} متعذّر، "
-                        f"و{manual_n} مرجعية تُراجع يدويًا."
+                        f"و{manual_n} يُفحص يدويًا."
                         + (f" {tail}" if tail else ""))
     d["sources_line"] = line_ar(c)
     if isinstance(d.get("source_reliability"), dict):

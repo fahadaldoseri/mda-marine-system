@@ -340,7 +340,7 @@ def _listening(port):
 
 _old_ports = [p for p in (8080, 8090) if _listening(p)]
 check(not _old_ports, "لا خوادم معاينة قديمة معلّقة (8080/8090)",
-      f"خوادم قديمة ما زالت تعمل على: {_old_ports} — أوقفها لتجنّب مهام خدمية عالقة في لوحة المهام")
+      f"خوادم قديمة لا يزالت تعمل على: {_old_ports} — أوقفها لتجنّب مهام خدمية عالقة في لوحة المهام")
 check(_listening(3000), "خادم المعاينة يعمل على المنفذ المعتمد (3000)",
       "خادم المعاينة غير مستمع على 3000 — شغّل tools/ensure_devserver.sh 3000")
 _chr = int(_sp.run(['bash', '-lc', "pgrep -c chromium 2>/dev/null || echo 0"], capture_output=True, text=True).stdout.strip() or 0)
@@ -362,11 +362,11 @@ elif not _bk.exists():
     warns.append("مستودع النسخة الاحتياطية غير موجود محليًا — شغّل tools/github_backup.sh")
 else:
     warns.append("لا تقرير لليوم لفحص النسخة الاحتياطية")
-# 6د) رقم النسخة: الصيغة «و ب YY/MM/NN» والتسلسل اليومي
+# 6د) رقم الإصدار: الصيغة «و ب YY/MM/NN» والتسلسل اليومي
 import subprocess as _sp
 _r = _sp.run(['python3', str(B / 'tools' / 'next_version.py'), '--precheck'], capture_output=True, text=True)
 _line = ((_r.stdout or _r.stderr).strip().splitlines() or ['بلا مخرجات'])[-1].strip()
-check(_r.returncode == 0, f"رقم النسخة متسلسل وصحيح (قبل الكتابة) — {_line}", f"رقم النسخة غير متسلسل: {_line}")
+check(_r.returncode == 0, f"رقم الإصدار متسلسل وصحيح (قبل الكتابة) — {_line}", f"رقم الإصدار غير متسلسل: {_line}")
 
 print(f"===== فحص ما قبل التشغيل — {DATE} =====")
 for m in oks:   print(f"  ✔ {m}")

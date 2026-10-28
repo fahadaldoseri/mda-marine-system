@@ -12,7 +12,7 @@
 | `.cover` · `.cover__title` | عنوان التقرير وتاريخه | `meta.title` + `meta.date_label` | ≤ 90 حرفًا (سطران في الطباعة بخط 21pt) | يلتف؛ فوق 3 أسطر قصّره في البيانات |
 | `.cover__eyebrow` | الجهة | `meta.subtitle` | ≤ 60 حرفًا | يُحذف إن غاب |
 | `.cover__lede` (`.body-text`) | الفقرة التمهيدية | `meta.lede` | 150–700 حرفًا (4–8 أسطر طباعة) | فوق 900 حرف تتجاوز الغلاف إلى الصفحة الثانية |
-| `.chips` > `.chip` | رقم النسخة · آخر تحديث · فترة التغطية · المصادر | `meta.version` · `meta.generated_label` · `meta.window` · `meta.sources_cited`/`sources_checked` | 3–5 شرائح | تلتف على أسطر؛ عدد المصادر من الحقلين لا رقم مكتوب |
+| `.chips` > `.chip` | رقم الإصدار · آخر تحديث · فترة التغطية · المصادر | `meta.version` · `meta.generated_label` · `meta.window` · `meta.sources_cited`/`sources_checked` | 3–5 شرائح | تلتف على أسطر؛ عدد المصادر من الحقلين لا رقم مكتوب |
 | `.status` > `.threat` | مستوى التهديد الحالي (المستوى فقط، بلا سلّم) | `meta.threat_level` (النص كما هو) | ≤ 14 حرفًا | الصنف `.threat--med`/`--low` يغيّر لون الحد؛ الكلمة هي الحامل للمعنى |
 | `.kpis` > `.kpi` | مؤشرات الغلاف | `meta.hero_kpis[]` = `label` · `value` · `note` · `accent` (`ok`/`info`/`warn`/`danger`) · `delta.text` | 2–5 بطاقات (3 في النموذج) | شبكة `auto-fit`: السادسة تنزل صفًا جديدًا؛ بطاقة وحيدة تملأ العرض |
 | `.toc` | فهرس الأقسام | ثابت: أسماء الأقسام الـ16 | 16 + (17 للشاشة) | `.toc__pg` فارغ ويملؤه المولّد برمجيًا (موضع الرقم) |

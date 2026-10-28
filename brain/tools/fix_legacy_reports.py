@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parent.parent
 EDITS = [
     # ── الإصدار الخاص GFS — 15 أكتوبر ─────────────────────────────────────
     ("reports/special-2026-10-15-GFS.md",
-     "**NAVAREA IX**: «GFS PRIDE» ما زالت **مشتعلة وتائهة** (on fire and adrift)",
+     "**NAVAREA IX**: «GFS PRIDE» لا يزالت **مشتعلة وتائهة** (on fire and adrift)",
      "**NAVAREA IX**: أُبلغ عن **حريق فيها وانجرافها** (on fire and adrift)",
      "ق-سوداء: «مشتعلة وتائهة» → صياغة محددة"),
     ("reports/special-2026-10-15-GFS.md",

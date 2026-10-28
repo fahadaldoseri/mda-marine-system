@@ -33,6 +33,10 @@ RSS_SECTION_LABEL = "تغذية آلية"
 # فشل TLS مع كونا: 27
 # 29 «البحرية الملكية البريطانية»: الموقع كله يرد 403 على أي عميل آلي (بما فيه الصفحة الرئيسية)
 #    ⇒ تُقيَّد مرجعية تُراجع بالمتصفح، ولا يُبنى مسار يتجاوز الحماية (سياسة المستخدم) — ك-212
+class ChannelsUnavailable(RuntimeError):
+    """تعذّر بناء خريطة القنوات — يُعلن مانعًا لا يُبتلع."""
+
+
 MANUAL_REFERENCE: set[int] = {
     1, 5, 13, 15, 18, 19, 21, 23, 27, 29, 34, 39,
     40, 44, 48, 52, 56, 57, 59, 60, 61, 62,
@@ -56,8 +60,11 @@ def rss_numbers() -> set[int]:
         sys.path.insert(0, str(Path(__file__).resolve().parent))
         import check_feeds  # noqa: WPS433
         return {int(x["num"]) for x in check_feeds.feeds()}
-    except Exception:
-        return set()
+    except (ImportError, AttributeError, KeyError, ValueError, OSError) as e:
+        # ك-: لا ابتلاع صامت. تعذّر جدول المسارات يُعلن مانعًا صريحًا بدل إرجاع مجموعة فارغة
+        # تُسقط كل المصادر من العدّاد بلا سبب ظاهر.
+        raise ChannelsUnavailable(
+            f"تعذّر تحميل جدول مسارات الفحص: {type(e).__name__}: {e}") from e
 
 
 

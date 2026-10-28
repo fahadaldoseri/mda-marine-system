@@ -71,7 +71,7 @@ def read_accuracy() -> dict:
     m = re.search(r"ما لم يتحقق[^\d]*(\d+)", txt)
     if m:
         out["refuted"] = int(m.group(1))
-    m = re.search(r"غير محسوم[^\d]*(\d+)", txt)
+    m = re.search(r"لم يتم التأكيد بعد[^\d]*(\d+)", txt)
     if m:
         out["open"] = int(m.group(1))
     causes = re.findall(r"سبب[^\n:：]*[:：]\s*(.+)", txt)
@@ -150,7 +150,7 @@ def main() -> int:
         "## 4) قياس دقة التقديرات (المصدر: سجل القياس الربعي)",
         "",
         f"- عدد التقديرات: **{acc['estimates']}** · تحقق: **{acc['confirmed']}** · "
-        f"لم يتحقق: **{acc['refuted']}** · غير محسوم: **{acc['open']}**",
+        f"لم يتحقق: **{acc['refuted']}** · لم يتم التأكيد بعد: **{acc['open']}**",
         f"- أكثر سبب للخطأ: {acc['top_cause'] or 'غير مسجل بعد'}",
         "",
         "> لا يُرقّى أسلوب تحليلي ولا تُعدَّل قاعدة تحليلية بلا سجل قياس دقة يسبقه (ح10).",
@@ -164,7 +164,7 @@ def main() -> int:
     print(f"  · دروس ذات صلة: {len(relevant)} · مطبَّق تلقائيًا: {len(auto)} · "
           f"قيد الترقية: {len(promote)} · يحتاج اعتمادًا: {len(needs_approval)}")
     print(f"  · دقة التقديرات: {acc['estimates']} تقديرًا — تحقق {acc['confirmed']} · "
-          f"لم يتحقق {acc['refuted']} · غير محسوم {acc['open']}")
+          f"لم يتحقق {acc['refuted']} · لم يتم التأكيد بعد {acc['open']}")
     print(f"  ✔ كُتب: {OUT}")
     return 0
 

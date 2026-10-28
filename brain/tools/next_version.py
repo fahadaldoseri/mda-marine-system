@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""رقم النسخة — توليد وتحقق.
+"""رقم الإصدار — توليد وتحقق.
 
 الاصطلاح المعتمد (13 أكتوبر 2026): «و ب YY/MM/NN»
   «و ب» = اختصار اسم الجهة: مركز الوعي بالمجال البحري (ثابت في كل الإصدارات)
@@ -8,7 +8,7 @@
   NN    = رقم الإصدار المتسلسل داخل الشهر — يبدأ 1 عند كل شهر جديد (وكل سنة جديدة)، ويتقدّم 1 كل إصدار
 
 الاستخدام:
-  python3 tools/next_version.py [التاريخ]            # يطبع رقم النسخة المتوقع
+  python3 tools/next_version.py [التاريخ]            # يطبع رقم الإصدار المتوقع
   python3 tools/next_version.py --check [التاريخ]    # يتحقق أن رقم نسخة اليوم صحيح (رمز خروج 1 عند الفشل)
 """
 # ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
@@ -56,11 +56,11 @@ def check(date=None):
     v = json.loads(path.read_text(encoding='utf-8')).get('version', '').strip()
     mm = PAT.match(v)
     if not mm:
-        print(f'  ✘ رقم النسخة «{v}» لا يطابق الصيغة «و ب YY/MM/NN»')
+        print(f'  ✘ رقم الإصدار «{v}» لا يطابق الصيغة «و ب YY/MM/NN»')
         return 1
     y, m = int(date[:4]) % 100, int(date[5:7])
     if (int(mm.group(1)), int(mm.group(2))) != (y, m):
-        print(f'  ✘ رقم النسخة «{v}» لا يوافق سنة/شهر تاريخ الإصدار {date}')
+        print(f'  ✘ رقم الإصدار «{v}» لا يوافق سنة/شهر تاريخ الإصدار {date}')
         return 1
     ok = v == expect
     print(f'  {"✔" if ok else "✘"} رقم نسخة {date}: «{v}» — المتوقع «{expect}»')
@@ -96,4 +96,4 @@ if __name__ == '__main__':
     if '--check' in sys.argv:
         sys.exit(check(args[0] if args else None))
     v, nn = next_version(args[0] if args else None)
-    print(f'  رقم النسخة التالي: «{v}»  (المتسلسل داخل الشهر: {nn})')
+    print(f'  رقم الإصدار التالي: «{v}»  (المتسلسل داخل الشهر: {nn})')

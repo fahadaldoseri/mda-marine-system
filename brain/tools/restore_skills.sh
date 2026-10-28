@@ -26,9 +26,9 @@ to_local=0; to_repo=0; equal=0
 mkdir -p "$REPO"
 
 # ── 1) ملفات المستودع: تُقارن وتُنقل حسب الأحدث ──
-OUR_SKILLS="marine-news-brain military-arabic-editing macr-system superpowers-method"
+OUR_SKILLS="marine-news-brain military-arabic-editing macr-system superpowers-method self-learning-loop-ops vocabulary-guard-ops"
 in_scope() {  # مهارات المشروع فقط، لا كل مهارات المنصة
-  case "$1" in marine-news-brain/*|military-arabic-editing/*|macr-system/*|superpowers-method/*) return 0 ;; *) return 1 ;; esac
+  case "$1" in marine-news-brain/*|military-arabic-editing/*|macr-system/*|superpowers-method/*|self-learning-loop-ops/*|vocabulary-guard-ops/*) return 0 ;; *) return 1 ;; esac
 }
 
 while IFS= read -r f; do
