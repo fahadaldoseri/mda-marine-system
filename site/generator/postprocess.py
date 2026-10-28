@@ -270,3 +270,36 @@ def run(dist_root) -> dict:
             p.write_text(n, encoding="utf-8")
             stats["changed"] += 1
     return stats
+
+# ── إصلاح ك-252 (2026-10-28): pubDate لكل عنصر + lastBuildDate للقناة في تغذية RSS ──
+def _enrich_feed(dist=None):
+    import re as _re
+    from datetime import datetime, timezone
+    from email.utils import format_datetime
+    from pathlib import Path as _P
+    dist = _P(dist) if dist else _P(__file__).resolve().parent.parent / "dist"
+    f = dist / "feed.xml"
+    if not f.exists():
+        print("تغذية RSS: الملف غير موجود")
+        return 0
+    xml = f.read_text(encoding="utf-8"); added = 0
+    def _pub(m):
+        nonlocal added
+        try:
+            dt = datetime.fromisoformat(m.group(2)).replace(tzinfo=timezone.utc)
+        except Exception:
+            dt = datetime.now(timezone.utc)
+        if "<pubDate>" in m.group(0):
+            return m.group(0)
+        added += 1
+        return m.group(0) + f"<pubDate>{format_datetime(dt)}</pubDate>"
+    xml = _re.sub(r'(<guid[^>]*>mn-(\d{4}-\d{2}-\d{2})[^<]*</guid>)', _pub, xml)
+    if "lastBuildDate" not in xml:
+        xml = xml.replace("<channel>", f"<channel><lastBuildDate>{format_datetime(datetime.now(timezone.utc))}</lastBuildDate>", 1)
+    f.write_text(xml, encoding="utf-8")
+    print(f"تغذية RSS: pubDate لـ {added} عنصرًا + lastBuildDate")
+    return added
+
+
+if __name__ == "__main__":
+    _enrich_feed()

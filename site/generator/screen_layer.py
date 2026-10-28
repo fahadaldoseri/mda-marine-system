@@ -6,7 +6,7 @@
 قاعدة الأمان (قرار الشكل المجمّد v3): هذه الطبقة للشاشة فقط ولا تمسّ PDF ولا Word.
   1. كل HTML هنا بصنف no-print، فيُحجب في الطباعة ويحذفه محوّل Word.
   2. كل CSS هنا داخل @media screen، فلا أثر له على وسائط print.
-  3. العناصر الأصلية (الترويسة وبطاقة القرار والمؤشرات) تبقى في الصفحة كما هي للطباعة،
+  3. العناصر الأصلية (الترويسة وأهم الأخبار المتعلقة بالأمن البحري والمؤشرات) تبقى في الصفحة كما هي للطباعة،
      وتُخفى على الشاشة فقط.
   4. السكربت لا يعدّل إلا أصنافًا بالبادئة sc- وصنف sc-collapsed، وهذا الصنف لا يؤثر إلا داخل @media screen.
 المصدر الوحيد للبيانات ملف الواجهة (meta). لا استنتاج ولا تعبئة.
@@ -21,6 +21,9 @@ _NO_PREFIX_CHANGE = {"new": "جديد", "closed": "أُغلق", "reclassified": 
                      "info": "متابعة", "ongoing": "مستمر"}
 HERO_MAX_CHANGES = 2
 HERO_MAX_ACTIONS = 2
+
+
+from section_counts import for_title as _sec_count
 
 
 def first_sentence(text: str) -> str:
@@ -48,7 +51,7 @@ def _chip(label, value_html, extra=""):
 
 def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_html="",
                 doc_mode=False, archived=False):
-    """كتلة القرار فوق الطيّ: العنوان والشرائح وحالة التهديد والمؤشرات وبطاقة القرار.
+    """كتلة القرار فوق الطيّ: العنوان والشرائح وحالة التهديد والمؤشرات وأهم الأخبار المتعلقة بالأمن البحري.
 
     doc_mode: التقارير الخاصة، وعنوانها الكامل هو العنوان الظاهر (كانت بلا عنوان على الشاشة).
     archived: إصدار غير الأحدث، فلا شارة عمر تنذر بالقِدم بل وسم أرشيفي محايد.
@@ -78,11 +81,17 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
         chips.append(_chip("آخر تحديث", f'<span class="bidi">{esc(gen)}</span>'))
     if meta.get("window"):
         chips.append(_chip("فترة التغطية", esc(meta["window"])))
-    chk, cit = meta.get("sources_checked"), meta.get("sources_cited")
-    if chk not in (None, "") and cit not in (None, ""):
-        chips.append(_chip("المصادر", f'<span class="bidi">{esc(cit)}</span> من <span class="bidi">{esc(chk)}</span>'))
-    elif chk not in (None, ""):
-        chips.append(_chip("إجمالي المصادر المعتمدة", f'<span class="bidi">{esc(chk)}</span>'))
+    appr, auto, man, cit = (meta.get("sources_approved"), meta.get("sources_checked"),
+                            meta.get("sources_manual_reference_count"), meta.get("sources_cited"))
+    if appr not in (None, ""):
+        _parts = [f'<span class="bidi">{esc(appr)}</span> معتمدة']
+        if auto not in (None, ""):
+            _parts.append(f'<span class="bidi">{esc(auto)}</span> بالمسار الآلي')
+        if man not in (None, ""):
+            _parts.append(f'<span class="bidi">{esc(man)}</span> بالفحص اليدوي')
+        chips.append(_chip("المصادر", " · ".join(_parts)))
+    if cit not in (None, ""):
+        chips.append(_chip("مستشهد بها", f'<span class="bidi">{esc(cit)}</span>'))
 
     # العمود الجانبي: مستوى التهديد ثم المؤشرات
     side = []
@@ -111,44 +120,69 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
     if kp:
         side.append(f'<div class="sc-kpis">{"".join(kp)}</div>')
 
-    # بطاقة القرار (شاشة): أعداد وروابط للقسم — لا تكرار حرفي لنصوص المتن
+    # أهم الأخبار المتعلقة بالأمن البحري (شاشة): خلاصة مُركّزة لكل صف + العدد + رابط إلى القسم في صفحته.
+    # إصلاح ك-239 (2026-10-28): كانت الصفوف تُفرَغ لأن سكربت الروابط كان يحذف الرابط عند غياب
+    # القسم من الصفحة بعد نقله إلى «إضافات». القاعدة الآن: لا يُحذف أي عنصر، ويُوجَّه الرابط للصفحة البديلة.
     rows = []
-    changes = meta.get("changes") or []
+
+    def _gist(items, limit=2, width=64):
+        out = []
+        for raw in items[:limit]:
+            t = re.split(r"[.،؛]", str(raw).strip())[0].strip()
+            t = re.sub(r"\s+", " ", t)
+            if len(t) > width:
+                t = t[:width].rsplit(" ", 1)[0] + "…"
+            if t:
+                out.append(t)
+        return " · ".join(out)
+
+    # مصدر «ما تغيّر»: نصوص أهم الأخبار المتعلقة بالأمن البحري (سلاسل)، لا سجل التغييرات البنيوي
+    changes = [c for c in (dc.get("changed") or []) if isinstance(c, str)]
+    if not changes:
+        changes = [c for c in (meta.get("changes") or []) if isinstance(c, str)]
     if changes:
+        gist = _gist(changes, limit=2)
+        total = _sec_count(meta.get("date") or meta.get("iso") or meta.get("report_date") or "", "ما تغيّر منذ التقرير السابق", default=0) or len(meta.get("changes") or []) or len(changes)
         rows.append(
             '<div class="sc-row"><div class="sc-l">ما تغيّر</div>'
-            f'<div class="sc-v"><p class="sc-more"><a href="#sec-00" data-goto="ما تغيّر">'
-            f'عرض كل ما تغيّر ({len(changes)})</a></p></div></div>')
+            f'<div class="sc-v"><p class="sc-gist">{inline(gist)}</p>'
+            f'<p class="sc-more">{total} بندًا · '
+            '<a href="/additions.html#sec-00" data-goto="ما تغيّر" data-alt="/additions.html#sec-00">التفاصيل</a></p></div></div>')
     acts = _list_items(dc.get("action"))
+    n_acts = _sec_count(meta.get("date") or meta.get("iso") or meta.get("report_date") or "", "التوجيهات التشغيلية", default=0) or len(acts)
     if acts:
         rows.append(
             '<div class="sc-row"><div class="sc-l">التوجيهات التشغيلية</div>'
-            f'<div class="sc-v"><p class="sc-more">عدد البنود: {len(acts)} · '
-            '<a href="#" data-goto="التوجيهات التشغيلية">انتقل إلى القسم</a></p></div></div>')
+            f'<div class="sc-v"><p class="sc-gist">{inline(_gist(acts, limit=2))}</p>'
+            f'<p class="sc-more">{n_acts} بنود · '
+            '<a href="/additions.html#sec-03" data-goto="التوجيهات التشغيلية" data-alt="/additions.html#sec-03">القسم الكامل</a></p></div></div>')
     watch = _list_items(dc.get("watch"))
+    n_watch = _sec_count(meta.get("date") or meta.get("iso") or meta.get("report_date") or "", "مؤشرات التحذير المبكر", default=0) or len(watch)
     if watch:
         rows.append(
             '<div class="sc-row"><div class="sc-l">ما يُراقب خلال 24 ساعة</div>'
-            f'<div class="sc-v"><p class="sc-more">عدد البنود: {len(watch)} · '
-            '<a href="#" data-goto="مؤشرات التحذير المبكر">انتقل إلى المؤشرات</a></p></div></div>')
+            f'<div class="sc-v"><p class="sc-gist">{inline(_gist(watch, limit=2))}</p>'
+            f'<p class="sc-more">{n_watch} بنود · '
+            '<a href="/additions.html#sec-07" data-goto="مؤشرات التحذير المبكر" data-alt="/additions.html#sec-07">المؤشرات الكاملة</a></p></div></div>')
     key = ""
     if rkey_html:
         key = rkey_html.replace('class="rkey no-print"', 'class="sc-rkey"')
     card = ""
     if rows:
-        card = (f'<section class="sc-card" aria-label="بطاقة القرار"><h2 class="sc-h2">بطاقة القرار</h2>'
+        card = (f'<section class="sc-card" aria-label="أهم الأخبار المتعلقة بالأمن البحري"><h2 class="sc-h2">أهم الأخبار المتعلقة بالأمن البحري</h2>'
                 f'{"".join(rows)}{key}</section>')
 
     grid = ""
     if side or card:
         solo = "" if card else " sc-solo"
-        grid = (f'<div class="sc-grid{solo}"><div class="sc-side">{"".join(side)}</div>{card}</div>')
+        # قرار المالك 2026-10-28: أهم الأخبار المتعلقة بالأمن البحري في يمين الشاشة والبطاقات في اليسار (تبديل مواضع)
+        grid = (f'<div class="sc-grid{solo}">{card}<div class="sc-side">{"".join(side)}</div></div>')
     lede = ""
     if doc_mode and meta.get("lede"):
         lede = f'<p class="sc-lede">{inline(meta["lede"])}</p>'
     return (
         '<div class="sc-hero no-print">'
-        f'<p class="sc-eyebrow">{esc(eyebrow)}</p><h1 class="sc-h1">{h1}</h1>{lede}'
+        f'<p class="sc-eyebrow">{esc(eyebrow)}</p><h2 class="sc-h1">{h1}</h2>{lede}'
         f'<div class="sc-chips">{"".join(chips)}</div>{grid}</div>'
     )
 
@@ -176,7 +210,7 @@ body:has(.site-nav) .topbar{display:none}
 .sc-fresh.f-old{border-color:var(--danger);color:var(--danger)}
 .sc-fresh.f-old b{color:var(--danger)}
 .sc-arch{color:var(--muted)}
-.sc-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:22px;align-items:start}
+.sc-grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:22px;align-items:start}
 /* بلا بطاقة قرار (السجل التراكمي): مستوى التهديد والمؤشرات في صف واحد بدل عمود يترك نصف العرض فارغًا */
 .sc-grid.sc-solo{grid-template-columns:minmax(0,1fr)}
 .sc-solo .sc-side{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));align-items:stretch}
@@ -214,6 +248,8 @@ body:has(.site-nav) .topbar{display:none}
 .sc-acts li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px;padding:5px 0;line-height:1.8}
 .sc-acts li i{font-style:normal;font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:12.5px;background:var(--accent);color:var(--accent-ink);border-radius:6px;width:24px;height:24px;display:grid;place-items:center;margin-top:4px}
 .sc-watch li{padding:5px 0;line-height:1.8}
+.sc-gist{font-size:15.5px;line-height:1.75;color:var(--ink);margin:0 0 4px}
+.sc-plain{color:var(--accent);display:inline-block;padding:3px 0;min-height:24px}
 .sc-more{font-size:14px;margin:6px 0 0}
 .sc-more a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:3px 0;min-height:24px}
 .sup-banner a{display:inline-block;padding:3px 0;min-height:24px}
@@ -259,7 +295,7 @@ body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,sys
 .sn-name em,.ar-risk,.hc-tag{font-size:12.5px}
 .foot a,.foot-note a,.sc-foot a,.glossary a{display:inline-block;padding:3px 0}
 @media (max-width:1000px){
-  /* الجوال: مستوى التهديد ثم بطاقة القرار ثم المؤشرات (القرار قبل الأرقام) */
+  /* الجوال: مستوى التهديد ثم أهم الأخبار المتعلقة بالأمن البحري ثم المؤشرات (القرار قبل الأرقام) */
   .sc-grid,.sc-grid.sc-solo{display:flex;flex-direction:column;gap:14px}
   .sc-side{display:contents}
   .sc-threat{order:1}.sc-card{order:2}.sc-kpis{order:3;display:grid;gap:10px}
@@ -280,6 +316,7 @@ body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,sys
 /* الحركة: عند طيّ الأقسام على الشاشة يبدأ الرسم المتحرّك لحظة التحويل إلى الطباعة فيلتقطه PDF ناقصًا
    (شريط الخط الزمني). الحالة النهائية هي المقصودة، وهي ما كانت تُلتقط قبل الطيّ. */
 @media print{.tl-fill{animation:none}}
+
 """
 
 SCREEN_JS = r"""
@@ -374,13 +411,21 @@ SCREEN_JS = r"""
     bar.appendChild(nav); bar.appendChild(all);
     main.parentNode.insertBefore(bar, main);
   }
-  // روابط «كاملة» في بطاقة القرار
+  // روابط «كاملة» في أهم الأخبار المتعلقة بالأمن البحري — القاعدة: لا يُحذف أي عنصر (منع إفراغ الصف)
   [].forEach.call(d.querySelectorAll('[data-goto]'), function (a) {
     var key = a.getAttribute('data-goto');
     var hit = items.filter(function (it) { return it.title.indexOf(key) >= 0; })[0];
-    if (!hit) { a.parentNode.removeChild(a); return; }
-    a.href = '#' + hit.sec.id;
-    a.addEventListener('click', function () { openSec(hit.sec); });
+    if (hit) {
+      a.href = '#' + hit.sec.id;
+      a.addEventListener('click', function () { openSec(hit.sec); });
+      return;
+    }
+    var alt = a.getAttribute('data-alt');
+    if (alt) { a.href = alt; return; }
+    var plain = d.createElement('span');
+    plain.className = 'sc-plain';
+    plain.textContent = a.textContent;
+    a.parentNode.replaceChild(plain, a);
   });
   // رابط مباشر إلى قسم مطوي: يُفتح
   if (location.hash) {
