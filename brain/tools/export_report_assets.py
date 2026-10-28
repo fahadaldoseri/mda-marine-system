@@ -303,6 +303,11 @@ def main() -> int:
     ap.add_argument("--extra-css", help="ملف CSS اختباري يُحقن بعد أنماط PDF (للمعاينة التجريبية فقط)")
     args = ap.parse_args()
 
+    # حارس صيغة التاريخ — فشل مغلق بدل إنشاء مخرجات باسم «--date»
+    import re as _re
+    if not _re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(args.date or "")):
+        print(f"⛔ صيغة التاريخ غير صحيحة: «{args.date}» — المطلوب YYYY-MM-DD", file=sys.stderr)
+        return 2
     page_path = DIST / "reports" / f"{args.date}.html"
     if not page_path.exists():
         print(f"فشل: صفحة الإصدار غير موجودة: {page_path}")

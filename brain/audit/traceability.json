@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-28T19:20:34.014620+00:00",
+  "generated_at": "2026-10-28T21:45:31.954886+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -1840,84 +1840,84 @@
     {
       "fault_id": "ك-227",
       "state": "بانتظار التحقق",
-      "lesson_id": null,
+      "lesson_id": "ك-227",
       "barrier_id": "B-20e1ded3",
       "run_evidence": null
     },
     {
       "fault_id": "ك-228",
       "state": "بانتظار التحقق",
-      "lesson_id": null,
+      "lesson_id": "ك-228",
       "barrier_id": "B-5f1b0299",
       "run_evidence": null
     },
     {
       "fault_id": "ك-229",
       "state": "بانتظار التحقق",
-      "lesson_id": null,
+      "lesson_id": "ك-229",
       "barrier_id": "B-57e46bca",
       "run_evidence": null
     },
     {
       "fault_id": "ك-230",
       "state": "بانتظار التحقق",
-      "lesson_id": null,
+      "lesson_id": "ك-230",
       "barrier_id": "B-187ec15c",
       "run_evidence": null
     },
     {
       "fault_id": "ك-231",
       "state": "بانتظار التحقق",
-      "lesson_id": null,
+      "lesson_id": "ك-231",
       "barrier_id": "B-e7b3e5f4",
       "run_evidence": null
     },
     {
       "fault_id": "ك-232",
       "state": "بانتظار التحقق",
-      "lesson_id": null,
+      "lesson_id": "ك-232",
       "barrier_id": "B-63f0fd77",
       "run_evidence": null
     },
     {
       "fault_id": "ك-233",
       "state": "بانتظار التحقق",
-      "lesson_id": null,
+      "lesson_id": "ك-233",
       "barrier_id": "B-e89ffc3a",
       "run_evidence": null
     },
     {
       "fault_id": "ك-234",
       "state": "بانتظار التحقق",
-      "lesson_id": null,
+      "lesson_id": "ك-234",
       "barrier_id": "B-e8b0ecc9",
       "run_evidence": null
     },
     {
       "fault_id": "ك-235",
       "state": "بانتظار التحقق",
-      "lesson_id": null,
+      "lesson_id": "ك-235",
       "barrier_id": "B-601719cc",
       "run_evidence": null
     },
     {
       "fault_id": "ك-236",
       "state": "بانتظار التحقق",
-      "lesson_id": null,
+      "lesson_id": "ك-236",
       "barrier_id": "B-4faffaec",
       "run_evidence": null
     },
     {
       "fault_id": "ك-237",
       "state": "بانتظار التحقق",
-      "lesson_id": null,
+      "lesson_id": "ك-237",
       "barrier_id": "B-1fabded9",
       "run_evidence": null
     },
     {
       "fault_id": "ك-238",
       "state": "مفتوح",
-      "lesson_id": null,
+      "lesson_id": "ك-238",
       "barrier_id": "B-345f3744",
       "run_evidence": " والقرار النهائي لأي القائمتين أصحّ يحتاج كلمة المالك · تغطية الأسلوب 8/8 · مانعة 0 — مغلق تشغيليً"
     },
@@ -2130,6 +2130,69 @@
       "lesson_id": "ك-269",
       "barrier_id": "B-e1b3797a",
       "run_evidence": "نع · التجربة تمنع · ومع --allow-delete ينفّذ. النتيجة: نجح 4 · فشل 0 (خرج 0)"
+    },
+    {
+      "fault_id": "ك-270",
+      "state": "مغلق",
+      "lesson_id": "ك-270",
+      "barrier_id": "B-26ab6512",
+      "run_evidence": "thon3 validators/check_print_quality.py --pdf <pdf> ← النتيجة: مطابق (خرج 0)"
+    },
+    {
+      "fault_id": "ك-271",
+      "state": "مغلق",
+      "lesson_id": "ك-271",
+      "barrier_id": "B-70b327e2",
+      "run_evidence": "alidators/check_pdf_format.py --pdf <pdf> ← «لا فجوة داخلية ≥ 45 مم» (خرج 0)"
+    },
+    {
+      "fault_id": "ك-272",
+      "state": "مغلق",
+      "lesson_id": "ك-272",
+      "barrier_id": "B-e8998b8b",
+      "run_evidence": "ى المخرج + بوابة الشكل: 9 صفحات · متوسط تعبئة 94.1% · لا فجوة ≥45 مم (خرج 0)"
+    },
+    {
+      "fault_id": "ك-273",
+      "state": "مغلق",
+      "lesson_id": "ك-273",
+      "barrier_id": "B-47be0d65",
+      "run_evidence": "ython3 validators/check_backup_parity.py --mode strict ← «لا انحراف» (خرج 0)"
+    },
+    {
+      "fault_id": "ك-274",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-274",
+      "barrier_id": "B-5ff8935f",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-275",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-275",
+      "barrier_id": "B-78c40bca",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-276",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-276",
+      "barrier_id": "B-c4b492e3",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-277",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-277",
+      "barrier_id": "B-43fed4ad",
+      "run_evidence": "نُقل الملف إلى `brain/docs/` وحُذف المجلد الخطأ، ثم التماثل خرج 0 مغلق"
+    },
+    {
+      "fault_id": "ك-278",
+      "state": "مغلق",
+      "lesson_id": "ك-278",
+      "barrier_id": "B-6373aded",
+      "run_evidence": "منفَّذ: حارس فشل مغلق في final_gate.sh (يتحقق YYYY-MM-DD ويخرج 2 برسالة صريحة) وحارس مثله"
     }
   ]
 }
