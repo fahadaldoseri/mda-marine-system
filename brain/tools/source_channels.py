@@ -58,6 +58,9 @@ MANUAL_REFERENCE: set[int] = {
 # مسار كل مصدر بلا تغذية آلية: browser + الرابط المرجعي المعلن في سجل الموثوقية.
 # تبقى MANUAL_REFERENCE هي مجموعة القنوات التي تدخل العدّاد، وهذا السجل يضيف عنوان المسار فقط.
 BROWSER_ROUTES: dict[int, dict[str, str]] = {
+    # 41: USNI News — يحجب الطلب الآلي (403 Cloudflare) ويستجيب لمتصفح حقيقي.
+    # القياس: HTTP 200 · 463423B · 7.93s عبر tools/browser_fetch.py
+    41: {"path": "browser", "url": "https://news.usni.org/feed"},
     1: {"path": "browser", "url": "https://www.ukmto.org/recent-incidents"},
     5: {"path": "browser", "url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx"},
     13: {"path": "browser", "url": "https://shipnext.com/vessel/9315159-cameroon-prosperity"},
