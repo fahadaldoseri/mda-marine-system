@@ -141,6 +141,7 @@ def nav_html(active: str = "") -> str:
       {link('/reports/monthly-2026-10.html', 'اللوحة الشهرية', 'monthly')}
       {link('/reports/cumulative-2026.html', 'السجل التراكمي', 'cumulative')}
       {link('/sources.html', 'المصادر والمراجع', 'sources')}
+      {link('/additions.html', 'إضافات', 'additions')}
     </div>
     <div class="sn-tools">
       <div class="sn-scale" role="group" aria-label="حجم الخط">
