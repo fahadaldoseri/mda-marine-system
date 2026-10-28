@@ -244,3 +244,6 @@ echo "السجلات: $LOGDIR"
 # ── حلقة التعلم الذاتي (مهارة superpowers-method) — لا تمنع، وتسجّل في كل تشغيل ──
 python3 "$B/tools/skill_lessons.py" --date "$D" || true
 exit "$WORST"
+
+# بوابة تغطية مسارات المصادر (جولة 2026-10-29)
+python3 "$B/validators/check_source_route_coverage.py" --date "${DATE:-$(date -u +%F)}" || exit 1

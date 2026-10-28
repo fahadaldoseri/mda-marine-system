@@ -156,9 +156,11 @@
 
 | # | المصدر | التغذية |
 |---:|---|---|
+| 1 | UKMTO — الحوادث الأخيرة | https://www.ukmto.org/recent-incidents |
 | 2 | UKMTO — التحذيرات 2026 | https://r.jina.ai/https://www.ukmto.org/ukmto-products/warnings/2026 |
 | 3 | UKMTO — النشرات الاستشارية 2026 | https://r.jina.ai/https://www.ukmto.org/ukmto-products/advisories/2026 |
 | 4 | UKMTO — التقارير الأسبوعية 2026 | https://r.jina.ai/https://www.ukmto.org/ukmto-products/weekly-reports/2026 |
+| 5 | IMO — سجل الحوادث المؤكدة | https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx |
 | 6 | straits.live | https://straits.live/feed.xml |
 | 6 | straits.live | https://straits.live/briefs/feed.xml |
 | 7 | gCaptain | https://gcaptain.com/feed/ |
@@ -167,6 +169,7 @@
 | 10 | الجزيرة نت | https://www.ajnet.me/rss |
 | 11 | الجزيرة الإنجليزية | https://www.aljazeera.com/xml/rss/all.xml |
 | 12 | OFAC — الإجراءات الأخيرة | https://ofac.treasury.gov/rss.xml |
+| 13 | ShipNext — التحقق من السفن | https://shipnext.com/vessel/9315159-cameroon-prosperity |
 | 14 | قناة العربية | https://www.alarabiya.net/feed/rss2/ar.xml |
 | 14 | قناة العربية | https://www.alarabiya.net/feed/rss2/ar/arab-and-world.xml |
 | 14 | قناة العربية | https://www.alarabiya.net/feed/rss2/ar/aswaq.xml |
@@ -175,7 +178,9 @@
 | 20 | جريدة الأيام | http://feeds.feedburner.com/alayam-news-list-all |
 | 20 | جريدة الأيام | http://feeds.feedburner.com/alayam-online-international-news |
 | 20 | جريدة الأيام | https://www.alayam.com/pages/rss |
+| 21 | جريدة أخبار الخليج | https://akhbar-alkhaleej.com/ |
 | 22 | جريدة البلاد | https://www.albiladpress.com/rss |
+| 23 | Gulf Daily News | https://www.gdnonline.com |
 | 24 | وكالة الأنباء القطرية (قنا) | https://qna.org.qa/en/RSS-Feeds |
 | 24 | وكالة الأنباء القطرية (قنا) | https://qna.org.qa/en/Pages/RSS-Feeds/Analysis-and-Reports |
 | 24 | وكالة الأنباء القطرية (قنا) | https://qna.org.qa/en/Pages/RSS-Feeds/Qatar |
@@ -183,12 +188,15 @@
 | 25 | وكالة أنباء الإمارات (وام) | https://www.wam.ae/en/rss |
 | 26 | وكالة الأنباء السعودية (واس) | https://www.spa.gov.sa/rss.xml |
 | 26 | وكالة الأنباء السعودية (واس) | https://www.spa.gov.sa/feed |
+| 27 | وكالة الأنباء الكويتية (كونا) | https://www.kuna.net.kw |
 | 28 | وكالة الأنباء العُمانية | https://omannews.gov.om/rss.ona |
 | 28 | وكالة الأنباء العُمانية | https://omannews.gov.om/rssinfo/ |
+| 29 | البحرية الملكية البريطانية | https://www.royalnavy.mod.uk/news |
 | 30 | القيادة المركزية الأمريكية (سنتكوم) | https://www.centcom.mil/DesktopModules/ArticleCS/RSS.ashx?ContentType=1&Site=808&isdashboardselected=0&max=20 |
 | 31 | JMIC | https://combinedmaritimeforces.com/feed/ |
 | 32 | IMB/ICC — القرصنة | https://icc-ccs.org/feed/ |
 | 33 | MARAD/MSCI | https://www.maritime.dot.gov/rss.xml |
+| 34 | MSCIO | https://www.mscio.eu/alerts/ |
 | 35 | Splash 247 | https://splash247.com/feed/ |
 | 35 | Splash 247 | https://splash247.com/feed/atom/ |
 | 36 | Lloyd's List | https://www.lloydslist.com/rss/lloyds-list |
@@ -197,14 +205,17 @@
 | 37 | MarineLink | https://www.marinelink.com/blogs/rss?type=video |
 | 38 | Jerusalem Post | https://www.jpost.com/rss |
 | 38 | Jerusalem Post | https://www.jpost.com/rss/rssfeedsmiddleeastnews.aspx |
+| 40 | MarineTraffic | https://www.marinetraffic.com/en/maritime-news |
 | 41 | USNI News | https://news.usni.org/feed |
 | 42 | Naval News | https://www.navalnews.com/feed/ |
 | 43 | The Maritime Executive | https://maritime-executive.com/ |
+| 44 | Windward | https://windward.ai/feed/ |
 | 45 | IRIB News | https://www.iribnews.ir/fa/rss/allnews |
 | 46 | ISNA | https://www.isna.ir/rss |
 | 46 | ISNA | https://en.isna.ir/rss |
 | 47 | Mehr — العربي | https://ar.mehrnews.com/rss |
 | 47 | Mehr — العربي | https://en.mehrnews.com/rss |
+| 48 | Institute for the Study of War | https://www.understandingwar.org/wp-json/wp/v2/posts?per_page=10 |
 | 49 | Sanaa Center | https://sanaacenter.org/feed/ |
 | 50 | Navy Times | https://www.navytimes.com/feed/ |
 | 51 | Baird Maritime | https://www.bairdmaritime.com/feed/ |
@@ -213,6 +224,19 @@
 | 54 | Bloomberg | https://feeds.bloomberg.com/politics/news.rss |
 | 55 | Axios | https://api.axios.com/feed/ |
 | 58 | المركز الإعلامي للقوات المسلحة اليمنية | https://yafm.net/ |
+| 15 | حساب @UK_MTO على X | https://x.com/UK_MTO |
+| 17 | حساب @bna_en على X | https://x.com/bna_en |
+| 18 | حساب @bahdiplomatic على X | https://x.com/bahdiplomatic |
+| 19 | حساب @US5thFleet على X | https://x.com/us5thfleet |
+| 56 | حساب @YemenResistanc1 على X | https://x.com/YemenResistanc1 |
+| 57 | حساب @spokespersonyem على X | https://x.com/spokespersonyem |
+| 59 | المتحدث العسكري للطرف المقابل (تلغرام) | https://t.me/s/army21ye |
+| 60 | حساب @CJFCSpox على X | https://x.com/CJFCSpox |
+| 61 | حساب @ERYANIM على X | https://x.com/ERYANIM |
+| 62 | حساب @Yemenarmyeng على X | https://x.com/Yemenarmyeng |
+| 14 | قناة العربية — الحساب الرسمي على X | https://x.com/AlArabiya |
+| 41 | USNI News — تغذية عبر وسيط قراءة | https://r.jina.ai/https://news.usni.org/feed |
+| 42 | Naval News — الحساب الرسمي على X | https://x.com/navalnewscom |
 
 ---
 

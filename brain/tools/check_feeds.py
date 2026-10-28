@@ -98,6 +98,60 @@ FALLBACK_ROUTES = {
         {'url': 'https://r.jina.ai/http://www.maritime.dot.gov/msci',
          'via': 'fallback:jina.ai/msci'},
     ],
+    # جولة 2026-10-29: أحد عشر مسارًا ثبت بالقياس الحي أنها تقرأ محتوى حقيقيًا،
+    # فترقّت مصادرها من «مرجعية يدوية» إلى المسار الآلي. الوسيط r.jina.ai يُقرأ به
+    # الصفحة الرسمية نفسها للجهة (لا مصدر بديل)، والجهة مملوكة للخبر.
+    1: [
+        {'url': 'https://r.jina.ai/https://www.ukmto.org/recent-incidents',
+         'via': 'official-page:jina.ai/ukmto-incidents'},
+    ],
+    5: [
+        {'url': 'https://r.jina.ai/https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx',
+         'via': 'official-page:jina.ai/imo-middle-east-incidents'},
+    ],
+    13: [
+        {'url': 'https://shipnext.com/api/v2/fleet/public/9315159',
+         'via': 'official-api:shipnext/vessel-9315159'},
+    ],
+    21: [
+        {'url': 'https://r.jina.ai/https://akhbar-alkhaleej.com/',
+         'via': 'official-page:jina.ai/akhbar-alkhaleej'},
+    ],
+    23: [
+        {'url': 'https://r.jina.ai/https://www.gdnonline.com',
+         'via': 'official-page:jina.ai/gdnonline'},
+    ],
+    27: [
+        {'url': 'https://r.jina.ai/https://www.kuna.net.kw',
+         'via': 'official-page:jina.ai/kuna'},
+    ],
+    29: [
+        {'url': 'https://r.jina.ai/https://www.royalnavy.mod.uk/news',
+         'via': 'official-page:jina.ai/royalnavy-news'},
+    ],
+    34: [
+        {'url': 'https://r.jina.ai/https://www.mscio.eu/alerts/',
+         'via': 'official-page:jina.ai/mscio-alerts'},
+    ],
+    40: [
+        {'url': 'https://r.jina.ai/https://www.marinetraffic.com/en/maritime-news',
+         'via': 'official-page:jina.ai/marinetraffic-news'},
+    ],
+    44: [
+        {'url': 'https://windward.ai/feed/', 'via': 'official:windward-rss'},
+    ],
+    48: [
+        {'url': 'https://www.understandingwar.org/wp-json/wp/v2/posts?per_page=10',
+         'via': 'official-api:isw-wp-json'},
+    ],
+    41: [
+        {'url': 'https://r.jina.ai/https://news.usni.org/',
+         'via': 'official-page:jina.ai/usni-news'},
+    ],
+    51: [
+        {'url': 'https://r.jina.ai/https://bairdmaritime.com/',
+         'via': 'official-page:jina.ai/baird-maritime'},
+    ],
 }
 
 
@@ -245,6 +299,17 @@ def _payload_items(payload, source_url):
     blocked = _blocked_reason(raw)
     if blocked:
         raise ValueError(blocked)
+    # مسارات مخصّصة (حساب X · عرض تلغرام · وسيط نصّي): مستخرجها يقرأ المحتوى الحقيقي
+    # من الحمولة الرسمية، ويُقدَّم على الاستخراج العام (عطل ك-2xx: ضجيج الصور والتنقّل).
+    try:
+        from content_extractors import items_for, is_real_item
+    except ImportError:
+        items_for = None
+        is_real_item = None
+    if items_for is not None:
+        method, special = items_for(source_url, payload)
+        if special:
+            return special, len(text)
     items = parse(raw)
     method = 'rss'
     if not items:
@@ -253,6 +318,11 @@ def _payload_items(payload, source_url):
     if not items:
         items = _derived_items(raw, source_url)
         method = 'derived'
+        # كل عنصر مشتق يلزمه أن يكون محتوى حقيقيًا لا رابط صورة ولا بند تنقّل.
+        if is_real_item is not None:
+            items = [it for it in items if is_real_item(it)]
+        if len(items) < 3:
+            raise ValueError(f'derived items without real content ({len(items)})')
     # عطل ك-82: هيكل تطبيق JS يُنتج «عنصرًا» واحدًا وهميًا من عنوان، فيظهر المصدر ناجحًا
     # بلا محتوى حقيقي. الشرط: أي استخراج مشتق من هيكل تطبيق يلزمه 3 عناصر على الأقل.
     shell = bool(re.search(r'polyfills\.[0-9a-f]{8}|runtime\.[0-9a-f]{8}|/_next/static/', raw, re.I))
