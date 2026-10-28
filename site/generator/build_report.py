@@ -1308,7 +1308,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False):
 
     chips = []
     if meta.get("version"):
-        chips.append(f'<span class="chip">رقم النسخة <b>{esc(meta["version"])}</b></span>')
+        chips.append(f'<span class="chip">رقم الإصدار <b>{esc(meta["version"])}</b></span>')
     if generated:
         chips.append(f'<span class="chip">آخر تحديث <b class="bidi">{esc(generated)}</b></span>')
     if meta.get("window"):
