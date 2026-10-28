@@ -71,7 +71,7 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
     elif gen and not doc_mode:
         chips.append(f'<span class="sc-chip sc-fresh" data-gen="{esc(gen)}" hidden>عمر الإصدار <b class="sc-age"></b></span>')
     if meta.get("version"):
-        chips.append(_chip("رقم النسخة", f'<span class="bidi">{esc(meta["version"])}</span>'))
+        chips.append(_chip("رقم الإصدار", f'<span class="bidi">{esc(meta["version"])}</span>'))
     if gen and (not archived or archived == "none"):
         chips.append(_chip("آخر تحديث", f'<span class="bidi">{esc(gen)}</span>'))
     elif gen and doc_mode:
