@@ -326,7 +326,20 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .card, .decision, .dc, .blk, .blk *{background-image:none !important}
   .card, .decision, .dc{background:#fff !important}
   /* ك-245: منع انقسام مفتاح الخريطة بين صفحتين في <span class="ltr">PDF</span> */
-  .map-key, .map-legend, .key-box, .mx-key { break-inside: avoid !important; page-break-inside: avoid !important; }
+  .map-key, .map-legend, .key-box, .mx-key,
+  .print-map, .print-map .hmap, .print-map .hmap-wrap { break-inside: avoid !important; page-break-inside: avoid !important; }
+  /* ك-245: المفتاح كامل في عمود واحد، وتلتصق كتلة الخريطة بذيل المحتوى */
+  .print-map{display:block !important}
+  .print-map .hmap-wrap{overflow:hidden !important}
+  .print-map .hmap-keys{display:block !important;margin:2mm 0 0;font-size:8.4pt;line-height:1.3}
+  .print-map .hmap-legend{grid-template-columns:minmax(0,1fr) !important;columns:1 !important;gap:0 !important;margin:1.5mm 0 0}
+  .print-map .hmap-legend li{break-inside:avoid !important;page-break-inside:avoid !important;margin:0 0 1mm !important;font-size:8.4pt !important;line-height:1.3 !important}
+  .print-map-distribution{break-inside:avoid !important;page-break-inside:avoid !important;margin-top:2mm}
+  .print-map-distribution h3{font-size:10pt;margin:1.5mm 0 1mm}
+  .print-map-distribution .dist-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5mm}
+  .print-map-distribution .dist-card{display:block !important;width:auto !important;margin:0 !important;padding:1.3mm 1.7mm;border:1px solid #cfd8e3;border-radius:1.2mm;background:#fff;color:#20303f;font-size:7.7pt;line-height:1.25;break-inside:avoid;page-break-inside:avoid}
+  .print-map-distribution .dist-card b{display:block;color:#0a1524;font-size:8pt;margin-bottom:.5mm}
+  .print-map-distribution .dist-card span{display:block}
 
   :root{
     --ink:#0a1524;--ink-2:#20303f;--muted:#4b5e73;--faint:#5c728c;
@@ -350,7 +363,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   #sec-03 .map-viz, .map-viz{break-inside:auto !important;page-break-inside:auto !important}
   .map-viz svg{break-inside:avoid !important;page-break-inside:avoid !important}
   .map-viz{padding:1.2mm 1.2mm}
-  /* مفتاح الخريطة في عمودين: يوفّر نحو 55 مم فيستقر القسم داخل ورقة واحدة */
+  /* لا يُقسَّم مفتاح hmap في الطباعة؛ النسخة المطبوعة تعلن عمودًا واحدًا صراحةً */
   .map-legend{columns:2;column-gap:8mm}
   .map-legend li{break-inside:avoid;margin:0 0 1.4mm;font-size:9pt;line-height:1.45}
   .map-legend .lg-txt{font-size:9pt}
@@ -486,6 +499,13 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   /* الغلاف ينتهي عند شريط التصنيف: أهم الأخبار المتعلقة بالأمن البحري تبدأ صفحة جديدة (يمنع العنوان اليتيم والفراغ) */
   .decision{break-inside:avoid !important;page-break-inside:avoid !important}
   .map-viz svg{max-height:145mm !important;width:100%;height:auto}
+  /* القاعدة الأخص تأتي بعد سياسة التدفق العامة حتى لا تنقضها */
+  .print-map{break-inside:avoid !important;page-break-inside:avoid !important}
+  .print-map .hmap-wrap{break-inside:avoid !important;page-break-inside:avoid !important;overflow:hidden !important}
+  .print-map .hmap-wrap{grid-template-columns:minmax(0,6fr) minmax(0,1fr) !important}
+  .print-map .hmap-zoom{border-inline-start:1.5px solid var(--accent) !important;border-top:0 !important}
+  .print-map .hmap-legend{grid-template-columns:minmax(0,1fr) !important;columns:1 !important}
+  .print-map .hmap-keys{display:block !important}
   /* محاذاة مضبوطة: تُغلق فراغات الجانبين في الفقرات والقوائم، ولا تمسّ العناوين والبطاقات */
   section.doc p,section.doc li,.sec-lede,.masthead .lede,.glossary li,.src-grid li,
   /* تصفير فقرات المتن والعناوين التمهيدية (قرار المالك 2026-10-22): يمنع الفراغ الجانبي */
@@ -775,22 +795,6 @@ body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,sys
    (شريط الخط الزمني). الحالة النهائية هي المقصودة، وهي ما كانت تُلتقط قبل الطيّ. */
 @media print{.tl-fill{animation:none}}
 
-/* إصلاح ك-246/ك-247/ك-248 (2026-10-28): أهداف لمس ≥44px · إلغاء قص الملخصات · مؤشر شريط القفز */
-@media screen and (max-width: 820px){
-  a, button, [role="button"], summary, .sc-toggle, .sn-brand, .sn-link, .hc-open,
-  #cont-link, .num, bdi { min-height:44px; }
-  a, button, [role="button"], summary { display:inline-flex; align-items:center; }
-  nav a, .sn-link, .p-btn, .sc-jump a, button, summary, .sc-toggle{ min-height:44px !important; min-width:44px !important; box-sizing:border-box; }
-  .sc-toggle, .sc-toggle.no-print { width:44px; height:44px; min-width:44px; }
-  .sc-peek, .sc-peek span, .sc-kn, .src .st, .sc-note,
-  nav a, .sn-link, .p-btn, .chip a, .sc-jump a, button, summary,
-  .sc-toggle, .hc-open, #cont-link {
-  .sc-gist, .sc-sum, [class*="clamp"], [class*="gist"] { -webkit-line-clamp:unset !important;
-    overflow:visible !important; max-height:none !important; display:block !important;
-    white-space:normal !important; text-overflow:clip !important; }
-  nav.sc-jump { -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 26px), transparent 100%);
-    mask-image:linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 26px), transparent 100%); }
-}
 </style>
 <style>
 :root{--sn-bg:#040810;--sn-panel:#0b1524;--sn-line:#1b2b45;--sn-ink:#e9f0f9;--sn-ink2:#b9c8dc;
@@ -882,6 +886,47 @@ body.daylight .brand-title,body.daylight .brand-sub{color:#0d1a2b}
   .topbar .brand-title{font-size:13.5px;line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
   .topbar .tb-meta{display:flex;gap:6px;flex:0 0 auto}
   .topbar .btn{min-height:40px;padding:6px 10px}
+}
+/* أهداف لمس وقص النص على الجوال — الشاشة فقط */
+@media screen and (max-width:820px){
+  a, button, [role="button"], summary {
+    min-height:44px !important;
+    min-width:44px !important;
+    display:inline-flex;
+    align-items:center;
+    box-sizing:border-box;
+  }
+  nav a, .sn-link, .sn-brand, .p-btn, .chip a, .sc-jump a,
+  button, summary, .sc-toggle {
+    min-height:44px !important;
+    min-width:44px !important;
+    padding-block:8px;
+  }
+  .sc-toggle, .sc-toggle.no-print {
+    width:44px;
+    height:44px;
+    min-width:44px;
+  }
+  td a, th a, table a, .src a, .st a {
+    min-height:44px !important;
+    min-width:44px !important;
+    display:inline-flex;
+    align-items:center;
+    box-sizing:border-box;
+    padding-block:8px;
+    vertical-align:middle;
+  }
+  .sc-peek, .sc-peek span, .sc-kn, .sc-gist, .sc-sum,
+  [class*="clamp"], [class*="gist"] {
+    -webkit-line-clamp:unset !important;
+    display:block !important;
+    max-height:none !important;
+    overflow:visible !important;
+    white-space:normal !important;
+    text-overflow:clip !important;
+  }
+  nav.sc-jump { -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 26px), transparent 100%);
+    mask-image:linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 26px), transparent 100%); }
 }
 html{scroll-padding-top:calc(var(--nav-h, 60px) + var(--bar-h, 0px) + 12px);scroll-padding-bottom:80px}
 section.doc{scroll-margin-top:0 !important}
@@ -999,7 +1044,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
   <div class="cls-banner c-open">تصنيف الإصدار: عام</div>
   <section class="decision reveal" aria-label="عام"><h2 class="dc-title">عام</h2><div class="dc-grid"><div class="dc-row"><div class="dc-l">ما تغيّر</div><div class="dc-v">أربعة بلاغات هجوم رسمية في مضيق هرمز (<bdi class="bidi">#169</bdi> · 13-01 إلى 13-04)، وإعلان إيراني باستهداف الناقلة «Al Maqam» (13-05)، وضبط فرنسي للناقلة «DF Peak» في المحيط الهندي (13-06)، وتصنيف <span class="ltr">JMIC</span> للتهديد بـ«شديد».</div></div><div class="dc-row risk-high"><div class="dc-l">مستوى التهديد</div><div class="dc-v">مرتفع جدًا</div></div><div class="dc-row"><div class="dc-l">التوصيات</div><div class="dc-v">تقييد العبور غير الضروري في مضيق هرمز، والعبور بضوء نهار ومرافقة معلنة، ورفع تقارير الوضع إلى <span class="ltr">UKMTO</span> كل ساعتين.</div></div><div class="dc-row"><div class="dc-l">ما يُراقب خلال 24 ساعة</div><div class="dc-v">بلاغات <span class="ltr">UKMTO</span> التالية، ومصير المفقودين في ضربة صحار، وتأكيد ملكية «Al Maqam»، ومستجدات إعادة فتح المضيق.</div></div></div><div class="dc-foot">أساس التقدير: بلاغات <span class="ltr">UKMTO</span> الرسمية، ونشرة <span class="ltr">JMIC</span> الاستشارية 11 أكتوبر، وبيانات العبور والسوق المعلنة.</div></section>
   <div class="kpis"><div class="kpi acc-danger reveal"><em></em><div class="k-l">بلاغات هجوم رسمية (24 ساعة)</div><div class="k-v bidi">4</div><div class="k-d"><span class="trend t-up">▲</span> +2 عن الفترة السابقة</div><div class="k-n"><span class="ltr">UKMTO</span> <bdi class="bidi">#167</bdi> · <bdi class="bidi">#168</bdi> · <bdi class="bidi">#169</bdi> · وتحذير 166-26</div></div><div class="kpi acc-danger reveal"><em></em><div class="k-l">إصابات السفن في أسبوعين</div><div class="k-v bidi">24</div><div class="k-d"><span class="trend t-up">▲</span> +3</div><div class="k-n">بحسب ما نقلته السلطات البريطانية إن تأكدت</div></div><div class="kpi acc-warn reveal"><em></em><div class="k-l">عبور المضيق التجاري</div><div class="k-v bidi">4</div><div class="k-d"><span class="trend t-flat">■</span> بلا تغيّر</div><div class="k-n"><span class="ltr">IMF</span> PortWatch · 4 أكتوبر مقابل خط أساس 85 يوميًا</div></div><div class="kpi acc-warn reveal"><em></em><div class="k-l">سفن منتظرة خارج الأرصفة</div><div class="k-v bidi">124</div><div class="k-d"><span class="trend t-up">▲</span> تكدس مرتفع</div><div class="k-n"><span class="ltr">AIS</span> في نطاق هرمز والخليج عند 03:22 <span class="ltr">UTC</span></div></div><div class="kpi acc-info reveal"><em></em><div class="k-l">سعر خام برنت</div><div class="k-v bidi">105.18</div><div class="k-d"><span class="trend t-up">▲</span> +1.82%</div><div class="k-n">دولار للبرميل · ارتفاع 1.82% في 24 ساعة</div></div></div>
-  <div class="sc-hero no-print"><p class="sc-eyebrow">التقرير اليومي لأمن الملاحة والأوضاع الراهنة في المنطقة</p><h1 class="sc-h1">قراءة تشغيلية لفترة 12–13 أكتوبر 2026 بتوقيت غرينتش: أربعة بلاغات هجوم رسمية في مضيق هرمز، وإعلان إيراني باستهداف ناقلة إماراتية، وضبط ناقلة مشمولة بالعقوبات في المحيط الهندي</h1><div class="sc-chips"><span class="sc-chip sc-arch">إصدار أرشيفي · صدر <b class="bidi">2026-10-13T04:00:00Z</b></span><span class="sc-chip">رقم الإصدار <b><span class="bidi">و ب <span class="ltr">26/10/10</span></span></b></span><span class="sc-chip">فترة التغطية <b>12–13 أكتوبر 2026 (<span class="ltr">UTC</span>)</b></span><span class="sc-chip">مستشهد بها <b><span class="bidi">11</span></b></span></div><div class="sc-grid"><section class="sc-card" aria-label="أهم الأخبار المتعلقة بالأمن البحري"><h2 class="sc-h2">أهم الأخبار المتعلقة بالأمن البحري</h2><div class="sc-row"><div class="sc-l">ما تغيّر</div><div class="sc-v"><p class="sc-gist">أ · ر</p><p class="sc-more">8 بندًا · <a href="/additions.html#sec-00" data-goto="ما تغيّر" data-alt="/additions.html#sec-00">التفاصيل</a></p></div></div><div class="sc-row"><div class="sc-l">التوجيهات التشغيلية</div><div class="sc-v"><p class="sc-gist">تقييد العبور غير الضروري في مضيق هرمز</p><p class="sc-more">7 بنود · <a href="/additions.html#sec-03" data-goto="التوجيهات التشغيلية" data-alt="/additions.html#sec-03">القسم الكامل</a></p></div></div><div class="sc-row"><div class="sc-l">ما يُراقب خلال 24 ساعة</div><div class="sc-v"><p class="sc-gist">بلاغات <span class="ltr">UKMTO</span> التالية</p><p class="sc-more">1 بنود · <a href="/additions.html#sec-07" data-goto="مؤشرات التحذير المبكر" data-alt="/additions.html#sec-07">المؤشرات الكاملة</a></p></div></div><div class="sc-rkey"><span class="rkey-t">مفتاح القراءة:</span><span class="rk k-fact">واقعة مؤكدة</span><span class="rk k-est">تقدير تحليلي</span><span class="rk k-info">بند إعلامي</span><span class="rk k-bg">لا جديد</span><span class="rk k-watch">تحت المراقبة</span></div></section><div class="sc-side"><div class="sc-threat risk-high"><div class="sc-tl">مستوى التهديد</div><div class="sc-tv">مرتفع جدًا</div><details class="sc-basis"><summary>أساس التقدير</summary><p>بلاغات <span class="ltr">UKMTO</span> الرسمية، ونشرة <span class="ltr">JMIC</span> الاستشارية 11 أكتوبر، وبيانات العبور والسوق المعلنة.</p></details></div><div class="sc-kpis"><div class="sc-kpi acc-danger"><div class="sc-kl">بلاغات هجوم رسمية (24 ساعة)</div><div class="sc-kv bidi">4</div><div class="sc-kd"><span class="trend t-up">▲</span> +2 عن الفترة السابقة</div><div class="sc-kn"><span class="ltr">UKMTO</span> <bdi class="bidi">#167</bdi> · <bdi class="bidi">#168</bdi> · <bdi class="bidi">#169</bdi> · وتحذير 166-26</div></div><div class="sc-kpi acc-danger"><div class="sc-kl">إصابات السفن في أسبوعين</div><div class="sc-kv bidi">24</div><div class="sc-kd"><span class="trend t-up">▲</span> +3</div><div class="sc-kn">بحسب ما نقلته السلطات البريطانية إن تأكدت</div></div><div class="sc-kpi acc-warn"><div class="sc-kl">عبور المضيق التجاري</div><div class="sc-kv bidi">4</div><div class="sc-kd"><span class="trend t-flat">■</span> بلا تغيّر</div><div class="sc-kn"><span class="ltr">IMF</span> PortWatch · 4 أكتوبر مقابل خط أساس 85 يوميًا</div></div><div class="sc-kpi acc-warn"><div class="sc-kl">سفن منتظرة خارج الأرصفة</div><div class="sc-kv bidi">124</div><div class="sc-kd"><span class="trend t-up">▲</span> تكدس مرتفع</div><div class="sc-kn"><span class="ltr">AIS</span> في نطاق هرمز والخليج عند 03:22 <span class="ltr">UTC</span></div></div><div class="sc-kpi acc-info"><div class="sc-kl">سعر خام برنت</div><div class="sc-kv bidi">105.18</div><div class="sc-kd"><span class="trend t-up">▲</span> +1.82%</div><div class="sc-kn">دولار للبرميل · ارتفاع 1.82% في 24 ساعة</div></div></div></div></div></div>
+  <div class="sc-hero no-print"><p class="sc-eyebrow">التقرير اليومي لأمن الملاحة والأوضاع الراهنة في المنطقة</p><h2 class="sc-h1">قراءة تشغيلية لفترة 12–13 أكتوبر 2026 بتوقيت غرينتش: أربعة بلاغات هجوم رسمية في مضيق هرمز، وإعلان إيراني باستهداف ناقلة إماراتية، وضبط ناقلة مشمولة بالعقوبات في المحيط الهندي</h2><div class="sc-chips"><span class="sc-chip sc-arch">إصدار أرشيفي · صدر <b class="bidi">2026-10-13T04:00:00Z</b></span><span class="sc-chip">رقم الإصدار <b><span class="bidi">و ب <span class="ltr">26/10/10</span></span></b></span><span class="sc-chip">فترة التغطية <b>12–13 أكتوبر 2026 (<span class="ltr">UTC</span>)</b></span><span class="sc-chip">مستشهد بها <b><span class="bidi">11</span></b></span></div><div class="sc-grid"><section class="sc-card" aria-label="أهم الأخبار المتعلقة بالأمن البحري"><h2 class="sc-h2">أهم الأخبار المتعلقة بالأمن البحري</h2><div class="sc-row"><div class="sc-l">ما تغيّر</div><div class="sc-v"><p class="sc-gist">أ · ر</p><p class="sc-more">8 بندًا · <a href="/additions.html#sec-00" data-goto="ما تغيّر" data-alt="/additions.html#sec-00">التفاصيل</a></p></div></div><div class="sc-row"><div class="sc-l">التوجيهات التشغيلية</div><div class="sc-v"><p class="sc-gist">تقييد العبور غير الضروري في مضيق هرمز</p><p class="sc-more">7 بنود · <a href="/additions.html#sec-03" data-goto="التوجيهات التشغيلية" data-alt="/additions.html#sec-03">القسم الكامل</a></p></div></div><div class="sc-row"><div class="sc-l">ما يُراقب خلال 24 ساعة</div><div class="sc-v"><p class="sc-gist">بلاغات <span class="ltr">UKMTO</span> التالية</p><p class="sc-more">1 بنود · <a href="/additions.html#sec-07" data-goto="مؤشرات التحذير المبكر" data-alt="/additions.html#sec-07">المؤشرات الكاملة</a></p></div></div><div class="sc-rkey"><span class="rkey-t">مفتاح القراءة:</span><span class="rk k-fact">واقعة مؤكدة</span><span class="rk k-est">تقدير تحليلي</span><span class="rk k-info">بند إعلامي</span><span class="rk k-bg">لا جديد</span><span class="rk k-watch">تحت المراقبة</span></div></section><div class="sc-side"><div class="sc-threat risk-high"><div class="sc-tl">مستوى التهديد</div><div class="sc-tv">مرتفع جدًا</div><details class="sc-basis"><summary>أساس التقدير</summary><p>بلاغات <span class="ltr">UKMTO</span> الرسمية، ونشرة <span class="ltr">JMIC</span> الاستشارية 11 أكتوبر، وبيانات العبور والسوق المعلنة.</p></details></div><div class="sc-kpis"><div class="sc-kpi acc-danger"><div class="sc-kl">بلاغات هجوم رسمية (24 ساعة)</div><div class="sc-kv bidi">4</div><div class="sc-kd"><span class="trend t-up">▲</span> +2 عن الفترة السابقة</div><div class="sc-kn"><span class="ltr">UKMTO</span> <bdi class="bidi">#167</bdi> · <bdi class="bidi">#168</bdi> · <bdi class="bidi">#169</bdi> · وتحذير 166-26</div></div><div class="sc-kpi acc-danger"><div class="sc-kl">إصابات السفن في أسبوعين</div><div class="sc-kv bidi">24</div><div class="sc-kd"><span class="trend t-up">▲</span> +3</div><div class="sc-kn">بحسب ما نقلته السلطات البريطانية إن تأكدت</div></div><div class="sc-kpi acc-warn"><div class="sc-kl">عبور المضيق التجاري</div><div class="sc-kv bidi">4</div><div class="sc-kd"><span class="trend t-flat">■</span> بلا تغيّر</div><div class="sc-kn"><span class="ltr">IMF</span> PortWatch · 4 أكتوبر مقابل خط أساس 85 يوميًا</div></div><div class="sc-kpi acc-warn"><div class="sc-kl">سفن منتظرة خارج الأرصفة</div><div class="sc-kv bidi">124</div><div class="sc-kd"><span class="trend t-up">▲</span> تكدس مرتفع</div><div class="sc-kn"><span class="ltr">AIS</span> في نطاق هرمز والخليج عند 03:22 <span class="ltr">UTC</span></div></div><div class="sc-kpi acc-info"><div class="sc-kl">سعر خام برنت</div><div class="sc-kv bidi">105.18</div><div class="sc-kd"><span class="trend t-up">▲</span> +1.82%</div><div class="sc-kn">دولار للبرميل · ارتفاع 1.82% في 24 ساعة</div></div></div></div></div></div>
   <section class="hero-map no-print" aria-hidden="true"><div class="hmap"><div class="hmap-panel">
   <h3>خريطة الوقائع</h3><p class="blk-lede">مواقع الوقائع داخل نطاق التقرير.</p>
   <div class="hmap-wrap">
@@ -1023,7 +1068,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
   <div class="rkey no-print"><span class="rkey-t">مفتاح القراءة:</span><span class="rk k-fact">واقعة مؤكدة</span><span class="rk k-est">تقدير تحليلي</span><span class="rk k-info">بند إعلامي</span><span class="rk k-bg">لا جديد</span><span class="rk k-watch">تحت المراقبة</span></div>
 
   <main>
-    <section class="doc pri reveal" id="sec-00" aria-labelledby="h-00"><h2 id="h-00">ما تغيّر منذ التقرير السابق</h2><div class="h-rule"></div><p class="sec-lede">ما استُجد، وما تغيّر تصنيفه، وما أُغلق.</p><ul class="changes"><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إصابة ناقلة نفط خام بمقذوف غير معروف أثناء عبور صادر في مضيق هرمز. <bdi class="bidi ev-code">#169 · 13-01</bdi> <bdi class="bidi"><span class="ltr">UKMTO</span> #169</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إصابة ناقلة منتجات بمقذوف غير معروف أثناء عبور صادر في المضيق. <bdi class="bidi ev-code">#168 · 13-02</bdi> <bdi class="bidi"><span class="ltr">UKMTO</span> #168</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إصابة سفينة حاويات بمقذوف غير معروف أثناء عبور قادم في المضيق. <bdi class="bidi ev-code">#167 · 13-03</bdi> <bdi class="bidi"><span class="ltr">UKMTO</span> #167</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">بلاغ متأخر عن هجوم على ناقلة صادرة، والطاقم بأمان. <bdi class="bidi ev-code">13-04</bdi> <bdi class="bidi"><span class="ltr">UKMTO 166-26</span></bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إعلان إيراني باستهداف الناقلة «Al Maqam» بلا تأكيد من المشغّل. <bdi class="bidi ev-code">13-05</bdi> <bdi class="bidi">TradeWinds</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">ضبط البحرية الفرنسية الناقلة «DF Peak» المشمولة بعقوبات الاتحاد الأوروبي في المحيط الهندي. <bdi class="bidi ev-code">13-06</bdi> <bdi class="bidi">TradeWinds</bdi></span></li><li class="chg c-changed"><span class="chg-tag"></span><span class="chg-txt">إعادة تصنيف إصابة مرسى صحار كـهجوم بعد تأكيد إصابة الناقلة بمسيّرة. <bdi class="bidi ev-code">#165 · 11-02</bdi> <bdi class="bidi"><span class="ltr">UKMTO</span> #165</bdi></span></li><li class="chg c-follow"><span class="chg-tag"></span><span class="chg-txt">متابعة مصير اثنين من الطاقم مفقودين، وأعمال البحث والإنقاذ مستمرة. <bdi class="bidi ev-code">#165 · 11-02</bdi> <bdi class="bidi">وزير الموانئ الهندي</bdi></span></li></ul></section>
+    <section class="doc pri reveal" id="sec-00" aria-labelledby="h-00"><h2 id="h-00">ما تغيّر منذ التقرير السابق</h2><div class="h-rule"></div><p class="sec-lede">ما استُجد، وما تغيّر تصنيفه، وما أُغلق.</p><ul class="changes"><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إصابة ناقلة نفط خام بمقذوف غير معروف أثناء عبور صادر في مضيق هرمز. <bdi class="bidi ev-code">#169 · 13-01</bdi> <bdi class="bidi">UKMTO #169</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إصابة ناقلة منتجات بمقذوف غير معروف أثناء عبور صادر في المضيق. <bdi class="bidi ev-code">#168 · 13-02</bdi> <bdi class="bidi">UKMTO #168</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إصابة سفينة حاويات بمقذوف غير معروف أثناء عبور قادم في المضيق. <bdi class="bidi ev-code">#167 · 13-03</bdi> <bdi class="bidi">UKMTO #167</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">بلاغ متأخر عن هجوم على ناقلة صادرة، والطاقم بأمان. <bdi class="bidi ev-code">13-04</bdi> <bdi class="bidi">UKMTO 166-26</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إعلان إيراني باستهداف الناقلة «Al Maqam» بلا تأكيد من المشغّل. <bdi class="bidi ev-code">13-05</bdi> <bdi class="bidi">TradeWinds</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">ضبط البحرية الفرنسية الناقلة «DF Peak» المشمولة بعقوبات الاتحاد الأوروبي في المحيط الهندي. <bdi class="bidi ev-code">13-06</bdi> <bdi class="bidi">TradeWinds</bdi></span></li><li class="chg c-changed"><span class="chg-tag"></span><span class="chg-txt">إعادة تصنيف إصابة مرسى صحار كـهجوم بعد تأكيد إصابة الناقلة بمسيّرة. <bdi class="bidi ev-code">#165 · 11-02</bdi> <bdi class="bidi">UKMTO #165</bdi></span></li><li class="chg c-follow"><span class="chg-tag"></span><span class="chg-txt">متابعة مصير اثنين من الطاقم مفقودين، وأعمال البحث والإنقاذ مستمرة. <bdi class="bidi ev-code">#165 · 11-02</bdi> <bdi class="bidi">وزير الموانئ الهندي</bdi></span></li></ul></section>
     <section class="doc reveal" id="sec-01" aria-labelledby="h-01"><h2 id="h-01"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>ما تغيّر منذ التقرير السابق</h2><div class="h-rule"></div><p class="sec-lede">ما استُجد، وما تغيّر تصنيفه، وما أُغلق.</p><ul><li><strong>جديد:</strong> أربعة بلاغات هجوم رسمية من <span class="ltr">UKMTO</span> في مضيق هرمز، ثلاثة منها لوقائع يوم 12 أكتوبر (#169 · 13-01 · #168 · 13-02 · #167 · 13-03)، وبلاغ متأخر لحادث يوم 11 أكتوبر (13-04).</li><li><strong>جديد:</strong> إعلان إيراني عن استهداف ناقلة النفط الخام العملاقة «Al Maqam» (13-05)، بلا تأكيد من المشغّل حتى الآن.</li><li><strong>جديد:</strong> ضبط البحرية الفرنسية الناقلة «DF Peak» المشمولة بعقوبات الاتحاد الأوروبي في المحيط الهندي (13-06).</li><li><strong>تصنيف تغيّر:</strong> نشرة <span class="ltr">JMIC</span> صنّفت تهديد مضيق هرمز بـ«شديد» — ثاني أعلى تصنيف.</li><li><strong>أُغلق:</strong> بلاغ <span class="ltr">UKMTO</span> رقم 165 (إصابة مرسى صحار بمسيّرة) أُعيد تصنيفه هجومًا وأُدرج في الخلفية (#165 · 11-02).</li><li><strong>متابعة:</strong> مصير اثنين من الطاقم الهنود مفقودين بعد ضربة صحار، وأعمال الإنقاذ مستمرة.</li></ul></section><section class="doc pri reveal" id="sec-02" aria-labelledby="h-02"><h2 id="h-02"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 3h9l-1.2 3H19v8h-8.2L9.6 11H6v9H4z"/></svg></span>الخلاصة</h2><div class="h-rule"></div><p class="sec-lede">الموقف ومستوى التهديد والإجراء المقترح في ثلاثة أسطر.</p><p>تصاعد هجومي واضح في مضيق هرمز: أربعة بلاغات هجوم رسمية في فترة واحدة، وإعلان إيراني باستهداف ناقلة إماراتية. العبور التجاري ما زال معطّلًا فعليًا، وأعداد السفن المنتظرة مرتفعة، وعبور المضيق أدنى بكثير من المعتاد. الخطر مرتفع جدًا على السفن والطواقم في المضيق وخليج عُمان، ويُضاف إليه بُعد جديد في المحيط الهندي بسبب إنفاذ العقوبات.</p></section><section class="doc reveal" id="sec-03" aria-labelledby="h-03"><h2 id="h-03"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 4l6 2 5-2v14l-5 2-6-2-5 2V6zM9 4v14M15 6v14"/></svg></span>التوزيع الجغرافي للوقائع</h2><div class="h-rule"></div><p class="sec-lede">أين تركّزت الوقائع، وحصيلة <span class="ltr">IMO</span> حسب القطاعات.</p><ul><li><strong>مضيق هرمز:</strong> أربع بلاغات هجوم رسمية (ثلاث ناقلات وسفينة حاويات)، ومقذوفات غير محددة المصدر.</li><li><strong>خليج عُمان (مرسى صحار):</strong> إصابة ناقلة بمسيّرة ومفقودان — أثرها مستمر من 11 أكتوبر.</li><li><strong>المحيط الهندي:</strong> اعتراض الناقلة «DF Peak» وإنفاذ عقوبات الاتحاد الأوروبي.</li><li><strong>الخليج العربي:</strong> لا واقعة جديدة في الفترة.</li><li><strong>بحر العرب:</strong> لا واقعة جديدة في الفترة.</li><li><strong>البحر الأحمر وباب المندب وخليج عدن:</strong> لا واقعة بحرية جديدة؛ النشاط الصاروخي على الرياض سياق إقليمي مرتبط.</li></ul><div class="viz map-viz reveal"><div class="map-panel">
   <h3>خريطة الوقائع</h3><p class="blk-lede">مواقع الوقائع داخل نطاق التقرير.</p>
   <div class="map-wrap">

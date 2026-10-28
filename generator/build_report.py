@@ -476,7 +476,20 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .card, .decision, .dc, .blk, .blk *{background-image:none !important}
   .card, .decision, .dc{background:#fff !important}
   /* ك-245: منع انقسام مفتاح الخريطة بين صفحتين في PDF */
-  .map-key, .map-legend, .key-box, .mx-key { break-inside: avoid !important; page-break-inside: avoid !important; }
+  .map-key, .map-legend, .key-box, .mx-key,
+  .print-map, .print-map .hmap, .print-map .hmap-wrap { break-inside: avoid !important; page-break-inside: avoid !important; }
+  /* ك-245: المفتاح كامل في عمود واحد، وتلتصق كتلة الخريطة بذيل المحتوى */
+  .print-map{display:block !important}
+  .print-map .hmap-wrap{overflow:hidden !important}
+  .print-map .hmap-keys{display:block !important;margin:2mm 0 0;font-size:8.4pt;line-height:1.3}
+  .print-map .hmap-legend{grid-template-columns:minmax(0,1fr) !important;columns:1 !important;gap:0 !important;margin:1.5mm 0 0}
+  .print-map .hmap-legend li{break-inside:avoid !important;page-break-inside:avoid !important;margin:0 0 1mm !important;font-size:8.4pt !important;line-height:1.3 !important}
+  .print-map-distribution{break-inside:avoid !important;page-break-inside:avoid !important;margin-top:2mm}
+  .print-map-distribution h3{font-size:10pt;margin:1.5mm 0 1mm}
+  .print-map-distribution .dist-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5mm}
+  .print-map-distribution .dist-card{display:block !important;width:auto !important;margin:0 !important;padding:1.3mm 1.7mm;border:1px solid #cfd8e3;border-radius:1.2mm;background:#fff;color:#20303f;font-size:7.7pt;line-height:1.25;break-inside:avoid;page-break-inside:avoid}
+  .print-map-distribution .dist-card b{display:block;color:#0a1524;font-size:8pt;margin-bottom:.5mm}
+  .print-map-distribution .dist-card span{display:block}
 
   :root{
     --ink:#0a1524;--ink-2:#20303f;--muted:#4b5e73;--faint:#5c728c;
@@ -500,7 +513,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   #sec-03 .map-viz, .map-viz{break-inside:auto !important;page-break-inside:auto !important}
   .map-viz svg{break-inside:avoid !important;page-break-inside:avoid !important}
   .map-viz{padding:1.2mm 1.2mm}
-  /* مفتاح الخريطة في عمودين: يوفّر نحو 55 مم فيستقر القسم داخل ورقة واحدة */
+  /* لا يُقسَّم مفتاح hmap في الطباعة؛ النسخة المطبوعة تعلن عمودًا واحدًا صراحةً */
   .map-legend{columns:2;column-gap:8mm}
   .map-legend li{break-inside:avoid;margin:0 0 1.4mm;font-size:9pt;line-height:1.45}
   .map-legend .lg-txt{font-size:9pt}
@@ -636,6 +649,13 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   /* الغلاف ينتهي عند شريط التصنيف: أهم الأخبار المتعلقة بالأمن البحري تبدأ صفحة جديدة (يمنع العنوان اليتيم والفراغ) */
   .decision{break-inside:avoid !important;page-break-inside:avoid !important}
   .map-viz svg{max-height:145mm !important;width:100%;height:auto}
+  /* القاعدة الأخص تأتي بعد سياسة التدفق العامة حتى لا تنقضها */
+  .print-map{break-inside:avoid !important;page-break-inside:avoid !important}
+  .print-map .hmap-wrap{break-inside:avoid !important;page-break-inside:avoid !important;overflow:hidden !important}
+  .print-map .hmap-wrap{grid-template-columns:minmax(0,6fr) minmax(0,1fr) !important}
+  .print-map .hmap-zoom{border-inline-start:1.5px solid var(--accent) !important;border-top:0 !important}
+  .print-map .hmap-legend{grid-template-columns:minmax(0,1fr) !important;columns:1 !important}
+  .print-map .hmap-keys{display:block !important}
   /* محاذاة مضبوطة: تُغلق فراغات الجانبين في الفقرات والقوائم، ولا تمسّ العناوين والبطاقات */
   section.doc p,section.doc li,.sec-lede,.masthead .lede,.glossary li,.src-grid li,
   /* تصفير فقرات المتن والعناوين التمهيدية (قرار المالك 2026-10-22): يمنع الفراغ الجانبي */
@@ -712,7 +732,7 @@ def isolate_dtg(t: str) -> str:
     """ك-171: عزل نطاقات DTG داخل bdi فلا ينعكس ترتيبها في سياق RTL."""
     import re as _re
     return _re.sub(r"(?<![\w\d])(\d{6}Z\s*[–-]\s*\d{6}Z)(?![\w])",
-                   lambda m: f'<bdi class="bidi">{m.group(1)}</bdi>', t)
+                   lambda m: f'<bdi class="bidi" dir="ltr">{m.group(1)}</bdi>', t)
 
 
 def bdi(t: str) -> str:
@@ -732,8 +752,8 @@ def normalize_digits(s: str) -> str:
 
 def inline(text: str, defs: dict = None) -> str:
     """تحويل العناصر المضمّنة: عريض، مائل، كود، روابط، استشهادات."""
-    t = isolate_dtg(text)
     t = esc(text)
+    t = isolate_dtg(t)
     t = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", t)
     t = re.sub(r"(?<!\*)\*(?!\s)([^*\n]+?)\*(?!\*)", r"<em>\1</em>", t)
     t = re.sub(r"`([^`]+)`", r"<code>\1</code>", t)
@@ -1153,7 +1173,7 @@ def threat_class(threat: str) -> str:
 # ----------------------------------------------------------------------------
 # البناء
 # ----------------------------------------------------------------------------
-def hero_map(map_html: str) -> str:
+def hero_map(map_html: str, *, print_mode: bool = False, extra_html: str = "") -> str:
     """نسخة خريطة الوقائع للشاشة فقط، تظهر أعلى الصفحة (قرار فهد 22 أكتوبر 2026).
 
     الصنف no-print يحجبها في PDF، وWord يحذفه (STRIP_SELECTORS). أصنافها مغايرة لأصناف
@@ -1165,7 +1185,45 @@ def hero_map(map_html: str) -> str:
     for old, new in (("viz map-viz reveal", "hmap"), ("map-panel", "hmap-panel"), ("map-wrap", "hmap-wrap"),
                      ("map-svg", "hmap-svg"), ("map-legend", "hmap-legend"), ("map-keys", "hmap-keys")):
         h = h.replace(old, new)
+    if extra_html:
+        head, tail = h.rsplit("</div>", 1)
+        h = head + extra_html + "</div>" + tail
+    if print_mode:
+        return f'<section class="print-map" aria-label="خريطة الوقائع ومفتاحها">{h}</section>'
     return f'<section class="hero-map no-print" aria-hidden="true">{h}</section>'
+
+
+def render_print_distribution_cards(sections, defs) -> str:
+    """بطاقات توزيع صغيرة تُوضع أسفل مفتاح خريطة PDF عند نقل القسم إلى الإضافات."""
+    for sec in sections:
+        if "التوزيع الجغرافي" not in sec.get("title", ""):
+            continue
+        lines = sec.get("lines") or []
+        for i, ln in enumerate(lines[:-1]):
+            if not (ln.strip().startswith("|") and is_sep(lines[i + 1])):
+                continue
+            rows = [split_table_row(ln)]
+            j = i + 2
+            while j < len(lines) and lines[j].strip().startswith("|"):
+                rows.append(split_table_row(lines[j]))
+                j += 1
+            cards = []
+            for row in rows[1:]:
+                if len(row) < 2 or not row[0].strip():
+                    continue
+                detail = " · ".join(x for x in row[1:4] if x.strip())
+                cards.append(
+                    '<div class="dist-card">'
+                    f'<b>{inline(row[0], defs)}</b><span>{inline(detail, defs)}</span>'
+                    '</div>'
+                )
+            if cards:
+                return (
+                    '<div class="print-map-distribution" aria-label="بطاقات التوزيع الجغرافي">'
+                    '<h3>بطاقات التوزيع الجغرافي</h3>'
+                    '<div class="dist-cards">' + "".join(cards) + '</div></div>'
+                )
+    return ""
 
 
 def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mode: str = "report"):
@@ -1220,6 +1278,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
                 _hidset.discard(_a)
         sections = [x for x in sections if not any(h in x["title"] for h in _hidset)]
         sections = sorted(sections, key=_order_key)
+    source_sections = list(parse_sections(md))
     # كتل خاصة بكل قسم: خريطة عنوان القسم إلى اسم الكتلة
     blocks_map = meta.get("blocks") or {}
     block_data = {k: meta.get(k) for k in ("indicators", "hypotheses", "gaps", "event_keys", "timeline", "source_reliability", "vessel_identity", "report_classes", "intel_analysis")}
@@ -1246,12 +1305,16 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
             map_html = ""
 
     hero_map_html = ""
+    print_map_html = ""
     if map_html and not doc_mode:
         try:
             from map_gulf import build_map as _build_map_hero
 
-            hero_map_html = hero_map(_build_map_hero(mp["points"], mp.get("caption"), mp.get("inset"), zoom=True))
-        except Exception as e:  # لا يُسقط فشل خريطة الشاشة بناء التقرير
+            _hero_map_source = _build_map_hero(mp["points"], mp.get("caption"), mp.get("inset"), zoom=True)
+            hero_map_html = hero_map(_hero_map_source)
+            if mode == "additions":
+                print_map_html = hero_map(_hero_map_source, print_mode=True)
+        except Exception as e:  # لا يُسقط فشل الخريطة بناء التقرير
             print(f"تنبيه: تعذر توليد خريطة الشاشة العليا ({e})", file=sys.stderr)
 
     # شريط المؤشرات
@@ -1299,8 +1362,18 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
         if not codes.is_primary(t):
             section_html = codes.demote(section_html, report_date, official)
         if map_html and "التوزيع الجغرافي للوقائع" in t:
-            # جدول التوزيع أولًا ثم الخريطة: الجدول يمتدّ فيمتلئ الفراغ، والخريطة تأخذ مساحتها كاملة
-            section_html = section_html + map_html
+            # نسخة الإضافات المطبوعة تستخدم hmap بصفحة مستقلة ومفتاح كامل؛ لا تُكرر map-viz القديمة.
+            if mode == "additions" and print_map_html:
+                # أبقِ النص نفسه، لكن أخّر الفقرة التفسيرية الأخيرة بصريًا كي تتسع
+                # كتلة الخريطة ذات المفتاح الكامل في الصفحة التالية بلا ورقة شبه فارغة.
+                tail_para = ""
+                m = re.search(r"(<p>.*?</p>)\s*$", section_html, flags=re.S)
+                if m:
+                    tail_para = m.group(1)
+                    section_html = section_html[:m.start()]
+                section_html = section_html + print_map_html + tail_para
+            else:
+                section_html = section_html + map_html
         for key, bname in blocks_map.items():
             if key in t:
                 for _bn in str(bname).split('+'):
@@ -1461,6 +1534,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
 
 
 LTR_PATTERNS = [
+    r"\b\d{6}Z\s*[–—-]\s*\d{6}Z\b",                         # نطاق الفترة كاملًا في عزل واحد
     r"\b\d{4,6}Z(?:\s+[A-Z]{3}\s*\d{2})?\b",                       # DTG: 180400Z OCT 26
     r"\b\d{1,3}[-°]\d{1,2}(?:\.\d+)?['′]?\s*[NS]\b",               # 26-16.8N
     r"\b[NS]\s?\d{1,3}[°-]\d{1,2}(?:\.\d+)?['′]?",                  # N 057°40.65′
@@ -1472,6 +1546,7 @@ LTR_PATTERNS = [
     r"\b\d{2,3}/\d{2}\b", r"\b[A-Z][A-Z0-9]{2,}(?:\s+[A-Z0-9]{2,})*\b",
 ]
 _LTR_RE = None
+_PERIOD_RE = re.compile(r"^\d{6}Z\s*[–—-]\s*\d{6}Z$")
 
 
 def isolate_ltr(html: str) -> str:
@@ -1482,12 +1557,34 @@ def isolate_ltr(html: str) -> str:
     global _LTR_RE
     if _LTR_RE is None:
         _LTR_RE = re.compile("|".join(f"(?:{p})" for p in LTR_PATTERNS))
-    parts = re.split(r"(<[^>]+>)", html)
+    kept = []
+
+    def _keep_bdi(m):
+        kept.append(m.group(0))
+        return f"\x00{len(kept) - 1}\x00"
+
+    # لا نعيد تغليف bdi الموجود، خصوصًا شريحة الفترة التي يجب أن تبقى عزلًا واحدًا.
+    protected = re.sub(
+        r'<bdi\b[^>]*\bdir=["\']ltr["\'][^>]*>.*?</bdi>|'
+        r'<bdi\b[^>]*\bclass=["\'][^"\']*\bbidi\b[^"\']*["\'][^>]*>.*?</bdi>',
+        _keep_bdi,
+        html,
+        flags=re.S,
+    )
+    parts = re.split(r"(<[^>]+>)", protected)
+
+    def _wrap(m):
+        raw = re.sub(r"\s*([–—-])\s*", r"\1", m.group(0))
+        if _PERIOD_RE.fullmatch(raw):
+            return f'<bdi class="bidi" dir="ltr">{raw}</bdi>'
+        return f'<span class="ltr">{m.group(0)}</span>'
+
     for k, part in enumerate(parts):
         if not part or part.startswith("<"):
             continue
-        parts[k] = _LTR_RE.sub(lambda m: f'<span class="ltr">{m.group(0)}</span>', part)
-    return "".join(parts)
+        parts[k] = _LTR_RE.sub(_wrap, part)
+    out = "".join(parts)
+    return re.sub(r"\x00(\d+)\x00", lambda m: kept[int(m.group(1))], out)
 
 
 def main():

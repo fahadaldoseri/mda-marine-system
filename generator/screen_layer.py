@@ -182,7 +182,7 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
         lede = f'<p class="sc-lede">{inline(meta["lede"])}</p>'
     return (
         '<div class="sc-hero no-print">'
-        f'<p class="sc-eyebrow">{esc(eyebrow)}</p><h1 class="sc-h1">{h1}</h1>{lede}'
+        f'<p class="sc-eyebrow">{esc(eyebrow)}</p><h2 class="sc-h1">{h1}</h2>{lede}'
         f'<div class="sc-chips">{"".join(chips)}</div>{grid}</div>'
     )
 
@@ -317,22 +317,6 @@ body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,sys
    (شريط الخط الزمني). الحالة النهائية هي المقصودة، وهي ما كانت تُلتقط قبل الطيّ. */
 @media print{.tl-fill{animation:none}}
 
-/* إصلاح ك-246/ك-247/ك-248 (2026-10-28): أهداف لمس ≥44px · إلغاء قص الملخصات · مؤشر شريط القفز */
-@media screen and (max-width: 820px){
-  a, button, [role="button"], summary, .sc-toggle, .sn-brand, .sn-link, .hc-open,
-  #cont-link, .num, bdi { min-height:44px; }
-  a, button, [role="button"], summary { display:inline-flex; align-items:center; }
-  nav a, .sn-link, .p-btn, .sc-jump a, button, summary, .sc-toggle{ min-height:44px !important; min-width:44px !important; box-sizing:border-box; }
-  .sc-toggle, .sc-toggle.no-print { width:44px; height:44px; min-width:44px; }
-  .sc-peek, .sc-peek span, .sc-kn, .src .st, .sc-note,
-  nav a, .sn-link, .p-btn, .chip a, .sc-jump a, button, summary,
-  .sc-toggle, .hc-open, #cont-link {
-  .sc-gist, .sc-sum, [class*="clamp"], [class*="gist"] { -webkit-line-clamp:unset !important;
-    overflow:visible !important; max-height:none !important; display:block !important;
-    white-space:normal !important; text-overflow:clip !important; }
-  nav.sc-jump { -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 26px), transparent 100%);
-    mask-image:linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 26px), transparent 100%); }
-}
 """
 
 SCREEN_JS = r"""

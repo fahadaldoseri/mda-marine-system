@@ -326,7 +326,20 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .card, .decision, .dc, .blk, .blk *{background-image:none !important}
   .card, .decision, .dc{background:#fff !important}
   /* ك-245: منع انقسام مفتاح الخريطة بين صفحتين في <span class="ltr">PDF</span> */
-  .map-key, .map-legend, .key-box, .mx-key { break-inside: avoid !important; page-break-inside: avoid !important; }
+  .map-key, .map-legend, .key-box, .mx-key,
+  .print-map, .print-map .hmap, .print-map .hmap-wrap { break-inside: avoid !important; page-break-inside: avoid !important; }
+  /* ك-245: المفتاح كامل في عمود واحد، وتلتصق كتلة الخريطة بذيل المحتوى */
+  .print-map{display:block !important}
+  .print-map .hmap-wrap{overflow:hidden !important}
+  .print-map .hmap-keys{display:block !important;margin:2mm 0 0;font-size:8.4pt;line-height:1.3}
+  .print-map .hmap-legend{grid-template-columns:minmax(0,1fr) !important;columns:1 !important;gap:0 !important;margin:1.5mm 0 0}
+  .print-map .hmap-legend li{break-inside:avoid !important;page-break-inside:avoid !important;margin:0 0 1mm !important;font-size:8.4pt !important;line-height:1.3 !important}
+  .print-map-distribution{break-inside:avoid !important;page-break-inside:avoid !important;margin-top:2mm}
+  .print-map-distribution h3{font-size:10pt;margin:1.5mm 0 1mm}
+  .print-map-distribution .dist-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5mm}
+  .print-map-distribution .dist-card{display:block !important;width:auto !important;margin:0 !important;padding:1.3mm 1.7mm;border:1px solid #cfd8e3;border-radius:1.2mm;background:#fff;color:#20303f;font-size:7.7pt;line-height:1.25;break-inside:avoid;page-break-inside:avoid}
+  .print-map-distribution .dist-card b{display:block;color:#0a1524;font-size:8pt;margin-bottom:.5mm}
+  .print-map-distribution .dist-card span{display:block}
 
   :root{
     --ink:#0a1524;--ink-2:#20303f;--muted:#4b5e73;--faint:#5c728c;
@@ -350,7 +363,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   #sec-03 .map-viz, .map-viz{break-inside:auto !important;page-break-inside:auto !important}
   .map-viz svg{break-inside:avoid !important;page-break-inside:avoid !important}
   .map-viz{padding:1.2mm 1.2mm}
-  /* مفتاح الخريطة في عمودين: يوفّر نحو 55 مم فيستقر القسم داخل ورقة واحدة */
+  /* لا يُقسَّم مفتاح hmap في الطباعة؛ النسخة المطبوعة تعلن عمودًا واحدًا صراحةً */
   .map-legend{columns:2;column-gap:8mm}
   .map-legend li{break-inside:avoid;margin:0 0 1.4mm;font-size:9pt;line-height:1.45}
   .map-legend .lg-txt{font-size:9pt}
@@ -486,6 +499,13 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   /* الغلاف ينتهي عند شريط التصنيف: أهم الأخبار المتعلقة بالأمن البحري تبدأ صفحة جديدة (يمنع العنوان اليتيم والفراغ) */
   .decision{break-inside:avoid !important;page-break-inside:avoid !important}
   .map-viz svg{max-height:145mm !important;width:100%;height:auto}
+  /* القاعدة الأخص تأتي بعد سياسة التدفق العامة حتى لا تنقضها */
+  .print-map{break-inside:avoid !important;page-break-inside:avoid !important}
+  .print-map .hmap-wrap{break-inside:avoid !important;page-break-inside:avoid !important;overflow:hidden !important}
+  .print-map .hmap-wrap{grid-template-columns:minmax(0,6fr) minmax(0,1fr) !important}
+  .print-map .hmap-zoom{border-inline-start:1.5px solid var(--accent) !important;border-top:0 !important}
+  .print-map .hmap-legend{grid-template-columns:minmax(0,1fr) !important;columns:1 !important}
+  .print-map .hmap-keys{display:block !important}
   /* محاذاة مضبوطة: تُغلق فراغات الجانبين في الفقرات والقوائم، ولا تمسّ العناوين والبطاقات */
   section.doc p,section.doc li,.sec-lede,.masthead .lede,.glossary li,.src-grid li,
   /* تصفير فقرات المتن والعناوين التمهيدية (قرار المالك 2026-10-22): يمنع الفراغ الجانبي */
@@ -775,22 +795,6 @@ body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,sys
    (شريط الخط الزمني). الحالة النهائية هي المقصودة، وهي ما كانت تُلتقط قبل الطيّ. */
 @media print{.tl-fill{animation:none}}
 
-/* إصلاح ك-246/ك-247/ك-248 (2026-10-28): أهداف لمس ≥44px · إلغاء قص الملخصات · مؤشر شريط القفز */
-@media screen and (max-width: 820px){
-  a, button, [role="button"], summary, .sc-toggle, .sn-brand, .sn-link, .hc-open,
-  #cont-link, .num, bdi { min-height:44px; }
-  a, button, [role="button"], summary { display:inline-flex; align-items:center; }
-  nav a, .sn-link, .p-btn, .sc-jump a, button, summary, .sc-toggle{ min-height:44px !important; min-width:44px !important; box-sizing:border-box; }
-  .sc-toggle, .sc-toggle.no-print { width:44px; height:44px; min-width:44px; }
-  .sc-peek, .sc-peek span, .sc-kn, .src .st, .sc-note,
-  nav a, .sn-link, .p-btn, .chip a, .sc-jump a, button, summary,
-  .sc-toggle, .hc-open, #cont-link {
-  .sc-gist, .sc-sum, [class*="clamp"], [class*="gist"] { -webkit-line-clamp:unset !important;
-    overflow:visible !important; max-height:none !important; display:block !important;
-    white-space:normal !important; text-overflow:clip !important; }
-  nav.sc-jump { -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 26px), transparent 100%);
-    mask-image:linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 26px), transparent 100%); }
-}
 </style>
 <style>
 :root{--sn-bg:#040810;--sn-panel:#0b1524;--sn-line:#1b2b45;--sn-ink:#e9f0f9;--sn-ink2:#b9c8dc;
@@ -882,6 +886,47 @@ body.daylight .brand-title,body.daylight .brand-sub{color:#0d1a2b}
   .topbar .brand-title{font-size:13.5px;line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
   .topbar .tb-meta{display:flex;gap:6px;flex:0 0 auto}
   .topbar .btn{min-height:40px;padding:6px 10px}
+}
+/* أهداف لمس وقص النص على الجوال — الشاشة فقط */
+@media screen and (max-width:820px){
+  a, button, [role="button"], summary {
+    min-height:44px !important;
+    min-width:44px !important;
+    display:inline-flex;
+    align-items:center;
+    box-sizing:border-box;
+  }
+  nav a, .sn-link, .sn-brand, .p-btn, .chip a, .sc-jump a,
+  button, summary, .sc-toggle {
+    min-height:44px !important;
+    min-width:44px !important;
+    padding-block:8px;
+  }
+  .sc-toggle, .sc-toggle.no-print {
+    width:44px;
+    height:44px;
+    min-width:44px;
+  }
+  td a, th a, table a, .src a, .st a {
+    min-height:44px !important;
+    min-width:44px !important;
+    display:inline-flex;
+    align-items:center;
+    box-sizing:border-box;
+    padding-block:8px;
+    vertical-align:middle;
+  }
+  .sc-peek, .sc-peek span, .sc-kn, .sc-gist, .sc-sum,
+  [class*="clamp"], [class*="gist"] {
+    -webkit-line-clamp:unset !important;
+    display:block !important;
+    max-height:none !important;
+    overflow:visible !important;
+    white-space:normal !important;
+    text-overflow:clip !important;
+  }
+  nav.sc-jump { -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 26px), transparent 100%);
+    mask-image:linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 26px), transparent 100%); }
 }
 html{scroll-padding-top:calc(var(--nav-h, 60px) + var(--bar-h, 0px) + 12px);scroll-padding-bottom:80px}
 section.doc{scroll-margin-top:0 !important}
@@ -992,14 +1037,14 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     <div class="threat risk-high"><div class="lbl">مستوى التهديد</div><div class="val">مرتفع</div></div>
     <div>
       <p class="lede">اختبار عدم التناسب بين حصة الإصابات وحصة التعرّض في مضيق هرمز. النتيجة: إصابات أسطول أدنوك تتجاوز المتوقع بأكثر من الضعف حتى في أشد الفروض تحفّظًا، فنسبة عدم التناسب بين 2.3 و12.2 ضعفًا — ما يميل بالترجيح إلى الاستهداف لا إلى التعرّض المرتفع وحده. ويُصحّح التقرير رقمًا سابقًا: 32 ناقلة تخص أسطول Navig8 لا إجمالي أدنوك.</p>
-      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-28 10:39 <span class="ltr">UTC</span></b></span></div>
+      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-28 12:11 <span class="ltr">UTC</span></b></span></div>
     </div>
   </header>
 
   <div class="cls-banner c-open">تصنيف الإصدار: خاص</div>
   
   <div class="kpis"><div class="kpi acc-ok reveal"><em></em><div class="k-l">حصة تعرّض أدنوك</div><div class="k-v bidi">2.3%</div><div class="k-n">نحو 5 عبورات أسبوعيًا من 30.25 يوميًا</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">حصة إصاباتها</div><div class="k-v bidi">15–28%</div><div class="k-n">15 سفينة من 53–100 واقعة</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">نسبة عدم التناسب R</div><div class="k-v bidi">2.3–12.2×</div><div class="k-n">أدنى سيناريو فوق عتبة الاستهداف</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">الحكم</div><div class="k-v bidi">استهداف لا تعرّض</div><div class="k-n">ثقة متوسطة إلى مرتفعة</div></div></div>
-  <div class="sc-hero no-print"><p class="sc-eyebrow">تقرير خاص</p><h1 class="sc-h1">مقام التعرّض: هل هي استهداف أم تعرّض؟</h1><p class="sc-lede">اختبار عدم التناسب بين حصة الإصابات وحصة التعرّض في مضيق هرمز. النتيجة: إصابات أسطول أدنوك تتجاوز المتوقع بأكثر من الضعف حتى في أشد الفروض تحفّظًا، فنسبة عدم التناسب بين 2.3 و12.2 ضعفًا — ما يميل بالترجيح إلى الاستهداف لا إلى التعرّض المرتفع وحده. ويُصحّح التقرير رقمًا سابقًا: 32 ناقلة تخص أسطول Navig8 لا إجمالي أدنوك.</p><div class="sc-chips"></div><div class="sc-grid sc-solo"><div class="sc-side"><div class="sc-threat risk-high"><div class="sc-tl">مستوى التهديد</div><div class="sc-tv">مرتفع</div></div><div class="sc-kpis"><div class="sc-kpi acc-ok"><div class="sc-kl">حصة تعرّض أدنوك</div><div class="sc-kv bidi">2.3%</div><div class="sc-kn">نحو 5 عبورات أسبوعيًا من 30.25 يوميًا</div></div><div class="sc-kpi acc-ok"><div class="sc-kl">حصة إصاباتها</div><div class="sc-kv bidi">15–28%</div><div class="sc-kn">15 سفينة من 53–100 واقعة</div></div><div class="sc-kpi acc-ok"><div class="sc-kl">نسبة عدم التناسب R</div><div class="sc-kv bidi">2.3–12.2×</div><div class="sc-kn">أدنى سيناريو فوق عتبة الاستهداف</div></div><div class="sc-kpi acc-ok"><div class="sc-kl">الحكم</div><div class="sc-kv bidi">استهداف لا تعرّض</div><div class="sc-kn">ثقة متوسطة إلى مرتفعة</div></div></div></div></div></div>
+  <div class="sc-hero no-print"><p class="sc-eyebrow">تقرير خاص</p><h2 class="sc-h1">مقام التعرّض: هل هي استهداف أم تعرّض؟</h2><p class="sc-lede">اختبار عدم التناسب بين حصة الإصابات وحصة التعرّض في مضيق هرمز. النتيجة: إصابات أسطول أدنوك تتجاوز المتوقع بأكثر من الضعف حتى في أشد الفروض تحفّظًا، فنسبة عدم التناسب بين 2.3 و12.2 ضعفًا — ما يميل بالترجيح إلى الاستهداف لا إلى التعرّض المرتفع وحده. ويُصحّح التقرير رقمًا سابقًا: 32 ناقلة تخص أسطول Navig8 لا إجمالي أدنوك.</p><div class="sc-chips"></div><div class="sc-grid sc-solo"><div class="sc-side"><div class="sc-threat risk-high"><div class="sc-tl">مستوى التهديد</div><div class="sc-tv">مرتفع</div></div><div class="sc-kpis"><div class="sc-kpi acc-ok"><div class="sc-kl">حصة تعرّض أدنوك</div><div class="sc-kv bidi">2.3%</div><div class="sc-kn">نحو 5 عبورات أسبوعيًا من 30.25 يوميًا</div></div><div class="sc-kpi acc-ok"><div class="sc-kl">حصة إصاباتها</div><div class="sc-kv bidi">15–28%</div><div class="sc-kn">15 سفينة من 53–100 واقعة</div></div><div class="sc-kpi acc-ok"><div class="sc-kl">نسبة عدم التناسب R</div><div class="sc-kv bidi">2.3–12.2×</div><div class="sc-kn">أدنى سيناريو فوق عتبة الاستهداف</div></div><div class="sc-kpi acc-ok"><div class="sc-kl">الحكم</div><div class="sc-kv bidi">استهداف لا تعرّض</div><div class="sc-kn">ثقة متوسطة إلى مرتفعة</div></div></div></div></div></div>
   
   <div class="notice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/></svg><div>تقرير تحليلي خاص. الحساب يقيس عدم التناسب ولا يُثبت نيّة ولا يسمّي جهة منفّذة، وكل رقم يحمل درجته وكل تقدير يحمل افتراضه.</div></div>
   
@@ -1319,7 +1364,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> مقام التعرّض — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: <span class="ltr">UTC</span> وتوقيت البحرين (<span class="ltr">UTC</span>+3).
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-28 10:39 <span class="ltr">UTC</span></bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-28 12:11 UTC</bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
     
   </footer>
 </div>
