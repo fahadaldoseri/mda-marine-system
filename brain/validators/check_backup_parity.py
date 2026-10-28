@@ -37,6 +37,7 @@ VOLATILE = (
 )
 # مخرجات مولّدة آليًا: تُستثنى من النسخ فلا تُحسب انحرافًا (عطل ك-18)
 SKIP_GLOBS = ("brain/reports/docx/التقرير-اليومي-", "brain/reports/pdf/")
+REPO_ONLY_PATTERNS = ("/shots/", "reports/docx/", "reports/pdf/", "backup-repo/", "__pycache__/", "site/dist/")
 ALLOW_REPO_ONLY = (
     "brain/backup-repo/",  # نسخة مستودع داخلية: لا تُنسخ للخادم
 
@@ -252,6 +253,8 @@ def main() -> int:
             drift.append(f"محتوى مختلف: {rel}")
     for rel in sorted(repo):
         if rel not in local:
+            if rel.startswith(ALLOW_REPO_ONLY) or any(x in rel for x in REPO_ONLY_PATTERNS):
+                continue                     # داخل المستودع بحكم السياسة (لقطات/مخرجات/أرشيف) ولا يُنسخ للخادم
             drift.append(f"زائد في المستودع: {rel}")
 
     print(f"  الشجرة المحلية: {len(local)} · المستودع: {len(repo)} · الروابط: "
