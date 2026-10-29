@@ -1,9 +1,9 @@
 {
  "date": "2026-10-29",
- "status": "ok",
+ "status": "degraded",
  "checked": 60,
- "ok": 60,
- "failed": 0,
+ "ok": 59,
+ "failed": 1,
  "browser_only": [],
  "manual_reference": [
   39,
@@ -17,9 +17,9 @@
  ],
  "empty": [],
  "stale_days_limit": 14,
- "fail_ratio": 0.0,
+ "fail_ratio": 0.017,
  "fail_ratio_limit": 0.2,
- "items": 1886,
+ "items": 1867,
  "checked_feeds": [
   {
    "num": 1,
@@ -41,7 +41,7 @@
    "via": "primary",
    "fetched_url": "https://r.jina.ai/https://www.ukmto.org/ukmto-products/warnings/2026",
    "items_count": 8,
-   "content_chars": 1175,
+   "content_chars": 1198,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -89,7 +89,7 @@
    "via": "primary",
    "fetched_url": "https://straits.live/feed.xml",
    "items_count": 59,
-   "content_chars": 35942,
+   "content_chars": 35743,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -309,7 +309,7 @@
    "via": "primary",
    "fetched_url": "https://www.albiladpress.com/rss",
    "items_count": 100,
-   "content_chars": 16661,
+   "content_chars": 16689,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -321,7 +321,7 @@
    "via": "primary",
    "fetched_url": "https://www.gdnonline.com",
    "items_count": 48,
-   "content_chars": 21101,
+   "content_chars": 20779,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -442,7 +442,7 @@
    "via": "fallback:omannews-home",
    "fetched_url": "https://omannews.gov.om/",
    "items_count": 49,
-   "content_chars": 8074,
+   "content_chars": 8075,
    "latest_age_days": null,
    "tls_verification": "disabled_source_28_only"
   },
@@ -618,24 +618,25 @@
    "num": 40,
    "name": "MarineTraffic",
    "primary_url": "https://www.marinetraffic.com/en/maritime-news",
-   "ok": true,
-   "via": "official-page:jina.ai/marinetraffic-news",
-   "fetched_url": "https://r.jina.ai/https://www.marinetraffic.com/en/maritime-news",
-   "items_count": 27,
-   "content_chars": 13118,
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
    "latest_age_days": null,
-   "tls_verification": "verified"
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: derived items without real content (1) | official-page:jina.ai/marinetraffic-news: derived items without real content (1) | browser: derived items without real content (1)"
   },
   {
    "num": 41,
    "name": "USNI News",
    "primary_url": "https://news.usni.org/feed",
    "ok": true,
-   "via": "browser",
-   "fetched_url": "https://news.usni.org/feed",
-   "items_count": 30,
-   "content_chars": 200831,
-   "latest_age_days": 0,
+   "via": "official-page:jina.ai/usni-news",
+   "fetched_url": "https://r.jina.ai/https://news.usni.org/",
+   "items_count": 37,
+   "content_chars": 8654,
+   "latest_age_days": null,
    "tls_verification": "verified"
   },
   {
@@ -659,7 +660,7 @@
    "via": "primary",
    "fetched_url": "https://maritime-executive.com/",
    "items_count": 31,
-   "content_chars": 19563,
+   "content_chars": 19504,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -803,7 +804,7 @@
    "via": "primary",
    "fetched_url": "https://feeds.bloomberg.com/markets/news.rss",
    "items_count": 20,
-   "content_chars": 3356,
+   "content_chars": 3365,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -887,7 +888,7 @@
    "via": "primary",
    "fetched_url": "https://x.com/us5thfleet",
    "items_count": 5,
-   "content_chars": 1871,
+   "content_chars": 1873,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -923,7 +924,7 @@
    "via": "primary",
    "fetched_url": "https://t.me/s/army21ye",
    "items_count": 19,
-   "content_chars": 8879,
+   "content_chars": 8877,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -947,7 +948,7 @@
    "via": "primary",
    "fetched_url": "https://x.com/ERYANIM",
    "items_count": 3,
-   "content_chars": 2377,
+   "content_chars": 2376,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -970,8 +971,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://x.com/AlArabiya",
-   "items_count": 4,
-   "content_chars": 1698,
+   "items_count": 5,
+   "content_chars": 1680,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -1000,7 +1001,38 @@
    "tls_verification": "verified"
   }
  ],
- "failed_feeds": [],
+ "failed_feeds": [
+  {
+   "num": 40,
+   "name": "MarineTraffic",
+   "primary_url": "https://www.marinetraffic.com/en/maritime-news",
+   "error": "derived items without real content (1)",
+   "block_reason": "all routes failed: primary: derived items without real content (1) | official-page:jina.ai/marinetraffic-news: derived items without real content (1) | browser: derived items without real content (1)",
+   "attempts": [
+    {
+     "url": "https://www.marinetraffic.com/en/maritime-news",
+     "via": "primary",
+     "ok": false,
+     "error": "derived items without real content (1)",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://r.jina.ai/https://www.marinetraffic.com/en/maritime-news",
+     "via": "official-page:jina.ai/marinetraffic-news",
+     "ok": false,
+     "error": "derived items without real content (1)",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://www.marinetraffic.com/",
+     "via": "browser",
+     "ok": false,
+     "error": "derived items without real content (1)",
+     "tls_verification": "verified"
+    }
+   ]
+  }
+ ],
  "failed_attempts": [
   {
    "num": 14,
@@ -1038,6 +1070,13 @@
    "block_reason": "all routes failed: primary: derived items without real content (2)"
   },
   {
+   "num": 40,
+   "name": "MarineTraffic",
+   "via": null,
+   "error": "derived items without real content (1)",
+   "block_reason": "all routes failed: primary: derived items without real content (1) | official-page:jina.ai/marinetraffic-news: derived items without real content (1) | browser: derived items without real content (1)"
+  },
+  {
    "num": 42,
    "name": "Naval News",
    "via": null,
@@ -1045,5 +1084,5 @@
    "block_reason": "all routes failed: primary: HTTP Error 503: Service Temporarily Unavailable"
   }
  ],
- "written_utc": "2026-10-28T23:47:02Z"
+ "written_utc": "2026-10-28T23:57:18Z"
 }
