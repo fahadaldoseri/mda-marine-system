@@ -34,6 +34,14 @@ echo "── بوابة المحرّك قبل $MODE ($D) ──"
 python3 "$B/tools/runbook.py" gates-status --date "$D" --root "$B" || {
   echo "✘ رُفض $MODE: سجل المحرّك لا يُظهر اكتمال البوابات. لا نشر خارج المحرّك."
   exit 2; }
+   # ك-312: حكم البوابات الفعلي — لا يكفي الاكتمال، يجب ألّا يكون في أي سجل حكم مانع.
+   python3 "$B/tools/gate_verdict.py" --date "$D" --root "$B" --json "$B/logs/gate-verdict-$D.json" || {
+     echo "✘ رُفض $MODE: بوابة بحكم مانع في سجل $D. أصلح ثم أعد تشغيل البوابة. لا نشر."
+     exit 2; }
+   # ك-315: تماثل النسخة الإنجليزية يُفحص في النشر نفسه (فشل مغلق).
+   python3 "$B/validators/check_en_parity.py" --date "$D" || {
+     echo "✘ رُفض $MODE: النسخة الإنجليزية غير مطابقة للعربية. لا نشر."
+     exit 2; }
 
 if [ "$MODE" = telegram ]; then
   OUT="$B/logs/publish-$D-telegram.json"

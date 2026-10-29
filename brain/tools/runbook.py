@@ -194,14 +194,16 @@ def prior_ok(m, ledger, idx):
 
 
 # ───────────────────────── run / complete ─────────────────────────
-def run(root, date, only_phase=None):
+def run(root, date, only_phase=None, redo=None):
+    """redo: معرّفات خطوات تُعاد للتحقق لأن مدخلاتها تغيّرت (ك-321) — لا تُقبل خطوة مكتملة قديمة."""
+    redo = set(redo or ())
     m = load(root)
     ledger = read_ledger(root, m, date)
     for i, s in enumerate(m["steps"]):
         if only_phase and s.get("phase") != only_phase:
             continue
         e = ledger.get(s["id"])
-        if e and e["status"] in ("done", "done_warn"):
+        if e and e["status"] in ("done", "done_warn") and s["id"] not in redo:
             continue
         blocker = prior_ok(m, ledger, i)
         if blocker:
@@ -738,14 +740,15 @@ def main():
     ap.add_argument("--kind")
     ap.add_argument("--after", default="START")
     ap.add_argument("--through", help="gate-json: آخر خطوة تُحسب (ما بعدها لم يحن وقته)")
+    ap.add_argument("--redo", default="", help="معرّفات خطوات تُعاد للتحقق بعد تغيّر مدخلاتها، مفصولة بفاصلة (ك-321)")
     a = ap.parse_args()
     c = a.cmd
     if c == "verify":
         return verify(a.root)
     if c == "run":
-        return run(a.root, a.date)
+        return run(a.root, a.date, redo=[x for x in a.redo.split(",") if x.strip()])
     if c == "gates":
-        return run(a.root, a.date, only_phase="gates")
+        return run(a.root, a.date, only_phase="gates", redo=[x for x in a.redo.split(",") if x.strip()])
     if c == "gate-json":
         return gate_json(a.root, a.date, a.through)
     if c == "gates-status":

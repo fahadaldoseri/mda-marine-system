@@ -13,8 +13,23 @@
 """
 import argparse, json, pathlib, re, sys
 
-BRAIN = pathlib.Path('/home/ubuntu/brain-marine-news')
-SITE = pathlib.Path('/home/ubuntu/seawatch')
+import os
+
+
+def _root(env: str, base: pathlib.Path, *names: str) -> pathlib.Path:
+    """جذر الشجرة: من متغيّر البيئة أو من مجلد شقيق معتمد (قابلية النقل)."""
+    v = os.environ.get(env)
+    if v:
+        return pathlib.Path(v)
+    for n in names:
+        if (base / n).is_dir():
+            return base / n
+    return base / names[0]
+
+
+_HOME = pathlib.Path(__file__).resolve().parents[1].parent
+BRAIN = _root("BRAIN_DIR", _HOME, "brain-marine-news", "brain")
+SITE = _root("SITE_DIR", _HOME, "seawatch", "site")
 
 
 def fail(msg):
