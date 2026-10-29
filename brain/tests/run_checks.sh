@@ -1,3 +1,13 @@
+
+# بوابة تماثل النسخة الإنجليزية مع المتن (تفشل مغلقًا إن أُسقط رقم أو كود)
+ENMD="$SITE/sources/i18n/en/${SURFACE_DATE}-sectioned.en.md"
+if [ -f "$ENMD" ]; then
+  if python3 "$B/validators/check_en_parity.py" --date "$SURFACE_DATE" >/dev/null 2>&1; then
+    ok "EN-parity-${SURFACE_DATE}"
+  else
+    bad "EN-parity-${SURFACE_DATE} — الترجمة تفقد بنية أو رقمًا"
+  fi
+fi
 #!/usr/bin/env bash
 # اختبارات البوابات — تُشغَّل بعد كل إصلاح: bash tests/run_checks.sh
 # الغرض: إثبات أن سلوك البوابة في الحالات الحرجة صحيح، لا مجرد قراءة الشيفرة.
