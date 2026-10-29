@@ -1,1 +1,1 @@
-../../site/generator/monthly_dashboard.py
+/home/ubuntu/seawatch/generator/monthly_dashboard.py
