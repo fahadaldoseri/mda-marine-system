@@ -1,1 +1,1 @@
-/home/ubuntu/seawatch/generator/verify.py
+../../site/generator/verify.py
