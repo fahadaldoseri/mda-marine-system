@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-29T11:47:25Z",
+  "generated_at": "2026-10-29T20:12:46Z",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -2410,6 +2410,27 @@
       "lesson_id": "ك-309",
       "barrier_id": "B-225a47c0",
       "run_evidence": "python3 tests/test_sections_registry_vs_report.py 2026-10-29 → «السجل متسق مع 17 قسمًا» · خرج 0"
+    },
+    {
+      "fault_id": "ك-310",
+      "state": "مغلق",
+      "lesson_id": "ك-310",
+      "barrier_id": "B-9d6a4c1b",
+      "run_evidence": "python3 tools/check_lang_switch_live.py --url https://seawatch-xp4qirmr.manus.space --date 2026-10-29 → خرج 0 · ✔ لا أخطاء JavaScript في أي مرحلة"
+    },
+    {
+      "fault_id": "ك-311",
+      "state": "مغلق",
+      "lesson_id": "ك-311",
+      "barrier_id": "B-43935073",
+      "run_evidence": "bash -c \"curl -s https://seawatch-xp4qirmr.manus.space/reports/en/index.json\" → خرج 0 · الفهرس 200 ويتضمن 2026-10-29 · وبوابة اللغة خرج 0 بانتقال زر EN فعليًا"
+    },
+    {
+      "fault_id": "ك-312",
+      "state": "مغلق",
+      "lesson_id": "ك-312",
+      "barrier_id": "B-0b07cfc8",
+      "run_evidence": "python3 tools/check_lang_switch_live.py --url https://seawatch-xp4qirmr.manus.space --date 2026-10-29 → خرج 0 · ✔ التفضيل المحفوظ لا يغيّر لغة الصفحة العربية وزر ع يعيد بلغتها"
     }
   ]
 }

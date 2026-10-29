@@ -1,4 +1,13 @@
 
+# بوابة زرّي اللغة على الموقع المنشور (تُشغَّل عند تمرير LIVE_URL)
+if [ -n "${LIVE_URL:-}" ]; then
+  if timeout 700 python3 "$B/tools/check_lang_switch_live.py" --url "$LIVE_URL" --date "${SURFACE_DATE:-$(date -u +%F)}" >/dev/null 2>&1; then
+    ok "lang-switch-live"
+  else
+    bad "lang-switch-live — زرّا اللغة لا يعملان على الموقع المنشور"
+  fi
+fi
+
 # بوابة تماثل النسخة الإنجليزية مع المتن (تفشل مغلقًا إن أُسقط رقم أو كود)
 ENMD="$SITE/sources/i18n/en/${SURFACE_DATE}-sectioned.en.md"
 if [ -f "$ENMD" ]; then
