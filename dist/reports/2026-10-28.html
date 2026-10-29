@@ -1371,20 +1371,20 @@ document.querySelectorAll('[data-scale]').forEach(function(b){
 });
 var I18N={ar:{"skip": "الانتقال إلى المحتوى", "menu": "القائمة", "home": "الرئيسية", "special": "التقارير الخاصة", "archive": "الأرشيف", "monthly": "اللوحة الشهرية", "cumulative": "السجل التراكمي", "sources": "المصادر والمراجع", "additions": "إضافات", "scale": "حجم الخط", "theme-dark": "المظهر: ليلي", "theme-light": "المظهر: نهاري", "print": "طباعة / PDF", "lang": "اللغة", "foot2-html": "تُحدَّث الصفحات آليًا مع كل إصدار · <a href=\"/#archive\">الأرشيف الكامل</a> · <a href=\"/feed.xml\">تغذية الإصدارات</a>", "no-en": "النسخة الإنجليزية لهذا الإصدار غير متاحة بعد."},en:{"skip": "Skip to content", "menu": "Menu", "home": "Home", "special": "Special reports", "archive": "Archive", "monthly": "Monthly dashboard", "cumulative": "Cumulative record", "sources": "Sources & references", "additions": "Additions", "scale": "Font size", "theme-dark": "Theme: night", "theme-light": "Theme: day", "print": "Print / PDF", "lang": "Language", "foot2-html": "Pages update automatically with every edition · <a href=\"/#archive\">Full archive</a> · <a href=\"/feed.xml\">Edition feed</a>", "no-en": "The English edition of this report is not available yet."}};
 function currentLang(){var lock=document.documentElement.getAttribute('data-lang');if(lock)return lock;var l=LS.getItem('mn-lang');return (l==='en')?'en':'ar';}
-function t(key){var d=I18N[currentLang()];return (d&&d[key])||I18N.ar[key]||'';}
+function i18nTxt(key){var d=I18N[currentLang()];return (d&&d[key])||I18N.ar[key]||'';}
 var _b=document.querySelector('.sn-name'), _s=document.querySelector('.sn-name em');
 var BRAND_TXT=_b?(_b.childNodes[0].nodeValue||'').trim():'', BRAND_SUB_TXT=_s?_s.textContent.trim():'';
 function paintLang(){
   var l=currentLang();
-  document.querySelectorAll('[data-i18n]').forEach(function(el){var v=t(el.getAttribute('data-i18n'));if(v)el.textContent=v;});
-  document.querySelectorAll('[data-i18n-aria]').forEach(function(el){var v=t(el.getAttribute('data-i18n-aria'));if(v)el.setAttribute('aria-label',v);});
+  document.querySelectorAll('[data-i18n]').forEach(function(el){var v=i18nTxt(el.getAttribute('data-i18n'));if(v)el.textContent=v;});
+  document.querySelectorAll('[data-i18n-aria]').forEach(function(el){var v=i18nTxt(el.getAttribute('data-i18n-aria'));if(v)el.setAttribute('aria-label',v);});
   var f1=document.querySelector('[data-i18n-html="foot1"]'); if(f1) f1.textContent=BRAND_TXT+' — '+BRAND_SUB_TXT;
-  var f2=document.querySelector('[data-i18n-html="foot2"]'); if(f2) f2.innerHTML=t('foot2-html');
+  var f2=document.querySelector('[data-i18n-html="foot2"]'); if(f2) f2.innerHTML=i18nTxt('foot2-html');
   document.querySelectorAll('[data-lang]').forEach(function(b){b.classList.toggle('on', b.getAttribute('data-lang')===l);});
   var rb=document.getElementById('btn-theme'), sb=document.getElementById('sn-theme');
   var L=(l==='en'), light=body.classList.contains('daylight');
   if(rb) rb.textContent = light ? (L?'Night mode':'النمط الليلي') : (L?'Day mode':'النمط النهاري');
-  if(sb) sb.textContent = light ? t('theme-light') : t('theme-dark');
+  if(sb) sb.textContent = light ? i18nTxt('theme-light') : i18nTxt('theme-dark');
 }
 function note(msg){
   var n=document.getElementById('sn-lang-note');
@@ -1396,10 +1396,10 @@ function routeLang(l){
   if(!m) return;
   var isEn=!!m[1], date=m[2];
   if(l==='en'&&!isEn){
-    fetch('/reports/en/index.json').then(function(r){return r.ok?r.json():null;}).then(function(d){
+    fetch('/reports/en/index.json?ts='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){
       var list=(d&&d.dates)||[];
-      if(list.indexOf(date)>=0){ location.href='/reports/en/'+date+'.html'; } else { note(t('no-en')); }
-    }).catch(function(){ note(t('no-en')); });
+      if(list.indexOf(date)>=0){ location.href='/reports/en/'+date+'.html'; } else { note(i18nTxt('no-en')); }
+    }).catch(function(){ note(i18nTxt('no-en')); });
   } else if(l==='ar'&&isEn){
     location.href='/reports/'+date+'.html';
   }
