@@ -74,6 +74,11 @@ def main():
     if style.get('waw_runs3'):
         print(f'    تتابع ثلاثي مبدوء بـ«و»: {style["waw_runs3"]} · جمل طويلة: {style.get("long", 0)}')
     print(f'  · الجمل المبدوءة بـ«و»: {waw}% (السقف {g["waw_sentence_pct_max"]}% · الهدف {cfg["targets"]["waw_sentence_pct"]}%)')
+    mon = cfg.get('monitoring', {}).get('waw_sentence_pct', {})
+    tgt = mon.get('target', cfg['targets']['waw_sentence_pct'])
+    state = 'داخل الهدف' if waw <= tgt else ('بين الهدف والسقف' if waw <= g['waw_sentence_pct_max'] else 'فوق السقف')
+    print(f'  · بند مراقبة «و» لكل تقرير: {waw}% · الهدف {tgt}% · السقف {g["waw_sentence_pct_max"]}%'
+          f' · الحالة: {state} · السجل: logs/style-metrics-{a.date}.json')
     if fails:
         for f in fails:
             print(f'  ✘ {f}')

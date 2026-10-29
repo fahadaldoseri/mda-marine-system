@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة b53a0e1bae281513). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة b7ba80d2ba6504f8). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -55,7 +55,7 @@
 | G034 | عيوب الكتابة (الصياغة والترقيم) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G034.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_prose_defects.py | stop |
 | G035 | تسرّب المحتوى الداخلي إلى المتن | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G035.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_internal_leak.py | stop |
 | G036 | المفردات المبسطة (تنبيهي حتى الموافقة) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G036.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_vocabulary.py | stop |
-| G044 | السجل الحاكم للمفردات ومُولَّده | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G044.log | ف1–ف5 — بوابة التحقق، ط15 — مدى بوابة الأسلوب | tools/final_gate.sh، tools/build_vocab_gate.py، appendices/simplified-vocabulary.json، tools/vocab_review.py | stop |
+| G044 | السجل الحاكم للمفردات ومُولَّده | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G044.log | ف1–ف5 — بوابة التحقق، ط15 — مدى بوابة الأسلوب | tools/final_gate.sh، tools/build_vocab_gate.py، appendices/simplified-vocabulary.json، tools/vocab_review.py، tools/lexicon_wiring.py، sections/20-lexicon.md | stop |
 | G048 | بوابة الإغلاق (الأعطال والاستثناءات) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G048.log | ف3 — إغلاق الأعطال | validators/check_closure.py | stop |
 | G040 | اختبارات المراجعة الثانية (أ · ب · ج · د · هـ · ز) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G040.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tests/test_review2.sh | stop |
 | G041 | اختبار انحدار المصلح (12→23) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G041.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tests/test_repair_regression.sh | stop |
