@@ -454,6 +454,18 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .ev-meta .ev-k{display:block;font-size:11.5px;color:var(--muted);opacity:.85;margin-bottom:2px}
 .ev-meta .ev-mv{display:block;color:var(--ink-2)}
 @media (max-width:820px){.ev-grid{grid-template-columns:1fr}}
+.dg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px;margin:16px 0 10px}
+.dg{position:relative;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:14px 16px 13px;overflow:hidden}
+.dg-top{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.dg-idx{font-variant-numeric:tabular-nums;font-size:12px;color:var(--muted);border:1px solid var(--line-2);border-radius:6px;padding:1px 6px}
+.dg-t{font-size:14px;color:var(--ink)}
+.dg-badge{margin-inline-start:auto;font-size:11.5px;line-height:1;padding:4px 10px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2)}
+.dg-body{margin:0 0 9px;font-size:13.5px;line-height:1.85;color:var(--ink-2)}
+.dg-meta{display:flex;flex-direction:column;gap:5px;margin:0;padding-top:8px;border-top:1px dashed var(--line)}
+.dg-f{display:grid;grid-template-columns:auto 1fr;gap:2px 8px;font-size:12.5px;line-height:1.7}
+.dg-k{color:var(--muted);font-size:11.5px;opacity:.9}
+.dg-v{color:var(--ink-2)}
+@media (max-width:820px){.dg-grid{grid-template-columns:1fr}}
 
 /* ---------- التذييل ---------- */
 .foot{margin-top:34px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);color:var(--muted);font-size:13.5px}
@@ -619,6 +631,15 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
      .ev-meta{margin-top:1.8mm;padding-top:1.4mm}
      .ev-meta{font-size:9.5pt;color:#4a5b73;border-top-color:#dbe3ec}
      .ev-idx,.ev-code,.ev-badge{font-size:9pt;color:#4a5b73;border-color:#c3cedb}
+     .dg-grid{display:block;margin:4mm 0 0}
+     .dg{display:block;margin:0 0 3mm;padding:3.2mm 4mm 2.8mm;break-inside:avoid;page-break-inside:avoid;border-color:#dbe3ec;background:#fff}
+     .dg-top{margin-bottom:1.4mm}
+     .dg-t{font-size:10pt}
+     .dg-body{font-size:9.5pt;line-height:1.5;margin-bottom:1.4mm;color:#243447}
+     .dg-meta{padding-top:1.2mm;border-top-color:#e4eaf1;gap:0}
+     .dg-f{font-size:9pt;line-height:1.45;grid-template-columns:auto 1fr}
+     .dg-k{font-size:8.6pt;color:#4a5b73}
+     .dg-idx,.dg-badge{font-size:9pt;color:#4a5b73;border-color:#c3cedb}
   .kpi,.glossary,.rmk{break-inside:avoid;page-break-inside:avoid}
   .tbl-wrap{overflow:visible;break-inside:auto;page-break-inside:auto}
   table{min-width:0;font-size:10.5pt}
@@ -983,6 +1004,77 @@ def render_source_cards(rows, defs):
     cards.append("</div>")
     return "\n".join(cards)
 # ----------------------------------------------------------------------------
+# ك-303: مطابقة صارمة لجدول المصادر + عارض بيانات عام يحفظ كل الأعمدة
+# ----------------------------------------------------------------------------
+def is_source_status_table(header) -> bool:
+    """جدول المصادر الحقيقي فقط: رقم + المصدر + حالة مقيسة + إجراء/رابط.
+
+    ك-303: المطابقة السابقة كانت واسعة («المصدر» أو «حالة») فابتلعت جداول المحتوى
+    («التوزيع الجغرافي للوقائع» و«الحركة الملاحية والتكدس») وأسقطت أعمدتها.
+    """
+    h = " ".join(header)
+    has_num = ("#" in h) or ("الرقم" in h) or ("رقم" in h)
+    has_src = "المصدر" in h
+    has_state = ("الحالة المقيسة" in h) or ("حالة الفحص" in h) or ("الفحص" in h)
+    has_act = ("الإجراء" in h) or ("الرابط" in h) or ("المسار" in h)
+    return has_num and has_src and has_state and has_act
+
+
+def _badge_header_index(header):
+    """فهرس عمود الحالة إن وُجد، ليُعرض شارة لا حقلًا نصيًا مكررًا."""
+    for i, h in enumerate(header):
+        if "حالة" in h or "التأكيد" in h:
+            return i
+    return None
+
+
+def render_data_grid(rows, defs):
+    """بطاقة لكل صف: العنوان من الخلية الأولى، ونص القراءة من الثانية، ثم بقية الأعمدة موسومة بأسماء رؤوسها.
+
+    ك-303: الغرض ألا يسقط أي عمود، وأن يُقرأ الصف بلا ازدحام أفقي.
+    """
+    body = [r for r in rows[1:] if any((c or "").strip() for c in r)]
+    if not body:
+        return ""
+    header = [re.sub(r"\s+", " ", (h or "").strip()) for h in rows[0]]
+    badge_i = _badge_header_index(header)
+    out = ['<div class="dg-grid">']
+    for n, r in enumerate(body, 1):
+        r = list(r) + [""] * (len(header) - len(r))
+        title = (r[0] or "").strip()
+        text = (r[1] or "").strip() if len(r) > 1 else ""
+        badge = (r[badge_i] or "").strip() if badge_i is not None else ""
+        # ك-303: الشارة للحالات القصيرة فقط؛ والنص الطويل يصير حقلًا موسومًا،
+        # وإذا تطابق نص الشارة مع نص القراءة يُعرض مرة واحدة.
+        if badge and (len(badge) > 42 or badge == text):
+            badge = ""
+        fields = []
+        for i, cell in enumerate(r):
+            if i in (0, 1) or i == badge_i:
+                continue
+            val = (cell or "").strip()
+            if not val:
+                continue
+            fields.append(
+                f'<div class="dg-f"><span class="dg-k">{esc(header[i] if i < len(header) else "")}</span>'
+                f'<span class="dg-v">{inline(val, defs)}</span></div>'
+            )
+        out.append(
+            '<article class="dg">'
+            '<div class="dg-top">'
+            f'<span class="dg-idx">{n}</span>'
+            f'<b class="dg-t">{inline(title, defs)}</b>'
+            + (f'<span class="dg-badge">{inline(badge, defs)}</span>' if badge else "")
+            + "</div>"
+            + (f'<p class="dg-body">{inline(text, defs)}</p>' if text else "")
+            + (f'<div class="dg-meta">{"".join(fields)}</div>' if fields else "")
+            + "</article>"
+        )
+    out.append("</div>")
+    return "\n".join(out)
+
+
+# ----------------------------------------------------------------------------
 # سجل الأحداث (قرار المالك 2026-10-29: نقل القسم إلى التقرير اليومي + تصميم بطاقات)
 # ----------------------------------------------------------------------------
 def is_events_table(header) -> bool:
@@ -1095,9 +1187,15 @@ def render_section_body(title: str, lines, defs, doc_mode: bool = False):
                 # ك-298: جدول الوقائع يجب أن يُصيّر بطاقاته، فكروت الحالة كانت تُسقط عمود «ما حدث»
                 out.append(render_events_grid(rows, defs))
                 continue
-            sc = render_source_cards(rows, defs)
-            if sc:
-                out.append(sc)
+            if is_source_status_table(rows[0]):
+                # ك-303: بطاقات المصدر لجدول المصادر الحقيقي فقط (مطابقة صارمة)
+                sc = render_source_cards(rows, defs)
+                if sc:
+                    out.append(sc)
+                    continue
+            if len(rows[0]) >= 3:
+                # ك-303: جداول المحتوى تُعرض بطاقات موسومة تحفظ كل الأعمدة
+                out.append(render_data_grid(rows, defs))
                 continue
             out.append(render_table(rows, defs))
             continue

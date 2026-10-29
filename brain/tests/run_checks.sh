@@ -229,6 +229,7 @@ python3 tests/test_source_channels.py
 
 echo "21) سطح «إضافات» (ك-234): سطح قارئ جديد بلا حارس = خطر فقد أو تكرار"
 t "سطح إضافات: العناوين المنقولة في صفحتها وحدها" python3 validators/check_additions_surface.py --date "$SURFACE_DATE"
+t "أمانة المحتوى: أعمدة الجداول وأعداد المصادر من الدفتر" python3 validators/check_content_fidelity.py --date "${DATE:-2026-10-29}"
 
 echo "22) اقتراحات البوابة (كانت بعد exit 0 = كود ميت)"
 t "اقتراحات البوابة" python3 tests/test_gate_suggestions.py
