@@ -1,22 +1,3 @@
-
-# بوابة زرّي اللغة على الموقع المنشور (تُشغَّل عند تمرير LIVE_URL)
-if [ -n "${LIVE_URL:-}" ]; then
-  if timeout 700 python3 "$B/tools/check_lang_switch_live.py" --url "$LIVE_URL" --date "${SURFACE_DATE:-$(date -u +%F)}" >/dev/null 2>&1; then
-    ok "lang-switch-live"
-  else
-    bad "lang-switch-live — زرّا اللغة لا يعملان على الموقع المنشور"
-  fi
-fi
-
-# بوابة تماثل النسخة الإنجليزية مع المتن (تفشل مغلقًا إن أُسقط رقم أو كود)
-ENMD="$SITE/sources/i18n/en/${SURFACE_DATE}-sectioned.en.md"
-if [ -f "$ENMD" ]; then
-  if python3 "$B/validators/check_en_parity.py" --date "$SURFACE_DATE" >/dev/null 2>&1; then
-    ok "EN-parity-${SURFACE_DATE}"
-  else
-    bad "EN-parity-${SURFACE_DATE} — الترجمة تفقد بنية أو رقمًا"
-  fi
-fi
 #!/usr/bin/env bash
 # اختبارات البوابات — تُشغَّل بعد كل إصلاح: bash tests/run_checks.sh
 # الغرض: إثبات أن سلوك البوابة في الحالات الحرجة صحيح، لا مجرد قراءة الشيفرة.
@@ -38,6 +19,27 @@ if [ -n "$BUILT_HTML" ]; then
   [ "$SURFACE_DATE" = "$(date -u +%F)" ] || echo "  ملاحظة: لم تُبنَ صفحة اليوم بعد — فحوص الأسطح تُقاس على $SURFACE_DATE، وإنفاذ اليوم في بوابات ما بعد البناء"
 else
   SURFACE_DATE="$(date -u +%F)"
+fi
+
+# ك-315: بوابتا اللغة الحيّة وتماثل النسخة الإنجليزية تُشغَّلان بعد تهيئة B وSITE وSURFACE_DATE
+# (كانتا قبل التهيئة فتُتخطّيان بصمت).
+# بوابة زرّي اللغة على الموقع المنشور (تُشغَّل عند تمرير LIVE_URL)
+if [ -n "${LIVE_URL:-}" ]; then
+  if timeout 700 python3 "$B/tools/check_lang_switch_live.py" --url "$LIVE_URL" --date "${SURFACE_DATE:-$(date -u +%F)}" >/dev/null 2>&1; then
+    ok "lang-switch-live"
+  else
+    bad "lang-switch-live — زرّا اللغة لا يعملان على الموقع المنشور"
+  fi
+fi
+
+# بوابة تماثل النسخة الإنجليزية مع المتن (تفشل مغلقًا إن أُسقط رقم أو كود)
+ENMD="$SITE/sources/i18n/en/${SURFACE_DATE}-sectioned.en.md"
+if [ -f "$ENMD" ]; then
+  if python3 "$B/validators/check_en_parity.py" --date "$SURFACE_DATE" >/dev/null 2>&1; then
+    ok "EN-parity-${SURFACE_DATE}"
+  else
+    bad "EN-parity-${SURFACE_DATE} — الترجمة تفقد بنية أو رقمًا"
+  fi
 fi
 
 echo "===== اختبارات بوابات النظام — $(date -u +%FT%TZ) ====="
@@ -241,8 +243,8 @@ t "منع التركيب المعلّق (ك-173)" python3 tests/test_hanging_ope
 echo "19) السجل الحاكم للمفردات وتغطية الأسطح (طلب فهد 2026-10-27)"
 t "السجل الحاكم: صلاحية · إنفاذ كل بند · سبب ومصدر · منع التعديل اليدوي · تغطية الأسطح" python3 tests/test_vocab_registry.py
 echo "20) قنوات المصادر (ك-237): الفحص كان يُشغَّل بلا احتساب رمز خروجه"
-t "قنوات المصادر: الهوية والمسارات والفجوة وعدم التراجع" python3 validators/check_closure.py --brain "$B" || fail "بوابة الإغلاق: الحلقة غير مغلقة"
-python3 tests/test_closure_gate.py || fail "اختبار بوابة الإغلاق"
+t "قنوات المصادر: الهوية والمسارات والفجوة وعدم التراجع" python3 validators/check_closure.py --brain "$B" || bad "بوابة الإغلاق: الحلقة غير مغلقة"
+python3 tests/test_closure_gate.py || bad "اختبار بوابة الإغلاق"
 python3 "$B/tests/test_sync_guard.py" || fail=1
 python3 tests/test_source_channels.py
 

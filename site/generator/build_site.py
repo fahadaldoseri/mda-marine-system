@@ -24,6 +24,9 @@ import os as _os
 from pathlib import Path as _Path
 _ROOT = _Path(__file__).resolve().parents[1]
 
+CRITICAL_FAIL: list[str] = []
+
+
 def _tree(_env, _base, *_names):
     """جذر الشجرة المجاورة: من متغيّر البيئة أو من مجلد شقيق."""
     _v = _os.environ.get(_env)
@@ -149,7 +152,8 @@ def build_reports(site_root: Path, dist: Path, reports, warnings):
             # غير الأحدث يُوسم أرشيفيًا على الشاشة بدل شارة «قديم» المنذرة
             _meta = dict(r["meta"], screen_archived=(r is not reports[0]))
             _, count = build_report.build(r["md"], target, _meta)
-        except Exception as e:  # بناء تقرير واحد لا يُسقط الموقع
+        except Exception as e:  # ك-316: تقرير يومي ساقط = فشل مغلق
+            CRITICAL_FAIL.append(f"تقرير {r['iso']}: {e}")
             warnings.append(f"فشل بناء {r['iso']}: {e}")
             continue
         html = target.read_text(encoding="utf-8")
@@ -241,6 +245,7 @@ def build_additions(site_root: Path, dist: Path, reports, warnings):
     try:
         _, count = build_report.build(r["md"], target, meta, mode="additions")
     except Exception as e:
+        CRITICAL_FAIL.append(f"صفحة إضافات: {e}")
         warnings.append(f"فشل بناء صفحة إضافات: {e}")
         return 0
     html = target.read_text(encoding="utf-8")
@@ -685,6 +690,7 @@ def main():
         import build_sources
         build_sources.build(dist)
     except Exception as e:
+        CRITICAL_FAIL.append(f"صفحة المصادر والمراجع: {e}")
         warnings.append(f"تعذّر بناء صفحة المصادر والمراجع: {e}")
     n_add = build_additions(site_root, dist, reports, warnings)  # ك-227: يحتاج سجل الإصدار الأم (meta+md) لا قائمة البناء
     (dist / "index.html").write_text(build_index(dist, built), encoding="utf-8")
@@ -701,6 +707,7 @@ def main():
         import build_special
         _, n_sp_items = build_special.build_all(dist)
     except Exception as e:  # لا يُسقط بناء الموقع بسبب قسم فرعي
+        CRITICAL_FAIL.append(f"التقارير الخاصة: {e}")
         warnings.append(f"تعذّر بناء صفحة التقارير الخاصة: {e}")
 
     # طبقة إصلاح المخرجات — تعمل على كل صفحة مبنية قبل النشر (idempotent)
@@ -712,6 +719,7 @@ def main():
         st = postprocess.run(dist)
         print(f"طبقة الإصلاح: {st['changed']} من {st['pages']} صفحة عُدّلت")
     except Exception as e:  # لا تُسقط البناء، لكن تُعلن في التنبيهات
+        CRITICAL_FAIL.append(f"طبقة الإصلاح: {e}")
         warnings.append(f"تعذّر تشغيل طبقة الإصلاح: {e}")
 
     print(f"الرئيسية: {len(built)} إصدار · السجل التراكمي: {'نعم' if cum else 'لا'} · "
@@ -756,14 +764,11 @@ def _build_en_editions() -> None:
         import build_report_en
         for _f in sorted(pathlib.Path("sources/i18n/en").glob("*-sectioned.en.md")):
             build_report_en.build(_f.name.split("-sectioned")[0])
-    except Exception as _e:  # لا يُسقط البناء العربي
+    except Exception as _e:  # ك-316: النسخة الإنجليزية مخرج منشور = فشل مغلق
+        CRITICAL_FAIL.append(f"النسخة الإنجليزية: {_e}")
         print("   تنبيه: لم تُبنَ نسخة إنجليزية:", _e)
 
 
-if __name__ == "__main__":
-    _rc = main()
-    _build_en_editions()
-    sys.exit(_rc)
 
 
 # ── إصلاح ك-252 (2026-10-28): pubDate لكل عنصر وlastBuildDate للقناة في تغذية RSS ──
@@ -792,8 +797,22 @@ def _enrich_feed():
         print(f"تغذية RSS: أُضيف pubDate وlastBuildDate ({f.name})")
 
 
-if __name__ == "__main__":
+
+
+# ك-316/ك-319: كتلة التشغيل في نهاية الملف لتصل إلى كل الدوال المعرّفة بعده،
+# ولتُشغّل إثراء التغذية (pubDate · lastBuildDate) الذي كان كودًا ميتًا غير قابل للوصول.
+def _finalize_build() -> None:
+    _build_en_editions()
     try:
         _enrich_feed()
-    except Exception as exc:
-        print("تنبيه: تعذّر إثراء التغذية:", exc)
+    except Exception as _e:
+        CRITICAL_FAIL.append(f"تغذية RSS: {_e}")
+
+
+if __name__ == "__main__":
+    _rc = main()
+    _finalize_build()
+    if _rc == 0 and CRITICAL_FAIL:
+        print("✘ فشل مغلق: أقسام منشورة لم تُبنَ — " + " · ".join(CRITICAL_FAIL[:4]))
+        _rc = 2
+    sys.exit(_rc)

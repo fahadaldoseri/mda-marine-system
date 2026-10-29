@@ -132,7 +132,7 @@ Attribution of the incident to an entity: Transit-related threats were attribute
 Internal control: Separate events from estimates, link each estimate to its code and source, and do not publish any unverified external review.
 
 ## Probabilities and Attribution of Incidents to Entities
-The percentages below are estimates, mutually exclusive and collectively exhaustive, and total 100%. No percentage constitutes evidence confirming an executing entity.
+The percentages below are estimates, collectively exhaustive, and total 100%. No percentage constitutes evidence confirming an executing entity.
 - 30% — Pressure on transit through the Strait of Hormuz continues: a blockade-enforcement notice was issued and transit was advised against.
 - 25% — Questioning or inspection of a neutral vessel occurs: the notice explicitly mentions questioning and inspection.
 - 20% — Targeting of ports and civil aviation in the Gulf of Aden continues: government and local reports recurred.
