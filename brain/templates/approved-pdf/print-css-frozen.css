@@ -125,6 +125,15 @@
      .ev-meta{margin-top:1.8mm;padding-top:1.4mm}
      .ev-meta{font-size:9.5pt;color:#4a5b73;border-top-color:#dbe3ec}
      .ev-idx,.ev-code,.ev-badge{font-size:9pt;color:#4a5b73;border-color:#c3cedb}
+     .dg-grid{display:block;margin:4mm 0 0}
+     .dg{display:block;margin:0 0 3mm;padding:3.2mm 4mm 2.8mm;break-inside:avoid;page-break-inside:avoid;border-color:#dbe3ec;background:#fff}
+     .dg-top{margin-bottom:1.4mm}
+     .dg-t{font-size:10pt}
+     .dg-body{font-size:9.5pt;line-height:1.5;margin-bottom:1.4mm;color:#243447}
+     .dg-meta{padding-top:1.2mm;border-top-color:#e4eaf1;gap:0}
+     .dg-f{font-size:9pt;line-height:1.45;grid-template-columns:auto 1fr}
+     .dg-k{font-size:8.6pt;color:#4a5b73}
+     .dg-idx,.dg-badge{font-size:9pt;color:#4a5b73;border-color:#c3cedb}
   .kpi,.glossary,.rmk{break-inside:avoid;page-break-inside:avoid}
   .tbl-wrap{overflow:visible;break-inside:auto;page-break-inside:auto}
   table{min-width:0;font-size:10.5pt}

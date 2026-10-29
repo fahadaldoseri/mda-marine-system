@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-29T01:34:23.272326+00:00",
+  "generated_at": "2026-10-29T11:47:25Z",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -2312,6 +2312,97 @@
       "lesson_id": "ك-295",
       "barrier_id": "B-9aa4c178",
       "run_evidence": null
+    },
+    {
+      "fault_id": "ك-303",
+      "state": "مغلق",
+      "lesson_id": "ك-303",
+      "barrier_id": "B-a3f6654e",
+      "run_evidence": "python3 validators/check_content_fidelity.py --date 2026-10-29 → خرج 0: additions.html «التوزيع الجغرافي» dg=12 · «الحركة الملاحية» dg=8 · src=0 · PDF 12 صفحة وcheck_pdf_format مطابق بعد تجميد 8977abb4ffb11e00"
+    },
+    {
+      "fault_id": "ك-304",
+      "state": "مغلق",
+      "lesson_id": "ك-304",
+      "barrier_id": "B-4fd1ad56",
+      "run_evidence": "قياس حي Playwright (1440px و390px): 5 أقسام مفتوحة · 0 تجاوز أفقي · 0 هدف <44px · خرج 0"
+    },
+    {
+      "fault_id": "ك-305",
+      "state": "مغلق",
+      "lesson_id": "ك-305",
+      "barrier_id": "B-b3f3b4a4",
+      "run_evidence": "python3 -c \"عدّ [ABC]/[123] و@ERYANIM في dist/reports/2026-10-29.html\" → 0 نمط · @ERYANIM=4 · خرج 0"
+    },
+    {
+      "fault_id": "ك-306",
+      "state": "مغلق",
+      "lesson_id": "ك-306",
+      "barrier_id": "B-3d0fc495",
+      "run_evidence": "python3 validators/check_content_fidelity.py --date 2026-10-29 → 16 واقعة · 17 إسنادًا · 8 مصادر · خرج 0"
+    },
+    {
+      "fault_id": "ك-307",
+      "state": "مغلق",
+      "lesson_id": "ك-307",
+      "barrier_id": "B-ac19ad27",
+      "run_evidence": "python3 -c \"len(meta['yesterday_review']) وbool(meta['internal_review'])\" → 4 وTrue · خرج 0"
+    },
+    {
+      "fault_id": "ك-308",
+      "state": "مغلق",
+      "lesson_id": "ك-308",
+      "barrier_id": "B-67d5ef05",
+      "run_evidence": "python3 -c \"count('المخطط 15 من 16') في صفحة التقرير\" → 1 · خرج 0"
+    },
+    {
+      "fault_id": "ك-300",
+      "state": "مغلق",
+      "lesson_id": "ك-300",
+      "barrier_id": "B-815b8e1c",
+      "run_evidence": "python3 validators/check_pdf_format.py --pdf /home/ubuntu/seawatch/dist/reports/pdf/2026-10-29.pdf → مطابق v3 · 12 صفحة · تعبئة 98.0% · 0 فجوة ≥45مم · خرج 0"
+    },
+    {
+      "fault_id": "ك-302",
+      "state": "مغلق",
+      "lesson_id": "ك-302",
+      "barrier_id": "B-13cfa925",
+      "run_evidence": "python3 -c \"عدّ <td></td> الفارغة في dist/reports/special-2026-10-15-GFS.html\" → 0 وسم فارغ · خرج 0"
+    },
+    {
+      "fault_id": "ك-296",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-296",
+      "barrier_id": "B-53f29a4f",
+      "run_evidence": "python3 validators/check_backup_parity.py --mode strict → «مطابق» (الشجرة = المستودع) · خرج 0"
+    },
+    {
+      "fault_id": "ك-297",
+      "state": "مغلق",
+      "lesson_id": "ك-297",
+      "barrier_id": "B-1edce643",
+      "run_evidence": "python3 validators/check_pdf_format.py --pdf /home/ubuntu/seawatch/dist/reports/pdf/2026-10-29.pdf → مطابق v3 · 12 صفحة · 0 فجوة ≥45مم · خرج 0"
+    },
+    {
+      "fault_id": "ك-298",
+      "state": "مغلق",
+      "lesson_id": "ك-298",
+      "barrier_id": "B-9218a17f",
+      "run_evidence": "python3 -c \"عدّ بطاقات .ev في dist/reports/2026-10-29.html\" → 16 بطاقة · خرج 0"
+    },
+    {
+      "fault_id": "ك-299",
+      "state": "مغلق",
+      "lesson_id": "ك-299",
+      "barrier_id": "B-775aaf68",
+      "run_evidence": "قياس حي: قسم «سجل الأحداث» مفتوح على الشاشة (display:grid) · خرج 0"
+    },
+    {
+      "fault_id": "ك-301",
+      "state": "مفتوح",
+      "lesson_id": "ك-301",
+      "barrier_id": "B-49251d88",
+      "run_evidence": "—"
     }
   ]
 }
