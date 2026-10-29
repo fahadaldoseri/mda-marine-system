@@ -761,46 +761,6 @@
       ]
     },
     {
-      "id": "S070",
-      "title": "دمج الذاكرة التراكمية (دفتر اليوم)",
-      "kind": "script",
-      "phase": "ingest",
-      "assert": [
-        {
-          "type": "cmd",
-          "command": [
-            "bash",
-            "-lc",
-            "test -s logs/runbook/{date}/S070.log"
-          ]
-        }
-      ],
-      "links": {
-        "rules": [
-          "أ1 — سلسلة التشغيل اليومي"
-        ],
-        "files": [
-          "tools/merge_ledger_daily.py",
-          "sections/90-automation.md",
-          "tools/daily_pipeline.sh"
-        ],
-        "folders": [],
-        "gates": [],
-        "tests": []
-      },
-      "on_fail": "stop",
-      "command": [
-        "bash",
-        "-lc",
-        "B=\"$PWD\"; export B SITE; python3 tools/merge_ledger_daily.py; rc=$?; exit $rc",
-        "B=\"$PWD\"; export B; python3 \"$B/tools/mark_components.py\" --date \"$D\" --component ledger_merge; rc=$?; exit $rc"
-      ],
-      "ok_rc": [
-        0
-      ],
-      "warn_rc": []
-    },
-    {
       "id": "S080",
       "title": "فرز التغذيات بالنموذج (اختياري)",
       "kind": "script",
@@ -1071,6 +1031,46 @@
       "writes": [
         "cumulative-2026/daily/{date}.json"
       ]
+    },
+    {
+      "id": "S070",
+      "title": "دمج الذاكرة التراكمية (دفتر اليوم)",
+      "kind": "script",
+      "phase": "write",
+      "assert": [
+        {
+          "type": "cmd",
+          "command": [
+            "bash",
+            "-lc",
+            "test -s logs/runbook/{date}/S070.log"
+          ]
+        }
+      ],
+      "links": {
+        "rules": [
+          "أ1 — سلسلة التشغيل اليومي"
+        ],
+        "files": [
+          "tools/merge_ledger_daily.py",
+          "sections/90-automation.md",
+          "tools/daily_pipeline.sh"
+        ],
+        "folders": [],
+        "gates": [],
+        "tests": []
+      },
+      "on_fail": "stop",
+      "command": [
+        "bash",
+        "-lc",
+        "B=\"$PWD\"; export B SITE; python3 tools/merge_ledger_daily.py; rc=$?; exit $rc",
+        "B=\"$PWD\"; export B; python3 \"$B/tools/mark_components.py\" --date \"$D\" --component ledger_merge; rc=$?; exit $rc"
+      ],
+      "ok_rc": [
+        0
+      ],
+      "warn_rc": []
     },
     {
       "id": "W040",
@@ -2502,43 +2502,6 @@
       "gate_title": "التسليم"
     },
     {
-      "id": "G047",
-      "title": "بطاقة القرار (لا إفراغ ولا رابط ميت)",
-      "kind": "script",
-      "phase": "gates",
-      "assert": [
-        {
-          "type": "cmd",
-          "command": [
-            "bash",
-            "-lc",
-            "test -s logs/runbook/{date}/G047.log"
-          ]
-        }
-      ],
-      "links": {
-        "rules": [
-          "ف4 — بطاقة القرار"
-        ],
-        "files": [
-          "validators/check_decision_card.py"
-        ],
-        "folders": [],
-        "gates": [],
-        "tests": []
-      },
-      "on_fail": "stop",
-      "command": [
-        "bash",
-        "-lc",
-        "B=\"$PWD\"; export B SITE; python3 \"$B/validators/check_decision_card.py\" --date \"$D\" --dist-root \"$SITE/dist\"; rc=$?; exit $rc"
-      ],
-      "ok_rc": [
-        0
-      ],
-      "warn_rc": []
-    },
-    {
       "id": "G048",
       "title": "بوابة الإغلاق (الأعطال والاستثناءات)",
       "kind": "script",
@@ -2571,43 +2534,6 @@
         "bash",
         "-lc",
         "B=\"$PWD\"; export B; python3 \"$B/validators/check_closure.py\" --brain \"$B\"; rc=$?; exit $rc"
-      ],
-      "ok_rc": [
-        0
-      ],
-      "warn_rc": []
-    },
-    {
-      "id": "G046",
-      "title": "سطح الإضافات (نقل الأقسام مرة واحدة)",
-      "kind": "script",
-      "phase": "gates",
-      "assert": [
-        {
-          "type": "cmd",
-          "command": [
-            "bash",
-            "-lc",
-            "test -s logs/runbook/{date}/G046.log"
-          ]
-        }
-      ],
-      "links": {
-        "rules": [
-          "ف4 — سياسة الأسطح"
-        ],
-        "files": [
-          "validators/check_additions_surface.py"
-        ],
-        "folders": [],
-        "gates": [],
-        "tests": []
-      },
-      "on_fail": "stop",
-      "command": [
-        "bash",
-        "-lc",
-        "B=\"$PWD\"; export B SITE; python3 \"$B/validators/check_additions_surface.py\" --date \"$D\" --site \"$SITE\"; rc=$?; exit $rc"
       ],
       "ok_rc": [
         0
@@ -2691,48 +2617,6 @@
       ],
       "warn_rc": [],
       "gate_title": "اختبار انحدار المصلح (12→23)"
-    },
-    {
-      "id": "G045",
-      "title": "تغطية بوابة الأسلوب لكل سطح يقرأه القارئ",
-      "kind": "script",
-      "phase": "gates",
-      "assert": [
-        {
-          "type": "cmd",
-          "command": [
-            "bash",
-            "-lc",
-            "test -s logs/runbook/{date}/G045.log"
-          ]
-        }
-      ],
-      "links": {
-        "rules": [
-          "ف1–ف5 — بوابة التحقق",
-          "ط15 — مدى بوابة الأسلوب"
-        ],
-        "files": [
-          "tools/final_gate.sh",
-          "tools/audit_style_coverage.py"
-        ],
-        "folders": [],
-        "gates": [],
-        "tests": [
-          "tests/test_vocab_registry.py"
-        ]
-      },
-      "on_fail": "stop",
-      "command": [
-        "bash",
-        "-lc",
-        "B=\"$PWD\"; export B SITE; python3 \"$B/tools/make_tg_digest.py\" --date \"$D\" >/dev/null 2>&1 || true; python3 \"$B/tools/audit_style_coverage.py\" --date \"$D\"; rc=$?; exit $rc"
-      ],
-      "ok_rc": [
-        0
-      ],
-      "warn_rc": [],
-      "gate_title": "التسليم"
     },
     {
       "id": "B010",
@@ -2856,6 +2740,122 @@
         0
       ],
       "warn_rc": []
+    },
+    {
+      "id": "G047",
+      "title": "بطاقة القرار (لا إفراغ ولا رابط ميت)",
+      "kind": "script",
+      "phase": "build",
+      "assert": [
+        {
+          "type": "cmd",
+          "command": [
+            "bash",
+            "-lc",
+            "test -s logs/runbook/{date}/G047.log"
+          ]
+        }
+      ],
+      "links": {
+        "rules": [
+          "ف4 — بطاقة القرار"
+        ],
+        "files": [
+          "validators/check_decision_card.py"
+        ],
+        "folders": [],
+        "gates": [],
+        "tests": []
+      },
+      "on_fail": "stop",
+      "command": [
+        "bash",
+        "-lc",
+        "B=\"$PWD\"; export B SITE; python3 \"$B/validators/check_decision_card.py\" --date \"$D\" --dist-root \"$SITE/dist\"; rc=$?; exit $rc"
+      ],
+      "ok_rc": [
+        0
+      ],
+      "warn_rc": []
+    },
+    {
+      "id": "G046",
+      "title": "سطح الإضافات (نقل الأقسام مرة واحدة)",
+      "kind": "script",
+      "phase": "build",
+      "assert": [
+        {
+          "type": "cmd",
+          "command": [
+            "bash",
+            "-lc",
+            "test -s logs/runbook/{date}/G046.log"
+          ]
+        }
+      ],
+      "links": {
+        "rules": [
+          "ف4 — سياسة الأسطح"
+        ],
+        "files": [
+          "validators/check_additions_surface.py"
+        ],
+        "folders": [],
+        "gates": [],
+        "tests": []
+      },
+      "on_fail": "stop",
+      "command": [
+        "bash",
+        "-lc",
+        "B=\"$PWD\"; export B SITE; python3 \"$B/validators/check_additions_surface.py\" --date \"$D\" --site \"$SITE\"; rc=$?; exit $rc"
+      ],
+      "ok_rc": [
+        0
+      ],
+      "warn_rc": []
+    },
+    {
+      "id": "G045",
+      "title": "تغطية بوابة الأسلوب لكل سطح يقرأه القارئ",
+      "kind": "script",
+      "phase": "build",
+      "assert": [
+        {
+          "type": "cmd",
+          "command": [
+            "bash",
+            "-lc",
+            "test -s logs/runbook/{date}/G045.log"
+          ]
+        }
+      ],
+      "links": {
+        "rules": [
+          "ف1–ف5 — بوابة التحقق",
+          "ط15 — مدى بوابة الأسلوب"
+        ],
+        "files": [
+          "tools/final_gate.sh",
+          "tools/audit_style_coverage.py"
+        ],
+        "folders": [],
+        "gates": [],
+        "tests": [
+          "tests/test_vocab_registry.py"
+        ]
+      },
+      "on_fail": "stop",
+      "command": [
+        "bash",
+        "-lc",
+        "B=\"$PWD\"; export B SITE; python3 \"$B/tools/make_tg_digest.py\" --date \"$D\" >/dev/null 2>&1 || true; python3 \"$B/tools/audit_style_coverage.py\" --date \"$D\"; rc=$?; exit $rc"
+      ],
+      "ok_rc": [
+        0
+      ],
+      "warn_rc": [],
+      "gate_title": "التسليم"
     },
     {
       "id": "B035",

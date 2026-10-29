@@ -64,7 +64,8 @@ PDF_CSS = """
 .annex-note{font-size:11.5pt;color:#555}
 {HIDE_SOURCES}
 main{gap:0 !important}
-section.doc > h2{break-after:avoid;page-break-after:avoid}
+/* ك-257: تدفّق الكتل — لا حجز للعنوان مع كتلته، لئلا تخلّف الكتلة فراغًا داخليًا */
+section.doc > h2,section.doc > h3{break-after:auto;page-break-after:auto}
 p,li,blockquote{orphans:3;widows:3}
 .map-viz svg{max-height:145mm;width:100%;height:auto}
 tbody tr:nth-child(even){background:#fff !important}
@@ -83,7 +84,14 @@ section.doc p{margin:1.5mm 0}
 section.doc ul,section.doc ol{margin:1mm 0}
 section.doc li{margin:.45mm 0}
 section.doc ul ul{margin:.6mm 0}
-.decision{break-before:page;page-break-before:page}
+/* ك-256: أُلغي الكسر القسري قبل بطاقة القرار — كان يخلّف فراغًا داخليًا في المتن (ص4).
+   تدفّق الكتل مسموح في مسار التوليد وفق نطاق البروفايل المعتمد. */
+/* ك-257: الأقسام وخريطة الوقائع تتدفّق بين الصفحات — الفراغ الداخلي صفر */
+section.doc,.additions-annex section.doc,section.print-map,.hmap{break-inside:auto !important;page-break-inside:auto !important}
+section.doc *,section.print-map *,.hmap *{break-inside:auto !important;page-break-inside:auto !important}
+.decision{break-inside:avoid}
+/* ك-256: نفس قاعدة الانقسام في مسار PDF لتصفير الفراغ الداخلي (تدفّق الكتل). */
+.card,.viz,.src,.table-row{break-inside:auto !important;page-break-inside:auto !important}
 section.doc p,section.doc li,.sec-lede,.masthead .lede,.glossary li,.src-grid li,
 .dc-list li,.chg-list li,.ev-list li,.map-caption,footer.foot{text-align:justify;text-align-last:start;hyphens:none}
 section.doc h2,section.doc h3,section.doc h4,.h-rule,.chip,.kpi,.tag,.st-badge,
@@ -92,9 +100,10 @@ section.doc h2,section.doc h3,section.doc h4,.h-rule,.chip,.kpi,.tag,.st-badge,
 /* عطل 2026-10-28: الملحق تجاوز الصفحة التاسعة بفقرة واحدة (صفحة عاشرة بتعبئة 7%).
    الحكم: ضغط الملحق وحده (تباعد أسطر ومقاطع) — لا يمسّ متن التقرير ولا هيئة الغلاف. */
 .additions-annex section.doc{padding:0 0 2mm}
-.additions-annex section.doc p{line-height:1.36;margin:.9mm 0}
-.additions-annex section.doc h3{margin:2.2mm 0 1mm !important}
-.additions-annex section.doc h2{margin:2mm 0 1.4mm !important}
+.additions-annex section.doc p{line-height:1.46;margin:1.5mm 0}
+.additions-annex section.doc li{margin:.8mm 0}
+.additions-annex section.doc h3{margin:3mm 0 1.4mm !important}
+.additions-annex section.doc h2{margin:3.4mm 0 2mm !important}
 """
 
 HEADER_TPL = """<div style="font-family:'Noto Kufi Arabic','IBM Plex Sans Arabic',sans-serif;font-size:7.6px;

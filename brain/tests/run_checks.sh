@@ -10,6 +10,17 @@ ok()   { PASS=$((PASS+1)); printf '  ✔ %s\n' "$1"; }
 bad()  { FAIL=$((FAIL+1)); printf '  ✘ %s\n' "$1"; }
 check(){ [ "$1" = "$2" ] && ok "$3 (=$1)" || bad "$3 — المتوقع $2 والواقع $1"; }
 
+# ك-247: فحوص الأسطح تحتاج صفحة مبنية. قبل البناء تُقاس على أحدث إصدار مبني،
+# ويبقى إنفاذ اليوم فشلًا مغلقًا في بوابات ما بعد البناء (G045 · G046 · G047).
+if [ -z "${SITE:-}" ]; then SITE="$(cd "$B/../seawatch" 2>/dev/null && pwd)"; fi
+BUILT_HTML="$(ls -1 "$SITE"/dist/reports/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9].html 2>/dev/null | sort | tail -1)"
+if [ -n "$BUILT_HTML" ]; then
+  SURFACE_DATE="$(basename "$BUILT_HTML" .html)"
+  [ "$SURFACE_DATE" = "$(date -u +%F)" ] || echo "  ملاحظة: لم تُبنَ صفحة اليوم بعد — فحوص الأسطح تُقاس على $SURFACE_DATE، وإنفاذ اليوم في بوابات ما بعد البناء"
+else
+  SURFACE_DATE="$(date -u +%F)"
+fi
+
 echo "===== اختبارات بوابات النظام — $(date -u +%FT%TZ) ====="
 
 # ── 1) سلوك دالة step في بوابة التسليم: انهيار ≠ تحذير (ك-131) ──────────────
@@ -217,13 +228,13 @@ python3 "$B/tests/test_sync_guard.py" || fail=1
 python3 tests/test_source_channels.py
 
 echo "21) سطح «إضافات» (ك-234): سطح قارئ جديد بلا حارس = خطر فقد أو تكرار"
-t "سطح إضافات: العناوين المنقولة في صفحتها وحدها" python3 validators/check_additions_surface.py --date "$(date -u +%F)"
+t "سطح إضافات: العناوين المنقولة في صفحتها وحدها" python3 validators/check_additions_surface.py --date "$SURFACE_DATE"
 
 echo "22) اقتراحات البوابة (كانت بعد exit 0 = كود ميت)"
 t "اقتراحات البوابة" python3 tests/test_gate_suggestions.py
 
 echo "23) أهم الأخبار المتعلقة بالأمن البحري (ك-239): سكربت الروابط كان يُفرغ الصف عند غياب القسم"
-t "أهم الأخبار المتعلقة بالأمن البحري: كل صف نصًّا ورابطًا صالحًا على السطحين" python3 validators/check_decision_card.py --date "$(date -u +%F)"
+t "أهم الأخبار المتعلقة بالأمن البحري: كل صف نصًّا ورابطًا صالحًا على السطحين" python3 validators/check_decision_card.py --date "$SURFACE_DATE"
 
 echo "----- الحصيلة -----"
 printf '  نجح: %s · فشل: %s\n' "$PASS" "$FAIL"

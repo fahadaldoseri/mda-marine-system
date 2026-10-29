@@ -95,6 +95,13 @@ finally:
 
 # 5) تغطية الأسطح
 day = sorted(p.name.replace("-sectioned.md", "") for p in (B / "reports").glob("*-sectioned.md"))[-1]
+# ك-247: قبل البناء لا توجد صفحة اليوم؛ تُقاس التغطية على أحدث إصدار مبني،
+# ويبقى إنفاذ اليوم على بوابة G045 بعد البناء (فشل مغلق).
+_built = sorted(p for p in (SITE / "dist" / "reports").glob("*.html") if re.match(r"\d{4}-\d{2}-\d{2}$", p.stem))
+if _built and not (SITE / "dist" / "reports" / f"{day}.html").exists():
+    _prev = _built[-1].stem
+    skips.append(f"تغطية الأسطح: صفحة {day} لم تُبنَ بعد — قِيست على {_prev}، وإنفاذ اليوم في G045 بعد البناء")
+    day = _prev
 if not (SITE / "dist" / "index.html").exists():
     skips.append("تغطية الأسطح: لا بناء موقع في SITE — تُقاس في بوابة التسليم بعد البناء")
 else:

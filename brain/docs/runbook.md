@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة dfb3f396354f475e). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة 5a04d225771a0e2a). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -13,7 +13,6 @@
 | S020 | فحص التغذيات (40 مصدرًا) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S020.log | أ1 — سلسلة التشغيل اليومي | tools/check_feeds.py، sections/90-automation.md | stop |
 | S030 | ترقيم التغذيات (أرقام لاتينية) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S030.log | أ1 — سلسلة التشغيل اليومي | tools/normalize_digits.py، sections/90-automation.md، tools/normalize_terms.py | stop |
 | S060 | حفظ الأصول الرسمية | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S060.log | أ1 — سلسلة التشغيل اليومي | tools/archive_originals.py، sections/90-automation.md | stop |
-| S070 | دمج الذاكرة التراكمية (دفتر اليوم) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S070.log | أ1 — سلسلة التشغيل اليومي | tools/merge_ledger_daily.py، sections/90-automation.md، tools/daily_pipeline.sh | stop |
 | S080 | فرز التغذيات بالنموذج (اختياري) (اختيارية) | script |  |  | cmd:bash -lc test -e logs/runbook/{date}/S080.log | أ1 — سلسلة التشغيل اليومي | tools/llm_triage.py، sections/90-automation.md | continue |
 | S090 | مراجعة التقرير بالنموذج (اختياري) (اختيارية) | script |  |  | cmd:bash -lc test -e logs/runbook/{date}/S090.log | أ1 — سلسلة التشغيل اليومي | tools/llm_review.py، sections/90-automation.md | continue |
 | W010 | كتابة التقرير اليومي | agent | sections/20-writing-brief.md، sections/20-lexicon.md، sections/20-examples.md، cumulative-2026/daily/{date}.json، feeds/feeds-{date}.md | reports/{date}-sectioned.md | min_bytes:reports/{date}-sectioned.md؛ contains:reports/{date}-sectioned.md | أ2 — قواعد الكتابة، ل1 — أسلوب اللغة | sections/20-writing-brief.md، sections/20-lexicon.md، sections/20-examples.md، runbook/prompts/write-report.md | stop |
@@ -21,6 +20,7 @@
 | S050 | فحص العقوبات (OFAC) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S050.log | أ1 — سلسلة التشغيل اليومي | tools/ofac_screen.py، sections/90-automation.md | stop |
 | W020 | بناء ملف واجهة التقرير | agent | reports/{date}-sectioned.md، templates/mark-schema.json | web/meta/{date}.json | min_bytes:web/meta/{date}.json | ب2 — ترتيب الأقسام | templates/mark-schema.json | stop |
 | W030 | بناء دفتر اليوم (وقائع ومقتطفات الأصل) | agent | reports/{date}-sectioned.md، feeds/feeds-{date}.json | cumulative-2026/daily/{date}.json | min_bytes:cumulative-2026/daily/{date}.json | ف1–ف5 — بوابة التحقق | tools/ledger_source_excerpt.py، cumulative-2026/daily/ | stop |
+| S070 | دمج الذاكرة التراكمية (دفتر اليوم) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S070.log | أ1 — سلسلة التشغيل اليومي | tools/merge_ledger_daily.py، sections/90-automation.md، tools/daily_pipeline.sh | stop |
 | W040 | علامة التشغيل اليومية (pipeline mark) | script |  |  | min_bytes:logs/pipeline-{date}.json | ف1–ف5 — بوابة التحقق | tools/write_mark.py | stop |
 | G001 | اختبارات البوابات (tests) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G001.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tests/run_checks.sh | stop |
 | G002 | تنظيف المحتوى الداخلي | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G002.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/scrub_internal.py، tools/apply_audit_gfs_docx.py، tools/apply_jmic_ukmto_to_gfs.py | stop |
@@ -56,15 +56,15 @@
 | G035 | تسرّب المحتوى الداخلي إلى المتن | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G035.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_internal_leak.py | stop |
 | G036 | المفردات المبسطة (تنبيهي حتى الموافقة) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G036.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_vocabulary.py | stop |
 | G044 | السجل الحاكم للمفردات ومُولَّده | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G044.log | ف1–ف5 — بوابة التحقق، ط15 — مدى بوابة الأسلوب | tools/final_gate.sh، tools/build_vocab_gate.py، appendices/simplified-vocabulary.json، tools/vocab_review.py | stop |
-| G047 | بطاقة القرار (لا إفراغ ولا رابط ميت) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G047.log | ف4 — بطاقة القرار | validators/check_decision_card.py | stop |
 | G048 | بوابة الإغلاق (الأعطال والاستثناءات) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G048.log | ف3 — إغلاق الأعطال | validators/check_closure.py | stop |
-| G046 | سطح الإضافات (نقل الأقسام مرة واحدة) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G046.log | ف4 — سياسة الأسطح | validators/check_additions_surface.py | stop |
 | G040 | اختبارات المراجعة الثانية (أ · ب · ج · د · هـ · ز) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G040.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tests/test_review2.sh | stop |
 | G041 | اختبار انحدار المصلح (12→23) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G041.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tests/test_repair_regression.sh | stop |
-| G045 | تغطية بوابة الأسلوب لكل سطح يقرأه القارئ | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G045.log | ف1–ف5 — بوابة التحقق، ط15 — مدى بوابة الأسلوب | tools/final_gate.sh، tools/audit_style_coverage.py | stop |
 | B010 | بناء الموقع من البيانات | script |  |  | file_exists:{site}/dist/reports/{date}.html | س1 — النشر | {site}/generator/build_site.py، {site}/generator/sync_from_brain.py، tools/build_source_reliability.py، tools/sync_backup.sh، tools/build_macr_docx.py، tools/build_provenance.py، tools/build_styles_docx.py، tools/build_audit_report.py، tools/build_ambiguity_map.py، tools/build_instructions_doc.py، tools/build_report_docx.py، tools/build_report_docx_exact.py، tools/sync_profile_hash.py، {site}/generator | stop |
 | B020 | تصدير PDF المعتمد | script |  |  | min_bytes:{site}/dist/reports/pdf/{date}.pdf | س1 — النشر | tools/export_report_assets.py، tools/pdf_change_guard.py | stop |
 | B030 | بوابتا جودة الطباعة على PDF نفسه | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/B030.log | ف5 — شكل PDF وجودة الطباعة | validators/check_pdf_format.py، validators/check_print_quality.py | stop |
+| G047 | بطاقة القرار (لا إفراغ ولا رابط ميت) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G047.log | ف4 — بطاقة القرار | validators/check_decision_card.py | stop |
+| G046 | سطح الإضافات (نقل الأقسام مرة واحدة) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G046.log | ف4 — سياسة الأسطح | validators/check_additions_surface.py | stop |
+| G045 | تغطية بوابة الأسلوب لكل سطح يقرأه القارئ | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G045.log | ف1–ف5 — بوابة التحقق، ط15 — مدى بوابة الأسلوب | tools/final_gate.sh، tools/audit_style_coverage.py | stop |
 | B035 | خط الأساس الرسمي (virgin) — تنبيهي | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/B035.log | س1 — النشر | tools/check_baseline.py | stop |
 | B040 | نسخة Word طبق الأصل (بوابة المخرج 9 تمنع التسليم بدونها) | script |  |  | cmd:bash -lc ls reports/docx/*{date}*.docx >/dev/null 2>&1 | س1 — النشر | tools/build_report_docx_exact.py | stop |
 | G005 | تطابق أرقام المصادر في كل المواضع | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G005.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh | stop |
