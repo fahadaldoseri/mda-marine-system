@@ -423,7 +423,7 @@ def fetch(f):
                 }
             attempts.append({'url': browser_route['url'], 'via': 'browser', 'ok': False,
                              'error': note, 'tls_verification': 'verified'})
-        except Exception as error:
+        except (OSError, RuntimeError, ValueError, ImportError) as error:
             attempts.append({'url': browser_route['url'], 'via': 'browser', 'ok': False,
                              'error': _error_text(error), 'tls_verification': 'verified'})
     block_reason = 'all routes failed: ' + ' | '.join(

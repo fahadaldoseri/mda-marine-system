@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import os
 import subprocess
+import sys
 import threading
 import time
 from pathlib import Path
@@ -39,12 +40,13 @@ def _ensure_display() -> str | None:
         subprocess.Popen(['Xvfb', DISPLAY, '-screen', '0', '1366x900x24'],
                          stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                          start_new_session=True)
-        for _ in range(20):
-            time.sleep(0.4)
-            if Path(f'/tmp/.X11-unix/X{DISPLAY.lstrip(":")}').exists():
-                return DISPLAY
-    except Exception:
+    except (OSError, ValueError) as exc:  # فشل تشغيل خفي: نعود بلا شاشة
+        print(f'   تنبيه: تعذّر تشغيل Xvfb — {exc}', file=sys.stderr)
         return None
+    for _ in range(20):
+        time.sleep(0.4)
+        if Path(f'/tmp/.X11-unix/X{DISPLAY.lstrip(":")}').exists():
+            return DISPLAY
     return None
 
 
@@ -59,6 +61,13 @@ def _which(name: str) -> str | None:
 def _challenged(status: int, text: str) -> bool:
     low = text[:4000].lower()
     return status in (403, 429, 503) or any(m in low for m in CHALLENGE_MARKS)
+
+
+try:
+    from playwright.sync_api import Error as _PWError
+except ImportError:  # بلا playwright: المسار يُبلّغ بالتعذّر لاحقًا
+    class _PWError(Exception):
+        pass
 
 
 def _attempt(playwright, url: str, timeout: int, warmup: bool, headful: bool):
@@ -82,15 +91,15 @@ def _attempt(playwright, url: str, timeout: int, warmup: bool, headful: bool):
             try:
                 page.goto(origin, wait_until='domcontentloaded', timeout=timeout * 1000)
                 page.wait_for_timeout(6000)  # ليُحلّ التحدي ويُكتب cf_clearance
-            except Exception:
-                pass
+            except _PWError as exc:      # تحدي أو مهلة في التسخين: نتابع إلى الطلب الأصل
+                print(f'   ملاحظة: تسخين الصفحة لم يكتمل — {type(exc).__name__}', file=sys.stderr)
         response = page.goto(url, wait_until='domcontentloaded', timeout=timeout * 1000)
         status = response.status if response else 0
         page.wait_for_timeout(4000)
         text = page.content()
         try:
             body = page.locator('body').inner_text(timeout=5000)
-        except Exception:
+        except _PWError:                 # لا نص مرئي في الصفحة: نكتفي بمحتوى HTML
             body = ''
         if body and ('<?xml' in body or body.lstrip().startswith('{')):
             text = body
@@ -106,7 +115,8 @@ def fetch_via_browser(url: str, timeout: int = 60, warmup: bool = True, attempts
     started = time.time()
     try:
         from playwright.sync_api import sync_playwright
-    except Exception as error:
+        from playwright.sync_api import Error as _PWError
+    except ImportError as error:
         return None, f'مسار المتصفح غير متاح — {type(error).__name__}: {error}'
 
     notes = []
@@ -123,7 +133,7 @@ def fetch_via_browser(url: str, timeout: int = 60, warmup: bool = True, attempts
                                          f'{seconds}s · محاولة {index + 1}')
                     if headful:
                         time.sleep(3)
-    except Exception as error:
+    except (OSError, RuntimeError, TimeoutError, _PWError) as error:
         return None, f'مسار المتصفح فشل — {type(error).__name__}: {str(error)[:140]}'
     return None, 'مسار المتصفح: ' + ' | '.join(notes)
 

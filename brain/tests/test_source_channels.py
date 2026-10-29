@@ -8,6 +8,7 @@
 from __future__ import annotations
 
 import json
+import re
 import subprocess as sp
 import sys
 import tempfile
@@ -31,34 +32,48 @@ total, approved, gap, dup = sc.identity()
 t("الهوية: مجموع القنوات = المعتمد", total == approved, f"{total} ≠ {approved}")
 t("لا مصدر معتمد بلا قناة", not gap, f"بلا قناة: {gap}")
 t("لا مصدر في قناتين", not dup, f"مكرّر: {dup}")
-t("عدد المسار الآلي = ما رمزه في الحالة", len(ch["rss"]) == 40, str(len(ch["rss"])))
-t("عدد المرجعية اليدوية = 22", len(ch["browser"]) == 22, str(len(ch["browser"])))
-t("المصدر 29 له قناة", 29 in ch["browser"], "29 غير مُسند")
 
-# ── عدم التراجع: حذف قناة مصدر ⇒ البوابة تمنع باسمه ──
+# ── التوقّعات تُشتق من سجل اليوم نفسه (ك-247: أرقام مثبّتة (40/22/29) تعفّنت بعد ترقية
+# المسارات، فصار الاختبار يمنع يومًا سليمًا بلا سبب) ──
+status_files = sorted((B / "feeds").glob("feeds-*.status.json"))
+if status_files:
+    st = json.loads(status_files[-1].read_text(encoding="utf-8"))
+    t("عدد المسار الآلي = ما رمزه سجل اليوم",
+      len(ch["rss"]) == int(st.get("checked", -1)),
+      f'{len(ch["rss"])} ≠ {st.get("checked")}')
+    man_status = {int(n) for n in (st.get("manual_reference") or []) if str(n).isdigit()}
+    t("عدد المرجعية اليدوية = ما رمزه سجل اليوم",
+      man_status == set(ch["browser"]),
+      f'{sorted(ch["browser"])} ≠ {sorted(man_status)}')
+else:
+    t("سجل اليوم موجود لاشتقاق الأعداد", False, "لا ملف feeds-*.status.json")
+
+routes = getattr(sc, "BROWSER_ROUTES", {})
+missing_route = sorted(n for n in ch["browser"] if n not in routes or not routes[n].get("url"))
+t("لكل مصدر مرجعية يدوية مسار مرجعي معلن", not missing_route, f"بلا مسار: {missing_route}")
+
+# ── عدم التراجع: إسقاط أي مصدر مرجعي ⇒ البوابة تمنع باسمه (يُختار من السجل لا من قائمة مثبّتة) ──
 with tempfile.TemporaryDirectory() as td:
     td = Path(td)
-    # ك-237: النسخة السابقة كانت تنسخ ملفًا واحدًا فقط، فينهار الاستيراد في المجلد المؤقت (rc=1 بلا مخرج)
-    # وتبقى الحالة السلبية بلا إثبات. الآن تُنسخ شجرة الأدوات والبيانات كاملة ثم يُحذف الرمز 29.
-    import shutil
-    shutil.copytree(B / "tools", td / "tools")
-    # جداول المسارات تُقرأ من sections/ وappendices/ داخل المجلد المؤقت، فتُنسخ كاملة
+    import shutil as _sh
+    _sh.copytree(B / "tools", td / "tools")
     for d in ("sections", "appendices"):
         if (B / d).exists():
-            shutil.copytree(B / d, td / d, dirs_exist_ok=True)
+            _sh.copytree(B / d, td / d, dirs_exist_ok=True)
     (td / "validators").mkdir(exist_ok=True)
     f = td / "tools" / "source_channels.py"
-    src = f.read_text(encoding="utf-8")
-    before = "1, 5, 13, 15, 18, 19, 21, 23, 27, 29, 34, 39,"
-    after = "1, 5, 13, 15, 18, 19, 21, 23, 27, 34, 39,"
-    assert before in src, "لم أستطع بناء نسخة الاختبار (تعذّر حذف الرمز 29)"
-    f.write_text(src.replace(before, after), encoding="utf-8")
-    assert after in f.read_text(encoding="utf-8"), "لم أستطع بناء نسخة الاختبار"
+    text = f.read_text(encoding="utf-8")
+    target = sorted(ch["browser"])[0]
+    block = re.search(r"MANUAL_REFERENCE: set\[int\] = \{[^}]*\}", text)
+    assert block, "لم أستطع بناء نسخة الاختبار (تعذّر العثور على قائمة المرجعية)"
+    keep = [n for n in sorted(ch["browser"]) if n != target]
+    newset = "MANUAL_REFERENCE: set[int] = {" + ", ".join(str(n) for n in keep) + ",}"
+    f.write_text(text[:block.start()] + newset + text[block.end():], encoding="utf-8")
     code = ("import sys; sys.path.insert(0, r'%s/tools'); import source_channels as s; "
             "t,a,g,d = s.identity(); print(g); raise SystemExit(0 if g else 3)" % td)
     r = sp.run([sys.executable, "-c", code], capture_output=True, text=True, cwd=str(td))
-    t("اختبار عدم تراجع: المصدر 29 يُكشف فجوة عند الإزالة",
-      r.returncode == 0 and "29" in r.stdout,
+    t(f"اختبار عدم تراجع: المصدر {target} يُكشف فجوة عند إسقاطه",
+      r.returncode == 0 and str(target) in r.stdout,
       f"rc={r.returncode} out={r.stdout.strip()[:60]} err={r.stderr.strip()[-80:]}")
 
 print(f"\n  النتيجة: {'نجح' if not FAIL else f'فشل {len(FAIL)}'}")
