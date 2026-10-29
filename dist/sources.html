@@ -428,7 +428,9 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .mp-events .mp-dot{stroke:#fff}
   .map-viz{break-inside:auto;page-break-inside:auto}
   .bar-row .bl,.bar-row .bv,.viz h3,.viz .src-note,.src,.src b,.src .st,.foot,.kpi .k-l,.kpi .k-n,.notice,.chip,.cite-ref,.tag{font-size:10.5pt;line-height:1.6}
-  .card,.viz,.src,.kpi,.table-row{break-inside:avoid;page-break-inside:avoid}
+  /* ك-256: البطاقات الكبيرة تنقسم بين الصفحات لتصفير الفراغ الداخلي؛ البطاقات الصغيرة تبقى موحّدة. */
+  .card,.viz,.src,.table-row{break-inside:auto;page-break-inside:auto}
+  .kpi,.glossary,.rmk{break-inside:avoid;page-break-inside:avoid}
   .tbl-wrap{overflow:visible;break-inside:auto;page-break-inside:auto}
   table{min-width:0;font-size:10.5pt}
   thead{display:table-header-group}
@@ -838,24 +840,25 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     فتبقىان هنا في الموقع للرجوع إليهما في أي وقت.</p>
   </header>
 
-  <div class="sx-note">حالة آخر فحص للتغذيات — 2026-10-28:
+  <div class="sx-note">حالة آخر فحص للتغذيات — 2026-10-29:
   المصادر المعتمدة: <b>62</b> · لها مسار آلي: <b>60</b>
-  (ناجحة <b>60</b> · متعذّرة <b>0</b>) · بلا مسار آلي بعد: <b>2</b>
+  (ناجحة <b>59</b> · متعذّرة <b>1</b>) · بلا مسار آلي بعد: <b>2</b>
   · مسارات معلنة <b>81</b> نجح منها <b>74</b>
-  · عناصر مجمَّعة <b>1826</b>.
+  · عناصر مجمَّعة <b>1867</b>.
   المصدر الواحد قد تكون له عدة مسارات؛ وعدد المسارات لا يُقرأ عددًا للمصادر.
   والتعذّر يُسجَّل قيدًا معروفًا؛ وسياسة النظام تمنع تجاوز حماية المواقع.
-   بصمة ملف الفحص: <code>462c30d3d05c</code> — تُعاد الأرقام بحساب sha256 للملف sources/feeds-status.json.</div>
+   بصمة ملف الفحص: <code>729b06978974</code> — تُعاد الأرقام بحساب sha256 للملف sources/feeds-status.json.</div>
 
 
-  <h2 class="sx-h2">التشخيص الحي: 0 مصدرًا متعذّرًا و2 بلا مسار آلي، من أصل 62 معتمدة</h2>
-  <div class="dx-tiles"><div class="dx-tile dx-ok"><b>60</b><span>ناجحة آليًا</span></div><div class="dx-tile dx-bad"><b>0</b><span>متعذّرة الآن</span></div><div class="dx-tile dx-lim"><b>2</b><span>بلا مسار آلي مُثبت</span></div><div class="dx-tile dx-none"><b>0</b><span>بلا تغذية معلنة</span></div></div>
-  <div class="sx-note">هذا القسم يُبنى من قياس فحص التغذيات نفسه بتاريخ 2026-10-28، لا من لقطة محفوظة.
+  <h2 class="sx-h2">التشخيص الحي: 1 مصدرًا متعذّرًا و2 بلا مسار آلي، من أصل 62 معتمدة</h2>
+  <div class="dx-tiles"><div class="dx-tile dx-ok"><b>59</b><span>ناجحة آليًا</span></div><div class="dx-tile dx-bad"><b>1</b><span>متعذّرة الآن</span></div><div class="dx-tile dx-lim"><b>2</b><span>بلا مسار آلي مُثبت</span></div><div class="dx-tile dx-none"><b>0</b><span>بلا تغذية معلنة</span></div></div>
+  <div class="sx-note">هذا القسم يُبنى من قياس فحص التغذيات نفسه بتاريخ 2026-10-29، لا من لقطة محفوظة.
   «ناجحة آليًا» يعني أن المسار قرأ محتوى حقيقيًا (عنوان مادة أو نصّ منشور) لا روابط صور أو قوائم تنقّل.
   و«بلا مسار آلي مُثبت» مصدر معتمد يُقرأ يدويًا أو من أرشيف رسمي حتى يُثبت مسار آلي له.</div>
   <div class="sx-tblwrap"><table class="sx-tbl cardified">
     <thead><tr><th>#</th><th>المصدر</th><th>الحالة المقيسة</th><th>الإجراء</th></tr></thead>
     <tbody>
+<tr class="dx-bad"><td class="n" data-label="#">40</td><td data-label="المصدر">MarineTraffic</td><td data-label="الحالة المقيسة">تعذّر — تعذّر الجلب</td><td data-label="الإجراء">إصلاح المسار أو إضافة مسار بديل</td></tr>
 <tr class="dx-lim"><td class="n" data-label="#">39</td><td data-label="المصدر">IHO — المنظمة الهيدروغرافية الدولية</td><td data-label="الحالة المقيسة">بلا مسار آلي مُثبت بعد</td><td data-label="الإجراء">قراءة يدوية أو حفظ أصل رسمي حتى يُثبت مسار آلي</td></tr>
 <tr class="dx-lim"><td class="n" data-label="#">52</td><td data-label="المصدر">Synmax</td><td data-label="الحالة المقيسة">بلا مسار آلي مُثبت بعد</td><td data-label="الإجراء">قراءة يدوية أو حفظ أصل رسمي حتى يُثبت مسار آلي</td></tr>
     </tbody>
@@ -863,8 +866,8 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <h2 class="sx-h2">حالة المصادر المفحوصة</h2>
   <div class="sx-legend">
-    <span><b style="background:#1f9d6b"></b>نجح الفحص (60)</span>
-    <span><b style="background:#c8402f"></b>متعذّر (0)</span>
+    <span><b style="background:#1f9d6b"></b>نجح الفحص (59)</span>
+    <span><b style="background:#c8402f"></b>متعذّر (1)</span>
     <span><b style="background:#5a6b86"></b>لا تغذية RSS (2)</span>
   </div>
   <div class="sx-note">الرمادي: مصدر مُدرج في سجل المصادر المعتمد ولا تغذية آلية له في فحص التغذيات اليومي؛
@@ -878,7 +881,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">5</span><span class="sx-name">IMO — سجل الحوادث المؤكدة</span></div><div class="sx-state">نجح · 8 عنصرًا · official-page:jina.ai/imo-middle-east-incidents</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">6</span><span class="sx-name">straits.live</span></div><div class="sx-state">نجح · 119 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">7</span><span class="sx-name">gCaptain</span></div><div class="sx-state">نجح · 12 عنصرًا · primary</div></div>
-<div class="sx-card ok"><div class="sx-top"><span class="sx-num">8</span><span class="sx-name">TradeWinds</span></div><div class="sx-state">نجح · 177 عنصرًا · primary</div></div>
+<div class="sx-card ok"><div class="sx-top"><span class="sx-num">8</span><span class="sx-name">TradeWinds</span></div><div class="sx-state">نجح · 178 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">9</span><span class="sx-name">Seatrade Maritime</span></div><div class="sx-state">نجح · 50 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">10</span><span class="sx-name">الجزيرة نت</span></div><div class="sx-state">نجح · 25 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">11</span><span class="sx-name">الجزيرة الإنجليزية</span></div><div class="sx-state">نجح · 25 عنصرًا · primary</div></div>
@@ -910,8 +913,8 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">37</span><span class="sx-name">MarineLink</span></div><div class="sx-state">نجح · 20 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">38</span><span class="sx-name">Jerusalem Post</span></div><div class="sx-state">نجح · 33 عنصرًا · primary</div></div>
 <div class="sx-card none"><div class="sx-top"><span class="sx-num">39</span><span class="sx-name">IHO — المنظمة الهيدروغرافية الدولية</span></div><div class="sx-state">مفحوصة يدويًا — لا تُفحص آليًا</div></div>
-<div class="sx-card ok"><div class="sx-top"><span class="sx-num">40</span><span class="sx-name">MarineTraffic</span></div><div class="sx-state">نجح · 27 عنصرًا · official-page:jina.ai/marinetraffic-news</div></div>
-<div class="sx-card ok"><div class="sx-top"><span class="sx-num">41</span><span class="sx-name">USNI News</span></div><div class="sx-state">نجح · 30 عنصرًا · browser</div></div>
+<div class="sx-card bad"><div class="sx-top"><span class="sx-num">40</span><span class="sx-name">MarineTraffic</span></div><div class="sx-state">تعذّر — تعذّر الجلب</div></div>
+<div class="sx-card ok"><div class="sx-top"><span class="sx-num">41</span><span class="sx-name">USNI News</span></div><div class="sx-state">نجح · 97 عنصرًا · official-page:jina.ai/usni-news, primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">42</span><span class="sx-name">Naval News</span></div><div class="sx-state">نجح · 5 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">43</span><span class="sx-name">The Maritime Executive</span></div><div class="sx-state">نجح · 31 عنصرًا · primary</div></div>
 <div class="sx-card ok"><div class="sx-top"><span class="sx-num">44</span><span class="sx-name">Windward</span></div><div class="sx-state">نجح · 12 عنصرًا · primary</div></div>

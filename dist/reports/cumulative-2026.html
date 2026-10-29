@@ -432,7 +432,9 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .mp-events .mp-dot{stroke:#fff}
   .map-viz{break-inside:auto;page-break-inside:auto}
   .bar-row .bl,.bar-row .bv,.viz h3,.viz .src-note,.src,.src b,.src .st,.foot,.kpi .k-l,.kpi .k-n,.notice,.chip,.cite-ref,.tag{font-size:10.5pt;line-height:1.6}
-  .card,.viz,.src,.kpi,.table-row{break-inside:avoid;page-break-inside:avoid}
+  /* ك-256: البطاقات الكبيرة تنقسم بين الصفحات لتصفير الفراغ الداخلي؛ البطاقات الصغيرة تبقى موحّدة. */
+  .card,.viz,.src,.table-row{break-inside:auto;page-break-inside:auto}
+  .kpi,.glossary,.rmk{break-inside:avoid;page-break-inside:avoid}
   .tbl-wrap{overflow:visible;break-inside:auto;page-break-inside:auto}
   table{min-width:0;font-size:10.5pt}
   thead{display:table-header-group}

@@ -432,7 +432,9 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .mp-events .mp-dot{stroke:#fff}
   .map-viz{break-inside:auto;page-break-inside:auto}
   .bar-row .bl,.bar-row .bv,.viz h3,.viz .src-note,.src,.src b,.src .st,.foot,.kpi .k-l,.kpi .k-n,.notice,.chip,.cite-ref,.tag{font-size:10.5pt;line-height:1.6}
-  .card,.viz,.src,.kpi,.table-row{break-inside:avoid;page-break-inside:avoid}
+  /* ك-256: البطاقات الكبيرة تنقسم بين الصفحات لتصفير الفراغ الداخلي؛ البطاقات الصغيرة تبقى موحّدة. */
+  .card,.viz,.src,.table-row{break-inside:auto;page-break-inside:auto}
+  .kpi,.glossary,.rmk{break-inside:avoid;page-break-inside:avoid}
   .tbl-wrap{overflow:visible;break-inside:auto;page-break-inside:auto}
   table{min-width:0;font-size:10.5pt}
   thead{display:table-header-group}
@@ -1061,7 +1063,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     <div class="threat risk-high"><div class="lbl">مستوى التهديد</div><div class="val">مرتفع</div></div>
     <div>
       <p class="lede">من العدّ الثنائي للتناقضات إلى مجموع موزون: وزن موثوقية المصدر × القوة التشخيصية، مع نسبة عدم التناسب R كوزن في دليل المقام. النتيجة بعد تدقيق مستقل: فرضية الانتماء أولًا (19.35) والخط الملاحي ثانيًا (14.32)، والعلم السنغافوري ساقطة بصافي سالب. والترتيب صمد في تسعة من عشرة سيناريوهات حساسية.</p>
-      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-28 23:35 <span class="ltr">UTC</span></b></span></div>
+      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-29 00:56 <span class="ltr">UTC</span></b></span></div>
     </div>
   </header>
 
@@ -1715,7 +1717,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> مصفوفة <span class="ltr">ACH</span> نسخة 3 — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: <span class="ltr">UTC</span> وتوقيت البحرين (<span class="ltr">UTC</span>+3).
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-28 23:35 UTC</bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-29 00:56 UTC</bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
     
   </footer>
 </div>
