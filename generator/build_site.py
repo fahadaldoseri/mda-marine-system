@@ -1,3 +1,4 @@
+import pathlib
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -749,8 +750,20 @@ def main():
     return 0
 
 
+def _build_en_editions() -> None:
+    """يبني نسخ الإصدارات الإنجليزية عند وجود ترجمة معتمدة."""
+    try:
+        import build_report_en
+        for _f in sorted(pathlib.Path("sources/i18n/en").glob("*-sectioned.en.md")):
+            build_report_en.build(_f.name.split("-sectioned")[0])
+    except Exception as _e:  # لا يُسقط البناء العربي
+        print("   تنبيه: لم تُبنَ نسخة إنجليزية:", _e)
+
+
 if __name__ == "__main__":
-    sys.exit(main())
+    _rc = main()
+    _build_en_editions()
+    sys.exit(_rc)
 
 
 # ── إصلاح ك-252 (2026-10-28): pubDate لكل عنصر وlastBuildDate للقناة في تغذية RSS ──

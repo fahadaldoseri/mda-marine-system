@@ -66,12 +66,13 @@ PREFS_EARLY = """<script>
 (function(){try{
 var b=document.body;if(!b)return;
 var t=localStorage.getItem('mn-theme');if(t==='light')b.classList.add('daylight');
+var g=localStorage.getItem('mn-lang');if(g==='en'){document.documentElement.lang='en';document.documentElement.dir='ltr';b.classList.add('lang-en');}
 var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom=s;
 }catch(e){}})();
 </script>"""
 
 # سكربت نهاية الصفحة: يربط الأدوات ويحفظ التفضيلات ويتذكر آخر تقرير
-PREFS_LATE = """<script>
+PREFS_LATE = r"""<script>
 (function(){
 var LS=window.localStorage, body=document.body;
 function save(k,v){try{LS.setItem(k,v);}catch(e){}}
@@ -80,8 +81,7 @@ var reportBtn=document.getElementById('btn-theme'), siteBtn=document.getElementB
 if(reportBtn){var clone=reportBtn.cloneNode(true);reportBtn.parentNode.replaceChild(clone,reportBtn);reportBtn=clone;}
 function isLight(){return body.classList.contains('daylight');}
 function paint(){
-  if(reportBtn) reportBtn.textContent = isLight() ? 'النمط الليلي' : 'النمط النهاري';
-  if(siteBtn) siteBtn.textContent = isLight() ? 'المظهر: نهاري' : 'المظهر: ليلي';
+  paintLang();
   document.querySelectorAll('[data-scale]').forEach(function(b){
     b.classList.toggle('on', parseFloat(b.getAttribute('data-scale'))===currentScale());
   });
@@ -97,6 +97,54 @@ document.querySelectorAll('[data-scale]').forEach(function(b){
     var s=parseFloat(b.getAttribute('data-scale'));save('mn-scale',s);
     body.style.zoom=(s===1?'':s);paint();});
 });
+var I18N={ar:{"skip": "الانتقال إلى المحتوى", "menu": "القائمة", "home": "الرئيسية", "special": "التقارير الخاصة", "archive": "الأرشيف", "monthly": "اللوحة الشهرية", "cumulative": "السجل التراكمي", "sources": "المصادر والمراجع", "additions": "إضافات", "scale": "حجم الخط", "theme-dark": "المظهر: ليلي", "theme-light": "المظهر: نهاري", "print": "طباعة / PDF", "lang": "اللغة", "foot2-html": "تُحدَّث الصفحات آليًا مع كل إصدار · <a href=\"/#archive\">الأرشيف الكامل</a> · <a href=\"/feed.xml\">تغذية الإصدارات</a>", "no-en": "النسخة الإنجليزية لهذا الإصدار غير متاحة بعد."},en:{"skip": "Skip to content", "menu": "Menu", "home": "Home", "special": "Special reports", "archive": "Archive", "monthly": "Monthly dashboard", "cumulative": "Cumulative record", "sources": "Sources & references", "additions": "Additions", "scale": "Font size", "theme-dark": "Theme: night", "theme-light": "Theme: day", "print": "Print / PDF", "lang": "Language", "foot2-html": "Pages update automatically with every edition · <a href=\"/#archive\">Full archive</a> · <a href=\"/feed.xml\">Edition feed</a>", "no-en": "The English edition of this report is not available yet."}};
+function currentLang(){var lock=document.documentElement.getAttribute('data-lang');if(lock)return lock;var l=LS.getItem('mn-lang');return (l==='en')?'en':'ar';}
+function t(key){var d=I18N[currentLang()];return (d&&d[key])||I18N.ar[key]||'';}
+var _b=document.querySelector('.sn-name'), _s=document.querySelector('.sn-name em');
+var BRAND_TXT=_b?(_b.childNodes[0].nodeValue||'').trim():'', BRAND_SUB_TXT=_s?_s.textContent.trim():'';
+function paintLang(){
+  var l=currentLang();
+  document.querySelectorAll('[data-i18n]').forEach(function(el){var v=t(el.getAttribute('data-i18n'));if(v)el.textContent=v;});
+  document.querySelectorAll('[data-i18n-aria]').forEach(function(el){var v=t(el.getAttribute('data-i18n-aria'));if(v)el.setAttribute('aria-label',v);});
+  var f1=document.querySelector('[data-i18n-html="foot1"]'); if(f1) f1.textContent=BRAND_TXT+' — '+BRAND_SUB_TXT;
+  var f2=document.querySelector('[data-i18n-html="foot2"]'); if(f2) f2.innerHTML=t('foot2-html');
+  document.querySelectorAll('[data-lang]').forEach(function(b){b.classList.toggle('on', b.getAttribute('data-lang')===l);});
+  var rb=document.getElementById('btn-theme'), sb=document.getElementById('sn-theme');
+  var L=(l==='en'), light=body.classList.contains('daylight');
+  if(rb) rb.textContent = light ? (L?'Night mode':'النمط الليلي') : (L?'Day mode':'النمط النهاري');
+  if(sb) sb.textContent = light ? t('theme-light') : t('theme-dark');
+}
+function note(msg){
+  var n=document.getElementById('sn-lang-note');
+  if(!n){n=document.createElement('div');n.id='sn-lang-note';n.className='sn-lang-note no-print';document.body.appendChild(n);}
+  n.textContent=msg; n.style.display='block'; setTimeout(function(){n.style.display='none';},4600);
+}
+function routeLang(l){
+  var m=location.pathname.match(/^\/reports\/(en\/)?(\d{4}-\d{2}-\d{2})\.html$/);
+  if(!m) return;
+  var isEn=!!m[1], date=m[2];
+  if(l==='en'&&!isEn){
+    fetch('/reports/en/index.json').then(function(r){return r.ok?r.json():null;}).then(function(d){
+      var list=(d&&d.dates)||[];
+      if(list.indexOf(date)>=0){ location.href='/reports/en/'+date+'.html'; } else { note(t('no-en')); }
+    }).catch(function(){ note(t('no-en')); });
+  } else if(l==='ar'&&isEn){
+    location.href='/reports/'+date+'.html';
+  }
+}
+function applyLang(l,go){
+  try{LS.setItem('mn-lang',l);}catch(e){}
+  var lock=document.documentElement.getAttribute('data-lang');
+  if(lock&&l!==lock){ if(go) routeLang(l); return; }
+  var root=document.documentElement;
+  root.lang=(l==='en')?'en':'ar'; root.dir=(l==='en')?'ltr':'rtl';
+  body.classList.toggle('lang-en', l==='en');
+  paintLang(); if(go) routeLang(l);
+}
+document.querySelectorAll('[data-lang]').forEach(function(b){
+  b.addEventListener('click',function(e){e.preventDefault();applyLang(b.getAttribute('data-lang'),true);});
+});
+paintLang();
 paint();
 // رابط التخطي: أول عنوان ظاهر في الصفحة (أو المتن)، فلا يمرّ قارئ لوحة المفاتيح على الشريط كله في كل صفحة
 var skip=document.getElementById('sn-skip');
@@ -116,22 +164,81 @@ if(p.indexOf('/reports/')===0){
 </script>"""
 
 
+LANG_CSS = """
+.sn-lang{display:inline-flex;border:1px solid var(--sn-line);border-radius:9px;overflow:hidden}
+.sn-lang button{background:transparent;border:0;color:var(--sn-ink2);padding:6px 11px;min-height:32px;min-width:42px;
+cursor:pointer;font:inherit;font-size:12.5px;font-weight:700}
+.sn-lang button.on{background:var(--sn-accent);color:var(--sn-accent-ink)}
+.sn-lang button:hover{color:var(--sn-ink)}
+.sn-lang-note{position:fixed;left:50%;transform:translateX(-50%);top:14px;z-index:60;background:var(--sn-panel);
+border:1px solid var(--sn-line);color:var(--sn-ink);border-radius:10px;padding:10px 14px;font-size:13px;
+box-shadow:0 10px 30px rgba(0,0,0,.35);max-width:90vw;text-align:center}
+"""
+
+LANG_JS = r"""
+var I18N={ar:{"skip": "الانتقال إلى المحتوى", "menu": "القائمة", "home": "الرئيسية", "special": "التقارير الخاصة", "archive": "الأرشيف", "monthly": "اللوحة الشهرية", "cumulative": "السجل التراكمي", "sources": "المصادر والمراجع", "additions": "إضافات", "scale": "حجم الخط", "theme-dark": "المظهر: ليلي", "theme-light": "المظهر: نهاري", "print": "طباعة / PDF", "lang": "اللغة", "foot2-html": "تُحدَّث الصفحات آليًا مع كل إصدار · <a href=\"/#archive\">الأرشيف الكامل</a> · <a href=\"/feed.xml\">تغذية الإصدارات</a>", "no-en": "النسخة الإنجليزية لهذا الإصدار غير متاحة بعد."},en:{"skip": "Skip to content", "menu": "Menu", "home": "Home", "special": "Special reports", "archive": "Archive", "monthly": "Monthly dashboard", "cumulative": "Cumulative record", "sources": "Sources & references", "additions": "Additions", "scale": "Font size", "theme-dark": "Theme: night", "theme-light": "Theme: day", "print": "Print / PDF", "lang": "Language", "foot2-html": "Pages update automatically with every edition · <a href=\"/#archive\">Full archive</a> · <a href=\"/feed.xml\">Edition feed</a>", "no-en": "The English edition of this report is not available yet."}};
+function currentLang(){var lock=document.documentElement.getAttribute('data-lang');if(lock)return lock;var l=LS.getItem('mn-lang');return (l==='en')?'en':'ar';}
+function t(key){var d=I18N[currentLang()];return (d&&d[key])||I18N.ar[key]||'';}
+var _b=document.querySelector('.sn-name'), _s=document.querySelector('.sn-name em');
+var BRAND_TXT=_b?(_b.childNodes[0].nodeValue||'').trim():'', BRAND_SUB_TXT=_s?_s.textContent.trim():'';
+function paintLang(){
+  var l=currentLang();
+  document.querySelectorAll('[data-i18n]').forEach(function(el){var v=t(el.getAttribute('data-i18n'));if(v)el.textContent=v;});
+  document.querySelectorAll('[data-i18n-aria]').forEach(function(el){var v=t(el.getAttribute('data-i18n-aria'));if(v)el.setAttribute('aria-label',v);});
+  var f1=document.querySelector('[data-i18n-html="foot1"]'); if(f1) f1.textContent=BRAND_TXT+' — '+BRAND_SUB_TXT;
+  var f2=document.querySelector('[data-i18n-html="foot2"]'); if(f2) f2.innerHTML=t('foot2-html');
+  document.querySelectorAll('[data-lang]').forEach(function(b){b.classList.toggle('on', b.getAttribute('data-lang')===l);});
+  var rb=document.getElementById('btn-theme'), sb=document.getElementById('sn-theme');
+  var L=(l==='en'), light=body.classList.contains('daylight');
+  if(rb) rb.textContent = light ? (L?'Night mode':'النمط الليلي') : (L?'Day mode':'النمط النهاري');
+  if(sb) sb.textContent = light ? t('theme-light') : t('theme-dark');
+}
+function note(msg){
+  var n=document.getElementById('sn-lang-note');
+  if(!n){n=document.createElement('div');n.id='sn-lang-note';n.className='sn-lang-note no-print';document.body.appendChild(n);}
+  n.textContent=msg; n.style.display='block'; setTimeout(function(){n.style.display='none';},4600);
+}
+function routeLang(l){
+  var m=location.pathname.match(/^\/reports\/(en\/)?(\d{4}-\d{2}-\d{2})\.html$/);
+  if(!m) return;
+  var isEn=!!m[1], date=m[2];
+  if(l==='en'&&!isEn){
+    fetch('/reports/en/index.json').then(function(r){return r.ok?r.json():null;}).then(function(d){
+      var list=(d&&d.dates)||[];
+      if(list.indexOf(date)>=0){ location.href='/reports/en/'+date+'.html'; } else { note(t('no-en')); }
+    }).catch(function(){ note(t('no-en')); });
+  } else if(l==='ar'&&isEn){
+    location.href='/reports/'+date+'.html';
+  }
+}
+function applyLang(l,go){
+  try{LS.setItem('mn-lang',l);}catch(e){}
+  var lock=document.documentElement.getAttribute('data-lang');
+  if(lock&&l!==lock){ if(go) routeLang(l); return; }
+  var root=document.documentElement;
+  root.lang=(l==='en')?'en':'ar'; root.dir=(l==='en')?'ltr':'rtl';
+  body.classList.toggle('lang-en', l==='en');
+  paintLang(); if(go) routeLang(l);
+}
+"""
+
+
 def nav_html(active: str = "") -> str:
     """شريط التنقّل الموحّد. active: home | monthly | cumulative | report"""
     def link(href, label, key):
         cur = ' aria-current="page"' if key == active else ""
-        return f'<a href="{href}"{cur}>{label}</a>'
+        return f'<a href="{href}"{cur} data-i18n="{key}">{label}</a>'
     # زر الطباعة في الشريط الواحد لصفحات الإصدار فقط (يحلّ محل زر الشريط العلوي المخفي على الشاشة)
-    print_btn = '<button type="button" class="sn-theme sn-print" id="sn-print">طباعة / PDF</button>' if active == "report" else ""
+    print_btn = '<button type="button" class="sn-theme sn-print" id="sn-print" data-i18n="print">طباعة / PDF</button>' if active == "report" else ""
     return f"""<nav class="site-nav no-print" aria-label="تنقل الموقع">
-  <a class="sn-skip" href="#" id="sn-skip">الانتقال إلى المحتوى</a>
+  <a class="sn-skip" href="#" id="sn-skip" data-i18n="skip">الانتقال إلى المحتوى</a>
   <div class="sn-inner">
     <a class="sn-brand" href="/">
       <span class="sn-mark">{MARK_SVG}</span>
       <span class="sn-name">{BRAND}<em>{BRAND_SUB}</em></span>
     </a>
     <button type="button" class="sn-menu no-print" aria-expanded="false" aria-controls="sn-panel">
-      <span class="sn-menu-icon" aria-hidden="true"></span><span>القائمة</span>
+      <span class="sn-menu-icon" aria-hidden="true"></span><span data-i18n="menu">القائمة</span>
     </button>
     <div class="sn-panel" id="sn-panel">
     <div class="sn-links">
@@ -144,7 +251,11 @@ def nav_html(active: str = "") -> str:
       {link('/additions.html', 'إضافات', 'additions')}
     </div>
     <div class="sn-tools">
-      <div class="sn-scale" role="group" aria-label="حجم الخط">
+      <div class="sn-lang" role="group" aria-label="اللغة / Language">
+        <button type="button" data-lang="ar" title="العربية" lang="ar">ع</button>
+        <button type="button" data-lang="en" title="English" lang="en">EN</button>
+      </div>
+      <div class="sn-scale" role="group" aria-label="حجم الخط" data-i18n-aria="scale">
         <button type="button" data-scale="1" title="حجم عادي">أ</button>
         <button type="button" data-scale="1.12" title="حجم أكبر">أ+</button>
         <button type="button" data-scale="1.25" title="أكبر حجم">أ++</button>
@@ -161,8 +272,8 @@ def foot_html(note: str = "") -> str:
     extra = f" · {note}" if note else ""
     return f"""<footer class="sn-foot no-print">
   <div class="sf-inner">
-    <span>{BRAND} — {BRAND_SUB}{extra}</span>
-    <span>تُحدَّث الصفحات آليًا مع كل إصدار · <a href="/#archive">الأرشيف الكامل</a> · <a href="/feed.xml">تغذية الإصدارات</a></span>
+    <span><span data-i18n-html="foot1">{BRAND} — {BRAND_SUB}</span>{extra}</span>
+    <span data-i18n-html="foot2">تُحدَّث الصفحات آليًا مع كل إصدار · <a href="/#archive">الأرشيف الكامل</a> · <a href="/feed.xml">تغذية الإصدارات</a></span>
   </div>
 </footer>"""
 
@@ -171,7 +282,7 @@ def inject(html: str, active: str, note: str = "") -> str:
     """حقن الترويسة والتفضيلات في صفحة مُولَّدة."""
     if "</head>" not in html:
         return html
-    style = f"<style>{SITE_CSS}{MOBILE_NAV_CSS}</style>"
+    style = f"<style>{SITE_CSS}{MOBILE_NAV_CSS}{LANG_CSS}</style>"
     html = html.replace("</head>", style + "</head>", 1)
 
     # سكربت المظهر المبكر بعد فتح الجسم مباشرة
