@@ -43,6 +43,7 @@ background:linear-gradient(150deg,var(--sn-accent),#0c8b83);color:#04120f}
 .sn-scale{display:flex;border:1px solid var(--sn-line);border-radius:9px;overflow:hidden}
 .sn-scale button{background:transparent;border:0;color:var(--sn-ink2);padding:5px 8px;min-width:34px;min-height:32px;cursor:pointer;font:inherit;font-size:13px}
 .sn-scale button.on{background:var(--sn-accent);color:var(--sn-accent-ink);font-weight:700}
+.sn-tools button, .sn-tools a, .sn-scale button{min-height:44px;min-width:44px}
 .sn-theme{background:var(--sn-panel);border:1px solid var(--sn-line);color:var(--sn-ink2);
 border-radius:9px;padding:6px 11px;cursor:pointer;font:inherit;font-size:13px}
 .sn-theme:hover{color:var(--sn-ink)}
@@ -169,7 +170,7 @@ if(p.indexOf('/reports/')===0){
 
 LANG_CSS = """
 .sn-lang{display:inline-flex;border:1px solid var(--sn-line);border-radius:9px;overflow:hidden}
-.sn-lang button{background:transparent;border:0;color:var(--sn-ink2);padding:6px 11px;min-height:32px;min-width:42px;
+.sn-lang button{background:transparent;border:0;color:var(--sn-ink2);padding:6px 11px;min-height:44px;min-width:44px;
 cursor:pointer;font:inherit;font-size:12.5px;font-weight:700}
 .sn-lang button.on{background:var(--sn-accent);color:var(--sn-accent-ink)}
 .sn-lang button:hover{color:var(--sn-ink)}

@@ -888,6 +888,7 @@ background:linear-gradient(150deg,var(--sn-accent),#0c8b83);color:#04120f}
 .sn-scale{display:flex;border:1px solid var(--sn-line);border-radius:9px;overflow:hidden}
 .sn-scale button{background:transparent;border:0;color:var(--sn-ink2);padding:5px 8px;min-width:34px;min-height:32px;cursor:pointer;font:inherit;font-size:13px}
 .sn-scale button.on{background:var(--sn-accent);color:var(--sn-accent-ink);font-weight:700}
+.sn-tools button, .sn-tools a, .sn-scale button{min-height:44px;min-width:44px}
 .sn-theme{background:var(--sn-panel);border:1px solid var(--sn-line);color:var(--sn-ink2);
 border-radius:9px;padding:6px 11px;cursor:pointer;font:inherit;font-size:13px}
 .sn-theme:hover{color:var(--sn-ink)}
@@ -1012,7 +1013,7 @@ html{scroll-padding-top:calc(var(--nav-h, 60px) + var(--bar-h, 0px) + 12px);scro
 section.doc{scroll-margin-top:0 !important}
 
 .sn-lang{display:inline-flex;border:1px solid var(--sn-line);border-radius:9px;overflow:hidden}
-.sn-lang button{background:transparent;border:0;color:var(--sn-ink2);padding:6px 11px;min-height:32px;min-width:42px;
+.sn-lang button{background:transparent;border:0;color:var(--sn-ink2);padding:6px 11px;min-height:44px;min-width:44px;
 cursor:pointer;font:inherit;font-size:12.5px;font-weight:700}
 .sn-lang button.on{background:var(--sn-accent);color:var(--sn-accent-ink)}
 .sn-lang button:hover{color:var(--sn-ink)}
@@ -1247,6 +1248,14 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <script>
 (function(){
   var d = document;
+  // ك-317: طبقة الشاشة ثنائية اللغة — كل نص تُبنيه هذه الطبقة يأتي من قاموس اللغة نفسها،
+  // فالصفحة الإنجليزية لا تعرض نصًا عربيًا حيًّا ولا تفقد أقسامها المفتوحة افتراضيًا.
+  var EN = (d.documentElement.getAttribute('lang') || 'ar').toLowerCase().indexOf('en') === 0;
+  var T = EN
+    ? { fresh:'Current', late:'Delayed', old:'Outdated', ltHour:'less than an hour', hour:' h ago', day:' d ago', before:' · ',
+        two:'2 items', many:' items', aria:'Toggle section 「{t}」', jump:'Jump to sections', openAll:'Expand all', closeAll:'Collapse all' }
+    : { fresh:'حديث', late:'متأخر', old:'قديم', ltHour:'أقل من ساعة', hour:' ساعة', day:' يومًا', before:' · قبل ',
+        two:'بندان', many:' بنود', aria:'طيّ قسم «{t}» أو فتحه', jump:'انتقال إلى الأقسام', openAll:'فتح الكل', closeAll:'طيّ الكل' };
   // عمر الإصدار: كلمة ولون معًا، ويُحسب عند فتح الصفحة
   var f = d.querySelector('[data-gen]');
   if (f) {
@@ -1256,11 +1265,11 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     if (isNaN(t)) { f.parentNode.removeChild(f); }
     else {
       var h = Math.max(0, (Date.now() - t) / 36e5), cls, word, txt;
-      if (h <= 30) { cls = 'f-ok'; word = 'حديث'; }
-      else if (h <= 54) { cls = 'f-warn'; word = 'متأخر'; }
-      else { cls = 'f-old'; word = 'قديم'; }
-      txt = h < 1 ? 'أقل من ساعة' : (h < 48 ? Math.round(h) + ' ساعة' : Math.round(h / 24) + ' يومًا');
-      f.querySelector('.sc-age').textContent = word + ' · قبل ' + txt;
+      if (h <= 30) { cls = 'f-ok'; word = T.fresh; }
+      else if (h <= 54) { cls = 'f-warn'; word = T.late; }
+      else { cls = 'f-old'; word = T.old; }
+      txt = h < 1 ? T.ltHour : (h < 48 ? Math.round(h) + T.hour : Math.round(h / 24) + T.day);
+      f.querySelector('.sc-age').textContent = word + T.before + txt;
       f.className += ' ' + cls; f.hidden = false;
     }
   }
@@ -1272,7 +1281,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
   // فلا يُعرض مطويًا فيُحجب المحتوى عن القارئ.)
   // ك-304: تُفتح أيضًا الأقسام التي طلب المالك إدراجها في التقرير اليومي: مستوى التهديد،
   // والتحذيرات والنشرات الرسمية، وسجل IMO والحوادث المؤكدة.
-  var openRe = /الخلاصة|التوجيهات التشغيلية|مؤشرات الموقف|سجل الأحداث|الوقائع الجديدة|مستوى التهديد|التحذيرات والنشرات الرسمية|سجل IMO/;
+  var openRe = /الخلاصة|التوجيهات التشغيلية|مؤشرات الموقف|سجل الأحداث|الوقائع الجديدة|مستوى التهديد|التحذيرات والنشرات الرسمية|سجل IMO|Summary|Operational Guidance|Situation Indicators|Event Log|Threat Level|Official Warnings and Advisories|IMO/;
   function setState(sec, btn, collapsed) {
     sec.classList.toggle('sc-collapsed', collapsed);
     btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
@@ -1294,7 +1303,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     var t = first ? flat(first) : '';
     if (!n && !t) return null;
     var el = d.createElement('div'); el.className = 'sc-peek no-print';
-    if (n > 1) { var b = d.createElement('b'); b.textContent = n === 2 ? 'بندان' : (n <= 10 ? n + ' بنود' : n + ' بندًا'); el.appendChild(b); }
+    if (n > 1) { var b = d.createElement('b'); b.textContent = n === 2 ? T.two : (n + T.many); el.appendChild(b); }
     if (t) { var sp = d.createElement('span'); sp.textContent = t; el.appendChild(sp); }
     return el;
   }
@@ -1304,7 +1313,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     var title = h.textContent.trim();
     var b = d.createElement('button');
     b.type = 'button'; b.className = 'sc-toggle no-print';
-    b.setAttribute('aria-label', 'طيّ قسم «' + title + '» أو فتحه');
+    b.setAttribute('aria-label', T.aria.replace('{t}', title));
     if (sec.id) b.setAttribute('aria-controls', sec.id);
     var pk = peekOf(sec); if (pk) sec.appendChild(pk);
     sec.appendChild(b);
@@ -1325,14 +1334,14 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
   }
   if (items.length) {
     var bar = d.createElement('div'); bar.className = 'sc-toolbar no-print';
-    var nav = d.createElement('nav'); nav.className = 'sc-jump'; nav.setAttribute('aria-label', 'انتقال إلى الأقسام');
+    var nav = d.createElement('nav'); nav.className = 'sc-jump'; nav.setAttribute('aria-label', T.jump);
     items.forEach(function (it) {
       var a = d.createElement('a'); a.href = '#' + it.sec.id; a.textContent = it.label;
       a.addEventListener('click', function () { openSec(it.sec); });
       nav.appendChild(a);
     });
     var all = d.createElement('div'); all.className = 'sc-all';
-    [['فتح الكل', false], ['طيّ الكل', true]].forEach(function (p) {
+    [[T.openAll, false], [T.closeAll, true]].forEach(function (p) {
       var b = d.createElement('button'); b.type = 'button'; b.textContent = p[0];
       b.addEventListener('click', function () { items.forEach(function (it) { setState(it.sec, it.btn, p[1]); }); });
       all.appendChild(b);
