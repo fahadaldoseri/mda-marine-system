@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-29T22:38:34.029130+00:00",
+  "generated_at": "2026-10-29T22:54:31.468618+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -2476,24 +2476,24 @@
     },
     {
       "fault_id": "ك-319",
-      "state": "بانتظار التحقق",
-      "lesson_id": null,
-      "barrier_id": "B-65dd4538",
-      "run_evidence": null
+      "state": "مغلق",
+      "lesson_id": "ك-319",
+      "barrier_id": "B-724760fb",
+      "run_evidence": " دليل: dist/feed.xml → pubDate=18 · lastBuildDate=1 بوابة تغذية RSS — خرج 0 (pubDate في كل عنصر وlas"
     },
     {
       "fault_id": "ك-320",
-      "state": "بانتظار التحقق",
+      "state": "مغلق",
       "lesson_id": "ك-320",
-      "barrier_id": "B-2bab1e76",
-      "run_evidence": null
+      "barrier_id": "B-b099a39c",
+      "run_evidence": "l size/Larger size/Largest size بوابة validators/check_en_parity.py — خرج 0 (بنية وأرقام وسمات بلا ع"
     },
     {
       "fault_id": "ك-321",
-      "state": "بانتظار التحقق",
+      "state": "مغلق",
       "lesson_id": "ك-321",
-      "barrier_id": "B-08895d42",
-      "run_evidence": null
+      "barrier_id": "B-a44ef953",
+      "run_evidence": "بوابة> ثم gate_verdict → لا حكم مانع اختبار tools/runbook.py --redo — خرج 0 بإعادة تحقق فعلية للخطوا"
     },
     {
       "fault_id": "ك-322",
