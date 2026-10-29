@@ -302,6 +302,18 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .ev-meta .ev-k{display:block;font-size:11.5px;color:var(--muted);opacity:.85;margin-bottom:2px}
 .ev-meta .ev-mv{display:block;color:var(--ink-2)}
 @media (max-width:820px){.ev-grid{grid-template-columns:1fr}}
+.dg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px;margin:16px 0 10px}
+.dg{position:relative;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:14px 16px 13px;overflow:hidden}
+.dg-top{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.dg-idx{font-variant-numeric:tabular-nums;font-size:12px;color:var(--muted);border:1px solid var(--line-2);border-radius:6px;padding:1px 6px}
+.dg-t{font-size:14px;color:var(--ink)}
+.dg-badge{margin-inline-start:auto;font-size:11.5px;line-height:1;padding:4px 10px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2)}
+.dg-body{margin:0 0 9px;font-size:13.5px;line-height:1.85;color:var(--ink-2)}
+.dg-meta{display:flex;flex-direction:column;gap:5px;margin:0;padding-top:8px;border-top:1px dashed var(--line)}
+.dg-f{display:grid;grid-template-columns:auto 1fr;gap:2px 8px;font-size:12.5px;line-height:1.7}
+.dg-k{color:var(--muted);font-size:11.5px;opacity:.9}
+.dg-v{color:var(--ink-2)}
+@media (max-width:820px){.dg-grid{grid-template-columns:1fr}}
 
 /* ---------- التذييل ---------- */
 .foot{margin-top:34px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);color:var(--muted);font-size:13.5px}
@@ -467,6 +479,15 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
      .ev-meta{margin-top:1.8mm;padding-top:1.4mm}
      .ev-meta{font-size:9.5pt;color:#4a5b73;border-top-color:#dbe3ec}
      .ev-idx,.ev-code,.ev-badge{font-size:9pt;color:#4a5b73;border-color:#c3cedb}
+     .dg-grid{display:block;margin:4mm 0 0}
+     .dg{display:block;margin:0 0 3mm;padding:3.2mm 4mm 2.8mm;break-inside:avoid;page-break-inside:avoid;border-color:#dbe3ec;background:#fff}
+     .dg-top{margin-bottom:1.4mm}
+     .dg-t{font-size:10pt}
+     .dg-body{font-size:9.5pt;line-height:1.5;margin-bottom:1.4mm;color:#243447}
+     .dg-meta{padding-top:1.2mm;border-top-color:#e4eaf1;gap:0}
+     .dg-f{font-size:9pt;line-height:1.45;grid-template-columns:auto 1fr}
+     .dg-k{font-size:8.6pt;color:#4a5b73}
+     .dg-idx,.dg-badge{font-size:9pt;color:#4a5b73;border-color:#c3cedb}
   .kpi,.glossary,.rmk{break-inside:avoid;page-break-inside:avoid}
   .tbl-wrap{overflow:visible;break-inside:auto;page-break-inside:auto}
   table{min-width:0;font-size:10.5pt}
@@ -1137,58 +1158,17 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <div class="bar-row"><div class="bl">الساحل الإيراني</div><div class="bar-track"><div class="bar-fill" style="--w:11.0%"></div></div><div class="bv bidi">4 · 4.4%</div></div>
 <div class="bar-row"><div class="bl">مياه قطر</div><div class="bar-track"><div class="bar-fill" style="--w:8.2%"></div></div><div class="bv bidi">3 · 3.3%</div></div>
 <div class="bar-row"><div class="bl">مواقع أخرى</div><div class="bar-track"><div class="bar-fill" style="--w:14.0%"></div></div><div class="bv bidi">5 · 5.6%</div></div><p class="src-note">المصدر: جدول التوزيع الجغرافي للوقائع في هذا التقرير. النسب لا تمثل أعداد هجمات مستقلة.</p></div>
-<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
-<thead><tr>
-<th scope="col">القطاع</th>
-<th scope="col">العدد</th>
-<th scope="col">النسبة</th>
-</tr></thead><tbody>
-<tr>
-<td data-label="القطاع">سواحل عُمان ومسندم</td>
-<td class="num" data-label="العدد">36</td>
-<td class="num" data-label="النسبة">40.0%</td>
-</tr>
-<tr>
-<td data-label="القطاع">سواحل الإمارات</td>
-<td class="num" data-label="العدد">18</td>
-<td class="num" data-label="النسبة">20.0%</td>
-</tr>
-<tr>
-<td data-label="القطاع">مضيق هرمز ذاته</td>
-<td class="num" data-label="العدد">15</td>
-<td class="num" data-label="النسبة">16.7%</td>
-</tr>
-<tr>
-<td data-label="القطاع">خليج عُمان، مياه مفتوحة</td>
-<td class="num" data-label="العدد">5</td>
-<td class="num" data-label="النسبة">5.6%</td>
-</tr>
-<tr>
-<td data-label="القطاع">شمال الخليج العربي والمياه العراقية</td>
-<td class="num" data-label="العدد">4</td>
-<td class="num" data-label="النسبة">4.4%</td>
-</tr>
-<tr>
-<td data-label="القطاع">الساحل الإيراني</td>
-<td class="num" data-label="العدد">4</td>
-<td class="num" data-label="النسبة">4.4%</td>
-</tr>
-<tr>
-<td data-label="القطاع">مياه قطر</td>
-<td class="num" data-label="العدد">3</td>
-<td class="num" data-label="النسبة">3.3%</td>
-</tr>
-<tr>
-<td data-label="القطاع">مواقع أخرى</td>
-<td class="num" data-label="العدد">5</td>
-<td class="num" data-label="النسبة">5.6%</td>
-</tr>
-<tr class="total">
-<td data-label="القطاع"><strong>المجموع</strong></td>
-<td data-label="العدد"><strong>90</strong></td>
-<td data-label="النسبة"><strong>100.0%</strong></td>
-</tr>
-</tbody></table></div>
+<div class="dg-grid">
+<article class="dg"><div class="dg-top"><span class="dg-idx">1</span><b class="dg-t">سواحل عُمان ومسندم</b></div><p class="dg-body">36</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">النسبة</span><span class="dg-v">40.0%</span></div></div></article>
+<article class="dg"><div class="dg-top"><span class="dg-idx">2</span><b class="dg-t">سواحل الإمارات</b></div><p class="dg-body">18</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">النسبة</span><span class="dg-v">20.0%</span></div></div></article>
+<article class="dg"><div class="dg-top"><span class="dg-idx">3</span><b class="dg-t">مضيق هرمز ذاته</b></div><p class="dg-body">15</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">النسبة</span><span class="dg-v">16.7%</span></div></div></article>
+<article class="dg"><div class="dg-top"><span class="dg-idx">4</span><b class="dg-t">خليج عُمان، مياه مفتوحة</b></div><p class="dg-body">5</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">النسبة</span><span class="dg-v">5.6%</span></div></div></article>
+<article class="dg"><div class="dg-top"><span class="dg-idx">5</span><b class="dg-t">شمال الخليج العربي والمياه العراقية</b></div><p class="dg-body">4</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">النسبة</span><span class="dg-v">4.4%</span></div></div></article>
+<article class="dg"><div class="dg-top"><span class="dg-idx">6</span><b class="dg-t">الساحل الإيراني</b></div><p class="dg-body">4</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">النسبة</span><span class="dg-v">4.4%</span></div></div></article>
+<article class="dg"><div class="dg-top"><span class="dg-idx">7</span><b class="dg-t">مياه قطر</b></div><p class="dg-body">3</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">النسبة</span><span class="dg-v">3.3%</span></div></div></article>
+<article class="dg"><div class="dg-top"><span class="dg-idx">8</span><b class="dg-t">مواقع أخرى</b></div><p class="dg-body">5</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">النسبة</span><span class="dg-v">5.6%</span></div></div></article>
+<article class="dg"><div class="dg-top"><span class="dg-idx">9</span><b class="dg-t"><strong>المجموع</strong></b></div><p class="dg-body"><strong>90</strong></p><div class="dg-meta"><div class="dg-f"><span class="dg-k">النسبة</span><span class="dg-v"><strong>100.0%</strong></span></div></div></article>
+</div>
 <p>خلال فترة التقرير، تتركز الوقائع الجديدة في مضيق هرمز ومرسى صحار/خليج عُمان. لا يظهر توسع موثق إلى البحر الأحمر أو باب المندب في بلاغات 11–12 أكتوبر.</p><div class="viz map-viz reveal"><div class="map-panel">
   <h3>خريطة الوقائع</h3><p class="blk-lede">مواقع الوقائع داخل نطاق التقرير.</p>
   <div class="map-wrap">
@@ -1207,58 +1187,17 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
   </div>
   <ol class="map-legend"><li><span class="lg-num" style="--mk:var(--danger)">1</span><span class="lg-txt">هجوم داخل مضيق هرمز — مقذوف غير محدد المصدر</span> <bdi class="bidi ev-code">11-01</bdi> <bdi class="bidi">#164</bdi></li><li><span class="lg-num" style="--mk:var(--danger)">2</span><span class="lg-txt">واقعة قرب مرسى صحار — إصابة ناقلة بطائرة مسيّرة</span> <bdi class="bidi ev-code">11-02</bdi> <bdi class="bidi">#165</bdi></li></ol>
   <p class="src-note">المصدر: وقائع التقرير وجدول التوزيع الجغرافي. المواقع المعروضة تقديرية للمنطقة المذكورة في المصدر ولا تُعد إحداثيات دقيقة.</p>
-</div><p class="map-keys">السواحل والجزر والحدود: بيانات Natural Earth. الشبكة: خطوط الطول والعرض. العلامات المرقمة: وقائع هذا التقرير.</p></div><p class="src-note">تحذيرات <span class="ltr">IHO/NAVAREA</span> تُربط بإحداثياتها عند توفرها؛ والويب لا يستبدل البث الملاحي المعتمد.</p></section><section class="doc reveal" id="sec-03" aria-labelledby="h-03"><h2 id="h-03"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 20a8 8 0 110-16 8 8 0 010 16zM12 12l4-3"/></svg></span>مؤشرات الموقف</h2><div class="h-rule"></div><p class="sec-lede">الأرقام، ومقارنتها بتقرير أمس، وحدود كل رقم.</p><div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
-<thead><tr>
-<th scope="col">المؤشر</th>
-<th scope="col">قراءة 12 أكتوبر</th>
-<th scope="col">المقارنة/القيد</th>
-</tr></thead><tbody>
-<tr>
-<td data-label="المؤشر">سجلات صفحة <span class="ltr">UKMTO</span> للحوادث الأخيرة</td>
-<td class="num" data-label="قراءة 12 أكتوبر">62</td>
-<td data-label="المقارنة/القيد">مقابل 59 في تقرير أمس ليوم 11 أكتوبر؛ +3 سجلات، منها البلاغ الأولي والتحديث لنفس <bdi class="bidi">#165</bdi></td>
-</tr>
-<tr>
-<td data-label="المؤشر">التحذيرات الرسمية في أكتوبر</td>
-<td class="num" data-label="قراءة 12 أكتوبر">15</td>
-<td data-label="المقارنة/القيد">مقابل 14 في تقرير أمس؛ +1 حسب صفحة <span class="ltr">UKMTO</span></td>
-</tr>
-<tr>
-<td data-label="المؤشر">النشرات الاستشارية في أكتوبر</td>
-<td class="num" data-label="قراءة 12 أكتوبر">3</td>
-<td data-label="المقارنة/القيد">دون زيادة عن تقرير أمس</td>
-</tr>
-<tr>
-<td data-label="المؤشر">الوقائع المصنفة هجومًا مؤكدًا في فترة 11–12 أكتوبر</td>
-<td class="num" data-label="قراءة 12 أكتوبر">2</td>
-<td data-label="المقارنة/القيد"><bdi class="bidi">#164</bdi> و#165؛ لا يُحسب البلاغ الأولي لـ#165 مرة ثانية</td>
-</tr>
-<tr>
-<td data-label="المؤشر">حوادث <span class="ltr">IMO</span> المؤكدة حتى 9 أكتوبر</td>
-<td class="num" data-label="قراءة 12 أكتوبر">100</td>
-<td data-label="المقارنة/القيد">دون تغيير</td>
-</tr>
-<tr>
-<td data-label="المؤشر">وفيات البحارة في سجل <span class="ltr">IMO</span></td>
-<td class="num" data-label="قراءة 12 أكتوبر">24</td>
-<td data-label="المقارنة/القيد">دون تغيير</td>
-</tr>
-<tr>
-<td data-label="المؤشر">الحركة التجارية الظاهرة عبر المضيق</td>
-<td data-label="قراءة 12 أكتوبر">4 عبورات في 4 أكتوبر، أي 5% من خط أساس 85 عبورًا يوميًا</td>
-<td data-label="المقارنة/القيد">آخر يوم منشور لدى <span class="ltr">IMF</span> PortWatch كما يعرضه straits.live؛ ليس قياسًا آنيًا ولا يشمل السفن التي لا تبث <span class="ltr">AIS</span></td>
-</tr>
-<tr>
-<td data-label="المؤشر">سفن ظاهرة <span class="ltr">AIS</span> تمسك مواقعها بعيدًا عن الرصيف</td>
-<td data-label="قراءة 12 أكتوبر">79 عند قراءة 06:20Z في 11 أكتوبر</td>
-<td data-label="المقارنة/القيد">المقياس يستبعد السفن القريبة من موانئ عاملة؛ لا يقارن مباشرة برقم 101–109 السابق المختلف التعريف</td>
-</tr>
-<tr>
-<td data-label="المؤشر">ناقلات أوقفت بث <span class="ltr">AIS</span> خلال 24 ساعة</td>
-<td class="num" data-label="قراءة 12 أكتوبر">63</td>
-<td data-label="المقارنة/القيد">straits.live يصفها كحد أدنى للسفن التي توقف استقبالها، لا كعدد حالات تهرب متعمد</td>
-</tr>
-</tbody></table></div>
+</div><p class="map-keys">السواحل والجزر والحدود: بيانات Natural Earth. الشبكة: خطوط الطول والعرض. العلامات المرقمة: وقائع هذا التقرير.</p></div><p class="src-note">تحذيرات <span class="ltr">IHO/NAVAREA</span> تُربط بإحداثياتها عند توفرها؛ والويب لا يستبدل البث الملاحي المعتمد.</p></section><section class="doc reveal" id="sec-03" aria-labelledby="h-03"><h2 id="h-03"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 20a8 8 0 110-16 8 8 0 010 16zM12 12l4-3"/></svg></span>مؤشرات الموقف</h2><div class="h-rule"></div><p class="sec-lede">الأرقام، ومقارنتها بتقرير أمس، وحدود كل رقم.</p><div class="dg-grid">
+<article class="dg"><div class="dg-top"><span class="dg-idx">1</span><b class="dg-t">سجلات صفحة <span class="ltr">UKMTO</span> للحوادث الأخيرة</b></div><p class="dg-body">62</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">المقارنة/القيد</span><span class="dg-v">مقابل 59 في تقرير أمس ليوم 11 أكتوبر؛ +3 سجلات، منها البلاغ الأولي والتحديث لنفس <bdi class="bidi">#165</bdi></span></div></div></article>
+<article class="dg"><div class="dg-top"><span class="dg-idx">2</span><b class="dg-t">التحذيرات الرسمية في أكتوبر</b></div><p class="dg-body">15</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">المقارنة/القيد</span><span class="dg-v">مقابل 14 في تقرير أمس؛ +1 حسب صفحة <span class="ltr">UKMTO</span></span></div></div></article>
+<article class="dg"><div class="dg-top"><span class="dg-idx">3</span><b class="dg-t">النشرات الاستشارية في أكتوبر</b></div><p class="dg-body">3</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">المقارنة/القيد</span><span class="dg-v">دون زيادة عن تقرير أمس</span></div></div></article>
+<article class="dg"><div class="dg-top"><span class="dg-idx">4</span><b class="dg-t">الوقائع المصنفة هجومًا مؤكدًا في فترة 11–12 أكتوبر</b></div><p class="dg-body">2</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">المقارنة/القيد</span><span class="dg-v"><bdi class="bidi">#164</bdi> و#165؛ لا يُحسب البلاغ الأولي لـ#165 مرة ثانية</span></div></div></article>
+<article class="dg"><div class="dg-top"><span class="dg-idx">5</span><b class="dg-t">حوادث <span class="ltr">IMO</span> المؤكدة حتى 9 أكتوبر</b></div><p class="dg-body">100</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">المقارنة/القيد</span><span class="dg-v">دون تغيير</span></div></div></article>
+<article class="dg"><div class="dg-top"><span class="dg-idx">6</span><b class="dg-t">وفيات البحارة في سجل <span class="ltr">IMO</span></b></div><p class="dg-body">24</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">المقارنة/القيد</span><span class="dg-v">دون تغيير</span></div></div></article>
+<article class="dg"><div class="dg-top"><span class="dg-idx">7</span><b class="dg-t">الحركة التجارية الظاهرة عبر المضيق</b></div><p class="dg-body">4 عبورات في 4 أكتوبر، أي 5% من خط أساس 85 عبورًا يوميًا</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">المقارنة/القيد</span><span class="dg-v">آخر يوم منشور لدى <span class="ltr">IMF</span> PortWatch كما يعرضه straits.live؛ ليس قياسًا آنيًا ولا يشمل السفن التي لا تبث <span class="ltr">AIS</span></span></div></div></article>
+<article class="dg"><div class="dg-top"><span class="dg-idx">8</span><b class="dg-t">سفن ظاهرة <span class="ltr">AIS</span> تمسك مواقعها بعيدًا عن الرصيف</b></div><p class="dg-body">79 عند قراءة 06:20Z في 11 أكتوبر</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">المقارنة/القيد</span><span class="dg-v">المقياس يستبعد السفن القريبة من موانئ عاملة؛ لا يقارن مباشرة برقم 101–109 السابق المختلف التعريف</span></div></div></article>
+<article class="dg"><div class="dg-top"><span class="dg-idx">9</span><b class="dg-t">ناقلات أوقفت بث <span class="ltr">AIS</span> خلال 24 ساعة</b></div><p class="dg-body">63</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">المقارنة/القيد</span><span class="dg-v">straits.live يصفها كحد أدنى للسفن التي توقف استقبالها، لا كعدد حالات تهرب متعمد</span></div></div></article>
+</div>
 <p>المؤشرات الثلاثة الأخيرة صادرة عن straits.live، وهو مصدر رصد تجميعي غير رسمي. لا تُجمع مع سجلات <span class="ltr">UKMTO</span> ولا تُستخدم لإثبات هجوم أو إغلاق قانوني. <a class="cite-ref bidi" href="https://straits.live/" target="_blank" rel="noopener noreferrer">[11]</a></p></section><section class="doc reveal" id="sec-04" aria-labelledby="h-04"><h2 id="h-04"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/></svg></span>مستوى التهديد</h2><div class="h-rule"></div><p class="sec-lede">التقييم الرسمي، والتقدير التحليلي، وحدود الثقة.</p><p><strong>التقييم الرسمي المباشر:</strong> <span class="ltr">UKMTO</span> صنفت <bdi class="bidi">#164</bdi> و#165 هجومين، وأبقت التحقيق مفتوحًا، ولم تسمِّ الطرف المسؤول. <span class="ltr">IMO</span> لم تضف أيًا منهما إلى سجلها حتى وقت القطع. لا يوجد تحذير رسمي منشور يعلن إغلاقًا قانونيًا دائمًا للمضيق. <a class="cite-ref bidi" href="https://www.ukmto.org/recent-incidents" target="_blank" rel="noopener noreferrer">[1]</a> <a class="cite-ref bidi" href="https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx" target="_blank" rel="noopener noreferrer">[7]</a></p>
 <p><strong>التقدير التحليلي:</strong> مستوى التهديد <strong>مرتفع</strong> في مضيق هرمز، و<strong>مرتفع</strong> في مرسى صحار وخليج عُمان القريب. الخطر المركب هو إصابة ناقلة عابرة بمقذوف غير محدد المصدر، وإصابة ناقلة قرب مرسى بطائرة مسيّرة مع إجلاء جارٍ، إضافة إلى ضغط الحركة والتكدس الملاحي. مستوى الثقة مرتفع في وقوع الإصابتين، ومتوسط في النتائج النهائية لواقعة صحار، ومنخفض في الإسناد.</p>
 <p><strong>بحر العرب والبحر الأحمر وباب المندب:</strong> لا توجد واقعة جديدة موثقة في فترة التقرير ضمن المصادر المعتمدة. ما زال خطر القرصنة/الاختطاف وخطر عودة النشاط المسلح مسارين منفصلين عن وقائع هرمز؛ لا يجوز جمعهما في رقم واحد.</p></section><section class="doc pri reveal" id="sec-05" aria-labelledby="h-05"><h2 id="h-05"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 15.5a3.5 3.5 0 100-7 3.5 3.5 0 000 7zM12 2l1.6 2.3 2.8-.4.5 2.7 2.6 1.2-1.1 2.6 1.1 2.6-2.6 1.2-.5 2.7-2.8-.4L12 22l-1.6-2.3-2.8.4-.5-2.7-2.6-1.2L5.6 13 4.5 10.4l2.6-1.2.5-2.7 2.8.4z"/></svg></span>التوجيهات التشغيلية</h2><div class="h-rule"></div><p class="sec-lede">ما يُنفَّذ قبل العبور والرسو وأثناء الحادث.</p><ol><li><strong>العبور في هرمز:</strong> تعامل مع كل عبور إلى الخارج كرحلة عالية الحساسية. راقب <span class="ltr">VHF 16</span> والاتصالات الموجهة، تحقق من هوية المخاطب، نسّق مع <span class="ltr">UKMTO</span> وJMIC وNCAGS، وأعد تقييم المسار قبل دخول الممر.</li><li><strong>المراسي ومرسى صحار:</strong> قلّل مدة البقاء غير الضروري، حافظ على استعداد الإخلاء والقطر، ونسّق مع السلطات المحلية قبل أي مناورة. لا تُستأنف العمليات قبل تقييم الضرر وخطر التلوث من الجهة المختصة.</li><li><strong>المراقبة والملاحة:</strong> قارن <span class="ltr">AIS</span> وGNSS بالرادار والملاحة التقديرية والمرئيات. سجّل أي فقد دفع أو حريق أو جسم جوي/سطحي، ولا تصف مصدر المقذوفات غير محددة المصدر بالتخمين.</li><li><strong>الطاقم والإنقاذ:</strong> جهّز نقاط التجمع ووسائل الاتصال والإخلاء الطبي، لأن وضع طاقم <bdi class="bidi">#165</bdi> النهائي غير منشور. أبقِ قنوات الإبلاغ مفتوحة أثناء القطر أو مكافحة الحريق.</li><li><strong>القرار الملاحي:</strong> لا تُحوّل تصنيف straits.live التأميني إلى إعلان إغلاق قانوني. القرار النهائي يعتمد على أحدث <span class="ltr">UKMTO</span> وJMIC وNAVAREA و<span class="ltr">IMO-MSI</span> وتعليمات سلطات الميناء.</li></ol></section><section class="doc reveal" id="sec-06" aria-labelledby="h-06"><h2 id="h-06"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l9 16H3zM12 8v6M12 16.4v1.2"/></svg></span>الوقائع الجديدة</h2><div class="h-rule"></div><p class="sec-lede">الوقائع الأمنية الجديدة خلال فترة التغطية، مفصولًا عن الخلفية.</p><p><strong>التوصيف:</strong> ما يلي <strong>وقائع أمنية جديدة</strong> ضمن فترة 11–12 أكتوبر، مع فصل الواقعة المؤكدة عن النقل الإعلامي والخلفية.</p>
@@ -1293,68 +1232,17 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <div class="bar-row"><div class="bl">7</div><div class="bar-track"><div class="bar-fill" style="--w:5.7%"></div></div><div class="bv bidi">— · 2.0%</div></div>
 <div class="bar-row"><div class="bl">8</div><div class="bar-track"><div class="bar-fill" style="--w:8.6%"></div></div><div class="bv bidi">— · 3.0%</div></div>
 <div class="bar-row"><div class="bl">9</div><div class="bar-track"><div class="bar-fill" style="--w:14.3%"></div></div><div class="bv bidi">— · 5.0%</div></div><p class="src-note">المصدر: جدول التوزيع الجغرافي للوقائع في هذا التقرير. النسب لا تمثل أعداد هجمات مستقلة.</p></div>
-<div class="tbl-wrap" tabindex="0" role="region" aria-label="جدول"><table class="cardified">
-<thead><tr>
-<th scope="col">رقم</th>
-<th scope="col">الفرضية</th>
-<th scope="col">النسبة</th>
-<th scope="col">سبب الترجيح والحد</th>
-</tr></thead><tbody>
-<tr>
-<td data-label="رقم">1</td>
-<td data-label="الفرضية">قوات إيرانية مباشرة</td>
-<td class="num" data-label="النسبة">28%</td>
-<td data-label="سبب الترجيح والحد">الملاءمة الجغرافية ونمط الخطر السابق؛ لا تسمية رسمية في <bdi class="bidi">#164</bdi> أو <bdi class="bidi">#165</bdi></td>
-</tr>
-<tr>
-<td data-label="رقم">2</td>
-<td data-label="الفرضية">جماعة مسلحة تعمل بالوكالة عن إيران</td>
-<td class="num" data-label="النسبة">10%</td>
-<td data-label="سبب الترجيح والحد">احتمال قائم في بيئة الصراع؛ لا دليل مباشر على جماعة محددة</td>
-</tr>
-<tr>
-<td data-label="رقم">3</td>
-<td data-label="الفرضية">جماعة الحوثي</td>
-<td class="num" data-label="النسبة">2%</td>
-<td data-label="سبب الترجيح والحد">ملاءمة جغرافية ضعيفة لوقائع هرمز وصحار؛ لا دليل على صلة بباب المندب</td>
-</tr>
-<tr>
-<td data-label="رقم">4</td>
-<td data-label="الفرضية">قرصنة أو فاعل إجرامي انتهازي</td>
-<td class="num" data-label="النسبة">5%</td>
-<td data-label="سبب الترجيح والحد">لا مطالب فدية أو صعود مثبت؛ ما زال احتمالًا احتياطيًا لا يفسر كل الوقائع</td>
-</tr>
-<tr>
-<td data-label="رقم">5</td>
-<td data-label="الفرضية">عطل تقني/حادث ملاحي أُسيء تفسيره</td>
-<td class="num" data-label="النسبة">10%</td>
-<td data-label="سبب الترجيح والحد">ضعيف أمام تأكيد <span class="ltr">UKMTO</span> إصابة <bdi class="bidi">#164</bdi> وUAV في <bdi class="bidi">#165</bdi>، لكنه لا يُلغى قبل التحقيق</td>
-</tr>
-<tr>
-<td data-label="رقم">6</td>
-<td data-label="الفرضية">غير حاسم/الأدلة لا تميز بين الفرضيات</td>
-<td class="num" data-label="النسبة">35%</td>
-<td data-label="سبب الترجيح والحد">عدم وجود مصدر إطلاق أو طرف مسؤول، وبقاء الضرر والنتيجة في <bdi class="bidi">#165</bdi> مجهولين</td>
-</tr>
-<tr>
-<td data-label="رقم">7</td>
-<td data-label="الفرضية">سرايا الأشتر/فاعل بحريني</td>
-<td class="num" data-label="النسبة">2%</td>
-<td data-label="سبب الترجيح والحد">ملاءمة جغرافية ضعيفة، ولا دليل مباشر</td>
-</tr>
-<tr>
-<td data-label="رقم">8</td>
-<td data-label="الفرضية">حزب الله اللبناني</td>
-<td class="num" data-label="النسبة">3%</td>
-<td data-label="سبب الترجيح والحد">لا دليل مباشر ولا ملاءمة تشغيلية ظاهرة لوقائع اليوم</td>
-</tr>
-<tr>
-<td data-label="رقم">9</td>
-<td data-label="الفرضية">فصائل الحشد الشعبي العراقية</td>
-<td class="num" data-label="النسبة">5%</td>
-<td data-label="سبب الترجيح والحد">احتمال إقليمي منخفض دون رابط موثق بوقائع هرمز/صحار</td>
-</tr>
-</tbody></table></div>
+<div class="dg-grid">
+<article class="dg"><div class="dg-top"><span class="dg-idx">1</span><b class="dg-t">1</b></div><p class="dg-body">قوات إيرانية مباشرة</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">النسبة</span><span class="dg-v">28%</span></div><div class="dg-f"><span class="dg-k">سبب الترجيح والحد</span><span class="dg-v">الملاءمة الجغرافية ونمط الخطر السابق؛ لا تسمية رسمية في <bdi class="bidi">#164</bdi> أو <bdi class="bidi">#165</bdi></span></div></div></article>
+<article class="dg"><div class="dg-top"><span class="dg-idx">2</span><b class="dg-t">2</b></div><p class="dg-body">جماعة مسلحة تعمل بالوكالة عن إيران</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">النسبة</span><span class="dg-v">10%</span></div><div class="dg-f"><span class="dg-k">سبب الترجيح والحد</span><span class="dg-v">احتمال قائم في بيئة الصراع؛ لا دليل مباشر على جماعة محددة</span></div></div></article>
+<article class="dg"><div class="dg-top"><span class="dg-idx">3</span><b class="dg-t">3</b></div><p class="dg-body">جماعة الحوثي</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">النسبة</span><span class="dg-v">2%</span></div><div class="dg-f"><span class="dg-k">سبب الترجيح والحد</span><span class="dg-v">ملاءمة جغرافية ضعيفة لوقائع هرمز وصحار؛ لا دليل على صلة بباب المندب</span></div></div></article>
+<article class="dg"><div class="dg-top"><span class="dg-idx">4</span><b class="dg-t">4</b></div><p class="dg-body">قرصنة أو فاعل إجرامي انتهازي</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">النسبة</span><span class="dg-v">5%</span></div><div class="dg-f"><span class="dg-k">سبب الترجيح والحد</span><span class="dg-v">لا مطالب فدية أو صعود مثبت؛ ما زال احتمالًا احتياطيًا لا يفسر كل الوقائع</span></div></div></article>
+<article class="dg"><div class="dg-top"><span class="dg-idx">5</span><b class="dg-t">5</b></div><p class="dg-body">عطل تقني/حادث ملاحي أُسيء تفسيره</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">النسبة</span><span class="dg-v">10%</span></div><div class="dg-f"><span class="dg-k">سبب الترجيح والحد</span><span class="dg-v">ضعيف أمام تأكيد <span class="ltr">UKMTO</span> إصابة <bdi class="bidi">#164</bdi> وUAV في <bdi class="bidi">#165</bdi>، لكنه لا يُلغى قبل التحقيق</span></div></div></article>
+<article class="dg"><div class="dg-top"><span class="dg-idx">6</span><b class="dg-t">6</b></div><p class="dg-body">غير حاسم/الأدلة لا تميز بين الفرضيات</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">النسبة</span><span class="dg-v">35%</span></div><div class="dg-f"><span class="dg-k">سبب الترجيح والحد</span><span class="dg-v">عدم وجود مصدر إطلاق أو طرف مسؤول، وبقاء الضرر والنتيجة في <bdi class="bidi">#165</bdi> مجهولين</span></div></div></article>
+<article class="dg"><div class="dg-top"><span class="dg-idx">7</span><b class="dg-t">7</b></div><p class="dg-body">سرايا الأشتر/فاعل بحريني</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">النسبة</span><span class="dg-v">2%</span></div><div class="dg-f"><span class="dg-k">سبب الترجيح والحد</span><span class="dg-v">ملاءمة جغرافية ضعيفة، ولا دليل مباشر</span></div></div></article>
+<article class="dg"><div class="dg-top"><span class="dg-idx">8</span><b class="dg-t">8</b></div><p class="dg-body">حزب الله اللبناني</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">النسبة</span><span class="dg-v">3%</span></div><div class="dg-f"><span class="dg-k">سبب الترجيح والحد</span><span class="dg-v">لا دليل مباشر ولا ملاءمة تشغيلية ظاهرة لوقائع اليوم</span></div></div></article>
+<article class="dg"><div class="dg-top"><span class="dg-idx">9</span><b class="dg-t">9</b></div><p class="dg-body">فصائل الحشد الشعبي العراقية</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">النسبة</span><span class="dg-v">5%</span></div><div class="dg-f"><span class="dg-k">سبب الترجيح والحد</span><span class="dg-v">احتمال إقليمي منخفض دون رابط موثق بوقائع هرمز/صحار</span></div></div></article>
+</div>
 <p><strong>اختبار الفرضية المضادة:</strong> قد يكون اختلاف التصنيف بين <bdi class="bidi">#164</bdi> و#165 نتيجة اختلاف نوع البلاغ أو إجراءات التحديث، لكن <span class="ltr">UKMTO</span> وصفت إصابة <bdi class="bidi">#164</bdi> بمقذوف، وأكدت في <bdi class="bidi">#165</bdi> إصابة بطائرة مسيّرة. لا يكفي ذلك لنسبة الإطلاق إلى دولة أو جماعة. كما أن تكرار التقارير عبر وسائل الإعلام لا يضيف تحققًا مستقلًا إذا كانت تعيد بيان <span class="ltr">UKMTO</span> أو قولًا واحدًا.</p></section><section class="doc reveal" id="sec-10" aria-labelledby="h-10"><h2 id="h-10"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 4v9a4 4 0 004 4h5M15 17l-2-2M15 17l-2 2M18 4a2 2 0 11-.001 4.001A2 2 0 0118 4z"/></svg></span>الحركة الملاحية والتكدس</h2><div class="h-rule"></div><p class="sec-lede">حركة المضيق والرسو من مصادر معلنة فقط.</p><ul><li>يعرض straits.live، في تحديث 11 أكتوبر <span class="ltr">0733Z</span>، أن المضيق <strong>مغلق فعليًا وفق تصنيف التأمين</strong>، وأن آخر قراءة منشورة للحركة التجارية هي 4 عبورات في 4 أكتوبر مقابل 85 عبورًا نموذجيًا، أي 5%. هذا وصف تأميني/تحليلي وليس إعلان إغلاق قانوني من <span class="ltr">IMO</span> أو <span class="ltr">NAVAREA</span>. <a class="cite-ref bidi" href="https://straits.live/" target="_blank" rel="noopener noreferrer">[11]</a></li><li>تظهر قراءة <span class="ltr">AIS</span> في المصدر نفسه 79 سفينة تمسك موقعها بعيدًا عن الرصيف، ضمن نطاق سابق تراوح بين 79 و148 خلال 13 ساعة. يستبعد القياس السفن الواقعة ضمن 25 كيلومترًا من ميناء يعمل؛ لذلك لا يصح مقارنته حسابيًا مباشرة برقم الانتظار السابق 101–109.</li><li>تسجيل 63 ناقلة أوقفت بث <span class="ltr">AIS</span> خلال 24 ساعة لا يثبت تعمد الإخفاء؛ المصدر نفسه يصفه كحد أدنى للسفن التي لم يعد يستقبل بثها.</li><li>لا توجد في المصادر الرسمية المفحوصة قراءة موحدة لزمن الانتظار أو عدد السفن في مناطق الرسو. التكدس الملاحي المرصود يؤكد ضغطًا تشغيليًا، لكنه لا يساوي عدد الوقائع الأمنية.</li></ul><div class="viz tl-viz reveal"><h3>الخط الزمني لمضيق هرمز</h3><div class="tl-row"><div class="tl-date bidi">10-05</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:100.0%"></div></div><div class="tl-num bidi">1</div><div class="tl-lbl">واقعة عسكري/تهديد مباشر، وهجوم على ناقلة</div></div><div class="tl-row"><div class="tl-date bidi">10-06</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:100.0%"></div></div><div class="tl-num bidi">1</div><div class="tl-lbl">هجوم/إصابة بمقذوف غير محدد المصدر</div></div><div class="tl-row"><div class="tl-date bidi">10-07</div><div class="tl-track"><div class="tl-fill k-bg" style="--w:6.0%"></div></div><div class="tl-num bidi">0</div><div class="tl-lbl">لا سجلات مرصودة</div></div><div class="tl-row"><div class="tl-date bidi">10-08</div><div class="tl-track"><div class="tl-fill k-bg" style="--w:6.0%"></div></div><div class="tl-num bidi">0</div><div class="tl-lbl">لا سجلات مرصودة</div></div><div class="tl-row"><div class="tl-date bidi">10-09</div><div class="tl-track"><div class="tl-fill k-bg" style="--w:6.0%"></div></div><div class="tl-num bidi">0</div><div class="tl-lbl">لا سجلات مرصودة</div></div><div class="tl-row"><div class="tl-date bidi">10-10</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:100.0%"></div></div><div class="tl-num bidi">1</div><div class="tl-lbl">واقعة عسكري، وهجوم منفصل</div></div><div class="tl-row"><div class="tl-date bidi">10-11</div><div class="tl-track"><div class="tl-fill k-confirm" style="--w:100.0%"></div></div><div class="tl-num bidi">1</div><div class="tl-lbl">هجوم مؤكد؛ إجلاء محتمل للطاقم</div></div><p class="src-note">المصدر: دفتر الأحداث التراكمي. الأعداد تعني سجلات مرصودة لا هجمات مؤكدة.</p></div><p class="src-note">قراءة اتجاه الحركة والتكدس من مسار المتابعة المعتمد؛ ويُعرض اسم المنصة ودقة بياناتها في مراجع التقرير على الموقع. يُؤخذ في الحساب مدة التحديث (20 دقيقة) واحتمال انقطاع الإرسال أو التزييف.</p></section><section class="doc reveal" id="sec-11" aria-labelledby="h-11"><h2 id="h-11"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h5M15 12h5M12 4v5M12 15v5"/></svg></span>ما لم يُحسم</h2><div class="h-rule"></div><p class="sec-lede">ما لا يزال مجهولًا، وما يلزم متابعته في التقرير التالي.</p><ul><li>لا اسم سفينة ولا رقم <span class="ltr">IMO</span> منشوران لـ <bdi class="bidi">#164</bdi> أو <bdi class="bidi">#165</bdi>؛ لا يجوز ملء الفراغ باسم متداول إعلاميًا.</li><li>لا توجد حصيلة ختامية منشورة لطاقم <bdi class="bidi">#165</bdi>، ولا نتيجة نهائية لتقييم الضرر أو الأثر البيئي.</li><li>مصدر إطلاق المقذوف في <bdi class="bidi">#164</bdi>، ومصدر الطائرة المسيّرة في <bdi class="bidi">#165</bdi>، غير محددين في المصادر الرسمية المفحوصة.</li><li>لا يمكن الجزم بأن واقعة إنقاذ 22 بحارًا في 10 أكتوبر هي إحدى وقائع <span class="ltr">UKMTO</span> السابقة؛ غياب اسم سفينة أو معرف مشترك يمنع الربط.</li><li>لا يظهر بلاغ رسمي مؤرخ 12 أكتوبر حتى وقت القطع؛ يجب إعادة الفحص عند صدور تحديثات لاحقة خلال اليوم.</li><li>لا توجد قراءة رسمية موحدة للتكدس الملاحي أو زمن الانتظار؛ أرقام <span class="ltr">AIS</span> من straits.live محدودة المنهج ولا تشمل السفن الصامتة أو القريبة من الموانئ.</li><li>لا يظهر بيان سنتكوم مباشر عن واقعة تعطيل السفينة التي أفادت بها gCaptain؛ لذلك لا يُعامل النقل الإعلامي كإسناد رسمي أو كهجوم مثبت.</li></ul></section><section class="doc reveal" id="sec-12" aria-labelledby="h-12"><h2 id="h-12"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>الخلفية</h2><div class="h-rule"></div><ul><li>سجل <span class="ltr">IMO</span> ثابت عند 100 حادثة مؤكدة و24 وفاة حتى 9 أكتوبر؛ لا يمثل مجموع البلاغات ولا يشمل بعدُ وقائع 11 أكتوبر. <a class="cite-ref bidi" href="https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx" target="_blank" rel="noopener noreferrer">[7]</a></li><li>بيان سنتكوم الرسمي الأخير الظاهر عن الحصار البحري مؤرخ 5 أكتوبر، ويذكر تحويل مسار السفينة التجارية رقم 130. لا يوجد تحديث رسمي أحدث ظاهر في صفحة البيانات الصحفية الحالية. <a class="cite-ref bidi" href="https://www.centcom.mil/MEDIA/PRESS-RELEASES/" target="_blank" rel="noopener noreferrer">[5]</a></li><li>ما زال سجل 10 أكتوبر عن واقعة ناقلة وقوات عسكرية في خليج عُمان، وسجل 9 أكتوبر عن إصابة سفينة غرب الجزيرة في الإمارات، خلفية مباشرة لفهم البيئة التشغيلية. لا يعاد احتسابهما كوقائع 12 أكتوبر. <a class="cite-ref bidi" href="https://www.ukmto.org/recent-incidents" target="_blank" rel="noopener noreferrer">[1]</a></li><li>تصنيف straits.live التأميني للمضيق وتراجع الحركة التجارية الظاهرة يفسران ضغط العبور، لكنهما لا يثبتان إغلاقًا قانونيًا ولا يساويان عدد الهجمات. <a class="cite-ref bidi" href="https://straits.live/" target="_blank" rel="noopener noreferrer">[11]</a></li></ul></section>
     
   </main>
@@ -1402,7 +1290,9 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
   // تُفتح الخلاصة والتوجيهات ومؤشرات الموقف وسجل الأحداث في كل نوع من الصفحات،
   // فإن لم يوجد شيء منها فُتح القسم الأول. (ك-298: سجل الأحداث صار في التقرير اليومي،
   // فلا يُعرض مطويًا فيُحجب المحتوى عن القارئ.)
-  var openRe = /الخلاصة|التوجيهات التشغيلية|مؤشرات الموقف|سجل الأحداث|الوقائع الجديدة/;
+  // ك-304: تُفتح أيضًا الأقسام التي طلب المالك إدراجها في التقرير اليومي: مستوى التهديد،
+  // والتحذيرات والنشرات الرسمية، وسجل IMO والحوادث المؤكدة.
+  var openRe = /الخلاصة|التوجيهات التشغيلية|مؤشرات الموقف|سجل الأحداث|الوقائع الجديدة|مستوى التهديد|التحذيرات والنشرات الرسمية|سجل IMO/;
   function setState(sec, btn, collapsed) {
     sec.classList.toggle('sc-collapsed', collapsed);
     btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
