@@ -35,6 +35,15 @@
       "alert_dir": "logs/alerts",
       "channel": "ملف محلي فقط — لا تلغرام",
       "note": "بند مراقبة مقيس لكل تقرير: الهدف 15% والسقف 25%؛ تجاوز الهدف تنبيه، وتجاوز السقف منع."
+    },
+    "waw_sentence_pct_section_analysis": {
+      "per_report": true,
+      "section": "قراءة الموقف وتحليل المؤشرات",
+      "target": 15,
+      "max": 20,
+      "fail_on_target_miss": false,
+      "record": "logs/style-metrics-<التاريخ>.sections.json",
+      "note": "سقف خاص بالقسم الأكثر إسهامًا في «و»؛ تجاوز الهدف تنبيه، وتجاوز السقف يُعالج قبل التسليم بإعادة صياغة مفتتح الجمل دون تغيير أي واقعة."
     }
   }
 }
