@@ -270,7 +270,9 @@ body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
 (function(){try{
 var b=document.body;if(!b)return;
 var t=localStorage.getItem('mn-theme');if(t==='light')b.classList.add('daylight');
-var g=localStorage.getItem('mn-lang');if(g==='en'){document.documentElement.lang='en';document.documentElement.dir='ltr';b.classList.add('lang-en');}
+/* لغة المستند تعلنها الصفحة نفسها (وسم lang + data-lang)؛ ولغة الشريط تتبع الصفحة أو تفضيل الزائر. */
+var lockE=document.documentElement.getAttribute('data-lang');
+if(lockE==='en'){b.classList.add('lang-en');}
 var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom=s;
 }catch(e){}})();
 </script><div class="wrap" role="main">

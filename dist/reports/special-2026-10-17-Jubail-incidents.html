@@ -1103,7 +1103,9 @@ body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
 (function(){try{
 var b=document.body;if(!b)return;
 var t=localStorage.getItem('mn-theme');if(t==='light')b.classList.add('daylight');
-var g=localStorage.getItem('mn-lang');if(g==='en'){document.documentElement.lang='en';document.documentElement.dir='ltr';b.classList.add('lang-en');}
+/* لغة المستند تعلنها الصفحة نفسها (وسم lang + data-lang)؛ ولغة الشريط تتبع الصفحة أو تفضيل الزائر. */
+var lockE=document.documentElement.getAttribute('data-lang');
+if(lockE==='en'){b.classList.add('lang-en');}
 var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom=s;
 }catch(e){}})();
 </script>
@@ -1131,7 +1133,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     
     <div>
       <p class="lede"><strong>تاريخ الإصدار:</strong> 17 أكتوبر 2026 · <strong>وقت القطع:</strong> 18:45 بتوقيت البحرين (15:45 <span class="ltr">UTC</span>)</p>
-      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-29 20:07 <span class="ltr">UTC</span></b></span></div>
+      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-29 20:10 <span class="ltr">UTC</span></b></span></div>
     </div>
   </header>
 
@@ -1428,7 +1430,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> تقرير خاص — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: <span class="ltr">UTC</span> وتوقيت البحرين (<span class="ltr">UTC</span>+3).
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-29 20:07 UTC</bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-29 20:10 UTC</bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
     
   </footer>
 </div>
