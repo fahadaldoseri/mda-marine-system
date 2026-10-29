@@ -318,7 +318,8 @@ document.querySelectorAll('[data-scale]').forEach(function(b){
     body.style.zoom=(s===1?'':s);paint();});
 });
 var I18N={ar:{"skip": "الانتقال إلى المحتوى", "menu": "القائمة", "home": "الرئيسية", "special": "التقارير الخاصة", "archive": "الأرشيف", "monthly": "اللوحة الشهرية", "cumulative": "السجل التراكمي", "sources": "المصادر والمراجع", "additions": "إضافات", "scale": "حجم الخط", "theme-dark": "المظهر: ليلي", "theme-light": "المظهر: نهاري", "print": "طباعة / PDF", "lang": "اللغة", "foot2-html": "تُحدَّث الصفحات آليًا مع كل إصدار · <a href=\"/#archive\">الأرشيف الكامل</a> · <a href=\"/feed.xml\">تغذية الإصدارات</a>", "no-en": "النسخة الإنجليزية لهذا الإصدار غير متاحة بعد."},en:{"skip": "Skip to content", "menu": "Menu", "home": "Home", "special": "Special reports", "archive": "Archive", "monthly": "Monthly dashboard", "cumulative": "Cumulative record", "sources": "Sources & references", "additions": "Additions", "scale": "Font size", "theme-dark": "Theme: night", "theme-light": "Theme: day", "print": "Print / PDF", "lang": "Language", "foot2-html": "Pages update automatically with every edition · <a href=\"/#archive\">Full archive</a> · <a href=\"/feed.xml\">Edition feed</a>", "no-en": "The English edition of this report is not available yet."}};
-function currentLang(){var lock=document.documentElement.getAttribute('data-lang');if(lock)return lock;var l=LS.getItem('mn-lang');return (l==='en')?'en':'ar';}
+function pageLang(){var lock=document.documentElement.getAttribute('data-lang');if(lock)return lock;var p=location.pathname;if(p.indexOf('/reports/en/')===0)return 'en';if(p.indexOf('/reports/')===0&&/^\d{4}-\d{2}-\d{2}\.html$/.test(p.slice(9)))return 'ar';return '';}
+function currentLang(){var pl=pageLang();if(pl)return pl;var l=LS.getItem('mn-lang');return (l==='en')?'en':'ar';}
 function i18nTxt(key){var d=I18N[currentLang()];return (d&&d[key])||I18N.ar[key]||'';}
 var _b=document.querySelector('.sn-name'), _s=document.querySelector('.sn-name em');
 var BRAND_TXT=_b?(_b.childNodes[0].nodeValue||'').trim():'', BRAND_SUB_TXT=_s?_s.textContent.trim():'';
@@ -354,8 +355,8 @@ function routeLang(l){
 }
 function applyLang(l,go){
   try{LS.setItem('mn-lang',l);}catch(e){}
-  var lock=document.documentElement.getAttribute('data-lang');
-  if(lock&&l!==lock){ if(go) routeLang(l); return; }
+  var pl=pageLang();
+  if(pl&&l!==pl){ if(go) routeLang(l); return; }
   var root=document.documentElement;
   root.lang=(l==='en')?'en':'ar'; root.dir=(l==='en')?'ltr':'rtl';
   body.classList.toggle('lang-en', l==='en');
