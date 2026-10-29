@@ -16,12 +16,14 @@ import re
 
 CODE_RE = re.compile(r"MN-(\d{4})-(\d{2})-(\d{2})-(\d{2})")
 OFFICIAL_RE = re.compile(r"(?:UKMTO\s*)?#\s?(\d{2,4})")
-PRIMARY_SECTION = "الوقائع الجديدة"
+PRIMARY_SECTION = "سجل الأحداث"
+LEGACY_PRIMARY_SECTIONS = ("الوقائع الجديدة",)
 
 
 def is_primary(title):
     """هل هذا هو القسم الذي يُعرض فيه الرمز الكامل؟ (يبدأ بـ«الوقائع»)."""
-    return str(title or "").strip().startswith("الوقائع")
+    t = str(title or "").strip()
+    return t.startswith("سجل الأحداث") or t.startswith("الوقائع")
 
 
 def short_code(code, report_date=None):

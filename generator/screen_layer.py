@@ -342,8 +342,10 @@ SCREEN_JS = r"""
   // الأقسام القابلة للطي: بلا سكربت تبقى كلها مفتوحة
   var main = d.querySelector('main'); if (!main) return;
   var secs = [].slice.call(main.querySelectorAll(':scope > section.doc'));
-  // تُفتح الخلاصة والتوجيهات في كل نوع من الصفحات، فإن لم يوجد شيء منها فُتح القسم الأول
-  var openRe = /الخلاصة|التوجيهات التشغيلية|مؤشرات الموقف/;
+  // تُفتح الخلاصة والتوجيهات ومؤشرات الموقف وسجل الأحداث في كل نوع من الصفحات،
+  // فإن لم يوجد شيء منها فُتح القسم الأول. (ك-298: سجل الأحداث صار في التقرير اليومي،
+  // فلا يُعرض مطويًا فيُحجب المحتوى عن القارئ.)
+  var openRe = /الخلاصة|التوجيهات التشغيلية|مؤشرات الموقف|سجل الأحداث|الوقائع الجديدة/;
   function setState(sec, btn, collapsed) {
     sec.classList.toggle('sc-collapsed', collapsed);
     btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');

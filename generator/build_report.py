@@ -83,6 +83,7 @@ FONT_LINK = "/assets/fonts/fonts.css"
 SECTION_ICONS = {
     "الخلاصة": "flag",
     "الوقائع الجديدة": "alert",
+    "سجل الأحداث": "alert",
     "التحذيرات والنشرات الرسمية": "broadcast",
     "سجل IMO": "ledger",
     "مؤشرات الموقف": "gauge",
@@ -106,6 +107,7 @@ SECTION_HINTS = {
     "مستوى التهديد": "التقييم الرسمي، والتقدير التحليلي، وحدود الثقة.",
     "التوجيهات التشغيلية": "ما يُنفَّذ قبل العبور والرسو وأثناء الحادث.",
     "الوقائع الجديدة": "الوقائع الأمنية الجديدة خلال فترة التغطية، مفصولًا عن الخلفية.",
+    "سجل الأحداث": "الوقائع الأمنية الجديدة خلال فترة التغطية، مرتّبة بالرمز والتوقيت.",
     "التحذيرات والنشرات الرسمية": "حالة الجهات الرسمية خلال فترة التقرير.",
     "سجل IMO": "الحصيلة الرسمية التراكمية، وآخر إدخال ظاهر.",
     "قراءة الموقف وتحليل المؤشرات": "وصف النمط والافتراضات والفرضيات ومؤشرات التحذير المبكر.",
@@ -165,7 +167,7 @@ except Exception as _e:  # noqa: BLE001
 def _hidden(title: str) -> bool:
     return any(h in title for h in HIDDEN_SECTIONS)
 
-INCIDENT_SECTION_KEYS = ("الوقائع الجديدة", "الوقائع", "الوقائع الأمنية")
+INCIDENT_SECTION_KEYS = ("سجل الأحداث", "الوقائع الجديدة", "الوقائع", "الوقائع الأمنية")
 
 ICON_PATHS = {
     "flag": "M4 3h9l-1.2 3H19v8h-8.2L9.6 11H6v9H4z",
@@ -433,6 +435,25 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .src.s-ok{border-inline-start:3px solid var(--ok)}
 .src.s-none{border-inline-start:3px solid var(--info)}
 .src.s-fail{border-inline-start:3px solid var(--danger)}
+/* ---------- سجل الأحداث (قرار المالك 2026-10-29) ---------- */
+.ev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px;margin:16px 0 10px}
+.ev{position:relative;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:14px 16px 13px;overflow:hidden}
+.ev::before{content:"";position:absolute;inset-inline-start:0;top:0;bottom:0;width:3px;background:var(--info)}
+.ev.b-official::before{background:var(--ok)}
+.ev.b-media::before{background:#d9a441}
+.ev.b-deny::before{background:var(--danger)}
+.ev-top{display:flex;align-items:center;gap:8px;margin-bottom:9px;flex-wrap:wrap}
+.ev-idx{font-variant-numeric:tabular-nums;font-size:12px;line-height:1;color:var(--muted);border:1px solid var(--line-2);border-radius:6px;padding:3px 6px}
+.ev-code{font-size:12px;color:var(--muted);letter-spacing:.02em}
+.ev-badge{margin-inline-start:auto;font-size:11.5px;line-height:1;padding:4px 10px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2)}
+.ev.b-official .ev-badge{border-color:rgba(34,195,182,.45);color:var(--ok)}
+.ev.b-media .ev-badge{border-color:rgba(217,164,65,.5);color:#e0b45f}
+.ev.b-deny .ev-badge{border-color:rgba(214,86,86,.45);color:#e88}
+.ev-what{margin:0;font-size:15.5px;line-height:1.8;color:var(--ink)}
+.ev-meta{margin:10px 0 0;padding-top:8px;border-top:1px dashed var(--line);font-size:12.5px;line-height:1.75;color:var(--muted)}
+.ev-meta .ev-k{display:block;font-size:11.5px;color:var(--muted);opacity:.85;margin-bottom:2px}
+.ev-meta .ev-mv{display:block;color:var(--ink-2)}
+@media (max-width:820px){.ev-grid{grid-template-columns:1fr}}
 
 /* ---------- التذييل ---------- */
 .foot{margin-top:34px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);color:var(--muted);font-size:13.5px}
@@ -488,12 +509,14 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .print-map{display:block !important}
   .print-map .hmap-wrap{overflow:hidden !important}
   /* لا يُقيَّد ارتفاع الخريطة: القيد يقلّص عرضها فيسقط فحص العرض (70%) — ك-256 */
-  .print-map .hmap-keys{display:block !important;margin:2mm 0 0;font-size:8.4pt;line-height:1.3}
+  .print-map .hmap-keys{display:block !important;margin:1.2mm 0 0;font-size:7.8pt;line-height:1.25}
   /* عطل 2026-10-28: المفتاح بعمود واحد بلغ 95مم فلم تجتمع الخريطة معه في صفحة،
      فبقي فراغ مانع (176مم). القرار: عمودان في الطباعة — المفتاح يبقى كاملًا وغير منقسم
      داخل الكتلة (break-inside:avoid) وتنخفض كتلته إلى ما يقارب النصف. */
-  .print-map .hmap-legend{grid-template-columns:repeat(4,minmax(0,1fr)) !important;columns:4 !important;column-gap:3.5mm !important;gap:0 !important;margin:1.2mm 0 0}
-  .print-map .hmap-legend li{break-inside:avoid !important;page-break-inside:avoid !important;margin:0 0 .2mm !important;font-size:7pt !important;line-height:1.18 !important}
+  /* ك-298ج: المفتاح (36مم) لم يجد متسعًا في ذيل صفحة الخريطة فهبط لصفحة شبه فارغة.
+     الحكم: ستة أعمدة وخط أصغر قليلًا — المفتاح يبقى كاملًا ويستقر في مكانه. */
+  .print-map .hmap-legend{grid-template-columns:repeat(6,minmax(0,1fr)) !important;columns:6 !important;column-gap:2.6mm !important;gap:0 !important;margin:1mm 0 0}
+  .print-map .hmap-legend li{break-inside:avoid !important;page-break-inside:avoid !important;margin:0 0 .15mm !important;font-size:6.5pt !important;line-height:1.12 !important}
   .print-map-distribution{break-inside:avoid !important;page-break-inside:avoid !important;margin-top:2mm}
   .print-map-distribution h3{font-size:10pt;margin:1.5mm 0 1mm}
   .print-map-distribution .dist-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5mm}
@@ -584,6 +607,18 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .bar-row .bl,.bar-row .bv,.viz h3,.viz .src-note,.src,.src b,.src .st,.foot,.kpi .k-l,.kpi .k-n,.notice,.chip,.cite-ref,.tag{font-size:10.5pt;line-height:1.6}
   /* ك-256: البطاقات الكبيرة تنقسم بين الصفحات لتصفير الفراغ الداخلي؛ البطاقات الصغيرة تبقى موحّدة. */
   .card,.viz,.src,.table-row{break-inside:auto;page-break-inside:auto}
+     /* ك-298: سجل الأحداث — عمود واحد وثبات البطاقة في الطباعة */
+     /* ك-298ب: الشبكة لا تنقسم في طباعة Chromium — تُحوّل كتلًا عادية لتتدفّق البطاقات */
+     .ev-grid{display:block;margin:5mm 0 0}
+     .ev{display:block;margin:0 0 3mm;padding:3.4mm 4mm 3mm;break-inside:avoid;page-break-inside:avoid;opacity:1 !important;transform:none !important;animation:none !important;border-color:#c3cedb;background:#fff}
+     .ev::before{width:4px;background:#0f8f86}
+     .ev.b-media::before{background:#b8860b}
+     .ev.b-deny::before{background:#9aa8ba}
+     .ev-what{font-size:10pt;line-height:1.55;color:#12203a;margin:0}
+     .ev-top{margin-bottom:1.6mm}
+     .ev-meta{margin-top:1.8mm;padding-top:1.4mm}
+     .ev-meta{font-size:9.5pt;color:#4a5b73;border-top-color:#dbe3ec}
+     .ev-idx,.ev-code,.ev-badge{font-size:9pt;color:#4a5b73;border-color:#c3cedb}
   .kpi,.glossary,.rmk{break-inside:avoid;page-break-inside:avoid}
   .tbl-wrap{overflow:visible;break-inside:auto;page-break-inside:auto}
   table{min-width:0;font-size:10.5pt}
@@ -947,6 +982,55 @@ def render_source_cards(rows, defs):
         )
     cards.append("</div>")
     return "\n".join(cards)
+# ----------------------------------------------------------------------------
+# سجل الأحداث (قرار المالك 2026-10-29: نقل القسم إلى التقرير اليومي + تصميم بطاقات)
+# ----------------------------------------------------------------------------
+def is_events_table(header) -> bool:
+    """جدول الوقائع/سجل الأحداث: رأس فيه «ما حدث» أو («الرمز» + «حالة التأكيد»)."""
+    htxt = " ".join(header)
+    return ("ما حدث" in htxt) or ("الرمز" in htxt and "حالة التأكيد" in htxt)
+
+EVENT_BADGES = (
+    (("نفي", "نفت", "نفى"), "b-deny"),
+    (("نقل", "إعلامي", "رواية", "غير مؤكد", "لم يتأكد"), "b-media"),
+    (("رسمي", "بلاغ"), "b-official"),
+)
+
+def event_badge(value: str):
+    """شارة الحالة من نص «حالة التأكيد»: نفي · نقل إعلامي · بلاغ رسمي · قيد التثبّت."""
+    v = (value or "").strip()
+    for keys, cls in EVENT_BADGES:
+        if any(k in v for k in keys):
+            return cls, v
+    return "b-info", (v or "قيد التثبّت")
+
+def render_events_grid(rows, defs):
+    """بطاقة لكل واقعة: شفرة وشارة حالة، ثم نص الحدث بسطر قراءة مريح، ثم المصدر والموقع والوقت."""
+    body = [r for r in rows[1:] if len(r) >= 2 and r[0].strip()]
+    if not body:
+        return ""
+    out = [f'<div class="ev-grid" data-count="{len(body)}">']
+    for idx, r in enumerate(body, 1):
+        code = r[0].strip()
+        what = r[1].strip() if len(r) > 1 else ""
+        meta = r[2].strip() if len(r) > 2 else ""
+        cls, label = event_badge(r[3] if len(r) > 3 else "")
+        meta_html = ""
+        if meta:
+            meta_html = (
+                '<p class="ev-meta"><span class="ev-k">المصدر والموقع والوقت</span>'
+                f'<span class="ev-mv">{inline(meta, defs)}</span></p>'
+            )
+        out.append(
+            f'<article class="ev reveal {cls}" id="ev-{idx:02d}">'
+            f'<div class="ev-top"><span class="ev-idx bidi">{idx:02d}</span>'
+            f'<span class="ev-code ltr">{esc(code)}</span>'
+            f'<span class="ev-badge">{esc(label)}</span></div>'
+            f'<p class="ev-what">{inline(what, defs)}</p>'
+            f"{meta_html}</article>"
+        )
+    out.append("</div>")
+    return "\n".join(out)
 
 
 # ----------------------------------------------------------------------------
@@ -1007,6 +1091,10 @@ def render_section_body(title: str, lines, defs, doc_mode: bool = False):
                 continue
             if "القطاع" in htxt or re.search(r"النسبة", htxt):
                 out.append(render_geo_viz(rows, defs))
+            if is_events_table(rows[0]):
+                # ك-298: جدول الوقائع يجب أن يُصيّر بطاقاته، فكروت الحالة كانت تُسقط عمود «ما حدث»
+                out.append(render_events_grid(rows, defs))
+                continue
             sc = render_source_cards(rows, defs)
             if sc:
                 out.append(sc)
@@ -1266,7 +1354,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
     # (الترتيب مستقر، والأقسام غير المعروفة تبقى في آخرها)
     order = [
         "ما تغيّر",         "الخلاصة",         "أهم الأخبار المتعلقة بالأمن البحري",         "التوزيع الجغرافي للوقائع",
-        "مؤشرات الموقف",         "مستوى التهديد",         "التوجيهات التشغيلية",         "الوقائع الجديدة",
+        "مؤشرات الموقف",         "مستوى التهديد",         "التوجيهات التشغيلية",         "سجل الأحداث",         "الوقائع الجديدة",
         "التحذيرات والنشرات",         "سجل IMO",         "قراءة الموقف وتحليل المؤشرات",         "الاحتمالات",         "الحركة الملاحية والتكدس",
         "ما لم يُحسم",         "المراقبة المستمرة",         "الخلفية القائمة",         "المصادر والمراجع",
 

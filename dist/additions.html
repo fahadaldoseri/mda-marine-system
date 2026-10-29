@@ -283,6 +283,25 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .src.s-ok{border-inline-start:3px solid var(--ok)}
 .src.s-none{border-inline-start:3px solid var(--info)}
 .src.s-fail{border-inline-start:3px solid var(--danger)}
+/* ---------- سجل الأحداث (قرار المالك 2026-10-29) ---------- */
+.ev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px;margin:16px 0 10px}
+.ev{position:relative;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:14px 16px 13px;overflow:hidden}
+.ev::before{content:"";position:absolute;inset-inline-start:0;top:0;bottom:0;width:3px;background:var(--info)}
+.ev.b-official::before{background:var(--ok)}
+.ev.b-media::before{background:#d9a441}
+.ev.b-deny::before{background:var(--danger)}
+.ev-top{display:flex;align-items:center;gap:8px;margin-bottom:9px;flex-wrap:wrap}
+.ev-idx{font-variant-numeric:tabular-nums;font-size:12px;line-height:1;color:var(--muted);border:1px solid var(--line-2);border-radius:6px;padding:3px 6px}
+.ev-code{font-size:12px;color:var(--muted);letter-spacing:.02em}
+.ev-badge{margin-inline-start:auto;font-size:11.5px;line-height:1;padding:4px 10px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2)}
+.ev.b-official .ev-badge{border-color:rgba(34,195,182,.45);color:var(--ok)}
+.ev.b-media .ev-badge{border-color:rgba(217,164,65,.5);color:#e0b45f}
+.ev.b-deny .ev-badge{border-color:rgba(214,86,86,.45);color:#e88}
+.ev-what{margin:0;font-size:15.5px;line-height:1.8;color:var(--ink)}
+.ev-meta{margin:10px 0 0;padding-top:8px;border-top:1px dashed var(--line);font-size:12.5px;line-height:1.75;color:var(--muted)}
+.ev-meta .ev-k{display:block;font-size:11.5px;color:var(--muted);opacity:.85;margin-bottom:2px}
+.ev-meta .ev-mv{display:block;color:var(--ink-2)}
+@media (max-width:820px){.ev-grid{grid-template-columns:1fr}}
 
 /* ---------- التذييل ---------- */
 .foot{margin-top:34px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);color:var(--muted);font-size:13.5px}
@@ -338,12 +357,14 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .print-map{display:block !important}
   .print-map .hmap-wrap{overflow:hidden !important}
   /* لا يُقيَّد ارتفاع الخريطة: القيد يقلّص عرضها فيسقط فحص العرض (70%) — ك-256 */
-  .print-map .hmap-keys{display:block !important;margin:2mm 0 0;font-size:8.4pt;line-height:1.3}
+  .print-map .hmap-keys{display:block !important;margin:1.2mm 0 0;font-size:7.8pt;line-height:1.25}
   /* عطل 2026-10-28: المفتاح بعمود واحد بلغ 95مم فلم تجتمع الخريطة معه في صفحة،
      فبقي فراغ مانع (176مم). القرار: عمودان في الطباعة — المفتاح يبقى كاملًا وغير منقسم
      داخل الكتلة (break-inside:avoid) وتنخفض كتلته إلى ما يقارب النصف. */
-  .print-map .hmap-legend{grid-template-columns:repeat(4,minmax(0,1fr)) !important;columns:4 !important;column-gap:3.5mm !important;gap:0 !important;margin:1.2mm 0 0}
-  .print-map .hmap-legend li{break-inside:avoid !important;page-break-inside:avoid !important;margin:0 0 .2mm !important;font-size:7pt !important;line-height:1.18 !important}
+  /* ك-298ج: المفتاح (36مم) لم يجد متسعًا في ذيل صفحة الخريطة فهبط لصفحة شبه فارغة.
+     الحكم: ستة أعمدة وخط أصغر قليلًا — المفتاح يبقى كاملًا ويستقر في مكانه. */
+  .print-map .hmap-legend{grid-template-columns:repeat(6,minmax(0,1fr)) !important;columns:6 !important;column-gap:2.6mm !important;gap:0 !important;margin:1mm 0 0}
+  .print-map .hmap-legend li{break-inside:avoid !important;page-break-inside:avoid !important;margin:0 0 .15mm !important;font-size:6.5pt !important;line-height:1.12 !important}
   .print-map-distribution{break-inside:avoid !important;page-break-inside:avoid !important;margin-top:2mm}
   .print-map-distribution h3{font-size:10pt;margin:1.5mm 0 1mm}
   .print-map-distribution .dist-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5mm}
@@ -434,6 +455,18 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .bar-row .bl,.bar-row .bv,.viz h3,.viz .src-note,.src,.src b,.src .st,.foot,.kpi .k-l,.kpi .k-n,.notice,.chip,.cite-ref,.tag{font-size:10.5pt;line-height:1.6}
   /* ك-256: البطاقات الكبيرة تنقسم بين الصفحات لتصفير الفراغ الداخلي؛ البطاقات الصغيرة تبقى موحّدة. */
   .card,.viz,.src,.table-row{break-inside:auto;page-break-inside:auto}
+     /* ك-298: سجل الأحداث — عمود واحد وثبات البطاقة في الطباعة */
+     /* ك-298ب: الشبكة لا تنقسم في طباعة Chromium — تُحوّل كتلًا عادية لتتدفّق البطاقات */
+     .ev-grid{display:block;margin:5mm 0 0}
+     .ev{display:block;margin:0 0 3mm;padding:3.4mm 4mm 3mm;break-inside:avoid;page-break-inside:avoid;opacity:1 !important;transform:none !important;animation:none !important;border-color:#c3cedb;background:#fff}
+     .ev::before{width:4px;background:#0f8f86}
+     .ev.b-media::before{background:#b8860b}
+     .ev.b-deny::before{background:#9aa8ba}
+     .ev-what{font-size:10pt;line-height:1.55;color:#12203a;margin:0}
+     .ev-top{margin-bottom:1.6mm}
+     .ev-meta{margin-top:1.8mm;padding-top:1.4mm}
+     .ev-meta{font-size:9.5pt;color:#4a5b73;border-top-color:#dbe3ec}
+     .ev-idx,.ev-code,.ev-badge{font-size:9pt;color:#4a5b73;border-color:#c3cedb}
   .kpi,.glossary,.rmk{break-inside:avoid;page-break-inside:avoid}
   .tbl-wrap{overflow:visible;break-inside:auto;page-break-inside:auto}
   table{min-width:0;font-size:10.5pt}
@@ -1109,25 +1142,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <div class="src s-none"><b>تعز</b><span class="st">لا واقعة جديدة — نقل محلي</span></div>
 <div class="src s-none"><b>اليمن</b><span class="st">لا واقعة جديدة — نقل رسمي</span></div>
 </div>
-<p>تركّزت الوقائع في الفترة على مسار العبور في مضيق هرمز والخليج العربي. بينما ظلت بلاغات خليج عدن مرتبطة بالقرصنة والموانئ اليمنية. لم يصدر خلال الفترة أي بلاغ رسمي جديد عن إصابة سفينة بمقذوف.</p><p class="src-note">تحذيرات <span class="ltr">IHO/NAVAREA</span> تُربط بإحداثياتها عند توفرها؛ والويب لا يستبدل البث الملاحي المعتمد.</p></section><section class="doc pri reveal" id="sec-03" aria-labelledby="h-03"><h2 id="h-03"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 15.5a3.5 3.5 0 100-7 3.5 3.5 0 000 7zM12 2l1.6 2.3 2.8-.4.5 2.7 2.6 1.2-1.1 2.6 1.1 2.6-2.6 1.2-.5 2.7-2.8-.4L12 22l-1.6-2.3-2.8.4-.5-2.7-2.6-1.2L5.6 13 4.5 10.4l2.6-1.2.5-2.7 2.8.4z"/></svg></span>التوجيهات التشغيلية</h2><div class="h-rule"></div><p class="sec-lede">ما يُنفَّذ قبل العبور والرسو وأثناء الحادث.</p><ul><li>ارفعوا مستوى المراقبة البصرية والراديوية عند الاقتراب من مضيق هرمز والخليج العربي.</li><li>خططوا زمن عبور إضافيًا، وتوقعوا كثافة حركة عالية وعمليات تطبيق حصار.</li><li>لا تعبروا مضيق هرمز أو خليج عُمان بلا حاجة تشغيلية واضحة، ووثّقوا مبرر العبور.</li><li>توقعوا الاستجواب والتفتيش إذا كنتم في وضع محايد أو فارغ، وجهّزوا مستندات الحمولة والوجهة.</li><li>سجّلوا أي نداء يطلب تغيير المسار حادثًا أمنيًا، وحددوا جهة النداء ووقته.</li><li>أبقوا نظام تحديد السفن (<span class="ltr">AIS</span>) واتصالات <span class="ltr">VHF</span> عاملة، وأبلغوا عن أي انقطاع فورًا.</li><li>في خليج عدن والبحر الأحمر راقبوا تحذيرات القرصنة، وشدّدوا إجراءات الحماية الذاتية.</li><li>فرّقوا بين البلاغات الرسمية والتقارير المهنية قبل قرار تغيير المسار.</li><li>لا تنسبوا أي حادث إلى جهة منفذة في سجل السفينة قبل تأكيد مستقل أو بيان رسمي.</li></ul></section><section class="doc reveal" id="sec-04" aria-labelledby="h-04"><h2 id="h-04"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l9 16H3zM12 8v6M12 16.4v1.2"/></svg></span>الوقائع الجديدة</h2><div class="h-rule"></div><p class="sec-lede">الوقائع الأمنية الجديدة خلال فترة التغطية، مفصولًا عن الخلفية.</p><div class="src-grid">
-<div class="src s-none"><b><span class="ltr">MN-2026-10-29-01</span></b><span class="st">لا واقعة جديدة — بلاغ رسمي</span></div>
-<div class="src s-none"><b><span class="ltr">MN-2026-10-29-02</span></b><span class="st">لا واقعة جديدة — بلاغ رسمي غير مفصّل</span></div>
-<div class="src s-none"><b><span class="ltr">MN-2026-10-29-03</span></b><span class="st">لا واقعة جديدة — نقل مهني عن إشعار رسمي</span></div>
-<div class="src s-none"><b><span class="ltr">MN-2026-10-29-04</span></b><span class="st">لا واقعة جديدة — نقل مهني</span></div>
-<div class="src s-none"><b><span class="ltr">MN-2026-10-29-05</span></b><span class="st">لا واقعة جديدة — نقل إعلامي</span></div>
-<div class="src s-none"><b><span class="ltr">MN-2026-10-29-06</span></b><span class="st">لا واقعة جديدة — نقل إعلامي عن وزير الخارجية</span></div>
-<div class="src s-none"><b><span class="ltr">MN-2026-10-29-07</span></b><span class="st">لا واقعة جديدة — نقل إعلامي</span></div>
-<div class="src s-none"><b><span class="ltr">MN-2026-10-29-08</span></b><span class="st">لا واقعة جديدة — نقل إعلامي</span></div>
-<div class="src s-none"><b><span class="ltr">MN-2026-10-29-09</span></b><span class="st">لا واقعة جديدة — نقل إعلامي</span></div>
-<div class="src s-none"><b><span class="ltr">MN-2026-10-29-10</span></b><span class="st">لا واقعة جديدة — نقل إعلامي عن نفي رسمي</span></div>
-<div class="src s-none"><b><span class="ltr">MN-2026-10-29-11</span></b><span class="st">لا واقعة جديدة — تقرير مهني</span></div>
-<div class="src s-none"><b><span class="ltr">MN-2026-10-29-12</span></b><span class="st">لا واقعة جديدة — تقرير مهني (النص غير متاح)</span></div>
-<div class="src s-none"><b><span class="ltr">MN-2026-10-29-13</span></b><span class="st">لا واقعة جديدة — تقرير مهني</span></div>
-<div class="src s-none"><b><span class="ltr">MN-2026-10-29-14</span></b><span class="st">لا واقعة جديدة — نقل حكومي</span></div>
-<div class="src s-none"><b><span class="ltr">MN-2026-10-29-15</span></b><span class="st">لا واقعة جديدة — نقل محلي</span></div>
-<div class="src s-none"><b><span class="ltr">MN-2026-10-29-16</span></b><span class="st">لا واقعة جديدة — نقل رسمي</span></div>
-</div>
-<p>الوقائع من <span class="ltr">MN-2026-10-29-01</span> إلى <span class="ltr">MN-2026-10-29-04</span> تتعلق بالمسار الرسمي للعبور وتطبيق الحصار. الوقائع من <span class="ltr">MN-2026-10-29-05</span> إلى <span class="ltr">MN-2026-10-29-09</span> هي نقل إعلامي عن مواقف سياسية لم يصحبها تنفيذ ميداني مثبت. وقائع اليمن مرتبطة بالموانئ والطيران المدني لا بحركة السفن.</p></section><section class="doc reveal" id="sec-05" aria-labelledby="h-05"><h2 id="h-05"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5c5 0 9 4 9 7s-4 7-9 7-9-4-9-7 4-7 9-7zM12 9.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5z"/></svg></span>قراءة الموقف وتحليل المؤشرات</h2><div class="h-rule"></div><p class="sec-lede">وصف النمط والافتراضات والفرضيات ومؤشرات التحذير المبكر.</p><p>الموقف البحري خلال الفترة انتقل من تحذير مهني إلى منتج رسمي. صدرت نشرة تطبيق الحصار. وصدرت نصيحة بتجنّب العبور غير الضروري. ومعنى ذلك أن القيد على العبور صار معلنًا لا ضمنيًّا.</p>
+<p>تركّزت الوقائع في الفترة على مسار العبور في مضيق هرمز والخليج العربي. بينما ظلت بلاغات خليج عدن مرتبطة بالقرصنة والموانئ اليمنية. لم يصدر خلال الفترة أي بلاغ رسمي جديد عن إصابة سفينة بمقذوف.</p><p class="src-note">تحذيرات <span class="ltr">IHO/NAVAREA</span> تُربط بإحداثياتها عند توفرها؛ والويب لا يستبدل البث الملاحي المعتمد.</p></section><section class="doc pri reveal" id="sec-03" aria-labelledby="h-03"><h2 id="h-03"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 15.5a3.5 3.5 0 100-7 3.5 3.5 0 000 7zM12 2l1.6 2.3 2.8-.4.5 2.7 2.6 1.2-1.1 2.6 1.1 2.6-2.6 1.2-.5 2.7-2.8-.4L12 22l-1.6-2.3-2.8.4-.5-2.7-2.6-1.2L5.6 13 4.5 10.4l2.6-1.2.5-2.7 2.8.4z"/></svg></span>التوجيهات التشغيلية</h2><div class="h-rule"></div><p class="sec-lede">ما يُنفَّذ قبل العبور والرسو وأثناء الحادث.</p><ul><li>ارفعوا مستوى المراقبة البصرية والراديوية عند الاقتراب من مضيق هرمز والخليج العربي.</li><li>خططوا زمن عبور إضافيًا، وتوقعوا كثافة حركة عالية وعمليات تطبيق حصار.</li><li>لا تعبروا مضيق هرمز أو خليج عُمان بلا حاجة تشغيلية واضحة، ووثّقوا مبرر العبور.</li><li>توقعوا الاستجواب والتفتيش إذا كنتم في وضع محايد أو فارغ، وجهّزوا مستندات الحمولة والوجهة.</li><li>سجّلوا أي نداء يطلب تغيير المسار حادثًا أمنيًا، وحددوا جهة النداء ووقته.</li><li>أبقوا نظام تحديد السفن (<span class="ltr">AIS</span>) واتصالات <span class="ltr">VHF</span> عاملة، وأبلغوا عن أي انقطاع فورًا.</li><li>في خليج عدن والبحر الأحمر راقبوا تحذيرات القرصنة، وشدّدوا إجراءات الحماية الذاتية.</li><li>فرّقوا بين البلاغات الرسمية والتقارير المهنية قبل قرار تغيير المسار.</li><li>لا تنسبوا أي حادث إلى جهة منفذة في سجل السفينة قبل تأكيد مستقل أو بيان رسمي.</li></ul></section><section class="doc reveal" id="sec-04" aria-labelledby="h-04"><h2 id="h-04"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5c5 0 9 4 9 7s-4 7-9 7-9-4-9-7 4-7 9-7zM12 9.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5z"/></svg></span>قراءة الموقف وتحليل المؤشرات</h2><div class="h-rule"></div><p class="sec-lede">وصف النمط والافتراضات والفرضيات ومؤشرات التحذير المبكر.</p><p>الموقف البحري خلال الفترة انتقل من تحذير مهني إلى منتج رسمي. صدرت نشرة تطبيق الحصار. وصدرت نصيحة بتجنّب العبور غير الضروري. ومعنى ذلك أن القيد على العبور صار معلنًا لا ضمنيًّا.</p>
 <p>التهديد الإيراني بالردّ مقابل مرافقة السفن يرفع خطر الاحتكاك في مسار العبور. لكن النقل الإعلامي لا يثبت إجراءً ميدانيًا جديدًا. وفي المقابل تكرر الحديث عن خطة سبعة أيام ومقترح قيد المراجعة. وهذا مسار تفاوضي لم يتحول إلى نتيجة ملاحية.</p>
 <p>في خليج عدن واليمن. تنتقل المخاطر من السفن إلى البنية المدنية. استهداف مطار عدن وتحذير وزارة الصحة يمسان وصول المساعدات والطواقم. لا العبور التجاري وحده.</p>
 <h3>مؤشرات التغيّر</h3>
@@ -1143,7 +1158,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <p>تقييم دقة تقديرات الأمس: تحقق تقدير استمرار مستوى التهديد المرتفع في هرمز والخليج العربي. إذ صدرت نشرة تطبيق الحصار داخل الفترة. ولم يظهر تأكيد رسمي لواقعة الناقلة ولا لخطر الألغام. فبقي ذلك التقدير غير متحقق. ولم يظهر تطور صاروخي جديد على خط البحر الأحمر داخل الفترة. وتحقق جزئيًّا تقدير تحول الاتصالات الإقليمية إلى خطوة ملاحية، إذ ظهرت خطة إعادة الفتح دون تنفيذ.</p>
 <p>المصدر والدرجة: <span class="ltr">JMIC</span> A/2 · <span class="ltr">UKMTO</span> A/2 · gCaptain نقلًا عن إشعار أمريكي B/2 · TradeWinds B/2 · gCaptain B/2 · Seatrade Maritime B/2 · straits.live C/3 · المركز الإعلامي للقوات المسلحة اليمنية C/3 · وزارة الصحة اليمنية C/3.</p>
 <p>نسبة الحادث إلى جهة: نُسبت التهديدات بشأن العبور إلى مواقف إيرانية كما نقلت straits.live. ولم يصدر تأكيد رسمي مستقل عنها. ونُسبت بلاغات عدن وتعز إلى المركز الإعلامي للقوات المسلحة اليمنية بوصفه المصدر الناقل. ولا تنسب هذه النشرة أي حادث إلى جهة منفذة بلا تأكيد.</p>
-<p>المراجعة النظيرة: فصل الوقائع عن التقديرات، وربط كل تقدير بمرمزه ومصدره.</p></section><section class="doc reveal" id="sec-06" aria-labelledby="h-06"><h2 id="h-06"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 4v9a4 4 0 004 4h5M15 17l-2-2M15 17l-2 2M18 4a2 2 0 11-.001 4.001A2 2 0 0118 4z"/></svg></span>الحركة الملاحية والتكدس</h2><div class="h-rule"></div><p class="sec-lede">حركة المضيق والرسو من مصادر معلنة فقط.</p><div class="src-grid">
+<p>المراجعة النظيرة: فصل الوقائع عن التقديرات، وربط كل تقدير بمرمزه ومصدره.</p></section><section class="doc reveal" id="sec-05" aria-labelledby="h-05"><h2 id="h-05"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 4v9a4 4 0 004 4h5M15 17l-2-2M15 17l-2 2M18 4a2 2 0 11-.001 4.001A2 2 0 0118 4z"/></svg></span>الحركة الملاحية والتكدس</h2><div class="h-rule"></div><p class="sec-lede">حركة المضيق والرسو من مصادر معلنة فقط.</p><div class="src-grid">
 <div class="src s-none"><b>مضيق هرمز</b><span class="st">لا واقعة جديدة — straits.live · gCaptain</span></div>
 <div class="src s-none"><b>الخليج العربي</b><span class="st">لا واقعة جديدة — TradeWinds</span></div>
 <div class="src s-none"><b>خليج عمان</b><span class="st">لا واقعة جديدة — <span class="ltr">JMIC</span> · <span class="ltr">UKMTO</span></span></div>
@@ -1153,14 +1168,14 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <div class="src s-ok"><b>بحر العرب</b><span class="st">فُحص — المواد المفحوصة</span></div>
 <div class="src s-ok"><b>شرق المتوسط</b><span class="st">فُحص — المواد المفحوصة</span></div>
 </div>
-<p>لا يتوفر في المواد الحالية رقم موحد لعدد السفن المتوقفة خارج المراسي. ولا رقم موحّد لعدد السفن التي خضعت للاستجواب. الرقم المتاح هو عدد السفن العابرة المنقول عن جهة خليجية. وهو نقل مهني ولا يمثل إحصاءً رسميًا.</p><p class="src-note">قراءة اتجاه الحركة والتكدس من مسار المتابعة المعتمد؛ ويُعرض اسم المنصة ودقة بياناتها في مراجع التقرير على الموقع. يُؤخذ في الحساب مدة التحديث (20 دقيقة) واحتمال انقطاع الإرسال أو التزييف.</p></section><section class="doc reveal" id="sec-07" aria-labelledby="h-07"><h2 id="h-07"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h5M15 12h5M12 4v5M12 15v5"/></svg></span>ما لم يُحسم</h2><div class="h-rule"></div><p class="sec-lede">ما لا يزال مجهولًا، وما يلزم متابعته في التقرير التالي.</p><p>لم تتحدد تفاصيل نشرة <span class="ltr">UKMTO</span> الاستشارية رقم 184-26، ولا نطاقها، ولا موقع النشاط المشبوه الذي أشارت إليه.</p>
+<p>لا يتوفر في المواد الحالية رقم موحد لعدد السفن المتوقفة خارج المراسي. ولا رقم موحّد لعدد السفن التي خضعت للاستجواب. الرقم المتاح هو عدد السفن العابرة المنقول عن جهة خليجية. وهو نقل مهني ولا يمثل إحصاءً رسميًا.</p><p class="src-note">قراءة اتجاه الحركة والتكدس من مسار المتابعة المعتمد؛ ويُعرض اسم المنصة ودقة بياناتها في مراجع التقرير على الموقع. يُؤخذ في الحساب مدة التحديث (20 دقيقة) واحتمال انقطاع الإرسال أو التزييف.</p></section><section class="doc reveal" id="sec-06" aria-labelledby="h-06"><h2 id="h-06"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h5M15 12h5M12 4v5M12 15v5"/></svg></span>ما لم يُحسم</h2><div class="h-rule"></div><p class="sec-lede">ما لا يزال مجهولًا، وما يلزم متابعته في التقرير التالي.</p><p>لم تتحدد تفاصيل نشرة <span class="ltr">UKMTO</span> الاستشارية رقم 184-26، ولا نطاقها، ولا موقع النشاط المشبوه الذي أشارت إليه.</p>
 <p>لم يتضح النص الكامل لنشرة <span class="ltr">JMIC</span> رقم 016-26، والاعتماد على نص الإشعار المنقول في التقارير المهنية.</p>
 <p>لم يُحدَّد هل وقع استجواب أو تفتيش فعلي لسفينة محايدة داخل الفترة، ولا عدد السفن المستجوبة.</p>
 <p>لم تتضح حصيلة إصابات السفن داخل الفترة، ولا ما إذا كان نفي القيادة المركزية يخص بلاغًا محددًا عن ألغام.</p>
 <p>لم يُحدَّد موعد تنفيذ خطة إعادة فتح مضيق هرمز، ولا ضماناتها، ولا الجهة المكلفة بالتنفيذ.</p>
 <p>لم تتضح نتائج التحقيق في بلاغات القذائف التي يُشتبه احتواؤها مواد سامة في تعز.</p>
 <p>لم يتحقق نص تقرير مهني عن تحذير القرصنة في خليج عدن، والاعتماد على العنوان المنقول.</p>
-<ul><li>المصادر: 62 معتمدة = 60 بالمسار الآلي + 2 بالمرجعية اليدوية · 59 ناجحة · 1 متعذّر: MarineTraffic — تغذية معطوبة · 2 يُفحص يدويًا.</li></ul></section><section class="doc reveal" id="sec-08" aria-labelledby="h-08"><h2 id="h-08"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>الخلفية</h2><div class="h-rule"></div><ul><li>أعلن التحالف اعتراض وتدمير 3 صواريخ باليستية باتجاه المنطقة الشرقية (<span class="ltr">270037Z</span>)، و4 طائرات مسيرة باتجاه المنطقة الجنوبية (<span class="ltr">270146Z</span>)، وكلاهما خارج الفترة.</li><li>صدرت نشرة <span class="ltr">UKMTO</span> رقم 183-26 (<span class="ltr">261734Z</span>) ورقم 182-26 (<span class="ltr">260925Z</span>)، وهي خارج الفترة.</li><li>أعلنت قوة بحرية أمريكية استمرار مهمة أمن بحري في المنطقة (<span class="ltr">271400Z</span>)، وأعلنت حاملة طائرات تمرين بحث وإنقاذ (<span class="ltr">281400Z</span>).</li><li>أُعلن عن ضربة طائرات مسيرة على سفينة حاويات قرب سواحل بلغاريا (<span class="ltr">281405Z</span>)، وهي خارج نطاق المسؤولية الجغرافية لهذه النشرة.</li></ul></section>
+<ul><li>المصادر: 62 معتمدة = 60 بالمسار الآلي + 2 بالمرجعية اليدوية · 59 ناجحة · 1 متعذّر: MarineTraffic — تغذية معطوبة · 2 يُفحص يدويًا.</li></ul></section><section class="doc reveal" id="sec-07" aria-labelledby="h-07"><h2 id="h-07"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>الخلفية</h2><div class="h-rule"></div><ul><li>أعلن التحالف اعتراض وتدمير 3 صواريخ باليستية باتجاه المنطقة الشرقية (<span class="ltr">270037Z</span>)، و4 طائرات مسيرة باتجاه المنطقة الجنوبية (<span class="ltr">270146Z</span>)، وكلاهما خارج الفترة.</li><li>صدرت نشرة <span class="ltr">UKMTO</span> رقم 183-26 (<span class="ltr">261734Z</span>) ورقم 182-26 (<span class="ltr">260925Z</span>)، وهي خارج الفترة.</li><li>أعلنت قوة بحرية أمريكية استمرار مهمة أمن بحري في المنطقة (<span class="ltr">271400Z</span>)، وأعلنت حاملة طائرات تمرين بحث وإنقاذ (<span class="ltr">281400Z</span>).</li><li>أُعلن عن ضربة طائرات مسيرة على سفينة حاويات قرب سواحل بلغاريا (<span class="ltr">281405Z</span>)، وهي خارج نطاق المسؤولية الجغرافية لهذه النشرة.</li></ul></section>
     <section class="print-map" aria-label="خريطة الوقائع ومفتاحها"><div class="hmap"><div class="hmap-panel">
   <h3>خريطة الوقائع</h3><p class="blk-lede">مواقع الوقائع داخل نطاق التقرير.</p>
   <div class="hmap-wrap">
@@ -1222,8 +1237,10 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
   // الأقسام القابلة للطي: بلا سكربت تبقى كلها مفتوحة
   var main = d.querySelector('main'); if (!main) return;
   var secs = [].slice.call(main.querySelectorAll(':scope > section.doc'));
-  // تُفتح الخلاصة والتوجيهات في كل نوع من الصفحات، فإن لم يوجد شيء منها فُتح القسم الأول
-  var openRe = /الخلاصة|التوجيهات التشغيلية|مؤشرات الموقف/;
+  // تُفتح الخلاصة والتوجيهات ومؤشرات الموقف وسجل الأحداث في كل نوع من الصفحات،
+  // فإن لم يوجد شيء منها فُتح القسم الأول. (ك-298: سجل الأحداث صار في التقرير اليومي،
+  // فلا يُعرض مطويًا فيُحجب المحتوى عن القارئ.)
+  var openRe = /الخلاصة|التوجيهات التشغيلية|مؤشرات الموقف|سجل الأحداث|الوقائع الجديدة/;
   function setState(sec, btn, collapsed) {
     sec.classList.toggle('sc-collapsed', collapsed);
     btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
