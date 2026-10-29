@@ -100,8 +100,8 @@ section.doc h2,section.doc h3,section.doc h4,.h-rule,.chip,.kpi,.tag,.st-badge,
 /* عطل 2026-10-28: الملحق تجاوز الصفحة التاسعة بفقرة واحدة (صفحة عاشرة بتعبئة 7%).
    الحكم: ضغط الملحق وحده (تباعد أسطر ومقاطع) — لا يمسّ متن التقرير ولا هيئة الغلاف. */
 .additions-annex section.doc{padding:0 0 2mm}
-.additions-annex section.doc p{line-height:1.46;margin:1.5mm 0}
-.additions-annex section.doc li{margin:.8mm 0}
+.additions-annex section.doc p{line-height:1.46;margin:1.3mm 0}
+.additions-annex section.doc li{margin:.7mm 0}
 .additions-annex section.doc h3{margin:3mm 0 1.4mm !important}
 .additions-annex section.doc h2{margin:3.4mm 0 2mm !important}
 """

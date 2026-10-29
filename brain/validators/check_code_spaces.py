@@ -28,7 +28,8 @@ B = Path(__file__).resolve().parents[1]
 EST_RE = re.compile(r"EST-\d{4}-\d{2}-\d{2}-\d{2}")
 MN_RE = re.compile(r"MN-\d{4}-\d{2}-\d{2}-\d{2}")
 
-FACTS_HEAD = "الوقائع الجديدة"
+FACTS_HEADS = ("سجل الأحداث", "الوقائع الجديدة")
+FACTS_HEAD = FACTS_HEADS[0]
 ANALYSIS_HEADS = ("قراءة الموقف وتحليل المؤشرات", "الاحتمالات ونسبة الحوادث إلى جهات", "الاحتمالات ونسبة الحادث إلى جهاته", "الخلاصة", "مؤشرات الموقف")
 
 
@@ -85,7 +86,7 @@ def main() -> int:
         blocks.append(f"رموز وقائع غير مسجَّلة في event-code-map أو event_keys: {unknown_mn}")
 
     for title, body in secs.items():
-        if title == FACTS_HEAD and EST_RE.search(body):
+        if title in FACTS_HEADS and EST_RE.search(body):
             blocks.append(f"رمز تقدير EST- داخل «{FACTS_HEAD}» — التقدير ليس واقعة: {sorted(set(EST_RE.findall(body)))}")
         if any(title.startswith(h) for h in ANALYSIS_HEADS) and MN_RE.search(body):
             warns.append(f"رمز واقعة كامل MN- داخل «{title}» — يُستعمل الرمز المختصر: {sorted(set(MN_RE.findall(body)))}")
