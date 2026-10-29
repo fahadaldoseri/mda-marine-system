@@ -163,7 +163,7 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
             '<div class="sc-row"><div class="sc-l">ما يُراقب خلال 24 ساعة</div>'
             f'<div class="sc-v"><p class="sc-gist">{inline(_gist(watch, limit=2))}</p>'
             f'<p class="sc-more">{n_watch} بنود · '
-            '<a href="/additions.html#sec-07" data-goto="مؤشرات التحذير المبكر" data-alt="/additions.html#sec-07">المؤشرات الكاملة</a></p></div></div>')
+            '<a href="/additions.html#sec-07" data-goto="علامات الإنذار المبكر" data-alt="/additions.html#sec-07">المؤشرات الكاملة</a></p></div></div>')
     key = ""
     if rkey_html:
         key = rkey_html.replace('class="rkey no-print"', 'class="sc-rkey"')

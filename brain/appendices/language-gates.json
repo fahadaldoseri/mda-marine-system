@@ -24,5 +24,17 @@
     "style_json": "logs/style-metrics-<التاريخ>.json",
     "orthography_json": "logs/orthography-<التاريخ>.json",
     "daily_numbers_in_chat": true
+  },
+  "monitoring": {
+    "waw_sentence_pct": {
+      "per_report": true,
+      "target": 15,
+      "max": 25,
+      "fail_on_target_miss": false,
+      "record": "logs/style-metrics-<التاريخ>.json",
+      "alert_dir": "logs/alerts",
+      "channel": "ملف محلي فقط — لا تلغرام",
+      "note": "بند مراقبة مقيس لكل تقرير: الهدف 15% والسقف 25%؛ تجاوز الهدف تنبيه، وتجاوز السقف منع."
+    }
   }
 }

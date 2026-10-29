@@ -150,7 +150,7 @@ def decision_card(dc, inline):
         pts = _points(value)
         if pts and label == "ما يُراقب خلال 24 ساعة":
             # صف المراقبة يُعرض عددًا وإحالة: النصوص الكاملة في قسم المؤشرات (منع التكرار الحرفي)
-            body = (f'<p class="dc-note">عدد البنود: {len(pts)} · وتفصيلها في قسم «مؤشرات التحذير المبكر».</p>')
+            body = (f'<p class="dc-note">عدد البنود: {len(pts)} · وتفصيلها في قسم «علامات الإنذار المبكر».</p>')
         elif pts:
             # الاقتصار على بندين في البطاقة (الباقي في القسم الكامل) — يمنع التكرار الحرفي
             shown, extra = pts[:2], max(0, len(pts) - 2)
@@ -594,7 +594,7 @@ def intel_analysis(data, inline):
     if inds:
         rws = [[i.get("indicator", ""), i.get("confirms", ""), i.get("refutes", ""), i.get("state", "")]
                for i in inds]
-        out.append('<h3>مؤشرات التحذير المبكر</h3><p class="blk-lede">المؤشر · ما يؤكده · ما ينفيه · الحالة.</p>'
+        out.append('<h3>علامات الإنذار المبكر</h3><p class="blk-lede">المؤشر · ما يؤكده · ما ينفيه · الحالة.</p>'
                    + _table(["المؤشر", "ما يؤكده", "ما ينفيه", "الحالة"], rws, inline))
 
     yr = data.get("yesterday_review") or []
