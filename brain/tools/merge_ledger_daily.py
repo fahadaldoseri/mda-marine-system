@@ -145,7 +145,7 @@ for f in DAILY_FILES:
             'sources': [ev.get('source', '')] if ev.get('source') else [],
             'source_count': 1 if ev.get('source') else 0,
             'deduplication_note': 'مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة',
-            'report_sections': ['الوقائع الجديدة'],
+            'report_sections': ['سجل الأحداث'],
             'merged_from': f.name,
             'merged_utc': (by_id.get(locals().get('rec', {}).get('event_id') or '', {}).get('merged_utc') or utcnow()),
         }
