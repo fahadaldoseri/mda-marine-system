@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-30T05:38:27.200450+00:00",
+  "generated_at": "2026-10-30T07:11:07.999124+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -2697,6 +2697,13 @@
       "lesson_id": "ك-350",
       "barrier_id": "B-0a69b76b",
       "run_evidence": " · #130) ثم إثبات التماثل `python3 validators/check_backup_parity.py` خرج 0 — «مطابق — المستودع يعكس"
+    },
+    {
+      "fault_id": "ك-351",
+      "state": "مغلق",
+      "lesson_id": "ك-351",
+      "barrier_id": "B-0c7e51a4",
+      "run_evidence": "`python3 validators/check_backup_parity.py` خرج 1 فرصد «مفقود من المستودع: skills/runbook-completion-closure-ops/*» (4 ملفات) · `SKILLS_DIR=/tmp/ghost-skills python3 validators/check_backup_parity.py` خرج 1 فرصد «مفقود من المستودع: skills/ghost-skill/SKILL.md» (اختبار سلبي) · وبعد الدفع عبر PR #133 خرج 0 — «مطابق — المستودع يعكس الشجرة المحلية كاملة» · `python3 skills/runbook-completion-closure-ops/scripts/run_to_completion.py --date 2026-10-30 --selftest` خرج 0 — 13/13 مطابق"
     }
   ]
 }
