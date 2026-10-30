@@ -1,1 +1,1 @@
-/home/ubuntu/seawatch/generator/map_gulf.py
+../../site/generator/map_gulf.py
