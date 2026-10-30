@@ -206,7 +206,17 @@ def main() -> int:
         _sk_names = set()
     if not _sk_names:
         _sk_names = {"marine-news-brain", "military-arabic-editing", "macr-system", "superpowers-method"}
-    for sk in sorted(_sk_names):
+    # ك-351: كانت القائمة من المستودع فقط، فمهارة على الخادم غير مدفوعة لا تُقارَن إطلاقًا
+    # ويظهر «مطابق» كاذبًا. القاعدة الآن: اتحاد مهارات المستودع ومهارات الخادم — فشل مغلق.
+    _local_names = set()
+    try:
+        for _d in sorted(sk_root.iterdir()):
+            if _d.is_dir() and _d.name not in {"__pycache__", ".git"}:
+                _local_names.add(_d.name)
+    # تضييق مقصود: أخطاء قراءة الجذر فقط — أي خطأ آخر يظهر ولا يُبتلع.
+    except (OSError, PermissionError):
+        _local_names = set()
+    for sk in sorted(_sk_names | _local_names):
         d = sk_root / sk
         if d.is_dir():
             local.update(manifest(d, {"__pycache__", ".git"}, set(), f"skills/{sk}"))
