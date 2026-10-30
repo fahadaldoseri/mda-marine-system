@@ -34,6 +34,7 @@ COMMON_ARABIC_WORDS = {
     "السفينة", "سفينة", "السفن", "رحلتها", "واصلت", "حادث", "حادثة", "النص", "الفقرة",
     "حركة", "المياه", "اليوم", "الفترة", "الجديدة", "الجديد", "المعتاد", "مستوى",
     "الله", "المشروع", "كلمة", "هذه", "وخلل",
+    "إليه", "إليها", "إليهم", "إليك", "لديها", "لديه", "بها", "به",
 }
 
 # سوابق ولواحق عربية شائعة لا تغيّر أصل الكلمة عند البحث في المعجم.
@@ -88,6 +89,16 @@ def load_project_dictionary() -> set[str]:
     paths = [ROOT / "appendices" / "terminology.md", ROOT / "appendices" / "style-blacklist.json"]
     paths.extend(sorted((ROOT / "appendices" / "libraries").rglob("*")))
     known = set(COMMON_ARABIC_WORDS) | set(DUPLICATE_LETTER_WHITELIST)
+    # معجم مشتق من المتن المعتمد (tools/build_lexicon_corpus.py) — مصدر حاكم واحد
+    corpus = ROOT / "appendices" / "lexicon-corpus.json"
+    if corpus.is_file():
+        try:
+            for word in json.loads(corpus.read_text(encoding="utf-8")).get("words", []):
+                normalized = normalize_word(str(word))
+                if len(normalized) >= LEXICON_MIN_BASE_LENGTH:
+                    known.add(normalized)
+        except (json.JSONDecodeError, UnicodeError):
+            pass
     for path in paths:
         if not path.is_file():
             continue

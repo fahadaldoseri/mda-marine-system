@@ -99,7 +99,7 @@
   },
   {
    "id": "new-incidents",
-   "title": "الوقائع الجديدة",
+   "title": "سجل الأحداث",
    "order": 8,
    "block": "{site}/generator/blocks.py",
    "validator": "validators/check_language.py",
@@ -388,7 +388,6 @@
   "validators/sources-37-result.json": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
   "validators/sources-37-browser.json": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
   "validators/sources-retry.json": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
-  "validators/check_orthography.py": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
   "historical/event-ledger-2026-02-28-to-2026-10-11.json": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
   "historical/cumulative-baseline-2026-02-28-to-2026-10-11.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
   "historical/monthly/2026-02-28-02-29.md": "مؤجَّل بقرار المالك: بلا خطوة بعد — مُدرج في تقرير الجولة للمراجعة (لم يُحذف)",
@@ -1057,7 +1056,8 @@
     "files": [
      "tools/merge_ledger_daily.py",
      "sections/90-automation.md",
-     "tools/daily_pipeline.sh"
+     "tools/daily_pipeline.sh",
+     "tools/repair_ledger_prose.py"
     ],
     "folders": [],
     "gates": [],
@@ -1068,7 +1068,8 @@
     "bash",
     "-lc",
     "B=\"$PWD\"; export B SITE; python3 tools/merge_ledger_daily.py; rc=$?; exit $rc",
-    "B=\"$PWD\"; export B; python3 \"$B/tools/mark_components.py\" --date \"$D\" --component ledger_merge; rc=$?; exit $rc"
+    "B=\"$PWD\"; export B; python3 \"$B/tools/mark_components.py\" --date \"$D\" --component ledger_merge; rc=$?; exit $rc",
+    "B=\"$PWD\"; export B; python3 \"$B/tools/repair_ledger_prose.py\" --check"
    ],
    "ok_rc": [
     0
@@ -1130,8 +1131,10 @@
      "ف1–ف5 — بوابة التحقق"
     ],
     "files": [
+     "tests/run_checks.sh",
      "tools/final_gate.sh",
-     "tests/run_checks.sh"
+     "validators/check_content_fidelity.py",
+     "validators/check_en_parity.py"
     ],
     "folders": [],
     "gates": [],
@@ -3300,8 +3303,9 @@
      "س2 — الإغلاق والدفع"
     ],
     "files": [
+     "tools/publish_changes.sh",
      "tools/publish_site.sh",
-     "tools/publish_changes.sh"
+     "validators/check_en_parity.py"
     ],
     "folders": [],
     "gates": [],
@@ -3342,7 +3346,8 @@
     ],
     "files": [
      "tools/check_live.sh",
-     "tools/live_visual_audit.py"
+     "tools/live_visual_audit.py",
+     "tools/live_dom_audit.py"
     ],
     "folders": [],
     "gates": [],
@@ -3354,7 +3359,8 @@
    "command": [
     "bash",
     "-lc",
-    "B=\"$PWD\"; export B SITE; bash tools/check_live.sh --compare {date}; rc=$?; exit $rc"
+    "B=\"$PWD\"; export B SITE; bash tools/check_live.sh --compare {date}; rc=$?; exit $rc",
+    "B=\"$PWD\"; export B; SITE=\"${SITE:-/home/ubuntu/seawatch}\"; python3 \"$B/tools/live_dom_audit.py\" --url \"file://$SITE/dist/reports/{date}.html\" --url \"file://$SITE/dist/additions.html\" --url \"file://$SITE/dist/sources.html\" --json \"logs/runbook/{date}/dom-audit.json\""
    ],
    "ok_rc": [
     0

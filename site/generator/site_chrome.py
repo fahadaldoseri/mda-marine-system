@@ -234,7 +234,7 @@ def nav_html(active: str = "") -> str:
         cur = ' aria-current="page"' if key == active else ""
         return f'<a href="{href}"{cur} data-i18n="{key}">{label}</a>'
     # زر الطباعة في الشريط الواحد لصفحات الإصدار فقط (يحلّ محل زر الشريط العلوي المخفي على الشاشة)
-    print_btn = '<button type="button" class="sn-theme sn-print" id="sn-print" data-i18n="print">طباعة / PDF</button>' if active == "report" else ""
+    print_btn = '<button type="button" class="sn-theme sn-print" id="sn-print" data-i18n="print">طباعة / PDF</button>' if active in ("report", "additions", "sources", "special") else ""
     return f"""<nav class="site-nav no-print" aria-label="تنقل الموقع">
   <a class="sn-skip" href="#" id="sn-skip" data-i18n="skip">الانتقال إلى المحتوى</a>
   <div class="sn-inner">
@@ -371,7 +371,9 @@ MOBILE_NAV_CSS = """
   .topbar a, .topbar button, .topbar .btn, .sn-brand, .sn-links a,
   .sc-toggle, .sc-jump a, .chip, .chip a, .tb-meta .btn,
   .sn-tools button, .sn-tools a, .sn-scale button, .sc-more a,
-  .sc-all button, details.sc-basis summary, .sf-inner a{
+  .sc-all button, details.sc-basis summary, .sf-inner a,
+  .sx-card a, .sx-name a, .sx-links a, .sx-row a, .sx-src a,
+  .sx-ref a, .sx-refs a, .src-ref a, .open-report a, a.btn-link, .sup-banner a{
     min-height:44px; min-width:44px; display:inline-flex; align-items:center;
     justify-content:center; box-sizing:border-box;
   }

@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة 1bb1f18c99b3e3e5). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة 8a4e2ba9df3b749b). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -20,9 +20,9 @@
 | S050 | فحص العقوبات (OFAC) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S050.log | أ1 — سلسلة التشغيل اليومي | tools/ofac_screen.py، sections/90-automation.md | stop |
 | W020 | بناء ملف واجهة التقرير | agent | reports/{date}-sectioned.md، templates/mark-schema.json | web/meta/{date}.json | min_bytes:web/meta/{date}.json | ب2 — ترتيب الأقسام | templates/mark-schema.json | stop |
 | W030 | بناء دفتر اليوم (وقائع ومقتطفات الأصل) | agent | reports/{date}-sectioned.md، feeds/feeds-{date}.json | cumulative-2026/daily/{date}.json | min_bytes:cumulative-2026/daily/{date}.json | ف1–ف5 — بوابة التحقق | tools/ledger_source_excerpt.py، cumulative-2026/daily/ | stop |
-| S070 | دمج الذاكرة التراكمية (دفتر اليوم) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S070.log | أ1 — سلسلة التشغيل اليومي | tools/merge_ledger_daily.py، sections/90-automation.md، tools/daily_pipeline.sh | stop |
+| S070 | دمج الذاكرة التراكمية (دفتر اليوم) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S070.log | أ1 — سلسلة التشغيل اليومي | tools/merge_ledger_daily.py، sections/90-automation.md، tools/daily_pipeline.sh، tools/repair_ledger_prose.py | stop |
 | W040 | علامة التشغيل اليومية (pipeline mark) | script |  |  | min_bytes:logs/pipeline-{date}.json | ف1–ف5 — بوابة التحقق | tools/write_mark.py | stop |
-| G001 | اختبارات البوابات (tests) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G001.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tests/run_checks.sh | stop |
+| G001 | اختبارات البوابات (tests) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G001.log | ف1–ف5 — بوابة التحقق | tests/run_checks.sh، tools/final_gate.sh، validators/check_content_fidelity.py، validators/check_en_parity.py | stop |
 | G002 | تنظيف المحتوى الداخلي | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G002.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/scrub_internal.py، tools/apply_audit_gfs_docx.py، tools/apply_jmic_ukmto_to_gfs.py | stop |
 | G003 | دمج بنك التعريفات | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G003.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/merge_glossary.py | stop |
 | G004 | أرقام المصادر (معتمدة/مفحوصة/ناجحة) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G004.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/source_counts.py | stop |
@@ -75,7 +75,7 @@
 | G043 | سجل البوابات gate.json من سجل المحرّك | script |  |  | cmd:bash -lc grep -q 'runbook-ledger' logs/gate-{date}/gate.json | ف1–ف5 — بوابة التحقق | tools/runbook.py، tools/write_mark.py | stop |
 | G038 | كتابة العلامة بعد البوابة | script |  | logs/pipeline-{date}.json | cmd:bash -lc test -s logs/runbook/{date}/G038.log؛ file_exists:logs/pipeline-{date}.json؛ cmd:bash -lc grep -q 'العلامة (final)' logs/runbook/{date}/G038.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/write_mark.py | stop |
 | G039 | مخطط العلامة الثابت | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G039.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_mark_schema.py | stop |
-| D010 | نشر الموقع (بعد كل البوابات) | script |  |  | cmd:python3 -c import json,sys;d=json.load(open('logs/publish-{date}.json'));sys.exit(0 if d.get('status')=='ok' else 1) | س2 — الإغلاق والدفع | tools/publish_site.sh، tools/publish_changes.sh | stop |
+| D010 | نشر الموقع (بعد كل البوابات) | script |  |  | cmd:python3 -c import json,sys;d=json.load(open('logs/publish-{date}.json'));sys.exit(0 if d.get('status')=='ok' else 1) | س2 — الإغلاق والدفع | tools/publish_changes.sh، tools/publish_site.sh، validators/check_en_parity.py | stop |
 | D020 | التحقق الحي من النشر (قراءة فقط) | script |  |  | cmd:python3 -c import json,sys;d=json.load(open('logs/live-{date}.json'));sys.exit(0 if d.get('status')=='ok' else 1) | س2 — الإغلاق والدفع | tools/check_live.sh، tools/live_visual_audit.py | stop |
 | D030 | إرسال الملخص وPDF على تلغرام (اختيارية) | script |  |  | cmd:python3 -c import json,sys;d=json.load(open('logs/publish-{date}-telegram.json'));sys.exit(0 if d.get('status')=='ok' else 1) | س4 — قناة التسليم | tools/publish_site.sh، tools/make_tg_digest.py، tools/telegram_send.py، tools/telegram_bot.py، secrets/secrets.env.example، secrets/README.md | continue |
 | D032 | أرشفة نص ملخص تلغرام المرسل | script |  |  | cmd:bash -lc test -d logs/telegram-archive | س4 — قناة التسليم | tools/archive_tg_digest.py، tools/telegram_send.py | continue |
@@ -104,7 +104,7 @@
 | 5 | مؤشرات الموقف (indicators) | {site}/generator/blocks.py | validators/check_style.py | runbook/prompts/sections/indicators.md | tests/test_sections_registry_vs_report.py |  |
 | 6 | مستوى التهديد (threat-level) | {site}/generator/blocks.py | validators/check_intel.py | runbook/prompts/sections/threat-level.md | tests/test_sections_registry_vs_report.py |  |
 | 7 | التوجيهات التشغيلية (directives) | {site}/generator/blocks.py | validators/check_points_rule.py | runbook/prompts/sections/directives.md | tests/test_sections_registry_vs_report.py |  |
-| 8 | الوقائع الجديدة (new-incidents) | {site}/generator/blocks.py | validators/check_language.py | runbook/prompts/sections/new-incidents.md | tests/test_sections_registry_vs_report.py |  |
+| 8 | سجل الأحداث (new-incidents) | {site}/generator/blocks.py | validators/check_language.py | runbook/prompts/sections/new-incidents.md | tests/test_sections_registry_vs_report.py |  |
 | 9 | التحذيرات والنشرات الرسمية (warnings) | {site}/generator/blocks.py | validators/check_code_spaces.py | runbook/prompts/sections/warnings.md | tests/test_sections_registry_vs_report.py |  |
 | 10 | سجل IMO والحوادث المؤكدة (imo-log) | {site}/generator/blocks.py | validators/check_carryover.py | runbook/prompts/sections/imo-log.md | tests/test_sections_registry_vs_report.py |  |
 | 11 | قراءة الموقف وتحليل المؤشرات (intel-analysis) | {site}/generator/blocks.py | validators/check_intel.py | runbook/prompts/sections/intel-analysis.md | tests/test_sections_registry_vs_report.py |  |
