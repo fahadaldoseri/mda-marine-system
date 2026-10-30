@@ -439,7 +439,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .topbar,.no-print{display:none !important}
   .wrap{max-width:none;padding:0}
   a{color:#0a1524;text-decoration:none}
-  section.doc{background:#fff;border:0;border-top:1px solid #cfd8e3;border-radius:0;padding:0 0 5mm;box-shadow:none;break-inside:auto;page-break-inside:auto}
+  section.doc{background:#fff;border:0;border-top:1px solid #cfd8e3;border-radius:0;padding:0 0 3mm;box-shadow:none;break-inside:auto;page-break-inside:auto}
   section.doc.pri{border-top:2px solid #0b6f66}
   section.doc > h2{font-size:13pt;color:#0a1524;break-after:avoid;page-break-after:avoid}
   section.doc > h2 .ico{display:none}
@@ -473,17 +473,17 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
      /* ك-341: بطاقتان في السطر في الطباعة — تدفّق بلا تصغير خطوط ولا حذف محتوى */
      .ev-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.6mm;margin:4mm 0 0}
      .ev{display:block;margin:0;padding:3mm 3.4mm 2.8mm}
-     .ev{display:block;margin:0 0 3mm;padding:3.4mm 4mm 3mm;break-inside:avoid;page-break-inside:avoid;opacity:1 !important;transform:none !important;animation:none !important;border-color:#c3cedb;background:#fff}
+     .ev{display:block;margin:0 0 2mm;padding:2.2mm 2.6mm 2mm;break-inside:avoid;page-break-inside:avoid;opacity:1 !important;transform:none !important;animation:none !important;border-color:#c3cedb;background:#fff}
      .ev::before{width:4px;background:#0f8f86}
      .ev.b-media::before{background:#b8860b}
      .ev.b-deny::before{background:#9aa8ba}
-     .ev-what{font-size:10pt;line-height:1.55;color:#12203a;margin:0}
-     .ev-top{margin-bottom:1.6mm}
-     .ev-meta{margin-top:1.8mm;padding-top:1.4mm}
-     .ev-meta{font-size:9.5pt;color:#4a5b73;border-top-color:#dbe3ec}
+     .ev-what{font-size:9.4pt;line-height:1.45;color:#12203a;margin:0}
+     .ev-top{margin-bottom:1mm}
+     .ev-meta{margin-top:1.1mm;padding-top:.9mm}
+     .ev-meta{font-size:9pt;color:#4a5b73;border-top-color:#dbe3ec}
      .ev-idx,.ev-code,.ev-badge{font-size:9pt;color:#4a5b73;border-color:#c3cedb}
      .dg-grid{display:block;margin:4mm 0 0}
-     .dg{display:block;margin:0 0 3mm;padding:3.2mm 4mm 2.8mm;break-inside:avoid;page-break-inside:avoid;border-color:#dbe3ec;background:#fff}
+     .dg{display:block;margin:0 0 2mm;padding:2.4mm 2.8mm 2.2mm;break-inside:avoid;page-break-inside:avoid;border-color:#dbe3ec;background:#fff}
      .dg-top{margin-bottom:1.4mm}
      .dg-t{font-size:10pt}
      .dg-body{font-size:9.5pt;line-height:1.5;margin-bottom:1.4mm;color:#243447}
@@ -544,7 +544,15 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   /* Chromium لا يجزّئ حاويات grid/flex بين الصفحات، فتتدفّق هنا بترتيب inline-block
      يحفظ هيئة العمودين/البطاقات نفسها، مع السماح بالانقسام بين الصفحات */
   .wrap,.changes,.dc-grid,.kpis,.masthead,.map-legend,.src-grid,.glossary,.tl-viz,.viz,.card,.decision{display:block !important}
+  /* عطل (2026-10-30): القاعدة العامة كانت تُظهر وسم <style> المحقون داخل الترويسة في الطباعة،
+     فطُبع نص <span class="ltr">CSS</span> داخل الصفحة الأولى. القياس الحي: display المحسوب لوسم style = inline-block في print.
+     الإصلاح: استثناء العناصر غير المرئية + حارس صريح يمنع طباعتها. */
   .kpis > *,.masthead > *,.map-legend > li,.glossary > li,.src-grid > *{display:inline-block !important;vertical-align:top !important;width:48.5% !important;margin:0 0 2.5mm 1% !important;box-sizing:border-box !important}
+  .kpis > style,.kpis > script,.kpis > template,.kpis > link,
+  .masthead > style,.masthead > script,.masthead > template,.masthead > link,
+  .src-grid > style,.src-grid > script,.src-grid > template,.src-grid > link,
+  .map-legend > style,.map-legend > script,.glossary > style,.glossary > script{display:none !important}
+  style,script,template,link,meta,title{display:none !important}
   .dc-grid > *,.dc-row{display:block !important;width:100% !important}
   /* ك-103: الوسم يُعوَّم والمحتوى كتلة قابلة للانقسام — فلا يُترك عنوان أو بطاقة يتيمة ولا فراغ أسفل الغلاف */
   .dc-row::after{content:"";display:block;clear:both}
@@ -1027,53 +1035,6 @@ cursor:pointer;font:inherit;font-size:12.5px;font-weight:700}
 .sn-lang-note{position:fixed;left:50%;transform:translateX(-50%);top:14px;z-index:60;background:var(--sn-panel);
 border:1px solid var(--sn-line);color:var(--sn-ink);border-radius:10px;padding:10px 14px;font-size:13px;
 box-shadow:0 10px 30px rgba(0,0,0,.35);max-width:90vw;text-align:center}
-
-/* اتجاه النصوص اللاتينية والإحداثيات — يمنع انقلابها في السياق العربي */
-.ltr{direction:ltr;unicode-bidi:isolate}
-
-/* ألوان الشارات في الوضع النهاري (نفس منطق ألوان نسخة الطباعة) */
-@media screen{
-  body.daylight .st-badge.s-stable,body.daylight .chg.c-closed .chg-tag,body.daylight .conf.c-high,
-  body.daylight .tag.t-confirm{color:#14603f;background:#edfaf3;border-color:#7cc4a0}
-  body.daylight .st-badge.s-active,body.daylight .kstrip.k-confirm,body.daylight .cls-banner.c-sensitive
-    {color:#7a1d1a;background:#fff1f0;border-color:#c77973}
-  body.daylight .conf.c-med,body.daylight .kstrip.k-suspect,body.daylight .chg.c-reclassified .chg-tag,
-  body.daylight .cls-banner.c-restricted,body.daylight .tag.t-suspect{color:#7c5000;background:#fff7e6;border-color:#c9a24f}
-  body.daylight .conf.c-low,body.daylight .kstrip.k-inter,body.daylight .chg.c-new .chg-tag
-    {color:#1d4f87;background:#edf4ff;border-color:#8bb1dd}
-  body.daylight .chg.c-ongoing .chg-tag{color:#31465c;background:#f6f8fb;border-color:#b8c4d1}
-  body.daylight .ev-code{color:#31465c;background:#f2f5f9;border-color:#c4d0dd}
-}
-
-/* رقم المعلّم: نص داكن على معلّم فاتح، ومقلوب في الوضع النهاري */
-body:not(.daylight) .lg-num{color:#04120f}
-body.daylight .lg-num{color:#ffffff}
-
-/* بطاقات الجوال للجداول — البند المعتمد 21 أكتوبر 2026 */
-@media (max-width:560px){
-  table.cardified{display:block;border:0;background:transparent;border-radius:0}
-  table.cardified.cardified{width:100%;max-width:100%;min-width:0}
-  table.cardified thead{display:none}
-  table.cardified tbody{display:block;max-width:100%}
-  table.cardified tr{display:block;max-width:100%;box-sizing:border-box;background:var(--panel);
-    border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin:0 0 10px}
-  table.cardified td{display:grid;grid-template-columns:minmax(72px,auto) minmax(0,1fr);gap:8px;
-    border:0;padding:5px 0;align-items:baseline;text-align:start;
-    overflow-wrap:anywhere;word-break:break-word;min-width:0}
-  table.cardified td::before{content:attr(data-label);color:var(--muted);font-size:12.5px;font-weight:600}
-  table.cardified td:empty{display:none}
-  /* ك-336: النص الإنجليزي الطويل (شرائح الحالة والتسميات) كان يتجاوز عرض بطاقة الجوال 16–31% */
-  table.cardified td > *,table.cardified .st-badge{white-space:normal;overflow-wrap:anywhere;
-    word-break:break-word;min-width:0;max-width:100%}
-  .tbl-wrap:has(table.cardified),.tbl-scroll:has(table.cardified){overflow:visible;border:0}
-  .tbl-hint{display:none}
-}
-/* بانر النسخة المستبدلة — البند المعتمد 21 أكتوبر 2026 */
-.sup-banner{margin:0 0 20px;padding:12px 16px;border:1px solid #c9a24f;border-radius:10px;
-  background:#2a2210;color:#ffd88a;font-size:14px}
-body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
-.sup-banner a{color:inherit;font-weight:700;text-decoration:underline}
-.sp-dim{opacity:.72}
 </style></head>
 <body class="lang-en"><nav class="site-nav no-print" aria-label="Site navigation">
   <a class="sn-skip" href="#" id="sn-skip" data-i18n="skip">Skip to content</a>
@@ -1097,7 +1058,7 @@ body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
     </div>
     <div class="sn-tools">
       <div class="sn-lang" role="group" aria-label="Language">
-        <button type="button" data-lang="ar" title="Arabic" lang="ar">AR</button>
+        <button type="button" data-lang="ar" title="Arabic" lang="ar">Public</button>
         <button type="button" data-lang="en" title="English" lang="en">EN</button>
       </div>
       <div class="sn-scale" role="group" aria-label="Text size" data-i18n-aria="scale">
@@ -1139,7 +1100,53 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <div class="wrap">
   <header class="masthead">
     <h1>Vessel fire in the Strait of Hormuz northeast of Khasab, followed by suppression, with four official notices during the period</h1>
-    <div class="threat risk-high"><div class="lbl">Threat Level</div><div class="val">High</div></div>
+    <style>
+.tz{border:1px solid var(--line,#243244);border-radius:14px;padding:14px 16px;background:var(--card,#0e1726);margin:10px 0}
+.tz-head{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;justify-content:space-between}
+.tz-head h3{margin:0;font-size:1.05rem}
+.tz-win{font-size:.8rem;opacity:.75}
+.tz-top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0 6px}
+.tz-badge{font-weight:700;font-size:1.5rem;line-height:1.2}
+.tz-sub{margin:0;font-size:.85rem;opacity:.85}
+.tz-zones{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px}
+.tz-z{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;padding:7px 9px;border:1px solid var(--line,#243244);border-radius:10px}
+.tz-n{font-size:.9rem}
+.tz-lv{font-weight:700;font-size:.9rem}
+.tz-dot{font-size:.8rem}
+.tz-c{font-size:.78rem;opacity:.8}
+.tz-basis{margin-top:10px;border-top:1px dashed var(--line,#243244);padding-top:8px}
+.tz-basis summary{cursor:pointer;font-weight:600;font-size:.9rem}
+.tz-basis p{margin:6px 0 0;font-size:.86rem;line-height:1.7}
+.tz-count{opacity:.85}
+@media (max-width:640px){
+  .tz{padding:12px}
+  .tz-badge{font-size:1.3rem}
+  .tz-z{flex-direction:column;align-items:flex-start}
+}
+.tz-badge.t-critical,.tz-lv.t-critical,.tz-dot.t-critical{color:#7f1d1d;border-color:#7f1d1d}
+.tz-badge.t-severe,.tz-lv.t-severe,.tz-dot.t-severe{color:#b91c1c;border-color:#b91c1c}
+.tz-badge.t-high,.tz-lv.t-high,.tz-dot.t-high{color:#c2410c;border-color:#c2410c}
+.tz-badge.t-medium,.tz-lv.t-medium,.tz-dot.t-medium{color:#a16207;border-color:#a16207}
+.tz-badge.t-low,.tz-lv.t-low,.tz-dot.t-low{color:#15803d;border-color:#15803d}
+@media print{
+  /* ضغط الورق (2026-10-30): بطاقة القطاعات الأربعة أُضيفت إلى الترويسة فزاد طول الإصدار
+     إلى 13 صفحة خارج النطاق 7–12. الضغط هنا للطباعة فقط ولا يمسّ هيئة الشاشة. */
+  .tz{break-inside:auto;page-break-inside:auto;border-color:#999;padding:2.2mm 3mm;margin:1.5mm 0}
+  .tz-head h3{font-size:10.4pt}
+  .tz-win{font-size:7.6pt}
+  .tz-top{margin:1.1mm 0 .7mm;gap:2mm}
+  .tz-badge{font-size:13pt;line-height:1.1}
+  .tz-sub{font-size:8pt}
+  .tz-zones{margin:1.1mm 0 0;gap:.7mm}
+  .tz-z{padding:1mm 1.4mm;border-radius:1.2mm;gap:2mm}
+  .tz-n,.tz-lv,.tz-c,.tz-dot{font-size:8pt;line-height:1.35}
+  .tz-basis{margin-top:1.1mm;padding-top:.9mm}
+  .tz-basis summary{font-size:8.5pt}
+  .tz-basis p{margin:.7mm 0 0;font-size:8pt;line-height:1.35}
+  .tz-basis>*{display:block!important}
+  .tz-basis summary{list-style:none}
+}
+</style><section class="tz tz-print" aria-label="Threat level by sector"><header class="tz-head"><h3>Threat level by sector</h3><span class="tz-win">over the previous 24 hours</span></header><div class="tz-top"><span class="tz-badge t-severe"><span aria-hidden="true">◆</span> Severe</span><p class="tz-sub">Highest sector:</p></div><ul class="tz-zones"><li class="tz-z"><span class="tz-n">Strait of Hormuz, Gulf of Oman and the Arabian Gulf</span><span class="tz-lv t-severe"><span class="tz-dot t-severe" aria-hidden="true">◆</span> Severe</span><span class="tz-c"><span class="bidi">4</span> qualifying incidents</span></li><li class="tz-z"><span class="tz-n">Bab al-Mandab and the Red Sea</span><span class="tz-lv t-low"><span class="tz-dot t-low" aria-hidden="true">▬</span> Low</span><span class="tz-c">No qualifying incident</span></li><li class="tz-z"><span class="tz-n">Arabian Sea</span><span class="tz-lv t-low"><span class="tz-dot t-low" aria-hidden="true">▬</span> Low</span><span class="tz-c">No qualifying incident</span></li><li class="tz-z"><span class="tz-n">Horn of Africa</span><span class="tz-lv t-low"><span class="tz-dot t-low" aria-hidden="true">▬</span> Low</span><span class="tz-c">No qualifying incident</span></li></ul><details class="tz-basis" open><summary>Basis of assessment</summary><p>Strait of Hormuz, Gulf of Oman and the Arabian Gulf <span class="bidi">4</span> qualifying incidents</p><p>Bab al-Mandab and the Red Sea</p><p>Arabian Sea</p><p>Horn of Africa</p><p class="tz-count">Counter: <span class="bidi">4</span> · confirmed <span class="bidi">3</span> · probable <span class="bidi">1</span> · excluded <span class="bidi">11</span> · non-spatial <span class="bidi">1</span> · total <span class="bidi">16</span></p></details></section>
     <div>
       <p class="lede">during the period <bdi class="bidi" dir="ltr">290400Z–300400Z</bdi> October 2026, the threat level remained high in the Strait of Hormuz, the Arabian Gulf, the Red Sea and Bab al-Mandab, and medium in the Arabian Sea and the eastern Mediterranean. An official advisory on blockade enforcement was issued with notice to avoid unnecessary transit, and an Iranian threat of retaliation was reported alongside a negotiating track to reopen the strait. Yemen reports focused on ports and civil aviation. <span class="ltr">UKMTO</span> and JMIC. Accounts of the cause of the fire differed between Iranian media reporting and an official U.S. denial regarding the mines.</p>
       <div class="masthead-meta"><span class="chip">Release number <b>W B <span class="ltr">30/10/26</span></b></span><span class="chip">Last updated <b class="bidi">2026-10-30T04:00:00Z</b></span><span class="chip">Coverage period <b><bdi class="bidi" dir="ltr">290400Z–300400Z</bdi> <span class="ltr">UTC</span> October 2026</b></span><span class="chip">Approved sources <b class="bidi">62</b></span><span class="chip">by automated route <b class="bidi">60</b></span><span class="chip">by manual review <b class="bidi">2</b></span><span class="chip">Cited sources <b class="bidi">10</b></span></div>
@@ -1147,9 +1154,88 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
   </header>
 
   <div class="cls-banner c-open">Release classification: public</div>
-  <section class="decision reveal" aria-label="Public"><h2 class="dc-title">Public</h2><div class="dc-grid"><div class="dc-row"><div class="dc-l">What changed</div><div class="dc-v"><ul class="dc-list"><li>A vessel fire occurred 25 nautical miles northeast of Khasab and was then extinguished, with the crew safe.</li><li>Four official notices and updates were issued by <span class="ltr">UKMTO</span> and JMIC within less than 24 hours.</li></ul><p class="dc-note">and 1 more item in the What changed section.</p></div></div><div class="dc-row risk-high"><div class="dc-l">Threat Level</div><div class="dc-v">High</div></div><div class="dc-row"><div class="dc-l">Recommendations</div><div class="dc-v"><ul class="dc-list"><li>Increase visual and radio watch when approaching the Strait of Hormuz and the Arabian Gulf.</li><li>Expect short-term official warnings and update transit plans according to the latest announced warning.</li></ul><p class="dc-note">and 1 more item in the Recommendations section.</p></div></div><div class="dc-row"><div class="dc-l">What is monitored over the next 24 hours</div><div class="dc-v"><p class="dc-note">Number of items: 3 · detailed in the Early-warning indicators section.</p></div></div></div><div class="dc-foot">Basis of assessment: <span class="ltr">UKMTO</span> on suspicious activity, a vessel fire, a first update to the warning, and a professional report on the extinguishing. The cause of the ignition has not been determined.</div></section>
+  <section class="decision reveal" aria-label="Public"><h2 class="dc-title">Public</h2><div class="dc-grid"><div class="dc-row"><div class="dc-l">What changed</div><div class="dc-v"><ul class="dc-list"><li>A vessel fire occurred 25 nautical miles northeast of Khasab and was then extinguished, with the crew safe.</li><li>Four official notices and updates were issued by <span class="ltr">UKMTO</span> and JMIC within less than 24 hours.</li></ul><p class="dc-note">and 1 more item in the What changed section.</p></div></div><div class="dc-row"><div class="dc-l">Threat Level</div><div class="dc-v">Detailed level is in the header card (threat level by sector)</div></div><div class="dc-row"><div class="dc-l">Recommendations</div><div class="dc-v"><ul class="dc-list"><li>Increase visual and radio watch when approaching the Strait of Hormuz and the Arabian Gulf.</li><li>Expect short-term official warnings and update transit plans according to the latest announced warning.</li></ul><p class="dc-note">and 1 more item in the Recommendations section.</p></div></div><div class="dc-row"><div class="dc-l">What is monitored over the next 24 hours</div><div class="dc-v"><p class="dc-note">Number of items: 3 · detailed in the Early-warning indicators section.</p></div></div></div><div class="dc-foot">Basis of assessment: <span class="ltr">UKMTO</span> on suspicious activity, a vessel fire, a first update to the warning, and a professional report on the extinguishing. The cause of the ignition has not been determined.</div></section>
   <div class="kpis"><div class="kpi acc-warn reveal"><em></em><div class="k-l">UKMTO bulletins and updates during the period <span class="ltr">UKMTO</span> During the period</div><div class="k-v bidi">4</div><div class="k-d">+2</div><div class="k-n">Short-term official sequence along the transit route</div></div><div class="kpi acc-warn reveal"><em></em><div class="k-l">Reports of vessel fires or vessels catching fire in the Strait of Hormuz</div><div class="k-v bidi">3</div><div class="k-d">+3</div><div class="k-n">First confirmed fire report during the period</div></div><div class="kpi acc-warn reveal"><em></em><div class="k-l">Reports denying or disputing mines in the waterways</div><div class="k-v bidi">2</div><div class="k-d">+1</div><div class="k-n">Conflicting accounts of the cause of the incidents</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">Incidents affecting ports and civil aviation in Yemen</div><div class="k-v bidi">0</div><div class="k-d">−3</div><div class="k-n">No new report has been issued during the period; this does not mean the risk has receded</div></div></div>
-  <div class="sc-hero no-print"><p class="sc-eyebrow">Daily Maritime Security Report</p><h2 class="sc-h1">during the period <bdi class="bidi" dir="ltr">290400Z–300400Z</bdi> October 2026, the threat level remained high in the Strait of Hormuz, the Arabian Gulf, the Red Sea and Bab al-Mandab, and medium in the Arabian Sea and the eastern Mediterranean. An official advisory on blockade enforcement was issued with notice to avoid unnecessary transit, and an Iranian threat of retaliation was reported alongside a negotiating track to reopen the strait. Yemen reports focused on ports and civil aviation.</h2><div class="sc-chips"><span class="sc-chip sc-fresh" data-gen="2026-10-30T04:00:00Z" hidden>Release age <b class="sc-age"></b></span><span class="sc-chip">Release number <b><span class="bidi">W B <span class="ltr">30/10/26</span></span></b></span><span class="sc-chip">Last updated <b><span class="bidi">2026-10-30T04:00:00Z</span></b></span><span class="sc-chip">Coverage period <b><bdi class="bidi" dir="ltr">290400Z–300400Z</bdi> <span class="ltr">UTC</span> October 2026</b></span><span class="sc-chip">Sources and References <b><span class="bidi">62</span> approved · <span class="bidi">60</span> by automated route <span class="bidi">2</span> by manual review</b></span><span class="sc-chip">cited <b><span class="bidi">10</span></b></span></div><div class="sc-grid"><section class="sc-card" aria-label="Top maritime security news"><h2 class="sc-h2">Top maritime security news</h2><div class="sc-row"><div class="sc-l">What changed</div><div class="sc-v"><p class="sc-gist">A vessel fire occurred 25 nautical miles northeast of Khasab and was then extinguished, with… · Four official notices and updates were issued by <span class="ltr">UKMTO</span> and JMIC within less than 24…</p><p class="sc-more">16 items · <a href="/additions.html#sec-00" data-goto="ما تغيّر" data-alt="/additions.html#sec-00">Details</a></p></div></div><div class="sc-row"><div class="sc-l">Operational Guidance</div><div class="sc-v"><p class="sc-gist">Increase visual and radio monitoring when approaching the Strait of Hormuz… · Expect short-term official warnings and update transit plans according to the latest…</p><p class="sc-more">9 items · <a href="/additions.html#sec-03" data-goto="التوجيهات التشغيلية" data-alt="/additions.html#sec-03">Full section</a></p></div></div><div class="sc-row"><div class="sc-l">What is monitored over the next 24 hours</div><div class="sc-v"><p class="sc-gist">Full text of UKMTO warning No. 187-26 being issued, with its scope and the incident location identified. <span class="ltr">UKMTO</span> No. 187-26 and defining its area and location… · Official announcement of the vessel’s identity, crew condition, and cargo</p><p class="sc-more">3 items · <a href="/additions.html#sec-07" data-goto="علامات الإنذار المبكر" data-alt="/additions.html#sec-07">Indicator</a></p></div></div></section><div class="sc-side"><div class="sc-threat risk-high"><div class="sc-tl">Threat Level</div><div class="sc-tv">High</div><details class="sc-basis"><summary>Basis of assessment</summary><p>Official report <span class="ltr">UKMTO</span> on suspicious activity, a vessel fire, a first update to the warning, and a professional report on the extinguishing. The cause of the ignition has not been determined.</p></details></div><div class="sc-kpis"><div class="sc-kpi acc-warn"><div class="sc-kl">UKMTO bulletins and updates during the period <span class="ltr">UKMTO</span> During the period</div><div class="sc-kv bidi">4</div><div class="sc-kd">+2</div><div class="sc-kn">Short-term official sequence along the transit route</div></div><div class="sc-kpi acc-warn"><div class="sc-kl">Reports of vessel fires or vessels catching fire in the Strait of Hormuz</div><div class="sc-kv bidi">3</div><div class="sc-kd">+3</div><div class="sc-kn">First confirmed fire report during the period</div></div><div class="sc-kpi acc-warn"><div class="sc-kl">Reports denying or disputing mines in the waterways</div><div class="sc-kv bidi">2</div><div class="sc-kd">+1</div><div class="sc-kn">Conflicting accounts of the cause of the incidents</div></div><div class="sc-kpi acc-ok"><div class="sc-kl">Incidents affecting ports and civil aviation in Yemen</div><div class="sc-kv bidi">0</div><div class="sc-kd">−3</div><div class="sc-kn">No new report has been issued during the period; this does not mean the risk has receded</div></div></div></div></div></div>
+  <div class="sc-hero no-print"><p class="sc-eyebrow">Daily Maritime Security Report</p><h2 class="sc-h1">during the period <bdi class="bidi" dir="ltr">290400Z–300400Z</bdi> October 2026, the threat level remained high in the Strait of Hormuz, the Arabian Gulf, the Red Sea and Bab al-Mandab, and medium in the Arabian Sea and the eastern Mediterranean. An official advisory on blockade enforcement was issued with notice to avoid unnecessary transit, and an Iranian threat of retaliation was reported alongside a negotiating track to reopen the strait. Yemen reports focused on ports and civil aviation.</h2><div class="sc-chips"><span class="sc-chip sc-fresh" data-gen="2026-10-30T04:00:00Z" hidden>Release age <b class="sc-age"></b></span><span class="sc-chip">Release number <b><span class="bidi">W B <span class="ltr">30/10/26</span></span></b></span><span class="sc-chip">Last updated <b><span class="bidi">2026-10-30T04:00:00Z</span></b></span><span class="sc-chip">Coverage period <b><bdi class="bidi" dir="ltr">290400Z–300400Z</bdi> <span class="ltr">UTC</span> October 2026</b></span><span class="sc-chip">Sources and References <b><span class="bidi">62</span> approved · <span class="bidi">60</span> by automated route <span class="bidi">2</span> by manual review</b></span><span class="sc-chip">cited <b><span class="bidi">10</span></b></span></div><div class="sc-grid"><section class="sc-card" aria-label="Top maritime security news"><h2 class="sc-h2">Top maritime security news</h2><div class="sc-row"><div class="sc-l">What changed</div><div class="sc-v"><p class="sc-gist">A vessel fire occurred 25 nautical miles northeast of Khasab and was then extinguished, with… · Four official notices and updates were issued by <span class="ltr">UKMTO</span> and JMIC within less than 24…</p><p class="sc-more">16 items · <a href="/additions.html#sec-00" data-goto="ما تغيّر" data-alt="/additions.html#sec-00">Details</a></p></div></div><div class="sc-row"><div class="sc-l">Operational Guidance</div><div class="sc-v"><p class="sc-gist">Increase visual and radio monitoring when approaching the Strait of Hormuz… · Expect short-term official warnings and update transit plans according to the latest…</p><p class="sc-more">9 items · <a href="/additions.html#sec-03" data-goto="التوجيهات التشغيلية" data-alt="/additions.html#sec-03">Full section</a></p></div></div><div class="sc-row"><div class="sc-l">What is monitored over the next 24 hours</div><div class="sc-v"><p class="sc-gist">Full text of UKMTO warning No. 187-26 being issued, with its scope and the incident location identified. <span class="ltr">UKMTO</span> No. 187-26 and defining its area and location… · Official announcement of the vessel’s identity, crew condition, and cargo</p><p class="sc-more">3 items · <a href="/additions.html#sec-07" data-goto="علامات الإنذار المبكر" data-alt="/additions.html#sec-07">Indicator</a></p></div></div></section><div class="sc-side"><style>
+.tz{border:1px solid var(--line,#243244);border-radius:14px;padding:14px 16px;background:var(--card,#0e1726);margin:10px 0}
+.tz-head{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;justify-content:space-between}
+.tz-head h3{margin:0;font-size:1.05rem}
+.tz-win{font-size:.8rem;opacity:.75}
+.tz-top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0 6px}
+.tz-badge{font-weight:700;font-size:1.5rem;line-height:1.2}
+.tz-sub{margin:0;font-size:.85rem;opacity:.85}
+.tz-zones{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px}
+.tz-z{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;padding:7px 9px;border:1px solid var(--line,#243244);border-radius:10px}
+.tz-n{font-size:.9rem}
+.tz-lv{font-weight:700;font-size:.9rem}
+.tz-dot{font-size:.8rem}
+.tz-c{font-size:.78rem;opacity:.8}
+.tz-basis{margin-top:10px;border-top:1px dashed var(--line,#243244);padding-top:8px}
+.tz-basis summary{cursor:pointer;font-weight:600;font-size:.9rem}
+.tz-basis p{margin:6px 0 0;font-size:.86rem;line-height:1.7}
+.tz-count{opacity:.85}
+@media (max-width:640px){
+  .tz{padding:12px}
+  .tz-badge{font-size:1.3rem}
+  .tz-z{flex-direction:column;align-items:flex-start}
+}
+.tz-badge.t-critical,.tz-lv.t-critical,.tz-dot.t-critical{color:#7f1d1d;border-color:#7f1d1d}
+.tz-badge.t-severe,.tz-lv.t-severe,.tz-dot.t-severe{color:#b91c1c;border-color:#b91c1c}
+.tz-badge.t-high,.tz-lv.t-high,.tz-dot.t-high{color:#c2410c;border-color:#c2410c}
+.tz-badge.t-medium,.tz-lv.t-medium,.tz-dot.t-medium{color:#a16207;border-color:#a16207}
+.tz-badge.t-low,.tz-lv.t-low,.tz-dot.t-low{color:#15803d;border-color:#15803d}
+@media print{
+  /* ضغط الورق (2026-10-30): بطاقة القطاعات الأربعة أُضيفت إلى الترويسة فزاد طول الإصدار
+     إلى 13 صفحة خارج النطاق 7–12. الضغط هنا للطباعة فقط ولا يمسّ هيئة الشاشة. */
+  .tz{break-inside:auto;page-break-inside:auto;border-color:#999;padding:2.2mm 3mm;margin:1.5mm 0}
+  .tz-head h3{font-size:10.4pt}
+  .tz-win{font-size:7.6pt}
+  .tz-top{margin:1.1mm 0 .7mm;gap:2mm}
+  .tz-badge{font-size:13pt;line-height:1.1}
+  .tz-sub{font-size:8pt}
+  .tz-zones{margin:1.1mm 0 0;gap:.7mm}
+  .tz-z{padding:1mm 1.4mm;border-radius:1.2mm;gap:2mm}
+  .tz-n,.tz-lv,.tz-c,.tz-dot{font-size:8pt;line-height:1.35}
+  .tz-basis{margin-top:1.1mm;padding-top:.9mm}
+  .tz-basis summary{font-size:8.5pt}
+  .tz-basis p{margin:.7mm 0 0;font-size:8pt;line-height:1.35}
+  .tz-basis>*{display:block!important}
+  .tz-basis summary{list-style:none}
+}
+
+/* اتجاه النصوص اللاتينية والإحداثيات — يمنع انقلابها في السياق العربي */
+.ltr{direction:ltr;unicode-bidi:isolate}
+
+/* رقم المعلّم: نص داكن على معلّم فاتح، ومقلوب في الوضع النهاري */
+body:not(.daylight) .lg-num{color:#04120f}
+body.daylight .lg-num{color:#ffffff}
+
+/* بطاقات الجوال للجداول — البند المعتمد 21 أكتوبر 2026 */
+@media (max-width:560px){
+  table.cardified{display:block;border:0;background:transparent;border-radius:0}
+  table.cardified.cardified{width:100%;max-width:100%;min-width:0}
+  table.cardified thead{display:none}
+  table.cardified tbody{display:block;max-width:100%}
+  table.cardified tr{display:block;max-width:100%;box-sizing:border-box;background:var(--panel);
+    border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin:0 0 10px}
+  table.cardified td{display:grid;grid-template-columns:minmax(72px,auto) minmax(0,1fr);gap:8px;
+    border:0;padding:5px 0;align-items:baseline;text-align:start;
+    overflow-wrap:anywhere;word-break:break-word;min-width:0}
+  table.cardified td::before{content:attr(data-label);color:var(--muted);font-size:12.5px;font-weight:600}
+  table.cardified td:empty{display:none}
+  /* ك-336: النص الإنجليزي الطويل (شرائح الحالة والتسميات) كان يتجاوز عرض بطاقة الجوال 16–31% */
+  table.cardified td > *,table.cardified .st-badge{white-space:normal;overflow-wrap:anywhere;
+    word-break:break-word;min-width:0;max-width:100%}
+  .tbl-wrap:has(table.cardified),.tbl-scroll:has(table.cardified){overflow:visible;border:0}
+  .tbl-hint{display:none}
+}
+/* بانر النسخة المستبدلة — البند المعتمد 21 أكتوبر 2026 */
+.sup-banner{margin:0 0 20px;padding:12px 16px;border:1px solid #c9a24f;border-radius:10px;
+  background:#2a2210;color:#ffd88a;font-size:14px}
+body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
+.sup-banner a{color:inherit;font-weight:700;text-decoration:underline}
+.sp-dim{opacity:.72}
+</style><section class="tz tz-screen" aria-label="Threat level by sector"><header class="tz-head"><h3>Threat level by sector</h3><span class="tz-win">over the previous 24 hours</span></header><div class="tz-top"><span class="tz-badge t-severe"><span aria-hidden="true">◆</span> Severe</span><p class="tz-sub">Highest sector:</p></div><ul class="tz-zones"><li class="tz-z"><span class="tz-n">Strait of Hormuz, Gulf of Oman and the Arabian Gulf</span><span class="tz-lv t-severe"><span class="tz-dot t-severe" aria-hidden="true">◆</span> Severe</span><span class="tz-c"><span class="bidi">4</span> qualifying incidents</span></li><li class="tz-z"><span class="tz-n">Bab al-Mandab and the Red Sea</span><span class="tz-lv t-low"><span class="tz-dot t-low" aria-hidden="true">▬</span> Low</span><span class="tz-c">No qualifying incident</span></li><li class="tz-z"><span class="tz-n">Arabian Sea</span><span class="tz-lv t-low"><span class="tz-dot t-low" aria-hidden="true">▬</span> Low</span><span class="tz-c">No qualifying incident</span></li><li class="tz-z"><span class="tz-n">Horn of Africa</span><span class="tz-lv t-low"><span class="tz-dot t-low" aria-hidden="true">▬</span> Low</span><span class="tz-c">No qualifying incident</span></li></ul><details class="tz-basis" open><summary>Basis of assessment</summary><p>Strait of Hormuz, Gulf of Oman and the Arabian Gulf <span class="bidi">4</span> qualifying incidents</p><p>Bab al-Mandab and the Red Sea</p><p>Arabian Sea</p><p>Horn of Africa</p><p class="tz-count">Counter: <span class="bidi">4</span> · confirmed <span class="bidi">3</span> · probable <span class="bidi">1</span> · excluded <span class="bidi">11</span> · non-spatial <span class="bidi">1</span> · total <span class="bidi">16</span></p></details></section><div class="sc-kpis"><div class="sc-kpi acc-warn"><div class="sc-kl">UKMTO bulletins and updates during the period <span class="ltr">UKMTO</span> During the period</div><div class="sc-kv bidi">4</div><div class="sc-kd">+2</div><div class="sc-kn">Short-term official sequence along the transit route</div></div><div class="sc-kpi acc-warn"><div class="sc-kl">Reports of vessel fires or vessels catching fire in the Strait of Hormuz</div><div class="sc-kv bidi">3</div><div class="sc-kd">+3</div><div class="sc-kn">First confirmed fire report during the period</div></div><div class="sc-kpi acc-warn"><div class="sc-kl">Reports denying or disputing mines in the waterways</div><div class="sc-kv bidi">2</div><div class="sc-kd">+1</div><div class="sc-kn">Conflicting accounts of the cause of the incidents</div></div><div class="sc-kpi acc-ok"><div class="sc-kl">Incidents affecting ports and civil aviation in Yemen</div><div class="sc-kv bidi">0</div><div class="sc-kd">−3</div><div class="sc-kn">No new report has been issued during the period; this does not mean the risk has receded</div></div></div></div></div></div>
   <section class="hero-map no-print" aria-hidden="true"><div class="hmap"><div class="hmap-panel">
   <h3>Incident map</h3><p class="blk-lede">Incident locations within the report's scope.</p>
   <div class="hmap-wrap">
@@ -1181,10 +1267,11 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <article class="dg"><div class="dg-top"><span class="dg-idx">5</span><b class="dg-t">Reports affecting Saudi refineries or infrastructure</b></div><p class="dg-body">1</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">Previous</span><span class="dg-v">—</span></div><div class="dg-f"><span class="dg-k">Trend</span><span class="dg-v">—</span></div><div class="dg-f"><span class="dg-k">Significance</span><span class="dg-v">No matching definition in yesterday's edition</span></div></div></article>
 <article class="dg"><div class="dg-top"><span class="dg-idx">6</span><b class="dg-t">Incidents affecting ports and civil aviation in Yemen</b></div><p class="dg-body">0</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">Previous</span><span class="dg-v">3</span></div><div class="dg-f"><span class="dg-k">Trend</span><span class="dg-v">Decrease</span></div><div class="dg-f"><span class="dg-k">Significance</span><span class="dg-v">No new report during the period</span></div></div></article>
 </div>
-<p>The figures in the table represent the number of headlines and incidents relayed during the period. The figure does not equal the number of attacks. The primary source for these indicators is the feeds screened in this run. Baseline: the “previous” value is read from the 2026-10-29 edition when the indicator definition matches (UKMTO bulletins · JMIC updates · fire reports · mine dispute), and “—” is left where no matching definition exists and therefore no comparison is made. <span class="ltr">UKMTO</span> · JMIC updates during the period <span class="ltr">JMIC</span> · fire reports · mines dispute), and «—» is left where no matching definition exists and is therefore not compared.</p></section><section class="doc reveal" id="sec-02" aria-labelledby="h-02"><h2 id="h-02"><span class="ico"><svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/></svg></span>Threat Level</h2><div class="h-rule"></div><p class="sec-lede">Official assessment, analytical judgement, and confidence limits.</p><p>The level in the Strait of Hormuz and the Arabian Gulf: High. This estimate is based on a UKMTO report of a fire breaking out on a vessel northeast of Khasab. The second basis for the estimate: two new warnings and two updates to previous bulletins during the period. The third basis: divergent accounts of the cause of the fire. <span class="ltr">UKMTO</span> about a vessel fire breaking out northeast of Khasab. Basis of the second estimate: two new warnings and two updates to previous notices during the period. Third basis: conflicting accounts of the cause of the fire.</p>
-<p>The level in the Red Sea and Bab el-Mandeb: persistently high; it is based on a Houthi report during the period of a strike on Ras Tanura refinery that was not confirmed by the Saudi authorities, together with the absence of a new maritime incident on the transit route. Accordingly, the estimate is continuity-based, not event-based.</p>
-<p>The level in the Arabian Sea: persistently medium; no new maritime incident in the area was reported during the period, so this level is not based on an event within the period.</p>
-<p>The level in the Eastern Mediterranean: persistently medium; the screened material did not include a new maritime incident in the area.</p></section><section class="doc reveal" id="sec-03" aria-labelledby="h-03"><h2 id="h-03"><span class="ico"><svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l9 16H3zM12 8v6M12 16.4v1.2"/></svg></span>Event Log</h2><div class="h-rule"></div><p class="sec-lede">New security incidents during the coverage period, ordered by code and time.</p><div class="ev-grid" data-count="16">
+<p>The figures in the table represent the number of headlines and incidents relayed during the period. The figure does not equal the number of attacks. The primary source for these indicators is the feeds screened in this run. Baseline: the “previous” value is read from the 2026-10-29 edition when the indicator definition matches (UKMTO bulletins · JMIC updates · fire reports · mine dispute), and “—” is left where no matching definition exists and therefore no comparison is made. <span class="ltr">UKMTO</span> · JMIC updates during the period <span class="ltr">JMIC</span> · fire reports · mines dispute), and «—» is left where no matching definition exists and is therefore not compared.</p></section><section class="doc reveal" id="sec-02" aria-labelledby="h-02"><h2 id="h-02"><span class="ico"><svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/></svg></span>Threat Level</h2><div class="h-rule"></div><p class="sec-lede">Official assessment, analytical judgement, and confidence limits.</p><p>General level: Severe — top zone: the Strait of Hormuz, the Gulf of Oman and the Arabian Gulf · within the previous 24 hours.</p>
+<p>Level in the Strait of Hormuz, the Gulf of Oman and the Arabian Gulf: Severe. Basis: a UKMTO report of an attack on a vessel inside the strait, suspicious activity 25 nautical miles northeast of Khasab, a vessel fire off the coast of Oman, and navigational disruption caused by tankers switching off their signals above the Gulf of Oman cables. <span class="ltr">UKMTO</span> an attack on a vessel inside the strait, suspicious activity 25 nautical miles northeast of Khasab, a vessel fire off the coast of Oman, and navigational disruption from tankers switching off their signals above the Gulf of Oman cables.</p>
+<p>Level in Bab el-Mandeb and the Red Sea: Low. No qualifying incident within the period; the report of a strike on the Ras Tanura refinery falls neither on a vessel nor on navigation, so it is excluded from the count.</p>
+<p>Level in the Arabian Sea: Low. No qualifying incident within the period.</p>
+<p>Level in the Horn of Africa: Low. No qualifying incident within the period.</p></section><section class="doc reveal" id="sec-03" aria-labelledby="h-03"><h2 id="h-03"><span class="ico"><svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l9 16H3zM12 8v6M12 16.4v1.2"/></svg></span>Event Log</h2><div class="h-rule"></div><p class="sec-lede">New security incidents during the coverage period, ordered by code and time.</p><div class="ev-grid" data-count="16">
 <article class="ev reveal b-official" id="ev-01"><div class="ev-top"><span class="ev-idx bidi">01</span><span class="ev-code ltr"><span class="ltr">MN-2026-10-30-01</span></span><span class="ev-badge">Official report</span></div><p class="ev-what">UKMTO warning No. 186-26 was issued <span class="ltr">UKMTO</span> No. 187-26, then its update 001</p><p class="ev-meta"><span class="ev-k">Source</span><span class="ev-mv"><span class="ltr">UKMTO</span> · Strait of Hormuz · UKMTO warning No. 186-26 · UKMTO (official account) · Official report <span class="ltr">292354Z</span> and 300319Z October 2026</span></p></article>
 <article class="ev reveal b-official" id="ev-02"><div class="ev-top"><span class="ev-idx bidi">02</span><span class="ev-code ltr"><span class="ltr">MN-2026-10-30-02</span></span><span class="ev-badge">Official report</span></div><p class="ev-what">UKMTO warning No. 186-26 was issued <span class="ltr">UKMTO</span> No. 186-26</p><p class="ev-meta"><span class="ev-k">Source</span><span class="ev-mv"><span class="ltr">UKMTO</span> · Strait of Hormuz · UKMTO warning No. 186-26 · UKMTO (official account) · Official report <span class="ltr">291804Z</span> October 2026</span></p></article>
 <article class="ev reveal b-official" id="ev-03"><div class="ev-top"><span class="ev-idx bidi">03</span><span class="ev-code ltr"><span class="ltr">MN-2026-10-30-03</span></span><span class="ev-badge">Official report</span></div><p class="ev-what">An update to UKMTO warning No. 185-26 was issued <span class="ltr">UKMTO</span> No. 185-26</p><p class="ev-meta"><span class="ev-k">Source</span><span class="ev-mv"><span class="ltr">UKMTO</span> · Strait of Hormuz · UKMTO warning No. 186-26 · UKMTO (official account) · Official report <span class="ltr">291559Z</span> October 2026</span></p></article>

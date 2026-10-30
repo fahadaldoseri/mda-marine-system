@@ -439,7 +439,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .topbar,.no-print{display:none !important}
   .wrap{max-width:none;padding:0}
   a{color:#0a1524;text-decoration:none}
-  section.doc{background:#fff;border:0;border-top:1px solid #cfd8e3;border-radius:0;padding:0 0 5mm;box-shadow:none;break-inside:auto;page-break-inside:auto}
+  section.doc{background:#fff;border:0;border-top:1px solid #cfd8e3;border-radius:0;padding:0 0 3mm;box-shadow:none;break-inside:auto;page-break-inside:auto}
   section.doc.pri{border-top:2px solid #0b6f66}
   section.doc > h2{font-size:13pt;color:#0a1524;break-after:avoid;page-break-after:avoid}
   section.doc > h2 .ico{display:none}
@@ -473,17 +473,17 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
      /* ك-341: بطاقتان في السطر في الطباعة — تدفّق بلا تصغير خطوط ولا حذف محتوى */
      .ev-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.6mm;margin:4mm 0 0}
      .ev{display:block;margin:0;padding:3mm 3.4mm 2.8mm}
-     .ev{display:block;margin:0 0 3mm;padding:3.4mm 4mm 3mm;break-inside:avoid;page-break-inside:avoid;opacity:1 !important;transform:none !important;animation:none !important;border-color:#c3cedb;background:#fff}
+     .ev{display:block;margin:0 0 2mm;padding:2.2mm 2.6mm 2mm;break-inside:avoid;page-break-inside:avoid;opacity:1 !important;transform:none !important;animation:none !important;border-color:#c3cedb;background:#fff}
      .ev::before{width:4px;background:#0f8f86}
      .ev.b-media::before{background:#b8860b}
      .ev.b-deny::before{background:#9aa8ba}
-     .ev-what{font-size:10pt;line-height:1.55;color:#12203a;margin:0}
-     .ev-top{margin-bottom:1.6mm}
-     .ev-meta{margin-top:1.8mm;padding-top:1.4mm}
-     .ev-meta{font-size:9.5pt;color:#4a5b73;border-top-color:#dbe3ec}
+     .ev-what{font-size:9.4pt;line-height:1.45;color:#12203a;margin:0}
+     .ev-top{margin-bottom:1mm}
+     .ev-meta{margin-top:1.1mm;padding-top:.9mm}
+     .ev-meta{font-size:9pt;color:#4a5b73;border-top-color:#dbe3ec}
      .ev-idx,.ev-code,.ev-badge{font-size:9pt;color:#4a5b73;border-color:#c3cedb}
      .dg-grid{display:block;margin:4mm 0 0}
-     .dg{display:block;margin:0 0 3mm;padding:3.2mm 4mm 2.8mm;break-inside:avoid;page-break-inside:avoid;border-color:#dbe3ec;background:#fff}
+     .dg{display:block;margin:0 0 2mm;padding:2.4mm 2.8mm 2.2mm;break-inside:avoid;page-break-inside:avoid;border-color:#dbe3ec;background:#fff}
      .dg-top{margin-bottom:1.4mm}
      .dg-t{font-size:10pt}
      .dg-body{font-size:9.5pt;line-height:1.5;margin-bottom:1.4mm;color:#243447}
@@ -544,7 +544,15 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   /* Chromium لا يجزّئ حاويات grid/flex بين الصفحات، فتتدفّق هنا بترتيب inline-block
      يحفظ هيئة العمودين/البطاقات نفسها، مع السماح بالانقسام بين الصفحات */
   .wrap,.changes,.dc-grid,.kpis,.masthead,.map-legend,.src-grid,.glossary,.tl-viz,.viz,.card,.decision{display:block !important}
+  /* عطل (2026-10-30): القاعدة العامة كانت تُظهر وسم <style> المحقون داخل الترويسة في الطباعة،
+     فطُبع نص <span class="ltr">CSS</span> داخل الصفحة الأولى. القياس الحي: display المحسوب لوسم style = inline-block في print.
+     الإصلاح: استثناء العناصر غير المرئية + حارس صريح يمنع طباعتها. */
   .kpis > *,.masthead > *,.map-legend > li,.glossary > li,.src-grid > *{display:inline-block !important;vertical-align:top !important;width:48.5% !important;margin:0 0 2.5mm 1% !important;box-sizing:border-box !important}
+  .kpis > style,.kpis > script,.kpis > template,.kpis > link,
+  .masthead > style,.masthead > script,.masthead > template,.masthead > link,
+  .src-grid > style,.src-grid > script,.src-grid > template,.src-grid > link,
+  .map-legend > style,.map-legend > script,.glossary > style,.glossary > script{display:none !important}
+  style,script,template,link,meta,title{display:none !important}
   .dc-grid > *,.dc-row{display:block !important;width:100% !important}
   /* ك-103: الوسم يُعوَّم والمحتوى كتلة قابلة للانقسام — فلا يُترك عنوان أو بطاقة يتيمة ولا فراغ أسفل الغلاف */
   .dc-row::after{content:"";display:block;clear:both}
@@ -1027,53 +1035,6 @@ cursor:pointer;font:inherit;font-size:12.5px;font-weight:700}
 .sn-lang-note{position:fixed;left:50%;transform:translateX(-50%);top:14px;z-index:60;background:var(--sn-panel);
 border:1px solid var(--sn-line);color:var(--sn-ink);border-radius:10px;padding:10px 14px;font-size:13px;
 box-shadow:0 10px 30px rgba(0,0,0,.35);max-width:90vw;text-align:center}
-
-/* اتجاه النصوص اللاتينية والإحداثيات — يمنع انقلابها في السياق العربي */
-.ltr{direction:ltr;unicode-bidi:isolate}
-
-/* ألوان الشارات في الوضع النهاري (نفس منطق ألوان نسخة الطباعة) */
-@media screen{
-  body.daylight .st-badge.s-stable,body.daylight .chg.c-closed .chg-tag,body.daylight .conf.c-high,
-  body.daylight .tag.t-confirm{color:#14603f;background:#edfaf3;border-color:#7cc4a0}
-  body.daylight .st-badge.s-active,body.daylight .kstrip.k-confirm,body.daylight .cls-banner.c-sensitive
-    {color:#7a1d1a;background:#fff1f0;border-color:#c77973}
-  body.daylight .conf.c-med,body.daylight .kstrip.k-suspect,body.daylight .chg.c-reclassified .chg-tag,
-  body.daylight .cls-banner.c-restricted,body.daylight .tag.t-suspect{color:#7c5000;background:#fff7e6;border-color:#c9a24f}
-  body.daylight .conf.c-low,body.daylight .kstrip.k-inter,body.daylight .chg.c-new .chg-tag
-    {color:#1d4f87;background:#edf4ff;border-color:#8bb1dd}
-  body.daylight .chg.c-ongoing .chg-tag{color:#31465c;background:#f6f8fb;border-color:#b8c4d1}
-  body.daylight .ev-code{color:#31465c;background:#f2f5f9;border-color:#c4d0dd}
-}
-
-/* رقم المعلّم: نص داكن على معلّم فاتح، ومقلوب في الوضع النهاري */
-body:not(.daylight) .lg-num{color:#04120f}
-body.daylight .lg-num{color:#ffffff}
-
-/* بطاقات الجوال للجداول — البند المعتمد 21 أكتوبر 2026 */
-@media (max-width:560px){
-  table.cardified{display:block;border:0;background:transparent;border-radius:0}
-  table.cardified.cardified{width:100%;max-width:100%;min-width:0}
-  table.cardified thead{display:none}
-  table.cardified tbody{display:block;max-width:100%}
-  table.cardified tr{display:block;max-width:100%;box-sizing:border-box;background:var(--panel);
-    border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin:0 0 10px}
-  table.cardified td{display:grid;grid-template-columns:minmax(72px,auto) minmax(0,1fr);gap:8px;
-    border:0;padding:5px 0;align-items:baseline;text-align:start;
-    overflow-wrap:anywhere;word-break:break-word;min-width:0}
-  table.cardified td::before{content:attr(data-label);color:var(--muted);font-size:12.5px;font-weight:600}
-  table.cardified td:empty{display:none}
-  /* ك-336: النص الإنجليزي الطويل (شرائح الحالة والتسميات) كان يتجاوز عرض بطاقة الجوال 16–31% */
-  table.cardified td > *,table.cardified .st-badge{white-space:normal;overflow-wrap:anywhere;
-    word-break:break-word;min-width:0;max-width:100%}
-  .tbl-wrap:has(table.cardified),.tbl-scroll:has(table.cardified){overflow:visible;border:0}
-  .tbl-hint{display:none}
-}
-/* بانر النسخة المستبدلة — البند المعتمد 21 أكتوبر 2026 */
-.sup-banner{margin:0 0 20px;padding:12px 16px;border:1px solid #c9a24f;border-radius:10px;
-  background:#2a2210;color:#ffd88a;font-size:14px}
-body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
-.sup-banner a{color:inherit;font-weight:700;text-decoration:underline}
-.sp-dim{opacity:.72}
 </style></head>
 <body><nav class="site-nav no-print" aria-label="تنقل الموقع">
   <a class="sn-skip" href="#" id="sn-skip" data-i18n="skip">الانتقال إلى المحتوى</a>
@@ -1139,7 +1100,53 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <div class="wrap">
   <header class="masthead">
     <h1>حريق سفينة في مضيق هرمز شمال شرق خصب ثم إخماده، مع أربع نشرات رسمية داخل الفترة</h1>
-    <div class="threat risk-high"><div class="lbl">مستوى التهديد</div><div class="val">مرتفع</div></div>
+    <style>
+.tz{border:1px solid var(--line,#243244);border-radius:14px;padding:14px 16px;background:var(--card,#0e1726);margin:10px 0}
+.tz-head{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;justify-content:space-between}
+.tz-head h3{margin:0;font-size:1.05rem}
+.tz-win{font-size:.8rem;opacity:.75}
+.tz-top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0 6px}
+.tz-badge{font-weight:700;font-size:1.5rem;line-height:1.2}
+.tz-sub{margin:0;font-size:.85rem;opacity:.85}
+.tz-zones{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px}
+.tz-z{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;padding:7px 9px;border:1px solid var(--line,#243244);border-radius:10px}
+.tz-n{font-size:.9rem}
+.tz-lv{font-weight:700;font-size:.9rem}
+.tz-dot{font-size:.8rem}
+.tz-c{font-size:.78rem;opacity:.8}
+.tz-basis{margin-top:10px;border-top:1px dashed var(--line,#243244);padding-top:8px}
+.tz-basis summary{cursor:pointer;font-weight:600;font-size:.9rem}
+.tz-basis p{margin:6px 0 0;font-size:.86rem;line-height:1.7}
+.tz-count{opacity:.85}
+@media (max-width:640px){
+  .tz{padding:12px}
+  .tz-badge{font-size:1.3rem}
+  .tz-z{flex-direction:column;align-items:flex-start}
+}
+.tz-badge.t-critical,.tz-lv.t-critical,.tz-dot.t-critical{color:#7f1d1d;border-color:#7f1d1d}
+.tz-badge.t-severe,.tz-lv.t-severe,.tz-dot.t-severe{color:#b91c1c;border-color:#b91c1c}
+.tz-badge.t-high,.tz-lv.t-high,.tz-dot.t-high{color:#c2410c;border-color:#c2410c}
+.tz-badge.t-medium,.tz-lv.t-medium,.tz-dot.t-medium{color:#a16207;border-color:#a16207}
+.tz-badge.t-low,.tz-lv.t-low,.tz-dot.t-low{color:#15803d;border-color:#15803d}
+@media print{
+  /* ضغط الورق (2026-10-30): بطاقة القطاعات الأربعة أُضيفت إلى الترويسة فزاد طول الإصدار
+     إلى 13 صفحة خارج النطاق 7–12. الضغط هنا للطباعة فقط ولا يمسّ هيئة الشاشة. */
+  .tz{break-inside:auto;page-break-inside:auto;border-color:#999;padding:2.2mm 3mm;margin:1.5mm 0}
+  .tz-head h3{font-size:10.4pt}
+  .tz-win{font-size:7.6pt}
+  .tz-top{margin:1.1mm 0 .7mm;gap:2mm}
+  .tz-badge{font-size:13pt;line-height:1.1}
+  .tz-sub{font-size:8pt}
+  .tz-zones{margin:1.1mm 0 0;gap:.7mm}
+  .tz-z{padding:1mm 1.4mm;border-radius:1.2mm;gap:2mm}
+  .tz-n,.tz-lv,.tz-c,.tz-dot{font-size:8pt;line-height:1.35}
+  .tz-basis{margin-top:1.1mm;padding-top:.9mm}
+  .tz-basis summary{font-size:8.5pt}
+  .tz-basis p{margin:.7mm 0 0;font-size:8pt;line-height:1.35}
+  .tz-basis>*{display:block!important}
+  .tz-basis summary{list-style:none}
+}
+</style><section class="tz tz-print" aria-label="مستوى التهديد حسب القطاعات"><header class="tz-head"><h3>مستوى التهديد حسب القطاعات</h3><span class="tz-win">خلال 24 ساعة السابقة</span></header><div class="tz-top"><span class="tz-badge t-severe"><span aria-hidden="true">◆</span> مرتفع جدًا</span><p class="tz-sub">أعلى قطاع: مضيق هرمز وخليج عُمان والخليج العربي</p></div><ul class="tz-zones"><li class="tz-z"><span class="tz-n">مضيق هرمز وخليج عُمان والخليج العربي</span><span class="tz-lv t-severe"><span class="tz-dot t-severe" aria-hidden="true">◆</span> مرتفع جدًا</span><span class="tz-c"><span class="bidi">4</span> وقائع مؤهّلة</span></li><li class="tz-z"><span class="tz-n">باب المندب والبحر الأحمر</span><span class="tz-lv t-low"><span class="tz-dot t-low" aria-hidden="true">▬</span> منخفض</span><span class="tz-c">لا واقعة مؤهّلة</span></li><li class="tz-z"><span class="tz-n">بحر العرب</span><span class="tz-lv t-low"><span class="tz-dot t-low" aria-hidden="true">▬</span> منخفض</span><span class="tz-c">لا واقعة مؤهّلة</span></li><li class="tz-z"><span class="tz-n">القرن الأفريقي</span><span class="tz-lv t-low"><span class="tz-dot t-low" aria-hidden="true">▬</span> منخفض</span><span class="tz-c">لا واقعة مؤهّلة</span></li></ul><details class="tz-basis" open><summary>أساس التقدير</summary><p>مضيق هرمز وخليج عُمان والخليج العربي: <span class="bidi">4</span> وقائع مؤهّلة — هجوم على سفينة · نشاط مشبوه · حريق على متن سفينة · تعطيل ملاحي</p><p>باب المندب والبحر الأحمر: لا واقعة مؤهّلة</p><p>بحر العرب: لا واقعة مؤهّلة</p><p>القرن الأفريقي: لا واقعة مؤهّلة</p><p class="tz-count">العدّاد: وقائع مؤهّلة <span class="bidi">4</span> · مؤكدة <span class="bidi">3</span> · مرجّحة <span class="bidi">1</span> · مستثناة <span class="bidi">11</span> · غير مكانية <span class="bidi">1</span> · إجمالي <span class="bidi">16</span></p></details></section>
     <div>
       <p class="lede">خلال الفترة <bdi class="bidi" dir="ltr">290400Z–300400Z</bdi> أكتوبر 2026، بقي مستوى التهديد مرتفعًا في مضيق هرمز والخليج العربي والبحر الأحمر وباب المندب، ومتوسطًا في بحر العرب وشرق المتوسط. ووقع حادث حريق سفينة على 25 ميلًا بحريًا شمال شرق خصب ثم أُخمد مع سلامة الطاقم، وصدرت أربع نشرات وتحديثات رسمية من <span class="ltr">UKMTO</span> وJMIC. وتباينت الروايات حول سبب الاشتعال بين نقل إعلامي إيراني ونفي رسمي أمريكي بشأن الألغام.</p>
       <div class="masthead-meta"><span class="chip">رقم الإصدار <b>و ب <span class="ltr">30/10/26</span></b></span><span class="chip">آخر تحديث <b class="bidi">2026-10-30T04:00:00Z</b></span><span class="chip">فترة التغطية <b><bdi class="bidi" dir="ltr">290400Z–300400Z</bdi> <span class="ltr">UTC</span> أكتوبر 2026</b></span><span class="chip">المصادر المعتمدة <b class="bidi">62</b></span><span class="chip">بالمسار الآلي <b class="bidi">60</b></span><span class="chip">بالفحص اليدوي <b class="bidi">2</b></span><span class="chip">مصادر مستشهد بها <b class="bidi">10</b></span></div>
@@ -1147,9 +1154,88 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
   </header>
 
   <div class="cls-banner c-open">تصنيف الإصدار: عام</div>
-  <section class="decision reveal" aria-label="عام"><h2 class="dc-title">عام</h2><div class="dc-grid"><div class="dc-row"><div class="dc-l">ما تغيّر</div><div class="dc-v"><ul class="dc-list"><li>وقع حريق سفينة على 25 ميلًا بحريًا شمال شرق خصب ثم أُخمد مع سلامة الطاقم.</li><li>صدرت أربع نشرات وتحديثات رسمية من <span class="ltr">UKMTO</span> وJMIC داخل أقل من 24 ساعة.</li></ul><p class="dc-note">و1 بنود أخرى في قسم «ما تغيّر».</p></div></div><div class="dc-row risk-high"><div class="dc-l">مستوى التهديد</div><div class="dc-v">مرتفع</div></div><div class="dc-row"><div class="dc-l">التوصيات</div><div class="dc-v"><ul class="dc-list"><li>ارفعوا المراقبة البصرية واللاسلكية عند الاقتراب من مضيق هرمز والخليج العربي.</li><li>توقعوا تحذيرات رسمية قصيرة المدى وحدّثوا خطط العبور وفق آخر تحذير معلن.</li></ul><p class="dc-note">و1 بنود أخرى في قسم «التوصيات».</p></div></div><div class="dc-row"><div class="dc-l">ما يُراقب خلال 24 ساعة</div><div class="dc-v"><p class="dc-note">عدد البنود: 3 · وتفصيلها في قسم «علامات الإنذار المبكر».</p></div></div></div><div class="dc-foot">أساس التقدير: بلاغ <span class="ltr">UKMTO</span> عن نشاط مشبوه وحريق سفينة، وتحديث أول للتحذير، ونقل مهني عن الإخماد. وسبب الاشتعال لم يُحسم.</div></section>
+  <section class="decision reveal" aria-label="عام"><h2 class="dc-title">عام</h2><div class="dc-grid"><div class="dc-row"><div class="dc-l">ما تغيّر</div><div class="dc-v"><ul class="dc-list"><li>وقع حريق سفينة على 25 ميلًا بحريًا شمال شرق خصب ثم أُخمد مع سلامة الطاقم.</li><li>صدرت أربع نشرات وتحديثات رسمية من <span class="ltr">UKMTO</span> وJMIC داخل أقل من 24 ساعة.</li></ul><p class="dc-note">و1 بنود أخرى في قسم «ما تغيّر».</p></div></div><div class="dc-row"><div class="dc-l">مستوى التهديد</div><div class="dc-v">المستوى التفصيلي في بطاقة الترويسة (مستوى التهديد حسب القطاعات)</div></div><div class="dc-row"><div class="dc-l">التوصيات</div><div class="dc-v"><ul class="dc-list"><li>ارفعوا المراقبة البصرية واللاسلكية عند الاقتراب من مضيق هرمز والخليج العربي.</li><li>توقعوا تحذيرات رسمية قصيرة المدى وحدّثوا خطط العبور وفق آخر تحذير معلن.</li></ul><p class="dc-note">و1 بنود أخرى في قسم «التوصيات».</p></div></div><div class="dc-row"><div class="dc-l">ما يُراقب خلال 24 ساعة</div><div class="dc-v"><p class="dc-note">عدد البنود: 3 · وتفصيلها في قسم «علامات الإنذار المبكر».</p></div></div></div><div class="dc-foot">أساس التقدير: بلاغ <span class="ltr">UKMTO</span> عن نشاط مشبوه وحريق سفينة، وتحديث أول للتحذير، ونقل مهني عن الإخماد. وسبب الاشتعال لم يُحسم.</div></section>
   <div class="kpis"><div class="kpi acc-warn reveal"><em></em><div class="k-l">نشرات وتحديثات <span class="ltr">UKMTO</span> داخل الفترة</div><div class="k-v bidi">4</div><div class="k-d">+2</div><div class="k-n">تتابع رسمي قصير المدى على مسار العبور</div></div><div class="kpi acc-warn reveal"><em></em><div class="k-l">بلاغات حريق أو اشتعال سفن في مضيق هرمز</div><div class="k-v bidi">3</div><div class="k-d">+3</div><div class="k-n">أول بلاغ حريق مؤكد داخل الفترة</div></div><div class="kpi acc-warn reveal"><em></em><div class="k-l">بلاغات نفي أو خلاف بشأن ألغام الممرات</div><div class="k-v bidi">2</div><div class="k-d">+1</div><div class="k-n">تباين الروايات حول سبب الحوادث</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">وقائع تمس الموانئ والطيران المدني في اليمن</div><div class="k-v bidi">0</div><div class="k-d">−3</div><div class="k-n">لم يصدر بلاغ جديد داخل الفترة، ولا يعني تراجع الخطر</div></div></div>
-  <div class="sc-hero no-print"><p class="sc-eyebrow">التقرير اليومي لأمن الملاحة والأوضاع الراهنة في المنطقة</p><h2 class="sc-h1">خلال الفترة <bdi class="bidi" dir="ltr">290400Z–300400Z</bdi> أكتوبر 2026، بقي مستوى التهديد مرتفعًا في مضيق هرمز والخليج العربي والبحر الأحمر وباب المندب، ومتوسطًا في بحر العرب وشرق المتوسط</h2><div class="sc-chips"><span class="sc-chip sc-fresh" data-gen="2026-10-30T04:00:00Z" hidden>عمر الإصدار <b class="sc-age"></b></span><span class="sc-chip">رقم الإصدار <b><span class="bidi">و ب <span class="ltr">30/10/26</span></span></b></span><span class="sc-chip">آخر تحديث <b><span class="bidi">2026-10-30T04:00:00Z</span></b></span><span class="sc-chip">فترة التغطية <b><bdi class="bidi" dir="ltr">290400Z–300400Z</bdi> <span class="ltr">UTC</span> أكتوبر 2026</b></span><span class="sc-chip">المصادر <b><span class="bidi">62</span> معتمدة · <span class="bidi">60</span> بالمسار الآلي · <span class="bidi">2</span> بالفحص اليدوي</b></span><span class="sc-chip">مستشهد بها <b><span class="bidi">10</span></b></span></div><div class="sc-grid"><section class="sc-card" aria-label="أهم الأخبار المتعلقة بالأمن البحري"><h2 class="sc-h2">أهم الأخبار المتعلقة بالأمن البحري</h2><div class="sc-row"><div class="sc-l">ما تغيّر</div><div class="sc-v"><p class="sc-gist">وقع حريق سفينة على 25 ميلًا بحريًا شمال شرق خصب ثم أُخمد مع… · صدرت أربع نشرات وتحديثات رسمية من <span class="ltr">UKMTO</span> وJMIC داخل أقل من 24…</p><p class="sc-more">16 بندًا · <a href="/additions.html#sec-00" data-goto="ما تغيّر" data-alt="/additions.html#sec-00">التفاصيل</a></p></div></div><div class="sc-row"><div class="sc-l">التوجيهات التشغيلية</div><div class="sc-v"><p class="sc-gist">ارفعوا المراقبة البصرية واللاسلكية عند الاقتراب من مضيق هرمز… · توقعوا تحذيرات رسمية قصيرة المدى وحدّثوا خطط العبور وفق آخر…</p><p class="sc-more">9 بنود · <a href="/additions.html#sec-03" data-goto="التوجيهات التشغيلية" data-alt="/additions.html#sec-03">القسم الكامل</a></p></div></div><div class="sc-row"><div class="sc-l">ما يُراقب خلال 24 ساعة</div><div class="sc-v"><p class="sc-gist">صدور النص الكامل لتحذير <span class="ltr">UKMTO</span> رقم 187-26 وتحديد نطاقه وموقع… · إعلان رسمي عن هوية السفينة وحالة الطاقم وحمولتها</p><p class="sc-more">3 بنود · <a href="/additions.html#sec-07" data-goto="علامات الإنذار المبكر" data-alt="/additions.html#sec-07">المؤشرات الكاملة</a></p></div></div></section><div class="sc-side"><div class="sc-threat risk-high"><div class="sc-tl">مستوى التهديد</div><div class="sc-tv">مرتفع</div><details class="sc-basis"><summary>أساس التقدير</summary><p>بلاغ <span class="ltr">UKMTO</span> عن نشاط مشبوه وحريق سفينة، وتحديث أول للتحذير، ونقل مهني عن الإخماد. وسبب الاشتعال لم يُحسم.</p></details></div><div class="sc-kpis"><div class="sc-kpi acc-warn"><div class="sc-kl">نشرات وتحديثات <span class="ltr">UKMTO</span> داخل الفترة</div><div class="sc-kv bidi">4</div><div class="sc-kd">+2</div><div class="sc-kn">تتابع رسمي قصير المدى على مسار العبور</div></div><div class="sc-kpi acc-warn"><div class="sc-kl">بلاغات حريق أو اشتعال سفن في مضيق هرمز</div><div class="sc-kv bidi">3</div><div class="sc-kd">+3</div><div class="sc-kn">أول بلاغ حريق مؤكد داخل الفترة</div></div><div class="sc-kpi acc-warn"><div class="sc-kl">بلاغات نفي أو خلاف بشأن ألغام الممرات</div><div class="sc-kv bidi">2</div><div class="sc-kd">+1</div><div class="sc-kn">تباين الروايات حول سبب الحوادث</div></div><div class="sc-kpi acc-ok"><div class="sc-kl">وقائع تمس الموانئ والطيران المدني في اليمن</div><div class="sc-kv bidi">0</div><div class="sc-kd">−3</div><div class="sc-kn">لم يصدر بلاغ جديد داخل الفترة، ولا يعني تراجع الخطر</div></div></div></div></div></div>
+  <div class="sc-hero no-print"><p class="sc-eyebrow">التقرير اليومي لأمن الملاحة والأوضاع الراهنة في المنطقة</p><h2 class="sc-h1">خلال الفترة <bdi class="bidi" dir="ltr">290400Z–300400Z</bdi> أكتوبر 2026، بقي مستوى التهديد مرتفعًا في مضيق هرمز والخليج العربي والبحر الأحمر وباب المندب، ومتوسطًا في بحر العرب وشرق المتوسط</h2><div class="sc-chips"><span class="sc-chip sc-fresh" data-gen="2026-10-30T04:00:00Z" hidden>عمر الإصدار <b class="sc-age"></b></span><span class="sc-chip">رقم الإصدار <b><span class="bidi">و ب <span class="ltr">30/10/26</span></span></b></span><span class="sc-chip">آخر تحديث <b><span class="bidi">2026-10-30T04:00:00Z</span></b></span><span class="sc-chip">فترة التغطية <b><bdi class="bidi" dir="ltr">290400Z–300400Z</bdi> <span class="ltr">UTC</span> أكتوبر 2026</b></span><span class="sc-chip">المصادر <b><span class="bidi">62</span> معتمدة · <span class="bidi">60</span> بالمسار الآلي · <span class="bidi">2</span> بالفحص اليدوي</b></span><span class="sc-chip">مستشهد بها <b><span class="bidi">10</span></b></span></div><div class="sc-grid"><section class="sc-card" aria-label="أهم الأخبار المتعلقة بالأمن البحري"><h2 class="sc-h2">أهم الأخبار المتعلقة بالأمن البحري</h2><div class="sc-row"><div class="sc-l">ما تغيّر</div><div class="sc-v"><p class="sc-gist">وقع حريق سفينة على 25 ميلًا بحريًا شمال شرق خصب ثم أُخمد مع… · صدرت أربع نشرات وتحديثات رسمية من <span class="ltr">UKMTO</span> وJMIC داخل أقل من 24…</p><p class="sc-more">16 بندًا · <a href="/additions.html#sec-00" data-goto="ما تغيّر" data-alt="/additions.html#sec-00">التفاصيل</a></p></div></div><div class="sc-row"><div class="sc-l">التوجيهات التشغيلية</div><div class="sc-v"><p class="sc-gist">ارفعوا المراقبة البصرية واللاسلكية عند الاقتراب من مضيق هرمز… · توقعوا تحذيرات رسمية قصيرة المدى وحدّثوا خطط العبور وفق آخر…</p><p class="sc-more">9 بنود · <a href="/additions.html#sec-03" data-goto="التوجيهات التشغيلية" data-alt="/additions.html#sec-03">القسم الكامل</a></p></div></div><div class="sc-row"><div class="sc-l">ما يُراقب خلال 24 ساعة</div><div class="sc-v"><p class="sc-gist">صدور النص الكامل لتحذير <span class="ltr">UKMTO</span> رقم 187-26 وتحديد نطاقه وموقع… · إعلان رسمي عن هوية السفينة وحالة الطاقم وحمولتها</p><p class="sc-more">3 بنود · <a href="/additions.html#sec-07" data-goto="علامات الإنذار المبكر" data-alt="/additions.html#sec-07">المؤشرات الكاملة</a></p></div></div></section><div class="sc-side"><style>
+.tz{border:1px solid var(--line,#243244);border-radius:14px;padding:14px 16px;background:var(--card,#0e1726);margin:10px 0}
+.tz-head{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;justify-content:space-between}
+.tz-head h3{margin:0;font-size:1.05rem}
+.tz-win{font-size:.8rem;opacity:.75}
+.tz-top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0 6px}
+.tz-badge{font-weight:700;font-size:1.5rem;line-height:1.2}
+.tz-sub{margin:0;font-size:.85rem;opacity:.85}
+.tz-zones{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px}
+.tz-z{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;padding:7px 9px;border:1px solid var(--line,#243244);border-radius:10px}
+.tz-n{font-size:.9rem}
+.tz-lv{font-weight:700;font-size:.9rem}
+.tz-dot{font-size:.8rem}
+.tz-c{font-size:.78rem;opacity:.8}
+.tz-basis{margin-top:10px;border-top:1px dashed var(--line,#243244);padding-top:8px}
+.tz-basis summary{cursor:pointer;font-weight:600;font-size:.9rem}
+.tz-basis p{margin:6px 0 0;font-size:.86rem;line-height:1.7}
+.tz-count{opacity:.85}
+@media (max-width:640px){
+  .tz{padding:12px}
+  .tz-badge{font-size:1.3rem}
+  .tz-z{flex-direction:column;align-items:flex-start}
+}
+.tz-badge.t-critical,.tz-lv.t-critical,.tz-dot.t-critical{color:#7f1d1d;border-color:#7f1d1d}
+.tz-badge.t-severe,.tz-lv.t-severe,.tz-dot.t-severe{color:#b91c1c;border-color:#b91c1c}
+.tz-badge.t-high,.tz-lv.t-high,.tz-dot.t-high{color:#c2410c;border-color:#c2410c}
+.tz-badge.t-medium,.tz-lv.t-medium,.tz-dot.t-medium{color:#a16207;border-color:#a16207}
+.tz-badge.t-low,.tz-lv.t-low,.tz-dot.t-low{color:#15803d;border-color:#15803d}
+@media print{
+  /* ضغط الورق (2026-10-30): بطاقة القطاعات الأربعة أُضيفت إلى الترويسة فزاد طول الإصدار
+     إلى 13 صفحة خارج النطاق 7–12. الضغط هنا للطباعة فقط ولا يمسّ هيئة الشاشة. */
+  .tz{break-inside:auto;page-break-inside:auto;border-color:#999;padding:2.2mm 3mm;margin:1.5mm 0}
+  .tz-head h3{font-size:10.4pt}
+  .tz-win{font-size:7.6pt}
+  .tz-top{margin:1.1mm 0 .7mm;gap:2mm}
+  .tz-badge{font-size:13pt;line-height:1.1}
+  .tz-sub{font-size:8pt}
+  .tz-zones{margin:1.1mm 0 0;gap:.7mm}
+  .tz-z{padding:1mm 1.4mm;border-radius:1.2mm;gap:2mm}
+  .tz-n,.tz-lv,.tz-c,.tz-dot{font-size:8pt;line-height:1.35}
+  .tz-basis{margin-top:1.1mm;padding-top:.9mm}
+  .tz-basis summary{font-size:8.5pt}
+  .tz-basis p{margin:.7mm 0 0;font-size:8pt;line-height:1.35}
+  .tz-basis>*{display:block!important}
+  .tz-basis summary{list-style:none}
+}
+
+/* اتجاه النصوص اللاتينية والإحداثيات — يمنع انقلابها في السياق العربي */
+.ltr{direction:ltr;unicode-bidi:isolate}
+
+/* رقم المعلّم: نص داكن على معلّم فاتح، ومقلوب في الوضع النهاري */
+body:not(.daylight) .lg-num{color:#04120f}
+body.daylight .lg-num{color:#ffffff}
+
+/* بطاقات الجوال للجداول — البند المعتمد 21 أكتوبر 2026 */
+@media (max-width:560px){
+  table.cardified{display:block;border:0;background:transparent;border-radius:0}
+  table.cardified.cardified{width:100%;max-width:100%;min-width:0}
+  table.cardified thead{display:none}
+  table.cardified tbody{display:block;max-width:100%}
+  table.cardified tr{display:block;max-width:100%;box-sizing:border-box;background:var(--panel);
+    border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin:0 0 10px}
+  table.cardified td{display:grid;grid-template-columns:minmax(72px,auto) minmax(0,1fr);gap:8px;
+    border:0;padding:5px 0;align-items:baseline;text-align:start;
+    overflow-wrap:anywhere;word-break:break-word;min-width:0}
+  table.cardified td::before{content:attr(data-label);color:var(--muted);font-size:12.5px;font-weight:600}
+  table.cardified td:empty{display:none}
+  /* ك-336: النص الإنجليزي الطويل (شرائح الحالة والتسميات) كان يتجاوز عرض بطاقة الجوال 16–31% */
+  table.cardified td > *,table.cardified .st-badge{white-space:normal;overflow-wrap:anywhere;
+    word-break:break-word;min-width:0;max-width:100%}
+  .tbl-wrap:has(table.cardified),.tbl-scroll:has(table.cardified){overflow:visible;border:0}
+  .tbl-hint{display:none}
+}
+/* بانر النسخة المستبدلة — البند المعتمد 21 أكتوبر 2026 */
+.sup-banner{margin:0 0 20px;padding:12px 16px;border:1px solid #c9a24f;border-radius:10px;
+  background:#2a2210;color:#ffd88a;font-size:14px}
+body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
+.sup-banner a{color:inherit;font-weight:700;text-decoration:underline}
+.sp-dim{opacity:.72}
+</style><section class="tz tz-screen" aria-label="مستوى التهديد حسب القطاعات"><header class="tz-head"><h3>مستوى التهديد حسب القطاعات</h3><span class="tz-win">خلال 24 ساعة السابقة</span></header><div class="tz-top"><span class="tz-badge t-severe"><span aria-hidden="true">◆</span> مرتفع جدًا</span><p class="tz-sub">أعلى قطاع: مضيق هرمز وخليج عُمان والخليج العربي</p></div><ul class="tz-zones"><li class="tz-z"><span class="tz-n">مضيق هرمز وخليج عُمان والخليج العربي</span><span class="tz-lv t-severe"><span class="tz-dot t-severe" aria-hidden="true">◆</span> مرتفع جدًا</span><span class="tz-c"><span class="bidi">4</span> وقائع مؤهّلة</span></li><li class="tz-z"><span class="tz-n">باب المندب والبحر الأحمر</span><span class="tz-lv t-low"><span class="tz-dot t-low" aria-hidden="true">▬</span> منخفض</span><span class="tz-c">لا واقعة مؤهّلة</span></li><li class="tz-z"><span class="tz-n">بحر العرب</span><span class="tz-lv t-low"><span class="tz-dot t-low" aria-hidden="true">▬</span> منخفض</span><span class="tz-c">لا واقعة مؤهّلة</span></li><li class="tz-z"><span class="tz-n">القرن الأفريقي</span><span class="tz-lv t-low"><span class="tz-dot t-low" aria-hidden="true">▬</span> منخفض</span><span class="tz-c">لا واقعة مؤهّلة</span></li></ul><details class="tz-basis" open><summary>أساس التقدير</summary><p>مضيق هرمز وخليج عُمان والخليج العربي: <span class="bidi">4</span> وقائع مؤهّلة — هجوم على سفينة · نشاط مشبوه · حريق على متن سفينة · تعطيل ملاحي</p><p>باب المندب والبحر الأحمر: لا واقعة مؤهّلة</p><p>بحر العرب: لا واقعة مؤهّلة</p><p>القرن الأفريقي: لا واقعة مؤهّلة</p><p class="tz-count">العدّاد: وقائع مؤهّلة <span class="bidi">4</span> · مؤكدة <span class="bidi">3</span> · مرجّحة <span class="bidi">1</span> · مستثناة <span class="bidi">11</span> · غير مكانية <span class="bidi">1</span> · إجمالي <span class="bidi">16</span></p></details></section><div class="sc-kpis"><div class="sc-kpi acc-warn"><div class="sc-kl">نشرات وتحديثات <span class="ltr">UKMTO</span> داخل الفترة</div><div class="sc-kv bidi">4</div><div class="sc-kd">+2</div><div class="sc-kn">تتابع رسمي قصير المدى على مسار العبور</div></div><div class="sc-kpi acc-warn"><div class="sc-kl">بلاغات حريق أو اشتعال سفن في مضيق هرمز</div><div class="sc-kv bidi">3</div><div class="sc-kd">+3</div><div class="sc-kn">أول بلاغ حريق مؤكد داخل الفترة</div></div><div class="sc-kpi acc-warn"><div class="sc-kl">بلاغات نفي أو خلاف بشأن ألغام الممرات</div><div class="sc-kv bidi">2</div><div class="sc-kd">+1</div><div class="sc-kn">تباين الروايات حول سبب الحوادث</div></div><div class="sc-kpi acc-ok"><div class="sc-kl">وقائع تمس الموانئ والطيران المدني في اليمن</div><div class="sc-kv bidi">0</div><div class="sc-kd">−3</div><div class="sc-kn">لم يصدر بلاغ جديد داخل الفترة، ولا يعني تراجع الخطر</div></div></div></div></div></div>
   <section class="hero-map no-print" aria-hidden="true"><div class="hmap"><div class="hmap-panel">
   <h3>خريطة الوقائع</h3><p class="blk-lede">مواقع الوقائع داخل نطاق التقرير.</p>
   <div class="hmap-wrap">
@@ -1182,10 +1268,11 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <article class="dg"><div class="dg-top"><span class="dg-idx">5</span><b class="dg-t">بلاغات تمس مصافي أو بنية سعودية</b></div><p class="dg-body">1</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">السابق</span><span class="dg-v">—</span></div><div class="dg-f"><span class="dg-k">الاتجاه</span><span class="dg-v">—</span></div><div class="dg-f"><span class="dg-k">الدلالة</span><span class="dg-v">لا تعريف مطابق في إصدار الأمس</span></div></div></article>
 <article class="dg"><div class="dg-top"><span class="dg-idx">6</span><b class="dg-t">وقائع تمس الموانئ والطيران المدني في اليمن</b></div><p class="dg-body">0</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">السابق</span><span class="dg-v">3</span></div><div class="dg-f"><span class="dg-k">الاتجاه</span><span class="dg-v">انخفاض</span></div><div class="dg-f"><span class="dg-k">الدلالة</span><span class="dg-v">لم يصدر بلاغ جديد داخل الفترة</span></div></div></article>
 </div>
-<p>الأرقام في الجدول تمثل عدد العناوين والوقائع المنقولة داخل الفترة. الرقم لا يساوي عدد الهجمات. المصدر الأساسي لهذه المؤشرات هو التغذيات المفحوصة في هذا التشغيل. خط الأساس: قيمة «السابق» تُقرأ من إصدار 2026-10-29 عند تطابق تعريف المؤشر (نشرات <span class="ltr">UKMTO</span> · تحديثات <span class="ltr">JMIC</span> · بلاغات الاشتعال · خلاف الألغام)، وتُترك «—» حيث لا تعريف مطابق فلا تُقارن.</p></section><section class="doc reveal" id="sec-02" aria-labelledby="h-02"><h2 id="h-02"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/></svg></span>مستوى التهديد</h2><div class="h-rule"></div><p class="sec-lede">التقييم الرسمي، والتقدير التحليلي، وحدود الثقة.</p><p>المستوى في مضيق هرمز والخليج العربي: مرتفع. يستند هذا التقدير إلى بلاغ <span class="ltr">UKMTO</span> عن اندلاع حريق في سفينة شمال‑شرق خصب. أساس التقدير الثاني: تحذيران جديدان وتحديثان لنشرات سابقة داخل الفترة. الأساس الثالث: تباين الروايات بشأن سبب الاشتعال.</p>
-<p>المستوى في البحر الأحمر وباب المندب: مرتفع مستمر؛ يرتكز على بلاغ حوثي داخل الفترة عن استهداف مصفاة رأس تنورة لم يؤكدته الجهات السعودية، مع غياب واقعة بحرية جديدة في خط العبور. لذلك التقدير استمراري لا حدثي.</p>
-<p>المستوى في بحر العرب: متوسط مستمر؛ لم ترد خلال الفترة واقعة بحرية جديدة في المنطقة، لذا هذا المستوى لا يستند إلى حدث داخل الفترة.</p>
-<p>المستوى في شرق البحر المتوسط: متوسط مستمر؛ لم تتضمن المواد المفحوصة واقعة بحرية جديدة في المنطقة.</p></section><section class="doc reveal" id="sec-03" aria-labelledby="h-03"><h2 id="h-03"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l9 16H3zM12 8v6M12 16.4v1.2"/></svg></span>سجل الأحداث</h2><div class="h-rule"></div><p class="sec-lede">الوقائع الأمنية الجديدة خلال فترة التغطية، مرتّبة بالرمز والتوقيت.</p><div class="ev-grid" data-count="16">
+<p>الأرقام في الجدول تمثل عدد العناوين والوقائع المنقولة داخل الفترة. الرقم لا يساوي عدد الهجمات. المصدر الأساسي لهذه المؤشرات هو التغذيات المفحوصة في هذا التشغيل. خط الأساس: قيمة «السابق» تُقرأ من إصدار 2026-10-29 عند تطابق تعريف المؤشر (نشرات <span class="ltr">UKMTO</span> · تحديثات <span class="ltr">JMIC</span> · بلاغات الاشتعال · خلاف الألغام)، وتُترك «—» حيث لا تعريف مطابق فلا تُقارن.</p></section><section class="doc reveal" id="sec-02" aria-labelledby="h-02"><h2 id="h-02"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/></svg></span>مستوى التهديد</h2><div class="h-rule"></div><p class="sec-lede">التقييم الرسمي، والتقدير التحليلي، وحدود الثقة.</p><p>المستوى العام: مرتفع جدًا — أعلى قطاع: مضيق هرمز وخليج عُمان والخليج العربي · خلال 24 ساعة السابقة.</p>
+<p>المستوى في مضيق هرمز وخليج عُمان والخليج العربي: مرتفع جدًا. الأساس: بلاغ <span class="ltr">UKMTO</span> عن هجوم على سفينة داخل المضيق، ونشاط مشبوه على 25 ميلًا بحريًا شمال شرق خصب، وحريق سفينة قرب سواحل عُمان، وتعطيل ملاحي بإطفاء إشارات ناقلات فوق كابلات خليج عُمان.</p>
+<p>المستوى في باب المندب والبحر الأحمر: منخفض. لا واقعة مؤهّلة داخل الفترة؛ بلاغ استهداف مصفاة رأس تنورة لا يقع على سفينة ولا يمسّ الملاحة، فيُستثنى من العدّ.</p>
+<p>المستوى في بحر العرب: منخفض. لا واقعة مؤهّلة داخل الفترة.</p>
+<p>المستوى في القرن الأفريقي: منخفض. لا واقعة مؤهّلة داخل الفترة.</p></section><section class="doc reveal" id="sec-03" aria-labelledby="h-03"><h2 id="h-03"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l9 16H3zM12 8v6M12 16.4v1.2"/></svg></span>سجل الأحداث</h2><div class="h-rule"></div><p class="sec-lede">الوقائع الأمنية الجديدة خلال فترة التغطية، مرتّبة بالرمز والتوقيت.</p><div class="ev-grid" data-count="16">
 <article class="ev reveal b-official" id="ev-01"><div class="ev-top"><span class="ev-idx bidi">01</span><span class="ev-code ltr"><span class="ltr">MN-2026-10-30-01</span></span><span class="ev-badge">بلاغ رسمي</span></div><p class="ev-what">صدر تحذير <span class="ltr">UKMTO</span> رقم 187-26 ثم تحديثه 001</p><p class="ev-meta"><span class="ev-k">المصدر والموقع والوقت</span><span class="ev-mv"><span class="ltr">UKMTO</span> · مضيق هرمز · <span class="ltr">292354Z</span> و300319Z أكتوبر 2026</span></p></article>
 <article class="ev reveal b-official" id="ev-02"><div class="ev-top"><span class="ev-idx bidi">02</span><span class="ev-code ltr"><span class="ltr">MN-2026-10-30-02</span></span><span class="ev-badge">بلاغ رسمي</span></div><p class="ev-what">صدر تحذير <span class="ltr">UKMTO</span> رقم 186-26</p><p class="ev-meta"><span class="ev-k">المصدر والموقع والوقت</span><span class="ev-mv"><span class="ltr">UKMTO</span> · مضيق هرمز · <span class="ltr">291804Z</span> أكتوبر 2026</span></p></article>
 <article class="ev reveal b-official" id="ev-03"><div class="ev-top"><span class="ev-idx bidi">03</span><span class="ev-code ltr"><span class="ltr">MN-2026-10-30-03</span></span><span class="ev-badge">بلاغ رسمي</span></div><p class="ev-what">صدر تحديث التحذير <span class="ltr">UKMTO</span> رقم 185-26</p><p class="ev-meta"><span class="ev-k">المصدر والموقع والوقت</span><span class="ev-mv"><span class="ltr">UKMTO</span> · مضيق هرمز · <span class="ltr">291559Z</span> أكتوبر 2026</span></p></article>
