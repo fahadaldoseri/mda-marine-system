@@ -166,7 +166,10 @@ def inject(date: str, c: dict) -> tuple[bool, str]:
     body = t[m.end():end].strip("\n")
     body = re.sub(r"\n{3,}", "\n\n", body)
     # لا أسطر فارغة محقونة (البند ط): فاصل واحد ثابت بين المتن والسطور المُولَّدة
-    t = t[:m.end()] + ("\n\n" + body if body else "") + "\n\n" + "\n".join(gen) + "\n" + t[end:]
+    # عطل (2026-10-30): كان سطر الإفصاح المولَّد يلتصق بالعنوان التالي فيصير جزءًا من قائمة
+    # بلا فاصل، فيفسد العرض والطباعة. الفاصل الآن سطر فارغ واحد ثابت قبل ما يلي.
+    t = (t[:m.end()] + ("\n\n" + body if body else "") + "\n\n" + "\n".join(gen)
+         + "\n\n" + t[end:].lstrip("\n"))
     p.write_text(t, encoding="utf-8")
     return True, str(p)
 

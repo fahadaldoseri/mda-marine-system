@@ -1,6 +1,25 @@
 {
   "date": "2026-10-30",
-  "feeds": {},
+  "feeds": {
+    "browser_only": [],
+    "checked": 60,
+    "derived_from": "feeds/feeds-2026-10-30.status.json",
+    "empty": [],
+    "fail_ratio": 0.0,
+    "failed": 0,
+    "failed_feeds": [],
+    "note": "قياسات متأخرة",
+    "ok": 60,
+    "stale": [
+      12,
+      13,
+      20,
+      30,
+      32,
+      49
+    ],
+    "status": "degraded"
+  },
   "final_gate": {
     "blocked_steps": [],
     "dir": "logs/gate-2026-10-30",
@@ -9,7 +28,7 @@
     "status": "warn"
   },
   "finished_utc": "2026-10-30T03:58:24Z",
-  "gate_finished_utc": "2026-10-30T05:06:53Z",
+  "gate_finished_utc": "2026-10-30T11:39:39Z",
   "gate_note": "علامة مرحلة الخط اليومي — بوابة التسليم لم تُشغَّل بعد.",
   "gate_state": "not_run",
   "language": {
@@ -32,7 +51,23 @@
     "waw_pct": 3.4,
     "waw_runs3": 0
   },
-  "overall": "ok",
+  "ledger_merge": {
+    "added_this_run_count": 16,
+    "derived_from": "cumulative-2026/daily/2026-10-30.json",
+    "merged_before_marker": true,
+    "note": "دُمج ملف اليوم في الدفتر الجامع (16 واقعة)",
+    "status": "ok"
+  },
+  "ofac": {
+    "derived_from": "watchlist/ofac-targets.txt + archive/ofac-screen-latest.json",
+    "list": "https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/SDN.CSV",
+    "matches": [],
+    "note": "فُحص 9 مستهدفًا — الحالة: ok",
+    "results_file": "archive/ofac-screen-latest.json",
+    "status": "ok",
+    "targets": 9
+  },
+  "overall": "degraded",
   "pipeline_version": 4,
   "report_present_at_pipeline_end": true,
   "schema_version": 1,
@@ -44,5 +79,14 @@
     "ok": 60,
     "status_file": "feeds/feeds-2026-10-30.status.json"
   },
-  "written_stage": "final"
+  "written_stage": "final",
+  "originals": {
+    "status": "ok",
+    "healthy": 3,
+    "failed": 0,
+    "empty_shell": 0,
+    "manifest": "archive/originals/2026-10-30/manifest.json",
+    "note": "حُفظت الأصول في archive/originals/2026-10-30",
+    "derived_from": "archive/originals/2026-10-30/"
+  }
 }

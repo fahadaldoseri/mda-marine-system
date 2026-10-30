@@ -134,6 +134,11 @@ FALLBACK_ROUTES = {
          'via': 'official-page:jina.ai/mscio-alerts'},
     ],
     40: [
+        # ك-جديد (2026-10-30): صفحة /en/maritime-news هيكل JS (3432B) ووسيطها يعيد 385B بعنوان فقط،
+        # فتفشل بـ«derived items without real content». القياس الحي أثبت أن مدوّنة MarineTraffic
+        # الرسمية تعيد محتوى حقيقيًا (347950B · 18 عنصرًا حقيقيًا) ⇒ تُقدَّم كمسار أول.
+        {'url': 'https://www.marinetraffic.com/blog/',
+         'via': 'official:marinetraffic-blog'},
         {'url': 'https://r.jina.ai/https://www.marinetraffic.com/en/maritime-news',
          'via': 'official-page:jina.ai/marinetraffic-news'},
     ],

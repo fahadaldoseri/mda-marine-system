@@ -39,13 +39,16 @@ The period's incidents focused on the transit route through the Strait of Hormuz
 The figures in the table represent the number of headlines and incidents relayed during the period. The figure does not equal the number of attacks. The primary source for these indicators is the feeds screened in this run. Baseline: the “previous” value is read from the 2026-10-29 edition when the indicator definition matches (UKMTO bulletins · JMIC updates · fire reports · mine dispute), and “—” is left where no matching definition exists and therefore no comparison is made.
 
 ## Threat Level
-The level in the Strait of Hormuz and the Arabian Gulf: High. This estimate is based on a UKMTO report of a fire breaking out on a vessel northeast of Khasab. The second basis for the estimate: two new warnings and two updates to previous bulletins during the period. The third basis: divergent accounts of the cause of the fire.
+General level: Severe — top zone: the Strait of Hormuz, the Gulf of Oman and the Arabian Gulf · within the previous 24 hours.
 
-The level in the Red Sea and Bab el-Mandeb: persistently high; it is based on a Houthi report during the period of a strike on Ras Tanura refinery that was not confirmed by the Saudi authorities, together with the absence of a new maritime incident on the transit route. Accordingly, the estimate is continuity-based, not event-based.
+Level in the Strait of Hormuz, the Gulf of Oman and the Arabian Gulf: Severe. Basis: a UKMTO report of an attack on a vessel inside the strait, suspicious activity 25 nautical miles northeast of Khasab, a vessel fire off the coast of Oman, and navigational disruption caused by tankers switching off their signals above the Gulf of Oman cables.
 
-The level in the Arabian Sea: persistently medium; no new maritime incident in the area was reported during the period, so this level is not based on an event within the period.
+Level in Bab el-Mandeb and the Red Sea: Low. No qualifying incident within the period; the report of a strike on the Ras Tanura refinery falls neither on a vessel nor on navigation, so it is excluded from the count.
 
-The level in the Eastern Mediterranean: persistently medium; the screened material did not include a new maritime incident in the area.
+Level in the Arabian Sea: Low. No qualifying incident within the period.
+
+Level in the Horn of Africa: Low. No qualifying incident within the period.
+
 
 ## Operational Guidance
 - Increase visual and radio monitoring when approaching the Strait of Hormuz and the Arabian Gulf.
@@ -176,6 +179,8 @@ The text of JMIC bulletin No. 109 has not been verified; reliance is placed on t
 The report of the strike on Ras Tanura refinery has not been confirmed, and no public Saudi denial or confirmation has been issued.
 
 - Sources: 62 approved = 60 via the automated route + 2 via manual reference · 60 successful · 2 manually reviewed.
+
+- Disclosed degraded run: Feeds: stale content — the newest item is older than the freshness threshold — fault ref K-352 · valid until 2026-11-30.
 
 ## Continuous Monitoring
 We monitor UKMTO and JMIC updates and every navigational warning that mentions a vessel, location, or hazardous object within the traffic separation route.

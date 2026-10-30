@@ -24,6 +24,7 @@ import argparse
 import html
 import json
 import re
+import threat_card as TC
 import sys
 from datetime import datetime, timezone
 
@@ -591,7 +592,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .topbar,.no-print{display:none !important}
   .wrap{max-width:none;padding:0}
   a{color:#0a1524;text-decoration:none}
-  section.doc{background:#fff;border:0;border-top:1px solid #cfd8e3;border-radius:0;padding:0 0 5mm;box-shadow:none;break-inside:auto;page-break-inside:auto}
+  section.doc{background:#fff;border:0;border-top:1px solid #cfd8e3;border-radius:0;padding:0 0 3mm;box-shadow:none;break-inside:auto;page-break-inside:auto}
   section.doc.pri{border-top:2px solid #0b6f66}
   section.doc > h2{font-size:13pt;color:#0a1524;break-after:avoid;page-break-after:avoid}
   section.doc > h2 .ico{display:none}
@@ -625,17 +626,17 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
      /* ك-341: بطاقتان في السطر في الطباعة — تدفّق بلا تصغير خطوط ولا حذف محتوى */
      .ev-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.6mm;margin:4mm 0 0}
      .ev{display:block;margin:0;padding:3mm 3.4mm 2.8mm}
-     .ev{display:block;margin:0 0 3mm;padding:3.4mm 4mm 3mm;break-inside:avoid;page-break-inside:avoid;opacity:1 !important;transform:none !important;animation:none !important;border-color:#c3cedb;background:#fff}
+     .ev{display:block;margin:0 0 2mm;padding:2.2mm 2.6mm 2mm;break-inside:avoid;page-break-inside:avoid;opacity:1 !important;transform:none !important;animation:none !important;border-color:#c3cedb;background:#fff}
      .ev::before{width:4px;background:#0f8f86}
      .ev.b-media::before{background:#b8860b}
      .ev.b-deny::before{background:#9aa8ba}
-     .ev-what{font-size:10pt;line-height:1.55;color:#12203a;margin:0}
-     .ev-top{margin-bottom:1.6mm}
-     .ev-meta{margin-top:1.8mm;padding-top:1.4mm}
-     .ev-meta{font-size:9.5pt;color:#4a5b73;border-top-color:#dbe3ec}
+     .ev-what{font-size:9.4pt;line-height:1.45;color:#12203a;margin:0}
+     .ev-top{margin-bottom:1mm}
+     .ev-meta{margin-top:1.1mm;padding-top:.9mm}
+     .ev-meta{font-size:9pt;color:#4a5b73;border-top-color:#dbe3ec}
      .ev-idx,.ev-code,.ev-badge{font-size:9pt;color:#4a5b73;border-color:#c3cedb}
      .dg-grid{display:block;margin:4mm 0 0}
-     .dg{display:block;margin:0 0 3mm;padding:3.2mm 4mm 2.8mm;break-inside:avoid;page-break-inside:avoid;border-color:#dbe3ec;background:#fff}
+     .dg{display:block;margin:0 0 2mm;padding:2.4mm 2.8mm 2.2mm;break-inside:avoid;page-break-inside:avoid;border-color:#dbe3ec;background:#fff}
      .dg-top{margin-bottom:1.4mm}
      .dg-t{font-size:10pt}
      .dg-body{font-size:9.5pt;line-height:1.5;margin-bottom:1.4mm;color:#243447}
@@ -696,7 +697,15 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   /* Chromium لا يجزّئ حاويات grid/flex بين الصفحات، فتتدفّق هنا بترتيب inline-block
      يحفظ هيئة العمودين/البطاقات نفسها، مع السماح بالانقسام بين الصفحات */
   .wrap,.changes,.dc-grid,.kpis,.masthead,.map-legend,.src-grid,.glossary,.tl-viz,.viz,.card,.decision{display:block !important}
+  /* عطل (2026-10-30): القاعدة العامة كانت تُظهر وسم <style> المحقون داخل الترويسة في الطباعة،
+     فطُبع نص CSS داخل الصفحة الأولى. القياس الحي: display المحسوب لوسم style = inline-block في print.
+     الإصلاح: استثناء العناصر غير المرئية + حارس صريح يمنع طباعتها. */
   .kpis > *,.masthead > *,.map-legend > li,.glossary > li,.src-grid > *{display:inline-block !important;vertical-align:top !important;width:48.5% !important;margin:0 0 2.5mm 1% !important;box-sizing:border-box !important}
+  .kpis > style,.kpis > script,.kpis > template,.kpis > link,
+  .masthead > style,.masthead > script,.masthead > template,.masthead > link,
+  .src-grid > style,.src-grid > script,.src-grid > template,.src-grid > link,
+  .map-legend > style,.map-legend > script,.glossary > style,.glossary > script{display:none !important}
+  style,script,template,link,meta,title{display:none !important}
   .dc-grid > *,.dc-row{display:block !important;width:100% !important}
   /* ك-103: الوسم يُعوَّم والمحتوى كتلة قابلة للانقسام — فلا يُترك عنوان أو بطاقة يتيمة ولا فراغ أسفل الغلاف */
   .dc-row::after{content:"";display:block;clear:both}
@@ -1366,11 +1375,22 @@ def render_intel_review_notes(meta: dict, inline) -> str:
 
 
 def threat_class(threat: str) -> str:
-    if re.search(r"مرتفع|حرج|شديد|عال", threat):
-        return "risk-high"
-    if re.search(r"متوسط|جوهري", threat):
-        return "risk-med"
-    return "risk-low"
+    """تصنيف المستوى إلى صنف لوني — يفشل مغلقًا على أي لفظ خارج السلّم المعتمد.
+
+    السلّم الحاكم: appendices/threat-scale.json (خمسة مستويات بمطابقة JMIC).
+    لكل مستوى صنف لوني مستقل: «حرج» لا يتشارك لون «مرتفع».
+    """
+    _map = {
+        "حرج": "risk-critical",
+        "مرتفع جدًا": "risk-severe",
+        "مرتفع": "risk-high",
+        "متوسط": "risk-med",
+        "منخفض": "risk-low",
+    }
+    key = (threat or "").strip()
+    if key not in _map:
+        raise ValueError(f"مستوى تهديد خارج السلّم المعتمد: «{threat}» — يُمنع البناء")
+    return _map[key]
 
 
 # ----------------------------------------------------------------------------
@@ -1642,7 +1662,11 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
         notice_html = f'<div class="notice">{icon("shield")}<div>{inline(meta["notice"], defs)}</div></div>'
 
     threat_html = ""
-    if threat:
+    _zj = TC.load_zones_site(report_date) if report_date else None
+    if _zj:
+        # بطاقة القطاعات الأربعة: مصدر رسم واحد للشاشة والطباعة (قرار المالك 2026-10-30)
+        threat_html = TC.zones_card(_zj, variant="print")
+    elif threat:
         threat_html = (
             f'<div class="threat {tcls}"><div class="lbl">مستوى التهديد</div>'
             f'<div class="val">{esc(threat)}</div></div>'

@@ -79,6 +79,21 @@ def copy_sources(date_iso: str, brain: Path) -> list:
     else:
         log.append(f"تحذير: ملف واجهة اليوم غير موجود: {src_meta}")
 
+    # ملف القطاعات (بطاقة مستوى التهديد) — مصدر حاكم واحد
+    src_zones = brain / "web" / "zones" / f"{date_iso}.json"
+    dst_zones = SITE / "sources" / "zones" / f"{date_iso}.json"
+    dst_zones.parent.mkdir(parents=True, exist_ok=True)
+    if src_zones.exists():
+        try:
+            json.loads(src_zones.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as e:
+            log.append(f"خطأ: ملف القطاعات ليس JSON صالحًا ({e}) — لم يُنسخ")
+            return log
+        shutil.copy2(src_zones, dst_zones)
+        log.append(f"نُسخ ملف القطاعات: {dst_zones.name}")
+    else:
+        log.append(f"تحذير: ملف قطاعات اليوم غير موجود: {src_zones}")
+
     ledger_candidates = sorted((brain / "cumulative-2026").glob("event-ledger*.json"))
     if ledger_candidates:
         newest = max(ledger_candidates, key=lambda p: p.stat().st_mtime)
