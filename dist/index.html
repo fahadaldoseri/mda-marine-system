@@ -106,7 +106,9 @@ body.daylight .brand-title,body.daylight .brand-sub{color:#0d1a2b}
   .topbar a, .topbar button, .topbar .btn, .sn-brand, .sn-links a,
   .sc-toggle, .sc-jump a, .chip, .chip a, .tb-meta .btn,
   .sn-tools button, .sn-tools a, .sn-scale button, .sc-more a,
-  .sc-all button, details.sc-basis summary, .sf-inner a{
+  .sc-all button, details.sc-basis summary, .sf-inner a,
+  .sx-card a, .sx-name a, .sx-links a, .sx-row a, .sx-src a,
+  .sx-ref a, .sx-refs a, .src-ref a, .open-report a, a.btn-link, .sup-banner a{
     min-height:44px; min-width:44px; display:inline-flex; align-items:center;
     justify-content:center; box-sizing:border-box;
   }
@@ -248,6 +250,9 @@ body.daylight .lg-num{color:#ffffff}
     overflow-wrap:anywhere;word-break:break-word;min-width:0}
   table.cardified td::before{content:attr(data-label);color:var(--muted);font-size:12.5px;font-weight:600}
   table.cardified td:empty{display:none}
+  /* ك-336: النص الإنجليزي الطويل (شرائح الحالة والتسميات) كان يتجاوز عرض بطاقة الجوال 16–31% */
+  table.cardified td > *,table.cardified .st-badge{white-space:normal;overflow-wrap:anywhere;
+    word-break:break-word;min-width:0;max-width:100%}
   .tbl-wrap:has(table.cardified),.tbl-scroll:has(table.cardified){overflow:visible;border:0}
   .tbl-hint{display:none}
 }
@@ -326,7 +331,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <div class="tiles">
     <div class="tile"><b>18</b><span>إصدار يومي منشور</span></div>
-    <div class="tile"><b>298</b><span>سجل في الدفتر التراكمي</span></div>
+    <div class="tile"><b>314</b><span>سجل في الدفتر التراكمي</span></div>
     <div class="tile"><b>62</b><span>مصدرًا معتمدًا في السجل</span></div>
     <div class="tile"><b>07:00</b><span>توقيت الإصدار اليومي (البحرين)</span></div>
   </div>

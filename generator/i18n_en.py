@@ -221,6 +221,29 @@ def make_translator(tm: dict[str, str], gl: dict[str, str]):
         for k in keys:
             if k in res:
                 res = res.replace(k, tm.get(k) or gl.get(k) or '')
+        if not ARABIC.search(res):
+            return res
+        # ك-337: احتياط على مستوى الجملة — النص قد يُقطَّع إلى عقد نصية حول وسوم داخلية،
+        # فتُترجم كل جملة على حدة بالمطابقة المباشرة ثم بالأطول الموجود، بلا تخمين.
+        parts = re.split(r"(?<=[.؟!؛])\s+|\s+·\s+", res)
+        if len(parts) > 1:
+            outs, allok = [], True
+            for p in parts:
+                pn = norm(p)
+                if not pn or not ARABIC.search(pn):
+                    outs.append(p); continue
+                hit = lookup(pn)
+                if hit is None:
+                    cand = [k for k in keys if k and k in pn]
+                    if cand:
+                        hit = tm.get(max(cand, key=len)) or gl.get(max(cand, key=len))
+                    else:
+                        allok = False; outs.append(p); continue
+                outs.append(p.replace(pn, hit))
+            joined = " ".join(outs)
+            if allok or not ARABIC.search(joined):
+                return joined
+            res = joined
         return res
 
     return translate

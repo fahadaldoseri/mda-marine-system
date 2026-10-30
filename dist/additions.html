@@ -854,6 +854,8 @@ body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,sys
   /* شريط الأقسام صفّ واحد قابل للتمرير بدل كتلة من الأزرار تدفع المحتوى */
   .sc-jump{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
   .sc-jump a{flex:0 0 auto;white-space:nowrap}
+  .sc-jump-hint{display:none;align-items:center;gap:2px;font-size:11.5px;color:var(--muted);padding:0 6px;flex:0 0 auto}
+  .sc-toolbar.is-scroll .sc-jump-hint{display:inline-flex}
   .sc-card{padding:18px 16px}
   .sc-threat{padding:16px}
   .sc-tv{font-size:28px}
@@ -963,7 +965,9 @@ body.daylight .brand-title,body.daylight .brand-sub{color:#0d1a2b}
   .topbar a, .topbar button, .topbar .btn, .sn-brand, .sn-links a,
   .sc-toggle, .sc-jump a, .chip, .chip a, .tb-meta .btn,
   .sn-tools button, .sn-tools a, .sn-scale button, .sc-more a,
-  .sc-all button, details.sc-basis summary, .sf-inner a{
+  .sc-all button, details.sc-basis summary, .sf-inner a,
+  .sx-card a, .sx-name a, .sx-links a, .sx-row a, .sx-src a,
+  .sx-ref a, .sx-refs a, .src-ref a, .open-report a, a.btn-link, .sup-banner a{
     min-height:44px; min-width:44px; display:inline-flex; align-items:center;
     justify-content:center; box-sizing:border-box;
   }
@@ -1055,6 +1059,9 @@ body.daylight .lg-num{color:#ffffff}
     overflow-wrap:anywhere;word-break:break-word;min-width:0}
   table.cardified td::before{content:attr(data-label);color:var(--muted);font-size:12.5px;font-weight:600}
   table.cardified td:empty{display:none}
+  /* ك-336: النص الإنجليزي الطويل (شرائح الحالة والتسميات) كان يتجاوز عرض بطاقة الجوال 16–31% */
+  table.cardified td > *,table.cardified .st-badge{white-space:normal;overflow-wrap:anywhere;
+    word-break:break-word;min-width:0;max-width:100%}
   .tbl-wrap:has(table.cardified),.tbl-scroll:has(table.cardified){overflow:visible;border:0}
   .tbl-hint{display:none}
 }
@@ -1096,7 +1103,7 @@ body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
         <button type="button" data-scale="1.25" title="أكبر حجم">أ++</button>
       </div>
       <button type="button" class="sn-theme" id="sn-theme">المظهر</button>
-      
+      <button type="button" class="sn-theme sn-print" id="sn-print" data-i18n="print">طباعة / PDF</button>
     </div>
     </div>
   </div>
@@ -1122,8 +1129,6 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     <div class="topbar-spacer"></div>
     <div class="tb-meta">
       <span class="chip">29 أكتوبر 2026</span>
-      <button class="btn" id="btn-theme" type="button">النمط النهاري</button>
-      <button class="btn btn-primary" id="btn-print" type="button">طباعة / <span class="ltr">PDF</span></button>
     </div>
   </div>
 </div>
@@ -1166,7 +1171,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <main>
     <section class="doc pri reveal" id="sec-00" aria-labelledby="h-00"><h2 id="h-00">ما تغيّر منذ التقرير السابق</h2><div class="h-rule"></div><p class="sec-lede">ما استُجد، وما تغيّر تصنيفه، وما أُغلق.</p><ul class="changes"><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">نشرة <span class="ltr">JMIC</span> رقم 016-26 بشأن تطبيق الحصار موزّعة عبر <span class="ltr">UKMTO</span> <bdi class="bidi ev-code">29-01</bdi> <bdi class="bidi">JMIC · UKMTO</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">نشرة <span class="ltr">UKMTO</span> الاستشارية رقم 184-26 عن بلاغات نشاط مشبوه <bdi class="bidi ev-code">29-02</bdi> <bdi class="bidi">UKMTO</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">نصيحة للعابرين بلا حاجة بالبقاء بعيدًا عن منطقة هرمز <bdi class="bidi ev-code">29-03</bdi> <bdi class="bidi">gCaptain</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تحذير للسفن المحايدة من الاستجواب والتفتيش في الخليج <bdi class="bidi ev-code">29-04</bdi> <bdi class="bidi">TradeWinds</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تهديد إيراني بالردّ على مرافقة السفن في مضيق هرمز <bdi class="bidi ev-code">29-05</bdi> <bdi class="bidi">straits.live</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">مناقشة خطة سبعة أيام لإعادة فتح مضيق هرمز <bdi class="bidi ev-code">29-06</bdi> <bdi class="bidi">straits.live</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">مقترح إيراني جديد لإعادة فتح مضيق هرمز قيد المراجعة <bdi class="bidi ev-code">29-07</bdi> <bdi class="bidi">straits.live</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">جهود دبلوماسية تركية بشأن هرمز واليمن <bdi class="bidi ev-code">29-08</bdi> <bdi class="bidi">straits.live</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تفاوض دول خليجية على اتفاق سلام إقليمي يشمل هرمز واليمن وإيران <bdi class="bidi ev-code">29-09</bdi> <bdi class="bidi">straits.live</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">نفي القيادة المركزية الأمريكية إصابة سفن تجارية بألغام في مضيق هرمز <bdi class="bidi ev-code">29-10</bdi> <bdi class="bidi">straits.live</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">عبور 3,000 سفينة تجارية مضيق هرمز واتهام جهة ملاحية بمخالفات <bdi class="bidi ev-code">29-11</bdi> <bdi class="bidi">straits.live</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تحذير من القرصنة في خليج عدن مع تحديث بشأن حصار إيران <bdi class="bidi ev-code">29-12</bdi> <bdi class="bidi">Seatrade Maritime</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">حصيلة ثمانية أشهر: 121 سفينة تعرضت لهجوم و24 بحارًا قُتلوا <bdi class="bidi ev-code">29-13</bdi> <bdi class="bidi">Seatrade Maritime</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">بلاغ حكومي يمني عن استهداف الحوثيين مطار عدن <bdi class="bidi ev-code">29-14</bdi> <bdi class="bidi">حساب @ERYANIM (رسمي يمني)</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">دعوة السلطة المحلية في تعز إلى تحقيق في بلاغات قذائف مشتبهة <bdi class="bidi ev-code">29-15</bdi> <bdi class="bidi">حساب @ERYANIM (رسمي يمني)</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">تحذير وزارة الصحة اليمنية من وصول مخزون الأدوية إلى مستويات حرجة <bdi class="bidi ev-code">29-16</bdi> <bdi class="bidi">قناة العربية (الحساب الرسمي)</bdi></span></li></ul></section>
-    <section class="doc pri reveal" id="sec-01" aria-labelledby="h-01"><h2 id="h-01"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 3h9l-1.2 3H19v8h-8.2L9.6 11H6v9H4z"/></svg></span>الخلاصة</h2><div class="h-rule"></div><p class="sec-lede">الموقف ومستوى التهديد والإجراء المقترح في ثلاثة أسطر.</p><ul><li>الحالة عند <span class="ltr">0400Z</span>: مستوى التهديد مرتفع في مضيق هرمز والخليج العربي، ومرتفع أيضًا في البحر الأحمر وباب المندب، ومستوى التهديد متوسط في بحر العرب وشرق المتوسط.</li><li>الجديد الأهم: نشرة مشتركة تطلب تطبيق الحصار مع إشعار بتجنّب العبور غير الضروري، وإعلان تهديد إيراني بالرد، مقابل مسار تفاوضي لإعادة فتح مضيق هرمز.</li><li>الأثر على العمل: لا تعتمدوا العبور الاعتيادي في مضيق هرمز؛ خططوا لزمن إضافي وتوقّعوا استجوابًا وتفتيشًا للسفن المحايدة.</li></ul></section><section class="doc reveal" id="sec-02" aria-labelledby="h-02"><h2 id="h-02"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 4l6 2 5-2v14l-5 2-6-2-5 2V6zM9 4v14M15 6v14"/></svg></span>التوزيع الجغرافي للوقائع</h2><div class="h-rule"></div><p class="sec-lede">أين تركّزت الوقائع، وحصيلة <span class="ltr">IMO</span> حسب القطاعات.</p><div class="dg-grid">
+    <section class="doc pri reveal" id="sec-01" aria-labelledby="h-01"><h2 id="h-01"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 3h9l-1.2 3H19v8h-8.2L9.6 11H6v9H4z"/></svg></span>الخلاصة</h2><div class="h-rule"></div><p class="sec-lede">الموقف ومستوى التهديد والإجراء المقترح في ثلاثة أسطر.</p><ul><li>الحالة عند <span class="ltr">0400Z</span>: مستوى التهديد مرتفع في مضيق هرمز والخليج العربي، ومرتفع أيضًا في البحر الأحمر وباب المندب، بينما لا يزال مستوى التهديد متوسطًا في بحر العرب وشرق المتوسط.</li><li>الجديد الأهم: نشرة مشتركة تطلب تطبيق الحصار وتحث على تجنّب العبور غير الضروري، مع إعلان إيراني عن تهديد بالرد مقابل مسار تفاوضي لإعادة فتح مضيق هرمز.</li><li>الأثر على العمل: لا تعتمدوا العبور الاعتيادي في مضيق هرمز؛ خططوا لوقت إضافي وتوقّعوا استجوابًا وتفتيشًا للسفن المحايدة.</li></ul></section><section class="doc reveal" id="sec-02" aria-labelledby="h-02"><h2 id="h-02"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 4l6 2 5-2v14l-5 2-6-2-5 2V6zM9 4v14M15 6v14"/></svg></span>التوزيع الجغرافي للوقائع</h2><div class="h-rule"></div><p class="sec-lede">أين تركّزت الوقائع، وحصيلة <span class="ltr">IMO</span> حسب القطاعات.</p><div class="dg-grid">
 <article class="dg"><div class="dg-top"><span class="dg-idx">1</span><b class="dg-t">خليج عُمان ومضيق هرمز</b><span class="dg-badge">بلاغ رسمي</span></div><p class="dg-body">نشرة <span class="ltr">JMIC</span> رقم 016-26 بشأن تطبيق الحصار</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">المصدر</span><span class="dg-v"><span class="ltr">JMIC</span> · <span class="ltr">UKMTO</span></span></div></div></article>
 <article class="dg"><div class="dg-top"><span class="dg-idx">2</span><b class="dg-t">خليج عُمان ومضيق هرمز والخليج العربي</b><span class="dg-badge">بلاغ رسمي غير مفصّل</span></div><p class="dg-body">نشرة <span class="ltr">UKMTO</span> الاستشارية رقم 184-26 عن بلاغات نشاط مشبوه</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">المصدر</span><span class="dg-v"><span class="ltr">UKMTO</span></span></div></div></article>
 <article class="dg"><div class="dg-top"><span class="dg-idx">3</span><b class="dg-t">مضيق هرمز</b><span class="dg-badge">نقل مهني عن إشعار رسمي</span></div><p class="dg-body">نصيحة للعابرين بعدم البقاء في المنطقة دون حاجة</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">المصدر</span><span class="dg-v">gCaptain نقلًا عن إشعار أمريكي</span></div></div></article>
@@ -1308,6 +1313,8 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     var n = sec.querySelectorAll(':scope > ul > li, :scope > ol > li, :scope > .tbl-wrap tbody tr, :scope > table tbody tr').length;
     var first = sec.querySelector(':scope > p:not(.sec-lede), :scope > ul > li, :scope > ol > li, :scope > .tbl-wrap tbody tr, :scope > table tbody tr');
     var t = first ? flat(first) : '';
+    // ك-336: المعاينة عنوان توجيهي لا نسخة من نص القسم — تُقصّ عند 58 محرفًا بحدّ كلمة
+    if (t && t.length > 58) { t = t.slice(0, 57).replace(/\s+\S*$/, '') + '\u2026'; }
     if (!n && !t) return null;
     var el = d.createElement('div'); el.className = 'sc-peek no-print';
     if (n > 1) { var b = d.createElement('b'); b.textContent = n === 2 ? T.two : (n + T.many); el.appendChild(b); }
@@ -1353,7 +1360,20 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
       b.addEventListener('click', function () { items.forEach(function (it) { setState(it.sec, it.btn, p[1]); }); });
       all.appendChild(b);
     });
-    bar.appendChild(nav); bar.appendChild(all);
+    var hint = d.createElement('span'); hint.className = 'sc-jump-hint';
+    hint.setAttribute('aria-hidden', 'true'); hint.textContent = '◂ ▸';
+    function syncHint(){
+      var over = nav.scrollWidth > nav.clientWidth + 4;
+      bar.classList.toggle('is-scroll', over);
+      if (!over) return;
+      var atEnd = nav.scrollLeft + nav.clientWidth >= nav.scrollWidth - 4;
+      var atStart = nav.scrollLeft <= 4;
+      hint.textContent = atStart ? '◂ ▸' : (atEnd ? '◂' : '◂ ▸');
+    }
+    nav.addEventListener('scroll', syncHint, {passive:true});
+    window.addEventListener('resize', syncHint);
+    bar.appendChild(nav); bar.appendChild(hint); bar.appendChild(all);
+    setTimeout(syncHint, 60);
     main.parentNode.insertBefore(bar, main);
   }
   // روابط «كاملة» في أهم الأخبار المتعلقة بالأمن البحري — القاعدة: لا يُحذف أي عنصر (منع إفراغ الصف)

@@ -63,6 +63,9 @@ EXTRA_CSS = """
     overflow-wrap:anywhere;word-break:break-word;min-width:0}
   table.cardified td::before{content:attr(data-label);color:var(--muted);font-size:12.5px;font-weight:600}
   table.cardified td:empty{display:none}
+  /* ك-336: النص الإنجليزي الطويل (شرائح الحالة والتسميات) كان يتجاوز عرض بطاقة الجوال 16–31% */
+  table.cardified td > *,table.cardified .st-badge{white-space:normal;overflow-wrap:anywhere;
+    word-break:break-word;min-width:0;max-width:100%}
   .tbl-wrap:has(table.cardified),.tbl-scroll:has(table.cardified){overflow:visible;border:0}
   .tbl-hint{display:none}
 }

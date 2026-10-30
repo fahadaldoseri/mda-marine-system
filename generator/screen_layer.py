@@ -308,6 +308,8 @@ body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,sys
   /* شريط الأقسام صفّ واحد قابل للتمرير بدل كتلة من الأزرار تدفع المحتوى */
   .sc-jump{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
   .sc-jump a{flex:0 0 auto;white-space:nowrap}
+  .sc-jump-hint{display:none;align-items:center;gap:2px;font-size:11.5px;color:var(--muted);padding:0 6px;flex:0 0 auto}
+  .sc-toolbar.is-scroll .sc-jump-hint{display:inline-flex}
   .sc-card{padding:18px 16px}
   .sc-threat{padding:16px}
   .sc-tv{font-size:28px}
@@ -375,6 +377,8 @@ SCREEN_JS = r"""
     var n = sec.querySelectorAll(':scope > ul > li, :scope > ol > li, :scope > .tbl-wrap tbody tr, :scope > table tbody tr').length;
     var first = sec.querySelector(':scope > p:not(.sec-lede), :scope > ul > li, :scope > ol > li, :scope > .tbl-wrap tbody tr, :scope > table tbody tr');
     var t = first ? flat(first) : '';
+    // ك-336: المعاينة عنوان توجيهي لا نسخة من نص القسم — تُقصّ عند 58 محرفًا بحدّ كلمة
+    if (t && t.length > 58) { t = t.slice(0, 57).replace(/\s+\S*$/, '') + '\u2026'; }
     if (!n && !t) return null;
     var el = d.createElement('div'); el.className = 'sc-peek no-print';
     if (n > 1) { var b = d.createElement('b'); b.textContent = n === 2 ? T.two : (n + T.many); el.appendChild(b); }
@@ -420,7 +424,20 @@ SCREEN_JS = r"""
       b.addEventListener('click', function () { items.forEach(function (it) { setState(it.sec, it.btn, p[1]); }); });
       all.appendChild(b);
     });
-    bar.appendChild(nav); bar.appendChild(all);
+    var hint = d.createElement('span'); hint.className = 'sc-jump-hint';
+    hint.setAttribute('aria-hidden', 'true'); hint.textContent = '◂ ▸';
+    function syncHint(){
+      var over = nav.scrollWidth > nav.clientWidth + 4;
+      bar.classList.toggle('is-scroll', over);
+      if (!over) return;
+      var atEnd = nav.scrollLeft + nav.clientWidth >= nav.scrollWidth - 4;
+      var atStart = nav.scrollLeft <= 4;
+      hint.textContent = atStart ? '◂ ▸' : (atEnd ? '◂' : '◂ ▸');
+    }
+    nav.addEventListener('scroll', syncHint, {passive:true});
+    window.addEventListener('resize', syncHint);
+    bar.appendChild(nav); bar.appendChild(hint); bar.appendChild(all);
+    setTimeout(syncHint, 60);
     main.parentNode.insertBefore(bar, main);
   }
   // روابط «كاملة» في أهم الأخبار المتعلقة بالأمن البحري — القاعدة: لا يُحذف أي عنصر (منع إفراغ الصف)

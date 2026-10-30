@@ -1692,8 +1692,6 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
     <div class="topbar-spacer"></div>
     <div class="tb-meta">
       {f'<span class="chip">{esc(date_label)}</span>' if date_label else ''}
-      <button class="btn" id="btn-theme" type="button">النمط النهاري</button>
-      <button class="btn btn-primary" id="btn-print" type="button">طباعة / PDF</button>
     </div>
   </div>
 </div>

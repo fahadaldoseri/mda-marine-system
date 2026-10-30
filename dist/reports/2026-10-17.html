@@ -854,6 +854,8 @@ body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,sys
   /* شريط الأقسام صفّ واحد قابل للتمرير بدل كتلة من الأزرار تدفع المحتوى */
   .sc-jump{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
   .sc-jump a{flex:0 0 auto;white-space:nowrap}
+  .sc-jump-hint{display:none;align-items:center;gap:2px;font-size:11.5px;color:var(--muted);padding:0 6px;flex:0 0 auto}
+  .sc-toolbar.is-scroll .sc-jump-hint{display:inline-flex}
   .sc-card{padding:18px 16px}
   .sc-threat{padding:16px}
   .sc-tv{font-size:28px}
@@ -963,7 +965,9 @@ body.daylight .brand-title,body.daylight .brand-sub{color:#0d1a2b}
   .topbar a, .topbar button, .topbar .btn, .sn-brand, .sn-links a,
   .sc-toggle, .sc-jump a, .chip, .chip a, .tb-meta .btn,
   .sn-tools button, .sn-tools a, .sn-scale button, .sc-more a,
-  .sc-all button, details.sc-basis summary, .sf-inner a{
+  .sc-all button, details.sc-basis summary, .sf-inner a,
+  .sx-card a, .sx-name a, .sx-links a, .sx-row a, .sx-src a,
+  .sx-ref a, .sx-refs a, .src-ref a, .open-report a, a.btn-link, .sup-banner a{
     min-height:44px; min-width:44px; display:inline-flex; align-items:center;
     justify-content:center; box-sizing:border-box;
   }
@@ -1055,6 +1059,9 @@ body.daylight .lg-num{color:#ffffff}
     overflow-wrap:anywhere;word-break:break-word;min-width:0}
   table.cardified td::before{content:attr(data-label);color:var(--muted);font-size:12.5px;font-weight:600}
   table.cardified td:empty{display:none}
+  /* ك-336: النص الإنجليزي الطويل (شرائح الحالة والتسميات) كان يتجاوز عرض بطاقة الجوال 16–31% */
+  table.cardified td > *,table.cardified .st-badge{white-space:normal;overflow-wrap:anywhere;
+    word-break:break-word;min-width:0;max-width:100%}
   .tbl-wrap:has(table.cardified),.tbl-scroll:has(table.cardified){overflow:visible;border:0}
   .tbl-hint{display:none}
 }
@@ -1122,8 +1129,6 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     <div class="topbar-spacer"></div>
     <div class="tb-meta">
       <span class="chip">17 أكتوبر 2026</span>
-      <button class="btn" id="btn-theme" type="button">النمط النهاري</button>
-      <button class="btn btn-primary" id="btn-print" type="button">طباعة / <span class="ltr">PDF</span></button>
     </div>
   </div>
 </div>
@@ -1364,6 +1369,8 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     var n = sec.querySelectorAll(':scope > ul > li, :scope > ol > li, :scope > .tbl-wrap tbody tr, :scope > table tbody tr').length;
     var first = sec.querySelector(':scope > p:not(.sec-lede), :scope > ul > li, :scope > ol > li, :scope > .tbl-wrap tbody tr, :scope > table tbody tr');
     var t = first ? flat(first) : '';
+    // ك-336: المعاينة عنوان توجيهي لا نسخة من نص القسم — تُقصّ عند 58 محرفًا بحدّ كلمة
+    if (t && t.length > 58) { t = t.slice(0, 57).replace(/\s+\S*$/, '') + '\u2026'; }
     if (!n && !t) return null;
     var el = d.createElement('div'); el.className = 'sc-peek no-print';
     if (n > 1) { var b = d.createElement('b'); b.textContent = n === 2 ? T.two : (n + T.many); el.appendChild(b); }
@@ -1409,7 +1416,20 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
       b.addEventListener('click', function () { items.forEach(function (it) { setState(it.sec, it.btn, p[1]); }); });
       all.appendChild(b);
     });
-    bar.appendChild(nav); bar.appendChild(all);
+    var hint = d.createElement('span'); hint.className = 'sc-jump-hint';
+    hint.setAttribute('aria-hidden', 'true'); hint.textContent = '◂ ▸';
+    function syncHint(){
+      var over = nav.scrollWidth > nav.clientWidth + 4;
+      bar.classList.toggle('is-scroll', over);
+      if (!over) return;
+      var atEnd = nav.scrollLeft + nav.clientWidth >= nav.scrollWidth - 4;
+      var atStart = nav.scrollLeft <= 4;
+      hint.textContent = atStart ? '◂ ▸' : (atEnd ? '◂' : '◂ ▸');
+    }
+    nav.addEventListener('scroll', syncHint, {passive:true});
+    window.addEventListener('resize', syncHint);
+    bar.appendChild(nav); bar.appendChild(hint); bar.appendChild(all);
+    setTimeout(syncHint, 60);
     main.parentNode.insertBefore(bar, main);
   }
   // روابط «كاملة» في أهم الأخبار المتعلقة بالأمن البحري — القاعدة: لا يُحذف أي عنصر (منع إفراغ الصف)
