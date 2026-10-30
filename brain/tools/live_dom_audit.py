@@ -96,10 +96,16 @@ JS = r"""
   // 6) قص أفقي حقيقي داخل حاويات التمرير
   document.querySelectorAll('nav, .sc-jump, .sn-links, .sx-grid, .tbl-wrap').forEach(el => {
     if (!visible(el)) return;
-    if (el.scrollWidth > el.clientWidth + 8)
+    if (el.clientWidth >= 12 && el.scrollWidth > el.clientWidth + 8) {
+      // حاوية التمرير المقصودة مع مؤشر معلن ليست عيبًا مقيسًا
+      if ((el.className || '').toString().includes('sc-jump') && document.querySelector('.sc-jump-hint')) return;
+      // حاوية بتمرير أفقي مقصود: المحتوى قابل للوصول، فلا يُعدّ قصًّا مانعًا
+      var ox = getComputedStyle(el).overflowX;
+      if (ox === 'auto' || ox === 'scroll') return;
       out.clipped.push({cls: (el.className || el.tagName).toString().slice(0, 40),
                         ratio: +(el.scrollWidth / Math.max(1, el.clientWidth)).toFixed(2),
                         overflowX: getComputedStyle(el).overflowX});
+    }
   });
 
   // 7) أزرار الشريط

@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة 8a4e2ba9df3b749b). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة be7d29011c6fe588). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -76,7 +76,7 @@
 | G038 | كتابة العلامة بعد البوابة | script |  | logs/pipeline-{date}.json | cmd:bash -lc test -s logs/runbook/{date}/G038.log؛ file_exists:logs/pipeline-{date}.json؛ cmd:bash -lc grep -q 'العلامة (final)' logs/runbook/{date}/G038.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/write_mark.py | stop |
 | G039 | مخطط العلامة الثابت | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G039.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_mark_schema.py | stop |
 | D010 | نشر الموقع (بعد كل البوابات) | script |  |  | cmd:python3 -c import json,sys;d=json.load(open('logs/publish-{date}.json'));sys.exit(0 if d.get('status')=='ok' else 1) | س2 — الإغلاق والدفع | tools/publish_changes.sh، tools/publish_site.sh، validators/check_en_parity.py | stop |
-| D020 | التحقق الحي من النشر (قراءة فقط) | script |  |  | cmd:python3 -c import json,sys;d=json.load(open('logs/live-{date}.json'));sys.exit(0 if d.get('status')=='ok' else 1) | س2 — الإغلاق والدفع | tools/check_live.sh، tools/live_visual_audit.py | stop |
+| D020 | التحقق الحي من النشر (قراءة فقط) | script |  |  | cmd:python3 -c import json,sys;d=json.load(open('logs/live-{date}.json'));sys.exit(0 if d.get('status')=='ok' else 1) | س2 — الإغلاق والدفع | tools/check_live.sh، tools/live_visual_audit.py، tools/live_dom_audit.py | stop |
 | D030 | إرسال الملخص وPDF على تلغرام (اختيارية) | script |  |  | cmd:python3 -c import json,sys;d=json.load(open('logs/publish-{date}-telegram.json'));sys.exit(0 if d.get('status')=='ok' else 1) | س4 — قناة التسليم | tools/publish_site.sh، tools/make_tg_digest.py، tools/telegram_send.py، tools/telegram_bot.py، secrets/secrets.env.example، secrets/README.md | continue |
 | D032 | أرشفة نص ملخص تلغرام المرسل | script |  |  | cmd:bash -lc test -d logs/telegram-archive | س4 — قناة التسليم | tools/archive_tg_digest.py، tools/telegram_send.py | continue |
 | D033 | تنبيه وصول التقرير على تلغرام | script |  |  | file_exists:logs/telegram-delivery-{date}.json | س4 — قناة التسليم | validators/check_telegram_delivery.py | continue |
