@@ -277,7 +277,7 @@ def build_index(dist: Path, reports, notfound: bool = False):
         ]
         hero_card = f"""<article class="hero-card">
       <div class="hc-top"><span class="hc-tag">آخر إصدار</span>
-        <span class="hc-risk rk-{esc(latest['risk_kind'])}">مستوى التهديد: {esc(latest['risk'])}</span>
+        <span class="hc-risk rk-{esc(latest.get('risk_kind') or 'med')}">مستوى التهديد: {esc(latest['risk'])}</span>
         {f'<span class="hc-code">رقم الإصدار <b>{esc(latest["version"])}</b></span>' if latest.get('version') else ''}</div>
       <h2>{esc(latest['label'])}</h2>
       <p class="hc-meta">{' · '.join(b for b in meta_bits if b)}</p>

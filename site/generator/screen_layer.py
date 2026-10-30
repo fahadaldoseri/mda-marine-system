@@ -13,6 +13,7 @@
 """
 
 import re
+import threat_card as TC
 
 import blocks as BLK
 import codes
@@ -98,13 +99,18 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
     threat = meta.get("threat_level") or ""
     dc = meta.get("decision_card") if isinstance(meta.get("decision_card"), dict) else {}
     if threat:
-        basis = ""
-        if dc.get("basis"):
-            basis = (f'<details class="sc-basis"><summary>أساس التقدير</summary>'
-                     f'<p>{esc(dc["basis"])}</p></details>')
-        side.append(
-            f'<div class="sc-threat {esc(threat_cls)}"><div class="sc-tl">مستوى التهديد</div>'
-            f'<div class="sc-tv">{esc(threat)}</div>{basis}</div>')
+        _zj = TC.load_zones_site(report_date) if report_date else None
+        if _zj:
+            # بطاقة القطاعات الأربعة بدل البطاقة المفردة (قرار المالك 2026-10-30)
+            side.append(TC.zones_card(_zj, variant="screen"))
+        else:
+            basis = ""
+            if dc.get("basis"):
+                basis = (f'<details class="sc-basis" open><summary>أساس التقدير</summary>'
+                         f'<p>{esc(dc["basis"])}</p></details>')
+            side.append(
+                f'<div class="sc-threat {esc(threat_cls)}"><div class="sc-tl">مستوى التهديد</div>'
+                f'<div class="sc-tv">{esc(threat)}</div>{basis}</div>')
     kp = []
     for k in meta.get("hero_kpis") or []:
         acc = k.get("accent", "ok")

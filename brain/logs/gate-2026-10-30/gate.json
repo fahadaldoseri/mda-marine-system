@@ -195,8 +195,8 @@
   {
    "step": "قاعدة النقاط في المصدر",
    "id": "G031",
-   "status": "ok",
-   "exit_code": 0,
+   "status": "warn",
+   "exit_code": 1,
    "log": "logs/runbook/2026-10-30/G031.log"
   },
   {
@@ -209,8 +209,8 @@
   {
    "step": "اكتمال التشغيل (الأعطال المعروفة)",
    "id": "G033",
-   "status": "ok",
-   "exit_code": 0,
+   "status": "warn",
+   "exit_code": 1,
    "log": "logs/runbook/2026-10-30/G033.log"
   },
   {
@@ -302,5 +302,5 @@
  "source": "runbook-ledger",
  "dir": "logs/gate-2026-10-30",
  "log_dir": "logs/gate-2026-10-30",
- "finished_utc": "2026-10-30T05:06:53Z"
+ "finished_utc": "2026-10-30T11:39:39Z"
 }

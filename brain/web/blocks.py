@@ -1,1 +1,1 @@
-/home/ubuntu/seawatch/generator/blocks.py
+../../site/generator/blocks.py

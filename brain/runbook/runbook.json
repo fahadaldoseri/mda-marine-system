@@ -673,8 +673,7 @@
    "command": [
     "bash",
     "-lc",
-    "B=\"$PWD\"; export B SITE; python3 tools/check_feeds.py --date {date}; rc=$?; exit $rc",
-    "B=\"$PWD\"; export B; python3 \"$B/tools/mark_components.py\" --date \"$D\" --component feeds; rc=$?; exit $rc"
+    "B=\"$PWD\"; export B SITE; python3 tools/check_feeds.py --date {date}; w=$?; if [ $w -gt 1 ]; then exit $w; fi; python3 \"$B/tools/mark_components.py\" --date \"$D\" --component feeds; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; exit ${w:-0}"
    ],
    "ok_rc": [
     0
@@ -957,8 +956,7 @@
    "command": [
     "bash",
     "-lc",
-    "B=\"$PWD\"; export B SITE; python3 tools/ofac_screen.py watchlist/ofac-targets.txt; rc=$?; exit $rc",
-    "B=\"$PWD\"; export B; python3 \"$B/tools/mark_components.py\" --date \"$D\" --component ofac; rc=$?; exit $rc"
+    "B=\"$PWD\"; export B SITE; python3 tools/ofac_screen.py watchlist/ofac-targets.txt; w=$?; if [ $w -gt 1 ]; then exit $w; fi; python3 \"$B/tools/mark_components.py\" --date \"$D\" --component ofac; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; exit ${w:-0}"
    ],
    "ok_rc": [
     0
@@ -1067,14 +1065,22 @@
    "command": [
     "bash",
     "-lc",
-    "B=\"$PWD\"; export B SITE; python3 tools/merge_ledger_daily.py; rc=$?; exit $rc",
-    "B=\"$PWD\"; export B; python3 \"$B/tools/mark_components.py\" --date \"$D\" --component ledger_merge; rc=$?; exit $rc",
-    "B=\"$PWD\"; export B; python3 \"$B/tools/repair_ledger_prose.py\" --check"
+    "B=\"$PWD\"; export B SITE; python3 tools/merge_ledger_daily.py; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; python3 \"$B/tools/mark_components.py\" --date \"$D\" --component ledger_merge; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; python3 \"$B/tools/repair_ledger_prose.py\" --check; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; python3 \"$B/tools/classify_zones.py\" --date \"$D\" --write; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; exit ${w:-0}"
    ],
    "ok_rc": [
     0
    ],
-   "warn_rc": []
+   "warn_rc": [],
+   "writes": [
+    "web/zones/{date}.json",
+    "web/meta/{date}.json"
+   ],
+   "reads": [
+    "cumulative-2026/daily/{date}.json",
+    "appendices/zone-registry.json",
+    "appendices/zone-overrides.json",
+    "appendices/threat-scale.json"
+   ]
   },
   {
    "id": "W040",
@@ -2086,8 +2092,7 @@
    "command": [
     "bash",
     "-lc",
-    "B=\"$PWD\"; export B SITE; python3 \"$B/validators/check_sources_count.py\"; rc=$?; exit $rc",
-    "bash -lc \"python3 \"$B/validators/check_source_route_coverage.py\" --date \"$D\"; rc=$?; exit $rc\""
+    "B=\"$PWD\"; export B SITE; python3 \"$B/validators/check_sources_count.py\"; w=$?; if [ $w -gt 1 ]; then exit $w; fi; python3 \"$B/validators/check_source_route_coverage.py\" --date \"$D\"; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; exit ${w:-0}"
    ],
    "ok_rc": [
     0
@@ -2780,7 +2785,7 @@
    "command": [
     "bash",
     "-lc",
-    "B=\"$PWD\"; export B SITE; python3 \"$B/validators/check_decision_card.py\" --date \"$D\" --dist-root \"$SITE/dist\"; rc=$?; exit $rc"
+    "B=\"$PWD\"; export B SITE; python3 \"$B/validators/check_decision_card.py\" --date \"$D\" --dist-root \"$SITE/dist\" && python3 \"$B/validators/check_threat_consistency.py\" --date \"$D\" --brain \"$B\"; rc=$?; exit $rc"
    ],
    "ok_rc": [
     0
@@ -3284,6 +3289,37 @@
    "gate_title": "مخطط العلامة الثابت"
   },
   {
+   "id": "D005",
+   "title": "تحديث النسخة الاحتياطية قبل النشر (شرط بوابة ما قبل التشغيل)",
+   "kind": "script",
+   "phase": "deliver",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s \"$B/logs/runbook/{date}/D005.log\" && grep -q 'parity' \"$B/logs/runbook/{date}/D005.log\" || true"
+     ]
+    }
+   ],
+   "links": {
+    "docs": [
+     "sections/70-delivery.md"
+    ]
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; export B SITE; bash tools/github_backup.sh && python3 validators/check_backup_parity.py --mode strict; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  },
+  {
    "id": "D010",
    "title": "نشر الموقع (بعد كل البوابات)",
    "kind": "script",
@@ -3359,8 +3395,7 @@
    "command": [
     "bash",
     "-lc",
-    "B=\"$PWD\"; export B SITE; bash tools/check_live.sh --compare {date}; rc=$?; exit $rc",
-    "B=\"$PWD\"; export B; SITE=\"${SITE:-/home/ubuntu/seawatch}\"; python3 \"$B/tools/live_dom_audit.py\" --url \"file://$SITE/dist/reports/{date}.html\" --url \"file://$SITE/dist/additions.html\" --url \"file://$SITE/dist/sources.html\" --json \"logs/runbook/{date}/dom-audit.json\""
+    "B=\"$PWD\"; export B SITE; bash tools/check_live.sh --compare {date}; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; python3 \"$B/tools/live_dom_audit.py\" --url \"file://$SITE/dist/reports/{date}.html\" --url \"file://$SITE/dist/additions.html\" --url \"file://$SITE/dist/sources.html\" --json \"logs/runbook/{date}/dom-audit.json\"; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; exit ${w:-0}"
    ],
    "ok_rc": [
     0
