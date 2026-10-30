@@ -1173,7 +1173,10 @@
       "reads": [
         "evidence/merkle/ledger.jsonl",
         "tools/append_only_ledger.py",
-        "tools/check_governing_assets.py"
+        "tools/check_governing_assets.py",
+        "tools/restore_skills.sh",
+        "validators/check_skills_integrity.py",
+        "tools/causality_window.sh"
       ],
       "writes": [],
       "assert": [
@@ -1196,8 +1199,40 @@
           "tools/check_governing_assets.py",
           "tools/governing_assets_merkle.py",
           "tools/governing-assets.txt",
+          "tools/restore_skills.sh",
+          "validators/check_skills_integrity.py",
+          "tools/causality_window.sh",
           "notes/PROJECT-DELTA-governing-chain.md",
-          "evidence/merkle/snapshot.json"
+          "evidence/merkle/snapshot.json",
+          "evidence/causality/20261030T193652Z-survey.log",
+          "evidence/causality/20261030T193703Z-fatrace-install.log",
+          "evidence/causality/20261030T193725Z-fatrace-contract.log",
+          "evidence/causality/20261030T193739Z-versions-mirror.log",
+          "evidence/causality/20261030T193755Z-backup.log",
+          "evidence/causality/20261030T193849Z-backup-verify.log",
+          "evidence/causality/20261030T193920Z-auditd-install.log",
+          "evidence/causality/20261030T193937Z-auditd-setup.log",
+          "evidence/causality/20261030T194016Z-monitor-start.log",
+          "evidence/causality/20261030T194033Z-window-status.log",
+          "evidence/causality/20261030T1940Z-auditd-monitor-runtime.log",
+          "evidence/causality/20261030T1940Z-auditd-monitor.py",
+          "evidence/causality/20261030T1940Z-auditd-window-ausearch.log",
+          "evidence/causality/20261030T1940Z-culprit.md",
+          "evidence/causality/20261030T1940Z-monitor.stdout.log",
+          "evidence/causality/20261030T194100Z-window-processes.log",
+          "evidence/causality/20261030T194139Z-baseline-hashes-lines.log",
+          "evidence/causality/20261030T194152Z-auditd-identity.log",
+          "evidence/causality/20261030T195504Z-live-audit-analysis.log",
+          "evidence/causality/20261030T195517Z-ausearch-time-bound.log",
+          "evidence/causality/20261030T202708Z-causality-window.log",
+          "evidence/causality/20261030T202708Z-samples.tsv",
+          "evidence/causality/20261030T202744Z-controlled-trigger.md",
+          "evidence/causality/20261030T2043Z-auditd-tool-validation.log",
+          "evidence/causality/20261030T2044Z-controlled-trigger-2.log",
+          "evidence/causality/20261030T2044Z-restore-integrity-before.log",
+          "evidence/causality/20261030T2045Z-restore-integrity-after.log",
+          "evidence/causality/20261030T2045Z-verify-before.txt",
+          "evidence/causality/CAUSALITY-FINAL.md"
         ],
         "gates": [
           "tools/check_governing_assets.py"
@@ -1208,7 +1243,7 @@
       "command": [
         "bash",
         "-lc",
-        "bash tools/restore_skills.sh && python3 tools/append_only_ledger.py --verify && python3 tools/check_governing_assets.py --json; rc=$?; exit \"$rc\""
+        "python3 validators/check_skills_integrity.py && bash tools/restore_skills.sh && python3 validators/check_skills_integrity.py && python3 tools/append_only_ledger.py --verify && python3 tools/check_governing_assets.py --json; rc=$?; exit \"$rc\""
       ],
       "ok_rc": [
         0
@@ -3492,6 +3527,9 @@
         }
       ],
       "links": {
+        "rules": [
+          "س2 — الإغلاق والدفع"
+        ],
         "docs": [
           "sections/70-delivery.md"
         ]

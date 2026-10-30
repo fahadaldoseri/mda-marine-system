@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-30T19:06:05.606210+00:00",
+  "generated_at": "2026-10-30T21:58:04.511531+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -2795,6 +2795,27 @@
       "lesson_id": "ك-364",
       "barrier_id": "B-7ac4979c",
       "run_evidence": "لق: ملفان `.txt` في `evidence/hermetic` و`evidence/merkle` → `verify` خرج 2 وسمّى الملفين؛ التنظيف →"
+    },
+    {
+      "fault_id": "ك-365",
+      "state": "مفتوح",
+      "lesson_id": "ك-365",
+      "barrier_id": "B-7923bcce",
+      "run_evidence": "اج سببي إلا بحدث auditd يحوي PID وcomm وexe وPPID؛ تجربة skills_write خرج 0، وskills_meta أعادت no m"
+    },
+    {
+      "fault_id": "ك-366",
+      "state": "مفتوح",
+      "lesson_id": "ك-366",
+      "barrier_id": "B-81189558",
+      "run_evidence": "ادعاء: restore_skills.sh ثم check_skills_integrity قبل/بعد؛ الاستعادة خرج 0، الفحص خرج 0، وتجربة ini"
+    },
+    {
+      "fault_id": "ك-367",
+      "state": "مفتوح",
+      "lesson_id": "ك-367",
+      "barrier_id": "B-5cb076c7",
+      "run_evidence": "ools/causality_window.sh صراحة إلى G000A، وأضيفت قاعدة D005؛ handbook خرج 0 وverify خرج 0 وtest_mani"
     }
   ]
 }
