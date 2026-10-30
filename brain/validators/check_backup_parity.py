@@ -22,6 +22,13 @@ BSKIP_DIRS = {"__pycache__", ".git", "shots", "node_modules", ".pytest_cache", "
 SSKIP_DIRS = {"__pycache__", ".git", "brain-backup", "dist", "shots", "node_modules", ".pytest_cache"}
 BSKIP_FILES = {"state/webhook-secret.txt", ".env", ".env.local"}
 SSKIP_FILES = {".env", ".env.local", ".env.production"}
+# روابط رمزية إلى شجرة الموقع: تُقارن عبر مقارنة الموقع نفسها (site) لا عبر نسخة المرآة،
+# فمحتواها يعتمد على موضع الرابط لا على نسخة قديمة (ك-331).
+SYMLINK_VIEWS = ("brain/web/blocks.py", "brain/web/build_report.py", "brain/web/map_gulf.py",
+                 "brain/web/monthly_dashboard.py", "brain/web/verify.py")
+# ملفات مولَّدة على الخادم باسم مخفي فلا تلتقطها مسحة الملفات المخفيّة، وتُعدّ زائدة في المستودع.
+REPO_EXTRA_ALLOW = ("skills/.skill_versions.json",)
+
 SANITIZED = {"brain/appendices/telegram-chat.json", "brain/appendices/telegram-subscriptions.json",
              "brain/appendices/telegram-targets.json",
              "brain/research/styles/sources/archive-reports.html"}
@@ -257,11 +264,15 @@ def main() -> int:
                 continue                     # مُحجب عمدًا (تنقية أسرار)
             if rel.startswith(VOLATILE):
                 continue                     # سجلّ ينمو بعد النسخ
+            if rel in SYMLINK_VIEWS:
+                continue                     # روابط إلى شجرة الموقع: أهدافها تختلف بموضع النسخة (ك-331)
             drift.append(f"محتوى مختلف: {rel}")
     for rel in sorted(repo):
         if rel not in local:
             if rel.startswith(ALLOW_REPO_ONLY) or any(x in rel for x in REPO_ONLY_PATTERNS):
                 continue                     # داخل المستودع بحكم السياسة (لقطات/مخرجات/أرشيف) ولا يُنسخ للخادم
+            if rel in REPO_EXTRA_ALLOW:
+                continue                     # ملف مخفي مولَّد على الخادم (ك-331)
             drift.append(f"زائد في المستودع: {rel}")
 
     print(f"  الشجرة المحلية: {len(local)} · المستودع: {len(repo)} · الروابط: "
@@ -269,7 +280,7 @@ def main() -> int:
     if not drift:
         print("  النتيجة: مطابق — المستودع يعكس الشجرة المحلية كاملة")
         return 0
-    for d in drift[:12]:
+    for d in drift[:200]:
         print(f"   ✘ {d}")
     if len(drift) > 12:
         print(f"   … و{len(drift) - 12} أخرى")
