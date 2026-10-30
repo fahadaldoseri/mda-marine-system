@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-30T13:15:56.463534+00:00",
+  "generated_at": "2026-10-30T14:29:00.336289+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -2753,6 +2753,13 @@
       "lesson_id": "ك-358",
       "barrier_id": "B-9a67e975",
       "run_evidence": "26-10-30: `python3 validators/check_backup_parity.py --mode strict` → خرج 0 · مطابق"
+    },
+    {
+      "fault_id": "ك-359",
+      "state": "مفتوح",
+      "lesson_id": "ك-359",
+      "barrier_id": "B-61d46ecf",
+      "run_evidence": null
     }
   ]
 }

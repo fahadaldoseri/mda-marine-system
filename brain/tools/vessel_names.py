@@ -116,6 +116,14 @@ def from_report(day: str) -> list[str]:
 
 if __name__ == '__main__':
     import sys
-    d = sys.argv[1] if len(sys.argv) > 1 else ''
+    args = sys.argv[1:]
+    if any(a in ('--help', '-h') for a in args):
+        print(__doc__)
+        raise SystemExit(0)
+    unknown = [a for a in args if a.startswith('-')]
+    if unknown or len(args) > 1:
+        print(f'وسيط غير معروف: {unknown[0]}' if unknown else 'الاستخدام: vessel_names.py [التاريخ]', file=sys.stderr)
+        raise SystemExit(2)
+    d = args[0] if args else ''
     for n in from_report(d):
         print(n)

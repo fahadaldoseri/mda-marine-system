@@ -32,11 +32,19 @@ def norm_set(xs):
 
 
 def main():
-    if len(sys.argv) != 3:
+    args = sys.argv[1:]
+    if any(a in ("--help", "-h") for a in args):
         print(__doc__)
         return 0
-    a = json.load(open(sys.argv[1], encoding="utf-8"))
-    b = json.load(open(sys.argv[2], encoding="utf-8"))
+    unknown = [a for a in args if a.startswith("-")]
+    if unknown:
+        print(f"وسيط غير معروف: {unknown[0]}", file=sys.stderr)
+        return 2
+    if len(args) != 2:
+        print(__doc__, file=sys.stderr)
+        return 2
+    a = json.load(open(args[0], encoding="utf-8"))
+    b = json.load(open(args[1], encoding="utf-8"))
     major, minor = [], []
     for k in STRICT:
         va, vb = (a.get(k) or "").__str__().upper(), (b.get(k) or "").__str__().upper()

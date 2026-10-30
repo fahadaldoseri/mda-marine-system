@@ -90,10 +90,22 @@ def precheck(date=None):
 
 
 if __name__ == '__main__':
-    args = [a for a in sys.argv[1:] if not a.startswith('--')]
-    if '--precheck' in sys.argv:
+    raw = sys.argv[1:]
+    if any(a in ('--help', '-h') for a in raw):
+        print(__doc__)
+        raise SystemExit(0)
+    flags = {'--check', '--precheck'}
+    unknown = [a for a in raw if a.startswith('-') and a not in flags]
+    if unknown:
+        print(f'وسيط غير معروف: {unknown[0]}', file=sys.stderr)
+        raise SystemExit(2)
+    args = [a for a in raw if a not in flags]
+    if len(args) > 1:
+        print('الاستخدام: next_version.py [--check|--precheck] [التاريخ]', file=sys.stderr)
+        raise SystemExit(2)
+    if '--precheck' in raw:
         sys.exit(precheck(args[0] if args else None))
-    if '--check' in sys.argv:
+    if '--check' in raw:
         sys.exit(check(args[0] if args else None))
     v, nn = next_version(args[0] if args else None)
     print(f'  رقم الإصدار التالي: «{v}»  (المتسلسل داخل الشهر: {nn})')

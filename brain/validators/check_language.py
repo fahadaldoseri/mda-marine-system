@@ -65,10 +65,18 @@ def analyze(text):
 
 
 def main():
-    if len(sys.argv) < 2:
-        print("الاستخدام: check_language.py <ملف التقرير>")
+    args = sys.argv[1:]
+    if any(a in ("--help", "-h") for a in args):
+        print(__doc__)
+        return 0
+    unknown = [a for a in args if a.startswith("-")]
+    if unknown:
+        print(f"وسيط غير معروف: {unknown[0]}", file=sys.stderr)
         return 2
-    p = Path(sys.argv[1])
+    if len(args) != 1:
+        print("الاستخدام: check_language.py <ملف التقرير>", file=sys.stderr)
+        return 2
+    p = Path(args[0])
     if not p.exists():
         print(f"الملف غير موجود: {p}")
         return 2

@@ -71,5 +71,21 @@ def walk(path):
     return "\n".join(out)
 
 
+def main():
+    args = sys.argv[1:]
+    if any(a in ('--help', '-h') for a in args):
+        print(__doc__)
+        return 0
+    unknown = [a for a in args if a.startswith('-')]
+    if unknown:
+        print(f'وسيط غير معروف: {unknown[0]}', file=sys.stderr)
+        return 2
+    if len(args) != 1:
+        print(__doc__, file=sys.stderr)
+        return 2
+    print(walk(args[0]))
+    return 0
+
+
 if __name__ == '__main__':
-    print(walk(sys.argv[1]))
+    sys.exit(main())
