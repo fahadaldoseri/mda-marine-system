@@ -69,8 +69,8 @@
   {
    "step": "فحص ما قبل التشغيل",
    "id": "G011",
-   "status": "warn",
-   "exit_code": 1,
+   "status": "ok",
+   "exit_code": 0,
    "log": "logs/runbook/2026-10-30/G011.log"
   },
   {
@@ -302,5 +302,5 @@
  "source": "runbook-ledger",
  "dir": "logs/gate-2026-10-30",
  "log_dir": "logs/gate-2026-10-30",
- "finished_utc": "2026-10-30T11:39:39Z"
+ "finished_utc": "2026-10-30T12:22:47Z"
 }
