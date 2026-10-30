@@ -1,0 +1,21 @@
+# مخلفات تشغيل
+__pycache__/
+*.pyc
+.DS_Store
+*.tmp
+.pytest_cache/
+
+# أسرار — لا تُرفع أبدًا
+state/webhook-secret.txt
+.env
+.env.*
+# قوالب البيئة تُرفع: بلا قيم سرية — والقيمة الحقيقية تُوضع في .env المحلي فقط
+!.env.example
+*.key
+*.pem
+secrets/
+
+# مخرجات مولّدة
+site/dist/
+site/shots/
+brain/shots/
