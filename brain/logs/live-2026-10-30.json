@@ -1,6 +1,6 @@
 {
  "date": "2026-10-30",
- "checked_at": "2026-10-30T12:52:35Z",
+ "checked_at": "2026-10-30T12:59:45Z",
  "paths": {
   "/": {
    "code": 200,
@@ -8,7 +8,7 @@
   },
   "/reports/2026-10-30.html": {
    "code": 200,
-   "bytes": 170527
+   "bytes": 170611
   },
   "/reports/pdf/2026-10-30.pdf": {
    "code": 200,
@@ -21,11 +21,16 @@
  },
  "pdf_sha256": {
   "local": "376899016478c78da19b397ee5d37a66054fb08e2695dcdec4d8c06dcb2a9af4",
-  "live": "6d29f7c025896c77cd8a5693232072b773cda537f0303887ba1f24f328b327a6",
-  "match": false
+  "live": "376899016478c78da19b397ee5d37a66054fb08e2695dcdec4d8c06dcb2a9af4",
+  "match": true,
+  "content": {
+   "pages_local": "12",
+   "pages_live": "12",
+   "text_local": "e8b66c20e6808af9788270b8",
+   "text_live": "e8b66c20e6808af9788270b8",
+   "match": true
+  }
  },
- "status": "failed",
- "bad": [
-  "pdf-differs-from-local"
- ]
+ "status": "ok",
+ "bad": []
 }
