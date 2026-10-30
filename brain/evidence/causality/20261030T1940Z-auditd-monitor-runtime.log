@@ -1,0 +1,11 @@
+start_utc=2026-10-30T19:40:16.496234+00:00
+duration_seconds=2700
+monitor_pid=1442441
+cwd=/home/ubuntu/brain-marine-news
+command=/home/ubuntu/brain-marine-news/evidence/causality/20261030T1940Z-auditd-monitor.py /home/ubuntu/brain-marine-news/evidence/causality 2700
+watch=/home/ubuntu/skills -p wa -k skills_write
+tool=auditd/auditctl/ausearch
+end_utc=2026-10-30T20:25:17.481439+00:00
+elapsed_seconds=2700.985
+events_with_skill_path=1
+final_ausearch_rc=0

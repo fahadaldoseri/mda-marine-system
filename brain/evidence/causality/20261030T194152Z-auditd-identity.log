@@ -1,0 +1,59 @@
+=== auditd_identity_utc=20261030T194152Z ===
+>>> systemctl status auditd
+● auditd.service - Security Auditing Service
+     Loaded: loaded (/usr/lib/systemd/system/auditd.service; enabled; preset: enabled)
+     Active: active (running) since Fri 2026-10-30 19:39:38 UTC; 2min 13s ago
+       Docs: man:auditd(8)
+             https://github.com/linux-audit/audit-documentation
+    Process: 1442351 ExecStart=/sbin/auditd (code=exited, status=0/SUCCESS)
+    Process: 1442356 ExecStartPost=/sbin/augenrules --load (code=exited, status=0/SUCCESS)
+   Main PID: 1442352 (auditd)
+      Tasks: 2 (limit: 4722)
+     Memory: 1.6M (peak: 3.0M)
+        CPU: 37ms
+     CGroup: /system.slice/auditd.service
+             └─1442352 /sbin/auditd
+
+Oct 30 19:39:38 eea78c9bbcb6 augenrules[1442366]: enabled 1
+Oct 30 19:39:38 eea78c9bbcb6 augenrules[1442366]: failure 1
+Oct 30 19:39:38 eea78c9bbcb6 augenrules[1442366]: pid 1442352
+Oct 30 19:39:38 eea78c9bbcb6 augenrules[1442366]: rate_limit 0
+Oct 30 19:39:38 eea78c9bbcb6 augenrules[1442366]: backlog_limit 8192
+Oct 30 19:39:38 eea78c9bbcb6 augenrules[1442366]: lost 0
+Oct 30 19:39:38 eea78c9bbcb6 augenrules[1442366]: backlog 0
+Oct 30 19:39:38 eea78c9bbcb6 augenrules[1442366]: backlog_wait_time 60000
+Oct 30 19:39:38 eea78c9bbcb6 augenrules[1442366]: backlog_wait_time_actual 0
+Oct 30 19:39:38 eea78c9bbcb6 systemd[1]: Started auditd.service - Security Auditing Service.
+[status_exit=0]
+>>> systemctl show auditd
+MainPID=1442352
+ExecStart={ path=/sbin/auditd ; argv[]=/sbin/auditd ; ignore_errors=no ; start_time=[Fri 2026-10-30 19:39:38 UTC] ; stop_time=[Fri 2026-10-30 19:39:38 UTC] ; pid=1442351 ; code=exited ; status=0 }
+ControlGroup=/system.slice/auditd.service
+Id=auditd.service
+ActiveState=active
+SubState=running
+FragmentPath=/usr/lib/systemd/system/auditd.service
+[show_exit=0]
+MAINPID=1442352
+exe=
+cwd=
+cmdline:
+/sbin/auditd 
+cgroup:
+0::/system.slice/auditd.service
+ps chain:
+    PID    PPID CMD
+1442352       1 /sbin/auditd
+    PID    PPID CMD
+      1       0 /sbin/init nomodules
+>>> auditctl status
+enabled 1
+failure 1
+pid 1442352
+rate_limit 0
+backlog_limit 8192
+lost 0
+backlog 0
+backlog_wait_time 60000
+backlog_wait_time_actual 0
+loginuid_immutable 0 unlocked
