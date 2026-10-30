@@ -41,7 +41,7 @@ def main() -> int:
     try:
         tracked = subprocess.run(["git", "-C", str(repo), "ls-files"],
                                  capture_output=True, text=True, check=True).stdout.split()
-    except Exception as exc:  # pragma: no cover
+    except (subprocess.CalledProcessError, OSError) as exc:  # فشل مغلق: تعذّر السرد يمنع
         print(f"✗ تعذّر سرد الملفات: {exc}")
         return 2
     bad: list[tuple[str, str]] = []
@@ -56,8 +56,9 @@ def main() -> int:
             continue
         try:
             txt = p.read_text(encoding="utf-8", errors="ignore")
-        except Exception:
-            continue
+        except OSError as exc:  # فشل مغلق: تعذّر قراءة ملف متتبَّع يمنع الفحص ولا يُتجاوَز صامتًا
+            print(f"✗ تعذّر قراءة ملف متتبَّع: {rel} — {exc}")
+            return 2
         guarded = any(rel.endswith(g.split("/", 1)[1]) for g in GUARDED)
         for label, rx in PATTERNS:
             if not rx.search(txt):
@@ -77,4 +78,7 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    # ك-133: كل مدقق يمرّ عبر الحارس الموحّد — الانهيار يخرج بالرمز 70 ويمنع التسليم
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)

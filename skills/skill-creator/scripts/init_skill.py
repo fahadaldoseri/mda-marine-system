@@ -3,22 +3,27 @@
 Skill Initializer - Creates a new skill from template
 
 Usage:
-    init_skill.py <skill-name>
+    init_skill.py <skill-name> [--output-dir DIRECTORY]
 
 Examples:
     init_skill.py my-new-skill
-    init_skill.py my-api-helper
+    init_skill.py my-api-helper --output-dir "/absolute/path/to/skills"
 
-Skills are created at /home/ubuntu/skills/<skill-name>/
+Without --output-dir, skills are created under /home/ubuntu/skills/ on cloud
+runtimes, or under the Manus user skill directory beside the installed
+skill-creator (normally ~/.manus/user-skills) on Work Locally.
 """
 
+import argparse
 import sys
 from pathlib import Path
+
+from quick_validate import default_skills_root, skill_name_error
 
 
 SKILL_TEMPLATE = """---
 name: {skill_name}
-description: [TODO: Complete and informative explanation of what the skill does and when to use it. Include WHEN to use this skill - specific scenarios, file types, or tasks that trigger it.]
+description: "[TODO: Complete and informative explanation of what the skill does and when to use it. Include WHEN to use this skill - specific scenarios, file types, or tasks that trigger it.]"
 ---
 
 # {skill_title}
@@ -192,33 +197,47 @@ def title_case_skill_name(skill_name):
     return ' '.join(word.capitalize() for word in skill_name.split('-'))
 
 
-SKILLS_BASE_PATH = "/home/ubuntu/skills"
+def resolve_output_dir(output_dir):
+    """Return the parent directory for a new skill, or None when no default root exists."""
+    if output_dir is not None:
+        return Path(output_dir).expanduser()
+    return default_skills_root()
 
 
-def init_skill(skill_name):
+def init_skill(skill_name, output_dir=None):
     """
     Initialize a new skill directory with template SKILL.md.
 
     Args:
         skill_name: Name of the skill
+        output_dir: Parent directory for the new skill. Defaults to the runtime skill root.
 
     Returns:
         Path to created skill directory, or None if error
     """
+    name_error = skill_name_error(skill_name)
+    if name_error:
+        print(f"Error: {name_error}")
+        return None
+
     # Determine skill directory path
-    skill_dir = Path(SKILLS_BASE_PATH) / skill_name
+    base_dir = resolve_output_dir(output_dir)
+    if base_dir is None:
+        print("Error: No default skill directory exists here. Pass --output-dir with an absolute skill root.")
+        return None
+    skill_dir = base_dir / skill_name
 
     # Check if directory already exists
     if skill_dir.exists():
-        print(f"❌ Error: Skill directory already exists: {skill_dir}")
+        print(f"Error: Skill directory already exists: {skill_dir}")
         return None
 
     # Create skill directory
     try:
         skill_dir.mkdir(parents=True, exist_ok=False)
-        print(f"✅ Created skill directory: {skill_dir}")
+        print(f"Created skill directory: {skill_dir}")
     except Exception as e:
-        print(f"❌ Error creating directory: {e}")
+        print(f"Error creating directory: {e}")
         return None
 
     # Create SKILL.md from template
@@ -230,10 +249,10 @@ def init_skill(skill_name):
 
     skill_md_path = skill_dir / 'SKILL.md'
     try:
-        skill_md_path.write_text(skill_content)
-        print("✅ Created SKILL.md")
+        skill_md_path.write_text(skill_content, encoding='utf-8')
+        print("Created SKILL.md")
     except Exception as e:
-        print(f"❌ Error creating SKILL.md: {e}")
+        print(f"Error creating SKILL.md: {e}")
         return None
 
     # Create resource directories with example files
@@ -242,29 +261,29 @@ def init_skill(skill_name):
         scripts_dir = skill_dir / 'scripts'
         scripts_dir.mkdir(exist_ok=True)
         example_script = scripts_dir / 'example.py'
-        example_script.write_text(EXAMPLE_SCRIPT.format(skill_name=skill_name))
+        example_script.write_text(EXAMPLE_SCRIPT.format(skill_name=skill_name), encoding='utf-8')
         example_script.chmod(0o755)
-        print("✅ Created scripts/example.py")
+        print("Created scripts/example.py")
 
         # Create references/ directory with example reference doc
         references_dir = skill_dir / 'references'
         references_dir.mkdir(exist_ok=True)
         example_reference = references_dir / 'api_reference.md'
-        example_reference.write_text(EXAMPLE_REFERENCE.format(skill_title=skill_title))
-        print("✅ Created references/api_reference.md")
+        example_reference.write_text(EXAMPLE_REFERENCE.format(skill_title=skill_title), encoding='utf-8')
+        print("Created references/api_reference.md")
 
         # Create templates/ directory with example template placeholder
         templates_dir = skill_dir / 'templates'
         templates_dir.mkdir(exist_ok=True)
         example_template = templates_dir / 'example_template.txt'
-        example_template.write_text(EXAMPLE_TEMPLATE)
-        print("✅ Created templates/example_template.txt")
+        example_template.write_text(EXAMPLE_TEMPLATE, encoding='utf-8')
+        print("Created templates/example_template.txt")
     except Exception as e:
-        print(f"❌ Error creating resource directories: {e}")
+        print(f"Error creating resource directories: {e}")
         return None
 
     # Print next steps
-    print(f"\n✅ Skill '{skill_name}' initialized successfully at {skill_dir}")
+    print(f"\nSkill '{skill_name}' initialized successfully at {skill_dir}")
     print("\nNext steps:")
     print("1. Edit SKILL.md to complete the TODO items and update the description")
     print("2. Customize or delete the example files in scripts/, references/, and templates/")
@@ -274,26 +293,30 @@ def init_skill(skill_name):
 
 
 def main():
-    if len(sys.argv) != 2:
-        print("Usage: init_skill.py <skill-name>")
-        print("\nSkill name requirements:")
-        print("  - Hyphen-case identifier (e.g., 'data-analyzer')")
-        print("  - Lowercase letters, digits, and hyphens only")
-        print("  - Max 64 characters")
-        print("  - Must match directory name exactly")
-        print("\nExamples:")
-        print("  init_skill.py my-new-skill")
-        print("  init_skill.py my-api-helper")
-        print(f"\nSkills are created at {SKILLS_BASE_PATH}/<skill-name>/")
-        sys.exit(1)
+    parser = argparse.ArgumentParser(
+        description="Create a skill template under an explicit or runtime default directory."
+    )
+    parser.add_argument("skill_name", help="Hyphen-case skill name")
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        metavar="DIRECTORY",
+        help=(
+            "Parent directory for the new skill. Defaults to /home/ubuntu/skills on cloud "
+            "runtimes, or the Manus user skill directory beside skill-creator on Work Locally."
+        ),
+    )
+    args = parser.parse_args()
 
-    skill_name = sys.argv[1]
+    skill_name = args.skill_name
+    output_dir = resolve_output_dir(args.output_dir)
 
-    print(f"🚀 Initializing skill: {skill_name}")
-    print(f"   Location: {SKILLS_BASE_PATH}/{skill_name}")
+    print(f"Initializing skill: {skill_name}")
+    if output_dir is not None:
+        print(f"   Location: {output_dir / skill_name}")
     print()
 
-    result = init_skill(skill_name)
+    result = init_skill(skill_name, output_dir=output_dir)
 
     if result:
         sys.exit(0)

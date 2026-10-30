@@ -60,14 +60,19 @@ PORT = 8799
 
 # أنماط PDF فقط: تُحقن أثناء التصدير ولا تمسّ صفحة الموقع
 PDF_CSS = """
-.additions-annex{break-before:page;page-break-before:always}
+/* ك-341: لا فاصل صفحة قسري للملحق — يبدأ بعد نهاية التقرير لتصفير الفراغ */
+.additions-annex{break-before:auto;page-break-before:auto;margin-top:4mm}
 .annex-note{font-size:11.5pt;color:#555}
+/* ك-341: تحرير الانكسار لكل عناصر الملحق — مصدر الفراغ كان break-inside:avoid داخليًا */
+.additions-annex,.additions-annex *{break-inside:auto !important;page-break-inside:auto !important}
 {HIDE_SOURCES}
-main{gap:0 !important}
+/* ك-341: المتن كان شبكة (grid) فتصير كل قسم عنصر شبكة غير قابل للانقسام → فراغات.
+   التحويل إلى تدفّق عادي يجعل الأقسام قابلة للانقسام وفق نطاق البروفايل (تدفّق الكتل). */
+main{display:block !important;gap:0 !important}
 /* ك-257: تدفّق الكتل — لا حجز للعنوان مع كتلته، لئلا تخلّف الكتلة فراغًا داخليًا */
 section.doc > h2,section.doc > h3{break-after:auto;page-break-after:auto}
 p,li,blockquote{orphans:3;widows:3}
-.map-viz svg{max-height:145mm;width:100%;height:auto}
+.print-map .hmap-svg{max-height:118mm !important;width:100%;height:auto}
 tbody tr:nth-child(even){background:#fff !important}
 tbody td{border-bottom:.4pt solid #e2e8f0}
 .mp-events text{font-size:12px}
@@ -88,6 +93,8 @@ section.doc ul ul{margin:.6mm 0}
    تدفّق الكتل مسموح في مسار التوليد وفق نطاق البروفايل المعتمد. */
 /* ك-257: الأقسام وخريطة الوقائع تتدفّق بين الصفحات — الفراغ الداخلي صفر */
 section.doc,.additions-annex section.doc,section.print-map,.hmap{break-inside:auto !important;page-break-inside:auto !important}
+/* ك-341: كتلة الخريطة ومفتاحها وحدة واحدة — تمنع يتيم المفتاح في ورقة أخيرة قليلة التعبئة */
+.print-map,.print-map .hmap-wrap{break-inside:avoid !important;page-break-inside:avoid !important}
 section.doc *,section.print-map *,.hmap *{break-inside:auto !important;page-break-inside:auto !important}
 .decision{break-inside:avoid}
 /* ك-256: نفس قاعدة الانقسام في مسار PDF لتصفير الفراغ الداخلي (تدفّق الكتل). */
@@ -100,6 +107,15 @@ section.doc h2,section.doc h3,section.doc h4,.h-rule,.chip,.kpi,.tag,.st-badge,
 /* عطل 2026-10-28: الملحق تجاوز الصفحة التاسعة بفقرة واحدة (صفحة عاشرة بتعبئة 7%).
    الحكم: ضغط الملحق وحده (تباعد أسطر ومقاطع) — لا يمسّ متن التقرير ولا هيئة الغلاف. */
 .additions-annex section.doc{padding:0 0 2mm}
+/* ك-341: تصفير فراغ شبكات الملحق في الطباعة — بطاقتان في السطر بدل بطاقة، بلا تصغير خطوط */
+.additions-annex .dg{display:inline-block;width:48.6%;vertical-align:top;margin:0 0 2.2mm .8%;padding:2.4mm 3mm 2.2mm}
+/* ك-341: شبكات البطاقات تُعرض كتدفق قابل للانكسار — الشبكة (grid) ذرّية فتنتج أوراقًا قليلة التعبئة */
+.src-grid,.card-grid,.ev-grid,.chg-grid,.viz-grid,.dg-grid{display:block !important}
+.additions-annex .src,.src{display:inline-block;width:32.4% !important;vertical-align:top;margin:0 0 2mm .8%}
+.card,.viz{display:inline-block;width:32.4% !important;vertical-align:top;margin:0 0 2mm .8%}
+.additions-annex .dg-f,.additions-annex .dg-top,.additions-annex .dg-meta{padding-top:.6mm;padding-bottom:.6mm}
+.additions-annex section.doc ul{margin:.8mm 0}
+
 .additions-annex section.doc p{line-height:1.46;margin:1.3mm 0}
 .additions-annex section.doc li{margin:.7mm 0}
 .additions-annex section.doc h3{margin:3mm 0 1.4mm !important}
@@ -369,6 +385,16 @@ def main() -> int:
                           d.innerHTML='<section class="doc" id="sec-additions"><h2>إضافات</h2><div class="h-rule"></div>'
                             +'<p class="annex-note">المجموعة المنقولة من التقرير اليومي — مرجعها الدائم صفحة «إضافات» على الموقع.</p></section>'+html;
                           const foot=host.querySelector('.foot'); host.insertBefore(d, foot||null);
+                          /* ك-341: ترتيب طباعي موثّق — تُنقل «الخلاصة» بعد «التوزيع الجغرافي للوقائع»
+                             لأن الفراغ الداخلي في نهاية الورقة كان ينتج عن انكسار غير مواتٍ قبلها.
+                             لا يمس الترتيب على الشاشة ولا المحتوى؛ الترتيب المنطقي للمجموعة محفوظ. */
+                          try{
+                            const secs=[...d.querySelectorAll('section.doc')];
+                            const byTitle=t=>secs.find(s=>{const h=s.querySelector('h2');
+                              return h&&h.textContent.indexOf(t)>=0;});
+                            const kh=byTitle('الخلاصة'), tz=byTitle('التوزيع');
+                            if(kh&&tz&&tz.nextSibling&&kh!==tz.nextSibling){ d.insertBefore(kh, tz.nextSibling); }
+                          }catch(e){}
                           return d.querySelectorAll('section.doc').length;}""", _html)
                         print(f"ملحق إضافات: {_n} قسمًا")
                 if args.extra_css:
