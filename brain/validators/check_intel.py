@@ -9,6 +9,7 @@
 """
 from __future__ import annotations
 
+import argparse
 import json
 import re
 import sys
@@ -52,11 +53,12 @@ def read_section(md_path: Path) -> str:
 
 
 def main() -> int:
-    if len(sys.argv) < 2:
-        print("الاستخدام: check_intel.py <تقرير.md> [ملف-الواجهة.json]")
-        return 1
-    md = Path(sys.argv[1])
-    meta_path = Path(sys.argv[2]) if len(sys.argv) > 2 else None
+    ap = argparse.ArgumentParser(description="بوابة قراءة الموقف وتحليل المؤشرات")
+    ap.add_argument("md", help="مسار تقرير Markdown")
+    ap.add_argument("meta", nargs="?", help="مسار ملف الواجهة JSON (اختياري)")
+    a = ap.parse_args()
+    md = Path(a.md)
+    meta_path = Path(a.meta) if a.meta else None
     if not md.exists():
         print(f"✘ الملف غير موجود: {md}")
         return 1
@@ -168,7 +170,7 @@ def main() -> int:
         else:
             print("  ✔ بقاء-2: جدول رموز التقدير EST")
         # ك-196: تعارض مع G035 (منع ذكر العمل الداخلي في المتن). السجل صار في الواجهة.
-        _mp = Path(sys.argv[2]) if len(sys.argv) > 2 else None
+        _mp = meta_path
         _meta_rev = ""
         if _mp is not None and _mp.is_file():
             _meta_rev = str((json.loads(_mp.read_text(encoding="utf-8")).get("intel_analysis") or {}).get("internal_review", "") or "")

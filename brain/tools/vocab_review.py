@@ -10,7 +10,9 @@
 
 الأوامر
 -------
-  --build [--date D] [--limit N]     يكتب ملف دفعة القرار: logs/vocab-review-<D>.md
+  --build [--date D] [--limit N]     يحسب دفعة القرار؛ لا يكتب بلا --write/--out
+  --write | --apply                 يكتب دفعة القرار إلى logs/vocab-review-<D>.md
+  --out PATH                        يكتب دفعة القرار إلى PATH (خيار كتابة صريح)
   --decide "اللفظ" --status approved|watch|rejected [--plain "بديل1|بديل2"] [--note "…"]
                                      يسجّل قرار المالك ويبني البوابة آليًا
   --impact "اللفظ"                   أثر اللفظ: أين ورد وكم مرة
@@ -158,10 +160,8 @@ def harvest(date_str: str, limit: int) -> list[dict]:
     return items[:limit]
 
 
-def build(date_str: str, limit: int) -> int:
+def build(date_str: str, limit: int, write: bool = False, out_path: str | None = None) -> int:
     items = harvest(date_str, limit)
-    LOGS.mkdir(exist_ok=True)
-    out = LOGS / f"vocab-review-{date_str}.md"
     lines = [
         f"# دفعة قرار المفردات — {date_str}", "",
         "**المصدر:** حصاد آلي من السجل الحاكم + حاصد البوابة + الأرشيف. لا بند من الذاكرة.",
@@ -184,8 +184,15 @@ def build(date_str: str, limit: int) -> int:
               "## تنفيذ القرار", "```bash",
               'python3 tools/vocab_review.py --decide "اللفظ" --status approved --plain "البديل" --note "قرار المالك — DATE"',
               "```"]
-    out.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print(f"  ✔ كُتبت الدفعة: {out} · {len(items)} بندًا")
+    rendered = "\n".join(lines) + "\n"
+    if write or out_path:
+        out = Path(out_path) if out_path else LOGS / f"vocab-review-{date_str}.md"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(rendered, encoding="utf-8")
+        print(f"  ✔ كُتبت الدفعة: {out} · {len(items)} بندًا")
+    else:
+        print("  ↷ قراءة فقط: لم تُكتب الدفعة. استخدم --write/--apply أو --out PATH للكتابة.")
+        print(f"  · نتيجة الحصاد: {len(items)} بندًا")
     for it in items[:6]:
         print(f"   · {it['term']}  ({it['count']} مرة في {len(it['files'])} إصدارًا)"
               + ("  ← وارد في عنوان" if it["headings"] else ""))
@@ -251,8 +258,13 @@ def fail(msg: str, code: int = 2) -> None:
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="حصاد المفردات ودفعة القرار")
-    ap.add_argument("--build", action="store_true", help="كتابة دفعة القرار")
+    ap = argparse.ArgumentParser(
+        description="حصاد المفردات ودفعة القرار (الوضع الافتراضي قراءة فقط؛ --decide يكتب السجل الحاكم)"
+    )
+    ap.add_argument("--build", action="store_true", help="حساب دفعة القرار")
+    ap.add_argument("--write", "--apply", dest="write", action="store_true",
+                    help="كتابة دفعة القرار إلى logs/vocab-review-<date>.md")
+    ap.add_argument("--out", metavar="PATH", help="كتابة دفعة القرار إلى PATH")
     ap.add_argument("--date", default=TODAY)
     ap.add_argument("--limit", type=int, default=20)
     ap.add_argument("--decide", metavar="اللفظ")
@@ -262,13 +274,18 @@ def main() -> int:
     ap.add_argument("--impact", metavar="اللفظ")
     a = ap.parse_args()
 
+    if a.out and (a.decide or a.impact):
+        fail("--out متاح مع حصاد الدفعة فقط")
+    if a.write and (a.decide or a.impact):
+        fail("--write/--apply متاحان مع حصاد الدفعة فقط")
+
     if a.impact:
         return impact(a.impact)
     if a.decide:
         if a.status not in ("approved", "watch", "rejected", "proposed"):
             fail("يجب تحديد الحالة: --status approved|watch|rejected|proposed")
         return decide(a.decide, a.status, a.plain, a.note)
-    return build(a.date, a.limit)
+    return build(a.date, a.limit, a.write, a.out)
 
 
 if __name__ == "__main__":

@@ -6,6 +6,7 @@
 الاستخدام: python3 tools/normalize_digits.py [--check] [جذور...]
 """
 from __future__ import annotations
+import argparse
 import os
 import sys
 from pathlib import Path
@@ -58,9 +59,12 @@ def scan(p: Path) -> int:
 
 
 def main() -> int:
-    args = sys.argv[1:]
-    check = "--check" in args
-    roots = [a for a in args if not a.startswith("--")] or ROOTS
+    ap = argparse.ArgumentParser(description="توحيد الأرقام العربية الهندية إلى الأرقام الإنجليزية")
+    ap.add_argument("--check", action="store_true", help="فحص فقط دون كتابة")
+    ap.add_argument("roots", nargs="*", metavar="ROOT", help="جذور اختيارية للفحص")
+    args = ap.parse_args()
+    check = args.check
+    roots = args.roots or ROOTS
     files = occ = 0
     details = []
     for p in targets(roots):
