@@ -1,6 +1,6 @@
 {
  "date": "2026-10-30",
- "checked_at": "2026-10-30T12:35:14Z",
+ "checked_at": "2026-10-30T12:52:35Z",
  "paths": {
   "/": {
    "code": 200,
@@ -20,10 +20,12 @@
   }
  },
  "pdf_sha256": {
-  "local": "6d29f7c025896c77cd8a5693232072b773cda537f0303887ba1f24f328b327a6",
+  "local": "376899016478c78da19b397ee5d37a66054fb08e2695dcdec4d8c06dcb2a9af4",
   "live": "6d29f7c025896c77cd8a5693232072b773cda537f0303887ba1f24f328b327a6",
-  "match": true
+  "match": false
  },
- "status": "ok",
- "bad": []
+ "status": "failed",
+ "bad": [
+  "pdf-differs-from-local"
+ ]
 }
