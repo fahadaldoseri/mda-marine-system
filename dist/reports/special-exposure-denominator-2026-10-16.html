@@ -469,7 +469,10 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .card,.viz,.src,.table-row{break-inside:auto;page-break-inside:auto}
      /* ك-298: سجل الأحداث — عمود واحد وثبات البطاقة في الطباعة */
      /* ك-298ب: الشبكة لا تنقسم في طباعة Chromium — تُحوّل كتلًا عادية لتتدفّق البطاقات */
-     .ev-grid{display:block;margin:5mm 0 0}
+     /* ك-341: بطاقتان في السطر في الطباعة — تدفّق بلا تصغير خطوط ولا حذف محتوى */
+     /* ك-341: بطاقتان في السطر في الطباعة — تدفّق بلا تصغير خطوط ولا حذف محتوى */
+     .ev-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.6mm;margin:4mm 0 0}
+     .ev{display:block;margin:0;padding:3mm 3.4mm 2.8mm}
      .ev{display:block;margin:0 0 3mm;padding:3.4mm 4mm 3mm;break-inside:avoid;page-break-inside:avoid;opacity:1 !important;transform:none !important;animation:none !important;border-color:#c3cedb;background:#fff}
      .ev::before{width:4px;background:#0f8f86}
      .ev.b-media::before{background:#b8860b}
@@ -1139,7 +1142,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     <div class="threat risk-high"><div class="lbl">مستوى التهديد</div><div class="val">مرتفع</div></div>
     <div>
       <p class="lede">اختبار عدم التناسب بين حصة الإصابات وحصة التعرّض في مضيق هرمز. النتيجة: إصابات أسطول أدنوك تتجاوز المتوقع بأكثر من الضعف حتى في أشد الفروض تحفّظًا، فنسبة عدم التناسب بين 2.3 و12.2 ضعفًا — ما يميل بالترجيح إلى الاستهداف لا إلى التعرّض المرتفع وحده. ويُصحّح التقرير رقمًا سابقًا: 32 ناقلة تخص أسطول Navig8 لا إجمالي أدنوك.</p>
-      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-30 02:20 <span class="ltr">UTC</span></b></span></div>
+      <div class="masthead-meta"><span class="chip">آخر تحديث <b class="bidi">2026-10-30 05:05 <span class="ltr">UTC</span></b></span></div>
     </div>
   </header>
 
@@ -1467,7 +1470,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> مقام التعرّض — مركز الوعي بالمجال البحري. التوقيت المعتمد مزدوج: <span class="ltr">UTC</span> وتوقيت البحرين (<span class="ltr">UTC</span>+3).
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-30 02:20 UTC</bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
+    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-30 05:05 UTC</bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
     
   </footer>
 </div>
