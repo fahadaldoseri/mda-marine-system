@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-30T07:11:07.999124+00:00",
+  "generated_at": "2026-10-30T13:15:56.463534+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -2700,10 +2700,59 @@
     },
     {
       "fault_id": "ك-351",
-      "state": "مغلق",
+      "state": "بانتظار التحقق",
       "lesson_id": "ك-351",
-      "barrier_id": "B-0c7e51a4",
-      "run_evidence": "`python3 validators/check_backup_parity.py` خرج 1 فرصد «مفقود من المستودع: skills/runbook-completion-closure-ops/*» (4 ملفات) · `SKILLS_DIR=/tmp/ghost-skills python3 validators/check_backup_parity.py` خرج 1 فرصد «مفقود من المستودع: skills/ghost-skill/SKILL.md» (اختبار سلبي) · وبعد الدفع عبر PR #133 خرج 0 — «مطابق — المستودع يعكس الشجرة المحلية كاملة» · `python3 skills/runbook-completion-closure-ops/scripts/run_to_completion.py --date 2026-10-30 --selftest` خرج 0 — 13/13 مطابق"
+      "barrier_id": "B-b3ad466b",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-352",
+      "state": "مغلق",
+      "lesson_id": "ك-352",
+      "barrier_id": "B-35621a71",
+      "run_evidence": "tComputedStyle(style)` = `inline-block` في print و`none` على الشاشة · خرج 0"
+    },
+    {
+      "fault_id": "ك-353",
+      "state": "مغلق",
+      "lesson_id": "ك-353",
+      "barrier_id": "B-0149d7e6",
+      "run_evidence": "الة يسجل دمج البنود الستة بـ`&&` مع حفظ رمز الخروج والاختبار السلبي · خرج 0"
+    },
+    {
+      "fault_id": "ك-354",
+      "state": "مغلق",
+      "lesson_id": "ك-354",
+      "barrier_id": "B-d589f715",
+      "run_evidence": "10-30: `python3 tools/runbook.py verify --date 2026-10-30 --root .` → خرج 0 · D005 قبل D010"
+    },
+    {
+      "fault_id": "ك-355",
+      "state": "مغلق",
+      "lesson_id": "ك-355",
+      "barrier_id": "B-6c8de01a",
+      "run_evidence": "`python3 tools/text_hash_guard.py --date 2026-10-30 --stage verify` → خرج 0"
+    },
+    {
+      "fault_id": "ك-356",
+      "state": "مغلق",
+      "lesson_id": "ك-356",
+      "barrier_id": "B-b02ae1e7",
+      "run_evidence": "validators/check_threat_consistency.py --date 2026-10-30 --brain .` → خرج 0"
+    },
+    {
+      "fault_id": "ك-357",
+      "state": "مغلق",
+      "lesson_id": "ك-357",
+      "barrier_id": "B-653ecc87",
+      "run_evidence": " الحالة يسجل `status=ok` والعيوب `[]` بعد مقارنة الصفحات وبصمة النص · خرج 0"
+    },
+    {
+      "fault_id": "ك-358",
+      "state": "مغلق",
+      "lesson_id": "ك-358",
+      "barrier_id": "B-9a67e975",
+      "run_evidence": "26-10-30: `python3 validators/check_backup_parity.py --mode strict` → خرج 0 · مطابق"
     }
   ]
 }
