@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-30",
+  "feeds": {},
+  "final_gate": {
+    "blocked_steps": [],
+    "dir": "logs/gate-2026-10-30",
+    "exit_code": 1,
+    "note": "نتيجة بوابة التسليم النهائية — كُتبت العلامة بعدها.",
+    "status": "warn"
+  },
+  "finished_utc": "2026-10-30T03:58:24Z",
+  "gate_finished_utc": "2026-10-30T05:06:53Z",
+  "gate_note": "علامة مرحلة الخط اليومي — بوابة التسليم لم تُشغَّل بعد.",
+  "gate_state": "not_run",
+  "language": {
+    "banned_terms": 0,
+    "edit_pass": {
+      "applied": true,
+      "by_category": {
+        "أسلوب": 13,
+        "ترقيم": 1,
+        "مفردة": 6
+      },
+      "changes": 20,
+      "edited": 3,
+      "model": "gpt-5-mini",
+      "rejected": 11,
+      "sections": 15
+    },
+    "long_sentences": 7,
+    "orthography_errors": 0,
+    "waw_pct": 3.4,
+    "waw_runs3": 0
+  },
+  "overall": "ok",
+  "pipeline_version": 4,
+  "report_present_at_pipeline_end": true,
+  "schema_version": 1,
+  "sources": {
+    "approved": 62,
+    "checked": 60,
+    "failed": 0,
+    "failed_names": [],
+    "ok": 60,
+    "status_file": "feeds/feeds-2026-10-30.status.json"
+  },
+  "written_stage": "final"
+}

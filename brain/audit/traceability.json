@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-30T02:27:33.950655+00:00",
+  "generated_at": "2026-10-30T03:50:01.813924+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -2596,8 +2596,8 @@
     {
       "fault_id": "ك-336",
       "state": "مفتوح",
-      "lesson_id": null,
-      "barrier_id": "B-279efb43",
+      "lesson_id": "ك-336",
+      "barrier_id": "B-859bd76b",
       "run_evidence": null
     },
     {
@@ -2605,6 +2605,27 @@
       "state": "مفتوح",
       "lesson_id": "ك-337",
       "barrier_id": "B-c3187280",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-338",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-338",
+      "barrier_id": "B-39681094",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-339",
+      "state": "مغلق",
+      "lesson_id": "ك-339",
+      "barrier_id": "B-a091b6a1",
+      "run_evidence": "اختبار سلبي: كسر حقيقي داخل النطاق يمنع (رمز 1)، وبعد الاستعادة يمرّ (رمز 0)"
+    },
+    {
+      "fault_id": "ك-340",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-340",
+      "barrier_id": "B-2217ed1b",
       "run_evidence": null
     }
   ]

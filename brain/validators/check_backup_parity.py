@@ -29,6 +29,7 @@ SYMLINK_VIEWS = ("brain/web/blocks.py", "brain/web/build_report.py", "brain/web/
 # ملفات مولَّدة على الخادم باسم مخفي فلا تلتقطها مسحة الملفات المخفيّة، وتُعدّ زائدة في المستودع.
 REPO_EXTRA_ALLOW = ("skills/.skill_versions.json",)
 
+LOCAL_ONLY_PATTERNS = ("audit/backups/",)  # لقطات الإغلاق على الخادم (ك-331)
 SANITIZED = {"brain/appendices/telegram-chat.json", "brain/appendices/telegram-subscriptions.json",
              "brain/appendices/telegram-targets.json",
              "brain/research/styles/sources/archive-reports.html"}
@@ -256,6 +257,8 @@ def main() -> int:
                     break
     for rel, (kind, val) in sorted(local.items()):
         if rel not in repo:
+            if any(rel.startswith(p) or f"/{p}" in rel for p in LOCAL_ONLY_PATTERNS):
+                continue                     # لقطة احتياطية على الخادم بحكم السياسة (ك-331)
             drift.append(f"مفقود من المستودع: {rel}")
         elif repo[rel][0] != kind:
             drift.append(f"نوع مختلف (ملف/رابط): {rel}")
