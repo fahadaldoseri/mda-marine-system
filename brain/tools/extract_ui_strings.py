@@ -37,6 +37,13 @@ def text_strings(path):
 
 def main():
     roots = sys.argv[1:]
+    if any(a in ("--help", "-h") for a in roots):
+        print(__doc__)
+        return 0
+    unknown = [a for a in roots if a.startswith("-")]
+    if unknown:
+        print(f"وسيط غير معروف: {unknown[0]}", file=sys.stderr)
+        return 2
     if not roots:
         print(__doc__)
         return 0

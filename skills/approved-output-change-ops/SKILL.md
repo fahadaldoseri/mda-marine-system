@@ -61,7 +61,7 @@ python3 "$SKILL/scripts/check_registry_conflicts.py" \
 
 ## الأدلة واللغة العربية
 
-اقرأ [references/print-fingerprint-contract.md](references/print-fingerprint-contract.md) للعقد الوحيد لقياس قبل/بعد والبصمة وقرار المالك، و[references/change-control.md](references/change-control.md) عند تحديد ما يحتاج قرارًا، و[references/evidence.md](references/evidence.md) عند بناء الدليل الحي. لا تجعل `pdftotext` وحده حكمًا على العربية: قد يقلب الحروف أو يضيف مسافات ومحارف اتجاه؛ استخدم قياسات PDF الهندسية، الرموز اللاتينية، البصمات، ومعاينة بصرية.
+اقرأ [references/change-control.md](references/change-control.md) عند تحديد ما يحتاج قرارًا، و[references/evidence.md](references/evidence.md) عند بناء الدليل الحي. لا تجعل `pdftotext` وحده حكمًا على العربية: قد يقلب الحروف أو يضيف مسافات ومحارف اتجاه؛ استخدم قياسات PDF الهندسية، الرموز اللاتينية، البصمات، ومعاينة بصرية.
 
 ## حلقة التعلم ومنع التكرار
 

@@ -106,6 +106,19 @@ def check(repo_root):
 
 def main():
     a = sys.argv[1:]
+    if any(x in ("--help", "-h") for x in a):
+        print(__doc__)
+        return 0
+    unknown = [x for x in a if x.startswith("-") and x != "--root"]
+    if unknown:
+        print(f"وسيط غير معروف: {unknown[0]}", file=sys.stderr)
+        return 2
+    if a.count("--root") > 1 or ("--root" in a and a.index("--root") + 1 >= len(a)):
+        print("الاستخدام: code_paths.py [--root REPO] check|classify ...", file=sys.stderr)
+        return 2
+    if not a:
+        print(__doc__)
+        return 0
     brain_dir = Path(__file__).resolve().parent.parent
     root = brain_dir
     if "--root" in a:
@@ -119,9 +132,6 @@ def main():
                   f"انطلاقًا من {brain_dir}")
             return RUNNABLE
         root = found
-    if not a:
-        print(__doc__)
-        return 0
     if a[0] == "check":
         return check(root)
     if a[0] == "classify":

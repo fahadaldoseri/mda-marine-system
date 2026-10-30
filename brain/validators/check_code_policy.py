@@ -69,7 +69,18 @@ def check_file(path: Path):
 
 
 def main():
-    target = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(f"{SITE}/dist")
+    args = sys.argv[1:]
+    if any(a in ("--help", "-h") for a in args):
+        print(__doc__)
+        return 0
+    unknown = [a for a in args if a.startswith("-")]
+    if unknown:
+        print(f"وسيط غير معروف: {unknown[0]}", file=sys.stderr)
+        return 2
+    if len(args) > 1:
+        print(__doc__, file=sys.stderr)
+        return 2
+    target = Path(args[0]) if args else Path(f"{SITE}/dist")
     files = sorted(target.glob("reports/*.html")) if target.is_dir() else [target]
     fails = 0
     print("  فحص سياسة عرض الرموز (2+5):")

@@ -108,6 +108,30 @@ def _date() -> str:
 
 
 if __name__ == "__main__":
+    args = sys.argv[1:]
+    if any(a in ('--help', '-h') for a in args):
+        print(__doc__)
+        raise SystemExit(0)
+    unknown_flags = []
+    unknown_values = []
+    i = 0
+    while i < len(args):
+        value = args[i]
+        if value in ('--brain', '--date'):
+            if i + 1 >= len(args) or args[i + 1].startswith('-'):
+                print(f'الخيار {value} يحتاج قيمة', file=sys.stderr)
+                raise SystemExit(2)
+            i += 2
+            continue
+        if value.startswith('-'):
+            unknown_flags.append(value)
+        else:
+            unknown_values.append(value)
+        i += 1
+    if unknown_flags or unknown_values:
+        bad = unknown_flags[0] if unknown_flags else unknown_values[0]
+        print(f'وسيط غير معروف: {bad}', file=sys.stderr)
+        raise SystemExit(2)
     # ك-133: كل مدقق يمرّ عبر الحارس الموحّد — الانهيار يخرج بالرمز 70 ولا يُبتلع.
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     from _guard import run
