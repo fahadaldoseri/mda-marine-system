@@ -1,1 +1,1 @@
-../../site/generator/build_report.py
+/home/ubuntu/seawatch/generator/build_report.py
