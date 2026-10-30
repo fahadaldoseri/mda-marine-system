@@ -1118,6 +1118,215 @@
    "gate_title": "علامة التشغيل اليومية"
   },
   {
+   "id": "G000",
+   "title": "لقطة الأصول الحاكمة وإلحاق السجل قبل البوابات",
+   "kind": "script",
+   "phase": "gates",
+   "reads": [
+    "tools/governing-assets.txt",
+    "tools/governing_assets_merkle.py",
+    "tools/append_only_ledger.py"
+   ],
+   "writes": [
+    "evidence/merkle/ledger.jsonl"
+   ],
+   "assert": [
+    {
+     "type": "file_exists",
+     "path": "evidence/merkle/ledger.jsonl"
+    },
+    {
+     "type": "min_bytes",
+     "path": "evidence/merkle/ledger.jsonl",
+     "n": 1
+    }
+   ],
+   "links": {
+    "rules": [
+     "سلسلة الأصول الحاكمة: قياس قبل الحكم وإلحاق append-only"
+    ],
+    "files": [
+     "tools/governing-assets.txt",
+     "tools/governing_assets_merkle.py",
+     "tools/append_only_ledger.py",
+     "notes/PROJECT-DELTA-governing-chain.md"
+    ],
+    "folders": [
+     "evidence/merkle",
+     "evidence/governing-chain"
+    ],
+    "gates": [],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "python3 tools/governing_assets_merkle.py --snapshot && snapshot=\"$(find evidence/merkle -maxdepth 1 -type f -name \"*.json\" -printf \"%T@ %p\\n\" | sort -nr | head -1 | cut -d\" \" -f2-)\" && root=\"$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1], encoding=\"utf-8\"))[\"root\"])' \"$snapshot\")\" && files=\"$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1], encoding=\"utf-8\"))[\"file_count\"])' \"$snapshot\")\" && python3 tools/append_only_ledger.py --append --kind snapshot --root \"$root\" --files \"$files\"; rc=$?; exit \"$rc\""
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [],
+   "gate_title": "لقطة الأصول الحاكمة وإلحاق السجل قبل البوابات"
+  },
+  {
+   "id": "G000A",
+   "title": "بوابة الأصول الحاكمة — ledger والمرآة (فشل مغلق)",
+   "kind": "script",
+   "phase": "gates",
+   "reads": [
+    "evidence/merkle/ledger.jsonl",
+    "tools/append_only_ledger.py",
+    "tools/check_governing_assets.py"
+   ],
+   "writes": [],
+   "assert": [
+    {
+     "type": "file_exists",
+     "path": "evidence/merkle/ledger.jsonl"
+    },
+    {
+     "type": "contains",
+     "path": "tools/governing-assets.txt",
+     "text": "GLOB /home/ubuntu/skills/*/SKILL.md"
+    }
+   ],
+   "links": {
+    "rules": [
+     "سلسلة الأصول الحاكمة: أي رمز غير صفري يوقف الكتيب"
+    ],
+    "files": [
+     "tools/append_only_ledger.py",
+     "tools/check_governing_assets.py",
+     "tools/governing_assets_merkle.py",
+     "tools/governing-assets.txt",
+     "notes/PROJECT-DELTA-governing-chain.md"
+    ],
+    "folders": [
+     "evidence/merkle",
+     "evidence/governing-chain"
+    ],
+    "gates": [
+     "tools/check_governing_assets.py"
+    ],
+    "tests": []
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "python3 tools/append_only_ledger.py --verify && python3 tools/check_governing_assets.py --json; rc=$?; exit \"$rc\""
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [],
+   "gate_title": "بوابة الأصول الحاكمة — ledger والمرآة (فشل مغلق)"
+  },
+  {
+   "id": "G000B",
+   "title": "مالك أدوات التشغيل المحكمة والمراقب",
+   "kind": "script",
+   "phase": "gates",
+   "reads": [
+    "tools/hermetic_run.sh",
+    "tools/watch_governing_assets.sh",
+    "notes/hermetic-run-plan.md",
+    "notes/PROJECT-DELTA-runbook-linkage.md"
+   ],
+   "writes": [],
+   "assert": [
+    {
+     "type": "file_exists",
+     "path": "evidence/hermetic/HERMETIC-RUN.md"
+    },
+    {
+     "type": "file_exists",
+     "path": "tools/watch_governing_assets.sh"
+    }
+   ],
+   "links": {
+    "rules": [
+     "أدوات التشغيل المحكمة والمراقبة لها مالك مانيفست صريح لا ذاكرة وكيل"
+    ],
+    "files": [
+     "tools/hermetic_run.sh",
+     "tools/watch_governing_assets.sh",
+     "notes/hermetic-run-plan.md",
+     "notes/PROJECT-DELTA-runbook-linkage.md"
+    ],
+    "folders": [
+     "evidence/hermetic",
+     "evidence/watch"
+    ],
+    "gates": [],
+    "tests": [
+     "tests/test_hermetic_run.py"
+    ]
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "bash tools/hermetic_run.sh --help && bash -n tools/watch_governing_assets.sh && test -x tools/watch_governing_assets.sh; rc=$?; exit \"$rc\""
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [],
+   "gate_title": "مالك أدوات التشغيل المحكمة والمراقب"
+  },
+  {
+   "id": "G000C",
+   "title": "اختبارات التشغيل داخل الحاوية المحكمة",
+   "kind": "script",
+   "phase": "gates",
+   "reads": [
+    "tests/test_hermetic_run.py",
+    "tools/hermetic_run.sh"
+   ],
+   "writes": [
+    "evidence/hermetic"
+   ],
+   "assert": [
+    {
+     "type": "file_exists",
+     "path": "evidence/hermetic/HERMETIC-RUN.md"
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — اختبار الحاوية المحكمة بدليل حي"
+    ],
+    "files": [
+     "tests/test_hermetic_run.py",
+     "tools/hermetic_run.sh",
+     "notes/hermetic-run-plan.md",
+     "evidence/hermetic/HERMETIC-RUN.md"
+    ],
+    "folders": [
+     "evidence/hermetic",
+     ".pytest_cache"
+    ],
+    "gates": [],
+    "tests": [
+     "tests/test_hermetic_run.py"
+    ]
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "python3 -m pytest -p no:cacheprovider -q tests/test_hermetic_run.py && test -s evidence/hermetic/HERMETIC-RUN.md; rc=$?; exit \"$rc\""
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [],
+   "gate_title": "اختبارات التشغيل داخل الحاوية المحكمة"
+  },
+  {
    "id": "G001",
    "title": "اختبارات البوابات (tests)",
    "kind": "script",

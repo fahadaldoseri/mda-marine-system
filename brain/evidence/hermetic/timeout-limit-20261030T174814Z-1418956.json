@@ -1,0 +1,100 @@
+{
+  "arguments": [
+    "-c",
+    "while True: pass"
+  ],
+  "argv": [
+    "python3",
+    "-c",
+    "while True: pass"
+  ],
+  "changed_files_outside_isolation": 0,
+  "changed_paths_outside_isolation": [],
+  "duration_ms": 1036,
+  "duration_seconds": 1.036,
+  "evidence_files": {
+    "impact_summary": "/home/ubuntu/brain-marine-news/evidence/hermetic/raw/timeout-limit-20261030T174814Z-1418956/impact-summary.json",
+    "project_compare": "/home/ubuntu/brain-marine-news/evidence/hermetic/raw/timeout-limit-20261030T174814Z-1418956/project-compare.json",
+    "raw_stderr": "/home/ubuntu/brain-marine-news/evidence/hermetic/raw/timeout-limit-20261030T174814Z-1418956/stderr.log",
+    "raw_stdout": "/home/ubuntu/brain-marine-news/evidence/hermetic/raw/timeout-limit-20261030T174814Z-1418956/stdout.log",
+    "seawatch_compare": "/home/ubuntu/brain-marine-news/evidence/hermetic/raw/timeout-limit-20261030T174814Z-1418956/seawatch-compare.json"
+  },
+  "exit_code": 124,
+  "fingerprints": {
+    "comparison_excludes": [
+      "evidence/hermetic/** (harness-owned evidence, traces, and fingerprints)"
+    ],
+    "project_after": "/home/ubuntu/brain-marine-news/evidence/hermetic/fingerprints/timeout-limit-20261030T174814Z-1418956/project-after.json",
+    "project_before": "/home/ubuntu/brain-marine-news/evidence/hermetic/fingerprints/timeout-limit-20261030T174814Z-1418956/project-before.json",
+    "project_root": "/home/ubuntu/brain-marine-news",
+    "seawatch_after": "/home/ubuntu/brain-marine-news/evidence/hermetic/fingerprints/timeout-limit-20261030T174814Z-1418956/seawatch-after.json",
+    "seawatch_before": "/home/ubuntu/brain-marine-news/evidence/hermetic/fingerprints/timeout-limit-20261030T174814Z-1418956/seawatch-before.json",
+    "seawatch_root": "/home/ubuntu/seawatch"
+  },
+  "impact_summary": {
+    "connect_attempts": 1,
+    "connect_lines": [
+      "1419010 connect(4, {sa_family=AF_INET, sin_port=htons(80), sin_addr=inet_addr(\"1.1.1.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)"
+    ],
+    "execve": [
+      "/bin/sh",
+      "/usr/bin/awk",
+      "/usr/bin/bwrap",
+      "/usr/bin/python3"
+    ],
+    "files_opened_for_write": [
+      "1419005 creat(\"/newroot/dev/full\", 0444) = 6",
+      "1419005 creat(\"/newroot/dev/null\", 0444) = 6",
+      "1419005 creat(\"/newroot/dev/random\", 0444) = 6",
+      "1419005 creat(\"/newroot/dev/tty\", 0444) = 6",
+      "1419005 creat(\"/newroot/dev/urandom\", 0444) = 6",
+      "1419005 creat(\"/newroot/dev/zero\", 0444) = 6",
+      "1419005 openat(6, \"gid_map\", O_RDWR|O_CLOEXEC) = 7",
+      "1419005 openat(6, \"setgroups\", O_RDWR|O_CLOEXEC) = 7",
+      "1419005 openat(6, \"uid_map\", O_RDWR|O_CLOEXEC) = 7",
+      "1419007 openat(AT_FDCWD, \"/var/tmp/hermetic-work.shR8RT/.hermetic-net-20261030T174814Z-1418956.probe.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 4",
+      "1419007 openat(AT_FDCWD, \"/var/tmp/hermetic-work.shR8RT/.hermetic-net-20261030T174814Z-1418956.probe.before\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 4",
+      "1419007 openat(AT_FDCWD, \"/var/tmp/hermetic-work.shR8RT/.hermetic-net-20261030T174814Z-1418956.probe.out\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 4",
+      "1419007 openat(AT_FDCWD, \"/var/tmp/hermetic-work.shR8RT/.hermetic-net-20261030T174814Z-1418956.probe.rc\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 4",
+      "1419008 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 4",
+      "1419011 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 4"
+    ]
+  },
+  "isolation": {
+    "mode": "bwrap",
+    "network": "unshared",
+    "root": "read-only in bwrap; monitored-root remount attempt in unshare fallback",
+    "tmp": "tmpfs in bwrap/fallback",
+    "workdir": "single bind-mounted writable directory outside monitored trees"
+  },
+  "net_packets": 0,
+  "network_proof": {
+    "command": "python3 -c 'import socket; socket.create_connection((\"1.1.1.1\",80),3)'",
+    "exit_code": 1,
+    "failed_as_expected": true,
+    "output": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n  File \"/usr/lib/python3.12/socket.py\", line 852, in create_connection\n    raise exceptions[0]\n  File \"/usr/lib/python3.12/socket.py\", line 837, in create_connection\n    sock.connect(sa)\nOSError: [Errno 101] Network is unreachable",
+    "packets_after_command": 0,
+    "packets_after_probe": 0,
+    "packets_before": 0
+  },
+  "raw_trace": "/home/ubuntu/brain-marine-news/evidence/hermetic/traces/timeout-limit-20261030T174814Z-1418956.strace",
+  "resource_limits": {
+    "cpu_quota": "50%",
+    "memory_mb": 512,
+    "mode": "ulimit+timeout",
+    "tasks_max": 64
+  },
+  "schema": "hermetic-run/v1",
+  "timeout_enforced": true,
+  "timeout_seconds": 1,
+  "timestamp_utc": "timeout-limit-20261030T174814Z",
+  "tool": "python3",
+  "tool_name": "timeout-limit",
+  "trace": "/home/ubuntu/brain-marine-news/evidence/hermetic/traces/timeout-limit-20261030T174814Z-1418956.strace",
+  "versions": {
+    "bubblewrap": "bubblewrap 0.9.0",
+    "strace": "strace -- version 6.8",
+    "systemd_run": "systemd 255 (255.4-1ubuntu8.17)",
+    "unshare": "unshare from util-linux 2.39.3"
+  }
+}

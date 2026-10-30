@@ -1,0 +1,38 @@
+{
+  "status": "BLOCK",
+  "checked_at": "2026-10-30T17:44:18.183581+00:00",
+  "date": "2026-10-30",
+  "current_root": "609750976b2559dc0f3e2dc9e366493b6ef72447e784c9bbdfff5686b93565ca",
+  "current_files": 2625,
+  "ledger": "/home/ubuntu/brain-marine-news/evidence/merkle/ledger.jsonl",
+  "ledger_verified": true,
+  "snapshot_entry": {
+    "seq": 2,
+    "ts": "2026-10-30T17:44:01.075297+00:00",
+    "kind": "snapshot",
+    "root": "609750976b2559dc0f3e2dc9e366493b6ef72447e784c9bbdfff5686b93565ca",
+    "files": 2625,
+    "prev_hash": "22d985d246e42796d1caed4afe6c7a31b45597d090feb5903132d120e0127447",
+    "hash": "c744caf3a2fd5d30309b8f4d6b6dd7b9f21414e09804ae03a6421382f4bbcdaa"
+  },
+  "snapshot_file": "/home/ubuntu/brain-marine-news/evidence/merkle/20261030T174400991832Z.json",
+  "mirror": "/home/ubuntu/mda-marine-system/skills",
+  "violations": [
+    "mirror mismatch: fault-closure-ops/SKILL.md (local vs /home/ubuntu/mda-marine-system/skills/fault-closure-ops/SKILL.md)",
+    "mirror mismatch: fault-closure-ops/references/schema.md (local vs /home/ubuntu/mda-marine-system/skills/fault-closure-ops/references/schema.md)",
+    "mirror mismatch: live-visual-audit-ops/SKILL.md (local vs /home/ubuntu/mda-marine-system/skills/live-visual-audit-ops/SKILL.md)",
+    "mirror mismatch: marine-news-brain/SKILL.md (local vs /home/ubuntu/mda-marine-system/skills/marine-news-brain/SKILL.md)",
+    "mirror mismatch: military-arabic-editing/SKILL.md (local vs /home/ubuntu/mda-marine-system/skills/military-arabic-editing/SKILL.md)",
+    "mirror mismatch: multi-agent-audit-ops/SKILL.md (local vs /home/ubuntu/mda-marine-system/skills/multi-agent-audit-ops/SKILL.md)",
+    "mirror mismatch: multi-agent-audit-ops/references/claim-measurement.md (local vs /home/ubuntu/mda-marine-system/skills/multi-agent-audit-ops/references/claim-measurement.md)",
+    "mirror mismatch: report-content-fidelity-ops/SKILL.md (local vs /home/ubuntu/mda-marine-system/skills/report-content-fidelity-ops/SKILL.md)",
+    "mirror mismatch: report-surface-policy-ops/SKILL.md (local vs /home/ubuntu/mda-marine-system/skills/report-surface-policy-ops/SKILL.md)",
+    "mirror mismatch: superpowers-method/SKILL.md (local vs /home/ubuntu/mda-marine-system/skills/superpowers-method/SKILL.md)",
+    "mirror mismatch: webdev/references/game-backend.md (local vs /home/ubuntu/mda-marine-system/skills/webdev/references/game-backend.md)",
+    "mirror mismatch: webdev/references/game-delivery.md (local vs /home/ubuntu/mda-marine-system/skills/webdev/references/game-delivery.md)",
+    "mirror-only or local-missing asset: fault-closure-ops/references/closure-contract.md",
+    "mirror-only or local-missing asset: military-arabic-editing/references/ambiguity-map.md",
+    "mirror-only or local-missing asset: multi-agent-audit-ops/references/audit-round-contract.md",
+    "mirror-only or local-missing asset: runbook-execution-ops/references/step-exit-codes.md"
+  ]
+}
