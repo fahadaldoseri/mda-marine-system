@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-30T14:51:19.178833+00:00",
+  "generated_at": "2026-10-30T18:06:10.975971+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -2765,8 +2765,15 @@
       "fault_id": "ك-360",
       "state": "مفتوح",
       "lesson_id": "ك-360",
-      "barrier_id": "B-6dbee535",
-      "run_evidence": null
+      "barrier_id": "B-ed40921d",
+      "run_evidence": "alidators/check_skills_integrity.py في بداية الجولة؛ تحقق حي: restore خرج 0 وintegrity خرج 0؛ نافذة "
+    },
+    {
+      "fault_id": "ك-361",
+      "state": "مغلق",
+      "lesson_id": "ك-361",
+      "barrier_id": "B-d5e423e1",
+      "run_evidence": "منفَّذ: عزلت مواصفات المهارات عن brain وأعدت التشغيل؛ py_compile خرج 0، والبوابة الحقيقية خرجت "
     }
   ]
 }

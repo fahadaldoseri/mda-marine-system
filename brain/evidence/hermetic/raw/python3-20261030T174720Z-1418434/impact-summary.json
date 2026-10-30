@@ -1,0 +1,31 @@
+{
+  "connect_attempts": 1,
+  "connect_lines": [
+    "1418482 connect(3, {sa_family=AF_INET, sin_port=htons(80), sin_addr=inet_addr(\"1.1.1.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)"
+  ],
+  "execve": [
+    "/bin/sh",
+    "/usr/bin/awk",
+    "/usr/bin/bwrap",
+    "/usr/bin/python3"
+  ],
+  "files_opened_for_write": [
+    "1418477 creat(\"/newroot/dev/full\", 0444) = 5",
+    "1418477 creat(\"/newroot/dev/null\", 0444) = 5",
+    "1418477 creat(\"/newroot/dev/random\", 0444) = 5",
+    "1418477 creat(\"/newroot/dev/tty\", 0444) = 5",
+    "1418477 creat(\"/newroot/dev/urandom\", 0444) = 5",
+    "1418477 creat(\"/newroot/dev/zero\", 0444) = 5",
+    "1418477 openat(5, \"gid_map\", O_RDWR|O_CLOEXEC) = 6",
+    "1418477 openat(5, \"setgroups\", O_RDWR|O_CLOEXEC) = 6",
+    "1418477 openat(5, \"uid_map\", O_RDWR|O_CLOEXEC) = 6",
+    "1418479 openat(AT_FDCWD, \"/var/tmp/hermetic-work.GUFkJH/.hermetic-net-20261030T174720Z-1418434.probe.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+    "1418479 openat(AT_FDCWD, \"/var/tmp/hermetic-work.GUFkJH/.hermetic-net-20261030T174720Z-1418434.probe.before\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+    "1418479 openat(AT_FDCWD, \"/var/tmp/hermetic-work.GUFkJH/.hermetic-net-20261030T174720Z-1418434.probe.out\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+    "1418479 openat(AT_FDCWD, \"/var/tmp/hermetic-work.GUFkJH/.hermetic-net-20261030T174720Z-1418434.probe.rc\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+    "1418479 openat(AT_FDCWD, \"/var/tmp/hermetic-work.GUFkJH/.hermetic-net-20261030T174720Z-1418434.run.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+    "1418480 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+    "1418483 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+    "1418486 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3"
+  ]
+}

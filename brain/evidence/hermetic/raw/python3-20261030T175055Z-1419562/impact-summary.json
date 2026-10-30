@@ -1,0 +1,32 @@
+{
+  "connect_attempts": 1,
+  "connect_lines": [
+    "1419610 connect(3, {sa_family=AF_INET, sin_port=htons(80), sin_addr=inet_addr(\"1.1.1.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)"
+  ],
+  "execve": [
+    "/bin/sh",
+    "/usr/bin/awk",
+    "/usr/bin/bwrap",
+    "/usr/bin/python3"
+  ],
+  "files_opened_for_write": [
+    "1419605 creat(\"/newroot/dev/full\", 0444) = 5",
+    "1419605 creat(\"/newroot/dev/null\", 0444) = 5",
+    "1419605 creat(\"/newroot/dev/random\", 0444) = 5",
+    "1419605 creat(\"/newroot/dev/tty\", 0444) = 5",
+    "1419605 creat(\"/newroot/dev/urandom\", 0444) = 5",
+    "1419605 creat(\"/newroot/dev/zero\", 0444) = 5",
+    "1419605 openat(5, \"gid_map\", O_RDWR|O_CLOEXEC) = 6",
+    "1419605 openat(5, \"setgroups\", O_RDWR|O_CLOEXEC) = 6",
+    "1419605 openat(5, \"uid_map\", O_RDWR|O_CLOEXEC) = 6",
+    "1419607 openat(AT_FDCWD, \"/var/tmp/hermetic-work.KHAnPR/.hermetic-net-20261030T175055Z-1419562.probe.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+    "1419607 openat(AT_FDCWD, \"/var/tmp/hermetic-work.KHAnPR/.hermetic-net-20261030T175055Z-1419562.probe.before\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+    "1419607 openat(AT_FDCWD, \"/var/tmp/hermetic-work.KHAnPR/.hermetic-net-20261030T175055Z-1419562.probe.out\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+    "1419607 openat(AT_FDCWD, \"/var/tmp/hermetic-work.KHAnPR/.hermetic-net-20261030T175055Z-1419562.probe.rc\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+    "1419607 openat(AT_FDCWD, \"/var/tmp/hermetic-work.KHAnPR/.hermetic-net-20261030T175055Z-1419562.run.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+    "1419608 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+    "1419611 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+    "1419613 openat(AT_FDCWD, \"/home/ubuntu/brain-marine-news/.hermetic-write-attempt-1419483-1793382655645373902\", O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC, 0666) = -1 EROFS (Read-only file system)",
+    "1419614 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3"
+  ]
+}
