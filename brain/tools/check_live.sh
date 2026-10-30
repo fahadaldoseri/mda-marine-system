@@ -36,13 +36,36 @@ for u in ("", f"reports/{D}.html", f"reports/pdf/{D}.pdf", "sources.html"):
         bad.append(f"/{u}")
 if CMP == "1":
     import os
+    import subprocess
+    import tempfile
     loc = os.path.join(SITE, "dist", "reports", "pdf", f"{D}.pdf")
     if os.path.isfile(loc):
         a = hashlib.sha256(open(loc, "rb").read()).hexdigest()
         b = hashlib.sha256(bodies[f"reports/pdf/{D}.pdf"]).hexdigest()
-        doc["pdf_sha256"] = {"local": a, "live": b, "match": a == b}
-        if a != b:
-            bad.append("pdf-differs-from-local")
+        # ك-358 (2026-10-30): مقارنة البايتات كانت تفشل لأن PDF يُعاد توليده بزمن إنشاء جديد
+        # فيختلف الـhash بلا أي فرق في المحتوى. القياس الآن على المحتوى: عدد الصفحات + بصمة النص.
+        def sig(path):
+            try:
+                txt = subprocess.run(["pdftotext", "-layout", path, "-"], capture_output=True, timeout=120).stdout
+                pages = subprocess.run(["pdfinfo", path], capture_output=True, timeout=60).stdout.decode("utf-8", "replace")
+                np = next((l.split(":")[1].strip() for l in pages.splitlines() if l.startswith("Pages:")), "?")
+                return np, hashlib.sha256(txt).hexdigest()[:24]
+            except Exception as e:  # noqa: BLE001
+                return "?", f"خطأ: {e}"
+        with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as tf:
+            tf.write(bodies[f"reports/pdf/{D}.pdf"])
+            live_p = tf.name
+        lp, lh = sig(loc)
+        vp, vh = sig(live_p)
+        os.unlink(live_p)
+        doc["pdf_sha256"] = {"local": a, "live": b, "match": a == b,
+                             "content": {"pages_local": lp, "pages_live": vp,
+                                         "text_local": lh, "text_live": vh,
+                                         "match": (lp == vp and lh == vh)}}
+        if lp != vp or lh != vh:
+            bad.append("pdf-content-differs-from-local")
+        elif a != b:
+            doc["pdf_sha256"]["note"] = "البايتات تختلف (زمن إنشاء PDF) والمحتوى مطابق — مقبول"
     else:
         doc["pdf_sha256"] = {"local": None, "note": "لا نسخة محلية للمقارنة"}
         bad.append("no-local-pdf")
