@@ -43,7 +43,7 @@ def journal_latest(path: pathlib.Path) -> dict:
             continue
         try:
             row = json.loads(line)
-        except Exception:
+        except json.JSONDecodeError:   # سطر تالف في السجل يُتجاوَز ولا يُسقط الحكم
             continue
         if row.get("step"):
             last[row["step"]] = row
@@ -90,7 +90,7 @@ def classify(entry: dict, log_text: str) -> tuple[str, list[str]]:
     rc = entry.get("rc")
     try:
         rc_i = int(rc) if rc is not None else 0
-    except Exception:
+    except (TypeError, ValueError):   # رمز غير رقمي ⇒ يُعامل صفرًا بلا ابتلاع أخطاء أخرى
         rc_i = 0
     if entry.get("status") == "failed":
         why.append("آخر حالة: failed")

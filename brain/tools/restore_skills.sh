@@ -31,6 +31,29 @@ in_scope() {  # مهارات المشروع فقط، لا كل مهارات ال
   case "$1" in marine-news-brain/*|military-arabic-editing/*|macr-system/*|superpowers-method/*|self-learning-loop-ops/*|vocabulary-guard-ops/*) return 0 ;; print-layout-gate-ops/*) return 0 ;; *) return 1 ;; esac
 }
 
+# ── 0) نسخة الدماغ مرجع حاكم (ك-340) ──
+# السبب الجذري لعطل G018: المقارنة كانت بين المحلي والمستودع فقط، فإذا كان
+# المستودع يحمل نسخة مختصرة (من تصدير قديم) هزمت النسخة الغنية ومسحت الشواهد.
+# القاعدة: أي ملف مهارة موجود في "$B/skills" هو المرجع، يُفرض على المحلي والمستودع.
+CANON="$B/skills"
+if [ -d "$CANON" ]; then
+  while IFS= read -r cf; do
+    rel="${cf#"$CANON"/}"
+    in_scope "$rel" || continue
+    case "$(basename "$rel")" in *.md|*.json|*.py|*.txt) ;; *) continue ;; esac
+    for tgt in "$SK/$rel" "$REPO/$rel"; do
+      if [ ! -f "$tgt" ] || ! cmp -s "$cf" "$tgt"; then
+        BK="${B:-.}/logs/skills-canon-$(date -u +%Y%m%d-%H%M%S)"
+        mkdir -p "$BK/$(dirname "$rel")" "$(dirname "$tgt")"
+        [ -f "$tgt" ] && cp -f "$tgt" "$BK/$(basename "$tgt").bak" 2>/dev/null || true
+        cp -f "$cf" "$tgt"
+        echo "  ⇧ فُرضت نسخة الدماغ: $rel → ${tgt#"$B"/}"
+      fi
+    done
+  done < <(find "$CANON" -type f | sort)
+fi
+
+
 while IFS= read -r f; do
   rel="${f#"$REPO"/}"
   in_scope "$rel" || continue
@@ -71,6 +94,7 @@ echo "  ملفات المستودع: $(find "$REPO" -type f | wc -l) · نُزّ
 broken=()
 while IFS= read -r f; do
   rel="${f#"$REPO"/}"
+  in_scope "$rel" || continue   # ك-339: التحقق النهائي كان بلا مرشّح النطاق، فيعلن كسرًا لملفات لم تُنسخ أصلًا
   [ -f "$SK/$rel" ] && cmp -s "$f" "$SK/$rel" || broken+=("$rel")
 done < <(find "$REPO" -type f \( -name "*.md" -o -name "*.json" -o -name "*.py" -o -name "*.txt" \) | sort)
 

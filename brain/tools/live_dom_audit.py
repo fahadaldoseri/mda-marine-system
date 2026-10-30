@@ -21,7 +21,8 @@ from pathlib import Path
 
 try:
     from playwright.sync_api import sync_playwright
-except Exception as exc:  # pragma: no cover
+    from playwright.sync_api import Error as PWError
+except ImportError as exc:  # فشل مغلق: غياب Playwright يمنع التدقيق (لا يبتلع أخطاء أخرى)
     print(f"✘ تعذّر استيراد Playwright: {exc}", file=sys.stderr)
     sys.exit(2)
 
@@ -137,11 +138,11 @@ def audit(url: str, shots: Path | None, min_touch: int) -> dict:
                     if menu:
                         menu.click()
                         page.wait_for_timeout(300)
-                except Exception:
+                except PWError:   # فشل تفاعل القائمة لا يُسقط القياس
                     pass
                 data = page.evaluate(JS, {"minTouch": min_touch})
                 data["http_status"] = 200
-            except Exception as exc:
+            except PWError as exc:   # فشل التصفح يُسجَّل خطأً في النتيجة لا يُبتلع
                 data = {"error": str(exc)[:160], "http_status": 0,
                         "counts": {"dup": 0, "touch": 0, "broken": 0, "empty": 0,
                                    "hiddenInteractive": 0, "clipped": 0}}
@@ -150,7 +151,7 @@ def audit(url: str, shots: Path | None, min_touch: int) -> dict:
                 slug = url.rstrip("/").split("/")[-1].replace(".html", "") or "root"
                 try:
                     page.screenshot(path=str(shots / f"{slug}-{name}.png"), full_page=False)
-                except Exception:
+                except PWError:   # تعذّر اللقطة لا يُسقط التدقيق
                     pass
             result["viewports"][name] = data
             ctx.close()

@@ -107,7 +107,7 @@ Skill creation involves these steps:
 2. Plan reusable skill contents (scripts, references, templates)
 3. Initialize the skill (run init_skill.py)
 4. Edit the skill (implement resources and write SKILL.md)
-5. Deliver the skill (send SKILL.md path via notify_user)
+5. Validate, package, and deliver the skill
 6. Iterate based on real usage
 
 Follow these steps in order, skipping only if there is a clear reason why they are not applicable.
@@ -140,20 +140,25 @@ Skip this step only if the skill being developed already exists, and iteration o
 
 When creating a new skill from scratch, always run the `init_skill.py` script. The script conveniently generates a new template skill directory that automatically includes everything a skill requires, making the skill creation process much more efficient and reliable.
 
-Usage:
+Usage (`<skill-creator-root>` is the directory containing this SKILL.md; use `python3` on macOS and Linux, `py -3` on Windows, and quote paths):
 
 ```bash
-python /home/ubuntu/skills/skill-creator/scripts/init_skill.py <skill-name>
+python3 "<skill-creator-root>/scripts/init_skill.py" <skill-name> [--output-dir "<absolute-directory>"]
 ```
 
 The script:
 
-- Creates the skill directory at `/home/ubuntu/skills/<skill-name>/`
+- Creates the skill under `--output-dir`. Without it, uses `/home/ubuntu/skills/` on cloud runtimes and, on Work Locally, the Manus user skill directory: `user-skills` beside the directory that contains `skill-creator`, normally `~/.manus/user-skills`. If neither exists, it stops and asks for `--output-dir`
 - Generates a SKILL.md template with proper frontmatter and TODO placeholders
 - Creates example resource directories: `scripts/`, `references/`, and `templates/`
 - Adds example files in each directory that can be customized or deleted
 
 After initialization, customize or remove the generated SKILL.md and example files as needed.
+
+On Work Locally:
+
+- Keep skills in the Manus user skill directory so later tasks on this computer discover them.
+- Do not create or edit skills in the directory that contains `skill-creator`. Manus manages it and replaces same-name skills when it syncs. To change one of those skills, edit a copy in the user skill directory.
 
 ### Step 4: Edit the Skill
 
@@ -163,9 +168,9 @@ When editing the (newly-generated or existing) skill, remember that the skill is
 
 Consult these helpful guides based on your skill's needs:
 
-- **Multi-step processes**: See `/home/ubuntu/skills/skill-creator/references/workflows.md` for sequential workflows and conditional logic
-- **Output formats or quality standards**: See `/home/ubuntu/skills/skill-creator/references/output-patterns.md` for template and example patterns
-- **Progressive Disclosure Patterns**: See `/home/ubuntu/skills/skill-creator/references/progressive-disclosure-patterns.md` for splitting content across files.
+- **Multi-step processes**: See `references/workflows.md` for sequential workflows and conditional logic
+- **Output formats or quality standards**: See `references/output-patterns.md` for template and example patterns
+- **Progressive Disclosure Patterns**: See `references/progressive-disclosure-patterns.md` for splitting content across files.
 
 These files contain established best practices for effective skill design.
 
@@ -199,30 +204,36 @@ Once development of the skill is complete, validate and deliver it to the user.
 
 #### Validate the Skill
 
-Run the validation script to ensure the skill meets all requirements:
+Run the validation script to ensure the skill meets all requirements. It uses PyYAML when it is installed and otherwise a built-in parser for the usual frontmatter forms. Only when it reports that PyYAML is required, install PyYAML in a task-local virtual environment outside the skill directory and use that interpreter. Do not write your own YAML parser.
 
 ```bash
-python /home/ubuntu/skills/skill-creator/scripts/quick_validate.py <skill-name>
+python3 "<skill-creator-root>/scripts/quick_validate.py" --path "<absolute-path-to-skill>"
 ```
 
-If validation fails, fix the errors and run validation again.
+If validation fails, fix the errors and run validation again. The validator rejects the template's `[TODO: ...]` description and repeated frontmatter keys.
+
+A bare skill name, `quick_validate.py <skill-name>`, resolves in the same default directory as `init_skill.py`. Do not use a Desktop or web client type to infer the execution environment. Use the actual runtime path.
+
+#### Package the Skill
+
+On Work Locally, package a delivery archive after validation. On cloud runtimes, skip this step unless the user asks for an archive file, because attaching `SKILL.md` already packages the skill:
+
+```bash
+python3 "<skill-creator-root>/scripts/package_skill.py" "<absolute-path-to-skill>" "<absolute-path-to-output>/<skill-name>.skill"
+```
+
+Write the archive outside the skill directory, normally in the current working folder. The packager validates the source before it writes, so the archive needs no separate check. It creates a ZIP container whose root contains `SKILL.md`, `scripts/`, `references/`, and other skill files directly, with directory entries such as `references/`. It keeps executable bits, normalizes other permissions, and excludes known cache and temporary files. It rejects unsafe links, special files, path escapes, output paths inside the source, and existing output files.
+
+Use `.skill` for a skill delivery archive. Use `.skill.zip` only when a delivery surface explicitly requires that name. Keep ordinary `.zip` attachments as ordinary attachments. Do not recursively package arbitrary local `SKILL.md` files.
 
 #### Deliver to User
 
-Use `message` tool to send the SKILL.md file as attachment:
+Deliver each skill once, with a single link; linking both the archive and `SKILL.md` shows the skill twice.
 
-```
-/home/ubuntu/skills/{skill-name}/SKILL.md
-```
+- On Work Locally, link only the `.skill` file by its absolute path, for example `[<skill-name>.skill](<absolute-path-to-output>/<skill-name>.skill)`. Manus uploads it and offers it as a skill the user can add to My Skills. A linked `SKILL.md` arrives as a plain file.
+- On cloud runtimes, link only `/home/ubuntu/skills/<skill-name>/SKILL.md`; the system packages the skill directory into a skill card. When the user asked for an archive file, link that `.skill` instead of `SKILL.md`.
 
-The system will automatically:
-
-1. Detect the path pattern `/home/ubuntu/skills/*/SKILL.md`
-2. Package the skill directory into a `.skill` file
-3. Send to frontend as a special card with options:
-   - Add to My Skills
-   - Download
-   - Preview
+Do not claim that a skill was saved or installed without a successful result. Do not upload a replacement for a user's installed skill unless the user explicitly requests that operation.
 
 ### Step 6: Iterate
 
