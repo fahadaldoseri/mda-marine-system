@@ -157,6 +157,19 @@ def check_all(brain: pathlib.Path, date: str) -> int:
         if z.get("carry_over") and (z.get("qualifying_codes") or []):
             problems.append(f"(7) القطاع {z['id']} موصوف استمراريًا وله واقعة داخل الفترة: {z['qualifying_codes']}")
 
+    # (9) ترويسة الإصدار (lede/headline) — عطل 2026-10-30: بقيت الجملة الأولى تذكر الفترة الرقمية
+    #     وموقعًا ليس من القطاعات («شرق المتوسط») ومستوى يخالف البطاقة.
+    lede = (meta.get("lede") or "") + " " + (meta.get("headline") or "")
+    if re.search(r"\d{6}Z", lede):
+        problems.append("(9) الترويسة تحمل الفترة الرقمية (نمط 290400Z) — المعتمد «خلال 24 ساعة السابقة»")
+    forbidden = ["شرق المتوسط", "شرق البحر المتوسط", "البحر الأحمر وباب المندب"]
+    for w in forbidden:
+        if w in lede:
+            problems.append(f"(9) الترويسة تذكر موقعًا/صيغة خارج القطاعات المعتمدة: «{w}»")
+    top_zone = (overall.get("top_zone") or "").strip()
+    if top_zone and lvl and lvl != allowed[-1] and top_zone not in lede:
+        problems.append(f"(9) الترويسة لا تسمّي أعلى قطاع ({top_zone}) مع مستوى {lvl}")
+
     if not notes:
         notes.append(f"المستوى العام {lvl} · أعلى قطاع {overall.get('top_zone')} · عدّاد {zones_json.get('counter')}")
 
