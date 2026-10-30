@@ -26,31 +26,20 @@ bwrap --unshare-all --die-with-parent --unshare-net \
 python3 -m pytest -q tests/test_hermetic_run.py
 ```
 
-كل تشغيل يكتب:
+كل تشغيل يكتب في مسار ثابت يعتمد على `--name`، ويستبدل مخرجات التشغيل السابق:
 
-- `evidence/hermetic/<tool>-<timestamp>-<pid>.json`
-- `evidence/hermetic/traces/<tool>-<timestamp>-<pid>.strace`
-- بصمات قبل/بعد لكل ملف عادي أو رابط رمزي في الشجرتين تحت `evidence/hermetic/fingerprints/`.
+- `evidence/hermetic/<name>.json`
+- `evidence/hermetic/traces/<name>.strace`
+- `evidence/hermetic/raw/<name>/{impact-summary,project-compare,seawatch-compare,stdout,stderr,systemd-probe.stderr}`
+- بصمات قبل/بعد لكل ملف عادي أو رابط رمزي في الشجرتين تحت `evidence/hermetic/fingerprints/<name>/`.
+
+يبقى زمن التشغيل داخل `timestamp_utc` وداخل محتوى السجل فقط؛ لا يدخل في اسم ملف. لذلك لا يُنشئ التشغيل الثاني ملفًا جديدًا ولا يترك ملفًا زمنيًا شاردًا.
 
 مقارنة الأثر تستبعد فقط `evidence/hermetic/**` لأنها مخرجات الحارس نفسه؛ كل المسارات الأخرى في `/home/ubuntu/brain-marine-news` و`/home/ubuntu/seawatch` داخلة في بصمات SHA-256. هذا الاستثناء يمنع أن يُحسب إنشاء الدليل الذاتي كضرر من الأداة.
 
 ## التجارب الحية والقياسات
 
-| التجربة | الأمر/السلوك | رمز الخروج | `net_packets` | الملفات المتغيرة خارج العزل | دليل JSON |
-|---|---|---:|---:|---:|---|
-| قراءة موجبة | قراءة أول سطر من `CLAUDE.md` | 0 | 0 | 0 | [`read-only-proof-20261030T174758Z-1418733.json`](./read-only-proof-20261030T174758Z-1418733.json) |
-| كتابة سالبة | سكربت يحاول إنشاء `.hermetic-direct-write-*` داخل المشروع؛ طبع `WRITE_FAILED:OSError` | 7 | 0 | 0 | [`write-attempt-20261030T174804Z-1418802.json`](./write-attempt-20261030T174804Z-1418802.json) |
-| شبكة سالبة | `socket.create_connection(('1.1.1.1',80),3)` | 1 | 0 | 0 | [`network-attempt-20261030T174809Z-1418889.json`](./network-attempt-20261030T174809Z-1418889.json) |
-| مهلة سالبة | `while True: pass` مع `--timeout 1` | 124 | 0 | 0 | [`timeout-limit-20261030T174814Z-1418956.json`](./timeout-limit-20261030T174814Z-1418956.json) |
-
-في التجارب الأربع فشل probe الشبكة الداخلي المعروف برمز 1 مع `OSError: [Errno 101] Network is unreachable`. وفي تجربة الشبكة سجل trace محاولتي `connect` (probe + الأداة)، وفي القراءة/الكتابة/المهلة سجل probe محاولة واحدة. عدّ الحزم من فروق عدادات `/proc/net/dev` داخل namespace، وبقي صفرًا في كل تجربة. تجربة المهلة استغرقت 1036ms تقريبًا وأعاد `timeout` الرمز 124.
-
-مسارات trace الخام للتجارب الأربع:
-
-- `/home/ubuntu/brain-marine-news/evidence/hermetic/traces/read-only-proof-20261030T174758Z-1418733.strace`
-- `/home/ubuntu/brain-marine-news/evidence/hermetic/traces/write-attempt-20261030T174804Z-1418802.strace`
-- `/home/ubuntu/brain-marine-news/evidence/hermetic/traces/network-attempt-20261030T174809Z-1418889.strace`
-- `/home/ubuntu/brain-marine-news/evidence/hermetic/traces/timeout-limit-20261030T174814Z-1418956.strace`
+اختبار `tests/test_hermetic_run.py` يعيد تشغيل القراءة والكتابة والشبكة والمهلة، ويثبت أن كل حالة تعيد استخدام `evidence/hermetic/python3.json` وملحقاته بدل إنشاء ملف جديد. أما الأدلة الزمنية السابقة لهذه التجارب فقد أُرشفت خارج شجرة المشروع في `/home/ubuntu/audit-2026-10-30/backups-declare/` مع سجل بصمات؛ المسار القياسي الحالي هو [`python3.json`](./python3.json).
 
 ## الإصدارات والقياسات الحرفية
 

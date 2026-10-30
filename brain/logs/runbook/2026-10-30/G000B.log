@@ -12,4 +12,4 @@ options:
   -h, --help          show this help
 
 The separator -- is mandatory. Unknown options exit 2. Every command run emits
- evidence/hermetic/<tool>-<timestamp>.json and a raw strace file.
+ evidence/hermetic/<name>.json and a raw strace file at a stable, overwriting path.
