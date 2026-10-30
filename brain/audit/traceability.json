@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-30T18:06:10.975971+00:00",
+  "generated_at": "2026-10-30T18:13:33.463770+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -2774,6 +2774,13 @@
       "lesson_id": "ك-361",
       "barrier_id": "B-d5e423e1",
       "run_evidence": "منفَّذ: عزلت مواصفات المهارات عن brain وأعدت التشغيل؛ py_compile خرج 0، والبوابة الحقيقية خرجت "
+    },
+    {
+      "fault_id": "ك-362",
+      "state": "مفتوح",
+      "lesson_id": "ك-362",
+      "barrier_id": "B-fcfde979",
+      "run_evidence": null
     }
   ]
 }
