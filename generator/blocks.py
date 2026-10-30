@@ -153,7 +153,8 @@ def decision_card(dc, inline):
         pts = _points(value)
         if pts and label == "ما يُراقب خلال 24 ساعة":
             # صف المراقبة يُعرض عددًا وإحالة: النصوص الكاملة في قسم المؤشرات (منع التكرار الحرفي)
-            body = (f'<p class="dc-note">عدد البنود: {len(pts)} · وتفصيلها في قسم «علامات الإنذار المبكر».</p>')
+            n_watch = _sec_count((_CODE_CTX.get() or {}).get("date") or "", "علامات الإنذار المبكر", default=0) or len(pts)
+            body = (f'<p class="dc-note">عدد البنود: {n_watch} · وتفصيلها في قسم «علامات الإنذار المبكر».</p>')
         elif pts:
             # الاقتصار على بندين في البطاقة (الباقي في القسم الكامل) — يمنع التكرار الحرفي
             shown, extra = pts[:2], max(0, len(pts) - 2)

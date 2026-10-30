@@ -52,6 +52,7 @@ DAILY_TITLE = "التقرير اليومي لأمن الملاحة والأوض�
 DAILY_PLACEHOLDERS = ['التقرير الصباحي اليومي', 'التقرير اليومي', 'التقرير اليومي لأمن الملاحة', 'تقرير أمن الملاحة']
 
 SOURCES_MANIFEST = Path(f'{BRAIN}/appendices/sources-manifest.json')
+THREAT_SCALE = BRAIN / "appendices" / "threat-scale.json"
 
 
 def approved_source_count(fallback: int = 40) -> int:
@@ -94,13 +95,47 @@ def ar_date(iso: str) -> str:
         return iso
 
 
+def _risk_catalog() -> tuple[dict, dict]:
+    """يقرأ سلم الخطر الحاكم؛ الملف المفقود أو غير الصالح يمنع البناء."""
+    try:
+        raw = json.loads(THREAT_SCALE.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ValueError(f"سلم الخطر الحاكم غير قابل للقراءة: {THREAT_SCALE}: {exc}") from exc
+    by_token, by_label = {}, {}
+    for level in raw.get("levels") or []:
+        token = str(level.get("token") or "").strip().lower()
+        ar = str(level.get("ar") or "").strip()
+        if not token or not ar or token in by_token:
+            raise ValueError("سلم الخطر الحاكم ناقص أو يحوي رمزًا مكررًا")
+        by_token[token] = level
+        for label in (ar, level.get("en"), level.get("jmic")):
+            if label:
+                by_label[str(label).strip().lower()] = token
+    if not by_token:
+        raise ValueError("سلم الخطر الحاكم فارغ")
+    return by_token, by_label
+
+
 def risk_of(meta: dict):
     dc = meta.get("decision_card") or {}
     kind = str(dc.get("risk_kind") or "").strip().lower()
     label = str(dc.get("risk") or meta.get("threat_level") or "").strip()
-    if kind not in ("high", "med", "low"):
-        kind = {"مرتفع": "high", "متوسط": "med", "منخفض": "low"}.get(label, "")
-    return label or "غير محدد", kind or "med"
+    by_token, by_label = _risk_catalog()
+    label_kind = by_label.get(label.lower()) if label else None
+    if kind:
+        if kind not in by_token:
+            raise ValueError(f"risk_kind خارج سلم الخطر الحاكم: «{kind}» — يُمنع البناء")
+        if label and not label_kind:
+            raise ValueError(f"مستوى الخطر خارج سلم الخطر الحاكم: «{label}» — يُمنع البناء")
+        # بعض الإصدارات القديمة حملت رمزًا لونيًا قديمًا؛ لا نُسقطها إلى med،
+        # بل نستخدم المستوى العربي الحاكم إن كان معروفًا.
+        if label_kind and label_kind != kind:
+            kind = label_kind
+    else:
+        if not label or not label_kind:
+            raise ValueError("ينقص مستوى خطر معتمد أو risk_kind — يُمنع البناء")
+        kind = label_kind
+    return label or str(by_token[kind].get("ar") or ""), kind
 
 
 RESTRICTED_CLASSES = {"مقيّد", "حساس"}
