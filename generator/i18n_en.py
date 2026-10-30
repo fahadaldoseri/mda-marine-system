@@ -39,6 +39,8 @@ I18N = ROOT / "sources" / "i18n" / "en"
 SKIP_TAGS = {"script", "style", "code"}
 TR_ATTRS = ("title", "aria-label", "alt", "placeholder", "data-label")
 ARABIC = re.compile(r"[\u0600-\u06FF]")
+# معرف تحذير UKMTO/NAVAREA بصيغة رقم-سنة؛ لا يجوز إدخاله من مفتاح جزئي.
+ADVISORY_ID = re.compile(r"(?<![\d-])\d{3}-\d{2}(?![\d-])")
 MONTHS = {
     "يناير": "January", "فبراير": "February", "مارس": "March", "أبريل": "April",
     "مايو": "May", "يونيو": "June", "يوليو": "July", "أغسطس": "August",
@@ -54,6 +56,13 @@ COUNTER = re.compile(r"^(\d+)\s+(" + "|".join(COUNT_WORD) + r")\b\s*(·?)$")
 def norm(s: str) -> str:
     s = (s or "").replace("\u00a0", " ")
     return re.sub(r"\s+", " ", s).strip()
+
+
+def _partial_key_safe(text: str, key: str) -> bool:
+    """لا تسمح بمفتاح جزئي أن يضيف معرف تحذير غير موجود في العقدة."""
+    text_ids = set(ADVISORY_ID.findall(text))
+    key_ids = set(ADVISORY_ID.findall(key))
+    return not key_ids or key_ids.issubset(text_ids)
 
 
 def plain(md_line: str) -> str:
@@ -189,11 +198,16 @@ def make_translator(tm: dict[str, str], gl: dict[str, str]):
         pat = localize_patterns(t)
         if pat:
             return pat
-        starts = [k for k in keys if k.startswith(t)]
+        # معرفات التحذير حساسة للهوية: لا تُقبل المطابقة الجزئية إلا إذا كانت
+        # كل معرفات المفتاح موجودة حرفيًا في العقدة نفسها؛ فلا يتسرّب 186-26
+        # إلى عقدة ev-01 التي لا تحمل إلا موقعها.
+        starts = [k for k in keys if k.startswith(t) and _partial_key_safe(t, k)
+                  and not norm(t).endswith(("·", "…"))]
         if starts:
             k = min(starts, key=len)
             return tm.get(k) or gl.get(k) or ''
-        within = [k for k in keys if t.startswith(k)]
+        within = [k for k in keys if t.startswith(k) and _partial_key_safe(t, k)
+                  and not ADVISORY_ID.search(t)]
         if within:
             k = max(within, key=len)
             return tm.get(k) or gl.get(k) or ''
