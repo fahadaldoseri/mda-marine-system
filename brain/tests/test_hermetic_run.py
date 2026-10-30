@@ -52,13 +52,14 @@ def test_unknown_runner_option_is_usage_error() -> None:
 
 def test_read_only_command_runs_and_emits_evidence() -> None:
     before = set(EVIDENCE_DIR.glob("*.json"))
+    claude_md = str(ROOT / "CLAUDE.md")
     result = run_runner(
         "--timeout",
         "10",
         "--",
         sys.executable,
         "-c",
-        "from pathlib import Path; print(Path('/home/ubuntu/brain-marine-news/CLAUDE.md').read_text().splitlines()[0])",
+        f"from pathlib import Path; print(Path({claude_md!r}).read_text().splitlines()[0])",
     )
     assert result.returncode == 0, result.stderr
     assert "CLAUDE.md" in result.stdout

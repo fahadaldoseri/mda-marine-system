@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-30T21:58:04.511531+00:00",
+  "generated_at": "2026-10-30T23:13:46.213937+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -2816,6 +2816,48 @@
       "lesson_id": "ك-367",
       "barrier_id": "B-5cb076c7",
       "run_evidence": "ools/causality_window.sh صراحة إلى G000A، وأضيفت قاعدة D005؛ handbook خرج 0 وverify خرج 0 وtest_mani"
+    },
+    {
+      "fault_id": "ك-368",
+      "state": "مغلق",
+      "lesson_id": "ك-368",
+      "barrier_id": "B-b2d4cebc",
+      "run_evidence": "eawatch-xp4qirmr.manus.space/reports/2026-10-30.html + عدّ المنتجات → خرج 0 · «خمسة منتجات رسمية» قا"
+    },
+    {
+      "fault_id": "ك-369",
+      "state": "مغلق",
+      "lesson_id": "ك-369",
+      "barrier_id": "B-1b35fc69",
+      "run_evidence": "watch-xp4qirmr.manus.space/reports/2026-10-30.html و/additions.html → خرج 0 · AR_REPORT_HAS_SEC04_LI"
+    },
+    {
+      "fault_id": "ع-370",
+      "state": "مغلق",
+      "lesson_id": "ع-370",
+      "barrier_id": "B-c95db083",
+      "run_evidence": "eawatch-xp4qirmr.manus.space/reports/en/2026-10-30.html + فحص ev-01 → خرج 0 · EN_EVENT_HAS_187_26=Tr"
+    },
+    {
+      "fault_id": "ك-371",
+      "state": "مغلق",
+      "lesson_id": "ك-371",
+      "barrier_id": "B-92eb6ae1",
+      "run_evidence": "watch-xp4qirmr.manus.space/reports/2026-10-30.html و/additions.html → خرج 0 · AR_FIRE_EVIDENCE= True"
+    },
+    {
+      "fault_id": "م-372",
+      "state": "بانتظار التحقق",
+      "lesson_id": "م-372",
+      "barrier_id": "B-076fc36c",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-373",
+      "state": "مغلق",
+      "lesson_id": "ك-373",
+      "barrier_id": "B-c282d6f8",
+      "run_evidence": " validators/check_threat_consistency.py --date 2026-10-30 --brain . → خرج 0 · المستوى العام مرتفع جد"
     }
   ]
 }

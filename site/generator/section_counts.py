@@ -31,7 +31,7 @@ def counts(date: str) -> dict:
         return {}
     out, cur = {}, None
     for line in p.read_text(encoding="utf-8").splitlines():
-        m = re.match(r"^##\s+(.+?)\s*$", line)
+        m = re.match(r"^#{2,3}\s+(.+?)\s*$", line)
         if m:
             cur = m.group(1).strip(); out.setdefault(cur, 0); continue
         if cur and re.match(r"^\s*(?:[-*]|\d+[.)])\s+\S", line):
