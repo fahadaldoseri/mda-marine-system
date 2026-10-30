@@ -163,13 +163,13 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
             f'<p class="sc-more">{n_acts} بنود · '
             '<a href="/additions.html#sec-03" data-goto="التوجيهات التشغيلية" data-alt="/additions.html#sec-03">القسم الكامل</a></p></div></div>')
     watch = _list_items(dc.get("watch"))
-    n_watch = _sec_count(meta.get("date") or meta.get("iso") or meta.get("report_date") or "", "مؤشرات التحذير المبكر", default=0) or len(watch)
+    n_watch = _sec_count(meta.get("date") or meta.get("iso") or meta.get("report_date") or "", "علامات الإنذار المبكر", default=0) or len(watch)
     if watch:
         rows.append(
             '<div class="sc-row"><div class="sc-l">ما يُراقب خلال 24 ساعة</div>'
             f'<div class="sc-v"><p class="sc-gist">{inline(_gist(watch, limit=2))}</p>'
             f'<p class="sc-more">{n_watch} بنود · '
-            '<a href="/additions.html#sec-07" data-goto="علامات الإنذار المبكر" data-alt="/additions.html#sec-07">المؤشرات الكاملة</a></p></div></div>')
+            '<a href="/additions.html#sec-04" data-goto="علامات الإنذار المبكر" data-alt="/additions.html#sec-04">المؤشرات الكاملة</a></p></div></div>')
     key = ""
     if rkey_html:
         key = rkey_html.replace('class="rkey no-print"', 'class="sc-rkey"')

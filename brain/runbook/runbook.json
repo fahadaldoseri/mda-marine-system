@@ -2904,7 +2904,9 @@
           "tools/sync_profile_hash.py"
         ],
         "gates": [],
-        "tests": []
+        "tests": [
+          "tests/test_en_advisory_id_matching.py"
+        ]
       },
       "on_fail": "stop",
       "command": [

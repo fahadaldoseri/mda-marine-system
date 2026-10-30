@@ -2,6 +2,11 @@
 
 كل بند يذكر ما أُثبت بالتشغيل. ما لم يُختبر يُذكر صراحةً.
 
+## 31 أكتوبر 2026 — قابلية النقل وتماثل الأدلة
+
+- اشتُقت جذور اختبارات وعدّاء hermetic ونافذة السببية من موقع الملف أو `BRAIN_DIR`/`SITE_DIR`/`SKILLS_DIR`؛ `python3 validators/check_portable_paths.py` = 0، واختبارات العداء 7/7 واختبار مطابقة المعرّف = 0.
+- صُنّفت `brain/evidence/**` بيانات دليل مولّدة في `appendices/code-paths.json` بعد أن منع الحارس 53 مسارًا غير مصنّف؛ `python3 tools/code_paths.py check --root .` = 0 بعد الإصلاح، و`python3 tools/runbook.py verify --root brain` = 0.
+
 ## 24 أكتوبر 2026 (2) — بعد أول تثبيت على الخادم
 
 مراجعة `bootstrap-result.md` من مانوس كشفت:

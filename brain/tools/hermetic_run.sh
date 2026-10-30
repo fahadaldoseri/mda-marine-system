@@ -4,7 +4,14 @@
 set -u
 
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SEAWATCH_ROOT="/home/ubuntu/seawatch"
+if [[ -n "${SITE_DIR:-}" && -d "$SITE_DIR" ]]; then
+  SEAWATCH_ROOT="$(cd "$SITE_DIR" && pwd)"
+elif [[ -d "$PROJECT_ROOT/../seawatch" ]]; then
+  SEAWATCH_ROOT="$(cd "$PROJECT_ROOT/../seawatch" && pwd)"
+else
+  SEAWATCH_ROOT="$(cd "$PROJECT_ROOT/../site" && pwd)"
+fi
+export PROJECT_ROOT SEAWATCH_ROOT
 EVIDENCE_DIR="${HERMETIC_EVIDENCE_DIR:-$PROJECT_ROOT/evidence/hermetic}"
 TIMEOUT_SECONDS=60
 MEMORY_MB=512
@@ -511,8 +518,8 @@ evidence = {
     "changed_files_outside_isolation": len(changed_paths),
     "changed_paths_outside_isolation": changed_paths,
     "fingerprints": {
-        "project_root": "/home/ubuntu/brain-marine-news",
-        "seawatch_root": "/home/ubuntu/seawatch",
+        "project_root": os.environ["PROJECT_ROOT"],
+        "seawatch_root": os.environ["SEAWATCH_ROOT"],
         "project_before": project_before,
         "project_after": project_after,
         "seawatch_before": seawatch_before,

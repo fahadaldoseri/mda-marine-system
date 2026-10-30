@@ -2,13 +2,15 @@
 # نافذة رصد سببية طويلة: تراقب الأصول الحاكمة وكاتب .skill_versions عبر auditd
 # الاستعمال: bash tools/causality_window.sh [seconds] [outdir]
 set -u
+PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+BRAIN_ROOT="${BRAIN_DIR:-$PROJECT_ROOT}"
 SECS="${1:-5400}"
-OUT="${2:-/home/ubuntu/brain-marine-news/evidence/causality}"
+OUT="${2:-$BRAIN_ROOT/evidence/causality}"
 TS="$(date -u +%Y%m%dT%H%M%SZ)"
 LOG="$OUT/${TS}-causality-window.log"
 SAMPLES="$OUT/${TS}-samples.tsv"
 mkdir -p "$OUT"
-SK=/home/ubuntu/skills
+SK="${SKILLS_DIR:-$PROJECT_ROOT/../skills}"
 FILES=(
   "$SK/marine-news-brain/SKILL.md"
   "$SK/military-arabic-editing/SKILL.md"
@@ -18,7 +20,7 @@ FILES=(
 )
 {
   echo "# نافذة سببية · بدأت $(date -u +%FT%TZ) · المدة ${SECS}s"
-  echo "# أداة: auditd (-w /home/ubuntu/skills -p wa -k skills_write) + عيّنات أسطر/بصمات"
+  echo "# أداة: auditd (-w $SK -p wa -k skills_write) + عيّنات أسطر/بصمات"
   echo "ts_utc	event	detail"
 } > "$LOG"
 printf 'ts_utc\t' > "$SAMPLES"

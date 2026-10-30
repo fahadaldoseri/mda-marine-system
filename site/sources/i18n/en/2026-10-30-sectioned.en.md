@@ -2,14 +2,14 @@
 > Maritime Domain Awareness Center — Kingdom of Bahrain · Issue: W B 30/10/26 · Reporting period: 290400Z–300400Z October 2026
 
 ## Summary
-- Situation at 0400Z: the threat level is high in the Strait of Hormuz and the Arabian Gulf following a commercial vessel fire inside the strait and successive official warnings; high in the Red Sea and Bab el-Mandeb; and medium in the Arabian Sea and the Eastern Mediterranean.
-- Most significant development: a vessel fire 25 nautical miles northeast of Khasab, later extinguished with the crew safe, together with three UKMTO bulletins and an update to a JMIC bulletin during the period.
+- Situation at 0400Z: the threat level is high in the Strait of Hormuz and the Arabian Gulf following an official report of an attack on a vessel and an official report of suspicious activity, with professional reporting of a vessel fire inside the strait and successive official warnings; low in the Red Sea, Bab el-Mandeb, the Arabian Sea and the Horn of Africa.
+- Most significant development: UKMTO established suspicious activity 25 nautical miles northeast of Khasab; professional reporting described a vessel fire, its subsiding and the crew's safety, alongside five official products: UKMTO warning No. 187-26 and its 001 update, warning No. 186-26, update 185-26/001, and JMIC bulletin No. 109 update.
 - Operational impact: increase vigilance along the transit route, expect short-term official warnings, and document every report before any route change.
 
 ## Geographic Distribution of Incidents
 | Region | Incident | Source | Confirmation Status |
 |---|---|---|---|
-| Strait of Hormuz and Gulf of Oman | Vessel fire 25 nautical miles northeast of Khasab, subsequently extinguished | UKMTO · straits.live · Jerusalem Post | Official report and professional reporting |
+| Strait of Hormuz and Gulf of Oman | Officially established suspicious activity, with professional reporting of a vessel fire and its subsiding | UKMTO · straits.live · Jerusalem Post | Official activity and professional reporting |
 | Strait of Hormuz | UKMTO warning No. 187-26 and its 001 update | UKMTO (official account) | Official report |
 | Strait of Hormuz | UKMTO warning No. 186-26 | UKMTO (official account) | Official report |
 | Strait of Hormuz | Update to UKMTO warning No. 185-26 | UKMTO (official account) | Official report |
@@ -24,12 +24,12 @@
 | Somalia | U.S. tightening of entry rules for vessels arriving from Somali ports | Splash 247 | Professional report |
 | Qatar | Visit by the Bahraini Coast Guard delegation to the General Directorate of Coasts and Borders | Qatar News Agency | Official report |
 
-The period's incidents focused on the transit route through the Strait of Hormuz. The fire became a confirmed maritime event according to a UKMTO report and was then extinguished. Meanwhile, the reports concerning Yemen and the refineries remained without a new maritime report and should not be read as a development in vessel movements.
+The period's incidents focused on the transit route through the Strait of Hormuz. The UKMTO report established suspicious activity, while professional sources reported a vessel fire, its subsiding and the crew's safety; the first update also mentioned the extinguishing. The official report does not establish the fire or the crew's safety. Meanwhile, the reports concerning Yemen and the refineries remained without a new maritime report and should not be read as a development in vessel movements.
 
 ## Situation Indicators
 | Indicator | Current | Previous | Trend | Significance |
 |---|---:|---:|---|---|
-| UKMTO bulletins and updates during the period | 4 | 2 | Increase | Short-term official monitoring of the transit route |
+| Official products from UKMTO and JMIC during the period | 5 | 2 | Increase | Short-term official monitoring of the transit route |
 | JMIC updates during the period | 1 | 1 | No change | Continued official coordination without announced escalation |
 | Reports of fire or outbreak of fire on vessels in the Strait of Hormuz | 3 | 0 | Increase | First confirmed fire report during the period |
 | Reports denying or disputing mines in the waterways | 2 | 1 | Limited increase | Divergence in accounts of the cause of the incidents |
@@ -71,7 +71,7 @@ Level in the Horn of Africa: Low. No qualifying incident within the period.
 | MN-2026-10-30-05 | UKMTO reported an attack on a vessel in the Strait of Hormuz, naming a company | UKMTO · Strait of Hormuz · 29 October 2026 | Undetailed official report |
 | MN-2026-10-30-06 | UKMTO reported suspicious activity 25 nautical miles northeast of Khasab | UKMTO · Strait of Hormuz and Gulf of Oman · 29 October 2026 | Undetailed official report |
 | MN-2026-10-30-07 | A vessel fire 25 nautical miles northeast of Oman was reported, with the crew's status initially unknown | straits.live · Strait of Hormuz · 300102Z October 2026 | Professional reporting |
-| MN-2026-10-30-08 | It was reported that the fire had been extinguished and that the crew was safe | Jerusalem Post · Strait of Hormuz · 300302Z October 2026 | Professional reporting |
+| MN-2026-10-30-08 | Jerusalem Post reported that the fire subsided and that the crew was safe | Jerusalem Post · Strait of Hormuz · 300302Z October 2026 | Professional reporting |
 | MN-2026-10-30-09 | Four tankers were reported burning in the Strait of Hormuz, amid a U.S.-Iranian dispute over the waterways being free of mines | straits.live · Strait of Hormuz · 300134Z October 2026 | Media reporting |
 | MN-2026-10-30-10 | An Iranian source was reported as saying that three non-compliant tankers had exploded in the Strait of Hormuz | Mehr · Strait of Hormuz · 291103Z October 2026 | Official Iranian media reporting |
 | MN-2026-10-30-11 | An Iranian source was reported as saying that another non-compliant tanker had struck naval mines | Mehr · Strait of Hormuz · 291820Z October 2026 | Official Iranian media reporting |
@@ -94,14 +94,14 @@ No new incident was entered in the International Maritime Organization's record 
 Incidents MN-2026-10-30-07, MN-2026-10-30-08, MN-2026-10-30-09, MN-2026-10-30-10, MN-2026-10-30-11, and MN-2026-10-30-12 are not entered in the confirmed-incident record because their information is relayed or professional and is not officially confirmed. Incident MN-2026-10-30-14 is a land-based report unrelated to vessel incidents.
 
 ## Situation Assessment and Indicator Analysis
-The maritime situation during the period focused on a single fire incident inside the Strait of Hormuz. The official report described the activity as suspicious at a distance of 25 nautical miles northeast of Khasab. Professional reporting described the incident as a vessel fire. The extinguishing of the fire was announced a few hours later. The conclusion is that an actual physical incident occurred, but its technical details have not yet become clear.
+The maritime situation during the period focused on a single fire incident inside the Strait of Hormuz. The official report described the activity as suspicious at a distance of 25 nautical miles northeast of Khasab. Professional reporting described the incident as a vessel fire, and the first update mentioned that the fire had subsided a few hours later. The conclusion is that an actual physical incident occurred, but its technical details have not yet become clear.
 
 Accounts of the cause of the fire diverge. An Iranian media entity spoke of non-compliant tankers and naval mines. Professional reports spoke of four burning tankers. An official U.S. denial stated that the waterways were free of mines. This divergence prevents conclusive attribution to an executing party and requires awaiting a complete official report.
 
 The transit route was not closed according to the screened material. However, the recurrence of official warnings within less than 24 hours indicates continuing pressure on the route. At the same time, precautionary commercial behavior appeared: expanded LNG purchases in anticipation of disruption in the strait, and expansion of the tanker fleet. This behavior indicates expectations of continuing risks, not an imminent easing.
 
 ### Indicators of Change
-- Official products increased to four bulletins and updates during the period, compared with two in the previous period.
+- Official products increased to five products from UKMTO and JMIC during the period, compared with two in the previous period.
 - The first confirmed vessel-fire report during the period appeared after the absence of this category in the previous period.
 - The focus shifted from reports of attacks on Yemeni ports to an actual incident inside the Strait of Hormuz.
 - Divergent accounts concerning mines widen the uncertainty margin regarding the cause of the incidents.
@@ -116,7 +116,7 @@ The transit route was not closed according to the screened material. However, th
 
 ### Hypothesis Testing
 - Hypothesis that the incident resulted from naval mines: supported by Iranian media reporting of a tanker striking mines, and weakened by an official U.S. denial that mines were present in the waterways.
-- Hypothesis that the incident was an accidental fire aboard a single vessel: supported by the UKMTO report of suspicious activity and the fire-extinguishing report, and weakened by professional reporting of four burning tankers.
+- Hypothesis that the incident was an accidental fire aboard a single vessel: supported by the UKMTO report of suspicious activity and professional reporting of the extinguishing, and weakened by professional reporting of four burning tankers.
 - Hypothesis of escalating pressure on the transit route: supported by the sequence of warnings during the period, and weakened by the absence of an official announcement of full closure or restriction.
 - Hypothesis of continuing precautionary commercial behavior: supported by expanded LNG purchases and tanker-fleet construction, and weakened by the absence of recent vessel-movement data on transit volumes.
 
@@ -138,7 +138,7 @@ Internal control: separate incidents from estimates, link each estimate to its c
 
 ## Probabilities and Attribution of Incidents to Parties
 The percentages below are estimates, are mutually comprehensive, and total 100%. No percentage is evidence confirming an executing party.
-- 30% — Continued pressure on transit through the Strait of Hormuz: four official bulletins and updates followed one another during the period.
+- 30% — Continued pressure on transit through the Strait of Hormuz: five official products from UKMTO and JMIC followed one another during the period.
 - 25% — Issuance of additional official details concerning the fire incident: a first update to the official warning was issued.
 - 20% — A new maritime incident occurring in the strait: reports of multiple incidents in the strait were repeated.
 - 15% — Continued precautionary commercial behavior: expanded LNG purchases and tanker-fleet construction.
