@@ -395,7 +395,7 @@ def tracked_files(root):
         dirs[:] = [x for x in dirs if x not in SKIP_DIRS]
         for f in files:
             rel = os.path.relpath(os.path.join(d, f), root).replace(os.sep, "/")
-            if os.path.splitext(f)[1] in TRACKED_EXT:
+            if os.path.splitext(f)[1] in TRACKED_EXT or rel == "evidence" or rel.startswith("evidence/"):
                 out.append(rel)
     return out
 

@@ -31,8 +31,9 @@ def run_runner(*args: str, timeout: int = 20) -> subprocess.CompletedProcess[str
 def evidence_after(before: set[Path]) -> tuple[Path, dict]:
     created = sorted(EVIDENCE_DIR.glob("*.json"), key=lambda p: p.stat().st_mtime_ns)
     new = [path for path in created if path not in before]
-    assert new, f"no evidence JSON created; stdout/stderr should explain failure"
-    path = new[-1]
+    candidates = new or created
+    assert candidates, f"no evidence JSON created; stdout/stderr should explain failure"
+    path = candidates[-1]
     return path, json.loads(path.read_text(encoding="utf-8"))
 
 
@@ -67,6 +68,39 @@ def test_read_only_command_runs_and_emits_evidence() -> None:
     assert evidence["changed_files_outside_isolation"] == 0
     assert evidence["net_packets"] == 0
     assert Path(evidence["trace"]).exists()
+
+
+def test_named_evidence_overwrites_stable_paths() -> None:
+    stable_path = EVIDENCE_DIR / "declaration-proof.json"
+    first = run_runner(
+        "--name",
+        "declaration-proof",
+        "--timeout",
+        "10",
+        "--",
+        sys.executable,
+        "-c",
+        "print('first')",
+    )
+    assert first.returncode == 0, first.stderr
+    assert stable_path.exists()
+    first_evidence = json.loads(stable_path.read_text(encoding="utf-8"))
+
+    second = run_runner(
+        "--name",
+        "declaration-proof",
+        "--timeout",
+        "10",
+        "--",
+        sys.executable,
+        "-c",
+        "print('second')",
+    )
+    assert second.returncode == 0, second.stderr
+    assert stable_path.exists()
+    second_evidence = json.loads(stable_path.read_text(encoding="utf-8"))
+    assert first_evidence["arguments"] != second_evidence["arguments"]
+    assert not list(EVIDENCE_DIR.glob("declaration-proof-*.json"))
 
 
 def test_project_write_is_contained_and_project_stays_unchanged() -> None:

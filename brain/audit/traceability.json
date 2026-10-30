@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-30T18:13:33.463770+00:00",
+  "generated_at": "2026-10-30T19:06:05.606210+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -2781,6 +2781,20 @@
       "lesson_id": "ك-362",
       "barrier_id": "B-fcfde979",
       "run_evidence": null
+    },
+    {
+      "fault_id": "ك-363",
+      "state": "مفتوح",
+      "lesson_id": "ك-363",
+      "barrier_id": "B-62832ff7",
+      "run_evidence": "رآة حاجز فشل مغلق: `python3 tools/check_governing_assets.py --json` → خرج 2 · `ledger_verified=true`"
+    },
+    {
+      "fault_id": "ك-364",
+      "state": "مغلق",
+      "lesson_id": "ك-364",
+      "barrier_id": "B-7ac4979c",
+      "run_evidence": "لق: ملفان `.txt` في `evidence/hermetic` و`evidence/merkle` → `verify` خرج 2 وسمّى الملفين؛ التنظيف →"
     }
   ]
 }

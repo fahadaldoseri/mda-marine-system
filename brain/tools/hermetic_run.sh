@@ -29,7 +29,7 @@ options:
   -h, --help          show this help
 
 The separator -- is mandatory. Unknown options exit 2. Every command run emits
- evidence/hermetic/<tool>-<timestamp>.json and a raw strace file.
+ evidence/hermetic/<name>.json and a raw strace file at a stable, overwriting path.
 USAGE
 }
 
@@ -129,12 +129,12 @@ mkdir -p -- "$EVIDENCE_DIR/traces" "$EVIDENCE_DIR/raw" "$EVIDENCE_DIR/fingerprin
 }
 
 TS="$(date -u +%Y%m%dT%H%M%SZ)"
-RUN_ID="${SAFE_NAME}-${TS}-$$"
+RUN_ID="${SAFE_NAME}"
 RAW_DIR="$EVIDENCE_DIR/raw/$RUN_ID"
 FP_DIR="$EVIDENCE_DIR/fingerprints/$RUN_ID"
 mkdir -p -- "$RAW_DIR" "$FP_DIR" || { printf 'cannot create run evidence directory\n' >&2; exit 70; }
-EVIDENCE_PATH="$EVIDENCE_DIR/${SAFE_NAME}-${TS}-$$.json"
-TRACE_PATH="$EVIDENCE_DIR/traces/${SAFE_NAME}-${TS}-$$.strace"
+EVIDENCE_PATH="$EVIDENCE_DIR/${SAFE_NAME}.json"
+TRACE_PATH="$EVIDENCE_DIR/traces/${SAFE_NAME}.strace"
 SUMMARY_PATH="$RAW_DIR/impact-summary.json"
 PROJECT_COMPARE_PATH="$RAW_DIR/project-compare.json"
 SEAWATCH_COMPARE_PATH="$RAW_DIR/seawatch-compare.json"
@@ -405,7 +405,7 @@ json.dump(
 )
 PY
 
-python3 - "$EVIDENCE_PATH" "$TOOL_NAME" "$RUN_RC" "$DURATION_MS" "$RESOURCE_MODE" "$SANDBOX_MODE" "$TRACE_PATH" "$SUMMARY_PATH" "$PROJECT_COMPARE_PATH" "$SEAWATCH_COMPARE_PATH" "$PROJECT_BEFORE" "$PROJECT_AFTER" "$SEAWATCH_BEFORE" "$SEAWATCH_AFTER" "$META_PREFIX" "$TIMEOUT_SECONDS" "$MEMORY_MB" "$CPU_QUOTA" "$TASKS_MAX" "$BWRAP_VERSION" "$UNSHARE_VERSION" "$STRACE_VERSION" "$SYSTEMD_VERSION" -- "${CMD[@]}" <<'PY'
+python3 - "$EVIDENCE_PATH" "$TS" "$TOOL_NAME" "$RUN_RC" "$DURATION_MS" "$RESOURCE_MODE" "$SANDBOX_MODE" "$TRACE_PATH" "$SUMMARY_PATH" "$PROJECT_COMPARE_PATH" "$SEAWATCH_COMPARE_PATH" "$PROJECT_BEFORE" "$PROJECT_AFTER" "$SEAWATCH_BEFORE" "$SEAWATCH_AFTER" "$META_PREFIX" "$TIMEOUT_SECONDS" "$MEMORY_MB" "$CPU_QUOTA" "$TASKS_MAX" "$BWRAP_VERSION" "$UNSHARE_VERSION" "$STRACE_VERSION" "$SYSTEMD_VERSION" -- "${CMD[@]}" <<'PY'
 from __future__ import annotations
 
 import json
@@ -415,6 +415,7 @@ import sys
 
 (
     evidence_path,
+    run_timestamp,
     tool_name,
     run_rc,
     duration_ms,
@@ -473,7 +474,7 @@ probe_output = read_text(".probe.out")[:1000]
 run_code = int(run_rc)
 evidence = {
     "schema": "hermetic-run/v1",
-    "timestamp_utc": pathlib.Path(evidence_path).stem.rsplit("-", 1)[0],
+    "timestamp_utc": run_timestamp,
     "tool": command[0] if command else tool_name,
     "tool_name": tool_name,
     "arguments": command[1:],

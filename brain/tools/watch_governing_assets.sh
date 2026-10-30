@@ -4,10 +4,10 @@ set -u
 WATCH_ROOT="/home/ubuntu/skills"
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DURATION="${1:-600}"
-STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
 LOG_DIR="$PROJECT_ROOT/evidence/watch"
-LOG="$LOG_DIR/$STAMP.log"
+LOG="$LOG_DIR/watch.log"
 mkdir -p "$LOG_DIR"
+: > "$LOG"
 
 if ! command -v inotifywait >/dev/null 2>&1; then
   echo "[$(date --iso-8601=seconds)] inotifywait missing; attempting installation" >> "$LOG"

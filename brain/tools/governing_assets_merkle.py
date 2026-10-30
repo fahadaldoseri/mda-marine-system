@@ -148,8 +148,7 @@ def build_snapshot(config: Path = CONFIG_DEFAULT) -> dict:
 def write_snapshot(snapshot: dict, output: Path | None = None) -> Path:
     EVIDENCE_DIR.mkdir(parents=True, exist_ok=True)
     if output is None:
-        stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
-        output = EVIDENCE_DIR / f"{stamp}.json"
+        output = EVIDENCE_DIR / "snapshot.json"
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(snapshot, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return output
