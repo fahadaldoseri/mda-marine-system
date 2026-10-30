@@ -377,6 +377,8 @@ SCREEN_JS = r"""
     var n = sec.querySelectorAll(':scope > ul > li, :scope > ol > li, :scope > .tbl-wrap tbody tr, :scope > table tbody tr').length;
     var first = sec.querySelector(':scope > p:not(.sec-lede), :scope > ul > li, :scope > ol > li, :scope > .tbl-wrap tbody tr, :scope > table tbody tr');
     var t = first ? flat(first) : '';
+    // ك-336: المعاينة عنوان توجيهي لا نسخة من نص القسم — تُقصّ عند 58 محرفًا بحدّ كلمة
+    if (t && t.length > 58) { t = t.slice(0, 57).replace(/\s+\S*$/, '') + '\u2026'; }
     if (!n && !t) return null;
     var el = d.createElement('div'); el.className = 'sc-peek no-print';
     if (n > 1) { var b = d.createElement('b'); b.textContent = n === 2 ? T.two : (n + T.many); el.appendChild(b); }

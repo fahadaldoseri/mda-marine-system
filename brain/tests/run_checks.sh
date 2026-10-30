@@ -265,3 +265,4 @@ echo "----- الحصيلة -----"
 printf '  نجح: %s · فشل: %s\n' "$PASS" "$FAIL"
 [ "$FAIL" -eq 0 ] || exit 1
 exit 0
+t "بوابة أسرار المستودع" python3 validators/check_repo_secrets.py

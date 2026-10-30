@@ -6,6 +6,7 @@
 الوضع: --mode strict (مانع، يُستعمل بعد خطوة النسخ) | --mode advisory (تنبيه، قبل النسخ)
 رموز الخروج: 0 مطابق · 1 انحراف في الوضع التنبيهي · 2 انحراف في الوضع المانع · 3 مستودع مفقود
 """
+
 from __future__ import annotations
 import argparse
 import hashlib
