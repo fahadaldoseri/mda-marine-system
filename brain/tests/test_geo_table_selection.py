@@ -9,7 +9,8 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-SITE = Path(__import__("os").environ.get("SITE_DIR", "/home/ubuntu/seawatch")).resolve()
+_here = Path(__file__).resolve()
+SITE = Path(__import__("os").environ.get("SITE_DIR") or (_here.parents[2] / "seawatch")).resolve()
 sys.path.insert(0, str(SITE / "generator"))
 
 from build_report import render_section_body  # noqa: E402
