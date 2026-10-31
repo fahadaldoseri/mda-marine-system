@@ -21,10 +21,16 @@ import os
 import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import code_paths  # noqa: E402
+
+
+# لا تُكتب نسخ /home/ubuntu/skills داخل أرشيف التطبيق؛ تُحفظ مؤقتًا خارج الشجرة
+# فقط لاسترجاع فشل التحقق في العملية نفسها.
+ARCHIVE_EXCLUDE_TOPS = {"skills"}
 
 
 def sha(p):
@@ -87,37 +93,46 @@ def main():
         return 0
 
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    arch = brain / "logs" / f"apply-{stamp}"
+    arch = None
+    rollback_root = Path(tempfile.mkdtemp(prefix="apply-rollback-"))
     done = []
     try:
         for rel, src, dst, rsha, why in plan:
+            archiveable = rel.split("/", 1)[0] not in ARCHIVE_EXCLUDE_TOPS
+            bak = None
             if dst.exists():
-                bak = arch / rel
+                if archiveable:
+                    if arch is None:
+                        arch = brain / "logs" / f"apply-{stamp}"
+                    bak = arch / rel
+                else:
+                    bak = rollback_root / rel
                 bak.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(dst, bak)
             dst.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(src, dst)
-            done.append((rel, dst, why))
+            done.append((rel, dst, bak))
         if not a.no_verify and (brain / "tools" / "runbook.py").is_file():
             r = subprocess.run([sys.executable, str(brain / "tools" / "runbook.py"), "verify", "--root", str(brain)],
                                capture_output=True, text=True, env=dict(os.environ, BRAIN_DIR=str(brain), SITE_DIR=str(site)))
             if r.returncode != 0:
                 raise RuntimeError("verify فشل بعد التطبيق:\n" + "\n".join(r.stdout.splitlines()[-8:]))
     except Exception as e:  # استعادة كاملة
-        for rel, dst, why in done:
-            bak = arch / rel
-            if bak.exists():
+        for rel, dst, bak in done:
+            if bak is not None and bak.exists():
                 shutil.copy2(bak, dst)
             elif dst.exists():
                 dst.unlink()
+        shutil.rmtree(rollback_root, ignore_errors=True)
         print(f"✘ {e}\n✘ استُعيدت الملفات كما كانت.")
         return 2
+    shutil.rmtree(rollback_root, ignore_errors=True)
     for rel, src, dst, rsha, why in plan:
         applied[rel] = rsha
     head = subprocess.run(["git", "-C", str(repo), "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
     state_p.parent.mkdir(parents=True, exist_ok=True)
     state_p.write_text(json.dumps({"commit": head, "applied_utc": stamp, "files": applied}, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"✔ طُبّق {len(plan)} ملفًا من {head[:8]} — الأرشيف: {arch}")
+    print(f"✔ طُبّق {len(plan)} ملفًا من {head[:8]} — الأرشيف: {arch or 'لا أرشيف لمجلد skills'}")
     return 0
 
 

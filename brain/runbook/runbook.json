@@ -3974,7 +3974,10 @@
      "tests/test_apply_from_github.py",
      "tests/test_backup_code_safety.py",
      "tests/test_backup_push_safety.py",
-     "tests/test_manifest_output_contract.py"
+     "tests/test_manifest_output_contract.py",
+     "tests/test_apply_archive_policy.py",
+     "tests/test_pdf_page_range_guard.py",
+     "tests/test_pdf_live_parity_en_guard.py"
     ]
    },
    "on_fail": "stop",

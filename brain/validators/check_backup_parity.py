@@ -32,6 +32,7 @@ REPO_EXTRA_ALLOW = ("skills/.skill_versions.json",)
 LOCAL_ONLY_PATTERNS = (
     "audit/backups/",                  # لقطات الإغلاق على الخادم (ك-331)
     "brain/logs/skills-sync-",         # نسخ استعادة مهارات محلية مؤقتة؛ لا تُنقل إلى المرآة
+    "brain/logs/apply-",               # أرشيفات التطبيق المحلية المؤقتة؛ لا تُنقل إلى المرآة
 )  # الاستثناءات محصورة بالمخرجات المولّدة، ولا تشمل سجلات التشغيل العامة
 SANITIZED = {"brain/appendices/telegram-chat.json", "brain/appendices/telegram-subscriptions.json",
              "brain/appendices/telegram-targets.json",
@@ -69,7 +70,7 @@ GROUP_REASONS = {
     "SSKIP_FILES": "ملفات بيئة الموقع (.env وأخواتها) لا تُنقل.",
     "SKIP_GLOBS": "مخرجات مولَّدة آليًا (Word وPDF) تُعاد توليدها ولا تُتعقَّب — عطل ك-18.",
     "ALLOW_REPO_ONLY": "ملفات تعيش في المستودع وحده بحكم وظيفتها: فهرس المستودع وإعداداته وتعليمات الوكلاء وسير عمل GitHub.",
-    "LOCAL_ONLY_PATTERNS": "مخرجات محلية مؤقتة محددة بالبادئة: لقطات الإغلاق ونسخ .bak التي ينشئها restore_skills؛ لا يُستثنى سجل تشغيل عام أو ملف شيفرة/بيانات.",
+    "LOCAL_ONLY_PATTERNS": "مخرجات محلية مؤقتة محددة بالبادئة: لقطات الإغلاق ونسخ .bak وأرشيفات apply التي تنشئها أدوات التشغيل؛ لا يُستثنى سجل تشغيل عام أو ملف شيفرة/بيانات.",
     "PROTECTED_PATHS": "ملف الأسرار المعتمد بقرار المالك: لا يُحذف ولا يُفرَّغ بالنسخ الاحتياطي (ك-168).",
 }
 
