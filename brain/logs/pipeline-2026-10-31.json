@@ -30,7 +30,7 @@
     "status": "warn"
   },
   "finished_utc": "2026-10-31T06:01:34Z",
-  "gate_finished_utc": "2026-10-31T07:52:37Z",
+  "gate_finished_utc": "2026-10-31T19:11:49Z",
   "gate_note": "علامة مرحلة الخط اليومي — بوابة التسليم لم تُشغَّل بعد.",
   "gate_state": "not_run",
   "language": {
@@ -68,6 +68,15 @@
     "status": "ok",
     "targets": 9
   },
+  "originals": {
+    "derived_from": "archive/originals/2026-10-31/",
+    "empty_shell": 0,
+    "failed": 0,
+    "healthy": 3,
+    "manifest": "archive/originals/2026-10-31/manifest.json",
+    "note": "حُفظت الأصول في archive/originals/2026-10-31",
+    "status": "ok"
+  },
   "overall": "degraded",
   "pipeline_version": 4,
   "report_present_at_pipeline_end": true,
@@ -80,14 +89,5 @@
     "ok": 60,
     "status_file": "feeds/feeds-2026-10-31.status.json"
   },
-  "written_stage": "final",
-  "originals": {
-    "status": "ok",
-    "healthy": 3,
-    "failed": 0,
-    "empty_shell": 0,
-    "manifest": "archive/originals/2026-10-31/manifest.json",
-    "note": "حُفظت الأصول في archive/originals/2026-10-31",
-    "derived_from": "archive/originals/2026-10-31/"
-  }
+  "written_stage": "final"
 }
