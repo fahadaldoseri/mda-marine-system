@@ -1053,16 +1053,16 @@
     "rules": [
      "أ1 — سلسلة التشغيل اليومي"
     ],
-   "files": [
-    "tools/merge_ledger_daily.py",
-    "sections/90-automation.md",
-    "tools/daily_pipeline.sh",
-    "tools/repair_ledger_prose.py"
-   ],
-   "gates": [],
-   "tests": [
-    "tests/test_classify_zones_damage_scope.py"
-   ]
+    "files": [
+     "tools/merge_ledger_daily.py",
+     "sections/90-automation.md",
+     "tools/daily_pipeline.sh",
+     "tools/repair_ledger_prose.py"
+    ],
+    "gates": [],
+    "tests": [
+     "tests/test_classify_zones_damage_scope.py"
+    ]
    },
    "on_fail": "stop",
    "command": [
@@ -2890,53 +2890,100 @@
    "warn_rc": [],
    "gate_title": "اختبار انحدار المصلح (12→23)"
   },
+  {
+   "id": "B005",
+   "title": "بوابة مُدخل الترجمة الإنجليزية قبل البناء (فشل مغلق)",
+   "kind": "script",
+   "phase": "build",
+   "reads": [
+    "{site}/sources/i18n/en/{date}-sectioned.en.md"
+   ],
+   "writes": [
+    "logs/runbook/{date}/B005.log"
+   ],
+   "assert": [
     {
-      "id": "B005",
-      "title": "بوابة مُدخل الترجمة الإنجليزية قبل البناء (فشل مغلق)",
-      "kind": "script",
-      "phase": "build",
-      "reads": [
-        "{site}/sources/i18n/en/{date}-sectioned.en.md"
-      ],
-      "writes": [
-        "logs/runbook/{date}/B005.log"
-      ],
-      "assert": [
-        {
-          "type": "cmd",
-          "command": [
-            "bash",
-            "-lc",
-            "grep -q '✔ مُدخل EN حاضر:' logs/runbook/{date}/B005.log && grep -Eq 'table_rows=[1-9][0-9]*' logs/runbook/{date}/B005.log"
-          ]
-        }
-      ],
-      "links": {
-        "rules": [
-          "س1 — النشر"
-        ],
-        "files": [
-          "{site}/sources/i18n/en/{date}-sectioned.en.md",
-          "validators/check_en_parity.py"
-        ],
-        "folders": [],
-        "gates": [],
-        "tests": [
-          "tests/test_delivery_scripts.sh"
-        ]
-      },
-      "on_fail": "stop",
-      "command": [
-        "bash",
-        "-lc",
-        "B=\"$PWD\"; export B SITE; P=\"$SITE/sources/i18n/en/{date}-sectioned.en.md\"; if [ ! -s \"$P\" ]; then printf '✘ مُدخل EN مفقود: %s\\n' \"$P\"; exit 2; fi; python3 -c 'from pathlib import Path; import sys; p=Path(sys.argv[1]); t=p.read_text(encoding=\"utf-8\"); rows=sum(1 for l in t.splitlines() if l.strip().startswith(\"|\")); print(f\"✔ مُدخل EN حاضر: {p}\"); print(f\"   lines={len(t.splitlines())} · table_rows={rows}\"); raise SystemExit(0 if rows else 2)' \"$P\"; rc=$?; exit $rc"
-      ],
-      "ok_rc": [
-        0
-      ],
-      "warn_rc": [],
-      "gate_title": "بوابة مُدخل الترجمة الإنجليزية قبل البناء (فشل مغلق)"
-    },
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "grep -q '✔ مُدخل EN حاضر:' logs/runbook/{date}/B005.log && grep -Eq 'table_rows=[1-9][0-9]*' logs/runbook/{date}/B005.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "س1 — النشر"
+    ],
+    "files": [
+     "{site}/sources/i18n/en/{date}-sectioned.en.md",
+     "validators/check_en_parity.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": [
+     "tests/test_delivery_scripts.sh"
+    ]
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; export B SITE; P=\"$SITE/sources/i18n/en/{date}-sectioned.en.md\"; if [ ! -s \"$P\" ]; then printf '✘ مُدخل EN مفقود: %s\\n' \"$P\"; exit 2; fi; python3 -c 'from pathlib import Path; import sys; p=Path(sys.argv[1]); t=p.read_text(encoding=\"utf-8\"); rows=sum(1 for l in t.splitlines() if l.strip().startswith(\"|\")); print(f\"✔ مُدخل EN حاضر: {p}\"); print(f\"   lines={len(t.splitlines())} · table_rows={rows}\"); raise SystemExit(0 if rows else 2)' \"$P\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [],
+   "gate_title": "بوابة مُدخل الترجمة الإنجليزية قبل البناء (فشل مغلق)"
+  },
+  {
+   "id": "B006",
+   "title": "بوابة عقد عدّادات بطاقة أهم الأخبار قبل البناء (فشل مغلق)",
+   "kind": "script",
+   "phase": "build",
+   "reads": [
+    "validators/check_card_counters.py",
+    "tests/test_card_counters.py"
+   ],
+   "writes": [
+    "logs/runbook/{date}/B006.log"
+   ],
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "grep -q 'Ran 3 tests' logs/runbook/{date}/B006.log && grep -q '^OK$' logs/runbook/{date}/B006.log"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف4 — بطاقة الأخبار وأمانة العدّ"
+    ],
+    "files": [
+     "validators/check_card_counters.py"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": [
+     "tests/test_card_counters.py"
+    ]
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; export B SITE; printf 'بوابة عقد عدّادات بطاقة أهم الأخبار — اختبار موجب وسالبان قبل البناء\\n'; python3 -m unittest -v tests/test_card_counters.py; rc=$?; printf 'نتيجة بوابة العقد: rc=%s\\n' \"$rc\"; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [],
+   "gate_title": "بوابة عقد عدّادات بطاقة أهم الأخبار قبل البناء (فشل مغلق)"
+  },
   {
    "id": "B010",
    "title": "بناء الموقع من البيانات",
@@ -2946,6 +2993,14 @@
     {
      "type": "file_exists",
      "path": "{site}/dist/reports/{date}.html"
+    },
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "grep -q '✔ بطاقة الفروع الثلاثة: العناوين والعدادات والمراسي متطابقة عربيًا وإنجليزيًا' logs/runbook/{date}/B010.log"
+     ]
     }
    ],
    "links": {
@@ -2969,19 +3024,21 @@
      "evidence/resume-20261031/geo-table-selection.sh",
      "evidence/resume-20261031/geo-table-selection.stdout",
      "evidence/resume-20261031/geo-table-selection.exit",
-     "tests/test_geo_table_selection.py"
+     "tests/test_geo_table_selection.py",
+     "validators/check_card_counters.py"
     ],
     "gates": [],
     "tests": [
      "tests/test_en_advisory_id_matching.py",
-     "tests/test_geo_table_selection.py"
+     "tests/test_geo_table_selection.py",
+     "tests/test_card_counters.py"
     ]
    },
    "on_fail": "stop",
    "command": [
     "bash",
     "-lc",
-    "B=\"$PWD\"; export B SITE; cd \"$SITE\" && python3 generator/sync_from_brain.py --date {date} && python3 generator/build_site.py; rc=$?; exit $rc"
+    "B=\"$PWD\"; export B SITE; cd \"$SITE\" && python3 generator/sync_from_brain.py --date {date} && python3 generator/build_site.py && python3 \"$B/validators/check_card_counters.py\" --date \"$D\" --dist-root \"$SITE/dist\"; rc=$?; exit $rc"
    ],
    "ok_rc": [
     0
@@ -4265,7 +4322,8 @@
     "gates": [],
     "tests": [
      "tests/test_apply_from_github.py",
-     "tests/test_backup_code_safety.py"
+     "tests/test_backup_code_safety.py",
+     "tests/test_parity_runtime_artifacts.py"
     ]
    },
    "on_fail": "stop",
