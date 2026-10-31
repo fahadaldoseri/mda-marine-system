@@ -5,6 +5,10 @@
 set -u
 B="${BRAIN_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 REPO="${BACKUP_REPO_DIR:-$(dirname "$B")/mda-marine-system}"
+# حماية: لو تسرّب جذر المرآة في BRAIN_DIR لظهر جذر مكرر مثل .../mda-marine-system/mda-marine-system
+case "$REPO" in
+  */mda-marine-system/mda-marine-system) REPO="${REPO%/mda-marine-system}" ;;
+esac
 LOG="$B/logs/github-backup-$(date -u +%F).log"
 mkdir -p "$B/logs"
 {
