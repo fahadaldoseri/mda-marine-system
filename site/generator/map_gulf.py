@@ -419,7 +419,20 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
     legend_html = f'<ol class="map-legend">{"".join(legend)}</ol>' if legend else ""
     cap = f'<p class="src-note">{caption}</p>' if caption else ""
     lede = ("مواقع الوقائع داخل نطاق التقرير." if points else
-            "نطاقات القطاعات المعتمدة؛ لا تمثل علامات أو إحداثيات وقائع.")
+            "لوحة سياق جغرافي: السواحل والمضيق والموانئ وشبكة خطوط الطول والعرض. "
+            "لا تُرسم مواقع وقائع لعدم ثبوت إحداثيات في المصادر.")
+    key_html = "" if points else (
+        '<ul class="map-legend mp-key">'
+        '<li><span class="lg-sw sw-land" aria-hidden="true"></span>اليابسة</li>'
+        '<li><span class="lg-sw sw-sea" aria-hidden="true"></span>البحر</li>'
+        '<li><span class="lg-sw sw-border" aria-hidden="true"></span>حدود الدول</li>'
+        '<li><span class="lg-sw sw-grid" aria-hidden="true"></span>شبكة خطوط الطول والعرض</li>'
+        '<li><span class="lg-sw sw-port" aria-hidden="true"></span>نقطة ميناء</li>'
+        '<li><span class="lg-sw sw-strait" aria-hidden="true"></span>تسمية بحر أو مضيق</li>'
+        '<li class="lg-none"><span class="lg-sw sw-none" aria-hidden="true"></span>'
+        'لا علامات وقائع — لا إحداثيات مثبتة في المصادر</li>'
+        '</ul>'
+    )
     return f"""<div class="map-panel">
   <h3>{title}</h3><p class="blk-lede">{lede}</p>
   <div class="map-wrap">
@@ -437,6 +450,7 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
     {overlay}
   </div>
   {legend_html}
+  {key_html}
   {cap}
 </div>"""
 
@@ -444,9 +458,9 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
 def build_map(points=None, caption=None, inset=None, zoom=False):
     """لوحة رئيسية + لوحة مصغّرة اختيارية لباب المندب."""
     points = points or []
-    map_title = "خريطة الوقائع" if points else "نطاقات القطاعات المعتمدة"
+    map_title = "خريطة الوقائع" if points else "السياق الجغرافي للقطاعات المعتمدة"
     map_label = ("خريطة الخليج العربي ومضيق هرمز وخليج عمان مع مواقع وقائع التقرير"
-                 if points else "خريطة نطاقات القطاعات المعتمدة؛ لا تمثل مواقع وقائع")
+                 if points else "خريطة سياق جغرافي للقطاعات المعتمدة: السواحل والمضيق والموانئ وخطوط الطول والعرض؛ بلا علامات وقائع")
     _set_bbox(MAIN_BBOX)
     zrect, zhtml = _zoom_parts(points) if zoom else ("", "")
     panels = [
