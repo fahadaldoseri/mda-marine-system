@@ -1,6 +1,6 @@
 {
  "date": "--help",
- "checked_at": "2026-10-31T11:56:40Z",
+ "checked_at": "2026-10-31T18:24:19Z",
  "release_paths": [
   "/",
   "/reports/--help.html",
@@ -8,14 +8,14 @@
   "/sources.html"
  ],
  "propagation": {
-  "attempt": 6,
-  "elapsed_seconds": 322,
+  "attempt": 2,
+  "elapsed_seconds": 67,
   "max_wait_seconds": 225
  },
  "paths": {
   "/": {
    "code": 200,
-   "bytes": 49041
+   "bytes": 49010
   },
   "/reports/--help.html": {
    "code": 404,
@@ -27,7 +27,7 @@
   },
   "/sources.html": {
    "code": 200,
-   "bytes": 129911
+   "bytes": 131950
   }
  },
  "status": "failed",
