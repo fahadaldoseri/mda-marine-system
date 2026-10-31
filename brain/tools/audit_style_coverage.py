@@ -21,10 +21,14 @@ import unicodedata as _ud
 def norm_derived(t: str) -> str:
     """تطبيع النص المشتق (HTML/PDF): إزالة علامات الاتجاه والكشيدة والتشكيل وتصحيح
     مواضع الترقيم — لأن الاستخراج العربي يُدخل مسافات وحروفًا زائدة لا وجود لها في المصدر."""
+    # NFKC expands U+2026 (ellipsis) to three ASCII dots, which would turn a
+    # legitimate truncation marker into the adjacent-punctuation defect "..".
+    ellipsis = "\ue000"
+    t = (t or "").replace("…", ellipsis)
     t=_ud.normalize("NFKC", t)
     t=re.sub(r"[\u0640\u200b-\u200f\u202a-\u202e\u2066-\u2069\u064b-\u0652\u0670]", "", t)
     t=re.sub(r"\s+([،.:؛؟!])", r"\1", t)
-    return re.sub(r"[ \t]{2,}", " ", t)
+    return re.sub(r"[ \t]{2,}", " ", t).replace(ellipsis, "…")
 
 import json
 import os
