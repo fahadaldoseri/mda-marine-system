@@ -114,6 +114,39 @@ def report_path(date: str) -> Path:
     return B / "reports" / f"{date}-sectioned.md"
 
 
+def ledger_events_line(date: str) -> str:
+    """سطر إجمالي الوقائع وإسناداتها، مشتق من دفتر اليوم لا من كتابة التقرير."""
+    p = B / "cumulative-2026" / "daily" / f"{date}.json"
+    if not p.exists():
+        return ""
+    raw = json.loads(p.read_text(encoding="utf-8"))
+    rows = raw if isinstance(raw, list) else (raw.get("incidents") or [])
+    counts: dict[str, int] = {}
+    for row in rows:
+        for name in re.split(r"[·,]", str(row.get("source", ""))):
+            name = name.strip()
+            if name:
+                counts[name] = counts.get(name, 0) + 1
+    if not rows or not counts:
+        return ""
+    _SINGLE = ["واقعة واحدة", "بلاغ واحد", "حادثة واحدة", "واقعة منفردة"]
+    _DOUBLE = ["واقعتان", "بلاغان", "حادثتان"]
+    _MANY = ["{n} وقائع", "{n} بلاغات", "{n} حوادث"]
+
+    def _count_phrase(n: int, i: int) -> str:
+        if n == 1:
+            return _SINGLE[i % len(_SINGLE)]
+        if n == 2:
+            return _DOUBLE[i % len(_DOUBLE)]
+        return _MANY[i % len(_MANY)].format(n=n)
+
+    details = "؛ ".join(
+        f"{name} {_count_phrase(n, i)}" for i, (name, n) in enumerate(counts.items())
+    )
+    return (f"إجمالي الوقائع المرمزة: {len(rows)} واقعة، بإجمالي {sum(counts.values())} إسنادًا. "
+            f"المصادر المستخدمة وعدد الوقائع المنسوبة إليها: {details}.")
+
+
 def faults_line(date: str) -> str:
     """سطر الإفصاح الآلي عن الأعطال المعروفة (قرار ح-4) — يُولَّد من العلامة والقائمة، لا يُكتب يدويًا."""
     mp = B / "logs" / f"pipeline-{date}.json"
@@ -149,9 +182,11 @@ def inject(date: str, c: dict) -> tuple[bool, str]:
         return False, f"لا نص تقرير: {p}"
     t = p.read_text(encoding="utf-8")
     fl = faults_line(date)
+    el = ledger_events_line(date)
     gen = [f"- {line_ar(c)}"] + ([f"- {fl}"] if fl else [])
     # إزالة النسخ المُولَّدة سابقًا في كل الملف، سواء كانت بنقطة أو بلا نقطة.
     t = re.sub(r"^-?\s*(?:المصادر:|تشغيل منقوص مُفصح:).*\n?", "", t, flags=re.M)
+    t = re.sub(r"^إجمالي الوقائع المرمزة:.*\n?", "", t, flags=re.M)
     if c.get("manual_reference_present"):
         manual_n = int(c.get("manual_reference_count") or len(c.get("manual_reference") or []))
         summary = (f"- إجمالي المصادر المعتمدة: {c['approved']} · المرصودة آليًا: {c['checked']} · "
@@ -170,6 +205,12 @@ def inject(date: str, c: dict) -> tuple[bool, str]:
     # بلا فاصل، فيفسد العرض والطباعة. الفاصل الآن سطر فارغ واحد ثابت قبل ما يلي.
     t = (t[:m.end()] + ("\n\n" + body if body else "") + "\n\n" + "\n".join(gen)
          + "\n\n" + t[end:].lstrip("\n"))
+    if el:
+        sm = re.search(r"^##\s+المصادر والمراجع\s*$", t, re.M)
+        if sm:
+            t = t[:sm.end()] + "\n\n" + el + t[sm.end():]
+        else:
+            t = t.rstrip("\n") + "\n\n" + el + "\n"
     p.write_text(t, encoding="utf-8")
     return True, str(p)
 

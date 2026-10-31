@@ -32,7 +32,7 @@ import time
 MANIFEST = "runbook/runbook.json"
 HANDBOOK = "docs/runbook.md"
 TRACKED_EXT = {".py", ".sh", ".md", ".json", ".js", ".mjs", ".ts", ".yaml", ".yml"}
-SKIP_DIRS = {".git", "node_modules", "__pycache__", "logs", ".venv"}
+SKIP_DIRS = {".git", "node_modules", "__pycache__", ".pytest_cache", "logs", ".venv"}
 
 
 # ───────────────────────── أدوات عامة ─────────────────────────
