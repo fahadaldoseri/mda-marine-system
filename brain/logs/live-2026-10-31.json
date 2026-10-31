@@ -1,6 +1,6 @@
 {
  "date": "2026-10-31",
- "checked_at": "2026-10-31T11:57:05Z",
+ "checked_at": "2026-10-31T13:59:20Z",
  "release_paths": [
   "/",
   "/reports/2026-10-31.html",
@@ -9,7 +9,7 @@
  ],
  "propagation": {
   "attempt": 1,
-  "elapsed_seconds": 1,
+  "elapsed_seconds": 0,
   "max_wait_seconds": 225
  },
  "paths": {
@@ -31,16 +31,17 @@
   }
  },
  "pdf_sha256": {
-  "local": "34a306a4e432fa12644cb2546b5a1bfc5140f3162e2507459f91135faf1cb029",
+  "local": "2f48480aeb39d827cc59640bfa5abd1ed36b3f508ba020658550dd91bcd39c95",
   "live": "34a306a4e432fa12644cb2546b5a1bfc5140f3162e2507459f91135faf1cb029",
-  "match": true,
+  "match": false,
   "content": {
    "pages_local": "11",
    "pages_live": "11",
    "text_local": "fc285687de98169b84b6edbf",
    "text_live": "fc285687de98169b84b6edbf",
    "match": true
-  }
+  },
+  "note": "البايتات تختلف (زمن إنشاء PDF) والمحتوى مطابق — مقبول"
  },
  "status": "ok",
  "bad": []
