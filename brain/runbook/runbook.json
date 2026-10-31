@@ -3972,7 +3972,8 @@
     "gates": [],
     "tests": [
      "tests/test_apply_from_github.py",
-     "tests/test_backup_code_safety.py"
+     "tests/test_backup_code_safety.py",
+     "tests/test_backup_push_safety.py"
     ]
    },
    "on_fail": "stop",
