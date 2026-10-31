@@ -3,6 +3,13 @@
 # الشيفرة والقواعد مصدرها GitHub (قرار المالك 2026-10-24): قبل النسخ تُجلب أحدث main وتُطبَّق على الخادم (apply_from_github)،
 # ثم تُبنى الشجرة فتُنسخ البيانات فقط ولا تُكتب الشيفرة فوق المستودع. غير مُعطِّل للخط اليومي: فشله يُسجَّل ولا يوقف التسليم.
 set -u
+# حاجز واجهة مُبكر: هذا السكربت لا يقبل معاملات؛ رفض --help وأي معامل مجهول
+# يسبق تهيئة المسارات وفتح السجل حتى لا يشغّل النسخة الاحتياطية عرضًا.
+if [ "$#" -ne 0 ]; then
+  echo "✘ معامل غير معروف: $1 — لا يدعم github_backup.sh معاملات (بما فيها --help)" >&2
+  echo "الاستخدام: bash tools/github_backup.sh" >&2
+  exit 2
+fi
 B="${BRAIN_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 REPO="${BACKUP_REPO_DIR:-$(dirname "$B")/mda-marine-system}"
 # حماية: لو تسرّب جذر المرآة في BRAIN_DIR لظهر جذر مكرر مثل .../mda-marine-system/mda-marine-system
@@ -48,6 +55,8 @@ mkdir -p "$B/logs"
     git -c user.name="MDA Backup" -c user.email="mda-backup@localhost" commit -q \
       -m "نسخة احتياطية $(date -u +%F) — تحديث البيانات" \
       -m "هوية الخادم: MDA Backup · دُمج بتفويض فهد الدوسري (تفويض 2026-10-24)."
+    # الدفع المباشر إلى main مقصود ومعتمد في المانيفست بقرار المالك: أداة
+    # التماثل تقارن بفرع main، لذلك تغييره يتطلب تغيير الأداة لا تجاوز العقد.
     if ! git push -q origin main 2>/dev/null; then   # تقدّم origin بين الجلب والدفع (دمج PR مثلًا): إعادة تأسيس ثم دفع
       git pull -q --rebase origin main && git push -q origin main
     fi && echo "تم الدفع: $(git rev-parse --short HEAD)" || echo "✘ فشل الدفع"
