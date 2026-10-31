@@ -256,3 +256,26 @@
 {"step": "D070", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/D070.log", "attempt": 1, "ts": "2026-10-31T18:19:23Z"}
 {"step": "D005", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/D005.log", "attempt": 1, "ts": "2026-10-31T18:20:39Z"}
 {"step": "D005", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/D005.log", "attempt": 1, "ts": "2026-10-31T18:34:05Z"}
+{"step": "D040", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/D040.log", "attempt": 1, "ts": "2026-10-31T18:35:30Z"}
+{"step": "G011", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/G011.log", "attempt": 1, "ts": "2026-10-31T18:58:01Z"}
+{"step": "B010", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/B010.log", "attempt": 1, "ts": "2026-10-31T19:00:30Z"}
+{"step": "B020", "status": "skipped", "disabled": true, "reason": "تعطيل بطلب المالك — يُفعّل بأمره الصريح", "rc": 0, "log": "logs/runbook/2026-10-31/B020.log", "ts": "2026-10-31T19:00:30Z"}
+{"step": "B030", "status": "skipped", "disabled": true, "reason": "تعطيل بطلب المالك — يُفعّل بأمره الصريح", "rc": 0, "log": "logs/runbook/2026-10-31/B030.log", "ts": "2026-10-31T19:00:30Z"}
+{"step": "G047", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/G047.log", "attempt": 1, "ts": "2026-10-31T19:00:36Z"}
+{"step": "G046", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/G046.log", "attempt": 1, "ts": "2026-10-31T19:00:36Z"}
+{"step": "G045", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/G045.log", "attempt": 1, "ts": "2026-10-31T19:00:48Z"}
+{"step": "B035", "status": "done_warn", "rc": 1, "outputs": {}, "log": "logs/runbook/2026-10-31/B035.log", "attempt": 1, "ts": "2026-10-31T19:00:48Z"}
+{"step": "B040", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/B040.log", "attempt": 1, "ts": "2026-10-31T19:00:54Z"}
+{"step": "G005", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/G005.log", "attempt": 1, "ts": "2026-10-31T19:00:54Z"}
+{"step": "G027", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/G027.log", "attempt": 1, "ts": "2026-10-31T19:00:55Z"}
+{"step": "G029", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/G029.log", "attempt": 1, "ts": "2026-10-31T19:00:55Z"}
+{"step": "G037", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-10-31/G037.log", "ts": "2026-10-31T19:00:59Z"}
+{"step": "G011", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/G011.log", "attempt": 1, "ts": "2026-10-31T19:10:40Z"}
+{"step": "G037", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/G037.log", "attempt": 1, "ts": "2026-10-31T19:10:44Z"}
+{"step": "G042", "status": "failed", "rc": 70, "problems": ["رمز الخروج 70"], "log": "logs/runbook/2026-10-31/G042.log", "ts": "2026-10-31T19:10:44Z"}
+{"step": "G010", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/G010.log", "attempt": 1, "ts": "2026-10-31T19:11:48Z"}
+{"step": "G011", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/G011.log", "attempt": 1, "ts": "2026-10-31T19:11:49Z"}
+{"step": "G042", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/G042.log", "attempt": 1, "ts": "2026-10-31T19:11:49Z"}
+{"step": "G043", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/G043.log", "attempt": 1, "ts": "2026-10-31T19:11:49Z"}
+{"step": "G038", "status": "done", "rc": 0, "outputs": {"logs/pipeline-2026-10-31.json": "282bcdbbc09b51c46b7c8124ff4c8a022d427072fe53afaf358a511e5617b497"}, "log": "logs/runbook/2026-10-31/G038.log", "attempt": 1, "ts": "2026-10-31T19:11:49Z"}
+{"step": "G039", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/G039.log", "attempt": 1, "ts": "2026-10-31T19:11:49Z"}
