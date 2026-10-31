@@ -3973,7 +3973,8 @@
     "tests": [
      "tests/test_apply_from_github.py",
      "tests/test_backup_code_safety.py",
-     "tests/test_backup_push_safety.py"
+     "tests/test_backup_push_safety.py",
+     "tests/test_manifest_output_contract.py"
     ]
    },
    "on_fail": "stop",
