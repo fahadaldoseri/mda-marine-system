@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-30T23:13:46.213937+00:00",
+  "generated_at": "2026-10-31T07:24:59.117611+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -2858,6 +2858,34 @@
       "lesson_id": "ك-373",
       "barrier_id": "B-c282d6f8",
       "run_evidence": " validators/check_threat_consistency.py --date 2026-10-30 --brain . → خرج 0 · المستوى العام مرتفع جد"
+    },
+    {
+      "fault_id": "ك-374",
+      "state": "مغلق",
+      "lesson_id": "ك-374",
+      "barrier_id": "B-63815682",
+      "run_evidence": "034.log: قالب جملة متكرر أكثر من مرتين = 0، سليم؛ أمر awk على السجل → خرج 0"
+    },
+    {
+      "fault_id": "ك-375",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-375",
+      "barrier_id": "B-f7c10748",
+      "run_evidence": "BLE_SELECTION_EXIT=0؛ B010 في logs/runbook/2026-10-31/B010.log → done رمز 0"
+    },
+    {
+      "fault_id": "ك-376",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-376",
+      "barrier_id": "B-ecc504af",
+      "run_evidence": "6-10-31: python3 tools/runbook.py run --date 2026-10-31 --redo B020 → رمز 2؛ check_pdf_format: فجوات"
+    },
+    {
+      "fault_id": "ك-377",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-377",
+      "barrier_id": "B-24e3284f",
+      "run_evidence": "e/ubuntu/seawatch/dist/reports/pdf/2026-10-31.pdf --date 2026-10-31 → رمز 2؛ class=print-map في HTML"
     }
   ]
 }

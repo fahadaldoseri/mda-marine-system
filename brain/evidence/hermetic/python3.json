@@ -10,8 +10,8 @@
   ],
   "changed_files_outside_isolation": 0,
   "changed_paths_outside_isolation": [],
-  "duration_ms": 1038,
-  "duration_seconds": 1.038,
+  "duration_ms": 1046,
+  "duration_seconds": 1.046,
   "evidence_files": {
     "impact_summary": "/home/ubuntu/brain-marine-news/evidence/hermetic/raw/python3/impact-summary.json",
     "project_compare": "/home/ubuntu/brain-marine-news/evidence/hermetic/raw/python3/project-compare.json",
@@ -34,7 +34,7 @@
   "impact_summary": {
     "connect_attempts": 1,
     "connect_lines": [
-      "1439176 connect(3, {sa_family=AF_INET, sin_port=htons(80), sin_addr=inet_addr(\"1.1.1.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)"
+      "1514039 connect(3, {sa_family=AF_INET, sin_port=htons(80), sin_addr=inet_addr(\"1.1.1.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)"
     ],
     "execve": [
       "/bin/sh",
@@ -43,21 +43,21 @@
       "/usr/bin/python3"
     ],
     "files_opened_for_write": [
-      "1439171 creat(\"/newroot/dev/full\", 0444) = 5",
-      "1439171 creat(\"/newroot/dev/null\", 0444) = 5",
-      "1439171 creat(\"/newroot/dev/random\", 0444) = 5",
-      "1439171 creat(\"/newroot/dev/tty\", 0444) = 5",
-      "1439171 creat(\"/newroot/dev/urandom\", 0444) = 5",
-      "1439171 creat(\"/newroot/dev/zero\", 0444) = 5",
-      "1439171 openat(5, \"gid_map\", O_RDWR|O_CLOEXEC) = 6",
-      "1439171 openat(5, \"setgroups\", O_RDWR|O_CLOEXEC) = 6",
-      "1439171 openat(5, \"uid_map\", O_RDWR|O_CLOEXEC) = 6",
-      "1439173 openat(AT_FDCWD, \"/var/tmp/hermetic-work.UMpp1g/.hermetic-net-20261030T191007Z-1439128.probe.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "1439173 openat(AT_FDCWD, \"/var/tmp/hermetic-work.UMpp1g/.hermetic-net-20261030T191007Z-1439128.probe.before\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "1439173 openat(AT_FDCWD, \"/var/tmp/hermetic-work.UMpp1g/.hermetic-net-20261030T191007Z-1439128.probe.out\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "1439173 openat(AT_FDCWD, \"/var/tmp/hermetic-work.UMpp1g/.hermetic-net-20261030T191007Z-1439128.probe.rc\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "1439174 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "1439177 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3"
+      "1514034 creat(\"/newroot/dev/full\", 0444) = 5",
+      "1514034 creat(\"/newroot/dev/null\", 0444) = 5",
+      "1514034 creat(\"/newroot/dev/random\", 0444) = 5",
+      "1514034 creat(\"/newroot/dev/tty\", 0444) = 5",
+      "1514034 creat(\"/newroot/dev/urandom\", 0444) = 5",
+      "1514034 creat(\"/newroot/dev/zero\", 0444) = 5",
+      "1514034 openat(5, \"gid_map\", O_RDWR|O_CLOEXEC) = 6",
+      "1514034 openat(5, \"setgroups\", O_RDWR|O_CLOEXEC) = 6",
+      "1514034 openat(5, \"uid_map\", O_RDWR|O_CLOEXEC) = 6",
+      "1514036 openat(AT_FDCWD, \"/var/tmp/hermetic-work.S9i20I/.hermetic-net-20261031T061825Z-1513990.probe.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "1514036 openat(AT_FDCWD, \"/var/tmp/hermetic-work.S9i20I/.hermetic-net-20261031T061825Z-1513990.probe.before\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "1514036 openat(AT_FDCWD, \"/var/tmp/hermetic-work.S9i20I/.hermetic-net-20261031T061825Z-1513990.probe.out\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "1514036 openat(AT_FDCWD, \"/var/tmp/hermetic-work.S9i20I/.hermetic-net-20261031T061825Z-1513990.probe.rc\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "1514037 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "1514040 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3"
     ]
   },
   "isolation": {
@@ -87,7 +87,7 @@
   "schema": "hermetic-run/v1",
   "timeout_enforced": true,
   "timeout_seconds": 1,
-  "timestamp_utc": "20261030T191007Z",
+  "timestamp_utc": "20261031T061825Z",
   "tool": "/usr/bin/python3",
   "tool_name": "python3",
   "trace": "/home/ubuntu/brain-marine-news/evidence/hermetic/traces/python3.strace",
