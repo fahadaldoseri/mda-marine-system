@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/brain-marine-news/tests/test_card_counters.py", line 12, in <module>
+    from i18n_en import translate_page  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'i18n_en'

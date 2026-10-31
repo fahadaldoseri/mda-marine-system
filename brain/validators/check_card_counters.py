@@ -82,6 +82,15 @@ def _nodes(node: Node, tag: str | None = None):
     return out
 
 
+def _has_ancestor_class(node: Node, class_name: str) -> bool:
+    parent = node.parent
+    while parent is not None:
+        if class_name in (parent.attrs.get("class") or "").split():
+            return True
+        parent = parent.parent
+    return False
+
+
 def _norm(value: str) -> str:
     return re.sub(r"\s+", " ", html_lib.unescape(value or "")).strip()
 
@@ -398,6 +407,185 @@ def _validate_zone_card(card: dict, node: Node, lang: str, zones_data: dict | No
     return errors
 
 
+def _hero_contract(registry: dict) -> dict:
+    contract = registry.get("hero_kpis")
+    if not isinstance(contract, dict) or not isinstance(contract.get("cards"), list):
+        raise ValueError("سجل المؤشرات مفقود أو غير صالح: hero_kpis.cards")
+    return contract
+
+
+def _hero_value(meta: dict, zones_data: dict, card: dict):
+    source = card.get("source") or {}
+    kind = source.get("kind")
+    if kind == "zones_counter":
+        return (zones_data.get("counter") or {}).get(source.get("key"))
+    if kind == "zones_sum":
+        ids = set(source.get("zone_ids") or [])
+        return sum(int(z.get(source.get("field"), 0) or 0) for z in zones_data.get("zones", []) if z.get("id") in ids)
+    if kind == "meta_path":
+        value = meta
+        for part in source.get("path", []):
+            value = value[part]
+        return value
+    return None
+
+
+def _hero_detail(meta: dict, zones_data: dict, card: dict) -> str:
+    detail = card.get("detail") or {}
+    if detail.get("kind") == "qualifying_composition":
+        c = zones_data.get("counter") or {}
+        return f"{c.get('confirmed', 0)} مؤكدة + {c.get('probable', 0)} مرجّحة + {c.get('unconfirmed_qualifying', 0)} غير مؤكدة مؤهلة"
+    if detail.get("kind") == "unconfirmed_split":
+        c = zones_data.get("counter") or {}
+        return f"{c.get('unconfirmed_total', 0)} روايات · منها {c.get('unconfirmed_qualifying', 0)} مؤهلة · تُذكر ولا تُحتسب"
+    if detail.get("kind") == "fire_split":
+        fire = (meta.get("hero_sources") or {}).get("fire") or {}
+        return f"المؤكد: {fire.get('confirmed', 0)} · المرجّح: {fire.get('probable', 0)} · غير المؤكد: {fire.get('unconfirmed', 0)}"
+    return detail.get("ar", "")
+
+
+def validate_hero_kpis(meta: dict, zones_data: dict, registry: dict, *, rendered_html: str | None = None,
+                       previous_meta: dict | None = None) -> list[str]:
+    """حواجز الصفين: عنوان ثابت، سبعة مواضع حاضرة، وتفصيل مشتق من المصدر."""
+    errors: list[str] = []
+    try:
+        contract = _hero_contract(registry)
+    except ValueError as exc:
+        return [str(exc)]
+    cards = meta.get("hero_kpis")
+    expected = contract["cards"]
+    if not isinstance(cards, list):
+        return ["حاجز وجود البطاقة: hero_kpis مفقود أو ليس قائمة"]
+    if len(cards) != len(expected):
+        errors.append(f"حاجز وجود البطاقة: عدد البطاقات={len(cards)} والملزم={len(expected)}")
+    actual = {str(c.get("id")): c for c in cards if isinstance(c, dict) and c.get("id")}
+    for item in expected:
+        cid = item.get("id", "")
+        card = actual.get(cid)
+        if card is None:
+            errors.append(f"حاجز وجود البطاقة: البطاقة مفقودة أو اختفى موضعها: {cid}")
+            continue
+        if card.get("title") != item.get("title"):
+            errors.append(f"حاجز ثبات العنوان: {cid}: {card.get('title')} ≠ {item.get('title')}")
+        if card.get("row") != item.get("row"):
+            errors.append(f"حاجز وجود البطاقة: موضع {cid}={card.get('row')} والملزم={item.get('row')}")
+        if card.get("tag") != item.get("tag"):
+            errors.append(f"حاجز ثبات العنوان: وسم {cid} متغير أو مفقود")
+        expected_value = _hero_value(meta, zones_data, item)
+        if expected_value is not None and str(card.get("value")) != str(expected_value):
+            errors.append(f"حاجز تفصيل البطاقة: {cid} قيمة البطاقة={card.get('value')} والمصدر={expected_value}")
+        expected_detail = _hero_detail(meta, zones_data, item)
+        if expected_detail and card.get("detail") != expected_detail:
+            errors.append(f"حاجز تفصيل البطاقة: {cid} تفصيل البطاقة={card.get('detail')} والمصدر={expected_detail}")
+        if item.get("source_label") and card.get("source") != item.get("source_label"):
+            errors.append(f"حاجز تفصيل البطاقة: مصدر {cid} مفقود أو غير مطابق للسجل")
+    rows = {int(k): int(v) for k, v in (contract.get("row_counts") or {}).items()}
+    for row, count in rows.items():
+        actual_count = sum(1 for c in cards if isinstance(c, dict) and c.get("row") == row)
+        if actual_count != count:
+            errors.append(f"حاجز وجود البطاقة: الصف {row} يحوي {actual_count}؛ الملزم={count}")
+    patterns = contract.get("risk_patterns") or []
+    if meta.get("hero_risk_patterns") != patterns:
+        errors.append("حاجز وجود البطاقة: وسم أنماط الخطر مفقود أو تغيّر")
+    if previous_meta:
+        previous = {str(c.get("id")): c for c in (previous_meta.get("hero_kpis") or []) if isinstance(c, dict)}
+        for item in expected:
+            cid = item.get("id", "")
+            if cid in previous and actual.get(cid, {}).get("title") != previous[cid].get("title"):
+                errors.append(f"حاجز ثبات العنوان: تقلّب عنوان {cid} بين يومين")
+    if rendered_html:
+        root = parse_document(rendered_html)
+        nodes = [n for n in _nodes(root) if "hero-kpis" in n.attrs.get("class", "").split()]
+        surfaces = {
+            "سطح التقرير/الطباعة": [n for n in nodes if not _has_ancestor_class(n, "sc-hero")],
+            "سطح الشاشة (screen_layer)": [n for n in nodes if _has_ancestor_class(n, "sc-hero")],
+        }
+        for surface, surface_nodes in surfaces.items():
+            if len(surface_nodes) != 1:
+                errors.append(f"حاجز وجود البطاقة: {surface} يحوي {len(surface_nodes)} حاويات hero-kpis؛ الملزم=1")
+                continue
+            if len([n for n in _nodes(surface_nodes[0]) if "hero-kpi" in n.attrs.get("class", "").split()]) != len(expected):
+                errors.append(f"حاجز وجود البطاقة: الصف أو بطاقة مؤشر مفقود من {surface}")
+    return errors
+
+
+def _official_contract(registry: dict) -> dict:
+    contract = registry.get("official_cards")
+    if not isinstance(contract, dict) or not isinstance(contract.get("cards"), list):
+        raise ValueError("سجل البطاقات الرسمية مفقود أو غير صالح: official_cards.cards")
+    return contract
+
+
+def validate_official_cards(meta: dict, registry: dict) -> list[str]:
+    """يثبت وجود بطاقتي الوفيات والعبور وصدق حالات القراءة الثلاث."""
+    errors: list[str] = []
+    try:
+        contract = _official_contract(registry)
+    except ValueError as exc:
+        return [str(exc)]
+    actual_cards = meta.get("official_cards")
+    expected_cards = contract["cards"]
+    if not isinstance(actual_cards, list):
+        return ["حاجز وجود البطاقات الرسمية: official_cards مفقود أو ليس قائمة"]
+    expected_ids = [str(card.get("id")) for card in expected_cards]
+    actual = {str(card.get("id")): card for card in actual_cards if isinstance(card, dict) and card.get("id")}
+    if len(actual_cards) != len(expected_cards):
+        errors.append(f"حاجز وجود البطاقات الرسمية: العدد={len(actual_cards)} والملزم={len(expected_cards)}")
+    for expected in expected_cards:
+        cid = str(expected.get("id"))
+        card = actual.get(cid)
+        if card is None:
+            errors.append(f"حاجز وجود البطاقات الرسمية: البطاقة مفقودة: {cid}")
+            continue
+        if card.get("title") != expected.get("title"):
+            errors.append(f"حاجز ثبات العنوان: {cid}: {card.get('title')} ≠ {expected.get('title')}")
+        if expected.get("basis") and card.get("basis") != expected["basis"]:
+            errors.append(f"حاجز المصدر الرسمي: أساس {cid} مفقود أو متغير")
+        if expected.get("badges") and card.get("badges") != expected["badges"]:
+            errors.append(f"حاجز المصدر الرسمي: أوسمة {cid} مفقودة أو متغيرة")
+        layers = card.get("layers")
+        if not isinstance(layers, dict):
+            errors.append(f"حاجز الطبقات: {cid} بلا طبقات ثلاث")
+            continue
+        for key in contract.get("layer_keys", ["daily", "cumulative", "updated"]):
+            layer = layers.get(key)
+            if not isinstance(layer, dict):
+                errors.append(f"حاجز الطبقات: {cid}.{key} مفقود")
+                continue
+            if layer.get("label") != expected.get("layers", {}).get(key, {}).get("label"):
+                errors.append(f"حاجز ثبات العنوان: {cid}.{key} label متغير")
+            if not str(layer.get("source") or "").strip():
+                errors.append(f"حاجز المصدر الرسمي: {cid}.{key} بلا مصدر")
+            state = layer.get("state")
+            value = str(layer.get("value") or "")
+            if state == "undisclosed" and value != "لم يُعلن":
+                errors.append(f"حاجز منع الصفر الكاذب: {cid}.{key} يجب أن يكون «لم يُعلن» عند عدم الإفصاح")
+            if state == "no_coverage" and value != "لا تغطية":
+                errors.append(f"حاجز التغطية: {cid}.{key} يجب أن يكون «لا تغطية» عند غياب القراءة")
+            if state == "denied" and value != "0":
+                errors.append(f"حاجز النفي: {cid}.{key} يجب أن يكون «0» عند النفي الصريح")
+            if key == "cumulative":
+                if layer.get("label") != "المجموع منذ 28 فبراير 2026":
+                    errors.append(f"حاجز الطبقات: {cid} تسمية المجموع غير معتمدة")
+                if re.search(r"\b\d+\s+من\s+\d+\b|فجوة|\bأيام?\b", value):
+                    errors.append(f"حاجز الطبقات: نص نقص أو أيام في مجموع {cid}")
+        if cid == "imo-seafarer-deaths":
+            daily = (layers.get("daily") or {}).get("value")
+            if (layers.get("daily") or {}).get("state") == "undisclosed" and str(daily) == "0":
+                errors.append("حاجز منع الصفر الكاذب: وفيات البحّارة بلا إفصاح لا تعرض 0")
+        if cid == "imo-transit-september-2026":
+            detail = " ".join(str(card.get(k) or "") for k in ("constraint", "period", "average", "high", "low"))
+            if card.get("badges") != ["للعلم العام", "آخر تحديث سبتمبر 2026"]:
+                errors.append("حاجز العبور: الوسمان الرسميان مفقودان")
+            if not all(token in detail for token in ("15.6", "25.8", "23 سبتمبر", "8.0", "3 سبتمبر")):
+                errors.append("حاجز العبور: متوسط أو أعلى/أدنى قراءة سبتمبر مفقودة")
+            if re.search(r"مناطق الانتظار|المؤشران\s*8\s*و?9|أرقام مناطق", detail):
+                errors.append("حاجز العبور: أرقام مناطق الانتظار محظورة")
+    for cid in set(actual) - set(expected_ids):
+        errors.append(f"حاجز وجود البطاقات الرسمية: بطاقة غير مسجلة: {cid}")
+    return errors
+
+
 def validate_one(report_html: str, additions_html: str, *, ar_report_html: str | None = None,
                  ar_additions_html: str | None = None, title_map: dict[str, str] | None = None,
                  registry: dict | None = None, zones_data: dict | None = None) -> list[str]:
@@ -425,7 +613,8 @@ def validate_one(report_html: str, additions_html: str, *, ar_report_html: str |
 
 def validate_card_documents(*, ar_report: str, ar_additions: str, en_report: str | None = None,
                              en_additions: str | None = None, glossary_path: Path | None = None,
-                             registry_path: Path | None = None, zones_data: dict | None = None) -> list[str]:
+                             registry_path: Path | None = None, zones_data: dict | None = None,
+                             meta_data: dict | None = None) -> list[str]:
     try:
         registry = load_registry(registry_path)
     except ValueError as exc:
@@ -436,6 +625,10 @@ def validate_card_documents(*, ar_report: str, ar_additions: str, en_report: str
         errors.extend(validate_one(en_report, en_additions or ar_additions, ar_report_html=ar_report,
                                    ar_additions_html=ar_additions, title_map=title_map,
                                    registry=registry, zones_data=zones_data))
+    if meta_data is not None and zones_data is not None:
+        errors.extend(validate_hero_kpis(meta_data, zones_data, registry, rendered_html=ar_report))
+    if meta_data is not None:
+        errors.extend(validate_official_cards(meta_data, registry))
     return errors
 
 
@@ -454,11 +647,13 @@ def main(argv=None) -> int:
             return 2
     zone_path = dist.parent / "sources" / "zones" / f"{args.date}.json"
     zones_data = _load_json(zone_path)
+    meta_path = dist.parent / "sources" / "meta" / f"{args.date}.json"
+    meta_data = _load_json(meta_path)
     errors = validate_card_documents(
         ar_report=paths[0].read_text(encoding="utf-8"), ar_additions=paths[1].read_text(encoding="utf-8"),
         en_report=paths[2].read_text(encoding="utf-8"), en_additions=paths[3].read_text(encoding="utf-8"),
         glossary_path=dist.parent / "sources" / "i18n" / "en" / "glossary.json",
-        registry_path=Path(args.registry), zones_data=zones_data,
+        registry_path=Path(args.registry), zones_data=zones_data, meta_data=meta_data,
     )
     if errors:
         for error in errors:

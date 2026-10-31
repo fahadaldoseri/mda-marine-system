@@ -1,15 +1,600 @@
 {
-  "generated_utc": "2026-10-31T06:17:36Z",
+  "generated_utc": "2026-10-31T16:59:59Z",
   "master": "cumulative-2026/event-ledger-master.json",
-  "records_total": 346,
+  "records_total": 474,
   "codes": {
+    "IMO-2026-03-01-119": {
+      "event_id": "EV-2026-03-01-002-ee109bbe",
+      "date_start": "2026-03-01",
+      "title": "IMO confirmed incident — STENA IMPERATIVE: One shipyard worker fatality. Two shipyard work"
+    },
+    "IMO-2026-03-01-120": {
+      "event_id": "EV-2026-03-01-003-233c4de6",
+      "date_start": "2026-03-01",
+      "title": "IMO confirmed incident — HERCULES STAR: Fire on board. No injuries."
+    },
+    "IMO-2026-03-01-121": {
+      "event_id": "EV-2026-03-01-004-5e93021c",
+      "date_start": "2026-03-01",
+      "title": "IMO confirmed incident — MKD VYOM: One seafarer fatality."
+    },
+    "IMO-2026-03-01-122": {
+      "event_id": "EV-2026-03-01-005-0723d52f",
+      "date_start": "2026-03-01",
+      "title": "IMO confirmed incident — SKYLIGHT: Four seafarers injured. Two seafarer fatalities."
+    },
+    "BF-2026-03-02-MSCIO-001": {
+      "event_id": "EV-2026-03-02-001-433aeab1",
+      "date_start": "2026-03-02",
+      "title": "إصابة ناقلة نفط بمقذوفين مجهولين واشتعال حريق في ميناء سلمان"
+    },
+    "IMO-2026-03-03-117": {
+      "event_id": "EV-2026-03-03-004-464bb582",
+      "date_start": "2026-03-03",
+      "title": "IMO confirmed incident — GOLD OAK: Steel plating damage. No injuries."
+    },
+    "IMO-2026-03-03-118": {
+      "event_id": "EV-2026-03-03-005-96adc385",
+      "date_start": "2026-03-03",
+      "title": "IMO confirmed incident — LIBRA TRADER: Minor damage. No injuries."
+    },
+    "IMO-2026-03-04-116": {
+      "event_id": "EV-2026-03-04-005-dc4cb13a",
+      "date_start": "2026-03-04",
+      "title": "IMO confirmed incident — SAFEEN PRESTIGE: Sunk. Oil slick detected. No injuries."
+    },
+    "IMO-2026-03-05-115": {
+      "event_id": "EV-2026-03-05-001-5f6ae5f7",
+      "date_start": "2026-03-05",
+      "title": "IMO confirmed incident — SONANGOL NAMIBE: Hull breach. No injuries."
+    },
+    "IMO-2026-03-06-114": {
+      "event_id": "EV-2026-03-06-007-858e0c7f",
+      "date_start": "2026-03-06",
+      "title": "IMO confirmed incident — MUSSAFAH 2: Four seafarer fatalities. Three severely injured."
+    },
+    "IMO-2026-03-07-113": {
+      "event_id": "EV-2026-03-07-008-26a5c0af",
+      "date_start": "2026-03-07",
+      "title": "IMO confirmed incident — ARABIA III: Damaged. No pollution. One seafarer injured."
+    },
+    "IMO-2026-03-11-108": {
+      "event_id": "EV-2026-03-11-012-3a666d59",
+      "date_start": "2026-03-11",
+      "title": "IMO confirmed incident — ZEFYROS: Attack on SAFESEA VISHNU caused collateral damage (fire)"
+    },
+    "IMO-2026-03-11-109": {
+      "event_id": "EV-2026-03-11-013-18b8f005",
+      "date_start": "2026-03-11",
+      "title": "IMO confirmed incident — SAFESEA VISHNU: Impact caused fire. One seafarer fatality."
+    },
+    "IMO-2026-03-11-110": {
+      "event_id": "EV-2026-03-11-014-1a499224",
+      "date_start": "2026-03-11",
+      "title": "IMO confirmed incident — STAR GWYNETH: Damage to cargo holds and forecastle. No injuries."
+    },
+    "IMO-2026-03-11-111": {
+      "event_id": "EV-2026-03-11-015-93d696f0",
+      "date_start": "2026-03-11",
+      "title": "IMO confirmed incident — MAYUREE NAREE: Fire on board. Three seafarer fatalities."
+    },
+    "IMO-2026-03-11-112": {
+      "event_id": "EV-2026-03-11-016-24721bb3",
+      "date_start": "2026-03-11",
+      "title": "IMO confirmed incident — ONE MAJESTY: Hull damage. No injuries."
+    },
+    "IMO-2026-03-12-107": {
+      "event_id": "EV-2026-03-12-013-4061ff50",
+      "date_start": "2026-03-12",
+      "title": "IMO confirmed incident — SOURCE BLESSING: Damaged. No pollution. No injuries."
+    },
+    "IMO-2026-03-16-106": {
+      "event_id": "EV-2026-03-16-017-ded10593",
+      "date_start": "2026-03-16",
+      "title": "IMO confirmed incident — GAS AL AHMADIAH: Damaged. No pollution. No injuries."
+    },
+    "IMO-2026-03-19-105": {
+      "event_id": "EV-2026-03-19-020-121bc82d",
+      "date_start": "2026-03-19",
+      "title": "IMO confirmed incident — HALUL 50: Damaged. No pollution. No injuries."
+    },
+    "IMO-2026-03-28-104": {
+      "event_id": "EV-2026-03-28-029-16a6f785",
+      "date_start": "2026-03-28",
+      "title": "IMO confirmed incident — SUNNY 77: Damaged. No pollution. No injuries."
+    },
+    "BF-2026-03-29-NAVAREA-111": {
+      "event_id": "EV-2026-03-29-001-49277ca6",
+      "date_start": "2026-03-29",
+      "title": "سفينة أُبلغ عن غرقها في شمال الخليج"
+    },
+    "IMO-2026-03-30-103": {
+      "event_id": "EV-2026-03-30-031-389016bd",
+      "date_start": "2026-03-30",
+      "title": "IMO confirmed incident — AL SALMI: Damaged. No pollution. No injuries."
+    },
+    "IMO-2026-04-01-102": {
+      "event_id": "EV-2026-04-01-002-e4feffab",
+      "date_start": "2026-04-01",
+      "title": "IMO confirmed incident — AQUA 1: Damaged. No pollution. No injuries."
+    },
+    "IMO-2026-04-07-100": {
+      "event_id": "EV-2026-04-07-008-e4d3993a",
+      "date_start": "2026-04-07",
+      "title": "IMO confirmed incident — GOLD AUTUMN: Damaged. No pollution. No injuries."
+    },
+    "IMO-2026-04-07-101": {
+      "event_id": "EV-2026-04-07-009-6b024f95",
+      "date_start": "2026-04-07",
+      "title": "IMO confirmed incident — QINGDAO STAR: Damaged. No pollution. No injuries."
+    },
+    "IMO-2026-04-18-098": {
+      "event_id": "EV-2026-04-18-019-de970a82",
+      "date_start": "2026-04-18",
+      "title": "IMO confirmed incident — CMA CGM EVERGLADE: Damaged. No pollution. No injuries."
+    },
+    "IMO-2026-04-18-099": {
+      "event_id": "EV-2026-04-18-020-dba831ea",
+      "date_start": "2026-04-18",
+      "title": "IMO confirmed incident — SANMAR HERALD: Damaged. No pollution. No injuries."
+    },
+    "IMO-2026-04-19-097": {
+      "event_id": "EV-2026-04-19-020-a28f65ac",
+      "date_start": "2026-04-19",
+      "title": "IMO confirmed incident — TOUSKA: Damaged. No pollution. No injuries. Vessel seized."
+    },
+    "IMO-2026-04-22-094": {
+      "event_id": "EV-2026-04-22-023-68baf115",
+      "date_start": "2026-04-22",
+      "title": "IMO confirmed incident — EUPHORIA: Minor damage. No pollution. No injuries."
+    },
+    "IMO-2026-04-22-095": {
+      "event_id": "EV-2026-04-22-024-2f12c7f1",
+      "date_start": "2026-04-22",
+      "title": "IMO confirmed incident — MSC FRANCESCA: Damaged. No pollution. No injuries. Vessel detaine"
+    },
+    "IMO-2026-04-22-096": {
+      "event_id": "EV-2026-04-22-025-792b7dbb",
+      "date_start": "2026-04-22",
+      "title": "IMO confirmed incident — EPAMINONDAS: Damaged. No pollution. No injuries. Vessel detained."
+    },
+    "IMO-2026-05-02-093": {
+      "event_id": "EV-2026-05-02-003-43054f7d",
+      "date_start": "2026-05-02",
+      "title": "IMO confirmed incident — VOLANS / BADR (BARGE): Damaged (Badr - Barge). No pollution. One "
+    },
+    "IMO-2026-05-03-091": {
+      "event_id": "EV-2026-05-03-004-62585a6e",
+      "date_start": "2026-05-03",
+      "title": "IMO confirmed incident — TMO BARAKAH: Damaged. No pollution. Vessel abandoned. No injuries"
+    },
+    "IMO-2026-05-03-092": {
+      "event_id": "EV-2026-05-03-005-7dd1e8ad",
+      "date_start": "2026-05-03",
+      "title": "IMO confirmed incident — MINOAN FALCON: Damaged. No pollution. No injuries."
+    },
+    "IMO-2026-05-04-089": {
+      "event_id": "EV-2026-05-04-005-a40e1e1f",
+      "date_start": "2026-05-04",
+      "title": "IMO confirmed incident — HMM NAMU: Damaged. No pollution. One seafarer injured."
+    },
+    "IMO-2026-05-04-090": {
+      "event_id": "EV-2026-05-04-006-9b4e53f9",
+      "date_start": "2026-05-04",
+      "title": "IMO confirmed incident — JV INNOVATION: Damaged. Pollution. No injuries."
+    },
+    "IMO-2026-05-05-088": {
+      "event_id": "EV-2026-05-05-006-16892cb9",
+      "date_start": "2026-05-05",
+      "title": "IMO confirmed incident — CMA CGM SAN ANTONIO: Damaged. No pollution. Eight seafarers injur"
+    },
+    "IMO-2026-05-06-087": {
+      "event_id": "EV-2026-05-06-001-16ddefd5",
+      "date_start": "2026-05-06",
+      "title": "IMO confirmed incident — HASNA: Damaged. No pollution. No injuries."
+    },
+    "IMO-2026-05-08-085": {
+      "event_id": "EV-2026-05-08-009-95b423c4",
+      "date_start": "2026-05-08",
+      "title": "IMO confirmed incident — SEVDA: Damaged. No pollution. No injuries."
+    },
+    "IMO-2026-05-08-086": {
+      "event_id": "EV-2026-05-08-010-a76c57f6",
+      "date_start": "2026-05-08",
+      "title": "IMO confirmed incident — SEA STAR III: Damaged. No pollution. No injuries."
+    },
+    "IMO-2026-05-10-084": {
+      "event_id": "EV-2026-05-10-001-7accae16",
+      "date_start": "2026-05-10",
+      "title": "IMO confirmed incident — SAFESEA NEHA: Damaged. No pollution. No injuries."
+    },
+    "IMO-2026-05-26-083": {
+      "event_id": "EV-2026-05-26-027-2c99d377",
+      "date_start": "2026-05-26",
+      "title": "IMO confirmed incident — OLYMPIC LIFE: Damaged. Pollution (limited bunker fuel discharge)."
+    },
+    "IMO-2026-05-29-082": {
+      "event_id": "EV-2026-05-29-030-a7454416",
+      "date_start": "2026-05-29",
+      "title": "IMO confirmed incident — LIAN STAR: Damaged. No pollution."
+    },
+    "IMO-2026-06-01-081": {
+      "event_id": "EV-2026-06-01-002-36f33d9b",
+      "date_start": "2026-06-01",
+      "title": "IMO confirmed incident — MSC SARISKA V: Damaged. No pollution. No injuries."
+    },
+    "IMO-2026-06-02-080": {
+      "event_id": "EV-2026-06-02-001-93ebeb97",
+      "date_start": "2026-06-02",
+      "title": "IMO confirmed incident — LEXIE: Damaged. No pollution."
+    },
+    "IMO-2026-06-08-079": {
+      "event_id": "EV-2026-06-08-009-d3390581",
+      "date_start": "2026-06-08",
+      "title": "IMO confirmed incident — MARIVEX: Damaged. No pollution. Abandoned. No injuries."
+    },
+    "IMO-2026-06-09-078": {
+      "event_id": "EV-2026-06-09-001-3787ecf5",
+      "date_start": "2026-06-09",
+      "title": "IMO confirmed incident — SETTEBELLO: Damaged. Abandoned. Three seafarer fatalities."
+    },
+    "IMO-2026-06-10-077": {
+      "event_id": "EV-2026-06-10-011-f0c1e760",
+      "date_start": "2026-06-10",
+      "title": "IMO confirmed incident — JALVEER: Damaged. Abandoned. No pollution"
+    },
+    "IMO-2026-06-12-076": {
+      "event_id": "EV-2026-06-12-013-6ef06cd7",
+      "date_start": "2026-06-12",
+      "title": "IMO confirmed incident — BOCHEM MARENGO: Damaged. No pollution. No injuries."
+    },
+    "IMO-2026-06-25-075": {
+      "event_id": "EV-2026-06-25-026-bc9698df",
+      "date_start": "2026-06-25",
+      "title": "IMO confirmed incident — EVER LOVELY: Damaged. No pollution. No injuries."
+    },
+    "IMO-2026-06-27-074": {
+      "event_id": "EV-2026-06-27-028-34399def",
+      "date_start": "2026-06-27",
+      "title": "IMO confirmed incident — KIKU: Damaged. No Pollution."
+    },
+    "IMO-2026-07-06-072": {
+      "event_id": "EV-2026-07-06-007-4c1dee18",
+      "date_start": "2026-07-06",
+      "title": "IMO confirmed incident — WEDYAN: Damaged. No pollution. No injuries."
+    },
+    "IMO-2026-07-06-073": {
+      "event_id": "EV-2026-07-06-008-8c7a928d",
+      "date_start": "2026-07-06",
+      "title": "IMO confirmed incident — AL REKAYYAT: Damaged. No Pollution"
+    },
+    "IMO-2026-07-07-071": {
+      "event_id": "EV-2026-07-07-008-8c0d04e1",
+      "date_start": "2026-07-07",
+      "title": "IMO confirmed incident — CYPRUS PROSPERITY: Damaged. No pollution. No injuries."
+    },
+    "IMO-2026-07-11-070": {
+      "event_id": "EV-2026-07-11-001-b400a66e",
+      "date_start": "2026-07-11",
+      "title": "IMO confirmed incident — GFS GALAXY: Damaged. No pollution. One seafarer fatality."
+    },
+    "IMO-2026-07-13-069": {
+      "event_id": "EV-2026-07-13-014-62fbc7af",
+      "date_start": "2026-07-13",
+      "title": "IMO confirmed incident — STOLT MAGNESIUM: Damaged. No pollution."
+    },
+    "IMO-2026-07-14-067": {
+      "event_id": "EV-2026-07-14-001-81d71559",
+      "date_start": "2026-07-14",
+      "title": "IMO confirmed incident — AL BAHYAH: Damaged. No pollution. One seafarer fatality. Three se"
+    },
+    "IMO-2026-07-14-068": {
+      "event_id": "EV-2026-07-14-002-e8d3b985",
+      "date_start": "2026-07-14",
+      "title": "IMO confirmed incident — MOMBASA B: Damaged. No pollution. Abandoned. Eleven seafarers inj"
+    },
+    "IMO-2026-07-15-066": {
+      "event_id": "EV-2026-07-15-016-ad1b173b",
+      "date_start": "2026-07-15",
+      "title": "IMO confirmed incident — BELMA: Damaged. No pollution."
+    },
+    "IMO-2026-07-16-065": {
+      "event_id": "EV-2026-07-16-001-4cfc66ab",
+      "date_start": "2026-07-16",
+      "title": "IMO confirmed incident — IDI: Damaged. No pollution."
+    },
+    "IMO-2026-07-19-063": {
+      "event_id": "EV-2026-07-19-020-bbef250c",
+      "date_start": "2026-07-19",
+      "title": "IMO confirmed incident — ACHELOOS: Damaged. No pollution."
+    },
+    "IMO-2026-07-19-064": {
+      "event_id": "EV-2026-07-19-021-bee77f55",
+      "date_start": "2026-07-19",
+      "title": "IMO confirmed incident — KAVOMALEAS: Damaged. No pollution. Abandoned."
+    },
+    "IMO-2026-07-20-062": {
+      "event_id": "EV-2026-07-20-021-65eee8ea",
+      "date_start": "2026-07-20",
+      "title": "IMO confirmed incident — KAIFAN: Damaged. Abandoned. Two seafarers injured."
+    },
+    "IMO-2026-07-24-061": {
+      "event_id": "EV-2026-07-24-025-0cc307db",
+      "date_start": "2026-07-24",
+      "title": "IMO confirmed incident — LAVINE: Damaged. No pollution."
+    },
+    "IMO-2026-07-31-060": {
+      "event_id": "EV-2026-07-31-032-26df6774",
+      "date_start": "2026-07-31",
+      "title": "IMO confirmed incident — GASLOG SHANGHAI: Damaged. No pollution."
+    },
+    "IMO-2026-08-03-059": {
+      "event_id": "EV-2026-08-03-004-f12f2874",
+      "date_start": "2026-08-03",
+      "title": "IMO confirmed incident — MINOAN PIONEER: Damaged. Pollution unconfirmed. One seafarer miss"
+    },
+    "IMO-2026-08-09-058": {
+      "event_id": "EV-2026-08-09-001-2f08b924",
+      "date_start": "2026-08-09",
+      "title": "IMO confirmed incident — AL JABRIYAH II: Damaged. No pollution"
+    },
+    "IMO-2026-08-11-057": {
+      "event_id": "EV-2026-08-11-012-36c06beb",
+      "date_start": "2026-08-11",
+      "title": "IMO confirmed incident — VELA NOVA: Damaged. No pollution."
+    },
+    "IMO-2026-08-13-056": {
+      "event_id": "EV-2026-08-13-014-6c7ed2a7",
+      "date_start": "2026-08-13",
+      "title": "IMO confirmed incident — NAVIG8 MESSI: Damaged. No pollution."
+    },
+    "IMO-2026-08-14-055": {
+      "event_id": "EV-2026-08-14-001-9a48484a",
+      "date_start": "2026-08-14",
+      "title": "IMO confirmed incident — AL WATAN: Damaged. No pollution."
+    },
+    "IMO-2026-08-15-054": {
+      "event_id": "EV-2026-08-15-016-74ac5abb",
+      "date_start": "2026-08-15",
+      "title": "IMO confirmed incident — RIYAN STAR: Damaged. No pollution. One seafarer fatality."
+    },
+    "IMO-2026-08-17-053": {
+      "event_id": "EV-2026-08-17-018-9e679c29",
+      "date_start": "2026-08-17",
+      "title": "IMO confirmed incident — MINOAN DIGNITY: Damaged. No pollution. One seafarer fatality."
+    },
+    "IMO-2026-08-24-052": {
+      "event_id": "EV-2026-08-24-025-2a28950b",
+      "date_start": "2026-08-24",
+      "title": "IMO confirmed incident — METRO VENETIAN: Damaged. No pollution."
+    },
+    "IMO-2026-08-25-051": {
+      "event_id": "EV-2026-08-25-026-6517e53e",
+      "date_start": "2026-08-25",
+      "title": "IMO confirmed incident — AL SALAM II: Damaged. No pollution."
+    },
+    "IMO-2026-08-28-050": {
+      "event_id": "EV-2026-08-28-001-da0a9d58",
+      "date_start": "2026-08-28",
+      "title": "IMO confirmed incident — AL YARMOUK: Damaged. No pollution."
+    },
+    "IMO-2026-08-29-049": {
+      "event_id": "EV-2026-08-29-030-3fa40384",
+      "date_start": "2026-08-29",
+      "title": "IMO confirmed incident — BURGAN: Damaged. No pollution."
+    },
+    "IMO-2026-08-31-047": {
+      "event_id": "EV-2026-08-31-001-2d75acd1",
+      "date_start": "2026-08-31",
+      "title": "IMO confirmed incident — SIDR: Damaged. No pollution. Two seafarer fatalities."
+    },
+    "IMO-2026-08-31-048": {
+      "event_id": "EV-2026-08-31-002-fc27ffda",
+      "date_start": "2026-08-31",
+      "title": "IMO confirmed incident — SENEGAL PROSPERITY: Damaged. No pollution."
+    },
+    "IMO-2026-09-07-046": {
+      "event_id": "EV-2026-09-07-001-f73d8833",
+      "date_start": "2026-09-07",
+      "title": "IMO confirmed incident — AL DASMA: Damaged. No pollution."
+    },
+    "IMO-2026-09-08-045": {
+      "event_id": "EV-2026-09-08-009-f38731c5",
+      "date_start": "2026-09-08",
+      "title": "IMO confirmed incident — HORIZON 1: Damaged. No pollution."
+    },
+    "IMO-2026-09-09-043": {
+      "event_id": "EV-2026-09-09-010-fa886b57",
+      "date_start": "2026-09-09",
+      "title": "IMO confirmed incident — HERCULES STAR: Damaged. No pollution. Two seafarer fatalities."
+    },
+    "IMO-2026-09-09-044": {
+      "event_id": "EV-2026-09-09-011-201b7e2a",
+      "date_start": "2026-09-09",
+      "title": "IMO confirmed incident — NEW ANDROS: Damaged. No pollution."
+    },
+    "IMO-2026-09-10-042": {
+      "event_id": "EV-2026-09-10-011-033fa32d",
+      "date_start": "2026-09-10",
+      "title": "IMO confirmed incident — ROMANCE: Damaged. Oil leak under assessment."
+    },
+    "IMO-2026-09-12-041": {
+      "event_id": "EV-2026-09-12-013-22f95b70",
+      "date_start": "2026-09-12",
+      "title": "IMO confirmed incident — EL GAIA: Damaged. Pollution (extent unknown). Two seafarers missi"
+    },
+    "IMO-2026-09-17-040": {
+      "event_id": "EV-2026-09-17-018-c8a913dc",
+      "date_start": "2026-09-17",
+      "title": "IMO confirmed incident — TREND: Damaged. No pollution."
+    },
+    "IMO-2026-09-18-039": {
+      "event_id": "EV-2026-09-18-001-c553ea5b",
+      "date_start": "2026-09-18",
+      "title": "IMO confirmed incident — STI STEADFAST: Damaged. No pollution."
+    },
+    "IMO-2026-09-21-037": {
+      "event_id": "EV-2026-09-21-022-b77ef6cc",
+      "date_start": "2026-09-21",
+      "title": "IMO confirmed incident — AL MARYAH: Damaged. No pollution."
+    },
+    "IMO-2026-09-21-038": {
+      "event_id": "EV-2026-09-21-023-3b36f083",
+      "date_start": "2026-09-21",
+      "title": "IMO confirmed incident — LR STEPHANIE: Damaged. No pollution. Two seafarers injured."
+    },
+    "IMO-2026-09-23-036": {
+      "event_id": "EV-2026-09-23-024-0d5f1f37",
+      "date_start": "2026-09-23",
+      "title": "IMO confirmed incident — CAPE DAO: Damaged. No pollution. One seafarer fatality. Sunk."
+    },
+    "IMO-2026-09-28-035": {
+      "event_id": "EV-2026-09-28-029-45b5f054",
+      "date_start": "2026-09-28",
+      "title": "IMO confirmed incident — AL FUNTAS: Damaged. No pollution."
+    },
+    "IMO-2026-09-29-032": {
+      "event_id": "EV-2026-09-29-001-aa188463",
+      "date_start": "2026-09-29",
+      "title": "IMO confirmed incident — AL RUWAIS: Damaged. No pollution."
+    },
+    "IMO-2026-09-29-033": {
+      "event_id": "EV-2026-09-29-002-cf8c2e96",
+      "date_start": "2026-09-29",
+      "title": "IMO confirmed incident — SINBAD: Damaged. No pollution."
+    },
+    "IMO-2026-09-29-034": {
+      "event_id": "EV-2026-09-29-003-8b788050",
+      "date_start": "2026-09-29",
+      "title": "IMO confirmed incident — MERSIN PROSPERITY: Damaged. No pollution."
+    },
+    "BF-2026-09-30-UKMTO-144": {
+      "event_id": "EV-2026-09-30-001-5c9f219a",
+      "date_start": "2026-09-30",
+      "title": "UKMTO #144: إصابة ناقلة نفط خام بمقذوف مجهول في مضيق هرمز"
+    },
+    "BF-2026-09-30-UKMTO-145": {
+      "event_id": "EV-2026-09-30-002-def6d913",
+      "date_start": "2026-09-30",
+      "title": "UKMTO #145: إصابة ناقلة داخلة بمقذوف مجهول في مضيق هرمز"
+    },
+    "BF-2026-09-30-UKMTO-146": {
+      "event_id": "EV-2026-09-30-003-9f267933",
+      "date_start": "2026-09-30",
+      "title": "UKMTO #146: إصابة ناقلة بمقذوف مجهول في مضيق هرمز"
+    },
+    "BF-2026-09-30-NAVAREA-347": {
+      "event_id": "EV-2026-09-30-004-5ef1dba6",
+      "date_start": "2026-09-30",
+      "title": "غرق مركب شحن الداو AL MOHSANI في مقاربات كراتشي"
+    },
+    "IMO-2026-10-01-031": {
+      "event_id": "EV-2026-10-01-002-4996d218",
+      "date_start": "2026-10-01",
+      "title": "IMO confirmed incident — KAZIMAH III: Damaged. No pollution."
+    },
+    "IMO-2026-10-02-029": {
+      "event_id": "EV-2026-10-02-001-33e51c85",
+      "date_start": "2026-10-02",
+      "title": "IMO confirmed incident — UHUD: Damaged. No pollution."
+    },
+    "IMO-2026-10-02-030": {
+      "event_id": "EV-2026-10-02-002-07a27314",
+      "date_start": "2026-10-02",
+      "title": "IMO confirmed incident — PROMISE: Damaged. No pollution."
+    },
+    "IMO-2026-10-03-028": {
+      "event_id": "EV-2026-10-03-001-35b96e78",
+      "date_start": "2026-10-03",
+      "title": "IMO confirmed incident — GHANA PROSPERITY: Damaged. No pollution."
+    },
+    "IMO-2026-10-04-025": {
+      "event_id": "EV-2026-10-04-005-195b4f0e",
+      "date_start": "2026-10-04",
+      "title": "IMO confirmed incident — GAS VELA: Damaged. No pollution."
+    },
+    "IMO-2026-10-04-026": {
+      "event_id": "EV-2026-10-04-006-ca64deb9",
+      "date_start": "2026-10-04",
+      "title": "IMO confirmed incident — CAMEROON PROSPERITY: Damaged. No pollution."
+    },
+    "IMO-2026-10-04-027": {
+      "event_id": "EV-2026-10-04-007-9170a3d5",
+      "date_start": "2026-10-04",
+      "title": "IMO confirmed incident — LIPSI: Damaged. No pollution."
+    },
+    "IMO-2026-10-05-023": {
+      "event_id": "EV-2026-10-05-006-00900c74",
+      "date_start": "2026-10-05",
+      "title": "IMO confirmed incident — MARAN GAS MYSTRAS: Damaged. No pollution."
+    },
+    "IMO-2026-10-05-024": {
+      "event_id": "EV-2026-10-05-007-cb059ce9",
+      "date_start": "2026-10-05",
+      "title": "IMO confirmed incident — ON PEACE: Damaged. No pollution. Twelve seafarers injured."
+    },
+    "IMO-2026-10-06-022": {
+      "event_id": "EV-2026-10-06-007-be2167e9",
+      "date_start": "2026-10-06",
+      "title": "IMO confirmed incident — ST1: Damaged. No pollution."
+    },
+    "IMO-2026-10-07-021": {
+      "event_id": "EV-2026-10-07-008-0efca121",
+      "date_start": "2026-10-07",
+      "title": "IMO confirmed incident — ACERS: Damaged. No pollution."
+    },
+    "IMO-2026-10-09-020": {
+      "event_id": "EV-2026-10-09-010-b753c4e2",
+      "date_start": "2026-10-09",
+      "title": "IMO confirmed incident — GEM NO. 2: Damaged."
+    },
+    "IMO-2026-10-10-018": {
+      "event_id": "EV-2026-10-10-011-d42ee10f",
+      "date_start": "2026-10-10",
+      "title": "IMO confirmed incident — AKIRA SUN (OCEAN MOLICA): Damaged. No pollution."
+    },
+    "IMO-2026-10-10-019": {
+      "event_id": "EV-2026-10-10-012-0bc1e747",
+      "date_start": "2026-10-10",
+      "title": "IMO confirmed incident — VALTHERA: Damaged. No pollution."
+    },
+    "IMO-2026-10-11-012": {
+      "event_id": "EV-2026-10-11-012-a34a96c6",
+      "date_start": "2026-10-11",
+      "title": "IMO confirmed incident — AL MAQAM: Damaged. No pollution."
+    },
+    "IMO-2026-10-11-013": {
+      "event_id": "EV-2026-10-11-013-288d5bfa",
+      "date_start": "2026-10-11",
+      "title": "IMO confirmed incident — DP WORLD KAVERI: Damaged. No pollution. One seafarer injured."
+    },
+    "IMO-2026-10-11-014": {
+      "event_id": "EV-2026-10-11-014-8f9b713c",
+      "date_start": "2026-10-11",
+      "title": "IMO confirmed incident — KITION M: Damaged. Limited pollution reported."
+    },
+    "IMO-2026-10-11-015": {
+      "event_id": "EV-2026-10-11-015-b5d6c220",
+      "date_start": "2026-10-11",
+      "title": "IMO confirmed incident — EVER VICT: Damaged. No pollution. Two seafarers injured."
+    },
+    "IMO-2026-10-11-016": {
+      "event_id": "EV-2026-10-11-016-dff5df05",
+      "date_start": "2026-10-11",
+      "title": "IMO confirmed incident — ANGOLA PROSPERITY: Damaged. No pollution."
+    },
+    "IMO-2026-10-11-017": {
+      "event_id": "EV-2026-10-11-017-c75bb4cf",
+      "date_start": "2026-10-11",
+      "title": "IMO confirmed incident — PETRO DOLPHIN: Two seafarers missing."
+    },
     "MN-2026-10-11-01": {
-      "event_id": "EV-2026-10-11-012-22cc05a8",
+      "event_id": "EV-2026-10-11-018-22cc05a8",
       "date_start": "2026-10-11",
       "title": "إصابة ناقلة في العبور إلى الخارج بمقذوف غير محدد المصدر (UKMTO #164)"
     },
     "MN-2026-10-13-04": {
-      "event_id": "EV-2026-10-11-013-e648dfab",
+      "event_id": "EV-2026-10-11-019-e648dfab",
       "date_start": "2026-10-11",
       "title": "بلاغ متأخر: هجوم على ناقلة صادرة (UKMTO 166-26)"
     },
@@ -53,38 +638,53 @@
       "date_start": "2026-10-13",
       "title": "التحالف بقيادة السعودية يضرب مواقع للحوثيين في صنعاء والحديدة وذمار"
     },
+    "IMO-2026-10-13-009": {
+      "event_id": "EV-2026-10-13-003-a6161258",
+      "date_start": "2026-10-13",
+      "title": "IMO confirmed incident — GFS PRIDE: Sunk. No pollution."
+    },
+    "IMO-2026-10-13-010": {
+      "event_id": "EV-2026-10-13-004-cb4d9c02",
+      "date_start": "2026-10-13",
+      "title": "IMO confirmed incident — GFS GISELLE: Damaged. No pollution."
+    },
+    "IMO-2026-10-13-011": {
+      "event_id": "EV-2026-10-13-005-5b72c5e4",
+      "date_start": "2026-10-13",
+      "title": "IMO confirmed incident — AL SAADIYAT: Damaged. No pollution."
+    },
     "MN-2026-10-14-01": {
-      "event_id": "EV-2026-10-13-003-30084b33",
+      "event_id": "EV-2026-10-13-006-30084b33",
       "date_start": "2026-10-13",
       "title": "إصابة سفينة حاويات بمقذوف غير معروف (UKMTO #170)"
     },
     "MN-2026-10-14-02": {
-      "event_id": "EV-2026-10-13-004-74dbe74e",
+      "event_id": "EV-2026-10-13-007-74dbe74e",
       "date_start": "2026-10-13",
       "title": "إصابة ناقلة بمقذوف غير معروف (UKMTO #171)"
     },
     "MN-2026-10-14-03": {
-      "event_id": "EV-2026-10-13-005-7b73a2c6",
+      "event_id": "EV-2026-10-13-008-7b73a2c6",
       "date_start": "2026-10-13",
       "title": "ضربات التحالف على أهداف حوثية وتصعيد يهدد مسار باب المندب"
     },
     "MN-2026-10-14-04": {
-      "event_id": "EV-2026-10-13-006-7a82c065",
+      "event_id": "EV-2026-10-13-009-7a82c065",
       "date_start": "2026-10-13",
       "title": "إعلان البحرية الإيرانية عن ناقلة «غير ممتثلة» تضررت واشتعلت بعد إطفاء التتبّع"
     },
     "MN-2026-10-14-06": {
-      "event_id": "EV-2026-10-13-007-5859b070",
+      "event_id": "EV-2026-10-13-010-5859b070",
       "date_start": "2026-10-13",
       "title": "خطر يهدد عمليات النقل من سفينة إلى سفينة وانصراف ناقلات عملاقة عن الخليج"
     },
     "MN-2026-10-14-07": {
-      "event_id": "EV-2026-10-13-008-c6a593c0",
+      "event_id": "EV-2026-10-13-011-c6a593c0",
       "date_start": "2026-10-13",
       "title": "سجل IMO الرسمي: 106 حادثة مؤكدة و24 وفاة، وإدراج «ANGOLA PROSPERITY» و«PETRO DOLPHIN»"
     },
     "MN-2026-10-15-06": {
-      "event_id": "EV-2026-10-13-009-2a01d281",
+      "event_id": "EV-2026-10-13-012-2a01d281",
       "date_start": "2026-10-13",
       "title": "إدراج أضرار «GFS GISELLE» (6 أميال) و«AL SAADIYAT» (ميل واحد) قرب ساحل عُمان"
     },
@@ -178,38 +778,48 @@
       "date_start": "2026-10-16",
       "title": "تغطية إعلامية واسعة تصف تصاعد الهجمات في المضيق بأنه الأعلى منذ بداية الحرب، مع ظهور حاويا"
     },
+    "IMO-2026-10-16-007": {
+      "event_id": "EV-2026-10-16-008-4c6feb00",
+      "date_start": "2026-10-16",
+      "title": "IMO confirmed incident — LOYALTY: Damaged. No pollution."
+    },
+    "IMO-2026-10-16-008": {
+      "event_id": "EV-2026-10-16-009-721b7e4a",
+      "date_start": "2026-10-16",
+      "title": "IMO confirmed incident — ST3: Damaged. No pollution."
+    },
     "MN-2026-10-17-02": {
-      "event_id": "EV-2026-10-16-008-cfb98a62",
+      "event_id": "EV-2026-10-16-010-cfb98a62",
       "date_start": "2026-10-16",
       "title": "إصابة الناقلة الضخمة «ST 3» (IMO 9220964) بمقذوف في مضيق هرمز — 15 بحّارًا هنديًا سالمون و"
     },
     "MN-2026-10-17-05": {
-      "event_id": "EV-2026-10-16-009-b16881ad",
+      "event_id": "EV-2026-10-16-011-b16881ad",
       "date_start": "2026-10-16",
       "title": "BBC Verify: 12 سفينة مُهاجَمة بين 5 و11 أكتوبر — أعلى حصيلة أسبوعية منذ بدء الحرب، وتراجع "
     },
     "MN-2026-10-17-06": {
-      "event_id": "EV-2026-10-16-010-c5384ec6",
+      "event_id": "EV-2026-10-16-012-c5384ec6",
       "date_start": "2026-10-16",
       "title": "الحوثيون يطلقون صاروخين على مطار عدن، والتحالف يعترض صاروخًا متجهًا إلى ينبع — تصعيد يمس ا"
     },
     "MN-2026-10-17-07": {
-      "event_id": "EV-2026-10-16-011-7aeb167f",
+      "event_id": "EV-2026-10-16-013-7aeb167f",
       "date_start": "2026-10-16",
       "title": "تحديث رسمي لحوادث القرصنة مقابل شمال الصومال، وتمرين SPAR 2026 لمكافحة القرصنة بمشاركة قوة"
     },
     "MN-2026-10-18-03": {
-      "event_id": "EV-2026-10-16-012-f251ebcd",
+      "event_id": "EV-2026-10-16-014-f251ebcd",
       "date_start": "2026-10-16",
       "title": "تحذير ملاحي 380/26: «CAPE DAO» تُبلَّغ عن الغرق والانجراف شرقًا بسرعة نصف عقدة في 24°21.48"
     },
     "MN-2026-10-18-10": {
-      "event_id": "EV-2026-10-16-013-82dfd39e",
+      "event_id": "EV-2026-10-16-015-82dfd39e",
       "date_start": "2026-10-16",
       "title": "إيران توسّع قائمة حظر الشحن في مضيق هرمز إلى 124 سفينة"
     },
     "MN-2026-10-18-11": {
-      "event_id": "EV-2026-10-16-014-6b57fb27",
+      "event_id": "EV-2026-10-16-016-6b57fb27",
       "date_start": "2026-10-16",
       "title": "نقل من سفينة إلى سفينة مقابل عُمان لإخفاء حركة ناقلات إيرانية · ثماني ناقلات غاز مسال وناق"
     },
@@ -283,38 +893,43 @@
       "date_start": "2026-10-18",
       "title": "سجل المنظمة البحرية الدولية ثابت عند 113 حادثة و24 وفاة كما في 14 أكتوبر · وتصحيح ترقيم ال"
     },
+    "IMO-2026-10-18-006": {
+      "event_id": "EV-2026-10-18-003-a19f6799",
+      "date_start": "2026-10-18",
+      "title": "IMO confirmed incident — JIF BARRACUDA: Damaged. No pollution. One seafarer injured."
+    },
     "MN-2026-10-19-01": {
-      "event_id": "EV-2026-10-18-003-4158d138",
+      "event_id": "EV-2026-10-18-004-4158d138",
       "date_start": "2026-10-18",
       "title": "بلاغ رسمي 177-26: قُطر يسير جنوبًا أصابه مقذوفان مجهولان شمال شرق خورفكان بالإمارات، مع أض"
     },
     "MN-2026-10-19-02": {
-      "event_id": "EV-2026-10-18-004-305e2ec0",
+      "event_id": "EV-2026-10-18-005-305e2ec0",
       "date_start": "2026-10-18",
       "title": "بحرية الحرس الثوري: ناقلة نفط «غير ممتثلة» أصابها لغم بحري جنوب مضيق هرمز مع حريق في غرفة "
     },
     "MN-2026-10-19-03": {
-      "event_id": "EV-2026-10-18-005-54d8699a",
+      "event_id": "EV-2026-10-18-006-54d8699a",
       "date_start": "2026-10-18",
       "title": "إيران تطلب من الولايات المتحدة قبول عرضها لإعادة فتح مضيق هرمز لمدة سبعة أيام، وتصف العرض "
     },
     "MN-2026-10-19-04": {
-      "event_id": "EV-2026-10-18-006-2f1cc101",
+      "event_id": "EV-2026-10-18-007-2f1cc101",
       "date_start": "2026-10-18",
       "title": "مسؤول الأمم المتحدة البحري: نحو 6,000 بحّار محتجزون في نحو 400 سفينة في نطاق المضيق مع تصا"
     },
     "MN-2026-10-19-06": {
-      "event_id": "EV-2026-10-18-007-ee8f93c3",
+      "event_id": "EV-2026-10-18-008-ee8f93c3",
       "date_start": "2026-10-18",
       "title": "عبور نادر لناقلة غاز مسال قطرية محمّلة عبر البحر الأحمر مع إطلاق نار على سفينة غير مسمّاة "
     },
     "MN-2026-10-19-07": {
-      "event_id": "EV-2026-10-18-008-103afc3b",
+      "event_id": "EV-2026-10-18-009-103afc3b",
       "date_start": "2026-10-18",
       "title": "تصاعد القلق الصومالي في التقارير المهنية مع بقاء الإحصاء الرسمي للقرصنة عند أدنى مستوياته "
     },
     "MN-2026-10-20-01": {
-      "event_id": "EV-2026-10-18-009-f0bd7610",
+      "event_id": "EV-2026-10-18-010-f0bd7610",
       "date_start": "2026-10-18",
       "title": "تحذير NAVAREA IX 386/26: حاويات شحن طافية وغارقة جزئيًا في محيط 25°24.26′ N 055°03.00′ E م"
     },
@@ -333,18 +948,23 @@
       "date_start": "2026-10-19",
       "title": "لا تحذير ملاحي جديد في NAVAREA IX (أحدثها 382/26 و381/26 بتاريخ 17 أكتوبر) وسجل المنظمة ال"
     },
+    "IMO-2026-10-19-005": {
+      "event_id": "EV-2026-10-19-004-5c20786d",
+      "date_start": "2026-10-19",
+      "title": "IMO confirmed incident — CHLOE (MIVERVA V): Damaged. No pollution."
+    },
     "MN-2026-10-20-03": {
-      "event_id": "EV-2026-10-19-004-6db506c3",
+      "event_id": "EV-2026-10-19-005-6db506c3",
       "date_start": "2026-10-19",
       "title": "سجل المنظمة البحرية الدولية: 114 حادثة مؤكدة و24 وفاة كما في 19 أكتوبر 2026، والإدراج الجد"
     },
     "MN-2026-10-20-04": {
-      "event_id": "EV-2026-10-19-005-49ca6639",
+      "event_id": "EV-2026-10-19-006-49ca6639",
       "date_start": "2026-10-19",
       "title": "تعيين من مصدر مهني غير رسمي للقُطر المستهدف شمال شرق خورفكان: «JIF BARRACUDA» برقم IMO 934"
     },
     "MN-2026-10-20-06": {
-      "event_id": "EV-2026-10-19-006-16f496f5",
+      "event_id": "EV-2026-10-19-007-16f496f5",
       "date_start": "2026-10-19",
       "title": "نائب رئيس الوزراء القطري يرفض رسوم العبور في مضيق هرمز ويدعو إلى الحوار مع طهران، ويحذّر م"
     },
@@ -363,28 +983,38 @@
       "date_start": "2026-10-20",
       "title": "بلا بلاغ رسمي جديد في الفترة؛ وأحدث بلاغ في UKMTO هو WARNING 177-26 بتاريخ 18 أكتوبر، وبلا"
     },
+    "IMO-2026-10-20-003": {
+      "event_id": "EV-2026-10-20-004-6c9489e2",
+      "date_start": "2026-10-20",
+      "title": "IMO confirmed incident — SOYIA: Damaged. No pollution."
+    },
+    "IMO-2026-10-20-004": {
+      "event_id": "EV-2026-10-20-005-14333363",
+      "date_start": "2026-10-20",
+      "title": "IMO confirmed incident — AL DASMA: Second attack. Damaged. No pollution."
+    },
     "MN-2026-10-21-01": {
-      "event_id": "EV-2026-10-20-004-ea748f8d",
+      "event_id": "EV-2026-10-20-006-ea748f8d",
       "date_start": "2026-10-20",
       "title": "بلاغ UKMTO الاستشارية 178: ناقلة تعرضت لواقعة مع قوات عسكرية على نحو 121 ميلًا بحريًا شرق "
     },
     "MN-2026-10-21-02": {
-      "event_id": "EV-2026-10-20-005-efacbeb2",
+      "event_id": "EV-2026-10-20-007-efacbeb2",
       "date_start": "2026-10-20",
       "title": "سجل المنظمة البحرية الدولية يرتفع إلى 116 حادثة مؤكدة و24 وفاة كما في 20 أكتوبر، والإدراج "
     },
     "MN-2026-10-21-03": {
-      "event_id": "EV-2026-10-20-006-721f6814",
+      "event_id": "EV-2026-10-20-008-721f6814",
       "date_start": "2026-10-20",
       "title": "الحرس الثوري الإيراني يعلن أن ناقلتين وصفهما بـ«المخالفتين» اندلع فيهما حريق وتوقفتا بعد ا"
     },
     "MN-2026-10-21-05": {
-      "event_id": "EV-2026-10-20-007-8fb3b0f9",
+      "event_id": "EV-2026-10-20-009-8fb3b0f9",
       "date_start": "2026-10-20",
       "title": "قائمة NAVAREA IX بتاريخ 20 أكتوبر عند 21 بندًا بلا تحذير جديد، وأحدث تحذير فيها 386/26 بتا"
     },
     "MN-2026-10-22-02": {
-      "event_id": "EV-2026-10-20-008-da7c7f87",
+      "event_id": "EV-2026-10-20-010-da7c7f87",
       "date_start": "2026-10-20",
       "title": "بلاغ UKMTO 180-26: ناقلة أُصيبت بمقذوف غير معلوم 30 ميلًا بحريًا جنوب شرق الفاو، والطاقم آ"
     },
@@ -453,23 +1083,33 @@
       "date_start": "2026-10-23",
       "title": "مؤشرات الممر والسوق عند 0345Z: برنت 113.66 دولارًا بارتفاع 2.86%، والسفن المتحفظة 144 بعد "
     },
+    "IMO-2026-10-23-001": {
+      "event_id": "EV-2026-10-23-002-c1b931e7",
+      "date_start": "2026-10-23",
+      "title": "IMO confirmed incident — GHANA PROSPERITY: Damaged. No pollution."
+    },
+    "IMO-2026-10-23-002": {
+      "event_id": "EV-2026-10-23-003-eabf2088",
+      "date_start": "2026-10-23",
+      "title": "IMO confirmed incident — LEONORA KOSAN: Damaged. No pollution."
+    },
     "MN-2026-10-24-01": {
-      "event_id": "EV-2026-10-23-002-24238941",
+      "event_id": "EV-2026-10-23-004-24238941",
       "date_start": "2026-10-23",
       "title": "نقلت تغذية straits.live عن Mehr أن الحرس الثوري قال إن ناقلتين عملاقتين أصابتهما ألغام بحر"
     },
     "MN-2026-10-24-02": {
-      "event_id": "EV-2026-10-23-003-6b0e136d",
+      "event_id": "EV-2026-10-23-005-6b0e136d",
       "date_start": "2026-10-23",
       "title": "ظهر عنوان عن إصابة ناقلة بمقذوف غير محدد المصدر في مضيق هرمز، دون هوية أو وقت أو موقع دقيق"
     },
     "MN-2026-10-24-03": {
-      "event_id": "EV-2026-10-23-004-58a95282",
+      "event_id": "EV-2026-10-23-006-58a95282",
       "date_start": "2026-10-23",
       "title": "رجّح نقل مهني ارتباط تسرب نفطي في الإمارات بناقلة نفط عملاقة أصابتها مسيرة، بلا أصل رسمي ف"
     },
     "MN-2026-10-24-04": {
-      "event_id": "EV-2026-10-23-005-c70c718d",
+      "event_id": "EV-2026-10-23-007-c70c718d",
       "date_start": "2026-10-23",
       "title": "نقلت Jerusalem Post تهديدًا إيرانيًا بقطع كابلات الإنترنت الخليجية إذا تجددت الضربات الأمر"
     },

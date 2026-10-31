@@ -223,3 +223,11 @@
 {"step": "D020", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/D020.log", "attempt": 1, "ts": "2026-10-31T14:07:19Z"}
 {"step": "D040", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/D040.log", "attempt": 1, "ts": "2026-10-31T14:08:21Z"}
 {"step": "D070", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/D070.log", "attempt": 1, "ts": "2026-10-31T14:09:21Z"}
+{"step": "D070", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/D070.log", "attempt": 1, "ts": "2026-10-31T14:14:38Z"}
+{"step": "B010", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-10-31/B010.log", "ts": "2026-10-31T15:29:10Z"}
+{"step": "B010", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-10-31/B010.log", "ts": "2026-10-31T15:33:03Z"}
+{"step": "B010", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-10-31/B010.log", "ts": "2026-10-31T15:39:52Z"}
+{"step": "B010", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/B010.log", "attempt": 1, "ts": "2026-10-31T15:45:14Z"}
+{"step": "B020", "status": "failed", "rc": 4, "problems": ["رمز الخروج 4"], "log": "logs/runbook/2026-10-31/B020.log", "ts": "2026-10-31T15:45:23Z"}
+{"step": "B010", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/B010.log", "attempt": 1, "ts": "2026-10-31T16:02:19Z"}
+{"step": "B020", "status": "failed", "rc": 4, "problems": ["رمز الخروج 4"], "log": "logs/runbook/2026-10-31/B020.log", "ts": "2026-10-31T16:02:27Z"}

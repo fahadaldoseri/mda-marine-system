@@ -111,9 +111,13 @@ for r in records:
         pass
 
 added, aliased, skipped, source_files = [], [], [], []
+coverage_only = []
 for f in DAILY_FILES:
     file_added = 0
     for ev in load_json(f):
+        if ev.get('no_incident') or ev.get('event_kind') in {'no_incident', 'legacy_projection'}:
+            coverage_only.append(f.name)
+            continue
         code = ev.get('code')
         if not code:
             skipped.append(f'{f.name}: سجل بلا رمز')
@@ -135,9 +139,11 @@ for f in DAILY_FILES:
             'display_code': code,
             'date_start': date,
             'date_label': label(date),
-            'location': ev.get('area', ''),
-            'classification': ev.get('class', ev.get('classification', '')),
-            'evidence_status': CLASS_MAP.get(ev.get('class', ''), 'unresolved_incident'),
+	        'location': ev.get('location', ev.get('area', '')),
+	        'classification': ev.get('classification', ev.get('class', '')),
+	        'evidence_status': ('confirmed_effect_or_attack'
+	                            if ev.get('evidence_kind') == 'imo_confirmed_incidents'
+	                            else CLASS_MAP.get(ev.get('class', ''), ev.get('evidence_status', 'unresolved_incident'))),
             'confidence_level': CONF_MAP.get(ev.get('confidence', ''), 'medium'),
             'confidence': ev.get('confidence', ''),
             'description': ev.get('title', ''),
@@ -149,6 +155,17 @@ for f in DAILY_FILES:
             'merged_from': f.name,
             'merged_utc': (by_id.get(locals().get('rec', {}).get('event_id') or '', {}).get('merged_utc') or utcnow()),
         }
+        # حقول إضافية اختيارية: تُحفظ للصفوف الجديدة ولا تُفرض على السجلات القديمة.
+        # هذا يحافظ على توافق أدوات القراءة القديمة التي تعتمد الحقول الأساسية أعلاه.
+        for _key in (
+            'vessel_name', 'vessel_source', 'imo_number', 'sector', 'sector_id',
+            'sector_basis', 'event_kind', 'published_at', 'deaths_confirmed',
+            'casualties', 'casualty_scope', 'target', 'outcome', 'backfilled',
+            'evidence_kind', 'evidence_ref', 'retrieved_at', 'attribution_basis',
+            'source_description',
+        ):
+            if _key in ev:
+                rec[_key] = ev[_key]
         records.append(rec)
         by_id[rec['event_id']] = rec
         added.append(f"{code} → {rec['event_id']}")
@@ -236,6 +253,7 @@ master['merge_log'] = {
     'aliased': aliased,
     'skipped': skipped,
     'code_conflicts': code_conflicts,
+    'coverage_only_skipped': len(coverage_only),
     'note': 'added_this_run = ما أضافته هذه الجولة فقط · added_total_since_frozen = كل ما دخل الدفتر بعد التجميد.',
 }
 MASTER.write_text(json.dumps(master, ensure_ascii=False, indent=2), encoding='utf-8')
@@ -255,6 +273,7 @@ print(f"  ✔ الدفتر الجامع: {MASTER.relative_to(B)} — {len(record
 print(f"  ✔ قائمة سجلات واحدة (`events`) — أُزيل المفتاح المكرر `records`")
 print(f"  ✔ مضاف هذه الجولة: {len(added_this_run)}" + (f" — {added_this_run}" if added_this_run else ' (لا جديد)'))
 print(f"  ✔ إجمالي المضاف منذ التجميد: {len(merged_from_frozen)} سجلًا ({len(current_codes)} رمزًا في الخريطة)")
+print(f"  · صفوف تغطية يومية لا تُعد وقائع: {len(coverage_only)}")
 if removed_this_run:
     print(f"  ⚠ مسحوب في هذه الجولة: {removed_this_run}")
 print(f"  ✔ رموز مثبّتة بأثر رجعي: {len(aliased)}" + (f" — {aliased}" if aliased else ''))

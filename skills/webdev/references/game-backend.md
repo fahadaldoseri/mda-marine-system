@@ -26,8 +26,10 @@ leaderboard-specific requirements, read the current config and run from the proj
 `node <runtime-directory>/scripts/prepare-backend-contract.mjs --dockerfile <deploy.dockerfilePath> --health-path <deploy.healthPath> --routes '<routes JSON>'`
 
 The config must use a project-relative Dockerfile, a concrete `/api/...` health path without wildcards,
-uncached `/api/*` server routing and a final `/*` static fallback. If the helper reports incompatible
-config, reconcile the config and actual backend first; this does not mean an existing declaration is invalid.
+`/api/*` server routing and a final `/*` static fallback. Server routes omit `cache` or set `"no-cache"`
+or `0`; Game publishing rejects other server-route `cache` values. If the helper reports incompatible
+config, it names the first failing field; reconcile the config and actual backend first; this does not
+mean an existing declaration is invalid.
 
 The helper validates the Dockerfile and creates the existing auth-backend release schema. It
 preserves a matching login/leaderboard declaration byte-for-byte, including boards and rules,

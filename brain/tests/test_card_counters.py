@@ -7,8 +7,8 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from validators.check_card_counters import _counter, validate_card_documents  # noqa: E402
-sys.path.insert(0, str(ROOT.parent / "site" / "generator"))
+from validators.check_card_counters import _counter, validate_card_documents, validate_hero_kpis, validate_official_cards  # noqa: E402
+sys.path.insert(0, "/home/ubuntu/seawatch/generator")
 from i18n_en import translate_page  # noqa: E402
 
 
@@ -152,6 +152,94 @@ class CardCounterGateTests(unittest.TestCase):
         expected = ("Counter: qualifying incidents", "confirmed", "probable", "excluded", "non-spatial", "total")
         for label in expected:
             self.assertIn(label, translated)
+
+
+class HeroKpiGateTests(unittest.TestCase):
+    """حواجز المؤشرات الجديدة: العنوان ثابت، الموضع حاضر، والتفصيل مصدره العدّاد."""
+
+    def setUp(self):
+        import copy
+        import json
+        self.copy = copy
+        self.meta = json.loads(Path("/home/ubuntu/seawatch/sources/meta/2026-10-31.json").read_text(encoding="utf-8"))
+        self.zones = json.loads((ROOT / "web/zones/2026-10-31.json").read_text(encoding="utf-8"))
+        self.registry = json.loads((ROOT / "appendices/card_registry.json").read_text(encoding="utf-8"))
+
+    def test_current_day_hero_kpis_match_source_contract(self):
+        self.assertEqual(validate_hero_kpis(self.meta, self.zones, self.registry), [])
+
+    def _rendered_hero_html(self, report_count=1, screen_count=1):
+        tiles = "".join('<div class="kpi hero-kpi"></div>' for _ in range(7))
+        report = "".join(f'<div class="kpis hero-kpis">{tiles}</div>' for _ in range(report_count))
+        screen = "".join(f'<div class="sc-kpis hero-kpis">{tiles}</div>' for _ in range(screen_count))
+        return f'<html lang="ar"><body>{report}<div class="sc-hero no-print">{screen}</div></body></html>'
+
+    def test_rendered_hero_kpis_allow_one_container_per_surface(self):
+        errors = validate_hero_kpis(self.meta, self.zones, self.registry,
+                                     rendered_html=self._rendered_hero_html())
+        self.assertEqual(errors, [])
+
+    def test_negative_duplicate_hero_container_within_same_surface_fails_closed(self):
+        errors = validate_hero_kpis(self.meta, self.zones, self.registry,
+                                     rendered_html=self._rendered_hero_html(report_count=2))
+        self.assertTrue(any("سطح التقرير/الطباعة" in e and "2" in e for e in errors), errors)
+
+    def test_unconfirmed_card_keeps_total_and_qualifying_dimensions(self):
+        counter = self.zones["counter"]
+        self.assertEqual(counter["unconfirmed_total"], 3)
+        self.assertEqual(counter["unconfirmed_qualifying"], 2)
+        card = next(c for c in self.meta["hero_kpis"] if c["id"] == "unconfirmed-narratives")
+        self.assertEqual(card["value"], "3")
+        self.assertEqual(card["detail"], "3 روايات · منها 2 مؤهلة · تُذكر ولا تُحتسب")
+
+    def test_negative_fixed_title_change_fails_closed(self):
+        changed = self.copy.deepcopy(self.meta)
+        changed["hero_kpis"][0]["title"] = "بلاغات UKMTO عن وقائع"
+        errors = validate_hero_kpis(changed, self.zones, self.registry)
+        self.assertTrue(any("ثبات العنوان" in e for e in errors), errors)
+
+    def test_negative_missing_card_fails_closed(self):
+        changed = self.copy.deepcopy(self.meta)
+        changed["hero_kpis"].pop(3)
+        errors = validate_hero_kpis(changed, self.zones, self.registry)
+        self.assertTrue(any("وجود البطاقة" in e or "صف" in e for e in errors), errors)
+
+    def test_negative_detail_composition_fails_closed(self):
+        changed = self.copy.deepcopy(self.meta)
+        changed["hero_kpis"][1]["detail"] = "3 مؤكدة + 1 مرجحة"
+        errors = validate_hero_kpis(changed, self.zones, self.registry)
+        self.assertTrue(any("تفصيل البطاقة" in e for e in errors), errors)
+
+
+class OfficialCardGateTests(unittest.TestCase):
+    """اختبارات RED/GREEN للبطاقات الرسمية ذات الطبقات الثلاث."""
+
+    def setUp(self):
+        import copy
+        import json
+        self.copy = copy
+        self.meta = json.loads(Path("/home/ubuntu/seawatch/sources/meta/2026-10-31.json").read_text(encoding="utf-8"))
+        self.registry = json.loads((ROOT / "appendices/card_registry.json").read_text(encoding="utf-8"))
+
+    def test_official_cards_have_three_layers_and_source_basis(self):
+        errors = validate_official_cards(self.meta, self.registry)
+        self.assertEqual(errors, [])
+
+    def test_false_zero_death_card_fails_closed(self):
+        changed = self.copy.deepcopy(self.meta)
+        changed["official_cards"] = self.copy.deepcopy(changed.get("official_cards") or [])
+        death = next(card for card in changed["official_cards"] if card["id"] == "imo-seafarer-deaths")
+        death["layers"]["daily"]["value"] = "0"
+        errors = validate_official_cards(changed, self.registry)
+        self.assertTrue(any("الصفر الكاذب" in error or "لم يُعلن" in error for error in errors), errors)
+
+    def test_transit_without_reading_uses_no_coverage_not_zero(self):
+        changed = self.copy.deepcopy(self.meta)
+        changed["official_cards"] = self.copy.deepcopy(changed.get("official_cards") or [])
+        transit = next(card for card in changed["official_cards"] if card["id"] == "imo-transit-september-2026")
+        transit["layers"]["daily"]["value"] = "0"
+        errors = validate_official_cards(changed, self.registry)
+        self.assertTrue(any("لا تغطية" in error or "الصفر" in error for error in errors), errors)
 
 
 if __name__ == "__main__":

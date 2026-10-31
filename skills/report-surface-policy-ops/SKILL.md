@@ -63,5 +63,3 @@ python3 scripts/audit_style_coverage.py --brain /path/to/brain --site /path/to/s
 - `70` انهيار غير متوقع في الأداة.
 
 لا تعدّل صفحات `dist/` يدويًا. أصلح المولد أو المصدر، أعد البناء، ثم أعد البوابات. اذكر أي نمط لم تختبره صراحة.
-
-> **حدود المحور والإحالة:** يملك هذا المحور قرار نقل/إخفاء الأقسام وتغطية الأسطح السبعة وتطابق السياسة مع الويب والطباعة؛ تُدار القياسات قبل/بعد ومستويات الأدلة والجولة الثانية في [عقد جولة التدقيق](../multi-agent-audit-ops/references/audit-round-contract.md) وينسّقها [multi-agent-audit-ops](../multi-agent-audit-ops/SKILL.md)، أما أمانة الأعمدة والأعداد فـ[report-content-fidelity-ops](../report-content-fidelity-ops/SKILL.md) والحكم المرئي فـ[live-visual-audit-ops](../live-visual-audit-ops/SKILL.md).

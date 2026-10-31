@@ -33,7 +33,7 @@ license: Complete terms in LICENSE.txt
 
 ## المسار العملي
 
-1. **قياس أمانة السطح** — على السطح النهائي لا على المصدر؛ طبّق ترتيب قبل/بعد والجولة الثانية من العقد المشترك:
+1. **القياس أولًا** — على السطح النهائي لا على المصدر:
 
    ```bash
    python3 scripts/check_surface_fidelity.py --md <report.md> --html <page.html> \
@@ -47,6 +47,10 @@ license: Complete terms in LICENSE.txt
 4. **اختبار سلبي إلزامي** — احقن عيبًا مصغّرًا (بطاقة مصدر واحدة داخل قسم جدول) وأثبت أن الحاجز يمنع، ثم استعد وأثبت أنه يمرّ. بلا اختبار سلبي، الحاجز ادّعاء.
 5. **اربطه بالحزمة** — أضف الحاجز إلى `tests/run_checks.sh` أو ما يعادله.
 6. **سجّل وأغلق** — صف عطل لكل صنف في سجل الأعطال (12 عمودًا) + صف تتبع + درس في سجل التعلم، ثم ادفع في فرع وطلب دمج. راجع `fault-closure-ops`.
+
+## التحقق من ادّعاء وكيل أو مساعد
+
+لا تقبل «أُصلح» أو «التصميم تغيّر» بلا مخرج أمر. القاعدة: **لكل ادّعاء قياس مضاد**. اقرأ المخرج، وإن خالف الادّعاء القياس فالقرار للقياس، وسجّل الفرق كعيب. أمثلة واقعية في `references/failure-classes.md`.
 
 ## حلقة التحسين الذاتي (إلزامية)
 
@@ -62,5 +66,3 @@ license: Complete terms in LICENSE.txt
 - `scripts/check_surface_fidelity.py` — مقياس أمانة الأعمدة والأعداد (معاملات: md · html · ledger · sections).
 - `scripts/negative_test_fidelity.sh` — اختبار سلبي يعيد إنتاج خرق مصغّر ويؤكد أن الحاجز يمنعه.
 - `references/failure-classes.md` — الأصناف الستة بالأوامر والمخرجات الحقيقية، وأمثلة ادّعاءات وكلاء رفضها القياس.
-
-> **حدود المحور والإحالة:** يملك هذا المحور أمانة مسار المصدر/السجل/المولّد/السطح والأعمدة والأعداد؛ تُدار الجولة المشتركة في [عقد جولة التدقيق](../multi-agent-audit-ops/references/audit-round-contract.md) وينسّقها [multi-agent-audit-ops](../multi-agent-audit-ops/SKILL.md)، أما موضع القسم على الأسطح فـ[report-surface-policy-ops](../report-surface-policy-ops/SKILL.md) والحكم المرئي/RTL/PDF فـ[live-visual-audit-ops](../live-visual-audit-ops/SKILL.md).
