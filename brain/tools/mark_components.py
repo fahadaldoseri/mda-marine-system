@@ -30,6 +30,36 @@ def _read_json(p: Path):
         return None
 
 
+def _bootstrap_mark(date: str, mark_p: Path) -> int:
+    """أنشئ علامة pipeline القياسية عند غيابها فقط، ثم اترك أثر المنشئ."""
+    print(f"  · لا علامة تشغيل: {mark_p} — إنشاء علامة pipeline عبر write_mark")
+    try:
+        from write_mark import main as write_mark_main
+    except ImportError as exc:
+        print(f"  ✘ تعذّر تحميل write_mark لإنشاء العلامة: {exc}")
+        return 70
+    old_argv = sys.argv[:]
+    try:
+        sys.argv = [str(B / "tools" / "write_mark.py"),
+                    "--date", date, "--stage", "pipeline"]
+        rc = int(write_mark_main())
+    finally:
+        sys.argv = old_argv
+    if rc != 0:
+        print(f"  ✘ تعذّر إنشاء علامة pipeline: رمز الخروج {rc}")
+        return rc
+    mark = _read_json(mark_p)
+    if mark is None:
+        print(f"  ✘ write_mark لم يكتب علامة قابلة للقراءة: {mark_p}")
+        return 70
+    mark["created_by"] = "mark_components"
+    mark["created_reason"] = "bootstrap قبل اشتقاق أول مكوّن في خط اليوم"
+    mark_p.write_text(json.dumps(mark, ensure_ascii=False, indent=2, sort_keys=True),
+                      encoding="utf-8")
+    print("  · أضيف أثر الإنشاء: created_by=mark_components")
+    return 0
+
+
 def derive_feeds(date: str) -> tuple[str, str, list[str], dict]:
     p = B / "feeds" / f"feeds-{date}.status.json"
     d = _read_json(p)
@@ -130,6 +160,10 @@ def main() -> int:
     a = ap.parse_args()
 
     mark_p = B / "logs" / f"pipeline-{a.date}.json"
+    if not mark_p.exists():
+        rc = _bootstrap_mark(a.date, mark_p)
+        if rc != 0:
+            return rc
     mark = _read_json(mark_p)
     if mark is None:
         print(f"  ✘ لا علامة تشغيل: {mark_p}")

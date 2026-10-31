@@ -153,20 +153,25 @@ def rank_of_zone(rows: list[dict], levels: dict, registry_order: list[str]) -> d
         if not r["qualifying"]:
             continue
         g = r.get("incident_group") or r["code"]
-        cur = groups.setdefault(g, {"conf": r["confirmation"], "titles": [], "codes": []})
+        cur = groups.setdefault(g, {"conf": r["confirmation"], "titles": [], "codes": [], "texts": []})
         cur["titles"].append(r["title"])
         cur["codes"].append(r["code"])
+        cur["texts"].append(r["title"] + " " + str(r.get("source_excerpt", "")))
         order = {"confirmed": 3, "probable": 2, "unconfirmed": 1}
         if order[r["confirmation"]] > order[cur["conf"]]:
             cur["conf"] = r["confirmation"]
     confirmed = [g for g, v in groups.items() if v["conf"] == "confirmed"]
     probable = [g for g, v in groups.items() if v["conf"] == "probable"]
     unconfirmed = [g for g, v in groups.items() if v["conf"] == "unconfirmed"]
-    hay = " ".join(r["title"] + " " + str(r.get("source_excerpt", "")) for r in rows if r["qualifying"])
     attack_damage = bool(
-        any(t in hay for t in ("هجوم", "استهداف", "انفجار"))
-        and any(d in hay for d in DAMAGE_MARKERS)
+        any(
+            v["conf"] == "confirmed"
+            and any(t in " ".join(v["texts"]) for t in ("هجوم", "استهداف", "انفجار"))
+            and any(d in " ".join(v["texts"]) for d in DAMAGE_MARKERS)
+            for v in groups.values()
+        )
     )
+    hay = " ".join(r["title"] + " " + str(r.get("source_excerpt", "")) for r in rows if r["qualifying"])
     full_disruption = any(m in hay for m in FULL_DISRUPTION_MARKERS)
     casualties = any(m in hay for m in CASUALTY_MARKERS)
     sinking = "غرق" in hay

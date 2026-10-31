@@ -1193,7 +1193,7 @@ def render_section_body(title: str, lines, defs, doc_mode: bool = False):
                 # وضع الوثيقة (التقارير الخاصة): يُعرض الجدول جدولًا كاملًا بكل أعمدته
                 out.append(render_table(rows, defs))
                 continue
-            if "القطاع" in htxt or re.search(r"النسبة", htxt):
+            if "القطاع" in htxt and ("عدد الوقائع" in htxt or re.search(r"النسبة", htxt)):
                 out.append(render_geo_viz(rows, defs))
             if is_events_table(rows[0]):
                 # ك-298: جدول الوقائع يجب أن يُصيّر بطاقاته، فكروت الحالة كانت تُسقط عمود «ما حدث»
@@ -1413,7 +1413,7 @@ def hero_map(map_html: str, *, print_mode: bool = False, extra_html: str = "") -
         h = head + extra_html + "</div>" + tail
     if print_mode:
         return f'<section class="print-map" aria-label="خريطة الوقائع ومفتاحها">{h}</section>'
-    return f'<section class="hero-map no-print" aria-hidden="true">{h}</section>'
+    return f'<section class="print-map hero-map no-print" aria-label="خريطة سياق القطاعات للشاشة">{h}</section>'
 
 
 def render_print_distribution_cards(sections, defs) -> str:
@@ -1515,10 +1515,12 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
     if not isinstance(blocks_map, dict):
         blocks_map = {}
 
-    # خريطة الوقائع: تُبنى من إحداثيات معلَنة في ملف الواجهة فقط
+    # خريطة الوقائع/النطاق: تُبنى من إحداثيات معلَنة في ملف الواجهة فقط.
+    # عند غياب الإحداثيات لا نرسم علامات تقريبية، لكن نبقي اللوحة الجغرافية
+    # المصمتة مع إفصاحها الصريح حتى لا تتحول الخريطة إلى معلومة مكانية مخترعة.
     map_html = ""
     mp = meta.get("map") or {}
-    if isinstance(mp, dict) and mp.get("points"):
+    if isinstance(mp, dict) and (mp.get("points") or mp.get("caption")):
         try:
             from map_gulf import build_map
 
@@ -1535,8 +1537,8 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
 
             _hero_map_source = _build_map_hero(mp["points"], mp.get("caption"), mp.get("inset"), zoom=True)
             hero_map_html = hero_map(_hero_map_source)
-            if mode == "additions":
-                print_map_html = hero_map(_hero_map_source, print_mode=True)
+            # تُحضر كتلة الطباعة لكل سطح؛ سياسة الإضافات تحدد موضعها فقط.
+            print_map_html = hero_map(_hero_map_source, print_mode=True)
         except Exception as e:  # لا يُسقط فشل الخريطة بناء التقرير
             print(f"تنبيه: تعذر توليد خريطة الشاشة العليا ({e})", file=sys.stderr)
 
@@ -1606,6 +1608,10 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
                 # السابقة لها (الخريطة تحتاج صفحة كاملة). القرار: تُلحق الخريطة ومفتاحها في
                 # نهاية ملحق الإضافات (صفحتها الكاملة)، ويُستكمل ما قبلها بمحتوى الأقسام.
                 section_html = section_html + tail_para
+            elif mode != "additions" and print_map_html:
+                # التقرير اليومي يحتاج كتلة print-map فعلية أيضًا؛ لا نستخدم
+                # مواقع وقائع غير مثبتة، فاللوحة قد تكون سياقية بلا علامات.
+                section_html = section_html + print_map_html
             else:
                 section_html = section_html + map_html
         for key, bname in blocks_map.items():

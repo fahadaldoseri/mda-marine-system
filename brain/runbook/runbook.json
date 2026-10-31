@@ -234,7 +234,10 @@
         "tests/test_sections_registry_vs_report.py"
       ],
       "files": [],
-      "heading": "المصادر والمراجع"
+      "heading": "المصادر والمراجع",
+      "aliases": [
+        "حالة المصادر والإفصاح"
+      ]
     }
   ],
   "exempt": [
@@ -623,7 +626,11 @@
         ],
         "files": [
           "tools/restore_skills.sh",
-          "sections/90-automation.md"
+          "sections/90-automation.md",
+          "evidence/resume-20261031/restore_skills.exit",
+          "evidence/resume-20261031/restore_skills.stdout",
+          "evidence/resume-20261031/check_skills_integrity.exit",
+          "evidence/resume-20261031/check_skills_integrity.stdout"
         ],
         "gates": [],
         "tests": []
@@ -660,10 +667,18 @@
         ],
         "files": [
           "tools/check_feeds.py",
-          "sections/90-automation.md"
+          "sections/90-automation.md",
+          "evidence/resume-20261031/check_feeds-2026-10-31.exit",
+          "evidence/resume-20261031/check_feeds-2026-10-31.stdout",
+          "evidence/resume-20261031/runbook-redo-S020.exit",
+          "evidence/resume-20261031/runbook-redo-S020.stdout",
+          "evidence/resume-20261031/usni-browser-live.exit",
+          "evidence/resume-20261031/usni-browser-live.stdout"
         ],
         "gates": [],
-        "tests": []
+        "tests": [
+          "tests/test_mark_components_bootstrap.py"
+        ]
       },
       "on_fail": "stop",
       "command": [
@@ -1045,7 +1060,9 @@
           "tools/repair_ledger_prose.py"
         ],
         "gates": [],
-        "tests": []
+        "tests": [
+          "tests/test_classify_zones_damage_scope.py"
+        ]
       },
       "on_fail": "stop",
       "command": [
@@ -2901,11 +2918,16 @@
           "tools/build_instructions_doc.py",
           "tools/build_report_docx.py",
           "tools/build_report_docx_exact.py",
-          "tools/sync_profile_hash.py"
+          "tools/sync_profile_hash.py",
+          "evidence/resume-20261031/geo-table-selection.sh",
+          "evidence/resume-20261031/geo-table-selection.stdout",
+          "evidence/resume-20261031/geo-table-selection.exit",
+          "tests/test_geo_table_selection.py"
         ],
         "gates": [],
         "tests": [
-          "tests/test_en_advisory_id_matching.py"
+          "tests/test_en_advisory_id_matching.py",
+          "tests/test_geo_table_selection.py"
         ]
       },
       "on_fail": "stop",
