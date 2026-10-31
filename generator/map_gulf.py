@@ -423,13 +423,13 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
             "لا تُرسم مواقع وقائع لعدم ثبوت إحداثيات في المصادر.")
     key_html = "" if points else (
         '<ul class="map-legend mp-key">'
-        '<li><span class="lg-sw sw-land" aria-hidden="true"></span>اليابسة</li>'
-        '<li><span class="lg-sw sw-sea" aria-hidden="true"></span>البحر</li>'
-        '<li><span class="lg-sw sw-border" aria-hidden="true"></span>حدود الدول</li>'
-        '<li><span class="lg-sw sw-grid" aria-hidden="true"></span>شبكة خطوط الطول والعرض</li>'
-        '<li><span class="lg-sw sw-port" aria-hidden="true"></span>نقطة ميناء</li>'
-        '<li><span class="lg-sw sw-strait" aria-hidden="true"></span>تسمية بحر أو مضيق</li>'
-        '<li class="lg-none"><span class="lg-sw sw-none" aria-hidden="true"></span>'
+        '<li><span class="lg-sw sw-land" role="presentation"></span>اليابسة</li>'
+        '<li><span class="lg-sw sw-sea" role="presentation"></span>البحر</li>'
+        '<li><span class="lg-sw sw-border" role="presentation"></span>حدود الدول</li>'
+        '<li><span class="lg-sw sw-grid" role="presentation"></span>شبكة خطوط الطول والعرض</li>'
+        '<li><span class="lg-sw sw-port" role="presentation"></span>نقطة ميناء</li>'
+        '<li><span class="lg-sw sw-strait" role="presentation"></span>تسمية بحر أو مضيق</li>'
+        '<li class="lg-none"><span class="lg-sw sw-none" role="presentation"></span>'
         'لا علامات وقائع — لا إحداثيات مثبتة في المصادر</li>'
         '</ul>'
     )
