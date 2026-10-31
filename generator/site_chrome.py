@@ -11,7 +11,9 @@
 
 BRAND = "مركز الوعي بالمجال البحري"
 BRAND_SUB = "تقارير أمن الملاحة — مملكة البحرين"
-
+# سياسة مالكية مؤقتة: لا تعرض الواجهة زرًا تفاعليًا للطباعة ولا رابط تنزيل PDF.
+# لا تُغيّر إلى True إلا بأمر المالك الصريح وبالتزامن مع runbook/runbook.json.
+PRINT_ENABLED = False
 MARK_SVG = (
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" '
     'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'
@@ -52,6 +54,7 @@ padding:9px 16px;border-radius:9px;font-weight:700;font-size:14px}
 .sn-skip:focus{top:8px;outline:2px solid var(--sn-ink);outline-offset:2px}
 .sn-print{background:var(--sn-accent);color:var(--sn-accent-ink);border-color:transparent;font-weight:700}
 .sn-print:hover{color:var(--sn-accent-ink);filter:brightness(1.08)}
+.sn-print-disabled{background:var(--sn-panel);color:var(--sn-muted);border-color:var(--sn-line);cursor:not-allowed}
 .sn-foot{margin-top:44px;border-top:1px solid var(--sn-line);background:var(--sn-bg);
 font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif}
 .sn-foot .sf-inner{max-width:1180px;margin:0 auto;padding:20px;color:var(--sn-muted);font-size:13px;
@@ -93,8 +96,6 @@ function currentScale(){var s=parseFloat(LS.getItem('mn-scale')||'1');return (s&
 function toggleTheme(){var on=body.classList.toggle('daylight');save('mn-theme',on?'light':'dark');paint();}
 if(reportBtn) reportBtn.addEventListener('click',function(e){e.preventDefault();toggleTheme();});
 if(siteBtn) siteBtn.addEventListener('click',function(e){e.preventDefault();toggleTheme();});
-var printBtn=document.getElementById('sn-print');
-if(printBtn) printBtn.addEventListener('click',function(e){e.preventDefault();window.print();});
 document.querySelectorAll('[data-scale]').forEach(function(b){
   b.addEventListener('click',function(e){e.preventDefault();
     var s=parseFloat(b.getAttribute('data-scale'));save('mn-scale',s);
@@ -233,8 +234,10 @@ def nav_html(active: str = "") -> str:
     def link(href, label, key):
         cur = ' aria-current="page"' if key == active else ""
         return f'<a href="{href}"{cur} data-i18n="{key}">{label}</a>'
-    # زر الطباعة في الشريط الواحد لصفحات الإصدار فقط (يحلّ محل زر الشريط العلوي المخفي على الشاشة)
-    print_btn = '<button type="button" class="sn-theme sn-print" id="sn-print" data-i18n="print">طباعة / PDF</button>' if active in ("report", "additions", "sources", "special") else ""
+    # قرار المالك: لا رابط/زر تنزيل مكسور؛ يظهر وسم غير تفاعلي يوضح التعطيل.
+    print_btn = ('<span class="sn-theme sn-print-disabled" role="status" aria-disabled="true">'
+                 'الطباعة غير مفعّلة حاليًا</span>') \
+        if (not PRINT_ENABLED and active in ("report", "additions", "sources", "special")) else ""
     return f"""<nav class="site-nav no-print" aria-label="تنقل الموقع">
   <a class="sn-skip" href="#" id="sn-skip" data-i18n="skip">الانتقال إلى المحتوى</a>
   <div class="sn-inner">

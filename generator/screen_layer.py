@@ -22,6 +22,7 @@ _NO_PREFIX_CHANGE = {"new": "جديد", "closed": "أُغلق", "reclassified": 
                      "info": "متابعة", "ongoing": "مستمر"}
 HERO_MAX_CHANGES = 2
 HERO_MAX_ACTIONS = 2
+HERO_KPI_MODERN_FROM = "2026-10-31"
 
 
 def first_sentence(text: str) -> str:
@@ -165,20 +166,71 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
             side.append(
                 f'<div class="sc-threat {esc(threat_cls)}"><div class="sc-tl">مستوى التهديد</div>'
                 f'<div class="sc-tv">{esc(threat)}</div>{basis}</div>')
-    kp = []
-    for k in meta.get("hero_kpis") or []:
-        acc = k.get("accent", "ok")
-        if acc not in ("ok", "info", "warn", "danger"):
-            acc = "ok"
-        delta = BLK.trend_html(k.get("delta")) if k.get("delta") else ""
-        note = inline(k.get("note", "")) if k.get("note") else ""
-        kp.append(
-            f'<div class="sc-kpi acc-{acc}"><div class="sc-kl">{inline(k.get("label", ""))}</div>'
-            f'<div class="sc-kv bidi">{esc(k.get("value", ""))}</div>'
-            + (f'<div class="sc-kd">{delta}</div>' if delta else "")
-            + (f'<div class="sc-kn">{note}</div>' if note else "") + "</div>")
-    if kp:
-        side.append(f'<div class="sc-kpis">{"".join(kp)}</div>')
+    hero_kpis = meta.get("hero_kpis") or []
+    if hero_kpis:
+        if report_date >= HERO_KPI_MODERN_FROM:
+            if len(hero_kpis) != 7 or sorted(k.get("row") for k in hero_kpis) != [1, 1, 1, 1, 2, 2, 2]:
+                raise ValueError("hero_kpis يجب أن يحوي صفًا أول من 4 وصفًا ثانيًا من 3؛ فشل مغلق")
+            def _screen_tile(k):
+                acc = k.get("accent", "ok")
+                if acc not in ("ok", "info", "warn", "danger"):
+                    acc = "ok"
+                title = k.get("title", "")
+                detail = k.get("detail", "")
+                tag = k.get("tag", "")
+                tag_html = f'<span class="sc-k-tag">{inline(tag)}</span>' if tag else ""
+                return (f'<div class="sc-kpi hero-kpi acc-{acc}" data-kpi-id="{esc(k.get("id", ""))}"><div class="sc-kl">{inline(title)}{tag_html}</div>'
+                        f'<div class="sc-kv bidi">{esc(k.get("value", ""))}</div>'
+                        f'<div class="sc-kn">{inline(detail)}</div></div>')
+            risk = meta.get("hero_risk_patterns") or []
+            risk_html = ('<div class="sc-k-risk" aria-label="أنماط الخطر"><span class="sc-k-risk-label">أنماط الخطر</span>'
+                         + "".join(f'<span class="sc-k-risk-tag">{inline(x)}</span>' for x in risk) + '</div>') if risk else ""
+            row1 = "".join(_screen_tile(k) for k in hero_kpis if k.get("row") == 1)
+            row2 = "".join(_screen_tile(k) for k in hero_kpis if k.get("row") == 2)
+            side.append(f'<div class="sc-kpis hero-kpis">{risk_html}<div class="sc-kpi-row sc-kpi-row-1">{row1}</div><div class="sc-kpi-row sc-kpi-row-2">{row2}</div></div>')
+        else:
+            legacy_tiles = []
+            for k in hero_kpis:
+                acc = k.get("accent", "ok")
+                if acc not in ("ok", "info", "warn", "danger"):
+                    acc = "ok"
+                delta = BLK.trend_html(k.get("delta")) if k.get("delta") else ""
+                note = inline(k.get("note", "")) if k.get("note") else ""
+                legacy_tiles.append(
+                    f'<div class="sc-kpi acc-{acc}"><div class="sc-kl">{inline(k.get("label", ""))}</div>'
+                    f'<div class="sc-kv bidi">{esc(k.get("value", ""))}</div>'
+                    + (f'<div class="sc-kd">{delta}</div>' if delta else "")
+                    + (f'<div class="sc-kn">{note}</div>' if note else "") + "</div>"
+                )
+            side.append(f'<div class="sc-kpis">{"".join(legacy_tiles)}</div>')
+
+    official_cards = meta.get("official_cards") or []
+    if official_cards:
+        official_html = []
+        for card in official_cards:
+            layers = card.get("layers") or {}
+            layer_html = []
+            for key in ("daily", "cumulative", "updated"):
+                layer = layers.get(key) or {}
+                layer_html.append(
+                    f'<div class="sc-official-layer"><span class="sc-official-label">{esc(layer.get("label", ""))}</span>'
+                    f'<b class="sc-official-value bidi">{esc(layer.get("value", ""))}</b>'
+                    f'<span class="sc-official-source">{esc(layer.get("source", "غير متاح"))}</span></div>'
+                )
+            badges = "".join(f'<span class="sc-k-tag">{esc(x)}</span>' for x in (card.get("badges") or []))
+            extras = []
+            if card.get("period"):
+                extras.append(f'الفترة: {esc(card["period"])} · المتوسط: <b class="bidi">{esc(card.get("average", ""))}</b> · الأعلى: <b class="bidi">{esc(card.get("high", ""))}</b> · الأدنى: <b class="bidi">{esc(card.get("low", ""))}</b>')
+            if card.get("constraint"):
+                extras.append(esc(card["constraint"]))
+            extra_html = "".join(f'<p class="sc-official-extra">{x}</p>' for x in extras)
+            official_html.append(
+                f'<article class="sc-official-card" data-official-card-id="{esc(card.get("id", ""))}">'
+                f'<h3>{esc(card.get("title", ""))} {badges}</h3>'
+                f'<p class="sc-official-basis">{esc(card.get("basis", ""))} · {esc(card.get("source_label", ""))}</p>'
+                f'<div class="sc-official-layers">{"".join(layer_html)}</div>{extra_html}</article>'
+            )
+        side.append(f'<section class="sc-official-cards" aria-label="المستجدات الرسمية"><h2 class="sc-h2">المستجدات الرسمية</h2><div class="sc-official-grid">{"".join(official_html)}</div></section>')
 
     # أهم الأخبار المتعلقة بالأمن البحري (شاشة): خلاصة مُركّزة لكل صف + العدد + رابط إلى القسم في صفحته.
     # إصلاح ك-239 (2026-10-28): كانت الصفوف تُفرَغ لأن سكربت الروابط كان يحذف الرابط عند غياب
@@ -278,12 +330,12 @@ body:has(.site-nav) .topbar{display:none}
 .sc-fresh.f-old{border-color:var(--danger);color:var(--danger)}
 .sc-fresh.f-old b{color:var(--danger)}
 .sc-arch{color:var(--muted)}
-.sc-grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:22px;align-items:start}
+.sc-grid{display:flex;flex-direction:column;gap:22px;align-items:stretch}
 /* بلا بطاقة قرار (السجل التراكمي): مستوى التهديد والمؤشرات في صف واحد بدل عمود يترك نصف العرض فارغًا */
 .sc-grid.sc-solo{grid-template-columns:minmax(0,1fr)}
 .sc-solo .sc-side{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));align-items:stretch}
 .sc-solo .sc-kpis{display:contents}
-.sc-side{display:grid;gap:12px;min-width:0}
+.sc-side{display:contents;min-width:0}
 .sc-threat{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:inset 0 2px 0 0 rgba(34,195,182,.55)}
 .sc-tl{font-size:13.5px;color:var(--muted)}
 .sc-tv{font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;font-size:32px;line-height:1.45}
@@ -293,15 +345,31 @@ body:has(.site-nav) .topbar{display:none}
 .sc-basis{margin-top:8px;font-size:13.5px;color:var(--muted)}
 .sc-basis summary{cursor:pointer;color:var(--ink-2)}
 .sc-basis p{margin:6px 0 0;line-height:1.8}
-.sc-kpis{display:grid;gap:10px}
-.sc-kpi{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;position:relative;overflow:hidden}
+.sc-kpis{display:grid;gap:16px;direction:rtl;order:3}
+.sc-official-cards{order:4;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;min-width:0}
+.sc-official-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.sc-official-card{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;text-align:right;direction:rtl;min-width:0}
+.sc-official-card h3{font-family:"Noto Kufi Arabic",sans-serif;font-size:16px;line-height:1.55;margin:0 0 5px;color:var(--accent)}
+.sc-official-basis,.sc-official-extra{font-size:12.5px;line-height:1.65;color:var(--muted);margin:3px 0}
+.sc-official-layers{display:grid;gap:7px;margin-top:10px}
+.sc-official-layer{display:grid;grid-template-columns:145px minmax(75px,auto) minmax(0,1fr);gap:8px;align-items:baseline;border-top:1px solid var(--line);padding-top:7px}
+.sc-official-label{font-size:12.5px;color:var(--muted)}
+.sc-official-value{font-family:"IBM Plex Mono",monospace;font-size:18px;line-height:1.35;text-align:right;direction:rtl;color:var(--ink)}
+.sc-official-source{font-size:11.5px;line-height:1.5;color:var(--muted);overflow-wrap:anywhere}
+.sc-kpi-row{display:grid;gap:16px;direction:rtl}
+.sc-kpi-row-1{grid-template-columns:repeat(4,minmax(0,1fr))}
+.sc-kpi-row-2{grid-template-columns:repeat(3,minmax(0,1fr))}
+.sc-kpi{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;position:relative;overflow:hidden;height:148px;min-height:148px;text-align:right;direction:rtl;display:flex;flex-direction:column}
 .sc-kpi:before{content:"";position:absolute;inset-inline-start:0;top:0;bottom:0;width:3px;background:var(--accent)}
 .sc-kpi.acc-info:before{background:var(--info)}.sc-kpi.acc-warn:before{background:var(--warn)}
 .sc-kpi.acc-danger:before{background:var(--danger)}.sc-kpi.acc-ok:before{background:var(--ok)}
 .sc-kl{font-size:14px;color:var(--muted);line-height:1.6}
-.sc-kv{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:26px;line-height:1.3}
+.sc-k-tag{display:inline-block;margin-inline-start:6px;padding:1px 7px;border:1px solid var(--line-2);border-radius:999px;color:var(--ink-2);font-size:11px;line-height:1.4;white-space:nowrap}
+.sc-kv{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:26px;line-height:1.3;text-align:right;direction:rtl}
 .sc-kd{font-size:14px;color:var(--ink-2)}
 .sc-kn{font-size:13px;color:var(--muted);line-height:1.7;margin-top:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sc-k-risk{display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:12px}
+.sc-k-risk-tag{border:1px solid var(--line-2);border-radius:999px;padding:1px 8px;color:var(--ink-2)}
 .sc-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 26px;min-width:0;box-shadow:inset 0 2px 0 0 rgba(34,195,182,.55)}
 .sc-h2{font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:19px;margin:0 0 6px;color:var(--accent)}
 .sc-row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;padding:14px 0;border-top:1px solid var(--line)}
@@ -366,8 +434,12 @@ body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,sys
   /* الجوال: مستوى التهديد ثم أهم الأخبار المتعلقة بالأمن البحري ثم المؤشرات (القرار قبل الأرقام) */
   .sc-grid,.sc-grid.sc-solo{display:flex;flex-direction:column;gap:14px}
   .sc-side{display:contents}
-  .sc-threat{order:1}.sc-card{order:2}.sc-kpis{order:3;display:grid;gap:10px}
-  .sc-solo .sc-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+  .sc-threat{order:2}.sc-card{order:1}.sc-kpis{order:3;display:grid;gap:12px}.sc-official-cards{order:4}
+  .sc-solo .sc-kpis{display:grid}
+  .sc-kpi-row-1,.sc-kpi-row-2{grid-template-columns:1fr;gap:12px}
+  .sc-official-grid{grid-template-columns:1fr;gap:12px}
+  .sc-official-layer{grid-template-columns:minmax(0,1fr) auto;gap:4px 8px}
+  .sc-official-source{grid-column:1 / -1}
   .sc-row{grid-template-columns:minmax(0,1fr);gap:2px}
   .sc-list li{grid-template-columns:minmax(0,1fr);gap:3px}
   .sc-list li .sc-code{justify-self:start}
