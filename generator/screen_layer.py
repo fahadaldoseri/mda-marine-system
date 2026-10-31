@@ -24,9 +24,6 @@ HERO_MAX_CHANGES = 2
 HERO_MAX_ACTIONS = 2
 
 
-from section_counts import for_title as _sec_count
-
-
 def first_sentence(text: str) -> str:
     """أول جملة من الفقرة التمهيدية: حتى أول نقطة يليها فراغ أو نهاية النص."""
     t = (text or "").strip()
@@ -51,7 +48,7 @@ def _chip(label, value_html, extra=""):
 
 
 def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_html="",
-                doc_mode=False, archived=False):
+                doc_mode=False, archived=False, card_targets=None):
     """كتلة القرار فوق الطيّ: العنوان والشرائح وحالة التهديد والمؤشرات وأهم الأخبار المتعلقة بالأمن البحري.
 
     doc_mode: التقارير الخاصة، وعنوانها الكامل هو العنوان الظاهر (كانت بلا عنوان على الشاشة).
@@ -142,34 +139,42 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
                 out.append(t)
         return " · ".join(out)
 
-    # مصدر «ما تغيّر»: نصوص أهم الأخبار المتعلقة بالأمن البحري (سلاسل)، لا سجل التغييرات البنيوي
+    # البنية المعتمدة: ثلاثة صفوف فقط. كل عداد ومرساة يأتيان من الهدف المبني،
+    # لا من طول حقول meta ولا من ترتيب رقمي ثابت.
+    targets = dict(card_targets or {})
     changes = [c for c in (dc.get("changed") or []) if isinstance(c, str)]
     if not changes:
         changes = [c for c in (meta.get("changes") or []) if isinstance(c, str)]
-    if changes:
-        gist = _gist(changes, limit=2)
-        total = _sec_count(meta.get("date") or meta.get("iso") or meta.get("report_date") or "", "ما تغيّر منذ التقرير السابق", default=0) or len(meta.get("changes") or []) or len(changes)
-        rows.append(
-            '<div class="sc-row"><div class="sc-l">ما تغيّر</div>'
-            f'<div class="sc-v"><p class="sc-gist">{inline(gist)}</p>'
-            f'<p class="sc-more">{total} بندًا · '
-            '<a href="/additions.html#sec-00" data-goto="ما تغيّر" data-alt="/additions.html#sec-00">التفاصيل</a></p></div></div>')
-    acts = _list_items(dc.get("action"))
-    n_acts = _sec_count(meta.get("date") or meta.get("iso") or meta.get("report_date") or "", "التوجيهات التشغيلية", default=0) or len(acts)
-    if acts:
-        rows.append(
-            '<div class="sc-row"><div class="sc-l">التوجيهات التشغيلية</div>'
-            f'<div class="sc-v"><p class="sc-gist">{inline(_gist(acts, limit=2))}</p>'
-            f'<p class="sc-more">{n_acts} بنود · '
-            '<a href="/additions.html#sec-03" data-goto="التوجيهات التشغيلية" data-alt="/additions.html#sec-03">القسم الكامل</a></p></div></div>')
+    changed_count = int(targets.get("changed_count") or len(changes))
+    changed_href = targets.get("changed_href") or "/additions.html#sec-00"
+    changed_goto = targets.get("changed_title") or "ما تغيّر منذ التقرير السابق"
+    rows.append(
+        '<div class="sc-row"><div class="sc-l">ما تغيّر</div>'
+        f'<div class="sc-v"><p class="sc-gist">{inline(_gist(changes, limit=2))}</p>'
+        f'<p class="sc-more">{changed_count} بنود · '
+        f'<a href="{esc(changed_href)}" data-goto="{esc(changed_goto)}" data-alt="{esc(changed_href)}">التفاصيل</a></p></div></div>')
+
+    warning_texts = [str(x).strip() for x in (targets.get("warning_texts") or []) if str(x).strip()]
+    if not warning_texts:
+        warning_texts = ["UKMTO / JMIC"]
+    warning_count = int(targets.get("warning_count") or len(warning_texts))
+    warning_href = targets.get("warning_href") or f"/reports/{report_date}.html#sec-06"
+    warning_gist = " · ".join(warning_texts)
+    rows.append(
+        '<div class="sc-row"><div class="sc-l">التحذيرات والنشرات الرسمية</div>'
+        f'<div class="sc-v"><p class="sc-gist">{inline(warning_gist)}</p>'
+        f'<p class="sc-more">{warning_count} صفوف · '
+        f'<a href="{esc(warning_href)}" data-goto="التحذيرات والنشرات الرسمية" data-alt="{esc(warning_href)}">القسم الرسمي</a></p></div></div>')
+
     watch = _list_items(dc.get("watch"))
-    n_watch = _sec_count(meta.get("date") or meta.get("iso") or meta.get("report_date") or "", "علامات الإنذار المبكر", default=0) or len(watch)
-    if watch:
-        rows.append(
-            '<div class="sc-row"><div class="sc-l">ما يُراقب خلال 24 ساعة</div>'
-            f'<div class="sc-v"><p class="sc-gist">{inline(_gist(watch, limit=2))}</p>'
-            f'<p class="sc-more">{n_watch} بنود · '
-            '<a href="/additions.html#sec-04" data-goto="علامات الإنذار المبكر" data-alt="/additions.html#sec-04">المؤشرات الكاملة</a></p></div></div>')
+    watch_count = int(targets.get("watch_count") or len(watch))
+    watch_href = targets.get("watch_href") or "/additions.html#sec-04-sub-02"
+    watch_title = targets.get("watch_title") or "علامات الإنذار المبكر 24–72 ساعة"
+    rows.append(
+        '<div class="sc-row"><div class="sc-l">ما يُراقب خلال 24–72 ساعة</div>'
+        f'<div class="sc-v"><p class="sc-gist">{inline(_gist(watch, limit=2))}</p>'
+        f'<p class="sc-more">{watch_count} بنود · '
+        f'<a href="{esc(watch_href)}" data-goto="{esc(watch_title)}" data-alt="{esc(watch_href)}">المؤشرات الكاملة</a></p></div></div>')
     key = ""
     if rkey_html:
         key = rkey_html.replace('class="rkey no-print"', 'class="sc-rkey"')

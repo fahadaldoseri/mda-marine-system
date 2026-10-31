@@ -37,7 +37,7 @@ BRAIN = _root("BRAIN_DIR", _HOME, "brain-marine-news", "brain")
 AR_MD = BRAIN / "reports"
 I18N = ROOT / "sources" / "i18n" / "en"
 SKIP_TAGS = {"script", "style", "code"}
-TR_ATTRS = ("title", "aria-label", "alt", "placeholder", "data-label")
+TR_ATTRS = ("title", "aria-label", "alt", "placeholder", "data-label", "data-goto", "data-alt")
 ARABIC = re.compile(r"[\u0600-\u06FF]")
 # معرف تحذير UKMTO/NAVAREA بصيغة رقم-سنة؛ لا يجوز إدخاله من مفتاح جزئي.
 ADVISORY_ID = re.compile(r"(?<![\d-])\d{3}-\d{2}(?![\d-])")
@@ -302,6 +302,40 @@ def _fix_chrome(out: str) -> str:
     return out
 
 
+def _collapse_inline_source_duplicates(out: str) -> str:
+    """Keep a source node's translated text once when its organization is a ltr child.
+
+    HTMLParser exposes text on either side of ``<span class="ltr">UKMTO</span>``
+    as separate units. A glossary hit for the first unit can already contain the
+    organization and the trailing unit can then repeat its suffix. Collapse only
+    an exact suffix repetition; never use a broad substring replacement.
+    """
+    pattern = re.compile(
+        r'(?P<before>[^<>]*\b(?P<org>UKMTO|JMIC|IMO)\b[^<>]*)'
+        r'(?P<span><span\b[^>]*\bclass="ltr"[^>]*>\s*(?P=org)\s*</span>)'
+        r'(?P<after>[^<>]*)',
+        re.IGNORECASE,
+    )
+
+    def replace(match: re.Match[str]) -> str:
+        before = match.group("before")
+        after = match.group("after")
+        org = match.group("org")
+        before_without_org = re.sub(rf"\b{re.escape(org)}\b", "", before, flags=re.IGNORECASE)
+        left = norm(before_without_org).rstrip(".!؟؛")
+        right = norm(after).lstrip(".!؟؛").rstrip(".!؟؛")
+        if right and left.endswith(right):
+            # Keep the source organization's bidi-safe span, not a second plain-text copy.
+            clean_before = re.sub(r"[ \t]{2,}", " ", before_without_org)
+            return clean_before + match.group("span")
+        return match.group(0)
+
+    previous = None
+    while previous != out:
+        previous, out = out, pattern.sub(replace, out)
+    return out
+
+
 def translate_page(html_text: str, date: str, tm: dict[str, str], gl: dict[str, str]):
     tr = make_translator(tm, gl)
     c = _Collector()
@@ -335,6 +369,7 @@ def translate_page(html_text: str, date: str, tm: dict[str, str], gl: dict[str, 
     out = re.sub(r'<meta name="description" content="[^"]*"',
                  '<meta name="description" content="Daily Maritime Security Report — English edition, translated and governed against the Arabic source.">', out)
     remaining = [t for t in c.units if ARABIC.search(norm(tr(t))) and len(ARABIC.findall(tr(t))) > 2]
+    out = _collapse_inline_source_duplicates(out)
     out = _fix_chrome(out)
     return out, [norm(x) for x in remaining], len(c.units)
 

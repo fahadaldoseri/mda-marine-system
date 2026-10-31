@@ -79,8 +79,11 @@ This decision card is the sole source of the decision in this edition; the threa
 
 Incidents MN-2026-10-31-05 through MN-2026-10-31-11 and MN-2026-10-31-16 are not treated as independent confirmed incidents. Incidents MN-2026-10-31-13 through MN-2026-10-31-15 are retained as no-change records, not as incidents.
 
-## Official Warnings and Bulletins
-The UKMTO feed displayed warning and incident headlines dated 28, 29, and 30 October, including reports of an attack in the Strait of Hormuz, a report south of Lavan Island, and a delayed report in the strait. Some UKMTO pages could not be opened directly because human verification was required; the available headlines were relayed from the feed while unpublished details were kept outside this report.
+## Official Warnings and Advisories
+| Entity | Official text as received |
+|---|---|
+| UKMTO | 30/10/2026 Attack:UKMTO has received a report of an incident 40NM south of Lavan Island,… |
+| JMIC | Combined Task Force 151 concludes counter-piracy Operation Tidal Wave |
 
 A UKMTO headline alone does not establish the weapon type, the executing party, or the damage tally. Likewise, the fire or mine account is not independent confirmation unless an official body or an independent professional source adopts it with information that can be matched.
 
