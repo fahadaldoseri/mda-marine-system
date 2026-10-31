@@ -1,6 +1,6 @@
 {
  "date": "2026-10-31",
- "checked_at": "2026-10-31T11:09:34Z",
+ "checked_at": "2026-10-31T11:46:49Z",
  "release_paths": [
   "/",
   "/reports/2026-10-31.html",
@@ -8,8 +8,8 @@
   "/sources.html"
  ],
  "propagation": {
-  "attempt": 6,
-  "elapsed_seconds": 305,
+  "attempt": 1,
+  "elapsed_seconds": 0,
   "max_wait_seconds": 225
  },
  "paths": {
@@ -19,11 +19,11 @@
   },
   "/reports/2026-10-31.html": {
    "code": 200,
-   "bytes": 150922
+   "bytes": 151240
   },
   "/reports/pdf/2026-10-31.pdf": {
    "code": 200,
-   "bytes": 817442
+   "bytes": 824942
   },
   "/sources.html": {
    "code": 200,
@@ -31,19 +31,18 @@
   }
  },
  "pdf_sha256": {
-  "local": "f5473eb97e08b2d9cdf1bf58e9cf99fb1a046d904e66497cb9c0bc5ed9e42374",
-  "live": "163aebf6e89961a002919c9c07a750281cea72149cac61132aca6f258ee04c3a",
+  "local": "34a306a4e432fa12644cb2546b5a1bfc5140f3162e2507459f91135faf1cb029",
+  "live": "f5473eb97e08b2d9cdf1bf58e9cf99fb1a046d904e66497cb9c0bc5ed9e42374",
   "match": false,
   "content": {
    "pages_local": "11",
    "pages_live": "11",
    "text_local": "fc285687de98169b84b6edbf",
-   "text_live": "2efa50f0e6996ea10a705b57",
-   "match": false
-  }
+   "text_live": "fc285687de98169b84b6edbf",
+   "match": true
+  },
+  "note": "البايتات تختلف (زمن إنشاء PDF) والمحتوى مطابق — مقبول"
  },
- "status": "failed",
- "bad": [
-  "pdf-content-differs-from-local"
- ]
+ "status": "ok",
+ "bad": []
 }
