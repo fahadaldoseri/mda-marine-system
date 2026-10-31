@@ -21,7 +21,7 @@ FLOOR = 1682
 
 def groups(src: str) -> set[str]:
     found = set()
-    for name in ("BSKIP_DIRS", "SSKIP_DIRS", "BSKIP_FILES", "SSKIP_FILES", "SKIP_GLOBS", "ALLOW_REPO_ONLY"):
+    for name in ("BSKIP_DIRS", "SSKIP_DIRS", "BSKIP_FILES", "SSKIP_FILES", "SKIP_GLOBS", "ALLOW_REPO_ONLY", "LOCAL_ONLY_PATTERNS"):
         if re.search(rf"^{name}\s*=", src, re.M):
             found.add(name)
     return found

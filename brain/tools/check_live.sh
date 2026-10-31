@@ -12,10 +12,14 @@ for a in "$@"; do case "$a" in --compare) CMP=1 ;; *) D="$a" ;; esac; done
 BASE="${LIVE_BASE_URL:-$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['base_url'])" "$SITE/sources/site.json" 2>/dev/null)}"
 [ -n "$BASE" ] || { echo "✘ لا رابط للموقع المنشور (sources/site.json:base_url)"; exit 2; }
 mkdir -p "$B/logs"
+STARTED_EPOCH="$(date +%s)"
 for attempt in 1 2 3 4 5 6; do
-python3 - "$B" "$SITE" "$BASE" "$D" "$CMP" <<'PY'
+python3 - "$B" "$SITE" "$BASE" "$D" "$CMP" "$attempt" "$STARTED_EPOCH" <<'PY'
 import hashlib, json, sys, datetime, urllib.request, urllib.error
-B, SITE, BASE, D, CMP = sys.argv[1:6]
+B, SITE, BASE, D, CMP, ATTEMPT, STARTED = sys.argv[1:8]
+RELEASE_PATHS = ("", f"reports/{D}.html", f"reports/pdf/{D}.pdf", "sources.html")
+checked_at = datetime.datetime.now(datetime.timezone.utc)
+elapsed = max(0, int(checked_at.timestamp()) - int(STARTED))
 def get(path):
     try:
         with urllib.request.urlopen(urllib.request.Request(f"{BASE}/{path}", headers={"User-Agent": "seawatch-check"}), timeout=60) as r:
@@ -25,10 +29,13 @@ def get(path):
         return e.code, b""
     except Exception:
         return 0, b""
-doc = {"date": D, "checked_at": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "paths": {}}
+doc = {"date": D, "checked_at": checked_at.strftime("%Y-%m-%dT%H:%M:%SZ"),
+       "release_paths": [f"/{p}" if p else "/" for p in RELEASE_PATHS],
+       "propagation": {"attempt": int(ATTEMPT), "elapsed_seconds": elapsed, "max_wait_seconds": 225},
+       "paths": {}}
 bad = []
 bodies = {}
-for u in ("", f"reports/{D}.html", f"reports/pdf/{D}.pdf", "sources.html"):
+for u in RELEASE_PATHS:
     code, body = get(u)
     bodies[u] = body
     doc["paths"][f"/{u}"] = {"code": code, "bytes": len(body)}
