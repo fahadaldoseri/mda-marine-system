@@ -231,3 +231,18 @@
 {"step": "B020", "status": "failed", "rc": 4, "problems": ["رمز الخروج 4"], "log": "logs/runbook/2026-10-31/B020.log", "ts": "2026-10-31T15:45:23Z"}
 {"step": "B010", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/B010.log", "attempt": 1, "ts": "2026-10-31T16:02:19Z"}
 {"step": "B020", "status": "failed", "rc": 4, "problems": ["رمز الخروج 4"], "log": "logs/runbook/2026-10-31/B020.log", "ts": "2026-10-31T16:02:27Z"}
+{"step": "S071", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/S071.log", "attempt": 1, "ts": "2026-10-31T17:07:38Z"}
+{"step": "B010", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-10-31/B010.log", "ts": "2026-10-31T17:08:45Z"}
+{"step": "B010", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/B010.log", "attempt": 1, "ts": "2026-10-31T17:19:11Z"}
+{"step": "B020", "status": "skipped", "disabled": true, "reason": "تعطيل بطلب المالك — يُفعّل بأمره الصريح", "rc": 0, "log": "logs/runbook/2026-10-31/B020.log", "ts": "2026-10-31T17:19:11Z"}
+{"step": "B030", "status": "skipped", "disabled": true, "reason": "تعطيل بطلب المالك — يُفعّل بأمره الصريح", "rc": 0, "log": "logs/runbook/2026-10-31/B030.log", "ts": "2026-10-31T17:19:11Z"}
+{"step": "G047", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/G047.log", "attempt": 1, "ts": "2026-10-31T17:19:16Z"}
+{"step": "G046", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/G046.log", "attempt": 1, "ts": "2026-10-31T17:19:16Z"}
+{"step": "G045", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-10-31/G045.log", "ts": "2026-10-31T17:19:28Z"}
+{"step": "B010", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-10-31/B010.log", "ts": "2026-10-31T17:29:32Z"}
+{"step": "B010", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/B010.log", "attempt": 1, "ts": "2026-10-31T17:35:33Z"}
+{"step": "B030", "status": "skipped", "disabled": true, "reason": "تعطيل بطلب المالك — يُفعّل بأمره الصريح", "rc": 0, "log": "logs/runbook/2026-10-31/B030.log", "ts": "2026-10-31T17:35:33Z"}
+{"step": "G047", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/G047.log", "attempt": 1, "ts": "2026-10-31T17:35:39Z"}
+{"step": "G046", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/G046.log", "attempt": 1, "ts": "2026-10-31T17:35:39Z"}
+{"step": "G045", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/G045.log", "attempt": 1, "ts": "2026-10-31T17:35:51Z"}
+{"step": "D005", "status": "failed", "rc": 70, "problems": ["رمز الخروج 70"], "log": "logs/runbook/2026-10-31/D005.log", "ts": "2026-10-31T17:36:28Z"}

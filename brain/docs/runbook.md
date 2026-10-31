@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة e075aa12deff719f). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة a74112fdfde47ff8). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -73,7 +73,7 @@
 | B030 | بوابتا جودة الطباعة على PDF نفسه (معطّلة: تعطيل بطلب المالك — يُفعّل بأمره الصريح) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/B030.log | ف5 — شكل PDF وجودة الطباعة | validators/check_pdf_format.py، validators/check_print_quality.py | stop |
 | G047 | بطاقة القرار (لا إفراغ ولا رابط ميت) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G047.log | ف4 — بطاقة القرار | validators/check_decision_card.py | stop |
 | G046 | سطح الإضافات (نقل الأقسام مرة واحدة) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G046.log | ف4 — سياسة الأسطح | validators/check_additions_surface.py | stop |
-| G045 | تغطية بوابة الأسلوب لكل سطح يقرأه القارئ | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G045.log | ف1–ف5 — بوابة التحقق، ط15 — مدى بوابة الأسلوب | tools/final_gate.sh، tools/audit_style_coverage.py | stop |
+| G045 | تغطية بوابة الأسلوب لكل سطح يقرأه القارئ | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G045.log | ف1–ف5 — بوابة التحقق، ط15 — مدى بوابة الأسلوب | tools/final_gate.sh، tools/audit_style_coverage.py، validators/check_forbidden_surface_terms.py | stop |
 | B035 | خط الأساس الرسمي (virgin) — تنبيهي | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/B035.log | س1 — النشر | tools/check_baseline.py | stop |
 | B040 | نسخة Word طبق الأصل (بوابة المخرج 9 تمنع التسليم بدونها) | script |  |  | cmd:bash -lc ls reports/docx/*{date}*.docx >/dev/null 2>&1 | س1 — النشر | tools/build_report_docx_exact.py | stop |
 | G005 | تطابق أرقام المصادر في كل المواضع | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G005.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh | stop |

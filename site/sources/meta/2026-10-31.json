@@ -23,7 +23,7 @@
    "title": "بلاغات UKMTO",
    "tag": "Z1",
    "value": "3",
-   "detail": "داخل نافذة التقرير",
+   "detail": "داخل فترة التقرير",
    "source": "سجل الوقائع الرسمي UKMTO",
    "accent": "warn"
   },
@@ -63,7 +63,7 @@
    "title": "منتجات UKMTO وJMIC المرصودة",
    "tag": "",
    "value": "3",
-   "detail": "داخل نافذة التقرير · لا يُدّعى أنها جديدة",
+   "detail": "خلال فترة التغطية · لا يُدّعى أنها جديدة",
    "source": "feeds/feeds-{date}.json · العدّ الخام المنفصل",
    "accent": "info"
   },
@@ -98,9 +98,31 @@
    "source_label": "IMO — قائمة الوقائع المؤكدة",
    "source_label_en": "IMO — confirmed incidents list",
    "layers": {
-    "daily": {"label": "عدد اليوم", "label_en": "Today", "state": "undisclosed", "value": "لم يُعلن", "value_en": "Not disclosed", "source": "قائمة IMO الرسمية؛ لا وفاة مذكورة في وقائع اليوم", "source_en": "Official IMO list; no death disclosed for today's incidents"},
-    "cumulative": {"label": "المجموع منذ 28 فبراير 2026", "label_en": "Total since 28 February 2026", "value": "24", "value_en": "24", "source": "IMO — 24 وفاة بحّار مؤكدة", "source_en": "IMO — 24 confirmed seafarer deaths"},
-    "updated": {"label": "آخر تحديث للمصدر", "label_en": "Source last updated", "value": "30 أكتوبر 2026", "value_en": "30 October 2026", "source": "القائمة الرسمية كما حُفظت في 31 أكتوبر 2026", "source_en": "Official list saved on 31 October 2026"}
+    "daily": {
+     "label": "عدد اليوم",
+     "label_en": "Today",
+     "state": "undisclosed",
+     "value": "لم يُعلن",
+     "value_en": "Not disclosed",
+     "source": "قائمة IMO الرسمية؛ لا وفاة مذكورة في وقائع اليوم",
+     "source_en": "Official IMO list; no death disclosed for today's incidents"
+    },
+    "cumulative": {
+     "label": "المجموع منذ 28 فبراير 2026",
+     "label_en": "Total since 28 February 2026",
+     "value": "24",
+     "value_en": "24",
+     "source": "IMO — 24 وفاة بحّار مؤكدة",
+     "source_en": "IMO — 24 confirmed seafarer deaths"
+    },
+    "updated": {
+     "label": "آخر تحديث للمصدر",
+     "label_en": "Source last updated",
+     "value": "30 أكتوبر 2026",
+     "value_en": "30 October 2026",
+     "source": "القائمة الرسمية كما حُفظت في 31 أكتوبر 2026",
+     "source_en": "Official list saved on 31 October 2026"
+    }
    }
   },
   {
@@ -111,14 +133,43 @@
    "basis_en": "For public information",
    "source_label": "IMO — بيانات العبور الرسمية",
    "source_label_en": "IMO — official transit data",
-   "badges": ["للعلم العام", "آخر تحديث سبتمبر 2026"],
-   "badges_en": ["For public information", "Last updated September 2026"],
+   "badges": [
+    "للعلم العام",
+    "آخر تحديث سبتمبر 2026"
+   ],
+   "badges_en": [
+    "For public information",
+    "Last updated September 2026"
+   ],
    "constraint": "أوقفت المنظمة تجميع بيانات العبور اليومية",
    "constraint_en": "IMO no longer compiles data on daily ship transits",
    "layers": {
-    "daily": {"label": "عدد اليوم", "label_en": "Today", "state": "no_coverage", "value": "لا تغطية", "value_en": "No coverage", "source": "لا قراءة رسمية ليوم 31 أكتوبر 2026", "source_en": "No official reading for 31 October 2026"},
-    "cumulative": {"label": "المجموع منذ 28 فبراير 2026", "label_en": "Total since 28 February 2026", "state": "no_coverage", "value": "لا تغطية", "value_en": "No coverage", "source": "المنظمة أوقفت تجميع البيانات اليومية؛ لا يُحسب مجموع تراكمي", "source_en": "IMO stopped compiling daily data; no cumulative total is calculated"},
-    "updated": {"label": "آخر تحديث للمصدر", "label_en": "Source last updated", "value": "سبتمبر 2026", "value_en": "September 2026", "source": "الرسم الرسمي المتاح لشهر سبتمبر 2026", "source_en": "Official chart available for September 2026"}
+    "daily": {
+     "label": "عدد اليوم",
+     "label_en": "Today",
+     "state": "no_coverage",
+     "value": "لا تغطية",
+     "value_en": "No coverage",
+     "source": "لا قراءة رسمية ليوم 31 أكتوبر 2026",
+     "source_en": "No official reading for 31 October 2026"
+    },
+    "cumulative": {
+     "label": "المجموع منذ 28 فبراير 2026",
+     "label_en": "Total since 28 February 2026",
+     "state": "no_coverage",
+     "value": "لا تغطية",
+     "value_en": "No coverage",
+     "source": "المنظمة أوقفت تجميع البيانات اليومية؛ لا يُحسب مجموع تراكمي",
+     "source_en": "IMO stopped compiling daily data; no cumulative total is calculated"
+    },
+    "updated": {
+     "label": "آخر تحديث للمصدر",
+     "label_en": "Source last updated",
+     "value": "سبتمبر 2026",
+     "value_en": "September 2026",
+     "source": "الرسم الرسمي المتاح لشهر سبتمبر 2026",
+     "source_en": "Official chart available for September 2026"
+    }
    },
    "period": "سبتمبر 2026",
    "period_en": "September 2026",
