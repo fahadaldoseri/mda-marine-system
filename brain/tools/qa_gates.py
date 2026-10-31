@@ -100,7 +100,8 @@ def gate_identity(date: str):
     _cover = "ما تغير منذ التقرير السابق"
     titles = [t for t in titles if not (t == _cover and titles.count(t) == 2)]
     dup = {t for t in titles if titles.count(t) > 1}
-    anchors = re.findall(r'id="([^"]+)"', html)
+    # لا تُحتسب سمات data-*-id؛ تُقرأ سمات id الحقيقية فقط.
+    anchors = re.findall(r'(?<![\w-])id="([^"]+)"', html)
     dup_anchor = {a for a in anchors if anchors.count(a) > 1}
     problems = []
     if dup:
@@ -230,6 +231,20 @@ def gate_hidden(date: str):
     return True, "الأقسام المنقولة محجوبة عن المتن وموضعها المعتمد الملحق", False
 
 
+def print_pipeline_disabled() -> bool:
+    """هل خط الطباعة معطّل بطلب المالك في المانيفست؟ (يُعاد التسليح تلقائيًا عند تفعيله)"""
+    try:
+        rb = json.loads(read(B / "runbook" / "runbook.json"))
+    except Exception:
+        return False
+    if isinstance(rb.get("print"), dict) and rb["print"].get("disabled") is True:
+        return True
+    for step in rb.get("steps", []):
+        if step.get("id") == "B020":
+            return step.get("disabled") is True
+    return False
+
+
 def gate_format(date: str):
     pdf = SITE / "dist" / "reports" / "pdf" / f"{date}.pdf"
     if not pdf.exists():
@@ -237,9 +252,17 @@ def gate_format(date: str):
     out = subprocess.run([sys.executable, str(B / "validators" / "check_pdf_format.py"),
                           "--pdf", str(pdf), "--date", date],
                          capture_output=True, text=True)
-    tail = (out.stdout or out.stderr).strip().splitlines()
-    detail = tail[-1] if tail else "لا مخرجات"
-    return out.returncode == 0, detail, False
+    text = (out.stdout or out.stderr).strip()
+    lines = text.splitlines()
+    detail = lines[-1] if lines else "لا مخرجات"
+    if out.returncode == 0:
+        return True, detail, False
+    violations = [ln.strip() for ln in lines if ln.strip().startswith("✗")]
+    style_only = bool(violations) and all("نمط الطباعة" in ln for ln in violations)
+    if style_only and print_pipeline_disabled():
+        return True, ("الطباعة معطّلة بطلب المالك — بند «نمط الطباعة» غير مانع · "
+                      "يُعاد تسليحه تلقائيًا عند تفعيل الطباعة · " + detail), False
+    return False, detail, False
 
 
 def gate_toc_rtl_footer(date: str):
