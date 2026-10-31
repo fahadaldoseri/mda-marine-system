@@ -30,6 +30,7 @@ from datetime import datetime, timezone
 
 # الاسم المعتمد للتقرير اليومي
 DAILY_TITLE = "التقرير اليومي لأمن الملاحة والأوضاع الراهنة في المنطقة"
+HERO_KPI_MODERN_FROM = "2026-10-31"
 from pathlib import Path
 
 
@@ -273,10 +274,14 @@ a.bidi{white-space:normal}
 .threat.risk-low .val{color:var(--ok)}
 
 /* ---------- شريط المؤشرات ---------- */
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:24px 0 8px}
+.kpis{display:grid;gap:16px;margin:24px 0 8px;direction:rtl}
+.kpi-row{display:grid;gap:16px;direction:rtl}
+.kpi-row-1{grid-template-columns:repeat(4,minmax(0,1fr))}
+.kpi-row-2{grid-template-columns:repeat(3,minmax(0,1fr))}
 .kpi{
   background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);
-  padding:15px 16px;position:relative;overflow:hidden
+  padding:15px 16px;position:relative;overflow:hidden;height:148px;min-height:148px;
+  display:flex;flex-direction:column;text-align:right;direction:rtl
 }
 .kpi em{position:absolute;inset-inline-start:0;top:0;bottom:0;width:3px;background:var(--accent)}
 .kpi.acc-info em{background:var(--info)}
@@ -284,8 +289,11 @@ a.bidi{white-space:normal}
 .kpi.acc-danger em{background:var(--danger)}
 .kpi.acc-ok em{background:var(--ok)}
 .kpi .k-l{font-size:12.5px;color:var(--muted);line-height:1.6;min-height:2.6em}
-.kpi .k-v{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:30px;line-height:1.25;margin-top:3px;font-variant-numeric:tabular-nums}
+.kpi .k-tag{display:inline-block;margin-inline-start:6px;padding:1px 7px;border:1px solid var(--line-2);border-radius:999px;color:var(--ink-2);font-size:11px;line-height:1.4;white-space:nowrap}
+.kpi .k-v{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:30px;line-height:1.25;margin-top:3px;font-variant-numeric:tabular-nums;text-align:right;direction:rtl}
 .kpi .k-n{font-size:12px;color:var(--muted);line-height:1.7;margin-top:4px}
+.k-risk-patterns{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:-8px 0 0;color:var(--muted);font-size:12px}
+.k-risk-tag{border:1px solid var(--line-2);border-radius:999px;padding:1px 8px;color:var(--ink-2)}
 
 .notice{
   display:flex;gap:12px;align-items:flex-start;margin:20px 0 6px;padding:13px 16px;
@@ -487,6 +495,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .wrap{padding:0 14px 70px}
   section.doc{padding:18px 15px 8px}
   .threat{margin-inline-start:0;width:100%}
+  .kpi-row-1,.kpi-row-2{grid-template-columns:1fr;gap:12px}
   .bar-row{grid-template-columns:1fr auto;grid-template-areas:"l v" "t t";gap:6px 10px}
   .bar-row .bl{grid-area:l}
   .bar-row .bv{grid-area:v;text-align:start}
@@ -759,8 +768,20 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .kpis .k-v{font-size:14pt !important;margin:0.5mm 0 !important}
   .kpis .k-l{font-size:8.6pt !important;line-height:1.25 !important;min-height:0 !important}
   .kpis .k-m{font-size:7.6pt !important;line-height:1.25 !important}
+  .kpis.hero-kpis{display:block !important;direction:rtl !important}
+  .kpis.hero-kpis .k-risk-patterns{display:block !important;width:100% !important;margin:0 0 1.5mm !important}
+  .kpis.hero-kpis .kpi-row{display:grid !important;gap:4mm !important;width:100% !important;margin:0 0 4mm !important;direction:rtl !important}
+  .kpis.hero-kpis .kpi-row-1{grid-template-columns:repeat(4,minmax(0,1fr)) !important}
+  .kpis.hero-kpis .kpi-row-2{grid-template-columns:repeat(3,minmax(0,1fr)) !important}
+  .kpis.hero-kpis .kpi-row > .kpi{display:flex !important;width:auto !important;margin:0 !important;height:148px !important;min-height:148px !important;padding:1.6mm 2mm !important;break-inside:avoid !important;page-break-inside:avoid !important;text-align:right !important;direction:rtl !important}
+  .kpis.hero-kpis .k-v{text-align:right !important;direction:rtl !important}
   .dc-grid{gap:1.5mm !important}
   section.doc{font-size:10.2pt !important}
+  /* ك-395: استعادة ميزانية الصفحات بعد إضافة بطاقات المؤشرات؛ مسافات المتن فقط، بلا تصغير خط أو بطاقة */
+  html body main section.doc{padding-bottom:1mm !important}
+  html body main section.doc p{margin:1mm 0 !important}
+  html body main section.doc ul,html body main section.doc ol{margin:.7mm 0 !important}
+  html body main section.doc li{margin:.3mm 0 !important}
 }
 
 }
@@ -769,8 +790,6 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 
 SCRIPT = """
 (function(){
-  var pb = document.getElementById('btn-print');
-  if(pb) pb.addEventListener('click', function(){ window.print(); });
   var tb = document.getElementById('btn-theme');
   if(tb) tb.addEventListener('click', function(){
     var on = document.body.classList.toggle('daylight');
@@ -1329,17 +1348,23 @@ def render_section_body(title: str, lines, defs, doc_mode: bool = False, section
 # ----------------------------------------------------------------------------
 # التحقق من meta
 # ----------------------------------------------------------------------------
-def validate_meta(meta: dict):
+def _modern_hero_kpis(report_date: str | None) -> bool:
+    return bool(report_date and report_date >= HERO_KPI_MODERN_FROM)
+
+
+def validate_meta(meta: dict, *, report_date: str | None = None):
     if not isinstance(meta, dict):
         raise BuildError("ملف الواجهة (meta) يجب أن يكون كائن JSON.")
     kpis = meta.get("hero_kpis", [])
     if not isinstance(kpis, list):
         raise BuildError("الحقل hero_kpis يجب أن يكون قائمة في ملف الواجهة.")
+    modern = _modern_hero_kpis(report_date)
+    required_label = "title" if modern else "label"
     for k in kpis:
         if not isinstance(k, dict):
-            raise BuildError("كل عنصر في hero_kpis يجب أن يكون كائنًا يحتوي label و value.")
-        if "label" not in k or "value" not in k:
-            raise BuildError("عنصر في hero_kpis ينقصه label أو value.")
+            raise BuildError(f"كل عنصر في hero_kpis يجب أن يكون كائنًا يحتوي {required_label} و value.")
+        if required_label not in k or "value" not in k:
+            raise BuildError(f"عنصر في hero_kpis ينقصه {required_label} أو value.")
     if "threat_level" in meta and not isinstance(meta["threat_level"], str):
         raise BuildError("الحقل threat_level يجب أن يكون نصًا.")
     return meta
@@ -1550,10 +1575,10 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
             "لم يُعثر على أي قسم بعنوان من المستوى الثاني (##) في الملف المصدر. "
             "تأكد من حفظ التقرير بأقسام بصيغة Markdown صحيحة."
         )
-    validate_meta(meta)
-    # سياسة عرض الرموز (2+5): كامل مرة واحدة في «الوقائع الجديدة»، ومختصر مدموج برقم البلاغ الرسمي في بقية المواضع
     _mdate = re.search(r"(\d{4}-\d{2}-\d{2})", md_path.name)
     report_date = _mdate.group(1) if _mdate else ""
+    validate_meta(meta, report_date=report_date)
+    # سياسة عرض الرموز (2+5): كامل مرة واحدة في «الوقائع الجديدة»، ومختصر مدموج برقم البلاغ الرسمي في بقية المواضع
     official = codes.official_map(meta)
     BLK.set_code_context(report_date, official)
     try:
@@ -1637,19 +1662,43 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
     kpi_html = ""
     kpis = meta.get("hero_kpis", [])
     if kpis:
-        tiles = []
-        for k in kpis:
-            acc = k.get("accent", "ok")
-            if acc not in ("ok", "info", "warn", "danger"):
-                acc = "ok"
-            tiles.append(
-                f'<div class="kpi acc-{acc} reveal"><em></em>'
-                f'<div class="k-l">{inline(k.get("label", ""))}</div>'
-                f'<div class="k-v bidi">{esc(k.get("value", ""))}</div>'
-                + (f'<div class="k-d">{BLK.trend_html(k.get("delta"))}</div>' if k.get("delta") else "")
-                + f'<div class="k-n">{inline(k.get("note", ""))}</div></div>'
-            )
-        kpi_html = '<div class="kpis">' + "".join(tiles) + "</div>"
+        modern = _modern_hero_kpis(report_date)
+        if modern and (len(kpis) != 7 or sorted(k.get("row") for k in kpis) != [1, 1, 1, 1, 2, 2, 2]):
+            raise BuildError("hero_kpis يجب أن يحوي صفًا أول من 4 وصفًا ثانيًا من 3؛ فشل مغلق")
+        if modern:
+            def _hero_tile(k):
+                acc = k.get("accent", "ok")
+                if acc not in ("ok", "info", "warn", "danger"):
+                    acc = "ok"
+                title = k.get("title", "")
+                detail = k.get("detail", "")
+                tag = k.get("tag", "")
+                tag_html = f'<span class="k-tag">{inline(tag)}</span>' if tag else ""
+                return (f'<div class="kpi hero-kpi acc-{acc} reveal" data-kpi-id="{esc(k.get("id", ""))}"><em></em>'
+                        f'<div class="k-l">{inline(title)}{tag_html}</div>'
+                        f'<div class="k-v bidi">{esc(k.get("value", ""))}</div>'
+                        f'<div class="k-n">{inline(detail)}</div></div>')
+            risk = meta.get("hero_risk_patterns") or []
+            risk_html = ('<div class="k-risk-patterns" aria-label="أنماط الخطر"><span class="k-risk-label">أنماط الخطر</span>'
+                         + "".join(f'<span class="k-risk-tag">{inline(x)}</span>' for x in risk) + '</div>') if risk else ""
+            row1 = "".join(_hero_tile(k) for k in kpis if k.get("row") == 1)
+            row2 = "".join(_hero_tile(k) for k in kpis if k.get("row") == 2)
+            kpi_html = ('<div class="kpis hero-kpis">' + risk_html
+                        + f'<div class="kpi-row kpi-row-1">{row1}</div>'
+                        + f'<div class="kpi-row kpi-row-2">{row2}</div></div>')
+        else:
+            tiles = []
+            for k in kpis:
+                acc = k.get("accent", "ok")
+                if acc not in ("ok", "info", "warn", "danger"):
+                    acc = "ok"
+                tiles.append(
+                    f'<div class="kpi acc-{acc} reveal"><em></em>'
+                    f'<div class="k-l">{inline(k.get("label", ""))}</div>'
+                    f'<div class="k-v bidi">{esc(k.get("value", ""))}</div>'
+                    f'<div class="k-n">{inline(k.get("note", ""))}</div></div>'
+                )
+            kpi_html = '<div class="kpis">' + "".join(tiles) + '</div>'
 
     # خريطة الملحق: تُلحق في نهاية «إضافات» فقط (صفحتها الكاملة بلا فراغ قبلها).
     appendix_map = print_map_html if mode == "additions" else ""
