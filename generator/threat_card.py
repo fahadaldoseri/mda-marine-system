@@ -220,6 +220,37 @@ def load_zones(date_iso: str, brain: pathlib.Path | str | None = None) -> dict |
     return json.loads(p.read_text(encoding="utf-8"))
 
 
+def zones_strip(zj: dict) -> str:
+    """شريط نسب القطاعات أسفل خريطة السياق: مستوى كل قطاع ووقائعه المؤهلة والمستثناة."""
+    zones = zj.get("zones") or []
+    if not zones:
+        return ""
+    rows = []
+    for z in zones:
+        tok = level_token(z.get("level", ""))
+        q = len(z.get("qualifying_codes") or [])
+        ex = int(z.get("excluded") or 0)
+        ev = int(z.get("events") or 0)
+        rows.append(
+            "<li>"
+            f'<span class="zs-id">{z.get("id","")}</span>'
+            f'<span class="zs-nm">{z.get("name","")}</span>'
+            f'<span class="zs-lv t-{tok}"><span aria-hidden="true">{MARKERS[tok]}</span> {z.get("level","")}</span>'
+            '<span class="zs-c">'
+            f'<span class="zs-lab">مؤهّلة</span> <bdi class="bidi">{q}</bdi> · '
+            f'<span class="zs-lab">مستثناة</span> <bdi class="bidi">{ex}</bdi> · '
+            f'<span class="zs-lab">إجمالي</span> <bdi class="bidi">{ev}</bdi>'
+            "</span>"
+            "</li>"
+        )
+    return (
+        '<div class="hmap-zstrip">'
+        f'<h4>نسب القطاعات — {zj.get("window") or T_WINDOW}</h4>'
+        f'<ul>{"".join(rows)}</ul>'
+        "</div>"
+    )
+
+
 def load_zones_site(date_iso: str, site: pathlib.Path | str | None = None) -> dict | None:
     """يقرأ ملف القطاعات من مصادر الموقع (sources/zones) أو من الدماغ كبديل."""
     if site:
