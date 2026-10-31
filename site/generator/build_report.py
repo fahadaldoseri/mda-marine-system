@@ -386,8 +386,30 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .mp-places text{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic",sans-serif;dominant-baseline:middle;text-anchor:middle}
 .mp-port-dot{fill:var(--map-label)}
 .mp-port-lbl{fill:var(--map-label);font-size:14px;direction:rtl;unicode-bidi:isolate}
-.mp-country{fill:var(--map-country);font-size:15px;letter-spacing:.5px}
-.mp-sea-lbl{fill:var(--map-sea-label);letter-spacing:.8px}
+.mp-country{fill:var(--map-country);font-size:15px;letter-spacing:0;direction:rtl;unicode-bidi:isolate}
+.mp-sea-lbl{fill:var(--map-sea-label);letter-spacing:0;direction:rtl;unicode-bidi:isolate}
+.mp-key{grid-template-columns:repeat(2,minmax(0,1fr))}
+.mp-key li{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--faint)}
+.mp-key .lg-sw{width:22px;height:14px;border-radius:3px;display:inline-block;flex:0 0 auto;border:1px solid var(--line-2)}
+.sw-land{background:var(--map-land);border-color:var(--map-coast)}
+.sw-sea{background:var(--map-sea)}
+.sw-border{border:0;border-top:2px dashed var(--map-border);height:0}
+.sw-grid{border:0;border-top:1px solid var(--map-grid-lbl);height:0}
+.sw-port{background:none;border:0;position:relative}
+.sw-port::after{content:"";position:absolute;inset:4px 9px;background:var(--map-label);border-radius:50%}
+.sw-strait{background:none;border:0}
+.sw-strait::after{content:"مضيق";color:var(--map-strait);font-weight:700;font-size:12px}
+.sw-none{border:1px dashed var(--faint);background:none}
+.mp-key .lg-none{grid-column:1 / -1;color:var(--ink-2)}
+.hmap-zstrip{margin:14px 0 0;border-top:1px solid var(--line-2);padding-top:12px}
+.hmap-zstrip h4{margin:0 0 10px;font-size:13px;color:var(--ink-2)}
+.hmap-zstrip ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.hmap-zstrip li{border:1px solid var(--line-2);border-radius:var(--radius-sm);padding:10px;background:var(--panel-2);display:grid;gap:6px}
+.hmap-zstrip .zs-id{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--faint)}
+.hmap-zstrip .zs-nm{font-size:12.5px;color:var(--ink-2);line-height:1.5}
+.hmap-zstrip .zs-lv{font-size:12.5px;font-weight:600}
+.hmap-zstrip .zs-c{font-size:12px;color:var(--faint)}
+@media (max-width:1000px){.hmap-zstrip ul{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .mp-sea-lg{font-size:19px}
 .mp-sea-sm{font-size:15px;font-weight:600;fill:var(--map-strait);letter-spacing:0}
 .mp-events .mp-halo{fill:var(--mk);opacity:.22}
@@ -1652,7 +1674,15 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
             from map_gulf import build_map as _build_map_hero
 
             _hero_map_source = _build_map_hero(mp["points"], mp.get("caption"), mp.get("inset"), zoom=True)
-            hero_map_html = hero_map(_hero_map_source)
+            _strip = ""
+            try:
+                import threat_card as _TC
+                _zj = _TC.load_zones_site(report_date)
+                if _zj:
+                    _strip = _TC.zones_strip(_zj)
+            except Exception as e:  # لا يُسقط فشل الشريط بناء التقرير
+                print(f"تنبيه: تعذر توليد شريط نسب القطاعات ({e})", file=sys.stderr)
+            hero_map_html = hero_map(_hero_map_source, extra_html=_strip)
             # تُحضر كتلة الطباعة لكل سطح؛ سياسة الإضافات تحدد موضعها فقط.
             print_map_html = hero_map(_hero_map_source, print_mode=True)
         except Exception as e:  # لا يُسقط فشل الخريطة بناء التقرير
