@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-31T18:01:56.166586+00:00",
+  "generated_at": "2026-10-31T18:22:39.719081+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -3029,10 +3029,10 @@
     },
     {
       "fault_id": "ك-398",
-      "state": "مفتوح",
+      "state": "مغلق",
       "lesson_id": "ك-398",
-      "barrier_id": "B-bbca2a6c",
-      "run_evidence": "t push origin main من مسارات D005/D040/D070، ثم تشغيل فرع وPR ودمج مع خرج 0؛ لم يُثبت بعد"
+      "barrier_id": "B-f5672c7b",
+      "run_evidence": "م 9562b8ad68fd23c18265b5f4ccbe67c7cb5e9e42؛ التشغيل الحالي D040 وD070 خرج 0 وأنشأ PR #172 برأس d1834"
     }
   ]
 }
