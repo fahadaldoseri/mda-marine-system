@@ -204,3 +204,12 @@
 {"step": "D020", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/D020.log", "attempt": 1, "ts": "2026-10-31T11:48:45Z"}
 {"step": "D040", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/D040.log", "attempt": 1, "ts": "2026-10-31T11:49:45Z"}
 {"step": "D070", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/D070.log", "attempt": 1, "ts": "2026-10-31T11:50:45Z"}
+{"step": "D070", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/D070.log", "attempt": 1, "ts": "2026-10-31T12:15:55Z"}
+{"step": "B005", "status": "done", "rc": 0, "outputs": {"logs/runbook/2026-10-31/B005.log": "55a289ea816464cd04ef93fc6b870ffaaaa7283b27cdf9e7a4fe42b223db8aa2"}, "log": "logs/runbook/2026-10-31/B005.log", "attempt": 1, "ts": "2026-10-31T13:24:39Z"}
+{"step": "B010", "status": "failed", "rc": 0, "problems": ["فحص فشل (رمز 1): bash -lc grep -q '✔ بطاقة الفروع الثلاثة: العناوين والعدادات والمراسي متطابقة عربيًا وإنجليزيًا' logs/runbook/2026-10-31/B010.log"], "log": "logs/runbook/2026-10-31/B010.log", "ts": "2026-10-31T13:26:54Z"}
+{"step": "B010", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/B010.log", "attempt": 1, "ts": "2026-10-31T13:41:00Z"}
+{"step": "B020", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/B020.log", "attempt": 1, "ts": "2026-10-31T13:41:19Z"}
+{"step": "B030", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/B030.log", "attempt": 1, "ts": "2026-10-31T13:41:30Z"}
+{"step": "G047", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/G047.log", "attempt": 1, "ts": "2026-10-31T13:41:36Z"}
+{"step": "G046", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/G046.log", "attempt": 1, "ts": "2026-10-31T13:41:36Z"}
+{"step": "G045", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-10-31/G045.log", "attempt": 1, "ts": "2026-10-31T13:41:48Z"}
