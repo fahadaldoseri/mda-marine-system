@@ -1,37 +1,55 @@
 #!/usr/bin/env python3
-"""اختبار توصيفي لسلوك دفع النسخة الاحتياطية المعتمد وحاجز واجهتها."""
+"""اختبار حاجز النسخ الاحتياطي: الدفع إلى فرع مسموح، وإلى main ممنوع."""
 from pathlib import Path
-import os
-import shutil
 import subprocess
+import sys
 import tempfile
 import unittest
 
 
-SCRIPT = Path(__file__).resolve().parents[1] / "tools" / "github_backup.sh"
+ROOT = Path(__file__).resolve().parents[1]
+SCRIPT = ROOT / "tools" / "github_backup.sh"
+GUARD = ROOT / "validators" / "check_backup_push_safety.py"
 
 
 class BackupPushSafetyTests(unittest.TestCase):
-    def test_manifest_approved_main_push_is_explicit(self):
-        """يثبت أن الدفع إلى main مقصود ومعلن، لا سلوكًا مخفيًا أو اختبارًا ميتًا."""
+    def run_guard(self, body: str) -> subprocess.CompletedProcess[str]:
+        with tempfile.TemporaryDirectory() as tmp:
+            script = Path(tmp) / "github_backup.sh"
+            script.write_text("#!/usr/bin/env bash\n" + body, encoding="utf-8")
+            return subprocess.run(
+                [sys.executable, str(GUARD), "--script", str(script)],
+                capture_output=True,
+                text=True,
+            )
+
+    def test_guard_accepts_branch_push_and_rejects_main_push(self):
+        safe = self.run_guard(
+            'BACKUP_BRANCH="backup/2026-10-31-210000"\n'
+            'git push -q -u origin "$BACKUP_BRANCH"\n'
+            'gh pr create --base main --head "$BACKUP_BRANCH"\n'
+        )
+        self.assertEqual(safe.returncode, 0, safe.stdout + safe.stderr)
+        self.assertIn("آمن", safe.stdout)
+
+        direct = self.run_guard('git push -q origin main\n')
+        self.assertEqual(direct.returncode, 2, direct.stdout + direct.stderr)
+        self.assertIn("main", direct.stdout + direct.stderr)
+
+    def test_backup_script_uses_pr_flow_and_guard(self):
         text = SCRIPT.read_text(encoding="utf-8")
-        self.assertIn("git push -q origin main", text)
-        self.assertIn("الدفع المباشر إلى main مقصود ومعتمد في المانيفست", text)
-        self.assertIn("التماثل تقارن بفرع main", text.replace("\n# ", " "))
+        self.assertNotRegex(text, r"git\s+push\b[^\n#]*\bmain\b")
+        self.assertIn("check_backup_push_safety.py", text)
+        self.assertIn('git push -q -u origin "$BACKUP_BRANCH"', text)
+        self.assertIn('gh pr create --base main --head "$BACKUP_BRANCH"', text)
+        self.assertIn("فشل مغلق", text)
 
     def test_unknown_arguments_fail_before_side_effects(self):
-        """--help وأي معامل مجهول يُرفضان قبل إنشاء السجل أو تشغيل النسخ."""
         with tempfile.TemporaryDirectory() as tmp:
             isolated = Path(tmp)
             script = isolated / "github_backup.sh"
-            shutil.copy2(SCRIPT, script)
-            env = os.environ.copy()
-            env.update(
-                {
-                    "BRAIN_DIR": str(isolated / "brain"),
-                    "BACKUP_REPO_DIR": str(isolated / "repo"),
-                }
-            )
+            script.write_text(SCRIPT.read_text(encoding="utf-8"), encoding="utf-8")
+            env = {"BRAIN_DIR": str(isolated / "brain"), "BACKUP_REPO_DIR": str(isolated / "repo")}
             for argument in ("--help", "--unknown"):
                 result = subprocess.run(
                     ["bash", str(script), argument],

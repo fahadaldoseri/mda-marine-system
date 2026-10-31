@@ -236,6 +236,7 @@ echo "17) GitHub مصدر الشيفرة"
 t "كل مسار مصنَّف code/data" python3 tools/code_paths.py check
 t "apply_from_github: تعارض · أرشفة · استعادة" python3 tests/test_apply_from_github.py
 t "النسخ الاحتياطي لا يكتب الشيفرة فوق GitHub" python3 tests/test_backup_code_safety.py
+t "حاجز النسخ الاحتياطي يمنع الدفع المباشر إلى main" python3 tests/test_backup_push_safety.py
 t "فهرس التقارير" python3 tests/test_reports_index.py
 t "ملف الأسرار: قراءة وقالب وتصنيف" python3 tests/test_secrets_file.py
 
