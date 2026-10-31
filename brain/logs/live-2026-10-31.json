@@ -1,6 +1,17 @@
 {
  "date": "2026-10-31",
- "checked_at": "2026-10-31T08:29:44Z",
+ "checked_at": "2026-10-31T11:09:34Z",
+ "release_paths": [
+  "/",
+  "/reports/2026-10-31.html",
+  "/reports/pdf/2026-10-31.pdf",
+  "/sources.html"
+ ],
+ "propagation": {
+  "attempt": 6,
+  "elapsed_seconds": 305,
+  "max_wait_seconds": 225
+ },
  "paths": {
   "/": {
    "code": 200,
@@ -20,17 +31,19 @@
   }
  },
  "pdf_sha256": {
-  "local": "163aebf6e89961a002919c9c07a750281cea72149cac61132aca6f258ee04c3a",
+  "local": "f5473eb97e08b2d9cdf1bf58e9cf99fb1a046d904e66497cb9c0bc5ed9e42374",
   "live": "163aebf6e89961a002919c9c07a750281cea72149cac61132aca6f258ee04c3a",
-  "match": true,
+  "match": false,
   "content": {
    "pages_local": "11",
    "pages_live": "11",
-   "text_local": "2efa50f0e6996ea10a705b57",
+   "text_local": "fc285687de98169b84b6edbf",
    "text_live": "2efa50f0e6996ea10a705b57",
-   "match": true
+   "match": false
   }
  },
- "status": "ok",
- "bad": []
+ "status": "failed",
+ "bad": [
+  "pdf-content-differs-from-local"
+ ]
 }
