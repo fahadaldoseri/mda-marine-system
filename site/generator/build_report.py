@@ -1167,7 +1167,7 @@ def is_incident_section(title: str) -> bool:
     return any(k in title for k in INCIDENT_SECTION_KEYS)
 
 
-def render_section_body(title: str, lines, defs, doc_mode: bool = False):
+def render_section_body(title: str, lines, defs, doc_mode: bool = False, section_id: str = ""):
     out, cards = [], []
     incident = is_incident_section(title)
 
@@ -1177,6 +1177,7 @@ def render_section_body(title: str, lines, defs, doc_mode: bool = False):
             cards.clear()
 
     i, n = 0, len(lines)
+    sub_idx = 0
     while i < n:
         ln = lines[i]
         s = ln.strip()
@@ -1219,13 +1220,17 @@ def render_section_body(title: str, lines, defs, doc_mode: bool = False):
                 i += 1
                 continue
             flush()
-            out.append(f"<h3>{inline(m3.group(1).strip(), defs)}</h3>")
+            sub_idx += 1
+            sid = f' id="{section_id}-sub-{sub_idx:02d}"' if section_id else ""
+            out.append(f"<h3{sid}>{inline(m3.group(1).strip(), defs)}</h3>")
             i += 1
             continue
 
         if re.match(r"^####\s+", s):
             flush()
-            out.append(f"<h3>{inline(re.sub(r'^####\s+', '', s), defs)}</h3>")
+            sub_idx += 1
+            sid = f' id="{section_id}-sub-{sub_idx:02d}"' if section_id else ""
+            out.append(f"<h3{sid}>{inline(re.sub(r'^####\s+', '', s), defs)}</h3>")
             i += 1
             continue
 
@@ -1449,6 +1454,92 @@ def render_print_distribution_cards(sections, defs) -> str:
     return ""
 
 
+def _section_anchor_map(sections):
+    """Return the actual top-level ids emitted for a selected section list."""
+    return {sec["title"]: f"sec-{idx + 1:02d}" for idx, sec in enumerate(sections)}
+
+
+def _subheading_anchor_map(section, section_id):
+    out = {}
+    n = 0
+    for line in section.get("lines", []):
+        m = re.match(r"^###\s+(.+?)\s*$", line.strip())
+        if m:
+            n += 1
+            out[m.group(1).strip()] = f"{section_id}-sub-{n:02d}"
+    return out
+
+
+def _markdown_table_rows(lines):
+    for i, line in enumerate(lines):
+        if line.strip().startswith("|") and i + 1 < len(lines) and is_sep(lines[i + 1]):
+            n = 0
+            j = i + 2
+            while j < len(lines) and lines[j].strip().startswith("|"):
+                n += 1
+                j += 1
+            return n
+    return 0
+
+
+def _subheading_list_count(section, wanted):
+    active = False
+    n = 0
+    for line in section.get("lines", []):
+        s = line.strip()
+        m = re.match(r"^###\s+(.+?)\s*$", s)
+        if m:
+            active = m.group(1).strip() == wanted
+            continue
+        if active and re.match(r"^##\s+|^###\s+", s):
+            break
+        if active and re.match(r"^\s*(?:[-*]|\d+[.)])\s+\S", line):
+            n += 1
+    return n
+
+
+def _official_warning_texts(section):
+    texts = []
+    lines = section.get("lines", []) if section else []
+    for i, line in enumerate(lines):
+        if line.strip().startswith("|") and i + 1 < len(lines) and is_sep(lines[i + 1]):
+            j = i + 2
+            while j < len(lines) and lines[j].strip().startswith("|"):
+                cells = split_table_row(lines[j])
+                if len(cells) >= 2 and cells[1].strip():
+                    texts.append(cells[1].strip())
+                j += 1
+            break
+    return texts
+
+
+def _card_targets(all_sections, report_sections, meta, defs, report_date):
+    """Measure the exact rendered targets used by the three card rows."""
+    warning_title = "التحذيرات والنشرات الرسمية"
+    watch_section_title = "قراءة الموقف وتحليل المؤشرات"
+    watch_title = "علامات الإنذار المبكر 24–72 ساعة"
+    warning_sec = next((x for x in report_sections if x["title"] == warning_title), None)
+    watch_sec = next((x for x in all_sections if x["title"] == watch_section_title), None)
+    changes_html = BLK.changes_block(meta.get("changes"), lambda x: inline(x, defs))
+    changed_count = len(re.findall(r'<li class="chg\b', changes_html))
+    report_ids = _section_anchor_map(report_sections)
+    addition_sections = [x for x in all_sections if any(k in x["title"] for k in ADDITIONS_SECTIONS)]
+    addition_ids = _section_anchor_map(addition_sections)
+    watch_subs = _subheading_anchor_map(watch_sec, addition_ids.get(watch_section_title, "sec-04")) if watch_sec else {}
+    warning_anchor = report_ids.get(warning_title, "sec-06")
+    watch_anchor = watch_subs.get(watch_title, "sec-04-sub-02")
+    return {
+        "changed_count": changed_count,
+        "changed_href": "/additions.html#sec-00",
+        "changed_title": "ما تغيّر منذ التقرير السابق",
+        "warning_count": _markdown_table_rows(warning_sec.get("lines", [])) if warning_sec else 0,
+        "warning_texts": _official_warning_texts(warning_sec),
+        "warning_href": f"/reports/{report_date}.html#{warning_anchor}",
+        "watch_count": _subheading_list_count(watch_sec, watch_title) if watch_sec else 0,
+        "watch_href": f"/additions.html#{watch_anchor}",
+        "watch_title": watch_title,
+    }
+
 def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mode: str = "report"):
     """mode='report' يُخفي أقسام «إضافات» (السياسة الحاكمة) · mode='additions' يعرضها وحدها بترتيبها."""
     md = md_path.read_text(encoding="utf-8")
@@ -1591,7 +1682,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
             '<div class="h-rule"></div>'
             + (f'<p class="sec-lede">{esc(SECTION_HINTS[t])}</p>' if SECTION_HINTS.get(t) else "")
         )
-        section_html = render_section_body(t, sec["lines"], defs, doc_mode)
+        section_html = render_section_body(t, sec["lines"], defs, doc_mode, section_id=f"sec-{idx + 1:02d}")
         if not codes.is_primary(t):
             section_html = codes.demote(section_html, report_date, official)
         if map_html and "التوزيع الجغرافي للوقائع" in t:
@@ -1690,10 +1781,11 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
                                               or report_date >= ADDITIONS_FROM)
         changes_html = ("" if (_adds_live and _hidden("ما تغيّر"))
                         else BLK.changes_block(meta.get("changes"), inline))
+    card_targets = _card_targets(source_sections, sections, meta, defs, report_date)
     screen_hero_html = "" if mode == "additions" else SCR.screen_hero(
         meta, esc=esc, inline=inline, report_date=report_date, official=official,
         threat_cls=tcls, rkey_html=rkey_html, doc_mode=doc_mode,
-        archived=meta.get("screen_archived") or False)
+        archived=meta.get("screen_archived") or False, card_targets=card_targets)
     ledger_html = (
         f'<div class="glossary">السجل التراكمي: '
         f'<a class="bidi" href="{esc(meta["ledger_url"])}" target="_blank" rel="noopener noreferrer">{esc(meta["ledger_url"])}</a></div>'
