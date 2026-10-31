@@ -418,12 +418,14 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
 
     legend_html = f'<ol class="map-legend">{"".join(legend)}</ol>' if legend else ""
     cap = f'<p class="src-note">{caption}</p>' if caption else ""
+    lede = ("مواقع الوقائع داخل نطاق التقرير." if points else
+            "نطاقات القطاعات المعتمدة؛ لا تمثل علامات أو إحداثيات وقائع.")
     return f"""<div class="map-panel">
-  <h3>{title}</h3><p class="blk-lede">مواقع الوقائع داخل نطاق التقرير.</p>
+  <h3>{title}</h3><p class="blk-lede">{lede}</p>
   <div class="map-wrap">
     <svg class="map-svg" viewBox="0 0 {WIDTH:.0f} {HEIGHT:.0f}" role="img"
          aria-label="{label_prefix}">
-      <rect class="mp-sea-bg" x="0" y="0" width="{WIDTH:.0f}" height="{HEIGHT:.0f}"/>
+      <rect class="mp-sea-bg" style="fill:#eaf2f8" x="0" y="0" width="{WIDTH:.0f}" height="{HEIGHT:.0f}"/>
       <g class="mp-grid">{"".join(grid_lines)}</g>
       <g class="mp-land" fill-rule="evenodd">{land_svg}</g>
       <g class="mp-borders">{border_svg}</g>
@@ -442,13 +444,16 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
 def build_map(points=None, caption=None, inset=None, zoom=False):
     """لوحة رئيسية + لوحة مصغّرة اختيارية لباب المندب."""
     points = points or []
+    map_title = "خريطة الوقائع" if points else "نطاقات القطاعات المعتمدة"
+    map_label = ("خريطة الخليج العربي ومضيق هرمز وخليج عمان مع مواقع وقائع التقرير"
+                 if points else "خريطة نطاقات القطاعات المعتمدة؛ لا تمثل مواقع وقائع")
     _set_bbox(MAIN_BBOX)
     zrect, zhtml = _zoom_parts(points) if zoom else ("", "")
     panels = [
         _panel(
-            "خريطة الوقائع",
+            map_title,
             points,
-            "خريطة الخليج العربي ومضيق هرمز وخليج عمان مع مواقع وقائع التقرير",
+            map_label,
             caption,
             SEAS, PORTS + (SCREEN_ONLY_PORTS if zoom else []), COUNTRIES, GRID_LON, GRID_LAT,
             extra_svg=zrect, overlay=zhtml,
@@ -470,7 +475,10 @@ def build_map(points=None, caption=None, inset=None, zoom=False):
 
     note = (
         '<p class="map-keys">السواحل والجزر والحدود: بيانات Natural Earth. '
-        'الشبكة: خطوط الطول والعرض. العلامات المرقمة: وقائع هذا التقرير.</p>'
+        'الشبكة: خطوط الطول والعرض. ' +
+        ('العلامات المرقمة: وقائع هذا التقرير.' if points else
+         'لا توجد إحداثيات وقائع مثبتة في ملف الواجهة؛ اللوحة سياق جغرافي للقطاعات فقط.') +
+        '</p>'
     )
     return f'<div class="viz map-viz reveal">{"".join(panels)}{note}</div>'
 
