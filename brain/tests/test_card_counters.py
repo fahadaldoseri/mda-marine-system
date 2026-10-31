@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""اختبارات ثابتة لبوابة عدادات بطاقة أهم الأخبار."""
+"""اختبارات ثابتة لسجل بطاقات العدادات الفعّال."""
 from pathlib import Path
 import sys
 import unittest
@@ -8,11 +8,30 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from validators.check_card_counters import _counter, validate_card_documents  # noqa: E402
+sys.path.insert(0, str(ROOT.parent / "site" / "generator"))
+from i18n_en import translate_page  # noqa: E402
 
+
+ZONES_DATA = {
+    "zones": [{"id": f"Z{i}"} for i in range(1, 5)],
+    "counter": {
+        "qualifying": 4,
+        "confirmed": 1,
+        "probable": 1,
+        "excluded": 11,
+        "nonspatial": 1,
+        "total": 16,
+    },
+}
 
 AR_REPORT = """
 <html lang="ar"><body>
-<div class="sc-card">
+<section class="tz" aria-label="مستوى التهديد حسب القطاعات">
+  <header class="tz-head"><h3>مستوى التهديد حسب القطاعات</h3></header>
+  <ul class="tz-zones"><li>Z1</li><li>Z2</li><li>Z3</li><li>Z4</li></ul>
+  <p class="tz-count">العدّاد: وقائع مؤهّلة <span class="bidi">4</span> · مؤكدة <span class="bidi">1</span> · مرجّحة <span class="bidi">1</span> · مستثناة <span class="bidi">11</span> · غير مكانية <span class="bidi">1</span> · إجمالي <span class="bidi">16</span></p>
+</section>
+<div class="sc-card" aria-label="أهم الأخبار المتعلقة بالأمن البحري">
   <div class="sc-row"><div class="sc-l">ما تغيّر</div><div class="sc-more">6 بنود <a href="/additions.html#sec-00" data-goto="ما تغيّر منذ التقرير السابق">التفاصيل</a></div></div>
   <div class="sc-row"><div class="sc-l">التحذيرات والنشرات الرسمية</div><div class="sc-more">تحذيران <a href="/reports/2026-10-31.html#sec-06" data-goto="التحذيرات والنشرات الرسمية">القسم الرسمي</a></div></div>
   <div class="sc-row"><div class="sc-l">ما يُراقب خلال 24–72 ساعة</div><div class="sc-more">5 بنود <a href="/additions.html#sec-04-sub-02" data-goto="علامات الإنذار المبكر 24–72 ساعة">المؤشرات الكاملة</a></div></div>
@@ -30,12 +49,17 @@ AR_ADDITIONS = """
 
 EN_REPORT = """
 <html lang="en"><body>
-<div class="sc-card">
-  <div class="sc-row"><div class="sc-l">What changed</div><div class="sc-more">6 items <a href="/additions.html#sec-00" data-goto="What changed since the previous report">Details</a></div></div>
-  <div class="sc-row"><div class="sc-l">Official warnings and advisories</div><div class="sc-more">2 rows <a href="/reports/2026-10-31.html#sec-06" data-goto="Official warnings and advisories">Official section</a></div></div>
-  <div class="sc-row"><div class="sc-l">What is monitored over the next 24–72 hours</div><div class="sc-more">5 items <a href="/additions.html#sec-04-sub-02" data-goto="Early-warning indicators 24–72 hours">Indicators</a></div></div>
+<section class="tz" aria-label="Threat level by sector">
+  <header class="tz-head"><h3>Threat level by sector</h3></header>
+  <ul class="tz-zones"><li>Z1</li><li>Z2</li><li>Z3</li><li>Z4</li></ul>
+  <p class="tz-count">Counter: qualifying incidents <span class="bidi">4</span> · confirmed <span class="bidi">1</span> · probable <span class="bidi">1</span> · excluded <span class="bidi">11</span> · non-spatial <span class="bidi">1</span> · total <span class="bidi">16</span></p>
+</section>
+<div class="sc-card" aria-label="Top maritime security news">
+  <div class="sc-row"><div class="sc-l">What changed</div><div class="sc-more">6 items <a href="/reports/en/additions.html#sec-00" data-goto="What changed since the previous report">Details</a></div></div>
+  <div class="sc-row"><div class="sc-l">Official warnings and advisories</div><div class="sc-more">2 rows <a href="/reports/en/2026-10-31.html#sec-06" data-goto="Official warnings and advisories">Official section</a></div></div>
+  <div class="sc-row"><div class="sc-l">What is monitored over the next 24–72 hours</div><div class="sc-more">5 items <a href="/reports/en/additions.html#sec-04-sub-02" data-goto="Early-warning indicators 24–72 hours">Indicators</a></div></div>
 </div>
-<section id="sec-06"><h2>Official Warnings and Advisories</h2><table><tbody><tr><td>UKMTO</td><td>Official text one</td></tr><tr><td>JMIC</td><td>Official text two</td></tr></tbody></table></section>
+<section id="sec-06"><h2>Official warnings and advisories</h2><table><tbody><tr><td>UKMTO</td><td>Official text one</td></tr><tr><td>JMIC</td><td>Official text two</td></tr></tbody></table></section>
 </body></html>
 """
 
@@ -54,10 +78,37 @@ class CardCounterGateTests(unittest.TestCase):
             "ar_additions": AR_ADDITIONS,
             "en_report": EN_REPORT,
             "en_additions": EN_ADDITIONS,
+            "zones_data": ZONES_DATA,
         }
 
-    def test_positive_matches_counts_titles_and_anchors(self):
+    def test_positive_registry_matches_both_enabled_cards(self):
         self.assertEqual(validate_card_documents(**self.docs()), [])
+
+    def test_registry_contains_two_enabled_cards(self):
+        import json
+        registry = json.loads((ROOT / "appendices/card_registry.json").read_text(encoding="utf-8"))
+        enabled = [c for c in registry["cards"] if c["status"]["state"] == "enabled"]
+        self.assertGreaterEqual(len(enabled), 2)
+
+    def test_unregistered_card_fails_closed(self):
+        docs = self.docs()
+        docs["ar_report"] = docs["ar_report"].replace(
+            'aria-label="مستوى التهديد حسب القطاعات"', 'aria-label="بطاقة غير مسجلة"', 1
+        )
+        errors = validate_card_documents(**docs)
+        self.assertTrue(any("غير مسجلة" in e for e in errors), errors)
+
+    def test_registered_card_missing_required_counter_fails_closed(self):
+        docs = self.docs()
+        docs["ar_report"] = docs["ar_report"].replace("· مؤكدة <span", "· <span", 1)
+        errors = validate_card_documents(**docs)
+        self.assertTrue(any("مفتاح" in e and "confirmed" in e for e in errors), errors)
+
+    def test_zone_counter_drift_fails_closed(self):
+        docs = self.docs()
+        docs["ar_report"] = docs["ar_report"].replace("وقائع مؤهّلة <span class=\"bidi\">4", "وقائع مؤهّلة <span class=\"bidi\">3", 1)
+        errors = validate_card_documents(**docs)
+        self.assertTrue(any("qualifying" in e and "4" in e and "3" in e for e in errors), errors)
 
     def test_negative_counter_change_fails_closed(self):
         docs = self.docs()
@@ -77,26 +128,30 @@ class CardCounterGateTests(unittest.TestCase):
         errors = validate_card_documents(**docs)
         self.assertTrue(any("صياغة" in e and "التحذيرات" in e for e in errors), errors)
 
-    def test_negative_arabic_card_latin_fails_closed(self):
+    def test_negative_arabic_card_latin_outside_allowlist_fails_closed(self):
         docs = self.docs()
-        docs["ar_report"] = docs["ar_report"].replace("تحذيران <a", "تحذيران UKMTO <a", 1)
+        docs["ar_report"] = docs["ar_report"].replace("تحذيران <a", "تحذيران XYZ <a", 1)
         errors = validate_card_documents(**docs)
         self.assertTrue(any("لاتينية" in e and "التحذيرات" in e for e in errors), errors)
 
-    def test_arabic_counter_forms_cover_zero_one_two_and_three_plus(self):
-        expected = {
-            "لا بنود": 0,
-            "بند واحد": 1,
-            "بندان": 2,
-            "3 بنود": 3,
-            "لا تحذيرات": 0,
-            "تحذير واحد": 1,
-            "تحذيران": 2,
-            "3 تحذيرات": 3,
-        }
+    def test_zone_heading_anchor_drift_fails_closed(self):
+        docs = self.docs()
+        docs["ar_report"] = docs["ar_report"].replace("<h3>مستوى التهديد حسب القطاعات", "<h3>عنوان منحرف", 1)
+        errors = validate_card_documents(**docs)
+        self.assertTrue(any("مرسا" in e and "القطاعات" in e for e in errors), errors)
+
+    def test_arabic_counter_forms_remain_strict(self):
+        expected = {"لا بنود": 0, "بند واحد": 1, "بندان": 2, "3 بنود": 3, "لا تحذيرات": 0, "تحذير واحد": 1, "تحذيران": 2, "3 تحذيرات": 3}
         for text, count in expected.items():
             self.assertEqual(_counter(text + " · التفاصيل", "ar"), count, text)
         self.assertIsNone(_counter("2 صفوف · التفاصيل", "ar"))
+
+    def test_english_threat_counter_is_generated_from_all_registered_labels(self):
+        html = '<html lang="ar"><body><p class="tz-count">العدّاد: وقائع مؤهّلة <span class="bidi">4</span> · مؤكدة <span class="bidi">1</span> · مرجّحة <span class="bidi">1</span> · مستثناة <span class="bidi">11</span> · غير مكانية <span class="bidi">1</span> · إجمالي <span class="bidi">16</span></p></body></html>'
+        translated, _, _ = translate_page(html, "2026-10-31", {}, {})
+        expected = ("Counter: qualifying incidents", "confirmed", "probable", "excluded", "non-spatial", "total")
+        for label in expected:
+            self.assertIn(label, translated)
 
 
 if __name__ == "__main__":

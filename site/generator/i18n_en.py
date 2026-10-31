@@ -152,8 +152,10 @@ class _Collector(HTMLParser):
         super().__init__(convert_charrefs=False)
         self.skip = 0
         self.units: list[str] = []
+        self.unit_contexts: list[str | None] = []
         self.parts: list[str] = []
         self.attrs_seen: list[str] = []
+        self.in_tz_count = False
 
     def _attr(self, attrs) -> str:
         if not attrs:
@@ -172,6 +174,8 @@ class _Collector(HTMLParser):
     def handle_starttag(self, tag, attrs):
         if tag in SKIP_TAGS:
             self.skip += 1
+        if tag == "p" and "tz-count" in dict(attrs).get("class", "").split():
+            self.in_tz_count = True
         self.parts.append(f"<{tag}{self._attr(attrs)}>")
 
     def handle_startendtag(self, tag, attrs):
@@ -180,6 +184,8 @@ class _Collector(HTMLParser):
     def handle_endtag(self, tag):
         if tag in SKIP_TAGS and self.skip:
             self.skip -= 1
+        if tag == "p" and self.in_tz_count:
+            self.in_tz_count = False
         self.parts.append(f"</{tag}>")
 
     def handle_data(self, data):
@@ -188,12 +194,46 @@ class _Collector(HTMLParser):
             return
         self.parts.append("\u0000")
         self.units.append(data)
+        self.unit_contexts.append("tz-count" if self.in_tz_count else None)
 
     def handle_entityref(self, name):
         self.parts.append(f"&{name};")
 
     def handle_charref(self, name):
         self.parts.append(f"&#{name};")
+
+
+def _counter_registry_path() -> pathlib.Path:
+    candidates = []
+    if os.environ.get("BRAIN_DIR"):
+        candidates.append(pathlib.Path(os.environ["BRAIN_DIR"]) / "appendices" / "card_registry.json")
+    candidates.extend([
+        ROOT.parent / "brain" / "appendices" / "card_registry.json",
+        _HOME / "brain-marine-news" / "appendices" / "card_registry.json",
+    ])
+    for path in candidates:
+        if path.is_file():
+            return path
+    raise RuntimeError("سجل البطاقات مفقود: لا يمكن توليد عدادات بطاقة القطاعات")
+
+
+def _sector_counter_labels() -> dict[str, str]:
+    registry = json.loads(_counter_registry_path().read_text(encoding="utf-8"))
+    card = next((c for c in registry.get("cards", [])
+                 if c.get("id") == "sector-threat-level"
+                 and (c.get("status") or {}).get("state") == "enabled"), None)
+    counters = (card or {}).get("counters") or []
+    labels = {c.get("display_label", ""): c.get("display_label_en", "") for c in counters}
+    if not labels or any(not arabic or not english for arabic, english in labels.items()):
+        raise RuntimeError("عقد تسميات بطاقة القطاعات غير صالح: يلزم كل مفتاح عربي وإنجليزي")
+    return labels
+
+
+def _translate_counter_fragment(text: str, labels: dict[str, str]) -> str:
+    translated = text.replace("العدّاد:", "Counter:")
+    for arabic, english in sorted(labels.items(), key=lambda item: len(item[0]), reverse=True):
+        translated = translated.replace(arabic, english)
+    return translated
 
 
 def make_translator(tm: dict[str, str], gl: dict[str, str]):
@@ -349,7 +389,10 @@ def translate_page(html_text: str, date: str, tm: dict[str, str], gl: dict[str, 
     tr = make_translator(tm, gl)
     c = _Collector()
     c.feed(html_text)
-    units = [tr(t) for t in c.units]
+    counter_labels = _sector_counter_labels()
+    units = [(_translate_counter_fragment(t, counter_labels)
+              if c.unit_contexts[i] == "tz-count" else tr(t))
+             for i, t in enumerate(c.units)]
     attrs = [tr(a) for a in c.attrs_seen]
     parts, k = [], 0
     for p in c.parts:
@@ -377,7 +420,8 @@ def translate_page(html_text: str, date: str, tm: dict[str, str], gl: dict[str, 
     out = re.sub(r"<title>.*?</title>", f"<title>Daily Maritime Security Report — {date} (English edition)</title>", out, flags=re.S)
     out = re.sub(r'<meta name="description" content="[^"]*"',
                  '<meta name="description" content="Daily Maritime Security Report — English edition, translated and governed against the Arabic source.">', out)
-    remaining = [t for t in c.units if ARABIC.search(norm(tr(t))) and len(ARABIC.findall(tr(t))) > 2]
+    remaining = [t for t, translated in zip(c.units, units)
+                 if ARABIC.search(norm(translated)) and len(ARABIC.findall(translated)) > 2]
     out = _collapse_inline_source_duplicates(out)
     out = _fix_chrome(out)
     return out, [norm(x) for x in remaining], len(c.units)

@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "description": "سجل حاكم لبطاقات العدادات الظاهرة في سطح التقرير؛ لا تُعدّل البوابة لتجاوز سجل غير مكتمل.",
+  "discovery": {
+    "component_classes": ["sc-card", "tz"]
+  },
+  "cards": [
+    {
+      "id": "maritime-security-news",
+      "status": {
+        "state": "enabled",
+        "reason": null
+      },
+      "page_component": {
+        "surface": "report",
+        "class": "sc-card",
+        "aria_label": "أهم الأخبار المتعلقة بالأمن البحري",
+        "aria_label_en": "Top maritime security news",
+        "producer": "site/generator/screen_layer.py"
+      },
+      "target_section": {
+        "surface": "report-and-additions",
+        "description": "كل عداد يقاس من القسم الذي تهبط إليه مرساة الصف، لا من قيمة الواجهة نفسها."
+      },
+      "anchor_rule": {
+        "method": "title-derived-fragment",
+        "description": "تُقبل المرساة فقط إذا حُلّت في السطح الصحيح وكان عنوان الهدف مطابقًا للعنوان المسجل عبر المعجم الإنجليزي عند الحاجة."
+      },
+      "latin_allowlist": ["UKMTO", "JMIC", "IMO", "AIS"],
+      "counters": [
+        {
+          "key": "changed",
+          "row_label": "ما تغيّر",
+          "row_label_en": "What changed",
+          "unit": "items",
+          "target": {
+            "surface": "additions",
+            "title": "ما تغيّر منذ التقرير السابق",
+            "title_en": "What changed since the previous report",
+            "measurement": "list_items"
+          },
+          "format": {
+            "ar": "items",
+            "en": "items"
+          }
+        },
+        {
+          "key": "warnings",
+          "row_label": "التحذيرات والنشرات الرسمية",
+          "row_label_en": "Official warnings and advisories",
+          "unit": "rows",
+          "target": {
+            "surface": "report",
+            "title": "التحذيرات والنشرات الرسمية",
+            "title_en": "Official warnings and advisories",
+            "measurement": "table_body_rows"
+          },
+          "format": {
+            "ar": "warnings",
+            "en": "rows"
+          }
+        },
+        {
+          "key": "watch",
+          "row_label": "ما يُراقب خلال 24–72 ساعة",
+          "row_label_en": "What is monitored over the next 24–72 hours",
+          "unit": "items",
+          "target": {
+            "surface": "additions",
+            "title": "علامات الإنذار المبكر 24–72 ساعة",
+            "title_en": "Early-warning indicators 24–72 hours",
+            "measurement": "list_items"
+          },
+          "format": {
+            "ar": "items",
+            "en": "items"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sector-threat-level",
+      "status": {
+        "state": "enabled",
+        "reason": null
+      },
+      "page_component": {
+        "surface": "report",
+        "class": "tz",
+        "aria_label": "مستوى التهديد حسب القطاعات",
+        "aria_label_en": "Threat level by sector",
+        "producer": "site/generator/threat_card.py",
+        "allow_multiple": true
+      },
+      "target_section": {
+        "surface": "report",
+        "title": "مستوى التهديد حسب القطاعات",
+        "title_en": "Threat level by sector",
+        "source_file": "sources/zones/{date}.json",
+        "measurement": "counter_object"
+      },
+      "anchor_rule": {
+        "method": "component-heading-derived",
+        "description": "عنوان h3 داخل البطاقة هو مرساة القسم؛ أي انحراف عنه يمنع الإصدار."
+      },
+      "latin_allowlist": ["UKMTO", "JMIC", "IMO", "AIS", "Z1", "Z2", "Z3", "Z4"],
+      "counters": [
+        {"key": "qualifying", "display_label": "وقائع مؤهّلة", "display_label_en": "qualifying incidents", "source_path": "counter.qualifying"},
+        {"key": "confirmed", "display_label": "مؤكدة", "display_label_en": "confirmed", "source_path": "counter.confirmed"},
+        {"key": "probable", "display_label": "مرجّحة", "display_label_en": "probable", "source_path": "counter.probable"},
+        {"key": "excluded", "display_label": "مستثناة", "display_label_en": "excluded", "source_path": "counter.excluded"},
+        {"key": "nonspatial", "display_label": "غير مكانية", "display_label_en": "non-spatial", "source_path": "counter.nonspatial"},
+        {"key": "total", "display_label": "إجمالي", "display_label_en": "total", "source_path": "counter.total"}
+      ]
+    }
+  ]
+}
