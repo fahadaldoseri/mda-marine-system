@@ -13,6 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_REGISTRY = ROOT / "appendices" / "card_registry.json"
+CONTRACT_LINE = "✔ بطاقة الفروع الثلاثة: العناوين والعدادات والمراسي متطابقة عربيًا وإنجليزيًا"
 
 
 def _default_dist_root() -> Path:
@@ -464,6 +465,7 @@ def main(argv=None) -> int:
             print(f"✘ {error}")
         return 2
     enabled = [c["id"] for c in load_registry(Path(args.registry))["cards"] if c["status"]["state"] == "enabled"]
+    print(CONTRACT_LINE)
     print(f"✔ حراسة البطاقات التصريحية: {len(enabled)} بطاقات مفعّلة ({'، '.join(enabled)})")
     return 0
 
