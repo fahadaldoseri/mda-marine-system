@@ -3281,18 +3281,20 @@
     ],
     "files": [
      "tools/final_gate.sh",
-     "tools/audit_style_coverage.py"
+     "tools/audit_style_coverage.py",
+     "validators/check_forbidden_surface_terms.py"
     ],
     "gates": [],
     "tests": [
-     "tests/test_vocab_registry.py"
+     "tests/test_vocab_registry.py",
+     "tests/test_forbidden_surface_terms.py"
     ]
    },
    "on_fail": "stop",
    "command": [
     "bash",
     "-lc",
-    "B=\"$PWD\"; export B SITE; python3 \"$B/tools/make_tg_digest.py\" --date \"$D\" >/dev/null 2>&1 || true; python3 \"$B/tools/audit_style_coverage.py\" --date \"$D\"; rc=$?; exit $rc"
+    "B=\"$PWD\"; export B SITE; python3 \"$B/tools/make_tg_digest.py\" --date \"$D\" >/dev/null 2>&1 || true; python3 \"$B/validators/check_forbidden_surface_terms.py\" --date \"$D\" --brain \"$B\" --site \"$SITE\"; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; python3 \"$B/tools/audit_style_coverage.py\" --date \"$D\"; rc=$?; exit $rc"
    ],
    "ok_rc": [
     0
