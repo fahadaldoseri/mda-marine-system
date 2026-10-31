@@ -1,66 +1,94 @@
 #!/usr/bin/env bash
 # نسخة احتياطية للبيانات على GitHub — مركز الوعي بالمجال البحري.
-# الشيفرة والقواعد مصدرها GitHub (قرار المالك 2026-10-24): قبل النسخ تُجلب أحدث main وتُطبَّق على الخادم (apply_from_github)،
-# ثم تُبنى الشجرة فتُنسخ البيانات فقط ولا تُكتب الشيفرة فوق المستودع. غير مُعطِّل للخط اليومي: فشله يُسجَّل ولا يوقف التسليم.
+# المصدر: GitHub/main للشيفرة؛ التغيير الناتج يمر دائمًا عبر فرع وطلب دمج.
 set -u
-# حاجز واجهة مُبكر: هذا السكربت لا يقبل معاملات؛ رفض --help وأي معامل مجهول
-# يسبق تهيئة المسارات وفتح السجل حتى لا يشغّل النسخة الاحتياطية عرضًا.
+
+# حاجز واجهة مبكر: لا معاملات حتى لا تُشغَّل النسخة عرضًا.
 if [ "$#" -ne 0 ]; then
   echo "✘ معامل غير معروف: $1 — لا يدعم github_backup.sh معاملات (بما فيها --help)" >&2
   echo "الاستخدام: bash tools/github_backup.sh" >&2
   exit 2
 fi
+
 B="${BRAIN_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 REPO="${BACKUP_REPO_DIR:-$(dirname "$B")/mda-marine-system}"
-# حماية: لو تسرّب جذر المرآة في BRAIN_DIR لظهر جذر مكرر مثل .../mda-marine-system/mda-marine-system
 case "$REPO" in
   */mda-marine-system/mda-marine-system) REPO="${REPO%/mda-marine-system}" ;;
 esac
 LOG="$B/logs/github-backup-$(date -u +%F).log"
 mkdir -p "$B/logs"
+
 {
+  abort() {
+    echo "✘ فشل مغلق: $*"
+    exit 2
+  }
+
   echo "=== بدء النسخ الاحتياطي: $(date -u +%FT%TZ) ==="
-  cd "$REPO" || exit 1
-  # 1) أحدث main من GitHub (تقدّم سريع فقط) ثم تطبيق الشيفرة على الخادم
-  if git fetch -q origin main 2>/dev/null; then
-    git checkout -q main 2>/dev/null
-    if [ -z "$(git status --porcelain | head -1)" ]; then
-      git merge -q --ff-only origin/main || { echo "✘ main المحلي تباعد عن origin/main — أوقف النسخ"; exit 1; }
-      python3 "$B/tools/apply_from_github.py" --repo "$REPO" --brain "$B" || echo "⚠ تعذّر/تعارض في تطبيق الشيفرة (رمز $?) — انظر أعلاه؛ تستمر النسخة للبيانات"
-    else
-      echo "⚠ شجرة المستودع فيها تعديل غير مدفوع — لا جلب ولا تطبيق في هذه الجولة"
-    fi
-  else
-    echo "⚠ تعذّر الجلب من origin — تُنسخ البيانات فقط"
-  fi
-  # 2) بناء الشجرة: بيانات فقط (الشيفرة تبقى كما في GitHub)
-  python3 "$B/tools/github_backup.py" || { echo "فشل بناء الشجرة"; exit 1; }
-  # 2.5) بوابة الأسرار (ك-162 — طلب فهد 2026-10-24): لا سرّ في الشجرة ولا في الالتزام القادم.
-  # سببها: رمز بوت تلغرام دخل brain/secrets/secrets.env في تاريخ المستودع. لا يتكرر.
-  python3 "$B/validators/check_secrets.py" --root "$REPO" || { echo "✘ بوابة الأسرار: مُنع النسخ الاحتياطي والدفع"; exit 70; }
-  # 2.6) فحص مكمّل (البند 6): لا ملف شيفرة على الخادم خارج المستودع — منع.
-  python3 "$B/validators/check_server_code_tracking.py" --root "$B" --repo "$REPO" || { echo "✘ ملفات شيفرة غير متتبَّعة على الخادم: مُنع النسخ الاحتياطي والدفع"; exit 70; }
-  # 2.7) حماية ملف الأسرار المعتمد: لا يُحذف ولا يُفرَّغ بالنسخ الاحتياطي (ك-168 — حذفه الالتزام eac53cd).
+  cd "$REPO" || abort "تعذر دخول مستودع النسخة: $REPO"
+
+  # يلزم خط أساس حديث ونظيف من main قبل بناء أي التزام احتياطي.
+  git fetch -q origin main || abort "تعذر جلب origin/main؛ لم يُنشأ التزام أو دفع"
+  [ -z "$(git status --porcelain)" ] || abort "شجرة المستودع غير نظيفة؛ لم يُنشأ فرع أو دفع"
+  git checkout -q main || abort "تعذر الانتقال إلى main؛ لم يُنشأ فرع أو دفع"
+  git merge -q --ff-only origin/main || abort "main المحلي تباعد عن origin/main؛ أوقف النسخ"
+  python3 "$B/tools/apply_from_github.py" --repo "$REPO" --brain "$B" \
+    || echo "⚠ تعذّر/تعارض في تطبيق الشيفرة (تستمر نسخة البيانات بعد تسجيل التحذير)"
+
+  # بناء الشجرة: بيانات فقط؛ الشيفرة تبقى كما في GitHub.
+  python3 "$B/tools/github_backup.py" || abort "فشل بناء الشجرة"
+  python3 "$B/validators/check_secrets.py" --root "$REPO" \
+    || { echo "✘ بوابة الأسرار: مُنع النسخ الاحتياطي والدفع"; exit 70; }
+  python3 "$B/validators/check_server_code_tracking.py" --root "$B" --repo "$REPO" \
+    || { echo "✘ ملفات شيفرة غير متتبَّعة على الخادم: مُنع النسخ الاحتياطي والدفع"; exit 70; }
+
+  # حماية ملف الأسرار المعتمد من الحذف أو التفريغ.
   PROT="$REPO/brain/secrets/secrets.env"
   if [ ! -s "$PROT" ]; then
     if git -C "$REPO" show HEAD:brain/secrets/secrets.env > "$PROT" 2>/dev/null; then
       echo "  ↺ أُعيد ملف الأسرار المعتمد من المستودع (لا يُحذف بالنسخ)"
     fi
   fi
+
   git add -A
   if git diff --cached --quiet; then
     echo "لا تغيير منذ آخر نسخة"
   else
-    # هوية خادم منفصلة + سطر تفويض صريح (طلب فهد 2026-10-24، البند 19).
+    # أنشئ فرعًا فريدًا قبل الالتزام؛ لا يُسمح بتغيير main مباشرة.
+    BACKUP_BRANCH="backup/$(date -u +%F-%H%M%S)-$$"
+    case "$BACKUP_BRANCH" in
+      main|refs/heads/main|*/main) abort "اسم الفرع المحسوب محظور: $BACKUP_BRANCH" ;;
+    esac
+    git show-ref --verify --quiet "refs/heads/$BACKUP_BRANCH" \
+      && abort "فرع النسخ موجود محليًا: $BACKUP_BRANCH"
+    git switch -q -c "$BACKUP_BRANCH" || abort "تعذر إنشاء فرع النسخ: $BACKUP_BRANCH"
     git -c user.name="MDA Backup" -c user.email="mda-backup@localhost" commit -q \
       -m "نسخة احتياطية $(date -u +%F) — تحديث البيانات" \
-      -m "هوية الخادم: MDA Backup · دُمج بتفويض فهد الدوسري (تفويض 2026-10-24)."
-    # الدفع المباشر إلى main مقصود ومعتمد في المانيفست بقرار المالك: أداة
-    # التماثل تقارن بفرع main، لذلك تغييره يتطلب تغيير الأداة لا تجاوز العقد.
-    if ! git push -q origin main 2>/dev/null; then   # تقدّم origin بين الجلب والدفع (دمج PR مثلًا): إعادة تأسيس ثم دفع
-      git pull -q --rebase origin main && git push -q origin main
-    fi && echo "تم الدفع: $(git rev-parse --short HEAD)" || echo "✘ فشل الدفع"
+      -m "هوية الخادم: MDA Backup · يُدمج عبر طلب دمج لا عبر دفع مباشر."
+
+    # الحاجز الساكن يوقف أي صيغة دفع تستهدف main قبل لمس الشبكة.
+    python3 "$B/validators/check_backup_push_safety.py" \
+      --script "$B/tools/github_backup.sh" \
+      || abort "حاجز الدفع المباشر منع العملية"
+    command -v gh >/dev/null 2>&1 \
+      || abort "gh غير متاح؛ لا يمكن إنشاء طلب دمج تلقائيًا"
+
+    git push -q -u origin "$BACKUP_BRANCH" \
+      || abort "تعذر دفع فرع النسخ؛ لم يُدفع main"
+    git ls-remote --exit-code --heads origin "$BACKUP_BRANCH" >/dev/null 2>&1 \
+      || abort "لم تثبت مرجعية فرع النسخ على origin"
+
+    PR_URL=""
+    if ! PR_URL="$(gh pr create --base main --head "$BACKUP_BRANCH" \
+      --title "نسخة احتياطية $(date -u +%F)" \
+      --body "نسخة بيانات آلية من github_backup.sh. تُراجع وتُدمج عبر طلب دمج؛ لا دفع مباشر إلى main." 2>&1)"; then
+      echo "$PR_URL"
+      abort "تعذر إنشاء طلب الدمج للفرع $BACKUP_BRANCH"
+    fi
+    echo "تم دفع الفرع فقط: $BACKUP_BRANCH"
+    echo "تم إنشاء طلب الدمج: $PR_URL"
   fi
   echo "=== انتهى: $(date -u +%FT%TZ) ==="
 } >> "$LOG" 2>&1
+
 tail -3 "$LOG"
