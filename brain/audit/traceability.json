@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-31T12:02:58.295392+00:00",
+  "generated_at": "2026-10-31T14:13:12.105837+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -2963,6 +2963,48 @@
       "lesson_id": "ك-388",
       "barrier_id": "B-582caf71",
       "run_evidence": "005 أثبت مدخل EN حاضرًا بخطوط 191 و51 صفًا، وB010 وcheck_en_parity.py خرج 0، مع عدم بقاء نص عربي في "
+    },
+    {
+      "fault_id": "ك-389",
+      "state": "مغلق",
+      "lesson_id": "ك-389",
+      "barrier_id": "B-c1d56547",
+      "run_evidence": "لي 154 مسارًا، وأضيفت حواجز الأرشفة والمزامنة والتطبيق؛ اختبار المرآة خرج 0 حاجز فشل مغلق: tests/tes"
+    },
+    {
+      "fault_id": "ك-390",
+      "state": "مفتوح",
+      "lesson_id": "ك-390",
+      "barrier_id": "B-eca7e550",
+      "run_evidence": "تج الفعلي وأضيف اختبار يقرأ assertions من المانيفست؛ Ran 1 test وOK · خرج 0 حاجز فشل مغلق: tests/tes"
+    },
+    {
+      "fault_id": "ك-391",
+      "state": "مفتوح",
+      "lesson_id": "ك-391",
+      "barrier_id": "B-4278c20f",
+      "run_evidence": "ودع، وأرشفة النسخة المستبدلة، واستعادة عند فشل verify؛ 8 فحوص ناجحة · خرج 0 حاجز فشل مغلق: tests/tes"
+    },
+    {
+      "fault_id": "ك-392",
+      "state": "مغلق",
+      "lesson_id": "ك-392",
+      "barrier_id": "B-d5abd8ec",
+      "run_evidence": "ط وخطوة الوكيل بلا prompt ويثبت إعادة الربط؛ الحصيلة نجح 12 · فشل 0 · خرج 0"
+    },
+    {
+      "fault_id": "ك-393",
+      "state": "مفتوح",
+      "lesson_id": "ك-393",
+      "barrier_id": "B-18dc5e01",
+      "run_evidence": "لمسار الجذري إلى المواصفة وشُغّل الفحص؛ كل مسارات المرآة 6598 مصنفة · خرج 0 حاجز فشل مغلق: python3 b"
+    },
+    {
+      "fault_id": "ك-394",
+      "state": "مغلق",
+      "lesson_id": "ك-394",
+      "barrier_id": "B-65a2370c",
+      "run_evidence": " العدادات الإنجليزية وربطت بالعقد الحاكم؛ 12 اختبارًا OK والمدقق الحي خرج 0 حاجز فشل مغلق: tests/tes"
     }
   ]
 }
