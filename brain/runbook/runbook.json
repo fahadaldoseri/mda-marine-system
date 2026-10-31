@@ -1,6 +1,10 @@
 {
  "version": 1,
  "ledger_dir": "logs/runbook",
+ "print": {
+  "enabled": false,
+  "reason": "تعطيل بطلب المالك — يُفعّل بأمره الصريح"
+ },
  "sections": [
   {
    "id": "what-changed",
@@ -1083,6 +1087,56 @@
     "appendices/zone-registry.json",
     "appendices/zone-overrides.json",
     "appendices/threat-scale.json"
+   ]
+  },
+  {
+   "id": "S071",
+   "title": "حارس استمرارية دفتر الوقائع",
+   "kind": "script",
+   "phase": "write",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "python3",
+      "validators/check_ledger_continuity.py",
+      "--date",
+      "{date}"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "أ1 — سلسلة التشغيل اليومي"
+    ],
+    "files": [
+     "validators/check_ledger_continuity.py",
+     "cumulative-2026/daily/",
+     "cumulative-2026/event-ledger-master.json",
+     "cumulative-2026/no-material.json"
+    ],
+    "folders": [],
+    "gates": [],
+    "tests": [
+     "tests/test_ledger_continuity.py"
+    ]
+   },
+   "on_fail": "stop",
+   "command": [
+    "python3",
+    "validators/check_ledger_continuity.py",
+    "--date",
+    "{date}"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [],
+   "writes": [],
+   "reads": [
+    "cumulative-2026/daily/{date}.json",
+    "cumulative-2026/event-ledger-master.json",
+    "cumulative-2026/no-material.json"
    ]
   },
   {
@@ -3025,13 +3079,22 @@
      "evidence/resume-20261031/geo-table-selection.stdout",
      "evidence/resume-20261031/geo-table-selection.exit",
      "tests/test_geo_table_selection.py",
-     "validators/check_card_counters.py"
+     "validators/check_card_counters.py",
+     "evidence/build-ar-hero.txt",
+     "evidence/card-baseline-flow.txt",
+     "evidence/card-baseline-measure.json",
+     "evidence/hero-kpi-green1.txt",
+     "evidence/hero-kpi-green2.txt",
+     "evidence/hero-kpi-red.txt",
+     "evidence/hero-kpi-red2.txt",
+     "evidence/meta-json-check.txt"
     ],
     "gates": [],
     "tests": [
      "tests/test_en_advisory_id_matching.py",
      "tests/test_geo_table_selection.py",
-     "tests/test_card_counters.py"
+     "tests/test_card_counters.py",
+     "tests/test_hero_kpi_schema.py"
     ]
    },
    "on_fail": "stop",
@@ -3050,6 +3113,8 @@
    "title": "تصدير PDF المعتمد",
    "kind": "script",
    "phase": "build",
+   "disabled": true,
+   "reason": "تعطيل بطلب المالك — يُفعّل بأمره الصريح",
    "assert": [
     {
      "type": "min_bytes",
@@ -3084,6 +3149,8 @@
    "title": "بوابتا جودة الطباعة على PDF نفسه",
    "kind": "script",
    "phase": "build",
+   "disabled": true,
+   "reason": "تعطيل بطلب المالك — يُفعّل بأمره الصريح",
    "assert": [
     {
      "type": "cmd",
@@ -3105,7 +3172,8 @@
     "gates": [],
     "tests": [
      "tests/test_pdf_heading_match.py",
-     "tests/test_print_alignment_hidden.py"
+     "tests/test_print_alignment_hidden.py",
+     "tests/test_runbook_disabled_steps.py"
     ]
    },
    "on_fail": "stop",

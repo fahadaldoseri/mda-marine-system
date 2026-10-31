@@ -18,36 +18,116 @@
  "report_schema_version": "2.1",
  "hero_kpis": [
   {
-   "label": "بلاغات UKMTO عن وقائع في Z1",
+   "id": "ukmto-reports",
+   "row": 1,
+   "title": "بلاغات UKMTO",
+   "tag": "Z1",
    "value": "3",
-   "note": "بلاغ هجوم وبلاغ جنوب لافان وبلاغ متأخر في هرمز",
-   "accent": "warn",
-   "delta": "+1",
-   "baseline": "بلاغات UKMTO عن وقائع في Z1 في الإصدار السابق"
+   "detail": "داخل نافذة التقرير",
+   "source": "سجل الوقائع الرسمي UKMTO",
+   "accent": "warn"
   },
   {
-   "label": "الوقائع المؤهلة في التقرير",
+   "id": "qualifying-incidents",
+   "row": 1,
+   "title": "الوقائع المؤهلة",
+   "tag": "",
    "value": "4",
-   "note": "3 مؤكدة و1 مرجحة بعد فصل المتابعات والروايات غير المؤكدة",
-   "accent": "warn",
-   "delta": "+1",
-   "baseline": "عدد الوقائع المؤهلة في الإصدار السابق"
+   "detail": "1 مؤكدة + 1 مرجّحة + 2 غير مؤكدة مؤهلة",
+   "source": "web/zones/{date}.json · counter",
+   "accent": "warn"
   },
   {
-   "label": "روايات الألغام أو الناقلات غير المؤكدة",
+   "id": "unconfirmed-narratives",
+   "row": 1,
+   "title": "الروايات غير المؤكدة",
+   "tag": "تُذكر ولا تُحتسب",
    "value": "3",
-   "note": "تُذكر ولا تُحتسب هجمات مستقلة",
-   "accent": "warn",
-   "delta": "+3",
-   "baseline": "روايات غير مؤكدة في الإصدار السابق"
+   "detail": "3 روايات · منها 2 مؤهلة · تُذكر ولا تُحتسب",
+   "source": "web/zones/{date}.json · counter",
+   "accent": "warn"
   },
   {
-   "label": "وقائع بحرية جديدة مثبتة في Z2–Z4",
+   "id": "proven-zones",
+   "row": 1,
+   "title": "وقائع مثبتة",
+   "tag": "Z2–Z4",
    "value": "0",
-   "note": "لا تغيير مثبت داخل الفترة",
-   "accent": "flat",
-   "delta": "0",
-   "baseline": "القطاعات Z2–Z4 في الإصدار السابق"
+   "detail": "يظهر الصفر دائمًا",
+   "source": "web/zones/{date}.json · Z2–Z4",
+   "accent": "ok"
+  },
+  {
+   "id": "official-products",
+   "row": 2,
+   "title": "منتجات UKMTO وJMIC المرصودة",
+   "tag": "",
+   "value": "3",
+   "detail": "داخل نافذة التقرير · لا يُدّعى أنها جديدة",
+   "source": "feeds/feeds-{date}.json · العدّ الخام المنفصل",
+   "accent": "info"
+  },
+  {
+   "id": "latest-official",
+   "row": 2,
+   "title": "أحدث بلاغ رسمي",
+   "tag": "",
+   "value": "30 أكتوبر 2026",
+   "detail": "الساعة غير متاحة",
+   "source": "feeds/feeds-{date}.json · UKMTO",
+   "accent": "info"
+  },
+  {
+   "id": "fire-reports",
+   "row": 2,
+   "title": "بلاغات حريق أو اشتعال سفن",
+   "tag": "",
+   "value": "3",
+   "detail": "المؤكد: 0 · المرجّح: 1 · غير المؤكد: 2",
+   "source": "feeds/feeds-{date}.json · فصل الحالة",
+   "accent": "warn"
+  }
+ ],
+ "official_cards": [
+  {
+   "id": "imo-seafarer-deaths",
+   "title": "وفيات البحّارة",
+   "title_en": "Seafarer deaths",
+   "basis": "رسمي — قائمة IMO للوقائع المؤكدة",
+   "basis_en": "Official — IMO confirmed incidents list",
+   "source_label": "IMO — قائمة الوقائع المؤكدة",
+   "source_label_en": "IMO — confirmed incidents list",
+   "layers": {
+    "daily": {"label": "عدد اليوم", "label_en": "Today", "state": "undisclosed", "value": "لم يُعلن", "value_en": "Not disclosed", "source": "قائمة IMO الرسمية؛ لا وفاة مذكورة في وقائع اليوم", "source_en": "Official IMO list; no death disclosed for today's incidents"},
+    "cumulative": {"label": "المجموع منذ 28 فبراير 2026", "label_en": "Total since 28 February 2026", "value": "24", "value_en": "24", "source": "IMO — 24 وفاة بحّار مؤكدة", "source_en": "IMO — 24 confirmed seafarer deaths"},
+    "updated": {"label": "آخر تحديث للمصدر", "label_en": "Source last updated", "value": "30 أكتوبر 2026", "value_en": "30 October 2026", "source": "القائمة الرسمية كما حُفظت في 31 أكتوبر 2026", "source_en": "Official list saved on 31 October 2026"}
+   }
+  },
+  {
+   "id": "imo-transit-september-2026",
+   "title": "العبور اليومي عبر مضيق هرمز",
+   "title_en": "Daily transits through the Strait of Hormuz",
+   "basis": "للعلم العام",
+   "basis_en": "For public information",
+   "source_label": "IMO — بيانات العبور الرسمية",
+   "source_label_en": "IMO — official transit data",
+   "badges": ["للعلم العام", "آخر تحديث سبتمبر 2026"],
+   "badges_en": ["For public information", "Last updated September 2026"],
+   "constraint": "أوقفت المنظمة تجميع بيانات العبور اليومية",
+   "constraint_en": "IMO no longer compiles data on daily ship transits",
+   "layers": {
+    "daily": {"label": "عدد اليوم", "label_en": "Today", "state": "no_coverage", "value": "لا تغطية", "value_en": "No coverage", "source": "لا قراءة رسمية ليوم 31 أكتوبر 2026", "source_en": "No official reading for 31 October 2026"},
+    "cumulative": {"label": "المجموع منذ 28 فبراير 2026", "label_en": "Total since 28 February 2026", "state": "no_coverage", "value": "لا تغطية", "value_en": "No coverage", "source": "المنظمة أوقفت تجميع البيانات اليومية؛ لا يُحسب مجموع تراكمي", "source_en": "IMO stopped compiling daily data; no cumulative total is calculated"},
+    "updated": {"label": "آخر تحديث للمصدر", "label_en": "Source last updated", "value": "سبتمبر 2026", "value_en": "September 2026", "source": "الرسم الرسمي المتاح لشهر سبتمبر 2026", "source_en": "Official chart available for September 2026"}
+   },
+   "period": "سبتمبر 2026",
+   "period_en": "September 2026",
+   "average": "15.6",
+   "average_en": "15.6",
+   "high": "25.8 (23 سبتمبر)",
+   "high_en": "25.8 (23 September)",
+   "low": "8.0 (3 سبتمبر)",
+   "low_en": "8.0 (3 September)"
   }
  ],
  "map": {
@@ -374,6 +454,7 @@
    "confirmed": 1,
    "probable": 1,
    "unconfirmed_qualifying": 2,
+   "unconfirmed_total": 3,
    "excluded": 11,
    "nonspatial": 1
   },
@@ -458,5 +539,28 @@
   "Z2": "منخفض",
   "Z3": "منخفض",
   "Z4": "منخفض"
+ },
+ "hero_risk_patterns": [
+  "هجوم",
+  "حريق",
+  "ألغام"
+ ],
+ "hero_sources": {
+  "official_products": {
+   "value": 3,
+   "source": "feeds/feeds-2026-10-31.json: UKMTO/JMIC raw product count"
+  },
+  "latest_official": {
+   "value": "30 أكتوبر 2026",
+   "source": "feeds/feeds-2026-10-31.json: latest UKMTO item",
+   "time": "الساعة غير متاحة"
+  },
+  "fire": {
+   "value": 3,
+   "confirmed": 0,
+   "probable": 1,
+   "unconfirmed": 2,
+   "source": "feeds/feeds-2026-10-31.json: fire/ignition reports"
+  }
  }
 }

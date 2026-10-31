@@ -183,12 +183,21 @@ def outputs_hash(root, step, date):
     return out
 
 
+def entry_allows_progress(step, entry):
+    """تسمح بالاستمرار بعد إنجاز عادي أو تخطٍّ مسجّل لخطوة معطلة صراحة."""
+    if not entry:
+        return False
+    if entry.get("status") in ("done", "done_warn"):
+        return True
+    return bool(step.get("disabled")) and entry.get("status") == "skipped"
+
+
 def prior_ok(m, ledger, idx):
     for s in m["steps"][:idx]:
         if s.get("optional"):
             continue
         e = ledger.get(s["id"])
-        if not e or e["status"] not in ("done", "done_warn"):
+        if not entry_allows_progress(s, e):
             return s["id"]
     return None
 
@@ -203,13 +212,26 @@ def run(root, date, only_phase=None, redo=None):
         if only_phase and s.get("phase") != only_phase:
             continue
         e = ledger.get(s["id"])
-        if e and e["status"] in ("done", "done_warn") and s["id"] not in redo:
+        if e and entry_allows_progress(s, e) and s["id"] not in redo:
             continue
         blocker = prior_ok(m, ledger, i)
         if blocker:
             print(f"✘ لا يجوز تنفيذ {s['id']} قبل اكتمال {blocker}")
             return 2
         print(f"▶ {s['id']} — {s['title']}  [{s['kind']}]")
+        if s.get("disabled"):
+            reason = str(s.get("reason") or "خطوة معطلة صراحة").strip()
+            logdir = os.path.join(root, "logs/runbook", date)
+            os.makedirs(logdir, exist_ok=True)
+            logf = os.path.join(logdir, f"{s['id']}.log")
+            open(logf, "w", encoding="utf-8").write(
+                f"تخطٍّ آمن — لم يُنفَّذ الأمر: {reason}\n"
+                "الحالة: disabled/skipped · رمز الخروج التشغيلي: 0\n")
+            append(root, m, date, {"step": s["id"], "status": "skipped", "disabled": True,
+                                   "reason": reason, "rc": 0, "log": os.path.relpath(logf, root)})
+            print(f"  ⏭ skipped/disabled (رمز 0) — {reason} — لم يُنفَّذ الأمر")
+            ledger = read_ledger(root, m, date)
+            continue
         # وضع الاختبار المعزول (طلب فهد 2026-10-24، البند 9): خطوات النشر والإرسال
         # تُسجَّل فقط ولا تُنفَّذ — لا نشر ولا تلغرام في أي اختبار.
         dry_ids = {x.strip() for x in os.environ.get("RUNBOOK_DRY_STEPS", "").split(",") if x.strip()}
@@ -320,7 +342,7 @@ def gates_status(root, date):
         if s.get("phase") not in m.get("gate_phases", ["gates"]):
             continue
         e = ledger.get(s["id"])
-        if not e or e["status"] not in ("done", "done_warn"):
+        if not entry_allows_progress(s, e):
             pend.append(s["id"])
     if pend:
         print(f"✘ بوابات غير مكتملة في سجل {date}: {'، '.join(pend)}")
@@ -344,6 +366,8 @@ def gate_json(root, date, through=None):
             st, rc = "ok", 0
         elif e and e["status"] == "done_warn":
             st, rc = "warn", 1
+        elif e and e["status"] == "skipped" and s.get("disabled"):
+            st, rc = "skipped", 0
         else:
             st = "block"
             rc = 2
@@ -351,8 +375,10 @@ def gate_json(root, date, through=None):
             rc = e["rc"]
         if st == "block":
             blocked.append(name)
-        worst = max(worst, {"ok": 0, "warn": 1, "block": 2}[st])
-        steps.append({"step": name, "id": s["id"], "status": st, "exit_code": rc, "log": (e or {}).get("log")})
+        worst = max(worst, {"ok": 0, "warn": 1, "skipped": 0, "block": 2}[st])
+        steps.append({"step": name, "id": s["id"], "status": st, "exit_code": rc,
+                      "disabled": bool(s.get("disabled")), "reason": s.get("reason"),
+                      "log": (e or {}).get("log")})
         if through and s["id"] == through:
             break
     out = {"date": date, "status": {0: "ok", 1: "warn", 2: "block"}[worst], "exit_code": worst, "steps": steps,
@@ -626,9 +652,13 @@ def verify(root):
 # ───────────────────────── الكتيب ─────────────────────────
 def render_handbook(m):
     h = hashlib.sha256(json.dumps(m, ensure_ascii=False, sort_keys=True).encode()).hexdigest()[:16]
+    print_policy = m.get("print") or {}
+    print_state = "مفعّلة" if print_policy.get("enabled", True) else "معطّلة"
+    print_reason = f" — {print_policy.get('reason')}" if print_policy.get("reason") else ""
     L = ["# كتيب الإجراءات التشغيلية", "",
          f"<!-- مولَّد آليًا من runbook/runbook.json (بصمة {h}). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->", "",
          "لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.", "",
+         f"سياسة الطباعة: {print_state}{print_reason}.", "",
          "## الخطوات", "",
          "| # | الخطوة | المنفّذ | يقرأ | يكتب | شرط الإتمام | القواعد | الملفات والمجلدات المرتبطة | عند الفشل |",
          "|---|---|---|---|---|---|---|---|---|"]
@@ -636,7 +666,12 @@ def render_handbook(m):
         links = s.get("links", {})
         conds = "؛ ".join(f"{a['type']}:{a.get('path', ' '.join(a.get('command', [])))}" for a in s.get("assert", []))
         rel = "، ".join(links.get("files", []) + links.get("folders", []) + links.get("gates", []))
-        L.append(f"| {s['id']} | {s['title']}{' (اختيارية)' if s.get('optional') else ''} | {s['kind']} | "
+        state = ""
+        if s.get("optional"):
+            state += " (اختيارية)"
+        if s.get("disabled"):
+            state += f" (معطّلة: {s.get('reason', 'سبب غير مذكور')})"
+        L.append(f"| {s['id']} | {s['title']}{state} | {s['kind']} | "
                  f"{'، '.join(s.get('reads', []))} | {'، '.join(s.get('writes', []))} | {conds} | "
                  f"{'، '.join(links.get('rules', []))} | {rel} | {s.get('on_fail', 'stop')} |")
     L += ["", "## أقسام التقرير وارتباطاتها", "",

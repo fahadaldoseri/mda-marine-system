@@ -178,6 +178,7 @@ GET game/sharing/releases/<exact pushed sha>: 200 ok:true confirms registration,
 404 is absent/inaccessible/unconfirmed. preparation is sharing status; publish needs gamePublishReady:true.
 checking waits without rebuilding. gamePublishCheckUnavailable retries this read once, never save/push.
 gamePublishBlocker: required_secret_missing or publish_contract_missing need webdev.config repair.
+publish_config_invalid: repair the webdev.config field at gamePublishConfigIssue.path, then read back.
 game_backend_contract_missing: [backend recovery](game-backend.md#prepare-verify-and-recover).
 Other failures need diagnostics/source/config fixes before saving; report blockers.
 Sharing alone proves no readiness; absent sharing does not block a basic release.

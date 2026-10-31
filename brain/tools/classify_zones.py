@@ -216,6 +216,11 @@ def load_day(date: str) -> list[dict] | None:
     return data
 
 
+def is_unconfirmed_narrative(row: dict) -> bool:
+    """يميز الرواية غير المؤكدة عن كل نقل غير مؤكد أو سجل عدم وقوع."""
+    return row.get("confirmation") == "unconfirmed" and str(row.get("title", "")).startswith("رواية ")
+
+
 def classify_day(date: str, reg, scale, levels, ovr, *, carry: bool = True) -> dict:
     """يصنّف يومًا واحدًا. carry=False يمنع التعاود عند البحث عن رتبة سابقة."""
     events = load_day(date)
@@ -302,6 +307,7 @@ def classify_day(date: str, reg, scale, levels, ovr, *, carry: bool = True) -> d
         "confirmed": len({r["incident_group"] for r in rows if r["qualifying"] and r["confirmation"] == "confirmed"}),
         "probable": len({r["incident_group"] for r in rows if r["qualifying"] and r["confirmation"] == "probable"}),
         "unconfirmed_qualifying": len({r["incident_group"] for r in rows if r["qualifying"] and r["confirmation"] == "unconfirmed"}),
+        "unconfirmed_total": len({r["incident_group"] for r in rows if is_unconfirmed_narrative(r)}),
         "excluded": len([r for r in rows if not r["qualifying"] and not r["nonspatial"]]),
         "nonspatial": len([r for r in rows if r["nonspatial"]]),
     }

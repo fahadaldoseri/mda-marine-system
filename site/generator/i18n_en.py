@@ -121,6 +121,46 @@ def load_glossary() -> dict[str, str]:
         d = json.loads(p.read_text(encoding="utf-8"))
         gl = {norm(k): v for k, v in (d.get("entries") or {}).items()}
     gl.update(chrome_glossary())
+    # عناوين ووسوم hero_kpis تُرجَم من سجل البطاقات الحاكم، لا من جدول النص الرسمي.
+    registry_path = BRAIN / "appendices" / "card_registry.json"
+    if registry_path.is_file():
+        registry = json.loads(registry_path.read_text(encoding="utf-8"))
+        contract = registry.get("hero_kpis") or {}
+        for card in contract.get("cards") or []:
+            title, title_en = norm(card.get("title", "")), norm(card.get("title_en", ""))
+            if title and title_en:
+                gl[title] = title_en
+            tag, tag_en = norm(card.get("tag", "")), norm(card.get("tag_en", ""))
+            if tag and tag_en:
+                gl[tag] = tag_en
+            detail = card.get("detail") or {}
+            ar, en = norm(detail.get("ar", "")), norm(detail.get("en", ""))
+            if ar and en:
+                gl[ar] = en
+        for ar, en in zip(contract.get("risk_patterns") or [], contract.get("risk_patterns_en") or []):
+            if ar and en:
+                gl[norm(ar)] = en
+        official = registry.get("official_cards") or {}
+        component = official.get("page_component") or {}
+        ar_label, en_label = norm(component.get("aria_label", "")), norm(component.get("aria_label_en", ""))
+        if ar_label and en_label:
+            gl[ar_label] = en_label
+        for card in official.get("cards") or []:
+            for ar_key, en_key in (("title", "title_en"), ("basis", "basis_en"),
+                                   ("source_label", "source_label_en"), ("constraint", "constraint_en"),
+                                   ("period", "period_en"), ("average", "average_en"),
+                                   ("high", "high_en"), ("low", "low_en")):
+                ar, en = norm(card.get(ar_key, "")), norm(card.get(en_key, ""))
+                if ar and en:
+                    gl[ar] = en
+            for ar_badge, en_badge in zip(card.get("badges") or [], card.get("badges_en") or []):
+                if ar_badge and en_badge:
+                    gl[norm(ar_badge)] = en_badge
+            for layer in (card.get("layers") or {}).values():
+                for ar_key, en_key in (("label", "label_en"), ("value", "value_en"), ("source", "source_en")):
+                    ar, en = norm(layer.get(ar_key, "")), norm(layer.get(en_key, ""))
+                    if ar and en:
+                        gl[ar] = en
     return gl
 
 
