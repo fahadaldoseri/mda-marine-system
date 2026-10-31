@@ -7,14 +7,14 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from validators.check_card_counters import validate_card_documents  # noqa: E402
+from validators.check_card_counters import _counter, validate_card_documents  # noqa: E402
 
 
 AR_REPORT = """
 <html lang="ar"><body>
 <div class="sc-card">
   <div class="sc-row"><div class="sc-l">ما تغيّر</div><div class="sc-more">6 بنود <a href="/additions.html#sec-00" data-goto="ما تغيّر منذ التقرير السابق">التفاصيل</a></div></div>
-  <div class="sc-row"><div class="sc-l">التحذيرات والنشرات الرسمية</div><div class="sc-more">2 صفوف <a href="/reports/2026-10-31.html#sec-06" data-goto="التحذيرات والنشرات الرسمية">القسم الرسمي</a></div></div>
+  <div class="sc-row"><div class="sc-l">التحذيرات والنشرات الرسمية</div><div class="sc-more">تحذيران <a href="/reports/2026-10-31.html#sec-06" data-goto="التحذيرات والنشرات الرسمية">القسم الرسمي</a></div></div>
   <div class="sc-row"><div class="sc-l">ما يُراقب خلال 24–72 ساعة</div><div class="sc-more">5 بنود <a href="/additions.html#sec-04-sub-02" data-goto="علامات الإنذار المبكر 24–72 ساعة">المؤشرات الكاملة</a></div></div>
 </div>
 <section id="sec-06"><h2>التحذيرات والنشرات الرسمية</h2><table><thead><tr><th>الجهة</th><th>النص</th></tr></thead><tbody><tr><td>UKMTO</td><td>النص الرسمي الأول</td></tr><tr><td>JMIC</td><td>النص الرسمي الثاني</td></tr></tbody></table></section>
@@ -70,6 +70,33 @@ class CardCounterGateTests(unittest.TestCase):
         docs["ar_report"] = docs["ar_report"].replace("#sec-04-sub-02", "#sec-04", 1)
         errors = validate_card_documents(**docs)
         self.assertTrue(any("علامات الإنذار المبكر" in e and "مرسا" in e for e in errors), errors)
+
+    def test_negative_arabic_counter_grammar_fails_closed(self):
+        docs = self.docs()
+        docs["ar_report"] = docs["ar_report"].replace("تحذيران", "2 صفوف", 1)
+        errors = validate_card_documents(**docs)
+        self.assertTrue(any("صياغة" in e and "التحذيرات" in e for e in errors), errors)
+
+    def test_negative_arabic_card_latin_fails_closed(self):
+        docs = self.docs()
+        docs["ar_report"] = docs["ar_report"].replace("تحذيران <a", "تحذيران UKMTO <a", 1)
+        errors = validate_card_documents(**docs)
+        self.assertTrue(any("لاتينية" in e and "التحذيرات" in e for e in errors), errors)
+
+    def test_arabic_counter_forms_cover_zero_one_two_and_three_plus(self):
+        expected = {
+            "لا بنود": 0,
+            "بند واحد": 1,
+            "بندان": 2,
+            "3 بنود": 3,
+            "لا تحذيرات": 0,
+            "تحذير واحد": 1,
+            "تحذيران": 2,
+            "3 تحذيرات": 3,
+        }
+        for text, count in expected.items():
+            self.assertEqual(_counter(text + " · التفاصيل", "ar"), count, text)
+        self.assertIsNone(_counter("2 صفوف · التفاصيل", "ar"))
 
 
 if __name__ == "__main__":

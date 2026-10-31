@@ -172,12 +172,48 @@ def _section_by_title(root: Node, title: str) -> Node | None:
     return None
 
 
+def _arabic_counter(text: str) -> tuple[int, str] | None:
+    """Read only the approved Arabic counter forms and their noun class."""
+    value = _norm(text)
+    patterns = (
+        (r"(?:^|\s)لا\s+(بنود|تحذيرات)(?=\s|$|·)", 0),
+        (r"(?:^|\s)(بند|تحذير)\s+واحد(?=\s|$|·)", 1),
+        (r"(?:^|\s)(بندان|تحذيران)(?=\s|$|·)", 2),
+        (r"(?:^|\s)([3-9]\d*)\s+(بنود|تحذيرات)(?=\s|$|·)", None),
+    )
+    for pattern, fixed in patterns:
+        match = re.search(pattern, value)
+        if not match:
+            continue
+        if fixed in (0, 1):
+            noun = match.group(1)
+        elif fixed is not None:
+            noun = "بنود" if match.group(1) == "بندان" else match.group(1)
+        else:
+            noun = match.group(2)
+        if noun in {"بند", "بندان", "بنود"}:
+            kind = "items"
+        elif noun in {"تحذير", "تحذيران", "تحذيرات"}:
+            kind = "warnings"
+        else:
+            return None
+        return (fixed if fixed is not None else int(match.group(1)), kind)
+    return None
+
+
 def _counter(text: str, lang: str) -> int | None:
     if lang == "en":
         m = re.search(r"\b(\d+)\s+(?:items?|rows?)\b", _norm(text), re.I)
-    else:
-        m = re.search(r"(?:^|\s)(\d+)\s+(?:بندًا|بنود|بند|صفًا|صفوف|صف)\b", _norm(text))
-    return int(m.group(1)) if m else None
+        return int(m.group(1)) if m else None
+    parsed = _arabic_counter(text)
+    return parsed[0] if parsed else None
+
+
+def _counter_kind(text: str, lang: str) -> str | None:
+    if lang == "en":
+        return None
+    parsed = _arabic_counter(text)
+    return parsed[1] if parsed else None
 
 
 def _card_rows(root: Node):
@@ -195,6 +231,8 @@ def _card_rows(root: Node):
             "label": _norm(labels[0].text()) if labels else "",
             "more": _norm(more[0].text()) if more else "",
             "count": _counter(more[0].text() if more else "", _lang(root)),
+            "counter_kind": _counter_kind(more[0].text() if more else "", _lang(root)),
+            "text": _norm(row.text()),
             "href": (links[0].attrs.get("href") or "") if links else "",
             "goto": (links[0].attrs.get("data-goto") or "") if links else "",
         })
@@ -252,6 +290,12 @@ def validate_one(report_html: str, additions_html: str, *, ar_report_html: str |
         seen.add(label)
         if row["count"] is None:
             errors.append(f"{lang}: عداد {label} غير مقروء")
+        if lang != "en":
+            expected_kind = "warnings" if key == "warnings" else "items"
+            if row["counter_kind"] != expected_kind:
+                errors.append(f"{lang}: صياغة عداد {label} غير مطابقة للعدد العربي المعتمد")
+            if re.search(r"[A-Za-z]+", row["text"]):
+                errors.append(f"{lang}: نص بحروف لاتينية متصلة داخل صف {label}")
         href = row["href"]
         if "#" not in href:
             errors.append(f"{lang}: رابط {label} بلا مرساة: {href}")

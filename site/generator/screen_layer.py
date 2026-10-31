@@ -33,6 +33,63 @@ def first_sentence(text: str) -> str:
     return t[: m.start()].strip() if m else t
 
 
+_CARD_ARABIC_EXACT = (
+    (
+        "Attack:UKMTO has received a report of an incident 40NM south of Lavan Island,…",
+        "أفادت الجهة البحرية البريطانية بتلقي بلاغ عن واقعة على بُعد 40 ميلًا بحريًا جنوب جزيرة لافان.",
+    ),
+    (
+        "Combined Task Force 151 concludes counter-piracy Operation Tidal Wave 2",
+        "اختتمت القوة البحرية المشتركة 151 عملية مكافحة القرصنة «الموجة المدّية 2».",
+    ),
+    (
+        "Combined Task Force 151 concludes counter-piracy Operation Tidal Wave",
+        "اختتمت القوة البحرية المشتركة 151 عملية مكافحة القرصنة «الموجة المدّية».",
+    ),
+)
+_CARD_ARABIC_TERMS = (
+    (r"(?<![A-Za-z])UKMTO(?![A-Za-z])", "مركز التجارة البحرية البريطانية"),
+    (r"(?<![A-Za-z])JMIC(?![A-Za-z])", "مركز المعلومات البحرية المشترك"),
+    (r"(?<![A-Za-z])IMO(?![A-Za-z])", "المنظمة البحرية الدولية"),
+    (r"(?<![A-Za-z])AIS(?![A-Za-z])", "نظام التعريف الآلي"),
+    (r"(?<![A-Za-z])VHF(?![A-Za-z])", "الاتصالات اللاسلكية البحرية"),
+    (r"(?<![A-Za-z])Z1(?![A-Za-z])", "القطاع الأول"),
+    (r"(?<![A-Za-z])Z2(?![A-Za-z])", "القطاع الثاني"),
+    (r"(?<![A-Za-z])Z3(?![A-Za-z])", "القطاع الثالث"),
+    (r"(?<![A-Za-z])Z4(?![A-Za-z])", "القطاع الرابع"),
+)
+
+
+def _arabic_card_text(text: str) -> str:
+    """Translate meaning for the Arabic card without changing the official table."""
+    value = str(text or "").strip()
+    for source, target in _CARD_ARABIC_EXACT:
+        value = value.replace(source, target)
+    for pattern, target in _CARD_ARABIC_TERMS:
+        value = re.sub(pattern, target, value)
+    return value
+
+
+def _arabic_count(count: int, noun: str) -> str:
+    """Return a grammatically valid counter for zero, one, two, and 3+."""
+    count = max(0, int(count))
+    if noun == "warnings":
+        if count == 0:
+            return "لا تحذيرات"
+        if count == 1:
+            return "تحذير واحد"
+        if count == 2:
+            return "تحذيران"
+        return f"{count} تحذيرات"
+    if count == 0:
+        return "لا بنود"
+    if count == 1:
+        return "بند واحد"
+    if count == 2:
+        return "بندان"
+    return f"{count} بنود"
+
+
 def _list_items(value):
     if isinstance(value, list):  # قائمة صريحة من الملف
         return [str(x).strip() for x in value if str(x).strip()]
@@ -131,7 +188,7 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
     def _gist(items, limit=2, width=64):
         out = []
         for raw in items[:limit]:
-            t = re.split(r"[.،؛]", str(raw).strip())[0].strip()
+            t = re.split(r"[.،؛]", _arabic_card_text(str(raw).strip()))[0].strip()
             t = re.sub(r"\s+", " ", t)
             if len(t) > width:
                 t = t[:width].rsplit(" ", 1)[0] + "…"
@@ -151,19 +208,19 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
     rows.append(
         '<div class="sc-row"><div class="sc-l">ما تغيّر</div>'
         f'<div class="sc-v"><p class="sc-gist">{inline(_gist(changes, limit=2))}</p>'
-        f'<p class="sc-more">{changed_count} بنود · '
+        f'<p class="sc-more">{_arabic_count(changed_count, "items")} · '
         f'<a href="{esc(changed_href)}" data-goto="{esc(changed_goto)}" data-alt="{esc(changed_href)}">التفاصيل</a></p></div></div>')
 
-    warning_texts = [str(x).strip() for x in (targets.get("warning_texts") or []) if str(x).strip()]
+    warning_texts = [_arabic_card_text(x) for x in (targets.get("warning_texts") or []) if str(x).strip()]
     if not warning_texts:
-        warning_texts = ["UKMTO / JMIC"]
+        warning_texts = ["المركز البريطاني / المركز البحري المشترك"]
     warning_count = int(targets.get("warning_count") or len(warning_texts))
     warning_href = targets.get("warning_href") or f"/reports/{report_date}.html#sec-06"
     warning_gist = " · ".join(warning_texts)
     rows.append(
         '<div class="sc-row"><div class="sc-l">التحذيرات والنشرات الرسمية</div>'
         f'<div class="sc-v"><p class="sc-gist">{inline(warning_gist)}</p>'
-        f'<p class="sc-more">{warning_count} صفوف · '
+        f'<p class="sc-more">{_arabic_count(warning_count, "warnings")} · '
         f'<a href="{esc(warning_href)}" data-goto="التحذيرات والنشرات الرسمية" data-alt="{esc(warning_href)}">القسم الرسمي</a></p></div></div>')
 
     watch = _list_items(dc.get("watch"))
@@ -173,7 +230,7 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
     rows.append(
         '<div class="sc-row"><div class="sc-l">ما يُراقب خلال 24–72 ساعة</div>'
         f'<div class="sc-v"><p class="sc-gist">{inline(_gist(watch, limit=2))}</p>'
-        f'<p class="sc-more">{watch_count} بنود · '
+        f'<p class="sc-more">{_arabic_count(watch_count, "items")} · '
         f'<a href="{esc(watch_href)}" data-goto="{esc(watch_title)}" data-alt="{esc(watch_href)}">المؤشرات الكاملة</a></p></div></div>')
     key = ""
     if rkey_html:

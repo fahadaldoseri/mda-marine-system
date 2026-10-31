@@ -49,7 +49,7 @@ MONTHS = {
 COUNT_WORD = {"بندًا": "items", "بنود": "items", "بند": "item", "واقعة": "incidents", "وقائع": "incidents",
               "مصدرًا": "sources", "مصادر": "sources", "سفينة": "vessel", "سفن": "vessels",
               "يومًا": "days", "أيام": "days", "رمزًا": "codes", "رموز": "codes", "حدثًا": "events",
-              "أحداث": "events", "خريطة": "map", "خرائط": "maps"}
+              "أحداث": "events", "تحذيرات": "rows", "خريطة": "map", "خرائط": "maps"}
 COUNTER = re.compile(r"^(\d+)\s+(" + "|".join(COUNT_WORD) + r")\b\s*(·?)$")
 
 
@@ -132,6 +132,15 @@ def localize_patterns(s: str) -> str | None:
     m = re.fullmatch(r"(" + "|".join(MONTHS) + r")\s+(\d{4})", n)
     if m:
         return f"{MONTHS[m.group(1)]} {m.group(2)}"
+    m = re.fullmatch(r"لا\s+(بنود|تحذيرات)\s*(·?)", n)
+    if m:
+        return f"0 {'items' if m.group(1) == 'بنود' else 'rows'}" + (f" {m.group(2)}" if m.group(2) else "")
+    m = re.fullmatch(r"(بند|تحذير)\s+واحد\s*(·?)", n)
+    if m:
+        return f"1 {'item' if m.group(1) == 'بند' else 'row'}" + (f" {m.group(2)}" if m.group(2) else "")
+    m = re.fullmatch(r"(بندان|تحذيران)\s*(·?)", n)
+    if m:
+        return f"2 {'items' if m.group(1) == 'بندان' else 'rows'}" + (f" {m.group(2)}" if m.group(2) else "")
     m = COUNTER.match(n)
     if m:
         return f"{m.group(1)} {COUNT_WORD[m.group(2)]}" + (f" {m.group(3)}" if m.group(3) else "")
