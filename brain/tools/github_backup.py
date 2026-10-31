@@ -28,6 +28,12 @@ SKILLS_SRC = (Path(os.environ["SKILLS_DIR"]) if os.environ.get("SKILLS_DIR")
 # مجلدات لا تُنقل (نسبةً إلى جذر كل شجرة)
 BRAIN_SKIP_DIRS = {"__pycache__", ".git", "shots", "node_modules", ".pytest_cache", "backup-repo"}
 SITE_SKIP_DIRS = {"__pycache__", ".git", "brain-backup", "dist", "shots", "node_modules", ".pytest_cache"}
+# أرشيفات التطبيق مؤقتة وليست أصولًا؛ لا تُعاد إلى المرآة.
+SKIP_DIR_GLOBS = {
+    "brain": ("logs/apply-*",),
+    "site": (),
+    "skills": (),
+}
 # ملفات لا تُنقل (نسبةً إلى جذر كل شجرة)
 BRAIN_SKIP_FILES = {"state/webhook-secret.txt", ".env", ".env.local"}
 SITE_SKIP_FILES = {".env", ".env.local", ".env.production"}
@@ -116,11 +122,13 @@ def is_code(prefix: str, rel: str) -> bool:
     return code_paths.classify(f"{prefix}/{rel}", SPEC) == "code"
 
 
-def copy_tree(src: Path, dst: Path, prefix: str, skip_dirs: set[str], skip_files: set[str]):
+def copy_tree(src: Path, dst: Path, prefix: str, skip_dirs: set[str], skip_files: set[str], skip_dir_globs=()):
     import fnmatch
     for dp, dns, fns in os.walk(src):
-        dns[:] = [d for d in dns if d not in skip_dirs]
         rel_dir = Path(dp).relative_to(src)
+        dns[:] = [d for d in dns if d not in skip_dirs and not any(
+            fnmatch.fnmatch((rel_dir / d).as_posix(), g) for g in skip_dir_globs
+        )]
         for d in list(dns):
             if (Path(dp) / d).is_symlink():
                 _mirror_symlink(Path(dp) / d, dst / rel_dir / d, prefix)
@@ -200,14 +208,14 @@ def main():
                     continue   # README و.gitignore و docs: GitHub مصدرها
             dst.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(src, dst)
-    copy_tree(BRAIN, OUT / "brain", "brain", BRAIN_SKIP_DIRS, BRAIN_SKIP_FILES)
-    copy_tree(SITE, OUT / "site", "site", SITE_SKIP_DIRS, SITE_SKIP_FILES)
+    copy_tree(BRAIN, OUT / "brain", "brain", BRAIN_SKIP_DIRS, BRAIN_SKIP_FILES, SKIP_DIR_GLOBS["brain"])
+    copy_tree(SITE, OUT / "site", "site", SITE_SKIP_DIRS, SITE_SKIP_FILES, SKIP_DIR_GLOBS["site"])
     # مهارات المشروع — تُنسخ مع النظام ليبقى المرجع حديثًا على أي جهاز.
     # القائمة تُقرأ من restore_skills.sh (مصدر واحد) لا من قائمة ثانية هنا (ك-150).
     for sk in project_skills():
         src = SKILLS_SRC / sk
         if src.exists():
-            copy_tree(src, OUT / "skills" / sk, "skills", {"__pycache__", ".git"}, set())
+            copy_tree(src, OUT / "skills" / sk, "skills", {"__pycache__", ".git"}, set(), SKIP_DIR_GLOBS["skills"])
     sanitize_all()
 
     files = sorted(p for p in OUT.rglob("*") if p.is_file() and ".git/" not in p.as_posix())

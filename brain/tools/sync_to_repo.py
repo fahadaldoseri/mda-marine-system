@@ -13,7 +13,7 @@
 مرآتا الموقع والمهارات تنحرفان كل يوم ويظهر «انحراف مانع» في المقيّم. القاعدة الآن:
 كل جذر يقيسه مقيّم التماثل (brain · site · skills) له مزامنة في الأمر نفسه.
 """
-import argparse, filecmp, shutil
+import argparse, filecmp, fnmatch, shutil
 from pathlib import Path
 
 EXCLUDE_DIRS = {'.git', 'secrets', 'state', '__pycache__', 'shots', '.pytest_cache'}
@@ -23,24 +23,31 @@ JUNK_FILES = {'.DS_Store', '.skill_versions.json'}   # ك-271: يُستثنى ف
 DELETE_MAX = 20          # سقف الحذف في التشغيل العادي
 SITE_EXCLUDE_DIRS = {'.git', '__pycache__', 'node_modules', '.venv', 'logs'}
 SKILLS_EXCLUDE_DIRS = {'.git', '__pycache__'}
+BRAIN_EXCLUDE_DIR_GLOBS = ('logs/apply-*',)
 
 
-def skip(p: Path, dirs: set, files: set = EXCLUDE_FILES, globs=EXCLUDE_GLOBS) -> bool:
+def skip(p: Path, dirs: set, files: set = EXCLUDE_FILES, globs=EXCLUDE_GLOBS,
+         dir_globs=(), root: Path | None = None) -> bool:
     """استثناء بالمسار لا بالاسم فقط: أي مجلد محظور في أي مستوى يُستثنى بمحتواه."""
-    if any(part in dirs for part in p.parts):
+    rel = p.relative_to(root) if root is not None else p
+    if any(part in dirs for part in rel.parts):
+        return True
+    parts = rel.parts
+    if any(fnmatch.fnmatch(Path(*parts[:i]).as_posix(), g)
+           for i in range(1, len(parts) + 1) for g in dir_globs):
         return True
     if p.is_dir():
         return False
-    if p.name in files or p.name in JUNK_FILES:
+    if rel.name in files or rel.name in JUNK_FILES:
         return True
-    return any(p.match(g) for g in globs)
+    return any(rel.match(g) for g in globs)
 
 
-def plan(src: Path, dst: Path, dirs: set, files: set, globs) -> dict:
+def plan(src: Path, dst: Path, dirs: set, files: set, globs, dir_globs=()) -> dict:
     """يحسب الخطة بلا تنفيذ: جديد · محدَّث · محذوف (قائمة المسارات)."""
     add, upd, dele = [], [], []
     for p in src.rglob('*'):
-        if skip(p, dirs, files, globs) or p.is_dir():
+        if skip(p, dirs, files, globs, dir_globs, src) or p.is_dir():
             continue
         rel = p.relative_to(src); t = dst / rel
         if not t.exists():
@@ -48,7 +55,7 @@ def plan(src: Path, dst: Path, dirs: set, files: set, globs) -> dict:
         elif not filecmp.cmp(p, t, shallow=False):
             upd.append(rel)
     for t in dst.rglob('*'):
-        if skip(t, dirs, files, globs) or t.is_dir():
+        if skip(t, dirs, files, globs, dir_globs, dst) or t.is_dir():
             continue
         if not (src / t.relative_to(dst)).exists():
             dele.append(t.relative_to(dst))
@@ -62,7 +69,7 @@ def run_pair(label: str, src: Path, dst: Path, a) -> int:
     if not dst.is_dir():
         raise SystemExit(f'✘ SYNC_GUARD: هدف غير موجود {dst}')
 
-    p = plan(src, dst, a.exclude_dirs, a.exclude_files, a.exclude_globs)
+    p = plan(src, dst, a.exclude_dirs, a.exclude_files, a.exclude_globs, a.exclude_dir_globs)
     top_src = {x.name for x in src.iterdir()}
     outside = [d for d in p['del'] if d.parts and d.parts[0] not in top_src]
 
@@ -107,12 +114,14 @@ def main():
     a = ap.parse_args()
 
     a.exclude_dirs, a.exclude_files, a.exclude_globs = EXCLUDE_DIRS, EXCLUDE_FILES, EXCLUDE_GLOBS
+    a.exclude_dir_globs = BRAIN_EXCLUDE_DIR_GLOBS
     rc = run_pair('brain', Path(a.brain), Path(a.repo), a)
 
     if a.site and a.repo_site:
         a.exclude_dirs = SITE_EXCLUDE_DIRS
         a.exclude_files = set()
         a.exclude_globs = ('*.pyc', '*.tmp')
+        a.exclude_dir_globs = ()
         rc = max(rc, run_pair('site', Path(a.site), Path(a.repo_site), a))
     elif bool(a.site) != bool(a.repo_site):
         print('  ✘ SYNC_GUARD: يجب تمرير --site و--repo-site معًا'); return 2
@@ -121,6 +130,7 @@ def main():
         a.exclude_dirs = SKILLS_EXCLUDE_DIRS
         a.exclude_files = set()
         a.exclude_globs = ('*.pyc', '*.tmp')
+        a.exclude_dir_globs = ()
         rc = max(rc, run_pair('skills', Path(a.skills), Path(a.repo_skills), a))
     elif bool(a.skills) != bool(a.repo_skills):
         print('  ✘ SYNC_GUARD: يجب تمرير --skills و--repo-skills معًا'); return 2
