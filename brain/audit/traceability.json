@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-31T09:01:52.195970+00:00",
+  "generated_at": "2026-10-31T12:02:58.295392+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -2914,6 +2914,55 @@
       "lesson_id": "ك-381",
       "barrier_id": "B-8add16ce",
       "run_evidence": "3 محليًا و6714 في المرآة مع النتيجة مطابق، واختبار runtime guard أعاد 2/2 وفحص المهارات خرج 0"
+    },
+    {
+      "fault_id": "ك-382",
+      "state": "مغلق",
+      "lesson_id": "ك-382",
+      "barrier_id": "B-672c4a3f",
+      "run_evidence": "_counters.py --date 2026-10-31 --dist-root /home/ubuntu/seawatch/dist خرج 0 · بطاقة الفروع الثلاثة م"
+    },
+    {
+      "fault_id": "ك-383",
+      "state": "مغلق",
+      "lesson_id": "ك-383",
+      "barrier_id": "B-09bda309",
+      "run_evidence": "قيق الحي أظهر 3 صفوف بطاقة و0 سلاسل لاتينية في الصفوف، وبوابة العدّاد خرج 0"
+    },
+    {
+      "fault_id": "ك-384",
+      "state": "مغلق",
+      "lesson_id": "ك-384",
+      "barrier_id": "B-54c49ef6",
+      "run_evidence": "ّق: إعادة G045 غطت 8 من 8 أسطح و0 سطح غير مغطى و0 مانع، ونتيجة الجولة خرج 0"
+    },
+    {
+      "fault_id": "ك-385",
+      "state": "مغلق",
+      "lesson_id": "ك-385",
+      "barrier_id": "B-1e7f5651",
+      "run_evidence": "مد لا مسارًا تفاعليًا مطبَّق: bash tools/github_backup.sh --help أعاد رمز 2 مع usage، وتشغيل D005 وD"
+    },
+    {
+      "fault_id": "ك-386",
+      "state": "مغلق",
+      "lesson_id": "ك-386",
+      "barrier_id": "B-fe7e316b",
+      "run_evidence": "إنجليزي الرسمي دون تعديل مطبَّق: check_en_parity.py --date 2026-10-31 خرج 0، والمدقق المباشر خرج 0، "
+    },
+    {
+      "fault_id": "ك-387",
+      "state": "مغلق",
+      "lesson_id": "ك-387",
+      "barrier_id": "B-5b9e5bb0",
+      "run_evidence": "نشر: branch=main وHEAD=origin/main → MAIN_PREPUBLISH_GUARD=0، ثم D010 خرج 0 ونُشر الالتزام 4b3e2e0"
+    },
+    {
+      "fault_id": "ك-388",
+      "state": "مغلق",
+      "lesson_id": "ك-388",
+      "barrier_id": "B-582caf71",
+      "run_evidence": "005 أثبت مدخل EN حاضرًا بخطوط 191 و51 صفًا، وB010 وcheck_en_parity.py خرج 0، مع عدم بقاء نص عربي في "
     }
   ]
 }

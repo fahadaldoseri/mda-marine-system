@@ -1,0 +1,38 @@
+{
+ "date": "--help",
+ "checked_at": "2026-10-31T11:56:40Z",
+ "release_paths": [
+  "/",
+  "/reports/--help.html",
+  "/reports/pdf/--help.pdf",
+  "/sources.html"
+ ],
+ "propagation": {
+  "attempt": 6,
+  "elapsed_seconds": 322,
+  "max_wait_seconds": 225
+ },
+ "paths": {
+  "/": {
+   "code": 200,
+   "bytes": 49041
+  },
+  "/reports/--help.html": {
+   "code": 404,
+   "bytes": 0
+  },
+  "/reports/pdf/--help.pdf": {
+   "code": 404,
+   "bytes": 0
+  },
+  "/sources.html": {
+   "code": 200,
+   "bytes": 129911
+  }
+ },
+ "status": "failed",
+ "bad": [
+  "/reports/--help.html",
+  "/reports/pdf/--help.pdf"
+ ]
+}
