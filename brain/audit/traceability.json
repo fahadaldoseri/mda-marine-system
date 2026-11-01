@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-01T18:52:49.965690+00:00",
+  "generated_at": "2026-11-01T21:07:17.537402+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -3299,6 +3299,34 @@
       "lesson_id": "ك-436",
       "barrier_id": "B-cbb91dc9",
       "run_evidence": "epo.py` يرفض العمل على `main` بلا `--allow-main` حارس الفرع: على main خرج 2 برسالة BRANCH_GUARD · عل"
+    },
+    {
+      "fault_id": "ك-437",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-437",
+      "barrier_id": "B-5de48292",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-438",
+      "state": "بانتظار التحقق",
+      "lesson_id": null,
+      "barrier_id": "B-5313d57b",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-439",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-439",
+      "barrier_id": "B-6c3973d3",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-440",
+      "state": "بانتظار التحقق",
+      "lesson_id": null,
+      "barrier_id": "B-0d5cfc04",
+      "run_evidence": null
     }
   ]
 }
