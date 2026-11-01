@@ -1072,7 +1072,7 @@
    "command": [
     "bash",
     "-lc",
-    "B=\"$PWD\"; export B SITE; python3 tools/merge_ledger_daily.py; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; python3 \"$B/tools/mark_components.py\" --date \"$D\" --component ledger_merge; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; python3 \"$B/tools/repair_ledger_prose.py\" --check; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; python3 \"$B/tools/classify_zones.py\" --date \"$D\" --write; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; exit ${w:-0}"
+    "B=\"$PWD\"; export B SITE; python3 tools/merge_ledger_daily.py; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; python3 \"$B/tools/mark_components.py\" --date \"$D\" --component ledger_merge; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; python3 \"$B/tools/repair_ledger_prose.py\" --check; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; python3 \"$B/tools/classify_zones.py\" --date \"$D\" --write; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; exit ${w:-0} ; python3 \"$B/tools/ledger_totals.py\" --date \"$D\" --write; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi"
    ],
    "ok_rc": [
     0
@@ -1087,7 +1087,16 @@
     "appendices/zone-registry.json",
     "appendices/zone-overrides.json",
     "appendices/threat-scale.json"
-   ]
+   ],
+   "declares": {
+    "reads": [
+     "cumulative-2026/daily/*.json",
+     "tools/ledger_totals.py"
+    ],
+    "writes": [
+     "web/kpis-totals/{date}.json"
+    ]
+   }
   },
   {
    "id": "S071",
@@ -1507,7 +1516,12 @@
     0
    ],
    "warn_rc": [],
-   "gate_title": "اختبارات البوابات (tests)"
+   "gate_title": "اختبارات البوابات (tests)",
+   "declares": {
+    "reads": [
+     "tests/test_kpi_layers.py"
+    ]
+   }
   },
   {
    "id": "G002",
@@ -3101,12 +3115,146 @@
    "command": [
     "bash",
     "-lc",
-    "B=\"$PWD\"; export B SITE; cd \"$SITE\" && python3 generator/sync_from_brain.py --date {date} && python3 generator/build_site.py && python3 \"$B/validators/check_card_counters.py\" --date \"$D\" --dist-root \"$SITE/dist\"; rc=$?; exit $rc"
+    "B=\"$PWD\"; export B SITE; cd \"$SITE\" && python3 generator/sync_from_brain.py --date {date} && python3 generator/build_site.py && python3 \"$B/validators/check_card_counters.py\" --date \"$D\" --dist-root \"$SITE/dist\" && python3 \"$B/validators/check_kpi_layers.py\" --date \"$D\" --dist-root \"$SITE/dist\" --brain \"$B\"; rc=$?; exit $rc"
    ],
    "ok_rc": [
     0
    ],
-   "warn_rc": []
+   "warn_rc": [],
+   "declares": {
+    "reads": [
+     "appendices/card_registry.json",
+     "validators/check_kpi_layers.py",
+     "web/kpis-totals/{date}.json"
+    ],
+    "writes": [
+     "dist/**"
+    ]
+   }
+  },
+  {
+   "id": "G049",
+   "title": "شريط نسب القطاعات بعد البناء (فشل مغلق)",
+   "kind": "script",
+   "phase": "build",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "B=\"$PWD\"; export B SITE; python3 \"$B/validators/check_zone_strip.py\" --date \"$D\" --brain \"$B\" --site \"$SITE\"; rc=$?; exit $rc"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف4 — شريط نسب القطاعات"
+    ],
+    "files": [
+     "validators/check_zone_strip.py",
+     "validators/check_zone_strip.py",
+     "web/zones/{date}.json",
+     "{site}/sources/zones/{date}.json",
+     "{site}/dist/reports/{date}.html"
+    ],
+    "gates": [],
+    "tests": [
+     "tests/test_zone_strip.py"
+    ]
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; export B SITE; python3 \"$B/validators/check_zone_strip.py\" --date \"$D\" --brain \"$B\" --site \"$SITE\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [],
+   "reads": [
+    "validators/check_zone_strip.py",
+    "web/zones/{date}.json",
+    "{site}/sources/zones/{date}.json",
+    "{site}/dist/reports/{date}.html"
+   ],
+   "writes": [
+    "logs/runbook/{date}/G049.log"
+   ]
+  },
+  {
+   "id": "G050",
+   "title": "سطح سجل الأحداث والأقسام المنقولة بعد البناء (فشل مغلق)",
+   "kind": "script",
+   "phase": "build",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "B=\"$PWD\"; export B SITE; python3 \"$B/validators/check_daily_event_surface.py\" --date \"$D\" --brain \"$B\" --site \"$SITE\"; rc=$?; exit $rc"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف4 — سياسة الأسطح وسجل الأحداث"
+    ],
+    "files": [
+     "validators/check_daily_event_surface.py",
+     "validators/check_daily_event_surface.py",
+     "appendices/report-sections-policy.json",
+     "{site}/sources/daily-events/{date}.json",
+     "{site}/dist/reports/{date}.html",
+     "{site}/dist/additions.html",
+     "evidence/gate-fix-2026-10-31/before/card-tests.out.txt",
+     "evidence/gate-fix-2026-10-31/before/cards.contract.txt",
+     "evidence/gate-fix-2026-10-31/before/cards.out.txt",
+     "evidence/gate-fix-2026-10-31/before/daily.contract.txt",
+     "evidence/gate-fix-2026-10-31/before/daily.out.txt",
+     "evidence/gate-fix-2026-10-31/before/portable.contract.txt",
+     "evidence/gate-fix-2026-10-31/before/portable.help.txt",
+     "evidence/gate-fix-2026-10-31/before/surface.out.txt",
+     "evidence/gate-fix-2026-10-31/red-green-card-focused.out.txt",
+     "evidence/gate-fix-2026-10-31/red-green-card-policy.out.txt",
+     "evidence/gate-fix-2026-10-31/red-green-card.out.txt",
+     "evidence/gate-fix-2026-10-31/red-green-daily.out.txt",
+     "evidence/gate-fix-2026-10-31/red-green-surface.out.txt",
+     "evidence/gate-fix-2026-10-31/red-green-zone.out.txt",
+     "evidence/gate-fix-2026-10-31/red/cards.out.txt",
+     "evidence/gate-fix-2026-10-31/red/daily.out.txt",
+     "evidence/gate-fix-2026-10-31/red/surface.out.txt",
+     "evidence/gate-fix-2026-10-31/red/zone.out.txt",
+     "evidence/gate-fix-2026-10-31/zone-actual.out.txt"
+    ],
+    "gates": [],
+    "tests": [
+     "{site}/tests/test_2026_10_31_surface_contract.py",
+     "tests/test_daily_event_surface.py"
+    ]
+   },
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; export B SITE; python3 \"$B/validators/check_daily_event_surface.py\" --date \"$D\" --brain \"$B\" --site \"$SITE\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [],
+   "reads": [
+    "validators/check_daily_event_surface.py",
+    "appendices/report-sections-policy.json",
+    "{site}/sources/daily-events/{date}.json",
+    "{site}/dist/reports/{date}.html",
+    "{site}/dist/additions.html"
+   ],
+   "writes": [
+    "logs/runbook/{date}/G050.log"
+   ]
   },
   {
    "id": "B020",

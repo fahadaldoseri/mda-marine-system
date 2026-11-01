@@ -311,7 +311,7 @@ def classify_day(date: str, reg, scale, levels, ovr, *, carry: bool = True) -> d
         "excluded": len([r for r in rows if not r["qualifying"] and not r["nonspatial"]]),
         "nonspatial": len([r for r in rows if r["nonspatial"]]),
     }
-    top_basis = f"أعلى قطاع: {overall['name']} — {overall['basis']}"
+    top_basis = f"أعلى نطاق: {overall['name']} — {overall['basis']}"
     return {
         "date": date,
         "window": WINDOW_LABEL,
@@ -428,7 +428,7 @@ def main() -> int:
                 dc = meta.setdefault("decision_card", {})
                 dc["risk"] = lv
                 dc["risk_kind"] = tok
-                dc["risk_ref"] = "بطاقة الترويسة: مستوى التهديد حسب القطاعات"
+                dc["risk_ref"] = "بطاقة الترويسة: مستوى التهديد"
                 meta_p.write_text(json.dumps(meta, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
                 print(f"   زُوّد ملف الواجهة بالمستوى المشتق: {lv} ({tok})")
         if args.show or not (args.write or args.json):

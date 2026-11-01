@@ -78,9 +78,27 @@ def lexicon_variants(word: str) -> set[str]:
 
 def strip_markup(text: str) -> str:
     text = re.sub(r"<!--.*?-->", " ", text, flags=re.S)
+    # ك-407: كانت البوابة تقيس وسوم النمط والسكربت كنصّ مقروء، فأنتجت مئات المخالفات الكاذبة
+    # (مثل «مسافة قبل علامة ترقيم» داخل محددات CSS). القياس الآن على النص المرئي وحده.
+    text = re.sub(r"<(style|script)\b[^>]*>.*?</\1>", " ", text, flags=re.S | re.I)
+    # ك-409: كان نزع الوسوم يُدخل فراغًا مكان كل وسم، فيُنشئ «مسافة قبل علامة ترقيم» كاذبة
+    # («<span>UTC</span>.» تصير «UTC .»). الفراغ يُضاف عند حدود الكتل وحدها، أما الوسوم
+    # السطرية فتُنزع بلا فراغ، فيُقاس ما يراه القارئ فعلًا.
+    text = re.sub(
+        r"</?(?:p|div|br|li|ul|ol|tr|td|th|table|h[1-6]|section|article|header|footer"
+        r"|main|aside|nav|figure|figcaption|blockquote|dl|dt|dd|hr)\b[^>]*>",
+        " ", text, flags=re.I,
+    )
+    text = re.sub(r"<[^>]{1,400}>", "", text)
+    text = (text.replace("&nbsp;", " ").replace("&amp;", "&").replace("&lt;", "<")
+                .replace("&gt;", ">").replace("&quot;", '"').replace("&#39;", "'"))
     text = re.sub(r"`[^`]*`", " ", text)
     text = re.sub(r"!?(?:\[[^\]]*\])\([^)]*\)", " ", text)
-    text = re.sub(r"[*_>#|]", " ", text)
+    # ك-409: كانت علامات التمييز في Markdown تُستبدل بفراغ، فتصير «**مرتفع**؛» → «مرتفع  ؛»
+    # وتُحتسب «مسافة قبل علامة ترقيم» كاذبة. علامات التمييز تُنزع بلا فراغ، وتبقى
+    # العلامات البنيوية (العنوان والاقتباس والجدول) فراغًا.
+    text = text.replace("*", "")
+    text = re.sub(r"[>#|]", " ", text)
     return text
 
 
@@ -144,6 +162,7 @@ def line_excerpt(line: str, start: int, end: int) -> str:
 
 
 def find_punctuation_defects(text: str) -> dict[str, list[dict]]:
+    text = strip_markup(text)  # ك-409: القياس على النص المرئي وحدها، أياً كان المستدعي
     result = defaultdict(list)
     for line_no, line in enumerate(text.splitlines(), 1):
         for token, label in (("، .", "فاصلة ثم نقطة"), (".،", "نقطة ثم فاصلة"),
@@ -162,6 +181,7 @@ def find_punctuation_defects(text: str) -> dict[str, list[dict]]:
 
 
 def find_duplicate_letters(text: str) -> list[dict]:
+    text = strip_markup(text)  # ك-409
     whitelist = lexicon_duplicate_whitelist()
     found = []
     for line_no, line in enumerate(text.splitlines(), 1):
@@ -206,6 +226,7 @@ def load_forbidden() -> list[dict]:
 
 
 def find_forbidden(text: str, report_date: str | None = None) -> list[dict]:
+    text = strip_markup(text)  # ك-409
     found = []
     lines = text.splitlines()
     for entry in load_forbidden():
@@ -241,6 +262,7 @@ def normalize_sentence(sentence: str) -> str:
 
 
 def find_repeated_templates(text: str) -> list[dict]:
+    text = strip_markup(text)  # ك-409
     candidates = []
     for line_no, line in enumerate(text.splitlines(), 1):
         if "|" in line:
@@ -266,6 +288,7 @@ def find_repeated_templates(text: str) -> list[dict]:
 
 
 def find_unknown_words(text: str) -> list[str]:
+    text = strip_markup(text)  # ك-409
     known = load_project_dictionary()
     words = Counter()
     for raw in ARABIC_WORD.findall(strip_markup(text)):
@@ -307,6 +330,9 @@ def main() -> int:
         print(f"الملف غير موجود: {path}")
         return 2
     text = path.read_text(encoding="utf-8")
+    # ك-407: القياس على النص الذي يراه القارئ: تُنزع وسوم النمط والسكربت والوسوم قبل كل فحص،
+    # فلا تُحتسب محددات CSS ولا وسوم HTML عيوبًا في الصياغة العربية.
+    text = strip_markup(text)
     punctuation = find_punctuation_defects(text)
     duplicates = find_duplicate_letters(text)
     _m = re.search(r"(\d{4}-\d{2}-\d{2})", path.name)

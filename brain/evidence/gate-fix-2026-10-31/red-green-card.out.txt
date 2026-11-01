@@ -1,0 +1,110 @@
+test_arabic_counter_forms_remain_strict (tests.test_card_counters.CardCounterGateTests.test_arabic_counter_forms_remain_strict) ... ok
+test_english_threat_counter_is_generated_from_all_registered_labels (tests.test_card_counters.CardCounterGateTests.test_english_threat_counter_is_generated_from_all_registered_labels) ... ok
+test_negative_anchor_title_change_fails_closed (tests.test_card_counters.CardCounterGateTests.test_negative_anchor_title_change_fails_closed) ... ok
+test_negative_arabic_card_latin_outside_allowlist_fails_closed (tests.test_card_counters.CardCounterGateTests.test_negative_arabic_card_latin_outside_allowlist_fails_closed) ... ok
+test_negative_arabic_counter_grammar_fails_closed (tests.test_card_counters.CardCounterGateTests.test_negative_arabic_counter_grammar_fails_closed) ... ok
+test_negative_counter_change_fails_closed (tests.test_card_counters.CardCounterGateTests.test_negative_counter_change_fails_closed) ... FAIL
+test_policy_surface_is_used_for_counter_targets (tests.test_card_counters.CardCounterGateTests.test_policy_surface_is_used_for_counter_targets) ... FAIL
+test_positive_registry_matches_both_enabled_cards (tests.test_card_counters.CardCounterGateTests.test_positive_registry_matches_both_enabled_cards) ... FAIL
+test_registered_card_missing_required_counter_fails_closed (tests.test_card_counters.CardCounterGateTests.test_registered_card_missing_required_counter_fails_closed) ... ok
+test_registry_contains_two_enabled_cards (tests.test_card_counters.CardCounterGateTests.test_registry_contains_two_enabled_cards) ... ok
+test_stale_fragment_uses_policy_surface_and_data_goto_title (tests.test_card_counters.CardCounterGateTests.test_stale_fragment_uses_policy_surface_and_data_goto_title) ... FAIL
+test_unregistered_card_fails_closed (tests.test_card_counters.CardCounterGateTests.test_unregistered_card_fails_closed) ... ok
+test_zone_counter_drift_fails_closed (tests.test_card_counters.CardCounterGateTests.test_zone_counter_drift_fails_closed) ... ok
+test_zone_heading_anchor_drift_fails_closed (tests.test_card_counters.CardCounterGateTests.test_zone_heading_anchor_drift_fails_closed) ... ok
+test_current_day_hero_kpis_match_source_contract (tests.test_card_counters.HeroKpiGateTests.test_current_day_hero_kpis_match_source_contract) ... ok
+test_negative_detail_composition_fails_closed (tests.test_card_counters.HeroKpiGateTests.test_negative_detail_composition_fails_closed) ... ok
+test_negative_duplicate_hero_container_within_same_surface_fails_closed (tests.test_card_counters.HeroKpiGateTests.test_negative_duplicate_hero_container_within_same_surface_fails_closed) ... ok
+test_negative_fixed_title_change_fails_closed (tests.test_card_counters.HeroKpiGateTests.test_negative_fixed_title_change_fails_closed) ... ok
+test_negative_missing_card_fails_closed (tests.test_card_counters.HeroKpiGateTests.test_negative_missing_card_fails_closed) ... ok
+test_rendered_hero_kpis_allow_one_container_per_surface (tests.test_card_counters.HeroKpiGateTests.test_rendered_hero_kpis_allow_one_container_per_surface) ... ok
+test_unconfirmed_card_keeps_total_and_qualifying_dimensions (tests.test_card_counters.HeroKpiGateTests.test_unconfirmed_card_keeps_total_and_qualifying_dimensions) ... ok
+test_false_zero_death_card_fails_closed (tests.test_card_counters.OfficialCardGateTests.test_false_zero_death_card_fails_closed) ... ok
+test_official_cards_have_three_layers_and_source_basis (tests.test_card_counters.OfficialCardGateTests.test_official_cards_have_three_layers_and_source_basis) ... FAIL
+test_transit_without_reading_uses_no_coverage_not_zero (tests.test_card_counters.OfficialCardGateTests.test_transit_without_reading_uses_no_coverage_not_zero) ... ok
+
+======================================================================
+FAIL: test_negative_counter_change_fails_closed (tests.test_card_counters.CardCounterGateTests.test_negative_counter_change_fails_closed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/brain-marine-news/tests/test_card_counters.py", line 139, in test_negative_counter_change_fails_closed
+    self.assertTrue(any("ما تغيّر" in e and "6" in e and "5" in e for e in errors), errors)
+AssertionError: False is not true : ['ar: خلال 24 ساعة السابقة (changed) عداد البطاقة=5 والهدف=6', 'ar: لفظ الفترة السابقة تسرب إلى بطاقة الفروع', 'en: البطاقة المسجّلة sector-threat-level غير موجودة مرة واحدة', 'en: بطاقة في الصفحة غير مسجلة: Threat level by sector', 'en: مفتاح مطلوب مفقود أو مكرر في بطاقة maritime-security-news: watch']
+
+======================================================================
+FAIL: test_policy_surface_is_used_for_counter_targets (tests.test_card_counters.CardCounterGateTests.test_policy_surface_is_used_for_counter_targets)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/brain-marine-news/tests/test_card_counters.py", line 97, in test_policy_surface_is_used_for_counter_targets
+    self.assertEqual(errors, [])
+AssertionError: Lists differ: ['ar: سطح هدف العداد غير قابل للتعيين من ا[275 chars]tch'] != []
+
+First list contains 5 additional elements.
+First extra element 0:
+'ar: سطح هدف العداد غير قابل للتعيين من السياسة: قراءة الموقف وتحليل المؤشرات'
+
++ []
+- ['ar: سطح هدف العداد غير قابل للتعيين من السياسة: قراءة الموقف وتحليل المؤشرات',
+-  'ar: لفظ الفترة السابقة تسرب إلى بطاقة الفروع',
+-  'en: البطاقة المسجّلة sector-threat-level غير موجودة مرة واحدة',
+-  'en: بطاقة في الصفحة غير مسجلة: Threat level by sector',
+-  'en: مفتاح مطلوب مفقود أو مكرر في بطاقة maritime-security-news: watch']
+
+======================================================================
+FAIL: test_positive_registry_matches_both_enabled_cards (tests.test_card_counters.CardCounterGateTests.test_positive_registry_matches_both_enabled_cards)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/brain-marine-news/tests/test_card_counters.py", line 107, in test_positive_registry_matches_both_enabled_cards
+    self.assertEqual(validate_card_documents(**self.docs()), [])
+AssertionError: Lists differ: ['ar: لفظ الفترة السابقة تسرب إلى بطاقة ال[195 chars]tch'] != []
+
+First list contains 4 additional elements.
+First extra element 0:
+'ar: لفظ الفترة السابقة تسرب إلى بطاقة الفروع'
+
++ []
+- ['ar: لفظ الفترة السابقة تسرب إلى بطاقة الفروع',
+-  'en: البطاقة المسجّلة sector-threat-level غير موجودة مرة واحدة',
+-  'en: بطاقة في الصفحة غير مسجلة: Threat level by sector',
+-  'en: مفتاح مطلوب مفقود أو مكرر في بطاقة maritime-security-news: watch']
+
+======================================================================
+FAIL: test_stale_fragment_uses_policy_surface_and_data_goto_title (tests.test_card_counters.CardCounterGateTests.test_stale_fragment_uses_policy_surface_and_data_goto_title)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/brain-marine-news/tests/test_card_counters.py", line 104, in test_stale_fragment_uses_policy_surface_and_data_goto_title
+    self.assertEqual(errors, [])
+AssertionError: Lists differ: ['ar: لفظ الفترة السابقة تسرب إلى بطاقة ال[195 chars]tch'] != []
+
+First list contains 4 additional elements.
+First extra element 0:
+'ar: لفظ الفترة السابقة تسرب إلى بطاقة الفروع'
+
++ []
+- ['ar: لفظ الفترة السابقة تسرب إلى بطاقة الفروع',
+-  'en: البطاقة المسجّلة sector-threat-level غير موجودة مرة واحدة',
+-  'en: بطاقة في الصفحة غير مسجلة: Threat level by sector',
+-  'en: مفتاح مطلوب مفقود أو مكرر في بطاقة maritime-security-news: watch']
+
+======================================================================
+FAIL: test_official_cards_have_three_layers_and_source_basis (tests.test_card_counters.OfficialCardGateTests.test_official_cards_have_three_layers_and_source_basis)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/brain-marine-news/tests/test_card_counters.py", line 248, in test_official_cards_have_three_layers_and_source_basis
+    self.assertEqual(errors, [])
+AssertionError: Lists differ: ['حاجز المصدر الرسمي: أساس imo-seafarer-de[200 chars]دان'] != []
+
+First list contains 4 additional elements.
+First extra element 0:
+'حاجز المصدر الرسمي: أساس imo-seafarer-deaths مفقود أو متغير'
+
++ []
+- ['حاجز المصدر الرسمي: أساس imo-seafarer-deaths مفقود أو متغير',
+-  'حاجز المصدر الرسمي: أساس imo-transit-september-2026 مفقود أو متغير',
+-  'حاجز المصدر الرسمي: أوسمة imo-transit-september-2026 مفقودة أو متغيرة',
+-  'حاجز العبور: الوسمان الرسميان مفقودان']
+
+----------------------------------------------------------------------
+Ran 24 tests in 0.050s
+
+FAILED (failures=5)

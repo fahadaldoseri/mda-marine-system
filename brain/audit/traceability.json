@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-31T18:22:39.719081+00:00",
+  "generated_at": "2026-10-31T21:35:21.273854+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -3033,6 +3033,55 @@
       "lesson_id": "ك-398",
       "barrier_id": "B-f5672c7b",
       "run_evidence": "م 9562b8ad68fd23c18265b5f4ccbe67c7cb5e9e42؛ التشغيل الحالي D040 وD070 خرج 0 وأنشأ PR #172 برأس d1834"
+    },
+    {
+      "fault_id": "ك-399",
+      "state": "مفتوح",
+      "lesson_id": "ك-399",
+      "barrier_id": "B-15f1e235",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-400",
+      "state": "مفتوح",
+      "lesson_id": "ك-400",
+      "barrier_id": "B-fb0b705c",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-401",
+      "state": "مفتوح",
+      "lesson_id": null,
+      "barrier_id": "B-e8b0bad5",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-402",
+      "state": "مفتوح",
+      "lesson_id": null,
+      "barrier_id": "B-ba8c3481",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-403",
+      "state": "مغلق",
+      "lesson_id": "ك-403",
+      "barrier_id": "B-4b1364bd",
+      "run_evidence": "face الجديد؛ التشغيل النهائي يمرر السطح وتبقى مخالفات IMO منفصلة فقط؛ خرج 2 بسبب عقد IMO القديم"
+    },
+    {
+      "fault_id": "ك-404",
+      "state": "مفتوح",
+      "lesson_id": "ك-404",
+      "barrier_id": "B-7487d3eb",
+      "run_evidence": "اخل masthead-meta python3 tests/test_2026_10_31_surface_contract.py → رمز 0؛ python3 -m unittest -v "
+    },
+    {
+      "fault_id": "ك-405",
+      "state": "مفتوح",
+      "lesson_id": "ك-405",
+      "barrier_id": "B-b906afb6",
+      "run_evidence": "لإصلاح: python3 validators/check_card_counters.py --date 2026-10-31 → رمز 2 و«ملف مطلوب مفقود: /home"
     }
   ]
 }

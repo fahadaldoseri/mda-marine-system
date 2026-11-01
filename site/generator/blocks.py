@@ -144,7 +144,7 @@ def decision_card(dc, inline):
         ("ما يُراقب خلال 24 ساعة", dc.get("watch"), None),
     ]
     if dc.get("risk"):
-        rows.insert(1, ("مستوى التهديد", "المستوى التفصيلي في بطاقة الترويسة (مستوى التهديد حسب القطاعات)", None))
+        rows.insert(1, ("مستوى التهديد", "المستوى التفصيلي في بطاقة الترويسة", None))
     cells = []
     for label, value, kind in rows:
         if not value:
@@ -336,10 +336,29 @@ def timeline(items, inline):
 def glossary(items):
     if not items:
         return ""
+    public = []
+    source_items = items.items() if isinstance(items, dict) else (
+        ((entry.get("term", ""), entry) for entry in items if isinstance(entry, dict))
+        if isinstance(items, list) else ()
+    )
+    for key, value in source_items:
+        if isinstance(value, dict):
+            term = str(value.get("term") or key).strip()
+            replacement = value.get("replacement") or value.get("plain") or value.get("approved")
+            if isinstance(replacement, list):
+                replacement = " · ".join(str(x).strip() for x in replacement if str(x).strip())
+            replacement = str(replacement or "").strip()
+            # لا تُعرض reason/note/source/decision؛ السطح العام يحوي الحكم اللغوي فقط.
+            if term and replacement:
+                public.append((term, replacement))
+        else:
+            public.append((str(key).strip(), str(value).strip()))
+    if not public:
+        return ""
     # عطل ك-43: صيغة البند الواحد في كل سطر جعلت القاموس يمتد صفحة كاملة عند
     # إضافة التعريفات المعيارية، فخالف حدّ تعبئة الصفحة الأخيرة. الصيغة المدمجة
     # تحفظ كل تعريف وترشّد المساحة: البنود متتابعة تفصلها علامة ·.
-    parts = " · ".join(f"<b>{esc(k)}</b>: {esc(v)}" for k, v in items.items())
+    parts = " · ".join(f"<b>{esc(k)}:</b> {esc(v)}" for k, v in public)
     return f'<div class="glossary"><b>قاموس الرموز والمصطلحات:</b> {parts}</div>'
 
 
