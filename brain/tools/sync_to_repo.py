@@ -100,6 +100,22 @@ def run_pair(label: str, src: Path, dst: Path, a) -> int:
     return 0
 
 
+def guard_branch(repo_root: Path, allow_main: bool) -> None:
+    """حارس فشل مغلق: لا التزام ولا دفع على الفرع الرئيسي في المستودع المرآة."""
+    import subprocess
+
+    try:
+        br = subprocess.run(
+            ["git", "-C", str(repo_root), "rev-parse", "--abbrev-ref", "HEAD"],
+            capture_output=True, text=True, timeout=30).stdout.strip()
+    except Exception as e:  # لا يكمل بلا معرفة الفرع
+        raise SystemExit(f"✘ BRANCH_GUARD: تعذّر قراءة فرع المستودع ({e})")
+    if br in ("main", "master") and not allow_main:
+        raise SystemExit(
+            f"✘ BRANCH_GUARD: المستودع المرآة على الفرع الرئيسي «{br}» — "
+            "أنشئ فرعًا ثم التزم وادفع واطلب دمجًا (أو استخدم --allow-main بقرار صريح).")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--brain', required=True)
@@ -109,9 +125,15 @@ def main():
     ap.add_argument('--skills', help='جذر المهارات على الخادم')
     ap.add_argument('--repo-skills', help='مجلد skills في المستودع')
     ap.add_argument('--dry-run', action='store_true')
+    ap.add_argument('--allow-main', action='store_true',
+                    help='السماح بالعمل على الفرع الرئيسي (بقرار صريح فقط)')
     ap.add_argument('--allow-delete', action='store_true',
                     help='السماح بالحذف الجماعي أو خارج نطاق المصدر بعد مراجعة الخطة')
     a = ap.parse_args()
+    _root = Path(a.repo)
+    if _root.name in ('brain', 'site', 'skills'):
+        _root = _root.parent
+    guard_branch(_root, a.allow_main)
 
     a.exclude_dirs, a.exclude_files, a.exclude_globs = EXCLUDE_DIRS, EXCLUDE_FILES, EXCLUDE_GLOBS
     a.exclude_dir_globs = BRAIN_EXCLUDE_DIR_GLOBS

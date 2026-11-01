@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-01T18:51:26.941518+00:00",
+  "generated_at": "2026-11-01T18:52:49.965690+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -3292,6 +3292,13 @@
       "lesson_id": "ك-435",
       "barrier_id": "B-b527f01c",
       "run_evidence": "التزام ثم طلب دمج، وتنظيف الشجرة قبل خطوة النسخة الاحتياطية خطوة D005 رمز 0 · التماثل مطابق تمامًا ("
+    },
+    {
+      "fault_id": "ك-436",
+      "state": "مغلق",
+      "lesson_id": "ك-436",
+      "barrier_id": "B-cbb91dc9",
+      "run_evidence": "epo.py` يرفض العمل على `main` بلا `--allow-main` حارس الفرع: على main خرج 2 برسالة BRANCH_GUARD · عل"
     }
   ]
 }
