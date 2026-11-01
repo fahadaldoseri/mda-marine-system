@@ -3245,7 +3245,7 @@
   },
   {
    "id": "G050",
-   "title": "سطح سجل الأحداث والأقسام المنقولة بعد البناء (فشل مغلق)",
+   "title": "سطح سجل الأحداث ومخطط الدفتر وعقد البطاقة بعد البناء (فشل مغلق)",
    "kind": "script",
    "phase": "build",
    "assert": [
@@ -3254,7 +3254,7 @@
      "command": [
       "bash",
       "-lc",
-      "B=\"$PWD\"; export B SITE; python3 \"$B/validators/check_daily_event_surface.py\" --date \"$D\" --brain \"$B\" --site \"$SITE\"; rc=$?; exit $rc"
+      "B=\"$PWD\"; export B SITE; python3 \"$B/validators/check_daily_event_surface.py\" --date \"$D\" --brain \"$B\" --site \"$SITE\" || exit $?; python3 \"$B/validators/check_daily_events_schema.py\" --date \"$D\" --brain \"$B\" --site \"$SITE\" || exit $?; python3 \"$B/validators/check_event_card_contract.py\" --date \"$D\" --brain \"$B\" --site \"$SITE\"; rc=$?; exit $rc"
      ]
     }
    ],
@@ -3287,19 +3287,26 @@
      "evidence/gate-fix-2026-10-31/red/daily.out.txt",
      "evidence/gate-fix-2026-10-31/red/surface.out.txt",
      "evidence/gate-fix-2026-10-31/red/zone.out.txt",
-     "evidence/gate-fix-2026-10-31/zone-actual.out.txt"
+     "evidence/gate-fix-2026-10-31/zone-actual.out.txt",
+     "validators/check_daily_events_schema.py",
+     "validators/check_event_card_contract.py",
+     "schemas/daily-events.schema.json",
+     "appendices/event-card-contract.md",
+     "tools/migrate_daily_events_schema.py"
     ],
     "gates": [],
     "tests": [
      "{site}/tests/test_2026_10_31_surface_contract.py",
-     "tests/test_daily_event_surface.py"
+     "tests/test_daily_event_surface.py",
+     "tests/test_daily_events_schema.py",
+     "tests/test_event_card_contract.py"
     ]
    },
    "on_fail": "stop",
    "command": [
     "bash",
     "-lc",
-    "B=\"$PWD\"; export B SITE; python3 \"$B/validators/check_daily_event_surface.py\" --date \"$D\" --brain \"$B\" --site \"$SITE\"; rc=$?; exit $rc"
+    "B=\"$PWD\"; export B SITE; python3 \"$B/validators/check_daily_event_surface.py\" --date \"$D\" --brain \"$B\" --site \"$SITE\" || exit $?; python3 \"$B/validators/check_daily_events_schema.py\" --date \"$D\" --brain \"$B\" --site \"$SITE\" || exit $?; python3 \"$B/validators/check_event_card_contract.py\" --date \"$D\" --brain \"$B\" --site \"$SITE\"; rc=$?; exit $rc"
    ],
    "ok_rc": [
     0
@@ -3310,7 +3317,9 @@
     "appendices/report-sections-policy.json",
     "{site}/sources/daily-events/{date}.json",
     "{site}/dist/reports/{date}.html",
-    "{site}/dist/additions.html"
+    "{site}/dist/additions.html",
+    "schemas/daily-events.schema.json",
+    "appendices/event-card-contract.md"
    ],
    "writes": [
     "logs/runbook/{date}/G050.log"

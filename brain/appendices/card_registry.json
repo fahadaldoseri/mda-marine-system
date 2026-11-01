@@ -563,5 +563,111 @@
         "low_en": "8.0 (3 September)"
       }
     ]
+  },
+  "events_log": {
+    "contract": "appendices/event-card-contract.md",
+    "schema": "schemas/daily-events.schema.json",
+    "migration": "tools/migrate_daily_events_schema.py",
+    "gates": [
+      "validators/check_daily_events_schema.py",
+      "validators/check_event_card_contract.py",
+      "validators/check_daily_event_surface.py"
+    ],
+    "tests": [
+      "tests/test_daily_events_schema.py",
+      "tests/test_event_card_contract.py",
+      "tests/test_daily_event_surface.py"
+    ],
+    "generator": [
+      "{site}/generator/build_report.py#render_ledger_events",
+      "{site}/generator/build_report.py#_event_fields_html"
+    ],
+    "live_from": "2026-10-31",
+    "rows": [
+      {
+        "index": 1,
+        "label": "الحدث",
+        "source": "title",
+        "absent": "لا بطاقة بلا عنوان"
+      },
+      {
+        "index": 2,
+        "label": "التصنيف",
+        "source": "class",
+        "absent": "قيد التثبّت"
+      },
+      {
+        "index": 3,
+        "label": "درجة الموثوقية",
+        "source": "confidence",
+        "absent": "غير مقيّمة"
+      },
+      {
+        "index": 4,
+        "label": "التاريخ والوقت",
+        "source": "date + time",
+        "absent": "التوقيت غير مسجّل في المصدر"
+      },
+      {
+        "index": 5,
+        "label": "الموضع",
+        "source": "sector_id + area",
+        "absent": "الموضع غير محدد في المصدر"
+      },
+      {
+        "index": 6,
+        "label": "المصدر",
+        "source": "source",
+        "absent": "غير متاح"
+      },
+      {
+        "index": 7,
+        "label": "الرابط الرسمي",
+        "source": "source_url + attribution",
+        "absent": "الرابط الرسمي غير مدرج في الدفتر",
+        "surface_note": "المسار الداخلي لا يُعرض على سطح القارئ؛ يبقى في الدفتر ومسار التدقيق"
+      },
+      {
+        "index": 8,
+        "label": "ترجمة المعنى",
+        "source": "translation",
+        "absent": "الترجمة غير مدرجة في الدفتر"
+      },
+      {
+        "index": 9,
+        "label": "النص الأصلي",
+        "source": "source_excerpt",
+        "absent": "لا نصّ خام في الدفتر"
+      },
+      {
+        "index": 10,
+        "label": "فرع تابع",
+        "source": "update_of · parent_id · duplicate_of",
+        "absent": "لم يُعثر على الواقعة السابقة في الدفتر المتاح"
+      }
+    ],
+    "closed_sets": {
+      "classification": [
+        "بلاغ رسمي",
+        "تقرير مهني",
+        "نقل إعلامي",
+        "نقل سياسي",
+        "رواية غير مؤكدة من طرف واحد",
+        "نفي رسمي",
+        "غير مصنّف",
+        "قيد التثبّت"
+      ],
+      "reliability": [
+        "عالية",
+        "متوسطة",
+        "منخفضة",
+        "غير مقيّمة"
+      ],
+      "row_states": [
+        "shown",
+        "hidden-rule-arabic-source",
+        "hidden-rule-no-excerpt"
+      ]
+    }
   }
 }

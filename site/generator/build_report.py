@@ -566,6 +566,13 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .ev.b-official .ev-badge{border-color:rgba(34,195,182,.45);color:var(--ok)}
 .ev.b-media .ev-badge{border-color:rgba(217,164,65,.5);color:#e0b45f}
 .ev.b-deny .ev-badge{border-color:rgba(214,86,86,.45);color:#e88}
+.ev-reliability{margin-inline-start:6px;font-size:11.5px;line-height:1;padding:4px 10px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2);white-space:nowrap}
+.ev-reliability[data-reliability="عالية"]{border-color:rgba(34,195,182,.4);color:#7fd7cf}
+.ev-reliability[data-reliability="منخفضة"]{border-color:rgba(214,86,86,.35);color:#e0a0a0}
+.ev-fold{margin-top:5px;font-size:12px;line-height:1.7;color:var(--muted)}
+.ev-fold>summary{cursor:pointer;color:var(--info);font-size:11.5px}
+.ev-fold>span{display:block;margin-top:3px;color:var(--ink-2);word-break:break-word}
+.ev-fold>.ev-path{display:block;margin-top:3px;font-size:11.5px;color:var(--muted);word-break:break-all;direction:ltr;unicode-bidi:isolate}
 .ev-what{margin:0;font-size:15.5px;line-height:1.8;color:var(--ink)}
 .ev-meta{margin:10px 0 0;padding-top:8px;border-top:1px dashed var(--line);font-size:12.5px;line-height:1.75;color:var(--muted)}
 .ev-meta .ev-k{display:block;font-size:11.5px;color:var(--muted);opacity:.85;margin-bottom:2px}
@@ -1279,13 +1286,106 @@ def _public_status_text(value: str) -> str:
         public = public.replace(term, replacement)
     return public
 
+# ── عقد بطاقة «سجل الأحداث»: appendices/event-card-contract.md ────────────────
+# عشرة صفوف ثابتة بالترتيب نفسه؛ المتغيّر قيمة الصف لا وجوده ولا اسمه.
+CARD_ROWS = 10
+ABSENCE = {
+    "classification": "قيد التثبّت",
+    "reliability": "غير مقيّمة",
+    "time": "التوقيت غير مسجّل في المصدر",
+    "place": "الموضع غير محدد في المصدر",
+    "source": "غير متاح",
+    "source_url": "الرابط الرسمي غير مدرج في الدفتر",
+    "translation": "الترجمة غير مدرجة في الدفتر",
+    "excerpt": "لا نصّ خام في الدفتر",
+    "excerpt_open": "مطويّ — افتح للعرض",
+    "parent": "لا فرع تابع في الدفتر المتاح",
+}
+# ترتيب المطابقة إلزامي والأخصّ أولًا: «نفي رسمي منقول» يُقرأ نفيًا لا بلاغًا رسميًّا.
+CLASSIFICATION_RULES = (
+    ("نفي رسمي", ("نفي",)),
+    ("بلاغ رسمي", ("بلاغ", "رسمي", "سجل دولي", "مؤسسي", "تقييم رسمي")),
+    ("تقرير مهني", ("مهني", "تقرير", "سجل مصدر", "تقدير", "تحليل مؤسسي")),
+    ("نقل إعلامي", ("إعلامي", "إعلام", "خبر", "وسم إعلامي", "تحليل إعلامي")),
+    ("نقل سياسي", ("سياسي", "دبلوماسي", "حكومي")),
+    ("رواية غير مؤكدة من طرف واحد", ("رواية", "ادعاء", "منقول", "نقل طرف", "بلا تأكيد", "تجميع غير رسمي")),
+)
+CLASSIFICATION_VALUES = tuple(label for label, _ in CLASSIFICATION_RULES) + ("غير مصنّف",)
+RELIABILITY_VALUES = ("عالية", "متوسطة", "منخفضة")
+BADGE_CLASSES = {
+    "بلاغ رسمي": "b-official",
+    "تقرير مهني": "b-official",
+    "نقل إعلامي": "b-media",
+    "نقل سياسي": "b-media",
+    "رواية غير مؤكدة من طرف واحد": "b-media",
+    "نفي رسمي": "b-deny",
+    "غير مصنّف": "b-info",
+    ABSENCE["classification"]: "b-info",
+}
+
+_SHORTLINK_RE = re.compile(r"https?://(?:t\.co|bit\.ly|lnkd\.in|tinyurl\.com|goo\.gl|ow\.ly|"
+                           r"buff\.ly|is\.gd|cutt\.ly|rb\.gy)/\S+")
+_HASHTAG_RE = re.compile(r"(?<!\w)#[A-Za-z0-9_\u0600-\u06ff]{2,}")
+_CLICKBAIT_RE = re.compile(r"click here to read the full warning\.?", re.I)
+_TIME_RE = re.compile(r"^\d{4}Z$")
+
+
 def event_badge(value: str):
-    """شارة الحالة من نص «حالة التأكيد»: نفي · نقل إعلامي · بلاغ رسمي · قيد التثبّت."""
-    v = (value or "").strip()
-    for keys, cls in EVENT_BADGES:
-        if any(k in v for k in keys):
-            return cls, _public_status_text(v)
-    return "b-info", (_public_status_text(v) or "قيد التثبّت")
+    """شارة التصنيف من القائمة المغلقة؛ القيمة الخام تُشتق ولا تُخمَّن فئة."""
+    label = event_classification(value)
+    return BADGE_CLASSES.get(label, "b-info"), label
+
+
+def event_classification(raw) -> str:
+    text = _public_status_text(_value_text(raw))
+    if not text:
+        return ABSENCE["classification"]
+    for label, keys in CLASSIFICATION_RULES:
+        if any(key in text for key in keys):
+            return label
+    return "غير مصنّف"
+
+
+def reliability_label(event: dict) -> str:
+    value = _value_text(event.get("confidence"))
+    return value if value in RELIABILITY_VALUES else ABSENCE["reliability"]
+
+
+def _looks_arabic(text) -> bool:
+    letters = [char for char in str(text or "") if char.isalpha()]
+    if not letters:
+        return False
+    arabic = sum(1 for char in letters if "\u0600" <= char <= "\u06ff")
+    return arabic / len(letters) >= 0.5
+
+
+def clean_excerpt(text) -> str:
+    """تنظيف العرض لا التخزين: يبقى النص الخام في الدفتر للتدقيق."""
+    value = _SHORTLINK_RE.sub("", _value_text(text))
+    value = _HASHTAG_RE.sub("", value)
+    value = _CLICKBAIT_RE.sub("", value)
+    value = re.sub(r"\s{2,}", " ", value)
+    return value.strip(" ·|,-—")
+
+
+def attribution_from_path(path) -> str:
+    """إسناد غير حساس للقارئ؛ المسار الكامل يبقى مطويًّا للتدقيق."""
+    text = _value_text(path).lower()
+    if not text:
+        return ""
+    if "feeds/" in text or "feed-" in text:
+        return "من تغذية المصادر"
+    if "official" in text or "imo" in text:
+        return "من مصدر رسمي"
+    return "من سجل داخلي"
+
+
+def _field_row(index: int, label: str, value: str, defs, *, state: str = "shown",
+               extra: str = "", attrs: str = "") -> str:
+    hidden = "" if state == "shown" else " hidden"
+    return (f'<div class="ev-field" data-row="{index}" data-row-state="{state}"{attrs}{hidden}>'
+            f'<span class="ev-k">{esc(label)}</span>'
+            f'<span class="ev-mv">{inline(value, defs)}</span>{extra}</div>')
 
 LIVE_EVENT_LEDGER_FROM = "2026-10-31"
 RELATION_KEYS = ("update_of", "parent_id", "duplicate_of")
@@ -1386,22 +1486,50 @@ def _relation_info(event: dict, known: dict[str, dict]) -> tuple[bool, str, str]
 
 
 def _event_fields_html(event: dict, defs) -> tuple[str, bool]:
-    date_time, has_time = _event_time(event)
-    desc = _event_description(event)
-    fields = [
-        ("التاريخ/الوقت", date_time or "غير متاح"),
-        ("المصدر", _event_sources(event) or "غير متاح"),
-        ("الموضع", _event_location(event) or "غير متاح"),
-    ]
-    # لا يُعاد «سطر الوصف» إذا كان هو نص البطاقة نفسه — التكرار المرئي ممنوع (ك-336)
-    if not desc:
-        fields.append(("سطر الوصف", "غير متاح"))
-    excerpt = _value_text(event.get("source_excerpt"))
-    if excerpt:
-        fields.append(("سطر المصدر كما في الدفتر", excerpt))
-    rows = []
-    for label, value in fields:
-        rows.append(f'<div class="ev-field"><span class="ev-k">{esc(label)}</span><span class="ev-mv">{inline(value, defs)}</span></div>')
+    """الصفوف 4–9 وفق العقد؛ الصفوف 1–3 في رأس البطاقة والصف 10 هو الفرع التابع."""
+    date_text = _event_date(event) or "غير متاح"
+    time_text = _value_text(event.get("time"))
+    has_time = bool(time_text and _TIME_RE.match(time_text))
+    date_line = f"{date_text} · {time_text}" if has_time else f"{date_text} · {ABSENCE['time']}"
+    rows = [_field_row(4, "التاريخ والوقت", date_line, defs)]
+
+    sector = _value_text(event.get("sector_id"))
+    area = _value_text(event.get("area"))
+    place = " · ".join(part for part in (sector, area) if part) or ABSENCE["place"]
+    rows.append(_field_row(5, "الموضع", place, defs))
+
+    rows.append(_field_row(6, "المصدر", _event_sources(event) or ABSENCE["source"], defs))
+
+    url = _value_text(event.get("source_url"))
+    path = _value_text(event.get("source_excerpt_from"))
+    attribution = attribution_from_path(path)
+    citation = url or ABSENCE["source_url"]
+    if attribution:
+        citation = f"{citation} · {attribution}"
+    # المسار الداخلي (الملف · التغذية · رقم البند) لا يُعرض على سطح القارئ:
+    # يتكرّر بالنص نفسه في كل بطاقة فيُمنع بقالب الجملة المتكرر، ولا يفيد القارئ.
+    # يبقى محفوظًا في دفتر الوقائع وفي مسار التدقيق.
+    rows.append(_field_row(7, "الرابط الرسمي", citation, defs))
+
+    excerpt_raw = _value_text(event.get("source_excerpt"))
+    translation = _value_text(event.get("translation"))
+    if translation:
+        state, value = "shown", translation
+    elif excerpt_raw and not _looks_arabic(excerpt_raw):
+        state, value = "shown", ABSENCE["translation"]
+    else:
+        state, value = "hidden-rule-arabic-source", ABSENCE["translation"]
+    rows.append(_field_row(8, "ترجمة المعنى", value, defs, state=state))
+
+    cleaned = clean_excerpt(excerpt_raw)
+    if cleaned:
+        inner = ('<details class="ev-fold" data-fold="original-text">'
+                 '<summary>النص الأصلي كما في المصدر</summary>'
+                 f'<span>{inline(cleaned, defs)}</span></details>')
+        rows.append(_field_row(9, "النص الأصلي", ABSENCE["excerpt_open"], defs, extra=inner))
+    else:
+        rows.append(_field_row(9, "النص الأصلي", ABSENCE["excerpt"], defs,
+                               state="hidden-rule-no-excerpt"))
     return "".join(rows), has_time
 
 
@@ -1414,8 +1542,8 @@ def render_ledger_events(events, defs, md_path: Path):
     cards = []
     for idx, event in enumerate(events, 1):
         code = _event_code(event)
-        status = _value_text(event.get("class") or event.get("confidence"))
-        cls, label = event_badge(status)
+        cls, label = event_badge(event.get("class"))
+        reliability = reliability_label(event)
         fields_html, has_time = _event_fields_html(event, defs)
         marked, parent_ref, relation_key = _relation_info(event, known)
         if marked:
@@ -1427,7 +1555,7 @@ def render_ledger_events(events, defs, md_path: Path):
                 branch_count += 1
                 parent_code = _event_code(parent)
                 branch_html = (
-                    f'<div class="ev-branch" data-branch-status="shown" data-parent-ref="{esc(parent_ref)}">'
+                    f'<div class="ev-branch" data-row="10" data-branch-status="shown" data-parent-ref="{esc(parent_ref)}">'
                     '<span class="ev-branch-title">فرع تابع</span>'
                     f'<div><span class="ev-k">التاريخ</span><span class="ev-mv">{esc(_event_date(parent) or "غير متاح")}</span></div>'
                     f'<div><span class="ev-k">الملخص</span><span class="ev-mv">{inline(_event_description(parent) or "غير متاح", defs)}</span></div>'
@@ -1437,22 +1565,29 @@ def render_ledger_events(events, defs, md_path: Path):
             else:
                 unresolved += 1
                 branch_html = (
-                    f'<div class="ev-branch-gap" data-branch-status="missing-target" data-parent-ref="{esc(parent_ref)}">'
+                    f'<div class="ev-branch-gap" data-row="10" data-branch-status="missing-target" data-parent-ref="{esc(parent_ref)}">'
                     f'فجوة ربط: المرجع {esc(parent_ref)} معلّم، ولا يوجد له هدف في الدفتر المتاح.</div>'
                 )
         elif marked:
             unresolved += 1
             branch_html = (
-                '<div class="ev-branch-gap" data-branch-status="missing-ref">'
+                '<div class="ev-branch-gap" data-row="10" data-branch-status="missing-ref">'
                 'فجوة ربط: الحدث معلّم كتحديث/امتداد، لكن الدفتر لا يحمل معرّف الحدث السابق.</div>'
             )
+        else:
+            # الصف 10 يظهر دائمًا: غياب الفرع حالة معلنة لا صفّ محذوف.
+            branch_html = _field_row(10, "فرع تابع", ABSENCE["parent"], defs,
+                                     attrs=' data-branch-status="not-marked"')
         cards.append(
             f'<article class="ev reveal {cls}" id="ev-{idx:02d}" data-event-code="{esc(code)}" '
             f'data-event-date="{esc(_event_date(event))}" data-event-has-time="{"1" if has_time else "0"}" '
-            f'data-relation-key="{esc(relation_key)}">'
+            f'data-relation-key="{esc(relation_key)}" data-event-rows="{CARD_ROWS}">'
             f'<div class="ev-top"><span class="ev-idx bidi">{idx:02d}</span>'
-            f'<span class="ev-code ltr">{esc(code)}</span><span class="ev-badge">{esc(label)}</span></div>'
-            f'<p class="ev-what">{inline(_event_description(event), defs)}</p>'
+            f'<span class="ev-code ltr">{esc(code)}</span>'
+            f'<span class="ev-badge" data-row="2" data-classification="{esc(label)}">{esc(label)}</span>'
+            f'<span class="ev-reliability" data-row="3" data-reliability="{esc(reliability)}">'
+            f'درجة الموثوقية: {esc(reliability)}</span></div>'
+            f'<p class="ev-what" data-row="1">{inline(_event_description(event), defs)}</p>'
             f'<div class="ev-meta">{fields_html}</div>{branch_html}</article>'
         )
     no_relation_note = ""
