@@ -1,6 +1,6 @@
 # المعجم الموحّد — اكتب العمود الثاني ولا تكتب الثالث
 
-<!-- مولَّد محوكم — المهارتان الحاكمتان: military-arabic-editing · marine-news-brain · السجل الحاكم: appendices/simplified-vocabulary.json v6 (2026-10-29) · التوليد والتحقق: tools/lexicon_wiring.py (بوابة G044) -->
+<!-- مولَّد محوكم — المهارتان الحاكمتان: military-arabic-editing · marine-news-brain · السجل الحاكم: appendices/simplified-vocabulary.json v7 (2026-10-31) · التوليد والتحقق: tools/lexicon_wiring.py (بوابة G044) -->
 
 ## أ) ألفاظ ومعانٍ
 

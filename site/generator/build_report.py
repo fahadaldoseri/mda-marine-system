@@ -27,9 +27,11 @@ import re
 import threat_card as TC
 import sys
 from datetime import datetime, timezone
+from display_format import format_release_version, format_update_label
+from html.parser import HTMLParser
 
 # الاسم المعتمد للتقرير اليومي
-DAILY_TITLE = "التقرير اليومي لأمن الملاحة والأوضاع الراهنة في المنطقة"
+DAILY_TITLE = "التقرير اليومي للأمن البحري والأوضاع الراهنة في المنطقة"
 HERO_KPI_MODERN_FROM = "2026-10-31"
 from pathlib import Path
 
@@ -41,6 +43,7 @@ class BuildError(Exception):
 import blocks as BLK
 import codes  # سياسة عرض رموز الأحداث (كامل مرة واحدة، ومختصر مدموج برقم البلاغ)
 import screen_layer as SCR  # طبقة الشاشة: القرار فوق الطيّ، للشاشة فقط (لا تمسّ الطباعة)
+from card_measurements import count_rendered_fragment
 
 
 # ----------------------------------------------------------------------------
@@ -82,6 +85,10 @@ DESIGN_TOKENS = ":root{" + DESIGN_TOKENS + "}"
 
 FONT_LINK = "/assets/fonts/fonts.css"
 
+# وسوم طبقات بطاقات المؤشرات (مصدر واحد مع بوابة check_kpi_layers)
+CUM_LABEL = "المجموع من 28 فبراير 2026"
+UPD_LABEL = "آخر تحديث"
+
 SECTION_ICONS = {
     "الخلاصة": "flag",
     "الوقائع الجديدة": "alert",
@@ -104,7 +111,7 @@ SECTION_ICONS = {
 SECTION_HINTS = {
     "ما تغيّر منذ التقرير السابق": "ما استُجد، وما تغيّر تصنيفه، وما أُغلق.",
     "الخلاصة": "الموقف ومستوى التهديد والإجراء المقترح في ثلاثة أسطر.",
-    "التوزيع الجغرافي للوقائع": "أين تركّزت الوقائع، وحصيلة IMO حسب القطاعات.",
+    "التوزيع الجغرافي للوقائع": "أين تركّزت الوقائع، وحصيلة IMO بحسب النطاق.",
     "مؤشرات الموقف": "الأرقام، ومقارنتها بتقرير أمس، وحدود كل رقم.",
     "مستوى التهديد": "التقييم الرسمي، والتقدير التحليلي، وحدود الثقة.",
     "التوجيهات التشغيلية": "ما يُنفَّذ قبل العبور والرسو وأثناء الحادث.",
@@ -291,7 +298,11 @@ a.bidi{white-space:normal}
 .kpi .k-l{font-size:12.5px;color:var(--muted);line-height:1.6;min-height:2.6em}
 .kpi .k-tag{display:inline-block;margin-inline-start:6px;padding:1px 7px;border:1px solid var(--line-2);border-radius:999px;color:var(--ink-2);font-size:11px;line-height:1.4;white-space:nowrap}
 .kpi .k-v{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:30px;line-height:1.25;margin-top:3px;font-variant-numeric:tabular-nums;text-align:right;direction:rtl}
-.kpi .k-n{font-size:12px;color:var(--muted);line-height:1.7;margin-top:4px}
+.kpi .k-lays{display:flex;flex-wrap:wrap;gap:4px 10px;margin:4px 0 0;font-size:12.5px;color:var(--muted)}
+.k-lay{display:inline-flex;gap:4px;align-items:baseline}
+.k-lay-l{color:var(--muted)}
+.k-lay b{color:var(--ink);font-weight:700}
+.k-n{font-size:12px;color:var(--muted);line-height:1.7;margin-top:4px}
 .k-risk-patterns{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:-8px 0 0;color:var(--muted);font-size:12px}
 .k-risk-tag{border:1px solid var(--line-2);border-radius:999px;padding:1px 8px;color:var(--ink-2)}
 
@@ -399,6 +410,8 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .sw-port::after{content:"";position:absolute;inset:4px 9px;background:var(--map-label);border-radius:50%}
 .sw-strait{background:none;border:0}
 .sw-strait::after{content:"مضيق";color:var(--map-strait);font-weight:700;font-size:12px}
+.mp-key .sw-strait{width:auto;height:auto;padding:1px 6px;border:1px solid var(--map-strait);border-radius:999px;background:none}
+.mp-key .sw-strait::after{font-size:10.5px;line-height:1.35;white-space:nowrap}
 .sw-none{border:1px dashed var(--faint);background:none}
 .mp-key .lg-none{grid-column:1 / -1;color:var(--ink-2)}
 .hmap-zstrip{margin:14px 0 0;border-top:1px solid var(--line-2);padding-top:12px}
@@ -409,6 +422,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .hmap-zstrip .zs-nm{font-size:12.5px;color:var(--ink-2);line-height:1.5}
 .hmap-zstrip .zs-lv{font-size:12.5px;font-weight:600}
 .hmap-zstrip .zs-c{font-size:12px;color:var(--faint)}
+.hmap-zstrip .zs-p{white-space:nowrap}
 @media (max-width:1000px){.hmap-zstrip ul{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .mp-sea-lg{font-size:19px}
 .mp-sea-sm{font-size:15px;font-weight:600;fill:var(--map-strait);letter-spacing:0}
@@ -426,7 +440,9 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .hmap .blk-lede,.hmap-keys,.hmap-panel .src-note{display:none}
 .hmap-wrap{position:relative;border:1px solid var(--line-2);border-radius:var(--radius-sm);overflow:hidden;background:var(--map-sea)}
 /* التكبير بجانب الخريطة لا فوقها: الشريحة كانت تحجب الخليج العربي (البحرين وقطر) */
-.hmap-wrap{display:grid;grid-template-columns:minmax(0,2.4fr) minmax(0,1fr);align-items:start}
+.hmap-wrap{display:grid;grid-template-columns:minmax(0,1fr);align-items:start}
+/* ك-XXX: عمود التكبير لا يُحجز إلا إذا وُجدت لوحته فعلًا، وإلا بقي 29% من العرض فارغًا */
+.hmap-wrap:has(> .hmap-zoom){grid-template-columns:minmax(0,2.4fr) minmax(0,1fr)}
 .hmap-zoom{border-inline-start:1.5px solid var(--accent);background:var(--map-sea);min-width:0;align-self:stretch;display:flex;flex-direction:column}
 .hmap-zsvg{display:block;width:100%;height:auto}
 .hz-cap{font-size:13px;color:var(--ink-2);background:var(--panel);padding:4px 10px;border-top:1px solid var(--line-2);margin-top:auto}
@@ -484,6 +500,11 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .ev-meta{margin:10px 0 0;padding-top:8px;border-top:1px dashed var(--line);font-size:12.5px;line-height:1.75;color:var(--muted)}
 .ev-meta .ev-k{display:block;font-size:11.5px;color:var(--muted);opacity:.85;margin-bottom:2px}
 .ev-meta .ev-mv{display:block;color:var(--ink-2)}
+.ev-field{margin:4px 0}
+.ev-branch{margin:12px 0 0;padding:10px 12px;border:1px solid rgba(77,157,255,.38);border-inline-start:3px solid var(--info);border-radius:8px;background:rgba(77,157,255,.06);font-size:12.5px;line-height:1.75}
+.ev-branch-title{display:block;color:var(--info);font-weight:700;margin-bottom:3px}
+.ev-branch-gap{margin:12px 0 0;padding:9px 12px;border:1px dashed rgba(255,176,46,.55);border-radius:8px;color:var(--warn);font-size:12.5px;line-height:1.7}
+.ev-ledger-note{margin:8px 0 14px;padding:9px 12px;border-inline-start:3px solid var(--warn);background:rgba(255,176,46,.06);color:var(--muted);font-size:12.5px}
 @media (max-width:820px){.ev-grid{grid-template-columns:1fr}}
 .dg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px;margin:16px 0 10px}
 .dg{position:relative;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:14px 16px 13px;overflow:hidden}
@@ -911,6 +932,14 @@ def inline(text: str, defs: dict = None) -> str:
         r'<a class="bidi" href="\1" target="_blank" rel="noopener noreferrer">\1</a>',
         t,
     )
+    # إبقاء علامة الترقيم خارج آخر وسم نصي مع إزالة أي فراغ قبلها؛ فمستخرج
+    # الأسطح يعامل حدود الوسوم كفواصل كتلية، وإدخال الترقيم داخل الوسم يفصل
+    # الكلمة عن سياقها ويحوّل المستوى المتكرر إلى قالب زائف.
+    t = re.sub(
+        r"(?P<close></(?:strong|em|code|a|span|bdi)>)[ \t]*(?P<punc>[،؛:,.؟!])",
+        r"\g<close>\g<punc>",
+        t,
+    )
     return t
 
 
@@ -1141,13 +1170,229 @@ EVENT_BADGES = (
     (("رسمي", "بلاغ"), "b-official"),
 )
 
+_PUBLIC_STATUS_REPLACEMENTS = None
+
+
+def _public_status_replacements():
+    """يقرأ بدائل العرض من السجل الحاكم، ولا يحمّل أسباب القرار إلى الصفحة."""
+    global _PUBLIC_STATUS_REPLACEMENTS
+    if _PUBLIC_STATUS_REPLACEMENTS is not None:
+        return _PUBLIC_STATUS_REPLACEMENTS
+    candidates = [
+        Path(__file__).resolve().parents[2] / "brain-marine-news" / "appendices" / "forbidden-coinages.json",
+        Path(__file__).resolve().parents[1] / "appendices" / "forbidden-coinages.json",
+    ]
+    pairs = {}
+    for path in candidates:
+        if not path.is_file():
+            continue
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, json.JSONDecodeError):
+            continue
+        for entry in data.get("entries", []) if isinstance(data, dict) else []:
+            if not isinstance(entry, dict):
+                continue
+            term = str(entry.get("term") or "").strip()
+            replacement = str(entry.get("replacement") or "").strip()
+            if term and replacement:
+                pairs[term] = replacement
+        if pairs:
+            break
+    _PUBLIC_STATUS_REPLACEMENTS = tuple(sorted(pairs.items(), key=lambda pair: len(pair[0]), reverse=True))
+    return _PUBLIC_STATUS_REPLACEMENTS
+
+
+def _public_status_text(value: str) -> str:
+    public = value
+    for term, replacement in _public_status_replacements():
+        public = public.replace(term, replacement)
+    return public
+
 def event_badge(value: str):
     """شارة الحالة من نص «حالة التأكيد»: نفي · نقل إعلامي · بلاغ رسمي · قيد التثبّت."""
     v = (value or "").strip()
     for keys, cls in EVENT_BADGES:
         if any(k in v for k in keys):
-            return cls, v
-    return "b-info", (v or "قيد التثبّت")
+            return cls, _public_status_text(v)
+    return "b-info", (_public_status_text(v) or "قيد التثبّت")
+
+LIVE_EVENT_LEDGER_FROM = "2026-10-31"
+RELATION_KEYS = ("update_of", "parent_id", "duplicate_of")
+RELATION_MARKER_KEYS = ("event_kind", "update_of", "parent_id", "duplicate_of")
+
+
+def _daily_events_path(md_path: Path, report_date: str) -> Path:
+    """مسار دفتر اليوم بجوار مصادر الموقع؛ لا يعتمد على مسار ثابت في النظام."""
+    return Path(md_path).resolve().parents[2] / "sources" / "daily-events" / f"{report_date}.json"
+
+
+def load_daily_events(md_path: Path, report_date: str):
+    """يقرأ دفتر الفترة كما نُسخ من Brain، أو يعيد None عند غيابه."""
+    path = _daily_events_path(md_path, report_date)
+    if not path.is_file():
+        return None
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise BuildError(f"دفتر أحداث الفترة غير صالح: {path.name}: {exc}") from exc
+    if not isinstance(value, list) or any(not isinstance(row, dict) for row in value):
+        raise BuildError(f"دفتر أحداث الفترة يجب أن يكون قائمة سجلات: {path.name}")
+    return value
+
+
+def _value_text(value) -> str:
+    if isinstance(value, list):
+        text = " · ".join(str(x).strip() for x in value if str(x).strip())
+    else:
+        text = str(value or "").strip()
+    # الاقتطاع في سجلات المصادر يُعرض بمحرف واحد؛ لا تُنقل ثلاث نقاط إلى السطح.
+    return re.sub(r"\.{3,}", "…", text)
+
+
+def _event_code(event: dict) -> str:
+    return _value_text(event.get("code") or event.get("display_code") or event.get("event_id"))
+
+
+def _event_date(event: dict) -> str:
+    return _value_text(event.get("date") or event.get("date_start") or event.get("date_label"))
+
+
+def _event_description(event: dict) -> str:
+    return _value_text(event.get("title") or event.get("description"))
+
+
+def _event_location(event: dict) -> str:
+    return _value_text(event.get("area") or event.get("location") or event.get("sector"))
+
+
+def _event_sources(event: dict) -> str:
+    return _value_text(event.get("source") or event.get("sources"))
+
+
+def _event_time(event: dict) -> tuple[str, bool]:
+    for key in ("time", "event_time", "occurred_at", "published_at"):
+        value = _value_text(event.get(key))
+        if value:
+            return value, True
+    return _event_date(event), False
+
+
+def _all_event_records(md_path: Path, daily_events: list[dict]) -> dict[str, dict]:
+    """فهرس اليوم مع الدفتر التراكمي لمطابقة مرجع سابق فقط إذا كان موجودًا."""
+    root = Path(md_path).resolve().parents[2]
+    records = list(daily_events)
+    cumulative = root / "sources" / "ledger.json"
+    if cumulative.is_file():
+        try:
+            raw = json.loads(cumulative.read_text(encoding="utf-8"))
+            old = raw.get("events") if isinstance(raw, dict) else raw
+            if isinstance(old, list):
+                records.extend(x for x in old if isinstance(x, dict))
+        except (OSError, json.JSONDecodeError):
+            pass
+    index = {}
+    for event in records:
+        for key in (_event_code(event), _value_text(event.get("event_id"))):
+            if key and key not in index:
+                index[key] = event
+    return index
+
+
+def _relation_info(event: dict, known: dict[str, dict]) -> tuple[bool, str, str]:
+    """يعيد (معلّم كفرع، المرجع، الحقل) دون استنتاج من تشابه النص."""
+    kind = _value_text(event.get("event_kind")).lower()
+    marker = bool(kind and any(token in kind for token in ("update", "extension", "follow", "duplicate", "تحديث", "امتداد", "تابع", "نسخة")))
+    for key in RELATION_KEYS:
+        ref = _value_text(event.get(key))
+        if ref:
+            return True, ref, key
+    # لا تُعامل link كرابط أب إلا إذا كان يحمل معرّفًا موجودًا؛ الرابط النصي
+    # العام قد يكون رابط مصدر، ولا يجوز تحويله إلى علاقة بالتخمين.
+    link = _value_text(event.get("link"))
+    if link and link in known:
+        return True, link, "link"
+    return marker, "", "event_kind" if marker else ""
+
+
+def _event_fields_html(event: dict, defs) -> tuple[str, bool]:
+    date_time, has_time = _event_time(event)
+    fields = [
+        ("التاريخ/الوقت", date_time or "غير متاح"),
+        ("المصدر", _event_sources(event) or "غير متاح"),
+        ("الموضع", _event_location(event) or "غير متاح"),
+        ("سطر الوصف", _event_description(event) or "غير متاح"),
+    ]
+    excerpt = _value_text(event.get("source_excerpt"))
+    if excerpt:
+        fields.append(("سطر المصدر كما في الدفتر", excerpt))
+    rows = []
+    for label, value in fields:
+        rows.append(f'<div class="ev-field"><span class="ev-k">{esc(label)}</span><span class="ev-mv">{inline(value, defs)}</span></div>')
+    return "".join(rows), has_time
+
+
+def render_ledger_events(events, defs, md_path: Path):
+    """يصيّر جميع سجلات دفتر الفترة، مع فرع موثق فقط عند وجود حقل ربط."""
+    known = _all_event_records(md_path, events)
+    relation_count = 0
+    branch_count = 0
+    unresolved = 0
+    cards = []
+    for idx, event in enumerate(events, 1):
+        code = _event_code(event)
+        status = _value_text(event.get("class") or event.get("confidence"))
+        cls, label = event_badge(status)
+        fields_html, has_time = _event_fields_html(event, defs)
+        marked, parent_ref, relation_key = _relation_info(event, known)
+        if marked:
+            relation_count += 1
+        branch_html = ""
+        if marked and parent_ref:
+            parent = known.get(parent_ref)
+            if parent and _event_code(parent) != code:
+                branch_count += 1
+                parent_code = _event_code(parent)
+                branch_html = (
+                    f'<div class="ev-branch" data-branch-status="shown" data-parent-ref="{esc(parent_ref)}">'
+                    '<span class="ev-branch-title">فرع تابع</span>'
+                    f'<div><span class="ev-k">التاريخ</span><span class="ev-mv">{esc(_event_date(parent) or "غير متاح")}</span></div>'
+                    f'<div><span class="ev-k">الملخص</span><span class="ev-mv">{inline(_event_description(parent) or "غير متاح", defs)}</span></div>'
+                    f'<div><span class="ev-k">المعرّف المرجعي</span><span class="ev-mv bidi">{esc(parent_code or parent_ref)}</span></div>'
+                    '</div>'
+                )
+            else:
+                unresolved += 1
+                branch_html = (
+                    f'<div class="ev-branch-gap" data-branch-status="missing-target" data-parent-ref="{esc(parent_ref)}">'
+                    f'فجوة ربط: المرجع {esc(parent_ref)} معلّم، ولا يوجد له هدف في الدفتر المتاح.</div>'
+                )
+        elif marked:
+            unresolved += 1
+            branch_html = (
+                '<div class="ev-branch-gap" data-branch-status="missing-ref">'
+                'فجوة ربط: الحدث معلّم كتحديث/امتداد، لكن الدفتر لا يحمل معرّف الحدث السابق.</div>'
+            )
+        cards.append(
+            f'<article class="ev reveal {cls}" id="ev-{idx:02d}" data-event-code="{esc(code)}" '
+            f'data-event-date="{esc(_event_date(event))}" data-event-has-time="{"1" if has_time else "0"}" '
+            f'data-relation-key="{esc(relation_key)}">'
+            f'<div class="ev-top"><span class="ev-idx bidi">{idx:02d}</span>'
+            f'<span class="ev-code ltr">{esc(code)}</span><span class="ev-badge">{esc(label)}</span></div>'
+            f'<p class="ev-what">{inline(_event_description(event), defs)}</p>'
+            f'<div class="ev-meta">{fields_html}</div>{branch_html}</article>'
+        )
+    no_relation_note = ""
+    if relation_count == 0:
+        no_relation_note = ('<p class="ev-ledger-note" data-relation-gap="none">'
+                            'فجوة بيانات الربط: لا توجد في دفتر هذه الفترة حقول event_kind أو update_of أو parent_id أو duplicate_of تثبت فرعًا تابعًا؛ لم تُنشأ علاقة من تشابه النص.</p>')
+    return (
+        f'<div class="ev-grid" data-count="{len(events)}" data-source-count="{len(events)}" '
+        f'data-relation-count="{relation_count}" data-branch-count="{branch_count}" '
+        f'data-unresolved-branch-count="{unresolved}">'
+        + "".join(cards) + "</div>" + no_relation_note
+    )
+
 
 def render_events_grid(rows, defs):
     """بطاقة لكل واقعة: شفرة وشارة حالة، ثم نص الحدث بسطر قراءة مريح، ثم المصدر والموقع والوقت."""
@@ -1545,6 +1790,26 @@ def _subheading_list_count(section, wanted):
     return n
 
 
+def _rendered_section_count(section, defs, measurement):
+    if not section:
+        return 0
+    fragment = render_section_body(section["title"], section.get("lines", []), defs,
+                                   False, section_id="counter-target")
+    return count_rendered_fragment(fragment, measurement)
+
+
+def _addition_sections_in_render_order(all_sections):
+    """Use the same policy ordering as build(mode='additions')."""
+    order = {key: index for index, key in enumerate(ADDITIONS_SECTIONS)}
+
+    def key(section):
+        title = section.get("title", "")
+        matches = [index for name, index in order.items() if name in title]
+        return min(matches, default=len(order))
+
+    return sorted((section for section in all_sections if key(section) < len(order)), key=key)
+
+
 def _official_warning_texts(section):
     texts = []
     lines = section.get("lines", []) if section else []
@@ -1563,26 +1828,29 @@ def _official_warning_texts(section):
 def _card_targets(all_sections, report_sections, meta, defs, report_date):
     """Measure the exact rendered targets used by the three card rows."""
     warning_title = "التحذيرات والنشرات الرسمية"
-    watch_section_title = "قراءة الموقف وتحليل المؤشرات"
-    watch_title = "علامات الإنذار المبكر 24–72 ساعة"
-    warning_sec = next((x for x in report_sections if x["title"] == warning_title), None)
+    watch_section_title = "المراقبة المستمرة"
+    watch_title = "المراقبة المستمرة"
+    warning_sec = next((x for x in all_sections if x["title"] == warning_title), None)
     watch_sec = next((x for x in all_sections if x["title"] == watch_section_title), None)
     changes_html = BLK.changes_block(meta.get("changes"), lambda x: inline(x, defs))
     changed_count = len(re.findall(r'<li class="chg\b', changes_html))
-    report_ids = _section_anchor_map(report_sections)
-    addition_sections = [x for x in all_sections if any(k in x["title"] for k in ADDITIONS_SECTIONS)]
-    addition_ids = _section_anchor_map(addition_sections)
-    watch_subs = _subheading_anchor_map(watch_sec, addition_ids.get(watch_section_title, "sec-04")) if watch_sec else {}
-    warning_anchor = report_ids.get(warning_title, "sec-06")
-    watch_anchor = watch_subs.get(watch_title, "sec-04-sub-02")
+    # ك-406: صفحة «إضافات» ترقّم أقسامها من الصفر وبترتيب السياسة؛ فكانت مراسي البطاقة
+    # تشير إلى ترتيب المصدر أو إلى قسم فرعي لا يطابق الصفحة المرسومة. الترقيم هنا يُطابق
+    # الترتيب الفعلي الذي تستخدمه build(mode='additions').
+    addition_sections = _addition_sections_in_render_order(all_sections)
+    # كتلة «ما تغيّر» هي sec-00 وتأتي قبل أقسام السياسة؛ جسم الإضافات يبدأ من sec-01.
+    addition_ids = {sec["title"]: f"sec-{idx + 1:02d}" for idx, sec in enumerate(addition_sections)}
+    changed_anchor = addition_ids.get("ما تغيّر", "sec-00")
+    warning_anchor = addition_ids.get(warning_title, "sec-01")
+    watch_anchor = addition_ids.get(watch_section_title, "sec-04")
     return {
         "changed_count": changed_count,
-        "changed_href": "/additions.html#sec-00",
+        "changed_href": f"/additions.html#{changed_anchor}",
         "changed_title": "ما تغيّر منذ التقرير السابق",
-        "warning_count": _markdown_table_rows(warning_sec.get("lines", [])) if warning_sec else 0,
+        "warning_count": _rendered_section_count(warning_sec, defs, "table_body_rows"),
         "warning_texts": _official_warning_texts(warning_sec),
-        "warning_href": f"/reports/{report_date}.html#{warning_anchor}",
-        "watch_count": _subheading_list_count(watch_sec, watch_title) if watch_sec else 0,
+        "warning_href": f"/additions.html#{warning_anchor}",
+        "watch_count": _rendered_section_count(watch_sec, defs, "visible_items"),
         "watch_href": f"/additions.html#{watch_anchor}",
         "watch_title": watch_title,
     }
@@ -1600,6 +1868,9 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
     _mdate = re.search(r"(\d{4}-\d{2}-\d{2})", md_path.name)
     report_date = _mdate.group(1) if _mdate else ""
     validate_meta(meta, report_date=report_date)
+    daily_events = load_daily_events(md_path, report_date)
+    if report_date >= LIVE_EVENT_LEDGER_FROM and daily_events is None:
+        raise BuildError("دفتر أحداث الفترة مفقود؛ لا يُبنى سجل الأحداث الحي بلا مصدر")
     # سياسة عرض الرموز (2+5): كامل مرة واحدة في «الوقائع الجديدة»، ومختصر مدموج برقم البلاغ الرسمي في بقية المواضع
     official = codes.official_map(meta)
     BLK.set_code_context(report_date, official)
@@ -1704,9 +1975,19 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
                 detail = k.get("detail", "")
                 tag = k.get("tag", "")
                 tag_html = f'<span class="k-tag">{inline(tag)}</span>' if tag else ""
+                # طبقات البطاقة (قرار المالك 2026-10-31): القيمة اليومية · المجموع من 28 فبراير 2026 · آخر تحديث المصدر
+                _lay = []
+                if k.get("cumulative") not in (None, ""):
+                    _lay.append(f'<div class="k-lay"><span class="k-lay-l">{CUM_LABEL}</span> '
+                                f'<b class="bidi">{esc(str(k["cumulative"]))}</b></div>')
+                if k.get("updated"):
+                    _lay.append(f'<div class="k-lay"><span class="k-lay-l">{UPD_LABEL}</span> '
+                                f'<b class="bidi">{esc(str(k["updated"]))}</b></div>')
+                layers_html = f'<div class="k-lays">{"".join(_lay)}</div>' if _lay else ""
                 return (f'<div class="kpi hero-kpi acc-{acc} reveal" data-kpi-id="{esc(k.get("id", ""))}"><em></em>'
                         f'<div class="k-l">{inline(title)}{tag_html}</div>'
                         f'<div class="k-v bidi">{esc(k.get("value", ""))}</div>'
+                        f'{layers_html}'
                         f'<div class="k-n">{inline(detail)}</div></div>')
             risk = meta.get("hero_risk_patterns") or []
             risk_html = ('<div class="k-risk-patterns" aria-label="أنماط الخطر"><span class="k-risk-label">أنماط الخطر</span>'
@@ -1761,7 +2042,10 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
             '<div class="h-rule"></div>'
             + (f'<p class="sec-lede">{esc(SECTION_HINTS[t])}</p>' if SECTION_HINTS.get(t) else "")
         )
-        section_html = render_section_body(t, sec["lines"], defs, doc_mode, section_id=f"sec-{idx + 1:02d}")
+        if "سجل الأحداث" in t and daily_events is not None and not doc_mode:
+            section_html = render_ledger_events(daily_events, defs, md_path)
+        else:
+            section_html = render_section_body(t, sec["lines"], defs, doc_mode, section_id=f"sec-{idx + 1:02d}")
         if not codes.is_primary(t):
             section_html = codes.demote(section_html, report_date, official)
         if map_html and "التوزيع الجغرافي للوقائع" in t:
@@ -1812,12 +2096,13 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
     title = meta.get("title") or DAILY_TITLE
     sub = meta.get("subtitle") or ""
     generated = meta.get("generated_label") or datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    generated_display = format_update_label(generated)
 
     chips = []
     if meta.get("version"):
-        chips.append(f'<span class="chip">رقم الإصدار <b>{esc(meta["version"])}</b></span>')
+        chips.append(f'<span class="chip">رقم الإصدار <b>{esc(format_release_version(meta["version"]))}</b></span>')
     if generated:
-        chips.append(f'<span class="chip">آخر تحديث <b class="bidi">{esc(generated)}</b></span>')
+        chips.append(f'<span class="chip">آخر تحديث <b>{esc(generated_display)}</b></span>')
     if meta.get("window"):
         win = esc(meta["window"])
         _m = re.match(r'^(\S+Z\s*[–-]\s*\S+Z)\s*(.*)$', win)
@@ -1828,10 +2113,6 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
         chips.append(f'<span class="chip">المصادر المعتمدة <b class="bidi">{esc(meta["sources_approved"])}</b></span>')
     if meta.get("sources_checked") not in (None, ""):
         chips.append(f'<span class="chip">بالمسار الآلي <b class="bidi">{esc(meta["sources_checked"])}</b></span>')
-    if meta.get("sources_manual_reference_count") not in (None, ""):
-        chips.append(f'<span class="chip">بالفحص اليدوي <b class="bidi">{esc(meta["sources_manual_reference_count"])}</b></span>')
-    if meta.get("sources_cited") not in (None, ""):
-        chips.append(f'<span class="chip">مصادر مستشهد بها <b class="bidi">{esc(meta["sources_cited"])}</b></span>')
 
     notice_html = ""
     if meta.get("notice"):
@@ -1926,7 +2207,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> {inline(meta.get("footer_note") or "هذا التقرير يعتمد على المصادر المعلنة فقط. لا تُجمع البلاغات كعدد هجمات، ولا يُنسب أي فعل إلى جهة إلا وفق مصدر رسمي مباشر.", defs)}
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">{esc(generated)}</bdi> — <b>المرجع الزمني:</b> UTC.
+    <br><b>وقت الإصدار:</b> <b>{esc(generated_display)}</b> — <b>المرجع الزمني:</b> UTC.
     {ledger_html}
   </footer>
 </div>
@@ -1937,6 +2218,9 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
     doc = codes.demote_page(doc, report_date, official)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     doc = isolate_ltr(doc)
+    # ك-408: بعد عزل الرموز اللاتينية تبقى مسافة بين الرمز وعلامة الترقيم التالية («UKMTO ،» · «UTC .»)،
+    # وهي مخالفة صياغة مانعة. التطبيع يلصق العلامة بالرمز مع عبور حدود الوسوم بلا مساس ببنية الصفحة.
+    doc = tighten_ltr_punct(doc)
     # طبقة الشاشة تُحقن بعد العزل: isolate_ltr يعمل على نص كل ما بين الوسوم فيفسد CSS وJS (مثل UTC وأسماء الخطوط)
     doc = doc.replace("</style>", SCR.SCREEN_CSS + "</style>", 1)
     # العنوان في وسم title نص صرف: isolate_ltr يلفّ الأسماء اللاتينية فيه بوسوم span فتظهر وسومًا في تبويب المتصفح
@@ -2036,3 +2320,34 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
+def tighten_ltr_punct(html: str) -> str:
+    """يلصق علامة الترقيم بالرمز اللاتيني/الرقمي السابق لها عبر حدود الوسوم.
+
+    ك-408: بعد عزل الرموز اللاتينية داخل وسوم، تظهر مسافة بين الرمز وعلامة الترقيم
+    («UKMTO ،» · «UTC .» · «EST-2026-10-31-01 :») وهي مخالفة صياغة مانعة في بوابة
+    عيوب الصياغة. الوسوم تُستبدل بمحرف حاجز مؤقت، ثم يُزال الفراغ وحده، ثم تُستعاد
+    الوسوم كما هي — فلا يتغيّر أي وسم أو نص سوى الفراغ المخالف.
+    """
+    parts = re.split(r"(<[^>]*>)", html)
+    token = "\u0000"
+    tags: list[str] = []
+    buffered: list[str] = []
+    for part in parts:
+        if part.startswith("<") and part.endswith(">"):
+            tags.append(part)
+            buffered.append(token)
+        else:
+            buffered.append(part)
+    text = "".join(buffered)
+    # الفاصل قد يكون مسافة عادية أو مسافة غير فاصلة (&nbsp;) تُستعمل للتحكم في اتجاه النص
+    text = text.replace("&nbsp;", "\u00a0")
+    pattern = re.compile(r"([A-Za-z0-9])(\u0000*)[ \t\u00a0]+(\u0000*)([،.:؛!؟])")
+    text = pattern.sub(lambda m: m.group(1) + m.group(2) + m.group(3) + m.group(4), text)
+    out: list[str] = []
+    pending = iter(tags)
+    for chunk in text.split(token):
+        out.append(chunk)
+        out.append(next(pending, ""))
+    return "".join(out)

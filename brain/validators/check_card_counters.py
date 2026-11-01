@@ -14,13 +14,18 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_REGISTRY = ROOT / "appendices" / "card_registry.json"
 CONTRACT_LINE = "✔ بطاقة الفروع الثلاثة: العناوين والعدادات والمراسي متطابقة عربيًا وإنجليزيًا"
+_SITE_GENERATOR = Path(os.environ.get("SITE_DIR") or (ROOT.parent / "seawatch")) / "generator"
+if not _SITE_GENERATOR.is_dir():
+    raise ImportError(f"مسار مولّد السطح المرسوم غير موجود: {_SITE_GENERATOR}")
+sys.path.insert(0, str(_SITE_GENERATOR))
+from card_measurements import measure_rendered_target as _shared_measure_rendered_target  # noqa: E402
 
 
 def _default_dist_root() -> Path:
     site = os.environ.get("SITE_DIR")
     if site:
         return Path(site) / "dist"
-    return ROOT.parent.parent / "seawatch" / "dist"
+    return ROOT.parent / "seawatch" / "dist"
 
 
 class Node:
@@ -120,6 +125,21 @@ def load_registry(path: Path | None = None) -> dict:
             raise ValueError(f"بطاقة بلا مكوّن أو aria_label: {card.get('id')}")
         if status.get("state") == "enabled" and not card["counters"]:
             raise ValueError(f"بطاقة مفعّلة بلا مفاتيح عدادات: {card.get('id')}")
+        if component.get("class") == "sc-card":
+            for counter in card["counters"]:
+                required = ("row_label", "row_label_en", "target_title", "surface", "measurement", "anchor_rule")
+                missing = [field for field in required if field not in counter]
+                if missing:
+                    raise ValueError(f"عداد {card.get('id')}.{counter.get('key')} بلا حقول حاكمة: {', '.join(missing)}")
+                titles = counter.get("target_title")
+                if not isinstance(titles, dict) or not titles.get("ar") or not titles.get("en"):
+                    raise ValueError(f"عنوان هدف عداد غير صالح: {card.get('id')}.{counter.get('key')}")
+                if counter.get("surface") not in {"report", "additions"}:
+                    raise ValueError(f"سطح هدف عداد غير صالح: {card.get('id')}.{counter.get('key')}")
+                if counter.get("measurement") not in {"table_body_rows", "visible_items"}:
+                    raise ValueError(f"قياس هدف عداد غير معتمد: {card.get('id')}.{counter.get('key')}")
+                if not isinstance(counter.get("anchor_rule"), dict) or counter["anchor_rule"].get("mode") not in {"section", "heading"}:
+                    raise ValueError(f"قاعدة مرساة عداد غير صالحة: {card.get('id')}.{counter.get('key')}")
     return registry
 
 
@@ -193,6 +213,49 @@ def _count_heading_list(heading: Node) -> int:
         if lists:
             return sum(1 for li in _nodes(lists[0], "li"))
     return 0
+
+
+def _count_visible_items(node: Node) -> int:
+    """Count the first visible item structure in a rendered section.
+
+    A section may deliberately be prose rather than a table/list. In that case
+    each rendered paragraph is one visible item; the gate must measure it rather
+    than inventing a table requirement.
+    """
+    lists = _nodes(node, "ul") + _nodes(node, "ol")
+    if lists:
+        return sum(1 for li in _nodes(lists[0], "li"))
+    tables = _nodes(node, "table")
+    if tables:
+        return _count_table_rows(node)
+    paragraphs = []
+    for paragraph in _nodes(node, "p"):
+        classes = set((paragraph.attrs.get("class") or "").split())
+        if classes & {"sec-lede", "src-note"}:
+            continue
+        if paragraph.text():
+            paragraphs.append(paragraph)
+    return len(paragraphs)
+
+
+def _serialize_node(node: Node) -> str:
+    """Serialize the already-parsed rendered target for the shared measurer."""
+    if isinstance(node, str):
+        return html_lib.escape(node)
+    attrs = "".join(
+        f' {key}="{html_lib.escape(str(value), quote=True)}"'
+        for key, value in node.attrs.items()
+    )
+    if node.tag in TreeParser.VOID:
+        return f"<{node.tag}{attrs}>"
+    return f"<{node.tag}{attrs}>" + "".join(_serialize_node(child) for child in node.children) + f"</{node.tag}>"
+
+
+def _measure_rendered_target(source: str | Node, measurement: str, target_id: str | None = None) -> int:
+    """Use the exact site measurement function for both card and target."""
+    html_source = _serialize_node(source) if isinstance(source, Node) else source
+    result = _shared_measure_rendered_target(html_source, measurement, target_id)
+    return int(result["count"])
 
 
 def _arabic_counter(text: str) -> tuple[int, str] | None:
@@ -296,11 +359,56 @@ def _target_for_href(href: str, ar_report: Node, ar_additions: Node, en_report: 
 
 
 def _target_title(counter: dict, lang: str) -> str:
-    return counter.get("target", {}).get("title_en" if lang == "en" else "title", "")
+    return (counter.get("target_title") or {}).get("en" if lang == "en" else "ar", "")
+
+
+def _title_matches_policy(policy_title: str, target_title: str, lang: str,
+                          title_map: dict[str, str]) -> bool:
+    raw_left = _norm(policy_title)
+    raw_right = _norm(target_title)
+    if raw_left == raw_right or raw_left in raw_right or raw_right in raw_left:
+        return True
+    if lang != "en":
+        return False
+    left = title_map.get(raw_left, raw_left).casefold()
+    right = title_map.get(raw_right, raw_right).casefold()
+    return left == right or left in right or right in left
+
+
+def _counter_surface(counter: dict, lang: str, sections_policy: dict | None,
+                     title_map: dict[str, str]) -> tuple[str | None, str | None]:
+    # تعيين السطح يتم من العنوان العربي الحاكم؛ الترجمة تخص مطابقة العنوان
+    # داخل الصفحة الإنجليزية فقط، ولا يجوز أن تنشئ خريطة سطح ثانية.
+    probe = (counter.get("target_title") or {}).get("ar", "")
+    declared = counter.get("surface")
+    if sections_policy is None:
+        if declared not in {"report", "additions"}:
+            return None, f"{lang}: سطح هدف العداد غير مسجل: {probe}"
+        return declared, None
+    report = [title for title in sections_policy.get("required_in_report", [])
+              if _title_matches_policy(str(title), probe, lang, title_map)]
+    additions = [title for title in sections_policy.get("required_in_additions", [])
+                 if _title_matches_policy(str(title), probe, lang, title_map)]
+    if len(report) + len(additions) != 1:
+        return None, f"{lang}: سطح هدف العداد غير قابل للتعيين من السياسة: {probe}"
+    surface = "report" if report else "additions"
+    if declared and declared != surface:
+        return surface, f"{lang}: سجل العداد يعلن سطح {declared} لكن السياسة تسند {probe} إلى {surface}"
+    return surface, None
+
+
+def _section_ancestor(node: Node) -> Node | None:
+    current = node
+    while current is not None:
+        if current.tag == "section":
+            return current
+        current = current.parent
+    return None
 
 
 def _validate_news_card(card: dict, node: Node, report: Node, additions: Node, ar_report: Node, ar_additions: Node,
-                        lang: str, title_map: dict[str, str]) -> list[str]:
+                        lang: str, title_map: dict[str, str],
+                        sections_policy: dict | None = None) -> list[str]:
     errors: list[str] = []
     counters = card["counters"]
     rows = _card_rows(node, lang)
@@ -323,43 +431,56 @@ def _validate_news_card(card: dict, node: Node, report: Node, additions: Node, a
         unknown = _unknown_latin(row["text"], card.get("latin_allowlist", [])) if lang == "ar" else []
         if unknown:
             errors.append(f"{lang}: نص بحروف لاتينية متصلة داخل صف {label} خارج المسموح: {', '.join(unknown)}")
+        title = _target_title(counter, lang)
+        target_surface, surface_error = _counter_surface(counter, lang, sections_policy, title_map)
+        if surface_error:
+            errors.append(surface_error)
+        if target_surface is None:
+            continue
         href = row["href"]
         if "#" not in href:
             errors.append(f"{lang}: مرساة {label} بلا جزء معرف: {href}")
             continue
         frag = href.split("#", 1)[1]
-        target = _target_for_href(href, ar_report, ar_additions, report if lang == "en" else None, additions if lang == "en" else None, lang)
+        href_surface = "additions" if "additions" in href.split("#", 1)[0] else "report"
+        if href_surface != target_surface:
+            errors.append(f"{lang}: مرساة {label} في سطح {href_surface} والسياسة تسندها إلى {target_surface}")
+        target = (ar_additions if lang != "en" else additions) if target_surface == "additions" else (ar_report if lang != "en" else report)
         target_node = _find_id(target, frag)
         if target_node is None:
-            errors.append(f"{lang}: مرساة {label} غير موجودة: #{frag}")
-            continue
-        title = _target_title(counter, lang)
-        measurement = counter.get("target", {}).get("measurement")
-        if measurement == "list_items":
-            if key == "watch" and target_node.tag in {"h2", "h3", "h4"}:
-                target_heading = target_node if _same_title(target_node.text(), title, lang, title_map) else None
-            else:
-                target_heading = next((n for n in _nodes(target_node, "h2") if _same_title(n.text(), title, lang, title_map)), None)
-            measured = _count_heading_list(target_heading) if key == "watch" and target_heading else _count_list(target_node)
-        elif measurement == "table_body_rows":
-            target_heading = _find_heading(target_node if target_node.tag == "section" else target_node, title, ("h2",), lang, title_map)
-            measured = _count_table_rows(target_node)
-            if not _nodes(target_node, "table"):
-                errors.append(f"{lang}: قسم {title} ليس جدولًا")
-        else:
-            target_heading = None
-            measured = 0
+            goto = row["goto"]
+            if not goto or not _same_title(goto, title, lang, title_map):
+                errors.append(f"{lang}: مرساة {label} غير موجودة: #{frag}")
+                continue
+            target_node = _find_heading(target, title, ("h2", "h3", "h4"), lang, title_map)
+            if target_node is None:
+                errors.append(f"{lang}: مرساة {label} غير موجودة في سطح {target_surface}: #{frag}")
+                continue
+        measurement = counter["measurement"]
+        scope = target_node if target_node.tag == "section" else _section_ancestor(target_node) or target_node
+        target_heading = _find_heading(scope, title, ("h2",), lang, title_map)
+        rendered = _shared_measure_rendered_target(_serialize_node(scope), measurement)
+        measured = int(rendered["count"])
+        if measurement == "table_body_rows" and not rendered["has_table"]:
+            errors.append(f"{lang}: قسم {title} ليس جدولًا")
         if target_heading is None:
             errors.append(f"{lang}: عنوان الهدف لا يطابق {label}: {title}")
-        if key == "watch" and target_heading is not target_node:
-            errors.append(f"{lang}: مرساة {label} لا تهبط مباشرة على عنوان الهدف «{title}»: {frag}")
+        anchor_mode = counter["anchor_rule"]["mode"]
+        if anchor_mode == "section" and target_node.tag != "section":
+            errors.append(f"{lang}: مرساة {label} يجب أن تهبط على أعلى القسم «{title}»: {frag}")
+        elif anchor_mode == "heading" and target_node.tag not in {"h2", "h3", "h4"}:
+            errors.append(f"{lang}: مرساة {label} يجب أن تهبط مباشرة على عنوان الهدف «{title}»: {frag}")
         if row["count"] != measured:
             errors.append(f"{lang}: {label} ({key}) عداد البطاقة={row['count']} والهدف={measured}")
         if row["goto"] and not _same_title(row["goto"], title, lang, title_map):
             errors.append(f"{lang}: مرساة {label} بعنوان غير مطابق: {row['goto']} ≠ {title}")
+    for row in rows:
+        detail_text = _norm(row["text"])
+        if row["label"] and detail_text.startswith(row["label"]):
+            detail_text = detail_text[len(row["label"]):].strip()
+        if "خلال 24 ساعة السابقة" in detail_text or "over the previous 24 hours" in detail_text:
+            errors.append(f"{lang}: لفظ الفترة السابقة تسرب إلى تفاصيل بطاقة الفروع")
     card_text = _norm(node.text())
-    if "خلال 24 ساعة السابقة" in card_text or "over the previous 24 hours" in card_text:
-        errors.append(f"{lang}: لفظ الفترة السابقة تسرب إلى بطاقة الفروع")
     if lang == "en" and re.search(r"[\u0600-\u06FF]", card_text):
         errors.append("en: نص عربي متسرب داخل بطاقة الفروع")
     return errors
@@ -575,7 +696,9 @@ def validate_official_cards(meta: dict, registry: dict) -> list[str]:
                 errors.append("حاجز منع الصفر الكاذب: وفيات البحّارة بلا إفصاح لا تعرض 0")
         if cid == "imo-transit-september-2026":
             detail = " ".join(str(card.get(k) or "") for k in ("constraint", "period", "average", "high", "low"))
-            if card.get("badges") != ["للعلم العام", "آخر تحديث سبتمبر 2026"]:
+            # مصدر الحكم الواحد: الأوسمة تُقرأ من السجل الحاكم (official_cards) لا من قائمة مثبّتة في الكود،
+            # لأن المالك أقرّ حذف وسم «للعلم العام» من كل الأسطح. الشرط يبقى فشلًا مغلقًا على أي فرق.
+            if card.get("badges") != (expected.get("badges") or []):
                 errors.append("حاجز العبور: الوسمان الرسميان مفقودان")
             if not all(token in detail for token in ("15.6", "25.8", "23 سبتمبر", "8.0", "3 سبتمبر")):
                 errors.append("حاجز العبور: متوسط أو أعلى/أدنى قراءة سبتمبر مفقودة")
@@ -588,7 +711,8 @@ def validate_official_cards(meta: dict, registry: dict) -> list[str]:
 
 def validate_one(report_html: str, additions_html: str, *, ar_report_html: str | None = None,
                  ar_additions_html: str | None = None, title_map: dict[str, str] | None = None,
-                 registry: dict | None = None, zones_data: dict | None = None) -> list[str]:
+                 registry: dict | None = None, zones_data: dict | None = None,
+                 sections_policy: dict | None = None) -> list[str]:
     report = parse_document(report_html)
     additions = parse_document(additions_html)
     lang = _lang(report)
@@ -603,7 +727,8 @@ def validate_one(report_html: str, additions_html: str, *, ar_report_html: str |
         component_class = card["page_component"]["class"]
         for node in nodes:
             if component_class == "sc-card":
-                errors.extend(_validate_news_card(card, node, report, additions, ar_report, ar_additions, lang, title_map or {}))
+                errors.extend(_validate_news_card(card, node, report, additions, ar_report, ar_additions,
+                                                  lang, title_map or {}, sections_policy))
             elif component_class == "tz":
                 errors.extend(_validate_zone_card(card, node, lang, zones_data, title_map or {}))
             else:
@@ -614,17 +739,20 @@ def validate_one(report_html: str, additions_html: str, *, ar_report_html: str |
 def validate_card_documents(*, ar_report: str, ar_additions: str, en_report: str | None = None,
                              en_additions: str | None = None, glossary_path: Path | None = None,
                              registry_path: Path | None = None, zones_data: dict | None = None,
-                             meta_data: dict | None = None) -> list[str]:
+                             meta_data: dict | None = None,
+                             sections_policy: dict | None = None) -> list[str]:
     try:
         registry = load_registry(registry_path)
     except ValueError as exc:
         return [str(exc)]
     title_map = _load_title_map(glossary_path)
-    errors = validate_one(ar_report, ar_additions, title_map=title_map, registry=registry, zones_data=zones_data)
+    errors = validate_one(ar_report, ar_additions, title_map=title_map, registry=registry,
+                          zones_data=zones_data, sections_policy=sections_policy)
     if en_report:
         errors.extend(validate_one(en_report, en_additions or ar_additions, ar_report_html=ar_report,
                                    ar_additions_html=ar_additions, title_map=title_map,
-                                   registry=registry, zones_data=zones_data))
+                                   registry=registry, zones_data=zones_data,
+                                   sections_policy=sections_policy))
     if meta_data is not None and zones_data is not None:
         errors.extend(validate_hero_kpis(meta_data, zones_data, registry, rendered_html=ar_report))
     if meta_data is not None:
@@ -649,11 +777,17 @@ def main(argv=None) -> int:
     zones_data = _load_json(zone_path)
     meta_path = dist.parent / "sources" / "meta" / f"{args.date}.json"
     meta_data = _load_json(meta_path)
+    policy_path = dist.parent / "sources" / "report-sections-policy.json"
+    sections_policy = _load_json(policy_path)
+    if sections_policy is None:
+        print(f"✘ سياسة أسطح الأقسام مفقودة أو غير صالحة: {policy_path}")
+        return 2
     errors = validate_card_documents(
         ar_report=paths[0].read_text(encoding="utf-8"), ar_additions=paths[1].read_text(encoding="utf-8"),
         en_report=paths[2].read_text(encoding="utf-8"), en_additions=paths[3].read_text(encoding="utf-8"),
         glossary_path=dist.parent / "sources" / "i18n" / "en" / "glossary.json",
         registry_path=Path(args.registry), zones_data=zones_data, meta_data=meta_data,
+        sections_policy=sections_policy,
     )
     if errors:
         for error in errors:

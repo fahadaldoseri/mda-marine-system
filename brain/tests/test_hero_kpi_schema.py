@@ -2,13 +2,14 @@
 """اختبار عقد بناء hero_kpis: مخطط قديم تاريخي ومخطط صفين حديث."""
 from __future__ import annotations
 
+import os
 import sys
 import tempfile
 import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SITE = Path("/home/ubuntu/seawatch")
+SITE = SITE_ROOT = Path(__file__).resolve().parents[1].parent / "seawatch"
 sys.path.insert(0, str(SITE / "generator"))
 import build_report  # noqa: E402
 

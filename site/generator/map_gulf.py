@@ -18,7 +18,7 @@ from codes import short_code  # عرض مختصر لرموز الوقائع عل
 REPORT_DATE = None
 from pathlib import Path
 
-from shapely.geometry import LineString, MultiPolygon, Polygon, box
+from shapely.geometry import LineString, MultiLineString, MultiPolygon, Polygon, box, shape
 
 DATA = Path(__file__).resolve().parent / "data"  # بيانات الخريطة بجوار الوحدة (مصدر واحد)
 
@@ -143,6 +143,80 @@ def _geom_paths(geom):
 
 _LAND_CACHE = {}
 _BORDER_CACHE = {}
+_MARITIME_CACHE = {}
+
+
+def _line_paths(geom):
+    """حوّل LineString/MultiLineString إلى مسارات SVG بعد القص بالنطاق الحالي."""
+    if geom.is_empty:
+        return []
+    lines = [geom] if isinstance(geom, LineString) else (
+        list(geom.geoms) if isinstance(geom, MultiLineString) else [])
+    out = []
+    for line in lines:
+        if not isinstance(line, LineString) or len(line.coords) < 2:
+            continue
+        out.append("M" + "L".join(f"{pt(c[0], c[1])[0]:.1f},{pt(c[0], c[1])[1]:.1f}" for c in line.coords))
+    return out
+
+
+def _maritime_boundary_paths():
+    """حدود بحرية مصدرها Marine Regions، لا تُخلط مع حدود اليابسة."""
+    key = BBOX
+    if key in _MARITIME_CACHE:
+        return _MARITIME_CACHE[key]
+    data = _load("marine_boundaries")
+    paths = []
+    if data:
+        for feat in data.get("features", []):
+            try:
+                geom = shape(feat.get("geometry") or {})
+                if geom.is_empty or not geom.intersects(BOX):
+                    continue
+                paths.extend(_line_paths(geom.intersection(BOX).simplify(TOLERANCE)))
+            except Exception:
+                continue
+    _MARITIME_CACHE[key] = paths
+    return paths
+
+
+ROUTES = {
+    "inbound": [(57.70, 26.42), (57.10, 26.48), (56.55, 26.54), (56.08, 26.58)],
+    "outbound": [(56.08, 26.16), (56.58, 26.12), (57.12, 26.06), (57.70, 25.96)],
+    "oman": [(57.68, 25.72), (57.08, 25.62), (56.50, 25.56), (56.08, 25.60)],
+}
+ROUTE_LABELS = [
+    ("مسار دخول", 56.92, 26.70, "inbound"),
+    ("مسار خروج", 56.96, 25.94, "outbound"),
+    ("المسار الجديد من جهة عُمان", 56.95, 25.48, "oman"),
+    ("منطقة الفصل", 56.82, 26.33, "separation"),
+]
+
+
+def _route_d(coords):
+    return "M" + "L".join(f"{pt(lon, lat)[0]:.1f},{pt(lon, lat)[1]:.1f}" for lon, lat in coords)
+
+
+def _routing_svg():
+    """مخطط إرشادي لا يُقدّم كتعليمات ملاحة تشغيلية."""
+    separation = [(56.06, 26.60), (57.72, 26.47), (57.72, 25.91), (56.06, 26.10)]
+    sep_d = "M" + "L".join(f"{pt(lon, lat)[0]:.1f},{pt(lon, lat)[1]:.1f}" for lon, lat in separation) + "Z"
+    paths = [
+        f'<path class="mp-separation-zone" d="{sep_d}" style="fill:#ffc857;fill-opacity:.12;stroke:#ffc857;stroke-width:1.4;stroke-dasharray:5 5;vector-effect:non-scaling-stroke"/>',
+        f'<path class="mp-route mp-route-inbound" d="{_route_d(ROUTES["inbound"])}" style="fill:none;stroke:#72e6d4;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:9 5;vector-effect:non-scaling-stroke"/>',
+        f'<path class="mp-route mp-route-outbound" d="{_route_d(ROUTES["outbound"])}" style="fill:none;stroke:#ffc266;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:9 5;vector-effect:non-scaling-stroke"/>',
+        f'<path class="mp-route mp-route-oman" d="{_route_d(ROUTES["oman"])}" style="fill:none;stroke:#d7a7ff;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:3 5;vector-effect:non-scaling-stroke"/>',
+    ]
+    labels = []
+    for text, lon, lat, kind in ROUTE_LABELS:
+        x, y = pt(lon, lat)
+        if 0 <= x <= WIDTH and 0 <= y <= HEIGHT:
+            color = {"inbound": "#bffcf2", "outbound": "#ffe0a3", "oman": "#ead4ff", "separation": "#ffe39a"}[kind]
+            labels.append(
+                f'<text class="mp-route-label mp-route-{kind}" x="{x:.1f}" y="{y:.1f}" '
+                f'style="fill:{color};font-size:12px;font-weight:700;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">{_esc(text)}</text>'
+            )
+    return f'<g class="mp-routes" aria-label="مسارات إرشادية (تمثيل تخطيطي)">{"".join(paths)}{"".join(labels)}</g>'
 
 
 def _land_paths():
@@ -286,34 +360,37 @@ def _esc(v):
 # ---------------------------------------------------------------- تكبير هرمز (لخريطة الشاشة العليا فقط)
 ZOOM_BBOX = (54.6, 23.4, 58.0, 27.0)     # مضيق هرمز وخورفكان وشرق الفجيرة
 ZOOM_WIDTH = 520.0
-ZOOM_MIN_POINTS = 2                      # لا يظهر التكبير إلا إن تجمّعت وقائع فيه
 ZOOM_TITLE = "تكبير: مضيق هرمز وخورفكان"
-
-
 def _zoom_parts(points):
-    """(مستطيل المنطقة على اللوحة الرئيسية، لوحة التكبير) أو ("", "") عند قلة الوقائع فيها.
+    """(مستطيل المنطقة على اللوحة الرئيسية، لوحة تكبير ثابتة لمضيق هرمز).
 
-    يُستدعى واللوحة الرئيسية هي النطاق الحالي، ويعيدها قبل الرجوع.
+    اللوحة لا تعتمد على وجود واقعة مكانية؛ فهي سياق جغرافي وتكبير للهندسة
+    نفسها، بينما تُضاف العلامات فقط عندما تحمل الواجهة إحداثيات مثبتة.
     """
     inside = [(i, p) for i, p in enumerate(points, start=1)
               if ZOOM_BBOX[0] <= float(p["lon"]) <= ZOOM_BBOX[2] and ZOOM_BBOX[1] <= float(p["lat"]) <= ZOOM_BBOX[3]]
-    if len(inside) < ZOOM_MIN_POINTS:
-        return "", ""
     x0, y0 = pt(ZOOM_BBOX[0], ZOOM_BBOX[3])
     x1, y1 = pt(ZOOM_BBOX[2], ZOOM_BBOX[1])
     rect = (f'<rect class="mp-zoomrect" x="{x0:.1f}" y="{y0:.1f}" width="{x1 - x0:.1f}" height="{y1 - y0:.1f}" '
             f'rx="4" style="fill:none;stroke:var(--accent);stroke-width:1.6;stroke-dasharray:7 5"/>')
     _set_bbox(ZOOM_BBOX, ZOOM_WIDTH)
     try:
-        land_svg = "".join(f'<path d="{d}"/>' for d in _land_paths())
-        border_svg = "".join(f'<path d="{d}"/>' for d in _border_paths())
+        land_svg = "".join(
+            f'<path d="{d}" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/>'
+            for d in _land_paths())
+        border_svg = "".join(
+            f'<path d="{d}" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/>'
+            for d in _border_paths())
+        maritime_svg = "".join(
+            f'<path class="mp-maritime-boundary" d="{d}" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/>'
+            for d in _maritime_boundary_paths())
         grid = []
         for lon in range(math.ceil(ZOOM_BBOX[0]), math.floor(ZOOM_BBOX[2]) + 1):
             x, _ = pt(lon, ZOOM_BBOX[1])
-            grid.append(f'<line x1="{x:.1f}" y1="0" x2="{x:.1f}" y2="{HEIGHT:.0f}"/>')
+            grid.append(f'<line x1="{x:.1f}" y1="0" x2="{x:.1f}" y2="{HEIGHT:.0f}" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/>')
         for lat in range(math.ceil(ZOOM_BBOX[1]), math.floor(ZOOM_BBOX[3]) + 1):
             _, y = pt(ZOOM_BBOX[0], lat)
-            grid.append(f'<line x1="0" y1="{y:.1f}" x2="{WIDTH:.0f}" y2="{y:.1f}"/>')
+            grid.append(f'<line x1="0" y1="{y:.1f}" x2="{WIDTH:.0f}" y2="{y:.1f}" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/>')
         true_xy = [pt(float(p["lon"]), float(p["lat"])) for _, p in inside]
         shown = _spread_markers(true_xy, sep=2 * MARK_SEP)
         marks = []
@@ -328,32 +405,74 @@ def _zoom_parts(points):
                 f'<g class="mp-event" transform="translate({x:.1f},{y:.1f})" style="--mk:{color}">'
                 f'<circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/>'
                 f'<text class="mp-num" y="6" style="font-size:17px">{i}</text></g>')
+        place_labels = [
+            ("إيران", 26.42, 56.30, "mp-country"),
+            ("عُمان", 24.36, 56.42, "mp-country"),
+            ("الإمارات", 25.04, 56.02, "mp-country"),
+            ("مضيق هرمز", 26.66, 56.35, "mp-sea-lbl mp-sea-sm"),
+            ("الخليج العربي", 26.92, 55.20, "mp-sea-lbl mp-sea-lg"),
+            ("خليج عمان", 24.14, 57.12, "mp-sea-lbl mp-sea-lg"),
+            ("خصب", 26.18, 56.25, "mp-port-lbl"),
+            ("الفجيرة", 25.12, 56.36, "mp-port-lbl"),
+        ]
+        label_svg = "".join(
+            f'<text class="{cls}" x="{pt(lon, lat)[0]:.1f}" y="{pt(lon, lat)[1]:.1f}" '
+            f'style="fill:{"#bce8ff" if "country" in cls else "#b6e7ff" if "sea" in cls else "#e4f6ff"};font-size:{"14" if "country" in cls else "16" if "sea" in cls else "13"}px;font-weight:600;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">{_esc(text)}</text>'
+            for text, lat, lon, cls in place_labels)
         svg = (f'<svg class="hmap-zsvg" viewBox="0 0 {WIDTH:.0f} {HEIGHT:.0f}" role="img" aria-label="{_esc(ZOOM_TITLE)}">'
-               f'<rect class="mp-sea-bg" x="0" y="0" width="{WIDTH:.0f}" height="{HEIGHT:.0f}"/>'
+               '<desc>تكبير للخريطة الرئيسية؛ تفاصيل نطاق العرض في وصف البطاقة.</desc>'
+               f'<rect class="mp-sea-bg" style="fill:#081d31" x="0" y="0" width="{WIDTH:.0f}" height="{HEIGHT:.0f}"/>'
                f'<g class="mp-grid">{"".join(grid)}</g>'
                f'<g class="mp-land" fill-rule="evenodd">{land_svg}</g>'
                f'<g class="mp-borders">{border_svg}</g>'
+               f'<g class="mp-maritime-boundaries">{maritime_svg}</g>'
+               f'{_routing_svg()}'
+               f'<g class="mp-places">{label_svg}</g>'
                f'<g class="mp-events">{"".join(marks)}</g></svg>')
     finally:
         _set_bbox(MAIN_BBOX)
     return rect, f'<div class="hmap-zoom">{svg}<div class="hz-cap">{_esc(ZOOM_TITLE)}</div></div>'
 
 
+MAP_KEY_STYLE = """<style>
+.map-key{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 22px;margin:14px 0 0;padding:0}
+.map-key li{display:flex;align-items:center;gap:8px;font-size:12.5px;line-height:1.55;color:#c3d2e6;margin:0}
+.map-key .lg-sw{width:24px;height:14px;border-radius:3px;display:inline-block;flex:0 0 auto;border:1px solid #42677f}
+.map-key .sw-land{background:#264b68;border-color:#78b7cc}
+.map-key .sw-sea{background:#081d31}
+.map-key .sw-border{height:0;border:0;border-top:2px dashed #73adc6}
+.map-key .sw-maritime-boundary{height:0;border:0;border-top:2px dashed #b6e7ff}
+.map-key .sw-grid{height:0;border:0;border-top:1px solid #9ac7da}
+.map-key .sw-port{width:14px;height:14px;border:0;position:relative}
+.map-key .sw-port:after{content:"";position:absolute;inset:4px;background:#e4f6ff;border-radius:50%}
+.map-key .sw-strait{width:auto;height:auto;padding:0 5px;border:1px solid #b6e7ff;border-radius:999px;color:#b6e7ff}
+.map-key .sw-route-in,.map-key .sw-route-out,.map-key .sw-route-oman,.map-key .sw-separation{height:0;border:0;border-top-width:2px;border-top-style:dashed}
+.map-key .sw-route-in{border-top-color:#72e6d4}.map-key .sw-route-out{border-top-color:#ffc266}.map-key .sw-route-oman{border-top-color:#d7a7ff;border-top-style:dotted}.map-key .sw-separation{border-top-color:#ffc857}
+.map-key .sw-route-note{width:24px;height:0;border:0;border-top:1px dotted #ffc857}
+.map-key .sw-none{border:1px dashed #7895b0;background:transparent}
+.map-key .lg-none{grid-column:1 / -1;color:#c3d2e6}
+@media (max-width:760px){.map-key{grid-template-columns:minmax(0,1fr)}}
+</style>"""
+
 
 def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lon, grid_lat,
            extra_svg="", overlay=""):
-    land_svg = "".join(f'<path d="{d}"/>' for d in _land_paths())
-    border_svg = "".join(f'<path d="{d}"/>' for d in _border_paths())
+    land_svg = "".join(
+        f'<path d="{d}" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/>'
+        for d in _land_paths())
+    border_svg = "".join(
+        f'<path d="{d}" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/>'
+        for d in _border_paths())
 
     grid_lines, grid_labels = [], []
     for lon in grid_lon:
         x, _ = pt(lon, BBOX[1])
-        grid_lines.append(f'<line x1="{x:.1f}" y1="0" x2="{x:.1f}" y2="{HEIGHT:.0f}"/>')
-        grid_labels.append(f'<text class="mp-grid-lbl" x="{x+5:.1f}" y="{HEIGHT-7:.0f}">{lon}°E</text>')
+        grid_lines.append(f'<line x1="{x:.1f}" y1="0" x2="{x:.1f}" y2="{HEIGHT:.0f}" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/>')
+        grid_labels.append(f'<text class="mp-grid-lbl" x="{x+5:.1f}" y="{HEIGHT-7:.0f}" style="fill:#9ac7da">{lon}°E</text>')
     for lat in grid_lat:
         _, y = pt(BBOX[0], lat)
-        grid_lines.append(f'<line x1="0" y1="{y:.1f}" x2="{WIDTH:.0f}" y2="{y:.1f}"/>')
-        grid_labels.append(f'<text class="mp-grid-lbl" x="7" y="{y-6:.1f}" text-anchor="start">{lat}°N</text>')
+        grid_lines.append(f'<line x1="0" y1="{y:.1f}" x2="{WIDTH:.0f}" y2="{y:.1f}" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/>')
+        grid_labels.append(f'<text class="mp-grid-lbl" x="7" y="{y-6:.1f}" text-anchor="start" style="fill:#9ac7da">{lat}°N</text>')
 
     true_xy = [pt(float(p["lon"]), float(p["lat"])) for p in points]
     shown_xy = _spread_markers(true_xy)
@@ -376,17 +495,20 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
         s["nx"], s["ny"] = nx, ny
 
     seas_svg = "".join(
-        f'<text class="mp-sea-lbl mp-sea-{s["sz"]}" x="{s["nx"]:.1f}" y="{s["ny"]:.1f}">{s["text"]}</text>'
+        f'<text class="mp-sea-lbl mp-sea-{s["sz"]}" x="{s["nx"]:.1f}" y="{s["ny"]:.1f}" '
+        f'style="fill:#b6e7ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">{s["text"]}</text>'
         for s in specs if s["k"] == "sea"
     )
     ports_svg = "".join(
         f'<g transform="translate({s["px"]:.1f},{s["py"]:.1f})">'
-        f'<circle class="mp-port-dot" r="2.8"/>'
-        f'<text class="mp-port-lbl" x="{s["nx"] - s["px"]:.1f}" y="{s["ny"] - s["py"]:.1f}">{s["text"]}</text></g>'
+        f'<circle class="mp-port-dot" r="2.8" style="fill:#e4f6ff"/>'
+        f'<text class="mp-port-lbl" x="{s["nx"] - s["px"]:.1f}" y="{s["ny"] - s["py"]:.1f}" '
+        f'style="fill:#e4f6ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">{s["text"]}</text></g>'
         for s in specs if s["k"] == "port"
     )
     countries_svg = "".join(
-        f'<text class="mp-country" x="{s["nx"]:.1f}" y="{s["ny"]:.1f}">{s["text"]}</text>'
+        f'<text class="mp-country" x="{s["nx"]:.1f}" y="{s["ny"]:.1f}" '
+        f'style="fill:#bce8ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">{s["text"]}</text>'
         for s in specs if s["k"] == "country"
     )
 
@@ -422,28 +544,42 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
             "لوحة سياق جغرافي: السواحل والمضيق والموانئ وشبكة خطوط الطول والعرض. "
             "لا تُرسم مواقع وقائع لعدم ثبوت إحداثيات في المصادر.")
     key_html = "" if points else (
-        '<ul class="map-legend mp-key">'
+        '<ul class="map-key mp-key" aria-label="مفتاح طبقات الخريطة">'
         '<li><span class="lg-sw sw-land" role="presentation"></span>اليابسة</li>'
         '<li><span class="lg-sw sw-sea" role="presentation"></span>البحر</li>'
         '<li><span class="lg-sw sw-border" role="presentation"></span>حدود الدول</li>'
+        '<li><span class="lg-sw sw-maritime-boundary" role="presentation"></span>حدود بحرية</li>'
         '<li><span class="lg-sw sw-grid" role="presentation"></span>شبكة خطوط الطول والعرض</li>'
         '<li><span class="lg-sw sw-port" role="presentation"></span>نقطة ميناء</li>'
         '<li><span class="lg-sw sw-strait" role="presentation"></span>تسمية بحر أو مضيق</li>'
+        '<li><span class="lg-sw sw-route-in" role="presentation"></span>مسار دخول</li>'
+        '<li><span class="lg-sw sw-route-out" role="presentation"></span>مسار خروج</li>'
+        '<li><span class="lg-sw sw-route-oman" role="presentation"></span>مسار جديد من جهة عُمان</li>'
+        '<li><span class="lg-sw sw-separation" role="presentation"></span>منطقة الفصل</li>'
+        '<li class="lg-none"><span class="lg-sw sw-route-note" role="presentation"></span>'
+        'مسارات إرشادية (تمثيل تخطيطي) — ليست تعليمات ملاحة</li>'
         '<li class="lg-none"><span class="lg-sw sw-none" role="presentation"></span>'
         'لا علامات وقائع — لا إحداثيات مثبتة في المصادر</li>'
         '</ul>'
     )
-    return f"""<div class="map-panel">
+    route_svg = _routing_svg() if BBOX == MAIN_BBOX else ""
+    maritime_svg = "".join(
+        f'<path class="mp-maritime-boundary" d="{d}" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/>'
+        for d in _maritime_boundary_paths())
+    return MAP_KEY_STYLE + f"""<div class="map-panel">
   <h3>{title}</h3><p class="blk-lede">{lede}</p>
   <div class="map-wrap">
     <svg class="map-svg" viewBox="0 0 {WIDTH:.0f} {HEIGHT:.0f}" role="img"
          aria-label="{label_prefix}">
-      <rect class="mp-sea-bg" style="fill:#eaf2f8" x="0" y="0" width="{WIDTH:.0f}" height="{HEIGHT:.0f}"/>
+      <desc>المعروض: بلاغات آخر 24 ساعة فقط؛ لا تُعرض طبقة تراكمية. لا تُرسم علامات وقائع لأن دفتر اليوم لا يثبت إحداثيات.</desc>
+      <rect class="mp-sea-bg" style="fill:#081d31" x="0" y="0" width="{WIDTH:.0f}" height="{HEIGHT:.0f}"/>
       <g class="mp-grid">{"".join(grid_lines)}</g>
       <g class="mp-land" fill-rule="evenodd">{land_svg}</g>
       <g class="mp-borders">{border_svg}</g>
+      <g class="mp-maritime-boundaries">{maritime_svg}</g>
       <g class="mp-places">{countries_svg}{ports_svg}{seas_svg}</g>
       <g class="mp-grid-labels">{"".join(grid_labels)}</g>
+      {route_svg}
       {extra_svg}
       <g class="mp-events">{"".join(marks)}</g>
     </svg>
@@ -458,7 +594,7 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
 def build_map(points=None, caption=None, inset=None, zoom=False):
     """لوحة رئيسية + لوحة مصغّرة اختيارية لباب المندب."""
     points = points or []
-    map_title = "خريطة الوقائع" if points else "السياق الجغرافي للقطاعات المعتمدة"
+    map_title = "خريطة الوقائع" if points else "السياق الجغرافي"
     map_label = ("خريطة الخليج العربي ومضيق هرمز وخليج عمان مع مواقع وقائع التقرير"
                  if points else "خريطة سياق جغرافي للقطاعات المعتمدة: السواحل والمضيق والموانئ وخطوط الطول والعرض؛ بلا علامات وقائع")
     _set_bbox(MAIN_BBOX)
