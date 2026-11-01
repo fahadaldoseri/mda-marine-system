@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BRAIN_ROOT = Path(__import__("os").environ.get("BRAIN_DIR") or ROOT.parent / "brain-marine-news")
 AR = ROOT / "dist" / "reports" / "2026-10-31.html"
 EN = ROOT / "dist" / "reports" / "en" / "2026-10-31.html"
+ADDITIONS = ROOT / "dist" / "additions.html"
 ZONES = ROOT / "sources" / "zones" / "2026-10-31.json"
 
 sys.path.insert(0, str(BRAIN_ROOT))
@@ -148,6 +149,7 @@ def require(cond: bool, message: str):
 def run():
     require(AR.is_file(), f"missing {AR}")
     require(EN.is_file(), f"missing {EN}")
+    require(ADDITIONS.is_file(), f"missing {ADDITIONS}")
     zones = json.loads(ZONES.read_text(encoding="utf-8"))
     for path, lang in ((AR, "ar"), (EN, "en")):
         html = path.read_text(encoding="utf-8")
@@ -181,6 +183,11 @@ def run():
                     "deprecated English news-card branch label remains")
             require(not re.search(r"[\u0600-\u06ff]", visible_text(html)),
                     "Arabic text leaked into English surface")
+    additions = ADDITIONS.read_text(encoding="utf-8")
+    require(additions.count('aria-label="خريطة سياق القطاعات للشاشة"') == 0,
+            "screen hero map must not be duplicated into the additions surface")
+    require(additions.count('aria-label="خريطة الوقائع ومفتاحها"') == 1,
+            "additions surface must contain exactly one printable map")
     print("surface contract: PASS")
 
 
