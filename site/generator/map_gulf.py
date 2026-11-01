@@ -502,7 +502,7 @@ def _zoom_parts(points):
         '<span><i class="rk-sw rk-lane" role="presentation"></i>مساران داخل النطاق الرسمي · '
         '<i class="rk-sw rk-separator" role="presentation"></i>خط فصل</span>'
         '<span><i class="rk-sw rk-inshore" role="presentation"></i>حدود منطقة الملاحة الساحلية · '
-        '<i class="rk-sw rk-arrow" role="presentation"></i>سهم اتجاه · تمثيل مخططي فقط</span>'
+        '<i class="rk-sw rk-arrow" role="presentation"></i>سهم اتجاه · تمثيل توضيحي فقط</span>'
         '</div>'
     )
     return rect, f'<div class="hmap-zoom">{svg}{route_key}<div class="hz-cap">{_esc(ZOOM_TITLE)}</div></div>'
@@ -813,9 +813,9 @@ def build_map(points=None, caption=None, inset=None, zoom=False):
     note = (
         '<p class="map-keys"><span class="mk-src">'
         'المصادر: اليابسة والحدود السياسية من Natural Earth بمقياس 1:50 مليون · '
-        'الحدود البحرية من Marine Regions (VLIZ) وتشمل خطوطًا غير محسومة وخطوط منتصف لا تُعدّ حدودًا سيادية · '
+        'الحدود البحرية من Marine Regions (VLIZ) وتشمل خطوطًا لم يُتفق عليها بعد وخطوط منتصف لا تُعدّ حدودًا سيادية · '
         'نظام فصل الملاحة في مضيق هرمز حسب مخطط المنظمة البحرية الدولية (اعتُمد 1968) بتمثيل تخطيطي · '
-        'تسميات المدن والموانئ مواضع تمثيلية تقديرية لغياب سند هيدروغرافي معلن. '
+        'تسميات المدن والموانئ مواضع تمثيلية تقديرية لغياب مرجع هيدروغرافي معلن. '
         'الإسقاط: مستوٍ محلي على WGS 84 · الشبكة: خطوط الطول والعرض. '
         'هذه الخريطة سياق إخباري وليست خريطة ملاحية ولا بديلًا عن التحذيرات الرسمية.'
         '</span><span class="mk-note">' +
