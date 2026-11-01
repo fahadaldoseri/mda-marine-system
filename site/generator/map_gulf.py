@@ -90,6 +90,25 @@ KIND_COLOR = {
     "ok": "var(--ok)",
 }
 
+
+def status_of(p: dict) -> tuple:
+    """(مفتاح اللون، التسمية العربية، التسمية الإنجليزية) لحالة الواقعة على الخريطة.
+
+    المصدر الحاكم: حقلا confirmation وqualifying في سجل القطاعات؛ ولا تُخترع حالة
+    عند غيابهما، بل تُعلن «حالة غير محددة» بدل إظهار لون محايد بلا معنى.
+    """
+    conf = (p.get("confirmation") or "").strip().lower()
+    qual = p.get("qualifying")
+    if qual is True and conf == "confirmed":
+        return "confirm", "مؤكد", "confirmed"
+    if qual is True and conf == "probable":
+        return "inter", "مرجّح", "probable"
+    if qual is True:
+        return "suspect", "غير مؤكد مؤهل", "unconfirmed (qualifying)"
+    if qual is False:
+        return "bg", "غير مؤهل — لا يُحتسب", "not qualifying"
+    return "bg", "حالة غير محددة", "status not stated"
+
 GRID_LON = [48, 52, 56, 60]
 GRID_LAT = [22, 24, 26, 28]
 INSET_GRID_LON = [40, 42, 44, 46]
@@ -435,10 +454,10 @@ def _zoom_parts(points):
             _, y = pt(ZOOM_BBOX[0], lat)
             grid.append(f'<line x1="0" y1="{y:.1f}" x2="{WIDTH:.0f}" y2="{y:.1f}" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/>')
         true_xy = [pt(float(p["lon"]), float(p["lat"])) for _, p in inside]
-        shown = _spread_markers(true_xy, sep=2 * MARK_SEP)
+        shown = _spread_markers(true_xy, sep=2.6 * MARK_SEP)
         marks = []
         for (i, p), (x, y), (tx, ty) in zip(inside, shown, true_xy):
-            color = KIND_COLOR.get(p.get("kind", "bg"), "var(--muted)")
+            color = KIND_COLOR.get(p.get("kind") or status_of(p)[0], "var(--muted)")
             if math.hypot(x - tx, y - ty) > 3:
                 marks.append(
                     f'<g class="mp-leader"><line x1="{tx:.1f}" y1="{ty:.1f}" x2="{x:.1f}" y2="{y:.1f}" '
@@ -473,6 +492,7 @@ def _zoom_parts(points):
                f'<g class="mp-maritime-boundaries">{maritime_svg}</g>'
                f'{_routing_svg()}'
                f'<g class="mp-places">{label_svg}</g>'
+               f'{_frame_svg()}'
                f'<g class="mp-events">{"".join(marks)}</g></svg>')
     finally:
         _set_bbox(MAIN_BBOX)
@@ -501,6 +521,17 @@ MAP_KEY_STYLE = """<style>
 .map-key .sw-port:after{content:"";position:absolute;inset:4px;background:#e4f6ff;border-radius:50%}
 .map-key .sw-strait{width:auto;height:auto;padding:0 5px;border:1px solid #b6e7ff;border-radius:999px;color:#b6e7ff}
 .map-key .sw-none{border:1px dashed #7895b0;background:transparent}
+.map-key .sw-mark-confirm{background:#e2554f;border-color:#f0a9a5}
+.map-key .sw-mark-prob{background:#e7b23c;border-color:#f2d79a}
+.map-key .sw-mark-unco{background:#4a7fa8;border-color:#9dc3dd}
+.map-key .sw-mark-none{background:transparent;border:2px solid #8aa2ba}
+.map-key .sw-mark-approx{width:14px;height:14px;border-radius:50%;background:transparent;border:2px dashed #cfe3f2;margin:0 5px}
+.map-key .sw-mark-exact{width:14px;height:14px;border-radius:50%;background:#e2554f;border:2px solid #081d31}
+.map-legend .lg-st{border:1px solid #42677f;border-radius:999px;padding:0 6px;font-size:11.5px;color:#cfe3f2;white-space:nowrap}
+.map-legend .lg-st.st-confirm{border-color:#e2554f;color:#f4b8b5}
+.map-legend .lg-st.st-inter{border-color:#e7b23c;color:#f2d79a}
+.map-legend .lg-st.st-suspect{border-color:#4a7fa8;color:#bcd8ec}
+.map-legend .lg-prec{color:#9fb6cb;font-size:11.5px;white-space:nowrap}
 .map-key .lg-none{grid-column:1 / -1;color:#c3e6f4}
 @media (max-width:760px){.map-key{grid-template-columns:minmax(0,1fr)}}
 .hmap-route-key{display:grid;gap:2px;padding:7px 10px 8px;border-top:1px solid #28405f;background:#0c1626;color:#c3d2e6;font-size:11.5px;line-height:1.45}
@@ -575,7 +606,8 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
     for i, p in enumerate(points, start=1):
         x, y = shown_xy[i - 1]
         tx, ty = true_xy[i - 1]
-        color = KIND_COLOR.get(p.get("kind", "bg"), "var(--muted)")
+        st_key, st_ar, st_en = status_of(p)
+        color = KIND_COLOR.get(p.get("kind") or st_key, "var(--muted)")
         code = p.get("code") or ""
         ref = p.get("ref") or ""
         if math.hypot(x - tx, y - ty) > 3:
@@ -591,31 +623,62 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
             f'<circle class="mp-dot" r="7" style="{_dot_style(p)}"/>'
             f'<text class="mp-num" y="3.7" style="fill:#fff;font-size:9.5px;font-weight:600;text-anchor:middle">{i}</text></g>'
         )
-        bits = [f'<span class="lg-txt">{p.get("label","")}</span>']
+        txt = (p.get("label") or p.get("area") or "").strip()
+        bits = [f'<span class="lg-txt">{_esc(txt)}</span>',
+                f'<span class="lg-st st-{st_key}">{st_ar}</span>',
+                f'<span class="lg-prec">{"موضع تقريبي" if p.get("precision") == "approximate" else "إحداثيات مذكورة"}</span>']
         if code:
             bits.append(f'<bdi class="bidi ev-code">{short_code(code, REPORT_DATE)}</bdi>')
         if ref:
-            bits.append(f'<bdi class="bidi">{ref}</bdi>')
+            bits.append(f'<bdi class="bidi">{_esc(ref)}</bdi>')
         legend.append(f'<li><span class="lg-num" style="--mk:{color}">{i}</span>{" ".join(bits)}</li>')
 
     legend_html = f'<ol class="map-legend">{"".join(legend)}</ol>' if legend else ""
     cap = f'<p class="src-note">{caption}</p>' if caption else ""
-    lede = ("مواقع الوقائع داخل نطاق التقرير." if points else
-            "لوحة سياق جغرافي: السواحل والمضيق والموانئ وشبكة خطوط الطول والعرض. "
-            "لا تُرسم مواقع وقائع لعدم ثبوت إحداثيات في المصادر.")
-    key_html = "" if points else (
-        '<ul class="map-key mp-key" aria-label="مفتاح طبقات الخريطة">'
+    if points:
+        _ap_n = sum(1 for p in points if p.get("precision") == "approximate")
+        lede = (f"مواقع {len(points)} واقعة داخل نطاق التقرير؛ " +
+                (f"منها {_ap_n} بموضع تقريبي داخل المنطقة نفسها لأن المصدر لم يذكر إحداثيات." if _ap_n else
+                 "وجميعها بإحداثيات مذكورة في المصادر."))
+    else:
+        lede = ("لوحة سياق جغرافي: السواحل والمضيق والموانئ وشبكة خطوط الطول والعرض. "
+                "لا تُرسم مواقع وقائع لعدم ثبوت إحداثيات في المصادر.")
+    desc_text = (_esc(label_prefix) if points else
+                 _esc("خريطة سياق جغرافي: السواحل والمضيق والموانئ وشبكة خطوط الطول والعرض؛ بلا علامات وقائع."))
+    layers = (
         '<li><span class="lg-sw sw-land" role="presentation"></span>اليابسة</li>'
         '<li><span class="lg-sw sw-sea" role="presentation"></span>البحر</li>'
         '<li><span class="lg-sw sw-border" role="presentation"></span>حدود الدول</li>'
-        '<li><span class="lg-sw sw-maritime-boundary" role="presentation"></span>حدود بحرية</li>'
+        '<li><span class="lg-sw sw-maritime-boundary" role="presentation"></span>حدود بحرية مرجعية (غير سيادية)</li>'
         '<li><span class="lg-sw sw-grid" role="presentation"></span>شبكة خطوط الطول والعرض</li>'
-        '<li><span class="lg-sw sw-port" role="presentation"></span>نقطة ميناء</li>'
+        '<li><span class="lg-sw sw-port" role="presentation"></span>نقطة مدينة أو ميناء (تقديرية)</li>'
         '<li><span class="lg-sw sw-strait" role="presentation"></span>تسمية بحر أو مضيق</li>'
-        '<li class="lg-none"><span class="lg-sw sw-none" role="presentation"></span>'
-        'لا علامات وقائع — لا إحداثيات مثبتة في المصادر</li>'
-        '</ul>'
     )
+    if points:
+        has_conf = any(status_of(p)[0] == "confirm" for p in points)
+        has_prob = any(status_of(p)[0] == "inter" for p in points)
+        has_unco = any(status_of(p)[0] == "suspect" for p in points)
+        has_ntq = any(status_of(p)[0] == "bg" for p in points)
+        has_approx = any(p.get("precision") == "approximate" for p in points)
+        has_exact = any(p.get("precision") != "approximate" for p in points)
+        marks_key = []
+        if has_conf:
+            marks_key.append('<li><span class="lg-sw sw-mark-confirm" role="presentation"></span>واقعة مؤكدة على السفن أو ملاحتها</li>')
+        if has_prob:
+            marks_key.append('<li><span class="lg-sw sw-mark-prob" role="presentation"></span>واقعة مرجّحة</li>')
+        if has_unco:
+            marks_key.append('<li><span class="lg-sw sw-mark-unco" role="presentation"></span>غير مؤكدة مؤهلة — تُذكر ولا ترفع المستوى وحدها</li>')
+        if has_ntq:
+            marks_key.append('<li><span class="lg-sw sw-mark-none" role="presentation"></span>بلاغ غير مؤهل — يُذكر ولا يُحتسب</li>')
+        if has_approx:
+            marks_key.append('<li><span class="lg-sw sw-mark-approx" role="presentation"></span>حلقة مفرّغة: موضع تقريبي داخل المنطقة نفسها (المصدر لم يذكر إحداثيات)</li>')
+        if has_exact:
+            marks_key.append('<li><span class="lg-sw sw-mark-exact" role="presentation"></span>علامة مصمتة: إحداثيات مذكورة في المصدر</li>')
+        layers = "".join(marks_key) + layers
+    else:
+        layers += ('<li class="lg-none"><span class="lg-sw sw-none" role="presentation"></span>'
+                   'لا علامات وقائع — لا إحداثيات مثبتة في المصادر</li>')
+    key_html = ('<ul class="map-key mp-key" aria-label="مفتاح طبقات الخريطة ورموزها">' + layers + '</ul>')
     route_svg = _routing_svg() if BBOX == ZOOM_BBOX else ""
     maritime_svg = "".join(
         f'<path class="mp-maritime-boundary" d="{d}" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/>'
@@ -625,7 +688,8 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
   <div class="map-wrap">
     <svg class="map-svg" viewBox="0 0 {WIDTH:.0f} {HEIGHT:.0f}" role="img"
          aria-label="{label_prefix}">
-      <desc>المعروض: بلاغات آخر 24 ساعة فقط؛ لا تُعرض طبقة تراكمية. لا تُرسم علامات وقائع لأن دفتر اليوم لا يثبت إحداثيات.</desc>
+      <title>{_esc(title)}</title>
+      <desc>{desc_text}</desc>
       <rect class="mp-sea-bg" style="fill:#081d31" x="0" y="0" width="{WIDTH:.0f}" height="{HEIGHT:.0f}"/>
       <g class="mp-grid">{"".join(grid_lines)}</g>
       <g class="mp-land" fill-rule="evenodd">{land_svg}</g>
@@ -635,6 +699,7 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
       <g class="mp-grid-labels">{"".join(grid_labels)}</g>
       {route_svg}
       {extra_svg}
+      {_frame_svg()}
       <g class="mp-events">{"".join(marks)}</g>
     </svg>
     {overlay}
@@ -645,19 +710,79 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
 </div>"""
 
 
+
+def _frame_svg() -> str:
+    """إطار خرائطي: مقياس رسم بالميل البحري والكيلومتر + سهم الشمال + إفصاح المرجع.
+
+    المقياس محسوب من عرض النطاق عند متوسط خط العرض (إسقاط مستوٍ محلي على WGS 84)،
+    ويُعلن كتقدير للسياق لا كقياس ملاحي معتمد.
+    """
+    lat_mid = (BBOX[1] + BBOX[3]) / 2.0
+    km_per_unit = ((BBOX[2] - BBOX[0]) / WIDTH) * 111.32 * math.cos(math.radians(lat_mid))
+    target = None
+    for cand in (10, 20, 25, 50, 100, 200, 500):
+        if cand / km_per_unit >= WIDTH * 0.16:
+            target = cand
+            break
+    target = target or 500
+    bar = target / km_per_unit
+    nm = target / 1.852
+    x0, y0 = 14.0, HEIGHT - 24.0
+    half = bar / 2.0
+    ticks = (f'<line x1="{x0 + half:.1f}" y1="{y0 - 5:.1f}" x2="{x0 + half:.1f}" y2="{y0 + 5:.1f}" '
+             f'style="stroke:#cfe3f2;stroke-width:1.2"/>')
+    bar_svg = (
+        f'<rect x="{x0 - 5:.1f}" y="{y0 - 11:.1f}" width="{bar + 12:.1f}" height="22" rx="3" '
+        f'style="fill:#081d31;opacity:.72"/>'
+        f'<line x1="{x0:.1f}" y1="{y0:.1f}" x2="{x0 + bar:.1f}" y2="{y0:.1f}" style="stroke:#cfe3f2;stroke-width:2.2"/>'
+        f'<line x1="{x0:.1f}" y1="{y0 - 5:.1f}" x2="{x0:.1f}" y2="{y0 + 5:.1f}" style="stroke:#cfe3f2;stroke-width:1.2"/>'
+        f'{ticks}'
+        f'<line x1="{x0 + bar:.1f}" y1="{y0 - 5:.1f}" x2="{x0 + bar:.1f}" y2="{y0 + 5:.1f}" style="stroke:#cfe3f2;stroke-width:1.2"/>'
+        f'<text x="{x0 + bar + 8:.1f}" y="{y0 + 4:.1f}" style="fill:#cfe3f2;font-size:11px;direction:rtl;unicode-bidi:isolate">'
+        f'{target:g} كيلومتر · {nm:.0f} ميل بحري</text>'
+    )
+    nx, ny = WIDTH - 26.0, 34.0
+    north_svg = (
+        f'<g class="mp-north" aria-label="سهم الشمال">'
+        f'<path d="M{nx:.1f} {ny - 15:.1f} L{nx + 6:.1f} {ny + 6:.1f} L{nx:.1f} {ny + 1:.1f} L{nx - 6:.1f} {ny + 6:.1f} Z" '
+        f'style="fill:#cfe3f2"/>'
+        f'<text x="{nx:.1f}" y="{ny + 19:.1f}" text-anchor="middle" style="fill:#cfe3f2;font-size:11px;font-weight:600">N</text></g>'
+    )
+    return f'<g class="mp-frame">{bar_svg}{north_svg}</g>'
+
+
 def _dot_style(p: dict) -> str:
-    """نمط العلامة داخل العنصر نفسه — لا يعتمد على ورقة الأنماط."""
+    """نمط العلامة داخل العنصر نفسه — لا يعتمد على ورقة الأنماط.
+
+    ترميز مزدوج: اللون للحالة، والشكل للدقة — فلا تُقرأ الخريطة بالألوان وحدها.
+    """
+    key, _, _ = status_of(p)
     if p.get("precision") == "approximate":
         return "fill:none;stroke:var(--mk);stroke-width:2.4;stroke-dasharray:3.5 2.5"
-    return "fill:var(--mk);stroke:var(--bg);stroke-width:2.2"
+    if key == "confirm":
+        return "fill:var(--mk);stroke:var(--bg);stroke-width:2.2"
+    if key == "bg":
+        return "fill:none;stroke:var(--mk);stroke-width:1.8;opacity:.85"
+    return "fill:var(--mk);stroke:#081d31;stroke-width:3.4"
 
 
 def build_map(points=None, caption=None, inset=None, zoom=False):
     """لوحة رئيسية + لوحة مصغّرة اختيارية لباب المندب."""
     points = points or []
     map_title = "خريطة الوقائع" if points else "السياق الجغرافي"
-    map_label = ("خريطة الخليج العربي ومضيق هرمز وخليج عمان مع مواقع وقائع التقرير"
-                 if points else "خريطة سياق جغرافي للقطاعات المعتمدة: السواحل والمضيق والموانئ وخطوط الطول والعرض؛ بلا علامات وقائع")
+    if points:
+        _n = len(points)
+        _ap = sum(1 for p in points if p.get("precision") == "approximate")
+        _ex = _n - _ap
+        _by = {}
+        for _p in points:
+            _by[status_of(_p)[1]] = _by.get(status_of(_p)[1], 0) + 1
+        _mix = " · ".join(f"{k} {v}" for k, v in _by.items())
+        map_label = (f"خريطة وقائع التقرير: {_n} واقعة مرسومة على الخليج العربي ومضيق هرمز وخليج عمان "
+                     f"(إحداثيات مذكورة {_ex} · مواضع تقريبية {_ap}). الحالات: {_mix}. "
+                     "الموضع التقريبي يعني أن المصدر لم يذكر إحداثيات فوُضعت العلامة داخل المنطقة نفسها لا في موضع محدد.")
+    else:
+        map_label = ("خريطة سياق جغرافي للقطاعات المعتمدة: السواحل والمضيق والموانئ وخطوط الطول والعرض؛ بلا علامات وقائع")
     _set_bbox(MAIN_BBOX)
     zrect, zhtml = _zoom_parts(points) if zoom else ("", "")
     panels = [
@@ -686,13 +811,19 @@ def build_map(points=None, caption=None, inset=None, zoom=False):
 
     _has_approx = any((p.get("precision") == "approximate") for p in points)
     note = (
-        '<p class="map-keys">السواحل والجزر والحدود: بيانات Natural Earth. '
-        'الشبكة: خطوط الطول والعرض. ' +
+        '<p class="map-keys"><span class="mk-src">'
+        'المصادر: اليابسة والحدود السياسية من Natural Earth بمقياس 1:50 مليون · '
+        'الحدود البحرية من Marine Regions (VLIZ) وتشمل خطوطًا غير محسومة وخطوط منتصف لا تُعدّ حدودًا سيادية · '
+        'نظام فصل الملاحة في مضيق هرمز حسب مخطط المنظمة البحرية الدولية (اعتُمد 1968) بتمثيل تخطيطي · '
+        'تسميات المدن والموانئ مواضع تمثيلية تقديرية لغياب سند هيدروغرافي معلن. '
+        'الإسقاط: مستوٍ محلي على WGS 84 · الشبكة: خطوط الطول والعرض. '
+        'هذه الخريطة سياق إخباري وليست خريطة ملاحية ولا بديلًا عن التحذيرات الرسمية.'
+        '</span><span class="mk-note">' +
         ((('العلامات المرقمة: وقائع هذا التقرير.' +
           (' والعلامة المفرّغة: موضع تقريبي داخل المنطقة نفسها لأن المصدر لم يذكر إحداثيات.' if _has_approx else ''))
          if points else
          'لا توجد إحداثيات وقائع مثبتة في ملف الواجهة؛ اللوحة سياق جغرافي للقطاعات فقط.')) +
-        '</p>'
+        '</span>'
     )
     return f'<div class="viz map-viz reveal">{"".join(panels)}{note}</div>'
 

@@ -146,7 +146,12 @@
         "precision": "approximate",
         "surface": "main",
         "basis": "مركز نظام فصل الملاحة المعتمد في مضيق هرمز (المساران بين 56.36°–56.45° شرقًا و26.54°–26.60° شمالًا) وفق معايرة مخطط المنظمة البحرية الدولية المحفوظة في المشروع.",
-        "source": "IMO — Strait of Hormuz TSS chart (Ships' Routeing) · audit-2026-10-30/imo-tss/imo-tss-derived.json"
+        "source": "IMO — Strait of Hormuz TSS chart (Ships' Routeing) · audit-2026-10-30/imo-tss/imo-tss-derived.json",
+        "label": "نشرت UKMTO تحذير 190-26 عبر حسابها الرسمي في 31/10/2026 عند 1859",
+        "confirmation": "confirmed",
+        "qualifying": false,
+        "zone": "Z1",
+        "class": "بلاغ رسمي"
       },
       {
         "code": "MN-2026-11-01-02",
@@ -156,7 +161,12 @@
         "precision": "approximate",
         "surface": "main",
         "basis": "مركز نظام فصل الملاحة المعتمد في مضيق هرمز (المساران بين 56.36°–56.45° شرقًا و26.54°–26.60° شمالًا) وفق معايرة مخطط المنظمة البحرية الدولية المحفوظة في المشروع.",
-        "source": "IMO — Strait of Hormuz TSS chart (Ships' Routeing) · audit-2026-10-30/imo-tss/imo-tss-derived.json"
+        "source": "IMO — Strait of Hormuz TSS chart (Ships' Routeing) · audit-2026-10-30/imo-tss/imo-tss-derived.json",
+        "label": "انتقاد مجموعة رباعية لقيود التصدير وإغلاق مضيق هرمز",
+        "confirmation": "unconfirmed",
+        "qualifying": false,
+        "zone": "Z1",
+        "class": "نقل إعلامي"
       },
       {
         "code": "MN-2026-11-01-03",
@@ -166,7 +176,12 @@
         "precision": "approximate",
         "surface": "main",
         "basis": "مركز نظام فصل الملاحة المعتمد في مضيق هرمز (المساران بين 56.36°–56.45° شرقًا و26.54°–26.60° شمالًا) وفق معايرة مخطط المنظمة البحرية الدولية المحفوظة في المشروع.",
-        "source": "IMO — Strait of Hormuz TSS chart (Ships' Routeing) · audit-2026-10-30/imo-tss/imo-tss-derived.json"
+        "source": "IMO — Strait of Hormuz TSS chart (Ships' Routeing) · audit-2026-10-30/imo-tss/imo-tss-derived.json",
+        "label": "محادثات تجري بشأن خطة لإعادة فتح مضيق هرمز خلال يومين",
+        "confirmation": "unconfirmed",
+        "qualifying": false,
+        "zone": "Z1",
+        "class": "نقل إعلامي"
       },
       {
         "code": "MN-2026-11-01-04",
@@ -176,7 +191,12 @@
         "precision": "approximate",
         "surface": "main",
         "basis": "مركز نظام فصل الملاحة المعتمد في مضيق هرمز (المساران بين 56.36°–56.45° شرقًا و26.54°–26.60° شمالًا) وفق معايرة مخطط المنظمة البحرية الدولية المحفوظة في المشروع.",
-        "source": "IMO — Strait of Hormuz TSS chart (Ships' Routeing) · audit-2026-10-30/imo-tss/imo-tss-derived.json"
+        "source": "IMO — Strait of Hormuz TSS chart (Ships' Routeing) · audit-2026-10-30/imo-tss/imo-tss-derived.json",
+        "label": "الحرس الثوري الإيراني قال إن أربع ناقلات أصابتها ألغام واشتعلت ف",
+        "confirmation": "unconfirmed",
+        "qualifying": true,
+        "zone": "Z1",
+        "class": "رواية"
       },
       {
         "code": "MN-2026-11-01-05",
@@ -186,7 +206,12 @@
         "precision": "approximate",
         "surface": "main",
         "basis": "نقطة تسمية الخليج العربي في هندسة خريطة المشروع نفسها.",
-        "source": "generator/map_gulf.py — SEAS"
+        "source": "generator/map_gulf.py — SEAS",
+        "label": "حريق في ناقلة غاز قطرية كبيرة خلال هجوم في الخليج",
+        "confirmation": "probable",
+        "qualifying": true,
+        "zone": "Z1",
+        "class": "نقل مهني"
       },
       {
         "code": "MN-2026-11-01-06",
@@ -196,10 +221,15 @@
         "precision": "approximate",
         "surface": "main",
         "basis": "مياه الخليج العربي قبالة ساحل الإمارات داخل نطاق القطاع Z1؛ أُثبت أنها في الماء لا على اليابسة بمضلعات اليابسة المستخدمة في الخريطة.",
-        "source": "generator/data/ne_50m_land.geojson + هندسة الخريطة في المشروع"
+        "source": "generator/data/ne_50m_land.geojson + هندسة الخريطة في المشروع",
+        "label": "توقف تسرب نفطي من ناقلة مقابل السواحل الإماراتية واستمرار أعمال ",
+        "confirmation": "confirmed",
+        "qualifying": false,
+        "zone": null,
+        "class": "تقرير مهني"
       }
     ],
-    "points_note": "المواضع المعروضة مواضع وقائع اليوم على الخريطة؛ والموضع التقريبي يعني أن المصدر لم يذكر إحداثيات فوُضع داخل المنطقة نفسها لا في موضع آخر.",
+    "points_note": "المواضع المعروضة مواضع وقائع اليوم على الخريطة؛ والموضع التقريبي يعني أن المصدر لم يذكر إحداثيات فوُضع داخل المنطقة نفسها لا في موضع آخر. وتوزيع الحالة: مؤكد 0 · مرجّح 0 · غير مؤكد مؤهل 0 · غير مؤهل 0 · حالة غير محددة 0.",
     "points_stats": {
       "events": 6,
       "with_area": 6,
@@ -207,7 +237,12 @@
       "exact": 0,
       "approximate": 6,
       "off_map": 0,
-      "excluded": 0
+      "excluded": 0,
+      "confirmed": 0,
+      "probable": 1,
+      "unconfirmed": 1,
+      "not_qualifying": 4,
+      "status_unknown": 0
     }
   },
   "decision_card": {

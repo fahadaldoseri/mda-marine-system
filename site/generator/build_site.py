@@ -837,7 +837,42 @@ def _enrich_feed():
 
 # ك-316/ك-319: كتلة التشغيل في نهاية الملف لتصل إلى كل الدوال المعرّفة بعده،
 # ولتُشغّل إثراء التغذية (pubDate · lastBuildDate) الذي كان كودًا ميتًا غير قابل للوصول.
+def _verify_map_contract() -> None:
+    """حارس عقد قسم الخريطة على الصفحات المبنية — فشل مغلق يمنع النشر."""
+    try:
+        sys.path.insert(0, str(_Path(__file__).resolve().parent))
+        import check_map_contract as _cmc
+    except Exception as _e:
+        CRITICAL_FAIL.append(f"حارس عقد الخريطة غير قابل للاستيراد: {_e}")
+        return
+    dist_reports = _ROOT / "dist" / "reports"
+    meta_dir = _ROOT / "sources" / "meta"
+    checked = 0
+    for meta_p in sorted(meta_dir.glob("*.json")):
+        try:
+            meta = json.loads(meta_p.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        mp = meta.get("map") or {}
+        if not (mp.get("points") or mp.get("caption")):
+            continue
+        page = dist_reports / f"{meta_p.stem}.html"
+        if not page.exists():
+            continue
+        bad = _cmc.verify(page.read_text(encoding="utf-8"), meta)
+        checked += 1
+        if bad:
+            print(f"✘ حارس عقد الخريطة ({meta_p.stem}): " + " · ".join(bad[:4]))
+            CRITICAL_FAIL.extend(f"خريطة {meta_p.stem}: {x}" for x in bad)
+    if not checked:
+        CRITICAL_FAIL.append("حارس عقد الخريطة: لم تُفحص أي صفحة خريطة")
+    else:
+        print(f"✔ حارس عقد الخريطة: فُحصت {checked} صفحة دون مخالفة" if not CRITICAL_FAIL
+              else f"حارس عقد الخريطة: فُحصت {checked} صفحة مع مخالفات")
+
+
 def _finalize_build() -> None:
+    _verify_map_contract()
     _build_en_editions()
     try:
         _enrich_feed()
