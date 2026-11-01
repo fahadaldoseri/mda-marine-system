@@ -137,7 +137,78 @@
   ],
   "map": {
     "caption": "تتركز البنود الستة في Z1. ويتضمن العد تحذيرًا رسميًا ونقلًا سياسيًا وتقارير مهنية وإعلامية؛ لذلك لا يساوي عدد الهجمات أو عدد السفن المتضررة (MN-2026-11-01-01 إلى MN-2026-11-01-06؛ الدرجات في السجل أدناه).",
-    "points": []
+    "points": [
+      {
+        "code": "MN-2026-11-01-01",
+        "area": "مضيق هرمز",
+        "lat": 26.56,
+        "lon": 56.4,
+        "precision": "approximate",
+        "surface": "main",
+        "basis": "مركز نظام فصل الملاحة المعتمد في مضيق هرمز (المساران بين 56.36°–56.45° شرقًا و26.54°–26.60° شمالًا) وفق معايرة مخطط المنظمة البحرية الدولية المحفوظة في المشروع.",
+        "source": "IMO — Strait of Hormuz TSS chart (Ships' Routeing) · audit-2026-10-30/imo-tss/imo-tss-derived.json"
+      },
+      {
+        "code": "MN-2026-11-01-02",
+        "area": "مضيق هرمز",
+        "lat": 26.56,
+        "lon": 56.4,
+        "precision": "approximate",
+        "surface": "main",
+        "basis": "مركز نظام فصل الملاحة المعتمد في مضيق هرمز (المساران بين 56.36°–56.45° شرقًا و26.54°–26.60° شمالًا) وفق معايرة مخطط المنظمة البحرية الدولية المحفوظة في المشروع.",
+        "source": "IMO — Strait of Hormuz TSS chart (Ships' Routeing) · audit-2026-10-30/imo-tss/imo-tss-derived.json"
+      },
+      {
+        "code": "MN-2026-11-01-03",
+        "area": "مضيق هرمز",
+        "lat": 26.56,
+        "lon": 56.4,
+        "precision": "approximate",
+        "surface": "main",
+        "basis": "مركز نظام فصل الملاحة المعتمد في مضيق هرمز (المساران بين 56.36°–56.45° شرقًا و26.54°–26.60° شمالًا) وفق معايرة مخطط المنظمة البحرية الدولية المحفوظة في المشروع.",
+        "source": "IMO — Strait of Hormuz TSS chart (Ships' Routeing) · audit-2026-10-30/imo-tss/imo-tss-derived.json"
+      },
+      {
+        "code": "MN-2026-11-01-04",
+        "area": "مضيق هرمز",
+        "lat": 26.56,
+        "lon": 56.4,
+        "precision": "approximate",
+        "surface": "main",
+        "basis": "مركز نظام فصل الملاحة المعتمد في مضيق هرمز (المساران بين 56.36°–56.45° شرقًا و26.54°–26.60° شمالًا) وفق معايرة مخطط المنظمة البحرية الدولية المحفوظة في المشروع.",
+        "source": "IMO — Strait of Hormuz TSS chart (Ships' Routeing) · audit-2026-10-30/imo-tss/imo-tss-derived.json"
+      },
+      {
+        "code": "MN-2026-11-01-05",
+        "area": "الخليج العربي",
+        "lat": 26.45,
+        "lon": 51.3,
+        "precision": "approximate",
+        "surface": "main",
+        "basis": "نقطة تسمية الخليج العربي في هندسة خريطة المشروع نفسها.",
+        "source": "generator/map_gulf.py — SEAS"
+      },
+      {
+        "code": "MN-2026-11-01-06",
+        "area": "مقابل السواحل الإماراتية",
+        "lat": 25.2,
+        "lon": 54.6,
+        "precision": "approximate",
+        "surface": "main",
+        "basis": "مياه الخليج العربي قبالة ساحل الإمارات داخل نطاق القطاع Z1؛ أُثبت أنها في الماء لا على اليابسة بمضلعات اليابسة المستخدمة في الخريطة.",
+        "source": "generator/data/ne_50m_land.geojson + هندسة الخريطة في المشروع"
+      }
+    ],
+    "points_note": "المواضع المعروضة مواضع وقائع اليوم على الخريطة؛ والموضع التقريبي يعني أن المصدر لم يذكر إحداثيات فوُضع داخل المنطقة نفسها لا في موضع آخر.",
+    "points_stats": {
+      "events": 6,
+      "with_area": 6,
+      "drawn": 6,
+      "exact": 0,
+      "approximate": 6,
+      "off_map": 0,
+      "excluded": 0
+    }
   },
   "decision_card": {
     "changed": [

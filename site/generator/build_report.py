@@ -457,6 +457,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .mp-sea-sm{font-size:15px;font-weight:600;fill:var(--map-strait);letter-spacing:0}
 .mp-events .mp-halo{fill:var(--mk);opacity:.22}
 .mp-events .mp-dot{fill:var(--mk);stroke:var(--bg);stroke-width:2.2;vector-effect:non-scaling-stroke}
+.mp-approx .mp-dot{fill:none !important;stroke:var(--mk);stroke-width:2.4;stroke-dasharray:3.5 2.5}
 .mp-events .mp-num{font-family:"IBM Plex Mono",monospace;font-size:9.5px;font-weight:600;fill:#fff;text-anchor:middle}
 .map-keys{font-size:12.5px;color:var(--faint);margin:12px 0 0}
 .map-legend{list-style:none;display:grid;gap:7px;margin:14px 0 0;padding:0}
@@ -1967,7 +1968,8 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
         try:
             from map_gulf import build_map
 
-            map_html = build_map(mp["points"], mp.get("caption"), mp.get("inset"))
+            _cap = ((mp.get("caption") or "") + " " + (mp.get("points_note") or "")).strip()
+            map_html = build_map(mp["points"], _cap, mp.get("inset"))
         except Exception as e:  # لا يُسقط فشل الخريطة بناء التقرير
             print(f"تنبيه: تعذر توليد الخريطة ({e})", file=sys.stderr)
             map_html = ""
@@ -1979,7 +1981,8 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
         try:
             from map_gulf import build_map as _build_map_hero
 
-            _hero_map_source = _build_map_hero(mp["points"], mp.get("caption"), mp.get("inset"), zoom=True)
+            _cap_h = ((mp.get("caption") or "") + " " + (mp.get("points_note") or "")).strip()
+            _hero_map_source = _build_map_hero(mp["points"], _cap_h, mp.get("inset"), zoom=True)
             _strip = ""
             try:
                 import threat_card as _TC

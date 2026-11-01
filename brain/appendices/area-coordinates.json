@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "owner_decision": "2026-11-01 — قرار المالك: تُرسم إحداثيات الوقائع على الخريطة؛ وإن لم يذكر المصدر إحداثيات تُوضع مِرساة تقريبية داخل المنطقة نفسها لا في أي موضع آخر.",
+  "rule": "لا يُرسم أي موضع بلا مِرساة معتمدة هنا؛ ومنطقة بحرية بلا مِرساة = فشل مغلق يمنع النشر.",
+  "surfaces": {
+    "main": {
+      "name": "الخريطة الرئيسة (الخليج العربي · مضيق هرمز · خليج عُمان · بحر العرب)",
+      "bbox": [46.5, 21.2, 62.0, 30.2],
+      "bbox_order": ["lon_min", "lat_min", "lon_max", "lat_max"],
+      "source": "هندسة الخريطة في المشروع: generator/map_gulf.py — MAIN_BBOX"
+    },
+    "inset": {
+      "name": "لوحة التكبير (البحر الأحمر · باب المندب)",
+      "bbox": [38.5, 10.5, 46.0, 20.0],
+      "bbox_order": ["lon_min", "lat_min", "lon_max", "lat_max"],
+      "source": "هندسة الخريطة في المشروع: generator/map_gulf.py — INSET_BBOX_DEFAULT"
+    }
+  },
+  "excluded_areas": [
+    {
+      "area": "خارج القطاعات",
+      "reason": "وسم تصنيفي لا موقع؛ الوقائع الموسومة به مستثناة من حساب القطاعات ومن الرسم."
+    },
+    {
+      "area": "المنطقة كاملة",
+      "reason": "وصف نطاق لا موقع محدَّد؛ يُذكر في المتن ولا يُرسم."
+    }
+  ],
+  "anchors": [
+    {
+      "area": "مضيق هرمز",
+      "aliases": ["Strait of Hormuz", "شرق مضيق هرمز", "مضيق هرمز وخليج عُمان"],
+      "lat": 26.56,
+      "lon": 56.4,
+      "surface": "main",
+      "precision": "approximate",
+      "basis": "مركز نظام فصل الملاحة المعتمد في مضيق هرمز (المساران بين 56.36°–56.45° شرقًا و26.54°–26.60° شمالًا) وفق معايرة مخطط المنظمة البحرية الدولية المحفوظة في المشروع.",
+      "source": "IMO — Strait of Hormuz TSS chart (Ships' Routeing) · audit-2026-10-30/imo-tss/imo-tss-derived.json"
+    },
+    {
+      "area": "الخليج العربي",
+      "aliases": ["الخليج", "Persian Gulf", "Arabian Gulf"],
+      "lat": 26.45,
+      "lon": 51.3,
+      "surface": "main",
+      "precision": "approximate",
+      "basis": "نقطة تسمية الخليج العربي في هندسة خريطة المشروع نفسها.",
+      "source": "generator/map_gulf.py — SEAS"
+    },
+    {
+      "area": "خليج عُمان",
+      "aliases": ["خليج عمان", "Gulf of Oman"],
+      "lat": 23.95,
+      "lon": 59.6,
+      "surface": "main",
+      "precision": "approximate",
+      "basis": "نقطة تسمية خليج عُمان في هندسة خريطة المشروع نفسها.",
+      "source": "generator/map_gulf.py — SEAS"
+    },
+    {
+      "area": "بحر العرب",
+      "aliases": ["Arabian Sea"],
+      "lat": 21.7,
+      "lon": 58.4,
+      "surface": "main",
+      "precision": "approximate",
+      "basis": "نقطة تسمية بحر العرب في هندسة خريطة المشروع نفسها.",
+      "source": "generator/map_gulf.py — SEAS"
+    },
+    {
+      "area": "مقابل السواحل الإماراتية",
+      "aliases": ["ساحل الإمارات", "الساحل الإماراتي", "مقابل الساحل الإماراتي", "Off the UAE coast"],
+      "lat": 25.2,
+      "lon": 54.6,
+      "surface": "main",
+      "precision": "approximate",
+      "basis": "مياه الخليج العربي قبالة ساحل الإمارات داخل نطاق القطاع Z1؛ أُثبت أنها في الماء لا على اليابسة بمضلعات اليابسة المستخدمة في الخريطة.",
+      "source": "generator/data/ne_50m_land.geojson + هندسة الخريطة في المشروع"
+    },
+    {
+      "area": "البحر الأحمر",
+      "aliases": ["Red Sea", "باب المندب والبحر الأحمر"],
+      "lat": 17.6,
+      "lon": 41.2,
+      "surface": "inset",
+      "precision": "approximate",
+      "basis": "نقطة تسمية البحر الأحمر في لوحة التكبير في هندسة خريطة المشروع نفسها.",
+      "source": "generator/map_gulf.py — INSET_SEAS"
+    },
+    {
+      "area": "باب المندب",
+      "aliases": ["مضيق باب المندب", "Bab el-Mandeb", "Bab-el-Mandeb"],
+      "lat": 12.75,
+      "lon": 43.55,
+      "surface": "inset",
+      "precision": "approximate",
+      "basis": "نقطة تسمية مضيق باب المندب في لوحة التكبير في هندسة خريطة المشروع نفسها.",
+      "source": "generator/map_gulf.py — INSET_SEAS"
+    },
+    {
+      "area": "خليج عدن",
+      "aliases": ["Gulf of Aden"],
+      "lat": 12.4,
+      "lon": 45.6,
+      "surface": "inset",
+      "precision": "approximate",
+      "basis": "مياه خليج عدن داخل نطاق لوحة التكبير، قرب نقطة تسمية الخليج في هندسة خريطة المشروع.",
+      "source": "generator/map_gulf.py — INSET_SEAS"
+    },
+    {
+      "area": "القرن الأفريقي",
+      "aliases": ["Horn of Africa", "خليج عدن والقرن الأفريقي"],
+      "lat": 10.4,
+      "lon": 51.3,
+      "surface": "off_map",
+      "precision": "approximate",
+      "basis": "خارج نطاق سطحَي الرسم الحاليين (الخريطة الرئيسة ولوحة التكبير)؛ يُذكر في جدول التوزيع الجغرافي وتسمية الخريطة ولا يُرسم.",
+      "source": "هندسة الخريطة في المشروع — حدود السطحين"
+    },
+    {
+      "area": "خليج عدن والمحيط الهندي",
+      "lat": 12.0,
+      "lon": 48.0,
+      "surface": "off_map",
+      "precision": "approximate",
+      "basis": "خارج نطاق سطحَي الرسم الحاليين؛ يُذكر ولا يُرسم.",
+      "source": "هندسة الخريطة في المشروع — حدود السطحين"
+    },
+    {
+      "area": "شرق البحر المتوسط",
+      "aliases": ["شرق المتوسط", "Eastern Mediterranean"],
+      "lat": 33.5,
+      "lon": 34.0,
+      "surface": "off_map",
+      "precision": "approximate",
+      "basis": "شمال نطاق الخريطة الرئيسة؛ يُذكر ولا يُرسم.",
+      "source": "هندسة الخريطة في المشروع — حدود السطحين"
+    },
+    {
+      "area": "البحر الأسود",
+      "lat": 43.0,
+      "lon": 34.0,
+      "surface": "off_map",
+      "precision": "approximate",
+      "basis": "خارج نطاق سطحَي الرسم؛ يُذكر ولا يُرسم.",
+      "source": "هندسة الخريطة في المشروع — حدود السطحين"
+    }
+  ]
+}

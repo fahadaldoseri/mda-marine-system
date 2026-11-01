@@ -445,9 +445,10 @@ def _zoom_parts(points):
                     f'style="stroke:var(--map-label);stroke-width:1;opacity:.75"/>'
                     f'<circle cx="{tx:.1f}" cy="{ty:.1f}" r="3" style="fill:var(--map-label)"/></g>')
             marks.append(
-                f'<g class="mp-event" transform="translate({x:.1f},{y:.1f})" style="--mk:{color}">'
-                f'<circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/>'
-                f'<text class="mp-num" y="6" style="font-size:17px">{i}</text></g>')
+                f'<g class="mp-event{" mp-approx" if p.get("precision") == "approximate" else ""}" transform="translate({x:.1f},{y:.1f})" style="--mk:{color}">'
+                f'<circle class="mp-halo" r="26" style="fill:var(--mk);opacity:.22"/>'
+                f'<circle class="mp-dot" r="14" style="{_dot_style(p)}"/>'
+                f'<text class="mp-num" y="6" style="font-size:17px;fill:#fff;font-weight:600;text-anchor:middle">{i}</text></g>')
         # مواضع مقاسة مسبقًا: تترك حيزًا فوق نطاق Λ وتفصل أسماء الموانئ عن حدوده.
         place_labels = [
             ("إيران", 26.78, 56.28, "mp-country"),
@@ -585,9 +586,10 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
                 f'<circle cx="{tx:.1f}" cy="{ty:.1f}" r="2.4" style="fill:var(--map-label)"/></g>'
             )
         marks.append(
-            f'<g class="mp-event" transform="translate({x:.1f},{y:.1f})" style="--mk:{color}">'
-            f'<circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/>'
-            f'<text class="mp-num" y="3.7">{i}</text></g>'
+            f'<g class="mp-event{" mp-approx" if p.get("precision") == "approximate" else ""}" transform="translate({x:.1f},{y:.1f})" style="--mk:{color}">'
+            f'<circle class="mp-halo" r="14" style="fill:var(--mk);opacity:.22"/>'
+            f'<circle class="mp-dot" r="7" style="{_dot_style(p)}"/>'
+            f'<text class="mp-num" y="3.7" style="fill:#fff;font-size:9.5px;font-weight:600;text-anchor:middle">{i}</text></g>'
         )
         bits = [f'<span class="lg-txt">{p.get("label","")}</span>']
         if code:
@@ -643,6 +645,13 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
 </div>"""
 
 
+def _dot_style(p: dict) -> str:
+    """نمط العلامة داخل العنصر نفسه — لا يعتمد على ورقة الأنماط."""
+    if p.get("precision") == "approximate":
+        return "fill:none;stroke:var(--mk);stroke-width:2.4;stroke-dasharray:3.5 2.5"
+    return "fill:var(--mk);stroke:var(--bg);stroke-width:2.2"
+
+
 def build_map(points=None, caption=None, inset=None, zoom=False):
     """لوحة رئيسية + لوحة مصغّرة اختيارية لباب المندب."""
     points = points or []
@@ -675,11 +684,14 @@ def build_map(points=None, caption=None, inset=None, zoom=False):
         )
     _set_bbox(MAIN_BBOX)
 
+    _has_approx = any((p.get("precision") == "approximate") for p in points)
     note = (
         '<p class="map-keys">السواحل والجزر والحدود: بيانات Natural Earth. '
         'الشبكة: خطوط الطول والعرض. ' +
-        ('العلامات المرقمة: وقائع هذا التقرير.' if points else
-         'لا توجد إحداثيات وقائع مثبتة في ملف الواجهة؛ اللوحة سياق جغرافي للقطاعات فقط.') +
+        ((('العلامات المرقمة: وقائع هذا التقرير.' +
+          (' والعلامة المفرّغة: موضع تقريبي داخل المنطقة نفسها لأن المصدر لم يذكر إحداثيات.' if _has_approx else ''))
+         if points else
+         'لا توجد إحداثيات وقائع مثبتة في ملف الواجهة؛ اللوحة سياق جغرافي للقطاعات فقط.')) +
         '</p>'
     )
     return f'<div class="viz map-viz reveal">{"".join(panels)}{note}</div>'
