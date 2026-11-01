@@ -14,6 +14,7 @@
 
 import re
 import threat_card as TC
+from display_format import format_release_version, format_update_label
 
 import blocks as BLK
 import codes
@@ -23,6 +24,8 @@ _NO_PREFIX_CHANGE = {"new": "جديد", "closed": "أُغلق", "reclassified": 
 HERO_MAX_CHANGES = 2
 HERO_MAX_ACTIONS = 2
 HERO_KPI_MODERN_FROM = "2026-10-31"
+
+DAILY_TITLE_FIXED = "التقرير اليومي للأمن البحري والأوضاع الراهنة في المنطقة"
 
 
 def first_sentence(text: str) -> str:
@@ -118,37 +121,31 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
     else:
         headline = meta.get("screen_headline") or first_sentence(meta.get("lede") or "") \
             or meta.get("headline") or title
-    h1 = codes.demote(esc(headline), report_date, official)
-    eyebrow = "تقرير خاص" if doc_mode else title
+    if doc_mode:
+        h1 = codes.demote(esc(headline), report_date, official)
+        sub = ""
+    else:
+        h1 = esc(DAILY_TITLE_FIXED)
+        sub = f'<p class="sc-sub">{codes.demote(esc(headline), report_date, official)}</p>'
+    eyebrow = "تقرير خاص" if doc_mode else ""
 
     chips = []
     gen = meta.get("generated_label") or ""
+    gen_display = format_update_label(gen)
     if gen and archived == "none":
         pass  # السجل التراكمي: لا عمر إصدار يُقاس، وشريحة «آخر تحديث» تكفي
     elif gen and archived:
-        chips.append(f'<span class="sc-chip sc-arch">إصدار أرشيفي · صدر <b class="bidi">{esc(gen)}</b></span>')
+        chips.append(f'<span class="sc-chip sc-arch">إصدار أرشيفي · صدر <b>{esc(gen_display)}</b></span>')
     elif gen and not doc_mode:
         chips.append(f'<span class="sc-chip sc-fresh" data-gen="{esc(gen)}" hidden>عمر الإصدار <b class="sc-age"></b></span>')
     if meta.get("version"):
-        chips.append(_chip("رقم الإصدار", f'<span class="bidi">{esc(meta["version"])}</span>'))
+        chips.append(_chip("رقم الإصدار", esc(format_release_version(meta["version"]))))
     if gen and (not archived or archived == "none"):
-        chips.append(_chip("آخر تحديث", f'<span class="bidi">{esc(gen)}</span>'))
+        chips.append(_chip("آخر تحديث", esc(gen_display)))
     elif gen and doc_mode:
-        chips.append(_chip("آخر تحديث", f'<span class="bidi">{esc(gen)}</span>'))
+        chips.append(_chip("آخر تحديث", esc(gen_display)))
     if meta.get("window"):
         chips.append(_chip("فترة التغطية", esc(meta["window"])))
-    appr, auto, man, cit = (meta.get("sources_approved"), meta.get("sources_checked"),
-                            meta.get("sources_manual_reference_count"), meta.get("sources_cited"))
-    if appr not in (None, ""):
-        _parts = [f'<span class="bidi">{esc(appr)}</span> معتمدة']
-        if auto not in (None, ""):
-            _parts.append(f'<span class="bidi">{esc(auto)}</span> بالمسار الآلي')
-        if man not in (None, ""):
-            _parts.append(f'<span class="bidi">{esc(man)}</span> بالفحص اليدوي')
-        chips.append(_chip("المصادر", " · ".join(_parts)))
-    if cit not in (None, ""):
-        chips.append(_chip("مستشهد بها", f'<span class="bidi">{esc(cit)}</span>'))
-
     # العمود الجانبي: مستوى التهديد ثم المؤشرات
     side = []
     threat = meta.get("threat_level") or ""
@@ -227,8 +224,9 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
             official_html.append(
                 f'<article class="sc-official-card" data-official-card-id="{esc(card.get("id", ""))}">'
                 f'<h3>{esc(card.get("title", ""))} {badges}</h3>'
-                f'<p class="sc-official-basis">{esc(card.get("basis", ""))} · {esc(card.get("source_label", ""))}</p>'
-                f'<div class="sc-official-layers">{"".join(layer_html)}</div>{extra_html}</article>'
+                + (f'<p class="sc-official-basis">{esc(card["basis"])}</p>' if card.get("basis") else "")
+                + (f'<p class="sc-official-basis">{esc(card.get("source_label", ""))}</p>' if card.get("source_label") else "")
+                + f'<div class="sc-official-layers">{"".join(layer_html)}</div>{extra_html}</article>'
             )
         side.append(f'<section class="sc-official-cards" aria-label="المستجدات الرسمية"><h2 class="sc-h2">المستجدات الرسمية</h2><div class="sc-official-grid">{"".join(official_html)}</div></section>')
 
@@ -258,7 +256,7 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
     changed_href = targets.get("changed_href") or "/additions.html#sec-00"
     changed_goto = targets.get("changed_title") or "ما تغيّر منذ التقرير السابق"
     rows.append(
-        '<div class="sc-row"><div class="sc-l">ما تغيّر</div>'
+        '<div class="sc-row"><div class="sc-l">خلال 24 ساعة السابقة</div>'
         f'<div class="sc-v"><p class="sc-gist">{inline(_gist(changes, limit=2))}</p>'
         f'<p class="sc-more">{_arabic_count(changed_count, "items")} · '
         f'<a href="{esc(changed_href)}" data-goto="{esc(changed_goto)}" data-alt="{esc(changed_href)}">التفاصيل</a></p></div></div>')
@@ -266,21 +264,22 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
     warning_texts = [_arabic_card_text(x) for x in (targets.get("warning_texts") or []) if str(x).strip()]
     if not warning_texts:
         warning_texts = ["المركز البريطاني / المركز البحري المشترك"]
-    warning_count = int(targets.get("warning_count") or len(warning_texts))
+    warning_count = (int(targets["warning_count"]) if "warning_count" in targets
+                     else len(warning_texts))
     warning_href = targets.get("warning_href") or f"/reports/{report_date}.html#sec-06"
     warning_gist = " · ".join(warning_texts)
     rows.append(
-        '<div class="sc-row"><div class="sc-l">التحذيرات والنشرات الرسمية</div>'
+        '<div class="sc-row"><div class="sc-l">التحذيرات والنشرات الرسمية النشطة</div>'
         f'<div class="sc-v"><p class="sc-gist">{inline(warning_gist)}</p>'
         f'<p class="sc-more">{_arabic_count(warning_count, "warnings")} · '
         f'<a href="{esc(warning_href)}" data-goto="التحذيرات والنشرات الرسمية" data-alt="{esc(warning_href)}">القسم الرسمي</a></p></div></div>')
 
     watch = _list_items(dc.get("watch"))
-    watch_count = int(targets.get("watch_count") or len(watch))
+    watch_count = int(targets["watch_count"]) if "watch_count" in targets else len(watch)
     watch_href = targets.get("watch_href") or "/additions.html#sec-04-sub-02"
     watch_title = targets.get("watch_title") or "علامات الإنذار المبكر 24–72 ساعة"
     rows.append(
-        '<div class="sc-row"><div class="sc-l">ما يُراقب خلال 24–72 ساعة</div>'
+        '<div class="sc-row"><div class="sc-l">ما يُراقب خلال 24 ساعة</div>'
         f'<div class="sc-v"><p class="sc-gist">{inline(_gist(watch, limit=2))}</p>'
         f'<p class="sc-more">{_arabic_count(watch_count, "items")} · '
         f'<a href="{esc(watch_href)}" data-goto="{esc(watch_title)}" data-alt="{esc(watch_href)}">المؤشرات الكاملة</a></p></div></div>')
@@ -302,8 +301,9 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
         lede = f'<p class="sc-lede">{inline(meta["lede"])}</p>'
     return (
         '<div class="sc-hero no-print">'
-        f'<p class="sc-eyebrow">{esc(eyebrow)}</p><h2 class="sc-h1">{h1}</h2>{lede}'
-        f'<div class="sc-chips">{"".join(chips)}</div>{grid}</div>'
+        + (f'<p class="sc-eyebrow">{esc(eyebrow)}</p>' if eyebrow else "")
+        + f'<h2 class="sc-h1">{h1}</h2>{sub}{lede}'
+        + f'<div class="sc-chips">{"".join(chips)}</div>{grid}</div>'
     )
 
 
@@ -316,8 +316,9 @@ SCREEN_CSS = """
 /* شريط واحد: مع شريط الموقع تنتقل أزرار الطباعة والمظهر وحجم الخط إليه ويُخفى شريط الإصدار */
 body:has(.site-nav) .topbar{display:none}
 .sc-hero{margin:20px 0 6px}
-.sc-eyebrow{font-size:14.5px;color:var(--muted);margin:0 0 6px}
-.sc-h1{font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;font-size:clamp(21px,2.05vw,28px);line-height:1.65;margin:0 0 12px;text-wrap:balance}
+.sc-eyebrow{font-size:14.5px;color:var(--muted);margin:0 0 6px;text-align:center}
+.sc-sub{font-size:15.5px;color:var(--ink-2);margin:0 0 10px;text-align:center;line-height:1.8}
+.sc-h1{font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;font-size:clamp(21px,2.05vw,28px);line-height:1.65;margin:0 0 6px;text-wrap:balance;text-align:center}
 .sc-h1 .ltr{white-space:nowrap}
 .sc-lede{font-size:15.5px;line-height:1.9;color:var(--ink-2);margin:0 0 12px;max-width:none}
 .sc-chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px}
@@ -356,6 +357,12 @@ body:has(.site-nav) .topbar{display:none}
 .sc-official-label{font-size:12.5px;color:var(--muted)}
 .sc-official-value{font-family:"IBM Plex Mono",monospace;font-size:18px;line-height:1.35;text-align:right;direction:rtl;color:var(--ink)}
 .sc-official-source{font-size:11.5px;line-height:1.5;color:var(--muted);overflow-wrap:anywhere}
+/* تنسيق مضغوط مقروء لبطاقات المستجدات (قرار المالك 2026-10-31: خفض الاكتظاظ) */
+.sc-official-layer{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:2px 10px;align-items:baseline;padding:6px 0;border-top:1px dashed var(--line)}
+.sc-official-layer:first-child{border-top:0}
+.sc-official-label{color:var(--muted);font-size:13px}
+.sc-official-value{font-weight:700}
+.sc-official-source{grid-column:1 / -1;color:var(--muted);font-size:12px;line-height:1.6}
 .sc-kpi-row{display:grid;gap:16px;direction:rtl}
 .sc-kpi-row-1{grid-template-columns:repeat(4,minmax(0,1fr))}
 .sc-kpi-row-2{grid-template-columns:repeat(3,minmax(0,1fr))}

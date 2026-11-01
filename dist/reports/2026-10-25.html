@@ -62,7 +62,7 @@ a:focus-visible,.btn:focus-visible{outline:2px solid var(--accent);outline-offse
 
 /* عزل القيم اللاتينية والرقمية المركبة داخل سياق عربي */
 bdi,.bidi{direction:ltr;unicode-bidi:isolate}
-.k-v,.chip b,.cite-ref,.bar-row .bv,td.num,th.num{direction:ltr;unicode-bidi:isolate;white-space:nowrap}
+.k-v,.chip b,.cite-ref,.bar-row.bv,td.num,th.num{direction:ltr;unicode-bidi:isolate;white-space:nowrap}
 .ev-code,.bidi.ev-code{direction:ltr;unicode-bidi:isolate;white-space:nowrap}  /* رمز الحدث لا يُكسر بين سطرين */
 a.bidi{white-space:normal}
 .eng{direction:ltr;unicode-bidi:plaintext;overflow-wrap:anywhere}
@@ -92,7 +92,7 @@ a.bidi{white-space:normal}
 .btn{
   font:inherit;font-size:12.5px;cursor:pointer;color:var(--ink);
   background:var(--panel-2);border:1px solid var(--line-2);border-radius:8px;
-  padding:7px 13px;transition:background .18s ease,transform .18s ease
+  padding:7px 13px;transition:background.18s ease,transform.18s ease
 }
 .btn:hover{background:var(--panel-3)}
 .btn:active{transform:translateY(1px)}
@@ -107,17 +107,17 @@ a.bidi{white-space:normal}
   flex:0 0 100%;width:100%;text-align:center
 }
 .masthead > div:not(.threat){flex:1 0 100%}
-.masthead .lede{color:var(--ink-2);font-size:15px;max-width:none;margin:0}
+.masthead.lede{color:var(--ink-2);font-size:15px;max-width:none;margin:0}
 .masthead-meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
 .threat{
   margin-inline-start:0;margin-inline-end:auto;text-align:center;border-radius:var(--radius);
   border:1px solid var(--line-2);background:var(--panel);padding:14px 20px;min-width:172px
 }
-.threat .lbl{font-size:12px;color:var(--muted)}
-.threat .val{font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;font-size:23px;line-height:1.45;margin-top:2px}
-.threat.risk-high .val{color:var(--danger)}
-.threat.risk-med .val{color:var(--warn)}
-.threat.risk-low .val{color:var(--ok)}
+.threat.lbl{font-size:12px;color:var(--muted)}
+.threat.val{font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;font-size:23px;line-height:1.45;margin-top:2px}
+.threat.risk-high.val{color:var(--danger)}
+.threat.risk-med.val{color:var(--warn)}
+.threat.risk-low.val{color:var(--ok)}
 
 /* ---------- شريط المؤشرات ---------- */
 .kpis{display:grid;gap:16px;margin:24px 0 8px;direction:rtl}
@@ -134,10 +134,14 @@ a.bidi{white-space:normal}
 .kpi.acc-warn em{background:var(--warn)}
 .kpi.acc-danger em{background:var(--danger)}
 .kpi.acc-ok em{background:var(--ok)}
-.kpi .k-l{font-size:12.5px;color:var(--muted);line-height:1.6;min-height:2.6em}
-.kpi .k-tag{display:inline-block;margin-inline-start:6px;padding:1px 7px;border:1px solid var(--line-2);border-radius:999px;color:var(--ink-2);font-size:11px;line-height:1.4;white-space:nowrap}
-.kpi .k-v{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-weight:600;font-size:30px;line-height:1.25;margin-top:3px;font-variant-numeric:tabular-nums;text-align:right;direction:rtl}
-.kpi .k-n{font-size:12px;color:var(--muted);line-height:1.7;margin-top:4px}
+.kpi.k-l{font-size:12.5px;color:var(--muted);line-height:1.6;min-height:2.6em}
+.kpi.k-tag{display:inline-block;margin-inline-start:6px;padding:1px 7px;border:1px solid var(--line-2);border-radius:999px;color:var(--ink-2);font-size:11px;line-height:1.4;white-space:nowrap}
+.kpi.k-v{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-weight:600;font-size:30px;line-height:1.25;margin-top:3px;font-variant-numeric:tabular-nums;text-align:right;direction:rtl}
+.kpi.k-lays{display:flex;flex-wrap:wrap;gap:4px 10px;margin:4px 0 0;font-size:12.5px;color:var(--muted)}
+.k-lay{display:inline-flex;gap:4px;align-items:baseline}
+.k-lay-l{color:var(--muted)}
+.k-lay b{color:var(--ink);font-weight:700}
+.k-n{font-size:12px;color:var(--muted);line-height:1.7;margin-top:4px}
 .k-risk-patterns{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:-8px 0 0;color:var(--muted);font-size:12px}
 .k-risk-tag{border:1px solid var(--line-2);border-radius:999px;padding:1px 8px;color:var(--ink-2)}
 
@@ -160,8 +164,8 @@ section.doc > h2{
   font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:21px;line-height:1.5;
   margin:0 0 4px;display:flex;align-items:center;gap:11px
 }
-section.doc > h2 .ico{width:24px;height:24px;flex:0 0 auto;display:grid;place-items:center;color:var(--accent)}
-section.doc > h2 .ico svg{width:18px;height:18px}
+section.doc > h2.ico{width:24px;height:24px;flex:0 0 auto;display:grid;place-items:center;color:var(--accent)}
+section.doc > h2.ico svg{width:18px;height:18px}
 .h-rule{height:1px;background:var(--line);margin:8px 0 12px}
 section.doc h3{
   font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:16.5px;
@@ -214,12 +218,12 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   font-size:15px;color:var(--ink-2)
 }
 .bar-row{display:grid;grid-template-columns:minmax(150px,1.05fr) 3fr 108px;gap:14px;align-items:center;margin:11px 0}
-.bar-row .bl{font-size:13.5px;color:var(--ink-2);line-height:1.55}
+.bar-row.bl{font-size:13.5px;color:var(--ink-2);line-height:1.55}
 .bar-track{height:9px;border-radius:999px;background:var(--panel-3);overflow:hidden}
 .bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#1fbfb2,#5ad6c8);width:var(--w,0);animation:grow 1s cubic-bezier(.22,.8,.28,1) both}
 @keyframes grow{from{width:0}}
-.bar-row .bv{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:12.5px;text-align:end;color:var(--ink);font-variant-numeric:tabular-nums}
-.viz .src-note{font-size:12.5px;color:var(--muted);margin:12px 0 0}
+.bar-row.bv{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:12.5px;text-align:end;color:var(--ink);font-variant-numeric:tabular-nums}
+.viz.src-note{font-size:12.5px;color:var(--muted);margin:12px 0 0}
 
 /* ---------- خريطة الوقائع ---------- */
 .map-wrap{border:1px solid var(--line-2);border-radius:var(--radius-sm);overflow:hidden;background:var(--map-sea);margin-top:6px}
@@ -236,7 +240,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .mp-sea-lbl{fill:var(--map-sea-label);letter-spacing:0;direction:rtl;unicode-bidi:isolate}
 .mp-key{grid-template-columns:repeat(2,minmax(0,1fr))}
 .mp-key li{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--faint)}
-.mp-key .lg-sw{width:22px;height:14px;border-radius:3px;display:inline-block;flex:0 0 auto;border:1px solid var(--line-2)}
+.mp-key.lg-sw{width:22px;height:14px;border-radius:3px;display:inline-block;flex:0 0 auto;border:1px solid var(--line-2)}
 .sw-land{background:var(--map-land);border-color:var(--map-coast)}
 .sw-sea{background:var(--map-sea)}
 .sw-border{border:0;border-top:2px dashed var(--map-border);height:0}
@@ -245,22 +249,25 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .sw-port::after{content:"";position:absolute;inset:4px 9px;background:var(--map-label);border-radius:50%}
 .sw-strait{background:none;border:0}
 .sw-strait::after{content:"مضيق";color:var(--map-strait);font-weight:700;font-size:12px}
+.mp-key.sw-strait{width:auto;height:auto;padding:1px 6px;border:1px solid var(--map-strait);border-radius:999px;background:none}
+.mp-key.sw-strait::after{font-size:10.5px;line-height:1.35;white-space:nowrap}
 .sw-none{border:1px dashed var(--faint);background:none}
-.mp-key .lg-none{grid-column:1 / -1;color:var(--ink-2)}
+.mp-key.lg-none{grid-column:1 / -1;color:var(--ink-2)}
 .hmap-zstrip{margin:14px 0 0;border-top:1px solid var(--line-2);padding-top:12px}
 .hmap-zstrip h4{margin:0 0 10px;font-size:13px;color:var(--ink-2)}
 .hmap-zstrip ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 .hmap-zstrip li{border:1px solid var(--line-2);border-radius:var(--radius-sm);padding:10px;background:var(--panel-2);display:grid;gap:6px}
-.hmap-zstrip .zs-id{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:12px;color:var(--faint)}
-.hmap-zstrip .zs-nm{font-size:12.5px;color:var(--ink-2);line-height:1.5}
-.hmap-zstrip .zs-lv{font-size:12.5px;font-weight:600}
-.hmap-zstrip .zs-c{font-size:12px;color:var(--faint)}
+.hmap-zstrip.zs-id{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:12px;color:var(--faint)}
+.hmap-zstrip.zs-nm{font-size:12.5px;color:var(--ink-2);line-height:1.5}
+.hmap-zstrip.zs-lv{font-size:12.5px;font-weight:600}
+.hmap-zstrip.zs-c{font-size:12px;color:var(--faint)}
+.hmap-zstrip.zs-p{white-space:nowrap}
 @media (max-width:1000px){.hmap-zstrip ul{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .mp-sea-lg{font-size:19px}
 .mp-sea-sm{font-size:15px;font-weight:600;fill:var(--map-strait);letter-spacing:0}
-.mp-events .mp-halo{fill:var(--mk);opacity:.22}
-.mp-events .mp-dot{fill:var(--mk);stroke:var(--bg);stroke-width:2.2;vector-effect:non-scaling-stroke}
-.mp-events .mp-num{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:9.5px;font-weight:600;fill:#fff;text-anchor:middle}
+.mp-events.mp-halo{fill:var(--mk);opacity:.22}
+.mp-events.mp-dot{fill:var(--mk);stroke:var(--bg);stroke-width:2.2;vector-effect:non-scaling-stroke}
+.mp-events.mp-num{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:9.5px;font-weight:600;fill:#fff;text-anchor:middle}
 .map-keys{font-size:12.5px;color:var(--faint);margin:12px 0 0}
 .map-legend{list-style:none;display:grid;gap:7px;margin:14px 0 0;padding:0}
 .map-legend li{display:flex;gap:10px;align-items:baseline;font-size:13.5px;color:var(--ink-2);margin:0}
@@ -269,32 +276,34 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .hero-map{margin:22px 0 6px}
 .hmap{margin:0;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:18px}
 .hmap h3{margin:0 0 14px;font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:15px;color:var(--ink-2)}
-.hmap .blk-lede,.hmap-keys,.hmap-panel .src-note{display:none}
+.hmap.blk-lede,.hmap-keys,.hmap-panel.src-note{display:none}
 .hmap-wrap{position:relative;border:1px solid var(--line-2);border-radius:var(--radius-sm);overflow:hidden;background:var(--map-sea)}
 /* التكبير بجانب الخريطة لا فوقها: الشريحة كانت تحجب الخليج العربي (البحرين وقطر) */
-.hmap-wrap{display:grid;grid-template-columns:minmax(0,2.4fr) minmax(0,1fr);align-items:start}
+.hmap-wrap{display:grid;grid-template-columns:minmax(0,1fr);align-items:start}
+/* ك-<span class="ltr">XXX</span>: عمود التكبير لا يُحجز إلا إذا وُجدت لوحته فعلًا، وإلا بقي 29% من العرض فارغًا */
+.hmap-wrap:has(> .hmap-zoom){grid-template-columns:minmax(0,2.4fr) minmax(0,1fr)}
 .hmap-zoom{border-inline-start:1.5px solid var(--accent);background:var(--map-sea);min-width:0;align-self:stretch;display:flex;flex-direction:column}
 .hmap-zsvg{display:block;width:100%;height:auto}
 .hz-cap{font-size:13px;color:var(--ink-2);background:var(--panel);padding:4px 10px;border-top:1px solid var(--line-2);margin-top:auto}
 @media (max-width:1000px){.hmap-wrap{grid-template-columns:minmax(0,1fr)}.hmap-zoom{border-inline-start:0;border-top:1.5px solid var(--accent)}}
 .hmap-svg{display:block;width:100%;height:auto;max-width:100%}
 /* خريطة الشاشة: علامات وتسميات أكبر قليلًا للقراءة من مسافة */
-.hmap-svg .mp-dot{r:9.5px}
-.hmap-svg .mp-halo{r:17px}
-.hmap-svg .mp-events .mp-num{font-size:12.5px}
-.hmap .mp-grid-lbl{font-size:12.5px}
-.hmap .mp-port-lbl{font-size:15.5px}
-.hmap .mp-country{font-size:16.5px}
+.hmap-svg.mp-dot{r:9.5px}
+.hmap-svg.mp-halo{r:17px}
+.hmap-svg.mp-events.mp-num{font-size:12.5px}
+.hmap.mp-grid-lbl{font-size:12.5px}
+.hmap.mp-port-lbl{font-size:15.5px}
+.hmap.mp-country{font-size:16.5px}
 .hmap-legend{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 30px;margin:16px 0 0;padding:0}
 .hmap-legend li{display:block;position:relative;padding-inline-start:34px;font-size:14px;line-height:1.85;color:var(--ink-2);margin:0}
-.hmap-legend .lg-num{position:absolute;inset-inline-start:0;top:3px}
-.hmap-legend .bidi{color:var(--muted);font-size:13px;white-space:nowrap}
+.hmap-legend.lg-num{position:absolute;inset-inline-start:0;top:3px}
+.hmap-legend.bidi{color:var(--muted);font-size:13px;white-space:nowrap}
 @media (max-width:760px){.hmap-legend{grid-template-columns:minmax(0,1fr)}}
 /* الجوال: الخريطة الرئيسية تُصغَّر كثيرًا فتكبر العلامات والتسميات لتبقى مقروءة (التفصيل في لوحة التكبير) */
 @media (max-width:700px){
-  .hmap-svg .mp-dot{r:13px}.hmap-svg .mp-halo{r:20px}.hmap-svg .mp-events .mp-num{font-size:15px}
-  .hmap-svg .mp-port-lbl{font-size:25px}.hmap-svg .mp-country{font-size:27px}
-  .hmap-svg .mp-sea-lg{font-size:31px}.hmap-svg .mp-sea-sm{font-size:25px}.hmap-svg .mp-grid-lbl{display:none}
+  .hmap-svg.mp-dot{r:13px}.hmap-svg.mp-halo{r:20px}.hmap-svg.mp-events.mp-num{font-size:15px}
+  .hmap-svg.mp-port-lbl{font-size:25px}.hmap-svg.mp-country{font-size:27px}
+  .hmap-svg.mp-sea-lg{font-size:31px}.hmap-svg.mp-sea-sm{font-size:25px}.hmap-svg.mp-grid-lbl{display:none}
 }
 /* ---------- الاستشهادات ---------- */
 .cite-ref{
@@ -308,7 +317,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .src-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin:14px 0 22px}
 .src{border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--panel-2);padding:11px 13px;font-size:13.5px;color:var(--ink-2)}
 .src b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-bottom:3px}
-.src .st{font-size:12px;color:var(--muted)}
+.src.st{font-size:12px;color:var(--muted)}
 .src.s-ok{border-inline-start:3px solid var(--ok)}
 .src.s-none{border-inline-start:3px solid var(--info)}
 .src.s-fail{border-inline-start:3px solid var(--danger)}
@@ -323,13 +332,18 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .ev-idx{font-variant-numeric:tabular-nums;font-size:12px;line-height:1;color:var(--muted);border:1px solid var(--line-2);border-radius:6px;padding:3px 6px}
 .ev-code{font-size:12px;color:var(--muted);letter-spacing:.02em}
 .ev-badge{margin-inline-start:auto;font-size:11.5px;line-height:1;padding:4px 10px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2)}
-.ev.b-official .ev-badge{border-color:rgba(34,195,182,.45);color:var(--ok)}
-.ev.b-media .ev-badge{border-color:rgba(217,164,65,.5);color:#e0b45f}
-.ev.b-deny .ev-badge{border-color:rgba(214,86,86,.45);color:#e88}
+.ev.b-official.ev-badge{border-color:rgba(34,195,182,.45);color:var(--ok)}
+.ev.b-media.ev-badge{border-color:rgba(217,164,65,.5);color:#e0b45f}
+.ev.b-deny.ev-badge{border-color:rgba(214,86,86,.45);color:#e88}
 .ev-what{margin:0;font-size:15.5px;line-height:1.8;color:var(--ink)}
 .ev-meta{margin:10px 0 0;padding-top:8px;border-top:1px dashed var(--line);font-size:12.5px;line-height:1.75;color:var(--muted)}
-.ev-meta .ev-k{display:block;font-size:11.5px;color:var(--muted);opacity:.85;margin-bottom:2px}
-.ev-meta .ev-mv{display:block;color:var(--ink-2)}
+.ev-meta.ev-k{display:block;font-size:11.5px;color:var(--muted);opacity:.85;margin-bottom:2px}
+.ev-meta.ev-mv{display:block;color:var(--ink-2)}
+.ev-field{margin:4px 0}
+.ev-branch{margin:12px 0 0;padding:10px 12px;border:1px solid rgba(77,157,255,.38);border-inline-start:3px solid var(--info);border-radius:8px;background:rgba(77,157,255,.06);font-size:12.5px;line-height:1.75}
+.ev-branch-title{display:block;color:var(--info);font-weight:700;margin-bottom:3px}
+.ev-branch-gap{margin:12px 0 0;padding:9px 12px;border:1px dashed rgba(255,176,46,.55);border-radius:8px;color:var(--warn);font-size:12.5px;line-height:1.7}
+.ev-ledger-note{margin:8px 0 14px;padding:9px 12px;border-inline-start:3px solid var(--warn);background:rgba(255,176,46,.06);color:var(--muted);font-size:12.5px}
 @media (max-width:820px){.ev-grid{grid-template-columns:1fr}}
 .dg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px;margin:16px 0 10px}
 .dg{position:relative;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:14px 16px 13px;overflow:hidden}
@@ -353,7 +367,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 
 /* ---------- الحركة: دخول لطيف بالـCSS فقط، والمحتوى مرئي دائمًا ---------- */
 @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.masthead,.kpis{animation:rise .55s cubic-bezier(.22,.8,.28,1) both}
+.masthead,.kpis{animation:rise.55s cubic-bezier(.22,.8,.28,1) both}
 @media (prefers-reduced-motion: reduce){
   .masthead,.kpis,.bar-fill{animation:none}
 }
@@ -365,8 +379,8 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .threat{margin-inline-start:0;width:100%}
   .kpi-row-1,.kpi-row-2{grid-template-columns:1fr;gap:12px}
   .bar-row{grid-template-columns:1fr auto;grid-template-areas:"l v" "t t";gap:6px 10px}
-  .bar-row .bl{grid-area:l}
-  .bar-row .bv{grid-area:v;text-align:start}
+  .bar-row.bl{grid-area:l}
+  .bar-row.bv{grid-area:v;text-align:start}
   .bar-track{grid-area:t;width:100%}
   table{font-size:14px}
 }
@@ -375,44 +389,44 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 @page{size:A4;margin:14mm 12mm}
 /* ---------- قواعد عرض معتمدة من تعديلات المعاينة (12 أكتوبر 2026) ---------- */
 .notice,
-.map-panel .src-note,
+.map-panel.src-note,
 .map-keys,
-.decision .dc-foot{display:none}
+.decision.dc-foot{display:none}
 
 .sec-lede{font-size:13px;color:var(--muted);margin:0 0 16px;line-height:1.7;max-width:76ch}
 .blk-lede{font-size:12.5px;color:var(--faint);margin:-6px 0 10px;line-height:1.6}
 
 @media print{
   /* ك-255: بطاقة القرار على خلفية بيضاء في الطباعة */
-  .card, .decision, .dc, .blk, .blk *{background-image:none !important}
-  .card, .decision, .dc{background:#fff !important}
+  .card, .decision, .dc, .blk, .blk *{background-image:none!important}
+  .card, .decision, .dc{background:#fff!important}
   /* ك-245: منع انقسام مفتاح الخريطة بين صفحتين في <span class="ltr">PDF</span> */
   .map-key, .map-legend, .key-box, .mx-key,
   /* عطل 2026-10-28: كتلة الخريطة+المفتاح (~130–215مم) لا تجتمع في صفحة فتترك فراغًا مانعًا.
      الحكم: الكتلة تنقسم بين الرسم والمفتاح، وكلٌّ منهما لا ينقسم. */
-  .print-map{break-inside:auto !important;page-break-inside:auto !important}
+  .print-map{break-inside:auto!important;page-break-inside:auto!important}
   /* الإطار نفسه ينقسم: الرسم (95مم) يبقى صحيحًا، والمفتاح يبقى كاملًا في صفحة واحدة */
-  .print-map .hmap-wrap{break-inside:auto !important;page-break-inside:auto !important;overflow:visible !important}
-  .print-map .hmap-svg{break-inside:avoid !important;page-break-inside:avoid !important}
-  .print-map .hmap-legend{break-inside:avoid !important;page-break-inside:avoid !important}
+  .print-map.hmap-wrap{break-inside:auto!important;page-break-inside:auto!important;overflow:visible!important}
+  .print-map.hmap-svg{break-inside:avoid!important;page-break-inside:avoid!important}
+  .print-map.hmap-legend{break-inside:avoid!important;page-break-inside:avoid!important}
   /* ك-245: المفتاح كامل في عمود واحد، وتلتصق كتلة الخريطة بذيل المحتوى */
-  .print-map{display:block !important}
-  .print-map .hmap-wrap{overflow:hidden !important}
+  .print-map{display:block!important}
+  .print-map.hmap-wrap{overflow:hidden!important}
   /* لا يُقيَّد ارتفاع الخريطة: القيد يقلّص عرضها فيسقط فحص العرض (70%) — ك-256 */
-  .print-map .hmap-keys{display:block !important;margin:1.2mm 0 0;font-size:7.8pt;line-height:1.25}
+  .print-map.hmap-keys{display:block!important;margin:1.2mm 0 0;font-size:7.8pt;line-height:1.25}
   /* عطل 2026-10-28: المفتاح بعمود واحد بلغ 95مم فلم تجتمع الخريطة معه في صفحة،
      فبقي فراغ مانع (176مم). القرار: عمودان في الطباعة — المفتاح يبقى كاملًا وغير منقسم
      داخل الكتلة (break-inside:avoid) وتنخفض كتلته إلى ما يقارب النصف. */
   /* ك-298ج: المفتاح (36مم) لم يجد متسعًا في ذيل صفحة الخريطة فهبط لصفحة شبه فارغة.
      الحكم: ستة أعمدة وخط أصغر قليلًا — المفتاح يبقى كاملًا ويستقر في مكانه. */
-  .print-map .hmap-legend{grid-template-columns:repeat(6,minmax(0,1fr)) !important;columns:6 !important;column-gap:2.6mm !important;gap:0 !important;margin:1mm 0 0}
-  .print-map .hmap-legend li{break-inside:avoid !important;page-break-inside:avoid !important;margin:0 0 .15mm !important;font-size:6.5pt !important;line-height:1.12 !important}
-  .print-map-distribution{break-inside:avoid !important;page-break-inside:avoid !important;margin-top:2mm}
+  .print-map.hmap-legend{grid-template-columns:repeat(6,minmax(0,1fr)) !important;columns:6!important;column-gap:2.6mm!important;gap:0!important;margin:1mm 0 0}
+  .print-map.hmap-legend li{break-inside:avoid!important;page-break-inside:avoid!important;margin:0 0.15mm!important;font-size:6.5pt!important;line-height:1.12!important}
+  .print-map-distribution{break-inside:avoid!important;page-break-inside:avoid!important;margin-top:2mm}
   .print-map-distribution h3{font-size:10pt;margin:1.5mm 0 1mm}
-  .print-map-distribution .dist-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5mm}
-  .print-map-distribution .dist-card{display:block !important;width:auto !important;margin:0 !important;padding:1.3mm 1.7mm;border:1px solid #cfd8e3;border-radius:1.2mm;background:#fff;color:#20303f;font-size:7.7pt;line-height:1.25;break-inside:avoid;page-break-inside:avoid}
-  .print-map-distribution .dist-card b{display:block;color:#0a1524;font-size:8pt;margin-bottom:.5mm}
-  .print-map-distribution .dist-card span{display:block}
+  .print-map-distribution.dist-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5mm}
+  .print-map-distribution.dist-card{display:block!important;width:auto!important;margin:0!important;padding:1.3mm 1.7mm;border:1px solid #cfd8e3;border-radius:1.2mm;background:#fff;color:#20303f;font-size:7.7pt;line-height:1.25;break-inside:avoid;page-break-inside:avoid}
+  .print-map-distribution.dist-card b{display:block;color:#0a1524;font-size:8pt;margin-bottom:.5mm}
+  .print-map-distribution.dist-card span{display:block}
 
   :root{
     --ink:#0a1524;--ink-2:#20303f;--muted:#4b5e73;--faint:#5c728c;
@@ -425,7 +439,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   }
   body{background:#fff;color:#111;font-size:10.8pt;line-height:1.62}
   /* لا تُطبع المصادر والمراجع ولا ملحق موثوقية المصادر في نسخة <span class="ltr">PDF</span> */
-  #sec-16{display:none !important}
+  #sec-16{display:none!important}
   p,li,blockquote,.sec-lede,.blk-lede,.note{orphans:3;widows:3}
   /* اقتصاد الورق: تُقاس الخريطة على ارتفاع صفحة واحدة مع عنوانها */
   /* الخريطة ينقسم إطارها فقط بين الرسم والمفتاح، فلا تبقى ورقة شبه فارغة */
@@ -433,27 +447,27 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .map-viz svg{max-height:100mm;height:auto;break-inside:avoid;page-break-inside:avoid}
   .map-legend{break-inside:avoid;page-break-inside:avoid}
   /* إجبار: كتلة الخريطة تنقسم بين الرسم والمفتاح مهما وردت قاعدة أخصّ */
-  #sec-03 .map-viz, .map-viz{break-inside:auto !important;page-break-inside:auto !important}
-  .map-viz svg{break-inside:avoid !important;page-break-inside:avoid !important}
+  #sec-03.map-viz, .map-viz{break-inside:auto!important;page-break-inside:auto!important}
+  .map-viz svg{break-inside:avoid!important;page-break-inside:avoid!important}
   .map-viz{padding:1.2mm 1.2mm}
   /* لا يُقسَّم مفتاح hmap في الطباعة؛ النسخة المطبوعة تعلن عمودًا واحدًا صراحةً */
   .map-legend{columns:2;column-gap:8mm}
   .map-legend li{break-inside:avoid;margin:0 0 1.4mm;font-size:9pt;line-height:1.45}
-  .map-legend .lg-txt{font-size:9pt}
+  .map-legend.lg-txt{font-size:9pt}
   .map-caption,.map-viz figcaption{margin-top:1.5mm;line-height:1.4}
   /* كثافة الصفحة: تقليل حشو الخلايا لتصبح الكتلة على مقاس الورقة */
-  tbody td{padding:1.5mm 2.2mm !important}
+  tbody td{padding:1.5mm 2.2mm!important}
   .sec-lede{margin:0 0 10px;line-height:1.55}
   section.doc{padding:0 0 3mm}
   .rmk,.glossary{break-inside:avoid;page-break-inside:avoid}
   /* انضباط بصري: خطوط فاصلة رقيقة بدل تظليل الصفوف */
-  tbody tr:nth-child(even){background:#fff !important}
+  tbody tr:nth-child(even){background:#fff!important}
   tbody td{border-bottom:.4pt solid #e2e8f0}
   .kpi,.viz,.src,.card,.notice,.threat,.chip,.decision,.bar-track{border-radius:2.4mm}
   .threat{display:inline-block;min-width:52mm}
   .mp-events text{font-size:13.5px}
   /* أرقام علامات الخريطة: لا بد من تخصيص أعلى لأن قاعدة الشاشة أخصّ */
-  .mp-events .mp-num{font-size:15px}
+  .mp-events.mp-num{font-size:15px}
   .mp-events text{font-size:15px}
   /* لا تباعد أحرف على العربية داخل الخريطة (يفكّ الاتصال) */
   .mp-country,.mp-sea-lbl,.mp-port-lbl{letter-spacing:0}
@@ -466,18 +480,18 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .kpis{margin-top:3mm}
   .cls-banner{margin-top:3mm}
   body::before{display:none}
-  .topbar,.no-print{display:none !important}
+  .topbar,.no-print{display:none!important}
   .wrap{max-width:none;padding:0}
   a{color:#0a1524;text-decoration:none}
   section.doc{background:#fff;border:0;border-top:1px solid #cfd8e3;border-radius:0;padding:0 0 3mm;box-shadow:none;break-inside:auto;page-break-inside:auto}
   section.doc.pri{border-top:2px solid #0b6f66}
   section.doc > h2{font-size:13pt;color:#0a1524;break-after:avoid;page-break-after:avoid}
-  section.doc > h2 .ico{display:none}
+  section.doc > h2.ico{display:none}
   section.doc h3{color:#0a1524;font-size:11pt;break-after:avoid;page-break-after:avoid}
   section.doc p,section.doc li,tbody td,.card p{color:#20303f}
   .masthead h1{color:#0a1524;font-size:21pt}
   .kpi,.viz,.src,.foot,.card,.notice{background:#fff;border-color:#cfd8e3;box-shadow:none}
-  .kpi .k-v{color:#0a1524}
+  .kpi.k-v{color:#0a1524}
   .threat{background:#fff;border-color:#cfd8e3}
   .chip{background:#f6f8fb;border-color:#cfd8e3;color:#31465c}
   .chip b{color:#0a1524}
@@ -492,9 +506,9 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .bar-fill{background:#0f8f86;animation:none}
   .masthead,.kpis{animation:none}
   .map-wrap{border-color:#c3cedb}
-  .mp-events .mp-dot{stroke:#fff}
+  .mp-events.mp-dot{stroke:#fff}
   .map-viz{break-inside:auto;page-break-inside:auto}
-  .bar-row .bl,.bar-row .bv,.viz h3,.viz .src-note,.src,.src b,.src .st,.foot,.kpi .k-l,.kpi .k-n,.notice,.chip,.cite-ref,.tag{font-size:10.5pt;line-height:1.6}
+  .bar-row.bl,.bar-row.bv,.viz h3,.viz.src-note,.src,.src b,.src.st,.foot,.kpi.k-l,.kpi.k-n,.notice,.chip,.cite-ref,.tag{font-size:10.5pt;line-height:1.6}
   /* ك-256: البطاقات الكبيرة تنقسم بين الصفحات لتصفير الفراغ الداخلي؛ البطاقات الصغيرة تبقى موحّدة. */
   .card,.viz,.src,.table-row{break-inside:auto;page-break-inside:auto}
      /* ك-298: سجل الأحداث — عمود واحد وثبات البطاقة في الطباعة */
@@ -503,7 +517,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
      /* ك-341: بطاقتان في السطر في الطباعة — تدفّق بلا تصغير خطوط ولا حذف محتوى */
      .ev-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.6mm;margin:4mm 0 0}
      .ev{display:block;margin:0;padding:3mm 3.4mm 2.8mm}
-     .ev{display:block;margin:0 0 2mm;padding:2.2mm 2.6mm 2mm;break-inside:avoid;page-break-inside:avoid;opacity:1 !important;transform:none !important;animation:none !important;border-color:#c3cedb;background:#fff}
+     .ev{display:block;margin:0 0 2mm;padding:2.2mm 2.6mm 2mm;break-inside:avoid;page-break-inside:avoid;opacity:1!important;transform:none!important;animation:none!important;border-color:#c3cedb;background:#fff}
      .ev::before{width:4px;background:#0f8f86}
      .ev.b-media::before{background:#b8860b}
      .ev.b-deny::before{background:#9aa8ba}
@@ -526,23 +540,23 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   table{min-width:0;font-size:10.5pt}
   thead{display:table-header-group}
   tbody tr{break-inside:avoid;page-break-inside:avoid}
-  html.js .reveal{opacity:1 !important;transform:none !important;transition:none !important}
+  html.js.reveal{opacity:1!important;transform:none!important;transition:none!important}
 
   .decision{background:#fff;border-color:#c3cedb}
-  .decision .dc-title{color:#0b6f66}
+  .decision.dc-title{color:#0b6f66}
   .dc-v{color:#0a1524}
-  .dc-row.risk-high .dc-v{color:#9d2b25}
-  .dc-row.risk-med .dc-v{color:#7d5200}
-  .dc-row.risk-low .dc-v{color:#166b45}
+  .dc-row.risk-high.dc-v{color:#9d2b25}
+  .dc-row.risk-med.dc-v{color:#7d5200}
+  .dc-row.risk-low.dc-v{color:#166b45}
   .dc-foot,.rkey,.glossary{color:#4b5e73}
   .conf,.kstrip,.chg-tag,.st-badge,.ev-code,.cls-banner{font-size:10.5pt;background:#f6f8fb;border-color:#b8c4d1;color:#31465c}
   .conf.c-high{color:#14603f;background:#edfaf3;border-color:#7cc4a0}
   .conf.c-med{color:#7c5000;background:#fff8ea;border-color:#cfa95a}
   .conf.c-low{color:#1d4f87;background:#eff5ff;border-color:#8bb1dd}
   .kstrip.k-confirm,.st-badge.s-active{color:#7a1d1a;background:#fff1f0;border-color:#c77973}
-  .kstrip.k-inter,.chg.c-new .chg-tag{color:#1d4f87;background:#edf4ff;border-color:#8bb1dd}
-  .kstrip.k-suspect,.chg.c-reclassified .chg-tag,.cls-banner.c-restricted{color:#7c5000;background:#fff7e6;border-color:#c9a24f}
-  .chg.c-closed .chg-tag,.st-badge.s-stable{color:#14603f;background:#edfaf3;border-color:#7cc4a0}
+  .kstrip.k-inter,.chg.c-new.chg-tag{color:#1d4f87;background:#edf4ff;border-color:#8bb1dd}
+  .kstrip.k-suspect,.chg.c-reclassified.chg-tag,.cls-banner.c-restricted{color:#7c5000;background:#fff7e6;border-color:#c9a24f}
+  .chg.c-closed.chg-tag,.st-badge.s-stable{color:#14603f;background:#edfaf3;border-color:#7cc4a0}
   .ev-code{color:#0b6f66;background:#effaf8;border-color:#7fc9c0}
   .tl-track{background:#e6ecf3}
   .tl-fill.k-confirm{background:#9d2b25}
@@ -552,104 +566,104 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   ul.d-kinds li::before{width:3px}
   .decision,.glossary{break-inside:avoid;page-break-inside:avoid}
   /* كتل التحليل الطويلة تُقسَّم بدل إفراغ ورقة كاملة */
-  .tl-viz,.viz,.card{break-inside:auto !important;page-break-inside:auto !important}
-  .tl-viz .tl-row,.viz svg,.card .kpi{break-inside:avoid;page-break-inside:avoid}
+  .tl-viz,.viz,.card{break-inside:auto!important;page-break-inside:auto!important}
+  .tl-viz.tl-row,.viz svg,.card.kpi{break-inside:avoid;page-break-inside:avoid}
   .decision{animation:none}
 
   /* ===== سياسة التدفّق الموحّدة: تمنع الفراغات الداخلية (قرار 18 أكتوبر 2026) =====
      القاعدة: القِطَع الصغيرة محمية من الانقسام، والحاويات الكبيرة تتدفّق بحرية.
      فتُملأ كل ورقة قبل الانتقال، ولا تُدفع الكتل الكبيرة لإفراغ نصف ورقة. */
-  *{break-inside:auto !important;page-break-inside:auto !important}
-  tr,.kpi,.map-legend li,.glossary li,.dc-row,.ev-item,.chg-item{break-inside:avoid !important;page-break-inside:avoid !important}
-  section.doc > h2,section.doc h3,section.doc h4,.h-rule,.sec-lede{break-after:avoid !important;page-break-after:avoid !important}
+  *{break-inside:auto!important;page-break-inside:auto!important}
+  tr,.kpi,.map-legend li,.glossary li,.dc-row,.ev-item,.chg-item{break-inside:avoid!important;page-break-inside:avoid!important}
+  section.doc > h2,section.doc h3,section.doc h4,.h-rule,.sec-lede{break-after:avoid!important;page-break-after:avoid!important}
   thead{display:table-header-group}
   thead tr{break-after:avoid;page-break-after:avoid}
   p,li{orphans:2;widows:2}
-  .map-viz svg{max-height:145mm !important;width:100%;height:auto;break-inside:avoid !important}
-  .map-legend,.map-viz,.tbl-wrap,.changes,.decision,.viz,.card{break-inside:auto !important;page-break-inside:auto !important}
+  .map-viz svg{max-height:145mm!important;width:100%;height:auto;break-inside:avoid!important}
+  .map-legend,.map-viz,.tbl-wrap,.changes,.decision,.viz,.card{break-inside:auto!important;page-break-inside:auto!important}
   /* ك-235: قاعدة مكرّرة كانت تنقض السطر 601 (auto) وتُعيد avoid، فتُنقل كتلة الخريطة كاملة فتُخلّف
      فراغًا قد يبلغ 206 مم في الصفحة السابقة. الرسم نفسه يبقى غير قابل للتجزئة (avoid على svg)،
      والحاوية والمفتاح يتدفّقان فيكتمل امتلاء الورقة. */
-  .map-viz{break-inside:auto !important;page-break-inside:auto !important}
+  .map-viz{break-inside:auto!important;page-break-inside:auto!important}
   /* Chromium لا يجزّئ حاويات grid/flex بين الصفحات، فتتدفّق هنا بترتيب inline-block
      يحفظ هيئة العمودين/البطاقات نفسها، مع السماح بالانقسام بين الصفحات */
-  .wrap,.changes,.dc-grid,.kpis,.masthead,.map-legend,.src-grid,.glossary,.tl-viz,.viz,.card,.decision{display:block !important}
+  .wrap,.changes,.dc-grid,.kpis,.masthead,.map-legend,.src-grid,.glossary,.tl-viz,.viz,.card,.decision{display:block!important}
   /* عطل (2026-10-30): القاعدة العامة كانت تُظهر وسم <style> المحقون داخل الترويسة في الطباعة،
      فطُبع نص <span class="ltr">CSS</span> داخل الصفحة الأولى. القياس الحي: display المحسوب لوسم style = inline-block في print.
      الإصلاح: استثناء العناصر غير المرئية + حارس صريح يمنع طباعتها. */
-  .kpis > *,.masthead > *,.map-legend > li,.glossary > li,.src-grid > *{display:inline-block !important;vertical-align:top !important;width:48.5% !important;margin:0 0 2.5mm 1% !important;box-sizing:border-box !important}
+  .kpis > *,.masthead > *,.map-legend > li,.glossary > li,.src-grid > *{display:inline-block!important;vertical-align:top!important;width:48.5% !important;margin:0 0 2.5mm 1% !important;box-sizing:border-box!important}
   .kpis > style,.kpis > script,.kpis > template,.kpis > link,
   .masthead > style,.masthead > script,.masthead > template,.masthead > link,
   .src-grid > style,.src-grid > script,.src-grid > template,.src-grid > link,
-  .map-legend > style,.map-legend > script,.glossary > style,.glossary > script{display:none !important}
-  style,script,template,link,meta,title{display:none !important}
-  .dc-grid > *,.dc-row{display:block !important;width:100% !important}
+  .map-legend > style,.map-legend > script,.glossary > style,.glossary > script{display:none!important}
+  style,script,template,link,meta,title{display:none!important}
+  .dc-grid > *,.dc-row{display:block!important;width:100% !important}
   /* ك-103: الوسم يُعوَّم والمحتوى كتلة قابلة للانقسام — فلا يُترك عنوان أو بطاقة يتيمة ولا فراغ أسفل الغلاف */
   .dc-row::after{content:"";display:block;clear:both}
-  .dc-row > *:first-child{float:inline-start !important;display:block !important;width:26% !important}
-  .dc-row > *:last-child{display:block !important;width:auto !important;margin-inline-start:27% !important}
-  .changes > *{display:block !important;width:100% !important}
+  .dc-row > *:first-child{float:inline-start!important;display:block!important;width:26% !important}
+  .dc-row > *:last-child{display:block!important;width:auto!important;margin-inline-start:27% !important}
+  .changes > *{display:block!important;width:100% !important}
   .viz > *,.card > *{box-sizing:border-box}
   /* ضغط تباعد الأقسام: يوفّر نحو 40 مم فتنتقل نهاية التقرير إلى صفحتها السابقة */
-  section.doc{padding:0 0 2.5mm !important}
-  section.doc > h2{margin:3mm 0 1.5mm !important}
-  .sec-lede{margin:0 0 2mm !important}
-  .h-rule{margin:1mm 0 2mm !important}
+  section.doc{padding:0 0 2.5mm!important}
+  section.doc > h2{margin:3mm 0 1.5mm!important}
+  .sec-lede{margin:0 0 2mm!important}
+  .h-rule{margin:1mm 0 2mm!important}
   /* تشخيص: إلغاء كل قواعد منع الكسر لتحديد مصدر الفراغات */
-  *{break-after:auto !important;break-before:auto !important}
-  body,p,li,td,th{line-height:1.36 !important}
+  *{break-after:auto!important;break-before:auto!important}
+  body,p,li,td,th{line-height:1.36!important}
   /* overflow مخفي يمنع Chromium من تقسيم الحاوية بين الصفحات فتُدفع كاملة وتُفرّغ الورقة */
-  *{overflow:visible !important}
-  .map-viz svg{max-height:145mm !important;width:100%;height:auto}
-  .masthead > div:not(.threat){display:block !important;width:100% !important;margin:0 !important}
+  *{overflow:visible!important}
+  .map-viz svg{max-height:145mm!important;width:100%;height:auto}
+  .masthead > div:not(.threat){display:block!important;width:100% !important;margin:0!important}
   .masthead h1{width:100% !important}
   /* الغلاف ينتهي عند شريط التصنيف: أهم الأخبار المتعلقة بالأمن البحري تبدأ صفحة جديدة (يمنع العنوان اليتيم والفراغ) */
-  .decision{break-inside:avoid !important;page-break-inside:avoid !important}
-  .map-viz svg{max-height:145mm !important;width:100%;height:auto}
+  .decision{break-inside:avoid!important;page-break-inside:avoid!important}
+  .map-viz svg{max-height:145mm!important;width:100%;height:auto}
   /* القاعدة الأخص تأتي بعد سياسة التدفق العامة حتى لا تنقضها */
-  .print-map{break-inside:avoid !important;page-break-inside:avoid !important}
-  .print-map .hmap-wrap{break-inside:avoid !important;page-break-inside:avoid !important;overflow:hidden !important}
-  .print-map .hmap-wrap{grid-template-columns:minmax(0,6fr) minmax(0,1fr) !important}
-  .print-map .hmap-zoom{border-inline-start:1.5px solid var(--accent) !important;border-top:0 !important}
+  .print-map{break-inside:avoid!important;page-break-inside:avoid!important}
+  .print-map.hmap-wrap{break-inside:avoid!important;page-break-inside:avoid!important;overflow:hidden!important}
+  .print-map.hmap-wrap{grid-template-columns:minmax(0,6fr) minmax(0,1fr) !important}
+  .print-map.hmap-zoom{border-inline-start:1.5px solid var(--accent) !important;border-top:0!important}
   /* عطل 2026-10-28: قاعدتان متعارضتان للمفتاح (عمود/عمودان) — أُلغيت الثانية.
      الحكم الواحد: عمودان في الطباعة، والكتلة لا تنقسم. */
-  .print-map .hmap-legend{grid-template-columns:repeat(4,minmax(0,1fr)) !important;columns:4 !important;column-gap:3.5mm !important}
-  .print-map .hmap-keys{display:block !important}
+  .print-map.hmap-legend{grid-template-columns:repeat(4,minmax(0,1fr)) !important;columns:4!important;column-gap:3.5mm!important}
+  .print-map.hmap-keys{display:block!important}
   /* محاذاة مضبوطة: تُغلق فراغات الجانبين في الفقرات والقوائم، ولا تمسّ العناوين والبطاقات */
-  section.doc p,section.doc li,.sec-lede,.masthead .lede,.glossary li,.src-grid li,
+  section.doc p,section.doc li,.sec-lede,.masthead.lede,.glossary li,.src-grid li,
   /* تصفير فقرات المتن والعناوين التمهيدية (قرار المالك 2026-10-22): يمنع الفراغ الجانبي */
-  .sec-lede,section.doc p,.masthead p,.blk-lede,.note{text-align:justify !important;text-align-last:start !important;hyphens:none !important}
+  .sec-lede,section.doc p,.masthead p,.blk-lede,.note{text-align:justify!important;text-align-last:start!important;hyphens:none!important}
   /* لا يُترك عنوان بطاقة أو قسم وحده أسفل ورقة بلا مضمون (عطل ك-103) */
-  section.decision > .dc-title,.card > h3,.viz > h3,section.doc > h2{break-after:avoid !important;page-break-after:avoid !important}
-  .dc-grid,.dc-row,.dc-v,.dc-v ul{break-inside:auto !important;page-break-inside:auto !important}
-  .dc-list li{break-inside:avoid !important;page-break-inside:avoid !important}
+  section.decision > .dc-title,.card > h3,.viz > h3,section.doc > h2{break-after:avoid!important;page-break-after:avoid!important}
+  .dc-grid,.dc-row,.dc-v,.dc-v ul{break-inside:auto!important;page-break-inside:auto!important}
+  .dc-list li{break-inside:avoid!important;page-break-inside:avoid!important}
   /* تصفير كامل المتن بما فيه قيم أهم الأخبار المتعلقة بالأمن البحري (ك-105): البوابة تفحص الصفحة بوسائط print */
   .dc-list li,.chg-list li,.ev-list li,.map-caption,footer.foot,
-  .dc-v,.dc-row,.dc-grid,.kv-v,.glossary li,.src-grid li{text-align:justify !important;
-    text-align-last:start !important;hyphens:none !important;word-spacing:normal !important}
+  .dc-v,.dc-row,.dc-grid,.kv-v,.glossary li,.src-grid li{text-align:justify!important;
+    text-align-last:start!important;hyphens:none!important;word-spacing:normal!important}
   section.doc h2,section.doc h3,section.doc h4,.h-rule,.chip,.kpi,.tag,.st-badge,
-  .map-legend li,.conf,.cls-banner,.threat,.toc li,.ev-code{text-align:start !important}
-  .map-panel{padding:2mm 2.5mm !important}
-  .map-legend{margin-top:1.5mm !important}
-  .map-legend li{margin:0 0 1mm !important;font-size:8.4pt !important;line-height:1.3 !important}
-  .kpis > *{width:32% !important;padding:1.6mm 2mm !important;margin:0 0 1.5mm 1% !important}
-  .kpis .k-v{font-size:14pt !important;margin:0.5mm 0 !important}
-  .kpis .k-l{font-size:8.6pt !important;line-height:1.25 !important;min-height:0 !important}
-  .kpis .k-m{font-size:7.6pt !important;line-height:1.25 !important}
-  .kpis.hero-kpis{display:block !important;direction:rtl !important}
-  .kpis.hero-kpis .k-risk-patterns{display:block !important;width:100% !important;margin:0 0 1.5mm !important}
-  .kpis.hero-kpis .kpi-row{display:grid !important;gap:4mm !important;width:100% !important;margin:0 0 4mm !important;direction:rtl !important}
-  .kpis.hero-kpis .kpi-row-1{grid-template-columns:repeat(4,minmax(0,1fr)) !important}
-  .kpis.hero-kpis .kpi-row-2{grid-template-columns:repeat(3,minmax(0,1fr)) !important}
-  .kpis.hero-kpis .kpi-row > .kpi{display:flex !important;width:auto !important;margin:0 !important;height:148px !important;min-height:148px !important;padding:1.6mm 2mm !important;break-inside:avoid !important;page-break-inside:avoid !important;text-align:right !important;direction:rtl !important}
-  .kpis.hero-kpis .k-v{text-align:right !important;direction:rtl !important}
-  .dc-grid{gap:1.5mm !important}
-  section.doc{font-size:10.2pt !important}
+  .map-legend li,.conf,.cls-banner,.threat,.toc li,.ev-code{text-align:start!important}
+  .map-panel{padding:2mm 2.5mm!important}
+  .map-legend{margin-top:1.5mm!important}
+  .map-legend li{margin:0 0 1mm!important;font-size:8.4pt!important;line-height:1.3!important}
+  .kpis > *{width:32% !important;padding:1.6mm 2mm!important;margin:0 0 1.5mm 1% !important}
+  .kpis.k-v{font-size:14pt!important;margin:0.5mm 0!important}
+  .kpis.k-l{font-size:8.6pt!important;line-height:1.25!important;min-height:0!important}
+  .kpis.k-m{font-size:7.6pt!important;line-height:1.25!important}
+  .kpis.hero-kpis{display:block!important;direction:rtl!important}
+  .kpis.hero-kpis.k-risk-patterns{display:block!important;width:100% !important;margin:0 0 1.5mm!important}
+  .kpis.hero-kpis.kpi-row{display:grid!important;gap:4mm!important;width:100% !important;margin:0 0 4mm!important;direction:rtl!important}
+  .kpis.hero-kpis.kpi-row-1{grid-template-columns:repeat(4,minmax(0,1fr)) !important}
+  .kpis.hero-kpis.kpi-row-2{grid-template-columns:repeat(3,minmax(0,1fr)) !important}
+  .kpis.hero-kpis.kpi-row > .kpi{display:flex!important;width:auto!important;margin:0!important;height:148px!important;min-height:148px!important;padding:1.6mm 2mm!important;break-inside:avoid!important;page-break-inside:avoid!important;text-align:right!important;direction:rtl!important}
+  .kpis.hero-kpis.k-v{text-align:right!important;direction:rtl!important}
+  .dc-grid{gap:1.5mm!important}
+  section.doc{font-size:10.2pt!important}
   /* ك-395: استعادة ميزانية الصفحات بعد إضافة بطاقات المؤشرات؛ مسافات المتن فقط، بلا تصغير خط أو بطاقة */
-  html body main section.doc{padding-bottom:1mm !important}
-  html body main section.doc p{margin:1mm 0 !important}
-  html body main section.doc ul,html body main section.doc ol{margin:.7mm 0 !important}
-  html body main section.doc li{margin:.3mm 0 !important}
+  html body main section.doc{padding-bottom:1mm!important}
+  html body main section.doc p{margin:1mm 0!important}
+  html body main section.doc ul,html body main section.doc ol{margin:.7mm 0!important}
+  html body main section.doc li{margin:.3mm 0!important}
 }
 
 
@@ -660,7 +674,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   margin:24px 0 6px;border:1px solid var(--line-2);border-radius:var(--radius);
   background:linear-gradient(180deg,rgba(34,195,182,.07),rgba(12,22,38,.4));padding:18px 22px 16px
 }
-.decision .dc-title{
+.decision.dc-title{
   font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:17px;margin:0 0 12px;color:var(--accent)
 }
 .dc-grid{display:grid;gap:8px}
@@ -669,9 +683,9 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .dc-list{margin:4px 0 0;padding-inline-start:20px}
 .dc-list li{margin:4px 0;line-height:1.75}
 .dc-v{font-size:16px;color:var(--ink);font-weight:500}
-.dc-row.risk-high .dc-v{color:var(--danger)}
-.dc-row.risk-med .dc-v{color:var(--warn)}
-.dc-row.risk-low .dc-v{color:var(--ok)}
+.dc-row.risk-high.dc-v{color:var(--danger)}
+.dc-row.risk-med.dc-v{color:var(--warn)}
+.dc-row.risk-low.dc-v{color:var(--ok)}
 .dc-foot{font-size:12.5px;color:var(--faint);margin-top:10px;border-top:1px solid var(--line);padding-top:8px}
 
 /* ---------- مفتاح القراءة ---------- */
@@ -709,10 +723,10 @@ ul.d-kinds li.k-watch::before{background:var(--warn)}
 ul.changes{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 .changes li{display:flex;gap:11px;align-items:baseline}
 .chg-tag{font-size:11.5px;border-radius:999px;padding:2px 10px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--panel-3);flex:0 0 auto}
-.chg.c-new .chg-tag{color:#d7e7ff;background:rgba(77,157,255,.15);border-color:rgba(77,157,255,.40)}
-.chg.c-closed .chg-tag{color:#cdf6e2;background:rgba(51,208,122,.15);border-color:rgba(51,208,122,.40)}
-.chg.c-reclassified .chg-tag{color:#ffe8c4;background:rgba(255,176,46,.15);border-color:rgba(255,176,46,.40)}
-.chg.c-ongoing .chg-tag{color:#cfd8e3;background:rgba(148,163,184,.14);border-color:rgba(148,163,184,.38)}
+.chg.c-new.chg-tag{color:#d7e7ff;background:rgba(77,157,255,.15);border-color:rgba(77,157,255,.40)}
+.chg.c-closed.chg-tag{color:#cdf6e2;background:rgba(51,208,122,.15);border-color:rgba(51,208,122,.40)}
+.chg.c-reclassified.chg-tag{color:#ffe8c4;background:rgba(255,176,46,.15);border-color:rgba(255,176,46,.40)}
+.chg.c-ongoing.chg-tag{color:#cfd8e3;background:rgba(148,163,184,.14);border-color:rgba(148,163,184,.38)}
 
 /* ---------- رموز الأحداث والحالات ---------- */
 .ev-code{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:11.5px;color:var(--accent);background:rgba(34,195,182,.10);border:1px solid rgba(34,195,182,.32);border-radius:6px;padding:0 5px}
@@ -724,10 +738,10 @@ ul.changes{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 .trend.t-up{color:var(--danger)}
 .trend.t-down{color:var(--ok)}
 .trend.t-flat{color:var(--muted)}
-.kpi .k-d{font-size:12px;margin-top:2px;font-family:"<span class="ltr">IBM</span> Plex Mono",monospace}
+.kpi.k-d{font-size:12px;margin-top:2px;font-family:"<span class="ltr">IBM</span> Plex Mono",monospace}
 
 /* ---------- الخط الزمني ---------- */
-.tl-viz .tl-row{display:grid;grid-template-columns:96px 1fr 46px minmax(180px,1.4fr);gap:12px;align-items:center;margin:9px 0}
+.tl-viz.tl-row{display:grid;grid-template-columns:96px 1fr 46px minmax(180px,1.4fr);gap:12px;align-items:center;margin:9px 0}
 .tl-date{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:12px;color:var(--muted)}
 .tl-track{height:9px;border-radius:999px;background:var(--panel-3);overflow:hidden}
 .tl-fill{height:100%;border-radius:999px;width:var(--w,0);animation:tl-grow 1s cubic-bezier(.22,.8,.28,1) both}
@@ -749,15 +763,15 @@ ul.changes{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 @media (max-width:760px){
   .dc-row{grid-template-columns:1fr;gap:2px}
   .dc-l{font-size:12.5px}
-  .tl-viz .tl-row{grid-template-columns:74px 1fr 34px;grid-template-areas:"d t n" "l l l";gap:6px 10px}
+  .tl-viz.tl-row{grid-template-columns:74px 1fr 34px;grid-template-areas:"d t n" "l l l";gap:6px 10px}
   .tl-date{grid-area:d}.tl-track{grid-area:t}.tl-num{grid-area:n}.tl-lbl{grid-area:l}
 }
 
 /* ---------- ملحق موثوقية المصادر ---------- */
 .tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
-.tbl-scroll .rel-tbl{min-width:640px}
+.tbl-scroll.rel-tbl{min-width:640px}
 .rel-tbl td:nth-child(5){max-width:420px}
-@media print{.tbl-scroll{overflow:visible}.tbl-scroll .rel-tbl{min-width:0}}
+@media print{.tbl-scroll{overflow:visible}.tbl-scroll.rel-tbl{min-width:0}}
 .rel-tbl td.rel{
   font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-weight:600;text-align:center;color:var(--accent)
 }
@@ -769,18 +783,18 @@ body.daylight{
   --accent:#0b6f66;--info:#1f5f9f;--danger:#a32a24;--warn:#8a5a00;--ok:#176b46;
 }
 body.daylight::before{display:none}
-body.daylight .topbar{background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.85))}
-body.daylight .btn-primary{background:#0b6f66;color:#ffffff}
-body.daylight .cite-ref{color:#0b6f66;background:rgba(11,111,102,.07);border-color:rgba(11,111,102,.30)}
-body.daylight .tag{color:#31465c;background:#f2f5f9;border-color:#c4d0dd}
-body.daylight .tag.t-confirm{color:#7a1d1a;background:#fff1f0;border-color:#c77973}
-body.daylight .tag.t-suspect{color:#7c5000;background:#fff7e6;border-color:#c9a24f}
-body.daylight .tag.t-inter{color:#1d4f87;background:#edf4ff;border-color:#8bb1dd}
-body.daylight .threat.risk-high .val{color:#a32a24}
-body.daylight .map-legend li,body.daylight .lg-num{color:#31465c}
-body.daylight .lg-num{color:#ffffff}
-body.daylight .map-keys{color:#5a7086}
-body.daylight .kpi em{opacity:.95}
+body.daylight.topbar{background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.85))}
+body.daylight.btn-primary{background:#0b6f66;color:#ffffff}
+body.daylight.cite-ref{color:#0b6f66;background:rgba(11,111,102,.07);border-color:rgba(11,111,102,.30)}
+body.daylight.tag{color:#31465c;background:#f2f5f9;border-color:#c4d0dd}
+body.daylight.tag.t-confirm{color:#7a1d1a;background:#fff1f0;border-color:#c77973}
+body.daylight.tag.t-suspect{color:#7c5000;background:#fff7e6;border-color:#c9a24f}
+body.daylight.tag.t-inter{color:#1d4f87;background:#edf4ff;border-color:#8bb1dd}
+body.daylight.threat.risk-high.val{color:#a32a24}
+body.daylight.map-legend li,body.daylight.lg-num{color:#31465c}
+body.daylight.lg-num{color:#ffffff}
+body.daylight.map-keys{color:#5a7086}
+body.daylight.kpi em{opacity:.95}
 
 /* ── تمييز الروابط داخل النص (<span class="ltr">WCAG</span> 2.1 AA — 1.4.1) ──
    عطل ك-72: تساوي الخصوصية يُحسم بالترتيب، فالقاعدة تُركَّب آخر كل الأنماط لتفوز. */
@@ -795,8 +809,9 @@ body.daylight .kpi em{opacity:.95}
 /* شريط واحد: مع شريط الموقع تنتقل أزرار الطباعة والمظهر وحجم الخط إليه ويُخفى شريط الإصدار */
 body:has(.site-nav) .topbar{display:none}
 .sc-hero{margin:20px 0 6px}
-.sc-eyebrow{font-size:14.5px;color:var(--muted);margin:0 0 6px}
-.sc-h1{font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;font-size:clamp(21px,2.05vw,28px);line-height:1.65;margin:0 0 12px;text-wrap:balance}
+.sc-eyebrow{font-size:14.5px;color:var(--muted);margin:0 0 6px;text-align:center}
+.sc-sub{font-size:15.5px;color:var(--ink-2);margin:0 0 10px;text-align:center;line-height:1.8}
+.sc-h1{font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;font-size:clamp(21px,2.05vw,28px);line-height:1.65;margin:0 0 6px;text-wrap:balance;text-align:center}
 .sc-h1 .ltr{white-space:nowrap}
 .sc-lede{font-size:15.5px;line-height:1.9;color:var(--ink-2);margin:0 0 12px;max-width:none}
 .sc-chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px}
@@ -835,6 +850,12 @@ body:has(.site-nav) .topbar{display:none}
 .sc-official-label{font-size:12.5px;color:var(--muted)}
 .sc-official-value{font-family:"IBM Plex Mono",monospace;font-size:18px;line-height:1.35;text-align:right;direction:rtl;color:var(--ink)}
 .sc-official-source{font-size:11.5px;line-height:1.5;color:var(--muted);overflow-wrap:anywhere}
+/* تنسيق مضغوط مقروء لبطاقات المستجدات (قرار المالك 2026-10-31: خفض الاكتظاظ) */
+.sc-official-layer{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:2px 10px;align-items:baseline;padding:6px 0;border-top:1px dashed var(--line)}
+.sc-official-layer:first-child{border-top:0}
+.sc-official-label{color:var(--muted);font-size:13px}
+.sc-official-value{font-weight:700}
+.sc-official-source{grid-column:1 / -1;color:var(--muted);font-size:12px;line-height:1.6}
 .sc-kpi-row{display:grid;gap:16px;direction:rtl}
 .sc-kpi-row-1{grid-template-columns:repeat(4,minmax(0,1fr))}
 .sc-kpi-row-2{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -1098,60 +1119,13 @@ cursor:pointer;font:inherit;font-size:12.5px;font-weight:700}
 .sn-lang-note{position:fixed;left:50%;transform:translateX(-50%);top:14px;z-index:60;background:var(--sn-panel);
 border:1px solid var(--sn-line);color:var(--sn-ink);border-radius:10px;padding:10px 14px;font-size:13px;
 box-shadow:0 10px 30px rgba(0,0,0,.35);max-width:90vw;text-align:center}
-
-/* اتجاه النصوص اللاتينية والإحداثيات — يمنع انقلابها في السياق العربي */
-.ltr{direction:ltr;unicode-bidi:isolate}
-
-/* ألوان الشارات في الوضع النهاري (نفس منطق ألوان نسخة الطباعة) */
-@media screen{
-  body.daylight .st-badge.s-stable,body.daylight .chg.c-closed .chg-tag,body.daylight .conf.c-high,
-  body.daylight .tag.t-confirm{color:#14603f;background:#edfaf3;border-color:#7cc4a0}
-  body.daylight .st-badge.s-active,body.daylight .kstrip.k-confirm,body.daylight .cls-banner.c-sensitive
-    {color:#7a1d1a;background:#fff1f0;border-color:#c77973}
-  body.daylight .conf.c-med,body.daylight .kstrip.k-suspect,body.daylight .chg.c-reclassified .chg-tag,
-  body.daylight .cls-banner.c-restricted,body.daylight .tag.t-suspect{color:#7c5000;background:#fff7e6;border-color:#c9a24f}
-  body.daylight .conf.c-low,body.daylight .kstrip.k-inter,body.daylight .chg.c-new .chg-tag
-    {color:#1d4f87;background:#edf4ff;border-color:#8bb1dd}
-  body.daylight .chg.c-ongoing .chg-tag{color:#31465c;background:#f6f8fb;border-color:#b8c4d1}
-  body.daylight .ev-code{color:#31465c;background:#f2f5f9;border-color:#c4d0dd}
-}
-
-/* رقم المعلّم: نص داكن على معلّم فاتح، ومقلوب في الوضع النهاري */
-body:not(.daylight) .lg-num{color:#04120f}
-body.daylight .lg-num{color:#ffffff}
-
-/* بطاقات الجوال للجداول — البند المعتمد 21 أكتوبر 2026 */
-@media (max-width:560px){
-  table.cardified{display:block;border:0;background:transparent;border-radius:0}
-  table.cardified.cardified{width:100%;max-width:100%;min-width:0}
-  table.cardified thead{display:none}
-  table.cardified tbody{display:block;max-width:100%}
-  table.cardified tr{display:block;max-width:100%;box-sizing:border-box;background:var(--panel);
-    border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin:0 0 10px}
-  table.cardified td{display:grid;grid-template-columns:minmax(72px,auto) minmax(0,1fr);gap:8px;
-    border:0;padding:5px 0;align-items:baseline;text-align:start;
-    overflow-wrap:anywhere;word-break:break-word;min-width:0}
-  table.cardified td::before{content:attr(data-label);color:var(--muted);font-size:12.5px;font-weight:600}
-  table.cardified td:empty{display:none}
-  /* ك-336: النص الإنجليزي الطويل (شرائح الحالة والتسميات) كان يتجاوز عرض بطاقة الجوال 16–31% */
-  table.cardified td > *,table.cardified .st-badge{white-space:normal;overflow-wrap:anywhere;
-    word-break:break-word;min-width:0;max-width:100%}
-  .tbl-wrap:has(table.cardified),.tbl-scroll:has(table.cardified){overflow:visible;border:0}
-  .tbl-hint{display:none}
-}
-/* بانر النسخة المستبدلة — البند المعتمد 21 أكتوبر 2026 */
-.sup-banner{margin:0 0 20px;padding:12px 16px;border:1px solid #c9a24f;border-radius:10px;
-  background:#2a2210;color:#ffd88a;font-size:14px}
-body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
-.sup-banner a{color:inherit;font-weight:700;text-decoration:underline}
-.sp-dim{opacity:.72}
 </style></head>
 <body><nav class="site-nav no-print" aria-label="تنقل الموقع">
   <a class="sn-skip" href="#" id="sn-skip" data-i18n="skip">الانتقال إلى المحتوى</a>
   <div class="sn-inner">
     <a class="sn-brand" href="/">
       <span class="sn-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/><path d="M12 11.5v4"/><path d="M9.6 13.2h4.8"/></svg></span>
-      <span class="sn-name">مركز الوعي بالمجال البحري<em>تقارير أمن الملاحة — مملكة البحرين</em></span>
+      <span class="sn-name">مركز الوعي بالمجال البحري <em>تقارير أمن الملاحة — مملكة البحرين</em></span>
     </a>
     <button type="button" class="sn-menu no-print" aria-expanded="false" aria-controls="sn-panel">
       <span class="sn-menu-icon" aria-hidden="true"></span><span data-i18n="menu">القائمة</span>
@@ -1213,29 +1187,50 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     <div class="threat risk-severe"><div class="lbl">مستوى التهديد</div><div class="val">مرتفع جدًا</div></div>
     <div>
       <p class="lede">خلال الفترة <bdi class="bidi" dir="ltr">240400Z–250400Z</bdi> أكتوبر 2026، نقلت تغذية straits.live عن الحرس الثوري أن سبع ناقلات نفط أصيبت في مضيق هرمز في ليلة واحدة، وإعلانًا عن وقف حركة السفن «غير الممتثلة». ووصل تسرب نفطي إلى شواطئ أم القيوين، مع عرض إيراني بفتح المضيق مقابل رفع الحصار. لا بلاغ رسمي جديد من <span class="ltr">UKMTO</span> ولا من <span class="ltr">NAVAREA IX</span>.</p>
-      <div class="masthead-meta"><span class="chip">رقم الإصدار <b>و ب <span class="ltr">26/10/21</span></b></span><span class="chip">آخر تحديث <b class="bidi">2026-10-25T04:00:00Z</b></span><span class="chip">فترة التغطية <b><bdi class="bidi" dir="ltr">240400Z–250400Z</bdi> <span class="ltr">UTC</span> أكتوبر 2026</b></span><span class="chip">المصادر المعتمدة <b class="bidi">62</b></span><span class="chip">بالمسار الآلي <b class="bidi">35</b></span><span class="chip">مصادر مستشهد بها <b class="bidi">8</b></span></div>
+      <div class="masthead-meta"><span class="chip">رقم الإصدار <b><span class="ltr">26/10/21</span></b></span><span class="chip">آخر تحديث <b>25 أكتوبر 2026 · 04:00 حسب التوقيت العالمي</b></span><span class="chip">فترة التغطية <b><bdi class="bidi" dir="ltr">240400Z–250400Z</bdi> <span class="ltr">UTC</span> أكتوبر 2026</b></span><span class="chip">المصادر المعتمدة <b class="bidi">62</b></span><span class="chip">بالمسار الآلي <b class="bidi">35</b></span></div>
     </div>
   </header>
 
   <div class="cls-banner c-open">تصنيف الإصدار: عام</div>
-  <section class="decision reveal" aria-label="عام"><h2 class="dc-title">عام</h2><div class="dc-grid"><div class="dc-row"><div class="dc-l">ما تغيّر</div><div class="dc-v"><ul class="dc-list"><li>ارتفع عدد الناقلات في الرواية الإيرانية من ناقلتين إلى سبع في ليلة واحدة.</li><li>إعلان عن وقف كامل لحركة السفن «غير الممتثلة» في المضيق.</li></ul><p class="dc-note">و4 بنود أخرى في قسم «ما تغيّر».</p></div></div><div class="dc-row"><div class="dc-l">مستوى التهديد</div><div class="dc-v">المستوى التفصيلي في بطاقة الترويسة (مستوى التهديد حسب القطاعات)</div></div><div class="dc-row"><div class="dc-l">التوصيات</div><div class="dc-v"><ul class="dc-list"><li>ارفعوا التأهب على السفن التجارية قبل عبور مضيق هرمز خلال الفترة.</li><li>أبلغوا <span class="ltr">UKMTO</span> فورًا عن أي إصابة أو اقتراب مشتبه.</li></ul><p class="dc-note">و1 بنود أخرى في قسم «التوصيات».</p></div></div><div class="dc-row"><div class="dc-l">ما يُراقب خلال 24 ساعة</div><div class="dc-v"><p class="dc-note">عدد البنود: 4 · وتفصيلها في قسم «علامات الإنذار المبكر».</p></div></div></div><div class="dc-foot">أساس التقدير: روايات من طرف في الصراع بلا بلاغ رسمي موازٍ، ونقل مهني عن تسرب إماراتي، واستمرار اضطراب العبور؛ الثقة منخفضة في الجديد ومتوسطة في الخلفية الرسمية.</div></section>
+  <section class="decision reveal" aria-label="عام"><h2 class="dc-title">عام</h2><div class="dc-grid"><div class="dc-row"><div class="dc-l">ما تغيّر</div><div class="dc-v"><ul class="dc-list"><li>ارتفع عدد الناقلات في الرواية الإيرانية من ناقلتين إلى سبع في ليلة واحدة.</li><li>إعلان عن وقف كامل لحركة السفن «غير الممتثلة» في المضيق.</li></ul><p class="dc-note">و4 بنود أخرى في قسم «ما تغيّر».</p></div></div><div class="dc-row"><div class="dc-l">مستوى التهديد</div><div class="dc-v">المستوى التفصيلي في بطاقة الترويسة</div></div><div class="dc-row"><div class="dc-l">التوصيات</div><div class="dc-v"><ul class="dc-list"><li>ارفعوا التأهب على السفن التجارية قبل عبور مضيق هرمز خلال الفترة.</li><li>أبلغوا <span class="ltr">UKMTO</span> فورًا عن أي إصابة أو اقتراب مشتبه.</li></ul><p class="dc-note">و1 بنود أخرى في قسم «التوصيات».</p></div></div><div class="dc-row"><div class="dc-l">ما يُراقب خلال 24 ساعة</div><div class="dc-v"><p class="dc-note">عدد البنود: 4 · وتفصيلها في قسم «علامات الإنذار المبكر».</p></div></div></div><div class="dc-foot">أساس التقدير: روايات من طرف في الصراع بلا بلاغ رسمي موازٍ، ونقل مهني عن تسرب إماراتي، واستمرار اضطراب العبور؛ الثقة منخفضة في الجديد ومتوسطة في الخلفية الرسمية.</div></section>
   <div class="kpis"><div class="kpi acc-warn reveal"><em></em><div class="k-l">رواية عن ناقلات مصابة</div><div class="k-v bidi">7</div><div class="k-n">رواية إيرانية عن سبع ناقلات في ليلة واحدة · بلا تأكيد مستقل</div></div><div class="kpi acc-warn reveal"><em></em><div class="k-l">بحّارون عالقون في الممر</div><div class="k-v bidi">6000</div><div class="k-n">نقل مهني · بلا أصل رسمي</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">آخر قياس عبور</div><div class="k-v bidi">4</div><div class="k-n">القياس يعود إلى 18 أكتوبر · مقابل 85 قبل الأزمة</div></div></div>
-  <div class="sc-hero no-print"><p class="sc-eyebrow">التقرير اليومي لأمن الملاحة والأوضاع الراهنة في المنطقة</p><h2 class="sc-h1">خلال الفترة <bdi class="bidi" dir="ltr">240400Z–250400Z</bdi> أكتوبر 2026، نقلت تغذية straits.live عن الحرس الثوري أن سبع ناقلات نفط أصيبت في مضيق هرمز في ليلة واحدة، وإعلانًا عن وقف حركة السفن «غير الممتثلة»</h2><div class="sc-chips"><span class="sc-chip sc-arch">إصدار أرشيفي · صدر <b class="bidi">2026-10-25T04:00:00Z</b></span><span class="sc-chip">رقم الإصدار <b><span class="bidi">و ب <span class="ltr">26/10/21</span></span></b></span><span class="sc-chip">فترة التغطية <b><bdi class="bidi" dir="ltr">240400Z–250400Z</bdi> <span class="ltr">UTC</span> أكتوبر 2026</b></span><span class="sc-chip">المصادر <b><span class="bidi">62</span> معتمدة · <span class="bidi">35</span> بالمسار الآلي</b></span><span class="sc-chip">مستشهد بها <b><span class="bidi">8</span></b></span></div><div class="sc-grid"><section class="sc-card" aria-label="أهم الأخبار المتعلقة بالأمن البحري"><h2 class="sc-h2">أهم الأخبار المتعلقة بالأمن البحري</h2><div class="sc-row"><div class="sc-l">ما تغيّر</div><div class="sc-v"><p class="sc-gist">ارتفع عدد الناقلات في الرواية الإيرانية من ناقلتين إلى سبع في… · إعلان عن وقف كامل لحركة السفن «غير الممتثلة» في المضيق</p><p class="sc-more">4 بنود · <a href="/additions.html#sec-00" data-goto="ما تغيّر منذ التقرير السابق" data-alt="/additions.html#sec-00">التفاصيل</a></p></div></div><div class="sc-row"><div class="sc-l">التحذيرات والنشرات الرسمية</div><div class="sc-v"><p class="sc-gist">المركز البريطاني / المركز البحري المشترك</p><p class="sc-more">تحذير واحد · <a href="/reports/2026-10-25.html#sec-09" data-goto="التحذيرات والنشرات الرسمية" data-alt="/reports/2026-10-25.html#sec-09">القسم الرسمي</a></p></div></div><div class="sc-row"><div class="sc-l">ما يُراقب خلال 24–72 ساعة</div><div class="sc-v"><p class="sc-gist">بلاغ رسمي يثبت إصابة ناقلة أو يحدد هوية أي من الناقلات المذكورة · تحديث <span class="ltr">NAVAREA IX</span> أو إلغاء تحذير <span class="ltr">383/26</span> في خليج عدن</p><p class="sc-more">4 بنود · <a href="/additions.html#sec-04-sub-02" data-goto="علامات الإنذار المبكر 24–72 ساعة" data-alt="/additions.html#sec-04-sub-02">المؤشرات الكاملة</a></p></div></div></section><div class="sc-side"><div class="sc-threat risk-severe"><div class="sc-tl">مستوى التهديد</div><div class="sc-tv">مرتفع جدًا</div><details class="sc-basis" open><summary>أساس التقدير</summary><p>روايات من طرف في الصراع بلا بلاغ رسمي موازٍ، ونقل مهني عن تسرب إماراتي، واستمرار اضطراب العبور؛ الثقة منخفضة في الجديد ومتوسطة في الخلفية الرسمية.</p></details></div><div class="sc-kpis"><div class="sc-kpi acc-warn"><div class="sc-kl">رواية عن ناقلات مصابة</div><div class="sc-kv bidi">7</div><div class="sc-kd"><span class="trend t-up">▲</span> ارتفعت من 2 إلى 7</div><div class="sc-kn">رواية إيرانية عن سبع ناقلات في ليلة واحدة · بلا تأكيد مستقل</div></div><div class="sc-kpi acc-warn"><div class="sc-kl">بحّارون عالقون في الممر</div><div class="sc-kv bidi">6000</div><div class="sc-kd"><span class="trend t-up">▲</span> أول قياس منقول</div><div class="sc-kn">نقل مهني · بلا أصل رسمي</div></div><div class="sc-kpi acc-ok"><div class="sc-kl">آخر قياس عبور</div><div class="sc-kv bidi">4</div><div class="sc-kd"><span class="trend t-flat">■</span> بلا قراءة جديدة</div><div class="sc-kn">القياس يعود إلى 18 أكتوبر · مقابل 85 قبل الأزمة</div></div></div></div></div></div>
-  <section class="print-map hero-map no-print" aria-label="خريطة سياق القطاعات للشاشة"><div class="hmap"><div class="hmap-panel">
+  <div class="sc-hero no-print"><h2 class="sc-h1">التقرير اليومي للأمن البحري والأوضاع الراهنة في المنطقة</h2><p class="sc-sub">خلال الفترة <bdi class="bidi" dir="ltr">240400Z–250400Z</bdi> أكتوبر 2026، نقلت تغذية straits.live عن الحرس الثوري أن سبع ناقلات نفط أصيبت في مضيق هرمز في ليلة واحدة، وإعلانًا عن وقف حركة السفن «غير الممتثلة»</p><div class="sc-chips"><span class="sc-chip sc-arch">إصدار أرشيفي · صدر <b>25 أكتوبر 2026 · 04:00 حسب التوقيت العالمي</b></span><span class="sc-chip">رقم الإصدار <b><span class="ltr">26/10/21</span></b></span><span class="sc-chip">فترة التغطية <b><bdi class="bidi" dir="ltr">240400Z–250400Z</bdi> <span class="ltr">UTC</span> أكتوبر 2026</b></span></div><div class="sc-grid"><section class="sc-card" aria-label="أهم الأخبار المتعلقة بالأمن البحري"><h2 class="sc-h2">أهم الأخبار المتعلقة بالأمن البحري</h2><div class="sc-row"><div class="sc-l">خلال 24 ساعة السابقة</div><div class="sc-v"><p class="sc-gist">ارتفع عدد الناقلات في الرواية الإيرانية من ناقلتين إلى سبع في… · إعلان عن وقف كامل لحركة السفن «غير الممتثلة» في المضيق</p><p class="sc-more">4 بنود · <a href="/additions.html#sec-00" data-goto="ما تغيّر منذ التقرير السابق" data-alt="/additions.html#sec-00">التفاصيل</a></p></div></div><div class="sc-row"><div class="sc-l">التحذيرات والنشرات الرسمية النشطة</div><div class="sc-v"><p class="sc-gist">المركز البريطاني / المركز البحري المشترك</p><p class="sc-more">لا تحذيرات · <a href="/additions.html#sec-03" data-goto="التحذيرات والنشرات الرسمية" data-alt="/additions.html#sec-03">القسم الرسمي</a></p></div></div><div class="sc-row"><div class="sc-l">ما يُراقب خلال 24 ساعة</div><div class="sc-v"><p class="sc-gist">بلاغ رسمي يثبت إصابة ناقلة أو يحدد هوية أي من الناقلات المذكورة · تحديث <span class="ltr">NAVAREA IX</span> أو إلغاء تحذير <span class="ltr">383/26</span> في خليج عدن</p><p class="sc-more">6 بنود · <a href="/additions.html#sec-04" data-goto="المراقبة المستمرة" data-alt="/additions.html#sec-04">المؤشرات الكاملة</a></p></div></div></section><div class="sc-side"><div class="sc-threat risk-severe"><div class="sc-tl">مستوى التهديد</div><div class="sc-tv">مرتفع جدًا</div><details class="sc-basis" open><summary>أساس التقدير</summary><p>روايات من طرف في الصراع بلا بلاغ رسمي موازٍ، ونقل مهني عن تسرب إماراتي، واستمرار اضطراب العبور؛ الثقة منخفضة في الجديد ومتوسطة في الخلفية الرسمية.</p></details></div><div class="sc-kpis"><div class="sc-kpi acc-warn"><div class="sc-kl">رواية عن ناقلات مصابة</div><div class="sc-kv bidi">7</div><div class="sc-kd"><span class="trend t-up">▲</span> ارتفعت من 2 إلى 7</div><div class="sc-kn">رواية إيرانية عن سبع ناقلات في ليلة واحدة · بلا تأكيد مستقل</div></div><div class="sc-kpi acc-warn"><div class="sc-kl">بحّارون عالقون في الممر</div><div class="sc-kv bidi">6000</div><div class="sc-kd"><span class="trend t-up">▲</span> أول قياس منقول</div><div class="sc-kn">نقل مهني · بلا أصل رسمي</div></div><div class="sc-kpi acc-ok"><div class="sc-kl">آخر قياس عبور</div><div class="sc-kv bidi">4</div><div class="sc-kd"><span class="trend t-flat">■</span> بلا قراءة جديدة</div><div class="sc-kn">القياس يعود إلى 18 أكتوبر · مقابل 85 قبل الأزمة</div></div></div></div></div></div>
+  <section class="print-map hero-map no-print" aria-label="خريطة سياق القطاعات للشاشة"><div class="hmap"><style>
+.map-key{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 22px;margin:14px 0 0;padding:0}
+.map-key li{display:flex;align-items:center;gap:8px;font-size:12.5px;line-height:1.55;color:#c3d2e6;margin:0}
+.map-key.lg-sw{width:24px;height:14px;border-radius:3px;display:inline-block;flex:0 0 auto;border:1px solid #42677f}
+.map-key.sw-land{background:#264b68;border-color:#78b7cc}
+.map-key.sw-sea{background:#081d31}
+.map-key.sw-border{height:0;border:0;border-top:2px dashed #73adc6}
+.map-key.sw-maritime-boundary{height:0;border:0;border-top:2px dashed #b6e7ff}
+.map-key.sw-grid{height:0;border:0;border-top:1px solid #9ac7da}
+.map-key.sw-port{width:14px;height:14px;border:0;position:relative}
+.map-key.sw-port:after{content:"";position:absolute;inset:4px;background:#e4f6ff;border-radius:50%}
+.map-key.sw-strait{width:auto;height:auto;padding:0 5px;border:1px solid #b6e7ff;border-radius:999px;color:#b6e7ff}
+.map-key.sw-route-in,.map-key.sw-route-out,.map-key.sw-route-oman,.map-key.sw-separation{height:0;border:0;border-top-width:2px;border-top-style:dashed}
+.map-key.sw-route-in{border-top-color:#72e6d4}.map-key.sw-route-out{border-top-color:#ffc266}.map-key.sw-route-oman{border-top-color:#d7a7ff;border-top-style:dotted}.map-key.sw-separation{border-top-color:#ffc857}
+.map-key.sw-route-note{width:24px;height:0;border:0;border-top:1px dotted #ffc857}
+.map-key.sw-none{border:1px dashed #7895b0;background:transparent}
+.map-key.lg-none{grid-column:1 / -1;color:#c3d2e6}
+@media (max-width:760px){.map-key{grid-template-columns:minmax(0,1fr)}}
+</style><div class="hmap-panel">
   <h3>خريطة الوقائع</h3><p class="blk-lede">مواقع الوقائع داخل نطاق التقرير.</p>
   <div class="hmap-wrap">
     <svg class="hmap-svg" viewBox="0 0 1120 722" role="img"
          aria-label="خريطة الخليج العربي ومضيق هرمز وخليج عمان مع مواقع وقائع التقرير">
-      <rect class="mp-sea-bg" style="fill:#eaf2f8" x="0" y="0" width="1120" height="722"/>
-      <g class="mp-grid"><line x1="108.4" y1="0" x2="108.4" y2="722"/><line x1="397.4" y1="0" x2="397.4" y2="722"/><line x1="686.5" y1="0" x2="686.5" y2="722"/><line x1="975.5" y1="0" x2="975.5" y2="722"/><line x1="0" y1="657.6" x2="1120" y2="657.6"/><line x1="0" y1="497.2" x2="1120" y2="497.2"/><line x1="0" y1="336.8" x2="1120" y2="336.8"/><line x1="0" y1="176.4" x2="1120" y2="176.4"/></g>
-      <g class="mp-land" fill-rule="evenodd"><path d="M488.3,476.9 483.5,473.9 493.7,469.8 499.5,464.2 501.9,467.4 497.3,474.7 493.7,476.4 488.3,476.9Z"/><path d="M440.8,474.6 439.6,468.9 442.9,467.0 444.9,470.5 440.8,474.6Z"/><path d="M693.3,272.6 683.1,280.6 678.8,278.1 675.4,278.2 668.2,281.3 662.9,281.8 653.4,287.3 644.8,290.0 636.7,289.3 635.5,285.5 635.6,284.1 639.3,284.8 652.6,279.9 669.3,271.7 670.9,268.1 668.2,262.1 668.9,260.8 679.7,263.8 691.8,257.9 701.9,256.3 706.6,260.5 700.0,262.9 693.3,272.6Z"/><path d="M536.7,485.7 529.4,484.9 527.4,486.3 515.5,483.6 519.5,480.3 529.9,476.4 536.7,483.0 536.7,485.7Z"/><path d="M294.4,352.3 292.2,350.2 286.6,339.6 288.3,332.1 285.6,321.5 286.9,318.4 293.7,317.0 295.2,317.5 293.2,320.9 297.0,326.8 297.5,336.6 296.8,346.2 294.4,352.3Z"/><path d="M124.2,48.0 121.4,47.2 114.3,32.2 116.7,28.2 117.1,25.2 118.4,24.3 119.8,19.3 121.7,17.7 133.6,33.5 133.0,40.5 128.3,46.2 124.2,48.0Z"/><path d="M1113.3,406.5 1101.5,405.9 1086.3,401.3 1077.5,408.8 1055.6,402.2 1023.5,394.4 1019.9,390.5 1017.9,383.8 1012.4,381.9 1004.4,392.0 977.3,386.2 968.0,388.0 962.4,384.8 947.7,384.7 936.2,378.4 919.6,382.7 906.6,383.5 888.6,372.5 869.3,369.5 853.7,370.4 845.6,369.6 832.6,365.6 826.4,361.5 816.2,364.6 811.6,358.9 782.9,353.5 773.6,333.8 773.3,324.1 766.2,307.0 763.9,282.3 761.3,272.6 757.4,264.2 745.2,249.4 739.1,246.4 712.2,240.6 695.0,245.1 682.2,253.6 661.2,258.4 656.9,262.1 651.7,270.2 644.8,275.0 635.4,273.8 625.4,278.6 606.7,292.2 596.8,296.3 588.5,296.0 579.7,289.6 559.8,280.9 546.9,278.1 529.1,280.0 520.7,278.6 506.3,268.5 502.6,261.2 494.4,256.3 468.4,245.2 447.4,230.7 443.5,225.2 441.0,217.0 431.8,207.2 411.3,199.1 399.6,190.5 386.0,188.6 373.3,188.9 367.7,187.3 362.6,183.6 345.3,165.9 345.1,158.9 334.4,141.5 331.9,135.4 329.6,118.2 326.7,113.7 315.6,106.6 313.8,102.0 316.2,95.9 316.2,91.2 310.4,86.8 301.7,84.5 299.6,79.2 301.2,69.0 299.8,62.5 292.2,52.3 280.9,41.8 269.5,26.2 265.1,22.4 258.1,0.1 257.2,0.0 1120.0,0.0 1120.0,405.5 1113.3,406.5Z"/><path d="M220.7,13.7 211.7,5.6 201.0,0.0 250.1,0.0 220.7,13.7Z"/><path d="M174.8,6.3 168.5,13.2 156.9,13.8 151.4,18.0 141.2,21.0 134.0,19.5 118.6,12.8 113.6,12.6 107.1,15.1 106.5,20.4 108.8,29.2 118.2,46.7 118.8,50.3 106.2,46.8 88.5,62.8 88.3,64.7 97.2,66.9 103.7,66.8 108.3,65.3 112.1,67.7 121.7,97.9 126.7,104.1 132.9,115.2 136.5,125.8 144.4,140.4 146.2,147.9 153.6,165.8 164.3,179.7 166.8,184.8 168.6,192.4 166.7,195.2 166.0,198.5 173.9,206.2 197.8,217.1 193.3,221.5 209.9,242.1 219.5,244.4 232.4,260.2 251.9,270.3 263.7,283.7 254.8,280.7 253.5,282.4 254.9,294.6 266.3,304.3 268.4,312.1 264.1,328.7 256.8,326.9 255.2,327.9 258.8,339.9 262.3,349.1 266.6,356.4 270.2,367.0 273.2,371.6 285.8,382.9 289.6,392.4 293.2,410.0 301.1,419.9 305.3,427.5 311.0,433.9 314.1,425.9 309.1,402.8 307.4,385.0 308.0,381.3 315.7,367.9 325.4,338.3 333.0,330.3 344.1,324.5 353.3,335.9 364.4,344.6 366.5,354.4 363.2,362.3 360.2,374.9 368.7,405.1 369.2,412.8 367.6,419.8 363.7,425.7 356.1,443.6 353.8,445.5 344.5,448.5 349.6,451.9 354.9,451.4 355.4,454.6 351.9,458.9 347.6,469.9 363.8,474.2 366.2,474.2 368.9,470.0 373.2,477.1 378.3,476.1 380.6,476.8 382.4,491.2 386.1,496.3 390.6,498.4 406.0,499.5 415.5,497.6 434.4,488.2 444.3,484.8 471.6,485.4 493.5,489.3 527.6,491.6 534.2,491.0 552.6,483.5 563.9,476.8 570.6,474.9 575.1,468.5 580.6,454.6 583.9,452.0 587.0,447.4 589.6,439.8 595.9,432.2 621.3,413.7 636.1,398.0 637.4,393.0 645.5,385.4 652.0,377.0 682.2,353.3 688.3,343.5 691.8,332.6 698.3,320.2 700.7,318.4 703.0,319.2 708.5,317.9 713.8,308.2 716.3,308.6 717.5,310.6 716.5,328.1 713.4,352.5 708.7,360.1 708.0,364.8 712.7,371.3 713.4,415.5 721.8,439.7 732.7,459.5 742.4,470.4 752.4,485.1 767.6,498.7 774.6,503.4 802.9,512.9 839.7,519.9 854.4,527.3 859.4,527.8 867.1,525.6 872.7,525.8 886.8,535.9 891.0,545.5 896.8,550.6 902.0,558.6 905.4,566.9 917.3,579.6 925.7,593.9 934.3,604.6 941.9,611.2 962.7,616.7 963.7,623.8 962.8,633.1 961.0,639.9 952.4,653.2 950.4,661.5 940.6,675.0 930.1,697.8 925.2,702.8 908.2,714.6 901.9,721.7 0.0,721.7 0.0,0.0 174.3,0.0 174.8,6.3Z"/><path d="M574.9,463.2 567.8,461.7 566.1,459.4 570.7,456.6 575.6,461.7 574.9,463.2Z"/></g>
-      <g class="mp-borders"><path d="M627.6,601.1L628.6,574.6L650.9,519.3L652.6,511.7L651.7,506.4L648.0,501.9L653.8,497.9L664.5,495.2L670.5,495.8L685.4,492.1L685.9,489.7L681.3,479.9L672.0,479.3L669.2,477.7L672.4,469.1L669.7,457.8L670.4,450.9L672.3,446.2L671.7,427.6L673.7,424.1L680.4,419.3L683.8,419.4L686.5,420.7L687.7,424.4L686.9,426.9L684.3,428.3L691.1,437.9L694.1,437.1L701.2,430.4L705.8,427.7L712.0,419.1L714.5,418.7"/><path d="M344.5,448.5L331.9,451.9L322.7,451.2L320.0,449.5L314.7,442.7L311.0,433.9"/><path d="M2.3,88.5L19.5,68.4L29.3,53.1L43.5,20.9L46.8,16.0L60.1,9.6L82.6,8.2L90.6,9.9L106.8,17.4"/><path d="M140.4,132.9L84.6,133.7L78.3,126.1L73.8,109.2L67.4,97.1L2.3,88.5"/><path d="M137.0,0.0L136.4,3.2L137.2,7.2L139.8,13.0L147.9,19.1"/><path d="M627.6,601.1L660.5,657.4L641.3,721.7"/><path d="M627.6,601.1L622.8,607.5L621.7,607.7L437.5,582.8L368.0,490.9L366.5,486.9L366.2,474.2"/><path d="M2.3,88.5L0.0,89.0"/><path d="M1090.2,400.8L1092.2,394.0L1094.0,370.1L1096.3,361.5L1095.6,356.7L1102.3,349.4L1106.3,323.5L1108.6,318.7L1120.0,313.7"/><path d="M1120.0,136.0L1112.0,132.6L1092.8,112.9L1088.8,106.6L1084.5,95.7L1072.2,75.0L1072.3,69.6L1070.7,66.3L1036.4,27.4"/><path d="M1036.4,27.4L1060.3,0.0"/><path d="M1036.4,27.4L1120.0,53.7"/><path d="M692.3,331.8L694.9,331.3L698.6,333.0L698.9,341.2L696.9,361.6L699.7,365.3L704.5,366.8L706.6,366.7L708.0,364.8"/><path d="M703.4,392.6L701.7,399.9L703.8,400.2L706.8,398.1L707.2,394.7L706.5,392.9L703.4,392.6"/></g>
-      <g class="mp-places"><text class="mp-country" x="491.4" y="152.4">إيران</text><text class="mp-country" x="187.9" y="613.5">السعودية</text><text class="mp-country" x="585.3" y="541.3">الإمارات</text><text class="mp-country" x="708.1" y="641.5">عُمان</text><g transform="translate(106.9,66.6)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="0.0" y="21.0">الكويت</text></g><g transform="translate(706.7,242.2)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="48.0" y="-34.0">بندر عباس</text></g><g transform="translate(633.7,401.0)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="-38.0" y="4.0">دبي</text></g><g transform="translate(363.5,392.9)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="-34.0" y="4.0">الدوحة</text></g><g transform="translate(737.8,469.9)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="-48.0" y="-10.0">صحار</text></g><g transform="translate(873.6,528.5)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="40.0" y="4.0">مسقط</text></g><g transform="translate(294.8,318.4)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="0.0" y="-13.0">المنامة</text></g><text class="mp-sea-lbl mp-sea-sm" x="682.8" y="258.2">مضيق هرمز</text><text class="mp-sea-lbl mp-sea-lg" x="346.8" y="272.7">الخليج العربي</text><text class="mp-sea-lbl mp-sea-lg" x="946.6" y="501.2">خليج عمان</text><text class="mp-sea-lbl mp-sea-lg" x="859.9" y="681.6">بحر العرب</text></g>
-      <g class="mp-grid-labels"><text class="mp-grid-lbl" x="113.4" y="715">48°E</text><text class="mp-grid-lbl" x="402.4" y="715">52°E</text><text class="mp-grid-lbl" x="691.5" y="715">56°E</text><text class="mp-grid-lbl" x="980.5" y="715">60°E</text><text class="mp-grid-lbl" x="7" y="651.6" text-anchor="start">22°N</text><text class="mp-grid-lbl" x="7" y="491.2" text-anchor="start">24°N</text><text class="mp-grid-lbl" x="7" y="330.8" text-anchor="start">26°N</text><text class="mp-grid-lbl" x="7" y="170.4" text-anchor="start">28°N</text></g>
+      <desc>المعروض: بلاغات آخر 24 ساعة فقط؛ لا تُعرض طبقة تراكمية. لا تُرسم علامات وقائع لأن دفتر اليوم لا يثبت إحداثيات.</desc>
+      <rect class="mp-sea-bg" style="fill:#081d31" x="0" y="0" width="1120" height="722"/>
+      <g class="mp-grid"><line x1="108.4" y1="0" x2="108.4" y2="722" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="397.4" y1="0" x2="397.4" y2="722" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="686.5" y1="0" x2="686.5" y2="722" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="975.5" y1="0" x2="975.5" y2="722" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="0" y1="657.6" x2="1120" y2="657.6" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="0" y1="497.2" x2="1120" y2="497.2" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="0" y1="336.8" x2="1120" y2="336.8" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="0" y1="176.4" x2="1120" y2="176.4" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/></g>
+      <g class="mp-land" fill-rule="evenodd"><path d="M488.3,476.9 483.5,473.9 493.7,469.8 499.5,464.2 501.9,467.4 497.3,474.7 493.7,476.4 488.3,476.9Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/><path d="M440.8,474.6 439.6,468.9 442.9,467.0 444.9,470.5 440.8,474.6Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/><path d="M693.3,272.6 683.1,280.6 678.8,278.1 675.4,278.2 668.2,281.3 662.9,281.8 653.4,287.3 644.8,290.0 636.7,289.3 635.5,285.5 635.6,284.1 639.3,284.8 652.6,279.9 669.3,271.7 670.9,268.1 668.2,262.1 668.9,260.8 679.7,263.8 691.8,257.9 701.9,256.3 706.6,260.5 700.0,262.9 693.3,272.6Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/><path d="M536.7,485.7 529.4,484.9 527.4,486.3 515.5,483.6 519.5,480.3 529.9,476.4 536.7,483.0 536.7,485.7Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/><path d="M294.4,352.3 292.2,350.2 286.6,339.6 288.3,332.1 285.6,321.5 286.9,318.4 293.7,317.0 295.2,317.5 293.2,320.9 297.0,326.8 297.5,336.6 296.8,346.2 294.4,352.3Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/><path d="M124.2,48.0 121.4,47.2 114.3,32.2 116.7,28.2 117.1,25.2 118.4,24.3 119.8,19.3 121.7,17.7 133.6,33.5 133.0,40.5 128.3,46.2 124.2,48.0Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/><path d="M1113.3,406.5 1101.5,405.9 1086.3,401.3 1077.5,408.8 1055.6,402.2 1023.5,394.4 1019.9,390.5 1017.9,383.8 1012.4,381.9 1004.4,392.0 977.3,386.2 968.0,388.0 962.4,384.8 947.7,384.7 936.2,378.4 919.6,382.7 906.6,383.5 888.6,372.5 869.3,369.5 853.7,370.4 845.6,369.6 832.6,365.6 826.4,361.5 816.2,364.6 811.6,358.9 782.9,353.5 773.6,333.8 773.3,324.1 766.2,307.0 763.9,282.3 761.3,272.6 757.4,264.2 745.2,249.4 739.1,246.4 712.2,240.6 695.0,245.1 682.2,253.6 661.2,258.4 656.9,262.1 651.7,270.2 644.8,275.0 635.4,273.8 625.4,278.6 606.7,292.2 596.8,296.3 588.5,296.0 579.7,289.6 559.8,280.9 546.9,278.1 529.1,280.0 520.7,278.6 506.3,268.5 502.6,261.2 494.4,256.3 468.4,245.2 447.4,230.7 443.5,225.2 441.0,217.0 431.8,207.2 411.3,199.1 399.6,190.5 386.0,188.6 373.3,188.9 367.7,187.3 362.6,183.6 345.3,165.9 345.1,158.9 334.4,141.5 331.9,135.4 329.6,118.2 326.7,113.7 315.6,106.6 313.8,102.0 316.2,95.9 316.2,91.2 310.4,86.8 301.7,84.5 299.6,79.2 301.2,69.0 299.8,62.5 292.2,52.3 280.9,41.8 269.5,26.2 265.1,22.4 258.1,0.1 257.2,0.0 1120.0,0.0 1120.0,405.5 1113.3,406.5Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/><path d="M220.7,13.7 211.7,5.6 201.0,0.0 250.1,0.0 220.7,13.7Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/><path d="M174.8,6.3 168.5,13.2 156.9,13.8 151.4,18.0 141.2,21.0 134.0,19.5 118.6,12.8 113.6,12.6 107.1,15.1 106.5,20.4 108.8,29.2 118.2,46.7 118.8,50.3 106.2,46.8 88.5,62.8 88.3,64.7 97.2,66.9 103.7,66.8 108.3,65.3 112.1,67.7 121.7,97.9 126.7,104.1 132.9,115.2 136.5,125.8 144.4,140.4 146.2,147.9 153.6,165.8 164.3,179.7 166.8,184.8 168.6,192.4 166.7,195.2 166.0,198.5 173.9,206.2 197.8,217.1 193.3,221.5 209.9,242.1 219.5,244.4 232.4,260.2 251.9,270.3 263.7,283.7 254.8,280.7 253.5,282.4 254.9,294.6 266.3,304.3 268.4,312.1 264.1,328.7 256.8,326.9 255.2,327.9 258.8,339.9 262.3,349.1 266.6,356.4 270.2,367.0 273.2,371.6 285.8,382.9 289.6,392.4 293.2,410.0 301.1,419.9 305.3,427.5 311.0,433.9 314.1,425.9 309.1,402.8 307.4,385.0 308.0,381.3 315.7,367.9 325.4,338.3 333.0,330.3 344.1,324.5 353.3,335.9 364.4,344.6 366.5,354.4 363.2,362.3 360.2,374.9 368.7,405.1 369.2,412.8 367.6,419.8 363.7,425.7 356.1,443.6 353.8,445.5 344.5,448.5 349.6,451.9 354.9,451.4 355.4,454.6 351.9,458.9 347.6,469.9 363.8,474.2 366.2,474.2 368.9,470.0 373.2,477.1 378.3,476.1 380.6,476.8 382.4,491.2 386.1,496.3 390.6,498.4 406.0,499.5 415.5,497.6 434.4,488.2 444.3,484.8 471.6,485.4 493.5,489.3 527.6,491.6 534.2,491.0 552.6,483.5 563.9,476.8 570.6,474.9 575.1,468.5 580.6,454.6 583.9,452.0 587.0,447.4 589.6,439.8 595.9,432.2 621.3,413.7 636.1,398.0 637.4,393.0 645.5,385.4 652.0,377.0 682.2,353.3 688.3,343.5 691.8,332.6 698.3,320.2 700.7,318.4 703.0,319.2 708.5,317.9 713.8,308.2 716.3,308.6 717.5,310.6 716.5,328.1 713.4,352.5 708.7,360.1 708.0,364.8 712.7,371.3 713.4,415.5 721.8,439.7 732.7,459.5 742.4,470.4 752.4,485.1 767.6,498.7 774.6,503.4 802.9,512.9 839.7,519.9 854.4,527.3 859.4,527.8 867.1,525.6 872.7,525.8 886.8,535.9 891.0,545.5 896.8,550.6 902.0,558.6 905.4,566.9 917.3,579.6 925.7,593.9 934.3,604.6 941.9,611.2 962.7,616.7 963.7,623.8 962.8,633.1 961.0,639.9 952.4,653.2 950.4,661.5 940.6,675.0 930.1,697.8 925.2,702.8 908.2,714.6 901.9,721.7 0.0,721.7 0.0,0.0 174.3,0.0 174.8,6.3Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/><path d="M574.9,463.2 567.8,461.7 566.1,459.4 570.7,456.6 575.6,461.7 574.9,463.2Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/></g>
+      <g class="mp-borders"><path d="M627.6,601.1L628.6,574.6L650.9,519.3L652.6,511.7L651.7,506.4L648.0,501.9L653.8,497.9L664.5,495.2L670.5,495.8L685.4,492.1L685.9,489.7L681.3,479.9L672.0,479.3L669.2,477.7L672.4,469.1L669.7,457.8L670.4,450.9L672.3,446.2L671.7,427.6L673.7,424.1L680.4,419.3L683.8,419.4L686.5,420.7L687.7,424.4L686.9,426.9L684.3,428.3L691.1,437.9L694.1,437.1L701.2,430.4L705.8,427.7L712.0,419.1L714.5,418.7" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M344.5,448.5L331.9,451.9L322.7,451.2L320.0,449.5L314.7,442.7L311.0,433.9" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M2.3,88.5L19.5,68.4L29.3,53.1L43.5,20.9L46.8,16.0L60.1,9.6L82.6,8.2L90.6,9.9L106.8,17.4" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M140.4,132.9L84.6,133.7L78.3,126.1L73.8,109.2L67.4,97.1L2.3,88.5" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M137.0,0.0L136.4,3.2L137.2,7.2L139.8,13.0L147.9,19.1" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M627.6,601.1L660.5,657.4L641.3,721.7" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M627.6,601.1L622.8,607.5L621.7,607.7L437.5,582.8L368.0,490.9L366.5,486.9L366.2,474.2" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M2.3,88.5L0.0,89.0" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M1090.2,400.8L1092.2,394.0L1094.0,370.1L1096.3,361.5L1095.6,356.7L1102.3,349.4L1106.3,323.5L1108.6,318.7L1120.0,313.7" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M1120.0,136.0L1112.0,132.6L1092.8,112.9L1088.8,106.6L1084.5,95.7L1072.2,75.0L1072.3,69.6L1070.7,66.3L1036.4,27.4" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M1036.4,27.4L1060.3,0.0" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M1036.4,27.4L1120.0,53.7" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M692.3,331.8L694.9,331.3L698.6,333.0L698.9,341.2L696.9,361.6L699.7,365.3L704.5,366.8L706.6,366.7L708.0,364.8" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M703.4,392.6L701.7,399.9L703.8,400.2L706.8,398.1L707.2,394.7L706.5,392.9L703.4,392.6" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/></g>
+      <g class="mp-maritime-boundaries"><path class="mp-maritime-boundary" d="M291.2,369.2L284.4,362.3L279.4,351.3L274.7,346.1L272.4,330.3L275.6,323.0L277.5,307.0L279.8,304.2L280.9,294.3L293.1,287.0L308.8,257.3" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M667.9,316.0L677.1,311.6L694.6,298.5L699.0,292.9L703.9,289.5L706.3,289.2L726.2,280.3L735.8,277.7L739.4,281.2L744.0,289.7L744.3,321.3L747.0,332.7L746.5,339.4L748.5,356.4L747.1,364.3" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M334.0,253.1L352.9,255.8L378.3,261.5L412.1,292.1L448.6,328.3L472.2,374.4" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M317.9,243.2L297.5,221.2L282.1,195.0L281.8,190.4L279.6,185.5L251.9,186.1L249.6,180.0L249.9,172.6L252.8,167.1L258.4,162.8L248.3,152.9L241.9,148.4L238.2,143.4L231.2,139.1L228.5,129.9L224.2,126.7L221.0,121.8L222.0,121.2" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M548.3,365.9L573.6,363.6L578.6,361.4L584.9,361.0L591.0,358.5L596.3,353.5" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M1077.8,549.6L1120.0,581.2" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M293.9,370.8L294.8,370.0L302.7,370.4L311.4,374.1L311.8,373.3L312.0,371.9L309.3,369.5L310.6,367.1L313.6,365.8L313.2,364.2L315.2,361.6L314.5,360.3L315.6,356.9L311.9,345.2L314.3,335.9L318.5,330.6L319.6,315.5L324.2,301.8L333.8,253.9" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M139.7,133.6L151.0,125.2L156.4,123.0L158.1,120.5L212.8,101.4L218.7,101.4" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M105.1,15.3L109.2,16.8L113.3,13.8L120.3,14.3L138.3,27.9" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M1078.9,545.1L1089.4,438.5L1090.5,414.1L1092.0,402.9" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M1072.8,545.7L1037.2,523.9L1022.2,516.2L1004.4,508.9L994.6,503.4L977.3,491.3L961.1,482.4L942.3,467.2L927.6,459.3L910.8,452.8L882.9,445.5L860.1,443.9L842.9,440.8L810.9,439.7L807.6,438.8L779.0,418.4L767.9,407.6" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M767.9,407.6L763.1,401.0L752.4,381.2L747.0,364.9" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M713.5,418.6L718.1,416.8L732.2,416.3L750.1,412.8L767.9,407.6" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M747.0,364.9L734.3,362.2L723.3,361.4L716.8,362.4L705.9,366.5" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M692.7,332.7L678.5,330.1L665.1,324.4" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M311.6,437.5L311.7,433.2L309.5,422.5L305.1,416.4L301.0,405.8L299.7,391.9L297.0,378.1" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M297.0,378.1L297.0,378.1" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M297.0,378.1L293.7,370.7" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M356.5,446.1L353.4,446.8L352.6,450.5L348.3,454.2L347.0,456.6" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M170.6,61.3L158.7,53.5L149.3,49.4L137.3,28.8" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M225.2,119.5L218.7,101.4" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M153.0,21.7L145.5,19.1L141.2,16.1L140.2,10.3L136.0,6.2L138.5,1.9L137.9,0.0" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M170.6,61.3L161.7,28.7" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M356.6,446.0L376.5,441.8L378.5,438.2L382.4,436.0L386.9,436.1L390.6,438.4L417.1,432.1L421.7,427.8L419.1,424.9L417.9,420.8L418.4,417.0L420.2,414.2L423.7,412.0L427.4,411.8L430.9,413.3L433.7,416.7L441.8,409.1L472.2,374.4" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M334.0,253.2L321.5,247.9L317.9,243.2" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M377.6,437.0L367.3,439.5L356.6,446.0" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/></g>
+      <g class="mp-places"><text class="mp-country" x="491.4" y="152.4" style="fill:#bce8ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">إيران</text><text class="mp-country" x="187.9" y="613.5" style="fill:#bce8ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">السعودية</text><text class="mp-country" x="585.3" y="541.3" style="fill:#bce8ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">الإمارات</text><text class="mp-country" x="708.1" y="641.5" style="fill:#bce8ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">عُمان</text><g transform="translate(106.9,66.6)"><circle class="mp-port-dot" r="2.8" style="fill:#e4f6ff"/><text class="mp-port-lbl" x="0.0" y="21.0" style="fill:#e4f6ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">الكويت</text></g><g transform="translate(706.7,242.2)"><circle class="mp-port-dot" r="2.8" style="fill:#e4f6ff"/><text class="mp-port-lbl" x="48.0" y="-34.0" style="fill:#e4f6ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">بندر عباس</text></g><g transform="translate(633.7,401.0)"><circle class="mp-port-dot" r="2.8" style="fill:#e4f6ff"/><text class="mp-port-lbl" x="-38.0" y="4.0" style="fill:#e4f6ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">دبي</text></g><g transform="translate(363.5,392.9)"><circle class="mp-port-dot" r="2.8" style="fill:#e4f6ff"/><text class="mp-port-lbl" x="-34.0" y="4.0" style="fill:#e4f6ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">الدوحة</text></g><g transform="translate(737.8,469.9)"><circle class="mp-port-dot" r="2.8" style="fill:#e4f6ff"/><text class="mp-port-lbl" x="-48.0" y="-10.0" style="fill:#e4f6ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">صحار</text></g><g transform="translate(873.6,528.5)"><circle class="mp-port-dot" r="2.8" style="fill:#e4f6ff"/><text class="mp-port-lbl" x="40.0" y="4.0" style="fill:#e4f6ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">مسقط</text></g><g transform="translate(294.8,318.4)"><circle class="mp-port-dot" r="2.8" style="fill:#e4f6ff"/><text class="mp-port-lbl" x="0.0" y="-13.0" style="fill:#e4f6ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">المنامة</text></g><text class="mp-sea-lbl mp-sea-sm" x="682.8" y="258.2" style="fill:#b6e7ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">مضيق هرمز</text><text class="mp-sea-lbl mp-sea-lg" x="346.8" y="272.7" style="fill:#b6e7ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">الخليج العربي</text><text class="mp-sea-lbl mp-sea-lg" x="946.6" y="501.2" style="fill:#b6e7ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">خليج عمان</text><text class="mp-sea-lbl mp-sea-lg" x="859.9" y="681.6" style="fill:#b6e7ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">بحر العرب</text></g>
+      <g class="mp-grid-labels"><text class="mp-grid-lbl" x="113.4" y="715" style="fill:#9ac7da">48°E</text><text class="mp-grid-lbl" x="402.4" y="715" style="fill:#9ac7da">52°E</text><text class="mp-grid-lbl" x="691.5" y="715" style="fill:#9ac7da">56°E</text><text class="mp-grid-lbl" x="980.5" y="715" style="fill:#9ac7da">60°E</text><text class="mp-grid-lbl" x="7" y="651.6" text-anchor="start" style="fill:#9ac7da">22°N</text><text class="mp-grid-lbl" x="7" y="491.2" text-anchor="start" style="fill:#9ac7da">24°N</text><text class="mp-grid-lbl" x="7" y="330.8" text-anchor="start" style="fill:#9ac7da">26°N</text><text class="mp-grid-lbl" x="7" y="170.4" text-anchor="start" style="fill:#9ac7da">28°N</text></g>
+      <g class="mp-routes" aria-label="مسارات إرشادية (تمثيل تخطيطي)"><path class="mp-separation-zone" d="M690.8,288.7L810.7,299.1L810.7,344.0L690.8,328.8Z" style="fill:#ffc857;fill-opacity:.12;stroke:#ffc857;stroke-width:1.4;stroke-dasharray:5 5;vector-effect:non-scaling-stroke"/><path class="mp-route mp-route-inbound" d="M809.3,303.1L765.9,298.3L726.2,293.5L692.2,290.3" style="fill:none;stroke:#72e6d4;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:9 5;vector-effect:non-scaling-stroke"/><path class="mp-route mp-route-outbound" d="M692.2,324.0L728.4,327.2L767.4,332.0L809.3,340.0" style="fill:none;stroke:#ffc266;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:9 5;vector-effect:non-scaling-stroke"/><path class="mp-route mp-route-oman" d="M807.8,359.3L764.5,367.3L722.6,372.1L692.2,368.9" style="fill:none;stroke:#d7a7ff;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:3 5;vector-effect:non-scaling-stroke"/><text class="mp-route-label mp-route-inbound" x="752.9" y="280.7" style="fill:#bffcf2;font-size:12px;font-weight:700;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">مسار دخول</text><text class="mp-route-label mp-route-outbound" x="755.8" y="341.6" style="fill:#ffe0a3;font-size:12px;font-weight:700;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">مسار خروج</text><text class="mp-route-label mp-route-oman" x="755.1" y="378.5" style="fill:#ead4ff;font-size:12px;font-weight:700;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">المسار الجديد من جهة عُمان</text><text class="mp-route-label mp-route-separation" x="745.7" y="310.3" style="fill:#ffe39a;font-size:12px;font-weight:700;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">منطقة الفصل</text></g>
       <rect class="mp-zoomrect" x="585.3" y="256.6" width="245.7" height="288.7" rx="4" style="fill:none;stroke:var(--accent);stroke-width:1.6;stroke-dasharray:7 5"/>
       <g class="mp-events"><g class="mp-event" transform="translate(715.4,312.7)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">1</text></g><g class="mp-event" transform="translate(700.9,288.7)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">2</text></g><g class="mp-event" transform="translate(657.5,368.9)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">3</text></g><g class="mp-event" transform="translate(686.5,264.6)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">4</text></g><g class="mp-event" transform="translate(722.6,240.6)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">5</text></g></g>
     </svg>
-    <div class="hmap-zoom"><svg class="hmap-zsvg" viewBox="0 0 520 609" role="img" aria-label="تكبير: مضيق هرمز وخورفكان"><rect class="mp-sea-bg" x="0" y="0" width="520" height="609"/><g class="mp-grid"><line x1="61.2" y1="0" x2="61.2" y2="609"/><line x1="214.1" y1="0" x2="214.1" y2="609"/><line x1="367.1" y1="0" x2="367.1" y2="609"/><line x1="520.0" y1="0" x2="520.0" y2="609"/><line x1="0" y1="507.1" x2="520" y2="507.1"/><line x1="0" y1="338.1" x2="520" y2="338.1"/><line x1="0" y1="169.0" x2="520" y2="169.0"/><line x1="0" y1="0.0" x2="520" y2="0.0"/></g><g class="mp-land" fill-rule="evenodd"><path d="M228.6,33.6 207.1,50.5 197.9,45.3 190.8,45.5 175.5,52.0 164.4,53.1 144.2,64.6 126.0,70.5 108.8,68.9 106.3,61.0 106.5,57.9 114.2,59.5 142.5,49.0 177.8,31.8 181.2,24.1 175.5,11.7 177.0,8.8 199.9,15.2 225.5,2.8 243.3,0.0 247.5,0.0 256.8,8.1 242.9,13.3 228.6,33.6Z"/><path d="M510.3,221.1 488.8,227.7 479.1,215.5 418.2,204.3 398.5,162.7 397.9,142.2 383.0,106.2 378.1,54.1 372.6,33.7 364.3,16.0 352.5,0.0 520.0,0.0 520.0,227.5 510.3,221.1Z"/><path d="M160.6,3.8 151.7,11.5 140.5,28.7 126.0,38.8 106.2,36.2 84.8,46.4 45.2,74.9 24.4,83.7 6.9,83.0 0.0,78.0 0.0,0.0 177.3,0.0 160.6,3.8Z"/><path d="M3.7,402.1 9.0,386.1 22.4,370.1 76.2,331.0 107.6,298.0 110.4,287.4 127.5,271.4 141.1,253.9 205.1,203.8 218.0,183.2 225.5,160.1 239.3,134.0 244.3,130.3 249.1,131.9 260.9,129.3 272.0,108.8 277.3,109.7 279.8,113.7 277.8,150.6 271.3,202.1 261.1,218.2 259.7,228.1 269.7,241.8 271.1,335.0 289.0,386.0 312.1,427.6 332.5,450.5 353.7,481.7 385.9,510.3 400.7,520.1 460.6,540.3 520.0,552.1 520.0,608.5 0.0,608.5 0.0,407.5 3.7,402.1Z"/></g><g class="mp-borders"><path d="M116.1,608.5L139.0,553.6L142.5,537.7L140.6,526.4L132.8,517.0L145.0,508.5L167.7,503.0L180.3,504.2L211.8,496.4L212.9,491.4L203.2,470.7L183.5,469.5L177.5,466.1L184.4,448.0L178.7,424.2L180.1,409.5L184.1,399.5L182.9,360.4L187.0,353.1L201.2,342.8L208.5,343.1L214.2,346.0L216.7,353.7L215.1,358.9L209.6,361.9L223.9,382.2L230.4,380.5L245.4,366.2L255.1,360.6L268.1,342.6L273.5,341.6"/><path d="M226.4,158.4L231.9,157.5L239.7,161.0L240.5,178.3L236.2,221.3L242.2,229.0L252.3,232.3L256.7,232.0L259.7,228.1"/><path d="M249.9,286.7L246.3,302.0L250.9,302.8L257.2,298.2L258.1,291.0L256.5,287.2L249.9,286.7"/></g><g class="mp-events"><g class="mp-event" transform="translate(275.3,118.3)" style="--mk:var(--muted)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">1</text></g><g class="mp-event" transform="translate(244.7,67.6)" style="--mk:var(--muted)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">2</text></g><g class="mp-event" transform="translate(152.9,236.6)" style="--mk:var(--muted)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">3</text></g><g class="mp-event" transform="translate(214.1,16.9)" style="--mk:var(--muted)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">4</text></g></g></svg><div class="hz-cap">تكبير: مضيق هرمز وخورفكان</div></div>
+    <div class="hmap-zoom"><svg class="hmap-zsvg" viewBox="0 0 520 609" role="img" aria-label="تكبير: مضيق هرمز وخورفكان"><desc>تكبير للخريطة الرئيسية؛ تفاصيل نطاق العرض في وصف البطاقة.</desc><rect class="mp-sea-bg" style="fill:#081d31" x="0" y="0" width="520" height="609"/><g class="mp-grid"><line x1="61.2" y1="0" x2="61.2" y2="609" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="214.1" y1="0" x2="214.1" y2="609" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="367.1" y1="0" x2="367.1" y2="609" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="520.0" y1="0" x2="520.0" y2="609" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="0" y1="507.1" x2="520" y2="507.1" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="0" y1="338.1" x2="520" y2="338.1" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="0" y1="169.0" x2="520" y2="169.0" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="0" y1="0.0" x2="520" y2="0.0" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/></g><g class="mp-land" fill-rule="evenodd"><path d="M228.6,33.6 207.1,50.5 197.9,45.3 190.8,45.5 175.5,52.0 164.4,53.1 144.2,64.6 126.0,70.5 108.8,68.9 106.3,61.0 106.5,57.9 114.2,59.5 142.5,49.0 177.8,31.8 181.2,24.1 175.5,11.7 177.0,8.8 199.9,15.2 225.5,2.8 243.3,0.0 247.5,0.0 256.8,8.1 242.9,13.3 228.6,33.6Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/><path d="M510.3,221.1 488.8,227.7 479.1,215.5 418.2,204.3 398.5,162.7 397.9,142.2 383.0,106.2 378.1,54.1 372.6,33.7 364.3,16.0 352.5,0.0 520.0,0.0 520.0,227.5 510.3,221.1Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/><path d="M160.6,3.8 151.7,11.5 140.5,28.7 126.0,38.8 106.2,36.2 84.8,46.4 45.2,74.9 24.4,83.7 6.9,83.0 0.0,78.0 0.0,0.0 177.3,0.0 160.6,3.8Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/><path d="M3.7,402.1 9.0,386.1 22.4,370.1 76.2,331.0 107.6,298.0 110.4,287.4 127.5,271.4 141.1,253.9 205.1,203.8 218.0,183.2 225.5,160.1 239.3,134.0 244.3,130.3 249.1,131.9 260.9,129.3 272.0,108.8 277.3,109.7 279.8,113.7 277.8,150.6 271.3,202.1 261.1,218.2 259.7,228.1 269.7,241.8 271.1,335.0 289.0,386.0 312.1,427.6 332.5,450.5 353.7,481.7 385.9,510.3 400.7,520.1 460.6,540.3 520.0,552.1 520.0,608.5 0.0,608.5 0.0,407.5 3.7,402.1Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/></g><g class="mp-borders"><path d="M116.1,608.5L139.0,553.6L142.5,537.7L140.6,526.4L132.8,517.0L145.0,508.5L167.7,503.0L180.3,504.2L211.8,496.4L212.9,491.4L203.2,470.7L183.5,469.5L177.5,466.1L184.4,448.0L178.7,424.2L180.1,409.5L184.1,399.5L182.9,360.4L187.0,353.1L201.2,342.8L208.5,343.1L214.2,346.0L216.7,353.7L215.1,358.9L209.6,361.9L223.9,382.2L230.4,380.5L245.4,366.2L255.1,360.6L268.1,342.6L273.5,341.6" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M226.4,158.4L231.9,157.5L239.7,161.0L240.5,178.3L236.2,221.3L242.2,229.0L252.3,232.3L256.7,232.0L259.7,228.1" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M249.9,286.7L246.3,302.0L250.9,302.8L257.2,298.2L258.1,291.0L256.5,287.2L249.9,286.7" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/></g><g class="mp-maritime-boundaries"><path class="mp-maritime-boundary" d="M174.9,125.3L194.4,116.0L231.3,88.3L240.7,76.5L251.1,69.3L256.2,68.8L298.2,50.0L318.6,44.4L326.3,51.9L335.8,69.7L336.5,136.4L342.2,160.3L341.1,174.4L345.4,210.3L342.5,227.0" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M0.0,219.7L12.0,214.7L23.2,204.2" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M520.0,387.4L477.6,385.9L470.6,384.0L410.0,341.0L386.5,318.3" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M386.5,318.3L376.3,304.3L353.8,262.7L342.4,228.2" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M271.3,341.4L281.2,337.7L311.0,336.6L348.9,329.3L386.5,318.3" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M342.4,228.2L315.3,222.6L292.2,221.0L278.4,222.9L255.4,231.7" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M227.4,160.3L197.3,155.0L168.9,142.9" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/></g><g class="mp-routes" aria-label="مسارات إرشادية (تمثيل تخطيطي)"><path class="mp-separation-zone" d="M223.3,67.6L477.2,89.6L477.2,184.2L223.3,152.1Z" style="fill:#ffc857;fill-opacity:.12;stroke:#ffc857;stroke-width:1.4;stroke-dasharray:5 5;vector-effect:non-scaling-stroke"/><path class="mp-route mp-route-inbound" d="M474.1,98.0L382.4,87.9L298.2,77.8L226.4,71.0" style="fill:none;stroke:#72e6d4;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:9 5;vector-effect:non-scaling-stroke"/><path class="mp-route mp-route-outbound" d="M226.4,142.0L302.8,148.7L385.4,158.9L474.1,175.8" style="fill:none;stroke:#ffc266;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:9 5;vector-effect:non-scaling-stroke"/><path class="mp-route mp-route-oman" d="M471.1,216.4L379.3,233.3L290.6,243.4L226.4,236.6" style="fill:none;stroke:#d7a7ff;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:3 5;vector-effect:non-scaling-stroke"/><text class="mp-route-label mp-route-inbound" x="354.8" y="50.7" style="fill:#bffcf2;font-size:12px;font-weight:700;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">مسار دخول</text><text class="mp-route-label mp-route-outbound" x="360.9" y="179.2" style="fill:#ffe0a3;font-size:12px;font-weight:700;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">مسار خروج</text><text class="mp-route-label mp-route-oman" x="359.4" y="256.9" style="fill:#ead4ff;font-size:12px;font-weight:700;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">المسار الجديد من جهة عُمان</text><text class="mp-route-label mp-route-separation" x="339.5" y="113.2" style="fill:#ffe39a;font-size:12px;font-weight:700;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">منطقة الفصل</text></g><g class="mp-places"><text class="mp-country" x="260.0" y="98.0" style="fill:#bce8ff;font-size:14px;font-weight:600;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">إيران</text><text class="mp-country" x="278.4" y="446.2" style="fill:#bce8ff;font-size:14px;font-weight:600;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">عُمان</text><text class="mp-country" x="217.2" y="331.3" style="fill:#bce8ff;font-size:14px;font-weight:600;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">الإمارات</text><text class="mp-sea-lbl mp-sea-sm" x="267.6" y="57.5" style="fill:#b6e7ff;font-size:16px;font-weight:600;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">مضيق هرمز</text><text class="mp-sea-lbl mp-sea-lg" x="91.8" y="13.5" style="fill:#b6e7ff;font-size:16px;font-weight:600;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">الخليج العربي</text><text class="mp-sea-lbl mp-sea-lg" x="385.4" y="483.4" style="fill:#b6e7ff;font-size:16px;font-weight:600;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">خليج عمان</text><text class="mp-port-lbl" x="252.4" y="138.6" style="fill:#e4f6ff;font-size:13px;font-weight:600;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">خصب</text><text class="mp-port-lbl" x="269.2" y="317.8" style="fill:#e4f6ff;font-size:13px;font-weight:600;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">الفجيرة</text></g><g class="mp-events"><g class="mp-event" transform="translate(275.3,118.3)" style="--mk:var(--muted)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">1</text></g><g class="mp-event" transform="translate(244.7,67.6)" style="--mk:var(--muted)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">2</text></g><g class="mp-event" transform="translate(152.9,236.6)" style="--mk:var(--muted)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">3</text></g><g class="mp-event" transform="translate(214.1,16.9)" style="--mk:var(--muted)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">4</text></g></g></svg><div class="hz-cap">تكبير: مضيق هرمز وخورفكان</div></div>
   </div>
   <ol class="hmap-legend"><li><span class="lg-num" style="--mk:var(--muted)">1</span><span class="lg-txt">رواية عن سبع ناقلات مصابة في مضيق هرمز</span> <bdi class="bidi ev-code">25-01</bdi> <bdi class="bidi">نقل عن الحرس الثوري عبر straits.live · D/4</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">2</span><span class="lg-txt">إعلان وقف حركة السفن «غير الممتثلة»</span> <bdi class="bidi ev-code">25-02</bdi> <bdi class="bidi">نقل عن البحرية الإيرانية · D/4</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">3</span><span class="lg-txt">امتداد تسرب نفطي إلى شواطئ أم القيوين</span> <bdi class="bidi ev-code">25-03</bdi> <bdi class="bidi">تقارير إماراتية منقولة · B/3</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">4</span><span class="lg-txt">إصابة ناقلة بمقذوف غير محدد المصدر</span> <bdi class="bidi ev-code">25-04</bdi> <bdi class="bidi">Shafaq News عبر straits.live · D/4</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">5</span><span class="lg-txt">عرض إيراني بفتح المضيق مقابل رفع الحصار</span> <bdi class="bidi ev-code">25-05</bdi> <bdi class="bidi">نقل عن طهران · B/3</bdi></li></ol>
   
@@ -1246,7 +1241,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <main>
     <section class="doc pri reveal" id="sec-00" aria-labelledby="h-00"><h2 id="h-00">ما تغيّر منذ التقرير السابق</h2><div class="h-rule"></div><p class="sec-lede">ما استُجد، وما تغيّر تصنيفه، وما أُغلق.</p><ul class="changes"><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">نقلت التغذية أن سبع ناقلات نفط أصيبت في مضيق هرمز في ليلة واحدة، بلا تأكيد مستقل. <bdi class="bidi ev-code">25-01</bdi> <bdi class="bidi">straits.live عن الحرس الثوري · D/4</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">إعلان عن وقف كامل لحركة السفن «غير الممتثلة» في المضيق. <bdi class="bidi ev-code">25-02</bdi> <bdi class="bidi">نقل عن البحرية الإيرانية · D/4</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">وصول التسرب النفطي إلى شواطئ أم القيوين مع إغلاق شواطئ، بلا أصل رسمي في المادة. <bdi class="bidi ev-code">25-03</bdi> <bdi class="bidi">تقارير إماراتية منقولة · B/3</bdi></span></li><li class="chg c-new"><span class="chg-tag">جديد</span><span class="chg-txt">عرض بفتح المضيق مقابل رفع الحصار، مع تمسّك طهران بشروط قبل التنفيذ. <bdi class="bidi ev-code">25-05</bdi> <bdi class="bidi">نقل عن طهران · B/3</bdi></span></li></ul></section>
-    <section class="doc reveal" id="sec-01" aria-labelledby="h-01"><h2 id="h-01"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 4l6 2 5-2v14l-5 2-6-2-5 2V6zM9 4v14M15 6v14"/></svg></span>التوزيع الجغرافي للوقائع</h2><div class="h-rule"></div><p class="sec-lede">أين تركّزت الوقائع، وحصيلة <span class="ltr">IMO</span> حسب القطاعات.</p><div class="dg-grid">
+    <section class="doc reveal" id="sec-01" aria-labelledby="h-01"><h2 id="h-01"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 4l6 2 5-2v14l-5 2-6-2-5 2V6zM9 4v14M15 6v14"/></svg></span>التوزيع الجغرافي للوقائع</h2><div class="h-rule"></div><p class="sec-lede">أين تركّزت الوقائع، وحصيلة <span class="ltr">IMO</span> بحسب النطاق.</p><div class="dg-grid">
 <article class="dg"><div class="dg-top"><span class="dg-idx">1</span><b class="dg-t">مضيق هرمز</b></div><p class="dg-body">رواية عن إصابة سبع ناقلات في ليلة واحدة</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">البلاغ</span><span class="dg-v">نقل عن الحرس الثوري عبر تغذية خاصة</span></div><div class="dg-f"><span class="dg-k">القراءة</span><span class="dg-v">رواية من طرف واحد، لا تأكيد ملاحي مستقل</span></div></div></article>
 <article class="dg"><div class="dg-top"><span class="dg-idx">2</span><b class="dg-t">مضيق هرمز</b></div><p class="dg-body">إعلان إيراني بوقف حركة السفن «غير الممتثلة»</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">البلاغ</span><span class="dg-v">نقل عن البحرية الإيرانية</span></div><div class="dg-f"><span class="dg-k">القراءة</span><span class="dg-v">إعلان من جهة منفذة، أثره على العبور غير مقيس</span></div></div></article>
 <article class="dg"><div class="dg-top"><span class="dg-idx">3</span><b class="dg-t">مضيق هرمز</b></div><p class="dg-body">إصابة ناقلة بمقذوف غير محدد المصدر</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">البلاغ</span><span class="dg-v">Shafaq News عبر تغذية خاصة</span></div><div class="dg-f"><span class="dg-k">القراءة</span><span class="dg-v">غير محسوم؛ قد يرتبط بالرواية الإيرانية</span></div></div></article>
@@ -1264,21 +1259,75 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 <article class="dg"><div class="dg-top"><span class="dg-idx">15</span><b class="dg-t">بحر العرب</b></div><p class="dg-body">لا واقعة جديدة</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">البلاغ</span><span class="dg-v">لا بلاغ رسمي</span></div><div class="dg-f"><span class="dg-k">القراءة</span><span class="dg-v">خطر القرصنة في الخلفية</span></div></div></article>
 <article class="dg"><div class="dg-top"><span class="dg-idx">16</span><b class="dg-t">خليج عُمان</b></div><p class="dg-body">لا واقعة جديدة</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">البلاغ</span><span class="dg-v">لا بلاغ رسمي</span></div><div class="dg-f"><span class="dg-k">القراءة</span><span class="dg-v">مسار التحويل يبقى تحت المراقبة</span></div></div></article>
 <article class="dg"><div class="dg-top"><span class="dg-idx">17</span><b class="dg-t">البحر الأحمر</b></div><p class="dg-body">ضربات سعودية على ساحل اليمن</p><div class="dg-meta"><div class="dg-f"><span class="dg-k">البلاغ</span><span class="dg-v">نقل إعلامي</span></div><div class="dg-f"><span class="dg-k">القراءة</span><span class="dg-v">قلق على المسار البديل</span></div></div></article>
-</div><section class="print-map" aria-label="خريطة الوقائع ومفتاحها"><div class="hmap"><div class="hmap-panel">
+</div><section class="print-map" aria-label="خريطة الوقائع ومفتاحها"><div class="hmap"><style>
+.map-key{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 22px;margin:14px 0 0;padding:0}
+.map-key li{display:flex;align-items:center;gap:8px;font-size:12.5px;line-height:1.55;color:#c3d2e6;margin:0}
+.map-key.lg-sw{width:24px;height:14px;border-radius:3px;display:inline-block;flex:0 0 auto;border:1px solid #42677f}
+.map-key.sw-land{background:#264b68;border-color:#78b7cc}
+.map-key.sw-sea{background:#081d31}
+.map-key.sw-border{height:0;border:0;border-top:2px dashed #73adc6}
+.map-key.sw-maritime-boundary{height:0;border:0;border-top:2px dashed #b6e7ff}
+.map-key.sw-grid{height:0;border:0;border-top:1px solid #9ac7da}
+.map-key.sw-port{width:14px;height:14px;border:0;position:relative}
+.map-key.sw-port:after{content:"";position:absolute;inset:4px;background:#e4f6ff;border-radius:50%}
+.map-key.sw-strait{width:auto;height:auto;padding:0 5px;border:1px solid #b6e7ff;border-radius:999px;color:#b6e7ff}
+.map-key.sw-route-in,.map-key.sw-route-out,.map-key.sw-route-oman,.map-key.sw-separation{height:0;border:0;border-top-width:2px;border-top-style:dashed}
+.map-key.sw-route-in{border-top-color:#72e6d4}.map-key.sw-route-out{border-top-color:#ffc266}.map-key.sw-route-oman{border-top-color:#d7a7ff;border-top-style:dotted}.map-key.sw-separation{border-top-color:#ffc857}
+.map-key.sw-route-note{width:24px;height:0;border:0;border-top:1px dotted #ffc857}
+.map-key.sw-none{border:1px dashed #7895b0;background:transparent}
+.map-key.lg-none{grid-column:1 / -1;color:#c3d2e6}
+@media (max-width:760px){.map-key{grid-template-columns:minmax(0,1fr)}}
+
+/* اتجاه النصوص اللاتينية والإحداثيات — يمنع انقلابها في السياق العربي */
+.ltr{direction:ltr;unicode-bidi:isolate}
+
+/* رقم المعلّم: نص داكن على معلّم فاتح، ومقلوب في الوضع النهاري */
+body:not(.daylight) .lg-num{color:#04120f}
+body.daylight .lg-num{color:#ffffff}
+
+/* بطاقات الجوال للجداول — البند المعتمد 21 أكتوبر 2026 */
+@media (max-width:560px){
+  table.cardified{display:block;border:0;background:transparent;border-radius:0}
+  table.cardified.cardified{width:100%;max-width:100%;min-width:0}
+  table.cardified thead{display:none}
+  table.cardified tbody{display:block;max-width:100%}
+  table.cardified tr{display:block;max-width:100%;box-sizing:border-box;background:var(--panel);
+    border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin:0 0 10px}
+  table.cardified td{display:grid;grid-template-columns:minmax(72px,auto) minmax(0,1fr);gap:8px;
+    border:0;padding:5px 0;align-items:baseline;text-align:start;
+    overflow-wrap:anywhere;word-break:break-word;min-width:0}
+  table.cardified td::before{content:attr(data-label);color:var(--muted);font-size:12.5px;font-weight:600}
+  table.cardified td:empty{display:none}
+  /* ك-336: النص الإنجليزي الطويل (شرائح الحالة والتسميات) كان يتجاوز عرض بطاقة الجوال 16–31% */
+  table.cardified td > *,table.cardified .st-badge{white-space:normal;overflow-wrap:anywhere;
+    word-break:break-word;min-width:0;max-width:100%}
+  .tbl-wrap:has(table.cardified),.tbl-scroll:has(table.cardified){overflow:visible;border:0}
+  .tbl-hint{display:none}
+}
+/* بانر النسخة المستبدلة — البند المعتمد 21 أكتوبر 2026 */
+.sup-banner{margin:0 0 20px;padding:12px 16px;border:1px solid #c9a24f;border-radius:10px;
+  background:#2a2210;color:#ffd88a;font-size:14px}
+body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
+.sup-banner a{color:inherit;font-weight:700;text-decoration:underline}
+.sp-dim{opacity:.72}
+</style><div class="hmap-panel">
   <h3>خريطة الوقائع</h3><p class="blk-lede">مواقع الوقائع داخل نطاق التقرير.</p>
   <div class="hmap-wrap">
     <svg class="hmap-svg" viewBox="0 0 1120 722" role="img"
          aria-label="خريطة الخليج العربي ومضيق هرمز وخليج عمان مع مواقع وقائع التقرير">
-      <rect class="mp-sea-bg" style="fill:#eaf2f8" x="0" y="0" width="1120" height="722"/>
-      <g class="mp-grid"><line x1="108.4" y1="0" x2="108.4" y2="722"/><line x1="397.4" y1="0" x2="397.4" y2="722"/><line x1="686.5" y1="0" x2="686.5" y2="722"/><line x1="975.5" y1="0" x2="975.5" y2="722"/><line x1="0" y1="657.6" x2="1120" y2="657.6"/><line x1="0" y1="497.2" x2="1120" y2="497.2"/><line x1="0" y1="336.8" x2="1120" y2="336.8"/><line x1="0" y1="176.4" x2="1120" y2="176.4"/></g>
-      <g class="mp-land" fill-rule="evenodd"><path d="M488.3,476.9 483.5,473.9 493.7,469.8 499.5,464.2 501.9,467.4 497.3,474.7 493.7,476.4 488.3,476.9Z"/><path d="M440.8,474.6 439.6,468.9 442.9,467.0 444.9,470.5 440.8,474.6Z"/><path d="M693.3,272.6 683.1,280.6 678.8,278.1 675.4,278.2 668.2,281.3 662.9,281.8 653.4,287.3 644.8,290.0 636.7,289.3 635.5,285.5 635.6,284.1 639.3,284.8 652.6,279.9 669.3,271.7 670.9,268.1 668.2,262.1 668.9,260.8 679.7,263.8 691.8,257.9 701.9,256.3 706.6,260.5 700.0,262.9 693.3,272.6Z"/><path d="M536.7,485.7 529.4,484.9 527.4,486.3 515.5,483.6 519.5,480.3 529.9,476.4 536.7,483.0 536.7,485.7Z"/><path d="M294.4,352.3 292.2,350.2 286.6,339.6 288.3,332.1 285.6,321.5 286.9,318.4 293.7,317.0 295.2,317.5 293.2,320.9 297.0,326.8 297.5,336.6 296.8,346.2 294.4,352.3Z"/><path d="M124.2,48.0 121.4,47.2 114.3,32.2 116.7,28.2 117.1,25.2 118.4,24.3 119.8,19.3 121.7,17.7 133.6,33.5 133.0,40.5 128.3,46.2 124.2,48.0Z"/><path d="M1113.3,406.5 1101.5,405.9 1086.3,401.3 1077.5,408.8 1055.6,402.2 1023.5,394.4 1019.9,390.5 1017.9,383.8 1012.4,381.9 1004.4,392.0 977.3,386.2 968.0,388.0 962.4,384.8 947.7,384.7 936.2,378.4 919.6,382.7 906.6,383.5 888.6,372.5 869.3,369.5 853.7,370.4 845.6,369.6 832.6,365.6 826.4,361.5 816.2,364.6 811.6,358.9 782.9,353.5 773.6,333.8 773.3,324.1 766.2,307.0 763.9,282.3 761.3,272.6 757.4,264.2 745.2,249.4 739.1,246.4 712.2,240.6 695.0,245.1 682.2,253.6 661.2,258.4 656.9,262.1 651.7,270.2 644.8,275.0 635.4,273.8 625.4,278.6 606.7,292.2 596.8,296.3 588.5,296.0 579.7,289.6 559.8,280.9 546.9,278.1 529.1,280.0 520.7,278.6 506.3,268.5 502.6,261.2 494.4,256.3 468.4,245.2 447.4,230.7 443.5,225.2 441.0,217.0 431.8,207.2 411.3,199.1 399.6,190.5 386.0,188.6 373.3,188.9 367.7,187.3 362.6,183.6 345.3,165.9 345.1,158.9 334.4,141.5 331.9,135.4 329.6,118.2 326.7,113.7 315.6,106.6 313.8,102.0 316.2,95.9 316.2,91.2 310.4,86.8 301.7,84.5 299.6,79.2 301.2,69.0 299.8,62.5 292.2,52.3 280.9,41.8 269.5,26.2 265.1,22.4 258.1,0.1 257.2,0.0 1120.0,0.0 1120.0,405.5 1113.3,406.5Z"/><path d="M220.7,13.7 211.7,5.6 201.0,0.0 250.1,0.0 220.7,13.7Z"/><path d="M174.8,6.3 168.5,13.2 156.9,13.8 151.4,18.0 141.2,21.0 134.0,19.5 118.6,12.8 113.6,12.6 107.1,15.1 106.5,20.4 108.8,29.2 118.2,46.7 118.8,50.3 106.2,46.8 88.5,62.8 88.3,64.7 97.2,66.9 103.7,66.8 108.3,65.3 112.1,67.7 121.7,97.9 126.7,104.1 132.9,115.2 136.5,125.8 144.4,140.4 146.2,147.9 153.6,165.8 164.3,179.7 166.8,184.8 168.6,192.4 166.7,195.2 166.0,198.5 173.9,206.2 197.8,217.1 193.3,221.5 209.9,242.1 219.5,244.4 232.4,260.2 251.9,270.3 263.7,283.7 254.8,280.7 253.5,282.4 254.9,294.6 266.3,304.3 268.4,312.1 264.1,328.7 256.8,326.9 255.2,327.9 258.8,339.9 262.3,349.1 266.6,356.4 270.2,367.0 273.2,371.6 285.8,382.9 289.6,392.4 293.2,410.0 301.1,419.9 305.3,427.5 311.0,433.9 314.1,425.9 309.1,402.8 307.4,385.0 308.0,381.3 315.7,367.9 325.4,338.3 333.0,330.3 344.1,324.5 353.3,335.9 364.4,344.6 366.5,354.4 363.2,362.3 360.2,374.9 368.7,405.1 369.2,412.8 367.6,419.8 363.7,425.7 356.1,443.6 353.8,445.5 344.5,448.5 349.6,451.9 354.9,451.4 355.4,454.6 351.9,458.9 347.6,469.9 363.8,474.2 366.2,474.2 368.9,470.0 373.2,477.1 378.3,476.1 380.6,476.8 382.4,491.2 386.1,496.3 390.6,498.4 406.0,499.5 415.5,497.6 434.4,488.2 444.3,484.8 471.6,485.4 493.5,489.3 527.6,491.6 534.2,491.0 552.6,483.5 563.9,476.8 570.6,474.9 575.1,468.5 580.6,454.6 583.9,452.0 587.0,447.4 589.6,439.8 595.9,432.2 621.3,413.7 636.1,398.0 637.4,393.0 645.5,385.4 652.0,377.0 682.2,353.3 688.3,343.5 691.8,332.6 698.3,320.2 700.7,318.4 703.0,319.2 708.5,317.9 713.8,308.2 716.3,308.6 717.5,310.6 716.5,328.1 713.4,352.5 708.7,360.1 708.0,364.8 712.7,371.3 713.4,415.5 721.8,439.7 732.7,459.5 742.4,470.4 752.4,485.1 767.6,498.7 774.6,503.4 802.9,512.9 839.7,519.9 854.4,527.3 859.4,527.8 867.1,525.6 872.7,525.8 886.8,535.9 891.0,545.5 896.8,550.6 902.0,558.6 905.4,566.9 917.3,579.6 925.7,593.9 934.3,604.6 941.9,611.2 962.7,616.7 963.7,623.8 962.8,633.1 961.0,639.9 952.4,653.2 950.4,661.5 940.6,675.0 930.1,697.8 925.2,702.8 908.2,714.6 901.9,721.7 0.0,721.7 0.0,0.0 174.3,0.0 174.8,6.3Z"/><path d="M574.9,463.2 567.8,461.7 566.1,459.4 570.7,456.6 575.6,461.7 574.9,463.2Z"/></g>
-      <g class="mp-borders"><path d="M627.6,601.1L628.6,574.6L650.9,519.3L652.6,511.7L651.7,506.4L648.0,501.9L653.8,497.9L664.5,495.2L670.5,495.8L685.4,492.1L685.9,489.7L681.3,479.9L672.0,479.3L669.2,477.7L672.4,469.1L669.7,457.8L670.4,450.9L672.3,446.2L671.7,427.6L673.7,424.1L680.4,419.3L683.8,419.4L686.5,420.7L687.7,424.4L686.9,426.9L684.3,428.3L691.1,437.9L694.1,437.1L701.2,430.4L705.8,427.7L712.0,419.1L714.5,418.7"/><path d="M344.5,448.5L331.9,451.9L322.7,451.2L320.0,449.5L314.7,442.7L311.0,433.9"/><path d="M2.3,88.5L19.5,68.4L29.3,53.1L43.5,20.9L46.8,16.0L60.1,9.6L82.6,8.2L90.6,9.9L106.8,17.4"/><path d="M140.4,132.9L84.6,133.7L78.3,126.1L73.8,109.2L67.4,97.1L2.3,88.5"/><path d="M137.0,0.0L136.4,3.2L137.2,7.2L139.8,13.0L147.9,19.1"/><path d="M627.6,601.1L660.5,657.4L641.3,721.7"/><path d="M627.6,601.1L622.8,607.5L621.7,607.7L437.5,582.8L368.0,490.9L366.5,486.9L366.2,474.2"/><path d="M2.3,88.5L0.0,89.0"/><path d="M1090.2,400.8L1092.2,394.0L1094.0,370.1L1096.3,361.5L1095.6,356.7L1102.3,349.4L1106.3,323.5L1108.6,318.7L1120.0,313.7"/><path d="M1120.0,136.0L1112.0,132.6L1092.8,112.9L1088.8,106.6L1084.5,95.7L1072.2,75.0L1072.3,69.6L1070.7,66.3L1036.4,27.4"/><path d="M1036.4,27.4L1060.3,0.0"/><path d="M1036.4,27.4L1120.0,53.7"/><path d="M692.3,331.8L694.9,331.3L698.6,333.0L698.9,341.2L696.9,361.6L699.7,365.3L704.5,366.8L706.6,366.7L708.0,364.8"/><path d="M703.4,392.6L701.7,399.9L703.8,400.2L706.8,398.1L707.2,394.7L706.5,392.9L703.4,392.6"/></g>
-      <g class="mp-places"><text class="mp-country" x="491.4" y="152.4">إيران</text><text class="mp-country" x="187.9" y="613.5">السعودية</text><text class="mp-country" x="585.3" y="541.3">الإمارات</text><text class="mp-country" x="708.1" y="641.5">عُمان</text><g transform="translate(106.9,66.6)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="0.0" y="21.0">الكويت</text></g><g transform="translate(706.7,242.2)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="48.0" y="-34.0">بندر عباس</text></g><g transform="translate(633.7,401.0)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="-38.0" y="4.0">دبي</text></g><g transform="translate(363.5,392.9)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="-34.0" y="4.0">الدوحة</text></g><g transform="translate(737.8,469.9)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="-48.0" y="-10.0">صحار</text></g><g transform="translate(873.6,528.5)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="40.0" y="4.0">مسقط</text></g><g transform="translate(294.8,318.4)"><circle class="mp-port-dot" r="2.8"/><text class="mp-port-lbl" x="0.0" y="-13.0">المنامة</text></g><text class="mp-sea-lbl mp-sea-sm" x="682.8" y="258.2">مضيق هرمز</text><text class="mp-sea-lbl mp-sea-lg" x="346.8" y="272.7">الخليج العربي</text><text class="mp-sea-lbl mp-sea-lg" x="946.6" y="501.2">خليج عمان</text><text class="mp-sea-lbl mp-sea-lg" x="859.9" y="681.6">بحر العرب</text></g>
-      <g class="mp-grid-labels"><text class="mp-grid-lbl" x="113.4" y="715">48°E</text><text class="mp-grid-lbl" x="402.4" y="715">52°E</text><text class="mp-grid-lbl" x="691.5" y="715">56°E</text><text class="mp-grid-lbl" x="980.5" y="715">60°E</text><text class="mp-grid-lbl" x="7" y="651.6" text-anchor="start">22°N</text><text class="mp-grid-lbl" x="7" y="491.2" text-anchor="start">24°N</text><text class="mp-grid-lbl" x="7" y="330.8" text-anchor="start">26°N</text><text class="mp-grid-lbl" x="7" y="170.4" text-anchor="start">28°N</text></g>
+      <desc>المعروض: بلاغات آخر 24 ساعة فقط؛ لا تُعرض طبقة تراكمية. لا تُرسم علامات وقائع لأن دفتر اليوم لا يثبت إحداثيات.</desc>
+      <rect class="mp-sea-bg" style="fill:#081d31" x="0" y="0" width="1120" height="722"/>
+      <g class="mp-grid"><line x1="108.4" y1="0" x2="108.4" y2="722" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="397.4" y1="0" x2="397.4" y2="722" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="686.5" y1="0" x2="686.5" y2="722" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="975.5" y1="0" x2="975.5" y2="722" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="0" y1="657.6" x2="1120" y2="657.6" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="0" y1="497.2" x2="1120" y2="497.2" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="0" y1="336.8" x2="1120" y2="336.8" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="0" y1="176.4" x2="1120" y2="176.4" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/></g>
+      <g class="mp-land" fill-rule="evenodd"><path d="M488.3,476.9 483.5,473.9 493.7,469.8 499.5,464.2 501.9,467.4 497.3,474.7 493.7,476.4 488.3,476.9Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/><path d="M440.8,474.6 439.6,468.9 442.9,467.0 444.9,470.5 440.8,474.6Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/><path d="M693.3,272.6 683.1,280.6 678.8,278.1 675.4,278.2 668.2,281.3 662.9,281.8 653.4,287.3 644.8,290.0 636.7,289.3 635.5,285.5 635.6,284.1 639.3,284.8 652.6,279.9 669.3,271.7 670.9,268.1 668.2,262.1 668.9,260.8 679.7,263.8 691.8,257.9 701.9,256.3 706.6,260.5 700.0,262.9 693.3,272.6Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/><path d="M536.7,485.7 529.4,484.9 527.4,486.3 515.5,483.6 519.5,480.3 529.9,476.4 536.7,483.0 536.7,485.7Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/><path d="M294.4,352.3 292.2,350.2 286.6,339.6 288.3,332.1 285.6,321.5 286.9,318.4 293.7,317.0 295.2,317.5 293.2,320.9 297.0,326.8 297.5,336.6 296.8,346.2 294.4,352.3Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/><path d="M124.2,48.0 121.4,47.2 114.3,32.2 116.7,28.2 117.1,25.2 118.4,24.3 119.8,19.3 121.7,17.7 133.6,33.5 133.0,40.5 128.3,46.2 124.2,48.0Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/><path d="M1113.3,406.5 1101.5,405.9 1086.3,401.3 1077.5,408.8 1055.6,402.2 1023.5,394.4 1019.9,390.5 1017.9,383.8 1012.4,381.9 1004.4,392.0 977.3,386.2 968.0,388.0 962.4,384.8 947.7,384.7 936.2,378.4 919.6,382.7 906.6,383.5 888.6,372.5 869.3,369.5 853.7,370.4 845.6,369.6 832.6,365.6 826.4,361.5 816.2,364.6 811.6,358.9 782.9,353.5 773.6,333.8 773.3,324.1 766.2,307.0 763.9,282.3 761.3,272.6 757.4,264.2 745.2,249.4 739.1,246.4 712.2,240.6 695.0,245.1 682.2,253.6 661.2,258.4 656.9,262.1 651.7,270.2 644.8,275.0 635.4,273.8 625.4,278.6 606.7,292.2 596.8,296.3 588.5,296.0 579.7,289.6 559.8,280.9 546.9,278.1 529.1,280.0 520.7,278.6 506.3,268.5 502.6,261.2 494.4,256.3 468.4,245.2 447.4,230.7 443.5,225.2 441.0,217.0 431.8,207.2 411.3,199.1 399.6,190.5 386.0,188.6 373.3,188.9 367.7,187.3 362.6,183.6 345.3,165.9 345.1,158.9 334.4,141.5 331.9,135.4 329.6,118.2 326.7,113.7 315.6,106.6 313.8,102.0 316.2,95.9 316.2,91.2 310.4,86.8 301.7,84.5 299.6,79.2 301.2,69.0 299.8,62.5 292.2,52.3 280.9,41.8 269.5,26.2 265.1,22.4 258.1,0.1 257.2,0.0 1120.0,0.0 1120.0,405.5 1113.3,406.5Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/><path d="M220.7,13.7 211.7,5.6 201.0,0.0 250.1,0.0 220.7,13.7Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/><path d="M174.8,6.3 168.5,13.2 156.9,13.8 151.4,18.0 141.2,21.0 134.0,19.5 118.6,12.8 113.6,12.6 107.1,15.1 106.5,20.4 108.8,29.2 118.2,46.7 118.8,50.3 106.2,46.8 88.5,62.8 88.3,64.7 97.2,66.9 103.7,66.8 108.3,65.3 112.1,67.7 121.7,97.9 126.7,104.1 132.9,115.2 136.5,125.8 144.4,140.4 146.2,147.9 153.6,165.8 164.3,179.7 166.8,184.8 168.6,192.4 166.7,195.2 166.0,198.5 173.9,206.2 197.8,217.1 193.3,221.5 209.9,242.1 219.5,244.4 232.4,260.2 251.9,270.3 263.7,283.7 254.8,280.7 253.5,282.4 254.9,294.6 266.3,304.3 268.4,312.1 264.1,328.7 256.8,326.9 255.2,327.9 258.8,339.9 262.3,349.1 266.6,356.4 270.2,367.0 273.2,371.6 285.8,382.9 289.6,392.4 293.2,410.0 301.1,419.9 305.3,427.5 311.0,433.9 314.1,425.9 309.1,402.8 307.4,385.0 308.0,381.3 315.7,367.9 325.4,338.3 333.0,330.3 344.1,324.5 353.3,335.9 364.4,344.6 366.5,354.4 363.2,362.3 360.2,374.9 368.7,405.1 369.2,412.8 367.6,419.8 363.7,425.7 356.1,443.6 353.8,445.5 344.5,448.5 349.6,451.9 354.9,451.4 355.4,454.6 351.9,458.9 347.6,469.9 363.8,474.2 366.2,474.2 368.9,470.0 373.2,477.1 378.3,476.1 380.6,476.8 382.4,491.2 386.1,496.3 390.6,498.4 406.0,499.5 415.5,497.6 434.4,488.2 444.3,484.8 471.6,485.4 493.5,489.3 527.6,491.6 534.2,491.0 552.6,483.5 563.9,476.8 570.6,474.9 575.1,468.5 580.6,454.6 583.9,452.0 587.0,447.4 589.6,439.8 595.9,432.2 621.3,413.7 636.1,398.0 637.4,393.0 645.5,385.4 652.0,377.0 682.2,353.3 688.3,343.5 691.8,332.6 698.3,320.2 700.7,318.4 703.0,319.2 708.5,317.9 713.8,308.2 716.3,308.6 717.5,310.6 716.5,328.1 713.4,352.5 708.7,360.1 708.0,364.8 712.7,371.3 713.4,415.5 721.8,439.7 732.7,459.5 742.4,470.4 752.4,485.1 767.6,498.7 774.6,503.4 802.9,512.9 839.7,519.9 854.4,527.3 859.4,527.8 867.1,525.6 872.7,525.8 886.8,535.9 891.0,545.5 896.8,550.6 902.0,558.6 905.4,566.9 917.3,579.6 925.7,593.9 934.3,604.6 941.9,611.2 962.7,616.7 963.7,623.8 962.8,633.1 961.0,639.9 952.4,653.2 950.4,661.5 940.6,675.0 930.1,697.8 925.2,702.8 908.2,714.6 901.9,721.7 0.0,721.7 0.0,0.0 174.3,0.0 174.8,6.3Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/><path d="M574.9,463.2 567.8,461.7 566.1,459.4 570.7,456.6 575.6,461.7 574.9,463.2Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/></g>
+      <g class="mp-borders"><path d="M627.6,601.1L628.6,574.6L650.9,519.3L652.6,511.7L651.7,506.4L648.0,501.9L653.8,497.9L664.5,495.2L670.5,495.8L685.4,492.1L685.9,489.7L681.3,479.9L672.0,479.3L669.2,477.7L672.4,469.1L669.7,457.8L670.4,450.9L672.3,446.2L671.7,427.6L673.7,424.1L680.4,419.3L683.8,419.4L686.5,420.7L687.7,424.4L686.9,426.9L684.3,428.3L691.1,437.9L694.1,437.1L701.2,430.4L705.8,427.7L712.0,419.1L714.5,418.7" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M344.5,448.5L331.9,451.9L322.7,451.2L320.0,449.5L314.7,442.7L311.0,433.9" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M2.3,88.5L19.5,68.4L29.3,53.1L43.5,20.9L46.8,16.0L60.1,9.6L82.6,8.2L90.6,9.9L106.8,17.4" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M140.4,132.9L84.6,133.7L78.3,126.1L73.8,109.2L67.4,97.1L2.3,88.5" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M137.0,0.0L136.4,3.2L137.2,7.2L139.8,13.0L147.9,19.1" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M627.6,601.1L660.5,657.4L641.3,721.7" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M627.6,601.1L622.8,607.5L621.7,607.7L437.5,582.8L368.0,490.9L366.5,486.9L366.2,474.2" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M2.3,88.5L0.0,89.0" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M1090.2,400.8L1092.2,394.0L1094.0,370.1L1096.3,361.5L1095.6,356.7L1102.3,349.4L1106.3,323.5L1108.6,318.7L1120.0,313.7" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M1120.0,136.0L1112.0,132.6L1092.8,112.9L1088.8,106.6L1084.5,95.7L1072.2,75.0L1072.3,69.6L1070.7,66.3L1036.4,27.4" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M1036.4,27.4L1060.3,0.0" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M1036.4,27.4L1120.0,53.7" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M692.3,331.8L694.9,331.3L698.6,333.0L698.9,341.2L696.9,361.6L699.7,365.3L704.5,366.8L706.6,366.7L708.0,364.8" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M703.4,392.6L701.7,399.9L703.8,400.2L706.8,398.1L707.2,394.7L706.5,392.9L703.4,392.6" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/></g>
+      <g class="mp-maritime-boundaries"><path class="mp-maritime-boundary" d="M291.2,369.2L284.4,362.3L279.4,351.3L274.7,346.1L272.4,330.3L275.6,323.0L277.5,307.0L279.8,304.2L280.9,294.3L293.1,287.0L308.8,257.3" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M667.9,316.0L677.1,311.6L694.6,298.5L699.0,292.9L703.9,289.5L706.3,289.2L726.2,280.3L735.8,277.7L739.4,281.2L744.0,289.7L744.3,321.3L747.0,332.7L746.5,339.4L748.5,356.4L747.1,364.3" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M334.0,253.1L352.9,255.8L378.3,261.5L412.1,292.1L448.6,328.3L472.2,374.4" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M317.9,243.2L297.5,221.2L282.1,195.0L281.8,190.4L279.6,185.5L251.9,186.1L249.6,180.0L249.9,172.6L252.8,167.1L258.4,162.8L248.3,152.9L241.9,148.4L238.2,143.4L231.2,139.1L228.5,129.9L224.2,126.7L221.0,121.8L222.0,121.2" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M548.3,365.9L573.6,363.6L578.6,361.4L584.9,361.0L591.0,358.5L596.3,353.5" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M1077.8,549.6L1120.0,581.2" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M293.9,370.8L294.8,370.0L302.7,370.4L311.4,374.1L311.8,373.3L312.0,371.9L309.3,369.5L310.6,367.1L313.6,365.8L313.2,364.2L315.2,361.6L314.5,360.3L315.6,356.9L311.9,345.2L314.3,335.9L318.5,330.6L319.6,315.5L324.2,301.8L333.8,253.9" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M139.7,133.6L151.0,125.2L156.4,123.0L158.1,120.5L212.8,101.4L218.7,101.4" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M105.1,15.3L109.2,16.8L113.3,13.8L120.3,14.3L138.3,27.9" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M1078.9,545.1L1089.4,438.5L1090.5,414.1L1092.0,402.9" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M1072.8,545.7L1037.2,523.9L1022.2,516.2L1004.4,508.9L994.6,503.4L977.3,491.3L961.1,482.4L942.3,467.2L927.6,459.3L910.8,452.8L882.9,445.5L860.1,443.9L842.9,440.8L810.9,439.7L807.6,438.8L779.0,418.4L767.9,407.6" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M767.9,407.6L763.1,401.0L752.4,381.2L747.0,364.9" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M713.5,418.6L718.1,416.8L732.2,416.3L750.1,412.8L767.9,407.6" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M747.0,364.9L734.3,362.2L723.3,361.4L716.8,362.4L705.9,366.5" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M692.7,332.7L678.5,330.1L665.1,324.4" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M311.6,437.5L311.7,433.2L309.5,422.5L305.1,416.4L301.0,405.8L299.7,391.9L297.0,378.1" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M297.0,378.1L297.0,378.1" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M297.0,378.1L293.7,370.7" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M356.5,446.1L353.4,446.8L352.6,450.5L348.3,454.2L347.0,456.6" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M170.6,61.3L158.7,53.5L149.3,49.4L137.3,28.8" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M225.2,119.5L218.7,101.4" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M153.0,21.7L145.5,19.1L141.2,16.1L140.2,10.3L136.0,6.2L138.5,1.9L137.9,0.0" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M170.6,61.3L161.7,28.7" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M356.6,446.0L376.5,441.8L378.5,438.2L382.4,436.0L386.9,436.1L390.6,438.4L417.1,432.1L421.7,427.8L419.1,424.9L417.9,420.8L418.4,417.0L420.2,414.2L423.7,412.0L427.4,411.8L430.9,413.3L433.7,416.7L441.8,409.1L472.2,374.4" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M334.0,253.2L321.5,247.9L317.9,243.2" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M377.6,437.0L367.3,439.5L356.6,446.0" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/></g>
+      <g class="mp-places"><text class="mp-country" x="491.4" y="152.4" style="fill:#bce8ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">إيران</text><text class="mp-country" x="187.9" y="613.5" style="fill:#bce8ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">السعودية</text><text class="mp-country" x="585.3" y="541.3" style="fill:#bce8ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">الإمارات</text><text class="mp-country" x="708.1" y="641.5" style="fill:#bce8ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">عُمان</text><g transform="translate(106.9,66.6)"><circle class="mp-port-dot" r="2.8" style="fill:#e4f6ff"/><text class="mp-port-lbl" x="0.0" y="21.0" style="fill:#e4f6ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">الكويت</text></g><g transform="translate(706.7,242.2)"><circle class="mp-port-dot" r="2.8" style="fill:#e4f6ff"/><text class="mp-port-lbl" x="48.0" y="-34.0" style="fill:#e4f6ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">بندر عباس</text></g><g transform="translate(633.7,401.0)"><circle class="mp-port-dot" r="2.8" style="fill:#e4f6ff"/><text class="mp-port-lbl" x="-38.0" y="4.0" style="fill:#e4f6ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">دبي</text></g><g transform="translate(363.5,392.9)"><circle class="mp-port-dot" r="2.8" style="fill:#e4f6ff"/><text class="mp-port-lbl" x="-34.0" y="4.0" style="fill:#e4f6ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">الدوحة</text></g><g transform="translate(737.8,469.9)"><circle class="mp-port-dot" r="2.8" style="fill:#e4f6ff"/><text class="mp-port-lbl" x="-48.0" y="-10.0" style="fill:#e4f6ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">صحار</text></g><g transform="translate(873.6,528.5)"><circle class="mp-port-dot" r="2.8" style="fill:#e4f6ff"/><text class="mp-port-lbl" x="40.0" y="4.0" style="fill:#e4f6ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">مسقط</text></g><g transform="translate(294.8,318.4)"><circle class="mp-port-dot" r="2.8" style="fill:#e4f6ff"/><text class="mp-port-lbl" x="0.0" y="-13.0" style="fill:#e4f6ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">المنامة</text></g><text class="mp-sea-lbl mp-sea-sm" x="682.8" y="258.2" style="fill:#b6e7ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">مضيق هرمز</text><text class="mp-sea-lbl mp-sea-lg" x="346.8" y="272.7" style="fill:#b6e7ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">الخليج العربي</text><text class="mp-sea-lbl mp-sea-lg" x="946.6" y="501.2" style="fill:#b6e7ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">خليج عمان</text><text class="mp-sea-lbl mp-sea-lg" x="859.9" y="681.6" style="fill:#b6e7ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">بحر العرب</text></g>
+      <g class="mp-grid-labels"><text class="mp-grid-lbl" x="113.4" y="715" style="fill:#9ac7da">48°E</text><text class="mp-grid-lbl" x="402.4" y="715" style="fill:#9ac7da">52°E</text><text class="mp-grid-lbl" x="691.5" y="715" style="fill:#9ac7da">56°E</text><text class="mp-grid-lbl" x="980.5" y="715" style="fill:#9ac7da">60°E</text><text class="mp-grid-lbl" x="7" y="651.6" text-anchor="start" style="fill:#9ac7da">22°N</text><text class="mp-grid-lbl" x="7" y="491.2" text-anchor="start" style="fill:#9ac7da">24°N</text><text class="mp-grid-lbl" x="7" y="330.8" text-anchor="start" style="fill:#9ac7da">26°N</text><text class="mp-grid-lbl" x="7" y="170.4" text-anchor="start" style="fill:#9ac7da">28°N</text></g>
+      <g class="mp-routes" aria-label="مسارات إرشادية (تمثيل تخطيطي)"><path class="mp-separation-zone" d="M690.8,288.7L810.7,299.1L810.7,344.0L690.8,328.8Z" style="fill:#ffc857;fill-opacity:.12;stroke:#ffc857;stroke-width:1.4;stroke-dasharray:5 5;vector-effect:non-scaling-stroke"/><path class="mp-route mp-route-inbound" d="M809.3,303.1L765.9,298.3L726.2,293.5L692.2,290.3" style="fill:none;stroke:#72e6d4;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:9 5;vector-effect:non-scaling-stroke"/><path class="mp-route mp-route-outbound" d="M692.2,324.0L728.4,327.2L767.4,332.0L809.3,340.0" style="fill:none;stroke:#ffc266;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:9 5;vector-effect:non-scaling-stroke"/><path class="mp-route mp-route-oman" d="M807.8,359.3L764.5,367.3L722.6,372.1L692.2,368.9" style="fill:none;stroke:#d7a7ff;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:3 5;vector-effect:non-scaling-stroke"/><text class="mp-route-label mp-route-inbound" x="752.9" y="280.7" style="fill:#bffcf2;font-size:12px;font-weight:700;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">مسار دخول</text><text class="mp-route-label mp-route-outbound" x="755.8" y="341.6" style="fill:#ffe0a3;font-size:12px;font-weight:700;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">مسار خروج</text><text class="mp-route-label mp-route-oman" x="755.1" y="378.5" style="fill:#ead4ff;font-size:12px;font-weight:700;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">المسار الجديد من جهة عُمان</text><text class="mp-route-label mp-route-separation" x="745.7" y="310.3" style="fill:#ffe39a;font-size:12px;font-weight:700;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">منطقة الفصل</text></g>
       <rect class="mp-zoomrect" x="585.3" y="256.6" width="245.7" height="288.7" rx="4" style="fill:none;stroke:var(--accent);stroke-width:1.6;stroke-dasharray:7 5"/>
       <g class="mp-events"><g class="mp-event" transform="translate(715.4,312.7)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">1</text></g><g class="mp-event" transform="translate(700.9,288.7)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">2</text></g><g class="mp-event" transform="translate(657.5,368.9)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">3</text></g><g class="mp-event" transform="translate(686.5,264.6)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">4</text></g><g class="mp-event" transform="translate(722.6,240.6)" style="--mk:var(--muted)"><circle class="mp-halo" r="14"/><circle class="mp-dot" r="7"/><text class="mp-num" y="3.7">5</text></g></g>
     </svg>
-    <div class="hmap-zoom"><svg class="hmap-zsvg" viewBox="0 0 520 609" role="img" aria-label="تكبير: مضيق هرمز وخورفكان"><rect class="mp-sea-bg" x="0" y="0" width="520" height="609"/><g class="mp-grid"><line x1="61.2" y1="0" x2="61.2" y2="609"/><line x1="214.1" y1="0" x2="214.1" y2="609"/><line x1="367.1" y1="0" x2="367.1" y2="609"/><line x1="520.0" y1="0" x2="520.0" y2="609"/><line x1="0" y1="507.1" x2="520" y2="507.1"/><line x1="0" y1="338.1" x2="520" y2="338.1"/><line x1="0" y1="169.0" x2="520" y2="169.0"/><line x1="0" y1="0.0" x2="520" y2="0.0"/></g><g class="mp-land" fill-rule="evenodd"><path d="M228.6,33.6 207.1,50.5 197.9,45.3 190.8,45.5 175.5,52.0 164.4,53.1 144.2,64.6 126.0,70.5 108.8,68.9 106.3,61.0 106.5,57.9 114.2,59.5 142.5,49.0 177.8,31.8 181.2,24.1 175.5,11.7 177.0,8.8 199.9,15.2 225.5,2.8 243.3,0.0 247.5,0.0 256.8,8.1 242.9,13.3 228.6,33.6Z"/><path d="M510.3,221.1 488.8,227.7 479.1,215.5 418.2,204.3 398.5,162.7 397.9,142.2 383.0,106.2 378.1,54.1 372.6,33.7 364.3,16.0 352.5,0.0 520.0,0.0 520.0,227.5 510.3,221.1Z"/><path d="M160.6,3.8 151.7,11.5 140.5,28.7 126.0,38.8 106.2,36.2 84.8,46.4 45.2,74.9 24.4,83.7 6.9,83.0 0.0,78.0 0.0,0.0 177.3,0.0 160.6,3.8Z"/><path d="M3.7,402.1 9.0,386.1 22.4,370.1 76.2,331.0 107.6,298.0 110.4,287.4 127.5,271.4 141.1,253.9 205.1,203.8 218.0,183.2 225.5,160.1 239.3,134.0 244.3,130.3 249.1,131.9 260.9,129.3 272.0,108.8 277.3,109.7 279.8,113.7 277.8,150.6 271.3,202.1 261.1,218.2 259.7,228.1 269.7,241.8 271.1,335.0 289.0,386.0 312.1,427.6 332.5,450.5 353.7,481.7 385.9,510.3 400.7,520.1 460.6,540.3 520.0,552.1 520.0,608.5 0.0,608.5 0.0,407.5 3.7,402.1Z"/></g><g class="mp-borders"><path d="M116.1,608.5L139.0,553.6L142.5,537.7L140.6,526.4L132.8,517.0L145.0,508.5L167.7,503.0L180.3,504.2L211.8,496.4L212.9,491.4L203.2,470.7L183.5,469.5L177.5,466.1L184.4,448.0L178.7,424.2L180.1,409.5L184.1,399.5L182.9,360.4L187.0,353.1L201.2,342.8L208.5,343.1L214.2,346.0L216.7,353.7L215.1,358.9L209.6,361.9L223.9,382.2L230.4,380.5L245.4,366.2L255.1,360.6L268.1,342.6L273.5,341.6"/><path d="M226.4,158.4L231.9,157.5L239.7,161.0L240.5,178.3L236.2,221.3L242.2,229.0L252.3,232.3L256.7,232.0L259.7,228.1"/><path d="M249.9,286.7L246.3,302.0L250.9,302.8L257.2,298.2L258.1,291.0L256.5,287.2L249.9,286.7"/></g><g class="mp-events"><g class="mp-event" transform="translate(275.3,118.3)" style="--mk:var(--muted)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">1</text></g><g class="mp-event" transform="translate(244.7,67.6)" style="--mk:var(--muted)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">2</text></g><g class="mp-event" transform="translate(152.9,236.6)" style="--mk:var(--muted)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">3</text></g><g class="mp-event" transform="translate(214.1,16.9)" style="--mk:var(--muted)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">4</text></g></g></svg><div class="hz-cap">تكبير: مضيق هرمز وخورفكان</div></div>
+    <div class="hmap-zoom"><svg class="hmap-zsvg" viewBox="0 0 520 609" role="img" aria-label="تكبير: مضيق هرمز وخورفكان"><desc>تكبير للخريطة الرئيسية؛ تفاصيل نطاق العرض في وصف البطاقة.</desc><rect class="mp-sea-bg" style="fill:#081d31" x="0" y="0" width="520" height="609"/><g class="mp-grid"><line x1="61.2" y1="0" x2="61.2" y2="609" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="214.1" y1="0" x2="214.1" y2="609" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="367.1" y1="0" x2="367.1" y2="609" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="520.0" y1="0" x2="520.0" y2="609" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="0" y1="507.1" x2="520" y2="507.1" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="0" y1="338.1" x2="520" y2="338.1" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="0" y1="169.0" x2="520" y2="169.0" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/><line x1="0" y1="0.0" x2="520" y2="0.0" style="stroke:#23445f;stroke-width:.7;vector-effect:non-scaling-stroke"/></g><g class="mp-land" fill-rule="evenodd"><path d="M228.6,33.6 207.1,50.5 197.9,45.3 190.8,45.5 175.5,52.0 164.4,53.1 144.2,64.6 126.0,70.5 108.8,68.9 106.3,61.0 106.5,57.9 114.2,59.5 142.5,49.0 177.8,31.8 181.2,24.1 175.5,11.7 177.0,8.8 199.9,15.2 225.5,2.8 243.3,0.0 247.5,0.0 256.8,8.1 242.9,13.3 228.6,33.6Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/><path d="M510.3,221.1 488.8,227.7 479.1,215.5 418.2,204.3 398.5,162.7 397.9,142.2 383.0,106.2 378.1,54.1 372.6,33.7 364.3,16.0 352.5,0.0 520.0,0.0 520.0,227.5 510.3,221.1Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/><path d="M160.6,3.8 151.7,11.5 140.5,28.7 126.0,38.8 106.2,36.2 84.8,46.4 45.2,74.9 24.4,83.7 6.9,83.0 0.0,78.0 0.0,0.0 177.3,0.0 160.6,3.8Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/><path d="M3.7,402.1 9.0,386.1 22.4,370.1 76.2,331.0 107.6,298.0 110.4,287.4 127.5,271.4 141.1,253.9 205.1,203.8 218.0,183.2 225.5,160.1 239.3,134.0 244.3,130.3 249.1,131.9 260.9,129.3 272.0,108.8 277.3,109.7 279.8,113.7 277.8,150.6 271.3,202.1 261.1,218.2 259.7,228.1 269.7,241.8 271.1,335.0 289.0,386.0 312.1,427.6 332.5,450.5 353.7,481.7 385.9,510.3 400.7,520.1 460.6,540.3 520.0,552.1 520.0,608.5 0.0,608.5 0.0,407.5 3.7,402.1Z" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/></g><g class="mp-borders"><path d="M116.1,608.5L139.0,553.6L142.5,537.7L140.6,526.4L132.8,517.0L145.0,508.5L167.7,503.0L180.3,504.2L211.8,496.4L212.9,491.4L203.2,470.7L183.5,469.5L177.5,466.1L184.4,448.0L178.7,424.2L180.1,409.5L184.1,399.5L182.9,360.4L187.0,353.1L201.2,342.8L208.5,343.1L214.2,346.0L216.7,353.7L215.1,358.9L209.6,361.9L223.9,382.2L230.4,380.5L245.4,366.2L255.1,360.6L268.1,342.6L273.5,341.6" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M226.4,158.4L231.9,157.5L239.7,161.0L240.5,178.3L236.2,221.3L242.2,229.0L252.3,232.3L256.7,232.0L259.7,228.1" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/><path d="M249.9,286.7L246.3,302.0L250.9,302.8L257.2,298.2L258.1,291.0L256.5,287.2L249.9,286.7" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/></g><g class="mp-maritime-boundaries"><path class="mp-maritime-boundary" d="M174.9,125.3L194.4,116.0L231.3,88.3L240.7,76.5L251.1,69.3L256.2,68.8L298.2,50.0L318.6,44.4L326.3,51.9L335.8,69.7L336.5,136.4L342.2,160.3L341.1,174.4L345.4,210.3L342.5,227.0" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M0.0,219.7L12.0,214.7L23.2,204.2" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M520.0,387.4L477.6,385.9L470.6,384.0L410.0,341.0L386.5,318.3" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M386.5,318.3L376.3,304.3L353.8,262.7L342.4,228.2" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M271.3,341.4L281.2,337.7L311.0,336.6L348.9,329.3L386.5,318.3" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M342.4,228.2L315.3,222.6L292.2,221.0L278.4,222.9L255.4,231.7" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/><path class="mp-maritime-boundary" d="M227.4,160.3L197.3,155.0L168.9,142.9" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/></g><g class="mp-routes" aria-label="مسارات إرشادية (تمثيل تخطيطي)"><path class="mp-separation-zone" d="M223.3,67.6L477.2,89.6L477.2,184.2L223.3,152.1Z" style="fill:#ffc857;fill-opacity:.12;stroke:#ffc857;stroke-width:1.4;stroke-dasharray:5 5;vector-effect:non-scaling-stroke"/><path class="mp-route mp-route-inbound" d="M474.1,98.0L382.4,87.9L298.2,77.8L226.4,71.0" style="fill:none;stroke:#72e6d4;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:9 5;vector-effect:non-scaling-stroke"/><path class="mp-route mp-route-outbound" d="M226.4,142.0L302.8,148.7L385.4,158.9L474.1,175.8" style="fill:none;stroke:#ffc266;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:9 5;vector-effect:non-scaling-stroke"/><path class="mp-route mp-route-oman" d="M471.1,216.4L379.3,233.3L290.6,243.4L226.4,236.6" style="fill:none;stroke:#d7a7ff;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:3 5;vector-effect:non-scaling-stroke"/><text class="mp-route-label mp-route-inbound" x="354.8" y="50.7" style="fill:#bffcf2;font-size:12px;font-weight:700;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">مسار دخول</text><text class="mp-route-label mp-route-outbound" x="360.9" y="179.2" style="fill:#ffe0a3;font-size:12px;font-weight:700;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">مسار خروج</text><text class="mp-route-label mp-route-oman" x="359.4" y="256.9" style="fill:#ead4ff;font-size:12px;font-weight:700;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">المسار الجديد من جهة عُمان</text><text class="mp-route-label mp-route-separation" x="339.5" y="113.2" style="fill:#ffe39a;font-size:12px;font-weight:700;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">منطقة الفصل</text></g><g class="mp-places"><text class="mp-country" x="260.0" y="98.0" style="fill:#bce8ff;font-size:14px;font-weight:600;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">إيران</text><text class="mp-country" x="278.4" y="446.2" style="fill:#bce8ff;font-size:14px;font-weight:600;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">عُمان</text><text class="mp-country" x="217.2" y="331.3" style="fill:#bce8ff;font-size:14px;font-weight:600;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">الإمارات</text><text class="mp-sea-lbl mp-sea-sm" x="267.6" y="57.5" style="fill:#b6e7ff;font-size:16px;font-weight:600;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">مضيق هرمز</text><text class="mp-sea-lbl mp-sea-lg" x="91.8" y="13.5" style="fill:#b6e7ff;font-size:16px;font-weight:600;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">الخليج العربي</text><text class="mp-sea-lbl mp-sea-lg" x="385.4" y="483.4" style="fill:#b6e7ff;font-size:16px;font-weight:600;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">خليج عمان</text><text class="mp-port-lbl" x="252.4" y="138.6" style="fill:#e4f6ff;font-size:13px;font-weight:600;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">خصب</text><text class="mp-port-lbl" x="269.2" y="317.8" style="fill:#e4f6ff;font-size:13px;font-weight:600;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">الفجيرة</text></g><g class="mp-events"><g class="mp-event" transform="translate(275.3,118.3)" style="--mk:var(--muted)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">1</text></g><g class="mp-event" transform="translate(244.7,67.6)" style="--mk:var(--muted)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">2</text></g><g class="mp-event" transform="translate(152.9,236.6)" style="--mk:var(--muted)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">3</text></g><g class="mp-event" transform="translate(214.1,16.9)" style="--mk:var(--muted)"><circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/><text class="mp-num" y="6" style="font-size:17px">4</text></g></g></svg><div class="hz-cap">تكبير: مضيق هرمز وخورفكان</div></div>
   </div>
   <ol class="hmap-legend"><li><span class="lg-num" style="--mk:var(--muted)">1</span><span class="lg-txt">رواية عن سبع ناقلات مصابة في مضيق هرمز</span> <bdi class="bidi ev-code">25-01</bdi> <bdi class="bidi">نقل عن الحرس الثوري عبر straits.live · D/4</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">2</span><span class="lg-txt">إعلان وقف حركة السفن «غير الممتثلة»</span> <bdi class="bidi ev-code">25-02</bdi> <bdi class="bidi">نقل عن البحرية الإيرانية · D/4</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">3</span><span class="lg-txt">امتداد تسرب نفطي إلى شواطئ أم القيوين</span> <bdi class="bidi ev-code">25-03</bdi> <bdi class="bidi">تقارير إماراتية منقولة · B/3</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">4</span><span class="lg-txt">إصابة ناقلة بمقذوف غير محدد المصدر</span> <bdi class="bidi ev-code">25-04</bdi> <bdi class="bidi">Shafaq News عبر straits.live · D/4</bdi></li><li><span class="lg-num" style="--mk:var(--muted)">5</span><span class="lg-txt">عرض إيراني بفتح المضيق مقابل رفع الحصار</span> <bdi class="bidi ev-code">25-05</bdi> <bdi class="bidi">نقل عن طهران · B/3</bdi></li></ol>
   
@@ -1415,7 +1464,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> لا تُجمع البلاغات كعدد هجمات، ولا تُنسب واقعة إلى جهة إلا ببلاغ رسمي أو سجل معتمد. النقل الإعلامي لا يرفع درجة الإثبات.
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-25T04:00:00Z</bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
+    <br><b>وقت الإصدار:</b> <b>25 أكتوبر 2026 · 04:00 حسب التوقيت العالمي</b> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
     <div class="glossary">السجل التراكمي: <a class="bidi" href="/reports/cumulative-2026.html" target="_blank" rel="noopener noreferrer">/reports/cumulative-2026.html</a></div>
   </footer>
 </div>

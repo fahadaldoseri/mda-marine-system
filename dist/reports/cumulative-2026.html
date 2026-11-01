@@ -62,7 +62,7 @@ a:focus-visible,.btn:focus-visible{outline:2px solid var(--accent);outline-offse
 
 /* عزل القيم اللاتينية والرقمية المركبة داخل سياق عربي */
 bdi,.bidi{direction:ltr;unicode-bidi:isolate}
-.k-v,.chip b,.cite-ref,.bar-row .bv,td.num,th.num{direction:ltr;unicode-bidi:isolate;white-space:nowrap}
+.k-v,.chip b,.cite-ref,.bar-row.bv,td.num,th.num{direction:ltr;unicode-bidi:isolate;white-space:nowrap}
 .ev-code,.bidi.ev-code{direction:ltr;unicode-bidi:isolate;white-space:nowrap}  /* رمز الحدث لا يُكسر بين سطرين */
 a.bidi{white-space:normal}
 .eng{direction:ltr;unicode-bidi:plaintext;overflow-wrap:anywhere}
@@ -92,7 +92,7 @@ a.bidi{white-space:normal}
 .btn{
   font:inherit;font-size:12.5px;cursor:pointer;color:var(--ink);
   background:var(--panel-2);border:1px solid var(--line-2);border-radius:8px;
-  padding:7px 13px;transition:background .18s ease,transform .18s ease
+  padding:7px 13px;transition:background.18s ease,transform.18s ease
 }
 .btn:hover{background:var(--panel-3)}
 .btn:active{transform:translateY(1px)}
@@ -107,17 +107,17 @@ a.bidi{white-space:normal}
   flex:0 0 100%;width:100%;text-align:center
 }
 .masthead > div:not(.threat){flex:1 0 100%}
-.masthead .lede{color:var(--ink-2);font-size:15px;max-width:none;margin:0}
+.masthead.lede{color:var(--ink-2);font-size:15px;max-width:none;margin:0}
 .masthead-meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
 .threat{
   margin-inline-start:0;margin-inline-end:auto;text-align:center;border-radius:var(--radius);
   border:1px solid var(--line-2);background:var(--panel);padding:14px 20px;min-width:172px
 }
-.threat .lbl{font-size:12px;color:var(--muted)}
-.threat .val{font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;font-size:23px;line-height:1.45;margin-top:2px}
-.threat.risk-high .val{color:var(--danger)}
-.threat.risk-med .val{color:var(--warn)}
-.threat.risk-low .val{color:var(--ok)}
+.threat.lbl{font-size:12px;color:var(--muted)}
+.threat.val{font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;font-size:23px;line-height:1.45;margin-top:2px}
+.threat.risk-high.val{color:var(--danger)}
+.threat.risk-med.val{color:var(--warn)}
+.threat.risk-low.val{color:var(--ok)}
 
 /* ---------- شريط المؤشرات ---------- */
 .kpis{display:grid;gap:16px;margin:24px 0 8px;direction:rtl}
@@ -134,10 +134,14 @@ a.bidi{white-space:normal}
 .kpi.acc-warn em{background:var(--warn)}
 .kpi.acc-danger em{background:var(--danger)}
 .kpi.acc-ok em{background:var(--ok)}
-.kpi .k-l{font-size:12.5px;color:var(--muted);line-height:1.6;min-height:2.6em}
-.kpi .k-tag{display:inline-block;margin-inline-start:6px;padding:1px 7px;border:1px solid var(--line-2);border-radius:999px;color:var(--ink-2);font-size:11px;line-height:1.4;white-space:nowrap}
-.kpi .k-v{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-weight:600;font-size:30px;line-height:1.25;margin-top:3px;font-variant-numeric:tabular-nums;text-align:right;direction:rtl}
-.kpi .k-n{font-size:12px;color:var(--muted);line-height:1.7;margin-top:4px}
+.kpi.k-l{font-size:12.5px;color:var(--muted);line-height:1.6;min-height:2.6em}
+.kpi.k-tag{display:inline-block;margin-inline-start:6px;padding:1px 7px;border:1px solid var(--line-2);border-radius:999px;color:var(--ink-2);font-size:11px;line-height:1.4;white-space:nowrap}
+.kpi.k-v{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-weight:600;font-size:30px;line-height:1.25;margin-top:3px;font-variant-numeric:tabular-nums;text-align:right;direction:rtl}
+.kpi.k-lays{display:flex;flex-wrap:wrap;gap:4px 10px;margin:4px 0 0;font-size:12.5px;color:var(--muted)}
+.k-lay{display:inline-flex;gap:4px;align-items:baseline}
+.k-lay-l{color:var(--muted)}
+.k-lay b{color:var(--ink);font-weight:700}
+.k-n{font-size:12px;color:var(--muted);line-height:1.7;margin-top:4px}
 .k-risk-patterns{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:-8px 0 0;color:var(--muted);font-size:12px}
 .k-risk-tag{border:1px solid var(--line-2);border-radius:999px;padding:1px 8px;color:var(--ink-2)}
 
@@ -160,8 +164,8 @@ section.doc > h2{
   font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:21px;line-height:1.5;
   margin:0 0 4px;display:flex;align-items:center;gap:11px
 }
-section.doc > h2 .ico{width:24px;height:24px;flex:0 0 auto;display:grid;place-items:center;color:var(--accent)}
-section.doc > h2 .ico svg{width:18px;height:18px}
+section.doc > h2.ico{width:24px;height:24px;flex:0 0 auto;display:grid;place-items:center;color:var(--accent)}
+section.doc > h2.ico svg{width:18px;height:18px}
 .h-rule{height:1px;background:var(--line);margin:8px 0 12px}
 section.doc h3{
   font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:16.5px;
@@ -214,12 +218,12 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   font-size:15px;color:var(--ink-2)
 }
 .bar-row{display:grid;grid-template-columns:minmax(150px,1.05fr) 3fr 108px;gap:14px;align-items:center;margin:11px 0}
-.bar-row .bl{font-size:13.5px;color:var(--ink-2);line-height:1.55}
+.bar-row.bl{font-size:13.5px;color:var(--ink-2);line-height:1.55}
 .bar-track{height:9px;border-radius:999px;background:var(--panel-3);overflow:hidden}
 .bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#1fbfb2,#5ad6c8);width:var(--w,0);animation:grow 1s cubic-bezier(.22,.8,.28,1) both}
 @keyframes grow{from{width:0}}
-.bar-row .bv{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:12.5px;text-align:end;color:var(--ink);font-variant-numeric:tabular-nums}
-.viz .src-note{font-size:12.5px;color:var(--muted);margin:12px 0 0}
+.bar-row.bv{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:12.5px;text-align:end;color:var(--ink);font-variant-numeric:tabular-nums}
+.viz.src-note{font-size:12.5px;color:var(--muted);margin:12px 0 0}
 
 /* ---------- خريطة الوقائع ---------- */
 .map-wrap{border:1px solid var(--line-2);border-radius:var(--radius-sm);overflow:hidden;background:var(--map-sea);margin-top:6px}
@@ -236,7 +240,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .mp-sea-lbl{fill:var(--map-sea-label);letter-spacing:0;direction:rtl;unicode-bidi:isolate}
 .mp-key{grid-template-columns:repeat(2,minmax(0,1fr))}
 .mp-key li{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--faint)}
-.mp-key .lg-sw{width:22px;height:14px;border-radius:3px;display:inline-block;flex:0 0 auto;border:1px solid var(--line-2)}
+.mp-key.lg-sw{width:22px;height:14px;border-radius:3px;display:inline-block;flex:0 0 auto;border:1px solid var(--line-2)}
 .sw-land{background:var(--map-land);border-color:var(--map-coast)}
 .sw-sea{background:var(--map-sea)}
 .sw-border{border:0;border-top:2px dashed var(--map-border);height:0}
@@ -245,22 +249,25 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .sw-port::after{content:"";position:absolute;inset:4px 9px;background:var(--map-label);border-radius:50%}
 .sw-strait{background:none;border:0}
 .sw-strait::after{content:"مضيق";color:var(--map-strait);font-weight:700;font-size:12px}
+.mp-key.sw-strait{width:auto;height:auto;padding:1px 6px;border:1px solid var(--map-strait);border-radius:999px;background:none}
+.mp-key.sw-strait::after{font-size:10.5px;line-height:1.35;white-space:nowrap}
 .sw-none{border:1px dashed var(--faint);background:none}
-.mp-key .lg-none{grid-column:1 / -1;color:var(--ink-2)}
+.mp-key.lg-none{grid-column:1 / -1;color:var(--ink-2)}
 .hmap-zstrip{margin:14px 0 0;border-top:1px solid var(--line-2);padding-top:12px}
 .hmap-zstrip h4{margin:0 0 10px;font-size:13px;color:var(--ink-2)}
 .hmap-zstrip ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 .hmap-zstrip li{border:1px solid var(--line-2);border-radius:var(--radius-sm);padding:10px;background:var(--panel-2);display:grid;gap:6px}
-.hmap-zstrip .zs-id{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:12px;color:var(--faint)}
-.hmap-zstrip .zs-nm{font-size:12.5px;color:var(--ink-2);line-height:1.5}
-.hmap-zstrip .zs-lv{font-size:12.5px;font-weight:600}
-.hmap-zstrip .zs-c{font-size:12px;color:var(--faint)}
+.hmap-zstrip.zs-id{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:12px;color:var(--faint)}
+.hmap-zstrip.zs-nm{font-size:12.5px;color:var(--ink-2);line-height:1.5}
+.hmap-zstrip.zs-lv{font-size:12.5px;font-weight:600}
+.hmap-zstrip.zs-c{font-size:12px;color:var(--faint)}
+.hmap-zstrip.zs-p{white-space:nowrap}
 @media (max-width:1000px){.hmap-zstrip ul{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .mp-sea-lg{font-size:19px}
 .mp-sea-sm{font-size:15px;font-weight:600;fill:var(--map-strait);letter-spacing:0}
-.mp-events .mp-halo{fill:var(--mk);opacity:.22}
-.mp-events .mp-dot{fill:var(--mk);stroke:var(--bg);stroke-width:2.2;vector-effect:non-scaling-stroke}
-.mp-events .mp-num{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:9.5px;font-weight:600;fill:#fff;text-anchor:middle}
+.mp-events.mp-halo{fill:var(--mk);opacity:.22}
+.mp-events.mp-dot{fill:var(--mk);stroke:var(--bg);stroke-width:2.2;vector-effect:non-scaling-stroke}
+.mp-events.mp-num{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:9.5px;font-weight:600;fill:#fff;text-anchor:middle}
 .map-keys{font-size:12.5px;color:var(--faint);margin:12px 0 0}
 .map-legend{list-style:none;display:grid;gap:7px;margin:14px 0 0;padding:0}
 .map-legend li{display:flex;gap:10px;align-items:baseline;font-size:13.5px;color:var(--ink-2);margin:0}
@@ -269,32 +276,34 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .hero-map{margin:22px 0 6px}
 .hmap{margin:0;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:18px}
 .hmap h3{margin:0 0 14px;font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:15px;color:var(--ink-2)}
-.hmap .blk-lede,.hmap-keys,.hmap-panel .src-note{display:none}
+.hmap.blk-lede,.hmap-keys,.hmap-panel.src-note{display:none}
 .hmap-wrap{position:relative;border:1px solid var(--line-2);border-radius:var(--radius-sm);overflow:hidden;background:var(--map-sea)}
 /* التكبير بجانب الخريطة لا فوقها: الشريحة كانت تحجب الخليج العربي (البحرين وقطر) */
-.hmap-wrap{display:grid;grid-template-columns:minmax(0,2.4fr) minmax(0,1fr);align-items:start}
+.hmap-wrap{display:grid;grid-template-columns:minmax(0,1fr);align-items:start}
+/* ك-<span class="ltr">XXX</span>: عمود التكبير لا يُحجز إلا إذا وُجدت لوحته فعلًا، وإلا بقي 29% من العرض فارغًا */
+.hmap-wrap:has(> .hmap-zoom){grid-template-columns:minmax(0,2.4fr) minmax(0,1fr)}
 .hmap-zoom{border-inline-start:1.5px solid var(--accent);background:var(--map-sea);min-width:0;align-self:stretch;display:flex;flex-direction:column}
 .hmap-zsvg{display:block;width:100%;height:auto}
 .hz-cap{font-size:13px;color:var(--ink-2);background:var(--panel);padding:4px 10px;border-top:1px solid var(--line-2);margin-top:auto}
 @media (max-width:1000px){.hmap-wrap{grid-template-columns:minmax(0,1fr)}.hmap-zoom{border-inline-start:0;border-top:1.5px solid var(--accent)}}
 .hmap-svg{display:block;width:100%;height:auto;max-width:100%}
 /* خريطة الشاشة: علامات وتسميات أكبر قليلًا للقراءة من مسافة */
-.hmap-svg .mp-dot{r:9.5px}
-.hmap-svg .mp-halo{r:17px}
-.hmap-svg .mp-events .mp-num{font-size:12.5px}
-.hmap .mp-grid-lbl{font-size:12.5px}
-.hmap .mp-port-lbl{font-size:15.5px}
-.hmap .mp-country{font-size:16.5px}
+.hmap-svg.mp-dot{r:9.5px}
+.hmap-svg.mp-halo{r:17px}
+.hmap-svg.mp-events.mp-num{font-size:12.5px}
+.hmap.mp-grid-lbl{font-size:12.5px}
+.hmap.mp-port-lbl{font-size:15.5px}
+.hmap.mp-country{font-size:16.5px}
 .hmap-legend{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 30px;margin:16px 0 0;padding:0}
 .hmap-legend li{display:block;position:relative;padding-inline-start:34px;font-size:14px;line-height:1.85;color:var(--ink-2);margin:0}
-.hmap-legend .lg-num{position:absolute;inset-inline-start:0;top:3px}
-.hmap-legend .bidi{color:var(--muted);font-size:13px;white-space:nowrap}
+.hmap-legend.lg-num{position:absolute;inset-inline-start:0;top:3px}
+.hmap-legend.bidi{color:var(--muted);font-size:13px;white-space:nowrap}
 @media (max-width:760px){.hmap-legend{grid-template-columns:minmax(0,1fr)}}
 /* الجوال: الخريطة الرئيسية تُصغَّر كثيرًا فتكبر العلامات والتسميات لتبقى مقروءة (التفصيل في لوحة التكبير) */
 @media (max-width:700px){
-  .hmap-svg .mp-dot{r:13px}.hmap-svg .mp-halo{r:20px}.hmap-svg .mp-events .mp-num{font-size:15px}
-  .hmap-svg .mp-port-lbl{font-size:25px}.hmap-svg .mp-country{font-size:27px}
-  .hmap-svg .mp-sea-lg{font-size:31px}.hmap-svg .mp-sea-sm{font-size:25px}.hmap-svg .mp-grid-lbl{display:none}
+  .hmap-svg.mp-dot{r:13px}.hmap-svg.mp-halo{r:20px}.hmap-svg.mp-events.mp-num{font-size:15px}
+  .hmap-svg.mp-port-lbl{font-size:25px}.hmap-svg.mp-country{font-size:27px}
+  .hmap-svg.mp-sea-lg{font-size:31px}.hmap-svg.mp-sea-sm{font-size:25px}.hmap-svg.mp-grid-lbl{display:none}
 }
 /* ---------- الاستشهادات ---------- */
 .cite-ref{
@@ -308,7 +317,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .src-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin:14px 0 22px}
 .src{border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--panel-2);padding:11px 13px;font-size:13.5px;color:var(--ink-2)}
 .src b{display:block;color:var(--ink);font-weight:600;font-size:14px;margin-bottom:3px}
-.src .st{font-size:12px;color:var(--muted)}
+.src.st{font-size:12px;color:var(--muted)}
 .src.s-ok{border-inline-start:3px solid var(--ok)}
 .src.s-none{border-inline-start:3px solid var(--info)}
 .src.s-fail{border-inline-start:3px solid var(--danger)}
@@ -323,13 +332,18 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .ev-idx{font-variant-numeric:tabular-nums;font-size:12px;line-height:1;color:var(--muted);border:1px solid var(--line-2);border-radius:6px;padding:3px 6px}
 .ev-code{font-size:12px;color:var(--muted);letter-spacing:.02em}
 .ev-badge{margin-inline-start:auto;font-size:11.5px;line-height:1;padding:4px 10px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2)}
-.ev.b-official .ev-badge{border-color:rgba(34,195,182,.45);color:var(--ok)}
-.ev.b-media .ev-badge{border-color:rgba(217,164,65,.5);color:#e0b45f}
-.ev.b-deny .ev-badge{border-color:rgba(214,86,86,.45);color:#e88}
+.ev.b-official.ev-badge{border-color:rgba(34,195,182,.45);color:var(--ok)}
+.ev.b-media.ev-badge{border-color:rgba(217,164,65,.5);color:#e0b45f}
+.ev.b-deny.ev-badge{border-color:rgba(214,86,86,.45);color:#e88}
 .ev-what{margin:0;font-size:15.5px;line-height:1.8;color:var(--ink)}
 .ev-meta{margin:10px 0 0;padding-top:8px;border-top:1px dashed var(--line);font-size:12.5px;line-height:1.75;color:var(--muted)}
-.ev-meta .ev-k{display:block;font-size:11.5px;color:var(--muted);opacity:.85;margin-bottom:2px}
-.ev-meta .ev-mv{display:block;color:var(--ink-2)}
+.ev-meta.ev-k{display:block;font-size:11.5px;color:var(--muted);opacity:.85;margin-bottom:2px}
+.ev-meta.ev-mv{display:block;color:var(--ink-2)}
+.ev-field{margin:4px 0}
+.ev-branch{margin:12px 0 0;padding:10px 12px;border:1px solid rgba(77,157,255,.38);border-inline-start:3px solid var(--info);border-radius:8px;background:rgba(77,157,255,.06);font-size:12.5px;line-height:1.75}
+.ev-branch-title{display:block;color:var(--info);font-weight:700;margin-bottom:3px}
+.ev-branch-gap{margin:12px 0 0;padding:9px 12px;border:1px dashed rgba(255,176,46,.55);border-radius:8px;color:var(--warn);font-size:12.5px;line-height:1.7}
+.ev-ledger-note{margin:8px 0 14px;padding:9px 12px;border-inline-start:3px solid var(--warn);background:rgba(255,176,46,.06);color:var(--muted);font-size:12.5px}
 @media (max-width:820px){.ev-grid{grid-template-columns:1fr}}
 .dg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px;margin:16px 0 10px}
 .dg{position:relative;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:14px 16px 13px;overflow:hidden}
@@ -353,7 +367,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 
 /* ---------- الحركة: دخول لطيف بالـCSS فقط، والمحتوى مرئي دائمًا ---------- */
 @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.masthead,.kpis{animation:rise .55s cubic-bezier(.22,.8,.28,1) both}
+.masthead,.kpis{animation:rise.55s cubic-bezier(.22,.8,.28,1) both}
 @media (prefers-reduced-motion: reduce){
   .masthead,.kpis,.bar-fill{animation:none}
 }
@@ -365,8 +379,8 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .threat{margin-inline-start:0;width:100%}
   .kpi-row-1,.kpi-row-2{grid-template-columns:1fr;gap:12px}
   .bar-row{grid-template-columns:1fr auto;grid-template-areas:"l v" "t t";gap:6px 10px}
-  .bar-row .bl{grid-area:l}
-  .bar-row .bv{grid-area:v;text-align:start}
+  .bar-row.bl{grid-area:l}
+  .bar-row.bv{grid-area:v;text-align:start}
   .bar-track{grid-area:t;width:100%}
   table{font-size:14px}
 }
@@ -375,44 +389,44 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 @page{size:A4;margin:14mm 12mm}
 /* ---------- قواعد عرض معتمدة من تعديلات المعاينة (12 أكتوبر 2026) ---------- */
 .notice,
-.map-panel .src-note,
+.map-panel.src-note,
 .map-keys,
-.decision .dc-foot{display:none}
+.decision.dc-foot{display:none}
 
 .sec-lede{font-size:13px;color:var(--muted);margin:0 0 16px;line-height:1.7;max-width:76ch}
 .blk-lede{font-size:12.5px;color:var(--faint);margin:-6px 0 10px;line-height:1.6}
 
 @media print{
   /* ك-255: بطاقة القرار على خلفية بيضاء في الطباعة */
-  .card, .decision, .dc, .blk, .blk *{background-image:none !important}
-  .card, .decision, .dc{background:#fff !important}
+  .card, .decision, .dc, .blk, .blk *{background-image:none!important}
+  .card, .decision, .dc{background:#fff!important}
   /* ك-245: منع انقسام مفتاح الخريطة بين صفحتين في <span class="ltr">PDF</span> */
   .map-key, .map-legend, .key-box, .mx-key,
   /* عطل 2026-10-28: كتلة الخريطة+المفتاح (~130–215مم) لا تجتمع في صفحة فتترك فراغًا مانعًا.
      الحكم: الكتلة تنقسم بين الرسم والمفتاح، وكلٌّ منهما لا ينقسم. */
-  .print-map{break-inside:auto !important;page-break-inside:auto !important}
+  .print-map{break-inside:auto!important;page-break-inside:auto!important}
   /* الإطار نفسه ينقسم: الرسم (95مم) يبقى صحيحًا، والمفتاح يبقى كاملًا في صفحة واحدة */
-  .print-map .hmap-wrap{break-inside:auto !important;page-break-inside:auto !important;overflow:visible !important}
-  .print-map .hmap-svg{break-inside:avoid !important;page-break-inside:avoid !important}
-  .print-map .hmap-legend{break-inside:avoid !important;page-break-inside:avoid !important}
+  .print-map.hmap-wrap{break-inside:auto!important;page-break-inside:auto!important;overflow:visible!important}
+  .print-map.hmap-svg{break-inside:avoid!important;page-break-inside:avoid!important}
+  .print-map.hmap-legend{break-inside:avoid!important;page-break-inside:avoid!important}
   /* ك-245: المفتاح كامل في عمود واحد، وتلتصق كتلة الخريطة بذيل المحتوى */
-  .print-map{display:block !important}
-  .print-map .hmap-wrap{overflow:hidden !important}
+  .print-map{display:block!important}
+  .print-map.hmap-wrap{overflow:hidden!important}
   /* لا يُقيَّد ارتفاع الخريطة: القيد يقلّص عرضها فيسقط فحص العرض (70%) — ك-256 */
-  .print-map .hmap-keys{display:block !important;margin:1.2mm 0 0;font-size:7.8pt;line-height:1.25}
+  .print-map.hmap-keys{display:block!important;margin:1.2mm 0 0;font-size:7.8pt;line-height:1.25}
   /* عطل 2026-10-28: المفتاح بعمود واحد بلغ 95مم فلم تجتمع الخريطة معه في صفحة،
      فبقي فراغ مانع (176مم). القرار: عمودان في الطباعة — المفتاح يبقى كاملًا وغير منقسم
      داخل الكتلة (break-inside:avoid) وتنخفض كتلته إلى ما يقارب النصف. */
   /* ك-298ج: المفتاح (36مم) لم يجد متسعًا في ذيل صفحة الخريطة فهبط لصفحة شبه فارغة.
      الحكم: ستة أعمدة وخط أصغر قليلًا — المفتاح يبقى كاملًا ويستقر في مكانه. */
-  .print-map .hmap-legend{grid-template-columns:repeat(6,minmax(0,1fr)) !important;columns:6 !important;column-gap:2.6mm !important;gap:0 !important;margin:1mm 0 0}
-  .print-map .hmap-legend li{break-inside:avoid !important;page-break-inside:avoid !important;margin:0 0 .15mm !important;font-size:6.5pt !important;line-height:1.12 !important}
-  .print-map-distribution{break-inside:avoid !important;page-break-inside:avoid !important;margin-top:2mm}
+  .print-map.hmap-legend{grid-template-columns:repeat(6,minmax(0,1fr)) !important;columns:6!important;column-gap:2.6mm!important;gap:0!important;margin:1mm 0 0}
+  .print-map.hmap-legend li{break-inside:avoid!important;page-break-inside:avoid!important;margin:0 0.15mm!important;font-size:6.5pt!important;line-height:1.12!important}
+  .print-map-distribution{break-inside:avoid!important;page-break-inside:avoid!important;margin-top:2mm}
   .print-map-distribution h3{font-size:10pt;margin:1.5mm 0 1mm}
-  .print-map-distribution .dist-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5mm}
-  .print-map-distribution .dist-card{display:block !important;width:auto !important;margin:0 !important;padding:1.3mm 1.7mm;border:1px solid #cfd8e3;border-radius:1.2mm;background:#fff;color:#20303f;font-size:7.7pt;line-height:1.25;break-inside:avoid;page-break-inside:avoid}
-  .print-map-distribution .dist-card b{display:block;color:#0a1524;font-size:8pt;margin-bottom:.5mm}
-  .print-map-distribution .dist-card span{display:block}
+  .print-map-distribution.dist-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5mm}
+  .print-map-distribution.dist-card{display:block!important;width:auto!important;margin:0!important;padding:1.3mm 1.7mm;border:1px solid #cfd8e3;border-radius:1.2mm;background:#fff;color:#20303f;font-size:7.7pt;line-height:1.25;break-inside:avoid;page-break-inside:avoid}
+  .print-map-distribution.dist-card b{display:block;color:#0a1524;font-size:8pt;margin-bottom:.5mm}
+  .print-map-distribution.dist-card span{display:block}
 
   :root{
     --ink:#0a1524;--ink-2:#20303f;--muted:#4b5e73;--faint:#5c728c;
@@ -425,7 +439,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   }
   body{background:#fff;color:#111;font-size:10.8pt;line-height:1.62}
   /* لا تُطبع المصادر والمراجع ولا ملحق موثوقية المصادر في نسخة <span class="ltr">PDF</span> */
-  #sec-16{display:none !important}
+  #sec-16{display:none!important}
   p,li,blockquote,.sec-lede,.blk-lede,.note{orphans:3;widows:3}
   /* اقتصاد الورق: تُقاس الخريطة على ارتفاع صفحة واحدة مع عنوانها */
   /* الخريطة ينقسم إطارها فقط بين الرسم والمفتاح، فلا تبقى ورقة شبه فارغة */
@@ -433,27 +447,27 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .map-viz svg{max-height:100mm;height:auto;break-inside:avoid;page-break-inside:avoid}
   .map-legend{break-inside:avoid;page-break-inside:avoid}
   /* إجبار: كتلة الخريطة تنقسم بين الرسم والمفتاح مهما وردت قاعدة أخصّ */
-  #sec-03 .map-viz, .map-viz{break-inside:auto !important;page-break-inside:auto !important}
-  .map-viz svg{break-inside:avoid !important;page-break-inside:avoid !important}
+  #sec-03.map-viz, .map-viz{break-inside:auto!important;page-break-inside:auto!important}
+  .map-viz svg{break-inside:avoid!important;page-break-inside:avoid!important}
   .map-viz{padding:1.2mm 1.2mm}
   /* لا يُقسَّم مفتاح hmap في الطباعة؛ النسخة المطبوعة تعلن عمودًا واحدًا صراحةً */
   .map-legend{columns:2;column-gap:8mm}
   .map-legend li{break-inside:avoid;margin:0 0 1.4mm;font-size:9pt;line-height:1.45}
-  .map-legend .lg-txt{font-size:9pt}
+  .map-legend.lg-txt{font-size:9pt}
   .map-caption,.map-viz figcaption{margin-top:1.5mm;line-height:1.4}
   /* كثافة الصفحة: تقليل حشو الخلايا لتصبح الكتلة على مقاس الورقة */
-  tbody td{padding:1.5mm 2.2mm !important}
+  tbody td{padding:1.5mm 2.2mm!important}
   .sec-lede{margin:0 0 10px;line-height:1.55}
   section.doc{padding:0 0 3mm}
   .rmk,.glossary{break-inside:avoid;page-break-inside:avoid}
   /* انضباط بصري: خطوط فاصلة رقيقة بدل تظليل الصفوف */
-  tbody tr:nth-child(even){background:#fff !important}
+  tbody tr:nth-child(even){background:#fff!important}
   tbody td{border-bottom:.4pt solid #e2e8f0}
   .kpi,.viz,.src,.card,.notice,.threat,.chip,.decision,.bar-track{border-radius:2.4mm}
   .threat{display:inline-block;min-width:52mm}
   .mp-events text{font-size:13.5px}
   /* أرقام علامات الخريطة: لا بد من تخصيص أعلى لأن قاعدة الشاشة أخصّ */
-  .mp-events .mp-num{font-size:15px}
+  .mp-events.mp-num{font-size:15px}
   .mp-events text{font-size:15px}
   /* لا تباعد أحرف على العربية داخل الخريطة (يفكّ الاتصال) */
   .mp-country,.mp-sea-lbl,.mp-port-lbl{letter-spacing:0}
@@ -466,18 +480,18 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .kpis{margin-top:3mm}
   .cls-banner{margin-top:3mm}
   body::before{display:none}
-  .topbar,.no-print{display:none !important}
+  .topbar,.no-print{display:none!important}
   .wrap{max-width:none;padding:0}
   a{color:#0a1524;text-decoration:none}
   section.doc{background:#fff;border:0;border-top:1px solid #cfd8e3;border-radius:0;padding:0 0 3mm;box-shadow:none;break-inside:auto;page-break-inside:auto}
   section.doc.pri{border-top:2px solid #0b6f66}
   section.doc > h2{font-size:13pt;color:#0a1524;break-after:avoid;page-break-after:avoid}
-  section.doc > h2 .ico{display:none}
+  section.doc > h2.ico{display:none}
   section.doc h3{color:#0a1524;font-size:11pt;break-after:avoid;page-break-after:avoid}
   section.doc p,section.doc li,tbody td,.card p{color:#20303f}
   .masthead h1{color:#0a1524;font-size:21pt}
   .kpi,.viz,.src,.foot,.card,.notice{background:#fff;border-color:#cfd8e3;box-shadow:none}
-  .kpi .k-v{color:#0a1524}
+  .kpi.k-v{color:#0a1524}
   .threat{background:#fff;border-color:#cfd8e3}
   .chip{background:#f6f8fb;border-color:#cfd8e3;color:#31465c}
   .chip b{color:#0a1524}
@@ -492,9 +506,9 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .bar-fill{background:#0f8f86;animation:none}
   .masthead,.kpis{animation:none}
   .map-wrap{border-color:#c3cedb}
-  .mp-events .mp-dot{stroke:#fff}
+  .mp-events.mp-dot{stroke:#fff}
   .map-viz{break-inside:auto;page-break-inside:auto}
-  .bar-row .bl,.bar-row .bv,.viz h3,.viz .src-note,.src,.src b,.src .st,.foot,.kpi .k-l,.kpi .k-n,.notice,.chip,.cite-ref,.tag{font-size:10.5pt;line-height:1.6}
+  .bar-row.bl,.bar-row.bv,.viz h3,.viz.src-note,.src,.src b,.src.st,.foot,.kpi.k-l,.kpi.k-n,.notice,.chip,.cite-ref,.tag{font-size:10.5pt;line-height:1.6}
   /* ك-256: البطاقات الكبيرة تنقسم بين الصفحات لتصفير الفراغ الداخلي؛ البطاقات الصغيرة تبقى موحّدة. */
   .card,.viz,.src,.table-row{break-inside:auto;page-break-inside:auto}
      /* ك-298: سجل الأحداث — عمود واحد وثبات البطاقة في الطباعة */
@@ -503,7 +517,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
      /* ك-341: بطاقتان في السطر في الطباعة — تدفّق بلا تصغير خطوط ولا حذف محتوى */
      .ev-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.6mm;margin:4mm 0 0}
      .ev{display:block;margin:0;padding:3mm 3.4mm 2.8mm}
-     .ev{display:block;margin:0 0 2mm;padding:2.2mm 2.6mm 2mm;break-inside:avoid;page-break-inside:avoid;opacity:1 !important;transform:none !important;animation:none !important;border-color:#c3cedb;background:#fff}
+     .ev{display:block;margin:0 0 2mm;padding:2.2mm 2.6mm 2mm;break-inside:avoid;page-break-inside:avoid;opacity:1!important;transform:none!important;animation:none!important;border-color:#c3cedb;background:#fff}
      .ev::before{width:4px;background:#0f8f86}
      .ev.b-media::before{background:#b8860b}
      .ev.b-deny::before{background:#9aa8ba}
@@ -526,23 +540,23 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   table{min-width:0;font-size:10.5pt}
   thead{display:table-header-group}
   tbody tr{break-inside:avoid;page-break-inside:avoid}
-  html.js .reveal{opacity:1 !important;transform:none !important;transition:none !important}
+  html.js.reveal{opacity:1!important;transform:none!important;transition:none!important}
 
   .decision{background:#fff;border-color:#c3cedb}
-  .decision .dc-title{color:#0b6f66}
+  .decision.dc-title{color:#0b6f66}
   .dc-v{color:#0a1524}
-  .dc-row.risk-high .dc-v{color:#9d2b25}
-  .dc-row.risk-med .dc-v{color:#7d5200}
-  .dc-row.risk-low .dc-v{color:#166b45}
+  .dc-row.risk-high.dc-v{color:#9d2b25}
+  .dc-row.risk-med.dc-v{color:#7d5200}
+  .dc-row.risk-low.dc-v{color:#166b45}
   .dc-foot,.rkey,.glossary{color:#4b5e73}
   .conf,.kstrip,.chg-tag,.st-badge,.ev-code,.cls-banner{font-size:10.5pt;background:#f6f8fb;border-color:#b8c4d1;color:#31465c}
   .conf.c-high{color:#14603f;background:#edfaf3;border-color:#7cc4a0}
   .conf.c-med{color:#7c5000;background:#fff8ea;border-color:#cfa95a}
   .conf.c-low{color:#1d4f87;background:#eff5ff;border-color:#8bb1dd}
   .kstrip.k-confirm,.st-badge.s-active{color:#7a1d1a;background:#fff1f0;border-color:#c77973}
-  .kstrip.k-inter,.chg.c-new .chg-tag{color:#1d4f87;background:#edf4ff;border-color:#8bb1dd}
-  .kstrip.k-suspect,.chg.c-reclassified .chg-tag,.cls-banner.c-restricted{color:#7c5000;background:#fff7e6;border-color:#c9a24f}
-  .chg.c-closed .chg-tag,.st-badge.s-stable{color:#14603f;background:#edfaf3;border-color:#7cc4a0}
+  .kstrip.k-inter,.chg.c-new.chg-tag{color:#1d4f87;background:#edf4ff;border-color:#8bb1dd}
+  .kstrip.k-suspect,.chg.c-reclassified.chg-tag,.cls-banner.c-restricted{color:#7c5000;background:#fff7e6;border-color:#c9a24f}
+  .chg.c-closed.chg-tag,.st-badge.s-stable{color:#14603f;background:#edfaf3;border-color:#7cc4a0}
   .ev-code{color:#0b6f66;background:#effaf8;border-color:#7fc9c0}
   .tl-track{background:#e6ecf3}
   .tl-fill.k-confirm{background:#9d2b25}
@@ -552,104 +566,104 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   ul.d-kinds li::before{width:3px}
   .decision,.glossary{break-inside:avoid;page-break-inside:avoid}
   /* كتل التحليل الطويلة تُقسَّم بدل إفراغ ورقة كاملة */
-  .tl-viz,.viz,.card{break-inside:auto !important;page-break-inside:auto !important}
-  .tl-viz .tl-row,.viz svg,.card .kpi{break-inside:avoid;page-break-inside:avoid}
+  .tl-viz,.viz,.card{break-inside:auto!important;page-break-inside:auto!important}
+  .tl-viz.tl-row,.viz svg,.card.kpi{break-inside:avoid;page-break-inside:avoid}
   .decision{animation:none}
 
   /* ===== سياسة التدفّق الموحّدة: تمنع الفراغات الداخلية (قرار 18 أكتوبر 2026) =====
      القاعدة: القِطَع الصغيرة محمية من الانقسام، والحاويات الكبيرة تتدفّق بحرية.
      فتُملأ كل ورقة قبل الانتقال، ولا تُدفع الكتل الكبيرة لإفراغ نصف ورقة. */
-  *{break-inside:auto !important;page-break-inside:auto !important}
-  tr,.kpi,.map-legend li,.glossary li,.dc-row,.ev-item,.chg-item{break-inside:avoid !important;page-break-inside:avoid !important}
-  section.doc > h2,section.doc h3,section.doc h4,.h-rule,.sec-lede{break-after:avoid !important;page-break-after:avoid !important}
+  *{break-inside:auto!important;page-break-inside:auto!important}
+  tr,.kpi,.map-legend li,.glossary li,.dc-row,.ev-item,.chg-item{break-inside:avoid!important;page-break-inside:avoid!important}
+  section.doc > h2,section.doc h3,section.doc h4,.h-rule,.sec-lede{break-after:avoid!important;page-break-after:avoid!important}
   thead{display:table-header-group}
   thead tr{break-after:avoid;page-break-after:avoid}
   p,li{orphans:2;widows:2}
-  .map-viz svg{max-height:145mm !important;width:100%;height:auto;break-inside:avoid !important}
-  .map-legend,.map-viz,.tbl-wrap,.changes,.decision,.viz,.card{break-inside:auto !important;page-break-inside:auto !important}
+  .map-viz svg{max-height:145mm!important;width:100%;height:auto;break-inside:avoid!important}
+  .map-legend,.map-viz,.tbl-wrap,.changes,.decision,.viz,.card{break-inside:auto!important;page-break-inside:auto!important}
   /* ك-235: قاعدة مكرّرة كانت تنقض السطر 601 (auto) وتُعيد avoid، فتُنقل كتلة الخريطة كاملة فتُخلّف
      فراغًا قد يبلغ 206 مم في الصفحة السابقة. الرسم نفسه يبقى غير قابل للتجزئة (avoid على svg)،
      والحاوية والمفتاح يتدفّقان فيكتمل امتلاء الورقة. */
-  .map-viz{break-inside:auto !important;page-break-inside:auto !important}
+  .map-viz{break-inside:auto!important;page-break-inside:auto!important}
   /* Chromium لا يجزّئ حاويات grid/flex بين الصفحات، فتتدفّق هنا بترتيب inline-block
      يحفظ هيئة العمودين/البطاقات نفسها، مع السماح بالانقسام بين الصفحات */
-  .wrap,.changes,.dc-grid,.kpis,.masthead,.map-legend,.src-grid,.glossary,.tl-viz,.viz,.card,.decision{display:block !important}
+  .wrap,.changes,.dc-grid,.kpis,.masthead,.map-legend,.src-grid,.glossary,.tl-viz,.viz,.card,.decision{display:block!important}
   /* عطل (2026-10-30): القاعدة العامة كانت تُظهر وسم <style> المحقون داخل الترويسة في الطباعة،
      فطُبع نص <span class="ltr">CSS</span> داخل الصفحة الأولى. القياس الحي: display المحسوب لوسم style = inline-block في print.
      الإصلاح: استثناء العناصر غير المرئية + حارس صريح يمنع طباعتها. */
-  .kpis > *,.masthead > *,.map-legend > li,.glossary > li,.src-grid > *{display:inline-block !important;vertical-align:top !important;width:48.5% !important;margin:0 0 2.5mm 1% !important;box-sizing:border-box !important}
+  .kpis > *,.masthead > *,.map-legend > li,.glossary > li,.src-grid > *{display:inline-block!important;vertical-align:top!important;width:48.5% !important;margin:0 0 2.5mm 1% !important;box-sizing:border-box!important}
   .kpis > style,.kpis > script,.kpis > template,.kpis > link,
   .masthead > style,.masthead > script,.masthead > template,.masthead > link,
   .src-grid > style,.src-grid > script,.src-grid > template,.src-grid > link,
-  .map-legend > style,.map-legend > script,.glossary > style,.glossary > script{display:none !important}
-  style,script,template,link,meta,title{display:none !important}
-  .dc-grid > *,.dc-row{display:block !important;width:100% !important}
+  .map-legend > style,.map-legend > script,.glossary > style,.glossary > script{display:none!important}
+  style,script,template,link,meta,title{display:none!important}
+  .dc-grid > *,.dc-row{display:block!important;width:100% !important}
   /* ك-103: الوسم يُعوَّم والمحتوى كتلة قابلة للانقسام — فلا يُترك عنوان أو بطاقة يتيمة ولا فراغ أسفل الغلاف */
   .dc-row::after{content:"";display:block;clear:both}
-  .dc-row > *:first-child{float:inline-start !important;display:block !important;width:26% !important}
-  .dc-row > *:last-child{display:block !important;width:auto !important;margin-inline-start:27% !important}
-  .changes > *{display:block !important;width:100% !important}
+  .dc-row > *:first-child{float:inline-start!important;display:block!important;width:26% !important}
+  .dc-row > *:last-child{display:block!important;width:auto!important;margin-inline-start:27% !important}
+  .changes > *{display:block!important;width:100% !important}
   .viz > *,.card > *{box-sizing:border-box}
   /* ضغط تباعد الأقسام: يوفّر نحو 40 مم فتنتقل نهاية التقرير إلى صفحتها السابقة */
-  section.doc{padding:0 0 2.5mm !important}
-  section.doc > h2{margin:3mm 0 1.5mm !important}
-  .sec-lede{margin:0 0 2mm !important}
-  .h-rule{margin:1mm 0 2mm !important}
+  section.doc{padding:0 0 2.5mm!important}
+  section.doc > h2{margin:3mm 0 1.5mm!important}
+  .sec-lede{margin:0 0 2mm!important}
+  .h-rule{margin:1mm 0 2mm!important}
   /* تشخيص: إلغاء كل قواعد منع الكسر لتحديد مصدر الفراغات */
-  *{break-after:auto !important;break-before:auto !important}
-  body,p,li,td,th{line-height:1.36 !important}
+  *{break-after:auto!important;break-before:auto!important}
+  body,p,li,td,th{line-height:1.36!important}
   /* overflow مخفي يمنع Chromium من تقسيم الحاوية بين الصفحات فتُدفع كاملة وتُفرّغ الورقة */
-  *{overflow:visible !important}
-  .map-viz svg{max-height:145mm !important;width:100%;height:auto}
-  .masthead > div:not(.threat){display:block !important;width:100% !important;margin:0 !important}
+  *{overflow:visible!important}
+  .map-viz svg{max-height:145mm!important;width:100%;height:auto}
+  .masthead > div:not(.threat){display:block!important;width:100% !important;margin:0!important}
   .masthead h1{width:100% !important}
   /* الغلاف ينتهي عند شريط التصنيف: أهم الأخبار المتعلقة بالأمن البحري تبدأ صفحة جديدة (يمنع العنوان اليتيم والفراغ) */
-  .decision{break-inside:avoid !important;page-break-inside:avoid !important}
-  .map-viz svg{max-height:145mm !important;width:100%;height:auto}
+  .decision{break-inside:avoid!important;page-break-inside:avoid!important}
+  .map-viz svg{max-height:145mm!important;width:100%;height:auto}
   /* القاعدة الأخص تأتي بعد سياسة التدفق العامة حتى لا تنقضها */
-  .print-map{break-inside:avoid !important;page-break-inside:avoid !important}
-  .print-map .hmap-wrap{break-inside:avoid !important;page-break-inside:avoid !important;overflow:hidden !important}
-  .print-map .hmap-wrap{grid-template-columns:minmax(0,6fr) minmax(0,1fr) !important}
-  .print-map .hmap-zoom{border-inline-start:1.5px solid var(--accent) !important;border-top:0 !important}
+  .print-map{break-inside:avoid!important;page-break-inside:avoid!important}
+  .print-map.hmap-wrap{break-inside:avoid!important;page-break-inside:avoid!important;overflow:hidden!important}
+  .print-map.hmap-wrap{grid-template-columns:minmax(0,6fr) minmax(0,1fr) !important}
+  .print-map.hmap-zoom{border-inline-start:1.5px solid var(--accent) !important;border-top:0!important}
   /* عطل 2026-10-28: قاعدتان متعارضتان للمفتاح (عمود/عمودان) — أُلغيت الثانية.
      الحكم الواحد: عمودان في الطباعة، والكتلة لا تنقسم. */
-  .print-map .hmap-legend{grid-template-columns:repeat(4,minmax(0,1fr)) !important;columns:4 !important;column-gap:3.5mm !important}
-  .print-map .hmap-keys{display:block !important}
+  .print-map.hmap-legend{grid-template-columns:repeat(4,minmax(0,1fr)) !important;columns:4!important;column-gap:3.5mm!important}
+  .print-map.hmap-keys{display:block!important}
   /* محاذاة مضبوطة: تُغلق فراغات الجانبين في الفقرات والقوائم، ولا تمسّ العناوين والبطاقات */
-  section.doc p,section.doc li,.sec-lede,.masthead .lede,.glossary li,.src-grid li,
+  section.doc p,section.doc li,.sec-lede,.masthead.lede,.glossary li,.src-grid li,
   /* تصفير فقرات المتن والعناوين التمهيدية (قرار المالك 2026-10-22): يمنع الفراغ الجانبي */
-  .sec-lede,section.doc p,.masthead p,.blk-lede,.note{text-align:justify !important;text-align-last:start !important;hyphens:none !important}
+  .sec-lede,section.doc p,.masthead p,.blk-lede,.note{text-align:justify!important;text-align-last:start!important;hyphens:none!important}
   /* لا يُترك عنوان بطاقة أو قسم وحده أسفل ورقة بلا مضمون (عطل ك-103) */
-  section.decision > .dc-title,.card > h3,.viz > h3,section.doc > h2{break-after:avoid !important;page-break-after:avoid !important}
-  .dc-grid,.dc-row,.dc-v,.dc-v ul{break-inside:auto !important;page-break-inside:auto !important}
-  .dc-list li{break-inside:avoid !important;page-break-inside:avoid !important}
+  section.decision > .dc-title,.card > h3,.viz > h3,section.doc > h2{break-after:avoid!important;page-break-after:avoid!important}
+  .dc-grid,.dc-row,.dc-v,.dc-v ul{break-inside:auto!important;page-break-inside:auto!important}
+  .dc-list li{break-inside:avoid!important;page-break-inside:avoid!important}
   /* تصفير كامل المتن بما فيه قيم أهم الأخبار المتعلقة بالأمن البحري (ك-105): البوابة تفحص الصفحة بوسائط print */
   .dc-list li,.chg-list li,.ev-list li,.map-caption,footer.foot,
-  .dc-v,.dc-row,.dc-grid,.kv-v,.glossary li,.src-grid li{text-align:justify !important;
-    text-align-last:start !important;hyphens:none !important;word-spacing:normal !important}
+  .dc-v,.dc-row,.dc-grid,.kv-v,.glossary li,.src-grid li{text-align:justify!important;
+    text-align-last:start!important;hyphens:none!important;word-spacing:normal!important}
   section.doc h2,section.doc h3,section.doc h4,.h-rule,.chip,.kpi,.tag,.st-badge,
-  .map-legend li,.conf,.cls-banner,.threat,.toc li,.ev-code{text-align:start !important}
-  .map-panel{padding:2mm 2.5mm !important}
-  .map-legend{margin-top:1.5mm !important}
-  .map-legend li{margin:0 0 1mm !important;font-size:8.4pt !important;line-height:1.3 !important}
-  .kpis > *{width:32% !important;padding:1.6mm 2mm !important;margin:0 0 1.5mm 1% !important}
-  .kpis .k-v{font-size:14pt !important;margin:0.5mm 0 !important}
-  .kpis .k-l{font-size:8.6pt !important;line-height:1.25 !important;min-height:0 !important}
-  .kpis .k-m{font-size:7.6pt !important;line-height:1.25 !important}
-  .kpis.hero-kpis{display:block !important;direction:rtl !important}
-  .kpis.hero-kpis .k-risk-patterns{display:block !important;width:100% !important;margin:0 0 1.5mm !important}
-  .kpis.hero-kpis .kpi-row{display:grid !important;gap:4mm !important;width:100% !important;margin:0 0 4mm !important;direction:rtl !important}
-  .kpis.hero-kpis .kpi-row-1{grid-template-columns:repeat(4,minmax(0,1fr)) !important}
-  .kpis.hero-kpis .kpi-row-2{grid-template-columns:repeat(3,minmax(0,1fr)) !important}
-  .kpis.hero-kpis .kpi-row > .kpi{display:flex !important;width:auto !important;margin:0 !important;height:148px !important;min-height:148px !important;padding:1.6mm 2mm !important;break-inside:avoid !important;page-break-inside:avoid !important;text-align:right !important;direction:rtl !important}
-  .kpis.hero-kpis .k-v{text-align:right !important;direction:rtl !important}
-  .dc-grid{gap:1.5mm !important}
-  section.doc{font-size:10.2pt !important}
+  .map-legend li,.conf,.cls-banner,.threat,.toc li,.ev-code{text-align:start!important}
+  .map-panel{padding:2mm 2.5mm!important}
+  .map-legend{margin-top:1.5mm!important}
+  .map-legend li{margin:0 0 1mm!important;font-size:8.4pt!important;line-height:1.3!important}
+  .kpis > *{width:32% !important;padding:1.6mm 2mm!important;margin:0 0 1.5mm 1% !important}
+  .kpis.k-v{font-size:14pt!important;margin:0.5mm 0!important}
+  .kpis.k-l{font-size:8.6pt!important;line-height:1.25!important;min-height:0!important}
+  .kpis.k-m{font-size:7.6pt!important;line-height:1.25!important}
+  .kpis.hero-kpis{display:block!important;direction:rtl!important}
+  .kpis.hero-kpis.k-risk-patterns{display:block!important;width:100% !important;margin:0 0 1.5mm!important}
+  .kpis.hero-kpis.kpi-row{display:grid!important;gap:4mm!important;width:100% !important;margin:0 0 4mm!important;direction:rtl!important}
+  .kpis.hero-kpis.kpi-row-1{grid-template-columns:repeat(4,minmax(0,1fr)) !important}
+  .kpis.hero-kpis.kpi-row-2{grid-template-columns:repeat(3,minmax(0,1fr)) !important}
+  .kpis.hero-kpis.kpi-row > .kpi{display:flex!important;width:auto!important;margin:0!important;height:148px!important;min-height:148px!important;padding:1.6mm 2mm!important;break-inside:avoid!important;page-break-inside:avoid!important;text-align:right!important;direction:rtl!important}
+  .kpis.hero-kpis.k-v{text-align:right!important;direction:rtl!important}
+  .dc-grid{gap:1.5mm!important}
+  section.doc{font-size:10.2pt!important}
   /* ك-395: استعادة ميزانية الصفحات بعد إضافة بطاقات المؤشرات؛ مسافات المتن فقط، بلا تصغير خط أو بطاقة */
-  html body main section.doc{padding-bottom:1mm !important}
-  html body main section.doc p{margin:1mm 0 !important}
-  html body main section.doc ul,html body main section.doc ol{margin:.7mm 0 !important}
-  html body main section.doc li{margin:.3mm 0 !important}
+  html body main section.doc{padding-bottom:1mm!important}
+  html body main section.doc p{margin:1mm 0!important}
+  html body main section.doc ul,html body main section.doc ol{margin:.7mm 0!important}
+  html body main section.doc li{margin:.3mm 0!important}
 }
 
 
@@ -660,7 +674,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   margin:24px 0 6px;border:1px solid var(--line-2);border-radius:var(--radius);
   background:linear-gradient(180deg,rgba(34,195,182,.07),rgba(12,22,38,.4));padding:18px 22px 16px
 }
-.decision .dc-title{
+.decision.dc-title{
   font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:17px;margin:0 0 12px;color:var(--accent)
 }
 .dc-grid{display:grid;gap:8px}
@@ -669,9 +683,9 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .dc-list{margin:4px 0 0;padding-inline-start:20px}
 .dc-list li{margin:4px 0;line-height:1.75}
 .dc-v{font-size:16px;color:var(--ink);font-weight:500}
-.dc-row.risk-high .dc-v{color:var(--danger)}
-.dc-row.risk-med .dc-v{color:var(--warn)}
-.dc-row.risk-low .dc-v{color:var(--ok)}
+.dc-row.risk-high.dc-v{color:var(--danger)}
+.dc-row.risk-med.dc-v{color:var(--warn)}
+.dc-row.risk-low.dc-v{color:var(--ok)}
 .dc-foot{font-size:12.5px;color:var(--faint);margin-top:10px;border-top:1px solid var(--line);padding-top:8px}
 
 /* ---------- مفتاح القراءة ---------- */
@@ -709,10 +723,10 @@ ul.d-kinds li.k-watch::before{background:var(--warn)}
 ul.changes{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 .changes li{display:flex;gap:11px;align-items:baseline}
 .chg-tag{font-size:11.5px;border-radius:999px;padding:2px 10px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--panel-3);flex:0 0 auto}
-.chg.c-new .chg-tag{color:#d7e7ff;background:rgba(77,157,255,.15);border-color:rgba(77,157,255,.40)}
-.chg.c-closed .chg-tag{color:#cdf6e2;background:rgba(51,208,122,.15);border-color:rgba(51,208,122,.40)}
-.chg.c-reclassified .chg-tag{color:#ffe8c4;background:rgba(255,176,46,.15);border-color:rgba(255,176,46,.40)}
-.chg.c-ongoing .chg-tag{color:#cfd8e3;background:rgba(148,163,184,.14);border-color:rgba(148,163,184,.38)}
+.chg.c-new.chg-tag{color:#d7e7ff;background:rgba(77,157,255,.15);border-color:rgba(77,157,255,.40)}
+.chg.c-closed.chg-tag{color:#cdf6e2;background:rgba(51,208,122,.15);border-color:rgba(51,208,122,.40)}
+.chg.c-reclassified.chg-tag{color:#ffe8c4;background:rgba(255,176,46,.15);border-color:rgba(255,176,46,.40)}
+.chg.c-ongoing.chg-tag{color:#cfd8e3;background:rgba(148,163,184,.14);border-color:rgba(148,163,184,.38)}
 
 /* ---------- رموز الأحداث والحالات ---------- */
 .ev-code{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:11.5px;color:var(--accent);background:rgba(34,195,182,.10);border:1px solid rgba(34,195,182,.32);border-radius:6px;padding:0 5px}
@@ -724,10 +738,10 @@ ul.changes{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 .trend.t-up{color:var(--danger)}
 .trend.t-down{color:var(--ok)}
 .trend.t-flat{color:var(--muted)}
-.kpi .k-d{font-size:12px;margin-top:2px;font-family:"<span class="ltr">IBM</span> Plex Mono",monospace}
+.kpi.k-d{font-size:12px;margin-top:2px;font-family:"<span class="ltr">IBM</span> Plex Mono",monospace}
 
 /* ---------- الخط الزمني ---------- */
-.tl-viz .tl-row{display:grid;grid-template-columns:96px 1fr 46px minmax(180px,1.4fr);gap:12px;align-items:center;margin:9px 0}
+.tl-viz.tl-row{display:grid;grid-template-columns:96px 1fr 46px minmax(180px,1.4fr);gap:12px;align-items:center;margin:9px 0}
 .tl-date{font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-size:12px;color:var(--muted)}
 .tl-track{height:9px;border-radius:999px;background:var(--panel-3);overflow:hidden}
 .tl-fill{height:100%;border-radius:999px;width:var(--w,0);animation:tl-grow 1s cubic-bezier(.22,.8,.28,1) both}
@@ -749,15 +763,15 @@ ul.changes{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 @media (max-width:760px){
   .dc-row{grid-template-columns:1fr;gap:2px}
   .dc-l{font-size:12.5px}
-  .tl-viz .tl-row{grid-template-columns:74px 1fr 34px;grid-template-areas:"d t n" "l l l";gap:6px 10px}
+  .tl-viz.tl-row{grid-template-columns:74px 1fr 34px;grid-template-areas:"d t n" "l l l";gap:6px 10px}
   .tl-date{grid-area:d}.tl-track{grid-area:t}.tl-num{grid-area:n}.tl-lbl{grid-area:l}
 }
 
 /* ---------- ملحق موثوقية المصادر ---------- */
 .tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
-.tbl-scroll .rel-tbl{min-width:640px}
+.tbl-scroll.rel-tbl{min-width:640px}
 .rel-tbl td:nth-child(5){max-width:420px}
-@media print{.tbl-scroll{overflow:visible}.tbl-scroll .rel-tbl{min-width:0}}
+@media print{.tbl-scroll{overflow:visible}.tbl-scroll.rel-tbl{min-width:0}}
 .rel-tbl td.rel{
   font-family:"<span class="ltr">IBM</span> Plex Mono",monospace;font-weight:600;text-align:center;color:var(--accent)
 }
@@ -769,18 +783,18 @@ body.daylight{
   --accent:#0b6f66;--info:#1f5f9f;--danger:#a32a24;--warn:#8a5a00;--ok:#176b46;
 }
 body.daylight::before{display:none}
-body.daylight .topbar{background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.85))}
-body.daylight .btn-primary{background:#0b6f66;color:#ffffff}
-body.daylight .cite-ref{color:#0b6f66;background:rgba(11,111,102,.07);border-color:rgba(11,111,102,.30)}
-body.daylight .tag{color:#31465c;background:#f2f5f9;border-color:#c4d0dd}
-body.daylight .tag.t-confirm{color:#7a1d1a;background:#fff1f0;border-color:#c77973}
-body.daylight .tag.t-suspect{color:#7c5000;background:#fff7e6;border-color:#c9a24f}
-body.daylight .tag.t-inter{color:#1d4f87;background:#edf4ff;border-color:#8bb1dd}
-body.daylight .threat.risk-high .val{color:#a32a24}
-body.daylight .map-legend li,body.daylight .lg-num{color:#31465c}
-body.daylight .lg-num{color:#ffffff}
-body.daylight .map-keys{color:#5a7086}
-body.daylight .kpi em{opacity:.95}
+body.daylight.topbar{background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.85))}
+body.daylight.btn-primary{background:#0b6f66;color:#ffffff}
+body.daylight.cite-ref{color:#0b6f66;background:rgba(11,111,102,.07);border-color:rgba(11,111,102,.30)}
+body.daylight.tag{color:#31465c;background:#f2f5f9;border-color:#c4d0dd}
+body.daylight.tag.t-confirm{color:#7a1d1a;background:#fff1f0;border-color:#c77973}
+body.daylight.tag.t-suspect{color:#7c5000;background:#fff7e6;border-color:#c9a24f}
+body.daylight.tag.t-inter{color:#1d4f87;background:#edf4ff;border-color:#8bb1dd}
+body.daylight.threat.risk-high.val{color:#a32a24}
+body.daylight.map-legend li,body.daylight.lg-num{color:#31465c}
+body.daylight.lg-num{color:#ffffff}
+body.daylight.map-keys{color:#5a7086}
+body.daylight.kpi em{opacity:.95}
 
 /* ── تمييز الروابط داخل النص (<span class="ltr">WCAG</span> 2.1 AA — 1.4.1) ──
    عطل ك-72: تساوي الخصوصية يُحسم بالترتيب، فالقاعدة تُركَّب آخر كل الأنماط لتفوز. */
@@ -795,8 +809,9 @@ body.daylight .kpi em{opacity:.95}
 /* شريط واحد: مع شريط الموقع تنتقل أزرار الطباعة والمظهر وحجم الخط إليه ويُخفى شريط الإصدار */
 body:has(.site-nav) .topbar{display:none}
 .sc-hero{margin:20px 0 6px}
-.sc-eyebrow{font-size:14.5px;color:var(--muted);margin:0 0 6px}
-.sc-h1{font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;font-size:clamp(21px,2.05vw,28px);line-height:1.65;margin:0 0 12px;text-wrap:balance}
+.sc-eyebrow{font-size:14.5px;color:var(--muted);margin:0 0 6px;text-align:center}
+.sc-sub{font-size:15.5px;color:var(--ink-2);margin:0 0 10px;text-align:center;line-height:1.8}
+.sc-h1{font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;font-size:clamp(21px,2.05vw,28px);line-height:1.65;margin:0 0 6px;text-wrap:balance;text-align:center}
 .sc-h1 .ltr{white-space:nowrap}
 .sc-lede{font-size:15.5px;line-height:1.9;color:var(--ink-2);margin:0 0 12px;max-width:none}
 .sc-chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px}
@@ -835,6 +850,12 @@ body:has(.site-nav) .topbar{display:none}
 .sc-official-label{font-size:12.5px;color:var(--muted)}
 .sc-official-value{font-family:"IBM Plex Mono",monospace;font-size:18px;line-height:1.35;text-align:right;direction:rtl;color:var(--ink)}
 .sc-official-source{font-size:11.5px;line-height:1.5;color:var(--muted);overflow-wrap:anywhere}
+/* تنسيق مضغوط مقروء لبطاقات المستجدات (قرار المالك 2026-10-31: خفض الاكتظاظ) */
+.sc-official-layer{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:2px 10px;align-items:baseline;padding:6px 0;border-top:1px dashed var(--line)}
+.sc-official-layer:first-child{border-top:0}
+.sc-official-label{color:var(--muted);font-size:13px}
+.sc-official-value{font-weight:700}
+.sc-official-source{grid-column:1 / -1;color:var(--muted);font-size:12px;line-height:1.6}
 .sc-kpi-row{display:grid;gap:16px;direction:rtl}
 .sc-kpi-row-1{grid-template-columns:repeat(4,minmax(0,1fr))}
 .sc-kpi-row-2{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -1151,7 +1172,7 @@ body.daylight .sup-banner{background:#fff7e6;color:#7c5000;border-color:#c9a24f}
   <div class="sn-inner">
     <a class="sn-brand" href="/">
       <span class="sn-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/><path d="M12 11.5v4"/><path d="M9.6 13.2h4.8"/></svg></span>
-      <span class="sn-name">مركز الوعي بالمجال البحري<em>تقارير أمن الملاحة — مملكة البحرين</em></span>
+      <span class="sn-name">مركز الوعي بالمجال البحري <em>تقارير أمن الملاحة — مملكة البحرين</em></span>
     </a>
     <button type="button" class="sn-menu no-print" aria-expanded="false" aria-controls="sn-panel">
       <span class="sn-menu-icon" aria-hidden="true"></span><span data-i18n="menu">القائمة</span>
@@ -1213,14 +1234,14 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
     <div class="threat risk-high"><div class="lbl">مستوى التهديد</div><div class="val">مرتفع</div></div>
     <div>
       <p class="lede">ذاكرة معرفية موثقة للفترة من 28 فبراير إلى 11 أكتوبر 2026، مقسمة على أقسام التقرير الصباحي المعتمد، ومبنية على المصادر الرسمية والمهنية المعلنة.</p>
-      <div class="masthead-meta"><span class="chip">رقم الإصدار <b>و ب <span class="ltr">26/10/9</span> — تراكمي</b></span><span class="chip">آخر تحديث <b class="bidi">2026-10-12T03:40:00Z</b></span><span class="chip">فترة التغطية <b>28 فبراير – 11 أكتوبر 2026 (<span class="ltr">UTC</span>)</b></span><span class="chip">بالمسار الآلي <b class="bidi">37</b></span><span class="chip">مصادر مستشهد بها <b class="bidi">18</b></span></div>
+      <div class="masthead-meta"><span class="chip">رقم الإصدار <b><span class="ltr">26/10/9</span> — تراكمي</b></span><span class="chip">آخر تحديث <b>12 أكتوبر 2026 · 03:40 حسب التوقيت العالمي</b></span><span class="chip">فترة التغطية <b>28 فبراير – 11 أكتوبر 2026 (<span class="ltr">UTC</span>)</b></span><span class="chip">بالمسار الآلي <b class="bidi">37</b></span></div>
     </div>
   </header>
 
   
   
   <div class="kpis"><div class="kpi acc-info reveal"><em></em><div class="k-l">سجلات الأحداث الذرية</div><div class="k-v bidi">145</div><div class="k-n">بعد الدمج والتفكيك — ليس عدد هجمات</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">المسجلات المجمعة من البحث</div><div class="k-v bidi">121</div><div class="k-n">من نتائج الفحص الشهري الموثق</div></div><div class="kpi acc-warn reveal"><em></em><div class="k-l">فترات الفحص</div><div class="k-v bidi">8</div><div class="k-n">من 28 فبراير إلى 11 أكتوبر 2026</div></div><div class="kpi acc-ok reveal"><em></em><div class="k-l">المصادر المعتمدة المفحوصة</div><div class="k-v bidi">37</div><div class="k-n">مسجلة باسمها ورابطها وحالة فحصها</div></div></div>
-  <div class="sc-hero no-print"><p class="sc-eyebrow">السجل التراكمي لأمن الملاحة</p><h2 class="sc-h1">ذاكرة معرفية موثقة للفترة من 28 فبراير إلى 11 أكتوبر 2026، مقسمة على أقسام التقرير الصباحي المعتمد، ومبنية على المصادر الرسمية والمهنية المعلنة</h2><div class="sc-chips"><span class="sc-chip">رقم الإصدار <b><span class="bidi">و ب <span class="ltr">26/10/9</span> — تراكمي</span></b></span><span class="sc-chip">آخر تحديث <b><span class="bidi">2026-10-12T03:40:00Z</span></b></span><span class="sc-chip">فترة التغطية <b>28 فبراير – 11 أكتوبر 2026 (<span class="ltr">UTC</span>)</b></span><span class="sc-chip">مستشهد بها <b><span class="bidi">18</span></b></span></div><div class="sc-grid"><section class="sc-card" aria-label="أهم الأخبار المتعلقة بالأمن البحري"><h2 class="sc-h2">أهم الأخبار المتعلقة بالأمن البحري</h2><div class="sc-row"><div class="sc-l">ما تغيّر</div><div class="sc-v"><p class="sc-gist"></p><p class="sc-more">لا بنود · <a href="/additions.html#sec-00" data-goto="ما تغيّر منذ التقرير السابق" data-alt="/additions.html#sec-00">التفاصيل</a></p></div></div><div class="sc-row"><div class="sc-l">التحذيرات والنشرات الرسمية</div><div class="sc-v"><p class="sc-gist">المركز البريطاني / المركز البحري المشترك</p><p class="sc-more">تحذير واحد · <a href="/reports/.html#sec-06" data-goto="التحذيرات والنشرات الرسمية" data-alt="/reports/.html#sec-06">القسم الرسمي</a></p></div></div><div class="sc-row"><div class="sc-l">ما يُراقب خلال 24–72 ساعة</div><div class="sc-v"><p class="sc-gist"></p><p class="sc-more">لا بنود · <a href="/additions.html#sec-04-sub-02" data-goto="علامات الإنذار المبكر 24–72 ساعة" data-alt="/additions.html#sec-04-sub-02">المؤشرات الكاملة</a></p></div></div><div class="sc-rkey"><span class="rkey-t">مفتاح القراءة:</span><span class="rk k-fact">واقعة مؤكدة</span><span class="rk k-est">تقدير تحليلي</span><span class="rk k-info">بند إعلامي</span><span class="rk k-bg">لا جديد</span><span class="rk k-watch">تحت المراقبة</span></div></section><div class="sc-side"><div class="sc-threat risk-high"><div class="sc-tl">مستوى التهديد</div><div class="sc-tv">مرتفع</div></div><div class="sc-kpis"><div class="sc-kpi acc-info"><div class="sc-kl">سجلات الأحداث الذرية</div><div class="sc-kv bidi">145</div><div class="sc-kn">بعد الدمج والتفكيك — ليس عدد هجمات</div></div><div class="sc-kpi acc-ok"><div class="sc-kl">المسجلات المجمعة من البحث</div><div class="sc-kv bidi">121</div><div class="sc-kn">من نتائج الفحص الشهري الموثق</div></div><div class="sc-kpi acc-warn"><div class="sc-kl">فترات الفحص</div><div class="sc-kv bidi">8</div><div class="sc-kn">من 28 فبراير إلى 11 أكتوبر 2026</div></div><div class="sc-kpi acc-ok"><div class="sc-kl">المصادر المعتمدة المفحوصة</div><div class="sc-kv bidi">37</div><div class="sc-kn">مسجلة باسمها ورابطها وحالة فحصها</div></div></div></div></div></div>
+  <div class="sc-hero no-print"><h2 class="sc-h1">التقرير اليومي للأمن البحري والأوضاع الراهنة في المنطقة</h2><p class="sc-sub">ذاكرة معرفية موثقة للفترة من 28 فبراير إلى 11 أكتوبر 2026، مقسمة على أقسام التقرير الصباحي المعتمد، ومبنية على المصادر الرسمية والمهنية المعلنة</p><div class="sc-chips"><span class="sc-chip">رقم الإصدار <b><span class="ltr">26/10/9</span> — تراكمي</b></span><span class="sc-chip">آخر تحديث <b>12 أكتوبر 2026 · 03:40 حسب التوقيت العالمي</b></span><span class="sc-chip">فترة التغطية <b>28 فبراير – 11 أكتوبر 2026 (<span class="ltr">UTC</span>)</b></span></div><div class="sc-grid"><section class="sc-card" aria-label="أهم الأخبار المتعلقة بالأمن البحري"><h2 class="sc-h2">أهم الأخبار المتعلقة بالأمن البحري</h2><div class="sc-row"><div class="sc-l">خلال 24 ساعة السابقة</div><div class="sc-v"><p class="sc-gist"></p><p class="sc-more">لا بنود · <a href="/additions.html#sec-00" data-goto="ما تغيّر منذ التقرير السابق" data-alt="/additions.html#sec-00">التفاصيل</a></p></div></div><div class="sc-row"><div class="sc-l">التحذيرات والنشرات الرسمية النشطة</div><div class="sc-v"><p class="sc-gist">المركز البريطاني / المركز البحري المشترك</p><p class="sc-more">لا تحذيرات · <a href="/additions.html#sec-01" data-goto="التحذيرات والنشرات الرسمية" data-alt="/additions.html#sec-01">القسم الرسمي</a></p></div></div><div class="sc-row"><div class="sc-l">ما يُراقب خلال 24 ساعة</div><div class="sc-v"><p class="sc-gist"></p><p class="sc-more">لا بنود · <a href="/additions.html#sec-04" data-goto="المراقبة المستمرة" data-alt="/additions.html#sec-04">المؤشرات الكاملة</a></p></div></div><div class="sc-rkey"><span class="rkey-t">مفتاح القراءة:</span><span class="rk k-fact">واقعة مؤكدة</span><span class="rk k-est">تقدير تحليلي</span><span class="rk k-info">بند إعلامي</span><span class="rk k-bg">لا جديد</span><span class="rk k-watch">تحت المراقبة</span></div></section><div class="sc-side"><div class="sc-threat risk-high"><div class="sc-tl">مستوى التهديد</div><div class="sc-tv">مرتفع</div></div><div class="sc-kpis"><div class="sc-kpi acc-info"><div class="sc-kl">سجلات الأحداث الذرية</div><div class="sc-kv bidi">145</div><div class="sc-kn">بعد الدمج والتفكيك — ليس عدد هجمات</div></div><div class="sc-kpi acc-ok"><div class="sc-kl">المسجلات المجمعة من البحث</div><div class="sc-kv bidi">121</div><div class="sc-kn">من نتائج الفحص الشهري الموثق</div></div><div class="sc-kpi acc-warn"><div class="sc-kl">فترات الفحص</div><div class="sc-kv bidi">8</div><div class="sc-kn">من 28 فبراير إلى 11 أكتوبر 2026</div></div><div class="sc-kpi acc-ok"><div class="sc-kl">المصادر المعتمدة المفحوصة</div><div class="sc-kv bidi">37</div><div class="sc-kn">مسجلة باسمها ورابطها وحالة فحصها</div></div></div></div></div></div>
   
   <div class="notice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v6c0 4.4-2.9 7.6-7 9-4.1-1.4-7-4.6-7-9V6z"/></svg><div>هذا السجل ذاكرة تراكمية للمرجع، وليس حصيلة هجمات. الرقم 145 يمثل سجلات ذرية بعد الدمج والتفكيك، ويلزم قراءته مع التعارضات والفجوات المسجلة.</div></div>
   <div class="rkey no-print"><span class="rkey-t">مفتاح القراءة:</span><span class="rk k-fact">واقعة مؤكدة</span><span class="rk k-est">تقدير تحليلي</span><span class="rk k-info">بند إعلامي</span><span class="rk k-bg">لا جديد</span><span class="rk k-watch">تحت المراقبة</span></div>
@@ -1422,7 +1443,7 @@ var s=parseFloat(localStorage.getItem('mn-scale')||'1');if(s&&s!==1)b.style.zoom
 
   <footer class="foot">
     <b>ملاحظة مهنية:</b> لا تُجمع البلاغات كعدد هجمات، ولا يُنسب أي فعل إلى جهة إلا بسند رسمي معلن، ويُعرض التعارض بدل حسمه بالتخمين.
-    <br><b>وقت الإصدار:</b> <bdi class="bidi">2026-10-12T03:40:00Z</bdi> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
+    <br><b>وقت الإصدار:</b> <b>12 أكتوبر 2026 · 03:40 حسب التوقيت العالمي</b> — <b>المرجع الزمني:</b> <span class="ltr">UTC</span>.
     
   </footer>
 </div>
