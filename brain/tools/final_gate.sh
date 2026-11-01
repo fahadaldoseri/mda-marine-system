@@ -189,6 +189,11 @@ step "مخطط العلامة الثابت" 2 python3 "$B/validators/check_mark_
 step_strict "اختبارات المراجعة الثانية (أ · ب · ج · د · هـ · ز)" bash "$B/tests/test_review2.sh" "$D"
 step_strict "اختبار انحدار المصلح (12→23)" bash "$B/tests/test_repair_regression.sh"
 step "تطابق النص المبني مع النص النهائي" 2 python3 "$B/tools/text_hash_guard.py" --date "$D" --stage verify
+# بوابات تغطية المصادر: يجب أن يكون الاستدعاء قبل exit؛ كان الاستدعاء القديم بعده
+# فلا يُنفَّذ، ما يسمح بسقوط مصدر من التشغيل دون منع التسليم.
+step "تغطية مسارات المصادر" 2 python3 "$B/validators/check_source_route_coverage.py" --brain "$B" --date "$D"
+step "تغطية المصادر في دفتر الوقائع" 2 python3 "$B/validators/check_source_daily_coverage.py" \
+  --brain "$B" --date "$D" --days 30 --json-out "$LOGDIR/source-daily-coverage.json"
 echo "----- الخلاصة -----" | tee -a "$REP"
 cat "$REP" | tail -14
 python3 - "$D" "$WORST" "$LOGDIR" "$B" <<'PY'
@@ -247,6 +252,3 @@ echo "السجلات: $LOGDIR"
 # ── حلقة التعلم الذاتي (مهارة superpowers-method) — لا تمنع، وتسجّل في كل تشغيل ──
 python3 "$B/tools/skill_lessons.py" --date "$D" || true
 exit "$WORST"
-
-# بوابة تغطية مسارات المصادر (جولة 2026-10-29)
-python3 "$B/validators/check_source_route_coverage.py" --date "${DATE:-$(date -u +%F)}" || exit 1
