@@ -1953,7 +1953,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
                     _strip = _TC.zones_strip(_zj)
             except Exception as e:  # لا يُسقط فشل الشريط بناء التقرير
                 print(f"تنبيه: تعذر توليد شريط نسب القطاعات ({e})", file=sys.stderr)
-            hero_map_html = hero_map(_hero_map_source, extra_html=_strip)
+            hero_map_html = "" if mode == "additions" else hero_map(_hero_map_source, extra_html=_strip)
             # تُحضر كتلة الطباعة لكل سطح؛ سياسة الإضافات تحدد موضعها فقط.
             print_map_html = hero_map(_hero_map_source, print_mode=True)
         except Exception as e:  # لا يُسقط فشل الخريطة بناء التقرير
