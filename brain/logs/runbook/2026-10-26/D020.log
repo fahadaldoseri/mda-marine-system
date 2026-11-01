@@ -1,2 +1,0 @@
-سُجّل فقط — لم يُنفَّذ (RUNBOOK_DRY_STEPS: وضع معزول)
-الأمر المعتاد: bash -lc B="$PWD"; export B SITE; bash tools/check_live.sh --compare 2026-10-26; rc=$?; exit $rc

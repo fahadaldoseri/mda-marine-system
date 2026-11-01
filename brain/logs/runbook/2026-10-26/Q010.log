@@ -1,2 +1,0 @@
-سُجّل فقط — لم يُنفَّذ (RUNBOOK_DRY_STEPS: وضع معزول)
-الأمر المعتاد: bash -lc B="$PWD"; export B SITE; python3 validators/check_library_use.py --date 2026-10-26; python3 validators/check_libraries_skills.py; rc=$?; exit $rc
