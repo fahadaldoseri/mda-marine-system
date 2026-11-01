@@ -21,6 +21,25 @@ def test_positive_on_real_output():
     assert problems == [], problems
 
 
+def test_imo_confirmed_attacks_card_is_present_and_uses_one_metric_source():
+    import json
+    registry = json.loads((BRAIN / 'appendices/card_registry.json').read_text(encoding='utf-8'))
+    card = next((item for item in registry['hero_kpis']['cards'] if item['id'] == 'imo-confirmed-attacks'), None)
+    assert card is not None, 'بطاقة IMO الثامنة مفقودة من سجل hero_kpis'
+    assert card['row'] == 2
+    assert card['source'] == {'kind': 'kpis_totals', 'id': 'imo-confirmed-attacks', 'field': 'today'}
+    assert {layer['id'] for layer in card['layers'].values()} == {'imo-confirmed-attacks'}
+
+
+def test_imo_confirmed_attacks_value_drift_is_detectable():
+    import json
+    metrics = json.loads((BRAIN / 'web/kpis-totals' / f'{DATE}.json').read_text(encoding='utf-8'))
+    metric = next((item for item in metrics['metrics'] if item['id'] == 'imo-confirmed-attacks'), None)
+    assert metric is not None, 'مقياس IMO الثامن مفقود من ملف المقاييس'
+    assert str(metric['today']) == '0'
+    assert str(metric['cumulative']) == '122'
+
+
 def test_negative_tampered_cumulative(tmp_path):
     dst = tmp_path / 'dist'
     for sub in ('reports', 'reports/en'):

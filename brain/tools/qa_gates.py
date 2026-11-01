@@ -171,6 +171,8 @@ def tight(s: str) -> str:
 def gate_parity(date: str):
     src = read(B / "reports" / f"{date}-sectioned.md")
     txt = norm(pdf_text(SITE / "dist" / "reports" / "pdf" / f"{date}.pdf"))
+    if print_pipeline_disabled() and not txt:
+        return True, "PDF مستثنى — الطباعة معطّلة بطلب المالك في المانيفست", False
     if not src or not txt:
         return False, "المصدر النصي أو PDF مفقود", True
     heads = [norm(h.lstrip("# ").strip()) for h in src.splitlines() if h.startswith("## ")]
@@ -235,7 +237,7 @@ def print_pipeline_disabled() -> bool:
     """هل خط الطباعة معطّل بطلب المالك في المانيفست؟ (يُعاد التسليح تلقائيًا عند تفعيله)"""
     try:
         rb = json.loads(read(B / "runbook" / "runbook.json"))
-    except Exception:
+    except (json.JSONDecodeError, AttributeError):
         return False
     if isinstance(rb.get("print"), dict) and rb["print"].get("disabled") is True:
         return True
@@ -247,6 +249,8 @@ def print_pipeline_disabled() -> bool:
 
 def gate_format(date: str):
     pdf = SITE / "dist" / "reports" / "pdf" / f"{date}.pdf"
+    if not pdf.exists() and print_pipeline_disabled():
+        return True, "التعبئة والفجوات مستثناة — الطباعة معطّلة بطلب المالك", False
     if not pdf.exists():
         return False, "ملف PDF غير موجود", True
     out = subprocess.run([sys.executable, str(B / "validators" / "check_pdf_format.py"),
@@ -276,6 +280,10 @@ def gate_toc_rtl_footer(date: str):
     if "class=\"ltr\"" not in html:
         problems.append("لا يوجد عزل اتجاهي .ltr في الصفحة")
     foot = len(re.findall(r"صفحة\s*\d+\s*من\s*\d+", txt)) or txt.count("صفحة ")
+    if not pages and print_pipeline_disabled():
+        if problems:
+            return False, " · ".join(problems), False
+        return True, "الفهرس والاتجاه مستثنيان من قياس PDF — الطباعة معطّلة بطلب المالك", False
     if not pages:
         problems.append("عدد صفحات PDF غير معروف")
     toc = re.findall(r"^(.+?)\s+(\d{1,3})\s*$", txt, re.M)
@@ -290,6 +298,8 @@ def gate_toc_rtl_footer(date: str):
 def gate_docx(date: str):
     d = B / "reports" / "docx"
     cands = sorted(d.glob(f"*{date}*.docx"), key=lambda p: p.stat().st_mtime, reverse=True)
+    if not cands and print_pipeline_disabled():
+        return True, "نسخة Word مستثناة — الطباعة معطّلة بطلب المالك في المانيفست", False
     if not cands:
         return False, "لا توجد نسخة Word للإصدار", True
     doc = cands[0]
@@ -314,9 +324,10 @@ def gate_docx(date: str):
 
 def gate_package(date: str):
     files = [SITE / "dist" / "reports" / f"{date}.html",
-             SITE / "dist" / "reports" / "pdf" / f"{date}.pdf",
              B / "reports" / f"{date}-sectioned.md",
              B / "web" / "meta" / f"{date}.json"]
+    if not print_pipeline_disabled():
+        files.insert(1, SITE / "dist" / "reports" / "pdf" / f"{date}.pdf")
     missing = [str(f) for f in files if not f.exists()]
     if missing:
         return False, "ملفات ناقصة في الحزمة: " + "، ".join(missing), True

@@ -45,6 +45,35 @@ import codes  # سياسة عرض رموز الأحداث (كامل مرة وا�
 import screen_layer as SCR  # طبقة الشاشة: القرار فوق الطيّ، للشاشة فقط (لا تمسّ الطباعة)
 from card_measurements import count_rendered_fragment
 
+IMO_INCIDENTS_JSON = Path(__file__).resolve().parents[2] / "brain-marine-news" / "appendices" / "imo-incidents.json"
+AR_MONTHS = {
+    1: "يناير", 2: "فبراير", 3: "مارس", 4: "أبريل", 5: "مايو", 6: "يونيو",
+    7: "يوليو", 8: "أغسطس", 9: "سبتمبر", 10: "أكتوبر", 11: "نوفمبر", 12: "ديسمبر",
+}
+
+
+def _imo_reference_line() -> str:
+    """سطر مرجعي لا يُعرض بلا قراءة ناجحة من سجل IMO الحاكم."""
+    try:
+        raw = json.loads(IMO_INCIDENTS_JSON.read_text(encoding="utf-8"))
+        totals = raw.get("totals") if isinstance(raw, dict) else None
+        source = raw.get("source") if isinstance(raw, dict) else None
+        confirmed = totals.get("confirmed_incidents") if isinstance(totals, dict) else None
+        updated = source.get("list_updated") if isinstance(source, dict) else None
+        if isinstance(confirmed, bool) or not isinstance(confirmed, int) or confirmed < 0:
+            raise ValueError("totals.confirmed_incidents ليس عددًا صحيحًا غير سالبًا")
+        parsed = datetime.strptime(str(updated), "%Y-%m-%d")
+    except (OSError, json.JSONDecodeError, TypeError, ValueError, AttributeError) as exc:
+        raise BuildError(f"مصدر IMO الحاكم غير قابل للقراءة لسطر المرجع: {IMO_INCIDENTS_JSON}: {exc}") from exc
+    date_label = f"{parsed.day} {AR_MONTHS[parsed.month]} {parsed.year}"
+    return (
+        '<p class="hmap-imo-reference" data-source="imo-incidents.json">'
+        '<span>هجمات مؤكدة على سفن (IMO):</span> '
+        f'<bdi class="bidi" dir="ltr">{confirmed}</bdi> · '
+        f'<span>آخر تحديث</span> <bdi class="bidi" dir="ltr">{date_label}</bdi>'
+        '</p>'
+    )
+
 
 # ----------------------------------------------------------------------------
 # نظام التصميم — «غرفة عمليات بحرية»: داكن، فيروزي واحد، بلا زخرفة
@@ -284,7 +313,7 @@ a.bidi{white-space:normal}
 .kpis{display:grid;gap:16px;margin:24px 0 8px;direction:rtl}
 .kpi-row{display:grid;gap:16px;direction:rtl}
 .kpi-row-1{grid-template-columns:repeat(4,minmax(0,1fr))}
-.kpi-row-2{grid-template-columns:repeat(3,minmax(0,1fr))}
+.kpi-row-2{grid-template-columns:repeat(4,minmax(0,1fr))}
 .kpi{
   background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);
   padding:15px 16px;position:relative;overflow:hidden;height:148px;min-height:148px;
@@ -446,6 +475,8 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .hmap-zoom{border-inline-start:1.5px solid var(--accent);background:var(--map-sea);min-width:0;align-self:stretch;display:flex;flex-direction:column}
 .hmap-zsvg{display:block;width:100%;height:auto}
 .hz-cap{font-size:13px;color:var(--ink-2);background:var(--panel);padding:4px 10px;border-top:1px solid var(--line-2);margin-top:auto}
+.hmap-imo-reference{margin:7px 0 0;padding-top:6px;border-top:1px solid var(--line-2);font-size:12px;line-height:1.5;color:var(--muted)}
+.hmap-imo-reference .bidi{font-family:"IBM Plex Mono",monospace;color:var(--ink-2);font-variant-numeric:tabular-nums}
 @media (max-width:1000px){.hmap-wrap{grid-template-columns:minmax(0,1fr)}.hmap-zoom{border-inline-start:0;border-top:1.5px solid var(--accent)}}
 .hmap-svg{display:block;width:100%;height:auto;max-width:100%}
 /* خريطة الشاشة: علامات وتسميات أكبر قليلًا للقراءة من مسافة */
@@ -815,7 +846,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .kpis.hero-kpis .k-risk-patterns{display:block !important;width:100% !important;margin:0 0 1.5mm !important}
   .kpis.hero-kpis .kpi-row{display:grid !important;gap:4mm !important;width:100% !important;margin:0 0 4mm !important;direction:rtl !important}
   .kpis.hero-kpis .kpi-row-1{grid-template-columns:repeat(4,minmax(0,1fr)) !important}
-  .kpis.hero-kpis .kpi-row-2{grid-template-columns:repeat(3,minmax(0,1fr)) !important}
+  .kpis.hero-kpis .kpi-row-2{grid-template-columns:repeat(4,minmax(0,1fr)) !important}
   .kpis.hero-kpis .kpi-row > .kpi{display:flex !important;width:auto !important;margin:0 !important;height:148px !important;min-height:148px !important;padding:1.6mm 2mm !important;break-inside:avoid !important;page-break-inside:avoid !important;text-align:right !important;direction:rtl !important}
   .kpis.hero-kpis .k-v{text-align:right !important;direction:rtl !important}
   .dc-grid{gap:1.5mm !important}
@@ -1941,6 +1972,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
     hero_map_html = ""
     print_map_html = ""
     if map_html and not doc_mode:
+        _imo_line = _imo_reference_line()
         try:
             from map_gulf import build_map as _build_map_hero
 
@@ -1953,6 +1985,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
                     _strip = _TC.zones_strip(_zj)
             except Exception as e:  # لا يُسقط فشل الشريط بناء التقرير
                 print(f"تنبيه: تعذر توليد شريط نسب القطاعات ({e})", file=sys.stderr)
+            _strip = _strip + _imo_line
             hero_map_html = "" if mode == "additions" else hero_map(_hero_map_source, extra_html=_strip)
             # تُحضر كتلة الطباعة لكل سطح؛ سياسة الإضافات تحدد موضعها فقط.
             print_map_html = hero_map(_hero_map_source, print_mode=True)
@@ -1964,8 +1997,8 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
     kpis = meta.get("hero_kpis", [])
     if kpis:
         modern = _modern_hero_kpis(report_date)
-        if modern and (len(kpis) != 7 or sorted(k.get("row") for k in kpis) != [1, 1, 1, 1, 2, 2, 2]):
-            raise BuildError("hero_kpis يجب أن يحوي صفًا أول من 4 وصفًا ثانيًا من 3؛ فشل مغلق")
+        if modern and (len(kpis) != 8 or sorted(k.get("row") for k in kpis) != [1, 1, 1, 1, 2, 2, 2, 2]):
+            raise BuildError("hero_kpis يجب أن يحوي صفًا أول من 4 وصفًا ثانيًا من 4؛ فشل مغلق")
         if modern:
             def _hero_tile(k):
                 acc = k.get("accent", "ok")

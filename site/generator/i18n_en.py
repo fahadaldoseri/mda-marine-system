@@ -164,8 +164,41 @@ def load_glossary() -> dict[str, str]:
     return gl
 
 
+def _en_number_list(raw: str) -> str:
+    """يحوّل قائمة أرقام عربية الفاصلة إلى قائمة إنجليزية: «39، 52» ← «39, 52»."""
+    parts = [part.strip() for part in re.split(r"[،,]", raw) if part.strip()]
+    return ", ".join(parts)
+
+
 def localize_patterns(s: str) -> str | None:
     n = norm(s)
+    m = re.fullmatch(r"المؤكد:\s*(\d+)\s*·\s*المرجّح:\s*(\d+)\s*·\s*غير المؤكد:\s*(\d+)", n)
+    if m:
+        return f"Confirmed: {m.group(1)} · probable: {m.group(2)} · unconfirmed: {m.group(3)}"
+    m = re.fullmatch(r"فُحصت\s+(\d+)\s+تغذية\s+من\s+(\d+)\s+تغذية\.", n)
+    if m:
+        return f"Checked {m.group(1)} of {m.group(2)} feeds."
+    m = re.fullmatch(r"بلغ مجموع العناصر المقروءة\s+(\d+)\s+عنصرًا\.", n)
+    if m:
+        return f"Total items read: {m.group(1)}."
+    m = re.fullmatch(r"تعذّرت\s+(\d+)\s+تغذية\s+من\s+أصل\s+(\d+)\.", n)
+    if m:
+        return f"{m.group(1)} of {m.group(2)} feeds failed."
+    m = re.fullmatch(r"سُجلت مرجعية يدوية للمصدرين\s+([\d،\s]+?)\s+—\s+العدد\s+(\d+)\.", n)
+    if m:
+        return (f"Manual reference recorded for sources {_en_number_list(m.group(1))}"
+                f" — count {m.group(2)}.")
+    m = re.fullmatch(r"وُسمت مصادر متقادمة وفق حد\s+(\d+)\s+يومًا:\s+([\d،\s]+?)\s+—\s+العدد\s+(\d+)؛\s+"
+                     r"لم يُستند إليها وحدها في إثبات واقعة جديدة\.", n)
+    if m:
+        return (f"Sources marked stale at the {m.group(1)}-day threshold: "
+                f"{_en_number_list(m.group(2))} — count {m.group(3)}; "
+                "not relied on alone to establish a new incident.")
+    m = re.fullmatch(r"سُجل تعذر مساري المصدرين\s+([\d،\s]+?)\s+في محاولات فرعية،\s+"
+                     r"مع بقاء حالة التغذية الكلية ناجحة عبر المسارات المعتمدة البديلة\.", n)
+    if m:
+        return (f"Sub-attempt failures recorded for sources {_en_number_list(m.group(1))}, "
+                "while overall feed status stayed successful through the approved alternative paths.")
     m = re.fullmatch(r"(\d{1,2})\s+(" + "|".join(MONTHS) + r")\s+(\d{4})\s+·\s+(\d{2}:\d{2})\s+حسب التوقيت العالمي", n)
     if m:
         return f"{m.group(1)} {MONTHS[m.group(2)]} {m.group(3)} · {m.group(4)} UTC"

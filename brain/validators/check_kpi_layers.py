@@ -28,6 +28,11 @@ def _load(path: pathlib.Path):
     return json.loads(path.read_text(encoding='utf-8')) if path.exists() else None
 
 
+def _metric_by_id(metrics: dict, metric_id: str) -> dict | None:
+    return next((metric for metric in (metrics.get('metrics') or [])
+                 if isinstance(metric, dict) and metric.get('id') == metric_id), None)
+
+
 def _card_block(html: str, card_id: str) -> str | None:
     i = html.find(f'data-kpi-id="{card_id}"')
     if i < 0:
@@ -57,6 +62,11 @@ def check(date: str, dist_root: pathlib.Path, brain: pathlib.Path) -> list[str]:
     if rng.get('days_covered') != rng.get('days_total'):
         problems.append(f"دفتر الأحداث ناقص: {rng.get('days_covered')} من {rng.get('days_total')} يومًا")
     by_id = {m['id']: m for m in metrics.get('metrics') or []}
+    meta_path = dist_root.parent / 'sources' / 'meta' / f'{date}.json'
+    meta = _load(meta_path)
+    if not meta:
+        problems.append(f'ملف meta الحاكم مفقود: {meta_path}')
+    meta_by_id = {c.get('id'): c for c in (meta or {}).get('hero_kpis') or [] if isinstance(c, dict)}
 
     cards = [c for c in (registry.get('hero_kpis') or {}).get('cards') or [] if c.get('layers')]
     if not cards:
@@ -70,6 +80,27 @@ def check(date: str, dist_root: pathlib.Path, brain: pathlib.Path) -> list[str]:
 
     for card in cards:
         cid = card['id']
+        source = card.get('source') or {}
+        if source.get('kind') == 'kpis_totals':
+            metric_id = source.get('id')
+            metric = _metric_by_id(metrics, str(metric_id or ''))
+            if metric is None:
+                problems.append(f'{cid}: مقياس القيمة الأساسية غير موجود: {metric_id}')
+            layer_ids = {spec.get('id') for spec in (card.get('layers') or {}).values()}
+            if layer_ids != {metric_id} or any(spec.get('kind') != 'kpis_totals' for spec in (card.get('layers') or {}).values()):
+                problems.append(f'{cid}: القيمة الأساسية والطبقتان لا تستخدم المقياس نفسه: {metric_id} مقابل {sorted(layer_ids)}')
+            actual_card = meta_by_id.get(cid)
+            if actual_card is None:
+                problems.append(f'{cid}: البطاقة غير موجودة في meta الحاكم')
+            elif metric is not None:
+                expected_value = metric.get(source.get('field', 'today'))
+                if str(actual_card.get('value')).strip() != str(expected_value).strip():
+                    problems.append(f'{cid}: قيمة البطاقة = «{actual_card.get("value")}» والمصدر = «{expected_value}»')
+                for layer_name, spec in (card.get('layers') or {}).items():
+                    expected_layer = metric.get(spec.get('field', layer_name))
+                    actual_layer = actual_card.get(layer_name)
+                    if str(actual_layer).strip() != str(expected_layer).strip():
+                        problems.append(f'{cid}: meta طبقة {layer_name} = «{actual_layer}» والمصدر = «{expected_layer}»')
         for kind, spec in (card.get('layers') or {}).items():
             mid = spec.get('id')
             met = by_id.get(mid)
@@ -116,4 +147,6 @@ def main() -> int:
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)

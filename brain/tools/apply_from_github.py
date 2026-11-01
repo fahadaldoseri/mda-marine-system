@@ -117,7 +117,7 @@ def main():
                                capture_output=True, text=True, env=dict(os.environ, BRAIN_DIR=str(brain), SITE_DIR=str(site)))
             if r.returncode != 0:
                 raise RuntimeError("verify فشل بعد التطبيق:\n" + "\n".join(r.stdout.splitlines()[-8:]))
-    except Exception as e:  # استعادة كاملة
+    except (OSError, RuntimeError) as e:  # استعادة أخطاء النسخ/التحقق فقط
         for rel, dst, bak in done:
             if bak is not None and bak.exists():
                 shutil.copy2(bak, dst)

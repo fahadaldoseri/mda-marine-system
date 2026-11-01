@@ -166,8 +166,8 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
     hero_kpis = meta.get("hero_kpis") or []
     if hero_kpis:
         if report_date >= HERO_KPI_MODERN_FROM:
-            if len(hero_kpis) != 7 or sorted(k.get("row") for k in hero_kpis) != [1, 1, 1, 1, 2, 2, 2]:
-                raise ValueError("hero_kpis يجب أن يحوي صفًا أول من 4 وصفًا ثانيًا من 3؛ فشل مغلق")
+            if len(hero_kpis) != 8 or sorted(k.get("row") for k in hero_kpis) != [1, 1, 1, 1, 2, 2, 2, 2]:
+                raise ValueError("hero_kpis يجب أن يحوي صفًا أول من 4 وصفًا ثانيًا من 4؛ فشل مغلق")
             def _screen_tile(k):
                 acc = k.get("accent", "ok")
                 if acc not in ("ok", "info", "warn", "danger"):
@@ -267,7 +267,7 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
     warning_count = (int(targets["warning_count"]) if "warning_count" in targets
                      else len(warning_texts))
     warning_href = targets.get("warning_href") or f"/reports/{report_date}.html#sec-06"
-    warning_gist = " · ".join(warning_texts)
+    warning_gist = _gist(warning_texts, limit=2)
     rows.append(
         '<div class="sc-row"><div class="sc-l">التحذيرات والنشرات الرسمية النشطة</div>'
         f'<div class="sc-v"><p class="sc-gist">{inline(warning_gist)}</p>'
@@ -365,7 +365,7 @@ body:has(.site-nav) .topbar{display:none}
 .sc-official-source{grid-column:1 / -1;color:var(--muted);font-size:12px;line-height:1.6}
 .sc-kpi-row{display:grid;gap:16px;direction:rtl}
 .sc-kpi-row-1{grid-template-columns:repeat(4,minmax(0,1fr))}
-.sc-kpi-row-2{grid-template-columns:repeat(3,minmax(0,1fr))}
+.sc-kpi-row-2{grid-template-columns:repeat(4,minmax(0,1fr))}
 .sc-kpi{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;position:relative;overflow:hidden;height:148px;min-height:148px;text-align:right;direction:rtl;display:flex;flex-direction:column}
 .sc-kpi:before{content:"";position:absolute;inset-inline-start:0;top:0;bottom:0;width:3px;background:var(--accent)}
 .sc-kpi.acc-info:before{background:var(--info)}.sc-kpi.acc-warn:before{background:var(--warn)}

@@ -104,6 +104,20 @@
         "cumulative-2026/event-ledger-master.json#events"
       ],
       "confidence": "عالية"
+    },
+    {
+      "id": "imo-confirmed-attacks",
+      "title": "هجمات مؤكدة على سفن",
+      "today": 0,
+      "cumulative": 122,
+      "updated": "2026-10-30",
+      "definition": "واقعة مؤكدة على سفينة تجارية مدرجة في قائمة IMO الرسمية؛ القائمة مرجع الحوادث المؤكدة ولا تُرفع فيها الروايات.",
+      "basis": "القائمة الرسمية للمنظمة البحرية الدولية (IMO) للوقائع المؤكدة على السفن التجارية؛ الرقم لا يُقارن بعدد سجلات المشروع الداخلية لأن المعيارين مختلفان.",
+      "comparison_warning": "الرقم 122 معياره قائمة IMO الرسمية؛ لا يُقارن بعدد سجلات المشروع الداخلية لأن المعيارين مختلفان.",
+      "sources": [
+        "appendices/imo-incidents.json#totals.confirmed_incidents"
+      ],
+      "confidence": "عالية"
     }
   ]
 }

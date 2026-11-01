@@ -23,6 +23,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DAILY_DIR = ROOT / "cumulative-2026" / "daily"
 MASTER_PATH = ROOT / "cumulative-2026" / "event-ledger-master.json"
 OUTPUT_DIR = ROOT / "web" / "kpis-totals"
+IMO_PATH = ROOT / "appendices" / "imo-incidents.json"
 START_DATE = dt.date(2026, 2, 28)
 
 SOURCE_DAILY = "cumulative-2026/daily/*.json"
@@ -396,6 +397,78 @@ def make_metric(
     }
 
 
+def make_imo_attacks(today: dt.date) -> dict[str, Any]:
+    """مقياس «هجمات مؤكدة على سفن» من القائمة الرسمية للمنظمة البحرية الدولية.
+
+    المصدر الحاكم الوحيد هو ``appendices/imo-incidents.json``؛ الرقم لا يُشتق من
+    دفتر المشروع لأن معيار القائمة الرسمية مختلف، ولذلك تُثبَّت المقارنة كتحذير.
+    """
+    base = {
+        "id": "imo-confirmed-attacks",
+        "title": "هجمات مؤكدة على سفن",
+        "today": None,
+        "cumulative": None,
+        "updated": None,
+        "definition": "واقعة مؤكدة على سفينة تجارية مدرجة في قائمة المنظمة البحرية الدولية الرسمية.",
+        "basis": "عدّ مباشر من القائمة الرسمية للمنظمة البحرية الدولية (appendices/imo-incidents.json)؛ لا تُرفع فيها الروايات ولا تُحتسب غير المؤكدة.",
+        "sources": ["appendices/imo-incidents.json"],
+        "confidence": "عالية",
+    }
+    if not IMO_PATH.exists():
+        base["basis"] += " ملف القائمة الرسمية مفقود؛ لذلك القيمتان null."
+        base["confidence"] = "غير متاح"
+        return base
+    try:
+        data = json.loads(IMO_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        base["basis"] += " تعذّرت قراءة ملف القائمة الرسمية؛ لذلك القيمتان null."
+        base["confidence"] = "غير متاح"
+        return base
+    incidents = data.get("incidents") or []
+    totals = data.get("totals") or {}
+    cumulative = totals.get("confirmed_incidents")
+    if cumulative is None:
+        cumulative = len(incidents)
+    month_en = today.strftime("%B")
+    month_ar = {"January": "يناير", "February": "فبراير", "March": "مارس", "April": "أبريل",
+                "May": "مايو", "June": "يونيو", "July": "يوليو", "August": "أغسطس",
+                "September": "سبتمبر", "October": "أكتوبر", "November": "نوفمبر",
+                "December": "ديسمبر"}.get(month_en, month_en)
+    day_hits = 0
+    for inc in incidents:
+        raw = str(inc.get("date") or "").strip()
+        nums = re.findall(r"\d+", raw)
+        if not nums:
+            continue
+        if int(nums[0]) != today.day:
+            continue
+        if month_en.lower() in raw.lower() or month_ar in raw:
+            day_hits += 1
+    stamp = None
+    explicit = data.get("retrieved")
+    if explicit:
+        try:
+            stamp = dt.date.fromisoformat(str(explicit))
+        except Exception:
+            stamp = None
+    if stamp is None:
+        try:
+            stamp = dt.date.fromtimestamp(IMO_PATH.stat().st_mtime)
+        except Exception:
+            stamp = None
+    base.update({
+        "today": day_hits,
+        "cumulative": cumulative,
+        "updated": stamp.isoformat() if stamp else None,
+    })
+    base["basis"] += " قاعدة updated: تاريخ آخر تحديث لملف القائمة الرسمية (mtime) لأن القائمة تُؤرَّخ بيوم وشهر بلا سنة."
+    base["definition"] = data.get("definition") or base["definition"]
+    warn = data.get("comparison_warning")
+    if warn:
+        base["basis"] += " " + str(warn)
+    return base
+
+
 def make_deaths(rows: list[dict[str, Any]], today: dt.date) -> dict[str, Any]:
     selected = [event for event in rows if numeric_deaths(event) is not None]
     today_selected = [event for event in selected if event["_event_date"] == today.isoformat()]
@@ -478,6 +551,7 @@ def build_payload(target: dt.date) -> tuple[dict[str, Any], dict[str, Any]]:
             "عالية",
         ),
         make_deaths(range_rows, target),
+        make_imo_attacks(target),
         make_metric(
             "fire-incidents",
             range_rows,

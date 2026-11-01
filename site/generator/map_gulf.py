@@ -180,16 +180,29 @@ def _maritime_boundary_paths():
     return paths
 
 
+# هندسة مسارات مضيق هرمز من المخطط الرسمي المحفوظ في imo-tss-derived.json.
+# الإحداثيات تمثل خطّي المسارين داخل نطاق Λ؛ لا تُسمّى دخولًا أو خروجًا.
 ROUTES = {
-    "inbound": [(57.70, 26.42), (57.10, 26.48), (56.55, 26.54), (56.08, 26.58)],
-    "outbound": [(56.08, 26.16), (56.58, 26.12), (57.12, 26.06), (57.70, 25.96)],
-    "oman": [(57.68, 25.72), (57.08, 25.62), (56.50, 25.56), (56.08, 25.60)],
+    "north": [
+        (56.381, 26.554), (56.406, 26.560), (56.430, 26.568),
+        (56.455, 26.575), (56.480, 26.581), (56.505, 26.581),
+        (56.530, 26.581), (56.555, 26.582), (56.580, 26.578),
+        (56.604, 26.559), (56.629, 26.526), (56.654, 26.504),
+    ],
+    "south": [
+        (56.381, 26.534), (56.406, 26.539), (56.430, 26.546),
+        (56.455, 26.555), (56.480, 26.565), (56.505, 26.566),
+        (56.530, 26.566), (56.555, 26.566), (56.580, 26.553),
+        (56.604, 26.527), (56.629, 26.496), (56.654, 26.487),
+    ],
 }
-ROUTE_LABELS = [
-    ("مسار دخول", 56.92, 26.70, "inbound"),
-    ("مسار خروج", 56.96, 25.94, "outbound"),
-    ("المسار الجديد من جهة عُمان", 56.95, 25.48, "oman"),
-    ("منطقة الفصل", 56.82, 26.33, "separation"),
+
+# حدود منطقة الملاحة الساحلية المتقطعة كما تُقرأ من القناع الرسمي (mask.png)
+# بعد تطبيق معايرة المحاور في imo-tss-lanes.json.
+INSHORE_ZONE = [
+    [(56.342, 26.590), (56.442, 26.620), (56.605, 26.620), (56.691, 26.509)],
+    [(56.363, 26.447), (56.300, 26.350), (56.219, 26.243)],
+    [(56.595, 26.447), (56.565, 26.395), (56.535, 26.349)],
 ]
 
 
@@ -197,26 +210,56 @@ def _route_d(coords):
     return "M" + "L".join(f"{pt(lon, lat)[0]:.1f},{pt(lon, lat)[1]:.1f}" for lon, lat in coords)
 
 
-def _routing_svg():
-    """مخطط إرشادي لا يُقدّم كتعليمات ملاحة تشغيلية."""
-    separation = [(56.06, 26.60), (57.72, 26.47), (57.72, 25.91), (56.06, 26.10)]
-    sep_d = "M" + "L".join(f"{pt(lon, lat)[0]:.1f},{pt(lon, lat)[1]:.1f}" for lon, lat in separation) + "Z"
-    paths = [
-        f'<path class="mp-separation-zone" d="{sep_d}" style="fill:#ffc857;fill-opacity:.12;stroke:#ffc857;stroke-width:1.4;stroke-dasharray:5 5;vector-effect:non-scaling-stroke"/>',
-        f'<path class="mp-route mp-route-inbound" d="{_route_d(ROUTES["inbound"])}" style="fill:none;stroke:#72e6d4;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:9 5;vector-effect:non-scaling-stroke"/>',
-        f'<path class="mp-route mp-route-outbound" d="{_route_d(ROUTES["outbound"])}" style="fill:none;stroke:#ffc266;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:9 5;vector-effect:non-scaling-stroke"/>',
-        f'<path class="mp-route mp-route-oman" d="{_route_d(ROUTES["oman"])}" style="fill:none;stroke:#d7a7ff;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:3 5;vector-effect:non-scaling-stroke"/>',
+def _arrow_d(start, end, width=12.0, head=18.0):
+    """محيط سهم اتجاه واحد، دون تسمية دخول/خروج، وفق اتجاه السهم في المخطط."""
+    x1, y1 = pt(*start)
+    x2, y2 = pt(*end)
+    dx, dy = x2 - x1, y2 - y1
+    length = math.hypot(dx, dy) or 1.0
+    ux, uy = dx / length, dy / length
+    nx, ny = -uy, ux
+    bx, by = x2 - ux * head, y2 - uy * head
+    tx, ty = x1 + ux * 8.0, y1 + uy * 8.0
+    points = [
+        (tx + nx * width / 2, ty + ny * width / 2),
+        (bx + nx * width / 2, by + ny * width / 2),
+        (bx + nx * width, by + ny * width),
+        (x2, y2),
+        (bx - nx * width, by - ny * width),
+        (bx - nx * width / 2, by - ny * width / 2),
+        (tx - nx * width / 2, ty - ny * width / 2),
     ]
-    labels = []
-    for text, lon, lat, kind in ROUTE_LABELS:
-        x, y = pt(lon, lat)
-        if 0 <= x <= WIDTH and 0 <= y <= HEIGHT:
-            color = {"inbound": "#bffcf2", "outbound": "#ffe0a3", "oman": "#ead4ff", "separation": "#ffe39a"}[kind]
-            labels.append(
-                f'<text class="mp-route-label mp-route-{kind}" x="{x:.1f}" y="{y:.1f}" '
-                f'style="fill:{color};font-size:12px;font-weight:700;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">{_esc(text)}</text>'
-            )
-    return f'<g class="mp-routes" aria-label="مسارات إرشادية (تمثيل تخطيطي)">{"".join(paths)}{"".join(labels)}</g>'
+    return "M" + "L".join(f"{x:.1f},{y:.1f}" for x, y in points) + "Z"
+
+
+def _routing_svg():
+    """تمثيل شاشة مكبّرة لنظام الفصل الرسمي؛ ليس تعليمات ملاحة تشغيلية."""
+    band = ROUTES["north"] + list(reversed(ROUTES["south"]))
+    band_d = "M" + "L".join(f"{pt(lon, lat)[0]:.1f},{pt(lon, lat)[1]:.1f}" for lon, lat in band) + "Z"
+    separator = [
+        ((a[0] + b[0]) / 2.0, (a[1] + b[1]) / 2.0)
+        for a, b in zip(ROUTES["north"], ROUTES["south"])
+    ]
+    paths = [
+        f'<path class="mp-tss-band" d="{band_d}" style="fill:#ee7be8;fill-opacity:.22;stroke:none"/>',
+        f'<path class="mp-route mp-route-north" d="{_route_d(ROUTES["north"])}" style="fill:none;stroke:#ff9af5;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke"/>',
+        f'<path class="mp-route mp-route-south" d="{_route_d(ROUTES["south"])}" style="fill:none;stroke:#ff9af5;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke"/>',
+        f'<path class="mp-route-separator" d="{_route_d(separator)}" style="fill:none;stroke:#f8cdf3;stroke-width:1.2;stroke-dasharray:5 4;vector-effect:non-scaling-stroke"/>',
+    ]
+    for i, coords in enumerate(INSHORE_ZONE, start=1):
+        paths.append(
+            f'<path class="mp-inshore-boundary mp-inshore-{i}" d="{_route_d(coords)}" '
+            'style="fill:none;stroke:#ff4ef4;stroke-width:1.6;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/>'
+        )
+    arrows = [
+        _arrow_d((56.535, 26.581), (56.415, 26.558)),  # السهم العلوي غربًا كما في المخطط
+        _arrow_d((56.415, 26.538), (56.535, 26.563)),  # السهم السفلي شرقًا كما في المخطط
+    ]
+    paths.extend(
+        f'<path class="mp-route-arrow mp-route-arrow-{i}" d="{d}" style="fill:none;stroke:#ff9af5;stroke-width:1.7;stroke-linejoin:round;vector-effect:non-scaling-stroke"/>'
+        for i, d in enumerate(arrows, start=1)
+    )
+    return f'<g class="mp-routes" aria-label="مسارات إرشادية (تمثيل تخطيطي)">{"".join(paths)}</g>'
 
 
 def _land_paths():
@@ -405,18 +448,19 @@ def _zoom_parts(points):
                 f'<g class="mp-event" transform="translate({x:.1f},{y:.1f})" style="--mk:{color}">'
                 f'<circle class="mp-halo" r="26"/><circle class="mp-dot" r="14"/>'
                 f'<text class="mp-num" y="6" style="font-size:17px">{i}</text></g>')
+        # مواضع مقاسة مسبقًا: تترك حيزًا فوق نطاق Λ وتفصل أسماء الموانئ عن حدوده.
         place_labels = [
-            ("إيران", 26.42, 56.30, "mp-country"),
-            ("عُمان", 24.36, 56.42, "mp-country"),
-            ("الإمارات", 25.04, 56.02, "mp-country"),
-            ("مضيق هرمز", 26.66, 56.35, "mp-sea-lbl mp-sea-sm"),
-            ("الخليج العربي", 26.92, 55.20, "mp-sea-lbl mp-sea-lg"),
-            ("خليج عمان", 24.14, 57.12, "mp-sea-lbl mp-sea-lg"),
-            ("خصب", 26.18, 56.25, "mp-port-lbl"),
-            ("الفجيرة", 25.12, 56.36, "mp-port-lbl"),
+            ("إيران", 26.78, 56.28, "mp-country"),
+            ("عُمان", 24.08, 56.62, "mp-country"),
+            ("الإمارات", 25.04, 55.34, "mp-country"),
+            ("مضيق هرمز", 26.88, 55.72, "mp-sea-lbl mp-sea-sm"),
+            ("الخليج العربي", 26.96, 54.98, "mp-sea-lbl mp-sea-lg"),
+            ("خليج عمان", 23.78, 57.28, "mp-sea-lbl mp-sea-lg"),
+            ("خصب", 26.18, 56.08, "mp-port-lbl"),
+            ("الفجيرة", 25.16, 56.46, "mp-port-lbl"),
         ]
         label_svg = "".join(
-            f'<text class="{cls}" x="{pt(lon, lat)[0]:.1f}" y="{pt(lon, lat)[1]:.1f}" '
+            f'<text data-map-label="1" class="{cls}" x="{pt(lon, lat)[0]:.1f}" y="{pt(lon, lat)[1]:.1f}" '
             f'style="fill:{"#bce8ff" if "country" in cls else "#b6e7ff" if "sea" in cls else "#e4f6ff"};font-size:{"14" if "country" in cls else "16" if "sea" in cls else "13"}px;font-weight:600;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round;direction:rtl;unicode-bidi:isolate">{_esc(text)}</text>'
             for text, lat, lon, cls in place_labels)
         svg = (f'<svg class="hmap-zsvg" viewBox="0 0 {WIDTH:.0f} {HEIGHT:.0f}" role="img" aria-label="{_esc(ZOOM_TITLE)}">'
@@ -431,7 +475,16 @@ def _zoom_parts(points):
                f'<g class="mp-events">{"".join(marks)}</g></svg>')
     finally:
         _set_bbox(MAIN_BBOX)
-    return rect, f'<div class="hmap-zoom">{svg}<div class="hz-cap">{_esc(ZOOM_TITLE)}</div></div>'
+    route_key = (
+        '<div class="hmap-route-key" aria-label="مفتاح نظام فصل الملاحة المعتمد">'
+        '<strong>نظام فصل الملاحة المعتمد — <bdi dir="ltr">IMO 1968</bdi></strong>'
+        '<span><i class="rk-sw rk-lane" role="presentation"></i>مساران داخل النطاق الرسمي · '
+        '<i class="rk-sw rk-separator" role="presentation"></i>خط فصل</span>'
+        '<span><i class="rk-sw rk-inshore" role="presentation"></i>حدود منطقة الملاحة الساحلية · '
+        '<i class="rk-sw rk-arrow" role="presentation"></i>سهم اتجاه · تمثيل مخططي فقط</span>'
+        '</div>'
+    )
+    return rect, f'<div class="hmap-zoom">{svg}{route_key}<div class="hz-cap">{_esc(ZOOM_TITLE)}</div></div>'
 
 
 MAP_KEY_STYLE = """<style>
@@ -446,12 +499,17 @@ MAP_KEY_STYLE = """<style>
 .map-key .sw-port{width:14px;height:14px;border:0;position:relative}
 .map-key .sw-port:after{content:"";position:absolute;inset:4px;background:#e4f6ff;border-radius:50%}
 .map-key .sw-strait{width:auto;height:auto;padding:0 5px;border:1px solid #b6e7ff;border-radius:999px;color:#b6e7ff}
-.map-key .sw-route-in,.map-key .sw-route-out,.map-key .sw-route-oman,.map-key .sw-separation{height:0;border:0;border-top-width:2px;border-top-style:dashed}
-.map-key .sw-route-in{border-top-color:#72e6d4}.map-key .sw-route-out{border-top-color:#ffc266}.map-key .sw-route-oman{border-top-color:#d7a7ff;border-top-style:dotted}.map-key .sw-separation{border-top-color:#ffc857}
-.map-key .sw-route-note{width:24px;height:0;border:0;border-top:1px dotted #ffc857}
 .map-key .sw-none{border:1px dashed #7895b0;background:transparent}
-.map-key .lg-none{grid-column:1 / -1;color:#c3d2e6}
+.map-key .lg-none{grid-column:1 / -1;color:#c3e6f4}
 @media (max-width:760px){.map-key{grid-template-columns:minmax(0,1fr)}}
+.hmap-route-key{display:grid;gap:2px;padding:7px 10px 8px;border-top:1px solid #28405f;background:#0c1626;color:#c3d2e6;font-size:11.5px;line-height:1.45}
+.hmap-route-key strong{color:#e9f0f9;font-weight:700}
+.hmap-route-key span{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.hmap-route-key .rk-sw{display:inline-block;width:22px;height:0;flex:0 0 auto;border-top:2px solid #ff9af5}
+.hmap-route-key .rk-separator{border-top-color:#f8cdf3;border-top-style:dashed;border-top-width:1px}
+.hmap-route-key .rk-inshore{border-top-color:#ff4ef4;border-top-style:dashed}
+.hmap-route-key .rk-arrow{width:15px;border-top-color:#ff9af5;transform:rotate(-18deg)}
+@media (max-width:760px){.hmap-route-key{font-size:11px;padding-inline:8px}}
 </style>"""
 
 
@@ -552,17 +610,11 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
         '<li><span class="lg-sw sw-grid" role="presentation"></span>شبكة خطوط الطول والعرض</li>'
         '<li><span class="lg-sw sw-port" role="presentation"></span>نقطة ميناء</li>'
         '<li><span class="lg-sw sw-strait" role="presentation"></span>تسمية بحر أو مضيق</li>'
-        '<li><span class="lg-sw sw-route-in" role="presentation"></span>مسار دخول</li>'
-        '<li><span class="lg-sw sw-route-out" role="presentation"></span>مسار خروج</li>'
-        '<li><span class="lg-sw sw-route-oman" role="presentation"></span>مسار جديد من جهة عُمان</li>'
-        '<li><span class="lg-sw sw-separation" role="presentation"></span>منطقة الفصل</li>'
-        '<li class="lg-none"><span class="lg-sw sw-route-note" role="presentation"></span>'
-        'مسارات إرشادية (تمثيل تخطيطي) — ليست تعليمات ملاحة</li>'
         '<li class="lg-none"><span class="lg-sw sw-none" role="presentation"></span>'
         'لا علامات وقائع — لا إحداثيات مثبتة في المصادر</li>'
         '</ul>'
     )
-    route_svg = _routing_svg() if BBOX == MAIN_BBOX else ""
+    route_svg = _routing_svg() if BBOX == ZOOM_BBOX else ""
     maritime_svg = "".join(
         f'<path class="mp-maritime-boundary" d="{d}" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/>'
         for d in _maritime_boundary_paths())

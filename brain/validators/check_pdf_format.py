@@ -134,6 +134,9 @@ def main() -> int:
     if not pdf.exists():
         print(f"فشل: الملف غير موجود {pdf}")
         return 2
+    if pdf.stat().st_size == 0:
+        print(f"فشل: الملف فارغ (0 بايت) {pdf} — بند مانع غير مُتحقَّق منه (فشل مغلق)")
+        return 2
     prof = {}
     if PROFILE.exists():
         import json
@@ -143,7 +146,11 @@ def main() -> int:
     notes: list[str] = []
 
     info = subprocess.run(["pdfinfo", str(pdf)], capture_output=True, text=True).stdout
-    pages = int(re.search(r"Pages:\s+(\d+)", info).group(1))
+    m_pages = re.search(r"Pages:\s+(\d+)", info)
+    if not m_pages:
+        print("فشل: تعذّر قراءة بنية PDF (لا «Pages» في مخرج pdfinfo) — بند مانع غير مُتحقَّق منه (فشل مغلق)")
+        return 2
+    pages = int(m_pages.group(1))
     text = subprocess.run(["pdftotext", str(pdf), "-"], capture_output=True, text=True).stdout
     nrm = lambda t: re.sub(r"[^\u0621-\u064A0-9]", "", t)
     flat = nrm(text)
