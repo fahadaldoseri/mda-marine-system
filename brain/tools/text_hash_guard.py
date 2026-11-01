@@ -48,6 +48,8 @@ def print_disabled() -> bool:
         return False
     if isinstance(rb.get("print"), dict) and rb["print"].get("disabled") is True:
         return True
+    if isinstance(rb.get("print"), dict) and rb["print"].get("enabled") is False:
+        return True
     for step in rb.get("steps", []):
         if step.get("id") in ("B020", "B030"):
             return step.get("disabled") is True
@@ -59,7 +61,8 @@ def outputs(date: str) -> list[Path]:
     outs = [SITE / "dist" / "reports" / f"{date}.html"]
     if not print_disabled():
         outs.append(SITE / "dist" / "reports" / "pdf" / f"{date}.pdf")
-    outs.append(B / "reports" / "docx" / f"التقرير-اليومي-{date}-طبق-الأصل.docx")
+    if not print_disabled():
+        outs.append(B / "reports" / "docx" / f"التقرير-اليومي-{date}-طبق-الأصل.docx")
     return outs
 
 

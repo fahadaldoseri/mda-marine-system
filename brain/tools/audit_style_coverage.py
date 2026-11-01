@@ -207,7 +207,9 @@ def main() -> int:
             # نثر PDF العربي: الاستخراج يعكس الحروف ويُدخل مسافات قبل الترقيم ⇒ حكم النثر عليه غير صالح بنيويًا
             pc, p_out = 0, "نثر PDF لا يُحكم عليه بالاستخراج — يُثبت بالإسناد (رموز البلاغ والمصطلحات اللاتينية)"
         else:
-            pc, p_out = run_gate(["python3", str(BASE / "validators" / "check_prose_defects.py"), "--md"], tgt)
+            # سطح سجل المصادر سطح مُهيكل: تكرار وسم الصف بنية سجل لا قالب جملة (قرار مُعلن 2026-11-01)
+            _extra = ["--structured-registry"] if s["label"] == "صفحة المصادر" else []
+            pc, p_out = run_gate(["python3", str(BASE / "validators" / "check_prose_defects.py")] + (_extra or ["--md"]), tgt)
         # بوابة المصطنعة تُرجع 1 للتحذير و2 للمنع (وهو سلوك البوابة نفسها في التسليم)
         if s["kind"] == "pdf":
             linked, note = pdf_link_proof(tgt.read_text(encoding="utf-8", errors="replace"), a.date)

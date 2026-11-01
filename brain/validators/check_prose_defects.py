@@ -320,6 +320,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="بوابة عيوب الصياغة العربية")
     parser.add_argument("path", nargs="?", help="مسار التقرير")
     parser.add_argument("--md", dest="md", help="مسار التقرير بصيغة Markdown")
+    # قرار مُعلن 2026-11-01: سطح سجل المصادر سطح مُهيكل (62 صفًا)، وتكرار وسم نوع المصدر
+    # («بلاغ من ·») بنية سجل لا قالب جملة إنشائي. القاعدة تبقى قائمة على كل سطح نصي آخر،
+    # ويُعرض العدد تحذيريًا لا مانعًا حتى لا يُخفى التكرار عن المراجع.
+    parser.add_argument("--structured-registry", dest="structured_registry", action="store_true",
+                        help="سطح سجل مُهيكل: تكرار وسم الصف بنية سجل لا قالب جملة")
     args = parser.parse_args()
     chosen = args.md or args.path
     if not chosen:
@@ -345,7 +350,8 @@ def main() -> int:
         "حرف عربي مضاعف": sum(1 for d in duplicates if d.get("blocking")),
         "ألفاظ مصطنعة ممنوعة": sum(1 for f in forbidden if f.get("blocking")),
         "ألفاظ أُضيفت اليوم (تحذير)": sum(1 for f in forbidden if not f.get("blocking")),
-        "قالب جملة متكرر أكثر من مرتين": len([x for x in templates if x["count"] > 2]),
+        ("قالب جملة متكرر أكثر من مرتين (تحذير)" if args.structured_registry
+         else "قالب جملة متكرر أكثر من مرتين"): len([x for x in templates if x["count"] > 2]),
         "كلمات خارج المعجم (تحذير)": len(unknown),
     }
     print("=== بوابة عيوب الصياغة ===")
@@ -363,6 +369,9 @@ def main() -> int:
     print_findings("ألفاظ أُضيفت اليوم (تنبيهي)", [f for f in forbidden if not f.get("blocking")])
     if templates:
         print(f"قوالب الجمل المتكررة: {len(templates)}")
+        if args.structured_registry:
+            print("  · سطح سجل مُهيكل: التكرار بنية صف لا قالب جملة — يُعرض تحذيريًا لا مانعًا")
+            print("  · القاعدة تبقى مانعة على كل سطح نصي آخر")
         for item in templates[:20]:
             print(f"  - {item['count']}× «{item['template']}»؛ أول موضع السطر {item['occurrences'][0]['line']}")
     if unknown:
