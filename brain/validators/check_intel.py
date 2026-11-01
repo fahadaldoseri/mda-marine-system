@@ -39,6 +39,7 @@ def _word(text: str, w: str) -> bool:
 FIELD_LEAK = ["intel_analysis", "blocks_map", "hero_kpis", "meta[", "block_data", "source_reliability"]
 
 errors: list[str] = []
+blocking: list[str] = []
 warns: list[str] = []
 
 
@@ -194,11 +195,26 @@ def main() -> int:
                 warns.append(f"ح6: عدد مؤشرات التحذير المبكر في ملف الواجهة = {len(inds)} (المعتمد 3–5)")
             # ك-: خريطة بلا نقاط = تسليم بلا خريطة. تُمنع مبكرًا بدل أن تفشل بوابة الطباعة متأخرة.
             evs = [e for e in (meta.get("event_keys") or []) if (e.get("area") or "").strip()]
-            mpts = (meta.get("map") or {}).get("points") or []
-            if evs and not mpts:
-                errors.append(f"ح13: جدول التوزيع الجغرافي فيه {len(evs)} واقعة والخريطة بلا نقاط (فشل مغلق)")
+            _mp = meta.get("map") or {}
+            mpts = _mp.get("points") or []
+            off_map = _mp.get("off_map") or []
+            _excl = {"خارج القطاعات", "المنطقة كاملة"}
+            need = [e for e in evs if (e.get("area") or "").strip() not in _excl]
+            drawn = {p.get("code") for p in mpts}
+            missing = [e.get("code") for e in need if e.get("code") not in drawn]
+            if need and missing:
+                blocking.append("ح13: وقائع بمنطقة بلا نقطة على الخريطة ({} من {}): {}".format(
+                    len(missing), len(need), "، ".join(str(x) for x in missing[:4])))
+            elif need and len(mpts) + len(off_map) < len(need):
+                blocking.append("ح13: نقاط الخريطة ({}) + خارج النطاق ({}) أقل من الوقائع ذات المنطقة ({})".format(
+                    len(mpts), len(off_map), len(need)))
             else:
-                print(f"  ✔ ح13: نقاط الخريطة = {len(mpts)} من {len(evs)} واقعة ذات منطقة")
+                print(f"  ✔ ح13: نقاط الخريطة = {len(mpts)} من {len(need)} واقعة بمنطقة · خارج النطاق {len(off_map)}")
+            for _p in mpts:
+                if _p.get("precision") not in ("exact", "approximate"):
+                    blocking.append(f"ح13: نقطة بلا تصنيف دقة معتمد: {_p.get('code')}")
+                elif _p.get("precision") == "approximate" and not (_p.get("basis") or "").strip():
+                    blocking.append(f"ح13: موضع تقريبي بلا أساس مكتوب: {_p.get('code')}")
         # تضييق مقصود (2026-10-28): أعطال القراءة/التحليل المتوقعة فقط — ما عداها يظهر ولا يُبتلع.
         except (OSError, UnicodeDecodeError, json.JSONDecodeError, AttributeError, TypeError) as e:
             errors.append(f"تعذر قراءة ملف الواجهة: {e}")
@@ -208,11 +224,13 @@ def main() -> int:
     print()
     for w in warns:
         print(f"  ⚠ {w}")
-    if errors:
-        for e in errors:
-            print(f"  ✘ {e}")
-        print(f"\nالنتيجة: فشل — {len(errors)} خطأ · {len(warns)} تحذير")
-        return 1
+        if errors or blocking:
+            for b in blocking:
+                print(f"  ✘ {b}")
+            for e in errors:
+                print(f"  ✘ {e}")
+            print(f"\nالنتيجة: فشل — {len(errors) + len(blocking)} خطأ ({len(blocking)} مانع) · {len(warns)} تحذير")
+            return 2 if blocking else 1
     print(f"\nالنتيجة: مجتاز — 0 خطأ · {len(warns)} تحذير")
     return 0
 

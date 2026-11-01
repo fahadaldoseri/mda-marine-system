@@ -22,6 +22,7 @@ import argparse
 import json
 import pathlib
 import re
+import subprocess
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -431,6 +432,14 @@ def main() -> int:
                 dc["risk_ref"] = "بطاقة الترويسة: مستوى التهديد"
                 meta_p.write_text(json.dumps(meta, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
                 print(f"   زُوّد ملف الواجهة بالمستوى المشتق: {lv} ({tok})")
+                # نقاط الخريطة: تُشتق من وقائع اليوم ومراسي المناطق المعتمدة (فشل مغلق عند غياب مِرساة)
+                _r = subprocess.run([sys.executable, str(ROOT / "tools" / "derive_map_points.py"),
+                     "--date", args.date, "--write"], capture_output=True, text=True)
+                sys.stdout.write(_r.stdout)
+                if _r.returncode == 2:
+                    raise FailClosed("نقاط الخريطة: " + (_r.stdout + _r.stderr).strip()[-300:])
+                if _r.returncode not in (0, 1):
+                    raise FailClosed("مشتق نقاط الخريطة خرج بالرمز " + str(_r.returncode))
         if args.show or not (args.write or args.json):
             print(f"   ══ {out['date']} · {out['window']} ══")
             print(f"   المستوى العام: {out['overall']['level']} — أعلى قطاع: {out['overall']['top_zone']}")
