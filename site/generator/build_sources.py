@@ -319,7 +319,7 @@ def build(dist: Path, quiet: bool = False) -> dict:
     def card_html(c):
         return (f'<div class="sx-card {c["kind"]}">'
                 f'<div class="sx-top"><span class="sx-num">{esc(c["num"])}</span>'
-                f'<span class="sx-name">{esc(c["name"])}</span></div>'
+                f'<span class="sx-name">{esc("بلاغ من · " + c["name"])}</span></div>'
                 f'<div class="sx-state">{esc(c["state"])}</div></div>')
 
     refs_html = '\n'.join(

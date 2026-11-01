@@ -122,7 +122,7 @@ SECTION_ICONS = {
     "الخلاصة": "flag",
     "الوقائع الجديدة": "alert",
     "سجل الأحداث": "alert",
-    "التحذيرات والنشرات الرسمية": "broadcast",
+    "التحذيرات والتنبيهات النشطة": "broadcast",
     "سجل IMO": "ledger",
     "مؤشرات الموقف": "gauge",
     "التوزيع الجغرافي للوقائع": "map",
@@ -146,7 +146,7 @@ SECTION_HINTS = {
     "التوجيهات التشغيلية": "ما يُنفَّذ قبل العبور والرسو وأثناء الحادث.",
     "الوقائع الجديدة": "الوقائع الأمنية الجديدة خلال فترة التغطية، مفصولًا عن الخلفية.",
     "سجل الأحداث": "الوقائع الأمنية الجديدة خلال فترة التغطية، مرتّبة بالرمز والتوقيت.",
-    "التحذيرات والنشرات الرسمية": "حالة الجهات الرسمية خلال فترة التقرير.",
+    "التحذيرات والتنبيهات النشطة": "حالة الجهات الرسمية خلال فترة التقرير.",
     "سجل IMO": "الحصيلة الرسمية التراكمية، وآخر إدخال ظاهر.",
     "قراءة الموقف وتحليل المؤشرات": "ما يدل عليه النمط والافتراضات والفرضيات وعلامات الإنذار المبكر.",
     "الاحتمالات ونسبة الحوادث إلى جهات": "من قد يكون مسؤولًا، بلا جزم وبلا نسبة بلا دليل.",
@@ -1240,6 +1240,32 @@ EVENT_BADGES = (
     (("رسمي", "بلاغ"), "b-official"),
 )
 
+# الفئات السبع المعتمدة لوسم بطاقة سجل الأحداث؛ لا يُسمح بسقوط التصنيف إلى نص حر.
+EVENT_CLASS_LABELS = {
+    "بلاغ رسمي": "بلاغ",
+    "بلاغ رسمي متأخر": "بلاغ",
+    "سجل دولي": "بلاغ",
+    "نقل مهني": "تقرير",
+    "تقرير مهني": "تقرير",
+    "سجل مصدر مهني": "تقرير",
+    "نقل إعلامي": "نقل إعلامي",
+    "نقل إعلامي متعارض": "نقل إعلامي",
+    "نقل إعلامي رسمي إيراني": "نقل إعلامي إيراني",
+    "نقل سياسي": "نقل",
+    "رواية": "مقال من",
+    "نفي رسمي منقول": "نفي رسمي",
+}
+EVENT_CLASS_CSS = {
+    "بلاغ": "b-official",
+    "تقرير": "b-info",
+    "نقل إعلامي": "b-media",
+    "نقل إعلامي إيراني": "b-media",
+    "نقل": "b-media",
+    "مقال من": "b-media",
+    "نفي رسمي": "b-deny",
+}
+
+
 _PUBLIC_STATUS_REPLACEMENTS = None
 
 
@@ -1390,7 +1416,6 @@ def _event_fields_html(event: dict, defs) -> tuple[str, bool]:
     desc = _event_description(event)
     fields = [
         ("التاريخ/الوقت", date_time or "غير متاح"),
-        ("المصدر", _event_sources(event) or "غير متاح"),
         ("الموضع", _event_location(event) or "غير متاح"),
     ]
     # لا يُعاد «سطر الوصف» إذا كان هو نص البطاقة نفسه — التكرار المرئي ممنوع (ك-336)
@@ -1405,6 +1430,20 @@ def _event_fields_html(event: dict, defs) -> tuple[str, bool]:
     return "".join(rows), has_time
 
 
+def _ledger_event_badge(event: dict) -> tuple[str, str]:
+    """يبني «الفئة · المصادر» من class/source الحاكمين مع فشل مغلق."""
+    raw_class = _value_text(event.get("class"))
+    if raw_class not in EVENT_CLASS_LABELS:
+        raise BuildError(f"تصنيف class خارج القائمة المغلقة في سجل الأحداث { _event_code(event) or '(بلا رمز)' }: {raw_class or '(فارغ)'}")
+    sources = _event_sources(event)
+    if not sources:
+        raise BuildError(f"سجل الأحداث بلا مصدر لبطاقة { _event_code(event) or '(بلا رمز)' }")
+    if re.search(r"\b[A-F]\s*/\s*[1-6]\b", sources):
+        raise BuildError(f"درجة مصدر داخل وسم بطاقة سجل الأحداث { _event_code(event) or '(بلا رمز)' }")
+    category = EVENT_CLASS_LABELS[raw_class]
+    return EVENT_CLASS_CSS[category], f"{category} · {sources}"
+
+
 def render_ledger_events(events, defs, md_path: Path):
     """يصيّر جميع سجلات دفتر الفترة، مع فرع موثق فقط عند وجود حقل ربط."""
     known = _all_event_records(md_path, events)
@@ -1414,8 +1453,7 @@ def render_ledger_events(events, defs, md_path: Path):
     cards = []
     for idx, event in enumerate(events, 1):
         code = _event_code(event)
-        status = _value_text(event.get("class") or event.get("confidence"))
-        cls, label = event_badge(status)
+        cls, label = _ledger_event_badge(event)
         fields_html, has_time = _event_fields_html(event, defs)
         marked, parent_ref, relation_key = _relation_info(event, known)
         if marked:
@@ -1930,7 +1968,7 @@ def _official_warning_texts(section):
 
 def _card_targets(all_sections, report_sections, meta, defs, report_date):
     """Measure the exact rendered targets used by the three card rows."""
-    warning_title = "التحذيرات والنشرات الرسمية"
+    warning_title = "التحذيرات والتنبيهات النشطة"
     watch_section_title = "المراقبة المستمرة"
     watch_title = "المراقبة المستمرة"
     warning_sec = next((x for x in all_sections if x["title"] == warning_title), None)

@@ -269,10 +269,10 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
     warning_href = targets.get("warning_href") or f"/reports/{report_date}.html#sec-06"
     warning_gist = _gist(warning_texts, limit=2)
     rows.append(
-        '<div class="sc-row"><div class="sc-l">التحذيرات والنشرات الرسمية النشطة</div>'
+        '<div class="sc-row"><div class="sc-l">التحذيرات والتنبيهات النشطة</div>'
         f'<div class="sc-v"><p class="sc-gist">{inline(warning_gist)}</p>'
         f'<p class="sc-more">{_arabic_count(warning_count, "warnings")} · '
-        f'<a href="{esc(warning_href)}" data-goto="التحذيرات والنشرات الرسمية" data-alt="{esc(warning_href)}">القسم الرسمي</a></p></div></div>')
+        f'<a href="{esc(warning_href)}" data-goto="التحذيرات والتنبيهات النشطة" data-alt="{esc(warning_href)}">القسم الرسمي</a></p></div></div>')
 
     watch = _list_items(dc.get("watch"))
     watch_count = int(targets["watch_count"]) if "watch_count" in targets else len(watch)
@@ -503,8 +503,8 @@ SCREEN_JS = r"""
   // فإن لم يوجد شيء منها فُتح القسم الأول. (ك-298: سجل الأحداث صار في التقرير اليومي،
   // فلا يُعرض مطويًا فيُحجب المحتوى عن القارئ.)
   // ك-304: تُفتح أيضًا الأقسام التي طلب المالك إدراجها في التقرير اليومي: مستوى التهديد،
-  // والتحذيرات والنشرات الرسمية، وسجل IMO والحوادث المؤكدة.
-  var openRe = /الخلاصة|التوجيهات التشغيلية|مؤشرات الموقف|سجل الأحداث|الوقائع الجديدة|مستوى التهديد|التحذيرات والنشرات الرسمية|سجل IMO|Summary|Operational Guidance|Situation Indicators|Event Log|Threat Level|Official Warnings and Advisories|IMO/;
+  // والتحذيرات والتنبيهات النشطة، وسجل IMO والحوادث المؤكدة.
+  var openRe = /الخلاصة|التوجيهات التشغيلية|مؤشرات الموقف|سجل الأحداث|الوقائع الجديدة|مستوى التهديد|التحذيرات والتنبيهات النشطة|سجل IMO|Summary|Operational Guidance|Situation Indicators|Event Log|Threat Level|Active warnings and advisories|IMO/;
   function setState(sec, btn, collapsed) {
     sec.classList.toggle('sc-collapsed', collapsed);
     btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
