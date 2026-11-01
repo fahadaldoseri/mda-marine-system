@@ -48,7 +48,7 @@ from html import escape as esc
 from pathlib import Path
 
 # الاسم المعتمد للتقرير اليومي (قرار صاحب القرار — 18 أكتوبر 2026)
-DAILY_TITLE = "التقرير اليومي لأمن الملاحة والأوضاع الراهنة في المنطقة"
+DAILY_TITLE = "التقرير اليومي للأمن البحري والأوضاع الراهنة في المنطقة"
 DAILY_PLACEHOLDERS = ['التقرير الصباحي اليومي', 'التقرير اليومي', 'التقرير اليومي لأمن الملاحة', 'تقرير أمن الملاحة']
 
 SOURCES_MANIFEST = Path(f'{BRAIN}/appendices/sources-manifest.json')
@@ -73,6 +73,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
 import build_report  # noqa: E402
+from display_format import format_release_version, format_update_label  # noqa: E402
 import monthly_dashboard  # noqa: E402
 import site_chrome  # noqa: E402
 
@@ -308,12 +309,12 @@ def build_index(dist: Path, reports, notfound: bool = False):
             f"فترة التغطية {esc(latest['window'])}" if latest.get("window") else "",
             f"{esc(str(latest['sources']))} مصدرًا مفحوصًا في ذلك التشغيل" if latest.get("sources") else "",
             f"{esc(str(latest['cited']))} مُستشهدًا" if latest.get("cited") else "",
-            f"آخر تحديث {esc(latest['generated'])}" if latest.get("generated") else "",
+            f"آخر تحديث {esc(format_update_label(latest['generated']))}" if latest.get("generated") else "",
         ]
         hero_card = f"""<article class="hero-card">
       <div class="hc-top"><span class="hc-tag">آخر إصدار</span>
         <span class="hc-risk rk-{esc(latest.get('risk_kind') or 'med')}">مستوى التهديد: {esc(latest['risk'])}</span>
-        {f'<span class="hc-code">رقم الإصدار <b>{esc(latest["version"])}</b></span>' if latest.get('version') else ''}</div>
+        {f'<span class="hc-code">رقم الإصدار <b>{esc(format_release_version(latest["version"]))}</b></span>' if latest.get('version') else ''}</div>
       <h2>{esc(latest['label'])}</h2>
       <p class="hc-meta">{' · '.join(b for b in meta_bits if b)}</p>
       <div class="hc-changes"><b>ما تغيّر:</b><ul>{chg_items}</ul></div>

@@ -1,7 +1,7 @@
 {
  "version": 2,
  "status": "generated",
- "updated": "2026-10-29",
+ "updated": "2026-10-31",
  "note": "مُولَّد آليًا من appendices/simplified-vocabulary.json — لا يُحرَّر يدويًا. الأمر: python3 tools/build_vocab_gate.py --apply",
  "entries": [
   {
@@ -203,13 +203,6 @@
   {
    "term": "ضغط متراكم",
    "replacement": "ضغط متزايد",
-   "reason": "قرار المالك",
-   "source": "دفعة قرار المفردات — tools/vocab_review.py",
-   "since": "2026-10-27"
-  },
-  {
-   "term": "على القطاعات",
-   "replacement": "حسب القطاعات",
    "reason": "قرار المالك",
    "source": "دفعة قرار المفردات — tools/vocab_review.py",
    "since": "2026-10-27"
@@ -983,6 +976,13 @@
    "reason": "قرار ورشة اللغة: دمج بند المعجم المحرَّر في السجل الحاكم (مصدر واحد).",
    "source": "sections/20-lexicon.md — قسم أ",
    "since": "2026-10-29"
+  },
+  {
+   "term": "على القطاعات",
+   "replacement": "حسب القطاعات",
+   "reason": "توحيد المصدر: المعجم المحرَّر يمنع «حسب النطاق» ويكتب «حسب القطاعات» — صُحِّح السجل ليطابق قرار الورشة.",
+   "source": "sections/20-lexicon.md — قسم أ",
+   "since": "2026-10-31"
   }
  ]
 }

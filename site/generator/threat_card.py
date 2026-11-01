@@ -46,9 +46,9 @@ FALLBACK_COLORS = {
 }
 
 # ── معجم النص المغلق (يُترجَم آليًا في النسخة الإنجليزية) ─────────────────────
-T_CARD_TITLE = "مستوى التهديد حسب القطاعات"
+T_CARD_TITLE = "مستوى التهديد"
 T_WINDOW = "خلال 24 ساعة السابقة"
-T_TOP = "أعلى قطاع:"
+T_TOP = "أعلى نطاق:"
 T_BASIS = "أساس التقدير"
 T_NONE = "لا واقعة مؤهّلة"
 T_ONE = "واقعة مؤهّلة واحدة"
@@ -59,6 +59,7 @@ T_COUNT_HEAD = "العدّاد:"
 T_QUAL = "وقائع مؤهّلة"
 T_CONF = "مؤكدة"
 T_PROB = "مرجّحة"
+T_UNCONFIRMED_QUAL = "مؤهلة غير مؤكدة"
 T_EXCL = "مستثناة"
 T_NONSPATIAL = "غير مكانية"
 T_TOTAL = "إجمالي"
@@ -100,7 +101,13 @@ def zones_css(zj: dict) -> str:
 .tz-badge{{font-weight:700;font-size:1.5rem;line-height:1.2}}
 .tz-sub{{margin:0;font-size:.85rem;opacity:.85}}
 .tz-zones{{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px}}
-.tz-z{{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;padding:7px 9px;border:1px solid var(--line,#243244);border-radius:10px}}
+.tz-z{{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:8px 10px;border:1px solid var(--line,#243244);border-radius:10px}}
+.tz-id{{font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--muted,#93a4bd);border:1px solid var(--line,#243244);border-radius:6px;padding:0 5px}}
+.tz-top{{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:12px;align-items:center;margin:10px 0 8px}}
+.tz-top-main{{display:flex;flex-wrap:wrap;gap:10px;align-items:center}}
+.tz-chips{{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}}
+.tz-chip{{font-size:.78rem;color:var(--muted,#93a4bd);border:1px solid var(--line,#243244);border-radius:999px;padding:2px 9px;white-space:nowrap}}
+.tz-chip b{{font-weight:700}}
 .tz-n{{font-size:.9rem}}
 .tz-lv{{font-weight:700;font-size:.9rem}}
 .tz-dot{{font-size:.8rem}}
@@ -112,7 +119,10 @@ def zones_css(zj: dict) -> str:
 @media (max-width:640px){{
   .tz{{padding:12px}}
   .tz-badge{{font-size:1.3rem}}
-  .tz-z{{flex-direction:column;align-items:flex-start}}
+  .tz-z{{grid-template-columns:auto minmax(0,1fr) auto;gap:6px}}
+  .tz-z .tz-c{{grid-column:2 / -1}}
+  .tz-top{{grid-template-columns:minmax(0,1fr)}}
+  .tz-chips{{justify-content:flex-start}}
 }}
 {rules}
 @media print{{
@@ -125,7 +135,8 @@ def zones_css(zj: dict) -> str:
   .tz-badge{{font-size:13pt;line-height:1.1}}
   .tz-sub{{font-size:8pt}}
   .tz-zones{{margin:1.1mm 0 0;gap:.7mm}}
-  .tz-z{{padding:1mm 1.4mm;border-radius:1.2mm;gap:2mm}}
+  .tz-z{{padding:1mm 1.4mm;border-radius:1.2mm;gap:2mm;grid-template-columns:auto minmax(0,1fr) auto auto}}
+  .tz-id,.tz-chip{{font-size:7.6pt}}
   .tz-n,.tz-lv,.tz-c,.tz-dot{{font-size:8pt;line-height:1.35}}
   .tz-basis{{margin-top:1.1mm;padding-top:.9mm}}
   .tz-basis summary{{font-size:8.5pt}}
@@ -161,21 +172,20 @@ def _zone_basis(z: dict) -> str:
     return " ".join(parts)
 
 
-def _counter_line(zj: dict) -> str:
+def _counter_chips(zj: dict) -> str:
+    """شرائح العدّاد في أعلى البطاقة: كل رقم في عنصر مستقل ليعبر بلا ترجمة."""
     c = zj.get("counter") or {}
-    return " ".join([
-        T_COUNT_HEAD,
-        f"{T_QUAL} {_n(c.get('qualifying', 0))}",
-        f"{T_SEP} {T_CONF} {_n(c.get('confirmed', 0))}",
-        f"{T_SEP} {T_PROB} {_n(c.get('probable', 0))}",
-        f"{T_SEP} {T_EXCL} {_n(c.get('excluded', 0))}",
-        f"{T_SEP} {T_NONSPATIAL} {_n(c.get('nonspatial', 0))}",
-        f"{T_SEP} {T_TOTAL} {_n(c.get('total', 0))}",
-    ])
+    items = ((T_QUAL, c.get("qualifying", 0)), (T_CONF, c.get("confirmed", 0)),
+             (T_PROB, c.get("probable", 0)), (T_EXCL, c.get("excluded", 0)),
+             (T_NONSPATIAL, c.get("nonspatial", 0)), (T_TOTAL, c.get("total", 0)))
+    return "".join(
+        f'<li class="tz-chip"><span class="tz-chip-l">{lab}</span> {_n(val)}</li>'
+        for lab, val in items
+    )
 
 
 def zones_card(zj: dict, *, variant: str = "screen") -> str:
-    """يبني بطاقة القطاعات. variant: screen | print."""
+    """يبني بطاقة مستوى التهديد. variant: screen | print."""
     overall = zj.get("overall") or {}
     tok = level_token(overall.get("level", ""))
     rows = []
@@ -183,13 +193,16 @@ def zones_card(zj: dict, *, variant: str = "screen") -> str:
         ztok = level_token(z.get("level", ""))
         rows.append(
             '<li class="tz-z">'
+            f'<span class="tz-id">{z.get("id", "")}</span>'
             f'<span class="tz-n">{z.get("name", "")}</span>'
             f'<span class="tz-lv t-{ztok}"><span class="tz-dot t-{ztok}" aria-hidden="true">{MARKERS[ztok]}</span> {z.get("level", "")}</span>'
             f'<span class="tz-c">{count_phrase(len(z.get("qualifying_codes") or []))}</span>'
             "</li>"
         )
+    # إبقاء النقطتين داخل الوسم يمنع محلل النص المرئي من إدخال مسافة قبلها
+    # عند نزع HTML؛ وهي الصيغة نفسها التي يقرأها القارئ في شريط القطاعات.
     basis_html = "".join(
-        f'<p>{z.get("name","")}: {_zone_basis(z)}</p>' for z in (zj.get("zones") or [])
+        f'<p><b>{z.get("name","")}:</b> {_zone_basis(z)}</p>' for z in (zj.get("zones") or [])
     )
     style = f"<style>{zones_css(zj)}</style>"
     return (
@@ -200,13 +213,15 @@ def zones_card(zj: dict, *, variant: str = "screen") -> str:
         f'<span class="tz-win">{zj.get("window") or T_WINDOW}</span>'
         "</header>"
         '<div class="tz-top">'
+        '<div class="tz-top-main">'
         f'<span class="tz-badge t-{tok}"><span aria-hidden="true">{MARKERS[tok]}</span> {overall.get("level","")}</span>'
         f'<p class="tz-sub">{T_TOP} {overall.get("top_zone","")}</p>'
+        "</div>"
+        f'<ul class="tz-chips tz-count">{_counter_chips(zj)}</ul>'
         "</div>"
         f'<ul class="tz-zones">{"".join(rows)}</ul>'
         f'<details class="tz-basis" open><summary>{T_BASIS}</summary>'
         f"{basis_html}"
-        f'<p class="tz-count">{_counter_line(zj)}</p>'
         "</details>"
         "</section>"
     )
@@ -228,24 +243,36 @@ def zones_strip(zj: dict) -> str:
     rows = []
     for z in zones:
         tok = level_token(z.get("level", ""))
-        q = len(z.get("qualifying_codes") or [])
-        ex = int(z.get("excluded") or 0)
-        ev = int(z.get("events") or 0)
+        confirmed = int(z.get("confirmed") or 0)
+        probable = int(z.get("probable") or 0)
+        qualifying = int(z.get("qualifying") or len(z.get("qualifying_codes") or []))
+        unconfirmed_qualifying = qualifying - confirmed - probable
+        excluded = int(z.get("excluded") or 0)
+        events = int(z.get("events") or 0)
+        if min(confirmed, probable, unconfirmed_qualifying, excluded, events) < 0:
+            raise ValueError(f"عداد قطاع سالب: {z.get('id', '')}")
+        if confirmed + probable + unconfirmed_qualifying + excluded != events:
+            raise ValueError(
+                f"عداد قطاع غير متسق {z.get('id', '')}: "
+                f"{confirmed}+{probable}+{unconfirmed_qualifying}+{excluded}!={events}"
+            )
         rows.append(
             "<li>"
             f'<span class="zs-id">{z.get("id","")}</span>'
             f'<span class="zs-nm">{z.get("name","")}</span>'
             f'<span class="zs-lv t-{tok}"><span aria-hidden="true">{MARKERS[tok]}</span> {z.get("level","")}</span>'
             '<span class="zs-c">'
-            f'<span class="zs-lab">مؤهّلة</span> <bdi class="bidi">{q}</bdi> · '
-            f'<span class="zs-lab">مستثناة</span> <bdi class="bidi">{ex}</bdi> · '
-            f'<span class="zs-lab">إجمالي</span> <bdi class="bidi">{ev}</bdi>'
+            f'<span class="zs-p"><span class="zs-lab">{T_CONF}</span> <bdi class="bidi">{confirmed}</bdi></span> · '
+            f'<span class="zs-p"><span class="zs-lab">{T_PROB}</span> <bdi class="bidi">{probable}</bdi></span> · '
+            f'<span class="zs-p"><span class="zs-lab">{T_UNCONFIRMED_QUAL}</span> <bdi class="bidi">{unconfirmed_qualifying}</bdi></span> · '
+            f'<span class="zs-p"><span class="zs-lab">{T_EXCL}</span> <bdi class="bidi">{excluded}</bdi></span> · '
+            f'<span class="zs-p"><span class="zs-lab">{T_TOTAL}</span> <bdi class="bidi">{events}</bdi></span>'
             "</span>"
             "</li>"
         )
     return (
         '<div class="hmap-zstrip">'
-        f'<h4>نسب القطاعات — {zj.get("window") or T_WINDOW}</h4>'
+        f'<h4>نسب التهديد — {zj.get("window") or T_WINDOW}</h4>'
         f'<ul>{"".join(rows)}</ul>'
         "</div>"
     )
@@ -264,7 +291,7 @@ def closed_vocabulary() -> list[str]:
     """العبارات الثابتة التي يجب أن تكون في معجم الترجمة الإنجليزية."""
     words = [
         T_CARD_TITLE, T_WINDOW, T_TOP, T_BASIS, T_NONE, T_ONE, T_TWO, T_MANY_SUFFIX,
-        T_CARRY, T_COUNT_HEAD, T_QUAL, T_CONF, T_PROB, T_EXCL, T_NONSPATIAL, T_TOTAL,
+        T_CARRY, T_COUNT_HEAD, T_QUAL, T_CONF, T_PROB, T_UNCONFIRMED_QUAL, T_EXCL, T_NONSPATIAL, T_TOTAL,
         T_SEP, T_DASH,
     ]
     words += list(LEVEL_TOKENS.keys())
