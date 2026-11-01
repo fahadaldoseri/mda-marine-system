@@ -123,6 +123,9 @@ COMP_STAGE=$(python3 -c "import json;print(json.load(open('$B/appendices/compreh
 # القاعدة: كل مكتبة وكل مهارة مرتبطة ببوابة تنفيذ، ولا اختلاف بين النسخ.
 # مقياس blockrc: 1 = أي فشل يوقف · 2 = الفشل المانع فقط.
 step "بوابة إغلاق المكتبات" 1 python3 validators/check_findings_closed.py --date "$D"
+# أمان دفع النسخة الاحتياطية (ك-408): المدقق كان قائمًا بلا استدعاء في بوابة التسليم،
+# فأعلنت مدقّقة الترابط تحذيرًا حقيقيًا «مدقّق غير مُستدعى». القاعدة: مدقّق بلا بوابة = معطّل.
+step "أمان دفع النسخة الاحتياطية (لا دفع مباشر إلى main)" 2 python3 "$B/validators/check_backup_push_safety.py" --script "$B/tools/github_backup.sh"
 step "ترابط المكتبات والمهارات" 2 python3 validators/check_libraries_skills.py
 step "تماثل المهارات والمكتبات (مزامنة فورية)" 1 bash tools/restore_skills.sh --check
 step "سلامة المهارات" 1 python3 validators/check_skills_integrity.py
