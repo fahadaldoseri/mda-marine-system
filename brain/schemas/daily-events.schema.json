@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mda-marine-system/schemas/daily-events.schema.json",
+  "title": "دفتر الوقائع اليومي — مخطط السجل الواحد",
+  "description": "مخطط سجل واحد في cumulative-2026/daily/{date}.json. العقد الحاكم للعرض في appendices/event-card-contract.md. القائمة الجذرية للملف قائمة سجلات؛ كل سجل إما واقعة مادة أو سجل لا واقعة.",
+  "oneOf": [
+    { "$ref": "#/$defs/material_record" },
+    { "$ref": "#/$defs/no_incident_record" }
+  ],
+  "$defs": {
+    "material_record": {
+      "type": "object",
+      "required": ["code", "date", "title", "source", "class", "confidence"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^MN-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{2}$",
+          "description": "رمز الواقعة؛ بلا تكرار داخل اليوم."
+        },
+        "date": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+          "description": "تاريخ الواقعة؛ يساوي اسم ملف اليوم."
+        },
+        "title": { "type": "string", "minLength": 4, "description": "عنوان الواقعة كما في التقرير." },
+        "source": { "type": "string", "minLength": 2, "description": "الجهة أو الحساب الناشر." },
+        "class": { "type": "string", "minLength": 2, "description": "التصنيف الخام كما في المصدر؛ يُشتق منه التصنيف المعروض بجدول العقد." },
+        "class_raw": { "type": "string", "description": "التصنيف الخام المحفوظ للتدقيق عند تطبيع الحقل class." },
+        "confidence": {
+          "type": "string",
+          "enum": ["عالية", "متوسطة", "منخفضة"],
+          "description": "درجة الموثوقية من عمود حالة التأكيد."
+        },
+        "confidence_raw": { "type": "string", "description": "القيمة الخام عند تصحيح قيمة غير مطابقة." },
+        "reliability_flag": {
+          "type": "string",
+          "enum": ["مصدر غير موثوق"],
+          "description": "حكم صريح على المصدر؛ لا يُستعمل نصّ الغياب لهذا الغرض."
+        },
+        "time": {
+          "type": "string",
+          "pattern": "^[0-9]{4}Z$",
+          "description": "توقيت الواقعة بصيغة DTG كما يذكره المصدر نصًّا."
+        },
+        "time_kind": { "type": "string", "enum": ["وقوع", "نشر"] },
+        "area": { "type": "string", "description": "الموضع كما في جدول التوزيع الجغرافي؛ قد يغيب فيُعرض نصّ الغياب." },
+        "sector_id": { "type": "string", "enum": ["Z1", "Z2", "Z3", "Z4"] },
+        "sector": { "type": "string", "description": "وصف القطاع أو نصّ التصنيف الجغرافي كما ورد." },
+        "sector_basis": { "type": "string" },
+        "source_url": {
+          "type": "string",
+          "pattern": "^https://[^\\s]+$",
+          "description": "الرابط الرسمي المباشر؛ لا روابط مختصرة ولا معطيات تتبّع."
+        },
+        "source_excerpt": { "type": "string", "description": "مقتطف نصّي حقيقي من مادة المصدر يدعم الواقعة." },
+        "source_excerpt_from": { "type": "string", "description": "مسار التحقق الداخلي: الملف · التغذية · رقم البند." },
+        "translation": { "type": "string", "description": "ترجمة المعنى إلى العربية للنصّ الأجنبي." },
+        "incident_kind": {
+          "type": "string",
+          "enum": ["هجوم", "حريق", "ألغام", "تسرب", "إغلاق", "تهديد", "اختطاف", "عطل", "جنوح", "نشاط مشبوه", "لا ينطبق"],
+          "description": "نوع الواقعة؛ لا يُستنتج من العنوان."
+        },
+        "vessel_name": { "type": "string" },
+        "vessel_source": { "type": "string" },
+        "imo_number": { "type": "string", "pattern": "^[0-9]{7}$" },
+        "target": { "type": "string", "enum": ["سفينة"] },
+        "outcome": { "type": "string", "description": "نتيجة الواقعة على السفينة كما تذكرها المادة." },
+        "operational_effect": { "type": "string" },
+        "deaths_confirmed": { "type": "integer", "minimum": 0 },
+        "casualties": { "type": "integer", "minimum": 0 },
+        "casualty_scope": { "type": "string", "enum": ["not_announced", "seafarer", "shipyard_worker"] },
+        "published_at": { "type": "string", "description": "تاريخ نشر المصدر." },
+        "event_kind": {
+          "type": "string",
+          "enum": ["جديد", "legacy_projection", "incident"],
+          "description": "منشأ السجل لا نوع الحادث؛ لا يُعاد تعريفه."
+        },
+        "evidence_kind": { "type": "string", "enum": ["imo_confirmed_incidents", "official_source"] },
+        "evidence_ref": { "type": "string" },
+        "classification": { "type": "string", "enum": ["imo_confirmed_incidents"] },
+        "source_description": { "type": "string" },
+        "verification": { "type": "string" },
+        "location": { "type": "string" },
+        "description": { "type": "string" },
+        "details": { "type": "string" },
+        "note": { "type": "string" },
+        "retrieved_at": { "type": "string" },
+        "backfilled": { "type": "boolean" },
+        "backfill_batch": { "type": "string" },
+        "material_projection": { "type": "string" },
+        "counted": { "type": "boolean" },
+        "dedup_note": { "type": "string" },
+        "update_of": { "type": "string", "description": "معرّف الواقعة السابقة في الدفتر التراكمي." },
+        "parent_id": { "type": "string" },
+        "duplicate_of": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "no_incident_record": {
+      "type": "object",
+      "required": ["no_incident", "title", "sources_checked", "retrieved_at"],
+      "properties": {
+        "no_incident": { "const": true },
+        "title": { "const": "لا واقعة مسجّلة في المصادر الرسمية المفحوصة" },
+        "event_kind": { "const": "no_incident" },
+        "retrieved_at": { "type": "string" },
+        "sources_checked": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["source_id", "url", "invoked", "result", "retrieved_at"],
+            "properties": {
+              "source_id": { "type": "string", "minLength": 1 },
+              "url": { "type": "string", "pattern": "^https://" },
+              "invoked": { "type": "boolean" },
+              "result": { "type": "string", "minLength": 1 },
+              "retrieved_at": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "x-contract": {
+    "owner": "appendices/event-card-contract.md",
+    "gate": "validators/check_daily_events_schema.py",
+    "live_from": "2026-10-31",
+    "absence_values": {
+      "confidence": "غير مقيّمة",
+      "time": "التوقيت غير مسجّل في المصدر",
+      "area": "الموضع غير محدد في المصدر",
+      "source_url": "الرابط الرسمي غير مدرج في الدفتر",
+      "link_parent": "لم يُعثر على الواقعة السابقة في الدفتر المتاح"
+    },
+    "note": "الغياب مسموح ويُعرض بنصّ الغياب؛ القيمة المشوّهة أو خارج القائمة المغلقة مخالفة مانعة."
+  }
+}
