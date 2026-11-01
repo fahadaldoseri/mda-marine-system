@@ -118,7 +118,7 @@
 | 6 | مستوى التهديد (threat-level) | {site}/generator/blocks.py | validators/check_intel.py | runbook/prompts/sections/threat-level.md | tests/test_sections_registry_vs_report.py |  |
 | 7 | التوجيهات التشغيلية (directives) | {site}/generator/blocks.py | validators/check_points_rule.py | runbook/prompts/sections/directives.md | tests/test_sections_registry_vs_report.py |  |
 | 8 | سجل الأحداث (new-incidents) | {site}/generator/blocks.py | validators/check_language.py | runbook/prompts/sections/new-incidents.md | tests/test_sections_registry_vs_report.py |  |
-| 9 | التحذيرات والنشرات الرسمية (warnings) | {site}/generator/blocks.py | validators/check_code_spaces.py | runbook/prompts/sections/warnings.md | tests/test_sections_registry_vs_report.py |  |
+| 9 | التحذيرات والتنبيهات النشطة (warnings) | {site}/generator/blocks.py | validators/check_code_spaces.py | runbook/prompts/sections/warnings.md | tests/test_sections_registry_vs_report.py |  |
 | 10 | سجل IMO والحوادث المؤكدة (imo-log) | {site}/generator/blocks.py | validators/check_carryover.py | runbook/prompts/sections/imo-log.md | tests/test_sections_registry_vs_report.py |  |
 | 11 | قراءة الموقف وتحليل المؤشرات (intel-analysis) | {site}/generator/blocks.py | validators/check_intel.py | runbook/prompts/sections/intel-analysis.md | tests/test_sections_registry_vs_report.py |  |
 | 12 | الاحتمالات ونسبة الحوادث إلى جهات (attribution) | {site}/generator/blocks.py | validators/check_comprehension.py | runbook/prompts/sections/attribution.md | tests/test_sections_registry_vs_report.py |  |
