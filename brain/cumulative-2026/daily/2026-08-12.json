@@ -1,77 +1,77 @@
 [
- {
-  "code": "NI-2026-08-12",
-  "date": "2026-08-12",
-  "area": "خارج القطاعات",
-  "sector": "خارج القطاعات",
-  "class": "no_incident",
-  "event_kind": "no_incident",
-  "no_incident": true,
-  "backfilled": true,
-  "title": "لا واقعة مسجّلة في المصادر الرسمية المفحوصة",
-  "description": "لا واقعة مسجّلة في المصادر الرسمية المفحوصة",
-  "source": "مسح رسمي متعدد المصادر",
-  "confidence": "عالية",
-  "sources_checked": [
-   {
-    "source_id": "imo_confirmed",
-    "source": "IMO — قائمة الوقائع المؤكدة المحفوظة",
-    "url": "file:///home/ubuntu/audit-2026-10-30/imo-incidents-official-1031.md",
-    "invoked": "قراءة الملف الرسمي المحفوظ",
-    "result": "بلا مادة لهذا التاريخ في القائمة الرسمية المحفوظة",
-    "retrieved_at": "2026-10-31T16:48:00Z"
-   },
-   {
-    "source_id": "ukmto_recent",
-    "source": "UKMTO — recent incidents",
-    "url": "https://www.ukmto.org/recent-incidents",
-    "invoked": "GET رسمي مباشر + قراءة المتصفح العادي",
-    "result": "بلا مادة لهذا التاريخ في الصفحة الرسمية الحالية",
-    "retrieved_at": "2026-10-31T16:51:56Z"
-   },
-   {
-    "source_id": "ukmto_advisories",
-    "source": "UKMTO — advisories",
-    "url": "https://www.ukmto.org/ukmto-products/advisories",
-    "invoked": "GET رسمي مباشر + قراءة المتصفح العادي",
-    "result": "بلا مادة: الصفحة الرسمية الحالية لا تعرض منتجات مؤرخة",
-    "retrieved_at": "2026-10-31T16:51:40Z"
-   },
-   {
-    "source_id": "jmic_2026",
-    "source": "JMIC — advisories 2026",
-    "url": "https://www.ukmto.org/partner-products/jmic-products/jmic-advisories/2026",
-    "invoked": "GET رسمي مباشر + قراءة المتصفح العادي",
-    "result": "بلا مادة: الصفحة الرسمية الحالية تعرض No products to display؛ المسار الآلي المباشر 403",
-    "retrieved_at": "2026-10-31T16:51:45Z"
-   },
-   {
-    "source_id": "navarea_ix",
-    "source": "NAVAREA IX",
-    "url": "https://hydrography.paknavy.gov.pk/navarea-ix-warnings/",
-    "invoked": "GET رسمي مباشر",
-    "result": "بلا مادة مؤرخة قابلة للإسناد لهذا اليوم في قائمة التحذيرات",
-    "retrieved_at": "2026-10-31T16:52:00Z"
-   },
-   {
-    "source_id": "mscio",
-    "source": "MSCIO — advisories",
-    "url": "https://mscio.eu/folder/documents/MSCIO%20Advisories/",
-    "invoked": "GET رسمي مباشر",
-    "result": "بلا مادة مؤرخة قابلة للإسناد لهذا اليوم",
-    "retrieved_at": "2026-10-31T16:55:17Z"
-   },
-   {
-    "source_id": "unctad",
-    "source": "UNCTAD — لوحة مضيق هرمز المحال إليها من IMO",
-    "url": "https://unctad.org/strait-of-hormuz-dashboard",
-    "invoked": "GET رسمي مباشر",
-    "result": "بلا مادة حادث يومية قابلة للإسناد: لوحة/منشور رسمي سياقي",
-    "retrieved_at": "2026-10-31T16:55:45Z"
-   }
-  ],
-  "retrieved_at": "2026-10-31T16:55:45Z",
-  "source_excerpt": "نتيجة سلبية مؤرخة بعد فحص كل المصادر الستة الرسمية المطلوبة ولوحة UNCTAD المحال إليها من IMO.",
-  "confidence_raw": "عالية لنتيجة المسح في وقت الاسترجاع؛ لا تعني إثبات غياب مطلق"
- }
+  {
+    "code": "NI-2026-08-12",
+    "date": "2026-08-12",
+    "area": "خارج القطاعات",
+    "sector": "خارج القطاعات",
+    "class": "no_incident",
+    "event_kind": "no_incident",
+    "no_incident": true,
+    "backfilled": true,
+    "title": "لا واقعة مسجّلة في المصادر الرسمية المفحوصة",
+    "description": "لا واقعة مسجّلة في المصادر الرسمية المفحوصة",
+    "source": "مسح رسمي متعدد المصادر",
+    "confidence": "عالية",
+    "sources_checked": [
+      {
+        "source_id": "imo_confirmed",
+        "source": "IMO — قائمة الوقائع المؤكدة المحفوظة",
+        "url": "file:///home/ubuntu/audit-2026-10-30/imo-incidents-official-1031.md",
+        "invoked": "قراءة الملف الرسمي المحفوظ",
+        "result": "بلا مادة لهذا التاريخ في القائمة الرسمية المحفوظة",
+        "retrieved_at": "2026-10-31T16:48:00Z"
+      },
+      {
+        "source_id": "ukmto_recent",
+        "source": "UKMTO — recent incidents",
+        "url": "https://www.ukmto.org/recent-incidents",
+        "invoked": "GET رسمي مباشر + قراءة المتصفح العادي",
+        "result": "بلا مادة لهذا التاريخ في الصفحة الرسمية الحالية",
+        "retrieved_at": "2026-10-31T16:51:56Z"
+      },
+      {
+        "source_id": "ukmto_advisories",
+        "source": "UKMTO — advisories",
+        "url": "https://www.ukmto.org/ukmto-products/advisories",
+        "invoked": "GET رسمي مباشر + قراءة المتصفح العادي",
+        "result": "بلا مادة: الصفحة الرسمية الحالية لا تعرض منتجات مؤرخة",
+        "retrieved_at": "2026-10-31T16:51:40Z"
+      },
+      {
+        "source_id": "jmic_2026",
+        "source": "JMIC — advisories 2026",
+        "url": "https://www.ukmto.org/partner-products/jmic-products/jmic-advisories/2026",
+        "invoked": "GET رسمي مباشر + قراءة المتصفح العادي",
+        "result": "بلا مادة: الصفحة الرسمية الحالية تعرض No products to display؛ المسار الآلي المباشر 403",
+        "retrieved_at": "2026-10-31T16:51:45Z"
+      },
+      {
+        "source_id": "navarea_ix",
+        "source": "NAVAREA IX",
+        "url": "https://hydrography.paknavy.gov.pk/navarea-ix-warnings/",
+        "invoked": "GET رسمي مباشر",
+        "result": "بلا مادة مؤرخة قابلة للإسناد لهذا اليوم في قائمة التحذيرات",
+        "retrieved_at": "2026-10-31T16:52:00Z"
+      },
+      {
+        "source_id": "mscio",
+        "source": "MSCIO — advisories",
+        "url": "https://mscio.eu/folder/documents/MSCIO%20Advisories/",
+        "invoked": "GET رسمي مباشر",
+        "result": "بلا مادة مؤرخة قابلة للإسناد لهذا اليوم",
+        "retrieved_at": "2026-10-31T16:55:17Z"
+      },
+      {
+        "source_id": "unctad",
+        "source": "UNCTAD — لوحة مضيق هرمز المحال إليها من IMO",
+        "url": "https://unctad.org/strait-of-hormuz-dashboard",
+        "invoked": "GET رسمي مباشر",
+        "result": "بلا مادة حادث يومية قابلة للإسناد: لوحة/منشور رسمي سياقي",
+        "retrieved_at": "2026-10-31T16:55:45Z"
+      }
+    ],
+    "retrieved_at": "2026-10-31T16:55:45Z",
+    "source_excerpt": "نتيجة سلبية مؤرخة بعد فحص كل المصادر الستة الرسمية المطلوبة ولوحة UNCTAD المحال إليها من IMO.",
+    "confidence_raw": "عالية لنتيجة المسح في وقت الاسترجاع؛ لا تعني إثبات غياب مطلق"
+  }
 ]

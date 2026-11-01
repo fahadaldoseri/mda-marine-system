@@ -13,7 +13,15 @@
     "material_projection": true,
     "sector": "الخليج العربي، مضيق هرمز، خليج عُمان، شمال بحر العرب",
     "retrieved_at": "2026-10-31T16:08:28Z",
-    "source_description": "إسقاط يومي أمين لسجل موجود أصلًا في event-ledger-master.json؛ لا واقعة جديدة."
+    "source_description": "إسقاط يومي أمين لسجل موجود أصلًا في event-ledger-master.json؛ لا واقعة جديدة.",
+    "official_ref": "UKMTO-003-26",
+    "official_ref_basis": "معرّف رسمي من نصّ المصدر: UKMTO-003-26",
+    "update_of": "EV-2026-02-28-001-e79efdf1",
+    "parent_id": "EV-2026-02-28-001-e79efdf1",
+    "link_basis": "official_ref=UKMTO-003-26 (سجل الدفتر المجمّد EV-2026-02-28-001-e79efdf1)",
+    "incident_kind": "هجوم",
+    "incident_kind_basis": "ذكر صريح: «ضربة»",
+    "target": "سفينة"
   },
   {
     "code": "COVER-2026-02-28-002",
@@ -29,7 +37,8 @@
     "material_projection": true,
     "sector": "الخليج العربي ومضيق هرمز",
     "retrieved_at": "2026-10-31T16:08:28Z",
-    "source_description": "إسقاط يومي أمين لسجل موجود أصلًا في event-ledger-master.json؛ لا واقعة جديدة."
+    "source_description": "إسقاط يومي أمين لسجل موجود أصلًا في event-ledger-master.json؛ لا واقعة جديدة.",
+    "target": "سفينة"
   },
   {
     "code": "COVER-2026-02-28-003",
@@ -45,7 +54,10 @@
     "material_projection": true,
     "sector": "مضيق هرمز",
     "retrieved_at": "2026-10-31T16:08:28Z",
-    "source_description": "إسقاط يومي أمين لسجل موجود أصلًا في event-ledger-master.json؛ لا واقعة جديدة."
+    "source_description": "إسقاط يومي أمين لسجل موجود أصلًا في event-ledger-master.json؛ لا واقعة جديدة.",
+    "incident_kind": "تهديد",
+    "incident_kind_basis": "ذكر صريح: «تهديد»",
+    "target": "سفينة"
   },
   {
     "code": "COVER-2026-02-28-004",
@@ -61,6 +73,9 @@
     "material_projection": true,
     "sector": "مضيق هرمز، الخليج العربي، خليج عُمان، بحر العرب",
     "retrieved_at": "2026-10-31T16:08:28Z",
-    "source_description": "إسقاط يومي أمين لسجل موجود أصلًا في event-ledger-master.json؛ لا واقعة جديدة."
+    "source_description": "إسقاط يومي أمين لسجل موجود أصلًا في event-ledger-master.json؛ لا واقعة جديدة.",
+    "incident_kind": "هجوم",
+    "incident_kind_basis": "ذكر صريح: «هجوم»",
+    "target": "سفينة"
   }
 ]
