@@ -98,8 +98,10 @@ def card_violations(card_html: str, index: int, labels: dict[int, str] | None = 
         errors.append(f"{where}: رابط مختصر ظاهر في نصّ البطاقة")
     if HASHTAG_RE.search(text):
         errors.append(f"{where}: وسم (#) ظاهر في نصّ البطاقة")
-    if 'data-fold="internal-path"' not in card_html:
-        errors.append(f"{where}: مسار التحقق الداخلي غير مطويّ")
+    # قرار العقد 2026-11-01: المسار الداخلي لا يُعرض على سطح القارئ أصلًا؛
+    # فيُمنع ظهوره نصًّا، ولا يُشترط وسم طيّ لصف غير معروض.
+    if "source_excerpt_from" in text or "مسار التحقق الداخلي" in text:
+        errors.append(f"{where}: المسار الداخلي ظاهر على سطح القارئ")
     if 'data-fold="original-text"' not in card_html and found.get(9) == "shown":
         errors.append(f"{where}: صف النص الأصلي ظاهر بلا طيّ")
     if found.get(9, "").startswith("hidden") and 'data-fold="original-text"' in card_html:

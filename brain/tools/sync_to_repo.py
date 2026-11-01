@@ -23,7 +23,9 @@ JUNK_FILES = {'.DS_Store', '.skill_versions.json'}   # ك-271: يُستثنى ف
 DELETE_MAX = 20          # سقف الحذف في التشغيل العادي
 SITE_EXCLUDE_DIRS = {'.git', '__pycache__', 'node_modules', '.venv', 'logs'}
 SKILLS_EXCLUDE_DIRS = {'.git', '__pycache__'}
-BRAIN_EXCLUDE_DIR_GLOBS = ('logs/apply-*',)
+BRAIN_EXCLUDE_DIR_GLOBS = ('logs', 'reports/docx', 'backup-repo', 'logs/apply-*')
+# 2026-11-01 (ك-441): المرآة لا تحمل سجلات التشغيل ولا مخرجات Word ولا مرآة النسخ الاحتياطي —
+# كانت المزامنة تعيدها فتظهر «زوائد» في مقيّم التماثل، وقد حذفها المالك بأمر سابق.
 
 
 def skip(p: Path, dirs: set, files: set = EXCLUDE_FILES, globs=EXCLUDE_GLOBS,
