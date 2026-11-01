@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-01T22:40:15.367416+00:00",
+  "generated_at": "2026-11-01T23:25:16.797733+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -3355,6 +3355,13 @@
       "lesson_id": "ك-444",
       "barrier_id": "B-7210b378",
       "run_evidence": "c0c9ca1..98933f0c` قبل: D010 rc=2 ورسالة non-fast-forward · بعد: D010 رمز 0 و`runbook status` كل الخ"
+    },
+    {
+      "fault_id": "ك-445",
+      "state": "مفتوح",
+      "lesson_id": "ك-445",
+      "barrier_id": "B-7b2b85ea",
+      "run_evidence": null
     }
   ]
 }

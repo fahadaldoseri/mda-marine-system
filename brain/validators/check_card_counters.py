@@ -168,6 +168,39 @@ def load_registry(path: Path | None = None) -> dict:
     return registry
 
 
+def _registry_blacklist_errors(registry_path: Path) -> list[str]:
+    """حاجز فشل مغلق (ك-449): السجل الحاكم لا يجوز أن يحمل لفظًا في القائمة السوداء.
+
+    العطل الحقيقي: سجل البطاقات حمل «التحذيرات والنشرات الرسمية» — لفظ ممنوع بقرار
+    المالك 2026-11-01 — فأوقف بناء الموقع اليومي عند بوابة العدّادات بعد أن كانت
+    القائمة السوداء نفسها تُعلن أن الصواب «التحذيرات والتنبيهات النشطة».
+    """
+    blacklist = _load_json(ROOT / "appendices" / "style-blacklist.json") or {}
+    terms: list[tuple[str, str]] = []
+
+    def walk(node) -> None:
+        if isinstance(node, dict):
+            term = node.get("term")
+            replacement = node.get("replacement")
+            if isinstance(term, str) and term.strip() and isinstance(replacement, str) and replacement.strip():
+                terms.append((term.strip(), replacement.strip()))
+            for value in node.values():
+                walk(value)
+        elif isinstance(node, list):
+            for value in node:
+                walk(value)
+
+    walk(blacklist)
+    if not terms:
+        return []
+    try:
+        raw = registry_path.read_text(encoding="utf-8")
+    except OSError:
+        return []
+    return [f"سجل البطاقات يحمل لفظًا ممنوعًا: «{term}» — الصواب «{replacement}»"
+            for term, replacement in terms if term in raw]
+
+
 def _load_title_map(glossary_path: Path | None = None) -> dict[str, str]:
     if glossary_path is None or not glossary_path.is_file():
         return {}
@@ -815,6 +848,11 @@ def main(argv=None) -> int:
     parser.add_argument("--dist-root", default=str(_default_dist_root()))
     parser.add_argument("--registry", default=str(DEFAULT_REGISTRY))
     args = parser.parse_args(argv)
+    blacklist_errors = _registry_blacklist_errors(Path(args.registry))
+    if blacklist_errors:
+        for error in blacklist_errors:
+            print(f"✘ {error}")
+        return 2
     dist = Path(args.dist_root)
     paths = [dist / "reports" / f"{args.date}.html", dist / "additions.html",
              dist / "reports" / "en" / f"{args.date}.html", dist / "reports" / "en" / "additions.html"]
