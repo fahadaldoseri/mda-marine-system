@@ -1,567 +1,673 @@
 {
- "schema_version": 1,
- "description": "سجل حاكم لبطاقات العدادات الظاهرة في سطح التقرير؛ لا تُعدّل البوابة لتجاوز سجل غير مكتمل.",
- "discovery": {
-  "component_classes": [
-   "sc-card",
-   "tz"
-  ]
- },
- "cards": [
-  {
-   "id": "maritime-security-news",
-   "status": {
-    "state": "enabled",
-    "reason": null
-   },
-   "page_component": {
-    "surface": "report",
-    "class": "sc-card",
-    "aria_label": "أهم الأخبار المتعلقة بالأمن البحري",
-    "aria_label_en": "Top maritime security news",
-    "producer": "site/generator/screen_layer.py"
-   },
-   "target_section": {
-    "surface": "report-and-additions",
-    "description": "كل عداد يقاس من القسم الذي تهبط إليه مرساة الصف، لا من قيمة الواجهة نفسها."
-   },
-   "anchor_rule": {
-    "method": "title-derived-section-or-heading",
-    "description": "تُقبل المرساة إذا حُلّت في السطح الصحيح وكان عنوان الهدف مطابقًا للعنوان المسجل عبر المعجم الإنجليزي؛ ويُقبل أعلى القسم عندما يكون القسم الكامل هو الهدف وفق السياسة."
-   },
-   "latin_allowlist": [
-    "UKMTO",
-    "JMIC",
-    "IMO",
-    "AIS"
-   ],
-   "counters": [
-    {
-     "key": "changed",
-     "row_label": "خلال 24 ساعة السابقة",
-     "row_label_en": "During the previous 24 hours",
-     "unit": "items",
-     "target_title": {
-      "ar": "ما تغيّر منذ التقرير السابق",
-      "en": "What changed since the previous report"
-     },
-     "surface": "additions",
-     "measurement": "visible_items",
-     "anchor_rule": {
-      "mode": "section",
-      "type": "section|heading"
-     },
-     "format": {
-      "ar": "items",
-      "en": "items"
-     }
-    },
-    {
-     "key": "warnings",
-     "row_label": "التحذيرات والتنبيهات النشطة",
-     "row_label_en": "Active warnings and advisories",
-     "unit": "rows",
-     "target_title": {
-      "ar": "التحذيرات والتنبيهات النشطة",
-      "en": "Active warnings and advisories"
-     },
-     "surface": "additions",
-     "measurement": "table_body_rows",
-     "anchor_rule": {
-      "mode": "section",
-      "type": "section|heading"
-     },
-     "format": {
-      "ar": "warnings",
-      "en": "rows"
-     }
-    },
-    {
-     "key": "watch",
-     "row_label": "ما يُراقب خلال 24 ساعة",
-     "row_label_en": "What is monitored over the next 24 hours",
-     "unit": "items",
-     "target_title": {
-      "ar": "المراقبة المستمرة",
-      "en": "Continuous Monitoring"
-     },
-     "surface": "additions",
-     "measurement": "visible_items",
-     "anchor_rule": {
-      "mode": "section",
-      "type": "section|heading"
-     },
-     "format": {
-      "ar": "items",
-      "en": "items"
-     }
-    }
-   ]
+  "schema_version": 1,
+  "description": "سجل حاكم لبطاقات العدادات الظاهرة في سطح التقرير؛ لا تُعدّل البوابة لتجاوز سجل غير مكتمل.",
+  "discovery": {
+    "component_classes": [
+      "sc-card",
+      "tz"
+    ]
   },
-  {
-   "id": "sector-threat-level",
-   "status": {
-    "state": "enabled",
-    "reason": null
-   },
-   "page_component": {
-    "surface": "report",
-    "class": "tz",
-    "aria_label": "مستوى التهديد",
-    "aria_label_en": "Threat level",
-    "producer": "site/generator/threat_card.py",
-    "allow_multiple": true
-   },
-   "target_section": {
-    "surface": "report",
-    "title": "مستوى التهديد",
-    "title_en": "Threat level",
-    "source_file": "sources/zones/{date}.json",
-    "measurement": "counter_object"
-   },
-   "anchor_rule": {
-    "method": "component-heading-derived",
-    "description": "عنوان h3 داخل البطاقة هو مرساة القسم؛ أي انحراف عنه يمنع الإصدار."
-   },
-   "latin_allowlist": [
-    "UKMTO",
-    "JMIC",
-    "IMO",
-    "AIS",
-    "Z1",
-    "Z2",
-    "Z3",
-    "Z4"
-   ],
-   "counters": [
-    {
-     "key": "qualifying",
-     "display_label": "وقائع مؤهّلة",
-     "display_label_en": "qualifying incidents",
-     "source_path": "counter.qualifying"
-    },
-    {
-     "key": "confirmed",
-     "display_label": "مؤكدة",
-     "display_label_en": "confirmed",
-     "source_path": "counter.confirmed"
-    },
-    {
-     "key": "probable",
-     "display_label": "مرجّحة",
-     "display_label_en": "probable",
-     "source_path": "counter.probable"
-    },
-    {
-     "key": "excluded",
-     "display_label": "مستثناة",
-     "display_label_en": "excluded",
-     "source_path": "counter.excluded"
-    },
-    {
-     "key": "nonspatial",
-     "display_label": "غير مكانية",
-     "display_label_en": "non-spatial",
-     "source_path": "counter.nonspatial"
-    },
-    {
-     "key": "total",
-     "display_label": "إجمالي",
-     "display_label_en": "total",
-     "source_path": "counter.total"
-    }
-   ]
-  }
- ],
- "hero_kpis": {
-  "id": "hero-kpis",
-  "status": {
-   "state": "enabled",
-   "reason": "اعتماد المالك 2026-10-31"
-  },
-  "page_component": {
-   "surface": "report",
-   "class": "hero-kpis",
-   "aria_label": "مؤشرات الوقائع والمستجدات الرسمية",
-   "aria_label_en": "Incident and official update indicators",
-   "producer": "site/generator/build_report.py + site/generator/screen_layer.py"
-  },
-  "row_counts": {
-   "1": 4,
-   "2": 4
-  },
-  "risk_patterns": [
-   "هجوم",
-   "حريق",
-   "ألغام"
-  ],
-  "risk_patterns_en": [
-   "Attack",
-   "Fire",
-   "Mines"
-  ],
   "cards": [
-   {
-    "id": "ukmto-reports",
-    "row": 1,
-    "title": "بلاغات UKMTO المرصودة",
-    "title_en": "Monitored UKMTO reports",
-    "tag": "Z1",
-    "tag_en": "Z1",
-    "source_label": "سجل الوقائع الرسمي UKMTO",
-    "source": {
-     "kind": "meta_path",
-     "path": [
-      "indicators",
-      0,
-      "current"
-     ]
+    {
+      "id": "maritime-security-news",
+      "status": {
+        "state": "enabled",
+        "reason": null
+      },
+      "page_component": {
+        "surface": "report",
+        "class": "sc-card",
+        "aria_label": "أهم الأخبار المتعلقة بالأمن البحري",
+        "aria_label_en": "Top maritime security news",
+        "producer": "site/generator/screen_layer.py"
+      },
+      "target_section": {
+        "surface": "report-and-additions",
+        "description": "كل عداد يقاس من القسم الذي تهبط إليه مرساة الصف، لا من قيمة الواجهة نفسها."
+      },
+      "anchor_rule": {
+        "method": "title-derived-section-or-heading",
+        "description": "تُقبل المرساة إذا حُلّت في السطح الصحيح وكان عنوان الهدف مطابقًا للعنوان المسجل عبر المعجم الإنجليزي؛ ويُقبل أعلى القسم عندما يكون القسم الكامل هو الهدف وفق السياسة."
+      },
+      "latin_allowlist": [
+        "UKMTO",
+        "JMIC",
+        "IMO",
+        "AIS"
+      ],
+      "counters": [
+        {
+          "key": "changed",
+          "row_label": "خلال 24 ساعة السابقة",
+          "row_label_en": "During the previous 24 hours",
+          "unit": "items",
+          "target_title": {
+            "ar": "ما تغيّر منذ التقرير السابق",
+            "en": "What changed since the previous report"
+          },
+          "surface": "additions",
+          "measurement": "visible_items",
+          "anchor_rule": {
+            "mode": "section",
+            "type": "section|heading"
+          },
+          "format": {
+            "ar": "items",
+            "en": "items"
+          }
+        },
+        {
+          "key": "warnings",
+          "row_label": "التحذيرات والنشرات الرسمية النشطة",
+          "row_label_en": "Active official warnings and advisories",
+          "unit": "rows",
+          "target_title": {
+            "ar": "التحذيرات والنشرات الرسمية",
+            "en": "Official warnings and advisories"
+          },
+          "surface": "additions",
+          "measurement": "table_body_rows",
+          "anchor_rule": {
+            "mode": "section",
+            "type": "section|heading"
+          },
+          "format": {
+            "ar": "warnings",
+            "en": "rows"
+          }
+        },
+        {
+          "key": "watch",
+          "row_label": "ما يُراقب خلال 24 ساعة",
+          "row_label_en": "What is monitored over the next 24 hours",
+          "unit": "items",
+          "target_title": {
+            "ar": "المراقبة المستمرة",
+            "en": "Continuous Monitoring"
+          },
+          "surface": "additions",
+          "measurement": "visible_items",
+          "anchor_rule": {
+            "mode": "section",
+            "type": "section|heading"
+          },
+          "format": {
+            "ar": "items",
+            "en": "items"
+          }
+        }
+      ]
     },
-    "detail": {
-     "ar": "داخل فترة التقرير",
-     "en": "Within the report period"
-    },
-    "layers": {
-     "cumulative": {
-      "kind": "kpis_totals",
-      "id": "ukmto-reports",
-      "field": "cumulative"
-     },
-     "updated": {
-      "kind": "kpis_totals",
-      "id": "ukmto-reports",
-      "field": "updated"
-     }
+    {
+      "id": "sector-threat-level",
+      "status": {
+        "state": "enabled",
+        "reason": null
+      },
+      "page_component": {
+        "surface": "report",
+        "class": "tz",
+        "aria_label": "مستوى التهديد",
+        "aria_label_en": "Threat level",
+        "producer": "site/generator/threat_card.py",
+        "allow_multiple": true
+      },
+      "target_section": {
+        "surface": "report",
+        "title": "مستوى التهديد",
+        "title_en": "Threat level",
+        "source_file": "sources/zones/{date}.json",
+        "measurement": "counter_object"
+      },
+      "anchor_rule": {
+        "method": "component-heading-derived",
+        "description": "عنوان h3 داخل البطاقة هو مرساة القسم؛ أي انحراف عنه يمنع الإصدار."
+      },
+      "latin_allowlist": [
+        "UKMTO",
+        "JMIC",
+        "IMO",
+        "AIS",
+        "Z1",
+        "Z2",
+        "Z3",
+        "Z4"
+      ],
+      "counters": [
+        {
+          "key": "qualifying",
+          "display_label": "وقائع مؤهّلة",
+          "display_label_en": "qualifying incidents",
+          "source_path": "counter.qualifying"
+        },
+        {
+          "key": "confirmed",
+          "display_label": "مؤكدة",
+          "display_label_en": "confirmed",
+          "source_path": "counter.confirmed"
+        },
+        {
+          "key": "probable",
+          "display_label": "مرجّحة",
+          "display_label_en": "probable",
+          "source_path": "counter.probable"
+        },
+        {
+          "key": "excluded",
+          "display_label": "مستثناة",
+          "display_label_en": "excluded",
+          "source_path": "counter.excluded"
+        },
+        {
+          "key": "nonspatial",
+          "display_label": "غير مكانية",
+          "display_label_en": "non-spatial",
+          "source_path": "counter.nonspatial"
+        },
+        {
+          "key": "total",
+          "display_label": "إجمالي",
+          "display_label_en": "total",
+          "source_path": "counter.total"
+        }
+      ]
     }
-   },
-   {
-    "id": "qualifying-incidents",
-    "row": 1,
-    "title": "وقائع مستوفية لمعيار الاحتساب",
-    "title_en": "Incidents meeting the counting criterion",
-    "tag": "",
-    "tag_en": "",
-    "source_label": "web/zones/{date}.json · counter",
-    "source": {
-     "kind": "zones_counter",
-     "key": "qualifying"
-    },
-    "detail": {
-     "kind": "qualifying_composition",
-     "en": "1 confirmed + 1 probable + 2 qualifying unconfirmed"
-    },
-    "layers": {
-     "cumulative": {
-      "kind": "kpis_totals",
-      "id": "qualifying-incidents",
-      "field": "cumulative"
-     },
-     "updated": {
-      "kind": "kpis_totals",
-      "id": "qualifying-incidents",
-      "field": "updated"
-     }
-    }
-   },
-   {
-    "id": "unconfirmed-narratives",
-    "row": 1,
-    "title": "روايات لم تتأكد",
-    "title_en": "Unconfirmed accounts",
-    "tag": "تُذكر ولا تُحتسب",
-    "tag_en": "Mentioned but not counted",
-    "source_label": "web/zones/{date}.json · counter",
-    "source": {
-     "kind": "zones_counter",
-     "key": "unconfirmed_total"
-    },
-    "detail": {
-     "kind": "unconfirmed_split",
-     "en": "3 narratives · 2 qualifying · mentioned but not counted"
-    },
-    "layers": {
-     "cumulative": {
-      "kind": "kpis_totals",
-      "id": "unconfirmed-narratives",
-      "field": "cumulative"
-     },
-     "updated": {
-      "kind": "kpis_totals",
-      "id": "unconfirmed-narratives",
-      "field": "updated"
-     }
-    }
-   },
-   {
-    "id": "proven-zones",
-    "row": 1,
-    "title": "وقائع مثبتة",
-    "title_en": "Confirmed incidents",
-    "tag": "Z2–Z4",
-    "tag_en": "Z2–Z4",
-    "source_label": "web/zones/{date}.json · Z2–Z4",
-    "source": {
-     "kind": "zones_sum",
-     "zone_ids": [
-      "Z2",
-      "Z3",
-      "Z4"
-     ],
-     "field": "confirmed"
-    },
-    "detail": {
-     "ar": "يظهر الصفر دائمًا",
-     "en": "Zero remains visible"
-    }
-   },
-   {
-    "id": "official-products",
-    "row": 2,
-    "title": "منتجات UKMTO وJMIC المرصودة",
-    "title_en": "Monitored UKMTO and JMIC products",
-    "tag": "",
-    "tag_en": "",
-    "source_label": "feeds/feeds-{date}.json · العدّ الخام المنفصل",
-    "source": {
-     "kind": "meta_path",
-     "path": [
-      "hero_sources",
-      "official_products",
-      "value"
-     ]
-    },
-    "detail": {
-     "ar": "خلال فترة التغطية · لا يُدّعى أنها جديدة",
-     "en": "During the coverage period · not claimed to be new"
-    },
-    "layers": {
-     "cumulative": {
-      "kind": "kpis_totals",
-      "id": "official-products",
-      "field": "cumulative"
-     },
-     "updated": {
-      "kind": "kpis_totals",
-      "id": "official-products",
-      "field": "updated"
-     }
-    }
-   },
-   {
-    "id": "latest-official",
-    "row": 2,
-    "title": "أحدث بلاغ رسمي",
-    "title_en": "Latest official report",
-    "tag": "",
-    "tag_en": "",
-    "source_label": "feeds/feeds-{date}.json · UKMTO",
-    "source": {
-     "kind": "meta_path",
-     "path": [
-      "hero_sources",
-      "latest_official",
-      "value"
-     ]
-    },
-    "detail": {
-     "ar": "الساعة غير متاحة",
-     "en": "Time unavailable"
-    }
-   },
-   {
-    "id": "fire-reports",
-    "row": 2,
-    "title": "حرائق السفن",
-    "title_en": "Ship fires",
-    "tag": "",
-    "tag_en": "",
-    "source_label": "feeds/feeds-{date}.json · فصل الحالة",
-    "source": {
-     "kind": "meta_path",
-     "path": [
-      "hero_sources",
-      "fire",
-      "value"
-     ]
-    },
-    "detail": {
-     "kind": "fire_split",
-     "en": "Confirmed: 0 · probable: 0 · unconfirmed: 2"
-    },
-    "layers": {
-     "cumulative": {
-      "kind": "kpis_totals",
-      "id": "fire-incidents",
-      "field": "cumulative"
-     },
-     "updated": {
-      "kind": "kpis_totals",
-      "id": "fire-incidents",
-      "field": "updated"
-     }
-    }
-   },
-   {
-    "id": "imo-confirmed-attacks",
-    "row": 2,
-    "title": "هجمات مؤكدة على سفن",
-    "title_en": "Confirmed attacks on ships",
-    "tag": "بلاغ من · IMO",
-    "tag_en": "Report from · IMO",
-    "source_label": "IMO — قائمة الوقائع المؤكدة",
-    "source_label_en": "IMO — confirmed incidents list",
-    "source": {
-     "kind": "kpis_totals",
-     "id": "imo-confirmed-attacks",
-     "field": "today"
-    },
-    "detail": {
-     "ar": "واقعة مؤكدة على سفينة تجارية في القائمة الرسمية للمنظمة البحرية الدولية · تحديث القائمة: 31 أكتوبر 2026",
-     "en": "Confirmed incident involving a commercial vessel in the official IMO list · List updated: 31 October 2026"
-    },
-    "layers": {
-     "cumulative": {
-      "kind": "kpis_totals",
-      "id": "imo-confirmed-attacks",
-      "field": "cumulative"
-     },
-     "updated": {
-      "kind": "kpis_totals",
-      "id": "imo-confirmed-attacks",
-      "field": "updated"
-     }
-    }
-   }
   ],
-  "layers_contract": {
-   "source_file": "web/kpis-totals/{date}.json",
-   "range_from": "2026-02-28",
-   "labels": {
-    "cumulative": "المجموع من 28 فبراير 2026",
-    "updated": "آخر تحديث"
-   },
-   "rule": "كل طبقة تُقارن بالمصدر؛ أي اختلاف يمنع الإصدار"
+  "hero_kpis": {
+    "id": "hero-kpis",
+    "status": {
+      "state": "enabled",
+      "reason": "اعتماد المالك 2026-10-31"
+    },
+    "page_component": {
+      "surface": "report",
+      "class": "hero-kpis",
+      "aria_label": "مؤشرات الوقائع والمستجدات الرسمية",
+      "aria_label_en": "Incident and official update indicators",
+      "producer": "site/generator/build_report.py + site/generator/screen_layer.py"
+    },
+    "row_counts": {
+      "1": 4,
+      "2": 4
+    },
+    "risk_patterns": [
+      "هجوم",
+      "حريق",
+      "ألغام"
+    ],
+    "risk_patterns_en": [
+      "Attack",
+      "Fire",
+      "Mines"
+    ],
+    "cards": [
+      {
+        "id": "ukmto-reports",
+        "row": 1,
+        "title": "بلاغات UKMTO المرصودة",
+        "title_en": "Monitored UKMTO reports",
+        "tag": "Z1",
+        "tag_en": "Z1",
+        "source_label": "سجل الوقائع الرسمي UKMTO",
+        "source": {
+          "kind": "meta_path",
+          "path": [
+            "indicators",
+            0,
+            "current"
+          ]
+        },
+        "detail": {
+          "ar": "داخل فترة التقرير",
+          "en": "Within the report period"
+        },
+        "layers": {
+          "cumulative": {
+            "kind": "kpis_totals",
+            "id": "ukmto-reports",
+            "field": "cumulative"
+          },
+          "updated": {
+            "kind": "kpis_totals",
+            "id": "ukmto-reports",
+            "field": "updated"
+          }
+        }
+      },
+      {
+        "id": "qualifying-incidents",
+        "row": 1,
+        "title": "وقائع مستوفية لمعيار الاحتساب",
+        "title_en": "Incidents meeting the counting criterion",
+        "tag": "",
+        "tag_en": "",
+        "source_label": "web/zones/{date}.json · counter",
+        "source": {
+          "kind": "zones_counter",
+          "key": "qualifying"
+        },
+        "detail": {
+          "kind": "qualifying_composition",
+          "en": "1 confirmed + 1 probable + 2 qualifying unconfirmed"
+        },
+        "layers": {
+          "cumulative": {
+            "kind": "kpis_totals",
+            "id": "qualifying-incidents",
+            "field": "cumulative"
+          },
+          "updated": {
+            "kind": "kpis_totals",
+            "id": "qualifying-incidents",
+            "field": "updated"
+          }
+        }
+      },
+      {
+        "id": "unconfirmed-narratives",
+        "row": 1,
+        "title": "روايات لم تتأكد",
+        "title_en": "Unconfirmed accounts",
+        "tag": "تُذكر ولا تُحتسب",
+        "tag_en": "Mentioned but not counted",
+        "source_label": "web/zones/{date}.json · counter",
+        "source": {
+          "kind": "zones_counter",
+          "key": "unconfirmed_total"
+        },
+        "detail": {
+          "kind": "unconfirmed_split",
+          "en": "3 narratives · 2 qualifying · mentioned but not counted"
+        },
+        "layers": {
+          "cumulative": {
+            "kind": "kpis_totals",
+            "id": "unconfirmed-narratives",
+            "field": "cumulative"
+          },
+          "updated": {
+            "kind": "kpis_totals",
+            "id": "unconfirmed-narratives",
+            "field": "updated"
+          }
+        }
+      },
+      {
+        "id": "proven-zones",
+        "row": 1,
+        "title": "وقائع مثبتة",
+        "title_en": "Confirmed incidents",
+        "tag": "Z2–Z4",
+        "tag_en": "Z2–Z4",
+        "source_label": "web/zones/{date}.json · Z2–Z4",
+        "source": {
+          "kind": "zones_sum",
+          "zone_ids": [
+            "Z2",
+            "Z3",
+            "Z4"
+          ],
+          "field": "confirmed"
+        },
+        "detail": {
+          "ar": "يظهر الصفر دائمًا",
+          "en": "Zero remains visible"
+        }
+      },
+      {
+        "id": "official-products",
+        "row": 2,
+        "title": "منتجات UKMTO وJMIC المرصودة",
+        "title_en": "Monitored UKMTO and JMIC products",
+        "tag": "",
+        "tag_en": "",
+        "source_label": "feeds/feeds-{date}.json · العدّ الخام المنفصل",
+        "source": {
+          "kind": "meta_path",
+          "path": [
+            "hero_sources",
+            "official_products",
+            "value"
+          ]
+        },
+        "detail": {
+          "ar": "خلال فترة التغطية · لا يُدّعى أنها جديدة",
+          "en": "During the coverage period · not claimed to be new"
+        },
+        "layers": {
+          "cumulative": {
+            "kind": "kpis_totals",
+            "id": "official-products",
+            "field": "cumulative"
+          },
+          "updated": {
+            "kind": "kpis_totals",
+            "id": "official-products",
+            "field": "updated"
+          }
+        }
+      },
+      {
+        "id": "latest-official",
+        "row": 2,
+        "title": "أحدث بلاغ رسمي",
+        "title_en": "Latest official report",
+        "tag": "",
+        "tag_en": "",
+        "source_label": "feeds/feeds-{date}.json · UKMTO",
+        "source": {
+          "kind": "meta_path",
+          "path": [
+            "hero_sources",
+            "latest_official",
+            "value"
+          ]
+        },
+        "detail": {
+          "ar": "الساعة غير متاحة",
+          "en": "Time unavailable"
+        }
+      },
+      {
+        "id": "fire-reports",
+        "row": 2,
+        "title": "حرائق السفن",
+        "title_en": "Ship fires",
+        "tag": "",
+        "tag_en": "",
+        "source_label": "feeds/feeds-{date}.json · فصل الحالة",
+        "source": {
+          "kind": "meta_path",
+          "path": [
+            "hero_sources",
+            "fire",
+            "value"
+          ]
+        },
+        "detail": {
+          "kind": "fire_split",
+          "en": "Confirmed: 0 · probable: 0 · unconfirmed: 2"
+        },
+        "layers": {
+          "cumulative": {
+            "kind": "kpis_totals",
+            "id": "fire-incidents",
+            "field": "cumulative"
+          },
+          "updated": {
+            "kind": "kpis_totals",
+            "id": "fire-incidents",
+            "field": "updated"
+          }
+        }
+      },
+      {
+        "id": "imo-confirmed-attacks",
+        "row": 2,
+        "title": "هجمات مؤكدة على سفن",
+        "title_en": "Confirmed attacks on ships",
+        "tag": "IMO",
+        "tag_en": "IMO",
+        "source_label": "IMO — قائمة الوقائع المؤكدة",
+        "source_label_en": "IMO — confirmed incidents list",
+        "source": {
+          "kind": "kpis_totals",
+          "id": "imo-confirmed-attacks",
+          "field": "today"
+        },
+        "detail": {
+          "ar": "واقعة مؤكدة على سفينة تجارية في القائمة الرسمية للمنظمة البحرية الدولية · تحديث القائمة: 31 أكتوبر 2026",
+          "en": "Confirmed incident involving a commercial vessel in the official IMO list · List updated: 31 October 2026"
+        },
+        "layers": {
+          "cumulative": {
+            "kind": "kpis_totals",
+            "id": "imo-confirmed-attacks",
+            "field": "cumulative"
+          },
+          "updated": {
+            "kind": "kpis_totals",
+            "id": "imo-confirmed-attacks",
+            "field": "updated"
+          }
+        }
+      }
+    ],
+    "layers_contract": {
+      "source_file": "web/kpis-totals/{date}.json",
+      "range_from": "2026-02-28",
+      "labels": {
+        "cumulative": "المجموع من 28 فبراير 2026",
+        "updated": "آخر تحديث"
+      },
+      "rule": "كل طبقة تُقارن بالمصدر؛ أي اختلاف يمنع الإصدار"
+    }
+  },
+  "official_cards": {
+    "id": "official-cards",
+    "status": {
+      "state": "enabled",
+      "reason": "اعتماد المالك 2026-10-31"
+    },
+    "page_component": {
+      "surface": "report",
+      "class": "sc-official-cards",
+      "aria_label": "المستجدات الرسمية",
+      "aria_label_en": "Official updates",
+      "producer": "site/generator/screen_layer.py"
+    },
+    "row_counts": {
+      "official": 2
+    },
+    "source": "/home/ubuntu/audit-2026-10-30/imo-transit-official-1031.md",
+    "layer_keys": [
+      "daily",
+      "cumulative",
+      "updated"
+    ],
+    "forbidden": [
+      "126 من 246",
+      "فجوة",
+      "أرقام مناطق الانتظار",
+      "المؤشران 8 و9"
+    ],
+    "cards": [
+      {
+        "id": "imo-seafarer-deaths",
+        "title": "وفيات البحّارة",
+        "title_en": "Seafarer deaths",
+        "basis": "رسمي — قائمة IMO للوقائع المؤكدة",
+        "basis_en": "Official — IMO confirmed incidents list",
+        "source_label": "IMO — قائمة الوقائع المؤكدة",
+        "source_label_en": "IMO — confirmed incidents list",
+        "layers": {
+          "daily": {
+            "label": "عدد اليوم",
+            "label_en": "Today",
+            "state": "undisclosed",
+            "value": "لم يُعلن",
+            "value_en": "Not disclosed",
+            "source": "قائمة IMO الرسمية؛ لا وفاة مذكورة في وقائع اليوم",
+            "source_en": "Official IMO list; no death disclosed for today's incidents"
+          },
+          "cumulative": {
+            "label": "المجموع منذ 28 فبراير 2026",
+            "label_en": "Total since 28 February 2026",
+            "value": "24",
+            "value_en": "24",
+            "source": "IMO — 24 وفاة بحّار مؤكدة",
+            "source_en": "IMO — 24 confirmed seafarer deaths"
+          },
+          "updated": {
+            "label": "آخر تحديث للمصدر",
+            "label_en": "Source last updated",
+            "value": "30 أكتوبر 2026",
+            "value_en": "30 October 2026",
+            "source": "القائمة الرسمية كما حُفظت في 31 أكتوبر 2026",
+            "source_en": "Official list saved on 31 October 2026"
+          }
+        }
+      },
+      {
+        "id": "imo-transit-september-2026",
+        "title": "العبور اليومي عبر مضيق هرمز",
+        "title_en": "Daily transits through the Strait of Hormuz",
+        "basis": "رسمي — بيانات IMO الشهرية للعبور",
+        "basis_en": "For public information",
+        "source_label": "IMO — بيانات العبور الرسمية",
+        "source_label_en": "IMO — official transit data",
+        "badges": [
+          "آخر تحديث سبتمبر 2026"
+        ],
+        "badges_en": [
+          "For public information",
+          "Last updated September 2026"
+        ],
+        "constraint": "أوقفت المنظمة تجميع بيانات العبور اليومية",
+        "constraint_en": "IMO no longer compiles data on daily ship transits",
+        "layers": {
+          "daily": {
+            "label": "عدد اليوم",
+            "label_en": "Today",
+            "state": "no_coverage",
+            "value": "لا تغطية",
+            "value_en": "No coverage",
+            "source": "لا قراءة رسمية ليوم 31 أكتوبر 2026",
+            "source_en": "No official reading for 31 October 2026"
+          },
+          "cumulative": {
+            "label": "المجموع منذ 28 فبراير 2026",
+            "label_en": "Total since 28 February 2026",
+            "state": "no_coverage",
+            "value": "لا تغطية",
+            "value_en": "No coverage",
+            "source": "المنظمة أوقفت تجميع البيانات اليومية؛ لا يُحسب مجموع تراكمي",
+            "source_en": "IMO stopped compiling daily data; no cumulative total is calculated"
+          },
+          "updated": {
+            "label": "آخر تحديث للمصدر",
+            "label_en": "Source last updated",
+            "value": "سبتمبر 2026",
+            "value_en": "September 2026",
+            "source": "الرسم الرسمي المتاح لشهر سبتمبر 2026",
+            "source_en": "Official chart available for September 2026"
+          }
+        },
+        "period": "سبتمبر 2026",
+        "period_en": "September 2026",
+        "average": "15.6",
+        "average_en": "15.6",
+        "high": "25.8 (23 سبتمبر)",
+        "high_en": "25.8 (23 September)",
+        "low": "8.0 (3 سبتمبر)",
+        "low_en": "8.0 (3 September)"
+      }
+    ]
+  },
+  "events_log": {
+    "contract": "appendices/event-card-contract.md",
+    "schema": "schemas/daily-events.schema.json",
+    "migration": "tools/migrate_daily_events_schema.py",
+    "gates": [
+      "validators/check_daily_events_schema.py",
+      "validators/check_event_card_contract.py",
+      "validators/check_daily_event_surface.py"
+    ],
+    "tests": [
+      "tests/test_daily_events_schema.py",
+      "tests/test_event_card_contract.py",
+      "tests/test_daily_event_surface.py"
+    ],
+    "generator": [
+      "{site}/generator/build_report.py#render_ledger_events",
+      "{site}/generator/build_report.py#_event_fields_html"
+    ],
+    "live_from": "2026-10-31",
+    "rows": [
+      {
+        "index": 1,
+        "label": "الحدث",
+        "source": "title",
+        "absent": "لا بطاقة بلا عنوان"
+      },
+      {
+        "index": 2,
+        "label": "التصنيف",
+        "source": "class",
+        "absent": "قيد التثبّت"
+      },
+      {
+        "index": 3,
+        "label": "درجة الموثوقية",
+        "source": "confidence",
+        "absent": "غير مقيّمة"
+      },
+      {
+        "index": 4,
+        "label": "التاريخ والوقت",
+        "source": "date + time",
+        "absent": "التوقيت غير مسجّل في المصدر"
+      },
+      {
+        "index": 5,
+        "label": "الموضع",
+        "source": "sector_id + area",
+        "absent": "الموضع غير محدد في المصدر"
+      },
+      {
+        "index": 6,
+        "label": "المصدر",
+        "source": "source",
+        "absent": "غير متاح"
+      },
+      {
+        "index": 7,
+        "label": "الرابط الرسمي",
+        "source": "source_url + attribution",
+        "absent": "الرابط الرسمي غير مدرج في الدفتر",
+        "surface_note": "المسار الداخلي لا يُعرض على سطح القارئ؛ يبقى في الدفتر ومسار التدقيق"
+      },
+      {
+        "index": 8,
+        "label": "ترجمة المعنى",
+        "source": "translation",
+        "absent": "الترجمة غير مدرجة في الدفتر"
+      },
+      {
+        "index": 9,
+        "label": "النص الأصلي",
+        "source": "source_excerpt",
+        "absent": "لا نصّ خام في الدفتر"
+      },
+      {
+        "index": 10,
+        "label": "فرع تابع",
+        "source": "update_of · parent_id · duplicate_of",
+        "absent": "لم يُعثر على الواقعة السابقة في الدفتر المتاح"
+      }
+    ],
+    "closed_sets": {
+      "classification": [
+        "بلاغ رسمي",
+        "تقرير مهني",
+        "نقل إعلامي",
+        "نقل سياسي",
+        "رواية غير مؤكدة من طرف واحد",
+        "نفي رسمي",
+        "غير مصنّف",
+        "قيد التثبّت"
+      ],
+      "reliability": [
+        "عالية",
+        "متوسطة",
+        "منخفضة",
+        "غير مقيّمة"
+      ],
+      "row_states": [
+        "shown",
+        "hidden-rule-arabic-source",
+        "hidden-rule-no-excerpt"
+      ]
+    }
   }
- },
- "official_cards": {
-  "id": "official-cards",
-  "status": {
-   "state": "enabled",
-   "reason": "اعتماد المالك 2026-10-31"
-  },
-  "page_component": {
-   "surface": "report",
-   "class": "sc-official-cards",
-   "aria_label": "المستجدات الرسمية",
-   "aria_label_en": "Official updates",
-   "producer": "site/generator/screen_layer.py"
-  },
-  "row_counts": {
-   "official": 2
-  },
-  "source": "/home/ubuntu/audit-2026-10-30/imo-transit-official-1031.md",
-  "layer_keys": [
-   "daily",
-   "cumulative",
-   "updated"
-  ],
-  "forbidden": [
-   "126 من 246",
-   "فجوة",
-   "أرقام مناطق الانتظار",
-   "المؤشران 8 و9"
-  ],
-  "cards": [
-   {
-    "id": "imo-seafarer-deaths",
-    "title": "وفيات البحّارة",
-    "title_en": "Seafarer deaths",
-    "basis": "رسمي — قائمة IMO للوقائع المؤكدة",
-    "basis_en": "Official — IMO confirmed incidents list",
-    "source_label": "IMO — قائمة الوقائع المؤكدة",
-    "source_label_en": "IMO — confirmed incidents list",
-    "layers": {
-     "daily": {
-      "label": "عدد اليوم",
-      "label_en": "Today",
-      "state": "undisclosed",
-      "value": "لم يُعلن",
-      "value_en": "Not disclosed",
-      "source": "قائمة IMO الرسمية؛ لا وفاة مذكورة في وقائع اليوم",
-      "source_en": "Official IMO list; no death disclosed for today's incidents"
-     },
-     "cumulative": {
-      "label": "المجموع منذ 28 فبراير 2026",
-      "label_en": "Total since 28 February 2026",
-      "value": "24",
-      "value_en": "24",
-      "source": "IMO — 24 وفاة بحّار مؤكدة",
-      "source_en": "IMO — 24 confirmed seafarer deaths"
-     },
-     "updated": {
-      "label": "آخر تحديث للمصدر",
-      "label_en": "Source last updated",
-      "value": "30 أكتوبر 2026",
-      "value_en": "30 October 2026",
-      "source": "القائمة الرسمية كما حُفظت في 31 أكتوبر 2026",
-      "source_en": "Official list saved on 31 October 2026"
-     }
-    }
-   },
-   {
-    "id": "imo-transit-september-2026",
-    "title": "العبور اليومي عبر مضيق هرمز",
-    "title_en": "Daily transits through the Strait of Hormuz",
-    "basis": "رسمي — بيانات IMO الشهرية للعبور",
-    "basis_en": "For public information",
-    "source_label": "IMO — بيانات العبور الرسمية",
-    "source_label_en": "IMO — official transit data",
-    "badges": [
-     "آخر تحديث سبتمبر 2026"
-    ],
-    "badges_en": [
-     "For public information",
-     "Last updated September 2026"
-    ],
-    "constraint": "أوقفت المنظمة تجميع بيانات العبور اليومية",
-    "constraint_en": "IMO no longer compiles data on daily ship transits",
-    "layers": {
-     "daily": {
-      "label": "عدد اليوم",
-      "label_en": "Today",
-      "state": "no_coverage",
-      "value": "لا تغطية",
-      "value_en": "No coverage",
-      "source": "لا قراءة رسمية ليوم 31 أكتوبر 2026",
-      "source_en": "No official reading for 31 October 2026"
-     },
-     "cumulative": {
-      "label": "المجموع منذ 28 فبراير 2026",
-      "label_en": "Total since 28 February 2026",
-      "state": "no_coverage",
-      "value": "لا تغطية",
-      "value_en": "No coverage",
-      "source": "المنظمة أوقفت تجميع البيانات اليومية؛ لا يُحسب مجموع تراكمي",
-      "source_en": "IMO stopped compiling daily data; no cumulative total is calculated"
-     },
-     "updated": {
-      "label": "آخر تحديث للمصدر",
-      "label_en": "Source last updated",
-      "value": "سبتمبر 2026",
-      "value_en": "September 2026",
-      "source": "الرسم الرسمي المتاح لشهر سبتمبر 2026",
-      "source_en": "Official chart available for September 2026"
-     }
-    },
-    "period": "سبتمبر 2026",
-    "period_en": "September 2026",
-    "average": "15.6",
-    "average_en": "15.6",
-    "high": "25.8 (23 سبتمبر)",
-    "high_en": "25.8 (23 September)",
-    "low": "8.0 (3 سبتمبر)",
-    "low_en": "8.0 (3 September)"
-   }
-  ]
- }
 }
