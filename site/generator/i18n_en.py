@@ -172,6 +172,35 @@ def _en_number_list(raw: str) -> str:
 
 def localize_patterns(s: str) -> str | None:
     n = norm(s)
+    m = re.fullmatch(r"\((\d+)\s*واقعة\)([؛\.]?)", n)
+    if m:
+        tail = ";" if m.group(2) == "؛" else m.group(2)
+        return f"({m.group(1)} events){tail}"
+
+    _G = None
+    try:
+        _G = load_glossary()
+    except Exception:
+        _G = {}
+
+    def _tr(v: str) -> str:
+        return (_G or {}).get(norm(v), v)
+
+    m = re.fullmatch(r"القطاع\s+(\S+)\s+(.+?)\s+—\s+مستواه\s+(.+?)\.", n)
+    if m:
+        return f"Sector {m.group(1)} {_tr(m.group(2))} — level {_tr(m.group(3))}."
+    m = re.fullmatch(r"الواقعة\s+(\S+)\s+—\s+المنطقة\s+(.+?)،\s+الصفة\s+(.+?)،\s+"
+                     r"الإثبات\s+(.+?)،\s+الموضع\s+(.+?)\.", n)
+    if m:
+        return (f"Event {m.group(1)} — area {_tr(m.group(2))}, "
+                f"class {_tr(m.group(3))}, confirmation {_tr(m.group(4))}, "
+                f"position {_tr(m.group(5))}.")
+    m = re.fullmatch(r"الخط الزمني المرصود:\s*(.+?)\.", n)
+    if m:
+        inner = _tr(m.group(1))
+        inner = re.sub(r"\((\d+)\s*واقعة\)", r"(\1 events)", inner)
+        inner = inner.replace("واقعة", "event").replace("؛", ";")
+        return f"Observed timeline: {inner}."
     m = re.fullmatch(r"المؤكد:\s*(\d+)\s*·\s*المرجّح:\s*(\d+)\s*·\s*غير المؤكد:\s*(\d+)", n)
     if m:
         return f"Confirmed: {m.group(1)} · probable: {m.group(2)} · unconfirmed: {m.group(3)}"

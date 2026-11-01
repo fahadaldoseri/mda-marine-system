@@ -91,6 +91,145 @@ KIND_COLOR = {
 }
 
 
+SECTOR_BBOX = {
+    "Z1": (47.4, 22.6, 60.4, 30.2),
+    "Z2": (32.0, 11.6, 44.6, 22.6),
+    "Z3": (52.0, 7.6, 68.6, 22.6),
+    "Z4": (39.6, -0.4, 52.0, 12.0),
+}
+SECTOR_FILL = {
+    "critical": "rgba(214,69,69,.20)",
+    "very_high": "rgba(224,122,52,.18)",
+    "high": "rgba(219,166,58,.16)",
+    "medium": "rgba(58,168,180,.14)",
+    "low": "rgba(90,140,200,.12)",
+}
+SECTOR_RANK_ORDER = ["critical", "very_high", "high", "medium", "low"]
+SECTOR_LEVEL_KEY = {
+    "حرج": "critical", "مرتفع جدًا": "very_high", "مرتفع جدا": "very_high",
+    "مرتفع": "high", "متوسط": "medium", "منخفض": "low",
+}
+SECTOR_LEVEL_AR = {
+    "critical": "حرج", "very_high": "مرتفع جدًا", "high": "مرتفع",
+    "medium": "متوسط", "low": "منخفض",
+}
+# نظام فصل الملاحة المعتمد في مضيق هرمز (المنظمة البحرية الدولية، Ships' Routeing):
+# شريطا مسار بين 56.22°E و56.70°E — يُرسم تفصيليًا في لوحة التكبير فقط.
+TSS_MAIN = [(56.22, 26.62), (56.70, 26.62), (56.70, 26.24), (56.22, 26.24)]
+TSS_ATTRIB = ("نظام فصل الملاحة المعتمد في مضيق هرمز (IMO Ships' Routeing، 1968) · "
+              "مصدر الرسم: audit-2026-10-30/imo-tss/imo-tss-derived.json")
+_ACTIVE_ZONES = []
+_ACTIVE_TIMELINE = []
+
+
+def _haversine_km(lon1, lat1, lon2, lat2):
+    import math as _m
+    r = 6371.0088
+    p1, p2 = _m.radians(lat1), _m.radians(lat2)
+    dp, dl = p2 - p1, _m.radians(lon2 - lon1)
+    a = _m.sin(dp / 2) ** 2 + _m.cos(p1) * _m.cos(p2) * _m.sin(dl / 2) ** 2
+    return 2 * r * _m.asin(_m.sqrt(a))
+
+
+def _dens(spec) -> str:
+    """سياسة كثافة الوسوم: الأولوية 0/1 دائمة · 2 تُخفى تحت 900px · 3 تحت 640px."""
+    pr = spec.get("prio", 3)
+    if pr <= 1:
+        return ""
+    return " lbl-2" if pr == 2 else " lbl-3"
+
+
+def _sector_svg(zones):
+    """طبقة القطاعات Z1–Z4 بمستطيلات إرشادية مشتقة من مراسي المناطق المعتمدة."""
+    if not zones:
+        return "", "", ""
+    order = {k: i for i, k in enumerate(SECTOR_RANK_ORDER)}
+    zs = [z for z in zones if str(z.get("id") or "").upper() in SECTOR_BBOX]
+    zs.sort(key=lambda z: order.get(
+        SECTOR_LEVEL_KEY.get(str(z.get("level") or "").strip(), str(z.get("level") or "").strip()), 9))
+    top = str(zs[0].get("id") or "").upper() if zs else ""
+    fills, labels = [], []
+    for z in zs:
+        zid = str(z.get("id") or "").upper()
+        x0, y0, x1, y1 = SECTOR_BBOX[zid]
+        ax, ay = pt(x0, y1)
+        bx, by = pt(x1, y0)
+        w, h = bx - ax, by - ay
+        if w <= 0 or h <= 0:
+            continue
+        _lvl_raw = str(z.get("level") or "").strip()
+        _lvl_key = SECTOR_LEVEL_KEY.get(_lvl_raw, _lvl_raw)
+        fill = SECTOR_FILL.get(_lvl_key, "rgba(90,140,200,.12)")
+        hi = " mp-sector-top" if zid == top else ""
+        sw = 2.0 if zid == top else 1.1
+        dash = "none" if zid == top else "9 6"
+        fills.append(
+            f'<g class="mp-sector{hi}" data-zone="{zid}">'
+            f'<rect x="{ax:.1f}" y="{ay:.1f}" width="{w:.1f}" height="{h:.1f}" '
+            f'style="fill:{fill};stroke:#8fd0e6;stroke-width:{sw};stroke-dasharray:{dash};'
+            f'vector-effect:non-scaling-stroke"/></g>')
+        lvl = SECTOR_LEVEL_AR.get(str(z.get("level") or "").strip(), "")
+        lx, ly = ax + 12.0, ay + 26.0
+        labels.append(
+            f'<g class="mp-sector-lbl" data-zone="{zid}">'
+            f'<text x="{lx:.1f}" y="{ly:.1f}" style="fill:#dff2fb;font-size:16px;font-weight:700;'
+            f'paint-order:stroke;stroke:#061726;stroke-width:4px;stroke-linejoin:round">{zid}</text>'
+            f'<text x="{lx + 36.0:.1f}" y="{ly:.1f}" style="fill:#bfe6f6;font-size:14px;'
+            f'paint-order:stroke;stroke:#061726;stroke-width:4px;stroke-linejoin:round">{_esc(lvl)}</text></g>')
+    note = ("حدود القطاعات: مستطيلات إرشادية مشتقة من مراسي المناطق المعتمدة "
+            "(appendices/area-coordinates.json) — ليست حدودًا قانونية.")
+    return "".join(fills), "".join(labels), note
+
+
+def _tss_main_svg(points):
+    """طبقة نظام فصل الملاحة + المسار المتأثر + المسافة التقريبية بالكيلومتر."""
+    if not points:
+        return "", ""
+    lon_c = sum(float(p["lon"]) for p in points) / len(points)
+    lat_c = sum(float(p["lat"]) for p in points) / len(points)
+    cx, cy = pt(lon_c, lat_c)
+    poly = " ".join(f"{pt(lo, la)[0]:.1f},{pt(lo, la)[1]:.1f}" for lo, la in TSS_MAIN)
+    px = [pt(lo, la) for lo, la in TSS_MAIN]
+    tx = sum(p[0] for p in px) / len(px)
+    ty = sum(p[1] for p in px) / len(px)
+    lon_t = sum(l for l, _ in TSS_MAIN) / len(TSS_MAIN)
+    lat_t = sum(a for _, a in TSS_MAIN) / len(TSS_MAIN)
+    km = _haversine_km(lon_c, lat_c, lon_t, lat_t)
+    svg = (f'<g class="mp-tss-main" aria-hidden="true">'
+           f'<polygon points="{poly}" style="fill:rgba(150,214,255,.14);stroke:#9ad9ff;'
+           f'stroke-width:1.6;stroke-dasharray:12 7;vector-effect:non-scaling-stroke"/>'
+           f'<line x1="{cx:.1f}" y1="{cy:.1f}" x2="{tx:.1f}" y2="{ty:.1f}" '
+           f'style="stroke:#ffd479;stroke-width:1.6;stroke-dasharray:7 5;vector-effect:non-scaling-stroke"/>'
+           f'<text x="{(cx + tx) / 2:.1f}" y="{(cy + ty) / 2 - 8:.1f}" text-anchor="middle" '
+           f'style="fill:#ffe3a6;font-size:15px;paint-order:stroke;stroke:#061726;stroke-width:4px;'
+           f'stroke-linejoin:round">المسار المتأثر ≈ {km:.0f} كم</text></g>')
+    note = (f'طبقة نظام فصل الملاحة: الرسم التفصيلي للمسارين المعتمدين داخل لوحة التكبير، '
+            f'وأثر وقائع اليوم على المسار ≈ {km:.0f} كم. ' + TSS_ATTRIB)
+    return svg, note
+
+
+def _alt_block(points, zones, timeline):
+    """بديل نصي كامل للخريطة (قارئ الشاشة) — سطر مستقل لكل عنصر ليكون قابلًا للترجمة."""
+    items = []
+    for z in (zones or []):
+        lvl = SECTOR_LEVEL_AR.get(str(z.get("level") or "").strip(), str(z.get("level") or ""))
+        items.append(f'القطاع {str(z.get("id") or "").upper()} {z.get("name") or ""} — مستواه {lvl}.')
+    for i, p in enumerate(points, start=1):
+        code = short_code(p.get("code") or "", REPORT_DATE) or f"{i:02d}"
+        items.append(
+            f'الواقعة {code} — المنطقة {p.get("area") or "غير محددة"}، '
+            f'الصفة {p.get("class") or "غير محددة"}، الإثبات {p.get("confirmation") or "غير محدد"}، '
+            f'الموضع {p.get("precision") or "تقريبي"}.')
+    if timeline:
+        items.append("الخط الزمني المرصود: " + "؛ ".join(
+            f'{t.get("date")} ({t.get("count")} واقعة)' for t in timeline) + ".")
+    items.append("طبقات الخريطة: يابسة وحدود دول Natural Earth 1:50m · "
+                 "حدود بحرية Marine Regions/VLIZ · نظام فصل الملاحة IMO Ships' Routeing 1968.")
+    items.append("وصف كل واقعة كاملًا في مفتاح الخريطة وبطاقة تفاصيل الوقائع أسفلها.")
+    items.append("المواضع تقريبية عند عدم ذكر المصدر إحداثيات، ولا تُستخدم للملاحة.")
+    return '<ul class="mp-alt-list">' + "".join(f"<li>{_esc(x)}</li>" for x in items) + '</ul>'
+
+
 def status_of(p: dict) -> tuple:
     """(مفتاح اللون، التسمية العربية، التسمية الإنجليزية) لحالة الواقعة على الخريطة.
 
@@ -570,6 +709,9 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
         f'<path d="{d}" style="fill:none;stroke:#73adc6;stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke"/>'
         for d in _border_paths())
 
+    sector_fill, sector_labels, _sector_note = _sector_svg(_ACTIVE_ZONES)
+    tss_svg, tss_note = _tss_main_svg(points) if BBOX == MAIN_BBOX else ("", "")
+
     grid_lines, grid_labels = [], []
     for lon in grid_lon:
         x, _ = pt(lon, BBOX[1])
@@ -601,19 +743,19 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
         s["nx"], s["ny"] = nx, ny
 
     seas_svg = "".join(
-        f'<text class="mp-sea-lbl mp-sea-{s["sz"]}" x="{s["nx"]:.1f}" y="{s["ny"]:.1f}" '
+        f'<text class="mp-sea-lbl mp-sea-{s["sz"]}{_dens(s)}" x="{s["nx"]:.1f}" y="{s["ny"]:.1f}" '
         f'style="fill:#b6e7ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">{s["text"]}</text>'
         for s in specs if s["k"] == "sea"
     )
     ports_svg = "".join(
         f'<g transform="translate({s["px"]:.1f},{s["py"]:.1f})">'
         f'<circle class="mp-port-dot" r="2.8" style="fill:#e4f6ff"/>'
-        f'<text class="mp-port-lbl" x="{s["nx"] - s["px"]:.1f}" y="{s["ny"] - s["py"]:.1f}" '
+        f'<text class="mp-port-lbl{_dens(s)}" x="{s["nx"] - s["px"]:.1f}" y="{s["ny"] - s["py"]:.1f}" '
         f'style="fill:#e4f6ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">{s["text"]}</text></g>'
         for s in specs if s["k"] == "port"
     )
     countries_svg = "".join(
-        f'<text class="mp-country" x="{s["nx"]:.1f}" y="{s["ny"]:.1f}" '
+        f'<text class="mp-country{_dens(s)}" x="{s["nx"]:.1f}" y="{s["ny"]:.1f}" '
         f'style="fill:#bce8ff;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">{s["text"]}</text>'
         for s in specs if s["k"] == "country"
     )
@@ -687,6 +829,25 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
         legend.append(f'<li><span class="lg-num" style="--mk:{color}">{sids[i - 1]}</span>{" ".join(bits)}</li>')
 
     legend_html = f'<ol class="map-legend">{"".join(legend)}</ol>' if legend else ""
+    ev_rows = []
+    for i, p in enumerate(points, start=1):
+        _sid = sids[i - 1]
+        _src = str(p.get("source") or "").lower()
+        _tl = [t for t in (_ACTIVE_TIMELINE or [])
+               if any(tok.strip() and tok.strip() in _src
+                      for tok in str(t.get("source") or "").lower().split("،")[:3])]
+        _tl_txt = "؛ ".join(f'{t.get("date")} ({t.get("count")} واقعة)' for t in _tl) or "غير متاح في المواد الحالية"
+        _ves = p.get("vessel") or p.get("ship") or ""
+        ev_rows.append(
+            f'<tr><td><bdi class="bidi">{_sid}</bdi></td>'
+            f'<td>{_esc((p.get("label") or "")[:150])}</td>'
+            f'<td>{_esc(str(p.get("class") or "غير محددة"))} · {_esc(str(p.get("confirmation") or "غير محدد"))}</td>'
+            f'<td>{_esc(_tl_txt)}</td>'
+            f'<td>{_esc(_ves or "غير محددة في المواد الحالية")}</td></tr>')
+    events_html = ('<details class="mp-events-detail"><summary>تفاصيل الوقائع: الخط الزمني وتفاصيل السفينة وإسناد الطبقات</summary>'
+                   '<table class="mp-ev-table"><thead><tr><th>المعرّف</th><th>الواقعة</th><th>الصفة والإثبات</th>'
+                   '<th>الخط الزمني</th><th>السفينة</th></tr></thead><tbody>'
+                   + "".join(ev_rows) + '</tbody></table></details>') if ev_rows else ""
     cap = f'<p class="src-note">{caption}</p>' if caption else ""
     if points:
         _ap_n = sum(1 for p in points if p.get("precision") == "approximate")
@@ -731,11 +892,18 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
     else:
         layers += ('<li class="lg-none"><span class="lg-sw sw-none" role="presentation"></span>'
                    'لا علامات وقائع — لا إحداثيات مثبتة في المصادر</li>')
-    key_html = ('<ul class="map-key mp-key" aria-label="مفتاح طبقات الخريطة ورموزها">' + layers + '</ul>')
+    attr_rows = (
+        '<li class="lg-group">ترتيب المفتاح بالقرار: الوقائع ← القطاعات ← الطبقات المرجعية ← المتابعة</li>'
+        '<li><span class="lg-sw sw-zone" role="presentation"></span>القطاعات Z1–Z4: مستطيلات إرشادية مشتقة من مراسي المناطق المعتمدة (appendices/area-coordinates.json) — ليست حدودًا قانونية</li>'
+        '<li><span class="lg-sw sw-tss" role="presentation"></span>نظام فصل الملاحة في مضيق هرمز (IMO Ships\' Routeing، 1968) — يُرسم تفصيليًا في لوحة التكبير</li>'
+        '<li><span class="lg-sw sw-route" role="presentation"></span>المسار المتأثر والمسافة التقريبية بالكيلومتر من مركز وقائع اليوم</li>'
+        '<li><span class="lg-sw sw-maritime" role="presentation"></span>الحدود البحرية: Marine Regions/VLIZ · اليابسة وحدود الدول: Natural Earth 1:50m</li>')
+    key_html = ('<ul class="map-key mp-key" aria-label="مفتاح طبقات الخريطة ورموزها">' + attr_rows + layers + '</ul>')
     route_svg = _routing_svg() if BBOX == ZOOM_BBOX else ""
     maritime_svg = "".join(
         f'<path class="mp-maritime-boundary" d="{d}" style="fill:none;stroke:#b6e7ff;stroke-width:1.5;stroke-dasharray:2 4;vector-effect:non-scaling-stroke"/>'
         for d in _maritime_boundary_paths())
+    alt_text = _alt_block(points, _ACTIVE_ZONES, _ACTIVE_TIMELINE)
     return MAP_KEY_STYLE + f"""<div class="map-panel">
   <h3>{title}</h3><p class="blk-lede">{lede}</p>
   <div class="map-wrap">
@@ -745,10 +913,13 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
       <desc>{desc_text}</desc>
       <rect class="mp-sea-bg" style="fill:#081d31" x="0" y="0" width="{WIDTH:.0f}" height="{HEIGHT:.0f}"/>
       <g class="mp-grid">{"".join(grid_lines)}</g>
+      <g class="mp-sectors">{sector_fill}</g>
       <g class="mp-land" fill-rule="evenodd">{land_svg}</g>
       <g class="mp-borders">{border_svg}</g>
       <g class="mp-maritime-boundaries">{maritime_svg}</g>
+      {tss_svg}
       <g class="mp-places">{countries_svg}{ports_svg}{seas_svg}</g>
+      <g class="mp-sector-labels">{sector_labels}</g>
       <g class="mp-grid-labels">{"".join(grid_labels)}</g>
       {route_svg}
       {extra_svg}
@@ -759,6 +930,8 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
   </div>
   {legend_html}
   {key_html}
+  <details class="mp-alt-wrap"><summary>البديل النصي للخريطة — وصف كامل لقارئ الشاشة</summary><div class="mp-alt" id="map-alt">{alt_text}</div></details>
+  {events_html}
   {cap}
 </div>"""
 
@@ -819,8 +992,11 @@ def _dot_style(p: dict) -> str:
     return "fill:var(--mk);stroke:#081d31;stroke-width:3.4"
 
 
-def build_map(points=None, caption=None, inset=None, zoom=False):
+def build_map(points=None, caption=None, inset=None, zoom=False, zones=None, timeline=None):
     """لوحة رئيسية + لوحة مصغّرة اختيارية لباب المندب."""
+    global _ACTIVE_ZONES, _ACTIVE_TIMELINE
+    _ACTIVE_ZONES = zones or []
+    _ACTIVE_TIMELINE = timeline or []
     points = points or []
     map_title = "خريطة الوقائع" if points else "السياق الجغرافي"
     if points:
