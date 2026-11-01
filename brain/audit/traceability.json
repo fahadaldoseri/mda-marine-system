@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-01T17:37:40.020268+00:00",
+  "generated_at": "2026-11-01T18:46:40.205210+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -3243,6 +3243,55 @@
       "lesson_id": null,
       "barrier_id": "B-19991e4f",
       "run_evidence": null
+    },
+    {
+      "fault_id": "ك-429",
+      "state": "بانتظار التحقق",
+      "lesson_id": null,
+      "barrier_id": "B-cd2ad388",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-430",
+      "state": "بانتظار التحقق",
+      "lesson_id": null,
+      "barrier_id": "B-dcd6be5b",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-431",
+      "state": "بانتظار التحقق",
+      "lesson_id": null,
+      "barrier_id": "B-bcc9ed40",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-432",
+      "state": "بانتظار التحقق",
+      "lesson_id": null,
+      "barrier_id": "B-c3104c71",
+      "run_evidence": "استبدال العمود بعمود «المنطقة» وإعادة البناء ثم إعادة الخطوة D020 رمز 0 بعد الإصلاح، وتدقيق DOM:"
+    },
+    {
+      "fault_id": "ك-433",
+      "state": "بانتظار التحقق",
+      "lesson_id": null,
+      "barrier_id": "B-cf7d2bc7",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-434",
+      "state": "بانتظار التحقق",
+      "lesson_id": null,
+      "barrier_id": "B-dc095bb1",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-435",
+      "state": "بانتظار التحقق",
+      "lesson_id": null,
+      "barrier_id": "B-49caae25",
+      "run_evidence": "، وتنظيف الشجرة قبل خطوة النسخة الاحتياطية دُمج طلب الدمج، وخطوة D005 رمز 0 في التشغيل التالي"
     }
   ]
 }
