@@ -263,7 +263,15 @@ a.bidi{white-space:normal}
   background:linear-gradient(180deg,rgba(6,11,20,.95),rgba(6,11,20,.82));
   border-bottom:1px solid var(--line);
 }
-.topbar-inner{max-width:1180px;margin:0 auto;padding:11px 22px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.topbar-inner{max-width:1180px;margin:0 auto;padding:11px 22px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;transition:padding .18s ease}
+.topbar.is-compact .topbar-inner{padding:4px 22px}
+.site-nav.is-compact{--sn-pad:2px}
+.site-nav.is-compact .site-nav-inner{padding-block:3px !important}
+.site-nav.is-compact .sn-sub,.site-nav.is-compact .sn-brand-sub{display:none}
+.topbar.is-compact .brand-sub,.topbar.is-compact .tb-meta{display:none}
+.topbar.is-compact .brand-mark{width:24px;height:24px}
+.topbar.is-compact .brand-mark svg{width:14px;height:14px}
+.hmap,.hmap-panel,section[id]{scroll-margin-top:64px}
 .brand{display:flex;align-items:center;gap:11px;min-width:0}
 .brand-mark{
   width:34px;height:34px;border-radius:10px;flex:0 0 auto;display:grid;place-items:center;
@@ -465,11 +473,11 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .lg-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;color:#fff;background:var(--mk);border-radius:999px;width:19px;height:19px;display:grid;place-items:center;flex:0 0 auto}
 /* ---------- خريطة الشاشة العليا: للشاشة فقط، تُحجب في الطباعة وWord بصنف no-print ---------- */
 .hero-map{margin:22px 0 6px}
-.hmap{margin:0;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:18px}
-.hmap h3{margin:0 0 14px;font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:15px;color:var(--ink-2)}
+.hmap,.hmap-panel{margin:0;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:18px}
+.hmap h3,.hmap-panel h3{margin:0 0 14px;font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:15px;color:var(--ink-2)}
 .hmap .blk-lede{display:none}
 .hmap-keys{font-size:11.5px;line-height:1.65;color:var(--muted);margin:8px 0 0}
-.hmap .map-key{margin-top:10px}
+.hmap .map-key,.hmap-panel .map-key{margin-top:10px}
 .hmap-wrap{position:relative;border:1px solid var(--line-2);border-radius:var(--radius-sm);overflow:hidden;background:var(--map-sea)}
 /* التكبير بجانب الخريطة لا فوقها: الشريحة كانت تحجب الخليج العربي (البحرين وقطر) */
 .hmap-wrap{display:grid;grid-template-columns:minmax(0,1fr);align-items:start}
@@ -484,11 +492,20 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .hmap-svg{display:block;width:100%;height:auto;max-width:100%}
 /* خريطة الشاشة: علامات وتسميات أكبر قليلًا للقراءة من مسافة */
 .hmap-svg .mp-dot{r:9.5px}
-.hmap-svg .mp-halo{r:17px}
-.hmap-svg .mp-events .mp-num{font-size:12.5px}
-.hmap .mp-grid-lbl{font-size:12.5px}
-.hmap .mp-port-lbl{font-size:15.5px}
-.hmap .mp-country{font-size:16.5px}
+.hmap-svg .mp-halo{r:24px}
+.hmap-svg .mp-events .mp-num{font-size:24px}
+.hmap-svg .mp-badge-r{fill:rgba(6,11,20,.88);stroke:var(--mk);stroke-width:1.6}
+.hmap-svg .mp-badge-t{font-family:"IBM Plex Mono",monospace;direction:ltr;unicode-bidi:isolate}
+.hmap-scroll-hint{display:none;font-size:12.5px;color:var(--muted);margin:6px 0 0}
+.hmap-decide{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0 0 12px;padding:0}
+.hmap-decide li{border:1px solid var(--line-2);border-radius:var(--radius-sm);background:var(--panel);padding:8px 11px;display:grid;gap:3px}
+.hmap-decide .mds-k{font-size:12px;color:var(--muted)}
+.hmap-decide .mds-v{font-size:13.5px;color:var(--ink);font-weight:600;line-height:1.5}
+@media (max-width:1000px){.hmap-decide{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.hmap-decide{grid-template-columns:minmax(0,1fr)}}
+.hmap .mp-grid-lbl,.hmap-panel .mp-grid-lbl{font-size:18px}
+.hmap .mp-port-lbl,.hmap-panel .mp-port-lbl{font-size:19px}
+.hmap .mp-country,.hmap-panel .mp-country{font-size:19px}
 .hmap-legend{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 30px;margin:16px 0 0;padding:0}
 .hmap-legend li{display:block;position:relative;padding-inline-start:34px;font-size:14px;line-height:1.85;color:var(--ink-2);margin:0}
 .hmap-legend .lg-num{position:absolute;inset-inline-start:0;top:3px}
@@ -496,9 +513,14 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 @media (max-width:760px){.hmap-legend{grid-template-columns:minmax(0,1fr)}}
 /* الجوال: الخريطة الرئيسية تُصغَّر كثيرًا فتكبر العلامات والتسميات لتبقى مقروءة (التفصيل في لوحة التكبير) */
 @media (max-width:700px){
-  .hmap-svg .mp-dot{r:13px}.hmap-svg .mp-halo{r:20px}.hmap-svg .mp-events .mp-num{font-size:15px}
-  .hmap-svg .mp-port-lbl{font-size:25px}.hmap-svg .mp-country{font-size:27px}
-  .hmap-svg .mp-sea-lg{font-size:31px}.hmap-svg .mp-sea-sm{font-size:25px}.hmap-svg .mp-grid-lbl{display:none}
+  /* ك-423: الجوال يعرض الخريطة بمقياس قراءة (سحب أفقي مقصود داخل الإطار) بدل تصغيرها إلى 0.30 */
+  .hmap-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .hmap-wrap>.hmap-svg,.hmap-wrap>.hmap-zoom{min-width:640px}
+  .hmap-scroll-hint{display:block}
+  .hmap-svg .mp-dot{r:13px}.hmap-svg .mp-halo{r:26px}.hmap-svg .mp-events .mp-num{font-size:30px}
+  .hmap-svg .mp-badge-t{font-size:28px}
+  .hmap-svg .mp-port-lbl{font-size:36px}.hmap-svg .mp-country{font-size:36px}
+  .hmap-svg .mp-sea-lg{font-size:40px}.hmap-svg .mp-sea-sm{font-size:34px}.hmap-svg .mp-grid-lbl{display:none}
 }
 /* ---------- الاستشهادات ---------- */
 .cite-ref{
@@ -1730,7 +1752,7 @@ def threat_class(threat: str) -> str:
 # ----------------------------------------------------------------------------
 # البناء
 # ----------------------------------------------------------------------------
-def hero_map(map_html: str, *, print_mode: bool = False, extra_html: str = "") -> str:
+def hero_map(map_html: str, *, print_mode: bool = False, extra_html: str = "", top_html: str = "") -> str:
     """نسخة خريطة الوقائع للشاشة فقط، تظهر أعلى الصفحة (قرار فهد 22 أكتوبر 2026).
 
     الصنف no-print يحجبها في PDF، وWord يحذفه (STRIP_SELECTORS). أصنافها مغايرة لأصناف
@@ -1747,7 +1769,37 @@ def hero_map(map_html: str, *, print_mode: bool = False, extra_html: str = "") -
         h = head + extra_html + "</div>" + tail
     if print_mode:
         return f'<section class="print-map" aria-label="خريطة الوقائع ومفتاحها">{h}</section>'
-    return f'<section class="print-map hero-map no-print" aria-label="خريطة سياق القطاعات للشاشة">{h}</section>'
+    _hint = '<p class="hmap-scroll-hint">اسحب أفقيًا لاستعراض كامل الخريطة.</p>'
+    return (f'<section class="print-map hero-map no-print" aria-label="خريطة سياق القطاعات للشاشة">'
+            f'{top_html}{h}{_hint}</section>')
+
+
+def _map_decision_strip(meta: dict) -> str:
+    """شريط قرار مثبت أعلى الخريطة: أعلى قطاع · العدّاد · إجراء اليوم · آخر تحديث."""
+    import html as _h
+    _esc = lambda v: _h.escape(str(v), quote=True)  # noqa: E731
+    try:
+        tz = meta.get("threat_zones") or {}
+        zs = tz.get("zones") or []
+        top = max(zs, key=lambda z: z.get("rank", 0)) if zs else {}
+        cnt = tz.get("counter") or {}
+        dc = meta.get("decision_card") or {}
+        _a = dc.get("action")
+        act = str(_a[0]) if isinstance(_a, list) and _a else (str(_a) if isinstance(_a, str) else "")
+        upd = meta.get("updated") or meta.get("generated_at") or ""
+        cells = [
+            ("أعلى قطاع", f'{top.get("name", "")} — {top.get("level_ar", "")}'.strip(" —")),
+            ("الوقائع المؤهلة", f'{cnt.get("qualifying", 0)} من {cnt.get("total", 0)}'),
+            ("إجراء اليوم", act),
+            ("آخر تحديث", str(upd)),
+        ]
+        items = "".join(
+            f'<li><span class="mds-k">{_esc(k)}</span><span class="mds-v">{_esc(v)}</span></li>'
+            for k, v in cells if v)
+        return f'<ul class="hmap-decide">{items}</ul>'
+    except Exception as e:  # لا يُسقط فشل الشريط بناء التقرير
+        print(f"تنبيه: تعذر توليد شريط قرار الخريطة ({e})", file=sys.stderr)
+        return ""
 
 
 def render_print_distribution_cards(sections, defs) -> str:
@@ -1997,7 +2049,9 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
             except Exception as e:  # لا يُسقط فشل الشريط بناء التقرير
                 print(f"تنبيه: تعذر توليد شريط نسب القطاعات ({e})", file=sys.stderr)
             _strip = _strip + _imo_line
-            hero_map_html = "" if mode == "additions" else hero_map(_hero_map_source, extra_html=_strip)
+            _dstrip = _map_decision_strip(meta)
+            hero_map_html = "" if mode == "additions" else hero_map(
+                _hero_map_source, extra_html=_strip, top_html=_dstrip)
             # تُحضر كتلة الطباعة لكل سطح؛ سياسة الإضافات تحدد موضعها فقط.
             print_map_html = hero_map(_hero_map_source, print_mode=True)
         except Exception as e:
@@ -2207,6 +2261,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="referrer" content="no-referrer">
 <script>document.documentElement.className='js';</script>
+<script>(function(){{var f=function(){{var els=[document.querySelector('.topbar'),document.querySelector('.site-nav')].filter(Boolean);if(!els.length)return;var c=window.scrollY>140;els.forEach(function(e){{e.classList.toggle('is-compact',c)}})}};var g=function(){{f();window.addEventListener('scroll',f,{{passive:true}})}};if(document.readyState==='loading'){{document.addEventListener('DOMContentLoaded',g)}}else{{g()}}}})();</script>
 <link rel="stylesheet" href="{FONT_LINK}">
 <style>{DESIGN_TOKENS}{STYLE}{BLK.STYLE_BLOCKS}{DAYLIGHT}{LINK_RULE}</style>
 </head>

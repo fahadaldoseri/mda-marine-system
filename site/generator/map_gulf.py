@@ -334,7 +334,7 @@ def _border_paths():
 
 # ---------------------------------------------------------------- منع التصادم (ك-107 · ك-108)
 DOT_R = 7.0                 # نصف قطر نقطة العلامة
-MARK_SEP = 22.0             # أدنى مسافة بين مركزي علامتين: قطرا نقطتين وهامش
+MARK_SEP = 40.0             # أدنى مسافة بين مركزي علامتين: قطرا نقطتين وهامش
 LABEL_GAP = 4.0             # أدنى فراغ بين تسميتين
 SEA_FONT = {"lg": 19, "sm": 15}
 COUNTRY_FONT = 15
@@ -382,7 +382,7 @@ def _spread_markers(coords, sep=MARK_SEP, iters=80):
 
 
 def _text_rect(x, y, size, text):
-    w = max(len(str(text)), 1) * size * 0.5 + 6
+    w = max(len(str(text)), 1) * size * 0.62 + 6
     h = size * 1.35
     return (x - w / 2, y - h / 2, x + w / 2, y + h / 2)
 
@@ -391,7 +391,7 @@ def _rects_hit(a, b, gap=LABEL_GAP):
     return a[0] < b[2] + gap and b[0] < a[2] + gap and a[1] < b[3] + gap and b[1] < a[3] + gap
 
 
-def _place_labels(specs, avoid_pts, step=7, tries=10):
+def _place_labels(specs, avoid_pts, step=9, tries=14):
     """يزيح التسمية رأسيًا حتى لا تتقاطع مع تسمية أسبق منها ولا مع علامة (ك-107).
 
     specs مرتبة بالأولوية: الأولى لا تتحرك. إن لم يوجد موضع خالٍ تبقى التسمية في موضعها الأصلي.
@@ -412,6 +412,22 @@ def _place_labels(specs, avoid_pts, step=7, tries=10):
         out.append(best)
     return out
 
+
+
+CLUSTER_SEP = 46.0        # عتبة ضمّ العلامات المتقاربة في شارة واحدة
+BADGE_FONT = 22.0          # حجم خط شارة المعرّف داخل viewBox
+
+
+def _badge(cx, cy, text, size=BADGE_FONT, dy=-26.0):
+    """شارة معرّف الواقعة: مستطيل داكن بحدّ بلون العلامة ونص معرّف واضح."""
+    w = 12.0 + len(str(text)) * size * 0.62
+    h = size * 1.55
+    x, y = cx - w / 2, cy + dy - h / 2
+    return (
+        f'<rect class="mp-badge-r" x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}" rx="{h/2:.1f}"/>'
+        f'<text class="mp-badge-t" x="{cx:.1f}" y="{cy + dy + size*0.36:.1f}" '
+        f'style="font-size:{size}px;fill:#eaf6ff;font-weight:600;text-anchor:middle">{text}</text>'
+    )
 
 
 def _esc(v):
@@ -531,7 +547,7 @@ MAP_KEY_STYLE = """<style>
 .map-legend .lg-st.st-confirm{border-color:#e2554f;color:#f4b8b5}
 .map-legend .lg-st.st-inter{border-color:#e7b23c;color:#f2d79a}
 .map-legend .lg-st.st-suspect{border-color:#4a7fa8;color:#bcd8ec}
-.map-legend .lg-prec{color:#9fb6cb;font-size:11.5px;white-space:nowrap}
+.map-legend .lg-prec{color:#cfe2ee;font-size:11.5px;white-space:nowrap}
 .map-key .lg-none{grid-column:1 / -1;color:#c3e6f4}
 @media (max-width:760px){.map-key{grid-template-columns:minmax(0,1fr)}}
 .hmap-route-key{display:grid;gap:2px;padding:7px 10px 8px;border-top:1px solid #28405f;background:#0c1626;color:#c3d2e6;font-size:11.5px;line-height:1.45}
@@ -541,7 +557,7 @@ MAP_KEY_STYLE = """<style>
 .hmap-route-key .rk-separator{border-top-color:#f8cdf3;border-top-style:dashed;border-top-width:1px}
 .hmap-route-key .rk-inshore{border-top-color:#ff4ef4;border-top-style:dashed}
 .hmap-route-key .rk-arrow{width:15px;border-top-color:#ff9af5;transform:rotate(-18deg)}
-@media (max-width:760px){.hmap-route-key{font-size:11px;padding-inline:8px}}
+@media (max-width:760px){.hmap-route-key{font-size:13px;padding-inline:8px}}
 </style>"""
 
 
@@ -602,6 +618,26 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
         for s in specs if s["k"] == "country"
     )
 
+    sids = []
+    for i, p in enumerate(points, start=1):
+        _s = short_code(p.get("code") or "", REPORT_DATE) or f"{i:02d}"
+        if not _s[:1].isalpha():
+            _s = f"MN-{_s}"
+        sids.append(_s)
+
+    # عنقود: ضمّ العلامات التي تقلّ المسافة بينها عن CLUSTER_SEP في شارة واحدة
+    groups: list[list[int]] = []
+    for idx in range(len(points)):
+        for g in groups:
+            if any(math.hypot(shown_xy[idx][0] - shown_xy[j][0],
+                              shown_xy[idx][1] - shown_xy[j][1]) < CLUSTER_SEP for j in g):
+                g.append(idx)
+                break
+        else:
+            groups.append([idx])
+    cluster_of = {j: gi for gi, g in enumerate(groups) for j in g}
+    cluster_head = {g[0]: g for g in groups}
+
     marks, legend = [], []
     for i, p in enumerate(points, start=1):
         x, y = shown_xy[i - 1]
@@ -617,12 +653,29 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
                 f'style="stroke:var(--map-label);stroke-width:1;opacity:.75"/>'
                 f'<circle cx="{tx:.1f}" cy="{ty:.1f}" r="2.4" style="fill:var(--map-label)"/></g>'
             )
-        marks.append(
-            f'<g class="mp-event{" mp-approx" if p.get("precision") == "approximate" else ""}" transform="translate({x:.1f},{y:.1f})" style="--mk:{color}">'
-            f'<circle class="mp-halo" r="14" style="fill:var(--mk);opacity:.22"/>'
-            f'<circle class="mp-dot" r="7" style="{_dot_style(p)}"/>'
-            f'<text class="mp-num" y="3.7" style="fill:#fff;font-size:9.5px;font-weight:600;text-anchor:middle">{i}</text></g>'
-        )
+        grp = cluster_head.get(cluster_of[i - 1])
+        if grp and grp[0] != i - 1:
+            # عضو تابع لعنقود رُسم مرة واحدة
+            pass
+        elif grp and len(grp) > 1:
+            cxs = sum(shown_xy[j][0] for j in grp) / len(grp)
+            cys = sum(shown_xy[j][1] for j in grp) / len(grp)
+            ids = "·".join(sids[j] for j in grp)
+            marks.append(
+                f'<g class="mp-event mp-cluster" transform="translate({cxs:.1f},{cys:.1f})" style="--mk:{color}">'
+                f'<circle class="mp-halo" r="26" style="fill:var(--mk);opacity:.22"/>'
+                f'<circle class="mp-dot" r="16" style="{_dot_style(p)}"/>'
+                f'<text class="mp-num" y="8" style="fill:#fff;font-size:26px;font-weight:700;text-anchor:middle">{len(grp)}</text>'
+                f'{_badge(cxs, cys, ids, dy=-34.0)}</g>'
+            )
+        else:
+            marks.append(
+                f'<g class="mp-event{" mp-approx" if p.get("precision") == "approximate" else ""}" transform="translate({x:.1f},{y:.1f})" style="--mk:{color}">'
+                f'<circle class="mp-halo" r="14" style="fill:var(--mk);opacity:.22"/>'
+                f'<circle class="mp-dot" r="7" style="{_dot_style(p)}"/>'
+                f'<text class="mp-num" y="5" style="fill:#fff;font-size:16px;font-weight:600;text-anchor:middle">{i}</text>'
+                f'{_badge(x, y, sids[i - 1])}</g>'
+            )
         txt = (p.get("label") or p.get("area") or "").strip()
         bits = [f'<span class="lg-txt">{_esc(txt)}</span>',
                 f'<span class="lg-st st-{st_key}">{st_ar}</span>',
@@ -631,7 +684,7 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
             bits.append(f'<bdi class="bidi ev-code">{short_code(code, REPORT_DATE)}</bdi>')
         if ref:
             bits.append(f'<bdi class="bidi">{_esc(ref)}</bdi>')
-        legend.append(f'<li><span class="lg-num" style="--mk:{color}">{i}</span>{" ".join(bits)}</li>')
+        legend.append(f'<li><span class="lg-num" style="--mk:{color}">{sids[i - 1]}</span>{" ".join(bits)}</li>')
 
     legend_html = f'<ol class="map-legend">{"".join(legend)}</ol>' if legend else ""
     cap = f'<p class="src-note">{caption}</p>' if caption else ""
@@ -738,7 +791,7 @@ def _frame_svg() -> str:
         f'<line x1="{x0:.1f}" y1="{y0 - 5:.1f}" x2="{x0:.1f}" y2="{y0 + 5:.1f}" style="stroke:#cfe3f2;stroke-width:1.2"/>'
         f'{ticks}'
         f'<line x1="{x0 + bar:.1f}" y1="{y0 - 5:.1f}" x2="{x0 + bar:.1f}" y2="{y0 + 5:.1f}" style="stroke:#cfe3f2;stroke-width:1.2"/>'
-        f'<text x="{x0 + bar + 8:.1f}" y="{y0 + 4:.1f}" style="fill:#cfe3f2;font-size:11px;direction:rtl;unicode-bidi:isolate">'
+        f'<text x="{x0 + bar + 8:.1f}" y="{y0 + 4:.1f}" style="fill:#cfe3f2;font-size:13px;direction:rtl;unicode-bidi:isolate">'
         f'{target:g} كيلومتر · {nm:.0f} ميل بحري</text>'
     )
     nx, ny = WIDTH - 26.0, 34.0
@@ -746,7 +799,7 @@ def _frame_svg() -> str:
         f'<g class="mp-north" aria-label="سهم الشمال">'
         f'<path d="M{nx:.1f} {ny - 15:.1f} L{nx + 6:.1f} {ny + 6:.1f} L{nx:.1f} {ny + 1:.1f} L{nx - 6:.1f} {ny + 6:.1f} Z" '
         f'style="fill:#cfe3f2"/>'
-        f'<text x="{nx:.1f}" y="{ny + 19:.1f}" text-anchor="middle" style="fill:#cfe3f2;font-size:11px;font-weight:600">N</text></g>'
+        f'<text x="{nx:.1f}" y="{ny + 19:.1f}" text-anchor="middle" style="fill:#cfe3f2;font-size:13px;font-weight:600">N</text></g>'
     )
     return f'<g class="mp-frame">{bar_svg}{north_svg}</g>'
 
