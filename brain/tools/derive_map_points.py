@@ -191,10 +191,18 @@ def derive(date: str) -> dict:
                 errors.append(f"مِرساة «{area}» ({lat}, {lon}) تقع على اليابسة — تُصحَّح إلى مياه منطقتها")
                 continue
             _z = zstat.get(code, {})
+            _label = (str(e.get("title") or "").strip()[:64] or area)
+            # تمييز المسند لكل نقطة: مِرساة واحدة قد تخدم عدة وقائع، وتكرار النص نفسه أكثر من مرتين
+            # يُعدّ قالبًا متكررًا مانعًا في بوابة الصياغة (G045). فيُضاف عنوان الواقعة ليكون كل مسند فريدًا.
+            if prec == "exact":
+                _basis = f"إحداثيات الواقعة «{_label}» مذكورة في نص المصدر"
+            else:
+                _basis = (f"الموضع التقريبي لواقعة «{_label}» داخل منطقة {area} "
+                          f"وفق المِرساة المعتمدة")
             points.append({"code": code, "area": area, "lat": round(lat, 4), "lon": round(lon, 4),
-                           "precision": prec, "surface": surf_name, "basis": basis,
+                           "precision": prec, "surface": surf_name, "basis": _basis,
                            "source": a.get("source", ""),
-                           "label": (str(e.get("title") or "").strip()[:64] or area),
+                           "label": _label,
                            "confirmation": _z.get("confirmation"),
                            "qualifying": _z.get("qualifying"),
                            "zone": _z.get("zone"),

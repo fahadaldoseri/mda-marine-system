@@ -1,0 +1,44 @@
+===== خط التشغيل الموحّد v4 — 2026-10-20 — 2026-10-20T03:43:15Z =====
+-- 1) التغذيات --
+  تغذيات مرصودة: 38
+  نجح: 32 · فشل: 6 · عناصر مقروءة: 993
+   ✘ 14 قناة العربية: all routes failed: primary: HTTP Error 403: Forbidden | fallback:jina.ai/alarabiya-rss: blocked page: Just a moment | fallback:jina.ai/alarabiya-home: blocked page: Just a moment
+   ✘ 17 حساب @bna_en على X: all routes failed: primary: HTTP Error 403: Forbidden | fallback:jina.ai/bna-en-x: proxy reported target error | fallback:jina.ai/bna-rss: blocked page: Human Verification
+   ✘ 25 وكالة أنباء الإمارات (وام): all routes failed: primary: content too short: 20 chars < 400
+   ✘ 25 وكالة أنباء الإمارات (وام): all routes failed: primary: content too short: 20 chars < 400
+   ✘ 26 وكالة الأنباء السعودية (واس): all routes failed: primary: content too short: 22 chars < 400
+   ✘ 26 وكالة الأنباء السعودية (واس): all routes failed: primary: content too short: 22 chars < 400
+  ✔ حُفظ: feeds-2026-10-20.json / .md / .status.json — الحالة: degraded
+   ✔ مستجدات التغذيات: feeds/feeds-2026-10-20.md (الحالة: degraded)
+-- 2) فحص OFAC (قائمة مُولَّدة من سفن التقرير) --
+  · لا سفن مُعرَّفة في إصدار 2026-10-20 — لا إضافة
+  سفن الإصدار: 0 · مضاف جديد: 0 · إجمالي القائمة: 4
+  قائمة SDN: 19413 اسمًا · المصدر: https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exp
+   ✔ لا تطابق · AL MAQAM
+   ✔ لا تطابق · DF PEAK
+   · مطابقة كلمة شائعة — إعلامي بلا تحذير · PETRO DOLPHIN → DO
+   ✔ لا تطابق · CAPE DAO
+  ✔ حُفظ: archive/ofac-screen-latest.json · تطابق: 0 · جزئي: 0 · لا تطابق: 4
+   ✔ فُحص 4 مستهدفًا — الحالة: ok
+-- 3) حفظ الأصول الرسمية --
+  أصول صالحة: 1/3 · هيكلية فارغة: 1 · فشل: 1 · البيان: /home/ubuntu/brain-marine-news/archive/originals/2026-10-20/manifest.json
+   ✘ [empty_shell] https://www.ukmto.org/recent-incidents → صفحة هيكلية بلا محتوى نصي (332 حرفًا < 400) — لا قيمة إثباتي
+   ✘ [failed] https://www.ukmto.org/advisories → HTTP Error 404: Not Found
+   ✘ حُفظت الأصول في archive/originals/2026-10-20/ — الحالة: degraded
+-- 4) دمج الذاكرة التراكمية (قبل العلامة) --
+  ✔ الدفتر الجامع: cumulative-2026/event-ledger-master.json — 208 سجلًا (نطاق 2026-02-28 → 2026-10-19)
+  ✔ قائمة سجلات واحدة (`events`) — أُزيل المفتاح المكرر `records`
+  ✔ مضاف هذه الجولة: 0 (لا جديد)
+  ✔ إجمالي المضاف منذ التجميد: 63 سجلًا (64 رمزًا في الخريطة)
+  ✔ رموز مثبّتة بأثر رجعي: 1 — ['MN-2026-10-11-02 → EV-2026-10-11-148-5ced58be']
+  ✔ أقسام مُعاد بناؤها: counts, source_audit · لقطات تاريخية موسومة: imo_summary, numeric_indicators, threat_assessment, geographic_summary, sections
+  ✔ خريطة الرموز: appendices/event-code-map.json — 64 رمزًا · غير مُسنَد: لا شيء
+  · توزيع أكتوبر: {'2026-10-01': 1, '2026-10-04': 2, '2026-10-05': 1, '2026-10-06': 1, '2026-10-07': 1, '2026-10-09': 1, '2026-10-10': 1, '2026-10-11': 3, '2026-10-12': 5, '2026-10-13': 9, '2026-10-14': 9, '2026-10-15': 2, '2026-10-16': 14, '2026-10-17': 11, '2026-10-18': 8, '2026-10-19': 3}
+   ✔ دُمج ملف اليوم في الدفتر الجامع وبُنيت خريطة الرموز ونُسخ الدفتر إلى الموقع
+-- 5) النموذج المدمج: ترشيح التغذيات + مراجعة لغوية --
+  ✔ داخل النطاق: 8 · عند الصلة المباشرة: 7 · خارج النطاق: 132 · أخطاء: 0
+  ✔ الملخص: /home/ubuntu/brain-marine-news/audit/llm-triage-2026-10-20-0345.md
+   ✔ رُشّحت التغذيات ورُوجعت اللغة آلياً بالنموذج المدمج
+-- 6) بوابة التسليم: مؤجّلة — التقرير أو ملف الواجهة لم يُكتب بعد --
+   شغّلها بعد كتابة التقرير: bash tools/final_gate.sh 2026-10-20
+===== نهاية الخط (رمز الخروج: 1) =====
