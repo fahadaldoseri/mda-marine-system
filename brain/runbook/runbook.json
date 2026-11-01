@@ -4116,7 +4116,7 @@
    "command": [
     "bash",
     "-lc",
-    "B=\"$PWD\"; export B; python3 validators/check_repo_secrets.py --repo \"$(dirname \"$B\")/mda-marine-system\" && python3 validators/check_secrets.py --root \"$B\" && python3 validators/check_secrets.py --root \"$(dirname \"$B\")/mda-marine-system\"; rc=$?; exit $rc"
+    "B=\"$PWD\"; export B; python3 validators/check_repo_secrets.py --repo \"$(dirname \"$B\")/mda-marine-system\" && python3 validators/check_secrets.py --root \"$B\" && python3 validators/check_secrets.py --root \"$(dirname \"$B\")/mda-marine-system\" && python3 validators/check_backup_push_safety.py --script \"$B/tools/github_backup.sh\"; rc=$?; exit $rc"
    ],
    "ok_rc": [
     0
