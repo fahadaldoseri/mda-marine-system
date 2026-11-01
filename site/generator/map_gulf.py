@@ -840,12 +840,12 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
         _ves = p.get("vessel") or p.get("ship") or ""
         ev_rows.append(
             f'<tr><td><bdi class="bidi">{_sid}</bdi></td>'
-            f'<td>{_esc((p.get("label") or "")[:150])}</td>'
+            f'<td>{_esc(str(p.get("area") or "غير محددة"))}</td>'
             f'<td>{_esc(str(p.get("class") or "غير محددة"))} · {_esc(str(p.get("confirmation") or "غير محدد"))}</td>'
             f'<td>{_esc(_tl_txt)}</td>'
             f'<td>{_esc(_ves or "غير محددة في المواد الحالية")}</td></tr>')
     events_html = ('<details class="mp-events-detail"><summary>تفاصيل الوقائع: الخط الزمني وتفاصيل السفينة وإسناد الطبقات</summary>'
-                   '<table class="mp-ev-table"><thead><tr><th>المعرّف</th><th>الواقعة</th><th>الصفة والإثبات</th>'
+                   '<table class="mp-ev-table"><thead><tr><th>المعرّف</th><th>المنطقة</th><th>الصفة والإثبات</th>'
                    '<th>الخط الزمني</th><th>السفينة</th></tr></thead><tbody>'
                    + "".join(ev_rows) + '</tbody></table></details>') if ev_rows else ""
     cap = f'<p class="src-note">{caption}</p>' if caption else ""
