@@ -1,0 +1,1 @@
+../../site/generator/build_report.py

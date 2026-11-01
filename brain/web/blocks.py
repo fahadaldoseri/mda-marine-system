@@ -1,0 +1,1 @@
+../../site/generator/blocks.py
