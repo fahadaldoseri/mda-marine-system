@@ -108,6 +108,31 @@ def _load_json(path: Path) -> dict | None:
     return value if isinstance(value, dict) else None
 
 
+def _default_kpis_totals() -> dict:
+    """مصدر المقاييس الافتراضي: يوم البيئة إن حُدد، وإلا أحدث يوم مؤرَّخ مُبنى.
+
+    عطل (2026-11-01): كان المصدر مثبتًا على 2026-10-31 فيقارن بطاقة اليوم بمقياس يوم
+    سابق ويفشل مغلقًا بلا سبب حقيقي. القاعدة الآن: لا تاريخ مثبّت داخل الحاجز.
+    """
+    for key in ("D", "DATE"):
+        env = (os.environ.get(key) or "").strip()
+        path = ROOT / "web" / "kpis-totals" / f"{env}.json"
+        if env and path.exists():
+            return _load_json(path) or {}
+    days = sorted(x.stem for x in (ROOT / "web" / "kpis-totals").glob("*.json")
+                  if re.fullmatch(r"\d{4}-\d{2}-\d{2}", x.stem))
+    for day in reversed(days):
+        data = _load_json(ROOT / "web" / "kpis-totals" / f"{day}.json")
+        if data:
+            return data
+    return {}
+
+
+def _metric_by_id(kpis_totals: dict, metric_id: str) -> dict | None:
+    return next((metric for metric in (kpis_totals.get("metrics") or [])
+                 if isinstance(metric, dict) and metric.get("id") == metric_id), None)
+
+
 def load_registry(path: Path | None = None) -> dict:
     """Load and minimally validate the one declarative card registry."""
     registry_path = path or DEFAULT_REGISTRY
@@ -535,7 +560,7 @@ def _hero_contract(registry: dict) -> dict:
     return contract
 
 
-def _hero_value(meta: dict, zones_data: dict, card: dict):
+def _hero_value(meta: dict, zones_data: dict, card: dict, kpis_totals: dict | None = None):
     source = card.get("source") or {}
     kind = source.get("kind")
     if kind == "zones_counter":
@@ -548,6 +573,9 @@ def _hero_value(meta: dict, zones_data: dict, card: dict):
         for part in source.get("path", []):
             value = value[part]
         return value
+    if kind == "kpis_totals":
+        metric = _metric_by_id(kpis_totals or _default_kpis_totals(), str(source.get("id") or ""))
+        return metric.get(source.get("field", "today")) if metric else None
     return None
 
 
@@ -555,19 +583,21 @@ def _hero_detail(meta: dict, zones_data: dict, card: dict) -> str:
     detail = card.get("detail") or {}
     if detail.get("kind") == "qualifying_composition":
         c = zones_data.get("counter") or {}
-        return f"{c.get('confirmed', 0)} مؤكدة + {c.get('probable', 0)} مرجّحة + {c.get('unconfirmed_qualifying', 0)} غير مؤكدة مؤهلة"
+        return f"{c.get('confirmed') or 0} مؤكدة + {c.get('probable') or 0} مرجّحة + {c.get('unconfirmed_qualifying') or 0} غير مؤكدة مؤهلة"
     if detail.get("kind") == "unconfirmed_split":
         c = zones_data.get("counter") or {}
-        return f"{c.get('unconfirmed_total', 0)} روايات · منها {c.get('unconfirmed_qualifying', 0)} مؤهلة · تُذكر ولا تُحتسب"
+        return f"{c.get('unconfirmed_total') or 0} روايات · منها {c.get('unconfirmed_qualifying') or 0} مؤهلة · تُذكر ولا تُحتسب"
     if detail.get("kind") == "fire_split":
         fire = (meta.get("hero_sources") or {}).get("fire") or {}
-        return f"المؤكد: {fire.get('confirmed', 0)} · المرجّح: {fire.get('probable', 0)} · غير المؤكد: {fire.get('unconfirmed', 0)}"
+        return (f"المؤكد: {fire.get('confirmed') or 0} · "
+                f"المرجّح: {fire.get('probable') or 0} · "
+                f"غير المؤكد: {fire.get('unconfirmed') or 0}")
     return detail.get("ar", "")
 
 
 def validate_hero_kpis(meta: dict, zones_data: dict, registry: dict, *, rendered_html: str | None = None,
-                       previous_meta: dict | None = None) -> list[str]:
-    """حواجز الصفين: عنوان ثابت، سبعة مواضع حاضرة، وتفصيل مشتق من المصدر."""
+                       previous_meta: dict | None = None, kpis_totals: dict | None = None) -> list[str]:
+    """حواجز الصفين: عنوان ثابت، ثمانية مواضع حاضرة، وتفصيل مشتق من المصدر."""
     errors: list[str] = []
     try:
         contract = _hero_contract(registry)
@@ -575,12 +605,13 @@ def validate_hero_kpis(meta: dict, zones_data: dict, registry: dict, *, rendered
         return [str(exc)]
     cards = meta.get("hero_kpis")
     expected = contract["cards"]
+    kpis_totals = kpis_totals or _default_kpis_totals()
     if not isinstance(cards, list):
         return ["حاجز وجود البطاقة: hero_kpis مفقود أو ليس قائمة"]
     if len(cards) != len(expected):
         errors.append(f"حاجز وجود البطاقة: عدد البطاقات={len(cards)} والملزم={len(expected)}")
     actual = {str(c.get("id")): c for c in cards if isinstance(c, dict) and c.get("id")}
-    for item in expected:
+    for expected_index, item in enumerate(expected):
         cid = item.get("id", "")
         card = actual.get(cid)
         if card is None:
@@ -590,9 +621,25 @@ def validate_hero_kpis(meta: dict, zones_data: dict, registry: dict, *, rendered
             errors.append(f"حاجز ثبات العنوان: {cid}: {card.get('title')} ≠ {item.get('title')}")
         if card.get("row") != item.get("row"):
             errors.append(f"حاجز وجود البطاقة: موضع {cid}={card.get('row')} والملزم={item.get('row')}")
+        if card in cards and cards.index(card) != expected_index:
+            errors.append(f"حاجز وجود البطاقة: ترتيب {cid}={cards.index(card)} والملزم={expected_index}")
         if card.get("tag") != item.get("tag"):
             errors.append(f"حاجز ثبات العنوان: وسم {cid} متغير أو مفقود")
-        expected_value = _hero_value(meta, zones_data, item)
+        source = item.get("source") or {}
+        metric = None
+        if source.get("kind") == "kpis_totals":
+            metric = _metric_by_id(kpis_totals, str(source.get("id") or ""))
+            if metric is None:
+                errors.append(f"حاجز مصدر المقياس: {cid} مقياس kpis_totals مفقود: {source.get('id')}")
+            for layer_name, layer_spec in (item.get("layers") or {}).items():
+                if (layer_spec.get("kind"), layer_spec.get("id")) != ("kpis_totals", source.get("id")):
+                    errors.append(f"حاجز مصدر المقياس: {cid}.{layer_name} لا يستخدم المقياس نفسه")
+                if metric is not None:
+                    expected_layer = metric.get(layer_spec.get("field", layer_name))
+                    actual_field = layer_name if layer_name in {"cumulative", "updated"} else layer_spec.get("field", layer_name)
+                    if expected_layer is None or str(card.get(actual_field)) != str(expected_layer):
+                        errors.append(f"حاجز طبقة البطاقة: {cid}.{layer_name} قيمة البطاقة={card.get(actual_field)} والمصدر={expected_layer}")
+        expected_value = _hero_value(meta, zones_data, item, kpis_totals)
         if expected_value is not None and str(card.get("value")) != str(expected_value):
             errors.append(f"حاجز تفصيل البطاقة: {cid} قيمة البطاقة={card.get('value')} والمصدر={expected_value}")
         expected_detail = _hero_detail(meta, zones_data, item)
@@ -740,7 +787,8 @@ def validate_card_documents(*, ar_report: str, ar_additions: str, en_report: str
                              en_additions: str | None = None, glossary_path: Path | None = None,
                              registry_path: Path | None = None, zones_data: dict | None = None,
                              meta_data: dict | None = None,
-                             sections_policy: dict | None = None) -> list[str]:
+                             sections_policy: dict | None = None,
+                             kpis_totals_data: dict | None = None) -> list[str]:
     try:
         registry = load_registry(registry_path)
     except ValueError as exc:
@@ -754,7 +802,8 @@ def validate_card_documents(*, ar_report: str, ar_additions: str, en_report: str
                                    registry=registry, zones_data=zones_data,
                                    sections_policy=sections_policy))
     if meta_data is not None and zones_data is not None:
-        errors.extend(validate_hero_kpis(meta_data, zones_data, registry, rendered_html=ar_report))
+        errors.extend(validate_hero_kpis(meta_data, zones_data, registry, rendered_html=ar_report,
+                                         kpis_totals=kpis_totals_data))
     if meta_data is not None:
         errors.extend(validate_official_cards(meta_data, registry))
     return errors
@@ -775,6 +824,8 @@ def main(argv=None) -> int:
             return 2
     zone_path = dist.parent / "sources" / "zones" / f"{args.date}.json"
     zones_data = _load_json(zone_path)
+    kpis_totals_path = ROOT / "web" / "kpis-totals" / f"{args.date}.json"
+    kpis_totals_data = _load_json(kpis_totals_path)
     meta_path = dist.parent / "sources" / "meta" / f"{args.date}.json"
     meta_data = _load_json(meta_path)
     policy_path = dist.parent / "sources" / "report-sections-policy.json"
@@ -787,7 +838,7 @@ def main(argv=None) -> int:
         en_report=paths[2].read_text(encoding="utf-8"), en_additions=paths[3].read_text(encoding="utf-8"),
         glossary_path=dist.parent / "sources" / "i18n" / "en" / "glossary.json",
         registry_path=Path(args.registry), zones_data=zones_data, meta_data=meta_data,
-        sections_policy=sections_policy,
+        sections_policy=sections_policy, kpis_totals_data=kpis_totals_data,
     )
     if errors:
         for error in errors:
@@ -800,4 +851,6 @@ def main(argv=None) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)

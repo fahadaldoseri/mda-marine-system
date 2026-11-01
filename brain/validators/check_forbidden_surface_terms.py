@@ -130,10 +130,6 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    try:
-        sys.exit(main())
-    except SystemExit:
-        raise
-    except BaseException as exc:
-        print(f"انهيار المدقق (رمز 70): {type(exc).__name__}: {exc}", file=sys.stderr)
-        raise SystemExit(70)
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)

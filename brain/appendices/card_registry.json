@@ -188,7 +188,7 @@
     },
     "row_counts": {
       "1": 4,
-      "2": 3
+      "2": 4
     },
     "risk_patterns": [
       "هجوم",
@@ -386,7 +386,7 @@
         },
         "detail": {
           "kind": "fire_split",
-          "en": "Confirmed: 0 · probable: 1 · unconfirmed: 2"
+          "en": "Confirmed: 0 · probable: 0 · unconfirmed: 2"
         },
         "layers": {
           "cumulative": {
@@ -397,6 +397,37 @@
           "updated": {
             "kind": "kpis_totals",
             "id": "fire-incidents",
+            "field": "updated"
+          }
+        }
+      },
+      {
+        "id": "imo-confirmed-attacks",
+        "row": 2,
+        "title": "هجمات مؤكدة على سفن",
+        "title_en": "Confirmed attacks on ships",
+        "tag": "IMO",
+        "tag_en": "IMO",
+        "source_label": "IMO — قائمة الوقائع المؤكدة",
+        "source_label_en": "IMO — confirmed incidents list",
+        "source": {
+          "kind": "kpis_totals",
+          "id": "imo-confirmed-attacks",
+          "field": "today"
+        },
+        "detail": {
+          "ar": "واقعة مؤكدة على سفينة تجارية في القائمة الرسمية للمنظمة البحرية الدولية · تحديث القائمة: 31 أكتوبر 2026",
+          "en": "Confirmed incident involving a commercial vessel in the official IMO list · List updated: 31 October 2026"
+        },
+        "layers": {
+          "cumulative": {
+            "kind": "kpis_totals",
+            "id": "imo-confirmed-attacks",
+            "field": "cumulative"
+          },
+          "updated": {
+            "kind": "kpis_totals",
+            "id": "imo-confirmed-attacks",
             "field": "updated"
           }
         }

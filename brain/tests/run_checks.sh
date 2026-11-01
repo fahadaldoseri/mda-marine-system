@@ -207,6 +207,7 @@ t() {  # t "الوصف" أمر...  — يمرّ إن كان رمز الخروج 
 cd "$B" || exit 1
 echo "13) أدوات اللغة: حارس الحفظ · الإملاء · التحرير الآلي"
 t "أدوات اللغة (اختبار قديم)" python3 tests/test_language_tools.py
+t "وحدات إسناد المصدر مشتركة بين المولّد والحاجز" python3 tests/test_content_fidelity_units.py
 t "حارس الحفظ: ترقيم ملاصق · عناوين · مسموح الحذف" python3 tests/test_preserve_check.py
 t "فاحص الإملاء بلا إنذار كاذب" python3 tests/test_orthography.py
 t "التحرير الآلي يحفظ التمهيد ويرفض تغيّر الأرقام" python3 tests/test_edit_pass.py

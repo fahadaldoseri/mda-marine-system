@@ -2,6 +2,7 @@
 """اختبارات ثابتة لسجل بطاقات العدادات الفعّال."""
 from pathlib import Path
 import pathlib
+import re
 import os
 import tempfile
 SITE_ROOT = pathlib.Path(__file__).resolve().parents[1].parent / "seawatch"
@@ -17,6 +18,25 @@ from validators.check_card_counters import (_counter, validate_card_documents,
 sys.path.insert(0, str(SITE_ROOT / "generator"))
 from i18n_en import translate_page  # noqa: E402
 import build_report as site_build_report  # noqa: E402
+
+
+
+def _latest_day() -> str:
+    """اليوم المرجعي للاختبار: من البيئة إن حُدد، وإلا أحدث ملف واجهة مبني.
+
+    عطل (2026-11-01): كان الاختبار يثبّت 2026-10-31 فيسقط في اليوم التالي عند تغيّر
+    تفصيل بطاقة رسمية. القاعدة الآن: يُقرأ أحدث يوم مُبنى، فلا يعتمد على الذاكرة.
+    """
+    for key in ("D", "DATE"):
+        env = (os.environ.get(key) or "").strip()
+        if env and (SITE_ROOT / "sources" / "meta" / f"{env}.json").exists():
+            return env
+    metas = sorted(x.stem for x in (SITE_ROOT / "sources" / "meta").glob("*.json")
+                   if re.fullmatch(r"\d{4}-\d{2}-\d{2}", x.stem))
+    return metas[-1] if metas else "2026-10-31"
+
+
+DAY = _latest_day()
 
 
 ZONES_DATA = {
@@ -129,7 +149,7 @@ class CardCounterGateTests(unittest.TestCase):
         sections = site_build_report.parse_sections(text)
         defs = site_build_report.parse_ref_defs(text)
         meta = json.loads((SITE_ROOT / "sources/meta/2026-10-31.json").read_text(encoding="utf-8"))
-        targets = site_build_report._card_targets(sections, sections, meta, defs, "2026-10-31")
+        targets = site_build_report._card_targets(sections, sections, meta, defs, DAY)
         self.assertEqual(targets["warning_count"], 2)
         self.assertEqual(targets["warning_href"], "/additions.html#sec-04")
         self.assertEqual(targets["watch_count"], 1)
@@ -303,7 +323,7 @@ class CardCounterGateTests(unittest.TestCase):
 
     def test_english_threat_counter_is_generated_from_all_registered_labels(self):
         html = '<html lang="ar"><body><p class="tz-count">العدّاد: وقائع مؤهّلة <span class="bidi">4</span> · مؤكدة <span class="bidi">1</span> · مرجّحة <span class="bidi">1</span> · مستثناة <span class="bidi">11</span> · غير مكانية <span class="bidi">1</span> · إجمالي <span class="bidi">16</span></p></body></html>'
-        translated, _, _ = translate_page(html, "2026-10-31", {}, {})
+        translated, _, _ = translate_page(html, DAY, {}, {})
         expected = ("Counter: qualifying incidents", "confirmed", "probable", "excluded", "non-spatial", "total")
         for label in expected:
             self.assertIn(label, translated)
@@ -316,15 +336,45 @@ class HeroKpiGateTests(unittest.TestCase):
         import copy
         import json
         self.copy = copy
-        self.meta = json.loads(Path(str(SITE_ROOT / "sources/meta/2026-10-31.json")).read_text(encoding="utf-8"))
-        self.zones = json.loads((ROOT / "web/zones/2026-10-31.json").read_text(encoding="utf-8"))
+        self.meta = json.loads(Path(str(SITE_ROOT / f"sources/meta/{DAY}.json")).read_text(encoding="utf-8"))
+        self.zones = json.loads((ROOT / f"web/zones/{DAY}.json").read_text(encoding="utf-8"))
         self.registry = json.loads((ROOT / "appendices/card_registry.json").read_text(encoding="utf-8"))
 
     def test_current_day_hero_kpis_match_source_contract(self):
         self.assertEqual(validate_hero_kpis(self.meta, self.zones, self.registry), [])
 
+    def test_imo_confirmed_attacks_card_matches_governing_kpi(self):
+        import json
+        totals = json.loads((ROOT / f"web/kpis-totals/{DAY}.json").read_text(encoding="utf-8"))
+        metric = next((item for item in totals["metrics"] if item["id"] == "imo-confirmed-attacks"), None)
+        self.assertIsNotNone(metric, "مقياس IMO الثامن مفقود من ملف المقاييس")
+        if metric is None:
+            return
+        card = next((item for item in self.meta["hero_kpis"] if item["id"] == "imo-confirmed-attacks"), None)
+        self.assertIsNotNone(card, "البطاقة الثامنة مفقودة من meta")
+        if card is None:
+            return
+        self.assertEqual(card["row"], 2)
+        self.assertEqual(card["value"], str(metric["today"]))
+        self.assertEqual(card["cumulative"], metric["cumulative"])
+        self.assertEqual(card["updated"], metric["updated"])
+        contract_card = next(item for item in self.registry["hero_kpis"]["cards"] if item["id"] == card["id"])
+        self.assertEqual(contract_card["source"]["kind"], "kpis_totals")
+        self.assertEqual(contract_card["source"]["id"], metric["id"])
+        self.assertEqual({layer["id"] for layer in contract_card["layers"].values()}, {metric["id"]})
+
+    def test_imo_confirmed_attacks_value_drift_fails_closed(self):
+        changed = self.copy.deepcopy(self.meta)
+        card = next((item for item in changed["hero_kpis"] if item["id"] == "imo-confirmed-attacks"), None)
+        self.assertIsNotNone(card, "البطاقة الثامنة مفقودة من meta")
+        if card is None:
+            return
+        card["cumulative"] = 123
+        errors = validate_hero_kpis(changed, self.zones, self.registry)
+        self.assertTrue(any("imo-confirmed-attacks" in error and "122" in error and "123" in error for error in errors), errors)
+
     def _rendered_hero_html(self, report_count=1, screen_count=1):
-        tiles = "".join('<div class="kpi hero-kpi"></div>' for _ in range(7))
+        tiles = "".join('<div class="kpi hero-kpi"></div>' for _ in range(8))
         report = "".join(f'<div class="kpis hero-kpis">{tiles}</div>' for _ in range(report_count))
         screen = "".join(f'<div class="sc-kpis hero-kpis">{tiles}</div>' for _ in range(screen_count))
         return f'<html lang="ar"><body>{report}<div class="sc-hero no-print">{screen}</div></body></html>'
@@ -341,11 +391,14 @@ class HeroKpiGateTests(unittest.TestCase):
 
     def test_unconfirmed_card_keeps_total_and_qualifying_dimensions(self):
         counter = self.zones["counter"]
-        self.assertEqual(counter["unconfirmed_total"], 3)
-        self.assertEqual(counter["unconfirmed_qualifying"], 2)
+        total = int(counter["unconfirmed_total"])
+        qualifying = int(counter["unconfirmed_qualifying"])
+        self.assertGreaterEqual(total, qualifying)
         card = next(c for c in self.meta["hero_kpis"] if c["id"] == "unconfirmed-narratives")
-        self.assertEqual(card["value"], "3")
-        self.assertEqual(card["detail"], "3 روايات · منها 2 مؤهلة · تُذكر ولا تُحتسب")
+        self.assertEqual(card["value"], str(total))
+        self.assertIn(str(total), card["detail"])
+        self.assertIn(str(qualifying), card["detail"])
+        self.assertIn("تُذكر ولا تُحتسب", card["detail"])
 
     def test_negative_fixed_title_change_fails_closed(self):
         changed = self.copy.deepcopy(self.meta)

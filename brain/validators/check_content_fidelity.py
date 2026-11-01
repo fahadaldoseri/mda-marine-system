@@ -16,6 +16,12 @@ import argparse, json, pathlib, re, sys
 import os
 
 
+_TOOLS = pathlib.Path(__file__).resolve().parents[1] / "tools"
+if str(_TOOLS) not in sys.path:
+    sys.path.insert(0, str(_TOOLS))
+from source_count_units import count_written_attributions
+
+
 def _root(env: str, base: pathlib.Path, *names: str) -> pathlib.Path:
     """جذر الشجرة: من متغيّر البيئة أو من مجلد شقيق معتمد (قابلية النقل)."""
     v = os.environ.get(env)
@@ -139,13 +145,9 @@ def check_source_counts(brain, site, date):
         short = key.split()[0]
         if key not in line and short not in line:
             ok = fail(f"لا ذكر لـ«{key}» في السطر")
-    # مجموع الإسنادات المكتوبة: أرقام صريحة + صيغ المثنى والمفرد العربية
+    # مجموع الإسنادات المكتوبة: وحدات المولّد من تعريف مشترك، لا نمطًا أوسع منه.
     clause = line.split('المنسوبة إليها')[-1]
-    written = 0
-    for m in re.finditer(r'(\d+)\s*(?:واقع|وقائع|واقعة)', clause):
-        written += int(m.group(1))
-    written += len(re.findall(r'واقعتان|واقعتين', clause)) * 2
-    written += len(re.findall(r'واقعة واحدة', clause))
+    written = count_written_attributions(clause)
     if written != total_attr:
         ok = fail(f"مجموع الإسنادات المكتوبة في المتن {written} والدفتر {total_attr}")
     if ok:

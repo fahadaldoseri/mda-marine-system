@@ -101,7 +101,9 @@ def check_all(brain: pathlib.Path, date: str) -> int:
     # (4-ب) لكل قطاع سطر إعلان «المستوى في <القطاع>: <المستوى>» يطابق بطاقته
     zone_levels = {z["name"]: z["level"] for z in (zones_json.get("zones") or [])}
     for zname, zlv in zone_levels.items():
-        mz = re.search(rf"المستوى في {re.escape(zname)}:\s*(حرج|مرتفع جدًا|مرتفع|متوسط|منخفض)", md)
+        # يقبل الصياغتين المعتمدتين: «المستوى في <القطاع>» و«مستوى التهديد في <القطاع>»؛
+        # والتحقق من المستوى نفسه يبقى صارمًا على سلّم الخمسة.
+        mz = re.search(rf"(?:مستوى التهديد في|المستوى في) {re.escape(zname)}:\s*(حرج|مرتفع جدًا|مرتفع|متوسط|منخفض)", md)
         if not mz:
             problems.append(f"(4) المتن لا يعلن مستوى القطاع «{zname}»")
             continue

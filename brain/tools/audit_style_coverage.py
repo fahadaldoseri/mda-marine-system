@@ -75,6 +75,32 @@ def flatten_json(obj, out: list[str]) -> None:
             flatten_json(v, out)
 
 
+def _disabled_producers() -> dict:
+    """يقرأ المانيفست ويُعيد خطواته المعطّلة — أساسُ استثناء السطح بقرار المالك.
+
+    السبب: إذا عطّل المالك الخطوة المُنتِجة لسطح (مثل الطباعة)، فغياب مخرجها ليس ثغرًا في
+    التغطية بل قرارٌ مُعلن. يُقرأ القرار من المانيفست نفسه لا من قائمة يدوية، ويعود السطح
+    تلقائيًا إلى القياس عند إعادة تفعيل الخطوة.
+    """
+    out = {}
+    try:
+        rb = json.loads((BASE / "runbook" / "runbook.json").read_text(encoding="utf-8"))
+    except Exception:
+        return out
+
+    def walk(o):
+        if isinstance(o, dict):
+            if o.get("id") and o.get("disabled"):
+                out[str(o["id"])] = str(o.get("disabled_reason") or "خطوة معطّلة بقرار المالك")
+            for v in o.values():
+                walk(v)
+        elif isinstance(o, list):
+            for v in o:
+                walk(v)
+    walk(rb)
+    return out
+
+
 def run_gate(cmd: list[str], text_file: Path) -> tuple[int, list[str]]:
     r = subprocess.run(cmd + [str(text_file)], capture_output=True, text=True)
     out = (r.stdout or "") + (r.stderr or "")
@@ -92,12 +118,14 @@ def surfaces(day: str) -> list[dict]:
         {"label": "المتن (التقرير)", "kind": "text", "path": BASE / "reports" / f"{day}-sectioned.md"},
         {"label": "ملف الواجهة (القاموس وأهم الأخبار المتعلقة بالأمن البحري)", "kind": "json",
          "path": BASE / "web" / "meta" / f"{day}.json"},
-        {"label": "رسالة تلغرام", "kind": "html", "path": BASE / "logs" / f"tg-digest-{day}.html"},
+        {"label": "رسالة تلغرام", "kind": "html", "producer": "D030",
+         "path": BASE / "logs" / f"tg-digest-{day}.html"},
         {"label": "صفحة التقرير", "kind": "html", "path": SITE / "dist" / "reports" / f"{day}.html"},
         {"label": "صفحة المصادر", "kind": "html", "path": SITE / "dist" / "sources.html"},
         {"label": "الصفحة الرئيسية", "kind": "html", "path": SITE / "dist" / "index.html"},
         {"label": "صفحة إضافات (ك-234)", "kind": "html", "path": SITE / "dist" / "additions.html"},
-        {"label": "PDF (قياس محدود)", "kind": "pdf", "path": SITE / "dist" / "reports" / "pdf" / f"{day}.pdf"},
+        {"label": "PDF (قياس محدود)", "kind": "pdf", "producer": "B020",
+         "path": SITE / "dist" / "reports" / "pdf" / f"{day}.pdf"},
     ]
 
 
@@ -159,9 +187,17 @@ def main() -> int:
     TMP.mkdir(parents=True, exist_ok=True)
 
     rows, blocked, uncovered = [], 0, 0
+    off = _disabled_producers()
     for i, s in enumerate(surfaces(a.date), 1):
         tgt, err = extract(s, i)
         if tgt is None:
+            prod = s.get("producer")
+            if prod and prod in off:
+                rows.append({"label": s["label"], "path": str(s["path"]),
+                             "status": "مستثنى بقرار المالك",
+                             "note": f"الخطوة {prod} معطّلة: {off[prod]} — {err}",
+                             "style": "—", "prose": "—", "findings": []})
+                continue
             uncovered += 1
             rows.append({"label": s["label"], "path": str(s["path"]), "status": "غير مغطى",
                          "note": err, "style": "—", "prose": "—"})

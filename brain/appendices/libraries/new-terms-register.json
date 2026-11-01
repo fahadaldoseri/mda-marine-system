@@ -1,7 +1,7 @@
 {
   "note": "مكتبة الألفاظ والرموز الجديدة — مرجع دائم يُغذّى آليًا قبل كل تسليم. بُنيت بعد مراجعة المالك في 21 أكتوبر 2026: بنود مُدرَجة في بنك التعريفات، وبنود مستبعدة لأنها جمل وصفية لا مصطلحات (محفوظة في excluded_noise للأمانة).",
-  "updated": "2026-10-31T06:50:24Z",
-  "count": 22,
+  "updated": "2026-11-01T08:34:47Z",
+  "count": 25,
   "terms": [
     {
       "term": "MSI",
@@ -183,19 +183,43 @@
       "status": "بانتظار مراجعة المالك"
     },
     {
-      "term": "EST-2026-10-31-",
-      "kind": "رمز أو مصطلح أجنبي",
-      "first_seen": "2026-10-31",
-      "occurrences_in_edition": 4,
-      "context": "EST-2026-10-31-01: استمرار مستوى التهديد المرتفع في Z1 خلال 24–72 ساعة — مرجح 55–80%.",
-      "status": "بانتظار مراجعة المالك"
-    },
-    {
       "term": "MN-2026-10-07",
       "kind": "رمز أو مصطلح أجنبي",
       "first_seen": "2026-10-31",
       "occurrences_in_edition": 1,
       "context": "اية الألغام بحادثة مستقلة — ممكن 20–45%. الأساس: MN-2026-10-31-05 إلى MN-2026-10-07، مع تضارب المصادر وعدم وجود تأكيد مستقل.",
+      "status": "بانتظار مراجعة المالك"
+    },
+    {
+      "term": "incidents.json",
+      "kind": "رمز أو مصطلح أجنبي",
+      "first_seen": "2026-11-01",
+      "occurrences_in_edition": 3,
+      "context": "appendices/imo-incidents.json#totals.confirmed_incidents",
+      "status": "بانتظار مراجعة المالك"
+    },
+    {
+      "term": "totals.confirme",
+      "kind": "رمز أو مصطلح أجنبي",
+      "first_seen": "2026-11-01",
+      "occurrences_in_edition": 2,
+      "context": "appendices/imo-incidents.json#totals.confirmed_incidents",
+      "status": "بانتظار مراجعة المالك"
+    },
+    {
+      "term": "source.list",
+      "kind": "رمز أو مصطلح أجنبي",
+      "first_seen": "2026-11-01",
+      "occurrences_in_edition": 1,
+      "context": "appendices/imo-incidents.json#source.list_updated",
+      "status": "بانتظار مراجعة المالك"
+    },
+    {
+      "term": "November",
+      "kind": "رمز أو مصطلح أجنبي",
+      "first_seen": "2026-11-01",
+      "occurrences_in_edition": 1,
+      "context": "No official reading for 1 November 2026",
       "status": "بانتظار مراجعة المالك"
     }
   ],
@@ -469,6 +493,16 @@
       "term": "EST-2026-10-30-",
       "reason": "جزء مبتور من رمز إصدار كامل، لا بند معجمي مستقل",
       "first_seen": "2026-10-30"
+    },
+    {
+      "term": "EST-2026-10-31-",
+      "reason": "جزء مبتور من رمز إصدار كامل، لا بند معجمي مستقل",
+      "first_seen": "2026-10-31"
+    },
+    {
+      "term": "EST-2026-11-01-",
+      "reason": "جزء مبتور من رمز إصدار كامل، لا بند معجمي مستقل",
+      "first_seen": "2026-11-01"
     }
   ],
   "reviewed": "2026-10-21",

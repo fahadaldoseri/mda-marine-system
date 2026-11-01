@@ -21,6 +21,11 @@ import re
 import sys
 from pathlib import Path
 
+_TOOLS_DIR = Path(__file__).resolve().parent
+if str(_TOOLS_DIR) not in sys.path:
+    sys.path.insert(0, str(_TOOLS_DIR))
+from source_count_units import count_phrase
+
 B = Path(__file__).resolve().parent.parent
 SENT_OPEN = "<!-- مصادر-تلقائي -->"
 SENT_CLOSE = "<!-- /مصادر-تلقائي -->"
@@ -129,19 +134,8 @@ def ledger_events_line(date: str) -> str:
                 counts[name] = counts.get(name, 0) + 1
     if not rows or not counts:
         return ""
-    _SINGLE = ["واقعة واحدة", "بلاغ واحد", "حادثة واحدة", "واقعة منفردة"]
-    _DOUBLE = ["واقعتان", "بلاغان", "حادثتان"]
-    _MANY = ["{n} وقائع", "{n} بلاغات", "{n} حوادث"]
-
-    def _count_phrase(n: int, i: int) -> str:
-        if n == 1:
-            return _SINGLE[i % len(_SINGLE)]
-        if n == 2:
-            return _DOUBLE[i % len(_DOUBLE)]
-        return _MANY[i % len(_MANY)].format(n=n)
-
     details = "؛ ".join(
-        f"{name} {_count_phrase(n, i)}" for i, (name, n) in enumerate(counts.items())
+        f"{name} {count_phrase(n, i)}" for i, (name, n) in enumerate(counts.items())
     )
     return (f"إجمالي الوقائع المرمزة: {len(rows)} واقعة، بإجمالي {sum(counts.values())} إسنادًا. "
             f"المصادر المستخدمة وعدد الوقائع المنسوبة إليها: {details}.")
@@ -212,6 +206,7 @@ def inject(date: str, c: dict) -> tuple[bool, str]:
         else:
             t = t.rstrip("\n") + "\n\n" + el + "\n"
     p.write_text(t, encoding="utf-8")
+    inject_sources_state(date, c)
     return True, str(p)
 
 
@@ -314,6 +309,67 @@ def main() -> int:
         return 0
     print(json.dumps(c, ensure_ascii=False, indent=1))
     return 0
+
+
+def sources_state_section(date: str, c: dict) -> str:
+    """قسم «حالة المصادر والإفصاح» — مُولَّد من ملف حالة التغذيات ومن العدّاد الحاكم.
+
+    عطل (2026-11-01): كان القسم يُكتب يدويًا في متن التقرير فغاب في إصدار اليوم،
+    وسقط فحص سطح الإضافات (G050) مغلقًا. الآن يُولَّد آليًا في كل تشغيل.
+    """
+    p = B / "feeds" / f"feeds-{date}.status.json"
+    d = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+    items = int(d.get("items") or 0)
+    limit = int(d.get("stale_days_limit") or 14)
+    stale = [str(x) for x in (d.get("stale") or [])]
+    manual = [str(x) for x in (d.get("manual_reference") or [])]
+    attempts = d.get("failed_attempts") or []
+    nums = []
+    for a in attempts:
+        n = a.get("num")
+        if n is not None and str(n) not in nums:
+            nums.append(str(n))
+
+    def ar_list(xs):
+        return "، ".join(xs)
+
+    parts = [f"فُحصت **{c['checked']}/{c['checked']} تغذية** بجملة **{items} عنصرًا**."]
+    parts = [f"فُحصت {c['checked']} تغذية من {c['checked']} تغذية.",
+             f"بلغ مجموع العناصر المقروءة {items} عنصرًا."]
+    if c["failed"] == 0:
+        parts.append("نجحت التغذية على مستوى المصدر كله.")
+    else:
+        parts.append(f"تعذّرت {c['failed']} تغذية من أصل {c['checked']}.")
+    if manual:
+        parts.append(f"سُجلت مرجعية يدوية للمصدرين {ar_list(manual)} — العدد {len(manual)}.")
+    if stale:
+        parts.append(f"وُسمت مصادر متقادمة وفق حد {limit} يومًا: {ar_list(stale)} — العدد {len(stale)}؛ "
+                     "لم يُستند إليها وحدها في إثبات واقعة جديدة.")
+    if nums:
+        parts.append(f"سُجل تعذر مساري المصدرين {ar_list(nums)} في محاولات فرعية، مع بقاء حالة التغذية "
+                     "الكلية ناجحة عبر المسارات المعتمدة البديلة.")
+    if not d.get("empty"):
+        parts.append("لا تغذية فارغة، ولا يُخفى أي قيد عن القارئ.")
+    return "## حالة المصادر والإفصاح\n" + "\n\n".join(parts)
+
+
+def inject_sources_state(date: str, c: dict) -> tuple[bool, str]:
+    """يكتب/يستبدل قسم «حالة المصادر والإفصاح» قبل «المصادر والمراجع» بلا تكرار."""
+    p = report_path(date)
+    if not p.exists():
+        return False, f"لا نص تقرير: {p}"
+    t = p.read_text(encoding="utf-8")
+    block = sources_state_section(date, c)
+    pat = re.compile(r"^##\s+حالة المصادر والإفصاح\s*$.*?(?=^##\s+المصادر والمراجع\s*$)", re.M | re.S)
+    if pat.search(t):
+        t = pat.sub(block + "\n\n", t, count=1)
+    else:
+        m = re.search(r"^##\s+المصادر والمراجع\s*$", t, re.M)
+        if not m:
+            return False, "قسم «المصادر والمراجع» غير موجود"
+        t = t[:m.start()] + block + "\n\n" + t[m.start():]
+    p.write_text(t, encoding="utf-8")
+    return True, str(p)
 
 
 if __name__ == "__main__":
