@@ -82,5 +82,14 @@
     "ok": 60,
     "status_file": "feeds/feeds-2026-11-01.status.json"
   },
-  "written_stage": "final"
+  "written_stage": "final",
+  "originals": {
+    "status": "ok",
+    "healthy": 3,
+    "failed": 0,
+    "empty_shell": 0,
+    "manifest": "archive/originals/2026-11-01/manifest.json",
+    "note": "حُفظت الأصول في archive/originals/2026-11-01",
+    "derived_from": "archive/originals/2026-11-01/"
+  }
 }

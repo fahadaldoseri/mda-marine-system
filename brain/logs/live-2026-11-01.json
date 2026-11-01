@@ -1,0 +1,30 @@
+{
+ "date": "2026-11-01",
+ "checked_at": "2026-11-01T10:27:13Z",
+ "release_paths": [
+  "/",
+  "/reports/2026-11-01.html",
+  "/sources.html"
+ ],
+ "propagation": {
+  "attempt": 1,
+  "elapsed_seconds": 0,
+  "max_wait_seconds": 225
+ },
+ "paths": {
+  "/": {
+   "code": 200,
+   "bytes": 50157
+  },
+  "/reports/2026-11-01.html": {
+   "code": 200,
+   "bytes": 189065
+  },
+  "/sources.html": {
+   "code": 200,
+   "bytes": 135233
+  }
+ },
+ "status": "ok",
+ "bad": []
+}
