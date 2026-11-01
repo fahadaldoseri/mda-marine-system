@@ -16,7 +16,7 @@
 النتيجة: تحذير — 4 بندًا (لا يمنع النشر)
      المطلوب: إدخال التعريفات الجديدة في البنك، وتسوية فجوات المعجم
 === تدقيق المكتبات والمهارات والترابط ===
-  1) المكتبات — 20 ملفًا
+  1) المكتبات — 21 ملفًا
      ✔ findings-2026-10-20.json · 329,495 حرفًا
      ✔ findings-2026-10-21.json · 341,644 حرفًا
      ✔ findings-2026-10-22.json · 349,405 حرفًا
@@ -28,10 +28,11 @@
      ✔ findings-2026-10-28.json · 429,275 حرفًا
      ✔ findings-2026-10-29.json · 443,161 حرفًا
      ✔ findings-2026-10-30.json · 453,653 حرفًا
+     ✔ findings-2026-10-31.json · 465,457 حرفًا
      ✔ findings-register.md · 1,796 حرفًا
      ✔ lexicon-exceptions.json · 36,436 حرفًا
-     ✔ lexicon-library.json · 277,187 حرفًا
-     ✔ lexicon-library.md · 4,938 حرفًا
+     ✔ lexicon-library.json · 281,802 حرفًا
+     ✔ lexicon-library.md · 4,942 حرفًا
      ✔ new-terms-register.json · 15,372 حرفًا
      ✔ new-terms-register.md · 4,932 حرفًا
      ✔ orthography-consistency.md · 3,343 حرفًا
@@ -49,6 +50,7 @@
      ✔ findings-2026-10-28.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
      ✔ findings-2026-10-29.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
      ✔ findings-2026-10-30.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ findings-2026-10-31.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
      ✔ findings-register.md ← validators/check_findings_closed.py, validators/check_library_use.py, tools/build_audit_report.py
      ✔ lexicon-exceptions.json ← validators/check_prose_defects.py, tools/build_lexicon_corpus.py
      ✔ lexicon-library.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
@@ -80,7 +82,7 @@
      ✔ تغطية فحص العقوبات ← check_ofac_coverage (مُشغَّل في البوابة)
      ✔ سلامة المهارات ← check_skills_integrity (مُشغَّل في البوابة)
   5) ترابط البوابات والأدوات والإجراء
-     أدوات تستدعيها البوابة: 24 · كلها موجودة
+     أدوات تستدعيها البوابة: 25 · كلها موجودة
      تدقيق المكتبات في البوابة: ✔
   6) النقل والسرية
      مسارات مطلقة: 0
