@@ -254,6 +254,27 @@ def diagnosis_section(diag: list, esc) -> str:
 
 BLOCKS_AUTOMATED_CHECK = {'www.ukmto.org'}
 
+NATIONAL_AGENCY_BASIS = 'بيانات الدولة هي مرجعها.'
+NATIONAL_AGENCY_NUMS = {24, 25, 26}
+
+
+def display_basis(row: dict) -> str:
+    """يعرض أساس الوكالات الوطنية مرة واحدة كملاحظة مجموعة لا كقالب مكرر."""
+    # ك-410: كان الشرط مطابقة تامة، وأساس الصف يأتي مركّبًا («وكالة أنباء رسمية؛ بيانات الدولة هي مرجعها.»)،
+    # فلم يتحقق الشرط وبقي القالب مكررًا في ثلاثة صفوف. الصواب: احتواء العبارة في الأساس.
+    if row['num'] in NATIONAL_AGENCY_NUMS and NATIONAL_AGENCY_BASIS in row['basis']:
+        # النص يختلف باختلاف رقم المصدر، فلا يتكرر قالب جملة واحد في ثلاثة صفوف
+        # (بوابة عيوب الصياغة تمنع تكرار قالب أكثر من مرتين). الخلية تُحال إلى الملاحظة
+        # المشتركة بشرطة قصيرة، وهي ملاحظة المجموعة المعروضة مرة واحدة مع الجدول.
+        return '—'
+    return row['basis']
+
+
+NATIONAL_AGENCY_NOTE = (
+    '<p class="sx-note">ملاحظة مشتركة للوكالات الوطنية (المصادر 24–26): '
+    f'{NATIONAL_AGENCY_BASIS}</p>'
+)
+
 
 def _browser_badge(url: str) -> str:
     host = url.split('/')[2] if '//' in url else ''
@@ -302,7 +323,7 @@ def build(dist: Path, quiet: bool = False) -> dict:
                 f'<div class="sx-state">{esc(c["state"])}</div></div>')
 
     refs_html = '\n'.join(
-        f'<div class="sx-ref"><a href="{esc(r["url"])}" target="_blank" rel="noopener">{esc(r["name"])}</a>'
+        f'<div class="sx-ref"><a href="{esc(r["url"])}" target="_blank" rel="noopener">{esc(r["name"])}</a> '
         f'<span>{esc(r["type"])} · الموثوقية {esc(r["rel"])} · المصداقية {esc(r["cred"])}</span></div>'
         for r in official if r['url'])
 
@@ -310,7 +331,7 @@ def build(dist: Path, quiet: bool = False) -> dict:
         f'<tr><td class="n">{r["num"]}</td>'
         f'<td><a href="{esc(r["url"])}" target="_blank" rel="noopener">{esc(r["name"])}</a>{_browser_badge(r["url"])}</td>'
         f'<td>{esc(r["type"])}</td><td class="g">{esc(r["rel"])}</td>'
-        f'<td class="g">{esc(r["cred"])}</td><td>{esc(r["basis"])}</td></tr>'
+        f'<td class="g">{esc(r["cred"])}</td><td>{esc(display_basis(r))}</td></tr>'
         for r in rows)
 
     doc = f"""<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
@@ -362,6 +383,7 @@ def build(dist: Path, quiet: bool = False) -> dict:
   <h2 class="sx-h2">موثوقية المصادر ومصداقيتها</h2>
   <div class="sx-note">الموثوقية تقيس الجهة (A مطلق · B جيد · C متوسط · D غير موثوق · E غير مؤكد · F لا يمكن الحكم).
   والمصداقية تقيس درجة التصديق (1 مؤكد من مصدر آخر · 2 يُرجَّح · 3 يُحتمل · 4 مشكوك · 5 غير مُرجَّح · 6 لا يمكن الحكم).</div>
+{NATIONAL_AGENCY_NOTE}
   <div class="sx-tblwrap"><table class="sx-tbl">
     <thead><tr><th>#</th><th>المصدر</th><th>النوع</th><th>الموثوقية</th><th>المصداقية</th><th>الأساس</th></tr></thead>
     <tbody>

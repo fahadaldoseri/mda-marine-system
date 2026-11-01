@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-31T21:35:21.273854+00:00",
+  "generated_at": "2026-11-01T00:57:10.711801+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -3082,6 +3082,20 @@
       "lesson_id": "ك-405",
       "barrier_id": "B-b906afb6",
       "run_evidence": "لإصلاح: python3 validators/check_card_counters.py --date 2026-10-31 → رمز 2 و«ملف مطلوب مفقود: /home"
+    },
+    {
+      "fault_id": "ك-406",
+      "state": "مغلق",
+      "lesson_id": "ك-406",
+      "barrier_id": "B-45cdc7a7",
+      "run_evidence": "_wiring.py --check && python3 tools/build_lexicon_corpus.py --check → خرج 0؛ 140 بندًا متطابقًا · ال"
+    },
+    {
+      "fault_id": "ك-407",
+      "state": "مغلق",
+      "lesson_id": "ك-407",
+      "barrier_id": "B-fc84c721",
+      "run_evidence": "ق: تحقق حي 2026-11-01: python3 validators/check_skills_integrity.py → خرج 0؛ bash -n tools/restore_s"
     }
   ]
 }

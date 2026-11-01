@@ -243,7 +243,7 @@ def nav_html(active: str = "") -> str:
   <div class="sn-inner">
     <a class="sn-brand" href="/">
       <span class="sn-mark">{MARK_SVG}</span>
-      <span class="sn-name">{BRAND}<em>{BRAND_SUB}</em></span>
+      <span class="sn-name">{BRAND} <em>{BRAND_SUB}</em></span>
     </a>
     <button type="button" class="sn-menu no-print" aria-expanded="false" aria-controls="sn-panel">
       <span class="sn-menu-icon" aria-hidden="true"></span><span data-i18n="menu">القائمة</span>

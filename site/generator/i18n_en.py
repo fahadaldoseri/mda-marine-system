@@ -166,6 +166,9 @@ def load_glossary() -> dict[str, str]:
 
 def localize_patterns(s: str) -> str | None:
     n = norm(s)
+    m = re.fullmatch(r"(\d{1,2})\s+(" + "|".join(MONTHS) + r")\s+(\d{4})\s+·\s+(\d{2}:\d{2})\s+حسب التوقيت العالمي", n)
+    if m:
+        return f"{m.group(1)} {MONTHS[m.group(2)]} {m.group(3)} · {m.group(4)} UTC"
     m = re.fullmatch(r"(\d{1,2})\s+(" + "|".join(MONTHS) + r")\s+(\d{4})", n)
     if m:
         return f"{m.group(1)} {MONTHS[m.group(2)]} {m.group(3)}"

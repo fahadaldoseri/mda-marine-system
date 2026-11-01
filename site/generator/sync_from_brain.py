@@ -100,6 +100,24 @@ def copy_sources(date_iso: str, brain: Path) -> list:
         shutil.copy2(newest, SITE / "sources" / "ledger.json")
         log.append(f"حُدّث دفتر الأحداث: {newest.name}")
 
+    # دفتر اليوم هو مصدر سجل الأحداث ذي الفترة الحالية؛ لا نعيد بناءه من
+    # event_keys اليدوي حتى لا تسقط سجلات أو حقول ربط مستقبلية.
+    daily_src = brain / "cumulative-2026" / "daily" / f"{date_iso}.json"
+    daily_dst = SITE / "sources" / "daily-events" / f"{date_iso}.json"
+    if daily_src.exists():
+        try:
+            daily_data = json.loads(daily_src.read_text(encoding="utf-8"))
+            if not isinstance(daily_data, list):
+                raise ValueError("دفتر اليوم يجب أن يكون قائمة سجلات")
+        except (OSError, json.JSONDecodeError, ValueError) as e:
+            log.append(f"خطأ: دفتر اليوم غير صالح ({e}) — لم يُنسخ")
+            return log
+        daily_dst.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(daily_src, daily_dst)
+        log.append(f"حُدّث دفتر اليوم للفترة: {daily_dst.name}")
+    else:
+        log.append(f"تحذير: دفتر اليوم غير موجود: {daily_src}")
+
     cum_md = sorted((brain / "cumulative-2026").glob("*تراكمي*.md"))
     if cum_md:
         newest = max(cum_md, key=lambda p: p.stat().st_mtime)
