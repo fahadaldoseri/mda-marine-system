@@ -1789,7 +1789,7 @@ def _map_decision_strip(meta: dict) -> str:
         upd = meta.get("updated") or meta.get("generated_at") or ""
         cells = [
             ("أعلى قطاع", f'{top.get("name", "")} — {top.get("level_ar", "")}'.strip(" —")),
-            ("الوقائع المؤهلة", f'{cnt.get("qualifying", 0)} من {cnt.get("total", 0)}'),
+            ("الوقائع المؤهلة", f'{cnt.get("qualifying", 0)} / {cnt.get("total", 0)}'),
             ("إجراء اليوم", act),
             ("آخر تحديث", str(upd)),
         ]
