@@ -1,2 +1,0 @@
-سُجّل فقط — لم يُنفَّذ (RUNBOOK_DRY_STEPS: وضع معزول)
-الأمر المعتاد: bash -lc B="$PWD"; export B; python3 validators/check_secrets.py --root "$B" && python3 validators/check_secrets.py --root "$(dirname "$B")/mda-marine-system"; rc=$?; exit $rc
