@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-01T22:14:21.421080+00:00",
+  "generated_at": "2026-11-01T22:40:15.367416+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -3327,6 +3327,34 @@
       "lesson_id": null,
       "barrier_id": "B-9c6543c1",
       "run_evidence": null
+    },
+    {
+      "fault_id": "ك-441",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-441",
+      "barrier_id": "B-bad636e3",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-442",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-442",
+      "barrier_id": "B-a2cb187f",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-443",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-443",
+      "barrier_id": "B-2b944f6d",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-444",
+      "state": "مغلق",
+      "lesson_id": "ك-444",
+      "barrier_id": "B-7210b378",
+      "run_evidence": "c0c9ca1..98933f0c` قبل: D010 rc=2 ورسالة non-fast-forward · بعد: D010 رمز 0 و`runbook status` كل الخ"
     }
   ]
 }
