@@ -1348,12 +1348,15 @@ def _relation_info(event: dict, known: dict[str, dict]) -> tuple[bool, str, str]
 
 def _event_fields_html(event: dict, defs) -> tuple[str, bool]:
     date_time, has_time = _event_time(event)
+    desc = _event_description(event)
     fields = [
         ("التاريخ/الوقت", date_time or "غير متاح"),
         ("المصدر", _event_sources(event) or "غير متاح"),
         ("الموضع", _event_location(event) or "غير متاح"),
-        ("سطر الوصف", _event_description(event) or "غير متاح"),
     ]
+    # لا يُعاد «سطر الوصف» إذا كان هو نص البطاقة نفسه — التكرار المرئي ممنوع (ك-336)
+    if not desc:
+        fields.append(("سطر الوصف", "غير متاح"))
     excerpt = _value_text(event.get("source_excerpt"))
     if excerpt:
         fields.append(("سطر المصدر كما في الدفتر", excerpt))

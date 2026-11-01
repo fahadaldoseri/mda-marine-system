@@ -296,14 +296,13 @@ def event_keys_table(items, inline):
         cls = STATUS_CLASS.get(st, "s-stable")
         rows.append([
             Raw(f'<bdi class="bidi ev-code">{esc(code_label(it.get("code", ""), it.get("ref", ""), f'{it.get("note", "")} {it.get("title", "")}'))}</bdi>'),
-            Raw(inline(it.get("title", ""))),
             Raw(inline(it.get("area", ""))),
             Raw(f'<span class="st-badge {cls}">{esc(st)}</span>'),
             Raw(inline(it.get("note", ""))),
         ])
     return (
         '<h3>تتبع الوقائع</h3><p class="blk-lede">رقم البلاغ (والكامل في «سجل الأحداث») · المنطقة · الحالة.</p>'
-        + _table(["الرمز", "الحدث", "المنطقة", "الحالة", "ملاحظة"], rows, inline)
+        + _table(["الرمز", "المنطقة", "الحالة", "ملاحظة"], rows, inline)
     )
 
 
