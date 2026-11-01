@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-01T12:37:16.968381+00:00",
+  "generated_at": "2026-11-01T16:20:12.123235+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -3165,6 +3165,41 @@
       "state": "بانتظار التحقق",
       "lesson_id": null,
       "barrier_id": "B-77f6c1ca",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-418",
+      "state": "مغلق",
+      "lesson_id": "ك-418",
+      "barrier_id": "B-dbbce523",
+      "run_evidence": "بوابة الصياغة على السطح المستخرج rc=1 و0 ألفاظ مصطنعة · تدقيق التغطية 8/8 مانعة 0"
+    },
+    {
+      "fault_id": "ك-419",
+      "state": "مفتوح",
+      "lesson_id": "ك-419",
+      "barrier_id": "B-414d1084",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-420",
+      "state": "مفتوح",
+      "lesson_id": null,
+      "barrier_id": "B-f89e8121",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-421",
+      "state": "مفتوح",
+      "lesson_id": null,
+      "barrier_id": "B-56f0e229",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-422",
+      "state": "مفتوح",
+      "lesson_id": null,
+      "barrier_id": "B-1c747146",
       "run_evidence": null
     }
   ]
