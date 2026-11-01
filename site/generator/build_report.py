@@ -521,6 +521,20 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .hmap-svg .mp-badge-t{font-size:28px}
   .hmap-svg .mp-port-lbl{font-size:36px}.hmap-svg .mp-country{font-size:36px}
   .hmap-svg .mp-sea-lg{font-size:40px}.hmap-svg .mp-sea-sm{font-size:34px}.hmap-svg .mp-grid-lbl{display:none}
+  .hmap-svg .mp-sector-top rect{filter:drop-shadow(0 0 6px rgba(143,208,230,.35))}
+  @media(max-width:900px){.hmap-svg .lbl-2{display:none}}
+  @media(max-width:640px){.hmap-svg .lbl-3{display:none}}
+  .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+    clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .mp-events-detail{margin-top:10px;border:1px solid var(--line,#243b57);border-radius:10px;padding:8px 10px}
+  .mp-events-detail summary{cursor:pointer;font-weight:600}
+  .mp-ev-table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13.5px}
+  .mp-ev-table th,.mp-ev-table td{border-bottom:1px solid var(--line,#243b57);padding:6px 8px;text-align:right;vertical-align:top}
+  .mp-key .lg-sw.sw-zone{background:rgba(143,208,230,.25);border:1px dashed #8fd0e6}
+  .mp-key .lg-sw.sw-tss{background:rgba(150,214,255,.20);border:1px dashed #9ad9ff}
+  .mp-key .lg-sw.sw-route{background:#ffd479}
+  .mp-key .lg-sw.sw-maritime{background:repeating-linear-gradient(90deg,#b6e7ff 0 4px,transparent 4px 8px)}
+  .mp-key .lg-group{opacity:.9;font-weight:600}
 }
 /* ---------- الاستشهادات ---------- */
 .cite-ref{
@@ -2023,7 +2037,9 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
             from map_gulf import build_map
 
             _cap = ((mp.get("caption") or "") + " " + (mp.get("points_note") or "")).strip()
-            map_html = build_map(mp["points"], _cap, mp.get("inset"))
+            map_html = build_map(mp["points"], _cap, mp.get("inset"),
+                             zones=(meta.get("threat_zones") or {}).get("zones"),
+                             timeline=meta.get("timeline"))
         except Exception as e:
             # فشل مغلق: وجود وقائع يعني أن الخريطة عقد إخراج لا عنصر تجميلي.
             if mp.get("points"):
@@ -2039,7 +2055,10 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
             from map_gulf import build_map as _build_map_hero
 
             _cap_h = ((mp.get("caption") or "") + " " + (mp.get("points_note") or "")).strip()
-            _hero_map_source = _build_map_hero(mp["points"], _cap_h, mp.get("inset"), zoom=True)
+            _hero_map_source = _build_map_hero(
+                mp["points"], _cap_h, mp.get("inset"), zoom=True,
+                zones=(meta.get("threat_zones") or {}).get("zones"),
+                timeline=meta.get("timeline"))
             _strip = ""
             try:
                 import threat_card as _TC
