@@ -17,7 +17,16 @@ for attempt in 1 2 3 4 5 6; do
 python3 - "$B" "$SITE" "$BASE" "$D" "$CMP" "$attempt" "$STARTED_EPOCH" <<'PY'
 import hashlib, json, sys, datetime, urllib.request, urllib.error
 B, SITE, BASE, D, CMP, ATTEMPT, STARTED = sys.argv[1:8]
-RELEASE_PATHS = ("", f"reports/{D}.html", f"reports/pdf/{D}.pdf", "sources.html")
+try:
+    _rb = json.load(open(f"{B}/runbook/runbook.json", encoding="utf-8"))
+except Exception:
+    _rb = {}
+PRINT_DISABLED = (isinstance(_rb.get("print"), dict) and _rb["print"].get("disabled") is True) or any(
+    _s.get("id") in ("B020", "B030") and _s.get("disabled") is True for _s in _rb.get("steps", []))
+RELEASE_PATHS = ["", f"reports/{D}.html"]
+if not PRINT_DISABLED:
+    RELEASE_PATHS.append(f"reports/pdf/{D}.pdf")
+RELEASE_PATHS.append("sources.html")
 checked_at = datetime.datetime.now(datetime.timezone.utc)
 elapsed = max(0, int(checked_at.timestamp()) - int(STARTED))
 def get(path):
@@ -41,7 +50,7 @@ for u in RELEASE_PATHS:
     doc["paths"][f"/{u}"] = {"code": code, "bytes": len(body)}
     if code != 200 or not body:
         bad.append(f"/{u}")
-if CMP == "1":
+if CMP == "1" and not PRINT_DISABLED:
     import os
     import subprocess
     import tempfile
@@ -79,7 +88,7 @@ if CMP == "1":
 doc["status"] = "ok" if not bad else "failed"
 doc["bad"] = bad
 open(f"{B}/logs/live-{D}.json", "w", encoding="utf-8").write(json.dumps(doc, ensure_ascii=False, indent=1))
-print("  ✔ كل المسارات ترد 200" + (" وPDF مطابق للمحلي" if CMP == "1" else "") if not bad else f"  ✘ خلل: {bad}")
+print(("  ✔ كل المسارات ترد 200" + (" وPDF مطابق للمحلي" if CMP == "1" and not PRINT_DISABLED else " (PDF مستثنى — الطباعة معطّلة بطلب المالك)")) if not bad else f"  ✘ خلل: {bad}")
 sys.exit(2 if bad else 0)
 PY
 rc=$?
