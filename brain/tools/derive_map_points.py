@@ -136,9 +136,26 @@ def derive(date: str) -> dict:
     land = load_land()
 
     events = meta.get("event_keys") or []
+    # حالة كل واقعة من سجل القطاعات الحاكم (تصنيف · تحقق · أهلية · قطاع).
+    # عند غياب الملف لا تُخترع حالة، بل تُترك فارغة وتُعلن على الخريطة «حالة غير محددة».
+    zstat: dict[str, dict] = {}
+    zones_p = ROOT / "web" / "zones" / f"{date}.json"
+    if zones_p.exists():
+        try:
+            _zj = json.loads(zones_p.read_text(encoding="utf-8"))
+            for _ze in (_zj.get("events") or []):
+                zstat[str(_ze.get("code") or "")] = {
+                    "confirmation": _ze.get("confirmation"),
+                    "qualifying": _ze.get("qualifying"),
+                    "zone": _ze.get("zone"),
+                    "class": _ze.get("class"),
+                }
+        except Exception:
+            zstat = {}
     points, off_map, errors = [], [], []
     stats = {"events": len(events), "with_area": 0, "drawn": 0, "exact": 0, "approximate": 0,
-             "off_map": 0, "excluded": 0}
+             "off_map": 0, "excluded": 0, "confirmed": 0, "probable": 0, "unconfirmed": 0,
+             "not_qualifying": 0, "status_unknown": 0}
 
     for e in events:
         area = (e.get("area") or "").strip()
@@ -173,9 +190,15 @@ def derive(date: str) -> dict:
             if on_land(lat, lon, land):
                 errors.append(f"مِرساة «{area}» ({lat}, {lon}) تقع على اليابسة — تُصحَّح إلى مياه منطقتها")
                 continue
+            _z = zstat.get(code, {})
             points.append({"code": code, "area": area, "lat": round(lat, 4), "lon": round(lon, 4),
                            "precision": prec, "surface": surf_name, "basis": basis,
-                           "source": a.get("source", "")})
+                           "source": a.get("source", ""),
+                           "label": (str(e.get("title") or "").strip()[:64] or area),
+                           "confirmation": _z.get("confirmation"),
+                           "qualifying": _z.get("qualifying"),
+                           "zone": _z.get("zone"),
+                           "class": _z.get("class")})
             stats["drawn"] += 1
             stats["exact" if prec == "exact" else "approximate"] += 1
         else:
@@ -187,13 +210,28 @@ def derive(date: str) -> dict:
         raise FailClosed(" · ".join(errors))
 
     note = ("المواضع المعروضة مواضع وقائع اليوم على الخريطة؛ والموضع التقريبي يعني أن المصدر لم يذكر إحداثيات "
-            "فوُضع داخل المنطقة نفسها لا في موضع آخر.")
+            "فوُضع داخل المنطقة نفسها لا في موضع آخر. "
+            f"وتوزيع الحالة: مؤكد {stats['confirmed']} · مرجّح {stats['probable']} · "
+            f"غير مؤكد مؤهل {stats['unconfirmed']} · غير مؤهل {stats['not_qualifying']} · "
+            f"حالة غير محددة {stats['status_unknown']}.")
     if off_map:
         note += " ووقائع خارج نطاق الخريطة تُذكر في جدول التوزيع الجغرافي: " + \
                 " · ".join(f'{o["area"]} ({o["code"]})' for o in off_map) + "."
     meta.setdefault("map", {})
     meta["map"]["points"] = points
     meta["map"]["points_note"] = note
+    for _p in points:
+        _q, _c = _p.get("qualifying"), (_p.get("confirmation") or "").strip().lower()
+        if _q is True and _c == "confirmed":
+            stats["confirmed"] += 1
+        elif _q is True and _c == "probable":
+            stats["probable"] += 1
+        elif _q is True:
+            stats["unconfirmed"] += 1
+        elif _q is False:
+            stats["not_qualifying"] += 1
+        else:
+            stats["status_unknown"] += 1
     meta["map"]["points_stats"] = stats
     if off_map:
         meta["map"]["off_map"] = off_map

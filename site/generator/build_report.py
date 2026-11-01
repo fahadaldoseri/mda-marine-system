@@ -467,7 +467,9 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .hero-map{margin:22px 0 6px}
 .hmap{margin:0;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:18px}
 .hmap h3{margin:0 0 14px;font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:15px;color:var(--ink-2)}
-.hmap .blk-lede,.hmap-keys,.hmap-panel .src-note{display:none}
+.hmap .blk-lede{display:none}
+.hmap-keys{font-size:11.5px;line-height:1.65;color:var(--muted);margin:8px 0 0}
+.hmap .map-key{margin-top:10px}
 .hmap-wrap{position:relative;border:1px solid var(--line-2);border-radius:var(--radius-sm);overflow:hidden;background:var(--map-sea)}
 /* التكبير بجانب الخريطة لا فوقها: الشريحة كانت تحجب الخليج العربي (البحرين وقطر) */
 .hmap-wrap{display:grid;grid-template-columns:minmax(0,1fr);align-items:start}
@@ -478,7 +480,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .hz-cap{font-size:13px;color:var(--ink-2);background:var(--panel);padding:4px 10px;border-top:1px solid var(--line-2);margin-top:auto}
 .hmap-imo-reference{margin:7px 0 0;padding-top:6px;border-top:1px solid var(--line-2);font-size:12px;line-height:1.5;color:var(--muted)}
 .hmap-imo-reference .bidi{font-family:"IBM Plex Mono",monospace;color:var(--ink-2);font-variant-numeric:tabular-nums}
-@media (max-width:1000px){.hmap-wrap{grid-template-columns:minmax(0,1fr)}.hmap-zoom{border-inline-start:0;border-top:1.5px solid var(--accent)}}
+@media (max-width:1000px){.hmap-wrap,.hmap-wrap:has(> .hmap-zoom){grid-template-columns:minmax(0,1fr)}.hmap-zoom{border-inline-start:0;border-top:1.5px solid var(--accent)}}
 .hmap-svg{display:block;width:100%;height:auto;max-width:100%}
 /* خريطة الشاشة: علامات وتسميات أكبر قليلًا للقراءة من مسافة */
 .hmap-svg .mp-dot{r:9.5px}
@@ -1970,8 +1972,11 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
 
             _cap = ((mp.get("caption") or "") + " " + (mp.get("points_note") or "")).strip()
             map_html = build_map(mp["points"], _cap, mp.get("inset"))
-        except Exception as e:  # لا يُسقط فشل الخريطة بناء التقرير
-            print(f"تنبيه: تعذر توليد الخريطة ({e})", file=sys.stderr)
+        except Exception as e:
+            # فشل مغلق: وجود وقائع يعني أن الخريطة عقد إخراج لا عنصر تجميلي.
+            if mp.get("points"):
+                raise
+            print(f"تنبيه: تعذر توليد خريطة السياق ({e})", file=sys.stderr)
             map_html = ""
 
     hero_map_html = ""
@@ -1995,7 +2000,9 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
             hero_map_html = "" if mode == "additions" else hero_map(_hero_map_source, extra_html=_strip)
             # تُحضر كتلة الطباعة لكل سطح؛ سياسة الإضافات تحدد موضعها فقط.
             print_map_html = hero_map(_hero_map_source, print_mode=True)
-        except Exception as e:  # لا يُسقط فشل الخريطة بناء التقرير
+        except Exception as e:
+            if mp.get("points"):
+                raise
             print(f"تنبيه: تعذر توليد خريطة الشاشة العليا ({e})", file=sys.stderr)
 
     # شريط المؤشرات
@@ -2256,10 +2263,10 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
     # سياسة عرض الرموز (2+5): تبسيط شامل لكل ما هو خارج قسم الوقائع
     doc = codes.demote_page(doc, report_date, official)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    doc = isolate_ltr(doc)
+    doc = _outside_special(isolate_ltr, doc)
     # ك-408: بعد عزل الرموز اللاتينية تبقى مسافة بين الرمز وعلامة الترقيم التالية («UKMTO ،» · «UTC .»)،
     # وهي مخالفة صياغة مانعة. التطبيع يلصق العلامة بالرمز مع عبور حدود الوسوم بلا مساس ببنية الصفحة.
-    doc = tighten_ltr_punct(doc)
+    doc = _outside_special(tighten_ltr_punct, doc)
     # طبقة الشاشة تُحقن بعد العزل: isolate_ltr يعمل على نص كل ما بين الوسوم فيفسد CSS وJS (مثل UTC وأسماء الخطوط)
     doc = doc.replace("</style>", SCR.SCREEN_CSS + "</style>", 1)
     # العنوان في وسم title نص صرف: isolate_ltr يلفّ الأسماء اللاتينية فيه بوسوم span فتظهر وسومًا في تبويب المتصفح
@@ -2284,6 +2291,18 @@ LTR_PATTERNS = [
 ]
 _LTR_RE = None
 _PERIOD_RE = re.compile(r"^\d{6}Z\s*[–—-]\s*\d{6}Z$")
+
+
+
+def _outside_special(transform, html):
+    """يطبّق معالجة نصية على HTML **خارج** كتل style وscript فقط.
+
+    عطل ك-413: كانت معالجة الترقيم تُزيل المسافة قبل المحدد في CSS فيتحوّل
+    «.hmap-svg .mp-dot» إلى «.hmap-svg.mp-dot» (محدد مركّب لا يطابق شيئًا)،
+    وكان عزل النصوص اللاتينية يحقن <span> داخل كتل CSS فيفسد الخطوط.
+    """
+    parts = re.split(r"(<(?:style|script)\b[^>]*>.*?</(?:style|script)>)", html, flags=re.S | re.I)
+    return "".join(p if i % 2 else transform(p) for i, p in enumerate(parts))
 
 
 def isolate_ltr(html: str) -> str:

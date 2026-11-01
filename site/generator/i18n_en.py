@@ -217,6 +217,43 @@ def localize_patterns(s: str) -> str | None:
     m = re.fullmatch(r"(بندان|تحذيران)\s*(·?)", n)
     if m:
         return f"2 {'items' if m.group(1) == 'بندان' else 'rows'}" + (f" {m.group(2)}" if m.group(2) else "")
+    # ── نصوص الخريطة المتحركة (المرحلة الاحترافية): تُبنى من الأرقام لا تُثبَّت في المعجم.
+    m = re.fullmatch(r"(\d+) كيلومتر · (\d+) ميل بحري", n)
+    if m:
+        return f"{m.group(1)} km · {m.group(2)} nm"
+    m = re.fullmatch(r"مواقع (\d+) واقعة داخل نطاق التقرير؛ (منها \d+ بموضع تقريبي داخل المنطقة "
+                     r"نفسها لأن المصدر لم يذكر إحداثيات\.|وجميعها بإحداثيات مذكورة في المصادر\.)", n)
+    if m:
+        tail = ("some of them placed approximately within the same area because the source gave no "
+                "coordinates." if m.group(2).startswith("منها") else
+                "all of them with coordinates stated in the sources.")
+        return f"Positions of {m.group(1)} incidents within the report scope; {tail}"
+    m = re.fullmatch(r"خريطة وقائع التقرير: (\d+) واقعة مرسومة على الخليج العربي ومضيق هرمز وخليج عمان "
+                     r"\(إحداثيات مذكورة (\d+) · مواضع تقريبية (\d+)\)\. الحالات: (.+?)\."
+                     r" الموضع التقريبي يعني أن المصدر لم يذكر إحداثيات فوُضعت العلامة داخل المنطقة نفسها لا في موضع محدد\.", n)
+    if m:
+        st = m.group(4)
+        for ar, en in (("غير مؤهل — لا يُحتسب", "not qualifying"),
+                       ("غير مؤكد مؤهل", "unconfirmed qualifying"),
+                       ("حالة غير محددة", "status not stated"),
+                       ("مؤكد", "confirmed"), ("مرجّح", "probable")):
+            st = st.replace(ar, en)
+        return (f"Incident map: {m.group(1)} incidents drawn over the Arabian Gulf, the Strait of Hormuz "
+                f"and the Gulf of Oman (stated coordinates {m.group(2)} · approximate positions {m.group(3)}). "
+                f"Statuses: {st}. An approximate position means the source gave no coordinates, so the marker "
+                "was placed within the same area rather than at a specific point.")
+    m = re.fullmatch(r"المواضع المعروضة مواضع وقائع اليوم على الخريطة؛ والموضع التقريبي يعني أن المصدر لم يذكر "
+                     r"إحداثيات فوُضع داخل المنطقة نفسها لا في موضع آخر\. وتوزيع الحالة: مؤكد (\d+) · "
+                     r"مرجّح (\d+) · غير مؤكد مؤهل (\d+) · غير مؤهل (\d+) · حالة غير محددة (\d+)\."
+                     r"( ووقائع خارج نطاق الخريطة تُذكر في جدول التوزيع الجغرافي: .+)?", n)
+    if m:
+        base = (f"Markers show today's incident positions; an approximate position means the source gave no "
+                f"coordinates, so it was placed within the same area rather than elsewhere. Status mix: "
+                f"confirmed {m.group(1)} · probable {m.group(2)} · unconfirmed qualifying {m.group(3)} · "
+                f"not qualifying {m.group(4)} · status not stated {m.group(5)}.")
+        if m.group(6):
+            base += (" Incidents outside the map extent are listed in the geographic distribution table.")
+        return base
     m = COUNTER.match(n)
     if m:
         return f"{m.group(1)} {COUNT_WORD[m.group(2)]}" + (f" {m.group(3)}" if m.group(3) else "")
@@ -418,10 +455,19 @@ def _fix_chrome(out: str) -> str:
     # فلا تُقرأ واجهة إنجليزية عربيةَ على قارئ الشاشة.
     def _lbl(m):
         v = m.group(1)
-        if "خريطة" in v:
-            en = "Map of the region with incident locations"
-        else:
-            en = "Section"
+        # تُترجم أسماء الوصول الوصفية عبر المعجم نفسه؛ ولا يبقى نص عام مبتسر.
+        try:
+            tr = translate(v)
+        except Exception:
+            tr = ""
+        if not tr or tr == v or re.search(r"[\u0600-\u06FF]", tr or ""):
+            try:
+                tr = localize_patterns(v) or tr
+            except Exception:
+                pass
+        if tr and tr != v and not re.search(r"[\u0600-\u06FF]", tr):
+            return 'aria-label="%s"' % tr.replace('"', "&quot;")
+        en = "Map of the region with incident locations" if "خريطة" in v else "Section"
         return 'aria-label="%s"' % en
     out = re.sub(r'aria-label="([^"]*[\u0600-\u06FF][^"]*)"', _lbl, out)
     return out
@@ -496,8 +542,23 @@ def translate_page(html_text: str, date: str, tm: dict[str, str], gl: dict[str, 
     out = re.sub(r"<title>.*?</title>", f"<title>Daily Maritime Security Report — {date} (English edition)</title>", out, flags=re.S)
     out = re.sub(r'<meta name="description" content="[^"]*"',
                  '<meta name="description" content="Daily Maritime Security Report — English edition, translated and governed against the Arabic source.">', out)
-    remaining = [t for t, translated in zip(c.units, units)
-                 if ARABIC.search(norm(translated)) and len(ARABIC.findall(translated)) > 2]
+    def _unit_ok(orig: str, translated: str) -> bool:
+        """الوحدة مترجمة إذا نجحت الترجمة أو نجح محرك الأنماط عليها.
+
+        محرك الأنماط مسار ثانٍ محكوم (مثل نمط تفصيل الحرائق)، فلا يُعدّ النص
+        العربي المتحرك عطلًا إذا كان له نمط معتمد يترجمه بالأرقام.
+        """
+        if not (ARABIC.search(norm(translated)) and len(ARABIC.findall(translated)) > 2):
+            return True
+        try:
+            alt = localize_patterns(orig)
+        except Exception:
+            alt = None
+        if not alt:
+            return False
+        return not (ARABIC.search(norm(alt)) and len(ARABIC.findall(alt)) > 2)
+
+    remaining = [t for t, translated in zip(c.units, units) if not _unit_ok(t, translated)]
     out = _collapse_inline_source_duplicates(out)
     out = _fix_chrome(out)
     return out, [norm(x) for x in remaining], len(c.units)
