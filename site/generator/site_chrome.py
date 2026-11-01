@@ -30,6 +30,13 @@ body.daylight{--sn-bg:#eef3f9;--sn-panel:#ffffff;--sn-line:#d3dded;--sn-ink:#0d1
 .site-nav{position:sticky;top:0;z-index:60;background:var(--sn-bg);border-bottom:1px solid var(--sn-line);
 font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif}
 .site-nav .sn-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:9px 20px;flex-wrap:wrap}
+.site-nav.is-compact .sn-inner{padding:3px 20px;gap:8px}
+.site-nav.is-compact .sn-name em{display:none}
+.site-nav.is-compact .sn-mark{width:22px;height:22px}
+.site-nav.is-compact .sn-mark svg{width:13px;height:13px}
+.site-nav.is-compact .sn-links{flex-wrap:nowrap;overflow-x:auto}
+.site-nav.is-compact .sn-links a{padding:4px 7px;min-height:26px;font-size:13px}
+.site-nav.is-compact{box-shadow:0 6px 18px rgba(0,0,0,.35)}
 .site-nav a{color:var(--sn-ink2);text-decoration:none}
 .sn-brand{display:flex;align-items:center;gap:10px;color:var(--sn-ink)!important;font-weight:700}
 .sn-mark{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:0 0 auto;
