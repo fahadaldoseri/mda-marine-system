@@ -51,7 +51,6 @@
 |---|---|---|
 | `appendices/terminology.md` | 20-language | قاموس المصطلحات والاستبدالات الإلزامية والصيغ الثابتة |
 | `appendices/report-blocks.md` | 40-blocks | مخطط الكتل الكامل وحقول بطاقة القرار وبنية كل بند |
-| `appendices/event-card-contract.md` | 40-blocks | عقد بطاقة سجل الأحداث: عشرة صفوف ثابتة وقوائم مغلقة ونطاق الإنفاذ (النطاق الحيّ صارم · الأرشيف بنيوي) |
 | `appendices/web-delivery.md` | 70-delivery | تفاصيل إخراج الويب والموقع الدائم ومخطط ملف الواجهة 2.1 |
 | `appendices/version-numbering.md` | اصطلاح رقم الإصدار «و ب YY/MM/NN»: اختصار الجهة، السنة، الشهر، والمتسلسل الشهري (يبدأ 1) |
 | `appendices/historical-baseline.md` | 10-sources | خط الأساس التاريخي التراكمي وفهرس الذاكرة |
@@ -69,10 +68,6 @@
 | `validators/check_style.py` | ف8 | بوابة الأسلوب المانعة + إدارة القائمة السوداء (`--add` · `--suggest` · `--promote`) |
 | `tools/style_learn.py` | ط10 | التطوير الذاتي للقائمة السوداء من سجل التعلم |
 | `validators/check_intel.py` | ف5 | بوابة التحليل الاستخباري (اللغة الاحتمالية · الافتراضات · المؤشرات · وسم الأسلوب) |
-| `validators/check_daily_events_schema.py` | ف4 | مخطط دفتر الوقائع: بنية السجل وقيمه المغلقة وحقوله الإلزامية في النطاق الحيّ (فشل مغلق) |
-| `validators/check_event_card_contract.py` | ف4 | عقد بطاقة سجل الأحداث على الصفحة المبنية عربيًّا وإنجليزيًّا (الصفوف · الشارتان · الطيّ · نظافة النص) |
-| `schemas/daily-events.schema.json` | ف4 | مخطط السجل الواحد لدفتر الوقائع، مرجع البوابتين والمولّد |
-| `tools/migrate_daily_events_schema.py` | ف4 | ترحيل الدفتر إلى المخطط (تجفيف افتراضي · حفظ الخام في `confidence_raw` · نسخ أصلية قبل الكتابة) |
 | `tools/intel_self_review.py` | ح12 | بناء `memory/intel-adaptation.md` قبل كتابة القسم — التعلم الذاتي |
 | `tools/estimate_accuracy.py` | ح10 | قياس دقة التقديرات وتحديث سجلها الربعي |
 | `site/generator/build_report.py` (مجلد `SITE_DIR`) | س2 | بناء صفحة التقرير — **المصدر الواحد** للمولّد |

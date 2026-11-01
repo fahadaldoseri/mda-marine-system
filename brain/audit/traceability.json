@@ -1,3346 +1,3332 @@
 {
- "version": 1,
- "generated_at": "2026-11-01",
- "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
- "rows": [
-  {
-   "fault_id": "ز-01",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ز-1",
-   "barrier_id": "B-1721e507",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-01",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-1",
-   "barrier_id": "B-f0cca58a",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-221",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-221",
-   "barrier_id": "B-240d4398",
-   "run_evidence": "ببه — يُحذف الاستثناء فور الدمج اختبار: check_server_code_tracking.py خرج 0 «كل ملفات الشيفرة متتبَّ"
-  },
-  {
-   "fault_id": "ك-222",
-   "state": "مغلق",
-   "lesson_id": "ك-222",
-   "barrier_id": "B-ded9c484",
-   "run_evidence": "ve.sh مع رسالة صريحة للمدة اختبار: check_live.sh --compare 2026-10-28 خرج 0 «كل المسارات ترد 200 وPD"
-  },
-  {
-   "fault_id": "ك-223",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-223",
-   "barrier_id": "B-cefc758b",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-224",
-   "state": "مغلق",
-   "lesson_id": "ك-224",
-   "barrier_id": "B-e6ba63c0",
-   "run_evidence": "ات-الكاملة.md · تشخيص-المصادر-الشامل) اختبار: تطبيق apply_from_github خرج 0 بعد الدمج («مطابق: 496 ·"
-  },
-  {
-   "fault_id": "ك-225",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-225",
-   "barrier_id": "B-e7487960",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-226",
-   "state": "مفتوح",
-   "lesson_id": "ك-226",
-   "barrier_id": "B-9e5d3a79",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ع-01",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ع-1",
-   "barrier_id": "B-cd4095dd",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "م-01",
-   "state": "مغلق",
-   "lesson_id": "م-1",
-   "barrier_id": "B-5f36040e",
-   "run_evidence": "حقق حي 2026-10-28: عرض فقرة الترويسة في المخرج المبني → لا قيد 74ch · مطابق تمامًا · قياس حي قبل التسليم (`"
-  },
-  {
-   "fault_id": "م-02",
-   "state": "مغلق",
-   "lesson_id": "م-2",
-   "barrier_id": "B-f6353d45",
-   "run_evidence": ": بنية بطاقة القرار في المخرج المبني → التسمية فوق القيمة بعرض كامل · مطابق تمامًا · قاعدة تصميم مكتوبة في "
-  },
-  {
-   "fault_id": "م-03",
-   "state": "موروث غير مثبت",
-   "lesson_id": "م-3",
-   "barrier_id": "B-67ade37e",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ث-01",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ث-1",
-   "barrier_id": "B-ccadf1fb",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ث-02",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ث-02",
-   "barrier_id": "B-c1cda84b",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ع-02",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ع-2",
-   "barrier_id": "B-889df220",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-02",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-02",
-   "barrier_id": "B-22462b88",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ث-03",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ث-03",
-   "barrier_id": "B-fe8b61bd",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ث-04",
-   "state": "موروث غير مثبت",
-   "lesson_id": null,
-   "barrier_id": "B-87ded236",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-03",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-03",
-   "barrier_id": "B-69946590",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ث-05",
-   "state": "موروث غير مثبت",
-   "lesson_id": null,
-   "barrier_id": "B-f93d75a3",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-04",
-   "state": "مغلق",
-   "lesson_id": "ك-4",
-   "barrier_id": "B-aee459ce",
-   "run_evidence": ".md` تحقق حي 2026-10-28: python3 validators/check_portable_paths.py → خرج 0 · لا مسار جذر مكتوب نصًّ"
-  },
-  {
-   "fault_id": "ك-05",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-5",
-   "barrier_id": "B-fc459538",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-06",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-06",
-   "barrier_id": "B-5fbfc25d",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-07",
-   "state": "مغلق",
-   "lesson_id": "ك-7",
-   "barrier_id": "B-476fef0b",
-   "run_evidence": "لصحيح من الفحص تحقق حي 2026-10-28: python3 tools/preflight_check.py → خرج 0 · نجح 39 · فشل 0 · قاعدة"
-  },
-  {
-   "fault_id": "ك-08",
-   "state": "مغلق",
-   "lesson_id": "ك-8",
-   "barrier_id": "B-61173ebf",
-   "run_evidence": "جلاته تحقق حي 2026-10-28: appendices/source-reliability-40.md موجود · مطابق تمامًا · قاعدة: **كل مرجع في مل"
-  },
-  {
-   "fault_id": "ك-09",
-   "state": "مغلق",
-   "lesson_id": "ك-9",
-   "barrier_id": "B-ab5124e0",
-   "run_evidence": " 2026-10-28: بوابة أرقام المصادر في tools/final_gate.sh → 4 مطابقات · خرج 0 · قاعدة: **لا تعديل بلا "
-  },
-  {
-   "fault_id": "ك-10",
-   "state": "موروث غير مثبت",
-   "lesson_id": null,
-   "barrier_id": "B-e3210fff",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-11",
-   "state": "موروث غير مثبت",
-   "lesson_id": null,
-   "barrier_id": "B-025945d1",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-12",
-   "state": "موروث غير مثبت",
-   "lesson_id": null,
-   "barrier_id": "B-eb498dbd",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-13",
-   "state": "موروث غير مثبت",
-   "lesson_id": null,
-   "barrier_id": "B-6a21ebd9",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-20",
-   "state": "موروث غير مثبت",
-   "lesson_id": null,
-   "barrier_id": "B-544fb05a",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-21",
-   "state": "موروث غير مثبت",
-   "lesson_id": null,
-   "barrier_id": "B-9ceed35f",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-22",
-   "state": "موروث غير مثبت",
-   "lesson_id": null,
-   "barrier_id": "B-01b40402",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-23",
-   "state": "مغلق",
-   "lesson_id": "ك-23",
-   "barrier_id": "B-91fd839d",
-   "run_evidence": "ة مباشرة — مُغلق — بوابة الأرقام صارت نظيفة بعد إعادة توليد التغذيات (رمز 0)"
-  },
-  {
-   "fault_id": "ك-24",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-24",
-   "barrier_id": "B-35a6f1ac",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-25",
-   "state": "موروث غير مثبت",
-   "lesson_id": null,
-   "barrier_id": "B-a38d4b25",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-26",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-26",
-   "barrier_id": "B-2ea667b3",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-27",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-27",
-   "barrier_id": "B-44f081ca",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-28",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-28",
-   "barrier_id": "B-adfc0bcb",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-29",
-   "state": "مفتوح",
-   "lesson_id": "ك-29",
-   "barrier_id": "B-9be39ded",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-30",
-   "state": "مفتوح",
-   "lesson_id": "ك-30",
-   "barrier_id": "B-e7e0a279",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-31",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-31",
-   "barrier_id": "B-2b960364",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-32",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-32",
-   "barrier_id": "B-c103cf0e",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-33",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-33",
-   "barrier_id": "B-5747a03a",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-34",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-34",
-   "barrier_id": "B-d6f0efa6",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-35",
-   "state": "موروث غير مثبت",
-   "lesson_id": null,
-   "barrier_id": "B-3b2e4bae",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-36",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-36",
-   "barrier_id": "B-7ac73f2d",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-37",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-37",
-   "barrier_id": "B-174e79f3",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-38",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-38",
-   "barrier_id": "B-803f4896",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-39",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-39",
-   "barrier_id": "B-c0813865",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-40",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-40",
-   "barrier_id": "B-a1f995f2",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-41",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-41",
-   "barrier_id": "B-c72fc1ac",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-42",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-42",
-   "barrier_id": "B-551d5816",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-43",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-43",
-   "barrier_id": "B-29eaa0fe",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-44",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-44",
-   "barrier_id": "B-c502bdc5",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-46",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-46",
-   "barrier_id": "B-0714d124",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-47",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-47",
-   "barrier_id": "B-81f532a7",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-48",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-48",
-   "barrier_id": "B-a079dbd6",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-49",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-49",
-   "barrier_id": "B-000c86fb",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-51",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-51",
-   "barrier_id": "B-86de057e",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-52",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-52",
-   "barrier_id": "B-600f7aa8",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-50",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-50",
-   "barrier_id": "B-b77fd73a",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-53",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-53",
-   "barrier_id": "B-6377fe06",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-54",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-54",
-   "barrier_id": "B-f87fc0bd",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-55",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-55",
-   "barrier_id": "B-7c06e258",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-56",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-56",
-   "barrier_id": "B-165fee06",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-57",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-57",
-   "barrier_id": "B-16085a03",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-58",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-58",
-   "barrier_id": "B-d8f2fc28",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-14",
-   "state": "موروث غير مثبت",
-   "lesson_id": null,
-   "barrier_id": "B-6a761cc7",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-15",
-   "state": "موروث غير مثبت",
-   "lesson_id": null,
-   "barrier_id": "B-0caf790f",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-16",
-   "state": "موروث غير مثبت",
-   "lesson_id": null,
-   "barrier_id": "B-dbde785f",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-17",
-   "state": "موروث غير مثبت",
-   "lesson_id": null,
-   "barrier_id": "B-dd86f060",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-18",
-   "state": "موروث غير مثبت",
-   "lesson_id": null,
-   "barrier_id": "B-be064a4c",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-19",
-   "state": "موروث غير مثبت",
-   "lesson_id": null,
-   "barrier_id": "B-355f3a70",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-45",
-   "state": "موروث غير مثبت",
-   "lesson_id": null,
-   "barrier_id": "B-0e292f7a",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-59",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-59",
-   "barrier_id": "B-0852e4cd",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-60",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-60",
-   "barrier_id": "B-b1710b48",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-61",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-61",
-   "barrier_id": "B-20c70781",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-62",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-62",
-   "barrier_id": "B-b1c2dac5",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-63",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-63",
-   "barrier_id": "B-8a021c5c",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-64",
-   "state": "موروث غير مثبت",
-   "lesson_id": null,
-   "barrier_id": "B-4d55d6f9",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-65",
-   "state": "موروث غير مثبت",
-   "lesson_id": null,
-   "barrier_id": "B-9c58856b",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-66",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-66",
-   "barrier_id": "B-6ec23060",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-67",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-67",
-   "barrier_id": "B-edfe2adb",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-68",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-68",
-   "barrier_id": "B-9776e904",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-69",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-69",
-   "barrier_id": "B-fae64cd8",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-70",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-70",
-   "barrier_id": "B-0e013dbf",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-71",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-71",
-   "barrier_id": "B-d9152e6e",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-72",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-72",
-   "barrier_id": "B-b48e1c47",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-73",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-73",
-   "barrier_id": "B-be8f77a6",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-75",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-75",
-   "barrier_id": "B-51290ba9",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-76",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-76",
-   "barrier_id": "B-145ca1c8",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-77",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-77",
-   "barrier_id": "B-1f6e1c52",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-78",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-78",
-   "barrier_id": "B-fb46fe82",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-79",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-79",
-   "barrier_id": "B-0985c1b7",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-80",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-80",
-   "barrier_id": "B-da646379",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-81",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-81",
-   "barrier_id": "B-850b77e5",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-82",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-82",
-   "barrier_id": "B-d43e5ca7",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-83",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-83",
-   "barrier_id": "B-00b9a2d0",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-84",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-84",
-   "barrier_id": "B-7751b7d6",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-85",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-85",
-   "barrier_id": "B-e9132259",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-86",
-   "state": "مفتوح",
-   "lesson_id": "ك-86",
-   "barrier_id": "B-8645868a",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-87",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-87",
-   "barrier_id": "B-7e010899",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-88",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-88",
-   "barrier_id": "B-107cea3e",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-89",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-89",
-   "barrier_id": "B-63828d99",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-90",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-90",
-   "barrier_id": "B-5d6dd227",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-91",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-91",
-   "barrier_id": "B-1f161a98",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-92",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-92",
-   "barrier_id": "B-6c13e83e",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-93",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-93",
-   "barrier_id": "B-72811022",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-94",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-94",
-   "barrier_id": "B-f1ac43d1",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-95",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-95",
-   "barrier_id": "B-b258ca6f",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-66/ب",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-66",
-   "barrier_id": "B-d36ce714",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-67/ب",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-67",
-   "barrier_id": "B-60e22c35",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-68/ب",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-68",
-   "barrier_id": "B-97fd3d26",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-69/ب",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-69",
-   "barrier_id": "B-bea55978",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-70/ب",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-70",
-   "barrier_id": "B-05073416",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-71/ب",
-   "state": "مفتوح",
-   "lesson_id": "ك-71",
-   "barrier_id": "B-d4ddba0d",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-72/ب",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-72",
-   "barrier_id": "B-65293f02",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-73/ب",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-73",
-   "barrier_id": "B-3cfa2672",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-74",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-74",
-   "barrier_id": "B-b87d04f8",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-75/ب",
-   "state": "مفتوح",
-   "lesson_id": "ك-75",
-   "barrier_id": "B-1348b84a",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-76/ب",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-76",
-   "barrier_id": "B-e3a9c707",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-77/ب",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-77",
-   "barrier_id": "B-d609e813",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-78/ب",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-78",
-   "barrier_id": "B-26058e5f",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-80/ب",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-80",
-   "barrier_id": "B-ed487051",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-81/ب",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-81",
-   "barrier_id": "B-78c53bf9",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-82/ب",
-   "state": "مفتوح",
-   "lesson_id": "ك-82",
-   "barrier_id": "B-3509c45c",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-83/ب",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-83",
-   "barrier_id": "B-a6be438b",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-84/ب",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-84",
-   "barrier_id": "B-16131373",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-85/ب",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-85",
-   "barrier_id": "B-3c5cb7bc",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-86/ب",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-86",
-   "barrier_id": "B-aa94b1f4",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-91/ب",
-   "state": "مفتوح",
-   "lesson_id": "ك-91",
-   "barrier_id": "B-f1231f50",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-92/ب",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-92",
-   "barrier_id": "B-234cf5a3",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-93/ب",
-   "state": "مفتوح",
-   "lesson_id": "ك-93",
-   "barrier_id": "B-f46aa03c",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-94/ب",
-   "state": "مفتوح",
-   "lesson_id": "ك-94",
-   "barrier_id": "B-46eff922",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-96",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-96",
-   "barrier_id": "B-a0c15b33",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-97",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-97",
-   "barrier_id": "B-b990c7c8",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-98",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-98",
-   "barrier_id": "B-94f6ab04",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-99",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-99",
-   "barrier_id": "B-c9140e17",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-100",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-100",
-   "barrier_id": "B-50d4fd41",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-101",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-101",
-   "barrier_id": "B-04aecdb7",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-102",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-102",
-   "barrier_id": "B-0ec17ab1",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-103",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-103",
-   "barrier_id": "B-fae50588",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-104",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-104",
-   "barrier_id": "B-d47650ab",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-105",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-105",
-   "barrier_id": "B-eb0ababb",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-106",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-106",
-   "barrier_id": "B-54e22710",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-107",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-107",
-   "barrier_id": "B-f8e6aa23",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-108",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-108",
-   "barrier_id": "B-f41f292d",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-109",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-109",
-   "barrier_id": "B-c1f2aabe",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-110",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-110",
-   "barrier_id": "B-d2a97aa7",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-111",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-111",
-   "barrier_id": "B-2c2e8e8b",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-112",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-112",
-   "barrier_id": "B-1f147150",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-113",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-113",
-   "barrier_id": "B-c0291086",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-114",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-114",
-   "barrier_id": "B-fcfce670",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-115",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-115",
-   "barrier_id": "B-41ddcf40",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-116",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-116",
-   "barrier_id": "B-a90e4e41",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-117",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-117",
-   "barrier_id": "B-ffb1cfbe",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-118",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-118",
-   "barrier_id": "B-82225374",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-119",
-   "state": "مفتوح",
-   "lesson_id": "ك-119",
-   "barrier_id": "B-336b51eb",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-120",
-   "state": "مفتوح",
-   "lesson_id": "ك-120",
-   "barrier_id": "B-d2ca5d79",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-121",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-121",
-   "barrier_id": "B-737a2a04",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-122",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-122",
-   "barrier_id": "B-31b11be6",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-123",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-123",
-   "barrier_id": "B-838d291b",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-124",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-124",
-   "barrier_id": "B-0e464943",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-122/ب",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-122",
-   "barrier_id": "B-ad702881",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-125",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-125",
-   "barrier_id": "B-5fc14304",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-126",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-126",
-   "barrier_id": "B-b1998390",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-127",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-127",
-   "barrier_id": "B-69d405f5",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-128",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-128",
-   "barrier_id": "B-3a9f9af8",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-129",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-129",
-   "barrier_id": "B-ee88bf1b",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-130",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-130",
-   "barrier_id": "B-a624b825",
-   "run_evidence": ".sh` يقرأ الشيفرة ويتحقق أن الحكم يُصدر فعليًا على PDF حقيقي — تحقّق: 7/7 اختبارات ناجحة."
-  },
-  {
-   "fault_id": "ك-131",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-131",
-   "barrier_id": "B-1bd029db",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-132",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-132",
-   "barrier_id": "B-8d71a29a",
-   "run_evidence": "لة بايثون مضمّنة، وربط ملف الاختبارات كخطوة مانعة في البوابة — تحقّق: 9/9 ناجحة · البوابة «نجاح مع"
-  },
-  {
-   "fault_id": "ك-133",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-133",
-   "barrier_id": "B-f44dfb9a",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-134",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-134",
-   "barrier_id": "B-3202fe44",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-135",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-135",
-   "barrier_id": "B-2d67666d",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-136",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-136",
-   "barrier_id": "B-a2c3c1fc",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-137",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-137",
-   "barrier_id": "B-0c33895a",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-138",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-138",
-   "barrier_id": "B-8e69f306",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-139",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-139",
-   "barrier_id": "B-cf7e992e",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-140",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-140",
-   "barrier_id": "B-714504bf",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-141",
-   "state": "مفتوح",
-   "lesson_id": "ك-141",
-   "barrier_id": "B-78e75993",
-   "run_evidence": "— حُوِّلت الستة إلى فشل مغلق (إعادة رفع ⇒ الحارس الموحّد ⇒ رمز 70)، وبقيت 59 حالة مصنَّفة "
-  },
-  {
-   "fault_id": "ك-142",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-142",
-   "barrier_id": "B-675c96f1",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-143",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-143",
-   "barrier_id": "B-142394a7",
-   "run_evidence": "_strict` فت منع عند أي رمز غير صفري · واختبارات المراجعة الثانية صارت 11/11 بعد إصلاح مصدر الفشل · و"
-  },
-  {
-   "fault_id": "ك-144",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-144",
-   "barrier_id": "B-c7b58b71",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-145",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-145",
-   "barrier_id": "B-ea513956",
-   "run_evidence": "يل شيفرة (ast) بحالتين مصطنعتين · وغياب سياسة الأقسام يرفع استثناءً ⇒ رمز 70 ⇒ منع."
-  },
-  {
-   "fault_id": "ك-146",
-   "state": "مفتوح",
-   "lesson_id": "ك-146",
-   "barrier_id": "B-6649d10b",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-147",
-   "state": "مفتوح",
-   "lesson_id": "ك-147",
-   "barrier_id": "B-bf5843cd",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-148",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-148",
-   "barrier_id": "B-cb604b9b",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-149",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-149",
-   "barrier_id": "B-0fb5d8d5",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-150",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-150",
-   "barrier_id": "B-6ebf7a2e",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-151",
-   "state": "مفتوح",
-   "lesson_id": "ك-151",
-   "barrier_id": "B-11e157ab",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-152",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-152",
-   "barrier_id": "B-87482362",
-   "run_evidence": "فة `from pathlib import Path`، وربط الفاحص بـ validators/_guard.py (الرمز 70 للانهيار)"
-  },
-  {
-   "fault_id": "ك-153",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-153",
-   "barrier_id": "B-19334715",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-154",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-154",
-   "barrier_id": "B-eac4c60f",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-155",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-155",
-   "barrier_id": "B-00c48235",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-156",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-156",
-   "barrier_id": "B-4fc0f6d0",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-157",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-157",
-   "barrier_id": "B-e77b23b5",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-158",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-158",
-   "barrier_id": "B-ff51b602",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-159",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-159",
-   "barrier_id": "B-9611991e",
-   "run_evidence": "د الحارس من مساره الصحيح مع بديل احتياطي، وأي انهيار في المدققات يخرج رمز 70 فيمنع."
-  },
-  {
-   "fault_id": "ك-160",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-160",
-   "barrier_id": "B-292c7d19",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-161",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-161",
-   "barrier_id": "B-811bbb25",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-162",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-162",
-   "barrier_id": "B-9c2471b0",
-   "run_evidence": "— أُضيف `validators/check_secrets.py` (منع، رمز 70) في بوابة التسليم و`gith"
-  },
-  {
-   "fault_id": "ك-163",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-163",
-   "barrier_id": "B-b7fbee8d",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-164",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-164",
-   "barrier_id": "B-77930017",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-165",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-165",
-   "barrier_id": "B-f71eeae6",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-166",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-166",
-   "barrier_id": "B-2fd8e249",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-167",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-167",
-   "barrier_id": "B-760bece5",
-   "run_evidence": "ُزيل اللبس مع اسم الجهة MSI Defense في عناوين التغذية. الاختبار: G003 خرج 0 في نسخة معزولة بعد الإصل"
-  },
-  {
-   "fault_id": "ك-168",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-168",
-   "barrier_id": "B-8ff8e4e9",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-169",
-   "state": "مفتوح",
-   "lesson_id": "ك-169",
-   "barrier_id": "B-94c06a6e",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-170",
-   "state": "مفتوح",
-   "lesson_id": "ك-170",
-   "barrier_id": "B-021d0efc",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-171",
-   "state": "مفتوح",
-   "lesson_id": "ك-171",
-   "barrier_id": "B-6fc10cd9",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-172",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-172",
-   "barrier_id": "B-f15d3c1b",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-173",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-173",
-   "barrier_id": "B-933fb69f",
-   "run_evidence": "— أُصلح النص حيًّا وصارت بوابة الأسلوب تعبر (رمز 0) على نص الخادم وعلى النص"
-  },
-  {
-   "fault_id": "ك-174",
-   "state": "مفتوح",
-   "lesson_id": "ك-174",
-   "barrier_id": "B-94083a42",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-169/ب",
-   "state": "مفتوح",
-   "lesson_id": "ك-169",
-   "barrier_id": "B-7ee8d85e",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-170/ب",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-170",
-   "barrier_id": "B-4e875131",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-171/ب",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-171",
-   "barrier_id": "B-cda13f6f",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-176",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-176",
-   "barrier_id": "B-f0efc67a",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-177",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-177",
-   "barrier_id": "B-4135324f",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-178",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-178",
-   "barrier_id": "B-5c0aa7e2",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-179",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-179",
-   "barrier_id": "B-6de63090",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-180",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-180",
-   "barrier_id": "B-6571f971",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-181",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-181",
-   "barrier_id": "B-dcde24f8",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-182",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-182",
-   "barrier_id": "B-c2df527b",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-183",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-183",
-   "barrier_id": "B-3f3fa12e",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-184",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-184",
-   "barrier_id": "B-d9ed63f7",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-185",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-185",
-   "barrier_id": "B-b1cad914",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-186",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-186",
-   "barrier_id": "B-2c4e89f4",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-187",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-187",
-   "barrier_id": "B-1cf68088",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-188",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-188",
-   "barrier_id": "B-ccb5fbcb",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-189",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-189",
-   "barrier_id": "B-1e433381",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-190",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-190",
-   "barrier_id": "B-707b6d37",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-191",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-191",
-   "barrier_id": "B-8b4a6483",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-192",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-192",
-   "barrier_id": "B-a5948b86",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-193",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-193",
-   "barrier_id": "B-5a1caf9b",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-194",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-194",
-   "barrier_id": "B-766f569d",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-195",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-195",
-   "barrier_id": "B-f3871889",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-196",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-196",
-   "barrier_id": "B-007fea11",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-197",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-197",
-   "barrier_id": "B-a579a434",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-198",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-198",
-   "barrier_id": "B-405af85a",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-199",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-199",
-   "barrier_id": "B-864e5369",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-201",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-201",
-   "barrier_id": "B-bb3040d4",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-203",
-   "state": "مفتوح",
-   "lesson_id": "ك-203",
-   "barrier_id": "B-3de97cc8",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-202",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-202",
-   "barrier_id": "B-c402399d",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-204",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-204",
-   "barrier_id": "B-264f6e7a",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-205",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-205",
-   "barrier_id": "B-d5aae70e",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-206",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-206",
-   "barrier_id": "B-d22568f4",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-207",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-207",
-   "barrier_id": "B-c8c785c4",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-208",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-208",
-   "barrier_id": "B-576daab7",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-209",
-   "state": "موروث غير مثبت",
-   "lesson_id": "ك-209",
-   "barrier_id": "B-ccf85bc7",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-210",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-210",
-   "barrier_id": "B-9614d446",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-211",
-   "state": "مغلق",
-   "lesson_id": "ك-211",
-   "barrier_id": "B-22ee98d6",
-   "run_evidence": "صمة النمط ac05b43f996ae9f0. تحقق حي 2026-10-28: check_pdf_format.py → خرج 0 · مطابق للشكل المعتمد (v"
-  },
-  {
-   "fault_id": "ك-212",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-212",
-   "barrier_id": "B-b44c721a",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-213",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-213",
-   "barrier_id": "B-f70c8d47",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-214",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-214",
-   "barrier_id": "B-86f305a5",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-215",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-215",
-   "barrier_id": "B-8370fa84",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-216",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-216",
-   "barrier_id": "B-8a4bbaf2",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-217",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-217",
-   "barrier_id": "B-db3db861",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-218",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-218",
-   "barrier_id": "B-2aa43560",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-219",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-219",
-   "barrier_id": "B-7128177c",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-220",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-220",
-   "barrier_id": "B-e84072c5",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-227",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-227",
-   "barrier_id": "B-20e1ded3",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-228",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-228",
-   "barrier_id": "B-5f1b0299",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-229",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-229",
-   "barrier_id": "B-57e46bca",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-230",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-230",
-   "barrier_id": "B-187ec15c",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-231",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-231",
-   "barrier_id": "B-e7b3e5f4",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-232",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-232",
-   "barrier_id": "B-63f0fd77",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-233",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-233",
-   "barrier_id": "B-e89ffc3a",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-234",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-234",
-   "barrier_id": "B-e8b0ecc9",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-235",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-235",
-   "barrier_id": "B-601719cc",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-236",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-236",
-   "barrier_id": "B-4faffaec",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-237",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-237",
-   "barrier_id": "B-1fabded9",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-238",
-   "state": "مفتوح",
-   "lesson_id": "ك-238",
-   "barrier_id": "B-345f3744",
-   "run_evidence": " والقرار النهائي لأي القائمتين أصحّ يحتاج كلمة المالك · تغطية الأسلوب 8/8 · مانعة 0 — مغلق تشغيليً"
-  },
-  {
-   "fault_id": "ك-239",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-239",
-   "barrier_id": "B-84237a38",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-241",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-241",
-   "barrier_id": "B-5626c431",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-242",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-242",
-   "barrier_id": "B-dd03729a",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-243",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-243",
-   "barrier_id": "B-b7e4c05c",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-244",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-244",
-   "barrier_id": "B-f3f91c1d",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-245",
-   "state": "مفتوح",
-   "lesson_id": "ك-245",
-   "barrier_id": "B-2234d734",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-246",
-   "state": "مفتوح",
-   "lesson_id": "ك-246",
-   "barrier_id": "B-f8b3328c",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-247",
-   "state": "مفتوح",
-   "lesson_id": "ك-247",
-   "barrier_id": "B-ee046c23",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-248",
-   "state": "مفتوح",
-   "lesson_id": "ك-248",
-   "barrier_id": "B-5b9b5169",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-249",
-   "state": "مفتوح",
-   "lesson_id": "ك-249",
-   "barrier_id": "B-a4b4f1b3",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-250",
-   "state": "مفتوح",
-   "lesson_id": "ك-250",
-   "barrier_id": "B-182e97ec",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-251",
-   "state": "مغلق",
-   "lesson_id": "ك-251",
-   "barrier_id": "B-2295f6bd",
-   "run_evidence": " حالة إن وُجدت اختبار ثبات: 4 تمريرات أنتجت بصمة واحدة 6722a78eee62 · خرج 0"
-  },
-  {
-   "fault_id": "ك-252",
-   "state": "مغلق",
-   "lesson_id": "ك-252",
-   "barrier_id": "B-2cec3eb7",
-   "run_evidence": "ولا صف يُحذف قياس: 285 صفًا حينها × 12 عمودًا · ترويسات 2 · مكرّر 0 · خرج 0"
-  },
-  {
-   "fault_id": "ك-253",
-   "state": "مغلق",
-   "lesson_id": "ك-253",
-   "barrier_id": "B-b98a62c4",
-   "run_evidence": "ا بمهلة اختبار سلبي وإيجابي: 5 حالات كلها صحيحة · بوابة السجل الحقيقي خرج 0"
-  },
-  {
-   "fault_id": "ك-254",
-   "state": "مغلق",
-   "lesson_id": "ك-254",
-   "barrier_id": "B-2e162f05",
-   "run_evidence": "التحقق يشترط نتيجة صريحة (خرج 0 · مطابق · أُثبت · قاس) ق"
-  },
-  {
-   "fault_id": "ك-255",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-255",
-   "barrier_id": "B-6fdb6176",
-   "run_evidence": "ليل لا يفرغ: يُكتب «لا نصّ حاجز — الحالة: …» قياس: الاستثناءات 275 والفاشل 0 · خرج 0"
-  },
-  {
-   "fault_id": "ك-256",
-   "state": "مغلق",
-   "lesson_id": "ك-256",
-   "barrier_id": "B-1413647c",
-   "run_evidence": "مغلق» صار يشترط الإصلاح «منفَّذ» حرفيًا اختبار انحدار: الحالة 6 أعادت رمز 2 · والحالة الإيجابية ما ز"
-  },
-  {
-   "fault_id": "ك-257",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-257",
-   "barrier_id": "B-d54a96bd",
-   "run_evidence": "، والدرس يجب أن يطابق العطل اختبارا انحدار: الحالة 7 والحالة 8 أعادتا رمز 2 · مطابق"
-  },
-  {
-   "fault_id": "ك-258",
-   "state": "مغلق",
-   "lesson_id": "ك-258",
-   "barrier_id": "B-d61f7735",
-   "run_evidence": "يجة الحارس رفض 3 صفوف بدليل غير قابل لإعادة التشغيل ثم أُصلح المصدر · فاشل 0"
-  },
-  {
-   "fault_id": "ك-259",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-259",
-   "barrier_id": "B-d6f5051c",
-   "run_evidence": "بيع الأرقام تمريرتان متتاليتان بثبات كامل (سجل + تعلم) · بصمة واحدة · فاشل 0"
-  },
-  {
-   "fault_id": "ك-260",
-   "state": "مغلق",
-   "lesson_id": "ك-260",
-   "barrier_id": "B-64701681",
-   "run_evidence": "ُبقيت الأرقام الحيّة من قياس الأداة قياس مباشر: 292 صفًا · 2 جدولان · فاشل 0"
-  },
-  {
-   "fault_id": "ك-261",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-261",
-   "barrier_id": "B-1b4dcd85",
-   "run_evidence": "المكرّر وتشغيل التحقق قبل الاعتماد المحرّك يعمل: تمريرتان متتاليتان · فاشل 0"
-  },
-  {
-   "fault_id": "ك-262",
-   "state": "مغلق",
-   "lesson_id": "ك-262",
-   "barrier_id": "B-ad859ed5",
-   "run_evidence": "مصدر واحد: الإصلاح والحاجز في التوليد والحارس الحارس خرج 0 والحالة الإيجابية والاخت"
-  },
-  {
-   "fault_id": "ك-263",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-263",
-   "barrier_id": "B-1f6ed37b",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-264",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-264",
-   "barrier_id": "B-648af386",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-265",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-265",
-   "barrier_id": "B-3b6a0f1d",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-266",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-266",
-   "barrier_id": "B-ca71c80b",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-267",
-   "state": "مغلق",
-   "lesson_id": "ك-267",
-   "barrier_id": "B-f82048df",
-   "run_evidence": "_print.py — 5 حالات سلبيّة وإيجابيّة تمرّ، وفحص مضاد: PDF مفقود يمنع برمز 2"
-  },
-  {
-   "fault_id": "ك-268",
-   "state": "مغلق",
-   "lesson_id": "ك-268",
-   "barrier_id": "B-0917b4f4",
-   "run_evidence": "اجهة كل بوابة قبل تشغيلها وتشغيلها بواجهتها الصحيحة مطبَّق: قاعدة: أي رمز 2 يُقرأ مع مخرجه الحرفي وي"
-  },
-  {
-   "fault_id": "ك-269",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-269",
-   "barrier_id": "B-e1b3797a",
-   "run_evidence": "نع · التجربة تمنع · ومع --allow-delete ينفّذ. النتيجة: نجح 4 · فشل 0 (خرج 0)"
-  },
-  {
-   "fault_id": "ك-270",
-   "state": "مغلق",
-   "lesson_id": "ك-270",
-   "barrier_id": "B-26ab6512",
-   "run_evidence": "thon3 validators/check_print_quality.py --pdf <pdf> ← النتيجة: مطابق (خرج 0)"
-  },
-  {
-   "fault_id": "ك-271",
-   "state": "مغلق",
-   "lesson_id": "ك-271",
-   "barrier_id": "B-70b327e2",
-   "run_evidence": "alidators/check_pdf_format.py --pdf <pdf> ← «لا فجوة داخلية ≥ 45 مم» (خرج 0)"
-  },
-  {
-   "fault_id": "ك-272",
-   "state": "مغلق",
-   "lesson_id": "ك-272",
-   "barrier_id": "B-e8998b8b",
-   "run_evidence": "ى المخرج + بوابة الشكل: 9 صفحات · متوسط تعبئة 94.1% · لا فجوة ≥45 مم (خرج 0)"
-  },
-  {
-   "fault_id": "ك-273",
-   "state": "مغلق",
-   "lesson_id": "ك-273",
-   "barrier_id": "B-47be0d65",
-   "run_evidence": "ython3 validators/check_backup_parity.py --mode strict ← «لا انحراف» (خرج 0)"
-  },
-  {
-   "fault_id": "ك-274",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-274",
-   "barrier_id": "B-5ff8935f",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-275",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-275",
-   "barrier_id": "B-78c40bca",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-276",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-276",
-   "barrier_id": "B-c4b492e3",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-277",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-277",
-   "barrier_id": "B-43fed4ad",
-   "run_evidence": "نُقل الملف إلى `brain/docs/` وحُذف المجلد الخطأ، ثم التماثل خرج 0 مغلق"
-  },
-  {
-   "fault_id": "ك-278",
-   "state": "مغلق",
-   "lesson_id": "ك-278",
-   "barrier_id": "B-6373aded",
-   "run_evidence": "منفَّذ: حارس فشل مغلق في final_gate.sh (يتحقق YYYY-MM-DD ويخرج 2 برسالة صريحة) وحارس مثله"
-  },
-  {
-   "fault_id": "ك-279",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-279",
-   "barrier_id": "B-6c15648d",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-280",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-280",
-   "barrier_id": "B-cda44d61",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-281",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-281",
-   "barrier_id": "B-9dd00163",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-282",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-282",
-   "barrier_id": "B-4dfc2354",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-283",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-283",
-   "barrier_id": "B-7ec937cb",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-284",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-284",
-   "barrier_id": "B-a05d6ccb",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-285",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-285",
-   "barrier_id": "B-792c40d6",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-286",
-   "state": "مغلق",
-   "lesson_id": "ك-286",
-   "barrier_id": "B-79339a1d",
-   "run_evidence": "python3 validators/check_source_route_coverage.py --date 2026-10-28 → خرج 0 (نجح 59 · فشل 0)"
-  },
-  {
-   "fault_id": "ك-287",
-   "state": "مغلق",
-   "lesson_id": "ك-287",
-   "barrier_id": "B-dd4c0158",
-   "run_evidence": "python3 validators/check_source_route_coverage.py --date 2026-10-28 → خرج 0 (نجح 59 · فشل 0)"
-  },
-  {
-   "fault_id": "ك-288",
-   "state": "مغلق",
-   "lesson_id": "ك-288",
-   "barrier_id": "B-2218a178",
-   "run_evidence": "python3 validators/check_source_route_coverage.py --date 2026-10-28 → خرج 0 (نجح 59 · فشل 0)"
-  },
-  {
-   "fault_id": "ك-289",
-   "state": "مغلق",
-   "lesson_id": "ك-289",
-   "barrier_id": "B-1e3cf307",
-   "run_evidence": "python3 validators/check_source_route_coverage.py --date 2026-10-28 → خرج 0 (نجح 59 · فشل 0)"
-  },
-  {
-   "fault_id": "ك-290",
-   "state": "مغلق",
-   "lesson_id": "ك-290",
-   "barrier_id": "B-e1644216",
-   "run_evidence": "python3 validators/check_source_route_coverage.py --date 2026-10-28 → خرج 0 (نجح 59 · فشل 0)"
-  },
-  {
-   "fault_id": "ك-291",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-291",
-   "barrier_id": "B-ff83695d",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-292",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-292",
-   "barrier_id": "B-a7c4cc9c",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-293",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-293",
-   "barrier_id": "B-72b6f3e4",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-294",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-294",
-   "barrier_id": "B-1f9b8528",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-295",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-295",
-   "barrier_id": "B-9aa4c178",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-296",
-   "state": "مغلق",
-   "lesson_id": "ك-296",
-   "barrier_id": "B-c7d8fabd",
-   "run_evidence": "لمؤقتة خارج الشجرة إلى audit-2026-10-29/backups/ بلا حذف ✔ D040 وD070 رمز 0 · check_backup_parity --"
-  },
-  {
-   "fault_id": "ك-297",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-297",
-   "barrier_id": "B-35559563",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-298",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-298",
-   "barrier_id": "B-0a2584cc",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-299",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-299",
-   "barrier_id": "B-29960f20",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-300",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-300",
-   "barrier_id": "B-f61d2246",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-301",
-   "state": "مفتوح",
-   "lesson_id": "ك-301",
-   "barrier_id": "B-3d1da237",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-302",
-   "state": "مفتوح",
-   "lesson_id": "ك-302",
-   "barrier_id": "B-147cd081",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-303",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-303",
-   "barrier_id": "B-d3effc9c",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-304",
-   "state": "مفتوح",
-   "lesson_id": "ك-304",
-   "barrier_id": "B-a17f934a",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-305",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-305",
-   "barrier_id": "B-b63ec084",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-306",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-306",
-   "barrier_id": "B-744de1c2",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-307",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-307",
-   "barrier_id": "B-4de9cc44",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-308",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-308",
-   "barrier_id": "B-08430fb2",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-309",
-   "state": "مغلق",
-   "lesson_id": "ك-309",
-   "barrier_id": "B-a1f8e25d",
-   "run_evidence": "sections_registry_vs_report.py 2026-10-29` → «السجل متسق مع 17 قسمًا» خرج 0 · `--selftest` → 4/4 خرج"
-  },
-  {
-   "fault_id": "ك-310",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-310",
-   "barrier_id": "B-08275011",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-311",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-311",
-   "barrier_id": "B-0f6f5c15",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-312",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-312",
-   "barrier_id": "B-3be05b28",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-313",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-313",
-   "barrier_id": "B-60603700",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-314",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-314",
-   "barrier_id": "B-21155efb",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-315",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-315",
-   "barrier_id": "B-0e63acd9",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-316",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-316",
-   "barrier_id": "B-1d823f0d",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-317",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-317",
-   "barrier_id": "B-b843b05e",
-   "run_evidence": "ر · المصادر · الإضافات · الخاصة · طبقة الإصلاح · الإنجليزية) والبناء يخرج 2. حاجز: فشل مغلق في نهاية"
-  },
-  {
-   "fault_id": "ك-318",
-   "state": "مفتوح",
-   "lesson_id": "ك-318",
-   "barrier_id": "B-90146d99",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-319",
-   "state": "مغلق",
-   "lesson_id": "ك-319",
-   "barrier_id": "B-724760fb",
-   "run_evidence": " دليل: dist/feed.xml → pubDate=18 · lastBuildDate=1 بوابة تغذية RSS — خرج 0 (pubDate في كل عنصر وlas"
-  },
-  {
-   "fault_id": "ك-320",
-   "state": "مغلق",
-   "lesson_id": "ك-320",
-   "barrier_id": "B-b099a39c",
-   "run_evidence": "l size/Larger size/Largest size بوابة validators/check_en_parity.py — خرج 0 (بنية وأرقام وسمات بلا ع"
-  },
-  {
-   "fault_id": "ك-321",
-   "state": "مغلق",
-   "lesson_id": "ك-321",
-   "barrier_id": "B-a44ef953",
-   "run_evidence": "بوابة> ثم gate_verdict → لا حكم مانع اختبار tools/runbook.py --redo — خرج 0 بإعادة تحقق فعلية للخطوا"
-  },
-  {
-   "fault_id": "ك-322",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-322",
-   "barrier_id": "B-b883dcc7",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-323",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-323",
-   "barrier_id": "B-6665b967",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-324",
-   "state": "مغلق",
-   "lesson_id": "ك-324",
-   "barrier_id": "B-365d8b99",
-   "run_evidence": " الكتلة في ملف الواجهة، وحُدِّث اختبار القسم. بوابة preflight_check — خرج 0 بعد الترحيل"
-  },
-  {
-   "fault_id": "ك-325",
-   "state": "مغلق",
-   "lesson_id": "ك-325",
-   "barrier_id": "B-33c2cacb",
-   "run_evidence": "م، وأُضيف اختبار سلبي بسبع حالات. اختبار tests/test_gate_verdict.py — خرج 0 بسبع حالات"
-  },
-  {
-   "fault_id": "ك-326",
-   "state": "مغلق",
-   "lesson_id": "ك-326",
-   "barrier_id": "B-727de0ea",
-   "run_evidence": " عبر فرع وطلب دمج قبل النسخة. بوابة check_backup_parity بوضع strict — خرج 0 (مطابق تمامًا)"
-  },
-  {
-   "fault_id": "ك-327",
-   "state": "مغلق",
-   "lesson_id": "ك-327",
-   "barrier_id": "B-b9ca1881",
-   "run_evidence": "ابق تاريخ الإنشاء، ثم أُعيد التحقق الحي. بوابة check_live --compare — خرج 0 بعد إعادة النشر"
-  },
-  {
-   "fault_id": "ك-328",
-   "state": "مفتوح",
-   "lesson_id": "ك-328",
-   "barrier_id": "B-c2f95197",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-329",
-   "state": "مفتوح",
-   "lesson_id": "ك-329",
-   "barrier_id": "B-1ab072f9",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-330",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-330",
-   "barrier_id": "B-33cf51f8",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-331",
-   "state": "مفتوح",
-   "lesson_id": "ك-331",
-   "barrier_id": "B-a94674c4",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-332",
-   "state": "مفتوح",
-   "lesson_id": "ك-332",
-   "barrier_id": "B-71dba89e",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-333",
-   "state": "مفتوح",
-   "lesson_id": "ك-333",
-   "barrier_id": "B-b6f05bcb",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-334",
-   "state": "مفتوح",
-   "lesson_id": "ك-334",
-   "barrier_id": "B-a9ab29d3",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-335",
-   "state": "مفتوح",
-   "lesson_id": "ك-335",
-   "barrier_id": "B-6755d349",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-336",
-   "state": "مفتوح",
-   "lesson_id": "ك-336",
-   "barrier_id": "B-859bd76b",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-337",
-   "state": "مفتوح",
-   "lesson_id": "ك-337",
-   "barrier_id": "B-c3187280",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-338",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-338",
-   "barrier_id": "B-39681094",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-339",
-   "state": "مغلق",
-   "lesson_id": "ك-339",
-   "barrier_id": "B-a091b6a1",
-   "run_evidence": "اختبار سلبي: كسر حقيقي داخل النطاق يمنع (رمز 1)، وبعد الاستعادة يمرّ (رمز 0)"
-  },
-  {
-   "fault_id": "ك-340",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-340",
-   "barrier_id": "B-2217ed1b",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-341",
-   "state": "مغلق",
-   "lesson_id": "ك-341",
-   "barrier_id": "B-0f572f6d",
-   "run_evidence": ".py` `python3 validators/check_content_fidelity.py --date 2026-10-30` خرج 0 بعد الإصلاح (كان 2)"
-  },
-  {
-   "fault_id": "ك-342",
-   "state": "مغلق",
-   "lesson_id": "ك-342",
-   "barrier_id": "B-93c2e2c0",
-   "run_evidence": "/restore_skills.sh` ثم `python3 validators/check_skills_integrity.py` خرج 0"
-  },
-  {
-   "fault_id": "ك-343",
-   "state": "مغلق",
-   "lesson_id": "ك-343",
-   "barrier_id": "B-b1b729bb",
-   "run_evidence": "hon3 validators/check_code_spaces.py reports/2026-10-30-sectioned.md` خرج 0"
-  },
-  {
-   "fault_id": "ك-344",
-   "state": "مغلق",
-   "lesson_id": "ك-344",
-   "barrier_id": "B-74021b56",
-   "run_evidence": "e_dom_audit.py` و`check_repo_secrets.py` `bash tests/test_review2.sh` خرج 0 (بند (ب) المدققات غير ال"
-  },
-  {
-   "fault_id": "ك-345",
-   "state": "مغلق",
-   "lesson_id": "ك-345",
-   "barrier_id": "B-94cc25a0",
-   "run_evidence": ") وملف ترجمة المتن، ثم إعادة البناء `python3 generator/build_site.py` خرج 0 ثم `python3 validators/c"
-  },
-  {
-   "fault_id": "ك-346",
-   "state": "مغلق",
-   "lesson_id": "ك-346",
-   "barrier_id": "B-ce5ff144",
-   "run_evidence": "ثق `python3 validators/check_pdf_format.py` و`check_print_quality.py` خرج 0 · 12 صفحة · تعبئة 98.7% "
-  },
-  {
-   "fault_id": "ك-347",
-   "state": "مغلق",
-   "lesson_id": "ك-347",
-   "barrier_id": "B-20afa2ff",
-   "run_evidence": "ord` بعد اكتمال التصحيحات `python3 tools/text_hash_guard.py --verify` خرج 0"
-  },
-  {
-   "fault_id": "ك-348",
-   "state": "مغلق",
-   "lesson_id": "ك-348",
-   "barrier_id": "B-5be1293c",
-   "run_evidence": "do G011` `python3 tools/runbook.py run --date 2026-10-30 --redo G011` خرج 0 ثم النشر D010 خرج 0"
-  },
-  {
-   "fault_id": "ك-349",
-   "state": "مغلق",
-   "lesson_id": "ك-349",
-   "barrier_id": "B-f289fa6d",
-   "run_evidence": " وتوليد الكتيب من جديد `python3 validators/check_libraries_skills.py` خرج 0 (0 عائق · 0 تحذير) و`run"
-  },
-  {
-   "fault_id": "ك-350",
-   "state": "مغلق",
-   "lesson_id": "ك-350",
-   "barrier_id": "B-0a69b76b",
-   "run_evidence": " · #130) ثم إثبات التماثل `python3 validators/check_backup_parity.py` خرج 0 — «مطابق — المستودع يعكس"
-  },
-  {
-   "fault_id": "ك-351",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-351",
-   "barrier_id": "B-b3ad466b",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-352",
-   "state": "مغلق",
-   "lesson_id": "ك-352",
-   "barrier_id": "B-35621a71",
-   "run_evidence": "tComputedStyle(style)` = `inline-block` في print و`none` على الشاشة · خرج 0"
-  },
-  {
-   "fault_id": "ك-353",
-   "state": "مغلق",
-   "lesson_id": "ك-353",
-   "barrier_id": "B-0149d7e6",
-   "run_evidence": "الة يسجل دمج البنود الستة بـ`&&` مع حفظ رمز الخروج والاختبار السلبي · خرج 0"
-  },
-  {
-   "fault_id": "ك-354",
-   "state": "مغلق",
-   "lesson_id": "ك-354",
-   "barrier_id": "B-d589f715",
-   "run_evidence": "10-30: `python3 tools/runbook.py verify --date 2026-10-30 --root .` → خرج 0 · D005 قبل D010"
-  },
-  {
-   "fault_id": "ك-355",
-   "state": "مغلق",
-   "lesson_id": "ك-355",
-   "barrier_id": "B-6c8de01a",
-   "run_evidence": "`python3 tools/text_hash_guard.py --date 2026-10-30 --stage verify` → خرج 0"
-  },
-  {
-   "fault_id": "ك-356",
-   "state": "مغلق",
-   "lesson_id": "ك-356",
-   "barrier_id": "B-b02ae1e7",
-   "run_evidence": "validators/check_threat_consistency.py --date 2026-10-30 --brain .` → خرج 0"
-  },
-  {
-   "fault_id": "ك-357",
-   "state": "مغلق",
-   "lesson_id": "ك-357",
-   "barrier_id": "B-653ecc87",
-   "run_evidence": " الحالة يسجل `status=ok` والعيوب `[]` بعد مقارنة الصفحات وبصمة النص · خرج 0"
-  },
-  {
-   "fault_id": "ك-358",
-   "state": "مغلق",
-   "lesson_id": "ك-358",
-   "barrier_id": "B-9a67e975",
-   "run_evidence": "26-10-30: `python3 validators/check_backup_parity.py --mode strict` → خرج 0 · مطابق"
-  },
-  {
-   "fault_id": "ك-359",
-   "state": "مفتوح",
-   "lesson_id": "ك-359",
-   "barrier_id": "B-61d46ecf",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-360",
-   "state": "مفتوح",
-   "lesson_id": "ك-360",
-   "barrier_id": "B-ed40921d",
-   "run_evidence": "alidators/check_skills_integrity.py في بداية الجولة؛ تحقق حي: restore خرج 0 وintegrity خرج 0؛ نافذة "
-  },
-  {
-   "fault_id": "ك-361",
-   "state": "مغلق",
-   "lesson_id": "ك-361",
-   "barrier_id": "B-d5e423e1",
-   "run_evidence": "منفَّذ: عزلت مواصفات المهارات عن brain وأعدت التشغيل؛ py_compile خرج 0، والبوابة الحقيقية خرجت "
-  },
-  {
-   "fault_id": "ك-362",
-   "state": "مفتوح",
-   "lesson_id": "ك-362",
-   "barrier_id": "B-fcfde979",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-363",
-   "state": "مفتوح",
-   "lesson_id": "ك-363",
-   "barrier_id": "B-62832ff7",
-   "run_evidence": "رآة حاجز فشل مغلق: `python3 tools/check_governing_assets.py --json` → خرج 2 · `ledger_verified=true`"
-  },
-  {
-   "fault_id": "ك-364",
-   "state": "مغلق",
-   "lesson_id": "ك-364",
-   "barrier_id": "B-7ac4979c",
-   "run_evidence": "لق: ملفان `.txt` في `evidence/hermetic` و`evidence/merkle` → `verify` خرج 2 وسمّى الملفين؛ التنظيف →"
-  },
-  {
-   "fault_id": "ك-365",
-   "state": "مفتوح",
-   "lesson_id": "ك-365",
-   "barrier_id": "B-7923bcce",
-   "run_evidence": "اج سببي إلا بحدث auditd يحوي PID وcomm وexe وPPID؛ تجربة skills_write خرج 0، وskills_meta أعادت no m"
-  },
-  {
-   "fault_id": "ك-366",
-   "state": "مفتوح",
-   "lesson_id": "ك-366",
-   "barrier_id": "B-81189558",
-   "run_evidence": "ادعاء: restore_skills.sh ثم check_skills_integrity قبل/بعد؛ الاستعادة خرج 0، الفحص خرج 0، وتجربة ini"
-  },
-  {
-   "fault_id": "ك-367",
-   "state": "مفتوح",
-   "lesson_id": "ك-367",
-   "barrier_id": "B-5cb076c7",
-   "run_evidence": "ools/causality_window.sh صراحة إلى G000A، وأضيفت قاعدة D005؛ handbook خرج 0 وverify خرج 0 وtest_mani"
-  },
-  {
-   "fault_id": "ك-368",
-   "state": "مغلق",
-   "lesson_id": "ك-368",
-   "barrier_id": "B-b2d4cebc",
-   "run_evidence": "eawatch-xp4qirmr.manus.space/reports/2026-10-30.html + عدّ المنتجات → خرج 0 · «خمسة منتجات رسمية» قا"
-  },
-  {
-   "fault_id": "ك-369",
-   "state": "مغلق",
-   "lesson_id": "ك-369",
-   "barrier_id": "B-1b35fc69",
-   "run_evidence": "watch-xp4qirmr.manus.space/reports/2026-10-30.html و/additions.html → خرج 0 · AR_REPORT_HAS_SEC04_LI"
-  },
-  {
-   "fault_id": "ع-370",
-   "state": "مغلق",
-   "lesson_id": "ع-370",
-   "barrier_id": "B-c95db083",
-   "run_evidence": "eawatch-xp4qirmr.manus.space/reports/en/2026-10-30.html + فحص ev-01 → خرج 0 · EN_EVENT_HAS_187_26=Tr"
-  },
-  {
-   "fault_id": "ك-371",
-   "state": "مغلق",
-   "lesson_id": "ك-371",
-   "barrier_id": "B-92eb6ae1",
-   "run_evidence": "watch-xp4qirmr.manus.space/reports/2026-10-30.html و/additions.html → خرج 0 · AR_FIRE_EVIDENCE= True"
-  },
-  {
-   "fault_id": "م-372",
-   "state": "بانتظار التحقق",
-   "lesson_id": "م-372",
-   "barrier_id": "B-076fc36c",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-373",
-   "state": "مغلق",
-   "lesson_id": "ك-373",
-   "barrier_id": "B-c282d6f8",
-   "run_evidence": " validators/check_threat_consistency.py --date 2026-10-30 --brain . → خرج 0 · المستوى العام مرتفع جد"
-  },
-  {
-   "fault_id": "ك-374",
-   "state": "مغلق",
-   "lesson_id": "ك-374",
-   "barrier_id": "B-63815682",
-   "run_evidence": "034.log: قالب جملة متكرر أكثر من مرتين = 0، سليم؛ أمر awk على السجل → خرج 0"
-  },
-  {
-   "fault_id": "ك-375",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-375",
-   "barrier_id": "B-f7c10748",
-   "run_evidence": "BLE_SELECTION_EXIT=0؛ B010 في logs/runbook/2026-10-31/B010.log → done رمز 0"
-  },
-  {
-   "fault_id": "ك-376",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-376",
-   "barrier_id": "B-ecc504af",
-   "run_evidence": "6-10-31: python3 tools/runbook.py run --date 2026-10-31 --redo B020 → رمز 2؛ check_pdf_format: فجوات"
-  },
-  {
-   "fault_id": "ك-377",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-377",
-   "barrier_id": "B-24e3284f",
-   "run_evidence": "e/ubuntu/seawatch/dist/reports/pdf/2026-10-31.pdf --date 2026-10-31 → رمز 2؛ class=print-map في HTML"
-  },
-  {
-   "fault_id": "ك-378",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-378",
-   "barrier_id": "B-dfceb6d1",
-   "run_evidence": "لاختبار السلبي في tests/test_delivery_scripts.sh عند غياب ملف EN يعيد رمز 2، وبعد الإصلاح logs/runbo"
-  },
-  {
-   "fault_id": "ك-379",
-   "state": "مغلق",
-   "lesson_id": "ك-379",
-   "barrier_id": "B-235bd135",
-   "run_evidence": "ck_live.sh مطبَّق: سجل العطل السابق يثبت 3×45s فشلًا ثم 6×45s نجاحًا برمز 0، وtools/check_live.sh يو"
-  },
-  {
-   "fault_id": "ك-380",
-   "state": "مغلق",
-   "lesson_id": "ك-380",
-   "barrier_id": "B-cfae3748",
-   "run_evidence": "_scope.py مطبَّق: pytest -q tests/test_classify_zones_damage_scope.py خرج 0 و1/1، وحالة هجوم مؤكد بل"
-  },
-  {
-   "fault_id": "ك-381",
-   "state": "مغلق",
-   "lesson_id": "ك-381",
-   "barrier_id": "B-8add16ce",
-   "run_evidence": "3 محليًا و6714 في المرآة مع النتيجة مطابق، واختبار runtime guard أعاد 2/2 وفحص المهارات خرج 0"
-  },
-  {
-   "fault_id": "ك-382",
-   "state": "مغلق",
-   "lesson_id": "ك-382",
-   "barrier_id": "B-672c4a3f",
-   "run_evidence": "_counters.py --date 2026-10-31 --dist-root /home/ubuntu/seawatch/dist خرج 0 · بطاقة الفروع الثلاثة م"
-  },
-  {
-   "fault_id": "ك-383",
-   "state": "مغلق",
-   "lesson_id": "ك-383",
-   "barrier_id": "B-09bda309",
-   "run_evidence": "قيق الحي أظهر 3 صفوف بطاقة و0 سلاسل لاتينية في الصفوف، وبوابة العدّاد خرج 0"
-  },
-  {
-   "fault_id": "ك-384",
-   "state": "مغلق",
-   "lesson_id": "ك-384",
-   "barrier_id": "B-54c49ef6",
-   "run_evidence": "ّق: إعادة G045 غطت 8 من 8 أسطح و0 سطح غير مغطى و0 مانع، ونتيجة الجولة خرج 0"
-  },
-  {
-   "fault_id": "ك-385",
-   "state": "مغلق",
-   "lesson_id": "ك-385",
-   "barrier_id": "B-1e7f5651",
-   "run_evidence": "مد لا مسارًا تفاعليًا مطبَّق: bash tools/github_backup.sh --help أعاد رمز 2 مع usage، وتشغيل D005 وD"
-  },
-  {
-   "fault_id": "ك-386",
-   "state": "مغلق",
-   "lesson_id": "ك-386",
-   "barrier_id": "B-fe7e316b",
-   "run_evidence": "إنجليزي الرسمي دون تعديل مطبَّق: check_en_parity.py --date 2026-10-31 خرج 0، والمدقق المباشر خرج 0، "
-  },
-  {
-   "fault_id": "ك-387",
-   "state": "مغلق",
-   "lesson_id": "ك-387",
-   "barrier_id": "B-5b9e5bb0",
-   "run_evidence": "نشر: branch=main وHEAD=origin/main → MAIN_PREPUBLISH_GUARD=0، ثم D010 خرج 0 ونُشر الالتزام 4b3e2e0"
-  },
-  {
-   "fault_id": "ك-388",
-   "state": "مغلق",
-   "lesson_id": "ك-388",
-   "barrier_id": "B-582caf71",
-   "run_evidence": "005 أثبت مدخل EN حاضرًا بخطوط 191 و51 صفًا، وB010 وcheck_en_parity.py خرج 0، مع عدم بقاء نص عربي في "
-  },
-  {
-   "fault_id": "ك-389",
-   "state": "مغلق",
-   "lesson_id": "ك-389",
-   "barrier_id": "B-c1d56547",
-   "run_evidence": "لي 154 مسارًا، وأضيفت حواجز الأرشفة والمزامنة والتطبيق؛ اختبار المرآة خرج 0 حاجز فشل مغلق: tests/tes"
-  },
-  {
-   "fault_id": "ك-390",
-   "state": "مفتوح",
-   "lesson_id": "ك-390",
-   "barrier_id": "B-eca7e550",
-   "run_evidence": "تج الفعلي وأضيف اختبار يقرأ assertions من المانيفست؛ Ran 1 test وOK · خرج 0 حاجز فشل مغلق: tests/tes"
-  },
-  {
-   "fault_id": "ك-391",
-   "state": "مفتوح",
-   "lesson_id": "ك-391",
-   "barrier_id": "B-4278c20f",
-   "run_evidence": "ودع، وأرشفة النسخة المستبدلة، واستعادة عند فشل verify؛ 8 فحوص ناجحة · خرج 0 حاجز فشل مغلق: tests/tes"
-  },
-  {
-   "fault_id": "ك-392",
-   "state": "مغلق",
-   "lesson_id": "ك-392",
-   "barrier_id": "B-d5abd8ec",
-   "run_evidence": "ط وخطوة الوكيل بلا prompt ويثبت إعادة الربط؛ الحصيلة نجح 12 · فشل 0 · خرج 0"
-  },
-  {
-   "fault_id": "ك-393",
-   "state": "مفتوح",
-   "lesson_id": "ك-393",
-   "barrier_id": "B-18dc5e01",
-   "run_evidence": "لمسار الجذري إلى المواصفة وشُغّل الفحص؛ كل مسارات المرآة 6598 مصنفة · خرج 0 حاجز فشل مغلق: python3 b"
-  },
-  {
-   "fault_id": "ك-394",
-   "state": "مغلق",
-   "lesson_id": "ك-394",
-   "barrier_id": "B-65a2370c",
-   "run_evidence": " العدادات الإنجليزية وربطت بالعقد الحاكم؛ 12 اختبارًا OK والمدقق الحي خرج 0 حاجز فشل مغلق: tests/tes"
-  },
-  {
-   "fault_id": "ك-395",
-   "state": "مفتوح",
-   "lesson_id": "ك-395",
-   "barrier_id": "B-5b897345",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-396",
-   "state": "مغلق",
-   "lesson_id": "ك-396",
-   "barrier_id": "B-f9e4061c",
-   "run_evidence": "0f884dc4e4e3 حاجز فشل مغلق: check_server_code_tracking.py بعد الدمج → خرج 0 · D005/D040/D070 → خرج 0"
-  },
-  {
-   "fault_id": "ك-397",
-   "state": "مغلق",
-   "lesson_id": "ك-397",
-   "barrier_id": "B-3b9f925d",
-   "run_evidence": "u/skills؛ PR #168 دُمج حاجز فشل مغلق: cmp للملفات الثلاثة مع الخادم → خرج 0؛ manifest المستودع 420 م"
-  },
-  {
-   "fault_id": "ك-398",
-   "state": "مغلق",
-   "lesson_id": "ك-398",
-   "barrier_id": "B-f5672c7b",
-   "run_evidence": "م 9562b8ad68fd23c18265b5f4ccbe67c7cb5e9e42؛ التشغيل الحالي D040 وD070 خرج 0 وأنشأ PR #172 برأس d1834"
-  },
-  {
-   "fault_id": "ك-399",
-   "state": "مفتوح",
-   "lesson_id": "ك-399",
-   "barrier_id": "B-15f1e235",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-400",
-   "state": "مفتوح",
-   "lesson_id": "ك-400",
-   "barrier_id": "B-fb0b705c",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-401",
-   "state": "مفتوح",
-   "lesson_id": "ك-401",
-   "barrier_id": "B-e8b0bad5",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-402",
-   "state": "مفتوح",
-   "lesson_id": "ك-402",
-   "barrier_id": "B-ba8c3481",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-403",
-   "state": "مغلق",
-   "lesson_id": "ك-403",
-   "barrier_id": "B-4b1364bd",
-   "run_evidence": "face الجديد؛ التشغيل النهائي يمرر السطح وتبقى مخالفات IMO منفصلة فقط؛ خرج 2 بسبب عقد IMO القديم"
-  },
-  {
-   "fault_id": "ك-404",
-   "state": "مفتوح",
-   "lesson_id": "ك-404",
-   "barrier_id": "B-7487d3eb",
-   "run_evidence": "اخل masthead-meta python3 tests/test_2026_10_31_surface_contract.py → رمز 0؛ python3 -m unittest -v "
-  },
-  {
-   "fault_id": "ك-405",
-   "state": "مفتوح",
-   "lesson_id": "ك-405",
-   "barrier_id": "B-b906afb6",
-   "run_evidence": "لإصلاح: python3 validators/check_card_counters.py --date 2026-10-31 → رمز 2 و«ملف مطلوب مفقود: /home"
-  },
-  {
-   "fault_id": "ك-406",
-   "state": "مغلق",
-   "lesson_id": "ك-406",
-   "barrier_id": "B-45cdc7a7",
-   "run_evidence": "_wiring.py --check && python3 tools/build_lexicon_corpus.py --check → خرج 0؛ 140 بندًا متطابقًا · ال"
-  },
-  {
-   "fault_id": "ك-407",
-   "state": "مغلق",
-   "lesson_id": "ك-407",
-   "barrier_id": "B-fc84c721",
-   "run_evidence": "ق: تحقق حي 2026-11-01: python3 validators/check_skills_integrity.py → خرج 0؛ bash -n tools/restore_s"
-  },
-  {
-   "fault_id": "ك-408",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-408",
-   "barrier_id": "B-5f904723",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-409",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-409",
-   "barrier_id": "B-10a6c966",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-410",
-   "state": "بانتظار التحقق",
-   "lesson_id": null,
-   "barrier_id": "B-f0adf13a",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-411",
-   "state": "بانتظار التحقق",
-   "lesson_id": null,
-   "barrier_id": "B-469c83ef",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-412",
-   "state": "بانتظار التحقق",
-   "lesson_id": null,
-   "barrier_id": "B-91774dca",
-   "run_evidence": "ن وقائعها، ورُبط بالخط اليومي في `classify_zones.py`، وقُلب ح13 إلى الرمز 2 عند خريطة بلا نقاط أو نق"
-  },
-  {
-   "fault_id": "ك-413",
-   "state": "بانتظار التحقق",
-   "lesson_id": null,
-   "barrier_id": "B-2ec22da7",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-414",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-414",
-   "barrier_id": "B-3cef876a",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-415",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-415",
-   "barrier_id": "B-387c5ef4",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-416",
-   "state": "بانتظار التحقق",
-   "lesson_id": "ك-416",
-   "barrier_id": "B-08556c98",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-417",
-   "state": "بانتظار التحقق",
-   "lesson_id": null,
-   "barrier_id": "B-77f6c1ca",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-418",
-   "state": "مغلق",
-   "lesson_id": "ك-418",
-   "barrier_id": "B-dbbce523",
-   "run_evidence": "بوابة الصياغة على السطح المستخرج rc=1 و0 ألفاظ مصطنعة · تدقيق التغطية 8/8 مانعة 0"
-  },
-  {
-   "fault_id": "ك-419",
-   "state": "مفتوح",
-   "lesson_id": "ك-419",
-   "barrier_id": "B-414d1084",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-420",
-   "state": "مفتوح",
-   "lesson_id": null,
-   "barrier_id": "B-f89e8121",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-421",
-   "state": "مفتوح",
-   "lesson_id": null,
-   "barrier_id": "B-56f0e229",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-422",
-   "state": "مفتوح",
-   "lesson_id": null,
-   "barrier_id": "B-1c747146",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-423",
-   "state": "بانتظار التحقق",
-   "lesson_id": null,
-   "barrier_id": "B-bb81243c",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-424",
-   "state": "بانتظار التحقق",
-   "lesson_id": null,
-   "barrier_id": "B-3d3d7256",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-425",
-   "state": "بانتظار التحقق",
-   "lesson_id": null,
-   "barrier_id": "B-4e828f84",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-426",
-   "state": "بانتظار التحقق",
-   "lesson_id": null,
-   "barrier_id": "B-a196803f",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-427",
-   "state": "بانتظار التحقق",
-   "lesson_id": null,
-   "barrier_id": "B-0b830e14",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-428",
-   "state": "بانتظار التحقق",
-   "lesson_id": null,
-   "barrier_id": "B-19991e4f",
-   "run_evidence": null
-  },
-  {
-   "fault_id": "ك-429",
-   "state": "مغلق",
-   "lesson_id": "ك-429",
-   "barrier_id": "B-300f1d76",
-   "run_evidence": "ية قياس DOM حي: 4 مستطيلات و4 وسوم في العربية والإنجليزية · خطوة D020 رمز 0 · بوابة عقد الخريطة 21/2"
-  },
-  {
-   "fault_id": "ك-430",
-   "state": "مغلق",
-   "lesson_id": "ك-430",
-   "barrier_id": "B-7887d8d6",
-   "run_evidence": "ب القطاع الأعلى مميّز في اللقطة الحية · mp-sector-top = 1 · خطوة D020 رمز 0 · بوابة وقياس آلي"
-  },
-  {
-   "fault_id": "ك-431",
-   "state": "مغلق",
-   "lesson_id": "ك-431",
-   "barrier_id": "B-244cbde9",
-   "run_evidence": " إزالة التسمية منه + إضافة قيم الحقول إلى `glossary.json` بناء الموقع رمز 0 · تماثل AR/EN: فاشل 0 · "
-  },
-  {
-   "fault_id": "ك-432",
-   "state": "مغلق",
-   "lesson_id": "ك-432",
-   "barrier_id": "B-76af0a43",
-   "run_evidence": "ستبدال العمود بعمود «المنطقة» وإعادة البناء ثم إعادة الخطوة خطوة D020 رمز 0 بعد الإصلاح · تدقيق DOM:"
-  },
-  {
-   "fault_id": "ك-433",
-   "state": "مغلق",
-   "lesson_id": "ك-433",
-   "barrier_id": "B-8ac2d2f9",
-   "run_evidence": " الحاكمة من الدماغ إلى `skills/` ثم مزامنة المرآة حارس سلامة المهارات خرج 0 (16 شاهدًا) · الأسطر مطا"
-  },
-  {
-   "fault_id": "ك-434",
-   "state": "مغلق",
-   "lesson_id": "ك-434",
-   "barrier_id": "B-04b393ad",
-   "run_evidence": "قياس جاف قبل التنفيذ قياس جاف: محذوف 0 في المجالات الثلاثة · المزامنة رمز 0 · خطوة D005 رمز 0 · بواب"
-  },
-  {
-   "fault_id": "ك-435",
-   "state": "مغلق",
-   "lesson_id": "ك-435",
-   "barrier_id": "B-b527f01c",
-   "run_evidence": "التزام ثم طلب دمج، وتنظيف الشجرة قبل خطوة النسخة الاحتياطية خطوة D005 رمز 0 · التماثل مطابق تمامًا ("
-  },
-  {
-   "fault_id": "ك-436",
-   "state": "مغلق",
-   "lesson_id": "ك-436",
-   "barrier_id": "B-cbb91dc9",
-   "run_evidence": "epo.py` يرفض العمل على `main` بلا `--allow-main` حارس الفرع: على main خرج 2 برسالة BRANCH_GUARD · عل"
-  },
-  {
-   "fault_id": "ك-437",
-   "state": "مغلق",
-   "lesson_id": "ك-437",
-   "barrier_id": "B-61d0ecc0",
-   "run_evidence": "بناء عربي وإنجليزي رمز 0 · بوابة عقد البطاقة مطابقة في اللغتين · اختبار العقد 16/16 فاشل 0"
-  },
-  {
-   "fault_id": "ك-438",
-   "state": "مغلق",
-   "lesson_id": "ك-438",
-   "barrier_id": "B-b7b4ced6",
-   "run_evidence": "بوابة المخطط على 247 ملفًا و491 سجلًا رمز 0 · 28 فجوة تاريخية موثّقة · اختبار المخطط 23/23 فاشل 0"
-  },
-  {
-   "fault_id": "ك-439",
-   "state": "مغلق",
-   "lesson_id": "ك-439",
-   "barrier_id": "B-6bb013c4",
-   "run_evidence": "بوابة العقد 6 بطاقات × 10 صفوف رمز 0 · اختبار سالب على صف محذوف يمنع · فاشل 0"
-  },
-  {
-   "fault_id": "ك-440",
-   "state": "مغلق",
-   "lesson_id": "ك-440",
-   "barrier_id": "B-20c686de",
-   "run_evidence": "المزامنة رسمت الخطة وخرج 0 · صفر رابط مكسور في الشجرة · 477 ملفًا مفحوصًا في الحلقة"
-  },
-  {
-   "fault_id": "ك-441",
-   "state": "مغلق",
-   "lesson_id": "ك-441",
-   "barrier_id": "B-88be985c",
-   "run_evidence": "43 مهارة · صفر حذف · اختبار ناجح 1/1"
-  },
-  {
-   "fault_id": "ك-442",
-   "state": "مغلق",
-   "lesson_id": "ك-442",
-   "barrier_id": "B-1cb46159",
-   "run_evidence": "خرج 0 · بصمة 7e3b2bec69c6bfc3 · مطابق"
-  }
- ]
+  "version": 1,
+  "generated_at": "2026-11-01T21:07:17.537402+00:00",
+  "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
+  "rows": [
+    {
+      "fault_id": "ز-01",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ز-1",
+      "barrier_id": "B-1721e507",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-01",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-1",
+      "barrier_id": "B-f0cca58a",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-221",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-221",
+      "barrier_id": "B-240d4398",
+      "run_evidence": "ببه — يُحذف الاستثناء فور الدمج اختبار: check_server_code_tracking.py خرج 0 «كل ملفات الشيفرة متتبَّ"
+    },
+    {
+      "fault_id": "ك-222",
+      "state": "مغلق",
+      "lesson_id": "ك-222",
+      "barrier_id": "B-ded9c484",
+      "run_evidence": "ve.sh مع رسالة صريحة للمدة اختبار: check_live.sh --compare 2026-10-28 خرج 0 «كل المسارات ترد 200 وPD"
+    },
+    {
+      "fault_id": "ك-223",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-223",
+      "barrier_id": "B-cefc758b",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-224",
+      "state": "مغلق",
+      "lesson_id": "ك-224",
+      "barrier_id": "B-e6ba63c0",
+      "run_evidence": "ات-الكاملة.md · تشخيص-المصادر-الشامل) اختبار: تطبيق apply_from_github خرج 0 بعد الدمج («مطابق: 496 ·"
+    },
+    {
+      "fault_id": "ك-225",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-225",
+      "barrier_id": "B-e7487960",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-226",
+      "state": "مفتوح",
+      "lesson_id": "ك-226",
+      "barrier_id": "B-9e5d3a79",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ع-01",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ع-1",
+      "barrier_id": "B-cd4095dd",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "م-01",
+      "state": "مغلق",
+      "lesson_id": "م-1",
+      "barrier_id": "B-5f36040e",
+      "run_evidence": "حقق حي 2026-10-28: عرض فقرة الترويسة في المخرج المبني → لا قيد 74ch · مطابق تمامًا · قياس حي قبل التسليم (`"
+    },
+    {
+      "fault_id": "م-02",
+      "state": "مغلق",
+      "lesson_id": "م-2",
+      "barrier_id": "B-f6353d45",
+      "run_evidence": ": بنية بطاقة القرار في المخرج المبني → التسمية فوق القيمة بعرض كامل · مطابق تمامًا · قاعدة تصميم مكتوبة في "
+    },
+    {
+      "fault_id": "م-03",
+      "state": "موروث غير مثبت",
+      "lesson_id": "م-3",
+      "barrier_id": "B-67ade37e",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ث-01",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ث-1",
+      "barrier_id": "B-ccadf1fb",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ث-02",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ث-02",
+      "barrier_id": "B-c1cda84b",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ع-02",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ع-2",
+      "barrier_id": "B-889df220",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-02",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-02",
+      "barrier_id": "B-22462b88",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ث-03",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ث-03",
+      "barrier_id": "B-fe8b61bd",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ث-04",
+      "state": "موروث غير مثبت",
+      "lesson_id": null,
+      "barrier_id": "B-87ded236",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-03",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-03",
+      "barrier_id": "B-69946590",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ث-05",
+      "state": "موروث غير مثبت",
+      "lesson_id": null,
+      "barrier_id": "B-f93d75a3",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-04",
+      "state": "مغلق",
+      "lesson_id": "ك-4",
+      "barrier_id": "B-aee459ce",
+      "run_evidence": ".md` تحقق حي 2026-10-28: python3 validators/check_portable_paths.py → خرج 0 · لا مسار جذر مكتوب نصًّ"
+    },
+    {
+      "fault_id": "ك-05",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-5",
+      "barrier_id": "B-fc459538",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-06",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-06",
+      "barrier_id": "B-5fbfc25d",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-07",
+      "state": "مغلق",
+      "lesson_id": "ك-7",
+      "barrier_id": "B-476fef0b",
+      "run_evidence": "لصحيح من الفحص تحقق حي 2026-10-28: python3 tools/preflight_check.py → خرج 0 · نجح 39 · فشل 0 · قاعدة"
+    },
+    {
+      "fault_id": "ك-08",
+      "state": "مغلق",
+      "lesson_id": "ك-8",
+      "barrier_id": "B-61173ebf",
+      "run_evidence": "جلاته تحقق حي 2026-10-28: appendices/source-reliability-40.md موجود · مطابق تمامًا · قاعدة: **كل مرجع في مل"
+    },
+    {
+      "fault_id": "ك-09",
+      "state": "مغلق",
+      "lesson_id": "ك-9",
+      "barrier_id": "B-ab5124e0",
+      "run_evidence": " 2026-10-28: بوابة أرقام المصادر في tools/final_gate.sh → 4 مطابقات · خرج 0 · قاعدة: **لا تعديل بلا "
+    },
+    {
+      "fault_id": "ك-10",
+      "state": "موروث غير مثبت",
+      "lesson_id": null,
+      "barrier_id": "B-e3210fff",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-11",
+      "state": "موروث غير مثبت",
+      "lesson_id": null,
+      "barrier_id": "B-025945d1",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-12",
+      "state": "موروث غير مثبت",
+      "lesson_id": null,
+      "barrier_id": "B-eb498dbd",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-13",
+      "state": "موروث غير مثبت",
+      "lesson_id": null,
+      "barrier_id": "B-6a21ebd9",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-20",
+      "state": "موروث غير مثبت",
+      "lesson_id": null,
+      "barrier_id": "B-544fb05a",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-21",
+      "state": "موروث غير مثبت",
+      "lesson_id": null,
+      "barrier_id": "B-9ceed35f",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-22",
+      "state": "موروث غير مثبت",
+      "lesson_id": null,
+      "barrier_id": "B-01b40402",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-23",
+      "state": "مغلق",
+      "lesson_id": "ك-23",
+      "barrier_id": "B-91fd839d",
+      "run_evidence": "ة مباشرة — مُغلق — بوابة الأرقام صارت نظيفة بعد إعادة توليد التغذيات (رمز 0)"
+    },
+    {
+      "fault_id": "ك-24",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-24",
+      "barrier_id": "B-35a6f1ac",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-25",
+      "state": "موروث غير مثبت",
+      "lesson_id": null,
+      "barrier_id": "B-a38d4b25",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-26",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-26",
+      "barrier_id": "B-2ea667b3",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-27",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-27",
+      "barrier_id": "B-44f081ca",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-28",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-28",
+      "barrier_id": "B-adfc0bcb",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-29",
+      "state": "مفتوح",
+      "lesson_id": "ك-29",
+      "barrier_id": "B-9be39ded",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-30",
+      "state": "مفتوح",
+      "lesson_id": "ك-30",
+      "barrier_id": "B-e7e0a279",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-31",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-31",
+      "barrier_id": "B-2b960364",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-32",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-32",
+      "barrier_id": "B-c103cf0e",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-33",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-33",
+      "barrier_id": "B-5747a03a",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-34",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-34",
+      "barrier_id": "B-d6f0efa6",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-35",
+      "state": "موروث غير مثبت",
+      "lesson_id": null,
+      "barrier_id": "B-3b2e4bae",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-36",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-36",
+      "barrier_id": "B-7ac73f2d",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-37",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-37",
+      "barrier_id": "B-174e79f3",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-38",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-38",
+      "barrier_id": "B-803f4896",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-39",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-39",
+      "barrier_id": "B-c0813865",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-40",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-40",
+      "barrier_id": "B-a1f995f2",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-41",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-41",
+      "barrier_id": "B-c72fc1ac",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-42",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-42",
+      "barrier_id": "B-551d5816",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-43",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-43",
+      "barrier_id": "B-29eaa0fe",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-44",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-44",
+      "barrier_id": "B-c502bdc5",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-46",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-46",
+      "barrier_id": "B-0714d124",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-47",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-47",
+      "barrier_id": "B-81f532a7",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-48",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-48",
+      "barrier_id": "B-a079dbd6",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-49",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-49",
+      "barrier_id": "B-000c86fb",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-51",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-51",
+      "barrier_id": "B-86de057e",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-52",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-52",
+      "barrier_id": "B-600f7aa8",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-50",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-50",
+      "barrier_id": "B-b77fd73a",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-53",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-53",
+      "barrier_id": "B-6377fe06",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-54",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-54",
+      "barrier_id": "B-f87fc0bd",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-55",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-55",
+      "barrier_id": "B-7c06e258",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-56",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-56",
+      "barrier_id": "B-165fee06",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-57",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-57",
+      "barrier_id": "B-16085a03",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-58",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-58",
+      "barrier_id": "B-d8f2fc28",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-14",
+      "state": "موروث غير مثبت",
+      "lesson_id": null,
+      "barrier_id": "B-6a761cc7",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-15",
+      "state": "موروث غير مثبت",
+      "lesson_id": null,
+      "barrier_id": "B-0caf790f",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-16",
+      "state": "موروث غير مثبت",
+      "lesson_id": null,
+      "barrier_id": "B-dbde785f",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-17",
+      "state": "موروث غير مثبت",
+      "lesson_id": null,
+      "barrier_id": "B-dd86f060",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-18",
+      "state": "موروث غير مثبت",
+      "lesson_id": null,
+      "barrier_id": "B-be064a4c",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-19",
+      "state": "موروث غير مثبت",
+      "lesson_id": null,
+      "barrier_id": "B-355f3a70",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-45",
+      "state": "موروث غير مثبت",
+      "lesson_id": null,
+      "barrier_id": "B-0e292f7a",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-59",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-59",
+      "barrier_id": "B-0852e4cd",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-60",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-60",
+      "barrier_id": "B-b1710b48",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-61",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-61",
+      "barrier_id": "B-20c70781",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-62",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-62",
+      "barrier_id": "B-b1c2dac5",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-63",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-63",
+      "barrier_id": "B-8a021c5c",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-64",
+      "state": "موروث غير مثبت",
+      "lesson_id": null,
+      "barrier_id": "B-4d55d6f9",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-65",
+      "state": "موروث غير مثبت",
+      "lesson_id": null,
+      "barrier_id": "B-9c58856b",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-66",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-66",
+      "barrier_id": "B-6ec23060",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-67",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-67",
+      "barrier_id": "B-edfe2adb",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-68",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-68",
+      "barrier_id": "B-9776e904",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-69",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-69",
+      "barrier_id": "B-fae64cd8",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-70",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-70",
+      "barrier_id": "B-0e013dbf",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-71",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-71",
+      "barrier_id": "B-d9152e6e",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-72",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-72",
+      "barrier_id": "B-b48e1c47",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-73",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-73",
+      "barrier_id": "B-be8f77a6",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-75",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-75",
+      "barrier_id": "B-51290ba9",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-76",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-76",
+      "barrier_id": "B-145ca1c8",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-77",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-77",
+      "barrier_id": "B-1f6e1c52",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-78",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-78",
+      "barrier_id": "B-fb46fe82",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-79",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-79",
+      "barrier_id": "B-0985c1b7",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-80",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-80",
+      "barrier_id": "B-da646379",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-81",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-81",
+      "barrier_id": "B-850b77e5",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-82",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-82",
+      "barrier_id": "B-d43e5ca7",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-83",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-83",
+      "barrier_id": "B-00b9a2d0",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-84",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-84",
+      "barrier_id": "B-7751b7d6",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-85",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-85",
+      "barrier_id": "B-e9132259",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-86",
+      "state": "مفتوح",
+      "lesson_id": "ك-86",
+      "barrier_id": "B-8645868a",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-87",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-87",
+      "barrier_id": "B-7e010899",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-88",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-88",
+      "barrier_id": "B-107cea3e",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-89",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-89",
+      "barrier_id": "B-63828d99",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-90",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-90",
+      "barrier_id": "B-5d6dd227",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-91",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-91",
+      "barrier_id": "B-1f161a98",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-92",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-92",
+      "barrier_id": "B-6c13e83e",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-93",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-93",
+      "barrier_id": "B-72811022",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-94",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-94",
+      "barrier_id": "B-f1ac43d1",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-95",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-95",
+      "barrier_id": "B-b258ca6f",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-66/ب",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-66",
+      "barrier_id": "B-d36ce714",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-67/ب",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-67",
+      "barrier_id": "B-60e22c35",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-68/ب",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-68",
+      "barrier_id": "B-97fd3d26",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-69/ب",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-69",
+      "barrier_id": "B-bea55978",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-70/ب",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-70",
+      "barrier_id": "B-05073416",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-71/ب",
+      "state": "مفتوح",
+      "lesson_id": "ك-71",
+      "barrier_id": "B-d4ddba0d",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-72/ب",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-72",
+      "barrier_id": "B-65293f02",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-73/ب",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-73",
+      "barrier_id": "B-3cfa2672",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-74",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-74",
+      "barrier_id": "B-b87d04f8",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-75/ب",
+      "state": "مفتوح",
+      "lesson_id": "ك-75",
+      "barrier_id": "B-1348b84a",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-76/ب",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-76",
+      "barrier_id": "B-e3a9c707",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-77/ب",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-77",
+      "barrier_id": "B-d609e813",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-78/ب",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-78",
+      "barrier_id": "B-26058e5f",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-80/ب",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-80",
+      "barrier_id": "B-ed487051",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-81/ب",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-81",
+      "barrier_id": "B-78c53bf9",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-82/ب",
+      "state": "مفتوح",
+      "lesson_id": "ك-82",
+      "barrier_id": "B-3509c45c",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-83/ب",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-83",
+      "barrier_id": "B-a6be438b",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-84/ب",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-84",
+      "barrier_id": "B-16131373",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-85/ب",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-85",
+      "barrier_id": "B-3c5cb7bc",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-86/ب",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-86",
+      "barrier_id": "B-aa94b1f4",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-91/ب",
+      "state": "مفتوح",
+      "lesson_id": "ك-91",
+      "barrier_id": "B-f1231f50",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-92/ب",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-92",
+      "barrier_id": "B-234cf5a3",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-93/ب",
+      "state": "مفتوح",
+      "lesson_id": "ك-93",
+      "barrier_id": "B-f46aa03c",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-94/ب",
+      "state": "مفتوح",
+      "lesson_id": "ك-94",
+      "barrier_id": "B-46eff922",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-96",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-96",
+      "barrier_id": "B-a0c15b33",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-97",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-97",
+      "barrier_id": "B-b990c7c8",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-98",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-98",
+      "barrier_id": "B-94f6ab04",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-99",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-99",
+      "barrier_id": "B-c9140e17",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-100",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-100",
+      "barrier_id": "B-50d4fd41",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-101",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-101",
+      "barrier_id": "B-04aecdb7",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-102",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-102",
+      "barrier_id": "B-0ec17ab1",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-103",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-103",
+      "barrier_id": "B-fae50588",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-104",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-104",
+      "barrier_id": "B-d47650ab",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-105",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-105",
+      "barrier_id": "B-eb0ababb",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-106",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-106",
+      "barrier_id": "B-54e22710",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-107",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-107",
+      "barrier_id": "B-f8e6aa23",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-108",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-108",
+      "barrier_id": "B-f41f292d",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-109",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-109",
+      "barrier_id": "B-c1f2aabe",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-110",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-110",
+      "barrier_id": "B-d2a97aa7",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-111",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-111",
+      "barrier_id": "B-2c2e8e8b",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-112",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-112",
+      "barrier_id": "B-1f147150",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-113",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-113",
+      "barrier_id": "B-c0291086",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-114",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-114",
+      "barrier_id": "B-fcfce670",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-115",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-115",
+      "barrier_id": "B-41ddcf40",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-116",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-116",
+      "barrier_id": "B-a90e4e41",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-117",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-117",
+      "barrier_id": "B-ffb1cfbe",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-118",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-118",
+      "barrier_id": "B-82225374",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-119",
+      "state": "مفتوح",
+      "lesson_id": "ك-119",
+      "barrier_id": "B-336b51eb",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-120",
+      "state": "مفتوح",
+      "lesson_id": "ك-120",
+      "barrier_id": "B-d2ca5d79",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-121",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-121",
+      "barrier_id": "B-737a2a04",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-122",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-122",
+      "barrier_id": "B-31b11be6",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-123",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-123",
+      "barrier_id": "B-838d291b",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-124",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-124",
+      "barrier_id": "B-0e464943",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-122/ب",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-122",
+      "barrier_id": "B-ad702881",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-125",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-125",
+      "barrier_id": "B-5fc14304",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-126",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-126",
+      "barrier_id": "B-b1998390",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-127",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-127",
+      "barrier_id": "B-69d405f5",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-128",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-128",
+      "barrier_id": "B-3a9f9af8",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-129",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-129",
+      "barrier_id": "B-ee88bf1b",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-130",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-130",
+      "barrier_id": "B-a624b825",
+      "run_evidence": ".sh` يقرأ الشيفرة ويتحقق أن الحكم يُصدر فعليًا على PDF حقيقي — تحقّق: 7/7 اختبارات ناجحة."
+    },
+    {
+      "fault_id": "ك-131",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-131",
+      "barrier_id": "B-1bd029db",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-132",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-132",
+      "barrier_id": "B-8d71a29a",
+      "run_evidence": "لة بايثون مضمّنة، وربط ملف الاختبارات كخطوة مانعة في البوابة — تحقّق: 9/9 ناجحة · البوابة «نجاح مع"
+    },
+    {
+      "fault_id": "ك-133",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-133",
+      "barrier_id": "B-f44dfb9a",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-134",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-134",
+      "barrier_id": "B-3202fe44",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-135",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-135",
+      "barrier_id": "B-2d67666d",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-136",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-136",
+      "barrier_id": "B-a2c3c1fc",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-137",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-137",
+      "barrier_id": "B-0c33895a",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-138",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-138",
+      "barrier_id": "B-8e69f306",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-139",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-139",
+      "barrier_id": "B-cf7e992e",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-140",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-140",
+      "barrier_id": "B-714504bf",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-141",
+      "state": "مفتوح",
+      "lesson_id": "ك-141",
+      "barrier_id": "B-78e75993",
+      "run_evidence": "— حُوِّلت الستة إلى فشل مغلق (إعادة رفع ⇒ الحارس الموحّد ⇒ رمز 70)، وبقيت 59 حالة مصنَّفة "
+    },
+    {
+      "fault_id": "ك-142",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-142",
+      "barrier_id": "B-675c96f1",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-143",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-143",
+      "barrier_id": "B-142394a7",
+      "run_evidence": "_strict` فت منع عند أي رمز غير صفري · واختبارات المراجعة الثانية صارت 11/11 بعد إصلاح مصدر الفشل · و"
+    },
+    {
+      "fault_id": "ك-144",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-144",
+      "barrier_id": "B-c7b58b71",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-145",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-145",
+      "barrier_id": "B-ea513956",
+      "run_evidence": "يل شيفرة (ast) بحالتين مصطنعتين · وغياب سياسة الأقسام يرفع استثناءً ⇒ رمز 70 ⇒ منع."
+    },
+    {
+      "fault_id": "ك-146",
+      "state": "مفتوح",
+      "lesson_id": "ك-146",
+      "barrier_id": "B-6649d10b",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-147",
+      "state": "مفتوح",
+      "lesson_id": "ك-147",
+      "barrier_id": "B-bf5843cd",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-148",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-148",
+      "barrier_id": "B-cb604b9b",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-149",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-149",
+      "barrier_id": "B-0fb5d8d5",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-150",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-150",
+      "barrier_id": "B-6ebf7a2e",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-151",
+      "state": "مفتوح",
+      "lesson_id": "ك-151",
+      "barrier_id": "B-11e157ab",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-152",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-152",
+      "barrier_id": "B-87482362",
+      "run_evidence": "فة `from pathlib import Path`، وربط الفاحص بـ validators/_guard.py (الرمز 70 للانهيار)"
+    },
+    {
+      "fault_id": "ك-153",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-153",
+      "barrier_id": "B-19334715",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-154",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-154",
+      "barrier_id": "B-eac4c60f",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-155",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-155",
+      "barrier_id": "B-00c48235",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-156",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-156",
+      "barrier_id": "B-4fc0f6d0",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-157",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-157",
+      "barrier_id": "B-e77b23b5",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-158",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-158",
+      "barrier_id": "B-ff51b602",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-159",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-159",
+      "barrier_id": "B-9611991e",
+      "run_evidence": "د الحارس من مساره الصحيح مع بديل احتياطي، وأي انهيار في المدققات يخرج رمز 70 فيمنع."
+    },
+    {
+      "fault_id": "ك-160",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-160",
+      "barrier_id": "B-292c7d19",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-161",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-161",
+      "barrier_id": "B-811bbb25",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-162",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-162",
+      "barrier_id": "B-9c2471b0",
+      "run_evidence": "— أُضيف `validators/check_secrets.py` (منع، رمز 70) في بوابة التسليم و`gith"
+    },
+    {
+      "fault_id": "ك-163",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-163",
+      "barrier_id": "B-b7fbee8d",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-164",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-164",
+      "barrier_id": "B-77930017",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-165",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-165",
+      "barrier_id": "B-f71eeae6",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-166",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-166",
+      "barrier_id": "B-2fd8e249",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-167",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-167",
+      "barrier_id": "B-760bece5",
+      "run_evidence": "ُزيل اللبس مع اسم الجهة MSI Defense في عناوين التغذية. الاختبار: G003 خرج 0 في نسخة معزولة بعد الإصل"
+    },
+    {
+      "fault_id": "ك-168",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-168",
+      "barrier_id": "B-8ff8e4e9",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-169",
+      "state": "مفتوح",
+      "lesson_id": "ك-169",
+      "barrier_id": "B-94c06a6e",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-170",
+      "state": "مفتوح",
+      "lesson_id": "ك-170",
+      "barrier_id": "B-021d0efc",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-171",
+      "state": "مفتوح",
+      "lesson_id": "ك-171",
+      "barrier_id": "B-6fc10cd9",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-172",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-172",
+      "barrier_id": "B-f15d3c1b",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-173",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-173",
+      "barrier_id": "B-933fb69f",
+      "run_evidence": "— أُصلح النص حيًّا وصارت بوابة الأسلوب تعبر (رمز 0) على نص الخادم وعلى النص"
+    },
+    {
+      "fault_id": "ك-174",
+      "state": "مفتوح",
+      "lesson_id": "ك-174",
+      "barrier_id": "B-94083a42",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-169/ب",
+      "state": "مفتوح",
+      "lesson_id": "ك-169",
+      "barrier_id": "B-7ee8d85e",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-170/ب",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-170",
+      "barrier_id": "B-4e875131",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-171/ب",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-171",
+      "barrier_id": "B-cda13f6f",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-176",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-176",
+      "barrier_id": "B-f0efc67a",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-177",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-177",
+      "barrier_id": "B-4135324f",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-178",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-178",
+      "barrier_id": "B-5c0aa7e2",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-179",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-179",
+      "barrier_id": "B-6de63090",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-180",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-180",
+      "barrier_id": "B-6571f971",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-181",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-181",
+      "barrier_id": "B-dcde24f8",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-182",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-182",
+      "barrier_id": "B-c2df527b",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-183",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-183",
+      "barrier_id": "B-3f3fa12e",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-184",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-184",
+      "barrier_id": "B-d9ed63f7",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-185",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-185",
+      "barrier_id": "B-b1cad914",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-186",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-186",
+      "barrier_id": "B-2c4e89f4",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-187",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-187",
+      "barrier_id": "B-1cf68088",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-188",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-188",
+      "barrier_id": "B-ccb5fbcb",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-189",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-189",
+      "barrier_id": "B-1e433381",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-190",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-190",
+      "barrier_id": "B-707b6d37",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-191",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-191",
+      "barrier_id": "B-8b4a6483",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-192",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-192",
+      "barrier_id": "B-a5948b86",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-193",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-193",
+      "barrier_id": "B-5a1caf9b",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-194",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-194",
+      "barrier_id": "B-766f569d",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-195",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-195",
+      "barrier_id": "B-f3871889",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-196",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-196",
+      "barrier_id": "B-007fea11",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-197",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-197",
+      "barrier_id": "B-a579a434",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-198",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-198",
+      "barrier_id": "B-405af85a",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-199",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-199",
+      "barrier_id": "B-864e5369",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-201",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-201",
+      "barrier_id": "B-bb3040d4",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-203",
+      "state": "مفتوح",
+      "lesson_id": "ك-203",
+      "barrier_id": "B-3de97cc8",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-202",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-202",
+      "barrier_id": "B-c402399d",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-204",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-204",
+      "barrier_id": "B-264f6e7a",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-205",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-205",
+      "barrier_id": "B-d5aae70e",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-206",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-206",
+      "barrier_id": "B-d22568f4",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-207",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-207",
+      "barrier_id": "B-c8c785c4",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-208",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-208",
+      "barrier_id": "B-576daab7",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-209",
+      "state": "موروث غير مثبت",
+      "lesson_id": "ك-209",
+      "barrier_id": "B-ccf85bc7",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-210",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-210",
+      "barrier_id": "B-9614d446",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-211",
+      "state": "مغلق",
+      "lesson_id": "ك-211",
+      "barrier_id": "B-22ee98d6",
+      "run_evidence": "صمة النمط ac05b43f996ae9f0. تحقق حي 2026-10-28: check_pdf_format.py → خرج 0 · مطابق للشكل المعتمد (v"
+    },
+    {
+      "fault_id": "ك-212",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-212",
+      "barrier_id": "B-b44c721a",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-213",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-213",
+      "barrier_id": "B-f70c8d47",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-214",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-214",
+      "barrier_id": "B-86f305a5",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-215",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-215",
+      "barrier_id": "B-8370fa84",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-216",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-216",
+      "barrier_id": "B-8a4bbaf2",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-217",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-217",
+      "barrier_id": "B-db3db861",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-218",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-218",
+      "barrier_id": "B-2aa43560",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-219",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-219",
+      "barrier_id": "B-7128177c",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-220",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-220",
+      "barrier_id": "B-e84072c5",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-227",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-227",
+      "barrier_id": "B-20e1ded3",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-228",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-228",
+      "barrier_id": "B-5f1b0299",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-229",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-229",
+      "barrier_id": "B-57e46bca",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-230",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-230",
+      "barrier_id": "B-187ec15c",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-231",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-231",
+      "barrier_id": "B-e7b3e5f4",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-232",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-232",
+      "barrier_id": "B-63f0fd77",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-233",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-233",
+      "barrier_id": "B-e89ffc3a",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-234",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-234",
+      "barrier_id": "B-e8b0ecc9",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-235",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-235",
+      "barrier_id": "B-601719cc",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-236",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-236",
+      "barrier_id": "B-4faffaec",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-237",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-237",
+      "barrier_id": "B-1fabded9",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-238",
+      "state": "مفتوح",
+      "lesson_id": "ك-238",
+      "barrier_id": "B-345f3744",
+      "run_evidence": " والقرار النهائي لأي القائمتين أصحّ يحتاج كلمة المالك · تغطية الأسلوب 8/8 · مانعة 0 — مغلق تشغيليً"
+    },
+    {
+      "fault_id": "ك-239",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-239",
+      "barrier_id": "B-84237a38",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-241",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-241",
+      "barrier_id": "B-5626c431",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-242",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-242",
+      "barrier_id": "B-dd03729a",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-243",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-243",
+      "barrier_id": "B-b7e4c05c",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-244",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-244",
+      "barrier_id": "B-f3f91c1d",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-245",
+      "state": "مفتوح",
+      "lesson_id": "ك-245",
+      "barrier_id": "B-2234d734",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-246",
+      "state": "مفتوح",
+      "lesson_id": "ك-246",
+      "barrier_id": "B-f8b3328c",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-247",
+      "state": "مفتوح",
+      "lesson_id": "ك-247",
+      "barrier_id": "B-ee046c23",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-248",
+      "state": "مفتوح",
+      "lesson_id": "ك-248",
+      "barrier_id": "B-5b9b5169",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-249",
+      "state": "مفتوح",
+      "lesson_id": "ك-249",
+      "barrier_id": "B-a4b4f1b3",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-250",
+      "state": "مفتوح",
+      "lesson_id": "ك-250",
+      "barrier_id": "B-182e97ec",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-251",
+      "state": "مغلق",
+      "lesson_id": "ك-251",
+      "barrier_id": "B-2295f6bd",
+      "run_evidence": " حالة إن وُجدت اختبار ثبات: 4 تمريرات أنتجت بصمة واحدة 6722a78eee62 · خرج 0"
+    },
+    {
+      "fault_id": "ك-252",
+      "state": "مغلق",
+      "lesson_id": "ك-252",
+      "barrier_id": "B-2cec3eb7",
+      "run_evidence": "ولا صف يُحذف قياس: 285 صفًا حينها × 12 عمودًا · ترويسات 2 · مكرّر 0 · خرج 0"
+    },
+    {
+      "fault_id": "ك-253",
+      "state": "مغلق",
+      "lesson_id": "ك-253",
+      "barrier_id": "B-b98a62c4",
+      "run_evidence": "ا بمهلة اختبار سلبي وإيجابي: 5 حالات كلها صحيحة · بوابة السجل الحقيقي خرج 0"
+    },
+    {
+      "fault_id": "ك-254",
+      "state": "مغلق",
+      "lesson_id": "ك-254",
+      "barrier_id": "B-2e162f05",
+      "run_evidence": "التحقق يشترط نتيجة صريحة (خرج 0 · مطابق · أُثبت · قاس) ق"
+    },
+    {
+      "fault_id": "ك-255",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-255",
+      "barrier_id": "B-6fdb6176",
+      "run_evidence": "ليل لا يفرغ: يُكتب «لا نصّ حاجز — الحالة: …» قياس: الاستثناءات 275 والفاشل 0 · خرج 0"
+    },
+    {
+      "fault_id": "ك-256",
+      "state": "مغلق",
+      "lesson_id": "ك-256",
+      "barrier_id": "B-1413647c",
+      "run_evidence": "مغلق» صار يشترط الإصلاح «منفَّذ» حرفيًا اختبار انحدار: الحالة 6 أعادت رمز 2 · والحالة الإيجابية ما ز"
+    },
+    {
+      "fault_id": "ك-257",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-257",
+      "barrier_id": "B-d54a96bd",
+      "run_evidence": "، والدرس يجب أن يطابق العطل اختبارا انحدار: الحالة 7 والحالة 8 أعادتا رمز 2 · مطابق"
+    },
+    {
+      "fault_id": "ك-258",
+      "state": "مغلق",
+      "lesson_id": "ك-258",
+      "barrier_id": "B-d61f7735",
+      "run_evidence": "يجة الحارس رفض 3 صفوف بدليل غير قابل لإعادة التشغيل ثم أُصلح المصدر · فاشل 0"
+    },
+    {
+      "fault_id": "ك-259",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-259",
+      "barrier_id": "B-d6f5051c",
+      "run_evidence": "بيع الأرقام تمريرتان متتاليتان بثبات كامل (سجل + تعلم) · بصمة واحدة · فاشل 0"
+    },
+    {
+      "fault_id": "ك-260",
+      "state": "مغلق",
+      "lesson_id": "ك-260",
+      "barrier_id": "B-64701681",
+      "run_evidence": "ُبقيت الأرقام الحيّة من قياس الأداة قياس مباشر: 292 صفًا · 2 جدولان · فاشل 0"
+    },
+    {
+      "fault_id": "ك-261",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-261",
+      "barrier_id": "B-1b4dcd85",
+      "run_evidence": "المكرّر وتشغيل التحقق قبل الاعتماد المحرّك يعمل: تمريرتان متتاليتان · فاشل 0"
+    },
+    {
+      "fault_id": "ك-262",
+      "state": "مغلق",
+      "lesson_id": "ك-262",
+      "barrier_id": "B-ad859ed5",
+      "run_evidence": "مصدر واحد: الإصلاح والحاجز في التوليد والحارس الحارس خرج 0 والحالة الإيجابية والاخت"
+    },
+    {
+      "fault_id": "ك-263",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-263",
+      "barrier_id": "B-1f6ed37b",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-264",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-264",
+      "barrier_id": "B-648af386",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-265",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-265",
+      "barrier_id": "B-3b6a0f1d",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-266",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-266",
+      "barrier_id": "B-ca71c80b",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-267",
+      "state": "مغلق",
+      "lesson_id": "ك-267",
+      "barrier_id": "B-f82048df",
+      "run_evidence": "_print.py — 5 حالات سلبيّة وإيجابيّة تمرّ، وفحص مضاد: PDF مفقود يمنع برمز 2"
+    },
+    {
+      "fault_id": "ك-268",
+      "state": "مغلق",
+      "lesson_id": "ك-268",
+      "barrier_id": "B-0917b4f4",
+      "run_evidence": "اجهة كل بوابة قبل تشغيلها وتشغيلها بواجهتها الصحيحة مطبَّق: قاعدة: أي رمز 2 يُقرأ مع مخرجه الحرفي وي"
+    },
+    {
+      "fault_id": "ك-269",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-269",
+      "barrier_id": "B-e1b3797a",
+      "run_evidence": "نع · التجربة تمنع · ومع --allow-delete ينفّذ. النتيجة: نجح 4 · فشل 0 (خرج 0)"
+    },
+    {
+      "fault_id": "ك-270",
+      "state": "مغلق",
+      "lesson_id": "ك-270",
+      "barrier_id": "B-26ab6512",
+      "run_evidence": "thon3 validators/check_print_quality.py --pdf <pdf> ← النتيجة: مطابق (خرج 0)"
+    },
+    {
+      "fault_id": "ك-271",
+      "state": "مغلق",
+      "lesson_id": "ك-271",
+      "barrier_id": "B-70b327e2",
+      "run_evidence": "alidators/check_pdf_format.py --pdf <pdf> ← «لا فجوة داخلية ≥ 45 مم» (خرج 0)"
+    },
+    {
+      "fault_id": "ك-272",
+      "state": "مغلق",
+      "lesson_id": "ك-272",
+      "barrier_id": "B-e8998b8b",
+      "run_evidence": "ى المخرج + بوابة الشكل: 9 صفحات · متوسط تعبئة 94.1% · لا فجوة ≥45 مم (خرج 0)"
+    },
+    {
+      "fault_id": "ك-273",
+      "state": "مغلق",
+      "lesson_id": "ك-273",
+      "barrier_id": "B-47be0d65",
+      "run_evidence": "ython3 validators/check_backup_parity.py --mode strict ← «لا انحراف» (خرج 0)"
+    },
+    {
+      "fault_id": "ك-274",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-274",
+      "barrier_id": "B-5ff8935f",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-275",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-275",
+      "barrier_id": "B-78c40bca",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-276",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-276",
+      "barrier_id": "B-c4b492e3",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-277",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-277",
+      "barrier_id": "B-43fed4ad",
+      "run_evidence": "نُقل الملف إلى `brain/docs/` وحُذف المجلد الخطأ، ثم التماثل خرج 0 مغلق"
+    },
+    {
+      "fault_id": "ك-278",
+      "state": "مغلق",
+      "lesson_id": "ك-278",
+      "barrier_id": "B-6373aded",
+      "run_evidence": "منفَّذ: حارس فشل مغلق في final_gate.sh (يتحقق YYYY-MM-DD ويخرج 2 برسالة صريحة) وحارس مثله"
+    },
+    {
+      "fault_id": "ك-279",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-279",
+      "barrier_id": "B-6c15648d",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-280",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-280",
+      "barrier_id": "B-cda44d61",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-281",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-281",
+      "barrier_id": "B-9dd00163",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-282",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-282",
+      "barrier_id": "B-4dfc2354",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-283",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-283",
+      "barrier_id": "B-7ec937cb",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-284",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-284",
+      "barrier_id": "B-a05d6ccb",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-285",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-285",
+      "barrier_id": "B-792c40d6",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-286",
+      "state": "مغلق",
+      "lesson_id": "ك-286",
+      "barrier_id": "B-79339a1d",
+      "run_evidence": "python3 validators/check_source_route_coverage.py --date 2026-10-28 → خرج 0 (نجح 59 · فشل 0)"
+    },
+    {
+      "fault_id": "ك-287",
+      "state": "مغلق",
+      "lesson_id": "ك-287",
+      "barrier_id": "B-dd4c0158",
+      "run_evidence": "python3 validators/check_source_route_coverage.py --date 2026-10-28 → خرج 0 (نجح 59 · فشل 0)"
+    },
+    {
+      "fault_id": "ك-288",
+      "state": "مغلق",
+      "lesson_id": "ك-288",
+      "barrier_id": "B-2218a178",
+      "run_evidence": "python3 validators/check_source_route_coverage.py --date 2026-10-28 → خرج 0 (نجح 59 · فشل 0)"
+    },
+    {
+      "fault_id": "ك-289",
+      "state": "مغلق",
+      "lesson_id": "ك-289",
+      "barrier_id": "B-1e3cf307",
+      "run_evidence": "python3 validators/check_source_route_coverage.py --date 2026-10-28 → خرج 0 (نجح 59 · فشل 0)"
+    },
+    {
+      "fault_id": "ك-290",
+      "state": "مغلق",
+      "lesson_id": "ك-290",
+      "barrier_id": "B-e1644216",
+      "run_evidence": "python3 validators/check_source_route_coverage.py --date 2026-10-28 → خرج 0 (نجح 59 · فشل 0)"
+    },
+    {
+      "fault_id": "ك-291",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-291",
+      "barrier_id": "B-ff83695d",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-292",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-292",
+      "barrier_id": "B-a7c4cc9c",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-293",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-293",
+      "barrier_id": "B-72b6f3e4",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-294",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-294",
+      "barrier_id": "B-1f9b8528",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-295",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-295",
+      "barrier_id": "B-9aa4c178",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-296",
+      "state": "مغلق",
+      "lesson_id": "ك-296",
+      "barrier_id": "B-c7d8fabd",
+      "run_evidence": "لمؤقتة خارج الشجرة إلى audit-2026-10-29/backups/ بلا حذف ✔ D040 وD070 رمز 0 · check_backup_parity --"
+    },
+    {
+      "fault_id": "ك-297",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-297",
+      "barrier_id": "B-35559563",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-298",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-298",
+      "barrier_id": "B-0a2584cc",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-299",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-299",
+      "barrier_id": "B-29960f20",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-300",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-300",
+      "barrier_id": "B-f61d2246",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-301",
+      "state": "مفتوح",
+      "lesson_id": "ك-301",
+      "barrier_id": "B-3d1da237",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-302",
+      "state": "مفتوح",
+      "lesson_id": "ك-302",
+      "barrier_id": "B-147cd081",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-303",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-303",
+      "barrier_id": "B-d3effc9c",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-304",
+      "state": "مفتوح",
+      "lesson_id": "ك-304",
+      "barrier_id": "B-a17f934a",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-305",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-305",
+      "barrier_id": "B-b63ec084",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-306",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-306",
+      "barrier_id": "B-744de1c2",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-307",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-307",
+      "barrier_id": "B-4de9cc44",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-308",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-308",
+      "barrier_id": "B-08430fb2",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-309",
+      "state": "مغلق",
+      "lesson_id": "ك-309",
+      "barrier_id": "B-a1f8e25d",
+      "run_evidence": "sections_registry_vs_report.py 2026-10-29` → «السجل متسق مع 17 قسمًا» خرج 0 · `--selftest` → 4/4 خرج"
+    },
+    {
+      "fault_id": "ك-310",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-310",
+      "barrier_id": "B-08275011",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-311",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-311",
+      "barrier_id": "B-0f6f5c15",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-312",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-312",
+      "barrier_id": "B-3be05b28",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-313",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-313",
+      "barrier_id": "B-60603700",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-314",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-314",
+      "barrier_id": "B-21155efb",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-315",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-315",
+      "barrier_id": "B-0e63acd9",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-316",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-316",
+      "barrier_id": "B-1d823f0d",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-317",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-317",
+      "barrier_id": "B-b843b05e",
+      "run_evidence": "ر · المصادر · الإضافات · الخاصة · طبقة الإصلاح · الإنجليزية) والبناء يخرج 2. حاجز: فشل مغلق في نهاية"
+    },
+    {
+      "fault_id": "ك-318",
+      "state": "مفتوح",
+      "lesson_id": "ك-318",
+      "barrier_id": "B-90146d99",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-319",
+      "state": "مغلق",
+      "lesson_id": "ك-319",
+      "barrier_id": "B-724760fb",
+      "run_evidence": " دليل: dist/feed.xml → pubDate=18 · lastBuildDate=1 بوابة تغذية RSS — خرج 0 (pubDate في كل عنصر وlas"
+    },
+    {
+      "fault_id": "ك-320",
+      "state": "مغلق",
+      "lesson_id": "ك-320",
+      "barrier_id": "B-b099a39c",
+      "run_evidence": "l size/Larger size/Largest size بوابة validators/check_en_parity.py — خرج 0 (بنية وأرقام وسمات بلا ع"
+    },
+    {
+      "fault_id": "ك-321",
+      "state": "مغلق",
+      "lesson_id": "ك-321",
+      "barrier_id": "B-a44ef953",
+      "run_evidence": "بوابة> ثم gate_verdict → لا حكم مانع اختبار tools/runbook.py --redo — خرج 0 بإعادة تحقق فعلية للخطوا"
+    },
+    {
+      "fault_id": "ك-322",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-322",
+      "barrier_id": "B-b883dcc7",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-323",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-323",
+      "barrier_id": "B-6665b967",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-324",
+      "state": "مغلق",
+      "lesson_id": "ك-324",
+      "barrier_id": "B-365d8b99",
+      "run_evidence": " الكتلة في ملف الواجهة، وحُدِّث اختبار القسم. بوابة preflight_check — خرج 0 بعد الترحيل"
+    },
+    {
+      "fault_id": "ك-325",
+      "state": "مغلق",
+      "lesson_id": "ك-325",
+      "barrier_id": "B-33c2cacb",
+      "run_evidence": "م، وأُضيف اختبار سلبي بسبع حالات. اختبار tests/test_gate_verdict.py — خرج 0 بسبع حالات"
+    },
+    {
+      "fault_id": "ك-326",
+      "state": "مغلق",
+      "lesson_id": "ك-326",
+      "barrier_id": "B-727de0ea",
+      "run_evidence": " عبر فرع وطلب دمج قبل النسخة. بوابة check_backup_parity بوضع strict — خرج 0 (مطابق تمامًا)"
+    },
+    {
+      "fault_id": "ك-327",
+      "state": "مغلق",
+      "lesson_id": "ك-327",
+      "barrier_id": "B-b9ca1881",
+      "run_evidence": "ابق تاريخ الإنشاء، ثم أُعيد التحقق الحي. بوابة check_live --compare — خرج 0 بعد إعادة النشر"
+    },
+    {
+      "fault_id": "ك-328",
+      "state": "مفتوح",
+      "lesson_id": "ك-328",
+      "barrier_id": "B-c2f95197",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-329",
+      "state": "مفتوح",
+      "lesson_id": "ك-329",
+      "barrier_id": "B-1ab072f9",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-330",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-330",
+      "barrier_id": "B-33cf51f8",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-331",
+      "state": "مفتوح",
+      "lesson_id": "ك-331",
+      "barrier_id": "B-a94674c4",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-332",
+      "state": "مفتوح",
+      "lesson_id": "ك-332",
+      "barrier_id": "B-71dba89e",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-333",
+      "state": "مفتوح",
+      "lesson_id": "ك-333",
+      "barrier_id": "B-b6f05bcb",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-334",
+      "state": "مفتوح",
+      "lesson_id": "ك-334",
+      "barrier_id": "B-a9ab29d3",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-335",
+      "state": "مفتوح",
+      "lesson_id": "ك-335",
+      "barrier_id": "B-6755d349",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-336",
+      "state": "مفتوح",
+      "lesson_id": "ك-336",
+      "barrier_id": "B-859bd76b",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-337",
+      "state": "مفتوح",
+      "lesson_id": "ك-337",
+      "barrier_id": "B-c3187280",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-338",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-338",
+      "barrier_id": "B-39681094",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-339",
+      "state": "مغلق",
+      "lesson_id": "ك-339",
+      "barrier_id": "B-a091b6a1",
+      "run_evidence": "اختبار سلبي: كسر حقيقي داخل النطاق يمنع (رمز 1)، وبعد الاستعادة يمرّ (رمز 0)"
+    },
+    {
+      "fault_id": "ك-340",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-340",
+      "barrier_id": "B-2217ed1b",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-341",
+      "state": "مغلق",
+      "lesson_id": "ك-341",
+      "barrier_id": "B-0f572f6d",
+      "run_evidence": ".py` `python3 validators/check_content_fidelity.py --date 2026-10-30` خرج 0 بعد الإصلاح (كان 2)"
+    },
+    {
+      "fault_id": "ك-342",
+      "state": "مغلق",
+      "lesson_id": "ك-342",
+      "barrier_id": "B-93c2e2c0",
+      "run_evidence": "/restore_skills.sh` ثم `python3 validators/check_skills_integrity.py` خرج 0"
+    },
+    {
+      "fault_id": "ك-343",
+      "state": "مغلق",
+      "lesson_id": "ك-343",
+      "barrier_id": "B-b1b729bb",
+      "run_evidence": "hon3 validators/check_code_spaces.py reports/2026-10-30-sectioned.md` خرج 0"
+    },
+    {
+      "fault_id": "ك-344",
+      "state": "مغلق",
+      "lesson_id": "ك-344",
+      "barrier_id": "B-74021b56",
+      "run_evidence": "e_dom_audit.py` و`check_repo_secrets.py` `bash tests/test_review2.sh` خرج 0 (بند (ب) المدققات غير ال"
+    },
+    {
+      "fault_id": "ك-345",
+      "state": "مغلق",
+      "lesson_id": "ك-345",
+      "barrier_id": "B-94cc25a0",
+      "run_evidence": ") وملف ترجمة المتن، ثم إعادة البناء `python3 generator/build_site.py` خرج 0 ثم `python3 validators/c"
+    },
+    {
+      "fault_id": "ك-346",
+      "state": "مغلق",
+      "lesson_id": "ك-346",
+      "barrier_id": "B-ce5ff144",
+      "run_evidence": "ثق `python3 validators/check_pdf_format.py` و`check_print_quality.py` خرج 0 · 12 صفحة · تعبئة 98.7% "
+    },
+    {
+      "fault_id": "ك-347",
+      "state": "مغلق",
+      "lesson_id": "ك-347",
+      "barrier_id": "B-20afa2ff",
+      "run_evidence": "ord` بعد اكتمال التصحيحات `python3 tools/text_hash_guard.py --verify` خرج 0"
+    },
+    {
+      "fault_id": "ك-348",
+      "state": "مغلق",
+      "lesson_id": "ك-348",
+      "barrier_id": "B-5be1293c",
+      "run_evidence": "do G011` `python3 tools/runbook.py run --date 2026-10-30 --redo G011` خرج 0 ثم النشر D010 خرج 0"
+    },
+    {
+      "fault_id": "ك-349",
+      "state": "مغلق",
+      "lesson_id": "ك-349",
+      "barrier_id": "B-f289fa6d",
+      "run_evidence": " وتوليد الكتيب من جديد `python3 validators/check_libraries_skills.py` خرج 0 (0 عائق · 0 تحذير) و`run"
+    },
+    {
+      "fault_id": "ك-350",
+      "state": "مغلق",
+      "lesson_id": "ك-350",
+      "barrier_id": "B-0a69b76b",
+      "run_evidence": " · #130) ثم إثبات التماثل `python3 validators/check_backup_parity.py` خرج 0 — «مطابق — المستودع يعكس"
+    },
+    {
+      "fault_id": "ك-351",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-351",
+      "barrier_id": "B-b3ad466b",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-352",
+      "state": "مغلق",
+      "lesson_id": "ك-352",
+      "barrier_id": "B-35621a71",
+      "run_evidence": "tComputedStyle(style)` = `inline-block` في print و`none` على الشاشة · خرج 0"
+    },
+    {
+      "fault_id": "ك-353",
+      "state": "مغلق",
+      "lesson_id": "ك-353",
+      "barrier_id": "B-0149d7e6",
+      "run_evidence": "الة يسجل دمج البنود الستة بـ`&&` مع حفظ رمز الخروج والاختبار السلبي · خرج 0"
+    },
+    {
+      "fault_id": "ك-354",
+      "state": "مغلق",
+      "lesson_id": "ك-354",
+      "barrier_id": "B-d589f715",
+      "run_evidence": "10-30: `python3 tools/runbook.py verify --date 2026-10-30 --root .` → خرج 0 · D005 قبل D010"
+    },
+    {
+      "fault_id": "ك-355",
+      "state": "مغلق",
+      "lesson_id": "ك-355",
+      "barrier_id": "B-6c8de01a",
+      "run_evidence": "`python3 tools/text_hash_guard.py --date 2026-10-30 --stage verify` → خرج 0"
+    },
+    {
+      "fault_id": "ك-356",
+      "state": "مغلق",
+      "lesson_id": "ك-356",
+      "barrier_id": "B-b02ae1e7",
+      "run_evidence": "validators/check_threat_consistency.py --date 2026-10-30 --brain .` → خرج 0"
+    },
+    {
+      "fault_id": "ك-357",
+      "state": "مغلق",
+      "lesson_id": "ك-357",
+      "barrier_id": "B-653ecc87",
+      "run_evidence": " الحالة يسجل `status=ok` والعيوب `[]` بعد مقارنة الصفحات وبصمة النص · خرج 0"
+    },
+    {
+      "fault_id": "ك-358",
+      "state": "مغلق",
+      "lesson_id": "ك-358",
+      "barrier_id": "B-9a67e975",
+      "run_evidence": "26-10-30: `python3 validators/check_backup_parity.py --mode strict` → خرج 0 · مطابق"
+    },
+    {
+      "fault_id": "ك-359",
+      "state": "مفتوح",
+      "lesson_id": "ك-359",
+      "barrier_id": "B-61d46ecf",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-360",
+      "state": "مفتوح",
+      "lesson_id": "ك-360",
+      "barrier_id": "B-ed40921d",
+      "run_evidence": "alidators/check_skills_integrity.py في بداية الجولة؛ تحقق حي: restore خرج 0 وintegrity خرج 0؛ نافذة "
+    },
+    {
+      "fault_id": "ك-361",
+      "state": "مغلق",
+      "lesson_id": "ك-361",
+      "barrier_id": "B-d5e423e1",
+      "run_evidence": "منفَّذ: عزلت مواصفات المهارات عن brain وأعدت التشغيل؛ py_compile خرج 0، والبوابة الحقيقية خرجت "
+    },
+    {
+      "fault_id": "ك-362",
+      "state": "مفتوح",
+      "lesson_id": "ك-362",
+      "barrier_id": "B-fcfde979",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-363",
+      "state": "مفتوح",
+      "lesson_id": "ك-363",
+      "barrier_id": "B-62832ff7",
+      "run_evidence": "رآة حاجز فشل مغلق: `python3 tools/check_governing_assets.py --json` → خرج 2 · `ledger_verified=true`"
+    },
+    {
+      "fault_id": "ك-364",
+      "state": "مغلق",
+      "lesson_id": "ك-364",
+      "barrier_id": "B-7ac4979c",
+      "run_evidence": "لق: ملفان `.txt` في `evidence/hermetic` و`evidence/merkle` → `verify` خرج 2 وسمّى الملفين؛ التنظيف →"
+    },
+    {
+      "fault_id": "ك-365",
+      "state": "مفتوح",
+      "lesson_id": "ك-365",
+      "barrier_id": "B-7923bcce",
+      "run_evidence": "اج سببي إلا بحدث auditd يحوي PID وcomm وexe وPPID؛ تجربة skills_write خرج 0، وskills_meta أعادت no m"
+    },
+    {
+      "fault_id": "ك-366",
+      "state": "مفتوح",
+      "lesson_id": "ك-366",
+      "barrier_id": "B-81189558",
+      "run_evidence": "ادعاء: restore_skills.sh ثم check_skills_integrity قبل/بعد؛ الاستعادة خرج 0، الفحص خرج 0، وتجربة ini"
+    },
+    {
+      "fault_id": "ك-367",
+      "state": "مفتوح",
+      "lesson_id": "ك-367",
+      "barrier_id": "B-5cb076c7",
+      "run_evidence": "ools/causality_window.sh صراحة إلى G000A، وأضيفت قاعدة D005؛ handbook خرج 0 وverify خرج 0 وtest_mani"
+    },
+    {
+      "fault_id": "ك-368",
+      "state": "مغلق",
+      "lesson_id": "ك-368",
+      "barrier_id": "B-b2d4cebc",
+      "run_evidence": "eawatch-xp4qirmr.manus.space/reports/2026-10-30.html + عدّ المنتجات → خرج 0 · «خمسة منتجات رسمية» قا"
+    },
+    {
+      "fault_id": "ك-369",
+      "state": "مغلق",
+      "lesson_id": "ك-369",
+      "barrier_id": "B-1b35fc69",
+      "run_evidence": "watch-xp4qirmr.manus.space/reports/2026-10-30.html و/additions.html → خرج 0 · AR_REPORT_HAS_SEC04_LI"
+    },
+    {
+      "fault_id": "ع-370",
+      "state": "مغلق",
+      "lesson_id": "ع-370",
+      "barrier_id": "B-c95db083",
+      "run_evidence": "eawatch-xp4qirmr.manus.space/reports/en/2026-10-30.html + فحص ev-01 → خرج 0 · EN_EVENT_HAS_187_26=Tr"
+    },
+    {
+      "fault_id": "ك-371",
+      "state": "مغلق",
+      "lesson_id": "ك-371",
+      "barrier_id": "B-92eb6ae1",
+      "run_evidence": "watch-xp4qirmr.manus.space/reports/2026-10-30.html و/additions.html → خرج 0 · AR_FIRE_EVIDENCE= True"
+    },
+    {
+      "fault_id": "م-372",
+      "state": "بانتظار التحقق",
+      "lesson_id": "م-372",
+      "barrier_id": "B-076fc36c",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-373",
+      "state": "مغلق",
+      "lesson_id": "ك-373",
+      "barrier_id": "B-c282d6f8",
+      "run_evidence": " validators/check_threat_consistency.py --date 2026-10-30 --brain . → خرج 0 · المستوى العام مرتفع جد"
+    },
+    {
+      "fault_id": "ك-374",
+      "state": "مغلق",
+      "lesson_id": "ك-374",
+      "barrier_id": "B-63815682",
+      "run_evidence": "034.log: قالب جملة متكرر أكثر من مرتين = 0، سليم؛ أمر awk على السجل → خرج 0"
+    },
+    {
+      "fault_id": "ك-375",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-375",
+      "barrier_id": "B-f7c10748",
+      "run_evidence": "BLE_SELECTION_EXIT=0؛ B010 في logs/runbook/2026-10-31/B010.log → done رمز 0"
+    },
+    {
+      "fault_id": "ك-376",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-376",
+      "barrier_id": "B-ecc504af",
+      "run_evidence": "6-10-31: python3 tools/runbook.py run --date 2026-10-31 --redo B020 → رمز 2؛ check_pdf_format: فجوات"
+    },
+    {
+      "fault_id": "ك-377",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-377",
+      "barrier_id": "B-24e3284f",
+      "run_evidence": "e/ubuntu/seawatch/dist/reports/pdf/2026-10-31.pdf --date 2026-10-31 → رمز 2؛ class=print-map في HTML"
+    },
+    {
+      "fault_id": "ك-378",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-378",
+      "barrier_id": "B-dfceb6d1",
+      "run_evidence": "لاختبار السلبي في tests/test_delivery_scripts.sh عند غياب ملف EN يعيد رمز 2، وبعد الإصلاح logs/runbo"
+    },
+    {
+      "fault_id": "ك-379",
+      "state": "مغلق",
+      "lesson_id": "ك-379",
+      "barrier_id": "B-235bd135",
+      "run_evidence": "ck_live.sh مطبَّق: سجل العطل السابق يثبت 3×45s فشلًا ثم 6×45s نجاحًا برمز 0، وtools/check_live.sh يو"
+    },
+    {
+      "fault_id": "ك-380",
+      "state": "مغلق",
+      "lesson_id": "ك-380",
+      "barrier_id": "B-cfae3748",
+      "run_evidence": "_scope.py مطبَّق: pytest -q tests/test_classify_zones_damage_scope.py خرج 0 و1/1، وحالة هجوم مؤكد بل"
+    },
+    {
+      "fault_id": "ك-381",
+      "state": "مغلق",
+      "lesson_id": "ك-381",
+      "barrier_id": "B-8add16ce",
+      "run_evidence": "3 محليًا و6714 في المرآة مع النتيجة مطابق، واختبار runtime guard أعاد 2/2 وفحص المهارات خرج 0"
+    },
+    {
+      "fault_id": "ك-382",
+      "state": "مغلق",
+      "lesson_id": "ك-382",
+      "barrier_id": "B-672c4a3f",
+      "run_evidence": "_counters.py --date 2026-10-31 --dist-root /home/ubuntu/seawatch/dist خرج 0 · بطاقة الفروع الثلاثة م"
+    },
+    {
+      "fault_id": "ك-383",
+      "state": "مغلق",
+      "lesson_id": "ك-383",
+      "barrier_id": "B-09bda309",
+      "run_evidence": "قيق الحي أظهر 3 صفوف بطاقة و0 سلاسل لاتينية في الصفوف، وبوابة العدّاد خرج 0"
+    },
+    {
+      "fault_id": "ك-384",
+      "state": "مغلق",
+      "lesson_id": "ك-384",
+      "barrier_id": "B-54c49ef6",
+      "run_evidence": "ّق: إعادة G045 غطت 8 من 8 أسطح و0 سطح غير مغطى و0 مانع، ونتيجة الجولة خرج 0"
+    },
+    {
+      "fault_id": "ك-385",
+      "state": "مغلق",
+      "lesson_id": "ك-385",
+      "barrier_id": "B-1e7f5651",
+      "run_evidence": "مد لا مسارًا تفاعليًا مطبَّق: bash tools/github_backup.sh --help أعاد رمز 2 مع usage، وتشغيل D005 وD"
+    },
+    {
+      "fault_id": "ك-386",
+      "state": "مغلق",
+      "lesson_id": "ك-386",
+      "barrier_id": "B-fe7e316b",
+      "run_evidence": "إنجليزي الرسمي دون تعديل مطبَّق: check_en_parity.py --date 2026-10-31 خرج 0، والمدقق المباشر خرج 0، "
+    },
+    {
+      "fault_id": "ك-387",
+      "state": "مغلق",
+      "lesson_id": "ك-387",
+      "barrier_id": "B-5b9e5bb0",
+      "run_evidence": "نشر: branch=main وHEAD=origin/main → MAIN_PREPUBLISH_GUARD=0، ثم D010 خرج 0 ونُشر الالتزام 4b3e2e0"
+    },
+    {
+      "fault_id": "ك-388",
+      "state": "مغلق",
+      "lesson_id": "ك-388",
+      "barrier_id": "B-582caf71",
+      "run_evidence": "005 أثبت مدخل EN حاضرًا بخطوط 191 و51 صفًا، وB010 وcheck_en_parity.py خرج 0، مع عدم بقاء نص عربي في "
+    },
+    {
+      "fault_id": "ك-389",
+      "state": "مغلق",
+      "lesson_id": "ك-389",
+      "barrier_id": "B-c1d56547",
+      "run_evidence": "لي 154 مسارًا، وأضيفت حواجز الأرشفة والمزامنة والتطبيق؛ اختبار المرآة خرج 0 حاجز فشل مغلق: tests/tes"
+    },
+    {
+      "fault_id": "ك-390",
+      "state": "مفتوح",
+      "lesson_id": "ك-390",
+      "barrier_id": "B-eca7e550",
+      "run_evidence": "تج الفعلي وأضيف اختبار يقرأ assertions من المانيفست؛ Ran 1 test وOK · خرج 0 حاجز فشل مغلق: tests/tes"
+    },
+    {
+      "fault_id": "ك-391",
+      "state": "مفتوح",
+      "lesson_id": "ك-391",
+      "barrier_id": "B-4278c20f",
+      "run_evidence": "ودع، وأرشفة النسخة المستبدلة، واستعادة عند فشل verify؛ 8 فحوص ناجحة · خرج 0 حاجز فشل مغلق: tests/tes"
+    },
+    {
+      "fault_id": "ك-392",
+      "state": "مغلق",
+      "lesson_id": "ك-392",
+      "barrier_id": "B-d5abd8ec",
+      "run_evidence": "ط وخطوة الوكيل بلا prompt ويثبت إعادة الربط؛ الحصيلة نجح 12 · فشل 0 · خرج 0"
+    },
+    {
+      "fault_id": "ك-393",
+      "state": "مفتوح",
+      "lesson_id": "ك-393",
+      "barrier_id": "B-18dc5e01",
+      "run_evidence": "لمسار الجذري إلى المواصفة وشُغّل الفحص؛ كل مسارات المرآة 6598 مصنفة · خرج 0 حاجز فشل مغلق: python3 b"
+    },
+    {
+      "fault_id": "ك-394",
+      "state": "مغلق",
+      "lesson_id": "ك-394",
+      "barrier_id": "B-65a2370c",
+      "run_evidence": " العدادات الإنجليزية وربطت بالعقد الحاكم؛ 12 اختبارًا OK والمدقق الحي خرج 0 حاجز فشل مغلق: tests/tes"
+    },
+    {
+      "fault_id": "ك-395",
+      "state": "مفتوح",
+      "lesson_id": "ك-395",
+      "barrier_id": "B-5b897345",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-396",
+      "state": "مغلق",
+      "lesson_id": "ك-396",
+      "barrier_id": "B-f9e4061c",
+      "run_evidence": "0f884dc4e4e3 حاجز فشل مغلق: check_server_code_tracking.py بعد الدمج → خرج 0 · D005/D040/D070 → خرج 0"
+    },
+    {
+      "fault_id": "ك-397",
+      "state": "مغلق",
+      "lesson_id": "ك-397",
+      "barrier_id": "B-3b9f925d",
+      "run_evidence": "u/skills؛ PR #168 دُمج حاجز فشل مغلق: cmp للملفات الثلاثة مع الخادم → خرج 0؛ manifest المستودع 420 م"
+    },
+    {
+      "fault_id": "ك-398",
+      "state": "مغلق",
+      "lesson_id": "ك-398",
+      "barrier_id": "B-f5672c7b",
+      "run_evidence": "م 9562b8ad68fd23c18265b5f4ccbe67c7cb5e9e42؛ التشغيل الحالي D040 وD070 خرج 0 وأنشأ PR #172 برأس d1834"
+    },
+    {
+      "fault_id": "ك-399",
+      "state": "مفتوح",
+      "lesson_id": "ك-399",
+      "barrier_id": "B-15f1e235",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-400",
+      "state": "مفتوح",
+      "lesson_id": "ك-400",
+      "barrier_id": "B-fb0b705c",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-401",
+      "state": "مفتوح",
+      "lesson_id": "ك-401",
+      "barrier_id": "B-e8b0bad5",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-402",
+      "state": "مفتوح",
+      "lesson_id": "ك-402",
+      "barrier_id": "B-ba8c3481",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-403",
+      "state": "مغلق",
+      "lesson_id": "ك-403",
+      "barrier_id": "B-4b1364bd",
+      "run_evidence": "face الجديد؛ التشغيل النهائي يمرر السطح وتبقى مخالفات IMO منفصلة فقط؛ خرج 2 بسبب عقد IMO القديم"
+    },
+    {
+      "fault_id": "ك-404",
+      "state": "مفتوح",
+      "lesson_id": "ك-404",
+      "barrier_id": "B-7487d3eb",
+      "run_evidence": "اخل masthead-meta python3 tests/test_2026_10_31_surface_contract.py → رمز 0؛ python3 -m unittest -v "
+    },
+    {
+      "fault_id": "ك-405",
+      "state": "مفتوح",
+      "lesson_id": "ك-405",
+      "barrier_id": "B-b906afb6",
+      "run_evidence": "لإصلاح: python3 validators/check_card_counters.py --date 2026-10-31 → رمز 2 و«ملف مطلوب مفقود: /home"
+    },
+    {
+      "fault_id": "ك-406",
+      "state": "مغلق",
+      "lesson_id": "ك-406",
+      "barrier_id": "B-45cdc7a7",
+      "run_evidence": "_wiring.py --check && python3 tools/build_lexicon_corpus.py --check → خرج 0؛ 140 بندًا متطابقًا · ال"
+    },
+    {
+      "fault_id": "ك-407",
+      "state": "مغلق",
+      "lesson_id": "ك-407",
+      "barrier_id": "B-fc84c721",
+      "run_evidence": "ق: تحقق حي 2026-11-01: python3 validators/check_skills_integrity.py → خرج 0؛ bash -n tools/restore_s"
+    },
+    {
+      "fault_id": "ك-408",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-408",
+      "barrier_id": "B-5f904723",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-409",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-409",
+      "barrier_id": "B-10a6c966",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-410",
+      "state": "بانتظار التحقق",
+      "lesson_id": null,
+      "barrier_id": "B-f0adf13a",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-411",
+      "state": "بانتظار التحقق",
+      "lesson_id": null,
+      "barrier_id": "B-469c83ef",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-412",
+      "state": "بانتظار التحقق",
+      "lesson_id": null,
+      "barrier_id": "B-91774dca",
+      "run_evidence": "ن وقائعها، ورُبط بالخط اليومي في `classify_zones.py`، وقُلب ح13 إلى الرمز 2 عند خريطة بلا نقاط أو نق"
+    },
+    {
+      "fault_id": "ك-413",
+      "state": "بانتظار التحقق",
+      "lesson_id": null,
+      "barrier_id": "B-2ec22da7",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-414",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-414",
+      "barrier_id": "B-3cef876a",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-415",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-415",
+      "barrier_id": "B-387c5ef4",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-416",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-416",
+      "barrier_id": "B-08556c98",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-417",
+      "state": "بانتظار التحقق",
+      "lesson_id": null,
+      "barrier_id": "B-77f6c1ca",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-418",
+      "state": "مغلق",
+      "lesson_id": "ك-418",
+      "barrier_id": "B-dbbce523",
+      "run_evidence": "بوابة الصياغة على السطح المستخرج rc=1 و0 ألفاظ مصطنعة · تدقيق التغطية 8/8 مانعة 0"
+    },
+    {
+      "fault_id": "ك-419",
+      "state": "مفتوح",
+      "lesson_id": "ك-419",
+      "barrier_id": "B-414d1084",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-420",
+      "state": "مفتوح",
+      "lesson_id": null,
+      "barrier_id": "B-f89e8121",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-421",
+      "state": "مفتوح",
+      "lesson_id": null,
+      "barrier_id": "B-56f0e229",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-422",
+      "state": "مفتوح",
+      "lesson_id": null,
+      "barrier_id": "B-1c747146",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-423",
+      "state": "بانتظار التحقق",
+      "lesson_id": null,
+      "barrier_id": "B-bb81243c",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-424",
+      "state": "بانتظار التحقق",
+      "lesson_id": null,
+      "barrier_id": "B-3d3d7256",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-425",
+      "state": "بانتظار التحقق",
+      "lesson_id": null,
+      "barrier_id": "B-4e828f84",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-426",
+      "state": "بانتظار التحقق",
+      "lesson_id": null,
+      "barrier_id": "B-a196803f",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-427",
+      "state": "بانتظار التحقق",
+      "lesson_id": null,
+      "barrier_id": "B-0b830e14",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-428",
+      "state": "بانتظار التحقق",
+      "lesson_id": null,
+      "barrier_id": "B-19991e4f",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-429",
+      "state": "مغلق",
+      "lesson_id": "ك-429",
+      "barrier_id": "B-300f1d76",
+      "run_evidence": "ية قياس DOM حي: 4 مستطيلات و4 وسوم في العربية والإنجليزية · خطوة D020 رمز 0 · بوابة عقد الخريطة 21/2"
+    },
+    {
+      "fault_id": "ك-430",
+      "state": "مغلق",
+      "lesson_id": "ك-430",
+      "barrier_id": "B-7887d8d6",
+      "run_evidence": "ب القطاع الأعلى مميّز في اللقطة الحية · mp-sector-top = 1 · خطوة D020 رمز 0 · بوابة وقياس آلي"
+    },
+    {
+      "fault_id": "ك-431",
+      "state": "مغلق",
+      "lesson_id": "ك-431",
+      "barrier_id": "B-244cbde9",
+      "run_evidence": " إزالة التسمية منه + إضافة قيم الحقول إلى `glossary.json` بناء الموقع رمز 0 · تماثل AR/EN: فاشل 0 · "
+    },
+    {
+      "fault_id": "ك-432",
+      "state": "مغلق",
+      "lesson_id": "ك-432",
+      "barrier_id": "B-76af0a43",
+      "run_evidence": "ستبدال العمود بعمود «المنطقة» وإعادة البناء ثم إعادة الخطوة خطوة D020 رمز 0 بعد الإصلاح · تدقيق DOM:"
+    },
+    {
+      "fault_id": "ك-433",
+      "state": "مغلق",
+      "lesson_id": "ك-433",
+      "barrier_id": "B-8ac2d2f9",
+      "run_evidence": " الحاكمة من الدماغ إلى `skills/` ثم مزامنة المرآة حارس سلامة المهارات خرج 0 (16 شاهدًا) · الأسطر مطا"
+    },
+    {
+      "fault_id": "ك-434",
+      "state": "مغلق",
+      "lesson_id": "ك-434",
+      "barrier_id": "B-04b393ad",
+      "run_evidence": "قياس جاف قبل التنفيذ قياس جاف: محذوف 0 في المجالات الثلاثة · المزامنة رمز 0 · خطوة D005 رمز 0 · بواب"
+    },
+    {
+      "fault_id": "ك-435",
+      "state": "مغلق",
+      "lesson_id": "ك-435",
+      "barrier_id": "B-b527f01c",
+      "run_evidence": "التزام ثم طلب دمج، وتنظيف الشجرة قبل خطوة النسخة الاحتياطية خطوة D005 رمز 0 · التماثل مطابق تمامًا ("
+    },
+    {
+      "fault_id": "ك-436",
+      "state": "مغلق",
+      "lesson_id": "ك-436",
+      "barrier_id": "B-cbb91dc9",
+      "run_evidence": "epo.py` يرفض العمل على `main` بلا `--allow-main` حارس الفرع: على main خرج 2 برسالة BRANCH_GUARD · عل"
+    },
+    {
+      "fault_id": "ك-437",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-437",
+      "barrier_id": "B-5de48292",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-438",
+      "state": "بانتظار التحقق",
+      "lesson_id": null,
+      "barrier_id": "B-5313d57b",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-439",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-439",
+      "barrier_id": "B-6c3973d3",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-440",
+      "state": "بانتظار التحقق",
+      "lesson_id": null,
+      "barrier_id": "B-0d5cfc04",
+      "run_evidence": null
+    }
+  ]
 }
