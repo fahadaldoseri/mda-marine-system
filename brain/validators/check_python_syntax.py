@@ -14,7 +14,28 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SKIP = {"node_modules", ".git", "logs", "dist", "archive", "audit"}
-ROOTS = [ROOT, pathlib.Path("/home/ubuntu/seawatch")]
+
+
+def _site_root() -> pathlib.Path | None:
+    """جذر الموقع من متغيّر البيئة أو من الشقيق المعتاد، بلا مسار مطلق مثبّت.
+
+    العلّة (ك-393): كان الجذر مكتوبًا مطلقًا، فأوقف تحذير النقل الأسبوعي
+    («1 ملفًا بمسار مطلق يكسر النقل»). الآن يُشتق من `SITE_DIR` أو من الشقيق
+    `seawatch`/`site` بجوار مجلد المشروع.
+    """
+    import os
+
+    env = os.environ.get("SITE_DIR") or os.environ.get("SITE")
+    if env and pathlib.Path(env).exists():
+        return pathlib.Path(env)
+    for name in ("seawatch", "site"):
+        cand = ROOT.parent / name
+        if cand.exists():
+            return cand
+    return None
+
+
+ROOTS = [ROOT] + ([_site_root()] if _site_root() else [])
 
 
 SHADOW_PAT = re.compile(r"from _guard import run\b(?! as)")
