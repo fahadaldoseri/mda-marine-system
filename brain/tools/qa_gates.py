@@ -382,6 +382,20 @@ def gate_site_output(date: str):
     return True, f"{len(pages)} صفحة سليمة: أقواس · اتجاه · نجوم · ثقة · جداول", False
 
 
+def gate_python_syntax(date: str):
+    """حارس ترجمة الشيفرة: يمنع ملف Python معطوبًا من الوصول إلى التسليم.
+
+    العلّة (ك-393): كان `validators/check_python_syntax.py` قائمًا لكنه غير
+    مُستدعى في بوابة التسليم، فأوقف التدقيق الأسبوعي بتحذير إنفاذ. يُستدعى هنا
+    ليعمل داخل خط الفحص العشري لا خارجه.
+    """
+    out = subprocess.run([sys.executable, str(B / "validators" / "check_python_syntax.py")],
+                         capture_output=True, text=True, cwd=str(B))
+    lines = (out.stdout or out.stderr).strip().splitlines()
+    detail = lines[-1] if lines else "لا مخرجات"
+    return (out.returncode == 0), detail, False
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", required=True)
@@ -389,6 +403,7 @@ def main() -> int:
     pdf = SITE / "dist" / "reports" / "pdf" / f"{a.date}.pdf"
     Path("/tmp/_qa_toc.txt").write_text(pdf_text(pdf), encoding="utf-8")
     gates = [
+        ("0 ترجمة الشيفرة (لا ملف Python معطوب)", gate_python_syntax),
         ("1 المصدر والمخطط", gate_schema),
         ("2 الهوية والمعرّفات", gate_identity),
         ("3 الأرقام والمصادر", gate_numbers),
@@ -453,3 +468,4 @@ def gate_no_empty_tags(date: str):
 
 if __name__ == "__main__":
     sys.exit(main())
+

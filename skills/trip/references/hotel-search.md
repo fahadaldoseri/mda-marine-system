@@ -8,7 +8,7 @@ The tool calls Trip.com's `POST /api/v1/products/hotels/query` (v2 contract). It
 |---|---:|---|
 | `destinationType` | yes | `CITY` (whole city), `HOTEL` (a named hotel) or `POI` (near a place). |
 | `cityName` | yes | The city containing the destination; results stay within it. |
-| `countryName` | one of the two | Country or region of `cityName`, any language (e.g. `Japan`, `中国`, `Hong Kong`). |
+| `countryName` | one of the two | Country or region of `cityName`, any language (e.g. `Japan`, `China`, `Hong Kong`). |
 | `countryCode` | one of the two | ISO two-letter code (e.g. `JP`, `CN`, `HK`) when no country name is passed; use `UK`, not `GB`. |
 | `name` | `HOTEL`: yes; `POI`: recommended | The hotel name, or the place name that labels distance texts. Omit for `CITY`. |
 | `latitude`, `longitude` | `POI` only | WGS84 decimal degrees of the place to stay near. |
