@@ -25,8 +25,7 @@ HDR = {
 CTX = ssl.create_default_context()
 CTX_UNVERIFIED = ssl._create_unverified_context()
 
-BRAIN = Path(__import__('os').environ.get('BRAIN_DIR', Path(__file__).resolve().parents[3] / 'brain-marine-news'))
-sys.path.insert(0, str(BRAIN / 'tools'))
+sys.path.insert(0, '/home/ubuntu/brain-marine-news/tools')
 from source_channels import BROWSER_ROUTES  # noqa: E402
 
 EXTRA = {17: 'https://x.com/bna_en'}
