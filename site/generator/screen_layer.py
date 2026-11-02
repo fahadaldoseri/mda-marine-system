@@ -356,7 +356,7 @@ body:has(.site-nav) .topbar{display:none}
 .sc-official-layer{display:grid;grid-template-columns:145px minmax(75px,auto) minmax(0,1fr);gap:8px;align-items:baseline;border-top:1px solid var(--line);padding-top:7px}
 .sc-official-label{font-size:12.5px;color:var(--muted)}
 .sc-official-value{font-family:"IBM Plex Mono",monospace;font-size:18px;line-height:1.35;text-align:right;direction:rtl;color:var(--ink)}
-.sc-official-source{font-size:11.5px;line-height:1.5;color:var(--muted);overflow-wrap:anywhere}
+.sc-official-source{font-size:12.5px;line-height:1.5;color:var(--muted);overflow-wrap:anywhere}
 /* تنسيق مضغوط مقروء لبطاقات المستجدات (قرار المالك 2026-10-31: خفض الاكتظاظ) */
 .sc-official-layer{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:2px 10px;align-items:baseline;padding:6px 0;border-top:1px dashed var(--line)}
 .sc-official-layer:first-child{border-top:0}
@@ -366,15 +366,15 @@ body:has(.site-nav) .topbar{display:none}
 .sc-kpi-row{display:grid;gap:16px;direction:rtl}
 .sc-kpi-row-1{grid-template-columns:repeat(4,minmax(0,1fr))}
 .sc-kpi-row-2{grid-template-columns:repeat(4,minmax(0,1fr))}
-.sc-kpi{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;position:relative;overflow:hidden;height:148px;min-height:148px;text-align:right;direction:rtl;display:flex;flex-direction:column}
+.sc-kpi{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;position:relative;overflow:hidden;height:auto;min-height:148px;text-align:right;direction:rtl;display:flex;flex-direction:column}
 .sc-kpi:before{content:"";position:absolute;inset-inline-start:0;top:0;bottom:0;width:3px;background:var(--accent)}
 .sc-kpi.acc-info:before{background:var(--info)}.sc-kpi.acc-warn:before{background:var(--warn)}
 .sc-kpi.acc-danger:before{background:var(--danger)}.sc-kpi.acc-ok:before{background:var(--ok)}
 .sc-kl{font-size:14px;color:var(--muted);line-height:1.6}
-.sc-k-tag{display:inline-block;margin-inline-start:6px;padding:1px 7px;border:1px solid var(--line-2);border-radius:999px;color:var(--ink-2);font-size:11px;line-height:1.4;white-space:nowrap}
+.sc-k-tag{display:inline-block;margin-inline-start:6px;padding:1px 7px;border:1px solid var(--line-2);border-radius:999px;color:var(--ink-2);font-size:12px;line-height:1.4;white-space:nowrap}
 .sc-kv{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:26px;line-height:1.3;text-align:right;direction:rtl}
 .sc-kd{font-size:14px;color:var(--ink-2)}
-.sc-kn{font-size:13px;color:var(--muted);line-height:1.7;margin-top:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sc-kn{font-size:13px;color:var(--muted);line-height:1.7;margin-top:3px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;flex:0 0 auto}
 .sc-k-risk{display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:12px}
 .sc-k-risk-tag{border:1px solid var(--line-2);border-radius:999px;padding:1px 8px;color:var(--ink-2)}
 .sc-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 26px;min-width:0;box-shadow:inset 0 2px 0 0 rgba(34,195,182,.55)}
@@ -455,7 +455,7 @@ body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,sys
   /* شريط الأقسام صفّ واحد قابل للتمرير بدل كتلة من الأزرار تدفع المحتوى */
   .sc-jump{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
   .sc-jump a{flex:0 0 auto;white-space:nowrap}
-  .sc-jump-hint{display:none;align-items:center;gap:2px;font-size:11.5px;color:var(--muted);padding:0 6px;flex:0 0 auto}
+  .sc-jump-hint{display:none;align-items:center;gap:2px;font-size:12.5px;color:var(--muted);padding:0 6px;flex:0 0 auto}
   .sc-toolbar.is-scroll .sc-jump-hint{display:inline-flex}
   .sc-card{padding:18px 16px}
   .sc-threat{padding:16px}

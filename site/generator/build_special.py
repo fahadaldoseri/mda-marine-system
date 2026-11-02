@@ -43,7 +43,7 @@ INDEX_CSS = """
 }
 .sp-card:hover{border-color:var(--line-2);transform:translateY(-1px);text-decoration:none}
 .sp-top{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
-.sp-tag{font-size:11.5px;border-radius:999px;padding:3px 10px;border:1px solid var(--line-2);background:var(--panel2);color:var(--ink2)}
+.sp-tag{font-size:12.5px;border-radius:999px;padding:3px 10px;border:1px solid var(--line-2);background:var(--panel2);color:var(--ink2)}
 .sp-tag.sp-hot{color:#ffd7d3;background:rgba(255,93,82,.16);border-color:rgba(255,93,82,.42)}
 .sp-tag.sp-code{font-family:"IBM Plex Mono",monospace;direction:ltr;unicode-bidi:isolate}
 .sp-card h2{font-family:"Noto Kufi Arabic",sans-serif;font-size:19px;font-weight:600;margin:0 0 6px;line-height:1.55}

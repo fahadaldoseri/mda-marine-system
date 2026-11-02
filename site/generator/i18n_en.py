@@ -511,7 +511,7 @@ def _collapse_inline_source_duplicates(out: str) -> str:
     an exact suffix repetition; never use a broad substring replacement.
     """
     pattern = re.compile(
-        r'(?P<before>[^<>]*\b(?P<org>UKMTO|JMIC|IMO)\b[^<>]*)'
+        r'(?P<before>[^<>]*\b(?P<org>UKMTO|JMIC|IMO|VLIZ|Marine Regions|Natural Earth)\b[^<>]*)'
         r'(?P<span><span\b[^>]*\bclass="ltr"[^>]*>\s*(?P=org)\s*</span>)'
         r'(?P<after>[^<>]*)',
         re.IGNORECASE,
