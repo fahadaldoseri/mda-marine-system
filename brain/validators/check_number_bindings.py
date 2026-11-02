@@ -6,7 +6,7 @@
 هجمات IMO يُنشر بلا أي بوابة تحرسه. القاعدة التي تمنع تكرار ذلك:
 **رقم بلا مالك معلن وبوابة تقارنه = رقم غير محروس**، ولو كان صحيحًا اليوم.
 
-لكل ربط ثلاثة عناصر: (١) ملف مالك واحد، (٢) طريقة استخراج من الملف، (٣) سطح منشور.
+لكل ربط ثلاثة عناصر: (1) ملف مالك واحد، (2) طريقة استخراج من الملف، (3) سطح منشور.
 الفشل مغلق (2) عند اختلاف أي ربط، وعند فساد الملف المالك.
 
 الاستخدام: python3 validators/check_number_bindings.py [--date YYYY-MM-DD] [--brain DIR] [--site DIR]
@@ -14,6 +14,7 @@
 from __future__ import annotations
 
 import argparse
+import datetime as dt
 import json
 import os
 import pathlib
@@ -47,6 +48,81 @@ def metric_value(brain: pathlib.Path, date: str, metric_id: str):
         if isinstance(m, dict) and m.get("id") == metric_id:
             return m, None
     return None, f"لا مقياس بالمعرّف {metric_id} في {f.name}"
+
+
+# العدّادات الثمانية التي يولّدها tools/ledger_totals.py من دفتر الوقائع.
+CUMULATIVE_METRICS = [
+    "ukmto-reports", "qualifying-incidents", "unconfirmed-narratives",
+    "confirmed-incidents", "deaths", "imo-confirmed-attacks",
+    "fire-incidents", "official-products",
+]
+LEDGER_SOURCE = "cumulative-2026/event-ledger-master.json + ledger_totals"
+
+
+def check_cumulative_metrics(brain: pathlib.Path, date: str, out: list, blockers: list) -> None:
+    """يعيد حساب العدّادات الثمانية من الدفتر ويقارنها بالمنشور (ك-456).
+
+    العلّة قبل الإصلاح: `ledger_totals.py` كان يولّد المجاميع وينشرها، ولا بوابة
+    تعيد حسابها وتقارنها، فيكفي تعديل يدوي أو نشر جزئي أو ملف قديم لتغيير رقم
+    منشور بلا اعتراض. هنا يُعاد الحساب من المصدر الحاكم نفسه (الدفتر) ويُقارن
+    بالملف المنشور: اليوم والمجموع والمدى الزمني.
+    """
+    pub_path = brain / "web" / "kpis-totals" / f"{date}.json"
+    if not pub_path.is_file():
+        blockers.append(f"ملف العدّادات المنشور مفقود: {pub_path}")
+        return
+    tools = str(brain / "tools")
+    if tools not in sys.path:
+        sys.path.insert(0, tools)
+    try:
+        import ledger_totals as lt
+    except ImportError as e:
+        blockers.append(f"تعذّر تحميل مولّد العدّادات لاختبار الربط: {e}")
+        return
+    try:
+        payload, audit = lt.build_payload(dt.date.fromisoformat(date))
+    except (ValueError, KeyError, OSError, RuntimeError, SystemExit) as e:
+        blockers.append(f"تعذّر إعادة حساب العدّادات من الدفتر: {type(e).__name__}: {e}")
+        return
+
+    published = load_json(pub_path)
+    pub = {m.get("id"): m for m in published.get("metrics", []) if isinstance(m, dict)}
+    recomputed = {m.get("id"): m for m in payload.get("metrics", [])}
+
+    missing = [m for m in CUMULATIVE_METRICS if m not in recomputed]
+    if missing:
+        blockers.append(f"عدّادات لا يولّدها المولّد بعد الآن: {missing}")
+    extra = [m for m in pub if m not in recomputed]
+    if extra:
+        blockers.append(f"عدّادات منشورة بلا مصدر في المولّد: {extra}")
+
+    for mid in CUMULATIVE_METRICS:
+        r, p = recomputed.get(mid), pub.get(mid)
+        if r is None or p is None:
+            blockers.append(
+                f"عدّاد {mid}: غير موجود في أحد الطرفين "
+                f"(مولّد={r is not None} · منشور={p is not None})")
+            continue
+        for field, label in (("today", "اليوم"), ("cumulative", "المجموع")):
+            rv, pv = r.get(field), p.get(field)
+            ok = rv == pv
+            out.append((f"{mid} — {label}", pv, LEDGER_SOURCE,
+                        f"kpis-totals/{date}.json (المحسوب {rv})",
+                        "مطابق" if ok else "مخالف"))
+            if not ok:
+                blockers.append(
+                    f"اختلاف ربط العدّاد {mid} ({label}): المنشور {pv} · المحسوب من الدفتر {rv}")
+
+    pr, rr = published.get("range") or {}, payload.get("range") or {}
+    for f in ("from", "to", "days_covered", "days_total"):
+        if f in rr and pr.get(f) != rr.get(f):
+            blockers.append(
+                f"اختلاف مدى الدفتر المنشور ({f}): المنشور {pr.get(f)} · المحسوب {rr.get(f)}")
+    out.append(("مدى الدفتر (أيام مغطاة)", rr.get("days_covered"), LEDGER_SOURCE,
+                f"kpis-totals/{date}.json (المحسوب {pr.get('days_covered')})",
+                "مطابق" if pr.get("days_covered") == rr.get("days_covered") else "مخالف"))
+    if audit.get("canonical_events") is None:
+        blockers.append("تدقيق المولّد لا يعلن عدد الوقائع الأساسية (canonical_events)")
 
 
 def check_imo(brain: pathlib.Path, date: str, out: list, blockers: list) -> None:
@@ -119,16 +195,18 @@ def check_sources(brain: pathlib.Path, site: pathlib.Path, date: str, out: list,
         if not p.is_file():
             continue
         try:
-            text = p.read_text(encoding="utf-8")
+            raw = p.read_text(encoding="utf-8")
+            text = re.sub(r"<[^>]+>", " ", raw)
         except (OSError, UnicodeDecodeError):
             continue
         for m in re.finditer(r"(\d{2,3})\s*مصدر", text):
             n = int(m.group(1))
-            after = text[m.end():m.end() + 16]
-            before = text[max(0, m.start() - 40):m.start()]
+            after = text[m.end():m.end() + 24]
+            before = text[max(0, m.start() - 60):m.start()]
             # كميات أخرى مشروعة: مفحوص في تشغيل · مستشهد به · مؤرخ بـ«آنذاك/في ذلك الشهر».
-            OTHER = ("مفحوص", "مستشهد", "متقادم", "آنذاك", "ذلك الشهر", "في حينه", "تاريخي")
-            if any(k in after for k in OTHER) or any(k in before for k in ("آنذاك", "في حينه", "تاريخي")):
+            OTHER = ("مفحوص", "مستشهد", "متقادم", "آنذاك", "ذلك الشهر", "في حينه", "تاريخي",
+             "ناجح", "ناجحة", "بنجاح", "فُحص", "فحص", "فحصت", "نجحت")
+            if any(k in after for k in OTHER) or any(k in before for k in OTHER):
                 out.append((f"كمية أخرى للمصادر ({n})", n, "—", f"{p.name}: كمية لا ادعاء معتمد", "مقبول"))
                 continue
             # ادعاء صريح عن القائمة المعتمدة: يجب أن يساوي المعتمد
@@ -159,6 +237,7 @@ def main() -> int:
     rows: list[tuple] = []
     blockers: list[str] = []
     check_imo(brain, date, rows, blockers)
+    check_cumulative_metrics(brain, date, rows, blockers)
     check_sources(brain, site, date, rows, blockers)
 
     print(f"   {'الرقم':<32} {'القيمة':>7}  {'الملف المالك':<34} {'السطح':<34} الحالة")

@@ -169,6 +169,8 @@ def tight(s: str) -> str:
 
 
 def gate_parity(date: str):
+    if print_pipeline_disabled():
+        return True, ("الطباعة معطّلة بطلب المالك — بند الطباعة غير مانع ولا يُحتسب أثر قديم"), False
     src = read(B / "reports" / f"{date}-sectioned.md")
     txt = norm(pdf_text(SITE / "dist" / "reports" / "pdf" / f"{date}.pdf"))
     if print_pipeline_disabled() and not txt:
@@ -239,8 +241,9 @@ def print_pipeline_disabled() -> bool:
         rb = json.loads(read(B / "runbook" / "runbook.json"))
     except (json.JSONDecodeError, AttributeError):
         return False
-    if isinstance(rb.get("print"), dict) and rb["print"].get("disabled") is True:
-        return True
+    if isinstance(rb.get("print"), dict):
+        if rb["print"].get("disabled") is True or rb["print"].get("enabled") is False:
+            return True
     for step in rb.get("steps", []):
         if step.get("id") == "B020":
             return step.get("disabled") is True
@@ -248,6 +251,8 @@ def print_pipeline_disabled() -> bool:
 
 
 def gate_format(date: str):
+    if print_pipeline_disabled():
+        return True, ("الطباعة معطّلة بطلب المالك — بند الطباعة غير مانع ولا يُحتسب أثر قديم"), False
     pdf = SITE / "dist" / "reports" / "pdf" / f"{date}.pdf"
     # ملف فارغ (0 بايت) أثرُ تصديرٍ مبتور: يُعامل معاملة «لم يُنتَج» ولا يُقبل كدليل على مخرج سليم.
     produced = pdf.exists() and pdf.stat().st_size > 0
@@ -272,6 +277,8 @@ def gate_format(date: str):
 
 
 def gate_toc_rtl_footer(date: str):
+    if print_pipeline_disabled():
+        return True, ("الطباعة معطّلة بطلب المالك — بند الطباعة غير مانع ولا يُحتسب أثر قديم"), False
     pdf = SITE / "dist" / "reports" / "pdf" / f"{date}.pdf"
     info = subprocess.run(["pdfinfo", str(pdf)], capture_output=True, text=True).stdout
     m = re.search(r"Pages:\s+(\d+)", info)
@@ -298,6 +305,8 @@ def gate_toc_rtl_footer(date: str):
 
 
 def gate_docx(date: str):
+    if print_pipeline_disabled():
+        return True, ("الطباعة معطّلة بطلب المالك — بند الطباعة غير مانع ولا يُحتسب أثر قديم"), False
     d = B / "reports" / "docx"
     cands = sorted(d.glob(f"*{date}*.docx"), key=lambda p: p.stat().st_mtime, reverse=True)
     if not cands and print_pipeline_disabled():
