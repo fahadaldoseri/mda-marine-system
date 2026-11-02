@@ -1,5 +1,12 @@
-drift brain/tools/audit_style_coverage.py
-drift brain/sections/10-sources.md
-drift brain/sections/40-blocks.md
+drift brain/tools/qa_gates.py
+drift brain/tools/build_vocab_gate.py
+drift brain/sections/20-lexicon.md
+drift brain/appendices/forbidden-coinages.json
+drift brain/appendices/simplified-vocabulary.json
+drift brain/appendices/writing-rules.json
 drift site/sources/i18n/en/glossary.json
 drift skills/SKILL.md
+drift skills/SKILL.md
+drift skills/SKILL.md
+drift skills/SKILL.md
+new brain/validators/check_vocab_chain.py
