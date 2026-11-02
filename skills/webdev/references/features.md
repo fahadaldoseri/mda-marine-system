@@ -6,10 +6,10 @@ pages own their interfaces and application-level prerequisites.
 ## Schema and defaults
 
 `PUT <config-plane>/config/features` takes `{"features": {...}}`. The only accepted keys
-are optional booleans `server` and `database`; unknown keys are rejected.
+are optional booleans `server`, `database`, and Web-only `redis`; unknown keys are rejected.
 
 For **Web projects**, both templates (`flexible` and `web-db-user`) use the same resource
-selection in Cloud and Local. New projects start with both capabilities off:
+selection in Cloud and Local. New projects start with every capability off:
 
 | Declaration | Effective server | Effective managed database |
 | --- | --- | --- |
@@ -21,20 +21,21 @@ selection in Cloud and Local. New projects start with both capabilities off:
 
 On later Web config writes, omitted feature keys preserve their existing effective values;
 they neither request a new database nor remove an existing capability. This applies to both
-whole-document and features-domain writes. Requesting `database: true` while omitting server
-also enables server if needed. A successful config response includes a `note` when that call
-automatically enabled server; initialization reports the dependency in its tool result.
-Explicit `database: true, server: false` is invalid (`needs_server_true`).
+whole-document and features-domain writes. Requesting `database: true` or `redis: true` while
+omitting server also enables server if needed. A successful config response includes a `note`
+when that call automatically enabled server; initialization reports the dependency in its tool
+result. Explicitly pairing either with `server: false` is invalid (`needs_server_true`).
 
-Game and Mobile retain their existing policies. Game initializes with both off and supports
-later upgrades through config; its features-domain writes replace the declaration and
-`server: true` with omitted database still enables both. Declare both values explicitly for
-Game upgrades. Mobile initializes with both on and requires both to remain on.
+Game and Mobile retain their existing policies and do not support `redis`. Game initializes
+with both off and supports later upgrades through config; its features-domain writes replace the
+declaration and `server: true` with omitted database still enables both. Declare both values
+explicitly for Game upgrades. Mobile initializes with both on and requires both to remain on.
 
-All managed capabilities are **one-way enablement**. An explicit request to disable an enabled
-capability is rejected as `managed_feature_disable_unsupported` or an `invalid_value` field
-error on `features.*`. Stored historical declarations retain their effective meaning; editing
-a Web project does not delete its existing managed resources.
+`server` and `database` are **one-way enablement**. An explicit request to disable either once
+enabled is rejected as `managed_feature_disable_unsupported` or an `invalid_value` field error on
+`features.*`. Stored historical declarations retain their effective meaning; editing a Web
+project does not delete its existing managed resources. Managed Redis is the exception:
+`redis: false` turns it off and deletes its instance, following [Redis](redis.md#turning-redis-off).
 
 ## What enablement changes
 
@@ -46,6 +47,8 @@ a Web project does not delete its existing managed resources.
 - `database` provisions the managed MySQL capability. It does not create application tables,
   migrations, or a migration tool. The database's connection, data scope, and interaction with
   a user-supplied database are in [database](database.md).
+- `redis` provisions one managed Redis instance per project. Its costs, data loss, connection
+  and recovery are in [Redis](redis.md).
 - Accepted enablement provisions the capability and supplies its platform values.
   `feature_reconcile_in_progress` identifies provisioning already in flight. A stored
   declaration, provisioning completion, and a running process's environment are distinct states.
@@ -61,8 +64,8 @@ not itself require reading either capability's usage guide when the task does no
 ## Declaration procedure
 
 Read the relevant capability contract before declaring it; do not guess unsupported feature
-keys or copy a remembered legacy schema. Warn the user that managed enablement is one-way
-before asking the owner to enable it. Keep an enabled feature on after a refused disable;
+keys or copy a remembered legacy schema. Warn the user that server and database enablement is one-way
+before asking the owner to enable them. Keep an enabled feature on after a refused disable;
 if the requested product needs a separate configuration that cannot be represented by this
 project, explain that boundary rather than looping on the same disable request.
 
@@ -76,6 +79,7 @@ atomically. Do not try repeated deploy writes before satisfying that prerequisit
 Before any managed database write, read [database](database.md): development and published
 application share that database. Declaring `database: false` is for a project that has not
 already enabled it, not a way to dismantle a live managed database.
+Before enabling Redis, read [Redis](redis.md).
 
 Prepare a [static build](build-contracts.md#static-build) declaration as soon as the site builds, and a
 [container deploy](build-contracts.md#container-build) declaration with its committed Dockerfile when the

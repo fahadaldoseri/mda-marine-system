@@ -175,8 +175,8 @@ resubmit.
 - `secret_revision_invalid` — new declarations carry `revision: 1`; a replacement is exactly
   `+1` ([config/secrets](secrets.md)).
 - `value_too_large` / `required` — the submitted value is over the size cap / empty.
-- `managed_feature_disable_unsupported` / `invalid_value` on `features.*` — a managed
-  capability cannot be turned off; keep it declared or, when the user wants a separate project, create one through its supported new-project entry. Do not rename/re-init inside an already-bound Session to bypass the refusal.
+- `managed_feature_disable_unsupported` / `invalid_value` on `features.*` — server or the
+  managed database cannot be turned off; keep it declared or, when the user wants a separate project, create one through its supported new-project entry. Do not rename/re-init inside an already-bound Session to bypass the refusal.
 - `stripe_key_shape_invalid` / `stripe_key_rejected` / `stripe_key_check_unavailable` — the
   owner-supplied Stripe key is malformed / rejected by Stripe / unverifiable right now
   ([Stripe](payments.md)).

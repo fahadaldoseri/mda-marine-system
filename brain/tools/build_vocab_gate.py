@@ -199,6 +199,27 @@ def fail(msg: str, code: int = 2) -> None:
     sys.exit(code)
 
 
+
+def _chain_guard(entries, banned_terms=None) -> list[str]:
+    """حارس سلسلة الاستبدال (ك-470): لا يكون بديل لفظٍ ممنوعًا هو نفسه.
+
+    السبب المثبت 2026-11-02: كان «المصادر المستشهد بها» يُستبدل بـ«المصادر المذكورة»،
+    وهو نفسه ممنوع يُستبدل بـ«المصادر المستخدمة»؛ فتطبيق البديل الأول يُنتج نصًا تمنعه البوابة
+    ويعيد الكتلة كلها. الحكم على «البديل ممنوع؟» يُشتق من حالات السجل (approved) لا من قائمة يدوية.
+    """
+    banned = {str(x).strip() for x in (banned_terms or []) if str(x).strip()}
+    if not banned:
+        banned = {str(e.get("term", "")).strip() for e in entries if e.get("term")}
+    out: list[str] = []
+    for e in entries:
+        reps = e.get("plain") or ([e.get("replacement")] if e.get("replacement") else [])
+        for r in reps:
+            r = str(r).strip()
+            if r and r in banned:
+                out.append(f"{e.get('term')} → {r}")
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="بناء بوابة المفردات من السجل الحاكم")
     g = ap.add_mutually_exclusive_group()

@@ -256,9 +256,10 @@ all-write lock. Conflicting keys, dependencies and whole-document replacement wa
 `unblock`; do not retry. `action_url` alone does not mean stop: follow Host pause/notifications.
 Stripe claim is non-blocking. Completion applies the change; do not repeat a completed replacement.
 
-Web `features` accepts only `server` and `database`. Both start off; later omitted keys preserve
-effective values. `server:true` does not request a database. `database:true` also enables server
-when omitted; explicitly pairing it with `server:false` is invalid. Enablement is one-way.
+Web `features` accepts only `server`, `database` and `redis`. All start off; later omitted keys
+preserve effective values. `server:true` does not request a database. `database:true` or
+`redis:true` also enables server when omitted; explicitly pairing either with `server:false` is
+invalid. Server/database enablement is one-way; Redis can be turned off.
 For requested Manus login select server during init, then read Authentication before implementation.
 Game/Mobile retain their distinct [feature policies](references/features.md).
 
@@ -411,6 +412,7 @@ implementation, verification and delivery. Cross-links locate owners.
 | [Service API](references/service-api.md) | Shared URLs, credentials, HTTP/RPC and errors for LLM, Images, Speech, Maps, API hub, Storage, Owner notifications and schedule-management RPCs. Owns platform signing names; independent keys use Secrets, build availability uses the main deployment contract. OAuth/Database/Stripe have separate transports. |
 | [Authentication](references/authentication.md) | Any login, including self-managed email/password: application sessions, roles and cross-site Preview cookies. Manus OAuth is the default only when no provider is specified. Requires Server; user/role records use Database, independent credentials use Secrets, Preview proxy uses Runtime. |
 | [Database](references/database.md) | Managed MySQL, migrations and shared development/published data; requires Server. No application tables or ownership model are supplied. External DSNs use Secrets; unusual startup preparation uses Build contracts. |
+| [Redis](references/redis.md) | Managed Redis for disposable caches or reconstructible state; requires Server. Billed to the Cloud balance per command; data is deleted when the Cloud balance runs out. Durable records use Database; user-supplied Redis uses Secrets. |
 | [Storage](references/storage.md) | Service API transfers and durable `/manus-storage/` paths. Stable Cloud Preview and published routing are platform-owned; direct dev-port reads bypass that route. Database owns indexes, Authentication access; Runtime Images need transfer, Agent images already exist, and LLM inputs may need signed downloads. |
 | [LLM](references/llm.md) | Built-in Manus AI is the default for requested AI text/chat generation. It uses project-provided credentials; no separate model-provider account or key is required. Read with Service API for chat completions, models, structured output and streaming. File/image inputs must be fetchable; Storage owns private-asset access. Responses do not persist conversations or implement accounts. |
 | [Images](references/images.md) | Service API generation/editing and model catalog. Returns URL/base64, not a durable asset; persistence belongs to Storage. Agent artwork has a different managed-asset result. |
@@ -421,7 +423,7 @@ implementation, verification and delivery. Cross-links locate owners.
 | [Scheduled work](references/scheduled-work.md) | Published callbacks, retries and task identity. Callback authentication is self-contained. Management RPCs use Service API; task associations use Database; AI work uses LLM. Publication uses Git/checkpoints; lifecycle/routes use the main deployment contract. |
 | [Payments](references/payments.md) | Stripe provisioning, checkout, webhooks and live handoff; requires Server. App identity/entitlements use Authentication/Database. User-input keys use Secrets; advanced declarations/pending state use Configuration. Mutually exclusive with Shopify. |
 | [Shopify](references/shopify.md) | Storefront stack, store choice, Admin and claim flow; relevant before init/stack selection. Excludes Stripe. Product-image assets use Storage; independent credentials use Secrets. |
-| [Secrets](references/secrets.md) | User-input keys, separate signing secrets and external DSNs; declaration/card/environment scopes. Managed values belong to Authentication, Service API, Payments or Database. Advanced imports/pending state use Configuration. |
+| [Secrets](references/secrets.md) | User-input keys, separate signing secrets and external DSNs; declaration/card/environment scopes. Managed values belong to Authentication, Service API, Payments, Database or Redis. Advanced imports/pending state use Configuration. |
 | [SEO](seo/SKILL.md) | Initial HTML, metadata, panel thresholds and gateway sitemap/robots. Build contracts cover special build placement; Routing and responses covers HTML, CSP and caching. |
 | [Site settings](references/site-settings.md) | Analytics and badge. |
 | [PWA](references/pwa.md) | Manifest ownership. |
@@ -443,10 +445,10 @@ implementation, verification and delivery. Cross-links locate owners.
 | [Diagnostics](references/diagnostics.md) | Custom LSP, native settings/reload, failed checking, recovery, published logs and the live version. Configuration and Errors own config/error envelopes. |
 | [Build contracts](references/build-contracts.md) | Nonstandard toolchains, build/startup failures and focused reproduction. Service variables: Service API; policy: Hosting; logs: Diagnostics; process-independent work: Scheduled work; HTTP: Routing and responses; rendering: SEO; advanced writes: Configuration. |
 | [Routing and responses](references/routing-and-responses.md) | HTML transformation, CSP, advanced caching and route failures. Configuration owns advanced writes and rejected-operation state. |
-| [Features](references/features.md) | Provisioning and non-Web policies. Use follows Database, Authentication, Payments and Secrets; advanced state uses Configuration, build shape uses Build contracts. |
+| [Features](references/features.md) | Provisioning and non-Web policies. Use follows Database, Redis, Authentication, Payments and Secrets; advanced state uses Configuration, build shape uses Build contracts. |
 | [Errors](references/errors.md) | Concrete error-code lookup pointing directly to its contract/recovery section; do not preload. |
 | [Project background](references/project.md) | Rare unresolved init/attach, Sandbox or legacy failures; never preload for ordinary work. |
 
-Read [setup](references/game-setup.md) before init. Follow the recorded engine: Three.js uses its starter receipt and Web build/checkpoints; Godot uses its [workflow](references/game-workflow.md). Both require [Game sharing](references/game-sharing.md) before metadata/OG work or `game/sharing` writes, and [in-place, seamless 3D animation loops](references/game-assets.md#continuous-animation-and-alignment).
+Read [setup](references/game-setup.md) before init. Follow the recorded engine: Three.js uses its starter receipt and Web build/checkpoints; Godot uses its [workflow](references/game-workflow.md). Both require [Game sharing](references/game-sharing.md) before metadata/OG work or `game/sharing` writes, and [travel-facing, root-pinned, seamless 3D animation](references/game-assets.md#continuous-animation-and-alignment).
 
 For Godot, read [Game Tweak language](references/game-runtime.md#tweak-presentation-language) before creating or editing Tweak parameters, including existing projects and after context loss.

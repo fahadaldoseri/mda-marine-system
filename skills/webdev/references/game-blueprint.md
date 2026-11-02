@@ -121,6 +121,7 @@ Disclose conflicts with requested mockups; never skip them to bypass approval.
 
 Reuse blueprintId through stages/retries, updating existing cards; never re-prepare/tool-poll. Each new run, including
 background continuations, closes older unanswered Blueprints in this session; follow the saved receipt.
+After approval, explicit direction changes follow [Blueprint updates](game-blueprint-update.md).
 
 ## Online features
 
