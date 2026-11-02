@@ -44,7 +44,7 @@ def print_disabled() -> bool:
     """هل خط الطباعة معطّل بطلب المالك في المانيفست الحاكم؟ (استثناء معلن لا إخفاء عطل)"""
     try:
         rb = json.loads((B / "runbook" / "runbook.json").read_text(encoding="utf-8"))
-    except Exception:
+    except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError):
         return False
     if isinstance(rb.get("print"), dict) and rb["print"].get("disabled") is True:
         return True

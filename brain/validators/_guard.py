@@ -8,6 +8,9 @@
     if __name__ == "__main__":
         from _guard import run      # أو: from validators._guard import run
         run(main)
+
+تنبيه: إن عرّف المدقق دالة باسم run في الملف نفسه، فاستورد الحارس باسم بديل
+(from _guard import run as guard_run) لتفادي تعارض الاسم — وهو عطل مُسجّل ك-389.
 """
 from __future__ import annotations
 

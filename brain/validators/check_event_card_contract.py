@@ -12,7 +12,7 @@
 - تماثل بنيوي بين النسخة العربية والإنجليزية: العدد والرموز والصفوف.
 
 الاستعمال:
-  python3 validators/check_event_card_contract.py --date 2026-11-01 --site /home/ubuntu/seawatch
+  python3 validators/check_event_card_contract.py --date 2026-11-01 --site "$SITE"
   python3 validators/check_event_card_contract.py --date 2026-11-01 --page /path/page.html --json
 
 رموز الخروج: 0 مطابق · 2 منع · 70 انهيار المدقق.

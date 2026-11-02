@@ -322,7 +322,7 @@ def _arabic_counter(text: str) -> tuple[int, str] | None:
         (r"(?:^|\s)لا\s+(بنود|تحذيرات)(?=\s|$|·)", 0),
         (r"(?:^|\s)(بند|تحذير)\s+واحد(?=\s|$|·)", 1),
         (r"(?:^|\s)(بندان|تحذيران)(?=\s|$|·)", 2),
-        (r"(?:^|\s)([3-9]\d*)\s+(بنود|تحذيرات)(?=\s|$|·)", None),
+        (r"(?:^|\s)([3-9]\d*|\d{2,})\s+(بنود|تحذيرات)(?=\s|$|·)", None),
     )
     for pattern, fixed in patterns:
         match = re.search(pattern, value)

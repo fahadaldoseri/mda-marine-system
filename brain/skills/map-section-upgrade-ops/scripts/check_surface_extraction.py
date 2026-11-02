@@ -5,10 +5,12 @@
 نصّ في مرجع بيانات لا يظهر في الصفحة. هذا السكربت يعيد إنتاج ذلك القياس.
 """
 from __future__ import annotations
+
+import os
 import argparse, json, pathlib, subprocess, sys
 
-BRAIN = pathlib.Path("/home/ubuntu/brain-marine-news")
-SITE = pathlib.Path("/home/ubuntu/seawatch")
+BRAIN = pathlib.Path(os.environ.get("BRAIN") or os.environ.get("BRAIN_DIR") or ".")
+SITE = pathlib.Path(os.environ.get("SITE") or os.environ.get("SITE_DIR") or "seawatch")
 
 
 def flatten(obj, out: list[str]) -> None:

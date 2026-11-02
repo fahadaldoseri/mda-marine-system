@@ -217,9 +217,24 @@ def load_day(date: str) -> list[dict] | None:
     return data
 
 
+ABSENCE_CLASSES = {"no_incident", "سجل دولي", "سجل مصدر مهني"}
+
+
 def is_unconfirmed_narrative(row: dict) -> bool:
-    """يميز الرواية غير المؤكدة عن كل نقل غير مؤكد أو سجل عدم وقوع."""
-    return row.get("confirmation") == "unconfirmed" and str(row.get("title", "")).startswith("رواية ")
+    """رواية غير مؤكدة: صف غير مؤكد يصف واقعة أو ادعاءً.
+
+    يستند إلى حقل `class` في الدفتر لا إلى نص العنوان:
+    تُستبعد سجلات انعدام الواقعة (`no_incident` · سجل دولي · سجل مصدر مهني)
+    والتصريحات السياسية، لأنها ليست روايات عن واقعة بحرية.
+    """
+    if row.get("confirmation") != "unconfirmed":
+        return False
+    cls = str(row.get("class", "")).strip()
+    if cls in ABSENCE_CLASSES:
+        return False
+    if "سياسي" in cls:
+        return False
+    return True
 
 
 def classify_day(date: str, reg, scale, levels, ovr, *, carry: bool = True) -> dict:
@@ -308,10 +323,15 @@ def classify_day(date: str, reg, scale, levels, ovr, *, carry: bool = True) -> d
         "confirmed": len({r["incident_group"] for r in rows if r["qualifying"] and r["confirmation"] == "confirmed"}),
         "probable": len({r["incident_group"] for r in rows if r["qualifying"] and r["confirmation"] == "probable"}),
         "unconfirmed_qualifying": len({r["incident_group"] for r in rows if r["qualifying"] and r["confirmation"] == "unconfirmed"}),
-        "unconfirmed_total": len({r["incident_group"] for r in rows if is_unconfirmed_narrative(r)}),
+        "unconfirmed_total": len({r["incident_group"] for r in rows if is_unconfirmed_narrative(r)}),  # noqa: E501
         "excluded": len([r for r in rows if not r["qualifying"] and not r["nonspatial"]]),
         "nonspatial": len([r for r in rows if r["nonspatial"]]),
     }
+
+    if counter["unconfirmed_qualifying"] > counter["unconfirmed_total"]:
+        raise FailClosed(
+            "تناقض عدّادي: روايات مؤهّلة " + str(counter["unconfirmed_qualifying"])
+            + " أكثر من إجمالي الروايات " + str(counter["unconfirmed_total"]))
     top_basis = f"أعلى نطاق: {overall['name']} — {overall['basis']}"
     return {
         "date": date,

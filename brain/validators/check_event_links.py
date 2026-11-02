@@ -31,7 +31,7 @@ def load() -> list[dict]:
     for f in sorted(DAILY.glob("*.json")):
         try:
             data = json.loads(f.read_text(encoding="utf-8"))
-        except Exception as exc:
+        except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError) as exc:
             print(f"   ✘ ملف يومي تالف: {f.name} — {exc}")
             continue
         for r in data if isinstance(data, list) else []:
@@ -57,7 +57,7 @@ def main() -> int:
         try:
             j = json.loads(FROZEN.read_text(encoding="utf-8"))
             frozen_ids = {str(e.get("event_id") or "") for e in j.get("events", [])}
-        except Exception:
+        except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError):
             pass
     known = codes | frozen_ids
 
@@ -94,4 +94,7 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    import sys as _sys, pathlib as _pl
+    _sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)

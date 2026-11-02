@@ -68,7 +68,7 @@ def _imo_reference_line() -> str:
     date_label = f"{parsed.day} {AR_MONTHS[parsed.month]} {parsed.year}"
     return (
         '<p class="hmap-imo-reference" data-source="imo-incidents.json">'
-        '<span>هجمات مؤكدة على سفن (IMO):</span> '
+        '<span>هجمات مؤكدة على سفن <bdi class="bidi" dir="ltr">(IMO)</bdi>:</span> '
         f'<bdi class="bidi" dir="ltr">{confirmed}</bdi> · '
         f'<span>آخر تحديث</span> <bdi class="bidi" dir="ltr">{date_label}</bdi>'
         '</p>'
@@ -89,7 +89,7 @@ DESIGN_TOKENS = """
   --ink:#e9f0f9;
   --ink-2:#c3d2e6;
   --muted:#8ba0bd;
-  --faint:#5f7899;
+  --faint:#86AEDE;
   --accent:#22c3b6;
   --accent-ink:#04120f;
   --info:#4d9dff;
@@ -277,7 +277,7 @@ a.bidi{white-space:normal}
   width:34px;height:34px;border-radius:10px;flex:0 0 auto;display:grid;place-items:center;
   background:rgba(34,195,182,.10);border:1px solid var(--line-2);color:var(--accent)
 }
-.brand-mark svg{width:19px;height:19px}
+.brand-mark svg{width:21px;height:21px;line-height:21px;height:19px}
 .brand-title{font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:15px;line-height:1.4}
 .brand-sub{font-size:12px;color:var(--muted);line-height:1.4}
 .topbar-spacer{flex:1 1 auto}
@@ -333,7 +333,7 @@ a.bidi{white-space:normal}
 .kpi.acc-danger em{background:var(--danger)}
 .kpi.acc-ok em{background:var(--ok)}
 .kpi .k-l{font-size:12.5px;color:var(--muted);line-height:1.6;min-height:2.6em}
-.kpi .k-tag{display:inline-block;margin-inline-start:6px;padding:1px 7px;border:1px solid var(--line-2);border-radius:999px;color:var(--ink-2);font-size:11px;line-height:1.4;white-space:nowrap}
+.kpi .k-tag{display:inline-block;margin-inline-start:6px;padding:1px 7px;border:1px solid var(--line-2);border-radius:999px;color:var(--ink-2);font-size:12px;line-height:1.4;white-space:nowrap}
 .kpi .k-v{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:30px;line-height:1.25;margin-top:3px;font-variant-numeric:tabular-nums;text-align:right;direction:rtl}
 .kpi .k-lays{display:flex;flex-wrap:wrap;gap:4px 10px;margin:4px 0 0;font-size:12.5px;color:var(--muted)}
 .k-lay{display:inline-flex;gap:4px;align-items:baseline}
@@ -389,7 +389,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
 .card{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:16px 18px}
 .card-head{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px}
 .card-head h3{font-family:"Noto Kufi Arabic",sans-serif;font-size:16px;font-weight:600;margin:0;line-height:1.6;color:var(--ink)}
-.tag{font-size:11.5px;border-radius:999px;padding:3px 10px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--panel-3);white-space:nowrap}
+.tag{font-size:12.5px;border-radius:999px;padding:3px 10px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--panel-3);white-space:nowrap}
 .tag.t-confirm{color:#ffd7d3;background:rgba(255,93,82,.16);border-color:rgba(255,93,82,.42)}
 .tag.t-suspect{color:#ffe6bd;background:rgba(255,176,46,.15);border-color:rgba(255,176,46,.40)}
 .tag.t-inter{color:#d5e6ff;background:rgba(77,157,255,.15);border-color:rgba(77,157,255,.40)}
@@ -428,7 +428,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .map-svg{display:block;width:100%;height:auto;max-width:100%}
 .mp-sea-bg{fill:var(--map-sea)}
 .mp-grid line{stroke:var(--map-grid);stroke-width:.7;vector-effect:non-scaling-stroke}
-.mp-grid-lbl{font-family:"IBM Plex Mono",monospace;font-size:11px;fill:var(--map-grid-lbl);direction:ltr;unicode-bidi:isolate}
+.mp-grid-lbl{font-family:"IBM Plex Mono",monospace;font-size:12px;fill:var(--map-grid-lbl);direction:ltr;unicode-bidi:isolate}
 .mp-land path{fill:var(--map-land);stroke:var(--map-coast);stroke-width:1.2;vector-effect:non-scaling-stroke}
 .mp-borders path{fill:none;stroke:var(--map-border);stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke}
 .mp-places text{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic",sans-serif;dominant-baseline:middle;text-anchor:middle}
@@ -470,13 +470,13 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .map-keys{font-size:12.5px;color:var(--faint);margin:12px 0 0}
 .map-legend{list-style:none;display:grid;gap:7px;margin:14px 0 0;padding:0}
 .map-legend li{display:flex;gap:10px;align-items:baseline;font-size:13.5px;color:var(--ink-2);margin:0}
-.lg-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;color:#fff;background:var(--mk);border-radius:999px;width:19px;height:19px;display:grid;place-items:center;flex:0 0 auto}
+.lg-num{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:#fff;background:var(--mk);border-radius:999px;width:19px;height:19px;flex:0 0 auto;display:grid;place-items:center;flex:0 0 auto}
 /* ---------- خريطة الشاشة العليا: للشاشة فقط، تُحجب في الطباعة وWord بصنف no-print ---------- */
 .hero-map{margin:22px 0 6px}
 .hmap,.hmap-panel{margin:0;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:18px}
 .hmap h3,.hmap-panel h3{margin:0 0 14px;font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:15px;color:var(--ink-2)}
 .hmap .blk-lede{display:none}
-.hmap-keys{font-size:11.5px;line-height:1.65;color:var(--muted);margin:8px 0 0}
+.hmap-keys{font-size:12.5px;line-height:1.65;color:var(--muted);margin:8px 0 0}
 .hmap .map-key,.hmap-panel .map-key{margin-top:10px}
 .hmap-wrap{position:relative;border:1px solid var(--line-2);border-radius:var(--radius-sm);overflow:hidden;background:var(--map-sea)}
 /* التكبير بجانب الخريطة لا فوقها: الشريحة كانت تحجب الخليج العربي (البحرين وقطر) */
@@ -538,7 +538,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 }
 /* ---------- الاستشهادات ---------- */
 .cite-ref{
-  display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:11.5px;
+  display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:12.5px;
   color:var(--accent);background:rgba(34,195,182,.10);border:1px solid rgba(34,195,182,.34);
   border-radius:6px;padding:0 5px;margin-inline-start:3px;vertical-align:1px
 }
@@ -562,20 +562,20 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .ev-top{display:flex;align-items:center;gap:8px;margin-bottom:9px;flex-wrap:wrap}
 .ev-idx{font-variant-numeric:tabular-nums;font-size:12px;line-height:1;color:var(--muted);border:1px solid var(--line-2);border-radius:6px;padding:3px 6px}
 .ev-code{font-size:12px;color:var(--muted);letter-spacing:.02em}
-.ev-badge{margin-inline-start:auto;font-size:11.5px;line-height:1;padding:4px 10px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2)}
+.ev-badge{margin-inline-start:auto;font-size:12.5px;line-height:1;padding:4px 10px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2)}
 .ev.b-official .ev-badge{border-color:rgba(34,195,182,.45);color:var(--ok)}
 .ev.b-media .ev-badge{border-color:rgba(217,164,65,.5);color:#e0b45f}
 .ev.b-deny .ev-badge{border-color:rgba(214,86,86,.45);color:#e88}
-.ev-reliability{margin-inline-start:6px;font-size:11.5px;line-height:1;padding:4px 10px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2);white-space:nowrap}
+.ev-reliability{margin-inline-start:6px;font-size:12.5px;line-height:1;padding:4px 10px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2);white-space:nowrap}
 .ev-reliability[data-reliability="عالية"]{border-color:rgba(34,195,182,.4);color:#7fd7cf}
 .ev-reliability[data-reliability="منخفضة"]{border-color:rgba(214,86,86,.35);color:#e0a0a0}
 .ev-fold{margin-top:5px;font-size:12px;line-height:1.7;color:var(--muted)}
-.ev-fold>summary{cursor:pointer;color:var(--info);font-size:11.5px}
+.ev-fold>summary{cursor:pointer;color:var(--info);font-size:12.5px}
 .ev-fold>span{display:block;margin-top:3px;color:var(--ink-2);word-break:break-word}
-.ev-fold>.ev-path{display:block;margin-top:3px;font-size:11.5px;color:var(--muted);word-break:break-all;direction:ltr;unicode-bidi:isolate}
+.ev-fold>.ev-path{display:block;margin-top:3px;font-size:12.5px;color:var(--muted);word-break:break-all;direction:ltr;unicode-bidi:isolate}
 .ev-what{margin:0;font-size:15.5px;line-height:1.8;color:var(--ink)}
 .ev-meta{margin:10px 0 0;padding-top:8px;border-top:1px dashed var(--line);font-size:12.5px;line-height:1.75;color:var(--muted)}
-.ev-meta .ev-k{display:block;font-size:11.5px;color:var(--muted);opacity:.85;margin-bottom:2px}
+.ev-meta .ev-k{display:block;font-size:12.5px;color:var(--muted);opacity:.85;margin-bottom:2px}
 .ev-meta .ev-mv{display:block;color:var(--ink-2)}
 .ev-field{margin:4px 0}
 .ev-branch{margin:12px 0 0;padding:10px 12px;border:1px solid rgba(77,157,255,.38);border-inline-start:3px solid var(--info);border-radius:8px;background:rgba(77,157,255,.06);font-size:12.5px;line-height:1.75}
@@ -588,11 +588,11 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .dg-top{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
 .dg-idx{font-variant-numeric:tabular-nums;font-size:12px;color:var(--muted);border:1px solid var(--line-2);border-radius:6px;padding:1px 6px}
 .dg-t{font-size:14px;color:var(--ink)}
-.dg-badge{margin-inline-start:auto;font-size:11.5px;line-height:1;padding:4px 10px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2)}
+.dg-badge{margin-inline-start:auto;font-size:12.5px;line-height:1;padding:4px 10px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2)}
 .dg-body{margin:0 0 9px;font-size:13.5px;line-height:1.85;color:var(--ink-2)}
 .dg-meta{display:flex;flex-direction:column;gap:5px;margin:0;padding-top:8px;border-top:1px dashed var(--line)}
 .dg-f{display:grid;grid-template-columns:auto 1fr;gap:2px 8px;font-size:12.5px;line-height:1.7}
-.dg-k{color:var(--muted);font-size:11.5px;opacity:.9}
+.dg-k{color:var(--muted);font-size:12.5px;opacity:.9}
 .dg-v{color:var(--ink-2)}
 @media (max-width:820px){.dg-grid{grid-template-columns:1fr}}
 
@@ -2066,9 +2066,11 @@ def _official_warning_texts(section):
 def _card_targets(all_sections, report_sections, meta, defs, report_date):
     """Measure the exact rendered targets used by the three card rows."""
     warning_title = "التحذيرات والتنبيهات النشطة"
+    # عنوان تاريخي محفوظ في إصدارات مؤرشفة ومجمّدة البصمة؛ يُقبل للتحديد فقط ولا يُكتب في أي سطح جديد.
+    legacy_warning_titles = ("التحذيرات والنشرات الرسمية",)
     watch_section_title = "المراقبة المستمرة"
     watch_title = "المراقبة المستمرة"
-    warning_sec = next((x for x in all_sections if x["title"] == warning_title), None)
+    warning_sec = next((x for x in all_sections if x["title"] == warning_title or x["title"] in legacy_warning_titles), None)
     watch_sec = next((x for x in all_sections if x["title"] == watch_section_title), None)
     changes_html = BLK.changes_block(meta.get("changes"), lambda x: inline(x, defs))
     changed_count = len(re.findall(r'<li class="chg\b', changes_html))
@@ -2079,7 +2081,7 @@ def _card_targets(all_sections, report_sections, meta, defs, report_date):
     # كتلة «ما تغيّر» هي sec-00 وتأتي قبل أقسام السياسة؛ جسم الإضافات يبدأ من sec-01.
     addition_ids = {sec["title"]: f"sec-{idx + 1:02d}" for idx, sec in enumerate(addition_sections)}
     changed_anchor = addition_ids.get("ما تغيّر", "sec-00")
-    warning_anchor = addition_ids.get(warning_title, "sec-01")
+    warning_anchor = addition_ids.get(warning_sec["title"] if warning_sec else warning_title, "sec-01")
     watch_anchor = addition_ids.get(watch_section_title, "sec-04")
     return {
         "changed_count": changed_count,

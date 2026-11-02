@@ -116,7 +116,7 @@ SECTOR_LEVEL_AR = {
 # نظام فصل الملاحة المعتمد في مضيق هرمز (المنظمة البحرية الدولية، Ships' Routeing):
 # شريطا مسار بين 56.22°E و56.70°E — يُرسم تفصيليًا في لوحة التكبير فقط.
 TSS_MAIN = [(56.22, 26.62), (56.70, 26.62), (56.70, 26.24), (56.22, 26.24)]
-TSS_ATTRIB = ("نظام فصل الملاحة المعتمد في مضيق هرمز (IMO Ships' Routeing، 1968) · "
+TSS_ATTRIB = ("نظام فصل الملاحة المعتمد في مضيق هرمز · IMO Ships' Routeing 1968 · "
               "مصدر الرسم: audit-2026-10-30/imo-tss/imo-tss-derived.json")
 _ACTIVE_ZONES = []
 _ACTIVE_TIMELINE = []
@@ -208,6 +208,21 @@ def _tss_main_svg(points):
     return svg, note
 
 
+_AR_CONF = {"confirmed": "مؤكد", "probable": "مرجّح", "unconfirmed": "غير مؤكد",
+            "مؤكد": "مؤكد", "مرجّح": "مرجّح", "غير مؤكد": "غير مؤكد"}
+_AR_PREC = {"exact": "دقيق", "approximate": "تقريبي", "دقيق": "دقيق", "تقريبي": "تقريبي"}
+
+
+def _ar_conf(v) -> str:
+    v = str(v or "").strip()
+    return _AR_CONF.get(v.lower(), v or "غير محدد")
+
+
+def _ar_prec(v) -> str:
+    v = str(v or "").strip()
+    return _AR_PREC.get(v.lower(), v or "تقريبي")
+
+
 def _alt_block(points, zones, timeline):
     """بديل نصي كامل للخريطة (قارئ الشاشة) — سطر مستقل لكل عنصر ليكون قابلًا للترجمة."""
     items = []
@@ -218,8 +233,8 @@ def _alt_block(points, zones, timeline):
         code = short_code(p.get("code") or "", REPORT_DATE) or f"{i:02d}"
         items.append(
             f'الواقعة {code} — المنطقة {p.get("area") or "غير محددة"}، '
-            f'الصفة {p.get("class") or "غير محددة"}، الإثبات {p.get("confirmation") or "غير محدد"}، '
-            f'الموضع {p.get("precision") or "تقريبي"}.')
+            f'الصفة {p.get("class") or "غير محددة"}، الإثبات {_ar_conf(p.get("confirmation"))}، '
+            f'الموضع {_ar_prec(p.get("precision"))}.')
     if timeline:
         items.append("الخط الزمني المرصود: " + "؛ ".join(
             f'{t.get("date")} ({t.get("count")} واقعة)' for t in timeline) + ".")
@@ -682,14 +697,14 @@ MAP_KEY_STYLE = """<style>
 .map-key .sw-mark-none{background:transparent;border:2px solid #8aa2ba}
 .map-key .sw-mark-approx{width:14px;height:14px;border-radius:50%;background:transparent;border:2px dashed #cfe3f2;margin:0 5px}
 .map-key .sw-mark-exact{width:14px;height:14px;border-radius:50%;background:#e2554f;border:2px solid #081d31}
-.map-legend .lg-st{border:1px solid #42677f;border-radius:999px;padding:0 6px;font-size:11.5px;color:#cfe3f2;white-space:nowrap}
+.map-legend .lg-st{white-space:normal;border:1px solid #42677f;border-radius:999px;padding:0 6px;font-size:12.5px;color:#cfe3f2}
 .map-legend .lg-st.st-confirm{border-color:#e2554f;color:#f4b8b5}
 .map-legend .lg-st.st-inter{border-color:#e7b23c;color:#f2d79a}
 .map-legend .lg-st.st-suspect{border-color:#4a7fa8;color:#bcd8ec}
-.map-legend .lg-prec{color:#cfe2ee;font-size:11.5px;white-space:nowrap}
+.map-legend .lg-prec{white-space:normal;color:#cfe2ee;font-size:12.5px}
 .map-key .lg-none{grid-column:1 / -1;color:#c3e6f4}
 @media (max-width:760px){.map-key{grid-template-columns:minmax(0,1fr)}}
-.hmap-route-key{display:grid;gap:2px;padding:7px 10px 8px;border-top:1px solid #28405f;background:#0c1626;color:#c3d2e6;font-size:11.5px;line-height:1.45}
+.hmap-route-key{display:grid;gap:2px;padding:7px 10px 8px;border-top:1px solid #28405f;background:#0c1626;color:#c3d2e6;font-size:12.5px;line-height:1.45}
 .hmap-route-key strong{color:#e9f0f9;font-weight:700}
 .hmap-route-key span{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
 .hmap-route-key .rk-sw{display:inline-block;width:22px;height:0;flex:0 0 auto;border-top:2px solid #ff9af5}
@@ -826,7 +841,7 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
             bits.append(f'<bdi class="bidi ev-code">{short_code(code, REPORT_DATE)}</bdi>')
         if ref:
             bits.append(f'<bdi class="bidi">{_esc(ref)}</bdi>')
-        legend.append(f'<li><span class="lg-num" style="--mk:{color}">{sids[i - 1]}</span>{" ".join(bits)}</li>')
+        legend.append(f'<li><span class="lg-num" style="--mk:{color}">{i:02d}</span><bdi class="bidi ev-code">{_esc(sids[i - 1])}</bdi>{" ".join(bits)}</li>')
 
     legend_html = f'<ol class="map-legend">{"".join(legend)}</ol>' if legend else ""
     ev_rows = []

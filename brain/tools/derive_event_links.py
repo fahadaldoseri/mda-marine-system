@@ -70,7 +70,7 @@ def allowed_kinds() -> set[str]:
     try:
         s = json.loads(p.read_text(encoding="utf-8"))
         return set(s["$defs"]["material_record"]["properties"]["incident_kind"].get("enum") or [])
-    except Exception:
+    except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError):
         return {k for k, _ in KIND_WORDS}
 
 
@@ -124,7 +124,7 @@ def frozen_reference_map() -> dict[str, str]:
         return out
     try:
         j = json.loads(p.read_text(encoding="utf-8"))
-    except Exception:
+    except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError):
         return out
     for e in j.get("events", []):
         txt = " ".join([
@@ -154,7 +154,7 @@ def load_days() -> list[tuple[pathlib.Path, list[dict]]]:
     for f in sorted(DAILY.glob("*.json")):
         try:
             data = json.loads(f.read_text(encoding="utf-8"))
-        except Exception as exc:  # ملف تالف يُعلن ولا يُتجاوز
+        except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError) as exc:  # ملف تالف يُعلن ولا يُتجاوز
             print(f"   ✘ تعذّر قراءة {f.name}: {exc}")
             continue
         if isinstance(data, list):
@@ -270,7 +270,7 @@ def derive(days) -> tuple[dict, dict]:
         try:
             _fj = json.loads(_fp.read_text(encoding="utf-8"))
             frozen_ids = {str(e.get("event_id") or "") for e in _fj.get("events", [])}
-        except Exception:
+        except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError):
             frozen_ids = set()
     known |= frozen_ids
     by_vessel: dict[str, str] = {}
