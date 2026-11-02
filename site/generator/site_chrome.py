@@ -48,8 +48,8 @@ background:linear-gradient(150deg,var(--sn-accent),#0c8b83);color:#04120f}
 .sn-links a{padding:6px 8px;min-height:32px;display:inline-flex;align-items:center;border-radius:8px;font-size:13.5px;border:1px solid transparent}
 .sn-links a:hover{background:var(--sn-panel);border-color:var(--sn-line);color:var(--sn-ink)}
 .sn-links a[aria-current="page"]{background:var(--sn-panel);border-color:var(--sn-line);color:var(--sn-ink);font-weight:600}
-.sn-tools{display:flex;align-items:center;gap:8px}
-.sn-scale{display:flex;border:1px solid var(--sn-line);border-radius:9px;overflow:hidden}
+.sn-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;min-width:0}
+.sn-scale{display:flex;flex:0 0 auto;border:1px solid var(--sn-line);border-radius:9px;overflow:hidden}
 .sn-scale button{background:transparent;border:0;color:var(--sn-ink2);padding:5px 8px;min-width:34px;min-height:32px;cursor:pointer;font:inherit;font-size:13px}
 .sn-scale button.on{background:var(--sn-accent);color:var(--sn-accent-ink);font-weight:700}
 .sn-tools button, .sn-tools a, .sn-scale button{min-height:44px;min-width:44px}
@@ -177,7 +177,7 @@ if(p.indexOf('/reports/')===0){
 
 
 LANG_CSS = """
-.sn-lang{display:inline-flex;border:1px solid var(--sn-line);border-radius:9px;overflow:hidden}
+.sn-lang{display:inline-flex;flex:0 0 auto;border:1px solid var(--sn-line);border-radius:9px;overflow:hidden}
 .sn-lang button{background:transparent;border:0;color:var(--sn-ink2);padding:6px 11px;min-height:44px;min-width:44px;
 cursor:pointer;font:inherit;font-size:12.5px;font-weight:700}
 .sn-lang button.on{background:var(--sn-accent);color:var(--sn-accent-ink)}

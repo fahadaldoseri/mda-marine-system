@@ -29,7 +29,7 @@ CSS = """
 .sp-head{margin:18px 0 6px}
 .sp-head h1{font-size:clamp(22px,3.4vw,32px);margin:0 0 8px}
 .sp-head p{color:var(--ink2);font-size:14.5px;line-height:1.8;margin:0}
-.sx-badge{font-size:11px;padding:1px 6px;border:1px solid var(--line);border-radius:999px;white-space:nowrap;opacity:.85}
+.sx-badge{font-size:12px;padding:1px 6px;border:1px solid var(--line);border-radius:999px;white-space:nowrap;opacity:.85}
 .sx-note{background:var(--panel);border:1px solid var(--line);border-radius:12px;
   padding:10px 14px;margin:14px 0;font-size:13.5px;color:var(--ink2)}
 .sx-h2{font-size:17px;margin:26px 0 10px;padding-inline-start:10px;border-inline-start:3px solid var(--accent)}
@@ -44,7 +44,7 @@ CSS = """
 .dx-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:9px;margin:10px 0 12px}
 .dx-tile{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:10px 12px;text-align:center}
 .dx-tile b{display:block;font-size:22px;line-height:1.25}
-.dx-tile span{font-size:11.5px;color:var(--muted)}
+.dx-tile span{font-size:12.5px;color:var(--muted)}
 .dx-ok b{color:#3fbf8f}.dx-lim b{color:#d8a83a}.dx-bad b{color:#e0604c}.dx-none b{color:#8fa2bd}
 .sx-top{display:flex;align-items:center;gap:8px}
 .sx-num{background:var(--bg);border:1px solid var(--line);border-radius:8px;

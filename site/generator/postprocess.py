@@ -214,6 +214,36 @@ def _empty_tags(part: str) -> str:
     return re.sub(r'<span class="tag[^"]*"></span>', "", part)
 
 
+
+REF_GROUP = re.compile(r"\((?=[^()<>]{1,80}\))(?P<inner>[^()<>]{1,80})\)")
+
+
+def _isolate_ref_groups(part: str) -> str:
+    """يعزل المجموعات المرجعية اللاتينية داخل الأقواس كجزيرة LTR.
+
+    يمنع انقلاب ترتيب المراجع في السياق العربي، ويمنع ظهور الفاصلة العربية
+    داخل نص لاتيني في النسخة الإنجليزية. لا يُطبَّق على مجموعة تحوي حروفًا عربية.
+    """
+    AR_LETTERS = re.compile(r"[\u0621-\u064A]")
+
+    def rep(m):
+        inner = m.group("inner")
+        if AR_LETTERS.search(inner):
+            return m.group(0)
+        if not re.search(r"[A-Za-z0-9]", inner):
+            return m.group(0)
+        # لا تعزل المجموعة البسيطة (رمز واحد)؛ العزل يخص المجموعات المختلطة فقط
+        # حتى لا يتغيّر تقسيم النص الذي يعتمد عليه مترجم النسخة الإنجليزية.
+        if not re.search(r"[؛،·]", inner):
+            return m.group(0)
+        if "bdi" in inner or "span" in inner:
+            return m.group(0)
+        clean = inner.replace("،", ",").replace("؛", ";").strip()
+        return f'<bdi class="bidi" dir="ltr">({clean})</bdi>'
+
+    return REF_GROUP.sub(rep, part)
+
+
 def sanitize(html: str) -> str:
     """يطبّق كل إصلاحات المخرجات على صفحة واحدة."""
     removed = 0
@@ -228,6 +258,7 @@ def sanitize(html: str) -> str:
 
     def body_fix(part: str) -> str:
         part = _merge_ltr(part)
+        part = _isolate_ref_groups(part)
         part = _stars(part)
         part = _trust(part)
         part = _tables(part)
