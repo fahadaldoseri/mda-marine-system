@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-02T09:39:57.689246+00:00",
+  "generated_at": "2026-11-02T10:28:01.498035+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -3396,6 +3396,13 @@
       "state": "مفتوح",
       "lesson_id": null,
       "barrier_id": "B-c41bd8d5",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-451",
+      "state": "مفتوح",
+      "lesson_id": "ك-451",
+      "barrier_id": "B-0f91f55c",
       "run_evidence": null
     }
   ]
