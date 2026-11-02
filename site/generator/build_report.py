@@ -578,6 +578,8 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .ev-meta .ev-k{display:block;font-size:12.5px;color:var(--muted);opacity:.85;margin-bottom:2px}
 .ev-meta .ev-mv{display:block;color:var(--ink-2)}
 .ev-field{margin:4px 0}
+.ev-field .ev-link{color:#9fd0ff;text-decoration:underline;text-underline-offset:2px}
+.ev-field .ev-link:hover,.ev-field .ev-link:focus{color:#cfe9ff}
 .ev-branch{margin:12px 0 0;padding:10px 12px;border:1px solid rgba(77,157,255,.38);border-inline-start:3px solid var(--info);border-radius:8px;background:rgba(77,157,255,.06);font-size:12.5px;line-height:1.75}
 .ev-branch-title{display:block;color:var(--info);font-weight:700;margin-bottom:3px}
 .ev-branch-gap{margin:12px 0 0;padding:9px 12px;border:1px dashed rgba(255,176,46,.55);border-radius:8px;color:var(--warn);font-size:12.5px;line-height:1.7}
@@ -1381,11 +1383,13 @@ def attribution_from_path(path) -> str:
 
 
 def _field_row(index: int, label: str, value: str, defs, *, state: str = "shown",
-               extra: str = "", attrs: str = "") -> str:
+               extra: str = "", attrs: str = "", raw: bool = False) -> str:
+    """صف في البطاقة. raw=True يعني أن القيمة HTML جاهز (رابط) لا نصًّا يُهرَّب."""
     hidden = "" if state == "shown" else " hidden"
+    body = value if raw else inline(value, defs)
     return (f'<div class="ev-field" data-row="{index}" data-row-state="{state}"{attrs}{hidden}>'
             f'<span class="ev-k">{esc(label)}</span>'
-            f'<span class="ev-mv">{inline(value, defs)}</span>{extra}</div>')
+            f'<span class="ev-mv">{body}</span>{extra}</div>')
 
 LIVE_EVENT_LEDGER_FROM = "2026-10-31"
 RELATION_KEYS = ("update_of", "parent_id", "duplicate_of")
@@ -1490,26 +1494,35 @@ def _event_fields_html(event: dict, defs) -> tuple[str, bool]:
     date_text = _event_date(event) or "غير متاح"
     time_text = _value_text(event.get("time"))
     has_time = bool(time_text and _TIME_RE.match(time_text))
-    date_line = f"{date_text} · {time_text}" if has_time else f"{date_text} · {ABSENCE['time']}"
+    # ملاحظة المالك 2026-11-02: التوقيت يُكتب إن وُجد، وإن غاب لا يُكتب أي نصّ بديل.
+    date_line = f"{date_text} · {time_text}" if has_time else date_text
     rows = [_field_row(4, "التاريخ والوقت", date_line, defs)]
 
     sector = _value_text(event.get("sector_id"))
     area = _value_text(event.get("area"))
     place = " · ".join(part for part in (sector, area) if part) or ABSENCE["place"]
-    rows.append(_field_row(5, "الموضع", place, defs))
+    rows.append(_field_row(5, "الموقع", place, defs))
 
-    rows.append(_field_row(6, "المصدر", _event_sources(event) or ABSENCE["source"], defs))
+    source_text = _event_sources(event) or ABSENCE["source"]
+    source_url = _value_text(event.get("source_url"))
+    if source_url.startswith("http"):
+        # ملاحظة المالك 2026-11-02: اسم المصدر رابطٌ يُدخل القارئ إلى مادة المصدر نفسها.
+        link = (f'<a class="ev-link" href="{esc(source_url)}" target="_blank" rel="noopener">'
+                f'{esc(source_text)}</a>')
+        rows.append(_field_row(6, "المصدر", link, defs, raw=True))
+    else:
+        rows.append(_field_row(6, "المصدر", source_text, defs))
 
-    url = _value_text(event.get("source_url"))
-    path = _value_text(event.get("source_excerpt_from"))
-    attribution = attribution_from_path(path)
-    citation = url or ABSENCE["source_url"]
-    if attribution:
-        citation = f"{citation} · {attribution}"
-    # المسار الداخلي (الملف · التغذية · رقم البند) لا يُعرض على سطح القارئ:
-    # يتكرّر بالنص نفسه في كل بطاقة فيُمنع بقالب الجملة المتكرر، ولا يفيد القارئ.
-    # يبقى محفوظًا في دفتر الوقائع وفي مسار التدقيق.
-    rows.append(_field_row(7, "الرابط الرسمي", citation, defs))
+    # ملاحظة المالك 2026-11-02: صفّ «الرابط الرسمي» لا يُعرض إلا إذا كان في الدفتر
+    # رابطٌ رسميٌّ مستقل (وثيقة مرجعية)؛ فغيابه لا يُكتب على سطح القارئ أصلًا.
+    official = _value_text(event.get("official_ref"))
+    if official.startswith("http"):
+        link = (f'<a class="ev-link" href="{esc(official)}" target="_blank" rel="noopener">'
+                f'{esc(official)}</a>')
+        rows.append(_field_row(7, "الرابط الرسمي", link, defs, raw=True))
+    else:
+        rows.append(_field_row(7, "الرابط الرسمي", "", defs,
+                               state="hidden-rule-no-official-link", raw=True))
 
     excerpt_raw = _value_text(event.get("source_excerpt"))
     translation = _value_text(event.get("translation"))
