@@ -143,6 +143,7 @@ step "فحص OFAC" 2 python3 "$B/tools/ofac_screen.py" "$B/watchlist/ofac-target
 step "تغطية فحص العقوبات" 2 python3 "$B/validators/check_ofac_coverage.py" --date "$D"
 step "استعمال المكتبات (المعجم والبنك والفجوات)" 2 python3 "$B/validators/check_library_use.py" --date "$D"
 step "عدد المصادر (مصدر واحد)" 2 python3 "$B/validators/check_sources_count.py"
+step "ربط الأرقام بمصادرها (ك-455)" 2 python3 "$B/validators/check_number_bindings.py" --date "$D"
 step "قابلية النقل (مسارات)" 2 python3 "$B/validators/check_portable_paths.py"
 step "الأرقام (0-9 لاتينية)" 2 python3 "$B/validators/check_numerals.py"
 # تنبيهي فعليًا: الانحراف (رمز 1) تحذير قبل الدفع؛ ولا يوقف إلا فقدان المستودع (رمز 3)

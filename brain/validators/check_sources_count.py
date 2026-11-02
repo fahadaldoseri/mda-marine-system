@@ -53,6 +53,15 @@ ADVISORY = [
     B / 'notes',
 ]
 
+# ك-453: المانيفست التشغيلي والكتيب المولَّد منه كانا **خارج** نطاق هذه البوابة،
+# فبقي فيهما «فحص التغذيات (40 مصدرًا)» سنوات العدد المعتمد 62. القاعدة الجديدة:
+# لا رقم ثابت للمصادر في المانيفست أو الكتيب — لا «40» ولا «62» — لأن الرقم الثابت
+# في ملف تشغيلي عطلُ انحراف مؤجل. المصدر الواحد هو `appendices/sources-manifest.json`.
+NO_STATIC_COUNT = [
+    B / 'runbook' / 'runbook.json',
+    B / 'docs' / 'runbook.md',
+]
+
 _AR_D = str.maketrans("0123456789", "0123456789")
 COUNT_RE = re.compile(r"([0-90-9]{2,3})\s*مصدر(?:ًا|اً|ا)?")
 # أرقام مكتوبة بالكلمات (كانت تمرّ من البوابة: «السبعة والثلاثون» بدل 40) — عطل ك-08
@@ -189,6 +198,14 @@ def main() -> int:
             continue
         for item, _, _, _ in count_mentions(p, approved):
             blockers.append(item)
+    # ك-453: أي رقم للمصادر في المانيفست أو الكتيب مانع — ولو طابق المعتمد اليوم.
+    for p in NO_STATIC_COUNT:
+        if not p.exists():
+            continue
+        for item, number, line_no, _ in count_mentions(p, -1):
+            blockers.append(
+                f"رقم ثابت للمصادر في ملف تشغيلي (يُنزع الرقم، والعدد يُقرأ من "
+                f"{MANIFEST.name}): {item} [سطر {line_no} · العدد المكتوب {number}]")
     for p in ADVISORY:
         if not p.exists():
             continue
