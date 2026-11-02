@@ -144,6 +144,7 @@ step "تغطية فحص العقوبات" 2 python3 "$B/validators/check_ofac_co
 step "استعمال المكتبات (المعجم والبنك والفجوات)" 2 python3 "$B/validators/check_library_use.py" --date "$D"
 step "عدد المصادر (مصدر واحد)" 2 python3 "$B/validators/check_sources_count.py"
 step "ربط الأرقام بمصادرها (ك-455)" 2 python3 "$B/validators/check_number_bindings.py" --date "$D"
+step "تغطية الربط (مالك أو استثناء لكل ملف)" 2 python3 "$B/tools/binding_coverage.py"
 step "قابلية النقل (مسارات)" 2 python3 "$B/validators/check_portable_paths.py"
 step "الأرقام (0-9 لاتينية)" 2 python3 "$B/validators/check_numerals.py"
 # تنبيهي فعليًا: الانحراف (رمز 1) تحذير قبل الدفع؛ ولا يوقف إلا فقدان المستودع (رمز 3)
