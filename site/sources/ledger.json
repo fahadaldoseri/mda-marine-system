@@ -1,8 +1,8 @@
 {
   "document_id": "marine-events-ledger-master",
-  "title": "دفتر الأحداث التراكمي — من 2026-02-28 إلى 2026-11-01",
+  "title": "دفتر الأحداث التراكمي — من 2026-02-28 إلى 2026-11-02",
   "period_start": "2026-02-28",
-  "period_end": "2026-11-01",
+  "period_end": "2026-11-02",
   "time_basis": "UTC عندما يورده المصدر؛ يفصل السجل بين تاريخ الواقعة وتاريخ النشر عند توفرهما.",
   "calendar_note": "2026-02-29 غير موجود تقويميًا؛ لا توجد وقائع مستقلة لذلك اليوم ولا أُدخلت وقائع 1 مارس في سجل فبراير.",
   "method": "دُمجت التقارير الشهرية المقدمة مع الدفتر التاريخي المهيكل. أزيلت النسخ الواضحة للواقعة نفسها، وحُفظت المصادر والتعارضات داخل السجل. السجل الذري يضم وقائع أمنية ونشرات وتفاعلات وخلفية؛ لا يمثل عدد هجمات.",
@@ -40,7 +40,7 @@
       "unresolved_or_advisory": 34
     },
     "unique_source_urls_in_ledger": 155,
-    "total_records": 480,
+    "total_records": 496,
     "by_month": {
       "2026-02": 4,
       "2026-03": 54,
@@ -51,7 +51,7 @@
       "2026-08": 28,
       "2026-09": 30,
       "2026-10": 241,
-      "2026-11": 6
+      "2026-11": 22
     },
     "by_evidence_status": {
       "background": 1,
@@ -59,7 +59,7 @@
       "military_interaction": 10,
       "piracy": 3,
       "recorded_security_event": 49,
-      "unresolved_incident": 194,
+      "unresolved_incident": 210,
       "unresolved_or_advisory": 34
     },
     "by_classification": {
@@ -80,8 +80,8 @@
       "اختطاف/قرصنة مؤكد": 1,
       "ادعاء منقول": 1,
       "بلاغ أولي أُسقط أمنيًا بعد التحقيق": 1,
-      "بلاغ تحالف": 2,
-      "بلاغ رسمي": 23,
+      "بلاغ تحالف": 3,
+      "بلاغ رسمي": 31,
       "بلاغ رسمي متأخر": 1,
       "بلاغ مؤسسي": 1,
       "بيان رسمي": 2,
@@ -106,7 +106,7 @@
       "تقدير مهني": 1,
       "تقرير حادث مهني": 1,
       "تقرير منظمة": 1,
-      "تقرير مهني": 13,
+      "تقرير مهني": 14,
       "تقرير مهني منقول": 2,
       "تقييم رسمي": 1,
       "تهديد منقول": 1,
@@ -118,10 +118,10 @@
       "دبلوماسي": 1,
       "ربط أحداث": 1,
       "رسمي": 1,
-      "رواية": 11,
+      "رواية": 12,
       "رواية غير مؤكدة من طرف واحد": 5,
       "رواية من طرف واحد": 2,
-      "سجل دولي": 2,
+      "سجل دولي": 3,
       "سجل رسمي": 1,
       "سجل مصدر مهني": 3,
       "سلسلة هجمات على ناقلات بمقذوفات غير محددة المصدر": 1,
@@ -160,7 +160,7 @@
       "نشرة/تنظيم مرور وإنقاذ": 1,
       "نفي رسمي": 1,
       "نفي رسمي منقول": 1,
-      "نقل إعلامي": 21,
+      "نقل إعلامي": 25,
       "نقل إعلامي رسمي إيراني": 4,
       "نقل إعلامي عن نفي رسمي": 1,
       "نقل إعلامي متعارض": 1,
@@ -225,18 +225,18 @@
       "وسم إعلامي": 1
     },
     "by_area_top10": {
-      "مضيق هرمز": 91,
+      "مضيق هرمز": 96,
       "غير محدّد": 53,
       "Strait of Hormuz": 30,
       "المنطقة كاملة": 17,
-      "الخليج العربي": 9,
+      "الخليج العربي": 12,
+      "خارج القطاعات": 7,
       "خليج عُمان": 6,
       "Gulf of Oman": 6,
       "البحر الأحمر": 4,
-      "طهران": 4,
-      "خط الاقتراب الشرقي (خورفكان)": 3
+      "طهران": 4
     },
-    "_rebuilt_utc": "2026-11-01T08:39:01Z"
+    "_rebuilt_utc": "2026-11-02T04:06:56Z"
   },
   "sections": {
     "الخلاصة القيادية": [],
@@ -514,7 +514,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-01.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "STENA IMPERATIVE",
       "vessel_source": "STENA IMPERATIVE (9666077)",
       "imo_number": "9666077",
@@ -560,7 +560,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-01.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "HERCULES STAR",
       "vessel_source": "HERCULES STAR (9916135)",
       "imo_number": "9916135",
@@ -606,7 +606,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-01.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "MKD VYOM",
       "vessel_source": "MKD VYOM (9284386)",
       "imo_number": "9284386",
@@ -652,7 +652,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-01.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "SKYLIGHT",
       "vessel_source": "SKYLIGHT (9330020)",
       "imo_number": "9330020",
@@ -801,7 +801,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-02.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "sector": "خارج القطاعات",
       "event_kind": "incident",
       "published_at": "2026-03-02",
@@ -812,6 +812,7 @@
         "missing": 0
       },
       "casualty_scope": "عامل حوض سفن",
+      "target": "سفينة",
       "outcome": "حريق أُخمد؛ السفينة إلى جانب الرصيف",
       "backfilled": true,
       "evidence_kind": "official_source",
@@ -840,7 +841,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-03.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "GOLD OAK",
       "vessel_source": "GOLD OAK (9806342)",
       "imo_number": "9806342",
@@ -886,7 +887,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-03.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "LIBRA TRADER",
       "vessel_source": "LIBRA TRADER (9562673)",
       "imo_number": "9562673",
@@ -993,7 +994,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-04.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "SAFEEN PRESTIGE",
       "vessel_source": "SAFEEN PRESTIGE (9593517)",
       "imo_number": "9593517",
@@ -1100,7 +1101,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-05.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "SONANGOL NAMIBE",
       "vessel_source": "SONANGOL NAMIBE (9325049)",
       "imo_number": "9325049",
@@ -1146,7 +1147,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-06.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "MUSSAFAH 2",
       "vessel_source": "MUSSAFAH 2 (9522051)",
       "imo_number": "9522051",
@@ -1232,7 +1233,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-07.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "ARABIA III",
       "vessel_source": "ARABIA III (8771332)",
       "imo_number": "8771332",
@@ -1340,7 +1341,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-11.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "ZEFYROS",
       "vessel_source": "ZEFYROS (9515917)",
       "imo_number": "9515917",
@@ -1386,7 +1387,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-11.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "SAFESEA VISHNU",
       "vessel_source": "SAFESEA VISHNU (9327009)",
       "imo_number": "9327009",
@@ -1432,7 +1433,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-11.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "STAR GWYNETH",
       "vessel_source": "STAR GWYNETH (9301031)",
       "imo_number": "9301031",
@@ -1478,7 +1479,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-11.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "MAYUREE NAREE",
       "vessel_source": "MAYUREE NAREE (9323649)",
       "imo_number": "9323649",
@@ -1524,7 +1525,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-11.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "ONE MAJESTY",
       "vessel_source": "ONE MAJESTY (9424912)",
       "imo_number": "9424912",
@@ -1654,7 +1655,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-12.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "SOURCE BLESSING",
       "vessel_source": "SOURCE BLESSING (9243198)",
       "imo_number": "9243198",
@@ -1721,7 +1722,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-16.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "GAS AL AHMADIAH",
       "vessel_source": "GAS AL AHMADIAH (9849629)",
       "imo_number": "9849629",
@@ -1828,7 +1829,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-19.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "HALUL 50",
       "vessel_source": "HALUL 50 (9602796)",
       "imo_number": "9602796",
@@ -1954,7 +1955,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-28.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "SUNNY 77",
       "vessel_source": "SUNNY 77 (8357368)",
       "imo_number": "8357368",
@@ -2022,7 +2023,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-29.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "sector": "Z1",
       "sector_id": "Z1",
       "event_kind": "incident",
@@ -2034,6 +2035,7 @@
         "missing": "لم يُعلن"
       },
       "casualty_scope": "not_announced",
+      "target": "سفينة",
       "outcome": "غرق مُبلّغ عنه",
       "backfilled": true,
       "evidence_kind": "official_source",
@@ -2062,7 +2064,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-30.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "AL SALMI",
       "vessel_source": "AL SALMI (9534793)",
       "imo_number": "9534793",
@@ -2168,7 +2170,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-01.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "AQUA 1",
       "vessel_source": "AQUA 1 (9573660)",
       "imo_number": "9573660",
@@ -2276,7 +2278,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-07.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "GOLD AUTUMN",
       "vessel_source": "GOLD AUTUMN (9220483)",
       "imo_number": "9220483",
@@ -2322,7 +2324,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-07.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "QINGDAO STAR",
       "vessel_source": "QINGDAO STAR (9318163)",
       "imo_number": "9318163",
@@ -2493,7 +2495,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-18.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "CMA CGM EVERGLADE",
       "vessel_source": "CMA CGM EVERGLADE (9894985)",
       "imo_number": "9894985",
@@ -2539,7 +2541,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-18.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "SANMAR HERALD",
       "vessel_source": "SANMAR HERALD (9330563)",
       "imo_number": "9330563",
@@ -2630,7 +2632,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-19.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "TOUSKA",
       "vessel_source": "TOUSKA (9328900)",
       "imo_number": "9328900",
@@ -2719,7 +2721,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-22.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "EUPHORIA",
       "vessel_source": "EUPHORIA (9235828)",
       "imo_number": "9235828",
@@ -2765,7 +2767,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-22.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "MSC FRANCESCA",
       "vessel_source": "MSC FRANCESCA (9401116)",
       "imo_number": "9401116",
@@ -2811,7 +2813,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-22.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "EPAMINONDAS",
       "vessel_source": "EPAMINONDAS (9153862)",
       "imo_number": "9153862",
@@ -3028,7 +3030,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-02.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "VOLANS / BADR (BARGE)",
       "vessel_source": "VOLANS (9298856) / BADR (BARGE)",
       "imo_number": "9298856",
@@ -3095,7 +3097,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-03.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "TMO BARAKAH",
       "vessel_source": "TMO BARAKAH (9902615)",
       "imo_number": "9902615",
@@ -3141,7 +3143,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-03.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "MINOAN FALCON",
       "vessel_source": "MINOAN FALCON (9605841)",
       "imo_number": "9605841",
@@ -3230,7 +3232,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-04.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "HMM NAMU",
       "vessel_source": "HMM NAMU (1039292)",
       "imo_number": "1039292",
@@ -3276,7 +3278,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-04.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "JV INNOVATION",
       "vessel_source": "JV INNOVATION (9276688)",
       "imo_number": "9276688",
@@ -3363,7 +3365,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-05.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "CMA CGM SAN ANTONIO",
       "vessel_source": "CMA CGM SAN ANTONIO (9294173)",
       "imo_number": "9294173",
@@ -3429,7 +3431,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-06.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "HASNA",
       "vessel_source": "HASNA (9212917)",
       "imo_number": "9212917",
@@ -3475,7 +3477,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-08.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "SEVDA",
       "vessel_source": "SEVDA (9172040)",
       "imo_number": "9172040",
@@ -3521,7 +3523,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-08.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "SEA STAR III",
       "vessel_source": "SEA STAR III (9569205)",
       "imo_number": "9569205",
@@ -3609,7 +3611,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-10.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "SAFESEA NEHA",
       "vessel_source": "SAFESEA NEHA (9563392)",
       "imo_number": "9563392",
@@ -3757,7 +3759,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "OLYMPIC LIFE",
       "vessel_source": "OLYMPIC LIFE (9844277)",
       "imo_number": "9844277",
@@ -3824,7 +3826,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-29.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "LIAN STAR",
       "vessel_source": "LIAN STAR (9072692)",
       "imo_number": "9072692",
@@ -3911,7 +3913,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-06-01.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "MSC SARISKA V",
       "vessel_source": "MSC SARISKA V (8715857)",
       "imo_number": "8715857",
@@ -3979,7 +3981,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-06-02.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "LEXIE",
       "vessel_source": "LEXIE (9203277)",
       "imo_number": "9203277",
@@ -4065,7 +4067,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-06-08.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "MARIVEX",
       "vessel_source": "MARIVEX (9464156)",
       "imo_number": "9464156",
@@ -4132,7 +4134,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-06-09.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "SETTEBELLO",
       "vessel_source": "SETTEBELLO (9162916)",
       "imo_number": "9162916",
@@ -4178,7 +4180,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-06-10.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "JALVEER",
       "vessel_source": "JALVEER (9486283)",
       "imo_number": "9486283",
@@ -4288,7 +4290,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-06-12.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "BOCHEM MARENGO",
       "vessel_source": "BOCHEM MARENGO (9749025)",
       "imo_number": "9749025",
@@ -4501,7 +4503,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-06-25.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "EVER LOVELY",
       "vessel_source": "EVER LOVELY (9629110)",
       "imo_number": "9629110",
@@ -4570,7 +4572,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-06-27.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "KIKU",
       "vessel_source": "KIKU (9329796)",
       "imo_number": "9329796",
@@ -4701,7 +4703,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-06.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "WEDYAN",
       "vessel_source": "WEDYAN (9524970)",
       "imo_number": "9524970",
@@ -4747,7 +4749,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-06.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "AL REKAYYAT",
       "vessel_source": "AL REKAYYAT (9397339)",
       "imo_number": "9397339",
@@ -4815,7 +4817,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-07.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "CYPRUS PROSPERITY",
       "vessel_source": "CYPRUS PROSPERITY (9595216)",
       "imo_number": "9595216",
@@ -4904,7 +4906,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-11.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "GFS GALAXY",
       "vessel_source": "GFS GALAXY (9401271)",
       "imo_number": "9401271",
@@ -4972,7 +4974,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-13.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "STOLT MAGNESIUM",
       "vessel_source": "STOLT MAGNESIUM (9739317)",
       "imo_number": "9739317",
@@ -5061,7 +5063,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-14.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "AL BAHYAH",
       "vessel_source": "AL BAHYAH (9937799)",
       "imo_number": "9937799",
@@ -5107,7 +5109,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-14.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "MOMBASA B",
       "vessel_source": "MOMBASA B (9739501)",
       "imo_number": "9739501",
@@ -5153,7 +5155,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-15.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "BELMA",
       "vessel_source": "BELMA (9289491)",
       "imo_number": "9289491",
@@ -5220,7 +5222,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-16.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "IDI",
       "vessel_source": "IDI (9307982)",
       "imo_number": "9307982",
@@ -5287,7 +5289,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-19.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "ACHELOOS",
       "vessel_source": "ACHELOOS (1087524)",
       "imo_number": "1087524",
@@ -5333,7 +5335,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-19.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "KAVOMALEAS",
       "vessel_source": "KAVOMALEAS (1042823)",
       "imo_number": "1042823",
@@ -5400,7 +5402,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-20.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "KAIFAN",
       "vessel_source": "KAIFAN (9656046)",
       "imo_number": "9656046",
@@ -5531,7 +5533,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-24.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "LAVINE",
       "vessel_source": "LAVINE (8818219)",
       "imo_number": "8818219",
@@ -5618,7 +5620,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-31.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "GASLOG SHANGHAI",
       "vessel_source": "GASLOG SHANGHAI (9600528)",
       "imo_number": "9600528",
@@ -5706,7 +5708,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-03.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "MINOAN PIONEER",
       "vessel_source": "MINOAN PIONEER (9471630)",
       "imo_number": "9471630",
@@ -5817,7 +5819,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-09.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "AL JABRIYAH II",
       "vessel_source": "AL JABRIYAH II (9329708)",
       "imo_number": "9329708",
@@ -5863,7 +5865,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-11.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "VELA NOVA",
       "vessel_source": "VELA NOVA (9136228)",
       "imo_number": "9136228",
@@ -5953,7 +5955,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-13.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "NAVIG8 MESSI",
       "vessel_source": "NAVIG8 MESSI (9482859)",
       "imo_number": "9482859",
@@ -6022,7 +6024,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-14.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "AL WATAN",
       "vessel_source": "AL WATAN (9615030)",
       "imo_number": "9615030",
@@ -6068,7 +6070,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-15.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "RIYAN STAR",
       "vessel_source": "RIYAN STAR (9156761)",
       "imo_number": "9156761",
@@ -6136,7 +6138,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-17.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "MINOAN DIGNITY",
       "vessel_source": "MINOAN DIGNITY (9294484)",
       "imo_number": "9294484",
@@ -6226,7 +6228,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-24.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "METRO VENETIAN",
       "vessel_source": "METRO VENETIAN (1013391)",
       "imo_number": "1013391",
@@ -6317,7 +6319,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-25.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "AL SALAM II",
       "vessel_source": "AL SALAM II (9328168)",
       "imo_number": "9328168",
@@ -6384,7 +6386,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-28.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "AL YARMOUK",
       "vessel_source": "AL YARMOUK (9653422)",
       "imo_number": "9653422",
@@ -6430,7 +6432,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-29.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "BURGAN",
       "vessel_source": "BURGAN (9656022)",
       "imo_number": "9656022",
@@ -6541,7 +6543,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-31.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "SIDR",
       "vessel_source": "SIDR (9854715)",
       "imo_number": "9854715",
@@ -6587,7 +6589,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-31.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "SENEGAL PROSPERITY",
       "vessel_source": "SENEGAL PROSPERITY (9532757)",
       "imo_number": "9532757",
@@ -6675,7 +6677,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-07.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "AL DASMA",
       "vessel_source": "AL DASMA (9653446)",
       "imo_number": "9653446",
@@ -6721,7 +6723,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-08.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "HORIZON 1",
       "vessel_source": "HORIZON 1 (9130456)",
       "imo_number": "9130456",
@@ -6788,7 +6790,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-09.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "HERCULES STAR",
       "vessel_source": "HERCULES STAR (9916135)",
       "imo_number": "9916135",
@@ -6834,7 +6836,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-09.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "NEW ANDROS",
       "vessel_source": "NEW ANDROS (9294252)",
       "imo_number": "9294252",
@@ -6901,7 +6903,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-10.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "ROMANCE",
       "vessel_source": "ROMANCE (9468815)",
       "imo_number": "9468815",
@@ -6967,7 +6969,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-12.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "EL GAIA",
       "vessel_source": "EL GAIA (9325336)",
       "imo_number": "9325336",
@@ -7053,7 +7055,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-17.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "TREND",
       "vessel_source": "TREND (9477177)",
       "imo_number": "9477177",
@@ -7119,7 +7121,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-18.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "STI STEADFAST",
       "vessel_source": "STI STEADFAST (9719719)",
       "imo_number": "9719719",
@@ -7165,7 +7167,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-21.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "AL MARYAH",
       "vessel_source": "AL MARYAH (9393682)",
       "imo_number": "9393682",
@@ -7211,7 +7213,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-21.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "LR STEPHANIE",
       "vessel_source": "LR STEPHANIE (9282625)",
       "imo_number": "9282625",
@@ -7278,7 +7280,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-23.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "CAPE DAO",
       "vessel_source": "CAPE DAO (9219020)",
       "imo_number": "9219020",
@@ -7346,7 +7348,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-28.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "AL FUNTAS",
       "vessel_source": "AL FUNTAS (9653408)",
       "imo_number": "9653408",
@@ -7413,7 +7415,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-29.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "AL RUWAIS",
       "vessel_source": "AL RUWAIS (9828405)",
       "imo_number": "9828405",
@@ -7459,7 +7461,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-29.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "SINBAD",
       "vessel_source": "SINBAD (9413688)",
       "imo_number": "9413688",
@@ -7505,7 +7507,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-29.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "MERSIN PROSPERITY",
       "vessel_source": "MERSIN PROSPERITY (9327554)",
       "imo_number": "9327554",
@@ -7551,7 +7553,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-30.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "sector": "Z1",
       "sector_id": "Z1",
       "event_kind": "incident",
@@ -7563,6 +7565,7 @@
         "missing": "لم يُعلن"
       },
       "casualty_scope": "not_announced",
+      "target": "سفينة",
       "backfilled": true,
       "evidence_kind": "official_source",
       "evidence_ref": "https://www.ukmto.org/recent-incidents#ukmto-144",
@@ -7590,7 +7593,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-30.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "sector": "Z1",
       "sector_id": "Z1",
       "event_kind": "incident",
@@ -7602,6 +7605,7 @@
         "missing": "لم يُعلن"
       },
       "casualty_scope": "not_announced",
+      "target": "سفينة",
       "backfilled": true,
       "evidence_kind": "official_source",
       "evidence_ref": "https://www.ukmto.org/recent-incidents#ukmto-145",
@@ -7629,7 +7633,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-30.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "sector": "Z1",
       "sector_id": "Z1",
       "event_kind": "incident",
@@ -7641,6 +7645,7 @@
         "missing": "لم يُعلن"
       },
       "casualty_scope": "not_announced",
+      "target": "سفينة",
       "backfilled": true,
       "evidence_kind": "official_source",
       "evidence_ref": "https://www.ukmto.org/recent-incidents#ukmto-146",
@@ -7668,7 +7673,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-30.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "sector": "خارج القطاعات",
       "event_kind": "incident",
       "published_at": "2026-09-30",
@@ -7707,7 +7712,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-01.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "KAZIMAH III",
       "vessel_source": "KAZIMAH III (9329693)",
       "imo_number": "9329693",
@@ -7774,7 +7779,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-02.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "UHUD",
       "vessel_source": "UHUD (9254939)",
       "imo_number": "9254939",
@@ -7820,7 +7825,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-02.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "PROMISE",
       "vessel_source": "PROMISE (1038896)",
       "imo_number": "1038896",
@@ -7866,7 +7871,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-03.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "GHANA PROSPERITY",
       "vessel_source": "GHANA PROSPERITY (9732541)",
       "imo_number": "9732541",
@@ -7912,7 +7917,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-04.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "GAS VELA",
       "vessel_source": "GAS VELA (9969845)",
       "imo_number": "9969845",
@@ -7958,7 +7963,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-04.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "CAMEROON PROSPERITY",
       "vessel_source": "CAMEROON PROSPERITY (93151598)",
       "imo_number": "93151598",
@@ -8004,7 +8009,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-04.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "LIPSI",
       "vessel_source": "LIPSI (1025033)",
       "imo_number": "1025033",
@@ -8092,7 +8097,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-05.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "MARAN GAS MYSTRAS",
       "vessel_source": "MARAN GAS MYSTRAS (9658238)",
       "imo_number": "9658238",
@@ -8138,7 +8143,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-05.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "ON PEACE",
       "vessel_source": "ON PEACE (9893204)",
       "imo_number": "9893204",
@@ -8206,7 +8211,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-06.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "ST1",
       "vessel_source": "ST1 (9256999)",
       "imo_number": "9256999",
@@ -8272,7 +8277,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-07.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "ACERS",
       "vessel_source": "ACERS (9301902)",
       "imo_number": "9301902",
@@ -8340,7 +8345,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-09.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "GEM NO. 2",
       "vessel_source": "GEM NO. 2 (9735373)",
       "imo_number": "9735373",
@@ -8407,7 +8412,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-10.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "AKIRA SUN (OCEAN MOLICA)",
       "vessel_source": "AKIRA SUN (OCEAN MOLICA) (9139270)",
       "imo_number": "9139270",
@@ -8453,7 +8458,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-10.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "VALTHERA",
       "vessel_source": "VALTHERA (9296389)",
       "imo_number": "9296389",
@@ -8519,7 +8524,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-11.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "AL MAQAM",
       "vessel_source": "AL MAQAM (9732577)",
       "imo_number": "9732577",
@@ -8565,7 +8570,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-11.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "DP WORLD KAVERI",
       "vessel_source": "DP WORLD KAVERI (9363429)",
       "imo_number": "9363429",
@@ -8611,7 +8616,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-11.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "KITION M",
       "vessel_source": "KITION M (9321160)",
       "imo_number": "9321160",
@@ -8657,7 +8662,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-11.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "EVER VICT",
       "vessel_source": "EVER VICT (9266774)",
       "imo_number": "9266774",
@@ -8703,7 +8708,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-11.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "ANGOLA PROSPERITY",
       "vessel_source": "ANGOLA PROSPERITY (9896414)",
       "imo_number": "9896414",
@@ -8749,7 +8754,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-11.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "PETRO DOLPHIN",
       "vessel_source": "PETRO DOLPHIN (1072294)",
       "imo_number": "1072294",
@@ -8795,7 +8800,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-12.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-11-019-e648dfab",
@@ -8818,7 +8823,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-11-148-5ced58be",
@@ -8864,7 +8869,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-12-002-5674c26e",
@@ -8887,7 +8892,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-12-003-81354af1",
@@ -8910,7 +8915,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-12-004-ab3ccc0a",
@@ -8933,7 +8938,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-12-005-8466c2a6",
@@ -8956,7 +8961,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-13-001-338e3526",
@@ -8979,7 +8984,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-13-002-91b6b7e8",
@@ -9002,7 +9008,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-13-003-a6161258",
@@ -9025,7 +9031,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "GFS PRIDE",
       "vessel_source": "GFS PRIDE (9349045)",
       "imo_number": "9349045",
@@ -9071,7 +9077,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "GFS GISELLE",
       "vessel_source": "GFS GISELLE (9704661)",
       "imo_number": "9704661",
@@ -9117,7 +9123,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "AL SAADIYAT",
       "vessel_source": "AL SAADIYAT (9760598)",
       "imo_number": "9760598",
@@ -9163,7 +9169,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-14.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-13-007-74dbe74e",
@@ -9186,7 +9192,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-14.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-13-008-7b73a2c6",
@@ -9196,8 +9202,8 @@
       "location": "البحر الأحمر وصنعاء والحديدة وذمار",
       "classification": "واقعة عسكري",
       "evidence_status": "unresolved_incident",
-      "confidence_level": "medium",
-      "confidence": "عالية للوقائع",
+      "confidence_level": "high",
+      "confidence": "عالية",
       "description": "ضربات التحالف على أهداف حوثية وتصعيد يهدد مسار باب المندب",
       "operational_effect": "",
       "sources": [
@@ -9209,7 +9215,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-14.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-13-009-7a82c065",
@@ -9232,7 +9238,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-14.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-13-010-5859b070",
@@ -9255,7 +9261,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-14.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-13-011-c6a593c0",
@@ -9278,7 +9284,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-14.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-13-012-2a01d281",
@@ -9301,7 +9307,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-15.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-14-001-5288dfbb",
@@ -9324,7 +9330,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-14.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-14-002-0a6b9d1c",
@@ -9347,7 +9353,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-15.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-14-003-9bf9ee47",
@@ -9370,7 +9376,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-15.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-14-004-5d29c4ef",
@@ -9393,7 +9399,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-15.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-14-005-a6477a49",
@@ -9416,7 +9422,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-15.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-14-006-259f269b",
@@ -9439,7 +9445,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-15.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-14-007-4616241a",
@@ -9449,8 +9455,8 @@
       "location": "خليج عُمان",
       "classification": "بيان رسمي",
       "evidence_status": "unresolved_incident",
-      "confidence_level": "medium",
-      "confidence": "عالية للوقائع",
+      "confidence_level": "high",
+      "confidence": "عالية",
       "description": "إعلان أمريكي: تدمير قارب داو مرتبط بإيران وتعطيل 4 سفن وإعادة توجيه 135 سفينة وتدمير 10 ناقلات منذ يوليو",
       "operational_effect": "",
       "sources": [
@@ -9462,7 +9468,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-15.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-14-008-32739430",
@@ -9485,7 +9491,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-15.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-14-009-80218b86",
@@ -9508,7 +9514,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-15.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-15-001-0853157b",
@@ -9531,7 +9537,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-15.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-15-002-7d9a4a92",
@@ -9554,7 +9561,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-18.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-16-001-0579ae25",
@@ -9577,7 +9584,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-16.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-16-002-87a77a3c",
@@ -9600,7 +9608,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-16.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-16-003-638517b6",
@@ -9623,7 +9632,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-16.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-16-004-dca65fd2",
@@ -9646,7 +9655,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-16.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-16-005-5125dc50",
@@ -9669,7 +9679,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-16.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-16-006-6e85b603",
@@ -9692,7 +9702,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-16.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-16-007-1aaa86a4",
@@ -9715,7 +9726,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-16.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-16-008-4c6feb00",
@@ -9738,7 +9749,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-16.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "LOYALTY",
       "vessel_source": "LOYALTY (9182306)",
       "imo_number": "9182306",
@@ -9784,7 +9795,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-16.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "ST3",
       "vessel_source": "ST3 (9220964)",
       "imo_number": "9220964",
@@ -9830,7 +9841,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-17.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-16-011-b16881ad",
@@ -9853,7 +9864,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-17.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-16-012-c5384ec6",
@@ -9876,7 +9887,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-17.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-16-013-7aeb167f",
@@ -9899,7 +9910,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-17.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-16-014-f251ebcd",
@@ -9922,7 +9933,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-18.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-16-015-82dfd39e",
@@ -9945,7 +9956,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-18.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-16-016-6b57fb27",
@@ -9968,7 +9979,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-18.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-17-001-72ea1164",
@@ -9991,7 +10002,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-17.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-17-002-bdb4209e",
@@ -10014,7 +10026,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-17.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-17-003-f91415e5",
@@ -10037,7 +10050,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-17.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-17-004-1da585a4",
@@ -10060,7 +10074,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-17.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-17-005-671a1848",
@@ -10083,7 +10098,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-17.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-17-006-b478a733",
@@ -10106,7 +10121,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-17.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-17-007-899cb441",
@@ -10129,7 +10144,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-18.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-17-008-2bcaa65e",
@@ -10152,7 +10167,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-18.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-17-009-9ba72927",
@@ -10175,7 +10190,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-18.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-17-010-51b05a9f",
@@ -10198,7 +10213,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-18.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-17-011-443456f9",
@@ -10221,7 +10236,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-18.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-17-012-44592476",
@@ -10244,7 +10259,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-20.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-18-001-6abe3af0",
@@ -10267,7 +10282,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-18.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-18-002-434490e4",
@@ -10290,7 +10306,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-18.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-18-003-a19f6799",
@@ -10313,7 +10329,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-18.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "JIF BARRACUDA",
       "vessel_source": "JIF BARRACUDA (9345506)",
       "imo_number": "9345506",
@@ -10359,7 +10375,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-19.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-18-005-305e2ec0",
@@ -10382,7 +10398,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-19.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-18-006-54d8699a",
@@ -10405,7 +10421,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-19.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-18-007-2f1cc101",
@@ -10428,7 +10444,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-19.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-18-008-ee8f93c3",
@@ -10451,7 +10467,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-19.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-18-009-103afc3b",
@@ -10474,7 +10490,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-19.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-18-010-f0bd7610",
@@ -10497,7 +10513,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-20.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-19-001-81c5649c",
@@ -10520,7 +10536,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-19.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-19-002-6cf0dd55",
@@ -10543,7 +10560,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-19.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-19-003-8cd361d6",
@@ -10566,7 +10583,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-19.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-19-004-5c20786d",
@@ -10589,7 +10606,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-19.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "CHLOE (MIVERVA V)",
       "vessel_source": "CHLOE (MIVERVA V) (9315367)",
       "imo_number": "9315367",
@@ -10635,7 +10652,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-20.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-19-006-49ca6639",
@@ -10658,7 +10675,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-20.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-19-007-16f496f5",
@@ -10681,7 +10698,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-20.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-20-001-c3042fda",
@@ -10704,7 +10721,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-20.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-20-002-c239445c",
@@ -10727,7 +10745,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-20.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-20-003-fe79f973",
@@ -10750,7 +10769,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-20.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-20-004-6c9489e2",
@@ -10773,7 +10792,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-20.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "SOYIA",
       "vessel_source": "SOYIA (9263916)",
       "imo_number": "9263916",
@@ -10819,7 +10838,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-20.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "AL DASMA",
       "vessel_source": "AL DASMA (9653446)",
       "imo_number": "9653446",
@@ -10865,7 +10884,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-21.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-20-007-efacbeb2",
@@ -10888,7 +10907,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-21.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-20-008-721f6814",
@@ -10911,7 +10930,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-21.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-20-009-8fb3b0f9",
@@ -10934,7 +10953,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-21.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-20-010-da7c7f87",
@@ -10957,7 +10976,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-22.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-21-001-97b57662",
@@ -10980,7 +10999,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-21.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-21-002-6404b6fe",
@@ -11003,7 +11023,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-22.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-21-003-0e2e3351",
@@ -11026,7 +11046,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-22.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-21-004-75ae0d4b",
@@ -11049,7 +11069,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-22.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-22-001-94b399b6",
@@ -11072,7 +11092,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-22.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-22-002-66ad3a9c",
@@ -11095,7 +11116,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-22.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-22-003-0ef873b6",
@@ -11118,7 +11139,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-23.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-22-004-9a4bb34c",
@@ -11141,7 +11162,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-23.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-22-005-7884bde6",
@@ -11164,7 +11185,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-23.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-22-006-c3125144",
@@ -11187,7 +11208,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-23.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-22-007-d3560a9e",
@@ -11210,7 +11231,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-23.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-22-008-914f29e0",
@@ -11233,7 +11254,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-23.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-23-001-3eaa0955",
@@ -11256,7 +11277,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-23.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-23-002-c1b931e7",
@@ -11279,7 +11301,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-23.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "GHANA PROSPERITY",
       "vessel_source": "GHANA PROSPERITY (9732541)",
       "imo_number": "9732541",
@@ -11325,7 +11347,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-23.json",
-      "merged_utc": "2026-11-01T08:39:01Z",
+      "merged_utc": "2026-11-02T04:06:55Z",
       "vessel_name": "LEONORA KOSAN",
       "vessel_source": "LEONORA KOSAN (9390953)",
       "imo_number": "9390953",
@@ -11371,7 +11393,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-24.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-23-005-6b0e136d",
@@ -11394,7 +11416,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-24.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-23-006-58a95282",
@@ -11417,7 +11439,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-24.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-23-007-c70c718d",
@@ -11440,7 +11462,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-24.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-24-001-bc950bbc",
@@ -11463,7 +11485,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-25.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-24-002-1247c8e4",
@@ -11486,7 +11508,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-25.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-24-003-92bd0302",
@@ -11509,7 +11531,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-25.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-24-004-3fdbca70",
@@ -11532,7 +11554,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-25.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-24-005-ecec6205",
@@ -11555,7 +11577,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-25.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-24-006-726d34a1",
@@ -11578,7 +11600,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-25.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-24-007-7329d1ca",
@@ -11601,7 +11623,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-25.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-26-001-1f1dac48",
@@ -11624,7 +11646,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-26-002-fe07306d",
@@ -11647,7 +11669,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-26-003-b7021287",
@@ -11670,7 +11693,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-26-004-81d3273c",
@@ -11693,7 +11717,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-26-005-f053b3ad",
@@ -11716,7 +11740,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-26-006-3b5b0268",
@@ -11739,7 +11763,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-26-007-2d00077e",
@@ -11762,7 +11787,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-26-008-e9c8f113",
@@ -11785,7 +11810,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-26-009-282b206b",
@@ -11808,7 +11833,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-26-010-1f27df82",
@@ -11831,7 +11856,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-26-011-ea59a22f",
@@ -11854,7 +11879,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-26-012-8d12d398",
@@ -11877,7 +11902,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-26-013-64cd06c5",
@@ -11900,7 +11925,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-26-014-47b7209b",
@@ -11923,7 +11948,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-26-015-5239a4db",
@@ -11946,7 +11971,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-26-016-c0bc7cf0",
@@ -11969,7 +11994,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-26-017-13a352bf",
@@ -11992,7 +12017,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-26-018-efaa40d2",
@@ -12015,7 +12041,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-26-019-981a2bff",
@@ -12038,7 +12064,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-26-020-0755dc3f",
@@ -12061,7 +12087,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-26-021-fc956af9",
@@ -12084,7 +12110,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-26-022-12016605",
@@ -12107,7 +12133,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-26-023-b34974a5",
@@ -12130,7 +12156,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-26-024-cba2beea",
@@ -12153,7 +12179,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-27-001-b48f655f",
@@ -12176,7 +12203,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-27-002-1f73fc95",
@@ -12199,7 +12227,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-27-003-ede055d9",
@@ -12222,7 +12250,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-27-004-0c01169f",
@@ -12245,7 +12273,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-27-005-3efe8d01",
@@ -12268,7 +12296,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-27-006-0be3f0f7",
@@ -12291,7 +12319,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-27-007-57fc9b3d",
@@ -12314,7 +12342,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-27-008-1da2c813",
@@ -12337,7 +12365,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-27-009-bbea53b3",
@@ -12360,7 +12389,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-27-010-cd6fbb78",
@@ -12383,7 +12412,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-27-011-0e23d42e",
@@ -12406,7 +12436,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-27-012-2a09b36e",
@@ -12429,7 +12459,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-27-013-ae3f63fe",
@@ -12452,7 +12483,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-27-014-9bcbe02d",
@@ -12475,7 +12507,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-28-001-020ac877",
@@ -12498,7 +12531,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-28-002-aa25dd2f",
@@ -12521,7 +12555,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-28-003-b957e24f",
@@ -12544,7 +12579,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-28-004-eaf5f243",
@@ -12567,7 +12603,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-28-005-a0454947",
@@ -12590,7 +12627,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-28-006-bdf93f65",
@@ -12613,7 +12650,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-28-007-14e25fee",
@@ -12636,7 +12674,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-28-008-2c128da1",
@@ -12659,7 +12697,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-28-009-6e8b09b9",
@@ -12682,7 +12720,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-28-010-94522dba",
@@ -12705,7 +12743,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-28-011-e945dad5",
@@ -12728,7 +12766,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-28-012-9f1d1230",
@@ -12751,7 +12789,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-28-013-5ca2bffb",
@@ -12774,7 +12812,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-28-014-30c912cd",
@@ -12797,7 +12835,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-28-015-3794568c",
@@ -12820,7 +12858,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-29-001-4f6b73d1",
@@ -12843,7 +12881,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-29-002-e25e7a1b",
@@ -12866,7 +12904,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-29-003-7f5ef647",
@@ -12889,7 +12927,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-29-004-6428c55d",
@@ -12912,7 +12950,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-29-005-a5653eb1",
@@ -12935,7 +12974,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-29-006-12c9dc40",
@@ -12958,7 +12998,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-29-007-a0435901",
@@ -12981,7 +13021,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-29-008-9a8fc083",
@@ -13004,7 +13044,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-29-009-a6a14d7c",
@@ -13027,7 +13067,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-29-010-ce6dde1d",
@@ -13050,7 +13090,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-29-011-c0971ffd",
@@ -13073,7 +13114,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-29-012-c4a69173",
@@ -13096,7 +13138,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-29-013-3c8e97e7",
@@ -13119,7 +13161,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-29-014-13824e42",
@@ -13142,7 +13185,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-29-015-85857870",
@@ -13165,7 +13208,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-29-016-05209c44",
@@ -13188,7 +13231,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-30-001-9edc93ae",
@@ -13211,7 +13254,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-30-002-4f86db9a",
@@ -13234,7 +13277,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-30-003-4a4c4453",
@@ -13257,7 +13300,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-30-004-3d9e8b1a",
@@ -13280,7 +13323,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-30-005-4ce0bd1a",
@@ -13303,7 +13346,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-30-006-d53c7de7",
@@ -13326,7 +13370,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-30-007-9b82cb60",
@@ -13349,7 +13393,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-30-008-6c099bc0",
@@ -13372,7 +13417,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-30-009-a848151c",
@@ -13395,7 +13440,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-30-010-15a52bff",
@@ -13418,7 +13463,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-30-011-e056e492",
@@ -13441,7 +13486,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-30-012-3c1dec9c",
@@ -13464,7 +13510,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-30-013-c20c18c2",
@@ -13487,7 +13533,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-30-014-12887155",
@@ -13510,7 +13556,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-30-015-961a2d39",
@@ -13533,7 +13579,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-30-016-229c3a6b",
@@ -13556,7 +13603,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-31-001-238fe2b1",
@@ -13579,7 +13626,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-31-002-b11d6087",
@@ -13602,7 +13650,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-31-003-17c75319",
@@ -13625,7 +13673,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-31-004-94d83f05",
@@ -13648,7 +13696,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-31-005-0609de50",
@@ -13671,7 +13720,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-31-006-0c61a58f",
@@ -13694,7 +13744,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-31-007-bf793e99",
@@ -13717,7 +13767,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-10-31-008-9376fec8",
@@ -13740,7 +13791,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-31-009-faebe6ae",
@@ -13763,7 +13814,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-31-010-0b87bf46",
@@ -13786,7 +13837,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-31-011-a61c8cf6",
@@ -13809,7 +13860,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-31-012-ba989bb3",
@@ -13832,7 +13883,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-31-013-c76208eb",
@@ -13855,7 +13906,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-31-014-7686ad2f",
@@ -13878,7 +13929,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-31-015-f4977d2c",
@@ -13901,7 +13952,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-10-31-016-1ea35f36",
@@ -13924,7 +13975,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-11-01-001-6c0e05d7",
@@ -13947,7 +13998,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-01.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-11-01-002-93d102c0",
@@ -13970,7 +14021,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-01.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-11-01-003-a3d46cd4",
@@ -13993,7 +14044,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-01.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-11-01-004-1b5dd088",
@@ -14016,7 +14067,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-01.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z"
     },
     {
       "event_id": "EV-2026-11-01-005-4c3b7fab",
@@ -14039,7 +14090,8 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-01.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
     },
     {
       "event_id": "EV-2026-11-01-006-d0872124",
@@ -14062,7 +14114,376 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-01.json",
-      "merged_utc": "2026-11-01T08:39:01Z"
+      "merged_utc": "2026-11-02T04:06:55Z",
+      "target": "سفينة"
+    },
+    {
+      "event_id": "EV-2026-11-01-007-eefeb84a",
+      "display_code": "MN-2026-11-02-02",
+      "date_start": "2026-11-01",
+      "date_label": "1 نوفمبر",
+      "location": "خارج القطاعات",
+      "classification": "بلاغ رسمي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "medium",
+      "confidence": "متوسطة",
+      "description": "نشرت UKMTO التحذير 191-26 من حسابها الرسمي في 01/11/2026 عند 1822Z",
+      "operational_effect": "",
+      "sources": [
+        "حساب @UK_MTO على X"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-02.json",
+      "merged_utc": "2026-11-02T04:06:55Z"
+    },
+    {
+      "event_id": "EV-2026-11-01-008-f8938151",
+      "display_code": "MN-2026-11-02-03",
+      "date_start": "2026-11-01",
+      "date_label": "1 نوفمبر",
+      "location": "مضيق هرمز",
+      "classification": "بلاغ رسمي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "medium",
+      "confidence": "متوسطة",
+      "description": "نشرت UKMTO التحديث الأول للتحذير 190-26 في 01/11/2026 عند 1819Z",
+      "operational_effect": "",
+      "sources": [
+        "حساب @UK_MTO على X"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-02.json",
+      "merged_utc": "2026-11-02T04:06:55Z"
+    },
+    {
+      "event_id": "EV-2026-11-01-009-8db0d78b",
+      "display_code": "MN-2026-11-02-04",
+      "date_start": "2026-11-01",
+      "date_label": "1 نوفمبر",
+      "location": "خارج القطاعات",
+      "classification": "بلاغ رسمي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "high",
+      "confidence": "عالية",
+      "description": "وزّعت UKMTO في 01/11/2026 عند 1426Z الملاحظة الاستشارية رقم 110 الصادرة عن JMIC",
+      "operational_effect": "",
+      "sources": [
+        "حساب @UK_MTO على X"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-02.json",
+      "merged_utc": "2026-11-02T04:06:55Z"
+    },
+    {
+      "event_id": "EV-2026-11-01-010-232a868d",
+      "display_code": "MN-2026-11-02-05",
+      "date_start": "2026-11-01",
+      "date_label": "1 نوفمبر",
+      "location": "مضيق هرمز",
+      "classification": "بلاغ رسمي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "medium",
+      "confidence": "متوسطة",
+      "description": "بلاغ هجوم بتاريخ 01/11/2026 عن واقعة داخل مضيق هرمز في قائمة تحذيرات UKMTO",
+      "operational_effect": "",
+      "sources": [
+        "UKMTO — التحذيرات 2026"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-02.json",
+      "merged_utc": "2026-11-02T04:06:55Z"
+    },
+    {
+      "event_id": "EV-2026-11-01-011-1d06f959",
+      "display_code": "MN-2026-11-02-06",
+      "date_start": "2026-11-01",
+      "date_label": "1 نوفمبر",
+      "location": "مضيق هرمز",
+      "classification": "رواية",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "low",
+      "confidence": "منخفضة",
+      "description": "نقلت مصادر إيرانية أن ناقلتي نفط انفجرتا بعد اصطدامهما المزعوم بألغام بحرية في مضيق هرمز وأن إحداهما اشتعلت",
+      "operational_effect": "",
+      "sources": [
+        "Mehr وISNA وstraits.live"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-02.json",
+      "merged_utc": "2026-11-02T04:06:55Z"
+    },
+    {
+      "event_id": "EV-2026-11-01-012-ddb761f1",
+      "display_code": "MN-2026-11-02-07",
+      "date_start": "2026-11-01",
+      "date_label": "1 نوفمبر",
+      "location": "مضيق هرمز",
+      "classification": "نقل إعلامي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "low",
+      "confidence": "منخفضة",
+      "description": "نقلت وكالة أنباء تركية عبر straits.live أن UKMTO أبلغت عن هجوم محتمل على سفينة داخل مضيق هرمز",
+      "operational_effect": "",
+      "sources": [
+        "straits.live"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-02.json",
+      "merged_utc": "2026-11-02T04:06:55Z"
+    },
+    {
+      "event_id": "EV-2026-11-01-013-0fe78f76",
+      "display_code": "MN-2026-11-02-09",
+      "date_start": "2026-11-01",
+      "date_label": "1 نوفمبر",
+      "location": "الخليج العربي",
+      "classification": "بلاغ رسمي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "high",
+      "confidence": "عالية",
+      "description": "أعلنت وزارة الخارجية البحرينية إدانتها لهجوم استهدف ناقلة غاز قطرية في الخليج العربي",
+      "operational_effect": "",
+      "sources": [
+        "حساب @bahdiplomatic على X"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-02.json",
+      "merged_utc": "2026-11-02T04:06:55Z"
+    },
+    {
+      "event_id": "EV-2026-11-01-014-db8c25c3",
+      "display_code": "MN-2026-11-02-10",
+      "date_start": "2026-11-01",
+      "date_label": "1 نوفمبر",
+      "location": "بحر العرب",
+      "classification": "بلاغ رسمي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "high",
+      "confidence": "عالية",
+      "description": "أعلن الأسطول الخامس الأمريكي تقديم مساندة لبحّارة واجهوا عطلًا في المحرك في بحر العرب",
+      "operational_effect": "",
+      "sources": [
+        "حساب @US5thFleet على X"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-02.json",
+      "merged_utc": "2026-11-02T04:06:55Z"
+    },
+    {
+      "event_id": "EV-2026-11-01-015-3e8a70a3",
+      "display_code": "MN-2026-11-02-11",
+      "date_start": "2026-11-01",
+      "date_label": "1 نوفمبر",
+      "location": "خارج القطاعات",
+      "classification": "بلاغ تحالف",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "high",
+      "confidence": "عالية",
+      "description": "أعلن التحالف المشترك اعتراض وتدمير صاروخ باليستي وطائرة مسيّرة أُطلقا باتجاه المنطقة الجنوبية، وتدمير مصادر في الحديدة وذمار",
+      "operational_effect": "",
+      "sources": [
+        "حساب @CJFCSpox على X"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-02.json",
+      "merged_utc": "2026-11-02T04:06:55Z"
+    },
+    {
+      "event_id": "EV-2026-11-01-016-b0c12ca7",
+      "display_code": "MN-2026-11-02-12",
+      "date_start": "2026-11-01",
+      "date_label": "1 نوفمبر",
+      "location": "خارج القطاعات",
+      "classification": "تقرير مهني",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "medium",
+      "confidence": "متوسطة",
+      "description": "نشرت Windward تحليلًا بعنوان عودة الألغام اللاصقة إلى الخليج مع إصابة أربع ناقلات قرب مضيق هرمز",
+      "operational_effect": "",
+      "sources": [
+        "Windward"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-02.json",
+      "merged_utc": "2026-11-02T04:06:55Z"
+    },
+    {
+      "event_id": "EV-2026-11-01-017-5c432046",
+      "display_code": "MN-2026-11-02-13",
+      "date_start": "2026-11-01",
+      "date_label": "1 نوفمبر",
+      "location": "خارج القطاعات",
+      "classification": "سجل دولي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "high",
+      "confidence": "عالية",
+      "description": "لم تُدرَج إضافة جديدة في قائمة IMO المعروضة وتضم القائمة تواريخ سبتمبر",
+      "operational_effect": "",
+      "sources": [
+        "IMO — سجل الحوادث المؤكدة"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-02.json",
+      "merged_utc": "2026-11-02T04:06:55Z"
+    },
+    {
+      "event_id": "EV-2026-11-01-018-6bb3e5c9",
+      "display_code": "MN-2026-11-02-14",
+      "date_start": "2026-11-01",
+      "date_label": "1 نوفمبر",
+      "location": "خارج القطاعات",
+      "classification": "نقل إعلامي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "low",
+      "confidence": "منخفضة",
+      "description": "صرّح وزير الدفاع الإيراني بجهوزية رد فوري من دون حدود جغرافية، وأعلن وزير الخارجية استمرار المشاورات مع الوسطاء القطريين",
+      "operational_effect": "",
+      "sources": [
+        "ISNA وMehr"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-02.json",
+      "merged_utc": "2026-11-02T04:06:55Z"
+    },
+    {
+      "event_id": "EV-2026-11-01-019-f19c2351",
+      "display_code": "MN-2026-11-02-16",
+      "date_start": "2026-11-01",
+      "date_label": "1 نوفمبر",
+      "location": "مضيق هرمز",
+      "classification": "نقل إعلامي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "low",
+      "confidence": "منخفضة",
+      "description": "نقل straits.live تقريرًا عن إصابة قاطرة بحرية في هجوم داخل مضيق هرمز",
+      "operational_effect": "",
+      "sources": [
+        "straits.live"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-02.json",
+      "merged_utc": "2026-11-02T04:06:55Z"
+    },
+    {
+      "event_id": "EV-2026-11-02-001-a4e73d81",
+      "display_code": "MN-2026-11-02-01",
+      "date_start": "2026-11-02",
+      "date_label": "2 نوفمبر",
+      "location": "خارج القطاعات",
+      "classification": "بلاغ رسمي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "medium",
+      "confidence": "متوسطة",
+      "description": "أصدرت UKMTO التحذير 192-26 عبر حسابها الرسمي في 02/11/2026 عند 0146Z",
+      "operational_effect": "",
+      "sources": [
+        "حساب @UK_MTO على X"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-02.json",
+      "merged_utc": "2026-11-02T04:06:55Z"
+    },
+    {
+      "event_id": "EV-2026-11-02-002-657d437b",
+      "display_code": "MN-2026-11-02-08",
+      "date_start": "2026-11-02",
+      "date_label": "2 نوفمبر",
+      "location": "الخليج العربي",
+      "classification": "نقل إعلامي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "low",
+      "confidence": "منخفضة",
+      "description": "نقلت الجزيرة نت عن البحرية البريطانية أن مقذوفين مجهولين استهدفا ناقلة في مياه الخليج",
+      "operational_effect": "",
+      "sources": [
+        "الجزيرة نت"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-02.json",
+      "merged_utc": "2026-11-02T04:06:55Z"
+    },
+    {
+      "event_id": "EV-2026-11-02-003-40933a50",
+      "display_code": "MN-2026-11-02-15",
+      "date_start": "2026-11-02",
+      "date_label": "2 نوفمبر",
+      "location": "الخليج العربي",
+      "classification": "بلاغ رسمي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "medium",
+      "confidence": "متوسطة",
+      "description": "بلاغ هجوم بتاريخ 02/11/2026 عن واقعة على بعد 72 ميلًا بحريًا شرق رأس الخفجي في السعودية",
+      "operational_effect": "",
+      "sources": [
+        "UKMTO — التحذيرات 2026"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-02.json",
+      "merged_utc": "2026-11-02T04:06:55Z"
     }
   ],
   "imo_summary": {
@@ -14146,8 +14567,8 @@
     ],
     "approved_source_count_source": "appendices/sources-manifest.json (مصدر واحد للحقيقة)",
     "approved_source_count_note": "كان 37 وصار 62 بموجب ملف المصدر الواحد.",
-    "unique_source_strings_in_ledger": 288,
-    "_rebuilt_utc": "2026-11-01T08:39:01Z"
+    "unique_source_strings_in_ledger": 295,
+    "_rebuilt_utc": "2026-11-02T04:06:56Z"
   },
   "limitations": [
     "لا يوجد رقم موحد للتكدس الملاحي أو طوابير الانتظار أو معدل العبور لكل الفترة؛ AIS قد يتأثر بالإطفاء أو التشويش ولا يرى العبور الصامت.",
@@ -14158,7 +14579,7 @@
   ],
   "schema_note": "قائمة السجلات الوحيدة هي `events`. أُزيل المفتاح المكرر `records` في 19 أكتوبر 2026 (بند 10 من التدقيق المستقل).",
   "vertical_rebuild": {
-    "rebuilt_utc": "2026-11-01T08:39:01Z",
+    "rebuilt_utc": "2026-11-02T04:06:56Z",
     "rebuilt_keys": [
       "counts",
       "source_audit"
@@ -14188,10 +14609,10 @@
     "rule": "كل قسم رأسي إمّا مُعاد بناؤه من السجلات، أو موسوم بتاريخه (`_state: point_in_time` + `_as_of`). لا قسم يبدو حديثًا بلا سند."
   },
   "merge_log": {
-    "merged_utc": "2026-11-01T08:39:01Z",
+    "merged_utc": "2026-11-02T04:06:56Z",
     "frozen_source": "event-ledger-sectioned-2026-02-28-to-2026-10-11.json",
-    "records_total": 480,
-    "records_from_daily_files": 335,
+    "records_total": 496,
+    "records_from_daily_files": 351,
     "added_this_run": [],
     "added_this_run_count": 0,
     "removed_this_run": [],
@@ -14603,11 +15024,15 @@
       {
         "file": "2026-11-01.json",
         "added": 6
+      },
+      {
+        "file": "2026-11-02.json",
+        "added": 16
       }
     ],
-    "added_total_since_frozen": 335,
-    "added_total_since_frozen_codes": 336,
-    "previous_merged_utc": "2026-11-01T05:25:27Z",
+    "added_total_since_frozen": 351,
+    "added_total_since_frozen_codes": 352,
+    "previous_merged_utc": "2026-11-02T04:05:36Z",
     "aliased": [
       "MN-2026-10-11-02 → EV-2026-10-11-148-5ced58be"
     ],

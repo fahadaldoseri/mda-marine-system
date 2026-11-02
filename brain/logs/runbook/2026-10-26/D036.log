@@ -1,0 +1,2 @@
+سُجّل فقط — لم يُنفَّذ (RUNBOOK_DRY_STEPS: وضع معزول)
+الأمر المعتاد: bash -lc B="$PWD"; export B; mkdir -p logs/checks; python3 tests/test_new_validators.py > logs/checks/new-validators-2026-10-26.txt 2>&1; r1=$?; python3 tests/test_parity_scope.py > logs/checks/parity-scope-2026-10-26.txt 2>&1; r2=$?; cat logs/checks/new-validators-2026-10-26.txt logs/checks/parity-scope-2026-10-26.txt; python3 -c "import json,sys;json.dump({'new_validators_rc':$r1,'parity_scope_rc':$r2},open('logs/checks/new-validators-2026-10-26.json','w'))"; exit $(( r1 || r2 ))
