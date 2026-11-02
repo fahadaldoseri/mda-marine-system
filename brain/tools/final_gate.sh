@@ -24,6 +24,52 @@ REP="$LOGDIR/report.txt"; : > "$REP"
 WORST=0
 N=0
 
+print_pipeline_disabled() {
+  python3 - "$B/runbook/runbook.json" <<'PY'
+import json, sys
+from pathlib import Path
+manifest = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+policy = manifest.get("print")
+if isinstance(policy, dict) and policy.get("enabled") is False:
+    raise SystemExit(0)
+for step in manifest.get("steps", []):
+    if step.get("id") in {"B020", "B030"} and step.get("disabled") is True:
+        raise SystemExit(0)
+raise SystemExit(1)
+PY
+}
+
+print_disable_reason() {
+  local reason stamp
+  reason="$(python3 - "$B/runbook/runbook.json" <<'PY'
+import json, sys
+from pathlib import Path
+manifest = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+print((manifest.get("print") or {}).get("reason") or "تعطيل الطباعة مثبت في المانيفست")
+PY
+)"
+  stamp="$(find "$B/logs" -maxdepth 1 -type d -name 'owner-print-disable-*' -printf '%f\n' 2>/dev/null | sort | tail -1 | sed 's/^owner-print-disable-//')"
+  printf 'معطّلة بأمر المالك (%s): %s' "${stamp:-تاريخ سجل المالك غير متاح}" "$reason"
+}
+
+step_disabled() {
+  local name="$1"; shift
+  local reason="$*"
+  N=$((N+1))
+  local log="$LOGDIR/$(printf '%02d' "$N")-$(echo "$name" | tr ' /' '__').log"
+  printf 'معطّلة بأمر المالك (مؤرخ) — مستثناة من الحكم دون تنفيذ الأمر: %s\n' "$reason" > "$log"
+  printf '%-34s %-8s (رمز 0) %s\n' "$name" "disabled" "$(basename "$log")" >> "$REP"
+  printf '  %-34s disabled (رمز 0) — %s\n' "$name" "$reason"
+}
+
+PRINT_DISABLED=0
+PRINT_REASON=""
+if print_pipeline_disabled; then
+  PRINT_DISABLED=1
+  PRINT_REASON="$(print_disable_reason)"
+  echo "  • سياسة الطباعة: $PRINT_REASON"
+fi
+
 step_strict() {     # خطوة اختبار: أي فشل يمنع (مراجعة 23 أكتوبر 2026، أولًا)
   local name="$1"; shift
   # ك-148: كان STRICT=1 بادئةً للاستدعاء فتتسرّب إلى بيئة العملية الابنة، فترى اختبارات
@@ -100,20 +146,30 @@ step "أصل نص كل واقعة (للفحص العكسي)" 1 python3 "$B/tools
 step "بصمة النص قبل البناء" 2 python3 "$B/tools/text_hash_guard.py" --date "$D" --stage record
 if [ "$BUILD" = "1" ]; then
   step "بناء الصفحة (مزامنة + بناء)" 2 python3 "$SITE/generator/sync_from_brain.py" --date "$D"
-  step "تصدير PDF المعتمد" 2 python3 "$B/tools/export_report_assets.py" --date "$D" --only pdf
-  # جودة الطباعة (ك-104 · ك-105): تُقاس على PDF النهائي وبوسائط print نفسها التي يُبنى بها.
-  # عرض/ارتفاع كتلة الخريطة وتصفير كل كتل المتن = بند مانع يوقف النشر وتلغرام.
-  step "جودة الطباعة (الخريطة والتصفير على PDF)" 2 python3 "$B/validators/check_print_quality.py" \
-    --pdf "$SITE/dist/reports/pdf/$D.pdf" --page "$SITE/dist/reports/$D.html" --date "$D"
+  if [ "$PRINT_DISABLED" = "1" ]; then
+    step_disabled "تصدير PDF المعتمد" "$PRINT_REASON"
+    step_disabled "جودة الطباعة (الخريطة والتصفير على PDF)" "$PRINT_REASON"
+  else
+    step "تصدير PDF المعتمد" 2 python3 "$B/tools/export_report_assets.py" --date "$D" --only pdf
+    # جودة الطباعة (ك-104 · ك-105): تُقاس على PDF النهائي وبوسائط print نفسها التي يُبنى بها.
+    # عرض/ارتفاع كتلة الخريطة وتصفير كل كتل المتن = بند مانع يوقف النشر وتلغرام.
+    step "جودة الطباعة (الخريطة والتصفير على PDF)" 2 python3 "$B/validators/check_print_quality.py" \
+      --pdf "$SITE/dist/reports/pdf/$D.pdf" --page "$SITE/dist/reports/$D.html" --date "$D"
+  fi
   # خط الأساس الرسمي (virgin): تنبيهي — يُعلن أي انحراف في ملفات الشكل والبوابات عن
   # النسخة المعتمدة، فلا يتغيّر الشكل الرسمي دون قرار موثَّق وتجديد للبيان.
   step "خط الأساس الرسمي (virgin)" 2 python3 "$B/tools/check_baseline.py"
-  # نسخة Word طبق الأصل: بوابة المخرج 9 تمنع التسليم بلا نسخة Word، فتُبنى هنا آليًا
-  step "نسخة Word طبق الأصل" 2 python3 "$B/tools/build_report_docx_exact.py" --date "$D"
+  # نسخة Word طبق الأصل: تُستثنى فقط مع سياسة الطباعة المعلنة، وتُعاد تسليحها تلقائيًا عند التفعيل.
+  if [ "$PRINT_DISABLED" = "1" ]; then
+    step_disabled "نسخة Word طبق الأصل" "$PRINT_REASON"
+  else
+    step "نسخة Word طبق الأصل" 2 python3 "$B/tools/build_report_docx_exact.py" --date "$D"
+  fi
 fi
 
 step "فحص ما قبل التشغيل" 2 python3 "$B/tools/preflight_check.py" "$D"
 step "مدقق التقرير (الواجهة)" 2 python3 "$B/validators/validate_report.py" "$B/web/meta/$D.json" --md "$B/reports/$D-sectioned.md"
+step "حقول علاقات الدفتر والأسطح المبنية" 2 python3 "$B/validators/check_ledger_links.py" --date "$D" --brain "$B" --site "$SITE"
 step "بوابة الأسلوب" 2 python3 "$B/validators/check_style.py" "$B/reports/$D-sectioned.md"
 step "بوابة اللغة" 2 python3 "$B/validators/check_language.py" "$B/reports/$D-sectioned.md"
 # بوابة الفهم: رموز بلا تعريف · اصطلاحات حاجبة · محتوى داخلي منشور · التباس «قُطر/قطر» · تعارض أرقام
@@ -172,7 +228,8 @@ step "المفردات المبسطة (تنبيهي حتى الموافقة)" 2 
 # السجل الحاكم للمفردات: مصدر واحد للإنفاذ (appendices/simplified-vocabulary.json)
 # ومُولَّده (appendices/forbidden-coinages.json) لا يُحرَّر يدويًا. فشل هذه الخطوة = تعارض السجلين.
 step "السجل الحاكم للمفردات ومُولَّده" 2 python3 "$B/tools/build_vocab_gate.py" --check
-python3_soft "$B/validators/check_vocab_chain.py"
+# ك-479: كان الحارس يُستدعى باسم دالة غير معرّفة («python3_soft») فيُهمَل صامتًا — أُعيد ربطه مانعًا.
+step "حارس سلسلة الاستبدال في المفردات (ك-479)" 2 python3 "$B/validators/check_vocab_chain.py"
 # تغطية بوابة الأسلوب: كل سطح يقرأه القارئ (المتن · القاموس · تلغرام · صفحة التقرير ·
 # صفحة المصادر · الرئيسية) يُقاس، وPDF يُثبت بالإسناد لأن الاستخراج العربي يعكس الحروف.
 step "تغطية بوابة الأسلوب لكل سطح يقرأه القارئ" 2 python3 "$B/tools/audit_style_coverage.py" --date "$D"
@@ -208,7 +265,7 @@ status = {0: 'ok', 1: 'warn', 2: 'block'}[worst]
 steps = []
 for line in (logdir / 'report.txt').read_text(encoding='utf-8').splitlines():
     parts = line.split()
-    idx = next((i for i, t in enumerate(parts) if t in ('ok', 'warn', 'block', 'crash')), None)
+    idx = next((i for i, t in enumerate(parts) if t in ('ok', 'warn', 'block', 'crash', 'disabled')), None)
     if idx:  # اسم الفحص قد يحوي مسافات — الموضع يُحدَّد بأول رمز حالة
         steps.append({'step': ' '.join(parts[:idx]), 'status': parts[idx],
                       'exit_code': (lambda x: int(x) if x and x.isdigit() else None)(

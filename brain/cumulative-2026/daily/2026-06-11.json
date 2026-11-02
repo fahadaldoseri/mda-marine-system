@@ -1,21 +1,28 @@
 [
-  {
-    "code": "COVER-2026-06-11-001",
-    "date": "2026-06-11",
-    "area": "",
-    "class": "واقعة عسكرية/إعاقة بالقوة وحريق",
-    "title": "أعلنت CENTCOM تعطيل الناقلة M/T Jalveer التي تحمل علم غينيا بيساو بعد قولها إنها تنقل نفطًا إيرانيًا وتخالف الحصار؛ أطلقت طائرة أمريكية صاروخين من نوع Hellfire على غرفة المحركات بعد عدم الامتثال. يسجل JMIC حريقًا في غرفة المحركات دون أثر بيئي.",
-    "source": "https://www.centcom.mil/MEDIA/PUBLIC-RELEASES/Article/4514268/us-forces-disable-3rd-oil-tanker-violating-blockade-in-gulf-of-oman/",
-    "confidence": "عالية",
-    "source_excerpt": "أعلنت CENTCOM تعطيل الناقلة M/T Jalveer التي تحمل علم غينيا بيساو بعد قولها إنها تنقل نفطًا إيرانيًا وتخالف الحصار؛ أطلقت طائرة أمريكية صاروخين من نوع Hellfire على غرفة المحركات بعد عدم الامتثال. يسجل JMIC حريقًا في غرفة المحركات دون أثر بيئي.",
-    "backfilled": true,
-    "event_kind": "legacy_projection",
-    "material_projection": true,
-    "sector": "",
-    "retrieved_at": "2026-10-31T16:08:28Z",
-    "source_description": "إسقاط يومي أمين لسجل موجود أصلًا في event-ledger-master.json؛ لا واقعة جديدة.",
-    "incident_kind": "هجوم",
-    "incident_kind_basis": "ذكر صريح: «صاروخ»",
-    "target": "سفينة"
-  }
+ {
+  "code": "COVER-2026-06-11-001",
+  "date": "2026-06-11",
+  "area": "",
+  "class": "واقعة عسكرية/إعاقة بالقوة وحريق",
+  "title": "أعلنت CENTCOM تعطيل الناقلة M/T Jalveer التي تحمل علم غينيا بيساو بعد قولها إنها تنقل نفطًا إيرانيًا وتخالف الحصار؛ أطلقت طائرة أمريكية صاروخين من نوع Hellfire على غرفة المحركات بعد عدم الامتثال. يسجل JMIC حريقًا في غرفة المحركات دون أثر بيئي.",
+  "source": "https://www.centcom.mil/MEDIA/PUBLIC-RELEASES/Article/4514268/us-forces-disable-3rd-oil-tanker-violating-blockade-in-gulf-of-oman/",
+  "confidence": "عالية",
+  "source_excerpt": "أعلنت CENTCOM تعطيل الناقلة M/T Jalveer التي تحمل علم غينيا بيساو بعد قولها إنها تنقل نفطًا إيرانيًا وتخالف الحصار؛ أطلقت طائرة أمريكية صاروخين من نوع Hellfire على غرفة المحركات بعد عدم الامتثال. يسجل JMIC حريقًا في غرفة المحركات دون أثر بيئي.",
+  "backfilled": true,
+  "material_projection": true,
+  "sector": "",
+  "retrieved_at": "2026-10-31T16:08:28Z",
+  "source_description": "إسقاط يومي أمين لسجل موجود أصلًا في event-ledger-master.json؛ لا واقعة جديدة.",
+  "incident_kind": "هجوم",
+  "incident_kind_basis": "ذكر صريح: «صاروخ»",
+  "target": "سفينة",
+  "update_of": null,
+  "parent_id": null,
+  "duplicate_of": null,
+  "event_kind": "جديد",
+  "link_basis": "لا دليل رابط",
+  "link_evidence": "",
+  "link_status": "غير مرتبط",
+  "counts_as_new": true
+ }
 ]

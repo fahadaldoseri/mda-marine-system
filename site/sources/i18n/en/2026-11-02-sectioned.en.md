@@ -9,8 +9,9 @@ The codes used here are defined as follows:
 - AIS is the Automatic Identification System.
 ## Summary
 - UKMTO issued three official warnings during the period: an update to warning 190-26, then warning 191-26 on 01/11, then warning 192-26 on 02/11, and issued on behalf of JMIC advisory note No. 110 (MN-2026-11-02-01 to MN-2026-11-02-04; UKMTO B/2).
-- Monitoring outlets and Iranian sources reported that two oil tankers exploded after their alleged collision with sea mines in the Strait of Hormuz, and that one of them caught fire, without independent official confirmation (MN-2026-11-02-06 and MN-2026-11-02-07; C/3).
-- Operational impact: raise vigilance in the Strait of Hormuz and the Arabian Gulf, do not change course based on an unconfirmed account, and report any projectile or explosion (EST-2026-11-02-01; confidence level: medium).
+- Monitoring outlets and Iranian sources reported that two oil tankers exploded after their alleged collision with maritime projectiles in the Strait of Hormuz, and that one of them caught fire, without independent official confirmation (MN-2026-11-02-06 and MN-2026-11-02-07; C/3).
+- Operational impact: raise vigilance in the Strait of Hormuz and the Arabian Gulf, do not change course based on an unconfirmed account, and report any projectile or explosion (EST-2026-11-02-01).
+Confidence level: medium.
 ## Geographic Distribution of Incidents
 | Sector | Coded items | Share | Source and grade |
 |---|---:|---:|---|
@@ -146,4 +147,4 @@ Sources used and their grades:
 - Jerusalem Post (C/3)
 - ISNA (C/3)
 Source status by number: sources 2, 5, 6, 10, 15, 18, 19, 31, 44, 46, 47 and 60 were cited; sources 39 and 52 require direct reading; the remaining numbers were not cited in this body.
-Repetition of headlines does not raise the confirmation grade when they carry the same claim. The share of incidents attributed to unspecific parties remains in this edition, because the available material carries no official attribution to a perpetrator.
+Repetition of headlines does not raise the confirmation grade when they carry the same claim. The share of incidents attributed to unknown parties remains in this edition, because the available material carries no official attribution to a perpetrator.

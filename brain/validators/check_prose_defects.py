@@ -233,11 +233,21 @@ def find_forbidden(text: str, report_date: str | None = None) -> list[dict]:
         term = str(entry.get("term", "")).strip()
         if not term:
             continue
+        normalized_term = normalize_word(term)
+        if not normalized_term:
+            continue
         # تاريخ السريان: لفظ أُضيف اليوم لا يمنع نصًا منشورًا قبله (قرار صاحب القرار 2026-10-23).
         since = str(entry.get("since", "") or "")
         blocking = not (report_date and since and report_date < since)
+        # لا تُطابق اللفظ كسلسلة فرعية داخل كلمة عربية («سند» داخل «يُسند»).
+        # تشمل الحدود علامات التشكيل العربية حتى لا يسمح التشكيل بالانفلات من الحارس.
+        term_pattern = re.compile(
+            r"(?<![\u0600-\u06FF])" + re.escape(normalized_term) + r"(?![\u0600-\u06FF])"
+        )
         for line_no, line in enumerate(lines, 1):
-            for match in re.finditer(re.escape(term), line):
+            # إزالة التشكيل تجعل الفحص المباشر مطابقًا لاستخراج الأسطح المطبّع.
+            matching_line = normalize_word(line)
+            for match in term_pattern.finditer(matching_line):
                 found.append({
                     "line": line_no, "term": term, "blocking": blocking,
                     "replacement": entry.get("replacement", "راجع قائمة المفردات المبسطة"),

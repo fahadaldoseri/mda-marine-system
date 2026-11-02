@@ -427,6 +427,16 @@ def gate_python_syntax(date: str):
     return (out.returncode == 0), detail, False
 
 
+def gate_ledger_links(date: str):
+    """فحص اتساق حقول العلاقة وغياب عبارات فجوة الربط من الأسطح المبنية."""
+    out = subprocess.run([sys.executable, str(B / "validators" / "check_ledger_links.py"),
+                          "--date", date, "--brain", str(B), "--site", str(SITE)],
+                         capture_output=True, text=True, cwd=str(B))
+    lines = ((out.stdout or "") + (out.stderr or "")).strip().splitlines()
+    detail = lines[-1] if lines else "لا مخرجات"
+    return (out.returncode == 0), detail, False
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", required=True)
@@ -435,6 +445,7 @@ def main() -> int:
     Path("/tmp/_qa_toc.txt").write_text(pdf_text(pdf), encoding="utf-8")
     gates = [
         ("0 ترجمة الشيفرة (لا ملف Python معطوب)", gate_python_syntax),
+        ("0 حقول علاقات الدفتر والأسطح المبنية", gate_ledger_links),
         ("0 ربط الأرقام بمصادرها", gate_number_bindings),
         ("0 سلسلة الاستبدال", gate_vocab_chain),
         ("1 المصدر والمخطط", gate_schema),
@@ -501,4 +512,3 @@ def gate_no_empty_tags(date: str):
 
 if __name__ == "__main__":
     sys.exit(main())
-

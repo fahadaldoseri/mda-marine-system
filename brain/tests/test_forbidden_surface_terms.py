@@ -17,6 +17,8 @@ import tempfile
 from pathlib import Path
 
 B = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(B))
+from validators.check_prose_defects import find_forbidden
 VALIDATOR = B / "validators" / "check_forbidden_surface_terms.py"
 STYLE = B / "validators" / "check_style.py"
 DATE = "2026-10-31"
@@ -99,6 +101,15 @@ def main() -> int:
         else:
             failures.append("السالب المباشر للقائمة")
             print("  ✘ مدقق القائمة لم يمنع نافذة:", (style.stdout + style.stderr).strip())
+
+        exact = find_forbidden("سند التقرير")
+        partial = find_forbidden("تسند الجهة التقرير")
+        diacritized = find_forbidden("يُسند هذا التقدير إلى الوقائع")
+        if exact and not partial and any(item["term"] == "يسند" for item in diacritized):
+            print("  ✓ حدود الكلمة والتشكيل: «سند» و«يُسند» يُمنعان و«تسند» لا تُطابق جزئيًا")
+        else:
+            failures.append("المطابقة الجزئية للفظ سند")
+            print(f"  ✘ المطابقة: exact={len(exact)} partial={len(partial)} diacritized={len(diacritized)}")
     print(f"الحصيلة: {len(failures)} فشل")
     return 1 if failures else 0
 
