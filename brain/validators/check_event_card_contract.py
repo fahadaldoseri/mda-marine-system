@@ -27,7 +27,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CARD_ROWS = 10
-ROW_LABELS = {4: "التاريخ والوقت", 5: "الموضع", 6: "المصدر", 7: "الرابط الرسمي",
+ROW_LABELS = {4: "التاريخ والوقت", 5: "الموقع", 6: "المصدر", 7: "الرابط الرسمي",
               8: "ترجمة المعنى", 9: "النص الأصلي"}
 # الوسوم المقابلة في النسخة الإنجليزية (تُقرأ من المعجم المعتمد، لا تُخمَّن).
 EN_ROW_LABELS = {4: "Date and time", 5: "Location", 6: "Source and grade",
@@ -35,7 +35,8 @@ EN_ROW_LABELS = {4: "Date and time", 5: "Location", 6: "Source and grade",
 CLASSIFICATION_VALUES = ("بلاغ رسمي", "تقرير مهني", "نقل إعلامي", "نقل سياسي",
                          "رواية غير مؤكدة من طرف واحد", "نفي رسمي", "غير مصنّف", "قيد التثبّت")
 RELIABILITY_VALUES = ("عالية", "متوسطة", "منخفضة", "غير مقيّمة")
-ROW_STATES = ("shown", "hidden-rule-arabic-source", "hidden-rule-no-excerpt")
+ROW_STATES = ("shown", "hidden-rule-arabic-source", "hidden-rule-no-excerpt",
+              "hidden-rule-no-official-link")
 SHORTLINK_RE = re.compile(r"https?://(?:t\.co|bit\.ly|lnkd\.in|tinyurl\.com|goo\.gl|ow\.ly|"
                           r"buff\.ly|is\.gd|cutt\.ly|rb\.gy)/")
 HASHTAG_RE = re.compile(r"(?<!\w)#[A-Za-z0-9_\u0600-\u06ff]{2,}")
@@ -106,6 +107,17 @@ def card_violations(card_html: str, index: int, labels: dict[int, str] | None = 
         errors.append(f"{where}: صف النص الأصلي ظاهر بلا طيّ")
     if found.get(9, "").startswith("hidden") and 'data-fold="original-text"' in card_html:
         errors.append(f"{where}: صف النص الأصلي مخفيّ وله طيّ في الوقت نفسه")
+    # ملاحظات المالك 2026-11-02 (فشل مغلق على كل بطاقة):
+    if "التوقيت غير مسجّل" in text:
+        errors.append(f"{where}: عبارة غياب التوقيت ظاهرة (أُلغيت بقرار المالك)")
+    if "الرابط الرسمي غير مدرج" in text or "من تغذية المصادر" in text:
+        errors.append(f"{where}: عبارة غياب الرابط أو إسناد التغذية ظاهرة (أُلغيت بقرار المالك)")
+    if "الموضع" in text:
+        errors.append(f"{where}: وسم «الموضع» ظاهر بدل «الموقع»")
+    if found.get(7, "").startswith("hidden") and "hidden-rule-no-official-link" not in card_html:
+        errors.append(f"{where}: صف الرابط الرسمي مخفيّ بحالة غير معروفة")
+    if found.get(7) == "shown" and not re.search(r'<a\b[^>]*href="https?://', card_html):
+        errors.append(f"{where}: صف الرابط الرسمي ظاهر بلا رابط")
     return errors
 
 
