@@ -381,11 +381,26 @@ def _translate_counter_fragment(text: str, labels: dict[str, str]) -> str:
 def make_translator(tm: dict[str, str], gl: dict[str, str]):
     keys = sorted(set(tm) | set(gl), key=len, reverse=True)
 
+    def _val(k: str) -> str:
+        """قيمة الترجمة لمفتاح، والمعجم المعتمد يسبق ذاكرة الترجمة الناقصة.
+
+        العلّة (ك-390): ذاكرة الترجمة تُبنى بمحاذاة أسطر المتن، فإذا انحرفت أسطر
+        الجدول أنتجت قيمةً إنجليزية تحمل كلمة عربية متبقية (مثل «في»)، وكانت
+        تُقدَّم على المعجم المعتمد فيبقى نص عربي مرئي في النسخة الإنجليزية.
+        القاعدة الآن: أي قيمة في ذاكرة الترجمة تحتوي حرفًا عربيًا لا تُقدَّم على
+        قيمة المعجم؛ فإن لم يوجد مدخل معجم تُستعمل كما هي للعلم والإصلاح.
+        """
+        tv = tm.get(k)
+        if tv and not ARABIC.search(tv):
+            return tv
+        gv = gl.get(k)
+        if gv:
+            return gv
+        return tv or ""
+
     def lookup(t: str) -> str | None:
-        if t in tm:
-            return tm[t]
-        if t in gl:
-            return gl[t]
+        if t in tm or t in gl:
+            return _val(t)
         pat = localize_patterns(t)
         if pat:
             return pat
@@ -396,18 +411,27 @@ def make_translator(tm: dict[str, str], gl: dict[str, str]):
                   and not norm(t).endswith(("·", "…"))]
         if starts:
             k = min(starts, key=len)
-            return tm.get(k) or gl.get(k) or ''
+            return _val(k)
         within = [k for k in keys if t.startswith(k) and _partial_key_safe(t, k)
                   and not ADVISORY_ID.search(t)]
         if within:
             k = max(within, key=len)
-            return tm.get(k) or gl.get(k) or ''
+            return _val(k)
         return None
 
     def translate(u: str) -> str:
         n = norm(u)
         if not n or not ARABIC.search(n):
             return u
+        # قوائم الأسماء اللاتينية المتصلة بحرف العطف العربي «و» (مثل: Mehr وISNA)
+        # ليست نصًّا عربيًا يحتاج معجمًا، بل يجب أن تُوصل بـ«and»؛ فيبقى الاسم
+        # اللاتيني كما هو ولا يبقى حرف عربي مرئي في الصفحة الإنجليزية (ك-391).
+        if set(ARABIC.findall(n)) == {"و"}:
+            fixed = re.sub(r"(?<=[A-Za-z0-9]) و(?=[A-Za-z0-9])", " and ", u)
+            fixed = re.sub(r"^\s*و(?=[A-Za-z0-9])", "and ", fixed)
+            dual = re.sub(r"(?<=[A-Za-z0-9]) و(?=[A-Za-z0-9])", " and ", fixed)
+            if not ARABIC.search(dual):
+                return dual
         direct = lookup(n)
         if direct is not None:
             return u.replace(n, direct)
@@ -574,10 +598,14 @@ def translate_page(html_text: str, date: str, tm: dict[str, str], gl: dict[str, 
     def _unit_ok(orig: str, translated: str) -> bool:
         """الوحدة مترجمة إذا نجحت الترجمة أو نجح محرك الأنماط عليها.
 
-        محرك الأنماط مسار ثانٍ محكوم (مثل نمط تفصيل الحرائق)، فلا يُعدّ النص
+        محرك الأنماط مسار ثانٍ محكوم (مثل نمط تفصيل الحريق)، فلا يُعدّ النص
         العربي المتحرك عطلًا إذا كان له نمط معتمد يترجمه بالأرقام.
+
+        تشديد ك-390/ك-391: أي حرف عربي متبقٍّ في المخرج الإنجليزي عطل مانع،
+        ولو كان حرفًا واحدًا؛ لأن بوابة تماثل النسختين ترفض النص العربي المرئي
+        كله. كان الحدّ السابق (>2) يسمح ببقاء كلمات مثل «في» و«و» فتوقف النشر.
         """
-        if not (ARABIC.search(norm(translated)) and len(ARABIC.findall(translated)) > 2):
+        if not ARABIC.search(norm(translated)):
             return True
         try:
             alt = localize_patterns(orig)
@@ -585,7 +613,7 @@ def translate_page(html_text: str, date: str, tm: dict[str, str], gl: dict[str, 
             alt = None
         if not alt:
             return False
-        return not (ARABIC.search(norm(alt)) and len(ARABIC.findall(alt)) > 2)
+        return not ARABIC.search(norm(alt))
 
     remaining = [t for t, translated in zip(c.units, units) if not _unit_ok(t, translated)]
     out = _collapse_inline_source_duplicates(out)

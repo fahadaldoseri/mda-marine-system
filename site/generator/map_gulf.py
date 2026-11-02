@@ -834,7 +834,16 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
                 f'{_badge(x, y, sids[i - 1])}</g>'
             )
         txt = (p.get("label") or p.get("area") or "").strip()
-        bits = [f'<span class="lg-txt">{_esc(txt)}</span>',
+        # ك-392: بند المفتاح يعرّف العلامة بالمنطقة لا بسرد الواقعة، فلا يتكرّر
+        # نصّ بطاقة سجل الأحداث في المفتاح (كان 4 نصوص ≥60 محرفًا مكرّرة).
+        label = (p.get("area") or p.get("sector") or "").strip() or _short_legend(
+            p.get("label") or "")
+        # إن غاب اسم المنطقة، يُعرض وسم ثابت قابل للترجمة بدل قصّ عنوان الواقعة،
+        # لأن العنوان المقصوص يُنتج وحدة نصية جديدة كل يوم بلا مقابل في المعجم
+        # فيوقف البناء فشلًا مغلقًا في النسخة الإنجليزية (ك-392).
+        if label.endswith("…"):
+            label = "موقع الواقعة"
+        bits = [f'<span class="lg-txt">{_esc(label)}</span>',
                 f'<span class="lg-st st-{st_key}">{st_ar}</span>',
                 f'<span class="lg-prec">{"موضع تقريبي" if p.get("precision") == "approximate" else "إحداثيات مذكورة"}</span>']
         if code:
@@ -1082,3 +1091,17 @@ if __name__ == "__main__":
     out = build_map(pts, "المصدر: جدول التوزيع الجغرافي للوقائع.", inset={"points": []})
     Path("/tmp/map_test.svg").write_text(out, encoding="utf-8")
     print("svg bytes:", len(out))
+def _short_legend(txt: str, limit: int = 56) -> str:
+    """عنوان مختصر لبند مفتاح الخريطة.
+
+    العلّة (ك-392): كان المفتاح يعيد نصّ الواقعة كاملًا، وهو نفسه نصّ بطاقة
+    سجل الأحداث، فظهر تكرار نصّي مرئي (4 نصوص ≥60 محرفًا) ورصدته أداة
+    التدقيق الحي فمنعت إغلاق خطوة التحقق الحي. المفتاح غايته تعريف العلامة
+    لا سرد الواقعة، فيُعرض هنا عنوان مختصر، ويبقى النص الكامل في بطاقة
+    الواقعة.
+    """
+    t = " ".join((txt or "").split())
+    if len(t) <= limit:
+        return t
+    cut = t[:limit].rsplit(" ", 1)[0]
+    return (cut or t[:limit]).rstrip("،,؛;") + "…"

@@ -39,6 +39,8 @@ In PowerShell:
 
 Check whether rclone is installed first. If missing, install it with an available system package manager or an official native release. Never run `rclone config` or pass `--config` in this mode.
 
+Run each connector wrapper directly as a top-level `exec` command, with its path written out in full. Do not invoke a wrapper through scripts or subprocesses, and do not build its path from variables or string operations; use scripts only to process saved command output afterward.
+
 ## Other Sandbox execution
 
 Use the preconfigured `gws` CLI through `exec`. Run `gws --help` before first use to learn available services and subcommands.
