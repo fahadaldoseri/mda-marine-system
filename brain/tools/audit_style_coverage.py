@@ -46,6 +46,45 @@ TODAY = date.today().isoformat()
 TMP = Path(tempfile.gettempdir()) / "style-coverage"
 
 
+TAG_MARK = "\u0001"
+TAG_MARK_INLINE = "\u0002"
+_PUNCT = ".،;؛:!؟"
+# الوسوم الوسيطة لا تُنتج فاصلًا في العرض؛ حذفها يطابق innerText في المتصفح.
+_INLINE_TAGS = {
+    "span", "bdi", "bdo", "b", "i", "em", "strong", "a", "code", "small", "sup", "sub",
+    "mark", "u", "s", "strike", "abbr", "acronym", "cite", "q", "time", "kbd", "samp",
+    "var", "wbr", "font", "label", "big", "tt", "data", "dfn", "ins", "del", "nobr",
+}
+
+
+def _tag_to_mark(m):
+    """وسم وسيط ⇒ حذف · وسم كتلي ⇒ فاصل سطر (ك-4م1)."""
+    g = re.match(r"<\s*/?\s*([A-Za-z0-9]+)", m.group(0))
+    return TAG_MARK_INLINE if (g and g.group(1).lower() in _INLINE_TAGS) else TAG_MARK
+
+
+def _tag_mark_to_text(s: str) -> str:
+    """يترجم أثر الوسوم إلى نصٍّ كما يُقرأ في المتصفح.
+
+    ك-4م2 (2026-11-02): قياس حيّ أثبت أن تحويل كل وسم إلى فاصل يُنتج نصوصًا لا يراها
+    القارئ: (1) فراغًا قبل علامة الترقيم إذا كان الوسم بين الرمز والعلامة
+    («B/2) .» في الاستخراج · 0 في المتصفح)؛ (2) حرفًا عربيًا مضاعفًا إذا التصق نصُّ
+    عنصرين متجاورين («جدًا» + «التقرير» ⇒ «االتقرير» · 0 في المتصفح).
+
+    القواعد: الوسم الوسيط بين حرفين ⇒ مسافة · الوسم الوسيط قبل ترقيم ⇒ حذف مع فراغه ·
+    ما سوى ذلك من الوسوم الوسيطة ⇒ حذف بلا فاصل (كما في العرض) · الوسم الكتلي ⇒ فاصل سطر.
+    """
+    # صنف الحرف: ء-ي وٱ-ۓ حروف عربية فقط — تُستثنى علامات الترقيم
+    # العربية (، U+060C · ؛ U+061B · ؟ U+061F) ولو وقعت داخل المدى ؀-ۿ،
+    # وإلا حُسبت حرفًا فأُدرج فراغ قبلها (عطل قياس رُصد 2026-11-02 وأُصلح).
+    s = re.sub(r"(?<=[\w\u0621-\u064A\u0671-\u06D3])" + TAG_MARK_INLINE
+               + r"+(?=[\w\u0621-\u064A\u0671-\u06D3])", " ", s)
+    s = re.sub(r"[ \t\u00a0]*(?:" + TAG_MARK + "|" + TAG_MARK_INLINE + r")+[ \t\u00a0]*(?=[" + re.escape(_PUNCT) + r"])",
+               "", s)
+    s = s.replace(TAG_MARK_INLINE, "")
+    return s.replace(TAG_MARK, "\n")
+
+
 def strip_html(raw: str) -> str:
     """يحوّل HTML إلى نص، ويحفظ كل صف جدول في سطر واحد بفواصل أنابيب.
 
@@ -56,11 +95,13 @@ def strip_html(raw: str) -> str:
     raw = re.sub(r"(?is)<(script|style|noscript|template)[^>]*>.*?</\1>", " ", raw)
     rows = []
     for row in re.findall(r"(?is)<tr[^>]*>(.*?)</tr>", raw):
-        cells = [re.sub(r"(?s)<[^>]+>", " ", c) for c in re.findall(r"(?is)<t[dh][^>]*>(.*?)</t[dh]>", row)]
+        cells = [re.sub(r"(?s)<[^>]+>", _tag_to_mark, c) for c in re.findall(r"(?is)<t[dh][^>]*>(.*?)</t[dh]>", row)]
+        cells = [_tag_mark_to_text(c) for c in cells]
         cells = [html.unescape(re.sub(r"\s+", " ", c)).strip() for c in cells]
         rows.append(" | ".join(c for c in cells if c))
     raw = re.sub(r"(?is)<(table|thead|tbody|tfoot)[^>]*>.*?</\1>", " ", raw)
-    raw = re.sub(r"(?s)<[^>]+>", "\n", raw)
+    raw = re.sub(r"(?s)<[^>]+>", _tag_to_mark, raw)
+    raw = _tag_mark_to_text(raw)
     return html.unescape(raw) + "\n" + "\n".join(rows)
 
 
@@ -85,7 +126,7 @@ def _disabled_producers() -> dict:
     out = {}
     try:
         rb = json.loads((BASE / "runbook" / "runbook.json").read_text(encoding="utf-8"))
-    except Exception:
+    except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError):
         return out
 
     def walk(o):

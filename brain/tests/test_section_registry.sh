@@ -3,7 +3,7 @@
 set -u
 B="$(cd "$(dirname "$0")/.." && pwd)"
 C="$(mktemp -d)"; trap 'rm -rf "$C"' EXIT
-tar -C "$B" --exclude=.git --exclude=logs --exclude=design --exclude=skills --exclude=reports --exclude='*.pdf' --exclude='*.docx' -cf - . | tar -C "$C" -xf -
+tar -C "$B" --exclude=.git --exclude=logs --exclude=design --exclude=reports --exclude='*.pdf' --exclude='*.docx' -cf - . | tar -C "$C" -xf -
 mkdir -p "$C/reports"; cp "$(ls "$B"/reports/*-sectioned.md | tail -1)" "$C/reports/"
 [ -d "$B/../site" ] && export SITE_DIR="$(cd "$B/../site" && pwd)" || export SITE_DIR="$(cd "$B/../seawatch" && pwd)"
 cd "$C" || exit 2

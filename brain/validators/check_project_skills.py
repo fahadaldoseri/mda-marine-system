@@ -121,4 +121,7 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    import sys as _sys, pathlib as _pl
+    _sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)

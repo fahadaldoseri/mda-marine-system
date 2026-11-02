@@ -211,6 +211,7 @@ t "وحدات إسناد المصدر مشتركة بين المولّد وال�
 t "حارس الحفظ: ترقيم ملاصق · عناوين · مسموح الحذف" python3 tests/test_preserve_check.py
 t "فاحص الإملاء بلا إنذار كاذب" python3 tests/test_orthography.py
 t "التحرير الآلي يحفظ التمهيد ويرفض تغيّر الأرقام" python3 tests/test_edit_pass.py
+t "استخراج نص الأسطح بمحرك العرض بلا عيوب وهمية" python3 tests/test_audit_extract_no_phantom.py
 
 echo "14) محرّك الكتيب والمانيفست"
 t "تقوية المحرّك (مسارات · ترتيب · gate-json · إتمام بالدليل)" python3 tests/test_runbook_hardening.py
@@ -273,3 +274,7 @@ printf '  نجح: %s · فشل: %s\n' "$PASS" "$FAIL"
 [ "$FAIL" -eq 0 ] || exit 1
 exit 0
 t "بوابة أسرار المستودع" python3 validators/check_repo_secrets.py
+
+# حارس ترجمة الشيفرة (يمنع ملفات Python معطوبة)
+python3 "$B/validators/check_python_syntax.py"
+rc=$?; [ $rc -ne 0 ] && exit $rc

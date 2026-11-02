@@ -261,12 +261,20 @@ def normalize_sentence(sentence: str) -> str:
     return sentence
 
 
+REGISTRY_ROW = re.compile(r"^\s*(?:[-*•]\s*)?\*{0,2}(?:MN|EST)-\d{4}-\d{2}-\d{2}-\d{2}\b")
+
+
 def find_repeated_templates(text: str) -> list[dict]:
     text = strip_markup(text)  # ك-409
     candidates = []
     for line_no, line in enumerate(text.splitlines(), 1):
         if "|" in line:
             continue  # أسطر الجداول: تكرار الخلية بنية جدول لا قالب جملة (معايرة 23 أكتوبر)
+        # قرار 2026-11-02 (امتداد قرار 2026-11-01 لسجل المصادر): أسطر «سجل الأحداث» في المتن
+        # سجل مُهيكل — رمز الواقعة ثم الحقول («المصدر» · «الدرجة» · «الموقع» · «الحالة»).
+        # تكرار وسم الحقل بنية صف لا قالب جملة إنشائي، ويبقى القياس مانعًا على كل نص آخر.
+        if REGISTRY_ROW.search(line):
+            continue
         clean_line = strip_markup(line).strip()
         if not clean_line or clean_line.startswith("#"):
             continue

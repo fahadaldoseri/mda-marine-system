@@ -249,9 +249,11 @@ def print_pipeline_disabled() -> bool:
 
 def gate_format(date: str):
     pdf = SITE / "dist" / "reports" / "pdf" / f"{date}.pdf"
-    if not pdf.exists() and print_pipeline_disabled():
+    # ملف فارغ (0 بايت) أثرُ تصديرٍ مبتور: يُعامل معاملة «لم يُنتَج» ولا يُقبل كدليل على مخرج سليم.
+    produced = pdf.exists() and pdf.stat().st_size > 0
+    if not produced and print_pipeline_disabled():
         return True, "التعبئة والفجوات مستثناة — الطباعة معطّلة بطلب المالك", False
-    if not pdf.exists():
+    if not produced:
         return False, "ملف PDF غير موجود", True
     out = subprocess.run([sys.executable, str(B / "validators" / "check_pdf_format.py"),
                           "--pdf", str(pdf), "--date", date],

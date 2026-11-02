@@ -492,11 +492,11 @@ ul.d-kinds li.k-bg::before{background:var(--line-2)}
 ul.d-kinds li.k-watch::before{background:var(--warn)}
 
 /* ---------- درجة الثقة ---------- */
-.conf{font-size:11.5px;border-radius:999px;padding:2px 9px;border:1px solid var(--line-2);white-space:nowrap;color:var(--ink-2)}
+.conf{font-size:12.5px;border-radius:999px;padding:2px 9px;border:1px solid var(--line-2);white-space:nowrap;color:var(--ink-2)}
 .conf.c-high{color:#cdf6e2;background:rgba(51,208,122,.16);border-color:rgba(51,208,122,.42)}
 .conf.c-med{color:#ffe8c4;background:rgba(255,176,46,.15);border-color:rgba(255,176,46,.40)}
 .conf.c-low{color:#d7e7ff;background:rgba(77,157,255,.15);border-color:rgba(77,157,255,.40)}
-.kstrip{font-size:11.5px;border-radius:999px;padding:2px 9px;border:1px solid var(--line-2);color:var(--ink-2);margin-inline-end:7px;white-space:nowrap}
+.kstrip{font-size:12.5px;border-radius:999px;padding:2px 9px;border:1px solid var(--line-2);color:var(--ink-2);margin-inline-end:7px;white-space:nowrap}
 .kstrip.k-confirm{color:#ffd9d5;background:rgba(255,93,82,.15);border-color:rgba(255,93,82,.40)}
 .kstrip.k-inter{color:#d7e7ff;background:rgba(77,157,255,.15);border-color:rgba(77,157,255,.40)}
 .kstrip.k-suspect{color:#ffe8c4;background:rgba(255,176,46,.15);border-color:rgba(255,176,46,.40)}
@@ -504,15 +504,15 @@ ul.d-kinds li.k-watch::before{background:var(--warn)}
 /* ---------- ما تغيّر ---------- */
 ul.changes{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 .changes li{display:flex;gap:11px;align-items:baseline}
-.chg-tag{font-size:11.5px;border-radius:999px;padding:2px 10px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--panel-3);flex:0 0 auto}
+.chg-tag{font-size:12.5px;border-radius:999px;padding:2px 10px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--panel-3);flex:0 0 auto}
 .chg.c-new .chg-tag{color:#d7e7ff;background:rgba(77,157,255,.15);border-color:rgba(77,157,255,.40)}
 .chg.c-closed .chg-tag{color:#cdf6e2;background:rgba(51,208,122,.15);border-color:rgba(51,208,122,.40)}
 .chg.c-reclassified .chg-tag{color:#ffe8c4;background:rgba(255,176,46,.15);border-color:rgba(255,176,46,.40)}
 .chg.c-ongoing .chg-tag{color:#cfd8e3;background:rgba(148,163,184,.14);border-color:rgba(148,163,184,.38)}
 
 /* ---------- رموز الأحداث والحالات ---------- */
-.ev-code{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--accent);background:rgba(34,195,182,.10);border:1px solid rgba(34,195,182,.32);border-radius:6px;padding:0 5px}
-.st-badge{font-size:11.5px;border-radius:999px;padding:2px 10px;border:1px solid var(--line-2);color:var(--ink-2);white-space:nowrap}
+.ev-code{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--accent);background:rgba(34,195,182,.10);border:1px solid rgba(34,195,182,.32);border-radius:6px;padding:0 5px}
+.st-badge{font-size:12.5px;border-radius:999px;padding:2px 10px;border:1px solid var(--line-2);color:var(--ink-2);white-space:nowrap}
 .st-badge.s-active{color:#ffd9d5;background:rgba(255,93,82,.14);border-color:rgba(255,93,82,.38)}
 .st-badge.s-stable{color:#cdf6e2;background:rgba(51,208,122,.14);border-color:rgba(51,208,122,.38)}
 .st-badge.s-closed{color:var(--muted);background:var(--panel-3)}

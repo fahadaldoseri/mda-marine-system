@@ -14,6 +14,8 @@
 """
 from __future__ import annotations
 
+import os
+
 import argparse
 import json
 import re
@@ -23,7 +25,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 ANCHORS = ROOT / "appendices" / "area-coordinates.json"
-LAND = Path("/home/ubuntu/seawatch/generator/data/ne_50m_land.geojson")
+LAND = Path(os.environ.get("SITE") or os.environ.get("SITE_DIR")
+            or Path(__file__).resolve().parents[1].parent / "seawatch") / "generator/data/ne_50m_land.geojson"
 
 _DIAC = dict.fromkeys(range(0x064B, 0x0653))
 
@@ -150,7 +153,7 @@ def derive(date: str) -> dict:
                     "zone": _ze.get("zone"),
                     "class": _ze.get("class"),
                 }
-        except Exception:
+        except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError):
             zstat = {}
     points, off_map, errors = [], [], []
     stats = {"events": len(events), "with_area": 0, "drawn": 0, "exact": 0, "approximate": 0,
@@ -191,7 +194,12 @@ def derive(date: str) -> dict:
                 errors.append(f"مِرساة «{area}» ({lat}, {lon}) تقع على اليابسة — تُصحَّح إلى مياه منطقتها")
                 continue
             _z = zstat.get(code, {})
-            _label = (str(e.get("title") or "").strip()[:64] or area)
+            _raw = str(e.get("title") or "").strip()
+            # لا قصّ في منتصف الكلمة: الاقتصاص عند حدّ كلمة مع علامة إسقاط ظاهرة، والحدّ 140 حرفًا.
+            if len(_raw) > 140:
+                _cut = _raw[:140].rsplit(" ", 1)[0].rstrip("،,؛;.")
+                _raw = (_cut or _raw[:140]) + "…"
+            _label = (_raw or area)
             # تمييز المسند لكل نقطة: مِرساة واحدة قد تخدم عدة وقائع، وتكرار النص نفسه أكثر من مرتين
             # يُعدّ قالبًا متكررًا مانعًا في بوابة الصياغة (G045). فيُضاف عنوان الواقعة ليكون كل مسند فريدًا.
             if prec == "exact":
@@ -217,17 +225,7 @@ def derive(date: str) -> dict:
     if errors:
         raise FailClosed(" · ".join(errors))
 
-    note = ("المواضع المعروضة مواضع وقائع اليوم على الخريطة؛ والموضع التقريبي يعني أن المصدر لم يذكر إحداثيات "
-            "فوُضع داخل المنطقة نفسها لا في موضع آخر. "
-            f"وتوزيع الحالة: مؤكد {stats['confirmed']} · مرجّح {stats['probable']} · "
-            f"غير مؤكد مؤهل {stats['unconfirmed']} · غير مؤهل {stats['not_qualifying']} · "
-            f"حالة غير محددة {stats['status_unknown']}.")
-    if off_map:
-        note += " ووقائع خارج نطاق الخريطة تُذكر في جدول التوزيع الجغرافي: " + \
-                " · ".join(f'{o["area"]} ({o["code"]})' for o in off_map) + "."
-    meta.setdefault("map", {})
-    meta["map"]["points"] = points
-    meta["map"]["points_note"] = note
+# العدّ قبل الصياغة: الجملة تُبنى من العدّادات المحسوبة، لا من قيم صفرية ابتدائية.
     for _p in points:
         _q, _c = _p.get("qualifying"), (_p.get("confirmation") or "").strip().lower()
         if _q is True and _c == "confirmed":
@@ -240,6 +238,27 @@ def derive(date: str) -> dict:
             stats["not_qualifying"] += 1
         else:
             stats["status_unknown"] += 1
+
+    note = ("المواضع المعروضة مواضع وقائع اليوم على الخريطة؛ والموضع التقريبي يعني أن المصدر لم يذكر إحداثيات "
+            "فوُضع داخل المنطقة نفسها لا في موضع آخر. "
+            f"وتوزيع الحالة: مؤكد {stats['confirmed']} · مرجّح {stats['probable']} · "
+            f"غير مؤكد مؤهل {stats['unconfirmed']} · غير مؤهل {stats['not_qualifying']} · "
+            f"حالة غير محددة {stats['status_unknown']}.")
+    if off_map:
+        note += " ووقائع خارج نطاق الخريطة تُذكر في جدول التوزيع الجغرافي: " + \
+                " · ".join(f'{o["area"]} ({o["code"]})' for o in off_map) + "."
+    # الحارس: جملة الحالة يجب أن تطابق عدّادات النقاط نفسها، وإلا لا تُكتب ولا تُنشر.
+    _expect = (f"مؤكد {stats['confirmed']} · مرجّح {stats['probable']} · "
+               f"غير مؤكد مؤهل {stats['unconfirmed']} · غير مؤهل {stats['not_qualifying']} · "
+               f"حالة غير محددة {stats['status_unknown']}")
+    if _expect not in note:
+        raise FailClosed("جملة توزيع الحالة لا تطابق عدّادات النقاط المحسوبة — لا تُكتب ولا تُنشر")
+    if stats["drawn"] != len(points):
+        raise FailClosed(f"عدد المرسوم المعلن {stats['drawn']} لا يساوي النقاط الفعلية {len(points)}")
+
+    meta.setdefault("map", {})
+    meta["map"]["points"] = points
+    meta["map"]["points_note"] = note
     meta["map"]["points_stats"] = stats
     if off_map:
         meta["map"]["off_map"] = off_map

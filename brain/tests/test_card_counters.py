@@ -60,7 +60,7 @@ AR_REPORT = """
 </section>
 <div class="sc-card" aria-label="أهم الأخبار المتعلقة بالأمن البحري">
   <div class="sc-row"><div class="sc-l">خلال 24 ساعة السابقة</div><div class="sc-more">6 بنود <a href="/additions.html#sec-00" data-goto="ما تغيّر منذ التقرير السابق">التفاصيل</a></div></div>
-  <div class="sc-row"><div class="sc-l">التحذيرات والنشرات الرسمية النشطة</div><div class="sc-more">تحذيران <a href="/additions.html#sec-warnings" data-goto="التحذيرات والنشرات الرسمية">القسم الرسمي</a></div></div>
+  <div class="sc-row"><div class="sc-l">التحذيرات والتنبيهات النشطة</div><div class="sc-more">تحذيران <a href="/additions.html#sec-warnings" data-goto="التحذيرات والتنبيهات النشطة">القسم الرسمي</a></div></div>
   <div class="sc-row"><div class="sc-l">ما يُراقب خلال 24 ساعة</div><div class="sc-more">بند واحد <a href="/additions.html#sec-monitoring" data-goto="المراقبة المستمرة">قسم المراقبة</a></div></div>
 </div>
 </body></html>
@@ -69,7 +69,7 @@ AR_REPORT = """
 AR_ADDITIONS = """
 <html lang="ar"><body>
 <section id="sec-00"><h2>ما تغيّر منذ التقرير السابق</h2><ul><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li></ul></section>
-<section id="sec-warnings"><h2>التحذيرات والنشرات الرسمية</h2><table><thead><tr><th>الجهة</th><th>النص</th></tr></thead><tbody><tr><td>UKMTO</td><td>النص الرسمي الأول</td></tr><tr><td>JMIC</td><td>النص الرسمي الثاني</td></tr></tbody></table></section>
+<section id="sec-warnings"><h2>التحذيرات والتنبيهات النشطة</h2><table><thead><tr><th>الجهة</th><th>النص</th></tr></thead><tbody><tr><td>UKMTO</td><td>النص الرسمي الأول</td></tr><tr><td>JMIC</td><td>النص الرسمي الثاني</td></tr></tbody></table></section>
 <section id="sec-monitoring"><h2>المراقبة المستمرة</h2><p>متابعة الجهات الرسمية والبلاغات ذات الصلة.</p></section>
 </body></html>
 """
@@ -83,7 +83,7 @@ EN_REPORT = """
 </section>
 <div class="sc-card" aria-label="Top maritime security news">
   <div class="sc-row"><div class="sc-l">During the previous 24 hours</div><div class="sc-more">6 items <a href="/reports/en/additions.html#sec-00" data-goto="What changed since the previous report">Details</a></div></div>
-  <div class="sc-row"><div class="sc-l">Active official warnings and advisories</div><div class="sc-more">2 rows <a href="/reports/en/additions.html#sec-warnings" data-goto="Official warnings and advisories">Official section</a></div></div>
+  <div class="sc-row"><div class="sc-l">Active warnings and advisories</div><div class="sc-more">2 rows <a href="/reports/en/additions.html#sec-warnings" data-goto="Active Warnings and Advisories">Official section</a></div></div>
   <div class="sc-row"><div class="sc-l">What is monitored over the next 24 hours</div><div class="sc-more">1 item <a href="/reports/en/additions.html#sec-monitoring" data-goto="Continuous Monitoring">Monitoring section</a></div></div>
 </div>
 </body></html>
@@ -92,7 +92,7 @@ EN_REPORT = """
 EN_ADDITIONS = """
 <html lang="en"><body>
 <section id="sec-00"><h2>What changed since the previous report</h2><ul><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li></ul></section>
-<section id="sec-warnings"><h2>Official warnings and advisories</h2><table><tbody><tr><td>UKMTO</td><td>Official text one</td></tr><tr><td>JMIC</td><td>Official text two</td></tr></tbody></table></section>
+<section id="sec-warnings"><h2>Active Warnings and Advisories</h2><table><tbody><tr><td>UKMTO</td><td>Official text one</td></tr><tr><td>JMIC</td><td>Official text two</td></tr></tbody></table></section>
 <section id="sec-monitoring"><h2>Continuous Monitoring</h2><p>Monitor official updates and relevant reports.</p></section>
 </body></html>
 """
@@ -113,7 +113,7 @@ class CardCounterGateTests(unittest.TestCase):
             "required_in_report": ["مستوى التهديد"],
             "required_in_additions": [
                 "ما تغيّر منذ التقرير السابق",
-                "التحذيرات والنشرات الرسمية",
+                "التحذيرات والتنبيهات النشطة",
                 "المراقبة المستمرة",
             ],
         }
@@ -126,7 +126,7 @@ class CardCounterGateTests(unittest.TestCase):
             "required_in_report": ["مستوى التهديد"],
             "required_in_additions": [
                 "ما تغيّر",
-                "التحذيرات والنشرات الرسمية",
+                "التحذيرات والتنبيهات النشطة",
                 "المراقبة المستمرة",
             ],
         }
@@ -134,7 +134,7 @@ class CardCounterGateTests(unittest.TestCase):
             glossary = Path(tmp) / "glossary.json"
             glossary.write_text(json.dumps({"entries": {
                 "ما تغيّر": "What changed",
-                "التحذيرات والنشرات الرسمية": "Official warnings and advisories",
+                "التحذيرات والتنبيهات النشطة": "Active Warnings and Advisories",
                 "قراءة الموقف وتحليل المؤشرات": "Situation reading and indicator analysis",
             }}, ensure_ascii=False), encoding="utf-8")
             errors = validate_card_documents(
@@ -143,17 +143,35 @@ class CardCounterGateTests(unittest.TestCase):
         self.assertEqual(errors, [])
 
     def test_rendered_additions_targets_measure_section_content_and_use_actual_ids(self):
+        """قياس البطاقة يجب أن يساوي ما في المصدر نفسه، والمرساة تُشير إلى معرّف قسم حقيقي.
+        لا تواريخ ولا أرقام من الذاكرة: يُقاس الإصدار المرجعي الحالي (DAY)."""
         import json
-        source = SITE_ROOT / "sources/reports/2026-10-31-sectioned.md"
+        day = DAY
+        source = SITE_ROOT / f"sources/reports/{day}-sectioned.md"
+        self.assertTrue(source.exists(), source)
         text = source.read_text(encoding="utf-8")
         sections = site_build_report.parse_sections(text)
         defs = site_build_report.parse_ref_defs(text)
-        meta = json.loads((SITE_ROOT / "sources/meta/2026-10-31.json").read_text(encoding="utf-8"))
-        targets = site_build_report._card_targets(sections, sections, meta, defs, DAY)
-        self.assertEqual(targets["warning_count"], 2)
-        self.assertEqual(targets["warning_href"], "/additions.html#sec-04")
-        self.assertEqual(targets["watch_count"], 1)
-        self.assertEqual(targets["watch_href"], "/additions.html#sec-05")
+        meta = json.loads((SITE_ROOT / f"sources/meta/{day}.json").read_text(encoding="utf-8"))
+        warn_titles = ("التحذيرات والتنبيهات النشطة", "التحذيرات والنشرات الرسمية")
+        warn = next((sec for sec in sections if sec["title"] in warn_titles), None)
+        watch = next((sec for sec in sections if sec["title"] == "المراقبة المستمرة"), None)
+        self.assertIsNotNone(warn)
+        self.assertIsNotNone(watch)
+        rows = 0
+        lines = warn["lines"]
+        for i, ln in enumerate(lines):
+            if ln.strip().startswith("|") and i + 1 < len(lines) and site_build_report.is_sep(lines[i + 1]):
+                j = i + 2
+                while j < len(lines) and lines[j].strip().startswith("|"):
+                    rows += 1
+                    j += 1
+        items = len([ln for ln in watch["lines"] if ln.strip().startswith("- ")])
+        targets = site_build_report._card_targets(sections, sections, meta, defs, day)
+        self.assertEqual(targets["warning_count"], rows)
+        self.assertEqual(targets["watch_count"], items)
+        for key in ("changed_href", "warning_href", "watch_href"):
+            self.assertIn("#sec-", targets[key], targets[key])
         self.assertEqual(targets["watch_title"], "المراقبة المستمرة")
 
     def test_shared_measurement_function_counts_rendered_target_structures(self):
@@ -207,7 +225,7 @@ class CardCounterGateTests(unittest.TestCase):
             )
             policy = {
                 "required_in_report": ["مستوى التهديد"],
-                "required_in_additions": ["ما تغيّر", "التحذيرات والنشرات الرسمية", "المراقبة المستمرة"],
+                "required_in_additions": ["ما تغيّر", "التحذيرات والتنبيهات النشطة", "المراقبة المستمرة"],
             }
             errors = validate_card_documents(**docs, registry_path=registry_path, sections_policy=policy)
         self.assertEqual(errors, [])
@@ -244,7 +262,7 @@ class CardCounterGateTests(unittest.TestCase):
             )
             policy = {
                 "required_in_report": ["مستوى التهديد"],
-                "required_in_additions": ["ما تغيّر", "التحذيرات والنشرات الرسمية", "المراقبة المستمرة"],
+                "required_in_additions": ["ما تغيّر", "التحذيرات والتنبيهات النشطة", "المراقبة المستمرة"],
             }
             errors = validate_card_documents(**docs, registry_path=registry_path, sections_policy=policy)
         self.assertTrue(any("مرسا" in error or "عداد" in error for error in errors), errors)

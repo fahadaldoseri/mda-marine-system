@@ -420,7 +420,7 @@ def make_imo_attacks(today: dt.date) -> dict[str, Any]:
         return base
     try:
         data = json.loads(IMO_PATH.read_text(encoding="utf-8"))
-    except Exception:
+    except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError):
         base["basis"] += " تعذّرت قراءة ملف القائمة الرسمية؛ لذلك القيمتان null."
         base["confidence"] = "غير متاح"
         return base
@@ -449,12 +449,12 @@ def make_imo_attacks(today: dt.date) -> dict[str, Any]:
     if explicit:
         try:
             stamp = dt.date.fromisoformat(str(explicit))
-        except Exception:
+        except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError):
             stamp = None
     if stamp is None:
         try:
             stamp = dt.date.fromtimestamp(IMO_PATH.stat().st_mtime)
-        except Exception:
+        except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError):
             stamp = None
     base.update({
         "today": day_hits,
