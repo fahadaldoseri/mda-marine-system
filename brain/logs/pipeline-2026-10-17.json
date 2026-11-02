@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-17",
+  "pipeline_version": 3,
+  "finished_utc": "2026-10-17T03:43:36Z",
+  "overall": "ok",
+  "feeds": {
+    "status": "ok"
+  },
+  "ofac": {
+    "status": "ok",
+    "note": "فُحص 2 مستهدفًا"
+  },
+  "originals": {
+    "status": "ok",
+    "note": "حُفظت الأصول في archive/originals/2026-10-17/",
+    "manifest": "archive/originals/2026-10-17/manifest.json"
+  },
+  "ledger_merge": {
+    "status": "ok",
+    "note": "دُمج ملف اليوم في الدفتر الجامع وبُنيت خريطة الرموز ونُسخ الدفتر إلى الموقع"
+  },
+  "builtin_llm": {
+    "status": "ok",
+    "note": "رُشّحت التغذيات ورُوجعت اللغة آلياً بالنموذج المدمج"
+  }
+}

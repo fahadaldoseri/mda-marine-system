@@ -1,0 +1,133 @@
+{"step": "S000", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/S000.log", "attempt": 1, "ts": "2026-11-02T03:43:05Z"}
+{"step": "S010", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/S010.log", "attempt": 1, "ts": "2026-11-02T03:43:08Z"}
+{"step": "S020", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/S020.log", "attempt": 1, "ts": "2026-11-02T03:44:53Z"}
+{"step": "S030", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/S030.log", "attempt": 1, "ts": "2026-11-02T03:44:54Z"}
+{"step": "S060", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/S060.log", "attempt": 1, "ts": "2026-11-02T03:45:02Z"}
+{"step": "S080", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/S080.log", "attempt": 1, "ts": "2026-11-02T03:47:31Z"}
+{"step": "S090", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-02/S090.log", "ts": "2026-11-02T03:47:31Z"}
+{"step": "W010", "status": "waiting_agent", "ts": "2026-11-02T03:47:31Z"}
+{"step": "W010", "status": "done", "outputs": {"reports/2026-11-02-sectioned.md": "2c699e9230234bbdbc7fc7d90493419d4aff909d7bd2258b2e1c237eabc8ea35"}, "ts": "2026-11-02T03:53:53Z"}
+{"step": "S090", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/S090.log", "attempt": 1, "ts": "2026-11-02T03:54:07Z"}
+{"step": "S040", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/S040.log", "attempt": 1, "ts": "2026-11-02T03:54:08Z"}
+{"step": "S050", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/S050.log", "attempt": 1, "ts": "2026-11-02T03:54:30Z"}
+{"step": "W020", "status": "waiting_agent", "ts": "2026-11-02T03:54:30Z"}
+{"step": "W020", "status": "done", "outputs": {"web/meta/2026-11-02.json": "f308545fc27708eea08e4585ff5fb4b27da9b03ae2b689e8d2083a199e26bd5e"}, "ts": "2026-11-02T03:58:05Z"}
+{"step": "W030", "status": "waiting_agent", "ts": "2026-11-02T03:58:06Z"}
+{"step": "W030", "status": "done", "outputs": {"cumulative-2026/daily/2026-11-02.json": "768d9cffc1724c4732023b9e479c173555c0749d8463ae375176b6e55aaa0b23"}, "ts": "2026-11-02T04:00:40Z"}
+{"step": "S070", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-02/S070.log", "ts": "2026-11-02T04:00:40Z"}
+{"step": "S070", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-02/S070.log", "ts": "2026-11-02T04:01:38Z"}
+{"step": "S070", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-02/S070.log", "ts": "2026-11-02T04:02:21Z"}
+{"step": "S070", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-02/S070.log", "ts": "2026-11-02T04:03:00Z"}
+{"step": "S070", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-02/S070.log", "ts": "2026-11-02T04:05:36Z"}
+{"step": "S070", "status": "done", "rc": 0, "outputs": {"web/zones/2026-11-02.json": "f89ccf0f896e408170de65f6f32fd9246a6162ebde8eef93dfe9377814709d55", "web/meta/2026-11-02.json": "5abca7dd3f618a4bb59eba1dfa7dce6ae947bb6cc1f26550f92ae20d59efff11"}, "log": "logs/runbook/2026-11-02/S070.log", "attempt": 1, "ts": "2026-11-02T04:06:56Z"}
+{"step": "S071", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/S071.log", "attempt": 1, "ts": "2026-11-02T04:06:56Z"}
+{"step": "S072", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/S072.log", "attempt": 1, "ts": "2026-11-02T04:06:56Z"}
+{"step": "W040", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/W040.log", "attempt": 1, "ts": "2026-11-02T04:06:56Z"}
+{"step": "G000", "status": "done", "rc": 0, "outputs": {"evidence/merkle/snapshot.json": "8746df4821772bfcdc2b8b5c0b676e7a1e7492f00cc148dcebd69b1bd29a4c25", "evidence/merkle/ledger.jsonl": "e2e17eed7befd5ea2ba938e2d590788cd7aa4ec08dc8cb720f0243fea6fb07e9"}, "log": "logs/runbook/2026-11-02/G000.log", "attempt": 1, "ts": "2026-11-02T04:06:57Z"}
+{"step": "G000A", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-02/G000A.log", "ts": "2026-11-02T04:07:01Z"}
+{"step": "G000", "status": "done", "rc": 0, "outputs": {"evidence/merkle/snapshot.json": "12eb27e3fa8f5b33e677855704ce0dbe1a1699b38c2a55c427bf108d9787f92c", "evidence/merkle/ledger.jsonl": "89184896933be8d285e43cb826590720969f3e6ab1937e674dce4cf5fe9dc3c1"}, "log": "logs/runbook/2026-11-02/G000.log", "attempt": 1, "ts": "2026-11-02T04:08:17Z"}
+{"step": "G000A", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G000A.log", "attempt": 1, "ts": "2026-11-02T04:08:21Z"}
+{"step": "G000B", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G000B.log", "attempt": 1, "ts": "2026-11-02T04:08:21Z"}
+{"step": "G000C", "status": "done", "rc": 0, "outputs": {"evidence/hermetic/declaration-proof.json": "f80acfb3f8c444cbdb410eb78349772ed19d4d876231d30045b8edcd6955d647", "evidence/hermetic/fingerprints/declaration-proof/project-after.json": "eba88c350a331d2204916ac61ef4553b87740b5708a57d9bb79d3feef248b7d9", "evidence/hermetic/fingerprints/declaration-proof/project-before.json": "956871ed80e7e7c917ff33ba4999917f016363bdadb20329f6e872934ee0bc60", "evidence/hermetic/fingerprints/declaration-proof/seawatch-after.json": "7dc63be31226ef0132a52dd6d3a9be3b4d767d466417b7e1d67a685dfcc58ad7", "evidence/hermetic/fingerprints/declaration-proof/seawatch-before.json": "7dc63be31226ef0132a52dd6d3a9be3b4d767d466417b7e1d67a685dfcc58ad7", "evidence/hermetic/fingerprints/python3/project-after.json": "f9fcd01b45ab6a823c4005ae796c0132ea39ea1ceaabcd6ae9878343823515cd", "evidence/hermetic/fingerprints/python3/project-before.json": "ab3ca57f9df133a8141a4ac2cd4cab69da042e506e23631a3e9b80ad914c0b42", "evidence/hermetic/fingerprints/python3/seawatch-after.json": "7dc63be31226ef0132a52dd6d3a9be3b4d767d466417b7e1d67a685dfcc58ad7", "evidence/hermetic/fingerprints/python3/seawatch-before.json": "7dc63be31226ef0132a52dd6d3a9be3b4d767d466417b7e1d67a685dfcc58ad7", "evidence/hermetic/python3.json": "e0ad2de7b005671e9b66adbeb2f4fe6f4a85fe29616af80d07db95a48f354109", "evidence/hermetic/raw/declaration-proof/impact-summary.json": "437e664b6abb1230891c0653b0cf11b3b942754c1ea6c0c072e1771936cc8021", "evidence/hermetic/raw/declaration-proof/project-compare.json": "892ba00608bab0d5ee298aa50f4498ed993a59c64ad194527769a97df412baae", "evidence/hermetic/raw/declaration-proof/seawatch-compare.json": "4837e0ec8b00aef9f367c78960f666e6f3ba5efbf27e4aba0122c574961cd82d", "evidence/hermetic/raw/declaration-proof/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "evidence/hermetic/raw/declaration-proof/stdout.log": "480c2336b410f1ad5f8bf1b28944490255804b65350c527787e74ebdd511e3a4", "evidence/hermetic/raw/declaration-proof/systemd-probe.stderr": "660b395af5f1e3ba12ff034400fc84c1a219bb7f3b781ae805225b5e2836945e", "evidence/hermetic/raw/python3/impact-summary.json": "efbc307c7873f7fe514e7325496ab38563bed6f2a53501db19d1ee442cb7e876", "evidence/hermetic/raw/python3/project-compare.json": "892ba00608bab0d5ee298aa50f4498ed993a59c64ad194527769a97df412baae", "evidence/hermetic/raw/python3/seawatch-compare.json": "4837e0ec8b00aef9f367c78960f666e6f3ba5efbf27e4aba0122c574961cd82d", "evidence/hermetic/raw/python3/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "evidence/hermetic/raw/python3/stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "evidence/hermetic/raw/python3/systemd-probe.stderr": "660b395af5f1e3ba12ff034400fc84c1a219bb7f3b781ae805225b5e2836945e", "evidence/hermetic/traces/declaration-proof.strace": "11a12fab2c5b6f56de6dc88b785d62a263acd2aa46dba1e71cbbc7a607b281e7", "evidence/hermetic/traces/python3.strace": "456b75393b8e07e218569661faa360adf50b31b7034c9d81d0b011f233977eb1"}, "log": "logs/runbook/2026-11-02/G000C.log", "attempt": 1, "ts": "2026-11-02T04:08:51Z"}
+{"step": "G000D", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-02/G000D.log", "ts": "2026-11-02T04:08:51Z"}
+{"step": "G000D", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-02/G000D.log", "ts": "2026-11-02T04:09:18Z"}
+{"step": "G000D", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G000D.log", "attempt": 1, "ts": "2026-11-02T04:09:42Z"}
+{"step": "G001", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-02/G001.log", "ts": "2026-11-02T04:15:57Z"}
+{"step": "G001", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-02/G001.log", "ts": "2026-11-02T04:29:52Z"}
+{"step": "G001", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G001.log", "attempt": 1, "ts": "2026-11-02T04:49:25Z"}
+{"step": "G002", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G002.log", "attempt": 1, "ts": "2026-11-02T04:49:25Z"}
+{"step": "G003", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G003.log", "attempt": 1, "ts": "2026-11-02T04:49:25Z"}
+{"step": "G004", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G004.log", "attempt": 1, "ts": "2026-11-02T04:49:25Z"}
+{"step": "G006", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G006.log", "attempt": 1, "ts": "2026-11-02T04:49:25Z"}
+{"step": "G007", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G007.log", "attempt": 1, "ts": "2026-11-02T04:50:33Z"}
+{"step": "G008", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G008.log", "attempt": 1, "ts": "2026-11-02T04:50:33Z"}
+{"step": "G009", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G009.log", "attempt": 1, "ts": "2026-11-02T04:50:33Z"}
+{"step": "G010", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G010.log", "attempt": 1, "ts": "2026-11-02T04:50:33Z"}
+{"step": "G011", "status": "done_warn", "rc": 1, "outputs": {}, "log": "logs/runbook/2026-11-02/G011.log", "attempt": 1, "ts": "2026-11-02T04:50:33Z"}
+{"step": "G012", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-02/G012.log", "ts": "2026-11-02T04:50:33Z"}
+{"step": "G010", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G010.log", "attempt": 1, "ts": "2026-11-02T04:52:29Z"}
+{"step": "G012", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G012.log", "attempt": 1, "ts": "2026-11-02T04:52:29Z"}
+{"step": "G013", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G013.log", "attempt": 1, "ts": "2026-11-02T04:52:29Z"}
+{"step": "G014", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G014.log", "attempt": 1, "ts": "2026-11-02T04:52:29Z"}
+{"step": "G015", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G015.log", "attempt": 1, "ts": "2026-11-02T04:52:30Z"}
+{"step": "G016", "status": "done_warn", "rc": 1, "outputs": {}, "log": "logs/runbook/2026-11-02/G016.log", "attempt": 1, "ts": "2026-11-02T04:52:31Z"}
+{"step": "G017", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G017.log", "attempt": 1, "ts": "2026-11-02T04:52:33Z"}
+{"step": "G018", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G018.log", "attempt": 1, "ts": "2026-11-02T04:52:33Z"}
+{"step": "G018A", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G018A.log", "attempt": 1, "ts": "2026-11-02T04:52:33Z"}
+{"step": "G019", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G019.log", "attempt": 1, "ts": "2026-11-02T04:52:33Z"}
+{"step": "G020", "status": "done_warn", "rc": 1, "outputs": {}, "log": "logs/runbook/2026-11-02/G020.log", "attempt": 1, "ts": "2026-11-02T04:52:33Z"}
+{"step": "G021", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G021.log", "attempt": 1, "ts": "2026-11-02T04:52:33Z"}
+{"step": "G022", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G022.log", "attempt": 1, "ts": "2026-11-02T04:52:41Z"}
+{"step": "G023", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G023.log", "attempt": 1, "ts": "2026-11-02T04:52:41Z"}
+{"step": "G024", "status": "done_warn", "rc": 1, "outputs": {}, "log": "logs/runbook/2026-11-02/G024.log", "attempt": 1, "ts": "2026-11-02T04:52:41Z"}
+{"step": "G025", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G025.log", "attempt": 1, "ts": "2026-11-02T04:52:42Z"}
+{"step": "G026", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-02/G026.log", "ts": "2026-11-02T04:52:42Z"}
+{"step": "G026", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G026.log", "attempt": 1, "ts": "2026-11-02T04:53:21Z"}
+{"step": "G028", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G028.log", "attempt": 1, "ts": "2026-11-02T04:53:23Z"}
+{"step": "G030", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-02/G030.log", "ts": "2026-11-02T04:53:23Z"}
+{"step": "G030", "status": "done_warn", "rc": 1, "outputs": {}, "log": "logs/runbook/2026-11-02/G030.log", "attempt": 1, "ts": "2026-11-02T04:54:47Z"}
+{"step": "G031", "status": "done_warn", "rc": 1, "outputs": {}, "log": "logs/runbook/2026-11-02/G031.log", "attempt": 1, "ts": "2026-11-02T04:54:47Z"}
+{"step": "G032", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-02/G032.log", "ts": "2026-11-02T04:54:48Z"}
+{"step": "G032", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G032.log", "attempt": 1, "ts": "2026-11-02T04:56:44Z"}
+{"step": "G033", "status": "done_warn", "rc": 1, "outputs": {}, "log": "logs/runbook/2026-11-02/G033.log", "attempt": 1, "ts": "2026-11-02T04:56:44Z"}
+{"step": "G034", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-02/G034.log", "ts": "2026-11-02T04:56:45Z"}
+{"step": "G034", "status": "done_warn", "rc": 1, "outputs": {}, "log": "logs/runbook/2026-11-02/G034.log", "attempt": 1, "ts": "2026-11-02T04:58:36Z"}
+{"step": "G035", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G035.log", "attempt": 1, "ts": "2026-11-02T04:58:37Z"}
+{"step": "G036", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G036.log", "attempt": 1, "ts": "2026-11-02T04:58:37Z"}
+{"step": "G044", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G044.log", "attempt": 1, "ts": "2026-11-02T04:58:37Z"}
+{"step": "G048", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G048.log", "attempt": 1, "ts": "2026-11-02T04:58:37Z"}
+{"step": "G048A", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G048A.log", "attempt": 1, "ts": "2026-11-02T04:58:39Z"}
+{"step": "G040", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-02/G040.log", "ts": "2026-11-02T04:58:42Z"}
+{"step": "G040", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-02/G040.log", "ts": "2026-11-02T05:00:18Z"}
+{"step": "G040", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G040.log", "attempt": 1, "ts": "2026-11-02T05:00:47Z"}
+{"step": "G041", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G041.log", "attempt": 1, "ts": "2026-11-02T05:00:48Z"}
+{"step": "B005", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-02/B005.log", "ts": "2026-11-02T05:00:48Z"}
+{"step": "B005", "status": "done", "rc": 0, "outputs": {"logs/runbook/2026-11-02/B005.log": "dd062971b169053c173fb51ffe230f842c7e574838e861db97503a6222678f29"}, "log": "logs/runbook/2026-11-02/B005.log", "attempt": 1, "ts": "2026-11-02T05:02:03Z"}
+{"step": "B006", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-02/B006.log", "ts": "2026-11-02T05:02:03Z"}
+{"step": "B006", "status": "done", "rc": 0, "outputs": {"logs/runbook/2026-11-02/B006.log": "ba186f2a9aa32f3dc69c4f6123497bba4f9ed47b942e534f36b8c6336bd5f929"}, "log": "logs/runbook/2026-11-02/B006.log", "attempt": 1, "ts": "2026-11-02T05:21:25Z"}
+{"step": "B010", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-02/B010.log", "ts": "2026-11-02T05:24:21Z"}
+{"step": "B010", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-02/B010.log", "ts": "2026-11-02T05:29:42Z"}
+{"step": "B010", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-02/B010.log", "ts": "2026-11-02T05:34:36Z"}
+{"step": "B010", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-02/B010.log", "ts": "2026-11-02T05:46:25Z"}
+{"step": "B010", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-02/B010.log", "ts": "2026-11-02T05:51:05Z"}
+{"step": "B010", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-02/B010.log", "ts": "2026-11-02T06:01:47Z"}
+{"step": "B010", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-02/B010.log", "ts": "2026-11-02T06:18:09Z"}
+{"step": "B010", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-02/B010.log", "ts": "2026-11-02T06:23:25Z"}
+{"step": "B010", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-02/B010.log", "ts": "2026-11-02T06:28:07Z"}
+{"step": "B010", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-02/B010.log", "ts": "2026-11-02T06:32:13Z"}
+{"step": "B010", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-02/B010.log", "ts": "2026-11-02T06:35:53Z"}
+{"step": "B010", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-02/B010.log", "ts": "2026-11-02T06:42:44Z"}
+{"step": "B010", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-02/B010.log", "ts": "2026-11-02T06:51:09Z"}
+{"step": "B010", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-02/B010.log", "ts": "2026-11-02T06:59:31Z"}
+{"step": "B010", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/B010.log", "attempt": 1, "ts": "2026-11-02T07:08:00Z"}
+{"step": "G049", "status": "done", "rc": 0, "outputs": {"logs/runbook/2026-11-02/G049.log": "250720418c0dacb9c046ed2aca211c6f798c49148fbefa13f8186b27f4f0e54a"}, "log": "logs/runbook/2026-11-02/G049.log", "attempt": 1, "ts": "2026-11-02T07:08:00Z"}
+{"step": "G052", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-02/G052.log", "ts": "2026-11-02T07:08:00Z"}
+{"step": "G052", "status": "failed", "rc": 70, "problems": ["رمز الخروج 70"], "log": "logs/runbook/2026-11-02/G052.log", "ts": "2026-11-02T07:09:48Z"}
+{"step": "G052", "status": "done", "rc": 0, "outputs": {"logs/runbook/2026-11-02/G049.log": "250720418c0dacb9c046ed2aca211c6f798c49148fbefa13f8186b27f4f0e54a"}, "log": "logs/runbook/2026-11-02/G052.log", "attempt": 1, "ts": "2026-11-02T07:11:17Z"}
+{"step": "G050", "status": "done", "rc": 0, "outputs": {"logs/runbook/2026-11-02/G050.log": "e605697e034dfddece681998e74f802110e805736687bf028f93841dff3da305"}, "log": "logs/runbook/2026-11-02/G050.log", "attempt": 1, "ts": "2026-11-02T07:11:17Z"}
+{"step": "G051", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G051.log", "attempt": 1, "ts": "2026-11-02T07:11:17Z"}
+{"step": "B020", "status": "skipped", "disabled": true, "reason": "تعطيل بطلب المالك — يُفعّل بأمره الصريح", "rc": 0, "log": "logs/runbook/2026-11-02/B020.log", "ts": "2026-11-02T07:11:17Z"}
+{"step": "B030", "status": "skipped", "disabled": true, "reason": "تعطيل بطلب المالك — يُفعّل بأمره الصريح", "rc": 0, "log": "logs/runbook/2026-11-02/B030.log", "ts": "2026-11-02T07:11:17Z"}
+{"step": "G047", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-02/G047.log", "ts": "2026-11-02T07:11:23Z"}
+{"step": "G047", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G047.log", "attempt": 1, "ts": "2026-11-02T07:12:12Z"}
+{"step": "G046", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G046.log", "attempt": 1, "ts": "2026-11-02T07:12:13Z"}
+{"step": "G045", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-02/G045.log", "ts": "2026-11-02T07:12:25Z"}
+{"step": "G045", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-02/G045.log", "ts": "2026-11-02T07:12:53Z"}
+{"step": "G045", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G045.log", "attempt": 1, "ts": "2026-11-02T07:15:49Z"}
+{"step": "B035", "status": "done_warn", "rc": 1, "outputs": {}, "log": "logs/runbook/2026-11-02/B035.log", "attempt": 1, "ts": "2026-11-02T07:15:49Z"}
+{"step": "B040", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/B040.log", "attempt": 1, "ts": "2026-11-02T07:15:58Z"}
+{"step": "G005", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G005.log", "attempt": 1, "ts": "2026-11-02T07:15:58Z"}
+{"step": "G027", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G027.log", "attempt": 1, "ts": "2026-11-02T07:15:59Z"}
+{"step": "G029", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G029.log", "attempt": 1, "ts": "2026-11-02T07:16:00Z"}
+{"step": "G037", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-02/G037.log", "ts": "2026-11-02T07:16:01Z"}
+{"step": "G037", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G037.log", "attempt": 1, "ts": "2026-11-02T07:16:31Z"}
+{"step": "G042", "status": "failed", "rc": 70, "problems": ["رمز الخروج 70"], "log": "logs/runbook/2026-11-02/G042.log", "ts": "2026-11-02T07:16:31Z"}
+{"step": "G042", "status": "failed", "rc": 70, "problems": ["رمز الخروج 70"], "log": "logs/runbook/2026-11-02/G042.log", "ts": "2026-11-02T07:16:52Z"}
+{"step": "B010", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-02/B010.log", "ts": "2026-11-02T07:20:28Z"}
+{"step": "B010", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/B010.log", "attempt": 1, "ts": "2026-11-02T07:29:21Z"}
+{"step": "G042", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G042.log", "attempt": 1, "ts": "2026-11-02T07:29:21Z"}
+{"step": "G043", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G043.log", "attempt": 1, "ts": "2026-11-02T07:29:21Z"}
+{"step": "G038", "status": "done", "rc": 0, "outputs": {"logs/pipeline-2026-11-02.json": "3ea12b28736a10815b822b992a6013049ab9b3570672506c1ab0bd44f7a04625"}, "log": "logs/runbook/2026-11-02/G038.log", "attempt": 1, "ts": "2026-11-02T07:29:21Z"}
+{"step": "G039", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-02/G039.log", "attempt": 1, "ts": "2026-11-02T07:29:21Z"}
+{"step": "D005", "status": "failed", "rc": 70, "problems": ["رمز الخروج 70"], "log": "logs/runbook/2026-11-02/D005.log", "ts": "2026-11-02T07:30:02Z"}
+{"step": "D005", "status": "failed", "rc": 70, "problems": ["رمز الخروج 70"], "log": "logs/runbook/2026-11-02/D005.log", "ts": "2026-11-02T07:32:20Z"}

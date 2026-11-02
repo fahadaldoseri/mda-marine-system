@@ -1,0 +1,2 @@
+سُجّل فقط — لم يُنفَّذ (RUNBOOK_DRY_STEPS: وضع معزول)
+الأمر المعتاد: bash -lc B="$PWD"; export B SITE; python3 tools/reports_index.py --today 2026-10-26; rc=$?; exit $rc

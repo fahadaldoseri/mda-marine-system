@@ -1,0 +1,104 @@
+$ python3 validators/check_intel.py reports/2026-10-28-sectioned.md web/meta/2026-10-28.json
+  · ح1/ح2/ح3/ح5: الفقرات السردية محذوفة بقرار المالك — يُشترط ما بقي:
+===== بوابة قراءة الموقف وتحليل المؤشرات — 2026-10-28-sectioned.md =====
+  ✔ ح1: فقرات القسم = 13
+  ✔ ح2: عبارات الاحتمال المعتمدة = 0 → 
+  ✔ ح2: لا عبارات مبهمة في القسم
+  ✔ ح3: درجة الثقة معلنة
+  · ح5: الافتراضات — محذوف بقرار المالك
+  ✔ ح5: مؤشرات التغيّر
+  · ح5: الفرضيات — محذوف بقرار المالك
+  · ح5: تقييم دقة الأمس — محذوف بقرار المالك
+  · ح6: صفوف المؤشرات = 0
+  ✔ بقاء-1: علامات الإنذار المبكر
+  ✔ بقاء-2: جدول رموز التقدير EST
+  ✔ بقاء-3: سجل المراجعة الداخلية في الواجهة
+  ✔ ح12: وسم الأسلوب = اختبار الافتراضات · علامات التغيّر · اختبار الفرضيات
+  ✔ ح13: نقاط الخريطة = 15 من 15 واقعة ذات منطقة
+
+
+النتيجة: مجتاز — 0 خطأ · 0 تحذير
+check_intel_exit=0
+$ python3 tools/source_counts.py --date 2026-10-28 --check
+  ✓ أرقام المصادر متطابقة في كل المواضع · المصادر: 62 معتمدة = 40 بالمسار الآلي + 22 بالمرجعية اليدوية · 39 ناجحة · 1 متعذّر: @bna_en — حجب المصدر · 22 يُفحص يدويًا.
+source_counts_check_exit=0
+$ python3 tests/test_source_channels.py
+  ✔ الهوية: مجموع القنوات = المعتمد
+  ✔ لا مصدر معتمد بلا قناة
+  ✔ لا مصدر في قناتين
+  ✔ عدد المسار الآلي = ما رمزه في الحالة
+  ✔ عدد المرجعية اليدوية = 22
+  ✔ المصدر 29 له قناة
+  ✔ اختبار عدم تراجع: المصدر 29 يُكشف فجوة عند الإزالة
+
+  النتيجة: نجح
+source_channels_test_exit=0
+$ python3 -m py_compile tools/source_channels.py
+py_compile_exit=0
+-- final line references --
+    40	MANUAL_REFERENCE: set[int] = {
+    41	    1, 5, 13, 15, 18, 19, 21, 23, 27, 29, 34, 39,
+    42	    40, 44, 48, 52, 56, 57, 59, 60, 61, 62,
+    43	}
+    44	
+    45	# مسار كل مصدر بلا تغذية آلية: browser + الرابط المرجعي المعلن في سجل الموثوقية.
+    46	# تبقى MANUAL_REFERENCE هي مجموعة القنوات التي تدخل العدّاد، وهذا السجل يضيف عنوان المسار فقط.
+    47	BROWSER_ROUTES: dict[int, dict[str, str]] = {
+    48	    1: {"path": "browser", "url": "https://www.ukmto.org/recent-incidents"},
+    49	    5: {"path": "browser", "url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx"},
+    50	    13: {"path": "browser", "url": "https://shipnext.com/vessel/9315159-cameroon-prosperity"},
+    51	    15: {"path": "browser", "url": "https://x.com/UK_MTO"},
+    52	    18: {"path": "browser", "url": "https://x.com/bahdiplomatic"},
+    53	    19: {"path": "browser", "url": "https://x.com/us5thfleet"},
+    54	    21: {"path": "browser", "url": "https://akhbar-alkhaleej.com/"},
+    55	    23: {"path": "browser", "url": "https://www.gdnonline.com"},
+    56	    27: {"path": "browser", "url": "https://www.kuna.net.kw"},
+    57	    29: {"path": "browser", "url": "https://www.royalnavy.mod.uk/news"},
+    58	    34: {"path": "browser", "url": "https://www.mscio.eu"},
+    59	    39: {"path": "browser", "url": "https://iho.int/"},
+    60	    40: {"path": "browser", "url": "https://www.marinetraffic.com/"},
+    61	    44: {"path": "browser", "url": "https://www.windward.ai/"},
+    62	    48: {"path": "browser", "url": "https://www.understandingwar.org/"},
+    63	    52: {"path": "browser", "url": "https://synmax.com/"},
+    64	    56: {"path": "browser", "url": "https://x.com/YemenResistanc1"},
+    65	    57: {"path": "browser", "url": "https://x.com/spokespersonyem"},
+    66	    59: {"path": "browser", "url": "https://t.me/army21ye"},
+    67	    60: {"path": "browser", "url": "https://x.com/CJFCSpox"},
+    68	    61: {"path": "browser", "url": "https://x.com/ERYANIM"},
+    69	    62: {"path": "browser", "url": "https://x.com/Yemenarmyeng"},
+    70	}
+    71	
+    72	# ── قناة المسار الرسمي البديل للجهة نفسها ──
+    73	PROXY_ROUTES: set[int] = set()
+    74	
+    75	# ك-81: واس (26) صار له مسار رسمي (بيانات الصفحة المُضمَّنة) ⇒ لم يعد «يُفحص بالمتصفح»
+    76	BROWSER_ONLY: dict[int, str] = {}
+    77	
+    78	
+    79	def rss_numbers() -> set[int]:
+    80	    """أرقام المصادر ذات المسار الآلي — تُشتق من جدول المسارات الحقيقي في check_feeds.
+    81	
+    82	    المصدر الوحيد للحقيقة هو جدول المسارات المستعمل في التشغيل اليومي، لا نسخ نصّية منه،
+   500	  "EST-2026-10-28-04": {
+   501	   "section": "قراءة الموقف وتحليل المؤشرات",
+   502	   "statement": "تحول الاتصالات القطرية الإيرانية إلى خطوة ملاحيّة قابلة للقياس",
+   503	   "confidence": "ممكن (20–45%)",
+   504	   "reliability": "وكالة الأنباء القطرية A/1",
+   505	   "note": "قرار المالك 2026-10-28: الصفحة الحية تعرض A/1؛ التوثيق السابق كان C/3 وحُفظ هنا لأثر المراجعة.",
+   506	   "support": "لقاء أمير قطر بالرئيس الإيراني ودعوة إلى إطار أمني وإعادة فتح المضيق",
+   507	   "against": "لا إعلان رسمي عن تغيير شروط العبور أو الرسوم"
+   508	  }
+   209	  [
+   210	    24,
+   211	    "وكالة الأنباء القطرية (قنا)",
+   212	    "https://qna.org.qa/",
+   213	    "وكالة رسمية",
+   214	    "A",
+   215	    1,
+   216	    "وكالة أنباء رسمية؛ بيانات الدولة هي مرجعها."
+   217	  ],
+    32	| 22 | [جريدة البلاد](https://www.albiladpress.com/) | صحيفة محلية | **C** | **3** | صحيفة محلية؛ تنشر عناوين رسمية بلا تحقق إضافي. |
+    33	| 23 | [Gulf Daily News](https://www.gdnonline.com) | صحيفة محلية | **C** | **3** | صحيفة محلية إنجليزية؛ فيها تحدٍّ أمني متكرر وقد تتعذر. |
+    34	| 24 | [وكالة الأنباء القطرية (قنا)](https://qna.org.qa/) | وكالة رسمية | **A** | **1** | وكالة أنباء رسمية؛ بيانات الدولة هي مرجعها. |
+    35	| 25 | [وكالة أنباء الإمارات (وام)](https://www.wam.ae/ar) | وكالة رسمية | **A** | **1** | وكالة أنباء رسمية؛ بيانات الدولة هي مرجعها. |
+   177	- المصادر: 62 معتمدة = 40 بالمسار الآلي + 22 بالمرجعية اليدوية · 39 ناجحة · 1 متعذّر: @bna_en — حجب المصدر · 22 يُفحص يدويًا.
