@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-02T10:28:01.498035+00:00",
+  "generated_at": "2026-11-02T10:35:01.095122+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -3404,6 +3404,13 @@
       "lesson_id": "ك-451",
       "barrier_id": "B-0f91f55c",
       "run_evidence": null
+    },
+    {
+      "fault_id": "ك-452",
+      "state": "مغلق",
+      "lesson_id": "ك-452",
+      "barrier_id": "B-7436c20f",
+      "run_evidence": " الحكم ويشترط حكمًا واحدًا. اختبار التكامل `close_check_selftest.sh`: 7/7 (ست حالات عزل + فحص الحك"
     }
   ]
 }
