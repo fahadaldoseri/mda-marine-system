@@ -1073,7 +1073,7 @@
    "command": [
     "bash",
     "-lc",
-    "B=\"$PWD\"; export B SITE; python3 tools/merge_ledger_daily.py; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; python3 \"$B/tools/mark_components.py\" --date \"$D\" --component ledger_merge; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; python3 \"$B/tools/repair_ledger_prose.py\" --check; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; python3 \"$B/tools/classify_zones.py\" --date \"$D\" --write; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; python3 \"$B/tools/ledger_totals.py\" --date \"$D\" --write; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; exit ${w:-0}"
+    "B=\"$PWD\"; export B SITE; python3 tools/merge_ledger_daily.py; r=$?; if [ $r -ne 0 ]; then exit $r; fi; python3 tools/resolve_source_links.py --date \"$D\" --brain \"$B\" --site \"$SITE\"; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; python3 \"$B/tools/mark_components.py\" --date \"$D\" --component ledger_merge; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; python3 \"$B/tools/repair_ledger_prose.py\" --check; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; python3 \"$B/tools/classify_zones.py\" --date \"$D\" --write; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; python3 \"$B/tools/ledger_totals.py\" --date \"$D\" --write; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; exit ${w:-0}"
    ],
    "ok_rc": [
     0

@@ -116,6 +116,10 @@ def card_violations(card_html: str, index: int, labels: dict[int, str] | None = 
         errors.append(f"{where}: وسم «الموضع» ظاهر بدل «الموقع»")
     if found.get(7, "").startswith("hidden") and "hidden-rule-no-official-link" not in card_html:
         errors.append(f"{where}: صف الرابط الرسمي مخفيّ بحالة غير معروفة")
+    src_match = re.search(r'<span class="ev-k">(?:المصدر|Source and grade)</span>\s*'
+                        r'<span class="ev-mv">(.*?)</span>', card_html, re.S)
+    if src_match and "@" in src_match.group(1) and 'class="ev-link"' not in src_match.group(1):
+        errors.append(f"{where}: مصدر باسم حساب (@) بلا رابط إلى مادة المصدر")
     if found.get(7) == "shown" and not re.search(r'<a\b[^>]*href="https?://', card_html):
         errors.append(f"{where}: صف الرابط الرسمي ظاهر بلا رابط")
     return errors
