@@ -49,12 +49,10 @@ def card(**changes) -> str:
         '<span class="ev-badge" data-row="2" data-classification="بلاغ رسمي">بلاغ رسمي</span>'
         '<span class="ev-reliability" data-row="3" data-reliability="متوسطة">درجة الموثوقية: متوسطة</span></div>'
         '<p class="ev-what" data-row="1">تحذير UKMTO رقم 190-26</p><div class="ev-meta">'
-        + row(4, "التاريخ والوقت", "2026-11-01 · التوقيت غير مسجّل في المصدر")
-        + row(5, "الموضع", "Z1 · مضيق هرمز")
+        + row(4, "التاريخ والوقت", "2026-11-01")
+        + row(5, "الموقع", "Z1 · مضيق هرمز")
         + row(6, "المصدر", "حساب UKMTO")
-        + row(7, "الرابط الرسمي", "الرابط الرسمي غير مدرج في الدفتر · من تغذية المصادر",
-              extra='<details class="ev-fold" data-fold="internal-path"><summary>مسار التحقق الداخلي</summary>'
-                    '<code class="bidi ev-path">feeds/feeds-2026-11-01.json</code></details>')
+        + row(7, "الرابط الرسمي", "", state="hidden-rule-no-official-link")
         + row(8, "ترجمة المعنى", "الترجمة غير مدرجة في الدفتر")
         + row(9, "النص الأصلي", "مطويّ — افتح للعرض",
               extra='<details class="ev-fold" data-fold="original-text"><summary>النص الأصلي كما في المصدر</summary>'
@@ -89,7 +87,11 @@ def main() -> int:
               card(**{'data-reliability="متوسطة"': 'data-x="y"'}), 1)))
     check("وسم صف مخالف للعقد يُمنع",
           any("لا يطابق العقد" in e for e in GATE.card_violations(
-              card(**{'<span class="ev-k">الموضع</span>': '<span class="ev-k">المكان</span>'}), 1)))
+              card(**{'<span class="ev-k">الموقع</span>': '<span class="ev-k">المكان</span>'}), 1)))
+    check("مصدر باسم حساب (@) بلا رابط يُمنع",
+          any("بلا رابط" in e for e in GATE.card_violations(
+              card(**{'<span class="ev-mv">حساب UKMTO</span>':
+                      '<span class="ev-mv">حساب @UK_MTO على X</span>'}), 1)))
     check("رابط مختصر ظاهر يُمنع",
           any("رابط مختصر" in e for e in GATE.card_violations(
               card(**{'<span>UKMTO WARNING 190-26</span>':
@@ -98,9 +100,11 @@ def main() -> int:
           any("وسم (#)" in e for e in GATE.card_violations(
               card(**{'<span>UKMTO WARNING 190-26</span>':
                       '<span>UKMTO WARNING #MarSec</span>'}), 1)))
-    check("غياب طيّ مسار التحقق يُمنع",
-          any("مسار التحقق" in e for e in GATE.card_violations(
-              card(**{'data-fold="internal-path"': 'data-fold="x"'}), 1)))
+    check("عرض المسار الداخلي يُمنع",
+          any("المسار الداخلي" in e for e in GATE.card_violations(
+              card(**{'<p class="ev-what" data-row="1">تحذير UKMTO رقم 190-26</p>':
+                      '<p class="ev-what" data-row="1">تحذير UKMTO رقم 190-26 '
+                      '<span>مسار التحقق الداخلي</span></p>'}), 1)))
     check("صف النص الأصلي ظاهرًا بلا طيّ يُمنع",
           any("بلا طيّ" in e for e in GATE.card_violations(
               card(**{'data-fold="original-text"': 'data-fold="y"'}), 1)))
@@ -118,11 +122,12 @@ def main() -> int:
     check("وسوم النسخة الإنجليزية مقروءة",
           GATE.card_violations(
               card(**{'<span class="ev-k">التاريخ والوقت</span>': '<span class="ev-k">Date and time</span>',
-                      '<span class="ev-k">الموضع</span>': '<span class="ev-k">Location</span>',
+                      '<span class="ev-k">الموقع</span>': '<span class="ev-k">Location</span>',
                       '<span class="ev-k">المصدر</span>': '<span class="ev-k">Source and grade</span>',
                       '<span class="ev-k">الرابط الرسمي</span>': '<span class="ev-k">Official link</span>',
                       '<span class="ev-k">ترجمة المعنى</span>': '<span class="ev-k">Meaning translation</span>',
-                      '<span class="ev-k">النص الأصلي</span>': '<span class="ev-k">Original text</span>'}), 1,
+                      '<span class="ev-k">النص الأصلي</span>': '<span class="ev-k">Original text</span>',
+                      '<span class="ev-k">فرع تابع</span>': '<span class="ev-k">Parent report</span>'}), 1,
               GATE.EN_ROW_LABELS) == [])
 
     print(f"  نجح {PASS} · فشل {FAIL}")

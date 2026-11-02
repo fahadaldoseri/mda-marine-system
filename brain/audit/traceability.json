@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-02T15:25:51.634735+00:00",
+  "generated_at": "2026-11-02T18:42:59.163222+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -3533,17 +3533,66 @@
     },
     {
       "fault_id": "ك-470",
-      "state": "بانتظار التحقق",
+      "state": "مغلق",
       "lesson_id": "ك-470",
-      "barrier_id": "B-7392f98b",
-      "run_evidence": null
+      "barrier_id": "B-f38e005e",
+      "run_evidence": "ارس في qa_gates وfinal_gate python3 validators/check_vocab_chain.py → خرج 0 · qa_gates → خرج 0 (بند "
     },
     {
       "fault_id": "ك-471",
-      "state": "بانتظار التحقق",
+      "state": "مغلق",
       "lesson_id": "ك-471",
-      "barrier_id": "B-89d52060",
-      "run_evidence": null
+      "barrier_id": "B-2e458539",
+      "run_evidence": " 310 ودفع الفهرس عبر 311، وقياس التماثل صار «مطابق: 7714/7532» D040 → خرج 0 · D070 → خرج 0 · التماثل"
+    },
+    {
+      "fault_id": "ك-472",
+      "state": "مغلق",
+      "lesson_id": "ك-472",
+      "barrier_id": "B-d19a4fab",
+      "run_evidence": "ابطها. حاجز الاختبار `python3 tests/test_final_gate_vs_manifest.py` → خرج 0 · «✔ كل ما تستدعيه final"
+    },
+    {
+      "fault_id": "ك-473",
+      "state": "مغلق",
+      "lesson_id": "ك-473",
+      "barrier_id": "B-d7f994e2",
+      "run_evidence": "ظ على الأولوية داخل المرحلة. حاجز `python3 tools/runbook.py verify` → خرج 0 · 0 خلل"
+    },
+    {
+      "fault_id": "ك-474",
+      "state": "مغلق",
+      "lesson_id": "ك-474",
+      "barrier_id": "B-72f2a267",
+      "run_evidence": "بلا رابط. حاجز الاختبار `python3 tests/test_event_card_contract.py` → خرج 0 · نجح 17 · فشل 0"
+    },
+    {
+      "fault_id": "ك-475",
+      "state": "مغلق",
+      "lesson_id": "ك-475",
+      "barrier_id": "B-b41caa20",
+      "run_evidence": "بوابتي المخرجات والتسليم. حاجز التشغيل المتطابق مرتين على كل الأيام → خرج 0 · 507/507 صفًا بالحقول ا"
+    },
+    {
+      "fault_id": "ك-476",
+      "state": "مغلق",
+      "lesson_id": "ك-476",
+      "barrier_id": "B-3faad568",
+      "run_evidence": "ية الصف والمكان اختبار `python3 tests/test_ledger_link_contract.py` → خرج 0 · نجح 6 · فشل 0؛ بوابة `"
+    },
+    {
+      "fault_id": "ك-477",
+      "state": "مغلق",
+      "lesson_id": "ك-477",
+      "barrier_id": "B-9a97db1b",
+      "run_evidence": "» دون إعادة بناء الموقع. اختبار tests/test_forbidden_surface_terms.py خرج 0؛ audit_style_coverage خر"
+    },
+    {
+      "fault_id": "ك-478",
+      "state": "مغلق",
+      "lesson_id": "ك-478",
+      "barrier_id": "B-9bfcb101",
+      "run_evidence": "لحاكمة python3 tools/build_lexicon_corpus.py --apply، فكتب 7512 كلمة وبصمة 381903ee61e4f553، ثم ثُبّت التطابق بأمر -"
     }
   ]
 }

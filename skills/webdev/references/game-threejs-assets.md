@@ -236,10 +236,7 @@ animations in Preview. Reuse geometry/materials, dispose retired resources, use 
 geometry and show a placeholder on load/failure.
 Instance rigged GLBs with `SkeletonUtils.clone()` (`three/examples/jsm/utils/SkeletonUtils.js`), not `.clone()`,
 which keeps the source skeleton so copies freeze or render on the original, and give each its own `AnimationMixer`.
-Make each moving character, including enemies and NPCs, face its travel direction, unless the design aims it
-elsewhere (for example at a lock-on target). Keep the last heading when it stops. glTF models usually face +Z,
-but the Three.js starter's `player.ts` turns local -Z toward travel. Correct the front with one fixed yaw on a
-wrapper group above the animated nodes. Then check the front in a moving Preview screenshot.
+Apply [travel facing and root pinning](game-assets.md#continuous-animation-and-alignment) to every moving model.
 
 ### Two-handed weapon grips
 

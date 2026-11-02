@@ -10,25 +10,17 @@ Use the destination the user has already named where practical. A CITY example n
 
 Choose a coherent travel situation and connect preferences to how the user wants to stay. Use everyday phrasing and natural changes of subject, as if someone were asking for help in a chat. Give practical reasons for a few preferences, such as parking for a driving trip or cancellation flexibility for unsettled plans. Avoid field-like labels, promotional language, and a polished introduction or conclusion inside the example. Do not try to mention every available filter. Do not invent a story or a preference about the user: the example is a hypothetical request they can modify.
 
-Use the richer examples below as the default breadth. Preserve the connected mix of room, facility, and booking preferences when adapting the place or language. Write natively in the reply language instead of translating English sentence structure word for word; for Simplified Chinese, use the corresponding Chinese example as the phrasing reference.
+Use the richer examples below as the default breadth. Preserve the connected mix of room, facility, and booking preferences when adapting the place or language. Write natively in the reply language instead of translating English sentence structure word for word; the user may write in any language, so phrase the example the way a native speaker of that language would ask in a chat, with its usual date and unit conventions.
 
 ### Example: a family stay
 
 > We're taking our eight-year-old to Shanghai from October 1 to 4, so that's two adults and a child in one room. Can you find us a five-star hotel within 2 km of Jing'an Temple metro station, rated at least 4.5 and either opened or renovated in the last two years? We'll have a lot of luggage, so we'd like at least 30 square metres, twin beds and a non-smoking room with a bathtub. We're driving, so we'll need free parking, and we'd also like a laundry room, a gym and breakfast included. Keep it under CNY 1,200 a night including tax. We'd like to pay at the hotel and need free cancellation in case our plans change. Start with five options, cheapest first.
 
-Native Simplified Chinese phrasing for the same supported conditions:
-
-> 国庆想带孩子去上海，10月1号住到4号，我和爱人加一个8岁的小孩，一间房就行。想住静安寺地铁站附近，两公里以内，找家五星酒店，评分至少4.5，近两年新开的或者翻新过的。带孩子东西多，房间得有30平，双床、无烟，还想要个浴缸。我们开车过去，得有免费停车，酒店也要有洗衣房和健身房，早餐一起含上。每晚连税别超过1200元，想到了酒店再付钱，行程万一有变化得能免费取消。先按价格从低到高给我看5家吧。
-
 ### Example: a city stay
 
 > We're driving to Shanghai for three nights, October 1 to 4, just the two of us sharing one room. The area isn't settled yet. Could you look for five-star hotels rated at least 4.5 and either opened or renovated in the last two years? We'd like a non-smoking room of at least 30 square metres with a bathtub and a king bed. Free parking, a laundry room and a gym are all things we'll use, and we'd like breakfast included. The budget is CNY 3,600 for the whole stay including tax. We want to pay at the hotel and be able to cancel for free if the trip changes. Show us five to start with, cheapest first.
 
-Native Simplified Chinese phrasing for the same supported conditions:
-
-> 10月1号到4号我俩开车去上海，住一间房，具体哪个区还没想好。帮我找找五星酒店，评分4.5以上、近两年新开的或者翻新过的，房间至少30平，要无烟的，有浴缸和特大床。停车得免费，也想找有洗衣房和健身房的，早餐算在房费里。三晚连税一共别超过3600元，到店再付钱，万一计划变了能免费取消。先挑价格低的给我看5家。
-
-Adapt one example in one language; do not show the alternatives or both languages together. Use the city version when only a city is known, so the introduction does not invent a landmark or radius. Example dates are illustrative. When tailoring dates, use a sensible future stay and make the year unambiguous if necessary. Do not execute an example unless the user adopts it.
+Adapt one example in the reply language; do not show the alternatives or several languages together. Use the city version when only a city is known, so the introduction does not invent a landmark or radius. Example dates are illustrative. When tailoring dates, use a sensible future stay and make the year unambiguous if necessary. Do not execute an example unless the user adopts it.
 
 ## Supported meaning of these examples
 

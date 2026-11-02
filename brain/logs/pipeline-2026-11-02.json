@@ -23,21 +23,14 @@
     "status": "degraded"
   },
   "final_gate": {
-    "status": "block",
-    "exit_code": 2,
+    "blocked_steps": [],
     "dir": "logs/gate-2026-11-02",
-    "blocked_steps": [
-      "اختبارات البوابات (tests)",
-      "تصدير PDF المعتمد",
-      "جودة الطباعة (الخريطة والتصفير على PDF)",
-      "عيوب الكتابة (الصياغة والترقيم)",
-      "المفردات المبسطة (تنبيهي حتى الموافقة)",
-      "تغطية بوابة الأسلوب لكل سطح يقرأه القارئ"
-    ],
-    "note": "نتيجة بوابة التسليم النهائية — مسجّلة بعد كتابة التقرير."
+    "exit_code": 2,
+    "note": "نتيجة بوابة التسليم النهائية — كُتبت العلامة بعدها.",
+    "status": "block"
   },
   "finished_utc": "2026-11-02T03:44:53Z",
-  "gate_finished_utc": "2026-11-02T13:41:27Z",
+  "gate_finished_utc": "2026-11-02T20:54:23Z",
   "gate_note": "علامة مرحلة الخط اليومي — بوابة التسليم لم تُشغَّل بعد.",
   "gate_state": "not_run",
   "language": {
@@ -45,13 +38,13 @@
     "edit_pass": {
       "applied": true,
       "by_category": {
-        "أسلوب": 15,
-        "مفردة": 21
+        "أسلوب": 9,
+        "مفردة": 8
       },
-      "changes": 36,
-      "edited": 5,
+      "changes": 17,
+      "edited": 3,
       "model": "gpt-5-mini",
-      "rejected": 10,
+      "rejected": 9,
       "sections": 16
     },
     "long_sentences": 15,

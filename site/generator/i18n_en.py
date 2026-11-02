@@ -76,13 +76,42 @@ def plain(md_line: str) -> str:
     return norm(s)
 
 
+def _line_kind(md_line: str) -> str:
+    """Return the structural kind required for one aligned Markdown line."""
+    s = md_line.strip()
+    if s.startswith("|"):
+        return f"table/{len(s.strip("|").split("|"))}"
+    heading = re.match(r"^(#{1,6})\s+", s)
+    if heading:
+        return f"h{len(heading.group(1))}"
+    if re.match(r"^[-*+]\s+", s):
+        return "list"
+    if s.startswith(">"):
+        return "quote"
+    return "text"
+
+
 def build_tm(date: str) -> dict[str, str]:
     ar = (AR_MD / f"{date}-sectioned.md").read_text(encoding="utf-8")
     en = (I18N / f"{date}-sectioned.en.md").read_text(encoding="utf-8")
-    A = [plain(x) for x in ar.splitlines() if x.strip()]
-    E = [plain(x) for x in en.splitlines() if x.strip()]
+    A_raw = [x for x in ar.splitlines() if x.strip()]
+    E_raw = [x for x in en.splitlines() if x.strip()]
+    A = [plain(x) for x in A_raw]
+    E = [plain(x) for x in E_raw]
     if len(A) != len(E):
         raise SystemExit(f"محاذاة غير ممكنة: عربي={len(A)} إنجليزي={len(E)}")
+    kind_mismatches = [
+        (idx, _line_kind(a), _line_kind(e))
+        for idx, (a, e) in enumerate(zip(A_raw, E_raw))
+        if _line_kind(a) != _line_kind(e)
+    ]
+    if kind_mismatches:
+        details = "; ".join(
+            f"idx {idx}: عربي={ar_kind} إنجليزي={en_kind}"
+            for idx, ar_kind, en_kind in kind_mismatches[:12]
+        )
+        more = f"؛ و{len(kind_mismatches) - 12} اختلافًا آخر" if len(kind_mismatches) > 12 else ""
+        raise SystemExit(f"أنواع الأسطر غير متطابقة: {details}{more}")
     tm = {a: e for a, e in zip(A, E) if a and a != e and ARABIC.search(a)}
     ar_rows = [x.strip() for x in ar.splitlines() if x.strip().startswith("|")]
     en_rows = [x.strip() for x in en.splitlines() if x.strip().startswith("|")]
@@ -170,8 +199,60 @@ def _en_number_list(raw: str) -> str:
     return ", ".join(parts)
 
 
+WARNING_COUNT_WORD = {
+    "واحد": "one", "واحدة": "one", "اثنان": "two", "اثنتان": "two",
+    "ثلاثة": "three", "ثلاث": "three", "أربعة": "four", "أربع": "four",
+    "خمسة": "five", "خمس": "five", "ستة": "six", "ست": "six",
+    "سبعة": "seven", "سبع": "seven", "ثمانية": "eight", "ثمان": "eight",
+    "تسعة": "nine", "تسع": "nine", "عشرة": "ten", "عشر": "ten",
+}
+
+
+def _warning_count(raw: str) -> str | None:
+    if raw.isdigit():
+        return raw
+    return WARNING_COUNT_WORD.get(raw)
+
+
+_OVERALL_LEVEL_EN = {
+    "مرتفع جدًا": "Very High",
+    "مرتفع": "High",
+    "متوسط": "Moderate",
+    "منخفض": "Low",
+}
+_OVERALL_SECTORS_EN = {
+    "مضيق هرمز، خليج عُمان، الخليج العربي":
+        "the Strait of Hormuz, the Gulf of Oman and the Arabian Gulf",
+    "مضيق هرمز، خليج عُمان، والخليج العربي":
+        "the Strait of Hormuz, the Gulf of Oman and the Arabian Gulf",
+    "مضيق هرمز وخليج عُمان والخليج العربي":
+        "the Strait of Hormuz, the Gulf of Oman and the Arabian Gulf",
+}
+
+
+def _overall_sectors(raw: str) -> str | None:
+    """Translate only the approved three-sector list; reject unknown free text."""
+    return _OVERALL_SECTORS_EN.get(norm(raw))
+
+
+def _en_date_phrase(raw: str) -> str | None:
+    """ترجمة تاريخ عربي محدود إلى صيغة إنجليزية، دون تخمين نص حر."""
+    value = norm(raw)
+    if not re.fullmatch(r"\d{1,2}\s+(?:" + "|".join(MONTHS) + r")(?:\s+\d{4})?", value):
+        return None
+    for arabic, english in MONTHS.items():
+        value = re.sub(rf"(?<!\S){re.escape(arabic)}(?!\S)", english, value)
+    return value
+
+
 def localize_patterns(s: str) -> str | None:
     n = norm(s)
+    m = re.fullmatch(r"\(?official_ref=(\S+)\s+\(سجل الدفتر المجمّد\s+([^)]+)\)\)?", n)
+    if m:
+        return f"(official_ref={m.group(1)} (frozen ledger record {m.group(2)}))"
+    m = re.fullmatch(r"\(?تصحيح معرّف معلّق\s+\(([^)]+)\)\s*←\s*([^:]+):\s*الواقعة نفسها بالسفينة\s*\)?", n)
+    if m:
+        return f"(Corrected dangling identifier ({m.group(1)}) ← {m.group(2)}: same vessel incident)"
     m = re.fullmatch(r"\((\d+)\s*واقعة\)([؛\.]?)", n)
     if m:
         tail = ";" if m.group(2) == "؛" else m.group(2)
@@ -185,6 +266,97 @@ def localize_patterns(s: str) -> str | None:
 
     def _tr(v: str) -> str:
         return (_G or {}).get(norm(v), v)
+
+    # عائلة المستوى العام: بنية كاملة ومقفلة على مستوى/قطاعات/عدد/مرجع معروف؛
+    # اختلافات الصياغة المقبولة محصورة في «يستند/يُسند»، «وهو/هذا»، و«لا ترفع/لا تُرفع».
+    m = re.fullmatch(
+        r"المستوى العام:\s*(?P<level>مرتفع جدًا|مرتفع|متوسط|منخفض)\s+—\s+"
+        r"(?P<label>القطاع الأعلى|القطاعات الأعلى):\s*(?P<sectors>.+?)\.\s+"
+        r"(?P<basis>يستند|يُسند)\s+هذا التقدير إلى صدور\s+"
+        r"(?P<count>واحد|واحدة|اثنان|اثنتان|ثلاثة|ثلاث|أربعة|أربع|خمسة|خمس|ستة|ست|"
+        r"سبعة|سبع|ثمانية|ثمان|تسعة|تسع|عشرة|عشر|\d+)\s+تحذيرات رسمية خلال الفترة،\s+"
+        r"(?P<between>منها|بينها)\s+بلاغ(?: عن)? هجوم داخل مضيق هرمز وتحديث لتحذير سابق[؛،]\s+"
+        r"(?P<high>وهو|هذا)\s+أعلى تكرار رسمي خلال الفترة القريبة\.\s+"
+        r"(?P<negative>لا تُرفع|لا ترفع)\s+"
+        r"(?:(?:درجة التهديد\s+استناد(?:ًا|ا) إلى روايات غير مؤكدة)|"
+        r"(?:الروايات غير المؤكدة\s+مستوى التهديد))\s+"
+        r"قبل تأكيد رسمي أو تأكيد من مصدرين مستقلين\s+"
+        r"\((?P<refs>\d{2}-\d{2}\s+إلى\s+\d{2}-\d{2}؛\s+B/2)\)\.",
+        n,
+    )
+    if m:
+        level = _OVERALL_LEVEL_EN[m.group("level")]
+        sectors = _overall_sectors(m.group("sectors"))
+        count = _warning_count(m.group("count"))
+        if sectors is None or count is None:
+            return None
+        label = "highest sector" if m.group("label") == "القطاع الأعلى" else "highest sectors"
+        refs = m.group("refs").replace(" إلى ", " to ").replace("؛", ";")
+        return (
+            f"Overall level: {level} — {label}: {sectors}. This assessment is based on the issuance of "
+            f"{count} official warnings during the period, including a report of an attack inside the Strait of "
+            f"Hormuz and an update to an earlier warning; this is the highest official frequency in the recent period. "
+            f"The threat level is not raised on the basis of unconfirmed accounts before official confirmation or "
+            f"confirmation from two independent sources ({refs})."
+        )
+
+    # عائلات متكررة في سطح الإضافات: لا تُقبل إلا مع بنية كاملة ومعرّف تحذير
+    # صريح، وتاريخ يوم/شهر اختياري معروف؛ أي نص خارج هذا القيد يبقى مانعًا.
+    m = re.fullmatch(r"،\s*من دون تفاصيل عن السفينة أو عن الضرر", n)
+    if m:
+        return ", without details about the vessel or the damage"
+    # ك-480: «و» الابتدائية اختيارية — سطح الإضافات قد يكتب «، التحذير 191-26 بتاريخ».
+    m = re.fullmatch(r"،\s*(?P<w>و)?التحذير\s+(?P<id>\d{3}-\d{2})\s+بتاريخ(?:\s+(?P<date>.+))?", n)
+    if m:
+        date = _en_date_phrase(m.group("date")) if m.group("date") else ""
+        if m.group("date") and date is None:
+            return None
+        lead = ", and" if m.group("w") else ","
+        return f"{lead} warning No. {m.group('id')} dated" + (f" {date}" if date else "")
+    # عائلة ناقلتي النفط (سطح الإضافات): ترتيب الجهتين متغيّر، والمقذوف/اللغام متغيّر،
+    # والمرجع مقفول ببنية معروفة؛ أي نص خارج هذا القيد يبقى مانعًا.
+    m = re.fullmatch(
+        r"نقلت\s+(?:وسائل متابعة ومصادر إيرانية|مصادر إيرانية ووسائل متابعة)\s+"
+        r"أن ناقلتي نفط انفجرتا بعد اصطدامهما المزعوم ب(?:ألغام|مقذوفات)\s+بحرية\s+"
+        r"في مضيق هرمز،\s+وأن إحداهما اندلع فيها حريق،\s+"
+        r"من دون تأكيد رسمي مستقل\s+\((?P<refs>[^)]+)\)\.",
+        n,
+    )
+    if m:
+        refs = re.sub(r"\s+و", " and ", m.group("refs")).replace("؛", ";")
+        return (
+            "Monitoring outlets and Iranian sources reported that two oil tankers exploded after their "
+            "alleged collision with maritime projectiles in the Strait of Hormuz, and that a fire broke out "
+            f"on one of them, without independent official confirmation ({refs})."
+        )
+    m = re.fullmatch(
+        r"(واحد|واحدة|اثنان|اثنتان|ثلاثة|ثلاث|أربعة|أربع|خمسة|خمس|ستة|ست|"
+        r"سبعة|سبع|ثمانية|ثمان|تسعة|تسع|عشرة|عشر|\d+)\s+تحذيرات خلال الفترة:\s+"
+        r"تحديث التحذير\s+(\d{3}-\d{2})،\s+ثم التحذير\s+(\d{3}-\d{2})\s+في(?:\s+(.+))?",
+        n,
+    )
+    if m:
+        count = _warning_count(m.group(1))
+        date = _en_date_phrase(m.group(4)) if m.group(4) else ""
+        if count is None or (m.group(4) and date is None):
+            return None
+        sentence_count = count[:1].upper() + count[1:]
+        return (f"{sentence_count} warnings during the period: an update to warning No. {m.group(2)}, "
+                f"followed by warning No. {m.group(3)} on" + (f" {date}" if date else ""))
+    m = re.fullmatch(
+        r"صدر\s+(واحد|واحدة|اثنان|اثنتان|ثلاثة|ثلاث|أربعة|أربع|خمسة|خمس|ستة|ست|"
+        r"سبعة|سبع|ثمانية|ثمان|تسعة|تسع|عشرة|عشر|\d+)\s+تحذيرات خلال الفترة:\s+"
+        r"التحذير\s+(\d{3}-\d{2})\s+\(التحديث الأول\)\s+بتاريخ(?:\s+(.+))?",
+        n,
+    )
+    if m:
+        count = _warning_count(m.group(1))
+        date = _en_date_phrase(m.group(3)) if m.group(3) else ""
+        if count is None or (m.group(3) and date is None):
+            return None
+        sentence_count = count[:1].upper() + count[1:]
+        return (f"{sentence_count} warnings were issued during the period: warning No. {m.group(2)} "
+                f"(the first update), dated" + (f" {date}" if date else ""))
 
     m = re.fullmatch(r"القطاع\s+(\S+)\s+(.+?)\s+—\s+مستواه\s+(.+?)\.", n)
     if m:
@@ -204,30 +376,36 @@ def localize_patterns(s: str) -> str | None:
     m = re.fullmatch(r"المؤكد:\s*(\d+)\s*·\s*المرجّح:\s*(\d+)\s*·\s*غير المؤكد:\s*(\d+)", n)
     if m:
         return f"Confirmed: {m.group(1)} · probable: {m.group(2)} · unconfirmed: {m.group(3)}"
-    m = re.fullmatch(r"فُحصت\s+(\d+)\s+تغذية\s+من\s+(\d+)\s+تغذية\.", n)
+    m = re.fullmatch(r"فُح(?:ِ)?صت\s+(\d+)\s+تغذية\s+من\s+(\d+)\s+تغذية\.", n)
     if m:
         return f"Checked {m.group(1)} of {m.group(2)} feeds."
-    m = re.fullmatch(r"بلغ مجموع العناصر المقروءة\s+(\d+)\s+عنصرًا\.", n)
+    m = re.fullmatch(r"بلغ مجموع العناصر المقروءة\s+(\d+)\s+عنصر(?:ًا|اً)\.", n)
     if m:
         return f"Total items read: {m.group(1)}."
     m = re.fullmatch(r"تعذّرت\s+(\d+)\s+تغذية\s+من\s+أصل\s+(\d+)\.", n)
     if m:
         return f"{m.group(1)} of {m.group(2)} feeds failed."
-    m = re.fullmatch(r"سُجلت مرجعية يدوية للمصدرين\s+([\d،\s]+?)\s+—\s+العدد\s+(\d+)\.", n)
+    m = re.fullmatch(r"سُج(?:ِّ)?لت مرجعية يدوية للمصدرين\s+([\d،\s]+?)\s+—\s+العدد\s+(\d+)\.", n)
     if m:
         return (f"Manual reference recorded for sources {_en_number_list(m.group(1))}"
                 f" — count {m.group(2)}.")
-    m = re.fullmatch(r"وُسمت مصادر متقادمة وفق حد\s+(\d+)\s+يومًا:\s+([\d،\s]+?)\s+—\s+العدد\s+(\d+)؛\s+"
-                     r"لم يُستند إليها وحدها في إثبات واقعة جديدة\.", n)
+    m = re.fullmatch(r"وُس(?:ِّ)?مت مصادر (?:متقادمة|قديمة) وفق حد\s+(\d+)\s+يومًا:\s+([\d،\s]+?)\s+—\s+العدد\s+(\d+)؛\s+"
+                     r"(?:و)?لم يُعتمد عليها وحدها لإثبات واقعة جديدة\.", n)
     if m:
         return (f"Sources marked stale at the {m.group(1)}-day threshold: "
                 f"{_en_number_list(m.group(2))} — count {m.group(3)}; "
                 "not relied on alone to establish a new incident.")
-    m = re.fullmatch(r"سُجل تعذر مساري المصدرين\s+([\d،\s]+?)\s+في محاولات فرعية،\s+"
+    m = re.fullmatch(r"سُج(?:ِّ)?ل تعذ(?:ّر|ر) مساري المصدرين\s+([\d،\s]+?)\s+في محاولات فرعية،\s+"
                      r"مع بقاء حالة التغذية الكلية ناجحة عبر المسارات المعتمدة البديلة\.", n)
     if m:
         return (f"Sub-attempt failures recorded for sources {_en_number_list(m.group(1))}, "
                 "while overall feed status stayed successful through the approved alternative paths.")
+    m = re.fullmatch(r"نجحت التغذية على مستوى المصدر ككل\.", n)
+    if m:
+        return "The feed status succeeded at the source level as a whole."
+    m = re.fullmatch(r"لا تغذية فارغة، ولا يُستَتَر أي قيد عن القارئ\.", n)
+    if m:
+        return "No feed is empty, and no constraint is concealed from the reader."
     m = re.fullmatch(r"(\d{1,2})\s+(" + "|".join(MONTHS) + r")\s+(\d{4})\s+·\s+(\d{2}:\d{2})\s+حسب التوقيت العالمي", n)
     if m:
         return f"{m.group(1)} {MONTHS[m.group(2)]} {m.group(3)} · {m.group(4)} UTC"

@@ -12,7 +12,6 @@ from __future__ import annotations
 
 import json
 import sys
-import traceback
 from pathlib import Path
 
 BASE = Path(__file__).resolve().parent.parent
@@ -56,10 +55,6 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    try:
-        sys.exit(main())
-    except SystemExit:
-        raise
-    except Exception:
-        traceback.print_exc()
-        sys.exit(70)
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)

@@ -17,7 +17,7 @@
 
 الاستعمال:
   python3 tools/resolve_source_links.py --date 2026-11-02
-  python3 tools/resolve_source_links.py --date 2026-11-02 --brain "$PWD" --site /home/ubuntu/seawatch
+  python3 tools/resolve_source_links.py --date 2026-11-02 --brain "$BRAIN_DIR" --site "$SITE_DIR"
 """
 from __future__ import annotations
 

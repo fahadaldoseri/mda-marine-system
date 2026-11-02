@@ -1301,7 +1301,6 @@ ABSENCE = {
     "translation": "الترجمة غير مدرجة في الدفتر",
     "excerpt": "لا نصّ خام في الدفتر",
     "excerpt_open": "مطويّ — افتح للعرض",
-    "parent": "لا فرع تابع في الدفتر المتاح",
 }
 # ترتيب المطابقة إلزامي والأخصّ أولًا: «نفي رسمي منقول» يُقرأ نفيًا لا بلاغًا رسميًّا.
 CLASSIFICATION_RULES = (
@@ -1394,6 +1393,8 @@ def _field_row(index: int, label: str, value: str, defs, *, state: str = "shown"
 LIVE_EVENT_LEDGER_FROM = "2026-10-31"
 RELATION_KEYS = ("update_of", "parent_id", "duplicate_of")
 RELATION_MARKER_KEYS = ("event_kind", "update_of", "parent_id", "duplicate_of")
+RELATION_KIND_FIELDS = {"تحديث": "update_of", "تكرار": "duplicate_of", "فرع تابع": "parent_id"}
+RELATION_KIND_LABELS = {"تحديث": "تحديث لبلاغ", "تكرار": "تكرار لبلاغ", "فرع تابع": "فرع من بلاغ"}
 
 
 def _daily_events_path(md_path: Path, report_date: str) -> Path:
@@ -1489,6 +1490,29 @@ def _relation_info(event: dict, known: dict[str, dict]) -> tuple[bool, str, str]
     return marker, "", "event_kind" if marker else ""
 
 
+def _counts_as_new_false(value) -> bool:
+    """يقبل القيمة المنطقية المطلوبة، مع تحمل تمثيل JSON النصي القديم."""
+    return value is False or str(value or "").strip().lower() in {"false", "0", "no"}
+
+
+def _relation_display(event: dict, known: dict[str, dict]) -> tuple[str, str] | None:
+    """يبني سطر العلاقة من العقد الصريح فقط، دون استنتاج أو نص غياب."""
+    kind = _value_text(event.get("event_kind"))
+    field = RELATION_KIND_FIELDS.get(kind)
+    reference = _value_text(event.get(field)) if field else ""
+    basis = _value_text(event.get("link_basis"))
+    if not field or not reference or not basis:
+        return None
+    target = known.get(reference)
+    target_code = _event_code(target) if target else reference
+    if not target or not target_code or target_code == _event_code(event):
+        return None
+    text = f"{RELATION_KIND_LABELS[kind]}: `{target_code}` ({basis})"
+    if _counts_as_new_false(event.get("counts_as_new")):
+        text += " لا يُحتسب واقعة جديدة"
+    return field, text
+
+
 def _event_fields_html(event: dict, defs) -> tuple[str, bool]:
     """الصفوف 4–9 وفق العقد؛ الصفوف 1–3 في رأس البطاقة والصف 10 هو الفرع التابع."""
     date_text = _event_date(event) or "غير متاح"
@@ -1558,39 +1582,23 @@ def render_ledger_events(events, defs, md_path: Path):
         cls, label = event_badge(event.get("class"))
         reliability = reliability_label(event)
         fields_html, has_time = _event_fields_html(event, defs)
-        marked, parent_ref, relation_key = _relation_info(event, known)
-        if marked:
+        relation = _relation_display(event, known)
+        relation_key = relation[0] if relation else ""
+        if relation:
             relation_count += 1
         branch_html = ""
-        if marked and parent_ref:
-            parent = known.get(parent_ref)
-            if parent and _event_code(parent) != code:
-                branch_count += 1
-                parent_code = _event_code(parent)
-                branch_html = (
-                    f'<div class="ev-branch" data-row="10" data-branch-status="shown" data-parent-ref="{esc(parent_ref)}">'
-                    '<span class="ev-branch-title">فرع تابع</span>'
-                    f'<div><span class="ev-k">التاريخ</span><span class="ev-mv">{esc(_event_date(parent) or "غير متاح")}</span></div>'
-                    f'<div><span class="ev-k">الملخص</span><span class="ev-mv">{inline(_event_description(parent) or "غير متاح", defs)}</span></div>'
-                    f'<div><span class="ev-k">المعرّف المرجعي</span><span class="ev-mv bidi">{esc(parent_code or parent_ref)}</span></div>'
-                    '</div>'
-                )
-            else:
-                unresolved += 1
-                branch_html = (
-                    f'<div class="ev-branch-gap" data-row="10" data-branch-status="missing-target" data-parent-ref="{esc(parent_ref)}">'
-                    f'فجوة ربط: المرجع {esc(parent_ref)} معلّم، ولا يوجد له هدف في الدفتر المتاح.</div>'
-                )
-        elif marked:
-            unresolved += 1
+        if relation:
+            branch_count += 1
+            relation_key, relation_text = relation
             branch_html = (
-                '<div class="ev-branch-gap" data-row="10" data-branch-status="missing-ref">'
-                'فجوة ربط: الحدث معلّم كتحديث/امتداد، لكن الدفتر لا يحمل معرّف الحدث السابق.</div>'
+                f'<div class="ev-branch" data-row="10" data-branch-status="shown" '
+                f'data-relation-ref="{esc(_value_text(event.get(relation_key)))}">'
+                '<span class="ev-branch-title">العلاقة</span>'
+                f'<span class="ev-mv">{inline(relation_text, defs)}</span></div>'
             )
         else:
-            # الصف 10 يظهر دائمًا: غياب الفرع حالة معلنة لا صفّ محذوف.
-            branch_html = _field_row(10, "فرع تابع", ABSENCE["parent"], defs,
-                                     attrs=' data-branch-status="not-marked"')
+            # يبقى الموضع البنيوي مخفيًا حتى لا تتغير أرقام الصفوف، بلا نص غياب للقارئ.
+            branch_html = '<div data-row="10" data-branch-status="not-marked" hidden aria-hidden="true"></div>'
         cards.append(
             f'<article class="ev reveal {cls}" id="ev-{idx:02d}" data-event-code="{esc(code)}" '
             f'data-event-date="{esc(_event_date(event))}" data-event-has-time="{"1" if has_time else "0"}" '
@@ -1603,15 +1611,11 @@ def render_ledger_events(events, defs, md_path: Path):
             f'<p class="ev-what" data-row="1">{inline(_event_description(event), defs)}</p>'
             f'<div class="ev-meta">{fields_html}</div>{branch_html}</article>'
         )
-    no_relation_note = ""
-    if relation_count == 0:
-        no_relation_note = ('<p class="ev-ledger-note" data-relation-gap="none">'
-                            'فجوة بيانات الربط: لا توجد في دفتر هذه الفترة حقول event_kind أو update_of أو parent_id أو duplicate_of تثبت فرعًا تابعًا؛ لم تُنشأ علاقة من تشابه النص.</p>')
     return (
         f'<div class="ev-grid" data-count="{len(events)}" data-source-count="{len(events)}" '
         f'data-relation-count="{relation_count}" data-branch-count="{branch_count}" '
         f'data-unresolved-branch-count="{unresolved}">'
-        + "".join(cards) + "</div>" + no_relation_note
+        + "".join(cards) + "</div>"
     )
 
 
