@@ -172,6 +172,7 @@ step "المفردات المبسطة (تنبيهي حتى الموافقة)" 2 
 # السجل الحاكم للمفردات: مصدر واحد للإنفاذ (appendices/simplified-vocabulary.json)
 # ومُولَّده (appendices/forbidden-coinages.json) لا يُحرَّر يدويًا. فشل هذه الخطوة = تعارض السجلين.
 step "السجل الحاكم للمفردات ومُولَّده" 2 python3 "$B/tools/build_vocab_gate.py" --check
+python3_soft "$B/validators/check_vocab_chain.py"
 # تغطية بوابة الأسلوب: كل سطح يقرأه القارئ (المتن · القاموس · تلغرام · صفحة التقرير ·
 # صفحة المصادر · الرئيسية) يُقاس، وPDF يُثبت بالإسناد لأن الاستخراج العربي يعكس الحروف.
 step "تغطية بوابة الأسلوب لكل سطح يقرأه القارئ" 2 python3 "$B/tools/audit_style_coverage.py" --date "$D"

@@ -95,6 +95,11 @@ that database over a declared `DATABASE_URL` is also rejected (`database_url_res
 A server project explicitly configured without the managed database can supply its own DSN;
 [database](database.md) owns that capability's data and enablement contract.
 
+`REDIS_URL`, `REDIS_REST_URL`, `REDIS_REST_TOKEN` and `MANUS_REDIS_GENERATION` cannot be declared
+while managed Redis is enabled, and enabling Redis over any of them is also rejected
+(`invalid_value` on `secrets.<name>`). A project without managed Redis can supply its own Redis
+values; [Redis](redis.md) owns the managed capability's contract.
+
 `STRIPE_SECRET_KEY`, `VITE_STRIPE_PUBLISHABLE_KEY`, and `STRIPE_WEBHOOK_SECRET` are provided by
 the platform Stripe integration. Adding or revising those fixed declarations without Stripe
 enablement is rejected as `stripe_integration_required`; [payments](payments.md) owns their

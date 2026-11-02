@@ -391,6 +391,15 @@ def gate_site_output(date: str):
     return True, f"{len(pages)} صفحة سليمة: أقواس · اتجاه · نجوم · ثقة · جداول", False
 
 
+def gate_vocab_chain(date: str) -> tuple[int, str]:
+    """ك-470: كل بديل تبديل آلي يجب أن يكون صيغة نهائية غير ممنوعة."""
+    r = subprocess.run([sys.executable, str(_ROOT / "validators" / "check_vocab_chain.py")],
+                       capture_output=True, text=True)
+    out = ((r.stdout or "") + (r.stderr or "")).strip().splitlines()
+    msg = out[-1] if out else "لا مخرجات"
+    return (r.returncode == 0), msg, []
+
+
 def gate_number_bindings(date: str):
     """حارس ربط الأرقام: كل رقم منشور يُعاد حسابه من ملفه المالك (ك-455).
 
@@ -427,6 +436,7 @@ def main() -> int:
     gates = [
         ("0 ترجمة الشيفرة (لا ملف Python معطوب)", gate_python_syntax),
         ("0 ربط الأرقام بمصادرها", gate_number_bindings),
+        ("0 سلسلة الاستبدال", gate_vocab_chain),
         ("1 المصدر والمخطط", gate_schema),
         ("2 الهوية والمعرّفات", gate_identity),
         ("3 الأرقام والمصادر", gate_numbers),

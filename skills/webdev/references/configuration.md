@@ -32,10 +32,10 @@ version are supplied by the tool. Query parameters belong in `query`, never in t
 | `POST publish` | Publish the latest checkpoint as a background job; its final result returns automatically. Do not poll. See [Git/checkpoints](git-checkpoints.md). |
 
 `GET config` returns `ok`, `revision`, `config`, secret availability, and applicable derived
-fields such as `publishing`, `git_repository`, `stripe`, `runtime_endpoints`, `preview_origin`, and
-`preview_device`. Derived fields are not declaration fields. `GET env` returns key names with
-`<redacted>` placeholders; user-declared secret keys are excluded. No sandbox config response
-returns a stored protected value.
+fields such as `publishing`, `git_repository`, `stripe`, `runtime_endpoints`, `preview_origin`,
+`preview_device`, and `redis`. Derived fields are not declaration fields. `GET env` returns key
+names with `<redacted>` placeholders; user-declared secret keys are excluded. No sandbox config
+response returns a stored protected value.
 
 `publishing.auto_publish` is a read-only user preference outside `config`; config writes
 cannot enable it. It controls automatic publication after a new checkpoint. An explicit

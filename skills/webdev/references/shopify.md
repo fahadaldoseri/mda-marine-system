@@ -5,7 +5,7 @@ Read this page before choosing a stack or initializing a new Shopify storefront,
 ## Enable the integration
 
 1. Initialize or attach the WebDev project first. Shopify and Stripe are mutually exclusive per project.
-2. Call `webdev.config` with `POST integrations/shopify/enable` and no body.
+2. Call `webdev.config` with `POST integrations/shopify/enable`. If the user explicitly asked for a new or fresh development store, send body `{"mode": "create"}`. If the user explicitly asked to connect an existing store from Manus Connectors, send `{"mode": "connect"}`. Otherwise send no body. `mode` only preselects the option in the card; never use it to skip the card.
 3. The response contains an `action_url` and pauses the agent. Stop and let the owner choose **Create a new store** or **Connect an existing store** in the card. Do not invent a store domain or bypass the card with a raw config write.
 4. Resume only after the platform reports that Shopify is configured. Read `GET config` if the current state is unclear. The integration manages `SHOPIFY_STORE_DOMAIN` and `SHOPIFY_STOREFRONT_ACCESS_TOKEN`; never ask the user to enter or replace them.
 

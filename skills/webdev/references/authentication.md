@@ -6,7 +6,7 @@ Application login is separate from project visibility. Manus OAuth requires `fea
 
 ## "Who can open this URL" is not your login
 
-Project visibility is a Dashboard sharing control, not application configuration. The platform checks non-public access after Manus authentication, before a request reaches the application. `owner` visibility admits the owner, the project's session collaborators, and invited users, subject to team policy. `team_only` admits the owner and current accepted members of the owner's team permitted by team policy; invitations and session collaboration do not widen that audience. Effective public visibility has no such platform access gate. None of these settings creates an application session.
+Project visibility is a platform access setting, not application configuration. The platform checks non-public access after Manus authentication, before a request reaches the application. `owner` visibility admits the owner, the project's session collaborators, and invited users, subject to team policy. `team_only` admits the owner and current accepted members of the owner's team permitted by team policy; invitations and session collaboration do not widen that audience. Effective public visibility has no such platform access gate. None of these settings creates an application session.
 
 ## Manus account login: the wire contract
 
