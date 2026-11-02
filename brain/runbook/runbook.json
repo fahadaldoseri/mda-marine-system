@@ -3370,14 +3370,17 @@
           "tools/en_master_build.sh",
           "{site}/generator/derive_en_units.py",
           "{site}/generator/i18n_en.py",
-          "{site}/sources/i18n/en/{date}-sectioned.en.md"
+          "{site}/sources/i18n/en/{date}-sectioned.en.md",
+          "skills/bilingual-master-direction-ops/SKILL.md",
+          "skills/bilingual-master-direction-ops/references/playbook.md",
+          "skills/bilingual-master-direction-ops/scripts/verify_master_direction.py"
         ]
       },
       "on_fail": "توقّف: وحدة عربية بلا مقابل إنجليزي في المتن الحاكم. لا تخمين ولا ترجمة آلية؛ راجع المتن الإنجليزي ثم أعد الخطوة.",
       "command": [
         "bash",
         "-lc",
-        "B=\"$PWD\"; export B SITE; bash \"$B/tools/en_master_build.sh\" {date} \"$SITE\""
+        "B=\"$PWD\"; export B SITE; bash \"$B/tools/en_master_build.sh\" {date} \"$SITE\" && python3 \"$B/../skills/bilingual-master-direction-ops/scripts/verify_master_direction.py\" --brain \"$B\" --site \"$SITE\" --date {date}"
       ],
       "ok_rc": [
         0
