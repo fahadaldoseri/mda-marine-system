@@ -20,6 +20,9 @@ done
 
 OUT="/home/ubuntu/audit-${DATE}/round-close-${DATE}.md"
 mkdir -p "$(dirname "$OUT")"
+# ك-452: كان الملف يُفتح بالإضافة فيتراكم حكم قديم مع الجديد فيُقرأ الحكم الخطأ.
+# القاعدة: تقرير الإغلاق صورة للحالة اللحظية — يُستبدل في كل تشغيل لا يُضاف.
+: > "$OUT"
 cd "$BRAIN" || exit 66
 say() { printf '%s\n' "$*" >> "$OUT"; }
 
@@ -48,6 +51,29 @@ say '```'
 say "رمز الخروج: ${CL_RC}"
 say ""
 
+# ك-451: مزامنة خارجية تعيد نسخًا مبتورة من ملفات المهارات. القاعدة: لا إعلان إغلاق
+# بلا قياس سلامة الأصول، ويُستعاد المبتور من المستودع بـ`tools/restore_skills.sh`.
+say "## 3.1) سلامة أصول المهارات (ك-451)"
+SI=$(python3 validators/check_skills_integrity.py 2>&1); SI_RC=$?
+say '```'
+say "$(printf '%s' "$SI" | tail -4)"
+say '```'
+say "رمز الخروج: ${SI_RC} — عند الفشل: \`bash tools/restore_skills.sh\` ثم أعد القياس"
+say ""
+
+say "## 3.2) حارس وصفات الإغلاق"
+RL_SCRIPT="$(dirname "$0")/recipe_lint.py"
+if [ -f "$RL_SCRIPT" ]; then
+  RL=$(python3 "$RL_SCRIPT" --playbook "$(dirname "$0")/../references/playbook.md" --check-paths 2>&1); RL_RC=$?
+  say '```'
+  say "$(printf '%s' "$RL" | tail -3)"
+  say '```'
+  say "رمز الخروج: ${RL_RC}"
+else
+  RL_RC=64; say "recipe_lint.py غير موجود بجوار هذه الأداة"
+fi
+say ""
+
 say "## 4) الروابط الحية"
 for p in / "/reports/${DATE}.html" "/reports/en/${DATE}.html" "/reports/pdf/${DATE}.pdf" /sources.html /additions.html /manus-routes.json; do
   code=$(curl -s -o /dev/null -w '%{http_code} %{size_download}B' "$URL$p")
@@ -74,10 +100,10 @@ say "$(grep -a '^| ك-' audit/سجل-الأعطال-والثغرات.md | tail -
 say '```'
 say ""
 say "## 7) الحكم"
-if [ "$PAR_RC" -eq 0 ] && [ "$CL_RC" -eq 0 ]; then
-  say "التماثل مطابق وحارس الإغلاق مجتاز — الجولة قابلة للإعلان بشرط مطابقة بصمة PDF أعلاه."
+if [ "$PAR_RC" -eq 0 ] && [ "$CL_RC" -eq 0 ] && [ "$SI_RC" -eq 0 ] && [ "$RL_RC" -eq 0 ]; then
+  say "التماثل مطابق · حارس الإغلاق مجتاز · أصول المهارات سليمة · وصفات الإغلاق سليمة — الجولة قابلة للإعلان بشرط مطابقة بصمة PDF أعلاه."
 else
-  say "غير جاهز للإعلان: التماثل=${PAR_RC} · حارس الإغلاق=${CL_RC}."
+  say "غير جاهز للإعلان: التماثل=${PAR_RC} · حارس الإغلاق=${CL_RC} · سلامة المهارات=${SI_RC} · وصفات الإغلاق=${RL_RC}."
 fi
 echo "   كُتب: $OUT"
 tail -14 "$OUT" | sed 's/^/   /'
