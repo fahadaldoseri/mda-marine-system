@@ -155,19 +155,25 @@ def surfaces(day: str) -> list[dict]:
     if _tg.exists():      # سطح مشتقٌّ من المتن والواجهة: يُبنى من المصدر قبل الفحص، فلا يُحكم على نسخة قديمة
         subprocess.run([sys.executable, str(_tg), "--date", day], capture_output=True, text=True)
 
-    return [
+    off = _disabled_producers()
+    rows = [
         {"label": "المتن (التقرير)", "kind": "text", "path": BASE / "reports" / f"{day}-sectioned.md"},
         {"label": "ملف الواجهة (القاموس وأهم الأخبار المتعلقة بالأمن البحري)", "kind": "json",
          "path": BASE / "web" / "meta" / f"{day}.json"},
+    ]
+    # ك-467: الطباعة معطّلة بأمر المالك ⇒ لا يُقاس ملف PDF قديم ولا يمنع التسليم.
+    if not ({"B020", "B030"} & set(off)):
+        rows.append({"label": "PDF (قياس محدود)", "kind": "pdf", "producer": "B020",
+                     "path": SITE / "dist" / "reports" / "pdf" / f"{day}.pdf"})
+    rows += [
         {"label": "رسالة تلغرام", "kind": "html", "producer": "D030",
          "path": BASE / "logs" / f"tg-digest-{day}.html"},
         {"label": "صفحة التقرير", "kind": "html", "path": SITE / "dist" / "reports" / f"{day}.html"},
         {"label": "صفحة المصادر", "kind": "html", "path": SITE / "dist" / "sources.html"},
         {"label": "الصفحة الرئيسية", "kind": "html", "path": SITE / "dist" / "index.html"},
         {"label": "صفحة إضافات (ك-234)", "kind": "html", "path": SITE / "dist" / "additions.html"},
-        {"label": "PDF (قياس محدود)", "kind": "pdf", "producer": "B020",
-         "path": SITE / "dist" / "reports" / "pdf" / f"{day}.pdf"},
     ]
+    return rows
 
 
 def extract(s: dict, idx: int) -> tuple[Path | None, str]:
