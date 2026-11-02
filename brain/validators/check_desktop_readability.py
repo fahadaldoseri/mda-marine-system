@@ -76,7 +76,7 @@ MEASURE = r"""
 """
 
 
-async def run(site: pathlib.Path, date: str, widths: list[int], pages: list[str]) -> dict:
+async def measure_pages(site: pathlib.Path, date: str, widths: list[int], pages: list[str]) -> dict:
     from playwright.async_api import async_playwright
     out = {"pages": [], "problems": []}
     async with async_playwright() as pw:
@@ -131,7 +131,7 @@ def main() -> int:
         alt = [f"dist/reports/{safe}.html"]
         pages = alt + pages[:1] + pages[2:]
     try:
-        res = asyncio.run(run(site, safe, widths, pages))
+        res = asyncio.run(measure_pages(site, safe, widths, pages))
     except (OSError, ValueError, RuntimeError, asyncio.TimeoutError) as e:
         # تضييق مقصود 2026-11-02: أخطاء التشغيل المتوقعة فقط؛ أي انهيار آخر يمرّ بحارس الانهيار الموحّد (رمز 70).
         print(f"  ✘ فشل مغلق: تعذّر تشغيل الفحص البصري ({type(e).__name__}: {e})")
@@ -155,7 +155,7 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    import sys as _sys, pathlib as _pl
-    _sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
-    from _guard import run as guard_run
-    guard_run(main)
+    # ك-133: كل مدقق يمرّ عبر الحارس الموحّد — الانهيار يخرج بالرمز 70 ولا يُبتلع.
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)
