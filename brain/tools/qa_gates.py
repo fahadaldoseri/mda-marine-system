@@ -385,7 +385,7 @@ def gate_site_output(date: str):
 def gate_python_syntax(date: str):
     """حارس ترجمة الشيفرة: يمنع ملف Python معطوبًا من الوصول إلى التسليم.
 
-    العلّة (ك-393): كان `validators/check_python_syntax.py` قائمًا لكنه غير
+    العلّة (ك-449): كان `validators/check_python_syntax.py` قائمًا لكنه غير
     مُستدعى في بوابة التسليم، فأوقف التدقيق الأسبوعي بتحذير إنفاذ. يُستدعى هنا
     ليعمل داخل خط الفحص العشري لا خارجه.
     """
