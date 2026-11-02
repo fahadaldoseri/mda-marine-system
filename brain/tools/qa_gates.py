@@ -382,6 +382,19 @@ def gate_site_output(date: str):
     return True, f"{len(pages)} صفحة سليمة: أقواس · اتجاه · نجوم · ثقة · جداول", False
 
 
+def gate_number_bindings(date: str):
+    """حارس ربط الأرقام: كل رقم منشور يُعاد حسابه من ملفه المالك (ك-455).
+
+    العلّة: عدّاد هجمات IMO كان يُنشر بلا بوابة، ورقم عدد المصادر في المانيفست
+    كان ثابتًا خارج نطاق الحرس. البوابة تفشل مغلقًا عند أي اختلاف.
+    """
+    out = subprocess.run([sys.executable, str(B / "validators" / "check_number_bindings.py"),
+                          "--date", date], capture_output=True, text=True, cwd=str(B))
+    lines = (out.stdout or out.stderr).strip().splitlines()
+    detail = lines[-1] if lines else "لا مخرجات"
+    return (out.returncode == 0), detail, False
+
+
 def gate_python_syntax(date: str):
     """حارس ترجمة الشيفرة: يمنع ملف Python معطوبًا من الوصول إلى التسليم.
 
@@ -404,6 +417,7 @@ def main() -> int:
     Path("/tmp/_qa_toc.txt").write_text(pdf_text(pdf), encoding="utf-8")
     gates = [
         ("0 ترجمة الشيفرة (لا ملف Python معطوب)", gate_python_syntax),
+        ("0 ربط الأرقام بمصادرها", gate_number_bindings),
         ("1 المصدر والمخطط", gate_schema),
         ("2 الهوية والمعرّفات", gate_identity),
         ("3 الأرقام والمصادر", gate_numbers),
