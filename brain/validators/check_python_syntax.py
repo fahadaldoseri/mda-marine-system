@@ -11,6 +11,7 @@ import argparse
 import pathlib
 import re
 import sys
+from pathlib import Path
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SKIP = {"node_modules", ".git", "logs", "dist", "archive", "audit"}
@@ -84,7 +85,7 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    import sys as _sys, pathlib as _pl
-    _sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
-    from _guard import run as guard_run
-    guard_run(main)
+    # ك-133: كل مدقق يمرّ عبر الحارس الموحّد — الانهيار يخرج بالرمز 70 ولا يُبتلع.
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)
