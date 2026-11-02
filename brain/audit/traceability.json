@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-02T12:54:17.890971+00:00",
+  "generated_at": "2026-11-02T13:28:35.748307+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -3495,6 +3495,20 @@
       "lesson_id": null,
       "barrier_id": "B-77583463",
       "run_evidence": null
+    },
+    {
+      "fault_id": "ك-465",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-465",
+      "barrier_id": "B-d3a63723",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-466",
+      "state": "مغلق",
+      "lesson_id": "ك-466",
+      "barrier_id": "B-39f9e7a8",
+      "run_evidence": "لصارمة ومزامنة المعجم آليًا في خطوة النسخة الاحتياطية. حي: D040 وD070 رمز 0 · `check_backup_parity -"
     }
   ]
 }
