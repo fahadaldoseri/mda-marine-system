@@ -100,6 +100,15 @@ def main() -> int:
           any("وسم (#)" in e for e in GATE.card_violations(
               card(**{'<span>UKMTO WARNING 190-26</span>':
                       '<span>UKMTO WARNING #MarSec</span>'}), 1)))
+    # ك-471: الكيانات المشفّرة ليست وسومًا مرئية، والوسم الحقيقي يبقى ممنوعًا.
+    check("كيان &#x27; لا يُعدّ وسمًا",
+          not any("وسم (#)" in e for e in GATE.card_violations(
+              card(**{'<span>UKMTO WARNING 190-26</span>':
+                      "<span>Lloyd&#x27;s List — Yemen&#x27;s coast</span>"}), 1)))
+    check("وسم # حقيقي يبقى ممنوعًا بعد فك الترميز",
+          any("وسم (#)" in e for e in GATE.card_violations(
+              card(**{'<span>UKMTO WARNING 190-26</span>':
+                      '<span>UKMTO WARNING &#35;MarSec</span>'}), 1)))
     check("عرض المسار الداخلي يُمنع",
           any("المسار الداخلي" in e for e in GATE.card_violations(
               card(**{'<p class="ev-what" data-row="1">تحذير UKMTO رقم 190-26</p>':

@@ -201,7 +201,10 @@ def main() -> int:
             _excl = {"خارج القطاعات", "المنطقة كاملة"}
             need = [e for e in evs if (e.get("area") or "").strip() not in _excl]
             drawn = {p.get("code") for p in mpts}
-            missing = [e.get("code") for e in need if e.get("code") not in drawn]
+            # عطل ك-: واقعة معلَنة «خارج نطاق الرسم» بسبب مكتوب تُعدّ محلولة، لا ناقصة.
+            declared_off = {str(o.get("code")) for o in off_map if (o.get("reason") or "").strip()}
+            missing = [e.get("code") for e in need
+                       if e.get("code") not in drawn and e.get("code") not in declared_off]
             if need and missing:
                 blocking.append("ح13: وقائع بمنطقة بلا نقطة على الخريطة ({} من {}): {}".format(
                     len(missing), len(need), "، ".join(str(x) for x in missing[:4])))

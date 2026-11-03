@@ -89,6 +89,12 @@ BROWSER_ROUTES: dict[int, dict[str, str]] = {
     60: {"path": "browser", "url": "https://x.com/CJFCSpox"},
     61: {"path": "browser", "url": "https://x.com/ERYANIM"},
     62: {"path": "browser", "url": "https://x.com/Yemenarmyeng"},
+    # ك-: 35 Splash 247 كان يفشل على المسار الآلي (415) — القياس: HTTP 200 · 234642B · 18.77s عبر tools/browser_fetch.py
+    35: {"path": "browser", "url": "https://splash247.com"},
+    # ك-: 58 المركز الإعلامي للقوات المسلحة اليمنية كان يفشل على المسار الآلي (415) — القياس: HTTP 200 · 176046B · 13.93s عبر tools/browser_fetch.py
+    58: {"path": "browser", "url": "https://yafm.net/"},
+    # 28 وكالة الأنباء العُمانية: المسار الآلي يسقط أحيانًا بخطأ TLS — القياس: HTTP 200 · 139424B · 23.89s عبر tools/browser_fetch.py
+    28: {"path": "browser", "url": "https://omannews.gov.om/"},
 }
 
 # ── قناة المسار الرسمي البديل للجهة نفسها ──

@@ -37,6 +37,8 @@ def _translate_page(ar_page: pathlib.Path, date: str, dst: pathlib.Path, tm, gl)
     page = page.replace("Official Warnings and Advisories", "Official warnings and advisories")
     # توحيد تسمية صف البطاقة مع السجل الحاكم (تعديلات 2026-11-01: «التحذيرات والتنبيهات النشطة»)
     page = page.replace("Official warnings and advisories", "Active warnings and advisories")
+    page = page.replace("Warnings and Active Advisories", "Active warnings and advisories")
+    page = page.replace("Warnings and active advisories", "Active warnings and advisories")
     page = page.replace("Early Warning Signs 24–72 Hours", "Early-warning indicators 24–72 hours")
     # الروابط داخل النسخة الإنجليزية يجب أن تبقى على السطح الإنجليزي نفسه.
     page = page.replace(f'/reports/{date}.html#', f'/reports/en/{date}.html#')

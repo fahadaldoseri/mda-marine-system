@@ -39,6 +39,54 @@ def build_pairs(date: str):
     return list(zip(A, E))
 
 
+def build_pairs_history(date: str, back: int = 14):
+    """أزواج اليوم المطلوب + أزواج الأيام السابقة.
+
+    الأسطح المنشورة (صفحة الإضافات والرئيسية والأرشيف) تعرض نصوصًا من أيام
+    سابقة. فإذا بقيت وحدة منها بلا ترجمة، تُشتقّ من متن يومها نفسه بدل أن
+    تفشل الحزمة أو تُترجم تخمينًا. (ك-478: تجميد الاشتقاق على يوم واحد.)
+    """
+    import datetime as _dt
+    d0 = _dt.date.fromisoformat(date)
+    pairs: list[tuple[str, str]] = []
+    for k in range(back + 1):
+        d = (d0 - _dt.timedelta(days=k)).isoformat()
+        try:
+            pairs.extend(build_pairs(d))
+        except SystemExit:
+            continue
+        except FileNotFoundError:
+            continue
+    if not pairs:
+        raise SystemExit("محاذاة غير ممكنة: لا يوم قابل للمحاذاة")
+    return pairs
+
+
+TOKEN_RE = re.compile(r"\d[\d.,:/–\-]*[A-Za-z]{0,3}|\b[A-Z]{2,}\b|[A-Za-z]{2,}-\d+|\d+-\d+")
+
+
+def tokens(s: str) -> set[str]:
+    """الرموز القابلة للتحقق: الأرقام والمعرّفات وأسماء الجهات اللاتينية."""
+    out = set()
+    for t in TOKEN_RE.findall(s):
+        t = t.strip().lower()
+        if not t:
+            continue
+        digits = re.sub(r"[^\d]", "", t)
+        out.add(digits if digits else t)
+    return {x for x in out if x}
+
+
+def verified(unit_ar: str, en: str) -> bool:
+    """لا يُقبل اشتقاق يخالف أرقام الوحدة أو معرّفاتها (فشل مغلق)."""
+    tu, te = tokens(unit_ar), tokens(en)
+    if not tu:
+        return bool(te) or bool(en.strip())
+    missing = {x for x in tu if x not in te}
+    # تُقبل الزيادة الطفيفة في أرقام الجملة الإنجليزية، ولا يُقبل نقص رقم عربي
+    return not missing
+
+
 def derive(unit: str, pairs) -> str | None:
     """يشتقّ النص الإنجليزي لوحدة عربية من المتن الإنجليزي بمحاذاة الجُمل."""
     nu = i18n_en.norm(unit)
@@ -82,7 +130,7 @@ def derive(unit: str, pairs) -> str | None:
             if len(we) > drop:
                 out[0] = " ".join(we[drop:])
         res = " ".join(out).strip()
-        if res and not i18n_en.ARABIC.search(res):
+        if res and not i18n_en.ARABIC.search(res) and verified(unit, res):
             return res
     return None
 
@@ -114,7 +162,8 @@ def main() -> int:
         print("   ✔ لا وحدة ناقصة")
         return 0
 
-    pairs = build_pairs(a.date)
+    pairs = build_pairs_history(a.date)
+    print(f"   أزواج المحاذاة المتاحة (اليوم + 14 يومًا سابقة): {len(pairs)} سطرًا")
     derived: dict[str, str] = {}
     failed: list[str] = []
     for u in uniq:

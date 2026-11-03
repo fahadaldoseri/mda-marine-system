@@ -59,6 +59,24 @@ def _account_for(source: str) -> str:
     return ""
 
 
+# بوابة المخطط تمنع معطيات التتبّع في الروابط؛ التطهير يقع عند التخزين لا عند العرض.
+TRACKING_PARAMS = ("utm_", "fbclid", "gclid", "mc_eid")
+
+
+def clean_url(url: str) -> str:
+    """يُبقي الرابط https نظيفًا بلا معطيات تتبّع، مع فك ترميز &amp;."""
+    value = (url or "").replace("&amp;", "&").strip()
+    if not value.startswith("http") or "?" not in value:
+        return value
+    base, _, query = value.partition("?")
+    kept = [
+        part for part in query.split("&")
+        if part and not any(part.split("=", 1)[0].lower().startswith(token) for token in TRACKING_PARAMS)
+    ]
+    trimmed = "&".join(kept).rstrip("&")
+    return f"{base}?{trimmed}" if trimmed else base
+
+
 def _targets(brain: Path, site: Path, date: str) -> list[Path]:
     out = [brain / "cumulative-2026" / "daily" / f"{date}.json"]
     for candidate in (site / "sources" / "daily-events" / f"{date}.json",
@@ -80,6 +98,11 @@ def enrich(path: Path, cache: dict[str, str]) -> tuple[int, int, bool]:
         if not isinstance(row, dict):
             continue
         if str(row.get("source_url") or "").startswith("http"):
+            current = str(row.get("source_url"))
+            cleaned = clean_url(current)
+            if cleaned != current:
+                row["source_url"] = cleaned
+                changed = True
             official += int(row.get("source_url_kind") == "official-product")
             account += int(row.get("source_url_kind") == "account")
             continue
@@ -96,7 +119,7 @@ def enrich(path: Path, cache: dict[str, str]) -> tuple[int, int, bool]:
             if fallback:
                 target, kind = fallback, "account"
         if target:
-            row["source_url"] = target
+            row["source_url"] = clean_url(target)
             row["source_url_kind"] = kind
             changed = True
             official += int(kind == "official-product")

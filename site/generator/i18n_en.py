@@ -257,6 +257,16 @@ def localize_patterns(s: str) -> str | None:
     if m:
         tail = ";" if m.group(2) == "؛" else m.group(2)
         return f"({m.group(1)} events){tail}"
+    # تفاصيل بطاقة الوقائع المؤهلة
+    m = re.fullmatch(r"(\d+)\s*مؤكدة\s*\+\s*(\d+)\s*مرجّحة\s*\+\s*(\d+)\s*غير مؤكدة مؤهلة", n)
+    if m:
+        return (f"{m.group(1)} confirmed + {m.group(2)} probable + "
+                f"{m.group(3)} qualifying unconfirmed")
+    # تفاصيل بطاقة الروايات غير المؤكدة
+    m = re.fullmatch(r"(\d+)\s*(?:روايات|رواية)\s*·\s*منها\s*(\d+)\s*مؤهلة\s*·\s*تُذكر ولا تُحتسب", n)
+    if m:
+        return (f"{m.group(1)} narratives · {m.group(2)} of them qualifying · "
+                "reported but not counted")
 
     _G = None
     try:
@@ -367,6 +377,14 @@ def localize_patterns(s: str) -> str | None:
         return (f"Event {m.group(1)} — area {_tr(m.group(2))}, "
                 f"class {_tr(m.group(3))}, confirmation {_tr(m.group(4))}, "
                 f"position {_tr(m.group(5))}.")
+    # ك-471: جملة مجمّعة لوقائع متشابهة في المنطقة والصفة والإثبات ودقة الموضع؛
+    # تُحفظ كل المعرّفات ويُترجَم النص بنمط واحد بلا اعتماد على المعجم.
+    m = re.fullmatch(r"الوقائع\s+((?:\S+\s*·\s*)+\S+)\s+—\s+المنطقة\s+(.+?)،\s+الصفة\s+(.+?)،\s+"
+                     r"الإثبات\s+(.+?)،\s+الموضع\s+(.+?)\.", n)
+    if m:
+        ids = ", ".join(x.strip() for x in m.group(1).split("·") if x.strip())
+        return (f"Events {ids} — area {_tr(m.group(2))}, class {_tr(m.group(3))}, "
+                f"confirmation {_tr(m.group(4))}, position {_tr(m.group(5))}.")
     m = re.fullmatch(r"الخط الزمني المرصود:\s*(.+?)\.", n)
     if m:
         inner = _tr(m.group(1))

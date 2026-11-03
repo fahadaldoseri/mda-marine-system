@@ -229,12 +229,24 @@ def _alt_block(points, zones, timeline):
     for z in (zones or []):
         lvl = SECTOR_LEVEL_AR.get(str(z.get("level") or "").strip(), str(z.get("level") or ""))
         items.append(f'القطاع {str(z.get("id") or "").upper()} {z.get("name") or ""} — مستواه {lvl}.')
+    # ك-471: الوقائع المتشابهة في المنطقة والصفة والإثبات ودقة الموضع تُجمع في جملة واحدة
+    # تحمل معرّفاتها كلها، بدل تكرار جملة واحدة بأربعة أسطر متطابقة نصًّا. الجمع يحفظ
+    # كل معرّف ويُبقي الوصف قابلًا للترجمة بنمط واحد، ويمنع قالب جملة متكررًا يوقف التسليم.
+    groups: list[tuple[tuple, list[int]]] = []
     for i, p in enumerate(points, start=1):
-        code = short_code(p.get("code") or "", REPORT_DATE) or f"{i:02d}"
-        items.append(
-            f'الواقعة {code} — المنطقة {p.get("area") or "غير محددة"}، '
-            f'الصفة {p.get("class") or "غير محددة"}، الإثبات {_ar_conf(p.get("confirmation"))}، '
-            f'الموضع {_ar_prec(p.get("precision"))}.')
+        key = (str(p.get("area") or "غير محددة"), str(p.get("class") or "غير محددة"),
+               _ar_conf(p.get("confirmation")), _ar_prec(p.get("precision")))
+        if groups and groups[-1][0] == key:
+            groups[-1][1].append(i)
+        else:
+            groups.append((key, [i]))
+    for key, idxs in groups:
+        area, cls, conf, prec = key
+        codes = [short_code(points[i - 1].get("code") or "", REPORT_DATE) or f"{i:02d}"
+                 for i in idxs]
+        who = (f'الواقعة {codes[0]}' if len(codes) == 1
+               else 'الوقائع ' + " · ".join(codes))
+        items.append(f'{who} — المنطقة {area}، الصفة {cls}، الإثبات {conf}، الموضع {prec}.')
     if timeline:
         items.append("الخط الزمني المرصود: " + "؛ ".join(
             f'{t.get("date")} ({t.get("count")} واقعة)' for t in timeline) + ".")

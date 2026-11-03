@@ -98,7 +98,13 @@ def identity_ar(c: dict) -> str:
 
 
 def line_ar(c: dict) -> str:
-    txt = (f"{identity_ar(c)} · {c['ok']} ناجحة")
+    """سطر الإفصاح مقسّم إلى جمل قصيرة (ك-458).
+
+    بوابة الأسلوب تمنع أي جملة تتجاوز 35 كلمة، وسطر الإفصاح الواحد بلغ 42 كلمة.
+    القسمة لا تُسقط معلومة: مقاطع السطر الثلاثة (الهوية · الفحص · المرجعية) صارت
+    ثلاثة مقاطع منفصلة بنقطة، وكل مقطع داخل الحد المسموح.
+    """
+    parts = [identity_ar(c), f"الفحص: {c['ok']} ناجحة"]
     if c["failed"]:
         # (و) كل مصدر متعذّر باسمه وسببه، لا أسماء مختصرة ولا أسباب مجمّعة
         pairs = []
@@ -106,13 +112,13 @@ def line_ar(c: dict) -> str:
             for n in ns:
                 pairs.append(f"{n.replace('حساب ', '').replace(' على X', '')} — {reason_label(r)}")
         if c.get("manual_reference_present"):
-            txt += f" · {c['failed']} متعذّر: " + " · ".join(pairs)
+            parts.append(f"{c['failed']} متعذّر: " + " · ".join(pairs))
         else:
-            txt += f" · تعذّر {c['failed']}: " + " · ".join(pairs)
+            parts.append(f"تعذّر {c['failed']}: " + " · ".join(pairs))
     if c.get("manual_reference_present"):
         manual_n = int(c.get("manual_reference_count") or len(c.get("manual_reference") or []))
-        return txt + f" · {manual_n} يُفحص يدويًا."
-    return txt + "."
+        parts.append(f"المرجعية اليدوية: {manual_n} يُفحص يدويًا")
+    return ". ".join(parts) + "."
 
 
 def report_path(date: str) -> Path:

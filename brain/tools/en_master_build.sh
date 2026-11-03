@@ -8,7 +8,7 @@
 # الاستعمال: bash tools/en_master_build.sh <DATE> [SITE]
 set -uo pipefail
 D="${1:?تاريخ مطلوب YYYY-MM-DD}"
-SITE="${2:-/home/ubuntu/seawatch}"
+SITE="${2:-${SITE_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../../seawatch" && pwd)}}"
 export SITE
 cd "$SITE" || exit 2
 
