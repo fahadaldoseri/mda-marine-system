@@ -25,12 +25,21 @@
    "size": 4592
   },
   "/home/ubuntu/brain-marine-news/runbook/runbook.json": {
-   "accepted_reductions": [],
+   "accepted_reductions": [
+    {
+     "date": "2026-11-03",
+     "from_lines": 5205,
+     "from_size": 166222,
+     "reason": "توحيد تنسيق المانيفست عند ربط حاجز الأرضية في G000/G000A — المحتوى نفسه وrunbook.py verify متسق وكل الخطوات قائمة",
+     "to_lines": 5205,
+     "to_size": 146937
+    }
+   ],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-03",
    "lines": 5205,
-   "sha256": "264268992ab1abb84e8c2e66736d0020acb980b5074156b061c0a1aa190803ce",
-   "size": 166222
+   "sha256": "ec85d00c552212c76c44b9878d9640cd76ea3a73c1dab1fafe64afc7efacae33",
+   "size": 146937
   },
   "/home/ubuntu/brain-marine-news/sections/00-identity.md": {
    "accepted_reductions": [],
@@ -2852,9 +2861,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-03",
-   "lines": 54,
-   "sha256": "730825e0083aa1f3faa80dcbbf2874add0439a34de33ce04dd992ab47f60d60b",
-   "size": 5914
+   "lines": 55,
+   "sha256": "f59c98c040f5a0db9377799bea6aba558ac2d12a4e9830b4b2c11ee2cb805d5a",
+   "size": 6160
   },
   "/home/ubuntu/skills/data-api/scripts/call.mjs": {
    "accepted_reductions": [],
@@ -2868,9 +2877,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-03",
-   "lines": 39,
-   "sha256": "ccc268ebf6d3a9d24b653858a096c3a49813f4760dbd1a87c99e94da806e991a",
-   "size": 1297
+   "lines": 40,
+   "sha256": "d06bc30505eb51b38d82d617a8e807c6ddff6bf40d651ac99c6fa6a094b90a2a",
+   "size": 1317
   },
   "/home/ubuntu/skills/data-backup-restoration/SKILL.md": {
    "accepted_reductions": [],
@@ -21433,6 +21442,6 @@
    "size": 2913
   }
  },
- "updated_at": "2026-11-03T11:40:05.603045+00:00",
+ "updated_at": "2026-11-03T12:16:56.065714+00:00",
  "version": 1
 }
