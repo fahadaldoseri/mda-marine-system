@@ -3727,6 +3727,13 @@
       "lesson_id": "ك-494",
       "barrier_id": "B-c43cb390",
       "run_evidence": "python3 validators/check_intel.py → رمز 0 و«ح13: نقاط الخريطة = كل الوقائع ذات المنطقة المطلوبة» · وبقيمة خارج الاستثناء بلا نقطة → رمز 2"
+    },
+    {
+      "fault_id": "ك-495",
+      "state": "مغلق",
+      "lesson_id": "ك-495",
+      "barrier_id": "B-207093f0",
+      "run_evidence": "python3 tools/skill_lessons.py --date 2026-11-03 → رمز 0 ويُكتب في logs/gate-status.md · بصمة المهارة قبل وبعد التشغيل متطابقة · python3 validators/check_backup_parity.py --mode strict → رمز 0 «مطابق» · python3 validators/check_closure.py → فاشل 0"
     }
   ]
 }
