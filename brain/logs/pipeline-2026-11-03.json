@@ -23,14 +23,18 @@
     "status": "degraded"
   },
   "final_gate": {
-    "blocked_steps": [],
-    "dir": "logs/gate-2026-11-03",
+    "status": "block",
     "exit_code": 2,
-    "note": "نتيجة بوابة التسليم النهائية — كُتبت العلامة بعدها.",
-    "status": "block"
+    "dir": "logs/gate-2026-11-03",
+    "blocked_steps": [
+      "اختبارات البوابات (tests)",
+      "بوابة قراءة الموقف وتحليل المؤشرات",
+      "قابلية النقل (مسارات)"
+    ],
+    "note": "نتيجة بوابة التسليم النهائية — مسجّلة بعد كتابة التقرير."
   },
   "finished_utc": "2026-11-03T03:46:21Z",
-  "gate_finished_utc": "2026-11-03T15:39:30Z",
+  "gate_finished_utc": "2026-11-03T20:12:28Z",
   "gate_note": "علامة مرحلة الخط اليومي — بوابة التسليم لم تُشغَّل بعد.",
   "gate_state": "not_run",
   "language": {
@@ -38,19 +42,19 @@
     "edit_pass": {
       "applied": true,
       "by_category": {
-        "أسلوب": 29,
-        "ترجمة حرفية": 3,
-        "مفردة": 18
+        "أسلوب": 34,
+        "ترجمة حرفية": 1,
+        "مفردة": 32
       },
-      "changes": 50,
-      "edited": 8,
+      "changes": 67,
+      "edited": 9,
       "model": "gpt-5-mini",
-      "rejected": 7,
+      "rejected": 6,
       "sections": 16
     },
     "long_sentences": 14,
     "orthography_errors": 0,
-    "waw_pct": 2.9,
+    "waw_pct": 2.3,
     "waw_runs3": 0
   },
   "ledger_merge": {

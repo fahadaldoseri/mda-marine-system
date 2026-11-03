@@ -3706,6 +3706,27 @@
       "lesson_id": "ك-491",
       "barrier_id": "B-90bf7b24",
       "run_evidence": "python3 validators/check_glossary_shape.py → رمز 0 (مدخلات=1219 · مفاتيح الجذر=7) · وبمفتاح شارد في الجذر → رمز 2 · وpython3 tools/runbook.py run --date 2026-11-03 → خرج 0 واكتملت كل الخطوات"
+    },
+    {
+      "fault_id": "ك-492",
+      "state": "مغلق",
+      "lesson_id": "ك-492",
+      "barrier_id": "B-0599cf24",
+      "run_evidence": "python3 tools/derive_area_labels.py --report /tmp/area-relabel.tsv → 394 صفًا أُعيد اشتقاقه و74 قيمة نطاق · python3 validators/check_area_vocabulary.py → رمز 0 على الدفتر وواجهة اليوم، ورمز 2 على قيمة خارج القائمة · الموقع الحي: «غير مكانية» 8 مرات و«خارج القطاعات» 0"
+    },
+    {
+      "fault_id": "ك-493",
+      "state": "مغلق",
+      "lesson_id": "ك-493",
+      "barrier_id": "B-2550105a",
+      "run_evidence": "python3 generator/i18n_en.py --date 2026-11-03 --src dist/additions.html → بلا وحدات ناقصة · python3 tools/runbook.py run --date 2026-11-03 → B010 خرج 0 وبنى الموقع"
+    },
+    {
+      "fault_id": "ك-494",
+      "state": "مغلق",
+      "lesson_id": "ك-494",
+      "barrier_id": "B-c43cb390",
+      "run_evidence": "python3 validators/check_intel.py → رمز 0 و«ح13: نقاط الخريطة = كل الوقائع ذات المنطقة المطلوبة» · وبقيمة خارج الاستثناء بلا نقطة → رمز 2"
     }
   ]
 }
