@@ -33,7 +33,7 @@ Reference for HTML-mode Slides decks. Read this file BEFORE writing any `<id>.ht
 - Chart.js: `<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>`
 - D3.js: `<script src="https://d3js.org/d3.v7.min.js"></script>`
 - Font Awesome icons: `<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">`
-- Google Fonts stylesheets (`fonts.googleapis.com`) for the font families named in the design brief.
+- Google Fonts stylesheets (`fonts.googleapis.com`) for the font families named in the design brief that exist on Google Fonts. Use any other family the brief names exactly as written, with no stylesheet and no look-alike substitute, and end its `font-family` with the matching generic family (`sans-serif`, `serif`, or `monospace`).
 - Tailwind CSS: `<script src="https://cdn.tailwindcss.com"></script>` — REQUIRED on any slide that uses Tailwind classes; utility classes carry no styling without it. Native CSS remains the default choice.
 
 Include a library only on slides that use it. Everything else — scripts, styles, fonts, assets — must be inline or a local absolute path.
