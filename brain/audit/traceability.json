@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-02T18:42:59.163222+00:00",
+  "generated_at": "2026-11-03T09:30:15.937656+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -3593,6 +3593,13 @@
       "lesson_id": "ك-478",
       "barrier_id": "B-9bfcb101",
       "run_evidence": "لحاكمة python3 tools/build_lexicon_corpus.py --apply، فكتب 7512 كلمة وبصمة 381903ee61e4f553، ثم ثُبّت التطابق بأمر -"
+    },
+    {
+      "fault_id": "ك-479",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-479",
+      "barrier_id": "B-bd88687d",
+      "run_evidence": null
     }
   ]
 }
