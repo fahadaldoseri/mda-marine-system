@@ -196,10 +196,10 @@ an accepted request starts the same background Job. Game publishing keeps its ex
 `GET config/visibility` reads website visibility; `PUT config/visibility` with
 `{ "visibility": "owner" | "team_only" | "public" }` requests a change. Shrinking access
 applies directly; expanding access displays a user confirmation card and leaves visibility
-unchanged until the user confirms. Immediately after a successful publish, direct the user
-to Change visibility on the existing result card to expand access; do not issue a separate
-PUT that creates a duplicate confirmation card. Do not approve on the user's behalf or ask
-them to confirm again in chat. These operations do not redeploy the website.
+unchanged until the user confirms. After publication, use the result card for public access;
+do not duplicate it with PUT. For team-only access, use the PUT confirmation flow or Publish
+panel; the result card offers only Private/Public. Do not approve for the user or request
+another chat confirmation. Visibility changes do not redeploy.
 
 #### Dashboard Widget publish
 

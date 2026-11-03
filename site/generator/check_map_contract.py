@@ -8,6 +8,7 @@
   4. وصف بديل للقارئ الشاشي لا يطابق الرسم الفعلي.
   5. غياب الإطار الخرائطي (مقياس الرسم · سهم الشمال) وسطر المصادر.
   6. بقاء لوحة التكبير بجانب الخريطة على الجوال بدل تكديسها.
+  7. عودة لفظ «الموضع» إلى أسطح الخريطة بعد اعتماد «الموقع» (ك-480).
 """
 from __future__ import annotations
 import argparse, json, pathlib, re, sys
@@ -19,11 +20,29 @@ def _style_blocks(html: str) -> list:
     return re.findall(r"<style\b[^>]*>(.*?)</style>", html, flags=re.S | re.I)
 
 
+def _map_block(html: str) -> str:
+    """كتلة قسم الخريطة وحدها: من أول إطار خريطة إلى نهاية القسم (ك-480)."""
+    i = html.find('class="map-panel')
+    if i < 0:
+        i = html.find('class="map-viz')
+    if i < 0:
+        return ""
+    j = html.find("</section>", i)
+    return html[i:j if j > 0 else i + 20000]
+
+
 def verify(html: str, meta: dict) -> list:
     v = []
     points = ((meta.get("map") or {}).get("points")) or []
     n = len(points)
     ap = sum(1 for p in points if p.get("precision") == "approximate")
+
+    # ك-480: اللفظ المرئي المعتمد «الموقع»؛ لا يعود «الموضع» إلى أسطح الخريطة.
+    map_block = _map_block(html)
+    if map_block:
+        banned = re.findall(r"(?<![\u0600-\u06FF])الموضع(?![\u0600-\u06FF])", map_block)
+        if banned:
+            v.append(f"لفظ «الموضع» ظهر {len(banned)} مرة في قسم الخريطة؛ المعتمد «الموقع» (ك-480)")
 
     for block in _style_blocks(html):
         for tag in ("<span", "<bdi", "<b>", "<i>", "<em"):

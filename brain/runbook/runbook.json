@@ -3453,7 +3453,7 @@
       "command": [
         "bash",
         "-lc",
-        "B=\"$PWD\"; export B SITE; cd \"$SITE\" && python3 generator/sync_from_brain.py --date {date} && python3 \"$B/tools/sync_card_layers.py\" --date \"$D\" && python3 generator/build_site.py && python3 \"$B/validators/check_card_counters.py\" --date \"$D\" --dist-root \"$SITE/dist\" && python3 \"$B/validators/check_kpi_layers.py\" --date \"$D\" --dist-root \"$SITE/dist\" --brain \"$B\" && python3 \"$B/validators/check_map_note_counts.py\" --date \"$D\" --site \"$SITE\"; rc=$?; exit $rc"
+        "B=\"$PWD\"; export B SITE; cd \"$SITE\" && python3 \"$B/tools/sync_card_layers.py\" --date \"$D\" && python3 generator/sync_from_brain.py --date {date} && python3 generator/build_site.py && python3 \"$B/validators/check_card_counters.py\" --date \"$D\" --dist-root \"$SITE/dist\" && python3 \"$B/validators/check_kpi_layers.py\" --date \"$D\" --dist-root \"$SITE/dist\" --brain \"$B\" && python3 \"$B/validators/check_map_note_counts.py\" --date \"$D\" --site \"$SITE\"; rc=$?; exit $rc && python3 \"$B/tests/test_map_location_term.py\" --date \"$D\""
       ],
       "ok_rc": [
         0
