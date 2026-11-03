@@ -69,7 +69,10 @@ ok, _ = preserved("أفادت UKMTO بمشاهدة قارب مسيّر.", "أف�
 check("الحارس يقبل استبدال مفردة", ok)
 
 # 2) تدريج بوابة اللغة: التواريخ والرموز من الإعداد لا من تقرير اليوم.
-rep_clean = B / "reports" / "2026-11-01-sectioned.md"
+# ك-485: النص «النظيف» كان تقريرًا قديمًا (2026-11-01) سبق قواعد لاحقة فصار مخالفًا،
+# فأسقط الاختبار بلا علاقة بالبوابة. الأرضية الآن أحدث تقرير — وهو التقرير الذي مُرّر
+# فعلًا من بوابات اللغة في الجولة نفسها.
+rep_clean = sorted((B / "reports").glob("*-sectioned.md"))[-1]
 rep_advisory = B / "reports" / "2026-10-23-sectioned.md"
 cfg = json.loads((B / "appendices" / "language-gates.json").read_text(encoding="utf-8"))
 advisory_until = date.fromisoformat(cfg["advisory_until"])
@@ -86,16 +89,32 @@ if rep_clean.exists() and rep_advisory.exists():
         f"أعادت {r.returncode}",
     )
 
-    r = language_gate(enforce_from.isoformat(), rep_clean)
-    check(
-        f"بوابة اللغة من enforce_from على متن نظيف تعيد 0",
-        r.returncode == 0,
-        f"أعادت {r.returncode}",
+    # ك-485: النص «النظيف» القديم كُتب قبل قواعد أحدث، فأصبح مخالفًا وأسقط اختبار التنظيف
+    # بلا علاقة بالبوابة. فتُهيَّأ هنا نسخة مؤقتة مطابقة للقواعد النافذة، ويبقى الاختبار
+    # يقيس البوابة الحقيقية لا أرضية قديمة. وتُحدَّث القائمة أدناه مع كل قاعدة لاحقة.
+    STALE_RULES = (
+        ("الموضع", "الموقع"),                     # قاعدة المالك: الموقع لا الموضع (2026-11-03)
+        ("غير محددة المصدر", "جهات غير معلومة"),   # قاعدة الإسناد (2026-11-02)
     )
-
     with tempfile.TemporaryDirectory() as td:
+        clean = Path(td) / "language-gate-clean.md"
+        clean_text = rep_clean.read_text(encoding="utf-8")
+        for old, new in STALE_RULES:
+            clean_text = clean_text.replace(old, new)
+        clean.write_text(clean_text, encoding="utf-8")
+        r = language_gate(enforce_from.isoformat(), clean)
+        detail = next(
+            (ln.strip() for ln in (r.stdout or "").splitlines() if ln.strip().startswith("✘")),
+            "",
+        )
+        check(
+            f"بوابة اللغة من enforce_from على متن نظيف تعيد 0",
+            r.returncode == 0,
+            f"أعادت {r.returncode}" + (f" · {detail}" if detail else ""),
+        )
+
         bad = Path(td) / "language-gate-negative.md"
-        bad.write_text(rep_clean.read_text(encoding="utf-8") + "\n\nعمليات عبور.\n", encoding="utf-8")
+        bad.write_text(clean_text + "\n\nعمليات عبور.\n", encoding="utf-8")
         r = language_gate(enforce_from.isoformat(), bad)
         check(
             f"بوابة اللغة من enforce_from على مخالفة تعيد {enforce_rc}",

@@ -83,7 +83,10 @@ else
   ok "لا استدعاء لمتغير غير معرّف في فحص العنوان اليتيم"
 fi
 PDF="$B/../seawatch/dist/reports/pdf/$(date -u +%F).pdf"
-if [ -f "$PDF" ]; then
+# ك-486: الطباعة معطَّلة بأمر المالك، فيبقى ملف PDF صفر بايت؛ ويُعلن التخطّي بدل إسقاط الاختبار كذبًا.
+if [ -f "$PDF" ] && [ ! -s "$PDF" ]; then
+  printf '  • تخطٍّ معلن: ملف PDF لليوم صفر بايت (الطباعة معطَّلة بأمر المالك) — يُختبر عند أول إصدار مطبوع\n'
+elif [ -f "$PDF" ]; then
   OUT=$(python3 "$B/validators/check_pdf_format.py" --pdf "$PDF" 2>&1)
   if printf '%s' "$OUT" | grep -qE "(لا عنوان قسم أو بطاقة يتيم|عنوان يتيم آخر ورقة)"; then
     ok "الفحص نفّذ حكمًا فعليًا على ملف حقيقي (لا ابتلاع استثناء)"
@@ -272,12 +275,26 @@ t "علاقات الدفتر: دليل حرفي ومكوّنات وفشل مغل
 echo "25) معجم المفردات المشتق (ك-328): تحذيرات كاذبة كانت تخفي العيوب الحقيقية"
 t "المعجم المشتق مطابق للمصادر + لفظ مصطنع يُكتشف" python3 tests/test_lexicon_gate.py
 
+echo "26) أرضية الأصول الحاكمة (ك-483): أي نقص في أصل معتمد يمنع التسليم"
+t "أرضية الأصول: قصّ يمنع · نموّ يرفع · قبول بسبب يُدوَّن · حذف يمنع" python3 tests/test_asset_floor.py
+
+# ك-484: هذان الفحصان كانا بعد exit 0 (كود ميت) فلا يُنفَّذان في أي جولة.
+echo "27) بوابات كانت معطَّلة فعليًا (ك-484)"
+t "بوابة أسرار المستودع" python3 validators/check_repo_secrets.py
+if python3 "$B/validators/check_python_syntax.py" >"$TMP/pysyn.txt" 2>&1; then
+  ok "حارس ترجمة الشيفرة (لا ملف Python معطوب)"
+else
+  bad "حارس ترجمة الشيفرة"; tail -4 "$TMP/pysyn.txt" | sed 's/^/      /'
+fi
+# حارس ك-484: لا فحوص مكتوبة بعد exit 0 في هذا المشغّل (فحوص معطَّلة بصمت)
+exit_line=$(grep -n '^exit 0' "$B/tests/run_checks.sh" | head -1 | cut -d: -f1)
+if [ -n "$exit_line" ] && tail -n +"$((exit_line + 1))" "$B/tests/run_checks.sh" | grep -qE '^[[:space:]]*(t |python3|bash|validators/)'; then
+  bad "فحوص بعد exit 0 = معطَّلة بصمت (ك-484)"
+else
+  ok "لا فحوص بعد exit 0 (ك-484)"
+fi
+
 echo "----- الحصيلة -----"
 printf '  نجح: %s · فشل: %s\n' "$PASS" "$FAIL"
 [ "$FAIL" -eq 0 ] || exit 1
 exit 0
-t "بوابة أسرار المستودع" python3 validators/check_repo_secrets.py
-
-# حارس ترجمة الشيفرة (يمنع ملفات Python معطوبة)
-python3 "$B/validators/check_python_syntax.py"
-rc=$?; [ $rc -ne 0 ] && exit $rc
