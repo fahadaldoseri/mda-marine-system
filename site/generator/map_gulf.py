@@ -246,14 +246,14 @@ def _alt_block(points, zones, timeline):
                  for i in idxs]
         who = (f'الواقعة {codes[0]}' if len(codes) == 1
                else 'الوقائع ' + " · ".join(codes))
-        items.append(f'{who} — المنطقة {area}، الصفة {cls}، الإثبات {conf}، الموضع {prec}.')
+        items.append(f'{who} — المنطقة {area}، الصفة {cls}، الإثبات {conf}، الموقع {prec}.')
     if timeline:
         items.append("الخط الزمني المرصود: " + "؛ ".join(
             f'{t.get("date")} ({t.get("count")} واقعة)' for t in timeline) + ".")
     items.append("طبقات الخريطة: يابسة وحدود دول Natural Earth 1:50m · "
                  "حدود بحرية Marine Regions/VLIZ · نظام فصل الملاحة IMO Ships' Routeing 1968.")
     items.append("وصف كل واقعة كاملًا في مفتاح الخريطة وبطاقة تفاصيل الوقائع أسفلها.")
-    items.append("المواضع تقريبية عند عدم ذكر المصدر إحداثيات، ولا تُستخدم للملاحة.")
+    items.append("المواقع تقريبية عند عدم ذكر المصدر إحداثيات، ولا تُستخدم للملاحة.")
     return '<ul class="mp-alt-list">' + "".join(f"<li>{_esc(x)}</li>" for x in items) + '</ul>'
 
 
@@ -857,7 +857,7 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
             label = "موقع الواقعة"
         bits = [f'<span class="lg-txt">{_esc(label)}</span>',
                 f'<span class="lg-st st-{st_key}">{st_ar}</span>',
-                f'<span class="lg-prec">{"موضع تقريبي" if p.get("precision") == "approximate" else "إحداثيات مذكورة"}</span>']
+                f'<span class="lg-prec">{"موقع تقريبي" if p.get("precision") == "approximate" else "إحداثيات مذكورة"}</span>']
         if code:
             bits.append(f'<bdi class="bidi ev-code">{short_code(code, REPORT_DATE)}</bdi>')
         if ref:
@@ -888,7 +888,7 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
     if points:
         _ap_n = sum(1 for p in points if p.get("precision") == "approximate")
         lede = (f"مواقع {len(points)} واقعة داخل نطاق التقرير؛ " +
-                (f"منها {_ap_n} بموضع تقريبي داخل المنطقة نفسها لأن المصدر لم يذكر إحداثيات." if _ap_n else
+                (f"منها {_ap_n} بموقع تقريبي داخل المنطقة نفسها لأن المصدر لم يذكر إحداثيات." if _ap_n else
                  "وجميعها بإحداثيات مذكورة في المصادر."))
     else:
         lede = ("لوحة سياق جغرافي: السواحل والمضيق والموانئ وشبكة خطوط الطول والعرض. "
@@ -921,7 +921,7 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
         if has_ntq:
             marks_key.append('<li><span class="lg-sw sw-mark-none" role="presentation"></span>بلاغ غير مؤهل — يُذكر ولا يُحتسب</li>')
         if has_approx:
-            marks_key.append('<li><span class="lg-sw sw-mark-approx" role="presentation"></span>حلقة مفرّغة: موضع تقريبي داخل المنطقة نفسها (المصدر لم يذكر إحداثيات)</li>')
+            marks_key.append('<li><span class="lg-sw sw-mark-approx" role="presentation"></span>حلقة مفرّغة: موقع تقريبي داخل المنطقة نفسها (المصدر لم يذكر إحداثيات)</li>')
         if has_exact:
             marks_key.append('<li><span class="lg-sw sw-mark-exact" role="presentation"></span>علامة مصمتة: إحداثيات مذكورة في المصدر</li>')
         layers = "".join(marks_key) + layers
@@ -1044,8 +1044,8 @@ def build_map(points=None, caption=None, inset=None, zoom=False, zones=None, tim
             _by[status_of(_p)[1]] = _by.get(status_of(_p)[1], 0) + 1
         _mix = " · ".join(f"{k} {v}" for k, v in _by.items())
         map_label = (f"خريطة وقائع التقرير: {_n} واقعة مرسومة على الخليج العربي ومضيق هرمز وخليج عمان "
-                     f"(إحداثيات مذكورة {_ex} · مواضع تقريبية {_ap}). الحالات: {_mix}. "
-                     "الموضع التقريبي يعني أن المصدر لم يذكر إحداثيات فوُضعت العلامة داخل المنطقة نفسها لا في موضع محدد.")
+                     f"(إحداثيات مذكورة {_ex} · مواقع تقريبية {_ap}). الحالات: {_mix}. "
+                     "الموقع التقريبي يعني أن المصدر لم يذكر إحداثيات فوُضعت العلامة داخل المنطقة نفسها لا في موقع محدد.")
     else:
         map_label = ("خريطة سياق جغرافي للقطاعات المعتمدة: السواحل والمضيق والموانئ وخطوط الطول والعرض؛ بلا علامات وقائع")
     _set_bbox(MAIN_BBOX)
@@ -1085,7 +1085,7 @@ def build_map(points=None, caption=None, inset=None, zoom=False, zones=None, tim
         'هذه الخريطة سياق إخباري وليست خريطة ملاحية ولا بديلًا عن التحذيرات الرسمية.'
         '</span><span class="mk-note">' +
         ((('العلامات المرقمة: وقائع هذا التقرير.' +
-          (' والعلامة المفرّغة: موضع تقريبي داخل المنطقة نفسها لأن المصدر لم يذكر إحداثيات.' if _has_approx else ''))
+          (' والعلامة المفرّغة: موقع تقريبي داخل المنطقة نفسها لأن المصدر لم يذكر إحداثيات.' if _has_approx else ''))
          if points else
          'لا توجد إحداثيات وقائع مثبتة في ملف الواجهة؛ اللوحة سياق جغرافي للقطاعات فقط.')) +
         '</span>'

@@ -205,7 +205,7 @@ def derive(date: str) -> dict:
             if prec == "exact":
                 _basis = f"إحداثيات الواقعة «{_label}» مذكورة في نص المصدر"
             else:
-                _basis = (f"الموضع التقريبي لواقعة «{_label}» داخل منطقة {area} "
+                _basis = (f"الموقع التقريبي لواقعة «{_label}» داخل منطقة {area} "
                           f"وفق المِرساة المعتمدة")
             points.append({"code": code, "area": area, "lat": round(lat, 4), "lon": round(lon, 4),
                            "precision": prec, "surface": surf_name, "basis": _basis,
@@ -239,8 +239,8 @@ def derive(date: str) -> dict:
         else:
             stats["status_unknown"] += 1
 
-    note = ("المواضع المعروضة مواضع وقائع اليوم على الخريطة؛ والموضع التقريبي يعني أن المصدر لم يذكر إحداثيات "
-            "فوُضع داخل المنطقة نفسها لا في موضع آخر. "
+    note = ("العلامات المعروضة علامات وقائع اليوم على الخريطة؛ والموقع التقريبي يعني أن المصدر لم يذكر إحداثيات "
+            "فوُضعت العلامة داخل المنطقة نفسها لا في موقع آخر. "
             f"وتوزيع الحالة: مؤكد {stats['confirmed']} · مرجّح {stats['probable']} · "
             f"غير مؤكد مؤهل {stats['unconfirmed']} · غير مؤهل {stats['not_qualifying']} · "
             f"حالة غير محددة {stats['status_unknown']}.")
