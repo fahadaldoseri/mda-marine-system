@@ -19,8 +19,8 @@
      ✔ lexicon-exceptions.json · 36,436 حرفًا
      ✔ lexicon-library.json · 296,182 حرفًا
      ✔ lexicon-library.md · 4,900 حرفًا
-     ✔ new-terms-register.json · 16,850 حرفًا
-     ✔ new-terms-register.md · 5,556 حرفًا
+     ✔ new-terms-register.json · 16,695 حرفًا
+     ✔ new-terms-register.md · 5,356 حرفًا
      ✔ orthography-consistency.md · 3,343 حرفًا
      ✔ recurring-phrases.md · 2,661 حرفًا
      ✔ terminology-gaps.md · 598 حرفًا
@@ -74,10 +74,12 @@
      أدوات تستدعيها البوابة: 26 · كلها موجودة
      تدقيق المكتبات في البوابة: ✔
   6) النقل والسرية
-     مسارات مطلقة: 0
+     مسارات مطلقة: 1
      ✔ telegram-chat.json سرّي ومُستثنى/مُنقّى في النسخة الاحتياطية
      ✔ telegram-targets.json سرّي ومُستثنى/مُنقّى في النسخة الاحتياطية
      ✔ telegram-subscriptions.json سرّي ومُستثنى/مُنقّى في النسخة الاحتياطية
      ملفات بأسرار محتملة: 3
 
-النتيجة: 0 عائق · 0 تحذير
+النتيجة: 0 عائق · 2 تحذير
+  • [الإنفاذ] مدقّق غير مُستدعى في بوابة التسليم: check_glossary_shape.py
+  • [النقل] 1 ملفًا بمسار مطلق (يكسر النقل): ['brain-marine-news/validators/check_glossary_shape.py:17']
