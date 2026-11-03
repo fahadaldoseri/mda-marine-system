@@ -23,11 +23,16 @@
     "status": "degraded"
   },
   "final_gate": {
-    "blocked_steps": [],
-    "dir": "logs/gate-2026-11-03",
+    "status": "block",
     "exit_code": 2,
-    "note": "نتيجة بوابة التسليم النهائية — كُتبت العلامة بعدها.",
-    "status": "block"
+    "dir": "logs/gate-2026-11-03",
+    "blocked_steps": [
+      "اختبارات البوابات (tests)",
+      "بوابة قراءة الموقف وتحليل المؤشرات",
+      "قابلية النقل (مسارات)",
+      "اختبارات المراجعة الثانية (أ · ب · ج · د · هـ · ز)"
+    ],
+    "note": "نتيجة بوابة التسليم النهائية — مسجّلة بعد كتابة التقرير."
   },
   "finished_utc": "2026-11-03T03:46:21Z",
   "gate_finished_utc": "2026-11-03T15:39:30Z",
@@ -38,14 +43,14 @@
     "edit_pass": {
       "applied": true,
       "by_category": {
-        "أسلوب": 29,
+        "أسلوب": 25,
         "ترجمة حرفية": 3,
-        "مفردة": 18
+        "مفردة": 33
       },
-      "changes": 50,
-      "edited": 8,
+      "changes": 61,
+      "edited": 12,
       "model": "gpt-5-mini",
-      "rejected": 7,
+      "rejected": 4,
       "sections": 16
     },
     "long_sentences": 14,
