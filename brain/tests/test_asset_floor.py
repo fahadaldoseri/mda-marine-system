@@ -8,6 +8,7 @@
   3) نموّ الأصل ⇒ 0، وترتفع الأرضية معه
   4) نقص مقبول صراحةً بلا سبب ⇒ 2 · وبسبب مسجَّل ⇒ 0 ويُدوَّن في السجل
   5) حذف أصل مسجَّل ⇒ 2
+  6) قرارات جماعية: بلا سبب ⇒ 2 · بمسار غير معروف ⇒ 2 · بحذف مسبَّب ⇒ 0 ويُدوَّن في سجل الحذف
 الرمز: 0 كل الحالات صحيحة · 1 خلل في الاختبار.
 """
 from __future__ import annotations
@@ -99,9 +100,37 @@ def main() -> int:
         rc, _ = run(cfg, floor)
         (ok if rc == 0 else bad)(f"فحص بعد قبول مسجَّل ⇒ {rc} (المتوقع 0)")
 
+        # أصل ثانٍ يبقى، كي لا يصير النطاق فارغًا (حالة خاصة تُمنع بذاتها)
+        keeper = tmp / "keep-skill"
+        keeper.mkdir()
+        (keeper / "SKILL.md").write_text("".join(f"سطر {i}\n" for i in range(10)), encoding="utf-8")
+        rc, _ = run(cfg, floor, "--update")
+        (ok if rc == 0 else bad)(f"إضافة أصل ثانٍ إلى الأرضية ⇒ {rc} (المتوقع 0)")
+
         asset.unlink()
         rc, out = run(cfg, floor)
         (ok if rc == 2 and "مفقود" in out else bad)(f"حذف أصل مسجَّل ⇒ {rc} (المتوقع 2 مع «مفقود»)")
+
+        # القرارات الجماعية: الملف محذوف، ولا يجوز تجاوزه إلا بقرار مسبَّب مكتوب
+        decisions = tmp / "decisions.txt"
+        decisions.write_text(f"{asset}\n", encoding="utf-8")
+        rc, out = run(cfg, floor, "--decisions", str(decisions))
+        (ok if rc == 2 else bad)(f"قرارات جماعية بلا سبب ⇒ {rc} (المتوقع 2)")
+
+        bogus = tmp / "bogus.txt"
+        bogus.write_text(f"{tmp}/غير-موجود.md\n", encoding="utf-8")
+        rc, out = run(cfg, floor, "--decisions", str(bogus), "--reason", "قرار تجريبي")
+        (ok if rc == 2 and "غير معروف" in out else bad)(f"قرار على مسار غير معروف ⇒ {rc} (المتوقع 2)")
+
+        rc, out = run(cfg, floor, "--decisions", str(decisions), "--reason", "تنظيف: ملف تجريبي محذوف بقرار مالك")
+        ledger = json.loads(floor.read_text(encoding="utf-8")).get("removals", [])
+        if rc == 0 and ledger and ledger[-1]["path"] == asset.as_posix() and "تنظيف" in ledger[-1]["reason"]:
+            ok("قرار جماعي مسبَّب لحذف أصل ⇒ 0 والحذف مدوَّن بالسبب")
+        else:
+            bad(f"الحذف المسبَّب لم يُدوَّن: rc={rc} · السجل={ledger[-1] if ledger else []}")
+
+        rc, _ = run(cfg, floor)
+        (ok if rc == 0 else bad)(f"فحص بعد قرار الحذف المسجَّل ⇒ {rc} (المتوقع 0)")
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
 
