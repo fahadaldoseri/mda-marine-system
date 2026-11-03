@@ -27,14 +27,12 @@
     "exit_code": 2,
     "dir": "logs/gate-2026-11-03",
     "blocked_steps": [
-      "بوابة الأسلوب",
-      "اكتمال التشغيل (الأعطال المعروفة)",
-      "تغطية بوابة الأسلوب لكل سطح يقرأه القارئ"
+      "اختبارات البوابات (tests)"
     ],
     "note": "نتيجة بوابة التسليم النهائية — مسجّلة بعد كتابة التقرير."
   },
   "finished_utc": "2026-11-03T03:46:21Z",
-  "gate_finished_utc": "2026-11-03T21:29:22Z",
+  "gate_finished_utc": "2026-11-03T21:48:10Z",
   "gate_note": "علامة مرحلة الخط اليومي — بوابة التسليم لم تُشغَّل بعد.",
   "gate_state": "not_run",
   "language": {
@@ -42,19 +40,18 @@
     "edit_pass": {
       "applied": true,
       "by_category": {
-        "أسلوب": 24,
-        "ترجمة حرفية": 2,
-        "مفردة": 16
+        "أسلوب": 17,
+        "مفردة": 14
       },
-      "changes": 42,
-      "edited": 9,
+      "changes": 31,
+      "edited": 6,
       "model": "gpt-5-mini",
-      "rejected": 6,
+      "rejected": 7,
       "sections": 16
     },
     "long_sentences": 14,
     "orthography_errors": 0,
-    "waw_pct": 1.2,
+    "waw_pct": 1.7,
     "waw_runs3": 0
   },
   "ledger_merge": {

@@ -5,8 +5,8 @@
  "steps": [
   {
    "step": "اختبارات البوابات (tests)",
-   "status": "ok",
-   "exit_code": 0,
+   "status": "block",
+   "exit_code": 1,
    "log": "01-اختبارات_البوابات_(tests).log"
   },
   {
@@ -125,8 +125,8 @@
   },
   {
    "step": "بوابة الأسلوب",
-   "status": "block",
-   "exit_code": 2,
+   "status": "ok",
+   "exit_code": 0,
    "log": "21-بوابة_الأسلوب.log"
   },
   {
@@ -281,8 +281,8 @@
   },
   {
    "step": "اكتمال التشغيل (الأعطال المعروفة)",
-   "status": "block",
-   "exit_code": 2,
+   "status": "warn",
+   "exit_code": 1,
    "log": "47-اكتمال_التشغيل_(الأعطال_المعروفة).log"
   },
   {
@@ -323,8 +323,8 @@
   },
   {
    "step": "تغطية بوابة الأسلوب لكل سطح يقرأه القارئ",
-   "status": "block",
-   "exit_code": 2,
+   "status": "ok",
+   "exit_code": 0,
    "log": "54-تغطية_بوابة_الأسلوب_لكل_سطح_يقرأه_القارئ.log"
   },
   {
@@ -377,5 +377,5 @@
   }
  ],
  "log_dir": "/home/ubuntu/brain-marine-news/logs/gate-2026-11-03",
- "finished_utc": "2026-11-03T21:48:10Z"
+ "finished_utc": "2026-11-03T22:04:27Z"
 }
