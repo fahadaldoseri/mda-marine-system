@@ -131,8 +131,15 @@ def check_all(brain: pathlib.Path, date: str) -> int:
             if other_id == z["id"]:
                 continue
             # اسم قطاع آخر داخل أساس هذا القطاع ⇒ تداخل
+            # ك-471: المطابقة بكلمة كاملة لا بجزء من كلمة — «العرب» من «بحر العرب»
+            # كان يطابق «العربي» في اسم قطاع هرمز نفسه فيُنتج منعًا كاذبًا.
+            own = (z.get("name") or "") + " " + (z.get("basis") or "")
+            basis = z.get("basis") or ""
             for token in re.split(r"[·—\s]+", other_name):
-                if len(token) > 3 and token in (z.get("basis") or ""):
+                if len(token) <= 3:
+                    continue
+                pat = r"(?<![\u0621-\u064A])" + re.escape(token) + r"(?![\u0621-\u064A])"
+                if re.search(pat, basis) and not re.search(pat, z.get("name") or ""):
                     problems.append(f"(5) أساس القطاع {z['id']} يشير إلى موقع من قطاع آخر: «{token}»")
                     break
 

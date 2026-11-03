@@ -20,6 +20,7 @@
 from __future__ import annotations
 
 import argparse
+import html
 import json
 import re
 import sys
@@ -61,7 +62,8 @@ def read_text(path: Path) -> str:
 def visible_text(card_html: str) -> str:
     """نصّ البطاقة المرئي بلا وسوم، لفحص الوسوم والروابط المختصرة."""
     text = re.sub(r"<(?:script|style)\b.*?</(?:script|style)>", " ", card_html, flags=re.S)
-    return re.sub(r"<[^>]+>", " ", text)
+    # ك-471: الفحص على المحارف المرئية بعد فك ترميز الكيانات، فلا يُعدّ «&#x27;» وسمًا.
+    return html.unescape(re.sub(r"<[^>]+>", " ", text))
 
 
 def card_violations(card_html: str, index: int, labels: dict[int, str] | None = None) -> list[str]:

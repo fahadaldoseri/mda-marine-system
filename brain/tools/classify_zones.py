@@ -237,7 +237,8 @@ def is_unconfirmed_narrative(row: dict) -> bool:
     return True
 
 
-def classify_day(date: str, reg, scale, levels, ovr, *, carry: bool = True) -> dict:
+def classify_day(date: str, reg, scale, levels, ovr, *, carry: bool = True,
+                strict: bool = False) -> dict:
     """يصنّف يومًا واحدًا. carry=False يمنع التعاود عند البحث عن رتبة سابقة."""
     events = load_day(date)
     if events is None:
@@ -328,6 +329,31 @@ def classify_day(date: str, reg, scale, levels, ovr, *, carry: bool = True) -> d
         "nonspatial": len([r for r in rows if r["nonspatial"]]),
     }
 
+    # ك-470: حارس الاستبعاد الصامت — واقعة رسمية تستهدف سفينة ولا تحمل نوعًا مؤهّلًا
+    # في عنوانها تُعدّ عطلاً لا تُسقط بصمت. الحل: لفظ مؤهّل معتمد أو تجاوز محوكم بسبب.
+    if strict:
+        raw = {e.get("code", ""): e for e in events if isinstance(e, dict)}
+        confirmed_classes = set(reg["counting"]["confirmation"]["confirmed"])
+        silent = []
+        for r in rows:
+            ev = raw.get(r["code"]) or {}
+            if r["class"] not in confirmed_classes:
+                continue
+            if str(ev.get("target") or "") != "سفينة":
+                continue
+            if ev.get("counts_as_new") is False:
+                continue
+            if r["qualifying"]:
+                continue
+            if not str(r.get("qualify_reason") or "").startswith("لا نوع مؤهّل"):
+                continue
+            if str(r["code"]).startswith("IMO-"):
+                continue
+            silent.append(r)
+        if silent:
+            detail = " · ".join(f"{r['code']} «{str(r['title'])[:44]}»" for r in silent[:4])
+            raise FailClosed(
+                "استبعاد صامت لواقعة رسمية تستهدف سفينة بلا نوع مؤهّل في العنوان: " + detail)
     if counter["unconfirmed_qualifying"] > counter["unconfirmed_total"]:
         raise FailClosed(
             "تناقض عدّادي: روايات مؤهّلة " + str(counter["unconfirmed_qualifying"])
@@ -417,7 +443,7 @@ def main() -> int:
         if not args.date:
             raise FailClosed("يلزم --date")
         reg, scale, levels, ovr = load_governed()
-        out = classify_day(args.date, reg, scale, levels, ovr)
+        out = classify_day(args.date, reg, scale, levels, ovr, strict=True)
         if args.write or args.json:
             dest = pathlib.Path(args.json) if args.json else (OUT_DIR / f"{args.date}.json")
             dest.parent.mkdir(parents=True, exist_ok=True)

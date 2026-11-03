@@ -12,7 +12,7 @@
 
 from __future__ import annotations
 
-import argparse
+import argparse, os
 import json
 import re
 import sys
@@ -118,8 +118,8 @@ def selftest() -> int:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="التحقق من اتجاه اللغة في خط أنابيب ثنائي اللغة")
-    ap.add_argument("--brain", default="/home/ubuntu/brain-marine-news")
-    ap.add_argument("--site", default="/home/ubuntu/seawatch")
+    ap.add_argument("--brain", default=str(_ROOT / "brain-marine-news"))
+    ap.add_argument("--site", default=str(_ROOT / "seawatch"))
     ap.add_argument("--date")
     ap.add_argument("--selftest", action="store_true")
     a = ap.parse_args()

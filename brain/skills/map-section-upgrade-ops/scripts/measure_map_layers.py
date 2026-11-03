@@ -1,13 +1,14 @@
-import os
 import asyncio, json, pathlib
 from playwright.async_api import async_playwright
 
-import os as _os, pathlib as _pl
-_D = _os.environ.get("DATE") or "2026-11-01"
-_ROOT = _pl.Path(_os.environ.get("SITE") or _os.environ.get("SITE_DIR") or "seawatch")
-URL = (_ROOT / f"dist/reports/{_D}.html").resolve().as_uri()
-URL_EN = (_ROOT / f"dist/reports/en/{_D}.html").resolve().as_uri()
-OUT = pathlib.Path(_os.environ.get("SHOTS") or "/tmp/shots")
+import os
+
+ROOT = pathlib.Path(__file__).resolve().parents[3]
+SITE = pathlib.Path(os.environ.get("SITE_DIR") or (ROOT / "seawatch"))
+DATE = os.environ.get("DATE", "2026-11-03")
+URL = (SITE / "dist" / "reports" / f"{DATE}.html").as_uri()
+URL_EN = (SITE / "dist" / "reports" / "en" / f"{DATE}.html").as_uri()
+OUT = pathlib.Path(os.environ.get("SHOTS_DIR") or (ROOT / "audit-2026-10-30" / "shots"))
 
 
 async def measure(pg):
