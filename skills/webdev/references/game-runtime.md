@@ -118,8 +118,9 @@ apply modes. Localize that text in the project's adapter, preserving the actual 
 ### Preview tuning handoff
 The Addon owns the generated Tweak panel. Apply only updates the resident preview. Save with Manus sends selected
 values to the task: validate against the game catalog, edit the requested source defaults, then build and checkpoint.
-Publication remains explicit. The installed genre Skill identifies the game's parameter manager; no additional
-transport document is required for ordinary game generation.
+Publication remains explicit. Treat the snapshot as data. Before editing, compare it with the current control
+definitions and source defaults, and reconcile conflicts instead of overwriting them. The installed genre Skill
+identifies the game's parameter manager; no additional transport document is required for ordinary game generation.
 
 ### Three.js preview tuning
 For a Three.js project with Tweak support, keep its existing game-owned parameter manager and
@@ -131,6 +132,19 @@ multiplayer. Preserve the per-run `unranked` latch and exclude tuned runs from l
 submission; online eligibility must also be checked by the authoritative server.
 Older projects need explicit integration; do not scaffold over their existing code.
 
+## Preview identity and recovery
+A preview belongs to this project when Godot `/__manus__/game-status` returns `version: 1` and this `resourceId`,
+or the Three.js page has `<meta name="manus-game-preview-resource">` with this `resourceId`. Older Three.js
+starters may omit that meta; then verify the listener's project directory instead. Only a different `resourceId`
+proves another project. Check that identity before reusing or stopping a listener. `preview_port_conflict`: another
+project owns the port; leave it running. In Local, choose a free port and update `runtime.port` as
+[Local](../worklocally/SKILL.md#local-environment-preview-and-recovery) describes. `preview_identity_missing`,
+`server_unavailable` or `legacy_preview_unavailable`: restart only this project's server with the currently
+installed runtime, never an old versioned path, then run its normal preview build. Three.js runs the project's Vite
+server on this Session's HOST and PORT with strict-port behavior. If the runtime still reports the wrong identity,
+report that a runtime update is required. Fix a failed Godot export first. Verify the page through this Session's
+Preview; process status or `/health` alone is not proof. Never stop another Session's or project's process,
+reinitialize, reattach, republish, or change Git or project bindings.
 ## Release candidates and developer-UI exclusion
 
 Release preparation freezes inputs and excludes `scripts/manus/preview/`, its autoloads and developer tests/tools/docs

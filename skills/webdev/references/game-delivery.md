@@ -98,6 +98,7 @@ build command in another exec per coherent batch (no args or --status only, neve
 play; failure keeps the last success. Init/Preview already hydrate assets; manual hydration is only for missing media.
 Diagnose before rebuilding. After recovery, verify HTTP on the current registered preview and browser WASM
 startup before reporting it playable; a successful build alone does not establish that an old URL works.
+Identity diagnostics and port conflicts follow [runtime](game-runtime.md#preview-identity-and-recovery).
 
 ## Develop and validate
 

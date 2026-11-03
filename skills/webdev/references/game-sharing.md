@@ -70,6 +70,14 @@ Check the icon at 32×32 and follow the engine's preparation below before the fi
 Verify the built favicon uses that image and the sharing title/description describe the actual game; report missing or invalid
 artwork without blocking a valid playable checkpoint or claiming the favicon is complete.
 
+### Rename
+When the Dashboard reports a project rename, first confirm the current project name still equals `newName`; if it
+changed again, stop and ask. Update the `game-sharing.json` title and the game name in default captions. The
+default X caption must include the new name; create it if missing and keep its other wording. Replace the old name
+in an existing OG cover and keep its style; if there is no cover, leave it absent. Keep handwritten share drafts,
+unrelated copy and the favicon. Run the engine's preparation below, rebuild, recheck the name and save a
+previewable checkpoint. If the cover edit fails, keep the old cover and report it. Keep Auto publish unchanged,
+and explain that publishing also ships the version's other changes.
 ## Three.js preparation
 
 Three.js has no Development Effort choice or concept stage. For every first complete Three.js game,
