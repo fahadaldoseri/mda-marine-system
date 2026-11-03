@@ -198,7 +198,7 @@ def main() -> int:
             _mp = meta.get("map") or {}
             mpts = _mp.get("points") or []
             off_map = _mp.get("off_map") or []
-            _excl = {"خارج القطاعات", "المنطقة كاملة"}
+            _excl = {"خارج القطاعات", "المنطقة كاملة", "غير مكانية", "سياق إقليمي"}
             need = [e for e in evs if (e.get("area") or "").strip() not in _excl]
             drawn = {p.get("code") for p in mpts}
             # عطل ك-: واقعة معلَنة «خارج نطاق الرسم» بسبب مكتوب تُعدّ محلولة، لا ناقصة.

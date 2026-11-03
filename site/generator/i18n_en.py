@@ -274,8 +274,42 @@ def localize_patterns(s: str) -> str | None:
     except Exception:
         _G = {}
 
+    _AREA_EN = {
+        "مضيق هرمز": "Strait of Hormuz", "خليج عُمان": "Gulf of Oman",
+        "الخليج العربي": "Arabian Gulf", "باب المندب": "Bab-el-Mandeb",
+        "البحر الأحمر": "Red Sea", "خليج عدن": "Gulf of Aden",
+        "القرن الأفريقي": "Horn of Africa", "بحر العرب": "Arabian Sea",
+        "المحيط الهندي": "Indian Ocean", "البحر الأسود": "Black Sea",
+        "غير مكانية": "Non-spatial", "المنطقة كاملة": "Entire area",
+        "سياق إقليمي": "Regional context",
+    }
+    try:  # نسخة مشتقة من السجل الحاكم، داخل مستودع الموقع (مسار نسبي)
+        _vp = pathlib.Path(__file__).resolve().parent.parent / "sources/i18n/en/area-vocabulary.json"
+        _v = json.loads(_vp.read_text(encoding="utf-8"))
+        _AREA_EN.update(_v.get("areas") or {})
+        _AREA_EN.update(_v.get("scalars") or {})
+    except Exception:
+        pass
+
+    def _tr_area(v: str) -> str:
+        """يترجم اسم منطقة، أو «موقع - منطقة»، أو سردًا مفصولًا بـ«·»."""
+        t = (v or "").strip()
+        if t in _AREA_EN:
+            return _AREA_EN[t]
+        if " · " in t:
+            return " · ".join(_tr_area(x) for x in t.split(" · "))
+        if " - " in t:
+            left, _, right = t.rpartition(" - ")
+            if right.strip() in _AREA_EN:
+                return f"{_tr(left.strip())} - {_AREA_EN[right.strip()]}"
+        return t
+
     def _tr(v: str) -> str:
-        return (_G or {}).get(norm(v), v)
+        hit = (_G or {}).get(norm(v))
+        if hit:
+            return hit
+        area = _tr_area(v)
+        return area if area != v else v
 
     # عائلة المستوى العام: بنية كاملة ومقفلة على مستوى/قطاعات/عدد/مرجع معروف؛
     # اختلافات الصياغة المقبولة محصورة في «يستند/يُسند»، «وهو/هذا»، و«لا ترفع/لا تُرفع».
@@ -371,6 +405,9 @@ def localize_patterns(s: str) -> str | None:
     m = re.fullmatch(r"القطاع\s+(\S+)\s+(.+?)\s+—\s+مستواه\s+(.+?)\.", n)
     if m:
         return f"Sector {m.group(1)} {_tr(m.group(2))} — level {_tr(m.group(3))}."
+    m = re.fullmatch(r"(Z\d)\s*·\s*(.+)", n)
+    if m and "القطاع" not in n:
+        return f"{m.group(1)} · {_tr_area(m.group(2))}"
     m = re.fullmatch(r"الواقعة\s+(\S+)\s+—\s+المنطقة\s+(.+?)،\s+الصفة\s+(.+?)،\s+"
                      r"الإثبات\s+(.+?)،\s+الموقع\s+(.+?)\.", n)
     if m:
