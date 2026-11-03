@@ -1,0 +1,11 @@
+── 1) بناء أول (قد يفشل مغلقًا على وحدات بلا مقابل) ──
+   rc=0
+   ✔ لا وحدة ناقصة — لا حاجة للاشتقاق
+Traceback (most recent call last):
+  File "/home/ubuntu/brain-marine-news/../skills/bilingual-master-direction-ops/scripts/verify_master_direction.py", line 145, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/ubuntu/brain-marine-news/../skills/bilingual-master-direction-ops/scripts/verify_master_direction.py", line 121, in main
+    ap.add_argument("--brain", default=str(_ROOT / "brain-marine-news"))
+                                           ^^^^^
+NameError: name '_ROOT' is not defined
