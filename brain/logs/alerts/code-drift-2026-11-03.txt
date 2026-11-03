@@ -1,3 +1,10 @@
-drift brain/validators/check_asset_floor.py
-drift brain/tests/test_asset_floor.py
-drift brain/tools/governing-assets.txt
+drift brain/validators/check_prose_defects.py
+drift brain/validators/check_vocab_chain.py
+drift brain/tests/run_checks.sh
+drift brain/sections/20-lexicon.md
+drift brain/appendices/forbidden-coinages.json
+drift brain/appendices/simplified-vocabulary.json
+drift site/generator/i18n_en.py
+drift site/sources/i18n/en/glossary.json
+drift skills/SKILL.md
+new brain/validators/check_glossary_shape.py

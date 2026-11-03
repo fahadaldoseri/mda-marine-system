@@ -25,12 +25,12 @@
   "final_gate": {
     "blocked_steps": [],
     "dir": "logs/gate-2026-11-03",
-    "exit_code": 1,
+    "exit_code": 2,
     "note": "نتيجة بوابة التسليم النهائية — كُتبت العلامة بعدها.",
-    "status": "warn"
+    "status": "block"
   },
   "finished_utc": "2026-11-03T03:46:21Z",
-  "gate_finished_utc": "2026-11-03T08:32:14Z",
+  "gate_finished_utc": "2026-11-03T15:39:30Z",
   "gate_note": "علامة مرحلة الخط اليومي — بوابة التسليم لم تُشغَّل بعد.",
   "gate_state": "not_run",
   "language": {
@@ -40,17 +40,17 @@
       "by_category": {
         "أسلوب": 29,
         "ترجمة حرفية": 3,
-        "مفردة": 16
+        "مفردة": 18
       },
-      "changes": 48,
-      "edited": 10,
+      "changes": 50,
+      "edited": 8,
       "model": "gpt-5-mini",
-      "rejected": 6,
+      "rejected": 7,
       "sections": 16
     },
-    "long_sentences": 13,
+    "long_sentences": 14,
     "orthography_errors": 0,
-    "waw_pct": 3.0,
+    "waw_pct": 2.9,
     "waw_runs3": 0
   },
   "ledger_merge": {
