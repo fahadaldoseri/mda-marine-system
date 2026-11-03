@@ -46,7 +46,7 @@ def verify(html: str, meta: dict) -> list:
             if str(n) not in d:
                 v.append(f"وصف الخريطة لا يذكر عدد الوقائع المرسومة ({n})")
             if ap and "تقريبي" not in d:
-                v.append("وصف الخريطة لا يذكر أن المواضع تقريبية مع وجود مواضع تقريبية")
+                v.append("وصف الخريطة لا يذكر أن المواقع تقريبية مع وجود مواضع تقريبية")
         elif "لا" not in d:
             v.append("وصف الخريطة غير صريح في غياب الوقائع")
 
@@ -61,8 +61,8 @@ def verify(html: str, meta: dict) -> list:
             empty = sum(1 for li in lis if not re.sub(r"<[^>]+>", " ", li).strip())
             if empty:
                 v.append(f"{empty} عنصر مفتاح بلا نص")
-            if not any("موضع تقريبي" in li or "إحداثيات مذكورة" in li for li in lis):
-                v.append("مفتاح الوقائع لا يعلن دقة الموضع")
+            if not any("موقع تقريبي" in li or "إحداثيات مذكورة" in li for li in lis):
+                v.append("مفتاح الوقائع لا يعلن دقة الموقع")
         if 'class="map-key mp-key"' not in html:
             v.append("مفتاح الطبقات ورموزها غائب مع وجود وقائع")
         if "sw-mark-approx" not in html and ap:

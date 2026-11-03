@@ -372,19 +372,19 @@ def localize_patterns(s: str) -> str | None:
     if m:
         return f"Sector {m.group(1)} {_tr(m.group(2))} — level {_tr(m.group(3))}."
     m = re.fullmatch(r"الواقعة\s+(\S+)\s+—\s+المنطقة\s+(.+?)،\s+الصفة\s+(.+?)،\s+"
-                     r"الإثبات\s+(.+?)،\s+الموضع\s+(.+?)\.", n)
+                     r"الإثبات\s+(.+?)،\s+الموقع\s+(.+?)\.", n)
     if m:
         return (f"Event {m.group(1)} — area {_tr(m.group(2))}, "
                 f"class {_tr(m.group(3))}, confirmation {_tr(m.group(4))}, "
-                f"position {_tr(m.group(5))}.")
+                f"location {_tr(m.group(5))}.")
     # ك-471: جملة مجمّعة لوقائع متشابهة في المنطقة والصفة والإثبات ودقة الموضع؛
     # تُحفظ كل المعرّفات ويُترجَم النص بنمط واحد بلا اعتماد على المعجم.
     m = re.fullmatch(r"الوقائع\s+((?:\S+\s*·\s*)+\S+)\s+—\s+المنطقة\s+(.+?)،\s+الصفة\s+(.+?)،\s+"
-                     r"الإثبات\s+(.+?)،\s+الموضع\s+(.+?)\.", n)
+                     r"الإثبات\s+(.+?)،\s+الموقع\s+(.+?)\.", n)
     if m:
         ids = ", ".join(x.strip() for x in m.group(1).split("·") if x.strip())
         return (f"Events {ids} — area {_tr(m.group(2))}, class {_tr(m.group(3))}, "
-                f"confirmation {_tr(m.group(4))}, position {_tr(m.group(5))}.")
+                f"confirmation {_tr(m.group(4))}, location {_tr(m.group(5))}.")
     m = re.fullmatch(r"الخط الزمني المرصود:\s*(.+?)\.", n)
     if m:
         inner = _tr(m.group(1))
@@ -446,7 +446,7 @@ def localize_patterns(s: str) -> str | None:
     m = re.fullmatch(r"(\d+) كيلومتر · (\d+) ميل بحري", n)
     if m:
         return f"{m.group(1)} km · {m.group(2)} nm"
-    m = re.fullmatch(r"مواقع (\d+) واقعة داخل نطاق التقرير؛ (منها \d+ بموضع تقريبي داخل المنطقة "
+    m = re.fullmatch(r"مواقع (\d+) واقعة داخل نطاق التقرير؛ (منها \d+ بموقع تقريبي داخل المنطقة "
                      r"نفسها لأن المصدر لم يذكر إحداثيات\.|وجميعها بإحداثيات مذكورة في المصادر\.)", n)
     if m:
         tail = ("some of them placed approximately within the same area because the source gave no "
@@ -454,8 +454,8 @@ def localize_patterns(s: str) -> str | None:
                 "all of them with coordinates stated in the sources.")
         return f"Positions of {m.group(1)} incidents within the report scope; {tail}"
     m = re.fullmatch(r"خريطة وقائع التقرير: (\d+) واقعة مرسومة على الخليج العربي ومضيق هرمز وخليج عمان "
-                     r"\(إحداثيات مذكورة (\d+) · مواضع تقريبية (\d+)\)\. الحالات: (.+?)\."
-                     r" الموضع التقريبي يعني أن المصدر لم يذكر إحداثيات فوُضعت العلامة داخل المنطقة نفسها لا في موضع محدد\.", n)
+                     r"\(إحداثيات مذكورة (\d+) · مواقع تقريبية (\d+)\)\. الحالات: (.+?)\."
+                     r" الموقع التقريبي يعني أن المصدر لم يذكر إحداثيات فوُضعت العلامة داخل المنطقة نفسها لا في موقع محدد\.", n)
     if m:
         st = m.group(4)
         for ar, en in (("غير مؤهل — لا يُحتسب", "not qualifying"),
@@ -464,15 +464,15 @@ def localize_patterns(s: str) -> str | None:
                        ("مؤكد", "confirmed"), ("مرجّح", "probable")):
             st = st.replace(ar, en)
         return (f"Incident map: {m.group(1)} incidents drawn over the Arabian Gulf, the Strait of Hormuz "
-                f"and the Gulf of Oman (stated coordinates {m.group(2)} · approximate positions {m.group(3)}). "
-                f"Statuses: {st}. An approximate position means the source gave no coordinates, so the marker "
+                f"and the Gulf of Oman (stated coordinates {m.group(2)} · approximate locations {m.group(3)}). "
+                f"Statuses: {st}. An approximate location means the source gave no coordinates, so the marker "
                 "was placed within the same area rather than at a specific point.")
-    m = re.fullmatch(r"المواضع المعروضة مواضع وقائع اليوم على الخريطة؛ والموضع التقريبي يعني أن المصدر لم يذكر "
-                     r"إحداثيات فوُضع داخل المنطقة نفسها لا في موضع آخر\. وتوزيع الحالة: مؤكد (\d+) · "
+    m = re.fullmatch(r"العلامات المعروضة علامات وقائع اليوم على الخريطة؛ والموقع التقريبي يعني أن المصدر لم يذكر "
+                     r"إحداثيات فوُضعت العلامة داخل المنطقة نفسها لا في موقع آخر. وتوزيع الحالة: مؤكد (\d+) · "
                      r"مرجّح (\d+) · غير مؤكد مؤهل (\d+) · غير مؤهل (\d+) · حالة غير محددة (\d+)\."
                      r"( ووقائع خارج نطاق الخريطة تُذكر في جدول التوزيع الجغرافي: .+)?", n)
     if m:
-        base = (f"Markers show today's incident positions; an approximate position means the source gave no "
+        base = (f"Markers show today's incident locations; an approximate location means the source gave no "
                 f"coordinates, so it was placed within the same area rather than elsewhere. Status mix: "
                 f"confirmed {m.group(1)} · probable {m.group(2)} · unconfirmed qualifying {m.group(3)} · "
                 f"not qualifying {m.group(4)} · status not stated {m.group(5)}.")
