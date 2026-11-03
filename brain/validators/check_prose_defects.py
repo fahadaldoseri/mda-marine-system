@@ -293,6 +293,14 @@ def find_repeated_templates(text: str) -> list[dict]:
             normalized = normalize_sentence(sentence)
             has_marker = any(marker in normalized for marker in ("نفّذوا", "بلاغ من", "لا بلاغ جديد"))
             has_sentence_end = sentence.rstrip().endswith((".", "؟", "!", "؛"))
+            # ك-490: مقطع الإسناد وحده ليس قالب جملة إنشائيًا؛ تقسيم الجمل على «؛» كان
+            # يُنتج مقطعًا مثل «MN-2026-11-03-06؛» فيتطابق تطبيعه مع غيره من الأكواد
+            # ويُعلن قالبًا متكررًا وهو معرّف لا صياغة. يُستثنى المقطع إذا لم يحمل أي
+            # حرف عربي بعد إزالة الأكواد والفواصل، ويبقى القياس مانعًا على كل نص آخر.
+            _bare = re.sub(r"(?:MN|EST)-\d{4}-\d{2}-\d{2}-\d{2}", "", sentence)
+            # يُشترط حرف عربي (لا علامة ترقيم عربية مثل «؛») حتى لا يُستثنى نص حقيقي.
+            if not re.search(r"[\u0621-\u064A]", _bare):
+                continue
             if len(normalized) >= 4 and (has_marker or has_sentence_end):
                 candidates.append((normalized, line_no, sentence.strip()))
     groups: dict[str, list[dict]] = defaultdict(list)

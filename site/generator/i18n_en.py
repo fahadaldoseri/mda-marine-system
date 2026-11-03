@@ -630,6 +630,15 @@ def make_translator(tm: dict[str, str], gl: dict[str, str]):
                 return dual
         direct = lookup(n)
         if direct is not None:
+            # ك-488: كان الاستبدال يجري بالنص المطبَّع داخل النص الأصلي، فإذا حمل
+            # النص العربي تشكيلًا (شدّة أو تطويل) لا يجد `replace` مطابقة، فيبقى
+            # النص عربيًا ثم يُجزّأ في الحلقة الاحتياطية إلى مقاطع مشوَّهة
+            # («Aو» و«Additions Newة»). الحل: إن طابق تطبيع الوحدة مفتاحًا كاملًا،
+            # تُعاد الترجمة كاملة مع الحفاظ على المسافات الطرفية.
+            if n == norm(u):
+                lead = u[: len(u) - len(u.lstrip())]
+                trail = u[len(u.rstrip()):]
+                return lead + direct + trail
             return u.replace(n, direct)
         res, ok = u, True
         for part in re.split(r"(?<=[…·])\s*", u):
