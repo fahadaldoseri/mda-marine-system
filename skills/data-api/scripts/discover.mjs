@@ -12,6 +12,7 @@ const SOURCES = {
   'world-bank': 'World Bank',
   'google-trends': 'Google Trends',
   'app-store': 'App Store',
+  mobbin: 'Mobbin',
   similarweb: 'Similarweb',
   'domain-check': 'Domainr',
   '3d-model': 'Tripo3D',

@@ -1,6 +1,6 @@
 ---
 name: data-api
-description: Look up external data and generate 3D assets through Manus Data APIs — X/Twitter posts and profiles, LinkedIn people and companies, YouTube videos and captions, TikTok/Instagram/Reddit content, financial market data (prices, technical indicators, company financials), SEC filings and earnings call transcripts, Crunchbase companies and investors, World Bank indicators, Google Trends, App Store rankings, Similarweb website traffic, domain-name availability, and 3D models from text or images. Use when the task needs structured data from these sources instead of scraping web pages, or needs a 3D asset generated programmatically.
+description: Look up external data and generate 3D assets through Manus Data APIs — X/Twitter posts and profiles, LinkedIn people and companies, YouTube videos and captions, TikTok/Instagram/Reddit content, financial market data (prices, technical indicators, company financials), SEC filings and earnings call transcripts, Crunchbase companies and investors, World Bank indicators, Google Trends, App Store rankings, Mobbin app and website UI design references (screens and page sections), Similarweb website traffic, domain-name availability, and 3D models from text or images. Use when the task needs structured data from these sources instead of scraping web pages, or needs a 3D asset generated programmatically.
 ---
 
 # Manus Data API
@@ -23,6 +23,7 @@ Pick the one `source` key that matches the task:
 | `world-bank` | World Bank development indicators — GDP, population, inflation, trade, education, health and other macroeconomic time series for every country and region. |
 | `google-trends` | Google search interest for any keyword — trends over time, by region, and related queries. |
 | `app-store` | Current top free iPhone apps from the US App Store with names, categories, and ranks. |
+| `mobbin` | Real app and website UI design references from Mobbin — screens, flows, and page sections such as pricing, onboarding, and checkout for design inspiration. |
 | `similarweb` | Website traffic and audience metrics — visits, engagement, global and country rank, traffic sources, referrals, keywords, and audience geography. |
 | `domain-check` | Real-time domain-name availability when naming a product or preparing to register a domain. |
 | `3d-model` | Generate 3D models from text descriptions or images. Generation is asynchronous: submit with text_to_model / image_to_model (upload the image first if needed), then poll get_task until the model is ready. |
