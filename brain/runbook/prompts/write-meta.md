@@ -1,3 +1,6 @@
+## قاعدة كتل العرض (إلزامية)
+خريطة `blocks` تصل عنوان القسم باسم كتلة عرض مدعومة فقط (indicators · hypotheses · gaps · timeline · source_reliability · vessel_identity · report_classes · intel_analysis). لا تُكتب أسماء حقول مثل `event_keys` في `blocks`: قسم «سجل الأحداث» يُبنى من طبقة البطاقات ومن دفتر الوقائع، ويُترك بلا كتلة نصية (مُعلن في `appendices/report-sections-policy.json` → `allowed_no_block_sections`).
+
 # خطوة: بناء ملف واجهة التقرير
 
 اكتب `web/meta/{date}.json` بالحقول المعتمدة (الخلاصة · بطاقة القرار · المؤشرات · مستوى التهديد · الرموز) مستخرجة من `reports/{date}-sectioned.md` نفسه، لا من الذاكرة.
