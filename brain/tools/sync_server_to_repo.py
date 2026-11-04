@@ -91,9 +91,12 @@ def main() -> int:
     local = local_manifest()
     m = _parity_module()
     diff: list[tuple[str, pathlib.Path]] = []
+    sanitized = set(m.SANITIZED)  # ملفات تُحفظ منقّحة في المستودع (ك-338) — لا تُنسخ بقيمها الحقيقية
     for rel, (kind, value) in sorted(local.items()):
         if kind != "file":
             continue  # الروابط تُقاس في أداة التماثل ولا تُنسخ هنا
+        if rel in sanitized:
+            continue  # منع تسريب معرّف المحادثة أو توكن البوت إلى المستودع
         src = _source_path(rel)
         if src is None or not src.is_file():
             continue
