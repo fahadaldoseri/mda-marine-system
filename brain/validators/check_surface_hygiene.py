@@ -19,7 +19,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 GATE_NAME = "نظافة أسطح الإصدار والإضافات"
-SEAWATCH_ROOT = Path("/home/ubuntu/seawatch")
+SEAWATCH_ROOT = Path(os.environ.get("SITE_DIR") or (Path(__file__).resolve().parents[2] / "seawatch"))
 REPORT_NAME = re.compile(r"^\d{4}-\d{2}-\d{2}\.html$")
 THREAT_TITLE = "مستوى التهديد"
 NEWS_TITLE = "أهم الأخبار المتعلقة بالأمن البحري"

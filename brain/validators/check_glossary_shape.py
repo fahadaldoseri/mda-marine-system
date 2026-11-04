@@ -18,8 +18,11 @@ GLOSSARY = pathlib.Path(
     if "--file" in sys.argv
     else _SITE / "sources/i18n/en/glossary.json"
 )
+# قاعدة: أي مفتاح يبدأ بـ«_» بيانات ما ورائية داخلية (سجل اتجاه الاشتقاق · ملاحظات البناء)
+# ولا يُعدّ مدخلًا في المكان الخطأ؛ وما عدا ذلك مفتاح جذري مرفوض.
 ALLOWED_TOP_LEVEL = {
     "_note",
+    "_directions",
     "_derived",
     "entries",
     "updated",
@@ -41,7 +44,7 @@ def main() -> int:
     if not isinstance(data, dict):
         print("✘ جذر المعجم ليس كائنًا (object)")
         return 2
-    stray = sorted(k for k in data if k not in ALLOWED_TOP_LEVEL)
+    stray = sorted(k for k in data if k not in ALLOWED_TOP_LEVEL and not k.startswith("_"))
     entries = data.get("entries")
     if not isinstance(entries, dict):
         print("✘ «entries» مفقود أو ليس كائنًا — لا مكان للمدخلات")
