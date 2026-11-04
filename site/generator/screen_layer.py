@@ -57,10 +57,11 @@ _CARD_ARABIC_TERMS = (
     (r"(?<![A-Za-z])IMO(?![A-Za-z])", "المنظمة البحرية الدولية"),
     (r"(?<![A-Za-z])AIS(?![A-Za-z])", "نظام التعريف الآلي"),
     (r"(?<![A-Za-z])VHF(?![A-Za-z])", "الاتصالات اللاسلكية البحرية"),
-    (r"(?<![A-Za-z])Z1(?![A-Za-z])", "القطاع الأول"),
-    (r"(?<![A-Za-z])Z2(?![A-Za-z])", "القطاع الثاني"),
-    (r"(?<![A-Za-z])Z3(?![A-Za-z])", "القطاع الثالث"),
-    (r"(?<![A-Za-z])Z4(?![A-Za-z])", "القطاع الرابع"),
+    (r"(?<![A-Za-z])Z1(?![A-Za-z])", "مضيق هرمز وخليج عُمان والخليج العربي"),
+    (r"(?<![A-Za-z])Z2(?![A-Za-z])", "باب المندب والبحر الأحمر"),
+    (r"(?<![A-Za-z])Z3(?![A-Za-z])", "بحر العرب"),
+    (r"(?<![A-Za-z])Z4(?![A-Za-z])", "القرن الأفريقي"),
+    (r"(?<![A-Za-z])Z5(?![A-Za-z])", ""),
 )
 
 
@@ -108,7 +109,7 @@ def _chip(label, value_html, extra=""):
     return f'<span class="sc-chip{extra}">{label} <b>{value_html}</b></span>'
 
 
-def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_html="",
+def screen_hero(meta, *, esc, inline, report_date, official, threat_cls,
                 doc_mode=False, archived=False, card_targets=None):
     """كتلة القرار فوق الطيّ: العنوان والشرائح وحالة التهديد والمؤشرات وأهم الأخبار المتعلقة بالأمن البحري.
 
@@ -166,8 +167,13 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
     hero_kpis = meta.get("hero_kpis") or []
     if hero_kpis:
         if report_date >= HERO_KPI_MODERN_FROM:
-            if len(hero_kpis) != 8 or sorted(k.get("row") for k in hero_kpis) != [1, 1, 1, 1, 2, 2, 2, 2]:
-                raise ValueError("hero_kpis يجب أن يحوي صفًا أول من 4 وصفًا ثانيًا من 4؛ فشل مغلق")
+            rows = {}
+            for k in hero_kpis:
+                rows.setdefault(int(k.get("row") or 1), []).append(k)
+            # قرار المالك 2026-11-04: الصف الأول 4 بطاقات، والصفوف التالية 3 (أو 2 للبطاقتين الدائمتين).
+            if (1 not in rows or len(rows[1]) != 4 or len(rows) < 2
+                    or any(len(v) not in (2, 3, 4) for r, v in rows.items() if r != 1)):
+                raise ValueError("hero_kpis: الصف الأول 4 بطاقات والصفوف التالية 3 (أو 2 للبطاقتين الدائمتين)؛ فشل مغلق")
             def _screen_tile(k):
                 acc = k.get("accent", "ok")
                 if acc not in ("ok", "info", "warn", "danger"):
@@ -241,7 +247,17 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
             t = re.split(r"[.،؛]", _arabic_card_text(str(raw).strip()))[0].strip()
             t = re.sub(r"\s+", " ", t)
             if len(t) > width:
-                t = t[:width].rsplit(" ", 1)[0] + "…"
+                # ك-497: لا يُقطع الملخص في وسط عبارة؛ يُقطع عند نهاية جملة أو
+                # عند فاصل معنى، وإلا استُعملت الكلمة الأخيرة كاملة.
+                cut = t[:width]
+                for sep in (". ", "، ", "؛ ", ": "):
+                    i = cut.rfind(sep)
+                    if i >= width * 0.6:
+                        cut = cut[: i + len(sep)].rstrip()
+                        break
+                else:
+                    cut = cut.rsplit(" ", 1)[0] + "…"
+                t = cut
             if t:
                 out.append(t)
         return " · ".join(out)
@@ -283,13 +299,10 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
         f'<div class="sc-v"><p class="sc-gist">{inline(_gist(watch, limit=2))}</p>'
         f'<p class="sc-more">{_arabic_count(watch_count, "items")} · '
         f'<a href="{esc(watch_href)}" data-goto="{esc(watch_title)}" data-alt="{esc(watch_href)}">المؤشرات الكاملة</a></p></div></div>')
-    key = ""
-    if rkey_html:
-        key = rkey_html.replace('class="rkey no-print"', 'class="sc-rkey"')
     card = ""
     if rows:
         card = (f'<section class="sc-card" aria-label="أهم الأخبار المتعلقة بالأمن البحري"><h2 class="sc-h2">أهم الأخبار المتعلقة بالأمن البحري</h2>'
-                f'{"".join(rows)}{key}</section>')
+                f'{"".join(rows)}</section>')
 
     grid = ""
     if side or card:
@@ -310,7 +323,7 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls, rkey_ht
 SCREEN_CSS = """
 /* ===== طبقة الشاشة: لا تُطبَّق في وسائط الطباعة ===== */
 @media screen{
-.masthead,.decision,.kpis,.rkey{display:none}
+.masthead,.decision,.kpis{display:none}
 .topbar{position:static}
 .topbar-inner{padding-block:7px}
 /* شريط واحد: مع شريط الموقع تنتقل أزرار الطباعة والمظهر وحجم الخط إليه ويُخفى شريط الإصدار */
@@ -396,8 +409,6 @@ body:has(.site-nav) .topbar{display:none}
 .sc-more{font-size:14px;margin:6px 0 0}
 .sc-more a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:3px 0;min-height:24px}
 .sup-banner a{display:inline-block;padding:3px 0;min-height:24px}
-.sc-rkey{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--muted);margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
-.sc-rkey .rkey-t{color:var(--muted)}
 /* الأقسام القابلة للطي */
 .sc-toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:26px 0 14px}
 .sc-jump{display:flex;gap:6px;flex-wrap:wrap;flex:1 1 360px}

@@ -1379,7 +1379,7 @@
       "command": [
         "bash",
         "-lc",
-        "python3 validators/check_skills_integrity.py && python3 validators/check_asset_floor.py && bash tools/restore_skills.sh && python3 validators/check_skills_integrity.py && python3 tools/append_only_ledger.py --verify && python3 tools/check_governing_assets.py --json; rc=$?; exit \"$rc\""
+        "python3 validators/check_skills_integrity.py && python3 validators/check_asset_floor.py && python3 validators/check_area_vocabulary.py && bash tools/restore_skills.sh && python3 validators/check_skills_integrity.py && python3 tools/append_only_ledger.py --verify && python3 tools/check_governing_assets.py --json; rc=$?; exit \"$rc\""
       ],
       "ok_rc": [
         0
@@ -1795,7 +1795,8 @@
         ],
         "files": [
           "tools/final_gate.sh",
-          "tools/source_counts.py"
+          "tools/source_counts.py",
+          "tools/patch_owner_notes.py"
         ],
         "gates": [],
         "tests": []
@@ -4625,8 +4626,8 @@
         0
       ],
       "warn_rc": [],
-      "disabled": true,
-      "disabled_reason": "لا تفويض إرسال تلغرام في هذه الجولة — النشر بلا إرسال بقرار المالك (2026-11-01)"
+      "disabled": false,
+      "disabled_reason": "تفويض إرسال تلغرام بقرار المالك (2026-11-04): «ارسال على تلقرام»"
     },
     {
       "id": "D032",
@@ -4698,8 +4699,8 @@
       "warn_rc": [
         1
       ],
-      "disabled": true,
-      "disabled_reason": "لا تفويض إرسال تلغرام في هذه الجولة — النشر بلا إرسال بقرار المالك (2026-11-01)"
+      "disabled": false,
+      "disabled_reason": "تفويض تنبيه الوصول على تلغرام بقرار المالك (2026-11-04)"
     },
     {
       "id": "D035",

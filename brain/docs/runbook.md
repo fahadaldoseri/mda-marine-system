@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة 65a17ea13494d314). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة 05a099d4606997c7). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -35,7 +35,7 @@
 | G001 | اختبارات البوابات (tests) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G001.log | ف1–ف5 — بوابة التحقق | tests/run_checks.sh، tools/final_gate.sh، validators/check_content_fidelity.py، validators/check_en_parity.py، tools/source_count_units.py، tests/test_content_fidelity_units.py | stop |
 | G002 | تنظيف المحتوى الداخلي | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G002.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/scrub_internal.py، tools/apply_audit_gfs_docx.py، tools/apply_jmic_ukmto_to_gfs.py | stop |
 | G003 | دمج بنك التعريفات | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G003.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/merge_glossary.py | stop |
-| G004 | أرقام المصادر (معتمدة/مفحوصة/ناجحة) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G004.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/source_counts.py | stop |
+| G004 | أرقام المصادر (معتمدة/مفحوصة/ناجحة) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G004.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/source_counts.py، tools/patch_owner_notes.py | stop |
 | G006 | إصلاح الصياغة الآلي (خطوة واحدة) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G006.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/repair_prose.py، tools/pro_audit.py | stop |
 | G007 | تحرير لغوي آلي (قبل/بعد لكل قسم) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G007.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/edit_pass.py، tools/audit_corpus.py، tools/audit_pdf_layout.py، tools/audit_pagination.py، tools/audit_broad_excepts.py | stop |
 | G008 | بوابات اللغة المتدرجة (إملاء ونحو وأسلوب) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G008.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/language_gates.py | stop |
@@ -102,9 +102,9 @@
 | D005 | تحديث النسخة الاحتياطية قبل النشر (شرط بوابة ما قبل التشغيل) | script |  |  | cmd:bash -lc test -s "$B/logs/runbook/{date}/D005.log" && grep -q 'parity' "$B/logs/runbook/{date}/D005.log" || true | س2 — الإغلاق والدفع |  | stop |
 | D010 | نشر الموقع (بعد كل البوابات) | script |  |  | cmd:python3 -c import json,sys;d=json.load(open('logs/publish-{date}.json'));sys.exit(0 if d.get('status')=='ok' else 1) | س2 — الإغلاق والدفع | tools/publish_changes.sh، tools/publish_site.sh، validators/check_en_parity.py | stop |
 | D020 | التحقق الحي من النشر (قراءة فقط) | script |  |  | cmd:python3 -c import json,sys;d=json.load(open('logs/live-{date}.json'));sys.exit(0 if d.get('status')=='ok' else 1) | س2 — الإغلاق والدفع | tools/check_live.sh، tools/live_visual_audit.py، tools/live_dom_audit.py | stop |
-| D030 | إرسال الملخص وPDF على تلغرام (اختيارية) (معطّلة: سبب غير مذكور) | script |  |  | cmd:python3 -c import json,sys;d=json.load(open('logs/publish-{date}-telegram.json'));sys.exit(0 if d.get('status')=='ok' else 1) | س4 — قناة التسليم | tools/publish_site.sh، tools/make_tg_digest.py، tools/telegram_send.py، tools/telegram_bot.py، secrets/secrets.env.example، secrets/README.md | continue |
+| D030 | إرسال الملخص وPDF على تلغرام (اختيارية) | script |  |  | cmd:python3 -c import json,sys;d=json.load(open('logs/publish-{date}-telegram.json'));sys.exit(0 if d.get('status')=='ok' else 1) | س4 — قناة التسليم | tools/publish_site.sh، tools/make_tg_digest.py، tools/telegram_send.py، tools/telegram_bot.py، secrets/secrets.env.example، secrets/README.md | continue |
 | D032 | أرشفة نص ملخص تلغرام المرسل (معطّلة: سبب غير مذكور) | script |  |  | cmd:bash -lc test -d logs/telegram-archive | س4 — قناة التسليم | tools/archive_tg_digest.py، tools/telegram_send.py | continue |
-| D033 | تنبيه وصول التقرير على تلغرام (معطّلة: سبب غير مذكور) | script |  |  | file_exists:logs/telegram-delivery-{date}.json | س4 — قناة التسليم | validators/check_telegram_delivery.py | continue |
+| D033 | تنبيه وصول التقرير على تلغرام | script |  |  | file_exists:logs/telegram-delivery-{date}.json | س4 — قناة التسليم | validators/check_telegram_delivery.py | continue |
 | D035 | بوابة الأسرار قبل النسخ الاحتياطي والدفع | script |  |  | cmd:bash -lc grep -q 'بوابة الأسرار: لا سرّ' logs/runbook/{date}/D035.log | س2 — الإغلاق والدفع | validators/check_secrets.py، tools/redact.py، tools/github_backup.sh | stop |
 | D036 | اختبارات المدقّقات الجديدة (أسرار · استثناءات · إرسال · تتبّع · نطاق) | script |  |  | cmd:bash -lc test -s logs/checks/new-validators-{date}.json && test -s logs/checks/new-validators-{date}.txt && test -s logs/checks/parity-scope-{date}.txt | س2 — الإغلاق والدفع | tests/test_new_validators.py، tests/test_parity_scope.py، tools/audit_broad_excepts.py، validators/check_secrets.py | stop |
 | D040 | النسخة الاحتياطية والتحقق من التماثل | script |  |  | cmd:bash -lc grep -q 'النتيجة: مطابق' logs/runbook/{date}/D040.log | س2 — الإغلاق والدفع | tools/github_backup.sh، validators/check_backup_parity.py، tools/github_backup.py، tools/apply_from_github.sh، tools/apply_from_github.py، tools/code_paths.py | stop |

@@ -30,7 +30,7 @@ def _translate_page(ar_page: pathlib.Path, date: str, dst: pathlib.Path, tm, gl)
     page, missing, total = i18n_en.translate_page(ar_page.read_text(encoding="utf-8"), date, tm, gl)
     if missing:
         raise SystemExit(
-            "فشل مغلق: نصوص عربية بلا ترجمة — أضفها إلى sources/i18n/en/glossary.json\n  - "
+            f"فشل مغلق: نصوص عربية بلا ترجمة في {ar_page.name} — أضفها إلى sources/i18n/en/glossary.json\n  - "
             + "\n  - ".join(sorted(set(missing))[:15])
         )
     # عناوين بطاقة الأخبار عقد واجهة، وتُطابقها بوابة العدّاد حرفيًا.

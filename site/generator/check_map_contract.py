@@ -31,8 +31,12 @@ def _map_block(html: str) -> str:
     return html[i:j if j > 0 else i + 20000]
 
 
-def verify(html: str, meta: dict) -> list:
+POLICY_FROM = "2026-11-03"   # قرار المالك 2026-11-04: يسري على هذا التقرير وما بعده
+
+
+def verify(html: str, meta: dict, date: str = "") -> list:
     v = []
+    check_no_map_note(meta.get("map") or {})
     points = ((meta.get("map") or {}).get("points")) or []
     n = len(points)
     ap = sum(1 for p in points if p.get("precision") == "approximate")
@@ -56,11 +60,11 @@ def verify(html: str, meta: dict) -> list:
     if 'class="map-viz' not in html and "map-panel" not in html:
         v.append("لا يوجد قسم خريطة في الصفحة")
 
-    svg_desc = re.search(r"<desc>(.*?)</desc>", html, flags=re.S)
-    if not svg_desc:
+    descs = re.findall(r"<desc>(.*?)</desc>", html, flags=re.S)
+    if not descs:
         v.append("لا يوجد وصف <desc> لخريطة الشاشة")
     else:
-        d = re.sub(r"<[^>]+>", " ", svg_desc.group(1))
+        d = " ".join(re.sub(r"<[^>]+>", " ", x) for x in descs)
         if n:
             if str(n) not in d:
                 v.append(f"وصف الخريطة لا يذكر عدد الوقائع المرسومة ({n})")
@@ -69,31 +73,42 @@ def verify(html: str, meta: dict) -> list:
         elif "لا" not in d:
             v.append("وصف الخريطة غير صريح في غياب الوقائع")
 
-    if n:
-        items = re.findall(r'<ol[^>]*class="[^"]*map-legend[^"]*"[^>]*>(.*?)</ol>', html, flags=re.S)
-        if not items:
-            v.append("لا توجد قائمة مفتاح للوقائع مع وجود وقائع")
-        else:
-            lis = re.findall(r"<li>(.*?)</li>", items[0], flags=re.S)
-            if len(lis) != n:
-                v.append(f"عناصر مفتاح الوقائع {len(lis)} لا تساوي عدد الوقائع {n}")
-            empty = sum(1 for li in lis if not re.sub(r"<[^>]+>", " ", li).strip())
-            if empty:
-                v.append(f"{empty} عنصر مفتاح بلا نص")
-            if not any("موقع تقريبي" in li or "إحداثيات مذكورة" in li for li in lis):
-                v.append("مفتاح الوقائع لا يعلن دقة الموقع")
-        if 'class="map-key mp-key"' not in html:
-            v.append("مفتاح الطبقات ورموزها غائب مع وجود وقائع")
-        if "sw-mark-approx" not in html and ap:
-            v.append("المفتاح لا يشرح العلامة المفرّغة للموضع التقريبي")
+    if n and 'class="map-key mp-key"' not in html:
+        v.append("مفتاح العلامات الثلاثي غائب عن الخريطة")
+    if "sw-mark-approx" not in html and ap:
+        v.append("المفتاح لا يشرح العلامة المفرّغة للموقع التقريبي")
 
     if 'class="mp-north"' not in html:
         v.append("سهم الشمال غائب عن الخريطة")
     if "ميل بحري" not in html or "كيلومتر" not in html:
         v.append("مقياس الرسم (كيلومتر · ميل بحري) غائب عن الخريطة")
-    for need in ("Natural Earth", "Marine Regions"):
-        if need not in html:
-            v.append(f"سطر المصادر لا يذكر {need}")
+    new_policy = True   # القرار يسري على كل إصدار يُبنى بعد التعديل
+    if new_policy:
+        # ملاحظة المالك 6 (2026-11-04): يُحذف سطر المصادر أسفل الخريطة ويُنقل إلى صفحة المصادر.
+        for need in ("Natural Earth", "Marine Regions", "Ships' Routeing", "VLIZ"):
+            if need in map_block:
+                v.append(f"عودة المصطلح المرجعي «{need}» إلى قسم الخريطة — محذوف بقرار المالك (ملاحظة 6)")
+        # ملاحظة المالك 2 و3: لا تظهر رموز القطاعات Z على سطح يقرأه القارئ.
+        zc = re.findall(r"(?<![A-Za-z0-9])Z[1-5](?![0-9])", map_block)
+        if zc:
+            v.append(f"رمز قطاع داخلي ظاهر للقارئ في قسم الخريطة: {sorted(set(zc))} (ملاحظة 2)")
+        # ملاحظة المالك 8: مفتاح الخريطة ثلاثة أسطر فقط.
+        if 'class="map-key mp-key"' not in html:
+            v.append("مفتاح العلامات الثلاثي غائب عن الخريطة")
+        else:
+            m = re.search(r'<ul class="map-key mp-key"[^>]*>(.*?)</ul>', html, flags=re.S)
+            items = re.findall(r"<li>(.*?)</li>", m.group(1), flags=re.S) if m else []
+            texts = [re.sub(r"<[^>]+>", " ", x).strip() for x in items]
+            want = ("واقعة مؤكدة", "موقع تقريبي", "بلاغ غير مؤهل")
+            if len(items) != 3 or any(w not in " ".join(texts) for w in want):
+                v.append(f"مفتاح الخريطة يجب أن يكون ثلاثة أسطر فقط ({texts}) — ملاحظة 8")
+        # ملاحظة المالك 6: لا يعود ملخّص العدّ (وصف الخريطة المرئي) إلى القسم.
+        for frag in ("تتركز البنود المرمزة", "ويشمل العد", "وتوزيع الحالة", "وقائع خارج نطاق الخريطة",
+                     "اليابسة والحدود السياسية", "هذه الخريطة سياق إخباري"):
+            if frag in map_block:
+                v.append(f"عودة النص المحذوف أسفل الخريطة: «{frag}» (ملاحظة 6)")
+    else:
+        pass
 
     if ".hmap-wrap:has(> .hmap-zoom)" not in html:
         v.append("قاعدة تكديس لوحة التكبير على الجوال غائبة عن الأنماط")
@@ -104,6 +119,13 @@ def verify(html: str, meta: dict) -> list:
     if any(x.strip() == "Section" for x in labels):
         v.append("اسم وصولي عام «Section» بدل وصف الخريطة")
     return v
+
+
+def check_no_map_note(mp: dict) -> None:
+    """ملاحظة المالك (6): لا نص وصف ولا ملاحظة أسفل الخريطة في أي إصدار."""
+    for k in ("caption", "points_note"):
+        if str(mp.get(k) or "").strip():
+            raise SystemExit(f"✘ وصف الخريطة يجب أن يكون فارغًا ({k}) — قرار المالك")
 
 
 def main() -> int:
@@ -118,7 +140,7 @@ def main() -> int:
         return 2
     html = html_p.read_text(encoding="utf-8")
     meta = json.loads(meta_p.read_text(encoding="utf-8"))
-    v = verify(html, meta)
+    v = verify(html, meta, args.date)
     n = len(((meta.get("map") or {}).get("points")) or [])
     if v:
         print(f"  ✘ حارس عقد الخريطة: {len(v)} مخالفة ({html_p.name} · {n} واقعة)")

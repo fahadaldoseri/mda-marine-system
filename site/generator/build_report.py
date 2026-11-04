@@ -788,7 +788,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
   .dc-row.risk-high .dc-v{color:#9d2b25}
   .dc-row.risk-med .dc-v{color:#7d5200}
   .dc-row.risk-low .dc-v{color:#166b45}
-  .dc-foot,.rkey,.glossary{color:#4b5e73}
+  .dc-foot,.glossary{color:#4b5e73}
   .conf,.kstrip,.chg-tag,.st-badge,.ev-code,.cls-banner{font-size:10.5pt;background:#f6f8fb;border-color:#b8c4d1;color:#31465c}
   .conf.c-high{color:#14603f;background:#edfaf3;border-color:#7cc4a0}
   .conf.c-med{color:#7c5000;background:#fff8ea;border-color:#cfa95a}
@@ -975,7 +975,7 @@ def normalize_digits(s: str) -> str:
 
 def inline(text: str, defs: dict = None) -> str:
     """تحويل العناصر المضمّنة: عريض، مائل، كود، روابط، استشهادات."""
-    t = esc(text)
+    t = esc(_public_text(text))
     t = isolate_dtg(t)
     t = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", t)
     t = re.sub(r"(?<!\*)\*(?!\s)([^*\n]+?)\*(?!\*)", r"<em>\1</em>", t)
@@ -1020,6 +1020,51 @@ def inline(text: str, defs: dict = None) -> str:
         t,
     )
     return t
+
+
+_ZONE_DISPLAY_NAMES: dict[str, str] = {}
+
+
+def _set_zone_display_names(meta: dict):
+    """يضبط أسماء المناطق من البيانات الحاكمة قبل صياغة أي سطح ظاهر."""
+    global _ZONE_DISPLAY_NAMES
+    names = {}
+    threat_zones = (meta or {}).get("threat_zones") or {}
+    for zone in threat_zones.get("zones") or []:
+        if not isinstance(zone, dict):
+            continue
+        zone_id = str(zone.get("id") or "").strip().upper()
+        name = str(zone.get("name") or "").strip()
+        if re.fullmatch(r"Z[1-5]", zone_id) and name:
+            names[zone_id] = name
+    top_id = str(threat_zones.get("top_zone_id") or "").strip().upper()
+    top_name = str(threat_zones.get("top_zone") or "").strip()
+    if re.fullmatch(r"Z[1-5]", top_id) and top_name:
+        names.setdefault(top_id, top_name)
+    _ZONE_DISPLAY_NAMES = names
+
+
+def _public_text(value) -> str:
+    """نص ظاهر للقارئ بلا رموز قطاعات أو ألفاظ محظورة في السطح العام."""
+    text = _value_text(value)
+    for zone_id, name in sorted(_ZONE_DISPLAY_NAMES.items(), key=lambda item: len(item[0]), reverse=True):
+        text = re.sub(
+            rf"(?<![A-Za-z0-9]){re.escape(zone_id)}\s*[—–-]\s*{re.escape(name)}",
+            name,
+            text,
+        )
+        text = re.sub(rf"(?<![A-Za-z0-9]){re.escape(zone_id)}\b", name, text)
+    text = re.sub(r"(?<![A-Za-z0-9])Z[1-5]\b\s*[—–-]?\s*", "", text)
+    for source, replacement in (
+        ("المواضع", "المواقع"),
+        ("الموضع", "الموقع"),
+        ("مواضع", "مواقع"),
+        ("موضع", "موقع"),
+        ("لا بلاغ", "لم يصدر بلاغ"),
+        ("غير محدد المصدر", "غير معلوم المصدر"),
+    ):
+        text = text.replace(source, replacement)
+    return re.sub(r"\s{2,}", " ", text).strip()
 
 
 def icon(name: str) -> str:
@@ -1295,7 +1340,7 @@ ABSENCE = {
     "classification": "قيد التثبّت",
     "reliability": "غير مقيّمة",
     "time": "التوقيت غير مسجّل في المصدر",
-    "place": "الموقع غير محدد في المصدر",
+    "place": "المنطقة كاملة",
     "source": "غير متاح",
     "source_url": "الرابط الرسمي غير مدرج في الدفتر",
     "translation": "الترجمة غير مدرجة في الدفتر",
@@ -1438,11 +1483,42 @@ def _event_description(event: dict) -> str:
 
 
 def _event_location(event: dict) -> str:
-    return _value_text(event.get("area") or event.get("location") or event.get("sector"))
+    missing = {"", "غير مكانية", "خارج القطاعات", "غير محددة", "غير محدد"}
+    candidates = (
+        event.get("zone_name"), event.get("area"), event.get("location"),
+        event.get("sector_name"), event.get("sector"),
+    )
+    for raw in candidates:
+        value = _public_text(raw)
+        if value and value not in missing:
+            return value
+    return ABSENCE["place"]
 
 
 def _event_sources(event: dict) -> str:
-    return _value_text(event.get("source") or event.get("sources"))
+    raw = _value_text(event.get("source") or event.get("sources"))
+    if not raw:
+        return ""
+    # تُستخرج الجهة الحقيقية من بداية المصدر أو من مسار المصدر الأصلي عند
+    # ورود وسم وصفي مثل «نقل إعلامي تركي» بدل اسم الجهة.
+    for marker in (" نقلًا عن ", " نقلاً عن ", " نقل عن "):
+        if marker in raw:
+            prefix = raw.split(marker, 1)[0].strip(" ·—-،")
+            if prefix and "إعلام" not in prefix and "وسيلة" not in prefix:
+                return _public_text(prefix)
+    generic = re.search(r"نقل\s*(?:إعلامي|من وسيلة إعلام|عن وسائل|عن وسيلة)", raw)
+    if generic:
+        provenance = _value_text(event.get("source_excerpt_from"))
+        match = re.search(r"\b\d+\.\s*([^·]+?)\s*·\s*item\b", provenance, flags=re.I)
+        if match:
+            candidate = match.group(1).strip()
+            if candidate and "/" not in candidate and "feeds" not in candidate.lower():
+                return _public_text(candidate)
+        for key in ("source_name", "publisher", "outlet", "source_label"):
+            candidate = _value_text(event.get(key))
+            if candidate and not re.search(r"نقل\s*(?:إعلامي|من وسيلة إعلام)", candidate):
+                return _public_text(candidate)
+    return _public_text(raw)
 
 
 def _event_time(event: dict) -> tuple[str, bool]:
@@ -1522,9 +1598,7 @@ def _event_fields_html(event: dict, defs) -> tuple[str, bool]:
     date_line = f"{date_text} · {time_text}" if has_time else date_text
     rows = [_field_row(4, "التاريخ والوقت", date_line, defs)]
 
-    sector = _value_text(event.get("sector_id"))
-    area = _value_text(event.get("area"))
-    place = " · ".join(part for part in (sector, area) if part) or ABSENCE["place"]
+    place = _event_location(event)
     rows.append(_field_row(5, "الموقع", place, defs))
 
     source_text = _event_sources(event) or ABSENCE["source"]
@@ -2006,6 +2080,22 @@ def _section_anchor_map(sections):
     return {sec["title"]: f"sec-{idx + 1:02d}" for idx, sec in enumerate(sections)}
 
 
+def _reorder_report_sections(sections):
+    """قرار المالك 2026-11-04 (ملاحظة 5): تبديل موضعَي «سجل الأحداث» و«مؤشرات الموقف» فقط."""
+    event_keys = ("سجل الأحداث", "الوقائع الجديدة", "الوقائع الأمنية")
+    out = list(sections)
+    i_ev = i_ind = None
+    for i, sec in enumerate(out):
+        title = sec.get("title", "")
+        if i_ev is None and any(k in title for k in event_keys):
+            i_ev = i
+        if i_ind is None and "مؤشرات الموقف" in title:
+            i_ind = i
+    if i_ev is not None and i_ind is not None and i_ev != i_ind:
+        out[i_ev], out[i_ind] = out[i_ind], out[i_ev]
+    return out
+
+
 def _subheading_anchor_map(section, section_id):
     out = {}
     n = 0
@@ -2125,6 +2215,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
     _mdate = re.search(r"(\d{4}-\d{2}-\d{2})", md_path.name)
     report_date = _mdate.group(1) if _mdate else ""
     validate_meta(meta, report_date=report_date)
+    _set_zone_display_names(meta)
     daily_events = load_daily_events(md_path, report_date)
     if report_date >= LIVE_EVENT_LEDGER_FROM and daily_events is None:
         raise BuildError("دفتر أحداث الفترة مفقود؛ لا يُبنى سجل الأحداث الحي بلا مصدر")
@@ -2167,6 +2258,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
                 _hidset.discard(_a)
         sections = [x for x in sections if not any(h in x["title"] for h in _hidset)]
         sections = sorted(sections, key=_order_key)
+        sections = _reorder_report_sections(sections)
     source_sections = list(parse_sections(md))
     # كتل خاصة بكل قسم: خريطة عنوان القسم إلى اسم الكتلة
     blocks_map = meta.get("blocks") or {}
@@ -2237,8 +2329,14 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
     kpis = meta.get("hero_kpis", [])
     if kpis:
         modern = _modern_hero_kpis(report_date)
-        if modern and (len(kpis) != 8 or sorted(k.get("row") for k in kpis) != [1, 1, 1, 1, 2, 2, 2, 2]):
-            raise BuildError("hero_kpis يجب أن يحوي صفًا أول من 4 وصفًا ثانيًا من 4؛ فشل مغلق")
+        if modern:
+            rows = {}
+            for k in kpis:
+                rows.setdefault(int(k.get("row") or 1), []).append(k)
+            # قرار المالك 2026-11-04: الصف الأول 4 بطاقات، والصفوف التالية 3 (أو 2 للبطاقتين الدائمتين).
+            if (1 not in rows or len(rows[1]) != 4 or len(rows) < 2
+                    or any(len(v) not in (2, 3, 4) for r, v in rows.items() if r != 1)):
+                raise BuildError("hero_kpis: الصف الأول 4 بطاقات والصفوف التالية 3 (أو 2 للبطاقتين الدائمتين)؛ فشل مغلق")
         if modern:
             def _hero_tile(k):
                 acc = k.get("accent", "ok")
@@ -2405,7 +2503,6 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
     date_label = meta.get("date_label") or ""
     cls_html = BLK.classification_banner(meta.get("classification"))
     decision_html = "" if mode == "additions" else BLK.decision_card(meta.get("decision_card"), inline)
-    rkey_html = BLK.reading_key() if any("[" in l and "]" in l for l in md.split("\n")) else ""
     # سياسة الأقسام 2026-10-28: «ما تغيّر» منقول إلى صفحة «إضافات»
     if mode == "additions":
         changes_html = BLK.changes_block(meta.get("changes"), inline)
@@ -2417,7 +2514,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
     card_targets = _card_targets(source_sections, sections, meta, defs, report_date)
     screen_hero_html = "" if mode == "additions" else SCR.screen_hero(
         meta, esc=esc, inline=inline, report_date=report_date, official=official,
-        threat_cls=tcls, rkey_html=rkey_html, doc_mode=doc_mode,
+        threat_cls=tcls, doc_mode=doc_mode,
         archived=meta.get("screen_archived") or False, card_targets=card_targets)
     ledger_html = (
         f'<div class="glossary">السجل التراكمي: '
@@ -2460,7 +2557,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
     <h1>{esc(meta.get("headline") or title)}</h1>
     {threat_html}
     <div>
-      <p class="lede">{codes.demote(esc(meta.get("lede") or ""), report_date, official)}</p>
+      <p class="lede">{codes.demote(esc(_public_text(meta.get("lede") or "")), report_date, official)}</p>
       <div class="masthead-meta">{"".join(chips)}</div>
     </div>
   </header>
@@ -2471,8 +2568,6 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
   {screen_hero_html}
   {hero_map_html}
   {notice_html}
-  {rkey_html}
-
   <main>
     {changes_html}
     {"".join(body)}
@@ -2490,6 +2585,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
 </html>"""
     # سياسة عرض الرموز (2+5): تبسيط شامل لكل ما هو خارج قسم الوقائع
     doc = codes.demote_page(doc, report_date, official)
+    doc = _outside_special(_public_text, doc)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     doc = _outside_special(isolate_ltr, doc)
     # ك-408: بعد عزل الرموز اللاتينية تبقى مسافة بين الرمز وعلامة الترقيم التالية («UKMTO ،» · «UTC .»)،

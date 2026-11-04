@@ -22,6 +22,11 @@ try:
 except ImportError:  # عند التشغيل من جذر المشروع
     from generator import build_report as BR
 
+try:
+    from map_gulf import map_attribution_lines
+except ImportError:  # عند التشغيل من جذر المشروع
+    from generator.map_gulf import map_attribution_lines
+
 SITE = Path(__file__).resolve().parents[1]
 
 CSS = """
@@ -58,6 +63,7 @@ CSS = """
   padding:8px 11px;font-size:13px;line-height:1.7;word-break:break-word}
 .sx-ref a{color:var(--accent);text-decoration:none;display:inline-block;padding:3px 0;min-height:24px}
 .sx-ref span{display:block;color:var(--ink2);font-size:13px;margin-top:3px}
+.sx-map-attribution{margin:8px 0;font-size:12px;line-height:1.45;color:var(--ink2)}
 .sx-tbl{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
 .sx-tbl th,.sx-tbl td{border:1px solid var(--line);padding:7px 9px;text-align:start;vertical-align:top}
 .sx-tbl th{background:var(--panel);font-size:12.5px}
@@ -326,6 +332,7 @@ def build(dist: Path, quiet: bool = False) -> dict:
         f'<div class="sx-ref"><a href="{esc(r["url"])}" target="_blank" rel="noopener">{esc(r["name"])}</a> '
         f'<span>{esc(r["type"])} · الموثوقية {esc(r["rel"])} · المصداقية {esc(r["cred"])}</span></div>'
         for r in official if r['url'])
+    map_attribution = esc(' · '.join(map_attribution_lines()))
 
     table_html = '\n'.join(
         f'<tr><td class="n">{r["num"]}</td>'
@@ -379,6 +386,7 @@ def build(dist: Path, quiet: bool = False) -> dict:
   <div class="sx-refs">
 {refs_html if refs_html else '<div class="sx-note">لا مراجع مسجّلة بعد.</div>'}
   </div>
+  <p class="sx-map-attribution">{map_attribution}</p>
 
   <h2 class="sx-h2">موثوقية المصادر ومصداقيتها</h2>
   <div class="sx-note">الموثوقية تقيس الجهة (A مطلق · B جيد · C متوسط · D غير موثوق · E غير مؤكد · F لا يمكن الحكم).

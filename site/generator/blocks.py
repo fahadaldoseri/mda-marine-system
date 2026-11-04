@@ -290,13 +290,29 @@ def gaps_table(items, inline):
 def event_keys_table(items, inline):
     if not items:
         return ""
+    def display_area(item):
+        """اسم المنطقة فقط؛ لا تُعرض معرّفات القطاعات أو وسم عدم المكان."""
+        missing = {"غير مكانية", "خارج القطاعات", "غير محددة", "غير محدد", ""}
+        candidates = (
+            item.get("zone_name"), item.get("area"), item.get("location"),
+            item.get("sector_name"), item.get("sector"),
+        )
+        for raw in candidates:
+            value = str(raw or "").strip()
+            if value in missing:
+                continue
+            value = re.sub(r"(?<![A-Za-z0-9])Z[1-5](?:\s*[—–-]\s*)?", "", value).strip(" ·—–-")
+            if value and value not in missing:
+                return value
+        return "المنطقة كاملة"
+
     rows = []
     for it in items:
         st = str(it.get("status", "")).strip()
         cls = STATUS_CLASS.get(st, "s-stable")
         rows.append([
             Raw(f'<bdi class="bidi ev-code">{esc(code_label(it.get("code", ""), it.get("ref", ""), f'{it.get("note", "")} {it.get("title", "")}'))}</bdi>'),
-            Raw(inline(it.get("area", ""))),
+            Raw(inline(display_area(it))),
             Raw(f'<span class="st-badge {cls}">{esc(st)}</span>'),
             Raw(inline(it.get("note", ""))),
         ])
@@ -351,7 +367,11 @@ def glossary(items):
             if term and replacement:
                 public.append((term, replacement))
         else:
-            public.append((str(key).strip(), str(value).strip()))
+            term = str(key).strip()
+            # الرموز داخل البيانات فقط؛ القاموس العام لا يعرض مفاتيح القطاعات.
+            if re.fullmatch(r"Z[1-5]", term):
+                continue
+            public.append((term, str(value).strip()))
     if not public:
         return ""
     # عطل ك-43: صيغة البند الواحد في كل سطر جعلت القاموس يمتد صفحة كاملة عند
@@ -359,19 +379,6 @@ def glossary(items):
     # تحفظ كل تعريف وترشّد المساحة: البنود متتابعة تفصلها علامة ·.
     parts = " · ".join(f"<b>{esc(k)}:</b> {esc(v)}" for k, v in public)
     return f'<div class="glossary"><b>قاموس الرموز والمصطلحات:</b> {parts}</div>'
-
-
-def reading_key():
-    return (
-        '<div class="rkey no-print">'
-        '<span class="rkey-t">مفتاح القراءة:</span>'
-        '<span class="rk k-fact">واقعة مؤكدة</span>'
-        '<span class="rk k-est">تقدير تحليلي</span>'
-        '<span class="rk k-info">بند إعلامي</span>'
-        '<span class="rk k-bg">لا جديد</span>'
-        '<span class="rk k-watch">تحت المراقبة</span>'
-        "</div>"
-    )
 
 
 def classification_banner(value):
@@ -470,17 +477,6 @@ STYLE_BLOCKS = """
 .dc-row.risk-low .dc-v{color:var(--ok)}
 .dc-foot{font-size:12.5px;color:var(--faint);margin-top:10px;border-top:1px solid var(--line);padding-top:8px}
 
-/* ---------- مفتاح القراءة ---------- */
-.rkey{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin:18px 0 0;font-size:12.5px;color:var(--muted)}
-.rkey-t{color:var(--faint)}
-.rk{display:inline-flex;align-items:center;gap:7px}
-.rk::before{content:"";width:3px;height:14px;border-radius:2px;background:var(--muted)}
-.rk.k-fact::before{background:var(--ok)}
-.rk.k-est::before{background:var(--info)}
-.rk.k-info::before{background:var(--muted)}
-.rk.k-bg::before{background:var(--line-2)}
-.rk.k-watch::before{background:var(--warn)}
-
 /* ---------- شرائط تمييز الحقيقة والتقدير ---------- */
 ul.d-kinds{list-style:none;padding-inline-start:0}
 ul.d-kinds li{position:relative;padding-inline-start:14px;margin:9px 0}
@@ -557,7 +553,7 @@ STYLE_PRINT_BLOCKS = """
   .dc-row.risk-high .dc-v{color:#9d2b25}
   .dc-row.risk-med .dc-v{color:#7d5200}
   .dc-row.risk-low .dc-v{color:#166b45}
-  .dc-foot,.rkey,.glossary{color:#4b5e73}
+  .dc-foot,.glossary{color:#4b5e73}
   .conf,.kstrip,.chg-tag,.st-badge,.ev-code,.cls-banner{font-size:10.5pt;background:#f6f8fb;border-color:#b8c4d1;color:#31465c}
   .conf.c-high{color:#14603f;background:#edfaf3;border-color:#7cc4a0}
   .conf.c-med{color:#7c5000;background:#fff8ea;border-color:#cfa95a}

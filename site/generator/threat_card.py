@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""بطاقة مستوى التهديد بالقطاعات الأربعة — مصدر رسم واحد للشاشة والطباعة.
+"""بطاقة مستوى التهديد بالقطاعات — مصدر رسم واحد للشاشة والطباعة.
 
 تُبنى من ملف حاكم واحد: brain-marine-news/web/zones/<date>.json
 (مُولَّد بـ tools/classify_zones.py من السلّم المعتمد وسجل القطاعات والأحكام المحوكمة).
@@ -61,7 +61,7 @@ T_CONF = "مؤكدة"
 T_PROB = "مرجّحة"
 T_UNCONFIRMED_QUAL = "مؤهلة غير مؤكدة"
 T_EXCL = "مستثناة"
-T_NONSPATIAL = "غير مكانية"
+T_NONSPATIAL = "موقع غير محدد"
 T_TOTAL = "إجمالي"
 T_SEP = "·"
 T_DASH = "—"
@@ -102,7 +102,6 @@ def zones_css(zj: dict) -> str:
 .tz-sub{{margin:0;font-size:.85rem;opacity:.85}}
 .tz-zones{{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px}}
 .tz-z{{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:8px 10px;border:1px solid var(--line,#243244);border-radius:10px}}
-.tz-id{{font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--muted,#93a4bd);border:1px solid var(--line,#243244);border-radius:6px;padding:0 5px}}
 .tz-top{{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:12px;align-items:center;margin:10px 0 8px}}
 .tz-top-main{{display:flex;flex-wrap:wrap;gap:10px;align-items:center}}
 .tz-chips{{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}}
@@ -136,7 +135,7 @@ def zones_css(zj: dict) -> str:
   .tz-sub{{font-size:8pt}}
   .tz-zones{{margin:1.1mm 0 0;gap:.7mm}}
   .tz-z{{padding:1mm 1.4mm;border-radius:1.2mm;gap:2mm;grid-template-columns:auto minmax(0,1fr) auto auto}}
-  .tz-id,.tz-chip{{font-size:7.6pt}}
+  .tz-chip{{font-size:7.6pt}}
   .tz-n,.tz-lv,.tz-c,.tz-dot{{font-size:8pt;line-height:1.35}}
   .tz-basis{{margin-top:1.1mm;padding-top:.9mm}}
   .tz-basis summary{{font-size:8.5pt}}
@@ -193,7 +192,6 @@ def zones_card(zj: dict, *, variant: str = "screen") -> str:
         ztok = level_token(z.get("level", ""))
         rows.append(
             '<li class="tz-z">'
-            f'<span class="tz-id">{z.get("id", "")}</span>'
             f'<span class="tz-n">{z.get("name", "")}</span>'
             f'<span class="tz-lv t-{ztok}"><span class="tz-dot t-{ztok}" aria-hidden="true">{MARKERS[ztok]}</span> {z.get("level", "")}</span>'
             f'<span class="tz-c">{count_phrase(len(z.get("qualifying_codes") or []))}</span>'
@@ -258,7 +256,6 @@ def zones_strip(zj: dict) -> str:
             )
         rows.append(
             "<li>"
-            f'<span class="zs-id">{z.get("id","")}</span>'
             f'<span class="zs-nm">{z.get("name","")}</span>'
             f'<span class="zs-lv t-{tok}"><span aria-hidden="true">{MARKERS[tok]}</span> {z.get("level","")}</span>'
             '<span class="zs-c">'
