@@ -78,15 +78,30 @@
       "confidence": "متوسطة"
     },
     {
-      "id": "imo-confirmed-attacks",
-      "title": "هجمات مؤكدة على سفن",
-      "today": 0,
-      "cumulative": 122,
-      "updated": "2026-10-31",
+      "id": "imo-confirmed-incidents",
+      "title": "سجل الحوادث المؤكدة من IMO",
+      "today": 6,
+      "cumulative": 128,
+      "updated": "2026-11-03",
       "definition": "واقعة مؤكدة على سفينة تجارية مدرجة في قائمة IMO الرسمية؛ القائمة مرجع الحوادث المؤكدة ولا تُرفع فيها الروايات.",
-      "basis": "عدّ مباشر من القائمة الرسمية للمنظمة البحرية الدولية (appendices/imo-incidents.json)؛ لا تُرفع فيها الروايات ولا تُحتسب غير المؤكدة. قاعدة updated: تاريخ آخر تحديث لملف القائمة الرسمية (mtime) لأن القائمة تُؤرَّخ بيوم وشهر بلا سنة. الرقم 122 معياره قائمة IMO الرسمية؛ لا يُقارن بعدد سجلات المشروع الداخلية لأن المعيارين مختلفان.",
+      "basis": "عدّ مباشر من القائمة الرسمية للمنظمة البحرية الدولية (appendices/imo-incidents.json)؛ لا تُرفع فيها الروايات ولا تُحتسب غير المؤكدة. قاعدة today: الفرق بين totals الحالية وprevious.totals؛ قاعدة updated: source.as_at في الصفحة الرسمية. الرقم 122 معياره قائمة IMO الرسمية؛ لا يُقارن بعدد سجلات المشروع الداخلية لأن المعيارين مختلفان.",
       "sources": [
-        "appendices/imo-incidents.json"
+        "appendices/imo-incidents.json",
+        "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx"
+      ],
+      "confidence": "عالية"
+    },
+    {
+      "id": "imo-seafarer-deaths",
+      "title": "أعداد الوفيات من IMO",
+      "today": 0,
+      "cumulative": 24,
+      "updated": "2026-11-03",
+      "definition": "عدد وفيات البحارة المؤكد في القائمة الرسمية للمنظمة البحرية الدولية.",
+      "basis": "عدّ مباشر من القائمة الرسمية للمنظمة البحرية الدولية (appendices/imo-incidents.json)؛ لا يُستنتج من دفتر المشروع. قاعدة today: الفرق بين totals الحالية وprevious.totals؛ قاعدة updated: source.as_at في الصفحة الرسمية.",
+      "sources": [
+        "appendices/imo-incidents.json",
+        "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx"
       ],
       "confidence": "عالية"
     },

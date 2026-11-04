@@ -1,0 +1,93 @@
+{
+  "created_by": "mark_components",
+  "created_reason": "bootstrap قبل اشتقاق أول مكوّن في خط اليوم",
+  "date": "2026-11-04",
+  "feeds": {
+    "browser_only": [],
+    "checked": 60,
+    "derived_from": "feeds/feeds-2026-11-04.status.json",
+    "empty": [],
+    "fail_ratio": 0.0,
+    "failed": 0,
+    "failed_feeds": [],
+    "note": "قياسات متأخرة",
+    "ok": 60,
+    "stale": [
+      12,
+      13,
+      20,
+      30,
+      32
+    ],
+    "status": "degraded"
+  },
+  "final_gate": {
+    "blocked_steps": [],
+    "dir": "logs/gate-2026-11-04",
+    "exit_code": 1,
+    "note": "نتيجة بوابة التسليم النهائية — كُتبت العلامة بعدها.",
+    "status": "warn"
+  },
+  "finished_utc": "2026-11-04T03:48:13Z",
+  "gate_finished_utc": "2026-11-04T16:37:35Z",
+  "gate_note": "علامة مرحلة الخط اليومي — بوابة التسليم لم تُشغَّل بعد.",
+  "gate_state": "not_run",
+  "language": {
+    "banned_terms": 0,
+    "edit_pass": {
+      "applied": true,
+      "by_category": {
+        "أسلوب": 15,
+        "ترجمة حرفية": 1,
+        "مفردة": 11
+      },
+      "changes": 27,
+      "edited": 6,
+      "model": "gpt-5-mini",
+      "rejected": 9,
+      "sections": 16
+    },
+    "long_sentences": 5,
+    "orthography_errors": 0,
+    "waw_pct": 2.4,
+    "waw_runs3": 0
+  },
+  "ledger_merge": {
+    "added_this_run_count": 5,
+    "derived_from": "cumulative-2026/daily/2026-11-04.json",
+    "merged_before_marker": true,
+    "note": "دُمج ملف اليوم في الدفتر الجامع (5 واقعة)",
+    "status": "ok"
+  },
+  "ofac": {
+    "derived_from": "watchlist/ofac-targets.txt + archive/ofac-screen-latest.json",
+    "list": "https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/SDN.CSV",
+    "matches": [],
+    "note": "فُحص 11 مستهدفًا — الحالة: ok",
+    "results_file": "archive/ofac-screen-latest.json",
+    "status": "ok",
+    "targets": 11
+  },
+  "originals": {
+    "derived_from": "archive/originals/2026-11-04/",
+    "empty_shell": 0,
+    "failed": 0,
+    "healthy": 3,
+    "manifest": "archive/originals/2026-11-04/manifest.json",
+    "note": "حُفظت الأصول في archive/originals/2026-11-04",
+    "status": "ok"
+  },
+  "overall": "degraded",
+  "pipeline_version": 4,
+  "report_present_at_pipeline_end": true,
+  "schema_version": 1,
+  "sources": {
+    "approved": 62,
+    "checked": 60,
+    "failed": 0,
+    "failed_names": [],
+    "ok": 60,
+    "status_file": "feeds/feeds-2026-11-04.status.json"
+  },
+  "written_stage": "final"
+}

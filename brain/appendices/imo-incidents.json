@@ -3,34 +3,87 @@
   "description": "الأرقام والقائمة الرسمية للمنظمة البحرية الدولية (IMO) للوقائع المؤكدة على السفن التجارية في مضيق هرمز والشرق الأوسط. مصدر حاكم واحد لبطاقة «هجمات مؤكدة على سفن» وسطر المرجع أسفل الخريطة.",
   "source": {
     "organization": "International Maritime Organization (IMO)",
-    "page_title": "Middle East - Highlighted (confirmed) incidents",
+    "page_title": "Middle East - Highlighted (Confirmed) incidents",
     "url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
     "retrieved": "2026-10-31",
-    "list_updated": "2026-10-30"
+    "list_updated": "2026-10-30",
+    "as_at": "3 November 2026",
+    "html_sha256": "1c140f7f0fbc221561f19720f0a8a0f15f28a29ff3ef97aa818ac6f27441f3ee"
   },
   "totals": {
-    "confirmed_incidents": 122,
+    "confirmed_incidents": 128,
     "confirmed_seafarer_deaths": 24
   },
   "definition": "واقعة مؤكدة على سفينة تجارية مدرجة في قائمة IMO الرسمية؛ القائمة مرجع الحوادث المؤكدة ولا تُرفع فيها الروايات.",
   "comparison_warning": "الرقم 122 معياره قائمة IMO الرسمية؛ لا يُقارن بعدد سجلات المشروع الداخلية لأن المعيارين مختلفان.",
   "incidents": [
     {
-      "date": "23 October",
-      "vessel": "GHANA PROSPERITY",
-      "imo_number": "9732541",
+      "date": "1 November",
+      "date_iso": "2026-11-01",
+      "vessel": "LARGO ATOM",
+      "imo_number": "1034747",
+      "location": "72NM East of Ras Al Khafji, Saudi Arabia",
+      "description": "Damaged. No pollution."
+    },
+    {
+      "date": "1 November",
+      "date_iso": "2026-11-01",
+      "vessel": "SELAT STORM",
+      "imo_number": "9266657",
+      "location": "Strait of Hormuz",
+      "description": "Damaged. Pollution unknown."
+    },
+    {
+      "date": "30 October",
+      "date_iso": "2026-10-30",
+      "vessel": "AL MAYEDA",
+      "imo_number": "9397298",
+      "location": "40NM South of Lavan Island, Iran",
+      "description": "Damaged. No pollution."
+    },
+    {
+      "date": "29 October",
+      "date_iso": "2026-10-29",
+      "vessel": "RITI",
+      "imo_number": "9249075",
+      "location": "Strait of Hormuz",
+      "description": "Damaged. No pollution."
+    },
+    {
+      "date": "29 October",
+      "date_iso": "2026-10-29",
+      "vessel": "LOUISE 1",
+      "imo_number": "9290323",
+      "location": "25NM Northeast of Khasab, Oman",
+      "description": "Damaged. No pollution."
+    },
+    {
+      "date": "28 October",
+      "date_iso": "2026-10-28",
+      "vessel": "ARZANAH",
+      "imo_number": "9928023",
       "location": "Strait of Hormuz",
       "description": "Damaged. No pollution."
     },
     {
       "date": "23 October",
-      "vessel": "LEONORA KOSAN",
-      "imo_number": "9390953",
+      "date_iso": "2026-10-23",
+      "vessel": "GHANA PROSPERITY (9732541",
+      "imo_number": "",
+      "location": "Strait of Hormuz",
+      "description": "Damaged. No pollution."
+    },
+    {
+      "date": "23 October",
+      "date_iso": "2026-10-23",
+      "vessel": "LEONORA KOSAN (9390953",
+      "imo_number": "",
       "location": "6NM northeast of Limah, Oman",
       "description": "Damaged. No pollution."
     },
     {
       "date": "20 October",
+      "date_iso": "2026-10-20",
       "vessel": "SOYIA",
       "imo_number": "9263916",
       "location": "30NM southeast of Al Faw, Iraq",
@@ -38,6 +91,7 @@
     },
     {
       "date": "20 October",
+      "date_iso": "2026-10-20",
       "vessel": "AL DASMA",
       "imo_number": "9653446",
       "location": "Strait of Hormuz",
@@ -45,13 +99,15 @@
     },
     {
       "date": "19 October",
-      "vessel": "CHLOE (MIVERVA V)",
+      "date_iso": "2026-10-19",
+      "vessel": "CHLOE (MIVERVA V",
       "imo_number": "9315367",
       "location": "121NM from coast of Oman",
       "description": "Damaged. No pollution."
     },
     {
       "date": "18 October",
+      "date_iso": "2026-10-18",
       "vessel": "JIF BARRACUDA",
       "imo_number": "9345506",
       "location": "Northeast of Khor Fakkan, UAE",
@@ -59,6 +115,7 @@
     },
     {
       "date": "16 October",
+      "date_iso": "2026-10-16",
       "vessel": "LOYALTY",
       "imo_number": "9182306",
       "location": "78 NM northeast of Al Jubail, Saudi Arabia",
@@ -66,6 +123,7 @@
     },
     {
       "date": "16 October",
+      "date_iso": "2026-10-16",
       "vessel": "ST3",
       "imo_number": "9220964",
       "location": "68 NM from Al Jubail",
@@ -73,6 +131,7 @@
     },
     {
       "date": "13 October",
+      "date_iso": "2026-10-13",
       "vessel": "GFS PRIDE",
       "imo_number": "9349045",
       "location": "Strait of Hormuz",
@@ -80,6 +139,7 @@
     },
     {
       "date": "13 October",
+      "date_iso": "2026-10-13",
       "vessel": "GFS GISELLE",
       "imo_number": "9704661",
       "location": "6NM from the coast of Oman",
@@ -87,6 +147,7 @@
     },
     {
       "date": "13 October",
+      "date_iso": "2026-10-13",
       "vessel": "AL SAADIYAT",
       "imo_number": "9760598",
       "location": "1 NM from the coast of Oman",
@@ -94,6 +155,7 @@
     },
     {
       "date": "11 October",
+      "date_iso": "2026-10-11",
       "vessel": "AL MAQAM",
       "imo_number": "9732577",
       "location": "Strait of Hormuz",
@@ -101,6 +163,7 @@
     },
     {
       "date": "11 October",
+      "date_iso": "2026-10-11",
       "vessel": "DP WORLD KAVERI",
       "imo_number": "9363429",
       "location": "Strait of Hormuz",
@@ -108,6 +171,7 @@
     },
     {
       "date": "11 October",
+      "date_iso": "2026-10-11",
       "vessel": "KITION M",
       "imo_number": "9321160",
       "location": "Strait of Hormuz",
@@ -115,6 +179,7 @@
     },
     {
       "date": "11 October",
+      "date_iso": "2026-10-11",
       "vessel": "EVER VICT",
       "imo_number": "9266774",
       "location": "Strait of Hormuz",
@@ -122,6 +187,7 @@
     },
     {
       "date": "11 October",
+      "date_iso": "2026-10-11",
       "vessel": "ANGOLA PROSPERITY",
       "imo_number": "9896414",
       "location": "8NM from the coast of Oman",
@@ -129,6 +195,7 @@
     },
     {
       "date": "11 October",
+      "date_iso": "2026-10-11",
       "vessel": "PETRO DOLPHIN",
       "imo_number": "1072294",
       "location": "Sohar Anchorage, Gulf of Oman",
@@ -136,13 +203,15 @@
     },
     {
       "date": "10 October",
-      "vessel": "AKIRA SUN (OCEAN MOLICA)",
+      "date_iso": "2026-10-10",
+      "vessel": "AKIRA SUN (OCEAN MOLICA",
       "imo_number": "9139270",
       "location": "Gulf of Oman",
       "description": "Damaged. No pollution."
     },
     {
       "date": "10 October",
+      "date_iso": "2026-10-10",
       "vessel": "VALTHERA",
       "imo_number": "9296389",
       "location": "Strait of Hormuz - Oman TTW",
@@ -150,13 +219,15 @@
     },
     {
       "date": "9 October",
+      "date_iso": "2026-10-09",
       "vessel": "GEM NO. 2",
       "imo_number": "9735373",
       "location": "13NM west of Al Jazeera, UAE",
-      "description": "Damaged."
+      "description": "Damaged. Pollution reported."
     },
     {
       "date": "7 October",
+      "date_iso": "2026-10-07",
       "vessel": "ACERS",
       "imo_number": "9301902",
       "location": "51NM north of Madinat ash Shamal, Qatar",
@@ -164,6 +235,7 @@
     },
     {
       "date": "6 October",
+      "date_iso": "2026-10-06",
       "vessel": "ST1",
       "imo_number": "9256999",
       "location": "2NM off the coast of Oman, near Jazirat",
@@ -171,6 +243,7 @@
     },
     {
       "date": "5 October",
+      "date_iso": "2026-10-05",
       "vessel": "MARAN GAS MYSTRAS",
       "imo_number": "9658238",
       "location": "Strait of Hormuz",
@@ -178,6 +251,7 @@
     },
     {
       "date": "5 October",
+      "date_iso": "2026-10-05",
       "vessel": "ON PEACE",
       "imo_number": "9893204",
       "location": "Strait of Hormuz",
@@ -185,6 +259,7 @@
     },
     {
       "date": "4 October",
+      "date_iso": "2026-10-04",
       "vessel": "GAS VELA",
       "imo_number": "9969845",
       "location": "Strait of Hormuz",
@@ -192,6 +267,7 @@
     },
     {
       "date": "4 October",
+      "date_iso": "2026-10-04",
       "vessel": "CAMEROON PROSPERITY",
       "imo_number": "93151598",
       "location": "Strait of Hormuz",
@@ -199,6 +275,7 @@
     },
     {
       "date": "4 October",
+      "date_iso": "2026-10-04",
       "vessel": "LIPSI",
       "imo_number": "1025033",
       "location": "Strait of Hormuz",
@@ -206,6 +283,7 @@
     },
     {
       "date": "3 October",
+      "date_iso": "2026-10-03",
       "vessel": "GHANA PROSPERITY",
       "imo_number": "9732541",
       "location": "Strait of Hormuz",
@@ -213,6 +291,7 @@
     },
     {
       "date": "2 October",
+      "date_iso": "2026-10-02",
       "vessel": "UHUD",
       "imo_number": "9254939",
       "location": "Strait of Hormuz",
@@ -220,6 +299,7 @@
     },
     {
       "date": "2 October",
+      "date_iso": "2026-10-02",
       "vessel": "PROMISE",
       "imo_number": "1038896",
       "location": "4NM east of Oman",
@@ -227,6 +307,7 @@
     },
     {
       "date": "1 October",
+      "date_iso": "2026-10-01",
       "vessel": "KAZIMAH III",
       "imo_number": "9329693",
       "location": "Strait of Hormuz",
@@ -234,6 +315,7 @@
     },
     {
       "date": "29 September",
+      "date_iso": "2026-09-29",
       "vessel": "AL RUWAIS",
       "imo_number": "9828405",
       "location": "Strait of Hormuz",
@@ -241,6 +323,7 @@
     },
     {
       "date": "29 September",
+      "date_iso": "2026-09-29",
       "vessel": "SINBAD",
       "imo_number": "9413688",
       "location": "Strait of Hormuz",
@@ -248,6 +331,7 @@
     },
     {
       "date": "29 September",
+      "date_iso": "2026-09-29",
       "vessel": "MERSIN PROSPERITY",
       "imo_number": "9327554",
       "location": "Strait of Hormuz",
@@ -255,6 +339,7 @@
     },
     {
       "date": "28 September",
+      "date_iso": "2026-09-28",
       "vessel": "AL FUNTAS",
       "imo_number": "9653408",
       "location": "Strait of Hormuz",
@@ -262,6 +347,7 @@
     },
     {
       "date": "23 September",
+      "date_iso": "2026-09-23",
       "vessel": "CAPE DAO",
       "imo_number": "9219020",
       "location": "15NM northeast of Khasab, Oman",
@@ -269,6 +355,7 @@
     },
     {
       "date": "21 September",
+      "date_iso": "2026-09-21",
       "vessel": "AL MARYAH",
       "imo_number": "9393682",
       "location": "Strait of Hormuz",
@@ -276,6 +363,7 @@
     },
     {
       "date": "21 September",
+      "date_iso": "2026-09-21",
       "vessel": "LR STEPHANIE",
       "imo_number": "9282625",
       "location": "Strait of Hormuz",
@@ -283,6 +371,7 @@
     },
     {
       "date": "18 September",
+      "date_iso": "2026-09-18",
       "vessel": "STI STEADFAST",
       "imo_number": "9719719",
       "location": "Strait of Hormuz",
@@ -290,6 +379,7 @@
     },
     {
       "date": "17 September",
+      "date_iso": "2026-09-17",
       "vessel": "TREND",
       "imo_number": "9477177",
       "location": "16NM northeast of Khasab, Oman",
@@ -297,6 +387,7 @@
     },
     {
       "date": "12 September",
+      "date_iso": "2026-09-12",
       "vessel": "EL GAIA",
       "imo_number": "9325336",
       "location": "Strait of Hormuz",
@@ -304,6 +395,7 @@
     },
     {
       "date": "10 September",
+      "date_iso": "2026-09-10",
       "vessel": "ROMANCE",
       "imo_number": "9468815",
       "location": "4NM west of Khasab, Oman",
@@ -311,6 +403,7 @@
     },
     {
       "date": "9 September",
+      "date_iso": "2026-09-09",
       "vessel": "HERCULES STAR",
       "imo_number": "9916135",
       "location": "24NM northwest of Port Rashid, UAE",
@@ -318,6 +411,7 @@
     },
     {
       "date": "9 September",
+      "date_iso": "2026-09-09",
       "vessel": "NEW ANDROS",
       "imo_number": "9294252",
       "location": "28NM south-east of Al-Faw, Iraq",
@@ -325,6 +419,7 @@
     },
     {
       "date": "8 September",
+      "date_iso": "2026-09-08",
       "vessel": "HORIZON 1",
       "imo_number": "9130456",
       "location": "38NM northeast of Dibba, UAE",
@@ -332,6 +427,7 @@
     },
     {
       "date": "7 September",
+      "date_iso": "2026-09-07",
       "vessel": "AL DASMA",
       "imo_number": "9653446",
       "location": "Southeast of Strait of Hormuz",
@@ -339,6 +435,7 @@
     },
     {
       "date": "31 August",
+      "date_iso": "2026-08-31",
       "vessel": "SIDR",
       "imo_number": "9854715",
       "location": "17NM east of Khasab, Oman",
@@ -346,6 +443,7 @@
     },
     {
       "date": "31 August",
+      "date_iso": "2026-08-31",
       "vessel": "SENEGAL PROSPERITY",
       "imo_number": "9532757",
       "location": "17NM east of Khasab, Oman",
@@ -353,6 +451,7 @@
     },
     {
       "date": "29 August",
+      "date_iso": "2026-08-29",
       "vessel": "BURGAN",
       "imo_number": "9656022",
       "location": "Strait of Hormuz",
@@ -360,6 +459,7 @@
     },
     {
       "date": "28 August",
+      "date_iso": "2026-08-28",
       "vessel": "AL YARMOUK",
       "imo_number": "9653422",
       "location": "6NM southeast of the Umm Al-Fayarin area, Oman",
@@ -367,6 +467,7 @@
     },
     {
       "date": "25 August",
+      "date_iso": "2026-08-25",
       "vessel": "AL SALAM II",
       "imo_number": "9328168",
       "location": "Strait of Hormuz",
@@ -374,6 +475,7 @@
     },
     {
       "date": "24 August",
+      "date_iso": "2026-08-24",
       "vessel": "METRO VENETIAN",
       "imo_number": "1013391",
       "location": "9NM northeast of Ash Shishah, Oman",
@@ -381,6 +483,7 @@
     },
     {
       "date": "17 August",
+      "date_iso": "2026-08-17",
       "vessel": "MINOAN DIGNITY",
       "imo_number": "9294484",
       "location": "Strait of Hormuz",
@@ -388,6 +491,7 @@
     },
     {
       "date": "15 August",
+      "date_iso": "2026-08-15",
       "vessel": "RIYAN STAR",
       "imo_number": "9156761",
       "location": "Strait of Hormuz",
@@ -395,6 +499,7 @@
     },
     {
       "date": "14 August",
+      "date_iso": "2026-08-14",
       "vessel": "AL WATAN",
       "imo_number": "9615030",
       "location": "Strait of Hormuz",
@@ -402,6 +507,7 @@
     },
     {
       "date": "13 August",
+      "date_iso": "2026-08-13",
       "vessel": "NAVIG8 MESSI",
       "imo_number": "9482859",
       "location": "Strait of Hormuz",
@@ -409,6 +515,7 @@
     },
     {
       "date": "11 August",
+      "date_iso": "2026-08-11",
       "vessel": "VELA NOVA",
       "imo_number": "9136228",
       "location": "70NM south of Gwadar, Pakistan",
@@ -416,6 +523,7 @@
     },
     {
       "date": "9 August",
+      "date_iso": "2026-08-09",
       "vessel": "AL JABRIYAH II",
       "imo_number": "9329708",
       "location": "Strait of Hormuz",
@@ -423,6 +531,7 @@
     },
     {
       "date": "3 August",
+      "date_iso": "2026-08-03",
       "vessel": "MINOAN PIONEER",
       "imo_number": "9471630",
       "location": "20NM northeast of Al Khasab, Oman",
@@ -430,6 +539,7 @@
     },
     {
       "date": "31 July",
+      "date_iso": "2026-07-31",
       "vessel": "GASLOG SHANGHAI",
       "imo_number": "9600528",
       "location": "11NM northeast of Lima, Oman",
@@ -437,6 +547,7 @@
     },
     {
       "date": "24 July",
+      "date_iso": "2026-07-24",
       "vessel": "LAVINE",
       "imo_number": "8818219",
       "location": "Gulf of Oman",
@@ -444,6 +555,7 @@
     },
     {
       "date": "20 July",
+      "date_iso": "2026-07-20",
       "vessel": "KAIFAN",
       "imo_number": "9656046",
       "location": "8NM northeast of Limah, Oman",
@@ -451,6 +563,7 @@
     },
     {
       "date": "19 July",
+      "date_iso": "2026-07-19",
       "vessel": "ACHELOOS",
       "imo_number": "1087524",
       "location": "17NM east of Dibba, UAE",
@@ -458,6 +571,7 @@
     },
     {
       "date": "19 July",
+      "date_iso": "2026-07-19",
       "vessel": "KAVOMALEAS",
       "imo_number": "1042823",
       "location": "8NM northwest of Kumzar, Oman",
@@ -465,6 +579,7 @@
     },
     {
       "date": "16 July",
+      "date_iso": "2026-07-16",
       "vessel": "IDI",
       "imo_number": "9307982",
       "location": "19NM east of Khasab, Oman",
@@ -472,6 +587,7 @@
     },
     {
       "date": "15 July",
+      "date_iso": "2026-07-15",
       "vessel": "BELMA",
       "imo_number": "9289491",
       "location": "IVO Bushehr Province, Persian Gulf",
@@ -479,6 +595,7 @@
     },
     {
       "date": "14 July",
+      "date_iso": "2026-07-14",
       "vessel": "AL BAHYAH",
       "imo_number": "9937799",
       "location": "13 NM from the coast of Oman",
@@ -486,6 +603,7 @@
     },
     {
       "date": "14 July",
+      "date_iso": "2026-07-14",
       "vessel": "MOMBASA B",
       "imo_number": "9739501",
       "location": "13 NM from the coast of Oman",
@@ -493,6 +611,7 @@
     },
     {
       "date": "13 July",
+      "date_iso": "2026-07-13",
       "vessel": "STOLT MAGNESIUM",
       "imo_number": "9739317",
       "location": "40 NM from the coast of Oman",
@@ -500,6 +619,7 @@
     },
     {
       "date": "11 July",
+      "date_iso": "2026-07-11",
       "vessel": "GFS GALAXY",
       "imo_number": "9401271",
       "location": "9NM east of Oman",
@@ -507,6 +627,7 @@
     },
     {
       "date": "7 July",
+      "date_iso": "2026-07-07",
       "vessel": "CYPRUS PROSPERITY",
       "imo_number": "9595216",
       "location": "6NM east of Musandam Peninsula, Oman",
@@ -514,6 +635,7 @@
     },
     {
       "date": "6 July",
+      "date_iso": "2026-07-06",
       "vessel": "WEDYAN",
       "imo_number": "9524970",
       "location": "16NM east of Khor Fakkan, UAE",
@@ -521,6 +643,7 @@
     },
     {
       "date": "6 July",
+      "date_iso": "2026-07-06",
       "vessel": "AL REKAYYAT",
       "imo_number": "9397339",
       "location": "8NM east of Limah, Oman",
@@ -528,6 +651,7 @@
     },
     {
       "date": "27 June",
+      "date_iso": "2026-06-27",
       "vessel": "KIKU",
       "imo_number": "9329796",
       "location": "8NM off Oman",
@@ -535,6 +659,7 @@
     },
     {
       "date": "25 June",
+      "date_iso": "2026-06-25",
       "vessel": "EVER LOVELY",
       "imo_number": "9629110",
       "location": "7.5NM southeast of Dahit, Oman",
@@ -542,6 +667,7 @@
     },
     {
       "date": "12 June",
+      "date_iso": "2026-06-12",
       "vessel": "BOCHEM MARENGO",
       "imo_number": "9749025",
       "location": "6NM east of Oman",
@@ -549,6 +675,7 @@
     },
     {
       "date": "10 June",
+      "date_iso": "2026-06-10",
       "vessel": "JALVEER",
       "imo_number": "9486283",
       "location": "21 NM northeast of Sohar, Oman",
@@ -556,6 +683,7 @@
     },
     {
       "date": "9 June",
+      "date_iso": "2026-06-09",
       "vessel": "SETTEBELLO",
       "imo_number": "9162916",
       "location": "25 NM east of Shinas, Oman",
@@ -563,6 +691,7 @@
     },
     {
       "date": "8 June",
+      "date_iso": "2026-06-08",
       "vessel": "MARIVEX",
       "imo_number": "9464156",
       "location": "21NM northeast of Masirah Island, Oman",
@@ -570,6 +699,7 @@
     },
     {
       "date": "2 June",
+      "date_iso": "2026-06-02",
       "vessel": "LEXIE",
       "imo_number": "9203277",
       "location": "Near Strait of Hormuz",
@@ -577,6 +707,7 @@
     },
     {
       "date": "1 June",
+      "date_iso": "2026-06-01",
       "vessel": "MSC SARISKA V",
       "imo_number": "8715857",
       "location": "40NM southeast of Umm Qasr, Iraq",
@@ -584,6 +715,7 @@
     },
     {
       "date": "29 May",
+      "date_iso": "2026-05-29",
       "vessel": "LIAN STAR",
       "imo_number": "9072692",
       "location": "Gulf of Oman",
@@ -591,6 +723,7 @@
     },
     {
       "date": "26 May",
+      "date_iso": "2026-05-26",
       "vessel": "OLYMPIC LIFE",
       "imo_number": "9844277",
       "location": "60NM east of Muscat, Oman",
@@ -598,6 +731,7 @@
     },
     {
       "date": "10 May",
+      "date_iso": "2026-05-10",
       "vessel": "SAFESEA NEHA",
       "imo_number": "9563392",
       "location": "23NM northeast of Doha, Qatar",
@@ -605,6 +739,7 @@
     },
     {
       "date": "8 May",
+      "date_iso": "2026-05-08",
       "vessel": "SEVDA",
       "imo_number": "9172040",
       "location": "Gulf of Oman",
@@ -612,6 +747,7 @@
     },
     {
       "date": "8 May",
+      "date_iso": "2026-05-08",
       "vessel": "SEA STAR III",
       "imo_number": "9569205",
       "location": "Gulf of Oman",
@@ -619,6 +755,7 @@
     },
     {
       "date": "6 May",
+      "date_iso": "2026-05-06",
       "vessel": "HASNA",
       "imo_number": "9212917",
       "location": "Gulf of Oman",
@@ -626,6 +763,7 @@
     },
     {
       "date": "5 May",
+      "date_iso": "2026-05-05",
       "vessel": "CMA CGM SAN ANTONIO",
       "imo_number": "9294173",
       "location": "30 NM northeast of Dibba Al-Fujairah, UAE",
@@ -633,6 +771,7 @@
     },
     {
       "date": "4 May",
+      "date_iso": "2026-05-04",
       "vessel": "HMM NAMU",
       "imo_number": "1039292",
       "location": "36NM North of Dubai, UAE",
@@ -640,6 +779,7 @@
     },
     {
       "date": "4 May",
+      "date_iso": "2026-05-04",
       "vessel": "JV INNOVATION",
       "imo_number": "9276688",
       "location": "15NM northwest of Ras Al-Khaimah, UAE",
@@ -647,6 +787,7 @@
     },
     {
       "date": "3 May",
+      "date_iso": "2026-05-03",
       "vessel": "TMO BARAKAH",
       "imo_number": "9902615",
       "location": "78NM north of Fujairah, UAE",
@@ -654,6 +795,7 @@
     },
     {
       "date": "3 May",
+      "date_iso": "2026-05-03",
       "vessel": "MINOAN FALCON",
       "imo_number": "9605841",
       "location": "11NM west of Sirik, Islamic Republic of Iran",
@@ -661,13 +803,15 @@
     },
     {
       "date": "2 May",
-      "vessel": "VOLANS/ BADR (BARGE)",
+      "date_iso": "2026-05-02",
+      "vessel": "VOLANS  / BADR (BARGE",
       "imo_number": "9298856",
       "location": "32NM northeast of Dibba Al-Fujairah, UAE",
       "description": "Damaged (Badr - Barge). No pollution. One seafarer fatality."
     },
     {
       "date": "22 April",
+      "date_iso": "2026-04-22",
       "vessel": "EUPHORIA",
       "imo_number": "9235828",
       "location": "8NM west of Islamic Republic of Iran",
@@ -675,6 +819,7 @@
     },
     {
       "date": "22 April",
+      "date_iso": "2026-04-22",
       "vessel": "MSC FRANCESCA",
       "imo_number": "9401116",
       "location": "15NM northeast of Oman",
@@ -682,6 +827,7 @@
     },
     {
       "date": "22 April",
+      "date_iso": "2026-04-22",
       "vessel": "EPAMINONDAS",
       "imo_number": "9153862",
       "location": "15NM northeast of Oman",
@@ -689,6 +835,7 @@
     },
     {
       "date": "19 April",
+      "date_iso": "2026-04-19",
       "vessel": "TOUSKA",
       "imo_number": "9328900",
       "location": "45 NM southeast of Chabahar, Islamic Republic of Iran",
@@ -696,6 +843,7 @@
     },
     {
       "date": "18 April",
+      "date_iso": "2026-04-18",
       "vessel": "CMA CGM EVERGLADE",
       "imo_number": "9894985",
       "location": "22NM North of Kumzar, Oman",
@@ -703,6 +851,7 @@
     },
     {
       "date": "18 April",
+      "date_iso": "2026-04-18",
       "vessel": "SANMAR HERALD",
       "imo_number": "9330563",
       "location": "19NM North of Kumzar, Oman",
@@ -710,6 +859,7 @@
     },
     {
       "date": "7 April",
+      "date_iso": "2026-04-07",
       "vessel": "GOLD AUTUMN",
       "imo_number": "9220483",
       "location": "112NM southeast of Ras Al",
@@ -717,6 +867,7 @@
     },
     {
       "date": "7 April",
+      "date_iso": "2026-04-07",
       "vessel": "QINGDAO STAR",
       "imo_number": "9318163",
       "location": "25NM south of Kish Island, Islamic Republic of Iran",
@@ -724,6 +875,7 @@
     },
     {
       "date": "1 April",
+      "date_iso": "2026-04-01",
       "vessel": "AQUA 1",
       "imo_number": "9573660",
       "location": "17NM north of Ras Laffan, Qatar",
@@ -731,6 +883,7 @@
     },
     {
       "date": "30 March",
+      "date_iso": "2026-03-30",
       "vessel": "AL SALMI",
       "imo_number": "9534793",
       "location": "31NM NW of Dubai, UAE",
@@ -738,6 +891,7 @@
     },
     {
       "date": "28 March",
+      "date_iso": "2026-03-28",
       "vessel": "SUNNY 77",
       "imo_number": "8357368",
       "location": "Near Duqm, Oman",
@@ -745,6 +899,7 @@
     },
     {
       "date": "19 March",
+      "date_iso": "2026-03-19",
       "vessel": "HALUL 50",
       "imo_number": "9602796",
       "location": "4NM east of Ras Laffan, Qatar",
@@ -752,6 +907,7 @@
     },
     {
       "date": "16 March",
+      "date_iso": "2026-03-16",
       "vessel": "GAS AL AHMADIAH",
       "imo_number": "9849629",
       "location": "23NM east of Fujairah, UAE",
@@ -759,6 +915,7 @@
     },
     {
       "date": "12 March",
+      "date_iso": "2026-03-12",
       "vessel": "SOURCE BLESSING",
       "imo_number": "9243198",
       "location": "35NM north of Jebel Ali, UAE",
@@ -766,6 +923,7 @@
     },
     {
       "date": "11 March",
+      "date_iso": "2026-03-11",
       "vessel": "ZEFYROS",
       "imo_number": "9515917",
       "location": "Near Khor Al Zubair Port, Iraq",
@@ -773,6 +931,7 @@
     },
     {
       "date": "11 March",
+      "date_iso": "2026-03-11",
       "vessel": "SAFESEA VISHNU",
       "imo_number": "9327009",
       "location": "Near Khor Al Zubair Port, Iraq",
@@ -780,6 +939,7 @@
     },
     {
       "date": "11 March",
+      "date_iso": "2026-03-11",
       "vessel": "STAR GWYNETH",
       "imo_number": "9301031",
       "location": "50NM northwest of Dubai",
@@ -787,6 +947,7 @@
     },
     {
       "date": "11 March",
+      "date_iso": "2026-03-11",
       "vessel": "MAYUREE NAREE",
       "imo_number": "9323649",
       "location": "11NM north of Oman",
@@ -794,20 +955,23 @@
     },
     {
       "date": "11 March",
+      "date_iso": "2026-03-11",
       "vessel": "ONE MAJESTY",
       "imo_number": "9424912",
-      "location": "25NM northwest of Ra's al Khaymah, UAE",
+      "location": "25NM northwest of Ra’s al Khaymah, UAE",
       "description": "Hull damage. No injuries."
     },
     {
       "date": "7 March",
+      "date_iso": "2026-03-07",
       "vessel": "ARABIA III",
       "imo_number": "8771332",
       "location": "Al Jubayl, Saudi Arabia",
-      "description": "Damaged. No pollution. One seafarer injured."
+      "description": "Damanged. No pollution. One seafarer injured."
     },
     {
       "date": "6 March",
+      "date_iso": "2026-03-06",
       "vessel": "MUSSAFAH 2",
       "imo_number": "9522051",
       "location": "6NM north of Oman",
@@ -815,6 +979,7 @@
     },
     {
       "date": "5 March",
+      "date_iso": "2026-03-05",
       "vessel": "SONANGOL NAMIBE",
       "imo_number": "9325049",
       "location": "30NM southeast of Mubarak Al Kabeer, Kuwait",
@@ -822,6 +987,7 @@
     },
     {
       "date": "4 March",
+      "date_iso": "2026-03-04",
       "vessel": "SAFEEN PRESTIGE",
       "imo_number": "9593517",
       "location": "2NM north of Oman",
@@ -829,6 +995,7 @@
     },
     {
       "date": "3 March",
+      "date_iso": "2026-03-03",
       "vessel": "GOLD OAK",
       "imo_number": "9806342",
       "location": "7NM east of Fujairah, UAE",
@@ -836,6 +1003,7 @@
     },
     {
       "date": "3 March",
+      "date_iso": "2026-03-03",
       "vessel": "LIBRA TRADER",
       "imo_number": "9562673",
       "location": "10NM east of Fujairah, UAE",
@@ -843,6 +1011,7 @@
     },
     {
       "date": "1 March",
+      "date_iso": "2026-03-01",
       "vessel": "STENA IMPERATIVE",
       "imo_number": "9666077",
       "location": "At Berth, Port of Bahrain",
@@ -850,6 +1019,7 @@
     },
     {
       "date": "1 March",
+      "date_iso": "2026-03-01",
       "vessel": "HERCULES STAR",
       "imo_number": "9916135",
       "location": "17 NM northwest of Mina Saqr, UAE",
@@ -857,6 +1027,7 @@
     },
     {
       "date": "1 March",
+      "date_iso": "2026-03-01",
       "vessel": "MKD VYOM",
       "imo_number": "9284386",
       "location": "52 NM northwest of Muscat, Oman",
@@ -864,11 +1035,21 @@
     },
     {
       "date": "1 March",
+      "date_iso": "2026-03-01",
       "vessel": "SKYLIGHT",
       "imo_number": "9330020",
       "location": "5 NM North of Khasab, Oman",
       "description": "Four seafarers injured. Two seafarer fatalities."
     }
   ],
-  "retrieved": "2026-10-31"
+  "retrieved": "2026-11-04",
+  "retrieved_at": "2026-11-04T03:41:34+00:00",
+  "previous": {
+    "totals": {
+      "confirmed_incidents": 122,
+      "confirmed_seafarer_deaths": 24
+    },
+    "retrieved": "2026-10-31",
+    "incidents_count": 122
+  }
 }
