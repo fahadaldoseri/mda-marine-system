@@ -44,7 +44,13 @@ ARCHIVE_END = dt.date(2026, 9, 30)
 
 # ── جدول إسناد المواقع الإنجليزية الواردة في بلاغات UKMTO إلى القطاع الحاكم ──
 # كل مدخل: (كلمات الكشف بالإنجليزية, المنطقة البحرية العربية, القطاع, البلد العربي أو "")
+# القواعد الأطول والأكثر تحديدًا تسبق القواعد العامة حتى لا تُسند واقعة إلى
+# بحر العرب لمجرد ظهور اسم المكلا داخل نص يذكر IRTC/خليج عدن صراحةً.
 PLACE_RULES = (
+    (("hadd, oman", "ras al hadd"), "خليج عُمان", "Z1", "عُمان"),
+    (("within the irtc", "gulf of aden"), "خليج عدن", "Z4", "اليمن"),
+    (("6nm east of oman",), "خليج عُمان", "Z1", "عُمان"),
+    (("14nm south off the coast of yemen",), "خليج عدن", "Z4", "اليمن"),
     (("strait of hormuz", "hormuz"), "مضيق هرمز", "Z1", ""),
     (("gulf of oman",), "خليج عُمان", "Z1", ""),
     (("persian gulf", "arabian gulf"), "الخليج العربي", "Z1", ""),
@@ -75,6 +81,15 @@ PLACE_RULES = (
       "sri lanka", "colombo", "maldives", "male"), "المحيط الهندي", "Z5", ""),
     (("black sea", "odessa", "odesa", "novorossiysk", "constanta"), "البحر الأسود", "NONE", ""),
 )
+
+NON_SPATIAL_VALUE = "غير مكانية"
+NO_INCIDENT_SOURCE = "UKMTO — التحذيرات 2026، IMO — سجل الحوادث المؤكدة"
+PRODUCT_LOCATION_BASIS = {
+    "UKMTO #036": 'نص المنتج الرسمي UKMTO #036: "Ras Al Hadd, Oman" (ويتضمن "Hadd, Oman")؛ سجل المناطق يربط عُمان بخليج عُمان.',
+    "UKMTO #048": 'نص المنتج الرسمي UKMTO #048: "within the IRTC, 92NM southwest of Al Mukalla, Yemen"؛ سجل المناطق يربط اليمن بخليج عدن.',
+    "UKMTO #068": 'نص المنتج الرسمي UKMTO #068: "6NM east of Oman"؛ وسوم المنتج الرسمية تشير إلى Oman، وسجل المناطق يربط عُمان بخليج عُمان.',
+    "UKMTO #069": 'نص المنتج الرسمي UKMTO #069: "14NM south off the coast of Yemen"؛ وسوم المنتج الرسمية تشير إلى Aden, Yemen، وسجل المناطق يربط اليمن بخليج عدن.',
+}
 
 KIND_MAP = {
     "ATTACK": ("هجوم", "هجوم", True),
@@ -132,6 +147,18 @@ def area_for(text: str, reg: dict) -> dict:
                         "place_as_in_source": k}
     return {"area": "", "sea": "", "sector_id": "", "sector": "", "place_as_in_source": "",
             "basis": "لم يتطابق نص المنتج مع جدول الإسناد — يحتاج مراجعة بشرية"}
+
+
+def validate_area_assignment(loc: dict, reg: dict, number: str, date: str) -> None:
+    """ارفض أي إسناد لا ينتمي إلى سجل المناطق أو يفتقد أساسه النصي."""
+    if not loc.get("area") or loc.get("area") == NON_SPATIAL_VALUE:
+        fail(f"إسناد موقع غير صالح للمنتج {number} في {date}: {loc.get('area')!r}")
+    if not str(loc.get("basis") or "").strip():
+        fail(f"منتج بلا أساس موقع: {number} — {date}")
+    approved_areas = {str(item.get("ar") or "") for item in reg.get("areas", [])}
+    sea = str(loc.get("sea") or "")
+    if sea not in approved_areas:
+        fail(f"منطقة غير موجودة في سجل المناطق: {number} — {sea}")
 
 
 def place_phrase(gist: str) -> str:
@@ -208,7 +235,13 @@ def main() -> int:
         # لا نلمس يوماً يحمل واقعة
         if any((not r.get("no_incident")) and not str(r.get("code", "")).startswith("NI-") for r in rows):
             continue
-        rows = [r for r in rows if str(r.get("code", "")).startswith("NI-")]
+        existing_no_incident = next(
+            (r for r in rows if r.get("no_incident") or str(r.get("code", "")).startswith("NI-")),
+            None,
+        )
+        # استبدال محتوى اليوم المتروك بنتيجة واحدة فقط يمنع بقاء صف NI قديم
+        # بجانب واقعة مستوردة أو تكرار صف NI عند إعادة التشغيل.
+        rows = []
         incidents = first_by_day.get(iso, [])
         updates = updates_by_day.get(iso, [])
         advisories = advisories_by_day.get(iso, [])
@@ -219,8 +252,24 @@ def main() -> int:
             kind = (it.get("kind") or "").upper()
             cls, incident_kind, counting = KIND_MAP.get(kind, (it.get("kind") or "بلاغ رسمي",
                                                                "لا ينطبق", True))
-            loc = area_for(" ".join([it.get("gist") or "", it.get("product_url") or ""]), reg)
-            if not loc["area"]:
+            number = str(it.get("number") or "").strip()
+            loc = area_for(" ".join([it.get("gist") or "", it.get("location_text") or "",
+                                      it.get("product_url") or ""]), reg)
+            if number in PRODUCT_LOCATION_BASIS:
+                loc["basis"] = PRODUCT_LOCATION_BASIS[number]
+            else:
+                source_fragments = [
+                    str(it.get("gist") or "").strip(),
+                    str(it.get("location_text") or "").strip(),
+                ]
+                source_fragments = [fragment for fragment in source_fragments if fragment]
+                source_text = "؛ ".join(dict.fromkeys(source_fragments))
+                loc["basis"] = (
+                    f'نص المنتج الرسمي {number}: «{source_text}»؛ '
+                    f'جدول المناطق يربط المطابقة «{loc.get("place_as_in_source")}"» بالمنطقة {loc.get("sea")}. '
+                )
+            validate_area_assignment(loc, reg, number, iso)
+            if not loc["area"] or not loc["basis"]:
                 review.append({"date": iso, "number": it.get("number"), "reason": loc["basis"],
                                "gist": (it.get("gist") or "")[:160]})
             num_digits = re.sub(r"\D", "", str(it.get("number")))
@@ -228,7 +277,8 @@ def main() -> int:
                 "backfilled": True,
                 "code": f"BF-{iso}-UKMTO-{num_digits}",
                 "date": iso,
-                "area": loc["area"] or "غير مكانية",
+                "area": loc["area"],
+                "area_basis": loc["basis"],
                 "location": it.get("gist") or "",
                 "location_phrase": place_phrase(it.get("gist") or ""),
                 "sector": loc["sector"] or "خارج القطاعات",
@@ -273,7 +323,16 @@ def main() -> int:
                            if not kept_products else
                            "لا واقعة مسجّلة في المصادر الرسمية المفحوصة لهذا التاريخ؛ "
                            "وقد صدر في اليوم منتج رسمي دون واقعة (يُسرد في المصادر المفحوصة).")
-            rows.append({
+            if existing_no_incident:
+                no_incident = dict(existing_no_incident)
+                no_incident["source"] = NO_INCIDENT_SOURCE
+                no_incident.setdefault("evidence_kind", "official-source-scan")
+                no_incident.setdefault("evidence_ref", arch.get("archive_urls", {}).get("warnings", arch.get("home", "")))
+                no_incident.setdefault("retrieved_at", arch.get("retrieved_at"))
+                if not no_incident.get("sources_checked"):
+                    no_incident["sources_checked"] = []
+            else:
+                no_incident = {
                 "code": f"NI-{iso}",
                 "date": iso,
                 "sector": "خارج القطاعات",
@@ -282,7 +341,7 @@ def main() -> int:
                 "backfilled": True,
                 "title": title,
                 "description": description,
-                "source": "مسح رسمي متعدد المصادر",
+                "source": NO_INCIDENT_SOURCE,
                 "confidence": "عالية",
                 "evidence_kind": "official-source-scan",
                 "evidence_ref": arch.get("archive_urls", {}).get("warnings", arch.get("home", "")),
@@ -294,13 +353,20 @@ def main() -> int:
                      "http_status": 200, "invoked": True,
                      "result": "لا واقعة في هذا التاريخ" if not kept_products
                                else f"{len(kept_products)} منتج رسمي صادر دون واقعة",
-                     "coverage_note": "أرشيف UKMTO الرسمي 2026: فبراير–سبتمبر (شهريًا)"},
+                     "coverage_note": "أرشيف UKMTO الرسمي 2026: فبراير–سبتمبر (شهريًا)",
+                     "retrieved_at": arch.get("retrieved_at")},
                     {"source_id": "imo_confirmed", "source": "IMO — قائمة الوقائع المؤكدة",
                      "url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
                      "http_status": 200, "invoked": True, "result": "لا واقعة في هذا التاريخ",
-                     "coverage_note": "القائمة الرسمية تغطي 2026-03-01 إلى 2026-11-01 (128 واقعة)"},
-                ],
-            })
+                     "coverage_note": "القائمة الرسمية تغطي 2026-03-01 إلى 2026-11-01 (128 واقعة)",
+                     "retrieved_at": arch.get("retrieved_at")},
+                ]}
+            rows.append(no_incident)
+        for candidate in rows:
+            if candidate.get("no_incident") or str(candidate.get("code", "")).startswith("NI-"):
+                continue
+            if candidate.get("area") == NON_SPATIAL_VALUE or not str(candidate.get("area_basis") or "").strip():
+                fail(f"سيُكتب صف بلا أساس موقع أو بقيمة موقع ممنوعة: {candidate.get('code')}")
         log.append(f"{iso} · وقائع رسمية: {len(incidents)} · تحديثات: {len(updates)} · "
                    f"منتجات: {len(advisories)} · صفوف اليوم: {len(rows)}")
         if args.apply:

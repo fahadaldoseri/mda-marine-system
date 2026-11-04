@@ -16,10 +16,9 @@ The report uses the following symbols: UKMTO is the United Kingdom Maritime Trad
 | Bab el-Mandeb and the Red Sea | 1 | 6.25% | Daily register + sector gate: 0 qualifying, 1 excluded |
 | Arabian Sea | 1 | 6.25% | Daily register + sector gate: 0 qualifying, 1 excluded |
 | the Horn of Africa | 1 | 6.25% | Daily register + sector gate: 0 qualifying, 1 excluded |
-| Non-spatial | 1 | 6.25% | Daily register + sector gate: 1 non-spatial |
-| Total | 16 | 100% | Daily register + sector gate: 4 qualifying, 11 excluded, 1 non-spatial |
+| Total | 16 | 100% | Daily register + sector gate: 4 qualifying, 12 excluded |
 
-The relevant maritime material was concentrated in Z1. Political news and non-spatial claims are not maritime incidents and are not included in the sector count.
+The relevant maritime material was concentrated in Z1. Political news and claims without a maritime location are not maritime incidents and are not included in the sector count.
 
 ## Situation Indicators
 | Indicator | Current | Previous | Trend | Significance |
@@ -175,7 +174,7 @@ We monitor UKMTO, JMIC, and IMO updates, together with every report mentioning a
 - Bab el-Mandeb and the Red Sea: **Low**.
 - Arabian Sea: **Low**.
 - the Horn of Africa: **Low**.
-- Period counter: **16 incidents**; **4 qualifying**; **11 excluded**; **1 non-spatial**. This count is not the number of attacks or vessels.
+- Period counter: **16 incidents**; **4 qualifying**; **12 excluded**. This count is not the number of attacks or vessels.
 ## Source Status and Disclosure
 **60/60 feeds** and **1,936 items** were screened. The feeds succeeded at the source level, and **2 manual references** were recorded for sources 39 and 52. The screening flag marked **6 stale sources** under the 14-day threshold: 12, 13, 20, 30, 32, and 49; they were not used alone to establish a new incident. The routes for sources 17 and 24 were also unavailable in two subsidiary attempts, while the overall feed status remained successful through the approved alternative routes. There were no empty feeds, and these limitations are not hidden from the reader.
 

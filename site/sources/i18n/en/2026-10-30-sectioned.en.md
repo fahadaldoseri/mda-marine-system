@@ -96,7 +96,7 @@ Incidents MN-2026-10-30-07, MN-2026-10-30-08, MN-2026-10-30-09, MN-2026-10-30-10
 ## Situation Assessment and Indicator Analysis
 The maritime situation during the period focused on a single fire incident inside the Strait of Hormuz. The official report described the activity as suspicious at a distance of 25 nautical miles northeast of Khasab. Professional reporting described the incident as a vessel fire, and the first update mentioned that the fire had subsided a few hours later. The conclusion is that an actual physical incident occurred, but its technical details have not yet become clear.
 
-Accounts of the cause of the fire diverge. An Iranian media entity spoke of non-compliant tankers and naval mines. Professional reports spoke of four burning tankers. An official U.S. denial stated that the waterways were free of mines. This divergence prevents conclusive attribution to an executing party and requires awaiting a complete official report.
+Accounts of the cause of the fire diverge. Mehr reported non-compliant tankers and naval mines. Professional reports spoke of four burning tankers. An official U.S. denial stated that the waterways were free of mines. This divergence prevents conclusive attribution to an executing party and requires awaiting a complete official report.
 
 The transit route was not closed according to the screened material. However, the recurrence of official warnings within less than 24 hours indicates continuing pressure on the route. At the same time, precautionary commercial behavior appeared: expanded LNG purchases in anticipation of disruption in the strait, and expansion of the tanker fleet. This behavior indicates expectations of continuing risks, not an imminent easing.
 

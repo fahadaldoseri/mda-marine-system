@@ -20,7 +20,9 @@
         "title",
         "source",
         "class",
-        "confidence"
+        "confidence",
+        "evidence_ref",
+        "retrieved_at"
       ],
       "properties": {
         "code": {
@@ -135,7 +137,12 @@
         },
         "area": {
           "type": "string",
-          "description": "الموضع كما في جدول التوزيع الجغرافي؛ قد يغيب فيُعرض نصّ الغياب."
+          "description": "الموضع كما في جدول التوزيع الجغرافي؛ يغيب فقط مع area_basis غير فارغ."
+        },
+        "area_basis": {
+          "type": "string",
+          "minLength": 1,
+          "description": "سند غياب الموضع عندما لا يحدده المصدر."
         },
         "sector_id": {
           "type": "string",
@@ -308,6 +315,21 @@
           "type": "string"
         }
       },
+      "allOf": [
+        {
+          "anyOf": [
+            {
+              "required": ["area"],
+              "properties": {
+                "area": {"minLength": 1}
+              }
+            },
+            {
+              "required": ["area_basis"]
+            }
+          ]
+        }
+      ],
       "additionalProperties": true
     },
     "no_incident_record": {

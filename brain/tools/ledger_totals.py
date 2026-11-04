@@ -130,6 +130,7 @@ FIRE_ELIGIBLE_STATUSES = {
     "unresolved_incident",
 }
 ISO_DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+NON_SEAFARER_CASUALTY_SCOPES = {"shipyard_worker", "عامل حوض سفن"}
 
 
 class LedgerError(Exception):
@@ -362,9 +363,11 @@ def numeric_deaths(event: dict[str, Any]) -> int | None:
     value = event.get("deaths_confirmed")
     if isinstance(value, bool):
         return None
-    if isinstance(value, int) and value >= 0:
+    # الصفر المعبأ آليًا عند غياب إعلان وفاة ليس رقمًا معلنًا؛ لا يدخل
+    # مجموعة القياس، ولا يتحول غياب الإعلان إلى حصيلة صفرية.
+    if isinstance(value, int) and value > 0:
         return value
-    if isinstance(value, float) and value.is_integer() and value >= 0:
+    if isinstance(value, float) and value.is_integer() and value > 0:
         return int(value)
     return None
 
@@ -514,7 +517,12 @@ def make_imo_deaths(today: dt.date) -> dict[str, Any]:
 
 
 def make_deaths(rows: list[dict[str, Any]], today: dt.date) -> dict[str, Any]:
-    selected = [event for event in rows if numeric_deaths(event) is not None]
+    raw_selected = [event for event in rows if numeric_deaths(event) is not None]
+    excluded_non_seafarer = [
+        event for event in raw_selected
+        if str(event.get("casualty_scope") or "") in NON_SEAFARER_CASUALTY_SCOPES
+    ]
+    selected = [event for event in raw_selected if event not in excluded_non_seafarer]
     today_selected = [event for event in selected if event["_event_date"] == today.isoformat()]
     updated_values = [source_date(event) for event in selected]
     updated_values = [value for value in updated_values if value is not None]
@@ -527,9 +535,10 @@ def make_deaths(rows: list[dict[str, Any]], today: dt.date) -> dict[str, Any]:
         today_value = None
         today_note = "لا يوجد صف في تاريخ اليوم يحمل deaths_confirmed رقميًا؛ today=null ولا يُستنتج الصفر من غياب الحقل."
     basis = (
-        "المجموع هو جمع deaths_confirmed الرقمي فقط بعد استبعاد سجل counted=false/duplicate_of؛ "
-        "لا تُقرأ الأرقام من العناوين أو الملخصات التراكمية. "
+        "المجموع هو جمع deaths_confirmed الموجب والمعلن فقط بعد استبعاد سجل counted=false/duplicate_of؛ "
+        "لا تُقرأ الأرقام من العناوين أو الملخصات التراكمية، وتُستبعد وفيات غير البحارة بحسب casualty_scope. "
         + today_note
+        + f" استُبعدت {len(excluded_non_seafarer)} صفوف غير بحارة من القياس."
         + " قاعدة updated: أعلى تاريخ من published_at أو retrieved_at أو date_start، مع استخدام تاريخ الواقعة عند غياب الحقلين الأولين."
     )
     return {

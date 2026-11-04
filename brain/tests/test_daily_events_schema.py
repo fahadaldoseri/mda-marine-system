@@ -43,6 +43,8 @@ LIVE_RECORD = {
     "confidence": "متوسطة",
     "source_excerpt": "UKMTO WARNING 190-26",
     "source_excerpt_from": "feeds/feeds-2026-11-01.json · 15 · item 1",
+    "evidence_ref": "feeds/feeds-2026-11-01.json · 15 · item 1",
+    "retrieved_at": "2026-11-01T04:00Z",
     "sector_id": "Z1",
 }
 

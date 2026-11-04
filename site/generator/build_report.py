@@ -36,6 +36,10 @@ HERO_KPI_MODERN_FROM = "2026-10-31"
 from pathlib import Path
 
 
+# نمط وسم نوع البند في القوائم — مصدر واحد يخدم القائمة المنظّمة والمرقّمة، فلا يتكرر النمط
+MARK_RE = re.compile(r"^\[(حقيقة|واقعة|تقدير تحليلي|تقدير|إعلامي|إعلام|خلفية|مراقبة)\]\s*")
+
+
 class BuildError(Exception):
     pass
 
@@ -1487,13 +1491,12 @@ def _event_location(event: dict) -> str:
     missing = {"", "غير مكانية", "خارج القطاعات", "غير محددة", "غير محدد"}
     candidates = (
         event.get("zone_name"), event.get("area"), event.get("location"),
-        event.get("sector_name"), event.get("sector"),
     )
     for raw in candidates:
         value = _public_text(raw)
         if value and value not in missing:
             return value
-    return ABSENCE["place"]
+    return ""
 
 
 def _join_sources(event: dict) -> str:
@@ -1630,7 +1633,10 @@ def _event_fields_html(event: dict, defs) -> tuple[str, bool]:
     rows = [_field_row(4, "التاريخ والوقت", date_line, defs)]
 
     place = _event_location(event)
-    rows.append(_field_row(5, "الموقع", place, defs))
+    if place:
+        rows.append(_field_row(5, "الموقع", place, defs))
+    else:
+        rows.append(_field_row(5, "الموقع", "", defs, state="hidden-rule-no-location"))
 
     source_text = _event_sources(event) or ABSENCE["source"]
     source_url = _value_text(event.get("source_url"))
@@ -1876,7 +1882,7 @@ def render_section_body(title: str, lines, defs, doc_mode: bool = False, section
             while i < n and re.match(r"^\s*[-*]\s+", lines[i]):
                 indent = len(lines[i]) - len(lines[i].lstrip())
                 raw = re.sub(r"^\s*[-*]\s+", "", lines[i].strip())
-                mk = re.match(r"^\[(حقيقة|واقعة|تقدير تحليلي|تقدير|إعلامي|إعلام|خلفية|مراقبة)\]\s*", raw)
+                mk = MARK_RE.match(raw)
                 cls = ""
                 if mk:
                     cls = ' class="' + BLK.MARK_KIND.get(mk.group(1), "") + '"'
@@ -1899,7 +1905,7 @@ def render_section_body(title: str, lines, defs, doc_mode: bool = False, section
             items, kinds = [], False
             while i < n and re.match(r"^\s*\d+[\.\)]\s+", lines[i]):
                 raw = re.sub(r"^\s*\d+[\.\)]\s+", "", lines[i].strip())
-                mk = re.match(r"^\[(حقيقة|واقعة|تقدير تحليلي|تقدير|إعلامي|إعلام|خلفية|مراقبة)\]\s*", raw)
+                mk = MARK_RE.match(raw)
                 cls = ""
                 if mk:
                     cls = ' class="' + BLK.MARK_KIND.get(mk.group(1), "") + '"'
