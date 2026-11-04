@@ -20,7 +20,7 @@ import subprocess
 import sys
 
 B = pathlib.Path(__file__).resolve().parent.parent
-S = pathlib.Path(os.environ.get("SITE", "/home/ubuntu/seawatch"))
+S = pathlib.Path(os.environ.get("SITE") or (B.parent / "seawatch"))
 REPO = pathlib.Path(os.environ.get("BACKUP_REPO_DIR", B.parent / "mda-marine-system"))
 
 

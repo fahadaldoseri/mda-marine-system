@@ -18,7 +18,7 @@ from validators.check_event_card_contract import (
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT = ROOT / "appendices" / "event-card-contract.md"
-GLOSSARY = Path("/home/ubuntu/seawatch/sources/i18n/en/glossary.json")
+GLOSSARY = Path(os.environ.get("SITE_DIR") or (Path(__file__).resolve().parents[2] / "seawatch")) / "sources/i18n/en/glossary.json"
 
 
 def _fixture_glossary(ar_labels: dict[int, str], *, omit: str | None = None) -> Path:
