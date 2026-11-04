@@ -15,10 +15,10 @@ Confidence level: medium.
 ## Geographic Distribution of Incidents
 | Sector | Coded items | Share | Source and grade |
 |---|---:|---:|---|
-| Z1 — Strait of Hormuz, Gulf of Oman and Arabian Gulf | 8 | 89% | UKMTO B/2, JMIC A/2, straits.live C/3, Al Jazeera Net C/3, Mehr B/3, Bahraini Ministry of Foreign Affairs A/2 |
-| Z2 — Bab al-Mandab and the Red Sea | 0 | 0% | No new qualifying maritime item appeared in the material used |
-| Z3 — Arabian Sea | 1 | 11% | United States Fifth Fleet A/2 |
-| Z4 — Horn of Africa | 0 | 0% | No new qualifying maritime item appeared in the material used |
+| Strait of Hormuz, Gulf of Oman and Arabian Gulf | 8 | 89% | UKMTO B/2, JMIC A/2, straits.live C/3, Al Jazeera Net C/3, Mehr B/3, Bahraini Ministry of Foreign Affairs A/2 |
+| Bab al-Mandab and the Red Sea | 0 | 0% | No new qualifying maritime item appeared in the material used |
+| Arabian Sea | 1 | 11% | United States Fifth Fleet A/2 |
+| Horn of Africa | 0 | 0% | No new qualifying maritime item appeared in the material used |
 | Total | 9 | 100% | Items coded in this report |
 The nine items are concentrated in Z1, with one item in Z3 on a non-hostile support mission. The number of items does not equal the number of attacks or the number of damaged vessels (MN-2026-11-02-03 and MN-2026-11-02-05 to MN-2026-11-02-10 and MN-2026-11-02-15 and MN-2026-11-02-16; grades in the log below).
 Seven items were not assigned a maritime sector because no maritime location is mentioned in them: warnings 191-26 and 192-26, advisory note No. 110, the coalition statement on intercepting an aerial projectile, a professional analysis on limpet mines, the IMO record, and the political positions (MN-2026-11-02-01 and MN-2026-11-02-02 and MN-2026-11-02-04 and MN-2026-11-02-11 to MN-2026-11-02-14).
@@ -35,10 +35,10 @@ Seven items were not assigned a maritime sector because no maritime location is 
 The figures in the table represent the number of published or coded items and do not express the number of attacks. The comparison with the previous figure is measured against the latest edition available in the current material.
 ## Threat Level
 Overall level: very high — highest sector: Strait of Hormuz, Gulf of Oman and Arabian Gulf. The assessment rests on three official warnings issued during the period, including an attack report inside the Strait of Hormuz and an update to an earlier warning, which is the highest official frequency in the recent period. Unconfirmed accounts do not raise the threat level before official confirmation or two independent sources (MN-2026-11-02-01 to MN-2026-11-02-05; B/2).
-- Level in the Strait of Hormuz, Gulf of Oman and Arabian Gulf: very high (Z1).
-- Level in Bab al-Mandab and the Red Sea: low (Z2). No new qualifying maritime incident was recorded in the material used.
-- Level in the Arabian Sea: low (Z3). One item was recorded on a non-hostile maritime support mission (MN-2026-11-02-10; A/2).
-- Level in the Horn of Africa: low (Z4). No new qualifying maritime item was observed.
+- Level in the Strait of Hormuz, Gulf of Oman and Arabian Gulf: very high.
+- Level in Bab al-Mandab and the Red Sea: low. No new qualifying maritime incident was recorded in the material used.
+- Level in the Arabian Sea: low. One item was recorded on a non-hostile maritime support mission (MN-2026-11-02-10; A/2).
+- Level in the Horn of Africa: low. No new qualifying maritime item was observed.
 ## Operational Guidance
 "Execute:"
 - Raise visual and radio watch before entering the Strait of Hormuz, keep AIS running, and report to the reporting centre on any projectile, explosion or floating object.
@@ -55,13 +55,13 @@ Overall level: very high — highest sector: Strait of Hormuz, Gulf of Oman and 
 - **MN-2026-11-02-07 — [Media]** Reports through straits.live quoted a Turkish news agency that UKMTO reported a possible attack on a vessel inside the Strait of Hormuz on 01/11/2026 at 2337Z. **Source:** straits.live C/3; **Stated location:** the Strait of Hormuz; **Status:** media relay with no matching official text in the material reviewed.
 - **MN-2026-11-02-08 — [Media]** Al Jazeera Net quoted the Royal Navy that two unidentified projectiles targeted a tanker in Gulf waters on 02/11/2026 at 0206Z. **Source:** Al Jazeera Net C/3; **Stated location:** Gulf waters; **Status:** unconfirmed media relay, and it may go back to the incident of warning 192-26.
 - **MN-2026-11-02-09 — [Official]** The Bahraini Ministry of Foreign Affairs announced on 01/11/2026 at 1739Z its condemnation of an attack that targeted a Qatari gas carrier in the Arabian Gulf. **Source:** the account @bahdiplomatic on X; **Grade:** A/2; **Stated location:** the Arabian Gulf; **Status:** official announcement.
-- **MN-2026-11-02-10 — [Official]** The United States Fifth Fleet announced on 01/11/2026 at 1323Z providing support to sailors who faced an engine failure in the Arabian Sea. **Source:** the account @US5thFleet on X; **Grade:** A/2; **Location:** the Arabian Sea (Z3); **Status:** non-hostile support mission.
+- **MN-2026-11-02-10 — [Official]** The United States Fifth Fleet announced on 01/11/2026 at 1323Z providing support to sailors who faced an engine failure in the Arabian Sea. **Source:** the account @US5thFleet on X; **Grade:** A/2; **Location:** the Arabian Sea; **Status:** non-hostile support mission.
 - **MN-2026-11-02-11 — [Official]** The Joint Coalition announced the interception and destruction of a ballistic missile and an unmanned aerial vehicle launched towards the southern region, and the destruction of targets in Hodeidah and Dhamar, on 01/11/2026 between 1524Z and 1549Z. **Source:** the account @CJFCSpox on X; **Grade:** A/2; **Location:** inside Yemen; **Status:** official announcement, not classified as a maritime incident.
 - **MN-2026-11-02-12 — [Analysis]** Windward published an analysis titled “The Return of Limpet Mines to the Gulf” mentioning four tankers hit near the Strait of Hormuz, on 01/11/2026 at 1057Z. **Source:** Windward B/2; **Scope:** professional analysis; **Status:** an analytical reading of earlier incidents, not counted as a new incident.
 - **MN-2026-11-02-13 — [Official]** No new addition was entered in the displayed IMO list. The list includes the dates 29 September, 28 September, 23 September, 21 September and 18 September. **Source:** IMO — Confirmed Incidents Record; **Grade:** A/1; **Status:** no development.
 - **MN-2026-11-02-14 — [Political]** The Iranian Defence Minister stated readiness for an immediate response without geographic limits, and the Iranian Foreign Minister announced the continuation of consultations with Qatari mediators with no result yet, on 01/11/2026 between 1310Z and 1346Z. **Source:** ISNA C/3, Mehr B/3; **Status:** political positions, not counted as a maritime incident.
-- **MN-2026-11-02-15 — [Official]** The UKMTO warning list showed an attack report dated 02/11/2026 on an incident 72 nautical miles east of Ras Al Khafji in Saudi Arabia. The available text proves the report and does not specify the vessel or the damage. **Source:** UKMTO — Warnings 2026; **Grade:** B/2; **Location:** the Arabian Gulf (Z1); **Status:** official report without detail.
-- **MN-2026-11-02-16 — [Media]** straits.live reported on 01/11/2026 at 2248Z a report of a harbour tug being hit in an attack inside the Strait of Hormuz, without official confirmation in the available material. **Source:** straits.live C/3; **Stated location:** the Strait of Hormuz (Z1); **Status:** unconfirmed report.
+- **MN-2026-11-02-15 — [Official]** The UKMTO warning list showed an attack report dated 02/11/2026 on an incident 72 nautical miles east of Ras Al Khafji in Saudi Arabia. The available text proves the report and does not specify the vessel or the damage. **Source:** UKMTO — Warnings 2026; **Grade:** B/2; **Location:** the Arabian Gulf; **Status:** official report without detail.
+- **MN-2026-11-02-16 — [Media]** straits.live reported on 01/11/2026 at 2248Z a report of a harbour tug being hit in an attack inside the Strait of Hormuz, without official confirmation in the available material. **Source:** straits.live C/3; **Stated location:** the Strait of Hormuz; **Status:** unconfirmed report.
 MN-2026-11-02-06, MN-2026-11-02-07 and MN-2026-11-02-08 are not treated as independent confirmed incidents before official confirmation or two independent sources. Official warnings prove their issuance only and are not used to prove the number of damaged vessels.
 ## Official Warnings and Advisories
 | Party | Official text as received |

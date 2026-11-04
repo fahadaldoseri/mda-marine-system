@@ -258,7 +258,8 @@ def derive(date: str) -> dict:
 
     meta.setdefault("map", {})
     meta["map"]["points"] = points
-    meta["map"]["points_note"] = note
+    # ملاحظة المالك (6): لا وصف ولا ملاحظة نصية أسفل الخريطة — تُترك فارغة دائمًا
+    meta["map"]["points_note"] = ""
     meta["map"]["points_stats"] = stats
     if off_map:
         meta["map"]["off_map"] = off_map

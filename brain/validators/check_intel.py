@@ -199,7 +199,10 @@ def main() -> int:
             mpts = _mp.get("points") or []
             off_map = _mp.get("off_map") or []
             _excl = {"خارج القطاعات", "المنطقة كاملة", "غير مكانية", "سياق إقليمي"}
-            need = [e for e in evs if (e.get("area") or "").strip() not in _excl]
+            _non_incident = ("لا يُحتسب", "لا يحتسب", "موقف سياسي", "بيان سياسي")
+            need = [e for e in evs
+                    if (e.get("area") or "").strip() not in _excl
+                    and not any(s in (e.get("status") or "") for s in _non_incident)]
             drawn = {p.get("code") for p in mpts}
             # عطل ك-: واقعة معلَنة «خارج نطاق الرسم» بسبب مكتوب تُعدّ محلولة، لا ناقصة.
             declared_off = {str(o.get("code")) for o in off_map if (o.get("reason") or "").strip()}

@@ -17,13 +17,12 @@ The symbols used here are defined as follows:
 ## Geographic Distribution of Incidents
 | Sector | Coded item count | Share | Source and grade |
 |---|---:|---:|---|
-| Z1 — Strait of Hormuz, Gulf of Oman and the Arabian Gulf | 6 | 100% | UKMTO B/2, straits.live C/3, gCaptain B/2, TradeWinds B/2, The Maritime Executive B/2, MarineLink C/3 |
-| Z2 — Bab al-Mandab and the Red Sea | 0 | 0% | No new item appeared in the material used |
-| Z3 — Arabian Sea | 0 | 0% | No new item appeared in the material used |
-| Z4 — the Horn of Africa | 0 | 0% | No new item appeared in the material used |
+| Strait of Hormuz, Gulf of Oman and the Arabian Gulf | 6 | 100% | UKMTO B/2, straits.live C/3, gCaptain B/2, TradeWinds B/2, The Maritime Executive B/2, MarineLink C/3 |
+| Bab al-Mandab and the Red Sea | 0 | 0% | No new item appeared in the material used |
+| Arabian Sea | 0 | 0% | No new item appeared in the material used |
+| the Horn of Africa | 0 | 0% | No new item appeared in the material used |
 | Total | 6 | 100% | Coded items in this report |
 
-The six items are concentrated in Z1. The count includes an official warning, political reporting, and professional and media reports; it does not equal the number of attacks or damaged vessels (MN-2026-11-01-01 through MN-2026-11-01-06; grades in the log below).
 
 ## Situation Indicators
 | Indicator | Current | Previous | Trend | Significance |
@@ -39,10 +38,10 @@ The figures in the table count published or coded items, not attacks. There is n
 ## Threat Level
 Overall level: Moderate — highest sector: Strait of Hormuz, Gulf of Oman and the Arabian Gulf. The assessment is based on UKMTO warning No. 190-26 and reports of tanker fires and an oil spill in the Gulf area. The warning alone does not establish the incident type or the executing party (MN-2026-11-01-01, MN-2026-11-01-04 and MN-2026-11-01-06; B/2; C/3).
 
-- Level in Strait of Hormuz, Gulf of Oman and the Arabian Gulf: Moderate (Z1).
-- Level in Bab al-Mandab and the Red Sea: Low (Z2); no new maritime incident was recorded in the material used.
-- Level in the Arabian Sea: Low (Z3); the material used contains no new maritime item.
-- Level in the Horn of Africa: Low (Z4); the material used showed no new maritime item.
+- Level in Strait of Hormuz, Gulf of Oman and the Arabian Gulf: Moderate.
+- Level in Bab al-Mandab and the Red Sea: Low; no new maritime incident was recorded in the material used.
+- Level in the Arabian Sea: Low; the material used contains no new maritime item.
+- Level in the Horn of Africa: Low; the material used showed no new maritime item.
 
 ## Operational Guidance
 "Execute:"

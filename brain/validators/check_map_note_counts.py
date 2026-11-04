@@ -115,15 +115,19 @@ def main() -> int:
         problems.append("لا نقاط في ملف الواجهة — لا يمكن التحقق من جملة الحالة")
     calc = compute(points)
 
-    # 1) جملة المصدر
-    m = AR_SRC.search(note)
-    if not m:
-        problems.append("جملة المصدر (points_note) غير موجودة بصيغتها المعتمدة")
+    m = None
+    # 1) جملة المصدر — حُذفت من الأسطح بقرار المالك (ملاحظة 6 و8)؛ تُتحقق فقط إن وُجدت.
+    if not str(note).strip():
+        print("  ✔ ملاحظة الخريطة محذوفة بقرار المالك — لا جملة مصدر للتحقق")
     else:
-        got = dict(zip(KEYS, (int(x) for x in m.groups())))
-        for k, v in got.items():
-            if v != calc[k]:
-                problems.append(f"جملة المصدر: {k} معلن {v} والمحسوب {calc[k]}")
+        m = AR_SRC.search(note)
+        if not m:
+            problems.append("جملة المصدر (points_note) موجودة لكن ليست بصيغتها المعتمدة")
+        else:
+            got = dict(zip(KEYS, (int(x) for x in m.groups())))
+            for k, v in got.items():
+                if v != calc[k]:
+                    problems.append(f"جملة المصدر: {k} معلن {v} والمحسوب {calc[k]}")
 
     # 2) إحصاءات النقاط
     for k in KEYS:
@@ -162,7 +166,7 @@ def main() -> int:
         problems.append(f"الصفحة الإنجليزية غير موجودة: {en_p}")
 
     out = {"date": args.date, "points": len(points), "computed": calc, "stats": stats,
-           "source_note_ok": bool(m), "arabic_page_ok": ar_ok, "english_page_ok": en_ok,
+           "source_note_ok": (not str(note).strip()) or bool(m), "arabic_page_ok": ar_ok, "english_page_ok": en_ok,
            "problems": problems}
     if args.json:
         pathlib.Path(args.json).write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")

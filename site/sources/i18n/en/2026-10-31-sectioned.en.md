@@ -12,10 +12,10 @@ The report uses the following symbols: UKMTO is the United Kingdom Maritime Trad
 ## Geographic Distribution of Incidents
 | Sector | Incident count | Share | Source / basis |
 |---|---:|---:|---|
-| Z1 — Strait of Hormuz, Gulf of Oman and the Arabian Gulf | 12 | 75% | Daily register + sector gate: 4 qualifying, 8 excluded |
-| Z2 — Bab el-Mandeb and the Red Sea | 1 | 6.25% | Daily register + sector gate: 0 qualifying, 1 excluded |
-| Z3 — Arabian Sea | 1 | 6.25% | Daily register + sector gate: 0 qualifying, 1 excluded |
-| Z4 — the Horn of Africa | 1 | 6.25% | Daily register + sector gate: 0 qualifying, 1 excluded |
+| Strait of Hormuz, Gulf of Oman and the Arabian Gulf | 12 | 75% | Daily register + sector gate: 4 qualifying, 8 excluded |
+| Bab el-Mandeb and the Red Sea | 1 | 6.25% | Daily register + sector gate: 0 qualifying, 1 excluded |
+| Arabian Sea | 1 | 6.25% | Daily register + sector gate: 0 qualifying, 1 excluded |
+| the Horn of Africa | 1 | 6.25% | Daily register + sector gate: 0 qualifying, 1 excluded |
 | Non-spatial | 1 | 6.25% | Daily register + sector gate: 1 non-spatial |
 | Total | 16 | 100% | Daily register + sector gate: 4 qualifying, 11 excluded, 1 non-spatial |
 
@@ -41,10 +41,10 @@ The figures in the table are counts of reports or coverage groups during the per
 
 | Sector | Calculated level | Decision card | Basis of judgement |
 |---|---|---|---|
-| Z1 — Strait of Hormuz, Gulf of Oman and the Arabian Gulf | High | High | UKMTO reports of incidents in Hormuz align with continuing reports of vessel damage and conflicting accounts concerning mines and projectiles. |
-| Z2 — Bab el-Mandeb and the Red Sea | Low | Low | No qualifying incident during the period. |
-| Z3 — Arabian Sea | Low | Low | The period contains no qualifying incident. |
-| Z4 — the Horn of Africa | Low | Low | No qualifying incident was recorded during this period. |
+| Strait of Hormuz, Gulf of Oman and the Arabian Gulf | High | High | UKMTO reports of incidents in Hormuz align with continuing reports of vessel damage and conflicting accounts concerning mines and projectiles. |
+| Bab el-Mandeb and the Red Sea | Low | Low | No qualifying incident during the period. |
+| Arabian Sea | Low | Low | The period contains no qualifying incident. |
+| the Horn of Africa | Low | Low | No qualifying incident was recorded during this period. |
 
 This decision card is the sole source of the decision in this edition; the threat level, the decision-card risk value, and the body text are identical.
 
@@ -171,10 +171,10 @@ We monitor UKMTO, JMIC, and IMO updates, together with every report mentioning a
 
 ### Decision Card and Counter
 - Calculated general level: **High**; highest sector: **Strait of Hormuz, Gulf of Oman and the Arabian Gulf**.
-- Z1 — Strait of Hormuz, Gulf of Oman and the Arabian Gulf: **High**.
-- Z2 — Bab el-Mandeb and the Red Sea: **Low**.
-- Z3 — Arabian Sea: **Low**.
-- Z4 — the Horn of Africa: **Low**.
+- Strait of Hormuz, Gulf of Oman and the Arabian Gulf: **High**.
+- Bab el-Mandeb and the Red Sea: **Low**.
+- Arabian Sea: **Low**.
+- the Horn of Africa: **Low**.
 - Period counter: **16 incidents**; **4 qualifying**; **11 excluded**; **1 non-spatial**. This count is not the number of attacks or vessels.
 ## Source Status and Disclosure
 **60/60 feeds** and **1,936 items** were screened. The feeds succeeded at the source level, and **2 manual references** were recorded for sources 39 and 52. The screening flag marked **6 stale sources** under the 14-day threshold: 12, 13, 20, 30, 32, and 49; they were not used alone to establish a new incident. The routes for sources 17 and 24 were also unavailable in two subsidiary attempts, while the overall feed status remained successful through the approved alternative routes. There were no empty feeds, and these limitations are not hidden from the reader.

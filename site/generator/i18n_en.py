@@ -245,6 +245,9 @@ def _en_date_phrase(raw: str) -> str | None:
     return value
 
 
+_PLACE_EN = {"لما": "Lima"}
+
+
 def localize_patterns(s: str) -> str | None:
     n = norm(s)
     m = re.fullmatch(r"\(?official_ref=(\S+)\s+\(سجل الدفتر المجمّد\s+([^)]+)\)\)?", n)
@@ -275,6 +278,8 @@ def localize_patterns(s: str) -> str | None:
         _G = {}
 
     _AREA_EN = {
+        "غير محددة": "not specified",
+        "مقابل السواحل الإماراتية": "off the UAE coast",
         "مضيق هرمز": "Strait of Hormuz", "خليج عُمان": "Gulf of Oman",
         "الخليج العربي": "Arabian Gulf", "باب المندب": "Bab-el-Mandeb",
         "البحر الأحمر": "Red Sea", "خليج عدن": "Gulf of Aden",
@@ -303,6 +308,17 @@ def localize_patterns(s: str) -> str | None:
             if right.strip() in _AREA_EN:
                 return f"{_tr(left.strip())} - {_AREA_EN[right.strip()]}"
         return t
+
+    def _area_full(v: str) -> str:
+        """ترجمة وسم منطقة كامل، بما فيه «مكان، عمان - منطقة» (ك-497)."""
+        t = (v or "").strip()
+        m = re.fullmatch(r"(?P<place>[^،]+)،\s*عمان\s*-\s*(?P<area>.+)", t)
+        if m:
+            place = _PLACE_EN.get(m.group("place").strip())
+            area = _tr_area(m.group("area"))
+            if place and not ARABIC.search(area):
+                return f"{place}, Oman - {area}"
+        return _tr_area(t)
 
     def _tr(v: str) -> str:
         hit = (_G or {}).get(norm(v))
@@ -411,7 +427,7 @@ def localize_patterns(s: str) -> str | None:
     m = re.fullmatch(r"الواقعة\s+(\S+)\s+—\s+المنطقة\s+(.+?)،\s+الصفة\s+(.+?)،\s+"
                      r"الإثبات\s+(.+?)،\s+الموقع\s+(.+?)\.", n)
     if m:
-        return (f"Event {m.group(1)} — area {_tr(m.group(2))}, "
+        return (f"Event {m.group(1)} — area {_area_full(m.group(2))}, "
                 f"class {_tr(m.group(3))}, confirmation {_tr(m.group(4))}, "
                 f"location {_tr(m.group(5))}.")
     # ك-471: جملة مجمّعة لوقائع متشابهة في المنطقة والصفة والإثبات ودقة الموضع؛
@@ -420,7 +436,7 @@ def localize_patterns(s: str) -> str | None:
                      r"الإثبات\s+(.+?)،\s+الموقع\s+(.+?)\.", n)
     if m:
         ids = ", ".join(x.strip() for x in m.group(1).split("·") if x.strip())
-        return (f"Events {ids} — area {_tr(m.group(2))}, class {_tr(m.group(3))}, "
+        return (f"Events {ids} — area {_area_full(m.group(2))}, class {_tr(m.group(3))}, "
                 f"confirmation {_tr(m.group(4))}, location {_tr(m.group(5))}.")
     m = re.fullmatch(r"الخط الزمني المرصود:\s*(.+?)\.", n)
     if m:
@@ -490,6 +506,9 @@ def localize_patterns(s: str) -> str | None:
                 "coordinates." if m.group(2).startswith("منها") else
                 "all of them with coordinates stated in the sources.")
         return f"Positions of {m.group(1)} incidents within the report scope; {tail}"
+    _zl = _zone_level_en(n)
+    if _zl is not None:
+        return _zl
     m = re.fullmatch(r"خريطة وقائع التقرير: (\d+) واقعة مرسومة على الخليج العربي ومضيق هرمز وخليج عمان "
                      r"\(إحداثيات مذكورة (\d+) · مواقع تقريبية (\d+)\)\. الحالات: (.+?)\."
                      r" الموقع التقريبي يعني أن المصدر لم يذكر إحداثيات فوُضعت العلامة داخل المنطقة نفسها لا في موقع محدد\.", n)
@@ -516,6 +535,46 @@ def localize_patterns(s: str) -> str | None:
         if m.group(6):
             base += (" Incidents outside the map extent are listed in the geographic distribution table.")
         return base
+
+    # ك-497: عائلة وصف الواقعة على الخريطة (البديل النصي) — بنية مقفلة بمعرّف واقعة
+    _KIND = {"بلاغ رسمي": "official report", "نقل إعلامي": "media relay",
+             "تقدير تحليلي": "analytical estimate", "رواية غير مؤكدة": "unconfirmed account",
+             "بلاغ غير مؤكد": "unconfirmed report"}
+    _CONF = {"مؤكد": "confirmed", "غير مؤكد": "unconfirmed", "مرجح": "probable"}
+    _LOC = {"تقريبي": "approximate", "دقيق": "exact"}
+    m = re.fullmatch(
+        r"الواقعة\s+(?P<code>\d{2}-\d{2})\s+—\s+المنطقة\s+(?P<area>.+?)،\s+"
+        r"الصفة\s+(?P<kind>[^،]+)،\s+الإثبات\s+(?P<conf>[^،]+)،\s+الموقع\s+(?P<loc>.+)\.",
+        n)
+    if m:
+        area = _tr_area(m.group("area"))
+        kind = _KIND.get(m.group("kind").strip())
+        conf = _CONF.get(m.group("conf").strip())
+        loc = _LOC.get(m.group("loc").strip())
+        if kind and conf and loc and not re.search(ARABIC, area):
+            return (f"Incident {m.group('code')} — area {area}, type {kind}, "
+                    f"confirmation {conf}, location {loc}.")
+
+    # ك-497: بلاغ التحذير في جدول المصادر — نص مقتطع بعلامة قطع
+    m = re.fullmatch(
+        r"(?:·\s*)+التحذير\s+(?P<id>\d{3}-\d{2}):\s*هجوم على ناقلة على بعد\s+"
+        r"(?P<d>\d+)\s+ميلا? بحريا? شرق\s+(?P<place>.+)…", n)
+    if m:
+        return (f"· Warning {m.group('id')}: an attack on a tanker {m.group('d')} "
+                f"nautical miles east of {m.group('place')}…")
+
+    # ك-497: عائلات بطاقة سجل الحوادث المؤكدة من IMO
+    m = re.fullmatch(r"—\s*(?P<n>\d+)\s+حادثة مؤكدة على سفن تجارية", n)
+    if m:
+        return f"— {m.group('n')} confirmed incidents on commercial vessels"
+    m = re.fullmatch(r"(?P<place>[^،]+)،\s*عمان\s*-\s*(?P<area>.+)", n)
+    if m:
+        area = _tr_area(m.group("area"))
+        if not re.search(ARABIC, area):
+            return f"{m.group('place')}, Oman - {area}"
+    m = re.fullmatch(r"بصيغة مختصرة لا يذكر اسم السفينة ولا الضرر", n)
+    if m:
+        return "in a brief form that names neither the vessel nor the damage"
     m = COUNTER.match(n)
     if m:
         return f"{m.group(1)} {COUNT_WORD[m.group(2)]}" + (f" {m.group(3)}" if m.group(3) else "")
@@ -609,6 +668,48 @@ def _translate_counter_fragment(text: str, labels: dict[str, str]) -> str:
     for arabic, english in sorted(labels.items(), key=lambda item: len(item[0]), reverse=True):
         translated = translated.replace(arabic, english)
     return translated
+
+
+_ZONES_RAW = {
+    'مضيق هرمز وخليج عُمان والخليج العربي': 'the Strait of Hormuz, the Gulf of Oman and the Arabian Gulf',
+    'باب المندب والبحر الأحمر': 'Bab al-Mandab and the Red Sea',
+    'بحر العرب': 'the Arabian Sea',
+    'القرن الأفريقي': 'the Horn of Africa',
+    'المحيط الهندي': 'the Indian Ocean',
+    'الخليج العربي': 'the Arabian Gulf',
+    'خليج عُمان': 'the Gulf of Oman',
+    'خليج عدن': 'the Gulf of Aden',
+}
+_LEVELS_RAW = {'حرج': 'Critical', 'مرتفع جدًا': 'Very high', 'مرتفع': 'High',
+               'متوسط': 'Moderate', 'منخفض': 'Low'}
+_TAILS_RAW = {
+    '': '',
+    ' لم تُسجَّل واقعة بحرية جديدة في المصادر المستخدمة.': ' No new maritime incident was recorded in the sources used.',
+    ' لا تتضمن المصادر المستخدمة بندًا بحريًا جديدًا.': ' The sources used contain no new maritime item.',
+    ' لم تُظهر المصادر المستخدمة بندًا بحريًا جديدًا.': ' The sources used show no new maritime item.',
+    ' لا واقعة مؤهّلة داخل الفترة.': ' No qualifying incident within the period.',
+}
+ZONES_EN = {norm(k): v for k, v in _ZONES_RAW.items()}
+LEVELS_EN = {norm(k): v for k, v in _LEVELS_RAW.items()}
+TAILS_EN = {norm(k): v for k, v in _TAILS_RAW.items()}
+_ZONE_LEVEL_RE = re.compile(
+    r"المستوى في (" + "|".join(map(re.escape, ZONES_EN)) + r"): ("
+    + "|".join(map(re.escape, LEVELS_EN)) + r")(?:\s*\(Z[1-5]\))?\.(.*)")
+
+
+def _zone_level_en(n: str):
+    """نمط أسطر مستوى القطاع: «المستوى في <منطقة>: <مستوى>. <ذيل>» (ك-497).
+
+    يُترجم بالمعنى لا كلمة بكلمة؛ وذيل غير معروف يعيد None فيبقى الوحدة غير مترجمة
+    فيرفض البناء فشلًا مغلقًا بدل إخراج عربية داخل الصفحة الإنجليزية.
+    """
+    m = _ZONE_LEVEL_RE.fullmatch(n)
+    if not m:
+        return None
+    tail_en = TAILS_EN.get(norm(m.group(3)))
+    if tail_en is None:
+        return None
+    return f"Level in {ZONES_EN[m.group(1)]}: {LEVELS_EN[m.group(2)]}.{tail_en}"
 
 
 def make_translator(tm: dict[str, str], gl: dict[str, str]):

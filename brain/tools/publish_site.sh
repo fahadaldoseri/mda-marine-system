@@ -48,10 +48,27 @@ if [ "$MODE" = telegram ]; then
   DIG="$B/logs/tg-digest-$D.html"
   PDF="$SITE/dist/reports/pdf/$D.pdf"
   python3 "$B/tools/make_tg_digest.py" --date "$D" --out "$DIG" || { record "$OUT" failed 2 '{"why":"digest"}'; exit 2; }
-  [ -s "$PDF" ] || { echo "✘ لا PDF: $PDF"; record "$OUT" failed 2 '{"why":"pdf-missing"}'; exit 2; }
-  python3 "$B/tools/telegram_send.py" --daily-report --date "$D" --file "$DIG" --document "$PDF" 2>&1 | tee "$B/logs/telegram-$D.out" | tail -3
+  # الطباعة معطلة بأمر المالك (2026-11-03)؛ فيُرسل الملخص نصًّا بلا مرفق PDF،
+  # ويُسجَّل سبب التخطي في سجل الإرسال. وجود PDF يعني أن الطباعة مُفعَّلة فيُرسل معه.
+  if [ -s "$PDF" ]; then
+    python3 "$B/tools/telegram_send.py" --daily-report --date "$D" --file "$DIG" --document "$PDF" 2>&1 | tee "$B/logs/telegram-$D.out" | tail -3
+    PDF_STATE=attached
+  else
+    echo "⚠ لا PDF (الطباعة معطلة بأمر المالك) — يُرسل الملخص نصًّا بلا مرفق"
+    # إن كان تاريخ التقرير غير تاريخ اليوم بتوقيت UTC (إرسال بعد منتصف الليل)،
+    # يلزم تفويض مكتوب في logs/owner-approval-$D.txt — وإلا يفشل مغلقًا.
+    APPROVAL="$B/logs/owner-approval-$D.txt"
+    TODAY=$(date -u +%F)
+    if [ "$D" != "$TODAY" ] && [ -s "$APPROVAL" ]; then
+      REASON=$(head -3 "$APPROVAL" | tr '\n' ' ')
+      python3 "$B/tools/telegram_send.py" --daily-report --date "$D" --file "$DIG" --owner-approved --reason "$REASON" 2>&1 | tee "$B/logs/telegram-$D.out" | tail -3
+    else
+      python3 "$B/tools/telegram_send.py" --daily-report --date "$D" --file "$DIG" 2>&1 | tee "$B/logs/telegram-$D.out" | tail -3
+    fi
+    PDF_STATE=skipped-printing-disabled
+  fi
   rc=${PIPESTATUS[0]}
-  if [ "$rc" -eq 0 ]; then record "$OUT" ok 0; echo "✔ أُرسل ملخص $D"; else record "$OUT" failed "$rc"; echo "✘ فشل إرسال تلغرام (رمز $rc)"; fi
+  if [ "$rc" -eq 0 ]; then record "$OUT" ok 0 "{\"pdf\":\"$PDF_STATE\"}"; echo "✔ أُرسل ملخص $D"; else record "$OUT" failed "$rc"; echo "✘ فشل إرسال تلغرام (رمز $rc)"; fi
   exit "$rc"
 fi
 

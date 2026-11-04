@@ -80,7 +80,11 @@ def source_paths() -> list[pathlib.Path]:
     paths = list(APPROVED_SOURCES)
     paths += sorted((ROOT / "reports").glob("*-sectioned.md"))
     paths += sorted((ROOT / "sections").glob("*.md"))
-    return [p for p in paths if p.exists()]
+    # ك-496: `sections/20-lexicon.md` ملف مُشتق من `appendices/simplified-vocabulary.json`
+    # ويُعاد توليده داخل الجولة بعد توليد المعجم، فكان يُبقي البصمة غير مطابقة أبدًا.
+    # يُستبعد هنا لأن أصله المعتمد (الملف الحاكم) مصدرٌ قائم بذاته.
+    derived = {ROOT / "sections" / "20-lexicon.md"}
+    return [p for p in paths if p.exists() and p not in derived]
 
 
 def build() -> dict:

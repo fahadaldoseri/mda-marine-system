@@ -11,10 +11,12 @@ import json
 import pathlib
 import sys
 
+import os as _os
+_SITE = pathlib.Path(_os.environ.get("SITE_DIR") or (pathlib.Path(__file__).resolve().parents[2] / "seawatch"))
 GLOSSARY = pathlib.Path(
     sys.argv[sys.argv.index("--file") + 1]
     if "--file" in sys.argv
-    else "/home/ubuntu/seawatch/sources/i18n/en/glossary.json"
+    else _SITE / "sources/i18n/en/glossary.json"
 )
 ALLOWED_TOP_LEVEL = {
     "_note",
@@ -56,4 +58,7 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    # ك-133: كل مدقق يمرّ عبر الحارس الموحّد — الانهيار يخرج بالرمز 70 ويمنع التسليم.
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)

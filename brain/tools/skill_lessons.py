@@ -162,7 +162,14 @@ def main() -> int:
 
     append_log(entry)
     block = build_block(a.date, summ, new_faults, history[:40])
-    changed = update_lessons(block)
+    # ك-495: نتيجة كل تشغيل تُدوَّن في سجل تشغيل مستقل، لا في أصل المهارة الحاكم؛
+    # كتابتها في المهارة كانت تُنشئ انحراف تماثل بعد كل بوابة (عطل متكرر).
+    status_log = ROOT / 'logs' / 'gate-status.md'
+    status_log.parent.mkdir(parents=True, exist_ok=True)
+    with status_log.open('a', encoding='utf-8') as fh:
+        fh.write(f'\n<!-- {entry["ts_utc"]} -->\n' + block + '\n')
+    # المهارة تُحدَّث فقط عند درس جديد حقيقي (عطل جديد يدخل السجل).
+    changed = update_lessons(block) if new_faults else False
     print(f'  • حلقة التعلم: نتيجة {summ["status"]} · أعطال جديدة: {len(new_faults)}'
           f'{" · حُدّثت كتلة الدروس" if changed else ""}')
     return 0
