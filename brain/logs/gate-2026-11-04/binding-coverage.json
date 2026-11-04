@@ -1,0 +1,86 @@
+{
+ "brain": "/home/ubuntu/brain-marine-news",
+ "total": 1121,
+ "bound": 299,
+ "declared_output": 0,
+ "exempt": 812,
+ "orphans": [
+  "tools/ledger_proof_degree.py",
+  "tools/merge_event_sources.py",
+  "tools/source_alternatives.py",
+  "tools/source_coverage_line.py",
+  "tests/test_event_card_rows.py",
+  "tests/test_ledger_proof_degree.py",
+  "tests/test_merge_event_sources.py",
+  "tests/test_source_alternatives.py",
+  "tests/test_source_coverage_line.py",
+  "tests/test_surface_hygiene.py"
+ ],
+ "verdict": 1,
+ "samples": {
+  "bound": [
+   "validators/_guard.py",
+   "validators/check_additions_surface.py",
+   "validators/check_area_vocabulary.py",
+   "validators/check_asset_floor.py",
+   "validators/check_backup_parity.py",
+   "validators/check_backup_push_safety.py",
+   "validators/check_card_counters.py",
+   "validators/check_carryover.py",
+   "validators/check_closure.py",
+   "validators/check_code_policy.py",
+   "validators/check_code_spaces.py",
+   "validators/check_comprehension.py",
+   "validators/check_content_fidelity.py",
+   "validators/check_daily_event_surface.py",
+   "validators/check_daily_events_schema.py",
+   "validators/check_decision_card.py",
+   "validators/check_desktop_readability.py",
+   "validators/check_en_parity.py",
+   "validators/check_event_card_contract.py",
+   "validators/check_event_links.py"
+  ],
+  "exempt": [
+   [
+    "validators/__pycache__/_guard.cpython-312.pyc",
+    "ذاكرة ترجمة مؤقتة"
+   ],
+   [
+    "validators/__pycache__/check_card_counters.cpython-312.pyc",
+    "ذاكرة ترجمة مؤقتة"
+   ],
+   [
+    "validators/__pycache__/check_comprehension.cpython-312.pyc",
+    "ذاكرة ترجمة مؤقتة"
+   ],
+   [
+    "validators/__pycache__/check_daily_event_surface.cpython-312.pyc",
+    "ذاكرة ترجمة مؤقتة"
+   ],
+   [
+    "validators/__pycache__/check_decision_card.cpython-312.pyc",
+    "ذاكرة ترجمة مؤقتة"
+   ],
+   [
+    "validators/__pycache__/check_event_card_contract.cpython-312.pyc",
+    "ذاكرة ترجمة مؤقتة"
+   ],
+   [
+    "validators/__pycache__/check_kpi_layers.cpython-312.pyc",
+    "ذاكرة ترجمة مؤقتة"
+   ],
+   [
+    "validators/__pycache__/check_ledger_continuity.cpython-312.pyc",
+    "ذاكرة ترجمة مؤقتة"
+   ],
+   [
+    "validators/__pycache__/check_ledger_links.cpython-312.pyc",
+    "ذاكرة ترجمة مؤقتة"
+   ],
+   [
+    "validators/__pycache__/check_map_note_counts.cpython-312.pyc",
+    "ذاكرة ترجمة مؤقتة"
+   ]
+  ]
+ }
+}

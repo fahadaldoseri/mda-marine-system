@@ -1,18 +1,40 @@
 [
   {
-    "code": "COVER-2026-04-02-001",
+    "code": "NI-2026-04-02",
     "date": "2026-04-02",
-    "class": "تحذير/نشرة",
-    "title": "أكدت MSCIO استمرار العمليات العسكرية، وأن العبور في هرمز غير موصى به. سجلت اضطرابًا متقطعًا في GNSS/AIS والاتصالات والرادار، وتكدسًا لسفن تجارية عند المخطاف والموانئ. وفي باب المندب/البحر الأحمر قالت إن خطر عودة النشاط الحوثي قائم، مع عدم تسجيل هجمات حوثية بحرية حتى ذلك التاريخ. الأثر التشغيلي: تعزيز المراقبة، التحقق بالرادار والملاحة التقديرية، وتجنب المسارات غير الضرورية.",
-    "source": "https://mscio.eu/media/documents/20260402_MSCIO_ADVISORY_01_2026._UPDATE_12.pdf",
-    "confidence": "عالية",
-    "source_excerpt": "أكدت MSCIO استمرار العمليات العسكرية، وأن العبور في هرمز غير موصى به. سجلت اضطرابًا متقطعًا في GNSS/AIS والاتصالات والرادار، وتكدسًا لسفن تجارية عند المخطاف والموانئ. وفي باب المندب/البحر الأحمر قالت إن خطر عودة النشاط الحوثي قائم، مع عدم تسجيل هجمات حوثية بحرية حتى ذلك التاريخ. الأثر التشغيلي: تعزيز المراقبة، التحقق بالرادار والملاحة التقديرية، وتجنب المسارات غير الضرورية.",
+    "sector": "خارج القطاعات",
+    "class": "no_incident",
+    "no_incident": true,
     "backfilled": true,
-    "material_projection": true,
-    "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
-    "retrieved_at": "2026-10-31T16:08:28Z",
-    "source_description": "إسقاط يومي أمين لسجل موجود أصلًا في event-ledger-master.json؛ لا واقعة جديدة.",
-    "target": "سفينة",
+    "title": "لا واقعة مسجّلة في المصادر الرسمية المفحوصة",
+    "description": "لا واقعة مسجّلة في المصادر الرسمية المفحوصة لهذا التاريخ.",
+    "source": "مسح رسمي متعدد المصادر",
+    "confidence": "عالية",
+    "evidence_kind": "official-source-scan",
+    "evidence_ref": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+    "retrieved_at": "2026-11-04T03:05:20Z",
+    "sources_checked": [
+      {
+        "source_id": "imo_confirmed",
+        "source": "IMO — قائمة الوقائع المؤكدة (القسم الرسمي الموضوعات الساخنة)",
+        "url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+        "http_status": 200,
+        "invoked": true,
+        "result": "لا واقعة في هذا التاريخ",
+        "coverage_note": "القائمة الرسمية تغطي 2026-03-01 إلى 2026-10-23 (84 يومًا مؤرَّخًا · 122 واقعة)",
+        "retrieved_at": "2026-11-04T03:05:20Z"
+      },
+      {
+        "source_id": "ukmto",
+        "source": "UKMTO — البلاغات الرسمية (Recent Incidents)",
+        "url": "https://www.ukmto.org/recent-incidents",
+        "http_status": 403,
+        "invoked": true,
+        "result": "محجوب على الطلب الآلي — لا يُعدّ فحصًا",
+        "coverage_note": "curl يُرجع 403؛ مسار المتصفح في المشروع يجلب الصفحة (يُستخدم عند توفره)",
+        "retrieved_at": "2026-11-04T03:05:20Z"
+      }
+    ],
     "update_of": null,
     "parent_id": null,
     "duplicate_of": null,
@@ -20,7 +42,6 @@
     "link_basis": "لا دليل رابط",
     "link_evidence": "",
     "link_status": "غير مرتبط",
-    "counts_as_new": true,
-    "sector_id": "Z1"
+    "counts_as_new": true
   }
 ]
