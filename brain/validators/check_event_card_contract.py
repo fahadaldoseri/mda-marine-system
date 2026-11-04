@@ -4,11 +4,11 @@
 
 تقيس الصفحة المبنية مقابل `appendices/event-card-contract.md`:
 
-- عشرة صفوف ثابتة بالترتيب نفسه في كل بطاقة: العنوان · التصنيف · درجة الموثوقية ·
-  التاريخ والوقت · الموضع · المصدر · الرابط الرسمي · ترجمة المعنى · النص الأصلي · فرع تابع.
-- الوسوم حرفية كما في العقد، والقيم داخل القوائم المغلقة.
+- تسعة صفوف ثابتة بالترتيب نفسه في كل بطاقة؛ صف ترجمة المعنى ملغى.
+- تسميات الحقول مشتقة من العقد، ومقابلات النسخة الإنجليزية من المعجم الحاكم.
+- الصفوف 1 و2 و3 و9 بنيوية: رقم الصف، الحالة المعتمدة، ومضمون غير فارغ.
 - لا وسوم ولا روابط مختصرة ظاهرة في نصّ البطاقة.
-- الطيّ إلزامي لمسار التحقق الداخلي وللنص الأصلي.
+- الطيّ إلزامي للنص الأصلي.
 - تماثل بنيوي بين النسخة العربية والإنجليزية: العدد والرموز والصفوف.
 
 الاستعمال:
@@ -27,12 +27,12 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CARD_ROWS = 10
-ROW_LABELS = {4: "التاريخ والوقت", 5: "الموقع", 6: "المصدر", 7: "الرابط الرسمي",
-              8: "ترجمة المعنى", 9: "النص الأصلي"}
-# الوسوم المقابلة في النسخة الإنجليزية (تُقرأ من المعجم المعتمد، لا تُخمَّن).
-EN_ROW_LABELS = {4: "Date and time", 5: "Location", 6: "Source and grade",
-                 7: "Official link", 8: "Meaning translation", 9: "Original text"}
+CONTRACT_PATH = ROOT / "appendices" / "event-card-contract.md"
+DEFAULT_GLOSSARY_PATH = ROOT.parent / "seawatch" / "sources" / "i18n" / "en" / "glossary.json"
+CARD_ROWS = 9
+LABELLED_ROWS = (4, 5, 6, 7, 8)
+AR_LABELLED_ROWS = LABELLED_ROWS
+STRUCTURAL_ROWS = (1, 2, 3, 9)
 CLASSIFICATION_VALUES = ("بلاغ رسمي", "تقرير مهني", "نقل إعلامي", "نقل سياسي",
                          "رواية غير مؤكدة من طرف واحد", "نفي رسمي", "غير مصنّف", "قيد التثبّت")
 RELIABILITY_VALUES = ("عالية", "متوسطة", "منخفضة", "غير مقيّمة")
@@ -41,13 +41,37 @@ ROW_STATES = ("shown", "hidden-rule-arabic-source", "hidden-rule-no-excerpt",
 SHORTLINK_RE = re.compile(r"https?://(?:t\.co|bit\.ly|lnkd\.in|tinyurl\.com|goo\.gl|ow\.ly|"
                           r"buff\.ly|is\.gd|cutt\.ly|rb\.gy)/")
 HASHTAG_RE = re.compile(r"(?<!\w)#[A-Za-z0-9_\u0600-\u06ff]{2,}")
+TRANSLATION_FALLBACK_RE = re.compile(
+    r"(?:الترجمة|ترجمة)\s+(?:غير\s+)?(?:ال)?(?:مدرجة|متاحة|متوفرة|موجودة|مذكورة)\s+في\s+"
+    r"(?:الدفتر|السجل)|(?:translation|meaning translation)\s+(?:(?:is|was)\s+)?(?:not\s+)?"
+    r"(?:listed|available|present|included)\s+in\s+(?:the\s+)?(?:ledger|log)",
+    re.IGNORECASE,
+)
+MEANING_TRANSLATION_LABELS = {"ترجمة المعنى", "Meaning translation"}
 CARD_RE = re.compile(r'<article\b[^>]*\bclass="ev[^"]*"[^>]*>.*?</article>', re.S)
 CODE_RE = re.compile(r'data-event-code="([^"]*)"')
 ROWS_ATTR_RE = re.compile(r'data-event-rows="(\d+)"')
-ROW_RE = re.compile(r'data-row="(\d+)"(?: data-row-state="([a-z\-]+)")?[^>]*>\s*'
-                    r'(?:<span class="ev-k">([^<]*)</span>)?')
+ROW_OPEN_RE = re.compile(
+    r'<(?P<tag>[A-Za-z][\w:-]*)\b'
+    r'(?=[^>]*\bdata-row\s*=\s*"(?P<number>\d+)")[^>]*>',
+    re.S,
+)
+ROW_STATE_RE = re.compile(r'\bdata-row-state\s*=\s*"([a-z\-]+)"')
+EV_LABEL_RE = re.compile(r'<span\s+class="ev-k">([^<]*)</span>')
+BRANCH_TITLE_RE = re.compile(r'<span\s+class="ev-branch-title">([^<]*)</span>')
 BADGE_RE = re.compile(r'data-classification="([^"]*)"')
 RELIABILITY_RE = re.compile(r'data-reliability="([^"]*)"')
+CONTRACT_ROW_RE = re.compile(r'^\s*\|\s*(\d+)\s*\|\s*([^|]+?)\s*\|', re.M)
+
+
+class RowFragment:
+    __slots__ = ("number", "state", "opening_tag", "inner_html")
+
+    def __init__(self, number: int, state: str, opening_tag: str, inner_html: str) -> None:
+        self.number = number
+        self.state = state
+        self.opening_tag = opening_tag
+        self.inner_html = inner_html
 
 
 def read_text(path: Path) -> str:
@@ -59,6 +83,126 @@ def read_text(path: Path) -> str:
         raise RuntimeError(f"تعذر قراءة {path}: {exc}") from exc
 
 
+def load_arabic_row_labels(contract_path: Path = CONTRACT_PATH) -> dict[int, str]:
+    """اشتق تسميات الصفوف من جدول العقد، لا من نسخة داخل الحارس."""
+    contract = read_text(contract_path)
+    section_match = re.search(
+        r'^##\s+الصفوف التسعة\s*$.*?(?=^###\s+الصف الملغى\s*$)',
+        contract,
+        re.M | re.S,
+    )
+    if not section_match:
+        raise RuntimeError(f"جدول صفوف البطاقة مفقود في العقد: {contract_path}")
+    labels = {
+        int(match.group(1)): match.group(2).strip()
+        for match in CONTRACT_ROW_RE.finditer(section_match.group(0))
+    }
+    expected = set(range(1, CARD_ROWS + 1))
+    if set(labels) != expected or any(not label for label in labels.values()):
+        raise RuntimeError(
+            f"جدول صفوف البطاقة غير مكتمل في العقد: المتوقع 1..{CARD_ROWS}"
+        )
+    return labels
+
+
+def _branch_label(arabic_row_label: str) -> str:
+    """استخرج عنوان فرع العلاقة من تسمية الصف التاسع في العقد."""
+    return arabic_row_label.split("(", 1)[0].strip()
+
+
+def _arabic_expected_labels(contract_path: Path = CONTRACT_PATH) -> dict[int, str]:
+    labels = load_arabic_row_labels(contract_path)
+    expected = {number: labels[number] for number in LABELLED_ROWS}
+    expected[9] = _branch_label(labels[9])
+    return expected
+
+
+def _load_entries(glossary_path: Path) -> dict[str, str]:
+    try:
+        data = json.loads(read_text(glossary_path))
+    except json.JSONDecodeError as exc:
+        raise RuntimeError(f"المعجم غير قابل للقراءة: {glossary_path}: {exc}") from exc
+    entries = data.get("entries") if isinstance(data, dict) else None
+    if not isinstance(entries, dict):
+        raise RuntimeError(f"مفتاح entries مفقود أو غير صالح في المعجم: {glossary_path}")
+    return entries
+
+
+def _glossary_translation(entries: dict[str, str], arabic_label: str) -> str:
+    direct = entries.get(arabic_label)
+    if isinstance(direct, str) and direct.strip():
+        return direct.strip()
+
+    # بعض نسخ المعجم تحفظ تسمية المصدر داخل مثال يبدأ بالعبارة نفسها؛
+    # يُشتق الجزء المقابل قبل النقطتين آليًا، ولا تُكتب تسمية إنجليزية في الحارس.
+    prefixed = [
+        value for key, value in entries.items()
+        if isinstance(key, str) and key.startswith(f"{arabic_label}:")
+        and isinstance(value, str) and value.strip()
+    ]
+    if len(prefixed) == 1:
+        candidate = prefixed[0].split(":", 1)[0].strip()
+        if candidate:
+            return candidate
+    raise RuntimeError(f"لا مقابل إنجليزي في المعجم للتسمية: {arabic_label}")
+
+
+def load_english_row_labels(
+    glossary_path: Path = DEFAULT_GLOSSARY_PATH,
+    arabic_labels: dict[int, str] | None = None,
+    *,
+    required_rows: tuple[int, ...] | list[int] | None = None,
+) -> dict[int, str]:
+    """اشتق مقابلات الصفوف من entries للتسميات المطلوبة فقط، بفشل مغلق."""
+    arabic_labels = arabic_labels or _arabic_expected_labels()
+    required_rows = tuple(required_rows if required_rows is not None else LABELLED_ROWS)
+    entries = _load_entries(glossary_path)
+    translations: dict[int, str] = {}
+    missing: list[str] = []
+    for number in required_rows:
+        arabic_label = arabic_labels[number]
+        try:
+            translations[number] = _glossary_translation(entries, arabic_label)
+        except RuntimeError:
+            missing.append(arabic_label)
+    if missing:
+        unique_missing = list(dict.fromkeys(missing))
+        raise RuntimeError(
+            "لا مقابل إنجليزي في المعجم للتسمية: " + "، ".join(unique_missing)
+        )
+    return translations
+
+
+def _presented_labels(page_html: str) -> dict[int, str]:
+    """اقرأ التسميات المعروضة فعليًا لاختيار مقابلات المعجم اللازمة."""
+    rows = _extract_rows(page_html)
+    labels: dict[int, str] = {}
+    for number in LABELLED_ROWS:
+        row = rows.get(number)
+        if row is None:
+            continue
+        match = EV_LABEL_RE.search(row.inner_html)
+        if match:
+            labels[number] = match.group(1).strip()
+    branch = BRANCH_TITLE_RE.search(page_html)
+    if branch:
+        labels[9] = branch.group(1).strip()
+    return labels
+
+
+def _extract_rows(card_html: str) -> dict[int, RowFragment]:
+    matches = list(ROW_OPEN_RE.finditer(card_html))
+    rows: dict[int, RowFragment] = {}
+    for index, match in enumerate(matches):
+        number = int(match.group("number"))
+        end = matches[index + 1].start() if index + 1 < len(matches) else len(card_html)
+        opening_tag = match.group(0)
+        state_match = ROW_STATE_RE.search(opening_tag)
+        state = state_match.group(1) if state_match else "shown"
+        rows.setdefault(number, RowFragment(number, state, opening_tag, card_html[match.end():end]))
+    return rows
+
+
 def visible_text(card_html: str) -> str:
     """نصّ البطاقة المرئي بلا وسوم، لفحص الوسوم والروابط المختصرة."""
     text = re.sub(r"<(?:script|style)\b.*?</(?:script|style)>", " ", card_html, flags=re.S)
@@ -66,26 +210,68 @@ def visible_text(card_html: str) -> str:
     return html.unescape(re.sub(r"<[^>]+>", " ", text))
 
 
-def card_violations(card_html: str, index: int, labels: dict[int, str] | None = None) -> list[str]:
+def card_violations(
+    card_html: str,
+    index: int,
+    labels: dict[int, str] | None = None,
+) -> list[str]:
     errors: list[str] = []
-    labels = labels or ROW_LABELS
+    labels = labels or _arabic_expected_labels()
     code = (CODE_RE.search(card_html) or [None, f"#{index}"])[1]
     where = f"بطاقة {index} ({code})"
     rows_attr = ROWS_ATTR_RE.search(card_html)
     if not rows_attr or rows_attr.group(1) != str(CARD_ROWS):
         errors.append(f"{where}: سمة عدد الصفوف غائبة أو مخالفة (المتوقع {CARD_ROWS})")
-    found: dict[int, str] = {}
-    for match in ROW_RE.finditer(card_html):
-        found[int(match.group(1))] = match.group(2) or "shown"
-    missing = [str(number) for number in range(1, CARD_ROWS + 1) if number not in found]
+
+    row_matches = list(ROW_OPEN_RE.finditer(card_html))
+    rows = _extract_rows(card_html)
+    numbers = [int(match.group("number")) for match in row_matches]
+    missing = [str(number) for number in range(1, CARD_ROWS + 1) if number not in rows]
     if missing:
         errors.append(f"{where}: صفوف غائبة: {', '.join(missing)}")
-    for number, state in sorted(found.items()):
-        if state not in ROW_STATES:
-            errors.append(f"{where}: صف {number} بحالة غير معروفة: {state}")
-    for number, label in labels.items():
-        if number in found and label not in card_html:
+    duplicates = sorted({number for number in numbers if numbers.count(number) > 1})
+    if duplicates:
+        errors.append(f"{where}: صفوف مكررة: {', '.join(map(str, duplicates))}")
+
+    for number, row in sorted(rows.items()):
+        if row.state not in ROW_STATES:
+            errors.append(f"{where}: صف {number} بحالة غير معروفة: {row.state}")
+        if number in STRUCTURAL_ROWS:
+            content = visible_text(row.inner_html).strip()
+            if number == 9 and not content:
+                branch_status = re.search(r'data-branch-status="([^"]+)"', row.opening_tag)
+                content = branch_status.group(1).strip() if branch_status else ""
+            if not content:
+                errors.append(f"{where}: صف {number} بلا مضمون")
+
+    for number in LABELLED_ROWS:
+        label = labels.get(number)
+        row = rows.get(number)
+        if not label or row is None:
+            continue
+        actual = EV_LABEL_RE.search(row.inner_html)
+        if actual is None:
+            errors.append(f"{where}: وسم الصف {number} مفقود (المتوقع «{label}»)")
+        elif actual.group(1).strip() != label:
             errors.append(f"{where}: وسم الصف {number} لا يطابق العقد («{label}»)")
+
+    expected_branch = labels.get(9)
+    branch_titles = BRANCH_TITLE_RE.findall(card_html)
+    if expected_branch and branch_titles:
+        if any(title.strip() != expected_branch for title in branch_titles):
+            errors.append(f"{where}: وسم العلاقة لا يطابق العقد («{expected_branch}»)")
+
+    row_labels = [label.strip() for label in EV_LABEL_RE.findall(card_html)]
+    if any(label in MEANING_TRANSLATION_LABELS for label in row_labels):
+        errors.append(f"{where}: صف ترجمة المعنى ظاهر في البطاقة رغم إلغائه بقرار المالك")
+    row_eight = re.search(
+        r'<[^>]*\bdata-row="8"[^>]*>.*?<span class="ev-k">([^<]*)</span>',
+        card_html,
+        re.S,
+    )
+    if row_eight and row_eight.group(1).strip() in MEANING_TRANSLATION_LABELS:
+        errors.append(f"{where}: الصف الثامن موسوم «ترجمة المعنى» رغم إلغائه بقرار المالك")
+
     badge = BADGE_RE.search(card_html)
     if not badge:
         errors.append(f"{where}: شارة التصنيف غائبة")
@@ -96,6 +282,7 @@ def card_violations(card_html: str, index: int, labels: dict[int, str] | None = 
         errors.append(f"{where}: شارة درجة الموثوقية غائبة")
     elif reliability.group(1) not in RELIABILITY_VALUES:
         errors.append(f"{where}: درجة موثوقية خارج القائمة المغلقة: {reliability.group(1)}")
+
     text = visible_text(card_html)
     if SHORTLINK_RE.search(text):
         errors.append(f"{where}: رابط مختصر ظاهر في نصّ البطاقة")
@@ -105,9 +292,9 @@ def card_violations(card_html: str, index: int, labels: dict[int, str] | None = 
     # فيُمنع ظهوره نصًّا، ولا يُشترط وسم طيّ لصف غير معروض.
     if "source_excerpt_from" in text or "مسار التحقق الداخلي" in text:
         errors.append(f"{where}: المسار الداخلي ظاهر على سطح القارئ")
-    if 'data-fold="original-text"' not in card_html and found.get(9) == "shown":
+    if 'data-fold="original-text"' not in card_html and rows.get(8, RowFragment(8, "", "", "")).state == "shown":
         errors.append(f"{where}: صف النص الأصلي ظاهر بلا طيّ")
-    if found.get(9, "").startswith("hidden") and 'data-fold="original-text"' in card_html:
+    if rows.get(8, RowFragment(8, "", "", "")).state.startswith("hidden") and 'data-fold="original-text"' in card_html:
         errors.append(f"{where}: صف النص الأصلي مخفيّ وله طيّ في الوقت نفسه")
     # ملاحظات المالك 2026-11-02 (فشل مغلق على كل بطاقة):
     if "التوقيت غير مسجّل" in text:
@@ -116,23 +303,29 @@ def card_violations(card_html: str, index: int, labels: dict[int, str] | None = 
         errors.append(f"{where}: عبارة غياب الرابط أو إسناد التغذية ظاهرة (أُلغيت بقرار المالك)")
     if "الموضع" in text:
         errors.append(f"{where}: وسم «الموضع» ظاهر بدل «الموقع»")
-    if found.get(7, "").startswith("hidden") and "hidden-rule-no-official-link" not in card_html:
+    if rows.get(7, RowFragment(7, "", "", "")).state.startswith("hidden") and "hidden-rule-no-official-link" not in card_html:
         errors.append(f"{where}: صف الرابط الرسمي مخفيّ بحالة غير معروفة")
-    src_match = re.search(r'<span class="ev-k">(?:المصدر|Source and grade)</span>\s*'
-                        r'<span class="ev-mv">(.*?)</span>', card_html, re.S)
-    if src_match and "@" in src_match.group(1) and 'class="ev-link"' not in src_match.group(1):
+    src_row = rows.get(6)
+    if src_row and "@" in src_row.inner_html and 'class="ev-link"' not in src_row.inner_html:
         errors.append(f"{where}: مصدر باسم حساب (@) بلا رابط إلى مادة المصدر")
-    if found.get(7) == "shown" and not re.search(r'<a\b[^>]*href="https?://', card_html):
+    if rows.get(7, RowFragment(7, "", "", "")).state == "shown" and not re.search(r'<a\b[^>]*href="https?://', card_html):
         errors.append(f"{where}: صف الرابط الرسمي ظاهر بلا رابط")
     return errors
 
 
-def page_violations(page_html: str, label: str,
-                    labels: dict[int, str] | None = None) -> tuple[list[str], list[str]]:
+def page_violations(
+    page_html: str,
+    label: str,
+    labels: dict[int, str] | None = None,
+) -> tuple[list[str], list[str]]:
     cards = CARD_RE.findall(page_html)
     errors: list[str] = []
+    page_text = visible_text(page_html)
+    if TRANSLATION_FALLBACK_RE.search(page_text):
+        errors.append(f"{label}: نص ترجمة بديل ظاهر في الصفحة المبنية")
     if not cards:
-        return [f"{label}: لا بطاقات سجل أحداث في الصفحة"], []
+        errors.append(f"{label}: لا بطاقات سجل أحداث في الصفحة")
+        return errors, []
     codes: list[str] = []
     for index, card in enumerate(cards, 1):
         errors.extend(card_violations(card, index, labels))
@@ -141,6 +334,19 @@ def page_violations(page_html: str, label: str,
     if len(set(codes)) != len(codes):
         errors.append(f"{label}: رموز بطاقات مكررة في الصفحة")
     return errors, codes
+
+
+# واجهة توافقية للاختبارات والأدوات التي تستورد الثوابت؛ القيم مشتقة عند الاستيراد.
+ROW_LABELS = load_arabic_row_labels()
+AR_EXPECTED_LABELS = _arabic_expected_labels()
+try:
+    EN_ROW_LABELS = load_english_row_labels(
+        DEFAULT_GLOSSARY_PATH,
+        AR_EXPECTED_LABELS,
+        required_rows=LABELLED_ROWS + (9,),
+    )
+except RuntimeError:
+    EN_ROW_LABELS = {}
 
 
 def main() -> int:
@@ -166,6 +372,7 @@ def main() -> int:
             raise RuntimeError(f"دفتر اليوم مفقود: {ledger}")
         ledger_rows = json.loads(read_text(ledger))
         ar_html = read_text(ar_page)
+        ar_expected = _arabic_expected_labels()
     except RuntimeError as exc:
         print(f"✘ منع: {exc}")
         return 2
@@ -173,7 +380,7 @@ def main() -> int:
         print(f"✘ منع: دفتر اليوم غير قابل للقراءة: {exc}")
         return 2
 
-    ar_errors, ar_codes = page_violations(ar_html, "العربية")
+    ar_errors, ar_codes = page_violations(ar_html, "العربية", ar_expected)
     errors.extend(ar_errors)
     records = [row for row in ledger_rows if isinstance(row, dict) and not row.get("no_incident")]
     if len(ar_codes) != len(records):
@@ -183,7 +390,17 @@ def main() -> int:
         errors.append("العربية: رموز البطاقات لا تطابق رموز الدفتر بالترتيب")
 
     if en_page.is_file():
-        en_errors, en_codes = page_violations(read_text(en_page), "الإنجليزية", EN_ROW_LABELS)
+        try:
+            presented_ar = _presented_labels(ar_html)
+            en_labels = load_english_row_labels(
+                site / "sources" / "i18n" / "en" / "glossary.json",
+                presented_ar,
+                required_rows=tuple(presented_ar),
+            )
+        except RuntimeError as exc:
+            en_labels = {}
+            errors.append(str(exc))
+        en_errors, en_codes = page_violations(read_text(en_page), "الإنجليزية", en_labels)
         errors.extend(en_errors)
         if en_codes and ar_codes and en_codes != ar_codes:
             errors.append("تماثل: رموز النسخة الإنجليزية لا تطابق العربية بالترتيب")

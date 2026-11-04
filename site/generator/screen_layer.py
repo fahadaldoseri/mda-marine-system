@@ -109,8 +109,95 @@ def _chip(label, value_html, extra=""):
     return f'<span class="sc-chip{extra}">{label} <b>{value_html}</b></span>'
 
 
+def news_card_block(meta, *, esc, inline, report_date, card_targets=None):
+    """كتلة «أهم الأخبار المتعلقة بالأمن البحري» بصفوفها الثلاثة.
+
+    قرار المالك 2026-11-04: نُقلت هذه الكتلة من صفحة الإصدار إلى صفحة «إضافات»،
+    ويبقى في صفحة الإصدار سطر إشارة واحد فقط (news_pointer).
+    """
+    # خلاصة مُركّزة لكل صف + العدد + رابط إلى القسم في صفحته.
+    # إصلاح ك-239 (2026-10-28): كانت الصفوف تُفرَغ لأن سكربت الروابط كان يحذف الرابط عند غياب
+    # القسم من الصفحة بعد نقله إلى «إضافات». القاعدة الآن: لا يُحذف أي عنصر، ويُوجَّه الرابط للصفحة البديلة.
+    rows = []
+
+    def _gist(items, limit=2, width=64):
+        out = []
+        for raw in items[:limit]:
+            t = re.split(r"[.،؛]", _arabic_card_text(str(raw).strip()))[0].strip()
+            t = re.sub(r"\s+", " ", t)
+            if len(t) > width:
+                # ك-497: لا يُقطع الملخص في وسط عبارة؛ يُقطع عند نهاية جملة أو
+                # عند فاصل معنى، وإلا استُعملت الكلمة الأخيرة كاملة.
+                cut = t[:width]
+                for sep in (". ", "، ", "؛ ", ": "):
+                    i = cut.rfind(sep)
+                    if i >= width * 0.6:
+                        cut = cut[: i + len(sep)].rstrip()
+                        break
+                else:
+                    cut = cut.rsplit(" ", 1)[0] + "…"
+                t = cut
+            if t:
+                out.append(t)
+        return " · ".join(out)
+
+    # البنية المعتمدة: ثلاثة صفوف فقط. كل عداد ومرساة يأتيان من الهدف المبني،
+    # لا من طول حقول meta ولا من ترتيب رقمي ثابت.
+    dc = meta.get("decision_card") if isinstance(meta.get("decision_card"), dict) else {}
+    targets = dict(card_targets or {})
+    changes = [c for c in (dc.get("changed") or []) if isinstance(c, str)]
+    if not changes:
+        changes = [c for c in (meta.get("changes") or []) if isinstance(c, str)]
+    changed_count = int(targets.get("changed_count") or len(changes))
+    changed_href = targets.get("changed_href") or "/additions.html#sec-00"
+    changed_goto = targets.get("changed_title") or "ما تغيّر منذ التقرير السابق"
+    rows.append(
+        '<div class="sc-row"><div class="sc-l">خلال 24 ساعة السابقة</div>'
+        f'<div class="sc-v"><p class="sc-gist">{inline(_gist(changes, limit=2))}</p>'
+        f'<p class="sc-more">{_arabic_count(changed_count, "items")} · '
+        f'<a href="{esc(changed_href)}" data-goto="{esc(changed_goto)}" data-alt="{esc(changed_href)}">التفاصيل</a></p></div></div>')
+
+    warning_texts = [_arabic_card_text(x) for x in (targets.get("warning_texts") or []) if str(x).strip()]
+    if not warning_texts:
+        warning_texts = ["المركز البريطاني / المركز البحري المشترك"]
+    warning_count = (int(targets["warning_count"]) if "warning_count" in targets
+                     else len(warning_texts))
+    warning_href = targets.get("warning_href") or f"/reports/{report_date}.html#sec-06"
+    warning_gist = _gist(warning_texts, limit=2)
+    rows.append(
+        '<div class="sc-row"><div class="sc-l">التحذيرات والتنبيهات النشطة</div>'
+        f'<div class="sc-v"><p class="sc-gist">{inline(warning_gist)}</p>'
+        f'<p class="sc-more">{_arabic_count(warning_count, "warnings")} · '
+        f'<a href="{esc(warning_href)}" data-goto="التحذيرات والتنبيهات النشطة" data-alt="{esc(warning_href)}">القسم الرسمي</a></p></div></div>')
+
+    watch = _list_items(dc.get("watch"))
+    watch_count = int(targets["watch_count"]) if "watch_count" in targets else len(watch)
+    watch_href = targets.get("watch_href") or "/additions.html#sec-04-sub-02"
+    watch_title = targets.get("watch_title") or "علامات الإنذار المبكر 24–72 ساعة"
+    rows.append(
+        '<div class="sc-row"><div class="sc-l">ما يُراقب خلال 24 ساعة</div>'
+        f'<div class="sc-v"><p class="sc-gist">{inline(_gist(watch, limit=2))}</p>'
+        f'<p class="sc-more">{_arabic_count(watch_count, "items")} · '
+        f'<a href="{esc(watch_href)}" data-goto="{esc(watch_title)}" data-alt="{esc(watch_href)}">المؤشرات الكاملة</a></p></div></div>')
+    card = ""
+    if rows:
+        card = (f'<section class="sc-card" data-kpi-id="maritime-security-news" aria-label="أهم الأخبار المتعلقة بالأمن البحري"><h2 class="sc-h2">أهم الأخبار المتعلقة بالأمن البحري</h2>'
+                f'{"".join(rows)}</section>')
+    if not rows:
+        return ""
+    return ('<section class="sc-card" data-kpi-id="maritime-security-news" aria-label="أهم الأخبار المتعلقة بالأمن البحري">'
+            '<h2 class="sc-h2">أهم الأخبار المتعلقة بالأمن البحري</h2>'
+            + "".join(rows) + "</section>")
+
+
+def news_pointer():
+    """سطر إشارة واحد في صفحة الإصدار يحيل إلى كتلة أهم الأخبار في صفحة «إضافات».قرار المالك 2026-11-04."""
+    return ('<p class="sc-pointer no-print">أهم الأخبار — في صفحة '
+            '<a href="/additions.html#news-card">الإضافات</a>.</p>')
+
+
 def screen_hero(meta, *, esc, inline, report_date, official, threat_cls,
-                doc_mode=False, archived=False, card_targets=None):
+                doc_mode=False, archived=False, card_targets=None, news_card=True):
     """كتلة القرار فوق الطيّ: العنوان والشرائح وحالة التهديد والمؤشرات وأهم الأخبار المتعلقة بالأمن البحري.
 
     doc_mode: التقارير الخاصة، وعنوانها الكامل هو العنوان الظاهر (كانت بلا عنوان على الشاشة).
@@ -208,6 +295,12 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls,
             side.append(f'<div class="sc-kpis">{"".join(legacy_tiles)}</div>')
 
     official_cards = meta.get("official_cards") or []
+    # قرار المالك 2026-11-04: بطاقتا IMO الدائمتان تُعرضان مرة واحدة في صف
+    # hero؛ تبقى نسختهما في meta للتوافق مع الصفحات التاريخية، لكن لا تُكرر
+    # على سطح التقرير الحديث في كتلة «المستجدات الرسمية».
+    if report_date >= HERO_KPI_MODERN_FROM:
+        official_cards = [card for card in official_cards
+                          if card.get("id") not in {"imo-confirmed-incidents", "imo-seafarer-deaths"}]
     if official_cards:
         official_html = []
         for card in official_cards:
@@ -236,73 +329,8 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls,
             )
         side.append(f'<section class="sc-official-cards" aria-label="المستجدات الرسمية"><h2 class="sc-h2">المستجدات الرسمية</h2><div class="sc-official-grid">{"".join(official_html)}</div></section>')
 
-    # أهم الأخبار المتعلقة بالأمن البحري (شاشة): خلاصة مُركّزة لكل صف + العدد + رابط إلى القسم في صفحته.
-    # إصلاح ك-239 (2026-10-28): كانت الصفوف تُفرَغ لأن سكربت الروابط كان يحذف الرابط عند غياب
-    # القسم من الصفحة بعد نقله إلى «إضافات». القاعدة الآن: لا يُحذف أي عنصر، ويُوجَّه الرابط للصفحة البديلة.
-    rows = []
-
-    def _gist(items, limit=2, width=64):
-        out = []
-        for raw in items[:limit]:
-            t = re.split(r"[.،؛]", _arabic_card_text(str(raw).strip()))[0].strip()
-            t = re.sub(r"\s+", " ", t)
-            if len(t) > width:
-                # ك-497: لا يُقطع الملخص في وسط عبارة؛ يُقطع عند نهاية جملة أو
-                # عند فاصل معنى، وإلا استُعملت الكلمة الأخيرة كاملة.
-                cut = t[:width]
-                for sep in (". ", "، ", "؛ ", ": "):
-                    i = cut.rfind(sep)
-                    if i >= width * 0.6:
-                        cut = cut[: i + len(sep)].rstrip()
-                        break
-                else:
-                    cut = cut.rsplit(" ", 1)[0] + "…"
-                t = cut
-            if t:
-                out.append(t)
-        return " · ".join(out)
-
-    # البنية المعتمدة: ثلاثة صفوف فقط. كل عداد ومرساة يأتيان من الهدف المبني،
-    # لا من طول حقول meta ولا من ترتيب رقمي ثابت.
-    targets = dict(card_targets or {})
-    changes = [c for c in (dc.get("changed") or []) if isinstance(c, str)]
-    if not changes:
-        changes = [c for c in (meta.get("changes") or []) if isinstance(c, str)]
-    changed_count = int(targets.get("changed_count") or len(changes))
-    changed_href = targets.get("changed_href") or "/additions.html#sec-00"
-    changed_goto = targets.get("changed_title") or "ما تغيّر منذ التقرير السابق"
-    rows.append(
-        '<div class="sc-row"><div class="sc-l">خلال 24 ساعة السابقة</div>'
-        f'<div class="sc-v"><p class="sc-gist">{inline(_gist(changes, limit=2))}</p>'
-        f'<p class="sc-more">{_arabic_count(changed_count, "items")} · '
-        f'<a href="{esc(changed_href)}" data-goto="{esc(changed_goto)}" data-alt="{esc(changed_href)}">التفاصيل</a></p></div></div>')
-
-    warning_texts = [_arabic_card_text(x) for x in (targets.get("warning_texts") or []) if str(x).strip()]
-    if not warning_texts:
-        warning_texts = ["المركز البريطاني / المركز البحري المشترك"]
-    warning_count = (int(targets["warning_count"]) if "warning_count" in targets
-                     else len(warning_texts))
-    warning_href = targets.get("warning_href") or f"/reports/{report_date}.html#sec-06"
-    warning_gist = _gist(warning_texts, limit=2)
-    rows.append(
-        '<div class="sc-row"><div class="sc-l">التحذيرات والتنبيهات النشطة</div>'
-        f'<div class="sc-v"><p class="sc-gist">{inline(warning_gist)}</p>'
-        f'<p class="sc-more">{_arabic_count(warning_count, "warnings")} · '
-        f'<a href="{esc(warning_href)}" data-goto="التحذيرات والتنبيهات النشطة" data-alt="{esc(warning_href)}">القسم الرسمي</a></p></div></div>')
-
-    watch = _list_items(dc.get("watch"))
-    watch_count = int(targets["watch_count"]) if "watch_count" in targets else len(watch)
-    watch_href = targets.get("watch_href") or "/additions.html#sec-04-sub-02"
-    watch_title = targets.get("watch_title") or "علامات الإنذار المبكر 24–72 ساعة"
-    rows.append(
-        '<div class="sc-row"><div class="sc-l">ما يُراقب خلال 24 ساعة</div>'
-        f'<div class="sc-v"><p class="sc-gist">{inline(_gist(watch, limit=2))}</p>'
-        f'<p class="sc-more">{_arabic_count(watch_count, "items")} · '
-        f'<a href="{esc(watch_href)}" data-goto="{esc(watch_title)}" data-alt="{esc(watch_href)}">المؤشرات الكاملة</a></p></div></div>')
-    card = ""
-    if rows:
-        card = (f'<section class="sc-card" aria-label="أهم الأخبار المتعلقة بالأمن البحري"><h2 class="sc-h2">أهم الأخبار المتعلقة بالأمن البحري</h2>'
-                f'{"".join(rows)}</section>')
+    card = (news_card_block(meta, esc=esc, inline=inline, report_date=report_date,
+                           card_targets=card_targets) if news_card else "")
 
     grid = ""
     if side or card:
@@ -390,6 +418,8 @@ body:has(.site-nav) .topbar{display:none}
 .sc-kn{font-size:13px;color:var(--muted);line-height:1.7;margin-top:3px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;flex:0 0 auto}
 .sc-k-risk{display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:12px}
 .sc-k-risk-tag{border:1px solid var(--line-2);border-radius:999px;padding:1px 8px;color:var(--ink-2)}
+.sc-pointer{margin:10px 0 0;font-size:13px;color:var(--muted)}
+.sc-pointer a{color:var(--link,#5fd0c6);text-decoration:none;border-bottom:1px dotted currentColor}
 .sc-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 26px;min-width:0;box-shadow:inset 0 2px 0 0 rgba(34,195,182,.55)}
 .sc-h2{font-family:"Noto Kufi Arabic",sans-serif;font-weight:600;font-size:19px;margin:0 0 6px;color:var(--accent)}
 .sc-row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;padding:14px 0;border-top:1px solid var(--line)}

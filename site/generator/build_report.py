@@ -142,7 +142,8 @@ SECTION_HINTS = {
     "الخلاصة": "الموقف ومستوى التهديد والإجراء المقترح في ثلاثة أسطر.",
     "التوزيع الجغرافي للوقائع": "أين تركّزت الوقائع، وحصيلة IMO بحسب النطاق.",
     "مؤشرات الموقف": "الأرقام، ومقارنتها بتقرير أمس، وحدود كل رقم.",
-    "مستوى التهديد": "التقييم الرسمي، والتقدير التحليلي، وحدود الثقة.",
+    # قرار المالك 2026-11-04: حُذف السطر التمهيدي لقسم «مستوى التهديد» لتمام
+    # تكراره مع عناصر التصميم الرباعي، ولئلا يستهلك من سقف كلمات القسم.
     "التوجيهات التشغيلية": "ما يُنفَّذ قبل العبور والرسو وأثناء الحادث.",
     "الوقائع الجديدة": "الوقائع الأمنية الجديدة خلال فترة التغطية، مفصولًا عن الخلفية.",
     "سجل الأحداث": "الوقائع الأمنية الجديدة خلال فترة التغطية، مرتّبة بالرمز والتوقيت.",
@@ -1335,7 +1336,7 @@ def _public_status_text(value: str) -> str:
 
 # ── عقد بطاقة «سجل الأحداث»: appendices/event-card-contract.md ────────────────
 # عشرة صفوف ثابتة بالترتيب نفسه؛ المتغيّر قيمة الصف لا وجوده ولا اسمه.
-CARD_ROWS = 10
+CARD_ROWS = 9
 ABSENCE = {
     "classification": "قيد التثبّت",
     "reliability": "غير مقيّمة",
@@ -1495,8 +1496,33 @@ def _event_location(event: dict) -> str:
     return ABSENCE["place"]
 
 
+def _join_sources(event: dict) -> str:
+    """يجمع أسماء المصادر في سطر واحد بفواصل بلا تكرار (قرار المالك 2026-11-04).
+
+    المصادر المكررة التي حملت الواقعة نفسها تُذكر كلها في صف المصدر، ولا يُسقَط
+    اسم مصدر لأن بلاغه مكرر. الترتيب: قائمة sources ثم حقل source المفرد.
+    """
+    vals = []
+    srcs = event.get("sources")
+    if isinstance(srcs, (list, tuple)):
+        vals.extend(str(x).strip() for x in srcs if str(x).strip())
+    elif isinstance(srcs, str) and srcs.strip():
+        vals.append(srcs.strip())
+    base = _value_text(event.get("source"))
+    if base:
+        vals.append(base)
+    seen, out = set(), []
+    for value in vals:
+        for part in re.split(r"\s*[؛;]\s*", value):
+            part = part.strip(" ·—-،")
+            if part and part not in seen:
+                seen.add(part)
+                out.append(part)
+    return "؛ ".join(out)
+
+
 def _event_sources(event: dict) -> str:
-    raw = _value_text(event.get("source") or event.get("sources"))
+    raw = _join_sources(event)
     if not raw:
         return ""
     # تُستخرج الجهة الحقيقية من بداية المصدر أو من مسار المصدر الأصلي عند
@@ -1571,6 +1597,11 @@ def _counts_as_new_false(value) -> bool:
     return value is False or str(value or "").strip().lower() in {"false", "0", "no"}
 
 
+def _is_cumulative_update(event: dict) -> bool:
+    """سجل تحديث تراكمي يبقى في الدفتر ولا يتحول إلى بطاقة واقعة."""
+    return _value_text(event.get("event_kind")).strip().lower() == "تحديث بيانات"
+
+
 def _relation_display(event: dict, known: dict[str, dict]) -> tuple[str, str] | None:
     """يبني سطر العلاقة من العقد الصريح فقط، دون استنتاج أو نص غياب."""
     kind = _value_text(event.get("event_kind"))
@@ -1590,7 +1621,7 @@ def _relation_display(event: dict, known: dict[str, dict]) -> tuple[str, str] | 
 
 
 def _event_fields_html(event: dict, defs) -> tuple[str, bool]:
-    """الصفوف 4–9 وفق العقد؛ الصفوف 1–3 في رأس البطاقة والصف 10 هو الفرع التابع."""
+    """الصفوف 4–8 وفق العقد؛ الصفوف 1–3 في رأس البطاقة والصف 9 هو الفرع التابع."""
     date_text = _event_date(event) or "غير متاح"
     time_text = _value_text(event.get("time"))
     has_time = bool(time_text and _TIME_RE.match(time_text))
@@ -1623,38 +1654,37 @@ def _event_fields_html(event: dict, defs) -> tuple[str, bool]:
                                state="hidden-rule-no-official-link", raw=True))
 
     excerpt_raw = _value_text(event.get("source_excerpt"))
-    translation = _value_text(event.get("translation"))
-    if translation:
-        state, value = "shown", translation
-    elif excerpt_raw and not _looks_arabic(excerpt_raw):
-        state, value = "shown", ABSENCE["translation"]
-    else:
-        state, value = "hidden-rule-arabic-source", ABSENCE["translation"]
-    rows.append(_field_row(8, "ترجمة المعنى", value, defs, state=state))
+    # قرار المالك 2026-11-04 (المعتمد): أُخفي صف «ترجمة المعنى» نهائيًا لأنه تكرار
+    # للعنوان المرئي (الصف 1)؛ ويبقى حقل translation يُدوَّن داخليًا في الدفتر بلا عرض.
 
     cleaned = clean_excerpt(excerpt_raw)
     if cleaned:
         inner = ('<details class="ev-fold" data-fold="original-text">'
                  '<summary>النص الأصلي كما في المصدر</summary>'
                  f'<span>{inline(cleaned, defs)}</span></details>')
-        rows.append(_field_row(9, "النص الأصلي", ABSENCE["excerpt_open"], defs, extra=inner))
+        rows.append(_field_row(8, "النص الأصلي", ABSENCE["excerpt_open"], defs, extra=inner))
     else:
-        rows.append(_field_row(9, "النص الأصلي", ABSENCE["excerpt"], defs,
+        rows.append(_field_row(8, "النص الأصلي", ABSENCE["excerpt"], defs,
                                state="hidden-rule-no-excerpt"))
     return "".join(rows), has_time
 
 
 def render_ledger_events(events, defs, md_path: Path):
     """يصيّر جميع سجلات دفتر الفترة، مع فرع موثق فقط عند وجود حقل ربط."""
-    known = _all_event_records(md_path, events)
+    renderable_events = [event for event in events if not _is_cumulative_update(event)]
+    known = _all_event_records(md_path, renderable_events)
     relation_count = 0
     branch_count = 0
     unresolved = 0
     cards = []
-    for idx, event in enumerate(events, 1):
+    for idx, event in enumerate(renderable_events, 1):
         code = _event_code(event)
         cls, label = event_badge(event.get("class"))
         reliability = reliability_label(event)
+        # قرار المالك 2026-11-04 (المعتمد): درجة الإثبات الدقيقة تُعرض داخل صف
+        # «درجة الموثوقية» بعد حذف جدول «تتبع الوقائع» الذي كان يحملها وحده.
+        proof_degree = _value_text(event.get("proof_degree"))
+        reliability_line = f"{reliability} — {proof_degree}" if proof_degree else reliability
         fields_html, has_time = _event_fields_html(event, defs)
         relation = _relation_display(event, known)
         relation_key = relation[0] if relation else ""
@@ -1665,14 +1695,14 @@ def render_ledger_events(events, defs, md_path: Path):
             branch_count += 1
             relation_key, relation_text = relation
             branch_html = (
-                f'<div class="ev-branch" data-row="10" data-branch-status="shown" '
+                f'<div class="ev-branch" data-row="9" data-branch-status="shown" '
                 f'data-relation-ref="{esc(_value_text(event.get(relation_key)))}">'
                 '<span class="ev-branch-title">العلاقة</span>'
                 f'<span class="ev-mv">{inline(relation_text, defs)}</span></div>'
             )
         else:
             # يبقى الموضع البنيوي مخفيًا حتى لا تتغير أرقام الصفوف، بلا نص غياب للقارئ.
-            branch_html = '<div data-row="10" data-branch-status="not-marked" hidden aria-hidden="true"></div>'
+            branch_html = '<div data-row="9" data-branch-status="not-marked" hidden aria-hidden="true"></div>'
         cards.append(
             f'<article class="ev reveal {cls}" id="ev-{idx:02d}" data-event-code="{esc(code)}" '
             f'data-event-date="{esc(_event_date(event))}" data-event-has-time="{"1" if has_time else "0"}" '
@@ -1681,12 +1711,12 @@ def render_ledger_events(events, defs, md_path: Path):
             f'<span class="ev-code ltr">{esc(code)}</span>'
             f'<span class="ev-badge" data-row="2" data-classification="{esc(label)}">{esc(label)}</span>'
             f'<span class="ev-reliability" data-row="3" data-reliability="{esc(reliability)}">'
-            f'درجة الموثوقية: {esc(reliability)}</span></div>'
+            f'درجة الموثوقية: {esc(reliability_line)}</span></div>'
             f'<p class="ev-what" data-row="1">{inline(_event_description(event), defs)}</p>'
             f'<div class="ev-meta">{fields_html}</div>{branch_html}</article>'
         )
     return (
-        f'<div class="ev-grid" data-count="{len(events)}" data-source-count="{len(events)}" '
+        f'<div class="ev-grid" data-count="{len(renderable_events)}" data-source-count="{len(renderable_events)}" '
         f'data-relation-count="{relation_count}" data-branch-count="{branch_count}" '
         f'data-unresolved-branch-count="{unresolved}">'
         + "".join(cards) + "</div>"
@@ -1784,6 +1814,12 @@ def render_section_body(title: str, lines, defs, doc_mode: bool = False, section
             if is_events_table(rows[0]):
                 # ك-298: جدول الوقائع يجب أن يُصيّر بطاقاته، فكروت الحالة كانت تُسقط عمود «ما حدث»
                 out.append(render_events_grid(rows, defs))
+                continue
+            if title in {"التحذيرات والتنبيهات النشطة", "التحذيرات والنشرات الرسمية"}:
+                # عقد بطاقة التحذيرات يقيس table_body_rows؛ لا يجوز تحويل هذا
+                # الجدول إلى بطاقات dg-grid لأن ذلك يفقد نوع السطح ويجعل الحارس
+                # يفشل رغم تطابق عدد الصفوف.
+                out.append(render_table(rows, defs))
                 continue
             if is_source_status_table(rows[0]):
                 # ك-303: بطاقات المصدر لجدول المصادر الحقيقي فقط (مطابقة صارمة)
@@ -2452,6 +2488,22 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
         # القاعدة: تنبيه القسم يُكتب مرة واحدة في مستوى القسم لا داخل حلقة عناصره.
         if "الحركة" in t:
             section_html += '<p class="src-note">قراءة اتجاه الحركة والتكدس من مسار المتابعة المعتمد؛ ويُعرض اسم المنصة ودقة بياناتها في مراجع التقرير على الموقع. يُؤخذ في الحساب مدة التحديث (20 دقيقة) واحتمال انقطاع الإرسال أو التزييف.</p>'
+        if "حالة المصادر" in t:
+            # قرار المالك 2026-11-04 (البند 6): سطر واحد يذكر عدد المصادر المفحوصة
+            # والمحجوبة، وتفصيلها في صفحة المصادر.
+            _cov = meta.get("source_coverage") or {}
+            _tried = _cov.get("attempted")
+            _ok = _cov.get("successful")
+            _blocked = _cov.get("blocked_count")
+            if isinstance(_tried, int) and isinstance(_ok, int) and isinstance(_blocked, int):
+                # قرار المالك 2026-11-04 (البند 6): سطر واحد بثلاثة أعداد، وكل عدد
+                # داخل وسم لاتيني حتى يبقى النص العربي وحدات معجمية ثابتة قابلة للترجمة.
+                section_html += (
+                    '<p class="src-note">المصادر المفحوصة '
+                    f'<span class="ltr">{_tried}</span> · الناجحة '
+                    f'<span class="ltr">{_ok}</span> · المحجوبة '
+                    f'<span class="ltr">{_blocked}</span></p>'
+                )
         if "التوزيع الجغرافي" in t:
             section_html += '<p class="src-note">تحذيرات IHO/NAVAREA تُربط بإحداثياتها عند توفرها؛ والويب لا يستبدل البث الملاحي المعتمد.</p>'
         body.append(section_html)
@@ -2512,10 +2564,17 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
         changes_html = ("" if (_adds_live and _hidden("ما تغيّر"))
                         else BLK.changes_block(meta.get("changes"), inline))
     card_targets = _card_targets(source_sections, sections, meta, defs, report_date)
-    screen_hero_html = "" if mode == "additions" else SCR.screen_hero(
-        meta, esc=esc, inline=inline, report_date=report_date, official=official,
-        threat_cls=tcls, doc_mode=doc_mode,
-        archived=meta.get("screen_archived") or False, card_targets=card_targets)
+    # قرار المالك 2026-11-04: كتلة «أهم الأخبار المتعلقة بالأمن البحري» انتقلت من
+    # صفحة الإصدار إلى صفحة «إضافات»، ويبقى في الإصدار سطر إشارة واحد فقط.
+    if mode == "additions":
+        screen_hero_html = SCR.news_card_block(
+            meta, esc=esc, inline=inline, report_date=report_date, card_targets=card_targets)
+    else:
+        screen_hero_html = SCR.screen_hero(
+            meta, esc=esc, inline=inline, report_date=report_date, official=official,
+            threat_cls=tcls, doc_mode=doc_mode, news_card=False,
+            archived=meta.get("screen_archived") or False, card_targets=card_targets)
+        screen_hero_html += SCR.news_pointer()
     ledger_html = (
         f'<div class="glossary">السجل التراكمي: '
         f'<a class="bidi" href="{esc(meta["ledger_url"])}" target="_blank" rel="noopener noreferrer">{esc(meta["ledger_url"])}</a></div>'

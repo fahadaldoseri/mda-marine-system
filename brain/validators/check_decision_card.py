@@ -53,6 +53,20 @@ SITE = _site_root()
 
 
 MIN_CHARS = 40
+# الحد الأدنى لأي صف مكتوب، والحد المختصر لصف يحمل عددًا فعليًا ورابطًا صالحًا.
+MIN_ANY_CHARS = 8
+COUNT_HINTS = ("بند", "بنود", "تحذير", "تحذيران", "واقعة", "وقائع", "لا جديد", "لا بنود", "لا تحذيرات")
+
+
+def _row_text_ok(text: str, anchors: int, plain: str | None) -> bool:
+    """صف مكتمل: نص فعلي، ومع رابط صالح أو نص بديل؛ والنص الطويل أو صف عددي مختصر."""
+    if len(text) < MIN_ANY_CHARS:
+        return False
+    if len(text) >= MIN_CHARS:
+        return True
+    # صف مختصر مقبول إذا حمل عددًا أو لفظ عدّ مع رابط صالح (بطاقة المؤشرات المختصرة).
+    has_count = any(ch.isdigit() for ch in text) or any(h in text for h in COUNT_HINTS)
+    return bool(has_count and (anchors > 0 or plain))
 
 
 def _check_page(page_path: pathlib.Path, dist_root: pathlib.Path, required: bool = True) -> list[str]:
@@ -89,9 +103,10 @@ def _check_page(page_path: pathlib.Path, dist_root: pathlib.Path, required: bool
 
     for row in rows:
         label = row["label"]
-        if len(row["text"]) < MIN_CHARS:
+        if not _row_text_ok(row["text"], row["anchors"], row["plain"]):
             problems.append(
-                f"{page_path.name}: صف «{label}» نصّه {len(row['text'])} حرفًا فقط (الحد {MIN_CHARS})"
+                f"{page_path.name}: صف «{label}» نصّه غير مكتمل ({len(row['text'])} حرفًا، "
+                f"روابط {row['anchors']}) — الحد {MIN_CHARS} حرفًا أو صف عددي برابط صالح"
             )
         if row["anchors"] == 0 and not row["plain"]:
             problems.append(f"{page_path.name}: صف «{label}» بلا رابط وبلا نص بديل")
@@ -130,11 +145,23 @@ def main() -> int:
         return 2
     dist_root = pathlib.Path(args.dist_root).expanduser().resolve() if args.dist_root else page_path.parent.parent
 
-    problems = _check_page(page_path, dist_root)
+    # قرار المالك 2026-11-04: الكتلة انتقلت إلى صفحة الإضافات، وصفحة الإصدار تحمل
+    # سطر إشارة واحدًا؛ فيُفحص السطح الذي تسنده السياسة ويُتخطّى الآخر بلا مانع.
+    import json as _json
+    _policy = BRAIN / "appendices" / "report-sections-policy.json"
+    _home = "additions"
+    try:
+        _p = _json.loads(_policy.read_text(encoding="utf-8"))
+        _title = "أهم الأخبار المتعلقة بالأمن البحري"
+        if _title in (_p.get("required_in_report") or []):
+            _home = "report"
+    except (OSError, ValueError):
+        pass
+    problems = _check_page(page_path, dist_root, required=(_home == "report"))
     if args.additions:
         add_path = pathlib.Path(args.additions).expanduser().resolve()
         if add_path.is_file():
-            problems += _check_page(add_path, dist_root, required=False)
+            problems += _check_page(add_path, dist_root, required=(_home == "additions"))
 
     if problems:
         print("مانع: أهم الأخبار المتعلقة بالأمن البحري غير مكتملة:")

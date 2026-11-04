@@ -47,6 +47,9 @@ FALLBACK_COLORS = {
 
 # ── معجم النص المغلق (يُترجَم آليًا في النسخة الإنجليزية) ─────────────────────
 T_CARD_TITLE = "مستوى التهديد"
+# قرار المالك 2026-11-04: توحيد عنوان القسم في المتن؛ البطاقة تحمل وسمًا وصفيًا
+# غير عنواني حتى لا يتكرر عنوان «مستوى التهديد» ثلاث مرات في الصفحة الواحدة.
+T_CARD_LABEL = "المستوى الحالي"
 T_WINDOW = "خلال 24 ساعة السابقة"
 T_TOP = "أعلى نطاق:"
 T_BASIS = "أساس التقدير"
@@ -95,7 +98,7 @@ def zones_css(zj: dict) -> str:
     return f"""
 .tz{{border:1px solid var(--line,#243244);border-radius:14px;padding:14px 16px;background:var(--card,#0e1726);margin:10px 0}}
 .tz-head{{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;justify-content:space-between}}
-.tz-head h3{{margin:0;font-size:1.05rem}}
+.tz-head h3,.tz-head .tz-title{{margin:0;font-size:1.05rem}}
 .tz-win{{font-size:.8rem;opacity:.75}}
 .tz-top{{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0 6px}}
 .tz-badge{{font-weight:700;font-size:1.5rem;line-height:1.2}}
@@ -128,7 +131,7 @@ def zones_css(zj: dict) -> str:
   /* ضغط الورق (2026-10-30): بطاقة القطاعات الأربعة أُضيفت إلى الترويسة فزاد طول الإصدار
      إلى 13 صفحة خارج النطاق 7–12. الضغط هنا للطباعة فقط ولا يمسّ هيئة الشاشة. */
   .tz{{break-inside:auto;page-break-inside:auto;border-color:#999;padding:2.2mm 3mm;margin:1.5mm 0}}
-  .tz-head h3{{font-size:10.4pt}}
+  .tz-head h3,.tz-head .tz-title{{font-size:10.4pt}}
   .tz-win{{font-size:7.6pt}}
   .tz-top{{margin:1.1mm 0 .7mm;gap:2mm}}
   .tz-badge{{font-size:13pt;line-height:1.1}}
@@ -207,7 +210,7 @@ def zones_card(zj: dict, *, variant: str = "screen") -> str:
         style
         + f'<section class="tz tz-{variant}" aria-label="{T_CARD_TITLE}">'
         '<header class="tz-head">'
-        f"<h3>{T_CARD_TITLE}</h3>"
+        f'<div class="tz-title">{T_CARD_LABEL}</div>'
         f'<span class="tz-win">{zj.get("window") or T_WINDOW}</span>'
         "</header>"
         '<div class="tz-top">'
@@ -255,7 +258,9 @@ def zones_strip(zj: dict) -> str:
                 f"{confirmed}+{probable}+{unconfirmed_qualifying}+{excluded}!={events}"
             )
         rows.append(
-            "<li>"
+            # المعرّف الآلي للقطاع يُكتب في سمة بيانات لا في نص مرئي،
+            # التزامًا بقرار المالك: لا تُعرض رموز القطاعات للقارئ.
+            f'<li data-zone-id="{z.get("id","")}">'
             f'<span class="zs-nm">{z.get("name","")}</span>'
             f'<span class="zs-lv t-{tok}"><span aria-hidden="true">{MARKERS[tok]}</span> {z.get("level","")}</span>'
             '<span class="zs-c">'

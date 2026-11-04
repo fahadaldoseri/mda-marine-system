@@ -34,8 +34,23 @@ LIVE_FROM = "2026-10-31"
 ABSENCE_VALUES = {"غير متاح", "غير مقيّمة", "غير مدرج", "لا يوجد", "غير معروف", "-", "—"}
 
 CONFIDENCE = ("عالية", "متوسطة", "منخفضة")
-SECTOR_IDS = ("Z1", "Z2", "Z3", "Z4")
-EVENT_KINDS = ("جديد", "legacy_projection", "incident")
+# ك-507: القوائم المغلقة تُقرأ من المخطط نفسه (مصدر واحد) بدل نسخها داخل الحارس.
+# النسخ المزدوج جعل إضافة القطاع الخامس Z5 وقيم الربط المعتمدة تُمنع من الحارس رغم
+# أنها معتمدة في السجل الحاكم — وهو صنف «ازدواج مصدر الحقيقة».
+_SCHEMA_PATH = Path(__file__).resolve().parents[1] / "schemas" / "daily-events.schema.json"
+
+
+def _schema_enum(name: str, fallback: tuple) -> tuple:
+    try:
+        spec = json.loads(_SCHEMA_PATH.read_text(encoding="utf-8"))
+        enum = spec["$defs"]["material_record"]["properties"][name]["enum"]
+    except (OSError, ValueError, KeyError, TypeError):
+        return fallback
+    return tuple(enum) if isinstance(enum, list) and enum else fallback
+
+
+SECTOR_IDS = _schema_enum("sector_id", ("Z1", "Z2", "Z3", "Z4"))
+EVENT_KINDS = _schema_enum("event_kind", ("جديد", "legacy_projection", "incident"))
 EVIDENCE_KINDS = ("imo_confirmed_incidents", "official_source")
 CLASSIFICATIONS = ("imo_confirmed_incidents",)
 CASUALTY_SCOPES = ("not_announced", "seafarer", "shipyard_worker", "عامل حوض سفن")
@@ -160,7 +175,13 @@ def violations(rows: list[dict], *, date_label: str, known_ids: set[str] | None 
             if value and value in ABSENCE_VALUES:
                 errors.append(f"{where}: نصّ غياب مخزّن كقيمة في «{key}»؛ الغياب يُترك غيابًا")
         if live:
-            for key in ("area", "source_excerpt", "source_excerpt_from"):
+            # القاعدة 5 في السجل الحاكم: صفوف «لا واقعة مسجّلة» ليست وقائع ولا تحمل قيمة موقع؛
+            # نطاقها يُقرأ من sector_id، فيبقى المقتطف وسنده شرطًا عليها دون الموضع.
+            _silent = bool(re.match(r"^لا واقعة", _text(row.get("title"))
+                                    or _text(row.get("description"))))
+            _required = ("source_excerpt", "source_excerpt_from") if _silent else \
+                ("area", "source_excerpt", "source_excerpt_from")
+            for key in _required:
                 if not _text(row.get(key)):
                     errors.append(f"{where}: الحقل «{key}» مطلوب في النطاق الحيّ وغائب")
         for key in RELATION_KEYS:

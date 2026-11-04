@@ -908,10 +908,20 @@ def translate_page(html_text: str, date: str, tm: dict[str, str], gl: dict[str, 
     c = _Collector()
     c.feed(html_text)
     counter_labels = _sector_counter_labels()
-    units = [(_translate_counter_fragment(t, counter_labels)
-              if c.unit_contexts[i] == "tz-count" else tr(t))
+    def _bold(t: str) -> str:
+        """يحوّل **نص** إلى <b>نص</b> ويمنع ظهور علامات النجمة الخام للقارئ (عطل ك-492).
+
+        السبب: قيم المعجم الإنجليزية كُتبت بعلامات تأكيد Markdown، والترجمة تُدرجها
+        في HTML مباشرة فتظهر النجوم نصًّا. العربية تُخرج التسميات عريضة، فالمواءمة
+        تقتضي إخراجًا عريضًا لا نجومًا.
+        """
+        t = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", t)
+        return t.replace("**", "")
+
+    units = [_bold(_translate_counter_fragment(t, counter_labels)
+                   if c.unit_contexts[i] == "tz-count" else tr(t))
              for i, t in enumerate(c.units)]
-    attrs = [tr(a) for a in c.attrs_seen]
+    attrs = [_bold(tr(a)) for a in c.attrs_seen]
     parts, k = [], 0
     for p in c.parts:
         if p == "\u0000":

@@ -12,6 +12,7 @@
 """
 from __future__ import annotations
 import argparse, json, pathlib, re, sys
+from datetime import date as _date
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import i18n_en  # noqa: E402
@@ -19,6 +20,64 @@ import i18n_en  # noqa: E402
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 AR_MD = ROOT.parent / "brain-marine-news" / "reports"
 I18N = ROOT / "sources" / "i18n" / "en"
+MANIFEST = ROOT.parent / "brain-marine-news" / "runbook" / "runbook.json"
+
+
+def i18n_policy() -> dict[str, str]:
+    """اقرأ سياسة اتجاه اللغة من المانيفست، ولا تسمح بمسار اتجاه ضمني.
+
+    قبل ``i18n.since`` كانت العربية هي الأصل التحريري؛ ومن ذلك التاريخ أصبحت
+    الإنجليزية هي الأصل. لا يغيّر هذا الحارس سياسة بناء يوم لاحق، بل يحدد فقط
+    اتجاه السجل الذي يُكتب لكل اشتقاق، حتى لا تختلط الوحدات التاريخية بوحدات
+    الإضافات المبنية من أحدث إصدار.
+    """
+    if not MANIFEST.is_file():
+        raise SystemExit(f"سياسة i18n مفقودة: {MANIFEST}")
+    try:
+        raw = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        policy = raw.get("i18n") or {}
+        master = str(policy.get("master") or "")
+        since = str(policy.get("since") or "")
+        _date.fromisoformat(since)
+    except (OSError, ValueError, TypeError, json.JSONDecodeError) as exc:
+        raise SystemExit(f"سياسة i18n غير صالحة: {MANIFEST}: {exc}") from exc
+    if master != "en":
+        raise SystemExit(f"اتجاه i18n غير مدعوم للاشتقاق: master={master!r}")
+    return {"master": master, "since": since}
+
+
+def direction_for(source_date: str) -> dict[str, str]:
+    """Return the audited master/rendered direction for one source edition."""
+    policy = i18n_policy()
+    before_cutover = _date.fromisoformat(source_date) < _date.fromisoformat(policy["since"])
+    if before_cutover:
+        return {
+            "master": "ar",
+            "rendered": "en",
+            "policy": f"pre_since_ar_master<{policy['since']}",
+        }
+    return {
+        "master": "en",
+        "rendered": "ar",
+        "policy": f"since_en_master>={policy['since']}",
+    }
+
+
+def latest_source_date() -> str:
+    report_root = ROOT / "sources" / "reports"
+    ar_dates = {
+        p.name.split("-sectioned")[0]
+        for p in report_root.glob("*-sectioned.md")
+        if re.fullmatch(r"\d{4}-\d{2}-\d{2}", p.name.split("-sectioned")[0])
+    }
+    dates = sorted(
+        p.name.split("-sectioned")[0]
+        for p in I18N.glob("*-sectioned.en.md")
+        if p.name.split("-sectioned")[0] in ar_dates
+    )
+    if not dates:
+        raise SystemExit("لا يوجد متن إنجليزي قابل للمحاذاة")
+    return dates[-1]
 
 
 def sentences(s: str) -> list[str]:
@@ -162,13 +221,48 @@ def main() -> int:
         print("   ✔ لا وحدة ناقصة")
         return 0
 
-    pairs = build_pairs_history(a.date)
-    print(f"   أزواج المحاذاة المتاحة (اليوم + 14 يومًا سابقة): {len(pairs)} سطرًا")
+    source_specs: list[dict] = []
+    for pg in pages:
+        if pg.name == "additions.html":
+            source_date = latest_source_date()
+            pairs = build_pairs(source_date)
+            surface = "additions"
+            note = "الإضافات ← أحدث إصدار منشور"
+        else:
+            source_date = a.date
+            pairs = build_pairs_history(a.date)
+            surface = "report"
+            note = "التقرير ← اليوم + 14 يومًا سابقة"
+        direction = direction_for(source_date)
+        source_specs.append({
+            "pairs": pairs,
+            "source_date": source_date,
+            "surface": surface,
+            "direction": direction,
+        })
+        print(
+            f"   محاذاة {pg.name}: {len(pairs)} سطرًا · {note} · "
+            f"الأصل {direction['master']} → المشتق {direction['rendered']}"
+        )
     derived: dict[str, str] = {}
+    derived_meta: dict[str, dict[str, str]] = {}
     failed: list[str] = []
     for u in uniq:
-        en = derive(u, pairs)
-        (derived.__setitem__(u, en) if en else failed.append(u))
+        for spec in source_specs:
+            en = derive(u, spec["pairs"])
+            if en:
+                derived[u] = en
+                direction = spec["direction"]
+                derived_meta[u] = {
+                    "source_date": spec["source_date"],
+                    "surface": spec["surface"],
+                    "master": direction["master"],
+                    "rendered": direction["rendered"],
+                    "policy": direction["policy"],
+                }
+                break
+        else:
+            failed.append(u)
 
     for k, v in derived.items():
         print(f"   ✔ اشتُقّت: {k[:70]}  →  {v[:70]}")
@@ -176,7 +270,8 @@ def main() -> int:
         print(f"   ✘ تعذّر اشتقاقها: {k[:110]}")
     if a.json:
         pathlib.Path(a.json).write_text(
-            json.dumps({"derived": derived, "failed": failed}, ensure_ascii=False, indent=2),
+            json.dumps({"derived": derived, "derived_meta": derived_meta, "failed": failed},
+                       ensure_ascii=False, indent=2),
             encoding="utf-8")
 
     if a.apply and derived:
@@ -185,6 +280,8 @@ def main() -> int:
         ent = d.setdefault("entries", {})
         for k, v in derived.items():
             ent[k] = v
+        direction_log = d.setdefault("_directions", {})
+        direction_log.update(derived_meta)
         d["updated"] = a.date
         P.write_text(json.dumps(d, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         print(f"   ✔ كُتبت {len(derived)} وحدة في المعجم")

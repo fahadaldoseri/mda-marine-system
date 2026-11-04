@@ -48,6 +48,28 @@ def rows_from_daily(path: Path, value: object) -> list[dict]:
     return rows
 
 
+MATERIAL_PROJECTION_MARK = "material_projection"
+
+# ك-504: الفراغ لا يُعدّ مادة. سجل الإسقاط (بلا واقعة موثّقة) كان يُقبل «مادة»
+# فيمرّ اليوم بلا يوم حقيقي — وهذا بالضبط ما منعته هذه البوابة.
+BLOCKED_MARKS = ("محجوب",)
+
+
+def _is_projection(row: dict) -> bool:
+    return bool(row.get(MATERIAL_PROJECTION_MARK))
+
+
+def _has_verified_source(row: dict) -> bool:
+    """فحص ناجح واحد على الأقل: مصدر مُستدعى ونتيجته ليست «محجوب»."""
+    for source in row.get("sources_checked") or []:
+        if not isinstance(source, dict):
+            continue
+        result = str(source.get("result") or "")
+        if not any(mark in result for mark in BLOCKED_MARKS):
+            return True
+    return False
+
+
 def _is_no_incident(row: dict) -> bool:
     return bool(row.get("no_incident")) or row.get("event_kind") == "no_incident" \
         or row.get("class") == "no_incident"
@@ -68,6 +90,8 @@ def validate_no_incident(path: Path, row: dict) -> None:
             raise RuntimeError(f"مصدر no_incident ناقص {missing} في {path} (#{index})")
     if not row.get("retrieved_at"):
         raise RuntimeError(f"سجل no_incident بلا retrieved_at: {path}")
+    if not _has_verified_source(row):
+        raise RuntimeError(f"سجل no_incident بلا مصدر فُحص فعليًا ونجح (كل المصادر محجوبة): {path}")
 
 
 def daily_coverage(root: Path) -> tuple[set[str], set[str]]:
@@ -85,6 +109,10 @@ def daily_coverage(root: Path) -> tuple[set[str], set[str]]:
         rows = rows_from_daily(path, value)
         if not rows:
             continue
+        projections = [row for row in rows if _is_projection(row)]
+        if projections:
+            raise RuntimeError(
+                f"يوم بسجل إسقاط بلا مادة موثّقة: {path} — الفراغ لا يُعدّ مادة")
         negative = [_is_no_incident(row) for row in rows]
         if any(negative):
             if not all(negative):

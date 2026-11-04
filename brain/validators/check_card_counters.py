@@ -357,19 +357,76 @@ def _component_label(card: dict, lang: str) -> str:
     return component.get("aria_label_en") if lang == "en" else component["aria_label"]
 
 
+def _component_surface(card: dict, lang: str, sections_policy: dict | None,
+                        title_map: dict[str, str]) -> tuple[str | None, str | None]:
+    """Resolve a registered component's surface through the governing policy."""
+    component = card["page_component"]
+    declared = component.get("surface")
+    declared_surfaces = component.get("surfaces")
+    if isinstance(declared_surfaces, list) and declared_surfaces:
+        allowed = [str(x) for x in declared_surfaces if str(x) in {"report", "additions"}]
+    else:
+        allowed = [declared] if declared in {"report", "additions"} else []
+    if not allowed:
+        return None, f"{lang}: سطح البطاقة غير مسجل: {card['id']}"
+    if sections_policy is None:
+        if declared not in {"report", "additions"}:
+            return None, f"{lang}: سطح البطاقة غير مسجل: {card['id']}"
+        return declared, None
+
+    # سياسة الأسطح حاكمة بالعناوين العربية؛ لا ننشئ خريطة سطح مستقلة للإنجليزية.
+    probe = _norm(component.get("aria_label", ""))
+    report_titles = [str(title) for title in sections_policy.get("required_in_report", [])]
+    additions_titles = [str(title) for title in sections_policy.get("required_in_additions", [])]
+    report = [title for title in report_titles if _title_matches_policy(title, probe, "ar", title_map)]
+    additions = [title for title in additions_titles if _title_matches_policy(title, probe, "ar", title_map)]
+    if len(report) + len(additions) != 1:
+        return None, f"{lang}: سطح البطاقة غير قابل للتعيين من السياسة: {card['id']}"
+    surface = "report" if report else "additions"
+    if surface not in allowed:
+        return surface, f"{lang}: سجل البطاقة {card['id']} يعلن سطح {declared} لكن السياسة تسنده إلى {surface}"
+    return surface, None
+
+
+def _component_matches(card: dict, node: Node, lang: str, title_map: dict[str, str]) -> bool:
+    component = card["page_component"]
+    if not _same_title(node.attrs.get("aria-label", ""), _component_label(card, lang), lang, title_map):
+        return False
+    # بطاقة الأخبار هي البطاقة المسجلة ذات المعرّف المرئي؛ لا تقبل مطابقة aria-label وحدها.
+    if component.get("class") == "sc-card" and node.attrs.get("data-kpi-id") != card["id"]:
+        return False
+    return True
+
+
 def _class_nodes(root: Node, class_name: str) -> list[Node]:
     return [node for node in _nodes(root) if class_name in node.attrs.get("class", "").split()]
 
 
-def _resolve_components(root: Node, cards: list[dict], lang: str, title_map: dict[str, str]) -> tuple[dict[str, Node], list[str]]:
+def _resolve_components(root: Node, cards: list[dict], lang: str, title_map: dict[str, str],
+                        sections_policy: dict | None = None, surface: str = "report") -> tuple[dict[str, Node], list[str]]:
     errors: list[str] = []
     resolved: dict[str, Node] = {}
     registered_classes = {c["page_component"]["class"] for c in cards}
     for card in cards:
         component = card["page_component"]
         candidates = _class_nodes(root, component["class"])
-        expected = _component_label(card, lang)
-        matches = [node for node in candidates if _same_title(node.attrs.get("aria-label", ""), expected, lang, title_map)]
+        expected_surface, surface_error = _component_surface(card, lang, sections_policy, title_map)
+        if surface_error and surface == "report":
+            errors.append(surface_error)
+        allowed_surfaces = component.get("surfaces") if isinstance(component.get("surfaces"), list) else None
+        if expected_surface != surface and allowed_surfaces and surface in allowed_surfaces:
+            # سطح إضافي معلَن في السجل: حضور المكوّن فيه اختياري (نسخة طباعة/شاشة)،
+            # فلا يُطالب به، وإن ظهر يُحتسب ويُمنع بقاءه بلا تسجيل.
+            extra_matches = [node for node in candidates if _component_matches(card, node, lang, title_map)]
+            if extra_matches:
+                resolved[card["id"]] = extra_matches
+            continue
+        if expected_surface != surface:
+            wrong_surface = [node for node in candidates if _component_matches(card, node, lang, title_map)]
+            if wrong_surface:
+                errors.append(f"{lang}: البطاقة المسجّلة {card['id']} ظهرت على سطح {surface}؛ السياسة تسندها إلى {expected_surface}")
+            continue
+        matches = [node for node in candidates if _component_matches(card, node, lang, title_map)]
         if not matches or (len(matches) > 1 and not component.get("allow_multiple")):
             if not candidates:
                 errors.append(f"{lang}: البطاقة المسجّلة {card['id']} مفقودة من الصفحة")
@@ -464,6 +521,29 @@ def _section_ancestor(node: Node) -> Node | None:
     return None
 
 
+def _section_matches_title(section: Node, title: str, lang: str, title_map: dict[str, str]) -> bool:
+    if _same_title(section.attrs.get("aria-label", ""), title, lang, title_map):
+        return True
+    return _find_heading(section, title, ("h2", "h3", "h4"), lang, title_map) is not None
+
+
+def _zone_inside_target_section(node: Node, title: str, lang: str,
+                                title_map: dict[str, str]) -> bool:
+    # عندما يكون المكوّن نفسه عنصر section (كما في المولّد الحالي)، يكون aria-label
+    # عنوان القسم. وإذا وُجد قسم خارجي، فلا يكفي عنوان المكوّن وحده: يجب أن يطابق
+    # أحد أسلافه عنوان القسم المستهدف حتى لا تمر بطاقة خرجت من نطاقها.
+    outer_sections = []
+    current = node.parent
+    while current is not None:
+        if current.tag == "section":
+            outer_sections.append(current)
+        current = current.parent
+    if outer_sections:
+        return any(_section_matches_title(section, title, lang, title_map)
+                   for section in outer_sections)
+    return node.tag == "section" and _section_matches_title(node, title, lang, title_map)
+
+
 def _validate_news_card(card: dict, node: Node, report: Node, additions: Node, ar_report: Node, ar_additions: Node,
                         lang: str, title_map: dict[str, str],
                         sections_policy: dict | None = None) -> list[str]:
@@ -556,9 +636,8 @@ def _nested_get(data: dict, path: str):
 def _validate_zone_card(card: dict, node: Node, lang: str, zones_data: dict | None, title_map: dict[str, str]) -> list[str]:
     errors: list[str] = []
     title = card["target_section"].get("title_en" if lang == "en" else "title", "")
-    heading = _find_heading(node, title, ("h3", "h2"), lang, title_map)
-    if heading is None:
-        errors.append(f"{lang}: مرساة بطاقة القطاعات لا تطابق عنوانها: {title}")
+    if not _zone_inside_target_section(node, title, lang, title_map):
+        errors.append(f"{lang}: مرساة بطاقة القطاعات خارج القسم المستهدف: {title}")
     if zones_data is None:
         return errors + [f"{lang}: مصدر عدادات بطاقة القطاعات مفقود"]
     count_nodes = [n for n in _nodes(node) if "tz-count" in n.attrs.get("class", "").split()]
@@ -710,11 +789,104 @@ def validate_hero_kpis(meta: dict, zones_data: dict, registry: dict, *, rendered
     return errors
 
 
+def validate_imo_permanent_cards(meta: dict, registry: dict, kpis_totals: dict,
+                                 *, rendered_html: str | None = None) -> list[str]:
+    """حارس القرار 9: بطاقتا IMO الدائمتان، مصدر واحد، وظهور واحد على السطح."""
+    errors: list[str] = []
+    expected_ids = ("imo-confirmed-incidents", "imo-seafarer-deaths")
+    source_url = "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx"
+    source_file = "appendices/imo-incidents.json"
+    hero_contract = (registry.get("hero_kpis") or {}).get("cards") or []
+    contract_by_id = {str(card.get("id")): card for card in hero_contract if isinstance(card, dict)}
+    actual_hero = [card for card in (meta.get("hero_kpis") or []) if isinstance(card, dict)]
+    actual_by_id = {str(card.get("id")): card for card in actual_hero if card.get("id")}
+    kpi_metrics = {str(metric.get("id")): metric for metric in (kpis_totals or {}).get("metrics", [])
+                   if isinstance(metric, dict) and metric.get("id")}
+
+    all_ids = {str(card.get("id")) for card in actual_hero if card.get("id")}
+    all_ids.update(str(card.get("id")) for card in (meta.get("official_cards") or [])
+                   if isinstance(card, dict) and card.get("id"))
+    all_ids.update(str(metric.get("id")) for metric in (kpis_totals or {}).get("metrics", [])
+                   if isinstance(metric, dict) and metric.get("id"))
+    if "imo-confirmed-attacks" in all_ids:
+        errors.append("حاجز معرّف IMO القديم: imo-confirmed-attacks ما زال موجودًا")
+
+    for cid in expected_ids:
+        contract = contract_by_id.get(cid)
+        card = actual_by_id.get(cid)
+        if contract is None:
+            errors.append(f"حاجز موضع بطاقة IMO: العقد مفقود: {cid}")
+            continue
+        if card is None:
+            errors.append(f"حاجز موضع بطاقة IMO: البطاقة الدائمة مفقودة: {cid}")
+            continue
+        if card.get("row") != 2:
+            errors.append(f"حاجز موضع بطاقة IMO: {cid} خارج الصف 2")
+        if card.get("title") != contract.get("title"):
+            errors.append(f"حاجز عنوان بطاقة IMO: {cid} متغير")
+        if card.get("source_url") != source_url:
+            errors.append(f"حاجز مصدر بطاقة IMO: {cid} بلا رابط IMO الرسمي")
+        if source_file not in str(card.get("source") or ""):
+            errors.append(f"حاجز مصدر بطاقة IMO: {cid} بلا appendices/imo-incidents.json")
+        if source_url not in str(card.get("source") or ""):
+            errors.append(f"حاجز مصدر بطاقة IMO: {cid} بلا رابط الصفحة الرسمية")
+        metric_id = ((contract.get("source") or {}).get("id") or cid)
+        metric = kpi_metrics.get(str(metric_id))
+        if metric is None:
+            errors.append(f"حاجز مصدر بطاقة IMO: مقياس {metric_id} مفقود")
+            continue
+        for field in ("today", "cumulative", "updated"):
+            if str(card.get("value" if field == "today" else field)) != str(metric.get(field)):
+                errors.append(f"حاجز طبقة بطاقة IMO: {cid}.{field} قيمة البطاقة={card.get('value' if field == 'today' else field)} والمصدر={metric.get(field)}")
+
+    official_counts = {}
+    for card in (meta.get("official_cards") or []):
+        if isinstance(card, dict) and card.get("id") in expected_ids:
+            official_counts[card["id"]] = official_counts.get(card["id"], 0) + 1
+    for cid, count in official_counts.items():
+        if count > 1:
+            errors.append(f"حاجز تكرار مصدر IMO: {cid} مكرر {count} مرات في official_cards")
+
+    rows = {int(k): int(v) for k, v in ((registry.get("hero_kpis") or {}).get("row_counts") or {}).items()}
+    if rows.get(2) != 2 or sum(1 for card in actual_hero if card.get("row") == 2) != 2:
+        errors.append("حاجز موضع بطاقات IMO: الصف الدائم يجب أن يحوي بطاقتين فقط")
+    if rendered_html:
+        root = parse_document(rendered_html)
+        all_nodes = list(_nodes(root))
+        # السطحان معرَّفان في المشروع: سطح التقرير/الطباعة، وسطح الشاشة (sc-hero).
+        # وفي كل سطح يجب أن تظهر البطاقة الدائمة مرة واحدة فقط؛ التكرار داخل السطح نفسه ممنوع.
+        surfaces = {
+            "سطح التقرير/الطباعة": [n for n in all_nodes if not _has_ancestor_class(n, "sc-hero")],
+            "سطح الشاشة (screen_layer)": [n for n in all_nodes if _has_ancestor_class(n, "sc-hero")],
+        }
+        for cid in expected_ids:
+            for surface, nodes in surfaces.items():
+                hero_nodes = [n for n in nodes if n.attrs.get("data-kpi-id") == cid]
+                official_nodes = [n for n in nodes if n.attrs.get("data-official-card-id") == cid]
+                if len(hero_nodes) != 1:
+                    errors.append(f"حاجز تكرار مصدر IMO: {cid} ظاهر {len(hero_nodes)} مرة في {surface}")
+                if official_nodes:
+                    errors.append(f"حاجز تكرار مصدر IMO: {cid} مكرر في official-cards على {surface}")
+    return errors
+
+
 def _official_contract(registry: dict) -> dict:
     contract = registry.get("official_cards")
     if not isinstance(contract, dict) or not isinstance(contract.get("cards"), list):
         raise ValueError("سجل البطاقات الرسمية مفقود أو غير صالح: official_cards.cards")
     return contract
+
+
+def _official_source_totals() -> dict:
+    """أرقام القائمة الرسمية المحفوظة في المشروع — مصدر واحد لا يُخترع منه شيء."""
+    p = ROOT / "appendices" / "imo-incidents.json"
+    try:
+        d = json.loads(p.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    totals = d.get("totals") or {}
+    return {"confirmed_incidents": str(totals.get("confirmed_incidents") or ""),
+            "confirmed_seafarer_deaths": str(totals.get("confirmed_seafarer_deaths") or "")}
 
 
 def validate_official_cards(meta: dict, registry: dict) -> list[str]:
@@ -759,6 +931,11 @@ def validate_official_cards(meta: dict, registry: dict) -> list[str]:
                 errors.append(f"حاجز المصدر الرسمي: {cid}.{key} بلا مصدر")
             state = layer.get("state")
             value = str(layer.get("value") or "")
+            _tot = _official_source_totals()
+            _want = {"imo-confirmed-incidents": _tot.get("confirmed_incidents"),
+                     "imo-seafarer-deaths": _tot.get("confirmed_seafarer_deaths")}.get(cid)
+            if _want and key == "cumulative" and value and value != _want:
+                errors.append(f"حاجز مطابقة القائمة الرسمية: {cid}.{key} = {value} والمصدر الرسمي = {_want}")
             if state == "undisclosed" and value != "لم يُعلن":
                 errors.append(f"حاجز منع الصفر الكاذب: {cid}.{key} يجب أن يكون «لم يُعلن» عند عدم الإفصاح")
             if state == "no_coverage" and value != "لا تغطية":
@@ -792,14 +969,15 @@ def validate_official_cards(meta: dict, registry: dict) -> list[str]:
 def validate_one(report_html: str, additions_html: str, *, ar_report_html: str | None = None,
                  ar_additions_html: str | None = None, title_map: dict[str, str] | None = None,
                  registry: dict | None = None, zones_data: dict | None = None,
-                 sections_policy: dict | None = None) -> list[str]:
+                 sections_policy: dict | None = None, surface: str = "report") -> list[str]:
     report = parse_document(report_html)
     additions = parse_document(additions_html)
     lang = _lang(report)
     ar_report = parse_document(ar_report_html) if ar_report_html else report
     ar_additions = parse_document(ar_additions_html) if ar_additions_html else additions
     cards = [card for card in (registry or {}).get("cards", []) if (card.get("status") or {}).get("state") == "enabled"]
-    resolved, errors = _resolve_components(report, cards, lang, title_map or {})
+    root = report if surface == "report" else additions
+    resolved, errors = _resolve_components(root, cards, lang, title_map or {}, sections_policy, surface)
     for card in cards:
         nodes = resolved.get(card["id"], [])
         if not nodes:
@@ -828,17 +1006,26 @@ def validate_card_documents(*, ar_report: str, ar_additions: str, en_report: str
         return [str(exc)]
     title_map = _load_title_map(glossary_path)
     errors = validate_one(ar_report, ar_additions, title_map=title_map, registry=registry,
-                          zones_data=zones_data, sections_policy=sections_policy)
+                          zones_data=zones_data, sections_policy=sections_policy, surface="report")
+    errors.extend(validate_one(ar_report, ar_additions, title_map=title_map, registry=registry,
+                               zones_data=zones_data, sections_policy=sections_policy, surface="additions"))
     if en_report:
         errors.extend(validate_one(en_report, en_additions or ar_additions, ar_report_html=ar_report,
                                    ar_additions_html=ar_additions, title_map=title_map,
                                    registry=registry, zones_data=zones_data,
-                                   sections_policy=sections_policy))
+                                   sections_policy=sections_policy, surface="report"))
+        errors.extend(validate_one(en_report, en_additions or ar_additions, ar_report_html=ar_report,
+                                   ar_additions_html=ar_additions, title_map=title_map,
+                                   registry=registry, zones_data=zones_data,
+                                   sections_policy=sections_policy, surface="additions"))
     if meta_data is not None and zones_data is not None:
         errors.extend(validate_hero_kpis(meta_data, zones_data, registry, rendered_html=ar_report,
                                          kpis_totals=kpis_totals_data))
     if meta_data is not None:
         errors.extend(validate_official_cards(meta_data, registry))
+        if kpis_totals_data is not None:
+            errors.extend(validate_imo_permanent_cards(meta_data, registry, kpis_totals_data,
+                                                       rendered_html=ar_report))
     return errors
 
 

@@ -63,8 +63,6 @@ KIND_LABEL = {
     "watch": "تحت المراقبة",
 }
 
-STATUS_CLASS = {"نشط": "s-active", "مستقر": "s-stable", "مغلق": "s-closed", "قائم": "s-active"}
-
 TREND = {"up": ("▲", "t-up"), "down": ("▼", "t-down"), "flat": ("■", "t-flat")}
 
 # ربط علامات البنود داخل النص بأصناف الشرائط
@@ -287,41 +285,6 @@ def gaps_table(items, inline):
     )
 
 
-def event_keys_table(items, inline):
-    if not items:
-        return ""
-    def display_area(item):
-        """اسم المنطقة فقط؛ لا تُعرض معرّفات القطاعات أو وسم عدم المكان."""
-        missing = {"غير مكانية", "خارج القطاعات", "غير محددة", "غير محدد", ""}
-        candidates = (
-            item.get("zone_name"), item.get("area"), item.get("location"),
-            item.get("sector_name"), item.get("sector"),
-        )
-        for raw in candidates:
-            value = str(raw or "").strip()
-            if value in missing:
-                continue
-            value = re.sub(r"(?<![A-Za-z0-9])Z[1-5](?:\s*[—–-]\s*)?", "", value).strip(" ·—–-")
-            if value and value not in missing:
-                return value
-        return "المنطقة كاملة"
-
-    rows = []
-    for it in items:
-        st = str(it.get("status", "")).strip()
-        cls = STATUS_CLASS.get(st, "s-stable")
-        rows.append([
-            Raw(f'<bdi class="bidi ev-code">{esc(code_label(it.get("code", ""), it.get("ref", ""), f'{it.get("note", "")} {it.get("title", "")}'))}</bdi>'),
-            Raw(inline(display_area(it))),
-            Raw(f'<span class="st-badge {cls}">{esc(st)}</span>'),
-            Raw(inline(it.get("note", ""))),
-        ])
-    return (
-        '<h3>تتبع الوقائع</h3><p class="blk-lede">رقم البلاغ (والكامل في «سجل الأحداث») · المنطقة · الحالة.</p>'
-        + _table(["الرمز", "المنطقة", "الحالة", "ملاحظة"], rows, inline)
-    )
-
-
 def timeline(items, inline):
     """خط زمني لمضيق هرمز: تكرار الوقائع وتوقيتها."""
     if not items:
@@ -441,8 +404,6 @@ def render_block(name, data, inline):
         return hypotheses_table(data, inline)
     if name == "gaps":
         return gaps_table(data, inline)
-    if name == "event_keys":
-        return event_keys_table(data, inline)
     if name == "timeline":
         return timeline(data, inline)
     if name == "source_reliability":

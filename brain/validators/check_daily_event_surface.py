@@ -66,6 +66,11 @@ def _date(event: dict) -> str:
     return _text(event.get("date") or event.get("date_start") or event.get("date_label"))
 
 
+def _is_cumulative_update(event: dict) -> bool:
+    """سجل تحديث تراكمي يبقى في الدفتر ولا يظهر كبطاقة واقعة."""
+    return _text(event.get("event_kind")).strip().lower() == "تحديث بيانات"
+
+
 def _relation_marker(event: dict, known: set[str]) -> tuple[bool, str]:
     kind = _text(event.get("event_kind")).lower()
     marked = bool(kind and any(token in kind for token in (
@@ -145,7 +150,8 @@ def validate_documents(*, daily: list[dict], report: str, additions: str, site: 
                        policy: dict | None = None) -> list[str]:
     errors: list[str] = []
     policy = policy or {}
-    moved = tuple(policy.get("required_in_additions") or MOVED_SECTIONS)
+    moved_config = policy.get("required_in_additions")
+    moved = tuple(moved_config) if moved_config is not None else MOVED_SECTIONS
     required_report = tuple(policy.get("required_in_report") or ())
 
     report_heads = _headings(report)
@@ -180,20 +186,21 @@ def validate_documents(*, daily: list[dict], report: str, additions: str, site: 
         return int(match.group(1)) if match else None
 
     cards = _event_cards(report)
-    expected_codes = [_code(event) for event in daily]
+    renderable_daily = [event for event in daily if not _is_cumulative_update(event)]
+    expected_codes = [_code(event) for event in renderable_daily]
     actual_codes = [code for code, _ in cards]
     source_count = attr_int("data-source-count")
     rendered_count = attr_int("data-count")
-    if source_count != len(daily):
-        errors.append(f"عداد مصدر سجل الأحداث={source_count}، والدفتر={len(daily)}")
-    if rendered_count != len(daily) or len(cards) != len(daily):
-        errors.append(f"عدد بطاقات سجل الأحداث={len(cards)}، والدفتر={len(daily)}")
+    if source_count != len(renderable_daily):
+        errors.append(f"عداد مصدر سجل الأحداث={source_count}، والسجلات القابلة للعرض={len(renderable_daily)}")
+    if rendered_count != len(renderable_daily) or len(cards) != len(renderable_daily):
+        errors.append(f"عدد بطاقات سجل الأحداث={len(cards)}، والسجلات القابلة للعرض={len(renderable_daily)}")
     if actual_codes != expected_codes:
         errors.append("رموز سجل الأحداث الظاهرة لا تطابق ترتيب/سجلات دفتر الفترة")
 
     known = _known_ids(site, daily)
     expected_relations = {}
-    for event in daily:
+    for event in renderable_daily:
         marked, ref = _relation_marker(event, known)
         if marked:
             expected_relations[_code(event)] = ref

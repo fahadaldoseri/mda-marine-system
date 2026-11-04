@@ -25,6 +25,7 @@ SCRIPT = re.compile(r"<(script|style)\b.*?</\1>", re.S | re.I)
 MT_FLAG = re.compile(
     r"(?im)^\s*(auto_translate|mt_fallback|machine_translation)\s*[:=]\s*(true|1|\"1\"|'1')"
 )
+WORKSPACE_ROOT = Path(os.environ.get("WORKSPACE_ROOT", "/home/ubuntu"))
 DEFAULT_MASTER = "sources/i18n/en/{date}-sectioned.en.md"
 
 
@@ -118,8 +119,8 @@ def selftest() -> int:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="التحقق من اتجاه اللغة في خط أنابيب ثنائي اللغة")
-    ap.add_argument("--brain", default=str(_ROOT / "brain-marine-news"))
-    ap.add_argument("--site", default=str(_ROOT / "seawatch"))
+    ap.add_argument("--brain", default=str(WORKSPACE_ROOT / "brain-marine-news"))
+    ap.add_argument("--site", default=str(WORKSPACE_ROOT / "seawatch"))
     ap.add_argument("--date")
     ap.add_argument("--selftest", action="store_true")
     a = ap.parse_args()
