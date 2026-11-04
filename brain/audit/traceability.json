@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-04T17:45:07.496859+00:00",
+  "generated_at": "2026-11-04T20:41:42.453046+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -3800,30 +3800,100 @@
     {
       "fault_id": "ك-508",
       "state": "بانتظار التحقق",
-      "lesson_id": null,
+      "lesson_id": "ك-508",
       "barrier_id": "B-db3dcacb",
       "run_evidence": null
     },
     {
       "fault_id": "ك-509",
       "state": "بانتظار التحقق",
-      "lesson_id": null,
+      "lesson_id": "ك-509",
       "barrier_id": "B-fe822096",
       "run_evidence": null
     },
     {
       "fault_id": "ك-510",
       "state": "بانتظار التحقق",
-      "lesson_id": null,
+      "lesson_id": "ك-510",
       "barrier_id": "B-855dbd32",
       "run_evidence": null
     },
     {
       "fault_id": "ك-511",
       "state": "بانتظار التحقق",
-      "lesson_id": null,
+      "lesson_id": "ك-511",
       "barrier_id": "B-2056c922",
       "run_evidence": null
+    },
+    {
+      "fault_id": "ك-512",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-512",
+      "barrier_id": "B-9bc439d5",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-513",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-513",
+      "barrier_id": "B-1865c288",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-514",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-514",
+      "barrier_id": "B-66783951",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-515",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-515",
+      "barrier_id": "B-26ccb6f9",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-516",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-516",
+      "barrier_id": "B-475588af",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-517",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-517",
+      "barrier_id": "B-fc875ab5",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-518",
+      "state": "مغلق",
+      "lesson_id": "ك-518",
+      "barrier_id": "B-a92edc8c",
+      "run_evidence": "فرة · `tests/test_code_paths_ignore.py` 5 اختبارات ناجحة · D005 وD070 رمز 0"
+    },
+    {
+      "fault_id": "ك-519",
+      "state": "مغلق",
+      "lesson_id": null,
+      "barrier_id": "B-b05e3c42",
+      "run_evidence": "racking.py` ⇒ كل ملفات الشيفرة متتبَّعة (المستثنى المعلَّل: 0) · D005 رمز 0"
+    },
+    {
+      "fault_id": "ك-520",
+      "state": "مغلق",
+      "lesson_id": null,
+      "barrier_id": "B-55584ff3",
+      "run_evidence": "#424 `check_backup_parity.py --mode strict` ⇒ «النتيجة: مطابق» · D070 رمز 0"
+    },
+    {
+      "fault_id": "ك-521",
+      "state": "مغلق",
+      "lesson_id": null,
+      "barrier_id": "B-e20e08ea",
+      "run_evidence": "ناء `check_number_bindings.py --date 2026-11-04` ⇒ مطابق · G037 وG054 رمز 0 · بطاقة الوفيات على المو"
     }
   ]
 }
