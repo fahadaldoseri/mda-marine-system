@@ -89,11 +89,11 @@ brain/appendices/sources-manifest.json	1604	2026-10-30 01:48	5f0e9224abfd9af6b44
 brain/appendices/style-blacklist.json	27231	2026-11-04 16:48	dcde34a26bc0a133a0538f2bf32e7f2485f0c531ee8de9e99a3d57bef3798a97
 brain/appendices/support-sources.json	5119	2026-10-30 01:48	ed9d88fde6d7868733c51802f4c1e787e61c185ddc1559e43ef3e9bed01875b6
 brain/appendices/support-sources.md	5684	2026-10-30 01:48	c7e6485ac405a5c4d2c4aa2dea4033c9602b228e396b3248c918371f7274b410
-brain/appendices/telegram-chat.json	292	2026-11-04 20:20	5ee40c89c7200fbe43324cb33e9262cb712dbc36311ca4980668fc5961eea38b
+brain/appendices/telegram-chat.json	292	2026-11-04 20:22	5ee40c89c7200fbe43324cb33e9262cb712dbc36311ca4980668fc5961eea38b
 brain/appendices/telegram-delivery.md	10197	2026-10-30 01:48	27fac5e22e59cffc330bc7108ab305c5432fecaaf66c47bb043a89d39d4304e7
 brain/appendices/telegram-policy.md	4387	2026-10-30 01:48	c33e56b83afe79c64256596caf82f4d8bd2c89b29f6a08943dd59ec428865da4
-brain/appendices/telegram-subscriptions.json	431	2026-11-04 20:20	5962c1c85557fb5b778f2d7c51a460b010c0fb35d51a65c684faf1f84efc01e7
-brain/appendices/telegram-targets.json	1249	2026-11-04 20:20	7ea4a5521bed2b352a96d01471270ec06f635e3f191eda4f1b2a70bac62aea71
+brain/appendices/telegram-subscriptions.json	431	2026-11-04 20:22	5962c1c85557fb5b778f2d7c51a460b010c0fb35d51a65c684faf1f84efc01e7
+brain/appendices/telegram-targets.json	1249	2026-11-04 20:22	7ea4a5521bed2b352a96d01471270ec06f635e3f191eda4f1b2a70bac62aea71
 brain/appendices/terminology.md	27058	2026-10-30 01:48	3adb93630d6a3ddadb391901e2a73fcb9d837ffd8c8eab6148083136a2276d54
 brain/appendices/threat-scale.json	2735	2026-11-02 03:22	59c8b45529077a488fece61965c240b912f4ddbaac5c69d5a5809bb56ba7c4c4
 brain/appendices/ui-contract.json	769	2026-10-31 20:41	ac9d83bfc53419877221d56388ae16a2a016b9a1d1a2f2292cfad7cf4efdcdfd
@@ -1422,7 +1422,7 @@ brain/docs/audit-2026-10-13-full-chain.md	8431	2026-10-30 01:48	efc4ee70761522bd
 brain/docs/incident-2026-10-13.md	11662	2026-10-30 01:48	da1566558ff20ae85c4a58d2302eb0d5e390aa33ec240be6448205ea60d9d757
 brain/docs/prompt-نسخة-أعمق-تقرير-GFS.md	13250	2026-10-30 01:48	fa4529b94352367ba3b1f0bf7cb12bec1c87cb472e596121dc309facd400175f
 brain/docs/reports-index.md	1991	2026-11-04 17:40	3f8807a492e728e621a153614d79241c6a11068d80d619391e67cd1277e20c93
-brain/docs/runbook.md	46953	2026-11-04 16:48	11d23741cba9191335bde4a94abe0f94efc0d94aecb473b816d561122760eeda
+brain/docs/runbook.md	48569	2026-11-04 20:22	5feecb2f191346dfdbd6670cb70a0bb88f470bf35506caddfbaaa3e1f9fc731d
 brain/docs/source-diagnosis-2026-10-22.json	42715	2026-10-30 01:48	9bf926f465bbd85303485d143a58d7c1597739deded1809e9205ab384bd1fb47
 brain/docs/source-diagnosis-2026-10-30.json	47465	2026-10-30 13:24	3e3780bac0465d36b6377fac76703d5b78d659a002f9eba97462042a51004ba2
 brain/docs/source-scan-40.json	67807	2026-10-30 01:48	3a68fb103efa0f4c1a729ea3285bb97a9ed48a21b4a5e8aebfc0dccc012f34e2
@@ -1681,7 +1681,7 @@ brain/logs/alerts/code-drift-2026-10-31.txt	1215	2026-10-31 23:17	deb96abac31cb5
 brain/logs/alerts/code-drift-2026-11-01.txt	146	2026-11-01 18:23	a2573753a1e70bbdf8052260200496d316f577cab81e4670254fb96b818b9ee7
 brain/logs/alerts/code-drift-2026-11-02.txt	272	2026-11-02 23:20	2ed4da74a94f47907ae600878127b60e66d1905dda48e7f71bf429c543736f38
 brain/logs/alerts/code-drift-2026-11-03.txt	312	2026-11-03 22:04	30b12d7578390ee0c5424c759e6d38f1977bfc135307c804df035e812526be6e
-brain/logs/alerts/code-drift-2026-11-04.txt	890	2026-11-04 20:16	ecd8dd4df5b92dea2daa098e46aa9f91075e82ebabe7243931a79eaa096610e8
+brain/logs/alerts/code-drift-2026-11-04.txt	640	2026-11-04 20:20	19689f143b7d20674bc0eb27d42d5d3286fc46309d2dd7cd663748cec66b6e59
 brain/logs/alerts/waw-2026-10-23.md	277	2026-11-01 05:34	efe84461c536546ae852581631c35a9383f3d21bdc458a97825b127ee88daa9d
 brain/logs/alerts/waw-2026-10-27.md	277	2026-10-27 20:47	5d644ac7fe5265918d1941ea93ed533464a4d99989a58101dce924748345d0b6
 brain/logs/alerts/waw-2026-10-28.md	275	2026-10-28 21:52	e76a2d82d53c72fe940bc41ec0bf6a075ec214f7b376bf1147b5253bd9d344ee
@@ -2471,7 +2471,7 @@ brain/logs/github-backup-2026-10-31.log	365396	2026-10-31 23:17	e81ef97ec80ed676
 brain/logs/github-backup-2026-11-01.log	347789	2026-11-01 18:48	3a56f1798365d5f8833042ca9e52b5343495ab4a6596ed6d8cefd6505c751744
 brain/logs/github-backup-2026-11-02.log	749260	2026-11-02 23:42	a31d1973a27dd1276d18d48740620a4c8ef7fb0b276d25649e7392a71b0f359b
 brain/logs/github-backup-2026-11-03.log	427494	2026-11-03 22:05	0f412dcd4affe396fff11344934a377d2cd74e6279377cdaac4d1beaec1592e8
-brain/logs/github-backup-2026-11-04.log	206551	2026-11-04 20:20	0def245d9d8b09b0d5e3f31cdc70c9ae2197943e973b13c203c8e6861ff737a5
+brain/logs/github-backup-2026-11-04.log	221647	2026-11-04 20:22	0a51027941eaf5823debfd597477eb6df41134652546f2c07330e31feec3db8e
 brain/logs/hero-kpi-schema-green1-2026-10-31.txt	2878	2026-10-31 15:13	a0d504ca5a166935ef1be28efb8305b5852d5b38866c326818f8740c21a1f2ce
 brain/logs/hero-kpi-schema-green2-2026-10-31.txt	90594	2026-10-31 15:14	13f963ac8aa7428ca0cfa5ce4f5ffb0490adc2a30b7a70292543489dbe1a2cae
 brain/logs/hero-kpi-schema-green3-2026-10-31.txt	1508	2026-10-31 15:14	e9fa27106592fed6ea916095a09c8649aee7d4d16482d017cee4da1b3c5c1a16
@@ -3647,7 +3647,7 @@ brain/logs/runbook/2026-11-04/B020.log	202	2026-11-04 15:44	a19b3f58ca41fb95bbe6
 brain/logs/runbook/2026-11-04/B030.log	202	2026-11-04 15:44	a19b3f58ca41fb95bbe68c8a83245c0f144cfd1e6073bd69ef568ff4cd8c6efb
 brain/logs/runbook/2026-11-04/B035.log	1104	2026-11-04 16:16	9655b7572f1e7963e670f3aa2d8764efd1c39acaa907f02249b6ec23590a03e9
 brain/logs/runbook/2026-11-04/B040.log	1421	2026-11-04 16:16	787fc01c862855b3a53479d4325e0df12fc635cb0db2643da91ef628ecb4c508
-brain/logs/runbook/2026-11-04/D005.log	0	2026-11-04 20:17	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+brain/logs/runbook/2026-11-04/D005.log	1733	2026-11-04 20:21	a52749ff1c480bf0b5051a67b9553d1a2cfdb016921e3a9d05b8a0085a4a0089
 brain/logs/runbook/2026-11-04/D010.log	2542	2026-11-04 17:18	4ff893e12e59bb29de51baad94c94d17e73e294c6604f0ad29b4a232bc16b84f
 brain/logs/runbook/2026-11-04/D020.log	1760	2026-11-04 17:33	af9ae6443a3548c3e20b7d5c9017284b0562726453217943261cf551efd78922
 brain/logs/runbook/2026-11-04/D030.log	2865	2026-11-04 17:33	e045812236d9fc82893f2bf6b0013a282f1375db115908efdfae2d0089631bc2
@@ -3749,7 +3749,7 @@ brain/logs/runbook/2026-11-04/S080.log	208	2026-11-04 03:51	9450950b6bd64e2439aa
 brain/logs/runbook/2026-11-04/S090.log	289	2026-11-04 04:00	408b37c22f172d5becb27838c3935f883014f858aa1b8f6f38ec6155a961590d
 brain/logs/runbook/2026-11-04/W040.log	208	2026-11-04 04:14	cc0d016003b9242e035dd29168d637f6917b97d1cde050a642aa81ec4f8fcf58
 brain/logs/runbook/2026-11-04/dom-audit.json	5257	2026-11-04 17:33	4756d1e63f0b59502c7b49cbe57648ac127c289429c2fe8004e285561e7a45e3
-brain/logs/runbook/2026-11-04.jsonl	31044	2026-11-04 20:17	08346db56b26dcf111a90372268c05f5680c236cbd1da7395aeaeae47525af82
+brain/logs/runbook/2026-11-04.jsonl	31202	2026-11-04 20:21	d349cd24f6231fc9a295fc3a2bae21bb9e7ea61284fca0993ae8ab2631e00de9
 brain/logs/runbook-2026-10-27-rerun-command.log	37	2026-10-27 12:30	17c1481000d4ad90004090da958719d7eb777d0bd88c2de9972d5799bf7d00f4
 brain/logs/runbook-2026-10-27-rerun-command.rc	26	2026-10-27 12:30	74c905a22ab61a575c3de023cdb3bcbfd25801a9e7b18cf266bc5767482f2615
 brain/logs/scrub-2026-10-20.json	78	2026-10-20 20:02	c481a6ee4dbafc625d5dfe6e880c5bd4375820b1bb7ea91bb97f86deb3aa05fb
@@ -4095,7 +4095,7 @@ brain/research/styles/D-military-writing.md	27629	2026-10-17 07:56	32b1b1ce74f35
 brain/research/styles/E-arabic-admin-military.md	7336	2026-10-19 21:02	d9233175956f01d1af1a7294ca80b516e8023af679aafb32860d947aa4dfd4e3
 brain/research/styles/sources/algiers-admin.pdf	3504865	2026-10-17 07:54	0e0e5a5bdf317c6fe7f04a69e7fe00a97f9b16b3e92b281058f99b22201d1a7d
 brain/research/styles/sources/alukah-style.html	105177	2026-10-22 04:46	cc60b8ef3f97f5db734970c64473c19b9525a2b2cf7b9d1663f589742be1e666
-brain/research/styles/sources/archive-reports.html	236209	2026-11-04 20:20	60258146b7358c0ddc23de22616dbf0e59a37b7e336b57673a37b4bd36bf29c5
+brain/research/styles/sources/archive-reports.html	236209	2026-11-04 20:22	60258146b7358c0ddc23de22616dbf0e59a37b7e336b57673a37b4bd36bf29c5
 brain/research/styles/sources/biskra-admin.html	106392	2026-10-17 07:54	b18077661a8adadfeccca4a989130da950e8bda7116a479a6a783c6b8e5beaad
 brain/research/styles/sources/meta.json	13858	2026-10-17 07:55	7ca5f3885c9e8d2190fdff6d06902508c82977e3b6d4906a7262ac0240cd1c2a
 brain/runbook/prompts/sections/attribution.md	513	2026-10-30 01:49	8471e32723b90f0ff7fffac2d4879987ca3216bd7e885a88c20223d45134487a
@@ -4118,14 +4118,14 @@ brain/runbook/prompts/sections/what-changed.md	524	2026-10-30 01:49	77d93b32cb43
 brain/runbook/prompts/write-ledger.md	1626	2026-10-30 01:49	c3a2afb67628993c944a174de12fbb64eed265a13e4dbd6001fc76d6874efd02
 brain/runbook/prompts/write-meta.md	1849	2026-11-04 17:36	375078d4030d8c7902e56266d3f717e823982198a24837ba49ceba9d0b173022
 brain/runbook/prompts/write-report.md	5286	2026-11-04 16:48	e4023f422948ea48b931dbfb23430f9bf909eae5067d2927619847ec737cd804
-brain/runbook/runbook.json	166724	2026-11-04 16:48	45d58f62e36dfbbbba4ee7818868fa1fe069e29ea291d23ede03b0514a951075
+brain/runbook/runbook.json	152574	2026-11-04 20:22	2a795d881cd43b0f838ddb9b42c878ada617b42528c469ce470b70849ad812ec
 brain/runbook-result.md	4939	2026-10-23 12:18	29cf0657b12b7e2fdc4aa553e27ef1b1b48c938a1a9a9d22e7e42fc551a87c60
 brain/schedule/detail-v4.txt	3004	2026-10-30 01:49	d7e29249ae5ea223a3098f9e5b476ba6ccbebd8172d55644aa80c9a66c938bab
 brain/schedule/detail-v6.txt	5339	2026-10-30 01:49	15a9722e27d103476b86e232eff3a6eabc96e55b0bfc683fd48534b0a569f985
 brain/schedule/detail-v7.txt	5722	2026-10-30 01:49	6506521ef999e708ed5b2b1b4faa4d888f53b90591b6dfd6d800d66a2e5fa950
 brain/schedule/التفاصيل-الكاملة-قبل-المرحلة-الثالثة.md	3789	2026-10-30 01:49	90d4c4b3536f9cb7d121ff25dee251173b7fb1507e37cb979ca41b7ae5467e61
 brain/schedule/التفاصيل-المختصرة-المرحلة-الثالثة.txt	2041	2026-10-30 01:49	0845e4839bbcd874ecc4fff9770965581a1d2684ca99b6ca5b96e7c60773ba5b
-brain/schemas/daily-events.schema.json	12248	2026-11-04 16:48	1d1e079923701faf80ec8071a4ce2e4a6ada4cf3b09e518a32c8839e5020b9a7
+brain/schemas/daily-events.schema.json	12783	2026-11-04 20:22	ee5a58703a146b9847bc84ab94964aa3dfe7105281cd2efb6332b3709a71f2b6
 brain/schemas/daily-report-v2.json	979	2026-10-30 01:49	62ec4e21eb75f05d4ee6906b46ee7dc0d2a1d785bd56179f4fb8870f59d51c0c
 brain/secrets/README.md	1641	2026-10-23 20:51	9c8828804152881eb1328b547a3c92981f3189cabc22b4bf411fd2a2b898620e
 brain/secrets/secrets.env	323	2026-10-28 15:09	c6e41d64985b1f29a1a7d3df29ff5fc59bdd47cfd89817eebe46fcc3f05f0cdd
@@ -4245,7 +4245,7 @@ brain/tests/test_classify_zones_damage_scope.py	1259	2026-10-31 08:00	53c6b81359
 brain/tests/test_closure_gate.py	7140	2026-10-30 01:49	64865501cd65509065f1d13e778b7acbe9f690b41c997a26c41fcc562a150dc0
 brain/tests/test_content_fidelity_units.py	1773	2026-11-01 10:01	d366060003bcbca9d231e2fe67cbbb67e0587d7bb997b711bc1801644f80b929
 brain/tests/test_daily_event_surface.py	5126	2026-11-01 00:23	e6e5c73a26d82eddb9011c4caf6170719bc4ceb18ba3ace490014f2bbeb6f5bf
-brain/tests/test_daily_events_schema.py	5483	2026-11-01 21:30	ba9a521f5a08e4b3119c1147d4dc38740a1393afa68ed652263826e508b33135
+brain/tests/test_daily_events_schema.py	5591	2026-11-04 20:22	0f6b3e555e5f94763220078d2ce6fcffa7c245f801ec4769532ee744ee21a0da
 brain/tests/test_day_coverage_gate.py	2844	2026-11-04 20:20	566abd58acab6c21c4e3e0ea1609203c3796fcf35867e7304ccd385ea16b7da0
 brain/tests/test_delivery_scripts.sh	4136	2026-10-31 08:58	066a1717bca315f3408d5e66d00817fd223ba27366418b80406b14e547e50c5e
 brain/tests/test_edit_pass.py	2828	2026-10-30 01:49	fd61313741dd71367c84ed7da4ad2f32c6375ab01b15483a0a0ade80e625d869
@@ -4384,7 +4384,7 @@ brain/tools/audit_corpus.py	19276	2026-10-30 01:49	ec67ccd79e14228d712f811e55825
 brain/tools/audit_pagination.py	5370	2026-10-30 01:49	c97fc4a397dc2072fc06acf489c8d4f89aadaad831db63d0a2a5c171467ddb60
 brain/tools/audit_pdf_layout.py	5139	2026-10-30 01:49	142590d4ebc9c641b63161c625e45b68d85eb959f73bb93731670a2c65da57a1
 brain/tools/audit_style_coverage.py	16816	2026-11-02 14:16	b4bbe28deb05b9140956e3c751332daa51689ea72aa00ab06d39c242374d4ba7
-brain/tools/backfill_ukmto_archive.py	18304	2026-11-04 16:42	7c520963515d6a24623815d50c10b839ca4b89ebfb37da40415a8dff3aa38372
+brain/tools/backfill_ukmto_archive.py	23017	2026-11-04 20:22	62e2a38b9023b03cb8ddce446192e4d13735512577ede5fb27c44885e3286965
 brain/tools/binding_coverage.py	7092	2026-11-02 12:33	f8e2d095eb34587ee737cf89ff346ec9b878d8f78a81b4b0cde54cef0244debe
 brain/tools/browser_fetch.py	6848	2026-10-30 01:49	8081a0ce991685465b03b7a99907be0d3ed92f307e40d4741633a1f53322950d
 brain/tools/build_ambiguity_map.py	3464	2026-10-30 01:49	e6d67452c88670dd24e47cb179c4742d1bc92e980374f76cd1e058a1e87058c6
@@ -4441,7 +4441,7 @@ brain/tools/language_gates.py	6312	2026-10-30 01:49	39cf7943196827edee613239f3e4
 brain/tools/ledger_link_fields.py	35596	2026-11-02 20:08	c7477aee9355c2556f314bded44e959ab56acedbc1b366b78244a04c66344ec3
 brain/tools/ledger_proof_degree.py	6219	2026-11-04 16:42	0e2a7cffcfbabaeca94198ccdafdafac3d7ed9bd781ca8087e9ba7fd5ffd9fda
 brain/tools/ledger_source_excerpt.py	4595	2026-10-30 01:49	6d324849a9ddadf9661e3a48450f43fd6815790579c3af50224c83ec386baa48
-brain/tools/ledger_totals.py	27735	2026-11-04 16:48	172e7ba4dc73e4f4eb0d5f5f401e8b07f842b355b203d0f38d36264fb8f0e956
+brain/tools/ledger_totals.py	28486	2026-11-04 20:22	bb0e75938867610d7ddbb89d5550c1788104b547a990c7a7ebb0c71b66f67d3c
 brain/tools/lexicon_wiring.py	10515	2026-10-30 01:49	bd3e0a814de2fe0eed566919100f2f4442c63fe06f625763bc01a970153e2f65
 brain/tools/live_dom_audit.py	10825	2026-10-30 05:24	790b6ed9b1c7c07b77229cd1b5d25d327b1020f94ebcc15b411ebfffa3910e54
 brain/tools/live_visual_audit.py	6693	2026-10-30 01:49	86e38c3242c05ac8b67204c8d4dc32a2097c0ea984685113c4473ecfdc0f80f9
@@ -4527,7 +4527,7 @@ brain/validators/__pycache__/check_print_quality.cpython-312.pyc	24297	2026-10-3
 brain/validators/__pycache__/check_style.cpython-312.pyc	19243	2026-10-30 23:27	273319f0c39fda28b0021d8f2ae3b2e80bf382a14e3f031f836778363385d67d
 brain/validators/_guard.py	2146	2026-11-02 07:34	ff4a64d8c9321949ee660ea1fccc15d6866b17162b7f24fb05af88bce9588c57
 brain/validators/check_additions_surface.py	5498	2026-10-30 01:49	d5189dfd43d835b40dfe511b6c26104cc9ece77a09b5c27937004ebe286bcc97
-brain/validators/check_area_vocabulary.py	4765	2026-11-04 01:03	7b7b3af87eb81937c44f6cf57a3031691faa825574d2f8f8c0936fd092b2b919
+brain/validators/check_area_vocabulary.py	7894	2026-11-04 20:22	cf446c5d2f15addeb37e66b8849d3df78219e99dd99838c9592429e6d9649440
 brain/validators/check_asset_floor.py	10763	2026-11-03 13:19	edfa8efd0956d36f6b1562d38da174b0406a0f23149f0e3bcc53f22767a0d004
 brain/validators/check_backup_parity.py	18008	2026-10-31 13:54	8558bff9b334a2ac29d572d7aec6d4b202f33d6a84374c6b7b3374f597408093
 brain/validators/check_backup_push_safety.py	3041	2026-11-01 10:01	34784396cd5feadfa73f28c9fab22a650d862e2fda85229058139a984c15b7ae
@@ -4539,7 +4539,7 @@ brain/validators/check_code_spaces.py	5961	2026-10-30 01:49	ce94a330b523081fadf3
 brain/validators/check_comprehension.py	20925	2026-10-30 01:49	8e91c3f1e919a7d476cebf0794ff6ccf3edcaa5438cee09059336df0cb9a9928
 brain/validators/check_content_fidelity.py	7979	2026-11-01 10:01	e241d9c13441959416f544fafd906b39a360d67e136a24862fd17897c0f35e23
 brain/validators/check_daily_event_surface.py	12964	2026-11-04 16:48	9b19edfb9767b48aaa0010733245ee905e9dd4b3c21fb5c7bc320fbf466fb3f5
-brain/validators/check_daily_events_schema.py	16490	2026-11-04 16:48	0aeaad24110541cd1f71df891718911d53b14f8d426a7040efc95e883ec630b9
+brain/validators/check_daily_events_schema.py	16787	2026-11-04 20:22	a584f443ff96a388e854808b7f1e8f22b53ad4d9c4d8f43aa905e39b878d9cea
 brain/validators/check_day_coverage.py	8098	2026-11-04 20:20	543a2bea1f17fe34b92645f9dda450b07100ef60576ab2ec146ade075ed9483a
 brain/validators/check_decision_card.py	8871	2026-11-04 16:48	b4879f3254d581e54f74f3d992406e0b8951c8c46c45d44ed06ca6c33a374d12
 brain/validators/check_desktop_readability.py	8670	2026-11-02 13:17	1d8c54ea9fa02f956d3f7c4e43d95c779a18183af00226b596829a96b7886fb7
@@ -4593,7 +4593,7 @@ brain/validators/validate_report.py	14757	2026-10-30 01:49	d1f69a48690b074ba6e77
 brain/watchlist/ofac-targets.txt	120	2026-11-04 04:25	b5c435c96ce2eb36633dc6d7d5c193ffc4d7b8703a9a69a51b6063cb8d9e9908
 brain/watchlist/original-sources.txt	112	2026-10-13 11:40	eebf99dd8e1f6eba4e17bee0a046baa2e228069b6aec94716713a7f2ae19a1ab
 brain/web/blocks.py	30657	2026-11-04 16:48	0f0bd98db20c762cb80bb67ffdffb2dc2ddb59feb4637878d60143a4773307e1
-brain/web/build_report.py	156401	2026-11-04 16:48	5402399a9808ac31d5b6cafb58cb8c633a18b1c91eb6772d7e3b7fcc46ad3142
+brain/web/build_report.py	156535	2026-11-04 20:22	5fec95dd80f0b342e0107c0601260b83351b872ff149c12dc8f320721a1ae967
 brain/web/kpis-totals/2026-10-31.json	7437	2026-11-01 03:09	f52c108e67fe908c48943a5d37d16c3de50a840bec2cbf31eea42265061c37d6
 brain/web/kpis-totals/2026-11-01.json	7491	2026-11-01 08:48	bd292882bad0129285014b95c42553a7421b8cfd892e242742758544a7794c3d
 brain/web/kpis-totals/2026-11-02.json	7491	2026-11-02 17:22	9183f5bacac5a572ee3b5fc1366a1e5feaf6cabe111c5feaa6dafb33484a7af7
@@ -4650,7 +4650,7 @@ brain/معايرة-البوابات-11-تقريرًا.md	3230	2026-10-23 08:51	3
 brain/مقتطف-قسم-الترجمة-بالمعنى.md	1912	2026-10-23 09:14	1eed06b4be054045eb261af3d925162be6838125a1cc995635b403af7b3abbc1
 docs/superpowers/plans/2026-10-31-backup-no-direct-main.md	4456	2026-10-31 18:09	550be11ac8ba2a41f891e89efab1edf901fa7d680d642f4569b09d7343383483
 docs/حالة-الجلسة-2026-10-28.md	3083	2026-10-30 01:49	e29bd840f0c5c67779bfcf67c5783b4fb136ea38396f28948faf3d0b095748ff
-docs/فهرس-الملفات.tsv	636162	2026-11-04 20:20	c101466b91077cc82a979d73252b592cb8807d4040255c21f4287ee23d5b1b43
+docs/فهرس-الملفات.tsv	636165	2026-11-04 20:22	0c41cec924e6cf39a9fd954fd62610f7dd11f7bf0ad04b753987cb1e9853d3a2
 docs/نقل-إلى-جيت-هب.md	3422	2026-10-30 01:49	4e29cf4eefdc6d9119084a8fa23b54a8f0dfb7a5e0301fceb287d95a9c03d4f5
 site/.env.example	1084	2026-10-19 20:23	08415b2d49f5882aba7c627813ab609f7b7f012d799268d89f9da041dd1208f9
 site/.gitignore	173	2026-10-19 20:47	5043122bf34ebc42db96fac05224d2fcbd91ed62f9d02fe05f1bd22ae2686fcc
@@ -4681,7 +4681,7 @@ site/generator/__pycache__/site_chrome.cpython-312.pyc	28367	2026-11-01 00:40	d8
 site/generator/__pycache__/sync_from_brain.cpython-312.pyc	17563	2026-11-01 00:40	7c0b1b391932d0926e939ac30d7bb74f60616cae423292bc9fce3513898ae921
 site/generator/__pycache__/threat_card.cpython-312.pyc	19088	2026-11-01 00:40	9fc4cdd3882c7c912794deea64be0c77eb831db423f61b094fee3176b5263f4f
 site/generator/blocks.py	30657	2026-11-04 16:48	0f0bd98db20c762cb80bb67ffdffb2dc2ddb59feb4637878d60143a4773307e1
-site/generator/build_report.py	156401	2026-11-04 16:48	5402399a9808ac31d5b6cafb58cb8c633a18b1c91eb6772d7e3b7fcc46ad3142
+site/generator/build_report.py	156535	2026-11-04 20:22	5fec95dd80f0b342e0107c0601260b83351b872ff149c12dc8f320721a1ae967
 site/generator/build_report_en.py	4533	2026-11-04 01:03	fd6c64e0c6cf23180ca71db2b7b2a4fce0688215722132e3c5c1d5eb6ed57374
 site/generator/build_site.py	47119	2026-11-01 21:30	414da7b62191b3ad151d57da13eae94a85ecd9d8b397a8048f45054d94573c99
 site/generator/build_sources.py	24137	2026-11-04 01:03	daee56842a7025803d6b1034de9699de28f6f0f955e8d8c391d33cc1ff1b8591
@@ -4724,11 +4724,11 @@ site/sources/daily-events/2026-11-03.json	14917	2026-11-03 22:19	aabf6841736925b
 site/sources/daily-events/2026-11-04.json	7441	2026-11-04 19:31	acdcb998c8014fa644ca9424304133304fcc5edc58e6c84a64e7653d5a81c58a
 site/sources/feeds-status.json	28773	2026-11-04 20:05	71c461dc677569287fb7eea72823518dba496a8b278addc5f3fde190eaf7e56b
 site/sources/i18n/en/2026-10-29-sectioned.en.md	22527	2026-10-29 20:39	c7dcf4a312763cb0b5bec48cc4b89d3b0641f84c7c9fc712efe8c1b0edd512a8
-site/sources/i18n/en/2026-10-30-sectioned.en.md	23015	2026-10-30 22:30	3094b393a1a3e0c36c7a853f56b62fd3bd9fa6a833715746b558e6413e1a2e13
-site/sources/i18n/en/2026-10-31-sectioned.en.md	18126	2026-11-04 01:03	e8350e112c63a7ae4a9628b36b72df1f85c629ad6060a1d1d239c5898eb4bfbb
+site/sources/i18n/en/2026-10-30-sectioned.en.md	22996	2026-11-04 20:22	20959d9d042ab93cfdc2ce920cd5679946a8f095ade42036836325fade461eed
+site/sources/i18n/en/2026-10-31-sectioned.en.md	18034	2026-11-04 20:22	4780e3e11091d902cd7759c3504fe26f60dee93107c7d3a035eb9814113cfed5
 site/sources/i18n/en/2026-11-01-sectioned.en.md	16641	2026-11-04 01:03	2d3e378af7e366c7c4f1b7d01d702d1d159dcc1c95b657ec8c0cab0be8b3743a
 site/sources/i18n/en/2026-11-02-sectioned.en.md	23271	2026-11-04 01:03	e591f290a118189403ce0d2469bfd897b09982f7ea4be835b0a46202f06adf49
-site/sources/i18n/en/2026-11-03-sectioned.en.md	23566	2026-11-04 01:03	88e2233df82e68bf0e378649116f7dd68b322fd2abba11ca4c2111b29415d04c
+site/sources/i18n/en/2026-11-03-sectioned.en.md	23524	2026-11-04 20:22	e1a8df357e27d086c5323b8c08c608c612cfafe9f41e626291086b0f77188678
 site/sources/i18n/en/2026-11-04-sectioned.en.md	17572	2026-11-04 17:36	6cb87aab23bd6b07734bf2683573b1750d067b0e8de8ed920683d33df84807c3
 site/sources/i18n/en/area-vocabulary.json	788	2026-11-03 19:29	8d62acd0afcab182c0c970e9089c4054a6a15959ccc4ad11a6f0b6a3883b5d98
 site/sources/i18n/en/glossary.json	267154	2026-11-04 16:48	f2b4ddd996fec9f9fe21a406372658c903ac8ddd884d5919420a1d76047168ed
@@ -4997,7 +4997,7 @@ skills/behave-skill/reference/advanced-patterns.md	2860	2026-10-30 00:44	4871c79
 skills/behave-skill/reference/playbook.md	17698	2026-10-30 00:44	5579bf051a447f6b91b78a72066f2ff26a85b754e9e20bf168c335fc0a7ccf0f
 skills/bilingual-master-direction-ops/SKILL.md	4454	2026-11-03 03:10	a47602cea3477a7928bad15fb2deeb3062151ad5410b4916304a142c1f02b8d3
 skills/bilingual-master-direction-ops/references/playbook.md	7145	2026-11-03 03:10	3208959e710b19292a5ff603bfa0adb2f072de2e8371e4894361e22099f11a3c
-skills/bilingual-master-direction-ops/scripts/verify_master_direction.py	6038	2026-11-04 16:48	65a57fd754ba749401a9d02dc540c61f9c6bc2d0b5dd7a221f8b3ced984ce497
+skills/bilingual-master-direction-ops/scripts/verify_master_direction.py	5944	2026-11-04 20:22	e1e36fc477c5e66c43603dc6114cea0806012aa3f09830dfd20544829aeaf5d3
 skills/blocker-scope-repair-ops/SKILL.md	8713	2026-11-03 17:58	6e7d239dcda12cb3288874bab9a4d8a4fe34f880abc809d099de1822dc048c5c
 skills/blocker-scope-repair-ops/references/measured-cases.md	4735	2026-11-03 17:58	1e08d2961de89c8020c264133a2db46b385bfd8cb1829fd87ff53a43bae1ab93
 skills/blocker-scope-repair-ops/scripts/check_block_matrix.py	2700	2026-11-03 17:58	ae0d1ff312329248fd04b2cb08780a4efab19d65007e3bdcfa5e6d3688f32631
@@ -6770,7 +6770,7 @@ skills/map-section-upgrade-ops/references/gate-surface-contract.md	1775	2026-11-
 skills/map-section-upgrade-ops/scripts/check_surface_extraction.py	2552	2026-11-03 08:40	fa880ce3503b1e20a46d08e52d694e739c2e0fd32282f1bfecd9921fbbf12b8e
 skills/map-section-upgrade-ops/scripts/measure_map_layers.py	4154	2026-11-03 08:40	d5536efd7e05cc2d85ef75299d66bc9405ddab4802807e88adee46ec84130977
 skills/map-section-upgrade-ops/scripts/measure_map_layers_live.py	2055	2026-11-01 18:47	d3bea5189eb5a119efcbf577c33a57ff66f9b7307f29234566466721514653a8
-skills/marine-news-brain/SKILL.md	8499	2026-11-03 08:40	650aa6f665249a53a3abd8125af997305d58d7dd649733356bc8b5559c1f1e3b
+skills/marine-news-brain/SKILL.md	3963	2026-11-04 20:22	e5f9929e44e250fff53d506b92dc2dbe77e68f1f9987c0ff61c698c0092fbe12
 skills/marine-news-brain/references/adaptive-learning.md	850	2026-10-28 19:18	d669e1b91d5a43a18fc4973277fa53feb16167bb89f0393e4aa990fb92565f12
 skills/marine-news-brain/references/source-policy.md	1011	2026-10-28 19:18	4c116c098c4eeaded9eee0de758bb03a90409e0b50bab308aab0546fcec9fd04
 skills/marine-news-brain/references/terminology.md	2015	2026-10-28 19:18	5f1bec0f0d9cf6df796f5118fb66e8274f63e87244bf2ebc283d80c4ee9e73d2
@@ -6938,7 +6938,7 @@ skills/migrate-dotnet9-to-dotnet10/references/extensions-hosting-dotnet9to10.md	
 skills/migrate-dotnet9-to-dotnet10/references/sdk-msbuild-dotnet9to10.md	2455	2026-10-30 00:45	ffcab567221a4a6439944be69f3e9d131e37b5f4afcfe4af377c7ef679155312
 skills/migrate-dotnet9-to-dotnet10/references/serialization-networking-dotnet9to10.md	3020	2026-10-30 00:45	8f935a471ea2da9c132763851bff73f9b011facd26255579bc0bf8448975bee5
 skills/migrate-dotnet9-to-dotnet10/references/winforms-wpf-dotnet9to10.md	3482	2026-10-30 00:45	d82418368d9f0967a9d72606ec6270b040b74721f5255a644a43e31b42526658
-skills/military-arabic-editing/SKILL.md	6354	2026-11-03 08:40	a2389ee03dbae8edf02395fdcd41c94a0aad2e5ce02da64316e29e0fb172eb28
+skills/military-arabic-editing/SKILL.md	3445	2026-11-04 20:22	75a97580e35ada524a14a5a1a1dc55c68c5d60737ec37f39eda5cb8cc24bb972
 skills/military-arabic-editing/references/adaptive-learning.md	774	2026-10-28 19:18	b15dddeaa6abfa94afe3ceac81d1a17febd61f3ac101a9400e82d51b3b2f60ce
 skills/military-arabic-editing/references/ambiguity-map.md	7098	2026-11-01 16:04	4a46ecdf4270c7d33b5ebf859cf6c94883362e004f034b6837e9ce5c2d834c21
 skills/military-arabic-editing/references/commander-style.md	1093	2026-10-28 19:18	5ab9d3b11fed5014b447a3e41ad15e1abf5a5ef77bdb938c792f7fc521a9ab0e
@@ -7556,7 +7556,7 @@ skills/source-coverage-route-ops/references/verifiable-counts.md	1106	2026-11-02
 skills/source-coverage-route-ops/scripts/browser_fetch.py	6107	2026-11-02 21:17	456c31307fbf2ff59bbb5da101181218d9a7ee5ed195491a587b63c072d1b158
 skills/source-coverage-route-ops/scripts/check_source_route_coverage.py	4676	2026-11-02 21:17	bccafcd8303e50bbc49f40c6fca43e8da6ebd6aa18137536ea89bcdd25c75bce
 skills/source-coverage-route-ops/scripts/measure_coverage.py	3493	2026-11-02 21:17	b35467274d56b69a7a01f9dc4f3c9b652dd25a39c3aab0ebe9c17a18957ccb25
-skills/source-coverage-route-ops/scripts/probe_source_routes.py	4769	2026-11-03 08:40	db3763ae5be69a8fc042e21e9eb2f9b4e657fc9483bb3df7ac0438f8f6e0e371
+skills/source-coverage-route-ops/scripts/probe_source_routes.py	4608	2026-11-04 20:22	98a58a866ceae6531d6fdaaafdd22957580fa5119a4ccf88e4dca29c50494865
 skills/source-coverage-route-ops/templates/source-route-entry.json	818	2026-11-02 21:17	d013d4d76946c6a792d4a3abc1fd49a3551fdac2680a22f83ec05c2ec64a103c
 skills/source-ingest-ops/SKILL.md	2698	2026-10-30 13:24	a10e74d9a1520b86fa7cac401935b0e42ef3ee7fe2e3fc776482905554d16866
 skills/source-ingest-ops/scripts/ingest_preflight.py	1385	2026-10-30 13:24	ab20dfe490610da148a13dbd7ddcd7272ce5571698cb525dbba57e14f3bf8090
@@ -7665,7 +7665,7 @@ skills/supabase-postgres-best-practices/references/schema-primary-keys.md	1821	2
 skills/supabase-postgres-best-practices/references/security-privileges.md	1566	2026-10-30 00:44	095909274a4fb43df785d7144cf674eeb40284d2d45628f14af4108737b93663
 skills/supabase-postgres-best-practices/references/security-rls-basics.md	1372	2026-10-30 00:44	e04dd1a3a382aafdaaa73fe9f7976352acdde6e90c2a2470d281b94d4f44b096
 skills/supabase-postgres-best-practices/references/security-rls-performance.md	2103	2026-10-30 00:44	2e1faeca7d5746e246b1c78f9492fe2a9cfa41c4d7fa1e23c402d58fa18ea014
-skills/superpowers-method/SKILL.md	8173	2026-11-04 17:40	a85508b06581ac4fc0b8505d1f8c731aafcd3ad3a23030c40cdcbefa5769f9b3
+skills/superpowers-method/SKILL.md	7475	2026-11-04 20:22	4f52e98c5a5e2cdf36edfea9ce03d034fa7c1d1478a6695f74e0d440c42d93b7
 skills/support-policy/SKILL.md	879	2026-10-30 01:12	2d8b449f2370488599d54981e052102921c44f156f24bcff009eb0ce3f1ca70e
 skills/support-policy/references/original-block.txt	690	2026-10-30 01:12	1ac03df4478cd505e027cdffecb7f3701029091ac5e1c41619b3ff4c3bfc4fbf
 skills/sympy/SKILL.md	9824	2026-10-30 00:44	5445c2f5dadb95d6653681c30060b4ab9686fe02ab6729d8fc41f4a2c19a90cf
