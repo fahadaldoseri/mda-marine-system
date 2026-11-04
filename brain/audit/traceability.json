@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-04T20:41:42.453046+00:00",
+  "generated_at": "2026-11-04T20:58:32.110608+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -3894,6 +3894,20 @@
       "lesson_id": null,
       "barrier_id": "B-e20e08ea",
       "run_evidence": "ناء `check_number_bindings.py --date 2026-11-04` ⇒ مطابق · G037 وG054 رمز 0 · بطاقة الوفيات على المو"
+    },
+    {
+      "fault_id": "ك-522",
+      "state": "بانتظار التحقق",
+      "lesson_id": null,
+      "barrier_id": "B-e9ab8dc1",
+      "run_evidence": null
+    },
+    {
+      "fault_id": "ك-523",
+      "state": "مغلق",
+      "lesson_id": null,
+      "barrier_id": "B-12929125",
+      "run_evidence": "y.py` ⇒ «صفر شيفرة غير متتبَّعة» · `check_classification_matrix.py` ⇒ 4/4 بلا اختلاف"
     }
   ]
 }
