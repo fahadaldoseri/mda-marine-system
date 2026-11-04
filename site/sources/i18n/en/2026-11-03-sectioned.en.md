@@ -20,7 +20,7 @@ Confidence: moderate.
 ## Geographic Distribution of Incidents
 | Zone | Coded items | Share | Source and grade |
 |---|---:|---:|---|
-| Strait of Hormuz, Gulf of Oman and the Arabian Gulf | 6 | 75% | UKMTO A/1 and B/2, straits.live C/3, Turkish media relay C/3, Iranian media relay C/3 |
+| Strait of Hormuz, Gulf of Oman and the Arabian Gulf | 6 | 75% | UKMTO A/1 and B/2, straits.live C/3, TradeWinds C/3, Mehr — Arabic C/3 |
 | Bab al-Mandab and the Red Sea | 1 | 12.5% | Media relay C/3 |
 | Arabian Sea | 0 | 0% | No new qualifying maritime item in the material used |
 | Horn of Africa | 1 | 12.5% | Mehr citing a European maritime security center C/3 |
@@ -67,14 +67,14 @@ The overall level fell by one step from the previous edition, because the approv
 - **MN-2026-11-03-03 — [official]** The UKMTO warnings list showed an attack report dated 02/11/2026 about an incident 9 nautical miles northeast of a position whose text is incomplete in the available material. **Source:** UKMTO — Warnings 2026; **Grade:** B/2; **Location:** not stated in full in the available text; **Status:** official report without details, possibly the same as Warning 193-26.
 - **MN-2026-11-03-04 — [official]** The IMO record stated that confirmed incidents reached 125 as of 02/11/2026, and that confirmed seafarer fatalities reached 24. The latest dated entry in the record is 30/10/2026. **Source:** IMO — confirmed incidents record; **Grade:** A/1; **Scope:** international record; **Status:** no new entry in the record.
 - **MN-2026-11-03-05 — [media]** Media sources relayed from Iran's Revolutionary Guard that two oil tankers exploded after striking naval projectiles in the Strait of Hormuz, and that one of them caught fire. No maritime authority confirmed it. **Source:** straits.live C/3 citing Iranian outlets; **Stated location:** the Strait of Hormuz; **Status:** unconfirmed report from a single party.
-- **MN-2026-11-03-06 — [media]** A Turkish news agency relayed from the Iranian navy that an oil tanker caught fire after striking a naval projectile east of the Strait of Hormuz. No official confirmation is published. **Source:** Turkish media relay citing straits.live C/3; **Stated location:** east of the Strait of Hormuz; **Status:** unconfirmed report.
-- **MN-2026-11-03-07 — [media]** Iranian media relayed that the Revolutionary Guard downed US drones and seized reconnaissance drones over Qeshm Island west of the strait. The item concerns aerial action and proves no effect on navigation. **Source:** Iranian media relay C/3; **Stated location:** Qeshm Island; **Status:** unconfirmed report.
-- **MN-2026-11-03-08 — [media]** Multiple media outlets relayed from a US official that US defensive strikes hit Iranian targets within the Strait of Hormuz, with explosions heard on Qeshm Island. No statement from US Central Command is published in the available material. **Source:** media relay C/3; **Stated location:** the Strait of Hormuz; **Status:** unconfirmed report pending an official statement.
+- **MN-2026-11-03-06 — [media]** A Turkish news agency relayed from the Iranian navy that an oil tanker caught fire after striking a naval projectile east of the Strait of Hormuz. No official confirmation is published. **Source:** TradeWinds C/3; **Stated location:** east of the Strait of Hormuz; **Status:** unconfirmed report.
+- **MN-2026-11-03-07 — [media]** Iranian media relayed that the Revolutionary Guard downed US drones and seized reconnaissance drones over Qeshm Island west of the strait. The item concerns aerial action and proves no effect on navigation. **Source:** Mehr — Arabic C/3; **Stated location:** Qeshm Island; **Status:** unconfirmed report.
+- **MN-2026-11-03-08 — [media]** Multiple media outlets relayed from a US official that US defensive strikes hit Iranian targets within the Strait of Hormuz, with explosions heard on Qeshm Island. No statement from US Central Command is published in the available material. **Source:** straits.live C/3; **Stated location:** the Strait of Hormuz; **Status:** unconfirmed report pending an official statement.
 - **MN-2026-11-03-09 — [media]** An Iranian agency relayed that Somali pirates hijacked an Iranian fishing vessel with 23 people on board off the northeastern coast of Somalia, citing a European maritime security center. **Source:** Mehr C/3; **Stated location:** off the Somali coast; **Status:** not officially confirmed in the available material.
 - **MN-2026-11-03-10 — [political]** A US newspaper and follow-up outlets relayed that Iran announced the Strait of Hormuz could reopen within two days if Washington meets its conditions. No US response is declared and no agreement text is published. **Source:** media relay C/3; **Scope:** political position; **Status:** a one-sided announcement that does not count as a maritime incident.
 - **MN-2026-11-03-11 — [media]** Follow-up media relayed a Houthi advance to within 80 km of Aden. The item is land-based and proves no new maritime incident. **Source:** Jerusalem Post C/3; **Location:** inside Yemen; **Status:** unconfirmed land relay.
-- **MN-2026-11-03-12 — [professional]** A warning appeared about a piracy mother vessel in the Indian Ocean, and the text requires verification from a maritime authority or a reporting center. **Source:** relay from a specialist outlet C/3; **Scope:** maritime security advisory; **Status:** incomplete information under watch.
-- **MN-2026-11-03-13 — [media]** Maritime reports relayed that a large crude oil tanker stopped a leak from its hull off the coast of the United Arab Emirates, with no reported injuries. **Source:** relay from a specialist outlet C/3; **Stated location:** off the coast of the United Arab Emirates; **Status:** not officially confirmed.
+- **MN-2026-11-03-12 — [professional]** A warning appeared about a piracy mother vessel in the Indian Ocean, and the text requires verification from a maritime authority or a reporting center. **Source:** Lloyd's List C/3; **Scope:** maritime security advisory; **Status:** incomplete information under watch.
+- **MN-2026-11-03-13 — [media]** Maritime reports relayed that a large crude oil tanker stopped a leak from its hull off the coast of the United Arab Emirates, with no reported injuries. **Source:** TradeWinds C/3; **Stated location:** off the coast of the United Arab Emirates; **Status:** not officially confirmed.
 
 MN-2026-11-03-05, MN-2026-11-03-06 and MN-2026-11-03-08 are not treated as independent confirmed incidents before official confirmation or confirmation by two independent sources. Official warnings prove issuance only, and are not used to prove the number of damaged vessels.
 
@@ -171,13 +171,13 @@ Sub-routes failed to fetch sources 17, 20, 24, while the overall feed state rema
 No feed is empty, and no constraint is withheld from the reader.
 
 ## Sources and References
-Total coded incidents: 13 incidents, with 13 attributions in all. Sources used and the number of incidents attributed to each: UKMTO — Warning 192-26 text, one incident; UKMTO — Warnings 2026, one incident; UKMTO — Recent Incidents, one incident; @UK_MTO account on X, one incident; IMO — confirmed incidents record, one incident; straits.live, four incidents; Turkish media relay, one incident; IRIB News, one incident; ISNA, one incident; Mehr — Arabic, one incident; New York Times — Middle East, one incident; relay from a specialist outlet, two incidents.
+Total coded incidents: 13 incidents, with 13 attributions in all. Sources used and the number of incidents attributed to each: UKMTO — Warning 192-26 text, one incident; UKMTO — Warnings 2026, one incident; UKMTO — Recent Incidents, one incident; @UK_MTO account on X, one incident; IMO — confirmed incidents record, one incident; straits.live, four incidents; TradeWinds, one incident; Mehr — Arabic, one incident; straits.live, one incident; Mehr — Arabic, one incident; New York Times — Middle East, one incident; Jerusalem Post, one incident; Lloyd's List, one incident; TradeWinds, one incident.
 
 The source record shows 62 approved sources, of which 60 through the automated route and 2 through manual reference, with 60 successful feeds and 0 unavailable.
 
 - Numbers 39 and 52 require direct reading.
 - Official reports were used to establish the issuance of warnings and the strike on the tanker in the Arabian Gulf.
-- Media accounts were presented as unconfirmed relay.
+- The named-source accounts were presented as unconfirmed relay.
 
 Sources used and their grades:
 - UKMTO — Warning 192-26 text (A/1)
@@ -186,11 +186,11 @@ Sources used and their grades:
 - @UK_MTO account on X (B/2)
 - JMIC (A/2)
 - straits.live (C/3)
-- Turkish media relay (C/3)
+- TradeWinds (C/3)
 - IRIB News (C/3)
 - ISNA (C/3)
 - Mehr — Arabic (C/3)
-- relay from a specialist outlet (C/3)
+- Lloyd's List and TradeWinds (C/3)
 
 Source status by number: sources 1, 2, 5, 6, 15, 31, 45, 46, 47 and 53 were used; numbers 39 and 52 require direct reading; the remaining numbers were not used in this text.
 

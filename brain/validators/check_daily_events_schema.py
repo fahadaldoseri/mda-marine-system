@@ -74,7 +74,8 @@ SHORTENERS = ("t.co/", "bit.ly/", "lnkd.in/", "tinyurl.com/", "goo.gl/", "ow.ly/
               "buff.ly/", "is.gd/", "cutt.ly/", "rb.gy/")
 TRACKING = ("utm_", "fbclid=", "gclid=", "mc_eid=")
 RELATION_KEYS = ("update_of", "parent_id", "duplicate_of")
-REQUIRED = ("code", "date", "title", "source", "class", "confidence")
+REQUIRED = ("code", "date", "title", "source", "class", "confidence",
+            "evidence_ref", "retrieved_at")
 
 
 def _text(value) -> str:
@@ -179,11 +180,13 @@ def violations(rows: list[dict], *, date_label: str, known_ids: set[str] | None 
             # نطاقها يُقرأ من sector_id، فيبقى المقتطف وسنده شرطًا عليها دون الموضع.
             _silent = bool(re.match(r"^لا واقعة", _text(row.get("title"))
                                     or _text(row.get("description"))))
-            _required = ("source_excerpt", "source_excerpt_from") if _silent else \
-                ("area", "source_excerpt", "source_excerpt_from")
+            _required = ("source_excerpt", "source_excerpt_from")
             for key in _required:
                 if not _text(row.get(key)):
                     errors.append(f"{where}: الحقل «{key}» مطلوب في النطاق الحيّ وغائب")
+            # area اختيارية فقط عندما يثبت area_basis أن المصدر لم يحدد الموقع.
+            if not _silent and not _text(row.get("area")) and not _text(row.get("area_basis")):
+                errors.append(f"{where}: الحقل «area» غائب بلا area_basis يوضح غياب الموقع")
         for key in RELATION_KEYS:
             ref = _text(row.get(key))
             if ref and known and ref not in known:
