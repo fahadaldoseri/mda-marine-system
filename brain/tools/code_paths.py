@@ -66,13 +66,19 @@ def load_spec(repo_root):
 
 
 def _match(rel, pat):
-    if pat.endswith("/**"):
-        return rel == pat[:-3] or rel.startswith(pat[:-2])
+    if pat.endswith("/**") and (rel == pat[:-3] or rel.startswith(pat[:-2])):
+        return True
     return fnmatch.fnmatchcase(rel, pat)
 
 
+def is_ignored(rel, spec):
+    """مولَّد آليًا: لا شيفرة ولا بيانات — لا يُقارن ولا يُنسخ ولا يُلزم تعقّبه."""
+    rel = rel[2:] if rel.startswith("./") else rel
+    return any(_match(rel, p) for p in spec.get("ignore", ()))
 def classify(rel, spec):
     rel = rel[2:] if rel.startswith("./") else rel
+    if is_ignored(rel, spec):
+        return "generated"
     if any(_match(rel, p) for p in spec["code"]):
         return "code"
     if any(_match(rel, p) for p in spec["data"]):
@@ -96,11 +102,13 @@ def check(repo_root):
     except SpecNotFound as e:
         print(f"✘ تعذّر التحقق (فشل مغلق {RUNNABLE}): {e}")
         return RUNNABLE
+    gen = [f for f in files if classify(f, spec) == "generated"]
     bad = [f for f in files if classify(f, spec) is None]
     for f in bad:
         print(f"✘ مسار غير مصنَّف (أضفه إلى code أو data في {repo_root}/appendices/code-paths.json): {f}")
     if not bad:
-        print(f"✔ كل مسارات المستودع ({len(files)}) مصنَّفة · الجذر: {repo_root}")
+        extra = f" · ومولَّد مستثنى: {len(gen)}" if gen else ""
+        print(f"✔ كل مسارات المستودع ({len(files)}) مصنَّفة{extra} · الجذر: {repo_root}")
     return 2 if bad else 0
 
 
