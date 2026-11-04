@@ -269,3 +269,11 @@
 {"step": "B010", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-03/B010.log", "attempt": 1, "ts": "2026-11-04T00:55:32Z"}
 {"step": "D030", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-03/D030.log", "ts": "2026-11-04T00:55:32Z"}
 {"step": "D033", "status": "done_warn", "rc": 1, "outputs": {}, "log": "logs/runbook/2026-11-03/D033.log", "attempt": 1, "ts": "2026-11-04T00:55:32Z"}
+{"step": "D040", "status": "failed", "rc": 70, "problems": ["رمز الخروج 70"], "log": "logs/runbook/2026-11-03/D040.log", "ts": "2026-11-04T00:56:01Z"}
+{"step": "D030", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-03/D030.log", "attempt": 1, "ts": "2026-11-04T00:58:39Z"}
+{"step": "D032", "status": "skipped", "disabled": true, "reason": "خطوة معطلة صراحة", "rc": 0, "log": "logs/runbook/2026-11-03/D032.log", "ts": "2026-11-04T00:58:39Z"}
+{"step": "D033", "status": "done_warn", "rc": 1, "outputs": {}, "log": "logs/runbook/2026-11-03/D033.log", "attempt": 1, "ts": "2026-11-04T00:58:39Z"}
+{"step": "D040", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-03/D040.log", "ts": "2026-11-04T00:58:40Z"}
+{"step": "D030", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-03/D030.log", "attempt": 1, "ts": "2026-11-04T00:59:06Z"}
+{"step": "D040", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-03/D040.log", "ts": "2026-11-04T00:59:07Z"}
+{"step": "D040", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-03/D040.log", "ts": "2026-11-04T01:01:25Z"}
