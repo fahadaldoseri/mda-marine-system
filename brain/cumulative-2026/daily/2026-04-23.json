@@ -1,18 +1,40 @@
 [
   {
-    "code": "COVER-2026-04-23-001",
+    "code": "NI-2026-04-23",
     "date": "2026-04-23",
-    "class": "واقعة أمني/محاولة صعود",
-    "title": "اقترب قاربان صغيران يحملان مسلحين من سفينة شحن؛ اقترب أحدهما إلى نحو 600 متر، فأطلقت عناصر الأمن طلقات تحذيرية ورد القارب بإطلاق النار، ثم انسحب القاربان. الطاقم آمن، وعملية أتالانتا تحقق. الأثر التشغيلي: تأكيد عودة تكتيك الاقتراب والاشتباك القصير قبالة الصومال، وضرورة إبقاء حراسة مسلحة ومراقبة القوارب الصغيرة وفق BMP-MS.",
-    "source": "https://www.londonpandi.com/media/kbumd0zo/d9e083c9acdb41cc8330dc22b0f1981a.pdf",
-    "confidence": "عالية",
-    "source_excerpt": "اقترب قاربان صغيران يحملان مسلحين من سفينة شحن؛ اقترب أحدهما إلى نحو 600 متر، فأطلقت عناصر الأمن طلقات تحذيرية ورد القارب بإطلاق النار، ثم انسحب القاربان. الطاقم آمن، وعملية أتالانتا تحقق. الأثر التشغيلي: تأكيد عودة تكتيك الاقتراب والاشتباك القصير قبالة الصومال، وضرورة إبقاء حراسة مسلحة ومراقبة القوارب الصغيرة وفق BMP-MS.",
+    "sector": "خارج القطاعات",
+    "class": "no_incident",
+    "no_incident": true,
     "backfilled": true,
-    "material_projection": true,
-    "sector": "Z4 — القرن الأفريقي",
-    "retrieved_at": "2026-10-31T16:08:28Z",
-    "source_description": "إسقاط يومي أمين لسجل موجود أصلًا في event-ledger-master.json؛ لا واقعة جديدة.",
-    "target": "سفينة",
+    "title": "لا واقعة مسجّلة في المصادر الرسمية المفحوصة",
+    "description": "لا واقعة مسجّلة في المصادر الرسمية المفحوصة لهذا التاريخ.",
+    "source": "مسح رسمي متعدد المصادر",
+    "confidence": "عالية",
+    "evidence_kind": "official-source-scan",
+    "evidence_ref": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+    "retrieved_at": "2026-11-04T03:05:20Z",
+    "sources_checked": [
+      {
+        "source_id": "imo_confirmed",
+        "source": "IMO — قائمة الوقائع المؤكدة (القسم الرسمي الموضوعات الساخنة)",
+        "url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+        "http_status": 200,
+        "invoked": true,
+        "result": "لا واقعة في هذا التاريخ",
+        "coverage_note": "القائمة الرسمية تغطي 2026-03-01 إلى 2026-10-23 (84 يومًا مؤرَّخًا · 122 واقعة)",
+        "retrieved_at": "2026-11-04T03:05:20Z"
+      },
+      {
+        "source_id": "ukmto",
+        "source": "UKMTO — البلاغات الرسمية (Recent Incidents)",
+        "url": "https://www.ukmto.org/recent-incidents",
+        "http_status": 403,
+        "invoked": true,
+        "result": "محجوب على الطلب الآلي — لا يُعدّ فحصًا",
+        "coverage_note": "curl يُرجع 403؛ مسار المتصفح في المشروع يجلب الصفحة (يُستخدم عند توفره)",
+        "retrieved_at": "2026-11-04T03:05:20Z"
+      }
+    ],
     "update_of": null,
     "parent_id": null,
     "duplicate_of": null,
@@ -20,7 +42,6 @@
     "link_basis": "لا دليل رابط",
     "link_evidence": "",
     "link_status": "غير مرتبط",
-    "counts_as_new": true,
-    "sector_id": "Z4"
+    "counts_as_new": true
   }
 ]

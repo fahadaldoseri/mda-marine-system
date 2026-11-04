@@ -13,6 +13,8 @@
   "official_ref_basis": "معرّف رسمي من نصّ المصدر: UKMTO WARNING 193-26",
   "source_url": "https://x.com/UK_MTO/status/2117329793800622309",
   "source_url_kind": "official-product",
+  "sector_id": "Z1",
+  "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
   "update_of": null,
   "parent_id": null,
   "duplicate_of": null,
@@ -21,8 +23,7 @@
   "link_evidence": "",
   "link_status": "غير مرتبط",
   "counts_as_new": true,
-  "sector_id": "Z1",
-  "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي"
+  "proof_degree": "بلاغ رسمي، والنص غير متاح"
  },
  {
   "code": "MN-2026-11-03-02",
@@ -39,6 +40,8 @@
   "source_url": "https://www.ukmto.org/recent-incidents#cf20ad27-fa3a-48e2-a581-70efad469506",
   "source_url_kind": "official-product",
   "target": "سفينة",
+  "sector_id": "Z1",
+  "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
   "update_of": null,
   "parent_id": null,
   "duplicate_of": null,
@@ -47,8 +50,9 @@
   "link_evidence": "",
   "link_status": "غير مرتبط",
   "counts_as_new": true,
-  "sector_id": "Z1",
-  "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي"
+  "incident_kind": "هجوم",
+  "incident_kind_basis": "ذكر صريح: «استهداف»",
+  "proof_degree": "نص رسمي كامل"
  },
  {
   "code": "MN-2026-11-03-03",
@@ -67,6 +71,35 @@
   "incident_kind": "هجوم",
   "incident_kind_basis": "ذكر صريح: «هجوم»",
   "target": "سفينة",
+  "sector_id": "Z1",
+  "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
+  "update_of": "MN-2026-11-02-01",
+  "parent_id": "MN-2026-11-02-01",
+  "duplicate_of": null,
+  "event_kind": "جديد",
+  "link_basis": "official_ref=UKMTO-192-26 (سلسلة من 2 وقائع)",
+  "link_evidence": "",
+  "link_status": "غير مرتبط",
+  "counts_as_new": true,
+  "proof_degree": "بلاغ رسمي غير مفصَّل"
+ },
+ {
+  "code": "MN-2026-11-03-04",
+  "date": "2026-11-03",
+  "area": "المنطقة كاملة",
+  "class": "سجل دولي",
+  "title": "تحديث بيانات IMO: 128 حادثة مؤكدة و24 وفاة مؤكدة للبحارة حتى 03/11/2026",
+  "source": "IMO — القائمة الرسمية للحوادث المؤكدة",
+  "confidence": "عالية",
+  "source_excerpt": "Number of confirmed incidents as at 2 November 2026: 125",
+  "source_excerpt_from": "feeds/source-facts-2026-11-03.md · IMO — سجل الحوادث المؤكدة",
+  "official_ref": "IMO-2026-11-02-125",
+  "official_ref_basis": "نصّ رسمي منقول في ملف الحقائق: Number of confirmed incidents as at 2 November 2026: 125",
+  "source_url_kind": "account",
+  "source_url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+  "sector_id": "",
+  "sector": "",
+  "retrieved_at": "2026-11-04T03:41:34+00:00",
   "update_of": null,
   "parent_id": null,
   "duplicate_of": null,
@@ -74,34 +107,7 @@
   "link_basis": "لا دليل رابط",
   "link_evidence": "",
   "link_status": "غير مرتبط",
-  "counts_as_new": true,
-  "sector_id": "Z1",
-  "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي"
- },
- {
-  "code": "MN-2026-11-03-04",
-  "date": "2026-11-03",
-  "area": "المنطقة كاملة",
-  "class": "سجل دولي",
-  "title": "بقي سجل IMO عند 125 حادثة مؤكدة و24 وفاة مؤكدة لبحّارة حتى 02/11/2026 بلا إضافة جديدة",
-  "source": "IMO — سجل الحوادث المؤكدة",
-  "confidence": "عالية",
-  "source_excerpt": "Number of confirmed incidents as at 2 November 2026: 125",
-  "source_excerpt_from": "feeds/source-facts-2026-11-03.md · IMO — سجل الحوادث المؤكدة",
-  "official_ref": "IMO-2026-11-02-125",
-  "official_ref_basis": "نصّ رسمي منقول في ملف الحقائق: Number of confirmed incidents as at 2 November 2026: 125",
-  "source_url_kind": "account",
-  "source_url": "https://www.imo.org/",
-  "update_of": null,
-  "parent_id": null,
-  "duplicate_of": null,
-  "event_kind": "تحديث بيانات",
-  "link_basis": "لا دليل رابط",
-  "link_evidence": "",
-  "link_status": "غير مرتبط",
-  "counts_as_new": false,
-  "sector_id": "",
-  "sector": ""
+  "counts_as_new": true
  },
  {
   "code": "MN-2026-11-03-05",
@@ -115,6 +121,8 @@
   "source_excerpt_from": "feeds/feeds-2026-11-03.json · 6. straits.live · item 12 (Tue, 03 Nov 2026 02:18:18 GMT)",
   "source_url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5iY2ltclRmQkM3Q3RJNkU4MEhtNlc2MlVXMlNjYkpfUDJlSjVxMXQ5ZFFVa2R4WEhaa3RjYzZLZVV6SkFnbGFqeHJNQkxPQzhLOTNNcy1LdFhqVEZ4TzF4NzFDQQ?oc=5",
   "source_url_kind": "media-relay",
+  "sector_id": "Z1",
+  "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
   "update_of": null,
   "parent_id": null,
   "duplicate_of": null,
@@ -123,8 +131,7 @@
   "link_evidence": "",
   "link_status": "غير مرتبط",
   "counts_as_new": true,
-  "sector_id": "Z1",
-  "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي"
+  "proof_degree": "غير مؤكد من طرف واحد"
  },
  {
   "code": "MN-2026-11-03-06",
@@ -141,6 +148,8 @@
   "incident_kind": "حريق",
   "incident_kind_basis": "ذكر صريح: «اشتعلت»",
   "target": "سفينة",
+  "sector_id": "Z1",
+  "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
   "update_of": null,
   "parent_id": null,
   "duplicate_of": null,
@@ -149,8 +158,7 @@
   "link_evidence": "",
   "link_status": "غير مرتبط",
   "counts_as_new": true,
-  "sector_id": "Z1",
-  "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي"
+  "proof_degree": "غير مؤكد"
  },
  {
   "code": "MN-2026-11-03-07",
@@ -164,6 +172,8 @@
   "source_excerpt_from": "feeds/feeds-2026-11-03.json · 47. Mehr — العربي · item 2 (Tue, 03 Nov 2026 03:34:54 GMT)",
   "source_url": "https://en.mehrnews.com/news/249118/Iran-captures-two-US-MQM-170-drones-over-Qeshm-Island",
   "source_url_kind": "media-relay",
+  "sector_id": "Z1",
+  "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
   "update_of": null,
   "parent_id": null,
   "duplicate_of": null,
@@ -172,8 +182,7 @@
   "link_evidence": "",
   "link_status": "غير مرتبط",
   "counts_as_new": true,
-  "sector_id": "Z1",
-  "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي"
+  "proof_degree": "غير مؤكد ولا يمس الملاحة"
  },
  {
   "code": "MN-2026-11-03-08",
@@ -187,6 +196,8 @@
   "source_excerpt_from": "feeds/feeds-2026-11-03.json · 6. straits.live · item 1 (Tue, 03 Nov 2026 03:12:04 GMT)",
   "source_url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFAyT0tjSVNMQXg2dlQ0b3dXcTFpR18zLTZtSUpWN1lrRkY3cUphM1Q1bjllNVh5Yk4tYkY4bnRJdzhEeU83LVdBVDZKS2pGcUhQaDBLeWpFaVdMQk9GRFF1aWdLNTg0TGpta0p6YXl2NDltRjRtNU1Vdm45YzR3UQ?oc=5",
   "source_url_kind": "media-relay",
+  "sector_id": "Z1",
+  "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
   "update_of": null,
   "parent_id": null,
   "duplicate_of": null,
@@ -195,8 +206,7 @@
   "link_evidence": "",
   "link_status": "غير مرتبط",
   "counts_as_new": true,
-  "sector_id": "Z1",
-  "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي"
+  "proof_degree": "غير مؤكد بانتظار بيان رسمي"
  },
  {
   "code": "MN-2026-11-03-09",
@@ -213,6 +223,8 @@
   "incident_kind": "اختطاف",
   "incident_kind_basis": "ذكر صريح: «اختطاف»",
   "target": "سفينة",
+  "sector_id": "Z4",
+  "sector": "Z4 — القرن الأفريقي",
   "update_of": null,
   "parent_id": null,
   "duplicate_of": null,
@@ -221,8 +233,7 @@
   "link_evidence": "",
   "link_status": "غير مرتبط",
   "counts_as_new": true,
-  "sector_id": "Z4",
-  "sector": "Z4 — القرن الأفريقي"
+  "proof_degree": "غير مؤكد رسميًا"
  },
  {
   "code": "MN-2026-11-03-10",
@@ -236,6 +247,8 @@
   "source_excerpt_from": "feeds/feeds-2026-11-03.json · 53. New York Times — الشرق الأوسط · item 2 (Mon, 02 Nov 2026 20:25:34 +0000)",
   "source_url": "https://www.nytimes.com/2026/11/02/world/middleeast/iran-deal-strait-of-hormuz.html",
   "source_url_kind": "media-relay",
+  "sector_id": "Z1",
+  "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
   "update_of": null,
   "parent_id": null,
   "duplicate_of": null,
@@ -243,9 +256,7 @@
   "link_basis": "لا دليل رابط",
   "link_evidence": "",
   "link_status": "غير مرتبط",
-  "counts_as_new": true,
-  "sector_id": "Z1",
-  "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي"
+  "counts_as_new": true
  },
  {
   "code": "MN-2026-11-03-11",
@@ -259,6 +270,8 @@
   "source_excerpt_from": "feeds/feeds-2026-11-03.json · 38. Jerusalem Post · item 5",
   "source_url": "https://www.ajnet.me/news/liveblog/2026/11/3/%d8%a7%d9%84%d9%8a%d9%85%d9%86-%d9%85%d8%a8%d8%a7%d8%b4%d8%b1-%d8%a7%d9%84%d9%82%d9%88%d8%a7%d8%aa-%d8%a7%d9%84%d8%ad%d9%83%d9%88%d9%85%d9%8a%d8%a9-%d8%aa%d8%b3%d8%aa%d8%b9%d9%8a%d8%af?traffic_source=rss",
   "source_url_kind": "media-relay",
+  "sector_id": "Z4",
+  "sector": "Z4 — القرن الأفريقي",
   "update_of": null,
   "parent_id": null,
   "duplicate_of": null,
@@ -267,8 +280,7 @@
   "link_evidence": "",
   "link_status": "غير مرتبط",
   "counts_as_new": true,
-  "sector_id": "Z4",
-  "sector": "Z4 — القرن الأفريقي"
+  "proof_degree": "نقل بري غير مؤكد"
  },
  {
   "code": "MN-2026-11-03-12",
@@ -283,6 +295,8 @@
   "source_url": "https://www.lloydslist.com/LL1158885/Piracy%20mothership%20warning%20issued%20in%20Indian%20Ocean",
   "source_url_kind": "professional-relay",
   "target": "سفينة",
+  "sector_id": "Z5",
+  "sector": "Z5 — المحيط الهندي",
   "update_of": null,
   "parent_id": null,
   "duplicate_of": null,
@@ -291,8 +305,7 @@
   "link_evidence": "",
   "link_status": "غير مرتبط",
   "counts_as_new": true,
-  "sector_id": "Z5",
-  "sector": "Z5 — المحيط الهندي"
+  "proof_degree": "معلومة ناقصة تحت المراقبة"
  },
  {
   "code": "MN-2026-11-03-13",
@@ -309,6 +322,8 @@
   "incident_kind": "تسرب",
   "incident_kind_basis": "ذكر صريح: «تسرب»",
   "target": "سفينة",
+  "sector_id": "Z1",
+  "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
   "update_of": null,
   "parent_id": null,
   "duplicate_of": null,
@@ -317,7 +332,6 @@
   "link_evidence": "",
   "link_status": "غير مرتبط",
   "counts_as_new": true,
-  "sector_id": "Z1",
-  "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي"
+  "proof_degree": "غير مؤكد رسميًا"
  }
 ]

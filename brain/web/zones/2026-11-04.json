@@ -1,0 +1,250 @@
+{
+  "date": "2026-11-04",
+  "window": "خلال 24 ساعة السابقة",
+  "scale_version": 1,
+  "registry_version": 1,
+  "scale_levels": [
+    {
+      "ar": "حرج",
+      "rank": 5,
+      "token": "critical",
+      "color": "#FFA3A3",
+      "marker": "■ ■ ■ ■ ■"
+    },
+    {
+      "ar": "مرتفع جدًا",
+      "rank": 4,
+      "token": "severe",
+      "color": "#FFA96B",
+      "marker": "▲ ▲ ▲ ▲"
+    },
+    {
+      "ar": "مرتفع",
+      "rank": 3,
+      "token": "high",
+      "color": "#FFC24D",
+      "marker": "▲ ▲ ▲"
+    },
+    {
+      "ar": "متوسط",
+      "rank": 2,
+      "token": "med",
+      "color": "#d29119",
+      "marker": "▲ ▲"
+    },
+    {
+      "ar": "منخفض",
+      "rank": 1,
+      "token": "low",
+      "color": "#28b45a",
+      "marker": "▲"
+    }
+  ],
+  "overall": {
+    "level": "متوسط",
+    "rank": 2,
+    "top_zone": "مضيق هرمز وخليج عُمان والخليج العربي",
+    "top_zone_id": "Z1",
+    "basis": "أعلى نطاق: مضيق هرمز وخليج عُمان والخليج العربي — وقائع مؤهّلة: إصابة غرفة محركات ناقلة نفط خام كبيرة في أحدث هجوم داخل مضيق هرمز"
+  },
+  "zones": [
+    {
+      "id": "Z1",
+      "name": "مضيق هرمز وخليج عُمان والخليج العربي",
+      "level": "متوسط",
+      "rank": 2,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 1,
+      "events": 2,
+      "qualifying_codes": [
+        "MN-2026-11-04-04"
+      ],
+      "categories": [
+        "هجوم على سفينة"
+      ],
+      "basis": "وقائع مؤهّلة: إصابة غرفة محركات ناقلة نفط خام كبيرة في أحدث هجوم داخل مضيق هرمز",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-04"
+    },
+    {
+      "id": "Z2",
+      "name": "باب المندب والبحر الأحمر",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-04"
+    },
+    {
+      "id": "Z3",
+      "name": "بحر العرب",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-04"
+    },
+    {
+      "id": "Z4",
+      "name": "القرن الأفريقي",
+      "level": "متوسط",
+      "rank": 2,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "استمراري — آخر واقعة مؤهّلة في هذا القطاع بتاريخ 2026-11-03.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": true,
+      "last_change": "2026-11-03",
+      "carry_from": "2026-11-03"
+    },
+    {
+      "id": "Z5",
+      "name": "المحيط الهندي",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 1,
+      "events": 1,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-04"
+    }
+  ],
+  "counter": {
+    "total": 5,
+    "qualifying": 1,
+    "confirmed": 0,
+    "probable": 0,
+    "unconfirmed_qualifying": 1,
+    "unconfirmed_total": 3,
+    "excluded": 2,
+    "nonspatial": 2
+  },
+  "generated_from": "cumulative-2026/daily/2026-11-04.json",
+  "events": [
+    {
+      "code": "MN-2026-11-04-01",
+      "title": "صدر تحذير UKMTO 194-26 من حساب @UK_MTO على X عند 031313Z NOV 26",
+      "area": "غير مكانية",
+      "class": "بلاغ رسمي",
+      "zone": null,
+      "nonspatial": true,
+      "zone_reason": "بلا موقع بحري",
+      "qualifying": false,
+      "confirmation": "confirmed",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-04-01",
+      "source_excerpt": "UKMTO WARNING 194-26 Click here to view the full warning⤵️ https://t.co/vb0tlPtuBC #MaritimeSecurity #MarSec https://t.co/JTEYe8jDGP",
+      "category": ""
+    },
+    {
+      "code": "MN-2026-11-04-02",
+      "title": "صدر بلاغ UKMTO 195-26 من حساب @UK_MTO على X عند 032043Z NOV 26",
+      "area": "غير مكانية",
+      "class": "بلاغ رسمي",
+      "zone": null,
+      "nonspatial": true,
+      "zone_reason": "بلا موقع بحري",
+      "qualifying": false,
+      "confirmation": "confirmed",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-04-02",
+      "source_excerpt": "UKMTO WARNING 195-26 Click here to view the full warning⤵️ https://t.co/HfEr4pUJQY #MaritimeSecurity #MarSec https://t.co/fzjc8cLEq2",
+      "category": ""
+    },
+    {
+      "code": "MN-2026-11-04-03",
+      "title": "مقتل بحّار هندي في ضربة على قارب داو داخل مضيق هرمز",
+      "area": "مضيق هرمز",
+      "class": "بلاغ مهني",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": false,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-04-03",
+      "source_excerpt": "Indian seafarer killed in Hormuz Dhow strike",
+      "category": ""
+    },
+    {
+      "code": "MN-2026-11-04-04",
+      "title": "إصابة غرفة محركات ناقلة نفط خام كبيرة في أحدث هجوم داخل مضيق هرمز",
+      "area": "مضيق هرمز",
+      "class": "بلاغ مهني",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": true,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "نوع مؤهّل: «هجوم» وهدف بحري/ملاحي: «ناقلة»",
+      "incident_group": "MN-2026-11-04-04",
+      "source_excerpt": "VLCC engine room struck in latest Hormuz attack",
+      "category": "هجوم على سفينة"
+    },
+    {
+      "code": "MN-2026-11-04-05",
+      "title": "إنقاذ 20 بحّارًا إيرانيًا من قراصنة صوماليين",
+      "area": "الصومال - المحيط الهندي",
+      "class": "بلاغ غير مؤكد",
+      "zone": "Z5",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «المحيط الهندي»",
+      "qualifying": false,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-04-05",
+      "source_excerpt": "Indian Navy rescues 20 Iranian crew from Somali pirates",
+      "category": ""
+    }
+  ]
+}

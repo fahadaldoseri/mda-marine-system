@@ -1,0 +1,45 @@
+{
+ "date": "2026-11-04",
+ "method": "HTTP request only; no hidden browser and no bypass of blocking/CAPTCHA",
+ "records": [
+  {
+   "source": "حساب @bna_en على X",
+   "original_path": "https://x.com/bna_en",
+   "alternative_path": "https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
+   "http_code": 405,
+   "result": "فشل",
+   "evidence": "route=وكالة أنباء البحرين — RSS الرسمي المعلن; http_code=405; bytes=2097; sha256=4d1f2fbeb73a0e45ca131ce492ee2bf9a0955160a15130bed3ebfa44618970a6; reason=HTTP 405; HTTPError 405",
+   "official_route": "وكالة أنباء البحرين — RSS الرسمي المعلن",
+   "content_chars": 2097,
+   "bytes": 2097,
+   "sha256": "4d1f2fbeb73a0e45ca131ce492ee2bf9a0955160a15130bed3ebfa44618970a6",
+   "elapsed_ms": 912
+  },
+  {
+   "source": "جريدة الأيام",
+   "original_path": "https://www.alayam.com/pages/rss",
+   "alternative_path": "https://www.alayam.com/",
+   "http_code": 403,
+   "result": "فشل",
+   "evidence": "route=الصفحة الرئيسية الرسمية للجريدة; http_code=403; bytes=5944; sha256=67584f1326368c1dc74bd5359bce3c445a135d52ab24a266b109a50b520438ff; reason=HTTP 403; HTTPError 403",
+   "official_route": "الصفحة الرئيسية الرسمية للجريدة",
+   "content_chars": 5944,
+   "bytes": 5944,
+   "sha256": "67584f1326368c1dc74bd5359bce3c445a135d52ab24a266b109a50b520438ff",
+   "elapsed_ms": 1635
+  },
+  {
+   "source": "وكالة الأنباء القطرية (قنا)",
+   "original_path": "https://qna.org.qa/en/RSS-Feeds",
+   "alternative_path": "https://qna.org.qa/en/Pages/RSS-Feeds/Analysis-and-Reports",
+   "http_code": 200,
+   "result": "نجح",
+   "evidence": "route=صفحة RSS الرسمية البديلة لقنا; http_code=200; bytes=32873; sha256=e14e9ed841852f3f96b765238e7708bc8fe9642539641e3d964c99162df4ba61; reason=HTTP 200 مع مادة مستلمة",
+   "official_route": "صفحة RSS الرسمية البديلة لقنا",
+   "content_chars": 32864,
+   "bytes": 32873,
+   "sha256": "e14e9ed841852f3f96b765238e7708bc8fe9642539641e3d964c99162df4ba61",
+   "elapsed_ms": 1506
+  }
+ ]
+}
