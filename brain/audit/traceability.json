@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generated_at": "2026-11-03T16:30:15Z",
+ "generated_at": "2026-11-04T01:09:39Z",
  "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
  "rows": [
   {
@@ -3748,6 +3748,51 @@
    "lesson_id": "ك-497",
    "barrier_id": "B-7c41ab90",
    "run_evidence": "bash tools/final_gate.sh → خطوة «توليد المعجم المشتق (إلزامي قبل الاختبارات)» رمز 0 ثم الاختبار 19 «المعجم المشتق مطابق للمصادر» ناجح · python3 tools/build_lexicon_corpus.py --check → كلمات=7605 · بصمة=62f47fa05bb045fe"
+  },
+  {
+   "fault_id": "ك-498",
+   "state": "مغلق",
+   "lesson_id": "ك-498",
+   "barrier_id": "B-b1f68631",
+   "run_evidence": "python3 validators/check_map_note_counts.py --date 2026-11-03 ⇒ خرج 0 وسطر «ملاحظة الخريطة محذوفة بقرار المالك»",
+   "closure_round": "2026-11-04",
+   "check_closure": "python3 validators/check_closure.py ⇒ 0"
+  },
+  {
+   "fault_id": "ك-499",
+   "state": "مغلق",
+   "lesson_id": "ك-499",
+   "barrier_id": "B-08f30c54",
+   "run_evidence": "bash tools/publish_site.sh --telegram 2026-11-03 ⇒ خرج 0 · status ok · «الرسالة 55»",
+   "closure_round": "2026-11-04",
+   "check_closure": "python3 validators/check_closure.py ⇒ 0"
+  },
+  {
+   "fault_id": "ك-500",
+   "state": "مغلق",
+   "lesson_id": "ك-500",
+   "barrier_id": "B-67ee9c04",
+   "run_evidence": "curl -s https://seawatch-xp4qirmr.manus.space/reports/2026-11-03.html ⇒ خرج 0 · «غير مكاني»=0 · نص الخريطة=0 · رموز Z=0",
+   "closure_round": "2026-11-04",
+   "check_closure": "python3 validators/check_closure.py ⇒ 0"
+  },
+  {
+   "fault_id": "ك-501",
+   "state": "مغلق",
+   "lesson_id": "ك-501",
+   "barrier_id": "B-1325cbc4",
+   "run_evidence": "git -C /home/ubuntu/mda-marine-system show origin/main:brain/tools/publish_site.sh | grep -c owner-approval ⇒ 2 · D040 خرج 0 · التماثل 0 انحراف",
+   "closure_round": "2026-11-04",
+   "check_closure": "python3 validators/check_closure.py ⇒ 0"
+  },
+  {
+   "fault_id": "ك-502",
+   "state": "مغلق",
+   "lesson_id": "ك-502",
+   "barrier_id": "B-e3e39f7b",
+   "run_evidence": "cat logs/publish-2026-11-03-telegram.json ⇒ خرج 0 · status ok · \"pdf\": \"skipped-printing-disabled\"",
+   "closure_round": "2026-11-04",
+   "check_closure": "python3 validators/check_closure.py ⇒ 0"
   }
  ]
 }
