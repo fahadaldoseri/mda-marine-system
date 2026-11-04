@@ -91,13 +91,10 @@
      أدوات تستدعيها البوابة: 27 · كلها موجودة
      تدقيق المكتبات في البوابة: ✔
   6) النقل والسرية
-     مسارات مطلقة: 3
+     مسارات مطلقة: 0
      ✔ telegram-chat.json سرّي ومُستثنى/مُنقّى في النسخة الاحتياطية
      ✔ telegram-targets.json سرّي ومُستثنى/مُنقّى في النسخة الاحتياطية
      ✔ telegram-subscriptions.json سرّي ومُستثنى/مُنقّى في النسخة الاحتياطية
      ملفات بأسرار محتملة: 3
 
-النتيجة: 0 عائق · 3 تحذير
-  • [الإنفاذ] مدقّق غير مُستدعى في بوابة التسليم: check_glossary_shape.py
-  • [الإنفاذ] مدقّق غير مُستدعى في بوابة التسليم: check_surface_hygiene.py
-  • [النقل] 3 ملفًا بمسار مطلق (يكسر النقل): ['brain-marine-news/validators/check_surface_hygiene.py:22', 'brain-marine-news/tests/test_event_card_rows.py:21', 'brain-marine-news/tools/sync_server_to_repo.py:23']
+النتيجة: 0 عائق · 0 تحذير
