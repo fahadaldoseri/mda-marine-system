@@ -1,650 +1,650 @@
 {
-  "title": "التقرير اليومي لأمن الملاحة والأوضاع الراهنة في المنطقة",
-  "subtitle": "مركز الوعي بالمجال البحري — مملكة البحرين",
-  "date_label": "31 أكتوبر 2026",
-  "headline": "بلاغات UKMTO عن ثلاث وقائع في Z1 مع استمرار تضارب روايات الألغام والناقلات",
-  "lede": "خلال 24 ساعة السابقة، بقي المستوى العام «مرتفع»، وكان أعلى قطاع هو مضيق هرمز وخليج عُمان والخليج العربي. أبلغت UKMTO عن هجوم على سفينة في مضيق هرمز، وواقعة جنوب جزيرة لافان، وبلاغ متأخر عن واقعة في المضيق. ونُقلت روايات عن حريق وألغام من دون تأكيد مستقل كافٍ، لذلك لم تُحوّل إلى حصيلة هجمات.",
-  "window": "خلال 24 ساعة السابقة",
-  "version": "و ب 31/10/26",
-  "generated_label": "2026-10-31T04:00:00Z",
-  "threat_level": "مرتفع",
-  "sources_checked": 60,
-  "sources_cited": 11,
-  "description": "تقرير أمن الملاحة في القطاعات الأربعة المعتمدة: مضيق هرمز وخليج عُمان والخليج العربي، باب المندب والبحر الأحمر، بحر العرب، والقرن الأفريقي.",
-  "notice": "نسخة ويب من التقرير اليومي. المصادر المعتمدة 62 مصدرًا؛ 60 مرصودة آليًا، 60 ناجحة، 0 متعذّر، و2 يُفحص يدويًا.",
-  "footer_note": "المصدر المهني أو الإعلامي لا يرفع الواقعة إلى تأكيد رسمي من دون بلاغ مستقل.",
-  "classification": "عام",
-  "ledger_url": "/reports/cumulative-2026.html",
-  "report_schema_version": "2.1",
-  "hero_kpis": [
-    {
-      "id": "ukmto-reports",
-      "row": 1,
-      "title": "بلاغات UKMTO المرصودة",
-      "tag": "Z1",
-      "value": "3",
-      "detail": "داخل فترة التقرير",
-      "source": "سجل الوقائع الرسمي UKMTO",
-      "accent": "warn",
-      "cumulative": 158,
-      "updated": "2026-10-31",
-      "cumulative_source": "web/kpis-totals/2026-10-31.json#ukmto-reports"
-    },
-    {
-      "id": "qualifying-incidents",
-      "row": 1,
-      "title": "وقائع مستوفية لمعيار الاحتساب",
-      "tag": "",
-      "value": "4",
-      "detail": "1 مؤكدة + 1 مرجّحة + 2 غير مؤكدة مؤهلة",
-      "source": "web/zones/{date}.json · counter",
-      "accent": "warn",
-      "cumulative": 138,
-      "updated": "2026-10-31",
-      "cumulative_source": "web/kpis-totals/2026-10-31.json#qualifying-incidents"
-    },
-    {
-      "id": "unconfirmed-narratives",
-      "row": 1,
-      "title": "روايات لم تتأكد",
-      "tag": "تُذكر ولا تُحتسب",
-      "value": "3",
-      "detail": "3 روايات · منها 2 مؤهلة · تُذكر ولا تُحتسب",
-      "source": "web/zones/{date}.json · counter",
-      "accent": "warn",
-      "cumulative": 22,
-      "updated": "2026-10-31",
-      "cumulative_source": "web/kpis-totals/2026-10-31.json#unconfirmed-narratives"
-    },
-    {
-      "id": "proven-zones",
-      "row": 1,
-      "title": "وقائع مثبتة",
-      "tag": "Z2–Z4",
-      "value": "0",
-      "detail": "يظهر الصفر دائمًا",
-      "source": "web/zones/{date}.json · Z2–Z4",
-      "accent": "ok"
-    },
-    {
-      "id": "official-products",
-      "row": 2,
-      "title": "منتجات UKMTO وJMIC المرصودة",
-      "tag": "",
-      "value": "3",
-      "detail": "خلال فترة التغطية · لا يُدّعى أنها جديدة",
-      "source": "feeds/feeds-{date}.json · العدّ الخام المنفصل",
-      "accent": "info",
-      "cumulative": 164,
-      "updated": "2026-10-31",
-      "cumulative_source": "web/kpis-totals/2026-10-31.json#official-products"
-    },
-    {
-      "id": "latest-official",
-      "row": 2,
-      "title": "أحدث بلاغ رسمي",
-      "tag": "",
-      "value": "30 أكتوبر 2026",
-      "detail": "الساعة غير متاحة",
-      "source": "feeds/feeds-{date}.json · UKMTO",
-      "accent": "info"
-    },
-    {
-      "id": "fire-reports",
-      "row": 2,
-      "title": "حرائق السفن",
-      "tag": "",
-      "value": "3",
-      "detail": "المؤكد: 0 · المرجّح: 1 · غير المؤكد: 2",
-      "source": "feeds/feeds-{date}.json · فصل الحالة",
-      "accent": "warn",
-      "cumulative": 49,
-      "updated": "2026-10-31",
-      "cumulative_source": "web/kpis-totals/2026-10-31.json#fire-incidents"
-    },
-    {
-      "id": "imo-confirmed-attacks",
-      "row": 2,
-      "title": "هجمات مؤكدة على سفن",
-      "title_en": "Confirmed attacks on ships",
-      "tag": "IMO",
-      "tag_en": "IMO",
-      "value": "0",
-      "detail": "واقعة مؤكدة على سفينة تجارية في القائمة الرسمية للمنظمة البحرية الدولية · تحديث القائمة: 30 أكتوبر 2026",
-      "source": "IMO — قائمة الوقائع المؤكدة",
-      "source_label": "IMO — قائمة الوقائع المؤكدة",
-      "source_label_en": "IMO — confirmed incidents list",
-      "source_ref": "web/kpis-totals/2026-10-31.json#imo-confirmed-attacks",
-      "accent": "info",
-      "cumulative": 122,
-      "updated": "2026-10-30",
-      "cumulative_source": "web/kpis-totals/2026-10-31.json#imo-confirmed-attacks",
-      "updated_source": "web/kpis-totals/2026-10-31.json#imo-confirmed-attacks"
-    }
-  ],
-  "official_cards": [
-    {
-      "id": "imo-seafarer-deaths",
-      "title": "وفيات البحّارة",
-      "title_en": "Seafarer deaths",
-      "basis": "رسمي — قائمة IMO للوقائع المؤكدة",
-      "basis_en": "",
-      "source_label": "قائمة IMO للوقائع المؤكدة",
-      "source_label_en": "IMO confirmed incidents list",
-      "layers": {
-        "daily": {
-          "label": "عدد اليوم",
-          "label_en": "Today",
-          "state": "undisclosed",
-          "value": "لم يُعلن",
-          "value_en": "Not disclosed",
-          "source": "لا وفاة مذكورة في وقائع اليوم",
-          "source_en": "No fatality disclosed for today"
-        },
-        "cumulative": {
-          "label": "المجموع منذ 28 فبراير 2026",
-          "label_en": "Total since 28 February 2026",
-          "value": "24",
-          "value_en": "24",
-          "source": "وفيات بحّارة مؤكدة",
-          "source_en": "Confirmed seafarer deaths"
-        },
-        "updated": {
-          "label": "آخر تحديث للمصدر",
-          "label_en": "Source last updated",
-          "value": "30 أكتوبر 2026",
-          "value_en": "30 October 2026",
-          "source": "القائمة الرسمية المحفوظة",
-          "source_en": "Official list as saved"
-        }
-      }
-    },
-    {
-      "id": "imo-transit-september-2026",
-      "title": "العبور اليومي عبر مضيق هرمز",
-      "title_en": "Daily transits through the Strait of Hormuz",
-      "basis": "رسمي — بيانات IMO الشهرية للعبور",
-      "basis_en": "",
-      "source_label": "بيانات العبور الرسمية",
-      "source_label_en": "Official transit data",
-      "badges": [
-        "آخر تحديث سبتمبر 2026"
-      ],
-      "badges_en": [
-        "For public information",
-        "Last updated September 2026"
-      ],
-      "constraint": "أوقفت المنظمة تجميع بيانات العبور اليومية",
-      "constraint_en": "IMO no longer compiles data on daily ship transits",
-      "layers": {
-        "daily": {
-          "label": "عدد اليوم",
-          "label_en": "Today",
-          "state": "no_coverage",
-          "value": "لا تغطية",
-          "value_en": "No coverage",
-          "source": "أوقفت المنظمة تجميع بيانات العبور اليومية",
-          "source_en": "The Organization stopped daily transit compilation"
-        },
-        "cumulative": {
-          "label": "المجموع منذ 28 فبراير 2026",
-          "label_en": "Total since 28 February 2026",
-          "state": "no_coverage",
-          "value": "لا تغطية",
-          "value_en": "No coverage",
-          "source": "البيانات اليومية غير متاحة",
-          "source_en": "Daily data unavailable"
-        },
-        "updated": {
-          "label": "آخر تحديث للمصدر",
-          "label_en": "Source last updated",
-          "value": "سبتمبر 2026",
-          "value_en": "September 2026",
-          "source": "الرسم الرسمي للعبور الشهري",
-          "source_en": "Official monthly transit chart"
-        }
-      },
-      "period": "سبتمبر 2026",
-      "period_en": "September 2026",
-      "average": "15.6",
-      "average_en": "15.6",
-      "high": "25.8 (23 سبتمبر)",
-      "high_en": "25.8 (23 September)",
-      "low": "8.0 (3 سبتمبر)",
-      "low_en": "8.0 (3 September)"
-    }
-  ],
-  "map": {
-    "caption": "المصدر: سجل القطاعات ودفتر وقائع 31 أكتوبر. التوزيع القطاعي: Z1 — مضيق هرمز وخليج عُمان والخليج العربي؛ Z2 — باب المندب والبحر الأحمر؛ Z3 — بحر العرب؛ Z4 — القرن الأفريقي. لم يثبت المرجع إحداثيات معتمدة لوقائع اليوم، لذلك لم تُرسم نقاط؛ لا تُخترع إحداثيات تقريبية.",
-    "points": []
+ "title": "التقرير اليومي لأمن الملاحة والأوضاع الراهنة في المنطقة",
+ "subtitle": "مركز الوعي بالمجال البحري — مملكة البحرين",
+ "date_label": "31 أكتوبر 2026",
+ "headline": "بلاغات UKMTO عن ثلاث وقائع في Z1 مع استمرار تضارب روايات الألغام والناقلات",
+ "lede": "خلال 24 ساعة السابقة، بقي المستوى العام «مرتفع»، وكان أعلى قطاع هو مضيق هرمز وخليج عُمان والخليج العربي. أبلغت UKMTO عن هجوم على سفينة في مضيق هرمز، وواقعة جنوب جزيرة لافان، وبلاغ متأخر عن واقعة في المضيق. ونُقلت روايات عن حريق وألغام من دون تأكيد مستقل كافٍ، لذلك لم تُحوّل إلى حصيلة هجمات.",
+ "window": "خلال 24 ساعة السابقة",
+ "version": "و ب 31/10/26",
+ "generated_label": "2026-10-31T04:00:00Z",
+ "threat_level": "مرتفع",
+ "sources_checked": 60,
+ "sources_cited": 11,
+ "description": "تقرير أمن الملاحة في القطاعات الأربعة المعتمدة: مضيق هرمز وخليج عُمان والخليج العربي، باب المندب والبحر الأحمر، بحر العرب، والقرن الأفريقي.",
+ "notice": "نسخة ويب من التقرير اليومي. المصادر المعتمدة 62 مصدرًا؛ 60 مرصودة آليًا، 60 ناجحة، 0 متعذّر، و2 يُفحص يدويًا.",
+ "footer_note": "المصدر المهني أو الإعلامي لا يرفع الواقعة إلى تأكيد رسمي من دون بلاغ مستقل.",
+ "classification": "عام",
+ "ledger_url": "/reports/cumulative-2026.html",
+ "report_schema_version": "2.1",
+ "hero_kpis": [
+  {
+   "id": "ukmto-reports",
+   "row": 1,
+   "title": "بلاغات UKMTO المرصودة",
+   "tag": "Z1",
+   "value": "3",
+   "detail": "داخل فترة التقرير",
+   "source": "سجل الوقائع الرسمي UKMTO",
+   "accent": "warn",
+   "cumulative": 158,
+   "updated": "2026-10-31",
+   "cumulative_source": "web/kpis-totals/2026-10-31.json#ukmto-reports"
   },
-  "decision_card": {
-    "changed": [
-      "أبلغت UKMTO عن واقعة هجوم على سفينة في مضيق هرمز، وواقعة جنوب جزيرة لافان، وبلاغ متأخر عن واقعة في المضيق.",
-      "نُقلت روايات عن حريق سفينة وعن اشتعال ناقلات أو اصطدامها بألغام، من دون تأكيد مستقل كافٍ.",
-      "لم يضف سجل IMO حادثة جديدة إلى قائمة الحوادث المؤكدة في المواد المفحوصة."
-    ],
-    "risk": "مرتفع",
-    "risk_kind": "high",
-    "action": [
-      "لا تُنفذوا عبورًا في Z1 بلا حاجة تشغيلية واضحة وموافقة موثقة.",
-      "أضيفوا وقتًا احتياطيًا، وأبقوا AIS وVHF عاملين، وسجلوا أي نداء يطلب تغيير المسار.",
-      "لا تنسبوا أي إصابة أو حريق إلى جهة منفذة قبل تأكيد مستقل أو بيان رسمي صريح."
-    ],
-    "watch": [
-      "نشر النصوص الكاملة لبلاغات UKMTO وتحديد السفن والأضرار والموقع.",
-      "صدور تأكيد مستقل لحريق السفينة أو لرواية الألغام.",
-      "إعلان رسمي يحدد شروط إعادة فتح مضيق هرمز وتنفيذها ميدانيًا."
-    ],
-    "basis": "بطاقة الحكم مبنية على بلاغات UKMTO الرسمية، مع عرض الحريق وروايات الألغام بوصفها نقلًا مهنيًا أو إعلاميًا غير مؤكد؛ لذلك يتطابق risk مع threat_level والمتن.",
-    "risk_ref": "بطاقة الترويسة: مستوى التهديد"
+  {
+   "id": "qualifying-incidents",
+   "row": 1,
+   "title": "وقائع مستوفية لمعيار الاحتساب",
+   "tag": "",
+   "value": "4",
+   "detail": "1 مؤكدة + 1 مرجّحة + 2 غير مؤكدة مؤهلة",
+   "source": "web/zones/{date}.json · counter",
+   "accent": "warn",
+   "cumulative": 138,
+   "updated": "2026-10-31",
+   "cumulative_source": "web/kpis-totals/2026-10-31.json#qualifying-incidents"
   },
-  "changes": [
-    {
-      "kind": "new",
-      "code": "MN-2026-10-31-01",
-      "ref": "UKMTO",
-      "text": "بلاغ هجوم على سفينة في مضيق هرمز"
-    },
-    {
-      "kind": "new",
-      "code": "MN-2026-10-31-02",
-      "ref": "UKMTO",
-      "text": "بلاغ واقعة جنوب جزيرة لافان"
-    },
-    {
-      "kind": "new",
-      "code": "MN-2026-10-31-03",
-      "ref": "UKMTO",
-      "text": "بلاغ متأخر عن واقعة في مضيق هرمز"
-    },
-    {
-      "kind": "new",
-      "code": "MN-2026-10-31-04",
-      "ref": "gCaptain · TradeWinds",
-      "text": "نقل مهني عن حريق سفينة وإجلاء أفراد من طاقمها"
-    },
-    {
-      "kind": "new",
-      "code": "MN-2026-10-31-05",
-      "ref": "straits.live",
-      "text": "نقل رواية عن إصابة ناقلة بمقذوف مجهول"
-    },
-    {
-      "kind": "new",
-      "code": "MN-2026-10-31-06",
-      "ref": "straits.live · ISNA",
-      "text": "رواية عن اشتعال ناقلات واصطدامها بألغام بلا تأكيد مستقل"
-    }
-  ],
-  "indicators": [
-    {
-      "name": "بلاغات UKMTO عن وقائع في Z1 داخل الفترة",
-      "current": 3,
-      "previous": 2,
-      "trend": "up",
-      "delta": 1,
-      "meaning": "زيادة البلاغات الرسمية مع تفاوت مستوى التفاصيل",
-      "baseline": "بلاغات UKMTO عن وقائع في Z1 في الإصدار السابق"
-    },
-    {
-      "name": "وقائع ضرر على سفن ذات أساس رسمي أو مهني",
-      "current": 2,
-      "previous": 1,
-      "trend": "up",
-      "delta": 1,
-      "meaning": "استمرار خطر مباشر على السفن",
-      "baseline": "وقائع ضرر على سفن في الإصدار السابق"
-    },
-    {
-      "name": "روايات اشتعال أو ألغام بلا تأكيد مستقل",
-      "current": 3,
-      "previous": 0,
-      "trend": "up",
-      "delta": 3,
-      "meaning": "فجوة بين التداول الإعلامي والإثبات الرسمي",
-      "baseline": "روايات غير مؤكدة في الإصدار السابق"
-    },
-    {
-      "name": "وقائع بحرية مثبتة في Z2–Z4",
-      "current": 0,
-      "previous": 0,
-      "trend": "flat",
-      "delta": 0,
-      "meaning": "لا دليل جديد في المواد المفحوصة",
-      "baseline": "الوقائع البحرية المثبتة في Z2–Z4 في الإصدار السابق"
-    }
-  ],
-  "hypotheses": [
-    {
-      "likelihood": "50.94%",
-      "statement": "استمرار مستوى التهديد المرتفع في Z1 خلال 24–72 ساعة",
-      "support": "بلاغات UKMTO الرسمية المتعددة في هرمز وحوله",
-      "against": "لا يتوافر بعد نص كامل يحدد حجم الضرر أو الجهة المنفذة"
-    },
-    {
-      "likelihood": "24.53%",
-      "statement": "صدور توضيح رسمي إضافي عن إحدى الوقائع",
-      "support": "نقص التفاصيل في العناوين الرسمية المتاحة",
-      "against": "صفحات المصدر لا تعرض كل النصوص آليًا"
-    },
-    {
-      "likelihood": "24.53%",
-      "statement": "ثبوت رواية الألغام بحادثة مستقلة",
-      "support": "تعدد الروايات الإعلامية والطرفية",
-      "against": "غياب تأكيد مستقل وتضارب المواقف"
-    }
-  ],
-  "hypotheses_method": "الأسلوب: أُخذ منتصف كل نطاق أصلي (67.5، 32.5، 32.5) ثم سُوّي إلى مجموع 100%، فصارت النسب 50.94% و24.53% و24.53%. النطاقات الأصلية المحفوظة: 55–80%، 20–45%، 20–45%.",
-  "gaps": [
-    {
-      "gap": "النصوص الكاملة لبلاغات UKMTO وهوية السفن والأضرار",
-      "owner": "UKMTO",
-      "impact": "يمنع تثبيت صفة الواقعة ودمج البلاغات أو فصلها نهائيًا"
-    },
-    {
-      "gap": "التحقق المستقل من حريق السفينة وروايات الألغام",
-      "owner": "الجهات البحرية الرسمية والمهنية المستقلة",
-      "impact": "يمنع رفع الروايات إلى حوادث مؤكدة"
-    },
-    {
-      "gap": "موعد وآلية تنفيذ إعادة فتح مضيق هرمز",
-      "owner": "الجهات المعلنة للمسار السياسي",
-      "impact": "يمنع قياس أثر القرار على العبور"
-    }
-  ],
-  "blocks": {
-    "مؤشرات الموقف": "indicators",
-    "الاحتمالات ونسبة الحوادث إلى جهات": "hypotheses",
-    "ما لم يُحسم": "gaps",
-    "المصادر والمراجع": "source_reliability",
-    "سجل الأحداث": "event_keys",
-    "الحركة الملاحية والتكدس": "timeline"
+  {
+   "id": "unconfirmed-narratives",
+   "row": 1,
+   "title": "روايات لم تتأكد",
+   "tag": "تُذكر ولا تُحتسب",
+   "value": "3",
+   "detail": "3 روايات · منها 2 مؤهلة · تُذكر ولا تُحتسب",
+   "source": "web/zones/{date}.json · counter",
+   "accent": "warn",
+   "cumulative": 22,
+   "updated": "2026-10-31",
+   "cumulative_source": "web/kpis-totals/2026-10-31.json#unconfirmed-narratives"
   },
-  "event_keys": [
-    {
-      "code": "MN-2026-10-31-01",
-      "title": "بلاغ هجوم على سفينة في مضيق هرمز",
-      "area": "مضيق هرمز",
-      "status": "بلاغ رسمي",
-      "ref": "UKMTO",
-      "note": "تفاصيل الضرر والجهة المنفذة غير مكتملة"
-    },
-    {
-      "code": "MN-2026-10-31-02",
-      "title": "بلاغ واقعة جنوب جزيرة لافان",
-      "area": "Z1",
-      "status": "بلاغ رسمي",
-      "ref": "UKMTO",
-      "note": "التفاصيل الفنية غير متاحة في العنوان"
-    },
-    {
-      "code": "MN-2026-10-31-03",
-      "title": "بلاغ متأخر عن واقعة في مضيق هرمز",
-      "area": "مضيق هرمز",
-      "status": "بلاغ رسمي متأخر",
-      "ref": "UKMTO",
-      "note": "لا يُدمج مع بلاغ آخر بلا قرينة ربط"
-    },
-    {
-      "code": "MN-2026-10-31-04",
-      "title": "حريق سفينة وإجلاء أفراد من طاقمها",
-      "area": "Z1",
-      "status": "نقل مهني؛ مرجح",
-      "ref": "gCaptain · TradeWinds",
-      "note": "ضرر فعلي على سفينة؛ لا إثبات رسمي كامل"
-    },
-    {
-      "code": "MN-2026-10-31-05",
-      "title": "رواية إصابة ناقلة بمقذوف مجهول",
-      "area": "مضيق هرمز",
-      "status": "نقل إعلامي غير مؤكد",
-      "ref": "straits.live",
-      "note": "لا تأكيد مستقل"
-    },
-    {
-      "code": "MN-2026-10-31-06",
-      "title": "رواية اشتعال ناقلات بعد اصطدامها بألغام",
-      "area": "مضيق هرمز",
-      "status": "بلاغ طرفي غير مؤكد",
-      "ref": "straits.live · ISNA",
-      "note": "لا تُحتسب هجمات مستقلة"
-    }
-  ],
-  "timeline": [
-    {
-      "date": "10-30",
-      "count": 4,
-      "kind": "event",
-      "label": "MN-2026-10-31-01 إلى MN-2026-10-31-04: ثلاثة بلاغات UKMTO وواقعة حريق منقولة مهنيًا",
-      "time": "29/10/2026 و30/10/2026؛ 30/10/2026 21:30 +0100 كما ورد في الدفتر",
-      "source": "UKMTO (رسمي)؛ gCaptain · TradeWinds · الجزيرة الإنجليزية"
-    },
-    {
-      "date": "10-31",
-      "count": 2,
-      "kind": "event",
-      "label": "MN-2026-10-31-05 وMN-2026-10-31-06: روايتا مقذوف وألغام غير مؤكدتين",
-      "time": "31/10/2026 03:55:48 GMT و05:13:07 GMT كما ورد في الدفتر",
-      "source": "straits.live؛ ISNA (نقل غير مؤكد)"
-    }
-  ],
-  "source_reliability": {
-    "checked": 60,
-    "cited": 11,
-    "approved": 62,
-    "ok": 60,
-    "manual_reference": [
-      39,
-      52
-    ],
-    "stale": [
-      12,
-      13,
-      20,
-      30,
-      32,
-      49
-    ],
-    "failed": 0,
-    "rows": [
-      {
-        "num": "1",
-        "name": "UKMTO",
-        "url": "https://www.ukmto.org/recent-incidents",
-        "rel": "رسمي",
-        "basis": "ثلاثة بلاغات عن وقائع في Z1"
-      },
-      {
-        "num": "5",
-        "name": "IMO",
-        "url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
-        "rel": "رسمي",
-        "basis": "سجل الحوادث المؤكدة"
-      },
-      {
-        "num": "31",
-        "name": "JMIC",
-        "url": "https://combinedmaritimeforces.com/jmic/",
-        "rel": "رسمي بحري مشترك",
-        "basis": "المتابعة الرسمية للمنطقة"
-      },
-      {
-        "num": "6",
-        "name": "straits.live",
-        "url": "https://straits.live/",
-        "rel": "مهني/إعلامي",
-        "basis": "نقل الحريق وروايات الألغام"
-      },
-      {
-        "num": "7",
-        "name": "gCaptain",
-        "url": "https://gcaptain.com/",
-        "rel": "إعلام بحري",
-        "basis": "نقل مهني عن حريق سفينة"
-      },
-      {
-        "num": "8",
-        "name": "TradeWinds",
-        "url": "https://www.tradewindsnews.com/",
-        "rel": "إعلام بحري مهني",
-        "basis": "نقل مهني عن وضع السفينة والطاقم"
-      },
-      {
-        "num": "11",
-        "name": "الجزيرة الإنجليزية",
-        "url": "https://www.aljazeera.com/",
-        "rel": "إعلام إقليمي",
-        "basis": "نقل رواية الناقلة والطاقم"
-      },
-      {
-        "num": "44",
-        "name": "Windward",
-        "url": "https://www.windward.ai/",
-        "rel": "منصة تحليل تجاري",
-        "basis": "مراقبة مسارات السفن"
-      },
-      {
-        "num": "46",
-        "name": "ISNA",
-        "url": "https://en.isna.ir/",
-        "rel": "وكالة إيرانية",
-        "basis": "نقل موقف رسمي إيراني"
-      },
-      {
-        "num": "47",
-        "name": "Mehr — العربي",
-        "url": "https://ar.mehrnews.com/",
-        "rel": "وكالة شبه رسمية",
-        "basis": "نقل موقف إيراني"
-      },
-      {
-        "num": "30",
-        "name": "سنتكوم كما نُقل",
-        "url": "https://www.centcom.mil/",
-        "rel": "رسمي عسكري",
-        "basis": "نفي منقول بشأن مركبة غير مأهولة"
-      }
-    ]
+  {
+   "id": "proven-zones",
+   "row": 1,
+   "title": "وقائع مثبتة",
+   "tag": "Z2–Z4",
+   "value": "0",
+   "detail": "يظهر الصفر دائمًا",
+   "source": "web/zones/{date}.json · Z2–Z4",
+   "accent": "ok"
   },
-  "threat_zones": {
-    "overall": "مرتفع",
-    "rank": 3,
-    "top_zone": "مضيق هرمز وخليج عُمان والخليج العربي",
-    "window": "خلال 24 ساعة السابقة",
-    "counter": {
-      "total": 16,
-      "qualifying": 4,
-      "confirmed": 1,
-      "probable": 1,
-      "unconfirmed_qualifying": 2,
-      "unconfirmed_total": 3,
-      "excluded": 11,
-      "nonspatial": 1
-    },
-    "zones": [
-      {
-        "id": "Z1",
-        "name": "مضيق هرمز وخليج عُمان والخليج العربي",
-        "level": "مرتفع",
-        "rank": 3,
-        "confirmed": 1,
-        "probable": 1,
-        "qualifying": 4,
-        "carry_over": false
-      },
-      {
-        "id": "Z2",
-        "name": "باب المندب والبحر الأحمر",
-        "level": "منخفض",
-        "rank": 1,
-        "confirmed": 0,
-        "probable": 0,
-        "qualifying": 0,
-        "carry_over": false
-      },
-      {
-        "id": "Z3",
-        "name": "بحر العرب",
-        "level": "منخفض",
-        "rank": 1,
-        "confirmed": 0,
-        "probable": 0,
-        "qualifying": 0,
-        "carry_over": false
-      },
-      {
-        "id": "Z4",
-        "name": "القرن الأفريقي",
-        "level": "منخفض",
-        "rank": 1,
-        "confirmed": 0,
-        "probable": 0,
-        "qualifying": 0,
-        "carry_over": false
-      }
-    ]
+  {
+   "id": "official-products",
+   "row": 2,
+   "title": "منتجات UKMTO وJMIC المرصودة",
+   "tag": "",
+   "value": "3",
+   "detail": "خلال فترة التغطية · لا يُدّعى أنها جديدة",
+   "source": "feeds/feeds-{date}.json · العدّ الخام المنفصل",
+   "accent": "info",
+   "cumulative": 164,
+   "updated": "2026-10-31",
+   "cumulative_source": "web/kpis-totals/2026-10-31.json#official-products"
   },
-  "glossary": {
-    "UKMTO": "مركز التجارة البحرية البريطاني.",
-    "JMIC": "مركز المعلومات البحرية المشترك.",
-    "IMO": "المنظمة البحرية الدولية.",
-    "AIS": "نظام التعريف الآلي للسفن.",
-    "VHF": "نطاق تردد لاسلكي بحري.",
-    "MN-": "رمز الواقعة في سجل التقرير.",
-    "EST-": "رمز التقدير التحليلي.",
-    "Z1": "مضيق هرمز وخليج عُمان والخليج العربي.",
-    "Z2": "باب المندب والبحر الأحمر.",
-    "Z3": "بحر العرب.",
-    "Z4": "القرن الأفريقي.",
-    "الواقعة": "بلاغ أمني لم يثبت كونه هجومًا بعد."
+  {
+   "id": "latest-official",
+   "row": 2,
+   "title": "أحدث بلاغ رسمي",
+   "tag": "",
+   "value": "30 أكتوبر 2026",
+   "detail": "الساعة غير متاحة",
+   "source": "feeds/feeds-{date}.json · UKMTO",
+   "accent": "info"
   },
-  "sources_approved": 62,
-  "sources_ok": 60,
-  "sources_line": "المصادر: 62 معتمدة = 60 بالمسار الآلي + 2 بالمرجعية اليدوية · 60 ناجحة · 2 يُفحص يدويًا.",
-  "sources_failed": 0,
-  "sources_manual_reference": [
-    39,
-    52
-  ],
-  "sources_manual_reference_count": 2,
-  "stale_sources": [
-    12,
-    13,
-    20,
-    30,
-    32,
-    49
-  ],
-  "event_count": 16,
-  "report_path": "/reports/2026-10-31-sectioned.md",
-  "threat_zone_levels": {
-    "Z1": "مرتفع",
-    "Z2": "منخفض",
-    "Z3": "منخفض",
-    "Z4": "منخفض"
+  {
+   "id": "fire-reports",
+   "row": 2,
+   "title": "حرائق السفن",
+   "tag": "",
+   "value": "3",
+   "detail": "المؤكد: 0 · المرجّح: 1 · غير المؤكد: 2",
+   "source": "feeds/feeds-{date}.json · فصل الحالة",
+   "accent": "warn",
+   "cumulative": 49,
+   "updated": "2026-10-31",
+   "cumulative_source": "web/kpis-totals/2026-10-31.json#fire-incidents"
   },
-  "hero_risk_patterns": [
-    "هجوم",
-    "حريق",
-    "ألغام"
-  ],
-  "hero_sources": {
-    "official_products": {
-      "value": 3,
-      "source": "feeds/feeds-2026-10-31.json: UKMTO/JMIC raw product count"
-    },
-    "latest_official": {
-      "value": "30 أكتوبر 2026",
-      "source": "feeds/feeds-2026-10-31.json: latest UKMTO item",
-      "time": "الساعة غير متاحة"
-    },
-    "fire": {
-      "value": 3,
-      "confirmed": 0,
-      "probable": 1,
-      "unconfirmed": 2,
-      "source": "feeds/feeds-2026-10-31.json: fire/ignition reports"
-    }
+  {
+   "id": "imo-confirmed-attacks",
+   "row": 2,
+   "title": "هجمات مؤكدة على سفن",
+   "title_en": "Confirmed attacks on ships",
+   "tag": "IMO",
+   "tag_en": "IMO",
+   "value": "0",
+   "detail": "واقعة مؤكدة على سفينة تجارية في القائمة الرسمية للمنظمة البحرية الدولية · تحديث القائمة: 30 أكتوبر 2026",
+   "source": "IMO — قائمة الوقائع المؤكدة",
+   "source_label": "IMO — قائمة الوقائع المؤكدة",
+   "source_label_en": "IMO — confirmed incidents list",
+   "source_ref": "web/kpis-totals/2026-10-31.json#imo-confirmed-attacks",
+   "accent": "info",
+   "cumulative": 122,
+   "updated": "2026-10-30",
+   "cumulative_source": "web/kpis-totals/2026-10-31.json#imo-confirmed-attacks",
+   "updated_source": "web/kpis-totals/2026-10-31.json#imo-confirmed-attacks"
   }
+ ],
+ "official_cards": [
+  {
+   "id": "imo-seafarer-deaths",
+   "title": "وفيات البحّارة",
+   "title_en": "Seafarer deaths",
+   "basis": "رسمي — قائمة IMO للوقائع المؤكدة",
+   "basis_en": "",
+   "source_label": "قائمة IMO للوقائع المؤكدة",
+   "source_label_en": "IMO confirmed incidents list",
+   "layers": {
+    "daily": {
+     "label": "عدد اليوم",
+     "label_en": "Today",
+     "state": "undisclosed",
+     "value": "لم يُعلن",
+     "value_en": "Not disclosed",
+     "source": "لا وفاة مذكورة في وقائع اليوم",
+     "source_en": "No fatality disclosed for today"
+    },
+    "cumulative": {
+     "label": "المجموع منذ 28 فبراير 2026",
+     "label_en": "Total since 28 February 2026",
+     "value": "24",
+     "value_en": "24",
+     "source": "وفيات بحّارة مؤكدة",
+     "source_en": "Confirmed seafarer deaths"
+    },
+    "updated": {
+     "label": "آخر تحديث للمصدر",
+     "label_en": "Source last updated",
+     "value": "30 أكتوبر 2026",
+     "value_en": "30 October 2026",
+     "source": "القائمة الرسمية المحفوظة",
+     "source_en": "Official list as saved"
+    }
+   }
+  },
+  {
+   "id": "imo-transit-september-2026",
+   "title": "العبور اليومي عبر مضيق هرمز",
+   "title_en": "Daily transits through the Strait of Hormuz",
+   "basis": "رسمي — بيانات IMO الشهرية للعبور",
+   "basis_en": "",
+   "source_label": "بيانات العبور الرسمية",
+   "source_label_en": "Official transit data",
+   "badges": [
+    "آخر تحديث سبتمبر 2026"
+   ],
+   "badges_en": [
+    "For public information",
+    "Last updated September 2026"
+   ],
+   "constraint": "أوقفت المنظمة تجميع بيانات العبور اليومية",
+   "constraint_en": "IMO no longer compiles data on daily ship transits",
+   "layers": {
+    "daily": {
+     "label": "عدد اليوم",
+     "label_en": "Today",
+     "state": "no_coverage",
+     "value": "لا تغطية",
+     "value_en": "No coverage",
+     "source": "أوقفت المنظمة تجميع بيانات العبور اليومية",
+     "source_en": "The Organization stopped daily transit compilation"
+    },
+    "cumulative": {
+     "label": "المجموع منذ 28 فبراير 2026",
+     "label_en": "Total since 28 February 2026",
+     "state": "no_coverage",
+     "value": "لا تغطية",
+     "value_en": "No coverage",
+     "source": "البيانات اليومية غير متاحة",
+     "source_en": "Daily data unavailable"
+    },
+    "updated": {
+     "label": "آخر تحديث للمصدر",
+     "label_en": "Source last updated",
+     "value": "سبتمبر 2026",
+     "value_en": "September 2026",
+     "source": "الرسم الرسمي للعبور الشهري",
+     "source_en": "Official monthly transit chart"
+    }
+   },
+   "period": "سبتمبر 2026",
+   "period_en": "September 2026",
+   "average": "15.6",
+   "average_en": "15.6",
+   "high": "25.8 (23 سبتمبر)",
+   "high_en": "25.8 (23 September)",
+   "low": "8.0 (3 سبتمبر)",
+   "low_en": "8.0 (3 September)"
+  }
+ ],
+ "map": {
+  "caption": "",
+  "points": []
+ },
+ "decision_card": {
+  "changed": [
+   "أبلغت UKMTO عن واقعة هجوم على سفينة في مضيق هرمز، وواقعة جنوب جزيرة لافان، وبلاغ متأخر عن واقعة في المضيق.",
+   "نُقلت روايات عن حريق سفينة وعن اشتعال ناقلات أو اصطدامها بألغام، من دون تأكيد مستقل كافٍ.",
+   "لم يضف سجل IMO حادثة جديدة إلى قائمة الحوادث المؤكدة في المواد المفحوصة."
+  ],
+  "risk": "مرتفع",
+  "risk_kind": "high",
+  "action": [
+   "لا تُنفذوا عبورًا في Z1 بلا حاجة تشغيلية واضحة وموافقة موثقة.",
+   "أضيفوا وقتًا احتياطيًا، وأبقوا AIS وVHF عاملين، وسجلوا أي نداء يطلب تغيير المسار.",
+   "لا تنسبوا أي إصابة أو حريق إلى جهة منفذة قبل تأكيد مستقل أو بيان رسمي صريح."
+  ],
+  "watch": [
+   "نشر النصوص الكاملة لبلاغات UKMTO وتحديد السفن والأضرار والموقع.",
+   "صدور تأكيد مستقل لحريق السفينة أو لرواية الألغام.",
+   "إعلان رسمي يحدد شروط إعادة فتح مضيق هرمز وتنفيذها ميدانيًا."
+  ],
+  "basis": "بطاقة الحكم مبنية على بلاغات UKMTO الرسمية، مع عرض الحريق وروايات الألغام بوصفها نقلًا مهنيًا أو إعلاميًا غير مؤكد؛ لذلك يتطابق risk مع threat_level والمتن.",
+  "risk_ref": "بطاقة الترويسة: مستوى التهديد"
+ },
+ "changes": [
+  {
+   "kind": "new",
+   "code": "MN-2026-10-31-01",
+   "ref": "UKMTO",
+   "text": "بلاغ هجوم على سفينة في مضيق هرمز"
+  },
+  {
+   "kind": "new",
+   "code": "MN-2026-10-31-02",
+   "ref": "UKMTO",
+   "text": "بلاغ واقعة جنوب جزيرة لافان"
+  },
+  {
+   "kind": "new",
+   "code": "MN-2026-10-31-03",
+   "ref": "UKMTO",
+   "text": "بلاغ متأخر عن واقعة في مضيق هرمز"
+  },
+  {
+   "kind": "new",
+   "code": "MN-2026-10-31-04",
+   "ref": "gCaptain · TradeWinds",
+   "text": "نقل مهني عن حريق سفينة وإجلاء أفراد من طاقمها"
+  },
+  {
+   "kind": "new",
+   "code": "MN-2026-10-31-05",
+   "ref": "straits.live",
+   "text": "نقل رواية عن إصابة ناقلة بمقذوف مجهول"
+  },
+  {
+   "kind": "new",
+   "code": "MN-2026-10-31-06",
+   "ref": "straits.live · ISNA",
+   "text": "رواية عن اشتعال ناقلات واصطدامها بألغام بلا تأكيد مستقل"
+  }
+ ],
+ "indicators": [
+  {
+   "name": "بلاغات UKMTO عن وقائع في Z1 داخل الفترة",
+   "current": 3,
+   "previous": 2,
+   "trend": "up",
+   "delta": 1,
+   "meaning": "زيادة البلاغات الرسمية مع تفاوت مستوى التفاصيل",
+   "baseline": "بلاغات UKMTO عن وقائع في Z1 في الإصدار السابق"
+  },
+  {
+   "name": "وقائع ضرر على سفن ذات أساس رسمي أو مهني",
+   "current": 2,
+   "previous": 1,
+   "trend": "up",
+   "delta": 1,
+   "meaning": "استمرار خطر مباشر على السفن",
+   "baseline": "وقائع ضرر على سفن في الإصدار السابق"
+  },
+  {
+   "name": "روايات اشتعال أو ألغام بلا تأكيد مستقل",
+   "current": 3,
+   "previous": 0,
+   "trend": "up",
+   "delta": 3,
+   "meaning": "فجوة بين التداول الإعلامي والإثبات الرسمي",
+   "baseline": "روايات غير مؤكدة في الإصدار السابق"
+  },
+  {
+   "name": "وقائع بحرية مثبتة في Z2–Z4",
+   "current": 0,
+   "previous": 0,
+   "trend": "flat",
+   "delta": 0,
+   "meaning": "لا دليل جديد في المواد المفحوصة",
+   "baseline": "الوقائع البحرية المثبتة في Z2–Z4 في الإصدار السابق"
+  }
+ ],
+ "hypotheses": [
+  {
+   "likelihood": "50.94%",
+   "statement": "استمرار مستوى التهديد المرتفع في Z1 خلال 24–72 ساعة",
+   "support": "بلاغات UKMTO الرسمية المتعددة في هرمز وحوله",
+   "against": "لا يتوافر بعد نص كامل يحدد حجم الضرر أو الجهة المنفذة"
+  },
+  {
+   "likelihood": "24.53%",
+   "statement": "صدور توضيح رسمي إضافي عن إحدى الوقائع",
+   "support": "نقص التفاصيل في العناوين الرسمية المتاحة",
+   "against": "صفحات المصدر لا تعرض كل النصوص آليًا"
+  },
+  {
+   "likelihood": "24.53%",
+   "statement": "ثبوت رواية الألغام بحادثة مستقلة",
+   "support": "تعدد الروايات الإعلامية والطرفية",
+   "against": "غياب تأكيد مستقل وتضارب المواقف"
+  }
+ ],
+ "hypotheses_method": "الأسلوب: أُخذ منتصف كل نطاق أصلي (67.5، 32.5، 32.5) ثم سُوّي إلى مجموع 100%، فصارت النسب 50.94% و24.53% و24.53%. النطاقات الأصلية المحفوظة: 55–80%، 20–45%، 20–45%.",
+ "gaps": [
+  {
+   "gap": "النصوص الكاملة لبلاغات UKMTO وهوية السفن والأضرار",
+   "owner": "UKMTO",
+   "impact": "يمنع تثبيت صفة الواقعة ودمج البلاغات أو فصلها نهائيًا"
+  },
+  {
+   "gap": "التحقق المستقل من حريق السفينة وروايات الألغام",
+   "owner": "الجهات البحرية الرسمية والمهنية المستقلة",
+   "impact": "يمنع رفع الروايات إلى حوادث مؤكدة"
+  },
+  {
+   "gap": "موعد وآلية تنفيذ إعادة فتح مضيق هرمز",
+   "owner": "الجهات المعلنة للمسار السياسي",
+   "impact": "يمنع قياس أثر القرار على العبور"
+  }
+ ],
+ "blocks": {
+  "مؤشرات الموقف": "indicators",
+  "الاحتمالات ونسبة الحوادث إلى جهات": "hypotheses",
+  "ما لم يُحسم": "gaps",
+  "المصادر والمراجع": "source_reliability",
+  "سجل الأحداث": "event_keys",
+  "الحركة الملاحية والتكدس": "timeline"
+ },
+ "event_keys": [
+  {
+   "code": "MN-2026-10-31-01",
+   "title": "بلاغ هجوم على سفينة في مضيق هرمز",
+   "area": "مضيق هرمز",
+   "status": "بلاغ رسمي",
+   "ref": "UKMTO",
+   "note": "تفاصيل الضرر والجهة المنفذة غير مكتملة"
+  },
+  {
+   "code": "MN-2026-10-31-02",
+   "title": "بلاغ واقعة جنوب جزيرة لافان",
+   "area": "Z1",
+   "status": "بلاغ رسمي",
+   "ref": "UKMTO",
+   "note": "التفاصيل الفنية غير متاحة في العنوان"
+  },
+  {
+   "code": "MN-2026-10-31-03",
+   "title": "بلاغ متأخر عن واقعة في مضيق هرمز",
+   "area": "مضيق هرمز",
+   "status": "بلاغ رسمي متأخر",
+   "ref": "UKMTO",
+   "note": "لا يُدمج مع بلاغ آخر بلا قرينة ربط"
+  },
+  {
+   "code": "MN-2026-10-31-04",
+   "title": "حريق سفينة وإجلاء أفراد من طاقمها",
+   "area": "Z1",
+   "status": "نقل مهني؛ مرجح",
+   "ref": "gCaptain · TradeWinds",
+   "note": "ضرر فعلي على سفينة؛ لا إثبات رسمي كامل"
+  },
+  {
+   "code": "MN-2026-10-31-05",
+   "title": "رواية إصابة ناقلة بمقذوف مجهول",
+   "area": "مضيق هرمز",
+   "status": "نقل إعلامي غير مؤكد",
+   "ref": "straits.live",
+   "note": "لا تأكيد مستقل"
+  },
+  {
+   "code": "MN-2026-10-31-06",
+   "title": "رواية اشتعال ناقلات بعد اصطدامها بألغام",
+   "area": "مضيق هرمز",
+   "status": "بلاغ طرفي غير مؤكد",
+   "ref": "straits.live · ISNA",
+   "note": "لا تُحتسب هجمات مستقلة"
+  }
+ ],
+ "timeline": [
+  {
+   "date": "10-30",
+   "count": 4,
+   "kind": "event",
+   "label": "MN-2026-10-31-01 إلى MN-2026-10-31-04: ثلاثة بلاغات UKMTO وواقعة حريق منقولة مهنيًا",
+   "time": "29/10/2026 و30/10/2026؛ 30/10/2026 21:30 +0100 كما ورد في الدفتر",
+   "source": "UKMTO (رسمي)؛ gCaptain · TradeWinds · الجزيرة الإنجليزية"
+  },
+  {
+   "date": "10-31",
+   "count": 2,
+   "kind": "event",
+   "label": "MN-2026-10-31-05 وMN-2026-10-31-06: روايتا مقذوف وألغام غير مؤكدتين",
+   "time": "31/10/2026 03:55:48 GMT و05:13:07 GMT كما ورد في الدفتر",
+   "source": "straits.live؛ ISNA (نقل غير مؤكد)"
+  }
+ ],
+ "source_reliability": {
+  "checked": 60,
+  "cited": 11,
+  "approved": 62,
+  "ok": 60,
+  "manual_reference": [
+   39,
+   52
+  ],
+  "stale": [
+   12,
+   13,
+   20,
+   30,
+   32,
+   49
+  ],
+  "failed": 0,
+  "rows": [
+   {
+    "num": "1",
+    "name": "UKMTO",
+    "url": "https://www.ukmto.org/recent-incidents",
+    "rel": "رسمي",
+    "basis": "ثلاثة بلاغات عن وقائع في Z1"
+   },
+   {
+    "num": "5",
+    "name": "IMO",
+    "url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+    "rel": "رسمي",
+    "basis": "سجل الحوادث المؤكدة"
+   },
+   {
+    "num": "31",
+    "name": "JMIC",
+    "url": "https://combinedmaritimeforces.com/jmic/",
+    "rel": "رسمي بحري مشترك",
+    "basis": "المتابعة الرسمية للمنطقة"
+   },
+   {
+    "num": "6",
+    "name": "straits.live",
+    "url": "https://straits.live/",
+    "rel": "مهني/إعلامي",
+    "basis": "نقل الحريق وروايات الألغام"
+   },
+   {
+    "num": "7",
+    "name": "gCaptain",
+    "url": "https://gcaptain.com/",
+    "rel": "إعلام بحري",
+    "basis": "نقل مهني عن حريق سفينة"
+   },
+   {
+    "num": "8",
+    "name": "TradeWinds",
+    "url": "https://www.tradewindsnews.com/",
+    "rel": "إعلام بحري مهني",
+    "basis": "نقل مهني عن وضع السفينة والطاقم"
+   },
+   {
+    "num": "11",
+    "name": "الجزيرة الإنجليزية",
+    "url": "https://www.aljazeera.com/",
+    "rel": "إعلام إقليمي",
+    "basis": "نقل رواية الناقلة والطاقم"
+   },
+   {
+    "num": "44",
+    "name": "Windward",
+    "url": "https://www.windward.ai/",
+    "rel": "منصة تحليل تجاري",
+    "basis": "مراقبة مسارات السفن"
+   },
+   {
+    "num": "46",
+    "name": "ISNA",
+    "url": "https://en.isna.ir/",
+    "rel": "وكالة إيرانية",
+    "basis": "نقل موقف رسمي إيراني"
+   },
+   {
+    "num": "47",
+    "name": "Mehr — العربي",
+    "url": "https://ar.mehrnews.com/",
+    "rel": "وكالة شبه رسمية",
+    "basis": "نقل موقف إيراني"
+   },
+   {
+    "num": "30",
+    "name": "سنتكوم كما نُقل",
+    "url": "https://www.centcom.mil/",
+    "rel": "رسمي عسكري",
+    "basis": "نفي منقول بشأن مركبة غير مأهولة"
+   }
+  ]
+ },
+ "threat_zones": {
+  "overall": "مرتفع",
+  "rank": 3,
+  "top_zone": "مضيق هرمز وخليج عُمان والخليج العربي",
+  "window": "خلال 24 ساعة السابقة",
+  "counter": {
+   "total": 16,
+   "qualifying": 4,
+   "confirmed": 1,
+   "probable": 1,
+   "unconfirmed_qualifying": 2,
+   "unconfirmed_total": 3,
+   "excluded": 11,
+   "nonspatial": 1
+  },
+  "zones": [
+   {
+    "id": "Z1",
+    "name": "مضيق هرمز وخليج عُمان والخليج العربي",
+    "level": "مرتفع",
+    "rank": 3,
+    "confirmed": 1,
+    "probable": 1,
+    "qualifying": 4,
+    "carry_over": false
+   },
+   {
+    "id": "Z2",
+    "name": "باب المندب والبحر الأحمر",
+    "level": "منخفض",
+    "rank": 1,
+    "confirmed": 0,
+    "probable": 0,
+    "qualifying": 0,
+    "carry_over": false
+   },
+   {
+    "id": "Z3",
+    "name": "بحر العرب",
+    "level": "منخفض",
+    "rank": 1,
+    "confirmed": 0,
+    "probable": 0,
+    "qualifying": 0,
+    "carry_over": false
+   },
+   {
+    "id": "Z4",
+    "name": "القرن الأفريقي",
+    "level": "منخفض",
+    "rank": 1,
+    "confirmed": 0,
+    "probable": 0,
+    "qualifying": 0,
+    "carry_over": false
+   }
+  ]
+ },
+ "glossary": {
+  "UKMTO": "مركز التجارة البحرية البريطاني.",
+  "JMIC": "مركز المعلومات البحرية المشترك.",
+  "IMO": "المنظمة البحرية الدولية.",
+  "AIS": "نظام التعريف الآلي للسفن.",
+  "VHF": "نطاق تردد لاسلكي بحري.",
+  "MN-": "رمز الواقعة في سجل التقرير.",
+  "EST-": "رمز التقدير التحليلي.",
+  "Z1": "مضيق هرمز وخليج عُمان والخليج العربي.",
+  "Z2": "باب المندب والبحر الأحمر.",
+  "Z3": "بحر العرب.",
+  "Z4": "القرن الأفريقي.",
+  "الواقعة": "بلاغ أمني لم يثبت كونه هجومًا بعد."
+ },
+ "sources_approved": 62,
+ "sources_ok": 60,
+ "sources_line": "المصادر: 62 معتمدة = 60 بالمسار الآلي + 2 بالمرجعية اليدوية · 60 ناجحة · 2 يُفحص يدويًا.",
+ "sources_failed": 0,
+ "sources_manual_reference": [
+  39,
+  52
+ ],
+ "sources_manual_reference_count": 2,
+ "stale_sources": [
+  12,
+  13,
+  20,
+  30,
+  32,
+  49
+ ],
+ "event_count": 16,
+ "report_path": "/reports/2026-10-31-sectioned.md",
+ "threat_zone_levels": {
+  "Z1": "مرتفع",
+  "Z2": "منخفض",
+  "Z3": "منخفض",
+  "Z4": "منخفض"
+ },
+ "hero_risk_patterns": [
+  "هجوم",
+  "حريق",
+  "ألغام"
+ ],
+ "hero_sources": {
+  "official_products": {
+   "value": 3,
+   "source": "feeds/feeds-2026-10-31.json: UKMTO/JMIC raw product count"
+  },
+  "latest_official": {
+   "value": "30 أكتوبر 2026",
+   "source": "feeds/feeds-2026-10-31.json: latest UKMTO item",
+   "time": "الساعة غير متاحة"
+  },
+  "fire": {
+   "value": 3,
+   "confirmed": 0,
+   "probable": 1,
+   "unconfirmed": 2,
+   "source": "feeds/feeds-2026-10-31.json: fire/ignition reports"
+  }
+ }
 }
