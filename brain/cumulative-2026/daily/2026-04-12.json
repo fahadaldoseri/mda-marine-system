@@ -1,47 +1,42 @@
 [
   {
-    "code": "NI-2026-04-12",
-    "date": "2026-04-12",
-    "sector": "خارج القطاعات",
-    "class": "no_incident",
-    "no_incident": true,
     "backfilled": true,
-    "title": "لا واقعة مسجّلة في المصادر الرسمية المفحوصة",
-    "description": "لا واقعة مسجّلة في المصادر الرسمية المفحوصة لهذا التاريخ.",
-    "source": "مسح رسمي متعدد المصادر",
-    "confidence": "عالية",
-    "evidence_kind": "official-source-scan",
-    "evidence_ref": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
-    "retrieved_at": "2026-11-04T03:05:20Z",
-    "sources_checked": [
-      {
-        "source_id": "imo_confirmed",
-        "source": "IMO — قائمة الوقائع المؤكدة (القسم الرسمي الموضوعات الساخنة)",
-        "url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
-        "http_status": 200,
-        "invoked": true,
-        "result": "لا واقعة في هذا التاريخ",
-        "coverage_note": "القائمة الرسمية تغطي 2026-03-01 إلى 2026-10-23 (84 يومًا مؤرَّخًا · 122 واقعة)",
-        "retrieved_at": "2026-11-04T03:05:20Z"
-      },
-      {
-        "source_id": "ukmto",
-        "source": "UKMTO — البلاغات الرسمية (Recent Incidents)",
-        "url": "https://www.ukmto.org/recent-incidents",
-        "http_status": 403,
-        "invoked": true,
-        "result": "محجوب على الطلب الآلي — لا يُعدّ فحصًا",
-        "coverage_note": "curl يُرجع 403؛ مسار المتصفح في المشروع يجلب الصفحة (يُستخدم عند توفره)",
-        "retrieved_at": "2026-11-04T03:05:20Z"
-      }
-    ],
+    "code": "BF-2026-04-12-UKMTO-034",
+    "date": "2026-04-12",
+    "area": "البحر الأحمر",
+    "area_basis": "نص UKMTO — Suspicious Activity UKMTO #034 (الأرشيف الرسمي 2026): «UKMTO has received a report of an incident 54NM southwest of Al Hudaydah, Yemen.»؛ سجل المناطق أسند النص إلى «البحر الأحمر».",
+    "location": "UKMTO has received a report of an incident 54NM southwest of Al Hudaydah, Yemen.",
+    "location_phrase": "54NM southwest of Al Hudaydah",
+    "sector": "Z2 — باب المندب والبحر الأحمر",
+    "sector_id": "Z2",
+    "sector_basis": "جدول إسناد الملء الرجعي: تطابق «red sea» في نص المنتج الرسمي",
+    "class": "نشاط مشبوه",
+    "incident_kind": "نشاط مشبوه",
+    "incident_kind_basis": "تصنيف المنتج الرسمي: SUSPICIOUS ACTIVITY",
+    "counting_basis": "يُحتسب (بلاغ رسمي عن واقعة تمس سفينة أو ملاحة)",
+    "title": "UKMTO #034 — UKMTO has received a report of an incident 54NM southwest of Al Hudaydah, Yemen.",
+    "description": "UKMTO has received a report of an incident 54NM southwest of Al Hudaydah, Yemen.",
+    "source": "UKMTO — Suspicious Activity UKMTO #034 (الأرشيف الرسمي 2026)",
+    "source_url": "https://www.ukmto.org/-/media/ukmto/products/20260412_ukmto_warning_034-26.pdf?rev=bb52d0e1ed67431497d0f9799a9a8860",
+    "source_excerpt": "UKMTO has received a report of an incident 54NM southwest of Al Hudaydah, Yemen.",
+    "source_description": "UKMTO official product UKMTO #034 dated 12/04/2026.",
+    "evidence_kind": "official_source",
+    "evidence_ref": "https://www.ukmto.org/-/media/ukmto/products/20260412_ukmto_warning_034-26.pdf?rev=bb52d0e1ed67431497d0f9799a9a8860",
+    "retrieved_at": "2026-11-04T03:35:34Z",
+    "published_at": "2026-04-12",
+    "casualties": {
+      "fatalities": "لم يُعلن",
+      "injured": "لم يُعلن",
+      "missing": "لم يُعلن"
+    },
+    "casualty_scope": "not_announced",
     "update_of": null,
     "parent_id": null,
     "duplicate_of": null,
-    "event_kind": "جديد",
+    "event_kind": "legacy_projection",
     "link_basis": "لا دليل رابط",
     "link_evidence": "",
     "link_status": "غير مرتبط",
-    "counts_as_new": true
+    "counts_as_new": false
   }
 ]

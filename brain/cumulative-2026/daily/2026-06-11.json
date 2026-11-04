@@ -1,47 +1,42 @@
 [
   {
-    "code": "NI-2026-06-11",
-    "date": "2026-06-11",
-    "sector": "خارج القطاعات",
-    "class": "no_incident",
-    "no_incident": true,
     "backfilled": true,
-    "title": "لا واقعة مسجّلة في المصادر الرسمية المفحوصة",
-    "description": "لا واقعة مسجّلة في المصادر الرسمية المفحوصة لهذا التاريخ.",
-    "source": "مسح رسمي متعدد المصادر",
-    "confidence": "عالية",
-    "evidence_kind": "official-source-scan",
-    "evidence_ref": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
-    "retrieved_at": "2026-11-04T03:05:20Z",
-    "sources_checked": [
-      {
-        "source_id": "imo_confirmed",
-        "source": "IMO — قائمة الوقائع المؤكدة (القسم الرسمي الموضوعات الساخنة)",
-        "url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
-        "http_status": 200,
-        "invoked": true,
-        "result": "لا واقعة في هذا التاريخ",
-        "coverage_note": "القائمة الرسمية تغطي 2026-03-01 إلى 2026-10-23 (84 يومًا مؤرَّخًا · 122 واقعة)",
-        "retrieved_at": "2026-11-04T03:05:20Z"
-      },
-      {
-        "source_id": "ukmto",
-        "source": "UKMTO — البلاغات الرسمية (Recent Incidents)",
-        "url": "https://www.ukmto.org/recent-incidents",
-        "http_status": 403,
-        "invoked": true,
-        "result": "محجوب على الطلب الآلي — لا يُعدّ فحصًا",
-        "coverage_note": "curl يُرجع 403؛ مسار المتصفح في المشروع يجلب الصفحة (يُستخدم عند توفره)",
-        "retrieved_at": "2026-11-04T03:05:20Z"
-      }
-    ],
+    "code": "BF-2026-06-11-UKMTO-067",
+    "date": "2026-06-11",
+    "area": "خليج عُمان",
+    "area_basis": "نص UKMTO — Suspicious Activity UKMTO #067 (الأرشيف الرسمي 2026): «UKMTO has received a report of an incident 21NM northeast of Sohar, Oman.»؛ سجل المناطق أسند النص إلى «خليج عُمان».",
+    "location": "UKMTO has received a report of an incident 21NM northeast of Sohar, Oman.",
+    "location_phrase": "21NM northeast of Sohar",
+    "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
+    "sector_id": "Z1",
+    "sector_basis": "جدول إسناد الملء الرجعي: تطابق «gulf of oman» في نص المنتج الرسمي",
+    "class": "نشاط مشبوه",
+    "incident_kind": "نشاط مشبوه",
+    "incident_kind_basis": "تصنيف المنتج الرسمي: SUSPICIOUS ACTIVITY",
+    "counting_basis": "يُحتسب (بلاغ رسمي عن واقعة تمس سفينة أو ملاحة)",
+    "title": "UKMTO #067 — UKMTO has received a report of an incident 21NM northeast of Sohar, Oman.",
+    "description": "UKMTO has received a report of an incident 21NM northeast of Sohar, Oman.",
+    "source": "UKMTO — Suspicious Activity UKMTO #067 (الأرشيف الرسمي 2026)",
+    "source_url": "https://www.ukmto.org/-/media/ukmto/products/20260611-ukmto_warning_067-26.pdf?rev=7cceed4cbb054e6fb9b4a96bad49e8ac",
+    "source_excerpt": "UKMTO has received a report of an incident 21NM northeast of Sohar, Oman.",
+    "source_description": "UKMTO official product UKMTO #067 dated 11/06/2026.",
+    "evidence_kind": "official_source",
+    "evidence_ref": "https://www.ukmto.org/-/media/ukmto/products/20260611-ukmto_warning_067-26.pdf?rev=7cceed4cbb054e6fb9b4a96bad49e8ac",
+    "retrieved_at": "2026-11-04T03:35:34Z",
+    "published_at": "2026-06-11",
+    "casualties": {
+      "fatalities": "لم يُعلن",
+      "injured": "لم يُعلن",
+      "missing": "لم يُعلن"
+    },
+    "casualty_scope": "not_announced",
     "update_of": null,
     "parent_id": null,
     "duplicate_of": null,
-    "event_kind": "جديد",
+    "event_kind": "legacy_projection",
     "link_basis": "لا دليل رابط",
     "link_evidence": "",
     "link_status": "غير مرتبط",
-    "counts_as_new": true
+    "counts_as_new": false
   }
 ]

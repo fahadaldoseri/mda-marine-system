@@ -16,7 +16,12 @@
     "link_basis": "لا دليل رابط",
     "link_evidence": "",
     "link_status": "غير مرتبط",
-    "counts_as_new": true
+    "counts_as_new": true,
+    "evidence_ref": "https://www.ukmto.org/recent-incidents",
+    "source_url": "https://www.ukmto.org/recent-incidents",
+    "evidence_ref_kind": "source-home",
+    "evidence_note": "التغذية لا تحمل رابط الخبر بعينه؛ الرابط هو موقع المصدر",
+    "retrieved_at": "2026-10-21T18:04:51Z"
   },
   {
     "code": "MN-2026-10-21-02",
@@ -35,7 +40,12 @@
     "link_basis": "معرّف رسمي مشترك بين مصدرين",
     "link_evidence": "IMO 9345506",
     "link_status": "مرتبط",
-    "counts_as_new": false
+    "counts_as_new": false,
+    "evidence_ref": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+    "source_url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+    "evidence_ref_kind": "source-home",
+    "evidence_note": "التغذية لا تحمل رابط الخبر بعينه؛ الرابط هو موقع المصدر",
+    "retrieved_at": "2026-10-21T18:04:51Z"
   },
   {
     "code": "MN-2026-10-21-03",
@@ -43,7 +53,7 @@
     "area": "مضيق هرمز",
     "class": "رواية من طرف واحد",
     "title": "الحرس الثوري الإيراني يعلن أن ناقلتين وصفهما بـ«المخالفتين» اندلع فيهما حريق وتوقفتا بعد انفجار ألغام في نقطة عبور غير قانونية جنوب المضيق، بلا هوية سفينة ولا تأكيد مستقل",
-    "source": "رواية من طرف واحد — الحرس الثوري، منقولة عبر إعلام دولي",
+    "source": "الحرس الثوري",
     "confidence": "منخفضة",
     "sector_id": "Z1",
     "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
@@ -54,25 +64,13 @@
     "link_basis": "لا دليل رابط",
     "link_evidence": "",
     "link_status": "غير مرتبط",
-    "counts_as_new": true
-  },
-  {
-    "code": "MN-2026-10-21-04",
-    "date": "2026-10-21",
-    "area": "المنطقة كاملة",
-    "class": "مؤشرات",
-    "title": "برنت 109.48 دولارًا بارتفاع 0.21% عند 0003Z، و107 سفن واقفة بعيدًا عن المراسي عند 0022Z مقابل 130، وأحدث قياس عبور عبور 4 سفن في 18 أكتوبر مقابل خط أساس 85 يوميًا",
-    "source": "منصة (يُذكر اسم المصدر) مستقلة وبيانات تتبّع السفن (AIS)",
-    "confidence": "متوسطة",
-    "target": "سفينة",
-    "update_of": null,
-    "parent_id": null,
-    "duplicate_of": null,
-    "event_kind": "جديد",
-    "link_basis": "لا دليل رابط",
-    "link_evidence": "",
-    "link_status": "غير مرتبط",
-    "counts_as_new": true
+    "counts_as_new": true,
+    "retrieved_at": "2026-10-21T18:04:51Z",
+    "retrieved_at_basis": "feeds/feeds-2026-10-21.status.json written_utc",
+    "evidence_ref": "https://sepahnews.ir/",
+    "source_url": "https://sepahnews.ir/",
+    "evidence_ref_kind": "source-home",
+    "evidence_note": "التغذية نسبت الادعاء إلى الحرس الثوري وذكرت نقله عبر جهة غير مسمّاة، ولم تحمل رابط البيان بعينه؛ أُثبتت بوابة سباه نيوز الرسمية."
   },
   {
     "code": "MN-2026-10-21-05",
@@ -89,6 +87,11 @@
     "link_basis": "لا دليل رابط",
     "link_evidence": "",
     "link_status": "غير مرتبط",
-    "counts_as_new": true
+    "counts_as_new": true,
+    "evidence_ref": "https://hydrography.paknavy.gov.pk/navarea-ix-warnings/",
+    "source_url": "https://hydrography.paknavy.gov.pk/navarea-ix-warnings/",
+    "evidence_ref_kind": "source-home",
+    "evidence_note": "التغذية لا تحمل رابط الخبر بعينه؛ الرابط هو موقع المصدر",
+    "retrieved_at": "2026-10-21T18:04:51Z"
   }
 ]
