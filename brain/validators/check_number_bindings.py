@@ -53,7 +53,11 @@ def metric_value(brain: pathlib.Path, date: str, metric_id: str):
 # العدّادات الثمانية التي يولّدها tools/ledger_totals.py من دفتر الوقائع.
 CUMULATIVE_METRICS = [
     "ukmto-reports", "qualifying-incidents", "unconfirmed-narratives",
-    "confirmed-incidents", "deaths", "imo-confirmed-attacks",
+    "confirmed-incidents", "deaths",
+    # قرار المالك 2026-11-04: دُمجت بطاقة «هجمات IMO» في بطاقة «سجل الحوادث
+    # المؤكدة من IMO»، فصار المعرّف المنشور imo-confirmed-incidents،
+    # وأُضيف عدّاد وفيات البحّارة المستقل. القائمة تقرأ ما يولّده المولّد فعلًا.
+    "imo-confirmed-incidents", "imo-seafarer-deaths",
     "fire-incidents", "official-products",
 ]
 LEDGER_SOURCE = "cumulative-2026/event-ledger-master.json + ledger_totals"
@@ -143,7 +147,7 @@ def check_imo(brain: pathlib.Path, date: str, out: list, blockers: list) -> None
     out.append(("هجمات IMO المؤكدة (تراكمي)", declared, "appendices/imo-incidents.json", "تماسك المالك", "مطابق" if declared == len(rows) else "مخالف"))
 
     # (2) السطح المنشور: بطاقة العدّاد التراكمي
-    m, err = metric_value(brain, date, "imo-confirmed-attacks")
+    m, err = metric_value(brain, date, "imo-confirmed-incidents")
     if m is None:
         blockers.append(f"ربط هجمات IMO بلا سطح منشور: {err}")
     else:

@@ -15,6 +15,7 @@ from __future__ import annotations
 import argparse
 import datetime as _datetime
 import json
+import pathlib
 import re
 import sys
 from pathlib import Path
@@ -22,7 +23,24 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 RELATION_FIELDS = ("update_of", "parent_id", "duplicate_of")
 KIND_TO_FIELD = {"تحديث": "update_of", "تكرار": "duplicate_of", "فرع تابع": "parent_id"}
-ALLOWED_KINDS = set(KIND_TO_FIELD) | {"جديد"}
+
+# ك-507: مصدر واحد للأنواع المعتمدة = مخطط الدفتر نفسه. وصنف «تحديث بيانات» معتمد
+# بقرار المالك: صف يعلن تحديث أرقام تراكمية من مصدر رسمي، ليس واقعة ولا فرعًا تابعًا،
+# ولذلك لا يُطلب له حقل علاقة — ويُستبعد من سطح سجل الأحداث عند العرض.
+_SCHEMA_PATH = pathlib.Path(__file__).resolve().parents[1] / "schemas" / "daily-events.schema.json"
+RELATION_FREE_KINDS = {"جديد", "تحديث بيانات", "no_incident", "incident", "legacy_projection"}
+
+
+def _schema_event_kinds(fallback: tuple) -> tuple:
+    try:
+        spec = json.loads(_SCHEMA_PATH.read_text(encoding="utf-8"))
+        enum = spec["$defs"]["material_record"]["properties"]["event_kind"]["enum"]
+    except (OSError, ValueError, KeyError, TypeError):
+        return fallback
+    return tuple(enum) if isinstance(enum, list) and enum else fallback
+
+
+ALLOWED_KINDS = set(_schema_event_kinds(("جديد", "تحديث", "تكرار", "فرع تابع", "تحديث بيانات")))
 ABSENCE_RELATION_RE = re.compile(
     r"لا\s+فرع\s+تابع|فجوة\s+(?:بيانات\s+)?الربط|لم\s+تُنشأ\s+علاقة|"
     r"لا\s+توجد[^\n.]{0,100}علاقة|لم\s+يُعثر\s+على\s+الواقعة\s+السابقة"
@@ -170,7 +188,7 @@ def _check_schema(item: dict, codes: dict[str, dict], problems: list[str]) -> tu
         problems.append(f"event_kind غير معروف: {code} — {kind}")
         return None
     expected = KIND_TO_FIELD.get(kind)
-    if kind == "جديد" and present:
+    if kind in RELATION_FREE_KINDS and present:
         problems.append(f"event_kind جديد مع حقل علاقة: {code} — {', '.join(sorted(present))}")
     elif expected and expected not in present:
         problems.append(f"event_kind بلا الحقل المقابل: {code} — {kind} يحتاج {expected}")

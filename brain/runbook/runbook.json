@@ -1067,11 +1067,14 @@
           "sections/90-automation.md",
           "tools/daily_pipeline.sh",
           "tools/repair_ledger_prose.py",
-          "tools/derive_area_labels.py"
+          "tools/derive_area_labels.py",
+          "tools/backfill_ukmto_archive.py",
+          "tools/refresh_imo_incidents.py"
         ],
         "gates": [],
         "tests": [
-          "tests/test_classify_zones_damage_scope.py"
+          "tests/test_classify_zones_damage_scope.py",
+          "tests/test_map_points_nonspatial.py"
         ]
       },
       "on_fail": "stop",
@@ -2128,7 +2131,9 @@
           "tools/style_metrics.py"
         ],
         "gates": [],
-        "tests": []
+        "tests": [
+          "tests/test_style_chain_no_self_ban.py"
+        ]
       },
       "on_fail": "stop",
       "command": [
@@ -3635,7 +3640,8 @@
           "{site}/tests/test_2026_10_31_surface_contract.py",
           "tests/test_daily_event_surface.py",
           "tests/test_daily_events_schema.py",
-          "tests/test_event_card_contract.py"
+          "tests/test_event_card_contract.py",
+          "tests/test_owner9_imo_cards.py"
         ]
       },
       "on_fail": "stop",

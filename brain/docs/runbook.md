@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة 05a099d4606997c7). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة b052b11196f03e29). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -22,7 +22,7 @@
 | S050 | فحص العقوبات (OFAC) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S050.log | أ1 — سلسلة التشغيل اليومي | tools/ofac_screen.py، sections/90-automation.md | stop |
 | W020 | بناء ملف واجهة التقرير | agent | reports/{date}-sectioned.md، templates/mark-schema.json | web/meta/{date}.json | min_bytes:web/meta/{date}.json | ب2 — ترتيب الأقسام | templates/mark-schema.json | stop |
 | W030 | بناء دفتر اليوم (وقائع ومقتطفات الأصل) | agent | reports/{date}-sectioned.md، feeds/feeds-{date}.json | cumulative-2026/daily/{date}.json | min_bytes:cumulative-2026/daily/{date}.json | ف1–ف5 — بوابة التحقق | tools/ledger_source_excerpt.py، cumulative-2026/daily/ | stop |
-| S070 | دمج الذاكرة التراكمية (دفتر اليوم) | script | cumulative-2026/daily/{date}.json، appendices/zone-registry.json، appendices/zone-overrides.json، appendices/threat-scale.json | web/zones/{date}.json، web/meta/{date}.json | cmd:bash -lc test -s logs/runbook/{date}/S070.log | أ1 — سلسلة التشغيل اليومي | tools/merge_ledger_daily.py، tools/ledger_link_fields.py، sections/90-automation.md، tools/daily_pipeline.sh، tools/repair_ledger_prose.py، tools/derive_area_labels.py | stop |
+| S070 | دمج الذاكرة التراكمية (دفتر اليوم) | script | cumulative-2026/daily/{date}.json، appendices/zone-registry.json، appendices/zone-overrides.json، appendices/threat-scale.json | web/zones/{date}.json، web/meta/{date}.json | cmd:bash -lc test -s logs/runbook/{date}/S070.log | أ1 — سلسلة التشغيل اليومي | tools/merge_ledger_daily.py، tools/ledger_link_fields.py، sections/90-automation.md، tools/daily_pipeline.sh، tools/repair_ledger_prose.py، tools/derive_area_labels.py، tools/backfill_ukmto_archive.py، tools/refresh_imo_incidents.py | stop |
 | S071 | حارس استمرارية دفتر الوقائع | script | cumulative-2026/daily/{date}.json، cumulative-2026/event-ledger-master.json، cumulative-2026/no-material.json |  | cmd:python3 validators/check_ledger_continuity.py --date {date} | أ1 — سلسلة التشغيل اليومي | validators/check_ledger_continuity.py، cumulative-2026/daily/، cumulative-2026/event-ledger-master.json، cumulative-2026/no-material.json | stop |
 | S072 | اشتقاق روابط الوقائع وتسجيل المعرّفات الرسمية (فشل مغلق) | script | cumulative-2026/daily/، cumulative-2026/event-ledger-sectioned-2026-02-28-to-2026-10-11.json، schemas/daily-events.schema.json | cumulative-2026/daily/ | cmd:python3 tools/derive_event_links.py --apply | أ1 — سلسلة التشغيل اليومي | tools/derive_event_links.py، validators/check_event_links.py، schemas/daily-events.schema.json | stop |
 | W040 | علامة التشغيل اليومية (pipeline mark) | script |  |  | min_bytes:logs/pipeline-{date}.json | ف1–ف5 — بوابة التحقق | tools/write_mark.py | stop |

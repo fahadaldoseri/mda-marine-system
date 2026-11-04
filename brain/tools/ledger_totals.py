@@ -35,9 +35,13 @@ METRIC_TITLES = {
     "unconfirmed-narratives": "روايات لم تتأكد",
     "confirmed-incidents": "وقائع مؤكدة",
     "deaths": "الوفيات المسجّلة",
+    "imo-confirmed-incidents": "سجل الحوادث المؤكدة من IMO",
+    "imo-seafarer-deaths": "أعداد الوفيات من IMO",
     "fire-incidents": "حرائق السفن",
     "official-products": "منتجات UKMTO وJMIC المرصودة",
 }
+
+IMO_URL = "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx"
 
 # These are the governed maritime-event concepts used by the existing ledger
 # classifier.  A hit is never enough by itself: a maritime or navigational
@@ -253,6 +257,18 @@ def source_text(event: dict[str, Any]) -> str:
     return " ".join(source_values(event))
 
 
+def source_mentions(source: str, token: str) -> bool:
+    """Match a governed source token despite handle/URL separators.
+
+    Source records use both ``UKMTO`` and the official X handle ``UK_MTO``.
+    Removing non-alphanumeric ASCII separators lets both spellings resolve to
+    the same source without broadening the match to an unrelated Arabic word.
+    """
+    compact_source = re.sub(r"[^a-z0-9]+", "", str(source).casefold())
+    compact_token = re.sub(r"[^a-z0-9]+", "", str(token).casefold())
+    return bool(compact_token) and compact_token in compact_source
+
+
 def event_text(event: dict[str, Any]) -> str:
     fields = (
         "title",
@@ -320,12 +336,12 @@ def fire(event: dict[str, Any]) -> bool:
 
 
 def direct_ukmto(event: dict[str, Any]) -> bool:
-    return "ukmto" in source_text(event).lower()
+    return source_mentions(source_text(event), "ukmto")
 
 
 def official_product(event: dict[str, Any]) -> bool:
-    source = source_text(event).lower()
-    return "ukmto" in source or "jmic" in source
+    source = source_text(event)
+    return source_mentions(source, "ukmto") or source_mentions(source, "jmic")
 
 
 def source_date(event: dict[str, Any]) -> dt.date | None:
@@ -397,31 +413,52 @@ def make_metric(
     }
 
 
-def make_imo_attacks(today: dt.date) -> dict[str, Any]:
-    """مقياس «هجمات مؤكدة على سفن» من القائمة الرسمية للمنظمة البحرية الدولية.
+def _load_imo_source() -> dict[str, Any] | None:
+    if not IMO_PATH.exists():
+        return None
+    try:
+        data = json.loads(IMO_PATH.read_text(encoding="utf-8"))
+    except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError):
+        return None
+    return data if isinstance(data, dict) else None
 
-    المصدر الحاكم الوحيد هو ``appendices/imo-incidents.json``؛ الرقم لا يُشتق من
-    دفتر المشروع لأن معيار القائمة الرسمية مختلف، ولذلك تُثبَّت المقارنة كتحذير.
-    """
+
+def _imo_as_at_date(data: dict[str, Any]) -> dt.date | None:
+    """تحويل source.as_at (مثل «3 November 2026») إلى تاريخ قابل للمقارنة."""
+    raw = str((data.get("source") or {}).get("as_at") or "").strip()
+    match = re.search(r"(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})", raw)
+    if not match:
+        return None
+    try:
+        month = dt.datetime.strptime(match.group(2), "%B").month
+        return dt.date(int(match.group(3)), month, int(match.group(1)))
+    except (ValueError, TypeError):
+        return None
+
+
+def _imo_previous_total(data: dict[str, Any], key: str) -> int | None:
+    previous = data.get("previous") or {}
+    totals = previous.get("totals") if isinstance(previous, dict) else {}
+    value = totals.get(key) if isinstance(totals, dict) else None
+    return value if isinstance(value, int) and not isinstance(value, bool) else None
+
+
+def make_imo_attacks(today: dt.date) -> dict[str, Any]:
+    """مقياس سجل الحوادث المؤكدة من القائمة الرسمية للمنظمة البحرية الدولية."""
     base = {
-        "id": "imo-confirmed-attacks",
-        "title": "هجمات مؤكدة على سفن",
+        "id": "imo-confirmed-incidents",
+        "title": "سجل الحوادث المؤكدة من IMO",
         "today": None,
         "cumulative": None,
         "updated": None,
         "definition": "واقعة مؤكدة على سفينة تجارية مدرجة في قائمة المنظمة البحرية الدولية الرسمية.",
         "basis": "عدّ مباشر من القائمة الرسمية للمنظمة البحرية الدولية (appendices/imo-incidents.json)؛ لا تُرفع فيها الروايات ولا تُحتسب غير المؤكدة.",
-        "sources": ["appendices/imo-incidents.json"],
+        "sources": ["appendices/imo-incidents.json", IMO_URL],
         "confidence": "عالية",
     }
-    if not IMO_PATH.exists():
-        base["basis"] += " ملف القائمة الرسمية مفقود؛ لذلك القيمتان null."
-        base["confidence"] = "غير متاح"
-        return base
-    try:
-        data = json.loads(IMO_PATH.read_text(encoding="utf-8"))
-    except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError):
-        base["basis"] += " تعذّرت قراءة ملف القائمة الرسمية؛ لذلك القيمتان null."
+    data = _load_imo_source()
+    if data is None:
+        base["basis"] += " ملف القائمة الرسمية مفقود أو غير صالح؛ لذلك القيمتان null."
         base["confidence"] = "غير متاح"
         return base
     incidents = data.get("incidents") or []
@@ -429,43 +466,50 @@ def make_imo_attacks(today: dt.date) -> dict[str, Any]:
     cumulative = totals.get("confirmed_incidents")
     if cumulative is None:
         cumulative = len(incidents)
-    month_en = today.strftime("%B")
-    month_ar = {"January": "يناير", "February": "فبراير", "March": "مارس", "April": "أبريل",
-                "May": "مايو", "June": "يونيو", "July": "يوليو", "August": "أغسطس",
-                "September": "سبتمبر", "October": "أكتوبر", "November": "نوفمبر",
-                "December": "ديسمبر"}.get(month_en, month_en)
-    day_hits = 0
-    for inc in incidents:
-        raw = str(inc.get("date") or "").strip()
-        nums = re.findall(r"\d+", raw)
-        if not nums:
-            continue
-        if int(nums[0]) != today.day:
-            continue
-        if month_en.lower() in raw.lower() or month_ar in raw:
-            day_hits += 1
-    stamp = None
-    explicit = data.get("retrieved")
-    if explicit:
-        try:
-            stamp = dt.date.fromisoformat(str(explicit))
-        except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError):
-            stamp = None
-    if stamp is None:
-        try:
-            stamp = dt.date.fromtimestamp(IMO_PATH.stat().st_mtime)
-        except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError):
-            stamp = None
+    previous = _imo_previous_total(data, "confirmed_incidents")
+    day_hits = cumulative - previous if previous is not None else 0
+    stamp = _imo_as_at_date(data)
     base.update({
         "today": day_hits,
         "cumulative": cumulative,
         "updated": stamp.isoformat() if stamp else None,
     })
-    base["basis"] += " قاعدة updated: تاريخ آخر تحديث لملف القائمة الرسمية (mtime) لأن القائمة تُؤرَّخ بيوم وشهر بلا سنة."
+    base["basis"] += " قاعدة today: الفرق بين totals الحالية وprevious.totals؛ قاعدة updated: source.as_at في الصفحة الرسمية."
     base["definition"] = data.get("definition") or base["definition"]
     warn = data.get("comparison_warning")
     if warn:
         base["basis"] += " " + str(warn)
+    return base
+
+
+def make_imo_deaths(today: dt.date) -> dict[str, Any]:
+    """مقياس وفيات البحارة من نفس سجل IMO الرسمي، بلا اشتقاق من دفتر الوقائع."""
+    base = {
+        "id": "imo-seafarer-deaths",
+        "title": "أعداد الوفيات من IMO",
+        "today": None,
+        "cumulative": None,
+        "updated": None,
+        "definition": "عدد وفيات البحارة المؤكد في القائمة الرسمية للمنظمة البحرية الدولية.",
+        "basis": "عدّ مباشر من القائمة الرسمية للمنظمة البحرية الدولية (appendices/imo-incidents.json)؛ لا يُستنتج من دفتر المشروع.",
+        "sources": ["appendices/imo-incidents.json", IMO_URL],
+        "confidence": "عالية",
+    }
+    data = _load_imo_source()
+    if data is None:
+        base["basis"] += " ملف القائمة الرسمية مفقود أو غير صالح؛ لذلك القيمتان null."
+        base["confidence"] = "غير متاح"
+        return base
+    totals = data.get("totals") or {}
+    cumulative = totals.get("confirmed_seafarer_deaths")
+    previous = _imo_previous_total(data, "confirmed_seafarer_deaths")
+    stamp = _imo_as_at_date(data)
+    base.update({
+        "today": cumulative - previous if isinstance(cumulative, int) and previous is not None else 0,
+        "cumulative": cumulative if isinstance(cumulative, int) else None,
+        "updated": stamp.isoformat() if stamp else None,
+    })
+    base["basis"] += " قاعدة today: الفرق بين totals الحالية وprevious.totals؛ قاعدة updated: source.as_at في الصفحة الرسمية."
     return base
 
 
@@ -552,6 +596,7 @@ def build_payload(target: dt.date) -> tuple[dict[str, Any], dict[str, Any]]:
         ),
         make_deaths(range_rows, target),
         make_imo_attacks(target),
+        make_imo_deaths(target),
         make_metric(
             "fire-incidents",
             range_rows,

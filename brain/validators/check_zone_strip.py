@@ -74,10 +74,14 @@ class _ZoneStripParser:
                 self.strip_depth = depth
         if self.strip_depth is not None and tag == "li" and self.zone_depth is None:
             self.zone_depth = depth
-            self.current = {"id": "", "metrics": {}}
+            # المعرّف الآلي يُقرأ من سمة البيانات (لا من نص مرئي) لأن قرار المالك
+            # يمنع عرض رموز القطاعات للقارئ؛ ويُقبل وسم zs-id القديم للتوافق.
+            self.current = {"id": _norm(attrs.get("data-zone-id") or ""), "name": "", "metrics": {}}
         if self.zone_depth is not None and tag == "span":
             field = None
-            if "zs-id" in classes:
+            if "zs-nm" in classes:
+                field = "name"
+            elif "zs-id" in classes:
                 field = "id"
             elif "zs-p" in classes:
                 field = "metric"
@@ -93,7 +97,9 @@ class _ZoneStripParser:
             field, depth, parts = self.capture
             if len(self.stack) == depth:
                 text = _norm(" ".join(parts))
-                if field == "id" and self.current is not None:
+                if field == "name" and self.current is not None:
+                    self.current["name"] = text
+                elif field == "id" and self.current is not None and not self.current.get("id"):
                     self.current["id"] = text
                 elif field == "metric" and self.current is not None:
                     self._add_metric(text)
@@ -162,23 +168,34 @@ def validate_zone_strip(page_html: str, source: dict) -> list[str]:
     if not isinstance(source_zones, list) or not source_zones:
         return ["مصدر القطاعات مفقود أو بلا قائمة قطاعات"]
     expected: dict[str, dict[str, int]] = {}
+    by_name: dict[str, str] = {}
     for zone in source_zones:
         if not isinstance(zone, dict) or not str(zone.get("id") or "").strip():
             errors.append("مصدر القطاعات يحوي قطاعًا بلا معرّف")
             continue
         zone_id = str(zone["id"])
+        zone_name = _norm(zone.get("name") or "")
         if zone_id in expected:
             errors.append(f"معرّف قطاع مكرر في المصدر: {zone_id}")
             continue
+        if zone_name:
+            if zone_name in by_name:
+                errors.append(f"اسم قطاع مكرر في المصدر: {zone_name}")
+            by_name[zone_name] = zone_id
         counts, count_errors = _source_counts(zone)
         errors.extend(count_errors)
         if counts is not None:
             expected[zone_id] = counts
     seen: list[str] = []
     for row in parser.zones:
-        zone_id = row.get("id", "")
+        # الهوية بالاسم المرئي أولًا: رموز القطاعات ممنوعة على سطح القارئ
+        # فتُنقّى من الوسوم، ويبقى الاسم ثابتًا وقابلًا للمطابقة.
+        row_name = _norm(row.get("name") or "")
+        zone_id = by_name.get(row_name, "") if row_name else ""
         if not zone_id:
-            errors.append("صف في شريط القطاعات بلا معرّف")
+            zone_id = _norm(row.get("id") or "")
+        if not zone_id:
+            errors.append(f"صف في شريط القطاعات بلا معرّف مطابق للمصدر: {row_name or 'بلا اسم'}")
             continue
         if zone_id in seen:
             errors.append(f"قطاع مكرر في شريط النسب: {zone_id}")

@@ -5,6 +5,7 @@ import pathlib
 import re
 import os
 import tempfile
+import json
 SITE_ROOT = pathlib.Path(__file__).resolve().parents[1].parent / "seawatch"
 import sys
 import unittest
@@ -19,6 +20,26 @@ sys.path.insert(0, str(SITE_ROOT / "generator"))
 from i18n_en import translate_page  # noqa: E402
 import build_report as site_build_report  # noqa: E402
 
+
+
+def _all_cards(reg: dict) -> list[dict]:
+    """كل بطاقات العقد في قائمة واحدة (تعاودي: البطاقات قد تكون متداخلة)."""
+    out: list[dict] = []
+
+    def walk(node) -> None:
+        if isinstance(node, dict):
+            if node.get("counters") and node.get("target_section"):
+                out.append(node)
+            elif node.get("id") and ("title" in node or "layers" in node):
+                out.append(node)
+            for value in node.values():
+                walk(value)
+        elif isinstance(node, list):
+            for item in node:
+                walk(item)
+
+    walk(reg)
+    return out
 
 
 def _latest_day() -> str:
@@ -54,20 +75,20 @@ ZONES_DATA = {
 AR_REPORT = """
 <html lang="ar"><body>
 <section class="tz" aria-label="مستوى التهديد">
-  <header class="tz-head"><h3>مستوى التهديد</h3></header>
+  <header class="tz-head"><div class="tz-title">المستوى الحالي</div></header>
   <ul class="tz-zones"><li>Z1</li><li>Z2</li><li>Z3</li><li>Z4</li></ul>
-  <p class="tz-count">العدّاد: وقائع مؤهّلة <span class="bidi">4</span> · مؤكدة <span class="bidi">1</span> · مرجّحة <span class="bidi">1</span> · مستثناة <span class="bidi">11</span> · غير مكانية <span class="bidi">1</span> · إجمالي <span class="bidi">16</span></p>
+  <p class="tz-count">العدّاد: وقائع مؤهّلة <span class="bidi">4</span> · مؤكدة <span class="bidi">1</span> · مرجّحة <span class="bidi">1</span> · مستثناة <span class="bidi">11</span> · موقع غير محدد <span class="bidi">1</span> · إجمالي <span class="bidi">16</span></p>
 </section>
-<div class="sc-card" aria-label="أهم الأخبار المتعلقة بالأمن البحري">
-  <div class="sc-row"><div class="sc-l">خلال 24 ساعة السابقة</div><div class="sc-more">6 بنود <a href="/additions.html#sec-00" data-goto="ما تغيّر منذ التقرير السابق">التفاصيل</a></div></div>
-  <div class="sc-row"><div class="sc-l">التحذيرات والتنبيهات النشطة</div><div class="sc-more">تحذيران <a href="/additions.html#sec-warnings" data-goto="التحذيرات والتنبيهات النشطة">القسم الرسمي</a></div></div>
-  <div class="sc-row"><div class="sc-l">ما يُراقب خلال 24 ساعة</div><div class="sc-more">بند واحد <a href="/additions.html#sec-monitoring" data-goto="المراقبة المستمرة">قسم المراقبة</a></div></div>
-</div>
 </body></html>
 """
 
 AR_ADDITIONS = """
 <html lang="ar"><body>
+<div class="sc-card" data-kpi-id="maritime-security-news" aria-label="أهم الأخبار المتعلقة بالأمن البحري">
+  <div class="sc-row"><div class="sc-l">خلال 24 ساعة السابقة</div><div class="sc-more">6 بنود <a href="/additions.html#sec-00" data-goto="ما تغيّر منذ التقرير السابق">التفاصيل</a></div></div>
+  <div class="sc-row"><div class="sc-l">التحذيرات والتنبيهات النشطة</div><div class="sc-more">تحذيران <a href="/additions.html#sec-warnings" data-goto="التحذيرات والتنبيهات النشطة">القسم الرسمي</a></div></div>
+  <div class="sc-row"><div class="sc-l">ما يُراقب خلال 24 ساعة</div><div class="sc-more">بند واحد <a href="/additions.html#sec-monitoring" data-goto="المراقبة المستمرة">قسم المراقبة</a></div></div>
+</div>
 <section id="sec-00"><h2>ما تغيّر منذ التقرير السابق</h2><ul><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li></ul></section>
 <section id="sec-warnings"><h2>التحذيرات والتنبيهات النشطة</h2><table><thead><tr><th>الجهة</th><th>النص</th></tr></thead><tbody><tr><td>UKMTO</td><td>النص الرسمي الأول</td></tr><tr><td>JMIC</td><td>النص الرسمي الثاني</td></tr></tbody></table></section>
 <section id="sec-monitoring"><h2>المراقبة المستمرة</h2><p>متابعة الجهات الرسمية والبلاغات ذات الصلة.</p></section>
@@ -77,20 +98,20 @@ AR_ADDITIONS = """
 EN_REPORT = """
 <html lang="en"><body>
 <section class="tz" aria-label="Threat level">
-  <header class="tz-head"><h3>Threat level</h3></header>
+  <header class="tz-head"><div class="tz-title">Current level</div></header>
   <ul class="tz-zones"><li>Z1</li><li>Z2</li><li>Z3</li><li>Z4</li></ul>
-  <p class="tz-count">Counter: qualifying incidents <span class="bidi">4</span> · confirmed <span class="bidi">1</span> · probable <span class="bidi">1</span> · excluded <span class="bidi">11</span> · non-spatial <span class="bidi">1</span> · total <span class="bidi">16</span></p>
+  <p class="tz-count">Counter: qualifying incidents <span class="bidi">4</span> · confirmed <span class="bidi">1</span> · probable <span class="bidi">1</span> · excluded <span class="bidi">11</span> · location not specified <span class="bidi">1</span> · total <span class="bidi">16</span></p>
 </section>
-<div class="sc-card" aria-label="Top maritime security news">
-  <div class="sc-row"><div class="sc-l">During the previous 24 hours</div><div class="sc-more">6 items <a href="/reports/en/additions.html#sec-00" data-goto="What changed since the previous report">Details</a></div></div>
-  <div class="sc-row"><div class="sc-l">Active warnings and advisories</div><div class="sc-more">2 rows <a href="/reports/en/additions.html#sec-warnings" data-goto="Active Warnings and Advisories">Official section</a></div></div>
-  <div class="sc-row"><div class="sc-l">What is monitored over the next 24 hours</div><div class="sc-more">1 item <a href="/reports/en/additions.html#sec-monitoring" data-goto="Continuous Monitoring">Monitoring section</a></div></div>
-</div>
 </body></html>
 """
 
 EN_ADDITIONS = """
 <html lang="en"><body>
+<div class="sc-card" data-kpi-id="maritime-security-news" aria-label="Top maritime security news">
+  <div class="sc-row"><div class="sc-l">During the previous 24 hours</div><div class="sc-more">6 items <a href="/reports/en/additions.html#sec-00" data-goto="What changed since the previous report">Details</a></div></div>
+  <div class="sc-row"><div class="sc-l">Active warnings and advisories</div><div class="sc-more">2 rows <a href="/reports/en/additions.html#sec-warnings" data-goto="Active Warnings and Advisories">Official section</a></div></div>
+  <div class="sc-row"><div class="sc-l">What is monitored over the next 24 hours</div><div class="sc-more">1 item <a href="/reports/en/additions.html#sec-monitoring" data-goto="Continuous Monitoring">Monitoring section</a></div></div>
+</div>
 <section id="sec-00"><h2>What changed since the previous report</h2><ul><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li></ul></section>
 <section id="sec-warnings"><h2>Active Warnings and Advisories</h2><table><tbody><tr><td>UKMTO</td><td>Official text one</td></tr><tr><td>JMIC</td><td>Official text two</td></tr></tbody></table></section>
 <section id="sec-monitoring"><h2>Continuous Monitoring</h2><p>Monitor official updates and relevant reports.</p></section>
@@ -112,6 +133,7 @@ class CardCounterGateTests(unittest.TestCase):
         policy = {
             "required_in_report": ["مستوى التهديد"],
             "required_in_additions": [
+                "أهم الأخبار المتعلقة بالأمن البحري",
                 "ما تغيّر منذ التقرير السابق",
                 "التحذيرات والتنبيهات النشطة",
                 "المراقبة المستمرة",
@@ -125,6 +147,7 @@ class CardCounterGateTests(unittest.TestCase):
         policy = {
             "required_in_report": ["مستوى التهديد"],
             "required_in_additions": [
+                "أهم الأخبار المتعلقة بالأمن البحري",
                 "ما تغيّر",
                 "التحذيرات والتنبيهات النشطة",
                 "المراقبة المستمرة",
@@ -180,11 +203,11 @@ class CardCounterGateTests(unittest.TestCase):
 
     def test_negative_anchor_rule_rejects_section_id_that_lands_on_other_heading(self):
         docs = self.docs()
-        docs["ar_report"] = docs["ar_report"].replace(
+        docs["ar_additions"] = docs["ar_additions"].replace(
             "#sec-monitoring\" data-goto=\"المراقبة المستمرة",
             "#sec-warnings\" data-goto=\"المراقبة المستمرة",
         )
-        docs["en_report"] = docs["en_report"].replace(
+        docs["en_additions"] = docs["en_additions"].replace(
             "#sec-monitoring\" data-goto=\"Continuous Monitoring",
             "#sec-warnings\" data-goto=\"Continuous Monitoring",
         )
@@ -207,16 +230,6 @@ class CardCounterGateTests(unittest.TestCase):
             registry_path = Path(tmp) / "card_registry.json"
             registry_path.write_text(json.dumps(registry, ensure_ascii=False), encoding="utf-8")
             docs = self.docs()
-            docs["ar_report"] = docs["ar_report"].replace("5 بنود", "بند واحد", 1)
-            docs["en_report"] = docs["en_report"].replace("5 items", "1 item", 1)
-            docs["ar_report"] = docs["ar_report"].replace(
-                "#sec-04-sub-02\" data-goto=\"علامات الإنذار المبكر 24–72 ساعة",
-                "#sec-monitoring\" data-goto=\"المراقبة المستمرة",
-            )
-            docs["en_report"] = docs["en_report"].replace(
-                "#sec-04-sub-02\" data-goto=\"Early-warning indicators 24–72 hours",
-                "#sec-monitoring\" data-goto=\"Continuous Monitoring",
-            )
             docs["ar_additions"] = docs["ar_additions"].replace(
                 "</body>", '<section id="sec-monitoring"><h2>المراقبة المستمرة</h2><p>متابعة الجهات الرسمية والبلاغات ذات الصلة.</p></section></body>'
             )
@@ -225,7 +238,7 @@ class CardCounterGateTests(unittest.TestCase):
             )
             policy = {
                 "required_in_report": ["مستوى التهديد"],
-                "required_in_additions": ["ما تغيّر", "التحذيرات والتنبيهات النشطة", "المراقبة المستمرة"],
+                "required_in_additions": ["أهم الأخبار المتعلقة بالأمن البحري", "ما تغيّر", "التحذيرات والتنبيهات النشطة", "المراقبة المستمرة"],
             }
             errors = validate_card_documents(**docs, registry_path=registry_path, sections_policy=policy)
         self.assertEqual(errors, [])
@@ -246,11 +259,11 @@ class CardCounterGateTests(unittest.TestCase):
             registry_path = Path(tmp) / "card_registry.json"
             registry_path.write_text(json.dumps(registry, ensure_ascii=False), encoding="utf-8")
             docs = self.docs()
-            docs["ar_report"] = docs["ar_report"].replace(
+            docs["ar_additions"] = docs["ar_additions"].replace(
                 "#sec-monitoring\" data-goto=\"المراقبة المستمرة",
                 "#sec-00\" data-goto=\"المراقبة المستمرة",
             )
-            docs["en_report"] = docs["en_report"].replace(
+            docs["en_additions"] = docs["en_additions"].replace(
                 "#sec-monitoring\" data-goto=\"Continuous Monitoring",
                 "#sec-00\" data-goto=\"Continuous Monitoring",
             )
@@ -262,20 +275,66 @@ class CardCounterGateTests(unittest.TestCase):
             )
             policy = {
                 "required_in_report": ["مستوى التهديد"],
-                "required_in_additions": ["ما تغيّر", "التحذيرات والتنبيهات النشطة", "المراقبة المستمرة"],
+                "required_in_additions": ["أهم الأخبار المتعلقة بالأمن البحري", "ما تغيّر", "التحذيرات والتنبيهات النشطة", "المراقبة المستمرة"],
             }
             errors = validate_card_documents(**docs, registry_path=registry_path, sections_policy=policy)
         self.assertTrue(any("مرسا" in error or "عداد" in error for error in errors), errors)
 
     def test_stale_fragment_uses_policy_surface_and_data_goto_title(self):
         docs = self.docs()
-        docs["ar_report"] = docs["ar_report"].replace("#sec-04-sub-02", "#legacy-watch-anchor", 1)
-        docs["en_report"] = docs["en_report"].replace("#sec-04-sub-02", "#legacy-watch-anchor", 1)
+        docs["ar_additions"] = docs["ar_additions"].replace("#sec-04-sub-02", "#legacy-watch-anchor", 1)
+        docs["en_additions"] = docs["en_additions"].replace("#sec-04-sub-02", "#legacy-watch-anchor", 1)
         errors = validate_card_documents(**docs)
         self.assertEqual(errors, [])
 
     def test_positive_registry_matches_both_enabled_cards(self):
         self.assertEqual(validate_card_documents(**self.docs()), [])
+
+    def test_news_card_missing_from_declared_additions_surface_fails_closed(self):
+        import copy
+        with tempfile.TemporaryDirectory() as tmp:
+            registry = copy.deepcopy(json.loads((ROOT / "appendices/card_registry.json").read_text(encoding="utf-8")))
+            news = next(card for card in registry["cards"] if card["id"] == "maritime-security-news")
+            news["page_component"]["surface"] = "additions"
+            registry_path = Path(tmp) / "card_registry.json"
+            registry_path.write_text(json.dumps(registry, ensure_ascii=False), encoding="utf-8")
+            policy = {
+                "required_in_report": ["مستوى التهديد"],
+                "required_in_additions": [
+                    "أهم الأخبار المتعلقة بالأمن البحري",
+                    "ما تغيّر منذ التقرير السابق",
+                    "التحذيرات والتنبيهات النشطة",
+                    "المراقبة المستمرة",
+                ],
+            }
+            docs = self.docs()
+            docs["ar_additions"] = docs["ar_additions"].replace(
+                '<div class="sc-card" data-kpi-id="maritime-security-news"',
+                '<div class="moved-card" data-kpi-id="maritime-security-news"',
+                1,
+            )
+            docs["en_additions"] = docs["en_additions"].replace(
+                '<div class="sc-card" data-kpi-id="maritime-security-news"',
+                '<div class="moved-card" data-kpi-id="maritime-security-news"',
+                1,
+            )
+            errors = validate_card_documents(**docs, registry_path=registry_path, sections_policy=policy)
+        self.assertTrue(any("maritime-security-news" in error and ("مفقودة" in error or "سطح" in error)
+                            for error in errors), errors)
+
+    def test_zone_component_outside_target_section_fails_closed(self):
+        docs = self.docs()
+        docs["ar_report"] = docs["ar_report"].replace(
+            '<section class="tz" aria-label="مستوى التهديد">',
+            '<section id="wrong-section"><h2>قسم آخر</h2><section class="tz" aria-label="مستوى التهديد">',
+            1,
+        ).replace(
+            '</section>\n</body>',
+            '</section></section>\n</body>',
+            1,
+        )
+        errors = validate_card_documents(**docs)
+        self.assertTrue(any("مرسا" in error and "القطاعات" in error for error in errors), errors)
 
     def test_registry_contains_two_enabled_cards(self):
         import json
@@ -305,33 +364,37 @@ class CardCounterGateTests(unittest.TestCase):
 
     def test_negative_counter_change_fails_closed(self):
         docs = self.docs()
-        docs["ar_report"] = docs["ar_report"].replace("6 بنود", "5 بنود", 1)
+        docs["ar_additions"] = docs["ar_additions"].replace("6 بنود", "5 بنود", 1)
         errors = validate_card_documents(**docs)
         self.assertTrue(any("خلال 24 ساعة السابقة" in e and "6" in e and "5" in e for e in errors), errors)
 
     def test_negative_anchor_title_change_fails_closed(self):
         docs = self.docs()
-        docs["ar_report"] = docs["ar_report"].replace("#sec-monitoring", "#sec-warnings", 1)
+        docs["ar_additions"] = docs["ar_additions"].replace("#sec-monitoring", "#sec-warnings", 1)
         errors = validate_card_documents(**docs)
         self.assertTrue(any("مرسا" in e or "عداد" in e for e in errors), errors)
 
     def test_negative_arabic_counter_grammar_fails_closed(self):
         docs = self.docs()
-        docs["ar_report"] = docs["ar_report"].replace("تحذيران", "2 صفوف", 1)
+        docs["ar_additions"] = docs["ar_additions"].replace("تحذيران", "2 صفوف", 1)
         errors = validate_card_documents(**docs)
         self.assertTrue(any("صياغة" in e and "التحذيرات" in e for e in errors), errors)
 
     def test_negative_arabic_card_latin_outside_allowlist_fails_closed(self):
         docs = self.docs()
-        docs["ar_report"] = docs["ar_report"].replace("تحذيران <a", "تحذيران XYZ <a", 1)
+        docs["ar_additions"] = docs["ar_additions"].replace("تحذيران <a", "تحذيران XYZ <a", 1)
         errors = validate_card_documents(**docs)
         self.assertTrue(any("لاتينية" in e and "التحذيرات" in e for e in errors), errors)
 
-    def test_zone_heading_anchor_drift_fails_closed(self):
+    def test_zone_internal_label_is_not_anchor(self):
         docs = self.docs()
-        docs["ar_report"] = docs["ar_report"].replace("<h3>مستوى التهديد", "<h3>عنوان منحرف", 1)
+        docs["ar_report"] = docs["ar_report"].replace(
+            '<div class="tz-title">المستوى الحالي</div>',
+            '<div class="tz-title">عنوان وصفي آخر</div>',
+            1,
+        )
         errors = validate_card_documents(**docs)
-        self.assertTrue(any("مرسا" in e and "القطاعات" in e for e in errors), errors)
+        self.assertEqual(errors, [])
 
     def test_arabic_counter_forms_remain_strict(self):
         expected = {"لا بنود": 0, "بند واحد": 1, "بندان": 2, "3 بنود": 3, "لا تحذيرات": 0, "تحذير واحد": 1, "تحذيران": 2, "3 تحذيرات": 3}
@@ -340,9 +403,13 @@ class CardCounterGateTests(unittest.TestCase):
         self.assertIsNone(_counter("2 صفوف · التفاصيل", "ar"))
 
     def test_english_threat_counter_is_generated_from_all_registered_labels(self):
-        html = '<html lang="ar"><body><p class="tz-count">العدّاد: وقائع مؤهّلة <span class="bidi">4</span> · مؤكدة <span class="bidi">1</span> · مرجّحة <span class="bidi">1</span> · مستثناة <span class="bidi">11</span> · غير مكانية <span class="bidi">1</span> · إجمالي <span class="bidi">16</span></p></body></html>'
+        html = '<html lang="ar"><body><p class="tz-count">العدّاد: وقائع مؤهّلة <span class="bidi">4</span> · مؤكدة <span class="bidi">1</span> · مرجّحة <span class="bidi">1</span> · مستثناة <span class="bidi">11</span> · موقع غير محدد <span class="bidi">1</span> · إجمالي <span class="bidi">16</span></p></body></html>'
         translated, _, _ = translate_page(html, DAY, {}, {})
-        expected = ("Counter: qualifying incidents", "confirmed", "probable", "excluded", "non-spatial", "total")
+        # التسميات تُقرأ من العقد الحاكم لا من نص مثبّت (عطل ك-489: تغيّر التسمية في العقد فسقط الاختبار)
+        reg = json.loads((ROOT / "appendices/card_registry.json").read_text(encoding="utf-8"))
+        zone_card = next(c for c in _all_cards(reg) if (c.get("target_section") or {}).get("title") == "مستوى التهديد")
+        expected = ["Counter: " + zone_card["counters"][0]["display_label_en"]] + [
+            c["display_label_en"] for c in zone_card["counters"][1:]]
         for label in expected:
             self.assertIn(label, translated)
 
@@ -361,38 +428,33 @@ class HeroKpiGateTests(unittest.TestCase):
     def test_current_day_hero_kpis_match_source_contract(self):
         self.assertEqual(validate_hero_kpis(self.meta, self.zones, self.registry), [])
 
-    def test_imo_confirmed_attacks_card_matches_governing_kpi(self):
-        import json
-        totals = json.loads((ROOT / f"web/kpis-totals/{DAY}.json").read_text(encoding="utf-8"))
-        metric = next((item for item in totals["metrics"] if item["id"] == "imo-confirmed-attacks"), None)
-        self.assertIsNotNone(metric, "مقياس IMO الثامن مفقود من ملف المقاييس")
-        if metric is None:
-            return
-        card = next((item for item in self.meta["hero_kpis"] if item["id"] == "imo-confirmed-attacks"), None)
-        self.assertIsNotNone(card, "البطاقة الثامنة مفقودة من meta")
+    def test_merged_imo_card_matches_official_list(self):
+        """قرار المالك: دُمجت بطاقة «هجمات مؤكدة على سفن» في «سجل الحوادث المؤكدة من IMO»،
+        فيُقاس المُدمَج على القائمة الرسمية نفسها ولا يُقاس مقياس ملغى."""
+        appendix = json.loads((ROOT / "appendices/imo-incidents.json").read_text(encoding="utf-8"))
+        official = str((appendix.get("totals") or {}).get("confirmed_incidents"))
+        card = next((c for c in (self.meta.get("official_cards") or []) if c.get("id") == "imo-confirmed-incidents"), None)
+        self.assertIsNotNone(card, "بطاقة سجل الحوادث المؤكدة مفقودة من الواجهة")
         if card is None:
             return
-        self.assertEqual(card["row"], 2)
-        self.assertEqual(card["value"], str(metric["today"]))
-        self.assertEqual(card["cumulative"], metric["cumulative"])
-        self.assertEqual(card["updated"], metric["updated"])
-        contract_card = next(item for item in self.registry["hero_kpis"]["cards"] if item["id"] == card["id"])
-        self.assertEqual(contract_card["source"]["kind"], "kpis_totals")
-        self.assertEqual(contract_card["source"]["id"], metric["id"])
-        self.assertEqual({layer["id"] for layer in contract_card["layers"].values()}, {metric["id"]})
+        layers = card.get("layers") or {}
+        self.assertEqual({k for k in layers}, {"daily", "cumulative", "updated"})
+        self.assertEqual(str(layers["cumulative"].get("value")), official)
+        self.assertTrue(str(layers["updated"].get("value") or "").strip(), "طبقة آخر تحديث بلا قيمة")
 
-    def test_imo_confirmed_attacks_value_drift_fails_closed(self):
+    def test_merged_imo_card_value_drift_fails_closed(self):
+        """ضبط سالب: انحراف قيمة البطاقة المدمجة عن القائمة الرسمية يُمنع."""
         changed = self.copy.deepcopy(self.meta)
-        card = next((item for item in changed["hero_kpis"] if item["id"] == "imo-confirmed-attacks"), None)
-        self.assertIsNotNone(card, "البطاقة الثامنة مفقودة من meta")
+        card = next((c for c in (changed.get("official_cards") or []) if c.get("id") == "imo-confirmed-incidents"), None)
+        self.assertIsNotNone(card, "بطاقة سجل الحوادث المؤكدة مفقودة من الواجهة")
         if card is None:
             return
-        card["cumulative"] = 123
-        errors = validate_hero_kpis(changed, self.zones, self.registry)
-        self.assertTrue(any("imo-confirmed-attacks" in error and "122" in error and "123" in error for error in errors), errors)
+        card["layers"]["cumulative"]["value"] = "1"
+        errors = validate_official_cards(changed, self.registry)
+        self.assertTrue(any("سجل الحوادث المؤكدة" in e or "imo-confirmed-incidents" in e for e in errors), errors)
 
     def _rendered_hero_html(self, report_count=1, screen_count=1):
-        tiles = "".join('<div class="kpi hero-kpi"></div>' for _ in range(8))
+        tiles = "".join('<div class="kpi hero-kpi"></div>' for _ in range(len(self.meta.get("hero_kpis") or [])))
         report = "".join(f'<div class="kpis hero-kpis">{tiles}</div>' for _ in range(report_count))
         screen = "".join(f'<div class="sc-kpis hero-kpis">{tiles}</div>' for _ in range(screen_count))
         return f'<html lang="ar"><body>{report}<div class="sc-hero no-print">{screen}</div></body></html>'
@@ -444,7 +506,7 @@ class OfficialCardGateTests(unittest.TestCase):
         import copy
         import json
         self.copy = copy
-        self.meta = json.loads(Path(str(SITE_ROOT / "sources/meta/2026-10-31.json")).read_text(encoding="utf-8"))
+        self.meta = json.loads(Path(str(SITE_ROOT / f"sources/meta/{DAY}.json")).read_text(encoding="utf-8"))
         self.registry = json.loads((ROOT / "appendices/card_registry.json").read_text(encoding="utf-8"))
 
     def test_official_cards_have_three_layers_and_source_basis(self):
@@ -455,6 +517,7 @@ class OfficialCardGateTests(unittest.TestCase):
         changed = self.copy.deepcopy(self.meta)
         changed["official_cards"] = self.copy.deepcopy(changed.get("official_cards") or [])
         death = next(card for card in changed["official_cards"] if card["id"] == "imo-seafarer-deaths")
+        death["layers"]["daily"]["state"] = "undisclosed"
         death["layers"]["daily"]["value"] = "0"
         errors = validate_official_cards(changed, self.registry)
         self.assertTrue(any("الصفر الكاذب" in error or "لم يُعلن" in error for error in errors), errors)

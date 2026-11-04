@@ -7,15 +7,34 @@
 """
 from __future__ import annotations
 import json
+import os
 import pathlib
 import sys
 
-BRAIN = pathlib.Path("/home/ubuntu/brain-marine-news")
+BRAIN = pathlib.Path(os.environ.get("BRAIN_DIR") or pathlib.Path(__file__).resolve().parents[1])
 DATE = sys.argv[1] if len(sys.argv) > 1 else "2026-11-03"
 Z1 = "Z1 — مضيق هرمز وخليج عُمان والخليج العربي"
 
 META = BRAIN / "web" / "meta" / f"{DATE}.json"
 ZONES = BRAIN / "web" / "zones" / f"{DATE}.json"
+
+# عطل ك-487: كانت أرقام IMO مثبّتة نصًّا (125/24 وتاريخ 02/11/2026) فعادت قيمة متقادمة
+# إلى ملف الواجهة. القاعدة: الرقم يُقرأ من القائمة الرسمية المحفوظة لحظة التشغيل، لا من نص ثابت.
+_IMO = json.loads((BRAIN / "appendices" / "imo-incidents.json").read_text(encoding="utf-8"))
+_IMO_TOTALS = _IMO.get("totals") or {}
+IMO_INCIDENTS = str(_IMO_TOTALS.get("confirmed_incidents") or "")
+IMO_DEATHS = str(_IMO_TOTALS.get("confirmed_seafarer_deaths") or "")
+_MONTHS = {"January": "01", "February": "02", "March": "03", "April": "04", "May": "05", "June": "06",
+           "July": "07", "August": "08", "September": "09", "October": "10", "November": "11", "December": "12"}
+
+
+def imo_as_at() -> str:
+    """تاريخ بيانات القائمة الرسمية (المصدر يكتبه بالإنجليزية) بصيغة يوم/شهر/سنة."""
+    raw = str((_IMO.get("source") or {}).get("as_at") or "").strip()
+    parts = raw.replace(",", "").split()
+    if len(parts) == 3 and parts[1] in _MONTHS:
+        return f"{int(parts[0]):02d}/{_MONTHS[parts[1]]}/{parts[2]}"
+    return raw
 
 
 def patch_meta() -> list[str]:
@@ -32,12 +51,14 @@ def patch_meta() -> list[str]:
     if d0:
         d0["title"] = "أعداد الوفيات من IMO"
         d0["title_en"] = "IMO seafarer fatalities"
-        d0["layers"]["cumulative"]["value"] = "24"
-        d0["layers"]["cumulative"]["source"] = "IMO — 24 وفاة بحّار مؤكدة"
-        d0["layers"]["updated"]["value"] = "02/11/2026"
-        d0["layers"]["updated"]["value_en"] = "02/11/2026"
-        d0["layers"]["updated"]["source"] = "قائمة IMO الرسمية كما حُفظت في 02/11/2026"
-        d0["layers"]["updated"]["source_en"] = "Official IMO list as saved on 02/11/2026"
+        d0["layers"]["cumulative"]["value"] = IMO_DEATHS
+        d0["layers"]["cumulative"]["value_en"] = IMO_DEATHS
+        d0["layers"]["cumulative"]["source"] = f"IMO — {IMO_DEATHS} وفاة بحّار مؤكدة بتاريخ {imo_as_at()}"
+        d0["layers"]["cumulative"]["source_en"] = f"IMO — {IMO_DEATHS} confirmed seafarer fatalities as at {imo_as_at()}"
+        d0["layers"]["updated"]["value"] = imo_as_at()
+        d0["layers"]["updated"]["value_en"] = imo_as_at()
+        d0["layers"]["updated"]["source"] = f"القائمة الرسمية بتاريخ بيانات {imo_as_at()}"
+        d0["layers"]["updated"]["source_en"] = f"Official list as at {imo_as_at()}"
 
     if not any(c["id"] == "imo-confirmed-incidents" for c in oc):
         oc.append({
@@ -52,16 +73,16 @@ def patch_meta() -> list[str]:
             "badges_en": ["Permanent card"],
             "layers": {
                 "daily": {"label": "عدد اليوم", "label_en": "Today", "value": "0", "value_en": "0",
-                          "source": "قائمة IMO الرسمية؛ لا إضافة جديدة في آخر تحديث 02/11/2026",
-                          "source_en": "Official IMO list; no new addition in the 2 November 2026 update"},
+                          "source": f"قائمة IMO الرسمية؛ لا إضافة مسندة بعد قراءة {imo_as_at()}",
+                          "source_en": f"Official IMO list; no attributed addition after the {imo_as_at()} reading"},
                 "cumulative": {"label": "المجموع منذ 28 فبراير 2026", "label_en": "Total since 28 February 2026",
-                               "value": "125", "value_en": "125",
-                               "source": "IMO — 125 حادثة مؤكدة على سفن تجارية",
-                               "source_en": "IMO — 125 confirmed incidents on commercial ships"},
+                               "value": IMO_INCIDENTS, "value_en": IMO_INCIDENTS,
+                               "source": f"IMO — {IMO_INCIDENTS} حادثة مؤكدة على سفن تجارية بتاريخ {imo_as_at()}",
+                               "source_en": f"IMO — {IMO_INCIDENTS} confirmed incidents on commercial ships as at {imo_as_at()}"},
                 "updated": {"label": "آخر تحديث للمصدر", "label_en": "Source last updated",
-                            "value": "02/11/2026", "value_en": "02/11/2026",
-                            "source": "القائمة الرسمية كما حُفظت في 02/11/2026",
-                            "source_en": "Official list as saved on 2 November 2026"},
+                            "value": imo_as_at(), "value_en": imo_as_at(),
+                            "source": f"القائمة الرسمية بتاريخ بيانات {imo_as_at()}",
+                            "source_en": f"Official list as at {imo_as_at()}"},
             },
         })
         log.append("official_cards: أُضيفت بطاقة سجل الحوادث المؤكدة من IMO")

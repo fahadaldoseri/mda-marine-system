@@ -125,6 +125,30 @@ def load_anchors() -> tuple[dict, dict, dict]:
     return d.get("surfaces", {}), by_key, excluded
 
 
+def resolve_area(key: str, anchors: dict, excluded: dict) -> tuple[str | None, dict | None, dict | None]:
+    """يحلّ اسم المنطقة إلى مِرساة معتمدة، ويدعم الاسم المركّب «البلد - البحر».
+
+    قاعدة سجل المناطق (المادة 2): إن ذُكر موقع بحري مع بلد يُسمّى البلد مع البحر،
+    فيبقى الاسم المعروض «الصومال - المحيط الهندي» والمِرساة تُؤخذ من الجزء البحري.
+    المطابقة الطويلة تُرجَّح عند التزاحم (المادة 5). وإذا لم يُحلّ الجزء البحري
+    يبقى الاسم بلا مِرساة فيفشل الرسم مغلقًا، ولا يُخترع موضع.
+    """
+    if key in excluded:
+        return key, None, excluded[key]
+    if key in anchors:
+        return key, anchors[key], None
+    # تطبيع الاسم يحذف الشرطة والفواصل، فيُبحث عن أطول اسم مسجَّل يحتويه الاسم المركّب
+    # بحدّ كلمة صريح («الصومال - المحيط الهندي» ← «المحيط الهندي»).
+    hay = f" {key} "
+    for cand in sorted(anchors, key=len, reverse=True):
+        if f" {cand} " in hay:
+            return cand, anchors[cand], None
+    for cand in sorted(excluded, key=len, reverse=True):
+        if f" {cand} " in hay:
+            return cand, None, excluded[cand]
+    return None, None, None
+
+
 def in_surface(lat: float, lon: float, surf: dict) -> bool:
     x0, y0, x1, y1 = surf["bbox"]
     return (x0 <= lon <= x1) and (y0 <= lat <= y1)
@@ -167,10 +191,10 @@ def derive(date: str) -> dict:
             continue
         stats["with_area"] += 1
         key = norm_area(area)
-        if key in excluded:
+        res_key, a, exc = resolve_area(key, anchors, excluded)
+        if exc is not None:
             stats["excluded"] += 1
             continue
-        a = anchors.get(key)
         if not a:
             errors.append(f"منطقة بلا مِرساة معتمدة: «{area}» ({code}) — تُضاف مِرساة موثقة في area-coordinates.json")
             continue

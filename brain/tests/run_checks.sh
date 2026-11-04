@@ -215,6 +215,7 @@ t "حارس الحفظ: ترقيم ملاصق · عناوين · مسموح ال
 t "فاحص الإملاء بلا إنذار كاذب" python3 tests/test_orthography.py
 t "التحرير الآلي يحفظ التمهيد ويرفض تغيّر الأرقام" python3 tests/test_edit_pass.py
 t "استخراج نص الأسطح بمحرك العرض بلا عيوب وهمية" python3 tests/test_audit_extract_no_phantom.py
+t "قرار 9: بطاقات IMO الدائمة وسجل التحديثات" python3 tests/test_owner9_imo_cards.py
 
 echo "14) محرّك الكتيب والمانيفست"
 t "تقوية المحرّك (مسارات · ترتيب · gate-json · إتمام بالدليل)" python3 tests/test_runbook_hardening.py
