@@ -1,19 +1,11 @@
 {
  "brain": "/home/ubuntu/brain-marine-news",
- "total": 1121,
- "bound": 299,
+ "total": 1144,
+ "bound": 314,
  "declared_output": 0,
- "exempt": 812,
+ "exempt": 828,
  "orphans": [
-  "tools/ledger_proof_degree.py",
-  "tools/merge_event_sources.py",
-  "tools/source_alternatives.py",
-  "tools/source_coverage_line.py",
   "tests/test_event_card_rows.py",
-  "tests/test_ledger_proof_degree.py",
-  "tests/test_merge_event_sources.py",
-  "tests/test_source_alternatives.py",
-  "tests/test_source_coverage_line.py",
   "tests/test_surface_hygiene.py"
  ],
  "verdict": 1,
@@ -34,15 +26,23 @@
    "validators/check_content_fidelity.py",
    "validators/check_daily_event_surface.py",
    "validators/check_daily_events_schema.py",
+   "validators/check_day_coverage.py",
    "validators/check_decision_card.py",
    "validators/check_desktop_readability.py",
    "validators/check_en_parity.py",
-   "validators/check_event_card_contract.py",
-   "validators/check_event_links.py"
+   "validators/check_event_card_contract.py"
   ],
   "exempt": [
    [
     "validators/__pycache__/_guard.cpython-312.pyc",
+    "ذاكرة ترجمة مؤقتة"
+   ],
+   [
+    "validators/__pycache__/check_area_vocabulary.cpython-312.pyc",
+    "ذاكرة ترجمة مؤقتة"
+   ],
+   [
+    "validators/__pycache__/check_backup_parity.cpython-312.pyc",
     "ذاكرة ترجمة مؤقتة"
    ],
    [
@@ -58,27 +58,19 @@
     "ذاكرة ترجمة مؤقتة"
    ],
    [
+    "validators/__pycache__/check_daily_events_schema.cpython-312.pyc",
+    "ذاكرة ترجمة مؤقتة"
+   ],
+   [
+    "validators/__pycache__/check_day_coverage.cpython-312.pyc",
+    "ذاكرة ترجمة مؤقتة"
+   ],
+   [
     "validators/__pycache__/check_decision_card.cpython-312.pyc",
     "ذاكرة ترجمة مؤقتة"
    ],
    [
     "validators/__pycache__/check_event_card_contract.cpython-312.pyc",
-    "ذاكرة ترجمة مؤقتة"
-   ],
-   [
-    "validators/__pycache__/check_kpi_layers.cpython-312.pyc",
-    "ذاكرة ترجمة مؤقتة"
-   ],
-   [
-    "validators/__pycache__/check_ledger_continuity.cpython-312.pyc",
-    "ذاكرة ترجمة مؤقتة"
-   ],
-   [
-    "validators/__pycache__/check_ledger_links.cpython-312.pyc",
-    "ذاكرة ترجمة مؤقتة"
-   ],
-   [
-    "validators/__pycache__/check_map_note_counts.cpython-312.pyc",
     "ذاكرة ترجمة مؤقتة"
    ]
   ]

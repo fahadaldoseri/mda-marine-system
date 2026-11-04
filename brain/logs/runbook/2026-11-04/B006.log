@@ -1,6 +1,6 @@
 بوابة عقد عدّادات بطاقة أهم الأخبار — اختبار موجب وسالبان قبل البناء
 نتيجة بوابة العقد: rc=0
-سياسة الأقسام: /home/ubuntu/seawatch/sources/report-sections-policy.json · محذوف 15 · كتل 4
+سياسة الأقسام: /home/ubuntu/seawatch/sources/report-sections-policy.json · محذوف 15 · كتل 5
 test_arabic_counter_forms_remain_strict (tests.test_card_counters.CardCounterGateTests.test_arabic_counter_forms_remain_strict) ... ok
 test_english_threat_counter_is_generated_from_all_registered_labels (tests.test_card_counters.CardCounterGateTests.test_english_threat_counter_is_generated_from_all_registered_labels) ... ok
 test_monitoring_anchor_to_unrelated_section_fails_closed (tests.test_card_counters.CardCounterGateTests.test_monitoring_anchor_to_unrelated_section_fails_closed) ... ok
@@ -10,6 +10,7 @@ test_negative_anchor_title_change_fails_closed (tests.test_card_counters.CardCou
 test_negative_arabic_card_latin_outside_allowlist_fails_closed (tests.test_card_counters.CardCounterGateTests.test_negative_arabic_card_latin_outside_allowlist_fails_closed) ... ok
 test_negative_arabic_counter_grammar_fails_closed (tests.test_card_counters.CardCounterGateTests.test_negative_arabic_counter_grammar_fails_closed) ... ok
 test_negative_counter_change_fails_closed (tests.test_card_counters.CardCounterGateTests.test_negative_counter_change_fails_closed) ... ok
+test_news_card_missing_from_declared_additions_surface_fails_closed (tests.test_card_counters.CardCounterGateTests.test_news_card_missing_from_declared_additions_surface_fails_closed) ... ok
 test_policy_surface_is_used_for_counter_targets (tests.test_card_counters.CardCounterGateTests.test_policy_surface_is_used_for_counter_targets) ... ok
 test_policy_surface_maps_translated_english_targets_after_section_move (tests.test_card_counters.CardCounterGateTests.test_policy_surface_maps_translated_english_targets_after_section_move) ... ok
 test_positive_registry_matches_both_enabled_cards (tests.test_card_counters.CardCounterGateTests.test_positive_registry_matches_both_enabled_cards) ... ok
@@ -20,8 +21,9 @@ test_rendered_additions_targets_measure_section_content_and_use_actual_ids (test
 test_shared_measurement_function_counts_rendered_target_structures (tests.test_card_counters.CardCounterGateTests.test_shared_measurement_function_counts_rendered_target_structures) ... ok
 test_stale_fragment_uses_policy_surface_and_data_goto_title (tests.test_card_counters.CardCounterGateTests.test_stale_fragment_uses_policy_surface_and_data_goto_title) ... ok
 test_unregistered_card_fails_closed (tests.test_card_counters.CardCounterGateTests.test_unregistered_card_fails_closed) ... ok
+test_zone_component_outside_target_section_fails_closed (tests.test_card_counters.CardCounterGateTests.test_zone_component_outside_target_section_fails_closed) ... ok
 test_zone_counter_drift_fails_closed (tests.test_card_counters.CardCounterGateTests.test_zone_counter_drift_fails_closed) ... ok
-test_zone_heading_anchor_drift_fails_closed (tests.test_card_counters.CardCounterGateTests.test_zone_heading_anchor_drift_fails_closed) ... ok
+test_zone_internal_label_is_not_anchor (tests.test_card_counters.CardCounterGateTests.test_zone_internal_label_is_not_anchor) ... ok
 test_current_day_hero_kpis_match_source_contract (tests.test_card_counters.HeroKpiGateTests.test_current_day_hero_kpis_match_source_contract) ... ok
 test_merged_imo_card_matches_official_list (tests.test_card_counters.HeroKpiGateTests.test_merged_imo_card_matches_official_list)
 قرار المالك: دُمجت بطاقة «هجمات مؤكدة على سفن» في «سجل الحوادث المؤكدة من IMO»، ... ok
@@ -38,6 +40,6 @@ test_official_cards_have_three_layers_and_source_basis (tests.test_card_counters
 test_transit_without_reading_uses_no_coverage_not_zero (tests.test_card_counters.OfficialCardGateTests.test_transit_without_reading_uses_no_coverage_not_zero) ... ok
 
 ----------------------------------------------------------------------
-Ran 32 tests in 0.105s
+Ran 34 tests in 0.151s
 
 OK

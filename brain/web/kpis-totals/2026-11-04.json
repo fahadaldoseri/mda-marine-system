@@ -67,10 +67,10 @@
       "id": "deaths",
       "title": "الوفيات المسجّلة",
       "today": null,
-      "cumulative": 26,
+      "cumulative": 24,
       "updated": "2026-10-31",
       "definition": "مجموع الوفيات التي يثبتها الحقل الرقمي deaths_confirmed في واقعة فريدة.",
-      "basis": "المجموع هو جمع deaths_confirmed الرقمي فقط بعد استبعاد سجل counted=false/duplicate_of؛ لا تُقرأ الأرقام من العناوين أو الملخصات التراكمية. لا يوجد صف في تاريخ اليوم يحمل deaths_confirmed رقميًا؛ today=null ولا يُستنتج الصفر من غياب الحقل. قاعدة updated: أعلى تاريخ من published_at أو retrieved_at أو date_start، مع استخدام تاريخ الواقعة عند غياب الحقلين الأولين.",
+      "basis": "المجموع هو جمع deaths_confirmed الموجب والمعلن فقط بعد استبعاد سجل counted=false/duplicate_of؛ لا تُقرأ الأرقام من العناوين أو الملخصات التراكمية، وتُستبعد وفيات غير البحارة بحسب casualty_scope. لا يوجد صف في تاريخ اليوم يحمل deaths_confirmed رقميًا؛ today=null ولا يُستنتج الصفر من غياب الحقل. استُبعدت 2 صفوف غير بحارة من القياس. قاعدة updated: أعلى تاريخ من published_at أو retrieved_at أو date_start، مع استخدام تاريخ الواقعة عند غياب الحقلين الأولين.",
       "sources": [
         "cumulative-2026/daily/*.json",
         "cumulative-2026/event-ledger-master.json#events"
