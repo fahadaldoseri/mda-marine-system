@@ -21,7 +21,8 @@ EXCLUDE_FILES = {'telegram-chat.json', 'telegram-targets.json', 'telegram-subscr
 EXCLUDE_GLOBS = ('*.pyc', '*.tmp', 'telegram*.json')
 JUNK_FILES = {'.DS_Store', '.skill_versions.json'}   # ك-271: يُستثنى في المزامن والمقيّم معًا
 DELETE_MAX = 20          # سقف الحذف في التشغيل العادي
-SITE_EXCLUDE_DIRS = {'.git', '__pycache__', 'node_modules', '.venv', 'logs'}
+SITE_EXCLUDE_DIRS = {'.git', '__pycache__', 'node_modules', '.venv', 'logs',
+                     'dist', 'shots', '.pytest_cache'}   # ك-522: مخرجات البناء لا تُدفع إلى المرآة
 SKILLS_EXCLUDE_DIRS = {'.git', '__pycache__'}
 BRAIN_EXCLUDE_DIR_GLOBS = ('logs', 'reports/docx', 'backup-repo', 'logs/apply-*')
 # 2026-11-01 (ك-441): المرآة لا تحمل سجلات التشغيل ولا مخرجات Word ولا مرآة النسخ الاحتياطي —
