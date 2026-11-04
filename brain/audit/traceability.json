@@ -3741,6 +3741,13 @@
    "lesson_id": "ك-496",
    "barrier_id": "B-5a1c9e70",
    "run_evidence": "python3 tools/build_lexicon_corpus.py --apply → كلمات=7603 · بصمة=57075d65c1fcacf5 · ثم python3 tools/build_lexicon_corpus.py --check → رمز 0 ثلاث مرات متتابعة (ثبات) · python3 tests/test_lexicon_gate.py → رمز 0 «النتيجة: ناجح»"
+  },
+  {
+   "fault_id": "ك-497",
+   "state": "مغلق",
+   "lesson_id": "ك-497",
+   "barrier_id": "B-7c41ab90",
+   "run_evidence": "bash tools/final_gate.sh → خطوة «توليد المعجم المشتق (إلزامي قبل الاختبارات)» رمز 0 ثم الاختبار 19 «المعجم المشتق مطابق للمصادر» ناجح · python3 tools/build_lexicon_corpus.py --check → كلمات=7605 · بصمة=62f47fa05bb045fe"
   }
  ]
 }

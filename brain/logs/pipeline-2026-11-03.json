@@ -23,16 +23,14 @@
     "status": "degraded"
   },
   "final_gate": {
-    "status": "block",
-    "exit_code": 2,
+    "blocked_steps": [],
     "dir": "logs/gate-2026-11-03",
-    "blocked_steps": [
-      "اختبارات البوابات (tests)"
-    ],
-    "note": "نتيجة بوابة التسليم النهائية — مسجّلة بعد كتابة التقرير."
+    "exit_code": 2,
+    "note": "نتيجة بوابة التسليم النهائية — كُتبت العلامة بعدها.",
+    "status": "block"
   },
   "finished_utc": "2026-11-03T03:46:21Z",
-  "gate_finished_utc": "2026-11-03T21:48:10Z",
+  "gate_finished_utc": "2026-11-03T22:04:27Z",
   "gate_note": "علامة مرحلة الخط اليومي — بوابة التسليم لم تُشغَّل بعد.",
   "gate_state": "not_run",
   "language": {
