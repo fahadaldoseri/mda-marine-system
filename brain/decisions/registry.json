@@ -11,8 +11,8 @@
   "decided_by": "المالك",
   "last_measured": "2026-11-06",
   "counts": {
-    "منفَّذ": 7,
     "منفَّذ جزئيًّا": 4,
+    "منفَّذ": 11,
     "يحتاج تحققًا": 3,
     "يحتاج قرارًا": 2
   },
@@ -276,25 +276,61 @@
       "id": "D-0611",
       "title": "إغلاق F-04: D071 في عقد التسليم",
       "status": "منفَّذ",
-      "evidence": "check_delivery_policy.py ✔ · tests/test_delivery_policy.py OK · الخطوة مُدرجة في العقد"
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "runbook/delivery-policy.json"
+        },
+        {
+          "kind": "file",
+          "ref": "validators/check_delivery_policy.py"
+        }
+      ],
+      "governing_file": "runbook/delivery-policy.json",
+      "title_ar": "إغلاق F-04: D071 في عقد التسليم"
     },
     {
       "id": "D-0612",
       "title": "إغلاق F-06: سند داخلي لرقم الأداء",
       "status": "منفَّذ",
-      "evidence": "audit/مرجع-آلية-العمل.md يحمل مسار قياس مؤرخ · test_reference_generator OK"
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "audit/مرجع-آلية-العمل.md"
+        },
+        {
+          "kind": "file",
+          "ref": "tools/build_workflow_reference.py"
+        }
+      ],
+      "governing_file": "runbook/phases.json",
+      "title_ar": "إغلاق F-06: سند داخلي لرقم الأداء"
     },
     {
       "id": "D-0613",
       "title": "إغلاق وضع Quirks للصفحة الإنجليزية",
       "status": "منفَّذ",
-      "evidence": "dist/reports/en/2026-11-05.html يبدأ بـ <!DOCTYPE html> · التطبيع في دالة الترجمة"
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "audit/تدقيق-القياس-البصري-الآلي-2026-11-06.md"
+        }
+      ],
+      "governing_file": "runbook/runbook.json",
+      "title_ar": "إغلاق وضع Quirks للصفحة الإنجليزية"
     },
     {
       "id": "D-0614",
       "title": "اعتماد مهارة measured-defect-closure-ops",
       "status": "منفَّذ",
-      "evidence": "قرار المالك 2026-11-06 · quick_validate: Skill is valid"
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "audit/ملاحظات-المالك-2026-11-05.md"
+        }
+      ],
+      "governing_file": "INDEX.md",
+      "title_ar": "اعتماد مهارة measured-defect-closure-ops"
     }
   ]
 }
