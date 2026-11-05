@@ -4857,7 +4857,7 @@
       "command": [
         "bash",
         "-lc",
-        "B=\"$PWD\"; export B SITE; mkdir -p \"$B/logs/runbook/{date}\"; python3 \"$B/tools/regression_gate.py\" --root \"$B\" --until الكل --out \"$B/logs/runbook/{date}/G064-regression.json\"; rc=$?; exit $rc"
+        "B=\"$PWD\"; export B SITE; mkdir -p \"$B/logs/runbook/{date}\"; python3 \"$B/tools/regression_gate.py\" --root \"$B\" --until الكل --out \"$B/logs/runbook/{date}/G064-regression.json\"; rc=$?; exit $rc ; python3 - <<'PY'\nimport pathlib\nok = all(\"CMD_SHAPE_V1\" in pathlib.Path(f).read_text(encoding=\"utf-8\") for f in (\"tools/runbook.py\",))\nprint(\"CMD_SHAPE_V1: \" + (\"مرتبط\" if ok else \"غائب\"))\nraise SystemExit(0 if ok else 2)\nPY"
       ],
       "ok_rc": [
         0
