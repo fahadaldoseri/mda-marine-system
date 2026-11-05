@@ -112,13 +112,13 @@ The material also reported a United States action against fraudulent ship regist
 ## Source Status and Disclosure
 60 of 60 feeds were checked.
 Items read totalled 1929.
-One of the 60 feeds could not be retrieved.
+1 of the 60 feeds could not be retrieved.
 Manual reference was recorded for sources 39 and 52 — a total of 2.
 Sources described as stale under the 14-day limit: 12, 13, 20, 30, 31, 32 — a total of 6; they were not used alone to establish a new incident.
 A sub-route failure was recorded for sources 17 and 24 with success via an alternative route; all routes of source 27 failed and that is disclosed.
 No feed was empty, and no constraint is withheld from the reader.
 ## Sources and References
-Total coded incidents: 5, with 5 attributions. Sources used and the incidents attributed to them: straits.live, four items; TradeWinds, one item; Seatrade Maritime, one item; gCaptain, one item; the UKMTO 2026 warnings list, one item; the IMO official list, one figure.
+Total coded incidents: 5, with 5 attributions. Sources used and the incidents attributed to them: straits.live, 4 items; TradeWinds, 1 item; Seatrade Maritime, 1 item; gCaptain, 1 item; the UKMTO warnings list, 1 item; the IMO official list, 1 figure.
 Sources used for the new incidents:
 - **straits.live:** the party announcement about four tankers, two seized vessels and a downed drone; the reported United States strikes; the announcement on passage for Indian ships; the report on the death of a seafarer, all dated 04/11/2026.
 - **TradeWinds:** two projectiles hitting a large crude carrier dated 04/11/2026; container operators avoiding the Strait; the Gulf of Oman shuttle item.

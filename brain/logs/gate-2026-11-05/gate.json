@@ -141,8 +141,8 @@
   {
    "step": "فحص ما قبل التشغيل",
    "id": "G011",
-   "status": "warn",
-   "exit_code": 1,
+   "status": "ok",
+   "exit_code": 0,
    "disabled": false,
    "reason": null,
    "log": "logs/runbook/2026-11-05/G011.log"
@@ -524,11 +524,38 @@
    "disabled": false,
    "reason": null,
    "log": "logs/runbook/2026-11-05/G042.log"
+  },
+  {
+   "step": "سجل البوابات من المحرّك",
+   "id": "G043",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-05/G043.log"
+  },
+  {
+   "step": "كتابة العلامة بعد البوابة",
+   "id": "G038",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-05/G038.log"
+  },
+  {
+   "step": "مخطط العلامة الثابت",
+   "id": "G039",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-05/G039.log"
   }
  ],
  "blocked_steps": [],
  "source": "runbook-ledger",
  "dir": "logs/gate-2026-11-05",
  "log_dir": "logs/gate-2026-11-05",
- "finished_utc": "2026-11-05T13:20:21Z"
+ "finished_utc": "2026-11-05T13:54:13Z"
 }
