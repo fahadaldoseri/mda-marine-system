@@ -31,8 +31,13 @@ REQUIRED_FORBIDDEN = [
     "telegram_outside_step",
     "silent_close",
 ]
-REQUIRED_MANIFEST_STEPS = ["D005", "D010", "D030", "D033", "D035", "D040", "D070"]
+# القائمة مرجعها المانيفست نفسه؛ هذا السطر للتوافق الخلفي فقط
+REQUIRED_MANIFEST_STEPS = ["D005", "D010", "D030", "D033", "D035", "D040", "D070", "D071"]
 
+
+def manifest_deliver_steps(manifest: dict) -> list[str]:
+    """خطوات التسليم الفعلية = كل خطوة في طور deliver بالمانيفست (لا قائمة ثابتة)."""
+    return sorted(s["id"] for s in manifest.get("steps", []) if str(s.get("phase")) == "deliver")
 
 def check(root: Path) -> list[str]:
     errs: list[str] = []
