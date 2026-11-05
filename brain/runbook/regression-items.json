@@ -18,34 +18,87 @@
     {
       "id": "ب-01",
       "phase": "1",
-      "kind": "manual",
+      "kind": "cmd",
       "blocking": true,
       "title": "القصّ البصري في بطاقات سجل الأحداث",
-      "how": "قياس scrollWidth/clientWidth لكل بطاقة على 1440 و1920 — تساوٍ بلا فائض"
+      "how": "قياس scrollWidth/clientWidth لكل بطاقة على 1440 و1920 — تساوٍ بلا فائض",
+      "method_ar": "قياس آلي بمتصفح حقيقي (Playwright) على أحدث إصدار مبني، عرضا 1440 و1920، حسب runbook/readiness-questions.json للسؤال العاشر.",
+      "argv": [
+        "python3",
+        "tools/browser_measure.py",
+        "--root",
+        "{root}",
+        "--site-root",
+        "{root}/../seawatch/dist",
+        "--check",
+        "overflow",
+        "--out",
+        "audit/measurements/regression-b-01.json"
+      ]
     },
     {
       "id": "ب-02",
       "phase": "1",
-      "kind": "manual",
+      "kind": "cmd",
       "blocking": true,
       "title": "قصّ نص بطاقة UKMTO الإنجليزية",
-      "how": "قياس البطاقة الإنجليزية — لا نص مقطوع"
+      "how": "قياس البطاقة الإنجليزية — لا نص مقطوع",
+      "method_ar": "قياس آلي بمتصفح حقيقي (Playwright) على أحدث إصدار مبني، عرضا 1440 و1920، حسب runbook/readiness-questions.json للسؤال العاشر.",
+      "argv": [
+        "python3",
+        "tools/browser_measure.py",
+        "--root",
+        "{root}",
+        "--site-root",
+        "{root}/../seawatch/dist",
+        "--en",
+        "--check",
+        "overflow",
+        "--out",
+        "audit/measurements/regression-b-02.json"
+      ]
     },
     {
       "id": "ب-03",
       "phase": "1",
-      "kind": "manual",
+      "kind": "cmd",
       "blocking": true,
       "title": "المرساة #news-card",
-      "how": "فتح الرابط حيًّا والوصول إلى الموضع — وصول صحيح"
+      "how": "فتح الرابط حيًّا والوصول إلى الموضع — وصول صحيح",
+      "method_ar": "قياس آلي بمتصفح حقيقي (Playwright) على أحدث إصدار مبني، عرضا 1440 و1920، حسب runbook/readiness-questions.json للسؤال العاشر.",
+      "argv": [
+        "python3",
+        "tools/browser_measure.py",
+        "--root",
+        "{root}",
+        "--site-root",
+        "{root}/../seawatch/dist",
+        "--check",
+        "anchor",
+        "--out",
+        "audit/measurements/regression-b-03.json"
+      ]
     },
     {
       "id": "ب-04",
       "phase": "1",
-      "kind": "manual",
+      "kind": "cmd",
       "blocking": true,
       "title": "وضع Quirks",
-      "how": "عدد تحذيرات الكونسول في الصفحة الإنجليزية — صفر"
+      "how": "عدد تحذيرات الكونسول في الصفحة الإنجليزية — صفر",
+      "method_ar": "قياس آلي بمتصفح حقيقي (Playwright) على أحدث إصدار مبني، عرضا 1440 و1920، حسب runbook/readiness-questions.json للسؤال العاشر.",
+      "argv": [
+        "python3",
+        "tools/browser_measure.py",
+        "--root",
+        "{root}",
+        "--site-root",
+        "{root}/../seawatch/dist",
+        "--check",
+        "console",
+        "--out",
+        "audit/measurements/regression-b-04.json"
+      ]
     },
     {
       "id": "ب-05",
@@ -162,18 +215,46 @@
     {
       "id": "ب-13",
       "phase": "4",
-      "kind": "manual",
+      "kind": "cmd",
       "blocking": true,
       "title": "بطاقة القرار أعلى الشاشة",
-      "how": "قياس موضع البطاقة وثلاثة أسطرها — ظاهرة في الأعلى"
+      "how": "قياس موضع البطاقة وثلاثة أسطرها — ظاهرة في الأعلى",
+      "method_ar": "قياس آلي بمتصفح حقيقي (Playwright) على أحدث إصدار مبني، عرضا 1440 و1920، حسب runbook/readiness-questions.json للسؤال العاشر.",
+      "argv": [
+        "python3",
+        "tools/browser_measure.py",
+        "--root",
+        "{root}",
+        "--site-root",
+        "{root}/../seawatch/dist",
+        "--check",
+        "decision",
+        "--out",
+        "audit/measurements/regression-b-13.json"
+      ]
     },
     {
       "id": "ب-14",
       "phase": "4",
-      "kind": "manual",
-      "blocking": true,
+      "kind": "cmd",
+      "blocking": false,
       "title": "جاهزية القائد",
-      "how": "عشرة أسئلة وزمن الإجابة — 60 ثانية أو أقل"
+      "how": "عشرة أسئلة وزمن الإجابة — 60 ثانية أو أقل",
+      "method_ar": "قياس آلي بمتصفح حقيقي (Playwright) على أحدث إصدار مبني، عرضا 1440 و1920، حسب runbook/readiness-questions.json للسؤال العاشر.",
+      "argv": [
+        "python3",
+        "tools/browser_measure.py",
+        "--root",
+        "{root}",
+        "--site-root",
+        "{root}/../seawatch/dist",
+        "--check",
+        "readiness",
+        "--soft",
+        "readiness",
+        "--out",
+        "audit/measurements/regression-b-14.json"
+      ]
     },
     {
       "id": "ب-15",
@@ -190,5 +271,6 @@
         "--summary"
       ]
     }
-  ]
+  ],
+  "manual_items_rule_ar": "لا بند يدوي: كل بند في هذا السجل يُقاس آليًّا. البند ب-14 يُقاس ويُبلَّغ ولا يمنع حتى يقرّر المالك موضع أسئلة الشاشة الأولى."
 }
