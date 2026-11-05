@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة 238d1c661e4fb565). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة 0aa863fa85e75f6a). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -103,6 +103,7 @@
 | G043 | سجل البوابات gate.json من سجل المحرّك | script |  |  | cmd:bash -lc grep -q 'runbook-ledger' logs/gate-{date}/gate.json | ف1–ف5 — بوابة التحقق | tools/runbook.py، tools/write_mark.py | stop |
 | G038 | كتابة العلامة بعد البوابة | script |  | logs/pipeline-{date}.json | cmd:bash -lc test -s logs/runbook/{date}/G038.log؛ file_exists:logs/pipeline-{date}.json؛ cmd:bash -lc grep -q 'العلامة (final)' logs/runbook/{date}/G038.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/write_mark.py | stop |
 | G039 | مخطط العلامة الثابت | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G039.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_mark_schema.py | stop |
+| G061 | سياسة التسليم المتصل (قرار المالك: أ) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G061.log؛ cmd:bash -lc grep -q '✔ سياسة التسليم المتصل:' logs/runbook/{date}/G061.log | ف1–ف5 — بوابة التحقق | validators/check_delivery_policy.py، runbook/delivery-policy.json، tests/test_delivery_policy.py | stop |
 | D005 | تحديث النسخة الاحتياطية قبل النشر (شرط بوابة ما قبل التشغيل) | script |  |  | cmd:bash -lc test -s "$B/logs/runbook/{date}/D005.log" && grep -q 'parity' "$B/logs/runbook/{date}/D005.log" || true | س2 — الإغلاق والدفع |  | stop |
 | D010 | نشر الموقع (بعد كل البوابات) | script |  |  | cmd:python3 -c import json,sys;d=json.load(open('logs/publish-{date}.json'));sys.exit(0 if d.get('status')=='ok' else 1) | س2 — الإغلاق والدفع | tools/publish_changes.sh، tools/publish_site.sh، validators/check_en_parity.py | stop |
 | D020 | التحقق الحي من النشر (قراءة فقط) | script |  |  | cmd:python3 -c import json,sys;d=json.load(open('logs/live-{date}.json'));sys.exit(0 if d.get('status')=='ok' else 1) | س2 — الإغلاق والدفع | tools/check_live.sh، tools/live_visual_audit.py، tools/live_dom_audit.py | stop |
