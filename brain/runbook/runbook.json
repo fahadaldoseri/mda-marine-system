@@ -4873,6 +4873,8 @@
       "phase": "finalize",
       "on_fail": "stop",
       "command": [
+        "bash",
+        "-lc",
         "B=\"$PWD\"; SITE=\"${SITE:-/home/ubuntu/seawatch}\"; export B SITE; mkdir -p \"$B/logs/runbook/{date}\"; python3 \"$B/tools/browser_measure.py\" --root \"$B\" --site-root \"$SITE/dist\" --check overflow --check console --check anchor --check decision --check readiness --soft readiness --out \"$B/logs/runbook/{date}/G065-measure.json\""
       ],
       "assert": [

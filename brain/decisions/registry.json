@@ -12,7 +12,7 @@
   "last_measured": "2026-11-06",
   "counts": {
     "منفَّذ جزئيًّا": 4,
-    "منفَّذ": 11,
+    "منفَّذ": 12,
     "يحتاج تحققًا": 3,
     "يحتاج قرارًا": 2
   },
@@ -331,6 +331,27 @@
       ],
       "governing_file": "INDEX.md",
       "title_ar": "اعتماد مهارة measured-defect-closure-ops"
+    },
+    {
+      "id": "D-0615",
+      "title_ar": "إصلاح صيغة أمر الخطوة G065 وتحصين مشغّل الكتيب",
+      "status": "منفَّذ",
+      "governing_file": "runbook/runbook.json",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "runbook/runbook.json"
+        },
+        {
+          "kind": "file",
+          "ref": "tools/runbook.py"
+        },
+        {
+          "kind": "file",
+          "ref": "tests/test_manifest_commands.py"
+        }
+      ],
+      "next_action_ar": "—"
     }
   ]
 }
