@@ -91,7 +91,22 @@ def _line_kind(md_line: str) -> str:
     return "text"
 
 
-def build_tm(date: str) -> dict[str, str]:
+# NORMALIZE_HEAD_V1: ترويسة المستند المترجَم — doctype ثم سمات html صحيحة.
+# كان بناء النسخة الإنجليزية يُسقط <!DOCTYPE html> فتقع الصفحة في وضع Quirks (BackCompat).
+def normalize_document_head(page: str) -> str:
+    m = re.search(r"<html([^>]*)>", page)
+    if m:
+        a = m.group(1)
+        for k, v in (("lang", "en"), ("dir", "ltr")):
+            a = re.sub(rf'{k}="[^"]*"', f'{k}="{v}"', a) if f"{k}=" in a else a + f' {k}="{v}"'
+        if "data-lang=" not in a:
+            a += ' data-lang="en"'
+        page = page[: m.start()] + "<html" + a + ">" + page[m.end():]
+    return re.sub(r"^(?:\ufeff)?\s*(?:<!doctype[^>]*>)?\s*", "<!DOCTYPE html>\n", page, count=1, flags=re.I)
+
+
+def build_tm(
+date: str) -> dict[str, str]:
     ar = (AR_MD / f"{date}-sectioned.md").read_text(encoding="utf-8")
     en = (I18N / f"{date}-sectioned.en.md").read_text(encoding="utf-8")
     A_raw = [x for x in ar.splitlines() if x.strip()]
@@ -1044,6 +1059,7 @@ def translate_page(html_text: str, date: str, tm: dict[str, str], gl: dict[str, 
     out = _collapse_inline_source_duplicates(out)
     out = _fix_chrome(out)
     out = _apply_card_row_labels(out)
+    out = normalize_document_head(out)
     return out, [norm(x) for x in remaining], len(c.units)
 
 

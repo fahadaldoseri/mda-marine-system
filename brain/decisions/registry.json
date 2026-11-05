@@ -271,6 +271,30 @@
       ],
       "governing_file": "appendices/card_registry.json",
       "next_action_ar": "قياس صفوف البطاقة في المخرج المبني وتثبيت الحالة"
+    },
+    {
+      "id": "D-0611",
+      "title": "إغلاق F-04: D071 في عقد التسليم",
+      "status": "closed",
+      "evidence": "check_delivery_policy.py ✔ · tests/test_delivery_policy.py OK · الخطوة مُدرجة في العقد"
+    },
+    {
+      "id": "D-0612",
+      "title": "إغلاق F-06: سند داخلي لرقم الأداء",
+      "status": "closed",
+      "evidence": "audit/مرجع-آلية-العمل.md يحمل مسار قياس مؤرخ · test_reference_generator OK"
+    },
+    {
+      "id": "D-0613",
+      "title": "إغلاق وضع Quirks للصفحة الإنجليزية",
+      "status": "closed",
+      "evidence": "dist/reports/en/2026-11-05.html يبدأ بـ <!DOCTYPE html> · التطبيع في دالة الترجمة"
+    },
+    {
+      "id": "D-0614",
+      "title": "اعتماد مهارة measured-defect-closure-ops",
+      "status": "closed",
+      "evidence": "قرار المالك 2026-11-06 · quick_validate: Skill is valid"
     }
   ]
 }
