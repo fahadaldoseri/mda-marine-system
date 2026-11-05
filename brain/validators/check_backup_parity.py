@@ -30,7 +30,9 @@ SYMLINK_VIEWS = ("brain/web/blocks.py", "brain/web/build_report.py", "brain/web/
 REPO_EXTRA_ALLOW = ("skills/.skill_versions.json",)
 
 LOCAL_ONLY_PATTERNS = (
-    "audit/backups/",                  # لقطات الإغلاق على الخادم (ك-331)
+    "audit/backups/",                  # لقطات الإغلاق على الخادم (ك-331
+    "logs/",  # سجلات خطوات الكتيب: مولَّد تشغيلي يُعاد توليده كل جولة (الدليل المُتعقَّب في audit/)
+)
     "brain/logs/skills-sync-",         # نسخ استعادة مهارات محلية مؤقتة؛ لا تُنقل إلى المرآة
     "brain/logs/skills-canon-",        # نسخ قانونية مؤقتة لمهارات (SKILL.md.bak)؛ محلية بطبيعتها
     "brain/logs/apply-",               # أرشيفات التطبيق المحلية المؤقتة؛ لا تُنقل إلى المرآة
