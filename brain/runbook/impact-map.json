@@ -1,0 +1,266 @@
+{
+  "version": 1,
+  "rule_ar": "أي ملف متغيّر لا قاعدة له = تغيير غير معلن، ويُصنَّف انحدارًا حتى لو كان تحسينًا.",
+  "surfaces_ar": [
+    "صفحة الرئيسية",
+    "صفحة الإصدار",
+    "أحدث إصدار",
+    "صفحة الإضافات",
+    "صفحة المصادر",
+    "التغذية RSS",
+    "دفتر اليوم",
+    "نص التقرير"
+  ],
+  "rules": [
+    {
+      "match": [
+        "site/generator/build_report.py",
+        "build_report.py"
+      ],
+      "surfaces": [
+        "صفحة الإصدار",
+        "أحدث إصدار",
+        "صفحة الإضافات",
+        "صفحة الرئيسية"
+      ],
+      "gates": [
+        "validators/check_card_counters.py",
+        "validators/check_surface_hygiene.py"
+      ],
+      "tests": [
+        "tests/test_reference_generator.py"
+      ]
+    },
+    {
+      "match": [
+        "site/generator/map_cluster.py",
+        "map_cluster.py"
+      ],
+      "surfaces": [
+        "أحدث إصدار"
+      ],
+      "gates": [
+        "validators/check_event_links.py"
+      ],
+      "tests": [
+        "tests/test_map_cluster.py"
+      ]
+    },
+    {
+      "match": [
+        "site/generator/screen_layer.py",
+        "screen_layer.py"
+      ],
+      "surfaces": [
+        "صفحة الإصدار",
+        "صفحة الرئيسية"
+      ],
+      "gates": [
+        "validators/check_card_counters.py"
+      ],
+      "tests": []
+    },
+    {
+      "match": [
+        "site/**/*.css",
+        "site/**/*.html"
+      ],
+      "surfaces": [
+        "كل الأسطح"
+      ],
+      "gates": [
+        "validators/check_surface_hygiene.py",
+        "validators/check_forbidden_surface_terms.py"
+      ],
+      "tests": []
+    },
+    {
+      "match": [
+        "sections/10-sources.md",
+        "10-sources.md"
+      ],
+      "surfaces": [
+        "صفحة المصادر"
+      ],
+      "gates": [
+        "validators/check_source_naming.py",
+        "validators/check_sources_count.py"
+      ],
+      "tests": []
+    },
+    {
+      "match": [
+        "sections/30-structure.md",
+        "30-structure.md"
+      ],
+      "surfaces": [
+        "صفحة الإصدار",
+        "صفحة الإضافات"
+      ],
+      "gates": [
+        "validators/check_additions_surface.py",
+        "validators/check_en_parity.py"
+      ],
+      "tests": []
+    },
+    {
+      "match": [
+        "appendices/card_registry.json"
+      ],
+      "surfaces": [
+        "صفحة الإصدار",
+        "أحدث إصدار"
+      ],
+      "gates": [
+        "validators/check_card_counters.py",
+        "validators/check_event_card_contract.py"
+      ],
+      "tests": []
+    },
+    {
+      "match": [
+        "appendices/source-*.json",
+        "appendices/source-*.md"
+      ],
+      "surfaces": [
+        "صفحة المصادر"
+      ],
+      "gates": [
+        "validators/check_source_naming.py"
+      ],
+      "tests": []
+    },
+    {
+      "match": [
+        "runbook/runbook.json"
+      ],
+      "surfaces": [],
+      "gates": [],
+      "tests": [
+        "tests/test_manifest_commands.py"
+      ]
+    },
+    {
+      "match": [
+        "runbook/phases.json",
+        "tools/build_workflow_reference.py"
+      ],
+      "surfaces": [],
+      "gates": [
+        "validators/check_reference_generated.py"
+      ],
+      "tests": [
+        "tests/test_reference_generator.py"
+      ]
+    },
+    {
+      "match": [
+        "runbook/delivery-policy.json"
+      ],
+      "surfaces": [],
+      "gates": [
+        "validators/check_delivery_policy.py"
+      ],
+      "tests": []
+    },
+    {
+      "match": [
+        "runbook/regression-items.json",
+        "runbook/impact-map.json"
+      ],
+      "surfaces": [],
+      "gates": [
+        "validators/check_gate_readiness.py"
+      ],
+      "tests": [
+        "tests/test_gate_tools.py"
+      ]
+    },
+    {
+      "match": [
+        "decisions/registry.json"
+      ],
+      "surfaces": [],
+      "gates": [
+        "validators/check_decisions_registry.py"
+      ],
+      "tests": [
+        "tests/test_decisions_registry.py"
+      ]
+    },
+    {
+      "match": [
+        "tools/*.py",
+        "validators/*.py"
+      ],
+      "surfaces": [],
+      "gates": [
+        "validators/check_gate_readiness.py"
+      ],
+      "tests": [
+        "tests/test_gate_tools.py"
+      ]
+    },
+    {
+      "match": [
+        "web/meta/*.json",
+        "web/zones/*.json",
+        "web/kpis-totals/*.json"
+      ],
+      "surfaces": [
+        "صفحة الإصدار",
+        "أحدث إصدار"
+      ],
+      "gates": [
+        "validators/check_card_counters.py"
+      ],
+      "tests": []
+    },
+    {
+      "match": [
+        "cumulative-2026/daily/*.json",
+        "cumulative-2026/event-ledger-master.json"
+      ],
+      "surfaces": [
+        "دفتر اليوم",
+        "صفحة الإصدار"
+      ],
+      "gates": [
+        "validators/check_ledger_links.py"
+      ],
+      "tests": []
+    },
+    {
+      "match": [
+        "reports/*-sectioned.md",
+        "site/sources/i18n/en/*.md"
+      ],
+      "surfaces": [
+        "نص التقرير",
+        "صفحة الإصدار",
+        "أحدث إصدار"
+      ],
+      "gates": [
+        "validators/check_en_parity.py"
+      ],
+      "tests": []
+    },
+    {
+      "match": [
+        "tools/crossing_gate.py",
+        "tools/surface_fingerprint.py",
+        "tools/number_fingerprint.py",
+        "tools/impact_matrix.py",
+        "tools/regression_gate.py",
+        "tools/gate_coverage.py"
+      ],
+      "surfaces": [],
+      "gates": [
+        "validators/check_gate_readiness.py"
+      ],
+      "tests": [
+        "tests/test_gate_tools.py"
+      ]
+    }
+  ]
+}

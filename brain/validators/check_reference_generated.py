@@ -31,6 +31,7 @@ def _load_tool(root: Path):
 def main() -> int:
     ap = argparse.ArgumentParser(description="حارس مرجع آلية العمل المولَّد")
     ap.add_argument("--root", default=".", help="جذر المشروع")
+    ap.add_argument("--summary", action="store_true", help="سطر واحد فقط")
     args = ap.parse_args()
     root = Path(args.root).resolve()
 
@@ -42,7 +43,8 @@ def main() -> int:
     rc = mod.cmd_check(root)
     if rc != 0:
         return rc
-    print("   المرجع والمقارنة مولَّدان ولا تعارض بينهما وبين phases.json")
+    if not args.summary:
+        print("   المرجع والمقارنة مولَّدان ولا تعارض بينهما وبين phases.json")
     return 0
 
 
