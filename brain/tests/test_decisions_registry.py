@@ -55,7 +55,10 @@ class Positive(unittest.TestCase):
 
     def test_all_sixteen_present(self):
         reg = json.loads((ROOT / "decisions" / "registry.json").read_text(encoding="utf-8"))
-        self.assertEqual(len(reg["decisions"]), 16)
+        # القرارات لا تُحذف: الحد الأدنى 16، ويجوز أن تنمو مع قرارات جديدة موثّقة
+        self.assertGreaterEqual(len(reg["decisions"]), 16)
+        for d in reg["decisions"]:
+            self.assertTrue(str(d.get("title_ar", "")).strip(), d.get("id"))
 
 
 class Negative(unittest.TestCase):
