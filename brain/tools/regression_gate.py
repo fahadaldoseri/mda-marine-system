@@ -101,7 +101,7 @@ def main() -> int:
         print(f"✘ الانحدار: {len(blockers)} بندًا مانعًا ساقطًا — لا عبور ({' · '.join(blockers)})")
         return 2
     print(f"✔ الانحدار: صفر بند مانع ساقط" +
-          (f" · {len(exceptions)} استثناء بموعد سارٍ" if exceptions else ""))
+          (f" · {sum(1 for r in rows if r.get('open_until'))} بندًا بمهلة مفتوحة" if any(r.get("open_until") for r in rows) else ""))
     return 0
 
 

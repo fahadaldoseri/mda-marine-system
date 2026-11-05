@@ -20,6 +20,15 @@ import re
 import sys
 from datetime import date
 from pathlib import Path
+import json as _json
+def declared(root):
+    """يقرأ المسارات المعلنة من العقد؛ لا مسار مفترض."""
+    m = _json.loads((root / "runbook" / "reference-manifest.json").read_text(encoding="utf-8"))
+    t = {"header": root / m["templates"]["header"], "sections": root / m["templates"]["sections_dir"]}
+    for k, v in t.items():
+        if not v.exists():
+            raise SystemExit(f"✘ مسار معلن مفقود ({k}): {v}")
+    return t
 
 OUT_DOC = "audit/مرجع-آلية-العمل.md"
 OUT_CMP = "audit/مقارنة-الإصدارين-5-6.md"
@@ -82,7 +91,7 @@ def bootstrap(root: Path) -> int:
     sdir.mkdir(parents=True, exist_ok=True)
     for num, name, body in sections:
         (sdir / f"{num:02d}.md").write_text(f"## {num} — {name}\n\n{body}\n", encoding="utf-8")
-    (root / "runbook" / "reference" / "header.md").write_text(header + "\n", encoding="utf-8")
+    (declared(root)["header"]).write_text(header + "\n", encoding="utf-8")
 
     phases = [{"id": "ت", "name": "مرحلة التجهيز لاستخدام المرجع", "items": [
         {"id": f"ت-{i:02d}", "title": t, "status": st, "impact": imp, "basis": bas, "gate": g}
@@ -124,7 +133,7 @@ def load(root: Path):
     chunks: dict[int, str] = {}
     for f in sorted(sdir.glob("*.md")):
         chunks[int(f.stem)] = f.read_text(encoding="utf-8").strip()
-    header = (root / "runbook" / "reference" / "header.md").read_text(encoding="utf-8").strip()
+    header = (declared(root)["header"]).read_text(encoding="utf-8").strip()
     return data, header, chunks
 
 
