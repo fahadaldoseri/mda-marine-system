@@ -31,12 +31,11 @@ REPO_EXTRA_ALLOW = ("skills/.skill_versions.json",)
 
 LOCAL_ONLY_PATTERNS = (
     "audit/backups/",                  # لقطات الإغلاق على الخادم (ك-331
-    "logs/",  # سجلات خطوات الكتيب: مولَّد تشغيلي يُعاد توليده كل جولة (الدليل المُتعقَّب في audit/)
-)
     "brain/logs/skills-sync-",         # نسخ استعادة مهارات محلية مؤقتة؛ لا تُنقل إلى المرآة
     "brain/logs/skills-canon-",        # نسخ قانونية مؤقتة لمهارات (SKILL.md.bak)؛ محلية بطبيعتها
     "brain/logs/apply-",               # أرشيفات التطبيق المحلية المؤقتة؛ لا تُنقل إلى المرآة
-)  # الاستثناءات محصورة بالمخرجات المولّدة، ولا تشمل سجلات التشغيل العامة
+    "logs/",                           # سجلات خطوات الكتيب: مولَّد تشغيلي يُعاد توليده كل جولة، والدليل المُتعقَّب في audit/
+)  # الاستثناءات محصورة بالمخرجات المولّدة والملفات التشغيلية
 SANITIZED = {"brain/appendices/telegram-chat.json", "brain/appendices/telegram-subscriptions.json",
              "brain/appendices/telegram-targets.json",
              "brain/research/styles/sources/archive-reports.html"}
