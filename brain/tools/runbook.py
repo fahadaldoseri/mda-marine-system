@@ -166,6 +166,10 @@ def check_asserts(root, step, date):
                 problems.append(f"النص المطلوب غير موجود في {sub(a['path'], date, root)}")
         elif t == "cmd":
             cmd = [sub(c, date, root) for c in a["command"]]
+            # CMD_SHAPE_V1: صيغة أمر الخطوة قائمة argv نصية غير فارغة، وإلا فشل مغلق برسالة واضحة
+            if not isinstance(cmd, list) or not cmd or any(not isinstance(x, str) or not x for x in cmd):
+                print(f"   ✘ الخطوة {s['id']}: صيغة الأمر يجب أن تكون قائمة argv نصية غير فارغة (CMD_SHAPE_V1)")
+                return 2
             r = subprocess.run(cmd, cwd=root, capture_output=True, text=True, env=step_env(root, date))
             if r.returncode not in a.get("ok_rc", [0]):
                 problems.append(f"فحص فشل (رمز {r.returncode}): {' '.join(cmd)}")

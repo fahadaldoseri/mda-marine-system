@@ -1,3 +1,4 @@
+import unittest
 #!/usr/bin/env python3
 """كل أمر في المانيفست يستدعي سكربتًا موجودًا بخيارات موجودة في نصه (D060 كان يمرّر --check إلى أداة لا تعرفه).
 الاستعمال: python3 tests/test_manifest_commands.py    رمز 0 سليم · 2 خلل"""
@@ -32,3 +33,24 @@ for b in bad:
 if not bad:
     print(f"✔ {n} استدعاء سكربت في المانيفست: كلها موجودة وخياراتها معرَّفة")
 sys.exit(2 if bad else 0)
+
+class TestCommandShape(unittest.TestCase):
+    """ALL_COMMANDS_ARE_ARGV_V1: كل أمر خطوة قائمة argv نصية، وبلا تاريخ مثبَّت."""
+
+    def test_shape_and_date(self):
+        import json, pathlib, re
+        rb = json.loads(pathlib.Path("runbook/runbook.json").read_text(encoding="utf-8"))
+        for s in rb["steps"]:
+            c = s.get("command")
+            self.assertIsInstance(c, list, f"{s['id']}: الأمر ليس قائمة argv")
+            self.assertTrue(all(isinstance(x, str) and x for x in c), f"{s['id']}: عنصر أمر غير نصي")
+            self.assertNotIn(";", c[0], f"{s['id']}: العنصر الأول اسم برنامج لا سطر شل")
+            self.assertNotIn(" ", c[0], f"{s['id']}: العنصر الأول اسم برنامج بلا مسافات")
+            joined = " ".join(c)
+            self.assertIsNone(re.search(r"20\d\d-\d\d-\d\d", joined),
+                              f"{s['id']}: تاريخ مثبَّت في الأمر بدل {{date}}")
+
+
+if __name__ == "__main__":
+    unittest.main()
+
