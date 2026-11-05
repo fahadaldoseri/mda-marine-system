@@ -55,6 +55,17 @@ def copy_section_policy(src_brain, dst_sources):
     return False
 
 
+def copy_card_registry(src_brain, dst_sources):
+    """ينسخ عقد البطاقات الحاكم ليقرأ الموقع عناوين الصفوف منه لا من ترجمة حرّة."""
+    src = Path(src_brain) / 'appendices' / 'card_registry.json'
+    dst = Path(dst_sources) / 'card_registry.json'
+    if not src.exists():
+        return None
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(src, dst)
+    return dst
+
+
 def copy_sources(date_iso: str, brain: Path) -> list:
     log = []
     src_md = brain / "reports" / f"{date_iso}-sectioned.md"
@@ -241,6 +252,7 @@ def main():
 
     brain = Path(a.brain).resolve()
     copy_section_policy(brain, _ROOT / 'sources')
+    copy_card_registry(brain, _ROOT / 'sources')
     for line in copy_sources(a.date, brain):
         print(line)
     for line in sync_special(brain):

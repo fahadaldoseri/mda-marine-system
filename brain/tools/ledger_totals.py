@@ -470,14 +470,17 @@ def make_imo_attacks(today: dt.date) -> dict[str, Any]:
     if cumulative is None:
         cumulative = len(incidents)
     previous = _imo_previous_total(data, "confirmed_incidents")
-    day_hits = cumulative - previous if previous is not None else 0
     stamp = _imo_as_at_date(data)
+    # قاعدة صحيحة: الفرق يُحتسب في يوم تحديث المصدر نفسه فقط؛ أي يوم لاحق بلا تحديث = 0
+    same_day = bool(stamp and today and stamp == today)
+    day_hits = (cumulative - previous) if (previous is not None and same_day) else 0
     base.update({
         "today": day_hits,
         "cumulative": cumulative,
         "updated": stamp.isoformat() if stamp else None,
     })
-    base["basis"] += " قاعدة today: الفرق بين totals الحالية وprevious.totals؛ قاعدة updated: source.as_at في الصفحة الرسمية."
+    base["basis"] += (" قاعدة today: الفرق بين totals الحالية وprevious.totals، ويُحتسب صفرًا في أي يوم لا يوجد فيه تحديث للمصدر "
+                      "(لا يُنقل فرق يوم سابق إلى يوم جديد)؛ قاعدة updated: source.as_at في الصفحة الرسمية.")
     base["definition"] = data.get("definition") or base["definition"]
     warn = data.get("comparison_warning")
     if warn:
@@ -507,12 +510,14 @@ def make_imo_deaths(today: dt.date) -> dict[str, Any]:
     cumulative = totals.get("confirmed_seafarer_deaths")
     previous = _imo_previous_total(data, "confirmed_seafarer_deaths")
     stamp = _imo_as_at_date(data)
+    same_day = bool(stamp and today and stamp == today)
     base.update({
-        "today": cumulative - previous if isinstance(cumulative, int) and previous is not None else 0,
+        "today": (cumulative - previous) if (isinstance(cumulative, int) and previous is not None and same_day) else 0,
         "cumulative": cumulative if isinstance(cumulative, int) else None,
         "updated": stamp.isoformat() if stamp else None,
     })
-    base["basis"] += " قاعدة today: الفرق بين totals الحالية وprevious.totals؛ قاعدة updated: source.as_at في الصفحة الرسمية."
+    base["basis"] += (" قاعدة today: الفرق بين totals الحالية وprevious.totals، ويُحتسب صفرًا في أي يوم لا يوجد فيه تحديث للمصدر؛ "
+                      "قاعدة updated: source.as_at في الصفحة الرسمية.")
     return base
 
 

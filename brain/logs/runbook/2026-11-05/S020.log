@@ -1,0 +1,20 @@
+  تغذيات مرصودة: 81
+  نجح: 59 مصدرًا (78 مسارًا) · فشل: 1 مصدرًا · يُفحص بالمتصفح: 0 · عناصر مقروءة: 1929
+  ◻ مرجعية تُراجع يدويًا: 2 مصدرًا · الأرقام: [39, 52]
+   ✘ 27 وكالة الأنباء الكويتية (كونا): all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | official-page:jina.ai/kuna: HTTP Error 503: Service Unavailable | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://www.kuna.net.kw/
+Call log:
+  - navigating to "https://www.kuna.net.kw/", waiting until "dom
+   ◐ 12 OFAC — الإجراءات الأخيرة: محتوى متقادم — عمر أحدث مادة 630 يومًا
+   ◐ 13 ShipNext — التحقق من السفن: محتوى متقادم — عمر أحدث مادة 80 يومًا
+   ◐ 20 جريدة الأيام: محتوى متقادم — عمر أحدث مادة 1026 يومًا
+   ◐ 20 جريدة الأيام: محتوى متقادم — عمر أحدث مادة 1026 يومًا
+   ◐ 30 القيادة المركزية الأمريكية (سنتكوم: محتوى متقادم — عمر أحدث مادة 272 يومًا
+   ◐ 31 JMIC: محتوى متقادم — عمر أحدث مادة 15 يومًا
+   ◐ 32 IMB/ICC — القرصنة: محتوى متقادم — عمر أحدث مادة 20 يومًا
+  ✔ حُفظ: feeds-2026-11-05.json / .md / .status.json — الحالة: degraded
+  · لا علامة تشغيل: /home/ubuntu/brain-marine-news/logs/pipeline-2026-11-05.json — إنشاء علامة pipeline عبر write_mark
+  ✔ العلامة (pipeline): /home/ubuntu/brain-marine-news/logs/pipeline-2026-11-05.json · المخطط v1 · نص التقرير موجود: False · المصادر: 62/60/59 · البوابة: not_run
+  · أضيف أثر الإنشاء: created_by=mark_components
+  ✔ حُدّثت المكوّنات ['feeds'] من المخرجات · الحالة العامة: degraded
+     feeds: {"status": "degraded", "checked": 60, "ok": 59, "failed": 1, "failed_feeds": [{"num": 27, "name": "وكالة الأنباء الكويتية (كونا)",
+   ملاحظة: تسخين الصفحة لم يكتمل — Error
