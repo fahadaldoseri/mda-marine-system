@@ -152,7 +152,7 @@ def news_card_block(meta, *, esc, inline, report_date, card_targets=None):
     changed_href = targets.get("changed_href") or "/additions.html#sec-00"
     changed_goto = targets.get("changed_title") or "ما تغيّر منذ التقرير السابق"
     rows.append(
-        '<div class="sc-row"><div class="sc-l">خلال 24 ساعة السابقة</div>'
+        '<div class="sc-row"><div class="sc-l" data-card-label="maritime-security-news:changed">خلال 24 ساعة السابقة</div>'
         f'<div class="sc-v"><p class="sc-gist">{inline(_gist(changes, limit=2))}</p>'
         f'<p class="sc-more">{_arabic_count(changed_count, "items")} · '
         f'<a href="{esc(changed_href)}" data-goto="{esc(changed_goto)}" data-alt="{esc(changed_href)}">التفاصيل</a></p></div></div>')
@@ -165,7 +165,7 @@ def news_card_block(meta, *, esc, inline, report_date, card_targets=None):
     warning_href = targets.get("warning_href") or f"/reports/{report_date}.html#sec-06"
     warning_gist = _gist(warning_texts, limit=2)
     rows.append(
-        '<div class="sc-row"><div class="sc-l">التحذيرات والتنبيهات النشطة</div>'
+        '<div class="sc-row"><div class="sc-l" data-card-label="maritime-security-news:warnings">التحذيرات والتنبيهات النشطة</div>'
         f'<div class="sc-v"><p class="sc-gist">{inline(warning_gist)}</p>'
         f'<p class="sc-more">{_arabic_count(warning_count, "warnings")} · '
         f'<a href="{esc(warning_href)}" data-goto="التحذيرات والتنبيهات النشطة" data-alt="{esc(warning_href)}">القسم الرسمي</a></p></div></div>')
@@ -175,7 +175,7 @@ def news_card_block(meta, *, esc, inline, report_date, card_targets=None):
     watch_href = targets.get("watch_href") or "/additions.html#sec-04-sub-02"
     watch_title = targets.get("watch_title") or "علامات الإنذار المبكر 24–72 ساعة"
     rows.append(
-        '<div class="sc-row"><div class="sc-l">ما يُراقب خلال 24 ساعة</div>'
+        '<div class="sc-row"><div class="sc-l" data-card-label="maritime-security-news:watch">ما يُراقب خلال 24 ساعة</div>'
         f'<div class="sc-v"><p class="sc-gist">{inline(_gist(watch, limit=2))}</p>'
         f'<p class="sc-more">{_arabic_count(watch_count, "items")} · '
         f'<a href="{esc(watch_href)}" data-goto="{esc(watch_title)}" data-alt="{esc(watch_href)}">المؤشرات الكاملة</a></p></div></div>')

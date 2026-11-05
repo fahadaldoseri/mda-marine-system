@@ -327,6 +327,44 @@ def localize_patterns(s: str) -> str | None:
         area = _tr_area(v)
         return area if area != v else v
 
+    # عدّاد الوقائع غير المؤكدة (سطر مختصر)
+    m = re.fullmatch(r"(\d+)\s*وقائع غير مؤكدة\s*·\s*تُذكر ولا تُحتسب", n)
+    if m:
+        return f"{m.group(1)} unconfirmed incidents · reported but not counted"
+    # رقم الإصدار بالتاريخ
+    m = re.fullmatch(r"[·•]?\s*إصدار\s+(\d{1,2})\s+([^\s]+)\s+(\d{4})", n)
+    if m:
+        month = MONTHS.get(m.group(2))
+        if not month:
+            return None
+        return f"· Edition {m.group(1)} {month} {m.group(3)}"
+    # وسم «إعلان · unconfirmed» في بطاقات الوقائع
+    if n == "إعلان · unconfirmed":
+        return "Declaration · unconfirmed"
+    # إحالة الرمز بين اليوم والسجل
+    m = re.fullmatch(r"بالرمز\s+(\d{2}-\d{2})\s*\((\d{2}-\d{2})\)\.", n)
+    if m:
+        return f"under reference {m.group(1)} ({m.group(2)})."
+    # عدد البنود الأخرى في قسم «ما تغيّر»
+    m = re.fullmatch(r"و(\d+)\s+بنود أخرى في قسم «ما تغيّر»\.", n)
+    if m:
+        return f"and {m.group(1)} further items in the «What changed» section."
+    # صفّ واقعة غير مؤكدة في بطاقة الوقائع
+    m = re.fullmatch(
+        r"الواقعة\s+(\d{2}-\d{2})\s*—\s*المنطقة\s+(.+?)،\s*الصفة\s+(.+?)،\s*الإثبات\s+(.+?)،\s*الموقع\s+(.+?)\.",
+        n)
+    if m:
+        ch = {"رواية من طرف واحد": "one-sided account", "رواية": "account",
+              "إعلان": "declaration", "تقرير مهني": "professional report",
+              "بلاغ رسمي": "official report", "بلاغ": "report"}
+        ev = {"غير مؤكد": "unconfirmed", "مؤكد": "confirmed"}
+        po = {"تقريبي": "approximate", "محدد": "specific"}
+        area = _tr_area(m.group(2))
+        if area in ch or m.group(3) not in ch or m.group(4) not in ev or m.group(5) not in po:
+            return None
+        return (f"Incident {m.group(1)} — Area {area}, character {ch[m.group(3)]}, "
+                f"evidence {ev[m.group(4)]}, position {po[m.group(5)]}.")
+
     # عائلة المستوى العام: بنية كاملة ومقفلة على مستوى/قطاعات/عدد/مرجع معروف؛
     # اختلافات الصياغة المقبولة محصورة في «يستند/يُسند»، «وهو/هذا»، و«لا ترفع/لا تُرفع».
     m = re.fullmatch(
@@ -903,6 +941,40 @@ def _collapse_inline_source_duplicates(out: str) -> str:
     return out
 
 
+def card_row_labels() -> dict[str, str]:
+    """عناوين صفوف البطاقات بالإنجليزية من عقدها الحاكم، لا من ترجمة حرّة للعنوان العربي."""
+    path = pathlib.Path("sources") / "card_registry.json"
+    try:
+        registry = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    out: dict[str, str] = {}
+    for card in registry.get("cards", []) or []:
+        cid = str(card.get("id"))
+        for counter in card.get("counters", []) or []:
+            key = str(counter.get("key"))
+            label_en = counter.get("row_label_en")
+            if cid and key and label_en:
+                out[f"{cid}:{key}"] = label_en
+    return out
+
+
+def _apply_card_row_labels(out: str) -> str:
+    """يثبّت نصّ كل صف بطاقة مُوسَّم على نص العقد الإنجليزي."""
+    labels = card_row_labels()
+    if not labels:
+        return out
+
+    def repl(match: "re.Match[str]") -> str:
+        key = match.group("key")
+        label = labels.get(key)
+        if not label:
+            return match.group(0)
+        return (f'<div class="sc-l" data-card-label="{key}">{label}</div>')
+
+    return re.sub(r'<div class="sc-l" data-card-label="(?P<key>[^"]+)">[^<]*</div>', repl, out)
+
+
 def translate_page(html_text: str, date: str, tm: dict[str, str], gl: dict[str, str]):
     tr = make_translator(tm, gl)
     c = _Collector()
@@ -971,6 +1043,7 @@ def translate_page(html_text: str, date: str, tm: dict[str, str], gl: dict[str, 
     remaining = [t for t, translated in zip(c.units, units) if not _unit_ok(t, translated)]
     out = _collapse_inline_source_duplicates(out)
     out = _fix_chrome(out)
+    out = _apply_card_row_labels(out)
     return out, [norm(x) for x in remaining], len(c.units)
 
 

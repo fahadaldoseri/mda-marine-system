@@ -84,6 +84,22 @@ def sentences(s: str) -> list[str]:
     return [p.strip() for p in re.split(r"(?<=[.؟!؛])\s+|\s+·\s+", s) if p.strip()]
 
 
+def sentences_loose(s: str) -> list[str]:
+    """تفكيك موسّع: يعامل «؛» و«;» فاصلًا واحدًا حتى تتساوى الجملتان العربية والإنجليزية."""
+    return [p.strip() for p in re.split(r"(?<=[.؟!؛;])\s+|\s+·\s+", s) if p.strip()]
+
+
+def pair_sentences(a: str, e: str):
+    """جمل السطرين: التفكيك القياسي أولًا، ثم الموسّع عند اختلاف العدد (بلا تغيير المسار الناجح)."""
+    sa, se = sentences(a), sentences(e)
+    if sa and se and len(sa) == len(se):
+        return sa, se
+    sa2, se2 = sentences_loose(a), sentences_loose(e)
+    if sa2 and se2 and len(sa2) == len(se2):
+        return sa2, se2
+    return [], []
+
+
 def words(s: str) -> list[str]:
     return [w for w in re.split(r"\s+", s.strip()) if w]
 
@@ -158,8 +174,8 @@ def derive(unit: str, pairs) -> str | None:
         na = i18n_en.norm(a)
         if nu not in na:
             continue
-        sa, se = sentences(a), sentences(e)
-        if len(sa) != len(se) or not sa:
+        sa, se = pair_sentences(a, e)
+        if not sa:
             continue
         # موضع أول جملة من الوحدة داخل جمل السطر العربي
         start = None
@@ -225,9 +241,10 @@ def main() -> int:
     for pg in pages:
         if pg.name == "additions.html":
             source_date = latest_source_date()
-            pairs = build_pairs(source_date)
+            # الإضافات تعرض نصوصًا من أيام سابقة أيضًا؛ فالاشتقاق يشمل اليوم و14 يومًا قبله
+            pairs = build_pairs_history(source_date)
             surface = "additions"
-            note = "الإضافات ← أحدث إصدار منشور"
+            note = "الإضافات ← أحدث إصدار منشور + 14 يومًا سابقة"
         else:
             source_date = a.date
             pairs = build_pairs_history(a.date)

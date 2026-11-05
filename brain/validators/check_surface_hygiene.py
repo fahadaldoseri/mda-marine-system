@@ -10,6 +10,8 @@
 """
 from __future__ import annotations
 
+import os
+
 import argparse
 import json
 import re
@@ -326,7 +328,7 @@ def main() -> int:
     args = parser.parse_args()
     try:
         failures = violations(args.report, args.additions)
-    except Exception as exc:  # لا نجاح عند تعذر القياس الداخلي.
+    except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError) as exc:  # لا نجاح عند تعذر القياس الداخلي.
         failures = [f"تعذر القياس الداخلي؛ فشل مغلق: {type(exc).__name__}: {exc}"]
     status = "مطابق" if not failures else "منع"
     if args.json:
@@ -343,4 +345,7 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    import sys as _sys, pathlib as _pl
+    _sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)

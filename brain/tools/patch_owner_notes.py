@@ -16,6 +16,9 @@ DATE = sys.argv[1] if len(sys.argv) > 1 else "2026-11-03"
 Z1 = "Z1 — مضيق هرمز وخليج عُمان والخليج العربي"
 
 META = BRAIN / "web" / "meta" / f"{DATE}.json"
+REGISTRY = json.loads((BRAIN / "appendices" / "card_registry.json").read_text(encoding="utf-8"))
+IMO_URL = "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx"
+IMO_SOURCE_STRING = f"appendices/imo-incidents.json + {IMO_URL}"
 ZONES = BRAIN / "web" / "zones" / f"{DATE}.json"
 
 # عطل ك-487: كانت أرقام IMO مثبّتة نصًّا (125/24 وتاريخ 02/11/2026) فعادت قيمة متقادمة
@@ -35,6 +38,34 @@ def imo_as_at() -> str:
     if len(parts) == 3 and parts[1] in _MONTHS:
         return f"{int(parts[0]):02d}/{_MONTHS[parts[1]]}/{parts[2]}"
     return raw
+
+
+def imo_as_at_iso() -> str:
+    """تاريخ بيانات القائمة الرسمية بصيغة ISO للمقارنة مع مقاييس الدفتر."""
+    d = imo_as_at()
+    parts = d.split("/")
+    return f"{parts[2]}-{parts[1]}-{parts[0]}" if len(parts) == 3 else d
+
+
+def sync_official_cards(oc: list[dict]) -> int:
+    """يوحّد البطاقات الدائمة مع عقدها الحاكم: العقد مصدر واحد لا تُكتب قيمه يدويًا."""
+    contracts = {str(c.get("id")): c for c in (REGISTRY.get("official_cards") or {}).get("cards", [])}
+    touched = 0
+    for card in oc:
+        contract = contracts.get(str(card.get("id")))
+        if not contract:
+            continue
+        for key, value in contract.items():
+            if key == "layers":
+                for lk, lv in (value or {}).items():
+                    target = card.setdefault("layers", {}).setdefault(lk, {})
+                    for kk in ("label", "label_en", "state"):
+                        if kk in (lv or {}):
+                            target[kk] = lv[kk]
+            elif key != "id":
+                card[key] = value
+        touched += 1
+    return touched
 
 
 def patch_meta() -> list[str]:
@@ -86,7 +117,20 @@ def patch_meta() -> list[str]:
             },
         })
         log.append("official_cards: أُضيفت بطاقة سجل الحوادث المؤكدة من IMO")
-    log.append(f"official_cards: {len(oc)} بطاقات")
+    touched = sync_official_cards(oc)
+    log.append(f"official_cards: {len(oc)} بطاقات · مُزامَنة مع العقد: {touched}")
+
+    # بطاقات IMO في صف المؤشرات: المصدر والرابط والقيم من المصدر الرسمي وحده
+    for card in m["hero_kpis"]:
+        if str(card.get("id")) not in ("imo-confirmed-incidents", "imo-seafarer-deaths"):
+            continue
+        cumulative = IMO_INCIDENTS if card["id"] == "imo-confirmed-incidents" else IMO_DEATHS
+        card["source"] = IMO_SOURCE_STRING
+        card["source_url"] = IMO_URL
+        card["value"] = str(card.get("value") or "0")
+        card["cumulative"] = cumulative
+        card["updated"] = imo_as_at_iso()
+    log.append("hero_kpis: مواءمة بطاقتَي IMO مع المصدر الرسمي")
 
     ek = m["event_keys"]
     m["event_keys"] = [e for e in ek if e.get("code") != "MN-2026-11-03-04"]

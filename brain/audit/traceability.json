@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-04T20:58:32.110608+00:00",
+  "generated_at": "2026-11-05T04:35:47.598565+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -3877,35 +3877,35 @@
     {
       "fault_id": "ك-519",
       "state": "مغلق",
-      "lesson_id": null,
+      "lesson_id": "ك-519",
       "barrier_id": "B-b05e3c42",
       "run_evidence": "racking.py` ⇒ كل ملفات الشيفرة متتبَّعة (المستثنى المعلَّل: 0) · D005 رمز 0"
     },
     {
       "fault_id": "ك-520",
       "state": "مغلق",
-      "lesson_id": null,
+      "lesson_id": "ك-520",
       "barrier_id": "B-55584ff3",
       "run_evidence": "#424 `check_backup_parity.py --mode strict` ⇒ «النتيجة: مطابق» · D070 رمز 0"
     },
     {
       "fault_id": "ك-521",
       "state": "مغلق",
-      "lesson_id": null,
+      "lesson_id": "ك-521",
       "barrier_id": "B-e20e08ea",
       "run_evidence": "ناء `check_number_bindings.py --date 2026-11-04` ⇒ مطابق · G037 وG054 رمز 0 · بطاقة الوفيات على المو"
     },
     {
       "fault_id": "ك-522",
       "state": "بانتظار التحقق",
-      "lesson_id": null,
+      "lesson_id": "ك-522",
       "barrier_id": "B-e9ab8dc1",
       "run_evidence": null
     },
     {
       "fault_id": "ك-523",
       "state": "مغلق",
-      "lesson_id": null,
+      "lesson_id": "ك-523",
       "barrier_id": "B-12929125",
       "run_evidence": "y.py` ⇒ «صفر شيفرة غير متتبَّعة» · `check_classification_matrix.py` ⇒ 4/4 بلا اختلاف"
     }

@@ -20,6 +20,8 @@ import tempfile
 from pathlib import Path
 
 ARABIC = re.compile(r"[\u0600-\u06FF]")
+# جذر مساحة العمل: /home/ubuntu (يفصل بين الدماغ والموقع)
+_ROOT = Path(__file__).resolve().parents[3]
 TAG = re.compile(r"<[^>]+>")
 SCRIPT = re.compile(r"<(script|style)\b.*?</\1>", re.S | re.I)
 MT_FLAG = re.compile(

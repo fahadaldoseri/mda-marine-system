@@ -1,0 +1,253 @@
+{
+  "date": "2026-11-05",
+  "window": "خلال 24 ساعة السابقة",
+  "scale_version": 1,
+  "registry_version": 1,
+  "scale_levels": [
+    {
+      "ar": "حرج",
+      "rank": 5,
+      "token": "critical",
+      "color": "#FFA3A3",
+      "marker": "■ ■ ■ ■ ■"
+    },
+    {
+      "ar": "مرتفع جدًا",
+      "rank": 4,
+      "token": "severe",
+      "color": "#FFA96B",
+      "marker": "▲ ▲ ▲ ▲"
+    },
+    {
+      "ar": "مرتفع",
+      "rank": 3,
+      "token": "high",
+      "color": "#FFC24D",
+      "marker": "▲ ▲ ▲"
+    },
+    {
+      "ar": "متوسط",
+      "rank": 2,
+      "token": "med",
+      "color": "#d29119",
+      "marker": "▲ ▲"
+    },
+    {
+      "ar": "منخفض",
+      "rank": 1,
+      "token": "low",
+      "color": "#28b45a",
+      "marker": "▲"
+    }
+  ],
+  "overall": {
+    "level": "مرتفع جدًا",
+    "rank": 4,
+    "top_zone": "مضيق هرمز وخليج عُمان والخليج العربي",
+    "top_zone_id": "Z1",
+    "basis": "أعلى نطاق: مضيق هرمز وخليج عُمان والخليج العربي — وقائع مؤهّلة: إعلان الحرس الثوري تدمير أربع ناقلات نفط بألغام بحرية داخل مضيق هرمز وضبط سفينتين وإسقاط مسيّرة أمريكية من نوع MQ-9 · إصابة ناقلة نفط خام كبيرة بمقذوفين وإصابة غرفة محركاتها في أحدث هجوم داخل مضيق هرمز · مقتل بحّار من ولاية غوجارات الهندية في هجوم على سفينة قرب مضيق هرمز ودفنه في عُمان"
+  },
+  "zones": [
+    {
+      "id": "Z1",
+      "name": "مضيق هرمز وخليج عُمان والخليج العربي",
+      "level": "مرتفع جدًا",
+      "rank": 4,
+      "confirmed": 2,
+      "probable": 0,
+      "excluded": 2,
+      "events": 5,
+      "qualifying_codes": [
+        "MN-2026-11-05-01",
+        "MN-2026-11-05-03",
+        "MN-2026-11-05-05"
+      ],
+      "categories": [
+        "تهديد ألغام",
+        "هجوم على سفينة"
+      ],
+      "basis": "وقائع مؤهّلة: إعلان الحرس الثوري تدمير أربع ناقلات نفط بألغام بحرية داخل مضيق هرمز وضبط سفينتين وإسقاط مسيّرة أمريكية من نوع MQ-9 · إصابة ناقلة نفط خام كبيرة بمقذوفين وإصابة غرفة محركاتها في أحدث هجوم داخل مضيق هرمز · مقتل بحّار من ولاية غوجارات الهندية في هجوم على سفينة قرب مضيق هرمز ودفنه في عُمان",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-05"
+    },
+    {
+      "id": "Z2",
+      "name": "باب المندب والبحر الأحمر",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-05"
+    },
+    {
+      "id": "Z3",
+      "name": "بحر العرب",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-05"
+    },
+    {
+      "id": "Z4",
+      "name": "القرن الأفريقي",
+      "level": "متوسط",
+      "rank": 2,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "استمراري — آخر واقعة مؤهّلة في هذا القطاع بتاريخ 2026-11-03.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": true,
+      "last_change": "2026-11-03",
+      "carry_from": "2026-11-03"
+    },
+    {
+      "id": "Z5",
+      "name": "المحيط الهندي",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-05"
+    }
+  ],
+  "counter": {
+    "total": 5,
+    "qualifying": 3,
+    "confirmed": 2,
+    "probable": 0,
+    "unconfirmed_qualifying": 1,
+    "unconfirmed_total": 3,
+    "excluded": 2,
+    "nonspatial": 0
+  },
+  "generated_from": "cumulative-2026/daily/2026-11-05.json",
+  "events": [
+    {
+      "code": "MN-2026-11-05-01",
+      "title": "إعلان الحرس الثوري تدمير أربع ناقلات نفط بألغام بحرية داخل مضيق هرمز وضبط سفينتين وإسقاط مسيّرة أمريكية من نوع MQ-9",
+      "area": "إيران - مضيق هرمز",
+      "class": "رواية من طرف واحد",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": true,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "نوع مؤهّل: «ألغام» وهدف بحري/ملاحي: «ناقلات»",
+      "incident_group": "MN-2026-11-05-01",
+      "source_excerpt": "IRGC says four oil tankers destroyed by naval mines in Strait of Hormuz",
+      "category": "تهديد ألغام"
+    },
+    {
+      "code": "MN-2026-11-05-02",
+      "title": "نقل عن مسؤول أمريكي أن القوات الأمريكية نفذت ضربات دفاعية على أهداف إيرانية داخل مضيق هرمز",
+      "area": "إيران - مضيق هرمز",
+      "class": "نقل إعلامي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": false,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-05-02",
+      "source_excerpt": "US has conducted defensive strikes on some Iranian targets in the Strait of Hormuz, US official says",
+      "category": ""
+    },
+    {
+      "code": "MN-2026-11-05-03",
+      "title": "إصابة ناقلة نفط خام كبيرة بمقذوفين وإصابة غرفة محركاتها في أحدث هجوم داخل مضيق هرمز",
+      "area": "مضيق هرمز",
+      "class": "تقرير مهني",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": true,
+      "confirmation": "confirmed",
+      "qualify_reason": "نوع مؤهّل: «هجوم» وهدف بحري/ملاحي: «ناقلة»",
+      "incident_group": "MN-2026-11-05-03",
+      "source_excerpt": "Two projectiles hit VLCC blacklisted by Iran this week",
+      "category": "هجوم على سفينة"
+    },
+    {
+      "code": "MN-2026-11-05-04",
+      "title": "إعلان السماح للسفن الهندية بالمرور عبر مضيق هرمز بعد إغلاق استمر ثمانية أشهر",
+      "area": "إيران - مضيق هرمز",
+      "class": "إعلان",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": false,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-05-04",
+      "source_excerpt": "Iran to allow Indian ships to pass through Hormuz: Route had been closed for 8 months; India imports 40% of...",
+      "category": ""
+    },
+    {
+      "code": "MN-2026-11-05-05",
+      "title": "مقتل بحّار من ولاية غوجارات الهندية في هجوم على سفينة قرب مضيق هرمز ودفنه في عُمان",
+      "area": "عُمان - مضيق هرمز",
+      "class": "تقرير مهني",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": true,
+      "confirmation": "confirmed",
+      "qualify_reason": "نوع مؤهّل: «هجوم» وهدف بحري/ملاحي: «سفينة»",
+      "incident_group": "MN-2026-11-05-05",
+      "source_excerpt": "Attack on vessel near Strait of Hormuz: Deceased sailor hailed from Gujarat, kin plan burial in Oman",
+      "category": "هجوم على سفينة"
+    }
+  ]
+}
