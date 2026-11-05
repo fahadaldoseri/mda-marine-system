@@ -16,6 +16,16 @@ import argparse
 import importlib.util
 import sys
 from pathlib import Path
+import json as _json
+def _declared_or_die(root):
+    m = root / "runbook" / "reference-manifest.json"
+    if not m.exists():
+        raise SystemExit("✘ عقد مسارات المرجع مفقود: runbook/reference-manifest.json")
+    d = _json.loads(m.read_text(encoding="utf-8"))
+    miss = [v for v in [d["templates"]["header"], d["templates"]["sections_dir"]] if not (root / v).exists()]
+    if miss:
+        raise SystemExit("✘ مسار معلن في العقد غير موجود: " + " · ".join(miss))
+    return d
 
 TOOL = "tools/build_workflow_reference.py"
 

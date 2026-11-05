@@ -15,6 +15,21 @@
       "gate": "حارس المرجع المولَّد (تعديل يدوي مُقحَم — بعد إتاحة المولّد)",
       "rc": 1,
       "final_line": "FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmpdu0o1wfb/runbook/reference/header.md'"
+    },
+    {
+      "gate": "حارس المرجع — نسخة سليمة (مسار معلن)",
+      "rc": 1,
+      "final_line": "FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmp754wuo2a/runbook/runbook.json'"
+    },
+    {
+      "gate": "حارس المرجع — نسخة مُقحَمة",
+      "rc": 1,
+      "final_line": "FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmp754wuo2a/runbook/runbook.json'"
+    },
+    {
+      "gate": "حارس المرجع — عقد مسارات مفقود",
+      "rc": 1,
+      "final_line": "FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmp754wuo2a/runbook/reference-manifest.json'"
     }
   ],
   "note": "الاختبار الأول للمرجع كان غير صالح: مُنع لغياب المولّد لا لكشف الإقحام؛ أُعيد بعد إتاحته."
