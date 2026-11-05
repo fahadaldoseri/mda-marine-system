@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة 68dc920a65642ee1). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة 3e14af5e1160ad0d). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -106,6 +106,7 @@
 | G061 | سياسة التسليم المتصل (قرار المالك: أ) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G061.log؛ cmd:bash -lc grep -q '✔ سياسة التسليم المتصل:' logs/runbook/{date}/G061.log | ف1–ف5 — بوابة التحقق | validators/check_delivery_policy.py، runbook/delivery-policy.json، tests/test_delivery_policy.py | stop |
 | G062 | دفتر القرارات (حالة كل قرار ودليله) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G062.log؛ cmd:bash -lc grep -q '✔ دفتر القرارات:' logs/runbook/{date}/G062.log | ف1–ف5 — بوابة التحقق | validators/check_decisions_registry.py، decisions/registry.json، tests/test_decisions_registry.py | stop |
 | G063 | مرجع آلية العمل المولَّد (بنود مرقّمة وسقف جهد مشتق) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G063.log؛ cmd:bash -lc grep -q '✔ مرجع آلية العمل:' logs/runbook/{date}/G063.log | ف1–ف5 — بوابة التحقق | validators/check_reference_generated.py، tools/build_workflow_reference.py، runbook/phases.json، tests/test_reference_generator.py | stop |
+| G064 | الانحدار التراكمي وأدوات البوابة المانعة | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G064.log؛ cmd:bash -lc grep -q '✔ الانحدار:' logs/runbook/{date}/G064.log | ف1–ف5 — بوابة التحقق | tools/regression_gate.py، tools/surface_fingerprint.py، tools/number_fingerprint.py، tools/impact_matrix.py، tools/crossing_gate.py، tools/gate_coverage.py، runbook/regression-items.json، runbook/impact-map.json، validators/check_gate_readiness.py | stop |
 | D005 | تحديث النسخة الاحتياطية قبل النشر (شرط بوابة ما قبل التشغيل) | script |  |  | cmd:bash -lc test -s "$B/logs/runbook/{date}/D005.log" && grep -q 'parity' "$B/logs/runbook/{date}/D005.log" || true | س2 — الإغلاق والدفع |  | stop |
 | D010 | نشر الموقع (بعد كل البوابات) | script |  |  | cmd:python3 -c import json,sys;d=json.load(open('logs/publish-{date}.json'));sys.exit(0 if d.get('status')=='ok' else 1) | س2 — الإغلاق والدفع | tools/publish_changes.sh، tools/publish_site.sh، validators/check_en_parity.py | stop |
 | D020 | التحقق الحي من النشر (قراءة فقط) | script |  |  | cmd:python3 -c import json,sys;d=json.load(open('logs/live-{date}.json'));sys.exit(0 if d.get('status')=='ok' else 1) | س2 — الإغلاق والدفع | tools/check_live.sh، tools/live_visual_audit.py، tools/live_dom_audit.py | stop |

@@ -4811,6 +4811,63 @@
       "gate_title": "مرجع آلية العمل المولَّد"
     },
     {
+      "id": "G064",
+      "title": "الانحدار التراكمي وأدوات البوابة المانعة",
+      "kind": "script",
+      "phase": "finalize",
+      "assert": [
+        {
+          "type": "cmd",
+          "command": [
+            "bash",
+            "-lc",
+            "test -s logs/runbook/{date}/G064.log"
+          ]
+        },
+        {
+          "type": "cmd",
+          "command": [
+            "bash",
+            "-lc",
+            "grep -q '✔ الانحدار:' logs/runbook/{date}/G064.log"
+          ]
+        }
+      ],
+      "links": {
+        "rules": [
+          "ف1–ف5 — بوابة التحقق"
+        ],
+        "files": [
+          "tools/regression_gate.py",
+          "tools/surface_fingerprint.py",
+          "tools/number_fingerprint.py",
+          "tools/impact_matrix.py",
+          "tools/crossing_gate.py",
+          "tools/gate_coverage.py",
+          "runbook/regression-items.json",
+          "runbook/impact-map.json",
+          "validators/check_gate_readiness.py"
+        ],
+        "gates": [],
+        "tests": [
+          "tests/test_gate_tools.py"
+        ]
+      },
+      "on_fail": "stop",
+      "command": [
+        "bash",
+        "-lc",
+        "B=\"$PWD\"; export B SITE; mkdir -p \"$B/logs/runbook/{date}\"; python3 \"$B/tools/regression_gate.py\" --root \"$B\" --until الكل --out \"$B/logs/runbook/{date}/G064-regression.json\"; rc=$?; exit $rc"
+      ],
+      "ok_rc": [
+        0
+      ],
+      "warn_rc": [
+        1
+      ],
+      "gate_title": "الانحدار التراكمي"
+    },
+    {
       "id": "D005",
       "title": "تحديث النسخة الاحتياطية قبل النشر (شرط بوابة ما قبل التشغيل)",
       "kind": "script",
