@@ -4757,7 +4757,8 @@
     ],
     "gates": [],
     "tests": [
-     "tests/test_delivery_scripts.sh"
+     "tests/test_delivery_scripts.sh",
+     "tests/test_live_dom_dup_scope.py"
     ]
    },
    "on_fail": "stop",

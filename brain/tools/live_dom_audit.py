@@ -49,6 +49,11 @@ JS = r"""
     if (!visible(el)) return;
     if (el.closest('[aria-hidden="true"]')) return;   // فهرس بصري زخرفي: لا يُعدّ تكرار محتوى
     if (el.children.length > 0) return;              // الأوراق فقط
+    // ك-526: حقول البطاقة القيمية (الوسم، درجة الموثوقية، الرمز) بيانات لا محتوى؛
+    // تكرار القيمة نفسها بين بطاقات مختلفة سليم، فلا يُحتسب تكرارًا نصيًّا مرئيًّا.
+    if (el.hasAttribute('data-reliability') || el.hasAttribute('data-classification')) return;
+    if (el.classList.contains('ev-badge') || el.classList.contains('ev-reliability')
+        || el.classList.contains('ev-code') || el.classList.contains('ev-idx')) return;
     const t = (el.textContent || '').replace(/\s+/g, ' ').trim();
     if (t.length < 60) return;
     if (seen.has(t)) out.dup.push({text: t.slice(0, 90), first: seen.get(t), again: el.tagName.toLowerCase()});
