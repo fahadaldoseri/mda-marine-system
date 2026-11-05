@@ -62,6 +62,10 @@ def check(root: Path) -> list[str]:
             errs.append(f"{did}: بلا عنوان")
         if st in DONE:
             ev = d.get("evidence") or []
+            # EVIDENCE_SHAPE_V1: دليل بشكل غير قائمة عناصر kind/ref يُمنع ولا يُسقط الحارس
+            if not isinstance(ev, list) or any(not isinstance(x, dict) for x in ev):
+                errs.append(f"{did}: صيغة الدليل يجب أن تكون قائمة عناصر kind/ref")
+                continue
             if not ev:
                 errs.append(f"{did}: حالة «{st}» بلا دليل")
             if not str(d.get("governing_file", "")).strip():
