@@ -9,7 +9,7 @@ Use the MCP server named exactly `manus-tasks` in a Manus chat, on cloud Sandbox
 
 ## Choose the execution path
 
-The eight task/Project management tools below need no user confirmation or `get_access` call and do not install API credentials. Use each tool's input schema. For supported script-based HTTP operations, call `get_access` first; its first call asks the user to allow script API access for this chat. Wait for that decision rather than asking for a second verbal confirmation. Denial of script access does not disable the direct tools, but never use them to contradict a refusal of the underlying action.
+The task, file and Project tools below need no user confirmation or `get_access` call and do not install API credentials. Use each tool's input schema. For supported script-based HTTP operations, call `get_access` first; its first call asks the user to allow script API access for this chat. Wait for that decision rather than asking for a second verbal confirmation. Denial of script access does not disable the direct tools, but never use them to contradict a refusal of the underlying action.
 
 Only the main conversation agent may call these tools, including `get_access`. Child/workflow subagents and detached executions must return the API work to their main-session coordinator. A tool error is not success. If script approval is pending or rejected, do not read or use credentials or retry automatically. An older host reporting an unsupported direct tool needs updating; do not automatically request script access as a fallback.
 
@@ -20,10 +20,13 @@ Only the main conversation agent may call these tools, including `get_access`. C
 | Find tasks or inspect a Project's tasks | `list_tasks` | For a specific Project, pass both `scope: "project"` and `project_id`; retain returned task IDs for later calls. |
 | Read another task's conversation or results | `list_task_messages` | Use its `task_id`; read relevant history before summarizing results or sending a context-dependent follow-up. |
 | Continue a task or send it instructions | `send_task_message` | Send `message.content` to the existing `task_id`; do not create a replacement task. |
+| Attach local files to a task message | `upload_file` | Pass absolute paths; then put each returned `file_id` in `message.content` as `{"type":"file","file_id":"..."}` next to the text it belongs to. |
 | Rename a task or change its visibility/sharing | `update_task` | Omit `task_id` for the current task; use an explicit ID for another task. Provide only the requested settings. |
 | Start an independent job | `create_task` | Supply a self-contained first message; omit `project_id` to inherit the current Project; set an ID or an empty string only to override it. |
 
 Resolve a task from an explicit ID or `list_tasks`; if several tasks match, ask which one before sending a message. Follow `next_cursor` when the requested task/history is not on the first page. A partial page is not the entire history, and an accepted message does not mean the task has finished.
+
+**Send files as attachments.** Another task cannot open this computer's paths, and copied signed URLs break or expire. To share a screenshot, report or other local file, call `upload_file` with its absolute path, then reference the returned `file_id` in the message instead of pasting a path or URL. One call accepts up to 20 files, each with a file extension; executables, scripts and installers are rejected, and each file must finish uploading within 3 minutes. Use the IDs within 48 hours. If `upload_file` fails, report the error rather than sending the message without the files.
 
 **Continue in the current task by default.** Create a separate user-visible task only when the user explicitly asks for one or accepts a new-task suggestion; do not ask for another confirmation after that. A request to continue, implement, test, deploy, or work in parallel does not request a new task. Keep the requested outcome and its necessary follow-up work here, using internal subagents/workflow where appropriate. Standalone value, duration, complexity, parallelism, a new phase, or easier progress tracking alone do not justify creating or suggesting another task. Proactively suggest one only when the conversation establishes a separate user goal outside the current request and a concrete need to manage it independently; otherwise continue here or finish without a suggestion.
 
@@ -71,7 +74,7 @@ The temporary API key supports only these HTTP endpoints:
 
 Stay within these endpoints. Access approval covers API use in this chat, but does not expand the user's requested scope. Before creating a reusable agent, sending, or stopping a task, ensure the current request calls for it. The Task management lifecycle guidance above also applies to script-created tasks. Never print, echo, log, or repeat credential values.
 
-For a task waiting on a normal question, use `send_task_message`. An action confirmation is different: `task.confirmAction` is not available through this addon, so ask the user to complete it in Manus. File upload, connector/skill discovery, webhooks, and other unlisted HTTP operations are not enabled by the temporary key.
+For a task waiting on a normal question, use `send_task_message`. An action confirmation is different: `task.confirmAction` is not available through this addon, so ask the user to complete it in Manus. To attach files, use the `upload_file` tool; the temporary key does not enable HTTP file upload, connector/skill discovery, webhooks, or other unlisted HTTP operations.
 
 ## API endpoint details
 

@@ -4868,6 +4868,58 @@
       "gate_title": "الانحدار التراكمي"
     },
     {
+      "id": "G065",
+      "title": "القياس البصري الحي (قصّ · توافق · مراسٍ · بطاقة القرار)",
+      "phase": "finalize",
+      "on_fail": "stop",
+      "command": [
+        "B=\"$PWD\"; SITE=\"${SITE:-/home/ubuntu/seawatch}\"; export B SITE; mkdir -p \"$B/logs/runbook/{date}\"; python3 \"$B/tools/browser_measure.py\" --root \"$B\" --site-root \"$SITE/dist\" --check overflow --check console --check anchor --check decision --check readiness --soft readiness --out \"$B/logs/runbook/{date}/G065-measure.json\""
+      ],
+      "assert": [
+        {
+          "type": "cmd",
+          "command": [
+            "bash",
+            "-lc",
+            "test -s logs/runbook/{date}/G065.log"
+          ]
+        },
+        {
+          "type": "cmd",
+          "command": [
+            "bash",
+            "-lc",
+            "grep -q '✔ القياس البصري' logs/runbook/{date}/G065.log"
+          ]
+        }
+      ],
+      "links": {
+        "rules": [
+          "ف1–ف5 — بوابة التحقق"
+        ],
+        "files": [
+          "tools/browser_measure.py",
+          "runbook/readiness-questions.json",
+          "runbook/regression-items.json"
+        ],
+        "folders": [
+          "audit/measurements"
+        ],
+        "gates": [
+          "G064"
+        ]
+      },
+      "note_ar": "يقيس أحدث إصدار مبني بمتصفح حقيقي على عرضي 1440 و1920: القصّ · وضع المستند وأخطاء الكونسول · المراسي بين الصفحات · بطاقة القرار في الشاشة الأولى · جاهزية القائد العشرة أسئلة (إعلامي). يفشل مغلقًا على المخالفات المانعة وحدها.",
+      "kind": "script",
+      "ok_rc": [
+        0
+      ],
+      "warn_rc": [
+        1
+      ],
+      "gate_title": "القياس البصري الحي"
+    },
+    {
       "id": "D005",
       "title": "تحديث النسخة الاحتياطية قبل النشر (شرط بوابة ما قبل التشغيل)",
       "kind": "script",

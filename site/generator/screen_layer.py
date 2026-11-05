@@ -181,11 +181,11 @@ def news_card_block(meta, *, esc, inline, report_date, card_targets=None):
         f'<a href="{esc(watch_href)}" data-goto="{esc(watch_title)}" data-alt="{esc(watch_href)}">المؤشرات الكاملة</a></p></div></div>')
     card = ""
     if rows:
-        card = (f'<section class="sc-card" data-kpi-id="maritime-security-news" aria-label="أهم الأخبار المتعلقة بالأمن البحري"><h2 class="sc-h2">أهم الأخبار المتعلقة بالأمن البحري</h2>'
+        card = (f'<section class="sc-card" id="news-card" data-kpi-id="maritime-security-news" aria-label="أهم الأخبار المتعلقة بالأمن البحري"><h2 class="sc-h2">أهم الأخبار المتعلقة بالأمن البحري</h2>'
                 f'{"".join(rows)}</section>')
     if not rows:
         return ""
-    return ('<section class="sc-card" data-kpi-id="maritime-security-news" aria-label="أهم الأخبار المتعلقة بالأمن البحري">'
+    return ('<section class="sc-card" id="news-card" data-kpi-id="maritime-security-news" aria-label="أهم الأخبار المتعلقة بالأمن البحري">'
             '<h2 class="sc-h2">أهم الأخبار المتعلقة بالأمن البحري</h2>'
             + "".join(rows) + "</section>")
 

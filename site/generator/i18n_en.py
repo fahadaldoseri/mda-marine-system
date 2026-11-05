@@ -1069,6 +1069,16 @@ def main() -> int:
     else:
         print("   ✔ لا نص عربي متبقٍّ في الصفحة المترجمة")
     if a.out:
+        # ك-جديد: تطبيع ترويسة المستند الإنجليزي — doctype ثم وسم html بصفاته
+        if '<html' in page:
+            _m = re.search(r'<html([^>]*)>', page)
+            _a = _m.group(1)
+            for _k, _v in (('lang', 'en'), ('dir', 'ltr')):
+                _a = re.sub(rf'{_k}="[^"]*"', f'{_k}="{_v}"', _a) if f'{_k}=' in _a else _a + f' {_k}="{_v}"'
+            if 'data-lang=' not in _a:
+                _a += ' data-lang="en"'
+            page = page[:_m.start()] + '<html' + _a + '>' + page[_m.end():]
+        page = re.sub(r'^(?:\ufeff)?\s*(?:<!doctype[^>]*>)?\s*', '<!DOCTYPE html>\n', page, count=1, flags=re.I)
         pathlib.Path(a.out).write_text(page, encoding="utf-8")
         print(f"   ✔ كُتب {a.out}")
     return 0 if not uniq else 1
