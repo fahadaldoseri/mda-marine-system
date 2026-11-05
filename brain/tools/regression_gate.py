@@ -90,7 +90,7 @@ def main() -> int:
         tail = f" [غير مانع حتى {r['open_until']}]" if r["state"] == "ساقط" and not r["blocking"] else ""
         print(f"   {mark} {r['id']} (م{r['phase']}) {r['state']}{tail} — {r['note']}")
 
-    out = Path(args.out) if args.out else root / "logs" / "regression" / f"{today}-until-{args.until}.json"
+    out = Path(args.out) if args.out else root / "audit" / "regression" / f"{today}-until-{args.until}.json"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps({"date": today, "until": args.until, "rows": rows,
                                "passed": passed, "failed": failed, "manual": manual,

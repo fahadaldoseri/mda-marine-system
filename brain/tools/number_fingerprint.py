@@ -95,7 +95,7 @@ def main() -> int:
 
     data = measure(root, site)
     data["tag"] = args.date
-    dst = Path(args.out) if args.out else root / "logs" / "fingerprints" / f"numbers-{args.date}.json"
+    dst = Path(args.out) if args.out else root / "audit" / "fingerprints" / f"numbers-{args.date}.json"
     dst.parent.mkdir(parents=True, exist_ok=True)
     dst.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     total = sum(s["count"] for s in data["surfaces"].values())

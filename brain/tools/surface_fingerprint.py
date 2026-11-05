@@ -72,7 +72,7 @@ def measure(root: Path, site: Path) -> dict:
 def write(root: Path, site: Path, tag: str, out_path: str | None) -> Path:
     data = measure(root, site)
     data["tag"] = tag
-    dst = Path(out_path) if out_path else root / "logs" / "fingerprints" / f"surfaces-{tag}.json"
+    dst = Path(out_path) if out_path else root / "audit" / "fingerprints" / f"surfaces-{tag}.json"
     dst.parent.mkdir(parents=True, exist_ok=True)
     dst.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"✔ بصمة الأسطح: {len(data['surfaces'])} سطحًا → {dst}")
