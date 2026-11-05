@@ -142,6 +142,8 @@ def measure(url: str, widths: list[int], questions: list[str], phrases: list[str
             page.wait_for_timeout(1200)
             data = page.evaluate(JS_MEASURE, {"errors": [], "warnings": [], "pageerrors": [],
                                               "questions": questions, "phrases": phrases})
+            if url.startswith("file://"):
+                errs = [e for e in errs if "ERR_FILE_NOT_FOUND" not in e]
             data["console"] = {"errors": len(errs), "warnings": len(warns), "samples": (errs + warns)[:3]}
             data["pageerrors"] = pageerrs[:3]
             # أهداف المراسي: داخليًّا من الصفحة نفسها، وخارجيًّا بفتح الصفحة الهدف مرة لكل مرساة
@@ -156,6 +158,8 @@ def measure(url: str, widths: list[int], questions: list[str], phrases: list[str
                 try:
                     aux = browser.new_page()
                     target_page = link["page"]
+                    if base and url.startswith("file://") and target_page in ("", "/"):
+                        target_page = "/index.html"
                     if base and url.startswith("file://") and target_page.startswith("/"):
                         target_page = "file://" + base.rstrip("/") + target_page
                     aux.goto(target_page if target_page.startswith("file://") else urljoin(url, target_page),
