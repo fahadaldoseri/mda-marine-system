@@ -189,6 +189,11 @@ def build_reports(site_root: Path, dist: Path, reports, warnings):
             _meta = dict(r["meta"], screen_archived=(r is not reports[0]))
             _, count = build_report.build(r["md"], target, _meta)
         except Exception as e:  # ك-316: تقرير يومي ساقط = فشل مغلق
+            import traceback as _tb, pathlib as _pl, datetime as _dt
+            _log = _pl.Path("logs/runbook") / f"fail-{_dt.date.today().isoformat()}.log"
+            _log.parent.mkdir(parents=True, exist_ok=True)
+            with _log.open("a", encoding="utf-8") as _fh:
+                _fh.write(f"\n=== تقرير {r['iso']} ===\n{_tb.format_exc()}\n")
             CRITICAL_FAIL.append(f"تقرير {r['iso']}: {e}")
             warnings.append(f"فشل بناء {r['iso']}: {e}")
             continue
