@@ -52,6 +52,39 @@ def secrets_gate() -> None:
                    "--quiet"]) == 0)
 
 
+def secret_assignment_contexts() -> None:
+    """لا تعتبر مراجع Python العارية أسرارًا، وتبقي القيم النصية مانعة."""
+    with tempfile.TemporaryDirectory() as td:
+        root = Path(td)
+        (root / "code.py").write_text(
+            "token = _canonical_identifier_token\n", encoding="utf-8"
+        )
+        (root / "secret.py").write_text(
+            'TOKEN = "A1b2C3d4E5f6G7h8I9j0K1l2"\n', encoding="utf-8"
+        )
+        (root / "mixed.py").write_text(
+            "token = _canonical_identifier_token\n"
+            'TOKEN = "A1b2C3d4E5f6G7h8I9j0K1l2"\n',
+            encoding="utf-8",
+        )
+        gate = B / "validators" / "check_secrets.py"
+        check(
+            "بوابة الأسرار تمرر مرجع Python العاري غير السرّي",
+            run([sys.executable, str(gate), "--root", str(root), "--file", "code.py", "--quiet"])
+            == 0,
+        )
+        check(
+            "بوابة الأسرار تمنع قيمة TOKEN النصية الطويلة",
+            run([sys.executable, str(gate), "--root", str(root), "--file", "secret.py", "--quiet"])
+            == 70,
+        )
+        check(
+            "بوابة الأسرار لا تسقط سرًا لاحقًا بعد تطابق كاذب",
+            run([sys.executable, str(gate), "--root", str(root), "--file", "mixed.py", "--quiet"])
+            == 70,
+        )
+
+
 def audit_tool_cases() -> None:
     cases = {
         "pass": ("def f():\n    try:\n        x()\n    except Exception:\n        pass\n", True),
@@ -123,6 +156,7 @@ def code_tracking() -> None:
 def main() -> int:
     print("1) بوابة الأسرار")
     secrets_gate()
+    secret_assignment_contexts()
     print("2) أداة تدقيق الاستثناءات (الحالات الست)")
     audit_tool_cases()
     print("3) حاجز الإرسال (بلا اتصال)")
