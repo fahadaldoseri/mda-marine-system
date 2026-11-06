@@ -19,6 +19,7 @@ REPORT_DATE = None
 from pathlib import Path
 
 from shapely.geometry import LineString, MultiLineString, MultiPolygon, Polygon, box, shape
+import map_cluster
 
 DATA = Path(__file__).resolve().parent / "data"  # بيانات الخريطة بجوار الوحدة (مصدر واحد)
 
@@ -820,16 +821,11 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
             _s = f"MN-{_s}"
         sids.append(_s)
 
-    # عنقود: ضمّ العلامات التي تقلّ المسافة بينها عن CLUSTER_SEP في شارة واحدة
-    groups: list[list[int]] = []
-    for idx in range(len(points)):
-        for g in groups:
-            if any(math.hypot(shown_xy[idx][0] - shown_xy[j][0],
-                              shown_xy[idx][1] - shown_xy[j][1]) < CLUSTER_SEP for j in g):
-                g.append(idx)
-                break
-        else:
-            groups.append([idx])
+    _pts = [{"id": i, "xy": shown_xy[i], "x": shown_xy[i][0], "y": shown_xy[i][1],
+             "lat": points[i].get("lat"), "lon": points[i].get("lon")} for i in range(len(points))]
+    _cl = map_cluster.cluster_points(_pts, lambda lon, lat: pt(lon, lat), CLUSTER_SEP)
+    groups = [[(e["id"] if isinstance(e, dict) else e) for e in g] for g in _cl]
+    groups = [g for g in groups if g]
     cluster_of = {j: gi for gi, g in enumerate(groups) for j in g}
     cluster_head = {g[0]: g for g in groups}
 
