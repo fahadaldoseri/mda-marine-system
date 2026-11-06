@@ -1,0 +1,3869 @@
+{
+  "date": "2026-11-06",
+  "period_start": "2026-10-08",
+  "period_end": "2026-11-06",
+  "days": 30,
+  "manifest_path": "/home/ubuntu/brain-marine-news/appendices/sources-manifest.json",
+  "registry_path": "/home/ubuntu/brain-marine-news/appendices/source-reliability-40.json",
+  "approved_source_count": 62,
+  "manifest_declared_source_count": 62,
+  "route_declared_unique_count": 60,
+  "route_declared_row_count": 81,
+  "manual_reference_count": 2,
+  "manual_reference": [
+    39,
+    52
+  ],
+  "manual_reference_reasons": {
+    "39": "IHO: المسارات الرسمية التي قيسَت أعادت HTTP 200 دون عناوين/مادة دلالية (sitemap روابط وfeed صفحة stub)، لذلك تبقى مرجعية يدوية.",
+    "52": "Synmax: التغذية الرسمية قيسَت HTTP 200 بصفر عنصر، والواجهة أعادت مصفوفة فارغة، لذلك تبقى مرجعية يدوية."
+  },
+  "checked_unique_count": 60,
+  "checked_union_manual_count": 62,
+  "checked_missing_sources": [],
+  "checked_unknown_sources": [],
+  "status_manual_reference": [
+    39,
+    52
+  ],
+  "status_file": "/home/ubuntu/brain-marine-news/feeds/feeds-2026-11-06.status.json",
+  "status_value": "ok",
+  "status_declared_checked": 60,
+  "status_declared_ok": 60,
+  "status_declared_failed": 0,
+  "daily_files_count": 30,
+  "daily_files": [
+    "2026-10-08.json",
+    "2026-10-09.json",
+    "2026-10-10.json",
+    "2026-10-11.json",
+    "2026-10-12.json",
+    "2026-10-13.json",
+    "2026-10-14.json",
+    "2026-10-15.json",
+    "2026-10-16.json",
+    "2026-10-17.json",
+    "2026-10-18.json",
+    "2026-10-19.json",
+    "2026-10-20.json",
+    "2026-10-21.json",
+    "2026-10-22.json",
+    "2026-10-23.json",
+    "2026-10-24.json",
+    "2026-10-25.json",
+    "2026-10-26.json",
+    "2026-10-27.json",
+    "2026-10-28.json",
+    "2026-10-29.json",
+    "2026-10-30.json",
+    "2026-10-31.json",
+    "2026-11-01.json",
+    "2026-11-02.json",
+    "2026-11-03.json",
+    "2026-11-04.json",
+    "2026-11-05.json",
+    "2026-11-06.json"
+  ],
+  "daily_invalid_names": [],
+  "daily_event_count": 261,
+  "sources_reaching_ledger_count": 40,
+  "sources_without_ledger_events_count": 22,
+  "sources": [
+    {
+      "num": 1,
+      "name": "UKMTO — الحوادث الأخيرة",
+      "url": "https://www.ukmto.org/recent-incidents",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 1,
+      "event_count": 7,
+      "direct_source_count": 4,
+      "source_excerpt_count": 3,
+      "last_access": "2026-10-31",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://www.ukmto.org/recent-incidents"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 2,
+      "name": "UKMTO — التحذيرات 2026",
+      "url": "https://www.ukmto.org/ukmto-products/warnings/2026",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 9,
+      "event_count": 14,
+      "direct_source_count": 6,
+      "source_excerpt_count": 12,
+      "last_access": "2026-11-06",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 3,
+      "name": "UKMTO — التنبيهات الإرشادية 2026",
+      "url": "https://www.ukmto.org/ukmto-products/advisories/2026",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 4,
+      "event_count": 4,
+      "direct_source_count": 0,
+      "source_excerpt_count": 4,
+      "last_access": "2026-10-31",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 4,
+      "name": "UKMTO — التقارير الأسبوعية 2026",
+      "url": "https://www.ukmto.org/ukmto-products/weekly-reports/2026",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 4,
+      "event_count": 4,
+      "direct_source_count": 0,
+      "source_excerpt_count": 4,
+      "last_access": "2026-10-31",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 5,
+      "name": "IMO — سجل الحوادث المؤكدة",
+      "url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 8,
+      "event_count": 38,
+      "direct_source_count": 37,
+      "source_excerpt_count": 4,
+      "last_access": "2026-11-03",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 6,
+      "name": "straits.live",
+      "url": "https://straits.live/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 2,
+      "status_route_count": 2,
+      "status_ok_route_count": 2,
+      "status_failed_route_count": 0,
+      "feed_items_count": 116,
+      "event_count": 53,
+      "direct_source_count": 49,
+      "source_excerpt_count": 41,
+      "last_access": "2026-11-06",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 7,
+      "name": "gCaptain",
+      "url": "https://gcaptain.com",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 12,
+      "event_count": 13,
+      "direct_source_count": 13,
+      "source_excerpt_count": 6,
+      "last_access": "2026-11-05",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 8,
+      "name": "TradeWinds",
+      "url": "https://www.tradewindsnews.com",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 210,
+      "event_count": 16,
+      "direct_source_count": 16,
+      "source_excerpt_count": 11,
+      "last_access": "2026-11-06",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 9,
+      "name": "Seatrade Maritime",
+      "url": "https://www.seatrade-maritime.com",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 50,
+      "event_count": 7,
+      "direct_source_count": 7,
+      "source_excerpt_count": 6,
+      "last_access": "2026-11-05",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 10,
+      "name": "الجزيرة نت",
+      "url": "https://www.ajnet.me/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 25,
+      "event_count": 1,
+      "direct_source_count": 1,
+      "source_excerpt_count": 1,
+      "last_access": "2026-11-02",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 11,
+      "name": "الجزيرة الإنجليزية",
+      "url": "https://www.aljazeera.com/where/iran/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 25,
+      "event_count": 4,
+      "direct_source_count": 2,
+      "source_excerpt_count": 2,
+      "last_access": "2026-10-31",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 12,
+      "name": "OFAC — الإجراءات الأخيرة",
+      "url": "https://ofac.treasury.gov/recent-actions",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 10,
+      "event_count": 0,
+      "direct_source_count": 0,
+      "source_excerpt_count": 0,
+      "last_access": "",
+      "zero_category": "ب",
+      "zero_reason": "المسار أنتج 10 عنصرًا في التغذية لكن لم تُسجّل واقعة دفترية خلال الفترة",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 13,
+      "name": "ShipNext — التحقق من السفن",
+      "url": "https://shipnext.com/vessel/9315159-cameroon-prosperity",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 1,
+      "event_count": 0,
+      "direct_source_count": 0,
+      "source_excerpt_count": 0,
+      "last_access": "",
+      "zero_category": "ب",
+      "zero_reason": "المسار أنتج 1 عنصرًا في التغذية لكن لم تُسجّل واقعة دفترية خلال الفترة",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://shipnext.com/vessel/9315159-cameroon-prosperity"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 14,
+      "name": "قناة العربية",
+      "url": "https://www.alarabiya.net/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 4,
+      "status_route_count": 4,
+      "status_ok_route_count": 4,
+      "status_failed_route_count": 0,
+      "feed_items_count": 182,
+      "event_count": 4,
+      "direct_source_count": 1,
+      "source_excerpt_count": 4,
+      "last_access": "2026-10-29",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 15,
+      "name": "حساب @UK_MTO على X",
+      "url": "https://x.com/UK_MTO",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 5,
+      "event_count": 14,
+      "direct_source_count": 9,
+      "source_excerpt_count": 13,
+      "last_access": "2026-11-06",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://x.com/UK_MTO"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 16,
+      "name": "حساب @bna_ar على X",
+      "url": "https://x.com/bna_ar",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 8,
+      "event_count": 0,
+      "direct_source_count": 0,
+      "source_excerpt_count": 0,
+      "last_access": "",
+      "zero_category": "ب",
+      "zero_reason": "المسار أنتج 8 عنصرًا في التغذية لكن لم تُسجّل واقعة دفترية خلال الفترة",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 17,
+      "name": "حساب @bna_en على X",
+      "url": "https://x.com/bna_en",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 2,
+      "status_route_count": 2,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 1,
+      "feed_items_count": 5,
+      "event_count": 0,
+      "direct_source_count": 0,
+      "source_excerpt_count": 0,
+      "last_access": "",
+      "zero_category": "ب",
+      "zero_reason": "المسار أنتج 5 عنصرًا في التغذية لكن لم تُسجّل واقعة دفترية خلال الفترة",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 18,
+      "name": "حساب @bahdiplomatic على X",
+      "url": "https://x.com/bahdiplomatic",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 5,
+      "event_count": 1,
+      "direct_source_count": 1,
+      "source_excerpt_count": 1,
+      "last_access": "2026-11-02",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://x.com/bahdiplomatic"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 19,
+      "name": "حساب @US5thFleet على X",
+      "url": "https://x.com/us5thfleet",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 5,
+      "event_count": 1,
+      "direct_source_count": 1,
+      "source_excerpt_count": 1,
+      "last_access": "2026-11-02",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://x.com/us5thfleet"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 20,
+      "name": "جريدة الأيام",
+      "url": "https://www.alayam.com/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 3,
+      "status_route_count": 3,
+      "status_ok_route_count": 2,
+      "status_failed_route_count": 1,
+      "feed_items_count": 23,
+      "event_count": 0,
+      "direct_source_count": 0,
+      "source_excerpt_count": 0,
+      "last_access": "",
+      "zero_category": "ب",
+      "zero_reason": "المسار أنتج 23 عنصرًا في التغذية لكن لم تُسجّل واقعة دفترية خلال الفترة",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 21,
+      "name": "جريدة أخبار الخليج",
+      "url": "https://akhbar-alkhaleej.com/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 47,
+      "event_count": 0,
+      "direct_source_count": 0,
+      "source_excerpt_count": 0,
+      "last_access": "",
+      "zero_category": "ب",
+      "zero_reason": "المسار أنتج 47 عنصرًا في التغذية لكن لم تُسجّل واقعة دفترية خلال الفترة",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://akhbar-alkhaleej.com/"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 22,
+      "name": "جريدة البلاد",
+      "url": "https://www.albiladpress.com/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 100,
+      "event_count": 0,
+      "direct_source_count": 0,
+      "source_excerpt_count": 0,
+      "last_access": "",
+      "zero_category": "ب",
+      "zero_reason": "المسار أنتج 100 عنصرًا في التغذية لكن لم تُسجّل واقعة دفترية خلال الفترة",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 23,
+      "name": "Gulf Daily News",
+      "url": "https://www.gdnonline.com",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 48,
+      "event_count": 0,
+      "direct_source_count": 0,
+      "source_excerpt_count": 0,
+      "last_access": "",
+      "zero_category": "ب",
+      "zero_reason": "المسار أنتج 48 عنصرًا في التغذية لكن لم تُسجّل واقعة دفترية خلال الفترة",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://www.gdnonline.com"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 24,
+      "name": "وكالة الأنباء القطرية (قنا)",
+      "url": "https://qna.org.qa/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 3,
+      "status_route_count": 3,
+      "status_ok_route_count": 2,
+      "status_failed_route_count": 1,
+      "feed_items_count": 97,
+      "event_count": 6,
+      "direct_source_count": 6,
+      "source_excerpt_count": 6,
+      "last_access": "2026-10-30",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 25,
+      "name": "وكالة أنباء الإمارات (وام)",
+      "url": "https://www.wam.ae/ar",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 2,
+      "status_route_count": 2,
+      "status_ok_route_count": 2,
+      "status_failed_route_count": 0,
+      "feed_items_count": 34,
+      "event_count": 0,
+      "direct_source_count": 0,
+      "source_excerpt_count": 0,
+      "last_access": "",
+      "zero_category": "ب",
+      "zero_reason": "المسار أنتج 34 عنصرًا في التغذية لكن لم تُسجّل واقعة دفترية خلال الفترة",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 26,
+      "name": "وكالة الأنباء السعودية (واس)",
+      "url": "https://www.spa.gov.sa",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 2,
+      "status_route_count": 2,
+      "status_ok_route_count": 2,
+      "status_failed_route_count": 0,
+      "feed_items_count": 22,
+      "event_count": 0,
+      "direct_source_count": 0,
+      "source_excerpt_count": 0,
+      "last_access": "",
+      "zero_category": "ب",
+      "zero_reason": "المسار أنتج 22 عنصرًا في التغذية لكن لم تُسجّل واقعة دفترية خلال الفترة",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 27,
+      "name": "وكالة الأنباء الكويتية (كونا)",
+      "url": "https://www.kuna.net.kw",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 60,
+      "event_count": 0,
+      "direct_source_count": 0,
+      "source_excerpt_count": 0,
+      "last_access": "",
+      "zero_category": "ب",
+      "zero_reason": "المسار أنتج 60 عنصرًا في التغذية لكن لم تُسجّل واقعة دفترية خلال الفترة",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://www.kuna.net.kw"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 28,
+      "name": "وكالة الأنباء العُمانية",
+      "url": "https://omannews.gov.om",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 2,
+      "status_route_count": 2,
+      "status_ok_route_count": 2,
+      "status_failed_route_count": 0,
+      "feed_items_count": 57,
+      "event_count": 1,
+      "direct_source_count": 1,
+      "source_excerpt_count": 1,
+      "last_access": "2026-10-27",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://omannews.gov.om/"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 29,
+      "name": "البحرية الملكية البريطانية",
+      "url": "https://www.royalnavy.mod.uk/news",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 3,
+      "event_count": 0,
+      "direct_source_count": 0,
+      "source_excerpt_count": 0,
+      "last_access": "",
+      "zero_category": "ب",
+      "zero_reason": "المسار أنتج 3 عنصرًا في التغذية لكن لم تُسجّل واقعة دفترية خلال الفترة",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://www.royalnavy.mod.uk/news"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 30,
+      "name": "القيادة المركزية الأمريكية (سنتكوم)",
+      "url": "https://www.centcom.mil/MEDIA/PRESS-RELEASES/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 20,
+      "event_count": 5,
+      "direct_source_count": 5,
+      "source_excerpt_count": 1,
+      "last_access": "2026-10-31",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 31,
+      "name": "JMIC — المنظمة البحرية المشتركة",
+      "url": "https://combinedmaritimeforces.com/jmic/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 15,
+      "event_count": 8,
+      "direct_source_count": 7,
+      "source_excerpt_count": 3,
+      "last_access": "2026-10-30",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 32,
+      "name": "IMB/ICC — القرصنة",
+      "url": "https://iccwbo.org/global-insights/trade/maritime-piracy-and-armed-robbery",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 10,
+      "event_count": 3,
+      "direct_source_count": 3,
+      "source_excerpt_count": 0,
+      "last_access": "2026-10-26",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 33,
+      "name": "MARAD/MSCI",
+      "url": "https://www.maritime.dot.gov/msci",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 11,
+      "event_count": 1,
+      "direct_source_count": 1,
+      "source_excerpt_count": 1,
+      "last_access": "2026-10-26",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 34,
+      "name": "MSCIO",
+      "url": "https://www.mscio.eu",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 3,
+      "event_count": 3,
+      "direct_source_count": 3,
+      "source_excerpt_count": 3,
+      "last_access": "2026-10-31",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://www.mscio.eu"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 35,
+      "name": "Splash 247",
+      "url": "https://splash247.com",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 2,
+      "status_route_count": 2,
+      "status_ok_route_count": 2,
+      "status_failed_route_count": 0,
+      "feed_items_count": 20,
+      "event_count": 3,
+      "direct_source_count": 3,
+      "source_excerpt_count": 3,
+      "last_access": "2026-10-30",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://splash247.com"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 36,
+      "name": "Lloyd's List",
+      "url": "https://www.lloydslist.com",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 2,
+      "status_route_count": 2,
+      "status_ok_route_count": 2,
+      "status_failed_route_count": 0,
+      "feed_items_count": 24,
+      "event_count": 6,
+      "direct_source_count": 6,
+      "source_excerpt_count": 3,
+      "last_access": "2026-11-04",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 37,
+      "name": "MarineLink",
+      "url": "https://www.marinelink.com",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 2,
+      "status_route_count": 2,
+      "status_ok_route_count": 2,
+      "status_failed_route_count": 0,
+      "feed_items_count": 20,
+      "event_count": 4,
+      "direct_source_count": 4,
+      "source_excerpt_count": 3,
+      "last_access": "2026-11-01",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 38,
+      "name": "Jerusalem Post",
+      "url": "https://www.jpost.com/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 2,
+      "status_route_count": 2,
+      "status_ok_route_count": 2,
+      "status_failed_route_count": 0,
+      "feed_items_count": 33,
+      "event_count": 7,
+      "direct_source_count": 7,
+      "source_excerpt_count": 4,
+      "last_access": "2026-11-03",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 39,
+      "name": "IHO — المنظمة الهيدروغرافية الدولية",
+      "url": "https://iho.int/",
+      "route_kind": "مرجعية يدوية",
+      "route_state": "مرجعية يدوية",
+      "route_count": 0,
+      "status_route_count": 0,
+      "status_ok_route_count": 0,
+      "status_failed_route_count": 0,
+      "feed_items_count": 0,
+      "event_count": 0,
+      "direct_source_count": 0,
+      "source_excerpt_count": 0,
+      "last_access": "",
+      "zero_category": "أ",
+      "zero_reason": "لا مسار استخراج آلي؛ المصدر معلن مرجعية يدوية",
+      "manual_reason": "IHO: المسارات الرسمية التي قيسَت أعادت HTTP 200 دون عناوين/مادة دلالية (sitemap روابط وfeed صفحة stub)، لذلك تبقى مرجعية يدوية.",
+      "manual": true,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://iho.int/"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 40,
+      "name": "MarineTraffic",
+      "url": "https://www.marinetraffic.com/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 18,
+      "event_count": 0,
+      "direct_source_count": 0,
+      "source_excerpt_count": 0,
+      "last_access": "",
+      "zero_category": "ب",
+      "zero_reason": "المسار أنتج 18 عنصرًا في التغذية لكن لم تُسجّل واقعة دفترية خلال الفترة",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://www.marinetraffic.com/"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 41,
+      "name": "USNI News",
+      "url": "https://news.usni.org/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 2,
+      "status_route_count": 2,
+      "status_ok_route_count": 2,
+      "status_failed_route_count": 0,
+      "feed_items_count": 90,
+      "event_count": 3,
+      "direct_source_count": 2,
+      "source_excerpt_count": 2,
+      "last_access": "2026-10-31",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://news.usni.org/feed"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 42,
+      "name": "Naval News",
+      "url": "https://www.navalnews.com/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 2,
+      "status_route_count": 2,
+      "status_ok_route_count": 2,
+      "status_failed_route_count": 0,
+      "feed_items_count": 15,
+      "event_count": 2,
+      "direct_source_count": 2,
+      "source_excerpt_count": 2,
+      "last_access": "2026-10-28",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 43,
+      "name": "The Maritime Executive",
+      "url": "https://maritime-executive.com/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 31,
+      "event_count": 3,
+      "direct_source_count": 3,
+      "source_excerpt_count": 0,
+      "last_access": "2026-11-06",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 44,
+      "name": "Windward",
+      "url": "https://www.windward.ai/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 12,
+      "event_count": 2,
+      "direct_source_count": 2,
+      "source_excerpt_count": 2,
+      "last_access": "2026-11-02",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://www.windward.ai/"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 45,
+      "name": "IRIB News",
+      "url": "https://www.iribnews.ir/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 100,
+      "event_count": 0,
+      "direct_source_count": 0,
+      "source_excerpt_count": 0,
+      "last_access": "",
+      "zero_category": "ب",
+      "zero_reason": "المسار أنتج 100 عنصرًا في التغذية لكن لم تُسجّل واقعة دفترية خلال الفترة",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 46,
+      "name": "ISNA",
+      "url": "https://www.isna.ir/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 2,
+      "status_route_count": 2,
+      "status_ok_route_count": 2,
+      "status_failed_route_count": 0,
+      "feed_items_count": 60,
+      "event_count": 4,
+      "direct_source_count": 4,
+      "source_excerpt_count": 2,
+      "last_access": "2026-11-02",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 47,
+      "name": "Mehr — العربي",
+      "url": "https://ar.mehrnews.com/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 2,
+      "status_route_count": 2,
+      "status_ok_route_count": 2,
+      "status_failed_route_count": 0,
+      "feed_items_count": 60,
+      "event_count": 16,
+      "direct_source_count": 16,
+      "source_excerpt_count": 8,
+      "last_access": "2026-11-04",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 48,
+      "name": "Institute for the Study of War",
+      "url": "https://www.understandingwar.org/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 10,
+      "event_count": 1,
+      "direct_source_count": 0,
+      "source_excerpt_count": 1,
+      "last_access": "2026-10-28",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://www.understandingwar.org/"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 49,
+      "name": "Sanaa Center",
+      "url": "https://sanaacenter.org/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 20,
+      "event_count": 1,
+      "direct_source_count": 1,
+      "source_excerpt_count": 1,
+      "last_access": "2026-10-26",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 50,
+      "name": "Navy Times",
+      "url": "https://www.navytimes.com/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 10,
+      "event_count": 0,
+      "direct_source_count": 0,
+      "source_excerpt_count": 0,
+      "last_access": "",
+      "zero_category": "ب",
+      "zero_reason": "المسار أنتج 10 عنصرًا في التغذية لكن لم تُسجّل واقعة دفترية خلال الفترة",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 51,
+      "name": "Baird Maritime",
+      "url": "https://www.bairdmaritime.com/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 11,
+      "event_count": 2,
+      "direct_source_count": 2,
+      "source_excerpt_count": 2,
+      "last_access": "2026-10-27",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 52,
+      "name": "Synmax",
+      "url": "https://synmax.com/",
+      "route_kind": "مرجعية يدوية",
+      "route_state": "مرجعية يدوية",
+      "route_count": 0,
+      "status_route_count": 0,
+      "status_ok_route_count": 0,
+      "status_failed_route_count": 0,
+      "feed_items_count": 0,
+      "event_count": 0,
+      "direct_source_count": 0,
+      "source_excerpt_count": 0,
+      "last_access": "",
+      "zero_category": "أ",
+      "zero_reason": "لا مسار استخراج آلي؛ المصدر معلن مرجعية يدوية",
+      "manual_reason": "Synmax: التغذية الرسمية قيسَت HTTP 200 بصفر عنصر، والواجهة أعادت مصفوفة فارغة، لذلك تبقى مرجعية يدوية.",
+      "manual": true,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://synmax.com/"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 53,
+      "name": "New York Times — الشرق الأوسط",
+      "url": "https://www.nytimes.com/international/section/world/middleeast",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 23,
+      "event_count": 1,
+      "direct_source_count": 1,
+      "source_excerpt_count": 1,
+      "last_access": "2026-11-03",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 54,
+      "name": "Bloomberg",
+      "url": "https://www.bloomberg.com/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 2,
+      "status_route_count": 2,
+      "status_ok_route_count": 2,
+      "status_failed_route_count": 0,
+      "feed_items_count": 40,
+      "event_count": 1,
+      "direct_source_count": 1,
+      "source_excerpt_count": 0,
+      "last_access": "2026-10-13",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 55,
+      "name": "Axios",
+      "url": "https://www.axios.com/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 100,
+      "event_count": 1,
+      "direct_source_count": 1,
+      "source_excerpt_count": 1,
+      "last_access": "2026-10-30",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": null,
+      "browser_only": false
+    },
+    {
+      "num": 56,
+      "name": "المجلس الأعلى للمقاومة الشعبية — اليمن",
+      "url": "https://x.com/YemenResistanc1",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 5,
+      "event_count": 0,
+      "direct_source_count": 0,
+      "source_excerpt_count": 0,
+      "last_access": "",
+      "zero_category": "ب",
+      "zero_reason": "المسار أنتج 5 عنصرًا في التغذية لكن لم تُسجّل واقعة دفترية خلال الفترة",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://x.com/YemenResistanc1"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 57,
+      "name": "الناطق الرسمي للقوات المسلحة اليمنية",
+      "url": "https://x.com/spokespersonyem",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 5,
+      "event_count": 0,
+      "direct_source_count": 0,
+      "source_excerpt_count": 0,
+      "last_access": "",
+      "zero_category": "ب",
+      "zero_reason": "المسار أنتج 5 عنصرًا في التغذية لكن لم تُسجّل واقعة دفترية خلال الفترة",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://x.com/spokespersonyem"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 58,
+      "name": "المركز الإعلامي للقوات المسلحة اليمنية",
+      "url": "https://yafm.net/",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 19,
+      "event_count": 0,
+      "direct_source_count": 0,
+      "source_excerpt_count": 0,
+      "last_access": "",
+      "zero_category": "ب",
+      "zero_reason": "المسار أنتج 19 عنصرًا في التغذية لكن لم تُسجّل واقعة دفترية خلال الفترة",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://yafm.net/"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 59,
+      "name": "المتحدث العسكري للطرف المقابل (تليغرام)",
+      "url": "https://t.me/army21ye",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 20,
+      "event_count": 0,
+      "direct_source_count": 0,
+      "source_excerpt_count": 0,
+      "last_access": "",
+      "zero_category": "ب",
+      "zero_reason": "المسار أنتج 20 عنصرًا في التغذية لكن لم تُسجّل واقعة دفترية خلال الفترة",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://t.me/army21ye"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 60,
+      "name": "المتحدث الرسمي باسم قوات التحالف (X)",
+      "url": "https://x.com/CJFCSpox",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 5,
+      "event_count": 1,
+      "direct_source_count": 1,
+      "source_excerpt_count": 1,
+      "last_access": "2026-11-02",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://x.com/CJFCSpox"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 61,
+      "name": "معمر الإرياني — وزير الإعلام اليمني (X)",
+      "url": "https://x.com/ERYANIM",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 5,
+      "event_count": 2,
+      "direct_source_count": 2,
+      "source_excerpt_count": 2,
+      "last_access": "2026-10-29",
+      "zero_category": "",
+      "zero_reason": "",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://x.com/ERYANIM"
+      },
+      "browser_only": false
+    },
+    {
+      "num": 62,
+      "name": "المركز الإعلامي للقوات المسلحة اليمنية — إنجليزي (X)",
+      "url": "https://x.com/Yemenarmyeng",
+      "route_kind": "مسار آلي",
+      "route_state": "مسار آلي",
+      "route_count": 1,
+      "status_route_count": 1,
+      "status_ok_route_count": 1,
+      "status_failed_route_count": 0,
+      "feed_items_count": 5,
+      "event_count": 0,
+      "direct_source_count": 0,
+      "source_excerpt_count": 0,
+      "last_access": "",
+      "zero_category": "ب",
+      "zero_reason": "المسار أنتج 5 عنصرًا في التغذية لكن لم تُسجّل واقعة دفترية خلال الفترة",
+      "manual_reason": "",
+      "manual": false,
+      "browser_route": {
+        "path": "browser",
+        "url": "https://x.com/Yemenarmyeng"
+      },
+      "browser_only": false
+    }
+  ],
+  "unmatched_source_values": {
+    "UKMTO": 10,
+    "IMF PortWatch": 2,
+    "EUNAVFOR · القوات البحرية المشتركة": 1,
+    "IRNA": 1,
+    "Kpler": 1,
+    "NAVAREA IX 380/26": 1,
+    "NAVAREA IX 383/26 · CMF — CTF 151": 1,
+    "NAVAREA IX 383/26 — Hydrographer of Pakistan": 1,
+    "NAVAREA IX 386/26 — Hydrographer of Pakistan": 1,
+    "NAVAREA IX — Hydrographer of Pakistan": 1,
+    "NAVAREA IX — الهيدروغرافي الباكستاني (A/1)": 1,
+    "UKMTO 178 — Advisory": 1,
+    "UKMTO منقولًا عبر منصة مهنية": 1,
+    "الأناضول · The Independent (C/3)": 1,
+    "الجزيرة · ستريتس تايمز": 1,
+    "الحرس الثوري": 1,
+    "المنظمة البحرية الدولية منقولة عبر الإعلام": 1,
+    "بيان القوات الأمريكية الوسطى": 1,
+    "تقارير إعلامية (D/4)": 1,
+    "تقارير قطاعية · CMF": 1,
+    "رواية طرف منفّذ (D/4)": 1,
+    "رواية غير مؤكدة من طرف واحد رسمي · رويترز · الجزيرة": 1,
+    "رويترز": 1,
+    "رويترز · UANI · وزارة الخزانة الأمريكية": 1,
+    "رويترز · التحالف": 1,
+    "فارس": 1,
+    "منصة (يُذكر اسم المصدر) مستقلة (C/3)": 1,
+    "نقل إعلامي عن مصادر إيرانية (D/4)": 1,
+    "نقل إعلامي مهني (بيانات UKMTO وKpler)": 1,
+    "نقل عن البحرية الإيرانية (D/4)": 1,
+    "وزارة الموانئ الهندية": 1
+  },
+  "event_matches": [
+    {
+      "date": "2026-10-08",
+      "code": "NI-2026-10-08",
+      "matched_source_numbers": [
+        1,
+        5
+      ],
+      "source": "IMO — سجل الحوادث المؤكدة، UKMTO — الحوادث الأخيرة",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-09",
+      "code": "IMO-2026-10-09-020",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — Middle East - Highlighted (Confirmed) incidents",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-10",
+      "code": "IMO-2026-10-10-018",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — Middle East - Highlighted (Confirmed) incidents",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-10",
+      "code": "IMO-2026-10-10-019",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — Middle East - Highlighted (Confirmed) incidents",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-11",
+      "code": "IMO-2026-10-11-012",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — Middle East - Highlighted (Confirmed) incidents",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-11",
+      "code": "IMO-2026-10-11-013",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — Middle East - Highlighted (Confirmed) incidents",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-11",
+      "code": "IMO-2026-10-11-014",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — Middle East - Highlighted (Confirmed) incidents",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-11",
+      "code": "IMO-2026-10-11-015",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — Middle East - Highlighted (Confirmed) incidents",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-11",
+      "code": "IMO-2026-10-11-016",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — Middle East - Highlighted (Confirmed) incidents",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-11",
+      "code": "IMO-2026-10-11-017",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — Middle East - Highlighted (Confirmed) incidents",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-12",
+      "code": "MN-2026-10-11-01",
+      "matched_source_numbers": [],
+      "source": "UKMTO",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-12",
+      "code": "MN-2026-10-11-02",
+      "matched_source_numbers": [],
+      "source": "UKMTO",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-13",
+      "code": "MN-2026-10-13-01",
+      "matched_source_numbers": [],
+      "source": "UKMTO",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-13",
+      "code": "MN-2026-10-13-02",
+      "matched_source_numbers": [],
+      "source": "UKMTO",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-13",
+      "code": "MN-2026-10-13-03",
+      "matched_source_numbers": [],
+      "source": "UKMTO",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-13",
+      "code": "MN-2026-10-13-04",
+      "matched_source_numbers": [],
+      "source": "UKMTO",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-13",
+      "code": "MN-2026-10-13-05",
+      "matched_source_numbers": [
+        8
+      ],
+      "source": "TradeWinds",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-13",
+      "code": "MN-2026-10-13-06",
+      "matched_source_numbers": [
+        8
+      ],
+      "source": "TradeWinds",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-13",
+      "code": "MN-2026-10-13-07",
+      "matched_source_numbers": [
+        7,
+        54
+      ],
+      "source": "Bloomberg (بيانات تتبع الناقلات) عبر gCaptain · Gulf Insider · ZeroHedge",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-13",
+      "code": "MN-2026-10-13-08",
+      "matched_source_numbers": [
+        7
+      ],
+      "source": "Reuters عبر gCaptain (13 أكتوبر 18:48Z)",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-13",
+      "code": "IMO-2026-10-13-009",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — Middle East - Highlighted (Confirmed) incidents",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-13",
+      "code": "IMO-2026-10-13-010",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — Middle East - Highlighted (Confirmed) incidents",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-13",
+      "code": "IMO-2026-10-13-011",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — Middle East - Highlighted (Confirmed) incidents",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-14",
+      "code": "MN-2026-10-14-01",
+      "matched_source_numbers": [],
+      "source": "UKMTO",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-14",
+      "code": "MN-2026-10-14-02",
+      "matched_source_numbers": [],
+      "source": "UKMTO",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-14",
+      "code": "MN-2026-10-14-03",
+      "matched_source_numbers": [
+        7
+      ],
+      "source": "Reuters عبر gCaptain",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-14",
+      "code": "MN-2026-10-14-04",
+      "matched_source_numbers": [],
+      "source": "IRNA",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-14",
+      "code": "MN-2026-10-14-05",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live ووسائط",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-14",
+      "code": "MN-2026-10-14-06",
+      "matched_source_numbers": [
+        7
+      ],
+      "source": "gCaptain وتقرير معهد ملاحي",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-14",
+      "code": "MN-2026-10-14-07",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-15",
+      "code": "MN-2026-10-15-01",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "بيان الموانئ السنغافورية · IMO",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-15",
+      "code": "MN-2026-10-15-02",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO · رويترز",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-15",
+      "code": "MN-2026-10-15-03",
+      "matched_source_numbers": [],
+      "source": "UKMTO",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-15",
+      "code": "MN-2026-10-15-04",
+      "matched_source_numbers": [],
+      "source": "UKMTO",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-15",
+      "code": "MN-2026-10-15-05",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-15",
+      "code": "MN-2026-10-15-06",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-15",
+      "code": "MN-2026-10-15-07",
+      "matched_source_numbers": [],
+      "source": "بيان القوات الأمريكية الوسطى",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-15",
+      "code": "MN-2026-10-15-08",
+      "matched_source_numbers": [],
+      "source": "رويترز · التحالف",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-15",
+      "code": "MN-2026-10-15-09",
+      "matched_source_numbers": [],
+      "source": "تقارير قطاعية · CMF",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-16",
+      "code": "MN-2026-10-16-01",
+      "matched_source_numbers": [
+        31
+      ],
+      "source": "JMIC",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-16",
+      "code": "MN-2026-10-16-02",
+      "matched_source_numbers": [
+        30
+      ],
+      "source": "سنتكوم",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-16",
+      "code": "MN-2026-10-16-05",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO · بيان سنغافوري",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-16",
+      "code": "MN-2026-10-16-06",
+      "matched_source_numbers": [
+        31
+      ],
+      "source": "منصة (يُذكر اسم المصدر) · JMIC",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-16",
+      "code": "IMO-2026-10-16-007",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — Middle East - Highlighted (Confirmed) incidents",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-16",
+      "code": "IMO-2026-10-16-008",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — Middle East - Highlighted (Confirmed) incidents",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-17",
+      "code": "MN-2026-10-17-01",
+      "matched_source_numbers": [],
+      "source": "UKMTO منقولًا عبر منصة مهنية",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-17",
+      "code": "MN-2026-10-17-02",
+      "matched_source_numbers": [],
+      "source": "وزارة الموانئ الهندية",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-17",
+      "code": "MN-2026-10-17-05",
+      "matched_source_numbers": [],
+      "source": "نقل إعلامي مهني (بيانات UKMTO وKpler)",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-17",
+      "code": "MN-2026-10-17-06",
+      "matched_source_numbers": [],
+      "source": "الجزيرة · ستريتس تايمز",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-17",
+      "code": "MN-2026-10-17-07",
+      "matched_source_numbers": [],
+      "source": "EUNAVFOR · القوات البحرية المشتركة",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-17",
+      "code": "MN-2026-10-17-09",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO · UKMTO",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-18",
+      "code": "MN-2026-10-18-01",
+      "matched_source_numbers": [
+        2
+      ],
+      "source": "UKMTO WARNING 176-26",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-18",
+      "code": "MN-2026-10-18-02",
+      "matched_source_numbers": [],
+      "source": "رواية غير مؤكدة من طرف واحد رسمي · رويترز · الجزيرة",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-18",
+      "code": "MN-2026-10-18-03",
+      "matched_source_numbers": [],
+      "source": "NAVAREA IX 380/26",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-18",
+      "code": "MN-2026-10-18-04",
+      "matched_source_numbers": [
+        47
+      ],
+      "source": "مهر نيوز نقلًا عن البحرية الإيرانية",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-18",
+      "code": "MN-2026-10-18-05",
+      "matched_source_numbers": [
+        30
+      ],
+      "source": "القيادة المركزية الأمريكية منقولة",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-18",
+      "code": "MN-2026-10-18-06",
+      "matched_source_numbers": [],
+      "source": "Kpler",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-18",
+      "code": "MN-2026-10-18-07",
+      "matched_source_numbers": [
+        38
+      ],
+      "source": "نقل إعلامي · جيروزاليم بوست",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-18",
+      "code": "MN-2026-10-18-08",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO · UKMTO",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-18",
+      "code": "MN-2026-10-18-09",
+      "matched_source_numbers": [
+        31,
+        32
+      ],
+      "source": "IMB/ICC · JMIC",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-18",
+      "code": "MN-2026-10-18-10",
+      "matched_source_numbers": [
+        36
+      ],
+      "source": "لويدز ليست",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-18",
+      "code": "MN-2026-10-18-11",
+      "matched_source_numbers": [],
+      "source": "رويترز · UANI · وزارة الخزانة الأمريكية",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-18",
+      "code": "IMO-2026-10-18-006",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — Middle East - Highlighted (Confirmed) incidents",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-19",
+      "code": "MN-2026-10-19-01",
+      "matched_source_numbers": [
+        2
+      ],
+      "source": "UKMTO WARNING 177-26",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-19",
+      "code": "MN-2026-10-19-02",
+      "matched_source_numbers": [],
+      "source": "فارس",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-19",
+      "code": "MN-2026-10-19-03",
+      "matched_source_numbers": [],
+      "source": "رويترز",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-19",
+      "code": "MN-2026-10-19-04",
+      "matched_source_numbers": [],
+      "source": "المنظمة البحرية الدولية منقولة عبر الإعلام",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-19",
+      "code": "MN-2026-10-19-05",
+      "matched_source_numbers": [],
+      "source": "IMF PortWatch",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-19",
+      "code": "MN-2026-10-19-06",
+      "matched_source_numbers": [
+        8
+      ],
+      "source": "TradeWinds",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-19",
+      "code": "MN-2026-10-19-07",
+      "matched_source_numbers": [
+        11,
+        32
+      ],
+      "source": "المكتب البحري الدولي · الجزيرة الإنجليزية",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-19",
+      "code": "MN-2026-10-19-08",
+      "matched_source_numbers": [
+        38
+      ],
+      "source": "جيروزاليم بوست",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-19",
+      "code": "MN-2026-10-19-09",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "NAVAREA IX · IMO",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-19",
+      "code": "IMO-2026-10-19-005",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — Middle East - Highlighted (Confirmed) incidents",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-20",
+      "code": "MN-2026-10-20-01",
+      "matched_source_numbers": [],
+      "source": "NAVAREA IX 386/26 — Hydrographer of Pakistan",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-20",
+      "code": "MN-2026-10-20-02",
+      "matched_source_numbers": [],
+      "source": "NAVAREA IX 383/26 — Hydrographer of Pakistan",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-20",
+      "code": "MN-2026-10-20-03",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — سجل الحوادث المؤكدة",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-20",
+      "code": "MN-2026-10-20-04",
+      "matched_source_numbers": [
+        43
+      ],
+      "source": "Maritime Executive · Vanguard Tech · وبلاغ UKMTO 177-26 بلا اسم",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-20",
+      "code": "MN-2026-10-20-05",
+      "matched_source_numbers": [
+        47
+      ],
+      "source": "جهة إيرانية — وكالة مهر",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-20",
+      "code": "MN-2026-10-20-06",
+      "matched_source_numbers": [
+        8
+      ],
+      "source": "TradeWinds · الجزيرة",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-20",
+      "code": "MN-2026-10-20-07",
+      "matched_source_numbers": [],
+      "source": "IMF PortWatch",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-20",
+      "code": "MN-2026-10-20-08",
+      "matched_source_numbers": [
+        1
+      ],
+      "source": "UKMTO — Recent Incidents",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-20",
+      "code": "IMO-2026-10-20-003",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — Middle East - Highlighted (Confirmed) incidents",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-20",
+      "code": "IMO-2026-10-20-004",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — Middle East - Highlighted (Confirmed) incidents",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-21",
+      "code": "MN-2026-10-21-01",
+      "matched_source_numbers": [],
+      "source": "UKMTO 178 — Advisory",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-21",
+      "code": "MN-2026-10-21-02",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — سجل الحوادث المؤكدة",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-21",
+      "code": "MN-2026-10-21-03",
+      "matched_source_numbers": [],
+      "source": "الحرس الثوري",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-21",
+      "code": "MN-2026-10-21-05",
+      "matched_source_numbers": [],
+      "source": "NAVAREA IX — Hydrographer of Pakistan",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-22",
+      "code": "MN-2026-10-22-01",
+      "matched_source_numbers": [
+        1
+      ],
+      "source": "UKMTO 179-26 — Attack",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-22",
+      "code": "MN-2026-10-22-02",
+      "matched_source_numbers": [
+        1
+      ],
+      "source": "UKMTO 180-26 — Attack",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-22",
+      "code": "MN-2026-10-22-03",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — Highlighted confirmed incidents",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-22",
+      "code": "MN-2026-10-22-04",
+      "matched_source_numbers": [],
+      "source": "NAVAREA IX 383/26 · CMF — CTF 151",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-22",
+      "code": "MN-2026-10-22-06",
+      "matched_source_numbers": [
+        6,
+        7,
+        47
+      ],
+      "source": "Mehr — العربي · straits.live · gCaptain",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-23",
+      "code": "MN-2026-10-23-01",
+      "matched_source_numbers": [],
+      "source": "NAVAREA IX — الهيدروغرافي الباكستاني (A/1)",
+      "source_excerpt_from": "navarea-ix-inforce.md"
+    },
+    {
+      "date": "2026-10-23",
+      "code": "MN-2026-10-23-02",
+      "matched_source_numbers": [],
+      "source": "نقل إعلامي عن مصادر إيرانية (D/4)",
+      "source_excerpt_from": "straits-live-brief.md"
+    },
+    {
+      "date": "2026-10-23",
+      "code": "MN-2026-10-23-03",
+      "matched_source_numbers": [],
+      "source": "رواية طرف منفّذ (D/4)",
+      "source_excerpt_from": "straits-live-brief.md"
+    },
+    {
+      "date": "2026-10-23",
+      "code": "MN-2026-10-23-04",
+      "matched_source_numbers": [
+        5,
+        41
+      ],
+      "source": "USNI News عن أرقام IMO (B/2)",
+      "source_excerpt_from": "straits-live-brief.md"
+    },
+    {
+      "date": "2026-10-23",
+      "code": "MN-2026-10-23-05",
+      "matched_source_numbers": [],
+      "source": "تقارير إعلامية (D/4)",
+      "source_excerpt_from": "straits-live-brief.md"
+    },
+    {
+      "date": "2026-10-23",
+      "code": "MN-2026-10-23-06",
+      "matched_source_numbers": [],
+      "source": "منصة (يُذكر اسم المصدر) مستقلة (C/3)",
+      "source_excerpt_from": "straits-live-brief.md"
+    },
+    {
+      "date": "2026-10-23",
+      "code": "MN-2026-10-23-07",
+      "matched_source_numbers": [],
+      "source": "الأناضول · The Independent (C/3)",
+      "source_excerpt_from": "straits-live-brief.md"
+    },
+    {
+      "date": "2026-10-23",
+      "code": "IMO-2026-10-23-001",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — Middle East - Highlighted (Confirmed) incidents",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-23",
+      "code": "IMO-2026-10-23-002",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — Middle East - Highlighted (Confirmed) incidents",
+      "source_excerpt_from": ""
+    },
+    {
+      "date": "2026-10-24",
+      "code": "MN-2026-10-24-01",
+      "matched_source_numbers": [
+        6,
+        47
+      ],
+      "source": "straits.live عن Mehr (D/4)",
+      "source_excerpt_from": "feeds-2026-10-24.json"
+    },
+    {
+      "date": "2026-10-24",
+      "code": "MN-2026-10-24-02",
+      "matched_source_numbers": [
+        6,
+        47
+      ],
+      "source": "Mehr عبر straits.live (D/4)",
+      "source_excerpt_from": "feeds-2026-10-24.json"
+    },
+    {
+      "date": "2026-10-24",
+      "code": "MN-2026-10-24-03",
+      "matched_source_numbers": [
+        36,
+        37
+      ],
+      "source": "Lloyd's List · MarineLink (B/3)",
+      "source_excerpt_from": "feeds-2026-10-24.json"
+    },
+    {
+      "date": "2026-10-24",
+      "code": "MN-2026-10-24-04",
+      "matched_source_numbers": [
+        38
+      ],
+      "source": "Jerusalem Post (B/3)",
+      "source_excerpt_from": "feeds-2026-10-24.json"
+    },
+    {
+      "date": "2026-10-25",
+      "code": "MN-2026-10-25-01",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live عن الحرس الثوري (D/4)",
+      "source_excerpt_from": "feeds-2026-10-25.json"
+    },
+    {
+      "date": "2026-10-25",
+      "code": "MN-2026-10-25-02",
+      "matched_source_numbers": [],
+      "source": "نقل عن البحرية الإيرانية (D/4)",
+      "source_excerpt_from": "feeds-2026-10-25.json"
+    },
+    {
+      "date": "2026-10-25",
+      "code": "MN-2026-10-25-03",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "تقارير إماراتية منقولة عبر straits.live (B/3)",
+      "source_excerpt_from": "feeds-2026-10-25.json"
+    },
+    {
+      "date": "2026-10-25",
+      "code": "MN-2026-10-25-04",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "Shafaq News عبر straits.live (D/4)",
+      "source_excerpt_from": "feeds-2026-10-25.json"
+    },
+    {
+      "date": "2026-10-25",
+      "code": "MN-2026-10-25-05",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "نقل عن طهران عبر straits.live (B/3)",
+      "source_excerpt_from": "feeds-2026-10-25.json"
+    },
+    {
+      "date": "2026-10-25",
+      "code": "MN-2026-10-25-06",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "نقل مهني عبر straits.live (C/3)",
+      "source_excerpt_from": "feeds-2026-10-25.json"
+    },
+    {
+      "date": "2026-10-25",
+      "code": "MN-2026-10-25-07",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live (B/3)",
+      "source_excerpt_from": "feeds-2026-10-25.json"
+    },
+    {
+      "date": "2026-10-26",
+      "code": "MN-2026-10-26-01",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "الحرس الثوري عبر تسنيم، منقولًا",
+      "source_excerpt_from": "straits.live · https://news.google.com/rss/articles/CBMitwFBVV95cUxPeFYxb2phT19vdGFXS3I1X2JxQTY2d0wxZ3Jwb0tTbXVqb3FJdWRlSDBrN1RtQWF2aEhzNmt6OTJPUHVfRW8yVkRlaTVJNC14YWlHbWhpUlNFNzhkNzI5d05DemRzMFVneTF6QzluVHFieEJPVEtMSm1ObGlGeE5BRUlabE5SMy1Mc3FOSng2VzQtT1RwZGxMWUpCczFmQW1pOGZTZkR1QV9DUVJpU0VGZ1lrUkNUSDg?oc=5"
+    },
+    {
+      "date": "2026-10-26",
+      "code": "MN-2026-10-26-02",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live (تجميع)",
+      "source_excerpt_from": "straits.live · https://news.google.com/rss/articles/CBMiwwFBVV95cUxOS1QwN2hrTUszZUY4XzJkQk16NGkzSW1tUXdDcXg1aHhvNUh2RHJhTi1peDRvX2s5Qmdnb1dqRWg5SGxoOHUwaUlfSG1WN1pXNWJSSWQ4Wkk3dGRHYVIyYU5ENld5T1BxSC03Q1NMRG9OV0xWZjNtUDZuc0tKc182UVFRQzFweEp2LUl3clB3WUo3VWtuNGt3YnlIT0tEdkRXX1JZVGYtVllacXgtMTVVNTgxRWs5Q3FrLWRzLUdjMER4UUU?oc=5"
+    },
+    {
+      "date": "2026-10-26",
+      "code": "MN-2026-10-26-03",
+      "matched_source_numbers": [
+        6,
+        11
+      ],
+      "source": "تقارير إماراتية منقولة",
+      "source_excerpt_from": "straits.live · https://www.aljazeera.com/video/newsfeed/2026/10/25/oil-slick-from-tanker-in-hormuz-strait-washes-up-on-uae-beaches?traffic_source=rss"
+    },
+    {
+      "date": "2026-10-26",
+      "code": "MN-2026-10-26-04",
+      "matched_source_numbers": [
+        6,
+        30
+      ],
+      "source": "القيادة المركزية الأميركية",
+      "source_excerpt_from": "straits.live · https://news.google.com/rss/articles/CBMitwFBVV95cUxPeFYxb2phT19vdGFXS3I1X2JxQTY2d0wxZ3Jwb0tTbXVqb3FJdWRlSDBrN1RtQWF2aEhzNmt6OTJPUHVfRW8yVkRlaTVJNC14YWlHbWhpUlNFNzhkNzI5d05DemRzMFVneTF6QzluVHFieEJPVEtMSm1ObGlGeE5BRUlabE5SMy1Mc3FOSng2VzQtT1RwZGxMWUpCczFmQW1pOGZTZkR1QV9DUVJpU0VGZ1lrUkNUSDg?oc=5"
+    },
+    {
+      "date": "2026-10-26",
+      "code": "MN-2026-10-26-05",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "وزارة الخارجية الإيرانية، منقولًا",
+      "source_excerpt_from": "straits.live · https://news.google.com/rss/articles/CBMinwFBVV95cUxOamJ5VTMxZnVkTXBzT0Jtd0NsOG9NYWU1UGJpU1FpZW42bk1kVVFoZkNEdzF6U3pyRUw5M2ZtX3l5X05mb1EtdTl4VTBLYVR1SUZGbUZ6aHRiSEMxbmI0aG54Q3B2S2VDWnc0cmFhMDNuRmZxZTJ1ay1TaTMtVk56ZjN1VXFuQ29mUjVOQVpmVTBsUzJIcldjZnk2LWNrWFU?oc=5"
+    },
+    {
+      "date": "2026-10-26",
+      "code": "MN-2026-10-26-06",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live (تجميع)",
+      "source_excerpt_from": "straits.live · https://news.google.com/rss/articles/CBMidkFVX3lxTE1IdE9HNUJ6WmFiWXBneDQ3SUpYS1VhWlJmVEo3czlhTjNkMVlUOU51UXp6YjQ2cXlfRkszXzJySlhZV3FKdlpyVkRrOUhzaEg4bnNqMFFweF8tY0h1ODVYRVg2Szl3NHpBQ1M4N1hieW5IS0JUbXc?oc=5"
+    },
+    {
+      "date": "2026-10-26",
+      "code": "MN-2026-10-26-07",
+      "matched_source_numbers": [
+        47
+      ],
+      "source": "مهر، منقولًا",
+      "source_excerpt_from": "Mehr — العربي · https://ar.mehrnews.com/news/1974979/%D8%A7%D9%84%D9%82%D9%88%D8%A7%D8%AA-%D8%A7%D9%84%D9%85%D8%B3%D9%84%D8%AD%D8%A9-%D8%A7%D9%84%D9%8A%D9%85%D9%86%D9%8A%D8%A9-%D8%AA%D9%86%D9%81%D8%B0-%D8%AB%D9%84%D8%A7%D8%AB-%D8%B9%D9%85%D9%84%D9%8A%D8%A7%D8%AA-%D9%81%D9%8A-%D8%A7%D9%84%D8%B9%D9%85%D9%82-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A"
+    },
+    {
+      "date": "2026-10-26",
+      "code": "MN-2026-10-26-08",
+      "matched_source_numbers": [
+        31
+      ],
+      "source": "JMIC",
+      "source_excerpt_from": "JMIC · https://combinedmaritimeforces.com/2026/10/20/combined-task-force-151-concludes-counter-piracy-operation-tidal-wave/"
+    },
+    {
+      "date": "2026-10-26",
+      "code": "MN-2026-10-26-09",
+      "matched_source_numbers": [
+        31,
+        32
+      ],
+      "source": "IMB/ICC",
+      "source_excerpt_from": "JMIC · https://combinedmaritimeforces.com/2026/09/25/ctf-151-tests-response-to-piracy-incidents-in-gulf-of-aden-exercise/"
+    },
+    {
+      "date": "2026-10-26",
+      "code": "MN-2026-10-26-10",
+      "matched_source_numbers": [
+        30
+      ],
+      "source": "القيادة المركزية الأميركية",
+      "source_excerpt_from": "القيادة المركزية الأمريكية (سنتكوم) · https://www.centcom.mil/MEDIA/NEWS-ARTICLES/News-Article-View/Article/4398492/us-navy-and-royal-saudi-naval-forces-conclude-exercise-indigo-defender/"
+    },
+    {
+      "date": "2026-10-26",
+      "code": "MN-2026-10-26-11",
+      "matched_source_numbers": [
+        38
+      ],
+      "source": "جيروزاليم بوست، منقولًا",
+      "source_excerpt_from": "Jerusalem Post · https://www.jpost.com/middle-east/iran-news/article-912855"
+    },
+    {
+      "date": "2026-10-26",
+      "code": "MN-2026-10-26-12",
+      "matched_source_numbers": [
+        7
+      ],
+      "source": "gCaptain",
+      "source_excerpt_from": "gCaptain · https://gcaptain.com/russia-says-it-hit-two-cargo-vessels-and-ukrainian-logistics-hubs/"
+    },
+    {
+      "date": "2026-10-26",
+      "code": "MN-2026-10-26-13",
+      "matched_source_numbers": [
+        42
+      ],
+      "source": "نافال نيوز",
+      "source_excerpt_from": "Naval News · https://www.navalnews.com/naval-news/2026/10/navantia-launches-seventh-avante-corvette-for-saudi-arabia/"
+    },
+    {
+      "date": "2026-10-26",
+      "code": "MN-2026-10-26-14",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live (تجميع)",
+      "source_excerpt_from": "straits.live · https://news.google.com/rss/articles/CBMipwFBVV95cUxOYl9ZVHdYVUkxcEJuNDRHUk9FRVJZdm9fRXk3a2F2NlJUSm0yamNIUDl6TEt5a1hNRndxOEZqdjEycmJQUGtHeHYwZGNST1U4OXI0akFUSTlId1Vkei1KLTJtTEhzdXdJQXlOZkR0b3BUc2VGSmVIUVZ3VWZFUTRFS2NwTE5HSDVlWFAzMzRrWWFvMkVMUW1NYW04VUNhLTRpX2l2aWZOWQ?oc=5"
+    },
+    {
+      "date": "2026-10-26",
+      "code": "MN-2026-10-26-15",
+      "matched_source_numbers": [
+        36
+      ],
+      "source": "لويدز ليست",
+      "source_excerpt_from": "Lloyd's List · https://www.lloydslist.com/LL1157563/Daily%20Briefing%2026%20October%202026?utm_source=search&amp;utm_medium=RSS&amp;utm_term=&amp;utm_campaign=search_rss"
+    },
+    {
+      "date": "2026-10-26",
+      "code": "MN-2026-10-26-16",
+      "matched_source_numbers": [
+        33
+      ],
+      "source": "MARAD/MSCI",
+      "source_excerpt_from": "MARAD/MSCI · https://www.maritime.dot.gov/node/161"
+    },
+    {
+      "date": "2026-10-26",
+      "code": "MN-2026-10-26-17",
+      "matched_source_numbers": [
+        8
+      ],
+      "source": "TradeWinds",
+      "source_excerpt_from": "TradeWinds · https://services.tradewindsnews.com/api/feed/rss"
+    },
+    {
+      "date": "2026-10-26",
+      "code": "MN-2026-10-26-18",
+      "matched_source_numbers": [
+        9
+      ],
+      "source": "Seatrade Maritime",
+      "source_excerpt_from": "Seatrade Maritime · https://www.seatrade-maritime.com/rss.xml"
+    },
+    {
+      "date": "2026-10-26",
+      "code": "MN-2026-10-26-19",
+      "matched_source_numbers": [
+        41
+      ],
+      "source": "USNI News",
+      "source_excerpt_from": "USNI News · https://news.usni.org/feed"
+    },
+    {
+      "date": "2026-10-26",
+      "code": "MN-2026-10-26-20",
+      "matched_source_numbers": [
+        51
+      ],
+      "source": "Baird Maritime",
+      "source_excerpt_from": "Baird Maritime · https://www.bairdmaritime.com/feed/"
+    },
+    {
+      "date": "2026-10-26",
+      "code": "MN-2026-10-26-21",
+      "matched_source_numbers": [
+        49
+      ],
+      "source": "Sanaa Center",
+      "source_excerpt_from": "Sanaa Center · https://sanaacenter.org/feed/"
+    },
+    {
+      "date": "2026-10-26",
+      "code": "MN-2026-10-26-22",
+      "matched_source_numbers": [
+        47
+      ],
+      "source": "مهر، منقولًا",
+      "source_excerpt_from": "سطر التقرير (لا مقتطف تغذية مطابق)"
+    },
+    {
+      "date": "2026-10-26",
+      "code": "MN-2026-10-26-23",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live (تجميع)",
+      "source_excerpt_from": "straits.live · https://straits.live/feed.xml"
+    },
+    {
+      "date": "2026-10-26",
+      "code": "MN-2026-10-26-24",
+      "matched_source_numbers": [
+        35
+      ],
+      "source": "Splash 247",
+      "source_excerpt_from": "Splash 247 · https://splash247.com/feed/"
+    },
+    {
+      "date": "2026-10-27",
+      "code": "MN-2026-10-27-01",
+      "matched_source_numbers": [
+        14
+      ],
+      "source": "هيئة بحرية بريطانية",
+      "source_excerpt_from": "https://www.alarabiya.net/arab-and-world/iraq/2026/10/26/%D9%87%D9%8A%D8%A6%D8%A9-%D8%A8%D8%AD%D8%B1%D9%8A%D8%A9-%D8%A8%D8%B1%D9%8A%D8%B7%D8%A7%D9%86%D9%8A%D8%A9-%D8%AD%D8%B1%D9%8A%D9%82-%D8%B9%D9%84%D9%89-%D9%85%D8%AA%D9%86-%D8%B3%D9%81%D9%8A%D9%86%D8%A9-%D9%82%D8%A8%D8%A7%D9%84%D8%A9-%D8%B3%D9%88%D8%A7%D8%AD%D9%84-%D8%A7%D9%84%D8%B9%D8%B1%D8%A7%D9%82"
+    },
+    {
+      "date": "2026-10-27",
+      "code": "MN-2026-10-27-02",
+      "matched_source_numbers": [
+        14
+      ],
+      "source": "التحالف",
+      "source_excerpt_from": "https://vid.alarabiya.net/images/2026/03/15/a9eca658-74be-4809-88af-3b0b824d1ded/a9eca658-74be-4809-88af-3b0b824d1ded_16x9_1200x676.png?width=801&format=jpg"
+    },
+    {
+      "date": "2026-10-27",
+      "code": "MN-2026-10-27-03",
+      "matched_source_numbers": [
+        14
+      ],
+      "source": "هيومن رايتس ووتش",
+      "source_excerpt_from": "https://www.alarabiya.net/arab-and-world/yemen/2026/10/27/%D9%87%D9%8A%D9%88%D9%85%D9%86-%D8%B1%D8%A7%D9%8A%D8%AA%D8%B3-%D9%87%D8%AC%D9%88%D9%85-%D8%AD%D9%88%D8%AB%D9%8A-%D8%B9%D9%84%D9%89-%D8%B7%D8%B1%D9%8A%D9%82-%D8%AD%D9%8A%D9%88%D9%8A-%D8%A7%D9%84%D9%89-%D8%AA%D8%B9%D8%B2-%D9%82%D8%AF-%D9%8A%D8%B1%D9%82%D9%89-%D9%84%D8%AC%D8%B1%D9%8A%D9%85%D8%A9-%D8%AD%D8%B1%D8%A8"
+    },
+    {
+      "date": "2026-10-27",
+      "code": "MN-2026-10-27-04",
+      "matched_source_numbers": [
+        5,
+        24
+      ],
+      "source": "وكالة الأنباء القطرية",
+      "source_excerpt_from": "https://qna.org.qa/en/News-Area/News/2026-10/26/qatar-takes-part-in-imo-2026-wmdpe-in-korea"
+    },
+    {
+      "date": "2026-10-27",
+      "code": "MN-2026-10-27-05",
+      "matched_source_numbers": [
+        28
+      ],
+      "source": "وكالة الأنباء العُمانية",
+      "source_excerpt_from": "https://omannews.gov.om/"
+    },
+    {
+      "date": "2026-10-27",
+      "code": "MN-2026-10-27-06",
+      "matched_source_numbers": [
+        31
+      ],
+      "source": "JMIC",
+      "source_excerpt_from": "https://combinedmaritimeforces.com/2026/10/20/combined-task-force-151-concludes-counter-piracy-operation-tidal-wave/"
+    },
+    {
+      "date": "2026-10-27",
+      "code": "MN-2026-10-27-07",
+      "matched_source_numbers": [
+        47
+      ],
+      "source": "مهر",
+      "source_excerpt_from": "https://ar.mehrnews.com/news/1975007/%D8%A8%D8%B2%D8%B4%D9%83%D9%8A%D8%A7%D9%86-%D8%A7%D9%8A%D8%B1%D8%A7%D9%86-%D8%AA%D8%AF%D8%B9%D9%85-%D8%A3%D9%8A-%D8%AA%D9%81%D8%A7%D9%87%D9%85-%D9%85%D9%86-%D8%B4%D8%A3%D9%86%D9%87-%D8%AA%D8%B9%D8%B2%D9%8A%D8%B2-%D9%88%D8%AD%D8%AF%D8%A9-%D9%88%D8%AA%D9%85%D8%A7%D8%B3%D9%83-%D8%A7%D9%84%D8%AF%D9%88%D9%84"
+    },
+    {
+      "date": "2026-10-27",
+      "code": "MN-2026-10-27-08",
+      "matched_source_numbers": [
+        7
+      ],
+      "source": "gCaptain",
+      "source_excerpt_from": "feeds-2026-10-27.json · https://gcaptain.com/tanker-disabled-in-strait-of-hormuz-attack-another-vessel-reported-on-fire-in-persian-gulf/"
+    },
+    {
+      "date": "2026-10-27",
+      "code": "MN-2026-10-27-09",
+      "matched_source_numbers": [
+        7
+      ],
+      "source": "gCaptain",
+      "source_excerpt_from": "feeds-2026-10-27.json · https://gcaptain.com/oil-spill-off-uae-widens-satellite-images-show-prompting-more-beach-closures/"
+    },
+    {
+      "date": "2026-10-27",
+      "code": "MN-2026-10-27-10",
+      "matched_source_numbers": [
+        36
+      ],
+      "source": "Lloyd's List",
+      "source_excerpt_from": "feeds-2026-10-27.json · https://www.lloydslist.com/LL1158812/Bulk%20carrier%20Cape%20Dao%20sinks%20after%20Hormuz%20attack?utm_source=search&amp;utm_medium=RSS&amp;utm_term=&amp;utm_campaign=search_rss"
+    },
+    {
+      "date": "2026-10-27",
+      "code": "MN-2026-10-27-11",
+      "matched_source_numbers": [
+        37
+      ],
+      "source": "MarineLink",
+      "source_excerpt_from": "feeds-2026-10-27.json · https://www.marinelink.com/news/oil-prices-fall-amidst-hopes-easing-543907"
+    },
+    {
+      "date": "2026-10-27",
+      "code": "MN-2026-10-27-12",
+      "matched_source_numbers": [
+        9
+      ],
+      "source": "Seatrade Maritime",
+      "source_excerpt_from": "feeds-2026-10-27.json · https://www.seatrade-maritime.com/tankers/gulf-ship-to-ship-transfers-bolster-astronomical-vlcc-rates"
+    },
+    {
+      "date": "2026-10-27",
+      "code": "MN-2026-10-27-13",
+      "matched_source_numbers": [
+        51
+      ],
+      "source": "Baird Maritime",
+      "source_excerpt_from": "feeds-2026-10-27.json · https://www.bairdmaritime.com/security/incidents/accidents/seahorse-crew-rescued-off-lebanon"
+    },
+    {
+      "date": "2026-10-27",
+      "code": "MN-2026-10-27-14",
+      "matched_source_numbers": [
+        8
+      ],
+      "source": "TradeWinds",
+      "source_excerpt_from": "feeds-2026-10-27.json · https://www.tradewindsnews.com/casualties/russia-claims-more-attacks-on-black-sea-dry-cargo-vessels/2-1-2064292"
+    },
+    {
+      "date": "2026-10-28",
+      "code": "MN-2026-10-28-01",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-10-28.json · straits.live · https://news.google.com/rss/articles/CBMilgFBVV95cUxOUjR3WUhORnNFV1llNm5NSFFnaGpsZTJJZk50LUFvaE5DbjZYc2ZFNWhNdmtVVFZnaFpQYU1pRmcwNkpHdmVvdlRuZTdxWHl6UFVQTmpTNTRNZ1NoMmhoVjlTT2dWMTBPMFR6M3NxOWdTcFFHMHNKeXppYXVnLUFabVlmYUUyRWZKRWlwbTI5SV8tWlZKNHc?oc=5"
+    },
+    {
+      "date": "2026-10-28",
+      "code": "MN-2026-10-28-02",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-10-28.json · straits.live · https://news.google.com/rss/articles/CBMiwgFBVV95cUxObnczOXF6bHh1ek90ODRaMTUzOFlPb2pxZWN6TkZBUnZNX3pPVjFHNW1RRE1KMk9BaGlBR0tYelVlWHBQWnNOOWF1V25hdWdYLTBRN01EeDF5dUVCeDJDdlhXMjZMNmtaTldKWGNPellVOUpVcWp4b0RrUEt4enF0bHV0dUc1WEswSDNPclY5Q0ZiOVpUbDFrR28wNGdiNGY4VmZYa0x0SEkzLTRXS0dSR0J1b0pGSzB0ZXdybnBoRzk3Z9IBxwFBVV95cUxPZzNIdzZPSnBjZzBoZmVBanRxRXVhcmxhU09NTzZZZ2FrTlZxTWZkX2V0b2V3Qi12Y0lZNnZmZEt3bWpZdlJ6bVhlR2FLNWFlNU93eS1IbnBPLXJYRmRXbE1VSE1EaHBHVFBncWRlUV9YN3IwcEtEV3lnQktrYl83OU1mcVV4SDBodlhsQVk1WmhFdmRGa3dVdnh0NEYzRjZ4QXVSOWxFcUZOenZrLUREZW9GNzIzZ0l3bXpWUVQzWDB3QkJiOWt3?oc=5"
+    },
+    {
+      "date": "2026-10-28",
+      "code": "MN-2026-10-28-03",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-10-28.json · straits.live · https://news.google.com/rss/articles/CBMiigFBVV95cUxQZ0ppMGRmLVktTjZMOXRDOHpCNVlmUktPLV9xeGc2MVJYRGdTV1M4anB2Z2J0RVUwbV9KODFhQkF2NnRPeFlfMmtUaXRzTmxKUzZpaDAteWFNb1BXVE5UeHpGbkF6WW1MdDJSM09za1BfSERmaHFPd05IV0hSTDBDeG5kaFlQcDFpWkE?oc=5"
+    },
+    {
+      "date": "2026-10-28",
+      "code": "MN-2026-10-28-04",
+      "matched_source_numbers": [
+        7,
+        8
+      ],
+      "source": "gCaptain · TradeWinds",
+      "source_excerpt_from": "feeds/feeds-2026-10-28.json · gCaptain · https://gcaptain.com/iran-says-it-will-take-action-against-sinokor-ships-in-hormuz/"
+    },
+    {
+      "date": "2026-10-28",
+      "code": "MN-2026-10-28-05",
+      "matched_source_numbers": [
+        8
+      ],
+      "source": "TradeWinds",
+      "source_excerpt_from": "feeds/feeds-2026-10-28.json · TradeWinds · https://www.tradewindsnews.com/casualties/fire-burns-at-saudi-gulf-export-hub-after-houthi-strike/2-1-2064972"
+    },
+    {
+      "date": "2026-10-28",
+      "code": "MN-2026-10-28-06",
+      "matched_source_numbers": [
+        8
+      ],
+      "source": "TradeWinds",
+      "source_excerpt_from": "feeds/feeds-2026-10-28.json · TradeWinds · https://www.tradewindsnews.com/tankers/spill-spreads-from-vlcc-damaged-in-iranian-attack-off-uae/2-1-2064453"
+    },
+    {
+      "date": "2026-10-28",
+      "code": "MN-2026-10-28-07",
+      "matched_source_numbers": [
+        42
+      ],
+      "source": "Naval News",
+      "source_excerpt_from": "feeds/feeds-2026-10-28.json · Naval News · https://www.navalnews.com/naval-news/2026/10/houthi-ballistic-missile-intercepted-near-belgian-minehunter-in-bab-el-mandeb/"
+    },
+    {
+      "date": "2026-10-28",
+      "code": "MN-2026-10-28-08",
+      "matched_source_numbers": [
+        37
+      ],
+      "source": "MarineLink",
+      "source_excerpt_from": "feeds/feeds-2026-10-28.json · MarineLink · https://www.marinelink.com/news/houthi-missile-strikes-saudi-oil-refinery-543943"
+    },
+    {
+      "date": "2026-10-28",
+      "code": "MN-2026-10-28-09",
+      "matched_source_numbers": [
+        24
+      ],
+      "source": "وكالة الأنباء القطرية (قنا)",
+      "source_excerpt_from": "feeds/feeds-2026-10-28.json · وكالة الأنباء القطرية (قنا) · https://qna.org.qa/en/News-Area/News/2026-10/27/hh-the-amir-meets-iranian-president"
+    },
+    {
+      "date": "2026-10-28",
+      "code": "MN-2026-10-28-10",
+      "matched_source_numbers": [
+        24
+      ],
+      "source": "وكالة الأنباء القطرية (قنا)",
+      "source_excerpt_from": "feeds/feeds-2026-10-28.json · وكالة الأنباء القطرية (قنا) · https://qna.org.qa/en/News-Area/News/2026-10/27/qatar-calls-for-new-regional-security-framework-based-on-state-sovereignty-respect"
+    },
+    {
+      "date": "2026-10-28",
+      "code": "MN-2026-10-28-11",
+      "matched_source_numbers": [
+        24
+      ],
+      "source": "وكالة الأنباء القطرية (قنا)",
+      "source_excerpt_from": "feeds/feeds-2026-10-28.json · وكالة الأنباء القطرية (قنا) · https://qna.org.qa/en/News-Area/News/2026-10/27/qatar-joins-gcc-talks-on-transport-links-and-rising-shipping-costs"
+    },
+    {
+      "date": "2026-10-28",
+      "code": "MN-2026-10-28-12",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-10-28.json · straits.live · https://news.google.com/rss/articles/CBMixAFBVV95cUxPTWgySXBrX2JKYzVRcmxZSzNPWW5RWHdpZlAtSTUxc2hhV0k3ejRacjdjTWF5WlhGXzFxdFJsV1NqQnNMYnpJd0pLazRYNlM0Y0k0S09JMVktbXJGSEVhZHFtRVZkUG9LUl9RQ2psdjQyMXJhX0xCT3dNY3EybzcwUTcwWVhra29rXzdMOXhrSFVCMm9DOEpRd1FvVXRNNGozNzZXUmd4cm8tRHltc0hiSV9uckVMdGY2QmZwZWl4TjZacm1U?oc=5"
+    },
+    {
+      "date": "2026-10-28",
+      "code": "MN-2026-10-28-13",
+      "matched_source_numbers": [
+        6,
+        48
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-10-28.json · straits.live · https://news.google.com/rss/articles/CBMiswFBVV95cUxQLU5XdU9vRVMtTFoyUmx6eU54bjdGenRVcVFqc05VTmh5UERaRG9GYnl4ZEFmUU1oZkRUMzQ2YzJVWXQ1TWNnZnpyWE1oLXk3TGF3T1p6cGxER25sRVEwRUpiMHlqeGhkdFNFZmt4dVBocVdFUTFjcGhBa2FvcHM5anZrLXlRY1JYZUZRMGdCZDNYQmg1V1dfNFUwUnM5NjVTS3JfWmE0M2F2M1d3ZEVVeWdkSQ?oc=5"
+    },
+    {
+      "date": "2026-10-28",
+      "code": "MN-2026-10-28-14",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-10-28.json · straits.live · https://www.hellenicshippingnews.com/saudi-red-sea-ports-brace-for-seasonal-import-surge/"
+    },
+    {
+      "date": "2026-10-28",
+      "code": "MN-2026-10-28-15",
+      "matched_source_numbers": [
+        35
+      ],
+      "source": "Splash 247",
+      "source_excerpt_from": "feeds/feeds-2026-10-28.json · Splash 247 · https://splash247.com/jade-pacific-makes-liner-debut-with-red-sea-service/"
+    },
+    {
+      "date": "2026-10-29",
+      "code": "MN-2026-10-29-01",
+      "matched_source_numbers": [
+        15,
+        31
+      ],
+      "source": "JMIC · UKMTO",
+      "source_excerpt_from": "feeds/feeds-2026-10-29.md · 15. حساب @UK_MTO على X · السطر 419"
+    },
+    {
+      "date": "2026-10-29",
+      "code": "MN-2026-10-29-02",
+      "matched_source_numbers": [
+        2
+      ],
+      "source": "UKMTO",
+      "source_excerpt_from": "feeds/feeds-2026-10-29.md · 2. UKMTO · السطر 12"
+    },
+    {
+      "date": "2026-10-29",
+      "code": "MN-2026-10-29-03",
+      "matched_source_numbers": [
+        7
+      ],
+      "source": "gCaptain نقلًا عن إشعار أمريكي",
+      "source_excerpt_from": "feeds/feeds-2026-10-29.json · gCaptain · https://gcaptain.com/us-tells-ships-to-avoid-unnecessary-transits-through-hormuz/"
+    },
+    {
+      "date": "2026-10-29",
+      "code": "MN-2026-10-29-04",
+      "matched_source_numbers": [
+        8
+      ],
+      "source": "TradeWinds",
+      "source_excerpt_from": "feeds/feeds-2026-10-29.json · TradeWinds · https://www.tradewindsnews.com/regulation/us-warns-neutral-ships-they-may-be-stopped-and-searched-in-gulf/2-1-2065688"
+    },
+    {
+      "date": "2026-10-29",
+      "code": "MN-2026-10-29-05",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-10-29.md · 6. straits.live · السطر 34"
+    },
+    {
+      "date": "2026-10-29",
+      "code": "MN-2026-10-29-06",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-10-29.md · 6. straits.live · السطر 36"
+    },
+    {
+      "date": "2026-10-29",
+      "code": "MN-2026-10-29-07",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-10-29.md · 6. straits.live · السطر 38"
+    },
+    {
+      "date": "2026-10-29",
+      "code": "MN-2026-10-29-08",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-10-29.md · 6. straits.live · السطر 35"
+    },
+    {
+      "date": "2026-10-29",
+      "code": "MN-2026-10-29-09",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-10-29.json · straits.live · https://news.google.com/rss/articles/CBMiqAFBVV95cUxPaU1uMHZGZWM0UklUYWc3NUN6a2d3TEM0UWJxb2hDamlzVW82bHNjV25jT3F3QktkYnJlckgtMzIwMDU5c1loN051V0cyWVRUdllvY0otQ3l1eFJ6aXJfVF9PT2xfYUNGWmp6RnlxcEY2Mlpqd2NGUWVWWXQ2UExBS25mN0RZWlFkcWNJY25PV2dQZHhXQkpFbXByTnVXbnAzdExDb0xQS2c?oc=5"
+    },
+    {
+      "date": "2026-10-29",
+      "code": "MN-2026-10-29-10",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-10-29.md · 6. straits.live · السطر 37"
+    },
+    {
+      "date": "2026-10-29",
+      "code": "MN-2026-10-29-11",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-10-29.json · straits.live · https://news.google.com/rss/articles/CBMivwFBVV95cUxPMXlmQXR6Mmh1OV9LNENOQ0tlTmlLQURTTkRobXYwcWR4b0duRE0tOVNwV2ppQjNMWVZIRk1jUy1KemxCbU1IdHdldmYzRGYzTExoeGRETXZmZ0VKSnZqZ2FjV216blgteW4yR0R1S2ZMTGw1SkZfb21rSnJLODFBTWVwczM2Z1dabnZqY2tBTjU1NGVoM0FYbnNyVTRlUHlNY25xb0h6SWNCaTJpdndmRDNtcUhGZkprV2hTdmFHUQ?oc=5"
+    },
+    {
+      "date": "2026-10-29",
+      "code": "MN-2026-10-29-12",
+      "matched_source_numbers": [
+        9
+      ],
+      "source": "Seatrade Maritime",
+      "source_excerpt_from": "feeds/feeds-2026-10-29.md · 9. Seatrade Maritime · السطر 62"
+    },
+    {
+      "date": "2026-10-29",
+      "code": "MN-2026-10-29-13",
+      "matched_source_numbers": [
+        9
+      ],
+      "source": "Seatrade Maritime",
+      "source_excerpt_from": "feeds/feeds-2026-10-29.json · Seatrade Maritime · https://www.seatrade-maritime.com/security/iran-war-8-months-on-121-vessels-attacked-24-seafarers-killed"
+    },
+    {
+      "date": "2026-10-29",
+      "code": "MN-2026-10-29-14",
+      "matched_source_numbers": [
+        61
+      ],
+      "source": "حساب @ERYANIM (رسمي يمني)",
+      "source_excerpt_from": "feeds/feeds-2026-10-29.md · 61. حساب @ERYANIM على X · السطر 476"
+    },
+    {
+      "date": "2026-10-29",
+      "code": "MN-2026-10-29-15",
+      "matched_source_numbers": [
+        61
+      ],
+      "source": "حساب @ERYANIM (رسمي يمني)",
+      "source_excerpt_from": "feeds/feeds-2026-10-29.md · 61. حساب @ERYANIM على X · السطر 475"
+    },
+    {
+      "date": "2026-10-29",
+      "code": "MN-2026-10-29-16",
+      "matched_source_numbers": [
+        14,
+        24
+      ],
+      "source": "قناة العربية (الحساب الرسمي) نقلًا عن وزارة الصحة اليمنية",
+      "source_excerpt_from": "feeds/feeds-2026-10-29.md · 14. قناة العربية · السطر 488"
+    },
+    {
+      "date": "2026-10-30",
+      "code": "MN-2026-10-30-01",
+      "matched_source_numbers": [
+        15
+      ],
+      "source": "UKMTO (حسابها الرسمي)",
+      "source_excerpt_from": "feeds/feeds-2026-10-30.md · 15. حساب @UK_MTO على X — via: primary · عناصر: 5 · محتوى: 1623 حرف · السطر 454"
+    },
+    {
+      "date": "2026-10-30",
+      "code": "MN-2026-10-30-02",
+      "matched_source_numbers": [
+        15
+      ],
+      "source": "UKMTO (حسابها الرسمي)",
+      "source_excerpt_from": "feeds/feeds-2026-10-30.md · 15. حساب @UK_MTO على X — via: primary · عناصر: 5 · محتوى: 1623 حرف · السطر 456"
+    },
+    {
+      "date": "2026-10-30",
+      "code": "MN-2026-10-30-03",
+      "matched_source_numbers": [
+        15
+      ],
+      "source": "UKMTO (حسابها الرسمي)",
+      "source_excerpt_from": "feeds/feeds-2026-10-30.md · 15. حساب @UK_MTO على X — via: primary · عناصر: 5 · محتوى: 1623 حرف · السطر 457"
+    },
+    {
+      "date": "2026-10-30",
+      "code": "MN-2026-10-30-04",
+      "matched_source_numbers": [
+        15,
+        31
+      ],
+      "source": "JMIC · UKMTO",
+      "source_excerpt_from": "feeds/feeds-2026-10-30.md · 15. حساب @UK_MTO على X — via: primary · عناصر: 5 · محتوى: 1623 حرف · السطر 458"
+    },
+    {
+      "date": "2026-10-30",
+      "code": "MN-2026-10-30-05",
+      "matched_source_numbers": [
+        2
+      ],
+      "source": "UKMTO (حسابها الرسمي)",
+      "source_excerpt_from": "feeds/feeds-2026-10-30.md · 2. UKMTO — التحذيرات 2026 — via: primary · عناصر: 9 · محتوى: 1295 حرف · السطر 12"
+    },
+    {
+      "date": "2026-10-30",
+      "code": "MN-2026-10-30-06",
+      "matched_source_numbers": [
+        2
+      ],
+      "source": "UKMTO (حسابها الرسمي)",
+      "source_excerpt_from": "feeds/feeds-2026-10-30.md · 2. UKMTO — التحذيرات 2026 — via: primary · عناصر: 9 · محتوى: 1295 حرف · السطر 13"
+    },
+    {
+      "date": "2026-10-30",
+      "code": "MN-2026-10-30-07",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-10-30.md · 6. straits.live — via: primary · عناصر: 58 · محتوى: 30551 حرف · السطر 37"
+    },
+    {
+      "date": "2026-10-30",
+      "code": "MN-2026-10-30-08",
+      "matched_source_numbers": [
+        38
+      ],
+      "source": "Jerusalem Post",
+      "source_excerpt_from": "feeds/feeds-2026-10-30.md · 38. Jerusalem Post — via: primary · عناصر: 30 · محتوى: 34789 حرف · السطر 316"
+    },
+    {
+      "date": "2026-10-30",
+      "code": "MN-2026-10-30-09",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-10-30.md · 6. straits.live — via: primary · عناصر: 58 · محتوى: 30551 حرف · السطر 38"
+    },
+    {
+      "date": "2026-10-30",
+      "code": "MN-2026-10-30-10",
+      "matched_source_numbers": [
+        47
+      ],
+      "source": "Mehr — العربي",
+      "source_excerpt_from": "feeds/feeds-2026-10-30.md · 47. Mehr — العربي — via: primary · عناصر: 30 · محتوى: 14069 حرف · السطر 388"
+    },
+    {
+      "date": "2026-10-30",
+      "code": "MN-2026-10-30-11",
+      "matched_source_numbers": [
+        47
+      ],
+      "source": "Mehr — العربي",
+      "source_excerpt_from": "feeds/feeds-2026-10-30.md · 47. Mehr — العربي — via: primary · عناصر: 30 · محتوى: 27772 حرف · السطر 378"
+    },
+    {
+      "date": "2026-10-30",
+      "code": "MN-2026-10-30-12",
+      "matched_source_numbers": [
+        44
+      ],
+      "source": "Windward",
+      "source_excerpt_from": "feeds/feeds-2026-10-30.md · 44. Windward — via: primary · عناصر: 12 · محتوى: 114464 حرف · السطر 351"
+    },
+    {
+      "date": "2026-10-30",
+      "code": "MN-2026-10-30-13",
+      "matched_source_numbers": [
+        55
+      ],
+      "source": "Axios",
+      "source_excerpt_from": "feeds/feeds-2026-10-30.md · 55. Axios — via: primary · عناصر: 100 · محتوى: 897060 حرف · السطر 442"
+    },
+    {
+      "date": "2026-10-30",
+      "code": "MN-2026-10-30-14",
+      "matched_source_numbers": [
+        38
+      ],
+      "source": "Jerusalem Post",
+      "source_excerpt_from": "feeds/feeds-2026-10-30.md · 38. Jerusalem Post — via: primary · عناصر: 30 · محتوى: 34789 حرف · السطر 319"
+    },
+    {
+      "date": "2026-10-30",
+      "code": "MN-2026-10-30-15",
+      "matched_source_numbers": [
+        35
+      ],
+      "source": "Splash 247",
+      "source_excerpt_from": "feeds/feeds-2026-10-30.md · 35. Splash 247 — via: primary · عناصر: 10 · محتوى: 7891 حرف · السطر 273"
+    },
+    {
+      "date": "2026-10-30",
+      "code": "MN-2026-10-30-16",
+      "matched_source_numbers": [
+        24
+      ],
+      "source": "وكالة الأنباء القطرية (قنا)",
+      "source_excerpt_from": "feeds/feeds-2026-10-30.md · 24. وكالة الأنباء القطرية (قنا) — via: primary · عناصر: 50 · محتوى: 27033 حرف · السطر 174"
+    },
+    {
+      "date": "2026-10-31",
+      "code": "MN-2026-10-31-01",
+      "matched_source_numbers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "source": "UKMTO (التحذيرات 2026)",
+      "source_excerpt_from": "feeds/feeds-2026-10-31.json · 2. UKMTO — التحذيرات 2026 · item 3 · https://www.ukmto.org/recent-incidents#01e0ab3b-eaa2-4136-9704-a71af6bd4613"
+    },
+    {
+      "date": "2026-10-31",
+      "code": "MN-2026-10-31-02",
+      "matched_source_numbers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "source": "UKMTO (التحذيرات 2026)",
+      "source_excerpt_from": "feeds/feeds-2026-10-31.json · 2. UKMTO — التحذيرات 2026 · item 5 · https://www.ukmto.org/recent-incidents#3fcebe8b-d2d7-478d-a9c0-bf0258f4c25c"
+    },
+    {
+      "date": "2026-10-31",
+      "code": "MN-2026-10-31-03",
+      "matched_source_numbers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "source": "UKMTO (التحذيرات 2026)",
+      "source_excerpt_from": "feeds/feeds-2026-10-31.json · 2. UKMTO — التحذيرات 2026 · item 6 · https://www.ukmto.org/recent-incidents#f4508d59-a48d-45af-92db-ebfb5201c8b0"
+    },
+    {
+      "date": "2026-10-31",
+      "code": "MN-2026-10-31-04",
+      "matched_source_numbers": [
+        7,
+        8,
+        11
+      ],
+      "source": "gCaptain · TradeWinds · الجزيرة الإنجليزية",
+      "source_excerpt_from": "feeds/feeds-2026-10-31.json · 8. TradeWinds · item 1 · https://www.tradewindsnews.com/casualties/giant-qatari-lng-carrier-suffers-fire-in-gulf-attack-as-trump-says-war-will-be-wrapped-up-soon/2-1-2067169"
+    },
+    {
+      "date": "2026-10-31",
+      "code": "MN-2026-10-31-05",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-10-31.json · 6. straits.live · item 3 · https://news.google.com/rss/articles/CBMiwgFBVV95cUxObXVVZXlYZ0hiWEFPS1FJcmJZN0J2MHlfOTNtQ3gyRkdGVVZpVHNrYnh5WWoyM2ZqcVJxOGpwVWY5TU85Wm85MUI5eXlERUxqZHVYU05RRUdBa2ZpbmtUd0dmUTBwd3ZWMjNjaV9PWURxeHRvdl9TRFVWQl9wNU12bF92V2lpMGR3MU91OW9MVVM4dFhPYWF4NlNNZE5ueFctaWpNR0VLWGpjYzUxNktqOHc0LWVqU1VhZFhYeG9Ub0RaZw?oc=5"
+    },
+    {
+      "date": "2026-10-31",
+      "code": "MN-2026-10-31-06",
+      "matched_source_numbers": [
+        6,
+        11,
+        46
+      ],
+      "source": "straits.live · ISNA",
+      "source_excerpt_from": "feeds/feeds-2026-10-31.json · 6. straits.live · item 6 · https://www.aljazeera.com/video/newsfeed/2026/10/31/iran-says-four-tankers-on-fire-after-striking-mines-in-hormuz?traffic_source=rss"
+    },
+    {
+      "date": "2026-10-31",
+      "code": "MN-2026-10-31-07",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-10-31.json · 6. straits.live · item 4 · https://news.google.com/rss/articles/CBMiwgFBVV95cUxOQnlMdXJLYy1jRGpmbmEtYVdENVRGYlJwNlZ5c0ZYYjNCQjQ4cHE2WnBMeFd5VWM1cl9OajZvSk0ybUhCREk5UHFHNUJmRmlvZEZVX0RrcUw3SXdoQTZweHpwcExpb05YWERlS1NYUjFETWNQMmowVWk4a1p5SVVFY19PaFhwYm5CYnktZjIxd18yeTZOMkx3dGctTDB4UXpONUF6cDVMN2NrdkFjeFVyX3lZMXFiQUxOM3RsV2VTcU5HZw?oc=5"
+    },
+    {
+      "date": "2026-10-31",
+      "code": "MN-2026-10-31-08",
+      "matched_source_numbers": [
+        46,
+        47
+      ],
+      "source": "ISNA · Mehr",
+      "source_excerpt_from": "feeds/feeds-2026-10-31.json · 46. ISNA · item 2 · https://en.isna.ir/news/1405080805044/Iranian-Army-Navy-Destroys-Enemy-USV-Two-Offending-Tankers-Catch"
+    },
+    {
+      "date": "2026-10-31",
+      "code": "MN-2026-10-31-09",
+      "matched_source_numbers": [
+        6,
+        30
+      ],
+      "source": "سنتكوم كما نُقل عبر straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-10-31.json · 6. straits.live · item 37 · https://news.google.com/rss/articles/CBMivAFBVV95cUxNcU9oR1VOZFFxRGJzXzZ0c0ZhWko1c0Q3M0hfNXdfMW9NYUI3M3RDYXA5U0NrRHUyLU0xSUMxTk1OWk1xMHFheVNkSEZLXzZSSmcxYW55QVBJUVJXT3o2dXhzZDVmVzdhWEFnVVFWTEp5dkZPQU5KOVZ2NEVCVlBna2RUN3JvUndPX2djR2xBYVRYN2VRZWVIOWV0S2ZxbE5tU0FYYi1iRHBFUEZPeU1GZUNDOWxxUHhWTmhrctIBwgFBVV95cUxPV3ZWS19PRHhwLXZEMlczQlhfLVFPZ2h6QUFhbzIybjBkbVZZd1JSRHo1Z1dnWGxuSEFDM2tpLVN3Y09DWi1sdEU5MGktZGx5ZVRPT2FNeXFMdWNMcHRDVUcxTkNzV2l4cG55bHlMVUFJNFFnU0JxUlZkeHFSTF9jNWFXZlVGMG5kamg2eEYwQ05hRi1nWUhOeHZOTFhCc3VfZXd6MUhqa1lmUkdqbjVUQkNvVHgwNnZqRTBEX01WaXZ6UQ?oc=5"
+    },
+    {
+      "date": "2026-10-31",
+      "code": "MN-2026-10-31-10",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-10-31.json · 6. straits.live · item 8 · https://news.google.com/rss/articles/CBMirAFBVV95cUxOSGIyejZiZmtBaTl2ZEY1aFc1eV9xbHlRaE51SEtlelZ2dFk5QlJFWk1taXVwWk5aSFJZSFY4ZHZvWHdMZ29IX1RTb1RMN2tLcmtnM29vVFkzTDEwRXhzQVdXVERjS3Y2Ylc4SXVnVWdSOTlIYjlRblo0QjZBRDVXMFdyZG1INDdJN3NCSV9jWXJTc05nNnhBbmxFMDBudWZ6NE1xWkhXYWFyb2xh?oc=5"
+    },
+    {
+      "date": "2026-10-31",
+      "code": "MN-2026-10-31-11",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-10-31.json · 6. straits.live · item 45 · https://www.cnbc.com/2026/10/30/tanker-attack-strait-hormuz-iran-war-oil.html"
+    },
+    {
+      "date": "2026-10-31",
+      "code": "MN-2026-10-31-12",
+      "matched_source_numbers": [
+        2,
+        3,
+        4,
+        5,
+        41
+      ],
+      "source": "IMO — سجل الحوادث المؤكدة",
+      "source_excerpt_from": "feeds/feeds-2026-10-31.json · 5. IMO — سجل الحوادث المؤكدة · item 1 · https://r.jina.ai/https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx"
+    },
+    {
+      "date": "2026-10-31",
+      "code": "MN-2026-10-31-13",
+      "matched_source_numbers": [
+        34
+      ],
+      "source": "MSCIO",
+      "source_excerpt_from": "feeds/feeds-2026-10-31.json · 34. MSCIO · item 1 · https://www.mscio.eu/alerts/"
+    },
+    {
+      "date": "2026-10-31",
+      "code": "MN-2026-10-31-14",
+      "matched_source_numbers": [
+        34
+      ],
+      "source": "MSCIO",
+      "source_excerpt_from": "feeds/feeds-2026-10-31.json · 34. MSCIO · item 1 · https://www.mscio.eu/alerts/"
+    },
+    {
+      "date": "2026-10-31",
+      "code": "MN-2026-10-31-15",
+      "matched_source_numbers": [
+        34
+      ],
+      "source": "MSCIO",
+      "source_excerpt_from": "feeds/feeds-2026-10-31.json · 34. MSCIO · item 1 · https://www.mscio.eu/alerts/"
+    },
+    {
+      "date": "2026-10-31",
+      "code": "MN-2026-10-31-16",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-10-31.json · 6. straits.live · item 15 · https://news.google.com/rss/articles/CBMiZ0FVX3lxTFA2WnZqR0hKYkJBclh6S1kyZ2NGS1I3a1RtU2QtVmMzU0pDeUZIOGJ1dlVwSXBIRFBvOTdCd21YSXRYaTlOaTU3YmpQbEhXMjRFOWNhUUd2THRTWElrYVN3SUhnT211a0HSAVxBVV95cUxPN24zdUc2YXNhcldWTWJyeUQtVHR0UkljNzdwc21IcGhjX19EeUZQWkl1UXBLdGdhSDgtNmRHVnpqbUpQbG43RjJNbHk0MUtSNGJYNGlFX21sWW5WYw?oc=5"
+    },
+    {
+      "date": "2026-11-01",
+      "code": "MN-2026-11-01-01",
+      "matched_source_numbers": [
+        15
+      ],
+      "source": "حساب @UK_MTO على X",
+      "source_excerpt_from": "feeds/feeds-2026-11-01.json · 15. حساب @UK_MTO على X · item 1"
+    },
+    {
+      "date": "2026-11-01",
+      "code": "MN-2026-11-01-02",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-11-01.json · 6. straits.live · item 1"
+    },
+    {
+      "date": "2026-11-01",
+      "code": "MN-2026-11-01-03",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-11-01.json · 6. straits.live · item 2"
+    },
+    {
+      "date": "2026-11-01",
+      "code": "MN-2026-11-01-04",
+      "matched_source_numbers": [
+        6,
+        7
+      ],
+      "source": "straits.live · gCaptain",
+      "source_excerpt_from": "feeds/feeds-2026-11-01.json · 7. gCaptain · item 3"
+    },
+    {
+      "date": "2026-11-01",
+      "code": "MN-2026-11-01-05",
+      "matched_source_numbers": [
+        8,
+        43
+      ],
+      "source": "TradeWinds · The Maritime Executive",
+      "source_excerpt_from": "feeds/feeds-2026-11-01.json · 8. TradeWinds · item 1"
+    },
+    {
+      "date": "2026-11-01",
+      "code": "MN-2026-11-01-06",
+      "matched_source_numbers": [
+        37
+      ],
+      "source": "MarineLink",
+      "source_excerpt_from": "feeds/feeds-2026-11-01.json · 37. MarineLink · item 3"
+    },
+    {
+      "date": "2026-11-02",
+      "code": "MN-2026-11-02-01",
+      "matched_source_numbers": [
+        15
+      ],
+      "source": "حساب @UK_MTO على X",
+      "source_excerpt_from": "feeds/feeds-2026-11-02.json · 15. حساب @UK_MTO على X · item 1 (2026-11-02T01:46:41Z)"
+    },
+    {
+      "date": "2026-11-02",
+      "code": "MN-2026-11-02-02",
+      "matched_source_numbers": [
+        15
+      ],
+      "source": "حساب @UK_MTO على X",
+      "source_excerpt_from": "feeds/feeds-2026-11-02.json · 15. حساب @UK_MTO على X · item 2 (2026-11-01T18:22:15Z)"
+    },
+    {
+      "date": "2026-11-02",
+      "code": "MN-2026-11-02-03",
+      "matched_source_numbers": [
+        15
+      ],
+      "source": "حساب @UK_MTO على X",
+      "source_excerpt_from": "feeds/feeds-2026-11-02.json · 15. حساب @UK_MTO على X · item 3 (2026-11-01T18:19:25Z)"
+    },
+    {
+      "date": "2026-11-02",
+      "code": "MN-2026-11-02-04",
+      "matched_source_numbers": [
+        15
+      ],
+      "source": "حساب @UK_MTO على X",
+      "source_excerpt_from": "feeds/feeds-2026-11-02.json · 15. حساب @UK_MTO على X · item 4 (2026-11-01T14:26:46Z)"
+    },
+    {
+      "date": "2026-11-02",
+      "code": "MN-2026-11-02-05",
+      "matched_source_numbers": [
+        2
+      ],
+      "source": "UKMTO — التحذيرات 2026",
+      "source_excerpt_from": "feeds/feeds-2026-11-02.json · 2. UKMTO — التحذيرات 2026 · item 5"
+    },
+    {
+      "date": "2026-11-02",
+      "code": "MN-2026-11-02-06",
+      "matched_source_numbers": [
+        6,
+        46,
+        47
+      ],
+      "source": "Mehr وISNA وstraits.live",
+      "source_excerpt_from": "feeds/feeds-2026-11-02.json · 47. Mehr — العربي · item 4 (Sun, 01 Nov 2026 21:33:50 GMT)"
+    },
+    {
+      "date": "2026-11-02",
+      "code": "MN-2026-11-02-07",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-11-02.json · 6. straits.live · item 3 (Sun, 01 Nov 2026 23:37:36 GMT)"
+    },
+    {
+      "date": "2026-11-02",
+      "code": "MN-2026-11-02-08",
+      "matched_source_numbers": [
+        10
+      ],
+      "source": "الجزيرة نت",
+      "source_excerpt_from": "feeds/feeds-2026-11-02.json · 10. الجزيرة نت · item 2 (Mon, 02 Nov 2026 02:06:37 +0300)"
+    },
+    {
+      "date": "2026-11-02",
+      "code": "MN-2026-11-02-09",
+      "matched_source_numbers": [
+        18
+      ],
+      "source": "حساب @bahdiplomatic على X",
+      "source_excerpt_from": "feeds/feeds-2026-11-02.json · 18. حساب @bahdiplomatic على X · item 2 (2026-11-01T17:39:09Z)"
+    },
+    {
+      "date": "2026-11-02",
+      "code": "MN-2026-11-02-10",
+      "matched_source_numbers": [
+        19
+      ],
+      "source": "حساب @US5thFleet على X",
+      "source_excerpt_from": "feeds/feeds-2026-11-02.json · 19. حساب @US5thFleet على X · item 1 (2026-11-01T13:23:52Z)"
+    },
+    {
+      "date": "2026-11-02",
+      "code": "MN-2026-11-02-11",
+      "matched_source_numbers": [
+        60
+      ],
+      "source": "حساب @CJFCSpox على X",
+      "source_excerpt_from": "feeds/feeds-2026-11-02.json · 60. حساب @CJFCSpox على X · item 3 (2026-11-01T15:47:22Z)"
+    },
+    {
+      "date": "2026-11-02",
+      "code": "MN-2026-11-02-12",
+      "matched_source_numbers": [
+        44
+      ],
+      "source": "Windward",
+      "source_excerpt_from": "feeds/feeds-2026-11-02.json · 44. Windward · item 2 (Sun, 01 Nov 2026 10:57:22 +0000)"
+    },
+    {
+      "date": "2026-11-02",
+      "code": "MN-2026-11-02-13",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — سجل الحوادث المؤكدة",
+      "source_excerpt_from": "feeds/feeds-2026-11-02.json · 5. IMO — سجل الحوادث المؤكدة · item 1"
+    },
+    {
+      "date": "2026-11-02",
+      "code": "MN-2026-11-02-14",
+      "matched_source_numbers": [
+        46,
+        47
+      ],
+      "source": "ISNA وMehr",
+      "source_excerpt_from": "feeds/feeds-2026-11-02.json · 46. ISNA · item 2 (Sun, 01 Nov 2026 13:46:32 GMT)"
+    },
+    {
+      "date": "2026-11-02",
+      "code": "MN-2026-11-02-15",
+      "matched_source_numbers": [
+        2
+      ],
+      "source": "UKMTO — التحذيرات 2026",
+      "source_excerpt_from": "feeds/feeds-2026-11-02.json · 2. UKMTO — التحذيرات 2026 · item 6"
+    },
+    {
+      "date": "2026-11-02",
+      "code": "MN-2026-11-02-16",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-11-02.json · 6. straits.live · item 9 (Sun, 01 Nov 2026 22:48:41 GMT)"
+    },
+    {
+      "date": "2026-11-03",
+      "code": "MN-2026-11-03-01",
+      "matched_source_numbers": [
+        15
+      ],
+      "source": "حساب @UK_MTO على X",
+      "source_excerpt_from": "feeds/feeds-2026-11-03.json · 15. حساب @UK_MTO على X · item 1 (2026-11-02T18:55:35Z)"
+    },
+    {
+      "date": "2026-11-03",
+      "code": "MN-2026-11-03-02",
+      "matched_source_numbers": [
+        2
+      ],
+      "source": "UKMTO — نص التحذير 192-26",
+      "source_excerpt_from": "feeds/feeds-2026-11-03.json · 2. UKMTO — التحذيرات 2026 · item 5"
+    },
+    {
+      "date": "2026-11-03",
+      "code": "MN-2026-11-03-03",
+      "matched_source_numbers": [
+        2
+      ],
+      "source": "UKMTO — التحذيرات 2026",
+      "source_excerpt_from": "feeds/feeds-2026-11-03.json · 2. UKMTO — التحذيرات 2026 · item 6"
+    },
+    {
+      "date": "2026-11-03",
+      "code": "MN-2026-11-03-04",
+      "matched_source_numbers": [
+        5
+      ],
+      "source": "IMO — القائمة الرسمية للحوادث المؤكدة",
+      "source_excerpt_from": "feeds/source-facts-2026-11-03.md · IMO — سجل الحوادث المؤكدة"
+    },
+    {
+      "date": "2026-11-03",
+      "code": "MN-2026-11-03-05",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-11-03.json · 6. straits.live · item 12 (Tue, 03 Nov 2026 02:18:18 GMT)"
+    },
+    {
+      "date": "2026-11-03",
+      "code": "MN-2026-11-03-06",
+      "matched_source_numbers": [
+        8
+      ],
+      "source": "TradeWinds",
+      "source_excerpt_from": "feeds/feeds-2026-11-03.json · 8. TradeWinds · item 42 (Mon, 02 Nov 2026 08:14:34 +0100)"
+    },
+    {
+      "date": "2026-11-03",
+      "code": "MN-2026-11-03-07",
+      "matched_source_numbers": [
+        47
+      ],
+      "source": "Mehr — العربي",
+      "source_excerpt_from": "feeds/feeds-2026-11-03.json · 47. Mehr — العربي · item 2 (Tue, 03 Nov 2026 03:34:54 GMT)"
+    },
+    {
+      "date": "2026-11-03",
+      "code": "MN-2026-11-03-08",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-11-03.json · 6. straits.live · item 1 (Tue, 03 Nov 2026 03:12:04 GMT)"
+    },
+    {
+      "date": "2026-11-03",
+      "code": "MN-2026-11-03-09",
+      "matched_source_numbers": [
+        47
+      ],
+      "source": "Mehr — العربي",
+      "source_excerpt_from": "feeds/feeds-2026-11-03.json · 47. Mehr — العربي · item 25 (Mon, 02 Nov 2026 06:05:45 GMT)"
+    },
+    {
+      "date": "2026-11-03",
+      "code": "MN-2026-11-03-10",
+      "matched_source_numbers": [
+        53
+      ],
+      "source": "New York Times — الشرق الأوسط",
+      "source_excerpt_from": "feeds/feeds-2026-11-03.json · 53. New York Times — الشرق الأوسط · item 2 (Mon, 02 Nov 2026 20:25:34 +0000)"
+    },
+    {
+      "date": "2026-11-03",
+      "code": "MN-2026-11-03-11",
+      "matched_source_numbers": [
+        38
+      ],
+      "source": "Jerusalem Post",
+      "source_excerpt_from": "feeds/feeds-2026-11-03.json · 38. Jerusalem Post · item 5"
+    },
+    {
+      "date": "2026-11-03",
+      "code": "MN-2026-11-03-12",
+      "matched_source_numbers": [
+        36
+      ],
+      "source": "Lloyd's List",
+      "source_excerpt_from": "feeds/feeds-2026-11-03.json · 36. Lloyd's List · item 5 (Mon, 02 Nov 2026 12:21:11 GMT)"
+    },
+    {
+      "date": "2026-11-03",
+      "code": "MN-2026-11-03-13",
+      "matched_source_numbers": [
+        8
+      ],
+      "source": "TradeWinds",
+      "source_excerpt_from": "feeds/feeds-2026-11-03.json · 8. TradeWinds · item 40 (Mon, 02 Nov 2026 09:11:27 +0100)"
+    },
+    {
+      "date": "2026-11-04",
+      "code": "MN-2026-11-04-01",
+      "matched_source_numbers": [
+        15
+      ],
+      "source": "حساب @UK_MTO على X",
+      "source_excerpt_from": "feeds/feeds-2026-11-04.json · 15. حساب @UK_MTO على X · item 2 (2026-11-03T13:13:28Z)"
+    },
+    {
+      "date": "2026-11-04",
+      "code": "MN-2026-11-04-02",
+      "matched_source_numbers": [
+        15
+      ],
+      "source": "حساب @UK_MTO على X",
+      "source_excerpt_from": "feeds/feeds-2026-11-04.json · 15. حساب @UK_MTO على X · item 1 (2026-11-03T20:43:11Z)"
+    },
+    {
+      "date": "2026-11-04",
+      "code": "MN-2026-11-04-03",
+      "matched_source_numbers": [
+        9,
+        36
+      ],
+      "source": "Seatrade Maritime؛ Lloyd's List",
+      "source_excerpt_from": "feeds/feeds-2026-11-04.json · 9. Seatrade Maritime · item 3 (Tue, 03 Nov 2026 17:10:37 GMT)"
+    },
+    {
+      "date": "2026-11-04",
+      "code": "MN-2026-11-04-04",
+      "matched_source_numbers": [
+        9
+      ],
+      "source": "Seatrade Maritime",
+      "source_excerpt_from": "feeds/feeds-2026-11-04.json · 9. Seatrade Maritime · item 1 (Wed, 04 Nov 2026 03:35:39 GMT)"
+    },
+    {
+      "date": "2026-11-04",
+      "code": "MN-2026-11-04-05",
+      "matched_source_numbers": [
+        47
+      ],
+      "source": "Mehr — العربي",
+      "source_excerpt_from": "feeds/feeds-2026-11-04.json · 47. Mehr — العربي · item 15 (Tue, 03 Nov 2026 10:52:24 GMT)"
+    },
+    {
+      "date": "2026-11-05",
+      "code": "MN-2026-11-05-01",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-11-05.json · 6. straits.live · item 7 (Wed, 04 Nov 2026 15:23:47 GMT)"
+    },
+    {
+      "date": "2026-11-05",
+      "code": "MN-2026-11-05-02",
+      "matched_source_numbers": [
+        6,
+        7
+      ],
+      "source": "straits.live؛ gCaptain",
+      "source_excerpt_from": "feeds/feeds-2026-11-05.json · 6. straits.live · item 8 (Wed, 04 Nov 2026 14:16:01 GMT)"
+    },
+    {
+      "date": "2026-11-05",
+      "code": "MN-2026-11-05-03",
+      "matched_source_numbers": [
+        8,
+        9
+      ],
+      "source": "TradeWinds؛ Seatrade Maritime",
+      "source_excerpt_from": "feeds/feeds-2026-11-05.json · 8. TradeWinds · item 36 (Wed, 04 Nov 2026 05:14:55 +0100)"
+    },
+    {
+      "date": "2026-11-05",
+      "code": "MN-2026-11-05-04",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-11-05.json · 6. straits.live · item 9 (Wed, 04 Nov 2026 13:57:03 GMT)"
+    },
+    {
+      "date": "2026-11-05",
+      "code": "MN-2026-11-05-05",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-11-05.json · 6. straits.live · item 12 (Wed, 04 Nov 2026 10:47:54 GMT)"
+    },
+    {
+      "date": "2026-11-06",
+      "code": "MN-2026-11-06-01",
+      "matched_source_numbers": [
+        2,
+        15
+      ],
+      "source": "UKMTO — التحذيرات 2026؛ حساب @UK_MTO على X",
+      "source_excerpt_from": "feeds/feeds-2026-11-06.json · 2. UKMTO — التحذيرات 2026 · item 4"
+    },
+    {
+      "date": "2026-11-06",
+      "code": "MN-2026-11-06-02",
+      "matched_source_numbers": [
+        6
+      ],
+      "source": "straits.live",
+      "source_excerpt_from": "feeds/feeds-2026-11-06.json · 6. straits.live · item 2 (Fri, 06 Nov 2026 04:32:14 GMT)"
+    },
+    {
+      "date": "2026-11-06",
+      "code": "MN-2026-11-06-03",
+      "matched_source_numbers": [
+        8,
+        43
+      ],
+      "source": "TradeWinds؛ The Maritime Executive",
+      "source_excerpt_from": "feeds/feeds-2026-11-06.json · 8. TradeWinds · item 2 (Fri, 06 Nov 2026 04:46:51 +0100)"
+    }
+  ],
+  "checked_declared": 60,
+  "gate": "check_source_daily_coverage",
+  "problems": [],
+  "exit_code": 0
+}

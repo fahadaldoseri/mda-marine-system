@@ -34,7 +34,8 @@
         "JMIC",
         "IMO",
         "AIS",
-        "Z"
+        "Z",
+        "Update"
       ],
       "counters": [
         {
@@ -98,7 +99,16 @@
           }
         }
       ],
-      "latin_allowlist_note": "Z رمز التوقيت العالمي (UTC) المستخدم في نصوص التحذيرات الرسمية مثل «1855Z»؛ أُدرج بقرار 2026-11-03 بعد أن رصدت البوابة الرمز خارج المسموح."
+      "latin_allowlist_note": "Z رمز التوقيت العالمي (UTC) المستخدم في نصوص التحذيرات الرسمية مثل «1855Z»؛ أُدرج بقرار 2026-11-03 بعد أن رصدت البوابة الرمز خارج المسموح. Update اسم منتج رسمي في JMIC؛ أُدرج بقرار 2026-11-06 بعد تحقق منشور UKMTO الرسمي ورابط PDF المنتج.",
+      "latin_allowlist_evidence": [
+        {
+          "token": "Update",
+          "evidence_type": "اسم منتج رسمي",
+          "source": "JMIC",
+          "source_url": "https://www.ukmto.org/-/media/ukmto/products/jmic_advisory_update_111_05-nov.pdf?rev=de54e3b88ef24dd3a3c3cb0a215b1acf",
+          "announced_reason": "Update 111 JMIC Advisory Note 5th Nov 2026؛ المنتج موزع رسميًا عبر UKMTO نيابة عن JMIC."
+        }
+      ]
     },
     {
       "id": "sector-threat-level",
