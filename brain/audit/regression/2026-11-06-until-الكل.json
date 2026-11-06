@@ -72,16 +72,16 @@
       "state": "ناجح",
       "blocking": true,
       "open_until": null,
-      "note": "  النتيجة: مطابق — 27 رقمًا مربوطًا بمالكه وبوابته"
+      "note": "  النتيجة: مطابق — 26 رقمًا مربوطًا بمالكه وبوابته"
     },
     {
       "id": "ب-09",
       "title": "الشروح الآلية على السطح",
       "phase": "2",
-      "state": "ناجح",
+      "state": "ساقط",
       "blocking": true,
       "open_until": null,
-      "note": "مطابق: حارس الألفاظ المانعة — 9 أسطح · 82 ألفاظ مانعة · 0 مخالفة"
+      "note": "  ✗ [missing-surface] سطح مطلوب مفقود — فشل مغلق — /home/ubuntu/seawatch/dist/reports/2026-11-06.html"
     },
     {
       "id": "ب-10",
@@ -138,10 +138,12 @@
       "note": "✔ تغطية البوابات: 100.0% (3/3) · مراجع ميتة 0/— · وحدات شاردة 0"
     }
   ],
-  "passed": 14,
-  "failed": 1,
+  "passed": 13,
+  "failed": 2,
   "manual": 0,
-  "blockers": [],
+  "blockers": [
+    "ب-09"
+  ],
   "exceptions": [
     "ب-10"
   ]

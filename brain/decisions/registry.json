@@ -9,18 +9,19 @@
     "يحتاج قرارًا"
   ],
   "decided_by": "المالك",
-  "last_measured": "2026-11-05",
+  "last_measured": "2026-11-06",
   "counts": {
     "منفَّذ جزئيًّا": 4,
-    "منفَّذ": 17,
-    "يحتاج تحققًا": 3
+    "منفَّذ": 18,
+    "يحتاج تحققًا": 3,
+    "يحتاج قرارًا": 0
   },
   "decisions": [
     {
       "id": "D-01",
       "title_ar": "عنقود مرقّم على الخريطة + تفكيك شعاعي للحوادث المتقاربة",
       "status": "منفَّذ جزئيًّا",
-      "wording_ar": "العلامة الحالية غير احترافية، ولو كان هناك ٤ حوادث جنب بعضها أحدث تداخلًا ولا يمكن التركيز عليها.",
+      "wording_ar": "العلامة الحالية غير احترافية، ولو كان هناك 4 حوادث جنب بعضها أحدث تداخلًا ولا يمكن التركيز عليها.",
       "evidence": [
         {
           "kind": "measure",
@@ -266,7 +267,7 @@
       "id": "D-16",
       "title_ar": "إخفاء الصف الثامن في بطاقة الواقعة",
       "status": "يحتاج تحققًا",
-      "wording_ar": "اعتماد إخفاء الصف الثامن لأنه تكرار للعنوان — ٣ صفوف أقل ازدحامًا.",
+      "wording_ar": "اعتماد إخفاء الصف الثامن لأنه تكرار للعنوان — 3 صفوف أقل ازدحامًا.",
       "evidence": [
         {
           "kind": "measure",
@@ -411,6 +412,40 @@
           "ref": "قرار المالك 2026-11-06: اعتماد مهارة الملء الرجعي للقرارات"
         }
       ],
+      "next_action_ar": "—"
+    },
+    {
+      "id": "D-0619",
+      "title_ar": "اشتقاق النسب النقطية للفرضيات من النطاقات بقاعدة معلَنة",
+      "status": "منفَّذ",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "tools/hypothesis_distribution.py",
+          "note": "أداة CLI بواجهتي --write و--check؛ اشتقاق 45% و33% و22% بقاعدة منتصف النطاق ثم أكبر البواقي، والمجموع 100."
+        },
+        {
+          "kind": "file",
+          "ref": "validators/validate_report.py",
+          "note": "ف4.3 يعيد استدعاء خوارزمية الأداة ويتحقق من النوع والنطاق والجموع والتطابق النقطي."
+        },
+        {
+          "kind": "file",
+          "ref": "tests/test_validate_report_ranges.py",
+          "note": "اختبار موجب وستة مسارات سالبة؛ التشغيل: python3 tests/test_validate_report_ranges.py · Ran 10 tests · OK."
+        },
+        {
+          "kind": "file",
+          "ref": "runbook/runbook.json",
+          "note": "الخطوة G011H قبل G012 تشغّل --write ثم --check على web/meta/{date}.json."
+        },
+        {
+          "kind": "measure",
+          "ref": "web/meta/2026-11-06.json",
+          "note": "المخرج المشتق المخزّن: 45% من 55–80% · 33% من 45–55% · 22% من 20–45%، مع likelihood_range وpoint_from_range وdistribution_rule."
+        }
+      ],
+      "governing_file": "runbook/runbook.json",
       "next_action_ar": "—"
     }
   ]

@@ -1,0 +1,18 @@
+  تغذيات مرصودة: 81
+  نجح: 58 مصدرًا (75 مسارًا) · فشل: 2 مصدرًا · يُفحص بالمتصفح: 0 · عناصر مقروءة: 1882
+  ◻ مرجعية تُراجع يدويًا: 2 مصدرًا · الأرقام: [39, 52]
+   ✘ 41 USNI News: all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | official-page:jina.ai/usni-news: حجب مصدر — رفض الخادم الطلب (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44527B — تحدي قائم | مرئي: HTTP 403 · 44527B — تحدي قائم | مرئي: HTTP 403 · 44527B — تحدي قائم | مجرَّد: HTTP 403 · 44575B — تحدي قائم
+   ✘ 58 المركز الإعلامي للقوات المسلحة الي: all routes failed: primary: derived items without real content (1) | browser: derived items without real content (1)
+   ◐ 12 OFAC — الإجراءات الأخيرة: محتوى متقادم — عمر أحدث مادة 631 يومًا
+   ◐ 13 ShipNext — التحقق من السفن: محتوى متقادم — عمر أحدث مادة 81 يومًا
+   ◐ 20 جريدة الأيام: محتوى متقادم — عمر أحدث مادة 1027 يومًا
+   ◐ 20 جريدة الأيام: محتوى متقادم — عمر أحدث مادة 1027 يومًا
+   ◐ 30 القيادة المركزية الأمريكية (سنتكوم: محتوى متقادم — عمر أحدث مادة 273 يومًا
+   ◐ 31 JMIC: محتوى متقادم — عمر أحدث مادة 16 يومًا
+   ◐ 32 IMB/ICC — القرصنة: محتوى متقادم — عمر أحدث مادة 22 يومًا
+  ✔ حُفظ: feeds-2026-11-06.json / .md / .status.json — الحالة: degraded
+  · لا علامة تشغيل: /home/ubuntu/brain-marine-news/logs/pipeline-2026-11-06.json — إنشاء علامة pipeline عبر write_mark
+  ✔ العلامة (pipeline): /home/ubuntu/brain-marine-news/logs/pipeline-2026-11-06.json · المخطط v1 · نص التقرير موجود: False · المصادر: 62/60/58 · البوابة: not_run
+  · أضيف أثر الإنشاء: created_by=mark_components
+  ✔ حُدّثت المكوّنات ['feeds'] من المخرجات · الحالة العامة: degraded
+     feeds: {"status": "degraded", "checked": 60, "ok": 58, "failed": 2, "failed_feeds": [{"num": 41, "name": "USNI News", "error": "مسار المت
