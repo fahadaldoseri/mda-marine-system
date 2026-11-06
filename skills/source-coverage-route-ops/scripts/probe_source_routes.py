@@ -7,7 +7,6 @@
 المخرج: JSON بالمحاولات + جدول مختصر في الطرفية. لا يُخمَّن شيء.
 """
 import json
-import os
 import re
 import ssl
 import sys
@@ -26,9 +25,7 @@ HDR = {
 CTX = ssl.create_default_context()
 CTX_UNVERIFIED = ssl._create_unverified_context()
 
-_ROOT = pathlib.Path(__file__).resolve().parents[3]
-_BRAIN = pathlib.Path(os.environ.get("BRAIN_DIR") or (_ROOT / "brain-marine-news"))
-sys.path.insert(0, str(_BRAIN / "tools"))
+sys.path.insert(0, '/home/ubuntu/brain-marine-news/tools')
 from source_channels import BROWSER_ROUTES  # noqa: E402
 
 EXTRA = {17: 'https://x.com/bna_en'}
@@ -93,7 +90,7 @@ def main():
     rows += [{'num': 17, 'name': 'bna_en', 'url': EXTRA[17]}]
     with ThreadPoolExecutor(max_workers=8) as ex:
         res = list(ex.map(lambda r: probe(r['num'], r['name'], r['url']), rows))
-    out = Path(os.environ.get('PROBE_OUT') or (_ROOT / 'sources-audit' / 'probe-routes.json'))
+    out = Path('/home/ubuntu/sources-audit/probe-routes.json')
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding='utf-8')
     print(f"{'#':>3} {'المسار':<58} {'مباشر':>8} {'حجم':>8} {'jina':>6} {'تغذية':>6} {'JS':>3}")

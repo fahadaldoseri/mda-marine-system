@@ -2,13 +2,6 @@
 
 كل بند يذكر ما أُثبت بالتشغيل. ما لم يُختبر يُذكر صراحةً.
 
-## 6 نوفمبر 2026 — اعتماد gate-strictness-hardening-ops
-
-- أُدرجت المهارة رسميًا في `INDEX.md` وسجل مهارات المشروع، وسُجّل قرار المالك الصريح بالمعرّف `D-0620` في `decisions/registry.json`، مع حدود عدم التداخل مع المهارات الأربع المجاورة.
-- `python3 /home/ubuntu/skills/skill-creator/scripts/quick_validate.py skills/gate-strictness-hardening-ops` = `Skill is valid!`، و`python3 brain/validators/check_decisions_registry.py --root brain --summary` = صفر عوائق.
-- تطابقت بصمات `SKILL.md` و`references/lessons.md` و`scripts/gate_audit.py` بين مصدر المهارة والجذر التشغيلي ومرآة المستودع؛ أُضيفت سجلاتها إلى `docs/فهرس-الملفات.tsv`.
-- بقيت توصية ربط `gate_audit.py` بخطوة مانيفست لاحقة غير منفذة؛ لم تُعدّل `runbook/` أو `docs/runbook.md` أو `audit/` أو `tools/` أو `validators/`.
-
 ## 31 أكتوبر 2026 — قابلية النقل وتماثل الأدلة
 
 - اشتُقت جذور اختبارات وعدّاء hermetic ونافذة السببية من موقع الملف أو `BRAIN_DIR`/`SITE_DIR`/`SKILLS_DIR`؛ `python3 validators/check_portable_paths.py` = 0، واختبارات العداء 7/7 واختبار مطابقة المعرّف = 0.

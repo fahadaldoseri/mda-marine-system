@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة 3dcfd88867c9de54). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة 364e62331c503924). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -109,6 +109,7 @@
 | G063 | مرجع آلية العمل المولَّد (بنود مرقّمة وسقف جهد مشتق) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G063.log؛ cmd:bash -lc grep -q '✔ مرجع آلية العمل:' logs/runbook/{date}/G063.log | ف1–ف5 — بوابة التحقق | validators/check_reference_generated.py، tools/build_workflow_reference.py، runbook/phases.json، tests/test_reference_generator.py | stop |
 | G064 | الانحدار التراكمي وأدوات البوابة المانعة | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G064.log؛ cmd:bash -lc grep -q '✔ الانحدار:' logs/runbook/{date}/G064.log | ف1–ف5 — بوابة التحقق | tools/regression_gate.py، tools/surface_fingerprint.py، tools/number_fingerprint.py، tools/impact_matrix.py، tools/crossing_gate.py، tools/gate_coverage.py، runbook/regression-items.json، runbook/impact-map.json، validators/check_gate_readiness.py | stop |
 | G065 | القياس البصري الحي (قصّ · توافق · مراسٍ · بطاقة القرار) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G065.log؛ cmd:bash -lc grep -q '✔ القياس البصري' logs/runbook/{date}/G065.log | ف1–ف5 — بوابة التحقق | tools/browser_measure.py، runbook/readiness-questions.json، runbook/regression-items.json، audit/measurements، tools/regression_gate.py | stop |
+| G066 | تدقيق صلابة البوابات (استشاري مع حفظ JSON وبصمة) | script |  | audit/measurements/gate-audit-{date}.json، audit/measurements/gate-audit-{date}.json.sha256 | cmd:bash -lc test -s audit/measurements/gate-audit-{date}.json؛ cmd:bash -lc test -s audit/measurements/gate-audit-{date}.json.sha256 | ف1–ف5 — بوابة التحقق | skills/gate-strictness-hardening-ops/scripts/gate_audit.py، tests/test_gate_audit_triage.py، tests/test_desktop_readability_contract.py، audit/measurements، skills/gate-strictness-hardening-ops/scripts/gate_audit.py | continue |
 | D005 | تحديث النسخة الاحتياطية قبل النشر (شرط بوابة ما قبل التشغيل) | script |  |  | cmd:bash -lc test -s "$B/logs/runbook/{date}/D005.log" && grep -q 'parity' "$B/logs/runbook/{date}/D005.log" || true | س2 — الإغلاق والدفع |  | stop |
 | D010 | نشر الموقع (بعد كل البوابات) | script |  |  | cmd:python3 -c import json,sys;d=json.load(open('logs/publish-{date}.json'));sys.exit(0 if d.get('status')=='ok' else 1) | س2 — الإغلاق والدفع | tools/publish_changes.sh، tools/publish_site.sh، validators/check_en_parity.py | stop |
 | D020 | التحقق الحي من النشر (قراءة فقط) | script |  |  | cmd:python3 -c import json,sys;d=json.load(open('logs/live-{date}.json'));sys.exit(0 if d.get('status')=='ok' else 1) | س2 — الإغلاق والدفع | tools/check_live.sh، tools/live_visual_audit.py، tools/live_dom_audit.py | stop |
@@ -117,7 +118,7 @@
 | D033 | تنبيه وصول التقرير على تلغرام | script |  |  | file_exists:logs/telegram-delivery-{date}.json | س4 — قناة التسليم | validators/check_telegram_delivery.py | continue |
 | D035 | بوابة الأسرار قبل النسخ الاحتياطي والدفع | script |  |  | cmd:bash -lc grep -q 'بوابة الأسرار: لا سرّ' logs/runbook/{date}/D035.log | س2 — الإغلاق والدفع | validators/check_secrets.py، tools/redact.py، tools/github_backup.sh | stop |
 | D036 | اختبارات المدقّقات الجديدة (أسرار · استثناءات · إرسال · تتبّع · نطاق) | script |  |  | cmd:bash -lc test -s logs/checks/new-validators-{date}.json && test -s logs/checks/new-validators-{date}.txt && test -s logs/checks/parity-scope-{date}.txt | س2 — الإغلاق والدفع | tests/test_new_validators.py، tests/test_parity_scope.py، tests/test_preflight_guard.py، tests/test_telegram_digest_cards.py، tests/test_secret_documentation_scope.py، tests/test_en_parity_confidence_map.py، tests/test_github_backup_failure_output.py، tools/audit_broad_excepts.py، validators/check_secrets.py | stop |
-| D040 | النسخة الاحتياطية والتحقق من التماثل | script |  |  | cmd:bash -lc grep -q 'النتيجة: مطابق' logs/runbook/{date}/D040.log | س2 — الإغلاق والدفع | tools/github_backup.sh، validators/check_backup_parity.py، tools/github_backup.py، tools/apply_from_github.sh، tools/apply_from_github.py، tools/code_paths.py | stop |
+| D040 | النسخة الاحتياطية والتحقق من التماثل | script |  |  | cmd:bash -lc grep -q 'النتيجة: مطابق' logs/runbook/{date}/D040.log | س2 — الإغلاق والدفع | tools/github_backup.sh، validators/check_backup_parity.py، runbook/approved-skills.json، validators/check_skills_parity.py، tools/github_backup.py، tools/apply_from_github.sh، tools/apply_from_github.py، tools/code_paths.py | stop |
 | D045 | فهرس التقارير (المستودع مقابل الأرشيف الخاص) (اختيارية) | script |  |  | cmd:bash -lc grep -q '{date}' docs/reports-index.md | س2 — الإغلاق والدفع | tools/reports_index.py، appendices/reports-archive.json | continue |
 | D050 | التعلم الذاتي وتسجيل الدروس | script |  |  | file_exists:memory/learning-log.jsonl | س2 — الإغلاق والدفع | tools/self_improve.py، tools/skill_lessons.py، tools/self_test.py | stop |
 | D060 | تسجيل رموز التقدير والأحداث | script |  |  | cmd:bash -lc grep -q 'رمز تقدير مسجّل' logs/runbook/{date}/D060.log | ب2 — ترتيب الأقسام | tools/register_estimate.py | stop |
@@ -126,7 +127,7 @@
 | Q012 | جولة إغلاق الأعطال والدروس (فحص بلا تعديل) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/Q012.log | ف3 — إغلاق الأعطال والدروس | tools/normalize_fault_log.py، tools/closure_round.py | stop |
 | Q015 | تدقيق المكتبات اللغوية (أسبوعي) (اختيارية) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/Q015.log | ف1–ف5 — بوابة التحقق | tools/audit_corpus.py | continue |
 | Q020 | قياس دقة التقدير (ربع سنوي) | script |  |  | cmd:bash -lc grep -q 'نسبة التحقق' logs/runbook/{date}/Q020.log | ف4 — قراءة الموقف وتحليل المؤشرات | tools/estimate_accuracy.py | stop |
-| D070 | النسخة الاحتياطية الختامية والتماثل بعد كل خطوات اليوم | script |  |  | cmd:bash -lc grep -q 'النتيجة: مطابق' logs/runbook/{date}/D070.log | س2 — الإغلاق والدفع | tools/github_backup.sh، validators/check_backup_parity.py، tools/github_backup.py، tools/apply_from_github.sh، tools/apply_from_github.py، tools/code_paths.py | stop |
+| D070 | النسخة الاحتياطية الختامية والتماثل بعد كل خطوات اليوم | script |  |  | cmd:bash -lc grep -q 'النتيجة: مطابق' logs/runbook/{date}/D070.log | س2 — الإغلاق والدفع | tools/github_backup.sh، validators/check_backup_parity.py، runbook/approved-skills.json، validators/check_skills_parity.py، tools/github_backup.py، tools/apply_from_github.sh، tools/apply_from_github.py، tools/code_paths.py | stop |
 
 ## أقسام التقرير وارتباطاتها
 

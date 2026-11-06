@@ -4137,8 +4137,8 @@
    "warn_rc": []
   },
   {
-    "id": "G045",
-    "title": "تغطية بوابة الأسلوب لكل سطح يقرأه القارئ",
+   "id": "G045",
+   "title": "تغطية بوابة الأسلوب لكل سطح يقرأه القارئ",
    "kind": "script",
    "phase": "build",
    "assert": [
@@ -4163,22 +4163,22 @@
     ],
     "gates": [],
     "tests": [
-      "tests/test_vocab_registry.py",
-      "tests/test_forbidden_surface_terms.py",
-      "tests/test_meta_style_normalizer.py",
-      "tests/test_style_coverage_order.py"
+     "tests/test_vocab_registry.py",
+     "tests/test_forbidden_surface_terms.py",
+     "tests/test_meta_style_normalizer.py",
+     "tests/test_style_coverage_order.py"
     ]
-  },
-  "deferred_surfaces": [
+   },
+   "deferred_surfaces": [
     {
-      "label": "رسالة تلغرام",
-      "producer": "D030",
-      "reason": "D030 خطوة إرسال اختيارية في مرحلة التسليم، وتأتي بعد G045؛ غياب ملف الرسالة أثناء G045 معلومة ترتيب لا مخالفة تغطية.",
-      "effective_from": "2026-11-06",
-      "review_when": "يُعاد الحكم إذا تغيّر ترتيب D030 أو أصبح إرسال تلغرام مطلوبًا قبل G045."
+     "label": "رسالة تلغرام",
+     "producer": "D030",
+     "reason": "D030 خطوة إرسال اختيارية في مرحلة التسليم، وتأتي بعد G045؛ غياب ملف الرسالة أثناء G045 معلومة ترتيب لا مخالفة تغطية.",
+     "effective_from": "2026-11-06",
+     "review_when": "يُعاد الحكم إذا تغيّر ترتيب D030 أو أصبح إرسال تلغرام مطلوبًا قبل G045."
     }
-  ],
-  "on_fail": "stop",
+   ],
+   "on_fail": "stop",
    "command": [
     "bash",
     "-lc",
@@ -4980,6 +4980,69 @@
    "gate_title": "القياس البصري الحي"
   },
   {
+   "id": "G066",
+   "title": "تدقيق صلابة البوابات (استشاري مع حفظ JSON وبصمة)",
+   "kind": "script",
+   "phase": "finalize",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s audit/measurements/gate-audit-{date}.json"
+     ]
+    },
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s audit/measurements/gate-audit-{date}.json.sha256"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "skills/gate-strictness-hardening-ops/scripts/gate_audit.py",
+     "tests/test_gate_audit_triage.py",
+     "tests/test_desktop_readability_contract.py"
+    ],
+    "folders": [
+     "audit/measurements"
+    ],
+    "gates": [
+     "skills/gate-strictness-hardening-ops/scripts/gate_audit.py"
+    ],
+    "tests": [
+     "tests/test_gate_audit_triage.py",
+     "tests/test_desktop_readability_contract.py",
+     "tests/test_binding_coverage_cli.py"
+    ]
+   },
+   "writes": [
+    "audit/measurements/gate-audit-{date}.json",
+    "audit/measurements/gate-audit-{date}.json.sha256"
+   ],
+   "note_ar": "خطوة استشارية: رمز 1 يعني وجود مرشحات تحتاج قرارًا، ولا يمنع التسليم؛ لا يُخفى المخرج الخام ولا بصمته.",
+   "on_fail": "continue",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; mkdir -p \"$B/audit/measurements\"; OUT=\"$B/audit/measurements/gate-audit-{date}.json\"; python3 \"/home/ubuntu/skills/gate-strictness-hardening-ops/scripts/gate_audit.py\" --root . --json > \"$OUT\"; rc=$?; sha256sum \"$OUT\" > \"$OUT.sha256\"; echo \"gate_audit rc=$rc\"; cat \"$OUT.sha256\"; cat \"$OUT\"; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [
+    1
+   ],
+   "gate_title": "تدقيق صلابة البوابات"
+  },
+  {
    "id": "D005",
    "title": "تحديث النسخة الاحتياطية قبل النشر (شرط بوابة ما قبل التشغيل)",
    "kind": "script",
@@ -5271,7 +5334,7 @@
     "rules": [
      "س2 — الإغلاق والدفع"
     ],
-   "files": [
+    "files": [
      "tests/test_new_validators.py",
      "tests/test_parity_scope.py",
      "tests/test_preflight_guard.py",
@@ -5316,6 +5379,8 @@
     "files": [
      "tools/github_backup.sh",
      "validators/check_backup_parity.py",
+     "runbook/approved-skills.json",
+     "validators/check_skills_parity.py",
      "tools/github_backup.py",
      "tools/apply_from_github.sh",
      "tools/apply_from_github.py",
@@ -5330,14 +5395,15 @@
      "tests/test_apply_archive_policy.py",
      "tests/test_pdf_page_range_guard.py",
      "tests/test_pdf_live_parity_en_guard.py",
-     "tests/test_code_paths_ignore.py"
+     "tests/test_code_paths_ignore.py",
+     "tests/test_skills_parity.py"
     ]
    },
    "on_fail": "stop",
    "command": [
     "bash",
     "-lc",
-    "B=\"$PWD\"; export B SITE; bash tools/github_backup.sh && python3 validators/check_backup_parity.py --mode strict; rc=$?; exit $rc"
+    "B=\"$PWD\"; export B SITE; python3 validators/check_skills_parity.py --root \"$B\" --skills-file \"$B/runbook/approved-skills.json\" && bash tools/github_backup.sh && python3 validators/check_backup_parity.py --mode strict; rc=$?; exit $rc"
    ],
    "ok_rc": [
     0
@@ -5672,6 +5738,8 @@
     "files": [
      "tools/github_backup.sh",
      "validators/check_backup_parity.py",
+     "runbook/approved-skills.json",
+     "validators/check_skills_parity.py",
      "tools/github_backup.py",
      "tools/apply_from_github.sh",
      "tools/apply_from_github.py",
@@ -5682,14 +5750,15 @@
      "tests/test_apply_from_github.py",
      "tests/test_backup_code_safety.py",
      "tests/test_parity_runtime_artifacts.py",
-     "tests/test_code_paths_ignore.py"
+     "tests/test_code_paths_ignore.py",
+     "tests/test_skills_parity.py"
     ]
    },
    "on_fail": "stop",
    "command": [
     "bash",
     "-lc",
-    "B=\"$PWD\"; export B SITE; bash tools/github_backup.sh && python3 validators/check_backup_parity.py --mode strict; rc=$?; exit $rc"
+    "B=\"$PWD\"; export B SITE; python3 validators/check_skills_parity.py --root \"$B\" --skills-file \"$B/runbook/approved-skills.json\" && bash tools/github_backup.sh && python3 validators/check_backup_parity.py --mode strict; rc=$?; exit $rc"
    ],
    "ok_rc": [
     0

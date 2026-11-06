@@ -10,6 +10,7 @@
 from __future__ import annotations
 import argparse
 import hashlib
+import json
 import os
 import subprocess
 import sys
@@ -177,6 +178,19 @@ def repo_manifest():
     return out
 
 
+def approved_skill_names() -> list[str]:
+    """اقرأ نطاق المهارات من السجل الحاكم، وافشل مغلقًا عند فساد العقد."""
+    path = B / "runbook" / "approved-skills.json"
+    data = json.loads(path.read_text(encoding="utf-8"))
+    values = data.get("skills") if isinstance(data, dict) else None
+    if not isinstance(values, list) or not all(isinstance(value, str) and value.strip() for value in values):
+        raise ValueError("runbook/approved-skills.json يجب أن يحوي قائمة skills غير فارغة")
+    names = sorted({value.strip() for value in values})
+    if not names:
+        raise ValueError("runbook/approved-skills.json لا يجوز أن تكون قائمة skills فارغة")
+    return names
+
+
 def _inside_repo() -> bool:
     """يكتشف التشغيل من داخل نسخة من المستودع نفسه (استنساخ/Codespaces)."""
     repo = Path(__file__).resolve().parents[2]      # <repo>/brain/validators/<file>
@@ -198,35 +212,18 @@ def main() -> int:
     # عطل ك-60: المقارنة أغفلت جذر المهارات، فظهرت ملفات المستودع «زائدة» كذبًا.
     # القاعدة: كل جذر ينسخه github_backup يجب أن تدخله المقارنة بالنفس.
     sk_root = Path(os.environ["SKILLS_DIR"]) if os.environ.get("SKILLS_DIR") else (Path("/home/ubuntu/skills") if Path("/home/ubuntu/skills").is_dir() else B.parent / "skills")
-    # ك-224: كانت القائمة أسماءً ثابتة، فأي مهارة جديدة في المستودع تظهر «زائدة» كذبًا
-    # (vocabulary-guard-ops · self-learning-loop-ops). القاعدة الآن: كل مجلد مهارة يتتبعه
-    # المستودع يُقارَن بمقابله على الخادم — تُقوّي الحارس ولا تُضعفه.
-    _sk_names = set()
     try:
-        _tracked = subprocess.run(["git", "-C", str(REPO), "ls-files", "-z", "skills"],
-                                  capture_output=True, check=True).stdout.decode("utf-8")
-        for _f in _tracked.split("\0"):
-            if _f.startswith("skills/") and _f.count("/") >= 2:
-                _sk_names.add(_f.split("/")[1])
-    # تضييق مقصود: أعطال git المتوقعة فقط — أي خطأ آخر يظهر ولا يُبتلع.
-    except (subprocess.CalledProcessError, subprocess.TimeoutExpired, OSError, UnicodeDecodeError):
-        _sk_names = set()
-    if not _sk_names:
-        _sk_names = {"marine-news-brain", "military-arabic-editing", "macr-system", "superpowers-method"}
-    # ك-351: كانت القائمة من المستودع فقط، فمهارة على الخادم غير مدفوعة لا تُقارَن إطلاقًا
-    # ويظهر «مطابق» كاذبًا. القاعدة الآن: اتحاد مهارات المستودع ومهارات الخادم — فشل مغلق.
-    _local_names = set()
-    try:
-        for _d in sorted(sk_root.iterdir()):
-            if _d.is_dir() and _d.name not in {"__pycache__", ".git"}:
-                _local_names.add(_d.name)
-    # تضييق مقصود: أخطاء قراءة الجذر فقط — أي خطأ آخر يظهر ولا يُبتلع.
-    except (OSError, PermissionError):
-        _local_names = set()
-    for sk in sorted(_sk_names | _local_names):
+        _sk_names = approved_skill_names()
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError, TypeError, ValueError) as exc:
+        print(f"  ✘ فشل مغلق — تعذّر قراءة نطاق المهارات المعتمد: {type(exc).__name__}: {exc}")
+        return 2
+    print(f"  نطاق المهارات المعتمد من runbook/approved-skills.json: {len(_sk_names)}")
+    for sk in _sk_names:
         d = sk_root / sk
-        if d.is_dir():
-            local.update(manifest(d, {"__pycache__", ".git"}, set(), f"skills/{sk}"))
+        if not d.is_dir():
+            local[f"skills/{sk}/ (مفقودة من المصدر)"] = ("missing-approved-skill", "")
+            continue
+        local.update(manifest(d, {"__pycache__", ".git"}, set(), f"skills/{sk}"))
     static = B / "backup-repo"
     if static.exists():
         for dp, dns, fns in os.walk(static):
@@ -237,6 +234,13 @@ def main() -> int:
                     continue
                 local[rel] = ("file", sha(p))
     repo = repo_manifest()
+    # النطاق الحاكم متناظر على الطرفين: لا تُطلب المهارات العامة غير المعتمدة
+    # ولا تُحوَّل ملفاتها المتتبعة في المرآة إلى «زوائد» مانعة.
+    repo = {
+        rel: value
+        for rel, value in repo.items()
+        if not rel.startswith("skills/") or len(rel.split("/")) < 2 or rel.split("/")[1] in _sk_names
+    }
 
     drift = []
     # فحص تسرّب الأسرار: أسماء ممنوعة و/أو قيم سرية داخل المدفوع

@@ -12,7 +12,7 @@
 
 from __future__ import annotations
 
-import argparse, os
+import argparse
 import json
 import re
 import sys
@@ -20,8 +20,6 @@ import tempfile
 from pathlib import Path
 
 ARABIC = re.compile(r"[\u0600-\u06FF]")
-# جذر مساحة العمل: /home/ubuntu (يفصل بين الدماغ والموقع)
-_ROOT = Path(__file__).resolve().parents[3]
 TAG = re.compile(r"<[^>]+>")
 SCRIPT = re.compile(r"<(script|style)\b.*?</\1>", re.S | re.I)
 MT_FLAG = re.compile(
@@ -120,8 +118,8 @@ def selftest() -> int:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="التحقق من اتجاه اللغة في خط أنابيب ثنائي اللغة")
-    ap.add_argument("--brain", default=str(_ROOT / "brain-marine-news"))
-    ap.add_argument("--site", default=str(_ROOT / "seawatch"))
+    ap.add_argument("--brain", default="/home/ubuntu/brain-marine-news")
+    ap.add_argument("--site", default="/home/ubuntu/seawatch")
     ap.add_argument("--date")
     ap.add_argument("--selftest", action="store_true")
     a = ap.parse_args()

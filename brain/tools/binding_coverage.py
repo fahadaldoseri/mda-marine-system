@@ -117,10 +117,11 @@ def name_referenced(rel: str, corpus: str) -> bool:
 def main() -> int:
     global ROOT
     ap = argparse.ArgumentParser(description="قياس تغطية الربط للمشروع")
-    ap.add_argument("--brain", default=str(ROOT))
+    ap.add_argument("--brain", "--root", dest="root", default=str(ROOT))
     ap.add_argument("--json", default="")
     ap.add_argument("--show", type=int, default=15, help="عدد اليتامى المعروضين")
     a = ap.parse_args()
+    ROOT = pathlib.Path(a.root).resolve()
 
     corpus, outputs = load_owner_corpus()
     bound, declared, exempt, orphans = [], [], [], []

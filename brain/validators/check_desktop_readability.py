@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import os
 import pathlib
-import argparse, asyncio, json, pathlib, sys
+import argparse, asyncio, json, sys
 
 MEASURE = r"""
 () => {
