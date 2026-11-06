@@ -16,6 +16,7 @@
 """
 from __future__ import annotations
 import argparse, json, os, pathlib, re, sys
+from datetime import datetime, timezone
 
 BLOCK_VERDICTS = ("ممنوع التسليم", "الحكم: ممنوع", "منع التسليم")
 BLOCK_PATTERNS = (re.compile(r"مخالفة مانعة\s*[:：]?\s*([1-9]\d*)\b"),)
@@ -48,6 +49,63 @@ def journal_latest(path: pathlib.Path) -> dict:
         if row.get("step"):
             last[row["step"]] = row
     return last
+
+
+def _ts(value: object) -> datetime | None:
+    """اقرأ توقيت دفتر الجولة بصيغة UTC، وأعد None عند غياب الدليل."""
+    if not value:
+        return None
+    try:
+        out = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+        return out if out.tzinfo else out.replace(tzinfo=timezone.utc)
+    except (TypeError, ValueError):
+        return None
+
+
+def stale_gate_reason(
+    gate_id: str,
+    journal: dict,
+    manifest_steps: list[dict],
+    delivery_id: str = "D010",
+) -> str:
+    """اكتشف حكم G011 القديم بعد تغيّر مدخلاته وقبل D010.
+
+    G011 يفحص التقرير المبني وعلامة الخط والنسخة الاحتياطية. لذلك فإن تشغيل
+    B010 أو D005 بعد آخر تشغيل له يجعل سجله غير صالح للحكم، حتى لو كان دفتر
+    الجولة يسمح بالاستمرار بحالة ``done_warn``. لا نُسقط الحكم ولا نحوّله إلى
+    نجاح؛ نُصدر سبب منع صريحًا يُلزم ``--redo G011``.
+    """
+    if gate_id != "G011":
+        return ""
+    ids = [str(s.get("id", "")) for s in manifest_steps]
+    try:
+        gate_i = ids.index(gate_id)
+        delivery_i = ids.index(delivery_id)
+    except ValueError:
+        return f"تعذّر إثبات ترتيب {gate_id} قبل {delivery_id} في المانيفست"
+    gate_ts = _ts((journal.get(gate_id) or {}).get("ts"))
+    if gate_ts is None:
+        return f"سجل {gate_id} بلا توقيت تشغيل صالح — أعد تشغيله عبر --redo {gate_id}"
+    for spec in manifest_steps[gate_i + 1 : delivery_i]:
+        step_id = str(spec.get("id", ""))
+        if not step_id or step_id.startswith("G"):
+            continue
+        entry = journal.get(step_id)
+        if not entry or entry.get("status") == "waiting_agent":
+            continue
+        step_ts = _ts(entry.get("ts"))
+        if step_ts is None:
+            return (
+                f"سجل {gate_id} غير صالح: الخطوة اللاحقة {step_id} بلا توقيت تشغيل "
+                f"— أعد تشغيله عبر --redo {gate_id}"
+            )
+        if step_ts > gate_ts:
+            return (
+                f"سجل {gate_id} قديم بعد تشغيل {step_id} عند {entry.get('ts')} "
+                f"(آخر تشغيل للبوابة {journal.get(gate_id, {}).get('ts')}) "
+                f"— أعد تشغيله عبر --redo {gate_id}"
+            )
+    return ""
 
 
 def _strip_labels(line: str) -> str:
@@ -85,7 +143,7 @@ def blocking_in_log(text: str) -> str:
     return ""
 
 
-def classify(entry: dict, log_text: str) -> tuple[str, list[str]]:
+def classify(entry: dict, log_text: str, stale_reason: str = "") -> tuple[str, list[str]]:
     why: list[str] = []
     rc = entry.get("rc")
     try:
@@ -99,6 +157,8 @@ def classify(entry: dict, log_text: str) -> tuple[str, list[str]]:
     b = blocking_in_log(log_text)
     if b:
         why.append(f"حكم مانع في السجل: {b}")
+    if stale_reason:
+        why.append(stale_reason)
     if why:
         return "مانع", why
     if entry.get("status") == "done_warn" or rc_i == 1:
@@ -125,6 +185,15 @@ def main() -> int:
     if not steps:
         print(f"   ✘ إدخال ناقص: لا دفتر جولة في {jl}")
         return 2
+    manifest_path = brain / "runbook" / "runbook.json"
+    try:
+        manifest_doc = json.loads(manifest_path.read_text(encoding="utf-8"))
+        manifest_steps = manifest_doc.get("steps", []) if isinstance(manifest_doc, dict) else manifest_doc
+        if not isinstance(manifest_steps, list):
+            raise ValueError("steps ليست قائمة")
+    except (OSError, json.JSONDecodeError, ValueError, TypeError) as exc:
+        print(f"   ✘ إدخال ناقص: تعذّر قراءة مانيفست ترتيب البوابات: {exc}")
+        return 2
     gates = sorted(k for k in steps if k.startswith("G"))
     if a.step:
         gates = [g for g in gates if g == a.step]
@@ -132,7 +201,8 @@ def main() -> int:
     for g in gates:
         lp = brain / "logs" / "runbook" / a.date / f"{g}.log"
         txt = lp.read_text(encoding="utf-8", errors="ignore") if lp.exists() else ""
-        state, why = classify(steps[g], txt)
+        stale = stale_gate_reason(g, steps, manifest_steps)
+        state, why = classify(steps[g], txt, stale)
         verdicts[g] = {"state": state, "why": why, "rc": steps[g].get("rc"), "ts": steps[g].get("ts"), "log": str(lp.name)}
         if state == "مانع":
             blockers.append((g, why))

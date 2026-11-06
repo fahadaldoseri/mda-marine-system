@@ -5271,9 +5271,14 @@
     "rules": [
      "س2 — الإغلاق والدفع"
     ],
-    "files": [
+   "files": [
      "tests/test_new_validators.py",
      "tests/test_parity_scope.py",
+     "tests/test_preflight_guard.py",
+     "tests/test_telegram_digest_cards.py",
+     "tests/test_secret_documentation_scope.py",
+     "tests/test_en_parity_confidence_map.py",
+     "tests/test_github_backup_failure_output.py",
      "tools/audit_broad_excepts.py",
      "validators/check_secrets.py"
     ]
@@ -5282,7 +5287,7 @@
    "command": [
     "bash",
     "-lc",
-    "B=\"$PWD\"; export B; mkdir -p logs/checks; python3 tests/test_new_validators.py > logs/checks/new-validators-{date}.txt 2>&1; r1=$?; python3 tests/test_parity_scope.py > logs/checks/parity-scope-{date}.txt 2>&1; r2=$?; python3 tests/test_parity_skills_canon_local_only.py > logs/checks/parity-skills-canon-{date}.txt 2>&1; r3=$?; cat logs/checks/new-validators-{date}.txt logs/checks/parity-scope-{date}.txt logs/checks/parity-skills-canon-{date}.txt; python3 -c \"import json,sys;json.dump({'new_validators_rc':$r1,'parity_scope_rc':$r2,'parity_skills_canon_rc':$r3},open('logs/checks/new-validators-{date}.json','w'))\"; exit $(( r1 || r2 || r3 ))"
+    "B=\"$PWD\"; export B; mkdir -p logs/checks; python3 tests/test_new_validators.py > logs/checks/new-validators-{date}.txt 2>&1; r1=$?; python3 tests/test_parity_scope.py > logs/checks/parity-scope-{date}.txt 2>&1; r2=$?; python3 tests/test_parity_skills_canon_local_only.py > logs/checks/parity-skills-canon-{date}.txt 2>&1; r3=$?; python3 tests/test_telegram_digest_cards.py >> logs/checks/new-validators-{date}.txt 2>&1; r4=$?; python3 tests/test_secret_documentation_scope.py >> logs/checks/new-validators-{date}.txt 2>&1; r5=$?; python3 tests/test_en_parity_confidence_map.py >> logs/checks/new-validators-{date}.txt 2>&1; r6=$?; python3 tests/test_github_backup_failure_output.py >> logs/checks/new-validators-{date}.txt 2>&1; r7=$?; cat logs/checks/new-validators-{date}.txt logs/checks/parity-scope-{date}.txt logs/checks/parity-skills-canon-{date}.txt; python3 -c \"import json,sys;json.dump({'new_validators_rc':$r1,'parity_scope_rc':$r2,'parity_skills_canon_rc':$r3,'telegram_digest_rc':$r4,'secret_documentation_rc':$r5,'en_parity_confidence_rc':$r6,'github_backup_failure_output_rc':$r7},open('logs/checks/new-validators-{date}.json','w'))\"; exit $(( r1 || r2 || r3 || r4 || r5 || r6 || r7 ))"
    ],
    "ok_rc": [
     0

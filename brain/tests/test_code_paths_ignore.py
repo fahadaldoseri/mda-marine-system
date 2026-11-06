@@ -55,6 +55,13 @@ class CodePathsIgnoreTests(unittest.TestCase):
         ):
             self.assertEqual("data", code_paths.classify(rel, spec()), rel)
 
+    def test_decisions_and_special_reports_are_data(self):
+        for rel in (
+            "brain/decisions/registry.json",
+            "brain/special-reports/2026-11-05-الخليج-العربي.html",
+        ):
+            self.assertEqual("data", code_paths.classify(rel, spec()), rel)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

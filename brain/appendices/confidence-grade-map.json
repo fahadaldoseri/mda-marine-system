@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "updated": "2026-11-06",
+  "note": "خريطة حاكمة لتمثيل درجات الإسناد في أسطح القارئ. الرمز الداخلي والعبارة العربية والعبارة الإنجليزية تُحوّل إلى canonical واحد للمقارنة؛ لا تُعرض الرموز الداخلية في سطح القارئ.",
+  "source": "sections/75-style.md · appendices/source-reliability-40.json",
+  "grades": {
+    "A/1": {
+      "canonical": "reliability=high|corroboration=high",
+      "arabic": "موثوقية عالية وتصديق مرتفع",
+      "english": "high reliability, high corroboration"
+    },
+    "B/2": {
+      "canonical": "reliability=high|corroboration=high",
+      "arabic": "موثوقية جيدة وتصديق جيد",
+      "english": "high reliability, high corroboration"
+    },
+    "C/3": {
+      "canonical": "reliability=medium|corroboration=medium",
+      "arabic": "موثوقية متوسطة وتصديق متوسط",
+      "english": "medium reliability, medium corroboration"
+    },
+    "D/4": {
+      "canonical": "reliability=low|corroboration=low",
+      "arabic": "موثوقية محدودة وتصديق ضعيف",
+      "english": "low reliability, low corroboration"
+    },
+    "E/5": {
+      "canonical": "reliability=low|corroboration=low",
+      "arabic": "موثوقية غير مؤكدة وتصديق ضعيف",
+      "english": "low reliability, low corroboration"
+    },
+    "F/6": {
+      "canonical": "reliability=unassessable|corroboration=none",
+      "arabic": "موثوقية غير قابلة للتقييم بلا تصديق",
+      "english": "unassessable reliability, no corroboration"
+    }
+  }
+}

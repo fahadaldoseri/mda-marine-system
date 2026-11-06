@@ -38,6 +38,72 @@ def short(text, n):
     return cut.rstrip("،,:؛ ") + "…"
 
 
+def _hero_kpi_registry() -> dict[str, dict]:
+    """Return the governing hero-card contract keyed by card id.
+
+    The daily meta file is a derived surface and has used more than one
+    presentation shape over time.  Labels therefore come from the governing
+    registry when a derived card omits one; values remain data from the
+    derived surface.
+    """
+    path = B / "appendices" / "card_registry.json"
+    try:
+        registry = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    cards = ((registry.get("hero_kpis") or {}).get("cards") or [])
+    return {
+        str(card.get("id")): card
+        for card in cards
+        if isinstance(card, dict) and card.get("id")
+    }
+
+
+def _hero_kpi_items(meta: dict) -> list[dict]:
+    """Normalize list and container forms emitted by the meta builders."""
+    raw = meta.get("hero_kpis") or []
+    if isinstance(raw, list):
+        return [item for item in raw if isinstance(item, dict)]
+    if isinstance(raw, dict):
+        for key in ("cards", "items", "data"):
+            nested = raw.get(key)
+            if isinstance(nested, list):
+                return [item for item in nested if isinstance(item, dict)]
+        return [
+            {"id": key, **value}
+            for key, value in raw.items()
+            if isinstance(value, dict)
+        ]
+    return []
+
+
+def _card_field(card: dict, registry_card: dict, keys: tuple[str, ...]):
+    for source in (card, registry_card):
+        for key in keys:
+            value = source.get(key)
+            if value is not None and str(value).strip():
+                return value
+    return ""
+
+
+def _hero_kpi_line(card: dict, registry: dict[str, dict]) -> str:
+    card_id = str(card.get("id") or "")
+    contract = registry.get(card_id, {})
+    label = _card_field(
+        card,
+        contract,
+        ("label", "display_label", "title", "name", "caption", "key"),
+    )
+    value = _card_field(
+        card,
+        {},
+        ("value", "current", "count", "total", "number", "amount"),
+    )
+    if not label:
+        label = card_id or "مؤشر"
+    return f"{label} {value}".strip()
+
+
 def build(meta, date, base, detail=True):
     cut = dt.datetime.strptime(meta["generated_label"], "%Y-%m-%dT%H:%M:%SZ")
     start = cut - dt.timedelta(hours=24)
@@ -55,7 +121,10 @@ def build(meta, date, base, detail=True):
         lines += [f"{i}) {short(title, 70)} ({c['code']})" + (":" if detail else "")]
         if detail:
             lines.append(short(c["text"], 90))
-    kp = " · ".join(f"{k['label']} {k['value']}" for k in meta.get("hero_kpis", [])[:3])
+    registry = _hero_kpi_registry()
+    kp = " · ".join(
+        _hero_kpi_line(card, registry) for card in _hero_kpi_items(meta)[:3]
+    )
     if kp:
         lines += ["", "<b>المؤشرات:</b>", kp]
     act = (meta.get("decision_card", {}).get("action") or [""])[0]

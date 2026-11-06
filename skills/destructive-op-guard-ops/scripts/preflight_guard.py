@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import fnmatch
 import os
 import subprocess
 import sys
@@ -52,7 +53,16 @@ def _is_sensitive_name(name: str) -> bool:
     )
 
 
-def _sensitive_paths(scope: Path) -> list[str]:
+def _is_excluded(relative: str, excludes: Iterable[str]) -> bool:
+    """Return whether a relative path is outside the destructive operation."""
+    name = Path(relative).name
+    return any(
+        fnmatch.fnmatch(relative, pattern) or fnmatch.fnmatch(name, pattern)
+        for pattern in excludes
+    )
+
+
+def _sensitive_paths(scope: Path, excludes: Iterable[str]) -> list[str]:
     found: list[str] = []
     if _is_sensitive_name(scope.name):
         found.append(scope.name)
@@ -61,13 +71,19 @@ def _sensitive_paths(scope: Path) -> list[str]:
     for directory, dirnames, filenames in os.walk(scope, topdown=True, followlinks=False):
         base = Path(directory)
         for name in list(dirnames):
+            relative = (base / name).relative_to(scope).as_posix()
+            if _is_excluded(relative, excludes):
+                # The operation does not enter an explicitly excluded subtree.
+                dirnames.remove(name)
+                continue
             if _is_sensitive_name(name):
-                found.append((base / name).relative_to(scope).as_posix())
+                found.append(relative)
                 # Do not inspect the sensitive subtree or print its contents.
                 dirnames.remove(name)
         for name in filenames:
-            if _is_sensitive_name(name):
-                found.append((base / name).relative_to(scope).as_posix())
+            relative = (base / name).relative_to(scope).as_posix()
+            if not _is_excluded(relative, excludes) and _is_sensitive_name(name):
+                found.append(relative)
     return sorted(set(found))
 
 
@@ -102,7 +118,9 @@ def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     target = _resolve(args.target)
     issues: list[str] = []
-    excludes = args.excludes if args.excludes is not None else DEFAULT_EXCLUDES
+    # Explicit exclusions add to the safe baseline; they must not silently
+    # remove protections such as .git, secrets, state, or key files.
+    excludes = [*DEFAULT_EXCLUDES, *(args.excludes or [])]
 
     if not target.is_dir():
         print("النتيجة: غير آمن (خرج 2)")
@@ -135,8 +153,8 @@ def main(argv: list[str] | None = None) -> int:
     if source == target:
         issues.append("المصدر والهدف متطابقان؛ لا تسمح بعملية استبدال ذاتية النطاق.")
 
-    source_sensitive = _sensitive_paths(source)
-    target_sensitive = _sensitive_paths(target)
+    source_sensitive = _sensitive_paths(source, excludes)
+    target_sensitive = _sensitive_paths(target, excludes)
     sensitive = sorted(set(source_sensitive + target_sensitive))
     excludes_inside = _exclude_inside_scope(target, source, excludes)
     if source_sensitive:

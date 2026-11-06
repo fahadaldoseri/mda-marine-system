@@ -31,6 +31,36 @@ CASES = [
 ]
 
 
+def test_gate_log_stale_after_delivery_prep_is_blocked():
+    """لا يُعاد استعمال حكم بوابة سبقته خطوة غيّرت مدخلاتها قبل D010."""
+    journal = {
+        "G011": {"status": "done_warn", "ts": "2026-11-06T08:37:25Z"},
+        "B010": {"status": "done", "ts": "2026-11-06T12:49:46Z"},
+        "D005": {"status": "done", "ts": "2026-11-06T17:39:32Z"},
+    }
+    manifest = [
+        {"id": "G011", "phase": "gates"},
+        {"id": "B010", "phase": "build"},
+        {"id": "D005", "phase": "deliver"},
+        {"id": "D010", "phase": "deliver"},
+    ]
+    reason = gv.stale_gate_reason("G011", journal, manifest, "D010")
+    assert reason and "B010" in reason
+
+
+def test_gate_log_current_after_delivery_prep_is_not_stale():
+    journal = {
+        "G011": {"status": "done", "ts": "2026-11-06T20:43:00Z"},
+        "D005": {"status": "done", "ts": "2026-11-06T17:39:32Z"},
+    }
+    manifest = [
+        {"id": "G011", "phase": "gates"},
+        {"id": "D005", "phase": "deliver"},
+        {"id": "D010", "phase": "deliver"},
+    ]
+    assert gv.stale_gate_reason("G011", journal, manifest, "D010") == ""
+
+
 def main() -> int:
     bad = 0
     for desc, text, want in CASES:
@@ -39,6 +69,17 @@ def main() -> int:
         if got != want:
             bad += 1
         print(f"  {mark} {desc}: مانع={got} (المتوقع {want})")
+    try:
+        test_gate_log_stale_after_delivery_prep_is_blocked()
+        print("  ✔ سجل G011 القديم بعد B010/D005 يُمنع")
+        test_gate_log_current_after_delivery_prep_is_not_stale()
+        print("  ✔ سجل G011 الحديث بعد B010/D005 لا يُمنع بقدم السجل")
+    except AssertionError as exc:
+        bad += 1
+        print(f"  ✘ اختبار صلاحية سجل البوابة: {exc}")
+    except AttributeError as exc:
+        bad += 1
+        print(f"  ✘ عقد صلاحية سجل البوابة غير موجود: {exc}")
     print(f"  الحصيلة: {'كل الحالات صحيحة' if not bad else f'{bad} حالة خاطئة'}")
     return 2 if bad else 0
 
