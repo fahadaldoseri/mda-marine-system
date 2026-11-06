@@ -821,10 +821,10 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
             _s = f"MN-{_s}"
         sids.append(_s)
 
-    _pts = [{"id": i, "xy": shown_xy[i], "x": shown_xy[i][0], "y": shown_xy[i][1],
-             "lat": points[i].get("lat"), "lon": points[i].get("lon")} for i in range(len(points))]
+    _pts = [{"id": i, "lon": points[i].get("lon"), "lat": points[i].get("lat")}
+            for i in range(len(points))]
     _cl = map_cluster.cluster_points(_pts, lambda lon, lat: pt(lon, lat), CLUSTER_SEP)
-    groups = [[(e["id"] if isinstance(e, dict) else e) for e in g] for g in _cl]
+    groups = [[int(m["id"]) if isinstance(m, dict) else int(m) for m in c["members"]] for c in _cl]
     groups = [g for g in groups if g]
     cluster_of = {j: gi for gi, g in enumerate(groups) for j in g}
     cluster_head = {g[0]: g for g in groups}
