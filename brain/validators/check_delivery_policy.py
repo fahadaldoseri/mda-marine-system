@@ -48,7 +48,7 @@ def check(root: Path) -> list[str]:
         return [f"عقد السياسة غير موجود: {policy_path}"]
     try:
         policy = json.loads(policy_path.read_text(encoding="utf-8"))
-    except Exception as exc:  # noqa: BLE001
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
         return [f"عقد السياسة غير قابل للقراءة: {exc}"]
 
     if str(policy.get("mode", "")).strip().upper() != "A":
@@ -86,7 +86,7 @@ def check(root: Path) -> list[str]:
         return errs
     try:
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    except Exception as exc:  # noqa: BLE001
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
         errs.append(f"المانيفست غير قابل للقراءة: {exc}")
         return errs
 
@@ -132,4 +132,6 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)

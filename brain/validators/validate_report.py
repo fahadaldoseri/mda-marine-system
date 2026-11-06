@@ -22,6 +22,16 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from tools.hypothesis_distribution import (  # noqa: E402
+    DistributionError,
+    POINT_FROM_RANGE_KIND,
+    RULE as DISTRIBUTION_RULE,
+    calculate_distribution,
+    parse_point,
+    parse_range,
+)
 
 REQUIRED = {
     "report_schema_version": str, "title": str, "subtitle": str, "date_label": str,
@@ -124,23 +134,48 @@ def check_time(d):
 
 
 def check_hypotheses(d):
-    """ف4.3 — مجموع الاحتمالات = 100% وصيغتها معيارية."""
+    """ف4.3 — يقبل نقاطًا مشتقة من نطاقات بقاعدة قابلة لإعادة التشغيل فقط."""
     hs = d.get("hypotheses") or []
     if not hs:
         return ["[ف4.3] لا فرضيات"]
-    total, bad = 0.0, []
-    for h in hs:
-        raw = str(h.get("likelihood", "")).strip()
-        m = re.match(r"^(\d+(?:\.\d+)?)\s*%$", raw)
-        if not m:
-            bad.append(raw)
-        else:
-            total += float(m.group(1))
+
     errs = []
-    if bad:
-        errs.append(f"[ف4.3] صيغة احتمال غير معيارية (يجب نسبة مئوية): {bad}")
-    if abs(total - 100.0) > 0.1:
-        errs.append(f"[ف4.3] مجموع الاحتمالات {total} وليس 100")
+    kinds = [h.get("likelihood_kind") for h in hs]
+    if any(kind != POINT_FROM_RANGE_KIND for kind in kinds):
+        if len(set(kinds)) > 1:
+            errs.append(f"[ف4.3] خلط أنواع الاحتمال غير مسموح: {kinds}")
+        else:
+            errs.append(f"[ف4.3] نوع احتمال غير معتمد: {kinds}")
+        return errs
+    if d.get("distribution_rule") != DISTRIBUTION_RULE:
+        errs.append("[ف4.3] distribution_rule مفقود أو لا يطابق الإصدار المعتمد")
+
+    ranges, points = [], []
+    for h in hs:
+        raw_range = h.get("likelihood_range")
+        try:
+            parse_range(raw_range)
+            ranges.append(str(raw_range))
+        except DistributionError as exc:
+            errs.append(f"[ف4.3] نطاق likelihood_range غير صالح: {exc}")
+        try:
+            points.append(parse_point(h.get("likelihood")))
+        except DistributionError as exc:
+            errs.append(f"[ف4.3] likelihood النقطي غير صالح: {exc}")
+
+    if points:
+        total = sum(points)
+        if abs(total - 100.0) > 0.1:
+            errs.append(f"[ف4.3] مجموع الاحتمالات {total} وليس 100")
+    if errs:
+        return errs
+
+    try:
+        expected = calculate_distribution(ranges)
+    except DistributionError as exc:
+        return [f"[ف4.3] تعذر إعادة اشتقاق التوزيع: {exc}"]
+    if points != expected:
+        errs.append(f"[ف4.3] النسب النقطية {points} لا تساوي ناتج الاشتقاق {expected}")
     return errs
 
 

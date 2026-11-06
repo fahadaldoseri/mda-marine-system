@@ -39,6 +39,37 @@ from pathlib import Path
 # نمط وسم نوع البند في القوائم — مصدر واحد يخدم القائمة المنظّمة والمرقّمة، فلا يتكرر النمط
 MARK_RE = re.compile(r"^\[(حقيقة|واقعة|تقدير تحليلي|تقدير|إعلامي|إعلام|خلفية|مراقبة)\]\s*")
 
+# رموز الدرجات داخل المادة المصدرية مفيدة للتدقيق، لكنها ليست لغة قارئ في صفحة «إضافات».
+# تُقرأ الأوصاف من خريطة حاكمة مشتركة مع المولّد الإنجليزي وفاحص التماثل.
+_GRADE_MAP_PATH = Path(__file__).resolve().parents[2] / "brain-marine-news" / "appendices" / "confidence-grade-map.json"
+_GRADE_MAP = json.loads(_GRADE_MAP_PATH.read_text(encoding="utf-8"))["grades"]
+_INTERNAL_GRADE_LABELS = {code: entry["arabic"] for code, entry in _GRADE_MAP.items()}
+_INTERNAL_GRADE_RE = re.compile(
+    r"(?<![A-Za-z0-9_])(?:" + "|".join(re.escape(k) for k in _INTERNAL_GRADE_LABELS) + r")(?![A-Za-z0-9_])"
+)
+
+
+def redact_internal_grade_codes(text: str) -> str:
+    """يحوّل رموز درجات الإسناد إلى أوصاف عربية في سطح القارئ فقط."""
+    return _INTERNAL_GRADE_RE.sub(lambda match: _INTERNAL_GRADE_LABELS[match.group(0)], text)
+
+
+def compact_threat_section_html(section_html: str) -> str:
+    """يختصر العبارات المكررة في قسم التهديد دون إسقاط الوقائع أو مستويات القطاعات."""
+    replacements = (
+        ("المستوى في ", ""),
+        ("ما يبرره في كلمات قليلة", "السبب"),
+        ("لا واقعة مؤهلة داخل الفترة", "لا واقعة مؤهلة"),
+        ("استمراري؛ آخر واقعة مؤهلة في هذا القطاع بتاريخ ", "مستمر؛ آخر واقعة مؤهلة في "),
+        ("لماذا لم يرتفع أكثر:", "سبب الثبات:"),
+        ("ما يرفعه أو يخفضه:", "عوامل التغيير:"),
+        ("لا تأكيد رسمي لتضرر ", "لا تأكيد لتضرر "),
+        ("الانتقال إلى حالة حرجة يتطلب ", "الحالة الحرجة تتطلب "),
+    )
+    for before, after in replacements:
+        section_html = section_html.replace(before, after)
+    return section_html
+
 
 class BuildError(Exception):
     pass
@@ -2459,6 +2490,8 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
             section_html = render_ledger_events(daily_events, defs, md_path)
         else:
             section_html = render_section_body(t, sec["lines"], defs, doc_mode, section_id=f"sec-{idx + 1:02d}")
+        if mode != "additions" and "مستوى التهديد" in t:
+            section_html = compact_threat_section_html(section_html)
         if not codes.is_primary(t):
             section_html = codes.demote(section_html, report_date, official)
         if map_html and "التوزيع الجغرافي للوقائع" in t:
@@ -2651,6 +2684,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
     # سياسة عرض الرموز (2+5): تبسيط شامل لكل ما هو خارج قسم الوقائع
     doc = codes.demote_page(doc, report_date, official)
     doc = _outside_special(_public_text, doc)
+    doc = _outside_special(redact_internal_grade_codes, doc)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     doc = _outside_special(isolate_ltr, doc)
     # ك-408: بعد عزل الرموز اللاتينية تبقى مسافة بين الرمز وعلامة الترقيم التالية («UKMTO ،» · «UTC .»)،

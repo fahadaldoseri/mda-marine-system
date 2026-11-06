@@ -24,15 +24,22 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "dist" / "reports" / "en"
 
 
+def missing_translation_error(page_name: str, missing: list[str]) -> str:
+    """يبني رسالة واحدة حتمية بكل الوحدات الناقصة، بلا سقف تشخيصي."""
+    unique = sorted({str(item).strip() for item in missing if str(item).strip()})
+    return (
+        f"فشل مغلق: نصوص عربية بلا ترجمة في {page_name} — أضفها إلى "
+        "sources/i18n/en/glossary.json\n  - "
+        + "\n  - ".join(unique)
+    )
+
+
 def _translate_page(ar_page: pathlib.Path, date: str, dst: pathlib.Path, tm, gl) -> pathlib.Path:
     if not ar_page.exists():
         raise SystemExit(f"صفحة الإصدار العربية غير موجودة: {ar_page}")
     page, missing, total = i18n_en.translate_page(ar_page.read_text(encoding="utf-8"), date, tm, gl)
     if missing:
-        raise SystemExit(
-            f"فشل مغلق: نصوص عربية بلا ترجمة في {ar_page.name} — أضفها إلى sources/i18n/en/glossary.json\n  - "
-            + "\n  - ".join(sorted(set(missing))[:15])
-        )
+        raise SystemExit(missing_translation_error(ar_page.name, missing))
     # عناوين بطاقة الأخبار عقد واجهة، وتُطابقها بوابة العدّاد حرفيًا.
     page = page.replace("Official Warnings and Advisories", "Official warnings and advisories")
     # توحيد تسمية صف البطاقة مع السجل الحاكم (تعديلات 2026-11-01: «التحذيرات والتنبيهات النشطة»)

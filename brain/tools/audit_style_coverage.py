@@ -142,6 +142,69 @@ def _disabled_producers() -> dict:
     return out
 
 
+def _load_manifest() -> dict:
+    """يقرأ مانيفست التشغيل؛ غيابه لا يُنشئ استثناءً تلقائيًا."""
+    path = BASE / "runbook" / "runbook.json"
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError, TypeError, json.JSONDecodeError):
+        return {}
+    return data if isinstance(data, dict) else {}
+
+
+def deferred_producer_ids(manifest: dict, gate_id: str) -> dict[str, dict]:
+    """يعيد المنتجات المؤجلة فقط إذا أثبت المانيفست أنها بعد البوابة الحالية.
+
+    لا يكفي وجود اسم المنتج في قائمة يدوية: يجب أن يعلن عقد البوابة المنتج والسبب
+    وتاريخ السريان، ثم يثبت ترتيب `producer` بعد `gate` في قائمة الخطوات.
+    """
+    steps = manifest.get("steps") if isinstance(manifest, dict) else None
+    if not isinstance(steps, list):
+        return {}
+    positions = {
+        str(step.get("id")): index
+        for index, step in enumerate(steps)
+        if isinstance(step, dict) and step.get("id")
+    }
+    if gate_id not in positions:
+        return {}
+    out: dict[str, dict] = {}
+    for step in steps:
+        if not isinstance(step, dict) or str(step.get("id")) != gate_id:
+            continue
+        for declaration in step.get("deferred_surfaces") or []:
+            if not isinstance(declaration, dict):
+                continue
+            producer = str(declaration.get("producer") or "").strip()
+            if not producer or producer not in positions:
+                continue
+            producer_index = positions[producer]
+            gate_index = positions[gate_id]
+            if producer_index > gate_index:
+                out[producer] = {
+                    **declaration,
+                    "gate": gate_id,
+                    "gate_index": gate_index,
+                    "producer_index": producer_index,
+                }
+    return out
+
+
+def _current_step_id(manifest: dict) -> str | None:
+    """يستدل على خطوة G045 من ذكر ملف الأداة في أمرها؛ لا يثبت هويةً صامتة."""
+    steps = manifest.get("steps") if isinstance(manifest, dict) else None
+    if not isinstance(steps, list):
+        return None
+    matches = []
+    for step in steps:
+        if not isinstance(step, dict):
+            continue
+        if "audit_style_coverage.py" in json.dumps(step, ensure_ascii=False):
+            if step.get("id"):
+                matches.append(str(step["id"]))
+    return matches[0] if len(matches) == 1 else None
+
+
 def run_gate(cmd: list[str], text_file: Path) -> tuple[int, list[str]]:
     r = subprocess.run(cmd + [str(text_file)], capture_output=True, text=True)
     out = (r.stdout or "") + (r.stderr or "")
@@ -233,7 +296,10 @@ def main() -> int:
     a = ap.parse_args()
     TMP.mkdir(parents=True, exist_ok=True)
 
-    rows, blocked, uncovered = [], 0, 0
+    manifest = _load_manifest()
+    gate_id = _current_step_id(manifest)
+    deferred = deferred_producer_ids(manifest, gate_id) if gate_id else {}
+    rows, blocked, uncovered, deferred_count = [], 0, 0, 0
     off = _disabled_producers()
     for i, s in enumerate(surfaces(a.date), 1):
         tgt, err = extract(s, i)
@@ -243,6 +309,15 @@ def main() -> int:
                 rows.append({"label": s["label"], "path": str(s["path"]),
                              "status": "مستثنى بقرار المالك",
                              "note": f"الخطوة {prod} معطّلة: {off[prod]} — {err}",
+                             "style": "—", "prose": "—", "findings": []})
+                continue
+            if prod and prod in deferred:
+                declaration = deferred[prod]
+                deferred_count += 1
+                rows.append({"label": s["label"], "path": str(s["path"]),
+                             "status": "مؤجل معلن",
+                             "note": (f"{declaration.get('reason', 'استثناء ترتيب معلن')} — "
+                                      f"{prod} بعد {declaration.get('gate', gate_id)} · {err}"),
                              "style": "—", "prose": "—", "findings": []})
                 continue
             uncovered += 1
@@ -295,8 +370,8 @@ def main() -> int:
             print(f"{r['label'][:41]:<42} {r['status']:<14} {r['style']:<10} {r['prose']:<10}  {r['note']}")
             for f in r.get("findings", [])[:3]:
                 print(f"      · {f}")
-        print(f"── الأسطح: {len(rows)} · مغطاة: {len(rows) - uncovered - blocked} · "
-              f"غير مغطاة: {uncovered} · مانعة: {blocked}")
+        print(f"── الأسطح: {len(rows)} · مغطاة: {len(rows) - uncovered - blocked - deferred_count} · "
+              f"مؤجلة معلنة: {deferred_count} · غير مغطاة: {uncovered} · مانعة: {blocked}")
     return 2 if (uncovered or blocked) else 0
 
 

@@ -42,7 +42,7 @@ def run_item(root: Path, item: dict) -> tuple[str, str]:
     argv = [str(a).replace("{root}", str(root)) for a in item["argv"]]
     try:
         r = subprocess.run(argv, cwd=root, env=env, capture_output=True, text=True, timeout=900)
-    except Exception as exc:  # noqa: BLE001
+    except (OSError, subprocess.TimeoutExpired) as exc:
         return "ساقط", f"تعذّر التشغيل: {exc}"
     ok = (r.returncode == item.get("expect", 0))
     note = (r.stdout or r.stderr or "").strip().splitlines()

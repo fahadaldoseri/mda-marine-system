@@ -50,6 +50,11 @@ class Positive(unittest.TestCase):
     def test_repository_registry_passes(self):
         self.assertEqual(MOD.check(ROOT), [])
 
+    def test_declared_zero_status_count_is_valid(self):
+        registry = json.loads((ROOT / "decisions" / "registry.json").read_text(encoding="utf-8"))
+        self.assertEqual(registry["counts"].get("يحتاج قرارًا"), 0)
+        self.assertEqual(MOD.check(ROOT), [])
+
     def test_contract_line_stable(self):
         self.assertIn("دفتر القرارات", MOD.OK_LINE)
 

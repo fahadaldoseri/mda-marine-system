@@ -16,9 +16,13 @@ from __future__ import annotations
 import argparse
 import fnmatch
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
+
+BRAIN = Path(os.environ.get("BRAIN_DIR") or Path(__file__).resolve().parents[1])
+SITE = Path(os.environ.get("SITE_DIR") or BRAIN.parent / "seawatch")
 
 REQUIRED = ("match", "surfaces", "gates", "tests")
 
@@ -47,7 +51,7 @@ def from_git(root: Path, site: Path) -> list[str]:
             r = subprocess.run(["git", "-C", str(repo), "diff", "--name-only", "HEAD"],
                                capture_output=True, text=True, timeout=60)
             out += [f"{label}/{x}" for x in r.stdout.split() if x]
-        except Exception:  # noqa: BLE001
+        except (OSError, subprocess.TimeoutExpired):
             continue
     return sorted(set(out))
 
@@ -62,8 +66,8 @@ def rule_for(rules: list[dict], path: str) -> dict | None:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="مصفوفة الأثر")
-    ap.add_argument("--root", default=".", help="جذر النظام")
-    ap.add_argument("--site", default="/home/ubuntu/seawatch", help="جذر الموقع")
+    ap.add_argument("--root", default=str(BRAIN), help="جذر النظام")
+    ap.add_argument("--site", default=str(SITE), help="جذر الموقع")
     ap.add_argument("--changed", nargs="*", default=[], help="ملفات متغيّرة")
     ap.add_argument("--from-git", action="store_true", help="استخراج المتغيّر من Git")
     ap.add_argument("--require-declared", action="store_true", help="فشل عند تغيير غير معلن")

@@ -16,6 +16,7 @@
 """
 from __future__ import annotations
 import argparse, collections, pathlib, re, sys
+import json
 
 import os
 
@@ -40,13 +41,80 @@ AR_PAGE = SITE / "dist" / "reports"
 EN_PAGE = SITE / "dist" / "reports" / "en"
 ARABIC = re.compile(r"[\u0600-\u06FF][\u0600-\u06FF\s]{2,}")
 
+
+CONFIDENCE_GRADE_MAP_PATH = BRAIN / "appendices" / "confidence-grade-map.json"
+
+
+def _load_confidence_grade_map() -> dict[str, dict[str, str]]:
+    """تحميل خريطة الدرجات الوحيدة التي يشترك فيها المولّد والفاحص."""
+    data = json.loads(CONFIDENCE_GRADE_MAP_PATH.read_text(encoding="utf-8"))
+    grades = data.get("grades")
+    if not isinstance(grades, dict) or not grades:
+        raise ValueError(f"خريطة الدرجات فارغة أو غير صالحة: {CONFIDENCE_GRADE_MAP_PATH}")
+    required = {"canonical", "arabic", "english"}
+    for code, entry in grades.items():
+        if not isinstance(entry, dict) or not required.issubset(entry):
+            raise ValueError(f"مدخل درجة ناقص في الخريطة: {code}")
+    return grades
+
+
+CONFIDENCE_GRADE_MAP = _load_confidence_grade_map()
+_GRADE_CODE_RE = re.compile(r"(?<![A-Za-z0-9])(?:[A-F]/[1-6])(?![0-9])")
+_GRADE_FORMS: list[tuple[str, str]] = []
+for _code, _entry in CONFIDENCE_GRADE_MAP.items():
+    for _form in (_code, _entry["arabic"], _entry["english"]):
+        if _form:
+            _GRADE_FORMS.append((_form, _entry["canonical"]))
+_GRADE_FORMS.sort(key=lambda item: len(item[0]), reverse=True)
+_GRADE_FORM_RE = re.compile(
+    "|".join(f"(?P<g{idx}>{re.escape(form)})" for idx, (form, _) in enumerate(_GRADE_FORMS)),
+    re.IGNORECASE,
+)
+_GRADE_CANONICAL_BY_FORM = {form.casefold(): canonical for form, canonical in _GRADE_FORMS}
+
+
+def _grade_spans(text: str) -> list[tuple[int, int, str]]:
+    """أعد مواضع الرمز أو الوصف، مع أولوية للعبارات الأطول."""
+    spans: list[tuple[int, int, str]] = []
+    occupied: list[tuple[int, int]] = []
+    for match in _GRADE_FORM_RE.finditer(text):
+        start, end = match.span()
+        if any(start < old_end and end > old_start for old_start, old_end in occupied):
+            continue
+        form = match.group(0)
+        canonical = _GRADE_CANONICAL_BY_FORM.get(form.casefold())
+        if canonical:
+            spans.append((start, end, canonical))
+            occupied.append((start, end))
+    for match in _GRADE_CODE_RE.finditer(text):
+        start, end = match.span()
+        if any(start < old_end and end > old_start for old_start, old_end in occupied):
+            continue
+        code = match.group(0)
+        entry = CONFIDENCE_GRADE_MAP.get(code)
+        spans.append((start, end, entry["canonical"] if entry else code))
+        occupied.append((start, end))
+    return sorted(spans)
+
+
+def _semantic_grade_tokens(text: str) -> collections.Counter[str]:
+    return collections.Counter(canonical for _, _, canonical in _grade_spans(text))
+
+
+def _without_grade_forms(text: str) -> str:
+    """احذف تمثيل الدرجة قبل عدّ الأرقام، مع إبقاء الأرقام الأخرى محكومة."""
+    spans = _grade_spans(text)
+    for start, end, _ in reversed(spans):
+        text = text[:start] + " " + text[end:]
+    return text
+
 TOKENS = [
     ("أكواد الوقائع/التقديرات", r"(?<![\d-])(?:MN|EST|NAV|IMO|UKMTO)-\d{4}-\d{2}-\d{2}(?:-\d+)?"),
     ("تحذيرات NAVAREA/UKMTO", r"NAVAREA\s+[IVX]+\s+\d+/\d+|UKMTO\s+\d+[-/]\d+"),
     ("الحسابات", r"@[A-Za-z0-9_]+"),
     ("النسب المئوية", r"(?<![\d.])\d+(?:[.,]\d+)?\s*%"),
     ("المديات الرقمية", r"(?<![\d.])\d+\s*[–-]\s*\d+\s*%"),
-    ("درجات الثقة", r"(?<![A-Za-z0-9])[A-C]/\d(?![0-9])"),
+    ("درجات الثقة", r"(?<![A-Za-z0-9])[A-F]/[1-6](?![0-9])"),
     ("التواريخ والأوقات", r"\b\d{4}-\d{2}-\d{2}\b|\b\d{2}:\d{2}(?::\d{2})?\b"),
     ("كل الأرقام", r"(?<![\d.])\d+(?:[.,]\d+)?(?![\d])"),
 ]
@@ -56,11 +124,19 @@ PAGE_KEYS = ("h1", "h2", "h3", "tables", "rows", "svg", "buttons", "list_items",
 
 def counts(p: pathlib.Path):
     t = p.read_text(encoding="utf-8")
+    number_text = _without_grade_forms(t)
     return {
         "h2": len(re.findall(r"^## ", t, re.M)),
         "table_rows": len([l for l in t.splitlines() if l.strip().startswith("|")]),
         "list_items": len([l for l in t.splitlines() if re.match(r"^\s*[-*]\s+", l)]),
-        "tokens": {name: collections.Counter(re.findall(pat, t)) for name, pat in TOKENS},
+        "tokens": {
+            name: (
+                _semantic_grade_tokens(t)
+                if name == "درجات الثقة"
+                else collections.Counter(re.findall(pat, number_text if name == "كل الأرقام" else t))
+            )
+            for name, pat in TOKENS
+        },
     }
 
 

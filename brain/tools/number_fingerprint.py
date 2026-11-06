@@ -16,12 +16,16 @@ from __future__ import annotations
 import argparse
 import glob
 import json
+import os
 import re
 import sys
 from datetime import date
 from pathlib import Path
 
 from surface_fingerprint import surfaces, visible  # لا تكرار لمنطق الأسطح
+
+BRAIN = Path(os.environ.get("BRAIN_DIR") or Path(__file__).resolve().parents[1])
+SITE = Path(os.environ.get("SITE_DIR") or BRAIN.parent / "seawatch")
 
 NUM = re.compile(r"\d[\d,.\u0660-\u0669]*")
 DIGIT_MAP = str.maketrans("\u0660\u0661\u0662\u0663\u0664\u0665\u0666\u0667\u0668\u0669", "0123456789")
@@ -80,8 +84,8 @@ def compare(root: Path, site: Path, baseline: str) -> tuple[int, list[str]]:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="بصمة الأرقام المعروضة")
-    ap.add_argument("--root", default=".", help="جذر النظام")
-    ap.add_argument("--site", default="/home/ubuntu/seawatch", help="جذر الموقع")
+    ap.add_argument("--root", default=str(BRAIN), help="جذر النظام")
+    ap.add_argument("--site", default=str(SITE), help="جذر الموقع")
     ap.add_argument("--date", default=date.today().isoformat(), help="تاريخ البصمة أو وسمها")
     ap.add_argument("--out", help="مسار ملف البصمة")
     ap.add_argument("--compare", help="ملف بصمة للمقارنة")

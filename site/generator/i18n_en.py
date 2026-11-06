@@ -158,6 +158,16 @@ def chrome_glossary() -> dict[str, str]:
     return {norm(k): v for k, v in ar_obj.items() if isinstance(v, str) and v.strip() and en_obj.get(k)}
 
 
+def confidence_grade_map() -> dict[str, dict[str, str]]:
+    """الخريطة الحاكمة المشتركة لرمز الدرجة ووصفَي القارئ العربي والإنجليزي."""
+    path = BRAIN / "appendices" / "confidence-grade-map.json"
+    data = json.loads(path.read_text(encoding="utf-8"))
+    grades = data.get("grades")
+    if not isinstance(grades, dict) or not grades:
+        raise RuntimeError(f"خريطة الدرجات مفقودة أو فارغة: {path}")
+    return grades
+
+
 def load_glossary() -> dict[str, str]:
     p = I18N / "glossary.json"
     gl: dict[str, str] = {}
@@ -165,6 +175,8 @@ def load_glossary() -> dict[str, str]:
         d = json.loads(p.read_text(encoding="utf-8"))
         gl = {norm(k): v for k, v in (d.get("entries") or {}).items()}
     gl.update(chrome_glossary())
+    for entry in confidence_grade_map().values():
+        gl[norm(entry["arabic"])] = entry["english"]
     # عناوين ووسوم hero_kpis تُرجَم من سجل البطاقات الحاكم، لا من جدول النص الرسمي.
     registry_path = BRAIN / "appendices" / "card_registry.json"
     if registry_path.is_file():
@@ -311,9 +323,23 @@ def localize_patterns(s: str) -> str | None:
     except Exception:
         pass
 
+    _ZONE_EN = {}
+    try:  # الاسم المركب للقطاع يُقرأ من السجل الحاكم، لا من قائمة ثابتة
+        _rp = BRAIN / "appendices" / "zone-registry.json"
+        _r = json.loads(_rp.read_text(encoding="utf-8"))
+        _ZONE_EN.update({
+            norm(z.get("ar", "")): z.get("en", "")
+            for z in (_r.get("zones") or [])
+            if norm(z.get("ar", "")) and norm(z.get("en", ""))
+        })
+    except Exception:
+        pass
+
     def _tr_area(v: str) -> str:
         """يترجم اسم منطقة، أو «موقع - منطقة»، أو سردًا مفصولًا بـ«·»."""
         t = (v or "").strip()
+        if norm(t) in _ZONE_EN:
+            return _ZONE_EN[norm(t)]
         if t in _AREA_EN:
             return _AREA_EN[t]
         if " · " in t:
@@ -379,6 +405,18 @@ def localize_patterns(s: str) -> str | None:
             return None
         return (f"Incident {m.group(1)} — Area {area}, character {ch[m.group(3)]}, "
                 f"evidence {ev[m.group(4)]}, position {po[m.group(5)]}.")
+
+    # ترويسة بطاقة القطاعات: المستوى والاسم المركب يأتيان من السجل الحاكم.
+    m = re.fullmatch(
+        r"المستوى العام\s+(?P<level>حرج|مرتفع جدًا|مرتفع|متوسط|منخفض)\.\s+"
+        r"ويظل\s+(?P<zone>.+?)\s+أعلى القطاعات عند مستوى\s+(?P=level)\.",
+        n,
+    )
+    if m:
+        level = _OVERALL_LEVEL_EN.get(m.group("level"))
+        zone = _tr_area(m.group("zone"))
+        if level and zone != m.group("zone") and not ARABIC.search(zone):
+            return f"Overall level: {level}. The {zone} remains the highest sector at {level} level."
 
     # عائلة المستوى العام: بنية كاملة ومقفلة على مستوى/قطاعات/عدد/مرجع معروف؛
     # اختلافات الصياغة المقبولة محصورة في «يستند/يُسند»، «وهو/هذا»، و«لا ترفع/لا تُرفع».
@@ -950,10 +988,24 @@ def _collapse_inline_source_duplicates(out: str) -> str:
             return clean_before + match.group("span")
         return match.group(0)
 
-    previous = None
-    while previous != out:
-        previous, out = out, pattern.sub(replace, out)
-    return out
+    # هذه العملية انقاصية: كل استبدال صالح يحذف نسخة نصية من المصدر، لذلك
+    # لا يجوز أن يتجاوز عدد الدورات طول HTML الابتدائي، ولا يجوز تمرير نتيجة
+    # تغيّرت من دون أن تنقص. الفشل هنا مانع حتى لا يعاد بناء تقرير غير موثوق.
+    max_iterations = max(1, len(out) + 1)
+    for iteration in range(1, max_iterations + 1):
+        next_out = pattern.sub(replace, out)
+        if next_out == out:
+            return out
+        if len(next_out) >= len(out):
+            raise RuntimeError(
+                "حارس ترجمة مانع: ضغط تكرارات المصادر لم يكن انقاصيًا "
+                f"في الدورة {iteration} (الطول {len(out)} ثم {len(next_out)})."
+            )
+        out = next_out
+    raise RuntimeError(
+        "حارس ترجمة مانع: ضغط تكرارات المصادر لم يصل إلى الثبات "
+        f"ضمن السقف الانقاصي {max_iterations} دورة."
+    )
 
 
 def card_row_labels() -> dict[str, str]:
@@ -972,6 +1024,75 @@ def card_row_labels() -> dict[str, str]:
             if cid and key and label_en:
                 out[f"{cid}:{key}"] = label_en
     return out
+
+
+def _governed_event_card_labels(gl: dict[str, str]) -> dict[str, str]:
+    """اقرأ أوسمة صفوف بطاقة الأحداث من العقد ثم حلّها في المعجم.
+
+    قد يطابق مترجم النص مفتاحًا أطول يبدأ بكلمة «المصدر» ويضع عنوان جدول
+    («Source and limits») داخل وسم البطاقة. هذه الأوسمة بنيوية، لذلك تُثبت
+    بعد الترجمة من العقد نفسه، مع اشتقاق «Source» من مدخل المعجم ذي البادئة
+    عندما لا يوجد مدخل مباشر.
+    """
+    contract_path = BRAIN / "appendices" / "event-card-contract.md"
+    try:
+        contract = contract_path.read_text(encoding="utf-8")
+    except (OSError, UnicodeError):
+        return {}
+    section = re.search(
+        r"^##\s+الصفوف التسعة\s*$.*?(?=^###\s+الصف الملغى\s*$)",
+        contract,
+        re.M | re.S,
+    )
+    if not section:
+        return {}
+    ar_labels = {
+        int(match.group(1)): match.group(2).strip()
+        for match in re.finditer(
+            r"^\s*\|\s*(\d+)\s*\|\s*([^|]+?)\s*\|", section.group(0), re.M
+        )
+    }
+    labels: dict[str, str] = {}
+    for number in (4, 5, 6, 7, 8):
+        arabic = ar_labels.get(number, "")
+        if not arabic:
+            continue
+        english = gl.get(arabic, "")
+        if not english:
+            prefixed = [
+                value for key, value in gl.items()
+                if isinstance(key, str) and key.startswith(f"{arabic}:")
+                and isinstance(value, str) and value.strip()
+            ]
+            if len(prefixed) == 1:
+                english = prefixed[0].split(":", 1)[0].strip()
+        if english and not ARABIC.search(english):
+            labels[str(number)] = english.strip()
+    return labels
+
+
+_EVENT_CARD_LABEL_RE = re.compile(
+    r'(?P<prefix><div\b(?=[^>]*\bclass="ev-field\b)'
+    r'(?=[^>]*\bdata-row="(?P<row>\d+)")[^>]*>.*?'
+    r'<span\b(?=[^>]*\bclass="ev-k\b)[^>]*>)'
+    r'(?P<label>[^<]*)(?P<suffix></span>)',
+    re.S,
+)
+
+
+def _apply_governed_event_card_labels(out: str, gl: dict[str, str]) -> str:
+    """ثبّت الأوسمة البنيوية بعد الترجمة، ولا تغيّر قيم الصفوف أو متنها."""
+    labels = _governed_event_card_labels(gl)
+    if not labels:
+        return out
+
+    def replace(match: re.Match[str]) -> str:
+        label = labels.get(match.group("row"))
+        if not label:
+            return match.group(0)
+        return match.group("prefix") + label + match.group("suffix")
+
+    return _EVENT_CARD_LABEL_RE.sub(replace, out)
 
 
 def _apply_card_row_labels(out: str) -> str:
@@ -1058,6 +1179,7 @@ def translate_page(html_text: str, date: str, tm: dict[str, str], gl: dict[str, 
     remaining = [t for t, translated in zip(c.units, units) if not _unit_ok(t, translated)]
     out = _collapse_inline_source_duplicates(out)
     out = _fix_chrome(out)
+    out = _apply_governed_event_card_labels(out, gl)
     out = _apply_card_row_labels(out)
     out = normalize_document_head(out)
     return out, [norm(x) for x in remaining], len(c.units)
@@ -1080,7 +1202,7 @@ def main() -> int:
     uniq = sorted(set(missing))
     if uniq:
         print(f"   ✘ نصوص عربية بلا ترجمة: {len(uniq)}")
-        for s in uniq[:60]:
+        for s in uniq:
             print(f"      · {s[:120]}")
     else:
         print("   ✔ لا نص عربي متبقٍّ في الصفحة المترجمة")
