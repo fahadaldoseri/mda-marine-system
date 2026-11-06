@@ -270,7 +270,9 @@ def run(root, date, only_phase=None, redo=None):
         cmd = [sub(c, date, root) for c in s["command"]]
         attempts = 1 + (int(s["on_fail"].split(":")[1]) if str(s.get("on_fail", "")).startswith("retry:") else 0)
         for n in range(1, attempts + 1):
+            started = time.perf_counter()
             r = subprocess.run(cmd, cwd=root, capture_output=True, text=True, env=step_env(root, date))
+            elapsed_seconds = time.perf_counter() - started
             logdir = os.path.join(root, "logs/runbook", date)
             os.makedirs(logdir, exist_ok=True)
             logf = os.path.join(logdir, f"{s['id']}.log")
@@ -281,7 +283,8 @@ def run(root, date, only_phase=None, redo=None):
             except Exception:  # noqa: BLE001
                 def redact(text: str) -> str:  # احتياط: لا إخفاء إن غاب المرشّح
                     return text
-            open(logf, "w", encoding="utf-8").write(redact((r.stdout or "") + (r.stderr or "")))
+            output = redact((r.stdout or "") + (r.stderr or ""))
+            open(logf, "w", encoding="utf-8").write(output.rstrip("\n") + f"\nelapsed_seconds={elapsed_seconds:.6f}\n")
             ok_rc, warn_rc = s.get("ok_rc", [0]), s.get("warn_rc", [])
             probs = check_asserts(root, s, date) if (r.returncode in ok_rc or r.returncode in warn_rc) else [f"رمز الخروج {r.returncode}"]
             if not probs:
@@ -407,14 +410,19 @@ ROOT_SEEDS = ("INDEX.md", "CLAUDE.md", "SETUP.md", "README.md")
 
 
 def static_paths(s):
+    runtime_outputs = set(s.get("runtime_outputs", []))
     for key in ("reads", "writes"):
         for p in s.get(key, []):
+            if p in runtime_outputs:
+                continue
             yield key, p
     if s.get("prompt"):
         yield "prompt", s["prompt"]
     links = s.get("links", {})
     for k in ("files", "folders", "gates", "tests"):
         for p in links.get(k, []):
+            if p in runtime_outputs:
+                continue
             yield "links." + k, p
     if s["kind"] != "agent" and s.get("command"):
         for c in s["command"][1:]:

@@ -54,3 +54,10 @@ It checks the manifest policy key, that every rendered unit has a counterpart in
 ## References
 
 - `references/playbook.md` — the exact blocker sequence, symptoms, causes and proven fixes from a real round.
+
+## حدود المهارة
+هذه المهارة لا تؤلف الوقائع أو تقدير التهديد؛ المهارة الجارة `marine-news-brain` تفعل ذلك.
+
+
+## حلقة التعلم الذاتي
+بعد كل عطل أو ملاحظة: **عطل** (العرض ورمز الخروج) ← **درس** (السبب الجذري) ← **حاجز** (قاعدة أو فحص قابل للتنفيذ) ← **اختبار** (حالة سليمة تمر وحالة مخالفة تمنع). إذا لم يوجد أمر ومخرج فعليان للحاجز، اكتب «وعْد غير مقيس/لم أختبره» ولا تعلن نجاحًا.

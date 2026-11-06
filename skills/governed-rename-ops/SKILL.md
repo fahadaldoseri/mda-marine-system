@@ -72,3 +72,6 @@ license: Complete terms in LICENSE.md
 
 - `scripts/scan_name_surfaces.py` — جرد الاسم القديم/الجديد على أسطح متعددة مع تمييز الأسطح الحاكمة ورمز خروج.
 - `references/case-k298-k309.md` — الحالة الحقيقية: الأوامر · الفشل · الإصلاح · الإثبات · الدروس.
+
+## حدود المهارة
+هذه المهارة لا تؤلف الخبر أو تقرر لغة القارئ؛ المهارتان الجارتان `marine-news-brain` و`military-arabic-editing` تفعلان ذلك.

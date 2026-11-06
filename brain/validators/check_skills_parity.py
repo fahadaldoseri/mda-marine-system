@@ -52,6 +52,45 @@ def approved_names(root: Path, skills_arg: str, skills_file: Path | None) -> lis
     return sorted(path.name for path in mirror.iterdir() if path.is_dir() and path.name not in SKIP_DIRS)
 
 
+def approved_aliases(
+    root: Path,
+    names: set[str],
+    *,
+    skills_arg: str,
+    skills_file_arg: str,
+) -> dict[str, str]:
+    """Validate aliases only for the selected project scope.
+
+    An explicit ``--skills`` list is an isolated fixture/override and must
+    not be coupled to the project's full alias registry.  Likewise, an
+    external ``--skills-file`` describes another root; the local alias map is
+    ignored in that case.  The normal unscoped invocation remains fail-closed.
+    """
+    path = root / "runbook" / "skill-aliases.json"
+    if not path.is_file():
+        return {}
+    if skills_arg.strip():
+        return {}
+    if skills_file_arg.strip():
+        selected = Path(skills_file_arg).expanduser().resolve()
+        try:
+            selected.relative_to(root)
+        except ValueError:
+            return {}
+    data = json.loads(path.read_text(encoding="utf-8"))
+    aliases = data.get("aliases") if isinstance(data, dict) else None
+    if not isinstance(aliases, dict) or not all(
+        isinstance(old, str) and old.strip() and isinstance(new, str) and new.strip()
+        for old, new in aliases.items()
+    ):
+        raise ValueError("خريطة توافق المهارات يجب أن تحوي aliases من أسماء إلى أسماء")
+    normalized = {old.strip(): new.strip() for old, new in aliases.items()}
+    invalid = {old: new for old, new in normalized.items() if new not in names or old in names}
+    if invalid:
+        raise ValueError(f"أهداف خريطة التوافق غير معتمدة أو تتعارض مع القائمة: {invalid}")
+    return normalized
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="قارن بصمات ملفات المهارات المعتمدة بين المصدر والمرآة")
     parser.add_argument("--root", default=str(Path(__file__).resolve().parents[1]), help="جذر brain")
@@ -76,6 +115,12 @@ def main(argv: list[str] | None = None) -> int:
         return 2
     try:
         names = approved_names(root, args.skills, skills_file)
+        aliases = approved_aliases(
+            root,
+            set(names),
+            skills_arg=args.skills,
+            skills_file_arg=args.skills_file,
+        )
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(f"✘ فشل مغلق — تعذّر قراءة قائمة المهارات المعتمدة: {type(exc).__name__}: {exc}")
         return 2
@@ -110,7 +155,7 @@ def main(argv: list[str] | None = None) -> int:
             elif src[rel] != dst[rel]:
                 differences.append(f"{skill}/{rel} (بصمة مختلفة: {src[rel][:12]}… != {dst[rel][:12]}…)")
 
-    print(f"المهارات: {len(names)} · الملفات: {total_files} · المختلف: {len(differences)} · المفقود: {missing_files} · الزائد: {extra_files}")
+    print(f"المهارات: {len(names)} · aliases: {len(aliases)} · الملفات: {total_files} · المختلف: {len(differences)} · المفقود: {missing_files} · الزائد: {extra_files}")
     if differences:
         print("✘ فشل مغلق — اختلاف بصمة المهارات:")
         for item in differences:

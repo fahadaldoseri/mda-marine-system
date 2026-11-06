@@ -1,0 +1,64 @@
+# مخرجات تشغيل مهارة تدوير الأسرار
+
+التشغيل الجاف على المشروع الحقيقي لم يكتب ملفات ولم يحدّث الجهة الخارجية.
+كل القيم السرية محجوبة؛ المعروض بصمات وأطوال وعدّادات فقط.
+
+## secret_propose
+
+### secret_propose
+$ python3 python3 /home/ubuntu/skills/secret-rotation-ops/scripts/propose_tightening.py --brain /home/ubuntu/brain-marine-news
+  السجلات المقروءة: 794 · أصناف الثغرات: 8
+  [other] 595 حالة · أمثلة: ك-01, ك-221, ك-223, ك-224, ك-226
+       التشديد: أضف قاعدة تصنيف صريحة قبل إغلاق العطل
+       اختبار سلبي: assert classify_fault(record) != 'other'
+  [output-redaction] 82 حالة · أمثلة: ك-222, ك-05, ك-36, ك-49, ك-50
+       التشديد: ثبّت الاختبار السلبي المقترح لصنف output-redaction ثم اكسره عمدًا للتأكد من المنع
+       اختبار سلبي: assert run_rotation_capture().contains_secret == False
+  [secure-backup] 50 حالة · أمثلة: ك-225, ك-04, ك-06, ك-13, ك-60
+       التشديد: ثبّت الاختبار السلبي المقترح لصنف secure-backup ثم اكسره عمدًا للتأكد من المنع
+       اختبار سلبي: assert backup_permissions(rotation_backup) == {'file': 0o600, 'dir': 0o700}
+  [history-leak] 30 حالة · أمثلة: ك-33, ك-62, ك-75, ك-149, ك-153
+       التشديد: ثبّت الاختبار السلبي المقترح لصنف history-leak ثم اكسره عمدًا للتأكد من المنع
+       اختبار سلبي: assert scan_git_history(secret).printed_values == 0
+  [consumer-inventory] 15 حالة · أمثلة: ك-20, ك-64, ك-78, ك-82, ك-72
+       التشديد: ثبّت الاختبار السلبي المقترح لصنف consumer-inventory ثم اكسره عمدًا للتأكد من المنع
+       اختبار سلبي: assert inventory_consumers(project).before_rotation is not None
+  [live-verification] 13 حالة · أمثلة: ك-24, ك-70, ك-22, م-01, م-02
+       التشديد: ثبّت الاختبار السلبي المقترح لصنف live-verification ثم اكسره عمدًا للتأكد من المنع
+       اختبار سلبي: assert rotate(live=True).post_check == True
+  [portable-paths] 8 حالة · أمثلة: ك-59, ك-77, ك-25, ك-263, ك-266
+       التشديد: ثبّت الاختبار السلبي المقترح لصنف portable-paths ثم اكسره عمدًا للتأكد من المنع
+       اختبار سلبي: assert run_portable_gate(brain, site) == 0
+  [documentation] 1 حالة · أمثلة: ك-08
+       التشديد: ثبّت الاختبار السلبي المقترح لصنف documentation ثم اكسره عمدًا للتأكد من المنع
+       اختبار سلبي: assert rotation_docs.has_safe_audit_entry and rotation_docs.contains_secret == False
+  القاعدة: لا تُغلق الثغرة قبل تسجيل السبب الجذري والقاعدة والاختبار السلبي.
+EXIT_CODE=0
+
+## secret_rotate_dry
+
+### secret_rotate_dry
+$ python3 python3 /home/ubuntu/skills/secret-rotation-ops/scripts/tools/rotate_webhook_secret.py --brain /home/ubuntu/brain-marine-news --repo /home/ubuntu/brain-marine-news --dry-run --skip-telegram
+  جرد المستهلكين قبل التدوير: 60 مسارًا
+  فحص سجل Git السابق: 0 موضعًا؛ لا تُطبع القيم
+  الويب هوك الحالي: غير مُسجَّل · استجابة_API=SKIPPED
+  البصمة القديمة=bb6dd0466c21 · البصمة الجديدة=08e930489123 · الأطوال فقط محفوظة (43/43)
+  النسخة الاحتياطية المخططة: /home/ubuntu/brain-marine-news/state/secret-rotation-backups · الملفات الموجودة=2
+  الوثيقة المخططة: /home/ubuntu/brain-marine-news/appendices/security-notes.md
+  تجربة فقط — لم تُكتب ملفات ولم تُحدَّث الجهة الخارجية
+EXIT_CODE=0
+
+## secret_portable
+
+### secret_portable
+$ python3 python3 /home/ubuntu/skills/secret-rotation-ops/scripts/validators/check_portable_paths.py --brain /home/ubuntu/brain-marine-news --site /home/ubuntu/seawatch
+بوابة قابلية النقل — المسار المطلق في الشيفرة
+  الجذور المفحوصة: /home/ubuntu/brain-marine-news · /home/ubuntu/seawatch
+  ✔ لا مسار مطلق في أي ملف تنفيذي — النظام يعمل من أي مسار.
+EXIT_CODE=0
+
+## secret_guard
+
+### secret_guard
+$ python3 python3 /home/ubuntu/skills/secret-rotation-ops/scripts/validators/_guard.py
+EXIT_CODE=0

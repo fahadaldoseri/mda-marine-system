@@ -84,3 +84,7 @@ python3 scripts/propose_tightening.py --brain "$BRAIN"
 - `scripts/validators/check_portable_paths.py` لمنع المسارات المطلقة.
 - `scripts/propose_tightening.py` لحلقة التحسين الذاتي.
 - `references/rotation-runbook.md` لتسلسل الجرد والنسخ والتدوير والتحقق.
+
+
+## حدود المهارة
+هذه المهارة لا تدير إعدادات التشغيل العادية أو محتوى التقرير؛ المهارة الجارة `project-evidence-and-coverage-ops` تدير الأدلة غير السرية.
