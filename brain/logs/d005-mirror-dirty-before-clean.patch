@@ -1,0 +1,155 @@
+[1mdiff --git a/brain/appendices/code-paths.json b/brain/appendices/code-paths.json[m
+[1mindex 3a84b061..9971d928 100644[m
+[1m--- a/brain/appendices/code-paths.json[m
+[1m+++ b/brain/appendices/code-paths.json[m
+[36m@@ -104,7 +104,9 @@[m
+     "brain/backup-repo/**",[m
+     "site/notes/**",[m
+     "site/docs/**",[m
+[31m-    "brain/docs/**"[m
+[32m+[m[32m    "brain/docs/**",[m
+[32m+[m[32m    "brain/decisions/registry.json",[m
+[32m+[m[32m    "brain/special-reports/2026-11-05-الخليج-العربي.html"[m
+   ],[m
+   "data_note": "الترتيب: يُطابَق code أولًا ثم data؛ فالملفات القاعدية المعدودة في code داخل appendices/ و site/sources/ تتقدم على نمط data الأعم.",[m
+   "backup_may_overwrite": "data فقط. أما code فلا يكتبه النسخ الاحتياطي فوق المستودع؛ يأتي منه (tools/apply_from_github.py).",[m
+[1mdiff --git a/brain/tools/browser_measure.py b/brain/tools/browser_measure.py[m
+[1mindex 8381f03f..c7ed8693 100644[m
+[1m--- a/brain/tools/browser_measure.py[m
+[1m+++ b/brain/tools/browser_measure.py[m
+[36m@@ -13,7 +13,7 @@[m
+ [m
+ الاستعمال:[m
+   browser_measure.py --url <رابط> --out audit/measurements/live.json[m
+[31m-  browser_measure.py --url file:///home/ubuntu/seawatch/dist/reports/2026-11-05.html[m
+[32m+[m[32m  browser_measure.py --url file://$SITE_DIR/dist/reports/2026-11-05.html[m
+   browser_measure.py --check overflow --check decision --phrase "هجمات مؤكدة"[m
+ [m
+ رمز الخروج: 0 كل الفحوص المطلوبة ناجحة · 2 فشل مانع.[m
+[36m@@ -22,10 +22,13 @@[m [mfrom __future__ import annotations[m
+ [m
+ import argparse[m
+ import json[m
+[32m+[m[32mimport os[m
+ import sys[m
+ from datetime import datetime, timezone[m
+ from pathlib import Path[m
+ [m
+[32m+[m[32mBRAIN = Path(os.environ.get("BRAIN_DIR") or Path(__file__).resolve().parents[1])[m
+[32m+[m
+ # أسئلة القائد العشرة تُقرأ من مصدر حقيقي واحد: runbook/readiness-questions.json[m
+ READINESS_FILE = "runbook/readiness-questions.json"[m
+ DEFAULT_READINESS = [[m
+[36m@@ -33,6 +36,13 @@[m [mDEFAULT_READINESS = [[m
+     "آخر تحديث", "التحذيرات", "المراقبة", "الاستهداف", "الخلاصة",[m
+ ][m
+ [m
+[32m+[m[32m# بعض المواقع الرسمية تُنشئ قائمة الوقائع بعد تحميل HTML وتمنع بصمة Chromium[m
+[32m+[m[32m# الافتراضية؛ هذه بصمة سياق متصفح حقيقي ثابتة، وليست تجاوزًا لشرط وجود المرساة.[m
+[32m+[m[32mANCHOR_BROWSER_USER_AGENT = ([m
+[32m+[m[32m    "Mozilla/5.0 (X11; Linux x86_64; rv:158.0) Gecko/20100101 Firefox/158.0"[m
+[32m+[m[32m)[m
+[32m+[m[32mANCHOR_DOM_WAIT_MS = 15000[m
+[32m+[m
+ [m
+ def load_readiness(root: Path, url: str) -> list[str]:[m
+     """يقرأ الأسئلة من المصدر الواحد، ويختار نمط اللغة بحسب الصفحة المقيسة."""[m
+[36m@@ -125,14 +135,19 @@[m [mJS_MEASURE = r"""[m
+ [m
+ def measure(url: str, widths: list[int], questions: list[str], phrases: list[str],[m
+             base: str | None = None) -> dict:[m
+[31m-    from playwright.sync_api import sync_playwright  # استيراد مؤجَّل[m
+[32m+[m[32m    from playwright.sync_api import Error as PlaywrightError, sync_playwright  # استيراد مؤجَّل[m
+     from urllib.parse import urljoin[m
+ [m
+     result = {"url": url, "at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "widths": {}}[m
+     with sync_playwright() as pw:[m
+         browser = pw.chromium.launch(args=["--no-sandbox"])[m
+         for width in widths:[m
+[31m-            page = browser.new_page(viewport={"width": width, "height": 900}, device_scale_factor=1)[m
+[32m+[m[32m            context = browser.new_context([m
+[32m+[m[32m                viewport={"width": width, "height": 900},[m
+[32m+[m[32m                device_scale_factor=1,[m
+[32m+[m[32m                user_agent=ANCHOR_BROWSER_USER_AGENT,[m
+[32m+[m[32m            )[m
+[32m+[m[32m            page = context.new_page()[m
+             errs: list[str] = [][m
+             warns: list[str] = [][m
+             pageerrs: list[str] = [][m
+[36m@@ -148,29 +163,63 @@[m [mdef measure(url: str, widths: list[int], questions: list[str], phrases: list[str[m
+             data["pageerrors"] = pageerrs[:3][m
+             # أهداف المراسي: داخليًّا من الصفحة نفسها، وخارجيًّا بفتح الصفحة الهدف مرة لكل مرساة[m
+             targets: dict[str, bool] = {}[m
+[32m+[m[32m            target_details: dict[str, dict] = {}[m
+             for link in data.get("anchor_links", []):[m
+                 if link["page"] == "(نفس الصفحة)":[m
+                     targets[f"#{link['hash']}"] = bool(link.get("same_page_exists"))[m
+[32m+[m[32m                    target_details[f"#{link['hash']}"] = {[m
+[32m+[m[32m                        "http_status": None,[m
+[32m+[m[32m                        "dom_wait_ms": 0,[m
+[32m+[m[32m                        "exists": targets[f"#{link['hash']}"] ,[m
+[32m+[m[32m                    }[m
+                     continue[m
+                 key = f"{link['page']}#{link['hash']}"[m
+                 if key in targets:[m
+                     continue[m
+                 try:[m
+[31m-                    aux = browser.new_page()[m
+[32m+[m[32m                    aux = context.new_page()[m
+                     target_page = link["page"][m
+                     if base and url.startswith("file://") and target_page in ("", "/"):[m
+                         target_page = "/index.html"[m
+                     if base and url.startswith("file://") and target_page.startswith("/"):[m
+                         target_page = "file://" + base.rstrip("/") + target_page[m
+[31m-                    aux.goto(target_page if target_page.startswith("file://") else urljoin(url, target_page),[m
+[31m-                             wait_until="load", timeout=45000)[m
+[32m+[m[32m                    response = aux.goto([m
+[32m+[m[32m                        target_page if target_page.startswith("file://") else urljoin(url, target_page),[m
+[32m+[m[32m                        wait_until="load", timeout=45000,[m
+[32m+[m[32m                    )[m
+[32m+[m[32m                    status = response.status if response is not None else None[m
+[32m+[m[32m                    aux.wait_for_function([m
+[32m+[m[32m                        "(h) => !!document.getElementById(h)",[m
+[32m+[m[32m                        arg=link["hash"], timeout=ANCHOR_DOM_WAIT_MS,[m
+[32m+[m[32m                    )[m
+                     targets[key] = bool(aux.evaluate("(h) => !!document.getElementById(h)", link["hash"]))[m
+[32m+[m[32m                    if not targets[key]:[m
+[32m+[m[32m                        if status is not None and not (200 <= status < 400):[m
+[32m+[m[32m                            raise PlaywrightError(f"anchor target HTTP {status}; DOM target absent")[m
+[32m+[m[32m                        raise PlaywrightError("anchor target absent after DOM wait")[m
+[32m+[m[32m                    target_details[key] = {[m
+[32m+[m[32m                        "http_status": status,[m
+[32m+[m[32m                        "dom_wait_ms": ANCHOR_DOM_WAIT_MS,[m
+[32m+[m[32m                        "exists": targets[key],[m
+[32m+[m[32m                    }[m
+                     aux.close()[m
+[31m-                except Exception:  # noqa: BLE001[m
+[32m+[m[32m                except PlaywrightError as exc:[m
+                     targets[key] = False[m
+[32m+[m[32m                    target_details[key] = {[m
+[32m+[m[32m                        "http_status": None,[m
+[32m+[m[32m                        "dom_wait_ms": ANCHOR_DOM_WAIT_MS,[m
+[32m+[m[32m                        "exists": False,[m
+[32m+[m[32m                        "error": str(exc)[:200],[m
+[32m+[m[32m                    }[m
+[32m+[m[32m                    try:[m
+[32m+[m[32m                        aux.close()[m
+[32m+[m[32m                    except Exception:[m
+[32m+[m[32m                        pass[m
+             data["anchor_targets"] = targets[m
+[32m+[m[32m            data["anchor_target_details"] = target_details[m
+             result["widths"][str(width)] = data[m
+             page.close()[m
+[32m+[m[32m            context.close()[m
+         browser.close()[m
+     return result[m
+ [m
+[36m@@ -231,7 +280,7 @@[m [mdef main() -> int:[m
+     ap.add_argument("--soft", action="append", default=[],[m
+                     choices=["overflow", "console", "anchor", "decision", "readiness", "phrases"],[m
+                     help="فحص يُقاس ويُبلَّغ ولا يمنع")[m
+[31m-    ap.add_argument("--root", default=".", help="جذر النظام (لقراءة أسئلة الجاهزية)")[m
+[32m+[m[32m    ap.add_argument("--root", default=str(BRAIN), help="جذر النظام (لقراءة أسئلة الجاهزية)")[m
+     ap.add_argument("--base-file", help="جذر الموقع المحلي لحلّ المسارات المطلقة في file://")[m
+     ap.add_argument("--widths", default="1440,1920", help="عروض الشاشة")[m
+     ap.add_argument("--check", action="append", default=[],[m
