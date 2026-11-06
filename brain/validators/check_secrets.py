@@ -47,6 +47,13 @@ PATTERNS = {
     "معرّف محادثة تلغرام": r"(?i)\b(?:TELEGRAM_)?(?:OWNER_)?CHAT_ID\b\s*[=:]\s*[\"']?-?\d{6,}",
 }
 
+# استثناء ضيق موثّق: في Python قد يطابق الفحص مرجع دالة داخليًا عاريًا مثل
+# ``token = _canonical_identifier_token``. هذا ليس قيمة نصية ولا جدول أسرار؛
+# القيم المقتبسة، والقيم ذات الأنماط السرية، وكل الامتدادات الأخرى تبقى مانعة.
+PY_BARE_INTERNAL_REF = re.compile(
+    r"(?i)\b(TOKEN|API_KEY|APIKEY|SECRET|PASSWORD|BOT_TOKEN)\b\s*[=:]\s*_([A-Za-z_][A-Za-z0-9_]*)"
+)
+
 TEXT_SUFFIXES = {".py", ".sh", ".md", ".json", ".jsonl", ".txt", ".html", ".css", ".js",
                  ".yml", ".yaml", ".env", ".ini", ".cfg", ".log", ".csv", ""}
 
@@ -60,8 +67,15 @@ def env_secret_values() -> list[str]:
 def scan_text(path: str, text: str, env_vals: list[str]) -> list[tuple[str, str]]:
     hits: list[tuple[str, str]] = []
     for kind, pattern in PATTERNS.items():
-        if re.search(pattern, text):
+        for match in re.finditer(pattern, text):
+            if (
+                kind == "تعيين سرّي بقيمة"
+                and path.lower().endswith(".py")
+                and PY_BARE_INTERNAL_REF.search(text, match.start(), match.end())
+            ):
+                continue
             hits.append((kind, path))
+            break
     for value in env_vals:
         if value in text:
             hits.append(("قيمة سرّية فعلية من البيئة", path))

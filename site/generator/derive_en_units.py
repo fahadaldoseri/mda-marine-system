@@ -146,7 +146,18 @@ def build_pairs_history(date: str, back: int = 14):
 # intentionally date-agnostic: the current report date is only a fallback when
 # the governing pairs do not themselves expose a full incident key.
 _ID_DASHES = "‐‑‒–—−﹘﹣－"
-_ARABIC_DIGITS = str.maketrans("\u0660\u0661\u0662\u0663\u0664\u0665\u0666\u0667\u0668\u0669\u06f0\u06f1\u06f2\u06f3\u06f4\u06f5\u06f6\u06f7\u06f8\u06f9", "01234567890123456789")
+
+
+def _build_arabic_digits() -> dict[int, int]:
+    """ابنِ خريطة الأرقام العربية والهندية-الفارسية بلا قيمة نصية طويلة."""
+    return str.maketrans(
+        "".join(chr(0x0660 + i) for i in range(10))
+        + "".join(chr(0x06F0 + i) for i in range(10)),
+        "0123456789" * 2,
+    )
+
+
+_ARABIC_DIGITS = _build_arabic_digits()
 _ID_SEP = rf"[-{re.escape(_ID_DASHES)}]"
 _IDENTIFIER_RE = re.compile(
     rf"(?<![A-Za-z0-9])(?:MN{_ID_SEP}\d{{4}}{_ID_SEP}\d{{2}}{_ID_SEP}\d{{2}}{_ID_SEP}\d{{2}}|MN{_ID_SEP}\d{{2}}{_ID_SEP}\d{{2}}|\d{{2}}{_ID_SEP}\d{{2}})(?![A-Za-z0-9])",
