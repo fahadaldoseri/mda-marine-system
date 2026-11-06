@@ -175,13 +175,14 @@
       "kind": "cmd",
       "blocking": false,
       "expect": 0,
-      "open_until": "2026-11-08",
       "title": "ربط الخريطة بالبطاقات",
       "argv": [
         "bash",
         "-lc",
         "grep -rq 'id=\"ev-' \"$SITE/dist\" && grep -rq 'data-event-id' \"$SITE/dist\""
-      ]
+      ],
+      "closed": "2026-11-06",
+      "evidence": "audit/measurements/map-integration-after-2026-11-06.json"
     },
     {
       "id": "ب-11",
@@ -202,7 +203,6 @@
       "kind": "cmd",
       "blocking": false,
       "expect": 0,
-      "open_until": "2026-11-10",
       "title": "الوحدة غير المربوطة",
       "argv": [
         "python3",
@@ -210,7 +210,9 @@
         "--root",
         "{root}",
         "--orphans"
-      ]
+      ],
+      "closed": "2026-11-06",
+      "evidence": "audit/measurements/map-integration-after-2026-11-06.json"
     },
     {
       "id": "ب-13",

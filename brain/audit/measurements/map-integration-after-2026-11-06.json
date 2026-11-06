@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-06",
+  "result_ar": "نجح الدمج: map_gulf يستدعي map_cluster.cluster_points — بناء الموقع rc=0 بلا فشل مغلق",
+  "before": {
+    "عدد العلامات mp-event": 10,
+    "شارات عنقود mp-cluster": 2,
+    "خطوط إسناد mp-leader": 9,
+    "عناصر الخريطة الكلية": 158
+  },
+  "after": {
+    "mp-event": 9,
+    "mp-cluster": 1,
+    "mp-leader": 9
+  },
+  "root_cause_ar": "عقد الوحدة: cluster_points(points, project, min_sep) · كل نقطة تحتاج id و lon و lat · project(lon, lat) تعيد (x, y) · العنقود قاموس فيه members/anchor/centroid. النداءات الثلاثة الفاشلة خالفت العقد: بلا lon/lat · project بوسيط واحد · وتمرير العنقود نفسه بدل members.",
+  "traceback_file": "audit/measurements/map-traceback-2026-11-06.txt"
+}
