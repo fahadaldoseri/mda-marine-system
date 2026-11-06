@@ -1,6 +1,6 @@
 {
   "schema": "governing-assets-merkle/v1",
-  "generated_at": "2026-11-05T04:15:00.986058+00:00",
+  "generated_at": "2026-11-06T07:42:16.497174+00:00",
   "config": "/home/ubuntu/brain-marine-news/tools/governing-assets.txt",
   "selection": [
     "GLOB /home/ubuntu/skills/*/SKILL.md",
@@ -27,16 +27,16 @@
     "odd_level": "duplicate the final node",
     "root": "final single node, hexadecimal lowercase"
   },
-  "file_count": 2988,
-  "root": "1b70f5fab46144ef28cdc3428ead4978df45a8781304fcfca53814d361f3fc48",
+  "file_count": 3019,
+  "root": "337f2099ba1c607bf59fe429873a52c0bd5638a2966f6c68b554bad093454571",
   "files": [
     {
       "path": "/home/ubuntu/brain-marine-news/INDEX.md",
-      "lines": 194,
-      "sha256": "89df98291560f5862e97b0dc54085dc26019fbf0be9234b23927cd8e649164b0",
-      "size": 20308,
-      "mtime": "2026-11-04T13:29:24.549078+00:00",
-      "mtime_ns": 1793798964549078376,
+      "lines": 214,
+      "sha256": "9a2ae224e9f1346e67ed209882aea4c818e38878ecf6306973cdde42aef63b11",
+      "size": 22702,
+      "mtime": "2026-11-05T23:00:30.741584+00:00",
+      "mtime_ns": 1793919630741583796,
       "exists": true
     },
     {
@@ -59,20 +59,20 @@
     },
     {
       "path": "/home/ubuntu/brain-marine-news/audit/asset-floor.json",
-      "lines": 23941,
-      "sha256": "9cb69478a9079d102bfc4b3c24460481a9686633a077d5999e663f32ca4783f9",
-      "size": 872107,
-      "mtime": "2026-11-05T04:15:00.279993+00:00",
-      "mtime_ns": 1793852100279993215,
+      "lines": 24189,
+      "sha256": "5baa1fb3988036ad6584dfc576c9dd0749e3b8aa32fba037117e48f21db5c4e5",
+      "size": 880752,
+      "mtime": "2026-11-06T07:42:15.793062+00:00",
+      "mtime_ns": 1793950935793062115,
       "exists": true
     },
     {
       "path": "/home/ubuntu/brain-marine-news/runbook/runbook.json",
-      "lines": 5401,
-      "sha256": "c2c1499c54977faa06a35dfd8c54d710e51a403ee66afd4ec90a995f3bbdb518",
-      "size": 152654,
-      "mtime": "2026-11-04T20:29:32.840009+00:00",
-      "mtime_ns": 1793824172840009055,
+      "lines": 5669,
+      "sha256": "b8a6c5bbf6e93b58f85aa58e434dd7753a380e6660aba22ce57b06be641a8f2e",
+      "size": 181374,
+      "mtime": "2026-11-06T07:22:41.643601+00:00",
+      "mtime_ns": 1793949761643601091,
       "exists": true
     },
     {
@@ -116,8 +116,8 @@
       "lines": 263,
       "sha256": "abe5714e9b031d246d4875eef9966b0b81718d00578a1231b2a7b0fca446695d",
       "size": 23215,
-      "mtime": "2026-11-04T04:29:40.694984+00:00",
-      "mtime_ns": 1793766580694983677,
+      "mtime": "2026-11-05T04:34:05.180158+00:00",
+      "mtime_ns": 1793853245180157833,
       "exists": true
     },
     {
@@ -526,6 +526,24 @@
       "exists": true
     },
     {
+      "path": "/home/ubuntu/brain-marine-news/tests/test_decisions_registry.py",
+      "lines": 119,
+      "sha256": "2b85e254153a678976bc4d02c52cd290e5bc805a337be354d48941a0454f9899",
+      "size": 4537,
+      "mtime": "2026-11-05T22:47:30.841958+00:00",
+      "mtime_ns": 1793918850841957992,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/brain-marine-news/tests/test_delivery_policy.py",
+      "lines": 123,
+      "sha256": "2b1059db7518f4e2cf46561e706f1f1f1daa7ee09ccec811e26b16855637a6a9",
+      "size": 5562,
+      "mtime": "2026-11-05T21:10:31.782341+00:00",
+      "mtime_ns": 1793913031782341087,
+      "exists": true
+    },
+    {
       "path": "/home/ubuntu/brain-marine-news/tests/test_delivery_scripts.sh",
       "lines": 42,
       "sha256": "066a1717bca315f3408d5e66d00817fd223ba27366418b80406b14e547e50c5e",
@@ -604,6 +622,15 @@
       "size": 1125,
       "mtime": "2026-10-28T04:26:55.591485+00:00",
       "mtime_ns": 1793161615591484719,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/brain-marine-news/tests/test_gate_tools.py",
+      "lines": 81,
+      "sha256": "0c3c3dc46736357a3a2c3c1fb5c491758bb075e2daae552cf9cc03690370420e",
+      "size": 3851,
+      "mtime": "2026-11-05T22:00:36.618765+00:00",
+      "mtime_ns": 1793916036618765258,
       "exists": true
     },
     {
@@ -724,12 +751,21 @@
       "exists": true
     },
     {
+      "path": "/home/ubuntu/brain-marine-news/tests/test_live_dom_dup_scope.py",
+      "lines": 98,
+      "sha256": "ac4e9c5f132ed94e584552ad12bf25363b50214d5e60cd17f29c710f4fa786ef",
+      "size": 4325,
+      "mtime": "2026-11-05T15:00:29.508336+00:00",
+      "mtime_ns": 1793890829508335648,
+      "exists": true
+    },
+    {
       "path": "/home/ubuntu/brain-marine-news/tests/test_manifest_commands.py",
-      "lines": 34,
-      "sha256": "4905eef34d5d69b37c017b7d66c58d311542e02caf610cf9053870992976d54c",
-      "size": 1471,
-      "mtime": "2026-10-23T20:51:43.022907+00:00",
-      "mtime_ns": 1792788703022907561,
+      "lines": 56,
+      "sha256": "f1ecf08dcb33ae4b04138a77ead1ec61b894dd45b7d5dccf2bb98f5595d8402f",
+      "size": 2567,
+      "mtime": "2026-11-05T22:55:26.481875+00:00",
+      "mtime_ns": 1793919326481874930,
       "exists": true
     },
     {
@@ -739,6 +775,15 @@
       "size": 1394,
       "mtime": "2026-10-31T13:30:46.643355+00:00",
       "mtime_ns": 1793453446643354606,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/brain-marine-news/tests/test_map_cluster.py",
+      "lines": 65,
+      "sha256": "08a7eed120be938c9f5448454bfa23a7215969867d49e8d20a94d1c41057df18",
+      "size": 2978,
+      "mtime": "2026-11-05T17:13:32.038162+00:00",
+      "mtime_ns": 1793898812038161964,
       "exists": true
     },
     {
@@ -755,8 +800,8 @@
       "lines": 113,
       "sha256": "1ff7bfcc82f0ab058c3261b0787c06c2c9e867d8ae0dca210472086e79cb9e8c",
       "size": 5761,
-      "mtime": "2026-11-05T04:14:13.009523+00:00",
-      "mtime_ns": 1793852053009523273,
+      "mtime": "2026-11-06T07:41:59.418166+00:00",
+      "mtime_ns": 1793950919418166197,
       "exists": true
     },
     {
@@ -859,6 +904,15 @@
       "exists": true
     },
     {
+      "path": "/home/ubuntu/brain-marine-news/tests/test_parity_skills_canon_local_only.py",
+      "lines": 49,
+      "sha256": "2e285d859d7468c25f9fb2bcd87023b8754889317c456330f9876e523b08b120",
+      "size": 2398,
+      "mtime": "2026-11-05T13:43:11.720694+00:00",
+      "mtime_ns": 1793886191720694026,
+      "exists": true
+    },
+    {
       "path": "/home/ubuntu/brain-marine-news/tests/test_pdf_heading_match.py",
       "lines": 31,
       "sha256": "69475afe320d589ed37e9df3edb24981fd254f5a70d87862d7826ced8d68cb9d",
@@ -901,6 +955,15 @@
       "size": 1563,
       "mtime": "2026-10-23T20:51:43.022907+00:00",
       "mtime_ns": 1792788703022907561,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/brain-marine-news/tests/test_reference_generator.py",
+      "lines": 111,
+      "sha256": "727aefdef12866b54711b9e502dbdd393a5dbab7864d07ccc11eb17d9b66c7e0",
+      "size": 4536,
+      "mtime": "2026-11-05T21:52:12.464137+00:00",
+      "mtime_ns": 1793915532464137313,
       "exists": true
     },
     {
@@ -1045,6 +1108,15 @@
       "size": 2829,
       "mtime": "2026-11-04T13:34:49.849714+00:00",
       "mtime_ns": 1793799289849713559,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/brain-marine-news/tests/test_source_coverage_transient.py",
+      "lines": 114,
+      "sha256": "48e41fce3b916883090805e08ff13020e2162ef76605931150ea895708837251",
+      "size": 4942,
+      "mtime": "2026-11-05T04:58:38.777823+00:00",
+      "mtime_ns": 1793854718777823282,
       "exists": true
     },
     {
@@ -1624,6 +1696,15 @@
       "exists": true
     },
     {
+      "path": "/home/ubuntu/brain-marine-news/tools/browser_measure.py",
+      "lines": 299,
+      "sha256": "f8e1765f04b5be853f86aeab95c16655e0d1ea14ef0ebac6482bde97ee3743e9",
+      "size": 16690,
+      "mtime": "2026-11-05T22:28:34.175508+00:00",
+      "mtime_ns": 1793917714175508337,
+      "exists": true
+    },
+    {
       "path": "/home/ubuntu/brain-marine-news/tools/build_ambiguity_map.py",
       "lines": 56,
       "sha256": "e6d67452c88670dd24e47cb179c4742d1bc92e980374f76cd1e058a1e87058c6",
@@ -1639,6 +1720,15 @@
       "size": 17123,
       "mtime": "2026-10-21T15:23:32.814341+00:00",
       "mtime_ns": 1792596212814340530,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/brain-marine-news/tools/build_hero_kpis.py",
+      "lines": 141,
+      "sha256": "b08f2043fcf962179f2bdfa567aae7b6bc5918937a093953c7ed792844bc1d6c",
+      "size": 6650,
+      "mtime": "2026-11-05T06:21:29.273612+00:00",
+      "mtime_ns": 1793859689273612416,
       "exists": true
     },
     {
@@ -1720,6 +1810,15 @@
       "size": 12424,
       "mtime": "2026-11-02T15:16:48.673021+00:00",
       "mtime_ns": 1793632608673020778,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/brain-marine-news/tools/build_workflow_reference.py",
+      "lines": 367,
+      "sha256": "bb33b09ec97e27764fc2880bf72632bcd71fe1cd1d77259c05d1a03f42cbb69b",
+      "size": 23324,
+      "mtime": "2026-11-05T23:37:45.711375+00:00",
+      "mtime_ns": 1793921865711374742,
       "exists": true
     },
     {
@@ -1837,6 +1936,15 @@
       "size": 13191,
       "mtime": "2026-10-28T22:57:24.407310+00:00",
       "mtime_ns": 1793228244407310489,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/brain-marine-news/tools/crossing_gate.py",
+      "lines": 143,
+      "sha256": "c17f76a5ddd8c9f65e6a901b9ef4e127293ae08249b249fc1f27ece6b436ecf2",
+      "size": 8543,
+      "mtime": "2026-11-05T21:58:38.358177+00:00",
+      "mtime_ns": 1793915918358176832,
       "exists": true
     },
     {
@@ -1984,6 +2092,15 @@
       "exists": true
     },
     {
+      "path": "/home/ubuntu/brain-marine-news/tools/gate_coverage.py",
+      "lines": 142,
+      "sha256": "162d15cb6bebc4bb050a86c53a3e2c99251f9a5bce324fdbda6f1b7b784e292c",
+      "size": 6440,
+      "mtime": "2026-11-05T22:01:52.935176+00:00",
+      "mtime_ns": 1793916112935175953,
+      "exists": true
+    },
+    {
       "path": "/home/ubuntu/brain-marine-news/tools/gate_verdict.py",
       "lines": 157,
       "sha256": "fa5e69a6af312af1d0c33ccf2a83919c00e862ab195eb0adbeb9eb793bdf3cbb",
@@ -2044,6 +2161,15 @@
       "size": 19479,
       "mtime": "2026-10-30T23:19:03.583343+00:00",
       "mtime_ns": 1793402343583342548,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/brain-marine-news/tools/impact_matrix.py",
+      "lines": 114,
+      "sha256": "6246a9308b9aa2ae29ab9d7105d054add7672185b1ca712d18f9e43e694ce63c",
+      "size": 5127,
+      "mtime": "2026-11-05T21:58:05.209980+00:00",
+      "mtime_ns": 1793915885209979665,
       "exists": true
     },
     {
@@ -2111,11 +2237,11 @@
     },
     {
       "path": "/home/ubuntu/brain-marine-news/tools/ledger_totals.py",
-      "lines": 692,
-      "sha256": "bb0e75938867610d7ddbb89d5550c1788104b547a990c7a7ebb0c71b66f67d3c",
-      "size": 28486,
-      "mtime": "2026-11-04T19:20:06.277556+00:00",
-      "mtime_ns": 1793820006277555786,
+      "lines": 697,
+      "sha256": "49d9583af6578744664bb12f6c68cf301a44405e76818c76801ff40e488c8563",
+      "size": 29080,
+      "mtime": "2026-11-05T06:07:14.065369+00:00",
+      "mtime_ns": 1793858834065369030,
       "exists": true
     },
     {
@@ -2129,11 +2255,11 @@
     },
     {
       "path": "/home/ubuntu/brain-marine-news/tools/live_dom_audit.py",
-      "lines": 218,
-      "sha256": "790b6ed9b1c7c07b77229cd1b5d25d327b1020f94ebcc15b411ebfffa3910e54",
-      "size": 10825,
-      "mtime": "2026-10-30T04:25:11.084601+00:00",
-      "mtime_ns": 1793334311084601067,
+      "lines": 223,
+      "sha256": "ce011a54686b4ea73f23d4796b6423a3a8f30f8921c070ab3fb532152d714917",
+      "size": 11385,
+      "mtime": "2026-11-05T15:42:12.280058+00:00",
+      "mtime_ns": 1793893332280058051,
       "exists": true
     },
     {
@@ -2317,6 +2443,15 @@
       "exists": true
     },
     {
+      "path": "/home/ubuntu/brain-marine-news/tools/number_fingerprint.py",
+      "lines": 108,
+      "sha256": "29ea5049f650b98d54d474225f368c814d53d9c999ac422121596b352d88c555",
+      "size": 4672,
+      "mtime": "2026-11-05T22:04:23.533576+00:00",
+      "mtime_ns": 1793916263533576487,
+      "exists": true
+    },
+    {
       "path": "/home/ubuntu/brain-marine-news/tools/ofac_screen.py",
       "lines": 216,
       "sha256": "49fbfd38ac4f4255f36746ada5e80ecf9167626440663dd4209c88d7393b020b",
@@ -2345,11 +2480,11 @@
     },
     {
       "path": "/home/ubuntu/brain-marine-news/tools/patch_owner_notes.py",
-      "lines": 120,
-      "sha256": "229df77fe97bb40d402cb7d3df148e60d6395fa14fcf823c14c68bacdeef8dc4",
-      "size": 6884,
-      "mtime": "2026-11-04T04:26:00.238153+00:00",
-      "mtime_ns": 1793766360238152509,
+      "lines": 164,
+      "sha256": "19b859448497b775377889de352fc9967d4c78dd080fb0baf66c5ac9060ee16d",
+      "size": 9093,
+      "mtime": "2026-11-05T06:08:02.297665+00:00",
+      "mtime_ns": 1793858882297664857,
       "exists": true
     },
     {
@@ -2470,6 +2605,15 @@
       "exists": true
     },
     {
+      "path": "/home/ubuntu/brain-marine-news/tools/regression_gate.py",
+      "lines": 109,
+      "sha256": "3cf620515026dbe52e9ce822d2264f7f6a3ddaee9763499de5db120143dfb35d",
+      "size": 5367,
+      "mtime": "2026-11-05T23:37:45.710523+00:00",
+      "mtime_ns": 1793921865710523078,
+      "exists": true
+    },
+    {
       "path": "/home/ubuntu/brain-marine-news/tools/reorder_sections.py",
       "lines": 172,
       "sha256": "9b02590cc1a34806abcb601470be076389febfe57f0de095531495c7ba518f83",
@@ -2534,11 +2678,11 @@
     },
     {
       "path": "/home/ubuntu/brain-marine-news/tools/runbook.py",
-      "lines": 810,
-      "sha256": "8981b04f1d465ff3eee9f7514c9a68fe68a7e583bf8ea73ae909b68e4b8ea48a",
-      "size": 39120,
-      "mtime": "2026-10-31T16:18:59.113200+00:00",
-      "mtime_ns": 1793463539113199939,
+      "lines": 814,
+      "sha256": "195f273c2ef40a7bbf6c64d6e02c53a9edc319a3aa59f6d67b84efacf54ade14",
+      "size": 39558,
+      "mtime": "2026-11-05T22:55:16.294083+00:00",
+      "mtime_ns": 1793919316294083021,
       "exists": true
     },
     {
@@ -2656,6 +2800,15 @@
       "size": 7281,
       "mtime": "2026-11-03T04:24:48.088832+00:00",
       "mtime_ns": 1793679888088831964,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/brain-marine-news/tools/surface_fingerprint.py",
+      "lines": 129,
+      "sha256": "480808045a1764209d101d848eefe51ce63ff172ab9bb53a0d4800d2f79f6815",
+      "size": 5614,
+      "mtime": "2026-11-05T22:04:23.533321+00:00",
+      "mtime_ns": 1793916263533321121,
       "exists": true
     },
     {
@@ -2822,11 +2975,11 @@
     },
     {
       "path": "/home/ubuntu/brain-marine-news/validators/check_backup_parity.py",
-      "lines": 316,
-      "sha256": "8558bff9b334a2ac29d572d7aec6d4b202f33d6a84374c6b7b3374f597408093",
-      "size": 18008,
-      "mtime": "2026-10-31T13:55:22.608996+00:00",
-      "mtime_ns": 1793454922608995603,
+      "lines": 318,
+      "sha256": "0248d94aff6e3f81335316ff63d42a3848789aa18476cae68fd4eabdd7063a3e",
+      "size": 18311,
+      "mtime": "2026-11-05T22:29:57.116000+00:00",
+      "mtime_ns": 1793917797116000231,
       "exists": true
     },
     {
@@ -2938,6 +3091,24 @@
       "exists": true
     },
     {
+      "path": "/home/ubuntu/brain-marine-news/validators/check_decisions_registry.py",
+      "lines": 117,
+      "sha256": "ce84f732f597fd066e96ee321954fc90154f034e9c6157c1b56c9a272c02e9e3",
+      "size": 5176,
+      "mtime": "2026-11-05T22:46:39.429273+00:00",
+      "mtime_ns": 1793918799429272757,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/brain-marine-news/validators/check_delivery_policy.py",
+      "lines": 135,
+      "sha256": "f7b4ac1f793f9d20b031a63eae3afd6c429cb83ebf2eacd7f4f392d9b39829cb",
+      "size": 5930,
+      "mtime": "2026-11-05T22:37:52.433732+00:00",
+      "mtime_ns": 1793918272433731446,
+      "exists": true
+    },
+    {
       "path": "/home/ubuntu/brain-marine-news/validators/check_desktop_readability.py",
       "lines": 161,
       "sha256": "1d8c54ea9fa02f956d3f7c4e43d95c779a18183af00226b596829a96b7886fb7",
@@ -2989,6 +3160,15 @@
       "size": 6131,
       "mtime": "2026-11-01T06:18:53.990826+00:00",
       "mtime_ns": 1793513933990825804,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/brain-marine-news/validators/check_gate_readiness.py",
+      "lines": 85,
+      "sha256": "a4cfa91f81aba30cb5db96d7332215f2ef6b86eae1b81bc9fd5f3a32d7845bc1",
+      "size": 3839,
+      "mtime": "2026-11-05T22:00:27.778720+00:00",
+      "mtime_ns": 1793916027778719983,
       "exists": true
     },
     {
@@ -3190,6 +3370,15 @@
       "exists": true
     },
     {
+      "path": "/home/ubuntu/brain-marine-news/validators/check_reference_generated.py",
+      "lines": 62,
+      "sha256": "3a8c3d0c3fc7085ca29d7cdd978165b1de7e8f1d2b0b440913616da08fa6c9bb",
+      "size": 2393,
+      "mtime": "2026-11-05T23:37:45.711613+00:00",
+      "mtime_ns": 1793921865711612874,
+      "exists": true
+    },
+    {
       "path": "/home/ubuntu/brain-marine-news/validators/check_repo_secrets.py",
       "lines": 84,
       "sha256": "556ab39236c4fc6990d75531a0a5112cb871b7466167b9ea9d4ea60deb869d9a",
@@ -3236,11 +3425,11 @@
     },
     {
       "path": "/home/ubuntu/brain-marine-news/validators/check_source_daily_coverage.py",
-      "lines": 119,
-      "sha256": "e7a34770a30f10331aca407a6b7ba404243eff7343eb91f3a34414fcd898d9e4",
-      "size": 6037,
-      "mtime": "2026-11-02T05:00:44.655476+00:00",
-      "mtime_ns": 1793595644655476116,
+      "lines": 202,
+      "sha256": "a0bed85b75a8984d610b099c16f6f94b1161ed4b5b6983e553278cf7df1ec2ff",
+      "size": 10059,
+      "mtime": "2026-11-05T04:57:23.965762+00:00",
+      "mtime_ns": 1793854643965762091,
       "exists": true
     },
     {
@@ -3281,11 +3470,11 @@
     },
     {
       "path": "/home/ubuntu/brain-marine-news/validators/check_surface_hygiene.py",
-      "lines": 346,
-      "sha256": "d791dd8c5f693ed94cda18ccefc27c898c7545373d05afd32223f696c936bb16",
-      "size": 14696,
-      "mtime": "2026-11-04T17:40:00.856099+00:00",
-      "mtime_ns": 1793814000856099447,
+      "lines": 351,
+      "sha256": "f9db6225562b248b6a7f7a8358bf9d689973f78b422f8ac7dc73781677849fb5",
+      "size": 14879,
+      "mtime": "2026-11-05T05:01:35.598895+00:00",
+      "mtime_ns": 1793854895598895213,
       "exists": true
     },
     {
@@ -4559,11 +4748,11 @@
     },
     {
       "path": "/home/ubuntu/skills/bilingual-master-direction-ops/scripts/verify_master_direction.py",
-      "lines": 145,
-      "sha256": "e1e36fc477c5e66c43603dc6114cea0806012aa3f09830dfd20544829aeaf5d3",
-      "size": 5944,
-      "mtime": "2026-11-04T18:47:24.601029+00:00",
-      "mtime_ns": 1793818044601028920,
+      "lines": 147,
+      "sha256": "185379f78da2fc63575bb2cfb17805b89220294d7ccbfc5c46a435f2c9c046b3",
+      "size": 6083,
+      "mtime": "2026-11-05T05:25:21.774455+00:00",
+      "mtime_ns": 1793856321774454547,
       "exists": true
     },
     {
@@ -5773,6 +5962,15 @@
       "exists": true
     },
     {
+      "path": "/home/ubuntu/skills/crossing-gate-ops/SKILL.md",
+      "lines": 91,
+      "sha256": "d8f2537bc685bfe49cc99ffc4ebd2d13c81d9c271c08af782a2a314c40532b95",
+      "size": 7990,
+      "mtime": "2026-11-05T22:33:57.870651+00:00",
+      "mtime_ns": 1793918037870650752,
+      "exists": true
+    },
+    {
       "path": "/home/ubuntu/skills/cucumber-skill/SKILL.md",
       "lines": 232,
       "sha256": "3348b02aaaf9ff00bd4115bee5dd68baa1301ee48c16fe28b97e753faa05baaf",
@@ -6772,6 +6970,15 @@
       "exists": true
     },
     {
+      "path": "/home/ubuntu/skills/decision-registry-backfill-ops/SKILL.md",
+      "lines": 49,
+      "sha256": "fc26938eaf92bdf895605e08fce9f1e8ebb8bac58c17eec3f82713f2e1f17724",
+      "size": 4625,
+      "mtime": "2026-11-05T23:13:54.788706+00:00",
+      "mtime_ns": 1793920434788706153,
+      "exists": true
+    },
+    {
       "path": "/home/ubuntu/skills/deep-research/SKILL.md",
       "lines": 69,
       "sha256": "b69aefe8fab8686128b995d0551cdc76e0abea7874fdcac70ff87b2ada28538f",
@@ -7096,6 +7303,15 @@
       "exists": true
     },
     {
+      "path": "/home/ubuntu/skills/enforcement-layer-audit-ops/SKILL.md",
+      "lines": 49,
+      "sha256": "f753cf3a50bc3d34437d8f5e394cf8491799dcc2426bfe47e852bca59a58a226",
+      "size": 4735,
+      "mtime": "2026-11-06T00:17:45.569254+00:00",
+      "mtime_ns": 1793924265569253724,
+      "exists": true
+    },
+    {
       "path": "/home/ubuntu/skills/espresso-skill/SKILL.md",
       "lines": 258,
       "sha256": "460208377da2899645014dcd0b55d61880b3cd34eae8af62b2ccf12396ad26f7",
@@ -7345,6 +7561,15 @@
       "size": 7046,
       "mtime": "2026-11-04T18:47:32.960430+00:00",
       "mtime_ns": 1793818052960429572,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/fail-closed-guard-hardening-ops/SKILL.md",
+      "lines": 67,
+      "sha256": "9181230e5fd120c675e9869ffaf338d69013a3d7aa19d4d652ee539fcb135ed8",
+      "size": 5672,
+      "mtime": "2026-11-05T22:59:22.087187+00:00",
+      "mtime_ns": 1793919562087187061,
       "exists": true
     },
     {
@@ -17743,6 +17968,15 @@
       "exists": true
     },
     {
+      "path": "/home/ubuntu/skills/manual-visual-check-automation-ops/SKILL.md",
+      "lines": 61,
+      "sha256": "68065aa2632ef7f9360878c7b36cf7309215f18691ec8ff955ca0a186a0a6c41",
+      "size": 5634,
+      "mtime": "2026-11-05T22:33:57.804839+00:00",
+      "mtime_ns": 1793918037804838557,
+      "exists": true
+    },
+    {
       "path": "/home/ubuntu/skills/manus-api/SKILL.md",
       "lines": 144,
       "sha256": "4f4f651b3df5c8f3b882212daba54c98d99a61437b98afe32de3a23a7fdd0f74",
@@ -17798,11 +18032,11 @@
     },
     {
       "path": "/home/ubuntu/skills/manus-tasks/SKILL.md",
-      "lines": 80,
-      "sha256": "f6725bf3acdb28a4ef05a264bae2fce7386a91e965d4aaab0afe0049648dfb85",
-      "size": 12349,
-      "mtime": "2026-11-04T18:47:32.865626+00:00",
-      "mtime_ns": 1793818052865625922,
+      "lines": 83,
+      "sha256": "00410d12511c653eb4661094d8c15e8cdabb1f814276075f022bd30fd7dcf8a8",
+      "size": 13178,
+      "mtime": "2026-11-05T17:10:21.559402+00:00",
+      "mtime_ns": 1793898621559401814,
       "exists": true
     },
     {
@@ -18649,6 +18883,15 @@
       "size": 2539,
       "mtime": "2026-11-04T18:47:32.010815+00:00",
       "mtime_ns": 1793818052010815284,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/measured-defect-closure-ops/SKILL.md",
+      "lines": 65,
+      "sha256": "0a0a7f2e8d25e05eb2b230367c850e6906bedc8e591fd7fe3a91866f4848c8ce",
+      "size": 5307,
+      "mtime": "2026-11-05T22:52:27.270776+00:00",
+      "mtime_ns": 1793919147270776391,
       "exists": true
     },
     {
@@ -21982,6 +22225,33 @@
       "exists": true
     },
     {
+      "path": "/home/ubuntu/skills/runbook-closed-fail-repair-ops/SKILL.md",
+      "lines": 88,
+      "sha256": "36069d623961ba76a3ddc238f93c3373fc085e15c1a150d14cc4de98045837fe",
+      "size": 9186,
+      "mtime": "2026-11-05T04:39:32.356987+00:00",
+      "mtime_ns": 1793853572356987249,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/runbook-closed-fail-repair-ops/references/measured-cases.md",
+      "lines": 63,
+      "sha256": "1f13936cfb2974345a1cbda8dd39cb82496e8fb2e05391a81a5668f5c6ea96ac",
+      "size": 5347,
+      "mtime": "2026-11-05T04:29:55.456606+00:00",
+      "mtime_ns": 1793852995456605619,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/runbook-closed-fail-repair-ops/scripts/diagnose_closed_fail.py",
+      "lines": 128,
+      "sha256": "1cff7082cb0682517a1b7b5c97fa766436599d801a688fa6ec87a322eaba9639",
+      "size": 6179,
+      "mtime": "2026-11-05T04:39:59.849010+00:00",
+      "mtime_ns": 1793853599849010577,
+      "exists": true
+    },
+    {
       "path": "/home/ubuntu/skills/runbook-completion-closure-ops/SKILL.md",
       "lines": 83,
       "sha256": "bc46eae25480a611ebefe235d9abee5d6972208524caaff5fbd2f29219632157",
@@ -22433,11 +22703,11 @@
     },
     {
       "path": "/home/ubuntu/skills/self-learning-loop-ops/SKILL.md",
-      "lines": 112,
-      "sha256": "a1f2539bafefd7a8609ace988c1e7237a770b2ac3b47e13b47d7c7db65ae41f7",
-      "size": 14307,
-      "mtime": "2026-11-04T18:47:14.645154+00:00",
-      "mtime_ns": 1793818034645154373,
+      "lines": 136,
+      "sha256": "add4d225295a3ae1234d8ef223cdae66d74fbbe2603278b95e1711c40286803f",
+      "size": 17170,
+      "mtime": "2026-11-05T23:14:20.745242+00:00",
+      "mtime_ns": 1793920460745241570,
       "exists": true
     },
     {
@@ -23017,6 +23287,15 @@
       "exists": true
     },
     {
+      "path": "/home/ubuntu/skills/skill-adoption-governance-ops/SKILL.md",
+      "lines": 53,
+      "sha256": "9e254cda4bbe91400265b02db7cc3c809d4edd2e8932c23f0d573c4424258ff3",
+      "size": 4457,
+      "mtime": "2026-11-05T23:02:46.791566+00:00",
+      "mtime_ns": 1793919766791565647,
+      "exists": true
+    },
+    {
       "path": "/home/ubuntu/skills/skill-coverage-audit-ops/SKILL.md",
       "lines": 33,
       "sha256": "4b1dce21056b8c2c626f3fec5d8d7f9a60a771827711c5c458f23fa2cb5ebddc",
@@ -23261,11 +23540,11 @@
     },
     {
       "path": "/home/ubuntu/skills/source-coverage-route-ops/scripts/probe_source_routes.py",
-      "lines": 106,
-      "sha256": "98a58a866ceae6531d6fdaaafdd22957580fa5119a4ccf88e4dca29c50494865",
-      "size": 4608,
-      "mtime": "2026-11-04T18:47:16.461409+00:00",
-      "mtime_ns": 1793818036461409303,
+      "lines": 109,
+      "sha256": "db3763ae5be69a8fc042e21e9eb2f9b4e657fc9483bb3df7ac0438f8f6e0e371",
+      "size": 4769,
+      "mtime": "2026-11-05T04:49:35.326761+00:00",
+      "mtime_ns": 1793854175326760685,
       "exists": true
     },
     {

@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة c5df0b3a52cc274b). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة 3dcfd88867c9de54). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -116,7 +116,7 @@
 | D032 | أرشفة نص ملخص تلغرام المرسل (معطّلة: سبب غير مذكور) | script |  |  | cmd:bash -lc test -d logs/telegram-archive | س4 — قناة التسليم | tools/archive_tg_digest.py، tools/telegram_send.py | continue |
 | D033 | تنبيه وصول التقرير على تلغرام | script |  |  | file_exists:logs/telegram-delivery-{date}.json | س4 — قناة التسليم | validators/check_telegram_delivery.py | continue |
 | D035 | بوابة الأسرار قبل النسخ الاحتياطي والدفع | script |  |  | cmd:bash -lc grep -q 'بوابة الأسرار: لا سرّ' logs/runbook/{date}/D035.log | س2 — الإغلاق والدفع | validators/check_secrets.py، tools/redact.py، tools/github_backup.sh | stop |
-| D036 | اختبارات المدقّقات الجديدة (أسرار · استثناءات · إرسال · تتبّع · نطاق) | script |  |  | cmd:bash -lc test -s logs/checks/new-validators-{date}.json && test -s logs/checks/new-validators-{date}.txt && test -s logs/checks/parity-scope-{date}.txt | س2 — الإغلاق والدفع | tests/test_new_validators.py، tests/test_parity_scope.py، tools/audit_broad_excepts.py، validators/check_secrets.py | stop |
+| D036 | اختبارات المدقّقات الجديدة (أسرار · استثناءات · إرسال · تتبّع · نطاق) | script |  |  | cmd:bash -lc test -s logs/checks/new-validators-{date}.json && test -s logs/checks/new-validators-{date}.txt && test -s logs/checks/parity-scope-{date}.txt | س2 — الإغلاق والدفع | tests/test_new_validators.py، tests/test_parity_scope.py، tests/test_preflight_guard.py، tests/test_telegram_digest_cards.py، tests/test_secret_documentation_scope.py، tests/test_en_parity_confidence_map.py، tests/test_github_backup_failure_output.py، tools/audit_broad_excepts.py، validators/check_secrets.py | stop |
 | D040 | النسخة الاحتياطية والتحقق من التماثل | script |  |  | cmd:bash -lc grep -q 'النتيجة: مطابق' logs/runbook/{date}/D040.log | س2 — الإغلاق والدفع | tools/github_backup.sh، validators/check_backup_parity.py، tools/github_backup.py، tools/apply_from_github.sh، tools/apply_from_github.py، tools/code_paths.py | stop |
 | D045 | فهرس التقارير (المستودع مقابل الأرشيف الخاص) (اختيارية) | script |  |  | cmd:bash -lc grep -q '{date}' docs/reports-index.md | س2 — الإغلاق والدفع | tools/reports_index.py، appendices/reports-archive.json | continue |
 | D050 | التعلم الذاتي وتسجيل الدروس | script |  |  | file_exists:memory/learning-log.jsonl | س2 — الإغلاق والدفع | tools/self_improve.py، tools/skill_lessons.py، tools/self_test.py | stop |
