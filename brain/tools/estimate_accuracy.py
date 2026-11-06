@@ -16,7 +16,7 @@ import argparse
 import json
 import re
 from collections import Counter
-from datetime import date
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -44,6 +44,18 @@ def load() -> list[dict]:
             except json.JSONDecodeError:
                 continue
     return rows
+
+
+def stamp_report(text: str, generated_at: str) -> str:
+    """Add or replace the generation stamp without changing the measured table."""
+    marker = f"**آخر توليد (UTC):** {generated_at}"
+    text = re.sub(r"\*\*آخر توليد \(UTC\):\*\*[^\n]*\n?", "", text, count=1)
+    table = "| عدد التقديرات |"
+    pos = text.find(table)
+    if pos < 0:
+        return text
+    line_start = text.rfind("\n", 0, pos) + 1
+    return text[:line_start] + marker + "\n\n" + text[line_start:]
 
 
 def main() -> int:
@@ -84,6 +96,7 @@ def main() -> int:
             flags=re.S,
         )
         if new != txt:
+            new = stamp_report(new, datetime.now(timezone.utc).isoformat())
             LOG.write_text(new, encoding="utf-8")
             print(f"  ✔ حُدّث السجل: {LOG}")
         else:
