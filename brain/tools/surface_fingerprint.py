@@ -18,10 +18,14 @@ import argparse
 import glob
 import hashlib
 import json
+import os
 import re
 import sys
 from datetime import date
 from pathlib import Path
+
+BRAIN = Path(os.environ.get("BRAIN_DIR") or Path(__file__).resolve().parents[1])
+SITE = Path(os.environ.get("SITE_DIR") or BRAIN.parent / "seawatch")
 
 TAGS = re.compile(r"<(script|style)\b.*?</\1>", re.S | re.I)
 ANY_TAG = re.compile(r"<[^>]+>")
@@ -110,8 +114,8 @@ def compare(root: Path, site: Path, baseline: str) -> int:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="بصمة الأسطح الحاكمة")
-    ap.add_argument("--root", default=".", help="جذر النظام")
-    ap.add_argument("--site", default="/home/ubuntu/seawatch", help="جذر الموقع")
+    ap.add_argument("--root", default=str(BRAIN), help="جذر النظام")
+    ap.add_argument("--site", default=str(SITE), help="جذر الموقع")
     ap.add_argument("--tag", default=date.today().isoformat(), help="وسم البصمة")
     ap.add_argument("--out", help="مسار ملف البصمة")
     ap.add_argument("--compare", help="ملف بصمة للمقارنة")

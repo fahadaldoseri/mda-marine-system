@@ -385,6 +385,42 @@ def _shift(date: str, days: int) -> str:
     return (datetime.date(y, m, d) + datetime.timedelta(days=days)).isoformat()
 
 
+def governed_threat_lede(zone_card: dict, registry: dict) -> str:
+    """يبني ترويسة التهديد من سجل القطاعات، بلا أسماء أو ترتيب ثابتين."""
+    registry_zones = registry.get("zones") or []
+    registry_names = {
+        str(z.get("id") or "").strip(): str(z.get("ar") or "").strip()
+        for z in registry_zones
+        if str(z.get("id") or "").strip() and str(z.get("ar") or "").strip()
+    }
+    rows = zone_card.get("zones") or []
+    if not registry_names or not rows:
+        raise FailClosed("لا يمكن اشتقاق ترويسة التهديد بلا قطاعات وسجل أسماء معتمد")
+    registry_order = {zid: i for i, zid in enumerate(registry_names)}
+    if any(str(row.get("id") or "").strip() not in registry_names for row in rows):
+        raise FailClosed("بطاقة القطاعات تحمل معرّفًا غير موجود في سجل القطاعات المعتمد")
+    try:
+        top = max(
+            rows,
+            key=lambda row: (
+                int(row.get("rank", 0)),
+                -registry_order[str(row.get("id") or "").strip()],
+            ),
+        )
+    except (TypeError, ValueError, KeyError) as exc:
+        raise FailClosed(f"رتبة قطاع غير صالحة عند اشتقاق الترويسة: {exc}") from exc
+    overall = zone_card.get("overall") or {}
+    level = str(overall.get("level") or "").strip()
+    top_id = str(top.get("id") or "").strip()
+    top_level = str(top.get("level") or "").strip()
+    top_name = registry_names[top_id]
+    if not level or not top_level or not top_name:
+        raise FailClosed("بيانات المستوى أو أعلى قطاع ناقصة عند اشتقاق الترويسة")
+    if top_level != level:
+        raise FailClosed(f"المستوى العام «{level}» لا يساوي مستوى أعلى قطاع «{top_level}»")
+    return f"المستوى العام {level}. ويظل {top_name} أعلى القطاعات عند مستوى {top_level}."
+
+
 def selftest() -> int:
     reg, scale, levels, ovr = load_governed()
     bad = 0
@@ -472,6 +508,7 @@ def main() -> int:
                         for z in out["zones"]
                     ],
                 }
+                meta["lede"] = governed_threat_lede(out, reg)
                 dc = meta.setdefault("decision_card", {})
                 dc["risk"] = lv
                 dc["risk_kind"] = tok

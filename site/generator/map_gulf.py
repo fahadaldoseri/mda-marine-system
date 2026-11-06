@@ -684,13 +684,14 @@ def _zoom_parts(points):
         marks = []
         for (i, p), (x, y), (tx, ty) in zip(inside, shown, true_xy):
             color = KIND_COLOR.get(p.get("kind") or status_of(p)[0], "var(--muted)")
+            event_id = _esc(p.get("code") or f"{i:02d}")
             if math.hypot(x - tx, y - ty) > 3:
                 marks.append(
                     f'<g class="mp-leader"><line x1="{tx:.1f}" y1="{ty:.1f}" x2="{x:.1f}" y2="{y:.1f}" '
                     f'style="stroke:var(--map-label);stroke-width:1;opacity:.75"/>'
                     f'<circle cx="{tx:.1f}" cy="{ty:.1f}" r="3" style="fill:var(--map-label)"/></g>')
             marks.append(
-                f'<g class="mp-event{" mp-approx" if p.get("precision") == "approximate" else ""}" transform="translate({x:.1f},{y:.1f})" style="--mk:{color}">'
+                f'<g class="mp-event{" mp-approx" if p.get("precision") == "approximate" else ""}" data-event-id="{event_id}" transform="translate({x:.1f},{y:.1f})" style="--mk:{color}">'
                 f'<circle class="mp-halo" r="26" style="fill:var(--mk);opacity:.22"/>'
                 f'<circle class="mp-dot" r="14" style="{_dot_style(p)}"/>'
                 f'<text class="mp-num" y="6" style="font-size:17px;fill:#fff;font-weight:600;text-anchor:middle">{i}</text></g>')
@@ -852,16 +853,18 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
             cxs = sum(shown_xy[j][0] for j in grp) / len(grp)
             cys = sum(shown_xy[j][1] for j in grp) / len(grp)
             ids = "·".join(sids[j] for j in grp)
+            event_ids = "·".join(_esc(points[j].get("code") or sids[j]) for j in grp)
             marks.append(
-                f'<g class="mp-event mp-cluster" transform="translate({cxs:.1f},{cys:.1f})" style="--mk:{color}">'
+                f'<g class="mp-event mp-cluster" data-event-id="{event_ids}" transform="translate({cxs:.1f},{cys:.1f})" style="--mk:{color}">'
                 f'<circle class="mp-halo" r="26" style="fill:var(--mk);opacity:.22"/>'
                 f'<circle class="mp-dot" r="16" style="{_dot_style(p)}"/>'
                 f'<text class="mp-num" y="8" style="fill:#fff;font-size:26px;font-weight:700;text-anchor:middle">{len(grp)}</text>'
                 f'{_badge(cxs, cys, ids, dy=-34.0)}</g>'
             )
         else:
+            event_id = _esc(code or sids[i - 1])
             marks.append(
-                f'<g class="mp-event{" mp-approx" if p.get("precision") == "approximate" else ""}" transform="translate({x:.1f},{y:.1f})" style="--mk:{color}">'
+                f'<g class="mp-event{" mp-approx" if p.get("precision") == "approximate" else ""}" data-event-id="{event_id}" transform="translate({x:.1f},{y:.1f})" style="--mk:{color}">'
                 f'<circle class="mp-halo" r="14" style="fill:var(--mk);opacity:.22"/>'
                 f'<circle class="mp-dot" r="7" style="{_dot_style(p)}"/>'
                 f'<text class="mp-num" y="5" style="fill:#fff;font-size:16px;font-weight:600;text-anchor:middle">{i}</text>'

@@ -57,7 +57,7 @@ def collect(root: Path, steps: list[dict]):
                     for cand in base.glob("/".join(["*"] * depth) + f"/{p}"):
                         if cand.is_file():
                             return True
-        except Exception:  # noqa: BLE001
+        except OSError:
             pass
         return False
 
@@ -84,7 +84,7 @@ def collect(root: Path, steps: list[dict]):
                 if f.stat().st_size > 2_000_000:
                     continue
                 corpus_parts.append(f.read_text(encoding="utf-8", errors="replace"))
-            except Exception:  # noqa: BLE001
+            except OSError:
                 continue
     corpus = "\n".join(corpus_parts)
     for sub in ("tools", "validators"):

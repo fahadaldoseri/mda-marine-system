@@ -15,8 +15,10 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import json
 import pathlib
+import re
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -70,6 +72,109 @@ def hero_detail(meta: dict, zones: dict, card: dict) -> str:
         return (f"المؤكد: {fire.get('confirmed') or 0} · المرجّح: {fire.get('probable') or 0} · "
                 f"غير المؤكد: {fire.get('unconfirmed') or 0}")
     return str(detail.get("ar") or "")
+
+
+def _imo_totals() -> tuple[dict, dict]:
+    """يقرأ مجاميع IMO وتاريخ القراءة من المصدر المحفوظ، لا من نص يوم سابق."""
+    appendix = load(ROOT / "appendices" / "imo-incidents.json")
+    return appendix.get("totals") or {}, appendix.get("source") or {}
+
+
+def _imo_date(source: dict) -> str:
+    """يحوّل ``3 November 2026`` إلى صيغة العرض المعتمدة في البطاقات."""
+    raw = str(source.get("as_at") or "").strip()
+    months = {
+        "January": "01", "February": "02", "March": "03", "April": "04",
+        "May": "05", "June": "06", "July": "07", "August": "08",
+        "September": "09", "October": "10", "November": "11", "December": "12",
+    }
+    match = re.fullmatch(r"(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})", raw)
+    if not match or match.group(2) not in months:
+        return raw
+    return f"{int(match.group(1)):02d}/{months[match.group(2)]}/{match.group(3)}"
+
+
+def _previous_total(previous: dict, card_id: str) -> int:
+    """يستخرج مجموع يوم أمس لتكوين طبقة daily بلا تخمين أو كتابة يدوية."""
+    card = previous.get(card_id) or {}
+    value = ((card.get("layers") or {}).get("cumulative") or {}).get("value")
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return 0
+
+
+def build_official_cards(meta: dict, registry: dict) -> list[dict]:
+    """ينشئ قائمة البطاقات الرسمية من العقد ومصدر IMO في كل تشغيل.
+
+    العقد يحدد الشكل والعناوين، وملف IMO يحدد المجاميع وتاريخ القراءة. إذا كانت
+    بطاقة اليوم موجودة، يُستخدم مجموعها السابق لحساب فرق اليوم فقط؛ ولا يُنسخ
+    ملف يوم سابق كاملًا ولا تُضاف بطاقة يدويًا إلى ملف تاريخ بعينه.
+    """
+    contract = registry.get("official_cards") or {}
+    previous = {str(c.get("id")): c for c in (meta.get("official_cards") or [])
+                if isinstance(c, dict) and c.get("id")}
+    totals, source = _imo_totals()
+    incidents = int(totals.get("confirmed_incidents") or 0)
+    deaths = int(totals.get("confirmed_seafarer_deaths") or 0)
+    as_at = _imo_date(source)
+    cards: list[dict] = []
+    for item in contract.get("cards") or []:
+        card = copy.deepcopy(item)
+        cid = str(card.get("id"))
+        layers = card.setdefault("layers", {})
+        if cid == "imo-confirmed-incidents":
+            before = _previous_total(previous, cid)
+            daily = incidents - before if before else 0
+            daily_layer = layers.setdefault("daily", {})
+            daily_layer.update({
+                "state": "shown",
+                "value": str(daily),
+                "value_en": str(daily),
+                "source": f"قائمة IMO الرسمية؛ الفرق بين القراءة الحالية والسابقة = {daily}",
+                "source_en": f"Official IMO list; difference from the previous reading = {daily}",
+            })
+            cumulative = layers.setdefault("cumulative", {})
+            cumulative.update({
+                "value": str(incidents),
+                "value_en": str(incidents),
+                "source": f"IMO — {incidents} حادثة مؤكدة حتى {as_at}",
+                "source_en": f"IMO — {incidents} confirmed incidents as at {as_at}",
+            })
+            updated = layers.setdefault("updated", {})
+            updated.update({
+                "value": as_at,
+                "value_en": as_at,
+                "source": f"القائمة الرسمية بتاريخ بيانات {as_at}",
+                "source_en": f"Official list as at {as_at}",
+            })
+        elif cid == "imo-seafarer-deaths":
+            before = _previous_total(previous, cid)
+            daily = deaths - before if before else 0
+            daily_layer = layers.setdefault("daily", {})
+            daily_layer.update({
+                "state": "shown",
+                "value": str(daily),
+                "value_en": str(daily),
+                "source": f"قائمة IMO الرسمية؛ الفرق بين القراءة الحالية والسابقة = {daily}",
+                "source_en": f"Official IMO list; difference from the previous reading = {daily}",
+            })
+            cumulative = layers.setdefault("cumulative", {})
+            cumulative.update({
+                "value": str(deaths),
+                "value_en": str(deaths),
+                "source": f"IMO — {deaths} وفاة بحّار مؤكدة حتى {as_at}",
+                "source_en": f"IMO — {deaths} confirmed seafarer deaths as at {as_at}",
+            })
+            updated = layers.setdefault("updated", {})
+            updated.update({
+                "value": as_at,
+                "value_en": as_at,
+                "source": f"القائمة الرسمية بتاريخ بيانات {as_at}",
+                "source_en": f"Official list as at {as_at}",
+            })
+        cards.append(card)
+    return cards
 
 
 def build(meta: dict, zones: dict, registry: dict, kpis: dict) -> list[dict]:
@@ -126,9 +231,12 @@ def main() -> int:
     if args.apply:
         meta["hero_kpis"] = cards
         meta["hero_risk_patterns"] = list(contract.get("risk_patterns") or [])
+        official_cards = build_official_cards(meta, registry)
+        meta["official_cards"] = official_cards
         meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
         print(f"   ✔ بُني {len(cards)} بطاقة من العقد · تغيّرت: {len(changed)}"
-              + (f" ({', '.join(changed)})" if changed else ""))
+              + (f" ({', '.join(changed)})" if changed else "")
+              + f" · official_cards: {len(official_cards)} من العقد والمصدر الرسمي")
     else:
         print(f"   ✔ قياس: {len(cards)} بطاقة · مطابقة: {len(cards) - len(changed)} · مخالفة: {len(changed)}")
         for cid in changed:

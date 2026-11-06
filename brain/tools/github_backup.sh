@@ -17,6 +17,20 @@ case "$REPO" in
 esac
 LOG="$B/logs/github-backup-$(date -u +%F).log"
 mkdir -p "$B/logs"
+exec 3>&2
+
+print_backup_log_on_exit() {
+  rc=$?
+  trap - EXIT
+  if [ -f "$LOG" ]; then
+    tail -3 "$LOG" >&3 || true
+  else
+    echo "✘ فشل مغلق: لم يُنشأ سجل النسخة الاحتياطية: $LOG" >&3
+  fi
+  exec 3>&-
+  exit "$rc"
+}
+trap print_backup_log_on_exit EXIT
 
 {
   abort() {
@@ -90,5 +104,3 @@ mkdir -p "$B/logs"
   fi
   echo "=== انتهى: $(date -u +%FT%TZ) ==="
 } >> "$LOG" 2>&1
-
-tail -3 "$LOG"

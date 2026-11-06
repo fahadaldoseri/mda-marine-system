@@ -16,13 +16,15 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 import subprocess
 import sys
 from datetime import date
 from pathlib import Path
 
-ROOT_DEFAULT = Path("/home/ubuntu/brain-marine-news")
+BRAIN = Path(os.environ.get("BRAIN_DIR") or Path(__file__).resolve().parents[1])
+SITE = Path(os.environ.get("SITE_DIR") or BRAIN.parent / "seawatch")
 
 
 def sh(argv: list[str], root: Path, timeout: int = 1200) -> tuple[int, str]:
@@ -34,8 +36,8 @@ def sh(argv: list[str], root: Path, timeout: int = 1200) -> tuple[int, str]:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="بوابة العبور")
-    ap.add_argument("--root", default=str(ROOT_DEFAULT))
-    ap.add_argument("--site", default="/home/ubuntu/seawatch")
+    ap.add_argument("--root", default=str(BRAIN))
+    ap.add_argument("--site", default=str(SITE))
     ap.add_argument("--from", dest="frm", required=True, help="المرحلة الحالية")
     ap.add_argument("--to", dest="to", required=True, help="المرحلة التالية")
     ap.add_argument("--date", default=date.today().isoformat())

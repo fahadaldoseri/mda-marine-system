@@ -13,7 +13,7 @@
 
 الاستعمال:
   browser_measure.py --url <رابط> --out audit/measurements/live.json
-  browser_measure.py --url file:///home/ubuntu/seawatch/dist/reports/2026-11-05.html
+  browser_measure.py --url file://$SITE_DIR/dist/reports/2026-11-05.html
   browser_measure.py --check overflow --check decision --phrase "هجمات مؤكدة"
 
 رمز الخروج: 0 كل الفحوص المطلوبة ناجحة · 2 فشل مانع.
@@ -22,9 +22,12 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+
+BRAIN = Path(os.environ.get("BRAIN_DIR") or Path(__file__).resolve().parents[1])
 
 # أسئلة القائد العشرة تُقرأ من مصدر حقيقي واحد: runbook/readiness-questions.json
 READINESS_FILE = "runbook/readiness-questions.json"
@@ -32,6 +35,13 @@ DEFAULT_READINESS = [
     "مستوى التهديد", "أعلى قطاع", "إجراء اليوم", "الوقائع المستوفية", "المصادر",
     "آخر تحديث", "التحذيرات", "المراقبة", "الاستهداف", "الخلاصة",
 ]
+
+# بعض المواقع الرسمية تُنشئ قائمة الوقائع بعد تحميل HTML وتمنع بصمة Chromium
+# الافتراضية؛ هذه بصمة سياق متصفح حقيقي ثابتة، وليست تجاوزًا لشرط وجود المرساة.
+ANCHOR_BROWSER_USER_AGENT = (
+    "Mozilla/5.0 (X11; Linux x86_64; rv:158.0) Gecko/20100101 Firefox/158.0"
+)
+ANCHOR_DOM_WAIT_MS = 15000
 
 
 def load_readiness(root: Path, url: str) -> list[str]:
@@ -125,14 +135,19 @@ JS_MEASURE = r"""
 
 def measure(url: str, widths: list[int], questions: list[str], phrases: list[str],
             base: str | None = None) -> dict:
-    from playwright.sync_api import sync_playwright  # استيراد مؤجَّل
+    from playwright.sync_api import Error as PlaywrightError, sync_playwright  # استيراد مؤجَّل
     from urllib.parse import urljoin
 
     result = {"url": url, "at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "widths": {}}
     with sync_playwright() as pw:
         browser = pw.chromium.launch(args=["--no-sandbox"])
         for width in widths:
-            page = browser.new_page(viewport={"width": width, "height": 900}, device_scale_factor=1)
+            context = browser.new_context(
+                viewport={"width": width, "height": 900},
+                device_scale_factor=1,
+                user_agent=ANCHOR_BROWSER_USER_AGENT,
+            )
+            page = context.new_page()
             errs: list[str] = []
             warns: list[str] = []
             pageerrs: list[str] = []
@@ -148,29 +163,63 @@ def measure(url: str, widths: list[int], questions: list[str], phrases: list[str
             data["pageerrors"] = pageerrs[:3]
             # أهداف المراسي: داخليًّا من الصفحة نفسها، وخارجيًّا بفتح الصفحة الهدف مرة لكل مرساة
             targets: dict[str, bool] = {}
+            target_details: dict[str, dict] = {}
             for link in data.get("anchor_links", []):
                 if link["page"] == "(نفس الصفحة)":
                     targets[f"#{link['hash']}"] = bool(link.get("same_page_exists"))
+                    target_details[f"#{link['hash']}"] = {
+                        "http_status": None,
+                        "dom_wait_ms": 0,
+                        "exists": targets[f"#{link['hash']}"] ,
+                    }
                     continue
                 key = f"{link['page']}#{link['hash']}"
                 if key in targets:
                     continue
                 try:
-                    aux = browser.new_page()
+                    aux = context.new_page()
                     target_page = link["page"]
                     if base and url.startswith("file://") and target_page in ("", "/"):
                         target_page = "/index.html"
                     if base and url.startswith("file://") and target_page.startswith("/"):
                         target_page = "file://" + base.rstrip("/") + target_page
-                    aux.goto(target_page if target_page.startswith("file://") else urljoin(url, target_page),
-                             wait_until="load", timeout=45000)
+                    response = aux.goto(
+                        target_page if target_page.startswith("file://") else urljoin(url, target_page),
+                        wait_until="load", timeout=45000,
+                    )
+                    status = response.status if response is not None else None
+                    aux.wait_for_function(
+                        "(h) => !!document.getElementById(h)",
+                        arg=link["hash"], timeout=ANCHOR_DOM_WAIT_MS,
+                    )
                     targets[key] = bool(aux.evaluate("(h) => !!document.getElementById(h)", link["hash"]))
+                    if not targets[key]:
+                        if status is not None and not (200 <= status < 400):
+                            raise PlaywrightError(f"anchor target HTTP {status}; DOM target absent")
+                        raise PlaywrightError("anchor target absent after DOM wait")
+                    target_details[key] = {
+                        "http_status": status,
+                        "dom_wait_ms": ANCHOR_DOM_WAIT_MS,
+                        "exists": targets[key],
+                    }
                     aux.close()
-                except Exception:  # noqa: BLE001
+                except PlaywrightError as exc:
                     targets[key] = False
+                    target_details[key] = {
+                        "http_status": None,
+                        "dom_wait_ms": ANCHOR_DOM_WAIT_MS,
+                        "exists": False,
+                        "error": str(exc)[:200],
+                    }
+                    try:
+                        aux.close()
+                    except Exception:
+                        pass
             data["anchor_targets"] = targets
+            data["anchor_target_details"] = target_details
             result["widths"][str(width)] = data
             page.close()
+            context.close()
         browser.close()
     return result
 
@@ -231,7 +280,7 @@ def main() -> int:
     ap.add_argument("--soft", action="append", default=[],
                     choices=["overflow", "console", "anchor", "decision", "readiness", "phrases"],
                     help="فحص يُقاس ويُبلَّغ ولا يمنع")
-    ap.add_argument("--root", default=".", help="جذر النظام (لقراءة أسئلة الجاهزية)")
+    ap.add_argument("--root", default=str(BRAIN), help="جذر النظام (لقراءة أسئلة الجاهزية)")
     ap.add_argument("--base-file", help="جذر الموقع المحلي لحلّ المسارات المطلقة في file://")
     ap.add_argument("--widths", default="1440,1920", help="عروض الشاشة")
     ap.add_argument("--check", action="append", default=[],

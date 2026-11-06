@@ -4,11 +4,13 @@
 سالب: وقائع متطابقة الموضع بلا تفكيك تُكشف كتراكب، وواقعة مُسقطة تُكشف.
 """
 
+import os
 import pathlib
 import sys
 import unittest
 
-SITE = pathlib.Path("/home/ubuntu/seawatch")
+BRAIN = pathlib.Path(os.environ.get("BRAIN_DIR") or pathlib.Path(__file__).resolve().parents[1])
+SITE = pathlib.Path(os.environ.get("SITE_DIR") or BRAIN.parent / "seawatch")
 sys.path.insert(0, str(SITE / "generator"))
 
 import map_cluster as mc  # noqa: E402

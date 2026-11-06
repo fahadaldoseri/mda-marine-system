@@ -32,7 +32,7 @@ def check(root: Path) -> list[str]:
         return [f"دفتر القرارات غير موجود: {path}"]
     try:
         reg = json.loads(path.read_text(encoding="utf-8"))
-    except Exception as exc:  # noqa: BLE001
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
         return [f"دفتر القرارات غير قابل للقراءة: {exc}"]
 
     allowed = set(reg.get("status_values_ar") or [])
@@ -82,8 +82,9 @@ def check(root: Path) -> list[str]:
 
     declared = reg.get("counts") or {}
     for k, v in declared.items():
-        if counts.get(k) != v:
-            errs.append(f"عدّاد «{k}» معلن {v} والواقع {counts.get(k)}")
+        actual = counts.get(k, 0)
+        if actual != v:
+            errs.append(f"عدّاد «{k}» معلن {v} والواقع {actual}")
 
     return errs
 
@@ -114,4 +115,6 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)

@@ -1,5 +1,6 @@
 {
  "_note": "معجم واجهة النسخة الإنجليزية — سجل حاكم واحد لنصوص لا تأتي من المتن (بطاقات الوقائع · وسوم الحالة · تسميات المؤشرات · مفاتيح الخريطة · عدّادات · عناصر الشريط). يُسقط عليه معجم الشريط من generator/site_chrome.py. أي نص عربي جديد لا يعبر البوابة قبل إضافته هنا.",
+ "_confidence_grade_map": "brain-marine-news/appendices/confidence-grade-map.json",
  "date_created": "2026-10-29",
  "entries": {
   "آخر تحديث": "Last updated",
@@ -277,6 +278,7 @@
   "خلال فترة التغطية · لا يُدّعى أنها جديدة": "during the coverage period · not claimed to be new",
   "أعلى قطاع:": "Highest sector:",
   "لا واقعة مؤهّلة": "No qualifying incident",
+  "لا واقعة مؤهلة.": "No eligible incident.",
   "واقعة مؤهّلة واحدة": "One qualifying incident",
   "واقعتان مؤهّلتان": "Two qualifying incidents",
   "وقائع مؤهّلة": "qualifying incidents",
@@ -1454,7 +1456,155 @@
   "المستوى في بحر العرب: منخفض — لا جديد.": "Zone level in the Arabian Sea: Low — nothing new.",
   "المستوى في المحيط الهندي: منخفض — لا جديد.": "Zone level in the Indian Ocean: Low — nothing new.",
   "لماذا لم يصل إلى «حرج»: الرتبة الخامسة تشترط تعطيلًا كاملًا لممر ملاحي أو غرق سفينة أو خسائر بشرية مؤكدة.": "Why it did not reach “critical”: the fifth rank requires a full disruption of a shipping lane, a vessel sinking, or confirmed human losses.",
-  "المصادر: 62 معتمدة = 60 بالمسار الآلي + 2 بالمرجعية اليدوية. الفحص: 59 ناجحة. 1 متعذّر: وكالة الأنباء الكويتية (كونا) — عطل اتصال مؤقت. المرجعية اليدوية: 2 يُفحص يدويًا.": "Sources: 62 approved = 60 by automated route + 2 by manual reference. Check: 59 succeeded. 1 not retrieved: Kuwait News Agency (KUNA) — a temporary connection fault. Manual reference: 2 items under manual review."
+  "المصادر: 62 معتمدة = 60 بالمسار الآلي + 2 بالمرجعية اليدوية. الفحص: 59 ناجحة. 1 متعذّر: وكالة الأنباء الكويتية (كونا) — عطل اتصال مؤقت. المرجعية اليدوية: 2 يُفحص يدويًا.": "Sources: 62 approved = 60 by automated route + 2 by manual reference. Check: 59 succeeded. 1 not retrieved: Kuwait News Agency (KUNA) — a temporary connection fault. Manual reference: 2 items under manual review.",
+  "TradeWinds؛": "TradeWinds; The Maritime Executive. **Location:** Strait of Hormuz and the Gulf of Oman. **Status:** media report; no official statement from South Korea or confirmation from UKMTO appears in today's material.",
+  "إصابة ناقلة نفط خام كبيرة بمقذوفين": "engine room of a large crude oil tanker in the latest attack in the Strait. The two items most probably describe the vessel recorded on 04/11/2026 as MN-2026-11-04-04 (MN-2026-11-05-03).",
+  "إعلان طرفي مفصّل يذكر أربع ناقلات وسفينتين مضبوطتين، وبلاغات عن ضربات في المنطقة نفسها": "reports of strikes in the same area | No maritime authority confirmation, no vessel names and no casualty figures |",
+  "إعلان طرفي يغطي أربع ناقلات وسفينتين مضبوطتين ومسيّرة مُسقطة داخل المضيق.": "A party announcement covering four tankers, two seized vessels and a downed drone inside the Strait.",
+  "اطلبوا تأكيدًا من": "- Request confirmation from UKMTO and the IMO register before acting on any party announcement about tankers inside the Strait.",
+  "الأثر على العمل:": "the Strait alongside announced United States strikes; because that announcement is a claim without confirmation, routing decisions must rest on official verification first.",
+  "الإعلان بيان سياسي بعد انتخابات التجديد النصفي الأمريكية": "The material also reports United States strikes, which would be consistent with real losses |",
+  "الخسائر أقل من المعلن والبندان المهنيان يصفان سفينة واحدة": "carrier; the register unchanged | The announcement's detail and its repetition across many headlines |",
+  "العدد لا يساوي عدد الهجمات أو عدد السفن المتضررة": "figure does not equal the number of attacks or the number of vessels affected |",
+  "المصدر والتاريخ": "Source and date |",
+  "المواد تذكر أيضًا ضربات أمريكية، وهو ما يتسق مع خسائر حقيقية": "same period | The material also reports United States strikes, which would be consistent with real losses |",
+  "النص الكامل وموقع التحذيرين 194-26 و195-26: لا يزالان غير متوفرين.": "Full text and position of UKMTO warnings 194-26 and 195-26: still not available.",
+  "بندان مهنيان عن إصابة ناقلة نفط خام كبيرة، والأرجح أنهما يصفان سفينة واحدة.": "Two trade items about damage to a large crude oil tanker, probably describing one vessel.",
+  "بندان مهنيان عن ناقلة نفط خام كبيرة واحدة، وثبات الرقم الرسمي": "large crude carrier; the register unchanged | The announcement's detail and its repetition across many headlines |",
+  "تأكيد مستقل بتدمير أربع ناقلات داخل المضيق: غير متوفر.": "Independent confirmation of the destruction of four tankers inside the Strait: not available.",
+  "تجارة النقل المكوكي في خليج عمان": "a case-by-case basis | TradeWinds; 04/11/2026 |",
+  "تحت المراقبة: أرقام الحركة الملاحية والتكدس في مضيق هرمز وخليج عُمان.": "Under monitoring: shipping movement and congestion figures in the Strait of Hormuz and the Gulf of Oman.",
+  "تحت المراقبة: أسماء السفن المضبوطة ومواقعها وحالة أطقمها.": "Under monitoring: the names and positions of the seized vessels and the condition of their crews.",
+  "تحت المراقبة: أي تأكيد بخسائر الناقلات المعلن من": "the IMO register or a naval authority.",
+  "تحت المراقبة: تنفيذ ترتيبات المرور المعلنة للسفن الهندية.": "Under monitoring: implementation of the announced passage arrangements for Indian ships.",
+  "تربط بنود سياسية في الفترة نتائج انتخابات التجديد النصفي الأمريكية بمسار الحرب على إيران، مع نقل عن الرئيس الأمريكي أنه يقلل من احتمال ضربات جديدة، وتصريح لقيادة إيرانية بأن العداء الأمريكي سيستمر. هذه البنود سياق فقط ولا تثبت واقعة بحرية.": "Political items in the period link United States midterm election results to the course of the Iran war, with the United States President reported to be playing down the prospect of further strikes and an Iranian leader saying United States hostility would persist. These items are context only and do not establish a maritime incident.",
+  "تفصيل الإعلان وتكراره في عناوين كثيرة": "unchanged | The announcement's detail and its repetition across many headlines |",
+  "تنفيذ ترتيبات المرور المعلنة للسفن الهندية: غير متوفر.": "Whether the announced passage arrangements for Indian ships were implemented: not available.",
+  "توقيت الإعلان مباشرة بعد نتائج الانتخابات، ووجود بنود سياسية في الفترة نفسها": "the same period | The material also reports United States strikes, which would be consistent with real losses |",
+  "حملت القائمة الرسمية للمنظمة البحرية الدولية 128 حادثة مؤكدة على سفن تجارية و24 وفاة مؤكدة بين البحّارة، بقراءة 4/11/2026 وبقيمة مرجعية بتاريخ 3/11/2026 (أحدث تحديث للقائمة). لا قراءة أحدث في مواد اليوم.": "The official International Maritime Organization list carried 128 confirmed incidents against commercial ships and 24 confirmed seafarer deaths, read on 4/11/2026 and effective as at 3/11/2026, the list's latest update. No more recent reading appears in the material.",
+  "خسارة ناقلات فعلًا داخل المضيق": "maritime authority confirmation, no vessel names and no casualty figures |",
+  "دخل مشغّل ناقلات في تجارة النقل المكوكي في خليج عمان حسب حالة كل رحلة": "entered the Gulf of Oman shuttle business on a case-by-case basis | TradeWinds; 04/11/2026 |",
+  "درجة الثقة: منخفضة إلى متوسطة.": "Confidence level: low to moderate.",
+  "رقم البلاغ ومسافة معلنة 14 ميلًا بحريًا شمال شرق نقطة غير مكتملة الاسم": "report number and a stated distance of 14 nautical miles north-east of a point whose name is incomplete |",
+  "زدوا المراقبة البصرية واللاسلكية، وأبلغوا مركز بلاغات الملاحة فورًا عند رؤية أي جسم عائم أو سماع انفجار أو مشاهدة لغم.": "Raise visual and radio watch and report any floating object, explosion or mine sighting to the maritime reporting centre without delay.",
+  "سُجل تعذر مسار فرعي للمصدرين 17، 24 مع نجاح عبر مسار بديل؛ وتعذرت مسارات المصدر 27 كاملةً وأُفصح عن ذلك.": "A sub-route failure was recorded for sources 17 and 24 with success via an alternative route; all routes of source 27 failed and that is disclosed.",
+  "كما ذكرت المواد إجراءً أمريكيًا ضد تسجيل سفن مزوَّر تستخدمه أسطول الظل الإيراني. وهو إجراء قانوني وتجاري ولا يُحتسب واقعة بحرية.": "The material also reported a United States action against fraudulent ship registries used by Iran's shadow fleet. It is a legal and commercial measure and is not counted as a maritime incident.",
+  "لا تأكيد من جهة ملاحية، ولا أسماء سفن، ولا حصيلة خسائر": "in the same area | No maritime authority confirmation, no vessel names and no casualty figures |",
+  "لا تحذير جديد من": "IMO figure during the period.",
+  "لا تنسب أي مادة واقعة إلى جهة منفذة مسمّاة. والعناوين التي تذكر ضربات أو الحرس الثوري تُعرض كما وردت في مصدرها ولا تتحول إلى نسبة رسمية للحادث إلى جهة.": "No material attributes any incident to a named actor. Headlines mentioning strikes or the Revolutionary Guard are presented as their source stated them and do not become an official attribution of an incident to an actor.",
+  "لا رقم جديد مذكور في المواد": "the material | Not available |",
+  "لم تحمل تغذية": "no confirmed addition to the register. Trade reports about the Strait of Hormuz are not added to the official figure before they appear in the IMO register or are confirmed by an independent maritime authority.",
+  "لم يصدر تحذير جديد خلال فترة التقرير، ولا يزال النص الكامل للتحذيرين النشطين غير متوافر. لا يجوز استخراج اسم سفينة أو موقع أدق أو حصيلة بشرية منهما قبل نشر النص الرسمي.": "No new warning was issued during the reporting period and the full text of both active products is still unavailable. No vessel name, more precise position or casualty figure may be drawn from them before the official text is published.",
+  "مقتل بحّار في هجوم على سفينة قرب المضيق": "Death of a seafarer in an attack near the Strait |",
+  "هوية السفينة المصابة بمقذوفين وموقعها: غير معلومَين، ولا تثبت صلتها بالسفينة المسجّلة في": "and position of the vessel struck by two projectiles: not available; its link to the vessel reported on 04/11/2026 is not established.",
+  "يصف البندان المهنيان عن ناقلة نفط خام كبيرة النوع نفسه من الضرر في المسطح المائي نفسه، ولا تتيح المواد فصل الواقعة بثقة عن السفينة المسجّلة في": "two trade items about a very large crude carrier describe the same kind of damage in the same waterway, and the material does not allow them to be separated with certainty from the vessel recorded on 04/11/2026. Counting them twice would inflate the number of affected ships.",
+  "إعلان طرفي يغطي أربع ناقلات وسفينتين مضبوطتين ومسيّرة؛ وإعلان السماح بمرور السفن الهندية؛ وبلاغ عن ضربات نقل عن مسؤول أمريكي": "Party announcement covering four tankers, two seized vessels and a drone; the announcement on allowing Indian ships to pass; the strike reported by a United States official",
+  "توقف الشحن الخام المرئي، وبقيت ناقلات إيران الفارغة متوقفة منذ سبتمبر، لا رقم مذكور": "Visible crude loadings halted and Iranian empty tankers idle since September; no figure given",
+  "حملت القائمة الرسمية للمنظمة البحرية الدولية 128 حادثة مؤكدة و24 وفاة مؤكدة بين البحّارة بقيمة مرجعية بتاريخ 3/11/2026 وبقراءة 4/11/2026. ولا يمثل هذا الرقم مجموع منتجات": "The official IMO list carried 128 confirmed incidents and 24 confirmed seafarer deaths as at 3/11/2026, read on 4/11/2026. The figure is not the total of",
+  "رقم التحذير وصدوره عن الحساب الرسمي؛ الموقع والضرر غير متاحان": "The warning number and its issue from the official account; position and damage are not available",
+  "سلوك خطوط الحاويات": "Container lines' behaviour",
+  "شحن النفط الخام": "Crude loadings",
+  "غياب أي تحذير جديد من": "The absence of any new",
+  "لا تتضمن المواد رقمًا موحّدًا للتكدس ولا عدد السفن التي غيّرت خط سيرها؛ لذلك تُستخدم البنود أعلاه للاطّلاع على الاتجاه فقط ولا تُعتبر إحصاءً كاملاً.": "No unified congestion figure or count of vessels that changed route is available in the material, so the items above are used for direction only and not as complete statistics.",
+  "مشغلو الحاويات يتجنبون مضيق هرمز بسبب مخاطر أمنية «غير قابلة للتوقع»، لا رقم مذكور": "Container operators avoid the Strait of Hormuz because of \"unpredictable\" security risks; no figure given",
+  "يهيمن على الفترة إعلان طرف واحد يغطي أربع ناقلات وسفينتين مضبوطتين ومسيّرة مُسقطة، مع بلاغات عن ضربات أمريكية داخل المضيق. حجم الإعلان كبير، لكنه صادر عن طرف في المواجهة، ولا يؤكد أي منتج من": "The period is dominated by a single party announcement covering four tankers, two seized vessels and a downed drone, together with reports of United States strikes inside the Strait. The scale of the announcement is significant, but it comes from one side of the confrontation and no",
+  "(A/2)،": "through UKMTO (A/2), and media reporting (C/3) |",
+  "(A/2)، والنقل الإعلامي (C/3)": "UKMTO (A/2), JMIC through UKMTO (A/2), and media reporting (C/3) |",
+  ". لا يثبت هذا التصريح وحده إغلاقًا ملاحيًا رسميًا، ولذلك ظلّ في الخلفية السياسية لا في عدّ الوقائع البحرية المؤكدة.": "to fulfilment of specified conditions, according to ISNA. That statement alone does not establish an official maritime closure, so it remains in the political background rather than in the count of confirmed maritime incidents.",
+  "Update 111 قبل اعتماد أي تغيير في خط السير.": "details of JMIC Update 111 before adopting any route change.",
+  "Update 111، نُشِر عبر": "Update 111, distributed through UKMTO; details are not available |",
+  "، بحسب": "a reference value dated 03/11/2026, according to IMO.",
+  "، ومنها اسم السفينة ونوع الضرر وحالة الطاقم.": "196-26, including the ship's name, type of damage and crew status.",
+  "؛ الاتجاه: زيادة رسمية واحدة.": "in the 05/11 report; direction: one official increase.",
+  "؛ الاتجاه: زيادة.": "the 05/11 report; direction: increase.",
+  "اطلبوا نص": "any route change.",
+  "الكامل وتفاصيل التنبيه الإرشادي": "before adopting any route change.",
+  "المحدث": "names, an independent maritime report and an updated IMO record |",
+  "تظل التحذيرات": "The warning labelled",
+  "تفاصيل بلاغ": "of damage and crew status.",
+  "جزءًا من السياق القائم، ولا تُعد واقعتين جديدتين في هذا التقرير.": "195-26, issued on 03/11/2026 remains part of the existing context and is not counted as two new incidents in this report.",
+  "رسمي مستقل في الخليج العربي": "The presence of an independent official UKMTO report in the Arabian Gulf |",
+  "رسمي، مع نقص تفاصيله واعتماد بقية المستجدات على نقل إعلامي غير مؤكد.": "product exists, while its details are incomplete and the remaining developments depend on unconfirmed media reporting.",
+  "قبل إدراجها في القائمة الرسمية أو تأكيدها من جهة ملاحية مستقلة.": "the IMO register before it appears in the official list or is confirmed by an independent maritime authority.",
+  "لأضرار متعددة أو تعطيل عبور؛ يخفضه نفي رسمي موثق أو إغلاق البلاغ دون مستجد.": "or IMO of multiple instances of damage or a disruption to transit would raise it; a documented official denial or closure of the report without a new development would lower it.",
+  "لا يسمّي جهة منفذة.": "Iran, and the UKMTO report does not name a responsible party.",
+  "للحوادث المؤكدة: 128 حادثة و24 وفاة؛ الاتجاه: بلا تغيير معروف.": "of confirmed incidents: 128 incidents and 24 deaths; direction: no known change.",
+  "متابعة نصّ": "any later update on the UKMTO website.",
+  "وIMO والسلطات البحرية المحلية.": "UKMTO, IMO and local maritime authorities.",
+  "وأي تحديث لاحق على موقع": "UKMTO 196-26 and any later update on the UKMTO website.",
+  "والجهات الملاحية الرسمية.": "consultation with UKMTO and official maritime authorities.",
+  "ورواية عن خمس ناقلات بلا تأكيد مستقل": "high | UKMTO 196-26 and an account about five tankers without independent confirmation |",
+  "وقيمة مرجعية بتاريخ": "with a reference value dated 03/11/2026, according to IMO.",
+  "ولا حصيلة بشرية منشورة.": "casualty count have been published.",
+  "ومواقعها وحالة أطقمها في الرواية التي نقلتها straits.live.": "crew condition of the five tankers in the account carried by straits.live.",
+  ". الافتراض الثاني أن نشر الأصول الكورية الجنوبية قرار نافذ. ما يخالفه: غياب بيان رسمي كوري في مواد اليوم.": ".",
+  "؛ التفاصيل غير متاحة": "details are not available",
+  "؛ الحالة: قائم.": "status: active.",
+  "؛ الحالة: يحتاج متابعة.": "status: requires follow-up.",
+  "؛ المصدر: straits.live؛ الحالة: غير مؤكدة.": "source: straits.",
+  "؛ تفاصيل الإصابة غير متاحة": "details of the impact are not available",
+  "؛ زيادة رسمية واحدة": "warnings list; one official increase",
+  "؛ لا تسجيل أحدث في مواد اليوم": "no later entry in today's material",
+  "؛ ما يؤكده: وجود واقعة مبلّغ عنها؛ ما ينفي اتساعها: غياب النص الكامل؛ المصدر:": "what it confirms: that a reported incident exists; what argues against its expansion: the full text is absent; source:",
+  "إضافة أحدث إلى قائمة المنظمة البحرية الدولية. آخر قيمة مثبتة في تقرير": "material. The latest value confirmed in the",
+  "ارفعوا التأهب قبل الدخول إلى خليج عُمان · مضيق هرمز، وأعيدوا تقييم نقاط الانتظار.": "Raise the alert level before entering the Strait of Hormuz and the Gulf of Oman, and reassess waiting points.",
+  "استعداد كوريا الجنوبية لنشر أصول بحرية قرب خليج عُمان · مضيق هرمز بالتزامن مع تقارير عن ناقلات تحترق": "MN-2026-11-06-03 — What happened: TradeWinds and The Maritime Executive reported that South Korea was preparing to deploy naval assets near the Strait of Hormuz and the Gulf of Oman, alongside reports of tankers burning.",
+  "الأسماء أو الأضرار أو الخسائر.": "hours. UKMTO and IMO did not confirm the names, damage or casualties, so this is recorded as one unconfirmed account",
+  "الأسماء أو الأضرار أو الخسائر، لذلك تُسجّل كرواية واحدة غير مؤكدة (06-02).": "names, damage or casualties, so this is recorded as one unconfirmed account (MN-2026-11-06-02).",
+  "الكامل ونشرة": "and the details of",
+  "المستوى العام مرتفع. ويظل خليج عُمان · مضيق هرمز والخليج العربي أعلى القطاعات عند مستوى مرتفع.": "Level in the Strait of Hormuz, the Gulf of Oman and the Arabian Gulf: high",
+  "الواقعة 06-01 — المنطقة شمال مدينة الشمال - الخليج العربي، الصفة بلاغ رسمي، الإثبات مؤكد، الموقع تقريبي.": "MN-2026-11-06-01 — What happened: On 05/11/2026, UKMTO listed report 196-26 about an incident 50 nautical miles north of Madinat ash Shamal and described it as an attack. Source:",
+  "بلاغ 196-26 عن واقعة على بعد 50 ميلًا بحريًا شمال مدينة الشمال ووصفها هجومًا؛ النص الكامل وتفاصيل الضرر والطاقم غير متاحة.": "The UKMTO warnings list included report 196-26 about an incident 50 nautical miles north of Madinat ash Shamal and described it as an attack;",
+  "بلاغ 196-26 عن واقعة على بعد 50 ميلًا بحريًا شمال مدينة الشمال، مع وصفها هجومًا؛ التفاصيل الكاملة غير متاحة.": "warnings list included report 196-26 about an incident 50 nautical miles north of Madinat ash Shamal and described it as an attack; the full details of the report are not available in today's material",
+  "بلاغ 196-26 عن واقعة على بعد 50 ميلًا بحريًا شمال مدينة الشمال، مع وصفها هجومًا؛ التفاصيل الكاملة للبلاغ غير متاحة في مواد اليوم (06-01).": "report 196-26 about an incident 50 nautical miles north of Madinat ash Shamal and described it as an attack; the full details of the report are not available in today's material (MN-2026-11-06-01).",
+  "رسمي عن واقعة في الخليج العربي وروايات إعلامية مركزة على خليج عُمان · مضيق هرمز؛ وجود منتج رسمي يرفع أولوية التحقق، لكن غياب التفاصيل والأسماء والتأكيد الملاحي المستقل لا يثبت أضرارًا متعددة أو خسائر بشرية.": "The material combines an official UKMTO report of an incident in the Arabian Gulf with media accounts focused on the Strait of Hormuz and the Gulf of Oman.",
+  "رسمي عن واقعة في الخليج العربي وروايات إعلامية مركزة على مضيق هرمز وخليج عُمان. هذا يرفع أولوية التحقق، لكنه لا يحول الرواية عن خمس ناقلات إلى خمس وقائع؛ لا أسماء سفن ولا أرقام": "report of an incident in the Arabian Gulf with media accounts focused on the Strait of Hormuz and the Gulf of Oman. This raises the priority of verification, but it does not turn the account about five tankers into five incidents; no ship names",
+  "شمال مدينة الشمال - الخليج العربي": "Arabian Gulf — north of Madinat ash Shamal ·",
+  "لا تُعد العناوين المتكررة عن خمس ناقلات وقائع منفصلة؛ تكرار الرواية لا يرفع درجة الإثبات.": "Repeated headlines about five tankers being hit do not raise the proof level;",
+  "هي 128 حادثة مؤكدة على سفن تجارية و24 وفاة بين البحّارة، بقراءة": "is 128 confirmed incidents involving commercial ships and 24 seafarer deaths, read on",
+  "و195-26 الصادرة في": "warning 195-26, issued on",
+  "و3 بنود أخرى في قسم «التوصيات».": "and 3 further items in the Recommendations section.",
+  "وJMIC؛ لا إشعار إغلاق رسمي في مواد اليوم": "and JMIC; no official closure notice in today's material",
+  "ورواية عن إصابة خمس ناقلات واستعداد بحري كوري قرب مضيق هرمز دون تأكيد مستقل": "straits.live: report of an account that five tankers were hit by sea mines near the Strait of Hormuz.",
+  "سبب الثبات: لا واقعة مؤكدة، والبلاغ المهني وحده لا يكفي.": "Why it did not rise further: no confirmed incident, and a trade report alone is not enough.",
+  "الأرقام أعلاه تمثل البنود التي أمكن تحديدها من العناوين والنصوص المروّدة، ولا تمثل عدد الهجمات. نجحت 60 تغذية وبلغ مجموع عناصرها 1912 عنصرًا.": "The figures above represent the items that could be identified from the headlines and text supplied; they do not represent the number of attacks. 60 feeds succeeded and their items totalled 1912.",
+  "المستوى العام: متوسط — أعلى قطاع: مضيق هرمز وخليج عُمان والخليج العربي.": "Overall level: moderate — highest zone: Strait of Hormuz, Gulf of Oman and the Persian Gulf.",
+  "تغيّر رقم": "Change in the confirmed IMO figure",
+  "السبب": "What supports it in brief",
+  "سبب الثبات: لا تأكيد لتضرر خمس ناقلات أو لخسائر بشرية؛ الحالة الحرجة تتطلب تعطيلًا كاملاً للممر أو غرقًا أو خسائر مؤكدة.": "Why it did not rise further: there is no official confirmation that five tankers were damaged or that there were human losses; moving to a critical state requires full disruption of the passage, a sinking or confirmed losses.",
+  "مستمر؛ آخر واقعة مؤهلة في 2026-11-03": "Continuing level; latest qualifying incident in this sector dated 2026-11-03",
+  "موثوقية جيدة وتصديق جيد": "high reliability, high corroboration",
+  "موثوقية جيدة وتصديق متوسط": "high reliability, medium corroboration",
+  "موثوقية جيدة وتصديق ضعيف": "high reliability, low corroboration",
+  "موثوقية متوسطة وتصديق جيد": "medium reliability, high corroboration",
+  "موثوقية متوسطة وتصديق متوسط": "medium reliability, medium corroboration",
+  "موثوقية متوسطة وتصديق ضعيف": "medium reliability, low corroboration",
+  "موثوقية ضعيفة وتصديق جيد": "low reliability, high corroboration",
+  "موثوقية ضعيفة وتصديق متوسط": "low reliability, medium corroboration",
+  "موثوقية ضعيفة وتصديق ضعيف": "low reliability, low corroboration",
+  "موثوقية جيدة وتصديق جيد،": "high reliability, high corroboration, ",
+  "موثوقية متوسطة وتصديق متوسط،": "medium reliability, medium corroboration, ",
+  "موثوقية جيدة وتصديق جيد؛": "high reliability, high corroboration; ",
+  "موثوقية متوسطة وتصديق متوسط؛": "medium reliability, medium corroboration; ",
+  "موثوقية جيدة وتصديق جيد، straits.live موثوقية متوسطة وتصديق متوسط، MarineLink موثوقية متوسطة وتصديق متوسط). نقلت straits.live مقترحًا لإعادة فتح مضيق هرمز خلال يومين، مع حديث عن سبع نقاط، لكن لا يوجد في المواد الحالية إعلان تنفيذي يثبت فتحه (01-02 و01-03؛ موثوقية متوسطة وتصديق متوسط). الأثر على العمل: ارفعوا الحذر في مضيق هرمز والخليج العربي، ولا تغيّروا المسار أو تعبروا قرب جسم متضرر اعتمادًا على عنوان إعلامي وحده (": "high reliability, high corroboration, straits.live medium reliability, medium corroboration, MarineLink medium reliability, medium corroboration). straits.live relayed a proposal to reopen the Strait of Hormuz within two days, with mention of seven points, but the current material contains no executive announcement establishing that it has opened (01-02 and 01-03; medium reliability, medium corroboration). Operational impact: raise caution in the Strait of Hormuz and the Arabian Gulf, and do not alter course or pass near a damaged object based solely on a media headline (",
+  "نقلت ستريتس.لايف مقترحًا لإعادة فتح مضيق هرمز خلال يومين، مع حديث عن سبع نقاط، لكن لا يوجد في المواد الحالية إعلان تنفيذي يثبت فتحه (01-02 و01-03؛ موثوقية متوسطة وتصديق متوسط).": "straits.live relayed a proposal to reopen the Strait of Hormuz within two days, with mention of seven points, but the current material contains no executive announcement establishing that it has opened (01-02 and 01-03; medium reliability, medium corroboration).",
+  "، وإلى تقارير عن حرائق ناقلات وتسرب نفطي في نطاق الخليج. لا يثبت التحذير وحده نوع الواقعة أو الجهة المنفذة (01-01 و01-04 و01-06؛ موثوقية جيدة وتصديق جيد وموثوقية متوسطة وتصديق متوسط).": ", and reports of tanker fires and an oil spill in the Gulf area. The warning alone does not establish the incident type or the executing party (01-01, 01-04 and 01-06; high reliability, high corroboration and medium reliability, medium corroboration).",
+  "رقم 190-26 وإلى تقارير عن اندلاع حرائق في ناقلات وتسرب نفطي داخل نطاق الخليج. لا يثبت التحذير وحده نوع الواقعة أو الجهة المنفذة (01-01 و01-04 و01-06؛ موثوقية جيدة وتصديق جيد؛ موثوقية متوسطة وتصديق متوسط).": " warning No. 190-26 and reports of tanker fires and an oil spill in the Gulf area. The warning alone does not establish the incident type or the executing party (01-01, 01-04 and 01-06; high reliability, high corroboration; medium reliability, medium corroboration).",
+  "نشر التحذير 190-26 من دون تفاصيل في العنوان المتاح (01-01؛ موثوقية جيدة وتصديق جيد)": "Warning 190-26 was published without incident details in the available headline (01-01; high reliability, high corroboration)",
+  "نقل متكرر عن ادعاء واحد لا يعادل تحققًا مستقلًا (01-04؛ موثوقية متوسطة وتصديق متوسط)": "Repeated reporting of a single claim does not amount to independent confirmation (01-04; medium reliability, medium corroboration)",
+  "تفاصيل تشغيلية منقولة بلا تأكيد رسمي مستقل في المواد الحالية (01-05؛ موثوقية جيدة وتصديق جيد)": "Relayed operational details without independent official confirmation in the current material (01-05; high reliability, high corroboration)",
+  "موثوقية عالية وتصديق مرتفع": "high reliability, high corroboration",
+  "المستوى العام: مرتفع جدًا — القطاع الأعلى: مضيق هرمز، خليج عُمان، الخليج العربي. يستند هذا التقدير إلى صدور ثلاثة تحذيرات رسمية خلال الفترة، منها بلاغ هجوم داخل مضيق هرمز وتحديث لتحذير سابق، وهو أعلى تكرار رسمي خلال الفترة القريبة. لا تُرفع درجة التهديد استنادًا إلى روايات غير مؤكدة قبل تأكيد رسمي أو تأكيد من مصدرين مستقلين (02-01 إلى 02-05؛ موثوقية جيدة وتصديق جيد).": "Overall level: very high — highest sector: Strait of Hormuz, Gulf of Oman and the Arabian Gulf. This assessment is based on three official warnings issued during the period, including an attack report inside the Strait of Hormuz and an update to a previous warning; this is the highest official frequency in the recent period. The threat level is not raised based on unconfirmed accounts before official confirmation or confirmation from two independent sources (02-01 to 02-05; high reliability, high corroboration).",
+  "تحذيران جديدان وتحديث للتحذير 190-26 خلال اثنتي عشرة ساعة (02-01 إلى 02-03؛ موثوقية جيدة وتصديق جيد)": "Two new warnings and an update to warning 190-26 within twelve hours (02-01 to 02-03; high reliability, high corroboration)",
+  "لا إدراج جديد في القائمة المعروضة (02-13؛ موثوقية عالية وتصديق مرتفع)": "No new entry in the displayed list (02-13; high reliability, high corroboration)",
+  "إعلان إيراني يمنح مهلة يومين مقابل شروط، بلا رد أميركي معلن (03-10؛ موثوقية متوسطة وتصديق متوسط)": "An Iranian announcement gives a two-day deadline in exchange for conditions, with no announced American response (03-10; medium reliability, medium corroboration)",
+  "اختطفت سفينة صيد إيرانية وعلى متنها 23 فردًا (03-09؛ موثوقية متوسطة وتصديق متوسط)": "An Iranian fishing vessel was hijacked with 23 people on board (03-09; medium reliability, medium corroboration)",
+  "المستوى العام: مرتفع — القطاع الأعلى: مضيق هرمز وخليج عمان والخليج العربي. يستند هذا التقييم إلى مجموعة مؤكدة واحدة خلال الفترة: النص الرسمي الكامل للتحذير 192-26 عن هجوم على ناقلة في الخليج العربي. وردت ثلاث روايات غير مؤكدة عن انفجارات ومقذوفات؛ لا ترفع هذه الروايات المستوى حتى يصدر تأكيد رسمي أو تأكيد من مصدرين مستقلين (03-01 إلى 03-06؛ موثوقية عالية وتصديق مرتفع وموثوقية جيدة وتصديق جيد وموثوقية متوسطة وتصديق متوسط).": "Overall level: high — highest sector: Strait of Hormuz, Gulf of Oman and the Arabian Gulf. This assessment rests on one confirmed set during the period: the full official text of warning 192-26 about an attack on a tanker in the Arabian Gulf. Three unconfirmed accounts of explosions and projectiles were reported; these accounts do not raise the level until official confirmation or confirmation from two independent sources (03-01 to 03-06; high reliability, high corroboration, high reliability, high corroboration and medium reliability, medium corroboration).",
+  "بصيغة مختصرة لا يذكر اسم السفينة ولا الضرر (03-03؛ موثوقية جيدة وتصديق جيد)": "In brief form, it names neither the vessel nor the damage (03-03; high reliability, high corroboration)",
+  "تحذير واحد جديد: 193-26 (03-01؛ موثوقية جيدة وتصديق جيد)": "One new warning: 193-26 (03-01; high reliability, high corroboration)",
+  "روايات عن انفجار ناقلتين نفط وعن اندلاع حريق في ناقلة شرق المضيق، ونقل إعلامي عن ضربات داخل نطاق المضيق (03-05؛ 03-06؛ 03-08؛ موثوقية متوسطة وتصديق متوسط)": "Accounts of two oil tankers exploding and a tanker catching fire east of the strait, and media reporting of strikes within the strait area (03-05; 03-06; 03-08; medium reliability, medium corroboration)",
+  "نُشر نص التحذير 192-26 مع موقع الواقعة ونوع السفينة (03-02؛ موثوقية عالية وتصديق مرتفع)": "The text of warning 192-26 was published with the incident location and vessel type (03-02; high reliability, high corroboration)",
+  "straits.live (موثوقية متوسطة وتصديق متوسط)": "straits.live (medium reliability, medium corroboration)"
  },
  "_derived": {
   "قناة العربية (الحساب الرسمي)": "اشتقاق آلي بمحاذاة ذاكرة الترجمة",
@@ -1462,7 +1612,7 @@
   "2026-10-29": "أُضيف 49 مدخلًا بيد المحرر من قائمة النصوص الناقصة الكاملة"
  },
  "date_updated": "2026-11-05",
- "updated": "2026-11-05",
+ "updated": "2026-11-06",
  "legacy_surface_units_note": "وحدات أسطح قديمة (إضافات · رئيسية · أرشيف) قُيّدت ترجمتها مرة واحدة لأنها لا تجد مقابلًا في متن اليوم الإنجليزي؛ العطل المرجع: ك-478.",
  "_directions": {
   "السفن المتوقفة خارج المراسي في مضيق هرمز وخليج المتابعة": {
@@ -2193,6 +2343,769 @@
   },
   "— التحذيرات 2026؛": {
    "source_date": "2026-11-05",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "TradeWinds؛": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "إصابة ناقلة نفط خام كبيرة بمقذوفين": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "إعلان طرفي مفصّل يذكر أربع ناقلات وسفينتين مضبوطتين، وبلاغات عن ضربات في المنطقة نفسها": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "إعلان طرفي يغطي أربع ناقلات وسفينتين مضبوطتين ومسيّرة مُسقطة داخل المضيق.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "اطلبوا تأكيدًا من": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "الأثر على العمل:": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "الإعلان بيان سياسي بعد انتخابات التجديد النصفي الأمريكية": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "الخسائر أقل من المعلن والبندان المهنيان يصفان سفينة واحدة": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "العدد لا يساوي عدد الهجمات أو عدد السفن المتضررة": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "المصدر والتاريخ": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "المواد تذكر أيضًا ضربات أمريكية، وهو ما يتسق مع خسائر حقيقية": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "النص الكامل وموقع التحذيرين 194-26 و195-26: لا يزالان غير متوفرين.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "بندان مهنيان عن إصابة ناقلة نفط خام كبيرة، والأرجح أنهما يصفان سفينة واحدة.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "بندان مهنيان عن ناقلة نفط خام كبيرة واحدة، وثبات الرقم الرسمي": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "تأكيد مستقل بتدمير أربع ناقلات داخل المضيق: غير متوفر.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "تجارة النقل المكوكي في خليج عمان": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "تحت المراقبة: أرقام الحركة الملاحية والتكدس في مضيق هرمز وخليج عُمان.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "تحت المراقبة: أسماء السفن المضبوطة ومواقعها وحالة أطقمها.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "تحت المراقبة: أي تأكيد بخسائر الناقلات المعلن من": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "تحت المراقبة: تنفيذ ترتيبات المرور المعلنة للسفن الهندية.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "تربط بنود سياسية في الفترة نتائج انتخابات التجديد النصفي الأمريكية بمسار الحرب على إيران، مع نقل عن الرئيس الأمريكي أنه يقلل من احتمال ضربات جديدة، وتصريح لقيادة إيرانية بأن العداء الأمريكي سيستمر. هذه البنود سياق فقط ولا تثبت واقعة بحرية.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "تفصيل الإعلان وتكراره في عناوين كثيرة": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "تنفيذ ترتيبات المرور المعلنة للسفن الهندية: غير متوفر.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "توقيت الإعلان مباشرة بعد نتائج الانتخابات، ووجود بنود سياسية في الفترة نفسها": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "حملت القائمة الرسمية للمنظمة البحرية الدولية 128 حادثة مؤكدة على سفن تجارية و24 وفاة مؤكدة بين البحّارة، بقراءة 4/11/2026 وبقيمة مرجعية بتاريخ 3/11/2026 (أحدث تحديث للقائمة). لا قراءة أحدث في مواد اليوم.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "خسارة ناقلات فعلًا داخل المضيق": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "دخل مشغّل ناقلات في تجارة النقل المكوكي في خليج عمان حسب حالة كل رحلة": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "درجة الثقة: منخفضة إلى متوسطة.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "رقم البلاغ ومسافة معلنة 14 ميلًا بحريًا شمال شرق نقطة غير مكتملة الاسم": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "زدوا المراقبة البصرية واللاسلكية، وأبلغوا مركز بلاغات الملاحة فورًا عند رؤية أي جسم عائم أو سماع انفجار أو مشاهدة لغم.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "سُجل تعذر مسار فرعي للمصدرين 17، 24 مع نجاح عبر مسار بديل؛ وتعذرت مسارات المصدر 27 كاملةً وأُفصح عن ذلك.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "كما ذكرت المواد إجراءً أمريكيًا ضد تسجيل سفن مزوَّر تستخدمه أسطول الظل الإيراني. وهو إجراء قانوني وتجاري ولا يُحتسب واقعة بحرية.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "لا تأكيد من جهة ملاحية، ولا أسماء سفن، ولا حصيلة خسائر": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "لا تحذير جديد من": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "لا تنسب أي مادة واقعة إلى جهة منفذة مسمّاة. والعناوين التي تذكر ضربات أو الحرس الثوري تُعرض كما وردت في مصدرها ولا تتحول إلى نسبة رسمية للحادث إلى جهة.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "لا رقم جديد مذكور في المواد": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "لم تحمل تغذية": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "لم يصدر تحذير جديد خلال فترة التقرير، ولا يزال النص الكامل للتحذيرين النشطين غير متوافر. لا يجوز استخراج اسم سفينة أو موقع أدق أو حصيلة بشرية منهما قبل نشر النص الرسمي.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "مقتل بحّار في هجوم على سفينة قرب المضيق": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "هوية السفينة المصابة بمقذوفين وموقعها: غير معلومَين، ولا تثبت صلتها بالسفينة المسجّلة في": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "يصف البندان المهنيان عن ناقلة نفط خام كبيرة النوع نفسه من الضرر في المسطح المائي نفسه، ولا تتيح المواد فصل الواقعة بثقة عن السفينة المسجّلة في": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "إعلان طرفي يغطي أربع ناقلات وسفينتين مضبوطتين ومسيّرة؛ وإعلان السماح بمرور السفن الهندية؛ وبلاغ عن ضربات نقل عن مسؤول أمريكي": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "توقف الشحن الخام المرئي، وبقيت ناقلات إيران الفارغة متوقفة منذ سبتمبر، لا رقم مذكور": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "حملت القائمة الرسمية للمنظمة البحرية الدولية 128 حادثة مؤكدة و24 وفاة مؤكدة بين البحّارة بقيمة مرجعية بتاريخ 3/11/2026 وبقراءة 4/11/2026. ولا يمثل هذا الرقم مجموع منتجات": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "رقم التحذير وصدوره عن الحساب الرسمي؛ الموقع والضرر غير متاحان": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "سلوك خطوط الحاويات": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "شحن النفط الخام": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "غياب أي تحذير جديد من": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "لا تتضمن المواد رقمًا موحّدًا للتكدس ولا عدد السفن التي غيّرت خط سيرها؛ لذلك تُستخدم البنود أعلاه للاطّلاع على الاتجاه فقط ولا تُعتبر إحصاءً كاملاً.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "مشغلو الحاويات يتجنبون مضيق هرمز بسبب مخاطر أمنية «غير قابلة للتوقع»، لا رقم مذكور": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "يهيمن على الفترة إعلان طرف واحد يغطي أربع ناقلات وسفينتين مضبوطتين ومسيّرة مُسقطة، مع بلاغات عن ضربات أمريكية داخل المضيق. حجم الإعلان كبير، لكنه صادر عن طرف في المواجهة، ولا يؤكد أي منتج من": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "(A/2)،": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "(A/2)، والنقل الإعلامي (C/3)": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  ". لا يثبت هذا التصريح وحده إغلاقًا ملاحيًا رسميًا، ولذلك ظلّ في الخلفية السياسية لا في عدّ الوقائع البحرية المؤكدة.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "Update 111 قبل اعتماد أي تغيير في خط السير.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "Update 111، نُشِر عبر": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "، بحسب": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "، ومنها اسم السفينة ونوع الضرر وحالة الطاقم.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "؛ الاتجاه: زيادة رسمية واحدة.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "؛ الاتجاه: زيادة.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "اطلبوا نص": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "الكامل وتفاصيل التنبيه الإرشادي": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "المحدث": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "تظل التحذيرات": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "تفاصيل بلاغ": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "جزءًا من السياق القائم، ولا تُعد واقعتين جديدتين في هذا التقرير.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "رسمي مستقل في الخليج العربي": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "رسمي، مع نقص تفاصيله واعتماد بقية المستجدات على نقل إعلامي غير مؤكد.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "قبل إدراجها في القائمة الرسمية أو تأكيدها من جهة ملاحية مستقلة.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "لأضرار متعددة أو تعطيل عبور؛ يخفضه نفي رسمي موثق أو إغلاق البلاغ دون مستجد.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "لا يسمّي جهة منفذة.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "للحوادث المؤكدة: 128 حادثة و24 وفاة؛ الاتجاه: بلا تغيير معروف.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "متابعة نصّ": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "وIMO والسلطات البحرية المحلية.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "وأي تحديث لاحق على موقع": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "والجهات الملاحية الرسمية.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "ورواية عن خمس ناقلات بلا تأكيد مستقل": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "وقيمة مرجعية بتاريخ": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "ولا حصيلة بشرية منشورة.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "ومواقعها وحالة أطقمها في الرواية التي نقلتها straits.live.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  ". الافتراض الثاني أن نشر الأصول الكورية الجنوبية قرار نافذ. ما يخالفه: غياب بيان رسمي كوري في مواد اليوم.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "؛ التفاصيل غير متاحة": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "؛ الحالة: قائم.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "؛ الحالة: يحتاج متابعة.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "؛ المصدر: straits.live؛ الحالة: غير مؤكدة.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "؛ تفاصيل الإصابة غير متاحة": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "؛ زيادة رسمية واحدة": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "؛ لا تسجيل أحدث في مواد اليوم": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "؛ ما يؤكده: وجود واقعة مبلّغ عنها؛ ما ينفي اتساعها: غياب النص الكامل؛ المصدر:": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "إضافة أحدث إلى قائمة المنظمة البحرية الدولية. آخر قيمة مثبتة في تقرير": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "ارفعوا التأهب قبل الدخول إلى خليج عُمان · مضيق هرمز، وأعيدوا تقييم نقاط الانتظار.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "استعداد كوريا الجنوبية لنشر أصول بحرية قرب خليج عُمان · مضيق هرمز بالتزامن مع تقارير عن ناقلات تحترق": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "الأسماء أو الأضرار أو الخسائر.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "الأسماء أو الأضرار أو الخسائر، لذلك تُسجّل كرواية واحدة غير مؤكدة (06-02).": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "الكامل ونشرة": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "المستوى العام مرتفع. ويظل خليج عُمان · مضيق هرمز والخليج العربي أعلى القطاعات عند مستوى مرتفع.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "الواقعة 06-01 — المنطقة شمال مدينة الشمال - الخليج العربي، الصفة بلاغ رسمي، الإثبات مؤكد، الموقع تقريبي.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "بلاغ 196-26 عن واقعة على بعد 50 ميلًا بحريًا شمال مدينة الشمال ووصفها هجومًا؛ النص الكامل وتفاصيل الضرر والطاقم غير متاحة.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "بلاغ 196-26 عن واقعة على بعد 50 ميلًا بحريًا شمال مدينة الشمال، مع وصفها هجومًا؛ التفاصيل الكاملة غير متاحة.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "بلاغ 196-26 عن واقعة على بعد 50 ميلًا بحريًا شمال مدينة الشمال، مع وصفها هجومًا؛ التفاصيل الكاملة للبلاغ غير متاحة في مواد اليوم (06-01).": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "رسمي عن واقعة في الخليج العربي وروايات إعلامية مركزة على خليج عُمان · مضيق هرمز؛ وجود منتج رسمي يرفع أولوية التحقق، لكن غياب التفاصيل والأسماء والتأكيد الملاحي المستقل لا يثبت أضرارًا متعددة أو خسائر بشرية.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "رسمي عن واقعة في الخليج العربي وروايات إعلامية مركزة على مضيق هرمز وخليج عُمان. هذا يرفع أولوية التحقق، لكنه لا يحول الرواية عن خمس ناقلات إلى خمس وقائع؛ لا أسماء سفن ولا أرقام": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "شمال مدينة الشمال - الخليج العربي": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "لا تُعد العناوين المتكررة عن خمس ناقلات وقائع منفصلة؛ تكرار الرواية لا يرفع درجة الإثبات.": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "هي 128 حادثة مؤكدة على سفن تجارية و24 وفاة بين البحّارة، بقراءة": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "و195-26 الصادرة في": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "و3 بنود أخرى في قسم «التوصيات».": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "وJMIC؛ لا إشعار إغلاق رسمي في مواد اليوم": {
+   "source_date": "2026-11-06",
+   "surface": "report",
+   "master": "en",
+   "rendered": "ar",
+   "policy": "since_en_master>=2026-11-03"
+  },
+  "ورواية عن إصابة خمس ناقلات واستعداد بحري كوري قرب مضيق هرمز دون تأكيد مستقل": {
+   "source_date": "2026-11-06",
    "surface": "report",
    "master": "en",
    "rendered": "ar",

@@ -90,6 +90,25 @@ _SECTION_OPEN = re.compile(r"<section\b[^>]*>")
 _SECTION_CLOSE = re.compile(r"</section>")
 _TAG = re.compile(r"<[^>]+>")
 _H2 = re.compile(r"<h2\b[^>]*>(.*?)</h2>", re.S)
+_EVENT_ID_ATTR = re.compile(r'data-event-id="[^"]*"')
+
+
+def _demote_fragment_preserving_event_ids(text, report_date=None, official=None):
+    """اختصر النص الظاهر مع إبقاء معرفات الخريطة الحاكمة كاملةً."""
+    protected = []
+
+    def mask(match):
+        token = f"\x00EVENT_ID_ATTR_{len(protected)}\x00"
+        protected.append(match.group(0))
+        return token
+
+    masked = _EVENT_ID_ATTR.sub(mask, str(text))
+    demoted = demote(masked, report_date, official)
+    return re.sub(
+        r"\x00EVENT_ID_ATTR_(\d+)\x00",
+        lambda match: protected[int(match.group(1))],
+        demoted,
+    )
 
 
 def _top_sections(doc):
@@ -117,11 +136,11 @@ def demote_page(doc, report_date=None, official=None):
         return doc
     out, pos = [], 0
     for a, b in _top_sections(doc):
-        out.append(demote(doc[pos:a], report_date, official))
+        out.append(_demote_fragment_preserving_event_ids(doc[pos:a], report_date, official))
         blk = doc[a:b]
         hm = _H2.search(blk)
         title = _TAG.sub("", hm.group(1)).strip() if hm else ""
-        out.append(blk if is_primary(title) else demote(blk, report_date, official))
+        out.append(blk if is_primary(title) else _demote_fragment_preserving_event_ids(blk, report_date, official))
         pos = b
-    out.append(demote(doc[pos:], report_date, official))
+    out.append(_demote_fragment_preserving_event_ids(doc[pos:], report_date, official))
     return "".join(out)

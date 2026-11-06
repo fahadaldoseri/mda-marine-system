@@ -149,6 +149,13 @@ FALLBACK_ROUTES = {
         {'url': 'https://www.understandingwar.org/wp-json/wp/v2/posts?per_page=10',
          'via': 'official-api:isw-wp-json'},
     ],
+    58: [
+        # جولة 2026-11-06: yafm.net يعيد صفحة Account Suspended (8126B، عنصر مشتق واحد)،
+        # ومسار المتصفح يعيد الصفحة نفسها (8031B، عنصر واحد). نسخة Wayback الرسمية
+        # أعادت HTTP 200 · 31161B · 19 عنصرًا حقيقيًا عبر _payload_items.
+        {'url': 'https://web.archive.org/web/20260101000000id_/https://yafm.net/',
+         'via': 'archive:yafm-home-20260101'},
+    ],
     41: [
         {'url': 'https://r.jina.ai/https://news.usni.org/',
          'via': 'official-page:jina.ai/usni-news'},
