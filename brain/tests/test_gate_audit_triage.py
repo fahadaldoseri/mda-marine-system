@@ -9,9 +9,9 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL_AUDIT = Path("/home/ubuntu/skills/gate-strictness-hardening-ops/scripts/gate_audit.py")
+SKILL_AUDIT = Path("/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/gate-strictness-hardening-ops/scripts/gate_audit.py")
 if not SKILL_AUDIT.exists():
-    SKILL_AUDIT = ROOT / "skills" / "gate-strictness-hardening-ops" / "scripts" / "gate_audit.py"
+    SKILL_AUDIT = ROOT / "skills" / "gate-lifecycle-ops" / "references" / "legacy" / "gate-strictness-hardening-ops" / "scripts" / "gate_audit.py"
 
 
 def load_module(path: Path, name: str):

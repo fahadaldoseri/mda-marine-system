@@ -153,6 +153,18 @@ def test_trivial_assert():
     shutil.rmtree(top)
 
 
+def test_declared_runtime_output_is_not_static_requirement():
+    m = dict(BASE, steps=[step(
+        "G1",
+        runtime_outputs=["{site}/dist/additions.html"],
+        links={"rules": ["ق"], "files": ["{site}/dist/additions.html"], "folders": [], "gates": [], "tests": []},
+    )])
+    top, root = project(m)
+    r = eng(root, "verify")
+    ok(r.returncode == 0, "المخرج الديناميكي المعلن لا يُعامل كملف ثابت قبل البناء")
+    shutil.rmtree(top)
+
+
 def test_gates_status_covers_gate_phases():
     m = dict(BASE, gate_phases=["gates", "outputs", "finalize"],
              steps=[step("G1", phase="gates", command=["true"]), step("B1", phase="build", command=["true"]),
@@ -194,7 +206,7 @@ def test_gate_json_from_ledger():
 
 
 if __name__ == "__main__":
-    for t in (test_env_and_placeholders, test_include, test_sections_token, test_reachability, test_phase_order, test_trivial_assert, test_gates_status_covers_gate_phases, test_gates_run_covers_gate_phases, test_gate_json_from_ledger):
+    for t in (test_env_and_placeholders, test_include, test_sections_token, test_reachability, test_phase_order, test_trivial_assert, test_declared_runtime_output_is_not_static_requirement, test_gates_status_covers_gate_phases, test_gates_run_covers_gate_phases, test_gate_json_from_ledger):
         print(t.__name__)
         t()
     print(f"\nالحصيلة: نجح {PASS} · فشل {FAIL}")

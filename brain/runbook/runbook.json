@@ -2414,8 +2414,8 @@
      "validators/check_project_skills.py",
      "skills/approved-output-change-ops/SKILL.md",
      "skills/macr-system/SKILL.md",
-     "skills/map-readability-ops/SKILL.md",
-     "skills/map-section-upgrade-ops/SKILL.md",
+     "skills/map-clarity-ops/SKILL.md",
+     "skills/map-clarity-ops/SKILL.md",
      "skills/marine-news-brain/SKILL.md",
      "skills/military-arabic-editing/SKILL.md",
      "skills/source-coverage-route-ops/SKILL.md"
@@ -3896,6 +3896,11 @@
    ],
    "writes": [
     "logs/runbook/{date}/G050.log"
+   ],
+   "runtime_outputs": [
+    "{site}/sources/daily-events/{date}.json",
+    "{site}/dist/reports/{date}.html",
+    "{site}/dist/additions.html"
    ]
   },
   {
@@ -3982,6 +3987,10 @@
    "writes": [],
    "reads": [
     "cumulative-2026/daily/{date}.json",
+    "{site}/dist/**/*.html"
+   ],
+   "runtime_outputs": [
+    "{site}/dist",
     "{site}/dist/**/*.html"
    ]
   },
@@ -5007,7 +5016,7 @@
      "ف1–ف5 — بوابة التحقق"
     ],
     "files": [
-     "skills/gate-strictness-hardening-ops/scripts/gate_audit.py",
+     "skills/gate-lifecycle-ops/references/legacy/gate-strictness-hardening-ops/scripts/gate_audit.py",
      "tests/test_gate_audit_triage.py",
      "tests/test_desktop_readability_contract.py"
     ],
@@ -5015,7 +5024,7 @@
      "audit/measurements"
     ],
     "gates": [
-     "skills/gate-strictness-hardening-ops/scripts/gate_audit.py"
+     "skills/gate-lifecycle-ops/references/legacy/gate-strictness-hardening-ops/scripts/gate_audit.py"
     ],
     "tests": [
      "tests/test_gate_audit_triage.py",
@@ -5032,7 +5041,7 @@
    "command": [
     "bash",
     "-lc",
-    "B=\"$PWD\"; mkdir -p \"$B/audit/measurements\"; OUT=\"$B/audit/measurements/gate-audit-{date}.json\"; python3 \"/home/ubuntu/skills/gate-strictness-hardening-ops/scripts/gate_audit.py\" --root . --json > \"$OUT\"; rc=$?; sha256sum \"$OUT\" > \"$OUT.sha256\"; echo \"gate_audit rc=$rc\"; cat \"$OUT.sha256\"; cat \"$OUT\"; exit $rc"
+    "B=\"$PWD\"; mkdir -p \"$B/audit/measurements\"; OUT=\"$B/audit/measurements/gate-audit-{date}.json\"; python3 \"skills/gate-lifecycle-ops/references/legacy/gate-strictness-hardening-ops/scripts/gate_audit.py\" --root . --json > \"$OUT\"; rc=$?; sha256sum \"$OUT\" > \"$OUT.sha256\"; echo \"gate_audit rc=$rc\"; cat \"$OUT.sha256\"; cat \"$OUT\"; exit $rc"
    ],
    "ok_rc": [
     0
@@ -5041,6 +5050,69 @@
     1
    ],
    "gate_title": "تدقيق صلابة البوابات"
+  },
+  {
+   "id": "G067",
+   "title": "ميزانية أداء البوابات (قياس صريح وفشل مغلق)",
+   "kind": "script",
+   "phase": "finalize",
+   "assert": [
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s audit/measurements/perf-budget-{date}.json"
+     ]
+    },
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "test -s audit/measurements/perf-budget-{date}.json.sha256"
+     ]
+    },
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "grep -q '\"status\": \"pass\"' audit/measurements/perf-budget-{date}.json"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "ف1–ف5 — بوابة التحقق"
+    ],
+    "files": [
+     "tools/perf_budget.py",
+     "runbook/perf-budget.json"
+    ],
+    "folders": [
+     "audit/measurements"
+    ],
+    "tests": [
+     "tests/test_perf_budget.py"
+    ]
+   },
+   "writes": [
+    "audit/measurements/perf-budget-{date}.json",
+    "audit/measurements/perf-budget-{date}.json.sha256"
+   ],
+   "note_ar": "تقيس هذه الخطوة فقط أزمنة مسجلة بعلامة صريحة؛ غياب السجل أو الزمن أو تجاوز الحد يمنع الجولة. الحدود مشتقة من أعلى قياس حي مع هامش 25% موثق في عقد الميزانية.",
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; mkdir -p \"$B/audit/measurements\"; OUT=\"$B/audit/measurements/perf-budget-{date}.json\"; python3 \"$B/tools/perf_budget.py\" --root \"$B\" --date \"$D\" --budget \"$B/runbook/perf-budget.json\" --out \"$OUT\"; rc=$?; sha256sum \"$OUT\" > \"$OUT.sha256\"; cat \"$OUT.sha256\"; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": [],
+   "gate_title": "ميزانية أداء البوابات"
   },
   {
    "id": "D005",
@@ -5392,6 +5464,7 @@
      "tests/test_backup_code_safety.py",
      "tests/test_backup_push_safety.py",
      "tests/test_manifest_output_contract.py",
+     "tests/test_parity_committed_state.py",
      "tests/test_apply_archive_policy.py",
      "tests/test_pdf_page_range_guard.py",
      "tests/test_pdf_live_parity_en_guard.py",

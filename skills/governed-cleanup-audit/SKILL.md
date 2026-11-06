@@ -106,3 +106,7 @@ python3 scripts/quarantine_move.py --plan plan.json --apply --restore   # إرج
 | `scripts/surface_fingerprint.py` | جرد الأسطح والخردة والمجلدات الفارغة وبصمات التكرار بين سطحين |
 | `references/decision-tiers.md` | معايير الطبقات الثلاث وسياسات الاستبقاء |
 | `references/gate-and-push.md` | تسلسل البوابات وطريق الدفع وقوالب التقارير |
+
+
+## حدود المهارة
+هذه المهارة لا تنفذ الحذف أو الاستعادة؛ المهارة الجارة `destructive-op-guard-ops` تفعل ذلك.

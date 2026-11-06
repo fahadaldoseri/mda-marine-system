@@ -10,6 +10,7 @@ import tempfile
 from pathlib import Path
 
 VALIDATOR = Path(__file__).resolve().parents[1] / "validators" / "check_backup_parity.py"
+B = VALIDATOR.parents[1]
 
 
 def run_case(rel: str) -> subprocess.CompletedProcess[str]:
@@ -19,11 +20,18 @@ def run_case(rel: str) -> subprocess.CompletedProcess[str]:
         site = root / "seawatch"
         repo = root / "mda-marine-system"
         skills = root / "skills"
+        (brain / "runbook").mkdir(parents=True)
+        shutil.copy2(B / "runbook" / "parity-scope.json", brain / "runbook" / "parity-scope.json")
+        (brain / "runbook" / "approved-skills.json").write_text(
+            '{"skills": ["approved"]}\n', encoding="utf-8"
+        )
+        (skills / "approved").mkdir(parents=True)
+        (skills / "approved" / "SKILL.md").write_text("approved\n", encoding="utf-8")
         generated = brain / "logs" / rel
         generated.parent.mkdir(parents=True)
         generated.write_text("generated\n", encoding="utf-8")
         site.mkdir()
-        skills.mkdir()
+        skills.mkdir(exist_ok=True)
         repo.mkdir()
         subprocess.run(["git", "-C", str(repo), "init", "-q"], check=True)
         validator = root / "check_backup_parity.py"
@@ -40,12 +48,13 @@ def test_restore_backup_is_local_only() -> None:
     assert result.returncode == 0, result.stdout + result.stderr
 
 
-def test_general_run_log_is_not_allowlisted() -> None:
+def test_general_run_log_is_informational_not_a_broad_allowlist() -> None:
     result = run_case("runbook/2026-10-31/other.log")
-    assert result.returncode == 2, result.stdout + result.stderr
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert "غير ملتزم" in result.stdout
 
 
 if __name__ == "__main__":
     test_restore_backup_is_local_only()
-    test_general_run_log_is_not_allowlisted()
+    test_general_run_log_is_informational_not_a_broad_allowlist()
     print("runtime-artifact guard: 2/2")

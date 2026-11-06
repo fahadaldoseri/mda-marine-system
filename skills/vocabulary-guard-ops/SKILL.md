@@ -82,3 +82,7 @@ python3 scripts/status_report.py --scan brain/appendices brain/memory \
 ## معيار الإغلاق
 
 لا يُقال «أُغلق» إلا بثلاثة مخرجات معًا من **نسخة المستودع**: `check_registry` بلا خلل، `check_surfaces` بصفر سطح مانع، واختبار المشروع (مثال: `tests/test_vocab_registry.py`) بصفر فشل، مع بصمة الملفات في تقرير الحالة.
+
+
+## حدود المهارة
+هذه المهارة لا تحكم صدق الواقعة أو مصدرها؛ المهارة الجارة `marine-news-brain` تفعل ذلك.
