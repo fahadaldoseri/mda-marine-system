@@ -1,0 +1,32 @@
+# Evidence: gate-audit candidate triage — 2026-11-06
+
+## Baseline
+Command: python3 /home/ubuntu/mda-marine-system/skills/gate-strictness-hardening-ops/scripts/gate_audit.py --root /home/ubuntu/mda-marine-system/brain --json
+Exit: 1 (candidate list, not final gate failure)
+Raw JSON: gate-audit-2026-11-06-before-274.json
+SHA256: faade5b2974044a56be291e394946f6d259dfae0efa913e7c3db5346b2d3c54b
+Total: 274
+Breakdown: 0, 100, 96, 1, 40, 5, 21, 11 across the eight emitted categories.
+
+## Final after authoritative sync
+Command: python3 /home/ubuntu/skills/gate-strictness-hardening-ops/scripts/gate_audit.py --root /home/ubuntu/brain-marine-news --json
+Exit: 1 (one open candidate)
+Raw JSON: gate-audit-2026-11-06-final.json
+SHA256: a69f26a25d7e17b02110219e1c852fa10b8999525c63138b03e27cb29a4ae7fe
+Result: category 9 = validators/check_desktop_readability.py; all other categories = 0; total = 1.
+
+Command: python3 /home/ubuntu/skills/gate-strictness-hardening-ops/scripts/gate_audit.py --root /home/ubuntu/mda-marine-system/brain --json
+Exit: 1 (same one open candidate)
+Raw JSON: repository brain copy of gate-audit-2026-11-06-final.json
+SHA256: a69f26a25d7e17b02110219e1c852fa10b8999525c63138b03e27cb29a4ae7fe
+
+## Contract tests
+- python3 -m unittest /home/ubuntu/brain-marine-news/tests/test_gate_audit_triage.py -> 0; 4 tests OK.
+- python3 /home/ubuntu/brain-marine-news/tests/test_gate_guard_contracts.py -> 0; 30 successful, 0 failed.
+- Repository copies: same commands -> 0; 4 tests OK and 30 successful, 0 failed.
+- Both learning-log.jsonl files parse as JSONL after append.
+
+## Remaining candidate evidence
+- `validators/check_desktop_readability.py:79-114` launches Playwright and evaluates live DOM geometry.
+- No dedicated static positive/negative test invokes this guard in the `tests/` inventory.
+- Its judgement requires a live browser/site surface; therefore it remains open as `غير قابل للحكم آليًا`, not silently marked clean.

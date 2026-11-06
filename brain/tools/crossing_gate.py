@@ -25,6 +25,9 @@ from pathlib import Path
 
 BRAIN = Path(os.environ.get("BRAIN_DIR") or Path(__file__).resolve().parents[1])
 SITE = Path(os.environ.get("SITE_DIR") or BRAIN.parent / "seawatch")
+LIVE_HOST = "https://seawatch-xp4qirmr.manus.space"
+LIVE_PATHS = ("index", "additions", "sources", "feed.xml")
+LIVE_USER_AGENT = "MDA-Live-Gate/1.0"
 
 
 def sh(argv: list[str], root: Path, timeout: int = 1200) -> tuple[int, str]:
@@ -32,6 +35,18 @@ def sh(argv: list[str], root: Path, timeout: int = 1200) -> tuple[int, str]:
            "HOME": str(Path.home()), "LANG": "C.UTF-8"}
     r = subprocess.run(argv, cwd=root, capture_output=True, text=True, timeout=timeout, env=env)
     return r.returncode, ((r.stdout or "") + (r.stderr or "")).strip()
+
+
+def live_probe_script(host: str = LIVE_HOST, paths: tuple[str, ...] = LIVE_PATHS) -> str:
+    """Build a bounded, attributable HTTP probe for the optional live gate."""
+    quoted_paths = " ".join(paths)
+    return (
+        "set -u; "
+        f"for u in {quoted_paths}; do "
+        f"curl -sS --connect-timeout 10 --max-time 25 -A '{LIVE_USER_AGENT}' "
+        f"-o /dev/null -w '%{{http_code}} ' '{host}/$u'; "
+        "done"
+    )
 
 
 def main() -> int:
@@ -114,8 +129,7 @@ def main() -> int:
     else:
         record("9 التماثل والطباعة", 0, "لم يُطلب في هذه الدورة (يُطلب عند الانتقال الحقيقي)", blocking=False)
     if args.live:
-        rcL, oL = sh(["bash", "-lc", f"for u in index additions sources feed.xml; do "
-                     f"curl -s -o /dev/null -w '%{{http_code}} ' https://seawatch-xp4qirmr.manus.space/$u; done"], root)
+        rcL, oL = sh(["bash", "-lc", live_probe_script()], root)
         record("10 التحقق الحي", rcL if "200" not in oL else 0, oL)
     else:
         record("10 التحقق الحي", 0, "لم يُطلب في هذه الدورة", blocking=False)
