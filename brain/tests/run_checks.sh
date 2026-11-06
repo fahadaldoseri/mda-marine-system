@@ -297,6 +297,9 @@ else
   ok "لا فحوص بعد exit 0 (ك-484)"
 fi
 
+echo "28) عقود الحراس: موجب + سالب لكل حارس مرشَّح"
+t "عقود الحراس الستة عشر" python3 "$B/tests/test_gate_guard_contracts.py"
+
 echo "----- الحصيلة -----"
 printf '  نجح: %s · فشل: %s\n' "$PASS" "$FAIL"
 [ "$FAIL" -eq 0 ] || exit 1

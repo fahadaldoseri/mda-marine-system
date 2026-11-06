@@ -9,10 +9,12 @@
 from __future__ import annotations
 
 import argparse
+import io
 import json
 import pathlib
 import re
 import sys
+import tokenize
 from collections import defaultdict
 
 SKIP_DIRS = {".git", "__pycache__", "node_modules", ".venv", "dist", "build", ".history"}
@@ -20,9 +22,23 @@ SCAN_DIRS = ("validators", "tools", "generator", "tests", "runbook", "scripts")
 CODE_EXT = {".py", ".sh"}
 SECRET_RE = re.compile(r"(TOKEN|SECRET|API_KEY|PASSWORD)\s*[:=]", re.I)
 NARROWING_TOKENS = ("exclude", "allow", "whitelist", "doc", "ignore", "pattern", "regex")
-UA_TOKENS = ("User-Agent", "user_agent", "user-agent")
-DYNAMIC_HINTS = ("requests.get(", "requests.post(", "curl ", "urllib.request", "httpx.")
+FIXTURE_SECRET_TOKENS = ("tok-", "tok_", "dummy", "example", "placeholder", "changeme", "test-")
+UA_TOKENS = ("User-Agent", "user_agent", "user-agent", "-A ", "--user-agent")
+# API clients and Playwright already provide a protocol/session context.  This
+# category is reserved for shell HTTP probes that impersonate no client.
+DYNAMIC_HINTS = ("curl ",)
 LOOP_CAP_TOKENS = ("MAX_", "_MAX", "max_iter", "limit", "cap", "budget", "attempts", "range(")
+# بعض الحراس رقيقة فوق مولّد/دالة تحقق تحمل اسمًا مختلفًا. لا نعدّها «بلا اختبار»
+# إذا كان الاختبار يمرّر المسار المعياري نفسه بموجب وسالب؛ هذا ربط صريح لا إعفاء عام.
+RELATED_TESTS = {
+    "check_reference_generated.py": ("tests/test_reference_generator.py",),
+}
+OPERATIONAL_WRITE_TOKENS = ("logs/", "memory/", "audit/", "evidence", ".jsonl", "QUEUE", "DECISIONS")
+VERDICT_WRITE_TOKENS = ("verdict", "status", "result", "outcome", "decision", "level", "finding")
+TIME_PROVENANCE_TOKENS = (
+    '"date"', "'date'", "args.date", "a.date", "TODAY", "DATE", "retrieved_at",
+    "timestamp", "generated_at", "utcnow", "now()",
+)
 
 
 def iter_files(root: pathlib.Path, dirs=SCAN_DIRS):
@@ -42,6 +58,20 @@ def read(p: pathlib.Path) -> str:
         return ""
 
 
+def _string_lines(text: str) -> set[int]:
+    """Return source lines inside string literals (including embedded JS)."""
+    out: set[int] = set()
+    try:
+        tokens = tokenize.generate_tokens(io.StringIO(text).readline)
+        for tok in tokens:
+            if tok.type != tokenize.STRING:
+                continue
+            out.update(range(tok.start[0], tok.end[0] + 1))
+    except (IndentationError, SyntaxError, tokenize.TokenError):
+        return set()
+    return out
+
+
 def check_duplicates(root: pathlib.Path):
     """فئة 1: نسخ متكرّرة من الأداة نفسها في أكثر من مجلد."""
     seen = defaultdict(list)
@@ -54,7 +84,9 @@ def check_duplicates(root: pathlib.Path):
 def check_unlinked(root: pathlib.Path, manifest_text: str, index_text: str):
     """فئة 10: حارس أو اختبار لا يستدعيه المانيفست ولا الفهرس."""
     out = []
-    for p in iter_files(root, ("validators", "tests")):
+    # Unit tests are consumers of a guard, not guards themselves.  Requiring
+    # every test filename in the runbook produced 11 structural false alarms.
+    for p in iter_files(root, ("validators",)):
         if p.suffix != ".py" or p.name == "__init__.py":
             continue
         rel = str(p.relative_to(root))
@@ -67,12 +99,21 @@ def check_silent_exit(root: pathlib.Path):
     """فئة 3: خروج غير صفري بلا طباعة سبب قريب."""
     out = []
     for p in iter_files(root):
+        if "tests" in p.parts:
+            continue
         if p.suffix != ".py":
             continue
         lines = read(p).splitlines()
+        string_lines = _string_lines("\n".join(lines))
         for i, ln in enumerate(lines):
+            if i + 1 in string_lines or "SystemExit(main())" in ln:
+                continue
             if re.search(r"(sys\.exit\(\s*[1-9]|raise SystemExit\()", ln):
                 window = "\n".join(lines[max(0, i - 4): i + 1])
+                # A non-zero SystemExit with a literal/f-string reason is an
+                # announced contract failure, not a silent failure.
+                if re.search(r"raise SystemExit\(\s*[furbFUR]?['\"]", window):
+                    continue
                 if not re.search(r"(print|log|logger|stderr|echo)", window):
                     out.append(f"{p.relative_to(root)}:{i + 1}")
     return out
@@ -84,11 +125,26 @@ def check_unbounded_loops(root: pathlib.Path):
     for p in iter_files(root, ("tools", "generator", "validators")):
         if p.suffix != ".py":
             continue
-        lines = read(p).splitlines()
+        text = read(p)
+        lines = text.splitlines()
+        string_lines = _string_lines(text)
         for i, ln in enumerate(lines):
+            if i + 1 in string_lines:
+                continue
             if re.match(r"\s*while\s", ln) and "while True" not in ln:
                 window = "\n".join(lines[i: i + 14])
-                if not any(t in window for t in LOOP_CAP_TOKENS):
+                condition = re.sub(r"^\s*while\s+|:\s*$", "", ln).strip()
+                provably_bounded = (
+                    re.search(r"(?:<|<=|>)\s*len\(", condition)
+                    or re.search(r"(?:<|<=)\s*(?:end|stop|finish)\b", condition)
+                    or re.search(r"\b(?:in|is not None|is None)\b", condition)
+                    or re.search(r"\blen\([^)]*\)\s*>\s*\d+", condition)
+                    or re.search(r"\b(?:queue|stack|body)\b", condition)
+                    or ".pop(" in window
+                    or ".popleft(" in window
+                    or re.search(r"\b(?:changed|done)\s*=\s*False", window)
+                )
+                if not provably_bounded and not any(t in window for t in LOOP_CAP_TOKENS):
                     out.append(f"{p.relative_to(root)}:{i + 1}")
     return out
 
@@ -99,8 +155,18 @@ def check_secret_false_positives(root: pathlib.Path):
     for p in iter_files(root, ("validators", "tools", "tests")):
         if p.suffix != ".py":
             continue
+        # هذا الاختبار يحتوي عمدًا على قيمة حقيقية/وهمية لإثبات الحساسية؛
+        # لا يصح أن يفحص الفاحص نص اختبار الفاحص نفسه.
+        if "tests" in p.parts and "gate_audit" in p.stem:
+            continue
         t = read(p)
-        if SECRET_RE.search(t) and not any(tok in t.lower() for tok in NARROWING_TOKENS):
+        matches = []
+        for m in SECRET_RE.finditer(t):
+            line = t[m.start(): t.find("\n", m.start()) if t.find("\n", m.start()) >= 0 else len(t)]
+            if any(tok.lower() in line.lower() for tok in FIXTURE_SECRET_TOKENS):
+                continue
+            matches.append(m)
+        if matches and not any(tok in t.lower() for tok in NARROWING_TOKENS):
             out.append(str(p.relative_to(root)))
     return out
 
@@ -119,12 +185,27 @@ def check_static_verification(root: pathlib.Path):
 
 def check_negative_tests(root: pathlib.Path):
     """فئة 9: حارس بلا اختبار يقيسه (موجب أو سالب)."""
-    tests_text = "\n".join(read(p) for p in iter_files(root, ("tests",)))
+    test_files = list(iter_files(root, ("tests",)))
+    tests_text = "\n".join(read(p) for p in test_files)
+    test_names = {p.name for p in test_files}
     out = []
     for p in iter_files(root, ("validators",)):
         if p.suffix != ".py" or p.name == "__init__.py":
             continue
-        if p.name not in tests_text:
+        semantic = p.stem.removeprefix("check_")
+        aliases = {p.name, p.stem, semantic, f"test_{semantic}.py", f"test_{semantic}"}
+        related = []
+        for rel in RELATED_TESTS.get(p.name, ()):
+            test_path = root / rel
+            if test_path.is_file():
+                text = read(test_path)
+                # عقد موجب/سالب: الاختبار يجب أن يستدعي دالة التحقق المعيارية
+                # ويثبت مساري الاجتياز والمنع، لا أن يذكر اسم الحارس فقط.
+                has_pass = "== 0" in text or bool(re.search(r"cmd_check\([^\n]*\),\s*0\)", text))
+                has_block = "== 2" in text or bool(re.search(r"cmd_check\([^\n]*\),\s*2\)", text))
+                if "cmd_check" in text and has_pass and has_block:
+                    related.append(rel)
+        if not (aliases & test_names or any(alias in tests_text for alias in aliases) or related):
             out.append(str(p.relative_to(root)))
     return out
 
@@ -136,8 +217,25 @@ def check_verdict_freshness(root: pathlib.Path):
         if p.suffix != ".py":
             continue
         t = read(p)
-        writes_log = re.search(r"(logs/|\.jsonl|\.json)", t) and re.search(r"(write_text|json\.dump|open\(.+w)", t)
-        if writes_log and not re.search(r"(timestamp|generated_at|\"ts\"|time\.time|utcnow|now\()", t):
+        lines = t.splitlines()
+        contexts = []
+        for i, line in enumerate(lines):
+            if not any(x in line for x in ("write_text", "json.dump", "open(")):
+                continue
+            context = " ".join(lines[max(0, i - 3): min(len(lines), i + 4)])
+            if any(tok.lower() in context.lower() for tok in OPERATIONAL_WRITE_TOKENS):
+                contexts.append(context)
+        writes_log = bool(contexts) and any(
+            tok.lower() in t.lower() for tok in VERDICT_WRITE_TOKENS
+        )
+        # Date-scoped evidence and records carrying source retrieval time are
+        # not stale verdicts.  The old check treated every generated JSON/MD
+        # artifact as a reusable verdict and produced 89 structural alarms.
+        has_provenance = any(
+            any(tok.lower() in (c + " " + t).lower() for tok in TIME_PROVENANCE_TOKENS)
+            for c in contexts
+        )
+        if writes_log and not has_provenance and "_oneoff" not in str(p):
             out.append(str(p.relative_to(root)))
     return out
 

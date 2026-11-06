@@ -212,8 +212,11 @@ def run(root, date, only_phase=None, redo=None):
     redo = set(redo or ())
     m = load(root)
     ledger = read_ledger(root, m, date)
+    allowed_phases = None
+    if only_phase:
+        allowed_phases = set(m.get("gate_phases", ["gates"])) if only_phase == "gates" else {only_phase}
     for i, s in enumerate(m["steps"]):
-        if only_phase and s.get("phase") != only_phase:
+        if allowed_phases is not None and s.get("phase") not in allowed_phases:
             continue
         e = ledger.get(s["id"])
         if e and entry_allows_progress(s, e) and s["id"] not in redo:

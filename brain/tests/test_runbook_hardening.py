@@ -164,6 +164,17 @@ def test_gates_status_covers_gate_phases():
     shutil.rmtree(top)
 
 
+def test_gates_run_covers_gate_phases():
+    m = dict(BASE, gate_phases=["gates", "finalize"],
+             steps=[step("G1", phase="gates", command=["true"], asserts=[]),
+                    step("G2", phase="finalize", command=["bash", "-lc", "printf done > gate-marker.txt"], asserts=[])])
+    top, root = project(m)
+    r = eng(root, "gates", "--date", "2026-10-24", "--redo", "G2")
+    ok(r.returncode == 0 and (root / "gate-marker.txt").read_text(encoding="utf-8") == "done",
+       "gates ينفذ كل gate_phases بما فيها finalize")
+    shutil.rmtree(top)
+
+
 def test_gate_json_from_ledger():
     m = dict(BASE, gate_phases=["gates", "finalize"],
              steps=[step("G1", phase="gates", command=["echo", "ok"], gate_title="فحص أول"),
@@ -183,7 +194,7 @@ def test_gate_json_from_ledger():
 
 
 if __name__ == "__main__":
-    for t in (test_env_and_placeholders, test_include, test_sections_token, test_reachability, test_phase_order, test_trivial_assert, test_gates_status_covers_gate_phases, test_gate_json_from_ledger):
+    for t in (test_env_and_placeholders, test_include, test_sections_token, test_reachability, test_phase_order, test_trivial_assert, test_gates_status_covers_gate_phases, test_gates_run_covers_gate_phases, test_gate_json_from_ledger):
         print(t.__name__)
         t()
     print(f"\nالحصيلة: نجح {PASS} · فشل {FAIL}")
