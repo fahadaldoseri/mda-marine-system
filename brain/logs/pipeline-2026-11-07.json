@@ -1,0 +1,104 @@
+{
+  "created_by": "mark_components",
+  "created_reason": "bootstrap قبل اشتقاق أول مكوّن في خط اليوم",
+  "date": "2026-11-07",
+  "feeds": {
+    "browser_only": [],
+    "checked": 60,
+    "derived_from": "feeds/feeds-2026-11-07.status.json",
+    "empty": [],
+    "fail_ratio": 0.017,
+    "failed": 1,
+    "failed_feeds": [
+      {
+        "block_reason": "all routes failed: primary: HTTP Error 522: <none> | official:spa-next-data: The read operation timed out | official:spa-home-next-data: The read operation timed out",
+        "error": "The read operation timed out",
+        "name": "وكالة الأنباء السعودية (واس)",
+        "num": 26
+      }
+    ],
+    "note": "مصدر نجح على مسار وفشل على آخر لا يُحسب متعذّرًا (عطل ك-137)",
+    "ok": 59,
+    "stale": [
+      12,
+      13,
+      20,
+      30,
+      31,
+      32
+    ],
+    "status": "degraded"
+  },
+  "final_gate": {
+    "blocked_steps": [],
+    "dir": "logs/gate-2026-11-07",
+    "exit_code": 1,
+    "note": "نتيجة بوابة التسليم النهائية — كُتبت العلامة بعدها.",
+    "status": "warn"
+  },
+  "finished_utc": "2026-11-06T23:08:09Z",
+  "gate_finished_utc": "2026-11-07T07:39:17Z",
+  "gate_note": "علامة مرحلة الخط اليومي — بوابة التسليم لم تُشغَّل بعد.",
+  "gate_state": "not_run",
+  "language": {
+    "banned_terms": 0,
+    "edit_pass": {
+      "applied": true,
+      "by_category": {
+        "أسلوب": 15,
+        "بنية": 7,
+        "ترجمة حرفية": 2,
+        "مفردة": 12
+      },
+      "changes": 36,
+      "edited": 6,
+      "model": "gpt-5-mini",
+      "rejected": 10,
+      "sections": 16
+    },
+    "long_sentences": 5,
+    "orthography_errors": 0,
+    "waw_pct": 5.0,
+    "waw_runs3": 0
+  },
+  "ledger_merge": {
+    "added_this_run_count": 2,
+    "derived_from": "cumulative-2026/daily/2026-11-07.json",
+    "merged_before_marker": true,
+    "note": "دُمج ملف اليوم في الدفتر الجامع (2 واقعة)",
+    "status": "ok"
+  },
+  "ofac": {
+    "derived_from": "watchlist/ofac-targets.txt + archive/ofac-screen-latest.json",
+    "list": "https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/SDN.CSV",
+    "matches": [],
+    "note": "فُحص 12 مستهدفًا — الحالة: ok",
+    "results_file": "archive/ofac-screen-latest.json",
+    "status": "ok",
+    "targets": 12
+  },
+  "originals": {
+    "derived_from": "archive/originals/2026-11-07/",
+    "empty_shell": 0,
+    "failed": 0,
+    "healthy": 3,
+    "manifest": "archive/originals/2026-11-07/manifest.json",
+    "note": "حُفظت الأصول في archive/originals/2026-11-07",
+    "status": "ok"
+  },
+  "overall": "degraded",
+  "pipeline_version": 4,
+  "report_present_at_pipeline_end": true,
+  "schema_version": 1,
+  "sources": {
+    "approved": 62,
+    "checked": 60,
+    "failed": 1,
+    "failed_names": [
+      "وكالة الأنباء السعودية (واس)"
+    ],
+    "ok": 59,
+    "status_file": "feeds/feeds-2026-11-07.status.json"
+  },
+  "written_stage": "final"
+}

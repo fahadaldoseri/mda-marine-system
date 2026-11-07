@@ -1,0 +1,27 @@
+$ python3 validators/check_governing_assets.py --json
+{
+  "status": "BLOCK",
+  "checked_at": "2026-11-06T23:36:20.694714+00:00",
+  "date": null,
+  "current_root": "dc19806524bc967babb97f7791b44b51a465bdf74d0c2721aae4674c0c92438b",
+  "current_files": 3063,
+  "ledger": "/home/ubuntu/brain-marine-news/evidence/merkle/ledger.jsonl",
+  "ledger_verified": true,
+  "snapshot_entry": {
+    "seq": 18,
+    "ts": "2026-11-06T23:29:10.210016+00:00",
+    "kind": "snapshot",
+    "root": "0426ff4db2a2567432a5ee353ae3a77552d148e449d2ee4901ca1263a15640cd",
+    "files": 3063,
+    "prev_hash": "9433feb9013d687e93c9f613930c9266b6d1c7be71fbb9c08f158a09a52b8290",
+    "hash": "249eb920067b129404775878842a6388efbe1d66dbcef14bc7899244e963cea4"
+  },
+  "snapshot_file": "/home/ubuntu/brain-marine-news/evidence/merkle/snapshot.json",
+  "mirror": "/home/ubuntu/mda-marine-system/skills",
+  "violations": [
+    "snapshot root mismatch: current dc19806524bc967babb97f7791b44b51a465bdf74d0c2721aae4674c0c92438b != recorded 0426ff4db2a2567432a5ee353ae3a77552d148e449d2ee4901ca1263a15640cd",
+    "snapshot content mismatch: /home/ubuntu/brain-marine-news/tests/test_area_absence.py"
+  ]
+}
+RC=2
+exit

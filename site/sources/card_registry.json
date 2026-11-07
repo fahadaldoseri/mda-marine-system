@@ -207,6 +207,12 @@
       "1": 4,
       "2": 2
     },
+    "allowed_accents": [
+      "ok",
+      "info",
+      "warn",
+      "danger"
+    ],
     "risk_patterns": [
       "هجوم",
       "حريق",
@@ -233,6 +239,13 @@
             0,
             "current"
           ]
+        },
+        "presentation": {
+          "label": "contract_title",
+          "note": "derived_detail_with_source_date",
+          "accent_rule": {
+            "kind": "unconfirmed_or_probable_warn"
+          }
         },
         "detail": {
           "ar": "داخل فترة التقرير",
@@ -263,6 +276,13 @@
           "kind": "zones_counter",
           "key": "qualifying"
         },
+        "presentation": {
+          "label": "contract_title",
+          "note": "derived_detail_with_source_date",
+          "accent_rule": {
+            "kind": "unconfirmed_or_probable_warn"
+          }
+        },
         "detail": {
           "kind": "qualifying_composition",
           "en": "1 confirmed + 1 probable + 2 qualifying unconfirmed"
@@ -292,9 +312,26 @@
           "kind": "zones_counter",
           "key": "unconfirmed_total"
         },
+        "presentation": {
+          "label": "contract_title",
+          "note": "derived_detail_with_source_date",
+          "accent_rule": {
+            "kind": "positive_warn"
+          }
+        },
         "detail": {
           "kind": "unconfirmed_split",
           "en": "3 narratives · 2 qualifying · mentioned but not counted"
+        },
+        "number_format": {
+          "singular": "رواية",
+          "dual": "روايتان",
+          "plural": "روايات",
+          "zero": "plural",
+          "one": "singular",
+          "two": "dual",
+          "few": "plural",
+          "many": "singular"
         },
         "layers": {
           "cumulative": {
@@ -326,6 +363,13 @@
           ],
           "field": "confirmed"
         },
+        "presentation": {
+          "label": "contract_title",
+          "note": "scoped_value_with_source_date",
+          "accent_rule": {
+            "kind": "positive_danger"
+          }
+        },
         "detail": {
           "ar": "يظهر الصفر دائمًا",
           "en": "Zero remains visible"
@@ -343,6 +387,14 @@
         "source": {
           "kind": "kpis_totals",
           "id": "imo-confirmed-incidents"
+        },
+        "presentation": {
+          "label": "contract_title",
+          "note": "derived_detail_with_source_date",
+          "accent_rule": {
+            "kind": "explicit",
+            "value": "info"
+          }
         },
         "detail": {
           "ar": "عدد اليوم = فرق آخر تحديث رسمي",
@@ -373,6 +425,14 @@
         "source": {
           "kind": "kpis_totals",
           "id": "imo-seafarer-deaths"
+        },
+        "presentation": {
+          "label": "contract_title",
+          "note": "derived_detail_with_source_date",
+          "accent_rule": {
+            "kind": "explicit",
+            "value": "info"
+          }
         },
         "detail": {
           "ar": "عدد اليوم = فرق آخر تحديث رسمي",
