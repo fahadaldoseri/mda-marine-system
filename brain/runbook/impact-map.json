@@ -261,6 +261,26 @@
       "tests": [
         "tests/test_gate_tools.py"
       ]
+    },
+    {
+      "match": [
+        "tools/publish_channels.py",
+        "tools/publish_fallback.sh",
+        "tools/check_live.sh",
+        "tests/test_publish_channels.py"
+      ],
+      "surfaces": [
+        "قناة النشر",
+        "التحقق الحي"
+      ],
+      "gates": [
+        "S085",
+        "D010",
+        "D020"
+      ],
+      "tests": [
+        "tests/test_publish_channels.py"
+      ]
     }
   ]
 }

@@ -9,7 +9,24 @@ elif [ -d "$B/../seawatch" ]; then SITE="$B/../seawatch"; else SITE="$B/../site"
 CMP=0; D=""
 for a in "$@"; do case "$a" in --compare) CMP=1 ;; *) D="$a" ;; esac; done
 [ -n "$D" ] || D="$(date -u +%F)"
-BASE="${LIVE_BASE_URL:-$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['base_url'])" "$SITE/sources/site.json" 2>/dev/null)}"
+if [ -n "${LIVE_BASE_URL:-}" ]; then
+  BASE="$LIVE_BASE_URL"
+else
+  BASE="$(python3 - "$B/logs/publish-$D.json" "$SITE/sources/site.json" <<'PY'
+import json, sys
+for name in sys.argv[1:]:
+    try:
+        doc = json.load(open(name, encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        continue
+    url = doc.get("url")
+    if url and "/reports/" in url:
+        print(url.split("/reports/", 1)[0].rstrip("/")); break
+    if doc.get("base_url"):
+        print(str(doc["base_url"]).rstrip("/")); break
+PY
+)"
+fi
 [ -n "$BASE" ] || { echo "✘ لا رابط للموقع المنشور (sources/site.json:base_url)"; exit 2; }
 mkdir -p "$B/logs"
 STARTED_EPOCH="$(date +%s)"
@@ -50,6 +67,11 @@ for u in RELEASE_PATHS:
     doc["paths"][f"/{u}"] = {"code": code, "bytes": len(body)}
     if code != 200 or not body:
         bad.append(f"/{u}")
+    if u == f"reports/{D}.html":
+        has_date = D.encode("utf-8") in body
+        doc["paths"][f"/{u}"]["date_marker"] = has_date
+        if not has_date:
+            bad.append(f"/{u}:missing-date-marker")
 if CMP == "1" and not PRINT_DISABLED:
     import os
     import subprocess

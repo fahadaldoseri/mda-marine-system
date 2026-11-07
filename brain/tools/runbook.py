@@ -55,13 +55,25 @@ def sha(path):
 
 
 def site_dir(root):
-    """مجلد الموقع: SITE_DIR ← seawatch الشقيق ← site الشقيق (نفس منطق بقية الأدوات)."""
+    """مجلد الموقع: override صريح، ثم أقرب جذر يحوي dist، ثم مرشح شقيق."""
     if os.environ.get("SITE_DIR"):
         return os.environ["SITE_DIR"]
     parent = os.path.dirname(os.path.abspath(root))
-    for name in ("seawatch", "site"):
-        if os.path.isdir(os.path.join(parent, name)):
-            return os.path.join(parent, name)
+    candidates = []
+    for _ in range(4):
+        for name in ("seawatch", "site"):
+            candidate = os.path.join(parent, name)
+            if os.path.isdir(candidate) and candidate not in candidates:
+                candidates.append(candidate)
+        next_parent = os.path.dirname(parent)
+        if next_parent == parent:
+            break
+        parent = next_parent
+    for candidate in candidates:
+        if os.path.isdir(os.path.join(candidate, "dist")):
+            return candidate
+    if candidates:
+        return candidates[0]
     return os.path.join(parent, "seawatch")
 
 

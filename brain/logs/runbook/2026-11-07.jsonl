@@ -153,3 +153,13 @@
 {"step": "D010", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-07/D010.log", "ts": "2026-11-07T08:04:11Z"}
 {"step": "G011", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-07/G011.log", "attempt": 1, "ts": "2026-11-07T08:07:05Z"}
 {"step": "B009", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-07/B009.log", "attempt": 1, "ts": "2026-11-07T08:13:51Z"}
+{"step": "S085", "status": "failed", "rc": 0, "problems": ["فحص فشل (رمز 2): bash -lc python3 -c 'import json,sys;d=json.load(open(\"logs/publish-channel-2026-11-07.json\"));c=d.get(\"channels\",{});sys.exit(0 if set(c)=={\"manus\",\"github-pages\"} and any(v.get(\"state\")==\"ready\" for v in c.values()) else 1)"], "log": "logs/runbook/2026-11-07/S085.log", "ts": "2026-11-07T10:36:44Z"}
+{"step": "S085", "status": "done", "rc": 0, "outputs": {"logs/publish-channel-2026-11-07.json": "8ea7082a113dd8ea23229743089b4ed769a91ad8c892d553426fe8c1512c3ddd"}, "log": "logs/runbook/2026-11-07/S085.log", "attempt": 1, "ts": "2026-11-07T10:38:45Z"}
+{"step": "D010", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-07/D010.log", "ts": "2026-11-07T10:38:48Z"}
+{"step": "D010", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-07/D010.log", "ts": "2026-11-07T10:43:10Z"}
+{"step": "D010", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-07/D010.log", "attempt": 1, "ts": "2026-11-07T10:44:32Z"}
+{"step": "D020", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-07/D020.log", "attempt": 1, "ts": "2026-11-07T10:51:09Z"}
+{"step": "D030", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-07/D030.log", "ts": "2026-11-07T10:51:09Z"}
+{"step": "D032", "status": "skipped", "disabled": true, "reason": "خطوة معطلة صراحة", "rc": 0, "log": "logs/runbook/2026-11-07/D032.log", "ts": "2026-11-07T10:51:09Z"}
+{"step": "D033", "status": "done_warn", "rc": 1, "outputs": {}, "log": "logs/runbook/2026-11-07/D033.log", "attempt": 1, "ts": "2026-11-07T10:51:09Z"}
+{"step": "D035", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-07/D035.log", "ts": "2026-11-07T10:51:09Z"}

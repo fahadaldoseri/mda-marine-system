@@ -3514,6 +3514,59 @@
    "gate_title": "حارس مخطط الدفتر وحقول الدليل (فشل مغلق)"
   },
   {
+   "id": "S085",
+   "title": "فحص جاهزية قنوات النشر قبل البناء",
+   "kind": "script",
+   "phase": "build",
+   "assert": [
+    {
+     "type": "cmd",
+       "command": [
+        "python3",
+        "-c",
+        "import json,sys;d=json.load(open(\"logs/publish-channel-{date}.json\"));c=d.get(\"channels\",{});sys.exit(0 if set(c)=={\"manus\",\"github-pages\"} and any(v.get(\"state\")==\"ready\" for v in c.values()) else 1)"
+       ]
+    },
+    {
+     "type": "cmd",
+     "command": [
+      "bash",
+      "-lc",
+      "grep -q '\"manus\"' logs/publish-channel-{date}.json && grep -q '\"github-pages\"' logs/publish-channel-{date}.json"
+     ]
+    }
+   ],
+   "links": {
+    "rules": [
+     "أ1 — جهوزية التشغيل قبل البناء",
+     "س2 — قناتا النشر والفشل المغلق"
+    ],
+    "files": [
+     "tools/publish_channels.py",
+     "tools/publish_fallback.sh",
+     "tools/publish_site.sh"
+    ],
+    "gates": [],
+    "tests": [
+     "tests/test_publish_channels.py"
+    ]
+   },
+   "writes": [
+    "logs/publish-channel-{date}.json"
+   ],
+   "note_ar": "يفحص إضافة Manus حصراً عبر manus-mcp-cli tool list --server webdev-mcp، ويفحص المستودع العام البديل؛ نجاح سجل manus-webdev-logs لا يدخل في الحكم. إذا كانت قناة واحدة جاهزة يستمر، وإذا تعطّلتا معًا يفشل مبكرًا.",
+   "on_fail": "stop",
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; export B SITE; python3 tools/publish_channels.py preflight --date {date} --root \"$B\"; rc=$?; exit $rc"
+   ],
+   "ok_rc": [
+    0
+   ],
+   "warn_rc": []
+  },
+  {
    "id": "B005",
    "title": "بوابة مُدخل الترجمة الإنجليزية قبل البناء (فشل مغلق)",
    "kind": "script",
@@ -5181,7 +5234,7 @@
   },
   {
    "id": "D010",
-   "title": "نشر الموقع (بعد كل البوابات)",
+   "title": "نشر الموقع عبر قناتين مع تحقق حي قبل status=ok",
    "kind": "script",
    "phase": "deliver",
    "assert": [
@@ -5190,7 +5243,7 @@
      "command": [
       "python3",
       "-c",
-      "import json,sys;d=json.load(open('logs/publish-{date}.json'));sys.exit(0 if d.get('status')=='ok' else 1)"
+      "import json,sys;d=json.load(open('logs/publish-{date}.json'));sys.exit(0 if d.get('status')=='ok' and d.get('channel') in ('manus','github-pages') and d.get('url') and d.get('head') and d.get('live',{}).get('status')==200 and d.get('live',{}).get('bytes',0)>0 and d.get('live',{}).get('date_marker') else 1)"
      ]
     }
    ],
@@ -5199,14 +5252,16 @@
      "س2 — الإغلاق والدفع"
     ],
     "files": [
-     "tools/publish_changes.sh",
+     "tools/publish_channels.py",
+     "tools/publish_fallback.sh",
      "tools/publish_site.sh",
      "validators/check_en_parity.py"
     ],
     "gates": [],
     "tests": [
-     "tests/test_no_publish_without_runbook.sh",
      "tests/test_delivery_scripts.sh",
+     "tests/test_no_publish_without_runbook.sh",
+     "tests/test_publish_channels.py",
      "tests/test_publish_contract.py"
     ]
    },
@@ -5214,16 +5269,17 @@
    "command": [
     "bash",
     "-lc",
-    "B=\"$PWD\"; export B SITE; bash tools/publish_site.sh {date}; rc=$?; exit $rc"
+    "B=\"$PWD\"; export B SITE; python3 tools/publish_channels.py publish --date {date} --root \"$B\"; rc=$?; exit $rc"
    ],
    "ok_rc": [
     0
    ],
-   "warn_rc": []
+   "warn_rc": [],
+   "note_ar": "يجرّب Manus أولًا إن كانت جاهزة، ثم المحتوى العام raw.githack/jsDelivr عند الفشل أو التعطّل. لا يُكتب status=ok إلا بعد HTTP 200 وحجم موجب وعلامة تاريخ التقرير، وتُسجّل القناة الأساسية معطّلة دون إيقاف اليوم."
   },
   {
    "id": "D020",
-   "title": "التحقق الحي من النشر (قراءة فقط)",
+   "title": "التحقق الحي للقناة المستخدمة (200 وحجم وعلامة تاريخ)",
    "kind": "script",
    "phase": "deliver",
    "assert": [
@@ -5242,6 +5298,7 @@
     ],
     "files": [
      "tools/check_live.sh",
+     "tools/publish_channels.py",
      "tools/live_visual_audit.py",
      "tools/live_dom_audit.py"
     ],
@@ -5249,6 +5306,7 @@
     "tests": [
      "tests/test_delivery_scripts.sh",
      "tests/test_live_dom_dup_scope.py",
+     "tests/test_publish_channels.py",
      "tests/test_publish_contract.py"
     ]
    },
@@ -5261,7 +5319,8 @@
    "ok_rc": [
     0
    ],
-   "warn_rc": []
+   "warn_rc": [],
+   "note_ar": "يقرأ D020 رابط القناة المسجّل في publish-{date}.json، ويفشل مغلقًا عند 404 أو جسم صفري أو غياب علامة تاريخ التقرير."
   },
   {
    "id": "D030",

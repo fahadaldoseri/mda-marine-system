@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import os
+from datetime import datetime, timezone
 from pathlib import Path
 import shutil
 import subprocess
@@ -61,7 +62,8 @@ class GithubBackupFailureOutputTest(unittest.TestCase):
             self.assertEqual(proc.returncode, 2, proc.stdout + proc.stderr)
             combined = proc.stdout + proc.stderr
             self.assertIn("شجرة المستودع غير نظيفة", combined)
-            log = brain / "logs" / "github-backup-2026-11-06.log"
+            utc_date = datetime.now(timezone.utc).date().isoformat()
+            log = brain / "logs" / f"github-backup-{utc_date}.log"
             self.assertIn("شجرة المستودع غير نظيفة", log.read_text(encoding="utf-8"))
 
 
