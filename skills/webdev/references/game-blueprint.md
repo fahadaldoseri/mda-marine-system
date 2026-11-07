@@ -14,20 +14,21 @@ there are no effort, coverage or Godot concept-review steps. The lifecycle below
 means Godot. Planning-unavailable recovery settles only gameplay/online, preserving asset permissions.
 Use Web build/Preview/checkpoints/deployment, never Godot commands.
 
-Approved `assetProduction` covers only 3D models. Saved Hybrid reads the catalog Skill
+Approved `assetProduction` covers 3D models and [audio](game-threejs-assets.md#audio). Saved Hybrid reads the catalog Skill
 and search/adapt catalog models first. Fast mode generates models directly: skip catalog discovery, reading,
 search and retrieval for its models.
-All modes use `texture: true`; use `pbr: true` except in Fast mode. Each model's
+All modes use `texture: true`, `texture_version: "v3.5-20260815"` and `delight: true`; use `pbr: true` except in Fast mode. Each model's
 [detail tier](game-threejs-assets.md#built-in-game-asset-model-preferences) sets its P model and `face_limit`.
-New cards offer Fast mode (recommended) and Quality mode, in that order. Hybrid is only a retained saved choice.
+New cards offer Fast (recommended), Quality and Highest quality modes, in that order. Hybrid is only a retained saved choice.
 
 | Choice | Existing generation route and arguments |
 | --- | --- |
-| `hybrid` — Saved Hybrid mode | Manus asset catalog first, then text-to-3D with `model: "text/P1-20260311"`, `texture_quality: "fast"`, `texture_version: "v3.5-20260815"`; no design references. |
-| `ai_generated_fast` — Fast mode | Built-in text-to-3D only: `model: "text/P1-20260311"`, `pbr: false`, `texture_quality: "fast"`, `texture_version: "v3.5-20260815"`, `purpose: "gamedev"`; no catalog or design references. |
+| `hybrid` — Saved Hybrid mode | Manus asset catalog first, then text-to-3D with `model: "text/P1-20260311"`, `texture_quality: "fast"`; no design references. |
+| `ai_generated_fast` — Fast mode | Built-in text-to-3D only: `model: "text/P1-20260311"`, `pbr: false`, `texture_quality: "fast"`, `purpose: "gamedev"`; no catalog or design references. |
 | `ai_generated_max` — Quality mode | Object references: image `model: "gpt-image-2.5"` or stable successor, then image-to-3D with standard textures: Standard models use `model: "image/P2-20260801"`; Light models use `model: "image/P1-20260311"`. |
+| `ai_generated_highest` — Highest quality mode | As Quality, with image `quality: "high"`; all models use `model: "image/P2-20260801"` and `texture_quality: "extreme"`. |
 
-Standard textures use `texture_quality: "standard"`, `texture_version: "v3.0-20250812"` where supported.
+Standard textures use `texture_quality: "standard"`.
 All modes default to built-in `generate_3d_model`. Pass the selected `model` explicitly. P Series requires omitting
 `geometry_quality`, `smart_low_poly`, `generate_parts` and `compress`, including false values.
 Use only parameters exposed by its active schema; never bypass it through the Data API.
@@ -54,7 +55,7 @@ Wait for canonical approval; defaults grant none. New drafts, including non-inte
 countdowns use the saved choice. Unanswered historical drafts use Fast when confirmed, never a catalog fallback.
 Save keeps explicit choices. Generation failures do not authorize catalog sourcing.
 Historical approvals without a model choice do not gain generation permission. Preserve supplied-only,
-no-AI and other brief restrictions; model choices grant no audio/media permission. Hide tool details from the card.
+no-AI and other brief restrictions; model choices grant no other media permission. Hide tool details from the card.
 
 In Cloud and Local, follow [3D generation](game-assets.md#3d-model-generation). If the tool lacks the selected method, keep existing models and report deferred models; never change provider/method, reinitialize or make paid probes.
 
@@ -62,7 +63,7 @@ Follow the [Three.js asset lifecycle](game-threejs-assets.md#generate-validate-r
 capabilities, model paths, validation, registration, loader URLs and checkpoints. Apply its
 [staged CDN loading](game-threejs-assets.md#staged-cdn-loading) and
 [3D rendering safety](game-threejs-assets.md#3d-rendering-safety) during implementation.
-Catalog retrieval/adaptation applies only to saved catalog modes, never its Godot sync/release commands.
+Catalog retrieval/adaptation applies only to saved catalog modes and SFX, never its Godot sync/release commands.
 
 ### Three.js character rigging and animation
 

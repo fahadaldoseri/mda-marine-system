@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة fa9afd6fe455ae8d). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة 189e8e97d2188af2). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -60,18 +60,18 @@
 | G025 | عدد المصادر (مصدر واحد) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G025.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/sources_count_sync.py، tools/measure_source_ledger_coverage.py، tests/test_source_daily_coverage.py | stop |
 | G026 | قابلية النقل (مسارات) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G026.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_portable_paths.py، tools/portable_paths.py | stop |
 | G028 | حصاد الألفاظ الجديدة | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G028.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/harvest_terms.py | stop |
-| G030 | فصل فضاءات الرموز MN-/EST- | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G030.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh | stop |
+| G030 | فصل فضاءات الرموز MN-/EST- | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G030.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_code_spaces.py، tools/register_estimate.py، appendices/estimate-code-map.json | stop |
 | G031 | قاعدة النقاط في المصدر | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G031.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh | stop |
 | G032 | فاحص النقل بين الإصدارات | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G032.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh | stop |
 | G033 | اكتمال التشغيل (الأعطال المعروفة) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G033.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_run_completeness.py | stop |
 | G034 | عيوب الكتابة (الصياغة والترقيم) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G034.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_prose_defects.py | stop |
 | G035 | تسرّب المحتوى الداخلي إلى المتن | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G035.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_internal_leak.py | stop |
-| G036 | المفردات المبسطة (تنبيهي حتى الموافقة) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G036.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_vocabulary.py | stop |
+| G036 | المفردات المبسطة (تنبيهي حتى الموافقة) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G036.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_vocabulary.py، appendices/simplified-vocabulary.json | stop |
 | G044 | السجل الحاكم للمفردات ومُولَّده | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G044.log | ف1–ف5 — بوابة التحقق، ط15 — مدى بوابة الأسلوب | tools/final_gate.sh، tools/build_vocab_gate.py، appendices/simplified-vocabulary.json، tools/vocab_review.py، tools/lexicon_wiring.py، sections/20-lexicon.md | stop |
 | G044B | حارس سلسلة الاستبدال في المفردات (ك-479) | script | appendices/simplified-vocabulary.json، sections/20-lexicon.md |  | cmd:bash -lc test -s logs/runbook/{date}/G044B.log | ف1–ف5 — بوابة التحقق | validators/check_vocab_chain.py، tools/final_gate.sh، appendices/simplified-vocabulary.json، sections/20-lexicon.md | stop |
 | G048 | بوابة الإغلاق (الأعطال والاستثناءات) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G048.log | ف3 — إغلاق الأعطال | validators/check_closure.py | stop |
 | G048A | تغطية المصادر في دفتر الوقائع (اتحاد المصادر المسجّل) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G048A.log | ط9 — اتحاد المصادر | validators/check_source_daily_coverage.py | stop |
-| G040 | اختبارات المراجعة الثانية (أ · ب · ج · د · هـ · ز) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G040.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tests/test_review2.sh | stop |
+| G040 | اختبارات المراجعة الثانية (أ · ب · ج · د · هـ · ز) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G040.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tests/test_review2.sh، validators/check_skills_parity.py، tools/browser_measure.py | stop |
 | G041 | اختبار انحدار المصلح (12→23) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G041.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tests/test_repair_regression.sh | stop |
 | G057 | حارس اسم المصدر الحقيقي (فشل مغلق) | script | appendices/source-label-blacklist.json، cumulative-2026/daily/*.json، web/meta/*.json، reports/*-sectioned.md |  | cmd:bash -lc test -s logs/runbook/{date}/G057.log | ف1–ف5 — بوابة التحقق، موجة الصفر — حراس الدفتر | validators/check_source_naming.py، tools/source_alternatives.py | stop |
 | G058 | حارس تغطية الأيام والأدلة (فشل مغلق) | script | appendices/source-label-blacklist.json، cumulative-2026/daily/*.json |  | cmd:bash -lc test -s logs/runbook/{date}/G058.log | ف1–ف5 — بوابة التحقق، موجة الصفر — حراس الدفتر | validators/check_day_coverage.py، tools/source_coverage_line.py | stop |

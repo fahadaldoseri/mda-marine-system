@@ -156,7 +156,8 @@ def deferred_producer_ids(manifest: dict, gate_id: str) -> dict[str, dict]:
     """يعيد المنتجات المؤجلة فقط إذا أثبت المانيفست أنها بعد البوابة الحالية.
 
     لا يكفي وجود اسم المنتج في قائمة يدوية: يجب أن يعلن عقد البوابة المنتج والسبب
-    وتاريخ السريان، ثم يثبت ترتيب `producer` بعد `gate` في قائمة الخطوات.
+    وتاريخ السريان، ثم يثبت ترتيب `producer` بعد `gate` في قائمة الخطوات،
+    وخطوة إنفاذ لاحقة حقيقية غير معطّلة تحمل عقد الفحص المعلن.
     """
     steps = manifest.get("steps") if isinstance(manifest, dict) else None
     if not isinstance(steps, list):
@@ -169,6 +170,11 @@ def deferred_producer_ids(manifest: dict, gate_id: str) -> dict[str, dict]:
     if gate_id not in positions:
         return {}
     out: dict[str, dict] = {}
+    step_by_id = {
+        str(step.get("id")): step
+        for step in steps
+        if isinstance(step, dict) and step.get("id")
+    }
     for step in steps:
         if not isinstance(step, dict) or str(step.get("id")) != gate_id:
             continue
@@ -180,14 +186,72 @@ def deferred_producer_ids(manifest: dict, gate_id: str) -> dict[str, dict]:
                 continue
             producer_index = positions[producer]
             gate_index = positions[gate_id]
-            if producer_index > gate_index:
-                out[producer] = {
-                    **declaration,
-                    "gate": gate_id,
-                    "gate_index": gate_index,
-                    "producer_index": producer_index,
-                }
+            if producer_index <= gate_index:
+                continue
+            enforced_by = str(declaration.get("enforced_by") or "").strip()
+            if not enforced_by or enforced_by not in positions:
+                continue
+            enforcement_index = positions[enforced_by]
+            if enforcement_index <= producer_index:
+                continue
+            enforcement_step = step_by_id.get(enforced_by) or {}
+            if not _is_real_surface_enforcer(enforcement_step, declaration):
+                continue
+            out[producer] = {
+                **declaration,
+                "gate": gate_id,
+                "gate_index": gate_index,
+                "producer_index": producer_index,
+                "enforcement_index": enforcement_index,
+            }
     return out
+
+
+_ENFORCEMENT_MARKERS = {
+    "surface-coverage": ("audit_style_coverage.py",),
+    "telegram-delivery": ("check_telegram_delivery.py",),
+}
+
+
+def _is_real_surface_enforcer(step: dict, declaration: dict) -> bool:
+    """يثبت أن خطوة الإنفاذ المعلنة تنفذ عقدًا معروفًا وليست اسمًا حرًا."""
+    if not isinstance(step, dict) or step.get("disabled"):
+        return False
+    contract = str(declaration.get("enforcement_contract") or "surface-coverage").strip()
+    markers = _ENFORCEMENT_MARKERS.get(contract)
+    if not markers:
+        return False
+    payload = json.dumps(step, ensure_ascii=False)
+    return any(marker in payload for marker in markers)
+
+
+def classify_missing_surface(surface: dict, deferred: dict[str, dict], disabled: dict[str, str],
+                             error: str) -> dict[str, object]:
+    """يصنف سطحًا غائبًا من عقد المانيفست فقط، لا من نص الفحص."""
+    producer = str(surface.get("producer") or "").strip()
+    if producer and producer in disabled:
+        return {
+            "status": "مستثنى بقرار المالك",
+            "blocked": False,
+            "note": f"الخطوة {producer} معطّلة: {disabled[producer]} — {error}",
+        }
+    if producer and producer in deferred:
+        declaration = deferred[producer]
+        enforcement = str(declaration.get("enforced_by") or "—")
+        return {
+            "status": "مؤجل معلن",
+            "blocked": False,
+            "note": (f"{declaration.get('reason', 'تأجيل معلن')} — "
+                      f"{producer} بعد {declaration.get('gate', '—')}، "
+                      f"والإنفاذ في {enforcement} — {error}"),
+        }
+    return {"status": "غير مغطى", "blocked": True, "note": error}
+
+
+def classify_evaluated_surface(style_rc: int, prose_rc: int) -> dict[str, object]:
+    """يصنف سطحًا موجودًا؛ أي فشل أسلوبي أو نثري مانع فشلًا مغلقًا."""
+    covered = style_rc == 0 and prose_rc in (0, 1)
+    return {"status": "مغطى" if covered else "مانع", "blocked": not covered}
 
 
 def _current_step_id(manifest: dict) -> str | None:
@@ -231,7 +295,8 @@ def surfaces(day: str) -> list[dict]:
     rows += [
         {"label": "رسالة تلغرام", "kind": "html", "producer": "D030",
          "path": BASE / "logs" / f"tg-digest-{day}.html"},
-        {"label": "صفحة التقرير", "kind": "html", "path": SITE / "dist" / "reports" / f"{day}.html"},
+        {"label": "صفحة التقرير", "kind": "html", "producer": "B010",
+         "path": SITE / "dist" / "reports" / f"{day}.html"},
         {"label": "صفحة المصادر", "kind": "html", "path": SITE / "dist" / "sources.html"},
         {"label": "الصفحة الرئيسية", "kind": "html", "path": SITE / "dist" / "index.html"},
         {"label": "صفحة إضافات (ك-234)", "kind": "html", "path": SITE / "dist" / "additions.html"},
@@ -293,36 +358,35 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="قياس تغطية بوابة الأسلوب لكل سطح")
     ap.add_argument("--date", default=TODAY)
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("--gate-id", default=None,
+                    help="هوية البوابة الحالية من المانيفست؛ الافتراضي يُستدل من الأداة")
     a = ap.parse_args()
     TMP.mkdir(parents=True, exist_ok=True)
 
     manifest = _load_manifest()
-    gate_id = _current_step_id(manifest)
+    gate_id = a.gate_id or _current_step_id(manifest)
     deferred = deferred_producer_ids(manifest, gate_id) if gate_id else {}
     rows, blocked, uncovered, deferred_count = [], 0, 0, 0
     off = _disabled_producers()
     for i, s in enumerate(surfaces(a.date), 1):
         tgt, err = extract(s, i)
         if tgt is None:
-            prod = s.get("producer")
-            if prod and prod in off:
+            missing = classify_missing_surface(s, deferred, off, err)
+            if missing["status"] == "مستثنى بقرار المالك":
                 rows.append({"label": s["label"], "path": str(s["path"]),
-                             "status": "مستثنى بقرار المالك",
-                             "note": f"الخطوة {prod} معطّلة: {off[prod]} — {err}",
+                             "status": missing["status"], "note": missing["note"],
                              "style": "—", "prose": "—", "findings": []})
                 continue
-            if prod and prod in deferred:
-                declaration = deferred[prod]
+            if missing["status"] == "مؤجل معلن":
                 deferred_count += 1
                 rows.append({"label": s["label"], "path": str(s["path"]),
                              "status": "مؤجل معلن",
-                             "note": (f"{declaration.get('reason', 'استثناء ترتيب معلن')} — "
-                                      f"{prod} بعد {declaration.get('gate', gate_id)} · {err}"),
+                             "note": missing["note"],
                              "style": "—", "prose": "—", "findings": []})
                 continue
             uncovered += 1
             rows.append({"label": s["label"], "path": str(s["path"]), "status": "غير مغطى",
-                         "note": err, "style": "—", "prose": "—"})
+                         "note": missing["note"], "style": "—", "prose": "—"})
             continue
         sc, s_out = run_gate(["python3", str(BASE / "validators" / "check_style.py")], tgt)
         if s["kind"] == "pdf":
@@ -347,8 +411,9 @@ def main() -> int:
                 "text_sha256": hashlib.sha256(tgt.read_bytes()).hexdigest()[:16],
             })
             continue
-        ok = sc == 0 and pc in (0, 1)
-        if not ok:
+        evaluation = classify_evaluated_surface(sc, pc)
+        ok = evaluation["status"] == "مغطى"
+        if evaluation["blocked"]:
             blocked += 1
         note = ""
         rows.append({

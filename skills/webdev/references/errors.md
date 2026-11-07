@@ -154,7 +154,9 @@ Groups by origin:
   domain, feature flag, or redirect/headers route. Reads stay available so it can be removed,
   but publish answers `409 publish_contract_missing` until the retired field is gone; do not
   retry unchanged.
-- `integrations_mutually_exclusive` — Shopify/Stripe integration conflict.
+- `integrations_mutually_exclusive` — Shopify/Stripe integration conflict. Ask the owner whether to disconnect the current one first ([Stripe](payments.md#disconnect-stripe), [Shopify](shopify.md#disconnect-shopify)); do not disconnect without that answer.
+- `integration_not_connected` — the disconnect target or the copied integration is not connected. Read `GET config` for the current integrations; do not retry unchanged.
+- `publish_in_progress` — a Stripe disconnect waits for the running publish. Ask the owner to confirm the card again after it finishes.
 - `stripe_integration_required` — never hand-write the three fixed Stripe keys; declare
   `integrations: ["stripe"]` instead ([Stripe](payments.md)).
 - `database_url_reserved` — `DATABASE_URL` belongs to the managed database: for a server project that has not enabled its managed database, explicitly keep

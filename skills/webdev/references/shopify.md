@@ -71,6 +71,23 @@ When the user asks to claim or take ownership of their store, call `webdev.shopi
 
 Claim is still available in **Settings → Integrations → Shopify**. After claim, direct the owner to **Add to Connectors**; continuing to use the development-store Admin tool is a bug. Keep the Storefront domain/config intact unless the owner connects a different store.
 
+## Disconnect Shopify
+
+Disconnect only when the owner asks to remove Shopify from this website, for example to use Stripe instead. Building, publishing or a mutual-exclusion error is not by itself such a request; ask the owner first.
+
+1. Call `webdev.config` with `POST integrations/shopify/disconnect` and no body. Only the owner can call it; others get `403 permission_denied`.
+2. The response contains an `action_url` and pauses the agent. Stop and let the owner confirm in the card. If the development store is unclaimed, the card asks the owner to claim it first, because Manus offers no claim while Shopify is disconnected. Never remove `shopify` with a config write.
+3. Resume after the `integration_disconnected` notification. The disconnect is already applied; do not call it again. Remove the storefront code, routes and environment use that depend on Shopify. Then restart Preview, validate and save a checkpoint.
+
+The disconnect removes `integrations: ["shopify"]` and the managed Storefront declarations in one config revision. By default the stored values stay but are inactive. `webdev.shopify` is no longer listed, and open store-setup and claim cards stop working. The store is not deleted, transferred or changed. The published site keeps its current version until the next publish.
+
+Use the notification payload when you report the result:
+
+- `unclaimedDevStore`: the development store still exists but was not claimed. Tell the owner this, but do not tell the owner to claim it: Manus offers no claim while Shopify is disconnected.
+- For a claimed or Connector store, the owner's Shopify Connector stays installed. The disconnect does not change it; removing it is the owner's choice in Connectors.
+- `savedDataDeleted`: the owner chose to delete what Manus saved for Shopify: the stored Storefront values and the store record. The store itself is not changed.
+
+Enabling Shopify again with **Create a new store** reuses the same development store while it is still unclaimed. If Shopify has deleted it, or after `savedDataDeleted`, a new store is created. A claimed store or an existing store connects again through **Connect an existing store**.
 ## Security and verification
 
 - Do not make raw Shopify Admin HTTP calls; use `webdev.shopify` pre-claim or the Shopify Connector MCP post-claim/existing-store.

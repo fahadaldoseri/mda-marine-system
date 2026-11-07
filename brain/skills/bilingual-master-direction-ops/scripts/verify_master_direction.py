@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import sys
 import tempfile
@@ -26,6 +27,22 @@ MT_FLAG = re.compile(
     r"(?im)^\s*(auto_translate|mt_fallback|machine_translation)\s*[:=]\s*(true|1|\"1\"|'1')"
 )
 DEFAULT_MASTER = "sources/i18n/en/{date}-sectioned.en.md"
+
+
+def _default_brain() -> Path:
+    return Path(os.environ.get("BRAIN_DIR") or Path(__file__).resolve().parents[3])
+
+
+def _default_site() -> Path:
+    configured = os.environ.get("SITE_DIR")
+    if configured:
+        return Path(configured)
+    brain = _default_brain()
+    for name in ("seawatch", "site"):
+        candidate = brain.parent / name
+        if candidate.is_dir():
+            return candidate
+    return brain.parent / "seawatch"
 
 
 def visible_text(html: str) -> str:
@@ -118,8 +135,8 @@ def selftest() -> int:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="التحقق من اتجاه اللغة في خط أنابيب ثنائي اللغة")
-    ap.add_argument("--brain", default="/home/ubuntu/brain-marine-news")
-    ap.add_argument("--site", default="/home/ubuntu/seawatch")
+    ap.add_argument("--brain", default=str(_default_brain()))
+    ap.add_argument("--site", default=str(_default_site()))
     ap.add_argument("--date")
     ap.add_argument("--selftest", action="store_true")
     a = ap.parse_args()

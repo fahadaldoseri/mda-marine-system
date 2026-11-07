@@ -181,7 +181,7 @@ checking waits without rebuilding. gamePublishCheckUnavailable retries this read
 gamePublishBlocker: required_secret_missing or publish_contract_missing need webdev.config repair.
 publish_config_invalid: repair the webdev.config field at gamePublishConfigIssue.path, then read back.
 game_backend_contract_missing: [backend recovery](game-backend.md#prepare-verify-and-recover).
-Other failures need diagnostics/source/config fixes before saving; report blockers.
+Other failures need gamePublishReleaseIssue/diagnostics/source/config fixes before saving; report blockers.
 Sharing alone proves no readiness; absent sharing does not block a basic release.
 
 ## Publishing
