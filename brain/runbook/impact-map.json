@@ -296,6 +296,28 @@
         "tests/test_gate_audit_triage.py",
         "tests/test_gate_coverage_reference.py"
       ]
+    },
+    {
+      "match": [
+        "tools/repo_root.py",
+        "validators/check_server_code_tracking.py",
+        "tools/telegram_send.py",
+        "tools/runbook.py",
+        "tools/github_backup.sh"
+      ],
+      "surfaces": [],
+      "gates": [
+        "D035",
+        "D040",
+        "D070",
+        "D071"
+      ],
+      "tests": [
+        "tests/test_three_root_causes_20261107.py",
+        "tests/test_d035_repo_root.py",
+        "tests/test_gate_coverage_reference.py",
+        "tests/test_publish_live_contract_20261107.py"
+      ]
     }
   ]
 }

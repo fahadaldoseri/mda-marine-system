@@ -35,6 +35,41 @@ TRACKED_EXT = {".py", ".sh", ".md", ".json", ".js", ".mjs", ".ts", ".yaml", ".ym
 SKIP_DIRS = {".git", "node_modules", "__pycache__", ".pytest_cache", "logs", ".venv"}
 
 
+class ManifestNotFound(FileNotFoundError):
+    """فشل مغلق عند غياب مانيفست الكتيب من كل المسارات المعلنة."""
+
+
+def discover_root(start, *, explicit: bool = False):
+    """اعثر على جذر يحوي runbook/runbook.json دون تخمين اسم المستودع."""
+    requested = os.path.abspath(os.path.expanduser(str(start)))
+    checked = []
+    candidates = [requested] if explicit else [requested, *os.path.dirname(requested).split(os.sep)]
+    if not explicit:
+        candidates = []
+        current = requested
+        while True:
+            candidates.append(current)
+            parent = os.path.dirname(current)
+            if parent == current:
+                break
+            current = parent
+    for candidate in candidates:
+        manifest = os.path.join(candidate, MANIFEST)
+        checked.append(manifest)
+        if os.path.isfile(manifest):
+            return candidate
+    if not explicit:
+        for candidate in candidates:
+            brain_root = os.path.join(candidate, "brain")
+            manifest = os.path.join(brain_root, MANIFEST)
+            checked.append(manifest)
+            if os.path.isfile(manifest):
+                return brain_root
+    raise ManifestNotFound(
+        "مانيفست الكتيب غير موجود؛ المسارات المفحوصة: " + " · ".join(checked)
+    )
+
+
 # ───────────────────────── أدوات عامة ─────────────────────────
 def load(root):
     with open(os.path.join(root, MANIFEST), encoding="utf-8") as f:
@@ -799,7 +834,7 @@ def main():
     ap.add_argument("cmd")
     ap.add_argument("step", nargs="?")
     ap.add_argument("--date")
-    ap.add_argument("--root", default=".")
+    ap.add_argument("--root", default=None)
     ap.add_argument("--id")
     ap.add_argument("--title")
     ap.add_argument("--kind")
@@ -808,30 +843,35 @@ def main():
     ap.add_argument("--redo", default="", help="معرّفات خطوات تُعاد للتحقق بعد تغيّر مدخلاتها، مفصولة بفاصلة (ك-321)")
     a = ap.parse_args()
     c = a.cmd
+    try:
+        root = discover_root(a.root or os.getcwd(), explicit=a.root is not None)
+    except ManifestNotFound as exc:
+        print(f"✘ فشل مغلق: {exc}")
+        return 2
     if c == "verify":
-        return verify(a.root)
+        return verify(root)
     if c == "run":
-        return run(a.root, a.date, redo=[x for x in a.redo.split(",") if x.strip()])
+        return run(root, a.date, redo=[x for x in a.redo.split(",") if x.strip()])
     if c == "gates":
-        return run(a.root, a.date, only_phase="gates", redo=[x for x in a.redo.split(",") if x.strip()])
+        return run(root, a.date, only_phase="gates", redo=[x for x in a.redo.split(",") if x.strip()])
     if c == "gate-json":
-        return gate_json(a.root, a.date, a.through)
+        return gate_json(root, a.date, a.through)
     if c == "gates-status":
-        return gates_status(a.root, a.date)
+        return gates_status(root, a.date)
     if c == "complete":
-        return complete(a.root, a.step, a.date)
+        return complete(root, a.step, a.date)
     if c == "status":
-        return status(a.root, a.date)
+        return status(root, a.date)
     if c == "handbook":
-        return handbook(a.root)
+        return handbook(root)
     if c == "section-add":
-        return section_add(a.root, a.id, a.title, a.after)
+        return section_add(root, a.id, a.title, a.after)
     if c == "section-remove":
-        return section_remove(a.root, a.id)
+        return section_remove(root, a.id)
     if c == "step-add":
-        return step_add(a.root, a.id, a.title, a.kind, a.after)
+        return step_add(root, a.id, a.title, a.kind, a.after)
     if c == "step-remove":
-        return step_remove(a.root, a.id)
+        return step_remove(root, a.id)
     print(__doc__)
     return 0
 

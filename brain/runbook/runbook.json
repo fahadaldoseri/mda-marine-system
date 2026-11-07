@@ -5495,17 +5495,20 @@
     "files": [
      "validators/check_secrets.py",
      "tools/redact.py",
-     "tools/github_backup.sh"
+     "tools/github_backup.sh",
+     "tools/repo_root.py",
+     "validators/check_server_code_tracking.py"
     ],
     "tests": [
-     "tests/test_d035_repo_root.py"
+     "tests/test_d035_repo_root.py",
+     "tests/test_three_root_causes_20261107.py"
     ]
    },
    "on_fail": "stop",
    "command": [
     "bash",
     "-lc",
-    "B=\"$PWD\"; export B; REPO=\"$(git -C \"$B\" rev-parse --show-toplevel 2>/dev/null || dirname \"$B\")\"; export REPO; python3 validators/check_repo_secrets.py --repo \"$REPO\" && python3 validators/check_secrets.py --root \"$B\" && python3 validators/check_secrets.py --root \"$REPO\" && python3 validators/check_backup_push_safety.py --script \"$B/tools/github_backup.sh\"; rc=$?; exit $rc"
+    "B=\"${B:-}\"; test -n \"$B\" || { echo '✘ جذر brain غير مقيس'; exit 2; }; REPO=\"$(git -C \"$B\" rev-parse --show-toplevel 2>/dev/null)\" || { echo \"✘ تعذّر قياس جذر Git من $B\"; exit 2; }; export B REPO; python3 validators/check_repo_secrets.py --repo \"$REPO\" && python3 validators/check_secrets.py --root \"$B\" && python3 validators/check_secrets.py --root \"$REPO\" && python3 validators/check_backup_push_safety.py --script \"$B/tools/github_backup.sh\"; rc=$?; exit $rc"
    ],
    "ok_rc": [
     0
@@ -5582,7 +5585,8 @@
      "tools/github_backup.py",
      "tools/apply_from_github.sh",
      "tools/apply_from_github.py",
-     "tools/code_paths.py"
+     "tools/code_paths.py",
+     "tools/repo_root.py"
     ],
     "gates": [],
     "tests": [
@@ -5596,14 +5600,15 @@
      "tests/test_pdf_live_parity_en_guard.py",
      "tests/test_code_paths_ignore.py",
      "tests/test_skills_parity.py",
-     "tests/test_backup_tree_clean.py"
+     "tests/test_backup_tree_clean.py",
+     "tests/test_three_root_causes_20261107.py"
     ]
    },
    "on_fail": "stop",
    "command": [
     "bash",
     "-lc",
-    "B=\"$PWD\"; export B SITE; python3 validators/check_skills_parity.py --root \"$B\" --skills-file \"$B/runbook/approved-skills.json\" && bash tools/github_backup.sh && python3 validators/check_backup_parity.py --mode strict; rc=$?; exit $rc"
+    "B=\"${B:-}\"; test -n \"$B\" || { echo \"✘ جذر brain غير مقيس\"; exit 2; }; REPO=\"$(git -C \"$B\" rev-parse --show-toplevel 2>/dev/null)\" || { echo \"✘ تعذّر قياس جذر Git من $B\"; exit 2; }; export B SITE REPO BACKUP_REPO_DIR=\"$REPO\"; python3 validators/check_skills_parity.py --root \"$B\" --skills-file \"$B/runbook/approved-skills.json\" && bash tools/github_backup.sh && python3 validators/check_backup_parity.py --mode strict; rc=$?; exit $rc"
    ],
    "ok_rc": [
     0
@@ -5944,7 +5949,8 @@
      "tools/github_backup.py",
      "tools/apply_from_github.sh",
      "tools/apply_from_github.py",
-     "tools/code_paths.py"
+     "tools/code_paths.py",
+     "tools/repo_root.py"
     ],
     "gates": [],
     "tests": [
@@ -5953,14 +5959,15 @@
      "tests/test_parity_runtime_artifacts.py",
      "tests/test_code_paths_ignore.py",
      "tests/test_skills_parity.py",
-     "tests/test_backup_tree_clean.py"
+     "tests/test_backup_tree_clean.py",
+     "tests/test_three_root_causes_20261107.py"
     ]
    },
    "on_fail": "stop",
    "command": [
     "bash",
     "-lc",
-    "B=\"$PWD\"; export B SITE; python3 validators/check_skills_parity.py --root \"$B\" --skills-file \"$B/runbook/approved-skills.json\" && bash tools/github_backup.sh && python3 validators/check_backup_parity.py --mode strict; rc=$?; exit $rc"
+    "B=\"${B:-}\"; test -n \"$B\" || { echo \"✘ جذر brain غير مقيس\"; exit 2; }; REPO=\"$(git -C \"$B\" rev-parse --show-toplevel 2>/dev/null)\" || { echo \"✘ تعذّر قياس جذر Git من $B\"; exit 2; }; export B SITE REPO BACKUP_REPO_DIR=\"$REPO\"; python3 validators/check_skills_parity.py --root \"$B\" --skills-file \"$B/runbook/approved-skills.json\" && bash tools/github_backup.sh && python3 validators/check_backup_parity.py --mode strict; rc=$?; exit $rc"
    ],
    "ok_rc": [
     0
