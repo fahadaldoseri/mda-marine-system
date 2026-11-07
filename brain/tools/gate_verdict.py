@@ -180,7 +180,7 @@ def main() -> int:
     ap.add_argument("--json", default="")
     ap.add_argument("--quiet", action="store_true")
     a = ap.parse_args()
-    brain = pathlib.Path(a.root) if a.root else _root("BRAIN_DIR", pathlib.Path(__file__).resolve().parents[1].parent, "brain-marine-news", "brain")
+    brain = pathlib.Path(a.root) if a.root else canonical_brain_root(pathlib.Path(__file__).resolve().parents[1])
     jl = brain / "logs" / "runbook" / f"{a.date}.jsonl"
     steps = journal_latest(jl)
     if not steps:

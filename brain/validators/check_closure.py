@@ -18,17 +18,11 @@ from pathlib import Path as _Path
 _P = _Path(__file__).resolve()
 _C = [_P.parents[i] for i in range(1, min(6, len(_P.parents)))]
 def _brain_root():
-    e = _os.environ.get("BRAIN_DIR")
-    if e and _Path(e).is_dir():
-        return _Path(e)
-    for r in _C:
-        c = r / "brain-marine-news"
-        if (c / "reports").is_dir():
-            return c
-    for r in _C:
-        if (r / "reports").is_dir():
-            return r
-    return _C[0] / "brain-marine-news"
+    """جذر brain القانوني بالقياس (runbook/runbook.json) — فشل مغلق."""
+    import sys as _sys
+    _sys.path.insert(0, str(_Path(__file__).resolve().parents[1] / 'tools'))
+    from brain_root import canonical_brain_root
+    return canonical_brain_root(_Path(__file__).resolve().parents[1])
 BRAIN = _brain_root()
 
 
