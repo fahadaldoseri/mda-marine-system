@@ -15,7 +15,9 @@ import os
 import re
 from pathlib import Path
 
-REFERENCE_RE = re.compile(r"references/[A-Za-z0-9_.-]+\.md")
+# لا نعدّ السجل التاريخي لمسار مهارة أخرى (`other-skill/references/x.md`)
+# إحالةً محلية؛ الإحالة التنفيذية تبدأ مباشرةً بـ`references/` داخل المهارة.
+REFERENCE_RE = re.compile(r"(?<![A-Za-z0-9_./-])references/[A-Za-z0-9_.-]+\.md")
 
 
 def source_files(root: Path) -> dict[str, Path]:

@@ -11,6 +11,7 @@ from __future__ import annotations
 import subprocess
 import sys
 import tempfile
+import os
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -174,6 +175,20 @@ def main() -> int:
             clean_additions(),
         )
         check("طول قسم مستوى التهديد", "سالب — 111 كلمة", result, 2, "111")
+
+        production_site = Path(
+            os.environ.get("SITE_DIR", str(ROOT.parent / "seawatch"))
+        )
+        result = run_gate(
+            production_site / "dist" / "reports" / "2026-11-07.html",
+            production_site / "dist" / "additions.html",
+        )
+        check(
+            "طول قسم مستوى التهديد",
+            "موجب — الإصدار المبني لا يتجاوز السقف",
+            result,
+            0,
+        )
 
         result = run_case(
             root,

@@ -25,16 +25,28 @@ def test_telegram_is_deferred_only_when_manifest_places_producer_after_gate():
         "steps": [
             {"id": "G045", "deferred_surfaces": [{
                 "label": "رسالة تلغرام", "producer": "D030",
+                "enforced_by": "D033", "enforcement_contract": "telegram-delivery",
                 "reason": "اختياري ولاحق", "effective_from": "2026-11-06",
             }]},
             {"id": "D030", "title": "إرسال الملخص وPDF على تلغرام"},
+            {"id": "D033", "command": ["python3 validators/check_telegram_delivery.py"]},
         ]
     }
     deferred = module.deferred_producer_ids(manifest, "G045")
     assert deferred["D030"]["producer_index"] > deferred["D030"]["gate_index"]
+    assert deferred["D030"]["enforcement_index"] > deferred["D030"]["producer_index"]
 
     reordered = {"steps": [manifest["steps"][1], manifest["steps"][0]]}
     assert module.deferred_producer_ids(reordered, "G045") == {}
+
+    no_enforcer = {"steps": [
+        {"id": "G045", "deferred_surfaces": [{
+            "label": "رسالة تلغرام", "producer": "D030",
+            "reason": "اختياري ولاحق", "effective_from": "2026-11-06",
+        }]},
+        {"id": "D030", "title": "إرسال الملخص وPDF على تلغرام"},
+    ]}
+    assert module.deferred_producer_ids(no_enforcer, "G045") == {}
 
 
 if __name__ == "__main__":

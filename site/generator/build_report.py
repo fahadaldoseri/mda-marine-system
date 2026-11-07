@@ -75,6 +75,19 @@ class BuildError(Exception):
     pass
 
 
+_TEMPLATE_ARTIFACT_RE = re.compile(r"[{}]|<%|%>|\$\{")
+
+
+def assert_no_template_artifacts(text, label: str = "النص المرئي") -> None:
+    """Fail closed when a template/dict representation reaches reader text."""
+    value = str(text or "")
+    match = _TEMPLATE_ARTIFACT_RE.search(value)
+    if match:
+        raise BuildError(
+            f"تسرّب رمز قالب في {label}: {match.group(0)!r} — لا يُعرض النص الخام"
+        )
+
+
 import blocks as BLK
 import codes  # سياسة عرض رموز الأحداث (كامل مرة واحدة، ومختصر مدموج برقم البلاغ)
 import screen_layer as SCR  # طبقة الشاشة: القرار فوق الطيّ، للشاشة فقط (لا تمسّ الطباعة)
@@ -187,7 +200,7 @@ SECTION_HINTS = {
     "قراءة الموقف وتحليل المؤشرات": "ما يدل عليه النمط والافتراضات والفرضيات وعلامات الإنذار المبكر.",
     "الاحتمالات ونسبة الحوادث إلى جهات": "من قد يكون مسؤولًا، بلا جزم وبلا نسبة بلا دليل.",
     "الحركة الملاحية والتكدس": "حركة المضيق والرسو من مصادر معلنة فقط.",
-    "ما لم يُحسم": "ما لا يزال مجهولًا، وما يلزم متابعته في التقرير التالي.",
+    "ما لم يُحسم": "ما لم تحدده المواد بعد، وما يلزم متابعته في التقرير التالي.",
     "الخلفية القائمة": "وقائع أقدم لا يزال أثرها مؤثرًا على التشغيل.",
     "المصادر والمراجع": "حالة المصادر المفحوصة، وروابط المراجع المستشهد بها.",
 }
@@ -1011,6 +1024,7 @@ def normalize_digits(s: str) -> str:
 
 def inline(text: str, defs: dict = None) -> str:
     """تحويل العناصر المضمّنة: عريض، مائل، كود، روابط، استشهادات."""
+    assert_no_template_artifacts(text)
     t = esc(_public_text(text))
     t = isolate_dtg(t)
     t = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", t)
@@ -1539,7 +1553,15 @@ def _join_sources(event: dict) -> str:
     vals = []
     srcs = event.get("sources")
     if isinstance(srcs, (list, tuple)):
-        vals.extend(str(x).strip() for x in srcs if str(x).strip())
+        for item in srcs:
+            # المصدر الحاكم قد يحمل الاسم والمقتطف معًا؛ لا تُحوّل القاموس
+            # إلى repr قابل للظهور على السطح، فذلك يسرّب أقواس القالب والنص
+            # الداخلي بدل اسم المصدر الذي يقرأه القارئ.
+            if isinstance(item, dict):
+                item = item.get("name") or item.get("source") or item.get("label")
+            value = _value_text(item)
+            if value:
+                vals.append(value)
     elif isinstance(srcs, str) and srcs.strip():
         vals.append(srcs.strip())
     base = _value_text(event.get("source"))
@@ -1559,6 +1581,7 @@ def _event_sources(event: dict) -> str:
     raw = _join_sources(event)
     if not raw:
         return ""
+    assert_no_template_artifacts(raw, "مصادر الواقعة")
     # تُستخرج الجهة الحقيقية من بداية المصدر أو من مسار المصدر الأصلي عند
     # ورود وسم وصفي مثل «نقل إعلامي تركي» بدل اسم الجهة.
     for marker in (" نقلًا عن ", " نقلاً عن ", " نقل عن "):
@@ -2517,7 +2540,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
         for key, bname in blocks_map.items():
             if key in t:
                 for _bn in str(bname).split('+'):
-                    if _bn in HIDDEN_BLOCKS:
+                    if mode != "additions" and _bn in HIDDEN_BLOCKS:
                         continue
                     if block_data.get(_bn):
                         section_html += BLK.render_block(_bn, block_data[_bn], inline)

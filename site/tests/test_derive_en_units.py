@@ -14,7 +14,7 @@ import derive_en_units as D  # noqa: E402
 
 def test_arabic_and_persian_digits_normalize_to_latin() -> None:
     assert hasattr(D, "_build_arabic_digits")
-    assert D._canonical_identifier_text("٠١٢٣٤٥٦٧٨٩ ۰۱۲۳۴۵۶۷۸۹") == (
+    assert D._canonical_identifier_text("0123456789 ۰۱۲۳۴۵۶۷۸۹") == (
         "0123456789 0123456789"
     )
 

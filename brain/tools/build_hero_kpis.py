@@ -22,6 +22,9 @@ import re
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
+DEFAULT_ALLOWED_ACCENTS = frozenset(("ok", "info", "warn", "danger"))
+sys.path.insert(0, str(ROOT))
+from tools.arabic_counter import format_arabic_count  # noqa: E402
 
 
 def load(path: pathlib.Path) -> dict:
@@ -65,13 +68,70 @@ def hero_detail(meta: dict, zones: dict, card: dict) -> str:
         return (f"{counter.get('confirmed') or 0} مؤكدة + {counter.get('probable') or 0} مرجّحة + "
                 f"{counter.get('unconfirmed_qualifying') or 0} غير مؤكدة مؤهلة")
     if detail.get("kind") == "unconfirmed_split":
-        return (f"{counter.get('unconfirmed_total') or 0} روايات · منها "
+        total = counter.get("unconfirmed_total") or 0
+        count = int(total)
+        return (f"{format_arabic_count(count, card.get('number_format'))} · منها "
                 f"{counter.get('unconfirmed_qualifying') or 0} مؤهلة · تُذكر ولا تُحتسب")
     if detail.get("kind") == "fire_split":
         fire = (meta.get("hero_sources") or {}).get("fire") or {}
         return (f"المؤكد: {fire.get('confirmed') or 0} · المرجّح: {fire.get('probable') or 0} · "
                 f"غير المؤكد: {fire.get('unconfirmed') or 0}")
     return str(detail.get("ar") or "")
+
+
+def _display_date(value) -> str:
+    """يحوّل تاريخ المصدر ISO إلى صيغة العرض دون اختراع تاريخ بديل."""
+    raw = str(value or "").strip()
+    match = re.fullmatch(r"(\d{4})-(\d{2})-(\d{2})", raw)
+    return f"{match.group(3)}/{match.group(2)}/{match.group(1)}" if match else raw
+
+
+def _source_updated(meta: dict, zones: dict, card: dict, kpis: dict) -> str:
+    source = card.get("source") or {}
+    kind = source.get("kind")
+    if kind in {"zones_counter", "zones_sum"}:
+        return _display_date(zones.get("date"))
+    if kind == "kpis_totals":
+        return _display_date(metric(kpis, str(source.get("id") or ""), "updated"))
+    if kind == "meta_path":
+        return _display_date(metric(kpis, str(card.get("id") or ""), "updated"))
+    return ""
+
+
+def hero_note(meta: dict, zones: dict, card: dict, kpis: dict, value) -> str:
+    """ينشئ ملاحظة قابلة للتدقيق من التفصيل المشتق وتاريخ المصدر."""
+    presentation = card.get("presentation") or {}
+    kind = presentation.get("note")
+    detail = hero_detail(meta, zones, card)
+    if kind == "scoped_value_with_source_date":
+        tag = str(card.get("tag") or "").strip() or "النطاق المسجل"
+        detail = f"{value} وقائع مثبتة في {tag} خلال فترة التقرير"
+    if not detail:
+        return ""
+    updated = _source_updated(meta, zones, card, kpis)
+    if kind in {"derived_detail_with_source_date", "scoped_value_with_source_date"} and updated:
+        return f"{detail}؛ آخر تحديث المصدر: {updated}."
+    return detail
+
+
+def hero_accent(zones: dict, card: dict, allowed: set[str]) -> str:
+    """يشتق accent من حالة العداد وفق قاعدة العقد، ضمن القيم المسموحة فقط."""
+    rule = (card.get("presentation") or {}).get("accent_rule") or {}
+    kind = rule.get("kind")
+    counter = zones.get("counter") or {}
+    if kind == "explicit":
+        value = str(rule.get("value") or "")
+    elif kind == "unconfirmed_or_probable_warn":
+        value = "warn" if any(int(counter.get(key) or 0) > 0 for key in ("unconfirmed_qualifying", "probable")) else "ok"
+    elif kind == "positive_warn":
+        value = "warn" if int(counter.get("unconfirmed_total") or 0) > 0 else "info"
+    elif kind == "positive_danger":
+        value = "danger" if int(card.get("_derived_value") or 0) > 0 else "ok"
+    else:
+        value = "info"
+    if value not in allowed:
+        raise ValueError(f"accent غير مسموح في عقد hero_kpis: {value}")
+    return value
 
 
 def _imo_totals() -> tuple[dict, dict]:
@@ -179,6 +239,9 @@ def build_official_cards(meta: dict, registry: dict) -> list[dict]:
 
 def build(meta: dict, zones: dict, registry: dict, kpis: dict) -> list[dict]:
     contract = registry.get("hero_kpis") or {}
+    allowed = set(contract.get("allowed_accents") or DEFAULT_ALLOWED_ACCENTS)
+    if not allowed or not allowed.issubset(DEFAULT_ALLOWED_ACCENTS):
+        raise ValueError(f"مجموعة accent في العقد غير صالحة: {sorted(allowed)}")
     previous = {str(c.get("id")): c for c in (meta.get("hero_kpis") or []) if isinstance(c, dict)}
     cards: list[dict] = []
     for item in (contract.get("cards") or []):
@@ -194,6 +257,15 @@ def build(meta: dict, zones: dict, registry: dict, kpis: dict) -> list[dict]:
         value = hero_value(meta, zones, item, kpis)
         card["value"] = "" if value is None else str(value)
         card["detail"] = hero_detail(meta, zones, item)
+        if not str(card.get("label") or "").strip():
+            card["label"] = item.get("title") or ""
+        if not str(card.get("note") or "").strip():
+            card["note"] = hero_note(meta, zones, item, kpis, value)
+        existing_accent = str(card.get("accent") or "").strip()
+        if existing_accent not in allowed:
+            contract_card = dict(item)
+            contract_card["_derived_value"] = value
+            card["accent"] = hero_accent(zones, contract_card, allowed)
         source = item.get("source") or {}
         if source.get("kind") == "kpis_totals":
             metric_id = str(source.get("id") or "")

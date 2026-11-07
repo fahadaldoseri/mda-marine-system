@@ -35,7 +35,7 @@ BRAIN = _brain_root()
 STATES = {'مغلق', 'مفتوح', 'بانتظار التحقق', 'موروث غير مثبت', 'أعيد فتحه'}
 EXC_FIELDS = ['fault_id', 'state', 'reason', 'owner', 'approved_by', 'created_at', 'expires_at',
               'compensating_control', 'replacement_plan', 'evidence']
-OUTCOME = re.compile(r'خرج\s*(?:0|2|70)|رمز\s*(?:0|2|70)|exit\s*(?:0|2)|فاشل\s*(?:0|صفر)'
+OUTCOME = re.compile(r'(?i:\brc\s*=\s*(?:0|2|70))|خرج\s*(?:0|2|70)|رمز\s*(?:0|2|70)|exit\s*(?:0|2)|فاشل\s*(?:0|صفر)'
                      r'|\b(?:[1-9]|1[0-5])/(?:[1-9]|1[0-5])\b(?!\s*/)|صفر فاشل|مطابق تمامًا|بصمة\s*[0-9a-f]{6,}')
 IDENT = re.compile(r'^\|\s*([كزعثم])-(\d+)(/[بجدهوزحطيكلمنصعقفرستثخ]+)?\s*\|')
 

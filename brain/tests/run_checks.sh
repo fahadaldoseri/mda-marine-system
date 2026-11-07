@@ -254,6 +254,7 @@ t "منع التركيب المعلّق (ك-173)" python3 tests/test_hanging_ope
 
 echo "19) السجل الحاكم للمفردات وتغطية الأسطح (طلب فهد 2026-10-27)"
 t "السجل الحاكم: صلاحية · إنفاذ كل بند · سبب ومصدر · منع التعديل اليدوي · تغطية الأسطح" python3 tests/test_vocab_registry.py
+t "حاجز ألفاظ مولّد الإضافات: موجب + سالب" python3 "$SITE/tests/test_g001_forbidden_terms.py"
 echo "20) قنوات المصادر (ك-237): الفحص كان يُشغَّل بلا احتساب رمز خروجه"
 t "قنوات المصادر: الهوية والمسارات والفجوة وعدم التراجع" python3 validators/check_closure.py --brain "$B" || bad "بوابة الإغلاق: الحلقة غير مغلقة"
 python3 tests/test_closure_gate.py || bad "اختبار بوابة الإغلاق"
@@ -277,6 +278,7 @@ echo "25) معجم المفردات المشتق (ك-328): تحذيرات كاذ
 t "المعجم المشتق مطابق للمصادر + لفظ مصطنع يُكتشف" python3 tests/test_lexicon_gate.py
 t "شكل معجم النسخة الإنجليزية (ك-491)" python3 validators/check_glossary_shape.py
 t "مفردات حقل الموقع: أسماء المناطق البحرية وصيغة «الموقع - المنطقة» (ك-492)" python3 validators/check_area_vocabulary.py
+t "محاذاة متن التقرير العربي والإنجليزي (عدد ونوع كل سطر)" env BRAIN_DIR="$B" python3 "$SITE/tests/test_i18n_alignment.py"
 
 echo "26) أرضية الأصول الحاكمة (ك-483): أي نقص في أصل معتمد يمنع التسليم"
 t "أرضية الأصول: قصّ يمنع · نموّ يرفع · قبول بسبب يُدوَّن · حذف يمنع" python3 tests/test_asset_floor.py

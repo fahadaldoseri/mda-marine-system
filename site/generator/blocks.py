@@ -9,8 +9,9 @@
 
 import html
 import re
-
 import contextvars
+import json
+from pathlib import Path
 
 from codes import label as _code_label, demote as _demote  # سياسة عرض الرموز (2+5)
 
@@ -275,13 +276,52 @@ def hypotheses_table(items, inline):
     )
 
 
+_PUBLIC_GAP_REPLACEMENTS: tuple[tuple[str, str], ...] | None = None
+
+
+def _public_gap_text(value: object) -> str:
+    """طبّق بدائل السجل الحاكم على نص كتلة الإضافات قبل عرضه للقارئ."""
+    global _PUBLIC_GAP_REPLACEMENTS
+    if _PUBLIC_GAP_REPLACEMENTS is None:
+        candidates = (
+            Path(__file__).resolve().parents[2] / "brain-marine-news" / "appendices" / "forbidden-coinages.json",
+            Path(__file__).resolve().parents[1] / "appendices" / "forbidden-coinages.json",
+        )
+        pairs: dict[str, str] = {}
+        for path in candidates:
+            if not path.is_file():
+                continue
+            try:
+                data = json.loads(path.read_text(encoding="utf-8"))
+            except (OSError, UnicodeError, json.JSONDecodeError):
+                continue
+            for entry in data.get("entries", []) if isinstance(data, dict) else []:
+                if not isinstance(entry, dict):
+                    continue
+                term = str(entry.get("term") or "").strip()
+                replacement = str(entry.get("replacement") or "").strip()
+                if term and replacement:
+                    pairs[term] = replacement
+            if pairs:
+                break
+        _PUBLIC_GAP_REPLACEMENTS = tuple(sorted(pairs.items(), key=lambda pair: len(pair[0]), reverse=True))
+    text = str(value or "")
+    for term, replacement in _PUBLIC_GAP_REPLACEMENTS:
+        text = text.replace(term, replacement)
+    return text
+
+
 def gaps_table(items, inline):
     if not items:
         return ""
-    rows = [[it.get("gap", ""), it.get("owner", ""), it.get("impact", "")] for it in items]
+    rows = [[_public_gap_text(it.get("gap", "")),
+             _public_gap_text(it.get("owner", "")),
+             _public_gap_text(it.get("impact", ""))] for it in items]
+    lede = _public_gap_text("الفجوة · الجهة القادرة على حسمها · أثر استمرارها.")
+    headers = [_public_gap_text(value) for value in ("الفجوة", "الجهة القادرة على الحسم", "أثر استمرارها")]
     return (
-        '<h3>تكليفات المتابعة</h3><p class="blk-lede">الفجوة · الجهة القادرة على حسمها · أثر استمرارها.</p>'
-        + _table(["الفجوة", "الجهة القادرة على الحسم", "أثر استمرارها"], rows, inline)
+        f'<h3>تكليفات المتابعة</h3><p class="blk-lede">{lede}</p>'
+        + _table(headers, rows, inline)
     )
 
 

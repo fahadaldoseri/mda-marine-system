@@ -2,6 +2,7 @@
 """Regression test for governed English event-card row labels."""
 from __future__ import annotations
 
+import json
 import re
 import sys
 from pathlib import Path
@@ -35,14 +36,19 @@ def _row_label(page: str, row: int) -> str:
 
 
 def test_event_card_source_row_uses_governed_structural_label() -> None:
-    # The aligned report memory contains a longer table heading beginning with
-    # «المصدر». Prefix lookup must not leak that prose heading into a card label.
+    # The production glossary contains multiple long entries beginning with
+    # «المصدر». The structural label must have its own exact governed entry;
+    # prefix lookup must not leak a prose heading into a card label.
+    glossary = json.loads(
+        (ROOT / "sources" / "i18n" / "en" / "glossary.json").read_text(
+            encoding="utf-8"
+        )
+    )["entries"]
     translated, missing, _ = I.translate_page(
         CARD,
         "2026-11-06",
         {"المصدر والحدود": "Source and limits"},
-        {"المصدر: جدول التوزيع الجغرافي للوقائع في هذا التقرير. النسب لا تمثل أعداد هجمات مستقلة.":
-         "Source: Geographic distribution of incidents table in this report. Percentages do not represent independent attack counts."},
+        glossary,
     )
     assert missing == [], missing
     assert _row_label(translated, 6) == "Source"

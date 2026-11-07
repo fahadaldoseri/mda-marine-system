@@ -95,41 +95,31 @@ finally:
 
 # 5) تغطية الأسطح
 day = sorted(p.name.replace("-sectioned.md", "") for p in (B / "reports").glob("*-sectioned.md"))[-1]
-# ك-247: قبل البناء لا توجد صفحة اليوم؛ تُقاس التغطية على أحدث إصدار مبني،
-# ويبقى إنفاذ اليوم على بوابة G045 بعد البناء (فشل مغلق).
-_built = sorted(p for p in (SITE / "dist" / "reports").glob("*.html") if re.match(r"\d{4}-\d{2}-\d{2}$", p.stem))
-if _built and not (SITE / "dist" / "reports" / f"{day}.html").exists():
-    _prev = _built[-1].stem
-    skips.append(f"تغطية الأسطح: صفحة {day} لم تُبنَ بعد — قِيست على {_prev}، وإنفاذ اليوم في G045 بعد البناء")
-    day = _prev
 if not (SITE / "dist" / "index.html").exists():
     skips.append("تغطية الأسطح: لا بناء موقع في SITE — تُقاس في بوابة التسليم بعد البناء")
 else:
     env = dict(os.environ, SITE=str(SITE))
-    def _audit(d: str):
-        return subprocess.run([sys.executable, str(B / "tools" / "audit_style_coverage.py"), "--date", d],
+    def _audit(d: str, gate_id: str | None = None):
+        cmd = [sys.executable, str(B / "tools" / "audit_style_coverage.py"), "--date", d]
+        if gate_id:
+            cmd += ["--gate-id", gate_id]
+        return subprocess.run(cmd,
                               capture_output=True, text=True, env=env)
 
     def _counts(out: str):
-        m = re.search(r"الأسطح:\s*(\d+)\s*·\s*مغطاة:\s*(\d+)\s*·\s*غير مغطاة:\s*(\d+)\s*·\s*مانعة:\s*(\d+)", out or "")
+        m = re.search(r"الأسطح:\s*(\d+)\s*·\s*مغطاة:\s*(\d+)\s*·\s*مؤجلة معلنة:\s*(\d+)\s*·\s*غير مغطاة:\s*(\d+)\s*·\s*مانعة:\s*(\d+)", out or "")
         return tuple(int(x) for x in m.groups()) if m else None
 
-    r = _audit(day)
+    page_exists = (SITE / "dist" / "reports" / f"{day}.html").exists()
+    # قبل البناء: يُقاس يوم الجولة نفسه بعقد G001؛ إعلان الصفحة لا يُقرأ من هذا الاختبار.
+    r = _audit(day, None if page_exists else "G001")
     c = _counts(r.stdout)
-    if r.returncode == 0:
+    if not page_exists and r.returncode == 0 and c and c[2] == 1 and c[3] == 0 and c[4] == 0:
+        ok(f"صفحة {day} مؤجلة معلنًا من المانيفست — إنفاذها في G045 بعد B010")
+    elif r.returncode == 0:
         ok(f"تغطية الأسطح كاملة ({day}) — لا سطح خارج البوابة")
-    elif c and c[3] > 0:
-        bad("تغطية الأسطح", (r.stdout or "").strip().splitlines()[-1:] or r.returncode)
     else:
-        built = [d for d in sorted(p.name.replace("-sectioned.md", "") for p in (B / "reports").glob("*-sectioned.md"))
-                 if d < day and (SITE / "dist" / "reports" / f"{d}.html").exists()
-                 and (SITE / "dist" / "reports" / "pdf" / f"{d}.pdf").exists()]
-        r2 = _audit(built[-1]) if built else r
-        c2 = _counts(r2.stdout)
-        if r2.returncode == 0 or (c2 and c2[3] == 0 and c2[2] == 0):
-            ok(f"تغطية الأسطح كاملة على آخر تاريخ مبني ({built[-1] if built else '—'})؛ أسطح {day} تُقاس بعد خطوات البناء")
-        else:
-            bad("تغطية الأسطح", (r2.stdout or "").strip().splitlines()[-1:] or r2.returncode)
+        bad("تغطية الأسطح", (r.stdout or "").strip().splitlines()[-1:] or r.returncode)
 
 print(f"── الاختبارات: {len(fails)} فشل · {len(skips)} تخطٍّ موثَّق")
 for s in skips:

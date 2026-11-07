@@ -47,6 +47,13 @@ from datetime import date
 from html import escape as esc
 from pathlib import Path
 
+_LOCK_TOOLS = _Path(_os.environ.get("BRAIN_DIR", str(BRAIN))) / "tools"
+sys.path.insert(0, str(_LOCK_TOOLS))
+try:
+    from build_lock import BuildLock, BuildLockBusy, default_lock_path
+except Exception as _lock_exc:  # fail closed: direct builds must never bypass the lock
+    raise SystemExit(f"توقف البناء: تعذّر تحميل قفل البناء المشترك: {_lock_exc}") from _lock_exc
+
 # الاسم المعتمد للتقرير اليومي (قرار صاحب القرار — 18 أكتوبر 2026)
 DAILY_TITLE = "التقرير اليومي للأمن البحري والأوضاع الراهنة في المنطقة"
 DAILY_PLACEHOLDERS = ['التقرير الصباحي اليومي', 'التقرير اليومي', 'التقرير اليومي لأمن الملاحة', 'تقرير أمن الملاحة']
@@ -266,12 +273,12 @@ def build_additions(site_root: Path, dist: Path, reports, warnings):
         return 0
     r = reports[0]
     meta = dict(r["meta"])
-    # صفحة عرض فقط: تُكتم بطاقات التقرير ويبقى متن الأقسام المزاحة
-    # «ما تغيّر» يبقى: هو أول الأقسام المنقولة، وبطاقات التقرير الأخرى تُكتم
-    # الخريطة تُبنى مع وقائع التوزيع الجغرافي المنقول، فتبقى في «إضافات»
-    for k in ("decision_card", "hero_kpis", "notice", "threat_level", "timeline",
-              "event_keys", "glossary", "source_reliability", "vessel_identity", "intel_analysis",
-              "indicators", "hypotheses", "gaps", "blocks", "classification"):
+    # صفحة عرض فقط: تُكتم بطاقات التقرير ويبقى متن الأقسام المزاحة.
+    # لا تُحذف بيانات الكتل (hypotheses/indicators/gaps/timeline وغيرها):
+    # build_report يحتاجها ليعرض الجداول والبطاقات التي نُقلت إلى «إضافات».
+    # الخريطة تُبنى مع وقائع التوزيع الجغرافي المنقول، فتبقى في «إضافات».
+    for k in ("decision_card", "hero_kpis", "notice", "threat_level",
+              "event_keys", "glossary", "classification"):
         meta.pop(k, None)
     meta["title"] = "إضافات"
     meta["headline"] = "إضافات"
@@ -885,10 +892,32 @@ def _finalize_build() -> None:
         CRITICAL_FAIL.append(f"تغذية RSS: {_e}")
 
 
-if __name__ == "__main__":
+def _run_build() -> int:
     _rc = main()
     _finalize_build()
     if _rc == 0 and CRITICAL_FAIL:
         print("✘ فشل مغلق: أقسام منشورة لم تُبنَ — " + " · ".join(CRITICAL_FAIL[:4]))
         _rc = 2
-    sys.exit(_rc)
+    return _rc
+
+
+def _run_with_build_lock() -> int:
+    _lock_path = Path(_os.environ.get("MARINE_BUILD_LOCK_PATH", str(default_lock_path(BRAIN))))
+    _lock = BuildLock(_lock_path, stale_after=3600)
+    if _os.environ.get("MARINE_BUILD_LOCK_HELD") == "1":
+        try:
+            _lock.assert_owned_by_self_or_parent()
+        except BuildLockBusy as _exc:
+            print(f"✘ رُفض البناء: {_exc}")
+            return 73
+        return _run_build()
+    try:
+        with _lock:
+            return _run_build()
+    except BuildLockBusy as _exc:
+        print(f"✘ رُفض البناء الثاني: {_exc}")
+        return 73
+
+
+if __name__ == "__main__":
+    sys.exit(_run_with_build_lock())

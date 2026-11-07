@@ -78,6 +78,7 @@ Rules:
 - `<color name value>` — at least one. `value` is `#RRGGBB` only (variables carry no alpha; where you need semi-transparency, write an 8-digit hex literal at the point of use).
 - `<font name family size>` — at least one. Font-family + font-size binding, both required; `family` must be a font listed in Google Fonts (e.g. Noto Sans SC / Inter), a SINGLE font name — no comma fallback list. `size` is the default px size, positive number.
 - Variable `name`s: lowercase letter first, then lowercase letters, digits, hyphens (e.g. `brand`, `bg-dark`). `none`, `true`, and `false` are reserved words and cannot be used as names. Duplicate definitions are illegal; variables cannot reference variables.
+- Encode every row of the design brief's Colors table as a `<color>`, including the `-text` variants the brief's **Color contrast** section added. Text under 24 px (under 19 px when bold; card titles and subheads included) uses only colors that section marks "any text" or those `-text` variants; accents marked large-text or graphics-only stay on fills, lines, charts and large numerals. Without a brief, keep small text at 4.5:1 or more against its background (muted gray on white no lighter than #757575, 4.6:1).
 - `<color>` and `<font>` are two independent namespaces; names must be unique within each.
 - Reference by bare name: `fill="brand"`, `font="heading"`. Font variables carry their own size; an explicit sibling `size` overrides it. Literal fonts (`font="Inter"`; any uppercase/CJK character makes it a literal) set only the font-family, and must likewise be a single Google Fonts name.
 - Numbers are plain decimal literals (`18`, `18.5`); scientific/hex notation and stray whitespace are rejected.
@@ -185,7 +186,9 @@ stroke / stroke-width / stroke-dash  stroke, reuses shape syntax (no border by d
 flip-h / flip-v  mirror flip, default false (use for subject facing direction; rotation cannot replace it)
 shadow / opacity (lower opacity to use as a background texture)
 ```
-`crop-*` is mainly produced by the editor writing back a crop; you cannot see pixels, so unless an exact ratio is known, leave cropping to `fit="cover"`.
+`crop-*` is mainly produced by the editor writing back a crop; you cannot see pixels, so unless an exact ratio is known, leave cropping to `fit="cover"`. When the design brief has an Image frames section, give each `<image>` exactly its frame's x/y/width/height — the image was generated at that frame's ratio, so `fit="cover"` trims almost nothing; one image file per frame, never the same file cropped into several frames.
+
+Place images where the design brief's Slide Map plans them (see the Visuals section of SKILL.md): a full-bleed `<background type="image">` on cover / section / closing slides, and a side image (1/3–1/2 of the width, `fit="cover"`) or image band on content slides. Generate them with `slides/generate_fast_cheap_image`; chart/table-dominated or text-packed slides stay image-free.
 
 ```xml
 <image src="/home/user/deck/assets/team/cto.jpg" x="120" y="200" width="160" height="160" mask="ellipse"/>
@@ -316,7 +319,8 @@ The file-edit hook catches many of these; the rest surface at render/export. Che
 - Every element lies fully inside the 1280x720 canvas; elements do not overlap unless the overlap is a deliberate design choice (e.g. text over a background shape).
 - Distribute body content evenly: after fixed page elements (title, footer, slide number), actual content height should be close to the body area height — avoid content crammed at the top with a large empty bottom. If content is genuinely sparse, center it vertically with equal top/bottom whitespace.
 - Maintain grid alignment; in left/right layouts keep both columns' grids aligned with consistent heights, in top/bottom layouts keep equal left/right whitespace.
-- Keep fixed page elements (header, footer, slide number) IDENTICAL across slides — same font, same coordinates.
+- Keep fixed page elements (header, footer, slide number) IDENTICAL across slides — same font, same coordinates. Where one lands on an image (image background or image frame), keep the coordinates but put a small shape behind it with fill at least 90% opaque (8-digit hex, e.g. `#FFFFFFE6`) or use the light/dark text color that reads on that image — readability beats an identical color.
+- Body and small text (under 24 px) over an image sits on a shape or background `overlay` at least 90% opaque behind that text; the image's calm area alone is not enough.
 - Estimate text box sizes: oversized content overflows, undersized content leaves holes. Prefer sizing text to fill its box.
 - Balance visuals and text; use cards sparingly (only when needed for legibility).
 - Use the `design.xml` variables consistently across all slides for a coherent deck.

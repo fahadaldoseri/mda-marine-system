@@ -122,6 +122,12 @@ def main():
                 [{'fault_id': 'ك-1', 'lesson_id': 'ك-1', 'barrier_id': 'B-1234abcd', 'run_evidence': 'مرور كاذب'}])
         rc = run(t); print(f'  9) مغلق بدليل نصّي («مرور كاذب») → {rc} {"✔" if rc == 2 else "✘"}'); ok &= rc == 2
 
+    with tempfile.TemporaryDirectory() as d:   # عقد الدليل: صيغة rc=0 القانونية
+        t = Path(d) / 'j'
+        fixture(t, [row('ك-1', 'مغلق', 'تحقق تشغيلي ناجح', 'فعّال')], [],
+                [{'fault_id': 'ك-1', 'lesson_id': 'ك-1', 'barrier_id': 'B-1234abcd', 'run_evidence': 'rc=0'}])
+        rc = run(t); print(f'  10) مغلق بدليل rc=0 → {rc} {"✔" if rc == 0 else "✘"}'); ok &= rc == 0
+
     print('  الحصيلة: كل الاختبارات نجحت ✔' if ok else '  الحصيلة: فشل ✘')
     return 0 if ok else 1
 

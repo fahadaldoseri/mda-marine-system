@@ -95,5 +95,22 @@ def test_schema_rejects_missing_area_basis(tmp_path: Path) -> None:
     assert errors and any("area" in error for error in errors)
 
 
+def test_registry_requires_legal_separator_for_composite_area() -> None:
+    gate = load_gate()
+    names = {"مضيق هرمز", "خليج عُمان"}
+    valid, reason = gate.parts_ok("مضيق هرمز · خليج عُمان", names, "غير مكانية")
+    assert valid, reason
+    invalid, reason = gate.parts_ok("مضيق هرمز ومداخل خليج عُمان", names, "غير مكانية")
+    assert not invalid
+    assert "قيمة خارج السجل" in reason
+
+
+def test_current_round_has_no_unregistered_composite_area() -> None:
+    gate = load_gate()
+    root = Path(__file__).resolve().parents[1]
+    errors = gate.scan_root(root)
+    assert not [error for error in errors if "2026-11-07" in error]
+
+
 if __name__ == "__main__":
     raise SystemExit(0)

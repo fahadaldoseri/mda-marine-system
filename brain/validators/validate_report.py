@@ -51,6 +51,17 @@ GAP_FIELDS = ["gap", "owner", "impact"]
 EVENT_FIELDS = ["code", "title", "area", "status", "note"]
 TIMELINE_FIELDS = ["date", "count", "kind", "label"]
 
+
+def _hero_allowed_accents():
+    """يقرأ قيم accent من العقد الحاكم بدل تكرار قائمة محلية صامتة."""
+    path = ROOT / "appendices" / "card_registry.json"
+    try:
+        registry = json.loads(path.read_text(encoding="utf-8"))
+        values = (registry.get("hero_kpis") or {}).get("allowed_accents")
+    except (OSError, ValueError, AttributeError):
+        return set()
+    return {str(value) for value in values or [] if str(value).strip()}
+
 INTERNAL = ["checked_sources", "cited_sources", "confirmed_attacks_24h", "new_ukmto_reports_24h",
             "new_warnings_24h", "new_advisories_24h", "decision_card", "hero_kpis",
             "event_keys", "ledger_url", "report_schema_version", "kpis",
@@ -106,6 +117,14 @@ def check_schema(d):
                 errs.append(f"[ف1] {name}[{i}] ليس كائنًا")
                 continue
             errs += [f"[ف1] {name}[{i}] ينقصه {f}" for f in fields if f not in item]
+            if name == "hero_kpis":
+                for field in ("label", "note", "accent"):
+                    if field in item and not str(item.get(field) or "").strip():
+                        errs.append(f"[ف1] hero_kpis[{i}] ينقصه {field}")
+                accent = item.get("accent")
+                allowed = _hero_allowed_accents()
+                if accent is not None and allowed and str(accent) not in allowed:
+                    errs.append(f"[ف1] hero_kpis[{i}] accent غير مسموح: {accent}")
     for sec, ref in (d.get("blocks") or {}).items():
         if not isinstance(ref, str):
             continue
