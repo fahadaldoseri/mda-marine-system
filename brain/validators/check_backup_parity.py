@@ -349,10 +349,6 @@ def main() -> int:
     except ScopeError as exc:
         print(f"  ✘ فشل مغلق — سجل النطاق: {exc}")
         return 2
-    if _inside_repo():
-        print("  ℹ أنت داخل نسخة من المستودع نفسه — لا مقارنة (المطلوب هنا: بوابات المحتوى)")
-        print("  النتيجة: مطابق — الانحرافات المانعة: 0 (فحص داخل نسخة المستودع)")
-        return 0
     if not REPO.exists():
         print(f"  ⚠ لا مستودع نسخ احتياطي في: {REPO} (يُتخطّى الفحص)")
         return 3
