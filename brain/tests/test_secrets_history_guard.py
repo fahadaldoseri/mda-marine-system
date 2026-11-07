@@ -37,7 +37,7 @@ def test_history_scan_is_incremental_and_complete():
         (d / "a.txt").write_text("نص نظيف\n", encoding="utf-8")
         subprocess.run(["git", "-C", str(d), "add", "-A"], check=True)
         subprocess.run(["git", "-C", str(d), "commit", "-qm", "نظيف"], check=True)
-        (d / "b.txt").write_text('TOKEN="A1b2C3d4E5f6G7h8I9j0K1l2M3n4"\n', encoding="utf-8")
+        (d / "b.txt").write_text('TOKEN="' + "A1b2C3d4E5f6G7h8I9j0K1l2M3n4" + '"\n', encoding="utf-8")
         subprocess.run(["git", "-C", str(d), "add", "-A"], check=True)
         subprocess.run(["git", "-C", str(d), "commit", "-qm", "سرّ"], check=True)
         old_root, old_cur = cs.ROOT, cs.HISTORY_CURSOR
