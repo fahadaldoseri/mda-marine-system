@@ -5353,7 +5353,8 @@
     "tests": [
      "tests/test_no_publish_without_runbook.sh",
      "tests/test_delivery_scripts.sh",
-     "tests/test_secrets_file.py"
+     "tests/test_secrets_file.py",
+     "tests/test_gate_verdict.py"
     ]
    },
    "on_fail": "continue",
@@ -5545,6 +5546,7 @@
     ],
     "files": [
      "tools/github_backup.sh",
+     "validators/check_backup_tree_clean.py",
      "validators/check_backup_parity.py",
      "runbook/approved-skills.json",
      "validators/check_skills_parity.py",
@@ -5564,7 +5566,8 @@
      "tests/test_pdf_page_range_guard.py",
      "tests/test_pdf_live_parity_en_guard.py",
      "tests/test_code_paths_ignore.py",
-     "tests/test_skills_parity.py"
+     "tests/test_skills_parity.py",
+     "tests/test_backup_tree_clean.py"
     ]
    },
    "on_fail": "stop",
@@ -5905,6 +5908,7 @@
     ],
     "files": [
      "tools/github_backup.sh",
+     "validators/check_backup_tree_clean.py",
      "validators/check_backup_parity.py",
      "runbook/approved-skills.json",
      "validators/check_skills_parity.py",
@@ -5919,7 +5923,8 @@
      "tests/test_backup_code_safety.py",
      "tests/test_parity_runtime_artifacts.py",
      "tests/test_code_paths_ignore.py",
-     "tests/test_skills_parity.py"
+     "tests/test_skills_parity.py",
+     "tests/test_backup_tree_clean.py"
     ]
    },
    "on_fail": "stop",

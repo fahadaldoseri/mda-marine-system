@@ -104,7 +104,7 @@ def _hero_kpi_line(card: dict, registry: dict[str, dict]) -> str:
     return f"{label} {value}".strip()
 
 
-def build(meta, date, base, detail=True):
+def build(meta, date, base, detail=True, delivery_note=""):
     cut = dt.datetime.strptime(meta["generated_label"], "%Y-%m-%dT%H:%M:%SZ")
     start = cut - dt.timedelta(hours=24)
     bh = cut + dt.timedelta(hours=3)
@@ -128,8 +128,10 @@ def build(meta, date, base, detail=True):
     if kp:
         lines += ["", "<b>المؤشرات:</b>", kp]
     act = (meta.get("decision_card", {}).get("action") or [""])[0]
-    lines += ["", "<b>الإجراء المطلوب:</b>", f"نفّذوا — {short(act, 110)}", "", "<b>التقرير الكامل:</b>",
-              f"{base.rstrip('/')}/reports/{date}.html"]
+    lines += ["", "<b>الإجراء المطلوب:</b>", f"نفّذوا — {short(act, 110)}"]
+    if delivery_note:
+        lines += ["", "<b>قناة التسليم:</b>", delivery_note]
+    lines += ["", "<b>التقرير الكامل:</b>", f"{base.rstrip('/')}/reports/{date}.html"]
     return "\n".join(lines)
 
 
@@ -147,11 +149,25 @@ def main():
     need = ("title", "version", "generated_label", "threat_level", "changes")
     miss = [k for k in need if not meta.get(k)]
     base = a.base_url or site_base_url()
+    delivery_note = ""
+    publish_path = B / "logs" / f"publish-{a.date}.json"
+    try:
+        publish = json.loads(publish_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        publish = {}
+    if publish.get("status") == "ok" and publish.get("channel") == "github-pages":
+        report_url = str(publish.get("url") or "")
+        if "/reports/" in report_url:
+            base = report_url.split("/reports/", 1)[0]
+        delivery_note = (
+            "القناة الأساسية (منصة Manus) معطّلة مؤقتًا؛ "
+            "أُرسل التقرير عبر القناة البديلة."
+        )
     if miss or not base:
         print(f"✘ حقول ناقصة: {miss or ''} {'base_url' if not base else ''}")
         return 2
     for detail in (True, False):
-        text = build(meta, a.date, base, detail)
+        text = build(meta, a.date, base, detail, delivery_note)
         visible = re.sub(r"<[^>]+>", "", text)
         if len(visible) <= CAP:
             break
