@@ -40,22 +40,33 @@ class ManifestNotFound(FileNotFoundError):
 
 
 def discover_root(start, *, explicit: bool = False):
-    """اعثر على جذر يحوي المانيفست.
+    """اعثر على جذر يحوي المانيفست — فشل مغلق بلا تخمين.
 
-    العقد: عند غياب --root يُشتق الجذر من موضع الأداة نفسها (أب أبوي هذا الملف)،
-    فلا مجال لتخمين من مجلد العمل، ولا ينكسر مستدعٍ خارجي كالمهمة المجدولة.
-    أي جذر بلا مانيفست يفشل مغلقًا.
+    العقد: عند تمرير --root يُفحص الجذر المطلوب وحده. وبلا --root تُشتق المسارات من
+    مجلد العمل الحالي صاعدًا في سلسلة الآباء، ويُفحص في كل درجة مساران معلَنان:
+    `<درجة>/runbook/runbook.json` و`<درجة>/brain/runbook/runbook.json`.
+    لا يُستخدم موضع الأداة نفسه كبديل صامت، فمجرد تشغيلها من مجلد بلا مانيفست يفشل
+    مغلقًا (rc=2) مع طباعة كل المسارات المفحوصة.
     """
-    if not explicit:
-        start = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    requested = os.path.abspath(os.path.expanduser(str(start)))
     checked = []
-    candidates = [requested]
+    if explicit:
+        requested = os.path.abspath(os.path.expanduser(str(start)))
+        candidates = [requested]
+    else:
+        candidates = []
+        cur = os.path.abspath(os.getcwd())
+        while True:
+            candidates.append(cur)
+            parent = os.path.dirname(cur)
+            if parent == cur:
+                break
+            cur = parent
     for candidate in candidates:
-        manifest = os.path.join(candidate, MANIFEST)
-        checked.append(manifest)
-        if os.path.isfile(manifest):
-            return candidate
+        for rel in (MANIFEST, os.path.join("brain", MANIFEST)):
+            manifest = os.path.join(candidate, rel)
+            checked.append(manifest)
+            if os.path.isfile(manifest):
+                return os.path.dirname(os.path.dirname(manifest)) if rel.startswith("brain") else candidate
     raise ManifestNotFound(
         "مانيفست الكتيب غير موجود؛ المسارات المفحوصة: " + " · ".join(checked)
     )
