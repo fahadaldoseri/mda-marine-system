@@ -421,13 +421,21 @@ def main() -> int:
         _re.compile(r"-----BEGIN [A-Z ]*PRIVATE KEY-----"),             # مفاتيح خاصة
         _re.compile(r"\b(?:sk|pk)_(?:live|test)_[A-Za-z0-9]{20,}\b"), # مفاتيح دفع
     ]
+    # حدّ الأصل المولَّد (ك-552): ذاكرة الترجمة/الكاش مشتقة من مصدر مفحوص أصلًا،
+    # فمسحها ينتج منعًا كاذبًا بلا قيمة أمنية مضافة.
+    GENERATED_DIRS = {"__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache"}
     for dp, dns, fns in os.walk(REPO):
         if ".git" in Path(dp).parts:
+            continue
+        if any(part in GENERATED_DIRS for part in Path(dp).parts):
+            dns[:] = []
             continue
         for fn in fns:
             rel_scan = (Path(dp).relative_to(REPO) / fn).as_posix()
             if rel_scan in scope["repo"]["protected"]:
                 continue          # إعفاء مكتوب السبب: ملف الأسرار المعتمد بقرار المالك (ك-166/ك-168)
+            if fn.endswith((".pyc", ".pyo")):
+                continue          # أثر مولَّد (ك-552): لا يُفحص ولا يمنع
             if fn in SECRET_NAMES:
                 drift.append(f"تسرّب سرّي: {Path(dp).relative_to(REPO) / fn}")
                 continue
