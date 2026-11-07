@@ -222,16 +222,20 @@ def cloudflare_report_url(date: str, base_url: str = PAGES_BASE_URL) -> str:
 
 def site_root(root: Path) -> Path:
     """Resolve the site independently of whether ``root`` is brain or its mirror."""
+    env = os.environ.get("SITE_DIR")
     candidates = [
-        Path(os.environ["SITE_DIR"]) if os.environ.get("SITE_DIR") else None,
+        Path(env) if env else None,
         root.parent / "seawatch",
-        Path("/home/ubuntu/seawatch"),
         root.parent.parent / "seawatch",
     ]
+    # يُفضَّل الجذر الذي يحوي مخرج بناء فعليًا؛ لا مسارات مطلقة مثبَّتة (شرط النقل).
+    for candidate in candidates:
+        if candidate and (candidate / "dist").is_dir():
+            return candidate
     for candidate in candidates:
         if candidate and candidate.is_dir():
             return candidate
-    return Path(os.environ.get("SITE_DIR", str(root.parent / "seawatch")))
+    return Path(env) if env else root.parent / "seawatch"
 
 
 def cloudflare_pages_readiness(root: Path, date: str) -> dict[str, Any]:
