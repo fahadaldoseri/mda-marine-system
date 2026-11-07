@@ -30,15 +30,24 @@ def load_runtime_scope(path: Path) -> tuple[tuple[str, ...], tuple[str, ...]]:
     categories = document.get("categories") if isinstance(document, dict) else None
     if not isinstance(categories, list):
         raise ContractError("عقد النطاق بلا categories")
-    runtime = next((item for item in categories if item.get("id") == "operational_logs"), None)
-    if not isinstance(runtime, dict) or runtime.get("policy") != "informational":
-        raise ContractError("عقد النطاق يجب أن يعلن operational_logs بسياسة informational")
-    prefixes = runtime.get("prefixes")
-    exact = runtime.get("exact", [])
-    if not isinstance(prefixes, list) or not all(isinstance(value, str) and value for value in prefixes):
-        raise ContractError("operational_logs.prefixes غير صالح")
-    if not isinstance(exact, list) or not all(isinstance(value, str) and value for value in exact):
-        raise ContractError("operational_logs.exact غير صالح")
+    # يُحترم كل فئة معلَنة بسياسة informational: سجلات التشغيل + المخرجات المولَّدة.
+    # السبب: خطوات الجولة تُعيد كتابة مخرجاتها (فهرس التقارير · مكتبات المعجم ·
+    # مصفوفة التتبع · موجز التحسين) بعد النسخة الاحتياطية، وهي مشتقة لا مصدر حاكم.
+    honored = ("operational_logs", "generated")
+    prefixes: list[str] = []
+    exact: list[str] = []
+    for wanted in honored:
+        item = next((value for value in categories if value.get("id") == wanted), None)
+        if not isinstance(item, dict) or item.get("policy") != "informational":
+            raise ContractError(f"عقد النطاق يجب أن يعلن {wanted} بسياسة informational")
+        item_prefixes = item.get("prefixes")
+        item_exact = item.get("exact", [])
+        if not isinstance(item_prefixes, list) or not all(isinstance(v, str) and v for v in item_prefixes):
+            raise ContractError(f"{wanted}.prefixes غير صالح")
+        if not isinstance(item_exact, list) or not all(isinstance(v, str) and v for v in item_exact):
+            raise ContractError(f"{wanted}.exact غير صالح")
+        prefixes.extend(item_prefixes)
+        exact.extend(item_exact)
     return tuple(prefixes), tuple(exact)
 
 
