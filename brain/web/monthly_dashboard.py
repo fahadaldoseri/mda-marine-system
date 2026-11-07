@@ -1,1 +1,0 @@
-../../site/generator/monthly_dashboard.py
