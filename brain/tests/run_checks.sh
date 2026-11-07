@@ -218,6 +218,7 @@ t "استخراج نص الأسطح بمحرك العرض بلا عيوب وهم
 t "قرار 9: بطاقات IMO الدائمة وسجل التحديثات" python3 tests/test_owner9_imo_cards.py
 
 echo "14) محرّك الكتيب والمانيفست"
+t "عقد الجذر الصريح: موجب من /tmp وسالب للمفقود/المخالف" python3 tests/test_root_contract_phase1.py
 t "تقوية المحرّك (مسارات · ترتيب · gate-json · إتمام بالدليل)" python3 tests/test_runbook_hardening.py
 t "اختبارات المحرّك الأصلية" bash tests/test_runbook_engine.sh
 t "إضافة قسم ثم حذفه على نسخة مؤقتة" bash tests/test_section_registry.sh

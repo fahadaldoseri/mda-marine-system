@@ -40,31 +40,22 @@ class ManifestNotFound(FileNotFoundError):
 
 
 def discover_root(start, *, explicit: bool = False):
-    """اعثر على جذر يحوي runbook/runbook.json دون تخمين اسم المستودع."""
+    """اعثر على جذر يحوي المانيفست.
+
+    العقد: عند غياب --root يُشتق الجذر من موضع الأداة نفسها (أب أبوي هذا الملف)،
+    فلا مجال لتخمين من مجلد العمل، ولا ينكسر مستدعٍ خارجي كالمهمة المجدولة.
+    أي جذر بلا مانيفست يفشل مغلقًا.
+    """
+    if not explicit:
+        start = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     requested = os.path.abspath(os.path.expanduser(str(start)))
     checked = []
-    candidates = [requested] if explicit else [requested, *os.path.dirname(requested).split(os.sep)]
-    if not explicit:
-        candidates = []
-        current = requested
-        while True:
-            candidates.append(current)
-            parent = os.path.dirname(current)
-            if parent == current:
-                break
-            current = parent
+    candidates = [requested]
     for candidate in candidates:
         manifest = os.path.join(candidate, MANIFEST)
         checked.append(manifest)
         if os.path.isfile(manifest):
             return candidate
-    if not explicit:
-        for candidate in candidates:
-            brain_root = os.path.join(candidate, "brain")
-            manifest = os.path.join(brain_root, MANIFEST)
-            checked.append(manifest)
-            if os.path.isfile(manifest):
-                return brain_root
     raise ManifestNotFound(
         "مانيفست الكتيب غير موجود؛ المسارات المفحوصة: " + " · ".join(checked)
     )
@@ -844,7 +835,7 @@ def main():
     a = ap.parse_args()
     c = a.cmd
     try:
-        root = discover_root(a.root or os.getcwd(), explicit=a.root is not None)
+        root = discover_root(a.root or __file__, explicit=a.root is not None)
     except ManifestNotFound as exc:
         print(f"✘ فشل مغلق: {exc}")
         return 2
