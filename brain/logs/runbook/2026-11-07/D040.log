@@ -1,0 +1,34 @@
+المهارات: 34 · aliases: 28 · الملفات: 247 · المختلف: 0 · المفقود: 0 · الزائد: 0
+✔ تماثل المهارات: كل الملفات المعتمدة متطابقة SHA-256
+  نطاق المهارات المعتمد من runbook/approved-skills.json: 34
+  سجل النطاق: 4 فئات معلنة · كل مسار مصنّف
+  الحالة الملتزمة: 5986 · غير الملتزم: 27 · Git dirty: 18
+   ℹ غير ملتزم — لا يمنع: brain/logs/alerts/code-drift-2026-11-07.txt
+   ℹ غير ملتزم — لا يمنع: brain/logs/checks/new-validators-2026-11-07.json
+   ℹ غير ملتزم — لا يمنع: brain/logs/checks/new-validators-2026-11-07.txt
+   ℹ غير ملتزم — لا يمنع: brain/logs/checks/parity-scope-2026-11-07.txt
+   ℹ غير ملتزم — لا يمنع: brain/logs/checks/parity-skills-canon-2026-11-07.txt
+   ℹ غير ملتزم — لا يمنع: brain/logs/gate-verdict-2026-11-07.json
+   ℹ غير ملتزم — لا يمنع: brain/logs/github-backup-2026-11-07.log
+   ℹ غير ملتزم — لا يمنع: brain/logs/publish-2026-11-07-telegram.json
+   ℹ غير ملتزم — لا يمنع: brain/logs/runbook/2026-11-07.jsonl
+   ℹ غير ملتزم — لا يمنع: brain/logs/runbook/2026-11-07/D030.log
+   ℹ غير ملتزم — لا يمنع: brain/logs/runbook/2026-11-07/D035.log
+   ℹ غير ملتزم — لا يمنع: brain/logs/runbook/2026-11-07/D036.log
+   ℹ غير ملتزم — لا يمنع: brain/logs/runbook/2026-11-07/D040.log
+   ℹ غير ملتزم — لا يمنع: brain/logs/runbook/2026-11-07/G011.log
+   ℹ غير ملتزم — لا يمنع: brain/logs/skills-canon-20261105-034405/SKILL.md.bak
+   ℹ غير ملتزم — لا يمنع: brain/logs/skills-canon-20261106-092006/SKILL.md.bak
+   ℹ غير ملتزم — لا يمنع: brain/logs/skills-sync-20261103-201143/superpowers-method/SKILL.md.local.bak
+   ℹ غير ملتزم — لا يمنع: brain/logs/skills-sync-20261103-203526/superpowers-method/SKILL.md.local.bak
+   ℹ غير ملتزم — لا يمنع: brain/logs/skills-sync-20261103-205226/superpowers-method/SKILL.md.local.bak
+   ℹ غير ملتزم — لا يمنع: brain/logs/skills-sync-20261103-210933/superpowers-method/SKILL.md.local.bak
+   … و7 ملفات غير ملتزمة أخرى (معلوماتية)
+  الشجرة المحلية: 6013 · المستودع: 5995 · الروابط: 5 محليًا
+   ✘ تسرّب قيمة سرية: brain/tests/test_three_root_causes_20261107.py ("chat_id"\s*:\s*"?\d{6,}"?…)
+   ✘ تسرّب قيمة سرية: brain/tests/__pycache__/test_new_validators.cpython-312-pytest-7.4.4.pyc (\b\d{9,10}:[A-Za-z0-9_\-]{30…)
+  النتيجة: انحراف مانع (2) — النسخة الاحتياطية غير محدَّثة
+تم دفع الفرع فقط: backup/2026-11-07-151925-2636178
+تم إنشاء طلب الدمج: https://github.com/fahadaldoseri/mda-marine-system/pull/516
+=== انتهى: 2026-11-07T15:19:31Z ===
+elapsed_seconds=69.103312
