@@ -142,8 +142,19 @@ def measured_today(date: str) -> dict | None:
     return last
 
 
+def probe_readiness() -> tuple[str, str]:
+    """قياس جهوزية الإضافة لحظيًا — لا يُعتمد على أي سجل سابق."""
+    rc, out = run(["manus-mcp-cli", "tool", "list", "--server", "webdev-mcp"], timeout=120)
+    return classify_probe(rc, out)
+
+
 def verify_only(date: str) -> tuple[int, str]:
-    """شرط تحقق قناة المرآة في المانيفست."""
+    """شرط تحقق قناة المرآة في المانيفست — بقياس لحظي، لا بثقة في سجل سابق.
+
+    أ) سجل نشر موجود: يلزم تحقق حي مستوفٍ وتطابق البصمة المسجّلة.
+    ب) لا سجل نشر: يُقاس الآن؛ فإن كانت الإضافة غير جاهزة فالشرط مستوفى (استحالة نشر مقيسة)،
+       وإن كانت جاهزة فالتقرير ناقص على قناة جاهزة → فشل مغلق. وفشل القياس نفسه → غير مستوفى.
+    """
     marker = marker_path(date)
     if marker.is_file():
         doc = json.loads(marker.read_text(encoding="utf-8"))
@@ -153,10 +164,13 @@ def verify_only(date: str) -> tuple[int, str]:
         if doc.get("sha256") and live["sha256"] != doc["sha256"]:
             return 2, "البصمة المخدومة لا تطابق المسجّلة — المحتوى تغيّر بلا نشر جديد"
         return 0, f"قناة المرآة محقَّقة حيًّا · {live['status']} · {live['content_type']} · {live['bytes']} بايت"
-    entry = measured_today(date)
-    if entry and entry.get("state") in ("not-ready", "error"):
-        return 0, f"قياس موثّق اليوم: {entry.get('state')} — {str(entry.get('why'))[:90]}"
-    return 1, "لا سجل نشر ولا قياس جهوزية مسجّل اليوم لهذه القناة"
+    state, why = probe_readiness()
+    log_entry({"date": date, "state": state, "why": why, "source": "verify-only"})
+    if state == "not-ready":
+        return 0, f"استحالة نشر مقيسة الآن: {why}"
+    if state == "ready":
+        return 2, "الإضافة جاهزة وتقرير اليوم غير منشور على قناة المرآة — فشل مغلق"
+    return 1, f"تعذّر قياس جهوزية القناة: {why}"
 
 
 def log_entry(entry: dict) -> None:
