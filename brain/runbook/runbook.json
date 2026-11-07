@@ -351,7 +351,8 @@
     ".devcontainer/*",
     "runbook-result.md",
     "backup-repo/*",
-    "special-reports/*"
+    "special-reports/*",
+    "state/telegram-resend-*.json"
   ],
   "exempt_reasons": {
     "reports/*": "مخرجات: نصوص التقارير المولَّدة (يكتبها محرّك/الوكيل في خطوة W010)",
@@ -516,7 +517,8 @@
     "runbook/*": "ملفات المانيفست والبرومتات: يقرؤها المحرّك نفسه (runbook.py) ولا تُنفَّذ بخطوة مستقلة",
     "design/*": "مرجع تصميم محفوظ (design-v1) للقراءة فقط، لا تنفيذ فيه",
     "backup-repo/*": "شجرة مرآة الملفات التي تعيش في المستودع وحده (فهرس المستودع ومستندات الجلسة)؛ لا نظير لها على الخادم، ومقارنة التماثل تعتمدها من هذا المسار (ك-232).",
-    "special-reports/*": "تقارير خاصة تُنجز بطلب المالك خارج خط الأنابيب اليومي (كالتقرير الخاص عن وقائع الخليج العربي) — لا تدخل تسلسل الكتيب ولا تُنشر تلقائيًا"
+    "special-reports/*": "تقارير خاصة تُنجز بطلب المالك خارج خط الأنابيب اليومي (كالتقرير الخاص عن وقائع الخليج العربي) — لا تدخل تسلسل الكتيب ولا تُنشر تلقائيًا",
+    "state/telegram-resend-*.json": "سجل تفويض مكتوب ومؤرّخ لإعادة إرسال تلغرام؛ ينشأ عند أمر المالك لليوم نفسه (سجل لا شيفرة)"
   },
   "steps": [
     {
@@ -5400,6 +5402,48 @@
       "warn_rc": [],
       "disabled": false,
       "disabled_reason": "تفويض إرسال تلغرام بقرار المالك (2026-11-04): «ارسال على تلقرام»"
+    },
+    {
+      "id": "D031",
+      "title": "إعادة إرسال الملخص على تلغرام بأمر المالك (مسار محكوم)",
+      "kind": "script",
+      "phase": "deliver",
+      "assert": [
+        {
+          "type": "cmd",
+          "command": [
+            "python3",
+            "-c",
+            "import json,sys;d=[json.loads(l) for l in open('logs/telegram-sends.jsonl') if l.strip()];sys.exit(0 if any(e.get('decision')=='sent' and e.get('date')=='{date}' and e.get('kind')=='owner-approved' for e in d) else 1)"
+          ]
+        }
+      ],
+      "links": {
+        "rules": [
+          "س4 — قناة التسليم"
+        ],
+        "files": [
+          "tools/telegram_resend.py",
+          "tools/telegram_send.py"
+        ],
+        "gates": [],
+        "tests": [
+          "tests/test_telegram_resend_authorization.py"
+        ]
+      },
+      "on_fail": "continue",
+      "optional": true,
+      "command": [
+        "bash",
+        "-lc",
+        "B=\"$PWD\"; export B SITE; python3 tools/telegram_resend.py --date {date} --digest logs/tg-digest-{date}.html --targets primary; rc=$?; exit $rc"
+      ],
+      "ok_rc": [
+        0
+      ],
+      "warn_rc": [],
+      "disabled": false,
+      "disabled_reason": "مسار محكوم: لا يعمل إلا بملف تفويض مكتوب لليوم نفسه"
     },
     {
       "id": "D032",
