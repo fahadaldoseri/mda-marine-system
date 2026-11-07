@@ -18,6 +18,9 @@ import subprocess
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "tools"))
+from repo_root import RepoRootError, find_git_root
+
 CODE_EXT = {".py", ".sh", ".js", ".mjs", ".ts", ".yaml", ".yml", ".sql", ".pl"}
 SKIP_DIRS = {"logs", "__pycache__", ".venv", "node_modules", ".git", "shots",
              "archive", "dist", ".mypy_cache", ".pytest_cache", "_oneoff"}
@@ -45,11 +48,11 @@ def load_allowlist(root: Path) -> dict[str, str]:
 
 
 def default_repo_for(root: Path) -> Path:
-    """يختار مستودع Git الأب قبل fallback المستودع الشقيق القديم."""
-    parent = root.parent
-    if (parent / ".git").exists():
-        return parent
-    return parent / "mda-marine-system"
+    """يقيس جذر Git من المسار الممرر، ويرفض النسخة المضاعفة."""
+    try:
+        return find_git_root(root, reject_duplicate=True)
+    except RepoRootError:
+        raise
 
 
 def main() -> int:

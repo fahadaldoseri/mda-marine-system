@@ -55,6 +55,25 @@ def _token_from_env_file() -> str:
     return ""
 
 
+def _secret_from_env_file() -> str:
+    """اقرأ معرّف المالك من ملف البيئة دون إظهار قيمته."""
+    for cand in (Path(os.environ.get("BRAIN_DIR", B)) / ".env", B / ".env",
+                 Path(os.environ.get("BRAIN_DIR", B)) / "secrets" / "secrets.env", B / "secrets" / "secrets.env"):
+        try:
+            if not cand.is_file():
+                continue
+            for line in cand.read_text(encoding="utf-8").splitlines():
+                line = line.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                key, val = line.split("=", 1)
+                if key.strip() == "TELEGRAM_OWNER_CHAT_ID":
+                    return val.strip().strip("'\"")
+        except OSError:
+            continue
+    return ""
+
+
 def _log(entry: dict) -> None:
     """سجل تدقيق لكل محاولة إرسال: مسموحة أو مرفوضة."""
     import datetime as _dt
@@ -118,7 +137,7 @@ def load_targets(selector: str | None) -> list[dict]:
     items: list[dict] = []
     if TARGETS_FILE.exists():
         data = json.loads(TARGETS_FILE.read_text(encoding="utf-8"))
-        items = [t for t in data.get("targets", []) if t.get("chat_id")]
+        items = [t for t in data.get("targets", []) if isinstance(t, dict)]
     if not items and LEGACY_CHAT.exists():
         data = json.loads(LEGACY_CHAT.read_text(encoding="utf-8"))
         if data.get("chat_id"):
@@ -132,6 +151,15 @@ def load_targets(selector: str | None) -> list[dict]:
         chosen = [t for t in items if selector in (t.get("label"), str(t.get("chat_id")))]
     if not chosen:
         raise SystemExit("لا توجد جهة مطابقة في appendices/telegram-targets.json")
+    owner_from_env = os.environ.get("TELEGRAM_OWNER_CHAT_ID", "").strip()
+    owner_from_file = _secret_from_env_file()
+    owner_id = owner_from_env if re.fullmatch(r"-?\d+", owner_from_env) else owner_from_file
+    for target in chosen:
+        if target.get("type") == "private" and re.fullmatch(r"-?\d+", owner_id or ""):
+            target["chat_id"] = owner_id
+        chat_id = str(target.get("chat_id", "")).strip()
+        if target.get("enabled", True) and not re.fullmatch(r"-?\d+", chat_id):
+            raise SystemExit(f"معرّف الهدف المفعّل غير رقمي: {target.get('label', '?')}")
     return chosen
 
 
@@ -145,12 +173,27 @@ def ok_of(body: str) -> bool:
     return bool(re.search(r'"ok"\s*:\s*true', body))
 
 
+def platform_error(body: str) -> dict[str, object]:
+    """استخرج حقول خطأ المنصة دون الاحتفاظ بالنص الكامل أو أي سر."""
+    try:
+        payload = json.loads(body)
+    except (TypeError, json.JSONDecodeError):
+        return {"error_code": None, "description": "استجابة منصة غير صالحة"}
+    if not isinstance(payload, dict):
+        return {"error_code": None, "description": "استجابة منصة غير صالحة"}
+    return {
+        "error_code": payload.get("error_code"),
+        "description": str(payload.get("description") or "فشل غير موصوف"),
+    }
+
+
 def mid_of(body: str) -> str:
     m = re.search(r'"message_id"\s*:\s*(\d+)', body)
     return m.group(1) if m else "?"
 
 
 def send_text(token: str, cid: str, text: str, route_log: list[str]) -> bool:
+    global _LAST_SEND_ERROR
     base = (f"https://api.telegram.org/bot{token}/sendMessage"
             f"?chat_id={cid}&parse_mode=HTML&disable_web_page_preview=true"
             f"&text={urllib.parse.quote(text, safe='')}")
@@ -175,7 +218,9 @@ def send_text(token: str, cid: str, text: str, route_log: list[str]) -> bool:
             route_log[-1] = "وسيط GET (احتياطي)"
     if ok_of(body):
         route_log.append(f"نص: ok · الرسالة {mid_of(body)}")
+        _LAST_SEND_ERROR = {}
         return True
+    _LAST_SEND_ERROR = platform_error(body)
     route_log.append("نص: فشل")
     return False
 
@@ -199,7 +244,10 @@ def send_file(token: str, cid: str, kind: str, path: Path, caption: str, route_l
     return False
 
 
-def main() -> int:
+_LAST_SEND_ERROR: dict[str, object] = {}
+
+
+def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--text")
     ap.add_argument("--file")
@@ -216,7 +264,7 @@ def main() -> int:
     ap.add_argument("--owner-approved", action="store_true",
                     help="استثناء بأمر صريح من صاحب القرار، ويتطلب --reason")
     ap.add_argument("--reason", default="", help="سبب الاستثناء المكتوب")
-    args = ap.parse_args()
+    args = ap.parse_args(argv)
 
     token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip() or _token_from_env_file()
     if not token and not args.dry_run:
@@ -309,6 +357,10 @@ def main() -> int:
                     send_file(token, cid, "document", p, args.caption, log)
         else:
             failures += 1
+            _log({"decision": "failed", "date": args.date, "target": t.get("label"),
+                  "kind": "daily-report" if args.daily_report else "owner-approved",
+                  "error_code": _LAST_SEND_ERROR.get("error_code"),
+                  "description": _LAST_SEND_ERROR.get("description", "فشل غير موصوف")})
         print(f"[تلغرام] {t['label']}: " + " · ".join(log))
         if ok_text:
             _log({"decision": "sent", "date": args.date, "target": t.get("label"),

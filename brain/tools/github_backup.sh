@@ -11,10 +11,14 @@ if [ "$#" -ne 0 ]; then
 fi
 
 B="${BRAIN_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
-REPO="${BACKUP_REPO_DIR:-$(dirname "$B")/mda-marine-system}"
-case "$REPO" in
-  */mda-marine-system/mda-marine-system) REPO="${REPO%/mda-marine-system}" ;;
-esac
+if [ -n "${BACKUP_REPO_DIR:-}" ]; then
+  REPO="$BACKUP_REPO_DIR"
+else
+  REPO="$(git -C "$B" rev-parse --show-toplevel 2>/dev/null)" \
+    || { echo "✘ فشل مغلق: تعذّر قياس جذر Git من $B" >&2; exit 2; }
+fi
+REPO="$(cd "$REPO" && pwd -P)" \
+  || { echo "✘ فشل مغلق: مسار المستودع المقيس غير صالح: $REPO" >&2; exit 2; }
 SITE_ROOT="${SITE_DIR:-${SITE:-$B/../seawatch}}"
 LOG="$B/logs/github-backup-$(date -u +%F).log"
 WORKTREE=""
@@ -105,7 +109,7 @@ trap print_backup_log_on_exit EXIT
     command -v gh >/dev/null 2>&1 \
       || abort "gh غير متاح؛ لا يمكن إنشاء طلب دمج تلقائيًا"
 
-    git -C "$WORKTREE" push -q -u origin "$BACKUP_BRANCH" \
+    (cd "$WORKTREE" && git push -q -u origin "$BACKUP_BRANCH") \
       || abort "تعذر دفع فرع النسخ؛ لم يُدفع main"
     git -C "$WORKTREE" ls-remote --exit-code --heads origin "$BACKUP_BRANCH" >/dev/null 2>&1 \
       || abort "لم تثبت مرجعية فرع النسخ على origin"
