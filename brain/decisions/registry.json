@@ -9,10 +9,10 @@
     "يحتاج قرارًا"
   ],
   "decided_by": "المالك",
-  "last_measured": "2026-11-06",
+  "last_measured": "2026-11-07",
   "counts": {
+    "منفَّذ": 20,
     "منفَّذ جزئيًّا": 4,
-    "منفَّذ": 19,
     "يحتاج تحققًا": 3,
     "يحتاج قرارًا": 0
   },
@@ -460,22 +460,54 @@
         },
         {
           "kind": "file",
-          "ref": "skills/gate-lifecycle-ops/references/legacy/gate-strictness-hardening-ops/SKILL.md"
+          "ref": "runbook/impact-map.json"
         },
         {
           "kind": "file",
           "ref": "skills/gate-lifecycle-ops/references/legacy/gate-strictness-hardening-ops/scripts/gate_audit.py"
         },
         {
-          "kind": "file",
-          "ref": "skills/gate-lifecycle-ops/references/legacy/gate-strictness-hardening-ops/references/lessons.md"
+          "kind": "test",
+          "ref": "tests/test_gate_coverage_reference.py",
+          "note": "يحافظ على المسار الكامل ويمنع عودة scripts/gate_audit.py كمرجع مقتطع"
         },
         {
-          "kind": "note",
-          "ref": "طلب المالك الصريح 2026-11-06: اعتماد مهارة gate-strictness-hardening-ops رسمياً في فهرس المشروع وقواعده"
+          "kind": "measure",
+          "ref": "python3 tools/gate_coverage.py --root .",
+          "note": "بعد الإصلاح: لا مراجع ميتة، مع بقاء تغطية البوابات 100% ووحدات شاردة 0"
         }
       ],
-      "next_action_ar": "توصية لاحقة غير منفذة: ربط gate_audit.py بخطوة حوكمة في المانيفست؛ خارج نطاق هذا الاعتماد."
+      "next_action_ar": "إعادة تشغيل G066 ضمن الجولة؛ لا يوجد مرجع مقتطع مستقل."
+    },
+    {
+      "id": "D-0621",
+      "title_ar": "اعتماد Cloudflare Pages قناة العرض الأساسية",
+      "status": "منفَّذ",
+      "wording_ar": "اعتماد Cloudflare Pages للقناة الأساسية، مع raw.githack كبديل عرض، وraw.githubusercontent للتحقق فقط لا للعرض بسبب text/plain.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "runbook/runbook.json",
+          "note": "publish_channel_order صريح: cloudflare-pages ثم raw-githack ثم raw.githubusercontent-verify-only"
+        },
+        {
+          "kind": "file",
+          "ref": "tools/publish_channels.py",
+          "note": "Pages أولًا، وتسجيل GET/200/Content-Type والحجم والـredirects والبصمة؛ raw.githubusercontent presentation_eligible=false"
+        },
+        {
+          "kind": "test",
+          "ref": "tests/test_publish_live_contract_20261107.py",
+          "note": "16 اختبارًا مع عقد 308 والبصمة ومنع raw.githubusercontent كقناة عرض"
+        },
+        {
+          "kind": "measure",
+          "ref": "القياس الحي 2026-11-07",
+          "note": "/reports/2026-11-07 = HTTP 200، 189327 بايت، text/html; charset=utf-8، sha256=835ad2e9723546d295389edefbce3f750a4ff228bb53a4b0c12e79953db02f02"
+        }
+      ],
+      "governing_file": "runbook/runbook.json",
+      "next_action_ar": "إعادة القياس الحي عبر D020 في كل إصدار؛ لا تُعد raw.githubusercontent قناة عرض."
     }
   ]
 }

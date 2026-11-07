@@ -97,6 +97,34 @@ else
   echo "  ! مجلد الموقع ليس مستودع git: $_S"
 fi
 
+# 4أ) عقد النشر الحي — لا يكفي دفع Git: جرّب GET/200/Content-Type وعلامة التاريخ
+# بترتيب raw.githack ثم jsDelivr ثم raw.githubusercontent. قناة Pages ليست هنا ولا تُفعّل.
+if [ -n "$D" ]; then
+  say "4أ) التحقق الحي المتتابع — $D"
+  FALLBACK_REPO="${FALLBACK_REPO:-fahadaldoseri/seawatch-live}"
+  FALLBACK_OWNER="${FALLBACK_REPO%%/*}"
+  FALLBACK_NAME="${FALLBACK_REPO#*/}"
+  FALLBACK_BRANCH="main"
+  FALLBACK_GITHACK_ROOT="${FALLBACK_GITHACK_ROOT:-https://raw.githack.com/$FALLBACK_OWNER/$FALLBACK_NAME/$FALLBACK_BRANCH}"
+  FALLBACK_JSDELIVR_ROOT="${FALLBACK_JSDELIVR_ROOT:-https://cdn.jsdelivr.net/gh/$FALLBACK_OWNER/$FALLBACK_NAME@$FALLBACK_BRANCH}"
+  FALLBACK_RAW_GITHUB_ROOT="${FALLBACK_RAW_GITHUB_ROOT:-https://raw.githubusercontent.com/$FALLBACK_OWNER/$FALLBACK_NAME/$FALLBACK_BRANCH}"
+  FALLBACK_GITHACK_ROOT="${FALLBACK_GITHACK_ROOT%/}"
+  FALLBACK_JSDELIVR_ROOT="${FALLBACK_JSDELIVR_ROOT%/}"
+  FALLBACK_RAW_GITHUB_ROOT="${FALLBACK_RAW_GITHUB_ROOT%/}"
+  LIVE_VERIFY_RC=0
+  LIVE_VERIFY_JSON="$(python3 "$_B/tools/publish_channels.py" verify --date "$D" --root "$_B" \
+    --url "$FALLBACK_GITHACK_ROOT/reports/$D.html" \
+    --url "$FALLBACK_JSDELIVR_ROOT/reports/$D.html" \
+    --url "$FALLBACK_RAW_GITHUB_ROOT/reports/$D.html")" || LIVE_VERIFY_RC=$?
+  printf '%s\n' "$LIVE_VERIFY_JSON" > "$_B/logs/publish-live-$D.json"
+  if [ "$LIVE_VERIFY_RC" -ne 0 ]; then
+    echo "  ✘ التحقق الحي فشل — لا status=ok بلا GET/200/Content-Type"
+    FAIL=1
+  else
+    echo "  ✔ التحقق الحي نجح — GET/200/Content-Type عبر failover متتابع"
+  fi
+fi
+
 # 4ب) ميزانية الصفحات — تُعلن في كل إغلاق حتى يُعرف الحد قبل أي تعديل نصي
 if [ -n "$D" ] && [ -f "$_S/dist/reports/pdf/$D.pdf" ]; then
   say "4ب) ميزانية الصفحات — $D"

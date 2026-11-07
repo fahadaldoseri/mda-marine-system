@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# قناة المحتوى العامة البديلة — raw.githack/jsDelivr، لا تُستدعى إلا من D010 أو بتفويض تشغيل صريح.
+# قناة المحتوى العامة البديلة — raw.githack ثم jsDelivr ثم raw.githubusercontent.
+# لا يُكتب status=ok إلا بعد GET ناجح، HTTP 200، جسم غير فارغ، Content-Type نصي، وعلامة تاريخ التقرير.
 # الاستخدام: bash tools/publish_fallback.sh YYYY-MM-DD
 set -u
 B="${BRAIN_DIR:-$(cd "$(dirname "$0")/.." && pwd)}"
@@ -29,32 +30,72 @@ OWNER="${REPO%%/*}"
 NAME="${REPO#*/}"
 GITHACK_ROOT="${FALLBACK_GITHACK_ROOT:-https://raw.githack.com/$OWNER/$NAME/$BRANCH}"
 JSDELIVR_ROOT="${FALLBACK_JSDELIVR_ROOT:-https://cdn.jsdelivr.net/gh/$OWNER/$NAME@$BRANCH}"
+RAW_GITHUB_ROOT="${FALLBACK_RAW_GITHUB_ROOT:-https://raw.githubusercontent.com/$OWNER/$NAME/$BRANCH}"
+GITHACK_ROOT="${GITHACK_ROOT%/}"
+JSDELIVR_ROOT="${JSDELIVR_ROOT%/}"
+RAW_GITHUB_ROOT="${RAW_GITHUB_ROOT%/}"
+REPORT_URLS=(
+  "$GITHACK_ROOT/reports/$D.html"
+  "$JSDELIVR_ROOT/reports/$D.html"
+  "$RAW_GITHUB_ROOT/reports/$D.html"
+)
 LOG="$B/logs/publish-$D-fallback.json"
 WORK="${FALLBACK_WORKDIR:-$(mktemp -d "${TMPDIR:-/tmp}/seawatch-pages.XXXXXX")}"
 KEEP_WORK=0
 mkdir -p "$B/logs"
 
 record() {
-  local rc="$1" status="$2" head="${3:-}" fp="${4:-}" why="${5:-}"
-  python3 - "$LOG" "$D" "$REPO" "$GITHACK_ROOT" "$JSDELIVR_ROOT" "$rc" "$status" "$head" "$fp" "$why" <<'PY'
+  local rc="$1" status="$2" head="${3:-}" fp="${4:-}" why="${5:-}" live_json="${6:-}"
+  python3 - "$LOG" "$D" "$REPO" "$GITHACK_ROOT" "$JSDELIVR_ROOT" "$RAW_GITHUB_ROOT" "$rc" "$status" "$head" "$fp" "$why" "$live_json" <<'PY'
 import datetime, json, pathlib, sys
-out, date, repo, githack, jsdelivr, rc, status, head, fp, why = sys.argv[1:]
-previous = date.replace("-07", "-06") if date.endswith("-07") else date
-urls = [
-    f"{githack}/",
-    f"{githack}/reports/{date}.html",
-    f"{githack}/reports/{previous}.html",
-    f"{jsdelivr}/",
-    f"{jsdelivr}/reports/{date}.html",
-    f"{jsdelivr}/reports/{previous}.html",
-]
+(out, date, repo, githack, jsdelivr, raw_github, rc, status,
+ head, fp, why, live_json) = sys.argv[1:]
+urls = [f"{githack}/reports/{date}.html", f"{jsdelivr}/reports/{date}.html",
+        f"{raw_github}/reports/{date}.html"]
 doc = {
-    "date": date, "channel": "github-pages", "repo": repo,
-    "transport": ["raw.githack", "jsDelivr"],
-    "url": f"{githack.rstrip('/')}/reports/{date}.html", "urls": urls, "rc": int(rc),
-    "status": status, "at": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-    "head": head or None, "content_sha256": fp or None,
+    "date": date,
+    "channel": "github-pages",
+    "repo": repo,
+    "transport": ["raw.githack", "jsDelivr", "raw.githubusercontent.com"],
+    "url": urls[0],
+    "urls": urls,
+    "rc": int(rc),
+    "status": status,
+    "at": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+    "head": head or None,
+    "content_sha256": fp or None,
 }
+if live_json:
+    try:
+        verification = json.loads(live_json)
+    except json.JSONDecodeError:
+        verification = {"status": "failed", "attempts": [], "reason": "invalid verifier output"}
+    attempts = verification.get("attempts") or []
+    successful = next((item for item in attempts if item.get("ok") is True), None)
+    doc["verification"] = verification
+    doc["attempts"] = attempts
+    if successful:
+        url = successful.get("url", "")
+        doc.update({
+            "status": "ok",
+            "rc": 0,
+            "url": url,
+            "successful_url": url,
+            "successful_transport": (
+                "raw.githack" if "raw.githack.com" in url else
+                "jsDelivr" if "jsdelivr.net" in url else
+                "raw.githubusercontent.com" if "raw.githubusercontent.com" in url else None
+            ),
+            "live": successful,
+        })
+    else:
+        doc.update({
+            "status": "failed",
+            "rc": 2,
+            "successful_url": None,
+            "successful_transport": None,
+            "live": attempts[-1] if attempts else {"ok": False, "reason": "no candidates verified"},
+        })
 if why:
     doc["why"] = why
 pathlib.Path(out).write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -122,6 +163,15 @@ if ! git push -q origin HEAD:main; then
   echo "✘ fallback: push فشل"
   exit 1
 fi
-record 0 ok "$HEAD" "$FP"
-echo "✔ fallback: public raw/jsDelivr content pushed — $HEAD — sha256=$FP"
+
+VERIFY_RC=0
+VERIFY_JSON="$(python3 "$B/tools/publish_channels.py" verify --date "$D" --root "$B" \
+  --url "${REPORT_URLS[0]}" --url "${REPORT_URLS[1]}" --url "${REPORT_URLS[2]}")" || VERIFY_RC=$?
+if [ "$VERIFY_RC" -ne 0 ]; then
+  record 2 failed "$HEAD" "$FP" "live verification failed" "$VERIFY_JSON"
+  echo "✘ fallback: فشل التحقق الحي المتتابع — GET/200/Content-Type/علامة التاريخ"
+  exit 2
+fi
+record 0 ok "$HEAD" "$FP" "" "$VERIFY_JSON"
+echo "✔ fallback: GET/200/Content-Type verified via ${REPORT_URLS[*]} — $HEAD — sha256=$FP"
 exit 0
