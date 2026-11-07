@@ -126,6 +126,36 @@ def test_missing_scope_registry_fails_closed() -> None:
         td.cleanup()
 
 
+def test_in_repo_mode_emits_explicit_matching_result(tmp_path: Path) -> None:
+    repo = tmp_path / "repo"
+    brain = repo / "brain"
+    site = repo / "site"
+    skills = tmp_path / "skills"
+    (brain / "validators").mkdir(parents=True)
+    (brain / "runbook").mkdir()
+    (site / "generator").mkdir(parents=True)
+    (skills / "approved-skill").mkdir(parents=True)
+    shutil.copy2(V, brain / "validators" / V.name)
+    shutil.copy2(V.parent / "_guard.py", brain / "validators" / "_guard.py")
+    shutil.copy2(SCOPE, brain / "runbook" / "parity-scope.json")
+    (brain / "runbook" / "approved-skills.json").write_text(
+        json.dumps({"skills": ["approved-skill"]}) + "\n", encoding="utf-8"
+    )
+    (skills / "approved-skill" / "SKILL.md").write_text("approved\n", encoding="utf-8")
+
+    result = subprocess.run(
+        [sys.executable, str(brain / "validators" / V.name), "--mode", "strict"],
+        env=dict(os.environ, BRAIN_DIR=str(brain), SITE_DIR=str(site), SKILLS_DIR=str(skills)),
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert "لا مقارنة" in result.stdout
+    assert "النتيجة: مطابق" in result.stdout
+
+
 def test_live_scope_not_narrowed() -> None:
     repo = Path(os.environ.get("BACKUP_REPO_DIR") or V.resolve().parents[1].parent / "mda-marine-system")
     if not (repo / "brain" / "validators").is_dir():
