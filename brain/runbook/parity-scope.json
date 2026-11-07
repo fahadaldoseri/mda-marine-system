@@ -111,14 +111,20 @@
         ".devcontainer/",
         "brain/__pycache__/",
         "brain/tests/__pycache__/",
-        "brain/validators/__pycache__/"
+        "brain/validators/__pycache__/",
+        "brain/appendices/libraries/",
+        "brain/audit/موجز-التحسين-"
       ],
       "exact": [
         ".gitignore",
         "AGENTS.md",
         "README.md",
         "brain/.gitignore",
-        "brain/memory/learning-log.jsonl.pre-unify"
+        "brain/memory/learning-log.jsonl.pre-unify",
+        "brain/docs/reports-index.md",
+        "brain/audit/traceability.json",
+        "brain/audit/مصفوفة-التتبع.md",
+        "brain/audit/closure-exceptions.json"
       ]
     }
   ],
