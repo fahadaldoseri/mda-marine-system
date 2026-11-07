@@ -21,6 +21,11 @@ def run_git(repo: Path, *args: str) -> None:
 
 
 class GithubBackupFailureOutputTest(unittest.TestCase):
+    def test_backup_uses_isolated_worktree_for_runtime_logs(self) -> None:
+        source = SCRIPT.read_text(encoding="utf-8")
+        self.assertIn("git worktree add", source)
+        self.assertNotIn("git checkout -q main", source)
+
     def test_dirty_repo_reason_reaches_caller_and_log(self) -> None:
         with tempfile.TemporaryDirectory(prefix="github-backup-output-") as raw:
             tmp = Path(raw)
