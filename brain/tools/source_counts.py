@@ -241,6 +241,10 @@ def write_meta(date: str, c: dict) -> tuple[bool, str]:
         d["source_reliability"]["checked"] = c["checked"]
         d["source_reliability"]["approved"] = c["approved"]
         d["source_reliability"]["ok"] = c["ok"]
+    if isinstance(d.get("source_reliability"), dict):
+        _st = json.loads((B / "feeds" / f"feeds-{date}.status.json").read_text(encoding="utf-8")) if (B / "feeds" / f"feeds-{date}.status.json").exists() else {}
+        d["source_reliability"]["stale"] = len(_st.get("stale") or [])
+        d["source_reliability"]["stale_days_limit"] = _st.get("stale_days_limit")
     p.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
     return True, str(p)
 

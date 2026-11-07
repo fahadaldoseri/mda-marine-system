@@ -4630,8 +4630,12 @@
         "files": [
           "validators/check_number_bindings.py"
         ],
-        "gates": [],
-        "tests": []
+        "gates": [
+          "validators/check_published_counters.py"
+        ],
+        "tests": [
+          "tests/test_published_counters.py"
+        ]
       },
       "on_fail": "stop",
       "gate_title": "بوابة ربط الأرقام بمصادرها",

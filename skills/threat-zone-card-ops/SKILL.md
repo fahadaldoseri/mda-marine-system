@@ -1,6 +1,6 @@
 ---
 name: threat-zone-card-ops
-description: "Use when تشغيل أو تعديل بطاقة مستوى التهديد بالقطاعات الأربعة، إضافة قطاع أو تغيير حدوده، ظهور تعارض بين البطاقة والمتن أو ملف الواجهة، أو إجراء قياس حي للبطاقة."
+description: "Use when تشغيل أو تعديل بطاقة مستوى التهديد بالقطاعات الخمسة، إضافة قطاع أو تغيير حدوده، ظهور تعارض بين البطاقة والمتن أو ملف الواجهة، أو إجراء قياس حي للبطاقة."
 license: Complete terms in LICENSE.txt
 ---
 
@@ -22,18 +22,18 @@ license: Complete terms in LICENSE.txt
 
 | العقد | المسار | ما يجب تثبيته |
 |---|---|---|
-| السلم الخمسي | `/home/ubuntu/brain-marine-news/appendices/threat-scale.json` | `حرج · مرتفع جدًا · مرتفع · متوسط · منخفض`، الرتبة، JMIC، اللون، و`fail_closed=true` |
-| سجل القطاعات | `/home/ubuntu/brain-marine-news/appendices/zone-registry.json` | القطاعات الأربعة، الكلمات غير المتداخلة، ترتيب الإسناد، الأهلية والتأكيد |
-| الأحكام اليدوية | `/home/ubuntu/brain-marine-news/appendices/zone-overrides.json` | أهلية الواقعة، القطاع، `incident_group`، وسبب الحكم |
-| المصنّف | `/home/ubuntu/brain-marine-news/tools/classify_zones.py` | `--selftest`، الكتابة إلى `web/zones/<date>.json`، واشتقاق `web/meta/<date>.json` |
-| بوابة الاتساق | `/home/ubuntu/brain-marine-news/validators/check_threat_consistency.py` | الفحوص 1–9، رمز 0 للاجتياز و2 للمنع و70 للانهيار |
+| السلم الخمسي | `/home/ubuntu/mda-marine-system/brain/appendices/threat-scale.json` | `حرج · مرتفع جدًا · مرتفع · متوسط · منخفض`، الرتبة، JMIC، اللون، و`fail_closed=true` |
+| سجل القطاعات | `/home/ubuntu/mda-marine-system/brain/appendices/zone-registry.json` | القطاعات الخمسة، الكلمات غير المتداخلة، ترتيب الإسناد، الأهلية والتأكيد |
+| الأحكام اليدوية | `/home/ubuntu/mda-marine-system/brain/appendices/zone-overrides.json` | أهلية الواقعة، القطاع، `incident_group`، وسبب الحكم |
+| المصنّف | `/home/ubuntu/mda-marine-system/brain/tools/classify_zones.py` | `--selftest`، الكتابة إلى `web/zones/<date>.json`، واشتقاق `web/meta/<date>.json` |
+| بوابة الاتساق | `/home/ubuntu/mda-marine-system/brain/validators/check_threat_consistency.py` | الفحوص 1–9، رمز 0 للاجتياز و2 للمنع و70 للانهيار |
 | مولّد البطاقة | `/home/ubuntu/seawatch/generator/threat_card.py` | المعجم المغلق، الألوان، `details[open]`، ونسختا الشاشة والطباعة |
 
 ## العقد غير القابلة للتفاوض
 
 ### القطاعات
 
-ثبّت أربعة قطاعات فقط، وبالأسماء التالية حرفيًا:
+ثبّت خمسة قطاعات فقط، وبالأسماء التالية حرفيًا:
 
 1. `Z1` — **مضيق هرمز وخليج عُمان والخليج العربي**. أدخل خليج عُمان فيه.
 2. `Z2` — **باب المندب والبحر الأحمر**.
@@ -81,11 +81,11 @@ license: Complete terms in LICENSE.txt
 2. افحص التداخل والأسماء والألوان من السجلات الحاكمة قبل التصنيف.
 3. شغّل الاختبار الذاتي للمصنف:
    ```bash
-   python3 /home/ubuntu/brain-marine-news/tools/classify_zones.py --selftest
+   python3 /home/ubuntu/mda-marine-system/brain/tools/classify_zones.py --selftest
    ```
 4. بعد تحديث دفتر اليوم أو الأحكام المحوكمة، أعد بناء المصدر المشتق فقط عبر المصنف:
    ```bash
-   python3 /home/ubuntu/brain-marine-news/tools/classify_zones.py \
+   python3 /home/ubuntu/mda-marine-system/brain/tools/classify_zones.py \
      --date YYYY-MM-DD --write
    ```
    لا تعدّل `web/meta` يدويًا بعد ذلك؛ اترك المصنف يشتق `decision_card.risk` والحقول التابعة.
@@ -93,7 +93,7 @@ license: Complete terms in LICENSE.txt
 6. راجع المتن والترويسة مقابل المصدر المشتق. صحّح الصياغة المصدرية لا بطاقة سطح واحد.
 7. شغّل بوابة الاتساق:
    ```bash
-   python3 /home/ubuntu/brain-marine-news/validators/check_threat_consistency.py \
+   python3 /home/ubuntu/mda-marine-system/brain/validators/check_threat_consistency.py \
      --date YYYY-MM-DD --brain /home/ubuntu/brain-marine-news
    ```
    أوقف الجولة عند أي رمز غير 0، واقرأ المخرج الحرفي قبل أي تعديل.
