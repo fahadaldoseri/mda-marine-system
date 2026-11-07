@@ -1,0 +1,18 @@
+  تغذيات مرصودة: 81
+  نجح: 59 مصدرًا (76 مسارًا) · فشل: 1 مصدرًا · يُفحص بالمتصفح: 0 · عناصر مقروءة: 1925
+  ◻ مرجعية تُراجع يدويًا: 2 مصدرًا · الأرقام: [39, 52]
+   ✘ 26 وكالة الأنباء السعودية (واس): all routes failed: primary: HTTP Error 522: <none> | official:spa-next-data: The read operation timed out | official:spa-home-next-data: The read operation timed out
+   ◐ 12 OFAC — الإجراءات الأخيرة: محتوى متقادم — عمر أحدث مادة 632 يومًا
+   ◐ 13 ShipNext — التحقق من السفن: محتوى متقادم — عمر أحدث مادة 82 يومًا
+   ◐ 20 جريدة الأيام: محتوى متقادم — عمر أحدث مادة 1028 يومًا
+   ◐ 20 جريدة الأيام: محتوى متقادم — عمر أحدث مادة 1027 يومًا
+   ◐ 30 القيادة المركزية الأمريكية (سنتكوم: محتوى متقادم — عمر أحدث مادة 274 يومًا
+   ◐ 31 JMIC: محتوى متقادم — عمر أحدث مادة 17 يومًا
+   ◐ 32 IMB/ICC — القرصنة: محتوى متقادم — عمر أحدث مادة 22 يومًا
+  ✔ حُفظ: feeds-2026-11-07.json / .md / .status.json — الحالة: degraded
+  · لا علامة تشغيل: /home/ubuntu/brain-marine-news/logs/pipeline-2026-11-07.json — إنشاء علامة pipeline عبر write_mark
+  ✔ العلامة (pipeline): /home/ubuntu/brain-marine-news/logs/pipeline-2026-11-07.json · المخطط v1 · نص التقرير موجود: False · المصادر: 62/60/59 · البوابة: not_run
+  · أضيف أثر الإنشاء: created_by=mark_components
+  ✔ حُدّثت المكوّنات ['feeds'] من المخرجات · الحالة العامة: degraded
+     feeds: {"status": "degraded", "checked": 60, "ok": 59, "failed": 1, "failed_feeds": [{"num": 26, "name": "وكالة الأنباء السعودية (واس)", 
+elapsed_seconds=226.312677

@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/brain-marine-news/tests/test_card_counters.py", line 10, in <module>
+    from validators.check_card_counters import _counter, validate_card_documents, validate_hero_kpis  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ImportError: cannot import name 'validate_hero_kpis' from 'validators.check_card_counters' (/home/ubuntu/brain-marine-news/validators/check_card_counters.py)

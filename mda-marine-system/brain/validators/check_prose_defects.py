@@ -1,0 +1,424 @@
+#!/usr/bin/env python3
+"""بوابة عيوب الصياغة العربية في تقرير واحد.
+
+الفحوص الأربعة الأولى مانعة. وفحص المعجم تحذيري لأن قائمة الكلمات المتاحة
+قد لا تغطي كل أسماء السفن والمصطلحات الجديدة.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import sys
+import unicodedata
+from collections import Counter, defaultdict
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+ARABIC_WORD = re.compile(r"[ء-يٱآأإؤئـ]+")
+ARABIC_BASE = re.compile(r"[\u0621-\u063A\u0641-\u064A\u0671\u0679\u0688\u0691\u06A4\u06AF\u06CC]")
+SPACE_BEFORE_PUNCT = re.compile(r"[ \t]+([،.:؛؟!])")
+ARABIC_DIACRITICS = {chr(n) for n in range(0x064B, 0x0660)} | {"ـ"}
+
+# قائمة بيضاء معلنة: ألفاظ عربية ذات تضاعف مشروع أو بادئة صرفية مشروعة.
+# لا تُستعمل لإخفاء «معلنةة»؛ فالطاء المربوطة المكررة في آخر الكلمة خطأ.
+DUPLICATE_LETTER_WHITELIST = set(json.loads((Path(__file__).resolve().parent.parent / "appendices" / "doubled-letters.json").read_text(encoding="utf-8"))["whitelist"])
+
+COMMON_ARABIC_WORDS = {
+    "هذه", "هذا", "تلك", "ذلك", "التي", "الذي", "الذين", "من", "في", "إلى", "على",
+    "عن", "مع", "بين", "بعد", "قبل", "حتى", "كما", "وهو", "وهي", "هو", "هي", "هم",
+    "أن", "إن", "لا", "لم", "لن", "قد", "ما", "لايزال", "مازال", "بأن", "بلا", "ولا",
+    "و", "أو", "ثم", "لكن", "بل", "إذا", "كان", "كانت", "يكون", "تكون", "تم", "جرى",
+    "قال", "قالت", "أفادت", "أعلنت", "أكدت", "يُعلن", "يعلن", "ورد", "ذكرت", "بحسب",
+    "جهة", "جهةً", "المصدر", "مصدر", "رسمي", "رسمية", "البحرية", "بحري", "البحرية",
+    "السفينة", "سفينة", "السفن", "رحلتها", "واصلت", "حادث", "حادثة", "النص", "الفقرة",
+    "حركة", "المياه", "اليوم", "الفترة", "الجديدة", "الجديد", "المعتاد", "مستوى",
+    "الله", "المشروع", "كلمة", "هذه", "وخلل",
+    "إليه", "إليها", "إليهم", "إليك", "لديها", "لديه", "بها", "به",
+}
+
+# سوابق ولواحق عربية شائعة لا تغيّر أصل الكلمة عند البحث في المعجم.
+# لا تُقبل الصيغة الملحقة إلا إذا وُجدت الصيغة الناتجة نفسها في القاموس؛
+# فلا يتحول التطبيع إلى قائمة سماح عامة أو إلى خفض لصرامة الفحص.
+LEXICON_PREFIXES = ("ال", "و", "ف", "ب", "ك", "ل")
+LEXICON_SUFFIXES = ("يا", "ها", "هم", "نا", "ي")
+LEXICON_MIN_BASE_LENGTH = 3
+
+
+def normalize_word(word: str) -> str:
+    return "".join(ch for ch in unicodedata.normalize("NFC", word) if ch not in ARABIC_DIACRITICS)
+
+
+def lexicon_variants(word: str) -> set[str]:
+    """يعيد الصيغة الأصلية وصيغًا ناتجة عن إزالة لواصق عربية محددة فقط.
+
+    يسمح بعمليتي إزالة كحد أقصى حتى تُقرأ صيغ مثل «والتأمين» بوصفها
+    «و» + «ال» + الأصل، ويمنع التوسع غير المنضبط في الاشتقاق. لا تكفي
+    الصيغة الناتجة وحدها؛ إذ تُقارن لاحقًا بمجموعة القاموس الفعلية.
+    """
+    normalized = normalize_word(word)
+    variants = {normalized}
+    frontier = {normalized}
+    for _ in range(2):
+        next_frontier: set[str] = set()
+        for current in frontier:
+            for prefix in LEXICON_PREFIXES:
+                if current.startswith(prefix) and len(current) - len(prefix) >= LEXICON_MIN_BASE_LENGTH:
+                    next_frontier.add(current[len(prefix):])
+            for suffix in LEXICON_SUFFIXES:
+                if current.endswith(suffix) and len(current) - len(suffix) >= LEXICON_MIN_BASE_LENGTH:
+                    next_frontier.add(current[:-len(suffix)])
+        next_frontier -= variants
+        if not next_frontier:
+            break
+        variants.update(next_frontier)
+        frontier = next_frontier
+    return variants
+
+
+def strip_markup(text: str) -> str:
+    text = re.sub(r"<!--.*?-->", " ", text, flags=re.S)
+    # ك-407: كانت البوابة تقيس وسوم النمط والسكربت كنصّ مقروء، فأنتجت مئات المخالفات الكاذبة
+    # (مثل «مسافة قبل علامة ترقيم» داخل محددات CSS). القياس الآن على النص المرئي وحده.
+    text = re.sub(r"<(style|script)\b[^>]*>.*?</\1>", " ", text, flags=re.S | re.I)
+    # ك-409: كان نزع الوسوم يُدخل فراغًا مكان كل وسم، فيُنشئ «مسافة قبل علامة ترقيم» كاذبة
+    # («<span>UTC</span>.» تصير «UTC .»). الفراغ يُضاف عند حدود الكتل وحدها، أما الوسوم
+    # السطرية فتُنزع بلا فراغ، فيُقاس ما يراه القارئ فعلًا.
+    text = re.sub(
+        r"</?(?:p|div|br|li|ul|ol|tr|td|th|table|h[1-6]|section|article|header|footer"
+        r"|main|aside|nav|figure|figcaption|blockquote|dl|dt|dd|hr)\b[^>]*>",
+        " ", text, flags=re.I,
+    )
+    text = re.sub(r"<[^>]{1,400}>", "", text)
+    text = (text.replace("&nbsp;", " ").replace("&amp;", "&").replace("&lt;", "<")
+                .replace("&gt;", ">").replace("&quot;", '"').replace("&#39;", "'"))
+    text = re.sub(r"`[^`]*`", " ", text)
+    text = re.sub(r"!?(?:\[[^\]]*\])\([^)]*\)", " ", text)
+    # ك-409: كانت علامات التمييز في Markdown تُستبدل بفراغ، فتصير «**مرتفع**؛» → «مرتفع  ؛»
+    # وتُحتسب «مسافة قبل علامة ترقيم» كاذبة. علامات التمييز تُنزع بلا فراغ، وتبقى
+    # العلامات البنيوية (العنوان والاقتباس والجدول) فراغًا.
+    text = text.replace("*", "")
+    text = re.sub(r"[>#|]", " ", text)
+    return text
+
+
+def load_project_dictionary() -> set[str]:
+    """يبني قاموسًا من الملفات الموجودة فعليًا، لا من قائمة مخترعة."""
+    paths = [ROOT / "appendices" / "terminology.md", ROOT / "appendices" / "style-blacklist.json"]
+    paths.extend(sorted((ROOT / "appendices" / "libraries").rglob("*")))
+    known = set(COMMON_ARABIC_WORDS) | set(DUPLICATE_LETTER_WHITELIST)
+    # معجم مشتق من المتن المعتمد (tools/build_lexicon_corpus.py) — مصدر حاكم واحد
+    corpus = ROOT / "appendices" / "lexicon-corpus.json"
+    if corpus.is_file():
+        try:
+            for word in json.loads(corpus.read_text(encoding="utf-8")).get("words", []):
+                normalized = normalize_word(str(word))
+                if len(normalized) >= LEXICON_MIN_BASE_LENGTH:
+                    known.add(normalized)
+        except (json.JSONDecodeError, UnicodeError):
+            pass
+    for path in paths:
+        if not path.is_file():
+            continue
+        try:
+            raw = path.read_text(encoding="utf-8")
+        except UnicodeError:
+            continue
+        if path.suffix.lower() == ".json":
+            try:
+                data = json.loads(raw)
+                # ملف الاستثناءات المعتمد يحمل سببًا بشريًا لكل مدخل؛ لا
+                # نضيف كلمات التعليل نفسها إلى المعجم، بل المصطلح المراجع فقط.
+                if path.name == "lexicon-exceptions.json" and isinstance(data, dict):
+                    for entry in data.get("entries", []):
+                        if isinstance(entry, dict):
+                            term = normalize_word(str(entry.get("term", "")))
+                            if len(term) >= LEXICON_MIN_BASE_LENGTH:
+                                known.add(term)
+                    continue
+                raw = json.dumps(data, ensure_ascii=False)
+            except json.JSONDecodeError:
+                pass
+        for word in ARABIC_WORD.findall(raw):
+            normalized = normalize_word(word)
+            if len(normalized) >= 2:
+                known.add(normalized)
+    return known
+
+
+def lexicon_duplicate_whitelist() -> set[str]:
+    known = set(DUPLICATE_LETTER_WHITELIST)
+    for word in load_project_dictionary():
+        base = normalize_word(word)
+        if any(base[i] == base[i + 1] for i in range(len(base) - 1)):
+            known.add(base)
+    return known
+
+
+def line_excerpt(line: str, start: int, end: int) -> str:
+    left = max(0, start - 35)
+    right = min(len(line), end + 35)
+    return line[left:right].strip()
+
+
+def find_punctuation_defects(text: str) -> dict[str, list[dict]]:
+    text = strip_markup(text)  # ك-409: القياس على النص المرئي وحدها، أياً كان المستدعي
+    result = defaultdict(list)
+    for line_no, line in enumerate(text.splitlines(), 1):
+        for token, label in (("، .", "فاصلة ثم نقطة"), (".،", "نقطة ثم فاصلة"),
+                             ("،،", "فاصلتان"), ("..", "نقطتان")):
+            for match in re.finditer(re.escape(token), line):
+                result["علامات ترقيم متجاورة"].append({
+                    "line": line_no, "sample": line_excerpt(line, match.start(), match.end()),
+                    "reason": label,
+                })
+        for match in SPACE_BEFORE_PUNCT.finditer(line):
+            result["مسافة قبل علامة ترقيم"].append({
+                "line": line_no, "sample": line_excerpt(line, match.start(), match.end()),
+                "reason": f"مسافة قبل «{match.group(1)}»",
+            })
+    return result
+
+
+def find_duplicate_letters(text: str) -> list[dict]:
+    text = strip_markup(text)  # ك-409
+    whitelist = lexicon_duplicate_whitelist()
+    found = []
+    for line_no, line in enumerate(text.splitlines(), 1):
+        for match in ARABIC_WORD.finditer(line):
+            raw = match.group()
+            word = normalize_word(raw)
+            if len(word) < 2:
+                continue
+            positions = [i for i in range(len(word) - 1) if word[i] == word[i + 1]]
+            # «يةان» تركيب صرفي غير سليم: يسبق اللاحقة الدالة على المثنى حرف التاء.
+            if word.endswith("يةان"):
+                found.append({"line": line_no, "word": raw, "reason": "لاحقة «يةان» غير سليمة صرفيًا"})
+                continue
+            if not positions or word in whitelist:
+                continue
+            for pos in positions:
+                repeated = word[pos : pos + 2]
+                # البادئات والتضعيفات الموثقة في القائمة البيضاء لا تُعد عيبًا.
+                if pos == 0 and repeated in {"لل", "مم", "تت", "وو", "بب"}:
+                    continue
+                # المانع: تسلسلات لا تصحّ عربيًا («ةة» · «اا» · «وو» · «ىى» · «ئئ» · «ؤؤ»)
+                # أو حرف تكرّر ثلاث مرات. أما تضاعف حرفين في كلمة عربية سليمة
+                # («عدده» · «مخطط» · «وتحقق» · «وتغيير») فتنبيهي لا مانع — تصحيح ك-134.
+                # ك-200: كان العدّ كليًا فيُعلن «اختتمت» عيبًا وهي سليمة. الصواب: ثلاثية متتالية فقط.
+                blocking = (repeated in {"ةة", "اا", "وو", "ىى", "ئئ", "ؤؤ"}
+                            or (pos + 2 < len(word) and word[pos] == word[pos + 1] == word[pos + 2]))
+                found.append({
+                    "line": line_no, "word": raw, "blocking": blocking,
+                    "reason": f"تكرار الحرف «{word[pos]}» داخل الكلمة"
+                              + ("" if blocking else " — مشروع عربيًا، تنبيهي"),
+                })
+                break
+    return found
+
+
+def load_forbidden() -> list[dict]:
+    path = ROOT / "appendices" / "forbidden-coinages.json"
+    if not path.exists():
+        return []
+    data = json.loads(path.read_text(encoding="utf-8"))
+    return data.get("entries", []) if isinstance(data, dict) else []
+
+
+def find_forbidden(text: str, report_date: str | None = None) -> list[dict]:
+    text = strip_markup(text)  # ك-409
+    found = []
+    lines = text.splitlines()
+    for entry in load_forbidden():
+        term = str(entry.get("term", "")).strip()
+        if not term:
+            continue
+        normalized_term = normalize_word(term)
+        if not normalized_term:
+            continue
+        # تاريخ السريان: لفظ أُضيف اليوم لا يمنع نصًا منشورًا قبله (قرار صاحب القرار 2026-10-23).
+        since = str(entry.get("since", "") or "")
+        blocking = not (report_date and since and report_date < since)
+        # لا تُطابق اللفظ كسلسلة فرعية داخل كلمة عربية («سند» داخل «يُسند»).
+        # تشمل الحدود علامات التشكيل العربية حتى لا يسمح التشكيل بالانفلات من الحارس.
+        term_pattern = re.compile(
+            r"(?<![\u0600-\u06FF])" + re.escape(normalized_term) + r"(?![\u0600-\u06FF])"
+        )
+        for line_no, line in enumerate(lines, 1):
+            # إزالة التشكيل تجعل الفحص المباشر مطابقًا لاستخراج الأسطح المطبّع.
+            matching_line = normalize_word(line)
+            for match in term_pattern.finditer(matching_line):
+                found.append({
+                    "line": line_no, "term": term, "blocking": blocking,
+                    "replacement": entry.get("replacement", "راجع قائمة المفردات المبسطة"),
+                    "reason": entry.get("reason", "لفظ مصطنع ممنوع")
+                              + ("" if blocking else f" — ساري من {since} (نص أقدم منه: تنبيهي)"),
+                })
+    return found
+
+
+def normalize_sentence(sentence: str) -> str:
+    sentence = strip_markup(sentence).lower()
+    sentence = re.sub(r"[0-90-9]+", " ", sentence)
+    sentence = re.sub(r"https?://\S+|[A-Za-z][A-Za-z0-9_./-]*", " ", sentence)
+    # الأسماء المقتبسة وأسماء السفن تُحذف كي يبقى قالب الجملة.
+    sentence = re.sub(r"[«“\"].*?[»”\"]", " ", sentence)
+    sentence = re.sub(r"#[\w-]+", " ", sentence)
+    sentence = re.sub(r"\b(?:الأول|الثاني|الثالث|الرابع|الخامس|السادس|السابع|الثامن|التاسع|العاشر)\b", " ", sentence)
+    # ما بعد الشرطة في قالب التوجيه يختلف باختلاف الوجهة، لا باختلاف القالب.
+    sentence = re.sub(r"\bنفّذوا\s*[—–-].*", "نفّذوا —", sentence)
+    sentence = re.sub(r"\s+", " ", sentence).strip(" ،؛:")
+    return sentence
+
+
+REGISTRY_ROW = re.compile(r"^\s*(?:[-*•]\s*)?\*{0,2}(?:MN|EST)-\d{4}-\d{2}-\d{2}-\d{2}\b")
+
+
+def find_repeated_templates(text: str) -> list[dict]:
+    text = strip_markup(text)  # ك-409
+    candidates = []
+    for line_no, line in enumerate(text.splitlines(), 1):
+        if "|" in line:
+            continue  # أسطر الجداول: تكرار الخلية بنية جدول لا قالب جملة (معايرة 23 أكتوبر)
+        # قرار 2026-11-02 (امتداد قرار 2026-11-01 لسجل المصادر): أسطر «سجل الأحداث» في المتن
+        # سجل مُهيكل — رمز الواقعة ثم الحقول («المصدر» · «الدرجة» · «الموقع» · «الحالة»).
+        # تكرار وسم الحقل بنية صف لا قالب جملة إنشائي، ويبقى القياس مانعًا على كل نص آخر.
+        if REGISTRY_ROW.search(line):
+            continue
+        clean_line = strip_markup(line).strip()
+        if not clean_line or clean_line.startswith("#"):
+            continue
+        # bullets تمثل جملًا مستقلة حتى إن لم تنته بعلامة ترقيم.
+        for sentence in re.split(r"(?<=[.!؟؛])\s+|\s*\n\s*", clean_line):
+            normalized = normalize_sentence(sentence)
+            has_marker = any(marker in normalized for marker in ("نفّذوا", "بلاغ من", "لا بلاغ جديد"))
+            has_sentence_end = sentence.rstrip().endswith((".", "؟", "!", "؛"))
+            # عطل ك-491: «قالب جملة» يعني صياغة إنشائية، لا وسم حقل في بطاقة مهيكلة.
+            # وسم مثل «المصدر والتاريخ» يتكرر بنية بيانات في عدة بطاقات، فلا يُقاس قالبًا
+            # إلا إذا كان جملة (5 كلمات أو أكثر) أو منتهيًا بعلامة ترقيم.
+            if not has_marker and len(normalized.split()) < 4:
+                continue
+            # ك-490: مقطع الإسناد وحده ليس قالب جملة إنشائيًا؛ تقسيم الجمل على «؛» كان
+            # يُنتج مقطعًا مثل «MN-2026-11-03-06؛» فيتطابق تطبيعه مع غيره من الأكواد
+            # ويُعلن قالبًا متكررًا وهو معرّف لا صياغة. يُستثنى المقطع إذا لم يحمل أي
+            # حرف عربي بعد إزالة الأكواد والفواصل، ويبقى القياس مانعًا على كل نص آخر.
+            _bare = re.sub(r"(?:MN|EST)-\d{4}-\d{2}-\d{2}-\d{2}", "", sentence)
+            # يُشترط حرف عربي (لا علامة ترقيم عربية مثل «؛») حتى لا يُستثنى نص حقيقي.
+            if not re.search(r"[\u0621-\u064A]", _bare):
+                continue
+            if len(normalized) >= 4 and (has_marker or has_sentence_end):
+                candidates.append((normalized, line_no, sentence.strip()))
+    groups: dict[str, list[dict]] = defaultdict(list)
+    for normalized, line_no, sample in candidates:
+        groups[normalized].append({"line": line_no, "sample": sample[:120]})
+    return [
+        {"template": template, "count": len(items), "occurrences": items}
+        for template, items in sorted(groups.items())
+        if len(items) > 2
+    ]
+
+
+def find_unknown_words(text: str) -> list[str]:
+    text = strip_markup(text)  # ك-409
+    known = load_project_dictionary()
+    words = Counter()
+    for raw in ARABIC_WORD.findall(strip_markup(text)):
+        word = normalize_word(raw)
+        if len(word) < 3 or word in known:
+            continue
+        if any(variant in known for variant in lexicon_variants(word)):
+            continue
+        # الكلمات ذات الأعلام والأرقام والمصطلحات الأجنبية لا تدخل هذا التحذير.
+        if any(ch.isdigit() for ch in raw):
+            continue
+        words[word] += 1
+    return [word for word, _ in words.most_common()]
+
+
+def print_findings(title: str, findings: list[dict]) -> None:
+    if not findings:
+        return
+    print(f"{title}: {len(findings)}")
+    for item in findings[:20]:
+        where = f"السطر {item['line']}"
+        detail = item.get("sample") or item.get("word") or item.get("term") or item.get("reason", "")
+        print(f"  - {where}: {detail} — {item.get('reason', '')}")
+    if len(findings) > 20:
+        print(f"  - ... و{len(findings) - 20} موضعًا آخر")
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="بوابة عيوب الصياغة العربية")
+    parser.add_argument("path", nargs="?", help="مسار التقرير")
+    parser.add_argument("--md", dest="md", help="مسار التقرير بصيغة Markdown")
+    # قرار مُعلن 2026-11-01: سطح سجل المصادر سطح مُهيكل (62 صفًا)، وتكرار وسم نوع المصدر
+    # («بلاغ من ·») بنية سجل لا قالب جملة إنشائي. القاعدة تبقى قائمة على كل سطح نصي آخر،
+    # ويُعرض العدد تحذيريًا لا مانعًا حتى لا يُخفى التكرار عن المراجع.
+    parser.add_argument("--structured-registry", dest="structured_registry", action="store_true",
+                        help="سطح سجل مُهيكل: تكرار وسم الصف بنية سجل لا قالب جملة")
+    args = parser.parse_args()
+    chosen = args.md or args.path
+    if not chosen:
+        print("الاستخدام: check_prose_defects.py --md <ملف التقرير>")
+        return 2
+    path = Path(chosen)
+    if not path.exists():
+        print(f"الملف غير موجود: {path}")
+        return 2
+    text = path.read_text(encoding="utf-8")
+    # ك-407: القياس على النص الذي يراه القارئ: تُنزع وسوم النمط والسكربت والوسوم قبل كل فحص،
+    # فلا تُحتسب محددات CSS ولا وسوم HTML عيوبًا في الصياغة العربية.
+    text = strip_markup(text)
+    punctuation = find_punctuation_defects(text)
+    duplicates = find_duplicate_letters(text)
+    _m = re.search(r"(\d{4}-\d{2}-\d{2})", path.name)
+    forbidden = find_forbidden(text, _m.group(1) if _m else None)
+    templates = find_repeated_templates(text)
+    unknown = find_unknown_words(text)
+    counts = {
+        "علامات ترقيم متجاورة": len(punctuation.get("علامات ترقيم متجاورة", [])),
+        "مسافة قبل علامة ترقيم": len(punctuation.get("مسافة قبل علامة ترقيم", [])),
+        "حرف عربي مضاعف": sum(1 for d in duplicates if d.get("blocking")),
+        "ألفاظ مصطنعة ممنوعة": sum(1 for f in forbidden if f.get("blocking")),
+        "ألفاظ أُضيفت اليوم (تحذير)": sum(1 for f in forbidden if not f.get("blocking")),
+        ("قالب جملة متكرر أكثر من مرتين (تحذير)" if args.structured_registry
+         else "قالب جملة متكرر أكثر من مرتين"): len([x for x in templates if x["count"] > 2]),
+        "كلمات خارج المعجم (تحذير)": len(unknown),
+    }
+    print("=== بوابة عيوب الصياغة ===")
+    print(f"الملف: {path}")
+    print("| النوع | العدد | الحكم |")
+    print("|---|---:|---|")
+    for name, count in counts.items():
+        الحكم = "تحذير" if "(تحذير)" in name else ("مانع" if count else "سليم")
+        print(f"| {name} | {count} | {الحكم} |")
+    print_findings("علامات الترقيم المتجاورة", punctuation.get("علامات ترقيم متجاورة", []))
+    print_findings("المسافات قبل الترقيم", punctuation.get("مسافة قبل علامة ترقيم", []))
+    print_findings("الحروف العربية المضاعفة (مانع)", [d for d in duplicates if d.get("blocking")])
+    print_findings("حروف مضاعفة مشروعة (تنبيهي)", [d for d in duplicates if not d.get("blocking")])
+    print_findings("الألفاظ المصطنعة (مانع)", [f for f in forbidden if f.get("blocking")])
+    print_findings("ألفاظ أُضيفت اليوم (تنبيهي)", [f for f in forbidden if not f.get("blocking")])
+    if templates:
+        print(f"قوالب الجمل المتكررة: {len(templates)}")
+        if args.structured_registry:
+            print("  · سطح سجل مُهيكل: التكرار بنية صف لا قالب جملة — يُعرض تحذيريًا لا مانعًا")
+            print("  · القاعدة تبقى مانعة على كل سطح نصي آخر")
+        for item in templates[:20]:
+            print(f"  - {item['count']}× «{item['template']}»؛ أول موضع السطر {item['occurrences'][0]['line']}")
+    if unknown:
+        print(f"تحذير المعجم: {len(unknown)} كلمة مشتبهة — " + "، ".join(unknown[:40]))
+    blocking = sum(v for k, v in counts.items() if "(تحذير)" not in k)
+    if blocking:
+        print("النتيجة: مانع — لا يُسلَّم التقرير قبل المعالجة (لا تعديل آلي).")
+        return 2
+    if unknown:
+        print("النتيجة: تحذير — لا توجد مخالفة مانعة، راجع الكلمات المشتبهة.")
+        return 1
+    print("النتيجة: نجاح — لا عيوب مانعة ولا كلمات مشتبهة.")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)

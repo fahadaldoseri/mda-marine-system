@@ -1,0 +1,257 @@
+@media print{
+  /* ك-255: بطاقة القرار على خلفية بيضاء في الطباعة */
+  .card, .decision, .dc, .blk, .blk *{background-image:none !important}
+  .card, .decision, .dc{background:#fff !important}
+  /* ك-245: منع انقسام مفتاح الخريطة بين صفحتين في PDF */
+  .map-key, .map-legend, .key-box, .mx-key,
+  /* عطل 2026-10-28: كتلة الخريطة+المفتاح (~130–215مم) لا تجتمع في صفحة فتترك فراغًا مانعًا.
+     الحكم: الكتلة تنقسم بين الرسم والمفتاح، وكلٌّ منهما لا ينقسم. */
+  .print-map{break-inside:auto !important;page-break-inside:auto !important}
+  /* الإطار نفسه ينقسم: الرسم (95مم) يبقى صحيحًا، والمفتاح يبقى كاملًا في صفحة واحدة */
+  .print-map .hmap-wrap{break-inside:auto !important;page-break-inside:auto !important;overflow:visible !important}
+  .print-map .hmap-svg{break-inside:avoid !important;page-break-inside:avoid !important}
+  .print-map .hmap-legend{break-inside:avoid !important;page-break-inside:avoid !important}
+  /* ك-245: المفتاح كامل في عمود واحد، وتلتصق كتلة الخريطة بذيل المحتوى */
+  .print-map{display:block !important}
+  .print-map .hmap-wrap{overflow:hidden !important}
+  /* لا يُقيَّد ارتفاع الخريطة: القيد يقلّص عرضها فيسقط فحص العرض (70%) — ك-256 */
+  .print-map .hmap-keys{display:block !important;margin:1.2mm 0 0;font-size:7.8pt;line-height:1.25}
+  /* عطل 2026-10-28: المفتاح بعمود واحد بلغ 95مم فلم تجتمع الخريطة معه في صفحة،
+     فبقي فراغ مانع (176مم). القرار: عمودان في الطباعة — المفتاح يبقى كاملًا وغير منقسم
+     داخل الكتلة (break-inside:avoid) وتنخفض كتلته إلى ما يقارب النصف. */
+  /* ك-298ج: المفتاح (36مم) لم يجد متسعًا في ذيل صفحة الخريطة فهبط لصفحة شبه فارغة.
+     الحكم: ستة أعمدة وخط أصغر قليلًا — المفتاح يبقى كاملًا ويستقر في مكانه. */
+  .print-map .hmap-legend{grid-template-columns:repeat(6,minmax(0,1fr)) !important;columns:6 !important;column-gap:2.6mm !important;gap:0 !important;margin:1mm 0 0}
+  .print-map .hmap-legend li{break-inside:avoid !important;page-break-inside:avoid !important;margin:0 0 .15mm !important;font-size:6.5pt !important;line-height:1.12 !important}
+  .print-map-distribution{break-inside:avoid !important;page-break-inside:avoid !important;margin-top:2mm}
+  .print-map-distribution h3{font-size:10pt;margin:1.5mm 0 1mm}
+  .print-map-distribution .dist-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5mm}
+  .print-map-distribution .dist-card{display:block !important;width:auto !important;margin:0 !important;padding:1.3mm 1.7mm;border:1px solid #cfd8e3;border-radius:1.2mm;background:#fff;color:#20303f;font-size:7.7pt;line-height:1.25;break-inside:avoid;page-break-inside:avoid}
+  .print-map-distribution .dist-card b{display:block;color:#0a1524;font-size:8pt;margin-bottom:.5mm}
+  .print-map-distribution .dist-card span{display:block}
+
+  :root{
+    --ink:#0a1524;--ink-2:#20303f;--muted:#4b5e73;--faint:#5c728c;
+    --line:#8d9bad;--line-2:#5d6f84;--panel:#fff;--panel-2:#fff;--panel-3:#eef2f7;
+    --accent:#0b6f66;--info:#1f5f9f;--danger:#9d2b25;--warn:#7d5200;--ok:#166b45;
+    /* لوحة خريطة الطباعة المعتمدة (حزمة design-v1 — قرار المالك 2026-10-23): بحر أبيض ويابسة رمادية */
+    --map-sea:#ffffff;--map-land:#dfe4ea;--map-coast:#3f4f63;--map-border:#7b8796;
+    --map-grid:#d3d9e0;--map-grid-lbl:#4b5e73;--map-label:#0a1524;--map-country:#4b5e73;
+    --map-sea-label:#4b5e73;--map-strait:#9d2b25;--map-marker-ring:#ffffff;--map-marker-ink:#ffffff;
+  }
+  body{background:#fff;color:#111;font-size:10.8pt;line-height:1.62}
+  /* لا تُطبع المصادر والمراجع ولا ملحق موثوقية المصادر في نسخة PDF */
+  #sec-16{display:none !important}
+  p,li,blockquote,.sec-lede,.blk-lede,.note{orphans:3;widows:3}
+  /* اقتصاد الورق: تُقاس الخريطة على ارتفاع صفحة واحدة مع عنوانها */
+  /* الخريطة ينقسم إطارها فقط بين الرسم والمفتاح، فلا تبقى ورقة شبه فارغة */
+  .map-viz{break-inside:auto;page-break-inside:auto}
+  .map-viz svg{max-height:100mm;height:auto;break-inside:avoid;page-break-inside:avoid}
+  .map-legend{break-inside:avoid;page-break-inside:avoid}
+  /* إجبار: كتلة الخريطة تنقسم بين الرسم والمفتاح مهما وردت قاعدة أخصّ */
+  #sec-03 .map-viz, .map-viz{break-inside:auto !important;page-break-inside:auto !important}
+  .map-viz svg{break-inside:avoid !important;page-break-inside:avoid !important}
+  .map-viz{padding:1.2mm 1.2mm}
+  /* لا يُقسَّم مفتاح hmap في الطباعة؛ النسخة المطبوعة تعلن عمودًا واحدًا صراحةً */
+  .map-legend{columns:2;column-gap:8mm}
+  .map-legend li{break-inside:avoid;margin:0 0 1.4mm;font-size:9pt;line-height:1.45}
+  .map-legend .lg-txt{font-size:9pt}
+  .map-caption,.map-viz figcaption{margin-top:1.5mm;line-height:1.4}
+  /* كثافة الصفحة: تقليل حشو الخلايا لتصبح الكتلة على مقاس الورقة */
+  tbody td{padding:1.5mm 2.2mm !important}
+  .sec-lede{margin:0 0 10px;line-height:1.55}
+  section.doc{padding:0 0 3mm}
+  .rmk,.glossary{break-inside:avoid;page-break-inside:avoid}
+  /* انضباط بصري: خطوط فاصلة رقيقة بدل تظليل الصفوف */
+  tbody tr:nth-child(even){background:#fff !important}
+  tbody td{border-bottom:.4pt solid #e2e8f0}
+  .kpi,.viz,.src,.card,.notice,.threat,.chip,.decision,.bar-track{border-radius:2.4mm}
+  .threat{display:inline-block;min-width:52mm}
+  .mp-events text{font-size:13.5px}
+  /* أرقام علامات الخريطة: لا بد من تخصيص أعلى لأن قاعدة الشاشة أخصّ */
+  .mp-events .mp-num{font-size:15px}
+  .mp-events text{font-size:15px}
+  /* لا تباعد أحرف على العربية داخل الخريطة (يفكّ الاتصال) */
+  .mp-country,.mp-sea-lbl,.mp-port-lbl{letter-spacing:0}
+  /* لا يُترك عنوان قسم في نهاية صفحة ومحتواه في التالية */
+  .h-rule,.sec-lede{break-after:avoid;page-break-after:avoid}
+  /* ضغط الغلاف: تقليل الفراغ في الصفحة الأولى */
+  .masthead{padding:0 0 4mm}
+  .masthead h1{margin:0 0 3mm}
+  .threat{padding:4mm 6mm}
+  .kpis{margin-top:3mm}
+  .cls-banner{margin-top:3mm}
+  body::before{display:none}
+  .topbar,.no-print{display:none !important}
+  .wrap{max-width:none;padding:0}
+  a{color:#0a1524;text-decoration:none}
+  section.doc{background:#fff;border:0;border-top:1px solid #cfd8e3;border-radius:0;padding:0 0 3mm;box-shadow:none;break-inside:auto;page-break-inside:auto}
+  section.doc.pri{border-top:2px solid #0b6f66}
+  section.doc > h2{font-size:13pt;color:#0a1524;break-after:avoid;page-break-after:avoid}
+  section.doc > h2 .ico{display:none}
+  section.doc h3{color:#0a1524;font-size:11pt;break-after:avoid;page-break-after:avoid}
+  section.doc p,section.doc li,tbody td,.card p{color:#20303f}
+  .masthead h1{color:#0a1524;font-size:21pt}
+  .kpi,.viz,.src,.foot,.card,.notice{background:#fff;border-color:#cfd8e3;box-shadow:none}
+  .kpi .k-v{color:#0a1524}
+  .threat{background:#fff;border-color:#cfd8e3}
+  .chip{background:#f6f8fb;border-color:#cfd8e3;color:#31465c}
+  .chip b{color:#0a1524}
+  .cite-ref{color:#0a1524;background:#f2f5f9;border-color:#b8c4d1}
+  .tag{color:#31465c;background:#f6f8fb;border-color:#b8c4d1}
+  .tag.t-confirm{color:#7a1d1a;background:#fff1f0;border-color:#c77973}
+  .tag.t-suspect{color:#7c5000;background:#fff7e6;border-color:#c9a24f}
+  .tag.t-inter{color:#1d4f87;background:#edf4ff;border-color:#8bb1dd}
+  thead th{background:#eef2f7;color:#0a1524}
+  .viz{background:#fbfcfe}
+  .bar-track{background:#e6ecf3}
+  .bar-fill{background:#0f8f86;animation:none}
+  .masthead,.kpis{animation:none}
+  .map-wrap{border-color:#c3cedb}
+  .mp-events .mp-dot{stroke:#fff}
+  .map-viz{break-inside:auto;page-break-inside:auto}
+  .bar-row .bl,.bar-row .bv,.viz h3,.viz .src-note,.src,.src b,.src .st,.foot,.kpi .k-l,.kpi .k-n,.notice,.chip,.cite-ref,.tag{font-size:10.5pt;line-height:1.6}
+  /* ك-256: البطاقات الكبيرة تنقسم بين الصفحات لتصفير الفراغ الداخلي؛ البطاقات الصغيرة تبقى موحّدة. */
+  .card,.viz,.src,.table-row{break-inside:auto;page-break-inside:auto}
+     /* ك-298: سجل الأحداث — عمود واحد وثبات البطاقة في الطباعة */
+     /* ك-298ب: الشبكة لا تنقسم في طباعة Chromium — تُحوّل كتلًا عادية لتتدفّق البطاقات */
+     /* ك-341: بطاقتان في السطر في الطباعة — تدفّق بلا تصغير خطوط ولا حذف محتوى */
+     /* ك-341: بطاقتان في السطر في الطباعة — تدفّق بلا تصغير خطوط ولا حذف محتوى */
+     .ev-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.6mm;margin:4mm 0 0}
+     .ev{display:block;margin:0;padding:3mm 3.4mm 2.8mm}
+     .ev{display:block;margin:0 0 2mm;padding:2.2mm 2.6mm 2mm;break-inside:avoid;page-break-inside:avoid;opacity:1 !important;transform:none !important;animation:none !important;border-color:#c3cedb;background:#fff}
+     .ev::before{width:4px;background:#0f8f86}
+     .ev.b-media::before{background:#b8860b}
+     .ev.b-deny::before{background:#9aa8ba}
+     .ev-what{font-size:9.4pt;line-height:1.45;color:#12203a;margin:0}
+     .ev-top{margin-bottom:1mm}
+     .ev-meta{margin-top:1.1mm;padding-top:.9mm}
+     .ev-meta{font-size:9pt;color:#4a5b73;border-top-color:#dbe3ec}
+     .ev-idx,.ev-code,.ev-badge{font-size:9pt;color:#4a5b73;border-color:#c3cedb}
+     .dg-grid{display:block;margin:4mm 0 0}
+     .dg{display:block;margin:0 0 2mm;padding:2.4mm 2.8mm 2.2mm;break-inside:avoid;page-break-inside:avoid;border-color:#dbe3ec;background:#fff}
+     .dg-top{margin-bottom:1.4mm}
+     .dg-t{font-size:10pt}
+     .dg-body{font-size:9.5pt;line-height:1.5;margin-bottom:1.4mm;color:#243447}
+     .dg-meta{padding-top:1.2mm;border-top-color:#e4eaf1;gap:0}
+     .dg-f{font-size:9pt;line-height:1.45;grid-template-columns:auto 1fr}
+     .dg-k{font-size:8.6pt;color:#4a5b73}
+     .dg-idx,.dg-badge{font-size:9pt;color:#4a5b73;border-color:#c3cedb}
+  .kpi,.glossary,.rmk{break-inside:avoid;page-break-inside:avoid}
+  .tbl-wrap{overflow:visible;break-inside:auto;page-break-inside:auto}
+  table{min-width:0;font-size:10.5pt}
+  thead{display:table-header-group}
+  tbody tr{break-inside:avoid;page-break-inside:avoid}
+  html.js .reveal{opacity:1 !important;transform:none !important;transition:none !important}
+
+  .decision{background:#fff;border-color:#c3cedb}
+  .decision .dc-title{color:#0b6f66}
+  .dc-v{color:#0a1524}
+  .dc-row.risk-high .dc-v{color:#9d2b25}
+  .dc-row.risk-med .dc-v{color:#7d5200}
+  .dc-row.risk-low .dc-v{color:#166b45}
+  .dc-foot,.rkey,.glossary{color:#4b5e73}
+  .conf,.kstrip,.chg-tag,.st-badge,.ev-code,.cls-banner{font-size:10.5pt;background:#f6f8fb;border-color:#b8c4d1;color:#31465c}
+  .conf.c-high{color:#14603f;background:#edfaf3;border-color:#7cc4a0}
+  .conf.c-med{color:#7c5000;background:#fff8ea;border-color:#cfa95a}
+  .conf.c-low{color:#1d4f87;background:#eff5ff;border-color:#8bb1dd}
+  .kstrip.k-confirm,.st-badge.s-active{color:#7a1d1a;background:#fff1f0;border-color:#c77973}
+  .kstrip.k-inter,.chg.c-new .chg-tag{color:#1d4f87;background:#edf4ff;border-color:#8bb1dd}
+  .kstrip.k-suspect,.chg.c-reclassified .chg-tag,.cls-banner.c-restricted{color:#7c5000;background:#fff7e6;border-color:#c9a24f}
+  .chg.c-closed .chg-tag,.st-badge.s-stable{color:#14603f;background:#edfaf3;border-color:#7cc4a0}
+  .ev-code{color:#0b6f66;background:#effaf8;border-color:#7fc9c0}
+  .tl-track{background:#e6ecf3}
+  .tl-fill.k-confirm{background:#9d2b25}
+  .tl-fill.k-inter{background:#1f5f9f}
+  .tl-fill.k-suspect{background:#7d5200}
+  .tl-fill.k-bg{background:#7f92a8}
+  ul.d-kinds li::before{width:3px}
+  .decision,.glossary{break-inside:avoid;page-break-inside:avoid}
+  /* كتل التحليل الطويلة تُقسَّم بدل إفراغ ورقة كاملة */
+  .tl-viz,.viz,.card{break-inside:auto !important;page-break-inside:auto !important}
+  .tl-viz .tl-row,.viz svg,.card .kpi{break-inside:avoid;page-break-inside:avoid}
+  .decision{animation:none}
+
+  /* ===== سياسة التدفّق الموحّدة: تمنع الفراغات الداخلية (قرار 18 أكتوبر 2026) =====
+     القاعدة: القِطَع الصغيرة محمية من الانقسام، والحاويات الكبيرة تتدفّق بحرية.
+     فتُملأ كل ورقة قبل الانتقال، ولا تُدفع الكتل الكبيرة لإفراغ نصف ورقة. */
+  *{break-inside:auto !important;page-break-inside:auto !important}
+  tr,.kpi,.map-legend li,.glossary li,.dc-row,.ev-item,.chg-item{break-inside:avoid !important;page-break-inside:avoid !important}
+  section.doc > h2,section.doc h3,section.doc h4,.h-rule,.sec-lede{break-after:avoid !important;page-break-after:avoid !important}
+  thead{display:table-header-group}
+  thead tr{break-after:avoid;page-break-after:avoid}
+  p,li{orphans:2;widows:2}
+  .map-viz svg{max-height:145mm !important;width:100%;height:auto;break-inside:avoid !important}
+  .map-legend,.map-viz,.tbl-wrap,.changes,.decision,.viz,.card{break-inside:auto !important;page-break-inside:auto !important}
+  /* ك-235: قاعدة مكرّرة كانت تنقض السطر 601 (auto) وتُعيد avoid، فتُنقل كتلة الخريطة كاملة فتُخلّف
+     فراغًا قد يبلغ 206 مم في الصفحة السابقة. الرسم نفسه يبقى غير قابل للتجزئة (avoid على svg)،
+     والحاوية والمفتاح يتدفّقان فيكتمل امتلاء الورقة. */
+  .map-viz{break-inside:auto !important;page-break-inside:auto !important}
+  /* Chromium لا يجزّئ حاويات grid/flex بين الصفحات، فتتدفّق هنا بترتيب inline-block
+     يحفظ هيئة العمودين/البطاقات نفسها، مع السماح بالانقسام بين الصفحات */
+  .wrap,.changes,.dc-grid,.kpis,.masthead,.map-legend,.src-grid,.glossary,.tl-viz,.viz,.card,.decision{display:block !important}
+  /* عطل (2026-10-30): القاعدة العامة كانت تُظهر وسم <style> المحقون داخل الترويسة في الطباعة،
+     فطُبع نص CSS داخل الصفحة الأولى. القياس الحي: display المحسوب لوسم style = inline-block في print.
+     الإصلاح: استثناء العناصر غير المرئية + حارس صريح يمنع طباعتها. */
+  .kpis > *,.masthead > *,.map-legend > li,.glossary > li,.src-grid > *{display:inline-block !important;vertical-align:top !important;width:48.5% !important;margin:0 0 2.5mm 1% !important;box-sizing:border-box !important}
+  .kpis > style,.kpis > script,.kpis > template,.kpis > link,
+  .masthead > style,.masthead > script,.masthead > template,.masthead > link,
+  .src-grid > style,.src-grid > script,.src-grid > template,.src-grid > link,
+  .map-legend > style,.map-legend > script,.glossary > style,.glossary > script{display:none !important}
+  style,script,template,link,meta,title{display:none !important}
+  .dc-grid > *,.dc-row{display:block !important;width:100% !important}
+  /* ك-103: الوسم يُعوَّم والمحتوى كتلة قابلة للانقسام — فلا يُترك عنوان أو بطاقة يتيمة ولا فراغ أسفل الغلاف */
+  .dc-row::after{content:"";display:block;clear:both}
+  .dc-row > *:first-child{float:inline-start !important;display:block !important;width:26% !important}
+  .dc-row > *:last-child{display:block !important;width:auto !important;margin-inline-start:27% !important}
+  .changes > *{display:block !important;width:100% !important}
+  .viz > *,.card > *{box-sizing:border-box}
+  /* ضغط تباعد الأقسام: يوفّر نحو 40 مم فتنتقل نهاية التقرير إلى صفحتها السابقة */
+  section.doc{padding:0 0 2.5mm !important}
+  section.doc > h2{margin:3mm 0 1.5mm !important}
+  .sec-lede{margin:0 0 2mm !important}
+  .h-rule{margin:1mm 0 2mm !important}
+  /* تشخيص: إلغاء كل قواعد منع الكسر لتحديد مصدر الفراغات */
+  *{break-after:auto !important;break-before:auto !important}
+  body,p,li,td,th{line-height:1.36 !important}
+  /* overflow مخفي يمنع Chromium من تقسيم الحاوية بين الصفحات فتُدفع كاملة وتُفرّغ الورقة */
+  *{overflow:visible !important}
+  .map-viz svg{max-height:145mm !important;width:100%;height:auto}
+  .masthead > div:not(.threat){display:block !important;width:100% !important;margin:0 !important}
+  .masthead h1{width:100% !important}
+  /* الغلاف ينتهي عند شريط التصنيف: أهم الأخبار المتعلقة بالأمن البحري تبدأ صفحة جديدة (يمنع العنوان اليتيم والفراغ) */
+  .decision{break-inside:avoid !important;page-break-inside:avoid !important}
+  .map-viz svg{max-height:145mm !important;width:100%;height:auto}
+  /* القاعدة الأخص تأتي بعد سياسة التدفق العامة حتى لا تنقضها */
+  .print-map{break-inside:avoid !important;page-break-inside:avoid !important}
+  .print-map .hmap-wrap{break-inside:avoid !important;page-break-inside:avoid !important;overflow:hidden !important}
+  .print-map .hmap-wrap{grid-template-columns:minmax(0,6fr) minmax(0,1fr) !important}
+  .print-map .hmap-zoom{border-inline-start:1.5px solid var(--accent) !important;border-top:0 !important}
+  /* عطل 2026-10-28: قاعدتان متعارضتان للمفتاح (عمود/عمودان) — أُلغيت الثانية.
+     الحكم الواحد: عمودان في الطباعة، والكتلة لا تنقسم. */
+  .print-map .hmap-legend{grid-template-columns:repeat(4,minmax(0,1fr)) !important;columns:4 !important;column-gap:3.5mm !important}
+  .print-map .hmap-keys{display:block !important}
+  /* محاذاة مضبوطة: تُغلق فراغات الجانبين في الفقرات والقوائم، ولا تمسّ العناوين والبطاقات */
+  section.doc p,section.doc li,.sec-lede,.masthead .lede,.glossary li,.src-grid li,
+  /* تصفير فقرات المتن والعناوين التمهيدية (قرار المالك 2026-10-22): يمنع الفراغ الجانبي */
+  .sec-lede,section.doc p,.masthead p,.blk-lede,.note{text-align:justify !important;text-align-last:start !important;hyphens:none !important}
+  /* لا يُترك عنوان بطاقة أو قسم وحده أسفل ورقة بلا مضمون (عطل ك-103) */
+  section.decision > .dc-title,.card > h3,.viz > h3,section.doc > h2{break-after:avoid !important;page-break-after:avoid !important}
+  .dc-grid,.dc-row,.dc-v,.dc-v ul{break-inside:auto !important;page-break-inside:auto !important}
+  .dc-list li{break-inside:avoid !important;page-break-inside:avoid !important}
+  /* تصفير كامل المتن بما فيه قيم أهم الأخبار المتعلقة بالأمن البحري (ك-105): البوابة تفحص الصفحة بوسائط print */
+  .dc-list li,.chg-list li,.ev-list li,.map-caption,footer.foot,
+  .dc-v,.dc-row,.dc-grid,.kv-v,.glossary li,.src-grid li{text-align:justify !important;
+    text-align-last:start !important;hyphens:none !important;word-spacing:normal !important}
+  section.doc h2,section.doc h3,section.doc h4,.h-rule,.chip,.kpi,.tag,.st-badge,
+  .map-legend li,.conf,.cls-banner,.threat,.toc li,.ev-code{text-align:start !important}
+  .map-panel{padding:2mm 2.5mm !important}
+  .map-legend{margin-top:1.5mm !important}
+  .map-legend li{margin:0 0 1mm !important;font-size:8.4pt !important;line-height:1.3 !important}
+  .kpis > *{width:32% !important;padding:1.6mm 2mm !important;margin:0 0 1.5mm 1% !important}
+  .kpis .k-v{font-size:14pt !important;margin:0.5mm 0 !important}
+  .kpis .k-l{font-size:8.6pt !important;line-height:1.25 !important;min-height:0 !important}
+  .kpis .k-m{font-size:7.6pt !important;line-height:1.25 !important}
+  .dc-grid{gap:1.5mm !important}
+  section.doc{font-size:10.2pt !important}
+}

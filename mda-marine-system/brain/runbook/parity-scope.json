@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "id": "governing",
+      "reason": "محتوى المصدر الحاكم: يُزامَن، ويمنع غيابه أو اختلافه بعد الالتزام.",
+      "policy": "strict",
+      "prefixes": [
+        "brain/appendices/",
+        "brain/archive/",
+        "brain/assets/",
+        "brain/audit/",
+        "brain/backups/",
+        "brain/brain/",
+        "brain/cumulative-2026/",
+        "brain/decisions/",
+        "brain/design/",
+        "brain/docs/",
+        "brain/feeds/",
+        "brain/historical/",
+        "brain/memory/",
+        "brain/notes/",
+        "brain/reports/",
+        "brain/research/",
+        "brain/runbook/",
+        "brain/schedule/",
+        "brain/schemas/",
+        "brain/secrets/",
+        "brain/sections/",
+        "brain/special-reports/",
+        "brain/skills/",
+        "brain/templates/",
+        "brain/tests/",
+        "brain/tools/",
+        "brain/validators/",
+        "brain/watchlist/",
+        "brain/web/",
+        "site/",
+        "skills/"
+      ],
+      "exact": [
+        "brain/.env.example",
+        "brain/CHANGELOG.md",
+        "brain/CLAUDE.md",
+        "brain/INDEX.md",
+        "brain/PROJECT-DELTA.md",
+        "brain/SETUP.md",
+        "brain/bootstrap.sh",
+        "brain/requirements.txt",
+        "brain/runbook-result.md",
+        "brain/تحليل-ترجمة-حرفية.md",
+        "brain/تحليل-لغة-مرشحات-المفردات.md",
+        "brain/تقرير-محور-اللغة-23-10-2026.md",
+        "brain/جولة-23-10-2026-الجولة-الثانية.zip",
+        "brain/حزمة-الشيفرة-الجولة-2-23-10-2026.md",
+        "brain/حزمة-الشيفرة-الجولة-2-23-10-2026.zip",
+        "brain/رد-مانوس-2026-10-23.md",
+        "brain/رد-مانوس-الجولة-2-23-10-2026.md",
+        "brain/شيفرة-الجولة-23-10-2026.md",
+        "brain/فرق-تصحيح-تقرير-23.md",
+        "brain/مخرجات-الجولة-23-10-2026-الثالثة.md",
+        "brain/مخرجات-الجولة-23-10-2026.md",
+        "brain/معايرة-البوابات-11-تقريرًا.md",
+        "brain/مقتطف-قسم-الترجمة-بالمعنى.md"
+      ]
+    },
+    {
+      "id": "evidence_measurements",
+      "reason": "الأدلة والقياسات تثبت التشغيل وتُذكر معلوماتيًا؛ لا تُحوّل اختلافات إعادة التوليد إلى عيب في المحتوى الحاكم.",
+      "policy": "informational",
+      "prefixes": [
+        "brain/evidence/",
+        "brain/audit/measurements/"
+      ],
+      "exact": []
+    },
+    {
+      "id": "operational_logs",
+      "reason": "سجلات التشغيل والملفات المتغيرة تُعاد كتابتها أثناء الجولات؛ تُعرض ولا تمنع لقطة المحتوى الملتزمة.",
+      "policy": "informational",
+      "prefixes": [
+        "brain/logs/",
+        "brain/state/",
+        "brain/audit/backups/",
+        "brain/audit/self-test-",
+        "brain/audit/llm-review-",
+        "brain/audit/llm-triage-",
+        "brain/feeds/feeds-",
+        "brain/archive/ofac-screen-latest.json"
+      ],
+      "exact": []
+    },
+    {
+      "id": "generated",
+      "reason": "المخرجات المولدة أو إعدادات المرآة الخاصة بها تُعاد بناؤها ولا تُعامل كمحتوى مصدر ملتزم.",
+      "policy": "informational",
+      "prefixes": [
+        "brain/reports/docx/",
+        "brain/reports/pdf/",
+        "brain/reports/images/",
+        "brain/backup-repo/",
+        "brain/shots/",
+        "site/dist/",
+        "docs/",
+        ".github/",
+        ".devcontainer/"
+      ],
+      "exact": [
+        ".gitignore",
+        "AGENTS.md",
+        "README.md"
+      ]
+    }
+  ],
+  "roots": {
+    "brain": {
+      "skip_dirs": ["__pycache__", ".git", "shots", "node_modules", ".pytest_cache", "backup-repo"],
+      "skip_files": ["state/webhook-secret.txt", ".env", ".env.local"]
+    },
+    "site": {
+      "skip_dirs": ["__pycache__", ".git", "brain-backup", "dist", "shots", "node_modules", ".pytest_cache"],
+      "skip_files": [".env", ".env.local", ".env.production"]
+    }
+  },
+  "junk_files": [".DS_Store", ".skill_versions.json"],
+  "repo": {
+    "only_prefixes": ["brain/backup-repo/", "docs/", ".gitignore", "AGENTS.md", ".github/", ".devcontainer/", "README.md"],
+    "extra_allow": ["skills/.skill_versions.json"],
+    "sanitized": [
+      "brain/appendices/telegram-chat.json",
+      "brain/appendices/telegram-subscriptions.json",
+      "brain/appendices/telegram-targets.json",
+      "brain/research/styles/sources/archive-reports.html"
+    ],
+    "protected": ["brain/secrets/secrets.env"],
+    "symlink_views": [
+      "brain/web/blocks.py",
+      "brain/web/build_report.py",
+      "brain/web/map_gulf.py",
+      "brain/web/monthly_dashboard.py",
+      "brain/web/verify.py"
+    ]
+  }
+}

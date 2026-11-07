@@ -1,0 +1,32 @@
+{
+ "routes": [
+  {
+   "path": "/",
+   "title": "الرئيسية"
+  },
+  {
+   "path": "/reports/:date",
+   "title": "إصدار يومي"
+  },
+  {
+   "path": "/archive",
+   "title": "الأرشيف"
+  },
+  {
+   "path": "/ledger",
+   "title": "السجل التراكمي"
+  },
+  {
+   "path": "/monthly",
+   "title": "اللوحة الشهرية"
+  },
+  {
+   "path": "/reports/special-gfs-pride-giselle-2026-10-15",
+   "title": "تقرير خاص"
+  },
+  {
+   "path": "/feed.xml",
+   "title": "التغذية"
+  }
+ ]
+}

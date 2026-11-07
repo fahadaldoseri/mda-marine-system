@@ -1,0 +1,20 @@
+test_zone_strip (unittest.loader._FailedTest.test_zone_strip) ... ERROR
+
+======================================================================
+ERROR: test_zone_strip (unittest.loader._FailedTest.test_zone_strip)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_zone_strip
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/brain-marine-news/tests/test_zone_strip.py", line 13, in <module>
+    from validators.check_zone_strip import validate_zone_strip  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'validators.check_zone_strip'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

@@ -1,0 +1,101 @@
+=== survey_ts_utc=20261030T193652Z ===
+>>> findmnt -T /home/ubuntu/skills
+TARGET SOURCE   FSTYPE OPTIONS
+/      /dev/vda ext4   rw,noatime
+[exit=0]
+>>> mount | grep -i skills
+[exit=1]
+>>> stat skill files
+FILE=/home/ubuntu/skills/marine-news-brain/SKILL.md
+ubuntu ubuntu 644 2026-10-30 17:52:22.516694835 +0000 8499 /home/ubuntu/skills/marine-news-brain/SKILL.md
+[exit=0]
+FILE=/home/ubuntu/skills/military-arabic-editing/SKILL.md
+ubuntu ubuntu 644 2026-10-30 17:52:22.543530942 +0000 6354 /home/ubuntu/skills/military-arabic-editing/SKILL.md
+[exit=0]
+FILE=/home/ubuntu/skills/military-arabic-editing/references/ambiguity-map.md
+ubuntu ubuntu 644 2026-10-30 17:52:22.556840896 +0000 6427 /home/ubuntu/skills/military-arabic-editing/references/ambiguity-map.md
+[exit=0]
+FILE=/home/ubuntu/skills/superpowers-method/SKILL.md
+ubuntu ubuntu 644 2026-10-30 17:52:22.814500500 +0000 7656 /home/ubuntu/skills/superpowers-method/SKILL.md
+[exit=0]
+FILE=/home/ubuntu/skills/.skill_versions.json
+ubuntu ubuntu 644 2026-10-30 19:36:51.578288781 +0000 20872 /home/ubuntu/skills/.skill_versions.json
+[exit=0]
+>>> lsof +D /home/ubuntu/skills 2>/dev/null | head
+COMMAND     PID   USER   FD   TYPE DEVICE SIZE/OFF   NODE NAME
+bash    1425611 ubuntu  cwd    DIR  254,0    12288 304895 /home/ubuntu/skills
+[exit=]
+>>> fuser -v /home/ubuntu/skills/.skill_versions.json
+[exit=1]
+>>> .skill_versions.json head -c 800
+{
+  "accessibility": "JZuyk9FUmnYnFdEdvR77Km",
+  "accessibility-review": "BRGwVy6uZzhvGbNuxRapaw",
+  "account-research": "bowoDiDdxQDyQAjs7VAWLx",
+  "acestep": "EBy4ucZ4Ln8pYs8S4Bx7Y9",
+  "after-effects-playbooks": "LsRMujTGDPL6s82bKcFyDT",
+  "agent-development": "Dx3yaJXg58h43XVXa7vZN9",
+  "agent-md-refactor": "DJo4gDefFDogNqRTaT39Eh",
+  "agent-reach": "MwAjJswCYCskbmiAeFj8KA",
+  "agentic-eval": "jKvyjp27mSnWdWsiA8zXvN",
+  "ai-seo": "UNycSQawuVj4mtohX5RDKv",
+  "airflow-dag-patterns": "PKD9igk5fxr96pLi7p4r4k",
+  "album-art-director": "gMgDKWgTr9VaLuJCSKk8nU",
+  "alternative-blog-writer": "PaabKq7kRjsQfedf8y4YQx",
+  "api-designer": "RrjpUnXBLp652BSzPaG3bv",
+  "appinsights-instrumentation": "cMcsEB4mqjWhFBhNuKk9tQ",
+  "appium-skill": "JnAGdyHMFDNNGbpSyLdDTU",
+  "applying-brand-guidelines": "
+>>> systemctl service/timer grep
+[exit=]
+>>> systemctl list-timers --all | head -20
+NEXT                            LEFT LAST                              PASSED UNIT                         ACTIVATES
+Fri 2026-10-30 20:44:00 UTC  1h 7min Fri 2026-10-30 09:36:36 UTC       9h ago apt-daily.timer              apt-daily.service
+Sat 2026-10-31 00:00:00 UTC 4h 23min Fri 2026-10-30 00:00:28 UTC      18h ago dpkg-db-backup.timer         dpkg-db-backup.service
+Sat 2026-10-31 01:29:21 UTC 5h 52min Fri 2026-10-30 12:09:27 UTC       6h ago motd-news.timer              motd-news.service
+Sat 2026-10-31 06:19:41 UTC      10h Fri 2026-10-30 06:15:37 UTC      12h ago apt-daily-upgrade.timer      apt-daily-upgrade.service
+Sat 2026-10-31 17:38:32 UTC      22h Fri 2026-10-30 17:38:32 UTC 1h 58min ago systemd-tmpfiles-clean.timer systemd-tmpfiles-clean.service
+Sun 2026-11-01 03:10:22 UTC 1 day 7h Sun 2026-10-25 03:41:22 UTC   3 days ago e2scrub_all.timer            e2scrub_all.service
+Mon 2026-11-02 01:31:00 UTC   2 days Mon 2026-10-26 03:44:35 UTC   3 days ago fstrim.timer                 fstrim.service
+
+7 timers listed.
+[exit=]
+>>> ls cron and systemd
+/etc/cron.d:
+total 12
+drwxr-xr-x  2 root root 4096 Sep 11 02:10 .
+drwxr-xr-x 83 root root 4096 Oct 30 17:42 ..
+-rw-r--r--  1 root root  201 Apr  8  2024 e2scrub_all
+
+/etc/cron.daily:
+total 16
+drwxr-xr-x  2 root root 4096 Sep 11 02:10 .
+drwxr-xr-x 83 root root 4096 Oct 30 17:42 ..
+-rwxr-xr-x  1 root root 1478 Mar 22  2024 apt-compat
+-rwxr-xr-x  1 root root  123 Feb  5  2024 dpkg
+
+/etc/systemd/system:
+total 52
+drwxr-xr-x 10 root root 4096 Oct  8 12:43 .
+drwxr-xr-x  6 root root 4096 Sep 28 07:55 ..
+drwxr-xr-x  2 root root 4096 Oct  8 12:43 chrony.service.d
+lrwxrwxrwx  1 root root   38 Oct  8 12:43 chronyd.service -> /usr/lib/systemd/system/chrony.service
+-rw-r--r--  1 root root  562 Oct  8 12:43 e2b-noatime.service
+-rw-r--r--  1 root root 2145 Oct  8 12:43 envd.service
+-rw-r--r--  1 root root  385 Oct  8 12:43 forward_ports.service
+drwxr-xr-x  2 root root 4096 Sep 28 07:55 getty.target.wants
+drwxr-xr-x  2 root root 4096 Oct  8 12:43 multi-user.target.wants
+drwxr-xr-x  2 root root 4096 Oct  8 12:43 serial-getty@ttyS0.service.d
+drwxr-xr-x  2 root root 4096 Oct  8 12:43 sockets.target.wants
+drwxr-xr-x  2 root root 4096 Oct  8 12:43 ssh.service.requires
+drwxr-xr-x  2 root root 4096 Oct  8 12:43 sysinit.target.wants
+drwxr-xr-x  2 root root 4096 Sep 11 02:03 timers.target.wants
+[exit=]
+>>> ps grep skill/sync/manus
+      5       2 10-02:17:55 [kworker/R-sync_wq]
+   1152    1151 10-02:17:53 /usr/bin/earlyoom -m 10,5 -s 100,100 -r 0 --avoid (^|/)(supervisord|sandbox-runtime|runtime-upgrade|Xorg|x11vnc|websockify|ws-server|ws-mount|statesync|manus-[a-z-]*|tini|sshd)$
+   1157    1151 10-02:17:53 /usr/local/bin/ttyd -i /home/ubuntu/.local/run/manus-terminal/ttyd.sock -H X-Manus-Terminal-User -W -w /home/ubuntu /bin/bash -l
+1225594    1151  1-05:05:18 /bin/bash /opt/.manus/.packages/scripts/start-chrome.sh
+1225608 1225594  1-05:05:18 /usr/lib/chromium/chromium --show-component-extension-options --enable-gpu-rasterization --no-default-browser-check --disable-pings --media-router=0 --disable-dev-shm-usage --enable-remote-extensions --load-extension --disable-features=HighEfficiencyModeAvailable,HighEfficiencyModeToggle,DestroyProfileOnBrowserClose,Translate,PaintHolding,AcceptCHFrame --disable-permission-action-reporting --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-breakpad --no-default-browser-check --disable-dev-shm-usage --disable-hang-monitor --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --use-angle=swiftshader-webgl --ozone-override-screen-size=1280,1029 --noerrdialogs --window-size=1280,1029 --window-position=0,0 --lang=en-US --num-raster-threads=4 --remote-debugging-port=9222 --load-extension=/opt/.manus/.packages/chrome-extensions/ublock-lite --user-data-dir=/home/ubuntu/.browser_data_dir --download-default-directory=/home/ubuntu/Downloads
+1409807 1225262    03:23:09 /home/ubuntu/.nvm/versions/node/v22.13.0/bin/node /home/ubuntu/.manus-addons/manus-webdev-sha-eaaeec6cf811c1a2/runtime/mcp/server.mjs
+[exit=]

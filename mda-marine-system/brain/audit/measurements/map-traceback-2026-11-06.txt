@@ -1,0 +1,81 @@
+cluster.py", line 42, in cluster_points
+    x, y = project(float(p["lon"]), float(p["lat"]))
+                         ~^^^^^^^
+KeyError: 'lon'
+
+
+=== تقرير 2026-10-15 ===
+Traceback (most recent call last):
+  File "/home/ubuntu/seawatch/generator/build_site.py", line 190, in build_reports
+    _, count = build_report.build(r["md"], target, _meta)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/seawatch/generator/build_report.py", line 2328, in build
+    map_html = build_map(mp["points"], _cap, mp.get("inset"),
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/seawatch/generator/map_gulf.py", line 1041, in build_map
+    _panel(
+  File "/home/ubuntu/seawatch/generator/map_gulf.py", line 825, in _panel
+    _cl = map_cluster.cluster_points(_pts, lambda q: q["xy"], CLUSTER_SEP)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/seawatch/generator/map_cluster.py", line 42, in cluster_points
+    x, y = project(float(p["lon"]), float(p["lat"]))
+                         ~^^^^^^^
+KeyError: 'lon'
+
+
+=== تقرير 2026-10-14 ===
+Traceback (most recent call last):
+  File "/home/ubuntu/seawatch/generator/build_site.py", line 190, in build_reports
+    _, count = build_report.build(r["md"], target, _meta)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/seawatch/generator/build_report.py", line 2328, in build
+    map_html = build_map(mp["points"], _cap, mp.get("inset"),
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/seawatch/generator/map_gulf.py", line 1041, in build_map
+    _panel(
+  File "/home/ubuntu/seawatch/generator/map_gulf.py", line 825, in _panel
+    _cl = map_cluster.cluster_points(_pts, lambda q: q["xy"], CLUSTER_SEP)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/seawatch/generator/map_cluster.py", line 42, in cluster_points
+    x, y = project(float(p["lon"]), float(p["lat"]))
+                         ~^^^^^^^
+KeyError: 'lon'
+
+
+=== تقرير 2026-10-13 ===
+Traceback (most recent call last):
+  File "/home/ubuntu/seawatch/generator/build_site.py", line 190, in build_reports
+    _, count = build_report.build(r["md"], target, _meta)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/seawatch/generator/build_report.py", line 2328, in build
+    map_html = build_map(mp["points"], _cap, mp.get("inset"),
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/seawatch/generator/map_gulf.py", line 1041, in build_map
+    _panel(
+  File "/home/ubuntu/seawatch/generator/map_gulf.py", line 825, in _panel
+    _cl = map_cluster.cluster_points(_pts, lambda q: q["xy"], CLUSTER_SEP)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/seawatch/generator/map_cluster.py", line 42, in cluster_points
+    x, y = project(float(p["lon"]), float(p["lat"]))
+                         ~^^^^^^^
+KeyError: 'lon'
+
+
+=== تقرير 2026-10-12 ===
+Traceback (most recent call last):
+  File "/home/ubuntu/seawatch/generator/build_site.py", line 190, in build_reports
+    _, count = build_report.build(r["md"], target, _meta)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/seawatch/generator/build_report.py", line 2328, in build
+    map_html = build_map(mp["points"], _cap, mp.get("inset"),
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/seawatch/generator/map_gulf.py", line 1041, in build_map
+    _panel(
+  File "/home/ubuntu/seawatch/generator/map_gulf.py", line 825, in _panel
+    _cl = map_cluster.cluster_points(_pts, lambda q: q["xy"], CLUSTER_SEP)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/seawatch/generator/map_cluster.py", line 42, in cluster_points
+    x, y = project(float(p["lon"]), float(p["lat"]))
+                         ~^^^^^^^
+KeyError: 'lon'
+

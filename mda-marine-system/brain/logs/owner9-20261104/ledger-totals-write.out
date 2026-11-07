@@ -1,0 +1,36 @@
+العقد قبل التشغيل:
+  المصدر: ast:add_argument · الأداة: tools/ledger_totals.py
+  الخيارات المقبولة: --date, --help, --write, -h
+كود الخروج: 0
+آخر 30 سطرًا من المخرج الحرفي:
+    {
+      "id": "fire-incidents",
+      "title": "حرائق السفن",
+      "today": 0,
+      "cumulative": 57,
+      "updated": "2026-11-01",
+      "definition": "واقعة سفينة يتضمن outcome حريقًا أو نصها وصفًا صريحًا لحريق/اشتعال/إخماد حريق.",
+      "basis": "بحث محافظ في outcome والنص داخل حالات واقعة مسجلة؛ لا تُحتسب نشرات التحذير أو ملخصات القرصنة بلا واقعة سفينة. قاعدة updated: أعلى تاريخ من published_at أو retrieved_at أو date_start، مع استخدام تاريخ الواقعة عند غياب الحقلين الأولين.",
+      "sources": [
+        "cumulative-2026/daily/*.json",
+        "cumulative-2026/event-ledger-master.json#events"
+      ],
+      "confidence": "متوسطة"
+    },
+    {
+      "id": "official-products",
+      "title": "منتجات UKMTO وJMIC المرصودة",
+      "today": 2,
+      "cumulative": 202,
+      "updated": "2026-11-03",
+      "definition": "سجل مصدره UKMTO أو JMIC؛ كل code/identity يُحسب مرة واحدة حتى إن جمع الجهتين.",
+      "basis": "مطابقة اسم المصدر أو رابط المصدر مباشرة؛ لا تُدّعى جدة المنتج، بل رصده في السجل. قاعدة updated: أعلى تاريخ من published_at أو retrieved_at أو date_start، مع استخدام تاريخ الواقعة عند غياب الحقلين الأولين.",
+      "sources": [
+        "cumulative-2026/daily/*.json",
+        "cumulative-2026/event-ledger-master.json#events"
+      ],
+      "confidence": "عالية"
+    }
+  ]
+}
+التصنيف المقترح: 0 نجاح

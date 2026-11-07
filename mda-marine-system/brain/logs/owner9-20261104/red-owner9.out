@@ -1,0 +1,55 @@
+سياسة الأقسام: /home/ubuntu/seawatch/sources/report-sections-policy.json · محذوف 15 · كتل 4
+FFFFF
+======================================================================
+FAIL: test_event_generator_excludes_cumulative_update_records (__main__.Owner9ImoCardsTests.test_event_generator_excludes_cumulative_update_records)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/brain-marine-news/tests/test_owner9_imo_cards.py", line 77, in test_event_generator_excludes_cumulative_update_records
+    self.assertNotIn("MN-2026-11-03-04", rendered)
+AssertionError: 'MN-2026-11-03-04' unexpectedly found in '<div class="ev-grid" data-count="2" data-source-count="2" data-relation-count="0" data-branch-count="0" data-unresolved-branch-count="0"><article class="ev reveal b-info" id="ev-01" data-event-code="MN-2026-11-03-04" data-event-date="2026-11-03" data-event-has-time="0" data-relation-key="" data-event-rows="10"><div class="ev-top"><span class="ev-idx bidi">01</span><span class="ev-code ltr">MN-2026-11-03-04</span><span class="ev-badge" data-row="2" data-classification="قيد التثبّت">قيد التثبّت</span><span class="ev-reliability" data-row="3" data-reliability="عالية">درجة الموثوقية: عالية</span></div><p class="ev-what" data-row="1">تحديث IMO التراكمي</p><div class="ev-meta"><div class="ev-field" data-row="4" data-row-state="shown"><span class="ev-k">التاريخ والوقت</span><span class="ev-mv">2026-11-03</span></div><div class="ev-field" data-row="5" data-row-state="shown"><span class="ev-k">الموقع</span><span class="ev-mv">المنطقة كاملة</span></div><div class="ev-field" data-row="6" data-row-state="shown"><span class="ev-k">المصدر</span><span class="ev-mv">IMO</span></div><div class="ev-field" data-row="7" data-row-state="hidden-rule-no-official-link" hidden><span class="ev-k">الرابط الرسمي</span><span class="ev-mv"></span></div><div class="ev-field" data-row="8" data-row-state="hidden-rule-arabic-source" hidden><span class="ev-k">ترجمة المعنى</span><span class="ev-mv">الترجمة غير مدرجة في الدفتر</span></div><div class="ev-field" data-row="9" data-row-state="hidden-rule-no-excerpt" hidden><span class="ev-k">النص الأصلي</span><span class="ev-mv">لا نصّ خام في الدفتر</span></div></div><div data-row="10" data-branch-status="not-marked" hidden aria-hidden="true"></div></article><article class="ev reveal b-info" id="ev-02" data-event-code="MN-2026-11-03-01" data-event-date="2026-11-03" data-event-has-time="0" data-relation-key="" data-event-rows="10"><div class="ev-top"><span class="ev-idx bidi">02</span><span class="ev-code ltr">MN-2026-11-03-01</span><span class="ev-badge" data-row="2" data-classification="قيد التثبّت">قيد التثبّت</span><span class="ev-reliability" data-row="3" data-reliability="عالية">درجة الموثوقية: عالية</span></div><p class="ev-what" data-row="1">واقعة بحرية</p><div class="ev-meta"><div class="ev-field" data-row="4" data-row-state="shown"><span class="ev-k">التاريخ والوقت</span><span class="ev-mv">2026-11-03</span></div><div class="ev-field" data-row="5" data-row-state="shown"><span class="ev-k">الموقع</span><span class="ev-mv">المنطقة كاملة</span></div><div class="ev-field" data-row="6" data-row-state="shown"><span class="ev-k">المصدر</span><span class="ev-mv">UKMTO</span></div><div class="ev-field" data-row="7" data-row-state="hidden-rule-no-official-link" hidden><span class="ev-k">الرابط الرسمي</span><span class="ev-mv"></span></div><div class="ev-field" data-row="8" data-row-state="hidden-rule-arabic-source" hidden><span class="ev-k">ترجمة المعنى</span><span class="ev-mv">الترجمة غير مدرجة في الدفتر</span></div><div class="ev-field" data-row="9" data-row-state="hidden-rule-no-excerpt" hidden><span class="ev-k">النص الأصلي</span><span class="ev-mv">لا نصّ خام في الدفتر</span></div></div><div data-row="10" data-branch-status="not-marked" hidden aria-hidden="true"></div></article></div>'
+
+======================================================================
+FAIL: test_event_surface_guard_counts_only_renderable_records (__main__.Owner9ImoCardsTests.test_event_surface_guard_counts_only_renderable_records)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/brain-marine-news/tests/test_owner9_imo_cards.py", line 109, in test_event_surface_guard_counts_only_renderable_records
+    self.assertEqual(errors, [])
+AssertionError: Lists differ: ['القسم المنقول «حالة المصادر والإفصاح» في[870 chars]اكم'] != []
+
+First list contains 14 additional elements.
+First extra element 0:
+'القسم المنقول «حالة المصادر والإفصاح» في الإضافات عدده 0 لا يساوي 1'
+
+Diff is 970 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_imo_metric_uses_single_incidents_identifier (__main__.Owner9ImoCardsTests.test_imo_metric_uses_single_incidents_identifier)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/brain-marine-news/tests/test_owner9_imo_cards.py", line 29, in test_imo_metric_uses_single_incidents_identifier
+    self.assertEqual(metric["id"], "imo-confirmed-incidents")
+AssertionError: 'imo-confirmed-attacks' != 'imo-confirmed-incidents'
+- imo-confirmed-attacks
++ imo-confirmed-incidents
+
+
+======================================================================
+FAIL: test_imo_permanent_card_guard_exists_and_accepts_current_contract (__main__.Owner9ImoCardsTests.test_imo_permanent_card_guard_exists_and_accepts_current_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/brain-marine-news/tests/test_owner9_imo_cards.py", line 35, in test_imo_permanent_card_guard_exists_and_accepts_current_contract
+    self.assertIsNotNone(guard, "حارس البطاقتين الدائمتين غير موجود")
+AssertionError: unexpectedly None : حارس البطاقتين الدائمتين غير موجود
+
+======================================================================
+FAIL: test_imo_permanent_card_guard_rejects_duplicate_source (__main__.Owner9ImoCardsTests.test_imo_permanent_card_guard_rejects_duplicate_source)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/brain-marine-news/tests/test_owner9_imo_cards.py", line 45, in test_imo_permanent_card_guard_rejects_duplicate_source
+    self.assertIsNotNone(guard, "حارس مصدر IMO المكرر غير موجود")
+AssertionError: unexpectedly None : حارس مصدر IMO المكرر غير موجود
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.009s
+
+FAILED (failures=5)

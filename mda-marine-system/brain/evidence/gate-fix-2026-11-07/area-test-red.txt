@@ -1,0 +1,17 @@
+$ python3 -m pytest -p no:cacheprovider -q tests/test_area_absence.py
+.....F                                                                   [100%]
+=================================== FAILURES ===================================
+____________ test_current_round_has_no_unregistered_composite_area _____________
+
+    def test_current_round_has_no_unregistered_composite_area() -> None:
+        gate = load_gate()
+        root = Path(__file__).resolve().parents[1]
+        errors = gate.scan_root(root)
+>       assert not [error for error in errors if "2026-11-07" in error]
+E       AssertionError: assert not ['cumulative-2026/daily/2026-11-07.json#2 · قيمة خارج السجل: «مضيق هرمز ومداخل خليج عُمان»', 'web/meta/2026-11-07.json.event_keys[2] · قيمة خارج السجل: «مضيق هرمز ومداخل خليج عُمان»']
+
+tests/test_area_absence.py:112: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_area_absence.py::test_current_round_has_no_unregistered_composite_area
+1 failed, 5 passed in 0.89s
+RC=1

@@ -1,0 +1,182 @@
+#!/usr/bin/env python3
+"""يولّد ملخص تلغرام (HTML) من `web/meta/<التاريخ>.json` وفق قالب `appendices/telegram-delivery.md` (القسم 4).
+
+لا يرسل شيئًا. المخرج ملف نصي يمرّ بعدها على `telegram_send.py --validate-only` ثم الإرسال بأمر صريح.
+الاستعمال: python3 tools/make_tg_digest.py --date YYYY-MM-DD [--out PATH] [--base-url URL]
+المسارات: BRAIN_DIR و SITE_DIR تُحترمان.
+رموز الخروج: 0 تم · 2 بيانات ناقصة أو الملخص فوق السقف.
+"""
+import argparse
+import datetime as dt
+import json
+import os
+import re
+import sys
+from pathlib import Path
+
+CAP = 900
+MONTHS = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"]
+B = Path(os.environ.get("BRAIN_DIR") or Path(__file__).resolve().parent.parent)
+
+
+def site_base_url():
+    for cand in (os.environ.get("SITE_DIR"), B.parent / "seawatch", B.parent / "site"):
+        if cand and (Path(cand) / "sources" / "site.json").is_file():
+            return json.loads((Path(cand) / "sources" / "site.json").read_text(encoding="utf-8")).get("base_url", "")
+    return ""
+
+
+def dtg(t):
+    return f"{t.day:02d}{t.hour:02d}{t.minute:02d}Z"
+
+
+def short(text, n):
+    text = re.sub(r"\s+", " ", text).strip()
+    if len(text) <= n:
+        return text
+    cut = text[:n].rsplit(" ", 1)[0]
+    return cut.rstrip("،,:؛ ") + "…"
+
+
+def _hero_kpi_registry() -> dict[str, dict]:
+    """Return the governing hero-card contract keyed by card id.
+
+    The daily meta file is a derived surface and has used more than one
+    presentation shape over time.  Labels therefore come from the governing
+    registry when a derived card omits one; values remain data from the
+    derived surface.
+    """
+    path = B / "appendices" / "card_registry.json"
+    try:
+        registry = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    cards = ((registry.get("hero_kpis") or {}).get("cards") or [])
+    return {
+        str(card.get("id")): card
+        for card in cards
+        if isinstance(card, dict) and card.get("id")
+    }
+
+
+def _hero_kpi_items(meta: dict) -> list[dict]:
+    """Normalize list and container forms emitted by the meta builders."""
+    raw = meta.get("hero_kpis") or []
+    if isinstance(raw, list):
+        return [item for item in raw if isinstance(item, dict)]
+    if isinstance(raw, dict):
+        for key in ("cards", "items", "data"):
+            nested = raw.get(key)
+            if isinstance(nested, list):
+                return [item for item in nested if isinstance(item, dict)]
+        return [
+            {"id": key, **value}
+            for key, value in raw.items()
+            if isinstance(value, dict)
+        ]
+    return []
+
+
+def _card_field(card: dict, registry_card: dict, keys: tuple[str, ...]):
+    for source in (card, registry_card):
+        for key in keys:
+            value = source.get(key)
+            if value is not None and str(value).strip():
+                return value
+    return ""
+
+
+def _hero_kpi_line(card: dict, registry: dict[str, dict]) -> str:
+    card_id = str(card.get("id") or "")
+    contract = registry.get(card_id, {})
+    label = _card_field(
+        card,
+        contract,
+        ("label", "display_label", "title", "name", "caption", "key"),
+    )
+    value = _card_field(
+        card,
+        {},
+        ("value", "current", "count", "total", "number", "amount"),
+    )
+    if not label:
+        label = card_id or "مؤشر"
+    return f"{label} {value}".strip()
+
+
+def build(meta, date, base, detail=True, delivery_note=""):
+    cut = dt.datetime.strptime(meta["generated_label"], "%Y-%m-%dT%H:%M:%SZ")
+    start = cut - dt.timedelta(hours=24)
+    bh = cut + dt.timedelta(hours=3)
+    codes = {e["code"]: e for e in meta.get("event_keys", [])}
+    lines = ["<b>مركز الوعي بالمجال البحري</b>", "",
+             f"<b>{meta['title']}</b>",
+             f"تقرير رقم: «{meta['version']}»",
+             f"التاريخ: {cut.day} {MONTHS[cut.month - 1]} {cut.year}",
+             f"الفترة: {dtg(start)}–{dtg(cut)} {MONTHS[cut.month - 1]} {cut.year}",
+             f"الوقت: {cut.hour:02d}{cut.minute:02d}Z ({bh.hour:02d}{bh.minute:02d}C بتوقيت البحرين)", "",
+             f"<b>مستوى التهديد:</b> {meta['threat_level']}", "", "<b>ما تغيّر عن التقرير السابق:</b>"]
+    for i, c in enumerate(meta.get("changes", [])[:3], 1):
+        title = (codes.get(c["code"]) or {}).get("title") or short(c["text"], 70)
+        lines += [f"{i}) {short(title, 70)} ({c['code']})" + (":" if detail else "")]
+        if detail:
+            lines.append(short(c["text"], 90))
+    registry = _hero_kpi_registry()
+    kp = " · ".join(
+        _hero_kpi_line(card, registry) for card in _hero_kpi_items(meta)[:3]
+    )
+    if kp:
+        lines += ["", "<b>المؤشرات:</b>", kp]
+    act = (meta.get("decision_card", {}).get("action") or [""])[0]
+    lines += ["", "<b>الإجراء المطلوب:</b>", f"نفّذوا — {short(act, 110)}"]
+    if delivery_note:
+        lines += ["", "<b>قناة التسليم:</b>", delivery_note]
+    lines += ["", "<b>التقرير الكامل:</b>", f"{base.rstrip('/')}/reports/{date}.html"]
+    return "\n".join(lines)
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--date", required=True)
+    ap.add_argument("--out")
+    ap.add_argument("--base-url")
+    a = ap.parse_args()
+    mp = B / "web" / "meta" / f"{a.date}.json"
+    if not mp.is_file():
+        print(f"✘ لا بيانات إصدار: {mp}")
+        return 2
+    meta = json.loads(mp.read_text(encoding="utf-8"))
+    need = ("title", "version", "generated_label", "threat_level", "changes")
+    miss = [k for k in need if not meta.get(k)]
+    base = a.base_url or site_base_url()
+    delivery_note = ""
+    publish_path = B / "logs" / f"publish-{a.date}.json"
+    try:
+        publish = json.loads(publish_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        publish = {}
+    if publish.get("status") == "ok" and publish.get("channel") == "github-pages":
+        report_url = str(publish.get("url") or "")
+        if "/reports/" in report_url:
+            base = report_url.split("/reports/", 1)[0]
+        delivery_note = (
+            "القناة الأساسية (منصة Manus) معطّلة مؤقتًا؛ "
+            "أُرسل التقرير عبر القناة البديلة."
+        )
+    if miss or not base:
+        print(f"✘ حقول ناقصة: {miss or ''} {'base_url' if not base else ''}")
+        return 2
+    for detail in (True, False):
+        text = build(meta, a.date, base, detail, delivery_note)
+        visible = re.sub(r"<[^>]+>", "", text)
+        if len(visible) <= CAP:
+            break
+    out = Path(a.out) if a.out else B / "logs" / f"tg-digest-{a.date}.html"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(text, encoding="utf-8")
+    print(f"✔ {out} — {len(visible)} حرفًا (السقف {CAP})")
+    return 0 if len(visible) <= CAP else 2
+
+
+if __name__ == "__main__":
+    sys.exit(main())

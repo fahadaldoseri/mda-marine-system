@@ -1,0 +1,37 @@
+العقد قبل التشغيل:
+  المصدر: ast:add_argument · الأداة: /home/ubuntu/brain-marine-news/tools/runbook.py
+  الخيارات المقبولة: --after, --date, --help, --id, --kind, --redo, --root, --through, --title, -h
+كود الخروج: 2
+آخر 30 سطرًا من المخرج الحرفي:
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T193703Z-fatrace-install.log
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T193725Z-fatrace-contract.log
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T193739Z-versions-mirror.log
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T193755Z-backup.log
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T193849Z-backup-verify.log
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T193920Z-auditd-install.log
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T193937Z-auditd-setup.log
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T194016Z-monitor-start.log
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T194033Z-window-status.log
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T1940Z-auditd-monitor-runtime.log
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T1940Z-auditd-monitor.py
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T1940Z-auditd-window-ausearch.log
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T1940Z-culprit.md
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T1940Z-monitor.stdout.log
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T194100Z-window-processes.log
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T194139Z-baseline-hashes-lines.log
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T194152Z-auditd-identity.log
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T195504Z-live-audit-analysis.log
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T195517Z-ausearch-time-bound.log
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T202708Z-causality-window.log
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T202708Z-samples.tsv
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T202744Z-controlled-trigger.md
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T2043Z-auditd-tool-validation.log
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T2044Z-controlled-trigger-2.log
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T2044Z-restore-integrity-before.log
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T2045Z-restore-integrity-after.log
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: evidence/causality/20261030T2045Z-verify-before.txt
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: tools/causality_window.sh
+
+نتيجة التحقق: 29 خلل
+التصنيف المقترح: 2 منع/استخدام خاطئ
+قاعدة الفشل المغلق: توقّف واقرأ المخرج والعقد قبل أي متابعة

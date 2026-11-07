@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-07",
+  "at": "2026-11-07T10:38:45Z",
+  "channels": {
+    "manus": {
+      "state": "down",
+      "reason": "addon workspace recovery has not completed",
+      "probe": "manus-mcp-cli tool list --server webdev-mcp",
+      "probe_rc": 1
+    },
+    "github-pages": {
+      "state": "ready",
+      "reason": "public fallback repository is available; raw.githack/jsDelivr serve its root",
+      "auth_rc": 0,
+      "repo_rc": 0,
+      "visibility": "PUBLIC",
+      "branch": "main",
+      "repo": "fahadaldoseri/seawatch-live"
+    }
+  },
+  "status": "ready",
+  "rc": 0
+}

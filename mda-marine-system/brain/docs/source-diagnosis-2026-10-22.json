@@ -1,0 +1,1455 @@
+[
+ {
+  "num": 27,
+  "name": "وكالة الأنباء الكويتية (كونا)",
+  "url": "https://www.kuna.net.kw",
+  "type": "وكالة رسمية",
+  "reliability": "A",
+  "credibility": 1,
+  "basis": "وكالة أنباء رسمية؛ تعذّر الوصول متكرر، والقيمة في بيان الدولة عند الفتح.",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": null,
+  "page_chars": 0,
+  "page_error": "URLError",
+  "state": "خطأ شبكي (URLError)",
+  "path": "—",
+  "action": "إعادة الفحص ثم قرار"
+ },
+ {
+  "num": 14,
+  "name": "قناة العربية",
+  "url": "https://www.alarabiya.net/",
+  "type": "إعلام إقليمي",
+  "reliability": "C",
+  "credibility": 3,
+  "basis": "قناة إقليمية سريعة؛ تفاصيلها غالبًا بلا سند رسمي.",
+  "feed_registered": 3,
+  "feeds": [
+   {
+    "url": "https://www.alarabiya.net/feed/rss2/ar.xml",
+    "status": 403,
+    "items": 0,
+    "latest_age_days": null,
+    "error": "HTTP 403"
+   },
+   {
+    "url": "https://www.alarabiya.net/feed/rss2/ar/arab-and-world.xml",
+    "status": 403,
+    "items": 0,
+    "latest_age_days": null,
+    "error": "HTTP 403"
+   },
+   {
+    "url": "https://www.alarabiya.net/feed/rss2/ar/aswaq.xml",
+    "status": 403,
+    "items": 0,
+    "latest_age_days": null,
+    "error": "HTTP 403"
+   }
+  ],
+  "page_status": 403,
+  "page_chars": 0,
+  "page_error": "HTTP 403",
+  "state": "محجوب آليًا (403)",
+  "path": "—",
+  "action": "لا يُتجاوز الحجب — مسار متصفح أو استبعاد"
+ },
+ {
+  "num": 40,
+  "name": "MarineTraffic",
+  "url": "https://www.marinetraffic.com/",
+  "type": "منصة (يُذكر اسم المصدر) تجارية",
+  "reliability": "B",
+  "credibility": 3,
+  "basis": "منصة تتبع تجارية؛ البيانات قد تكون متأخرة أو ناقصة التغطية.",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 403,
+  "page_chars": 0,
+  "page_error": "HTTP 403",
+  "state": "محجوب آليًا (403)",
+  "path": "—",
+  "action": "لا يُتجاوز الحجب — مسار متصفح أو استبعاد"
+ },
+ {
+  "num": 44,
+  "name": "Windward",
+  "url": "https://www.windward.ai/",
+  "type": "منصة تحليل تجاري",
+  "reliability": "C",
+  "credibility": 3,
+  "basis": "الصفحة تُفتح بالمتصفح (7362 حرفًا) والتغذية محجوبة 403 — تحليل تجنّب العقوبات ومسارات AIS؛ مسح حي 22-10-2026",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 403,
+  "page_chars": 0,
+  "page_error": "HTTP 403",
+  "state": "محجوب آليًا (403)",
+  "path": "—",
+  "action": "لا يُتجاوز الحجب — مسار متصفح أو استبعاد"
+ },
+ {
+  "num": 1,
+  "name": "UKMTO — الحوادث الأخيرة",
+  "url": "https://www.ukmto.org/recent-incidents",
+  "type": "رسمي دولي",
+  "reliability": "A",
+  "credibility": 2,
+  "basis": "المصدر الرسمي المعتمد لبلاغات الحوادث في المنطقة؛ بلاغاته أولية وتُحدَّث لاحقًا، فيبقى 2 حتى تأكيد مستقل ثم يصبح 1.",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 403,
+  "page_chars": 0,
+  "page_error": "HTTP 403",
+  "state": "محجوب آليًا (403)",
+  "path": "—",
+  "action": "لا يُتجاوز الحجب — مسار متصفح أو استبعاد"
+ },
+ {
+  "num": 2,
+  "name": "UKMTO — التحذيرات 2026",
+  "url": "https://www.ukmto.org/ukmto-products/warnings/2026",
+  "type": "رسمي دولي",
+  "reliability": "A",
+  "credibility": 2,
+  "basis": "تحذير تحذير رسمي يُنشر بقناة مباشرة؛ مصداقية 2 حتى تأكيد مستقل ثم 1.",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 403,
+  "page_chars": 0,
+  "page_error": "HTTP 403",
+  "state": "محجوب آليًا (403)",
+  "path": "—",
+  "action": "لا يُتجاوز الحجب — مسار متصفح أو استبعاد"
+ },
+ {
+  "num": 3,
+  "name": "UKMTO — النشرات الاستشارية 2026",
+  "url": "https://www.ukmto.org/ukmto-products/advisories/2026",
+  "type": "رسمي دولي",
+  "reliability": "A",
+  "credibility": 2,
+  "basis": "نشرة استشارية رسمية تصدر مباشرة؛ مصداقية 2 حتى تأكيد مستقل ثم 1.",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 403,
+  "page_chars": 0,
+  "page_error": "HTTP 403",
+  "state": "محجوب آليًا (403)",
+  "path": "—",
+  "action": "لا يُتجاوز الحجب — مسار متصفح أو استبعاد"
+ },
+ {
+  "num": 4,
+  "name": "UKMTO — التقارير الأسبوعية 2026",
+  "url": "https://www.ukmto.org/ukmto-products/weekly-reports/2026",
+  "type": "رسمي دولي",
+  "reliability": "A",
+  "credibility": 2,
+  "basis": "تقرير دوري رسمي بحصيلة أسبوعية؛ مصداقية 2 حتى تأكيد مستقل ثم 1.",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 403,
+  "page_chars": 0,
+  "page_error": "HTTP 403",
+  "state": "محجوب آليًا (403)",
+  "path": "—",
+  "action": "لا يُتجاوز الحجب — مسار متصفح أو استبعاد"
+ },
+ {
+  "num": 29,
+  "name": "البحرية الملكية البريطانية",
+  "url": "https://www.royalnavy.mod.uk/news",
+  "type": "رسمي عسكري",
+  "reliability": "A",
+  "credibility": 2,
+  "basis": "مصدر عسكري رسمي؛ تغطيته للخليج متقطعة.",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 403,
+  "page_chars": 0,
+  "page_error": "HTTP 403",
+  "state": "محجوب آليًا (403)",
+  "path": "—",
+  "action": "لا يُتجاوز الحجب — مسار متصفح أو استبعاد"
+ },
+ {
+  "num": 48,
+  "name": "Institute for the Study of War",
+  "url": "https://www.understandingwar.org/",
+  "type": "مركز أبحاث عسكري",
+  "reliability": "B",
+  "credibility": 2,
+  "basis": "محجوب آليًا 403 — مسار متصفح ثابت كـUKMTO؛ Critical Threats (criticalthreats.org) مشروع تابع له يُحتسب معه مصدرًا واحدًا؛ مسح حي 22-10-2026",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 403,
+  "page_chars": 0,
+  "page_error": "HTTP 403",
+  "state": "محجوب آليًا (403)",
+  "path": "—",
+  "action": "لا يُتجاوز الحجب — مسار متصفح أو استبعاد"
+ },
+ {
+  "num": 33,
+  "name": "MARAD/MSCI",
+  "url": "https://www.maritime.dot.gov/msci",
+  "type": "رسمي حكومي",
+  "reliability": "A",
+  "credibility": 1,
+  "basis": "تنبيهات أمن الملاحة الأمريكية الرسمية.",
+  "feed_registered": 1,
+  "feeds": [
+   {
+    "url": "https://www.maritime.dot.gov/rss.xml",
+    "status": 403,
+    "items": 0,
+    "latest_age_days": null,
+    "error": "HTTP 403"
+   }
+  ],
+  "page_status": 403,
+  "page_chars": 0,
+  "page_error": "HTTP 403",
+  "state": "محجوب آليًا (403)",
+  "path": "—",
+  "action": "لا يُتجاوز الحجب — مسار متصفح أو استبعاد"
+ },
+ {
+  "num": 6,
+  "name": "straits.live",
+  "url": "https://straits.live/",
+  "type": "مرصد خاص",
+  "reliability": "C",
+  "credibility": 3,
+  "basis": "منصة (يُذكر اسم المصدر) خاصة غير رسمية؛ أرقام الانتظار والتصنيف التأميني تقديرية ومتغيرة.",
+  "feed_registered": 2,
+  "feeds": [
+   {
+    "url": "https://straits.live/feed.xml",
+    "status": 200,
+    "items": 37,
+    "latest_age_days": 0,
+    "error": null
+   },
+   {
+    "url": "https://straits.live/briefs/feed.xml",
+    "status": 200,
+    "items": 60,
+    "latest_age_days": 0,
+    "error": null
+   }
+  ],
+  "page_status": null,
+  "page_chars": 0,
+  "page_error": "TimeoutError",
+  "state": "يعمل آليًا · حديث (0 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 13,
+  "name": "ShipNext — التحقق من السفن",
+  "url": "https://shipnext.com/vessel/9315159-cameroon-prosperity",
+  "type": "قاعدة بيانات تجارية",
+  "reliability": "C",
+  "credibility": 3,
+  "basis": "أداة تحقق من هوية السفينة وبياناتها؛ بيانات تجارية غير رسمية.",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 200,
+  "page_chars": 2530,
+  "page_error": null,
+  "state": "صفحة تُقرأ آليًا",
+  "path": "صفحة",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 20,
+  "name": "جريدة الأيام",
+  "url": "https://www.alayam.com/",
+  "type": "صحيفة محلية",
+  "reliability": "C",
+  "credibility": 3,
+  "basis": "صحيفة محلية؛ نقل محلي لا يوثّق بحريًا.",
+  "feed_registered": 3,
+  "feeds": [
+   {
+    "url": "http://feeds.feedburner.com/alayam-news-list-all",
+    "status": 200,
+    "items": 15,
+    "latest_age_days": 1012,
+    "error": null
+   },
+   {
+    "url": "http://feeds.feedburner.com/alayam-online-international-news",
+    "status": 200,
+    "items": 8,
+    "latest_age_days": 1012,
+    "error": null
+   },
+   {
+    "url": "https://www.alayam.com/pages/rss",
+    "status": 403,
+    "items": 0,
+    "latest_age_days": null,
+    "error": "HTTP 403"
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 29398,
+  "page_error": null,
+  "state": "تغذية متقادمة (1012 يومًا)",
+  "path": "تغذية",
+  "action": "تغيير مسار التغذية أو تقييد المصدر بالمتصفح"
+ },
+ {
+  "num": 21,
+  "name": "جريدة أخبار الخليج",
+  "url": "https://akhbar-alkhaleej.com/",
+  "type": "صحيفة محلية",
+  "reliability": "C",
+  "credibility": 3,
+  "basis": "صحيفة محلية؛ تغطية محدودة وبلا تفاصيل بحرية.",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 200,
+  "page_chars": 6535,
+  "page_error": null,
+  "state": "صفحة تُقرأ آليًا",
+  "path": "صفحة",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 22,
+  "name": "جريدة البلاد",
+  "url": "https://www.albiladpress.com/",
+  "type": "صحيفة محلية",
+  "reliability": "C",
+  "credibility": 3,
+  "basis": "صحيفة محلية؛ تنشر عناوين رسمية بلا تحقق إضافي.",
+  "feed_registered": 1,
+  "feeds": [
+   {
+    "url": "https://www.albiladpress.com/rss",
+    "status": 200,
+    "items": 100,
+    "latest_age_days": 0,
+    "error": null
+   }
+  ],
+  "page_status": 403,
+  "page_chars": 0,
+  "page_error": "HTTP 403",
+  "state": "يعمل آليًا · حديث (0 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 23,
+  "name": "Gulf Daily News",
+  "url": "https://www.gdnonline.com",
+  "type": "صحيفة محلية",
+  "reliability": "C",
+  "credibility": 3,
+  "basis": "صحيفة محلية إنجليزية؛ فيها تحدٍّ أمني متكرر وقد تتعذر.",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 200,
+  "page_chars": 9362,
+  "page_error": null,
+  "state": "صفحة تُقرأ آليًا",
+  "path": "صفحة",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 36,
+  "name": "Lloyd's List",
+  "url": "https://www.lloydslist.com",
+  "type": "إعلام بحري مهني",
+  "reliability": "B",
+  "credibility": 3,
+  "basis": "إعلام بحري مهني عريق؛ موثوقية الجهة B، لكن جوهر محتواه خلف اشتراك ويخلط الخبر بالتحليل ورأي السوق فتبقى المصداقية 3.",
+  "feed_registered": 2,
+  "feeds": [
+   {
+    "url": "https://www.lloydslist.com/rss/lloyds-list",
+    "status": 200,
+    "items": 20,
+    "latest_age_days": 0,
+    "error": null
+   },
+   {
+    "url": "https://www.lloydslist.com/rss-feeds",
+    "status": 200,
+    "items": 0,
+    "latest_age_days": null,
+    "error": null
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 9849,
+  "page_error": null,
+  "state": "يعمل آليًا · حديث (0 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 37,
+  "name": "MarineLink",
+  "url": "https://www.marinelink.com",
+  "type": "إعلام بحري",
+  "reliability": "C",
+  "credibility": 3,
+  "basis": "غالب محتواه بيانات سوقية وبيانات صحفية مُعادة نشر بلا تحقق مستقل، فيُقرأ كإشارة صناعية لا كإثبات.",
+  "feed_registered": 2,
+  "feeds": [
+   {
+    "url": "https://www.marinelink.com/news/rss",
+    "status": 200,
+    "items": 10,
+    "latest_age_days": 0,
+    "error": null
+   },
+   {
+    "url": "https://www.marinelink.com/blogs/rss?type=video",
+    "status": 200,
+    "items": 10,
+    "latest_age_days": 4,
+    "error": null
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 8036,
+  "page_error": null,
+  "state": "يعمل آليًا · حديث (0 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 45,
+  "name": "IRIB News",
+  "url": "https://www.iribnews.ir/",
+  "type": "بث رسمي للدولة الإيرانية",
+  "reliability": "A",
+  "credibility": 3,
+  "basis": "تغذية https://www.iribnews.ir/fa/rss/allnews فعّالة (100 عنصر، أحدث مادة 22 أكتوبر 20:09 +3:30) — يُوسم ناقلًا لموقف الدولة؛ مسح حي 22-10-2026",
+  "feed_registered": 1,
+  "feeds": [
+   {
+    "url": "https://www.iribnews.ir/fa/rss/allnews",
+    "status": 200,
+    "items": 100,
+    "latest_age_days": 0,
+    "error": null
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 11101,
+  "page_error": null,
+  "state": "يعمل آليًا · حديث (0 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 46,
+  "name": "ISNA",
+  "url": "https://www.isna.ir/",
+  "type": "وكالة أنباء رسمية إيرانية",
+  "reliability": "A",
+  "credibility": 3,
+  "basis": "تغذية https://www.isna.ir/rss فعّالة (30 عنصرًا) + https://en.isna.ir/rss — تصريحات المسؤولين الإيرانيين؛ مسح حي 22-10-2026",
+  "feed_registered": 2,
+  "feeds": [
+   {
+    "url": "https://www.isna.ir/rss",
+    "status": 200,
+    "items": 30,
+    "latest_age_days": 0,
+    "error": null
+   },
+   {
+    "url": "https://en.isna.ir/rss",
+    "status": 200,
+    "items": 30,
+    "latest_age_days": 0,
+    "error": null
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 70,
+  "page_error": null,
+  "state": "يعمل آليًا · حديث (0 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 47,
+  "name": "Mehr — العربي",
+  "url": "https://ar.mehrnews.com/",
+  "type": "وكالة شبه رسمية",
+  "reliability": "B",
+  "credibility": 3,
+  "basis": "تغذية https://ar.mehrnews.com/rss فعّالة (30 عنصرًا عربيًا) + https://en.mehrnews.com/rss؛ مسح حي 22-10-2026",
+  "feed_registered": 2,
+  "feeds": [
+   {
+    "url": "https://ar.mehrnews.com/rss",
+    "status": 200,
+    "items": 30,
+    "latest_age_days": 0,
+    "error": null
+   },
+   {
+    "url": "https://en.mehrnews.com/rss",
+    "status": 200,
+    "items": 30,
+    "latest_age_days": 0,
+    "error": null
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 9620,
+  "page_error": null,
+  "state": "يعمل آليًا · حديث (0 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 50,
+  "name": "Navy Times",
+  "url": "https://www.navytimes.com/",
+  "type": "إعلام عسكري متخصص",
+  "reliability": "B",
+  "credibility": 3,
+  "basis": "تغذية https://www.navytimes.com/feed/ فعّالة (10 عناصر · مادة اليوم)؛ مسح حي 22-10-2026",
+  "feed_registered": 1,
+  "feeds": [
+   {
+    "url": "https://www.navytimes.com/feed/",
+    "status": 200,
+    "items": 10,
+    "latest_age_days": 0,
+    "error": null
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 10223,
+  "page_error": null,
+  "state": "يعمل آليًا · حديث (0 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 51,
+  "name": "Baird Maritime",
+  "url": "https://www.bairdmaritime.com/",
+  "type": "إعلام بحري متخصص",
+  "reliability": "B",
+  "credibility": 3,
+  "basis": "تغذية https://www.bairdmaritime.com/feed/ فعّالة (5 عناصر · مادة اليوم) — سبق أن ظهرت فارغة في قياس سابق فسُجّل الفرق؛ مسح حي 22-10-2026",
+  "feed_registered": 1,
+  "feeds": [
+   {
+    "url": "https://www.bairdmaritime.com/feed/",
+    "status": 200,
+    "items": 11,
+    "latest_age_days": 0,
+    "error": null
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 5668,
+  "page_error": null,
+  "state": "يعمل آليًا · حديث (0 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 52,
+  "name": "Synmax",
+  "url": "https://synmax.com/",
+  "type": "منصة تحليل تجاري",
+  "reliability": "C",
+  "credibility": 3,
+  "basis": "الصفحة تُفتح آليًا والتغذية فارغة (صفر عنصر) — رصد تجاري؛ مسح حي 22-10-2026",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 200,
+  "page_chars": 8966,
+  "page_error": null,
+  "state": "صفحة تُقرأ آليًا",
+  "path": "صفحة",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 54,
+  "name": "Bloomberg",
+  "url": "https://www.bloomberg.com/",
+  "type": "صحافة اقتصادية (تغذية)",
+  "reliability": "B",
+  "credibility": 3,
+  "basis": "تغذيتان فعّالتان https://feeds.bloomberg.com/markets/news.rss وhttps://feeds.bloomberg.com/politics/news.rss (20 عنصرًا · مادة اليوم) والصفحة محجوبة 403؛ مسح حي 22-10-2026",
+  "feed_registered": 2,
+  "feeds": [
+   {
+    "url": "https://feeds.bloomberg.com/markets/news.rss",
+    "status": 200,
+    "items": 20,
+    "latest_age_days": 0,
+    "error": null
+   },
+   {
+    "url": "https://feeds.bloomberg.com/politics/news.rss",
+    "status": 200,
+    "items": 20,
+    "latest_age_days": 0,
+    "error": null
+   }
+  ],
+  "page_status": 403,
+  "page_chars": 0,
+  "page_error": "HTTP 403",
+  "state": "يعمل آليًا · حديث (0 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 55,
+  "name": "Axios",
+  "url": "https://www.axios.com/",
+  "type": "صحافة عالمية (تغذية)",
+  "reliability": "B",
+  "credibility": 3,
+  "basis": "تغذية https://api.axios.com/feed/ فعّالة (100 عنصر · مادة اليوم)؛ مسح حي 22-10-2026",
+  "feed_registered": 1,
+  "feeds": [
+   {
+    "url": "https://api.axios.com/feed/",
+    "status": 200,
+    "items": 100,
+    "latest_age_days": 0,
+    "error": null
+   }
+  ],
+  "page_status": 403,
+  "page_chars": 0,
+  "page_error": "HTTP 403",
+  "state": "يعمل آليًا · حديث (0 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 56,
+  "name": "المجلس الأعلى للمقاومة الشعبية — اليمن",
+  "url": "https://x.com/YemenResistanc1",
+  "type": "حساب رسمي — طرف في الصراع",
+  "reliability": "B",
+  "credibility": 3,
+  "basis": "تصحيح مُعرّف: الصيغة الصحيحة YemenResistanc1 (والصيغة المذكورة سابقًا YemenResistance1 ردّت 404) — تشغيل بمتصفح؛ مسح حي 22-10-2026",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 200,
+  "page_chars": 1894,
+  "page_error": null,
+  "state": "متصفح إلزامي",
+  "path": "متصفح",
+  "action": "يُفتح بمتصفح في كل تشغيل"
+ },
+ {
+  "num": 57,
+  "name": "الناطق الرسمي للقوات المسلحة اليمنية",
+  "url": "https://x.com/spokespersonyem",
+  "type": "حساب رسمي — طرف في الصراع",
+  "reliability": "B",
+  "credibility": 3,
+  "basis": "تصحيح مُعرّف: الصيغة الصحيحة spokespersonyem (والصيغة المذكورة سابقًا spokespersonsem ردّت 404)؛ مسح حي 22-10-2026",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 200,
+  "page_chars": 2658,
+  "page_error": null,
+  "state": "متصفح إلزامي",
+  "path": "متصفح",
+  "action": "يُفتح بمتصفح في كل تشغيل"
+ },
+ {
+  "num": 58,
+  "name": "المركز الإعلامي للقوات المسلحة اليمنية",
+  "url": "https://yafm.net/",
+  "type": "موقع رسمي — طرف في الصراع",
+  "reliability": "B",
+  "credibility": 3,
+  "basis": "موقع رسمي يُفتح آليًا (5873 حرفًا) ولا تغذية له — المسار يكمّل حسابات X اليمنية؛ مسح حي 22-10-2026",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 200,
+  "page_chars": 7331,
+  "page_error": null,
+  "state": "صفحة تُقرأ آليًا",
+  "path": "صفحة",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 59,
+  "name": "المتحدث العسكري للطرف المقابل (تليغرام)",
+  "url": "https://t.me/army21ye",
+  "type": "قناة رسمية — الطرف المقابل",
+  "reliability": "B",
+  "credibility": 3,
+  "basis": "قناة تليغرام رسمية تُقرأ بالمعاينة العامة t.me/s (8000 حرف) وحساب X لصاحبها موقوف — لإقرار التوازن مع الطرف الآخر؛ مسح حي 22-10-2026",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 200,
+  "page_chars": 323,
+  "page_error": null,
+  "state": "معاينة عامة",
+  "path": "t.me/s",
+  "action": "تُقرأ بالمعاينة العامة"
+ },
+ {
+  "num": 60,
+  "name": "المتحدث الرسمي باسم قوات التحالف (X)",
+  "url": "https://x.com/CJFCSpox",
+  "type": "حساب رسمي — قوات التحالف",
+  "reliability": "B",
+  "credibility": 3,
+  "basis": "فُتح حيًّا (200) وعنوان الصفحة «المتحدث الرسمي باسم قوات التحالف» مطابق — تشغيل بمتصفح؛ مسح حي 22-10-2026",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 200,
+  "page_chars": 1422,
+  "page_error": null,
+  "state": "متصفح إلزامي",
+  "path": "متصفح",
+  "action": "يُفتح بمتصفح في كل تشغيل"
+ },
+ {
+  "num": 61,
+  "name": "معمر الإرياني — وزير الإعلام اليمني (X)",
+  "url": "https://x.com/ERYANIM",
+  "type": "حساب رسمي — طرف في الصراع",
+  "reliability": "B",
+  "credibility": 3,
+  "basis": "فُتح حيًّا (200) وعنوان مطابق للجهة؛ مسح حي 22-10-2026",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 200,
+  "page_chars": 2650,
+  "page_error": null,
+  "state": "متصفح إلزامي",
+  "path": "متصفح",
+  "action": "يُفتح بمتصفح في كل تشغيل"
+ },
+ {
+  "num": 62,
+  "name": "المركز الإعلامي للقوات المسلحة اليمنية — إنجليزي (X)",
+  "url": "https://x.com/Yemenarmyeng",
+  "type": "حساب رسمي — طرف في الصراع",
+  "reliability": "B",
+  "credibility": 3,
+  "basis": "فُتح حيًّا (200) وعنوان «Yemen Army Media» مطابق؛ مسح حي 22-10-2026",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 200,
+  "page_chars": 1785,
+  "page_error": null,
+  "state": "متصفح إلزامي",
+  "path": "متصفح",
+  "action": "يُفتح بمتصفح في كل تشغيل"
+ },
+ {
+  "num": 7,
+  "name": "gCaptain",
+  "url": "https://gcaptain.com",
+  "type": "إعلام بحري",
+  "reliability": "B",
+  "credibility": 2,
+  "basis": "إعلام متخصص ينشر تفاصيل تشغيلية؛ لا يوثّق بمعيار رسمي.",
+  "feed_registered": 1,
+  "feeds": [
+   {
+    "url": "https://gcaptain.com/feed/",
+    "status": 200,
+    "items": 12,
+    "latest_age_days": 0,
+    "error": null
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 17752,
+  "page_error": null,
+  "state": "يعمل آليًا · حديث (0 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 8,
+  "name": "TradeWinds",
+  "url": "https://www.tradewindsnews.com",
+  "type": "إعلام بحري",
+  "reliability": "B",
+  "credibility": 2,
+  "basis": "إعلام شحن مهني موثوق؛ جزء من محتواه خلف اشتراك.",
+  "feed_registered": 1,
+  "feeds": [
+   {
+    "url": "https://services.tradewindsnews.com/api/feed/rss",
+    "status": 200,
+    "items": 182,
+    "latest_age_days": 0,
+    "error": null
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 2133,
+  "page_error": null,
+  "state": "يعمل آليًا · حديث (0 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 9,
+  "name": "Seatrade Maritime",
+  "url": "https://www.seatrade-maritime.com",
+  "type": "إعلام بحري",
+  "reliability": "B",
+  "credibility": 2,
+  "basis": "إعلام شحن وأمن بحري مهني؛ ينقل ويضيف تحليلًا.",
+  "feed_registered": 1,
+  "feeds": [
+   {
+    "url": "https://www.seatrade-maritime.com/rss.xml",
+    "status": 200,
+    "items": 50,
+    "latest_age_days": 0,
+    "error": null
+   }
+  ],
+  "page_status": 403,
+  "page_chars": 0,
+  "page_error": "HTTP 403",
+  "state": "يعمل آليًا · حديث (0 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 10,
+  "name": "الجزيرة نت",
+  "url": "https://www.ajnet.me/",
+  "type": "إعلام إقليمي",
+  "reliability": "B",
+  "credibility": 2,
+  "basis": "قناة إخبارية كبرى؛ نقل سريع بلا تحقق مستقل عن الرسمي.",
+  "feed_registered": 1,
+  "feeds": [
+   {
+    "url": "https://www.ajnet.me/rss",
+    "status": null,
+    "items": 0,
+    "latest_age_days": null,
+    "error": "URLError"
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 211410,
+  "page_error": null,
+  "state": "صفحة تُقرأ آليًا",
+  "path": "صفحة",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 11,
+  "name": "الجزيرة الإنجليزية",
+  "url": "https://www.aljazeera.com/where/iran/",
+  "type": "إعلام إقليمي",
+  "reliability": "B",
+  "credibility": 2,
+  "basis": "النسخة الإنجليزية للجهة نفسها؛ لا تُعد مصدرًا مستقلًا عن الجزيرة نت.",
+  "feed_registered": 1,
+  "feeds": [
+   {
+    "url": "https://www.aljazeera.com/xml/rss/all.xml",
+    "status": 200,
+    "items": 25,
+    "latest_age_days": 0,
+    "error": null
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 5899,
+  "page_error": null,
+  "state": "يعمل آليًا · حديث (0 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 15,
+  "name": "حساب @UK_MTO على X",
+  "url": "https://x.com/UK_MTO",
+  "type": "قناة رسمية معلنة",
+  "reliability": "B",
+  "credibility": 2,
+  "basis": "القناة الرسمية المعلنة نفسها؛ قيمتها التنبيه المبكر لا التحقق الإضافي.",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 200,
+  "page_chars": 1578,
+  "page_error": null,
+  "state": "متصفح إلزامي",
+  "path": "متصفح",
+  "action": "يُفتح بمتصفح في كل تشغيل"
+ },
+ {
+  "num": 16,
+  "name": "حساب @bna_ar على X",
+  "url": "https://x.com/bna_ar",
+  "type": "حساب وكالة رسمية",
+  "reliability": "B",
+  "credibility": 2,
+  "basis": "حساب الوكالة الرسمية؛ النسخة الأصلية للبيان هي المرجع.",
+  "feed_registered": 1,
+  "feeds": [
+   {
+    "url": "https://www.bahrain.bh/wps/portal/en/BNP/RssFeedReader",
+    "status": 200,
+    "items": 0,
+    "latest_age_days": null,
+    "error": null
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 1599,
+  "page_error": null,
+  "state": "متصفح إلزامي",
+  "path": "متصفح",
+  "action": "يُفتح بمتصفح في كل تشغيل"
+ },
+ {
+  "num": 17,
+  "name": "حساب @bna_en على X",
+  "url": "https://x.com/bna_en",
+  "type": "حساب وكالة رسمية",
+  "reliability": "B",
+  "credibility": 2,
+  "basis": "النسخة الإنجليزية للوكالة نفسها؛ لا ترفع الثقة بذاتها.",
+  "feed_registered": 1,
+  "feeds": [
+   {
+    "url": "https://web.archive.org/web/20260108135704/https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
+    "status": 429,
+    "items": 0,
+    "latest_age_days": null,
+    "error": "HTTP 429"
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 1311,
+  "page_error": null,
+  "state": "متصفح إلزامي",
+  "path": "متصفح",
+  "action": "يُفتح بمتصفح في كل تشغيل"
+ },
+ {
+  "num": 18,
+  "name": "حساب @bahdiplomatic على X",
+  "url": "https://x.com/bahdiplomatic",
+  "type": "حساب رسمي حكومي",
+  "reliability": "B",
+  "credibility": 2,
+  "basis": "بيانات رسمية وطنية؛ غالبًا سياسية وبلا بُعد بحري مباشر.",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 200,
+  "page_chars": 1630,
+  "page_error": null,
+  "state": "متصفح إلزامي",
+  "path": "متصفح",
+  "action": "يُفتح بمتصفح في كل تشغيل"
+ },
+ {
+  "num": 19,
+  "name": "حساب @US5thFleet على X",
+  "url": "https://x.com/us5thfleet",
+  "type": "حساب عسكري رسمي",
+  "reliability": "B",
+  "credibility": 2,
+  "basis": "قناة عسكرية رسمية؛ نشرها قليل وتفاعلها مقيّد.",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 200,
+  "page_chars": 2101,
+  "page_error": null,
+  "state": "متصفح إلزامي",
+  "path": "متصفح",
+  "action": "يُفتح بمتصفح في كل تشغيل"
+ },
+ {
+  "num": 30,
+  "name": "القيادة المركزية الأمريكية (سنتكوم)",
+  "url": "https://www.centcom.mil/MEDIA/PRESS-RELEASES/",
+  "type": "رسمي عسكري",
+  "reliability": "A",
+  "credibility": 2,
+  "basis": "بيانات عسكرية رسمية؛ النشر بطيء وقد يتعذر التحميل.",
+  "feed_registered": 1,
+  "feeds": [
+   {
+    "url": "https://www.centcom.mil/DesktopModules/ArticleCS/RSS.ashx?ContentType=1&Site=808&isdashboardselected=0&max=20",
+    "status": 200,
+    "items": 20,
+    "latest_age_days": 259,
+    "error": null
+   }
+  ],
+  "page_status": 403,
+  "page_chars": 0,
+  "page_error": "HTTP 403",
+  "state": "تغذية متقادمة (259 يومًا)",
+  "path": "تغذية",
+  "action": "تغيير مسار التغذية أو تقييد المصدر بالمتصفح"
+ },
+ {
+  "num": 31,
+  "name": "JMIC — المنظمة البحرية المشتركة",
+  "url": "https://combinedmaritimeforces.com/jmic/",
+  "type": "رسمي بحري مشترك",
+  "reliability": "A",
+  "credibility": 2,
+  "basis": "منتج رسمي مشترك بين القوات؛ النشر غير منتظم.",
+  "feed_registered": 1,
+  "feeds": [
+   {
+    "url": "https://combinedmaritimeforces.com/feed/",
+    "status": 200,
+    "items": 15,
+    "latest_age_days": 2,
+    "error": null
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 4399,
+  "page_error": null,
+  "state": "يعمل آليًا · حديث (2 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 34,
+  "name": "MSCIO",
+  "url": "https://www.mscio.eu",
+  "type": "مكتب دولي",
+  "reliability": "B",
+  "credibility": 2,
+  "basis": "مكتب أمن الملاحة الأوروبي؛ محتواه ديناميكي وقد لا يكتمل تحميله.",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 200,
+  "page_chars": 8229,
+  "page_error": null,
+  "state": "صفحة تُقرأ آليًا",
+  "path": "صفحة",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 35,
+  "name": "Splash 247",
+  "url": "https://splash247.com",
+  "type": "إعلام بحري",
+  "reliability": "B",
+  "credibility": 2,
+  "basis": "إعلام بحري مهني؛ تغطيته للخليج متقطعة.",
+  "feed_registered": 2,
+  "feeds": [
+   {
+    "url": "https://splash247.com/feed/",
+    "status": 200,
+    "items": 10,
+    "latest_age_days": 0,
+    "error": null
+   },
+   {
+    "url": "https://splash247.com/feed/atom/",
+    "status": 403,
+    "items": 0,
+    "latest_age_days": null,
+    "error": "HTTP 403"
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 12462,
+  "page_error": null,
+  "state": "يعمل آليًا · حديث (0 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 38,
+  "name": "Jerusalem Post",
+  "url": "https://www.jpost.com/",
+  "type": "إعلام إقليمي",
+  "reliability": "B",
+  "credibility": 2,
+  "basis": "مصدر إقليمي مضاف حديثًا؛ يفيد في نقل تأكيدات رسمية أمريكية وإقليمية.",
+  "feed_registered": 2,
+  "feeds": [
+   {
+    "url": "https://www.jpost.com/rss",
+    "status": 200,
+    "items": 0,
+    "latest_age_days": null,
+    "error": null
+   },
+   {
+    "url": "https://www.jpost.com/rss/rssfeedsmiddleeastnews.aspx",
+    "status": 200,
+    "items": 30,
+    "latest_age_days": 0,
+    "error": null
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 18253,
+  "page_error": null,
+  "state": "يعمل آليًا · حديث (0 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 41,
+  "name": "USNI News",
+  "url": "https://news.usni.org/",
+  "type": "صحافة بحرية متخصصة",
+  "reliability": "B",
+  "credibility": 2,
+  "basis": "تغذية https://news.usni.org/feed فعّالة (30 عنصرًا، أحدث مادة 22 أكتوبر 2026) — تابعة لمعهد البحرية الأمريكي؛ مسح حي 22-10-2026",
+  "feed_registered": 1,
+  "feeds": [
+   {
+    "url": "https://news.usni.org/feed",
+    "status": 200,
+    "items": 30,
+    "latest_age_days": 0,
+    "error": null
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 6570,
+  "page_error": null,
+  "state": "يعمل آليًا · حديث (0 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 42,
+  "name": "Naval News",
+  "url": "https://www.navalnews.com/",
+  "type": "صحافة بحرية متخصصة",
+  "reliability": "B",
+  "credibility": 2,
+  "basis": "تغذية https://www.navalnews.com/feed/ فعّالة (10 عناصر) — تغطية الأساطيل والحوادث البحرية؛ مسح حي 22-10-2026",
+  "feed_registered": 1,
+  "feeds": [
+   {
+    "url": "https://www.navalnews.com/feed/",
+    "status": 200,
+    "items": 10,
+    "latest_age_days": 0,
+    "error": null
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 5108,
+  "page_error": null,
+  "state": "يعمل آليًا · حديث (0 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 43,
+  "name": "The Maritime Executive",
+  "url": "https://maritime-executive.com/",
+  "type": "صحافة بحرية متخصصة",
+  "reliability": "B",
+  "credibility": 2,
+  "basis": "الصفحة مفتوحة وتُقرأ آليًا (التغذية 404) — صحافة بحرية متخصصة؛ مسح حي 22-10-2026",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 200,
+  "page_chars": 19969,
+  "page_error": null,
+  "state": "صفحة تُقرأ آليًا",
+  "path": "صفحة",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 49,
+  "name": "Sanaa Center",
+  "url": "https://sanaacenter.org/",
+  "type": "مركز أبحاث يمني",
+  "reliability": "B",
+  "credibility": 2,
+  "basis": "تغذية https://sanaacenter.org/feed/ فعّالة (20 عنصرًا · عمر أحدث مادة 8 أيام)؛ مسح حي 22-10-2026",
+  "feed_registered": 1,
+  "feeds": [
+   {
+    "url": "https://sanaacenter.org/feed/",
+    "status": 200,
+    "items": 20,
+    "latest_age_days": 8,
+    "error": null
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 22038,
+  "page_error": null,
+  "state": "يعمل آليًا · حديث (8 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 53,
+  "name": "New York Times — الشرق الأوسط",
+  "url": "https://www.nytimes.com/international/section/world/middleeast",
+  "type": "صحافة عالمية (تغذية)",
+  "reliability": "B",
+  "credibility": 2,
+  "basis": "تغذية https://rss.nytimes.com/services/xml/rss/nyt/MiddleEast.xml فعّالة (21 عنصرًا · مادة اليوم) والصفحة محجوبة 403 — تُقرأ بالتغذية فقط؛ مسح حي 22-10-2026",
+  "feed_registered": 1,
+  "feeds": [
+   {
+    "url": "https://rss.nytimes.com/services/xml/rss/nyt/MiddleEast.xml",
+    "status": 200,
+    "items": 21,
+    "latest_age_days": 0,
+    "error": null
+   }
+  ],
+  "page_status": 403,
+  "page_chars": 0,
+  "page_error": "HTTP 403",
+  "state": "يعمل آليًا · حديث (0 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 5,
+  "name": "IMO — سجل الحوادث المؤكدة",
+  "url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+  "type": "رسمي دولي",
+  "reliability": "A",
+  "credibility": 1,
+  "basis": "حصيلة رسمية للحوادث المؤكدة والوفيات؛ أعلى مرجعية إحصائية في التقرير.",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 200,
+  "page_chars": 17600,
+  "page_error": null,
+  "state": "صفحة تُقرأ آليًا",
+  "path": "صفحة",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 12,
+  "name": "OFAC — الإجراءات الأخيرة",
+  "url": "https://ofac.treasury.gov/recent-actions",
+  "type": "رسمي حكومي",
+  "reliability": "A",
+  "credibility": 1,
+  "basis": "إجراءات عقوبات رسمية منشورة بحق كيانات وأفراد.",
+  "feed_registered": 1,
+  "feeds": [
+   {
+    "url": "https://ofac.treasury.gov/rss.xml",
+    "status": 200,
+    "items": 10,
+    "latest_age_days": 616,
+    "error": null
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 4168,
+  "page_error": null,
+  "state": "تغذية متقادمة (616 يومًا)",
+  "path": "تغذية",
+  "action": "تغيير مسار التغذية أو تقييد المصدر بالمتصفح"
+ },
+ {
+  "num": 24,
+  "name": "وكالة الأنباء القطرية (قنا)",
+  "url": "https://qna.org.qa/",
+  "type": "وكالة رسمية",
+  "reliability": "A",
+  "credibility": 1,
+  "basis": "وكالة أنباء رسمية؛ بيانات الدولة هي مرجعها.",
+  "feed_registered": 3,
+  "feeds": [
+   {
+    "url": "https://qna.org.qa/en/RSS-Feeds",
+    "status": 200,
+    "items": 0,
+    "latest_age_days": null,
+    "error": null
+   },
+   {
+    "url": "https://qna.org.qa/en/Pages/RSS-Feeds/Analysis-and-Reports",
+    "status": 200,
+    "items": 42,
+    "latest_age_days": 2,
+    "error": null
+   },
+   {
+    "url": "https://qna.org.qa/en/Pages/RSS-Feeds/Qatar",
+    "status": 200,
+    "items": 50,
+    "latest_age_days": -1,
+    "error": null
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 77660,
+  "page_error": null,
+  "state": "يعمل آليًا · حديث (-1 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 25,
+  "name": "وكالة أنباء الإمارات (وام)",
+  "url": "https://www.wam.ae/ar",
+  "type": "وكالة رسمية",
+  "reliability": "A",
+  "credibility": 1,
+  "basis": "وكالة أنباء رسمية؛ بيانات الدولة هي مرجعها.",
+  "feed_registered": 2,
+  "feeds": [
+   {
+    "url": "https://www.wam.ae/ar/rss",
+    "status": 200,
+    "items": 0,
+    "latest_age_days": null,
+    "error": null
+   },
+   {
+    "url": "https://www.wam.ae/en/rss",
+    "status": 200,
+    "items": 0,
+    "latest_age_days": null,
+    "error": null
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 20,
+  "page_error": null,
+  "state": "تغذية فارغة · صفحة هيكلية",
+  "path": "متصفح",
+  "action": "يُراجع مسار الوصول أو يُرفع للمتصفح"
+ },
+ {
+  "num": 26,
+  "name": "وكالة الأنباء السعودية (واس)",
+  "url": "https://www.spa.gov.sa",
+  "type": "وكالة رسمية",
+  "reliability": "A",
+  "credibility": 1,
+  "basis": "وكالة أنباء رسمية؛ بيانات الدولة هي مرجعها.",
+  "feed_registered": 2,
+  "feeds": [
+   {
+    "url": "https://www.spa.gov.sa/rss.xml",
+    "status": 200,
+    "items": 0,
+    "latest_age_days": null,
+    "error": null
+   },
+   {
+    "url": "https://www.spa.gov.sa/feed",
+    "status": 200,
+    "items": 0,
+    "latest_age_days": null,
+    "error": null
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 22,
+  "page_error": null,
+  "state": "تغذية فارغة · صفحة هيكلية",
+  "path": "متصفح",
+  "action": "يُراجع مسار الوصول أو يُرفع للمتصفح"
+ },
+ {
+  "num": 28,
+  "name": "وكالة الأنباء العُمانية",
+  "url": "https://omannews.gov.om",
+  "type": "وكالة رسمية",
+  "reliability": "A",
+  "credibility": 1,
+  "basis": "وكالة أنباء رسمية؛ مرجعية عُمان في مضيق هرمز وخليج عُمان.",
+  "feed_registered": 2,
+  "feeds": [
+   {
+    "url": "https://omannews.gov.om/rss.ona",
+    "status": 200,
+    "items": 100,
+    "latest_age_days": 0,
+    "error": null
+   },
+   {
+    "url": "https://omannews.gov.om/rssinfo/",
+    "status": 200,
+    "items": 0,
+    "latest_age_days": null,
+    "error": null
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 8058,
+  "page_error": null,
+  "state": "يعمل آليًا · حديث (0 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 32,
+  "name": "IMB/ICC — القرصنة",
+  "url": "https://iccwbo.org/global-insights/trade/maritime-piracy-and-armed-robbery",
+  "type": "رسمي دولي",
+  "reliability": "A",
+  "credibility": 1,
+  "basis": "تقارير القرصنة والسطو المسلح الرسمية الصادرة عن غرفة التجارة الدولية.",
+  "feed_registered": 1,
+  "feeds": [
+   {
+    "url": "https://icc-ccs.org/feed/",
+    "status": 200,
+    "items": 10,
+    "latest_age_days": 7,
+    "error": null
+   }
+  ],
+  "page_status": 200,
+  "page_chars": 14187,
+  "page_error": null,
+  "state": "يعمل آليًا · حديث (7 يومًا)",
+  "path": "تغذية",
+  "action": "لا إجراء"
+ },
+ {
+  "num": 39,
+  "name": "IHO — المنظمة الهيدروغرافية الدولية",
+  "url": "https://iho.int/",
+  "type": "رسمي دولي",
+  "reliability": "A",
+  "credibility": 1,
+  "basis": "مرجع رسمي دولي لتحذيرات NAVAREA والبيانات الهيدروغرافية.",
+  "feed_registered": 0,
+  "feeds": [],
+  "page_status": 200,
+  "page_chars": 238,
+  "page_error": null,
+  "state": "صفحة هيكلية (تحتاج متصفح)",
+  "path": "متصفح",
+  "action": "يُرفع للمتصفح"
+ }
+]

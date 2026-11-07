@@ -1,0 +1,42 @@
+===== فحص ما قبل التشغيل — 2026-10-19 =====
+  ✔ كتل العرض المدعومة: 9
+  ✔ ملف الواجهة صالح (JSON)
+  ✔ كل أسماء الكتل مدعومة (8)
+  ✔ كل مفاتيح الكتل تطابق عنوانًا (7)
+  ✔ عدد أقسام التقرير 15
+  ✔ حقول ملف الواجهة مكتملة
+  ✔ watchlist/ofac-targets.txt موجود
+  ✔ watchlist/original-sources.txt موجود
+  ✔ tools/check_feeds.py موجود
+  ✔ tools/ofac_screen.py موجود
+  ✔ tools/archive_originals.py موجود
+  ✔ tools/daily_pipeline.sh موجود
+  ✔ tools/build_source_reliability.py موجود
+  ✔ tools/ensure_devserver.sh موجود
+  ✔ validators/check_language.py موجود
+  ✔ validators/validate_report.py موجود
+  ✔ المولّد: build_report.py
+  ✔ المولّد: blocks.py
+  ✔ المولّد: map_gulf.py
+  ✔ المولّد: verify.py
+  ✔ المولّد: build_site.py
+  ✔ المولّد: sync_from_brain.py
+  ✔ سجل موثوقية المصادر الأربعين موجود
+  ✔ sources/site.json موجود
+  ✔ base_url مضبوط: https://seawatch-xp4qirmr.manus.space
+  ✔ خادم المعاينة يعمل (3000)
+  ✔ مساعد اعتماد الدفع سليم
+  ✔ الدفتر الجامع موجود
+  ✔ خريطة رموز الأحداث موجودة
+  ✔ الدفتر الجامع يغطي أحدث واقعة مسجّلة (2026-10-19)
+  ✔ كل رموز التقرير مُحلّة (9)
+  ✔ لا خوادم معاينة قديمة معلّقة (8080/8090)
+  ✔ خادم المعاينة يعمل على المنفذ المعتمد (3000)
+  ✔ عدد عمليات المتصفح معقول (10)
+  ✔ تنبيه تشغيلي: مهام الخدمات (services) لا تنتهي بحكم تصميمها، وليست مهام عالقة
+  ✔ النسخة الاحتياطية على GitHub تضم تقرير اليوم بحجم مطابق
+  ✔ رقم النسخة متسلسل وصحيح (قبل الكتابة) — ! إصدار مسجّل لتاريخ 2026-10-19 بالفعل — تحقق من منع التكرار
+  ! أقسام بلا كتلة عرض (تحقّق أنها مقصودة): ['الخلاصة', 'التوزيع الجغرافي للوقائع', 'مستوى التهديد', 'التوجيهات التشغيلية', 'التحذيرات والنشرات الرسمية', 'سجل IMO والحوادث المؤكدة', 'المراقبة المستمرة', 'الخلفية القائمة']
+  ✘ الخط اليومي لم ينجح: {'status': 'failed', 'checked': 38, 'ok': 30, 'failed': 8, 'fail_ratio': 0.211, 'failed_feeds': [{'num': 14, 'name': 'قناة العربية', 'error': 'HTTP Error 403: Forbidden'}, {'num': 14, 'name': 'قناة العربية', 'error': 'HTTP Error 403: Forbidden'}, {'num': 14, 'name': 'قناة العربية', 'error': 'HTTP Error 403: Forbidden'}, {'num': 17, 'name': 'حساب @bna_en على X', 'error': 'HTTP Error 403: Forbidden'}, {'num': 20, 'name': 'جريدة الأيام', 'error': 'HTTP Error 403: Forbidden'}, {'num': 28, 'name': 'وكالة الأنباء العُمانية', 'error': '<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unabl'}, {'num': 28, 'name': 'وكالة الأنباء العُمانية', 'error': '<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unabl'}, {'num': 33, 'name': 'MARAD/MSCI', 'error': 'HTTP Error 403: Forbidden'}]} · {'status': 'degraded', 'note': 'فُحص 4 مستهدفًا — الحالة: degraded', 'targets': 4, 'matches': [], 'reviews': ['PETRO DOLPHIN'], 'list': 'https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exp', 'results_file': 'archive/ofac-screen-latest.json'} · {'status': 'degraded', 'note': 'حُفظت الأصول في archive/originals/2026-10-19/ — الحالة: degraded', 'manifest': 'archive/originals/2026-10-19/manifest.json', 'healthy': 1, 'empty_shell': 1, 'failed': 1, 'status_file': 'archive/originals/2026-10-19/status.json'}
+----- النتيجة: نجح 37 · تحذير 1 · فشل 1 -----
+الحكم: ممنوع التسليم — أصلح الفشل أولًا

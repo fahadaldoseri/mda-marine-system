@@ -1,0 +1,8 @@
+command=python3 -c first && python3 -c fail23 && touch marker; rc=$?; exit "$rc"
+marker=/tmp/manifest-negative-chain-1421459.marker
+--- chain output ---
+first-command-ran
+second-command-ran
+chain_rc=23
+observed_chain_rc=23
+negative_test=PASS_second_failed_and_third_marker_absent

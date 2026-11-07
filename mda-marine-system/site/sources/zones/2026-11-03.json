@@ -1,0 +1,377 @@
+{
+  "date": "2026-11-03",
+  "window": "خلال 24 ساعة السابقة",
+  "scale_version": 1,
+  "registry_version": 1,
+  "scale_levels": [
+    {
+      "ar": "حرج",
+      "rank": 5,
+      "token": "critical",
+      "color": "#FFA3A3",
+      "marker": "■ ■ ■ ■ ■"
+    },
+    {
+      "ar": "مرتفع جدًا",
+      "rank": 4,
+      "token": "severe",
+      "color": "#FFA96B",
+      "marker": "▲ ▲ ▲ ▲"
+    },
+    {
+      "ar": "مرتفع",
+      "rank": 3,
+      "token": "high",
+      "color": "#FFC24D",
+      "marker": "▲ ▲ ▲"
+    },
+    {
+      "ar": "متوسط",
+      "rank": 2,
+      "token": "med",
+      "color": "#d29119",
+      "marker": "▲ ▲"
+    },
+    {
+      "ar": "منخفض",
+      "rank": 1,
+      "token": "low",
+      "color": "#28b45a",
+      "marker": "▲"
+    }
+  ],
+  "overall": {
+    "level": "مرتفع جدًا",
+    "rank": 4,
+    "top_zone": "مضيق هرمز وخليج عُمان والخليج العربي",
+    "top_zone_id": "Z1",
+    "basis": "أعلى نطاق: مضيق هرمز وخليج عُمان والخليج العربي — وقائع مؤهّلة: نُشر النص الكامل للتحذير 192-26: استهداف ناقلة بمقذوفين في الخليج العربي على بعد 72 ميلًا بحريًا شرق رأس الخفجي · ظهر بلاغ هجوم بتاريخ 02/11/2026 في قائمة التحذيرات بنص مختصر لا يحدد السفينة ولا الضرر · نقل إعلامي عن انفجار ناقلتَي نفط بعد الاصطدام بمقذوفات بحرية في مضيق هرمز"
+  },
+  "zones": [
+    {
+      "id": "Z1",
+      "name": "مضيق هرمز وخليج عُمان والخليج العربي",
+      "level": "مرتفع جدًا",
+      "rank": 4,
+      "confirmed": 2,
+      "probable": 0,
+      "excluded": 6,
+      "events": 9,
+      "qualifying_codes": [
+        "MN-2026-11-03-02",
+        "MN-2026-11-03-03",
+        "MN-2026-11-03-05"
+      ],
+      "categories": [
+        "استهداف سفينة",
+        "هجوم على سفينة",
+        "انفجار قرب سفينة"
+      ],
+      "basis": "وقائع مؤهّلة: نُشر النص الكامل للتحذير 192-26: استهداف ناقلة بمقذوفين في الخليج العربي على بعد 72 ميلًا بحريًا شرق رأس الخفجي · ظهر بلاغ هجوم بتاريخ 02/11/2026 في قائمة التحذيرات بنص مختصر لا يحدد السفينة ولا الضرر · نقل إعلامي عن انفجار ناقلتَي نفط بعد الاصطدام بمقذوفات بحرية في مضيق هرمز",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-03"
+    },
+    {
+      "id": "Z2",
+      "name": "باب المندب والبحر الأحمر",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-03"
+    },
+    {
+      "id": "Z3",
+      "name": "بحر العرب",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-03"
+    },
+    {
+      "id": "Z4",
+      "name": "القرن الأفريقي",
+      "level": "متوسط",
+      "rank": 2,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 1,
+      "events": 2,
+      "qualifying_codes": [
+        "MN-2026-11-03-09"
+      ],
+      "categories": [
+        "اختطاف"
+      ],
+      "basis": "وقائع مؤهّلة: اختطاف سفينة صيد إيرانية مع 23 فردًا على متنها قرب السواحل الشمالية الشرقية للصومال",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-03"
+    },
+    {
+      "id": "Z5",
+      "name": "المحيط الهندي",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 1,
+      "events": 1,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-03"
+    }
+  ],
+  "counter": {
+    "total": 13,
+    "qualifying": 4,
+    "confirmed": 2,
+    "probable": 0,
+    "unconfirmed_qualifying": 2,
+    "unconfirmed_total": 7,
+    "excluded": 8,
+    "nonspatial": 1
+  },
+  "generated_from": "cumulative-2026/daily/2026-11-03.json",
+  "events": [
+    {
+      "code": "MN-2026-11-03-01",
+      "title": "أصدرت UKMTO التحذير 193-26 عبر حسابها الرسمي في 02/11/2026 عند 1855Z",
+      "area": "لما، عُمان - مضيق هرمز",
+      "class": "بلاغ رسمي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": false,
+      "confirmation": "confirmed",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-03-01",
+      "source_excerpt": "UKMTO WARNING 193-26 Click here to view the full warning⤵️ https://t.co/YqEltTCKjB #MaritimeSecurity #MarSec https://t.co/L1SuHl5JUo",
+      "category": ""
+    },
+    {
+      "code": "MN-2026-11-03-02",
+      "title": "نُشر النص الكامل للتحذير 192-26: استهداف ناقلة بمقذوفين في الخليج العربي على بعد 72 ميلًا بحريًا شرق رأس الخفجي",
+      "area": "الخليج العربي",
+      "class": "بلاغ رسمي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «الخليج العربي»",
+      "qualifying": true,
+      "confirmation": "confirmed",
+      "qualify_reason": "نوع مؤهّل: «استهداف» وهدف بحري/ملاحي: «ناقلة»",
+      "incident_group": "MN-2026-11-03-02",
+      "source_excerpt": "02/11/2026 Attack:UKMTO WARNING 192-2026. UKMTO has received a report of an incident 72NM east of...",
+      "category": "استهداف سفينة"
+    },
+    {
+      "code": "MN-2026-11-03-03",
+      "title": "ظهر بلاغ هجوم بتاريخ 02/11/2026 في قائمة التحذيرات بنص مختصر لا يحدد السفينة ولا الضرر",
+      "area": "الخليج العربي",
+      "class": "بلاغ رسمي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «الخليج العربي»",
+      "qualifying": true,
+      "confirmation": "confirmed",
+      "qualify_reason": "نوع مؤهّل: «هجوم» وهدف بحري/ملاحي: «سفينة»",
+      "incident_group": "MN-2026-11-03-03",
+      "source_excerpt": "02/11/2026 Attack:UKMTO WARNING 192-26. UKMTO has received a report of an incident 9NM northeast...",
+      "category": "هجوم على سفينة"
+    },
+    {
+      "code": "MN-2026-11-03-04",
+      "title": "بقي سجل IMO عند 125 حادثة مؤكدة و24 وفاة مؤكدة لبحّارة حتى 02/11/2026 بلا إضافة جديدة",
+      "area": "المنطقة كاملة",
+      "class": "سجل دولي",
+      "zone": null,
+      "nonspatial": true,
+      "zone_reason": "بلا موقع بحري",
+      "qualifying": false,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-03-04",
+      "source_excerpt": "Number of confirmed incidents as at 2 November 2026: 125",
+      "category": ""
+    },
+    {
+      "code": "MN-2026-11-03-05",
+      "title": "نقل إعلامي عن انفجار ناقلتَي نفط بعد الاصطدام بمقذوفات بحرية في مضيق هرمز",
+      "area": "مضيق هرمز",
+      "class": "رواية",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": true,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "نوع مؤهّل: «انفجار» وهدف بحري/ملاحي: «مضيق»",
+      "incident_group": "MN-2026-11-03-05",
+      "source_excerpt": "Strait of Hormuz unstable as tankers reportedly hit mines",
+      "category": "انفجار قرب سفينة"
+    },
+    {
+      "code": "MN-2026-11-03-06",
+      "title": "نقل عن البحرية الإيرانية أن ناقلة نفط اشتعلت بعد الاصطدام بمقذوف بحري شرق مضيق هرمز",
+      "area": "مضيق هرمز",
+      "class": "رواية",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": false,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-03-06",
+      "source_excerpt": "Iran claims tanker ‘explosions’ as two more attacks feared in Middle East Gulf",
+      "category": ""
+    },
+    {
+      "code": "MN-2026-11-03-07",
+      "title": "إسقاط مسيّرات أميركية وأسر مسيّرات استطلاع فوق جزيرة قشم؛ البند يخص عملًا جوًا",
+      "area": "مضيق هرمز",
+      "class": "رواية",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": false,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-03-07",
+      "source_excerpt": "Iran captures two US MQM-170 drones over Qeshm Island",
+      "category": ""
+    },
+    {
+      "code": "MN-2026-11-03-08",
+      "title": "نقل عن مسؤول أميركي وقوع ضربات دفاعية في نطاق مضيق هرمز بلا بيان رسمي منشور",
+      "area": "مضيق هرمز",
+      "class": "رواية",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": false,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-03-08",
+      "source_excerpt": "U.S. Conducts Defensive Strikes on Iranian Targets in the Strait of Hormuz",
+      "category": ""
+    },
+    {
+      "code": "MN-2026-11-03-09",
+      "title": "اختطاف سفينة صيد إيرانية مع 23 فردًا على متنها قرب السواحل الشمالية الشرقية للصومال",
+      "area": "القرن الأفريقي",
+      "class": "رواية",
+      "zone": "Z4",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «القرن الأفريقي»",
+      "qualifying": true,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "نوع مؤهّل: «اختطاف» وهدف بحري/ملاحي: «سفينة»",
+      "incident_group": "MN-2026-11-03-09",
+      "source_excerpt": "Somali pirates hijack Iranian vessel with 23 crew",
+      "category": "اختطاف"
+    },
+    {
+      "code": "MN-2026-11-03-10",
+      "title": "إعلان إيراني بإمكان إعادة فتح مضيق هرمز خلال يومين مقابل شروط، بلا رد أميركي معلن",
+      "area": "مضيق هرمز",
+      "class": "نقل سياسي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": false,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-03-10",
+      "source_excerpt": "Iran Says It Would Reopen Strait of Hormuz in 2 Days as Part of U.S. Deal",
+      "category": ""
+    },
+    {
+      "code": "MN-2026-11-03-11",
+      "title": "نقل عن تقدم الحوثيين إلى مسافة 80 كم من عدن؛ البند بري ولا يثبت حادثًا بحريًا",
+      "area": "خليج عدن",
+      "class": "نقل إعلامي",
+      "zone": "Z4",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «خليج عدن»",
+      "qualifying": false,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-03-11",
+      "source_excerpt": "Yemen's Houthis advance to within 80 km of Aden in furthest push since 2015, sources say",
+      "category": ""
+    },
+    {
+      "code": "MN-2026-11-03-12",
+      "title": "تحذير من سفينة أم للقرصنة في المحيط الهندي يلزم التحقق منه من جهة ملاحية",
+      "area": "المحيط الهندي",
+      "class": "نقل مهني",
+      "zone": "Z5",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «المحيط الهندي»",
+      "qualifying": false,
+      "confirmation": "probable",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-03-12",
+      "source_excerpt": "Piracy mothership warning issued in Indian Ocean",
+      "category": ""
+    },
+    {
+      "code": "MN-2026-11-03-13",
+      "title": "نقل عن إيقاف ناقلة نفط خام كبيرة تسربًا من هيكلها مقابل السواحل الإماراتية بلا إصابات معلنة",
+      "area": "الإمارات - الخليج العربي",
+      "class": "نقل إعلامي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «الخليج العربي»",
+      "qualifying": false,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-03-13",
+      "source_excerpt": "Oil leak from VLCC damaged in Iranian attack halted by UAE",
+      "category": ""
+    }
+  ]
+}

@@ -1,0 +1,328 @@
+#!/usr/bin/env bash
+# حارس صيغة التاريخ — يمنع إنشاء مخرجات باسم «--date» عند استدعاء خاطئ (فشل مغلق)
+DATE="${DATE:-$(date -u +%F)}"
+case "$DATE" in
+  [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]) ;;
+  *) echo "⛔ صيغة التاريخ غير صحيحة: «$DATE» — المطلوب YYYY-MM-DD" >&2; exit 2 ;;
+esac
+# بوابة التسليم النهائية — فشل مغلق
+# بند 5 و6 من التدقيق المستقل (19 أكتوبر 2026): بوابات الفحص كانت خارج خط التشغيل،
+# وكانت معلّقة بوجود ملف PDF مبنٍ من جولة سابقة. هذه البوابة تجمعها في مسار واحد
+# بترتيب صحيح: يبني ← يُصدّر PDF ← يفحص، وأي مخالفة مانعة تُسقط التسليم.
+#
+# سلّم رموز الخروج الموحّد: 0 = نجاح · 1 = نجاح مع تحذير · 2 = مانع (يوقف التسليم)
+# الاستخدام: bash tools/final_gate.sh <YYYY-MM-DD> [--no-build]
+set -uo pipefail
+B="${BRAIN_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
+SITE="${SITE_DIR:-$(dirname "$B")/seawatch}"
+D="${1:-$(date -u +%F)}"
+BUILD=1
+for a in "$@"; do [ "$a" = "--no-build" ] && BUILD=0; done
+
+LOGDIR="$B/logs/gate-$D"; mkdir -p "$LOGDIR"
+REP="$LOGDIR/report.txt"; : > "$REP"
+WORST=0
+N=0
+
+print_pipeline_disabled() {
+  python3 - "$B/runbook/runbook.json" <<'PY'
+import json, sys
+from pathlib import Path
+manifest = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+policy = manifest.get("print")
+if isinstance(policy, dict) and policy.get("enabled") is False:
+    raise SystemExit(0)
+for step in manifest.get("steps", []):
+    if step.get("id") in {"B020", "B030"} and step.get("disabled") is True:
+        raise SystemExit(0)
+raise SystemExit(1)
+PY
+}
+
+print_disable_reason() {
+  local reason stamp
+  reason="$(python3 - "$B/runbook/runbook.json" <<'PY'
+import json, sys
+from pathlib import Path
+manifest = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+print((manifest.get("print") or {}).get("reason") or "تعطيل الطباعة مثبت في المانيفست")
+PY
+)"
+  stamp="$(find "$B/logs" -maxdepth 1 -type d -name 'owner-print-disable-*' -printf '%f\n' 2>/dev/null | sort | tail -1 | sed 's/^owner-print-disable-//')"
+  printf 'معطّلة بأمر المالك (%s): %s' "${stamp:-تاريخ سجل المالك غير متاح}" "$reason"
+}
+
+step_disabled() {
+  local name="$1"; shift
+  local reason="$*"
+  N=$((N+1))
+  local log="$LOGDIR/$(printf '%02d' "$N")-$(echo "$name" | tr ' /' '__').log"
+  printf 'معطّلة بأمر المالك (مؤرخ) — مستثناة من الحكم دون تنفيذ الأمر: %s\n' "$reason" > "$log"
+  printf '%-34s %-8s (رمز 0) %s\n' "$name" "disabled" "$(basename "$log")" >> "$REP"
+  printf '  %-34s disabled (رمز 0) — %s\n' "$name" "$reason"
+}
+
+PRINT_DISABLED=0
+PRINT_REASON=""
+if print_pipeline_disabled; then
+  PRINT_DISABLED=1
+  PRINT_REASON="$(print_disable_reason)"
+  echo "  • سياسة الطباعة: $PRINT_REASON"
+fi
+
+step_strict() {     # خطوة اختبار: أي فشل يمنع (مراجعة 23 أكتوبر 2026، أولًا)
+  local name="$1"; shift
+  # ك-148: كان STRICT=1 بادئةً للاستدعاء فتتسرّب إلى بيئة العملية الابنة، فترى اختبارات
+  # داخلية لوضع الصرامة وتفشل. الآن متغيّر داخلي غير مُصدَّر.
+  STRICT_LOCAL=1
+  step "$name" 1 "$@"
+  STRICT_LOCAL=0
+}
+
+step() {            # step "<اسم الفحص>" <رمز المانع عند الفشل> <الأمر...>
+  local name="$1"; shift
+  local blockrc="$1"; shift
+  N=$((N+1))
+  local log="$LOGDIR/$(printf '%02d' "$N")-$(echo "$name" | tr ' /' '__').log"
+  "$@" >"$log" 2>&1
+  local rc=$?
+  local status="ok"
+  # ك-131 (البند ح-1 من التدقيق المستقل): انهيار المدقق ليس تحذيرًا.
+  # ك-133 (قرار صاحب القرار 2026-10-23): رمز الانهيار المعتمد 70 يمنع ولو بلا أي نص مخرج.
+  if [ "$rc" -eq 70 ]; then
+    status="crash"; WORST=2
+  # وأي أثر انهيار مع رمز خارج العقد (0 نجاح · 1 تحذير · رمز المانع) = «انهيار» أيضًا.
+  elif [ "$rc" -ne 0 ] && [ "$rc" -ne "$blockrc" ] && \
+     grep -qE "Traceback \(most recent call last\)|^[A-Za-z_]*Error:" "$log" 2>/dev/null; then
+    status="crash"; WORST=2
+  elif [ "${STRICT_LOCAL:-0}" -eq 1 ] && [ "$rc" -ne 0 ]; then
+    # مراجعة 23 أكتوبر 2026 (أولًا): أي خطوة اختبار تمنع عند أي رمز غير صفري
+    status="block"; WORST=2
+  elif [ "$rc" -ge "$blockrc" ]; then status="block"; WORST=2
+  elif [ "$rc" -gt 0 ]; then status="warn"; [ "$WORST" -lt 1 ] && WORST=1; fi
+  printf '%-34s %-6s (رمز %s) %s\n' "$name" "$status" "$rc" "$(basename "$log")" >> "$REP"
+  printf '  %-34s %-6s (رمز %s)\n' "$name" "$status" "$rc"
+  return 0
+}
+
+echo "===== بوابة التسليم النهائية — $D — $(date -u +%FT%TZ) ====="
+echo "السلّم: 0 نجاح · 1 تحذير · 2 مانع" | tee -a "$REP"
+
+# توليد المعجم المشتق قبل الاختبارات (ك-497): المتن مصدر من مصادر المعجم، فأي إصلاح لغوي
+# يُبطل البصمة المخزّنة؛ فالتوليد يجب أن يسبق اختبار المطابقة لا أن يلحقه.
+step "توليد المعجم المشتق (إلزامي قبل الاختبارات)" 2 python3 "$B/tools/build_lexicon_corpus.py" --apply
+
+# اختبارات البوابات نفسها: تُثبت أن الحارس يعمل (انهيار = منع · الفحوص المانعة تُنفَّذ فعلًا).
+# طلب التدقيق المستقل 2026-10-23 (البندان ح-1 وح-2): لا إصلاح بلا اختبار دائم.
+step_strict "اختبارات البوابات (tests)" bash "$B/tests/run_checks.sh"
+
+# بوابة الأسرار (ك-162 — طلب فهد 2026-10-24): أي سرّ في الشجرة = منع التسليم.
+# سببها: رمز بوت تلغرام وُجد في brain/secrets/secrets.env في تاريخ المستودع.
+step_strict "بوابة الأسرار (لا سرّ في الشجرة)" python3 "$B/validators/check_secrets.py" --root "$B"
+step_strict "بوابة الأسرار (لا سرّ في الشجرة)" python3 "$B/validators/check_server_code_tracking.py" --root "$B"
+
+if [ ! -f "$B/reports/$D-sectioned.md" ] || [ ! -f "$B/web/meta/$D.json" ]; then
+  echo "  ✘ ناقص: reports/$D-sectioned.md أو web/meta/$D.json — لا تسليم بلا نص وواجهة." | tee -a "$REP"
+  WORST=2
+fi
+
+# تنظيف المحتوى الداخلي آليًا قبل البناء — يضمن ألا يتوقف النشر بسبب صنف معروف.
+# التنظيف لا يمنع التسليم (رمز 3)؛ والبوابة أدناه هي التي تمنع الجديد فقط.
+step "شكل معجم النسخة الإنجليزية" 2 python3 "$B/validators/check_glossary_shape.py"
+step "نظافة أسطح العرض (إصدار · إضافات)" 1 python3 "$B/validators/check_surface_hygiene.py"
+step "تنظيف المحتوى الداخلي" 3 python3 "$B/tools/scrub_internal.py" --date "$D" --apply
+
+# دمج بنك التعريفات المعياري: يضمن أن كل رمز مستخدم له تعريف يراه القارئ،
+# ويسبق البناء حتى يصل التعريف إلى الصفحة وPDF وبوابة الفهم معًا.
+step "دمج بنك التعريفات" 2 python3 "$B/tools/merge_glossary.py" --date "$D"
+# ── كل خطوة تعدّل نص التقرير تسبق البناء (البند أ — مراجعة 23 أكتوبر) ────────
+# ── أرقام المصادر الثلاثة (ح-3): تُولَّد من بيانات التشغيل وتُكتب في متن التقرير والواجهة ──
+step "أرقام المصادر (معتمدة/مفحوصة/ناجحة)" 2 python3 "$B/tools/source_counts.py" --date "$D" --write
+step "تطابق أرقام المصادر في كل المواضع" 2 python3 "$B/tools/source_counts.py" --date "$D" --check
+# إصلاح الصياغة الآلي الواحد (البند 8): يعدّل النص، فوجب أن يسبق البناء (البند أ).
+step "إصلاح الصياغة الآلي (خطوة واحدة)" 2 python3 "$B/tools/repair_prose.py" --date "$D"
+# ── محور اللغة (أمر 23 أكتوبر 2026): تحرير لغوي آلي لكل قسم بجدول قبل/بعد، وحارسه
+#    `preserve_check.py` يرفض أي تعديل يمسّ رقمًا أو رمزًا أو اسمًا لاتينيًا أو بنية عنوان/جدول.
+step "تحرير لغوي آلي (قبل/بعد لكل قسم)" 2 python3 "$B/tools/edit_pass.py" --report "$B/reports/$D-sectioned.md" --out-dir "$B/audit" $( [ "${EDIT_PASS_APPLY:-1}" = "1" ] && echo --apply )
+# بوابات اللغة المتدرجة: إملاء ونحو (ط13أ) + نسبة الجمل المبدوءة بـ«و» — تنبيهي حتى 2026-10-30 ومانع بعده.
+step "بوابات اللغة المتدرجة (إملاء ونحو وأسلوب)" 2 python3 "$B/tools/language_gates.py" --date "$D"
+# أصل نص كل واقعة من الأصول المحفوظة — يمكّن الفحص العكسي للترجمة بالمعنى.
+step "أصل نص كل واقعة (للفحص العكسي)" 1 python3 "$B/tools/ledger_source_excerpt.py" --date "$D"
+# عند عدم إعادة البناء نُسجّل البصمة للتحقق من مخرج سابق؛ أما البناء الفعلي
+# فيسجّلها داخل معاملة hash → build → verify واحدة تحت القفل المشترك.
+if [ "$BUILD" = "0" ]; then
+  step "بصمة النص قبل البناء" 2 python3 "$B/tools/text_hash_guard.py" --date "$D" --stage record
+fi
+if [ "$BUILD" = "1" ]; then
+  step "مزامنة النص مع الموقع" 2 python3 "$SITE/generator/sync_from_brain.py" --date "$D"
+  step "البناء الذري (بصمة ← بناء ← تحقق)" 2 bash "$B/tools/en_master_build.sh" "$D" "$SITE"
+  if [ "$PRINT_DISABLED" = "1" ]; then
+    step_disabled "تصدير PDF المعتمد" "$PRINT_REASON"
+    step_disabled "جودة الطباعة (الخريطة والتصفير على PDF)" "$PRINT_REASON"
+  else
+    step "تصدير PDF المعتمد" 2 python3 "$B/tools/export_report_assets.py" --date "$D" --only pdf
+    # جودة الطباعة (ك-104 · ك-105): تُقاس على PDF النهائي وبوسائط print نفسها التي يُبنى بها.
+    # عرض/ارتفاع كتلة الخريطة وتصفير كل كتل المتن = بند مانع يوقف النشر وتلغرام.
+    step "جودة الطباعة (الخريطة والتصفير على PDF)" 2 python3 "$B/validators/check_print_quality.py" \
+      --pdf "$SITE/dist/reports/pdf/$D.pdf" --page "$SITE/dist/reports/$D.html" --date "$D"
+  fi
+  # خط الأساس الرسمي (virgin): تنبيهي — يُعلن أي انحراف في ملفات الشكل والبوابات عن
+  # النسخة المعتمدة، فلا يتغيّر الشكل الرسمي دون قرار موثَّق وتجديد للبيان.
+  step "خط الأساس الرسمي (virgin)" 2 python3 "$B/tools/check_baseline.py"
+  # نسخة Word طبق الأصل: تُستثنى فقط مع سياسة الطباعة المعلنة، وتُعاد تسليحها تلقائيًا عند التفعيل.
+  if [ "$PRINT_DISABLED" = "1" ]; then
+    step_disabled "نسخة Word طبق الأصل" "$PRINT_REASON"
+  else
+    step "نسخة Word طبق الأصل" 2 python3 "$B/tools/build_report_docx_exact.py" --date "$D"
+  fi
+fi
+
+step "فحص ما قبل التشغيل" 2 python3 "$B/tools/preflight_check.py" "$D"
+step "مدقق التقرير (الواجهة)" 2 python3 "$B/validators/validate_report.py" "$B/web/meta/$D.json" --md "$B/reports/$D-sectioned.md"
+step "حقول علاقات الدفتر والأسطح المبنية" 2 python3 "$B/validators/check_ledger_links.py" --date "$D" --brain "$B" --site "$SITE"
+step "بوابة الأسلوب" 2 python3 "$B/validators/check_style.py" "$B/reports/$D-sectioned.md"
+step "بوابة اللغة" 2 python3 "$B/validators/check_language.py" "$B/reports/$D-sectioned.md"
+# بوابة الفهم: رموز بلا تعريف · اصطلاحات حاجبة · محتوى داخلي منشور · التباس «قُطر/قطر» · تعارض أرقام
+# المرحلة تُقرأ من appendices/comprehension-stages.json: 0 تحذيري · 1 يمنع ف3 · 2 يضيف ف4+ف5 · 3 يضيف ف1 · 4 يمنع الكل
+COMP_STAGE=$(python3 -c "import json;print(json.load(open('$B/appendices/comprehension-stages.json'))['stage'])" 2>/dev/null || echo 0)
+# ── بوابات ملزمة: الترابط والتماثل (قرار المستخدم — مانع لا تحذير) ──────────
+# القاعدة: كل مكتبة وكل مهارة مرتبطة ببوابة تنفيذ، ولا اختلاف بين النسخ.
+# مقياس blockrc: 1 = أي فشل يوقف · 2 = الفشل المانع فقط.
+step "بوابة إغلاق المكتبات" 1 python3 validators/check_findings_closed.py --date "$D"
+# أمان دفع النسخة الاحتياطية (ك-408): المدقق كان قائمًا بلا استدعاء في بوابة التسليم،
+# فأعلنت مدقّقة الترابط تحذيرًا حقيقيًا «مدقّق غير مُستدعى». القاعدة: مدقّق بلا بوابة = معطّل.
+step "أمان دفع النسخة الاحتياطية (لا دفع مباشر إلى main)" 2 python3 "$B/validators/check_backup_push_safety.py" --script "$B/tools/github_backup.sh"
+step "ترابط المكتبات والمهارات" 2 python3 validators/check_libraries_skills.py
+step "تماثل المهارات والمكتبات (مزامنة فورية)" 1 bash tools/restore_skills.sh --check
+step "سلامة المهارات" 1 python3 validators/check_skills_integrity.py
+# ── جولة تفعيل المهارات (2026-10-28): كل مدقّق في validators/ مُستدعى في بوابة التسليم ──
+# القاعدة الحاكمة: مدقّق لا تستدعيه بوابة التسليم = مدقّق معطّل (قياس بلا أثر).
+# العقود مقروءة من المدقّقات نفسها: check_closure يأخذ --brain، والباقي --date.
+step "بوابة الإغلاق (الأعطال والاستثناءات)" 2 python3 "$B/validators/check_closure.py" --brain "$B"
+step "سطح الإضافات (نقل الأقسام مرة واحدة)" 2 python3 "$B/validators/check_additions_surface.py" --date "$D" --site "$SITE"
+step "بطاقة القرار (لا إفراغ ولا رابط ميت)" 2 python3 "$B/validators/check_decision_card.py" --date "$D" --dist-root "$SITE/dist"
+step "بوابة الفهم (مرحلة $COMP_STAGE)" 2 python3 "$B/validators/check_comprehension.py" --date "$D"
+step "بوابة قراءة الموقف وتحليل المؤشرات" 2 python3 "$B/validators/check_intel.py" "$B/reports/$D-sectioned.md" "$B/web/meta/$D.json"
+# فحص العقوبات يُحدَّث لحظة البوابة، فالتقرير قد يُكتب أو يُعدَّل بعد الخط اليومي
+step "استخراج أهداف OFAC" 2 python3 "$B/tools/ofac_targets_from_report.py" --date "$D"
+step "فحص OFAC" 2 python3 "$B/tools/ofac_screen.py" "$B/watchlist/ofac-targets.txt"
+step "تغطية فحص العقوبات" 2 python3 "$B/validators/check_ofac_coverage.py" --date "$D"
+step "استعمال المكتبات (المعجم والبنك والفجوات)" 2 python3 "$B/validators/check_library_use.py" --date "$D"
+step "عدد المصادر (مصدر واحد)" 2 python3 "$B/validators/check_sources_count.py"
+step "ربط الأرقام بمصادرها (ك-455)" 2 python3 "$B/validators/check_number_bindings.py" --date "$D"
+step "تغطية الربط (مالك أو استثناء لكل ملف)" 2 python3 "$B/tools/binding_coverage.py"
+step "قابلية النقل (مسارات)" 2 python3 "$B/validators/check_portable_paths.py"
+step "الأرقام (0-9 لاتينية)" 2 python3 "$B/validators/check_numerals.py"
+# تنبيهي فعليًا: الانحراف (رمز 1) تحذير قبل الدفع؛ ولا يوقف إلا فقدان المستودع (رمز 3)
+# عطل ك-70: المطابقة كانت تُشغَّل قبل خطوة النسخ فتظهر انحرافًا في كل إصدار بلا معنى.
+# نُقلت إلى سلسلة التسليم بعد النسخ (tools/daily_pipeline.sh) لتصبح تحققًا حقيقيًا.
+# قاعدة دائمة: حصاد الألفاظ والرموز الجديدة قبل أي تسليم (موقع أو PDF)
+step "حصاد الألفاظ الجديدة" 2 python3 "$B/tools/harvest_terms.py" --date "$D"
+step "سياسة الرموز في المخرجات" 2 python3 "$B/validators/check_code_policy.py" "$SITE/dist"
+step "فصل فضاءات الرموز MN-/EST-" 2 python3 "$B/validators/check_code_spaces.py" --date "$D"
+step "قاعدة النقاط في المصدر" 2 python3 "$B/validators/check_points_rule.py" --md "$B/reports/$D-sectioned.md" --meta "$B/web/meta/$D.json"
+# فاحص النقل بين الإصدارات: سنة أو اسم سفينة خارج الفترة · نقل حرفي · حقل إسناد وزمن
+# الأساس: حادثة BW RHINE (وصف 2019 نُقل كواقعة 2026) — الاعتماد على السجل التراكمي لا على الحدس
+step "فاحص النقل بين الإصدارات" 2 python3 "$B/validators/check_carryover.py" --date "$D"
+# ── تدقيق المكتبات اللغوية — أسبوعيًا (تنبيهي، لا يوقف النشر) ──────────────
+AUDIT_STAMP="$B/logs/.audit-last"
+# ── اكتمال التشغيل (ح-4): تشغيل منقوص بأعطال معروفة يُفصح عنه ويمضي؛ وغيره يمنع ──
+step "اكتمال التشغيل (الأعطال المعروفة)" 2 python3 "$B/validators/check_run_completeness.py" --date "$D"
+# ── محور اللغة (طلب صاحب القرار 2026-10-23): عيوب الكتابة والتسرب الداخلي ──────
+# قياس العيوب على النص النهائي: ترقيم متجاور · مسافة قبل الترقيم · حروف مكررة لا تصح ·
+# ألفاظ مصطنعة ممنوعة · قالب متكرر أكثر من مرتين. والكلمات خارج المعجم تنبيهية.
+step "عيوب الكتابة (الصياغة والترقيم)" 2 python3 "$B/validators/check_prose_defects.py" --md "$B/reports/$D-sectioned.md"
+step "تسرّب المحتوى الداخلي إلى المتن" 2 python3 "$B/validators/check_internal_leak.py" --md "$B/reports/$D-sectioned.md"
+# المفردات المبسطة: تنبيهي حتى الموافقة الصريحة على القائمة (قرار صاحب القرار).
+step "المفردات المبسطة (تنبيهي حتى الموافقة)" 2 python3 "$B/validators/check_vocabulary.py" --md "$B/reports/$D-sectioned.md"
+# السجل الحاكم للمفردات: مصدر واحد للإنفاذ (appendices/simplified-vocabulary.json)
+# ومُولَّده (appendices/forbidden-coinages.json) لا يُحرَّر يدويًا. فشل هذه الخطوة = تعارض السجلين.
+step "السجل الحاكم للمفردات ومُولَّده" 2 python3 "$B/tools/build_vocab_gate.py" --check
+# ك-479: كان الحارس يُستدعى باسم دالة غير معرّفة («python3_soft») فيُهمَل صامتًا — أُعيد ربطه مانعًا.
+step "حارس سلسلة الاستبدال في المفردات (ك-479)" 2 python3 "$B/validators/check_vocab_chain.py"
+step "مفردات حقل الموقع في الدفتر والواجهة (ك-492)" 2 python3 "$B/validators/check_area_vocabulary.py"
+# تغطية بوابة الأسلوب: كل سطح يقرأه القارئ (المتن · القاموس · تلغرام · صفحة التقرير ·
+# صفحة المصادر · الرئيسية) يُقاس، وPDF يُثبت بالإسناد لأن الاستخراج العربي يعكس الحروف.
+step "تغطية بوابة الأسلوب لكل سطح يقرأه القارئ" 2 python3 "$B/tools/audit_style_coverage.py" --date "$D"
+if [ ! -f "$AUDIT_STAMP" ] || [ $(( ( $(date -u +%s) - $(date -u -r "$AUDIT_STAMP" +%s 2>/dev/null || echo 0) ) / 86400 )) -ge 6 ]; then
+  step "تدقيق المكتبات اللغوية (أسبوعي)" 3 python3 "$B/tools/audit_corpus.py" --date "$D"
+  date -u +%FT%TZ > "$AUDIT_STAMP" 2>/dev/null || true
+else
+  echo "  • تدقيق المكتبات: أُجري خلال آخر 6 أيام — تخطٍّ" | tee -a "$REP"
+fi
+
+step "بوابات المخرج العشر" 2 python3 "$B/tools/qa_gates.py" --date "$D"
+
+# العلامة تُكتب قبل الخلاصة كي تدخل خطواتها في gate.json وفي تنبيه الإيقاف (البند ح)
+step "كتابة العلامة بعد البوابة" 2 python3 "$B/tools/write_mark.py" --date "$D" --stage final
+step "مخطط العلامة الثابت" 2 python3 "$B/validators/check_mark_schema.py" --date "$D"
+# ── بصمة النص بعد البناء: تثبت أن المنشور بُني من النص النهائي (البند أ) ──────
+step_strict "اختبارات المراجعة الثانية (أ · ب · ج · د · هـ · ز)" bash "$B/tests/test_review2.sh" "$D"
+step_strict "اختبار انحدار المصلح (12→23)" bash "$B/tests/test_repair_regression.sh"
+step "تطابق النص المبني مع النص النهائي" 2 python3 "$B/tools/text_hash_guard.py" --date "$D" --stage verify
+# بوابات تغطية المصادر: يجب أن يكون الاستدعاء قبل exit؛ كان الاستدعاء القديم بعده
+# فلا يُنفَّذ، ما يسمح بسقوط مصدر من التشغيل دون منع التسليم.
+step "تغطية مسارات المصادر" 2 python3 "$B/validators/check_source_route_coverage.py" --brain "$B" --date "$D"
+step "تغطية المصادر في دفتر الوقائع" 2 python3 "$B/validators/check_source_daily_coverage.py" \
+  --brain "$B" --date "$D" --days 30 --json-out "$LOGDIR/source-daily-coverage.json"
+echo "----- الخلاصة -----" | tee -a "$REP"
+cat "$REP" | tail -14
+python3 - "$D" "$WORST" "$LOGDIR" "$B" <<'PY'
+import json, sys, datetime
+from pathlib import Path
+d, worst, logdir = sys.argv[1], int(sys.argv[2]), Path(sys.argv[3])
+B = Path(sys.argv[4])
+status = {0: 'ok', 1: 'warn', 2: 'block'}[worst]
+steps = []
+for line in (logdir / 'report.txt').read_text(encoding='utf-8').splitlines():
+    parts = line.split()
+    idx = next((i for i, t in enumerate(parts) if t in ('ok', 'warn', 'block', 'crash', 'disabled')), None)
+    if idx:  # اسم الفحص قد يحوي مسافات — الموضع يُحدَّد بأول رمز حالة
+        steps.append({'step': ' '.join(parts[:idx]), 'status': parts[idx],
+                      'exit_code': (lambda x: int(x) if x and x.isdigit() else None)(
+                          (parts[idx + 2].rstrip(')') if len(parts) > idx + 2 and parts[idx + 1] == '(رمز' else None)),
+                      'log': parts[-1]})
+result = {'date': d, 'status': status, 'exit_code': worst, 'steps': steps,
+          'log_dir': str(logdir), 'finished_utc': datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')}
+(logdir / 'gate.json').write_text(json.dumps(result, ensure_ascii=False, indent=1), encoding='utf-8')
+mark = B / f'logs/pipeline-{d}.json'
+if mark.exists():
+    try:
+        m = json.loads(mark.read_text(encoding='utf-8'))
+        m['final_gate'] = {'status': status, 'exit_code': worst, 'dir': f'logs/gate-{d}',
+                           'blocked_steps': [s['step'] for s in steps if s['status'] == 'block'],
+                           'note': 'نتيجة بوابة التسليم النهائية — مسجّلة بعد كتابة التقرير.'}
+        mark.write_text(json.dumps(m, ensure_ascii=False, indent=2), encoding='utf-8')
+        print(f"  · سُجّلت نتيجة البوابة في العلامة: logs/pipeline-{d}.json")
+    except Exception as e:
+        print(f"  · تعذر تحديث العلامة ({e}) — النتيجة محفوظة في gate.json")
+PY
+# ── تنبيه إيقاف التسليم (طلب صاحب القرار — البند 8) ───────────────────────
+if [ "$WORST" = "2" ]; then
+  mkdir -p "$B/logs/alerts"
+  ALERT="$B/logs/alerts/$D-إيقاف-التسليم.md"
+  {
+    echo "# إيقاف التسليم — $D"
+    echo
+    echo "الزمن (UTC): $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+    echo
+    echo "## الخطوات المانعة"
+    grep -E "block|crash" "$LOGDIR/report.txt" | sed "s/^/- /"
+    echo
+    echo "## ما يلزم قبل إعادة التشغيل"
+    echo "- يُصلح السبب أعلاه، ثم: bash tools/final_gate.sh $D"
+    echo "- لا نشر ولا إرسال إلى تلغرام بلا أمر صاحب القرار."
+  } > "$ALERT"
+  echo "  • تنبيه إيقاف مكتوب: logs/alerts/$D-إيقاف-التسليم.md"
+fi
+
+echo "===== نهاية البوابة: $([ "$WORST" = "0" ] && echo 'نجاح' || { [ "$WORST" = "1" ] && echo 'نجاح مع تحذير' || echo 'مانع — التسليم موقوف'; }) (رمز $WORST) ====="
+echo "السجلات: $LOGDIR"
+# ── العلامة بعد البوابة بمخطط ثابت (ع-1 · قرار 2026-10-23) ──────────────────
+# لا تُكتب العلامة قبل وجود النص ونتيجة البوابة، فلا تدّعي حالة غير حقيقية.
+# ── حلقة التعلم الذاتي (مهارة superpowers-method) — لا تمنع، وتسجّل في كل تشغيل ──
+python3 "$B/tools/skill_lessons.py" --date "$D" || true
+exit "$WORST"
+# ك-449: مدقّق ترجمة الشيفرة كان قائمًا بلا استدعاء في بوابة التسليم، فأوقف التدقيق
+# الأسبوعي بتحذير إنفاذ حقيقي («مدقّق غير مُستدعى»). القاعدة: مدقّق بلا بوابة = معطّل.
+step "ترجمة الشيفرة (لا ملف Python معطوب)" 2 python3 "$B/validators/check_python_syntax.py"

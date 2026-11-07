@@ -1,0 +1,481 @@
+{
+  "version": 1,
+  "title_ar": "دفتر قرارات المالك — الحالة والدليل",
+  "rule_ar": "لا يُكتب «منفَّذ» بلا دليل مقيس. ولا يُحذف قرار أبدًا؛ تتغيّر حالته ويثبت دليله.",
+  "status_values_ar": [
+    "منفَّذ",
+    "منفَّذ جزئيًّا",
+    "يحتاج تحققًا",
+    "يحتاج قرارًا"
+  ],
+  "decided_by": "المالك",
+  "last_measured": "2026-11-06",
+  "counts": {
+    "منفَّذ جزئيًّا": 4,
+    "منفَّذ": 19,
+    "يحتاج تحققًا": 3,
+    "يحتاج قرارًا": 0
+  },
+  "decisions": [
+    {
+      "id": "D-01",
+      "title_ar": "عنقود مرقّم على الخريطة + تفكيك شعاعي للحوادث المتقاربة",
+      "status": "منفَّذ جزئيًّا",
+      "wording_ar": "العلامة الحالية غير احترافية، ولو كان هناك 4 حوادث جنب بعضها أحدث تداخلًا ولا يمكن التركيز عليها.",
+      "evidence": [
+        {
+          "kind": "measure",
+          "ref": "seawatch/generator/map_cluster.py",
+          "note": "الوحدة موجودة (مسار خارج جذر النظام: يُقاس في موضعه)"
+        },
+        {
+          "kind": "measure",
+          "ref": "المرآة تحوي site/generator/map_cluster.py",
+          "note": "لم يُثبت استدعاؤها من build_report.py في هذه القياس"
+        }
+      ],
+      "governing_file": "audit/المواصفة-النهائية-لقسم-الخريطة.md",
+      "next_action_ar": "إدماج الوحدة في مولد الخريطة وقياس العنقدة على واقعة متعددة"
+    },
+    {
+      "id": "D-02",
+      "title_ar": "مفتاح الخريطة بثلاثة رموز فقط",
+      "status": "منفَّذ",
+      "wording_ar": "إبقاء الثلاثة فقط: الأحمر واقعة مؤكدة · الحلقة المفرّقة موقع تقريبي · الأزرق بلاغ غير مؤهل.",
+      "evidence": [
+        {
+          "kind": "measure",
+          "ref": "المخرج المبني 2026-11-05",
+          "note": "وسوم المفتاح الثلاثة ظاهرة، بلا مصطلحات مرجعية"
+        }
+      ],
+      "governing_file": "appendices/card_registry.json",
+      "next_action_ar": "لا شيء"
+    },
+    {
+      "id": "D-03",
+      "title_ar": "نقل إسناد بيانات الخريطة إلى صفحة المصادر",
+      "status": "منفَّذ",
+      "wording_ar": "نقل الإسناد إلى صفحة المصادر وحدها؛ الأمانة المصدرية تبقى دون ازدحام الخريطة.",
+      "evidence": [
+        {
+          "kind": "measure",
+          "ref": "seawatch/dist/sources.html",
+          "note": "Natural Earth و Marine Regions/VLIZ مذكوران في صفحة المصادر"
+        }
+      ],
+      "governing_file": "seawatch/generator/build_report.py",
+      "next_action_ar": "لا شيء"
+    },
+    {
+      "id": "D-04",
+      "title_ar": "تسمية «سجل الحوادث المؤكدة من IMO»",
+      "status": "منفَّذ",
+      "wording_ar": "اعتماد التسمية الجديدة «سجل الحوادث المؤكدة من IMO».",
+      "evidence": [
+        {
+          "kind": "measure",
+          "ref": "المخرج المبني + appendices/card_registry.json",
+          "note": "التسمية ظاهرة والعقد يحوي «سجل الحوادث»"
+        }
+      ],
+      "governing_file": "appendices/card_registry.json",
+      "next_action_ar": "لا شيء"
+    },
+    {
+      "id": "D-05",
+      "title_ar": "دمج بطاقة «هجمات مؤكدة على سفن — IMO» في «سجل الحوادث المؤكدة من IMO»",
+      "status": "منفَّذ جزئيًّا",
+      "wording_ar": "موافق على الدمج لئلا يُقرأ المصدر نفسه مرتين.",
+      "evidence": [
+        {
+          "kind": "measure",
+          "ref": "appendices/card_registry.json",
+          "note": "لا أثر لبطاقة «هجمات مؤكدة» منفصلة"
+        },
+        {
+          "kind": "measure",
+          "ref": "المخرج المبني 2026-11-05",
+          "note": "بقي ظهور نصي واحد لعبارة «هجمات مؤكدة» يحتاج فحصًا موضعيًّا"
+        }
+      ],
+      "governing_file": "appendices/card_registry.json",
+      "next_action_ar": "فحص موضع الظهور الواحد وإزالة البقايا إن كانت عنوانًا قديمًا"
+    },
+    {
+      "id": "D-06",
+      "title_ar": "تسمية البطاقة «أعداد الوفيات من IMO»",
+      "status": "منفَّذ",
+      "wording_ar": "اعتماد تسمية «أعداد الوفيات من IMO» كما وردت.",
+      "evidence": [
+        {
+          "kind": "measure",
+          "ref": "المخرج المبني + appendices/card_registry.json",
+          "note": "التسمية ظاهرة والعقد يحويها"
+        }
+      ],
+      "governing_file": "appendices/card_registry.json",
+      "next_action_ar": "لا شيء"
+    },
+    {
+      "id": "D-07",
+      "title_ar": "الاقتصار على اسم المصدر بلا «نقلًا عن»",
+      "status": "منفَّذ جزئيًّا",
+      "wording_ar": "يُكتفى باسم المصدر، ويشمل ذلك المشروع كاملًا لا سجل الأحداث وحده.",
+      "evidence": [
+        {
+          "kind": "measure",
+          "ref": "المخرج المبني 2026-11-05",
+          "note": "«نقلًا عن» = 0 · «نقل عن» = 1 (بقايا واحدة)"
+        }
+      ],
+      "governing_file": "sections/10-sources.md",
+      "next_action_ar": "إزالة البقايا الواحدة وتشغيل بوابة الألفاظ على المخرج"
+    },
+    {
+      "id": "D-08",
+      "title_ar": "نقل «الخلاصة» و«أهم الأخبار المتعلقة بالأمن البحري» إلى الإضافات",
+      "status": "يحتاج تحققًا",
+      "wording_ar": "نقل الخلاصة، ثم تقرر نقل «أهم الأخبار» أيضًا بعد سؤال معلَّق.",
+      "evidence": [
+        {
+          "kind": "measure",
+          "ref": "المخرج المبني 2026-11-05",
+          "note": "«أهم الأخبار» يظهر 6 مرات في التقرير — يلزم تحديد موضعه: الإصدار أم الإضافات"
+        }
+      ],
+      "governing_file": "sections/30-structure.md",
+      "next_action_ar": "قياس موضع الكتلة في الصفحتين وتثبيت القرار"
+    },
+    {
+      "id": "D-09",
+      "title_ar": "تسمية كتلة البطاقات العلوية («المرفق»)",
+      "status": "منفَّذ",
+      "wording_ar": "ما اسم هذا القسم؟ هل له تسمية؟",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "INDEX.md"
+        },
+        {
+          "kind": "note",
+          "ref": "قرار المالك 2026-11-06: تسمية الكتلة العلوية «مؤشرات الوقائع والمصادر الرسمية»"
+        }
+      ],
+      "governing_file": "appendices/card_registry.json",
+      "next_action_ar": "—"
+    },
+    {
+      "id": "D-10",
+      "title_ar": "إزالة «مفتاح القراءة» أسفل قسم أهم الأخبار",
+      "status": "منفَّذ",
+      "wording_ar": "يتم إزالته؛ معنى الوسم يظهر على الوسم نفسه.",
+      "evidence": [
+        {
+          "kind": "measure",
+          "ref": "المخرج المبني 2026-11-05",
+          "note": "«مفتاح القراءة» = 0 ظهور"
+        }
+      ],
+      "governing_file": "sections/40-blocks.md",
+      "next_action_ar": "لا شيء"
+    },
+    {
+      "id": "D-11",
+      "title_ar": "موقع دائم للتقرير على استضافة ثابتة",
+      "status": "منفَّذ",
+      "wording_ar": "تحويل التقرير الصباحي إلى موقع دائم بنطاق ثابت يبقى بعد انتهاء المساحة المؤقتة.",
+      "evidence": [
+        {
+          "kind": "measure",
+          "ref": "seawatch/dist/index.html",
+          "note": "موقع مبني بصفحات رئيسية وإصدارات وإضافات ومصادر (مسار خارج جذر النظام: يُقاس في موضعه)"
+        },
+        {
+          "kind": "measure",
+          "ref": "مشروع الويب المنشور",
+          "note": "نطاق منشور قائم"
+        }
+      ],
+      "governing_file": "web/project.json",
+      "next_action_ar": "لا شيء"
+    },
+    {
+      "id": "D-12",
+      "title_ar": "حفظ تفضيلات القراءة في متصفح الزائر",
+      "status": "يحتاج تحققًا",
+      "wording_ar": "المظهر الليلي/النهاري وحجم الخط وتذكّر آخر تقرير، بلا حساب ولا تسجيل.",
+      "evidence": [
+        {
+          "kind": "measure",
+          "ref": "seawatch",
+          "note": "localStorage موجود في 47 ملفًا وtheme في ملفين — لا يثبت وجود الميزة نفسها لأن أغلبها مكتبات"
+        }
+      ],
+      "governing_file": "seawatch/README.md",
+      "next_action_ar": "قياس موجّه لصفحة الإصدار: هل تعيد الصفحة تفضيل الزائر وتُظهر «تابع من حيث توقفت»"
+    },
+    {
+      "id": "D-13",
+      "title_ar": "معرّف واقعة + ربط ثنائي بين الخريطة وبطاقة الواقعة",
+      "status": "منفَّذ جزئيًّا",
+      "wording_ar": "يعتمد الربط ثنائي الاتجاه بين الخريطة وبطاقة الواقعة.",
+      "evidence": [
+        {
+          "kind": "measure",
+          "ref": "المخرج المبني 2026-11-05",
+          "note": "معرّفات بطاقات id=\"ev-N\" = 5 · معرّفات على عناصر الخريطة data-event-id = 0"
+        }
+      ],
+      "governing_file": "seawatch/generator/map_cluster.py",
+      "next_action_ar": "إسناد معرّف الواقعة إلى علامة الخريطة (الاتجاه العكسي)"
+    },
+    {
+      "id": "D-14",
+      "title_ar": "سجل الأحداث يجلب من جميع مصادر المشروع",
+      "status": "منفَّذ",
+      "wording_ar": "هل يُزوَّد سجل الأحداث بالمعلومات من جميع الـ62 مصدرًا؟",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "INDEX.md"
+        },
+        {
+          "kind": "note",
+          "ref": "قرار المالك 2026-11-06: يُشترط محاولة كل المصادر المسجّلة، ويُفصح عن المحجوب بدل إسقاطه"
+        }
+      ],
+      "governing_file": "sections/10-sources.md",
+      "next_action_ar": "—"
+    },
+    {
+      "id": "D-15",
+      "title_ar": "حذف قسم «تتبع الوقائع» وإدماج درجة الإثبات داخل بطاقة الواقعة",
+      "status": "منفَّذ",
+      "wording_ar": "تنفيذ الخيار 2: يحفظ المعلومة المفيدة داخل البطاقة، ويحذف سطحًا كاملًا مكررًا.",
+      "evidence": [
+        {
+          "kind": "measure",
+          "ref": "المخرج المبني 2026-11-05",
+          "note": "«تتبع الوقائع» = 0 ظهور"
+        }
+      ],
+      "governing_file": "sections/30-structure.md",
+      "next_action_ar": "لا شيء"
+    },
+    {
+      "id": "D-16",
+      "title_ar": "إخفاء الصف الثامن في بطاقة الواقعة",
+      "status": "يحتاج تحققًا",
+      "wording_ar": "اعتماد إخفاء الصف الثامن لأنه تكرار للعنوان — 3 صفوف أقل ازدحامًا.",
+      "evidence": [
+        {
+          "kind": "measure",
+          "ref": "seawatch/generator/build_report.py",
+          "note": "ترقيم صفوف البطاقة يبدأ من رقم 4 داخل _field_row — لم يُقس حسم وجود الصف الثامن في المخرج"
+        }
+      ],
+      "governing_file": "appendices/card_registry.json",
+      "next_action_ar": "قياس صفوف البطاقة في المخرج المبني وتثبيت الحالة"
+    },
+    {
+      "id": "D-0611",
+      "title": "إغلاق F-04: D071 في عقد التسليم",
+      "status": "منفَّذ",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "runbook/delivery-policy.json"
+        },
+        {
+          "kind": "file",
+          "ref": "validators/check_delivery_policy.py"
+        }
+      ],
+      "governing_file": "runbook/delivery-policy.json",
+      "title_ar": "إغلاق F-04: D071 في عقد التسليم"
+    },
+    {
+      "id": "D-0612",
+      "title": "إغلاق F-06: سند داخلي لرقم الأداء",
+      "status": "منفَّذ",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "audit/مرجع-آلية-العمل.md"
+        },
+        {
+          "kind": "file",
+          "ref": "tools/build_workflow_reference.py"
+        }
+      ],
+      "governing_file": "runbook/phases.json",
+      "title_ar": "إغلاق F-06: سند داخلي لرقم الأداء"
+    },
+    {
+      "id": "D-0613",
+      "title": "إغلاق وضع Quirks للصفحة الإنجليزية",
+      "status": "منفَّذ",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "audit/تدقيق-القياس-البصري-الآلي-2026-11-06.md"
+        }
+      ],
+      "governing_file": "runbook/runbook.json",
+      "title_ar": "إغلاق وضع Quirks للصفحة الإنجليزية"
+    },
+    {
+      "id": "D-0614",
+      "title": "اعتماد مهارة measured-defect-closure-ops",
+      "status": "منفَّذ",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "audit/ملاحظات-المالك-2026-11-05.md"
+        }
+      ],
+      "governing_file": "INDEX.md",
+      "title_ar": "اعتماد مهارة measured-defect-closure-ops"
+    },
+    {
+      "id": "D-0615",
+      "title_ar": "إصلاح صيغة أمر الخطوة G065 وتحصين مشغّل الكتيب",
+      "status": "منفَّذ",
+      "governing_file": "runbook/runbook.json",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "runbook/runbook.json"
+        },
+        {
+          "kind": "file",
+          "ref": "tools/runbook.py"
+        },
+        {
+          "kind": "file",
+          "ref": "tests/test_manifest_commands.py"
+        }
+      ],
+      "next_action_ar": "—"
+    },
+    {
+      "id": "D-0616",
+      "title_ar": "اعتماد مهارة fail-closed-guard-hardening-ops في المشروع",
+      "status": "منفَّذ",
+      "governing_file": "INDEX.md",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "INDEX.md"
+        },
+        {
+          "kind": "file",
+          "ref": "decisions/registry.json"
+        },
+        {
+          "kind": "note",
+          "ref": "قرار المالك الصريح 2026-11-06: اعتماد المهارة جزءًا من مهارات المشروع"
+        }
+      ],
+      "next_action_ar": "—"
+    },
+    {
+      "id": "D-0617",
+      "title_ar": "مهارة skill-adoption-governance-ops (عقد اعتماد المهارات)",
+      "status": "منفَّذ",
+      "governing_file": "INDEX.md",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "INDEX.md"
+        },
+        {
+          "kind": "note",
+          "ref": "قرار المالك 2026-11-06: اعتماد مهارة عقد اعتماد المهارات"
+        }
+      ],
+      "next_action_ar": "—"
+    },
+    {
+      "id": "D-0618",
+      "title_ar": "مهارة decision-registry-backfill-ops (ملء دفتر القرارات رجعيًّا)",
+      "status": "منفَّذ",
+      "governing_file": "INDEX.md",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "INDEX.md"
+        },
+        {
+          "kind": "note",
+          "ref": "قرار المالك 2026-11-06: اعتماد مهارة الملء الرجعي للقرارات"
+        }
+      ],
+      "next_action_ar": "—"
+    },
+    {
+      "id": "D-0619",
+      "title_ar": "اشتقاق النسب النقطية للفرضيات من النطاقات بقاعدة معلَنة",
+      "status": "منفَّذ",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "tools/hypothesis_distribution.py",
+          "note": "أداة CLI بواجهتي --write و--check؛ اشتقاق 45% و33% و22% بقاعدة منتصف النطاق ثم أكبر البواقي، والمجموع 100."
+        },
+        {
+          "kind": "file",
+          "ref": "validators/validate_report.py",
+          "note": "ف4.3 يعيد استدعاء خوارزمية الأداة ويتحقق من النوع والنطاق والجموع والتطابق النقطي."
+        },
+        {
+          "kind": "file",
+          "ref": "tests/test_validate_report_ranges.py",
+          "note": "اختبار موجب وستة مسارات سالبة؛ التشغيل: python3 tests/test_validate_report_ranges.py · Ran 10 tests · OK."
+        },
+        {
+          "kind": "file",
+          "ref": "runbook/runbook.json",
+          "note": "الخطوة G011H قبل G012 تشغّل --write ثم --check على web/meta/{date}.json."
+        },
+        {
+          "kind": "measure",
+          "ref": "web/meta/2026-11-06.json",
+          "note": "المخرج المشتق المخزّن: 45% من 55–80% · 33% من 45–55% · 22% من 20–45%، مع likelihood_range وpoint_from_range وdistribution_rule."
+        }
+      ],
+      "governing_file": "runbook/runbook.json",
+      "next_action_ar": "—"
+    },
+    {
+      "id": "D-0620",
+      "title_ar": "اعتماد مهارة gate-strictness-hardening-ops رسميًا في فهرس المشروع وقواعده",
+      "status": "منفَّذ",
+      "governing_file": "INDEX.md",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "INDEX.md"
+        },
+        {
+          "kind": "file",
+          "ref": "skills/gate-lifecycle-ops/references/legacy/gate-strictness-hardening-ops/SKILL.md"
+        },
+        {
+          "kind": "file",
+          "ref": "skills/gate-lifecycle-ops/references/legacy/gate-strictness-hardening-ops/scripts/gate_audit.py"
+        },
+        {
+          "kind": "file",
+          "ref": "skills/gate-lifecycle-ops/references/legacy/gate-strictness-hardening-ops/references/lessons.md"
+        },
+        {
+          "kind": "note",
+          "ref": "طلب المالك الصريح 2026-11-06: اعتماد مهارة gate-strictness-hardening-ops رسمياً في فهرس المشروع وقواعده"
+        }
+      ],
+      "next_action_ar": "توصية لاحقة غير منفذة: ربط gate_audit.py بخطوة حوكمة في المانيفست؛ خارج نطاق هذا الاعتماد."
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+# controlled trigger 2: init_skill writer capture
+2026-10-30T20:43:33Z
+shell_pid=1453058 bashpid=1453058 comm=bash exe=/usr/bin/bash ppid=1225262
+## versions before
+mtime=2026-10-30 20:43:32.287408527 +0000 epoch=1793393012 size=20872 inode=1622023 path=/home/ubuntu/skills/.skill_versions.json
+bed82e636debe59f1060de4c1bc63d316d7e3e2506d7227123b12350cb48c1ea  /home/ubuntu/skills/.skill_versions.json
+## init command
+Initializing skill: probe-sync-trigger-2
+   Location: /home/ubuntu/skills/probe-sync-trigger-2
+
+Created skill directory: /home/ubuntu/skills/probe-sync-trigger-2
+Created SKILL.md
+Created scripts/example.py
+Created references/api_reference.md
+Created templates/example_template.txt
+
+Skill 'probe-sync-trigger-2' initialized successfully at /home/ubuntu/skills/probe-sync-trigger-2
+
+Next steps:
+1. Edit SKILL.md to complete the TODO items and update the description
+2. Customize or delete the example files in scripts/, references/, and templates/
+3. Run the validator when ready to check the skill structure
+init_rc=0
+## process identity after init
+## versions after init immediate
+mtime=2026-10-30 20:43:32.287408527 +0000 epoch=1793393012 size=20872 inode=1622023 path=/home/ubuntu/skills/.skill_versions.json
+bed82e636debe59f1060de4c1bc63d316d7e3e2506d7227123b12350cb48c1ea  /home/ubuntu/skills/.skill_versions.json
+## versions after wait
+mtime=2026-10-30 20:43:32.287408527 +0000 epoch=1793393012 size=20872 inode=1622023 path=/home/ubuntu/skills/.skill_versions.json
+## ausearch -k skill_versions_write -ts recent -i
+<no matches>
+ausearch_skill_versions_rc=1
+## ausearch -k skills_write -ts recent -i filtered to trigger-2 or versions
+type=PROCTITLE msg=audit(10/30/26 20:39:44.667:10497) : proctitle=rm -rf /home/ubuntu/skills/probe-sync-trigger 
+type=PATH msg=audit(10/30/26 20:39:44.667:10497) : item=1 name=SKILL.md inode=1212483 dev=fe:00 mode=file,644 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=DELETE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(10/30/26 20:39:44.667:10497) : item=0 name=/home/ubuntu/brain-marine-news inode=272662 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=SYSCALL msg=audit(10/30/26 20:39:44.667:10497) : arch=x86_64 syscall=unlinkat success=yes exit=0 a0=0x5 a1=0x55cf77f1b8b0 a2=0x0 a3=0x27 items=2 ppid=1448229 pid=1451376 auid=unset uid=ubuntu gid=ubuntu euid=ubuntu suid=ubuntu fsuid=ubuntu egid=ubuntu sgid=ubuntu fsgid=ubuntu tty=pts7 ses=unset comm=rm exe=/usr/bin/rm subj=kernel key=skills_write 
+type=PROCTITLE msg=audit(10/30/26 20:39:44.671:10498) : proctitle=rm -rf /home/ubuntu/skills/probe-sync-trigger 
+type=PATH msg=audit(10/30/26 20:39:44.671:10498) : item=1 name=example.py inode=406379 dev=fe:00 mode=file,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=DELETE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(10/30/26 20:39:44.671:10498) : item=0 name=/home/ubuntu/brain-marine-news inode=406378 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=SYSCALL msg=audit(10/30/26 20:39:44.671:10498) : arch=x86_64 syscall=unlinkat success=yes exit=0 a0=0x6 a1=0x55cf77f1b8b0 a2=0x0 a3=0x2f items=2 ppid=1448229 pid=1451376 auid=unset uid=ubuntu gid=ubuntu euid=ubuntu suid=ubuntu fsuid=ubuntu egid=ubuntu sgid=ubuntu fsgid=ubuntu tty=pts7 ses=unset comm=rm exe=/usr/bin/rm subj=kernel key=skills_write 
+type=PROCTITLE msg=audit(10/30/26 20:39:44.671:10499) : proctitle=rm -rf /home/ubuntu/skills/probe-sync-trigger 
+type=PATH msg=audit(10/30/26 20:39:44.671:10499) : item=1 name=scripts inode=406378 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=DELETE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(10/30/26 20:39:44.671:10499) : item=0 name=/home/ubuntu/brain-marine-news inode=272662 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=SYSCALL msg=audit(10/30/26 20:39:44.671:10499) : arch=x86_64 syscall=unlinkat success=yes exit=0 a0=0x5 a1=0x55cf77f13730 a2=0x200 a3=0x55cf77f1b7b0 items=2 ppid=1448229 pid=1451376 auid=unset uid=ubuntu gid=ubuntu euid=ubuntu suid=ubuntu fsuid=ubuntu egid=ubuntu sgid=ubuntu fsgid=ubuntu tty=pts7 ses=unset comm=rm exe=/usr/bin/rm subj=kernel key=skills_write 
+type=PROCTITLE msg=audit(10/30/26 20:39:44.671:10500) : proctitle=rm -rf /home/ubuntu/skills/probe-sync-trigger 
+type=PATH msg=audit(10/30/26 20:39:44.671:10500) : item=1 name=api_reference.md inode=612695 dev=fe:00 mode=file,644 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=DELETE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(10/30/26 20:39:44.671:10500) : item=0 name=/home/ubuntu/brain-marine-news inode=300345 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=SYSCALL msg=audit(10/30/26 20:39:44.671:10500) : arch=x86_64 syscall=unlinkat success=yes exit=0 a0=0x6 a1=0x55cf77f1b8b0 a2=0x0 a3=0x32 items=2 ppid=1448229 pid=1451376 auid=unset uid=ubuntu gid=ubuntu euid=ubuntu suid=ubuntu fsuid=ubuntu egid=ubuntu sgid=ubuntu fsgid=ubuntu tty=pts7 ses=unset comm=rm exe=/usr/bin/rm subj=kernel key=skills_write 
+type=PROCTITLE msg=audit(10/30/26 20:39:44.671:10501) : proctitle=rm -rf /home/ubuntu/skills/probe-sync-trigger 
+type=PATH msg=audit(10/30/26 20:39:44.671:10501) : item=1 name=references inode=300345 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=DELETE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(10/30/26 20:39:44.671:10501) : item=0 name=/home/ubuntu/brain-marine-news inode=272662 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=SYSCALL msg=audit(10/30/26 20:39:44.671:10501) : arch=x86_64 syscall=unlinkat success=yes exit=0 a0=0x5 a1=0x55cf77f1b9d0 a2=0x200 a3=0x55cf77f1b7b0 items=2 ppid=1448229 pid=1451376 auid=unset uid=ubuntu gid=ubuntu euid=ubuntu suid=ubuntu fsuid=ubuntu egid=ubuntu sgid=ubuntu fsgid=ubuntu tty=pts7 ses=unset comm=rm exe=/usr/bin/rm subj=kernel key=skills_write 
+type=PROCTITLE msg=audit(10/30/26 20:39:44.671:10502) : proctitle=rm -rf /home/ubuntu/skills/probe-sync-trigger 
+type=PATH msg=audit(10/30/26 20:39:44.671:10502) : item=1 name=example_template.txt inode=616896 dev=fe:00 mode=file,644 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=DELETE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(10/30/26 20:39:44.671:10502) : item=0 name=/home/ubuntu/brain-marine-news inode=300346 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=SYSCALL msg=audit(10/30/26 20:39:44.671:10502) : arch=x86_64 syscall=unlinkat success=yes exit=0 a0=0x6 a1=0x55cf77f1b9d0 a2=0x0 a3=0x31 items=2 ppid=1448229 pid=1451376 auid=unset uid=ubuntu gid=ubuntu euid=ubuntu suid=ubuntu fsuid=ubuntu egid=ubuntu sgid=ubuntu fsgid=ubuntu tty=pts7 ses=unset comm=rm exe=/usr/bin/rm subj=kernel key=skills_write 
+type=PROCTITLE msg=audit(10/30/26 20:39:44.671:10503) : proctitle=rm -rf /home/ubuntu/skills/probe-sync-trigger 
+type=PATH msg=audit(10/30/26 20:39:44.671:10503) : item=1 name=templates inode=300346 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=DELETE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(10/30/26 20:39:44.671:10503) : item=0 name=/home/ubuntu/brain-marine-news inode=272662 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=SYSCALL msg=audit(10/30/26 20:39:44.671:10503) : arch=x86_64 syscall=unlinkat success=yes exit=0 a0=0x5 a1=0x55cf77f1baf0 a2=0x200 a3=0x55cf77f1b8d0 items=2 ppid=1448229 pid=1451376 auid=unset uid=ubuntu gid=ubuntu euid=ubuntu suid=ubuntu fsuid=ubuntu egid=ubuntu sgid=ubuntu fsgid=ubuntu tty=pts7 ses=unset comm=rm exe=/usr/bin/rm subj=kernel key=skills_write 
+type=PROCTITLE msg=audit(10/30/26 20:39:44.671:10504) : proctitle=rm -rf /home/ubuntu/skills/probe-sync-trigger 
+type=PATH msg=audit(10/30/26 20:39:44.671:10504) : item=1 name=/home/ubuntu/skills/probe-sync-trigger inode=272662 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=DELETE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(10/30/26 20:39:44.671:10504) : item=0 name=/home/ubuntu/skills/ inode=304895 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=SYSCALL msg=audit(10/30/26 20:39:44.671:10504) : arch=x86_64 syscall=unlinkat success=yes exit=0 a0=AT_FDCWD a1=0x55cf77f122e0 a2=0x200 a3=0x55cf77f1b9f0 items=2 ppid=1448229 pid=1451376 auid=unset uid=ubuntu gid=ubuntu euid=ubuntu suid=ubuntu fsuid=ubuntu egid=ubuntu sgid=ubuntu fsgid=ubuntu tty=pts7 ses=unset comm=rm exe=/usr/bin/rm subj=kernel key=skills_write 
+type=PROCTITLE msg=audit(10/30/26 20:42:25.599:10649) : proctitle=touch /home/ubuntu/skills/.causality-audit-probe-1452438.tmp 
+type=PATH msg=audit(10/30/26 20:42:25.599:10649) : item=1 name=/home/ubuntu/skills/.causality-audit-probe-1452438.tmp inode=1622168 dev=fe:00 mode=file,644 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=CREATE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(10/30/26 20:42:25.599:10649) : item=0 name=/home/ubuntu/skills/ inode=304895 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=SYSCALL msg=audit(10/30/26 20:42:25.599:10649) : arch=x86_64 syscall=openat success=yes exit=4 a0=AT_FDCWD a1=0x7fff139fe05d a2=O_WRONLY|O_CREAT|O_NOCTTY|O_NONBLOCK a3=0x1b6 items=2 ppid=1452438 pid=1452456 auid=unset uid=ubuntu gid=ubuntu euid=ubuntu suid=ubuntu fsuid=ubuntu egid=ubuntu sgid=ubuntu fsgid=ubuntu tty=pts13 ses=unset comm=touch exe=/usr/bin/touch subj=kernel key=skills_write 
+type=PROCTITLE msg=audit(10/30/26 20:42:25.615:10650) : proctitle=/usr/bin/bash --noprofile --norc -i 
+type=PATH msg=audit(10/30/26 20:42:25.615:10650) : item=0 name=/home/ubuntu/skills/.causality-audit-probe-1452438.tmp inode=1622168 dev=fe:00 mode=file,644 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=NORMAL cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=SYSCALL msg=audit(10/30/26 20:42:25.615:10650) : arch=x86_64 syscall=openat success=yes exit=4 a0=AT_FDCWD a1=0x55d33d0e8c20 a2=O_WRONLY|O_CREAT|O_TRUNC a3=0x1b6 items=1 ppid=1225262 pid=1452438 auid=unset uid=ubuntu gid=ubuntu euid=ubuntu suid=ubuntu fsuid=ubuntu egid=ubuntu sgid=ubuntu fsgid=ubuntu tty=pts13 ses=unset comm=bash exe=/usr/bin/bash subj=kernel key=skills_write 
+type=PROCTITLE msg=audit(10/30/26 20:42:25.619:10651) : proctitle=mv /home/ubuntu/skills/.causality-audit-probe-1452438.tmp /home/ubuntu/skills/.causality-audit-probe-1452438.tmp.moved 
+type=PATH msg=audit(10/30/26 20:42:25.619:10651) : item=3 name=/home/ubuntu/skills/.causality-audit-probe-1452438.tmp.moved inode=1622168 dev=fe:00 mode=file,644 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=CREATE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(10/30/26 20:42:25.619:10651) : item=2 name=/home/ubuntu/skills/.causality-audit-probe-1452438.tmp inode=1622168 dev=fe:00 mode=file,644 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=DELETE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(10/30/26 20:42:25.619:10651) : item=1 name=/home/ubuntu/skills/ inode=304895 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(10/30/26 20:42:25.619:10651) : item=0 name=/home/ubuntu/skills/ inode=304895 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=SYSCALL msg=audit(10/30/26 20:42:25.619:10651) : arch=x86_64 syscall=renameat2 success=yes exit=0 a0=AT_FDCWD a1=0x7ffc9063d026 a2=AT_FDCWD a3=0x7ffc9063d05d items=4 ppid=1452438 pid=1452458 auid=unset uid=ubuntu gid=ubuntu euid=ubuntu suid=ubuntu fsuid=ubuntu egid=ubuntu sgid=ubuntu fsgid=ubuntu tty=pts13 ses=unset comm=mv exe=/usr/bin/mv subj=kernel key=skills_write 
+type=PROCTITLE msg=audit(10/30/26 20:42:25.619:10652) : proctitle=rm /home/ubuntu/skills/.causality-audit-probe-1452438.tmp.moved 
+type=PATH msg=audit(10/30/26 20:42:25.619:10652) : item=1 name=/home/ubuntu/skills/.causality-audit-probe-1452438.tmp.moved inode=1622168 dev=fe:00 mode=file,644 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=DELETE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(10/30/26 20:42:25.619:10652) : item=0 name=/home/ubuntu/skills/ inode=304895 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=SYSCALL msg=audit(10/30/26 20:42:25.619:10652) : arch=x86_64 syscall=unlinkat success=yes exit=0 a0=AT_FDCWD a1=0x55e70ddee2e0 a2=0x0 a3=0x200 items=2 ppid=1452438 pid=1452459 auid=unset uid=ubuntu gid=ubuntu euid=ubuntu suid=ubuntu fsuid=ubuntu egid=ubuntu sgid=ubuntu fsgid=ubuntu tty=pts13 ses=unset comm=rm exe=/usr/bin/rm subj=kernel key=skills_write 
+type=PROCTITLE msg=audit(10/30/26 20:43:33.627:10719) : proctitle=python3 /home/ubuntu/skills/skill-creator/scripts/init_skill.py --output-dir /home/ubuntu/skills probe-sync-trigger-2 
+type=PATH msg=audit(10/30/26 20:43:33.627:10719) : item=1 name=/home/ubuntu/skills/probe-sync-trigger-2 inode=272662 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=CREATE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(10/30/26 20:43:33.627:10719) : item=0 name=/home/ubuntu/skills/ inode=304895 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=SYSCALL msg=audit(10/30/26 20:43:33.627:10719) : arch=x86_64 syscall=mkdir success=yes exit=0 a0=0x7fb0cf6e9130 a1=0777 a2=0x0 a3=0x7fb0cf811878 items=2 ppid=1453058 pid=1453066 auid=unset uid=ubuntu gid=ubuntu euid=ubuntu suid=ubuntu fsuid=ubuntu egid=ubuntu sgid=ubuntu fsgid=ubuntu tty=pts18 ses=unset comm=python3 exe=/usr/bin/python3.12 subj=kernel key=skills_write 
+type=PROCTITLE msg=audit(10/30/26 20:43:33.627:10720) : proctitle=python3 /home/ubuntu/skills/skill-creator/scripts/init_skill.py --output-dir /home/ubuntu/skills probe-sync-trigger-2 
+type=PATH msg=audit(10/30/26 20:43:33.627:10720) : item=1 name=/home/ubuntu/skills/probe-sync-trigger-2/SKILL.md inode=1212483 dev=fe:00 mode=file,644 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=CREATE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(10/30/26 20:43:33.627:10720) : item=0 name=/home/ubuntu/skills/probe-sync-trigger-2/ inode=272662 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=SYSCALL msg=audit(10/30/26 20:43:33.627:10720) : arch=x86_64 syscall=openat success=yes exit=4 a0=AT_FDCWD a1=0x7fb0cf502690 a2=O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC a3=0x1b6 items=2 ppid=1453058 pid=1453066 auid=unset uid=ubuntu gid=ubuntu euid=ubuntu suid=ubuntu fsuid=ubuntu egid=ubuntu sgid=ubuntu fsgid=ubuntu tty=pts18 ses=unset comm=python3 exe=/usr/bin/python3.12 subj=kernel key=skills_write 
+type=PROCTITLE msg=audit(10/30/26 20:43:33.627:10721) : proctitle=python3 /home/ubuntu/skills/skill-creator/scripts/init_skill.py --output-dir /home/ubuntu/skills probe-sync-trigger-2 
+type=PATH msg=audit(10/30/26 20:43:33.627:10721) : item=1 name=/home/ubuntu/skills/probe-sync-trigger-2/scripts inode=406232 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=CREATE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(10/30/26 20:43:33.627:10721) : item=0 name=/home/ubuntu/skills/probe-sync-trigger-2/ inode=272662 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=SYSCALL msg=audit(10/30/26 20:43:33.627:10721) : arch=x86_64 syscall=mkdir success=yes exit=0 a0=0x7fb0cf502690 a1=0777 a2=0x0 a3=0x7ffe00d3f340 items=2 ppid=1453058 pid=1453066 auid=unset uid=ubuntu gid=ubuntu euid=ubuntu suid=ubuntu fsuid=ubuntu egid=ubuntu sgid=ubuntu fsgid=ubuntu tty=pts18 ses=unset comm=python3 exe=/usr/bin/python3.12 subj=kernel key=skills_write 
+type=PROCTITLE msg=audit(10/30/26 20:43:33.627:10722) : proctitle=python3 /home/ubuntu/skills/skill-creator/scripts/init_skill.py --output-dir /home/ubuntu/skills probe-sync-trigger-2 
+type=PATH msg=audit(10/30/26 20:43:33.627:10722) : item=1 name=/home/ubuntu/skills/probe-sync-trigger-2/scripts/example.py inode=406378 dev=fe:00 mode=file,644 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=CREATE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(10/30/26 20:43:33.627:10722) : item=0 name=/home/ubuntu/skills/probe-sync-trigger-2/scripts/ inode=406232 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=SYSCALL msg=audit(10/30/26 20:43:33.627:10722) : arch=x86_64 syscall=openat success=yes exit=4 a0=AT_FDCWD a1=0x7fb0cf5025d0 a2=O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC a3=0x1b6 items=2 ppid=1453058 pid=1453066 auid=unset uid=ubuntu gid=ubuntu euid=ubuntu suid=ubuntu fsuid=ubuntu egid=ubuntu sgid=ubuntu fsgid=ubuntu tty=pts18 ses=unset comm=python3 exe=/usr/bin/python3.12 subj=kernel key=skills_write 
+type=PROCTITLE msg=audit(10/30/26 20:43:33.627:10723) : proctitle=python3 /home/ubuntu/skills/skill-creator/scripts/init_skill.py --output-dir /home/ubuntu/skills probe-sync-trigger-2 
+type=PATH msg=audit(10/30/26 20:43:33.627:10723) : item=0 name=/home/ubuntu/skills/probe-sync-trigger-2/scripts/example.py inode=406378 dev=fe:00 mode=file,644 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=NORMAL cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=SYSCALL msg=audit(10/30/26 20:43:33.627:10723) : arch=x86_64 syscall=chmod success=yes exit=0 a0=0x7fb0cf5025d0 a1=0755 a2=0x0 a3=0x7fb0cf80a960 items=1 ppid=1453058 pid=1453066 auid=unset uid=ubuntu gid=ubuntu euid=ubuntu suid=ubuntu fsuid=ubuntu egid=ubuntu sgid=ubuntu fsgid=ubuntu tty=pts18 ses=unset comm=python3 exe=/usr/bin/python3.12 subj=kernel key=skills_write 
+type=PROCTITLE msg=audit(10/30/26 20:43:33.627:10724) : proctitle=python3 /home/ubuntu/skills/skill-creator/scripts/init_skill.py --output-dir /home/ubuntu/skills probe-sync-trigger-2 
+type=PATH msg=audit(10/30/26 20:43:33.627:10724) : item=1 name=/home/ubuntu/skills/probe-sync-trigger-2/references inode=300345 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=CREATE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(10/30/26 20:43:33.627:10724) : item=0 name=/home/ubuntu/skills/probe-sync-trigger-2/ inode=272662 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=SYSCALL msg=audit(10/30/26 20:43:33.627:10724) : arch=x86_64 syscall=mkdir success=yes exit=0 a0=0x7fb0cf5025d0 a1=0777 a2=0x0 a3=0x7ffe00d3f340 items=2 ppid=1453058 pid=1453066 auid=unset uid=ubuntu gid=ubuntu euid=ubuntu suid=ubuntu fsuid=ubuntu egid=ubuntu sgid=ubuntu fsgid=ubuntu tty=pts18 ses=unset comm=python3 exe=/usr/bin/python3.12 subj=kernel key=skills_write 
+type=PROCTITLE msg=audit(10/30/26 20:43:33.627:10725) : proctitle=python3 /home/ubuntu/skills/skill-creator/scripts/init_skill.py --output-dir /home/ubuntu/skills probe-sync-trigger-2 
+type=PATH msg=audit(10/30/26 20:43:33.627:10725) : item=1 name=/home/ubuntu/skills/probe-sync-trigger-2/references/api_reference.md inode=612695 dev=fe:00 mode=file,644 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=CREATE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(10/30/26 20:43:33.627:10725) : item=0 name=/home/ubuntu/skills/probe-sync-trigger-2/references/ inode=300345 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=SYSCALL msg=audit(10/30/26 20:43:33.627:10725) : arch=x86_64 syscall=openat success=yes exit=4 a0=AT_FDCWD a1=0x7fb0cf5052b0 a2=O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC a3=0x1b6 items=2 ppid=1453058 pid=1453066 auid=unset uid=ubuntu gid=ubuntu euid=ubuntu suid=ubuntu fsuid=ubuntu egid=ubuntu sgid=ubuntu fsgid=ubuntu tty=pts18 ses=unset comm=python3 exe=/usr/bin/python3.12 subj=kernel key=skills_write 
+type=PROCTITLE msg=audit(10/30/26 20:43:33.627:10726) : proctitle=python3 /home/ubuntu/skills/skill-creator/scripts/init_skill.py --output-dir /home/ubuntu/skills probe-sync-trigger-2 
+type=PATH msg=audit(10/30/26 20:43:33.627:10726) : item=1 name=/home/ubuntu/skills/probe-sync-trigger-2/templates inode=300346 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=CREATE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(10/30/26 20:43:33.627:10726) : item=0 name=/home/ubuntu/skills/probe-sync-trigger-2/ inode=272662 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=SYSCALL msg=audit(10/30/26 20:43:33.627:10726) : arch=x86_64 syscall=mkdir success=yes exit=0 a0=0x7fb0cf502690 a1=0777 a2=0x0 a3=0x7ffe00d3f340 items=2 ppid=1453058 pid=1453066 auid=unset uid=ubuntu gid=ubuntu euid=ubuntu suid=ubuntu fsuid=ubuntu egid=ubuntu sgid=ubuntu fsgid=ubuntu tty=pts18 ses=unset comm=python3 exe=/usr/bin/python3.12 subj=kernel key=skills_write 
+type=PROCTITLE msg=audit(10/30/26 20:43:33.627:10727) : proctitle=python3 /home/ubuntu/skills/skill-creator/scripts/init_skill.py --output-dir /home/ubuntu/skills probe-sync-trigger-2 
+type=PATH msg=audit(10/30/26 20:43:33.627:10727) : item=1 name=/home/ubuntu/skills/probe-sync-trigger-2/templates/example_template.txt inode=616896 dev=fe:00 mode=file,644 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=CREATE cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=PATH msg=audit(10/30/26 20:43:33.627:10727) : item=0 name=/home/ubuntu/skills/probe-sync-trigger-2/templates/ inode=300346 dev=fe:00 mode=dir,755 ouid=ubuntu ogid=ubuntu rdev=00:00 obj=unlabeled nametype=PARENT cap_fp=none cap_fi=none cap_fe=0 cap_fver=0 cap_frootid=0 
+type=SYSCALL msg=audit(10/30/26 20:43:33.627:10727) : arch=x86_64 syscall=openat success=yes exit=4 a0=AT_FDCWD a1=0x7fb0cf505400 a2=O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC a3=0x1b6 items=2 ppid=1453058 pid=1453066 auid=unset uid=ubuntu gid=ubuntu euid=ubuntu suid=ubuntu fsuid=ubuntu egid=ubuntu sgid=ubuntu fsgid=ubuntu tty=pts18 ses=unset comm=python3 exe=/usr/bin/python3.12 subj=kernel key=skills_write 
+ausearch_skills_filtered_pipeline_rc=0
+## cleanup precheck
+find: paths must precede expression: `date'

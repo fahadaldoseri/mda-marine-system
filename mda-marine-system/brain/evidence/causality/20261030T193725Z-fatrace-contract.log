@@ -1,0 +1,23 @@
+=== contract_ts_utc=20261030T193725Z ===
+>>> readlink -f /usr/sbin/fatrace
+/usr/sbin/fatrace
+[exit=0]
+>>> dpkg-query fatrace
+fatrace 0.17.0-1 amd64 install ok installed
+[exit=0]
+>>> fatrace -h
+Usage: fatrace [options...] 
+
+Options:
+  -c, --current-mount		Only record events on partition/mount of current directory.
+  -o FILE, --output=FILE	Write events to a file instead of standard output.
+  -s SECONDS, --seconds=SECONDS	Stop after the given number of seconds.
+  -t, --timestamp		Add timestamp to events. Give twice for seconds since the epoch.
+  -p PID, --ignore-pid PID	Ignore events for this process ID. Can be specified multiple times.
+  -f TYPES, --filter=TYPES	Show only the given event types; choose from C, R, O, or W, e. g. --filter=OC.
+  -C COMM, --command=COMM	Show only events for this command.
+  -h, --help			Show help.
+[help_exit=0]
+>>> man fatrace relevant options
+bash: col: command not found
+[man_exit=]

@@ -1,0 +1,31 @@
+=== monitor_start_ts_utc=20261030T194016Z ===
+>>> python3 -m py_compile
+[compile_exit=0]
+60078794aa88b945cb2132c035b583fcff9cb7754171208d785bb2d11c1bedf2  /home/ubuntu/brain-marine-news/evidence/causality/20261030T1940Z-auditd-monitor.py
+[chmod_exit=0]
+>>> pre-start audit status
+enabled 1
+failure 1
+pid 1442352
+rate_limit 0
+backlog_limit 8192
+lost 0
+backlog 0
+backlog_wait_time 60000
+backlog_wait_time_actual 0
+loginuid_immutable 0 unlocked
+[audit_status_exit=0]
+>>> nohup monitor duration=2700
+[1] 1442441
+monitor_pid=1442441
+    PID    PPID     ELAPSED STAT CMD
+1442441 1442430       00:02 S<   python3 /home/ubuntu/brain-marine-news/evidence/causality/20261030T1940Z-auditd-monitor.py /home/ubuntu/brain-marine-news/evidence/causality 2700
+[ps_exit=0]
+>>> monitor metadata
+start_utc=2026-10-30T19:40:16.496234+00:00
+duration_seconds=2700
+monitor_pid=1442441
+cwd=/home/ubuntu/brain-marine-news
+command=/home/ubuntu/brain-marine-news/evidence/causality/20261030T1940Z-auditd-monitor.py /home/ubuntu/brain-marine-news/evidence/causality 2700
+watch=/home/ubuntu/skills -p wa -k skills_write
+tool=auditd/auditctl/ausearch

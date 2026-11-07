@@ -1,0 +1,38 @@
+=== window_status_utc=20261030T194033Z ===
+>>> ps monitor/auditd
+     53       2 10-02:21:36 S    [kauditd]
+1442352       1       00:55 S<sl /sbin/auditd
+1442441       1       00:17 S<   python3 /home/ubuntu/brain-marine-news/evidence/causality/20261030T1940Z-auditd-monitor.py /home/ubuntu/brain-marine-news/evidence/causality 2700
+>>> monitor proc identity
+readlink_exe=/usr/bin/python3.12
+cwd=/home/ubuntu/brain-marine-news
+cmdline:
+python3 /home/ubuntu/brain-marine-news/evidence/causality/20261030T1940Z-auditd-monitor.py /home/ubuntu/brain-marine-news/evidence/causality 2700 
+cgroup:
+0::/system.slice/e2b-bootup-cmd.scope/sandbox-runtime-children/preserved-terminals/runtime-1225262-18e2f91654d3ea20-terminal-003041
+chain:
+    PID    PPID CMD
+1442441       1 python3 /home/ubuntu/brain-marine-news/evidence/causality/20261030T1940Z-auditd-monitor.py /home/ubuntu/brain-marine-news/evidence/causality 2700
+    PID    PPID CMD
+      1       0 /sbin/init nomodules
+error: process ID out of range
+
+Usage:
+ ps [options]
+
+ Try 'ps --help <simple|list|output|threads|misc|all>'
+  or 'ps --help <s|l|o|t|m|a>'
+ for additional help text.
+
+For more details see ps(1).
+>>> audit status
+enabled 1
+failure 1
+pid 1442352
+rate_limit 0
+backlog_limit 8192
+lost 0
+backlog 0
+backlog_wait_time 60000
+backlog_wait_time_actual 0
+loginuid_immutable 0 unlocked
