@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة 6a7c426d2ac840b9). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة 28d306cbe42802fe). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -115,6 +115,7 @@
 | D005 | تحديث النسخة الاحتياطية قبل النشر (شرط بوابة ما قبل التشغيل) | script |  |  | cmd:bash -lc test -s "$B/logs/runbook/{date}/D005.log" && grep -q 'parity' "$B/logs/runbook/{date}/D005.log" || true | س2 — الإغلاق والدفع |  | stop |
 | D010 | نشر الموقع عبر قناتين مع تحقق حي قبل status=ok | script |  |  | cmd:python3 -c import json,sys;d=json.load(open('logs/publish-{date}.json'));live=d.get('live',{});sys.exit(0 if d.get('status')=='ok' and d.get('channel') in ('cloudflare-pages','raw-githack') and d.get('successful_url') and d.get('head') and live.get('status')==200 and live.get('bytes',0)>0 and live.get('date_marker') and live.get('content_type_normalized')=='text/html' and live.get('presentation_eligible') else 1) | س2 — الإغلاق والدفع | tools/publish_channels.py، tools/publish_fallback.sh، tools/publish_site.sh، validators/check_en_parity.py، tests/test_publish_preflight_freshness.py | stop |
 | D020 | التحقق الحي لقناة cloudflare-pages أو raw-githack (200 والحجم وContent-Type والبصمة) | script |  |  | cmd:python3 -c import json,sys;d=json.load(open('logs/live-{date}.json'));sys.exit(0 if d.get('status')=='ok' else 1) | س2 — الإغلاق والدفع | tools/check_live.sh، tools/publish_channels.py، tools/live_visual_audit.py، tools/live_dom_audit.py | stop |
+| D016 | قناة Manus المرآة: نشر محكوم وشرط تحقق خاص (200 · text/html · الحجم · البصمة) (اختيارية) | script |  |  | cmd:python3 tools/manus_channel_attempt.py --verify-only --date {date} | س4 — قنوات العرض، قرار المالك 2026-11-07: Manus قناة ثانية معلنة | tools/manus_channel_attempt.py | continue |
 | D030 | إرسال الملخص وPDF على تلغرام (اختيارية) | script |  |  | cmd:python3 -c import json,sys;d=json.load(open('logs/publish-{date}-telegram.json'));sys.exit(0 if d.get('status')=='ok' else 1) | س4 — قناة التسليم | tools/publish_site.sh، tools/make_tg_digest.py، tools/telegram_send.py، tools/telegram_bot.py، secrets/secrets.env.example، secrets/README.md | continue |
 | D031 | إعادة إرسال الملخص على تلغرام بأمر المالك (مسار محكوم) (اختيارية) | script |  |  | cmd:python3 -c import json,sys;d=[json.loads(l) for l in open('logs/telegram-sends.jsonl') if l.strip()];sys.exit(0 if any(e.get('decision')=='sent' and e.get('date')=='{date}' and e.get('kind')=='owner-approved' for e in d) else 1) | س4 — قناة التسليم | tools/telegram_resend.py، tools/telegram_send.py | continue |
 | D032 | أرشفة نص ملخص تلغرام المرسل (معطّلة: سبب غير مذكور) | script |  |  | cmd:bash -lc test -d logs/telegram-archive | س4 — قناة التسليم | tools/archive_tg_digest.py، tools/telegram_send.py | continue |

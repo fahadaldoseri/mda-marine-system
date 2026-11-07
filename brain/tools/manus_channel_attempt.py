@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
-"""محاولة نشر قناة Manus المحكومة — تُقاس الجهوزية أولًا، ولا تُدَّعى نجاحًا بلا تحقق حي.
+"""قناة Manus المرآة — محاولة نشر محكومة وشرط تحقق خاص بها.
 
-المنطق:
+المنطق في وضع النشر:
   1) قياس جهوزية إضافة المنصة عبر `manus-mcp-cli tool list --server webdev-mcp`.
-     غير جاهزة  → رمز 1 (تحذير مقصود، بلا ضجيج وبلا نشر).
-  2) جاهزة → استكشاف أداة النشر من السجل الحقيقي، وبناء مدخلاتها من مخططها المعلن.
-     مخطط غير مفهوم أو حقل إلزامي بلا مقابل معروف → رمز 2 (فشل مغلق، لا تخمين).
-  3) نشر ثم تحقق حي من رابط اليوم على نطاق Manus: 200 · text/html · حجم أدنى · التاريخ في المتن.
-     النجاح يُقيَّد في state/manus-channel-<date>.json ويُبلَّغ عنه مرة واحدة بأمر المالك.
+     غير جاهزة → رمز 1 (تحذير مقصود: القناة مرآة اختيارية، والقياس يُسجَّل بلا ضجيج).
+  2) جاهزة → استكشاف أداة النشر من السجل الحقيقي وبناء مدخلاتها من مخططها المعلن.
+     مخطط غير مفهوم أو حقل إلزامي بلا مقابل → رمز 2 (فشل مغلق، لا تخمين).
+  3) نشر ثم تحقق حي: 200 · text/html · حجم ≥ الحد · التاريخ في المتن · وتسجيل بصمة المتن المخدوم.
+
+المنطق في وضع التحقق (`--verify-only`) — وهو شرط القناة في المانيفست:
+  أ) إن وُجد سجل نشر لليوم: يلزم تحقق حي مستوفٍ وتطابق البصمة المخدومة مع المسجّلة (ثبات المحتوى).
+  ب) وإلا: يلزم قياس جهوزية مسجّل اليوم — قياس موثّق لا صمت.
 
 لا يُطبع أي سر، ولا يُخمَّن اسم حقل أو مسار.
 """
@@ -15,8 +18,8 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import hashlib
 import json
-import os
 import re
 import subprocess
 import sys
@@ -31,7 +34,6 @@ MIN_BYTES = 100_000
 NOT_READY_MARK = "workspace recovery has not completed"
 LOG_DIR = B / "logs" / "manus-channel"
 
-# خريطة أسماء الحقول الشائعة إلى القيم المعروفة — تُستخدم فقط إن أعلن المخطط وجودها.
 FIELD_ALIASES = {
     "project_id": PROJECT_ID, "projectId": PROJECT_ID, "project_uid": PROJECT_ID,
     "id": PROJECT_ID, "uid": PROJECT_ID,
@@ -103,7 +105,7 @@ def build_publish_args(schema_text: str) -> tuple[dict | None, str]:
 
 
 def verify_live(date: str, timeout: int = 45) -> dict:
-    """تحقق حي من رابط اليوم على نطاق Manus."""
+    """تحقق حي من رابط اليوم على نطاق المنصة: 200 · text/html · حجم · التاريخ في المتن · بصمة."""
     url = f"{MANUS_BASE}/reports/{date}.html"
     req = urllib.request.Request(url, headers={"User-Agent": "seawatch-channel-check/1.0"})
     try:
@@ -113,15 +115,48 @@ def verify_live(date: str, timeout: int = 45) -> dict:
             ok = (resp.status == 200 and ctype == "text/html"
                   and len(body) >= MIN_BYTES and date.encode() in body)
             return {"url": url, "status": resp.status, "content_type": ctype,
-                    "bytes": len(body), "ok": ok,
+                    "bytes": len(body), "sha256": hashlib.sha256(body).hexdigest(), "ok": ok,
                     "reason": "" if ok else "شرط التحقق غير مستوفى"}
     except Exception as exc:  # noqa: BLE001
-        return {"url": url, "status": 0, "content_type": "", "bytes": 0, "ok": False,
-                "reason": f"{type(exc).__name__}: {str(exc)[:100]}"}
+        return {"url": url, "status": 0, "content_type": "", "bytes": 0, "sha256": "",
+                "ok": False, "reason": f"{type(exc).__name__}: {str(exc)[:100]}"}
 
 
 def marker_path(date: str) -> Path:
     return B / "state" / f"manus-channel-{date}.json"
+
+
+def measured_today(date: str) -> dict | None:
+    """آخر قياس مسجّل اليوم لهذه القناة."""
+    path = LOG_DIR / f"{date}.jsonl"
+    if not path.is_file():
+        return None
+    last = None
+    for line in path.read_text(encoding="utf-8").splitlines():
+        try:
+            entry = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if entry.get("date") == date:
+            last = entry
+    return last
+
+
+def verify_only(date: str) -> tuple[int, str]:
+    """شرط تحقق قناة المرآة في المانيفست."""
+    marker = marker_path(date)
+    if marker.is_file():
+        doc = json.loads(marker.read_text(encoding="utf-8"))
+        live = verify_live(date)
+        if not live["ok"]:
+            return 2, f"سجل النشر موجود لكن التحقق الحي فشل: {live['reason']} (حالة {live['status']})"
+        if doc.get("sha256") and live["sha256"] != doc["sha256"]:
+            return 2, "البصمة المخدومة لا تطابق المسجّلة — المحتوى تغيّر بلا نشر جديد"
+        return 0, f"قناة المرآة محقَّقة حيًّا · {live['status']} · {live['content_type']} · {live['bytes']} بايت"
+    entry = measured_today(date)
+    if entry and entry.get("state") in ("not-ready", "error"):
+        return 0, f"قياس موثّق اليوم: {entry.get('state')} — {str(entry.get('why'))[:90]}"
+    return 1, "لا سجل نشر ولا قياس جهوزية مسجّل اليوم لهذه القناة"
 
 
 def log_entry(entry: dict) -> None:
@@ -137,6 +172,7 @@ def notify_success(doc: dict) -> tuple[bool, str]:
             f"التاريخ: {doc['date']}\n"
             f"الرابط: {doc['url']}\n"
             f"الحجم: {doc['bytes']} بايت · النوع: text/html\n"
+            f"البصمة: {str(doc.get('sha256'))[:16]}…\n"
             f"الوقت: {doc['verified_at']}")
     rc, out = run([sys.executable, str(B / "tools" / "telegram_send.py"),
                    "--text", text, "--targets", "primary", "--owner-approved",
@@ -149,7 +185,14 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", default=dt.date.today().isoformat())
     ap.add_argument("--no-notify", action="store_true")
+    ap.add_argument("--verify-only", action="store_true",
+                    help="فحص شرط قناة المرآة بلا نشر: سجل نشر محقَّق أو قياس جهوزية موثّق")
     a = ap.parse_args(argv)
+
+    if a.verify_only:
+        rc, why = verify_only(a.date)
+        print(f"   شرط قناة Manus: {'مستوفى' if rc == 0 else 'غير مستوفى'} — {why}")
+        return rc
 
     if marker_path(a.date).is_file():
         print(f"   ✔ قناة Manus منشورة لتاريخ {a.date} سابقًا — لا إعادة")
@@ -167,7 +210,7 @@ def main(argv: list[str] | None = None) -> int:
         log_entry({"date": a.date, "state": "schema", "why": "لا أداة نشر في السجل"})
         print("   ✘ لا أداة نشر معلنة في سجل الأدوات — لا تخمين")
         return 2
-    rc2, schema_text = run(["manus-mcp-cli", "tool", "get", tool, "--server", "webdev-mcp"], timeout=120)
+    _rc2, schema_text = run(["manus-mcp-cli", "tool", "get", tool, "--server", "webdev-mcp"], timeout=120)
     args, why2 = build_publish_args(schema_text)
     if args is None:
         log_entry({"date": a.date, "state": "schema", "tool": tool, "why": why2})
@@ -181,7 +224,8 @@ def main(argv: list[str] | None = None) -> int:
     doc = {"date": a.date, "tool": tool, "publish_rc": rc3,
            "publish_output_tail": out3.strip()[-300:],
            "url": live["url"], "status": live["status"], "content_type": live["content_type"],
-           "bytes": live["bytes"], "verified_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")}
+           "bytes": live["bytes"], "sha256": live["sha256"],
+           "verified_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")}
     if live["ok"]:
         marker_path(a.date).parent.mkdir(parents=True, exist_ok=True)
         marker_path(a.date).write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

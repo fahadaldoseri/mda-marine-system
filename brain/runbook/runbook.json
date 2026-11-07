@@ -5355,6 +5355,52 @@
       ]
     },
     {
+      "id": "D016",
+      "title": "قناة Manus المرآة: نشر محكوم وشرط تحقق خاص (200 · text/html · الحجم · البصمة)",
+      "kind": "script",
+      "phase": "deliver",
+      "assert": [
+        {
+          "type": "cmd",
+          "command": [
+            "python3",
+            "tools/manus_channel_attempt.py",
+            "--verify-only",
+            "--date",
+            "{date}"
+          ]
+        }
+      ],
+      "links": {
+        "rules": [
+          "س4 — قنوات العرض",
+          "قرار المالك 2026-11-07: Manus قناة ثانية معلنة"
+        ],
+        "files": [
+          "tools/manus_channel_attempt.py"
+        ],
+        "gates": [],
+        "tests": [
+          "tests/test_manus_channel_verify.py"
+        ]
+      },
+      "on_fail": "continue",
+      "optional": true,
+      "command": [
+        "bash",
+        "-lc",
+        "B=\"$PWD\"; export B SITE; python3 tools/manus_channel_attempt.py --date {date}; rc=$?; exit $rc"
+      ],
+      "ok_rc": [
+        0
+      ],
+      "warn_rc": [
+        1
+      ],
+      "disabled": false,
+      "disabled_reason": "قناة مرآة اختيارية: غير الجاهزية تحذير موثّق لا إسقاط للجولة، والنشر يقع تلقائيًا عند جهوزية الإضافة"
+    },
+    {
       "id": "D030",
       "title": "إرسال الملخص وPDF على تلغرام",
       "kind": "script",
@@ -6061,5 +6107,26 @@
     "cloudflare-pages",
     "raw-githack",
     "raw.githubusercontent-verify-only"
+  ],
+  "mirror_channels": [
+    {
+      "id": "manus",
+      "title": "قناة Manus المرآة (نطاق المنصة)",
+      "base_url": "https://seawatch-xp4qirmr.manus.space",
+      "report_path": "/reports/{date}.html",
+      "role": "mirror",
+      "required": false,
+      "step": "D016",
+      "tool": "tools/manus_channel_attempt.py",
+      "verify": {
+        "status": 200,
+        "content_type": "text/html",
+        "min_bytes": 100000,
+        "must_contain": "{date}",
+        "fingerprint": "sha256 للمتن المخدوم يُسجَّل ويُشترط ثباته عند إعادة التحقق",
+        "fingerprint_note": "لا تُشترط مطابقة بصمة البناء المحلي: المنصة تحقن عناصرها في المتن المخدوم"
+      },
+      "measured_state_2026_11_07": "الرابط يعيد 404 · رسالة المنصة: addon workspace recovery has not completed"
+    }
   ]
 }
