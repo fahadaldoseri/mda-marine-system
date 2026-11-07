@@ -48,7 +48,7 @@ def main():
     ap.add_argument("--no-verify", action="store_true")
     a = ap.parse_args()
     repo = Path(a.repo)
-    brain = Path(a.brain) if a.brain else repo.parent / "brain-marine-news"
+    brain = Path(a.brain) if a.brain else (repo / "brain")
     site = Path(a.site) if a.site else repo.parent / "seawatch"
     skills = Path(a.skills) if a.skills else (Path("/home/ubuntu/skills") if Path("/home/ubuntu/skills").is_dir() else repo / "skills")
     roots = {"brain": brain, "site": site, "skills": skills}

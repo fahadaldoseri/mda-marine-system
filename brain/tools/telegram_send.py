@@ -31,7 +31,6 @@ from pathlib import Path
 B = Path(__file__).resolve().parent.parent
 TARGETS_FILE = B / "appendices" / "telegram-targets.json"
 LEGACY_CHAT = B / "appendices" / "telegram-chat.json"
-RELAY = "https://r.jina.ai/"
 SEND_LOG = B / "logs" / "telegram-sends.jsonl"
 
 
@@ -200,22 +199,10 @@ def send_text(token: str, cid: str, text: str, route_log: list[str]) -> bool:
     body = send_text_direct(base)
     route_log.append("مباشر")
     if not ok_of(body):
-        payload = json.dumps({"url": base}, ensure_ascii=False)
-        with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False, encoding="utf-8") as fh:
-            fh.write(payload)
-            tmp = fh.name
-        try:
-            body = curl(["-X", "POST", RELAY, "-H", "Content-Type: application/json",
-                         "--data-binary", "@" + tmp])
-        finally:
-            try:
-                os.unlink(tmp)
-            except OSError:
-                pass
-        route_log[-1] = "وسيط POST"
-        if not ok_of(body):
-            body = curl([RELAY + base], timeout=90)
-            route_log[-1] = "وسيط GET (احتياطي)"
+            # ممنوع أي وسيط خارجي: تمرير عنوان يحمل رمز البوت إلى خدمة عامة تسريب مؤكد.
+            # الفشل مغلق: لا تُجرَّب أي جهة غير api.telegram.org إطلاقًا.
+            route_log[-1] = "مباشر: فشل — لا وسيط خارجي (فشل مغلق)"
+
     if ok_of(body):
         route_log.append(f"نص: ok · الرسالة {mid_of(body)}")
         _LAST_SEND_ERROR = {}

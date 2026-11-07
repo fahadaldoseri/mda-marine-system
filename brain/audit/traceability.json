@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-07T12:24:00.920854+00:00",
+  "generated_at": "2026-11-07T12:51:00+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -4062,6 +4062,27 @@
       "lesson_id": null,
       "barrier_id": "B-26501c01",
       "run_evidence": "ublish_live_contract_20261107.py tests/test_publish_channels.py -q` → خرج 0 · 16 passed"
+    },
+    {
+      "fault_id": "ك-549",
+      "state": "مغلق",
+      "lesson_id": "ك-549",
+      "barrier_id": "B-81217012",
+      "run_evidence": "pytest tests/test_three_root_causes_20261107.py -q → 8 passed؛ validators/check_server_code_tracking.py --root . → خرج 0؛ D035/D040/D070 مرتبطة؛ 14/14 SHA-256 ثم إزالة الشجرة المضاعفة"
+    },
+    {
+      "fault_id": "ك-550",
+      "state": "مغلق",
+      "lesson_id": "ك-550",
+      "barrier_id": "B-45f0a86f",
+      "run_evidence": "pytest tests/test_three_root_causes_20261107.py -q → 8 passed؛ bash tests/test_delivery_scripts.sh → 11 نجاح · 0 فشل؛ error_code وdescription محفوظان دون سر"
+    },
+    {
+      "fault_id": "ك-551",
+      "state": "مغلق",
+      "lesson_id": "ك-551",
+      "barrier_id": "B-1c41fa20",
+      "run_evidence": "pytest tests/test_three_root_causes_20261107.py -q → 8 passed؛ python3 tools/runbook.py verify --root . → خرج 0 «المانيفست متسق»؛ غياب المانيفست → rc=2 مع المسارات المفحوصة"
     }
   ]
 }
