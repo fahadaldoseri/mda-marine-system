@@ -30,6 +30,12 @@ class GithubBackupFailureOutputTest(unittest.TestCase):
             script = tools / "github_backup.sh"
             shutil.copy2(SCRIPT, script)
             script.chmod(0o755)
+            validators = brain / "validators"
+            validators.mkdir(parents=True)
+            shutil.copy2(ROOT / "validators" / "check_backup_tree_clean.py", validators)
+            runbook = brain / "runbook"
+            runbook.mkdir(parents=True)
+            shutil.copy2(ROOT / "runbook" / "parity-scope.json", runbook)
 
             bare = tmp / "origin.git"
             repo = tmp / "mda-marine-system"
@@ -61,10 +67,10 @@ class GithubBackupFailureOutputTest(unittest.TestCase):
 
             self.assertEqual(proc.returncode, 2, proc.stdout + proc.stderr)
             combined = proc.stdout + proc.stderr
-            self.assertIn("شجرة المستودع غير نظيفة", combined)
+            self.assertIn("حارس شجرة النسخ منع العملية", combined)
             utc_date = datetime.now(timezone.utc).date().isoformat()
             log = brain / "logs" / f"github-backup-{utc_date}.log"
-            self.assertIn("شجرة المستودع غير نظيفة", log.read_text(encoding="utf-8"))
+            self.assertIn("تعديل حاكم", log.read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

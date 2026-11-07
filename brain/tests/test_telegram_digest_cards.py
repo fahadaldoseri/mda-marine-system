@@ -23,6 +23,21 @@ def render(hero_kpis):
     return MOD.build(meta, "2026-11-06", "https://example.test")
 
 
+def test_fallback_delivery_note_contains_verified_url_and_manus_outage():
+    meta = json.loads((ROOT / "web/meta/2026-11-06.json").read_text(encoding="utf-8"))
+    text = MOD.build(
+        meta,
+        "2026-11-07",
+        "https://raw.githack.com/fahadaldoseri/seawatch-live/main",
+        delivery_note=(
+            "القناة الأساسية (منصة Manus) معطّلة مؤقتًا؛ "
+            "أُرسل التقرير عبر القناة البديلة."
+        ),
+    )
+    assert "https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html" in text
+    assert "القناة الأساسية (منصة Manus) معطّلة مؤقتًا" in text
+
+
 def main() -> int:
     cases = [
         (

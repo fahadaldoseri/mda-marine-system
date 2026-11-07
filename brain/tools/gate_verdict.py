@@ -176,6 +176,7 @@ def main() -> int:
     ap.add_argument("--date", required=True)
     ap.add_argument("--root", default="")
     ap.add_argument("--step", default="", help="خطوة واحدة فقط")
+    ap.add_argument("--delivery-step", default="D010", help="حدّ التسليم الذي تُقاس قبله قدم G011")
     ap.add_argument("--json", default="")
     ap.add_argument("--quiet", action="store_true")
     a = ap.parse_args()
@@ -201,7 +202,7 @@ def main() -> int:
     for g in gates:
         lp = brain / "logs" / "runbook" / a.date / f"{g}.log"
         txt = lp.read_text(encoding="utf-8", errors="ignore") if lp.exists() else ""
-        stale = stale_gate_reason(g, steps, manifest_steps)
+        stale = stale_gate_reason(g, steps, manifest_steps, a.delivery_step)
         state, why = classify(steps[g], txt, stale)
         verdicts[g] = {"state": state, "why": why, "rc": steps[g].get("rc"), "ts": steps[g].get("ts"), "log": str(lp.name)}
         if state == "مانع":

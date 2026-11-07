@@ -38,5 +38,13 @@ PATH="$T/bin:$PATH" BRAIN_DIR="$T/brain" SITE_DIR="$T/seawatch" bash "$T/brain/t
 [ "$rc" = 2 ] && grep -q '"status": "failed"' "$T/brain/logs/live-$D.json"; ok $? "check_live يفشل ويسجّل failed عند تعذّر الوصول"
 grep -q "/home/ubuntu" "$B/tools/publish_site.sh" "$B/tools/check_live.sh"; [ $? -ne 0 ]; ok $? "لا مسار /home/ubuntu في سكربتات التسليم"
 grep -q 'release_paths' "$B/tools/check_live.sh" && grep -q 'elapsed_seconds' "$B/tools/check_live.sh" && grep -q 'max_wait_seconds' "$B/tools/check_live.sh"; ok $? "التحقق الحي يوثق مسارات الإصدار وزمن الانتشار"
+python3 - "$B/tools/publish_site.sh" <<'PY'
+import pathlib, sys
+p = pathlib.Path(sys.argv[1]).read_text(encoding="utf-8")
+assert p.count("rc=${PIPESTATUS[0]}") >= 2
+assert p.index("rc=${PIPESTATUS[0]}") < p.index("PDF_STATE=attached")
+assert p.index("rc=${PIPESTATUS[0]}", p.index("PDF_STATE=attached")) < p.index("PDF_STATE=skipped-printing-disabled")
+PY
+ok $? "D030 يلتقط رمز Telegram API قبل تحديث حالة المرفق"
 echo "الحصيلة: نجح $PASS · فشل $FAIL"
 [ "$FAIL" = 0 ]

@@ -41,9 +41,12 @@ trap print_backup_log_on_exit EXIT
   echo "=== بدء النسخ الاحتياطي: $(date -u +%FT%TZ) ==="
   cd "$REPO" || abort "تعذر دخول مستودع النسخة: $REPO"
 
-  # يلزم خط أساس حديث ونظيف من main قبل بناء أي التزام احتياطي.
+  # سجلات التشغيل المعلنة محلية ولا تمنع النسخ؛ الشيفرة/البيانات الحقيقية تمنع مغلقًا.
+  python3 "$B/validators/check_backup_tree_clean.py" --repo "$REPO" --brain "$B" \
+    || abort "حارس شجرة النسخ منع العملية؛ راجع تصنيف المسارات وبصمات SHA-256"
+
+  # يلزم خط أساس حديث من main قبل بناء أي التزام احتياطي.
   git fetch -q origin main || abort "تعذر جلب origin/main؛ لم يُنشأ التزام أو دفع"
-  [ -z "$(git status --porcelain)" ] || abort "شجرة المستودع غير نظيفة؛ لم يُنشأ فرع أو دفع"
   git checkout -q main || abort "تعذر الانتقال إلى main؛ لم يُنشأ فرع أو دفع"
   git merge -q --ff-only origin/main || abort "main المحلي تباعد عن origin/main؛ أوقف النسخ"
   python3 "$B/tools/apply_from_github.py" --repo "$REPO" --brain "$B" \

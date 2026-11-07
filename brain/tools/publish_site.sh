@@ -49,7 +49,10 @@ python3 "$B/tools/runbook.py" gates-status --date "$D" --root "$B" || {
   echo "✘ رُفض $MODE: سجل المحرّك لا يُظهر اكتمال البوابات. لا نشر خارج المحرّك."
   exit 2; }
 # ك-312: حكم البوابات الفعلي — لا يكفي الاكتمال، يجب ألّا يكون في أي سجل حكم مانع.
-python3 "$B/tools/gate_verdict.py" --date "$D" --root "$B" --json "$B/logs/gate-verdict-$D.json" || {
+# حدّ القياس يختلف: النشر يقف عند D010، أما الرسالة فتقف عند D030 بعد D010/D020.
+DELIVERY_STEP="D010"
+[ "$MODE" = telegram ] && DELIVERY_STEP="D030"
+python3 "$B/tools/gate_verdict.py" --date "$D" --root "$B" --delivery-step "$DELIVERY_STEP" --json "$B/logs/gate-verdict-$D.json" || {
   echo "✘ رُفض $MODE: بوابة بحكم مانع في سجل $D. أصلح ثم أعد تشغيل البوابة. لا نشر."
   exit 2; }
 # ك-315: تماثل النسخة الإنجليزية يُفحص في النشر نفسه (فشل مغلق).
@@ -65,6 +68,7 @@ if [ "$MODE" = telegram ]; then
   # الطباعة معطلة بأمر المالك (2026-11-03)؛ فيُرسل الملخص نصًّا بلا مرفق PDF.
   if [ -s "$PDF" ]; then
     python3 "$B/tools/telegram_send.py" --daily-report --date "$D" --file "$DIG" --document "$PDF" 2>&1 | tee "$B/logs/telegram-$D.out" | tail -3
+    rc=${PIPESTATUS[0]}
     PDF_STATE=attached
   else
     echo "⚠ لا PDF (الطباعة معطلة بأمر المالك) — يُرسل الملخص نصًّا بلا مرفق"
@@ -76,9 +80,9 @@ if [ "$MODE" = telegram ]; then
     else
       python3 "$B/tools/telegram_send.py" --daily-report --date "$D" --file "$DIG" 2>&1 | tee "$B/logs/telegram-$D.out" | tail -3
     fi
+    rc=${PIPESTATUS[0]}
     PDF_STATE=skipped-printing-disabled
   fi
-  rc=${PIPESTATUS[0]}
   if [ "$rc" -eq 0 ]; then record "$OUT" ok 0 "{\"pdf\":\"$PDF_STATE\"}"; echo "✔ أُرسل ملخص $D"; else record "$OUT" failed "$rc"; echo "✘ فشل إرسال تلغرام (رمز $rc)"; fi
   exit "$rc"
 fi

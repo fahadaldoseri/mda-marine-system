@@ -5,8 +5,10 @@
 «5) رمز الانهيار 70 (حارس موحّد) يمنع التسليم» فصار السجل كله «مانعًا» وأوقف النشر.
 """
 from __future__ import annotations
+import json
 import pathlib
 import sys
+import tempfile
 
 B = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(B / "tools"))
@@ -59,6 +61,56 @@ def test_gate_log_current_after_delivery_prep_is_not_stale():
         {"id": "D010", "phase": "deliver"},
     ]
     assert gv.stale_gate_reason("G011", journal, manifest, "D010") == ""
+
+
+def test_gate_log_stale_after_publish_and_live_check_is_blocked_before_telegram():
+    """لا يُرسل D030 إذا تغيّرت مدخلات G011 بعد النشر والتحقق الحي."""
+    journal = {
+        "G011": {"status": "done", "ts": "2026-11-07T08:07:05Z"},
+        "S085": {"status": "done", "ts": "2026-11-07T10:38:45Z"},
+        "D010": {"status": "done", "ts": "2026-11-07T10:44:32Z"},
+        "D020": {"status": "done", "ts": "2026-11-07T10:51:09Z"},
+    }
+    manifest = [
+        {"id": "G011", "phase": "gates"},
+        {"id": "S085", "phase": "gates"},
+        {"id": "D010", "phase": "deliver"},
+        {"id": "D020", "phase": "deliver"},
+        {"id": "D030", "phase": "deliver"},
+    ]
+    reason = gv.stale_gate_reason("G011", journal, manifest, "D030")
+    assert reason and "S085" in reason
+
+
+def test_cli_uses_d030_as_delivery_boundary_for_telegram():
+    with tempfile.TemporaryDirectory(prefix="gate-verdict-d030-") as raw:
+        root = pathlib.Path(raw)
+        (root / "logs/runbook/2026-11-07").mkdir(parents=True)
+        (root / "runbook").mkdir()
+        (root / "runbook/runbook.json").write_text(json.dumps({
+            "steps": [
+                {"id": "G011", "phase": "gates"},
+                {"id": "S085", "phase": "gates"},
+                {"id": "D010", "phase": "deliver"},
+                {"id": "D020", "phase": "deliver"},
+                {"id": "D030", "phase": "deliver"},
+            ]
+        }), encoding="utf-8")
+        (root / "logs/runbook/2026-11-07.jsonl").write_text(
+            "\n".join(json.dumps({"step": key, "status": "done", "ts": ts}) for key, ts in (
+                ("G011", "2026-11-07T08:07:05Z"),
+                ("S085", "2026-11-07T10:38:45Z"),
+                ("D010", "2026-11-07T10:44:32Z"),
+                ("D020", "2026-11-07T10:51:09Z"),
+            )) + "\n", encoding="utf-8")
+        (root / "logs/runbook/2026-11-07/G011.log").write_text("جاهز\n", encoding="utf-8")
+        original_argv = sys.argv
+        try:
+            sys.argv = ["gate_verdict.py", "--date", "2026-11-07", "--root", str(root),
+                        "--delivery-step", "D030", "--quiet"]
+            assert gv.main() == 1
+        finally:
+            sys.argv = original_argv
 
 
 def main() -> int:
