@@ -1,8 +1,10 @@
 """اختبار انحدار: شرط تحقق قناة Manus المرآة يفشل مغلقًا ولا يُصدّق ادعاءً بلا قياس.
 
 الحالات المثبتة:
-  · لا سجل نشر ولا قياس جهوزية اليوم            → غير مستوفى (1)
-  · قياس جهوزية موثّق اليوم (الإضافة غير جاهزة) → مستوفى (0)
+  · لا سجل نشر + قياس لحظي: الإضافة غير جاهزة   → مستوفى (0) بقياس لا بسجل
+  · لا سجل نشر + قياس لحظي: الإضافة جاهزة       → فشل مغلق (2): تقرير ناقص على قناة جاهزة
+  · سجل مزيف يقول «غير جاهزة» والقياس يقول جاهزة → فشل مغلق (2): لا ثقة في السجل
+  · تعذّر القياس نفسه                            → غير مستوفى (1)
   · سجل نشر مع تحقق حي مطابق للبصمة             → مستوفى (0)
   · سجل نشر مع تحقق حي فاشل                     → فشل مغلق (2)
   · سجل نشر مع بصمة مخدومة مختلفة               → فشل مغلق (2)
@@ -43,21 +45,43 @@ def _write_log(tmp: Path, state: str) -> None:
         encoding='utf-8')
 
 
-def test_no_marker_no_measurement_is_not_satisfied(tmp_path: Path, monkeypatch) -> None:
+def _prep(tmp_path: Path, monkeypatch) -> None:
     monkeypatch.setattr(mc, 'B', _root(tmp_path))
     monkeypatch.setattr(mc, 'LOG_DIR', tmp_path / 'logs' / 'manus-channel')
-    rc, why = mc.verify_only(DATE)
-    assert rc == 1
-    assert 'لا سجل نشر' in why
 
 
-def test_recorded_measurement_satisfies_condition(tmp_path: Path, monkeypatch) -> None:
-    monkeypatch.setattr(mc, 'B', _root(tmp_path))
-    monkeypatch.setattr(mc, 'LOG_DIR', tmp_path / 'logs' / 'manus-channel')
-    _write_log(tmp_path, 'not-ready')
+def test_not_ready_measured_live_satisfies_condition(tmp_path: Path, monkeypatch) -> None:
+    _prep(tmp_path, monkeypatch)
+    monkeypatch.setattr(mc, 'probe_readiness', lambda: ('not-ready', 'إضافة المنصة لم تكتمل استعادتها'))
     rc, why = mc.verify_only(DATE)
     assert rc == 0
-    assert 'قياس موثّق' in why
+    assert 'استحالة نشر مقيسة الآن' in why
+
+
+def test_ready_but_unpublished_fails_closed(tmp_path: Path, monkeypatch) -> None:
+    _prep(tmp_path, monkeypatch)
+    monkeypatch.setattr(mc, 'probe_readiness', lambda: ('ready', 'الإضافة جاهزة'))
+    rc, why = mc.verify_only(DATE)
+    assert rc == 2
+    assert 'فشل مغلق' in why
+
+
+def test_fake_not_ready_log_cannot_satisfy_condition(tmp_path: Path, monkeypatch) -> None:
+    """سجل مزيف أو قديم لا يمرّر الشرط: القرار من قياس لحظي لا من السجل."""
+    _prep(tmp_path, monkeypatch)
+    _write_log(tmp_path, 'not-ready')
+    monkeypatch.setattr(mc, 'probe_readiness', lambda: ('ready', 'الإضافة جاهزة'))
+    rc, why = mc.verify_only(DATE)
+    assert rc == 2
+    assert 'فشل مغلق' in why
+
+
+def test_probe_error_is_not_satisfied(tmp_path: Path, monkeypatch) -> None:
+    _prep(tmp_path, monkeypatch)
+    monkeypatch.setattr(mc, 'probe_readiness', lambda: ('error', 'تعذّر القياس (رمز 127)'))
+    rc, why = mc.verify_only(DATE)
+    assert rc == 1
+    assert 'تعذّر قياس' in why
 
 
 def test_marker_with_matching_live_fingerprint_passes(tmp_path: Path, monkeypatch) -> None:
