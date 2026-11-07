@@ -139,6 +139,19 @@ def check_sources_count(brain: pathlib.Path, date: str, out: list, blockers: lis
     else:
         out.append(('عدد المصادر في INDEX', n, 'INDEX.md', 'لا إعلان مخالف', 'مطابق'))
 
+    scan = ['INDEX.md', 'sections/10-sources.md', 'sections/90-automation.md',
+            'appendices/source-reliability-40.md']
+    claims = []
+    for rel in scan:
+        for i, line in enumerate(text(brain / rel).splitlines(), 1):
+            if re.search(r'(37|40|62)[^\n]{0,25}مصدر|مصدر[^\n]{0,25}(37|40|62)', line) \
+                    and '**' in line and str(n) not in line:
+                claims.append(f'{rel}:{i}')
+    if claims:
+        blockers.append('إعلان غليظ بعدد مصادر مخالف للسجل %d في: %s' % (n, ' · '.join(claims[:4])))
+    else:
+        out.append(('إعلانات عدد المصادر', n, 'الملفات الحاكمة للمصادر', 'لا إعلان غليظ مخالف', 'مطابق'))
+
 
 def check_zones(brain: pathlib.Path, date: str, out: list, blockers: list) -> None:
     """عدد القطاعات في واجهة اليوم = عدد القطاعات في السجل المعتمد."""

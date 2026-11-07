@@ -94,7 +94,7 @@ license: Complete terms in LICENSE.txt
 7. شغّل بوابة الاتساق:
    ```bash
    python3 /home/ubuntu/mda-marine-system/brain/validators/check_threat_consistency.py \
-     --date YYYY-MM-DD --brain /home/ubuntu/brain-marine-news
+     --date YYYY-MM-DD --brain /home/ubuntu/mda-marine-system/brain
    ```
    أوقف الجولة عند أي رمز غير 0، واقرأ المخرج الحرفي قبل أي تعديل.
 8. افتح الصفحة المنشورة أو المحلية وشغّل سكربت القياس المرفق:
@@ -131,7 +131,7 @@ license: Complete terms in LICENSE.txt
 
 ```bash
 python3 /home/ubuntu/skills/fault-closure-ops/scripts/check_closure.py \
-  --brain /home/ubuntu/brain-marine-news
+  --brain /home/ubuntu/mda-marine-system/brain
 python3 /home/ubuntu/skills/fault-closure-ops/scripts/test_closure_gate.py
 ```
 
