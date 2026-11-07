@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة 8e011ff10aa4997e). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة 2493cb00673ec06a). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -100,7 +100,7 @@
 | G037 | بوابات المخرج العشر | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G037.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/qa_gates.py | stop |
 | G056 | بوابة ترجمة الشيفرة (صياغة بايثون) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G056.log | ف1–ف5 — بوابة التحقق | validators/check_python_syntax.py | stop |
 | G055 | بوابة تغطية الربط الشامل | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G055.log | ف1–ف5 — بوابة التحقق | tools/binding_coverage.py | stop |
-| G054 | بوابة ربط الأرقام بمصادرها | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G054.log | ف1–ف5 — بوابة التحقق | validators/check_number_bindings.py | stop |
+| G054 | بوابة ربط الأرقام بمصادرها | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G054.log | ف1–ف5 — بوابة التحقق | validators/check_number_bindings.py، validators/check_published_counters.py | stop |
 | G042 | تطابق النص المبني مع النص النهائي | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G042.log | ف1–ف5 — بوابة التحقق، ف6 — ذرية البناء وقفل single-flight | tools/final_gate.sh، tools/build_lock.py، tools/build_transaction.py، tools/en_master_build.sh | stop |
 | G043 | سجل البوابات gate.json من سجل المحرّك | script |  |  | cmd:bash -lc grep -q 'runbook-ledger' logs/gate-{date}/gate.json | ف1–ف5 — بوابة التحقق | tools/runbook.py، tools/write_mark.py | stop |
 | G038 | كتابة العلامة بعد البوابة | script |  | logs/pipeline-{date}.json | cmd:bash -lc test -s logs/runbook/{date}/G038.log؛ file_exists:logs/pipeline-{date}.json؛ cmd:bash -lc grep -q 'العلامة (final)' logs/runbook/{date}/G038.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/write_mark.py | stop |
