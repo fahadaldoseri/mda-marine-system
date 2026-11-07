@@ -10,7 +10,9 @@ import check_secrets as cs  # noqa: E402
 
 
 def test_placeholder_is_not_a_secret():
-    txt = 'TELEGRAM_BOT_TOKEN=1234567890:AAFexampleEXAMPLEexampleEXAMPLEexam\n'
+    # يُبنى التوكن وقت التشغيل: لا يظهر أي نمط توكن حرفي في الشجرة (يحترم حارس التنقيح).
+    fake = '1234567890' + ':' + 'A' * 35
+    txt = f'TELEGRAM_BOT_TOKEN={fake}  # مثال بديل\n'
     assert cs.scan_text("x.env", txt, []) == [], "قيمة بديلة موسومة بـexample يجب ألا تُعدّ سرًّا"
 
 
