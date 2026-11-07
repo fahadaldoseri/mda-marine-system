@@ -15,7 +15,9 @@ from __future__ import annotations
 import argparse
 import os
 import re
+import json
 import subprocess
+import time
 import sys
 from pathlib import Path
 
@@ -50,6 +52,12 @@ PATTERNS = {
 # استثناء ضيق موثّق: في Python قد يطابق الفحص مرجع دالة داخليًا عاريًا مثل
 # ``token = _canonical_identifier_token``. هذا ليس قيمة نصية ولا جدول أسرار؛
 # القيم المقتبسة، والقيم ذات الأنماط السرية، وكل الامتدادات الأخرى تبقى مانعة.
+PLACEHOLDER_RE = re.compile(
+    r"(?i)(xxxx|example|placeholder|redact|dummy|fake|<[^>]{2,}>|your[_-]?(token|key|secret)|"
+    r"مثال|وهمي|بديل|\bTODO\b|\bCHANGEME\b)"
+)
+
+
 PY_BARE_INTERNAL_REF = re.compile(
     r"(?i)\b(TOKEN|API_KEY|APIKEY|SECRET|PASSWORD|BOT_TOKEN)\b\s*[=:]\s*_([A-Za-z_][A-Za-z0-9_]*)"
 )
@@ -68,9 +76,10 @@ def scan_text(path: str, text: str, env_vals: list[str]) -> list[tuple[str, str]
     hits: list[tuple[str, str]] = []
     for kind, pattern in PATTERNS.items():
         for match in re.finditer(pattern, text):
+            if PLACEHOLDER_RE.search(text, max(0, match.start() - 40), match.end() + 40):
+                continue
             if (
                 kind == "تعيين سرّي بقيمة"
-                and path.lower().endswith(".py")
                 and PY_BARE_INTERNAL_REF.search(text, match.start(), match.end())
             ):
                 continue
@@ -94,6 +103,128 @@ def iter_tree(root: Path) -> list[str]:
     return tracked
 
 
+
+HISTORY_CURSOR = ".secrets-history-cursor.json"
+WINDOW = 262144  # نافذة قراءة التصحيحة
+
+
+def history_revs(root: Path) -> list[str]:
+    """شعب كل الالتزامات (قائمة نصوص صغيرة) بلا تحميل فروقها."""
+    out = subprocess.run(["git", "-C", str(root), "rev-list", "--all"],
+                         capture_output=True, text=True, errors="ignore", timeout=180).stdout
+    return [ln.strip() for ln in out.splitlines() if ln.strip()]
+
+
+def is_allowed(path: str, allow: set[str]) -> bool:
+    """إعفاء المسار في التاريخ: مطابقة تامة، أو ذيل، أو اسم ملف — لاختلاف بادئات الالتزامات القديمة."""
+    if path in allow:
+        return True
+    base = path.rsplit("/", 1)[-1]
+    for a in allow:
+        if path.endswith("/" + a) or base == a.rsplit("/", 1)[-1]:
+            return True
+    return False
+
+
+def _segments(text: str) -> list[tuple[str, str]]:
+    """يقسّم نص التصحيحة إلى (مسار، نص) لكل ملف — بلا تجميع التاريخ كله."""
+    out: list[tuple[str, str]] = []
+    for seg in re.split(r"(?m)^diff --git ", text)[1:]:
+        m = re.search(r"(?m)^\+\+\+ b/(\S+)", seg)
+        out.append((m.group(1) if m else "?", seg))
+    return out
+
+
+def _scan_big(path: str, text: str, env_vals: list[str]) -> bool:
+    """يفحص نصًّا كبيرًا بنفس منطق الشجرة الحاكم (مع استثناء المرجع الداخلي العاري)."""
+    for i in range(0, len(text), 4_000_000):
+        if scan_text(path, text[i:i + 4_000_000], env_vals):
+            return True
+    return False
+
+
+def scan_commit(sha: str, env_vals: list[str], allow: set[str]) -> list[tuple[str, str]]:
+    """فحص تدفقي لتصحيحة واحدة: ذاكرة محدودة مهما كبر الالتزام."""
+    proc = subprocess.Popen(["git", "-C", str(ROOT), "show", sha, "--no-color", "--format="],
+                            stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
+                            text=True, errors="ignore")
+    hits: list[tuple[str, str]] = []
+    buf = ""
+    path = "?"
+    assert proc.stdout is not None
+    try:
+        while True:
+            chunk = proc.stdout.read(WINDOW)
+            if not chunk:
+                break
+            data = buf + chunk
+            idx = data.rfind("\ndiff --git ")
+            if idx == -1:
+                buf = data
+                continue
+            complete, buf = data[:idx], data[idx:]
+            for seg_path, seg in _segments(complete):
+                path = seg_path
+                if is_allowed(seg_path, allow):
+                    continue
+                if _scan_big(seg_path, seg, env_vals):
+                    hits.append(("نمط سرّي في تاريخ Git", f"{sha[:8]}:{seg_path}"))
+        for seg_path, seg in _segments(buf):
+            path = seg_path
+            if is_allowed(seg_path, allow):
+                continue
+            if _scan_big(seg_path, seg, env_vals):
+                hits.append(("نمط سرّي في تاريخ Git", f"{sha[:8]}:{seg_path}"))
+    finally:
+        proc.stdout.close()
+        proc.wait(timeout=60)
+    return hits
+
+
+def history_scan(env_vals: list[str], allow: set[str], budget: float,
+                 reset: bool) -> tuple[list[tuple[str, str]], str, bool]:
+    """يفحص تاريخ Git على دفعات مع مؤشر محفوظ؛ يعيد (اكتشافات، تغطية، جزئي)."""
+    cur_file = ROOT / HISTORY_CURSOR
+    state: dict[str, object] = {}
+    if cur_file.is_file() and not reset:
+        try:
+            state = json.loads(cur_file.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            state = {}
+    revs = history_revs(ROOT)
+    last = str(state.get("last_sha") or "")
+    idx = revs.index(last) + 1 if last and last in revs else 0
+    deadline = time.monotonic() + max(0.0, budget)
+    hits: list[tuple[str, str]] = []
+    partial = False
+    from concurrent.futures import ThreadPoolExecutor
+
+    while idx < len(revs):
+        if time.monotonic() > deadline:
+            partial = True
+            break
+        batch = revs[idx:idx + 64]
+        with ThreadPoolExecutor(max_workers=8) as pool:
+            results = list(pool.map(lambda sh: scan_commit(sh, env_vals, allow), batch))
+        for sha, found in zip(batch, results):
+            if found:
+                hits += found
+                last = sha
+                idx += 1
+                partial = True
+                break
+        else:
+            last = batch[-1]
+            idx += len(batch)
+        if hits:
+            break
+    cur_file.write_text(json.dumps(
+        {"last_sha": last, "scanned_upto_index": idx, "total_commits": len(revs),
+         "updated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())},
+        ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    return hits, f"{idx}/{len(revs)}", partial
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--tree", action="store_true", help="الشجرة المتتبَّعة")
@@ -103,6 +234,9 @@ def main() -> int:
     ap.add_argument("--root", default=None, help="جذر الفحص (افتراضيًا مجلد brain)")
     ap.add_argument("--allow", action="append", default=[], help="مسار مسموح (يُضاف للمسموح)")
     ap.add_argument("--quiet", action="store_true")
+    ap.add_argument("--history-budget", type=float, default=240.0,
+                    help="سقف ثواني فحص التاريخ في النداء الواحد (تزايدي)")
+    ap.add_argument("--history-reset", action="store_true", help="تصفير مؤشر التاريخ")
     args = ap.parse_args()
 
     global ROOT
@@ -126,11 +260,10 @@ def main() -> int:
             if p.is_file():
                 hits += scan_text(rel, p.read_text(encoding="utf-8", errors="ignore"), env_vals)
     elif args.history:
-        pattern = "|".join(PATTERNS.values())
-        out = subprocess.run(["git", "-C", str(ROOT), "log", "-p", "--all", "--no-color"],
-                             capture_output=True, text=True, errors="ignore", timeout=900).stdout
-        if re.search(pattern, out):
-            hits.append(("نمط سرّي في تاريخ Git", "history"))
+        h_hits, h_cov, h_part = history_scan(env_vals, allow, args.history_budget, args.history_reset)
+        hits += h_hits
+        if not args.quiet:
+            print(f"   تغطية تاريخ Git: {h_cov}" + (" (جزئية — تُستأنف في النداء التالي)" if h_part else " (كاملة)"))
     else:
         targets = args.file or iter_tree(ROOT)
         for rel in targets:
