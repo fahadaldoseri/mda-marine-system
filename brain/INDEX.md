@@ -123,7 +123,7 @@
 
 ## ملحق الموثوقية وتوسيع المصادر (13 أكتوبر 2026)
 - القائمة المعتمدة: **62 مصدرًا** بحسب السجل الحاكم `appendices/source-reliability-40.json` (الاسم تاريخي).
-- العدد التاريخي **40 مصدرًا** (37 + Jerusalem Post + IHO + MarineTraffic) محفوظ كمرجع في `sections/10-sources.md` ولا يُنشر كعدد معتمد.
+- العدد التاريخي 40 مصدرًا (37 + Jerusalem Post + IHO + MarineTraffic) محفوظ كمرجع في `sections/10-sources.md` ولا يُنشر كعدد معتمد.
 - سجل الموثوقية والمصداقية الثابت → `appendices/source-reliability-40.md`
 - كتلة العرض وشكل الملحق → `sections/40-blocks.md`
 - بوابة التحقق من الملحق → `sections/60-validation.md`
