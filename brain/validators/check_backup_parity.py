@@ -21,6 +21,17 @@ S = Path(os.environ.get("SITE_DIR") or B.parent / "seawatch")
 REPO = Path(os.environ.get("BACKUP_REPO_DIR") or B.parent / "mda-marine-system")
 SCOPE_ENV = "PARITY_SCOPE_FILE"
 
+# مخرجات تشغيل محلية مؤقتة لا تُنقل إلى المرآة ولا تُعدّ انحرافًا حاكمًا.
+# تُحصر بالبادئة كي لا يُستثنى ملف شيفرة أو بيانات بلا سبب مكتوب.
+LOCAL_ONLY_PATTERNS = (
+    "audit/backups/",
+    "brain/logs/skills-sync-",
+    "brain/logs/skills-canon-",
+    "brain/logs/apply-",
+    "brain/logs/",
+    "logs/",
+)
+
 
 class ScopeError(ValueError):
     """سجل النطاق مفقود/فاسد أو مسار لا ينتمي إلى فئة معلنة."""
