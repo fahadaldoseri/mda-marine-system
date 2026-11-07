@@ -89,7 +89,10 @@
         "brain/archive/ofac-screen-latest.json"
       ],
       "exact": [
-        "brain/memory/learning-log.jsonl"
+        "brain/memory/learning-log.jsonl",
+        "brain/memory/improvement-queue.jsonl",
+        "brain/memory/intel-estimates.jsonl",
+        "brain/memory/intel-learning.jsonl"
       ]
     },
     {
@@ -114,7 +117,8 @@
         ".gitignore",
         "AGENTS.md",
         "README.md",
-        "brain/.gitignore"
+        "brain/.gitignore",
+        "brain/memory/learning-log.jsonl.pre-unify"
       ]
     }
   ],
