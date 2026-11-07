@@ -787,3 +787,41 @@ fatal: Authentication failed for 'https://github.com/fahadaldoseri/mda-marine-sy
 ⚠ تعارض (عُدّل على الخادم خارج GitHub): skills/superpowers-method/SKILL.md
 ✘ 2 تعارض. لا شيء طُبّق. إن كان المستودع هو الصحيح: أعد التشغيل بـ --accept-repo (تُؤرشف نسخ الخادم أولًا).
 ⚠ تعذّر/تعارض في تطبيق الشيفرة (تستمر نسخة البيانات بعد تسجيل التحذير)
+الملفات: 9110 · الحجم: 274.8 م.ب · الفهرس: docs/فهرس-الملفات.tsv
+  انحراف شيفرة: skills/SKILL.md — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+✔ بوابة الأسرار: لا سرّ في النطاق المفحوص
+✔ كل ملفات الشيفرة على الخادم متتبَّعة في المستودع (المستثنى المعلَّل: 0)
+✔ آمن: لا يوجد git push مباشر إلى main في /home/ubuntu/mda-marine-system/brain/tools/github_backup.sh
+remote: 
+remote: Create a pull request for 'backup/2026-11-07-173032-2646605' on GitHub by visiting:        
+remote:      https://github.com/fahadaldoseri/mda-marine-system/pull/new/backup/2026-11-07-173032-2646605        
+remote: 
+تم دفع الفرع فقط: backup/2026-11-07-173032-2646605
+تم إنشاء طلب الدمج: https://github.com/fahadaldoseri/mda-marine-system/pull/526
+=== انتهى: 2026-11-07T17:30:38Z ===
+=== بدء النسخ الاحتياطي: 2026-11-07T17:32:03Z ===
+حارس شجرة النسخ: تغييرات Git=8 · سجلات تشغيل معلنة=7 · تعديلات حاكمة=1
+  ✔ سجل تشغيل معلن: brain/logs/github-backup-2026-11-07.log · sha256=a10fe01d1d98744f2d124ecd3963d29a35eceb39eca40cae9ced1790f07999d6
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-07.jsonl · sha256=93a39a24295d1f944caf5bb303d305e91b024cedf558a91d82b4ef554090d5f3
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-07/D070.log · sha256=22373e07c75660328bea46953c9cb088838ba59de068cf1b18ac54bd5f724b12
+  ✔ سجل تشغيل معلن: brain/logs/telegram-archive/2026-11-07-2026-11-07T153039Z.html · sha256=87748aa713256aadb18572616dfaa044c5ab8bd2f035ff60bdecb11b07a002d0
+  ✔ سجل تشغيل معلن: brain/logs/telegram-archive/2026-11-07-2026-11-07T153115Z.html · sha256=87748aa713256aadb18572616dfaa044c5ab8bd2f035ff60bdecb11b07a002d0
+  ✔ سجل تشغيل معلن: brain/logs/telegram-archive/2026-11-07-2026-11-07T153140Z.html · sha256=87748aa713256aadb18572616dfaa044c5ab8bd2f035ff60bdecb11b07a002d0
+  ✔ سجل تشغيل معلن: brain/logs/telegram-archive/2026-11-07-2026-11-07T162054Z.html · sha256=87748aa713256aadb18572616dfaa044c5ab8bd2f035ff60bdecb11b07a002d0
+  ✘ تعديل حاكم: brain/validators/check_backup_parity.py · sha256=7cdbb24d6d4541b3aad15ddf014ea75bde349e4629f89a6dbd88c29a3a9b3f7a
+✘ فشل مغلق: توجد تعديلات شيفرة/بيانات حقيقية خارج سجلات التشغيل المعلنة
+✘ فشل مغلق: حارس شجرة النسخ منع العملية؛ راجع تصنيف المسارات وبصمات SHA-256
+=== بدء النسخ الاحتياطي: 2026-11-07T17:36:10Z ===
+حارس شجرة النسخ: تغييرات Git=7 · سجلات تشغيل معلنة=7 · تعديلات حاكمة=0
+  ✔ سجل تشغيل معلن: brain/logs/github-backup-2026-11-07.log · sha256=816dc0c7f519bd96e41e0a0555f224b54b69b37fca7c5b6bb9680afdb006914b
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-07.jsonl · sha256=93a39a24295d1f944caf5bb303d305e91b024cedf558a91d82b4ef554090d5f3
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-07/D070.log · sha256=22373e07c75660328bea46953c9cb088838ba59de068cf1b18ac54bd5f724b12
+  ✔ سجل تشغيل معلن: brain/logs/telegram-archive/2026-11-07-2026-11-07T153039Z.html · sha256=87748aa713256aadb18572616dfaa044c5ab8bd2f035ff60bdecb11b07a002d0
+  ✔ سجل تشغيل معلن: brain/logs/telegram-archive/2026-11-07-2026-11-07T153115Z.html · sha256=87748aa713256aadb18572616dfaa044c5ab8bd2f035ff60bdecb11b07a002d0
+  ✔ سجل تشغيل معلن: brain/logs/telegram-archive/2026-11-07-2026-11-07T153140Z.html · sha256=87748aa713256aadb18572616dfaa044c5ab8bd2f035ff60bdecb11b07a002d0
+  ✔ سجل تشغيل معلن: brain/logs/telegram-archive/2026-11-07-2026-11-07T162054Z.html · sha256=87748aa713256aadb18572616dfaa044c5ab8bd2f035ff60bdecb11b07a002d0
+✔ شجرة النسخ تمر: سجلات التشغيل المحلية لا تمنع النسخة الاحتياطية
+⚠ تعارض (عُدّل على الخادم خارج GitHub): skills/.skill_versions.json
+⚠ تعارض (عُدّل على الخادم خارج GitHub): skills/superpowers-method/SKILL.md
+✘ 2 تعارض. لا شيء طُبّق. إن كان المستودع هو الصحيح: أعد التشغيل بـ --accept-repo (تُؤرشف نسخ الخادم أولًا).
+⚠ تعذّر/تعارض في تطبيق الشيفرة (تستمر نسخة البيانات بعد تسجيل التحذير)
