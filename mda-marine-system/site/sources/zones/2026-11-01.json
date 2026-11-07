@@ -1,0 +1,245 @@
+{
+  "date": "2026-11-01",
+  "window": "خلال 24 ساعة السابقة",
+  "scale_version": 1,
+  "registry_version": 1,
+  "scale_levels": [
+    {
+      "ar": "حرج",
+      "rank": 5,
+      "token": "critical",
+      "color": "#FFA3A3",
+      "marker": "■ ■ ■ ■ ■"
+    },
+    {
+      "ar": "مرتفع جدًا",
+      "rank": 4,
+      "token": "severe",
+      "color": "#FFA96B",
+      "marker": "▲ ▲ ▲ ▲"
+    },
+    {
+      "ar": "مرتفع",
+      "rank": 3,
+      "token": "high",
+      "color": "#FFC24D",
+      "marker": "▲ ▲ ▲"
+    },
+    {
+      "ar": "متوسط",
+      "rank": 2,
+      "token": "med",
+      "color": "#d29119",
+      "marker": "▲ ▲"
+    },
+    {
+      "ar": "منخفض",
+      "rank": 1,
+      "token": "low",
+      "color": "#28b45a",
+      "marker": "▲"
+    }
+  ],
+  "overall": {
+    "level": "متوسط",
+    "rank": 2,
+    "top_zone": "مضيق هرمز وخليج عُمان والخليج العربي",
+    "top_zone_id": "Z1",
+    "basis": "أعلى نطاق: مضيق هرمز وخليج عُمان والخليج العربي — وقائع مؤهّلة: رواية إصابة أربع ناقلات بألغام واشتعالها في مضيق هرمز · حريق ناقلة غاز قطرية وإجلاء طاقم ناقلة في الخليج"
+  },
+  "zones": [
+    {
+      "id": "Z1",
+      "name": "مضيق هرمز وخليج عُمان والخليج العربي",
+      "level": "متوسط",
+      "rank": 2,
+      "confirmed": 0,
+      "probable": 1,
+      "excluded": 3,
+      "events": 5,
+      "qualifying_codes": [
+        "MN-2026-11-01-04",
+        "MN-2026-11-01-05"
+      ],
+      "categories": [
+        "تهديد ألغام",
+        "حريق على متن سفينة"
+      ],
+      "basis": "وقائع مؤهّلة: رواية إصابة أربع ناقلات بألغام واشتعالها في مضيق هرمز · حريق ناقلة غاز قطرية وإجلاء طاقم ناقلة في الخليج",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-01"
+    },
+    {
+      "id": "Z2",
+      "name": "باب المندب والبحر الأحمر",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-01"
+    },
+    {
+      "id": "Z3",
+      "name": "بحر العرب",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-01"
+    },
+    {
+      "id": "Z4",
+      "name": "القرن الأفريقي",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-01"
+    }
+  ],
+  "counter": {
+    "total": 6,
+    "qualifying": 2,
+    "confirmed": 0,
+    "probable": 1,
+    "unconfirmed_qualifying": 1,
+    "unconfirmed_total": 1,
+    "excluded": 3,
+    "nonspatial": 1
+  },
+  "generated_from": "cumulative-2026/daily/2026-11-01.json",
+  "events": [
+    {
+      "code": "MN-2026-11-01-01",
+      "title": "تحذير UKMTO رقم 190-26 عبر الحساب الرسمي",
+      "area": "مضيق هرمز",
+      "class": "بلاغ رسمي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": false,
+      "confirmation": "confirmed",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-01-01",
+      "source_excerpt": "UKMTO WARNING 190-26 Click here to read the full warning.⤵️ https://t.co/P2fqDD33ZS #MaritimeSecurity #MarSec https://t.co/BL6wGO6nXx",
+      "category": ""
+    },
+    {
+      "code": "MN-2026-11-01-02",
+      "title": "عنوان إعلامي عن انتقاد مجموعة رباعية لقيود التصدير وإغلاق مضيق هرمز",
+      "area": "مضيق هرمز",
+      "class": "نقل إعلامي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": false,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-01-02",
+      "source_excerpt": "Quad calls out export curbs, Strait of Hormuz closure | World News",
+      "category": ""
+    },
+    {
+      "code": "MN-2026-11-01-03",
+      "title": "خطة لإعادة فتح مضيق هرمز خلال يومين وربطها بقبول سبع نقاط",
+      "area": "مضيق هرمز",
+      "class": "نقل إعلامي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": false,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "نوع غير مؤهّل: «خطة»",
+      "incident_group": "MN-2026-11-01-03",
+      "source_excerpt": "Iran war live: Araghchi says talks under way on 2-day plan to reopen Hormuz",
+      "category": ""
+    },
+    {
+      "code": "MN-2026-11-01-04",
+      "title": "رواية إصابة أربع ناقلات بألغام واشتعالها في مضيق هرمز",
+      "area": "مضيق هرمز",
+      "class": "رواية",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": true,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "نوع مؤهّل: «ألغام» وهدف بحري/ملاحي: «ناقلات»",
+      "incident_group": "MN-2026-11-01-04",
+      "source_excerpt": "Iran’s IRGC Navy Says Four Tankers Catch Fire In Strait Of Hormuz",
+      "category": "تهديد ألغام"
+    },
+    {
+      "code": "MN-2026-11-01-05",
+      "title": "حريق ناقلة غاز قطرية وإجلاء طاقم ناقلة في الخليج",
+      "area": "الخليج العربي",
+      "class": "نقل مهني",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «الخليج العربي»",
+      "qualifying": true,
+      "confirmation": "probable",
+      "qualify_reason": "نوع مؤهّل: «حريق» وهدف بحري/ملاحي: «ناقلة»",
+      "incident_group": "MN-2026-11-01-05",
+      "source_excerpt": "Giant Qatari LNG carrier suffers fire in Gulf attack as Trump says war will be ‘wrapped up ​soon’",
+      "category": "حريق على متن سفينة"
+    },
+    {
+      "code": "MN-2026-11-01-06",
+      "title": "توقف تسرب نفطي من ناقلة مقابل السواحل الإماراتية واستمرار أعمال التنظيف",
+      "area": "مقابل السواحل الإماراتية",
+      "class": "تقرير مهني",
+      "zone": null,
+      "nonspatial": true,
+      "zone_reason": "بلا موقع بحري",
+      "qualifying": false,
+      "confirmation": "confirmed",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-01-06",
+      "source_excerpt": "Oil Leak Stopped From Tanker Offshore UAE, Clean Up Efforts Continue",
+      "category": ""
+    }
+  ]
+}

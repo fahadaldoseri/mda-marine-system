@@ -1,0 +1,6 @@
+$ python3 validators/check_skills_parity.py --root . --source-root /home/ubuntu/skills --mirror-root ./skills --skills-file runbook/approved-skills.json
+المهارات: 34 · aliases: 28 · الملفات: 247 · المختلف: 2 · المفقود: 0 · الزائد: 0
+✘ فشل مغلق — اختلاف بصمة المهارات:
+  - report-surface-and-print-ops/references/legacy/live-visual-audit-ops/SKILL.md (بصمة مختلفة: e31982f8803a… != e7eeb675d69a…)
+  - report-surface-and-print-ops/references/legacy/live-visual-audit-ops/scripts/verify_range_bidi.py (بصمة مختلفة: 62ca6bc56a3a… != ca3d744d28b5…)
+RC=2

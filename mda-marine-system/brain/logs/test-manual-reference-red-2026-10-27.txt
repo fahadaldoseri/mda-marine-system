@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/brain-marine-news/tests/test_manual_reference.py", line 14, in <module>
+    assert cf.MANUAL_REFERENCE == EXPECTED, cf.MANUAL_REFERENCE
+           ^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'cf' has no attribute 'MANUAL_REFERENCE'

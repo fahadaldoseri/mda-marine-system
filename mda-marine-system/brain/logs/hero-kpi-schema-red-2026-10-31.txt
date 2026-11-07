@@ -1,0 +1,38 @@
+العقد قبل التشغيل:
+  المصدر: ast:add_argument · الأداة: /home/ubuntu/brain-marine-news/tests/test_hero_kpi_schema.py
+  الخيارات المقبولة: --buffer, --catch, --durations, --failfast, --help, --locals, --quiet, --verbose, -b, -c, -f, -h, -k, -q, -v
+  تحذير استخراج: لم يُعثر على argparse/add_argument في AST
+كود الخروج: 1
+آخر 30 سطرًا من المخرج الحرفي:
+======================================================================
+ERROR: test_current_schema_requires_title_and_builds_4_then_3 (__main__.HeroKpiSchemaTests.test_current_schema_requires_title_and_builds_4_then_3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/brain-marine-news/tests/test_hero_kpi_schema.py", line 61, in test_current_schema_requires_title_and_builds_4_then_3
+    self.assertIs(build_report.validate_meta(NEW, report_date="2026-10-31"), NEW)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: validate_meta() got an unexpected keyword argument 'report_date'
+
+======================================================================
+ERROR: test_historical_missing_label_fails_closed (__main__.HeroKpiSchemaTests.test_historical_missing_label_fails_closed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/brain-marine-news/tests/test_hero_kpi_schema.py", line 58, in test_historical_missing_label_fails_closed
+    build_report.validate_meta(bad, report_date="2026-10-30")
+TypeError: validate_meta() got an unexpected keyword argument 'report_date'
+
+======================================================================
+ERROR: test_historical_schema_is_strict_and_keeps_flat_cards (__main__.HeroKpiSchemaTests.test_historical_schema_is_strict_and_keeps_flat_cards)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/brain-marine-news/tests/test_hero_kpi_schema.py", line 50, in test_historical_schema_is_strict_and_keeps_flat_cards
+    self.assertIs(build_report.validate_meta(OLD, report_date="2026-10-30"), OLD)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: validate_meta() got an unexpected keyword argument 'report_date'
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+FAILED (errors=4)
+التصنيف المقترح: 1 عطل
+قاعدة الفشل المغلق: توقّف واقرأ المخرج والعقد قبل أي متابعة

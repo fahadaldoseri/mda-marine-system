@@ -1,0 +1,17 @@
+{
+  "title_once": "التقرير اليومي للأمن البحري والأوضاع الراهنة في المنطقة",
+  "sub_line": "class=\"sc-sub\"",
+  "forbidden_visible": ["حسب القطاعات", "للعلم العام", "النافذة"],
+  "kpi_layers": {
+    "metrics_file": "web/kpis-totals/{date}.json",
+    "labels": {"cumulative": "المجموع من 28 فبراير 2026", "updated": "آخر تحديث"},
+    "cards": {
+      "ukmto-reports": "ukmto-reports",
+      "qualifying-incidents": "qualifying-incidents",
+      "unconfirmed-narratives": "unconfirmed-narratives",
+      "official-products": "official-products",
+      "fire-reports": "fire-incidents"
+    }
+  },
+  "pages": {"ar": "reports/{date}.html", "en": "reports/en/{date}.html"}
+}

@@ -1,0 +1,49 @@
+{
+  "_comment": "تدريج بوابات اللغة — القاعدة أ9 من الأمر التنفيذي 23 أكتوبر 2026. التاريخ مثبّت هنا لا في الشيفرة.",
+  "advisory_until": "2026-10-30",
+  "enforce_from": "2026-10-31",
+  "advisory_exit_code": 1,
+  "enforce_exit_code": 2,
+  "gates": {
+    "banned_terms_max": 0,
+    "orthography_errors_max": 0,
+    "internal_phrases_max": 0,
+    "waw_sentence_pct_max": 25,
+    "meaning_major_diff_max": 0
+  },
+  "targets": {
+    "waw_sentence_pct": 15
+  },
+  "alerts": {
+    "dir": "logs/alerts",
+    "waw_worse_than_median_pct": 30,
+    "median_days": 7,
+    "channel": "ملف محلي فقط — لا تلغرام"
+  },
+  "metrics": {
+    "style_json": "logs/style-metrics-<التاريخ>.json",
+    "orthography_json": "logs/orthography-<التاريخ>.json",
+    "daily_numbers_in_chat": true
+  },
+  "monitoring": {
+    "waw_sentence_pct": {
+      "per_report": true,
+      "target": 15,
+      "max": 25,
+      "fail_on_target_miss": false,
+      "record": "logs/style-metrics-<التاريخ>.json",
+      "alert_dir": "logs/alerts",
+      "channel": "ملف محلي فقط — لا تلغرام",
+      "note": "بند مراقبة مقيس لكل تقرير: الهدف 15% والسقف 25%؛ تجاوز الهدف تنبيه، وتجاوز السقف منع."
+    },
+    "waw_sentence_pct_section_analysis": {
+      "per_report": true,
+      "section": "قراءة الموقف وتحليل المؤشرات",
+      "target": 15,
+      "max": 20,
+      "fail_on_target_miss": false,
+      "record": "logs/style-metrics-<التاريخ>.sections.json",
+      "note": "سقف خاص بالقسم الأكثر إسهامًا في «و»؛ تجاوز الهدف تنبيه، وتجاوز السقف يُعالج قبل التسليم بإعادة صياغة مفتتح الجمل دون تغيير أي واقعة."
+    }
+  }
+}

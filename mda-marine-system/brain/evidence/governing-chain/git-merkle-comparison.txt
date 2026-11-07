@@ -1,0 +1,13 @@
+# Merkle/Git independent comparison
+# command context: python3 <this verifier> using evidence/merkle/20261030T174400991832Z.json
+leaf_sha256_raw_file_bytes=true
+parent_sha256=SHA256(left_digest_bytes||right_digest_bytes), odd_last_duplicated=true
+local_merkle_root=609750976b2559dc0f3e2dc9e366493b6ef72447e784c9bbdfff5686b93565ca
+mirror_merkle_root=f674dc2a1b438dfc44db4ae3deb4640734cb9227780a926289176d3ffc7a9525
+assets_compared=2625
+raw_bytes_same=2613
+raw_bytes_different=12
+mirror_missing=0
+git_object_algorithm=SHA-1("blob <size>\0" || file_bytes)
+git_hash_object_recomputed=2625/2625
+interpretation=roots are not expected to equal because Merkle uses raw SHA-256 leaves while Git uses SHA-1 blob framing; identical raw bytes had identical SHA-256 fingerprints and every Git SHA-1 was independently recomputed.

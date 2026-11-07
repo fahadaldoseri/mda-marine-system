@@ -1,0 +1,62 @@
+تحقق حي للمرساة ب-03 — 2026-11-06
+
+المصدر المطلوب: https://www.ukmto.org/recent-incidents
+المعرّف: f4b3cb09-5015-4102-b2a6-9982a7b9f7ec
+
+الأمر الحرفي:
+curl -sI https://www.ukmto.org/recent-incidents
+
+المخرج الحرفي:
+HTTP/2 403
+ date: Fri, 06 Nov 2026 16:22:57 GMT
+ content-type: text/html; charset=UTF-8
+ cache-control: private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+ expires: Thu, 01 Jan 1970 00:00:01 GMT
+ referrer-policy: same-origin
+ x-frame-options: SAMEORIGIN
+ server: cloudflare
+ cf-ray: a565709e6ab25837-MXP
+CURL_EXIT=0
+
+الأمر الحرفي للتحقق من HTML الخام:
+curl -sS -L -o <tmp> -w '%{http_code}' https://www.ukmto.org/recent-incidents
+
+المخرج الحرفي:
+HTTP_CODE=403
+HTML_BYTES=4542
+ANCHOR_RAW_HTML=NOT_FOUND
+ANCHOR_CONTEXT_BEGIN
+ANCHOR_CONTEXT_END
+
+تحقق Playwright الحقيقي:
+فتح: https://www.ukmto.org/recent-incidents
+العنوان: Recent Incidents
+النتيجة: document.readyState=complete، targetExists=true، targetTag=LI، htmlIncludes=true، bodyIncludes=false.
+المعرّف المطابق: f4b3cb09-5015-4102-b2a6-9982a7b9f7ec.
+النص يبدأ حرفيًا بـ:
+Attack UKMTO #196
+5 November 2026
+
+UKMTO has received a report of an incident 50NM North of Madinat ash Shamal, Qatar. A tanker has been struck by two unidentified projectiles.
+
+طلبات مصدر البيانات الرسمية داخل جلسة المتصفح:
+[GET] https://sccd.royalnavy.mod.uk/api/ukmto/all => [200]
+[GET] https://www.ukmto.org/_next/data/NWytYSxBBvmmiRRQ8O9u5/en/recent-incidents.json => [200]
+[GET] https://www.ukmto.org/_next/data/NWytYSxBBvmmiRRQ8O9u5/en/recent-incidents.json?path=recent-incidents => [200]
+
+فتح الرابط نفسه:
+https://www.ukmto.org/recent-incidents#f4b3cb09-5015-4102-b2a6-9982a7b9f7ec
+exists=true
+tag=LI
+rect.top=20
+rect.bottom=388
+rect.height=368
+viewport.width=1366
+viewport.height=682
+scrollY=250
+inViewport=true
+
+بصمة جلسة Playwright الحقيقية:
+navigator.userAgent=Mozilla/5.0 (X11; Linux x86_64; rv:158.0) Gecko/20100101 Firefox/158.0
+
+استنتاج مثبت: الرابط والمرساة صحيحان؛ المعرّف لا يظهر في HTML الخام بسبب Cloudflare/البناء الديناميكي، لكنه يظهر في DOM بعد تشغيل JavaScript ويمكن الوصول إليه. القرار: إصلاح أداة الفحص بمتصفح حقيقي وانتظار DOM، مع بقاء الغياب أو HTTP غير المقبول فشلًا مغلقًا.

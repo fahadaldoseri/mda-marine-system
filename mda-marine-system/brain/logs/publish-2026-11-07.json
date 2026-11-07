@@ -1,0 +1,65 @@
+{
+  "date": "2026-11-07",
+  "channel": "github-pages",
+  "url": "https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html",
+  "head": "d8e5f10ecfcfc93926d81a97b7c409b1ae6658ea",
+  "rc": 0,
+  "status": "ok",
+  "live": {
+    "ok": true,
+    "status": 200,
+    "bytes": 189327,
+    "date_marker": true,
+    "reason": "ok",
+    "url": "https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html",
+    "attempts": 1,
+    "elapsed_seconds": 3.042
+  },
+  "at": "2026-11-07T10:44:32Z",
+  "urls": [
+    "https://raw.githack.com/fahadaldoseri/seawatch-live/main/",
+    "https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html",
+    "https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-06.html",
+    "https://cdn.jsdelivr.net/gh/fahadaldoseri/seawatch-live@main/",
+    "https://cdn.jsdelivr.net/gh/fahadaldoseri/seawatch-live@main/reports/2026-11-07.html",
+    "https://cdn.jsdelivr.net/gh/fahadaldoseri/seawatch-live@main/reports/2026-11-06.html"
+  ],
+  "content_sha256": "967e7d05c58cd88b325c8680b0f67f6bec3a057c177171ba10986d3d937bd386",
+  "fallback_output_tail": "✔ fallback: public raw/jsDelivr content pushed — d8e5f10ecfcfc93926d81a97b7c409b1ae6658ea — sha256=967e7d05c58cd88b325c8680b0f67f6bec3a057c177171ba10986d3d937bd386",
+  "channels": {
+    "manus": {
+      "state": "down",
+      "reason": "addon workspace recovery has not completed"
+    },
+    "github-pages": {
+      "state": "ready",
+      "reason": "ok",
+      "live": {
+        "ok": true,
+        "status": 200,
+        "bytes": 189327,
+        "date_marker": true,
+        "reason": "ok",
+        "url": "https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html",
+        "attempts": 1,
+        "elapsed_seconds": 3.042
+      }
+    }
+  },
+  "attempts": [
+    {
+      "channel": "github-pages",
+      "status": "ok",
+      "live": {
+        "ok": true,
+        "status": 200,
+        "bytes": 189327,
+        "date_marker": true,
+        "reason": "ok",
+        "url": "https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html",
+        "attempts": 1,
+        "elapsed_seconds": 3.042
+      }
+    }
+  ]
+}

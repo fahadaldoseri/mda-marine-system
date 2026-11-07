@@ -1,0 +1,31 @@
+===== خط التشغيل الموحّد v2 — 2026-10-13 — 2026-10-13T11:40:52Z =====
+-- 1) التغذيات (38 تغذية) --
+/home/ubuntu/brain-marine-news/tools/check_feeds.py:55: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  stamp = dt.datetime.utcnow().strftime('%Y-%m-%d')
+  تغذيات مرصودة: 38
+  نجح: 30 · فشل: 8 · عناصر مقروءة: 774
+   ✘ 14 قناة العربية: HTTP Error 403: Forbidden
+   ✘ 14 قناة العربية: HTTP Error 403: Forbidden
+   ✘ 14 قناة العربية: HTTP Error 403: Forbidden
+   ✘ 17 حساب @bna_en على X: HTTP Error 403: Forbidden
+   ✘ 20 جريدة الأيام: HTTP Error 403: Forbidden
+   ✘ 28 وكالة الأنباء العُمانية: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unabl
+   ✘ 28 وكالة الأنباء العُمانية: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unabl
+   ✘ 33 MARAD/MSCI: HTTP Error 403: Forbidden
+  ✔ حُفظ: feeds-2026-10-13.json / .md
+   ✔ مستجدات التغذيات: feeds/feeds-2026-10-13.md
+-- 2) فحص OFAC --
+  قائمة SDN: 19372 اسمًا · المصدر: https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exp
+   ✔ لا تطابق · AL MAQAM
+   ◐ تطابق جزئي باسم شائع — يحتاج تحقق يدوي · DF PEAK → ['GIFTED PEAK LIMITED', 'GLOBAL PEAK']
+  ✔ حُفظ: archive/ofac-screen-latest.json
+   ✔ فُحص 2 مستهدفًا
+-- 3) حفظ الأصول الرسمية --
+/home/ubuntu/brain-marine-news/tools/archive_originals.py:18: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  return {'url': url, 'utc': dt.datetime.utcnow().isoformat(timespec='seconds') + 'Z', 'file': name,
+/home/ubuntu/brain-marine-news/tools/archive_originals.py:21: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  return {'url': url, 'utc': dt.datetime.utcnow().isoformat(timespec='seconds') + 'Z',
+  أصول محفوظة: 2/3 · البيان: /home/ubuntu/brain-marine-news/archive/originals/2026-10-13/manifest.json
+   ✘ https://www.ukmto.org/advisories → HTTP Error 404: Not Found
+   ✔ حُفظت الأصول في archive/originals/2026-10-13/
+===== نهاية الخط (رمز الخروج: 0) =====

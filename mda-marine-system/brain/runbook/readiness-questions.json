@@ -1,0 +1,79 @@
+{
+  "version": 2,
+  "rule_ar": "هذا هو التعريف الملزم لمقياس «جاهزية القائد» (البند ب4-08 في المرجع، كان غير محدَّد). كل سؤال يُقاس بوجود نصّه في الشاشة الأولى للصفحة المنشورة، على عرض 1440 و1920. وجود النصّ دليل على أن البند المطلوب معروض، لا على أنه صحيح المحتوى — صحة المحتوى تحرسها البوابات الأخرى.",
+  "measure_ar": "tools/browser_measure.py --check readiness",
+  "scope_ar": "الشاشة الأولى (قبل أي تمرير) في صفحة الإصدار اليومي",
+  "questions": [
+    {
+      "id": "ق-01",
+      "pattern": "مستوى التهديد",
+      "question_ar": "ما مستوى التهديد اليوم؟",
+      "surface_ar": "كتلة مستوى التهديد",
+      "pattern_en": "Threat level"
+    },
+    {
+      "id": "ق-02",
+      "pattern": "أعلى قطاع",
+      "question_ar": "أي قطاع هو الأعلى؟",
+      "surface_ar": "بطاقة القرار",
+      "pattern_en": "top sector"
+    },
+    {
+      "id": "ق-03",
+      "pattern": "إجراء اليوم",
+      "question_ar": "ما الإجراء المطلوب اليوم؟",
+      "surface_ar": "بطاقة القرار",
+      "pattern_en": "Action today"
+    },
+    {
+      "id": "ق-04",
+      "pattern": "الوقائع المستوفية",
+      "question_ar": "كم واقعة مستوفية اليوم؟",
+      "surface_ar": "بطاقات المؤشرات",
+      "pattern_en": "qualifying incidents"
+    },
+    {
+      "id": "ق-05",
+      "pattern": "المصادر",
+      "question_ar": "كم مصدرًا فُحص؟",
+      "surface_ar": "بطاقات المؤشرات",
+      "pattern_en": "Sources"
+    },
+    {
+      "id": "ق-06",
+      "pattern": "آخر تحديث",
+      "question_ar": "متى كان آخر تحديث للمصدر؟",
+      "surface_ar": "بطاقات المؤشرات",
+      "pattern_en": "Last update"
+    },
+    {
+      "id": "ق-07",
+      "pattern": "التحذيرات",
+      "question_ar": "هل توجد تحذيرات نشطة؟",
+      "surface_ar": "كتلة أهم الأخبار",
+      "pattern_en": "Warnings"
+    },
+    {
+      "id": "ق-08",
+      "pattern": "ما يُراقب",
+      "question_ar": "ما الذي يجب مراقبته خلال الساعات القادمة؟",
+      "surface_ar": "كتلة أهم الأخبار",
+      "pattern_en": "Watch"
+    },
+    {
+      "id": "ق-09",
+      "pattern": "خلال 24 ساعة",
+      "question_ar": "ماذا حدث خلال الساعات الأربع والعشرين السابقة؟",
+      "surface_ar": "كتلة أهم الأخبار",
+      "pattern_en": "past 24 hours"
+    },
+    {
+      "id": "ق-10",
+      "pattern": "المستجدات الرسمية",
+      "question_ar": "ما المستجدات الرسمية؟",
+      "surface_ar": "قسم المستجدات الرسمية",
+      "pattern_en": "Official developments"
+    }
+  ],
+  "note_ar": "لكل سؤال نمطان: عربي للسطح العربي وإنجليزي للسطح الإنجليزي (dist/reports/en)."
+}

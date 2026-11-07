@@ -1,0 +1,58 @@
+=== backup_verify_ts_utc=20261030T193849Z ===
+DEST=/home/ubuntu/audit-2026-10-30/backups-causality/20261030T193755Z-pre-reproduction
+>>> top-level
+.skill_versions.json f
+_legacy-marine-news-brain d
+_legacy-military-arabic-editing d
+accessibility d
+accessibility-review d
+account-research d
+acestep d
+after-effects-playbooks d
+agent-development d
+agent-md-refactor d
+agent-reach d
+agentic-eval d
+ai-seo d
+airflow-dag-patterns d
+album-art-director d
+alternative-blog-writer d
+api-designer d
+appinsights-instrumentation d
+appium-skill d
+applying-brand-guidelines d
+approved-output-change-ops d
+argv-tools-safe-probe-ops d
+aso-audit d
+audacity-playbooks d
+audit-support d
+automation-and-scheduling d
+aws-serverless d
+azure-role-selector d
+backlink-analysis d
+backtesting-frameworks d
+>>> source/dest file counts
+3266
+3266
+>>> source/dest bytes
+40M	/home/ubuntu/skills
+40M	/home/ubuntu/audit-2026-10-30/backups-causality/20261030T193755Z-pre-reproduction
+>>> file list diff (DEST is copy root)
+list_diff_exit=0
+>>> relevant hash pairs
+/home/ubuntu/skills/marine-news-brain/SKILL.md 650aa6f665249a53a3abd8125af997305d58d7dd649733356bc8b5559c1f1e3b 8499
+/home/ubuntu/audit-2026-10-30/backups-causality/20261030T193755Z-pre-reproduction/marine-news-brain/SKILL.md 650aa6f665249a53a3abd8125af997305d58d7dd649733356bc8b5559c1f1e3b 8499
+equal= True
+/home/ubuntu/skills/military-arabic-editing/SKILL.md a2389ee03dbae8edf02395fdcd41c94a0aad2e5ce02da64316e29e0fb172eb28 6354
+/home/ubuntu/audit-2026-10-30/backups-causality/20261030T193755Z-pre-reproduction/military-arabic-editing/SKILL.md a2389ee03dbae8edf02395fdcd41c94a0aad2e5ce02da64316e29e0fb172eb28 6354
+equal= True
+/home/ubuntu/skills/military-arabic-editing/references/ambiguity-map.md b45ad38539a9dc11dc520470b48e67c5eb4c521007c8a6121373075a99d06867 6427
+/home/ubuntu/audit-2026-10-30/backups-causality/20261030T193755Z-pre-reproduction/military-arabic-editing/references/ambiguity-map.md b45ad38539a9dc11dc520470b48e67c5eb4c521007c8a6121373075a99d06867 6427
+equal= True
+/home/ubuntu/skills/superpowers-method/SKILL.md 488f1b1252607b47e34a151064a4ae144750901acbf139b7739e9ac1a0e2765a 7656
+/home/ubuntu/audit-2026-10-30/backups-causality/20261030T193755Z-pre-reproduction/superpowers-method/SKILL.md 488f1b1252607b47e34a151064a4ae144750901acbf139b7739e9ac1a0e2765a 7656
+equal= True
+/home/ubuntu/skills/.skill_versions.json bed82e636debe59f1060de4c1bc63d316d7e3e2506d7227123b12350cb48c1ea 20872
+/home/ubuntu/audit-2026-10-30/backups-causality/20261030T193755Z-pre-reproduction/.skill_versions.json bed82e636debe59f1060de4c1bc63d316d7e3e2506d7227123b12350cb48c1ea 20872
+equal= True
+python_exit=0

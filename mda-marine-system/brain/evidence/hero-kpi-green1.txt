@@ -1,0 +1,13 @@
+..............F.
+======================================================================
+FAIL: test_negative_fixed_title_change_fails_closed (__main__.HeroKpiGateTests.test_negative_fixed_title_change_fails_closed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/brain-marine-news/tests/test_card_counters.py", line 175, in test_negative_fixed_title_change_fails_closed
+    self.assertTrue(any("ثبات العنوان" in e for e in errors), errors)
+AssertionError: False is not true : []
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.038s
+
+FAILED (failures=1)

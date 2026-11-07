@@ -1,0 +1,26 @@
+{
+ "version": 1,
+ "decision": "قرار صاحب القرار 2026-10-23 (البند ع-1): العلامة اليومية تُكتب بعد البوابة بمخطط ثابت ومُتحقَّق، فلا يتغيّر شكلها من يوم لآخر.",
+ "required": {
+  "schema_version": "int",
+  "date": "str",
+  "pipeline_version": "int",
+  "finished_utc": "str",
+  "overall": "enum:ok|degraded|failed",
+  "feeds": "obj",
+  "sources": "obj",
+  "final_gate": "obj",
+  "report_present_at_pipeline_end": "bool",
+  "gate_finished_utc": "str"
+ },
+ "required_in_sources": {
+  "approved": "int",
+  "checked": "int",
+  "ok": "int"
+ },
+ "required_in_final_gate": {
+  "status": "enum:ok|warn|block",
+  "exit_code": "int",
+  "dir": "str"
+ }
+}

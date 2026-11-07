@@ -1,0 +1,57 @@
+test_policy_surface_is_used_for_counter_targets (tests.test_card_counters.CardCounterGateTests.test_policy_surface_is_used_for_counter_targets) ... FAIL
+test_stale_fragment_uses_policy_surface_and_data_goto_title (tests.test_card_counters.CardCounterGateTests.test_stale_fragment_uses_policy_surface_and_data_goto_title) ... FAIL
+test_positive_registry_matches_both_enabled_cards (tests.test_card_counters.CardCounterGateTests.test_positive_registry_matches_both_enabled_cards) ... FAIL
+test_negative_counter_change_fails_closed (tests.test_card_counters.CardCounterGateTests.test_negative_counter_change_fails_closed) ... ok
+
+======================================================================
+FAIL: test_policy_surface_is_used_for_counter_targets (tests.test_card_counters.CardCounterGateTests.test_policy_surface_is_used_for_counter_targets)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/brain-marine-news/tests/test_card_counters.py", line 98, in test_policy_surface_is_used_for_counter_targets
+    self.assertEqual(errors, [])
+AssertionError: Lists differ: ['en: مفتاح مطلوب مفقود أو مكرر في بطاقة m[84 chars]vel'] != []
+
+First list contains 2 additional elements.
+First extra element 0:
+'en: مفتاح مطلوب مفقود أو مكرر في بطاقة maritime-security-news: watch'
+
++ []
+- ['en: مفتاح مطلوب مفقود أو مكرر في بطاقة maritime-security-news: watch',
+-  'en: مرساة بطاقة القطاعات لا تطابق عنوانها: Threat level']
+
+======================================================================
+FAIL: test_stale_fragment_uses_policy_surface_and_data_goto_title (tests.test_card_counters.CardCounterGateTests.test_stale_fragment_uses_policy_surface_and_data_goto_title)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/brain-marine-news/tests/test_card_counters.py", line 105, in test_stale_fragment_uses_policy_surface_and_data_goto_title
+    self.assertEqual(errors, [])
+AssertionError: Lists differ: ['en: مفتاح مطلوب مفقود أو مكرر في بطاقة m[84 chars]vel'] != []
+
+First list contains 2 additional elements.
+First extra element 0:
+'en: مفتاح مطلوب مفقود أو مكرر في بطاقة maritime-security-news: watch'
+
++ []
+- ['en: مفتاح مطلوب مفقود أو مكرر في بطاقة maritime-security-news: watch',
+-  'en: مرساة بطاقة القطاعات لا تطابق عنوانها: Threat level']
+
+======================================================================
+FAIL: test_positive_registry_matches_both_enabled_cards (tests.test_card_counters.CardCounterGateTests.test_positive_registry_matches_both_enabled_cards)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/brain-marine-news/tests/test_card_counters.py", line 108, in test_positive_registry_matches_both_enabled_cards
+    self.assertEqual(validate_card_documents(**self.docs()), [])
+AssertionError: Lists differ: ['en: مفتاح مطلوب مفقود أو مكرر في بطاقة m[84 chars]vel'] != []
+
+First list contains 2 additional elements.
+First extra element 0:
+'en: مفتاح مطلوب مفقود أو مكرر في بطاقة maritime-security-news: watch'
+
++ []
+- ['en: مفتاح مطلوب مفقود أو مكرر في بطاقة maritime-security-news: watch',
+-  'en: مرساة بطاقة القطاعات لا تطابق عنوانها: Threat level']
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.022s
+
+FAILED (failures=3)
