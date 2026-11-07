@@ -1,6 +1,6 @@
 {
  "date": "2026-11-07",
- "checked_at": "2026-11-07T10:49:28Z",
+ "checked_at": "2026-11-07T17:57:13Z",
  "release_paths": [
   "/",
   "/reports/2026-11-07.html",
@@ -14,16 +14,22 @@
  "paths": {
   "/": {
    "code": 200,
-   "bytes": 52170
+   "bytes": 52170,
+   "content_type": "text/html; charset=utf-8",
+   "content_type_ok": true
   },
   "/reports/2026-11-07.html": {
    "code": 200,
    "bytes": 189327,
+   "content_type": "text/html; charset=utf-8",
+   "content_type_ok": true,
    "date_marker": true
   },
   "/sources.html": {
    "code": 200,
-   "bytes": 140668
+   "bytes": 140668,
+   "content_type": "text/html; charset=utf-8",
+   "content_type_ok": true
   }
  },
  "status": "ok",

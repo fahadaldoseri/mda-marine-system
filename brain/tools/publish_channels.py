@@ -452,19 +452,20 @@ def _local_report(root: Path, date: str) -> Path:
     return site_root(root) / "dist" / "reports" / f"{date}.html"
 
 
+def _fresh_statuses(root: Path, date: str, repo: str) -> tuple[int, dict[str, dict[str, Any]]]:
+    """جهوزية القنوات بقياس جديد في كل مرة — لا قرار نشر على لقطة مخزّنة (عطل ك-555)."""
+    rc, doc = preflight(root, date, repo)
+    return rc, doc.get("channels", {})
+
+
 def publish(root: Path, date: str, repo: str = DEFAULT_REPO) -> int:
-    preflight_path = root / "logs" / f"publish-channel-{date}.json"
-    statuses = _read_json(preflight_path).get("channels", {})
-    if not statuses:
-        rc, preflight_doc = preflight(root, date, repo)
-        statuses = preflight_doc["channels"]
-        if rc != 0:
-            return rc
+    preflight_rc, statuses = _fresh_statuses(root, date, repo)
     selected = choose_channel(statuses)
     if not selected:
         _write_publish(root, date, {"date": date, "status": "failed", "rc": 2,
                                     "channel": None, "url": None, "head": None,
-                                    "why": "no presentation channel ready", "at": utc_now()})
+                                    "why": "no presentation channel ready after fresh preflight",
+                                    "preflight_rc": preflight_rc, "at": utc_now()})
         return 2
 
     order = ["cloudflare-pages", "raw-githack"] if selected == "cloudflare-pages" else [selected]
