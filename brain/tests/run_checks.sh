@@ -307,3 +307,4 @@ echo "----- الحصيلة -----"
 printf '  نجح: %s · فشل: %s\n' "$PASS" "$FAIL"
 [ "$FAIL" -eq 0 ] || exit 1
 exit 0
+t "لا وسيط خارجي في مسار الإرسال" python3 tests/test_no_external_relay_20261107.py
