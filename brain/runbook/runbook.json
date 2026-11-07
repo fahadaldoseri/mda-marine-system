@@ -5466,14 +5466,17 @@
      "validators/check_secrets.py",
      "tools/redact.py",
      "tools/github_backup.sh"
+    ],
+    "tests": [
+     "tests/test_d035_repo_root.py"
     ]
    },
    "on_fail": "stop",
-   "command": [
-    "bash",
-    "-lc",
-    "B=\"$PWD\"; export B; python3 validators/check_repo_secrets.py --repo \"$(dirname \"$B\")/mda-marine-system\" && python3 validators/check_secrets.py --root \"$B\" && python3 validators/check_secrets.py --root \"$(dirname \"$B\")/mda-marine-system\" && python3 validators/check_backup_push_safety.py --script \"$B/tools/github_backup.sh\"; rc=$?; exit $rc"
-   ],
+	  "command": [
+	   "bash",
+	   "-lc",
+	   "B=\"$PWD\"; export B; REPO=\"$(git -C \"$B\" rev-parse --show-toplevel 2>/dev/null || dirname \"$B\")\"; export REPO; python3 validators/check_repo_secrets.py --repo \"$REPO\" && python3 validators/check_secrets.py --root \"$B\" && python3 validators/check_secrets.py --root \"$REPO\" && python3 validators/check_backup_push_safety.py --script \"$B/tools/github_backup.sh\"; rc=$?; exit $rc"
+	  ],
    "ok_rc": [
     0
    ],
