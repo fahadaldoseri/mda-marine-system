@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-07T15:22:45.297525+00:00",
+  "generated_at": "2026-11-07T17:47:56.536289+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -4065,24 +4065,45 @@
     },
     {
       "fault_id": "ك-549",
-      "state": "مفتوح",
+      "state": "مغلق",
       "lesson_id": "ك-549",
       "barrier_id": "B-be25128d",
-      "run_evidence": null
+      "run_evidence": "قيس: `python3 -m pytest tests/test_three_root_causes_20261107.py -q → rc=0 (8 passed)` اختبار `test"
     },
     {
       "fault_id": "ك-550",
       "state": "مفتوح",
       "lesson_id": "ك-550",
       "barrier_id": "B-faa8c059",
-      "run_evidence": null
+      "run_evidence": "قيس: `python3 -m pytest tests/test_three_root_causes_20261107.py -q → rc=0 (8 passed)` `tests/test_"
     },
     {
       "fault_id": "ك-551",
       "state": "مفتوح",
       "lesson_id": "ك-551",
       "barrier_id": "B-aa45003c",
-      "run_evidence": null
+      "run_evidence": "قيس: `python3 -m pytest tests/test_three_root_causes_20261107.py -q → rc=0 (8 passed)` `tests/test_"
+    },
+    {
+      "fault_id": "ك-552",
+      "state": "مغلق",
+      "lesson_id": "ك-552",
+      "barrier_id": "B-4b97e386",
+      "run_evidence": "يل: `python3 -m pytest tests/test_secrets_generated_boundary.py -q` → rc=0 (2 passed) · `python3 va"
+    },
+    {
+      "fault_id": "ك-553",
+      "state": "مغلق",
+      "lesson_id": "ك-553",
+      "barrier_id": "B-14963bb7",
+      "run_evidence": "يل: `python3 -m pytest tests/test_secrets_generated_boundary.py -q` → rc=0 (2 passed) قاعدة صريحة: "
+    },
+    {
+      "fault_id": "ك-554",
+      "state": "مغلق",
+      "lesson_id": "ك-554",
+      "barrier_id": "B-0f6a787b",
+      "run_evidence": "غيل مقيس: `python3 -m pytest tests/test_canonical_brain_root.py -q` → rc=0 (5 passed) اختبار انحدار"
     }
   ]
 }

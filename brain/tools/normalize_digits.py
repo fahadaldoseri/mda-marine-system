@@ -13,9 +13,11 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent.parent          # مجلد brain
 BASE = HERE.parent                                      # جذر مساحة العمل
-ROOTS = [str(BASE / "brain-marine-news"), str(BASE / "seawatch")]
-if not Path(ROOTS[0]).exists():                          # عند التشغيل داخل نسخة مستنسخة
-    ROOTS = [str(HERE)] + ([str(HERE.parent / "site")] if (HERE.parent / "site").exists() else [])
+sys.path.insert(0, str(HERE / "tools"))
+from brain_root import canonical_brain_root  # noqa: E402
+_BRAIN = canonical_brain_root(HERE)
+_SITE = next((str(c) for c in [HERE.parent / "seawatch", HERE.parent / "site"] if c.exists()), str(HERE.parent / "seawatch"))
+ROOTS = [str(_BRAIN), _SITE]
 SKIP_DIRS = {"__pycache__", ".git", "node_modules", ".pytest_cache", "shots", "logs",
              "archive", "originals", "templates", ".history", ".manus-jobs",
              "terminal_full_output", "backup-repo", "web"}
