@@ -142,17 +142,30 @@ def test_in_repo_mode_emits_explicit_matching_result(tmp_path: Path) -> None:
         json.dumps({"skills": ["approved-skill"]}) + "\n", encoding="utf-8"
     )
     (skills / "approved-skill" / "SKILL.md").write_text("approved\n", encoding="utf-8")
+    subprocess.run(["git", "-C", str(repo), "init", "-q"], check=True)
+    subprocess.run(["git", "-C", str(repo), "config", "user.email", "test@example.invalid"], check=True)
+    subprocess.run(["git", "-C", str(repo), "config", "user.name", "parity-test"], check=True)
+    subprocess.run(["git", "-C", str(repo), "add", "."], check=True)
+    subprocess.run(["git", "-C", str(repo), "commit", "-qm", "fixture"], check=True)
 
     result = subprocess.run(
         [sys.executable, str(brain / "validators" / V.name), "--mode", "strict"],
-        env=dict(os.environ, BRAIN_DIR=str(brain), SITE_DIR=str(site), SKILLS_DIR=str(skills)),
+        env=dict(
+            os.environ,
+            BRAIN_DIR=str(brain),
+            SITE_DIR=str(site),
+            BACKUP_REPO_DIR=str(repo),
+            SKILLS_DIR=str(skills),
+        ),
         text=True,
         capture_output=True,
         check=False,
     )
 
     assert result.returncode == 0, result.stdout + result.stderr
-    assert "لا مقارنة" in result.stdout
+    assert "لا مقارنة" not in result.stdout
+    assert "الشجرة المحلية:" in result.stdout
+    assert "المستودع:" in result.stdout
     assert "النتيجة: مطابق" in result.stdout
 
 
