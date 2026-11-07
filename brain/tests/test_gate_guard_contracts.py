@@ -55,6 +55,19 @@ def test_code_policy() -> None:
         check("code_policy موجب: الرمز داخل سجل الأحداث", m.check_file(good)["outside"] == 0)
         check("code_policy سالب: الرمز خارج سجل الأحداث", m.check_file(bad)["outside"] == 1)
 
+        attribute_only = Path(td) / "attribute-only.html"
+        attribute_only.write_text(
+            '<main><section><h2>بطاقة القرار</h2>'
+            '<span data-code="MN-2026-11-06-01">رمز مخفي في وسم</span>'
+            '</section></main>',
+            encoding="utf-8",
+        )
+        result = m.check_file(attribute_only)
+        check(
+            "code_policy سالب: رمز في وسم بلا نص مرئي لا يُسقط الحارس",
+            result["outside"] == 1 and result["samples"],
+        )
+
 
 def test_ofac_coverage() -> None:
     m = load("validators/check_ofac_coverage.py", "guard_ofac_coverage")

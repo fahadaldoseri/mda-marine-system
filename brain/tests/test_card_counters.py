@@ -13,6 +13,8 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+from validators import check_card_counters as card_counter_module  # noqa: E402
+from tools.arabic_counter import format_arabic_count  # noqa: E402
 from validators.check_card_counters import (_counter, validate_card_documents,
                                              validate_hero_kpis, validate_official_cards,
                                              _measure_rendered_target)  # noqa: E402
@@ -428,6 +430,27 @@ class HeroKpiGateTests(unittest.TestCase):
     def test_current_day_hero_kpis_match_source_contract(self):
         self.assertEqual(validate_hero_kpis(self.meta, self.zones, self.registry), [])
 
+    def test_arabic_narrative_counter_forms_cover_zero_one_two_few_many_and_hundred(self):
+        narrative = next(card for card in self.registry["hero_kpis"]["cards"]
+                         if card["id"] == "unconfirmed-narratives")
+        forms = narrative["number_format"]
+        expected = {
+            0: "روايات",
+            1: "رواية",
+            2: "روايتان",
+            3: "روايات",
+            11: "رواية",
+            100: "رواية",
+        }
+        for value, noun in expected.items():
+            with self.subTest(value=value):
+                self.assertEqual(format_arabic_count(value, forms), f"{value} {noun}")
+
+    def test_arabic_narrative_counter_rejects_plural_for_one(self):
+        narrative = next(card for card in self.registry["hero_kpis"]["cards"]
+                         if card["id"] == "unconfirmed-narratives")
+        self.assertNotEqual(format_arabic_count(1, narrative["number_format"]), "1 روايات")
+
     def test_merged_imo_card_matches_official_list(self):
         """قرار المالك: دُمجت بطاقة «هجمات مؤكدة على سفن» في «سجل الحوادث المؤكدة من IMO»،
         فيُقاس المُدمَج على القائمة الرسمية نفسها ولا يُقاس مقياس ملغى."""
@@ -479,6 +502,11 @@ class HeroKpiGateTests(unittest.TestCase):
         self.assertIn(str(total), card["detail"])
         self.assertIn(str(qualifying), card["detail"])
         self.assertIn("تُذكر ولا تُحتسب", card["detail"])
+
+    def test_unconfirmed_detail_uses_singular_for_one_narrative(self):
+        self.assertEqual(int(self.zones["counter"]["unconfirmed_total"]), 1)
+        errors = validate_hero_kpis(self.meta, self.zones, self.registry)
+        self.assertEqual(errors, [])
 
     def test_negative_fixed_title_change_fails_closed(self):
         changed = self.copy.deepcopy(self.meta)

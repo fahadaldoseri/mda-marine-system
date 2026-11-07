@@ -47,7 +47,7 @@ Change: official confirmation of multiple damages or transit disruption raises i
 - Continue transmitting tracking data under company policy and record any outage or position discrepancy.
 ## Incident Log
 - **MN-2026-11-07-01** — **What happened:** On 06/11/2026, UKMTO listed a late report of an incident described as an attack 16 nautical miles east of Khasab. **Source:** UKMTO — 2026 warnings, and the @UK_MTO account on X, in warning 197-26. **Location:** off Khasab, at the entrance to the Strait of Hormuz. **Casualties:** not stated in the material reviewed. **Status:** official report; the full warning is needed to establish the damage type and vessel identity.
-- **MN-2026-11-07-02** — **What happened:** straits.live, gCaptain, MarineLink, Splash 247 and TradeWinds carried accounts of tankers struck by mines or catching fire near the Strait of Hormuz, with reports of a seafarer killed or missing. **Source:** straits.live; gCaptain; MarineLink; Splash 247; TradeWinds. **Location:** Strait of Hormuz and off the coast of Oman. **Casualties:** not established in the published UKMTO report. **Status:** unconfirmed report; some headlines may relate to the first incident, so each tanker or headline is not counted as a new incident.
+- **MN-2026-11-07-02** — **What happened:** Specialist maritime outlets carried accounts of tankers struck by mines or catching fire near the Strait of Hormuz, with reports of a seafarer killed or missing. **Source:** straits.live; gCaptain; MarineLink; Splash 247; TradeWinds. **Location:** Strait of Hormuz and off the coast of Oman. **Casualties:** not established in the published UKMTO report. **Status:** unconfirmed report; some headlines may relate to the first incident, so each tanker or headline is not counted as a new incident.
 Repeated headlines about multiple tankers do not raise the proof level or create independent incidents without vessel names, IMO numbers and a maritime report.
 ## Active Warnings and Advisories
 | Authority | Warning or advisory | Date and time | What the material establishes |
@@ -82,7 +82,7 @@ Yesterday's estimate that risk would continue in the Strait of Hormuz remains co
 ### EST Estimate Table
 | Code | Estimate | Probability | Basis |
 |---|---|---|---|
-| EST-2026-11-07-01 | Security-incident risk to ships near the Strait of Hormuz and the Gulf of Oman will continue during the next 24 to 72 hours | Likely (55–80%) to continue | UKMTO reports 196-26 and 197-26 (A/2), with incomplete details |
+| EST-2026-11-07-01 | Security-incident risk to ships near the Strait of Hormuz and the Gulf of Oman will continue during the next 24 to 72 hours | Likely (55–80%) to continue | UKMTO 196-26 and 197-26 reports (A/2), with incomplete details |
 | EST-2026-11-07-02 | An official maritime authority will confirm damage to at least one tanker from the circulating accounts | Approximately even chance (45–55%) | straits.live and professional outlets (C/3), with no full UKMTO details |
 | EST-2026-11-07-03 | An official navigational announcement will declare a complete disruption of the Strait of Hormuz during the next period | Unlikely (20–45%) | No official closure announcement in the daily material, despite continuing pressure and threats |
 ## Probabilities and Attribution

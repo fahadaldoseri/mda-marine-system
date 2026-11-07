@@ -58,7 +58,13 @@ def check_file(path: Path):
             outside += n
             ctx = TAGS_RE.sub(" ", sec)
             m = CODE_RE.search(ctx)
-            outside_samples.append(f"{title}: {ctx[max(0, m.start() - 50):m.end() + 30].strip()[-90:]}")
+            if m is not None:
+                sample = ctx[max(0, m.start() - 50):m.end() + 30]
+            else:
+                # قد يكون الرمز داخل خاصية HTML؛ يظل مخالفة، لكن لا يظهر بعد نزع الوسوم.
+                raw_match = CODE_RE.search(sec)
+                sample = sec[max(0, raw_match.start() - 50):raw_match.end() + 30] if raw_match else "رمز كامل خارج النص المرئي"
+            outside_samples.append(f"{title}: {TAGS_RE.sub(' ', sample).strip()[-90:]}")
     # ما قبل أول قسم (الترويسة والمقدمة) وبعده
     head = html.split("<main", 1)[0]
     tail = html.rsplit("</main>", 1)[-1]

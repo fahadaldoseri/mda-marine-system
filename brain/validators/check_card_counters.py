@@ -14,6 +14,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_REGISTRY = ROOT / "appendices" / "card_registry.json"
 CONTRACT_LINE = "✔ بطاقة الفروع الثلاثة: العناوين والعدادات والمراسي متطابقة عربيًا وإنجليزيًا"
+sys.path.insert(0, str(ROOT))
+from tools.arabic_counter import format_arabic_count  # noqa: E402
 _SITE_GENERATOR = Path(os.environ.get("SITE_DIR") or (ROOT.parent / "seawatch")) / "generator"
 if not _SITE_GENERATOR.is_dir():
     raise ImportError(f"مسار مولّد السطح المرسوم غير موجود: {_SITE_GENERATOR}")
@@ -698,7 +700,9 @@ def _hero_detail(meta: dict, zones_data: dict, card: dict) -> str:
         return f"{c.get('confirmed') or 0} مؤكدة + {c.get('probable') or 0} مرجّحة + {c.get('unconfirmed_qualifying') or 0} غير مؤكدة مؤهلة"
     if detail.get("kind") == "unconfirmed_split":
         c = zones_data.get("counter") or {}
-        return f"{c.get('unconfirmed_total') or 0} روايات · منها {c.get('unconfirmed_qualifying') or 0} مؤهلة · تُذكر ولا تُحتسب"
+        total = int(c.get("unconfirmed_total") or 0)
+        return (f"{format_arabic_count(total, card.get('number_format'))} · منها "
+                f"{c.get('unconfirmed_qualifying') or 0} مؤهلة · تُذكر ولا تُحتسب")
     if detail.get("kind") == "fire_split":
         fire = (meta.get("hero_sources") or {}).get("fire") or {}
         return (f"المؤكد: {fire.get('confirmed') or 0} · "

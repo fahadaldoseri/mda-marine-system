@@ -44,6 +44,22 @@ def test_real_report_alignment_is_accepted() -> None:
     assert tm["درجة الثقة: متوسطة."] == "Confidence level: medium."
 
 
+def test_2026_11_07_sector_level_lines_have_english_pairs() -> None:
+    expected = {
+        "المستوى في مضيق هرمز وخليج عُمان والخليج العربي: مرتفع":
+            "Level in the Strait of Hormuz, the Gulf of Oman and the Arabian Gulf: High",
+        "المستوى في باب المندب والبحر الأحمر: منخفض":
+            "Level in the Bab al-Mandab and the Red Sea: Low",
+        "المستوى في بحر العرب: منخفض": "Level in the Arabian Sea: Low",
+        "المستوى في القرن الأفريقي: متوسط": "Level in the Horn of Africa: Moderate",
+        "المستوى في المحيط الهندي: منخفض": "Level in the Indian Ocean: Low",
+    }
+    with _with_tm_paths(BRAIN / "reports", ROOT / "sources" / "i18n" / "en"):
+        tm = I.build_tm("2026-11-07")
+    for arabic, english in expected.items():
+        assert tm[arabic] == english
+
+
 def test_deleted_line_in_temp_copy_fails_closed() -> None:
     with tempfile.TemporaryDirectory(prefix="i18n-align-delete-") as raw:
         root = Path(raw)
@@ -88,6 +104,7 @@ def test_equal_count_but_wrong_line_kind_fails_closed() -> None:
 if __name__ == "__main__":
     tests = [
         test_real_report_alignment_is_accepted,
+        test_2026_11_07_sector_level_lines_have_english_pairs,
         test_deleted_line_in_temp_copy_fails_closed,
         test_equal_count_but_wrong_line_kind_fails_closed,
     ]

@@ -148,10 +148,14 @@ step "تحرير لغوي آلي (قبل/بعد لكل قسم)" 2 python3 "$B/to
 step "بوابات اللغة المتدرجة (إملاء ونحو وأسلوب)" 2 python3 "$B/tools/language_gates.py" --date "$D"
 # أصل نص كل واقعة من الأصول المحفوظة — يمكّن الفحص العكسي للترجمة بالمعنى.
 step "أصل نص كل واقعة (للفحص العكسي)" 1 python3 "$B/tools/ledger_source_excerpt.py" --date "$D"
-# بصمة النص النهائي قبل البناء: أي تعديل بعده = منع
-step "بصمة النص قبل البناء" 2 python3 "$B/tools/text_hash_guard.py" --date "$D" --stage record
+# عند عدم إعادة البناء نُسجّل البصمة للتحقق من مخرج سابق؛ أما البناء الفعلي
+# فيسجّلها داخل معاملة hash → build → verify واحدة تحت القفل المشترك.
+if [ "$BUILD" = "0" ]; then
+  step "بصمة النص قبل البناء" 2 python3 "$B/tools/text_hash_guard.py" --date "$D" --stage record
+fi
 if [ "$BUILD" = "1" ]; then
-  step "بناء الصفحة (مزامنة + بناء)" 2 python3 "$SITE/generator/sync_from_brain.py" --date "$D"
+  step "مزامنة النص مع الموقع" 2 python3 "$SITE/generator/sync_from_brain.py" --date "$D"
+  step "البناء الذري (بصمة ← بناء ← تحقق)" 2 bash "$B/tools/en_master_build.sh" "$D" "$SITE"
   if [ "$PRINT_DISABLED" = "1" ]; then
     step_disabled "تصدير PDF المعتمد" "$PRINT_REASON"
     step_disabled "جودة الطباعة (الخريطة والتصفير على PDF)" "$PRINT_REASON"

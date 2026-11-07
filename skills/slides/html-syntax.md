@@ -53,11 +53,12 @@ The canvas is fixed and rendered height is measured after every write/edit. The 
 - Keep every element — including decorative shapes, logos, and text — fully inside the container.
 
 ## Images
-Use images deliberately: they should raise the deck's visual quality, not fill space.
-- **Structural pages** (cover, section dividers, closing): a well-chosen full-bleed image (`object-fit: cover`) is the recommended device — pick one that matches the deck's subject and palette.
-- **Content pages**: use images sparingly — either as the page's central subject or as one supporting visual that complements the content. Most content pages need no image at all; never add one as decoration.
+Images should raise the deck's visual quality; generate on-theme ones freely with `slides/generate_fast_cheap_image` (see the Visuals section of SKILL.md). Place images where the design brief's Slide Map plans them.
+- **Structural pages** (cover, section dividers, closing): a well-chosen full-bleed image (`object-fit: cover`) is the recommended device — pick or generate one that matches the deck's subject and palette.
+- **Content pages** that carry an image: a side image taking 1/3–1/2 of the width, a full-height image column, an image band, or an illustration beside the text. Chart/table-dominated or text-packed pages stay image-free.
 - Only reference images that actually exist locally in the sandbox (searched or generated earlier in the session), by absolute path. NEVER write a non-existent or remote image URL into a slide.
-- Give every non-background image explicit pixel dimensions and `object-fit: contain`.
+- Give every non-background image explicit pixel dimensions. Use `object-fit: contain` for photos and screenshots whose full content matters; generated illustrations may use `object-fit: cover` to fill their frame. When the design brief has an Image frames section, size each image element to its frame box exactly (left/top/width/height in px) — the image was generated at that frame's ratio, so `cover` trims almost nothing; one `<img>` per frame, never one image split across frames with `background-position`. Frame boxes take precedence over the vertical-fill rules above: never stretch or squash an image element to fill a flex or grid row — let the text and spacing absorb the leftover height.
+- Overlay layouts (marked `(overlay)` in Image frames): once their images are generated and before writing those pages, `read` each overlay image (several reads in one turn are fine) and place the text block on its calm area — mirror the text box to the quiet side rather than regenerating — keeping the gradient overlay or panel the layout names. Body and small text (under 24 px) over an image sits on a panel or scrim at least 90% opaque behind that text (e.g. `rgba(255,255,255,0.92)`); the calm area alone is not enough.
 - Use high-quality, watermark-free images; never reuse the same image on two pages.
 - Do not embed diagram images rendered from Mermaid, D2, or plotting scripts — they lower deck quality. Build diagrams with HTML/CSS, charts with Chart.js/D3, and photos/illustrations from real image files.
 
@@ -72,7 +73,8 @@ Use images deliberately: they should raise the deck's visual quality, not fill s
 - Treat each page as a presentation slide rather than a website: avoid navigation UI, rounded-corner card components, border-accent boxes, and decorative shadows. Minimize card-style containers — they fragment the page — and never use cards on data-visualization pages.
 - Keep a clear hierarchy, align to a grid, and use at most four main content points per slide.
 - Keep the `.slide-container` background identical across all content pages (cover and closing may differ); maintain one consistent color system and recurring visual motifs across the deck, using at most 2-3 palette colors per slide with accents reserved for emphasis.
-- If the deck uses fixed page elements (header, footer, page number), keep them IDENTICAL across slides — same position, same size, same font.
+- Text colors follow the design brief's **Color contrast** section: text under 24 px (under 19 px at font-weight 700+; card titles and subheads included) uses only colors it marks "any text" or the `-text` variants it added to the Colors table; accents marked large-text or graphics-only stay on fills, lines, charts and large numerals. Without a brief, keep small text at 4.5:1 or more against its background (muted gray on white no lighter than #757575, 4.6:1).
+- If the deck uses fixed page elements (header, footer, page number), keep them IDENTICAL across slides — same position, same size, same font. Where one lands on an image, keep its position but give it a small solid chip (at least 90% opaque) or the light/dark text color that reads on that image — readability beats an identical color.
 - Vary the composition of adjacent content slides when appropriate. Keep the title slide concise and visually distinctive — bold typography, geometric shapes, or an asymmetric split work well.
 - When the user gives an explicit style request, follow it throughout the deck.
 - Before writing each slide's HTML, think through the design approach, continuity with the rest of the deck, layout structure, key content, and canvas-fit checks; then write the complete document.

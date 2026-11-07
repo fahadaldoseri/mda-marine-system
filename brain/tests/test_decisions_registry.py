@@ -65,6 +65,16 @@ class Positive(unittest.TestCase):
         for d in reg["decisions"]:
             self.assertTrue(str(d.get("title_ar", "")).strip(), d.get("id"))
 
+    def test_d0620_file_evidence_resolves(self):
+        reg = json.loads((ROOT / "decisions" / "registry.json").read_text(encoding="utf-8"))
+        decision = next(d for d in reg["decisions"] if d.get("id") == "D-0620")
+        missing = [
+            e["ref"]
+            for e in decision.get("evidence", [])
+            if e.get("kind") == "file" and not (ROOT / str(e["ref"])).exists()
+        ]
+        self.assertEqual(missing, [], f"D-0620 evidence paths must resolve: {missing}")
+
 
 class Negative(unittest.TestCase):
     def test_done_without_evidence_fails(self):
