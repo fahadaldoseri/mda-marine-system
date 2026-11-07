@@ -103,7 +103,10 @@
         "site/dist/",
         "docs/",
         ".github/",
-        ".devcontainer/"
+        ".devcontainer/",
+        "brain/__pycache__/",
+        "brain/tests/__pycache__/",
+        "brain/validators/__pycache__/"
       ],
       "exact": [
         ".gitignore",
