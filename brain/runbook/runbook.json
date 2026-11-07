@@ -5,6 +5,19 @@
   "enabled": true,
   "reason": "مُفعَّل بأمر المالك — 2026-11-03"
  },
+ "publish_channels": [
+  {
+   "name": "cloudflare-pages",
+   "enabled": true,
+   "note_ar": "القناة الأساسية: Cloudflare Pages؛ تُقاس حيًا بـGET/200 وContent-Type: text/html والحجم والبصمة، ثم raw.githack كبديل عرض. raw.githubusercontent تحقق فقط وليس قناة عرض.",
+   "primary": true,
+   "base_url": "https://seawatch-live.pages.dev",
+   "repo": "fahadaldoseri/seawatch-live",
+   "branch": "main",
+   "presentation_eligible": true,
+   "url": "https://seawatch-live.pages.dev"
+  }
+ ],
  "sections": [
   {
    "id": "what-changed",
@@ -3521,18 +3534,18 @@
    "assert": [
     {
      "type": "cmd",
-       "command": [
-        "python3",
-        "-c",
-        "import json,sys;d=json.load(open(\"logs/publish-channel-{date}.json\"));c=d.get(\"channels\",{});sys.exit(0 if set(c)=={\"manus\",\"github-pages\"} and any(v.get(\"state\")==\"ready\" for v in c.values()) else 1)"
-       ]
+     "command": [
+      "python3",
+      "-c",
+      "import json,sys;d=json.load(open(\"logs/publish-channel-{date}.json\"));c=d.get(\"channels\",{});sys.exit(0 if set(c)=={\"cloudflare-pages\",\"raw-githack\",\"raw.githubusercontent\"} and any(v.get(\"state\")==\"ready\" and v.get(\"presentation_eligible\",True) for v in c.values()) else 1)"
+     ]
     },
     {
      "type": "cmd",
      "command": [
       "bash",
       "-lc",
-      "grep -q '\"manus\"' logs/publish-channel-{date}.json && grep -q '\"github-pages\"' logs/publish-channel-{date}.json"
+      "grep -q 'cloudflare-pages' logs/publish-channel-{date}.json && grep -q 'raw-githack' logs/publish-channel-{date}.json && grep -q 'raw.githubusercontent' logs/publish-channel-{date}.json"
      ]
     }
    ],
@@ -3548,13 +3561,14 @@
     ],
     "gates": [],
     "tests": [
+     "tests/test_publish_live_contract_20261107.py",
      "tests/test_publish_channels.py"
     ]
    },
    "writes": [
     "logs/publish-channel-{date}.json"
    ],
-   "note_ar": "يفحص إضافة Manus حصراً عبر manus-mcp-cli tool list --server webdev-mcp، ويفحص المستودع العام البديل؛ نجاح سجل manus-webdev-logs لا يدخل في الحكم. إذا كانت قناة واحدة جاهزة يستمر، وإذا تعطّلتا معًا يفشل مبكرًا.",
+   "note_ar": "يفحص Cloudflare Pages بوصفها القناة الأساسية، ثم raw.githack بوصفها بديل العرض، ويسجل raw.githubusercontent كتحقق فقط بسبب Content-Type: text/plain. يثبت السجل ترتيب القنوات؛ إذا تعطلت قناتا العرض معًا يفشل مبكرًا.",
    "on_fail": "stop",
    "command": [
     "bash",
@@ -3564,7 +3578,12 @@
    "ok_rc": [
     0
    ],
-   "warn_rc": []
+   "warn_rc": [],
+   "channel_order": [
+    "cloudflare-pages",
+    "raw-githack",
+    "raw.githubusercontent-verify-only"
+   ]
   },
   {
    "id": "B005",
@@ -5243,7 +5262,7 @@
      "command": [
       "python3",
       "-c",
-      "import json,sys;d=json.load(open('logs/publish-{date}.json'));sys.exit(0 if d.get('status')=='ok' and d.get('channel') in ('manus','github-pages') and d.get('url') and d.get('head') and d.get('live',{}).get('status')==200 and d.get('live',{}).get('bytes',0)>0 and d.get('live',{}).get('date_marker') else 1)"
+      "import json,sys;d=json.load(open('logs/publish-{date}.json'));live=d.get('live',{});sys.exit(0 if d.get('status')=='ok' and d.get('channel') in ('cloudflare-pages','raw-githack') and d.get('successful_url') and d.get('head') and live.get('status')==200 and live.get('bytes',0)>0 and live.get('date_marker') and live.get('content_type_normalized')=='text/html' and live.get('presentation_eligible') else 1)"
      ]
     }
    ],
@@ -5275,11 +5294,16 @@
     0
    ],
    "warn_rc": [],
-   "note_ar": "يجرّب Manus أولًا إن كانت جاهزة، ثم المحتوى العام raw.githack/jsDelivr عند الفشل أو التعطّل. لا يُكتب status=ok إلا بعد HTTP 200 وحجم موجب وعلامة تاريخ التقرير، وتُسجّل القناة الأساسية معطّلة دون إيقاف اليوم."
+   "note_ar": "ينشر عبر Cloudflare Pages أولًا، ثم raw.githack عند الفشل؛ raw.githubusercontent لا يرفع status=ok لأنه text/plain والتحقق منه آلي فقط. لا يُكتب status=ok بلا GET/HTTP 200، Content-Type: text/html، حجم، علامة التاريخ، وتسجيل redirects وsha256.",
+   "channel_order": [
+    "cloudflare-pages",
+    "raw-githack",
+    "raw.githubusercontent-verify-only"
+   ]
   },
   {
    "id": "D020",
-   "title": "التحقق الحي للقناة المستخدمة (200 وحجم وعلامة تاريخ)",
+   "title": "التحقق الحي لقناة cloudflare-pages أو raw-githack (200 والحجم وContent-Type والبصمة)",
    "kind": "script",
    "phase": "deliver",
    "assert": [
@@ -5314,13 +5338,18 @@
    "command": [
     "bash",
     "-lc",
-    "B=\"$PWD\"; export B SITE; bash tools/check_live.sh --compare {date}; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; python3 \"$B/tools/live_dom_audit.py\" --url \"file://$SITE/dist/reports/{date}.html\" --url \"file://$SITE/dist/additions.html\" --url \"file://$SITE/dist/sources.html\" --json \"logs/runbook/{date}/dom-audit.json\"; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; exit ${w:-0}"
+    "B=\"$PWD\"; export B SITE; bash tools/check_live.sh --compare {date}; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; BASE=\"$(python3 - \"$B/logs/publish-{date}.json\" <<'PY'\nimport json,sys\nd=json.load(open(sys.argv[1],encoding='utf-8')); u=d.get('successful_url') or d.get('url') or ''; print(u.split('/reports/',1)[0].rstrip('/') if '/reports/' in u else u.rstrip('/'))\nPY\n)\"; test -n \"$BASE\" || { echo '✘ لا رابط حي مسجّل في publish-{date}.json'; exit 2; }; python3 \"$B/tools/live_dom_audit.py\" --url \"$BASE/reports/{date}.html\" --url \"$BASE/additions.html\" --url \"$BASE/sources.html\" --json \"logs/runbook/{date}/dom-audit.json\"; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; exit ${w:-0}"
    ],
    "ok_rc": [
     0
    ],
    "warn_rc": [],
-   "note_ar": "يقرأ D020 رابط القناة المسجّل في publish-{date}.json، ويفشل مغلقًا عند 404 أو جسم صفري أو غياب علامة تاريخ التقرير."
+   "note_ar": "يقرأ D020 رابط القناة المسجّل في publish-{date}.json وفق ترتيب cloudflare-pages ثم raw-githack؛ يدقق DOM على المسارات الحية فقط، ويسجل 200 وContent-Type والـredirects والبصمة، ويفشل مغلقًا عند 404 أو جسم صفري أو غياب علامة تاريخ التقرير.",
+   "channel_order": [
+    "cloudflare-pages",
+    "raw-githack",
+    "raw.githubusercontent-verify-only"
+   ]
   },
   {
    "id": "D030",
@@ -5473,11 +5502,11 @@
     ]
    },
    "on_fail": "stop",
-	  "command": [
-	   "bash",
-	   "-lc",
-	   "B=\"$PWD\"; export B; REPO=\"$(git -C \"$B\" rev-parse --show-toplevel 2>/dev/null || dirname \"$B\")\"; export REPO; python3 validators/check_repo_secrets.py --repo \"$REPO\" && python3 validators/check_secrets.py --root \"$B\" && python3 validators/check_secrets.py --root \"$REPO\" && python3 validators/check_backup_push_safety.py --script \"$B/tools/github_backup.sh\"; rc=$?; exit $rc"
-	  ],
+   "command": [
+    "bash",
+    "-lc",
+    "B=\"$PWD\"; export B; REPO=\"$(git -C \"$B\" rev-parse --show-toplevel 2>/dev/null || dirname \"$B\")\"; export REPO; python3 validators/check_repo_secrets.py --repo \"$REPO\" && python3 validators/check_secrets.py --root \"$B\" && python3 validators/check_secrets.py --root \"$REPO\" && python3 validators/check_backup_push_safety.py --script \"$B/tools/github_backup.sh\"; rc=$?; exit $rc"
+   ],
    "ok_rc": [
     0
    ],
@@ -5970,5 +5999,10 @@
   "arabic_rule": "تُترجم المعنى لا الكلمة: النسخة العربية تُصاغ بالمعنى من النسخة الإنجليزية، والترجمة كلمة بكلمة ممنوعة",
   "derive_tool": "{site}/generator/derive_en_units.py",
   "build_wrapper": "tools/en_master_build.sh"
- }
+ },
+ "publish_channel_order": [
+  "cloudflare-pages",
+  "raw-githack",
+  "raw.githubusercontent-verify-only"
+ ]
 }

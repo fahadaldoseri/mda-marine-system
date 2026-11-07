@@ -281,6 +281,21 @@
       "tests": [
         "tests/test_publish_channels.py"
       ]
+    },
+    {
+      "match": [
+        "skills/gate-lifecycle-ops/references/legacy/gate-strictness-hardening-ops/scripts/gate_audit.py"
+      ],
+      "surfaces": [
+        "تدقيق صلابة البوابات"
+      ],
+      "gates": [
+        "G066"
+      ],
+      "tests": [
+        "tests/test_gate_audit_triage.py",
+        "tests/test_gate_coverage_reference.py"
+      ]
     }
   ]
 }

@@ -7,8 +7,20 @@ B="${BRAIN_DIR:-$(cd "$(dirname "$0")/.." && pwd)}"
 if [ -n "${SITE_DIR:-}" ]; then SITE="$SITE_DIR"
 elif [ -d "$B/../seawatch" ]; then SITE="$B/../seawatch"; else SITE="$B/../site"; fi
 CMP=0; D=""
-for a in "$@"; do case "$a" in --compare) CMP=1 ;; *) D="$a" ;; esac; done
+for a in "$@"; do
+  case "$a" in
+    --compare) CMP=1 ;;
+    --*) echo "✘ معامل غير معروف: $a — الاستخدام: bash tools/check_live.sh [--compare] [YYYY-MM-DD]" >&2; exit 2 ;;
+    *)
+      [ -z "$D" ] || { echo "✘ تاريخ مكرر/معامل غير معروف: $a" >&2; exit 2; }
+      D="$a" ;;
+  esac
+done
 [ -n "$D" ] || D="$(date -u +%F)"
+if ! [[ "$D" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+  echo "✘ صيغة التاريخ غير صالحة: $D — المتوقّع YYYY-MM-DD" >&2
+  exit 2
+fi
 if [ -n "${LIVE_BASE_URL:-}" ]; then
   BASE="$LIVE_BASE_URL"
 else
@@ -48,13 +60,15 @@ checked_at = datetime.datetime.now(datetime.timezone.utc)
 elapsed = max(0, int(checked_at.timestamp()) - int(STARTED))
 def get(path):
     try:
-        with urllib.request.urlopen(urllib.request.Request(f"{BASE}/{path}", headers={"User-Agent": "seawatch-check"}), timeout=60) as r:
+        with urllib.request.urlopen(urllib.request.Request(
+                f"{BASE}/{path}", method="GET",
+                headers={"User-Agent": "seawatch-check", "Accept": "text/html,text/plain,application/pdf;q=0.9"}), timeout=60) as r:
             body = r.read()
-            return r.status, body
+            return r.status, body, r.headers.get("Content-Type", "")
     except urllib.error.HTTPError as e:
-        return e.code, b""
+        return e.code, b"", e.headers.get("Content-Type", "") if e.headers else ""
     except Exception:
-        return 0, b""
+        return 0, b"", ""
 doc = {"date": D, "checked_at": checked_at.strftime("%Y-%m-%dT%H:%M:%SZ"),
        "release_paths": [f"/{p}" if p else "/" for p in RELEASE_PATHS],
        "propagation": {"attempt": int(ATTEMPT), "elapsed_seconds": elapsed, "max_wait_seconds": 225},
@@ -62,10 +76,12 @@ doc = {"date": D, "checked_at": checked_at.strftime("%Y-%m-%dT%H:%M:%SZ"),
 bad = []
 bodies = {}
 for u in RELEASE_PATHS:
-    code, body = get(u)
+    code, body, content_type = get(u)
     bodies[u] = body
-    doc["paths"][f"/{u}"] = {"code": code, "bytes": len(body)}
-    if code != 200 or not body:
+    normalized_type = content_type.split(";", 1)[0].strip().lower()
+    doc["paths"][f"/{u}"] = {"code": code, "bytes": len(body), "content_type": content_type,
+                                "content_type_ok": normalized_type in {"text/html", "text/plain", "application/xhtml+xml", "application/pdf"}}
+    if code != 200 or not body or not doc["paths"][f"/{u}"]["content_type_ok"]:
         bad.append(f"/{u}")
     if u == f"reports/{D}.html":
         has_date = D.encode("utf-8") in body

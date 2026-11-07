@@ -46,6 +46,7 @@ class PublishContractTests(unittest.TestCase):
         (brain / "validators").mkdir()
         (brain / "logs").mkdir()
         shutil.copy2(PUBLISH, brain / "tools" / "publish_site.sh")
+        shutil.copy2(CHECK_LIVE, brain / "tools" / "check_live.sh")
         (brain / "tools" / "runbook.py").write_text("raise SystemExit(0)\n", encoding="utf-8")
         (brain / "tools" / "gate_verdict.py").write_text("raise SystemExit(0)\n", encoding="utf-8")
         (brain / "validators" / "check_en_parity.py").write_text("raise SystemExit(0)\n", encoding="utf-8")
@@ -72,8 +73,10 @@ class PublishContractTests(unittest.TestCase):
         self.assertEqual(git(site, "switch", "-qc", "publish", "main").returncode, 0)
         return site, remote, base
 
-    def publish(self, brain: Path, site: Path) -> subprocess.CompletedProcess[str]:
+    def publish(self, brain: Path, site: Path, extra_env: dict[str, str] | None = None) -> subprocess.CompletedProcess[str]:
         env = dict(os.environ, BRAIN_DIR=str(brain), SITE_DIR=str(site))
+        if extra_env:
+            env.update(extra_env)
         return run(["bash", str(PUBLISH), DATE], env=env)
 
     def remote_head(self, site: Path) -> str:
@@ -95,7 +98,25 @@ class PublishContractTests(unittest.TestCase):
         (site / "dist" / "reports").mkdir(parents=True)
         (site / "dist" / "reports" / f"{DATE}.html").write_text("<html>daily report</html>\n", encoding="utf-8")
         (site / "dist" / "manus-routes.json").write_text(json.dumps({"routes": [{"path": f"/reports/{DATE}.html"}]}), encoding="utf-8")
-        result = self.publish(brain, site)
+        class Handler(http.server.BaseHTTPRequestHandler):
+            def do_GET(self) -> None:  # noqa: N802
+                body = f"<html>report {DATE}</html>".encode()
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.send_header("Content-Length", str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+            def log_message(self, *_args: object) -> None:
+                pass
+        server = socketserver.TCPServer(("127.0.0.1", 0), Handler)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        try:
+            result = self.publish(brain, site, {"LIVE_BASE_URL": f"http://127.0.0.1:{server.server_address[1]}"})
+        finally:
+            server.shutdown()
+            server.server_close()
+            thread.join(timeout=5)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         head = git(site, "rev-parse", "HEAD").stdout.strip()
         self.assertNotEqual(head, base)

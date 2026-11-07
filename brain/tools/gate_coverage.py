@@ -23,7 +23,7 @@ import re
 import sys
 from pathlib import Path
 
-PATH_RE = re.compile(r"\b(?:tools|validators|tests|scripts|sections|appendices|runbook)/[\w\u0600-\u06FF\-./]+\.(?:py|sh|json|md|jsonl)\b")
+PATH_RE = re.compile(r"\b(?:skills|tools|validators|tests|scripts|sections|appendices|runbook)/[\w\u0600-\u06FF\-./]+\.(?:py|sh|json|md|jsonl)\b")
 
 # المسارات الموسومة: {site}/... و{brain}/... و{root}/... تُحلّ إلى جذرها الحقيقي
 TOKENS = {"{site}": "seawatch", "{brain}": "brain-marine-news", "{root}": "brain-marine-news"}

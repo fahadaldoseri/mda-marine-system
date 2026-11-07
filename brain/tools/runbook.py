@@ -166,6 +166,9 @@ def append(root, m, date, entry):
 def check_asserts(root, step, date):
     problems = []
     for a in step.get("assert", []):
+        if not isinstance(a, dict):
+            problems.append(f"شرط غير صالح في {step.get('id', '?')}: يجب أن يكون كائنًا (ASSERT_SHAPE_V1)")
+            continue
         t = a.get("type")
         if t in ("file_exists", "min_bytes", "contains"):
             p = resolve(root, a["path"], date)
@@ -180,8 +183,8 @@ def check_asserts(root, step, date):
             cmd = [sub(c, date, root) for c in a["command"]]
             # CMD_SHAPE_V1: صيغة أمر الخطوة قائمة argv نصية غير فارغة، وإلا فشل مغلق برسالة واضحة
             if not isinstance(cmd, list) or not cmd or any(not isinstance(x, str) or not x for x in cmd):
-                print(f"   ✘ الخطوة {s['id']}: صيغة الأمر يجب أن تكون قائمة argv نصية غير فارغة (CMD_SHAPE_V1)")
-                return 2
+                problems.append(f"الخطوة {step.get('id', '?')}: صيغة الأمر يجب أن تكون قائمة argv نصية غير فارغة (CMD_SHAPE_V1)")
+                continue
             r = subprocess.run(cmd, cwd=root, capture_output=True, text=True, env=step_env(root, date))
             if r.returncode not in a.get("ok_rc", [0]):
                 problems.append(f"فحص فشل (رمز {r.returncode}): {' '.join(cmd)}")

@@ -231,4 +231,12 @@
 | `report-surface-and-print-ops` | تحوّل فحصًا بصريًا يدويًا إلى قياس آلي بمتصفح حقيقي، بينما هذه المهارة تراجع صرامة البوابة واختبارها وربطها ولا تنشئ أداة قياس بصري. |
 | `crossing-gate-ops` | تحكم انتقالًا مقيسًا بين مرحلتين أو إصدارين بدليل قبل/بعد، بينما هذه المهارة تدقق بنية البوابة وقواعدها واختبارها السالب ولا تدير عبور المراحل. |
 
-**توصية مانيفست غير منفذة:** إضافة استدعاء صريح لـ`gate_audit.py` إلى خطوة حوكمة لاحقة في `runbook/runbook.json`، مع اختبار موجب وسالب؛ لم يُعدَّل المانيفست أو `docs/runbook.md` في اعتماد 2026-11-06.
+**ربط مانيفست منفَّذ (2026-11-07):** أصل `gate_audit.py` معلن في `runbook/impact-map.json`، وتستدعيه خطوة `G066`، ويمنع `tests/test_gate_coverage_reference.py` عودة المرجع المقتطع `scripts/gate_audit.py`.
+
+
+## عقد قناة النشر — Cloudflare Pages (2026-11-07)
+
+- **الترتيب الحاكم:** `cloudflare-pages` (أساسي) ← `raw-githack` (بديل عرض) ← `raw.githubusercontent-verify-only` (تحقق آلي فقط).
+- **حدود العرض:** لا يُسجّل `raw.githubusercontent.com` كقناة عرض؛ استجابته `text/plain` تُحفظ كدليل تحقق ولا ترفع `status=ok`.
+- **دليل القياس:** `tests/test_publish_live_contract_20261107.py` و`tests/test_publish_channels.py`، مع تسجيل GET/200 وContent-Type والحجم وredirects وsha256 في `publish-{date}.json`.
+- **المصدر الحاكم:** `runbook/runbook.json` و`runbook/impact-map.json` و`decisions/registry.json`.

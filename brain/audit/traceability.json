@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-07T10:21:05.033986+00:00",
+  "generated_at": "2026-11-07T12:24:00.920854+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -4048,6 +4048,20 @@
       "lesson_id": "ك-546",
       "barrier_id": "B-7819d21e",
       "run_evidence": null
+    },
+    {
+      "fault_id": "ك-547",
+      "state": "مغلق",
+      "lesson_id": null,
+      "barrier_id": "B-2ee8eb37",
+      "run_evidence": "ublish_live_contract_20261107.py tests/test_publish_channels.py -q` → خرج 0 · 16 passed"
+    },
+    {
+      "fault_id": "ك-548",
+      "state": "مغلق",
+      "lesson_id": null,
+      "barrier_id": "B-26501c01",
+      "run_evidence": "ublish_live_contract_20261107.py tests/test_publish_channels.py -q` → خرج 0 · 16 passed"
     }
   ]
 }

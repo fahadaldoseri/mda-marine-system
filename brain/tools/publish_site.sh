@@ -127,6 +127,24 @@ if [ "$origin_after" != "$head" ]; then
   echo "✘ فشل التحقق بعد الدفع: origin/main=$origin_after والرأس=$head"
   exit 5
 fi
-record "$B/logs/publish-$D.json" ok 0 "{\"head\":\"$head\",\"head_short\":\"$head_short\",\"origin_before\":\"$origin_before\",\"origin_main\":\"$origin_after\",\"branch\":\"$(git symbolic-ref --short HEAD)\",\"pushed_ref\":\"HEAD:main\",\"report_path\":\"/reports/$D.html\"}"
-echo "✔ نُشر عبر HEAD:main — $D ($head_short) — origin/main مطابق"
+BASE_URL="${LIVE_BASE_URL:-}"
+if [ -z "$BASE_URL" ] && [ -s "$SITE/sources/site.json" ]; then
+  BASE_URL="$(python3 - "$SITE/sources/site.json" <<'PY'
+import json, sys
+try:
+    print(str(json.load(open(sys.argv[1], encoding='utf-8')).get('base_url') or '').rstrip('/'))
+except (OSError, json.JSONDecodeError):
+    print('')
+PY
+)"
+fi
+[ -n "$BASE_URL" ] || fail_publish 2 missing-live-base-url
+if ! LIVE_BASE_URL="$BASE_URL" bash "$B/tools/check_live.sh" "$D"; then
+  record "$B/logs/publish-$D.json" failed 2 "{\"why\":\"live-http-verification\",\"head\":\"$head\",\"head_short\":\"$head_short\",\"origin_main\":\"$origin_after\",\"live_base\":\"$BASE_URL\"}"
+  echo "✘ فشل التحقق الحي بعد Git — لا status=ok بلا HTTP 200"
+  exit 2
+fi
+LIVE_JSON="$(cat "$B/logs/live-$D.json")"
+record "$B/logs/publish-$D.json" ok 0 "{\"head\":\"$head\",\"head_short\":\"$head_short\",\"origin_before\":\"$origin_before\",\"origin_main\":\"$origin_after\",\"branch\":\"$(git symbolic-ref --short HEAD)\",\"pushed_ref\":\"HEAD:main\",\"report_path\":\"/reports/$D.html\",\"live\":$LIVE_JSON}"
+echo "✔ نُشر عبر HEAD:main — $D ($head_short) — origin/main مطابق — live HTTP 200 verified"
 exit 0
