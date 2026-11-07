@@ -307,15 +307,43 @@ def qualifying(event: dict[str, Any]) -> bool:
     return has_maritime_target(event)
 
 
+# عطل ك-555 (جولة 2026-11-07): صفوف الدفتر اليومية تحمل مفردات `class` و`class_raw`
+# و`proof_degree`، بينما كان المصنّف يقرأ `evidence_status` وحده، فسقطت رواية اليوم
+# صامتًا وصار عدّاد «روايات لم تتأكد» صفرًا بينما المتن يعلن رواية واحدة.
+# الحل: تُستخرج الحالة من الحقل القانوني إن وُجد، وإلا تُشتق من مفردات الدفتر المعلنة.
+UNRESOLVED_STATUS_TOKENS = (
+    "غير مؤكد", "غير مؤكدة", "رواية", "روايات", "unresolved", "unconfirmed",
+)
+CONFIRMED_STATUS_TOKENS = (
+    "بلاغ رسمي", "مؤكد", "official", "confirmed",
+)
+
+
+def resolved_evidence_status(event: dict[str, Any]) -> str:
+    raw = str(event.get("evidence_status") or "").strip()
+    if raw:
+        return raw
+    vocabulary = " ".join(
+        str(event.get(key, "")) for key in ("class", "class_raw", "proof_degree", "confidence")
+    )
+    folded = vocabulary.casefold()
+    if any(token in vocabulary or token in folded for token in UNRESOLVED_STATUS_TOKENS):
+        return "unresolved_incident"
+    if any(token in vocabulary or token in folded for token in CONFIRMED_STATUS_TOKENS):
+        return "official_confirmed"
+    return ""
+
+
 def unconfirmed_narrative(event: dict[str, Any]) -> bool:
     if is_negative_event(event):
         return False
-    status = str(event.get("evidence_status", ""))
+    status = resolved_evidence_status(event)
     if status not in {"unresolved_incident", "unresolved_or_advisory"}:
         return False
-    description = str(event.get("description", "")).lstrip()
-    classification = str(event.get("classification", ""))
-    return description.startswith("رواية ") or any(marker in classification for marker in NARRATIVE_CLASS_MARKERS)
+    description = str(event.get("description") or event.get("title") or "").lstrip()
+    classification = " ".join(str(event.get(k, "")) for k in ("classification", "class", "class_raw"))
+    return (description.startswith(("رواية", "روايات"))
+            or any(marker in classification for marker in NARRATIVE_CLASS_MARKERS))
 
 
 def confirmed(event: dict[str, Any]) -> bool:

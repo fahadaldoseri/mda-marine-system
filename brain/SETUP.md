@@ -132,12 +132,12 @@ bash tools/final_gate.sh 2026-10-19
 
 ## 7) التشغيل اليومي
 
-- **داخل Manus:** مهمة مجدولة عند **06:40 بتوقيت البحرين** تشغّل الخط اليومي وتنشر وتسلّم على تلغرام.
+- **داخل Manus:** مهمة مجدولة عند **07:00 بتوقيت البحرين** تشغّل الخط اليومي وتنشر وتسلّم على تلغرام.
 - **خارج Manus:** أضف مهمة `cron` (أو GitHub Actions — انظر `docs/الاستقلال-عن-مانوس.md`):
 ```bash
-40 3 * * *  cd /path/to/brain-marine-news && bash tools/final_gate.sh "$(date -u +%F)" >> logs/cron.log 2>&1
+0 4 * * *  cd /path/to/mda-marine-system/brain && bash tools/final_gate.sh "$(date -u +%F)" >> logs/cron.log 2>&1
 ```
-(03:40 UTC = 06:40 بتوقيت البحرين)
+(04:00 UTC = 07:00 بتوقيت البحرين)
 
 ---
 

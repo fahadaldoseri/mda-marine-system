@@ -122,7 +122,8 @@
 - قرار المالك المعتمد بشأن إعادة تصميم قسم «مستوى التهديد» إلى أربعة عناصر وسقف 110 كلمات، وتسجيله في `sections/30-structure.md` (ب2-أ)، وربطه بالبوابة في `sections/60-validation.md` (ف10)، وتعليمات الكتابة في `runbook/prompts/write-report.md`.
 
 ## ملحق الموثوقية وتوسيع المصادر (13 أكتوبر 2026)
-- القائمة المعتمدة: **40 مصدرًا** (37 + Jerusalem Post + IHO + MarineTraffic) → `sections/10-sources.md`
+- القائمة المعتمدة: **62 مصدرًا** بحسب السجل الحاكم `appendices/source-reliability-40.json` (الاسم تاريخي).
+- العدد التاريخي **40 مصدرًا** (37 + Jerusalem Post + IHO + MarineTraffic) محفوظ كمرجع في `sections/10-sources.md` ولا يُنشر كعدد معتمد.
 - سجل الموثوقية والمصداقية الثابت → `appendices/source-reliability-40.md`
 - كتلة العرض وشكل الملحق → `sections/40-blocks.md`
 - بوابة التحقق من الملحق → `sections/60-validation.md`

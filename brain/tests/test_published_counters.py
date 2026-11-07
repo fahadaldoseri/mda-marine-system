@@ -1,0 +1,139 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""اختبار انحدار لحارس الأرقام المنشورة (ك-554).
+
+الاختبار يبني نسخة مؤقتة من الملفات المالكة من المشروع نفسه، ثم:
+- يثبت الحالة الموجبة: لا مانع عندما كل رقم يطابق مالكه.
+- يثبت الحالة السالبة لكل ربط: يُفسد الرقم في المالك أو في السطح فيجب أن يمنع الحارس.
+
+القاعدة المقيسة: حارس لا يفشل عند إفساد مدخله ليس حارسًا.
+"""
+from __future__ import annotations
+
+import json
+import pathlib
+import shutil
+import sys
+
+import pytest
+
+HERE = pathlib.Path(__file__).resolve()
+BRAIN = HERE.parents[1]
+sys.path.insert(0, str(BRAIN / 'validators'))
+
+import check_published_counters as gate  # noqa: E402
+
+DATE = '2026-11-07'
+NEEDED = [
+    'appendices/imo-incidents.json',
+    'appendices/zone-registry.json',
+    'appendices/source-reliability-40.json',
+    f'web/meta/{DATE}.json',
+    f'web/kpis-totals/{DATE}.json',
+    f'feeds/feeds-{DATE}.status.json',
+    f'reports/{DATE}-sectioned.md',
+    'INDEX.md',
+    'runbook/runbook.json',
+    'runbook/delivery-policy.json',
+    'watchlist/ofac-targets.txt',
+]
+
+
+@pytest.fixture()
+def sandbox(tmp_path):
+    for rel in NEEDED:
+        src = BRAIN / rel
+        dst = tmp_path / rel
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(src, dst)
+    return tmp_path
+
+
+def mutate_json(path: pathlib.Path, fn):
+    d = json.loads(path.read_text(encoding='utf-8'))
+    fn(d)
+    path.write_text(json.dumps(d, ensure_ascii=False, indent=2), encoding='utf-8')
+
+
+def test_positive_no_blockers(sandbox):
+    out, blockers = gate.collect(sandbox, DATE)
+    assert not blockers, blockers
+    assert len(out) >= 8
+
+
+def test_imo_historical_number_in_body_is_blocked(sandbox):
+    p = sandbox / f'reports/{DATE}-sectioned.md'
+    d = json.loads((sandbox / 'appendices/imo-incidents.json').read_text(encoding='utf-8'))
+    prev = d['previous']['totals']['confirmed_incidents']
+    p.write_text(p.read_text(encoding='utf-8') + f'\n- سجل IMO: {prev} حادثًا.\n', encoding='utf-8')
+    _, blockers = gate.collect(sandbox, DATE)
+    assert any('الرقم التاريخي' in b for b in blockers), blockers
+
+
+def test_current_imo_number_missing_is_blocked(sandbox):
+    p = sandbox / f'reports/{DATE}-sectioned.md'
+    t = p.read_text(encoding='utf-8')
+    d = json.loads((sandbox / 'appendices/imo-incidents.json').read_text(encoding='utf-8'))
+    cur = str(d['totals']['confirmed_incidents'])
+    lines = [l for l in t.splitlines() if 'IMO' in l and cur in l]
+    assert lines
+    for l in lines:
+        t = t.replace(l, l.replace(cur, '999'))
+    p.write_text(t, encoding='utf-8')
+    _, blockers = gate.collect(sandbox, DATE)
+    assert any('لا ينشر الرقم الحالي' in b for b in blockers), blockers
+
+
+def test_stale_mismatch_is_blocked(sandbox):
+    mutate_json(sandbox / f'web/meta/{DATE}.json',
+                lambda d: d['source_reliability'].__setitem__('stale', 99))
+    _, blockers = gate.collect(sandbox, DATE)
+    assert any('التقادم' in b for b in blockers), blockers
+
+
+def test_card_vs_metric_mismatch_is_blocked(sandbox):
+    def bump(d):
+        for c in d['hero_kpis']:
+            if c.get('id') == 'ukmto-reports':
+                c['value'] = '7'
+    mutate_json(sandbox / f'web/meta/{DATE}.json', bump)
+    _, blockers = gate.collect(sandbox, DATE)
+    assert any('البطاقة' in b for b in blockers), blockers
+
+
+def test_delivery_policy_missing_step_is_blocked(sandbox):
+    def drop(d):
+        d['manifest_delivery_steps'] = [s for s in d['manifest_delivery_steps'] if s != 'D010']
+    mutate_json(sandbox / 'runbook/delivery-policy.json', drop)
+    _, blockers = gate.collect(sandbox, DATE)
+    assert any('خطوات تسليم' in b for b in blockers), blockers
+
+
+def test_ofac_junk_entry_is_blocked(sandbox):
+    p = sandbox / 'watchlist/ofac-targets.txt'
+    p.write_text(p.read_text(encoding='utf-8') + 'UPDATE-001\n', encoding='utf-8')
+    _, blockers = gate.collect(sandbox, DATE)
+    assert any('OFAC' in b for b in blockers), blockers
+
+
+def test_probability_shares_must_sum_to_100(sandbox):
+    def break_sum(d):
+        d['hypotheses'][0]['likelihood'] = '10%'
+    mutate_json(sandbox / f'web/meta/{DATE}.json', break_sum)
+    _, blockers = gate.collect(sandbox, DATE)
+    assert any('النسب المشتقة' in b for b in blockers), blockers
+
+
+def test_sources_approved_mismatch_is_blocked(sandbox):
+    mutate_json(sandbox / f'web/meta/{DATE}.json',
+                lambda d: d.__setitem__('sources_approved', 40))
+    _, blockers = gate.collect(sandbox, DATE)
+    assert any('عدد المصادر' in b for b in blockers), blockers
+
+
+def test_zones_count_mismatch_is_blocked(sandbox):
+    def drop_zone(d):
+        d['threat_zone_levels'].pop('Z5', None)
+    mutate_json(sandbox / f'web/meta/{DATE}.json', drop_zone)
+    _, blockers = gate.collect(sandbox, DATE)
+    assert any('عدد القطاعات' in b for b in blockers), blockers
