@@ -1,6 +1,6 @@
 ---
 name: webdev
-description: "Build and deliver an initialized Manus website, mobile app or game: planning, design, development, Preview, configuration, checkpoints, publishing and saving/connecting code to GitHub. Use for ANY request to build a game, including simple browser/HTML5/canvas games and quick prototypes, unless the user explicitly asks for a different deliverable such as a single HTML file or a Python script. Load optional references only for capabilities or recovery the task actually needs."
+description: "Build and deliver an initialized Manus website, mobile app or game: planning, design, development, Preview, configuration, checkpoints, publishing and saving/connecting code to GitHub. Use for ANY request to build a game, including simple browser/HTML5/canvas games and quick prototypes, unless the user explicitly asks for a different deliverable such as a single HTML file or a Python script. Not for Unity, Unreal Engine or other native-engine games except Godot. Load optional references only for capabilities or recovery the task actually needs."
 ---
 
 # Webdev

@@ -29,7 +29,7 @@ method for the initial Blueprint implementation only; it is not ongoing consent 
 Select individual models from gameplay needs and recorded restrictions. Historical `custom` choices
 follow their recorded restrictions. Pending/cancelled choices and missing historical fields are not
 generation consent. Preserve narrower supplied-only, no-AI, budget and style restrictions.
-This decision does not authorize generated audio; assess need and obtain its separate approval.
+The saved choice also selects the [audio route](#audio).
 
 Existing games may add models without replacing their Blueprint or restarting setup. A direct request to
 generate a model authorizes that model; a generic request to improve visuals does not. Settle only the
@@ -75,13 +75,18 @@ Before each built-in `generate_3d_model` call, assign the model a detail tier wi
   use that maximum and tell the user.
 
 A descriptor applies only to the models it describes: "a knight in a low-poly forest" makes the trees and rocks
-Light and keeps the knight Standard. Quality uses these tiers. Fast and saved `hybrid` use only P1: their models
-are Light, and High models keep P1 with P1's maximum `face_limit` and the requested `texture_quality`.
+Light and keeps the knight Standard. Quality uses these tiers. Highest quality keeps their `face_limit` rules but
+uses P2 for every model, including Light. If its image `quality: "high"` is rejected, use the default and say so.
+Before registering each Highest quality model, rig or animation GLB, fit its textures in place to the
+[3D texture budgets](game-assets.md#3d-texture-budgets) with
+`npx -y @gltf-transform/cli@4 resize <glb> <glb> --width <edge> --height <edge>`; if that fails, keep the file and
+report it. Fast and saved `hybrid` use only P1: their models are Light, and High
+models keep P1 with P1's maximum `face_limit` and the requested `texture_quality`.
 Later additions follow the saved choice without gaining generation consent. Legacy `ai_generated` and additions
-without a saved Quality, Fast or Hybrid choice use Light unless the request prioritizes quality. A replacement
+without a saved Quality, Highest quality, Fast or Hybrid choice use Light unless the request prioritizes quality. A replacement
 keeps the replaced model's tier unless the request changes its detail. It passes the same non-default arguments
-again: the tier's `model`, any `face_limit` and requested `texture_quality`, and the saved mode's texture, PBR
-and texture-version settings. Omitted arguments fall back to tool defaults (P1, PBR, standard textures).
+again: the tier's `model`, any `face_limit` and requested `texture_quality`, and the saved mode's texture, PBR,
+texture-quality and texture-version settings. Omitted arguments fall back to tool defaults (P1, PBR, standard textures).
 Explicit user model, face-count, texture, budget and source instructions take precedence.
 Resolve exact model IDs and supported options from the active tool schema; account aliases are not proof of a
 selectable model version. If the preferred model cannot be selected, report the limitation and defer those assets
@@ -125,6 +130,27 @@ Sync validates files, uploads changes, restores missing recorded bytes and updat
 reusing hashes/storage and preserving groups. Do not invent storage keys. On upload failure, retry with
 the existing output; completed uploads survive. Apply [Asset browser groups](#asset-browser-groups)
 to the registered batch before saving.
+
+## Audio
+
+The saved Blueprint choice selects the audio route for the initial implementation:
+
+- `ai_generated_max` and `ai_generated_highest` (Quality and Highest quality modes): generate every sound effect the
+  game plays with `generate_sound_effect`, one cue per call, and one instrumental, seamlessly looping BGM track with
+  `generate_music`. Derive one audio style (instruments, texture, mood) from the game's visual direction and reuse it
+  in every prompt. Replace the starter's synthesized cues and procedural music; do not mix in catalog audio.
+- Fast mode and every other choice: search the Manus game asset catalog for `sfx` through the game-asset-catalog
+  Skill and retrieve suitable cues. When nothing fits, keep the starter's synthesized cue or leave it silent.
+  Generate audio only when the user explicitly requests it: each requested cue with `generate_sound_effect`, or
+  one music track with `generate_music`.
+
+Explicit silence, supplied-audio-only and no-AI restrictions override both routes. Later requests add or
+regenerate audio only when they explicitly ask for it.
+Put audio files in `assets/audio/`, load them with the starter's `Audio.load()` and play them with `playBuffer()`
+on the `sfx` or looping `music` bus. Route BGM through `startMusic()` and `stopMusic()`: start one looping source
+only when none is playing, and stop it in `stopMusic()`. Keep the volume settings and gesture unlock. Register,
+save and load them like other runtime media. Audition each changed cue and regenerate only for an actionable
+correction.
 
 ## Save and load assets
 

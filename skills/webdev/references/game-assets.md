@@ -100,7 +100,7 @@ Before-creation means deletion, not image restoration. Keep the last successful 
 
 ### 3D model generation
 For all GameDev 3D model generation, default to the Manus built-in `generate_3d_model` tool in Cloud and Local,
-for new games and additions to existing games. Discover its active schema and use only supported arguments.
+for new games and additions to existing games. Discover its active schema and use only supported arguments. Textured calls default to `texture_version: "v3.5-20260815"` and `delight: true`.
 Do not write custom scripts to submit or poll Tripo/provider jobs, or use the Data API as a generation shortcut.
 A Fast/Hybrid/AI mode, a provider name or an enabled connector does not select an external entry point.
 Only an explicit user request for a connector selects that route; use its registered tools, never a custom API

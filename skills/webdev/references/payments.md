@@ -68,6 +68,25 @@ Stripe signature verification uses `STRIPE_WEBHOOK_SECRET` and the exact request
 
 Sandbox claim information is in Settings › Integrations. After the site is published, the owner supplies live publishable and secret keys as a pair in that same Dashboard section. The platform then points the production webhook at the published domain. Republish is required for the deployed application to receive the live values. Live keys are not config-document fields.
 
+## Disconnect Stripe
+
+Disconnect only when the owner asks to remove Stripe from this website, for example to use Shopify instead. Building, publishing or a mutual-exclusion error is not by itself such a request; ask the owner first.
+
+1. Call `webdev.config` with `POST integrations/stripe/disconnect` and no body. Only the owner can call it; others get `403 permission_denied`.
+2. The response contains an `action_url` and pauses the agent. Stop and let the owner confirm in the card. If the sandbox is unclaimed, the card asks the owner to claim it first, because Manus offers no claim while Stripe is disconnected. Never remove `stripe` with a config write; that returns `integration_disable_unsupported`.
+3. Resume after the `integration_disconnected` notification. The disconnect is already applied; do not call it again. Remove the Stripe code, the `/api/stripe/webhook` route and all use of the three Stripe keys. Then restart Preview, validate and save a checkpoint.
+
+The disconnect removes `integrations: ["stripe"]` and the three managed declarations in one config revision, so new Preview runtimes do not receive the keys. By default the stored values stay but are inactive, the test webhook is deleted immediately, and the next publish deletes the live webhook. The published site keeps its current version and live keys until the next publish. The Stripe sandbox and the owner's Stripe account are not deleted or changed.
+
+Use the notification payload when you report the result:
+
+- `unclaimedSandboxExpiresAt`: the sandbox was not claimed, and Stripe deletes it at that time. Tell the owner both facts, but do not tell the owner to claim it: Manus offers no claim while Stripe is disconnected.
+- `liveKeysConfigured`: live payments and subscriptions stay in the owner's Stripe account. Manus stops receiving their events after the next publish. The owner manages or cancels them in the Stripe Dashboard.
+- `savedDataDeleted`: the owner chose to delete what Manus saved for Stripe: all stored values of the three keys and the Stripe record. Neither webhook is deleted.
+
+When live keys are configured and a publish is running, the card returns `revision_conflict` with `reason_code: publish_in_progress`. Tell the owner to confirm again after the publish finishes.
+
+Enabling Stripe again reuses what still works: an unclaimed sandbox that has not expired, a claimed sandbox, owner-supplied test keys and live keys. The live webhook is registered again for the published domain. An expired unclaimed sandbox is replaced by a new one. If reused owner-supplied keys no longer work, the owner enters them again in Settings › Integrations. After `savedDataDeleted`, nothing is reused: enabling Stripe again creates a new sandbox, and the owner enters own or live keys again.
 ## Payment implementation and completion
 
 Read this payment contract before modifying Stripe configuration or implementing platform-managed checkout. For a new project needing that capability, declare the server at creation. Read the configuration/secret contracts before revising managed declarations; use the single enable operation, never hand-add its fixed keys or create a second webhook in the Stripe Dashboard. Do not ask the user to provide the sandbox keys that the platform provisions.

@@ -2734,14 +2734,16 @@
     "rules": [
      "ف1–ف5 — بوابة التحقق"
     ],
-    "files": [
-     "tools/final_gate.sh",
-     "validators/check_portable_paths.py",
-     "tools/portable_paths.py"
-    ],
-    "gates": [],
-    "tests": []
-   },
+   "files": [
+    "tools/final_gate.sh",
+    "validators/check_portable_paths.py",
+    "tools/portable_paths.py"
+   ],
+   "gates": [],
+   "tests": [
+    "tests/test_g026_portable_paths.py"
+   ]
+  },
    "on_fail": "stop",
    "command": [
     "bash",
@@ -2816,10 +2818,15 @@
      "ف1–ف5 — بوابة التحقق"
     ],
     "files": [
-     "tools/final_gate.sh"
+     "tools/final_gate.sh",
+     "validators/check_code_spaces.py",
+     "tools/register_estimate.py",
+     "appendices/estimate-code-map.json"
     ],
     "gates": [],
-    "tests": []
+    "tests": [
+     "tests/test_g030_code_spaces.py"
+    ]
    },
    "on_fail": "stop",
    "command": [
@@ -3054,10 +3061,13 @@
     ],
     "files": [
      "tools/final_gate.sh",
-     "validators/check_vocabulary.py"
+     "validators/check_vocabulary.py",
+     "appendices/simplified-vocabulary.json"
     ],
     "gates": [],
-    "tests": []
+    "tests": [
+     "tests/test_g036_vocabulary_contract.py"
+    ]
    },
    "on_fail": "stop",
    "command": [
@@ -3189,7 +3199,8 @@
     ],
     "gates": [],
     "tests": [
-     "tests/test_closure_gate.py"
+     "tests/test_closure_gate.py",
+     "tests/test_traceability_completeness.py"
     ]
    },
    "on_fail": "stop",
@@ -3262,10 +3273,14 @@
     ],
     "files": [
      "tools/final_gate.sh",
-     "tests/test_review2.sh"
+     "tests/test_review2.sh",
+     "validators/check_skills_parity.py",
+     "tools/browser_measure.py"
     ],
     "gates": [],
-    "tests": []
+    "tests": [
+     "tests/test_g040_review2_contract.py"
+    ]
    },
    "on_fail": "stop",
    "command": [
@@ -4175,7 +4190,8 @@
      "tests/test_vocab_registry.py",
      "tests/test_forbidden_surface_terms.py",
      "tests/test_meta_style_normalizer.py",
-     "tests/test_style_coverage_order.py"
+     "tests/test_style_coverage_order.py",
+     "tests/test_surface_deferral_contract.py"
     ]
    },
    "deferred_surfaces": [

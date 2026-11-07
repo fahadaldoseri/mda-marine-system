@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import re
 import sys
 import tempfile
 from pathlib import Path
@@ -74,10 +75,11 @@ def test_portable_paths() -> None:
         m.BRAIN, m.SITE = root / "brain", root / "site"
         m.BRAIN.mkdir(); m.SITE.mkdir()
         m.LITERALS = (m.BRAIN.as_posix(), m.SITE.as_posix())
+        m.PAT = re.compile("|".join(re.escape(x) for x in m.LITERALS))
         (m.BRAIN / "good.py").write_text("ROOT = Path(__file__).resolve().parents[1]\n", encoding="utf-8")
         check("portable_paths موجب: جذر مشتق من الملف", m.scan() == [])
-        # نستخدم المسار الحرفي الذي تحرسه البوابة، لا جذرًا مؤقتًا لا يدخل PAT.
-        (m.BRAIN / "bad.py").write_text('ROOT = "/home/ubuntu/brain-marine-news"\n', encoding="utf-8")
+        # نبني المخالفة من الجذر المؤقت حتى يبقى الاختبار محمولًا وقابلًا لإعادة التشغيل.
+        (m.BRAIN / "bad.py").write_text(f'ROOT = "{m.BRAIN.as_posix()}"\n', encoding="utf-8")
         check("portable_paths سالب: مسار مطلق في شيفرة", bool(m.scan()))
 
 

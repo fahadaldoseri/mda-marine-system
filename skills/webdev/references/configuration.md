@@ -25,6 +25,7 @@ version are supplied by the tool. Query parameters belong in `query`, never in t
 | `PUT` / `DELETE secrets/{NAME}` | Advanced declaration/revision or withdrawal; new protected input uses the registered request-secrets tool. |
 | `POST integrations/shopify/enable` | Store selection; [Shopify](shopify.md). |
 | `POST integrations/stripe/enable` | Platform Stripe enablement; [payments](payments.md). |
+| `POST integrations/{stripe\|shopify}/disconnect` | Owner-confirmed disconnect card; [payments](payments.md#disconnect-stripe), [Shopify](shopify.md#disconnect-shopify). |
 | `GET env` | Discover injected runtime key names; values are redacted. |
 | `runtime/post-edit` | LSP registration: [diagnostics](diagnostics.md). |
 | `GET logs` | Published-site logs; [diagnostics](diagnostics.md#production-logs). |

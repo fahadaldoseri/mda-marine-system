@@ -155,7 +155,7 @@ continuing authorization to publish new checkpoints; never enable it yourself. I
 use the canonical-main push described above; Studio uses Managed Git. A push to another
 branch or the user's separate repository does not record a publishable Manus checkpoint.
 
-The checkpoint receipt tells you whether automatic publication was submitted. Completion is
+The checkpoint receipt says whether automatic publication was submitted or (Godot) pending. Completion is
 shown in the Dashboard without an Agent notification; continue other work or end the turn.
 Do not issue another publish request for the same deployment. If automatic submission failed,
 the checkpoint remains saved: inspect deployment status and recover through MCP publish when

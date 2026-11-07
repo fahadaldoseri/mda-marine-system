@@ -176,6 +176,7 @@ def measure(url: str, widths: list[int], questions: list[str], phrases: list[str
                 key = f"{link['page']}#{link['hash']}"
                 if key in targets:
                     continue
+                aux = None
                 try:
                     aux = context.new_page()
                     target_page = link["page"]
@@ -211,10 +212,9 @@ def measure(url: str, widths: list[int], questions: list[str], phrases: list[str
                         "exists": False,
                         "error": str(exc)[:200],
                     }
-                    try:
+                    # أخطاء الإغلاق غير المتوقعة تُترك للحارس الموحّد؛ لا تُبتلع.
+                    if aux is not None:
                         aux.close()
-                    except Exception:
-                        pass
             data["anchor_targets"] = targets
             data["anchor_target_details"] = target_details
             result["widths"][str(width)] = data
