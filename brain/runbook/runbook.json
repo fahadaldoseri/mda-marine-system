@@ -5274,7 +5274,8 @@
           "tools/publish_channels.py",
           "tools/publish_fallback.sh",
           "tools/publish_site.sh",
-          "validators/check_en_parity.py"
+          "validators/check_en_parity.py",
+          "tests/test_publish_preflight_freshness.py"
         ],
         "gates": [],
         "tests": [

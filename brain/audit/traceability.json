@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-07T17:47:56.536289+00:00",
+  "generated_at": "2026-11-07T18:00:52.257672+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -4104,6 +4104,13 @@
       "lesson_id": "ك-554",
       "barrier_id": "B-0f6a787b",
       "run_evidence": "غيل مقيس: `python3 -m pytest tests/test_canonical_brain_root.py -q` → rc=0 (5 passed) اختبار انحدار"
+    },
+    {
+      "fault_id": "ك-555",
+      "state": "مغلق",
+      "lesson_id": "ك-555",
+      "barrier_id": "B-e6da93e9",
+      "run_evidence": "س: `python3 -m pytest tests/test_publish_preflight_freshness.py -q` → rc=0 (2 passed) · وإعادة D010"
     }
   ]
 }
