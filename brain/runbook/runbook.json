@@ -5355,6 +5355,49 @@
       ]
     },
     {
+      "id": "D021",
+      "title": "حداثة النشر: المتن المخدوم هو البناء الحالي نفسه (بصمة كل ملف مسبار)",
+      "kind": "script",
+      "phase": "deliver",
+      "assert": [
+        {
+          "type": "cmd",
+          "command": [
+            "python3",
+            "validators/check_deployment_freshness.py",
+            "--date",
+            "{date}"
+          ]
+        }
+      ],
+      "links": {
+        "rules": [
+          "س4 — قنوات العرض",
+          "إصلاح فجوة حداثة النشر 2026-11-07"
+        ],
+        "files": [
+          "validators/check_deployment_freshness.py"
+        ],
+        "gates": [],
+        "tests": [
+          "tests/test_deployment_freshness.py"
+        ]
+      },
+      "on_fail": "stop",
+      "optional": false,
+      "command": [
+        "bash",
+        "-lc",
+        "python3 validators/check_deployment_freshness.py --date {date}; rc=$?; exit $rc"
+      ],
+      "ok_rc": [
+        0
+      ],
+      "warn_rc": [],
+      "disabled": false,
+      "disabled_reason": ""
+    },
+    {
       "id": "D016",
       "title": "قناة Manus المرآة: نشر محكوم وشرط تحقق خاص (200 · text/html · الحجم · البصمة)",
       "kind": "script",
@@ -6128,5 +6171,13 @@
       },
       "measured_state_2026_11_07": "الرابط يعيد 404 · رسالة المنصة: addon workspace recovery has not completed"
     }
+  ],
+  "deployment_probe_files": [
+    "index.html",
+    "feed.xml",
+    "sitemap.xml",
+    "reports/index.html",
+    "sources.html",
+    "additions.html"
   ]
 }
