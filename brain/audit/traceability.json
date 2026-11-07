@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-07T12:51:00+00:00",
+  "generated_at": "2026-11-07T15:22:45.297525+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -4052,37 +4052,37 @@
     {
       "fault_id": "ك-547",
       "state": "مغلق",
-      "lesson_id": null,
+      "lesson_id": "ك-547",
       "barrier_id": "B-2ee8eb37",
       "run_evidence": "ublish_live_contract_20261107.py tests/test_publish_channels.py -q` → خرج 0 · 16 passed"
     },
     {
       "fault_id": "ك-548",
       "state": "مغلق",
-      "lesson_id": null,
+      "lesson_id": "ك-548",
       "barrier_id": "B-26501c01",
       "run_evidence": "ublish_live_contract_20261107.py tests/test_publish_channels.py -q` → خرج 0 · 16 passed"
     },
     {
       "fault_id": "ك-549",
-      "state": "مغلق",
+      "state": "مفتوح",
       "lesson_id": "ك-549",
-      "barrier_id": "B-81217012",
-      "run_evidence": "pytest tests/test_three_root_causes_20261107.py -q → 8 passed؛ validators/check_server_code_tracking.py --root . → خرج 0؛ D035/D040/D070 مرتبطة؛ 14/14 SHA-256 ثم إزالة الشجرة المضاعفة"
+      "barrier_id": "B-be25128d",
+      "run_evidence": null
     },
     {
       "fault_id": "ك-550",
-      "state": "مغلق",
+      "state": "مفتوح",
       "lesson_id": "ك-550",
-      "barrier_id": "B-45f0a86f",
-      "run_evidence": "pytest tests/test_three_root_causes_20261107.py -q → 8 passed؛ bash tests/test_delivery_scripts.sh → 11 نجاح · 0 فشل؛ error_code وdescription محفوظان دون سر"
+      "barrier_id": "B-faa8c059",
+      "run_evidence": null
     },
     {
       "fault_id": "ك-551",
-      "state": "مغلق",
+      "state": "مفتوح",
       "lesson_id": "ك-551",
-      "barrier_id": "B-1c41fa20",
-      "run_evidence": "pytest tests/test_three_root_causes_20261107.py -q → 8 passed؛ python3 tools/runbook.py verify --root . → خرج 0 «المانيفست متسق»؛ غياب المانيفست → rc=2 مع المسارات المفحوصة"
+      "barrier_id": "B-aa45003c",
+      "run_evidence": null
     }
   ]
 }
