@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-06T18:41:17.726451+00:00",
+  "generated_at": "2026-11-07T03:00:53.371065+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -3302,38 +3302,38 @@
     },
     {
       "fault_id": "ك-437",
-      "state": "بانتظار التحقق",
+      "state": "مغلق",
       "lesson_id": "ك-437",
       "barrier_id": "B-4976cad0",
-      "run_evidence": null
+      "run_evidence": " 5 مخالفات «مسار التحقق الداخلي غير مطويّ» على 6 بطاقات · بعد الإصلاح rc=0 «6 بطاقة · مطابق» · اختب"
     },
     {
       "fault_id": "ك-438",
       "state": "بانتظار التحقق",
       "lesson_id": "ك-438",
       "barrier_id": "B-d0621f24",
-      "run_evidence": null
+      "run_evidence": " بناء EN فشل مغلقًا مرتين (3 نصوص بلا ترجمة ثم 10 نصوص) · بعد: مزامنة rc=0 · تماثل AR/EN rc=0 «0 نص"
     },
     {
       "fault_id": "ك-439",
-      "state": "بانتظار التحقق",
+      "state": "مغلق",
       "lesson_id": "ك-439",
       "barrier_id": "B-3b975ede",
-      "run_evidence": null
+      "run_evidence": "ما بعد محاولة أولى معكوسة أُلغيت من النسخ الاحتياطية قبل: بوابة السطح rc=2 بمخالفتين · تغطية الأسلو"
     },
     {
       "fault_id": "ك-440",
       "state": "بانتظار التحقق",
       "lesson_id": "ك-440",
       "barrier_id": "B-9c6543c1",
-      "run_evidence": null
+      "run_evidence": " لا واحدة تحمل `data-fold=\"internal-path\"` · بعد الإصلاح: عقد البطاقة rc=0"
     },
     {
       "fault_id": "ك-441",
-      "state": "بانتظار التحقق",
+      "state": "مغلق",
       "lesson_id": "ك-441",
       "barrier_id": "B-bad636e3",
-      "run_evidence": null
+      "run_evidence": "نيفست محفوظة في `backups-20261101/runbook.json.bak-sec8` قبل: الأسلوب rc=2 · verify «الكتيب لا يطاب"
     },
     {
       "fault_id": "ك-442",
@@ -3354,14 +3354,14 @@
       "state": "مغلق",
       "lesson_id": "ك-444",
       "barrier_id": "B-7210b378",
-      "run_evidence": "c0c9ca1..98933f0c` قبل: D010 rc=2 ورسالة non-fast-forward · بعد: D010 رمز 0 و`runbook status` كل الخ"
+      "run_evidence": "البعيد>` (`98933f0c`) ودفع سريع التقدم `2c0c9ca1..98933f0c` قبل: D010 rc=2 ورسالة non-fast-forward "
     },
     {
       "fault_id": "ك-445",
-      "state": "مفتوح",
+      "state": "مغلق",
       "lesson_id": "ك-445",
       "barrier_id": "B-7b2b85ea",
-      "run_evidence": null
+      "run_evidence": "s.py` يفحص السجل مقابل القائمة السوداء قبل أي فحص آخر؛ اختُبر موجبًا (rc=0) وسالبًا (rc=2)"
     },
     {
       "fault_id": "ك-446",
@@ -3680,10 +3680,10 @@
     },
     {
       "fault_id": "ك-491",
-      "state": "بانتظار التحقق",
+      "state": "مغلق",
       "lesson_id": "ك-491",
       "barrier_id": "B-eec0f04d",
-      "run_evidence": null
+      "run_evidence": "شاردان، وأُضيف الحارس validators/check_glossary_shape.py. فحص: البناء rc=0 · الحارس موجب 0 وسالب 2 "
     },
     {
       "fault_id": "ك-492",
@@ -3694,17 +3694,17 @@
     },
     {
       "fault_id": "ك-493",
-      "state": "بانتظار التحقق",
+      "state": "مغلق",
       "lesson_id": "ك-493",
       "barrier_id": "B-0eb4b443",
-      "run_evidence": null
+      "run_evidence": "جل المناطق داخل مستودع الموقع بمسار نسبي + 9 مدخلات معجم. فحص: البناء rc=0 · المعجم 1230 مدخلًا · «"
     },
     {
       "fault_id": "ك-494",
-      "state": "بانتظار التحقق",
+      "state": "مغلق",
       "lesson_id": "ك-494",
       "barrier_id": "B-fdc4a0a6",
-      "run_evidence": null
+      "run_evidence": "يفت «غير مكانية» و«سياق إقليمي» إلى قائمة الاستثناء. فحص: check_intel rc=0 · الوقائع ذات المنطقة ال"
     },
     {
       "fault_id": "ك-495",
@@ -3834,17 +3834,17 @@
     },
     {
       "fault_id": "ك-513",
-      "state": "بانتظار التحقق",
+      "state": "مغلق",
       "lesson_id": "ك-513",
       "barrier_id": "B-1865c288",
-      "run_evidence": null
+      "run_evidence": "· JMIC) وتصحيح أسطح العرض من صفوف الدفتر check_source_naming.py ⇒ كان rc=2 بـ29 مخالفة، وصار يفحص ا"
     },
     {
       "fault_id": "ك-514",
-      "state": "بانتظار التحقق",
+      "state": "مغلق",
       "lesson_id": "ك-514",
       "barrier_id": "B-66783951",
-      "run_evidence": null
+      "run_evidence": " الموقع في المصدر مع area_basis يوضح السبب check_area_vocabulary.py ⇒ rc=0 على الدفتر"
     },
     {
       "fault_id": "ك-515",
@@ -3900,7 +3900,7 @@
       "state": "بانتظار التحقق",
       "lesson_id": "ك-522",
       "barrier_id": "B-e9ab8dc1",
-      "run_evidence": null
+      "run_evidence": "زامنة[site]: جديد=0` بعد أن كان 129 · `audit_generated_boundary.py` ⇒ rc=0"
     },
     {
       "fault_id": "ك-523",
@@ -3922,6 +3922,69 @@
       "lesson_id": "ك-525",
       "barrier_id": "B-259da6d4",
       "run_evidence": " ضمن المرسوم قبل مقارنة المجموعة بالمطلوب `tests/test_map_cluster.py` 4/4 ناجح · اختبار سالب مباشر"
+    },
+    {
+      "fault_id": "ك-526",
+      "state": "مغلق",
+      "lesson_id": "ك-526",
+      "barrier_id": "B-c493509c",
+      "run_evidence": "فرض المنتج قبل المستهلك؛ `python3 tests/test_runbook_s090_order.py` → خرج 0"
+    },
+    {
+      "fault_id": "ك-527",
+      "state": "مغلق",
+      "lesson_id": "ك-527",
+      "barrier_id": "B-881f0f51",
+      "run_evidence": " يفشل مغلقًا عند أي ملف غير متصل؛ `python3 tools/runbook.py verify` → خرج 0"
+    },
+    {
+      "fault_id": "ك-530",
+      "state": "مغلق",
+      "lesson_id": "ك-530",
+      "barrier_id": "B-47322fb7",
+      "run_evidence": "صل القانوني؛ `python3 validators/check_area_vocabulary.py --root .` → خرج 0؛ الدليل قبل/بعد في `evid"
+    },
+    {
+      "fault_id": "ك-531",
+      "state": "مفتوح",
+      "lesson_id": "ك-531",
+      "barrier_id": "B-ed31e1a8",
+      "run_evidence": " قبل/بعد وبصمات ثلاثية؛ `python3 validators/check_skills_parity.py` → خرج 0 · 34 مهارة · 247 ملفًا ·"
+    },
+    {
+      "fault_id": "ك-532",
+      "state": "مغلق",
+      "lesson_id": "ك-532",
+      "barrier_id": "B-d6438082",
+      "run_evidence": "بلها الإنجليزي؛ إعادة بناء الموقع واختبار موجب وسالب الدليل: handbook RC=0 وverify RC=0، اختبار الق"
+    },
+    {
+      "fault_id": "ك-533",
+      "state": "مغلق",
+      "lesson_id": "ك-533",
+      "barrier_id": "B-e9ed2176",
+      "run_evidence": "sts/test_hero_kpi_presentation_contract.py: RED قبل الإصلاح ثم GREEN (3/3)؛ G012 أعيد تشغيله وخرج "
+    },
+    {
+      "fault_id": "ك-534",
+      "state": "مغلق",
+      "lesson_id": "ك-534",
+      "barrier_id": "B-4cbc003e",
+      "run_evidence": "ر الحكم العملياتي، ثم إعادة تشغيل البوابة check_style.py بعد الإصلاح: rc=0؛ بقيت 3 تنبيهات طول معلن"
+    },
+    {
+      "fault_id": "ك-535",
+      "state": "مغلق",
+      "lesson_id": "ك-535",
+      "barrier_id": "B-e1360008",
+      "run_evidence": "EN؛ check_project_skills.py عبر 4 أسطح: 34 مهارة، 247 ملفًا، 0 عوائق، rc=0"
+    },
+    {
+      "fault_id": "ك-536",
+      "state": "مغلق",
+      "lesson_id": "ك-536",
+      "barrier_id": "B-59ae4e44",
+      "run_evidence": "700ae7f245e5b6cb55632e0d4d282ed580402cf`)؛ بعد الإصلاح → `3 passed` و`rc=0` (GREEN؛ `/tmp/g030-test"
     }
   ]
 }

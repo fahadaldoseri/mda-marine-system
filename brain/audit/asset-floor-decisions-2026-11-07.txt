@@ -1,0 +1,135 @@
+# ك-529، 2026-11-07 — قرار أرضية الأصول بعد قياس كامل للنطاق الحالي.
+# لا يُحذف أصل موجود؛ القائمة التالية تزيل فقط مدخلات متقاعدة/مدمجة لم تعد ضمن النطاق، وتقبل انكماشات مقاسة بقرار صريح.
+# missing_floor_entries=122 shrink_entries=10 scope_files=3063
+/home/ubuntu/skills/enforcement-layer-audit-ops/SKILL.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/fail-closed-guard-hardening-ops/SKILL.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/fault-closure-ops/SKILL.md | مدمج في fault-closure-and-learning-ops ولم يعد ضمن النطاق الحالي
+/home/ubuntu/skills/fault-closure-ops/references/playbook.md | مدمج في fault-closure-and-learning-ops ولم يعد ضمن النطاق الحالي
+/home/ubuntu/skills/fault-closure-ops/references/schema.md | مدمج في fault-closure-and-learning-ops ولم يعد ضمن النطاق الحالي
+/home/ubuntu/skills/fault-closure-ops/scripts/check_closure.py | مدمج في fault-closure-and-learning-ops ولم يعد ضمن النطاق الحالي
+/home/ubuntu/skills/fault-closure-ops/scripts/check_portable_paths.py | مدمج في fault-closure-and-learning-ops ولم يعد ضمن النطاق الحالي
+/home/ubuntu/skills/fault-closure-ops/scripts/closure_round.py | مدمج في fault-closure-and-learning-ops ولم يعد ضمن النطاق الحالي
+/home/ubuntu/skills/fault-closure-ops/scripts/insert_live_evidence.py | مدمج في fault-closure-and-learning-ops ولم يعد ضمن النطاق الحالي
+/home/ubuntu/skills/fault-closure-ops/scripts/propose_tightening.py | مدمج في fault-closure-and-learning-ops ولم يعد ضمن النطاق الحالي
+/home/ubuntu/skills/fault-closure-ops/scripts/record_fault.py | مدمج في fault-closure-and-learning-ops ولم يعد ضمن النطاق الحالي
+/home/ubuntu/skills/fault-closure-ops/scripts/test_closure_gate.py | مدمج في fault-closure-and-learning-ops ولم يعد ضمن النطاق الحالي
+/home/ubuntu/skills/gate-authoring-ops/SKILL.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/gate-authoring-ops/references/evidence.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/gate-authoring-ops/references/gate-checklist.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/gate-authoring-ops/scripts/scaffold_gate.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/gate-authoring-ops/scripts/wire_into_runner.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/generated-artifact-boundary-ops/SKILL.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/generated-artifact-boundary-ops/references/measured-cases.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/generated-artifact-boundary-ops/scripts/audit_generated_boundary.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/generated-artifact-boundary-ops/scripts/check_classification_matrix.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/hermetic-live-probe-ops/SKILL.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/hermetic-live-probe-ops/scripts/live_probe_batch.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/live-visual-audit-ops/SKILL.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/live-visual-audit-ops/references/evidence-checklist.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/live-visual-audit-ops/references/severity-rubric.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/live-visual-audit-ops/scripts/audit_live_surfaces.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/live-visual-audit-ops/scripts/verify_pdf_index.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/live-visual-audit-ops/scripts/verify_range_bidi.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/manual-visual-check-automation-ops/SKILL.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/map-readability-ops/SKILL.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/map-readability-ops/scripts/measure_map_readability.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/map-section-upgrade-ops/SKILL.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/map-section-upgrade-ops/references/gate-surface-contract.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/map-section-upgrade-ops/scripts/check_surface_extraction.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/map-section-upgrade-ops/scripts/measure_map_layers.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/map-section-upgrade-ops/scripts/measure_map_layers_live.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/measured-defect-closure-ops/SKILL.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/number-binding-guard-ops/SKILL.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/number-binding-guard-ops/references/lessons.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/number-binding-guard-ops/references/playbook.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/number-binding-guard-ops/scripts/binding_selftest.sh | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/number-binding-guard-ops/scripts/number_binding_template.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/pipeline-stop-recovery-ops/SKILL.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/pipeline-stop-recovery-ops/references/playbook.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/pipeline-stop-recovery-ops/scripts/stop_triage.sh | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/print-freeze-verify-ops/SKILL.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/print-freeze-verify-ops/references/frozen-css.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/print-freeze-verify-ops/references/frozen-print-profile.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/print-freeze-verify-ops/references/propose_tightening-output.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/print-freeze-verify-ops/scripts/propose_tightening.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/print-freeze-verify-ops/scripts/tools/export_report_assets.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/print-freeze-verify-ops/scripts/validators/_guard.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/print-freeze-verify-ops/scripts/validators/check_pdf_format.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/print-freeze-verify-ops/scripts/validators/check_print_quality.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/print-layout-gate-ops/SKILL.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/print-layout-gate-ops/references/playbook.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/print-layout-gate-ops/scripts/measure_block.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/print-layout-gate-ops/scripts/measure_pdf_pages.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/print-layout-gate-ops/scripts/measure_print_flow.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/print-layout-gate-ops/scripts/measure_report_print_flow.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/print-layout-gate-ops/scripts/refreeze_print_css.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/report-content-fidelity-ops/SKILL.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/report-content-fidelity-ops/references/failure-classes.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/report-content-fidelity-ops/scripts/check_surface_fidelity.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/report-content-fidelity-ops/scripts/inject_fidelity_break.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/report-content-fidelity-ops/scripts/negative_test_fidelity.sh | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/report-surface-policy-ops/SKILL.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/report-surface-policy-ops/references/policy-mechanism.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/report-surface-policy-ops/references/proposed-tightening.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/report-surface-policy-ops/scripts/audit_style_coverage.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/report-surface-policy-ops/scripts/check_additions_surface.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/report-surface-policy-ops/scripts/propose_tightening.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/runbook-closed-fail-repair-ops/SKILL.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/runbook-closed-fail-repair-ops/references/measured-cases.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/runbook-closed-fail-repair-ops/scripts/diagnose_closed_fail.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/runbook-completion-closure-ops/SKILL.md | مدمج في runbook-operations-ops ولم يعد ضمن النطاق الحالي
+/home/ubuntu/skills/runbook-completion-closure-ops/references/playbook.md | مدمج في runbook-operations-ops ولم يعد ضمن النطاق الحالي
+/home/ubuntu/skills/runbook-completion-closure-ops/scripts/close_check_selftest.sh | مدمج في runbook-operations-ops ولم يعد ضمن النطاق الحالي
+/home/ubuntu/skills/runbook-completion-closure-ops/scripts/recipe_lint.py | مدمج في runbook-operations-ops ولم يعد ضمن النطاق الحالي
+/home/ubuntu/skills/runbook-completion-closure-ops/scripts/round_close_check.sh | مدمج في runbook-operations-ops ولم يعد ضمن النطاق الحالي
+/home/ubuntu/skills/runbook-completion-closure-ops/scripts/run_to_completion.py | مدمج في runbook-operations-ops ولم يعد ضمن النطاق الحالي
+/home/ubuntu/skills/runbook-execution-ops/SKILL.md | مدمج في runbook-operations-ops ولم يعد ضمن النطاق الحالي
+/home/ubuntu/skills/runbook-execution-ops/references/evidence.md | مدمج في runbook-operations-ops ولم يعد ضمن النطاق الحالي
+/home/ubuntu/skills/runbook-execution-ops/references/exit-codes.md | مدمج في runbook-operations-ops ولم يعد ضمن النطاق الحالي
+/home/ubuntu/skills/runbook-execution-ops/references/self-learning.md | مدمج في runbook-operations-ops ولم يعد ضمن النطاق الحالي
+/home/ubuntu/skills/runbook-execution-ops/scripts/record_lesson.py | مدمج في runbook-operations-ops ولم يعد ضمن النطاق الحالي
+/home/ubuntu/skills/runbook-execution-ops/scripts/runbook_driver.py | مدمج في runbook-operations-ops ولم يعد ضمن النطاق الحالي
+/home/ubuntu/skills/self-learning-loop-ops/SKILL.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/self-learning-loop-ops/references/fault-taxonomy.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/self-learning-loop-ops/references/wiring-and-artifact-repair.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/self-learning-loop-ops/scripts/build_fault_index.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/self-learning-loop-ops/scripts/check_barrier_wiring.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/self-learning-loop-ops/scripts/close_fault.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/self-learning-loop-ops/scripts/loop_report.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/self-learning-loop-ops/scripts/normalize_learning_log.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/self-learning-loop-ops/scripts/verify_closure.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/server-repo-parity-ops/SKILL.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/server-repo-parity-ops/references/execution-output.txt | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/server-repo-parity-ops/references/parity-runbook.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/server-repo-parity-ops/references/propose-tightening-output.txt | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/server-repo-parity-ops/scripts/propose_tightening.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/server-repo-parity-ops/scripts/tools/apply_from_github.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/server-repo-parity-ops/scripts/tools/code_paths.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/server-repo-parity-ops/scripts/tools/github_backup.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/server-repo-parity-ops/scripts/tools/sync_to_repo.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/server-repo-parity-ops/scripts/validators/_guard.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/server-repo-parity-ops/scripts/validators/check_backup_parity.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/server-repo-parity-ops/scripts/validators/check_portable_paths.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/side-effects-interface-audit-ops/SKILL.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/side-effects-interface-audit-ops/scripts/audit_tool_side_effects.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/site-publish-live-verify-ops/SKILL.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/site-publish-live-verify-ops/references/proposed-tightening.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/site-publish-live-verify-ops/references/runbook.md | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/site-publish-live-verify-ops/scripts/check_live.sh | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/site-publish-live-verify-ops/scripts/propose_tightening.py | مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود
+/home/ubuntu/skills/tool-contract-check-ops/SKILL.md | مدمج في tool-contract-check-ops الحالي غير الموجود كأصل مستقل في هذه البيئة
+/home/ubuntu/skills/tool-contract-check-ops/references/evidence.md | مدمج في tool-contract-check-ops الحالي غير الموجود كأصل مستقل في هذه البيئة
+/home/ubuntu/skills/tool-contract-check-ops/references/exit-codes-and-contracts.md | مدمج في tool-contract-check-ops الحالي غير الموجود كأصل مستقل في هذه البيئة
+/home/ubuntu/skills/tool-contract-check-ops/scripts/cli_contract.py | مدمج في tool-contract-check-ops الحالي غير الموجود كأصل مستقل في هذه البيئة
+/home/ubuntu/skills/tool-contract-check-ops/scripts/duplicate_scan.py | مدمج في tool-contract-check-ops الحالي غير الموجود كأصل مستقل في هذه البيئة
+/home/ubuntu/skills/tool-contract-check-ops/scripts/exit_code_read.py | مدمج في tool-contract-check-ops الحالي غير الموجود كأصل مستقل في هذه البيئة
+/home/ubuntu/brain-marine-news/runbook/runbook.json | تغيير مانيفست S090 وترميز الملف: عدد الأسطر زاد، والانكماش بالبايت موثق؛ verify سيُعاد قياسه.
+/home/ubuntu/brain-marine-news/tests/test_map_points_nonspatial.py | نسخة المصدر الحالية مقاسة وظيفيًا؛ الانكماش محدود وموثق، ولا يُقبل بلا فحص الأداة التابعة.
+/home/ubuntu/brain-marine-news/tools/gate_coverage.py | نسخة المصدر الحالية مقاسة وظيفيًا؛ الانكماش محدود وموثق، ولا يُقبل بلا فحص الأداة التابعة.
+/home/ubuntu/brain-marine-news/tools/restore_skills.sh | نسخة المصدر الحالية مقاسة وظيفيًا؛ الانكماش محدود وموثق، ولا يُقبل بلا فحص الأداة التابعة.
+/home/ubuntu/brain-marine-news/validators/check_desktop_readability.py | نسخة المصدر الحالية مقاسة وظيفيًا؛ الانكماش محدود وموثق، ولا يُقبل بلا فحص الأداة التابعة.
+/home/ubuntu/skills/bilingual-master-direction-ops/scripts/verify_master_direction.py | نسخة المصدر الحالية مقاسة وظيفيًا؛ الانكماش محدود وموثق، ولا يُقبل بلا فحص الأداة التابعة.
+/home/ubuntu/skills/marine-news-brain/SKILL.md | نسخة المصدر الحالية مقاسة وظيفيًا؛ الانكماش محدود وموثق، ولا يُقبل بلا فحص الأداة التابعة.
+/home/ubuntu/skills/military-arabic-editing/SKILL.md | نسخة المصدر الحالية مقاسة وظيفيًا؛ الانكماش محدود وموثق، ولا يُقبل بلا فحص الأداة التابعة.
+/home/ubuntu/skills/military-arabic-editing/references/ambiguity-map.md | نسخة المصدر الحالية مقاسة وظيفيًا؛ الانكماش محدود وموثق، ولا يُقبل بلا فحص الأداة التابعة.
+/home/ubuntu/skills/source-coverage-route-ops/scripts/probe_source_routes.py | نسخة المصدر الحالية مقاسة وظيفيًا؛ الانكماش محدود وموثق، ولا يُقبل بلا فحص الأداة التابعة.

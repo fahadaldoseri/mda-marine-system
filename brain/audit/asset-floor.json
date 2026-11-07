@@ -4,9 +4,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 214,
-   "sha256": "9a2ae224e9f1346e67ed209882aea4c818e38878ecf6306973cdde42aef63b11",
-   "size": 22702
+   "lines": 234,
+   "sha256": "a4f48d62a3b6c9dfc970b6627b46f7e06a6a792abbb132073391231edb2eb044",
+   "size": 26036
   },
   "/home/ubuntu/brain-marine-news/appendices/threat-scale.json": {
    "accepted_reductions": [],
@@ -42,13 +42,22 @@
      "reason": "قرار مسجَّل 2026-11-05: (1) runbook.json أُعيد تنسيقه بترميز عربي مقروء فزادت الأسطر 5214→5401 ونقص البايت 166665→152654 والمحتوى زاد لا نقص؛ (2) verify_master_direction.py نقص 4 بايت بعد إصلاح سكربت الاتجاه في جولة 2026-11-04 (المزامنة 21135d7f)؛ (3) probe_source_routes.py نقص 161 بايت بعد مزامنة الشيفرة المصحّحة من الخادم إلى المستودع (ed3a7507 ← 21135d7f). الأصول المفقودة فعليًا استُعيدت من المرآة: SKILL.md لمهارة الخريطة وسكربتاه وcheck_surface_extraction.py وtest_map_points_nonspatial.py.",
      "to_lines": 5401,
      "to_size": 152654
+    },
+    {
+     "date": "2026-11-06",
+     "from_lines": 5669,
+     "from_size": 181374,
+     "note": "تغيير مانيفست S090 وترميز الملف: عدد الأسطر زاد، والانكماش بالبايت موثق؛ verify سيُعاد قياسه.",
+     "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+     "to_lines": 5876,
+     "to_size": 167236
     }
    ],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 5669,
-   "sha256": "b8a6c5bbf6e93b58f85aa58e434dd7753a380e6660aba22ce57b06be641a8f2e",
-   "size": 181374
+   "lines": 5876,
+   "sha256": "f90cf991b0bae333722662a8aa2dcf02dc94002fbfc8764e8d4ff417057c0bd6",
+   "size": 167236
   },
   "/home/ubuntu/brain-marine-news/sections/00-identity.md": {
    "accepted_reductions": [],
@@ -182,9 +191,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 303,
-   "sha256": "b876d78c7932e4f0bc71e59fd3c3ef14985cc145d8526d79913ef545494d5096",
-   "size": 21468
+   "lines": 306,
+   "sha256": "4b7785db83db50be9ee3830450ad611c09b070a42eb5b82ae2c2b04559fba304",
+   "size": 21644
   },
   "/home/ubuntu/brain-marine-news/tests/sections/test_attribution.sh": {
    "accepted_reductions": [],
@@ -342,9 +351,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-05",
    "last_seen": "2026-11-06",
-   "lines": 99,
-   "sha256": "f23f7e41380ee5861b9e01bc7c453baa1514b68b358e9786aa06cc5ec91049d2",
-   "size": 3586
+   "lines": 116,
+   "sha256": "4162d5e236d90b99c9e488c117daed6ed8c1fa5b70f8c635a1159a81c6d47649",
+   "size": 4312
   },
   "/home/ubuntu/brain-marine-news/tests/test_asset_floor.py": {
    "accepted_reductions": [],
@@ -386,6 +395,14 @@
    "sha256": "07f4de0c3bf7d2a5f5b27ab27d39ca37f29c1a6d2894bd8506e049c8cf8a3e7c",
    "size": 3030
   },
+  "/home/ubuntu/brain-marine-news/tests/test_binding_coverage_cli.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 28,
+   "sha256": "24e8828165856cfdfc0b176058cab0bc793ca46589fb5ed8aebdfc3ff7f53e19",
+   "size": 846
+  },
   "/home/ubuntu/brain-marine-news/tests/test_card_counters.py": {
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
@@ -414,9 +431,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-05",
    "last_seen": "2026-11-06",
-   "lines": 60,
-   "sha256": "e56955f55e14554e5a4cf42a71c86febc8a1f882e3b46d701bc5826f29476abc",
-   "size": 2533
+   "lines": 67,
+   "sha256": "94bc7b6b984c5605d79a90f6f8c7286fa31b9e9d9228ffadc89dc05560d9e7ad",
+   "size": 2826
   },
   "/home/ubuntu/brain-marine-news/tests/test_content_fidelity_units.py": {
    "accepted_reductions": [],
@@ -454,9 +471,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
-   "lines": 119,
-   "sha256": "2b85e254153a678976bc4d02c52cd290e5bc805a337be354d48941a0454f9899",
-   "size": 4537
+   "lines": 124,
+   "sha256": "7b958623e2c5c5963c164eb0c812505b392782483b68951aa3846d4ba89f3cae",
+   "size": 4817
   },
   "/home/ubuntu/brain-marine-news/tests/test_delivery_policy.py": {
    "accepted_reductions": [],
@@ -474,6 +491,14 @@
    "sha256": "066a1717bca315f3408d5e66d00817fd223ba27366418b80406b14e547e50c5e",
    "size": 4136
   },
+  "/home/ubuntu/brain-marine-news/tests/test_desktop_readability_contract.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 59,
+   "sha256": "a7266d7d9681caeaac31a23bc216f5f13ace32950970c4da33924116f3541f4f",
+   "size": 2187
+  },
   "/home/ubuntu/brain-marine-news/tests/test_edit_pass.py": {
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
@@ -489,6 +514,14 @@
    "lines": 85,
    "sha256": "7ef7265dd972393f2ff402031ff128c690f21e205543d9c74385765c0017f5b3",
    "size": 3085
+  },
+  "/home/ubuntu/brain-marine-news/tests/test_en_parity_confidence_map.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 42,
+   "sha256": "9345b6ae714391ee35743cf113d63329f632c4d6474d25ec8504fe0950882b77",
+   "size": 1706
   },
   "/home/ubuntu/brain-marine-news/tests/test_event_card_contract.py": {
    "accepted_reductions": [],
@@ -530,6 +563,22 @@
    "sha256": "dbcd3739a79d7107f7e2b0c66195a7bfe25a7c9061e71afb144667604a81b65b",
    "size": 5123
   },
+  "/home/ubuntu/brain-marine-news/tests/test_gate_audit_triage.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 103,
+   "sha256": "f3b855c0000c8598156e13ebd6354ae614086141f00e35f2972f22cf9a77e704",
+   "size": 4933
+  },
+  "/home/ubuntu/brain-marine-news/tests/test_gate_guard_contracts.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 286,
+   "sha256": "991f2a7f7883ac05f6ffadd69bca208fa688c649f4f6689e2b4b00183e1eeab6",
+   "size": 15326
+  },
   "/home/ubuntu/brain-marine-news/tests/test_gate_suggestions.py": {
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
@@ -550,9 +599,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 47,
-   "sha256": "24c9ad8e2eadcdc0ff1ff738c72ae7cb6fd042bf06310dbea2694988d1c1fa03",
-   "size": 2033
+   "lines": 88,
+   "sha256": "1ba989ccd1a789ecb58613ef2eec58c6a66b5ff6bca918db7e72b9e23d05ba40",
+   "size": 3769
   },
   "/home/ubuntu/brain-marine-news/tests/test_geo_table_selection.py": {
    "accepted_reductions": [],
@@ -561,6 +610,14 @@
    "lines": 55,
    "sha256": "c8c63d611807dd14da335bf2d4ef31c165886a343024400704acc9f65c4a720d",
    "size": 2095
+  },
+  "/home/ubuntu/brain-marine-news/tests/test_github_backup_failure_output.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 69,
+   "sha256": "bf63da911247fe60b8fda858d9bb6800a56f61df5d04b8ff1f39b83d8b12c9ab",
+   "size": 2528
   },
   "/home/ubuntu/brain-marine-news/tests/test_hanging_opener.py": {
    "accepted_reductions": [],
@@ -678,9 +735,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
-   "lines": 65,
-   "sha256": "08a7eed120be938c9f5448454bfa23a7215969867d49e8d20a94d1c41057df18",
-   "size": 2978
+   "lines": 67,
+   "sha256": "7436e3839a51a67ebaa18ae4cda5ceb7798e2854d43bdca2eee6bff10f571db6",
+   "size": 3118
   },
   "/home/ubuntu/brain-marine-news/tests/test_map_location_term.py": {
    "accepted_reductions": [],
@@ -691,12 +748,22 @@
    "size": 3589
   },
   "/home/ubuntu/brain-marine-news/tests/test_map_points_nonspatial.py": {
-   "accepted_reductions": [],
+   "accepted_reductions": [
+    {
+     "date": "2026-11-06",
+     "from_lines": 113,
+     "from_size": 5761,
+     "note": "نسخة المصدر الحالية مقاسة وظيفيًا؛ الانكماش محدود وموثق، ولا يُقبل بلا فحص الأداة التابعة.",
+     "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+     "to_lines": 113,
+     "to_size": 5760
+    }
+   ],
    "first_seen": "2026-11-04",
    "last_seen": "2026-11-06",
    "lines": 113,
-   "sha256": "1ff7bfcc82f0ab058c3261b0787c06c2c9e867d8ae0dca210472086e79cb9e8c",
-   "size": 5761
+   "sha256": "b0fc9d6a3e348db6ec9dbf7f51ef7bc3e2bc1d9c5e79b602efa1a3606892beba",
+   "size": 5760
   },
   "/home/ubuntu/brain-marine-news/tests/test_mark_components_bootstrap.py": {
    "accepted_reductions": [],
@@ -714,13 +781,21 @@
    "sha256": "b8a21d295aae00dcbfa6463d17f59e5937515e341d9add9078b4860056c79ef0",
    "size": 2804
   },
+  "/home/ubuntu/brain-marine-news/tests/test_meta_style_normalizer.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 48,
+   "sha256": "077a2b1ffb5501e39a9eadb57ae76025a2610315e09fc4bf00f8e232508a1c58",
+   "size": 2745
+  },
   "/home/ubuntu/brain-marine-news/tests/test_new_validators.py": {
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 139,
-   "sha256": "2255fdc0c768e46fb7bfe64e749ed6c736fd2af243e9b1d08d11913f57b4f989",
-   "size": 7316
+   "lines": 173,
+   "sha256": "e1494597774b4440fb5df61475087c9cdf108ead97152286e663d56f1d9c217f",
+   "size": 8786
   },
   "/home/ubuntu/brain-marine-news/tests/test_no_publish_without_runbook.sh": {
    "accepted_reductions": [],
@@ -770,21 +845,29 @@
    "sha256": "c1c0db4a12c87b71009a578e87067043524320f242a923efdd11e264c8eea83d",
    "size": 6462
   },
+  "/home/ubuntu/brain-marine-news/tests/test_parity_committed_state.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 185,
+   "sha256": "d74a1756dd6972f353be344b421ce64f5044567d6b181f41547f000252b3a9a4",
+   "size": 7234
+  },
   "/home/ubuntu/brain-marine-news/tests/test_parity_runtime_artifacts.py": {
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 51,
-   "sha256": "a34188369784f4b318b706dafb422c2ce8f7c486b81c222f05b3877372f8d9f5",
-   "size": 1951
+   "lines": 60,
+   "sha256": "1429d0a12b42db398fcf8dd4f2bf0ce79d79fa77a114ecbca64add372bcecf4d",
+   "size": 2494
   },
   "/home/ubuntu/brain-marine-news/tests/test_parity_scope.py": {
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 77,
-   "sha256": "5a20e86de323558583ac1e3a4d09d86b943dc2ba944bce7b203917210492bcaa",
-   "size": 3601
+   "lines": 143,
+   "sha256": "6a9fe0947ce92cfeb590a9701261549fdba1f549c868115bc8a7a4ecc6bba391",
+   "size": 5792
   },
   "/home/ubuntu/brain-marine-news/tests/test_parity_skills_canon_local_only.py": {
    "accepted_reductions": [],
@@ -818,6 +901,22 @@
    "sha256": "4d7ace8d9bc4b7d4a51294ee0194aa7fa5ff17728c81ae8d423400f15b2025ef",
    "size": 1453
   },
+  "/home/ubuntu/brain-marine-news/tests/test_perf_budget.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 126,
+   "sha256": "41ccaff4736769197be563641fffd7ca7d22c21600f93c5ae65ef5d79a450e1b",
+   "size": 4186
+  },
+  "/home/ubuntu/brain-marine-news/tests/test_preflight_guard.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 110,
+   "sha256": "b6274b56d592568bb9352b3fbf5fcbc87c66b8358359e975f5190919173b1c59",
+   "size": 4286
+  },
   "/home/ubuntu/brain-marine-news/tests/test_preserve_check.py": {
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
@@ -849,6 +948,14 @@
    "lines": 18,
    "sha256": "876cc45ec5ec28deed6f874d89d4d191cefd2232538cb6e03e73f678f2e4a778",
    "size": 1505
+  },
+  "/home/ubuntu/brain-marine-news/tests/test_regression_b03_dynamic_anchor.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 140,
+   "sha256": "a60e94dae3bb22b04e5acc48408f1e7dd1a5b407b715ac5c5edf14f01dc125e1",
+   "size": 5359
   },
   "/home/ubuntu/brain-marine-news/tests/test_repair_regression.sh": {
    "accepted_reductions": [],
@@ -902,9 +1009,25 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 190,
-   "sha256": "814f887a490ab4fecebb0a61494209914da53e5cf9058c798984418ef4af015d",
-   "size": 11121
+   "lines": 213,
+   "sha256": "02eff8979a32fd8d7e80699de4340f580111684fad9ea96842b936701f1ed682",
+   "size": 12285
+  },
+  "/home/ubuntu/brain-marine-news/tests/test_runbook_s090_order.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 20,
+   "sha256": "38e172eb21db113b77162d4d54dfee68f8444500ca640280a8a54d079d2816c2",
+   "size": 848
+  },
+  "/home/ubuntu/brain-marine-news/tests/test_secret_documentation_scope.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 58,
+   "sha256": "23c1dc142e2dc88a763d9a9c1f0dda8c19af7695dbd0ca5e48cc485adc47d321",
+   "size": 1817
   },
   "/home/ubuntu/brain-marine-news/tests/test_secrets_file.py": {
    "accepted_reductions": [],
@@ -945,6 +1068,14 @@
    "lines": 61,
    "sha256": "96016bdbfc6fcfc07c50f7fe2624798e158862ccf71800c1a9aeb73cd8bade2d",
    "size": 3248
+  },
+  "/home/ubuntu/brain-marine-news/tests/test_skills_parity.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 65,
+   "sha256": "57e4d5c3622209cb03ec41a6b6ba9d79a5041a87c56afbfabbbc917954bb8678",
+   "size": 2601
   },
   "/home/ubuntu/brain-marine-news/tests/test_source_alternatives.py": {
    "accepted_reductions": [],
@@ -1002,6 +1133,14 @@
    "sha256": "bbd7da4f9acaf4d2ae27eb0f919659c9fb328cf7cf7f2c0b1ceba0e6d442bb02",
    "size": 3414
   },
+  "/home/ubuntu/brain-marine-news/tests/test_style_coverage_order.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 42,
+   "sha256": "d4f815fe427c3770f189845a6d6525706cf02e90c642df4a8fd114780c039af8",
+   "size": 1575
+  },
   "/home/ubuntu/brain-marine-news/tests/test_surface_hygiene.py": {
    "accepted_reductions": [],
    "first_seen": "2026-11-05",
@@ -1017,6 +1156,22 @@
    "lines": 61,
    "sha256": "4cd057689b96d17e1979770d9c7f2d66caa03d82ad4f7755598a92d18b9e0f64",
    "size": 2281
+  },
+  "/home/ubuntu/brain-marine-news/tests/test_telegram_digest_cards.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 72,
+   "sha256": "64747af931d4a2d17200ae3b3bb6be0dade3f902001df860678771f30db77db4",
+   "size": 2812
+  },
+  "/home/ubuntu/brain-marine-news/tests/test_validate_report_ranges.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 145,
+   "sha256": "8f4b76e7a3fc1baaedd140e0d17ec0363707c6d4d88f76223fa31216c0e15ef1",
+   "size": 5229
   },
   "/home/ubuntu/brain-marine-news/tests/test_vocab_registry.py": {
    "accepted_reductions": [],
@@ -1462,9 +1617,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 310,
-   "sha256": "b4bbe28deb05b9140956e3c751332daa51689ea72aa00ab06d39c242374d4ba7",
-   "size": 16816
+   "lines": 385,
+   "sha256": "9543c0543d7b8a34b3fd84bea5d9148972dfbc0db5db57910ff552768d969117",
+   "size": 20267
   },
   "/home/ubuntu/brain-marine-news/tools/backfill_ukmto_archive.py": {
    "accepted_reductions": [],
@@ -1478,9 +1633,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 170,
-   "sha256": "f8e2d095eb34587ee737cf89ff346ec9b878d8f78a81b4b0cde54cef0244debe",
-   "size": 7092
+   "lines": 171,
+   "sha256": "09c15514f5c780ce7e0e13bd1c570e4be0230c847e701ee51d60f466f5190de1",
+   "size": 7157
   },
   "/home/ubuntu/brain-marine-news/tools/browser_fetch.py": {
    "accepted_reductions": [],
@@ -1494,9 +1649,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
-   "lines": 299,
-   "sha256": "f8e1765f04b5be853f86aeab95c16655e0d1ea14ef0ebac6482bde97ee3743e9",
-   "size": 16690
+   "lines": 348,
+   "sha256": "d93ba8fcea3dcfd00213f45b3cd17b433a5797f3eb57d661f5a5c16a20149333",
+   "size": 18965
   },
   "/home/ubuntu/brain-marine-news/tools/build_ambiguity_map.py": {
    "accepted_reductions": [],
@@ -1518,9 +1673,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
-   "lines": 141,
-   "sha256": "b08f2043fcf962179f2bdfa567aae7b6bc5918937a093953c7ed792844bc1d6c",
-   "size": 6650
+   "lines": 249,
+   "sha256": "8f6a98951c690faad9d308505c31bd80a98a7f7d55b5f27b300110d4d699f758",
+   "size": 12017
   },
   "/home/ubuntu/brain-marine-news/tools/build_instructions_doc.py": {
    "accepted_reductions": [],
@@ -1638,9 +1793,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 612,
-   "sha256": "a50375b2ae55a947bb896c9b60f24f6443beace7485efe0dc370b9a7c766f490",
-   "size": 30178
+   "lines": 619,
+   "sha256": "08dd21e42c5b0855c30157c4c22c7a0cdcdde1cc5bbaceb0baeea6c7c934d288",
+   "size": 30667
   },
   "/home/ubuntu/brain-marine-news/tools/check_governing_assets.py": {
    "accepted_reductions": [],
@@ -1670,9 +1825,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 504,
-   "sha256": "055687681bc2dd19dd32edeb98c5ec7cedf408dc082f5619c7e0d231135849d1",
-   "size": 24591
+   "lines": 541,
+   "sha256": "2bc4b3503dbaf87232185b5af6969cdd6aaf51f89d0002f79e1ad064337fff7a",
+   "size": 26686
   },
   "/home/ubuntu/brain-marine-news/tools/claude_check.py": {
    "accepted_reductions": [],
@@ -1710,9 +1865,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
-   "lines": 143,
-   "sha256": "c17f76a5ddd8c9f65e6a901b9ef4e127293ae08249b249fc1f27ece6b436ecf2",
-   "size": 8543
+   "lines": 159,
+   "sha256": "33ad83b3689b9b12a581eb76717d8caed7786c59d7ffc48b46318f4f2a20a7ea",
+   "size": 9071
   },
   "/home/ubuntu/brain-marine-news/tools/daily_pipeline.sh": {
    "accepted_reductions": [],
@@ -1790,9 +1945,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 95,
-   "sha256": "0376f927fb23c982d95886a391dc86728b480a5bb54412832453d7602701eb80",
-   "size": 3655
+   "lines": 108,
+   "sha256": "51a09f965f48936f560d2b4ff37046cbd1392b204df15978ef536717afa6772e",
+   "size": 4257
   },
   "/home/ubuntu/brain-marine-news/tools/export_report_assets.py": {
    "accepted_reductions": [],
@@ -1843,20 +1998,30 @@
    "size": 13800
   },
   "/home/ubuntu/brain-marine-news/tools/gate_coverage.py": {
-   "accepted_reductions": [],
+   "accepted_reductions": [
+    {
+     "date": "2026-11-06",
+     "from_lines": 142,
+     "from_size": 6440,
+     "note": "نسخة المصدر الحالية مقاسة وظيفيًا؛ الانكماش محدود وموثق، ولا يُقبل بلا فحص الأداة التابعة.",
+     "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+     "to_lines": 142,
+     "to_size": 6404
+    }
+   ],
    "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 142,
-   "sha256": "162d15cb6bebc4bb050a86c53a3e2c99251f9a5bce324fdbda6f1b7b784e292c",
-   "size": 6440
+   "sha256": "02005258f7f3b43bcf056bdd4c31425badec44cdefdd7f01d018b97f9ebca7d4",
+   "size": 6404
   },
   "/home/ubuntu/brain-marine-news/tools/gate_verdict.py": {
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 157,
-   "sha256": "fa5e69a6af312af1d0c33ccf2a83919c00e862ab195eb0adbeb9eb793bdf3cbb",
-   "size": 6871
+   "lines": 227,
+   "sha256": "18d68c13823820c3800046be680c5fc4d6ca743a15e4ebc24d3a20cb92c0ec7f",
+   "size": 10165
   },
   "/home/ubuntu/brain-marine-news/tools/github_backup.py": {
    "accepted_reductions": [],
@@ -1870,9 +2035,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 94,
-   "sha256": "30a04484bfb0664fefb7dc0f6920bb9b870d600865f1c5809e0a0d1d00c67b5f",
-   "size": 5086
+   "lines": 106,
+   "sha256": "b0e3d4a70987215552225c1a3e120ccd9ba6c3a8af2005bfc9d348e6ece9cb4d",
+   "size": 5361
   },
   "/home/ubuntu/brain-marine-news/tools/governing-assets.txt": {
    "accepted_reductions": [],
@@ -1906,13 +2071,21 @@
    "sha256": "f2ebaa09b33ca81dfe34cbe246c08e979ae7d1d5480d8db0a2c09db21b79fe45",
    "size": 19479
   },
+  "/home/ubuntu/brain-marine-news/tools/hypothesis_distribution.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 204,
+   "sha256": "1ba891554ec6318c044959abb6ff1e74b2eeef2f6e8cd0f51bc7ce8c5be79ec3",
+   "size": 9331
+  },
   "/home/ubuntu/brain-marine-news/tools/impact_matrix.py": {
    "accepted_reductions": [],
    "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
-   "lines": 114,
-   "sha256": "6246a9308b9aa2ae29ab9d7105d054add7672185b1ca712d18f9e43e694ce63c",
-   "size": 5127
+   "lines": 118,
+   "sha256": "8fafc94f0489cecf104b8eb7b9931700e71492b65646c4e5cda2e178b2def0fe",
+   "size": 5292
   },
   "/home/ubuntu/brain-marine-news/tools/install_macr_skill.sh": {
    "accepted_reductions": [],
@@ -2046,9 +2219,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 97,
-   "sha256": "b2485b52642aca19c7adf02765a5f3ef86639d48fed890a424a3c03fe61e7ac4",
-   "size": 4335
+   "lines": 166,
+   "sha256": "975e36998d917a6859fd4c3dbf4dc6fff4831c3c2aabc2624d6f72a6ba3fcabf",
+   "size": 6550
   },
   "/home/ubuntu/brain-marine-news/tools/map_docx_changes.py": {
    "accepted_reductions": [],
@@ -2146,6 +2319,14 @@
    "sha256": "39a9b419b8ef9149c24ca68f2c71345d07112cfe0097d787ec065e6c2961a803",
    "size": 6016
   },
+  "/home/ubuntu/brain-marine-news/tools/normalize_meta_style.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 109,
+   "sha256": "f5960d5d375268a4e238556c3225f8f6d9cf883856c56a947f62afd81f865997",
+   "size": 4772
+  },
   "/home/ubuntu/brain-marine-news/tools/normalize_terms.py": {
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
@@ -2158,9 +2339,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
-   "lines": 108,
-   "sha256": "29ea5049f650b98d54d474225f368c814d53d9c999ac422121596b352d88c555",
-   "size": 4672
+   "lines": 112,
+   "sha256": "5f7bb0bf8bfd4cbe38fef0a1583721b44adb55a2d142276ba13683a713131ed3",
+   "size": 4826
   },
   "/home/ubuntu/brain-marine-news/tools/ofac_screen.py": {
    "accepted_reductions": [],
@@ -2201,6 +2382,14 @@
    "lines": 91,
    "sha256": "5a187ce0a7b752595930048cf61d2bf48f0161c1444792481d63645f1feb8245",
    "size": 4245
+  },
+  "/home/ubuntu/brain-marine-news/tools/perf_budget.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 165,
+   "sha256": "df7c32532f446f9784067a786d3ff2eb680759443ecb0c21647b44c1a197798d",
+   "size": 7468
   },
   "/home/ubuntu/brain-marine-news/tools/portable_paths.py": {
    "accepted_reductions": [],
@@ -2303,8 +2492,8 @@
    "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 109,
-   "sha256": "3cf620515026dbe52e9ce822d2264f7f6a3ddaee9763499de5db120143dfb35d",
-   "size": 5367
+   "sha256": "c505166a222d5823caa3ef3c73807d1ed94e78fb2e62b0d6af03cf319cc60d29",
+   "size": 5378
   },
   "/home/ubuntu/brain-marine-news/tools/reorder_sections.py": {
    "accepted_reductions": [],
@@ -2347,12 +2536,22 @@
    "size": 6992
   },
   "/home/ubuntu/brain-marine-news/tools/restore_skills.sh": {
-   "accepted_reductions": [],
+   "accepted_reductions": [
+    {
+     "date": "2026-11-06",
+     "from_lines": 108,
+     "from_size": 7343,
+     "note": "نسخة المصدر الحالية مقاسة وظيفيًا؛ الانكماش محدود وموثق، ولا يُقبل بلا فحص الأداة التابعة.",
+     "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+     "to_lines": 108,
+     "to_size": 7151
+    }
+   ],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
    "lines": 108,
-   "sha256": "ab1fe7149c429792344487a27b83038e6fbade715c5d710fc107b832a3e6fdf3",
-   "size": 7343
+   "sha256": "a596f8f9d1be92d8ae91248346476ecfed88bdfc833a03db95256ace2285984a",
+   "size": 7151
   },
   "/home/ubuntu/brain-marine-news/tools/rotate_webhook_secret.py": {
    "accepted_reductions": [],
@@ -2366,9 +2565,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 814,
-   "sha256": "195f273c2ef40a7bbf6c64d6e02c53a9edc319a3aa59f6d67b84efacf54ade14",
-   "size": 39558
+   "lines": 825,
+   "sha256": "048b9fe1778e48bc75fb0388d01002901097cf1efb9e37de8d5308b6d40635c9",
+   "size": 40102
   },
   "/home/ubuntu/brain-marine-news/tools/scrub_internal.py": {
    "accepted_reductions": [],
@@ -2478,9 +2677,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
-   "lines": 129,
-   "sha256": "480808045a1764209d101d848eefe51ce63ff172ab9bb53a0d4800d2f79f6815",
-   "size": 5614
+   "lines": 133,
+   "sha256": "e65ceab2a986fab441a910c2c262b3b0df5b2910ca7b981a7291c94c5f6ed182",
+   "size": 5768
   },
   "/home/ubuntu/brain-marine-news/tools/sync_backup.sh": {
    "accepted_reductions": [],
@@ -2630,9 +2829,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 318,
-   "sha256": "0248d94aff6e3f81335316ff63d42a3848789aa18476cae68fd4eabdd7063a3e",
-   "size": 18311
+   "lines": 480,
+   "sha256": "48964105cb72dc00dead61c8646232ba5c1679fb94d03ce8d47d2fabcc33316e",
+   "size": 22018
   },
   "/home/ubuntu/brain-marine-news/validators/check_backup_push_safety.py": {
    "accepted_reductions": [],
@@ -2734,33 +2933,43 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
-   "lines": 117,
-   "sha256": "ce84f732f597fd066e96ee321954fc90154f034e9c6157c1b56c9a272c02e9e3",
-   "size": 5176
+   "lines": 120,
+   "sha256": "4dccc740a0d95b858534028bb9d48438df55d181bb32d195e2c967afd2449e1b",
+   "size": 5297
   },
   "/home/ubuntu/brain-marine-news/validators/check_delivery_policy.py": {
    "accepted_reductions": [],
    "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
-   "lines": 135,
-   "sha256": "f7b4ac1f793f9d20b031a63eae3afd6c429cb83ebf2eacd7f4f392d9b39829cb",
-   "size": 5930
+   "lines": 137,
+   "sha256": "b843ad73c678e3b5e3e2642d92fc6dbbf9cb2fb1fdfef404ead86d6e4d74f5ae",
+   "size": 6051
   },
   "/home/ubuntu/brain-marine-news/validators/check_desktop_readability.py": {
-   "accepted_reductions": [],
+   "accepted_reductions": [
+    {
+     "date": "2026-11-06",
+     "from_lines": 161,
+     "from_size": 8670,
+     "note": "نسخة المصدر الحالية مقاسة وظيفيًا؛ الانكماش محدود وموثق، ولا يُقبل بلا فحص الأداة التابعة.",
+     "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+     "to_lines": 161,
+     "to_size": 8661
+    }
+   ],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
    "lines": 161,
-   "sha256": "1d8c54ea9fa02f956d3f7c4e43d95c779a18183af00226b596829a96b7886fb7",
-   "size": 8670
+   "sha256": "8c3943a27cc1f7fbdf40263af5d955553d6a9d222c80c275982f883e56fc4d75",
+   "size": 8661
   },
   "/home/ubuntu/brain-marine-news/validators/check_en_parity.py": {
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 173,
-   "sha256": "9737e7498e92a9c0904dd6bd0b93fcde18bb50448a967cf384f1bb0454a9fd1d",
-   "size": 8672
+   "lines": 249,
+   "sha256": "bf4d417cb1563f73724291de1d39c7045e1040c4ce09b827e1b8926b27faacc8",
+   "size": 11941
   },
   "/home/ubuntu/brain-marine-news/validators/check_event_card_contract.py": {
    "accepted_reductions": [],
@@ -2798,9 +3007,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
-   "lines": 85,
-   "sha256": "a4cfa91f81aba30cb5db96d7332215f2ef6b86eae1b81bc9fd5f3a32d7845bc1",
-   "size": 3839
+   "lines": 87,
+   "sha256": "0af34a107412a5975a56260c75a9ae5d9a19b809448b1ab01a04baca047fd4b6",
+   "size": 3920
   },
   "/home/ubuntu/brain-marine-news/validators/check_glossary_shape.py": {
    "accepted_reductions": [],
@@ -2982,9 +3191,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
-   "lines": 62,
-   "sha256": "3a8c3d0c3fc7085ca29d7cdd978165b1de7e8f1d2b0b440913616da08fa6c9bb",
-   "size": 2393
+   "lines": 64,
+   "sha256": "1762c5da90120c7597914bcfaddbbb81cd5da949ff09d341aa647e9f6c2dd571",
+   "size": 2474
   },
   "/home/ubuntu/brain-marine-news/validators/check_repo_secrets.py": {
    "accepted_reductions": [],
@@ -3006,9 +3215,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 147,
-   "sha256": "d1ea17766b3c4205f5009df563c83cf249cb55f9aeeef52a1a93162626b996ef",
-   "size": 7049
+   "lines": 161,
+   "sha256": "a9854f59b4f0a4ffab5d167c5b2f3d086a0df18498f5ee01f03bf4bb223ff891",
+   "size": 7837
   },
   "/home/ubuntu/brain-marine-news/validators/check_server_code_tracking.py": {
    "accepted_reductions": [],
@@ -3025,6 +3234,14 @@
    "lines": 74,
    "sha256": "f215f7654864318c56d3222102f1768e5e215082bad82a10d2f77ca9946e97d6",
    "size": 4263
+  },
+  "/home/ubuntu/brain-marine-news/validators/check_skills_parity.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 169,
+   "sha256": "01a934f9d5a4c2ddbdaf648fadc4df68ed4ae202297fa62bafd7148aa2223788",
+   "size": 7658
   },
   "/home/ubuntu/brain-marine-news/validators/check_source_daily_coverage.py": {
    "accepted_reductions": [],
@@ -3142,9 +3359,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 298,
-   "sha256": "d1f69a48690b074ba6e7765834626d7c20f6c09f1f10ec462d95facc4292a625",
-   "size": 14757
+   "lines": 333,
+   "sha256": "191c082c32267dabc7fc73ca84654de221232d329c57b8d6326e1a924083ebdf",
+   "size": 16141
   },
   "/home/ubuntu/skills/_legacy-marine-news-brain/SKILL.md": {
    "accepted_reductions": [],
@@ -3638,9 +3855,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 84,
-   "sha256": "4eef183c281f33a3cb88af6ea2d8f143a98ec6e95a9dac5c7cd8ee5e00a47d7f",
-   "size": 8718
+   "lines": 88,
+   "sha256": "4b8bfa5e377f4b7ff48e5bc82dc12d4df8b396531c64e879e153e7e22a780916",
+   "size": 8929
   },
   "/home/ubuntu/skills/approved-output-change-ops/references/change-control.md": {
    "accepted_reductions": [],
@@ -4190,9 +4407,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 56,
-   "sha256": "a47602cea3477a7928bad15fb2deeb3062151ad5410b4916304a142c1f02b8d3",
-   "size": 4454
+   "lines": 63,
+   "sha256": "b4f8cf498ef3b152a4aa4216f03d11e090d14c7e606c417d49cad979f01785bb",
+   "size": 5100
   },
   "/home/ubuntu/skills/bilingual-master-direction-ops/references/playbook.md": {
    "accepted_reductions": [],
@@ -4212,13 +4429,22 @@
      "reason": "قرار مسجَّل 2026-11-05: (1) runbook.json أُعيد تنسيقه بترميز عربي مقروء فزادت الأسطر 5214→5401 ونقص البايت 166665→152654 والمحتوى زاد لا نقص؛ (2) verify_master_direction.py نقص 4 بايت بعد إصلاح سكربت الاتجاه في جولة 2026-11-04 (المزامنة 21135d7f)؛ (3) probe_source_routes.py نقص 161 بايت بعد مزامنة الشيفرة المصحّحة من الخادم إلى المستودع (ed3a7507 ← 21135d7f). الأصول المفقودة فعليًا استُعيدت من المرآة: SKILL.md لمهارة الخريطة وسكربتاه وcheck_surface_extraction.py وtest_map_points_nonspatial.py.",
      "to_lines": 145,
      "to_size": 5944
+    },
+    {
+     "date": "2026-11-06",
+     "from_lines": 147,
+     "from_size": 6083,
+     "note": "نسخة المصدر الحالية مقاسة وظيفيًا؛ الانكماش محدود وموثق، ولا يُقبل بلا فحص الأداة التابعة.",
+     "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+     "to_lines": 145,
+     "to_size": 5944
     }
    ],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 147,
-   "sha256": "185379f78da2fc63575bb2cfb17805b89220294d7ccbfc5c46a435f2c9c046b3",
-   "size": 6083
+   "lines": 145,
+   "sha256": "e1e36fc477c5e66c43603dc6114cea0806012aa3f09830dfd20544829aeaf5d3",
+   "size": 5944
   },
   "/home/ubuntu/skills/blocker-scope-repair-ops/SKILL.md": {
    "accepted_reductions": [],
@@ -4456,9 +4682,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 97,
-   "sha256": "64ebf9f6d1f33ac0ad906a235dc640a63687f469a7c5a3eb776862a82908a7c0",
-   "size": 11075
+   "lines": 101,
+   "sha256": "b2aa055b2ce161ed86f5b93d313c2917206742649e16a0b53066b27087e6db99",
+   "size": 11261
   },
   "/home/ubuntu/skills/card-branch-integrity-ops/references/evidence-contract.md": {
    "accepted_reductions": [],
@@ -5296,9 +5522,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
-   "lines": 91,
-   "sha256": "d8f2537bc685bfe49cc99ffc4ebd2d13c81d9c271c08af782a2a314c40532b95",
-   "size": 7990
+   "lines": 99,
+   "sha256": "4d7c60224f70985cc87d02550adc774b49201f0fb813f09493ff2359caf2d686",
+   "size": 8644
   },
   "/home/ubuntu/skills/cucumber-skill/SKILL.md": {
    "accepted_reductions": [],
@@ -6192,9 +6418,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
-   "lines": 49,
-   "sha256": "fc26938eaf92bdf895605e08fce9f1e8ebb8bac58c17eec3f82713f2e1f17724",
-   "size": 4625
+   "lines": 57,
+   "sha256": "e24e44901e822c148cad04ebb10200555b1b5c2fd6f4da103ce18f39bc2b1921",
+   "size": 5264
   },
   "/home/ubuntu/skills/deep-research/SKILL.md": {
    "accepted_reductions": [],
@@ -6232,9 +6458,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 49,
-   "sha256": "1a920c8863d7d710955509f6a4e2485876c8160bf68c932cb03e98e64c4083c0",
-   "size": 7057
+   "lines": 53,
+   "sha256": "e55f349ced96756d53aa4bec9649c0d41f3991f63adcc7ce1b36081d411339ab",
+   "size": 7249
   },
   "/home/ubuntu/skills/destructive-op-guard-ops/references/evidence.md": {
    "accepted_reductions": [],
@@ -6484,14 +6710,6 @@
    "sha256": "e71de849347050c2c573c1cf24d742d5a13459557ecffa6e562f08006f46b5b7",
    "size": 27226
   },
-  "/home/ubuntu/skills/enforcement-layer-audit-ops/SKILL.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-06",
-   "last_seen": "2026-11-06",
-   "lines": 49,
-   "sha256": "f753cf3a50bc3d34437d8f5e394cf8491799dcc2426bfe47e852bca59a58a226",
-   "size": 4735
-  },
   "/home/ubuntu/skills/espresso-skill/SKILL.md": {
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
@@ -6716,93 +6934,189 @@
    "sha256": "f0cf8bf7ba27a3381366b9cf03e30506d34a70670537d046e851c340187060f8",
    "size": 7046
   },
-  "/home/ubuntu/skills/fail-closed-guard-hardening-ops/SKILL.md": {
+  "/home/ubuntu/skills/fault-closure-and-learning-ops/SKILL.md": {
    "accepted_reductions": [],
    "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
-   "lines": 67,
-   "sha256": "9181230e5fd120c675e9869ffaf338d69013a3d7aa19d4d652ee539fcb135ed8",
-   "size": 5672
+   "lines": 58,
+   "sha256": "a2d3712fd42216ab797a6829887dce2a8bcf7f4021b48eab3af352b15c03ddbd",
+   "size": 5891
   },
-  "/home/ubuntu/skills/fault-closure-ops/SKILL.md": {
+  "/home/ubuntu/skills/fault-closure-and-learning-ops/references/legacy-index.json": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 8,
+   "sha256": "d2cf823feb0e7193c5ccd7f7957ff87ba83a1448a6740247d4d65ece87f89980",
+   "size": 164
+  },
+  "/home/ubuntu/skills/fault-closure-and-learning-ops/references/legacy/fault-closure-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 120,
    "sha256": "1854082dcd379d516ce948d6de9ec163ed38dfa0be6a54e3beeec992f10f522e",
    "size": 10127
   },
-  "/home/ubuntu/skills/fault-closure-ops/references/playbook.md": {
+  "/home/ubuntu/skills/fault-closure-and-learning-ops/references/legacy/fault-closure-ops/references/playbook.md": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 79,
    "sha256": "1eb87d92c8eed275b582f1d8074c8f922181ffc9f7df1f2651b7ee4b7d8ad590",
    "size": 4284
   },
-  "/home/ubuntu/skills/fault-closure-ops/references/schema.md": {
+  "/home/ubuntu/skills/fault-closure-and-learning-ops/references/legacy/fault-closure-ops/references/schema.md": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 71,
    "sha256": "14715747b56a3a8f82239411bb10d4b1eea60e00f2eaef7afbddbee2c263e818",
    "size": 4118
   },
-  "/home/ubuntu/skills/fault-closure-ops/scripts/check_closure.py": {
+  "/home/ubuntu/skills/fault-closure-and-learning-ops/references/legacy/fault-closure-ops/scripts/check_closure.py": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 182,
    "sha256": "be6a482ac789f43c6463530f17a2c21ddbb022d2129208062edd1133f5ec3577",
    "size": 8445
   },
-  "/home/ubuntu/skills/fault-closure-ops/scripts/check_portable_paths.py": {
+  "/home/ubuntu/skills/fault-closure-and-learning-ops/references/legacy/fault-closure-ops/scripts/check_portable_paths.py": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 89,
    "sha256": "b7ec9291320a3e33ba8441daf8d71efcbebb5d2b5d67e9a2241165beefbe3194",
    "size": 3851
   },
-  "/home/ubuntu/skills/fault-closure-ops/scripts/closure_round.py": {
+  "/home/ubuntu/skills/fault-closure-and-learning-ops/references/legacy/fault-closure-ops/scripts/closure_round.py": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 250,
    "sha256": "de570e1e375ca3aaf7dc242530c9a5601c8d0b67561f7c7e7cd624c59bbab8cf",
    "size": 14590
   },
-  "/home/ubuntu/skills/fault-closure-ops/scripts/insert_live_evidence.py": {
+  "/home/ubuntu/skills/fault-closure-and-learning-ops/references/legacy/fault-closure-ops/scripts/insert_live_evidence.py": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 87,
    "sha256": "8cfb65bf15a0af25b3077860df4069f955bd4538f94ba2af1a5e6e0ef201ab87",
    "size": 3306
   },
-  "/home/ubuntu/skills/fault-closure-ops/scripts/propose_tightening.py": {
+  "/home/ubuntu/skills/fault-closure-and-learning-ops/references/legacy/fault-closure-ops/scripts/propose_tightening.py": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 133,
    "sha256": "08537a85fe1cb5553ef9947c6c14799d811e56f9d91881a89e38dedcf5f1aadb",
    "size": 5776
   },
-  "/home/ubuntu/skills/fault-closure-ops/scripts/record_fault.py": {
+  "/home/ubuntu/skills/fault-closure-and-learning-ops/references/legacy/fault-closure-ops/scripts/record_fault.py": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 102,
    "sha256": "b0e3757f795b27eab3cb0156ee2ed01cbdc4fb40fd6105de194e2a91c68861c5",
    "size": 4459
   },
-  "/home/ubuntu/skills/fault-closure-ops/scripts/test_closure_gate.py": {
+  "/home/ubuntu/skills/fault-closure-and-learning-ops/references/legacy/fault-closure-ops/scripts/test_closure_gate.py": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 130,
    "sha256": "64865501cd65509065f1d13e778b7acbe9f690b41c997a26c41fcc562a150dc0",
    "size": 7140
+  },
+  "/home/ubuntu/skills/fault-closure-and-learning-ops/references/legacy/fault-closure-ops/templates/exception-entry.json": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 9,
+   "sha256": "a7656b16932ed9676870bea3ca9e497a22eacef862b2f36ad9098548639bf809",
+   "size": 360
+  },
+  "/home/ubuntu/skills/fault-closure-and-learning-ops/references/legacy/measured-defect-closure-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 65,
+   "sha256": "0a0a7f2e8d25e05eb2b230367c850e6906bedc8e591fd7fe3a91866f4848c8ce",
+   "size": 5307
+  },
+  "/home/ubuntu/skills/fault-closure-and-learning-ops/references/legacy/self-learning-loop-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 112,
+   "sha256": "a1f2539bafefd7a8609ace988c1e7237a770b2ac3b47e13b47d7c7db65ae41f7",
+   "size": 14307
+  },
+  "/home/ubuntu/skills/fault-closure-and-learning-ops/references/legacy/self-learning-loop-ops/references/fault-taxonomy.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 33,
+   "sha256": "b65afa73a36fb9653ace2b50965a51f1baae4bafe6cc77965fb805b06c2e8466",
+   "size": 3409
+  },
+  "/home/ubuntu/skills/fault-closure-and-learning-ops/references/legacy/self-learning-loop-ops/references/wiring-and-artifact-repair.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 80,
+   "sha256": "7a4f4fec08d4eb9a22899da8351d8b65859c9aa8fe36607b27252ac9950f7435",
+   "size": 7339
+  },
+  "/home/ubuntu/skills/fault-closure-and-learning-ops/references/legacy/self-learning-loop-ops/scripts/build_fault_index.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 70,
+   "sha256": "140433d5a300d7d2048cfa01443634d9019319ae414bede8f38a00ee2641f247",
+   "size": 2722
+  },
+  "/home/ubuntu/skills/fault-closure-and-learning-ops/references/legacy/self-learning-loop-ops/scripts/check_barrier_wiring.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 100,
+   "sha256": "8a3dd7f2dd9aff3cbdfd14fa696ea5372582a40982adeac725e6349f050a21aa",
+   "size": 4424
+  },
+  "/home/ubuntu/skills/fault-closure-and-learning-ops/references/legacy/self-learning-loop-ops/scripts/close_fault.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 66,
+   "sha256": "3967b2f23d492a5a3eb760ff64c6c4520957d03a8037c6f85fe37577f6d02f5c",
+   "size": 3601
+  },
+  "/home/ubuntu/skills/fault-closure-and-learning-ops/references/legacy/self-learning-loop-ops/scripts/loop_report.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 66,
+   "sha256": "4d2cf9007f4f2106dee9b54b7e5200ebcee04a547e620470a7bc7576edd1d31a",
+   "size": 2612
+  },
+  "/home/ubuntu/skills/fault-closure-and-learning-ops/references/legacy/self-learning-loop-ops/scripts/normalize_learning_log.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 65,
+   "sha256": "a3a58de36fb2bba01c427faea44860f2475672413dd88c521171caf83beff000",
+   "size": 2551
+  },
+  "/home/ubuntu/skills/fault-closure-and-learning-ops/references/legacy/self-learning-loop-ops/scripts/verify_closure.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 82,
+   "sha256": "799466c4820cf0945ff90eeb2ecf0dc325e64173444cdae54552822da074f7fd",
+   "size": 4042
   },
   "/home/ubuntu/skills/favicon-gen/SKILL.md": {
    "accepted_reductions": [],
@@ -7804,45 +8118,309 @@
    "sha256": "4ccc421ac643ed5c3d63d7647175fdc07ed871359b4fde74d7ab3c12b48c02e3",
    "size": 125379
   },
-  "/home/ubuntu/skills/gate-authoring-ops/SKILL.md": {
+  "/home/ubuntu/skills/gate-lifecycle-ops/SKILL.md": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 62,
+   "sha256": "363284b0f152ee849aeba3f1b967676be3bd01af8cb86c860854ab5f15f8e537",
+   "size": 8021
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy-index.json": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 16,
+   "sha256": "632836a6db94281ffd0bb8d1e8926a9fd4f0052a068b7232819cb5bce3346bf0",
+   "size": 439
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/audit-candidate-triage-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 47,
+   "sha256": "7c2037b757c4ce65d09b7155a134ea8c77df3f3ad14bd33438b3b124f62863a3",
+   "size": 4700
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/audit-candidate-triage-ops/references/triage-table.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 34,
+   "sha256": "b1eaa91884372470174d8c40a777b1b5043c84756ac777d46dbff9b2cedaca90",
+   "size": 4135
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/enforcement-layer-audit-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 49,
+   "sha256": "f753cf3a50bc3d34437d8f5e394cf8491799dcc2426bfe47e852bca59a58a226",
+   "size": 4735
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/fail-closed-guard-hardening-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 67,
+   "sha256": "9181230e5fd120c675e9869ffaf338d69013a3d7aa19d4d652ee539fcb135ed8",
+   "size": 5672
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/gate-authoring-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 72,
    "sha256": "7cc56c0225672490f003c20c456e64a3a0d4bff95354a31f89dd9f6afe3be514",
    "size": 7932
   },
-  "/home/ubuntu/skills/gate-authoring-ops/references/evidence.md": {
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/gate-authoring-ops/references/evidence.md": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 153,
    "sha256": "b8182e2f63b2a0fa2c22eb442b29e01badd638e8817e1c5e6f9a1f68d51541bf",
    "size": 6363
   },
-  "/home/ubuntu/skills/gate-authoring-ops/references/gate-checklist.md": {
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/gate-authoring-ops/references/gate-checklist.md": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 40,
    "sha256": "e761074fe121a2548f7268ae9520f5100347105de9d66d6e0941b5dbd70f5468",
    "size": 3471
   },
-  "/home/ubuntu/skills/gate-authoring-ops/scripts/scaffold_gate.py": {
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/gate-authoring-ops/scripts/scaffold_gate.py": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 88,
    "sha256": "264ed7ec37cc055e07a789406d5915e36ea8f1546ab4be2ddc821230121b5645",
    "size": 3948
   },
-  "/home/ubuntu/skills/gate-authoring-ops/scripts/wire_into_runner.py": {
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/gate-authoring-ops/scripts/wire_into_runner.py": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 102,
    "sha256": "ad76c82dd8cf5c7c87bd3df41030c0c23866e4440ab95acf1b5321049b951b81",
    "size": 4178
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/gate-authoring-ops/templates/gate_template.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 131,
+   "sha256": "8ed9df3313260a29216a069749e0077ba516f88b2e0b4aa68dc9f7ce7ad6e159",
+   "size": 5523
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/gate-authoring-ops/templates/test_template.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 95,
+   "sha256": "16f75769e03820ffc436f98177adb72877e1c96f198931e7bb56c425175bc728",
+   "size": 2928
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/gate-scope-and-wiring-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 90,
+   "sha256": "deaec9946f3214c5fac6a1e11a6b284c8b8b3fe65a424ac814b6aafb4ad3e577",
+   "size": 7436
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/gate-scope-and-wiring-ops/references/measured-examples.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 18,
+   "sha256": "848b92a627f8d8eb752f5bbee6bfc0ba74f49f40e032f49f6d2eb2f77c74a445",
+   "size": 2060
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/gate-strictness-hardening-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 56,
+   "sha256": "9e176e1a844f1059bee6d28a7a507c127a5c4445e022d1bc748d28d8e6a38825",
+   "size": 7751
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/gate-strictness-hardening-ops/references/lessons.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 49,
+   "sha256": "4cd36620e8685de77b210f86919f89fffbafeea4093e1ce2733715963c66f848",
+   "size": 4230
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/gate-strictness-hardening-ops/scripts/gate_audit.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 294,
+   "sha256": "de552f7c86ff4ddb32c30f794d882eff8af6c64e5011a7caf6b647602379fe07",
+   "size": 13458
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/generated-artifact-boundary-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 99,
+   "sha256": "9209e17381d03706432bf6053bca0267aa19bdc8304d84ec6848e3c086f40839",
+   "size": 10884
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/generated-artifact-boundary-ops/references/measured-cases.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 63,
+   "sha256": "ccb81a12a0ed1866b0e6d7353233653c3839c309e50c36e97b9f0287df933b29",
+   "size": 4106
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/generated-artifact-boundary-ops/scripts/audit_generated_boundary.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 181,
+   "sha256": "144cda1b262294fa40b1fdf4e1272a8f762db2ad38e47725975d1c6cca2083e5",
+   "size": 7818
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/generated-artifact-boundary-ops/scripts/check_classification_matrix.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 76,
+   "sha256": "5296b7bd5645359e73beacfc44ed80a8c1eb39cd74455663d67f898915ca215c",
+   "size": 3030
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/hermetic-live-probe-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 65,
+   "sha256": "12425ac30b2c6c038931669f301f812d102a1e06d26b2cb22438ad01f5a1bb94",
+   "size": 8359
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/hermetic-live-probe-ops/scripts/live_probe_batch.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 577,
+   "sha256": "2bd803b6f0e6571921e4f8763e1fad4aa91f7c65f39de53979d99e7163754190",
+   "size": 21557
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/number-binding-guard-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 80,
+   "sha256": "8ea36e9d9a060076240061e7671d4c933c25012a287e1cc91fd8591ed42aafff",
+   "size": 8779
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/number-binding-guard-ops/references/lessons.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 25,
+   "sha256": "24541844ec4a4bcfee5c633d291eb517c7a5414b08b22620c4b541e79ca898b5",
+   "size": 2811
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/number-binding-guard-ops/references/playbook.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 45,
+   "sha256": "87c201c08faf9cda43da565e2bc6ec6db55fb3865b14608d8ee602f1cda1e99b",
+   "size": 4049
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/number-binding-guard-ops/scripts/binding_selftest.sh": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 69,
+   "sha256": "cfa1118fd0cdfd8473da69d223af4214ccb41e46209c3a674050e51d2bbb3df2",
+   "size": 2981
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/number-binding-guard-ops/scripts/number_binding_template.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 305,
+   "sha256": "e5b1f091fe7502bce75475b6e9b26d4f21750b69d5b9a5a84b6126bcbda9e62e",
+   "size": 13342
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/side-effects-interface-audit-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 60,
+   "sha256": "6473a2cad44fb7c24d3824f76a7a6eee6f093e78c1fca33f01aa80a740e059b5",
+   "size": 8718
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/side-effects-interface-audit-ops/scripts/audit_tool_side_effects.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 242,
+   "sha256": "23ceb4ddaf2fb24a83182240c8769cc787c1fd9fa54040ce3cb7e3385307f0a8",
+   "size": 11131
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/tool-contract-check-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 71,
+   "sha256": "b1a0532fee55afd9a93901efeadd5ee33cdd655571391938f4535a9693068169",
+   "size": 7050
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/tool-contract-check-ops/memory/learning-log.jsonl": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 6,
+   "sha256": "27b4444aef93f9b1581f6c2ae0006c006ce1eee5f9eaf355de5a3be4f859529a",
+   "size": 3575
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/tool-contract-check-ops/references/evidence.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 237,
+   "sha256": "90392fd63606d87175e37cc6ba166c1dfe00d0644bf46558962fbf5401acf8bd",
+   "size": 12283
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/tool-contract-check-ops/references/exit-codes-and-contracts.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 24,
+   "sha256": "68905c8553cffbc971b73105808d9fd070b9b6b0dbe9b39413af782c5f0c68a3",
+   "size": 3385
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/tool-contract-check-ops/scripts/cli_contract.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 294,
+   "sha256": "d9e0d6781e3066fe9aca732546043af78529e6c1ba54c9879126cca9679ff31b",
+   "size": 12798
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/tool-contract-check-ops/scripts/duplicate_scan.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 182,
+   "sha256": "4cb8108c7c13a26406b0d171713dd5fb5d8c7a92194dcb1e1efa3d26b3d40992",
+   "size": 8477
+  },
+  "/home/ubuntu/skills/gate-lifecycle-ops/references/legacy/tool-contract-check-ops/scripts/exit_code_read.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 80,
+   "sha256": "709639b2cb9d8462b6ab039eaafb037681642237bee55327ca0af65bfb5202ff",
+   "size": 3460
   },
   "/home/ubuntu/skills/gemini-api/SKILL.md": {
    "accepted_reductions": [],
@@ -7931,38 +8509,6 @@
    "lines": 399,
    "sha256": "f9abc86ccb9a5a94b72ea4293910770ec09521cc2444830e0a28532548d71a80",
    "size": 16960
-  },
-  "/home/ubuntu/skills/generated-artifact-boundary-ops/SKILL.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-05",
-   "last_seen": "2026-11-06",
-   "lines": 99,
-   "sha256": "9209e17381d03706432bf6053bca0267aa19bdc8304d84ec6848e3c086f40839",
-   "size": 10884
-  },
-  "/home/ubuntu/skills/generated-artifact-boundary-ops/references/measured-cases.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-05",
-   "last_seen": "2026-11-06",
-   "lines": 63,
-   "sha256": "ccb81a12a0ed1866b0e6d7353233653c3839c309e50c36e97b9f0287df933b29",
-   "size": 4106
-  },
-  "/home/ubuntu/skills/generated-artifact-boundary-ops/scripts/audit_generated_boundary.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-05",
-   "last_seen": "2026-11-06",
-   "lines": 181,
-   "sha256": "144cda1b262294fa40b1fdf4e1272a8f762db2ad38e47725975d1c6cca2083e5",
-   "size": 7818
-  },
-  "/home/ubuntu/skills/generated-artifact-boundary-ops/scripts/check_classification_matrix.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-05",
-   "last_seen": "2026-11-06",
-   "lines": 76,
-   "sha256": "5296b7bd5645359e73beacfc44ed80a8c1eb39cd74455663d67f898915ca215c",
-   "size": 3030
   },
   "/home/ubuntu/skills/git-attribution/SKILL.md": {
    "accepted_reductions": [],
@@ -8088,9 +8634,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-04",
    "last_seen": "2026-11-06",
-   "lines": 108,
-   "sha256": "1355a64f26a33a1538ddf0d54fa17eccbbba3bc6adb5379bdf7e9484c86fa741",
-   "size": 11115
+   "lines": 112,
+   "sha256": "cd8401ae58e988c9a0fb85afafb20ef088e9cabd0992173e49341c583f4a0abe",
+   "size": 11289
   },
   "/home/ubuntu/skills/governed-cleanup-audit/references/decision-tiers.md": {
    "accepted_reductions": [],
@@ -8128,9 +8674,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 74,
-   "sha256": "4aea2b982c7dcb8cf8a59c05ff1a2ff448f663195d1fd2c1c77ff999f37d7414",
-   "size": 5911
+   "lines": 77,
+   "sha256": "b04cdfe9b45bfab192cef4d12398363c5002c081cd711363ffaa9cf67c96a91a",
+   "size": 6128
   },
   "/home/ubuntu/skills/governed-rename-ops/references/case-k298-k309.md": {
    "accepted_reductions": [],
@@ -8152,9 +8698,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 90,
-   "sha256": "7c6fef739d946c0ba440aa07deb2770d5ae58c361b2e5fb50af921c6378d3982",
-   "size": 9287
+   "lines": 94,
+   "sha256": "474ff58c43a9f8b18744dcc3db0b449527c65ecbd5d1b67c7af3d78c807daeb3",
+   "size": 9519
   },
   "/home/ubuntu/skills/governing-assets-recovery-ops/scripts/compare_governing_assets.py": {
    "accepted_reductions": [],
@@ -8315,22 +8861,6 @@
    "lines": 24,
    "sha256": "705386611638c16ef9f1e94d1b114ea20492fdcbeb1d4afd48fd32a4c4852344",
    "size": 1546
-  },
-  "/home/ubuntu/skills/hermetic-live-probe-ops/SKILL.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 65,
-   "sha256": "12425ac30b2c6c038931669f301f812d102a1e06d26b2cb22438ad01f5a1bb94",
-   "size": 8359
-  },
-  "/home/ubuntu/skills/hermetic-live-probe-ops/scripts/live_probe_batch.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 577,
-   "sha256": "2bd803b6f0e6571921e4f8763e1fad4aa91f7c65f39de53979d99e7163754190",
-   "size": 21557
   },
   "/home/ubuntu/skills/html-video-production/SKILL.md": {
    "accepted_reductions": [],
@@ -14540,54 +15070,6 @@
    "sha256": "60b3b0345cdb89702486116fe3250e30504cc64ede5351865caf064a2db004c7",
    "size": 6146
   },
-  "/home/ubuntu/skills/live-visual-audit-ops/SKILL.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 96,
-   "sha256": "e31982f8803af18048549fe4b233e8fb821cb937b3ba52155511b3bd408bd5ef",
-   "size": 12123
-  },
-  "/home/ubuntu/skills/live-visual-audit-ops/references/evidence-checklist.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 27,
-   "sha256": "d774374ead15c73993e8e50f041906ad463927dd60bb5d5edd94b20ad11e2914",
-   "size": 2434
-  },
-  "/home/ubuntu/skills/live-visual-audit-ops/references/severity-rubric.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 31,
-   "sha256": "d15913147efe8ac891d6ee296649160c8cf8132f8f11919bb5e51d39bf8031da",
-   "size": 2713
-  },
-  "/home/ubuntu/skills/live-visual-audit-ops/scripts/audit_live_surfaces.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 209,
-   "sha256": "f3fd51f6d2567e39bcb9c62b5380fb54bf76acea47fa76a77837b04446d7ef1f",
-   "size": 9344
-  },
-  "/home/ubuntu/skills/live-visual-audit-ops/scripts/verify_pdf_index.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 248,
-   "sha256": "ba060f1ddf9f5dde60bc1fb22129b23dc8c2cf7e446c1f3991498c2569633fd9",
-   "size": 9351
-  },
-  "/home/ubuntu/skills/live-visual-audit-ops/scripts/verify_range_bidi.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 219,
-   "sha256": "62ca6bc56a3a145e234bb5b53911e1ae606757911f16347e5ace62d33d466764",
-   "size": 9438
-  },
   "/home/ubuntu/skills/logic-pro-playbooks/SKILL.md": {
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
@@ -14656,9 +15138,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 176,
-   "sha256": "ea1670fc318fe439d66e816991359195f9d2787bdb2ad08d896146fe4f54967b",
-   "size": 16246
+   "lines": 184,
+   "sha256": "2f5fb8cae1822f589282e6c62b5581672f99a2b7c492ddd047c1d86a8d0b86b9",
+   "size": 16941
   },
   "/home/ubuntu/skills/macr-system/references/api_reference.md": {
    "accepted_reductions": [],
@@ -15964,14 +16446,6 @@
    "sha256": "833cf0c7fbd1db145a8d81a74f918520b588d454ad1c7638115ff91a3f08bedb",
    "size": 1796
   },
-  "/home/ubuntu/skills/manual-visual-check-automation-ops/SKILL.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-06",
-   "last_seen": "2026-11-06",
-   "lines": 61,
-   "sha256": "68065aa2632ef7f9360878c7b36cf7309215f18691ec8ff955ca0a186a0a6c41",
-   "size": 5634
-  },
   "/home/ubuntu/skills/manus-api/SKILL.md": {
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
@@ -16028,69 +16502,79 @@
    "sha256": "00410d12511c653eb4661094d8c15e8cdabb1f814276075f022bd30fd7dcf8a8",
    "size": 13178
   },
-  "/home/ubuntu/skills/map-readability-ops/SKILL.md": {
+  "/home/ubuntu/skills/map-clarity-ops/SKILL.md": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 43,
+   "sha256": "2209e1572f993aedbecee1af51cd204ea682f4a9ebe43b59a0bce39a35d0d4f6",
+   "size": 4246
+  },
+  "/home/ubuntu/skills/map-clarity-ops/references/legacy-index.json": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 7,
+   "sha256": "f5f80bde04d9ade445276d2153149b20530cc9109b77db9af78d4ea0c11ba78e",
+   "size": 117
+  },
+  "/home/ubuntu/skills/map-clarity-ops/references/legacy/map-readability-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 45,
    "sha256": "85de51f22a8c31376cd93b27ef69a336e037bee57f23d22ead7eac036375a65d",
    "size": 5094
   },
-  "/home/ubuntu/skills/map-readability-ops/scripts/measure_map_readability.py": {
+  "/home/ubuntu/skills/map-clarity-ops/references/legacy/map-readability-ops/scripts/measure_map_readability.py": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 69,
    "sha256": "55e86ef81868593c86568a9080aaa565b1e5b0aabc1126fbc1f4ca6164d23445",
    "size": 3698
   },
-  "/home/ubuntu/skills/map-section-upgrade-ops/SKILL.md": {
+  "/home/ubuntu/skills/map-clarity-ops/references/legacy/map-section-upgrade-ops/SKILL.md": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
-   "lines": 79,
-   "sha256": "eb08cf446bae925d5c6ef41f5c1d6a70a088a07b2d75049b8d1b88ecf3191e91",
-   "size": 10929
+   "lines": 49,
+   "sha256": "364698cb3d9ae0b1d64b4c53a91c4d8fc1f799a8327c62b39ee9d96a110e8dd5",
+   "size": 5990
   },
-  "/home/ubuntu/skills/map-section-upgrade-ops/references/gate-surface-contract.md": {
+  "/home/ubuntu/skills/map-clarity-ops/references/legacy/map-section-upgrade-ops/references/gate-surface-contract.md": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 26,
    "sha256": "ea080547ac7b6e0de1924adfd17ebea12476d9e9f79acdfb7f4db5960806abb4",
    "size": 1775
   },
-  "/home/ubuntu/skills/map-section-upgrade-ops/scripts/check_surface_extraction.py": {
+  "/home/ubuntu/skills/map-clarity-ops/references/legacy/map-section-upgrade-ops/scripts/check_surface_extraction.py": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
-   "lines": 64,
-   "sha256": "fa880ce3503b1e20a46d08e52d694e739c2e0fd32282f1bfecd9921fbbf12b8e",
-   "size": 2552
-  },
-  "/home/ubuntu/skills/map-section-upgrade-ops/scripts/measure_map_layers.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 81,
-   "sha256": "d5536efd7e05cc2d85ef75299d66bc9405ddab4802807e88adee46ec84130977",
-   "size": 4154
-  },
-  "/home/ubuntu/skills/map-section-upgrade-ops/scripts/measure_map_layers_live.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 34,
-   "sha256": "d3bea5189eb5a119efcbf577c33a57ff66f9b7307f29234566466721514653a8",
-   "size": 2055
+   "lines": 63,
+   "sha256": "3473e5419bf5ae0ecc454446e96b78334377a92a4c17bb11abb2b9d370342f03",
+   "size": 2444
   },
   "/home/ubuntu/skills/marine-news-brain/SKILL.md": {
-   "accepted_reductions": [],
+   "accepted_reductions": [
+    {
+     "date": "2026-11-06",
+     "from_lines": 66,
+     "from_size": 8499,
+     "note": "نسخة المصدر الحالية مقاسة وظيفيًا؛ الانكماش محدود وموثق، ولا يُقبل بلا فحص الأداة التابعة.",
+     "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+     "to_lines": 54,
+     "to_size": 5048
+    }
+   ],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 66,
-   "sha256": "650aa6f665249a53a3abd8125af997305d58d7dd649733356bc8b5559c1f1e3b",
-   "size": 8499
+   "lines": 54,
+   "sha256": "51a9375e101a603535741eee9a4e8713a9a518f2413e6211f65c08dc208a0611",
+   "size": 5048
   },
   "/home/ubuntu/skills/marine-news-brain/references/adaptive-learning.md": {
    "accepted_reductions": [],
@@ -16780,14 +17264,6 @@
    "sha256": "54081db970e9333dad51f8458bc623912fab2087ecacccb6298f2c53833d6070",
    "size": 2539
   },
-  "/home/ubuntu/skills/measured-defect-closure-ops/SKILL.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-06",
-   "last_seen": "2026-11-06",
-   "lines": 65,
-   "sha256": "0a0a7f2e8d25e05eb2b230367c850e6906bedc8e591fd7fe3a91866f4848c8ce",
-   "size": 5307
-  },
   "/home/ubuntu/skills/meeting-briefing/SKILL.md": {
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
@@ -17117,12 +17593,22 @@
    "size": 3482
   },
   "/home/ubuntu/skills/military-arabic-editing/SKILL.md": {
-   "accepted_reductions": [],
+   "accepted_reductions": [
+    {
+     "date": "2026-11-06",
+     "from_lines": 59,
+     "from_size": 6354,
+     "note": "نسخة المصدر الحالية مقاسة وظيفيًا؛ الانكماش محدود وموثق، ولا يُقبل بلا فحص الأداة التابعة.",
+     "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+     "to_lines": 52,
+     "to_size": 4476
+    }
+   ],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 59,
-   "sha256": "a2389ee03dbae8edf02395fdcd41c94a0aad2e5ce02da64316e29e0fb172eb28",
-   "size": 6354
+   "lines": 52,
+   "sha256": "7dbd8e7b756731a4082c5e81e9312c4247e0df06507f137d5e395295271a3c8b",
+   "size": 4476
   },
   "/home/ubuntu/skills/military-arabic-editing/references/adaptive-learning.md": {
    "accepted_reductions": [],
@@ -17133,12 +17619,22 @@
    "size": 774
   },
   "/home/ubuntu/skills/military-arabic-editing/references/ambiguity-map.md": {
-   "accepted_reductions": [],
+   "accepted_reductions": [
+    {
+     "date": "2026-11-06",
+     "from_lines": 144,
+     "from_size": 7098,
+     "note": "نسخة المصدر الحالية مقاسة وظيفيًا؛ الانكماش محدود وموثق، ولا يُقبل بلا فحص الأداة التابعة.",
+     "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+     "to_lines": 129,
+     "to_size": 6427
+    }
+   ],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 144,
-   "sha256": "4a46ecdf4270c7d33b5ebf859cf6c94883362e004f034b6837e9ce5c2d834c21",
-   "size": 7098
+   "lines": 129,
+   "sha256": "b45ad38539a9dc11dc520470b48e67c5eb4c521007c8a6121373075a99d06867",
+   "size": 6427
   },
   "/home/ubuntu/skills/military-arabic-editing/references/commander-style.md": {
    "accepted_reductions": [],
@@ -17688,9 +18184,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 59,
-   "sha256": "6b0b644ba9d99c4ad9e03a04c7ba25f3a4307c778ac8dec7557fe5e351203054",
-   "size": 4874
+   "lines": 63,
+   "sha256": "27847e4538a8605730bea630bc3b2b59c808dafc9185225a8cb167527a7bf9b5",
+   "size": 5061
   },
   "/home/ubuntu/skills/multi-agent-audit-ops/references/claim-measurement.md": {
    "accepted_reductions": [],
@@ -17884,46 +18380,6 @@
    "sha256": "0da298a7ede2c1267b2e9eca0ad394f9df7296689d010bbbc7cd818ed4a59567",
    "size": 3418
   },
-  "/home/ubuntu/skills/number-binding-guard-ops/SKILL.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 80,
-   "sha256": "8ea36e9d9a060076240061e7671d4c933c25012a287e1cc91fd8591ed42aafff",
-   "size": 8779
-  },
-  "/home/ubuntu/skills/number-binding-guard-ops/references/lessons.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 25,
-   "sha256": "24541844ec4a4bcfee5c633d291eb517c7a5414b08b22620c4b541e79ca898b5",
-   "size": 2811
-  },
-  "/home/ubuntu/skills/number-binding-guard-ops/references/playbook.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 45,
-   "sha256": "87c201c08faf9cda43da565e2bc6ec6db55fb3865b14608d8ee602f1cda1e99b",
-   "size": 4049
-  },
-  "/home/ubuntu/skills/number-binding-guard-ops/scripts/binding_selftest.sh": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 69,
-   "sha256": "cfa1118fd0cdfd8473da69d223af4214ccb41e46209c3a674050e51d2bbb3df2",
-   "size": 2981
-  },
-  "/home/ubuntu/skills/number-binding-guard-ops/scripts/number_binding_template.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 305,
-   "sha256": "e5b1f091fe7502bce75475b6e9b26d4f21750b69d5b9a5a84b6126bcbda9e62e",
-   "size": 13342
-  },
   "/home/ubuntu/skills/obs-playbooks/SKILL.md": {
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
@@ -18096,9 +18552,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 98,
-   "sha256": "ccf9dbfb179678f900a9e2522d47bfea1b17ea672fe63fdaceee1a5a93b1626b",
-   "size": 11035
+   "lines": 106,
+   "sha256": "c1f2d6137ad27417b3a0388f94e0d17ebf01808177b9e5779b768f1f1043e020",
+   "size": 11684
   },
   "/home/ubuntu/skills/official-ledger-backfill-ops/references/official-sources.md": {
    "accepted_reductions": [],
@@ -18128,9 +18584,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 68,
-   "sha256": "a67bb858df8ce94937a1fc72dff807ef8bb00e232c559c811b9e4173280c8ca2",
-   "size": 7593
+   "lines": 76,
+   "sha256": "7302b5d0c4379a03ce997ee6cfc3392442bd5fe94ef5675870b1e1e67ce9aee9",
+   "size": 8246
   },
   "/home/ubuntu/skills/operation-to-skill-ops/scripts/check_skill_structure.py": {
    "accepted_reductions": [],
@@ -18192,9 +18648,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 86,
-   "sha256": "7ce9f8dfb03e477ce3783c3e79ea85edb291a7bf19320a0d2af24e9f24d09183",
-   "size": 9463
+   "lines": 90,
+   "sha256": "f107f6803d9f272ebb02eb3077e5da4036df701fc1c7e7cc8613b9cee73e8f10",
+   "size": 9631
   },
   "/home/ubuntu/skills/owner-ui-notes-contract-ops/references/evidence-recipes.md": {
    "accepted_reductions": [],
@@ -18227,6 +18683,158 @@
    "lines": 115,
    "sha256": "22433f9f2166848c04ed1920dc4460b1a2dd8dd5a41390b32779d93b4007f94f",
    "size": 4919
+  },
+  "/home/ubuntu/skills/parity-and-publish-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 43,
+   "sha256": "dd3abd4df6842b3bf8a4d4369418c994cbf61df5ef3de4c73ce4ac023d0b767e",
+   "size": 4693
+  },
+  "/home/ubuntu/skills/parity-and-publish-ops/references/legacy-index.json": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 7,
+   "sha256": "e550157425cf06b3a35a148bce59c663dc33cd7d8c0cb871deaeec9497bb1d90",
+   "size": 132
+  },
+  "/home/ubuntu/skills/parity-and-publish-ops/references/legacy/server-repo-parity-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 85,
+   "sha256": "74c4a8853419dc8486ca73ed2f1bda2a3c345632eaa368c38e965d712cb2ce65",
+   "size": 7990
+  },
+  "/home/ubuntu/skills/parity-and-publish-ops/references/legacy/server-repo-parity-ops/references/execution-output.txt": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 239,
+   "sha256": "98506ce220c1b3904c546654d414bff80a43feae549e4feae5c9b3ecfe0877a4",
+   "size": 21709
+  },
+  "/home/ubuntu/skills/parity-and-publish-ops/references/legacy/server-repo-parity-ops/references/parity-runbook.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 30,
+   "sha256": "e16dee4678f57ee875722bae5e60eb7398ca00ad99881dffec71195ffe36b0cb",
+   "size": 2010
+  },
+  "/home/ubuntu/skills/parity-and-publish-ops/references/legacy/server-repo-parity-ops/references/propose-tightening-output.txt": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 23,
+   "sha256": "3368a9892374cd8bc9bc16fbe74ba73ee37ccc56847990e900d2122b43fdb75f",
+   "size": 2371
+  },
+  "/home/ubuntu/skills/parity-and-publish-ops/references/legacy/server-repo-parity-ops/scripts/propose_tightening.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 106,
+   "sha256": "45e8fb3bbe0c56ff1c779bc10f26b7d8d153a06f7162a2381f334707edd8e656",
+   "size": 5372
+  },
+  "/home/ubuntu/skills/parity-and-publish-ops/references/legacy/server-repo-parity-ops/scripts/tools/apply_from_github.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 125,
+   "sha256": "a9b553240ce7f7bad3b818f342fc46d20d427f7d98723caebdc4858bed6aacfa",
+   "size": 6279
+  },
+  "/home/ubuntu/skills/parity-and-publish-ops/references/legacy/server-repo-parity-ops/scripts/tools/code_paths.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 146,
+   "sha256": "13c88fa221b2cde0a9b96f2b51c45d551f135e5b32a8d59e0fc1d486f4bbec81",
+   "size": 5247
+  },
+  "/home/ubuntu/skills/parity-and-publish-ops/references/legacy/server-repo-parity-ops/scripts/tools/github_backup.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 264,
+   "sha256": "1e9af4cb11c6f856a36c646f42ff5b31fdf91dccabf2c39408a757b1095366cc",
+   "size": 13247
+  },
+  "/home/ubuntu/skills/parity-and-publish-ops/references/legacy/server-repo-parity-ops/scripts/tools/sync_to_repo.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 53,
+   "sha256": "05c31bb31d0f395e862864b6e542b2c4f7a78a8f11209c6cf9c9d33717087b71",
+   "size": 2228
+  },
+  "/home/ubuntu/skills/parity-and-publish-ops/references/legacy/server-repo-parity-ops/scripts/validators/_guard.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 39,
+   "sha256": "6207157bab105f149169adbd84ce629675928ea72f4ae67235052f7a5a7b57b3",
+   "size": 1898
+  },
+  "/home/ubuntu/skills/parity-and-publish-ops/references/legacy/server-repo-parity-ops/scripts/validators/check_backup_parity.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 305,
+   "sha256": "9dda5018e7147923928a6ea8d943fee53e3ba8011076e46b794b443bd12931cf",
+   "size": 15581
+  },
+  "/home/ubuntu/skills/parity-and-publish-ops/references/legacy/server-repo-parity-ops/scripts/validators/check_portable_paths.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 99,
+   "sha256": "6806742b6c9f9fa501b48b4af1fac79d17bf774159a491cd7df231b462c8b9ec",
+   "size": 4092
+  },
+  "/home/ubuntu/skills/parity-and-publish-ops/references/legacy/site-publish-live-verify-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 61,
+   "sha256": "bb7078999d0a1c985f33705380ba480aa15a9d718f885af370f73621ab0e3bd6",
+   "size": 6012
+  },
+  "/home/ubuntu/skills/parity-and-publish-ops/references/legacy/site-publish-live-verify-ops/references/proposed-tightening.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 19,
+   "sha256": "0f547768dc2cf3fde93688defc2d400c7c9e91864b359a20f56f6aee25882c23",
+   "size": 2756
+  },
+  "/home/ubuntu/skills/parity-and-publish-ops/references/legacy/site-publish-live-verify-ops/references/runbook.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 29,
+   "sha256": "1ae9bc131836b15083870baebee112c93cce63d2cad1ff75e2f9bf360b901e70",
+   "size": 2405
+  },
+  "/home/ubuntu/skills/parity-and-publish-ops/references/legacy/site-publish-live-verify-ops/scripts/check_live.sh": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 160,
+   "sha256": "c410d30e805ebd5c30837ed186e3dcb78deb4dbf4dc7e653bae975b8cb26f3d5",
+   "size": 7505
+  },
+  "/home/ubuntu/skills/parity-and-publish-ops/references/legacy/site-publish-live-verify-ops/scripts/propose_tightening.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 76,
+   "sha256": "1f68a143e2ea0f86b54bf9e428c2d53fa8c8fc3faf845966918f5a39a4a85032",
+   "size": 5489
   },
   "/home/ubuntu/skills/payment/SKILL.md": {
    "accepted_reductions": [],
@@ -18435,30 +19043,6 @@
    "lines": 67,
    "sha256": "3c2f1e25728b0f0996138c3b2788d907616196a834ff70da4d01abd4c721ee1d",
    "size": 5209
-  },
-  "/home/ubuntu/skills/pipeline-stop-recovery-ops/SKILL.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 66,
-   "sha256": "8bad5085e7132a9cfe441bbd87f4938e9d1632d983f6ea01f14d55f3702bef56",
-   "size": 7134
-  },
-  "/home/ubuntu/skills/pipeline-stop-recovery-ops/references/playbook.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 54,
-   "sha256": "cc5b446a779e26804093a0d62232fc7526bfb7245cb895d517d6b159168a6271",
-   "size": 4560
-  },
-  "/home/ubuntu/skills/pipeline-stop-recovery-ops/scripts/stop_triage.sh": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 58,
-   "sha256": "ea4d63c4f44eb68d3a519a19636af01d031ce82df0ada5d6650f39a54c3dc185",
-   "size": 2396
   },
   "/home/ubuntu/skills/plantuml-ascii/SKILL.md": {
    "accepted_reductions": [],
@@ -18972,134 +19556,6 @@
    "sha256": "e9b7610fd7f62346572178b0a8aebdca42e9326bd2cffc49a4e3153909b711ae",
    "size": 58182
   },
-  "/home/ubuntu/skills/print-freeze-verify-ops/SKILL.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 57,
-   "sha256": "826e8a11745eef6c74c004644a666cfed1785104e3b8340126507335f5500b37",
-   "size": 5981
-  },
-  "/home/ubuntu/skills/print-freeze-verify-ops/references/frozen-css.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 18,
-   "sha256": "9bd6576e32ae5e82441bbd6eb7b575b8c41327bd4071c0d54bf32c792519bbd5",
-   "size": 2123
-  },
-  "/home/ubuntu/skills/print-freeze-verify-ops/references/frozen-print-profile.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 30,
-   "sha256": "6436a733ca7d1cf78e997f1d14f2c6b736002138dc6b20cced1feca08f97be7b",
-   "size": 3987
-  },
-  "/home/ubuntu/skills/print-freeze-verify-ops/references/propose_tightening-output.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 21,
-   "sha256": "4af06e59c44abe93de869250178c1fb84061a995d94d92d24c107fc6e132514a",
-   "size": 4029
-  },
-  "/home/ubuntu/skills/print-freeze-verify-ops/scripts/propose_tightening.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 159,
-   "sha256": "6384f2c75a86a7e5693897e92297003c2ecffbf62e5183adb87c04d27bf1a377",
-   "size": 8374
-  },
-  "/home/ubuntu/skills/print-freeze-verify-ops/scripts/tools/export_report_assets.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 481,
-   "sha256": "0d2fb8ac06464aef80f3451af7ad224d1e5be9a5f3e5382cd4acdf94037c94d8",
-   "size": 25604
-  },
-  "/home/ubuntu/skills/print-freeze-verify-ops/scripts/validators/_guard.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 39,
-   "sha256": "6207157bab105f149169adbd84ce629675928ea72f4ae67235052f7a5a7b57b3",
-   "size": 1898
-  },
-  "/home/ubuntu/skills/print-freeze-verify-ops/scripts/validators/check_pdf_format.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 286,
-   "sha256": "44ace1af1df636d4ba92dcd27b59957fb9aa370e1bd73d721c5656afc98ae79a",
-   "size": 13349
-  },
-  "/home/ubuntu/skills/print-freeze-verify-ops/scripts/validators/check_print_quality.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 396,
-   "sha256": "17ff329c802d043cfe40b4e8ae5d76fe77e469fc9e34b633a785c60cd08fe6b9",
-   "size": 18056
-  },
-  "/home/ubuntu/skills/print-layout-gate-ops/SKILL.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 89,
-   "sha256": "28ee95440c3a8ac3c40f8adf49b61e74ff83254144c5bd418766334e3697dbaa",
-   "size": 9994
-  },
-  "/home/ubuntu/skills/print-layout-gate-ops/references/playbook.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 57,
-   "sha256": "eb939b6ba26514c91add833ca2f1fc86a819c02ddec6261e5c2bdfca54a4881e",
-   "size": 4578
-  },
-  "/home/ubuntu/skills/print-layout-gate-ops/scripts/measure_block.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 89,
-   "sha256": "71665b7b9e9d36e41e2fd33661bbbe6dedd2093417ad762ae257751edb73c0d6",
-   "size": 4320
-  },
-  "/home/ubuntu/skills/print-layout-gate-ops/scripts/measure_pdf_pages.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 127,
-   "sha256": "5fe22ab8327704851b7d7bffde580dc9e22041907ae80fa13d22e9747f156ed5",
-   "size": 5834
-  },
-  "/home/ubuntu/skills/print-layout-gate-ops/scripts/measure_print_flow.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 123,
-   "sha256": "5027f97ed2d375ffd39b9b5cd970a0f91da94aa0dd11dad23155a6319b7467a6",
-   "size": 6126
-  },
-  "/home/ubuntu/skills/print-layout-gate-ops/scripts/measure_report_print_flow.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 131,
-   "sha256": "dadeaa3a26490b2fc4a771cfc0d630abf3d31f45a44bd957ce1cc9aada3d202b",
-   "size": 6627
-  },
-  "/home/ubuntu/skills/print-layout-gate-ops/scripts/refreeze_print_css.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 101,
-   "sha256": "40934a4e91f6c5df6f44b018d212d0bd206d3136e9537f89f717af3b97067aec",
-   "size": 4434
-  },
   "/home/ubuntu/skills/professional-communication/SKILL.md": {
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
@@ -19155,6 +19611,14 @@
    "lines": 308,
    "sha256": "b2b3fd7c58c686f0670b94cf7192ff79436ccf0d602650b33a83a9d01102f11d",
    "size": 8304
+  },
+  "/home/ubuntu/skills/project-evidence-and-coverage-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 90,
+   "sha256": "5566b49a063dbb7566a623080c26bae0b222884b89288f795a0f5e2c75923c9b",
+   "size": 9539
   },
   "/home/ubuntu/skills/prometheus-configuration/SKILL.md": {
    "accepted_reductions": [],
@@ -19424,9 +19888,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 34,
-   "sha256": "cdb75ee47bd5029d47b7974f2d57e4cf708b6208ab0510670774b3eb517d6eb5",
-   "size": 2640
+   "lines": 38,
+   "sha256": "cbd4f5f70b7ae6a5ee026fc2df9b45d2b2bca57b4087ce084b0865186d97efa3",
+   "size": 2824
   },
   "/home/ubuntu/skills/report-build-export-ops/scripts/build_preflight.py": {
    "accepted_reductions": [],
@@ -19436,89 +19900,297 @@
    "sha256": "1ce23aeb1c8b5ce91938ed31895753f733ea5ae97f4070f4d77232c527d6f81d",
    "size": 1164
   },
-  "/home/ubuntu/skills/report-content-fidelity-ops/SKILL.md": {
+  "/home/ubuntu/skills/report-surface-and-print-ops/SKILL.md": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 58,
+   "sha256": "c6af30ed641376e6d49ec3065fbd4f6eba68e28112938d98f00af8f8a2792322",
+   "size": 6204
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy-index.json": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 11,
+   "sha256": "7902394e78c02ddc6882e6081dfd6f2f5d3abc84c873bb7de0048291b1ffacd5",
+   "size": 271
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/live-visual-audit-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 96,
+   "sha256": "e31982f8803af18048549fe4b233e8fb821cb937b3ba52155511b3bd408bd5ef",
+   "size": 12123
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/live-visual-audit-ops/references/evidence-checklist.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 27,
+   "sha256": "d774374ead15c73993e8e50f041906ad463927dd60bb5d5edd94b20ad11e2914",
+   "size": 2434
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/live-visual-audit-ops/references/severity-rubric.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 31,
+   "sha256": "d15913147efe8ac891d6ee296649160c8cf8132f8f11919bb5e51d39bf8031da",
+   "size": 2713
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/live-visual-audit-ops/scripts/audit_live_surfaces.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 209,
+   "sha256": "f3fd51f6d2567e39bcb9c62b5380fb54bf76acea47fa76a77837b04446d7ef1f",
+   "size": 9344
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/live-visual-audit-ops/scripts/verify_pdf_index.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 248,
+   "sha256": "ba060f1ddf9f5dde60bc1fb22129b23dc8c2cf7e446c1f3991498c2569633fd9",
+   "size": 9351
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/live-visual-audit-ops/scripts/verify_range_bidi.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 219,
+   "sha256": "62ca6bc56a3a145e234bb5b53911e1ae606757911f16347e5ace62d33d466764",
+   "size": 9438
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/manual-visual-check-automation-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 61,
+   "sha256": "68065aa2632ef7f9360878c7b36cf7309215f18691ec8ff955ca0a186a0a6c41",
+   "size": 5634
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/print-freeze-verify-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 57,
+   "sha256": "826e8a11745eef6c74c004644a666cfed1785104e3b8340126507335f5500b37",
+   "size": 5981
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/print-freeze-verify-ops/references/frozen-css.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 18,
+   "sha256": "9bd6576e32ae5e82441bbd6eb7b575b8c41327bd4071c0d54bf32c792519bbd5",
+   "size": 2123
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/print-freeze-verify-ops/references/frozen-print-profile.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 30,
+   "sha256": "6436a733ca7d1cf78e997f1d14f2c6b736002138dc6b20cced1feca08f97be7b",
+   "size": 3987
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/print-freeze-verify-ops/references/propose_tightening-output.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 21,
+   "sha256": "4af06e59c44abe93de869250178c1fb84061a995d94d92d24c107fc6e132514a",
+   "size": 4029
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/print-freeze-verify-ops/scripts/propose_tightening.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 159,
+   "sha256": "6384f2c75a86a7e5693897e92297003c2ecffbf62e5183adb87c04d27bf1a377",
+   "size": 8374
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/print-freeze-verify-ops/scripts/tools/export_report_assets.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 481,
+   "sha256": "0d2fb8ac06464aef80f3451af7ad224d1e5be9a5f3e5382cd4acdf94037c94d8",
+   "size": 25604
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/print-freeze-verify-ops/scripts/validators/_guard.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 39,
+   "sha256": "6207157bab105f149169adbd84ce629675928ea72f4ae67235052f7a5a7b57b3",
+   "size": 1898
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/print-freeze-verify-ops/scripts/validators/check_pdf_format.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 286,
+   "sha256": "44ace1af1df636d4ba92dcd27b59957fb9aa370e1bd73d721c5656afc98ae79a",
+   "size": 13349
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/print-freeze-verify-ops/scripts/validators/check_print_quality.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 396,
+   "sha256": "17ff329c802d043cfe40b4e8ae5d76fe77e469fc9e34b633a785c60cd08fe6b9",
+   "size": 18056
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/print-layout-gate-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 89,
+   "sha256": "28ee95440c3a8ac3c40f8adf49b61e74ff83254144c5bd418766334e3697dbaa",
+   "size": 9994
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/print-layout-gate-ops/references/playbook.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 57,
+   "sha256": "eb939b6ba26514c91add833ca2f1fc86a819c02ddec6261e5c2bdfca54a4881e",
+   "size": 4578
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/print-layout-gate-ops/scripts/measure_block.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 89,
+   "sha256": "71665b7b9e9d36e41e2fd33661bbbe6dedd2093417ad762ae257751edb73c0d6",
+   "size": 4320
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/print-layout-gate-ops/scripts/measure_pdf_pages.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 127,
+   "sha256": "5fe22ab8327704851b7d7bffde580dc9e22041907ae80fa13d22e9747f156ed5",
+   "size": 5834
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/print-layout-gate-ops/scripts/measure_print_flow.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 123,
+   "sha256": "5027f97ed2d375ffd39b9b5cd970a0f91da94aa0dd11dad23155a6319b7467a6",
+   "size": 6126
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/print-layout-gate-ops/scripts/measure_report_print_flow.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 131,
+   "sha256": "dadeaa3a26490b2fc4a771cfc0d630abf3d31f45a44bd957ce1cc9aada3d202b",
+   "size": 6627
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/print-layout-gate-ops/scripts/refreeze_print_css.py": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 101,
+   "sha256": "40934a4e91f6c5df6f44b018d212d0bd206d3136e9537f89f717af3b97067aec",
+   "size": 4434
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/print-layout-gate-ops/templates/profile-change-entry.json": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 6,
+   "sha256": "fe47658baf440861a9ca631e1edfbf3c3d0275948e2aacec342d7c9313c4bc84",
+   "size": 427
+  },
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/report-content-fidelity-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 68,
    "sha256": "ad749b53a7dd36652b8589ffd842d2fd4f3134388afc45b9619f172fef6eaf4d",
    "size": 7302
   },
-  "/home/ubuntu/skills/report-content-fidelity-ops/references/failure-classes.md": {
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/report-content-fidelity-ops/references/failure-classes.md": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 68,
    "sha256": "41e0bf27afac7ce05801d2bd7449a42e3ed07342094256390ef71ffb2eb401f4",
    "size": 5439
   },
-  "/home/ubuntu/skills/report-content-fidelity-ops/scripts/check_surface_fidelity.py": {
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/report-content-fidelity-ops/scripts/check_surface_fidelity.py": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 108,
    "sha256": "01582482229e0f0bf63bc50d098602aa510b122aaa45bd50a537d2bb8f5adfc7",
    "size": 4938
   },
-  "/home/ubuntu/skills/report-content-fidelity-ops/scripts/inject_fidelity_break.py": {
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/report-content-fidelity-ops/scripts/inject_fidelity_break.py": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 14,
    "sha256": "dbbaf8200f359cb41f6ed8a0b24f89c1e1ac824958b66a186e73cc1a4b55f1d5",
    "size": 700
   },
-  "/home/ubuntu/skills/report-content-fidelity-ops/scripts/negative_test_fidelity.sh": {
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/report-content-fidelity-ops/scripts/negative_test_fidelity.sh": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 17,
    "sha256": "eeaf15097c60b2af88f1857d45c6e1e12dc004d9ca725d6d2e018b9d80815bac",
    "size": 1221
   },
-  "/home/ubuntu/skills/report-surface-policy-ops/SKILL.md": {
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/report-surface-policy-ops/SKILL.md": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 65,
    "sha256": "218965cb7e0bc370d6833b3880310c406897d6d67a3952790af21c617f9aeb19",
    "size": 5160
   },
-  "/home/ubuntu/skills/report-surface-policy-ops/references/policy-mechanism.md": {
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/report-surface-policy-ops/references/policy-mechanism.md": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 23,
    "sha256": "b69f33c32eb5ec486741f616461e62f9ecb71c24fe6f8c45d5f3a3a45b54c23e",
    "size": 2939
   },
-  "/home/ubuntu/skills/report-surface-policy-ops/references/proposed-tightening.md": {
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/report-surface-policy-ops/references/proposed-tightening.md": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 14,
    "sha256": "a83215e6d03e46dfbcb16995ca7989549a1e0216a32ff74de8aab2f3ebabb9be",
    "size": 1659
   },
-  "/home/ubuntu/skills/report-surface-policy-ops/scripts/audit_style_coverage.py": {
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/report-surface-policy-ops/scripts/audit_style_coverage.py": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 114,
    "sha256": "19958f20fb7e958e076ed794f2ccd46c6fef53132cfc152da3557fcbba7e0bca",
    "size": 7635
   },
-  "/home/ubuntu/skills/report-surface-policy-ops/scripts/check_additions_surface.py": {
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/report-surface-policy-ops/scripts/check_additions_surface.py": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 111,
    "sha256": "567fe7cac045eb9c4b6e1a11c0788efabfc12b64d2ef46b9baa0bb1c4a987803",
    "size": 6488
   },
-  "/home/ubuntu/skills/report-surface-policy-ops/scripts/propose_tightening.py": {
+  "/home/ubuntu/skills/report-surface-and-print-ops/references/legacy/report-surface-policy-ops/scripts/propose_tightening.py": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 39,
    "sha256": "9c61cd3aca843181a797abee74b9150d80bc5ea17859b7768f50ed55d7440f87",
@@ -19748,7 +20420,47 @@
    "sha256": "641d46ca37d050b17862e99dd0c8463b3c81926248ac9de50d1cb147ce6cef9e",
    "size": 16924
   },
-  "/home/ubuntu/skills/runbook-closed-fail-repair-ops/SKILL.md": {
+  "/home/ubuntu/skills/runbook-operations-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 47,
+   "sha256": "40767a254010aaba8a718e9380f4ad4fb02195073baf6172b6b45976d919ba8c",
+   "size": 5254
+  },
+  "/home/ubuntu/skills/runbook-operations-ops/references/legacy-index.json": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 9,
+   "sha256": "f797f9789cc64fc8b9c72c94a794347412aab8d8a454856a52b486d992fe39be",
+   "size": 205
+  },
+  "/home/ubuntu/skills/runbook-operations-ops/references/legacy/pipeline-stop-recovery-ops/SKILL.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 66,
+   "sha256": "8bad5085e7132a9cfe441bbd87f4938e9d1632d983f6ea01f14d55f3702bef56",
+   "size": 7134
+  },
+  "/home/ubuntu/skills/runbook-operations-ops/references/legacy/pipeline-stop-recovery-ops/references/playbook.md": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 54,
+   "sha256": "cc5b446a779e26804093a0d62232fc7526bfb7245cb895d517d6b159168a6271",
+   "size": 4560
+  },
+  "/home/ubuntu/skills/runbook-operations-ops/references/legacy/pipeline-stop-recovery-ops/scripts/stop_triage.sh": {
+   "accepted_reductions": [],
+   "first_seen": "2026-11-06",
+   "last_seen": "2026-11-06",
+   "lines": 58,
+   "sha256": "ea4d63c4f44eb68d3a519a19636af01d031ce82df0ada5d6650f39a54c3dc185",
+   "size": 2396
+  },
+  "/home/ubuntu/skills/runbook-operations-ops/references/legacy/runbook-closed-fail-repair-ops/SKILL.md": {
    "accepted_reductions": [],
    "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
@@ -19756,7 +20468,7 @@
    "sha256": "36069d623961ba76a3ddc238f93c3373fc085e15c1a150d14cc4de98045837fe",
    "size": 9186
   },
-  "/home/ubuntu/skills/runbook-closed-fail-repair-ops/references/measured-cases.md": {
+  "/home/ubuntu/skills/runbook-operations-ops/references/legacy/runbook-closed-fail-repair-ops/references/measured-cases.md": {
    "accepted_reductions": [],
    "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
@@ -19764,7 +20476,7 @@
    "sha256": "1f13936cfb2974345a1cbda8dd39cb82496e8fb2e05391a81a5668f5c6ea96ac",
    "size": 5347
   },
-  "/home/ubuntu/skills/runbook-closed-fail-repair-ops/scripts/diagnose_closed_fail.py": {
+  "/home/ubuntu/skills/runbook-operations-ops/references/legacy/runbook-closed-fail-repair-ops/scripts/diagnose_closed_fail.py": {
    "accepted_reductions": [],
    "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
@@ -19772,97 +20484,97 @@
    "sha256": "1cff7082cb0682517a1b7b5c97fa766436599d801a688fa6ec87a322eaba9639",
    "size": 6179
   },
-  "/home/ubuntu/skills/runbook-completion-closure-ops/SKILL.md": {
+  "/home/ubuntu/skills/runbook-operations-ops/references/legacy/runbook-completion-closure-ops/SKILL.md": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 83,
    "sha256": "bc46eae25480a611ebefe235d9abee5d6972208524caaff5fbd2f29219632157",
    "size": 11778
   },
-  "/home/ubuntu/skills/runbook-completion-closure-ops/references/playbook.md": {
+  "/home/ubuntu/skills/runbook-operations-ops/references/legacy/runbook-completion-closure-ops/references/playbook.md": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 59,
    "sha256": "139b84d3313f7e8883bc71f309f300b43c42dbe200be74b76d78dddb7605700c",
    "size": 10822
   },
-  "/home/ubuntu/skills/runbook-completion-closure-ops/scripts/close_check_selftest.sh": {
+  "/home/ubuntu/skills/runbook-operations-ops/references/legacy/runbook-completion-closure-ops/scripts/close_check_selftest.sh": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 88,
    "sha256": "d03f34d57a4dd002235f1210272f2d32e0df353cbc6b48c66d873894473530b1",
    "size": 5195
   },
-  "/home/ubuntu/skills/runbook-completion-closure-ops/scripts/recipe_lint.py": {
+  "/home/ubuntu/skills/runbook-operations-ops/references/legacy/runbook-completion-closure-ops/scripts/recipe_lint.py": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 136,
    "sha256": "d8b72af5e7c23c7723a655567bfecf9fcf53f41791567e9f2b48b5f52ea945a2",
    "size": 6211
   },
-  "/home/ubuntu/skills/runbook-completion-closure-ops/scripts/round_close_check.sh": {
+  "/home/ubuntu/skills/runbook-operations-ops/references/legacy/runbook-completion-closure-ops/scripts/round_close_check.sh": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 109,
    "sha256": "51f47fcc8b88a5bfe7cc861b9ddb91cd8060bfda82219fa0df6fcb0858283ff2",
    "size": 4717
   },
-  "/home/ubuntu/skills/runbook-completion-closure-ops/scripts/run_to_completion.py": {
+  "/home/ubuntu/skills/runbook-operations-ops/references/legacy/runbook-completion-closure-ops/scripts/run_to_completion.py": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 203,
    "sha256": "34a3a788539040c6e21bb5cf25830d0d99c29efa092c3bc1d34c9c95a97a78ae",
    "size": 11889
   },
-  "/home/ubuntu/skills/runbook-execution-ops/SKILL.md": {
+  "/home/ubuntu/skills/runbook-operations-ops/references/legacy/runbook-execution-ops/SKILL.md": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 72,
    "sha256": "817c6df38cc91ef1b176bb327068b24c2622789c37ada323decab360afba827d",
    "size": 5867
   },
-  "/home/ubuntu/skills/runbook-execution-ops/references/evidence.md": {
+  "/home/ubuntu/skills/runbook-operations-ops/references/legacy/runbook-execution-ops/references/evidence.md": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 188,
    "sha256": "df19913b87a3b99643346b1b85687394d3bc1090911ea89096a1a2610a2a254e",
    "size": 7281
   },
-  "/home/ubuntu/skills/runbook-execution-ops/references/exit-codes.md": {
+  "/home/ubuntu/skills/runbook-operations-ops/references/legacy/runbook-execution-ops/references/exit-codes.md": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 22,
    "sha256": "60defe43582e10322508d71aff2ccc7d0f8928326fe9559c04b068863c889e4f",
    "size": 3524
   },
-  "/home/ubuntu/skills/runbook-execution-ops/references/self-learning.md": {
+  "/home/ubuntu/skills/runbook-operations-ops/references/legacy/runbook-execution-ops/references/self-learning.md": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 21,
    "sha256": "9cf0acbe0ce3300a6b30152159b8538b1f0931e4e1cbba8b5a468a7bc66b94bd",
    "size": 2469
   },
-  "/home/ubuntu/skills/runbook-execution-ops/scripts/record_lesson.py": {
+  "/home/ubuntu/skills/runbook-operations-ops/references/legacy/runbook-execution-ops/scripts/record_lesson.py": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 123,
    "sha256": "840e6f2e456f6cf4d3af018410fb363dd4feb4be72da54ade3fcd6af0cad30d7",
    "size": 5072
   },
-  "/home/ubuntu/skills/runbook-execution-ops/scripts/runbook_driver.py": {
+  "/home/ubuntu/skills/runbook-operations-ops/references/legacy/runbook-execution-ops/scripts/runbook_driver.py": {
    "accepted_reductions": [],
-   "first_seen": "2026-11-03",
+   "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
    "lines": 283,
    "sha256": "ec498f89cef3f71b7e357bc900dbbb969d55d99c55b4cbc9907e63a1d642e154",
@@ -20072,9 +20784,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 86,
-   "sha256": "acdf3f64f6adc2e9bdf17792bbb1d17efd1667ba5d77f1cdc6bec27ae61cef23",
-   "size": 7745
+   "lines": 90,
+   "sha256": "68682497ab016239b17cc62f9a9179af191f90846a6ff2a01cf946c8ab1fd8e7",
+   "size": 7995
   },
   "/home/ubuntu/skills/secret-rotation-ops/references/execution-output.txt": {
    "accepted_reductions": [],
@@ -20171,78 +20883,6 @@
    "lines": 54,
    "sha256": "aa9d58f41712589d60b725fd6cdc6afbfc2a543d8223db34bb41baba2d430e7f",
    "size": 1718
-  },
-  "/home/ubuntu/skills/self-learning-loop-ops/SKILL.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 136,
-   "sha256": "add4d225295a3ae1234d8ef223cdae66d74fbbe2603278b95e1711c40286803f",
-   "size": 17170
-  },
-  "/home/ubuntu/skills/self-learning-loop-ops/references/fault-taxonomy.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 33,
-   "sha256": "b65afa73a36fb9653ace2b50965a51f1baae4bafe6cc77965fb805b06c2e8466",
-   "size": 3409
-  },
-  "/home/ubuntu/skills/self-learning-loop-ops/references/wiring-and-artifact-repair.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 80,
-   "sha256": "7a4f4fec08d4eb9a22899da8351d8b65859c9aa8fe36607b27252ac9950f7435",
-   "size": 7339
-  },
-  "/home/ubuntu/skills/self-learning-loop-ops/scripts/build_fault_index.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 70,
-   "sha256": "140433d5a300d7d2048cfa01443634d9019319ae414bede8f38a00ee2641f247",
-   "size": 2722
-  },
-  "/home/ubuntu/skills/self-learning-loop-ops/scripts/check_barrier_wiring.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 100,
-   "sha256": "8a3dd7f2dd9aff3cbdfd14fa696ea5372582a40982adeac725e6349f050a21aa",
-   "size": 4424
-  },
-  "/home/ubuntu/skills/self-learning-loop-ops/scripts/close_fault.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 66,
-   "sha256": "3967b2f23d492a5a3eb760ff64c6c4520957d03a8037c6f85fe37577f6d02f5c",
-   "size": 3601
-  },
-  "/home/ubuntu/skills/self-learning-loop-ops/scripts/loop_report.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 66,
-   "sha256": "4d2cf9007f4f2106dee9b54b7e5200ebcee04a547e620470a7bc7576edd1d31a",
-   "size": 2612
-  },
-  "/home/ubuntu/skills/self-learning-loop-ops/scripts/normalize_learning_log.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 65,
-   "sha256": "a3a58de36fb2bba01c427faea44860f2475672413dd88c521171caf83beff000",
-   "size": 2551
-  },
-  "/home/ubuntu/skills/self-learning-loop-ops/scripts/verify_closure.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 82,
-   "sha256": "799466c4820cf0945ff90eeb2ecf0dc325e64173444cdae54552822da074f7fd",
-   "size": 4042
   },
   "/home/ubuntu/skills/sentry-sdk-setup/SKILL.md": {
    "accepted_reductions": [],
@@ -20380,102 +21020,6 @@
    "sha256": "e8bcffb3ae07d77ab272a45c55cd4d8ce19e933f955cd3ed720fa58b5bd78b7c",
    "size": 12421
   },
-  "/home/ubuntu/skills/server-repo-parity-ops/SKILL.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 85,
-   "sha256": "74c4a8853419dc8486ca73ed2f1bda2a3c345632eaa368c38e965d712cb2ce65",
-   "size": 7990
-  },
-  "/home/ubuntu/skills/server-repo-parity-ops/references/execution-output.txt": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 239,
-   "sha256": "98506ce220c1b3904c546654d414bff80a43feae549e4feae5c9b3ecfe0877a4",
-   "size": 21709
-  },
-  "/home/ubuntu/skills/server-repo-parity-ops/references/parity-runbook.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 30,
-   "sha256": "e16dee4678f57ee875722bae5e60eb7398ca00ad99881dffec71195ffe36b0cb",
-   "size": 2010
-  },
-  "/home/ubuntu/skills/server-repo-parity-ops/references/propose-tightening-output.txt": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 23,
-   "sha256": "3368a9892374cd8bc9bc16fbe74ba73ee37ccc56847990e900d2122b43fdb75f",
-   "size": 2371
-  },
-  "/home/ubuntu/skills/server-repo-parity-ops/scripts/propose_tightening.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 106,
-   "sha256": "45e8fb3bbe0c56ff1c779bc10f26b7d8d153a06f7162a2381f334707edd8e656",
-   "size": 5372
-  },
-  "/home/ubuntu/skills/server-repo-parity-ops/scripts/tools/apply_from_github.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 125,
-   "sha256": "a9b553240ce7f7bad3b818f342fc46d20d427f7d98723caebdc4858bed6aacfa",
-   "size": 6279
-  },
-  "/home/ubuntu/skills/server-repo-parity-ops/scripts/tools/code_paths.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 146,
-   "sha256": "13c88fa221b2cde0a9b96f2b51c45d551f135e5b32a8d59e0fc1d486f4bbec81",
-   "size": 5247
-  },
-  "/home/ubuntu/skills/server-repo-parity-ops/scripts/tools/github_backup.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 264,
-   "sha256": "1e9af4cb11c6f856a36c646f42ff5b31fdf91dccabf2c39408a757b1095366cc",
-   "size": 13247
-  },
-  "/home/ubuntu/skills/server-repo-parity-ops/scripts/tools/sync_to_repo.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 53,
-   "sha256": "05c31bb31d0f395e862864b6e542b2c4f7a78a8f11209c6cf9c9d33717087b71",
-   "size": 2228
-  },
-  "/home/ubuntu/skills/server-repo-parity-ops/scripts/validators/_guard.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 39,
-   "sha256": "6207157bab105f149169adbd84ce629675928ea72f4ae67235052f7a5a7b57b3",
-   "size": 1898
-  },
-  "/home/ubuntu/skills/server-repo-parity-ops/scripts/validators/check_backup_parity.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 305,
-   "sha256": "9dda5018e7147923928a6ea8d943fee53e3ba8011076e46b794b443bd12931cf",
-   "size": 15581
-  },
-  "/home/ubuntu/skills/server-repo-parity-ops/scripts/validators/check_portable_paths.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 99,
-   "sha256": "6806742b6c9f9fa501b48b4af1fac79d17bf774159a491cd7df231b462c8b9ec",
-   "size": 4092
-  },
   "/home/ubuntu/skills/session-self-config/SKILL.md": {
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
@@ -20572,22 +21116,6 @@
    "sha256": "1faf1c554207d8cb0561dc7ea96cd143df6ce5ddfc2322af89f25f38e3bad8a2",
    "size": 9918
   },
-  "/home/ubuntu/skills/side-effects-interface-audit-ops/SKILL.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 60,
-   "sha256": "6473a2cad44fb7c24d3824f76a7a6eee6f093e78c1fca33f01aa80a740e059b5",
-   "size": 8718
-  },
-  "/home/ubuntu/skills/side-effects-interface-audit-ops/scripts/audit_tool_side_effects.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 242,
-   "sha256": "23ceb4ddaf2fb24a83182240c8769cc787c1fd9fa54040ce3cb7e3385307f0a8",
-   "size": 11131
-  },
   "/home/ubuntu/skills/similarity-search-patterns/SKILL.md": {
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
@@ -20652,61 +21180,21 @@
    "sha256": "12bf1a733540817fca963d42deca1b55cc3bd0b6ab26a34472ffd9d344e63c48",
    "size": 8501
   },
-  "/home/ubuntu/skills/site-publish-live-verify-ops/SKILL.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 61,
-   "sha256": "bb7078999d0a1c985f33705380ba480aa15a9d718f885af370f73621ab0e3bd6",
-   "size": 6012
-  },
-  "/home/ubuntu/skills/site-publish-live-verify-ops/references/proposed-tightening.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 19,
-   "sha256": "0f547768dc2cf3fde93688defc2d400c7c9e91864b359a20f56f6aee25882c23",
-   "size": 2756
-  },
-  "/home/ubuntu/skills/site-publish-live-verify-ops/references/runbook.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 29,
-   "sha256": "1ae9bc131836b15083870baebee112c93cce63d2cad1ff75e2f9bf360b901e70",
-   "size": 2405
-  },
-  "/home/ubuntu/skills/site-publish-live-verify-ops/scripts/check_live.sh": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 160,
-   "sha256": "c410d30e805ebd5c30837ed186e3dcb78deb4dbf4dc7e653bae975b8cb26f3d5",
-   "size": 7505
-  },
-  "/home/ubuntu/skills/site-publish-live-verify-ops/scripts/propose_tightening.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 76,
-   "sha256": "1f68a143e2ea0f86b54bf9e428c2d53fa8c8fc3faf845966918f5a39a4a85032",
-   "size": 5489
-  },
   "/home/ubuntu/skills/skill-adoption-governance-ops/SKILL.md": {
    "accepted_reductions": [],
    "first_seen": "2026-11-06",
    "last_seen": "2026-11-06",
-   "lines": 53,
-   "sha256": "9e254cda4bbe91400265b02db7cc3c809d4edd2e8932c23f0d573c4424258ff3",
-   "size": 4457
+   "lines": 61,
+   "sha256": "4328e5e3900f6c6f89a59c055263adaaf1f41ff6ed90905b5730664177061212",
+   "size": 5104
   },
   "/home/ubuntu/skills/skill-coverage-audit-ops/SKILL.md": {
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 33,
-   "sha256": "4b1dce21056b8c2c626f3fec5d8d7f9a60a771827711c5c458f23fa2cb5ebddc",
-   "size": 3070
+   "lines": 37,
+   "sha256": "e17d868f6b7c5fed00aac5799caf14fedb814d525825ef261ed3801ab67c4f21",
+   "size": 3289
   },
   "/home/ubuntu/skills/skill-coverage-audit-ops/scripts/inventory_skill_coverage.py": {
    "accepted_reductions": [],
@@ -20776,9 +21264,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 87,
-   "sha256": "6e4bc4dff6512d87d50d469d51b5ba834fa1ad712cd757a26d67858f6484eff7",
-   "size": 11629
+   "lines": 91,
+   "sha256": "2514baee6640486a60ffaa763d769647f960a15c38e127c304b5fd18cc3ecaad",
+   "size": 11823
   },
   "/home/ubuntu/skills/skill-ownership-merge-ops/scripts/measure_overlap.py": {
    "accepted_reductions": [],
@@ -20824,9 +21312,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 106,
-   "sha256": "68220736fdab2335dd10b373add3b4e925000420478958cb8e6e04ff6a034978",
-   "size": 24699
+   "lines": 116,
+   "sha256": "f688190d31ae93dc1b11b2ae3031f2c757d675d6b7f24954fccef55c344f0d68",
+   "size": 31177
   },
   "/home/ubuntu/skills/slo-implementation/SKILL.md": {
    "accepted_reductions": [],
@@ -20872,9 +21360,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 70,
-   "sha256": "167ad863339760d7f92aef6d9a93ae2fafa2edcd97190dbff2baa8229540a52e",
-   "size": 7391
+   "lines": 74,
+   "sha256": "8865f0d46654e08e459594f8438a046407cb36ec0fecabc9c5af837a10784dbe",
+   "size": 7576
   },
   "/home/ubuntu/skills/source-coverage-route-ops/references/route-patterns.md": {
    "accepted_reductions": [],
@@ -20926,21 +21414,30 @@
      "reason": "قرار مسجَّل 2026-11-05: (1) runbook.json أُعيد تنسيقه بترميز عربي مقروء فزادت الأسطر 5214→5401 ونقص البايت 166665→152654 والمحتوى زاد لا نقص؛ (2) verify_master_direction.py نقص 4 بايت بعد إصلاح سكربت الاتجاه في جولة 2026-11-04 (المزامنة 21135d7f)؛ (3) probe_source_routes.py نقص 161 بايت بعد مزامنة الشيفرة المصحّحة من الخادم إلى المستودع (ed3a7507 ← 21135d7f). الأصول المفقودة فعليًا استُعيدت من المرآة: SKILL.md لمهارة الخريطة وسكربتاه وcheck_surface_extraction.py وtest_map_points_nonspatial.py.",
      "to_lines": 106,
      "to_size": 4608
+    },
+    {
+     "date": "2026-11-06",
+     "from_lines": 109,
+     "from_size": 4769,
+     "note": "نسخة المصدر الحالية مقاسة وظيفيًا؛ الانكماش محدود وموثق، ولا يُقبل بلا فحص الأداة التابعة.",
+     "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+     "to_lines": 106,
+     "to_size": 4608
     }
    ],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 109,
-   "sha256": "db3763ae5be69a8fc042e21e9eb2f9b4e657fc9483bb3df7ac0438f8f6e0e371",
-   "size": 4769
+   "lines": 106,
+   "sha256": "98a58a866ceae6531d6fdaaafdd22957580fa5119a4ccf88e4dca29c50494865",
+   "size": 4608
   },
   "/home/ubuntu/skills/source-ingest-ops/SKILL.md": {
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 34,
-   "sha256": "a10e74d9a1520b86fa7cac401935b0e42ef3ee7fe2e3fc776482905554d16866",
-   "size": 2698
+   "lines": 38,
+   "sha256": "eaf04999d643a89246909be99cb070ba20b361138d672ff5ae481fe3f4862f26",
+   "size": 2874
   },
   "/home/ubuntu/skills/source-ingest-ops/scripts/ingest_preflight.py": {
    "accepted_reductions": [],
@@ -21954,9 +22451,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 142,
-   "sha256": "c7d5063b92bc05e538722cf2baa75e9054c51e02ff7c9b91e6308f077e6fdf75",
-   "size": 13750
+   "lines": 146,
+   "sha256": "b291932a8afcd05a4777717b461f8bdc717315633d31a7ba84c831784c755f59",
+   "size": 13934
   },
   "/home/ubuntu/skills/threat-zone-card-ops/scripts/measure_card.py": {
    "accepted_reductions": [],
@@ -21973,54 +22470,6 @@
    "lines": 275,
    "sha256": "d0e5e95443e358ad2a74811b196071d10807ca95aa20351ab5760feeecee1294",
    "size": 11276
-  },
-  "/home/ubuntu/skills/tool-contract-check-ops/SKILL.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 71,
-   "sha256": "b1a0532fee55afd9a93901efeadd5ee33cdd655571391938f4535a9693068169",
-   "size": 7050
-  },
-  "/home/ubuntu/skills/tool-contract-check-ops/references/evidence.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 237,
-   "sha256": "90392fd63606d87175e37cc6ba166c1dfe00d0644bf46558962fbf5401acf8bd",
-   "size": 12283
-  },
-  "/home/ubuntu/skills/tool-contract-check-ops/references/exit-codes-and-contracts.md": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 24,
-   "sha256": "68905c8553cffbc971b73105808d9fd070b9b6b0dbe9b39413af782c5f0c68a3",
-   "size": 3385
-  },
-  "/home/ubuntu/skills/tool-contract-check-ops/scripts/cli_contract.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 294,
-   "sha256": "d9e0d6781e3066fe9aca732546043af78529e6c1ba54c9879126cca9679ff31b",
-   "size": 12798
-  },
-  "/home/ubuntu/skills/tool-contract-check-ops/scripts/duplicate_scan.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 182,
-   "sha256": "4cb8108c7c13a26406b0d171713dd5fb5d8c7a92194dcb1e1efa3d26b3d40992",
-   "size": 8477
-  },
-  "/home/ubuntu/skills/tool-contract-check-ops/scripts/exit_code_read.py": {
-   "accepted_reductions": [],
-   "first_seen": "2026-11-03",
-   "last_seen": "2026-11-06",
-   "lines": 80,
-   "sha256": "709639b2cb9d8462b6ab039eaafb037681642237bee55327ca0af65bfb5202ff",
-   "size": 3460
   },
   "/home/ubuntu/skills/torch-geometric/SKILL.md": {
    "accepted_reductions": [],
@@ -22858,9 +23307,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 84,
-   "sha256": "43bc469ef7e95241797febb70955004332830c64cb10015795158325fc0d5192",
-   "size": 7758
+   "lines": 88,
+   "sha256": "234ae694f32e75023ec24605ca1d4e05d1677e50b46a7594f746e425da1fd0ad",
+   "size": 7930
   },
   "/home/ubuntu/skills/vocabulary-guard-ops/references/root-causes.md": {
    "accepted_reductions": [],
@@ -22930,9 +23379,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 41,
-   "sha256": "870df3785aab01beb411ab3798d57155791c6e9e5bd811f6d931b19339cb56e5",
-   "size": 5502
+   "lines": 49,
+   "sha256": "f25c0de013a25b33b5fbc7e1fbe4e8b2d5af80b793fc01d2e49209468c34b166",
+   "size": 6150
   },
   "/home/ubuntu/skills/waw-density-control-ops/references/learning-log.md": {
    "accepted_reductions": [],
@@ -23283,16 +23732,16 @@
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
    "lines": 185,
-   "sha256": "75e15935614bbd94a468fc88e8a0cfcc682f9b4f975e36a48e76be81cdc9f1f5",
-   "size": 37347
+   "sha256": "0065256d3ce40f2ac9d769439e5a43733738c7e2ad1360851b3a4baa30f51ca6",
+   "size": 37419
   },
   "/home/ubuntu/skills/webdev/SKILL.md": {
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
    "lines": 454,
-   "sha256": "5e6968100e055bd794448f5cb8cc8e8e8b06033a82365968dbebe52b7bdf6856",
-   "size": 36440
+   "sha256": "4c7e10d0c55e5db211ac2c0231660d74f9e2e3b4fdac468b397173887883883b",
+   "size": 36512
   },
   "/home/ubuntu/skills/webdev/references/api-hub.md": {
    "accepted_reductions": [],
@@ -23322,9 +23771,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 208,
-   "sha256": "c769e3b3c08968cea22d568b72d4da3c055fd15f2f4e619c4bac4d1fbad7a64b",
-   "size": 14158
+   "lines": 209,
+   "sha256": "b705ba08db1c5cbf317863805774426fdabdfe6354308d438ed75e1b27322f2d",
+   "size": 14331
   },
   "/home/ubuntu/skills/webdev/references/database.md": {
    "accepted_reductions": [],
@@ -23362,9 +23811,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 226,
-   "sha256": "f5e591c78eb52f39254f80d9a936a7da30a8e32ef1cef62b51d74912fd1fab3b",
-   "size": 22377
+   "lines": 228,
+   "sha256": "6212ba18e068395bf419e6553d203632917fe914d56e9c71b4c7abe1e8cba125",
+   "size": 22869
   },
   "/home/ubuntu/skills/webdev/references/features.md": {
    "accepted_reductions": [],
@@ -23387,8 +23836,8 @@
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
    "lines": 136,
-   "sha256": "c69485e981a2fd2307d34368c1db2b9467e283367a5622954c71a6fb08ef3197",
-   "size": 14284
+   "sha256": "cdb2e8ed3bc6fd1fb688ed1d62403fc1e05202f78993f58b27449e0f8be1b66e",
+   "size": 14366
   },
   "/home/ubuntu/skills/webdev/references/game-authentication.md": {
    "accepted_reductions": [],
@@ -23426,9 +23875,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 182,
-   "sha256": "965addbf6a58c962c2887616e7cde1fc93031fe4b61ef836a8cd88bb4e2e0df0",
-   "size": 14966
+   "lines": 183,
+   "sha256": "f9e101dd07cc74c64a61a31f1306538746c3d349c70b9ea2b7c66071e881758d",
+   "size": 15130
   },
   "/home/ubuntu/skills/webdev/references/game-bullet-hell.md": {
    "accepted_reductions": [],
@@ -23443,8 +23892,8 @@
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
    "lines": 203,
-   "sha256": "0c85fa29a9d11867af5696065f036fac6161e7c6deb4c0f4574e5da0d201ea42",
-   "size": 15100
+   "sha256": "ab4a580d4f48810b7239c969ad59f07e9fa12703b58b25cb7b0ffb91c64ce4b8",
+   "size": 15124
   },
   "/home/ubuntu/skills/webdev/references/game-generic-multiplayer.md": {
    "accepted_reductions": [],
@@ -23626,9 +24075,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 279,
-   "sha256": "dc2e5fcda7792a7a7fcb253f81211100110d4fdddee9b26ee18098dbc8d6ad83",
-   "size": 22182
+   "lines": 305,
+   "sha256": "fdcaf9f8250b001dd2b9868fbd706d415712129daabcd7dcc4c403319a18c6e2",
+   "size": 24185
   },
   "/home/ubuntu/skills/webdev/references/game-trading-card.md": {
    "accepted_reductions": [],
@@ -23667,8 +24116,8 @@
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
    "lines": 229,
-   "sha256": "059dde9328bb7a097e465373f24c888252f97a2d8f0b683cf03f641e94267c06",
-   "size": 14985
+   "sha256": "e7ca5ed16f047bb7b38363ed7c378d0605cdd965396b266ff7d5cebb9196c2a6",
+   "size": 14999
   },
   "/home/ubuntu/skills/webdev/references/hosting.md": {
    "accepted_reductions": [],
@@ -23714,9 +24163,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 114,
-   "sha256": "4cac4a8bcb18043c9117f0c95a6f75b770b64e815d8feb0ffebaf6fb071a8f2f",
-   "size": 11711
+   "lines": 133,
+   "sha256": "b1b26ceb606b776b614011d397baf6f4155c77c063338248a6bd2272ba9db74c",
+   "size": 14494
   },
   "/home/ubuntu/skills/webdev/references/project.md": {
    "accepted_reductions": [],
@@ -23786,9 +24235,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 78,
-   "sha256": "fcee7af684e046caf8602d55e65e484f566cf17ca8548e25e94305f1259b4fbd",
-   "size": 11449
+   "lines": 95,
+   "sha256": "9392ea0814d226d3a06da490d2ce175db89da8639da3be597d9c5a2a93d16c18",
+   "size": 13616
   },
   "/home/ubuntu/skills/webdev/references/site-settings.md": {
    "accepted_reductions": [],
@@ -24002,9 +24451,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-06",
-   "lines": 43,
-   "sha256": "dee05ec7634a6cd239a76b911ec244f067222401ae58746e8641d6f406e8bd1b",
-   "size": 5749
+   "lines": 51,
+   "sha256": "2a4af0f3fe4061c40190b42cba66e56d668fffe01f2018a86d4afd0f9e970f2e",
+   "size": 6394
   },
   "/home/ubuntu/skills/writing-rules-wiring-ops/scripts/check_writer_visibility.py": {
    "accepted_reductions": [],
@@ -24183,7 +24632,1228 @@
    "size": 2913
   }
  },
- "removals": [],
- "updated_at": "2026-11-06T07:42:15.763247+00:00",
+ "removals": [
+  {
+   "date": "2026-11-06",
+   "from_lines": 49,
+   "from_size": 4735,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/enforcement-layer-audit-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "f753cf3a50bc3d34437d8f5e394cf8491799dcc2426bfe47e852bca59a58a226"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 67,
+   "from_size": 5672,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/fail-closed-guard-hardening-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "9181230e5fd120c675e9869ffaf338d69013a3d7aa19d4d652ee539fcb135ed8"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 120,
+   "from_size": 10127,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في fault-closure-and-learning-ops ولم يعد ضمن النطاق الحالي",
+   "path": "/home/ubuntu/skills/fault-closure-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "1854082dcd379d516ce948d6de9ec163ed38dfa0be6a54e3beeec992f10f522e"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 79,
+   "from_size": 4284,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في fault-closure-and-learning-ops ولم يعد ضمن النطاق الحالي",
+   "path": "/home/ubuntu/skills/fault-closure-ops/references/playbook.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "1eb87d92c8eed275b582f1d8074c8f922181ffc9f7df1f2651b7ee4b7d8ad590"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 71,
+   "from_size": 4118,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في fault-closure-and-learning-ops ولم يعد ضمن النطاق الحالي",
+   "path": "/home/ubuntu/skills/fault-closure-ops/references/schema.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "14715747b56a3a8f82239411bb10d4b1eea60e00f2eaef7afbddbee2c263e818"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 182,
+   "from_size": 8445,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في fault-closure-and-learning-ops ولم يعد ضمن النطاق الحالي",
+   "path": "/home/ubuntu/skills/fault-closure-ops/scripts/check_closure.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "be6a482ac789f43c6463530f17a2c21ddbb022d2129208062edd1133f5ec3577"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 89,
+   "from_size": 3851,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في fault-closure-and-learning-ops ولم يعد ضمن النطاق الحالي",
+   "path": "/home/ubuntu/skills/fault-closure-ops/scripts/check_portable_paths.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "b7ec9291320a3e33ba8441daf8d71efcbebb5d2b5d67e9a2241165beefbe3194"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 250,
+   "from_size": 14590,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في fault-closure-and-learning-ops ولم يعد ضمن النطاق الحالي",
+   "path": "/home/ubuntu/skills/fault-closure-ops/scripts/closure_round.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "de570e1e375ca3aaf7dc242530c9a5601c8d0b67561f7c7e7cd624c59bbab8cf"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 87,
+   "from_size": 3306,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في fault-closure-and-learning-ops ولم يعد ضمن النطاق الحالي",
+   "path": "/home/ubuntu/skills/fault-closure-ops/scripts/insert_live_evidence.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "8cfb65bf15a0af25b3077860df4069f955bd4538f94ba2af1a5e6e0ef201ab87"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 133,
+   "from_size": 5776,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في fault-closure-and-learning-ops ولم يعد ضمن النطاق الحالي",
+   "path": "/home/ubuntu/skills/fault-closure-ops/scripts/propose_tightening.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "08537a85fe1cb5553ef9947c6c14799d811e56f9d91881a89e38dedcf5f1aadb"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 102,
+   "from_size": 4459,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في fault-closure-and-learning-ops ولم يعد ضمن النطاق الحالي",
+   "path": "/home/ubuntu/skills/fault-closure-ops/scripts/record_fault.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "b0e3757f795b27eab3cb0156ee2ed01cbdc4fb40fd6105de194e2a91c68861c5"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 130,
+   "from_size": 7140,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في fault-closure-and-learning-ops ولم يعد ضمن النطاق الحالي",
+   "path": "/home/ubuntu/skills/fault-closure-ops/scripts/test_closure_gate.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "64865501cd65509065f1d13e778b7acbe9f690b41c997a26c41fcc562a150dc0"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 72,
+   "from_size": 7932,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/gate-authoring-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "7cc56c0225672490f003c20c456e64a3a0d4bff95354a31f89dd9f6afe3be514"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 153,
+   "from_size": 6363,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/gate-authoring-ops/references/evidence.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "b8182e2f63b2a0fa2c22eb442b29e01badd638e8817e1c5e6f9a1f68d51541bf"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 40,
+   "from_size": 3471,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/gate-authoring-ops/references/gate-checklist.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "e761074fe121a2548f7268ae9520f5100347105de9d66d6e0941b5dbd70f5468"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 88,
+   "from_size": 3948,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/gate-authoring-ops/scripts/scaffold_gate.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "264ed7ec37cc055e07a789406d5915e36ea8f1546ab4be2ddc821230121b5645"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 102,
+   "from_size": 4178,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/gate-authoring-ops/scripts/wire_into_runner.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "ad76c82dd8cf5c7c87bd3df41030c0c23866e4440ab95acf1b5321049b951b81"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 99,
+   "from_size": 10884,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/generated-artifact-boundary-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "9209e17381d03706432bf6053bca0267aa19bdc8304d84ec6848e3c086f40839"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 63,
+   "from_size": 4106,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/generated-artifact-boundary-ops/references/measured-cases.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "ccb81a12a0ed1866b0e6d7353233653c3839c309e50c36e97b9f0287df933b29"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 181,
+   "from_size": 7818,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/generated-artifact-boundary-ops/scripts/audit_generated_boundary.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "144cda1b262294fa40b1fdf4e1272a8f762db2ad38e47725975d1c6cca2083e5"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 76,
+   "from_size": 3030,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/generated-artifact-boundary-ops/scripts/check_classification_matrix.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "5296b7bd5645359e73beacfc44ed80a8c1eb39cd74455663d67f898915ca215c"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 65,
+   "from_size": 8359,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/hermetic-live-probe-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "12425ac30b2c6c038931669f301f812d102a1e06d26b2cb22438ad01f5a1bb94"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 577,
+   "from_size": 21557,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/hermetic-live-probe-ops/scripts/live_probe_batch.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "2bd803b6f0e6571921e4f8763e1fad4aa91f7c65f39de53979d99e7163754190"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 96,
+   "from_size": 12123,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/live-visual-audit-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "e31982f8803af18048549fe4b233e8fb821cb937b3ba52155511b3bd408bd5ef"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 27,
+   "from_size": 2434,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/live-visual-audit-ops/references/evidence-checklist.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "d774374ead15c73993e8e50f041906ad463927dd60bb5d5edd94b20ad11e2914"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 31,
+   "from_size": 2713,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/live-visual-audit-ops/references/severity-rubric.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "d15913147efe8ac891d6ee296649160c8cf8132f8f11919bb5e51d39bf8031da"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 209,
+   "from_size": 9344,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/live-visual-audit-ops/scripts/audit_live_surfaces.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "f3fd51f6d2567e39bcb9c62b5380fb54bf76acea47fa76a77837b04446d7ef1f"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 248,
+   "from_size": 9351,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/live-visual-audit-ops/scripts/verify_pdf_index.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "ba060f1ddf9f5dde60bc1fb22129b23dc8c2cf7e446c1f3991498c2569633fd9"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 219,
+   "from_size": 9438,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/live-visual-audit-ops/scripts/verify_range_bidi.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "62ca6bc56a3a145e234bb5b53911e1ae606757911f16347e5ace62d33d466764"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 61,
+   "from_size": 5634,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/manual-visual-check-automation-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "68065aa2632ef7f9360878c7b36cf7309215f18691ec8ff955ca0a186a0a6c41"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 45,
+   "from_size": 5094,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/map-readability-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "85de51f22a8c31376cd93b27ef69a336e037bee57f23d22ead7eac036375a65d"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 69,
+   "from_size": 3698,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/map-readability-ops/scripts/measure_map_readability.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "55e86ef81868593c86568a9080aaa565b1e5b0aabc1126fbc1f4ca6164d23445"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 79,
+   "from_size": 10929,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/map-section-upgrade-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "eb08cf446bae925d5c6ef41f5c1d6a70a088a07b2d75049b8d1b88ecf3191e91"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 26,
+   "from_size": 1775,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/map-section-upgrade-ops/references/gate-surface-contract.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "ea080547ac7b6e0de1924adfd17ebea12476d9e9f79acdfb7f4db5960806abb4"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 64,
+   "from_size": 2552,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/map-section-upgrade-ops/scripts/check_surface_extraction.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "fa880ce3503b1e20a46d08e52d694e739c2e0fd32282f1bfecd9921fbbf12b8e"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 81,
+   "from_size": 4154,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/map-section-upgrade-ops/scripts/measure_map_layers.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "d5536efd7e05cc2d85ef75299d66bc9405ddab4802807e88adee46ec84130977"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 34,
+   "from_size": 2055,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/map-section-upgrade-ops/scripts/measure_map_layers_live.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "d3bea5189eb5a119efcbf577c33a57ff66f9b7307f29234566466721514653a8"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 65,
+   "from_size": 5307,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/measured-defect-closure-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "0a0a7f2e8d25e05eb2b230367c850e6906bedc8e591fd7fe3a91866f4848c8ce"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 80,
+   "from_size": 8779,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/number-binding-guard-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "8ea36e9d9a060076240061e7671d4c933c25012a287e1cc91fd8591ed42aafff"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 25,
+   "from_size": 2811,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/number-binding-guard-ops/references/lessons.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "24541844ec4a4bcfee5c633d291eb517c7a5414b08b22620c4b541e79ca898b5"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 45,
+   "from_size": 4049,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/number-binding-guard-ops/references/playbook.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "87c201c08faf9cda43da565e2bc6ec6db55fb3865b14608d8ee602f1cda1e99b"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 69,
+   "from_size": 2981,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/number-binding-guard-ops/scripts/binding_selftest.sh",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "cfa1118fd0cdfd8473da69d223af4214ccb41e46209c3a674050e51d2bbb3df2"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 305,
+   "from_size": 13342,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/number-binding-guard-ops/scripts/number_binding_template.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "e5b1f091fe7502bce75475b6e9b26d4f21750b69d5b9a5a84b6126bcbda9e62e"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 66,
+   "from_size": 7134,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/pipeline-stop-recovery-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "8bad5085e7132a9cfe441bbd87f4938e9d1632d983f6ea01f14d55f3702bef56"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 54,
+   "from_size": 4560,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/pipeline-stop-recovery-ops/references/playbook.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "cc5b446a779e26804093a0d62232fc7526bfb7245cb895d517d6b159168a6271"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 58,
+   "from_size": 2396,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/pipeline-stop-recovery-ops/scripts/stop_triage.sh",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "ea4d63c4f44eb68d3a519a19636af01d031ce82df0ada5d6650f39a54c3dc185"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 57,
+   "from_size": 5981,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/print-freeze-verify-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "826e8a11745eef6c74c004644a666cfed1785104e3b8340126507335f5500b37"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 18,
+   "from_size": 2123,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/print-freeze-verify-ops/references/frozen-css.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "9bd6576e32ae5e82441bbd6eb7b575b8c41327bd4071c0d54bf32c792519bbd5"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 30,
+   "from_size": 3987,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/print-freeze-verify-ops/references/frozen-print-profile.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "6436a733ca7d1cf78e997f1d14f2c6b736002138dc6b20cced1feca08f97be7b"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 21,
+   "from_size": 4029,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/print-freeze-verify-ops/references/propose_tightening-output.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "4af06e59c44abe93de869250178c1fb84061a995d94d92d24c107fc6e132514a"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 159,
+   "from_size": 8374,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/print-freeze-verify-ops/scripts/propose_tightening.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "6384f2c75a86a7e5693897e92297003c2ecffbf62e5183adb87c04d27bf1a377"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 481,
+   "from_size": 25604,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/print-freeze-verify-ops/scripts/tools/export_report_assets.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "0d2fb8ac06464aef80f3451af7ad224d1e5be9a5f3e5382cd4acdf94037c94d8"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 39,
+   "from_size": 1898,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/print-freeze-verify-ops/scripts/validators/_guard.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "6207157bab105f149169adbd84ce629675928ea72f4ae67235052f7a5a7b57b3"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 286,
+   "from_size": 13349,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/print-freeze-verify-ops/scripts/validators/check_pdf_format.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "44ace1af1df636d4ba92dcd27b59957fb9aa370e1bd73d721c5656afc98ae79a"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 396,
+   "from_size": 18056,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/print-freeze-verify-ops/scripts/validators/check_print_quality.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "17ff329c802d043cfe40b4e8ae5d76fe77e469fc9e34b633a785c60cd08fe6b9"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 89,
+   "from_size": 9994,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/print-layout-gate-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "28ee95440c3a8ac3c40f8adf49b61e74ff83254144c5bd418766334e3697dbaa"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 57,
+   "from_size": 4578,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/print-layout-gate-ops/references/playbook.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "eb939b6ba26514c91add833ca2f1fc86a819c02ddec6261e5c2bdfca54a4881e"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 89,
+   "from_size": 4320,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/print-layout-gate-ops/scripts/measure_block.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "71665b7b9e9d36e41e2fd33661bbbe6dedd2093417ad762ae257751edb73c0d6"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 127,
+   "from_size": 5834,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/print-layout-gate-ops/scripts/measure_pdf_pages.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "5fe22ab8327704851b7d7bffde580dc9e22041907ae80fa13d22e9747f156ed5"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 123,
+   "from_size": 6126,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/print-layout-gate-ops/scripts/measure_print_flow.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "5027f97ed2d375ffd39b9b5cd970a0f91da94aa0dd11dad23155a6319b7467a6"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 131,
+   "from_size": 6627,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/print-layout-gate-ops/scripts/measure_report_print_flow.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "dadeaa3a26490b2fc4a771cfc0d630abf3d31f45a44bd957ce1cc9aada3d202b"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 101,
+   "from_size": 4434,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/print-layout-gate-ops/scripts/refreeze_print_css.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "40934a4e91f6c5df6f44b018d212d0bd206d3136e9537f89f717af3b97067aec"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 68,
+   "from_size": 7302,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/report-content-fidelity-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "ad749b53a7dd36652b8589ffd842d2fd4f3134388afc45b9619f172fef6eaf4d"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 68,
+   "from_size": 5439,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/report-content-fidelity-ops/references/failure-classes.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "41e0bf27afac7ce05801d2bd7449a42e3ed07342094256390ef71ffb2eb401f4"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 108,
+   "from_size": 4938,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/report-content-fidelity-ops/scripts/check_surface_fidelity.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "01582482229e0f0bf63bc50d098602aa510b122aaa45bd50a537d2bb8f5adfc7"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 14,
+   "from_size": 700,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/report-content-fidelity-ops/scripts/inject_fidelity_break.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "dbbaf8200f359cb41f6ed8a0b24f89c1e1ac824958b66a186e73cc1a4b55f1d5"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 17,
+   "from_size": 1221,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/report-content-fidelity-ops/scripts/negative_test_fidelity.sh",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "eeaf15097c60b2af88f1857d45c6e1e12dc004d9ca725d6d2e018b9d80815bac"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 65,
+   "from_size": 5160,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/report-surface-policy-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "218965cb7e0bc370d6833b3880310c406897d6d67a3952790af21c617f9aeb19"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 23,
+   "from_size": 2939,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/report-surface-policy-ops/references/policy-mechanism.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "b69f33c32eb5ec486741f616461e62f9ecb71c24fe6f8c45d5f3a3a45b54c23e"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 14,
+   "from_size": 1659,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/report-surface-policy-ops/references/proposed-tightening.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "a83215e6d03e46dfbcb16995ca7989549a1e0216a32ff74de8aab2f3ebabb9be"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 114,
+   "from_size": 7635,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/report-surface-policy-ops/scripts/audit_style_coverage.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "19958f20fb7e958e076ed794f2ccd46c6fef53132cfc152da3557fcbba7e0bca"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 111,
+   "from_size": 6488,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/report-surface-policy-ops/scripts/check_additions_surface.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "567fe7cac045eb9c4b6e1a11c0788efabfc12b64d2ef46b9baa0bb1c4a987803"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 39,
+   "from_size": 3738,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/report-surface-policy-ops/scripts/propose_tightening.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "9c61cd3aca843181a797abee74b9150d80bc5ea17859b7768f50ed55d7440f87"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 88,
+   "from_size": 9186,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/runbook-closed-fail-repair-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "36069d623961ba76a3ddc238f93c3373fc085e15c1a150d14cc4de98045837fe"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 63,
+   "from_size": 5347,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/runbook-closed-fail-repair-ops/references/measured-cases.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "1f13936cfb2974345a1cbda8dd39cb82496e8fb2e05391a81a5668f5c6ea96ac"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 128,
+   "from_size": 6179,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/runbook-closed-fail-repair-ops/scripts/diagnose_closed_fail.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "1cff7082cb0682517a1b7b5c97fa766436599d801a688fa6ec87a322eaba9639"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 83,
+   "from_size": 11778,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في runbook-operations-ops ولم يعد ضمن النطاق الحالي",
+   "path": "/home/ubuntu/skills/runbook-completion-closure-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "bc46eae25480a611ebefe235d9abee5d6972208524caaff5fbd2f29219632157"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 59,
+   "from_size": 10822,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في runbook-operations-ops ولم يعد ضمن النطاق الحالي",
+   "path": "/home/ubuntu/skills/runbook-completion-closure-ops/references/playbook.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "139b84d3313f7e8883bc71f309f300b43c42dbe200be74b76d78dddb7605700c"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 88,
+   "from_size": 5195,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في runbook-operations-ops ولم يعد ضمن النطاق الحالي",
+   "path": "/home/ubuntu/skills/runbook-completion-closure-ops/scripts/close_check_selftest.sh",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "d03f34d57a4dd002235f1210272f2d32e0df353cbc6b48c66d873894473530b1"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 136,
+   "from_size": 6211,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في runbook-operations-ops ولم يعد ضمن النطاق الحالي",
+   "path": "/home/ubuntu/skills/runbook-completion-closure-ops/scripts/recipe_lint.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "d8b72af5e7c23c7723a655567bfecf9fcf53f41791567e9f2b48b5f52ea945a2"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 109,
+   "from_size": 4717,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في runbook-operations-ops ولم يعد ضمن النطاق الحالي",
+   "path": "/home/ubuntu/skills/runbook-completion-closure-ops/scripts/round_close_check.sh",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "51f47fcc8b88a5bfe7cc861b9ddb91cd8060bfda82219fa0df6fcb0858283ff2"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 203,
+   "from_size": 11889,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في runbook-operations-ops ولم يعد ضمن النطاق الحالي",
+   "path": "/home/ubuntu/skills/runbook-completion-closure-ops/scripts/run_to_completion.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "34a3a788539040c6e21bb5cf25830d0d99c29efa092c3bc1d34c9c95a97a78ae"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 72,
+   "from_size": 5867,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في runbook-operations-ops ولم يعد ضمن النطاق الحالي",
+   "path": "/home/ubuntu/skills/runbook-execution-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "817c6df38cc91ef1b176bb327068b24c2622789c37ada323decab360afba827d"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 188,
+   "from_size": 7281,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في runbook-operations-ops ولم يعد ضمن النطاق الحالي",
+   "path": "/home/ubuntu/skills/runbook-execution-ops/references/evidence.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "df19913b87a3b99643346b1b85687394d3bc1090911ea89096a1a2610a2a254e"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 22,
+   "from_size": 3524,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في runbook-operations-ops ولم يعد ضمن النطاق الحالي",
+   "path": "/home/ubuntu/skills/runbook-execution-ops/references/exit-codes.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "60defe43582e10322508d71aff2ccc7d0f8928326fe9559c04b068863c889e4f"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 21,
+   "from_size": 2469,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في runbook-operations-ops ولم يعد ضمن النطاق الحالي",
+   "path": "/home/ubuntu/skills/runbook-execution-ops/references/self-learning.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "9cf0acbe0ce3300a6b30152159b8538b1f0931e4e1cbba8b5a468a7bc66b94bd"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 123,
+   "from_size": 5072,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في runbook-operations-ops ولم يعد ضمن النطاق الحالي",
+   "path": "/home/ubuntu/skills/runbook-execution-ops/scripts/record_lesson.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "840e6f2e456f6cf4d3af018410fb363dd4feb4be72da54ade3fcd6af0cad30d7"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 283,
+   "from_size": 11007,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في runbook-operations-ops ولم يعد ضمن النطاق الحالي",
+   "path": "/home/ubuntu/skills/runbook-execution-ops/scripts/runbook_driver.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "ec498f89cef3f71b7e357bc900dbbb969d55d99c55b4cbc9907e63a1d642e154"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 136,
+   "from_size": 17170,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/self-learning-loop-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "add4d225295a3ae1234d8ef223cdae66d74fbbe2603278b95e1711c40286803f"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 33,
+   "from_size": 3409,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/self-learning-loop-ops/references/fault-taxonomy.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "b65afa73a36fb9653ace2b50965a51f1baae4bafe6cc77965fb805b06c2e8466"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 80,
+   "from_size": 7339,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/self-learning-loop-ops/references/wiring-and-artifact-repair.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "7a4f4fec08d4eb9a22899da8351d8b65859c9aa8fe36607b27252ac9950f7435"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 70,
+   "from_size": 2722,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/self-learning-loop-ops/scripts/build_fault_index.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "140433d5a300d7d2048cfa01443634d9019319ae414bede8f38a00ee2641f247"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 100,
+   "from_size": 4424,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/self-learning-loop-ops/scripts/check_barrier_wiring.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "8a3dd7f2dd9aff3cbdfd14fa696ea5372582a40982adeac725e6349f050a21aa"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 66,
+   "from_size": 3601,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/self-learning-loop-ops/scripts/close_fault.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "3967b2f23d492a5a3eb760ff64c6c4520957d03a8037c6f85fe37577f6d02f5c"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 66,
+   "from_size": 2612,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/self-learning-loop-ops/scripts/loop_report.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "4d2cf9007f4f2106dee9b54b7e5200ebcee04a547e620470a7bc7576edd1d31a"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 65,
+   "from_size": 2551,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/self-learning-loop-ops/scripts/normalize_learning_log.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "a3a58de36fb2bba01c427faea44860f2475672413dd88c521171caf83beff000"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 82,
+   "from_size": 4042,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/self-learning-loop-ops/scripts/verify_closure.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "799466c4820cf0945ff90eeb2ecf0dc325e64173444cdae54552822da074f7fd"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 85,
+   "from_size": 7990,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/server-repo-parity-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "74c4a8853419dc8486ca73ed2f1bda2a3c345632eaa368c38e965d712cb2ce65"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 239,
+   "from_size": 21709,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/server-repo-parity-ops/references/execution-output.txt",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "98506ce220c1b3904c546654d414bff80a43feae549e4feae5c9b3ecfe0877a4"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 30,
+   "from_size": 2010,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/server-repo-parity-ops/references/parity-runbook.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "e16dee4678f57ee875722bae5e60eb7398ca00ad99881dffec71195ffe36b0cb"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 23,
+   "from_size": 2371,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/server-repo-parity-ops/references/propose-tightening-output.txt",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "3368a9892374cd8bc9bc16fbe74ba73ee37ccc56847990e900d2122b43fdb75f"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 106,
+   "from_size": 5372,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/server-repo-parity-ops/scripts/propose_tightening.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "45e8fb3bbe0c56ff1c779bc10f26b7d8d153a06f7162a2381f334707edd8e656"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 125,
+   "from_size": 6279,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/server-repo-parity-ops/scripts/tools/apply_from_github.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "a9b553240ce7f7bad3b818f342fc46d20d427f7d98723caebdc4858bed6aacfa"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 146,
+   "from_size": 5247,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/server-repo-parity-ops/scripts/tools/code_paths.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "13c88fa221b2cde0a9b96f2b51c45d551f135e5b32a8d59e0fc1d486f4bbec81"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 264,
+   "from_size": 13247,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/server-repo-parity-ops/scripts/tools/github_backup.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "1e9af4cb11c6f856a36c646f42ff5b31fdf91dccabf2c39408a757b1095366cc"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 53,
+   "from_size": 2228,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/server-repo-parity-ops/scripts/tools/sync_to_repo.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "05c31bb31d0f395e862864b6e542b2c4f7a78a8f11209c6cf9c9d33717087b71"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 39,
+   "from_size": 1898,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/server-repo-parity-ops/scripts/validators/_guard.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "6207157bab105f149169adbd84ce629675928ea72f4ae67235052f7a5a7b57b3"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 305,
+   "from_size": 15581,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/server-repo-parity-ops/scripts/validators/check_backup_parity.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "9dda5018e7147923928a6ea8d943fee53e3ba8011076e46b794b443bd12931cf"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 99,
+   "from_size": 4092,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/server-repo-parity-ops/scripts/validators/check_portable_paths.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "6806742b6c9f9fa501b48b4af1fac79d17bf774159a491cd7df231b462c8b9ec"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 60,
+   "from_size": 8718,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/side-effects-interface-audit-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "6473a2cad44fb7c24d3824f76a7a6eee6f093e78c1fca33f01aa80a740e059b5"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 242,
+   "from_size": 11131,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/side-effects-interface-audit-ops/scripts/audit_tool_side_effects.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "23ceb4ddaf2fb24a83182240c8769cc787c1fd9fa54040ce3cb7e3385307f0a8"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 61,
+   "from_size": 6012,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/site-publish-live-verify-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "bb7078999d0a1c985f33705380ba480aa15a9d718f885af370f73621ab0e3bd6"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 19,
+   "from_size": 2756,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/site-publish-live-verify-ops/references/proposed-tightening.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "0f547768dc2cf3fde93688defc2d400c7c9e91864b359a20f56f6aee25882c23"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 29,
+   "from_size": 2405,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/site-publish-live-verify-ops/references/runbook.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "1ae9bc131836b15083870baebee112c93cce63d2cad1ff75e2f9bf360b901e70"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 160,
+   "from_size": 7505,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/site-publish-live-verify-ops/scripts/check_live.sh",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "c410d30e805ebd5c30837ed186e3dcb78deb4dbf4dc7e653bae975b8cb26f3d5"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 76,
+   "from_size": 5489,
+   "last_seen": "2026-11-06",
+   "note": "مسار مهارة متقاعد/مدمج غير موجود في النطاق الحالي؛ لا يُخفى أصل موجود",
+   "path": "/home/ubuntu/skills/site-publish-live-verify-ops/scripts/propose_tightening.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "1f68a143e2ea0f86b54bf9e428c2d53fa8c8fc3faf845966918f5a39a4a85032"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 71,
+   "from_size": 7050,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في tool-contract-check-ops الحالي غير الموجود كأصل مستقل في هذه البيئة",
+   "path": "/home/ubuntu/skills/tool-contract-check-ops/SKILL.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "b1a0532fee55afd9a93901efeadd5ee33cdd655571391938f4535a9693068169"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 237,
+   "from_size": 12283,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في tool-contract-check-ops الحالي غير الموجود كأصل مستقل في هذه البيئة",
+   "path": "/home/ubuntu/skills/tool-contract-check-ops/references/evidence.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "90392fd63606d87175e37cc6ba166c1dfe00d0644bf46558962fbf5401acf8bd"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 24,
+   "from_size": 3385,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في tool-contract-check-ops الحالي غير الموجود كأصل مستقل في هذه البيئة",
+   "path": "/home/ubuntu/skills/tool-contract-check-ops/references/exit-codes-and-contracts.md",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "68905c8553cffbc971b73105808d9fd070b9b6b0dbe9b39413af782c5f0c68a3"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 294,
+   "from_size": 12798,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في tool-contract-check-ops الحالي غير الموجود كأصل مستقل في هذه البيئة",
+   "path": "/home/ubuntu/skills/tool-contract-check-ops/scripts/cli_contract.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "d9e0d6781e3066fe9aca732546043af78529e6c1ba54c9879126cca9679ff31b"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 182,
+   "from_size": 8477,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في tool-contract-check-ops الحالي غير الموجود كأصل مستقل في هذه البيئة",
+   "path": "/home/ubuntu/skills/tool-contract-check-ops/scripts/duplicate_scan.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "4cb8108c7c13a26406b0d171713dd5fb5d8c7a92194dcb1e1efa3d26b3d40992"
+  },
+  {
+   "date": "2026-11-06",
+   "from_lines": 80,
+   "from_size": 3460,
+   "last_seen": "2026-11-06",
+   "note": "مدمج في tool-contract-check-ops الحالي غير الموجود كأصل مستقل في هذه البيئة",
+   "path": "/home/ubuntu/skills/tool-contract-check-ops/scripts/exit_code_read.py",
+   "reason": "ك-528: قرارات إزالة مدخلات أرضية مهارات متقاعدة/مدمجة وقبول انكماشات مقاسة؛ فحص النطاق الحالي يبقى فشلًا مغلقًا.",
+   "sha256": "709639b2cb9d8462b6ab039eaafb037681642237bee55327ca0af65bfb5202ff"
+  }
+ ],
+ "updated_at": "2026-11-06T23:36:34.389667+00:00",
  "version": 1
 }

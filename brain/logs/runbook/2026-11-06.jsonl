@@ -157,3 +157,6 @@
 {"step": "Q015", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-06/Q015.log", "attempt": 1, "ts": "2026-11-06T18:41:24Z"}
 {"step": "Q020", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-06/Q020.log", "attempt": 1, "ts": "2026-11-06T18:41:24Z"}
 {"step": "D070", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-06/D070.log", "ts": "2026-11-06T18:42:22Z"}
+{"step": "D070", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-06/D070.log", "ts": "2026-11-06T18:48:12Z"}
+{"step": "D070", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-06/D070.log", "attempt": 1, "ts": "2026-11-06T19:05:33Z"}
+{"step": "G066", "status": "done", "rc": 0, "outputs": {"audit/measurements/gate-audit-2026-11-06.json": "a6668250934c73d51ac72e9cfcaef82d26b34d011c251d41a3ff11a612ed6f11", "audit/measurements/gate-audit-2026-11-06.json.sha256": "6cd8cdcba2a70a116dc420f95474b2768412bd04359eb17bb6e3bfa20df6d971"}, "log": "logs/runbook/2026-11-06/G066.log", "attempt": 1, "ts": "2026-11-06T20:07:48Z"}
