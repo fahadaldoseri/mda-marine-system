@@ -44,14 +44,22 @@ def load_allowlist(root: Path) -> dict[str, str]:
     return out
 
 
+def default_repo_for(root: Path) -> Path:
+    """يختار مستودع Git الأب قبل fallback المستودع الشقيق القديم."""
+    parent = root.parent
+    if (parent / ".git").exists():
+        return parent
+    return parent / "mda-marine-system"
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", default=str(Path(__file__).resolve().parent.parent))
-    ap.add_argument("--repo", default=None, help="مستودع GitHub المحلي (افتراضيًا الشقيق mda-marine-system)")
+    ap.add_argument("--repo", default=None, help="مستودع GitHub المحلي (افتراضيًا Git الأب أو الشقيق القديم)")
     args = ap.parse_args()
 
     root = Path(args.root).resolve()
-    repo = Path(args.repo).resolve() if args.repo else (root.parent / "mda-marine-system")
+    repo = Path(args.repo).resolve() if args.repo else default_repo_for(root)
     if not (repo / ".git").exists():
         print(f"✘ لا مستودع في {repo} — تعذّر الفحص (رمز 2)")
         return 2

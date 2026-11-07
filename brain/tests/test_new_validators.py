@@ -152,6 +152,17 @@ def code_tracking() -> None:
         check("فاحص تتبّع الشيفرة يمرّ بعد الإزالة",
               run([sys.executable, str(v), "--root", str(root), "--repo", str(repo)]) == 0)
 
+        server_repo = Path(td) / "mda-marine-system"
+        server_root = server_repo / "brain"
+        (server_root / "tools").mkdir(parents=True)
+        (server_root / "tools" / "known.py").write_text("print(2)\n", encoding="utf-8")
+        subprocess.run(["git", "init", "-q", str(server_repo)], capture_output=True)
+        subprocess.run(["git", "-C", str(server_repo), "add", "-A"], capture_output=True)
+        subprocess.run(["git", "-C", str(server_repo), "-c", "user.name=t", "-c", "user.email=t@t",
+                        "commit", "-qm", "t"], capture_output=True)
+        check("فاحص تتبّع الشيفرة يستدل على مستودع الجذر تلقائيًا",
+              run([sys.executable, str(v), "--root", str(server_root)]) == 0)
+
 
 def main() -> int:
     print("1) بوابة الأسرار")
