@@ -108,31 +108,70 @@
       "exact": [
         ".gitignore",
         "AGENTS.md",
-        "README.md"
+        "README.md",
+        "brain/.gitignore"
       ]
     }
   ],
   "roots": {
     "brain": {
-      "skip_dirs": ["__pycache__", ".git", "shots", "node_modules", ".pytest_cache", "backup-repo"],
-      "skip_files": ["state/webhook-secret.txt", ".env", ".env.local"]
+      "skip_dirs": [
+        "__pycache__",
+        ".git",
+        "shots",
+        "node_modules",
+        ".pytest_cache",
+        "backup-repo"
+      ],
+      "skip_files": [
+        "state/webhook-secret.txt",
+        ".env",
+        ".env.local"
+      ]
     },
     "site": {
-      "skip_dirs": ["__pycache__", ".git", "brain-backup", "dist", "shots", "node_modules", ".pytest_cache"],
-      "skip_files": [".env", ".env.local", ".env.production"]
+      "skip_dirs": [
+        "__pycache__",
+        ".git",
+        "brain-backup",
+        "dist",
+        "shots",
+        "node_modules",
+        ".pytest_cache"
+      ],
+      "skip_files": [
+        ".env",
+        ".env.local",
+        ".env.production"
+      ]
     }
   },
-  "junk_files": [".DS_Store", ".skill_versions.json"],
+  "junk_files": [
+    ".DS_Store",
+    ".skill_versions.json"
+  ],
   "repo": {
-    "only_prefixes": ["brain/backup-repo/", "docs/", ".gitignore", "AGENTS.md", ".github/", ".devcontainer/", "README.md"],
-    "extra_allow": ["skills/.skill_versions.json"],
+    "only_prefixes": [
+      "brain/backup-repo/",
+      "docs/",
+      ".gitignore",
+      "AGENTS.md",
+      ".github/",
+      ".devcontainer/",
+      "README.md"
+    ],
+    "extra_allow": [
+      "skills/.skill_versions.json"
+    ],
     "sanitized": [
       "brain/appendices/telegram-chat.json",
       "brain/appendices/telegram-subscriptions.json",
       "brain/appendices/telegram-targets.json",
       "brain/research/styles/sources/archive-reports.html"
     ],
-    "protected": ["brain/secrets/secrets.env"],
+    "protected": [
+      "brain/secrets/secrets.env"
+    ],
     "symlink_views": [
       "brain/web/blocks.py",
       "brain/web/build_report.py",
