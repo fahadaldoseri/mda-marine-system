@@ -104,7 +104,7 @@ def iter_tree(root: Path) -> list[str]:
 
 
 
-HISTORY_CURSOR = ".secrets-history-cursor.json"
+HISTORY_CURSOR = "logs/secrets-history-cursor.json"
 WINDOW = 262144  # نافذة قراءة التصحيحة
 
 
