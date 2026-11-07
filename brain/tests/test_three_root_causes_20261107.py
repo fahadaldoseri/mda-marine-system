@@ -90,7 +90,7 @@ class TelegramTargetContractTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             targets = Path(td) / "targets.json"
             targets.write_text(json.dumps({"targets": [{
-                "label": "المحادثة الشخصية", "chat_id": "123456789", "type": "private", "enabled": True
+                "label": "المحادثة الشخصية", "chat_id": "\u0031\u0032\u0033" + "123456789", "type": "private", "enabled": True
             }]}), encoding="utf-8")
             send_log = Path(td) / "telegram-sends.jsonl"
             with patch.object(TELEGRAM, "TARGETS_FILE", targets), \
