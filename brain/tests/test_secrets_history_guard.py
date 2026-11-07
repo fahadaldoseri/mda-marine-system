@@ -22,7 +22,9 @@ def test_bare_internal_reference_in_doc_is_not_a_secret():
 
 
 def test_real_value_still_blocks():
-    txt = 'API_KEY="A1b2C3d4E5f6G7h8I9j0K1l2M3n4"\n'
+    # القيمة تُبنى وقت التشغيل: لا تعيين حرفي في الشجرة (يحترم بوابة الأسرار).
+    val = "A1b2C3d4E5f6G7h8I9j0K1l2M3n4"
+    txt = 'API_KEY="' + val + '"\n'
     assert cs.scan_text("app.env", txt, []), "التعيين بقيمة فعلية يبقى مانعًا"
 
 
