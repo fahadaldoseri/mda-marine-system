@@ -5174,6 +5174,55 @@
       "gate_title": "تدقيق صلابة البوابات"
     },
     {
+      "id": "G068",
+      "title": "عقد مهارة القياس الحي وميزانية الاستثناءات",
+      "kind": "script",
+      "phase": "finalize",
+      "assert": [
+        {
+          "type": "cmd",
+          "command": [
+            "bash",
+            "-lc",
+            "test -s logs/runbook/{date}/G068.log"
+          ]
+        }
+      ],
+      "links": {
+        "rules": [
+          "ف1–ف5 — بوابة التحقق",
+          "ح1 — حلقة التعلم الذاتي"
+        ],
+        "files": [
+          "skills/rerun-step-to-live-parity-ops/SKILL.md",
+          "skills/rerun-step-to-live-parity-ops/references/closure-evidence-contract.md",
+          "tests/test_live_parity_skill_contract.py",
+          "tools/triage_closure_exceptions.py",
+          "validators/check_exceptions_burndown.py",
+          "audit/closure-exceptions.json"
+        ],
+        "folders": [
+          "audit/measurements"
+        ],
+        "gates": [
+          "validators/check_exceptions_burndown.py"
+        ],
+        "tests": [
+          "tests/test_live_parity_skill_contract.py"
+        ]
+      },
+      "on_fail": "stop",
+      "command": [
+        "bash",
+        "-lc",
+        "B=\"$PWD\"; export B; python3 \"$B/tests/test_live_parity_skill_contract.py\" || exit 2; python3 \"$B/tools/triage_closure_exceptions.py\" --root \"$B\" --write || exit 2; python3 \"$B/validators/check_exceptions_burndown.py\" --root \"$B\"; rc=$?; exit $rc"
+      ],
+      "ok_rc": [
+        0
+      ],
+      "warn_rc": []
+    },
+    {
       "id": "G067",
       "title": "ميزانية أداء البوابات (قياس صريح وفشل مغلق)",
       "kind": "script",
@@ -5437,11 +5486,16 @@
           "قرار المالك 2026-11-07: Manus قناة ثانية معلنة"
         ],
         "files": [
-          "tools/manus_channel_attempt.py"
+          "tools/manus_channel_attempt.py",
+          "state/manus-channel-{date}.json",
+          "validators/check_deployment_freshness.py"
         ],
         "gates": [],
         "tests": [
           "tests/test_manus_channel_verify.py"
+        ],
+        "folders": [
+          "state"
         ]
       },
       "on_fail": "continue",
