@@ -23,6 +23,7 @@
 import argparse
 import html
 import json
+import os
 import re
 import threat_card as TC
 import sys
@@ -36,12 +37,31 @@ HERO_KPI_MODERN_FROM = "2026-10-31"
 from pathlib import Path
 
 
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+
+
+def _brain_root() -> Path:
+    """حل جذر brain من البيئة أو من الشجرة الحالية، لا من اسم قديم ثابت."""
+    configured = os.environ.get("BRAIN_DIR") or os.environ.get("BRAIN")
+    if configured:
+        return Path(configured)
+    candidates = (
+        _REPO_ROOT / "brain",
+        _REPO_ROOT / "brain-marine-news",
+        _REPO_ROOT.parent / "brain-marine-news",
+    )
+    return next((candidate for candidate in candidates if candidate.is_dir()), candidates[0])
+
+
+BRAIN_ROOT = _brain_root()
+
+
 # نمط وسم نوع البند في القوائم — مصدر واحد يخدم القائمة المنظّمة والمرقّمة، فلا يتكرر النمط
 MARK_RE = re.compile(r"^\[(حقيقة|واقعة|تقدير تحليلي|تقدير|إعلامي|إعلام|خلفية|مراقبة)\]\s*")
 
 # رموز الدرجات داخل المادة المصدرية مفيدة للتدقيق، لكنها ليست لغة قارئ في صفحة «إضافات».
 # تُقرأ الأوصاف من خريطة حاكمة مشتركة مع المولّد الإنجليزي وفاحص التماثل.
-_GRADE_MAP_PATH = Path(__file__).resolve().parents[2] / "brain-marine-news" / "appendices" / "confidence-grade-map.json"
+_GRADE_MAP_PATH = BRAIN_ROOT / "appendices" / "confidence-grade-map.json"
 _GRADE_MAP = json.loads(_GRADE_MAP_PATH.read_text(encoding="utf-8"))["grades"]
 _INTERNAL_GRADE_LABELS = {code: entry["arabic"] for code, entry in _GRADE_MAP.items()}
 _INTERNAL_GRADE_RE = re.compile(
@@ -93,7 +113,7 @@ import codes  # سياسة عرض رموز الأحداث (كامل مرة وا�
 import screen_layer as SCR  # طبقة الشاشة: القرار فوق الطيّ، للشاشة فقط (لا تمسّ الطباعة)
 from card_measurements import count_rendered_fragment
 
-IMO_INCIDENTS_JSON = Path(__file__).resolve().parents[2] / "brain-marine-news" / "appendices" / "imo-incidents.json"
+IMO_INCIDENTS_JSON = BRAIN_ROOT / "appendices" / "imo-incidents.json"
 AR_MONTHS = {
     1: "يناير", 2: "فبراير", 3: "مارس", 4: "أبريل", 5: "مايو", 6: "يونيو",
     7: "يوليو", 8: "أغسطس", 9: "سبتمبر", 10: "أكتوبر", 11: "نوفمبر", 12: "ديسمبر",
@@ -1353,7 +1373,7 @@ def _public_status_replacements():
     if _PUBLIC_STATUS_REPLACEMENTS is not None:
         return _PUBLIC_STATUS_REPLACEMENTS
     candidates = [
-        Path(__file__).resolve().parents[2] / "brain-marine-news" / "appendices" / "forbidden-coinages.json",
+        BRAIN_ROOT / "appendices" / "forbidden-coinages.json",
         Path(__file__).resolve().parents[1] / "appendices" / "forbidden-coinages.json",
     ]
     pairs = {}

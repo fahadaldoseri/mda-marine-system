@@ -15,7 +15,7 @@
 الخروج: 0 مطابق · 1 مخالف · 2 إدخال ناقص.
 """
 from __future__ import annotations
-import argparse, collections, pathlib, re, sys
+import argparse, collections, html, pathlib, re, sys
 import json
 
 import os
@@ -121,6 +121,25 @@ TOKENS = [
 
 PAGE_KEYS = ("h1", "h2", "h3", "tables", "rows", "svg", "buttons", "list_items", "links", "collapsed")
 
+_HTML_HIDDEN_BLOCK_RE = re.compile(
+    r"<(?:script|style)\b[^>]*>.*?</(?:script|style)>", re.IGNORECASE | re.DOTALL
+)
+_HTML_COMMENT_RE = re.compile(r"<!--.*?-->", re.DOTALL)
+_HTML_TAG_RE = re.compile(r"<[^>]+>")
+
+
+def visible_text(markup: str) -> str:
+    """استخرج النص الذي يراه القارئ، دون style/script أو سمات الوسوم."""
+    body = markup.split("</head>", 1)[-1]
+    body = _HTML_HIDDEN_BLOCK_RE.sub(" ", body)
+    body = _HTML_COMMENT_RE.sub(" ", body)
+    return html.unescape(_HTML_TAG_RE.sub(" ", body))
+
+
+def visible_number_tokens(text: str) -> collections.Counter[str]:
+    """عدّ قيم الأرقام في النص المرئي لا في CSS/JavaScript أو سمات HTML."""
+    return collections.Counter(re.findall(TOKENS[-1][1], _without_grade_forms(text)))
+
 
 def counts(p: pathlib.Path):
     t = p.read_text(encoding="utf-8")
@@ -142,8 +161,8 @@ def counts(p: pathlib.Path):
 
 def page_stats(p: pathlib.Path) -> dict:
     h = p.read_text(encoding="utf-8")
-    body = re.sub(r"<script.*?</script>|<style.*?</style>", "", h.split("</head>", 1)[-1], flags=re.S)
-    text = re.sub(r"<[^>]+>", " ", body)
+    body = _HTML_HIDDEN_BLOCK_RE.sub("", h.split("</head>", 1)[-1])
+    text = visible_text(h)
     m_lang = re.search(r'<html[^>]*lang="([^"]+)"', h)
     m_dir = re.search(r'<html[^>]*dir="([^"]+)"', h)
     return {
@@ -160,6 +179,7 @@ def page_stats(p: pathlib.Path) -> dict:
         "lang": m_lang.group(1) if m_lang else "",
         "dir": m_dir.group(1) if m_dir else "",
         "arabic_runs": sorted({re.sub(r"\s+", " ", x.group(0)).strip() for x in ARABIC.finditer(text)}),
+        "visible_numbers": visible_number_tokens(text),
     }
 
 
@@ -224,6 +244,20 @@ def main() -> int:
             print(f"   {mark} {k}: عربي {A[k]} · إنجليزي {E[k]}")
             if A[k] != E[k]:
                 bad.append(f"بنية:{k}")
+        ar_numbers, en_numbers = A["visible_numbers"], E["visible_numbers"]
+        missing_numbers = sorted(set(ar_numbers) - set(en_numbers))
+        extra_numbers = sorted(set(en_numbers) - set(ar_numbers))
+        numbers_ok = not missing_numbers and not extra_numbers
+        print(
+            f"   {'✔' if numbers_ok else '✘'} أرقام الصفحة المرئية: "
+            f"عربي {len(ar_numbers)} قيمة · إنجليزي {len(en_numbers)} قيمة"
+        )
+        if missing_numbers:
+            print(f"      ناقص في الإنجليزية: {missing_numbers[:8]}")
+        if extra_numbers:
+            print(f"      زائد في الإنجليزية: {extra_numbers[:8]}")
+        if not numbers_ok:
+            bad.append("أرقام الصفحة المرئية")
         lang_ok = E["lang"] == "en" and E["dir"] == "ltr"
         print(f"   {'✔' if lang_ok else '✘'} لغة الصفحة الإنجليزية: lang={E['lang']} dir={E['dir']}")
         if not lang_ok:

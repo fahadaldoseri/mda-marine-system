@@ -40,12 +40,17 @@ def signature(path: Path) -> tuple[int, int, str]:
 
 def parser() -> argparse.ArgumentParser:
     project = Path(__file__).resolve().parent.parent
-    parent = project.parent
+    # جذر المستودع القانوني: مجلد المشروع نفسه (`.../mda-marine-system`)، لا مجلد
+    # يتكرر باسمه. الاشتقاق القديم (`parent / "mda-marine-system"`) كان يُنتج مسارًا
+    # متداخلًا غير موجود بعد نقل الجذر القانوني إلى `mda-marine-system/brain` (ك-561).
+    repo = project.parent
+    legacy_roots = (str(Path.home() / "brain-marine-news"),)
     ap = argparse.ArgumentParser(description=__doc__, allow_abbrev=False)
     ap.add_argument("--brain", type=Path, default=project / "skills")
     ap.add_argument("--server", type=Path, default=Path(os.environ.get("SKILLS_DIR", "/home/ubuntu/skills")))
-    ap.add_argument("--mirror", type=Path, default=parent / "mda-marine-system" / "skills")
-    ap.add_argument("--mirror-brain", type=Path, default=parent / "mda-marine-system" / "brain" / "skills")
+    ap.add_argument("--mirror", type=Path, default=repo / "skills")
+    ap.add_argument("--mirror-brain", type=Path, default=repo / "brain" / "skills")
+    ap.set_defaults(legacy_roots=legacy_roots)
     return ap
 
 
@@ -57,6 +62,12 @@ def main(argv: list[str] | None = None) -> int:
         "mirror": args.mirror.expanduser(),
         "mirror_brain": args.mirror_brain.expanduser(),
     }
+    # فشل مغلق: لا يُقبل سطح داخل الجذر الأرشيفي (قرار المالك: الجذر القانوني هو brain وحده)
+    for name, root in surfaces.items():
+        if any(str(root).startswith(legacy) for legacy in args.legacy_roots):
+            print(f"✘ سطح مهارات داخل جذر أرشيفي: {name}={root}")
+            print("   الحدّ: الجذر القانوني هو mda-marine-system/brain؛ صحّح خيارات الحارس")
+            return 2
     project_skills = sorted(
         path.parent.name for path in (surfaces["brain"]).glob("*/SKILL.md")
     )

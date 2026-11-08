@@ -57,7 +57,7 @@ with tempfile.TemporaryDirectory() as td:
     td = Path(td)
     import shutil as _sh
     _sh.copytree(B / "tools", td / "tools")
-    for d in ("sections", "appendices"):
+    for d in ("sections", "appendices", "runbook"):
         if (B / d).exists():
             _sh.copytree(B / d, td / d, dirs_exist_ok=True)
     (td / "validators").mkdir(exist_ok=True)

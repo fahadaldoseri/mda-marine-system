@@ -126,6 +126,17 @@
         "brain/audit/مصفوفة-التتبع.md",
         "brain/audit/closure-exceptions.json"
       ]
+    },
+    {
+      "id": "generated_blocks",
+      "policy": "informational",
+      "markers": [
+        {
+          "start": "<!-- AUTO-LESSONS:START",
+          "end": "<!-- AUTO-LESSONS:END -->"
+        }
+      ],
+      "note": "كتل يكتبها مولّد داخل ملف حاكم (tools/skill_lessons.py)؛ التغيير المحصور فيها لا يمنع النسخة الاحتياطية."
     }
   ],
   "roots": {

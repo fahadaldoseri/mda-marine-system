@@ -132,6 +132,15 @@ def test_successful_pages_push_is_recorded_with_hash_and_redirect_metadata(
 
     def fake_run_command(args: list[str], **kwargs: object) -> tuple[int, str]:
         del kwargs
+        if args[:3] == ["gh", "auth", "status"]:
+            return 0, "Logged in to github.com"
+        if args[:3] == ["gh", "repo", "view"]:
+            return 0, json.dumps({
+                "nameWithOwner": "fahadaldoseri/seawatch-live",
+                "defaultBranchRef": {"name": "main"},
+                "url": "https://github.com/fahadaldoseri/seawatch-live",
+                "visibility": "PUBLIC",
+            })
         if args[1].endswith("publish_site.sh"):
             (logs / f"publish-{date}.json").write_text(
                 json.dumps({"status": "ok", "rc": 0, "head": "pages-head"}), encoding="utf-8"
@@ -180,6 +189,15 @@ def test_failed_pages_push_falls_back_to_raw_githack(
 
     def fake_run_command(args: list[str], **kwargs: object) -> tuple[int, str]:
         del kwargs
+        if args[:3] == ["gh", "auth", "status"]:
+            return 0, "Logged in to github.com"
+        if args[:3] == ["gh", "repo", "view"]:
+            return 0, json.dumps({
+                "nameWithOwner": "fahadaldoseri/seawatch-live",
+                "defaultBranchRef": {"name": "main"},
+                "url": "https://github.com/fahadaldoseri/seawatch-live",
+                "visibility": "PUBLIC",
+            })
         if args[1].endswith("publish_site.sh"):
             (logs / f"publish-{date}.json").write_text(
                 json.dumps({"status": "failed", "rc": 2, "head": "pages-head"}), encoding="utf-8"
@@ -215,6 +233,7 @@ def test_failed_pages_push_falls_back_to_raw_githack(
 
     monkeypatch.setattr("publish_channels.run_command", fake_run_command)
     monkeypatch.setattr("publish_channels.verify_live_url", fake_verify_live_url)
+    monkeypatch.setattr("publish_channels.PAGES_PROPAGATION_DELAYS", (0,))
     assert publish(tmp_path, date) == 0
     record = json.loads((logs / f"publish-{date}.json").read_text(encoding="utf-8"))
     assert record["status"] == "ok"

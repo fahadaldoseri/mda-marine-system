@@ -29,14 +29,16 @@ DEFAULT_DATE = '2026-11-07'
 def load_json(p: pathlib.Path):
     try:
         return json.loads(p.read_text(encoding='utf-8'))
-    except Exception:  # noqa: BLE001
+    except (OSError, json.JSONDecodeError, UnicodeDecodeError):
+        # ملف مفقود أو غير صالح: يُعاد None ويُعامل كغياب دليل لا كخطأ مبتلع
         return None
 
 
 def text(p: pathlib.Path) -> str:
     try:
         return p.read_text(encoding='utf-8')
-    except Exception:  # noqa: BLE001
+    except (OSError, UnicodeDecodeError):
+        # ملف مفقود أو ترميز غير سليم: يُعاد نص فارغ ويُعلن غياب الدليل صراحةً
         return ''
 
 
@@ -268,4 +270,6 @@ def main() -> int:
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)

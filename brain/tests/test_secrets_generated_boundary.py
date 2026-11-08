@@ -30,7 +30,7 @@ def test_generated_cache_holding_token_shape_does_not_block():
         env = {
             "PATH": "/usr/bin:/bin",
             "BRAIN_DIR": str(BRAIN),
-            "SITE_DIR": "/home/ubuntu/seawatch",
+            "SITE_DIR": str(pathlib.Path.home() / "seawatch"),
             "BACKUP_REPO_DIR": "/home/ubuntu/mda-marine-system",
         }
         r = subprocess.run([sys.executable, str(SCAN), "--mode", "strict"],

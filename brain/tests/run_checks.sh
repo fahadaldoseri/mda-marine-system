@@ -303,8 +303,9 @@ fi
 echo "28) عقود الحراس: موجب + سالب لكل حارس مرشَّح"
 t "عقود الحراس الستة عشر" python3 "$B/tests/test_gate_guard_contracts.py"
 
+t "لا وسيط خارجي في مسار الإرسال" python3 tests/test_no_external_relay_20261107.py
+t "تماثل الأرقام المرئية: موجب + سالب" python3 "$B/tests/test_en_parity_visible_numbers.py"
 echo "----- الحصيلة -----"
 printf '  نجح: %s · فشل: %s\n' "$PASS" "$FAIL"
 [ "$FAIL" -eq 0 ] || exit 1
 exit 0
-t "لا وسيط خارجي في مسار الإرسال" python3 tests/test_no_external_relay_20261107.py

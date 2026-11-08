@@ -16,7 +16,19 @@ DEFAULT_REGISTRY = ROOT / "appendices" / "card_registry.json"
 CONTRACT_LINE = "✔ بطاقة الفروع الثلاثة: العناوين والعدادات والمراسي متطابقة عربيًا وإنجليزيًا"
 sys.path.insert(0, str(ROOT))
 from tools.arabic_counter import format_arabic_count  # noqa: E402
-_SITE_GENERATOR = Path(os.environ.get("SITE_DIR") or (ROOT.parent / "seawatch")) / "generator"
+def _site_root() -> Path:
+    """جذر الموقع بالقياس لا بالافتراض (ك-563): البيئة أولًا ثم المرشحات الفعلية."""
+    for key in ("SITE_DIR", "SITE"):
+        value = (os.environ.get(key) or "").strip()
+        if value and (Path(value) / "generator").is_dir():
+            return Path(value)
+    for cand in (Path.home() / "seawatch", ROOT.parent / "seawatch", ROOT.parent / "site"):
+        if (cand / "generator").is_dir():
+            return cand
+    return Path.home() / "seawatch"
+
+
+_SITE_GENERATOR = _site_root() / "generator"
 if not _SITE_GENERATOR.is_dir():
     raise ImportError(f"مسار مولّد السطح المرسوم غير موجود: {_SITE_GENERATOR}")
 sys.path.insert(0, str(_SITE_GENERATOR))

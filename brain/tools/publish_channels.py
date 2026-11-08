@@ -25,6 +25,7 @@ DEFAULT_BRANCH = "main"
 PAGES_BASE_URL = "https://seawatch-live.pages.dev"
 PAGES_REPO = DEFAULT_REPO
 PAGES_BRANCH = DEFAULT_BRANCH
+PAGES_PROPAGATION_DELAYS = (15, 20, 25, 30, 40, 50)  # مهلة انتشار بناء القناة الأساسية قبل الحكم بالفشل (ثوانٍ)
 PAGES_MIN_BYTES = 100_000
 GITHACK_BASE = "https://raw.githack.com"
 JSDELIVR_BASE = "https://cdn.jsdelivr.net/gh"
@@ -487,6 +488,15 @@ def publish(root: Path, date: str, repo: str = DEFAULT_REPO) -> int:
             head = publish_doc.get("head") or ""
             url = cloudflare_report_url(date, base)
             live = verify_live_url(url, date, min_bytes=PAGES_MIN_BYTES, expected_sha256=local_sha)
+            waited = 0
+            for delay in PAGES_PROPAGATION_DELAYS:
+                if live.get("ok"):
+                    break
+                time.sleep(delay)
+                waited += delay
+                live = verify_live_url(url, date, min_bytes=PAGES_MIN_BYTES, expected_sha256=local_sha)
+            if waited:
+                live["propagation_wait_seconds"] = waited
             record = build_publish_record(date=date, channel=channel, url=url, head=head,
                                           live=live, rc=rc, fingerprint=local_sha)
             record["publish_output_tail"] = output[-1000:]

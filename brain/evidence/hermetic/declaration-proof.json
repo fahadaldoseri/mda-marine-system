@@ -10,31 +10,31 @@
   ],
   "changed_files_outside_isolation": 0,
   "changed_paths_outside_isolation": [],
-  "duration_ms": 158,
-  "duration_seconds": 0.158,
+  "duration_ms": 199,
+  "duration_seconds": 0.199,
   "evidence_files": {
-    "impact_summary": "/home/ubuntu/brain-marine-news/evidence/hermetic/raw/declaration-proof/impact-summary.json",
-    "project_compare": "/home/ubuntu/brain-marine-news/evidence/hermetic/raw/declaration-proof/project-compare.json",
-    "raw_stderr": "/home/ubuntu/brain-marine-news/evidence/hermetic/raw/declaration-proof/stderr.log",
-    "raw_stdout": "/home/ubuntu/brain-marine-news/evidence/hermetic/raw/declaration-proof/stdout.log",
-    "seawatch_compare": "/home/ubuntu/brain-marine-news/evidence/hermetic/raw/declaration-proof/seawatch-compare.json"
+    "impact_summary": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/raw/declaration-proof/impact-summary.json",
+    "project_compare": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/raw/declaration-proof/project-compare.json",
+    "raw_stderr": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/raw/declaration-proof/stderr.log",
+    "raw_stdout": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/raw/declaration-proof/stdout.log",
+    "seawatch_compare": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/raw/declaration-proof/seawatch-compare.json"
   },
   "exit_code": 0,
   "fingerprints": {
     "comparison_excludes": [
       "evidence/hermetic/** (harness-owned evidence, traces, and fingerprints)"
     ],
-    "project_after": "/home/ubuntu/brain-marine-news/evidence/hermetic/fingerprints/declaration-proof/project-after.json",
-    "project_before": "/home/ubuntu/brain-marine-news/evidence/hermetic/fingerprints/declaration-proof/project-before.json",
-    "project_root": "/home/ubuntu/brain-marine-news",
-    "seawatch_after": "/home/ubuntu/brain-marine-news/evidence/hermetic/fingerprints/declaration-proof/seawatch-after.json",
-    "seawatch_before": "/home/ubuntu/brain-marine-news/evidence/hermetic/fingerprints/declaration-proof/seawatch-before.json",
+    "project_after": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/fingerprints/declaration-proof/project-after.json",
+    "project_before": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/fingerprints/declaration-proof/project-before.json",
+    "project_root": "/home/ubuntu/mda-marine-system/brain",
+    "seawatch_after": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/fingerprints/declaration-proof/seawatch-after.json",
+    "seawatch_before": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/fingerprints/declaration-proof/seawatch-before.json",
     "seawatch_root": "/home/ubuntu/seawatch"
   },
   "impact_summary": {
     "connect_attempts": 1,
     "connect_lines": [
-      "2514711 connect(3, {sa_family=AF_INET, sin_port=htons(80), sin_addr=inet_addr(\"1.1.1.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)"
+      "2687007 connect(3, {sa_family=AF_INET, sin_port=htons(80), sin_addr=inet_addr(\"1.1.1.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)"
     ],
     "execve": [
       "/bin/sh",
@@ -43,23 +43,23 @@
       "/usr/bin/python3"
     ],
     "files_opened_for_write": [
-      "2514706 creat(\"/newroot/dev/full\", 0444) = 5",
-      "2514706 creat(\"/newroot/dev/null\", 0444) = 5",
-      "2514706 creat(\"/newroot/dev/random\", 0444) = 5",
-      "2514706 creat(\"/newroot/dev/tty\", 0444) = 5",
-      "2514706 creat(\"/newroot/dev/urandom\", 0444) = 5",
-      "2514706 creat(\"/newroot/dev/zero\", 0444) = 5",
-      "2514706 openat(5, \"gid_map\", O_RDWR|O_CLOEXEC) = 6",
-      "2514706 openat(5, \"setgroups\", O_RDWR|O_CLOEXEC) = 6",
-      "2514706 openat(5, \"uid_map\", O_RDWR|O_CLOEXEC) = 6",
-      "2514708 openat(AT_FDCWD, \"/var/tmp/hermetic-work.aGbt1p/.hermetic-net-20261106T233649Z-2514663.probe.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "2514708 openat(AT_FDCWD, \"/var/tmp/hermetic-work.aGbt1p/.hermetic-net-20261106T233649Z-2514663.probe.before\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "2514708 openat(AT_FDCWD, \"/var/tmp/hermetic-work.aGbt1p/.hermetic-net-20261106T233649Z-2514663.probe.out\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "2514708 openat(AT_FDCWD, \"/var/tmp/hermetic-work.aGbt1p/.hermetic-net-20261106T233649Z-2514663.probe.rc\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "2514708 openat(AT_FDCWD, \"/var/tmp/hermetic-work.aGbt1p/.hermetic-net-20261106T233649Z-2514663.run.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "2514709 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "2514712 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "2514715 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3"
+      "2687002 creat(\"/newroot/dev/full\", 0444) = 5",
+      "2687002 creat(\"/newroot/dev/null\", 0444) = 5",
+      "2687002 creat(\"/newroot/dev/random\", 0444) = 5",
+      "2687002 creat(\"/newroot/dev/tty\", 0444) = 5",
+      "2687002 creat(\"/newroot/dev/urandom\", 0444) = 5",
+      "2687002 creat(\"/newroot/dev/zero\", 0444) = 5",
+      "2687002 openat(5, \"gid_map\", O_RDWR|O_CLOEXEC) = 6",
+      "2687002 openat(5, \"setgroups\", O_RDWR|O_CLOEXEC) = 6",
+      "2687002 openat(5, \"uid_map\", O_RDWR|O_CLOEXEC) = 6",
+      "2687004 openat(AT_FDCWD, \"/var/tmp/hermetic-work.8YZlhb/.hermetic-net-20261108T044320Z-2686953.probe.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "2687004 openat(AT_FDCWD, \"/var/tmp/hermetic-work.8YZlhb/.hermetic-net-20261108T044320Z-2686953.probe.before\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "2687004 openat(AT_FDCWD, \"/var/tmp/hermetic-work.8YZlhb/.hermetic-net-20261108T044320Z-2686953.probe.out\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "2687004 openat(AT_FDCWD, \"/var/tmp/hermetic-work.8YZlhb/.hermetic-net-20261108T044320Z-2686953.probe.rc\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "2687004 openat(AT_FDCWD, \"/var/tmp/hermetic-work.8YZlhb/.hermetic-net-20261108T044320Z-2686953.run.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "2687005 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "2687008 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "2687011 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3"
     ]
   },
   "isolation": {
@@ -79,7 +79,7 @@
     "packets_after_probe": 0,
     "packets_before": 0
   },
-  "raw_trace": "/home/ubuntu/brain-marine-news/evidence/hermetic/traces/declaration-proof.strace",
+  "raw_trace": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/traces/declaration-proof.strace",
   "resource_limits": {
     "cpu_quota": "50%",
     "memory_mb": 512,
@@ -89,10 +89,10 @@
   "schema": "hermetic-run/v1",
   "timeout_enforced": false,
   "timeout_seconds": 10,
-  "timestamp_utc": "20261106T233649Z",
+  "timestamp_utc": "20261108T044320Z",
   "tool": "/usr/bin/python3",
   "tool_name": "declaration-proof",
-  "trace": "/home/ubuntu/brain-marine-news/evidence/hermetic/traces/declaration-proof.strace",
+  "trace": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/traces/declaration-proof.strace",
   "versions": {
     "bubblewrap": "bubblewrap 0.9.0",
     "strace": "strace -- version 6.8",

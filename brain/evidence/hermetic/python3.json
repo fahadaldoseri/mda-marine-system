@@ -10,31 +10,31 @@
   ],
   "changed_files_outside_isolation": 0,
   "changed_paths_outside_isolation": [],
-  "duration_ms": 1041,
-  "duration_seconds": 1.041,
+  "duration_ms": 1045,
+  "duration_seconds": 1.045,
   "evidence_files": {
-    "impact_summary": "/home/ubuntu/brain-marine-news/evidence/hermetic/raw/python3/impact-summary.json",
-    "project_compare": "/home/ubuntu/brain-marine-news/evidence/hermetic/raw/python3/project-compare.json",
-    "raw_stderr": "/home/ubuntu/brain-marine-news/evidence/hermetic/raw/python3/stderr.log",
-    "raw_stdout": "/home/ubuntu/brain-marine-news/evidence/hermetic/raw/python3/stdout.log",
-    "seawatch_compare": "/home/ubuntu/brain-marine-news/evidence/hermetic/raw/python3/seawatch-compare.json"
+    "impact_summary": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/raw/python3/impact-summary.json",
+    "project_compare": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/raw/python3/project-compare.json",
+    "raw_stderr": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/raw/python3/stderr.log",
+    "raw_stdout": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/raw/python3/stdout.log",
+    "seawatch_compare": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/raw/python3/seawatch-compare.json"
   },
   "exit_code": 124,
   "fingerprints": {
     "comparison_excludes": [
       "evidence/hermetic/** (harness-owned evidence, traces, and fingerprints)"
     ],
-    "project_after": "/home/ubuntu/brain-marine-news/evidence/hermetic/fingerprints/python3/project-after.json",
-    "project_before": "/home/ubuntu/brain-marine-news/evidence/hermetic/fingerprints/python3/project-before.json",
-    "project_root": "/home/ubuntu/brain-marine-news",
-    "seawatch_after": "/home/ubuntu/brain-marine-news/evidence/hermetic/fingerprints/python3/seawatch-after.json",
-    "seawatch_before": "/home/ubuntu/brain-marine-news/evidence/hermetic/fingerprints/python3/seawatch-before.json",
+    "project_after": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/fingerprints/python3/project-after.json",
+    "project_before": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/fingerprints/python3/project-before.json",
+    "project_root": "/home/ubuntu/mda-marine-system/brain",
+    "seawatch_after": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/fingerprints/python3/seawatch-after.json",
+    "seawatch_before": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/fingerprints/python3/seawatch-before.json",
     "seawatch_root": "/home/ubuntu/seawatch"
   },
   "impact_summary": {
     "connect_attempts": 1,
     "connect_lines": [
-      "2514922 connect(3, {sa_family=AF_INET, sin_port=htons(80), sin_addr=inet_addr(\"1.1.1.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)"
+      "2687211 connect(3, {sa_family=AF_INET, sin_port=htons(80), sin_addr=inet_addr(\"1.1.1.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)"
     ],
     "execve": [
       "/bin/sh",
@@ -43,21 +43,21 @@
       "/usr/bin/python3"
     ],
     "files_opened_for_write": [
-      "2514917 creat(\"/newroot/dev/full\", 0444) = 5",
-      "2514917 creat(\"/newroot/dev/null\", 0444) = 5",
-      "2514917 creat(\"/newroot/dev/random\", 0444) = 5",
-      "2514917 creat(\"/newroot/dev/tty\", 0444) = 5",
-      "2514917 creat(\"/newroot/dev/urandom\", 0444) = 5",
-      "2514917 creat(\"/newroot/dev/zero\", 0444) = 5",
-      "2514917 openat(5, \"gid_map\", O_RDWR|O_CLOEXEC) = 6",
-      "2514917 openat(5, \"setgroups\", O_RDWR|O_CLOEXEC) = 6",
-      "2514917 openat(5, \"uid_map\", O_RDWR|O_CLOEXEC) = 6",
-      "2514919 openat(AT_FDCWD, \"/var/tmp/hermetic-work.3IcsWU/.hermetic-net-20261106T233703Z-2514867.probe.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "2514919 openat(AT_FDCWD, \"/var/tmp/hermetic-work.3IcsWU/.hermetic-net-20261106T233703Z-2514867.probe.before\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "2514919 openat(AT_FDCWD, \"/var/tmp/hermetic-work.3IcsWU/.hermetic-net-20261106T233703Z-2514867.probe.out\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "2514919 openat(AT_FDCWD, \"/var/tmp/hermetic-work.3IcsWU/.hermetic-net-20261106T233703Z-2514867.probe.rc\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "2514920 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "2514923 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3"
+      "2687206 creat(\"/newroot/dev/full\", 0444) = 5",
+      "2687206 creat(\"/newroot/dev/null\", 0444) = 5",
+      "2687206 creat(\"/newroot/dev/random\", 0444) = 5",
+      "2687206 creat(\"/newroot/dev/tty\", 0444) = 5",
+      "2687206 creat(\"/newroot/dev/urandom\", 0444) = 5",
+      "2687206 creat(\"/newroot/dev/zero\", 0444) = 5",
+      "2687206 openat(5, \"gid_map\", O_RDWR|O_CLOEXEC) = 6",
+      "2687206 openat(5, \"setgroups\", O_RDWR|O_CLOEXEC) = 6",
+      "2687206 openat(5, \"uid_map\", O_RDWR|O_CLOEXEC) = 6",
+      "2687208 openat(AT_FDCWD, \"/var/tmp/hermetic-work.wS9jjB/.hermetic-net-20261108T044336Z-2687162.probe.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "2687208 openat(AT_FDCWD, \"/var/tmp/hermetic-work.wS9jjB/.hermetic-net-20261108T044336Z-2687162.probe.before\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "2687208 openat(AT_FDCWD, \"/var/tmp/hermetic-work.wS9jjB/.hermetic-net-20261108T044336Z-2687162.probe.out\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "2687208 openat(AT_FDCWD, \"/var/tmp/hermetic-work.wS9jjB/.hermetic-net-20261108T044336Z-2687162.probe.rc\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "2687209 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "2687212 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3"
     ]
   },
   "isolation": {
@@ -77,7 +77,7 @@
     "packets_after_probe": 0,
     "packets_before": 0
   },
-  "raw_trace": "/home/ubuntu/brain-marine-news/evidence/hermetic/traces/python3.strace",
+  "raw_trace": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/traces/python3.strace",
   "resource_limits": {
     "cpu_quota": "50%",
     "memory_mb": 512,
@@ -87,10 +87,10 @@
   "schema": "hermetic-run/v1",
   "timeout_enforced": true,
   "timeout_seconds": 1,
-  "timestamp_utc": "20261106T233703Z",
+  "timestamp_utc": "20261108T044336Z",
   "tool": "/usr/bin/python3",
   "tool_name": "python3",
-  "trace": "/home/ubuntu/brain-marine-news/evidence/hermetic/traces/python3.strace",
+  "trace": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/traces/python3.strace",
   "versions": {
     "bubblewrap": "bubblewrap 0.9.0",
     "strace": "strace -- version 6.8",

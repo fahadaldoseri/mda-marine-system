@@ -117,6 +117,17 @@ if ! gh auth status --hostname github.com >/dev/null 2>&1; then
   echo "✘ fallback: gh auth status فشل"
   exit 10
 fi
+echo "── بوابة المحرّك قبل fallback ($D) ──"
+python3 "$B/tools/runbook.py" gates-status --date "$D" --root "$B" || {
+  record 2 failed "" "" "engine gates incomplete"
+  echo "✘ fallback مرفوض: سجل المحرّك لا يُظهر اكتمال البوابات."
+  exit 2; }
+python3 "$B/tools/gate_verdict.py" --date "$D" --root "$B" --delivery-step D010 \
+  --json "$B/logs/gate-verdict-$D.json" || {
+  record 2 failed "" "" "blocking gate verdict"
+  echo "✘ fallback مرفوض: بوابة بحكم مانع — لا نشر بديل."
+  exit 2; }
+
 rm -rf "$WORK/repo" 2>/dev/null || true
 if ! git clone -q "https://github.com/$REPO.git" "$WORK/repo"; then
   record 2 failed "" "" "clone failed"
