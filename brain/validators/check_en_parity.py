@@ -34,7 +34,26 @@ def _root(env: str, base: pathlib.Path, *names: str) -> pathlib.Path:
 
 _HOME = pathlib.Path(__file__).resolve().parents[1].parent
 BRAIN = _root("BRAIN_DIR", _HOME, "brain-marine-news", "brain")
-SITE = _root("SITE_DIR", _HOME, "seawatch", "site")
+
+
+def _site() -> pathlib.Path:
+    """شجرة الموقع العاملة هي مصدر الحقيقة، والمرآة داخل المستودع بديل احتياطي (ك-569).
+
+    السبب المقيس: كان الحارس يقرأ ``<repo>/site`` (المرآة المشتقة) التي تُحدَّث عبر
+    فرع النسخة الاحتياطية وطلبه، فتتأخر عن الماستر الإنجليزي المكتوب في شجرة العمل،
+    فيمنع النشر بحجة «إدخال ناقص» بينما الملف موجود ومكتمل. القياس من شجرة العمل
+    يطابق قواعد المشروع: المصدر واحد، والمرآة مشتقة لا أصل.
+    """
+    v = os.environ.get("SITE_DIR")
+    if v:
+        return pathlib.Path(v)
+    for cand in (_HOME.parent / "seawatch", _HOME / "seawatch", _HOME / "site"):
+        if cand.is_dir():
+            return cand
+    return _HOME / "site"
+
+
+SITE = _site()
 AR = BRAIN / "reports"
 EN = SITE / "sources" / "i18n" / "en"
 AR_PAGE = SITE / "dist" / "reports"
