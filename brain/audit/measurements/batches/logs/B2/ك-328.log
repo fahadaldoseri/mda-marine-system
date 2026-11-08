@@ -1,0 +1,12 @@
+COMMAND: timeout 120 python3 tests/test_lexicon_gate.py
+STARTED_AT: 2026-11-08T23:12:33.413099+00:00
+RC: 1
+ELAPSED_SECONDS: 4.289
+OUTPUT_BEGIN
+   ✔ صفر كلمات مشتبهة على متن اليوم
+   ✔ اللفظ المصطنع «ترفيم» يُكتشف (الحالة السالبة ناجحة)
+
+   ✘ فشل:
+     - معجم المفردات غير مطابق للمصادر (رمز 1): ✘ المعجم غير مطابق للمصادر: المخزّن=e18f7c9802e33316 · المحسوب=32bf2d9ca4876bb2 · كلمات المخزّن=7904 · المحسوب=7911
+OUTPUT_END
+SHA256_BODY: 352f5fa771bcd81f71b0bebcf057e7badf45f53dcf70ee1a9e67247f9ad9d5fc

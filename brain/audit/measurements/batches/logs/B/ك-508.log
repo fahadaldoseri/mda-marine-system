@@ -1,0 +1,206 @@
+COMMAND: timeout 120 python3 validators/check_backup_parity.py --mode strict
+STARTED_AT: 2026-11-08T23:34:01.851285+00:00
+RC: 2
+OUTPUT_BEGIN
+  نطاق المهارات المعتمد من runbook/approved-skills.json: 34
+  سجل النطاق: 5 فئات معلنة · كل مسار مصنّف
+  الحالة الملتزمة: 6095 · غير الملتزم: 218 · Git dirty: 14
+   ℹ غير ملتزم — لا يمنع: brain/appendices/event-code-map.json
+   ℹ غير ملتزم — لا يمنع: brain/audit/measurements/batches/axis-backfill.md
+   ℹ غير ملتزم — لا يمنع: brain/audit/measurements/batches/commands-B.json
+   ℹ غير ملتزم — لا يمنع: brain/audit/measurements/batches/logs/A/ك-01.log
+   ℹ غير ملتزم — لا يمنع: brain/audit/measurements/batches/logs/A/ك-02.log
+   ℹ غير ملتزم — لا يمنع: brain/audit/measurements/batches/logs/A/ك-06.log
+   ℹ غير ملتزم — لا يمنع: brain/audit/measurements/batches/logs/A/ك-103.log
+   ℹ غير ملتزم — لا يمنع: brain/audit/measurements/batches/logs/A/ك-104.log
+   ℹ غير ملتزم — لا يمنع: brain/audit/measurements/batches/logs/A/ك-117.log
+   ℹ غير ملتزم — لا يمنع: brain/audit/measurements/batches/logs/A/ك-128.log
+   ℹ غير ملتزم — لا يمنع: brain/audit/measurements/batches/logs/A/ك-132.log
+   ℹ غير ملتزم — لا يمنع: brain/audit/measurements/batches/logs/A/ك-137.log
+   ℹ غير ملتزم — لا يمنع: brain/audit/measurements/batches/logs/A/ك-143.log
+   ℹ غير ملتزم — لا يمنع: brain/audit/measurements/batches/logs/A/ك-144.log
+   ℹ غير ملتزم — لا يمنع: brain/audit/measurements/batches/logs/A/ك-146.log
+   ℹ غير ملتزم — لا يمنع: brain/audit/measurements/batches/logs/A/ك-147.log
+   ℹ غير ملتزم — لا يمنع: brain/audit/measurements/batches/logs/A/ك-149.log
+   ℹ غير ملتزم — لا يمنع: brain/audit/measurements/batches/logs/A/ك-151.log
+   ℹ غير ملتزم — لا يمنع: brain/audit/measurements/batches/logs/A/ك-152.log
+   ℹ غير ملتزم — لا يمنع: brain/audit/measurements/batches/logs/A/ك-159.log
+   … و198 ملفات غير ملتزمة أخرى (معلوماتية)
+  الشجرة المحلية: 6313 · المستودع: 6278 · الروابط: 0 محليًا
+   ✘ زائد في المستودع: site/.env.example
+   ✘ زائد في المستودع: site/.gitignore
+   ✘ زائد في المستودع: site/Dockerfile
+   ✘ زائد في المستودع: site/README.md
+   ✘ زائد في المستودع: site/app.config.ts
+   ✘ زائد في المستودع: site/audit/visual/special-full.png
+   ✘ زائد في المستودع: site/audit/visual/special-index-card.png
+   ✘ زائد في المستودع: site/audit/visual/special-index-desktop.png
+   ✘ زائد في المستودع: site/audit/visual/special-index-mobile.png
+   ✘ زائد في المستودع: site/audit/visual/special-report-desktop.png
+   ✘ زائد في المستودع: site/audit/visual/special-timeline.png
+   ✘ زائد في المستودع: site/docs/superpowers/plans/2026-11-01-hormuz-tss-team-a.md
+   ✘ زائد في المستودع: site/generator/blocks.py
+   ✘ زائد في المستودع: site/generator/build_report.py
+   ✘ زائد في المستودع: site/generator/build_report_en.py
+   ✘ زائد في المستودع: site/generator/build_site.py
+   ✘ زائد في المستودع: site/generator/build_sources.py
+   ✘ زائد في المستودع: site/generator/build_special.py
+   ✘ زائد في المستودع: site/generator/card_measurements.py
+   ✘ زائد في المستودع: site/generator/check_map_contract.py
+   ✘ زائد في المستودع: site/generator/codes.py
+   ✘ زائد في المستودع: site/generator/data/marine_boundaries.geojson
+   ✘ زائد في المستودع: site/generator/data/ne_50m_admin_0_boundary_lines_land.geojson
+   ✘ زائد في المستودع: site/generator/data/ne_50m_land.geojson
+   ✘ زائد في المستودع: site/generator/derive_en_units.py
+   ✘ زائد في المستودع: site/generator/display_format.py
+   ✘ زائد في المستودع: site/generator/en_missing_report.py
+   ✘ زائد في المستودع: site/generator/i18n_en.py
+   ✘ زائد في المستودع: site/generator/make_en_glossary.py
+   ✘ زائد في المستودع: site/generator/map_cluster.py
+   ✘ زائد في المستودع: site/generator/map_gulf.py
+   ✘ زائد في المستودع: site/generator/monthly_dashboard.py
+   ✘ زائد في المستودع: site/generator/postprocess.py
+   ✘ زائد في المستودع: site/generator/screen_layer.py
+   ✘ زائد في المستودع: site/generator/section_counts.py
+   ✘ زائد في المستودع: site/generator/site_chrome.py
+   ✘ زائد في المستودع: site/generator/sync_from_brain.py
+   ✘ زائد في المستودع: site/generator/threat_card.py
+   ✘ زائد في المستودع: site/generator/verify.py
+   ✘ زائد في المستودع: site/notes/2026-10-28-mobile-shell-fix.md
+   ✘ زائد في المستودع: site/notes/2026-11-02-i18n-alignment-plan.md
+   ✘ زائد في المستودع: site/notes/2026-11-06-c3-semantic-attribution-plan.md
+   ✘ زائد في المستودع: site/notes/2026-11-06-derive-en-units-plan.md
+   ✘ زائد في المستودع: site/notes/2026-11-06-i18n-convergence-fix-plan.md
+   ✘ زائد في المستودع: site/notes/2026-11-06-translation-batch-plan.md
+   ✘ زائد في المستودع: site/notes/2026-11-07-g001-repair-plan.md
+   ✘ زائد في المستودع: site/notes/B010-2026-11-04-plan.md
+   ✘ زائد في المستودع: site/notes/PROJECT-DELTA-2026-10-31.md
+   ✘ زائد في المستودع: site/notes/PROJECT-DELTA-2026-11-01-D020.md
+   ✘ زائد في المستودع: site/notes/en-advisory-id-fix-20261030.md
+   ✘ زائد في المستودع: site/notes/map-redesign-plan-2026-10-31.md
+   ✘ زائد في المستودع: site/notes/source-page-fix-2026-10-31.md
+   ✘ زائد في المستودع: site/plan.md
+   ✘ زائد في المستودع: site/public/manus-routes.json
+   ✘ زائد في المستودع: site/server/app.py
+   ✘ زائد في المستودع: site/sources/card_registry.json
+   ✘ زائد في المستودع: site/sources/daily-events/2026-10-31.json
+   ✘ زائد في المستودع: site/sources/daily-events/2026-11-01.json
+   ✘ زائد في المستودع: site/sources/daily-events/2026-11-02.json
+   ✘ زائد في المستودع: site/sources/daily-events/2026-11-03.json
+   ✘ زائد في المستودع: site/sources/daily-events/2026-11-04.json
+   ✘ زائد في المستودع: site/sources/daily-events/2026-11-05.json
+   ✘ زائد في المستودع: site/sources/daily-events/2026-11-06.json
+   ✘ زائد في المستودع: site/sources/daily-events/2026-11-07.json
+   ✘ زائد في المستودع: site/sources/feeds-status.json
+   ✘ زائد في المستودع: site/sources/i18n/en/2026-10-29-sectioned.en.md
+   ✘ زائد في المستودع: site/sources/i18n/en/2026-10-30-sectioned.en.md
+   ✘ زائد في المستودع: site/sources/i18n/en/2026-10-31-sectioned.en.md
+   ✘ زائد في المستودع: site/sources/i18n/en/2026-11-01-sectioned.en.md
+   ✘ زائد في المستودع: site/sources/i18n/en/2026-11-02-sectioned.en.md
+   ✘ زائد في المستودع: site/sources/i18n/en/2026-11-03-sectioned.en.md
+   ✘ زائد في المستودع: site/sources/i18n/en/2026-11-04-sectioned.en.md
+   ✘ زائد في المستودع: site/sources/i18n/en/2026-11-05-sectioned.en.md
+   ✘ زائد في المستودع: site/sources/i18n/en/2026-11-06-sectioned.en.md
+   ✘ زائد في المستودع: site/sources/i18n/en/2026-11-07-sectioned.en.md
+   ✘ زائد في المستودع: site/sources/i18n/en/area-vocabulary.json
+   ✘ زائد في المستودع: site/sources/i18n/en/glossary.json
+   ✘ زائد في المستودع: site/sources/ledger.json
+   ✘ زائد في المستودع: site/sources/map/SOURCES.md
+   ✘ زائد في المستودع: site/sources/map/locations.json
+   ✘ زائد في المستودع: site/sources/meta/2026-10-12.json
+   ✘ زائد في المستودع: site/sources/meta/2026-10-13.json
+   ✘ زائد في المستودع: site/sources/meta/2026-10-14.json
+   ✘ زائد في المستودع: site/sources/meta/2026-10-15.json
+   ✘ زائد في المستودع: site/sources/meta/2026-10-16.json
+   ✘ زائد في المستودع: site/sources/meta/2026-10-17.json
+   ✘ زائد في المستودع: site/sources/meta/2026-10-18.json
+   ✘ زائد في المستودع: site/sources/meta/2026-10-19.json
+   ✘ زائد في المستودع: site/sources/meta/2026-10-20.json
+   ✘ زائد في المستودع: site/sources/meta/2026-10-21.json
+   ✘ زائد في المستودع: site/sources/meta/2026-10-22.json
+   ✘ زائد في المستودع: site/sources/meta/2026-10-23.json
+   ✘ زائد في المستودع: site/sources/meta/2026-10-24.json
+   ✘ زائد في المستودع: site/sources/meta/2026-10-25.json
+   ✘ زائد في المستودع: site/sources/meta/2026-10-26.json
+   ✘ زائد في المستودع: site/sources/meta/2026-10-27.json
+   ✘ زائد في المستودع: site/sources/meta/2026-10-28.json
+   ✘ زائد في المستودع: site/sources/meta/2026-10-29.json
+   ✘ زائد في المستودع: site/sources/meta/2026-10-30.json
+   ✘ زائد في المستودع: site/sources/meta/2026-10-31.json
+   ✘ زائد في المستودع: site/sources/meta/2026-11-01.json
+   ✘ زائد في المستودع: site/sources/meta/2026-11-02.json
+   ✘ زائد في المستودع: site/sources/meta/2026-11-03.json
+   ✘ زائد في المستودع: site/sources/meta/2026-11-04.json
+   ✘ زائد في المستودع: site/sources/meta/2026-11-05.json
+   ✘ زائد في المستودع: site/sources/meta/2026-11-06.json
+   ✘ زائد في المستودع: site/sources/meta/2026-11-07.json
+   ✘ زائد في المستودع: site/sources/meta/cumulative.json
+   ✘ زائد في المستودع: site/sources/report-sections-policy.json
+   ✘ زائد في المستودع: site/sources/reports/2026-10-12-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-10-13-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-10-14-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-10-15-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-10-16-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-10-17-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-10-18-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-10-19-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-10-20-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-10-21-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-10-22-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-10-23-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-10-24-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-10-25-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-10-26-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-10-27-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-10-28-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-10-29-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-10-30-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-10-31-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-11-01-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-11-02-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-11-03-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-11-04-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-11-05-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-11-06-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/2026-11-07-sectioned.md
+   ✘ زائد في المستودع: site/sources/reports/cumulative.md
+   ✘ زائد في المستودع: site/sources/site.json
+   ✘ زائد في المستودع: site/sources/source-reliability.md
+   ✘ زائد في المستودع: site/sources/special/2026-10-15-GFS.json
+   ✘ زائد في المستودع: site/sources/special/2026-10-15-GFS.md
+   ✘ زائد في المستودع: site/sources/special/2026-10-17-Jubail-incidents.json
+   ✘ زائد في المستودع: site/sources/special/2026-10-17-Jubail-incidents.md
+   ✘ زائد في المستودع: site/sources/special/ach-hormuz-targeting-2026-10-16.json
+   ✘ زائد في المستودع: site/sources/special/ach-hormuz-targeting-2026-10-16.md
+   ✘ زائد في المستودع: site/sources/special/ach-hormuz-targeting-v3-2026-10-16.json
+   ✘ زائد في المستودع: site/sources/special/ach-hormuz-targeting-v3-2026-10-16.md
+   ✘ زائد في المستودع: site/sources/special/exposure-denominator-2026-10-16.json
+   ✘ زائد في المستودع: site/sources/special/exposure-denominator-2026-10-16.md
+   ✘ زائد في المستودع: site/sources/special/gfs-pride-giselle-2026-10-15.json
+   ✘ زائد في المستودع: site/sources/special/gfs-pride-giselle-2026-10-15.md
+   ✘ زائد في المستودع: site/sources/zones/2026-10-30.json
+   ✘ زائد في المستودع: site/sources/zones/2026-10-31.json
+   ✘ زائد في المستودع: site/sources/zones/2026-11-01.json
+   ✘ زائد في المستودع: site/sources/zones/2026-11-02.json
+   ✘ زائد في المستودع: site/sources/zones/2026-11-03.json
+   ✘ زائد في المستودع: site/sources/zones/2026-11-04.json
+   ✘ زائد في المستودع: site/sources/zones/2026-11-05.json
+   ✘ زائد في المستودع: site/sources/zones/2026-11-06.json
+   ✘ زائد في المستودع: site/sources/zones/2026-11-07.json
+   ✘ زائد في المستودع: site/tests/test_2026_10_31_surface_contract.py
+   ✘ زائد في المستودع: site/tests/test_additions_content_fidelity.py
+   ✘ زائد في المستودع: site/tests/test_b009_template_leak_guard.py
+   ✘ زائد في المستودع: site/tests/test_b10_map_event_ids.py
+   ✘ زائد في المستودع: site/tests/test_derive_en_units.py
+   ✘ زائد في المستودع: site/tests/test_g001_forbidden_terms.py
+   ✘ زائد في المستودع: site/tests/test_g045_surface_rendering.py
+   ✘ زائد في المستودع: site/tests/test_g047_header_derivation.py
+   ✘ زائد في المستودع: site/tests/test_i18n_alignment.py
+   ✘ زائد في المستودع: site/tests/test_i18n_collapse_regression.py
+   ✘ زائد في المستودع: site/tests/test_i18n_event_card_labels.py
+   ✘ زائد في المستودع: site/tests/test_i18n_patterns.py
+   ✘ زائد في المستودع: site/tests/test_missing_translation_batch.py
+   … و161 أخرى
+  النتيجة: انحراف مانع (173) — النسخة الاحتياطية غير محدَّثة
+
+OUTPUT_END

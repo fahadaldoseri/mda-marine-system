@@ -1,0 +1,8 @@
+COMMAND: timeout 120 python3 validators/check_card_counters.py --date 2026-11-08 --dist-root /home/ubuntu/seawatch/dist
+STARTED_AT: 2026-11-08T23:25:07.584917+00:00
+RC: 0
+OUTPUT_BEGIN
+✔ بطاقة الفروع الثلاثة: العناوين والعدادات والمراسي متطابقة عربيًا وإنجليزيًا
+✔ حراسة البطاقات التصريحية: 2 بطاقات مفعّلة (maritime-security-news، sector-threat-level)
+
+OUTPUT_END

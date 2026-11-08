@@ -1,0 +1,93 @@
+COMMAND: timeout 120 python3 -m pytest -q tests/test_publish_channels.py
+STARTED_AT: 2026-11-08T23:34:44.653657+00:00
+RC: 1
+OUTPUT_BEGIN
+.......F.                                                                [100%]
+=================================== FAILURES ===================================
+____ test_successful_pages_push_is_recorded_with_hash_and_redirect_metadata ____
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fb9dd3aa060>
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-163/test_successful_pages_push_is_0')
+
+    def test_successful_pages_push_is_recorded_with_hash_and_redirect_metadata(
+        monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+    ) -> None:
+        date = "2026-11-07"
+        logs = tmp_path / "logs"
+        logs.mkdir()
+        (logs / f"publish-channel-{date}.json").write_text(
+            json.dumps({"channels": ready()}, ensure_ascii=False) + "\n", encoding="utf-8"
+        )
+    
+        def fake_run_command(args: list[str], **kwargs: object) -> tuple[int, str]:
+            del kwargs
+            if args[:3] == ["gh", "auth", "status"]:
+                return 0, "Logged in to github.com"
+            if args[:3] == ["gh", "repo", "view"]:
+                return 0, json.dumps({
+                    "nameWithOwner": "fahadaldoseri/seawatch-live",
+                    "defaultBranchRef": {"name": "main"},
+                    "url": "https://github.com/fahadaldoseri/seawatch-live",
+                    "visibility": "PUBLIC",
+                })
+            if args[1].endswith("publish_site.sh"):
+                (logs / f"publish-{date}.json").write_text(
+                    json.dumps({"status": "ok", "rc": 0, "head": "pages-head"}), encoding="utf-8"
+                )
+                return 0, "pushed Pages"
+            raise AssertionError(args)
+    
+        def fake_verify_live_url(url: str, checked_date: str, **kwargs: object) -> dict[str, object]:
+            assert checked_date == date
+            assert "pages.dev" in url
+            assert kwargs["min_bytes"] == 100_000
+            return {
+                "ok": True,
+                "status": 200,
+                "bytes": 189327,
+                "date_marker": True,
+                "content_type": "text/html; charset=utf-8",
+                "presentation_eligible": True,
+                "redirected": True,
+                "redirects": [{"status": 308, "from": url, "to": f"{url}.html"}],
+                "sha256": "835ad2e9723546d295389edefbce3f750a4ff228bb53a4b0c12e79953db02f02",
+                "url": url,
+            }
+    
+        monkeypatch.setattr("publish_channels.run_command", fake_run_command)
+        monkeypatch.setattr("publish_channels.verify_live_url", fake_verify_live_url)
+>       assert publish(tmp_path, date) == 0
+
+tests/test_publish_channels.py:170: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/publish_channels.py:491: in publish
+    source_rc, source_out = run_command(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = ['bash', '/tmp/pytest-of-root/pytest-163/test_successful_pages_push_is_0/tools/publish_fallback.sh', '2026-11-07']
+
+    def fake_run_command(args: list[str], **kwargs: object) -> tuple[int, str]:
+        del kwargs
+        if args[:3] == ["gh", "auth", "status"]:
+            return 0, "Logged in to github.com"
+        if args[:3] == ["gh", "repo", "view"]:
+            return 0, json.dumps({
+                "nameWithOwner": "fahadaldoseri/seawatch-live",
+                "defaultBranchRef": {"name": "main"},
+                "url": "https://github.com/fahadaldoseri/seawatch-live",
+                "visibility": "PUBLIC",
+            })
+        if args[1].endswith("publish_site.sh"):
+            (logs / f"publish-{date}.json").write_text(
+                json.dumps({"status": "ok", "rc": 0, "head": "pages-head"}), encoding="utf-8"
+            )
+            return 0, "pushed Pages"
+>       raise AssertionError(args)
+E       AssertionError: ['bash', '/tmp/pytest-of-root/pytest-163/test_successful_pages_push_is_0/tools/publish_fallback.sh', '2026-11-07']
+
+tests/test_publish_channels.py:149: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_publish_channels.py::test_successful_pages_push_is_recorded_with_hash_and_redirect_metadata
+1 failed, 8 passed in 0.07s
+
+OUTPUT_END

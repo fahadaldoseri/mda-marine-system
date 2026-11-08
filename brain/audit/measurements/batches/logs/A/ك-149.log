@@ -1,0 +1,6 @@
+COMMAND: timeout 120 python3 tests/test_skill_lessons.py
+RC: 0
+--- OUTPUT BEGIN ---
+  القاعدة: لا تكرار لدرس اليوم · والأعطال الجديدة تُذكر · والدليل في الكتلة
+  ✔ اختبار حلقة التعلم صحيح
+--- OUTPUT END ---

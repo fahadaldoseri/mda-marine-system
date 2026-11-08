@@ -1,0 +1,6 @@
+COMMAND: timeout 120 python3 tools/gate_coverage.py --root . --orphans
+RC: 0
+--- OUTPUT BEGIN ---
+   الوحدات الشاردة: 0
+✔ بوابة التغطية: سليم
+--- OUTPUT END ---

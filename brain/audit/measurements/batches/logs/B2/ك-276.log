@@ -1,0 +1,14 @@
+REUSED_FROM: audit/measurements/batches/logs/B/ك-276.log
+REUSED_PRIOR_COMMAND: python3 tests/test_final_gate_vs_manifest.py
+REUSED_PRIOR_RC: 0
+REUSED_NOTE: لم يُعاد القياس لأن سجل B السابق ناجح.
+--- PRIOR LOG BEGIN ---
+COMMAND: python3 tests/test_final_gate_vs_manifest.py
+STARTED_AT: 2026-11-08T22:36:39.668745+00:00
+RC: 0
+ELAPSED_SECONDS: 0.036
+OUTPUT_BEGIN
+✔ كل ما تستدعيه final_gate.sh (64 سكربتًا) موجود في أوامر المانيفست
+OUTPUT_END
+--- PRIOR LOG END ---
+SHA256_BODY: 4cdb9f75c3de7658460a2d03d7e390fddcfc2c24d3969a27314cbff891b82387

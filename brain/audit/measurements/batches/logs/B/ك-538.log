@@ -1,0 +1,8 @@
+COMMAND: timeout 120 sh -c 'python3 tests/test_source_naming_gate.py && python3 validators/check_source_naming.py --root .'
+STARTED_AT: 2026-11-08T23:34:44.242727+00:00
+RC: 0
+OUTPUT_BEGIN
+حارس اسم المصدر الحقيقي — الجذر: /home/ubuntu/mda-marine-system/brain
+✔ لا يوجد وصف مصدر عام ممنوع على الأسطح المفحوصة
+
+OUTPUT_END

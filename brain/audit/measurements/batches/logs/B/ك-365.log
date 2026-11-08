@@ -1,0 +1,6 @@
+COMMAND: timeout 120 sh -c 'test -s evidence/causality/20261030T2043Z-auditd-tool-validation.log && grep -q PID evidence/causality/20261030T2043Z-auditd-tool-validation.log && grep -q PPID evidence/causality/20261030T2043Z-auditd-tool-validation.log && grep -q exe evidence/causality/20261030T2043Z-auditd-tool-validation.log'
+STARTED_AT: 2026-11-08T23:24:06.635078+00:00
+RC: 1
+OUTPUT_BEGIN
+
+OUTPUT_END

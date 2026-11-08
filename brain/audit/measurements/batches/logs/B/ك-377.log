@@ -1,0 +1,12 @@
+COMMAND: timeout 120 python3 validators/check_print_quality.py --pdf /home/ubuntu/seawatch/dist/reports/pdf/2026-11-08.pdf --date 2026-11-08
+STARTED_AT: 2026-11-08T23:24:56.103104+00:00
+RC: 2
+OUTPUT_BEGIN
+بوابة جودة الطباعة · 2026-11-08.pdf
+  ✓ تصفير المتن في PDF: تجمّع الحافة اليسرى 40% (الحد 25%) · 6 صفحة · أدنى صفحة 17%
+
+المخالفات المانعة:
+  ✘ لم تُعثر كتلة خريطة مصمتة في PDF (فشل مغلق)
+النتيجة: مخالف لجودة الطباعة ✘
+
+OUTPUT_END

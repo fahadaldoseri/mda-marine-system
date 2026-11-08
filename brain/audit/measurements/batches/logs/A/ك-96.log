@@ -1,0 +1,5 @@
+COMMAND: timeout 120 python3 tests/test_final_gate_vs_manifest.py
+RC: 0
+--- OUTPUT BEGIN ---
+✔ كل ما تستدعيه final_gate.sh (64 سكربتًا) موجود في أوامر المانيفست
+--- OUTPUT END ---

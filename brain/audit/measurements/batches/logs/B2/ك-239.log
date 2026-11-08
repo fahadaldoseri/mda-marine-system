@@ -1,0 +1,15 @@
+REUSED_FROM: audit/measurements/batches/logs/B/ك-239.log
+REUSED_PRIOR_COMMAND: python3 validators/check_decision_card.py --date 2026-11-08
+REUSED_PRIOR_RC: 0
+REUSED_NOTE: لم يُعاد القياس لأن سجل B السابق ناجح.
+--- PRIOR LOG BEGIN ---
+COMMAND: python3 validators/check_decision_card.py --date 2026-11-08
+STARTED_AT: 2026-11-08T22:36:33.867963+00:00
+RC: 0
+ELAPSED_SECONDS: 4.95
+OUTPUT_BEGIN
+ملاحظة: لا بطاقة قرار على 2026-11-08.html — يُتخطّى
+أهم الأخبار المتعلقة بالأمن البحري: مطابقة ✓ — كل صف يحمل نصًّا ورابطًا صالحًا على السطحين
+OUTPUT_END
+--- PRIOR LOG END ---
+SHA256_BODY: 8b4c4b5528429f7d143f88ecd6ae6b3230b35b1568033380a7e10ca6bbfd29ca

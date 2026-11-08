@@ -1,0 +1,14 @@
+REUSED_FROM: audit/measurements/batches/logs/B/ك-279.log
+REUSED_PRIOR_COMMAND: env LIVE_BASE_URL=https://seawatch-live.pages.dev timeout 45s bash tools/check_live.sh --compare 2026-11-08
+REUSED_PRIOR_RC: 0
+REUSED_NOTE: لم يُعاد القياس لأن سجل B السابق ناجح.
+--- PRIOR LOG BEGIN ---
+COMMAND: env LIVE_BASE_URL=https://seawatch-live.pages.dev timeout 45s bash tools/check_live.sh --compare 2026-11-08
+STARTED_AT: 2026-11-08T22:36:40.610846+00:00
+RC: 0
+ELAPSED_SECONDS: 14.145
+OUTPUT_BEGIN
+  ✔ كل المسارات ترد 200 (PDF مستثنى — الطباعة معطّلة بطلب المالك)
+OUTPUT_END
+--- PRIOR LOG END ---
+SHA256_BODY: 54d75919402c360e95194f1ac46694fa8fa88d5a584aefb155cf37da7b9f6e12

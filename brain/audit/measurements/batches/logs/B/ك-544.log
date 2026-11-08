@@ -1,0 +1,6 @@
+COMMAND: timeout 120 sh -c 'test -s logs/runbook/2026-11-08/G067.log && grep -q "attempt" logs/runbook/2026-11-08/G067.log && grep -q "rc=" logs/runbook/2026-11-08/G067.log'
+STARTED_AT: 2026-11-08T23:34:44.645775+00:00
+RC: 1
+OUTPUT_BEGIN
+
+OUTPUT_END

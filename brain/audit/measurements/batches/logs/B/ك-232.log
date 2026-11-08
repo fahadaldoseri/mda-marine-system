@@ -1,0 +1,9 @@
+COMMAND: python3 tools/runbook.py verify --root .
+STARTED_AT: 2026-11-08T22:35:39.345402+00:00
+RC: 2
+ELAPSED_SECONDS: 47.062
+OUTPUT_BEGIN
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: tools/apply_batch_results.py
+
+نتيجة التحقق: 1 خلل
+OUTPUT_END

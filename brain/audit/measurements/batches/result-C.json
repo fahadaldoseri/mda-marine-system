@@ -1,0 +1,2416 @@
+{
+  "batch": "C",
+  "measured_at": "2026-11-08T22:33:59.445153+00:00",
+  "axis_vocabulary": [
+    "B006/عقد العدد العربي",
+    "D010/D020 — قناة نشر واحدة",
+    "D020/التحقق الحي والredirect",
+    "G001/أمانة المحتوى وتغطية الأسطح",
+    "G012/مخطط بطاقة المؤشرات",
+    "G013/لغة التقرير",
+    "G018A/نطاق إحالات المهارات",
+    "G030/فضاء رموز التقدير",
+    "G040/حراسة التنفيذ والاستثناءات",
+    "G062/مرجع دليل القرار",
+    "G063/مرجع آلية العمل المولَّد",
+    "G067/حفظ دليل الفشل",
+    "S085/D010/حدود قناة العرض",
+    "accessibility",
+    "apply-plan",
+    "archive-policy",
+    "build",
+    "card-counter-parity",
+    "code-paths",
+    "code-tracking",
+    "content",
+    "data",
+    "delivery",
+    "delivery-policy",
+    "derivation",
+    "gate",
+    "governing-application-conflict",
+    "language",
+    "layout",
+    "ledger-integrity",
+    "manifest",
+    "manifest-contract",
+    "parity",
+    "pdf",
+    "policy",
+    "portability",
+    "print",
+    "print/owner-order",
+    "process",
+    "registry",
+    "render",
+    "reporting",
+    "runbook-binding",
+    "schema",
+    "screen",
+    "skill-structure",
+    "sources",
+    "surface-policy",
+    "surface-test",
+    "system",
+    "tooling",
+    "ui",
+    "vocabulary",
+    "أثر طباعة قديم يعطّل بوابات معطّلة",
+    "أداة إرسال تلغرام تعلّق بلا مخرجات",
+    "أداة إغلاق الجولة — تقرير الأدلة",
+    "أدوات التدقيق",
+    "أدوات الجولة/جذر الكتابة",
+    "أرقام عربية في ملف شيفرة وسجل التعلم",
+    "أسطح المهارات/اشتقاق الجذر",
+    "أسماء المصادر",
+    "أسماء المصادر/سطحان",
+    "أصول المهارات",
+    "أمانة الأرقام",
+    "أمانة الإسناد",
+    "أمانة العدّ",
+    "أمن",
+    "أمن الأسرار",
+    "أمن المزامنة",
+    "إرسال تلغرام",
+    "إنفاذ",
+    "اختبارات",
+    "ازدواج",
+    "استقرار الأصول الحاكمة على القرص",
+    "استمرارية العمل بين الجولات",
+    "اشتقاق جذر الموقع في الاختبارات والمدقّقات",
+    "البوابات والإنفاذ",
+    "التحقق الحي — تكرار نصي مرئي",
+    "الترجمة الإنجليزية — إحلال وسوم الحالة",
+    "الترجمة الإنجليزية — تماثل النسختين",
+    "الترجمة الإنجليزية — كتل الإفصاح في الخريطة",
+    "الترجمة والمعجم",
+    "الترجمة — البديل النصي للخريطة",
+    "التماثل الإنجليزي",
+    "التماثل والنسخة الاحتياطية — مستوى متوسط",
+    "التماثل — شيفرة الخادم مقابل المرآة",
+    "الحارس الدائم — مدقّق صياغة الشيفرة",
+    "الخريطة — ألوان القطاعات",
+    "الخريطة — الحجب",
+    "الخريطة — الوصول",
+    "الخريطة — تصغير الجوال",
+    "الخريطة — طبقات القطاعات",
+    "الخريطة — محددات CSS",
+    "الخريطة — هوية العلامات",
+    "الطباعة والتخطيط",
+    "العدّادات التراكمية الثمانية بلا فحص ربط",
+    "الكتيب — رقم ثابت للمصادر خارج نطاق البوابة",
+    "المانيفست — اتساق بوابة التسليم",
+    "المانيفست — ترتيب المراحل",
+    "المرآة — استثناء مجلد logs أحدث انحرافًا",
+    "المرآة — شجرة غير نظيفة",
+    "المزامنة والنسخ",
+    "المزامنة — حارس الحذف",
+    "المستودع المرآة — تصنيف المسارات",
+    "المستودع المرآة — سياسة الفروع",
+    "المعجم المشتق",
+    "المفردات والأسطح",
+    "المفردات — مستوى عالٍ",
+    "المهارات والحوكمة",
+    "المهارات — اقتطاع متكرر",
+    "المهارات — تكرار اقتطاع النسخ الحاكمة",
+    "النشر والتحقق الحي",
+    "النشر — مطابقة الإنجليزية",
+    "النشر — نقل Git لبعيد الموقع",
+    "الوحدات",
+    "انحراف تماثل",
+    "انحراف تماثل متكرر بين الخادم والمرآة عند كل تعديل نصّي",
+    "انحراف شيفرة الخادم عن المستودع",
+    "بصمة نص قديمة بعد البناء",
+    "بطاقة سجل الأحداث — عقد السطح",
+    "بناء",
+    "بوابات",
+    "بوابة",
+    "بوابة الأسرار/حدّ الملفات المولّدة",
+    "بوابة الأسلوب",
+    "بوابة البوابة النهائية",
+    "بوابة المعجم المشتق",
+    "بوابة ح13",
+    "بوابة-إيجابية-كاذبة",
+    "بيانات",
+    "بيانات · ترتيب خطوات",
+    "تحصين استيراد الحارس الموحّد",
+    "تخطيط",
+    "ترتيب الكتيب/اعتماد الإدخال",
+    "ترتيب خطوة في المانيفست",
+    "ترجمة الموقع",
+    "ترجمة ثنائية اللغة",
+    "ترجمة وسم المسار في الخريطة",
+    "ترحيل التسمية",
+    "تركيب معلّق في الأسلوب",
+    "تسمية قسم التحذيرات عبر الأسطح",
+    "تشغيل",
+    "تصنيف الأصول",
+    "تصنيف المسارات",
+    "تعارض حكم",
+    "تعارض سياسات",
+    "تعارض عقد",
+    "تكافؤ النسخة الإنجليزية",
+    "تكرار في الشيفرة",
+    "تماثل",
+    "تماثل الخادم والمستودع",
+    "تماثل الماستر الإنجليزي",
+    "تماثل المهارات",
+    "تماثل المهارات/مرآة التشغيل",
+    "تماثل النسخة الإنجليزية",
+    "ثغرة أمنية",
+    "ثغرة إجراء",
+    "جذر brain في مولّد الموقع",
+    "جذر المستودع/تماثل الشجرة",
+    "جذر محرك الكتيب/المرآة",
+    "جذر مستودع النسخة الاحتياطية",
+    "جرد ربط تقديري يضخّم اليتامى إلى 6729",
+    "حارس المفردات وتغطية الأسطح",
+    "حارس عقد الخريطة",
+    "حاكمية المانيفست — سجل الأقسام والكتيب",
+    "حداثة البوابات/D010",
+    "حكم البوابات",
+    "حلقة استدعاء بوابات متكررة",
+    "حلقة التعلم",
+    "حلقة انحراف متكررة بين الخادم والمرآة في ملفات المهارات والمعجم",
+    "حماية ملفات المهارات الحاكمة",
+    "حماية مهارات المشروع من مزامنة الجولة",
+    "خريطة",
+    "خطأ صياغة في فاحص الوصول",
+    "خطوة النشر",
+    "دفتر الأحداث",
+    "دفتر الأحداث — الدليل الحرفي",
+    "دفتر الأحداث — حقول العلاقة",
+    "دفتر اليوم غائب",
+    "ربط الأدوات — أداة بلا خطوة مالكة",
+    "ربط الأرقام",
+    "ربط الأرقام — أسطح منشورة بلا بوابة تحرسها",
+    "ربط الأقسام بالكتل",
+    "ربط الاختبارات بالمانيفست",
+    "رسالة تلغرام خاطئة سابقة",
+    "رقم مصادر بلا مؤهّل في صفحة الإضافات",
+    "رموز أحداث غير مسجّلة",
+    "رموز تقديرات غير مسجّلة",
+    "روابط السطح",
+    "سجل النشر/هوية القناة",
+    "سطح PDF كان يمنع التسليم رغم تعطيل الطباعة",
+    "سلامة أصول المهارات — مزامنة خارجية (تكرار ك-360)",
+    "سلسلة الأصول الحاكمة",
+    "سند المادة",
+    "صياغة",
+    "طباعة",
+    "عرض",
+    "عزل اختبار قنوات المصادر/جذر قانوني",
+    "عطل ظاهر",
+    "عطل معروف غير مُفصح عنه",
+    "عقد أهداف تلغرام/دليل الفشل",
+    "عقد البطاقات — التسمية المعتمدة",
+    "عقد النشر/D010-D020",
+    "عقد النطاق: الكتل المولَّدة",
+    "عقد بطاقة سجل الأحداث — البوابة والمولّد",
+    "عملية المرآة — دفع مباشر إلى main",
+    "فجوة بيانات الدفتر",
+    "قرار النشر/جهوزية القنوات",
+    "قسم الخريطة — تكدّس العلامات على الجوال",
+    "قسم الخريطة — قالب جملة متكرر مانع",
+    "قسم الخريطة — معالجة النص بعد البناء",
+    "قناة Pages لا تدفع مصدرها",
+    "قناة النشر البديلة/حكم البوابات",
+    "قنوات المصادر/أرضية الأصول",
+    "قياس",
+    "قياس PDF: فجوة وتعبئة",
+    "قياس الأسلوب — استخراج نص الأسطح",
+    "كشف لفظ ممنوع في متن اليوم",
+    "كود ميت",
+    "لغة",
+    "لغة · أسطح",
+    "لغة ومفردات",
+    "لفظ مصطنع في عنوان قسم",
+    "مانيفست",
+    "متغير غير مُسند في المولّد",
+    "مجاميع الوفيات",
+    "محتوى",
+    "محرّك",
+    "مخالفة",
+    "مخطط الخطر",
+    "مدققان غير موصولين بالحارس الموحّد",
+    "مدققان يستدعيان حارس الانهيار بالاسم فقط",
+    "مدير الانحدار: مسار الموقع",
+    "مزامنة المستودع",
+    "مسار قائمة أصول خاطئ",
+    "مسارات",
+    "مصدر-سطح",
+    "معجم المفردات المشتق",
+    "معجم النسخة الإنجليزية",
+    "مفتاح الخريطة — تكرار نصّي مرئي",
+    "مفردات المناطق/حارس G000A",
+    "مفردات المواقع",
+    "ملف اختبار/بوابة الأسرار",
+    "ملف الواجهة — لفظ ممنوع في مراسي المناطق",
+    "ملفات شيفرة بلا مالك ولا استثناء",
+    "مهارات",
+    "نزاهة شجرة الأدلة",
+    "نسخة احتياطية للشيفرة",
+    "نشر",
+    "نطاق تطبيع الأرقام/مصادر المهارات",
+    "نطاق حارس",
+    "نطاق كاشف",
+    "نطاق-بوابة",
+    "نظام",
+    "واجهة",
+    "وحدات ترجمة ناقصة تمنع بناء النسخة الإنجليزية",
+    "وصول"
+  ],
+  "rows": [
+    {
+      "fault_id": "ك-223",
+      "axis": "parity",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/D040.log وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/D040.log"
+    },
+    {
+      "fault_id": "ك-225",
+      "axis": "gate",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد مصدر التماثل قبل الإغلاق؛ الحاجز المرشّح: شغّل python3 validators/check_gate_readiness.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_gate_readiness.py"
+    },
+    {
+      "fault_id": "ك-226",
+      "axis": "parity",
+      "class": "قرار مالك",
+      "proposed_action": "قرار مالك مطلوب: تحديد القبول أو الإصلاح الجذري قبل أي إغلاق؛ لا يُنشأ ادعاء دليل أو حاجز بديل بلا القرار.",
+      "artifact": ""
+    },
+    {
+      "fault_id": "ع-01",
+      "axis": "عطل ظاهر",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "م-03",
+      "axis": "مخالفة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل bash tests/run_checks.sh بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ث-02",
+      "axis": "ثغرة إجراء",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل bash tests/run_checks.sh بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ع-02",
+      "axis": "عطل ظاهر",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت مسار المصدر وعدّاده من سجل واحد؛ الحاجز المرشّح: شغّل python3 validators/check_source_route_coverage.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_source_route_coverage.py"
+    },
+    {
+      "fault_id": "ث-03",
+      "axis": "ثغرة إجراء",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/appendices/sources-manifest.json وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/appendices/sources-manifest.json"
+    },
+    {
+      "fault_id": "ك-03",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد مصدر التماثل قبل الإغلاق؛ الحاجز المرشّح: شغّل python3 validators/check_backup_parity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    },
+    {
+      "fault_id": "ث-05",
+      "axis": "ثغرة أمنية",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/appendices/security-notes.md وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/appendices/security-notes.md"
+    },
+    {
+      "fault_id": "ك-05",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد مصدر التماثل قبل الإغلاق؛ الحاجز المرشّح: شغّل python3 validators/check_backup_parity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    },
+    {
+      "fault_id": "ك-20",
+      "axis": "أمن الأسرار",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت الحماية السرية والفشل المغلق؛ الحاجز المرشّح: شغّل python3 validators/check_secrets.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_secrets.py"
+    },
+    {
+      "fault_id": "ك-21",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-22",
+      "axis": "النشر والتحقق الحي",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل python3 validators/check_delivery_policy.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_delivery_policy.py"
+    },
+    {
+      "fault_id": "ك-24",
+      "axis": "بوابات",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل python3 validators/check_gate_readiness.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_gate_readiness.py"
+    },
+    {
+      "fault_id": "ك-25",
+      "axis": "بناء",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل python3 validators/check_reference_generated.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_reference_generated.py"
+    },
+    {
+      "fault_id": "ك-26",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد مصدر التماثل قبل الإغلاق؛ الحاجز المرشّح: شغّل python3 validators/check_backup_parity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    },
+    {
+      "fault_id": "ك-30",
+      "axis": "دفتر الأحداث",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: اشتقاق السجل من مصدر وقائع واحد؛ الحاجز المرشّح: شغّل python3 validators/check_ledger_continuity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_ledger_continuity.py"
+    },
+    {
+      "fault_id": "ك-32",
+      "axis": "manifest",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت ترتيب الخطوة وعقدها في المانيفست؛ الحاجز المرشّح: شغّل python3 validators/check_run_completeness.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_run_completeness.py"
+    },
+    {
+      "fault_id": "ك-34",
+      "axis": "خريطة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-35",
+      "axis": "sources",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت مسار المصدر وعدّاده من سجل واحد؛ الحاجز المرشّح: شغّل python3 validators/check_source_route_coverage.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_source_route_coverage.py"
+    },
+    {
+      "fault_id": "ك-36",
+      "axis": "حارس المفردات وتغطية الأسطح",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة بناء النص والمعجم من المصدر الحاكم؛ الحاجز المرشّح: شغّل python3 validators/check_vocabulary.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_vocabulary.py"
+    },
+    {
+      "fault_id": "ك-37",
+      "axis": "بوابات",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل python3 validators/check_gate_readiness.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_gate_readiness.py"
+    },
+    {
+      "fault_id": "ك-38",
+      "axis": "حارس المفردات وتغطية الأسطح",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة بناء النص والمعجم من المصدر الحاكم؛ الحاجز المرشّح: شغّل python3 validators/check_vocabulary.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_vocabulary.py"
+    },
+    {
+      "fault_id": "ك-40",
+      "axis": "النشر والتحقق الحي",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل python3 validators/check_delivery_policy.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_delivery_policy.py"
+    },
+    {
+      "fault_id": "ك-41",
+      "axis": "sources",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت مسار المصدر وعدّاده من سجل واحد؛ الحاجز المرشّح: شغّل python3 validators/check_source_route_coverage.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_source_route_coverage.py"
+    },
+    {
+      "fault_id": "ك-42",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-43",
+      "axis": "النشر والتحقق الحي",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل python3 validators/check_delivery_policy.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_delivery_policy.py"
+    },
+    {
+      "fault_id": "ك-44",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-46",
+      "axis": "schema",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل python3 validators/check_daily_events_schema.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_daily_events_schema.py"
+    },
+    {
+      "fault_id": "ك-47",
+      "axis": "بوابات",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل python3 validators/check_gate_readiness.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_gate_readiness.py"
+    },
+    {
+      "fault_id": "ك-51",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-52",
+      "axis": "حارس المفردات وتغطية الأسطح",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة بناء النص والمعجم من المصدر الحاكم؛ الحاجز المرشّح: شغّل python3 validators/check_vocabulary.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_vocabulary.py"
+    },
+    {
+      "fault_id": "ك-50",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-53",
+      "axis": "أمن الأسرار",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت الحماية السرية والفشل المغلق؛ الحاجز المرشّح: شغّل python3 validators/check_secrets.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_secrets.py"
+    },
+    {
+      "fault_id": "ك-54",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد مصدر التماثل قبل الإغلاق؛ الحاجز المرشّح: شغّل python3 validators/check_backup_parity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    },
+    {
+      "fault_id": "ك-56",
+      "axis": "بناء",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل python3 validators/check_reference_generated.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_reference_generated.py"
+    },
+    {
+      "fault_id": "ك-14",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-15",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-16",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-17",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-18",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-19",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-45",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-59",
+      "axis": "بوابات",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل python3 validators/check_gate_readiness.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_gate_readiness.py"
+    },
+    {
+      "fault_id": "ك-60",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد مصدر التماثل قبل الإغلاق؛ الحاجز المرشّح: شغّل python3 validators/check_backup_parity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    },
+    {
+      "fault_id": "ك-61",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-62",
+      "axis": "النشر والتحقق الحي",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل python3 validators/check_delivery_policy.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_delivery_policy.py"
+    },
+    {
+      "fault_id": "ك-63",
+      "axis": "sources",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت مسار المصدر وعدّاده من سجل واحد؛ الحاجز المرشّح: شغّل python3 validators/check_source_route_coverage.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_source_route_coverage.py"
+    },
+    {
+      "fault_id": "ك-81",
+      "axis": "sources",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت مسار المصدر وعدّاده من سجل واحد؛ الحاجز المرشّح: شغّل python3 validators/check_source_route_coverage.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_source_route_coverage.py"
+    },
+    {
+      "fault_id": "ك-82",
+      "axis": "sources",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت مسار المصدر وعدّاده من سجل واحد؛ الحاجز المرشّح: شغّل python3 validators/check_source_route_coverage.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_source_route_coverage.py"
+    },
+    {
+      "fault_id": "ك-83",
+      "axis": "بوابات",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل python3 validators/check_gate_readiness.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_gate_readiness.py"
+    },
+    {
+      "fault_id": "ك-84",
+      "axis": "sources",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت مسار المصدر وعدّاده من سجل واحد؛ الحاجز المرشّح: شغّل python3 validators/check_source_route_coverage.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_source_route_coverage.py"
+    },
+    {
+      "fault_id": "ك-85",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-86",
+      "axis": "sources",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت مسار المصدر وعدّاده من سجل واحد؛ الحاجز المرشّح: شغّل python3 validators/check_source_route_coverage.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_source_route_coverage.py"
+    },
+    {
+      "fault_id": "ك-87",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-88",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-89",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-90",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-91",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-92",
+      "axis": "ترجمة ثنائية اللغة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة بناء النص والمعجم من المصدر الحاكم؛ الحاجز المرشّح: شغّل python3 validators/check_en_parity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_en_parity.py"
+    },
+    {
+      "fault_id": "ك-93",
+      "axis": "process",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل bash tests/run_checks.sh بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-94",
+      "axis": "أمانة الأرقام",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل python3 validators/check_number_bindings.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_number_bindings.py"
+    },
+    {
+      "fault_id": "ك-95",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-91/ب",
+      "axis": "الطباعة والتخطيط",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/appendices/report-sections-policy.json وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/appendices/report-sections-policy.json"
+    },
+    {
+      "fault_id": "ك-92/ب",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-93/ب",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-94/ب",
+      "axis": "الطباعة والتخطيط",
+      "class": "قرار مالك",
+      "proposed_action": "قرار مالك مطلوب: تحديد القبول أو الإصلاح الجذري قبل أي إغلاق؛ لا يُنشأ ادعاء دليل أو حاجز بديل بلا القرار.",
+      "artifact": ""
+    },
+    {
+      "fault_id": "ك-97",
+      "axis": "الطباعة والتخطيط",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/web/meta/2026-10-22.json وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/web/meta/2026-10-22.json"
+    },
+    {
+      "fault_id": "ك-98",
+      "axis": "خريطة",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/web/meta/2026-10-22.json وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/web/meta/2026-10-22.json"
+    },
+    {
+      "fault_id": "ك-99",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد مصدر التماثل قبل الإغلاق؛ الحاجز المرشّح: شغّل python3 validators/check_backup_parity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    },
+    {
+      "fault_id": "ك-100",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-101",
+      "axis": "خريطة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-102",
+      "axis": "الطباعة والتخطيط",
+      "class": "قرار مالك",
+      "proposed_action": "قرار مالك مطلوب: تحديد القبول أو الإصلاح الجذري قبل أي إغلاق؛ لا يُنشأ ادعاء دليل أو حاجز بديل بلا القرار.",
+      "artifact": ""
+    },
+    {
+      "fault_id": "ك-105",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-106",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-107",
+      "axis": "خريطة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-108",
+      "axis": "خريطة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-109",
+      "axis": "خريطة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-110",
+      "axis": "حارس المفردات وتغطية الأسطح",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة بناء النص والمعجم من المصدر الحاكم؛ الحاجز المرشّح: شغّل python3 validators/check_vocabulary.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_vocabulary.py"
+    },
+    {
+      "fault_id": "ك-111",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-112",
+      "axis": "خريطة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-113",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-114",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-115",
+      "axis": "خريطة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-116",
+      "axis": "sources",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت مسار المصدر وعدّاده من سجل واحد؛ الحاجز المرشّح: شغّل python3 validators/check_source_route_coverage.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_source_route_coverage.py"
+    },
+    {
+      "fault_id": "ك-118",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-119",
+      "axis": "sources",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت مسار المصدر وعدّاده من سجل واحد؛ الحاجز المرشّح: شغّل python3 validators/check_source_route_coverage.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_source_route_coverage.py"
+    },
+    {
+      "fault_id": "ك-120",
+      "axis": "sources",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت مسار المصدر وعدّاده من سجل واحد؛ الحاجز المرشّح: شغّل python3 validators/check_source_route_coverage.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_source_route_coverage.py"
+    },
+    {
+      "fault_id": "ك-121",
+      "axis": "sources",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/appendices/source-reliability-40.json وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/appendices/source-reliability-40.json"
+    },
+    {
+      "fault_id": "ك-122",
+      "axis": "خريطة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-123",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-124",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-122/ب",
+      "axis": "خريطة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-125",
+      "axis": "خريطة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-126",
+      "axis": "الطباعة والتخطيط",
+      "class": "قرار مالك",
+      "proposed_action": "قرار مالك مطلوب: تحديد القبول أو الإصلاح الجذري قبل أي إغلاق؛ لا يُنشأ ادعاء دليل أو حاجز بديل بلا القرار.",
+      "artifact": ""
+    },
+    {
+      "fault_id": "ك-127",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-129",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-130",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-131",
+      "axis": "manifest",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت ترتيب الخطوة وعقدها في المانيفست؛ الحاجز المرشّح: شغّل python3 validators/check_run_completeness.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_run_completeness.py"
+    },
+    {
+      "fault_id": "ك-138",
+      "axis": "حارس المفردات وتغطية الأسطح",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/appendices/known-faults.json وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/appendices/known-faults.json"
+    },
+    {
+      "fault_id": "ك-139",
+      "axis": "بوابات",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل python3 validators/check_gate_readiness.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_gate_readiness.py"
+    },
+    {
+      "fault_id": "ك-140",
+      "axis": "process",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/appendices/known-faults.json وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/appendices/known-faults.json"
+    },
+    {
+      "fault_id": "ك-141",
+      "axis": "الطباعة والتخطيط",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/appendices/broad-excepts-baseline.json وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/appendices/broad-excepts-baseline.json"
+    },
+    {
+      "fault_id": "ك-142",
+      "axis": "manifest",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت ترتيب الخطوة وعقدها في المانيفست؛ الحاجز المرشّح: شغّل python3 validators/check_run_completeness.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_run_completeness.py"
+    },
+    {
+      "fault_id": "ك-145",
+      "axis": "بوابات",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/appendices/broad-excepts-baseline.json وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/appendices/broad-excepts-baseline.json"
+    },
+    {
+      "fault_id": "ك-148",
+      "axis": "أمن الأسرار",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت ترتيب الخطوة وعقدها في المانيفست؛ الحاجز المرشّح: شغّل python3 validators/check_secrets.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_secrets.py"
+    },
+    {
+      "fault_id": "ك-153",
+      "axis": "حارس المفردات وتغطية الأسطح",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/appendices/forbidden-coinages.json وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/appendices/forbidden-coinages.json"
+    },
+    {
+      "fault_id": "ك-154",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-155",
+      "axis": "sources",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت مسار المصدر وعدّاده من سجل واحد؛ الحاجز المرشّح: شغّل python3 validators/check_source_route_coverage.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_source_route_coverage.py"
+    },
+    {
+      "fault_id": "ك-156",
+      "axis": "أمانة الأرقام",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/logs/pipeline-2026-10-24.json وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/logs/pipeline-2026-10-24.json"
+    },
+    {
+      "fault_id": "ك-157",
+      "axis": "النشر والتحقق الحي",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/D020.log وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/D020.log"
+    },
+    {
+      "fault_id": "ك-158",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/D040.log وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/D040.log"
+    },
+    {
+      "fault_id": "ك-160",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/D040.log وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/D040.log"
+    },
+    {
+      "fault_id": "ك-161",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/D070.log وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/D070.log"
+    },
+    {
+      "fault_id": "ك-163",
+      "axis": "sources",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: اشتقاق السجل من مصدر وقائع واحد؛ الحاجز المرشّح: شغّل python3 validators/check_source_route_coverage.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_source_route_coverage.py"
+    },
+    {
+      "fault_id": "ك-164",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/appendices/untracked-code-allowlist.json وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/appendices/untracked-code-allowlist.json"
+    },
+    {
+      "fault_id": "ك-165",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد مصدر التماثل قبل الإغلاق؛ الحاجز المرشّح: شغّل python3 validators/check_backup_parity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    },
+    {
+      "fault_id": "ك-166",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "قرار مالك",
+      "proposed_action": "قرار مالك مطلوب: تحديد القبول أو الإصلاح الجذري قبل أي إغلاق؛ لا يُنشأ ادعاء دليل أو حاجز بديل بلا القرار.",
+      "artifact": ""
+    },
+    {
+      "fault_id": "ك-168",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/D040.log وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/D040.log"
+    },
+    {
+      "fault_id": "ك-169",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-170",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-171",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-172",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/D040.log وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/D040.log"
+    },
+    {
+      "fault_id": "ك-173",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/G013.log وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/G013.log"
+    },
+    {
+      "fault_id": "ك-174",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-169/ب",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-192",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-193",
+      "axis": "الطباعة والتخطيط",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/G042.log وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/G042.log"
+    },
+    {
+      "fault_id": "ك-194",
+      "axis": "الطباعة والتخطيط",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/D020.log وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/D020.log"
+    },
+    {
+      "fault_id": "ك-195",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/D040.log وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/D040.log"
+    },
+    {
+      "fault_id": "ك-196",
+      "axis": "process",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل bash tests/run_checks.sh بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-197",
+      "axis": "بوابات",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل python3 validators/check_gate_readiness.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_gate_readiness.py"
+    },
+    {
+      "fault_id": "ك-198",
+      "axis": "الطباعة والتخطيط",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/reports/2026-10-26-sectioned.md وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/reports/2026-10-26-sectioned.md"
+    },
+    {
+      "fault_id": "ك-199",
+      "axis": "sources",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت مسار المصدر وعدّاده من سجل واحد؛ الحاجز المرشّح: شغّل python3 validators/check_source_route_coverage.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_source_route_coverage.py"
+    },
+    {
+      "fault_id": "ك-201",
+      "axis": "دفتر الأحداث",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/runbook/runbook.json وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/runbook/runbook.json"
+    },
+    {
+      "fault_id": "ك-203",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/D040.log وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/D040.log"
+    },
+    {
+      "fault_id": "ك-202",
+      "axis": "manifest",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/runbook/runbook.json وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/runbook/runbook.json"
+    },
+    {
+      "fault_id": "ك-204",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-205",
+      "axis": "sources",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت مسار المصدر وعدّاده من سجل واحد؛ الحاجز المرشّح: شغّل python3 validators/check_source_route_coverage.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_source_route_coverage.py"
+    },
+    {
+      "fault_id": "ك-206",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد مصدر التماثل قبل الإغلاق؛ الحاجز المرشّح: شغّل python3 validators/check_backup_parity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    },
+    {
+      "fault_id": "ك-210",
+      "axis": "نظام",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة بناء النص والمعجم من المصدر الحاكم؛ الحاجز المرشّح: شغّل bash tests/run_checks.sh بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-213",
+      "axis": "حارس المفردات وتغطية الأسطح",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة بناء النص والمعجم من المصدر الحاكم؛ الحاجز المرشّح: شغّل python3 validators/check_vocabulary.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_vocabulary.py"
+    },
+    {
+      "fault_id": "ك-214",
+      "axis": "حارس المفردات وتغطية الأسطح",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة بناء النص والمعجم من المصدر الحاكم؛ الحاجز المرشّح: شغّل python3 validators/check_vocabulary.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_vocabulary.py"
+    },
+    {
+      "fault_id": "ك-215",
+      "axis": "حارس المفردات وتغطية الأسطح",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة بناء النص والمعجم من المصدر الحاكم؛ الحاجز المرشّح: شغّل python3 validators/check_vocabulary.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_vocabulary.py"
+    },
+    {
+      "fault_id": "ك-216",
+      "axis": "schema",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل python3 validators/check_daily_events_schema.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_daily_events_schema.py"
+    },
+    {
+      "fault_id": "ك-217",
+      "axis": "schema",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/audit/faults-index.jsonl وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/audit/faults-index.jsonl"
+    },
+    {
+      "fault_id": "ك-219",
+      "axis": "data",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل python3 validators/check_content_fidelity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_content_fidelity.py"
+    },
+    {
+      "fault_id": "ك-220",
+      "axis": "derivation",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل bash tests/run_checks.sh بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-229",
+      "axis": "data",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت الحماية السرية والفشل المغلق؛ الحاجز المرشّح: شغّل python3 validators/check_content_fidelity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_content_fidelity.py"
+    },
+    {
+      "fault_id": "ك-238",
+      "axis": "vocabulary",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل bash tests/run_checks.sh بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-241",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-242",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-243",
+      "axis": "sources",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت مسار المصدر وعدّاده من سجل واحد؛ الحاجز المرشّح: شغّل python3 validators/check_source_route_coverage.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_source_route_coverage.py"
+    },
+    {
+      "fault_id": "ك-244",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-245",
+      "axis": "خريطة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-246",
+      "axis": "accessibility",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد عقد الوصول والقياس على المقاسات المستهدفة؛ الحاجز المرشّح: شغّل python3 validators/check_desktop_readability.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_desktop_readability.py"
+    },
+    {
+      "fault_id": "ك-247",
+      "axis": "accessibility",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد عقد الوصول والقياس على المقاسات المستهدفة؛ الحاجز المرشّح: شغّل python3 validators/check_desktop_readability.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_desktop_readability.py"
+    },
+    {
+      "fault_id": "ك-248",
+      "axis": "process",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل bash tests/run_checks.sh بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-249",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-250",
+      "axis": "أمانة الأرقام",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل python3 validators/check_number_bindings.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_number_bindings.py"
+    },
+    {
+      "fault_id": "ك-257",
+      "axis": "gate",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل python3 validators/check_gate_readiness.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_gate_readiness.py"
+    },
+    {
+      "fault_id": "ك-259",
+      "axis": "process",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل bash tests/run_checks.sh بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-261",
+      "axis": "process",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل bash tests/run_checks.sh بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-265",
+      "axis": "schema",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل python3 validators/check_daily_events_schema.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_daily_events_schema.py"
+    },
+    {
+      "fault_id": "ك-266",
+      "axis": "process",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل bash tests/run_checks.sh بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-280",
+      "axis": "محتوى",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت مسار المصدر وعدّاده من سجل واحد؛ الحاجز المرشّح: شغّل python3 validators/check_content_fidelity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_content_fidelity.py"
+    },
+    {
+      "fault_id": "ك-282",
+      "axis": "system",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت مسار المصدر وعدّاده من سجل واحد؛ الحاجز المرشّح: شغّل bash tests/run_checks.sh بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-283",
+      "axis": "system",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل bash tests/run_checks.sh بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-293",
+      "axis": "accessibility",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_desktop_readability.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_desktop_readability.py"
+    },
+    {
+      "fault_id": "ك-301",
+      "axis": "content",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: اشتقاق السجل من مصدر وقائع واحد؛ الحاجز المرشّح: شغّل python3 validators/check_content_fidelity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_content_fidelity.py"
+    },
+    {
+      "fault_id": "ك-302",
+      "axis": "content",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل python3 validators/check_content_fidelity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_content_fidelity.py"
+    },
+    {
+      "fault_id": "ك-304",
+      "axis": "render",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد عقد الوصول والقياس على المقاسات المستهدفة؛ الحاجز المرشّح: شغّل python3 validators/check_surface_hygiene.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_surface_hygiene.py"
+    },
+    {
+      "fault_id": "ك-305",
+      "axis": "content",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: اشتقاق السجل من مصدر وقائع واحد؛ الحاجز المرشّح: شغّل python3 validators/check_content_fidelity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_content_fidelity.py"
+    },
+    {
+      "fault_id": "ك-306",
+      "axis": "content",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/cumulative-2026/daily/2026-10-29.json وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/cumulative-2026/daily/2026-10-29.json"
+    },
+    {
+      "fault_id": "ك-307",
+      "axis": "content",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل python3 validators/check_content_fidelity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_content_fidelity.py"
+    },
+    {
+      "fault_id": "ك-312",
+      "axis": "وصول",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة بناء النص والمعجم من المصدر الحاكم؛ الحاجز المرشّح: شغّل python3 validators/check_desktop_readability.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_desktop_readability.py"
+    },
+    {
+      "fault_id": "ك-318",
+      "axis": "لغة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة بناء النص والمعجم من المصدر الحاكم؛ الحاجز المرشّح: شغّل python3 validators/check_language.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_language.py"
+    },
+    {
+      "fault_id": "ك-323",
+      "axis": "لغة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة بناء النص والمعجم من المصدر الحاكم؛ الحاجز المرشّح: شغّل python3 validators/check_language.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_language.py"
+    },
+    {
+      "fault_id": "ك-330",
+      "axis": "تخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-332",
+      "axis": "واجهة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_surface_hygiene.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_surface_hygiene.py"
+    },
+    {
+      "fault_id": "ك-340",
+      "axis": "مانيفست",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: اشتقاق السجل من مصدر وقائع واحد؛ الحاجز المرشّح: شغّل python3 validators/check_run_completeness.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_run_completeness.py"
+    },
+    {
+      "fault_id": "م-372",
+      "axis": "الوحدات",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز المرشّح: شغّل bash tests/run_checks.sh بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-399",
+      "axis": "ledger-integrity",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة بناء النص والمعجم من المصدر الحاكم؛ الحاجز المرشّح: شغّل python3 validators/check_ledger_continuity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_ledger_continuity.py"
+    },
+    {
+      "fault_id": "ك-400",
+      "axis": "skill-structure",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: استعادة الأصل الحاكم ومقارنة النسخ؛ الحاجز المرشّح: شغّل bash tests/run_checks.sh بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-401",
+      "axis": "بوابة-إيجابية-كاذبة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد عقد الوصول والقياس على المقاسات المستهدفة؛ الحاجز المرشّح: شغّل python3 validators/check_gate_readiness.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_gate_readiness.py"
+    },
+    {
+      "fault_id": "ك-402",
+      "axis": "نطاق-بوابة",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/B020.log وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/B020.log"
+    },
+    {
+      "fault_id": "ك-411",
+      "axis": "إنفاذ",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/G011.log وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/G011.log"
+    },
+    {
+      "fault_id": "ك-413",
+      "axis": "عرض",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_surface_hygiene.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_surface_hygiene.py"
+    },
+    {
+      "fault_id": "ك-415",
+      "axis": "الترجمة الإنجليزية — إحلال وسوم الحالة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة بناء النص والمعجم من المصدر الحاكم؛ الحاجز المرشّح: شغّل python3 validators/check_backup_parity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    },
+    {
+      "fault_id": "ك-416",
+      "axis": "الترجمة الإنجليزية — كتل الإفصاح في الخريطة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة بناء النص والمعجم من المصدر الحاكم؛ الحاجز المرشّح: شغّل python3 validators/check_backup_parity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    },
+    {
+      "fault_id": "ك-417",
+      "axis": "قسم الخريطة — تكدّس العلامات على الجوال",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_map_note_counts.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_map_note_counts.py"
+    },
+    {
+      "fault_id": "ك-420",
+      "axis": "عملية المرآة — دفع مباشر إلى main",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد مصدر التماثل قبل الإغلاق؛ الحاجز المرشّح: شغّل python3 validators/check_backup_parity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    },
+    {
+      "fault_id": "ك-421",
+      "axis": "المهارات — تكرار اقتطاع النسخ الحاكمة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد مصدر التماثل قبل الإغلاق؛ الحاجز المرشّح: شغّل python3 validators/check_backup_parity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    },
+    {
+      "fault_id": "ك-422",
+      "axis": "المرآة — استثناء مجلد logs أحدث انحرافًا",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد مصدر التماثل قبل الإغلاق؛ الحاجز المرشّح: شغّل python3 validators/check_backup_parity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    },
+    {
+      "fault_id": "ك-423",
+      "axis": "الخريطة — تصغير الجوال",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_map_note_counts.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_map_note_counts.py"
+    },
+    {
+      "fault_id": "ك-424",
+      "axis": "الخريطة — محددات CSS",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-425",
+      "axis": "الخريطة — هوية العلامات",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_ledger_continuity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_ledger_continuity.py"
+    },
+    {
+      "fault_id": "ك-426",
+      "axis": "الخريطة — الحجب",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-427",
+      "axis": "الخريطة — الوصول",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل bash tests/run_checks.sh بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-428",
+      "axis": "النشر — مطابقة الإنجليزية",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/D010.log وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/D010.log"
+    },
+    {
+      "fault_id": "ك-442",
+      "axis": "نزاهة شجرة الأدلة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: اشتقاق السجل من مصدر وقائع واحد؛ الحاجز المرشّح: شغّل python3 validators/check_backup_parity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    },
+    {
+      "fault_id": "ك-453",
+      "axis": "الكتيب — رقم ثابت للمصادر خارج نطاق البوابة",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/appendices/sources-manifest.json وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/appendices/sources-manifest.json"
+    },
+    {
+      "fault_id": "ك-457",
+      "axis": "كشف لفظ ممنوع في متن اليوم",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة بناء النص والمعجم من المصدر الحاكم؛ الحاجز المرشّح: شغّل python3 validators/check_language.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_language.py"
+    },
+    {
+      "fault_id": "ك-458",
+      "axis": "رقم مصادر بلا مؤهّل في صفحة الإضافات",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت مسار المصدر وعدّاده من سجل واحد؛ الحاجز المرشّح: شغّل python3 validators/check_source_route_coverage.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_source_route_coverage.py"
+    },
+    {
+      "fault_id": "ك-459",
+      "axis": "أرقام عربية في ملف شيفرة وسجل التعلم",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/memory/learning-log.jsonl وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/memory/learning-log.jsonl"
+    },
+    {
+      "fault_id": "ك-460",
+      "axis": "مدققان يستدعيان حارس الانهيار بالاسم فقط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد عقد الوصول والقياس على المقاسات المستهدفة؛ الحاجز المرشّح: شغّل bash tests/run_checks.sh بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-461",
+      "axis": "أثر طباعة قديم يعطّل بوابات معطّلة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_backup_parity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    },
+    {
+      "fault_id": "ك-464",
+      "axis": "أداة إرسال تلغرام تعلّق بلا مخرجات",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-467",
+      "axis": "سطح PDF كان يمنع التسليم رغم تعطيل الطباعة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_print_quality.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-468",
+      "axis": "وحدات ترجمة ناقصة تمنع بناء النسخة الإنجليزية",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/B010.log وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-08/B010.log"
+    },
+    {
+      "fault_id": "ك-485",
+      "axis": "بوابات",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة بناء النص والمعجم من المصدر الحاكم؛ الحاجز المرشّح: شغّل python3 validators/check_gate_readiness.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_gate_readiness.py"
+    },
+    {
+      "fault_id": "ك-486",
+      "axis": "بوابات",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز المرشّح: شغّل python3 validators/check_gate_readiness.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_gate_readiness.py"
+    },
+    {
+      "fault_id": "ك-487",
+      "axis": "لغة ومفردات",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/web/meta/2026-11-03.json وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/web/meta/2026-11-03.json"
+    },
+    {
+      "fault_id": "ك-489",
+      "axis": "أمانة الأرقام",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة بناء النص والمعجم من المصدر الحاكم؛ الحاجز المرشّح: شغّل python3 validators/check_number_bindings.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_number_bindings.py"
+    },
+    {
+      "fault_id": "ك-492",
+      "axis": "دفتر الأحداث",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: اشتقاق السجل من مصدر وقائع واحد؛ الحاجز المرشّح: شغّل python3 validators/check_ledger_continuity.py بعد الإصلاح وسجّل مخرجًا مقيسًا قابلًا لإعادة التشغيل.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_ledger_continuity.py"
+    },
+    {
+      "fault_id": "ك-495",
+      "axis": "حلقة التعلم",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/logs/gate-status.md وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/logs/gate-status.md"
+    },
+    {
+      "fault_id": "ك-543",
+      "axis": "عقد النشر/D010-D020",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/logs/publish-2026-11-07.json وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/logs/publish-2026-11-07.json"
+    },
+    {
+      "fault_id": "ك-545",
+      "axis": "تكافؤ النسخة الإنجليزية",
+      "class": "دليل قابل للاستخراج",
+      "proposed_action": "استخرج الأثر التاريخي من /home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-07/D010.log وطابقه مع المعرّف؛ يحتاج تحققًا مستقلًا قبل اعتباره دليل إغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/logs/runbook/2026-11-07/D010.log"
+    },
+    {
+      "fault_id": "ك-10",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد مصدر التماثل قبل الإغلاق؛ الحاجز: شغّل python3 validators/check_backup_parity.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    },
+    {
+      "fault_id": "ك-11",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد مصدر التماثل قبل الإغلاق؛ الحاجز: شغّل python3 validators/check_backup_parity.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    },
+    {
+      "fault_id": "ك-12",
+      "axis": "دفتر الأحداث",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: اشتقاق السجل من مصدر وقائع واحد؛ الحاجز: شغّل python3 validators/check_ledger_continuity.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_ledger_continuity.py"
+    },
+    {
+      "fault_id": "ك-13",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد مصدر التماثل قبل الإغلاق؛ الحاجز: شغّل python3 validators/check_backup_parity.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    },
+    {
+      "fault_id": "ك-64",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز: شغّل python3 validators/check_print_quality.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-65",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز: شغّل python3 validators/check_print_quality.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-66",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز: شغّل python3 validators/check_print_quality.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-67",
+      "axis": "process",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز: شغّل bash tests/run_checks.sh على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-68",
+      "axis": "process",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز: شغّل bash tests/run_checks.sh على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-69",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز: شغّل python3 validators/check_print_quality.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-70",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز: شغّل python3 validators/check_print_quality.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-71",
+      "axis": "process",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز: شغّل bash tests/run_checks.sh على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-72",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز: شغّل python3 validators/check_print_quality.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-73",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز: شغّل python3 validators/check_print_quality.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-75",
+      "axis": "دفتر الأحداث",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: اشتقاق السجل من مصدر وقائع واحد؛ الحاجز: شغّل python3 validators/check_ledger_continuity.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_ledger_continuity.py"
+    },
+    {
+      "fault_id": "ك-76",
+      "axis": "أمانة الأرقام",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز: شغّل python3 validators/check_number_bindings.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_number_bindings.py"
+    },
+    {
+      "fault_id": "ك-77",
+      "axis": "خريطة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد مصدر التماثل قبل الإغلاق؛ الحاجز: شغّل python3 validators/check_print_quality.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-78",
+      "axis": "بناء",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز: شغّل python3 validators/check_reference_generated.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_reference_generated.py"
+    },
+    {
+      "fault_id": "ك-79",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد مصدر التماثل قبل الإغلاق؛ الحاجز: شغّل python3 validators/check_backup_parity.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    },
+    {
+      "fault_id": "ك-80",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد مصدر التماثل قبل الإغلاق؛ الحاجز: شغّل python3 validators/check_backup_parity.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    },
+    {
+      "fault_id": "ك-66/ب",
+      "axis": "بوابات",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز: شغّل python3 validators/check_gate_readiness.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_gate_readiness.py"
+    },
+    {
+      "fault_id": "ك-67/ب",
+      "axis": "النشر والتحقق الحي",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز: شغّل python3 validators/check_delivery_policy.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_delivery_policy.py"
+    },
+    {
+      "fault_id": "ك-68/ب",
+      "axis": "process",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز: شغّل bash tests/run_checks.sh على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-69/ب",
+      "axis": "حارس المفردات وتغطية الأسطح",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة بناء النص والمعجم من المصدر الحاكم؛ الحاجز: شغّل python3 validators/check_vocabulary.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_vocabulary.py"
+    },
+    {
+      "fault_id": "ك-70/ب",
+      "axis": "حارس المفردات وتغطية الأسطح",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة بناء النص والمعجم من المصدر الحاكم؛ الحاجز: شغّل python3 validators/check_vocabulary.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_vocabulary.py"
+    },
+    {
+      "fault_id": "ك-71/ب",
+      "axis": "sources",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت مسار المصدر وعدّاده من سجل واحد؛ الحاجز: شغّل python3 validators/check_source_route_coverage.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_source_route_coverage.py"
+    },
+    {
+      "fault_id": "ك-72/ب",
+      "axis": "أمن الأسرار",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت الحماية السرية والفشل المغلق؛ الحاجز: شغّل python3 validators/check_secrets.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_secrets.py"
+    },
+    {
+      "fault_id": "ك-73/ب",
+      "axis": "النشر والتحقق الحي",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز: شغّل python3 validators/check_delivery_policy.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_delivery_policy.py"
+    },
+    {
+      "fault_id": "ك-74",
+      "axis": "النشر والتحقق الحي",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز: شغّل python3 validators/check_delivery_policy.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_delivery_policy.py"
+    },
+    {
+      "fault_id": "ك-75/ب",
+      "axis": "بوابات",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز: شغّل python3 validators/check_gate_readiness.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_gate_readiness.py"
+    },
+    {
+      "fault_id": "ك-76/ب",
+      "axis": "process",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز: شغّل bash tests/run_checks.sh على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-77/ب",
+      "axis": "حارس المفردات وتغطية الأسطح",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة بناء النص والمعجم من المصدر الحاكم؛ الحاجز: شغّل python3 validators/check_vocabulary.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_vocabulary.py"
+    },
+    {
+      "fault_id": "ك-78/ب",
+      "axis": "حارس المفردات وتغطية الأسطح",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة بناء النص والمعجم من المصدر الحاكم؛ الحاجز: شغّل python3 validators/check_vocabulary.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_vocabulary.py"
+    },
+    {
+      "fault_id": "ك-80/ب",
+      "axis": "أمن الأسرار",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت ترتيب الخطوة وعقدها في المانيفست؛ الحاجز: شغّل python3 validators/check_secrets.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_secrets.py"
+    },
+    {
+      "fault_id": "ك-81/ب",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز: شغّل python3 validators/check_print_quality.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-82/ب",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز: شغّل python3 validators/check_print_quality.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-83/ب",
+      "axis": "حارس المفردات وتغطية الأسطح",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة بناء النص والمعجم من المصدر الحاكم؛ الحاجز: شغّل python3 validators/check_vocabulary.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_vocabulary.py"
+    },
+    {
+      "fault_id": "ك-84/ب",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز: شغّل python3 validators/check_print_quality.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-85/ب",
+      "axis": "manifest",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت ترتيب الخطوة وعقدها في المانيفست؛ الحاجز: شغّل python3 validators/check_run_completeness.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_run_completeness.py"
+    },
+    {
+      "fault_id": "ك-86/ب",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد مصدر التماثل قبل الإغلاق؛ الحاجز: شغّل python3 validators/check_backup_parity.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    },
+    {
+      "fault_id": "ك-133",
+      "axis": "بوابات",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز: شغّل python3 validators/check_gate_readiness.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_gate_readiness.py"
+    },
+    {
+      "fault_id": "ك-134",
+      "axis": "manifest",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت ترتيب الخطوة وعقدها في المانيفست؛ الحاجز: شغّل python3 validators/check_run_completeness.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_run_completeness.py"
+    },
+    {
+      "fault_id": "ك-135",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز: شغّل python3 validators/check_print_quality.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-136",
+      "axis": "حارس المفردات وتغطية الأسطح",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة بناء النص والمعجم من المصدر الحاكم؛ الحاجز: شغّل python3 validators/check_vocabulary.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_vocabulary.py"
+    },
+    {
+      "fault_id": "ك-150",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد مصدر التماثل قبل الإغلاق؛ الحاجز: شغّل python3 validators/check_backup_parity.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    },
+    {
+      "fault_id": "ك-170/ب",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز: شغّل python3 validators/check_print_quality.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-171/ب",
+      "axis": "الطباعة والتخطيط",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز: شغّل python3 validators/check_print_quality.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-176",
+      "axis": "تماثل الخادم والمستودع",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد مصدر التماثل قبل الإغلاق؛ الحاجز: شغّل python3 validators/check_backup_parity.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    },
+    {
+      "fault_id": "ك-177",
+      "axis": "ترتيب خطوة في المانيفست",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت ترتيب الخطوة وعقدها في المانيفست؛ الحاجز: شغّل python3 validators/check_run_completeness.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_run_completeness.py"
+    },
+    {
+      "fault_id": "ك-178",
+      "axis": "دفتر اليوم غائب",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: اشتقاق السجل من مصدر وقائع واحد؛ الحاجز: شغّل python3 validators/check_ledger_continuity.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_ledger_continuity.py"
+    },
+    {
+      "fault_id": "ك-179",
+      "axis": "رموز أحداث غير مسجّلة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز: شغّل python3 validators/check_print_quality.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-180",
+      "axis": "تركيب معلّق في الأسلوب",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز: شغّل bash tests/run_checks.sh على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-181",
+      "axis": "رموز تقديرات غير مسجّلة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز: شغّل python3 validators/check_print_quality.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-182",
+      "axis": "عطل معروف غير مُفصح عنه",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز: شغّل bash tests/run_checks.sh على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-183",
+      "axis": "مسار قائمة أصول خاطئ",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت مسار المصدر وعدّاده من سجل واحد؛ الحاجز: شغّل bash tests/run_checks.sh على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-184",
+      "axis": "لفظ مصطنع في عنوان قسم",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: تثبيت مسار المصدر وعدّاده من سجل واحد؛ الحاجز: شغّل python3 validators/check_source_route_coverage.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_source_route_coverage.py"
+    },
+    {
+      "fault_id": "ك-185",
+      "axis": "متغير غير مُسند في المولّد",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز: شغّل python3 validators/check_print_quality.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-186",
+      "axis": "قياس PDF: فجوة وتعبئة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة توليد المخرج وقياس سطح الطباعة؛ الحاجز: شغّل python3 validators/check_print_quality.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-187",
+      "axis": "بصمة نص قديمة بعد البناء",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز: شغّل bash tests/run_checks.sh على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-188",
+      "axis": "رسالة تلغرام خاطئة سابقة",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: إعادة إنتاج العطل وإثبات الحاجز المقيس؛ الحاجز: شغّل python3 validators/check_print_quality.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "fault_id": "ك-189",
+      "axis": "خطأ صياغة في فاحص الوصول",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد عقد الوصول والقياس على المقاسات المستهدفة؛ الحاجز: شغّل bash tests/run_checks.sh على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/tests/run_checks.sh"
+    },
+    {
+      "fault_id": "ك-190",
+      "axis": "انحراف شيفرة الخادم عن المستودع",
+      "class": "حاجز يُعاد توليده",
+      "proposed_action": "رأس الإصلاح: توحيد مصدر التماثل قبل الإغلاق؛ الحاجز: شغّل python3 validators/check_backup_parity.py على مدخل الصف، وسجّل رمز الخروج والمخرج المقيس؛ أي فشل يمنع الإغلاق.",
+      "artifact": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    }
+  ],
+  "top_causes": [
+    {
+      "cause": "قصور طباعة وتخطيط الصفحات",
+      "count": 56,
+      "shared_barrier": "حاجز مشترك: شغّل python3 validators/check_print_quality.py بعد التصدير، وسجّل التعبئة والفجوة وحجم النص.",
+      "host_file": "/home/ubuntu/mda-marine-system/brain/validators/check_print_quality.py"
+    },
+    {
+      "cause": "انحراف التماثل والمزامنة بين الخادم والمستودع",
+      "count": 35,
+      "shared_barrier": "حاجز مشترك: شغّل python3 validators/check_backup_parity.py بعد المزامنة، ولا تعتمد فرقًا بلا بيان Git.",
+      "host_file": "/home/ubuntu/mda-marine-system/brain/validators/check_backup_parity.py"
+    },
+    {
+      "cause": "قابلية الوصول واستجابة الجوال",
+      "count": 21,
+      "shared_barrier": "حاجز مشترك: شغّل python3 validators/check_desktop_readability.py على المقاسات المكتبية والجوالية.",
+      "host_file": "/home/ubuntu/mda-marine-system/brain/validators/check_desktop_readability.py"
+    },
+    {
+      "cause": "تغطية المفردات والأسطح غير مكتملة",
+      "count": 21,
+      "shared_barrier": "حاجز مشترك: شغّل python3 validators/check_vocabulary.py على كل سطح قارئ قبل البناء.",
+      "host_file": "/home/ubuntu/mda-marine-system/brain/validators/check_vocabulary.py"
+    },
+    {
+      "cause": "مسارات أو جذور غير محمولة",
+      "count": 20,
+      "shared_barrier": "حاجز مشترك: شغّل python3 validators/check_portable_paths.py على الشجرة التنفيذية قبل الاعتماد.",
+      "host_file": "/home/ubuntu/mda-marine-system/brain/validators/check_portable_paths.py"
+    },
+    {
+      "cause": "ترتيب المانيفست وربط خطوات التشغيل",
+      "count": 16,
+      "shared_barrier": "حاجز مشترك: شغّل python3 validators/check_run_completeness.py للتحقق من ترتيب الخطوات ووجود مخرجاتها.",
+      "host_file": "/home/ubuntu/mda-marine-system/brain/validators/check_run_completeness.py"
+    },
+    {
+      "cause": "قصور نطاق البوابات أو غياب حارس قابل للتنفيذ",
+      "count": 14,
+      "shared_barrier": "حاجز مشترك: شغّل python3 validators/check_gate_readiness.py على كل نطاق معلن، وسجّل فشلًا مغلقًا عند تعذّر القراءة.",
+      "host_file": "/home/ubuntu/mda-marine-system/brain/validators/check_gate_readiness.py"
+    },
+    {
+      "cause": "النشر والتحقق الحي والانتشار",
+      "count": 14,
+      "shared_barrier": "حاجز مشترك: شغّل python3 validators/check_delivery_policy.py بعد إثبات القناة؛ لا يُستنتج النشر من دفع Git وحده.",
+      "host_file": "/home/ubuntu/mda-marine-system/brain/validators/check_delivery_policy.py"
+    },
+    {
+      "cause": "نزاهة دفتر الأحداث والبيانات",
+      "count": 14,
+      "shared_barrier": "حاجز مشترك: شغّل python3 validators/check_ledger_continuity.py مع فحص الروابط قبل اشتقاق البطاقات.",
+      "host_file": "/home/ubuntu/mda-marine-system/brain/validators/check_ledger_continuity.py"
+    },
+    {
+      "cause": "خلل اتجاه RTL أو ترجمة أو تطبيع لغوي",
+      "count": 14,
+      "shared_barrier": "حاجز مشترك: شغّل python3 validators/check_language.py على النص النهائي، مع اختبار الاتجاه/الترجمة قبل البناء.",
+      "host_file": "/home/ubuntu/mda-marine-system/brain/validators/check_language.py"
+    },
+    {
+      "cause": "استثناءات وفشل مفتوح",
+      "count": 11,
+      "shared_barrier": "حاجز مشترك: شغّل bash tools/final_gate.sh بحيث يتحول الانهيار أو الرمز خارج العقد إلى منع.",
+      "host_file": "/home/ubuntu/mda-marine-system/brain/tools/final_gate.sh"
+    },
+    {
+      "cause": "تغطية المصادر ومسار التحقق الخارجي",
+      "count": 9,
+      "shared_barrier": "حاجز مشترك: شغّل python3 validators/check_source_route_coverage.py وسجّل المسارات المتعذرة والبدائل.",
+      "host_file": "/home/ubuntu/mda-marine-system/brain/validators/check_source_route_coverage.py"
+    },
+    {
+      "cause": "مصدران للحقيقة أو اشتقاق يدوي للعدّ والمحتوى",
+      "count": 8,
+      "shared_barrier": "حاجز مشترك: شغّل python3 validators/check_content_fidelity.py لإثبات اشتقاق العدّ والمحتوى من مصدر واحد.",
+      "host_file": "/home/ubuntu/mda-marine-system/brain/validators/check_content_fidelity.py"
+    },
+    {
+      "cause": "قياس قديم أو غير مطابق للمخرج الفعلي",
+      "count": 5,
+      "shared_barrier": "حاجز مشترك: شغّل python3 tools/check_baseline.py واربط القياس بآخر مخرج مولّد قبل الحكم.",
+      "host_file": "/home/ubuntu/mda-marine-system/brain/tools/check_baseline.py"
+    },
+    {
+      "cause": "سلامة الأصول الحاكمة والمهارات",
+      "count": 3,
+      "shared_barrier": "حاجز مشترك: شغّل python3 validators/check_skills_integrity.py ثم قارن تماثل المهارات قبل الاعتماد.",
+      "host_file": "/home/ubuntu/mda-marine-system/brain/validators/check_skills_integrity.py"
+    }
+  ],
+  "summary": {
+    "total": 281,
+    "by_class": {
+      "دليل قابل للاستخراج": 40,
+      "حاجز يُعاد توليده": 236,
+      "قرار مالك": 5
+    },
+    "by_axis": {
+      "parity": 2,
+      "gate": 2,
+      "عطل ظاهر": 2,
+      "مخالفة": 1,
+      "ثغرة إجراء": 2,
+      "تماثل الخادم والمستودع": 26,
+      "ثغرة أمنية": 1,
+      "أمن الأسرار": 5,
+      "الطباعة والتخطيط": 68,
+      "النشر والتحقق الحي": 8,
+      "بوابات": 13,
+      "بناء": 3,
+      "دفتر الأحداث": 5,
+      "manifest": 6,
+      "خريطة": 13,
+      "sources": 17,
+      "حارس المفردات وتغطية الأسطح": 15,
+      "schema": 4,
+      "ترجمة ثنائية اللغة": 1,
+      "process": 12,
+      "أمانة الأرقام": 5,
+      "نظام": 1,
+      "data": 2,
+      "derivation": 1,
+      "vocabulary": 1,
+      "accessibility": 3,
+      "محتوى": 1,
+      "system": 2,
+      "content": 5,
+      "render": 1,
+      "وصول": 1,
+      "لغة": 2,
+      "تخطيط": 1,
+      "واجهة": 1,
+      "مانيفست": 1,
+      "الوحدات": 1,
+      "ledger-integrity": 1,
+      "skill-structure": 1,
+      "بوابة-إيجابية-كاذبة": 1,
+      "نطاق-بوابة": 1,
+      "إنفاذ": 1,
+      "عرض": 1,
+      "الترجمة الإنجليزية — إحلال وسوم الحالة": 1,
+      "الترجمة الإنجليزية — كتل الإفصاح في الخريطة": 1,
+      "قسم الخريطة — تكدّس العلامات على الجوال": 1,
+      "عملية المرآة — دفع مباشر إلى main": 1,
+      "المهارات — تكرار اقتطاع النسخ الحاكمة": 1,
+      "المرآة — استثناء مجلد logs أحدث انحرافًا": 1,
+      "الخريطة — تصغير الجوال": 1,
+      "الخريطة — محددات CSS": 1,
+      "الخريطة — هوية العلامات": 1,
+      "الخريطة — الحجب": 1,
+      "الخريطة — الوصول": 1,
+      "النشر — مطابقة الإنجليزية": 1,
+      "نزاهة شجرة الأدلة": 1,
+      "الكتيب — رقم ثابت للمصادر خارج نطاق البوابة": 1,
+      "كشف لفظ ممنوع في متن اليوم": 1,
+      "رقم مصادر بلا مؤهّل في صفحة الإضافات": 1,
+      "أرقام عربية في ملف شيفرة وسجل التعلم": 1,
+      "مدققان يستدعيان حارس الانهيار بالاسم فقط": 1,
+      "أثر طباعة قديم يعطّل بوابات معطّلة": 1,
+      "أداة إرسال تلغرام تعلّق بلا مخرجات": 1,
+      "سطح PDF كان يمنع التسليم رغم تعطيل الطباعة": 1,
+      "وحدات ترجمة ناقصة تمنع بناء النسخة الإنجليزية": 1,
+      "لغة ومفردات": 1,
+      "حلقة التعلم": 1,
+      "عقد النشر/D010-D020": 1,
+      "تكافؤ النسخة الإنجليزية": 1,
+      "ترتيب خطوة في المانيفست": 1,
+      "دفتر اليوم غائب": 1,
+      "رموز أحداث غير مسجّلة": 1,
+      "تركيب معلّق في الأسلوب": 1,
+      "رموز تقديرات غير مسجّلة": 1,
+      "عطل معروف غير مُفصح عنه": 1,
+      "مسار قائمة أصول خاطئ": 1,
+      "لفظ مصطنع في عنوان قسم": 1,
+      "متغير غير مُسند في المولّد": 1,
+      "قياس PDF: فجوة وتعبئة": 1,
+      "بصمة نص قديمة بعد البناء": 1,
+      "رسالة تلغرام خاطئة سابقة": 1,
+      "خطأ صياغة في فاحص الوصول": 1,
+      "انحراف شيفرة الخادم عن المستودع": 1
+    }
+  }
+}

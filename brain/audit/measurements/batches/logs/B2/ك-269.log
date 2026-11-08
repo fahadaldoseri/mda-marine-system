@@ -1,0 +1,23 @@
+COMMAND: timeout 120 python3 -m pytest tests/test_sync_guard.py -q
+STARTED_AT: 2026-11-08T23:09:49.567289+00:00
+RC: 2
+ELAPSED_SECONDS: 0.691
+OUTPUT_BEGIN
+
+==================================== ERRORS ====================================
+__________________ ERROR collecting tests/test_sync_guard.py ___________________
+tests/test_sync_guard.py:61: in <module>
+    sys.exit(0 if ok else 2)
+E   SystemExit: 0
+------------------------------- Captured stdout --------------------------------
+  ✔ ملف خارج النطاق بلا علم → مُنع (rc=2) والملف باقٍ
+  ✔ مع --allow-delete → نُفّذ (rc=0) والملف حُذف
+  ✔ حذف 25 ملفًا فوق السقف 20 → مُنع (rc=2)
+  ✔ التجربة تُظهر الخطة وتمنع التنفيذ (rc=2)
+  الحصيلة: كل الاختبارات نجحت ✔
+=========================== short test summary info ============================
+ERROR tests/test_sync_guard.py - SystemExit: 0
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.24s
+OUTPUT_END
+SHA256_BODY: 3f0395211aaaeb3e5a68517e9b1d0edf0782d6412908a8f43592813141de18ec

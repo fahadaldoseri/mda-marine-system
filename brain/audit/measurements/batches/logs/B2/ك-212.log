@@ -1,0 +1,22 @@
+REUSED_FROM: audit/measurements/batches/logs/B/ك-212.log
+REUSED_PRIOR_COMMAND: python3 tests/test_source_channels.py
+REUSED_PRIOR_RC: 0
+REUSED_NOTE: لم يُعاد القياس لأن سجل B السابق ناجح.
+--- PRIOR LOG BEGIN ---
+COMMAND: python3 tests/test_source_channels.py
+STARTED_AT: 2026-11-08T22:34:01.178854+00:00
+RC: 0
+ELAPSED_SECONDS: 0.242
+OUTPUT_BEGIN
+  ✔ الهوية: مجموع القنوات = المعتمد
+  ✔ لا مصدر معتمد بلا قناة
+  ✔ لا مصدر في قناتين
+  ✔ عدد المسار الآلي = ما رمزه سجل اليوم
+  ✔ عدد المرجعية اليدوية = ما رمزه سجل اليوم
+  ✔ لكل مصدر مرجعية يدوية مسار مرجعي معلن
+  ✔ اختبار عدم تراجع: المصدر 39 يُكشف فجوة عند إسقاطه
+
+  النتيجة: نجح
+OUTPUT_END
+--- PRIOR LOG END ---
+SHA256_BODY: a836d20b085121ebf037a5d18ca4938b34cd42145d415636e6139eac65230413

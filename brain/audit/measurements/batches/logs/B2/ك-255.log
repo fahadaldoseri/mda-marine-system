@@ -1,0 +1,9 @@
+COMMAND: timeout 120 python3 validators/check_exceptions_burndown.py --json
+STARTED_AT: 2026-11-08T23:09:49.520057+00:00
+RC: 2
+ELAPSED_SECONDS: 0.047
+OUTPUT_BEGIN
+usage: check_exceptions_burndown.py [-h] [--root ROOT] [--baseline-write]
+check_exceptions_burndown.py: error: unrecognized arguments: --json
+OUTPUT_END
+SHA256_BODY: 34f0051d3829226835c15042d555ac1c823c03556a764d42ae0349c3ba3666fa

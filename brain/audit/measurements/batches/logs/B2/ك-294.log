@@ -1,0 +1,16 @@
+REUSED_FROM: audit/measurements/batches/logs/B/ك-294.log
+REUSED_PRIOR_COMMAND: python3 validators/check_source_route_coverage.py --date 2026-11-08
+REUSED_PRIOR_RC: 0
+REUSED_NOTE: لم يُعاد القياس لأن سجل B السابق ناجح.
+--- PRIOR LOG BEGIN ---
+COMMAND: python3 validators/check_source_route_coverage.py --date 2026-11-08
+STARTED_AT: 2026-11-08T22:38:54.048405+00:00
+RC: 0
+ELAPSED_SECONDS: 0.095
+OUTPUT_BEGIN
+   مسارات معلنة: 60 · مرجعية يدوية موثَّقة: 2 ([39, 52]) · معتمدة: 62
+   نجح 60 · تعذّر 0 · فشل 0
+   ✔ تغطية المصادر كاملة ومتسقة
+OUTPUT_END
+--- PRIOR LOG END ---
+SHA256_BODY: d00b8521a9b86862f9a2b25a278f4fb1e87578a8f52e5926e560f593fae2f811

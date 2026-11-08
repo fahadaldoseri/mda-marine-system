@@ -1,0 +1,7 @@
+COMMAND: timeout 30 bash tools/check_live.sh --compare 2026-11-08
+STARTED_AT: 2026-11-08T23:25:09.701168+00:00
+RC: 0
+OUTPUT_BEGIN
+  ✔ كل المسارات ترد 200 (PDF مستثنى — الطباعة معطّلة بطلب المالك)
+
+OUTPUT_END

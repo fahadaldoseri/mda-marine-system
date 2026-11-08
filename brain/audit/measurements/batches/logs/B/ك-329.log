@@ -1,0 +1,8 @@
+COMMAND: timeout 120 python3 tools/repair_ledger_prose.py --check
+STARTED_AT: 2026-11-08T23:18:33.420315+00:00
+RC: 0
+OUTPUT_BEGIN
+   ✓ نظيف: historical/cumulative-baseline-2026-02-28-to-2026-10-11.md
+   ✓ نظيف: cumulative-2026/التقرير-التراكمي-الواسع-28-فبراير-الى-11-أكتوبر-2026.md
+
+OUTPUT_END

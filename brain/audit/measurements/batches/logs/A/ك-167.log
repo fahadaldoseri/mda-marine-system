@@ -1,0 +1,5 @@
+COMMAND: SITE_DIR=/home/ubuntu/seawatch timeout 120 python3 validators/check_glossary_shape.py
+RC: 0
+--- OUTPUT BEGIN ---
+✔ شكل المعجم سليم · مدخلات=1825 · مفاتيح الجذر=9
+--- OUTPUT END ---

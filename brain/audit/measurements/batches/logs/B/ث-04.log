@@ -1,0 +1,14 @@
+COMMAND: python3 - <<'PY'
+import json, pathlib, sys
+p=pathlib.Path('cumulative-2026/event-ledger-master.json')
+d=json.loads(p.read_text(encoding='utf-8'))
+assert isinstance(d.get('events'), list), 'events list missing'
+assert 'records' not in d, 'duplicate records key present'
+print(f"events={len(d['events'])}; records_key_absent={'records' not in d}")
+PY
+STARTED_AT: 2026-11-08T22:34:01.138719+00:00
+RC: 0
+ELAPSED_SECONDS: 0.04
+OUTPUT_BEGIN
+events=561; records_key_absent=True
+OUTPUT_END

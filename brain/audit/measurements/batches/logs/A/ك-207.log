@@ -1,0 +1,5 @@
+COMMAND: timeout 120 python3 tools/build_vocab_gate.py --check
+RC: 0
+--- OUTPUT BEGIN ---
+  ✔ السجل الحاكم والمُولَّد متطابقان — 144 بندًا مانعًا · 1 مراقبًا
+--- OUTPUT END ---

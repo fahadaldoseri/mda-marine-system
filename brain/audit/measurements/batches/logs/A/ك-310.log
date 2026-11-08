@@ -1,0 +1,32 @@
+COMMAND: timeout 120 python3 tools/check_lang_switch_live.py --url file:///home/ubuntu/seawatch/dist --date 2026-10-29
+RC: 1
+--- OUTPUT BEGIN ---
+   ✔ صفحة النسخة الإنجليزية تُخدم وجودها — /reports/en/2026-10-29.html
+   ✔ الصفحة العربية: lang=ar وتسميات عربية وزرّان (ع/EN) — lang=ar · الرئيسية=الرئيسية · ['ع', 'EN']
+   ✘ تفضيل إنجليزي محفوظ لا يغيّر لغة الصفحة العربية — lang=ar · الرئيسية=Home
+Traceback (most recent call last):
+  File "/home/ubuntu/mda-marine-system/brain/tools/check_lang_switch_live.py", line 98, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/ubuntu/mda-marine-system/brain/tools/check_lang_switch_live.py", line 71, in main
+    pg.wait_for_url(f"**/reports/en/{a.date}.html", timeout=20000)
+  File "/usr/local/lib/python3.12/dist-packages/playwright/sync_api/_generated.py", line 10057, in wait_for_url
+    self._sync(
+  File "/usr/local/lib/python3.12/dist-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+    return task.result()
+           ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/playwright/_impl/_page.py", line 590, in wait_for_url
+    return await self._main_frame.wait_for_url(**locals_to_params(locals()))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/playwright/_impl/_frame.py", line 289, in wait_for_url
+    async with self.expect_navigation(
+  File "/usr/local/lib/python3.12/dist-packages/playwright/_impl/_event_context_manager.py", line 33, in __aexit__
+    await self._future
+  File "/usr/local/lib/python3.12/dist-packages/playwright/_impl/_frame.py", line 265, in continuation
+    event = await waiter.result()
+            ^^^^^^^^^^^^^^^^^^^^^
+playwright._impl._errors.TimeoutError: Timeout 20000ms exceeded.
+=========================== logs ===========================
+waiting for navigation to "**/reports/en/2026-10-29.html" until 'load'
+============================================================
+--- OUTPUT END ---

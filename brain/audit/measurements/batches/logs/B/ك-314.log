@@ -1,0 +1,6 @@
+COMMAND: bash -n tests/run_checks.sh && ( ! grep -nE 'أوأو fail "' tests/run_checks.sh )
+STARTED_AT: 2026-11-08T22:43:10.343664+00:00
+RC: 0
+ELAPSED_SECONDS: 0.006
+OUTPUT_BEGIN
+OUTPUT_END

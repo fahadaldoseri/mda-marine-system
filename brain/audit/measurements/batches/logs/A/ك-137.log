@@ -1,0 +1,5 @@
+COMMAND: timeout 120 python3 tests/test_feed_counters.py
+RC: 0
+--- OUTPUT BEGIN ---
+  · مفحوصة 4 = ناجحة 2 + متعذّرة 2 · والحساب المزدوج ممتنع
+--- OUTPUT END ---

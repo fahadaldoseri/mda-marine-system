@@ -1,0 +1,36 @@
+COMMAND: timeout 120 python3 validators/check_number_bindings.py --date 2026-11-08 --brain . --site /home/ubuntu/seawatch
+STARTED_AT: 2026-11-08T23:28:15.584656+00:00
+RC: 0
+OUTPUT_BEGIN
+=== بوابة ربط الأرقام — التاريخ 2026-11-08 ===
+   الرقم                             القيمة  الملف المالك                       السطح                              الحالة
+   هجمات IMO المؤكدة (تراكمي)           128  appendices/imo-incidents.json      تماسك المالك                       مطابق
+   هجمات IMO المؤكدة (تراكمي)           128  web/kpis-totals/2026-11-08.json    بطاقة العدّاد                      مطابق
+   وفيات البحّارة المؤكدة (IMO)          24  appendices/imo-incidents.json      واجهة اليوم: [24]                  مطابق
+   ukmto-reports — اليوم                  1  cumulative-2026/event-ledger-master.json + ledger_totals kpis-totals/2026-11-08.json (المحسوب 1) مطابق
+   ukmto-reports — المجموع              216  cumulative-2026/event-ledger-master.json + ledger_totals kpis-totals/2026-11-08.json (المحسوب 216) مطابق
+   qualifying-incidents — اليوم           2  cumulative-2026/event-ledger-master.json + ledger_totals kpis-totals/2026-11-08.json (المحسوب 2) مطابق
+   qualifying-incidents — المجموع       162  cumulative-2026/event-ledger-master.json + ledger_totals kpis-totals/2026-11-08.json (المحسوب 162) مطابق
+   unconfirmed-narratives — اليوم         1  cumulative-2026/event-ledger-master.json + ledger_totals kpis-totals/2026-11-08.json (المحسوب 1) مطابق
+   unconfirmed-narratives — المجموع      32  cumulative-2026/event-ledger-master.json + ledger_totals kpis-totals/2026-11-08.json (المحسوب 32) مطابق
+   confirmed-incidents — اليوم            0  cumulative-2026/event-ledger-master.json + ledger_totals kpis-totals/2026-11-08.json (المحسوب 0) مطابق
+   confirmed-incidents — المجموع        212  cumulative-2026/event-ledger-master.json + ledger_totals kpis-totals/2026-11-08.json (المحسوب 212) مطابق
+   deaths — اليوم                      None  cumulative-2026/event-ledger-master.json + ledger_totals kpis-totals/2026-11-08.json (المحسوب None) مطابق
+   deaths — المجموع                      24  cumulative-2026/event-ledger-master.json + ledger_totals kpis-totals/2026-11-08.json (المحسوب 24) مطابق
+   imo-confirmed-incidents — اليوم        0  cumulative-2026/event-ledger-master.json + ledger_totals kpis-totals/2026-11-08.json (المحسوب 0) مطابق
+   imo-confirmed-incidents — المجموع     128  cumulative-2026/event-ledger-master.json + ledger_totals kpis-totals/2026-11-08.json (المحسوب 128) مطابق
+   imo-seafarer-deaths — اليوم            0  cumulative-2026/event-ledger-master.json + ledger_totals kpis-totals/2026-11-08.json (المحسوب 0) مطابق
+   imo-seafarer-deaths — المجموع         24  cumulative-2026/event-ledger-master.json + ledger_totals kpis-totals/2026-11-08.json (المحسوب 24) مطابق
+   fire-incidents — اليوم                 1  cumulative-2026/event-ledger-master.json + ledger_totals kpis-totals/2026-11-08.json (المحسوب 1) مطابق
+   fire-incidents — المجموع              54  cumulative-2026/event-ledger-master.json + ledger_totals kpis-totals/2026-11-08.json (المحسوب 54) مطابق
+   official-products — اليوم              1  cumulative-2026/event-ledger-master.json + ledger_totals kpis-totals/2026-11-08.json (المحسوب 1) مطابق
+   official-products — المجموع          223  cumulative-2026/event-ledger-master.json + ledger_totals kpis-totals/2026-11-08.json (المحسوب 223) مطابق
+   مدى الدفتر (أيام مغطاة)              254  cumulative-2026/event-ledger-master.json + ledger_totals kpis-totals/2026-11-08.json (المحسوب 254) مطابق
+   عدد المصادر المعتمد                   62  appendices/sources-manifest.json   أرقام قائمة المصادر: 62 صفًا حتى 62 مطابق
+   كمية أخرى للمصادر (60)                60  —                                  index.html: كمية لا ادعاء معتمد    مقبول
+   عدد المصادر المعتمد (62)              62  sources-manifest.json              index.html                         مطابق
+   كمية أخرى للمصادر (37)                37  —                                  cumulative-2026.html: كمية لا ادعاء معتمد مقبول
+   عدد المصادر المعتمد (62)              62  sources-manifest.json              2026-11-08.html                    مطابق
+  النتيجة: مطابق — 27 رقمًا مربوطًا بمالكه وبوابته
+
+OUTPUT_END

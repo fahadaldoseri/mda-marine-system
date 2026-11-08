@@ -1,0 +1,7 @@
+COMMAND: timeout 120 python3 tools/derive_map_points.py --date 2026-11-08
+STARTED_AT: 2026-11-08T23:25:26.773657+00:00
+RC: 2
+OUTPUT_BEGIN
+  ✘ فشل مغلق: بيانات اليابسة غير موجودة: /home/ubuntu/mda-marine-system/seawatch/generator/data/ne_50m_land.geojson
+
+OUTPUT_END

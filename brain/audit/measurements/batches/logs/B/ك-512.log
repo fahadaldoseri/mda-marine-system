@@ -1,0 +1,8 @@
+COMMAND: timeout 120 python3 validators/check_day_coverage.py --root .
+STARTED_AT: 2026-11-08T23:34:35.900261+00:00
+RC: 0
+OUTPUT_BEGIN
+حارس تغطية الأيام — من 2026-02-28 إلى آخر ملف يومي
+✔ كل يوم مغطّى بمادة ذات دليل أو بسجل لا واقعة موثّق
+
+OUTPUT_END
