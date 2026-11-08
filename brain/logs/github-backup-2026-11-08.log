@@ -505,3 +505,19 @@ remote:
   ✘ تعديل حاكم: brain/validators/validate_report.py · sha256=9a9bb3a17af130cbc18f026b9cea357c8521f097d78fa56c5ef4792c4d88d10b
 ✘ فشل مغلق: توجد تعديلات شيفرة/بيانات حقيقية خارج سجلات التشغيل المعلنة
 ✘ فشل مغلق: حارس شجرة النسخ منع العملية؛ راجع تصنيف المسارات وبصمات SHA-256
+=== بدء النسخ الاحتياطي: 2026-11-08T17:33:34Z ===
+حارس شجرة النسخ: تغييرات Git=3 · سجلات تشغيل معلنة=3 · كتل مولَّدة=0 · تعديلات حاكمة=0
+  ✔ سجل تشغيل معلن: brain/logs/github-backup-2026-11-08.log · sha256=093fce48b38242c1973315c13b24dd711c48bda9f33c6ff20df390d0b3f90900
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-08.jsonl · sha256=89a8310c715073990df6411ca3ea5b2fef6040818252a8120701fb7079b8aeb4
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-08/D030.log · sha256=03b8e8717574891200ff481e9d1b6b888f7481c2637d0956ce9ae293d546807a
+✔ شجرة النسخ تمر: سجلات التشغيل المحلية لا تمنع النسخة الاحتياطية
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/blocks.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_report.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_site.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/derive_en_units.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/i18n_en.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/sources/i18n/en/2026-11-07-sectioned.en.md
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/sources/i18n/en/glossary.json
+⚠ تعارض (عُدّل على الخادم خارج GitHub): skills/.skill_versions.json
+✘ 8 تعارض. لا شيء طُبّق. إن كان المستودع هو الصحيح: أعد التشغيل بـ --accept-repo (تُؤرشف نسخ الخادم أولًا).
+⚠ تعذّر/تعارض في تطبيق الشيفرة (تستمر نسخة البيانات بعد تسجيل التحذير)
