@@ -38,10 +38,10 @@ def site_root() -> Path:
         value = os.environ.get(key)
         if value and (Path(value) / "dist").is_dir():
             return Path(value)
-    for candidate in (Path("/home/ubuntu/seawatch"),):
+    for candidate in (Path.home() / "seawatch",):
         if (candidate / "dist").is_dir():
             return candidate
-    return Path("/home/ubuntu/seawatch")
+    return Path.home() / "seawatch"
 
 
 def sha_file(path: Path) -> tuple[str, int] | None:
@@ -122,4 +122,6 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)

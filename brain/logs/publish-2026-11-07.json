@@ -3,7 +3,7 @@
   "channel": "raw-githack",
   "url": "https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html",
   "successful_url": "https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html",
-  "head": "66cbe11993b7ae1e1dd15d0f282fbebd864572ee",
+  "head": "34bf0947885b17db086e9476861863edc14b5f3b",
   "rc": 0,
   "status": "ok",
   "live": {
@@ -27,16 +27,16 @@
     "reason": "ok",
     "url": "https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html",
     "attempts": 1,
-    "elapsed_seconds": 2.236
+    "elapsed_seconds": 4.901
   },
-  "at": "2026-11-08T02:45:43Z",
+  "at": "2026-11-08T03:47:07Z",
   "urls": [
     "https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html",
     "https://cdn.jsdelivr.net/gh/fahadaldoseri/seawatch-live@main/reports/2026-11-07.html",
     "https://raw.githubusercontent.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html"
   ],
-  "content_sha256": "51ac67d9eb2c47162be926c3c5e7dcec2a0edd71f8a89721abe8117c18cb6599",
-  "fallback_output_tail": "✔ fallback: GET/200/Content-Type verified via https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html https://cdn.jsdelivr.net/gh/fahadaldoseri/seawatch-live@main/reports/2026-11-07.html https://raw.githubusercontent.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html — 66cbe11993b7ae1e1dd15d0f282fbebd864572ee — sha256=51ac67d9eb2c47162be926c3c5e7dcec2a0edd71f8a89721abe8117c18cb6599",
+  "content_sha256": "c29feb8fa93b27d80f64bbc3ca90ade820e42b1e9f6bdc9d9bc251cf5577a03e",
+  "fallback_output_tail": "── بوابة المحرّك قبل fallback (2026-11-07) ──\n✔ كل بوابات 2026-11-07 مكتملة في سجل المحرّك\n   حكم البوابات 2026-11-07: فُحصت 77 بوابة · مانعة 0 · تحذير 7\n   ⚠ G016: done_warn · رمز الخروج 1\n   ⚠ G029: done_warn · رمز الخروج 1\n   ⚠ G030: done_warn · رمز الخروج 1\n   ⚠ G031: done_warn · رمز الخروج 1\n   ⚠ G033: done_warn · رمز الخروج 1\n   ⚠ G034: done_warn · رمز الخروج 1\n   ⚠ G055: done_warn · رمز الخروج 1\n   ✔ النتيجة: لا حكم مانع في بوابات 2026-11-07\n✔ fallback: GET/200/Content-Type verified via https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html https://cdn.jsdelivr.net/gh/fahadaldoseri/seawatch-live@main/reports/2026-11-07.html https://raw.githubusercontent.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html — 34bf0947885b17db086e9476861863edc14b5f3b — sha256=c29feb8fa93b27d80f64bbc3ca90ade820e42b1e9f6bdc9d9bc251cf5577a03e",
   "verification": {
     "status": "ok",
     "date": "2026-11-07",
@@ -64,7 +64,7 @@
         "reason": "ok",
         "url": "https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html",
         "attempts": 1,
-        "elapsed_seconds": 2.236
+        "elapsed_seconds": 4.901
       }
     ]
   },
@@ -72,9 +72,9 @@
   "channels": {
     "cloudflare-pages": {
       "state": "down",
-      "reason": "http=200; bytes=189327; min_bytes=100000; date_marker=true; content_type=text/html; content_type_ok=true; sha256=835ad2e9723546d2; sha256_match=false",
+      "reason": "ok",
       "live": {
-        "ok": false,
+        "ok": true,
         "status": 200,
         "bytes": 189327,
         "min_bytes": 100000,
@@ -84,17 +84,17 @@
         "content_type_normalized": "text/html",
         "content_type_ok": true,
         "presentation_eligible": true,
-        "sha256": "835ad2e9723546d295389edefbce3f750a4ff228bb53a4b0c12e79953db02f02",
+        "sha256": "9c5e0aa804d542912d74a7e77d8b7599477d765a0286187c672263307cca00e3",
         "expected_sha256": "9c5e0aa804d542912d74a7e77d8b7599477d765a0286187c672263307cca00e3",
-        "sha256_match": false,
+        "sha256_match": true,
         "requested_url": "https://seawatch-live.pages.dev/reports/2026-11-07",
         "final_url": "https://seawatch-live.pages.dev/reports/2026-11-07",
         "redirected": false,
         "redirects": [],
-        "reason": "http=200; bytes=189327; min_bytes=100000; date_marker=true; content_type=text/html; content_type_ok=true; sha256=835ad2e9723546d2; sha256_match=false",
+        "reason": "ok",
         "url": "https://seawatch-live.pages.dev/reports/2026-11-07",
-        "attempts": 16,
-        "elapsed_seconds": 90.377
+        "attempts": 1,
+        "elapsed_seconds": 5.176
       },
       "presentation_eligible": true
     },
@@ -122,7 +122,7 @@
         "reason": "ok",
         "url": "https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html",
         "attempts": 1,
-        "elapsed_seconds": 2.236
+        "elapsed_seconds": 4.901
       },
       "presentation_eligible": true
     },
@@ -138,11 +138,11 @@
       "channel": "cloudflare-pages",
       "url": "https://seawatch-live.pages.dev/reports/2026-11-07",
       "successful_url": null,
-      "head": "b29bbcb16c50351edbf3a4c3c23a353c3d0e6b6f",
+      "head": "34bf0947885b17db086e9476861863edc14b5f3b",
       "rc": 2,
       "status": "failed",
       "live": {
-        "ok": false,
+        "ok": true,
         "status": 200,
         "bytes": 189327,
         "min_bytes": 100000,
@@ -152,21 +152,21 @@
         "content_type_normalized": "text/html",
         "content_type_ok": true,
         "presentation_eligible": true,
-        "sha256": "835ad2e9723546d295389edefbce3f750a4ff228bb53a4b0c12e79953db02f02",
+        "sha256": "9c5e0aa804d542912d74a7e77d8b7599477d765a0286187c672263307cca00e3",
         "expected_sha256": "9c5e0aa804d542912d74a7e77d8b7599477d765a0286187c672263307cca00e3",
-        "sha256_match": false,
+        "sha256_match": true,
         "requested_url": "https://seawatch-live.pages.dev/reports/2026-11-07",
         "final_url": "https://seawatch-live.pages.dev/reports/2026-11-07",
         "redirected": false,
         "redirects": [],
-        "reason": "http=200; bytes=189327; min_bytes=100000; date_marker=true; content_type=text/html; content_type_ok=true; sha256=835ad2e9723546d2; sha256_match=false",
+        "reason": "ok",
         "url": "https://seawatch-live.pages.dev/reports/2026-11-07",
-        "attempts": 16,
-        "elapsed_seconds": 90.377
+        "attempts": 1,
+        "elapsed_seconds": 5.176
       },
-      "at": "2026-11-08T02:45:31Z",
+      "at": "2026-11-08T03:46:52Z",
       "content_sha256": "9c5e0aa804d542912d74a7e77d8b7599477d765a0286187c672263307cca00e3",
-      "publish_output_tail": "── بوابة المحرّك قبل publish (2026-11-07) ──\n✔ كل بوابات 2026-11-07 مكتملة في سجل المحرّك\n   حكم البوابات 2026-11-07: فُحصت 77 بوابة · مانعة 1 · تحذير 7\n   ✘ G011: سجل G011 قديم بعد تشغيل S085 عند 2026-11-08T02:31:35Z (آخر تشغيل للبوابة 2026-11-07T18:00:15Z) — أعد تشغيله عبر --redo G011\n   ⚠ G016: done_warn · رمز الخروج 1\n   ⚠ G029: done_warn · رمز الخروج 1\n   ⚠ G030: done_warn · رمز الخروج 1\n   ⚠ G031: done_warn · رمز الخروج 1\n   ⚠ G033: done_warn · رمز الخروج 1\n   ⚠ G034: done_warn · رمز الخروج 1\n   ⚠ G055: done_warn · رمز الخروج 1\n   ✘ النتيجة: ممنوع — 1 بوابة بحكم مانع. لا نشر حتى الإصلاح وإعادة تشغيل البوابة.\n✘ رُفض publish: بوابة بحكم مانع في سجل 2026-11-07. أصلح ثم أعد تشغيل البوابة. لا نشر.",
+      "publish_output_tail": "الي عربي 9 · إنجليزي 9\n   ✔ الحسابات: إجمالي عربي 3 · إنجليزي 3\n   ✘ النسب المئوية: إجمالي عربي 8 · إنجليزي 5\n      ناقص في الإنجليزية: {'45%': 1, '33%': 1, '22%': 1}\n   ✔ المديات الرقمية: إجمالي عربي 5 · إنجليزي 5\n   ✔ درجات الثقة: إجمالي عربي 2 · إنجليزي 2\n   ✔ التواريخ والأوقات: إجمالي عربي 9 · إنجليزي 9\n   ✘ كل الأرقام: إجمالي عربي 196 · إنجليزي 193\n      ناقص في الإنجليزية: {'128': 5, '45': 1, '33': 1, '22': 1}\n      زائد في الإنجليزية: {'122': 5}\n   ── الصفحتان المبنيتان ──\n   ✔ h1: عربي 1 · إنجليزي 1\n   ✔ h2: عربي 6 · إنجليزي 6\n   ✔ h3: عربي 2 · إنجليزي 2\n   ✔ tables: عربي 1 · إنجليزي 1\n   ✔ rows: عربي 3 · إنجليزي 3\n   ✔ svg: عربي 8 · إنجليزي 8\n   ✔ buttons: عربي 7 · إنجليزي 7\n   ✔ list_items: عربي 75 · إنجليزي 75\n   ✔ links: عربي 15 · إنجليزي 15\n   ✔ collapsed: عربي 0 · إنجليزي 0\n   ✔ لغة الصفحة الإنجليزية: lang=en dir=ltr\n   ✔ نصوص عربية متبقية في الصفحة الإنجليزية: 0\n   ✘ النتيجة: مخالف — النسب المئوية · كل الأرقام\n✘ رُفض publish: النسخة الإنجليزية غير مطابقة للعربية. لا نشر.",
       "channel_role": "primary-presentation"
     },
     {
@@ -174,7 +174,7 @@
       "channel": "raw-githack",
       "url": "https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html",
       "successful_url": "https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html",
-      "head": "66cbe11993b7ae1e1dd15d0f282fbebd864572ee",
+      "head": "34bf0947885b17db086e9476861863edc14b5f3b",
       "rc": 0,
       "status": "ok",
       "live": {
@@ -198,16 +198,16 @@
         "reason": "ok",
         "url": "https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html",
         "attempts": 1,
-        "elapsed_seconds": 2.236
+        "elapsed_seconds": 4.901
       },
-      "at": "2026-11-08T02:45:43Z",
+      "at": "2026-11-08T03:47:07Z",
       "urls": [
         "https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html",
         "https://cdn.jsdelivr.net/gh/fahadaldoseri/seawatch-live@main/reports/2026-11-07.html",
         "https://raw.githubusercontent.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html"
       ],
-      "content_sha256": "51ac67d9eb2c47162be926c3c5e7dcec2a0edd71f8a89721abe8117c18cb6599",
-      "fallback_output_tail": "✔ fallback: GET/200/Content-Type verified via https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html https://cdn.jsdelivr.net/gh/fahadaldoseri/seawatch-live@main/reports/2026-11-07.html https://raw.githubusercontent.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html — 66cbe11993b7ae1e1dd15d0f282fbebd864572ee — sha256=51ac67d9eb2c47162be926c3c5e7dcec2a0edd71f8a89721abe8117c18cb6599",
+      "content_sha256": "c29feb8fa93b27d80f64bbc3ca90ade820e42b1e9f6bdc9d9bc251cf5577a03e",
+      "fallback_output_tail": "── بوابة المحرّك قبل fallback (2026-11-07) ──\n✔ كل بوابات 2026-11-07 مكتملة في سجل المحرّك\n   حكم البوابات 2026-11-07: فُحصت 77 بوابة · مانعة 0 · تحذير 7\n   ⚠ G016: done_warn · رمز الخروج 1\n   ⚠ G029: done_warn · رمز الخروج 1\n   ⚠ G030: done_warn · رمز الخروج 1\n   ⚠ G031: done_warn · رمز الخروج 1\n   ⚠ G033: done_warn · رمز الخروج 1\n   ⚠ G034: done_warn · رمز الخروج 1\n   ⚠ G055: done_warn · رمز الخروج 1\n   ✔ النتيجة: لا حكم مانع في بوابات 2026-11-07\n✔ fallback: GET/200/Content-Type verified via https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html https://cdn.jsdelivr.net/gh/fahadaldoseri/seawatch-live@main/reports/2026-11-07.html https://raw.githubusercontent.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html — 34bf0947885b17db086e9476861863edc14b5f3b — sha256=c29feb8fa93b27d80f64bbc3ca90ade820e42b1e9f6bdc9d9bc251cf5577a03e",
       "verification": {
         "status": "ok",
         "date": "2026-11-07",
@@ -235,7 +235,7 @@
             "reason": "ok",
             "url": "https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html",
             "attempts": 1,
-            "elapsed_seconds": 2.236
+            "elapsed_seconds": 4.901
           }
         ]
       },
@@ -243,9 +243,9 @@
       "channels": {
         "cloudflare-pages": {
           "state": "down",
-          "reason": "http=200; bytes=189327; min_bytes=100000; date_marker=true; content_type=text/html; content_type_ok=true; sha256=835ad2e9723546d2; sha256_match=false",
+          "reason": "ok",
           "live": {
-            "ok": false,
+            "ok": true,
             "status": 200,
             "bytes": 189327,
             "min_bytes": 100000,
@@ -255,17 +255,17 @@
             "content_type_normalized": "text/html",
             "content_type_ok": true,
             "presentation_eligible": true,
-            "sha256": "835ad2e9723546d295389edefbce3f750a4ff228bb53a4b0c12e79953db02f02",
+            "sha256": "9c5e0aa804d542912d74a7e77d8b7599477d765a0286187c672263307cca00e3",
             "expected_sha256": "9c5e0aa804d542912d74a7e77d8b7599477d765a0286187c672263307cca00e3",
-            "sha256_match": false,
+            "sha256_match": true,
             "requested_url": "https://seawatch-live.pages.dev/reports/2026-11-07",
             "final_url": "https://seawatch-live.pages.dev/reports/2026-11-07",
             "redirected": false,
             "redirects": [],
-            "reason": "http=200; bytes=189327; min_bytes=100000; date_marker=true; content_type=text/html; content_type_ok=true; sha256=835ad2e9723546d2; sha256_match=false",
+            "reason": "ok",
             "url": "https://seawatch-live.pages.dev/reports/2026-11-07",
-            "attempts": 16,
-            "elapsed_seconds": 90.377
+            "attempts": 1,
+            "elapsed_seconds": 5.176
           },
           "presentation_eligible": true
         },
@@ -293,7 +293,7 @@
             "reason": "ok",
             "url": "https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-07.html",
             "attempts": 1,
-            "elapsed_seconds": 2.236
+            "elapsed_seconds": 4.901
           },
           "presentation_eligible": true
         },

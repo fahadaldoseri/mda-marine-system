@@ -273,6 +273,13 @@ def normalize_sentence(sentence: str) -> str:
 
 REGISTRY_ROW = re.compile(r"^\s*(?:[-*•]\s*)?\*{0,2}(?:MN|EST)-\d{4}-\d{2}-\d{2}-\d{2}\b")
 
+# ك-564: وسوم الحقول المُهيكلة في بطاقات السجلات. الصف المبدوء بها صف بيانات لا جملة إنشائية،
+# فيُستثنى الوسم من قياس القوالب المتكررة ويبقى نص الصف بعد الوسم داخل القياس.
+STRUCT_ROW_LABEL = re.compile(
+    r"^\s*(?:[-*•]\s*)?(?:المصدر والحدود|المصدر|الحدود|الموقع|الحالة|الدرجة|التاريخ والوقت"
+    r"|التاريخ|الوقت|النوع|الجهة)\s*[:：]?\s+"
+)
+
 
 def find_repeated_templates(text: str) -> list[dict]:
     text = strip_markup(text)  # ك-409
@@ -288,6 +295,15 @@ def find_repeated_templates(text: str) -> list[dict]:
         clean_line = strip_markup(line).strip()
         if not clean_line or clean_line.startswith("#"):
             continue
+        # ك-564: الصف المبدوء بوسم حقل مُهيكل («المصدر والحدود» · «المصدر» · «الحدود» · «الموقع» …)
+        # صف سجل لا قالب جملة إنشائي؛ فيُقاس نص الصف بعد الوسم، ويبقى الوسم نفسه خارج القياس.
+        # السبب المقيس: صفحة الإضافات تعرض صفوفًا مبدوءة بـ«المصدر والحدود» فيُعلن الوسم المتكرر
+        # قالبًا مانعًا وهو بنية بيانات، فتُمنع التسليم بلا عيب صياغة.
+        label = STRUCT_ROW_LABEL.match(clean_line)
+        if label:
+            clean_line = clean_line[label.end():].strip()
+            if not clean_line:
+                continue
         # bullets تمثل جملًا مستقلة حتى إن لم تنته بعلامة ترقيم.
         for sentence in re.split(r"(?<=[.!؟؛])\s+|\s*\n\s*", clean_line):
             normalized = normalize_sentence(sentence)

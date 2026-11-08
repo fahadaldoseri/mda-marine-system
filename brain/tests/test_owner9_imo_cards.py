@@ -6,6 +6,7 @@ from __future__ import annotations
 import copy
 import datetime as dt
 import json
+import os
 import re
 import sys
 import tempfile
@@ -13,7 +14,12 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SITE_ROOT = ROOT.parent / "seawatch"
+# build_report.py جزء من نسخة الموقع المعلنة داخل المستودع، لا من اسم مجلد
+# بديل قد يوجد في بيئة نشر أخرى.
+SITE_ROOT = ROOT.parent / "site"
+# حارس البطاقات يقرأ هذا المتغير عند الاستيراد؛ اربطه بالشجرة نفسها التي يختبرها
+# الملف بدل الاعتماد على اسم النشر التاريخي «seawatch».
+os.environ["SITE_DIR"] = str(SITE_ROOT)
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(SITE_ROOT / "generator"))
 

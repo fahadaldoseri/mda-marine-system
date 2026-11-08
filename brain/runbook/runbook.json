@@ -1707,6 +1707,17 @@
       ],
       "warn_rc": [],
       "gate_title": "اختبارات البوابات (tests)",
+      "deferred_surfaces": [
+        {
+          "label": "صفحة التقرير",
+          "producer": "B010",
+          "enforced_by": "G045",
+          "enforcement_contract": "surface-coverage",
+          "reason": "B010 يبني صفحة التقرير بعد G001؛ غياب مخرج HTML قبل البناء معلن مؤقتًا، ويعاد فحص الصفحة في G045 بعد اكتمال البناء.",
+          "effective_from": "2026-11-08",
+          "review_when": "يُعاد الحكم فور اكتمال B010 أو عند تغيير ترتيب البناء."
+        }
+      ],
       "declares": {
         "reads": [
           "tests/test_kpi_layers.py"
@@ -2999,7 +3010,9 @@
           "validators/check_prose_defects.py"
         ],
         "gates": [],
-        "tests": []
+        "tests": [
+          "tests/test_repeated_template_field_labels.py"
+        ]
       },
       "on_fail": "stop",
       "command": [
@@ -4643,7 +4656,7 @@
       "command": [
         "bash",
         "-lc",
-        "B=\"$PWD\"; export B SITE; python3 \"$B/validators/check_number_bindings.py\" --date \"$D\"; rc=$?; exit $rc"
+        "B=\"$PWD\"; export B SITE; python3 \"$B/validators/check_number_bindings.py\" --date \"$D\"; rc=$?; exit $rc; python3 \"$B/validators/check_published_counters.py\" --brain \"$B\" --date \"$D\"; rc2=$?; if [ $rc -eq 0 ] && [ $rc2 -ne 0 ]; then exit $rc2; fi; exit $rc"
       ],
       "ok_rc": [
         0
@@ -5295,7 +5308,7 @@
       "command": [
         "bash",
         "-lc",
-        "B=\"$PWD\"; export B SITE; python3 tools/publish_channels.py publish --date {date} --root \"$B\"; rc=$?; exit $rc"
+        "B=\"$PWD\"; export B SITE; python3 \"$B/tools/refresh_stale_gates.py\" --date {date} --root \"$B\" || { echo '✘ رُفض النشر: بوابة متقادمة لم تُجدَّد'; exit 2; }; python3 tools/publish_channels.py publish --date {date} --root \"$B\"; rc=$?; exit $rc"
       ],
       "ok_rc": [
         0

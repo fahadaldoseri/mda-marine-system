@@ -27,6 +27,7 @@ from datetime import datetime, timezone
 PROJECT = pathlib.Path(__file__).resolve().parent.parent
 DEFAULT_CONFIG = PROJECT / "tools" / "governing-assets.txt"
 DEFAULT_FLOOR = PROJECT / "audit" / "asset-floor.json"
+LEGACY_ROOTS = (str(pathlib.Path.home() / "brain-marine-news"),)
 
 
 def today() -> str:
@@ -43,6 +44,11 @@ def resolve_scope(config: pathlib.Path) -> tuple[list[pathlib.Path], list[str]]:
             continue
         kind, _, pattern = line.partition(" ")
         pattern = pattern.strip()
+        pattern = pattern.replace("{BRAIN}", PROJECT.as_posix())
+        if any(pattern.startswith(root) for root in LEGACY_ROOTS):
+            print(f"✘ أصل حاكم يشير إلى جذر أرشيفي: {pattern}")
+            print("   الحدّ: الجذر القانوني هو brain وحده؛ صحّح tools/governing-assets.txt")
+            raise SystemExit(2)
         if kind == "GLOB":
             files += [pathlib.Path(p) for p in glob.glob(pattern, recursive=True)]
         elif kind == "FILE":

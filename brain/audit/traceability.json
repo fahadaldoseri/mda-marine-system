@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-07T18:00:52.257672+00:00",
+  "generated_at": "2026-11-08T05:43:08.824723+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -4111,6 +4111,55 @@
       "lesson_id": "ك-555",
       "barrier_id": "B-e6da93e9",
       "run_evidence": "س: `python3 -m pytest tests/test_publish_preflight_freshness.py -q` → rc=0 (2 passed) · وإعادة D010"
+    },
+    {
+      "fault_id": "ك-556",
+      "state": "مغلق",
+      "lesson_id": "ك-556",
+      "barrier_id": "B-0b81c953",
+      "run_evidence": "t-floor.json؛ دليل إعادة التشغيل: python3 tests/test_asset_floor.py → rc=0 اختبار tests/test_asset_"
+    },
+    {
+      "fault_id": "ك-557",
+      "state": "مغلق",
+      "lesson_id": "ك-557",
+      "barrier_id": "B-d12b82e8",
+      "run_evidence": "ع فشل مغلق؛ دليل إعادة التشغيل: bash tests/test_delivery_scripts.sh → rc=0 اختبار عقد أدوات التسليم"
+    },
+    {
+      "fault_id": "ك-558",
+      "state": "مغلق",
+      "lesson_id": "ك-558",
+      "barrier_id": "B-65b72355",
+      "run_evidence": " tests/test_runbook_hardening.py tests/test_manifest_commands.py -q → rc=0 اختبار حارس D010 يثبت تج"
+    },
+    {
+      "fault_id": "ك-559",
+      "state": "مغلق",
+      "lesson_id": "ك-559",
+      "barrier_id": "B-63233fea",
+      "run_evidence": " إعادة التشغيل: python3 -m pytest tests/test_publish_channels.py -q → rc=0 اختبارات القنوات تثبت ان"
+    },
+    {
+      "fault_id": "ك-560",
+      "state": "مغلق",
+      "lesson_id": "ك-560",
+      "barrier_id": "B-cac4f0a0",
+      "run_evidence": "nnels.py؛ دليل إعادة التشغيل: python3 tests/test_source_channels.py → rc=0 الاختبار الموجب والسالب "
+    },
+    {
+      "fault_id": "ك-561",
+      "state": "مغلق",
+      "lesson_id": "ك-561",
+      "barrier_id": "B-1511f740",
+      "run_evidence": "rs/check_project_skills.py يرفض الجذر الأرشيفي ويعرض الأسطح الفعلية؛ وخرج 0 بعد الاستعادة."
+    },
+    {
+      "fault_id": "ك-562",
+      "state": "مغلق",
+      "lesson_id": "ك-562",
+      "barrier_id": "B-3f2f3dec",
+      "run_evidence": "در المهارات وأن جدول التحويل باقٍ؛ validators/check_project_skills.py خرج 0 عبر الأسطح الأربعة."
     }
   ]
 }

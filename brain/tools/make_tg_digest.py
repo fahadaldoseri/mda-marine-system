@@ -17,9 +17,25 @@ from pathlib import Path
 CAP = 900
 MONTHS = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"]
 B = Path(os.environ.get("BRAIN_DIR") or Path(__file__).resolve().parent.parent)
+MANIFEST = B / "runbook" / "runbook.json"
+
+
+def primary_channel_url():
+    """عنوان القناة الأساسية من المانيفست — رابط القرّاء الرسمي."""
+    try:
+        doc = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return ""
+    for ch in doc.get("publish_channels") or []:
+        if ch.get("primary") and ch.get("enabled"):
+            return str(ch.get("base_url") or ch.get("url") or "").rstrip("/")
+    return ""
 
 
 def site_base_url():
+    primary = primary_channel_url()
+    if primary:
+        return primary
     for cand in (os.environ.get("SITE_DIR"), B.parent / "seawatch", B.parent / "site"):
         if cand and (Path(cand) / "sources" / "site.json").is_file():
             return json.loads((Path(cand) / "sources" / "site.json").read_text(encoding="utf-8")).get("base_url", "")

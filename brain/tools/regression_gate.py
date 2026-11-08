@@ -22,6 +22,26 @@ from datetime import date
 from pathlib import Path
 
 
+def resolve_site(root: Path) -> Path:
+    """جذر الموقع من مصدر واحد (ك-565).
+
+    السبب المقيس: كانت الأداة تثبّت `root.parent / "seawatch"`، فصار المسار المشتق
+    `/home/ubuntu/mda-marine-system/seawatch` وهو غير موجود، فسقطت بنود الانحدار
+    الثمانية («لا إصدار مبني») وهي سليمة في الحقيقة. الحلّ: استخدام محلّل الجذر
+    المعلن نفسه الذي يستخدمه النشر، فلا يتكرر المسار في أداتين.
+    """
+    env = os.environ.get("SITE_DIR") or os.environ.get("SITE")
+    candidates = [Path(env) if env else None, root.parent / "seawatch",
+                  root.parent.parent / "seawatch", root.parent / "site"]
+    for candidate in candidates:
+        if candidate and (candidate / "dist").is_dir():
+            return candidate
+    for candidate in candidates:
+        if candidate and candidate.is_dir():
+            return candidate
+    raise SystemExit("✘ تعذّر تحديد جذر الموقع (لا جذر يحوي dist) — فشل مغلق")
+
+
 def load(root: Path) -> dict:
     p = root / "runbook" / "regression-items.json"
     if not p.is_file():
@@ -37,9 +57,11 @@ def in_scope(item_phase: str, until: str, order: list[str]) -> bool:
     return order.index(item_phase) <= order.index(until)
 
 
-def run_item(root: Path, item: dict) -> tuple[str, str]:
-    env = dict(os.environ, B=str(root), SITE=str(root.parent / "seawatch"))
-    argv = [str(a).replace("{root}", str(root)) for a in item["argv"]]
+def run_item(root: Path, item: dict, site: Path) -> tuple[str, str]:
+    env = dict(os.environ, B=str(root), SITE=str(site))
+    env["SITE_DIR"] = str(site)
+    argv = [str(a).replace("{root}", str(root)).replace("{site}", str(site)).replace("{dist}", str(site / "dist"))
+            for a in item["argv"]]
     try:
         r = subprocess.run(argv, cwd=root, env=env, capture_output=True, text=True, timeout=900)
     except (OSError, subprocess.TimeoutExpired) as exc:
@@ -58,6 +80,7 @@ def main() -> int:
     ap.add_argument("--out", help="ملف النتيجة JSON")
     args = ap.parse_args()
     root = Path(args.root).resolve()
+    site = resolve_site(root)
     data = load(root)
     order = data.get("phase_order", [])
     today = date.today().isoformat()
@@ -71,7 +94,7 @@ def main() -> int:
         if it["kind"] == "manual":
             state, note = ("ساقط" if args.require_manual else "يدوي"), it.get("how", "قياس بمتصفح")
         else:
-            state, note = run_item(root, it)
+            state, note = run_item(root, it, site)
         open_until = it.get("open_until")
         deadline_passed = bool(open_until and open_until < today)
         blocking = bool(it.get("blocking", True)) or deadline_passed

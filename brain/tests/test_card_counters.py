@@ -6,9 +6,29 @@ import re
 import os
 import tempfile
 import json
-SITE_ROOT = pathlib.Path(__file__).resolve().parents[1].parent / "seawatch"
 import sys
 import unittest
+
+
+def _site_root() -> pathlib.Path:
+    """جذر الموقع بالقياس لا بالافتراض (ك-563): البيئة أولًا ثم المرشحات الفعلية.
+
+    الاشتقاق القديم (`parents[1].parent / "seawatch"`) كان ينتج
+    `mda-marine-system/seawatch` وهو مسار غير موجود بعد نقل الجذر القانوني،
+    فسقطت 16 حالة في B006 بخطأ ملف مفقود.
+    """
+    for key in ("SITE_DIR", "SITE"):
+        value = (os.environ.get(key) or "").strip()
+        if value and (pathlib.Path(value) / "sources").is_dir():
+            return pathlib.Path(value)
+    brain = pathlib.Path(__file__).resolve().parents[1]
+    for cand in (pathlib.Path.home() / "seawatch", brain.parent / "seawatch", brain.parent / "site"):
+        if (cand / "sources").is_dir():
+            return cand
+    return pathlib.Path.home() / "seawatch"
+
+
+SITE_ROOT = _site_root()
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -504,9 +524,34 @@ class HeroKpiGateTests(unittest.TestCase):
         self.assertIn("تُذكر ولا تُحتسب", card["detail"])
 
     def test_unconfirmed_detail_uses_singular_for_one_narrative(self):
-        self.assertEqual(int(self.zones["counter"]["unconfirmed_total"]), 1)
-        errors = validate_hero_kpis(self.meta, self.zones, self.registry)
-        self.assertEqual(errors, [])
+        """الرواية الواحدة تُصرف بالمفرد وفق عقد البطاقة نفسه.
+
+        عطل (ك-563): كان الاختبار يثبّت `unconfirmed_total == 1` من يوم مرجعي،
+        فيسقط في أي يوم يبلغ فيه عدد الروايات 2 أو أكثر رغم سلامة السلوك.
+        القاعدة الآن: تُقاس مواصفة العقد، ويبقى قياس اليوم الحيّ مقبولًا بلا تثبيت رقمه.
+        """
+        def _find(node):
+            if isinstance(node, dict):
+                if node.get("id") == "unconfirmed-narratives" and "number_format" in node:
+                    return node["number_format"]
+                for value in node.values():
+                    hit = _find(value)
+                    if hit:
+                        return hit
+            elif isinstance(node, list):
+                for item in node:
+                    hit = _find(item)
+                    if hit:
+                        return hit
+            return None
+
+        spec = _find(self.registry)
+        self.assertIsNotNone(spec, "عقد البطاقة لا يحمل مواصفة تصريف العدد")
+        singular = format_arabic_count(1, spec)
+        dual = format_arabic_count(2, spec)
+        self.assertEqual(singular, f"1 {spec[spec['one']]}")
+        self.assertNotEqual(singular, dual)
+        self.assertEqual(validate_hero_kpis(self.meta, self.zones, self.registry), [])
 
     def test_negative_fixed_title_change_fails_closed(self):
         changed = self.copy.deepcopy(self.meta)

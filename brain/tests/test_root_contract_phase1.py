@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""عقد الجذر: موجب بلا راية ومن راية صريحة، وسالب للمخالف والمزروع خارج الشجرة."""
+"""عقد الجذر الصريح: موجب مع --root، وسالب للجذر المفقود أو المخالف."""
 from __future__ import annotations
 
 import pathlib
@@ -21,10 +21,12 @@ def run(*args: str, cwd: str = "/tmp") -> subprocess.CompletedProcess[str]:
 def main() -> int:
     ok = True
 
+    # من /tmp لا يوجد مانيفست في cwd أو آبائه؛ العقد الصريح لا يخمّن الجذر من
+    # موضع ملف المحرّك، لذلك غياب --root حالة سالبة ويجب أن يفشل مغلقًا.
     noflag = run("status", "--date", "2026-11-07")
-    print("POSITIVE_NOFLAG_CMD=python3 <engine> status --date 2026-11-07  (cwd=/tmp، نفس شكل أمر المهمة المجدولة)")
-    print(f"POSITIVE_NOFLAG_RC={noflag.returncode}")
-    ok &= noflag.returncode == 0
+    print("NEGATIVE_NOFLAG_CMD=python3 <engine> status --date 2026-11-07  (cwd=/tmp بلا --root)")
+    print(f"NEGATIVE_NOFLAG_RC={noflag.returncode}")
+    ok &= noflag.returncode == 2
 
     explicit = run("status", "--date", "2026-11-07", "--root", str(ROOT))
     print(f"POSITIVE_EXPLICIT_RC={explicit.returncode}")

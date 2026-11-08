@@ -20,6 +20,7 @@ import argparse
 import datetime as dt
 import hashlib
 import json
+import pathlib
 import re
 import subprocess
 import sys
@@ -28,7 +29,7 @@ from pathlib import Path
 
 B = Path(__file__).resolve().parent.parent
 PROJECT_ID = "XP4qiRMRUjBiSubQfXVdKs"
-PROJECT_DIR = "/home/ubuntu/seawatch"
+PROJECT_DIR = str(pathlib.Path.home() / "seawatch")
 MANUS_BASE = "https://seawatch-xp4qirmr.manus.space"
 MIN_BYTES = 100_000
 NOT_READY_MARK = "workspace recovery has not completed"
