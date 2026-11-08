@@ -5345,7 +5345,7 @@
       "command": [
         "bash",
         "-lc",
-        "B=\"$PWD\"; export B SITE; bash tools/check_live.sh --compare {date}; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; BASE=\"$(python3 - \"$B/logs/publish-{date}.json\" <<'PY'\nimport json,sys\nd=json.load(open(sys.argv[1],encoding='utf-8')); u=d.get('successful_url') or d.get('url') or ''; print(u.split('/reports/',1)[0].rstrip('/') if '/reports/' in u else u.rstrip('/'))\nPY\n)\"; test -n \"$BASE\" || { echo '✘ لا رابط حي مسجّل في publish-{date}.json'; exit 2; }; python3 \"$B/tools/live_dom_audit.py\" --url \"$BASE/reports/{date}.html\" --url \"$BASE/additions.html\" --url \"$BASE/sources.html\" --json \"logs/runbook/{date}/dom-audit.json\"; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; exit ${w:-0}"
+        "B=\"$PWD\"; export B SITE; bash tools/check_live.sh --compare {date}; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; BASE=\"$(python3 \"$B/tools/channel_base.py\")\"; test -n \"$BASE\" || { echo '✘ لا قناة أساسية معلنة في المانيفست'; exit 2; }; python3 \"$B/tools/live_dom_audit.py\" --url \"$BASE/reports/{date}.html\" --expect \"$BASE/reports/{date}.html=$(sha256sum \"$SITE/dist/reports/{date}.html\" | cut -d' ' -f1)\" --url \"$BASE/additions.html\" --expect \"$BASE/additions.html=$(sha256sum \"$SITE/dist/additions.html\" | cut -d' ' -f1)\" --url \"$BASE/sources.html\" --expect \"$BASE/sources.html=$(sha256sum \"$SITE/dist/sources.html\" | cut -d' ' -f1)\" --json \"logs/runbook/{date}/dom-audit.json\"; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; exit ${w:-0}"
       ],
       "ok_rc": [
         0
