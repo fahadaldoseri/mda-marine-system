@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-08T17:39:58.013541+00:00",
+  "generated_at": "2026-11-08T21:55:08.870715+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -4163,24 +4163,24 @@
     },
     {
       "fault_id": "ك-563",
-      "state": "مفتوح",
+      "state": "مغلق",
       "lesson_id": "ك-563",
-      "barrier_id": "B-7e319fe6",
-      "run_evidence": "_DIR/SITE ثم المرشحات الفعلية وتتحقق من وجود sources/ أو generator/ · rc=0 python3 -m pytest tests/"
+      "barrier_id": "B-4d505c68",
+      "run_evidence": "_DIR/SITE ثم المرشحات الفعلية وتتحقق من وجود sources/ أو generator/ · rc=0 اختبار حارس الموقع: pyth"
     },
     {
       "fault_id": "ك-565",
-      "state": "مفتوح",
+      "state": "مغلق",
       "lesson_id": "ك-565",
-      "barrier_id": "B-b1c9ef02",
-      "run_evidence": "محلّل جذر موحّد + دعم البديل {site} في محرّك الانحدار · rc=0 python3 tools/regression"
+      "barrier_id": "B-66d10395",
+      "run_evidence": "محلّل جذر موحّد + دعم البديل {site} في محرّك الانحدار · rc=0 حارس مدير الانحدار: pyth"
     },
     {
       "fault_id": "ك-566",
-      "state": "مفتوح",
+      "state": "مغلق",
       "lesson_id": "ك-566",
-      "barrier_id": "B-755e880c",
-      "run_evidence": "eason · prefixes · markers · policy) واحترام كل فئة معلنة في الحارس · rc=0 python3 -m pytest tests/"
+      "barrier_id": "B-1e155c3a",
+      "run_evidence": "eason · prefixes · markers · policy) واحترام كل فئة معلنة في الحارس · rc=0 اختبار عقد النطاق: pytho"
     },
     {
       "fault_id": "ك-567",
@@ -4191,10 +4191,10 @@
     },
     {
       "fault_id": "ك-568",
-      "state": "مفتوح",
+      "state": "مغلق",
       "lesson_id": "ك-568",
-      "barrier_id": "B-a5a89d89",
-      "run_evidence": "حرّك pgrep -af runbook.py run → لا عملية متكررة، وتشغيل الجولة كاملًا rc=0"
+      "barrier_id": "B-133f0dd9",
+      "run_evidence": "عمق: pgrep -af runbook.py run → لا عملية متكررة، وتشغيل الجولة كاملًا rc=0"
     },
     {
       "fault_id": "ك-569",
@@ -4212,10 +4212,10 @@
     },
     {
       "fault_id": "ك-571",
-      "state": "مفتوح",
+      "state": "مغلق",
       "lesson_id": "ك-571",
-      "barrier_id": "B-9fa2d77f",
-      "run_evidence": "وترفض الأرشيف، ورُبطت المواضع الستة python3 generator/build_site.py → rc=0 وبناء الصفحات الإنجليزية"
+      "barrier_id": "B-3d782b1b",
+      "run_evidence": "بطت المواضع الستة قياس بناء الموقع: python3 generator/build_site.py → rc=0 وبناء الصفحات الإنجليزية"
     },
     {
       "fault_id": "ك-573",
@@ -4226,10 +4226,10 @@
     },
     {
       "fault_id": "ك-574",
-      "state": "مفتوح",
+      "state": "مغلق",
       "lesson_id": "ك-574",
-      "barrier_id": "B-86db250d",
-      "run_evidence": "غلقًا برمز main نفسه في 50 مدقّقًا، ونسخ _guard.py في بيئة الاختبار · rc=0 python3 -m pytest tests/"
+      "barrier_id": "B-1c584a74",
+      "run_evidence": "غلقًا برمز main نفسه في 50 مدقّقًا، ونسخ _guard.py في بيئة الاختبار · rc=0 اختبارات الفشل المغلق: p"
     }
   ]
 }
