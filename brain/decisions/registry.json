@@ -9,9 +9,9 @@
     "يحتاج قرارًا"
   ],
   "decided_by": "المالك",
-  "last_measured": "2026-11-07",
+  "last_measured": "2026-11-09",
   "counts": {
-    "منفَّذ": 20,
+    "منفَّذ": 21,
     "منفَّذ جزئيًّا": 4,
     "يحتاج تحققًا": 3,
     "يحتاج قرارًا": 0
@@ -508,6 +508,41 @@
       ],
       "governing_file": "runbook/runbook.json",
       "next_action_ar": "إعادة القياس الحي عبر D020 في كل إصدار؛ لا تُعد raw.githubusercontent قناة عرض."
+    },
+    {
+      "id": "D-0622",
+      "title_ar": "اعتماد مهارة استئناف الخطوة إلى المزامنة الحية (rerun-step-to-live-parity-ops)",
+      "status": "منفَّذ",
+      "wording_ar": "«اعتمد المهارة رسمياً في فهرس المشروع واربطها بخطوة في الكتيب الآن» — المالك، 2026-11-09.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "skills/rerun-step-to-live-parity-ops/SKILL.md",
+          "note": "المهارة المعتمدة: حدود · قواعد حاكمة · مسار سبعي · أداة قياس · حلقة تعلّم ذاتي"
+        },
+        {
+          "kind": "file",
+          "ref": "skills/rerun-step-to-live-parity-ops/references/closure-evidence-contract.md",
+          "note": "عقد الأعمدة الاثني عشر ومفردات الاشتقاق ومنع انحراف الوثيقة عن POLICY"
+        },
+        {
+          "kind": "file",
+          "ref": "INDEX.md",
+          "note": "سطر الاعتماد في فهرس المشروع بتاريخ 2026-11-09"
+        },
+        {
+          "kind": "measurement",
+          "ref": "logs/runbook/2026-11/G068.log",
+          "note": "خطوة الكتيب المالكة: عقد المهارة + فرز الاستثناءات + ميزانيتها · rc=0"
+        },
+        {
+          "kind": "file",
+          "ref": "tests/test_live_parity_skill_contract.py",
+          "note": "عقد قابل للاختبار: أسطح متطابقة · بنية معلنة · أداة موجب وسالب · مرجع مطابق للسياسة"
+        }
+      ],
+      "governing_file": "runbook/runbook.json",
+      "next_action_ar": "مراجعة الاعتماد بعد ثلاث جولات: إن لم تُستهلك المهارة في جولة، يُعاد فتح الاعتماد بندًا لا يُحذف صامتًا."
     }
   ]
 }

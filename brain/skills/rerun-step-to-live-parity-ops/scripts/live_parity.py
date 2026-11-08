@@ -24,9 +24,12 @@ def fetch(url: str, timeout: int) -> tuple[int, bytes, str]:
     req = urllib.request.Request(url, headers={'User-Agent': UA})
     try:
         with urllib.request.urlopen(req, timeout=timeout) as r:
-            return r.status, r.read(), (r.headers.get('Content-Type') or '')
+            return (r.status or 200), r.read(), (r.headers.get('Content-Type') or '')
     except urllib.error.HTTPError as e:                     # 404/500 تُقاس لا تُخفى
         return e.code, e.read() or b'', (e.headers.get('Content-Type') or '')
+    except urllib.error.URLError as e:                      # رابط غير متاح أو انقطاع = تعذّر وصول معلن
+        print(f'   خطأ اتصال: {e.reason}')
+        return 0, b'', ''
 
 
 def sha(b: bytes) -> str:
