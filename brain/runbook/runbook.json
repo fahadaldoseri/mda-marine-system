@@ -5263,7 +5263,7 @@
       "command": [
         "bash",
         "-lc",
-        "B=\"$PWD\"; export B SITE; bash tools/github_backup.sh && python3 validators/check_backup_parity.py --mode strict; rc=$?; exit $rc"
+        "B=\"${B:-$PWD}\"; REPO=\"$(git -C \"$B\" rev-parse --show-toplevel 2>/dev/null)\"; export B SITE REPO BACKUP_REPO_DIR=\"$REPO\"; B=\"$PWD\"; export B SITE; bash tools/github_backup.sh && python3 validators/check_backup_parity.py --mode strict; rc=$?; exit $rc"
       ],
       "ok_rc": [
         0

@@ -16,9 +16,28 @@ import subprocess
 import sys
 from pathlib import Path
 
+def _git_toplevel(start: Path) -> Path | None:
+    """جذر مستودع النسخ بالقياس لا بالافتراض (ك-567).
+
+    السبب المقيس: كان الافتراض ``B.parent / "mda-marine-system"`` فينتج
+    ``/home/ubuntu/mda-marine-system/mda-marine-system`` وهو غير موجود، فيُتخطّى
+    فحص التماثل الصارم برسالة تحذير ورمز 3. القياس من Git يوحّد D005 وD040
+    ويصحّ عند نقل المشروع أو تغيير اسم المجلد.
+    """
+    try:
+        out = subprocess.run(["git", "-C", str(start), "rev-parse", "--show-toplevel"],
+                             capture_output=True, text=True, check=False)
+    except OSError:
+        return None
+    root = out.stdout.strip()
+    return Path(root) if out.returncode == 0 and root else None
+
+
 B = Path(os.environ.get("BRAIN_DIR") or Path(__file__).resolve().parents[1])
 S = Path(os.environ.get("SITE_DIR") or B.parent / "seawatch")
-REPO = Path(os.environ.get("BACKUP_REPO_DIR") or B.parent / "mda-marine-system")
+REPO = Path(os.environ.get("BACKUP_REPO_DIR") or "") if os.environ.get("BACKUP_REPO_DIR") else None
+if REPO is None:
+    REPO = _git_toplevel(B) or B.parent
 SCOPE_ENV = "PARITY_SCOPE_FILE"
 
 # مخرجات تشغيل محلية مؤقتة لا تُنقل إلى المرآة ولا تُعدّ انحرافًا حاكمًا.
