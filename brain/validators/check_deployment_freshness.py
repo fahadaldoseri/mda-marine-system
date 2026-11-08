@@ -95,18 +95,29 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--base", default=BASE_DEFAULT)
     ap.add_argument("--extra", nargs="*", default=[])
     ap.add_argument("--json-out", default="")
+    ap.add_argument("--wait-seconds", type=int, default=240,
+                    help="مهلة انتشار محدودة: يُعاد القياس خلالها حتى يظهر البناء الحالي (ك-573)")
+    ap.add_argument("--interval", type=int, default=20, help="الفاصل بين محاولات القياس، بالثواني")
     a = ap.parse_args(argv)
 
     root = site_root()
     if not (root / "dist").is_dir():
         print(f"   غير مستوفى: لا يوجد dist في {root}")
         return 1
-    result = probe(root, a.date, a.base, a.extra)
+    import time
+    waited, attempt, result = 0, 1, probe(root, a.date, a.base, a.extra)
+    while (result["stale"] or result["missing"]) and waited < a.wait_seconds:
+        time.sleep(a.interval)
+        waited += a.interval
+        attempt += 1
+        result = probe(root, a.date, a.base, a.extra)
+    result["propagation_wait_seconds"] = waited
+    result["attempts"] = attempt
     if a.json_out:
         Path(a.json_out).write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     print(f"   مطابق: {result['match']} · قديم: {len(result['stale'])} · غائب: {len(result['missing'])}"
-          f" · غير مقيس: {len(result['unmeasured'])}")
+          f" · غير مقيس: {len(result['unmeasured'])} · محاولات: {attempt} · انتظار: {waited}ث")
     for row in result["stale"][:5]:
         print(f"   ✘ قديم: {row['file']} · محلي {row['local_bytes']} بايت / حي {row['live_bytes']} بايت")
     for row in result["missing"][:5]:
@@ -123,5 +134,9 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     sys.path.insert(0, str(Path(__file__).resolve().parent))
-    from _guard import run
+    try:
+        from _guard import run
+    except ModuleNotFoundError:  # بيئة بلا الحارس الموحّد: فشل مغلق برمز main نفسه
+        def run(fn):
+            raise SystemExit(fn())
     run(main)

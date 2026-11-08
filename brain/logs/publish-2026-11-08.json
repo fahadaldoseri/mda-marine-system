@@ -1,0 +1,166 @@
+{
+  "date": "2026-11-08",
+  "channel": "cloudflare-pages",
+  "url": "https://seawatch-live.pages.dev/reports/2026-11-08",
+  "successful_url": "https://seawatch-live.pages.dev/reports/2026-11-08",
+  "head": "cd6e440703381f614db641226f49509eea8a78c3",
+  "rc": 0,
+  "status": "ok",
+  "live": {
+    "ok": true,
+    "status": 200,
+    "bytes": 195181,
+    "min_bytes": 100000,
+    "size_ok": true,
+    "date_marker": true,
+    "content_type": "text/html; charset=utf-8",
+    "content_type_normalized": "text/html",
+    "content_type_ok": true,
+    "presentation_eligible": true,
+    "sha256": "d57f251d7aa8f12b33691c32273dd8052a8ad188c36abbcceaf02709c882a8d9",
+    "expected_sha256": "d57f251d7aa8f12b33691c32273dd8052a8ad188c36abbcceaf02709c882a8d9",
+    "sha256_match": true,
+    "requested_url": "https://seawatch-live.pages.dev/reports/2026-11-08",
+    "final_url": "https://seawatch-live.pages.dev/reports/2026-11-08",
+    "redirected": false,
+    "redirects": [],
+    "reason": "ok",
+    "url": "https://seawatch-live.pages.dev/reports/2026-11-08",
+    "attempts": 1,
+    "elapsed_seconds": 2.515
+  },
+  "at": "2026-11-08T17:28:11Z",
+  "content_sha256": "d57f251d7aa8f12b33691c32273dd8052a8ad188c36abbcceaf02709c882a8d9",
+  "publish_output_tail": " عربي 0 · إنجليزي 0\n   ✔ النسب المئوية: إجمالي عربي 3 · إنجليزي 3\n   ✔ المديات الرقمية: إجمالي عربي 3 · إنجليزي 3\n   ✔ درجات الثقة: إجمالي عربي 0 · إنجليزي 0\n   ✔ التواريخ والأوقات: إجمالي عربي 13 · إنجليزي 13\n   ✔ كل الأرقام: إجمالي عربي 142 · إنجليزي 142\n   ── الصفحتان المبنيتان ──\n   ✔ h1: عربي 1 · إنجليزي 1\n   ✔ h2: عربي 6 · إنجليزي 6\n   ✔ h3: عربي 2 · إنجليزي 2\n   ✔ tables: عربي 2 · إنجليزي 2\n   ✔ rows: عربي 11 · إنجليزي 11\n   ✔ svg: عربي 8 · إنجليزي 8\n   ✔ buttons: عربي 7 · إنجليزي 7\n   ✔ list_items: عربي 76 · إنجليزي 76\n   ✔ links: عربي 17 · إنجليزي 17\n   ✔ collapsed: عربي 0 · إنجليزي 0\n   ✔ أرقام الصفحة المرئية: عربي 40 قيمة · إنجليزي 40 قيمة\n   ✔ لغة الصفحة الإنجليزية: lang=en dir=ltr\n   ✔ نصوص عربية متبقية في الصفحة الإنجليزية: 0\n   ✔ النتيجة: النسخة الإنجليزية مطابقة للمتن ولصفحة الإصدار في البنية والأرقام والأكواد واللغة\n  ✔ كل المسارات ترد 200 (PDF مستثنى — الطباعة معطّلة بطلب المالك)\n✔ نُشر عبر HEAD:main — 2026-11-08 (cd6e4407) — origin/main مطابق — live HTTP 200 verified",
+  "channel_role": "primary-presentation",
+  "pages_source_push": {
+    "rc": 0,
+    "head": "ba1e29cea0ba885c525249db01568863638d5c63",
+    "repo": "fahadaldoseri/seawatch-live",
+    "output_tail": "/Content-Type verified via https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-08.html https://cdn.jsdelivr.net/gh/fahadaldoseri/seawatch-live@main/reports/2026-11-08.html https://raw.githubusercontent.com/fahadaldoseri/seawatch-live/main/reports/2026-11-08.html — ba1e29cea0ba885c525249db01568863638d5c63 — sha256=a5d518fecbb0361dbcc0efad43d81d63401bfd1c7f413aec58d12e0590f754b7"
+  },
+  "channels": {
+    "cloudflare-pages": {
+      "state": "ready",
+      "reason": "Pages live 200/html/sha256 verified",
+      "live": {
+        "ok": true,
+        "status": 200,
+        "bytes": 195181,
+        "min_bytes": 100000,
+        "size_ok": true,
+        "date_marker": true,
+        "content_type": "text/html; charset=utf-8",
+        "content_type_normalized": "text/html",
+        "content_type_ok": true,
+        "presentation_eligible": true,
+        "sha256": "d57f251d7aa8f12b33691c32273dd8052a8ad188c36abbcceaf02709c882a8d9",
+        "expected_sha256": "d57f251d7aa8f12b33691c32273dd8052a8ad188c36abbcceaf02709c882a8d9",
+        "sha256_match": true,
+        "requested_url": "https://seawatch-live.pages.dev/reports/2026-11-08",
+        "final_url": "https://seawatch-live.pages.dev/reports/2026-11-08",
+        "redirected": false,
+        "redirects": [],
+        "reason": "ok",
+        "url": "https://seawatch-live.pages.dev/reports/2026-11-08",
+        "attempts": 1,
+        "elapsed_seconds": 2.515
+      },
+      "presentation_eligible": true
+    },
+    "raw-githack": {
+      "state": "ready",
+      "reason": "raw.githack fallback repository is public; jsDelivr is an intermediate transport",
+      "presentation_eligible": true
+    },
+    "raw.githubusercontent": {
+      "state": "verification-only",
+      "reason": "raw.githubusercontent.com يعيد text/plain؛ ممنوع كقناة عرض",
+      "presentation_eligible": false
+    }
+  },
+  "attempts": [
+    {
+      "date": "2026-11-08",
+      "channel": "cloudflare-pages",
+      "url": "https://seawatch-live.pages.dev/reports/2026-11-08",
+      "successful_url": "https://seawatch-live.pages.dev/reports/2026-11-08",
+      "head": "cd6e440703381f614db641226f49509eea8a78c3",
+      "rc": 0,
+      "status": "ok",
+      "live": {
+        "ok": true,
+        "status": 200,
+        "bytes": 195181,
+        "min_bytes": 100000,
+        "size_ok": true,
+        "date_marker": true,
+        "content_type": "text/html; charset=utf-8",
+        "content_type_normalized": "text/html",
+        "content_type_ok": true,
+        "presentation_eligible": true,
+        "sha256": "d57f251d7aa8f12b33691c32273dd8052a8ad188c36abbcceaf02709c882a8d9",
+        "expected_sha256": "d57f251d7aa8f12b33691c32273dd8052a8ad188c36abbcceaf02709c882a8d9",
+        "sha256_match": true,
+        "requested_url": "https://seawatch-live.pages.dev/reports/2026-11-08",
+        "final_url": "https://seawatch-live.pages.dev/reports/2026-11-08",
+        "redirected": false,
+        "redirects": [],
+        "reason": "ok",
+        "url": "https://seawatch-live.pages.dev/reports/2026-11-08",
+        "attempts": 1,
+        "elapsed_seconds": 2.515
+      },
+      "at": "2026-11-08T17:28:11Z",
+      "content_sha256": "d57f251d7aa8f12b33691c32273dd8052a8ad188c36abbcceaf02709c882a8d9",
+      "publish_output_tail": " عربي 0 · إنجليزي 0\n   ✔ النسب المئوية: إجمالي عربي 3 · إنجليزي 3\n   ✔ المديات الرقمية: إجمالي عربي 3 · إنجليزي 3\n   ✔ درجات الثقة: إجمالي عربي 0 · إنجليزي 0\n   ✔ التواريخ والأوقات: إجمالي عربي 13 · إنجليزي 13\n   ✔ كل الأرقام: إجمالي عربي 142 · إنجليزي 142\n   ── الصفحتان المبنيتان ──\n   ✔ h1: عربي 1 · إنجليزي 1\n   ✔ h2: عربي 6 · إنجليزي 6\n   ✔ h3: عربي 2 · إنجليزي 2\n   ✔ tables: عربي 2 · إنجليزي 2\n   ✔ rows: عربي 11 · إنجليزي 11\n   ✔ svg: عربي 8 · إنجليزي 8\n   ✔ buttons: عربي 7 · إنجليزي 7\n   ✔ list_items: عربي 76 · إنجليزي 76\n   ✔ links: عربي 17 · إنجليزي 17\n   ✔ collapsed: عربي 0 · إنجليزي 0\n   ✔ أرقام الصفحة المرئية: عربي 40 قيمة · إنجليزي 40 قيمة\n   ✔ لغة الصفحة الإنجليزية: lang=en dir=ltr\n   ✔ نصوص عربية متبقية في الصفحة الإنجليزية: 0\n   ✔ النتيجة: النسخة الإنجليزية مطابقة للمتن ولصفحة الإصدار في البنية والأرقام والأكواد واللغة\n  ✔ كل المسارات ترد 200 (PDF مستثنى — الطباعة معطّلة بطلب المالك)\n✔ نُشر عبر HEAD:main — 2026-11-08 (cd6e4407) — origin/main مطابق — live HTTP 200 verified",
+      "channel_role": "primary-presentation",
+      "pages_source_push": {
+        "rc": 0,
+        "head": "ba1e29cea0ba885c525249db01568863638d5c63",
+        "repo": "fahadaldoseri/seawatch-live",
+        "output_tail": "/Content-Type verified via https://raw.githack.com/fahadaldoseri/seawatch-live/main/reports/2026-11-08.html https://cdn.jsdelivr.net/gh/fahadaldoseri/seawatch-live@main/reports/2026-11-08.html https://raw.githubusercontent.com/fahadaldoseri/seawatch-live/main/reports/2026-11-08.html — ba1e29cea0ba885c525249db01568863638d5c63 — sha256=a5d518fecbb0361dbcc0efad43d81d63401bfd1c7f413aec58d12e0590f754b7"
+      },
+      "channels": {
+        "cloudflare-pages": {
+          "state": "ready",
+          "reason": "Pages live 200/html/sha256 verified",
+          "live": {
+            "ok": true,
+            "status": 200,
+            "bytes": 195181,
+            "min_bytes": 100000,
+            "size_ok": true,
+            "date_marker": true,
+            "content_type": "text/html; charset=utf-8",
+            "content_type_normalized": "text/html",
+            "content_type_ok": true,
+            "presentation_eligible": true,
+            "sha256": "d57f251d7aa8f12b33691c32273dd8052a8ad188c36abbcceaf02709c882a8d9",
+            "expected_sha256": "d57f251d7aa8f12b33691c32273dd8052a8ad188c36abbcceaf02709c882a8d9",
+            "sha256_match": true,
+            "requested_url": "https://seawatch-live.pages.dev/reports/2026-11-08",
+            "final_url": "https://seawatch-live.pages.dev/reports/2026-11-08",
+            "redirected": false,
+            "redirects": [],
+            "reason": "ok",
+            "url": "https://seawatch-live.pages.dev/reports/2026-11-08",
+            "attempts": 1,
+            "elapsed_seconds": 2.515
+          },
+          "presentation_eligible": true
+        },
+        "raw-githack": {
+          "state": "ready",
+          "reason": "raw.githack fallback repository is public; jsDelivr is an intermediate transport",
+          "presentation_eligible": true
+        },
+        "raw.githubusercontent": {
+          "state": "verification-only",
+          "reason": "raw.githubusercontent.com يعيد text/plain؛ ممنوع كقناة عرض",
+          "presentation_eligible": false
+        }
+      }
+    }
+  ]
+}

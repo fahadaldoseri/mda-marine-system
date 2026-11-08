@@ -486,6 +486,12 @@ def publish(root: Path, date: str, repo: str = DEFAULT_REPO) -> int:
             rc, output = run_command(["bash", str(root / "tools" / "publish_site.sh"), date], cwd=root, env=env)
             publish_doc = _read_json(root / "logs" / f"publish-{date}.json")
             head = publish_doc.get("head") or ""
+            # ك-573: قناة Cloudflare Pages تُبنى من مستودع المصدر؛ بلا دفع البناء الحالي إليه
+            # تبقى تخدم بناءً أقدم (مثل feed.xml) فيمنع حارس الحداثة D021.
+            source_rc, source_out = run_command(
+                ["bash", str(root / "tools" / "publish_fallback.sh"), date],
+                cwd=root, env=dict(os.environ, BRAIN_DIR=str(root)))
+            source_doc = _read_json(root / "logs" / f"publish-{date}-fallback.json")
             url = cloudflare_report_url(date, base)
             live = verify_live_url(url, date, min_bytes=PAGES_MIN_BYTES, expected_sha256=local_sha)
             waited = 0
@@ -501,6 +507,12 @@ def publish(root: Path, date: str, repo: str = DEFAULT_REPO) -> int:
                                           live=live, rc=rc, fingerprint=local_sha)
             record["publish_output_tail"] = output[-1000:]
             record["channel_role"] = "primary-presentation"
+            record["pages_source_push"] = {
+                "rc": source_rc,
+                "head": source_doc.get("head") or "",
+                "repo": source_doc.get("repo") or DEFAULT_REPO,
+                "output_tail": source_out[-400:],
+            }
             attempts.append(record)
             if record["status"] == "ok":
                 channel_states[channel] = {"state": "ready", "reason": "Pages live 200/html/sha256 verified",
