@@ -38,6 +38,7 @@ class GithubBackupFailureOutputTest(unittest.TestCase):
             validators = brain / "validators"
             validators.mkdir(parents=True)
             shutil.copy2(ROOT / "validators" / "check_backup_tree_clean.py", validators)
+            shutil.copy2(ROOT / "validators" / "_guard.py", validators)
             runbook = brain / "runbook"
             runbook.mkdir(parents=True)
             shutil.copy2(ROOT / "runbook" / "parity-scope.json", runbook)

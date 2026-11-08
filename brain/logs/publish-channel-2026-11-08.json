@@ -1,6 +1,6 @@
 {
   "date": "2026-11-08",
-  "at": "2026-11-08T05:51:01Z",
+  "at": "2026-11-08T17:27:44Z",
   "measurement_scope": "readiness-only; D020 owns live status, redirects, bytes and sha256",
   "release_today_checked": false,
   "release_today_note": "S085 يثبت الربط فقط؛ D020 يثبت 200 بعد التحويل وtext/html والحجم والبصمة.",
@@ -21,7 +21,7 @@
       "repo": "fahadaldoseri/seawatch-live",
       "branch": "main",
       "min_bytes": 100000,
-      "expected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "expected_sha256": "d57f251d7aa8f12b33691c32273dd8052a8ad188c36abbcceaf02709c882a8d9",
       "auto_deploy": true
     },
     "raw-githack": {

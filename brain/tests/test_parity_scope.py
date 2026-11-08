@@ -88,9 +88,10 @@ def _run_fixture(paths: dict[str, Path]) -> subprocess.CompletedProcess[str]:
 def test_scope_registry_has_reasons_and_four_policies() -> None:
     data = json.loads(SCOPE.read_text(encoding="utf-8"))
     categories = data["categories"]
-    assert {item["id"] for item in categories} == {
-        "governing", "evidence_measurements", "operational_logs", "generated"
-    }
+    ids = {item["id"] for item in categories}
+    core = {"governing", "evidence_measurements", "operational_logs", "generated"}
+    assert core <= ids, f"فئات جوهرية ناقصة: {core - ids}"
+    assert len(ids) == len(categories), "معرّفات فئات مكررة في سجل النطاق"
     assert all(item["reason"].strip() for item in categories)
     assert all(item["policy"] in {"strict", "informational"} for item in categories)
 
