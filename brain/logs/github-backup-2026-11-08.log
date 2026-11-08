@@ -1,0 +1,59 @@
+=== بدء النسخ الاحتياطي: 2026-11-08T03:00:53Z ===
+حارس شجرة النسخ: تغييرات Git=4 · سجلات تشغيل معلنة=3 · تعديلات حاكمة=1
+  ✔ سجل تشغيل معلن: brain/logs/github-backup-2026-11-08.log · sha256=1e941c6c348070a755705bfb28e38424a2e8fb7c82005550da519313293e314f
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-07.jsonl · sha256=a3b4a9b97c1fb427523be2c3d4447ba29312a06cb71398491a463c834d3c3b26
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-07/D030.log · sha256=520f3b4a412009bedcfa3f330706d64ddcc155bec21fd3bf067318668c170c69
+  ✘ تعديل حاكم: site/sources/i18n/en/glossary.json · sha256=4b77af99d394bdf8e72009cba681550996e0b790d68e70de9bc9fa0a44bc2c31
+✘ فشل مغلق: توجد تعديلات شيفرة/بيانات حقيقية خارج سجلات التشغيل المعلنة
+✘ فشل مغلق: حارس شجرة النسخ منع العملية؛ راجع تصنيف المسارات وبصمات SHA-256
+=== بدء النسخ الاحتياطي: 2026-11-08T03:01:29Z ===
+حارس شجرة النسخ: تغييرات Git=4 · سجلات تشغيل معلنة=4 · تعديلات حاكمة=0
+  ✔ سجل تشغيل معلن: brain/logs/github-backup-2026-11-08.log · sha256=a13af0ebb4afdaf1bec1bf85253f45fa2faa43375afd74d0e5acacc17f00a753
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-07.jsonl · sha256=16dfb450db500c75fb1c72ff8253cb9adf360ff0e4c0700cde2d43d54fdf0b51
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-07/D030.log · sha256=af5029c33a3850f28b59a61520164d9efd21edb167915b373aec2918988efc83
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-07/D040.log · sha256=f878f3db07370cdc1ce0d7cb37aca2d688b345795c1be142b7e990f80749e48b
+✔ شجرة النسخ تمر: سجلات التشغيل المحلية لا تمنع النسخة الاحتياطية
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_site.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): skills/.skill_versions.json
+⚠ تعارض (عُدّل على الخادم خارج GitHub): skills/superpowers-method/SKILL.md
+✘ 3 تعارض. لا شيء طُبّق. إن كان المستودع هو الصحيح: أعد التشغيل بـ --accept-repo (تُؤرشف نسخ الخادم أولًا).
+⚠ تعذّر/تعارض في تطبيق الشيفرة (تستمر نسخة البيانات بعد تسجيل التحذير)
+الملفات: 9144 · الحجم: 280.2 م.ب · الفهرس: docs/فهرس-الملفات.tsv
+  انحراف شيفرة: site/generator/build_site.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: skills/SKILL.md — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+✔ بوابة الأسرار: لا سرّ في النطاق المفحوص
+✔ كل ملفات الشيفرة على الخادم متتبَّعة في المستودع (المستثنى المعلَّل: 0)
+✔ آمن: لا يوجد git push مباشر إلى main في /home/ubuntu/mda-marine-system/brain/tools/github_backup.sh
+remote: 
+remote: Create a pull request for 'backup/2026-11-08-030213-2677096' on GitHub by visiting:        
+remote:      https://github.com/fahadaldoseri/mda-marine-system/pull/new/backup/2026-11-08-030213-2677096        
+remote: 
+تم دفع الفرع فقط: backup/2026-11-08-030213-2677096
+تم إنشاء طلب الدمج: https://github.com/fahadaldoseri/mda-marine-system/pull/541
+=== انتهى: 2026-11-08T03:02:19Z ===
+=== بدء النسخ الاحتياطي: 2026-11-08T03:02:40Z ===
+حارس شجرة النسخ: تغييرات Git=5 · سجلات تشغيل معلنة=5 · تعديلات حاكمة=0
+  ✔ سجل تشغيل معلن: brain/logs/alerts/code-drift-2026-11-08.txt · sha256=763212a8cfd5957926beffafd3bccaf4006bd551493174bc01bcb116f2a36b62
+  ✔ سجل تشغيل معلن: brain/logs/github-backup-2026-11-08.log · sha256=2db35aa008d471c15b88ff106ef331a34ba56f9e429bbad85d46460e720d205a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-07.jsonl · sha256=724c3e60dee65a6377e2f8cb1d7b9d56fd94557ef011239c5c17099257d592c7
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-07/D030.log · sha256=af5029c33a3850f28b59a61520164d9efd21edb167915b373aec2918988efc83
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-07/D040.log · sha256=8d1c96ade7459e01ad82ebd8e528e7410a26a5d3437fe6e1521d258d7c5a64ff
+✔ شجرة النسخ تمر: سجلات التشغيل المحلية لا تمنع النسخة الاحتياطية
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_site.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): skills/.skill_versions.json
+⚠ تعارض (عُدّل على الخادم خارج GitHub): skills/superpowers-method/SKILL.md
+✘ 3 تعارض. لا شيء طُبّق. إن كان المستودع هو الصحيح: أعد التشغيل بـ --accept-repo (تُؤرشف نسخ الخادم أولًا).
+⚠ تعذّر/تعارض في تطبيق الشيفرة (تستمر نسخة البيانات بعد تسجيل التحذير)
+الملفات: 9145 · الحجم: 280.2 م.ب · الفهرس: docs/فهرس-الملفات.tsv
+  انحراف شيفرة: site/generator/build_site.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: skills/SKILL.md — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+✔ بوابة الأسرار: لا سرّ في النطاق المفحوص
+✔ كل ملفات الشيفرة على الخادم متتبَّعة في المستودع (المستثنى المعلَّل: 0)
+✔ آمن: لا يوجد git push مباشر إلى main في /home/ubuntu/mda-marine-system/brain/tools/github_backup.sh
+remote: 
+remote: Create a pull request for 'backup/2026-11-08-030319-2677473' on GitHub by visiting:        
+remote:      https://github.com/fahadaldoseri/mda-marine-system/pull/new/backup/2026-11-08-030319-2677473        
+remote: 
+تم دفع الفرع فقط: backup/2026-11-08-030319-2677473
+تم إنشاء طلب الدمج: https://github.com/fahadaldoseri/mda-marine-system/pull/542
+=== انتهى: 2026-11-08T03:03:25Z ===
