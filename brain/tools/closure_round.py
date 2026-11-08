@@ -191,7 +191,8 @@ def main():
         key = ident.split('/')[0]
         key = f'{key.split(chr(45))[0]}-{int(key.split(chr(45))[1])}'
         les = by_fault.get(key, [])
-        if not les and re.search(r'بوابة|اختبار|قاس|قاعدة|حارس', r[6]):
+        if not les and (re.search(r'بوابة|اختبار|قاس|قاعدة|حارس', r[6])
+                       or OUTCOME.search(f'{r[5]} {r[6]}')):
             derived += 1
             e = {'ts': now.isoformat(), 'entry_kind': 'derived', 'cls': 'استنتاج رجعي', 'status': 'مرشّح',
                  'status_norm': 'مرشّح', 'fault_id': ident, 'symptom': r[3][:180], 'root_cause': r[4][:180],
