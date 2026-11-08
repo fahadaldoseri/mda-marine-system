@@ -1,0 +1,210 @@
+COMMAND: timeout 120 python3 tools/audit_broad_excepts.py --json
+RC: 1
+--- OUTPUT BEGIN ---
+{
+ "total": 98,
+ "unclassified": [],
+ "accepted_gate_logic": [
+  {
+   "file": "validators/check_code_spaces.py",
+   "func": "load",
+   "fingerprint": "6940bb4b",
+   "line_at_generation": 37,
+   "snippet": "return json.loads(p.read_text(encoding=\"utf-8\"))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": ""
+  },
+  {
+   "file": "validators/check_comprehension.py",
+   "func": "scrub",
+   "fingerprint": "c5e44cb4",
+   "line_at_generation": 169,
+   "snippet": "sys.path.insert(0, str(B / \"tools\"))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": ""
+  },
+  {
+   "file": "validators/check_comprehension.py",
+   "func": "glossary_text",
+   "fingerprint": "8e360aff",
+   "line_at_generation": 181,
+   "snippet": "g = json.loads(meta).get(\"glossary\") or {}",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": ""
+  },
+  {
+   "file": "validators/check_intel.py",
+   "func": "main",
+   "fingerprint": "31b37a12",
+   "line_at_generation": 87,
+   "snippet": "import json as _json",
+   "handler_kind": "تجاهل",
+   "category": "منطق البوابة",
+   "reason": "قراءة سياسة الأقسام داخل الفحص — الميل فشل مغلق."
+  },
+  {
+   "file": "validators/check_intel.py",
+   "func": "main",
+   "fingerprint": "462c4873",
+   "line_at_generation": 70,
+   "snippet": "import json as _json",
+   "handler_kind": "تجاهل",
+   "category": "منطق البوابة",
+   "reason": "قراءة سياسة الأقسام داخل الفحص — الميل فشل مغلق."
+  },
+  {
+   "file": "validators/check_libraries_skills.py",
+   "func": "check_portability",
+   "fingerprint": "247d663c",
+   "line_at_generation": 267,
+   "snippet": "import importlib.util",
+   "handler_kind": "تجاهل",
+   "category": "منطق البوابة",
+   "reason": "يُسجَّل عائق صريح في نتيجة بوابة قابلية النقل ⇒ يمنع."
+  },
+  {
+   "file": "validators/check_libraries_skills.py",
+   "func": "check_libs",
+   "fingerprint": "a21f54c9",
+   "line_at_generation": 65,
+   "snippet": "text = f.read_text(encoding=\"utf-8\")",
+   "handler_kind": "متابعة",
+   "category": "منطق البوابة",
+   "reason": "يُسجَّل عائق صريح في نتيجة بوابة قابلية النقل ⇒ يمنع."
+  },
+  {
+   "file": "validators/check_libraries_skills.py",
+   "func": "check_libs",
+   "fingerprint": "35aa1fc4",
+   "line_at_generation": 72,
+   "snippet": "data = json.loads(text)",
+   "handler_kind": "متابعة",
+   "category": "منطق البوابة",
+   "reason": "يُسجَّل عائق صريح في نتيجة بوابة قابلية النقل ⇒ يمنع."
+  },
+  {
+   "file": "validators/check_library_use.py",
+   "func": "load",
+   "fingerprint": "7f821f88",
+   "line_at_generation": 30,
+   "snippet": "return json.loads(path.read_text(encoding=\"utf-8\"))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": ""
+  },
+  {
+   "file": "validators/check_library_use.py",
+   "func": "check_new_terms_registry",
+   "fingerprint": "0a29df66",
+   "line_at_generation": 190,
+   "snippet": "data = json.loads(reg.read_text(encoding=\"utf-8\"))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": ""
+  },
+  {
+   "file": "validators/check_pdf_format.py",
+   "func": "main",
+   "fingerprint": "e3a29688",
+   "line_at_generation": 216,
+   "snippet": "import subprocess as _sp",
+   "handler_kind": "تجاهل",
+   "category": "منطق البوابة",
+   "reason": "فشل فحص العنوان اليتيم يُسجَّل في المخالفات ⇒ يمنع (ك-130)."
+  },
+  {
+   "file": "validators/check_print_quality.py",
+   "func": "_profile",
+   "fingerprint": "20f3e736",
+   "line_at_generation": 94,
+   "snippet": "return json.loads(PROFILE.read_text(encoding=\"utf-8\"))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": ""
+  },
+  {
+   "file": "validators/check_print_quality.py",
+   "func": "map_block_report",
+   "fingerprint": "82d4240a",
+   "line_at_generation": 144,
+   "snippet": "import numpy as np",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": ""
+  },
+  {
+   "file": "validators/check_print_quality.py",
+   "func": "map_block_report",
+   "fingerprint": "be15b166",
+   "line_at_generation": 152,
+   "snippet": "pages = _render_pages(pdf, dpi)",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": ""
+  },
+  {
+   "file": "validators/check_print_quality.py",
+   "func": "justify_report",
+   "fingerprint": "c5899604",
+   "line_at_generation": 252,
+   "snippet": "pages = _pdf_lines(pdf)",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": ""
+  },
+  {
+   "file": "validators/check_print_quality.py",
+   "func": "main",
+   "fingerprint": "77e9918d",
+   "line_at_generation": 350,
+   "snippet": "bad = alignment_report(page_path)",
+   "handler_kind": "تجاهل",
+   "category": "منطق البوابة",
+   "reason": "تأكيد ثانٍ على الصفحة بعد قياس PDF المعتمد — القياس الأساسي على PDF هو المانع، وهذا تكرار له؛ يُذكر في الملاحظات."
+  },
+  {
+   "file": "validators/check_run_completeness.py",
+   "func": "main",
+   "fingerprint": "5e531cda",
+   "line_at_generation": 36,
+   "snippet": "from mark_components import DERIVERS  # noqa: E402",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": ""
+  },
+  {
+   "file": "validators/check_server_code_tracking.py",
+   "func": "load_allowlist",
+   "fingerprint": "42e55220",
+   "line_at_generation": 40,
+   "snippet": "data = json.loads(p.read_text(encoding=\"utf-8\"))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": ""
+  },
+  {
+   "file": "validators/validate_report.py",
+   "func": "check_time",
+   "fingerprint": "0d525b33",
+   "line_at_generation": 140,
+   "snippet": "dt = datetime.fromisoformat(str(d[\"generated_label\"]).replace(\"Z\", \"+00:00\"))",
+   "handler_kind": "تجاهل",
+   "category": "منطق البوابة",
+   "reason": "خطأ تنسيق وقت التوليد يُسجَّل في الأخطاء ⇒ يمنع."
+  },
+  {
+   "file": "validators/validate_report.py",
+   "func": "main",
+   "fingerprint": "733ce997",
+   "line_at_generation": 308,
+   "snippet": "d = json.loads(path.read_text(encoding=\"utf-8\"))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": ""
+  }
+ ]
+}
+--- OUTPUT END ---

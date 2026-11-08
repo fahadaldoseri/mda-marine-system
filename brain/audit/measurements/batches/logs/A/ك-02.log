@@ -1,0 +1,4 @@
+NO EXECUTABLE COMMAND IN ROW
+OWNER SEARCH: الصف لا يحمل استدعاءً مكتملًا؛ المالك الحالي هو `bash tools/final_gate.sh 2026-11-08 --no-build`، لكنه مركب ذو آثار كتابة ومحجوز للمدير المركزي.
+FIX_APPLIED: تثبيت أن القياس يحتاج تشغيل المدير المركزي للبوابة المركبة، دون اختلاق rc.
+BARRIER: بوابة التسليم الفشل المغلق: `timeout 120 bash tools/final_gate.sh 2026-11-08 --no-build` → لم يُنفّذ ضمن النطاق؛ لا rc=0.

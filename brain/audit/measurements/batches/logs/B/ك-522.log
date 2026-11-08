@@ -1,0 +1,8 @@
+COMMAND: timeout 120 python3 tools/sync_to_repo.py --brain /home/ubuntu/mda-marine-system/brain --repo /home/ubuntu/mda-marine-system/brain --site /home/ubuntu/seawatch --repo-site /home/ubuntu/mda-marine-system/site --dry-run --allow-main
+STARTED_AT: 2026-11-08T23:34:36.339722+00:00
+RC: 0
+OUTPUT_BEGIN
+  المزامنة[brain]: جديد=0 · محدَّث=0 · محذوف=0 · تجربة
+  المزامنة[site]: جديد=6 · محدَّث=12 · محذوف=0 · تجربة
+
+OUTPUT_END

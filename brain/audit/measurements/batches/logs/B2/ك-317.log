@@ -1,0 +1,15 @@
+REUSED_FROM: audit/measurements/batches/logs/B/ك-317.log
+REUSED_PRIOR_COMMAND: python3 -m pytest tests/test_build_atomicity.py -q
+REUSED_PRIOR_RC: 0
+REUSED_NOTE: لم يُعاد القياس لأن سجل B السابق ناجح.
+--- PRIOR LOG BEGIN ---
+COMMAND: python3 -m pytest tests/test_build_atomicity.py -q
+STARTED_AT: 2026-11-08T22:43:10.779894+00:00
+RC: 0
+ELAPSED_SECONDS: 0.508
+OUTPUT_BEGIN
+...                                                                      [100%]
+3 passed in 0.01s
+OUTPUT_END
+--- PRIOR LOG END ---
+SHA256_BODY: 0ff7263b4a41c0c7c704725c999bc159ec342efa5f0093c94d0c5f99b874a94e

@@ -1,0 +1,5 @@
+COMMAND: timeout 120 python3 tests/test_orphan_rule.py
+RC: 0
+--- OUTPUT BEGIN ---
+  · اكتُشف 2 عنوانًا يتيمًا في الصفحتين 2 و3 · وتُجوهلت صفحتان سليمتان
+--- OUTPUT END ---

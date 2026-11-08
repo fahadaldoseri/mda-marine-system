@@ -1,0 +1,34 @@
+COMMAND: timeout 120 python3 tools/check_governing_assets.py --date 2026-11-08 --json
+STARTED_AT: 2026-11-08T23:24:03.003070+00:00
+RC: 2
+OUTPUT_BEGIN
+{
+  "status": "BLOCK",
+  "checked_at": "2026-11-08T23:24:04.909086+00:00",
+  "date": "2026-11-08",
+  "current_root": "58a6830312ca22921373e611827c48e6726664fe29951ce8fe983db5814f45df",
+  "current_files": 2658,
+  "ledger": "/home/ubuntu/mda-marine-system/brain/evidence/merkle/ledger.jsonl",
+  "ledger_verified": true,
+  "snapshot_entry": {
+    "seq": 20,
+    "ts": "2026-11-08T04:41:53.785907+00:00",
+    "kind": "snapshot",
+    "root": "a06b2d380e8467889846eecb0f69b752e5924cbff58a3441c2bb356e5662da86",
+    "files": 2655,
+    "prev_hash": "347a13091ea496de1ab5fe7586f45b196d8fd4a837c4d4436cdd21af8ef15d79",
+    "hash": "95f529ef26ebc0c957aa43786ae74c6ef5f8088a71a2fac7f8ca45c0cd85f70d"
+  },
+  "snapshot_file": "/home/ubuntu/mda-marine-system/brain/evidence/merkle/snapshot.json",
+  "mirror": "/home/ubuntu/mda-marine-system/skills",
+  "violations": [
+    "snapshot root mismatch: current 58a6830312ca22921373e611827c48e6726664fe29951ce8fe983db5814f45df != recorded a06b2d380e8467889846eecb0f69b752e5924cbff58a3441c2bb356e5662da86",
+    "snapshot content mismatch: /home/ubuntu/skills/fault-closure-and-learning-ops/SKILL.md",
+    "snapshot content mismatch: /home/ubuntu/skills/parity-and-publish-ops/SKILL.md",
+    "snapshot missing recorded path: /home/ubuntu/skills/rerun-step-to-live-parity-ops/SKILL.md",
+    "snapshot missing recorded path: /home/ubuntu/skills/rerun-step-to-live-parity-ops/references/closure-evidence-contract.md",
+    "snapshot missing recorded path: /home/ubuntu/skills/rerun-step-to-live-parity-ops/scripts/live_parity.py"
+  ]
+}
+
+OUTPUT_END

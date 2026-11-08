@@ -1,0 +1,17 @@
+REUSED_FROM: audit/measurements/batches/logs/B/ك-291.log
+REUSED_PRIOR_COMMAND: python3 /home/ubuntu/seawatch/generator/build_sources.py && grep -c "بصمة ملف الفحص" /home/ubuntu/seawatch/dist/sources.html
+REUSED_PRIOR_RC: 0
+REUSED_NOTE: لم يُعاد القياس لأن سجل B السابق ناجح.
+--- PRIOR LOG BEGIN ---
+COMMAND: python3 /home/ubuntu/seawatch/generator/build_sources.py && grep -c "بصمة ملف الفحص" /home/ubuntu/seawatch/dist/sources.html
+STARTED_AT: 2026-11-08T22:38:53.166873+00:00
+RC: 0
+ELAPSED_SECONDS: 0.452
+OUTPUT_BEGIN
+سياسة الأقسام: /home/ubuntu/seawatch/sources/report-sections-policy.json · محذوف 15 · كتل 5
+صفحة المصادر: 62 بطاقة · 32 مرجعًا رسميًا · 62 مصدرًا في جدول الموثوقية
+{'cards': 62, 'refs': 32, 'rows': 62, 'size': 127309}
+1
+OUTPUT_END
+--- PRIOR LOG END ---
+SHA256_BODY: 859807435c50549425e03d6b393c796ec6b55d9340e25cb5c3b0397a340dfcd6

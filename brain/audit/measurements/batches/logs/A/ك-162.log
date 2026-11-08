@@ -1,0 +1,5 @@
+COMMAND: timeout 120 python3 validators/check_secrets.py --root .
+RC: 0
+--- OUTPUT BEGIN ---
+✔ بوابة الأسرار: لا سرّ في النطاق المفحوص
+--- OUTPUT END ---

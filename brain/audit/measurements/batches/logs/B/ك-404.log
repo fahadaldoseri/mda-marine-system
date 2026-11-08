@@ -1,0 +1,15 @@
+COMMAND: timeout 120 python3 -m unittest -v tests/test_zone_strip.py
+STARTED_AT: 2026-11-08T23:25:07.510325+00:00
+RC: 0
+OUTPUT_BEGIN
+test_missing_strip_fails_closed (tests.test_zone_strip.ZoneStripGateTests.test_missing_strip_fails_closed) ... ok
+test_negative_metric_drift_fails_closed (tests.test_zone_strip.ZoneStripGateTests.test_negative_metric_drift_fails_closed) ... ok
+test_negative_source_sum_drift_fails_closed (tests.test_zone_strip.ZoneStripGateTests.test_negative_source_sum_drift_fails_closed) ... ok
+test_positive_strip_matches_source (tests.test_zone_strip.ZoneStripGateTests.test_positive_strip_matches_source) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.005s
+
+OK
+
+OUTPUT_END

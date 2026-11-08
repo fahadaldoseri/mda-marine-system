@@ -1,0 +1,28 @@
+COMMAND: timeout 120 sh -c 'python3 -m unittest tests/test_event_card_rows.py && python3 validators/check_event_card_contract.py --date 2026-11-08 --site /home/ubuntu/seawatch'
+STARTED_AT: 2026-11-08T23:28:25.843889+00:00
+RC: 1
+OUTPUT_BEGIN
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/usr/lib/python3.12/unittest/__main__.py", line 18, in <module>
+    main(module=None)
+  File "/usr/lib/python3.12/unittest/main.py", line 104, in __init__
+    self.parseArgs(argv)
+  File "/usr/lib/python3.12/unittest/main.py", line 153, in parseArgs
+    self.createTests()
+  File "/usr/lib/python3.12/unittest/main.py", line 164, in createTests
+    self.test = self.testLoader.loadTestsFromNames(self.testNames,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 207, in loadTestsFromNames
+    suites = [self.loadTestsFromName(name, module) for name in names]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/mda-marine-system/brain/tests/test_event_card_rows.py", line 21, in <module>
+    GLOSSARY = Path(os.environ.get("SITE_DIR") or (Path(__file__).resolve().parents[2] / "seawatch")) / "sources/i18n/en/glossary.json"
+                    ^^
+NameError: name 'os' is not defined. Did you forget to import 'os'?
+
+OUTPUT_END

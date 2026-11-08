@@ -1,0 +1,16 @@
+REUSED_FROM: audit/measurements/batches/logs/B/ك-315.log
+REUSED_PRIOR_COMMAND: python3 validators/check_portable_paths.py
+REUSED_PRIOR_RC: 0
+REUSED_NOTE: لم يُعاد القياس لأن سجل B السابق ناجح.
+--- PRIOR LOG BEGIN ---
+COMMAND: python3 validators/check_portable_paths.py
+STARTED_AT: 2026-11-08T22:43:10.350388+00:00
+RC: 0
+ELAPSED_SECONDS: 0.207
+OUTPUT_BEGIN
+بوابة قابلية النقل — المسار المطلق في الشيفرة
+  الجذور المفحوصة: /home/ubuntu/mda-marine-system/brain · /home/ubuntu/seawatch
+  ✔ لا مسار مطلق في أي ملف تنفيذي — النظام يعمل من أي مسار.
+OUTPUT_END
+--- PRIOR LOG END ---
+SHA256_BODY: 5255a8584ede37e7d6b4078a1f36778e4d0143c0b3c7499592930936d23b5b6a

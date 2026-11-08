@@ -1,0 +1,8 @@
+COMMAND: timeout 120 python3 validators/check_server_code_tracking.py --root .
+STARTED_AT: 2026-11-08T23:07:21.795586+00:00
+RC: 0
+ELAPSED_SECONDS: 0.122
+OUTPUT_BEGIN
+✔ كل ملفات الشيفرة على الخادم متتبَّعة في المستودع (المستثنى المعلَّل: 0)
+OUTPUT_END
+SHA256_BODY: 89fbe33f86c418ed8986e20507263978e94ba25956d09fdf6511ef07b45e21e1

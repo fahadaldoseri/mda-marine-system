@@ -1,0 +1,21 @@
+COMMAND: timeout 120 python3 -m pytest -q tests/test_map_points_nonspatial.py tests/test_map_location_term.py
+STARTED_AT: 2026-11-08T23:25:26.871782+00:00
+RC: 2
+OUTPUT_BEGIN
+
+==================================== ERRORS ====================================
+_______________ ERROR collecting tests/test_map_location_term.py _______________
+ImportError while importing test module '/home/ubuntu/mda-marine-system/brain/tests/test_map_location_term.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_map_location_term.py:21: in <module>
+    import check_map_contract as cmc  # noqa: E402
+E   ModuleNotFoundError: No module named 'check_map_contract'
+=========================== short test summary info ============================
+ERROR tests/test_map_location_term.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.06s
+
+OUTPUT_END

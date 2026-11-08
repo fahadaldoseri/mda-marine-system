@@ -1,0 +1,5 @@
+COMMAND: timeout 120 python3 tools/surface_fingerprint.py --root . --site /home/ubuntu/seawatch --tag batch-A-k49 --out /tmp/batch-A-k49-fingerprint.json
+RC: 0
+--- OUTPUT BEGIN ---
+✔ بصمة الأسطح: 8 سطحًا → /tmp/batch-A-k49-fingerprint.json
+--- OUTPUT END ---

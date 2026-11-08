@@ -1,0 +1,13 @@
+REUSED_FROM: audit/measurements/batches/logs/B/ك-314.log
+REUSED_PRIOR_COMMAND: bash -n tests/run_checks.sh && ( ! grep -nE 'أوأو fail "' tests/run_checks.sh )
+REUSED_PRIOR_RC: 0
+REUSED_NOTE: لم يُعاد القياس لأن سجل B السابق ناجح.
+--- PRIOR LOG BEGIN ---
+COMMAND: bash -n tests/run_checks.sh && ( ! grep -nE 'أوأو fail "' tests/run_checks.sh )
+STARTED_AT: 2026-11-08T22:43:10.343664+00:00
+RC: 0
+ELAPSED_SECONDS: 0.006
+OUTPUT_BEGIN
+OUTPUT_END
+--- PRIOR LOG END ---
+SHA256_BODY: 8edef9f12e6dfa61a60a642829f4e16b813296f98f2d995283f489b01f5790fa

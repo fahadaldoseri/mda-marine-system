@@ -1,0 +1,4 @@
+NO EXECUTABLE COMMAND IN ROW
+OWNER SEARCH: المالك الحالي للنسخ هو `tools/sync_backup.sh` → `tools/github_backup.sh`؛ النسخ الاحتياطي محظور صراحة في هذه الجولة.
+FIX_APPLIED: لا إصلاح برمجي؛ القناة خارج النطاق.
+BARRIER: مصدر واحد للحقيقة: `timeout 120 bash tools/github_backup.sh` → لم يُنفّذ لأن النسخ الاحتياطي خارج النطاق.

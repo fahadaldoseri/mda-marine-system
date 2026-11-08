@@ -1,0 +1,9 @@
+COMMAND: timeout 120 python3 tools/runbook.py verify --root .
+STARTED_AT: 2026-11-08T23:24:06.652773+00:00
+RC: 2
+OUTPUT_BEGIN
+✘ ملف غير متصل بأي خطوة أو قسم أو وثيقة: tools/measurement_batch_runner.py
+
+نتيجة التحقق: 1 خلل
+
+OUTPUT_END

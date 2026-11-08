@@ -1,0 +1,8 @@
+COMMAND: timeout 120 python3 tools/runbook.py verify --root .
+STARTED_AT: 2026-11-08T23:08:58.013315+00:00
+RC: 0
+ELAPSED_SECONDS: 46.300
+OUTPUT_BEGIN
+✔ المانيفست متسق: كل خطوة مربوطة، وكل ملف متصل بخطوة أو قسم أو وثيقة، وكل أداة يستدعيها كود أو مسجَّلة يدوية بسبب
+OUTPUT_END
+SHA256_BODY: cd74c2ffbc9620472b876f7b6af0b0dc1474af8f1eae9373f7df645338c352fd

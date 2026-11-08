@@ -1,0 +1,25 @@
+REUSED_FROM: audit/measurements/batches/logs/B/ك-313.log
+REUSED_PRIOR_COMMAND: python3 tools/gate_verdict.py --date 2026-11-08 --root .
+REUSED_PRIOR_RC: 0
+REUSED_NOTE: لم يُعاد القياس لأن سجل B السابق ناجح.
+--- PRIOR LOG BEGIN ---
+COMMAND: python3 tools/gate_verdict.py --date 2026-11-08 --root .
+STARTED_AT: 2026-11-08T22:43:10.287990+00:00
+RC: 0
+ELAPSED_SECONDS: 0.055
+OUTPUT_BEGIN
+   حكم البوابات 2026-11-08: فُحصت 78 بوابة · مانعة 0 · تحذير 10
+   ⚠ G012: done_warn · رمز الخروج 1
+   ⚠ G016: done_warn · رمز الخروج 1
+   ⚠ G024: done_warn · رمز الخروج 1
+   ⚠ G029: done_warn · رمز الخروج 1
+   ⚠ G030: done_warn · رمز الخروج 1
+   ⚠ G031: done_warn · رمز الخروج 1
+   ⚠ G033: done_warn · رمز الخروج 1
+   ⚠ G034: done_warn · رمز الخروج 1
+   ⚠ G055: done_warn · رمز الخروج 1
+   ⚠ G066: done_warn · رمز الخروج 1
+   ✔ النتيجة: لا حكم مانع في بوابات 2026-11-08
+OUTPUT_END
+--- PRIOR LOG END ---
+SHA256_BODY: c60818df9ab7d49fcbec5fd9db6584075a8ad9201960ac3f557256311c761a20

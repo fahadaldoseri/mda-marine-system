@@ -1,0 +1,7 @@
+COMMAND: timeout 120 python3 tools/build_lexicon_corpus.py --check
+STARTED_AT: 2026-11-08T23:25:27.680659+00:00
+RC: 1
+OUTPUT_BEGIN
+   ✘ المعجم غير مطابق للمصادر: المخزّن=e18f7c9802e33316 · المحسوب=32bf2d9ca4876bb2 · كلمات المخزّن=7904 · المحسوب=7911
+
+OUTPUT_END

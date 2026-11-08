@@ -1,0 +1,7 @@
+COMMAND: timeout 120 python3 validators/check_kpi_layers.py --date 2026-11-08 --dist-root /home/ubuntu/seawatch/dist --brain .
+STARTED_AT: 2026-11-08T23:28:19.790686+00:00
+RC: 0
+OUTPUT_BEGIN
+   ✔ طبقات البطاقات: 5 بطاقة بطبقتين (المجموع · آخر تحديث) مطابقة للمصدر عربيًا وإنجليزيًا
+
+OUTPUT_END

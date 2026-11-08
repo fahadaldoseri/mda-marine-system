@@ -1,0 +1,41 @@
+COMMAND: timeout 120 python3 -m pytest -q tests/test_three_root_causes_20261107.py
+STARTED_AT: 2026-11-08T23:34:45.178873+00:00
+RC: 1
+OUTPUT_BEGIN
+...F....                                                                 [100%]
+=================================== FAILURES ===================================
+_ TelegramTargetContractTests.test_failure_log_contains_platform_error_fields __
+
+self = <test_three_root_causes_20261107.TelegramTargetContractTests testMethod=test_failure_log_contains_platform_error_fields>
+
+    def test_failure_log_contains_platform_error_fields(self):
+        with tempfile.TemporaryDirectory() as td:
+            targets = Path(td) / "targets.json"
+            targets.write_text(json.dumps({"targets": [{
+                "label": "المحادثة الشخصية", "chat_id": "\u0031\u0032\u0033" + "123456789", "type": "private", "enabled": True
+            }]}), encoding="utf-8")
+            send_log = Path(td) / "telegram-sends.jsonl"
+            with patch.object(TELEGRAM, "TARGETS_FILE", targets), \
+                 patch.object(TELEGRAM, "LEGACY_CHAT", Path(td) / "missing.json"), \
+                 patch.object(TELEGRAM, "SEND_LOG", send_log), \
+                 patch.object(TELEGRAM, "send_text_direct", return_value='{"ok":false,"error_code":400,"description":"Bad Request"}'), \
+                 patch.object(TELEGRAM, "curl", return_value='{"ok":false,"error_code":400,"description":"Bad Request"}'), \
+                 patch.dict(os.environ, {"TELEGRAM_BOT_TOKEN": "test-token"}, clear=False):
+                with tempfile.NamedTemporaryFile("w", suffix=".html", delete=False, encoding="utf-8") as fh:
+                    fh.write("الفترة 2026-11-07 · و ب 1")
+                    digest = fh.name
+                try:
+                    rc = TELEGRAM.main(["--daily-report", "--date", "2026-11-07", "--file", digest])
+                finally:
+                    Path(digest).unlink(missing_ok=True)
+>           self.assertEqual(rc, 1)
+E           AssertionError: 3 != 1
+
+tests/test_three_root_causes_20261107.py:109: AssertionError
+----------------------------- Captured stdout call -----------------------------
+[تلغرام] مرفوض — تاريخ 2026-11-07 ليس تاريخ اليوم 2026-11-08
+=========================== short test summary info ============================
+FAILED tests/test_three_root_causes_20261107.py::TelegramTargetContractTests::test_failure_log_contains_platform_error_fields
+1 failed, 7 passed in 0.22s
+
+OUTPUT_END

@@ -1,0 +1,15 @@
+REUSED_FROM: audit/measurements/batches/logs/B/ك-329.log
+REUSED_PRIOR_COMMAND: python3 tools/repair_ledger_prose.py --check
+REUSED_PRIOR_RC: 0
+REUSED_NOTE: لم يُعاد القياس لأن سجل B السابق ناجح.
+--- PRIOR LOG BEGIN ---
+COMMAND: python3 tools/repair_ledger_prose.py --check
+STARTED_AT: 2026-11-08T22:43:11.994901+00:00
+RC: 0
+ELAPSED_SECONDS: 0.049
+OUTPUT_BEGIN
+   ✓ نظيف: historical/cumulative-baseline-2026-02-28-to-2026-10-11.md
+   ✓ نظيف: cumulative-2026/التقرير-التراكمي-الواسع-28-فبراير-الى-11-أكتوبر-2026.md
+OUTPUT_END
+--- PRIOR LOG END ---
+SHA256_BODY: 89142f05f985ec5b4350c3b8938a6cd7cd41554912d23ea732974e79c63a9f2e

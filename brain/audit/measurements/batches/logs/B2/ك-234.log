@@ -1,0 +1,16 @@
+REUSED_FROM: audit/measurements/batches/logs/B/ك-234.log
+REUSED_PRIOR_COMMAND: python3 validators/check_additions_surface.py --date 2026-11-08 --site /home/ubuntu/seawatch
+REUSED_PRIOR_RC: 0
+REUSED_NOTE: لم يُعاد القياس لأن سجل B السابق ناجح.
+--- PRIOR LOG BEGIN ---
+COMMAND: python3 validators/check_additions_surface.py --date 2026-11-08 --site /home/ubuntu/seawatch
+STARTED_AT: 2026-11-08T22:36:26.457511+00:00
+RC: 0
+ELAPSED_SECONDS: 0.048
+OUTPUT_BEGIN
+سطح إضافات: 14 عنوانًا · المطلوب نقله: 14
+  ✓ العناوين المنقولة مرة واحدة في صفحتها · ولا واحد منها في سطح التقرير · والمطلوب في التقرير حاضر
+النتيجة: مطابق
+OUTPUT_END
+--- PRIOR LOG END ---
+SHA256_BODY: e702b323907761719c723e7f7c58e5957dd2e12f316dfd74130f7a2231ef8ad9

@@ -1,0 +1,15 @@
+REUSED_FROM: audit/measurements/batches/logs/B/ك-277.log
+REUSED_PRIOR_COMMAND: python3 -m pytest tests/test_parity_scope.py -q
+REUSED_PRIOR_RC: 0
+REUSED_NOTE: لم يُعاد القياس لأن سجل B السابق ناجح.
+--- PRIOR LOG BEGIN ---
+COMMAND: python3 -m pytest tests/test_parity_scope.py -q
+STARTED_AT: 2026-11-08T22:36:39.705442+00:00
+RC: 0
+ELAPSED_SECONDS: 0.905
+OUTPUT_BEGIN
+......                                                                   [100%]
+6 passed in 0.42s
+OUTPUT_END
+--- PRIOR LOG END ---
+SHA256_BODY: 1eb2db9e4e255f5e95dd066b00d96f5abd675ead22ec28e79f17fb4ddadb163d

@@ -1,0 +1,8 @@
+COMMAND: python3 validators/check_exceptions_burndown.py --json
+STARTED_AT: 2026-11-08T22:36:38.817861+00:00
+RC: 2
+ELAPSED_SECONDS: 0.041
+OUTPUT_BEGIN
+usage: check_exceptions_burndown.py [-h] [--root ROOT] [--baseline-write]
+check_exceptions_burndown.py: error: unrecognized arguments: --json
+OUTPUT_END
