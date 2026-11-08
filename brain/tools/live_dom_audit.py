@@ -15,7 +15,9 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import urllib.request
 import sys
 from pathlib import Path
 
@@ -168,12 +170,39 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--url", action="append", required=True, help="رابط أو مسار file:// (يتكرر)")
     ap.add_argument("--min-touch", type=int, default=44)
+    ap.add_argument("--expect", action="append", default=[],
+                    help="URL=SHA256: لا يُدقَّق إلا ما يطابق بناءنا")
     ap.add_argument("--json", default="")
     ap.add_argument("--shots", default="")
     a = ap.parse_args()
 
     shots = Path(a.shots) if a.shots else None
-    reports = [audit(u, shots, a.min_touch) for u in a.url]
+    expects = {}
+    for item in a.expect:
+        if "=" in item:
+            u, s = item.rsplit("=", 1)
+            expects[u.strip()] = s.strip()
+    identity_fail, urls = [], []
+    for u in a.url:
+        want = expects.get(u)
+        if not want:
+            urls.append(u)
+            continue
+        try:
+            req = urllib.request.Request(u, headers={
+                "User-Agent": "Mozilla/5.0 (compatible; mda-marine-system-live-audit/1.0)"})
+            with urllib.request.urlopen(req, timeout=45) as resp:
+                body = resp.read()
+            got = hashlib.sha256(body).hexdigest()
+        except Exception as exc:
+            identity_fail.append(f"{u}: تعذّر جلب الصفحة للتحقق من الهوية ({str(exc)[:70]})")
+            continue
+        if got == want:
+            urls.append(u)
+        else:
+            identity_fail.append(
+                f"{u}: القناة لا تخدم بناءنا (بصمة {got[:12]} ≠ {want[:12]}) — لا يُدقَّق محتوى جهة أخرى")
+    reports = [audit(u, shots, a.min_touch) for u in urls]
     blocking, warnings = [], []
     for rep in reports:
         for vp, d in rep["viewports"].items():
@@ -205,6 +234,7 @@ def main() -> int:
                   f"تكرار {c.get('dup',0)} · لمس {c.get('touch',0)} · صور {c.get('broken',0)} · "
                   f"فارغ {c.get('empty',0)} · ميت {c.get('hiddenInteractive',0)} · قص {c.get('clipped',0)} · "
                   f"أزرار {json.dumps(d.get('toolbar', {}), ensure_ascii=False)[:90]}")
+    blocking = identity_fail + blocking
     for b in blocking:
         print(f"   ✘ {b}")
     for w in warnings:
