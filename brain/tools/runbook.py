@@ -259,9 +259,12 @@ def prior_ok(m, ledger, idx):
 
 
 # ───────────────────────── run / complete ─────────────────────────
-def run(root, date, only_phase=None, redo=None):
+def run(root, date, only_phase=None, redo=None, only_steps=None):
     """redo: معرّفات خطوات تُعاد للتحقق لأن مدخلاتها تغيّرت (ك-321) — لا تُقبل خطوة مكتملة قديمة."""
     redo = set(redo or ())
+    # ك-568: تشغيل محصور بخطوات معلومة ثم توقّف — يمنع الاستدعاء الدائري عندما
+    # تُجدَّد بوابةٌ داخل خطوة نشر تستدعي بدورها الخطوة نفسها.
+    only_steps = set(only_steps or ())
     m = load(root)
     ledger = read_ledger(root, m, date)
     allowed_phases = None
@@ -269,6 +272,8 @@ def run(root, date, only_phase=None, redo=None):
         allowed_phases = set(m.get("gate_phases", ["gates"])) if only_phase == "gates" else {only_phase}
     for i, s in enumerate(m["steps"]):
         if allowed_phases is not None and s.get("phase") not in allowed_phases:
+            continue
+        if only_steps and s["id"] not in only_steps:
             continue
         e = ledger.get(s["id"])
         if e and entry_allows_progress(s, e) and s["id"] not in redo:
@@ -842,6 +847,7 @@ def main():
     ap.add_argument("--kind")
     ap.add_argument("--after", default="START")
     ap.add_argument("--through", help="gate-json: آخر خطوة تُحسب (ما بعدها لم يحن وقته)")
+    ap.add_argument("--only", default="", help="معرّفات خطوات تُنفَّذ وحدها ثم يتوقف المحرّك (ك-568)، مفصولة بفاصلة")
     ap.add_argument("--redo", default="", help="معرّفات خطوات تُعاد للتحقق بعد تغيّر مدخلاتها، مفصولة بفاصلة (ك-321)")
     a = ap.parse_args()
     c = a.cmd
@@ -853,7 +859,8 @@ def main():
     if c == "verify":
         return verify(root)
     if c == "run":
-        return run(root, a.date, redo=[x for x in a.redo.split(",") if x.strip()])
+        return run(root, a.date, redo=[x for x in a.redo.split(",") if x.strip()],
+                   only_steps=[x for x in getattr(a, "only", "").split(",") if x.strip()])
     if c == "gates":
         return run(root, a.date, only_phase="gates", redo=[x for x in a.redo.split(",") if x.strip()])
     if c == "gate-json":
