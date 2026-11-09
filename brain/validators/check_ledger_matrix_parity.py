@@ -49,4 +49,12 @@ def main() -> int:
 
 
 if __name__ == '__main__':
-    raise SystemExit(main())
+    import sys as _sys
+    from pathlib import Path as _Path
+    _sys.path.insert(0, str(_Path(__file__).resolve().parent))
+    try:
+        from _guard import run
+    except ModuleNotFoundError:  # بيئة بلا الحارس الموحّد: فشل مغلق برمز main نفسه
+        def run(fn):
+            raise SystemExit(fn())
+    run(main)

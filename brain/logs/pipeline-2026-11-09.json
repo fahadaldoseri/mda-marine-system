@@ -7,66 +7,18 @@
     "checked": 60,
     "derived_from": "feeds/feeds-2026-11-09.status.json",
     "empty": [],
-    "fail_ratio": 0.15,
-    "failed": 9,
+    "fail_ratio": 0.017,
+    "failed": 1,
     "failed_feeds": [
       {
-        "block_reason": "all routes failed: primary: حجب مصدر — رفض الخادم الطلب (HTTP 403) | official:bna-en-rss: حجب مصدر — human verification page (HTTP 405)",
-        "error": "حجب مصدر — human verification page (HTTP 405)",
-        "name": "حساب @bna_en على X",
-        "num": 17
-      },
-      {
-        "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/UK_MTO\nCall log:\n  - navigating to \"https://x.com/UK_MTO\", waiting until \"domcontentl",
-        "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/UK_MTO\nCall log:\n  - navigating to \"https://x.com/UK_MTO\", waiting until \"domcontentl",
-        "name": "حساب @UK_MTO على X",
-        "num": 15
-      },
-      {
-        "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/bahdiplomatic\nCall log:\n  - navigating to \"https://x.com/bahdiplomatic\", waiting unti",
-        "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/bahdiplomatic\nCall log:\n  - navigating to \"https://x.com/bahdiplomatic\", waiting unti",
-        "name": "حساب @bahdiplomatic على X",
-        "num": 18
-      },
-      {
-        "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/us5thfleet\nCall log:\n  - navigating to \"https://x.com/us5thfleet\", waiting until \"dom",
-        "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/us5thfleet\nCall log:\n  - navigating to \"https://x.com/us5thfleet\", waiting until \"dom",
-        "name": "حساب @US5thFleet على X",
-        "num": 19
-      },
-      {
-        "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/YemenResistanc1\nCall log:\n  - navigating to \"https://x.com/YemenResistanc1\", waiting ",
-        "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/YemenResistanc1\nCall log:\n  - navigating to \"https://x.com/YemenResistanc1\", waiting ",
-        "name": "حساب @YemenResistanc1 على X",
-        "num": 56
-      },
-      {
-        "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/spokespersonyem\nCall log:\n  - navigating to \"https://x.com/spokespersonyem\", waiting ",
-        "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/spokespersonyem\nCall log:\n  - navigating to \"https://x.com/spokespersonyem\", waiting ",
-        "name": "حساب @spokespersonyem على X",
-        "num": 57
-      },
-      {
-        "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/CJFCSpox\nCall log:\n  - navigating to \"https://x.com/CJFCSpox\", waiting until \"domcont",
-        "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/CJFCSpox\nCall log:\n  - navigating to \"https://x.com/CJFCSpox\", waiting until \"domcont",
-        "name": "حساب @CJFCSpox على X",
-        "num": 60
-      },
-      {
-        "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/ERYANIM\nCall log:\n  - navigating to \"https://x.com/ERYANIM\", waiting until \"domconten",
-        "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/ERYANIM\nCall log:\n  - navigating to \"https://x.com/ERYANIM\", waiting until \"domconten",
-        "name": "حساب @ERYANIM على X",
-        "num": 61
-      },
-      {
-        "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/Yemenarmyeng\nCall log:\n  - navigating to \"https://x.com/Yemenarmyeng\", waiting until ",
+        "block_reason": "all routes failed: primary: HTTP Error 404: Not Found · HTTP Error 404 عبر curl | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/Yemenarmyeng\nCall log:\n  - navigating to \"https://x.com/Yemenarmyeng\", waiting until ",
         "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/Yemenarmyeng\nCall log:\n  - navigating to \"https://x.com/Yemenarmyeng\", waiting until ",
         "name": "حساب @Yemenarmyeng على X",
         "num": 62
       }
     ],
     "note": "مصدر نجح على مسار وفشل على آخر لا يُحسب متعذّرًا (عطل ك-137)",
-    "ok": 51,
+    "ok": 59,
     "stale": [
       12,
       13,
@@ -77,17 +29,37 @@
     ],
     "status": "degraded"
   },
+  "final_gate": {
+    "blocked_steps": [],
+    "dir": "logs/gate-2026-11-09",
+    "exit_code": 1,
+    "note": "نتيجة بوابة التسليم النهائية — كُتبت العلامة بعدها.",
+    "status": "warn"
+  },
   "finished_utc": "2026-11-09T04:19:25Z",
-  "gate_finished_utc": "",
+  "gate_finished_utc": "2026-11-09T07:54:48Z",
   "gate_note": "علامة مرحلة الخط اليومي — بوابة التسليم لم تُشغَّل بعد.",
   "gate_state": "not_run",
   "language": {
-    "banned_terms": null,
-    "edit_pass": null,
-    "long_sentences": null,
-    "orthography_errors": null,
-    "waw_pct": null,
-    "waw_runs3": null
+    "banned_terms": 0,
+    "edit_pass": {
+      "applied": true,
+      "by_category": {
+        "أسلوب": 32,
+        "ترجمة حرفية": 4,
+        "ترقيم": 1,
+        "مفردة": 28
+      },
+      "changes": 65,
+      "edited": 9,
+      "model": "gpt-5-mini",
+      "rejected": 6,
+      "sections": 16
+    },
+    "long_sentences": 15,
+    "orthography_errors": 0,
+    "waw_pct": 0.6,
+    "waw_runs3": 0
   },
   "ledger_merge": {
     "added_this_run_count": 6,
@@ -121,20 +93,12 @@
   "sources": {
     "approved": 62,
     "checked": 60,
-    "failed": 9,
+    "failed": 1,
     "failed_names": [
-      "حساب @bna_en على X",
-      "حساب @UK_MTO على X",
-      "حساب @bahdiplomatic على X",
-      "حساب @US5thFleet على X",
-      "حساب @YemenResistanc1 على X",
-      "حساب @spokespersonyem على X",
-      "حساب @CJFCSpox على X",
-      "حساب @ERYANIM على X",
       "حساب @Yemenarmyeng على X"
     ],
-    "ok": 51,
+    "ok": 59,
     "status_file": "feeds/feeds-2026-11-09.status.json"
   },
-  "written_stage": "pipeline"
+  "written_stage": "final"
 }

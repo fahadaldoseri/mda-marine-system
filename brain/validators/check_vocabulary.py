@@ -17,6 +17,36 @@ from pathlib import Path
 B = Path(__file__).resolve().parent.parent
 VOCAB = B / "appendices" / "simplified-vocabulary.json"
 
+# ك-591: مطابقة على حدود الكلمة العربية بعد إسقاط التشكيل والتطويل.
+# لا تُطابق «سند» داخل «تُسند»، ولا تُعتبر لاحقة/سابقة كلمة قائمة بذاتها.
+_AR_LETTER = "\u0621-\u064a\u0671-\u06d3"
+_TASHKEEL = "\u064b-\u0652\u0670\u0640\u06d6-\u06dc\u0640"
+
+
+def _strip_tashkeel(value: str) -> str:
+    import re as _re
+    return _re.sub(f"[{_TASHKEEL}]", "", value or "")
+
+
+def _word_hit(hard: str, text: str) -> bool:
+    import re as _re
+    hard_n = _strip_tashkeel(hard).strip()
+    if not hard_n:
+        return False
+    pattern = f"(?<![{_AR_LETTER}]){_re.escape(hard_n)}(?![{_AR_LETTER}])"
+    return _re.search(pattern, _strip_tashkeel(text)) is not None
+
+
+def _alternative(it: dict) -> str:
+    """البديل من السجل الحاكم: alternative/easy/simple أو الحقل المعتمد plain."""
+    easy = it.get("alternative") or it.get("easy") or it.get("simple")
+    if easy:
+        return str(easy)
+    plain = it.get("plain")
+    if isinstance(plain, list):
+        return "؛ ".join(str(x) for x in plain if str(x).strip())
+    return str(plain or "")
+
 
 def entries() -> tuple[list[dict], str]:
     if not VOCAB.exists():
@@ -44,8 +74,8 @@ def main() -> int:
     hits: list[tuple[str, str]] = []
     for it in items:
         hard = it.get("as_written") or it.get("term") or it.get("hard") or ""
-        easy = it.get("alternative") or it.get("easy") or it.get("simple") or ""
-        if hard and hard in text:
+        easy = _alternative(it)
+        if hard and _word_hit(hard, text):
             hits.append((hard, easy))
 
     if not hits:
