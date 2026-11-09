@@ -52,6 +52,11 @@ python3 "$B/tools/runbook.py" gates-status --date "$D" --root "$B" || {
 # حدّ القياس يختلف: النشر يقف عند D010، أما الرسالة فتقف عند D030 بعد D010/D020.
 DELIVERY_STEP="D010"
 [ "$MODE" = telegram ] && DELIVERY_STEP="D030"
+  # ك-591: البوابة التي صار سجلها قديمًا لأن خطوة نشر أُعيد تشغيلها بعده تُعاد
+  # هي نفسها بقياس حقيقي عند حدّ خطوة التسليم؛ والمانع الحقيقي يبقى مانعًا.
+  python3 "$B/tools/refresh_stale_gates.py" --date "$D" --root "$B" --delivery-step "$DELIVERY_STEP" || {
+    echo "✘ رُفض $MODE: بوابة متقادمة لم تُجدَّد عند حدّ $DELIVERY_STEP. لا نشر."
+    exit 2; }
 python3 "$B/tools/gate_verdict.py" --date "$D" --root "$B" --delivery-step "$DELIVERY_STEP" --json "$B/logs/gate-verdict-$D.json" || {
   echo "✘ رُفض $MODE: بوابة بحكم مانع في سجل $D. أصلح ثم أعد تشغيل البوابة. لا نشر."
   exit 2; }

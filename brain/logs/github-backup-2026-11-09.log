@@ -130,3 +130,175 @@
   ✘ تعديل حاكم: brain/web/meta/2026-11-09.json · sha256=29a6c626f1ddf12a53be10189714c1eacef5a3da029034ae818bb6a9970d478b
 ✘ فشل مغلق: توجد تعديلات شيفرة/بيانات حقيقية خارج سجلات التشغيل المعلنة
 ✘ فشل مغلق: حارس شجرة النسخ منع العملية؛ راجع تصنيف المسارات وبصمات SHA-256
+=== بدء النسخ الاحتياطي: 2026-11-09T08:06:45Z ===
+حارس شجرة النسخ: تغييرات Git=1 · سجلات تشغيل معلنة=1 · كتل مولَّدة=0 · تعديلات حاكمة=0
+  ✔ سجل تشغيل معلن: brain/logs/github-backup-2026-11-09.log · sha256=dfc70246c2e42bf6d568c87090fa6af00f2d0fc833b63824a8193be51458b5e1
+✔ شجرة النسخ تمر: سجلات التشغيل المحلية لا تمنع النسخة الاحتياطية
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/blocks.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_report.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_site.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/derive_en_units.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/i18n_en.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/section_counts.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/sources/i18n/en/2026-11-07-sectioned.en.md
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/sources/i18n/en/glossary.json
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/tests/test_i18n_alignment.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): skills/.skill_versions.json
+✘ 10 تعارض. لا شيء طُبّق. إن كان المستودع هو الصحيح: أعد التشغيل بـ --accept-repo (تُؤرشف نسخ الخادم أولًا).
+⚠ تعذّر/تعارض في تطبيق الشيفرة (تستمر نسخة البيانات بعد تسجيل التحذير)
+الملفات: 10005 · الحجم: 336.0 م.ب · الفهرس: docs/فهرس-الملفات.tsv
+  استُثني: brain/reports/docx/التقرير-اليومي-2026-11-08-طبق-الأصل.docx — مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب
+  استُثني: brain/reports/docx/التقرير-اليومي-2026-11-08-طبق-الأصل.pdf — مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب
+  استُثني: brain/reports/docx/التقرير-اليومي-2026-11-09-طبق-الأصل.docx — مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب
+  استُثني: brain/reports/docx/التقرير-اليومي-2026-11-09-طبق-الأصل.pdf — مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب
+  انحراف شيفرة: site/generator/blocks.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/build_site.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/build_report.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/section_counts.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/derive_en_units.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/i18n_en.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/sources/i18n/en/glossary.json — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/sources/i18n/en/2026-11-07-sectioned.en.md — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/tests/test_i18n_alignment.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  شيفرة جديدة من الخادم: site/generator/brain_root.py — نُسخت (غير موجودة في GitHub)
+  شيفرة جديدة من الخادم: site/sources/i18n/en/2026-11-08-sectioned.en.md — نُسخت (غير موجودة في GitHub)
+  شيفرة جديدة من الخادم: site/sources/i18n/en/2026-11-09-sectioned.en.md — نُسخت (غير موجودة في GitHub)
+  شيفرة جديدة من الخادم: site/tests/test_brain_root_canonical.py — نُسخت (غير موجودة في GitHub)
+✔ بوابة الأسرار: لا سرّ في النطاق المفحوص
+✔ كل ملفات الشيفرة على الخادم متتبَّعة في المستودع (المستثنى المعلَّل: 0)
+✔ آمن: لا يوجد git push مباشر إلى main في /home/ubuntu/mda-marine-system/brain/tools/github_backup.sh
+remote: 
+remote: Create a pull request for 'backup/2026-11-09-080738-2848345' on GitHub by visiting:        
+remote:      https://github.com/fahadaldoseri/mda-marine-system/pull/new/backup/2026-11-09-080738-2848345        
+remote: 
+تم دفع الفرع فقط: backup/2026-11-09-080738-2848345
+تم إنشاء طلب الدمج: https://github.com/fahadaldoseri/mda-marine-system/pull/583
+=== انتهى: 2026-11-09T08:07:45Z ===
+=== بدء النسخ الاحتياطي: 2026-11-09T08:15:27Z ===
+حارس شجرة النسخ: تغييرات Git=28 · سجلات تشغيل معلنة=28 · كتل مولَّدة=0 · تعديلات حاكمة=0
+  ✔ سجل تشغيل معلن: brain/logs/alerts/code-drift-2026-11-09.txt · sha256=365e308b10a1e87389cafd57d6218706229a9ac8a6c1c81b38e49a6d2c4d5e34
+  ✔ سجل تشغيل معلن: brain/logs/checks/new-validators-2026-11-09.json · sha256=67b0f21e2b00fb0f149a1c72a07ef8968cf491afc29ca53b019b999ca22e224c
+  ✔ سجل تشغيل معلن: brain/logs/checks/new-validators-2026-11-09.txt · sha256=3940529a0f4660f86b498f9c47750a3832f0369185303f8b29c7203f8316cf98
+  ✔ سجل تشغيل معلن: brain/logs/checks/parity-scope-2026-11-09.txt · sha256=e47c2b4a07710a12b6743639e2c35f4a5824af3a30c584242088525bc541c563
+  ✔ سجل تشغيل معلن: brain/logs/checks/parity-skills-canon-2026-11-09.txt · sha256=801e01a05041e45ce4238619d7473e85c13a27852e8d8237c56401c6d84018f7
+  ✔ سجل تشغيل معلن: brain/logs/gate-verdict-2026-11-09.json · sha256=1ba89a68f7e3968bad0a659e639fb1df0dd59500a89174c9a09cbe30dacefa4f
+  ✔ سجل تشغيل معلن: brain/logs/github-backup-2026-11-09.log · sha256=108f2210783c82a66924fe11b106680ee8548dbc57c190cdd1cd1f1505315fdd
+  ✔ سجل تشغيل معلن: brain/logs/live-2026-11-09.json · sha256=77881e15b193824a513b4f9f7291544587079d44409edd523a8e28ce95db490c
+  ✔ سجل تشغيل معلن: brain/logs/manus-channel/2026-11-09.jsonl · sha256=27190393d7f794d767f07571f40a7c08b83beec9bd2c726974656a0d74799a93
+  ✔ سجل تشغيل معلن: brain/logs/publish-2026-11-09-fallback.json · sha256=e081e6c54f5f04da5ba7015780fe588e84e27522e410b2214f43b66ddb2db3db
+  ✔ سجل تشغيل معلن: brain/logs/publish-2026-11-09.json · sha256=96974778792044c1df4f252ed362d95c4365d968ef8c577b07a23fcd482c1ee1
+  ✔ سجل تشغيل معلن: brain/logs/publish-channel-2026-11-09.json · sha256=662c1318d8d47df8c39d146d5f870d5888686322c1c653ab95546f70ed2d1da9
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09.jsonl · sha256=032053dcca0956a6f290982d6cbb069f0a9a662eb303a41f3919b2d6bcd20085
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D005.log · sha256=8b1d058bd9d922e5f0a59f9ef9aa14e8a2a05fa4207093b6bf7db205ba930d46
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D010.log · sha256=340fb5438feedb0c076f1f662478915626183979bb8b44e844c45fb0c562a942
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D016.log · sha256=f11b698da360816fab404d789a9c76e5e55512ea3467a63fc1857e425e1a219a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D020.log · sha256=c198db6d8f3c541a2cd1307a4d2fe096d6dad851c8be5d14b9a2da9a8030ddc7
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D021.log · sha256=afba8225c949ede98c7f24bb2b0334f152a94bb50c23f57d3327bcbacf045141
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D030.log · sha256=854db037467599400630af783f4ec15e63ac47fbfb72ec7859ec6277ea6ce271
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D031.log · sha256=83f0cad74110c45fab22a8dbee095edaf3f71405ed56fa016ac2b410bc104911
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D032.log · sha256=dfe4ce0600867eb122d78cb13fc8d6d2b429263790c037fa6f5b937e21ce6fc7
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D033.log · sha256=702eb61283b84d53850206bb058e0f30af1f3f15d7f80d53064149946ce32bda
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D035.log · sha256=991be46986a519b896d5e2b3c3e9cd7b66d7815655a7a59d38e4036cf8e94bbb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D036.log · sha256=4d4527f692fd530fa8e7c77ad5cd1500ae43bde27d386667711bb477f771c6bc
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/G011.log · sha256=dc3663069f3a6f45ba2c8a2be6b9a124156bdb8261183ef6187204770e3a6ae2
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/dom-audit.json · sha256=06a4e8b4f455bb9a59bf0f172fc8843fce16405e43074c366b37164dec070926
+  ✔ سجل تشغيل معلن: brain/logs/telegram-delivery-2026-11-09.json · sha256=1fad911690603f8e8d872e5dc9dedb615cb643df2288d71e1059c4b11e47c53f
+  ✔ سجل تشغيل معلن: brain/logs/telegram-sends.jsonl · sha256=74a68fc6cbf9606039ac2a0f5619b753d12d94f628c8f8c3ccffa15bba675255
+✔ شجرة النسخ تمر: سجلات التشغيل المحلية لا تمنع النسخة الاحتياطية
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/blocks.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_report.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_site.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/derive_en_units.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/i18n_en.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/section_counts.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/sources/i18n/en/2026-11-07-sectioned.en.md
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/sources/i18n/en/glossary.json
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/tests/test_i18n_alignment.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): skills/.skill_versions.json
+✘ 10 تعارض. لا شيء طُبّق. إن كان المستودع هو الصحيح: أعد التشغيل بـ --accept-repo (تُؤرشف نسخ الخادم أولًا).
+⚠ تعذّر/تعارض في تطبيق الشيفرة (تستمر نسخة البيانات بعد تسجيل التحذير)
+الملفات: 10027 · الحجم: 336.0 م.ب · الفهرس: docs/فهرس-الملفات.tsv
+  استُثني: brain/reports/docx/التقرير-اليومي-2026-11-08-طبق-الأصل.docx — مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب
+  استُثني: brain/reports/docx/التقرير-اليومي-2026-11-08-طبق-الأصل.pdf — مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب
+  استُثني: brain/reports/docx/التقرير-اليومي-2026-11-09-طبق-الأصل.docx — مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب
+  استُثني: brain/reports/docx/التقرير-اليومي-2026-11-09-طبق-الأصل.pdf — مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب
+  انحراف شيفرة: site/generator/blocks.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/build_site.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/build_report.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/section_counts.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/derive_en_units.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/i18n_en.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/sources/i18n/en/glossary.json — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/sources/i18n/en/2026-11-07-sectioned.en.md — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/tests/test_i18n_alignment.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  شيفرة جديدة من الخادم: site/generator/brain_root.py — نُسخت (غير موجودة في GitHub)
+  شيفرة جديدة من الخادم: site/sources/i18n/en/2026-11-08-sectioned.en.md — نُسخت (غير موجودة في GitHub)
+  شيفرة جديدة من الخادم: site/sources/i18n/en/2026-11-09-sectioned.en.md — نُسخت (غير موجودة في GitHub)
+  شيفرة جديدة من الخادم: site/tests/test_brain_root_canonical.py — نُسخت (غير موجودة في GitHub)
+✔ بوابة الأسرار: لا سرّ في النطاق المفحوص
+✔ كل ملفات الشيفرة على الخادم متتبَّعة في المستودع (المستثنى المعلَّل: 0)
+✔ آمن: لا يوجد git push مباشر إلى main في /home/ubuntu/mda-marine-system/brain/tools/github_backup.sh
+remote: 
+remote: Create a pull request for 'backup/2026-11-09-081622-2849624' on GitHub by visiting:        
+remote:      https://github.com/fahadaldoseri/mda-marine-system/pull/new/backup/2026-11-09-081622-2849624        
+remote: 
+تم دفع الفرع فقط: backup/2026-11-09-081622-2849624
+تم إنشاء طلب الدمج: https://github.com/fahadaldoseri/mda-marine-system/pull/584
+=== انتهى: 2026-11-09T08:16:29Z ===
+=== بدء النسخ الاحتياطي: 2026-11-09T08:18:01Z ===
+حارس شجرة النسخ: تغييرات Git=53 · سجلات تشغيل معلنة=52 · كتل مولَّدة=0 · تعديلات حاكمة=1
+  ✔ سجل تشغيل معلن: brain/appendices/libraries/findings-2026-11-09.json · sha256=2d12a9a2becf73fdcebaf106ff65ab91d14be94d3c109148e0f56ce2ad510d4d
+  ✔ سجل تشغيل معلن: brain/appendices/libraries/lexicon-library.json · sha256=8bc8f98bd1f856b08d07727c496d7a83a688bb8b871113f471d30b6f0c501536
+  ✔ سجل تشغيل معلن: brain/appendices/libraries/lexicon-library.md · sha256=da2d8c2938c2e5d87baf5af66d7cab274eb46be5418800e4f210a683eff74504
+  ✔ سجل تشغيل معلن: brain/audit/backups/closure-round-20261109-081751/learning-log.jsonl · sha256=fc9ff6c0fbb5c29dbffa14e69e352cecffafbb45a15f2a141a73d94c85cf36a3
+  ✔ سجل تشغيل معلن: brain/audit/backups/closure-round-20261109-081751/سجل-الأعطال-والثغرات.md · sha256=90ce2f401eb58b38eec3796d756c4e29c0e64149e1103570a623ff39c2e46cc3
+  ✔ سجل تشغيل معلن: brain/audit/backups/normalize-20261109-081751/learning-log.jsonl · sha256=fc9ff6c0fbb5c29dbffa14e69e352cecffafbb45a15f2a141a73d94c85cf36a3
+  ✔ سجل تشغيل معلن: brain/audit/backups/normalize-20261109-081751/سجل-الأعطال-والثغرات.md · sha256=90ce2f401eb58b38eec3796d756c4e29c0e64149e1103570a623ff39c2e46cc3
+  ✔ سجل تشغيل معلن: brain/audit/closure-exceptions.json · sha256=ca9f40929cbcb4253a538f9dd1724b0930408755310dc6bec6a49613d25fc11f
+  ✔ سجل تشغيل معلن: brain/audit/traceability.json · sha256=37961b876cdaec95ee7d598785ef5a0ef1fa189573104cc3a7785460a6055ac1
+  ✔ سجل تشغيل معلن: brain/audit/مصفوفة-التتبع.md · sha256=eaf10942344b203c9ad68b30577341ff169b885bd8bf7a136cda0069236341ab
+  ✔ سجل تشغيل معلن: brain/audit/موجز-التحسين-2026-11-09.md · sha256=ace18a2eb3db1f2b65b6237e2beb2a2962cb51de56aa8cd0c3164a3d99aa4d0c
+  ✔ سجل تشغيل معلن: brain/docs/reports-index.md · sha256=33ad2996345a6923f24c7c05fd0da1fa35504190c673e8ced17441c901c47318
+  ✔ سجل تشغيل معلن: brain/logs/alerts/code-drift-2026-11-09.txt · sha256=365e308b10a1e87389cafd57d6218706229a9ac8a6c1c81b38e49a6d2c4d5e34
+  ✔ سجل تشغيل معلن: brain/logs/checks/new-validators-2026-11-09.json · sha256=67b0f21e2b00fb0f149a1c72a07ef8968cf491afc29ca53b019b999ca22e224c
+  ✔ سجل تشغيل معلن: brain/logs/checks/new-validators-2026-11-09.txt · sha256=3940529a0f4660f86b498f9c47750a3832f0369185303f8b29c7203f8316cf98
+  ✔ سجل تشغيل معلن: brain/logs/checks/parity-scope-2026-11-09.txt · sha256=e47c2b4a07710a12b6743639e2c35f4a5824af3a30c584242088525bc541c563
+  ✔ سجل تشغيل معلن: brain/logs/checks/parity-skills-canon-2026-11-09.txt · sha256=801e01a05041e45ce4238619d7473e85c13a27852e8d8237c56401c6d84018f7
+  ✔ سجل تشغيل معلن: brain/logs/gate-status.md · sha256=fde7e26ac33da0cb90ec18c3e7468b82db81e7341d10834f27c81faaed8116f9
+  ✔ سجل تشغيل معلن: brain/logs/gate-verdict-2026-11-09.json · sha256=54575184dad9ebe001e40c70a476ee4a4cbccc8552fb96bea0085bccd089d746
+  ✔ سجل تشغيل معلن: brain/logs/github-backup-2026-11-09.log · sha256=c8235f638a74e30adc7accc939eae20a0b658a061e632f46a50831bc9ae1f7fe
+  ✔ سجل تشغيل معلن: brain/logs/live-2026-11-09.json · sha256=77881e15b193824a513b4f9f7291544587079d44409edd523a8e28ce95db490c
+  ✔ سجل تشغيل معلن: brain/logs/manus-channel/2026-11-09.jsonl · sha256=419ece5f40927b45883845dc333e91cfc9decf052aa8d698fa0e38ab73b3b73a
+  ✔ سجل تشغيل معلن: brain/logs/publish-2026-11-09-fallback.json · sha256=e081e6c54f5f04da5ba7015780fe588e84e27522e410b2214f43b66ddb2db3db
+  ✔ سجل تشغيل معلن: brain/logs/publish-2026-11-09.json · sha256=96974778792044c1df4f252ed362d95c4365d968ef8c577b07a23fcd482c1ee1
+  ✔ سجل تشغيل معلن: brain/logs/publish-channel-2026-11-09.json · sha256=662c1318d8d47df8c39d146d5f870d5888686322c1c653ab95546f70ed2d1da9
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09.jsonl · sha256=3831ec8daf78bcdfaf48570852853074b682bd2f312f220b8a5539253a3a43df
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D005.log · sha256=8b1d058bd9d922e5f0a59f9ef9aa14e8a2a05fa4207093b6bf7db205ba930d46
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D010.log · sha256=340fb5438feedb0c076f1f662478915626183979bb8b44e844c45fb0c562a942
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D016.log · sha256=d3c2c8ad92ffac68dbfded900865422fcc0e8b0f1464e1de286a419c13b9d016
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D020.log · sha256=c198db6d8f3c541a2cd1307a4d2fe096d6dad851c8be5d14b9a2da9a8030ddc7
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D021.log · sha256=afba8225c949ede98c7f24bb2b0334f152a94bb50c23f57d3327bcbacf045141
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D030.log · sha256=b3f11888b44b3304d99e537147637b2b492df08780e0702bef296443bc2ae3d7
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D031.log · sha256=216fc8bd1847a5c39f94e7b1fa56fcd74544f1c03281bcacea120b4a5d509374
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D032.log · sha256=dfe4ce0600867eb122d78cb13fc8d6d2b429263790c037fa6f5b937e21ce6fc7
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D033.log · sha256=702eb61283b84d53850206bb058e0f30af1f3f15d7f80d53064149946ce32bda
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D035.log · sha256=991be46986a519b896d5e2b3c3e9cd7b66d7815655a7a59d38e4036cf8e94bbb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D036.log · sha256=4d4527f692fd530fa8e7c77ad5cd1500ae43bde27d386667711bb477f771c6bc
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D040.log · sha256=6b443805d29d9e4ad69fab52f6f215cebe10c06b268ed7a6deb9458591f5c664
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D045.log · sha256=687f36cead6f62dada8094bff5b2ecb34a93b21a4215d4b18838d83001abfeec
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D050.log · sha256=462a571d000290c28c7170f3fefe42f385549299ed4eb8fce65e5e35d56da2d9
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D060.log · sha256=4d4d221c97766ca7c2b6a7895af1e0292e7caca4f1dbd02df2e080d89386959f
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D071.log · sha256=61a435b391d85f02c6732355dd8c1ad33c6fa36bb8b4d4ff08a5d71b6f351aad
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/G011.log · sha256=f6845b93ff651d0aeab7c46d59c5546482ab57420cf43c0c400e586510f37714
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/Q010.log · sha256=ea89a842adc6eb93ecb5a070901f9542734dab95a06542b5ec9a7e11902c3318
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/Q012.log · sha256=63b682e7d3c86f12971a651c235fc1257a27eeeaa663270b78a6353001770bce
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/Q015.log · sha256=61ffb68ec502de8582b27f769de1b40834bf68c6022e8097d7903d54195fc447
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/Q020.log · sha256=867e36314c5896783dd0f75936312eb56390758700a8d550246af5f783648763
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/dom-audit.json · sha256=06a4e8b4f455bb9a59bf0f172fc8843fce16405e43074c366b37164dec070926
+  ✔ سجل تشغيل معلن: brain/logs/telegram-delivery-2026-11-09.json · sha256=1fad911690603f8e8d872e5dc9dedb615cb643df2288d71e1059c4b11e47c53f
+  ✔ سجل تشغيل معلن: brain/logs/telegram-sends.jsonl · sha256=74a68fc6cbf9606039ac2a0f5619b753d12d94f628c8f8c3ccffa15bba675255
+  ✔ سجل تشغيل معلن: brain/memory/improvement-queue.jsonl · sha256=e9b4e6d7e153d6d6e2c0c1a843414850cf83cf07786e41f34aba1a53d334672a
+  ✔ سجل تشغيل معلن: brain/memory/learning-log.jsonl · sha256=fc9ff6c0fbb5c29dbffa14e69e352cecffafbb45a15f2a141a73d94c85cf36a3
+  ✘ تعديل حاكم: brain/tools/site_root.py · sha256=3cb92bb69a057bbcdc7df3b0e72144a2df09defc649586a909ced4e6309e1f71
+✘ فشل مغلق: توجد تعديلات شيفرة/بيانات حقيقية خارج سجلات التشغيل المعلنة
+✘ فشل مغلق: حارس شجرة النسخ منع العملية؛ راجع تصنيف المسارات وبصمات SHA-256
