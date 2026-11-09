@@ -3714,7 +3714,9 @@
         "tools/arabic_counter.py",
         "tools/build_hero_kpis.py",
         "appendices/card_registry.json",
-        "tests/test_card_counters.py"
+        "tests/test_card_counters.py",
+        "tests/test_card_registry_pairs.py",
+        "validators/check_card_registry_pairs.py"
       ],
       "writes": [
         "logs/runbook/{date}/B006.log"
@@ -3749,7 +3751,7 @@
       "command": [
         "bash",
         "-lc",
-        "B=\"$PWD\"; export B SITE; printf 'بوابة عقد عدّادات بطاقة أهم الأخبار — اختبار موجب وسالبان قبل البناء\\n'; python3 -m unittest -v tests/test_card_counters.py; rc=$?; printf 'نتيجة بوابة العقد: rc=%s\\n' \"$rc\"; exit $rc"
+        "B=\"$PWD\"; export B SITE; printf 'بوابة عقد عدّادات بطاقة أهم الأخبار — اختبار موجب وسالبان قبل البناء\\n'; python3 -m unittest -v tests/test_card_counters.py tests/test_card_registry_pairs.py; rc=$?; printf 'نتيجة بوابة العقد: rc=%s\\n' \"$rc\"; exit $rc"
       ],
       "ok_rc": [
         0
@@ -4472,7 +4474,7 @@
       "command": [
         "bash",
         "-lc",
-        "B=\"$PWD\"; export B SITE; python3 \"$B/tools/source_counts.py\" --date \"$D\" --check; rc=$?; exit $rc"
+        "B=\"$PWD\"; export B SITE; python3 \"$B/tools/source_counts.py\" --date \"$D\" --check; rc=$?; [ $rc -eq 0 ] || exit $rc; python3 -m pytest -q tests/test_source_totals_governed.py; exit $?"
       ],
       "ok_rc": [
         0
@@ -4480,7 +4482,11 @@
       "warn_rc": [
         1
       ],
-      "gate_title": "تطابق أرقام المصادر في كل المواضع"
+      "gate_title": "تطابق أرقام المصادر في كل المواضع",
+      "reads": [
+        "tools/source_counts.py",
+        "tests/test_source_totals_governed.py"
+      ]
     },
     {
       "id": "G027",
