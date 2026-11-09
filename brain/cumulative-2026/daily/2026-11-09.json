@@ -2,7 +2,7 @@
   {
     "code": "MN-2026-11-09-01",
     "date": "2026-11-09",
-    "area": "مقابل خصب — خليج عُمان",
+    "area": "مقابل خصب - خليج عُمان",
     "class": "بلاغ رسمي",
     "class_raw": "Suspicious Activity",
     "title": "عنوان UKMTO عن نشاط مشبوه على بعد 8 أميال بحرية شمال غرب خصب",
@@ -23,7 +23,7 @@
     "retrieved_at": "2026-11-09T04:19:34Z",
     "official_ref": null,
     "official_ref_basis": null,
-    "area_basis": "جدول التوزيع الجغرافي في التقرير يحدد الموقع: مقابل خصب — خليج عُمان.",
+    "area_basis": "جدول التوزيع الجغرافي في التقرير يحدد الموقع: مقابل خصب - خليج عُمان.",
     "incident_kind": "نشاط مشبوه",
     "incident_kind_basis": "عنوان UKMTO يذكر Suspicious Activity صراحةً.",
     "target": null,
@@ -84,7 +84,7 @@
   {
     "code": "MN-2026-11-09-03",
     "date": "2026-11-09",
-    "area": "مقابل خصب — خليج عُمان",
+    "area": "مقابل خصب - خليج عُمان",
     "class": "بلاغ رسمي",
     "class_raw": "Attack",
     "title": "تحديث عنوان UKMTO عن واقعة هجوم متأخرة الإبلاغ على بعد 16 ميلًا بحريًا شرق خصب",
@@ -105,7 +105,7 @@
     "retrieved_at": "2026-11-09T04:19:34Z",
     "official_ref": "UKMTO-197-26",
     "official_ref_basis": "الواقعة نفسها ظهرت في MN-2026-11-07-01 برقم UKMTO-197-26؛ عنوان اليوم يكرر 16NM east of Khasab.",
-    "area_basis": "جدول التوزيع الجغرافي في التقرير يحدد الموقع: مقابل خصب — خليج عُمان.",
+    "area_basis": "جدول التوزيع الجغرافي في التقرير يحدد الموقع: مقابل خصب - خليج عُمان.",
     "incident_kind": "هجوم",
     "incident_kind_basis": "مقتطف UKMTO يذكر Attack؛ التقرير يصفه كتحديث لبلاغ سابق ولا يعرض ضررًا أو هدفًا.",
     "target": "سفينة",
@@ -113,15 +113,15 @@
     "operational_effect": "متابعة البلاغ السابق وطلب نص UKMTO الكامل قبل تغيير خط السير قرب خصب.",
     "casualty_scope": null,
     "dedup_note": "تحديث لبلاغ MN-2026-11-07-01؛ لا تُعد واقعة مادية جديدة.",
-    "update_of": "MN-2026-11-07-01",
-    "parent_id": "MN-2026-11-07-01",
+    "title_basis": "نوع الواقعة «هجوم» من نص المصدر نفسه: «06/11/2026 Attack:UKMTO has received a time-late report…»",
+    "update_of": null,
+    "parent_id": null,
     "duplicate_of": null,
-    "event_kind": "تحديث",
-    "link_basis": "الموقع والتاريخ والصياغة تطابق سجل MN-2026-11-07-01.",
-    "link_evidence": "16NM east of Khasab",
-    "link_status": "مرتبط",
-    "counts_as_new": true,
-    "title_basis": "نوع الواقعة «هجوم» من نص المصدر نفسه: «06/11/2026 Attack:UKMTO has received a time-late report…»"
+    "event_kind": "جديد",
+    "link_basis": "لا دليل رابط",
+    "link_evidence": "",
+    "link_status": "غير مرتبط",
+    "counts_as_new": true
   },
   {
     "code": "MN-2026-11-09-04",
@@ -155,13 +155,13 @@
     "operational_effect": "طلب النص الكامل لبلاغ UKMTO قبل اتخاذ قرار تشغيلي بشأن سفن البضائع في خليج عُمان.",
     "casualty_scope": null,
     "dedup_note": "تحديث لبلاغ MN-2026-11-08-01؛ لا تُعد واقعة مادية جديدة.",
-    "update_of": "MN-2026-11-08-01",
-    "parent_id": "MN-2026-11-08-01",
+    "update_of": null,
+    "parent_id": null,
     "duplicate_of": null,
-    "event_kind": "تحديث",
-    "link_basis": "الصياغة نفسها تطابق سجل MN-2026-11-08-01.",
-    "link_evidence": "bulk carrier and military",
-    "link_status": "مرتبط",
+    "event_kind": "جديد",
+    "link_basis": "لا دليل رابط",
+    "link_evidence": "",
+    "link_status": "غير مرتبط",
     "counts_as_new": true
   },
   {
@@ -201,8 +201,6 @@
     "official_ref": null,
     "official_ref_basis": null,
     "area_basis": "جدول التوزيع الجغرافي في التقرير يحدد الموقع: مضيق هرمز.",
-    "incident_kind": "ألغام أو حريق",
-    "incident_kind_basis": "العناوين تذكر ألغامًا وحرائق، مع بقاء السبب والربط بين العناوين غير محسومين.",
     "target": "ناقلة",
     "outcome": "احتراق أو إصابة ناقلة/ناقلات بحسب العناوين؛ لا يثبتها مصدر ملاحي مستقل.",
     "operational_effect": "لا تتخذوا قرارًا بإغلاق خط السير أو تفيدوا بإصابة ناقلة قبل ظهور تأكيد ملاحي مستقل.",
@@ -215,7 +213,9 @@
     "link_basis": "لا دليل رابط",
     "link_evidence": "",
     "link_status": "غير مرتبط",
-    "counts_as_new": true
+    "counts_as_new": true,
+    "incident_kind": "هجوم",
+    "incident_kind_basis": "ذكر صريح: «أصيبت»"
   },
   {
     "code": "MN-2026-11-09-06",
@@ -262,8 +262,6 @@
     "official_ref": null,
     "official_ref_basis": null,
     "area_basis": "جدول التوزيع الجغرافي يضع الواقعة ضمن خليج عُمان، مع عنوان عن إجلاء قرب الساحل الإماراتي.",
-    "incident_kind": "ضربة أو حريق",
-    "incident_kind_basis": "العناوين تذكر تعطيلًا أو ضربة لسفينة بضائع وحريق ناقلة؛ لا يوجد رابط رسمي يثبت السبب أو وحدة الواقعة.",
     "target": "سفينة",
     "outcome": "تعطيل أو إصابة سفينة بضائع وحريق ناقلة وإجلاء 22 شخصًا بحسب عناوين مختلفة؛ لا يثبت أنها واقعة واحدة.",
     "operational_effect": "افصلوا بين واقعة سفينة البضائع وواقعة الناقلة المحترقة، ولا تعتمدوا عدد الإجلاء كإثبات لواقعة واحدة.",
@@ -276,6 +274,8 @@
     "link_basis": "لا دليل رابط",
     "link_evidence": "",
     "link_status": "غير مرتبط",
-    "counts_as_new": true
+    "counts_as_new": true,
+    "incident_kind": "حريق",
+    "incident_kind_basis": "ذكر صريح: «حريق»"
   }
 ]

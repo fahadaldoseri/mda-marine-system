@@ -168,11 +168,22 @@ def is_no_incident(row: dict) -> bool:
     return False
 
 
+def normalize_separators(raw: str) -> str:
+    """يُطبّع فاصل الموقع إلى الصيغة المعتمدة « - » قبل أي مطابقة."""
+    if not raw:
+        return raw
+    for dash in ("\u2014", "\u2013", "\u2212"):
+        raw = raw.replace(f" {dash} ", " - ").replace(dash, "-")
+    while "  " in raw:
+        raw = raw.replace("  ", " ")
+    return raw.strip()
+
+
 def derive(row: dict, reg: dict, terms: list[tuple[str, str]]) -> tuple[str | None, str, str | None]:
     """يعيد (القيمة الجديدة أو None للإزالة، رمز القاعدة، معرّف القطاع)."""
     if is_no_incident(row):
         return None, "R5:صف «لا واقعة» بلا قيمة موقع", None
-    raw = str(row.get("area") or "").strip()
+    raw = normalize_separators(str(row.get("area") or "").strip())
     location = str(row.get("location") or "").strip()
     title = str(row.get("title") or "").strip()
     excerpt = str(row.get("source_excerpt") or "")[:300]

@@ -16,3 +16,12 @@
 {"step": "W030", "status": "waiting_agent", "ts": "2026-11-09T04:31:46Z"}
 {"step": "W030", "status": "done", "outputs": {"cumulative-2026/daily/2026-11-09.json": "e915e667153392bd0f0ca5a077fcbabda8b7059f85e356e4d3d3373bbb6faa1e"}, "ts": "2026-11-09T04:35:24Z"}
 {"step": "W020", "status": "waiting_agent", "ts": "2026-11-09T04:35:24Z"}
+{"step": "S065", "status": "done", "rc": 0, "outputs": {"web/zones/2026-11-09.json": "cd313d2f604a8cffc5fa57541c723a5a7c63d41e7796e21e47f71b2726cfcec3"}, "log": "logs/runbook/2026-11-09/S065.log", "attempt": 1, "ts": "2026-11-09T04:40:24Z"}
+{"step": "W020", "status": "waiting_agent", "ts": "2026-11-09T04:40:24Z"}
+{"step": "W020", "status": "done", "outputs": {"web/meta/2026-11-09.json": "f3696a7cd05ad1039f4b6436f3e957941171c082193536577c2ca0142bf91c2b"}, "ts": "2026-11-09T04:46:28Z"}
+{"step": "S070", "status": "done", "rc": 0, "outputs": {"web/zones/2026-11-09.json": "cd313d2f604a8cffc5fa57541c723a5a7c63d41e7796e21e47f71b2726cfcec3", "web/meta/2026-11-09.json": "3ab8060f91b07353fee26ff589a5d6ee8059c03381f616240e0e8ab320c4bec8"}, "log": "logs/runbook/2026-11-09/S070.log", "attempt": 1, "ts": "2026-11-09T04:46:30Z"}
+{"step": "S071", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-09/S071.log", "attempt": 1, "ts": "2026-11-09T04:46:30Z"}
+{"step": "S072", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-09/S072.log", "attempt": 1, "ts": "2026-11-09T04:46:30Z"}
+{"step": "W040", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-09/W040.log", "attempt": 1, "ts": "2026-11-09T04:46:30Z"}
+{"step": "G000", "status": "done", "rc": 0, "outputs": {"evidence/merkle/snapshot.json": "9f4d3ddfa9a2af709790c95ade104b72e4cce64da7d81b7306f74857b18462bc", "evidence/merkle/ledger.jsonl": "daf0e685eeb47abce13a2997f0f0818184dfe24e55e7d1ea4024214782a93d59"}, "log": "logs/runbook/2026-11-09/G000.log", "attempt": 1, "ts": "2026-11-09T04:46:32Z"}
+{"step": "G000A", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-09/G000A.log", "ts": "2026-11-09T04:46:33Z"}

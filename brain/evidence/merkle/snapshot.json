@@ -1,6 +1,6 @@
 {
   "schema": "governing-assets-merkle/v1",
-  "generated_at": "2026-11-08T04:41:53.636073+00:00",
+  "generated_at": "2026-11-09T04:46:31.962382+00:00",
   "config": "/home/ubuntu/mda-marine-system/brain/tools/governing-assets.txt",
   "selection": [
     "GLOB /home/ubuntu/skills/*/SKILL.md",
@@ -27,8 +27,8 @@
     "odd_level": "duplicate the final node",
     "root": "final single node, hexadecimal lowercase"
   },
-  "file_count": 2655,
-  "root": "a06b2d380e8467889846eecb0f69b752e5924cbff58a3441c2bb356e5662da86",
+  "file_count": 2667,
+  "root": "8e6077c5ea1f9924a63ab63738e3f337457c3346c6fd5dafc2dfcf6493ccbb32",
   "files": [
     {
       "path": "/home/ubuntu/mda-marine-system/brain/{BRAIN}/INDEX.md",
@@ -3820,6 +3820,33 @@
       "exists": true
     },
     {
+      "path": "/home/ubuntu/skills/enforcer-coverage-burndown-ops/SKILL.md",
+      "lines": 42,
+      "sha256": "ff8fa568e4b256b6ee9ddcaf88718e654e55fd94b189b46497af90577bdaa934",
+      "size": 2863,
+      "mtime": "2026-11-09T02:37:58.466511+00:00",
+      "mtime_ns": 1794191878466510513,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/enforcer-coverage-burndown-ops/references/api_reference.md",
+      "lines": 34,
+      "sha256": "aaaa15e3c62258becd482c6f607b2eb7433dd24fe5a3a1cfb2d431e3bc85d27d",
+      "size": 981,
+      "mtime": "2026-11-09T02:37:58.466247+00:00",
+      "mtime_ns": 1794191878466246512,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/enforcer-coverage-burndown-ops/references/burndown-playbook.md",
+      "lines": 22,
+      "sha256": "fa60eb657b593452f7303a819dde0eda5105ede732aee4ed8baa3ded273d659f",
+      "size": 1859,
+      "mtime": "2026-11-09T02:37:58.466345+00:00",
+      "mtime_ns": 1794191878466345151,
+      "exists": true
+    },
+    {
       "path": "/home/ubuntu/skills/espresso-skill/SKILL.md",
       "lines": 258,
       "sha256": "460208377da2899645014dcd0b55d61880b3cd34eae8af62b2ccf12396ad26f7",
@@ -4073,11 +4100,11 @@
     },
     {
       "path": "/home/ubuntu/skills/fault-closure-and-learning-ops/SKILL.md",
-      "lines": 58,
-      "sha256": "a2d3712fd42216ab797a6829887dce2a8bcf7f4021b48eab3af352b15c03ddbd",
-      "size": 5891,
-      "mtime": "2026-11-06T22:25:26.664854+00:00",
-      "mtime_ns": 1794003926664854325,
+      "lines": 62,
+      "sha256": "70ffad15de6f250eddcdbbcefb619dfa1d3ec81160ef1f590f01e9e90e24f5d5",
+      "size": 6230,
+      "mtime": "2026-11-08T22:11:03.518598+00:00",
+      "mtime_ns": 1794175863518597902,
       "exists": true
     },
     {
@@ -4085,8 +4112,8 @@
       "lines": 8,
       "sha256": "d2cf823feb0e7193c5ccd7f7957ff87ba83a1448a6740247d4d65ece87f89980",
       "size": 164,
-      "mtime": "2026-11-06T22:26:36.111854+00:00",
-      "mtime_ns": 1794003996111854363,
+      "mtime": "2026-11-06T22:56:25.279748+00:00",
+      "mtime_ns": 1794005785279747869,
       "exists": true
     },
     {
@@ -4094,8 +4121,8 @@
       "lines": 120,
       "sha256": "1854082dcd379d516ce948d6de9ec163ed38dfa0be6a54e3beeec992f10f522e",
       "size": 10127,
-      "mtime": "2026-11-06T19:51:32.972163+00:00",
-      "mtime_ns": 1793994692972162789,
+      "mtime": "2026-11-06T22:56:25.279846+00:00",
+      "mtime_ns": 1794005785279846372,
       "exists": true
     },
     {
@@ -4103,8 +4130,8 @@
       "lines": 79,
       "sha256": "1eb87d92c8eed275b582f1d8074c8f922181ffc9f7df1f2651b7ee4b7d8ad590",
       "size": 4284,
-      "mtime": "2026-11-06T19:51:32.972535+00:00",
-      "mtime_ns": 1793994692972534959,
+      "mtime": "2026-11-06T22:56:25.280007+00:00",
+      "mtime_ns": 1794005785280007420,
       "exists": true
     },
     {
@@ -4112,8 +4139,8 @@
       "lines": 71,
       "sha256": "14715747b56a3a8f82239411bb10d4b1eea60e00f2eaef7afbddbee2c263e818",
       "size": 4118,
-      "mtime": "2026-11-06T19:51:32.972693+00:00",
-      "mtime_ns": 1793994692972693015,
+      "mtime": "2026-11-06T22:56:25.280079+00:00",
+      "mtime_ns": 1794005785280079399,
       "exists": true
     },
     {
@@ -4121,8 +4148,8 @@
       "lines": 182,
       "sha256": "be6a482ac789f43c6463530f17a2c21ddbb022d2129208062edd1133f5ec3577",
       "size": 8445,
-      "mtime": "2026-11-06T19:51:32.972871+00:00",
-      "mtime_ns": 1793994692972870532,
+      "mtime": "2026-11-06T22:56:25.280079+00:00",
+      "mtime_ns": 1794005785280079399,
       "exists": true
     },
     {
@@ -4130,8 +4157,8 @@
       "lines": 89,
       "sha256": "b7ec9291320a3e33ba8441daf8d71efcbebb5d2b5d67e9a2241165beefbe3194",
       "size": 3851,
-      "mtime": "2026-11-06T19:51:32.973008+00:00",
-      "mtime_ns": 1793994692973007827,
+      "mtime": "2026-11-06T22:56:25.280246+00:00",
+      "mtime_ns": 1794005785280246289,
       "exists": true
     },
     {
@@ -4139,8 +4166,8 @@
       "lines": 250,
       "sha256": "de570e1e375ca3aaf7dc242530c9a5601c8d0b67561f7c7e7cd624c59bbab8cf",
       "size": 14590,
-      "mtime": "2026-11-06T19:51:32.973097+00:00",
-      "mtime_ns": 1793994692973097164,
+      "mtime": "2026-11-06T22:56:25.280246+00:00",
+      "mtime_ns": 1794005785280246289,
       "exists": true
     },
     {
@@ -4148,8 +4175,8 @@
       "lines": 87,
       "sha256": "8cfb65bf15a0af25b3077860df4069f955bd4538f94ba2af1a5e6e0ef201ab87",
       "size": 3306,
-      "mtime": "2026-11-06T19:51:32.973361+00:00",
-      "mtime_ns": 1793994692973360539,
+      "mtime": "2026-11-06T22:56:25.280246+00:00",
+      "mtime_ns": 1794005785280246289,
       "exists": true
     },
     {
@@ -4157,8 +4184,8 @@
       "lines": 133,
       "sha256": "08537a85fe1cb5553ef9947c6c14799d811e56f9d91881a89e38dedcf5f1aadb",
       "size": 5776,
-      "mtime": "2026-11-06T19:51:32.973451+00:00",
-      "mtime_ns": 1793994692973451225,
+      "mtime": "2026-11-06T22:56:25.280246+00:00",
+      "mtime_ns": 1794005785280246289,
       "exists": true
     },
     {
@@ -4166,8 +4193,8 @@
       "lines": 102,
       "sha256": "b0e3757f795b27eab3cb0156ee2ed01cbdc4fb40fd6105de194e2a91c68861c5",
       "size": 4459,
-      "mtime": "2026-11-06T19:51:32.973552+00:00",
-      "mtime_ns": 1793994692973552315,
+      "mtime": "2026-11-06T22:56:25.280246+00:00",
+      "mtime_ns": 1794005785280246289,
       "exists": true
     },
     {
@@ -4175,8 +4202,8 @@
       "lines": 130,
       "sha256": "64865501cd65509065f1d13e778b7acbe9f690b41c997a26c41fcc562a150dc0",
       "size": 7140,
-      "mtime": "2026-11-06T19:51:32.973648+00:00",
-      "mtime_ns": 1793994692973647676,
+      "mtime": "2026-11-06T22:56:25.280246+00:00",
+      "mtime_ns": 1794005785280246289,
       "exists": true
     },
     {
@@ -4184,8 +4211,8 @@
       "lines": 9,
       "sha256": "a7656b16932ed9676870bea3ca9e497a22eacef862b2f36ad9098548639bf809",
       "size": 360,
-      "mtime": "2026-11-06T19:51:32.973797+00:00",
-      "mtime_ns": 1793994692973797071,
+      "mtime": "2026-11-06T22:56:25.280246+00:00",
+      "mtime_ns": 1794005785280246289,
       "exists": true
     },
     {
@@ -4193,8 +4220,8 @@
       "lines": 65,
       "sha256": "0a0a7f2e8d25e05eb2b230367c850e6906bedc8e591fd7fe3a91866f4848c8ce",
       "size": 5307,
-      "mtime": "2026-11-06T21:44:08.966070+00:00",
-      "mtime_ns": 1794001448966070416,
+      "mtime": "2026-11-06T22:56:25.280246+00:00",
+      "mtime_ns": 1794005785280246289,
       "exists": true
     },
     {
@@ -4202,8 +4229,8 @@
       "lines": 112,
       "sha256": "a1f2539bafefd7a8609ace988c1e7237a770b2ac3b47e13b47d7c7db65ae41f7",
       "size": 14307,
-      "mtime": "2026-11-06T19:51:31.018994+00:00",
-      "mtime_ns": 1793994691018993598,
+      "mtime": "2026-11-06T22:56:25.280246+00:00",
+      "mtime_ns": 1794005785280246289,
       "exists": true
     },
     {
@@ -4211,8 +4238,8 @@
       "lines": 33,
       "sha256": "b65afa73a36fb9653ace2b50965a51f1baae4bafe6cc77965fb805b06c2e8466",
       "size": 3409,
-      "mtime": "2026-11-06T19:51:31.019255+00:00",
-      "mtime_ns": 1793994691019255399,
+      "mtime": "2026-11-06T22:56:25.281065+00:00",
+      "mtime_ns": 1794005785281065425,
       "exists": true
     },
     {
@@ -4220,8 +4247,8 @@
       "lines": 80,
       "sha256": "7a4f4fec08d4eb9a22899da8351d8b65859c9aa8fe36607b27252ac9950f7435",
       "size": 7339,
-      "mtime": "2026-11-06T19:51:31.019417+00:00",
-      "mtime_ns": 1793994691019417000,
+      "mtime": "2026-11-06T22:56:25.281161+00:00",
+      "mtime_ns": 1794005785281161066,
       "exists": true
     },
     {
@@ -4229,8 +4256,8 @@
       "lines": 70,
       "sha256": "140433d5a300d7d2048cfa01443634d9019319ae414bede8f38a00ee2641f247",
       "size": 2722,
-      "mtime": "2026-11-06T19:51:31.019630+00:00",
-      "mtime_ns": 1793994691019629737,
+      "mtime": "2026-11-06T22:56:25.281161+00:00",
+      "mtime_ns": 1794005785281161066,
       "exists": true
     },
     {
@@ -4238,8 +4265,8 @@
       "lines": 100,
       "sha256": "8a3dd7f2dd9aff3cbdfd14fa696ea5372582a40982adeac725e6349f050a21aa",
       "size": 4424,
-      "mtime": "2026-11-06T19:51:31.019731+00:00",
-      "mtime_ns": 1793994691019731330,
+      "mtime": "2026-11-06T22:56:25.281444+00:00",
+      "mtime_ns": 1794005785281444111,
       "exists": true
     },
     {
@@ -4247,8 +4274,8 @@
       "lines": 66,
       "sha256": "3967b2f23d492a5a3eb760ff64c6c4520957d03a8037c6f85fe37577f6d02f5c",
       "size": 3601,
-      "mtime": "2026-11-06T19:51:31.019861+00:00",
-      "mtime_ns": 1793994691019861514,
+      "mtime": "2026-11-06T22:56:25.281444+00:00",
+      "mtime_ns": 1794005785281444111,
       "exists": true
     },
     {
@@ -4256,8 +4283,8 @@
       "lines": 66,
       "sha256": "4d2cf9007f4f2106dee9b54b7e5200ebcee04a547e620470a7bc7576edd1d31a",
       "size": 2612,
-      "mtime": "2026-11-06T19:51:31.019969+00:00",
-      "mtime_ns": 1793994691019968708,
+      "mtime": "2026-11-06T22:56:25.281444+00:00",
+      "mtime_ns": 1794005785281444111,
       "exists": true
     },
     {
@@ -4265,8 +4292,8 @@
       "lines": 65,
       "sha256": "a3a58de36fb2bba01c427faea44860f2475672413dd88c521171caf83beff000",
       "size": 2551,
-      "mtime": "2026-11-06T19:51:31.020059+00:00",
-      "mtime_ns": 1793994691020058690,
+      "mtime": "2026-11-06T22:56:25.281444+00:00",
+      "mtime_ns": 1794005785281444111,
       "exists": true
     },
     {
@@ -4274,8 +4301,62 @@
       "lines": 82,
       "sha256": "799466c4820cf0945ff90eeb2ecf0dc325e64173444cdae54552822da074f7fd",
       "size": 4042,
-      "mtime": "2026-11-06T19:51:31.020154+00:00",
-      "mtime_ns": 1793994691020153905,
+      "mtime": "2026-11-06T22:56:25.281444+00:00",
+      "mtime_ns": 1794005785281444111,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/fault-evidence-arming-ops/SKILL.md",
+      "lines": 46,
+      "sha256": "fa8c08eb4aaccc9b9452077ff336914eaeae494bb5310c0a7f59a72f82d10196",
+      "size": 3625,
+      "mtime": "2026-11-09T02:29:50.320340+00:00",
+      "mtime_ns": 1794191390320339588,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/fault-evidence-arming-ops/references/closure-evidence-contract.md",
+      "lines": 30,
+      "sha256": "6b350a1182785f2733f969e2fb83e8f48d50446fa1c6067f51ef3309a3da2915",
+      "size": 1902,
+      "mtime": "2026-11-09T02:29:50.320565+00:00",
+      "mtime_ns": 1794191390320565518,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/fault-evidence-arming-ops/scripts/arm_evidence_from_log.py",
+      "lines": 84,
+      "sha256": "009ba05bbda7a1f3999598ff09c547e107d4d54519f8db85a1362e88ab58d30c",
+      "size": 3364,
+      "mtime": "2026-11-09T02:29:50.320701+00:00",
+      "mtime_ns": 1794191390320701368,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/fault-ledger-matrix-parity-ops/SKILL.md",
+      "lines": 59,
+      "sha256": "3cf25dd819cf15e718de69f371b4d887719bc57ebb34698bbff81624103e7d58",
+      "size": 3874,
+      "mtime": "2026-11-09T02:29:50.205501+00:00",
+      "mtime_ns": 1794191390205500993,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/fault-ledger-matrix-parity-ops/references/api_reference.md",
+      "lines": 34,
+      "sha256": "bac7e3edb603d6d40a7beb4e4360b99626b82cb8f520e4579b1a8f7dbc7145e3",
+      "size": 981,
+      "mtime": "2026-11-09T02:29:50.205882+00:00",
+      "mtime_ns": 1794191390205882348,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/fault-ledger-matrix-parity-ops/references/parity-evidence.md",
+      "lines": 15,
+      "sha256": "3f30c341dfada8b0c5c4ebcce363e5c014816bf8c83a10d82c1afeaebf7b1f8a",
+      "size": 1153,
+      "mtime": "2026-11-09T02:29:50.206003+00:00",
+      "mtime_ns": 1794191390206002754,
       "exists": true
     },
     {
@@ -17258,11 +17339,11 @@
     },
     {
       "path": "/home/ubuntu/skills/parity-and-publish-ops/SKILL.md",
-      "lines": 43,
-      "sha256": "dd3abd4df6842b3bf8a4d4369418c994cbf61df5ef3de4c73ce4ac023d0b767e",
-      "size": 4693,
-      "mtime": "2026-11-06T22:26:25.996885+00:00",
-      "mtime_ns": 1794003985996885259,
+      "lines": 47,
+      "sha256": "cff17e234d69d95bf9d7fba55b31165e6cedb8f27f8da30fe96fda93cbc6b14b",
+      "size": 5073,
+      "mtime": "2026-11-08T22:11:03.506177+00:00",
+      "mtime_ns": 1794175863506176670,
       "exists": true
     },
     {
@@ -17270,8 +17351,8 @@
       "lines": 7,
       "sha256": "e550157425cf06b3a35a148bce59c663dc33cd7d8c0cb871deaeec9497bb1d90",
       "size": 132,
-      "mtime": "2026-11-06T22:26:36.129932+00:00",
-      "mtime_ns": 1794003996129932000,
+      "mtime": "2026-11-06T22:56:25.290119+00:00",
+      "mtime_ns": 1794005785290119165,
       "exists": true
     },
     {
@@ -17279,8 +17360,8 @@
       "lines": 85,
       "sha256": "74c4a8853419dc8486ca73ed2f1bda2a3c345632eaa368c38e965d712cb2ce65",
       "size": 7990,
-      "mtime": "2026-11-06T19:51:34.005433+00:00",
-      "mtime_ns": 1793994694005433071,
+      "mtime": "2026-11-06T22:56:25.290119+00:00",
+      "mtime_ns": 1794005785290119165,
       "exists": true
     },
     {
@@ -17288,8 +17369,8 @@
       "lines": 239,
       "sha256": "98506ce220c1b3904c546654d414bff80a43feae549e4feae5c9b3ecfe0877a4",
       "size": 21709,
-      "mtime": "2026-11-06T19:51:34.005785+00:00",
-      "mtime_ns": 1793994694005784819,
+      "mtime": "2026-11-06T22:56:25.290119+00:00",
+      "mtime_ns": 1794005785290119165,
       "exists": true
     },
     {
@@ -17297,8 +17378,8 @@
       "lines": 30,
       "sha256": "e16dee4678f57ee875722bae5e60eb7398ca00ad99881dffec71195ffe36b0cb",
       "size": 2010,
-      "mtime": "2026-11-06T19:51:34.006016+00:00",
-      "mtime_ns": 1793994694006015936,
+      "mtime": "2026-11-06T22:56:25.290731+00:00",
+      "mtime_ns": 1794005785290730685,
       "exists": true
     },
     {
@@ -17306,8 +17387,8 @@
       "lines": 23,
       "sha256": "3368a9892374cd8bc9bc16fbe74ba73ee37ccc56847990e900d2122b43fdb75f",
       "size": 2371,
-      "mtime": "2026-11-06T19:51:34.006115+00:00",
-      "mtime_ns": 1793994694006114944,
+      "mtime": "2026-11-06T22:56:25.290731+00:00",
+      "mtime_ns": 1794005785290730685,
       "exists": true
     },
     {
@@ -17315,8 +17396,8 @@
       "lines": 106,
       "sha256": "45e8fb3bbe0c56ff1c779bc10f26b7d8d153a06f7162a2381f334707edd8e656",
       "size": 5372,
-      "mtime": "2026-11-06T19:51:34.006271+00:00",
-      "mtime_ns": 1793994694006271195,
+      "mtime": "2026-11-06T22:56:25.290731+00:00",
+      "mtime_ns": 1794005785290730685,
       "exists": true
     },
     {
@@ -17324,8 +17405,8 @@
       "lines": 125,
       "sha256": "a9b553240ce7f7bad3b818f342fc46d20d427f7d98723caebdc4858bed6aacfa",
       "size": 6279,
-      "mtime": "2026-11-06T19:51:34.006514+00:00",
-      "mtime_ns": 1793994694006513630,
+      "mtime": "2026-11-06T22:56:25.290978+00:00",
+      "mtime_ns": 1794005785290978390,
       "exists": true
     },
     {
@@ -17333,8 +17414,8 @@
       "lines": 146,
       "sha256": "13c88fa221b2cde0a9b96f2b51c45d551f135e5b32a8d59e0fc1d486f4bbec81",
       "size": 5247,
-      "mtime": "2026-11-06T19:51:34.006720+00:00",
-      "mtime_ns": 1793994694006719626,
+      "mtime": "2026-11-06T22:56:25.291060+00:00",
+      "mtime_ns": 1794005785291059690,
       "exists": true
     },
     {
@@ -17342,8 +17423,8 @@
       "lines": 264,
       "sha256": "1e9af4cb11c6f856a36c646f42ff5b31fdf91dccabf2c39408a757b1095366cc",
       "size": 13247,
-      "mtime": "2026-11-06T19:51:34.006872+00:00",
-      "mtime_ns": 1793994694006871680,
+      "mtime": "2026-11-06T22:56:25.291060+00:00",
+      "mtime_ns": 1794005785291059690,
       "exists": true
     },
     {
@@ -17351,8 +17432,8 @@
       "lines": 53,
       "sha256": "05c31bb31d0f395e862864b6e542b2c4f7a78a8f11209c6cf9c9d33717087b71",
       "size": 2228,
-      "mtime": "2026-11-06T19:51:34.007129+00:00",
-      "mtime_ns": 1793994694007128878,
+      "mtime": "2026-11-06T22:56:25.291060+00:00",
+      "mtime_ns": 1794005785291059690,
       "exists": true
     },
     {
@@ -17360,8 +17441,8 @@
       "lines": 39,
       "sha256": "6207157bab105f149169adbd84ce629675928ea72f4ae67235052f7a5a7b57b3",
       "size": 1898,
-      "mtime": "2026-11-06T19:51:34.007297+00:00",
-      "mtime_ns": 1793994694007297290,
+      "mtime": "2026-11-06T22:56:25.291060+00:00",
+      "mtime_ns": 1794005785291059690,
       "exists": true
     },
     {
@@ -17369,8 +17450,8 @@
       "lines": 305,
       "sha256": "9dda5018e7147923928a6ea8d943fee53e3ba8011076e46b794b443bd12931cf",
       "size": 15581,
-      "mtime": "2026-11-06T19:51:34.007409+00:00",
-      "mtime_ns": 1793994694007408898,
+      "mtime": "2026-11-06T22:56:25.291393+00:00",
+      "mtime_ns": 1794005785291393277,
       "exists": true
     },
     {
@@ -17378,8 +17459,8 @@
       "lines": 99,
       "sha256": "6806742b6c9f9fa501b48b4af1fac79d17bf774159a491cd7df231b462c8b9ec",
       "size": 4092,
-      "mtime": "2026-11-06T19:51:34.007695+00:00",
-      "mtime_ns": 1793994694007694874,
+      "mtime": "2026-11-06T22:56:25.291393+00:00",
+      "mtime_ns": 1794005785291393277,
       "exists": true
     },
     {
@@ -17387,8 +17468,8 @@
       "lines": 61,
       "sha256": "bb7078999d0a1c985f33705380ba480aa15a9d718f885af370f73621ab0e3bd6",
       "size": 6012,
-      "mtime": "2026-11-06T19:51:29.739366+00:00",
-      "mtime_ns": 1793994689739366114,
+      "mtime": "2026-11-06T22:56:25.291393+00:00",
+      "mtime_ns": 1794005785291393277,
       "exists": true
     },
     {
@@ -17396,8 +17477,8 @@
       "lines": 19,
       "sha256": "0f547768dc2cf3fde93688defc2d400c7c9e91864b359a20f56f6aee25882c23",
       "size": 2756,
-      "mtime": "2026-11-06T19:51:29.739634+00:00",
-      "mtime_ns": 1793994689739633480,
+      "mtime": "2026-11-06T22:56:25.291682+00:00",
+      "mtime_ns": 1794005785291681639,
       "exists": true
     },
     {
@@ -17405,8 +17486,8 @@
       "lines": 29,
       "sha256": "1ae9bc131836b15083870baebee112c93cce63d2cad1ff75e2f9bf360b901e70",
       "size": 2405,
-      "mtime": "2026-11-06T19:51:29.739722+00:00",
-      "mtime_ns": 1793994689739721625,
+      "mtime": "2026-11-06T22:56:25.291740+00:00",
+      "mtime_ns": 1794005785291739602,
       "exists": true
     },
     {
@@ -17414,8 +17495,8 @@
       "lines": 160,
       "sha256": "c410d30e805ebd5c30837ed186e3dcb78deb4dbf4dc7e653bae975b8cb26f3d5",
       "size": 7505,
-      "mtime": "2026-11-06T19:51:29.740322+00:00",
-      "mtime_ns": 1793994689740322239,
+      "mtime": "2026-11-06T22:56:25.291740+00:00",
+      "mtime_ns": 1794005785291739602,
       "exists": true
     },
     {
@@ -17423,8 +17504,8 @@
       "lines": 76,
       "sha256": "1f68a143e2ea0f86b54bf9e428c2d53fa8c8fc3faf845966918f5a39a4a85032",
       "size": 5489,
-      "mtime": "2026-11-06T19:51:29.740477+00:00",
-      "mtime_ns": 1793994689740477091,
+      "mtime": "2026-11-06T22:56:25.291894+00:00",
+      "mtime_ns": 1794005785291894478,
       "exists": true
     },
     {
@@ -18955,6 +19036,33 @@
       "size": 3738,
       "mtime": "2026-11-06T19:51:32.036894+00:00",
       "mtime_ns": 1793994692036893614,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/rerun-step-to-live-parity-ops/SKILL.md",
+      "lines": 79,
+      "sha256": "0559e115ddc207f6c3a739d718eb1c6d77c846da174b658c707f531d338fb492",
+      "size": 7936,
+      "mtime": "2026-11-08T21:58:24.998134+00:00",
+      "mtime_ns": 1794175104998133714,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/rerun-step-to-live-parity-ops/references/closure-evidence-contract.md",
+      "lines": 81,
+      "sha256": "ead490af9520b957bdce85bde0c40c4ec0956fdf80542dd956325dec66720529",
+      "size": 7770,
+      "mtime": "2026-11-08T22:10:48.507575+00:00",
+      "mtime_ns": 1794175848507574694,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/rerun-step-to-live-parity-ops/scripts/live_parity.py",
+      "lines": 81,
+      "sha256": "c043233c8606bf58a46c9eecbcc66b207bd03671193f1ca32a379afe8d717859",
+      "size": 3528,
+      "mtime": "2026-11-08T22:10:48.507360+00:00",
+      "mtime_ns": 1794175848507359607,
       "exists": true
     },
     {
