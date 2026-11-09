@@ -3,7 +3,8 @@
 """حلّ جذر الموقع (seawatch) من مصدر واحد معلن.
 
 سبب الوجود (ك-590): بوابات عدّة كانت تفترض أن الموقع تحت `mda-marine-system/seawatch`
-أو تشتقّه بعدد ثابت من الآباء، فتنهار في التخطيط القانوني حيث الموقع في `/home/ubuntu/seawatch`.
+أو تشتقّه بعدد ثابت من الآباء، فتنهار في التخطيط القانوني حيث الموقع في مجلد المنزل
+(`$HOME/seawatch`) لا تحت مجلد المشروع.
 
 الترتيب المعتمد: متغيّر البيئة `SITE_DIR` ثم `SITE` ثم مرشّحات التخطيط القانوني،
 ويُشترط في المرشّح أن يحتوي `dist` أو `generator` حتى لا يُختار مجلد قديم بلا مخرج.
@@ -27,7 +28,7 @@ def candidates() -> list[Path]:
         [
             BRAIN_DIR.parent / "seawatch",
             BRAIN_DIR.parent.parent / "seawatch",
-            Path("/home/ubuntu/seawatch"),
+            Path.home() / "seawatch",
         ]
     )
     return out

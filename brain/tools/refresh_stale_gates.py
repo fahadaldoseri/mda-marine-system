@@ -21,10 +21,18 @@ import sys
 REDO_RE = re.compile(r"--redo\s+([A-Za-z]\d+)")
 
 
-def verdict(date: str, root: pathlib.Path, out: pathlib.Path) -> tuple[int, dict]:
+def verdict(date: str, root: pathlib.Path, out: pathlib.Path,
+            delivery_step: str = "D010") -> tuple[int, dict]:
+    """يقرأ حكم البوابات عند خطوة التسليم المطلوبة (ك-591).
+
+    سبب المعامل: حدّ القياس يختلف بحسب الخطوة — النشر يقف عند D010، أما إرسال
+    تلغرام فيقف عند D030 بعد D010 وD016. تثبيت D010 كان يجعل بوابة أُعيد تشغيلها
+    بعد D016 تُقاس على حدّ قديم، فيرفض الإرسال بلا سبب حقيقي.
+    """
     proc = subprocess.run(
         [sys.executable, str(root / "tools" / "gate_verdict.py"),
-         "--date", date, "--root", str(root), "--delivery-step", "D010", "--json", str(out)],
+         "--date", date, "--root", str(root), "--delivery-step", delivery_step,
+         "--json", str(out)],
         cwd=root, text=True, capture_output=True)
     try:
         doc = json.loads(out.read_text(encoding="utf-8"))
@@ -74,6 +82,8 @@ def main() -> int:
     ap.add_argument("--date", required=True)
     ap.add_argument("--root", default=".")
     ap.add_argument("--rounds", type=int, default=1)
+    ap.add_argument("--delivery-step", default="D010",
+                    help="خطوة التسليم التي يُقاس عندها الحكم (D010 نشر · D030 تلغرام)")
     a = ap.parse_args()
     root = pathlib.Path(a.root).resolve()
     depth = int(os.environ.get("GATE_REFRESH_DEPTH", "0") or 0)
@@ -84,7 +94,7 @@ def main() -> int:
     circular = recursive_ids(root)
 
     for attempt in range(a.rounds + 1):
-        rc, doc = verdict(a.date, root, out)
+        rc, doc = verdict(a.date, root, out, a.delivery_step)
         if rc == 0:
             print("   ✔ لا بوابة بحكم مانع" + (" بعد التجديد" if attempt else ""))
             return 0

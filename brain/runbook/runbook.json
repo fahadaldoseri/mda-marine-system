@@ -5459,7 +5459,8 @@
           "tests/test_delivery_scripts.sh",
           "tests/test_no_publish_without_runbook.sh",
           "tests/test_publish_channels.py",
-          "tests/test_publish_contract.py"
+          "tests/test_publish_contract.py",
+          "tests/test_delivery_gate_refresh.py"
         ]
       },
       "on_fail": "stop",
