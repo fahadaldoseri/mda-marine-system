@@ -6,6 +6,7 @@ from __future__ import annotations
 import contextlib
 import io
 import os
+import re
 import sys
 import tempfile
 from pathlib import Path
@@ -13,13 +14,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "generator"))
 import i18n_en as I  # noqa: E402
+from brain_root import brain_root  # noqa: E402
 
 DATE = os.environ.get("I18N_DATE", "2026-11-02")
-BRAIN = Path(
-    os.environ.get("BRAIN_DIR")
-    or os.environ.get("BRAIN")
-    or (ROOT.parent / "brain-marine-news")
-)
+# الجذر يُشتق من وحدة الجذر القانوني في المولّد؛ لا مسار مطلق مكتوب في الشيفرة.
+BRAIN = brain_root()
 AR_SOURCE = BRAIN / "reports" / f"{DATE}-sectioned.md"
 EN_SOURCE = ROOT / "sources" / "i18n" / "en" / f"{DATE}-sectioned.en.md"
 
@@ -42,6 +41,19 @@ def _run_build_tm(ar_dir: Path, en_dir: Path, date: str):
 def test_real_report_alignment_is_accepted() -> None:
     tm = I.build_tm(DATE)
     assert tm["درجة الثقة: متوسطة."] == "Confidence level: medium."
+
+
+def test_2026_11_08_rebuild_preserves_arabic_page_structure() -> None:
+    """إعادة البناء من المصدر القانوني لا تعيد بطاقة قطاعات قديمة إلى الإنجليزية."""
+    date = "2026-11-08"
+    with _with_tm_paths(BRAIN / "reports", ROOT / "sources" / "i18n" / "en"):
+        tm = I.build_tm(date)
+    gl = I.load_glossary()
+    source = (ROOT / "dist" / "reports" / f"{date}.html").read_text(encoding="utf-8")
+    translated, missing, _ = I.translate_page(source, date, tm, gl)
+    assert not missing, missing
+    assert translated.count('class="tz-zones"') == source.count('class="tz-zones"')
+    assert len(re.findall(r"<li\b", translated)) == len(re.findall(r"<li\b", source))
 
 
 def test_2026_11_07_sector_level_lines_have_english_pairs() -> None:
