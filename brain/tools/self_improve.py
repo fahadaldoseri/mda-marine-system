@@ -11,17 +11,16 @@
 الاستخدام: python3 tools/self_improve.py [--date YYYY-MM-DD] [--window 7]
 رمز الخروج: 0 دائمًا (استشاري) — الترقية إلى مانع تكون بقرار مرحلي.
 """
-import re
-FAULT_ROW = re.compile(r'^\\|\\s*[\\u0621-\\u064A]{1,3}-\\d')
 from __future__ import annotations
-
 import re
 
 FAULT_ROW = re.compile(r'^\|\s*[\u0621-\u064A]{1,3}-\d')
 
+
+
+
 import argparse
 import json
-import re
 from collections import Counter
 from datetime import date as _date
 from pathlib import Path
