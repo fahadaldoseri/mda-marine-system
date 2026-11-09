@@ -15,7 +15,12 @@ import pathlib
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-SITE = pathlib.Path(__import__("os").environ.get("SITE_DIR") or (ROOT.parent / "seawatch")).resolve()
+_site_candidates = [__import__("os").environ.get("SITE_DIR"),
+                    __import__("os").environ.get("SITE"),
+                    str(ROOT.parent / "site"), str(ROOT.parent / "seawatch"),
+                    str(ROOT.parent.parent / "seawatch")]
+SITE = next((pathlib.Path(p).resolve() for p in _site_candidates if p and
+             (pathlib.Path(p) / "generator").is_dir()), (ROOT.parent / "site").resolve())
 sys.path.insert(0, str(SITE / "generator"))
 
 import check_map_contract as cmc  # noqa: E402

@@ -1,0 +1,31 @@
+COMMAND: python3 tools/check_lang_switch_live.py --url https://seawatch-live.pages.dev --date 2026-11-08
+STARTED_AT: 2026-11-09T00:06:45.823387+00:00
+RC: 1
+OUTPUT_BEGIN
+Traceback (most recent call last):
+  File "/home/ubuntu/mda-marine-system/brain/tools/check_lang_switch_live.py", line 98, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/ubuntu/mda-marine-system/brain/tools/check_lang_switch_live.py", line 46, in main
+    pg.goto(en_url, wait_until="load")
+  File "/usr/local/lib/python3.12/dist-packages/playwright/sync_api/_generated.py", line 9903, in goto
+    self._sync(
+  File "/usr/local/lib/python3.12/dist-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+    return task.result()
+           ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/playwright/_impl/_page.py", line 562, in goto
+    return await self._main_frame.goto(**locals_to_params(locals()))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/playwright/_impl/_frame.py", line 157, in goto
+    await self._channel.send(
+  File "/usr/local/lib/python3.12/dist-packages/playwright/_impl/_connection.py", line 76, in send
+    return await self._connection.wrap_api_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/playwright/_impl/_connection.py", line 632, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://seawatch-live.pages.dev/reports/en/2026-11-08.html", waiting until "load"
+
+
+OUTPUT_END

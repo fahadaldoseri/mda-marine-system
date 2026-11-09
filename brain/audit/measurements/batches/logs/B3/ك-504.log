@@ -1,0 +1,13 @@
+COMMAND: timeout 120 sh -c 'python3 -m unittest tests/test_event_card_rows.py && python3 validators/check_event_card_contract.py --date 2026-11-08 --site /home/ubuntu/seawatch'
+STARTED_AT: 2026-11-09T00:09:31.147830+00:00
+RC: 0
+OUTPUT_BEGIN
+عقد بطاقة سجل الأحداث — 2026-11-08: 4 بطاقة
+النتيجة: مطابق
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 0.009s
+
+OK
+
+OUTPUT_END

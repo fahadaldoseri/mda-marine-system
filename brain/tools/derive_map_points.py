@@ -25,8 +25,13 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 ANCHORS = ROOT / "appendices" / "area-coordinates.json"
-LAND = Path(os.environ.get("SITE") or os.environ.get("SITE_DIR")
-            or Path(__file__).resolve().parents[1].parent / "seawatch") / "generator/data/ne_50m_land.geojson"
+_site_candidates = [os.environ.get("SITE"), os.environ.get("SITE_DIR"),
+                    str(ROOT.parent / "site"), str(ROOT.parent / "seawatch"),
+                    str(ROOT.parent.parent / "seawatch")]
+_site_root = next((Path(p) for p in _site_candidates if p and
+                   (Path(p) / "generator" / "data" / "ne_50m_land.geojson").is_file()),
+                  ROOT.parent / "site")
+LAND = _site_root / "generator/data/ne_50m_land.geojson"
 
 _DIAC = dict.fromkeys(range(0x064B, 0x0653))
 

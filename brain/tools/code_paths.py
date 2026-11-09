@@ -86,6 +86,19 @@ def classify(rel, spec):
     return None
 
 
+def localize_spec(spec, repo_root):
+    """حوّل أنماط brain/site إلى مسارات نسبية عند فحص جذر فرعي محلي."""
+    root_name = Path(repo_root).resolve().name
+    if root_name not in {"brain", "site"}:
+        return spec
+    prefix = root_name + "/"
+    localized = dict(spec)
+    for key in ("code", "data", "ignore"):
+        localized[key] = [p[len(prefix):] if p.startswith(prefix) else p
+                          for p in spec.get(key, [])]
+    return localized
+
+
 def tracked_files(repo_root):
     try:
         out = subprocess.run(["git", "-C", str(repo_root), "ls-files", "-z"],
@@ -97,7 +110,7 @@ def tracked_files(repo_root):
 
 def check(repo_root):
     try:
-        spec = load_spec(repo_root)
+        spec = localize_spec(load_spec(repo_root), repo_root)
         files = tracked_files(repo_root)
     except SpecNotFound as e:
         print(f"✘ تعذّر التحقق (فشل مغلق {RUNNABLE}): {e}")

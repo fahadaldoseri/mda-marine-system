@@ -1,0 +1,13 @@
+COMMAND: python3 validators/check_exceptions_burndown.py --json
+STARTED_AT: 2026-11-09T00:04:37.288352+00:00
+RC: 0
+OUTPUT_BEGIN
+{
+  "count": 438,
+  "baseline": 438,
+  "expiring_soon": 0,
+  "failures": []
+}
+   ✔ ميزانية الاستثناءات سليمة: لا زيادة ولا مهلة على وشك الانتهاء
+
+OUTPUT_END

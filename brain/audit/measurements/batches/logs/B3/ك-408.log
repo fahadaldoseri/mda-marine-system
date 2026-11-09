@@ -1,0 +1,96 @@
+COMMAND: timeout 120 python3 validators/check_libraries_skills.py
+STARTED_AT: 2026-11-09T00:08:51.871811+00:00
+RC: 0
+OUTPUT_BEGIN
+=== تدقيق المكتبات والمهارات والترابط ===
+  1) المكتبات — 29 ملفًا
+     ✔ findings-2026-10-20.json · 329,495 حرفًا
+     ✔ findings-2026-10-21.json · 341,644 حرفًا
+     ✔ findings-2026-10-22.json · 349,405 حرفًا
+     ✔ findings-2026-10-23.json · 359,570 حرفًا
+     ✔ findings-2026-10-24.json · 363,037 حرفًا
+     ✔ findings-2026-10-25.json · 377,183 حرفًا
+     ✔ findings-2026-10-26.json · 381,800 حرفًا
+     ✔ findings-2026-10-27.json · 404,229 حرفًا
+     ✔ findings-2026-10-28.json · 429,275 حرفًا
+     ✔ findings-2026-10-29.json · 443,161 حرفًا
+     ✔ findings-2026-10-30.json · 453,653 حرفًا
+     ✔ findings-2026-10-31.json · 464,864 حرفًا
+     ✔ findings-2026-11-01.json · 474,456 حرفًا
+     ✔ findings-2026-11-02.json · 494,038 حرفًا
+     ✔ findings-2026-11-03.json · 509,225 حرفًا
+     ✔ findings-2026-11-04.json · 516,221 حرفًا
+     ✔ findings-2026-11-05.json · 529,014 حرفًا
+     ✔ findings-2026-11-06.json · 538,912 حرفًا
+     ✔ findings-2026-11-07.json · 550,070 حرفًا
+     ✔ findings-2026-11-08.json · 558,577 حرفًا
+     ✔ findings-register.md · 1,796 حرفًا
+     ✔ lexicon-exceptions.json · 36,436 حرفًا
+     ✔ lexicon-library.json · 313,310 حرفًا
+     ✔ lexicon-library.md · 4,951 حرفًا
+     ✔ new-terms-register.json · 19,697 حرفًا
+     ✔ new-terms-register.md · 6,917 حرفًا
+     ✔ orthography-consistency.md · 3,343 حرفًا
+     ✔ recurring-phrases.md · 2,661 حرفًا
+     ✔ terminology-gaps.md · 598 حرفًا
+  2) ارتباط المكتبات بمن يقرؤها
+     ✔ findings-2026-10-20.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ findings-2026-10-21.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ findings-2026-10-22.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ findings-2026-10-23.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ findings-2026-10-24.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ findings-2026-10-25.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ findings-2026-10-26.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ findings-2026-10-27.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ findings-2026-10-28.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ findings-2026-10-29.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ findings-2026-10-30.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ findings-2026-10-31.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ findings-2026-11-01.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ findings-2026-11-02.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ findings-2026-11-03.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ findings-2026-11-04.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ findings-2026-11-05.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ findings-2026-11-06.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ findings-2026-11-07.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ findings-2026-11-08.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ findings-register.md ← validators/check_findings_closed.py, validators/check_library_use.py, tools/build_audit_report.py
+     ✔ lexicon-exceptions.json ← validators/check_prose_defects.py, tools/build_lexicon_corpus.py
+     ✔ lexicon-library.json ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ lexicon-library.md ← validators/check_findings_closed.py, validators/check_library_use.py, tools/audit_corpus.py
+     ✔ new-terms-register.json ← validators/check_library_use.py, tools/harvest_terms.py
+     ✔ new-terms-register.md ← validators/check_library_use.py, tools/harvest_terms.py
+     ✔ orthography-consistency.md ← sections/75-style.md, validators/check_findings_closed.py, validators/check_library_use.py
+     ✔ recurring-phrases.md ← validators/check_findings_closed.py, validators/check_library_use.py, tools/build_audit_report.py
+     ✔ terminology-gaps.md ← validators/check_findings_closed.py, validators/check_library_use.py, tools/build_audit_report.py
+  3) المهارات — الترويسة والروابط
+     ✔ marine-news-brain → references/adaptive-learning.md
+     ✔ marine-news-brain → references/source-policy.md
+     ✔ marine-news-brain → references/terminology.md
+     ✔ marine-news-brain → references/validation.md
+     ✔ marine-news-brain مطابقة لنسخة المستودع (5 ملفًا)
+     ✔ military-arabic-editing → references/adaptive-learning.md
+     ✔ military-arabic-editing → references/ambiguity-map.md
+     ✔ military-arabic-editing → references/commander-style.md
+     ✔ military-arabic-editing → references/terminology-map.md
+     ✔ military-arabic-editing مطابقة لنسخة المستودع (5 ملفًا)
+  4) إنفاذ القواعد الملزمة
+     ✔ كل نص ثابت يدخل مدى بوابة الأسلوب ← check_style (مُشغَّل في البوابة)
+     ✔ الرموز تُعرَّف في القاموس ← check_comprehension (مُشغَّل في البوابة)
+     ✔ التعدادات نقاطًا ← check_points_rule (مُشغَّل في البوابة)
+     ✔ الأرقام الإنجليزية ← check_numerals (مُشغَّل في البوابة)
+     ✔ فضلاء الرموز MN/EST منفصلة ← check_code_spaces (مُشغَّل في البوابة)
+     ✔ لا نقل خاطئ بين الإصدارات ← check_carryover (مُشغَّل في البوابة)
+     ✔ مطابقة شكل PDF ← check_pdf_format (مُشغَّل في البوابة)
+     ✔ تغطية فحص العقوبات ← check_ofac_coverage (مُشغَّل في البوابة)
+     ✔ سلامة المهارات ← check_skills_integrity (مُشغَّل في البوابة)
+  5) ترابط البوابات والأدوات والإجراء
+     أدوات تستدعيها البوابة: 28 · كلها موجودة
+     تدقيق المكتبات في البوابة: ✔
+  6) النقل والسرية
+     مسارات مطلقة: 0
+     ملفات بأسرار محتملة: 0
+
+النتيجة: 0 عائق · 0 تحذير
+
+OUTPUT_END

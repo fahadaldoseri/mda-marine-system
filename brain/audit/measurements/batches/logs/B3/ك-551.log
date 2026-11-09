@@ -1,0 +1,8 @@
+COMMAND: timeout 120 python3 -m pytest -q tests/test_three_root_causes_20261107.py
+STARTED_AT: 2026-11-09T00:12:04.337475+00:00
+RC: 0
+OUTPUT_BEGIN
+........                                                                 [100%]
+8 passed in 0.26s
+
+OUTPUT_END

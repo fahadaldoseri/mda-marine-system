@@ -1,0 +1,179 @@
+{
+ "batch": "A2",
+ "measured_at": "2026-11-09T00:04:23.910675+00:00",
+ "results": [
+  {
+   "fault_id": "ك-01",
+   "command": "SITE_DIR=/home/ubuntu/seawatch timeout 120 python3 tools/export_report_assets.py --date 2026-11-08 --only pdf",
+   "rc": 4,
+   "output_tail": "127.0.0.1 - - [08/Nov/2026 23:59:11] \"GET /assets/fonts/Noto-Kufi-Arabic-8bb3f61902.woff2 HTTP/1.1\" 200 -\n127.0.0.1 - - [08/Nov/2026 23:59:11] \"GET /assets/fonts/Noto-Kufi-Arabic-8e4b214d40.woff2 HTTP/1.1\" 200 -\n127.0.0.1 - - [08/Nov/2026 23:59:11] \"GET /assets/fonts/Noto-Kufi-Arabic-60828f5997.woff2 HTTP/1.1\" 200 -",
+   "log_file": "audit/measurements/batches/logs/A2/ك-01.log",
+   "sha256": "a0e56c5194b7d6181b3a6e74152062d8d1afa4442ed9e39bef068c876e64a78f",
+   "verdict": "لم يُغلق",
+   "barrier_text": "قياس مباشر: SITE_DIR=/home/ubuntu/seawatch timeout 120 python3 tools/export_report_assets.py --date 2026-11-08 --only pdf → rc=4 (لم يُغلق؛ السبب في السجل)",
+   "fix_applied": "",
+   "reason_if_not_closed": "rc=4: onts/Noto-Kufi-Arabic-8e4b214d40.woff2 HTTP/1.1\" 200 -\n127.0.0.1 - - [08/Nov/2026 23:59:11] \"GET /assets/fonts/Noto-Kufi-Arabic-60828f5997.woff2 HTTP/1.1\" 200 -"
+  },
+  {
+   "fault_id": "ك-27",
+   "command": "timeout 120 python3 tools/audit_broad_excepts.py --json",
+   "rc": 0,
+   "output_tail": "  }\n ]\n}",
+   "log_file": "audit/measurements/batches/logs/A2/ك-27.log",
+   "sha256": "87b44eb5e30f87aef42becb21f3482d63840d8fa4a86a4a17ba1a870275ae91b",
+   "verdict": "مغلق",
+   "barrier_text": "قياس مباشر: timeout 120 python3 tools/audit_broad_excepts.py --json → rc=0 · بصمة 87b44eb5e30f",
+   "fix_applied": "",
+   "reason_if_not_closed": ""
+  },
+  {
+   "fault_id": "ك-33",
+   "command": "timeout 120 bash -lc 'python3 tools/text_hash_guard.py --date 2026-11-08 --stage record && python3 tools/text_hash_guard.py --date 2026-11-08 --stage verify'",
+   "rc": 70,
+   "output_tail": "· بصمة النص قبل البناء: 7fd73a6ed382a25d — 2026-11-08T23:59:17Z\n  ✘ مخرج مفقود: 2026-11-08.html\n  ✘ النص المبني ليس النص النهائي — منع (البند أ)",
+   "log_file": "audit/measurements/batches/logs/A2/ك-33.log",
+   "sha256": "5fc0da85256c0178bfd185a2dad21301e44d01d186073704ab0f66da8d81eaea",
+   "verdict": "لم يُغلق",
+   "barrier_text": "قياس مباشر: timeout 120 bash -lc 'python3 tools/text_hash_guard.py --date 2026-11-08 --stage record && python3 tools/text_hash_guard.py --date 2026-11-08 --stage verify' → rc=70 (لم يُغلق؛ السبب في السجل)",
+   "fix_applied": "",
+   "reason_if_not_closed": "rc=70: · بصمة النص قبل البناء: 7fd73a6ed382a25d — 2026-11-08T23:59:17Z\n  ✘ مخرج مفقود: 2026-11-08.html\n  ✘ النص المبني ليس النص النهائي — منع (البند أ)"
+  },
+  {
+   "fault_id": "ك-57",
+   "command": "timeout 120 bash -lc 'bash -n tests/run_checks.sh && bash tests/run_checks.sh'",
+   "rc": 124,
+   "output_tail": "  ✔ عقد الجذر الصريح: موجب من /tmp وسالب للمفقود/المخالف\n  ✔ تقوية المحرّك (مسارات · ترتيب · gate-json · إتمام بالدليل)\n  ✔ اختبارات المحرّك الأصلية",
+   "log_file": "audit/measurements/batches/logs/A2/ك-57.log",
+   "sha256": "c05f5fb9a37fcda3f9dbdb38611b0d002e5b77fd0ec5c406e46f5e666e66194d",
+   "verdict": "لم يُغلق",
+   "barrier_text": "قياس مباشر: timeout 120 bash -lc 'bash -n tests/run_checks.sh && bash tests/run_checks.sh' → rc=124 (لم يُغلق؛ السبب في السجل)",
+   "fix_applied": "",
+   "reason_if_not_closed": "rc=124:   ✔ عقد الجذر الصريح: موجب من /tmp وسالب للمفقود/المخالف\n  ✔ تقوية المحرّك (مسارات · ترتيب · gate-json · إتمام بالدليل)\n  ✔ اختبارات المحرّك الأصلية"
+  },
+  {
+   "fault_id": "ك-58",
+   "command": "timeout 120 python3 validators/check_libraries_skills.py",
+   "rc": 0,
+   "output_tail": "     مسارات مطلقة: 0\n     ملفات بأسرار محتملة: 0\nالنتيجة: 0 عائق · 0 تحذير",
+   "log_file": "audit/measurements/batches/logs/A2/ك-58.log",
+   "sha256": "f23f85651615a4c48b3a6db3e0bc3a0196545aca2d5fde43c39344f3731a8a74",
+   "verdict": "مغلق",
+   "barrier_text": "قياس مباشر: timeout 120 python3 validators/check_libraries_skills.py → rc=0 · بصمة f23f85651615",
+   "fix_applied": "",
+   "reason_if_not_closed": ""
+  },
+  {
+   "fault_id": "ك-103",
+   "command": "timeout 120 python3 validators/check_pdf_format.py --pdf /home/ubuntu/seawatch/dist/reports/pdf/2026-10-29.pdf --date 2026-10-29",
+   "rc": 0,
+   "output_tail": "  ✓ لا فجوة داخلية ≥ 45 مم في متن التقرير\n  ✓ الغلاف والصفحة الأخيرة فوق حدّ التعبئة الأدنى\nالنتيجة: مطابق للشكل المعتمد (v3) ✓",
+   "log_file": "audit/measurements/batches/logs/A2/ك-103.log",
+   "sha256": "f932ad1b4fa2bc1b40f409eae41c78cb4dc93588a00d09d0830743fdc6bbaadf",
+   "verdict": "مغلق",
+   "barrier_text": "قياس مباشر: timeout 120 python3 validators/check_pdf_format.py --pdf /home/ubuntu/seawatch/dist/reports/pdf/2026-10-29.pdf --date 2026-10-29 → rc=0 · بصمة f932ad1b4fa2",
+   "fix_applied": "",
+   "reason_if_not_closed": ""
+  },
+  {
+   "fault_id": "ك-132",
+   "command": "timeout 120 bash -lc 'bash -n tests/run_checks.sh && bash tests/run_checks.sh'",
+   "rc": 124,
+   "output_tail": "  ✔ عقد الجذر الصريح: موجب من /tmp وسالب للمفقود/المخالف\n  ✔ تقوية المحرّك (مسارات · ترتيب · gate-json · إتمام بالدليل)\n  ✔ اختبارات المحرّك الأصلية",
+   "log_file": "audit/measurements/batches/logs/A2/ك-132.log",
+   "sha256": "a3cb021f6256bf7f2a328c1029f08bff40995e0576b553d1e14f852b6e11861a",
+   "verdict": "لم يُغلق",
+   "barrier_text": "قياس مباشر: timeout 120 bash -lc 'bash -n tests/run_checks.sh && bash tests/run_checks.sh' → rc=124 (لم يُغلق؛ السبب في السجل)",
+   "fix_applied": "",
+   "reason_if_not_closed": "rc=124:   ✔ عقد الجذر الصريح: موجب من /tmp وسالب للمفقود/المخالف\n  ✔ تقوية المحرّك (مسارات · ترتيب · gate-json · إتمام بالدليل)\n  ✔ اختبارات المحرّك الأصلية"
+  },
+  {
+   "fault_id": "ك-143",
+   "command": "timeout 120 bash tests/test_review2.sh 2026-11-08",
+   "rc": 1,
+   "output_tail": "── (ج) عنوان يتيم في PDF اصطناعي\n  ✔ العنوان اليتيم يمنع (وذُكر في المخرج)\n── الأثر: نجح 9 · فشل 2",
+   "log_file": "audit/measurements/batches/logs/A2/ك-143.log",
+   "sha256": "4ee597bdd5e6beae4202aae232541bb07422fa48eddac18bf13eea4f19f5a376",
+   "verdict": "لم يُغلق",
+   "barrier_text": "قياس مباشر: timeout 120 bash tests/test_review2.sh 2026-11-08 → rc=1 (لم يُغلق؛ السبب في السجل)",
+   "fix_applied": "",
+   "reason_if_not_closed": "rc=1: ── (ج) عنوان يتيم في PDF اصطناعي\n  ✔ العنوان اليتيم يمنع (وذُكر في المخرج)\n── الأثر: نجح 9 · فشل 2"
+  },
+  {
+   "fault_id": "ك-151",
+   "command": "timeout 120 python3 tools/audit_broad_excepts.py --json",
+   "rc": 1,
+   "output_tail": "  }\n ]\n}",
+   "log_file": "audit/measurements/batches/logs/A2/ك-151.log",
+   "sha256": "b74b3d2e45b18b2e820aff0b3f292bf2eba3b4fc42309748b1ca433aca4fea0b",
+   "verdict": "لم يُغلق",
+   "barrier_text": "قياس مباشر: timeout 120 python3 tools/audit_broad_excepts.py --json → rc=1 (لم يُغلق؛ السبب في السجل)",
+   "fix_applied": "",
+   "reason_if_not_closed": "rc=1:   }\n ]\n}"
+  },
+  {
+   "fault_id": "ك-162",
+   "command": "timeout 120 python3 validators/check_secrets.py --root .",
+   "rc": 0,
+   "output_tail": "✔ بوابة الأسرار: لا سرّ في النطاق المفحوص",
+   "log_file": "audit/measurements/batches/logs/A2/ك-162.log",
+   "sha256": "cffa585e2a73a217abb3541cd559bb5e69e1779c24540909ef50ad088f7f4c35",
+   "verdict": "مغلق",
+   "barrier_text": "قياس مباشر: timeout 120 python3 validators/check_secrets.py --root . → rc=0 · بصمة cffa585e2a73",
+   "fix_applied": "",
+   "reason_if_not_closed": ""
+  },
+  {
+   "fault_id": "ك-209",
+   "command": "timeout 120 python3 validators/check_prose_defects.py --md reports/2026-11-08-sectioned.md --structured-registry",
+   "rc": 0,
+   "output_tail": "| قالب جملة متكرر أكثر من مرتين (تحذير) | 0 | تحذير |\n| كلمات خارج المعجم (تحذير) | 0 | تحذير |\nالنتيجة: نجاح — لا عيوب مانعة ولا كلمات مشتبهة.",
+   "log_file": "audit/measurements/batches/logs/A2/ك-209.log",
+   "sha256": "ddedf20f0cc7ef60cdd334ae5eea4395af9cdc4c69c760f9b9164a179107c60e",
+   "verdict": "مغلق",
+   "barrier_text": "قياس مباشر: timeout 120 python3 validators/check_prose_defects.py --md reports/2026-11-08-sectioned.md --structured-registry → rc=0 · بصمة ddedf20f0cc7",
+   "fix_applied": "",
+   "reason_if_not_closed": ""
+  },
+  {
+   "fault_id": "ك-298",
+   "command": "timeout 120 bash -lc 'python3 validators/check_additions_surface.py --date 2026-10-29 --site /home/ubuntu/seawatch && python3 validators/check_code_policy.py /home/ubuntu/seawatch/dist'",
+   "rc": 1,
+   "output_tail": "   ✔ special-gfs-pride-giselle-2026-10-15.html: كامل داخل الوقائع 0 · خارجها 0 · في الترويسة/المقدمة 0 · مدموج برقم بلاغ 0\n   ✔ special.html: كامل داخل الوقائع 0 · خارجها 0 · في الترويسة/المقدمة 0 · مدموج برقم بلاغ 0\n  النتيجة: 27 صفحة مخالفة",
+   "log_file": "audit/measurements/batches/logs/A2/ك-298.log",
+   "sha256": "9abd61c31f2ae602b60f1fcbe68eddfdcd442844090c9e5e5860ab7c19906b59",
+   "verdict": "لم يُغلق",
+   "barrier_text": "قياس مباشر: timeout 120 bash -lc 'python3 validators/check_additions_surface.py --date 2026-10-29 --site /home/ubuntu/seawatch && python3 validators/check_code_policy.py /home/ubuntu/seawatch/dist' → rc=1 (لم يُغلق؛ السبب في السجل)",
+   "fix_applied": "",
+   "reason_if_not_closed": "rc=1: ي الترويسة/المقدمة 0 · مدموج برقم بلاغ 0\n   ✔ special.html: كامل داخل الوقائع 0 · خارجها 0 · في الترويسة/المقدمة 0 · مدموج برقم بلاغ 0\n  النتيجة: 27 صفحة مخالفة"
+  },
+  {
+   "fault_id": "ك-308",
+   "command": "timeout 120 python3 validators/check_pdf_format.py --pdf /home/ubuntu/seawatch/dist/reports/pdf/2026-10-29.pdf --date 2026-10-29",
+   "rc": 4,
+   "output_tail": "  ✓ الغلاف والصفحة الأخيرة فوق حدّ التعبئة الأدنى\n  ✗ نمط الطباعة تغيّر عن المعتمد (المعتمد e5ca691904c4d77e · الحالي 25f8825e360acc30)\nالنتيجة: مخالف للشكل المعتمد (1 مخالفة)",
+   "log_file": "audit/measurements/batches/logs/A2/ك-308.log",
+   "sha256": "2ea8f33814dd93d8517901d2149b89a77671b799aa296e2ac4716ec522c8d11e",
+   "verdict": "لم يُغلق",
+   "barrier_text": "قياس مباشر: timeout 120 python3 validators/check_pdf_format.py --pdf /home/ubuntu/seawatch/dist/reports/pdf/2026-10-29.pdf --date 2026-10-29 → rc=4 (لم يُغلق؛ السبب في السجل)",
+   "fix_applied": "",
+   "reason_if_not_closed": "rc=4: فحة الأخيرة فوق حدّ التعبئة الأدنى\n  ✗ نمط الطباعة تغيّر عن المعتمد (المعتمد e5ca691904c4d77e · الحالي 25f8825e360acc30)\nالنتيجة: مخالف للشكل المعتمد (1 مخالفة)"
+  },
+  {
+   "fault_id": "ك-310",
+   "command": "timeout 120 python3 tools/check_lang_switch_live.py --url file:///home/ubuntu/seawatch/dist --date 2026-10-29",
+   "rc": 1,
+   "output_tail": "=========================== logs ===========================\nwaiting for navigation to \"**/reports/en/2026-10-29.html\" until 'load'\n============================================================",
+   "log_file": "audit/measurements/batches/logs/A2/ك-310.log",
+   "sha256": "0985f0b586cbc1ab30087abd49d20e7c35041735b77fcf28c32fcd02ae2280b5",
+   "verdict": "لم يُغلق",
+   "barrier_text": "قياس مباشر: timeout 120 python3 tools/check_lang_switch_live.py --url file:///home/ubuntu/seawatch/dist --date 2026-10-29 → rc=1 (لم يُغلق؛ السبب في السجل)",
+   "fix_applied": "",
+   "reason_if_not_closed": "rc=1:  ===========================\nwaiting for navigation to \"**/reports/en/2026-10-29.html\" until 'load'\n============================================================"
+  }
+ ],
+ "summary": {
+  "closed": 5,
+  "not_closed": 9,
+  "total": 14
+ }
+}

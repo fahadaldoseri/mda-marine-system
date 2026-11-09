@@ -41,9 +41,9 @@ def _site_root():
     if e and _Path(e).is_dir():
         return _Path(e)
     for r in _C:
-        c = r / "seawatch"
-        if (c / "generator").is_dir():
-            return c
+        for c in (r / "seawatch", r / "site", r.parent / "seawatch"):
+            if (c / "generator").is_dir():
+                return c
     return _C[0] / "seawatch"
 SITE = _site_root()
 

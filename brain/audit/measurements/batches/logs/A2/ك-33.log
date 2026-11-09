@@ -1,0 +1,9 @@
+COMMAND: timeout 120 bash -lc 'python3 tools/text_hash_guard.py --date 2026-11-08 --stage record && python3 tools/text_hash_guard.py --date 2026-11-08 --stage verify'
+STARTED_AT: 2026-11-08T23:59:17.902929+00:00
+RC: 70
+OUTPUT_BEGIN
+  · بصمة النص قبل البناء: 7fd73a6ed382a25d — 2026-11-08T23:59:17Z
+  ✘ مخرج مفقود: 2026-11-08.html
+  ✘ النص المبني ليس النص النهائي — منع (البند أ)
+
+OUTPUT_END

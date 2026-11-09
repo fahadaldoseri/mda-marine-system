@@ -35,7 +35,18 @@ def _skills_dir(brain: Path) -> Path:
 
 SKILLS = _skills_dir(B)
 SKILL_NAMES = ("marine-news-brain", "military-arabic-editing")
-SITE = Path(os.environ.get("SITE_DIR") or B.parent / "seawatch")
+def _site_dir(brain: Path) -> Path:
+    """اختيار جذر الموقع من البيئة أو من تخطيطات brain/site وbrain/../seawatch."""
+    candidates = [os.environ.get("SITE_DIR"), os.environ.get("SITE"),
+                  str(brain.parent / "site"), str(brain.parent / "seawatch"),
+                  str(brain.parent.parent / "seawatch")]
+    for value in candidates:
+        if value and (Path(value) / "generator").is_dir():
+            return Path(value)
+    return brain.parent / "site"
+
+
+SITE = _site_dir(B)
 REPO_SKILLS = (Path(os.environ["BACKUP_REPO_DIR"]) / "skills" if os.environ.get("BACKUP_REPO_DIR")
                else (B.parent / "skills" if (B.parent / "skills").is_dir() and (B.parent / ".git").exists()
                      else B.parent / "mda-marine-system" / "skills"))

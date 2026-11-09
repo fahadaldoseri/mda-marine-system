@@ -1,0 +1,42 @@
+COMMAND: SITE_DIR=/home/ubuntu/seawatch timeout 120 python3 tools/export_report_assets.py --date 2026-11-08 --only pdf
+STARTED_AT: 2026-11-08T23:59:09.288889+00:00
+RC: 4
+OUTPUT_BEGIN
+هوية الترويسة: 12 أكتوبر 2026 · تصنيف: عام
+حجب قسم المصادر: لم يُعثر على القسم
+ملحق إضافات: 14 قسمًا
+إدراج الفهرس: 17 بندًا
+عزل النطاقات: 101 موضعًا
+إدراج الفهرس: 17 بندًا
+عزل النطاقات: 103 موضعًا
+[pdf] /home/ubuntu/seawatch/dist/reports/pdf/2026-11-08.pdf (1017 ك.ب)
+[toc] 17 قسمًا · أرقام صفحات مُثبتة لـ17
+فحص شكل PDF: 2026-11-08.pdf
+  ✓ أقسام المصدر: 16 — كلها حاضرة
+  ✓ تذييل الترقيم على 12 صفحة
+  ✓ متوسط التعبئة 94.3%
+  ✓ لا عنوان قسم أو بطاقة يتيم آخر ورقة
+  ✗ مفتاح الخريطة غائب أو ناقص (رموز: 7)
+  ✗ صفحات قليلة التعبئة: [(12, 51)]
+  ✗ فجوات داخلية كبيرة في متن التقرير: ص8=53.7 مم
+  ✗ الغلاف/الصفحة الأخيرة تعبئتها منخفضة: [(12, 51)]
+النتيجة: مخالف للشكل المعتمد (4 مخالفة)
+!! الشكل مخالف للمعتمد — لا يُسلَّم هذا الملف حتى يُصلح أو يُعتمد تغييرًا جديدًا
+127.0.0.1 - - [08/Nov/2026 23:59:10] "GET /reports/2026-11-08.html HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 23:59:10] "GET /assets/fonts/fonts.css HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 23:59:11] "GET /assets/fonts/IBM-Plex-Sans-Arabic-9d7d8908d8.woff2 HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 23:59:11] "GET /assets/fonts/IBM-Plex-Sans-Arabic-215a0591c7.woff2 HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 23:59:11] "GET /assets/fonts/IBM-Plex-Sans-Arabic-e55808264f.woff2 HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 23:59:11] "GET /assets/fonts/IBM-Plex-Sans-Arabic-cc13efa996.woff2 HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 23:59:11] "GET /assets/fonts/IBM-Plex-Sans-Arabic-9b30723842.woff2 HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 23:59:11] "GET /assets/fonts/IBM-Plex-Sans-Arabic-5d0529032f.woff2 HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 23:59:11] "GET /assets/fonts/Noto-Kufi-Arabic-0eac785d4a.woff2 HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 23:59:11] "GET /assets/fonts/IBM-Plex-Sans-Arabic-035d74b2ed.woff2 HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 23:59:11] "GET /assets/fonts/IBM-Plex-Sans-Arabic-0e94089077.woff2 HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 23:59:11] "GET /assets/fonts/IBM-Plex-Mono-1b581b1518.woff2 HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 23:59:11] "GET /assets/fonts/IBM-Plex-Mono-e2661bcc0d.woff2 HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 23:59:11] "GET /assets/fonts/Noto-Kufi-Arabic-8bb3f61902.woff2 HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 23:59:11] "GET /assets/fonts/Noto-Kufi-Arabic-8e4b214d40.woff2 HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 23:59:11] "GET /assets/fonts/Noto-Kufi-Arabic-60828f5997.woff2 HTTP/1.1" 200 -
+
+OUTPUT_END
