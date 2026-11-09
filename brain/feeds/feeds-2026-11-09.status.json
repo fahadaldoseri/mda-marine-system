@@ -1,0 +1,1323 @@
+{
+ "date": "2026-11-09",
+ "status": "degraded",
+ "checked": 60,
+ "ok": 51,
+ "failed": 9,
+ "browser_only": [],
+ "manual_reference": [
+  39,
+  52
+ ],
+ "stale": [
+  12,
+  13,
+  20,
+  30,
+  31,
+  32
+ ],
+ "empty": [],
+ "stale_days_limit": 14,
+ "fail_ratio": 0.15,
+ "fail_ratio_limit": 0.2,
+ "items": 1875,
+ "checked_feeds": [
+  {
+   "num": 1,
+   "name": "UKMTO — الحوادث الأخيرة",
+   "primary_url": "https://www.ukmto.org/recent-incidents",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.ukmto.org/recent-incidents",
+   "items_count": 1,
+   "content_chars": 14282,
+   "latest_age_days": null,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 2,
+   "name": "UKMTO — التحذيرات 2026",
+   "primary_url": "https://r.jina.ai/https://www.ukmto.org/ukmto-products/warnings/2026",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://r.jina.ai/https://www.ukmto.org/ukmto-products/warnings/2026",
+   "items_count": 9,
+   "content_chars": 1317,
+   "latest_age_days": null,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 3,
+   "name": "UKMTO — النشرات الاستشارية 2026",
+   "primary_url": "https://r.jina.ai/https://www.ukmto.org/ukmto-products/advisories/2026",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://r.jina.ai/https://www.ukmto.org/ukmto-products/advisories/2026",
+   "items_count": 4,
+   "content_chars": 927,
+   "latest_age_days": null,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 4,
+   "name": "UKMTO — التقارير الأسبوعية 2026",
+   "primary_url": "https://r.jina.ai/https://www.ukmto.org/ukmto-products/weekly-reports/2026",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://r.jina.ai/https://www.ukmto.org/ukmto-products/weekly-reports/2026",
+   "items_count": 4,
+   "content_chars": 1082,
+   "latest_age_days": null,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 5,
+   "name": "IMO — سجل الحوادث المؤكدة",
+   "primary_url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+   "ok": true,
+   "via": "official-page:jina.ai/imo-middle-east-incidents",
+   "fetched_url": "https://r.jina.ai/https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+   "items_count": 8,
+   "content_chars": 13863,
+   "latest_age_days": null,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 6,
+   "name": "straits.live",
+   "primary_url": "https://straits.live/feed.xml",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://straits.live/feed.xml",
+   "items_count": 56,
+   "content_chars": 24498,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 6,
+   "name": "straits.live",
+   "primary_url": "https://straits.live/briefs/feed.xml",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://straits.live/briefs/feed.xml",
+   "items_count": 60,
+   "content_chars": 110884,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 7,
+   "name": "gCaptain",
+   "primary_url": "https://gcaptain.com/feed/",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://gcaptain.com/feed/",
+   "items_count": 12,
+   "content_chars": 2877,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 8,
+   "name": "TradeWinds",
+   "primary_url": "https://services.tradewindsnews.com/api/feed/rss",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://services.tradewindsnews.com/api/feed/rss",
+   "items_count": 202,
+   "content_chars": 121641,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 9,
+   "name": "Seatrade Maritime",
+   "primary_url": "https://www.seatrade-maritime.com/rss.xml",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.seatrade-maritime.com/rss.xml",
+   "items_count": 50,
+   "content_chars": 4100,
+   "latest_age_days": -17,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 10,
+   "name": "الجزيرة نت",
+   "primary_url": "https://www.ajnet.me/rss",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.ajnet.me/rss",
+   "items_count": 25,
+   "content_chars": 10133,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 11,
+   "name": "الجزيرة الإنجليزية",
+   "primary_url": "https://www.aljazeera.com/xml/rss/all.xml",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.aljazeera.com/xml/rss/all.xml",
+   "items_count": 25,
+   "content_chars": 7297,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 12,
+   "name": "OFAC — الإجراءات الأخيرة",
+   "primary_url": "https://ofac.treasury.gov/rss.xml",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://ofac.treasury.gov/rss.xml",
+   "items_count": 10,
+   "content_chars": 206234,
+   "latest_age_days": 634,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 13,
+   "name": "ShipNext — التحقق من السفن",
+   "primary_url": "https://shipnext.com/vessel/9315159-cameroon-prosperity",
+   "ok": true,
+   "via": "official-api:shipnext/vessel-9315159",
+   "fetched_url": "https://shipnext.com/api/v2/fleet/public/9315159",
+   "items_count": 1,
+   "content_chars": 3093,
+   "latest_age_days": 84,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 14,
+   "name": "قناة العربية",
+   "primary_url": "https://www.alarabiya.net/feed/rss2/ar.xml",
+   "ok": true,
+   "via": "fallback:jina.ai/alarabiya-rss",
+   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
+   "items_count": 12,
+   "content_chars": 122017,
+   "latest_age_days": null,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 14,
+   "name": "قناة العربية",
+   "primary_url": "https://www.alarabiya.net/feed/rss2/ar/arab-and-world.xml",
+   "ok": true,
+   "via": "fallback:jina.ai/alarabiya-rss",
+   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
+   "items_count": 12,
+   "content_chars": 122017,
+   "latest_age_days": null,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 14,
+   "name": "قناة العربية",
+   "primary_url": "https://www.alarabiya.net/feed/rss2/ar/aswaq.xml",
+   "ok": true,
+   "via": "fallback:jina.ai/alarabiya-home",
+   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/",
+   "items_count": 26,
+   "content_chars": 66891,
+   "latest_age_days": null,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 16,
+   "name": "حساب @bna_ar على X",
+   "primary_url": "https://www.bahrain.bh/wps/portal/en/BNP/RssFeedReader",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.bahrain.bh/wps/portal/en/BNP/RssFeedReader",
+   "items_count": 8,
+   "content_chars": 3155,
+   "latest_age_days": null,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 17,
+   "name": "حساب @bna_en على X",
+   "primary_url": "https://web.archive.org/web/20260108135704/https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "latest_age_days": null,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: حجب مصدر — رفض الخادم الطلب (HTTP 403) | official:bna-en-rss: حجب مصدر — human verification page (HTTP 405)"
+  },
+  {
+   "num": 20,
+   "name": "جريدة الأيام",
+   "primary_url": "http://feeds.feedburner.com/alayam-news-list-all",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "http://feeds.feedburner.com/alayam-news-list-all",
+   "items_count": 15,
+   "content_chars": 7042,
+   "latest_age_days": 1030,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 20,
+   "name": "جريدة الأيام",
+   "primary_url": "http://feeds.feedburner.com/alayam-online-international-news",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "http://feeds.feedburner.com/alayam-online-international-news",
+   "items_count": 8,
+   "content_chars": 3675,
+   "latest_age_days": 1030,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 20,
+   "name": "جريدة الأيام",
+   "primary_url": "https://www.alayam.com/pages/rss",
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "latest_age_days": null,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Attention Required (HTTP 403) | fallback:jina.ai/alayam-home: blocked page: Attention Required | fallback:jina.ai/alayam-rss: blocked page: Attention Required"
+  },
+  {
+   "num": 21,
+   "name": "جريدة أخبار الخليج",
+   "primary_url": "https://akhbar-alkhaleej.com/",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://akhbar-alkhaleej.com/",
+   "items_count": 47,
+   "content_chars": 7388,
+   "latest_age_days": null,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 22,
+   "name": "جريدة البلاد",
+   "primary_url": "https://www.albiladpress.com/rss",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.albiladpress.com/rss",
+   "items_count": 100,
+   "content_chars": 17475,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 23,
+   "name": "Gulf Daily News",
+   "primary_url": "https://www.gdnonline.com",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.gdnonline.com",
+   "items_count": 49,
+   "content_chars": 20622,
+   "latest_age_days": null,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 24,
+   "name": "وكالة الأنباء القطرية (قنا)",
+   "primary_url": "https://qna.org.qa/en/RSS-Feeds",
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "latest_age_days": null,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: derived items without real content (2)"
+  },
+  {
+   "num": 24,
+   "name": "وكالة الأنباء القطرية (قنا)",
+   "primary_url": "https://qna.org.qa/en/Pages/RSS-Feeds/Analysis-and-Reports",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://qna.org.qa/en/Pages/RSS-Feeds/Analysis-and-Reports",
+   "items_count": 49,
+   "content_chars": 30217,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 24,
+   "name": "وكالة الأنباء القطرية (قنا)",
+   "primary_url": "https://qna.org.qa/en/Pages/RSS-Feeds/Qatar",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://qna.org.qa/en/Pages/RSS-Feeds/Qatar",
+   "items_count": 50,
+   "content_chars": 27727,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 25,
+   "name": "وكالة أنباء الإمارات (وام)",
+   "primary_url": "https://www.wam.ae/ar/rss",
+   "ok": true,
+   "via": "official-telegram:wamnews_en",
+   "fetched_url": "https://t.me/s/wamnews_en",
+   "items_count": 17,
+   "content_chars": 3851,
+   "latest_age_days": 2,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 25,
+   "name": "وكالة أنباء الإمارات (وام)",
+   "primary_url": "https://www.wam.ae/en/rss",
+   "ok": true,
+   "via": "official-telegram:wamnews_en",
+   "fetched_url": "https://t.me/s/wamnews_en",
+   "items_count": 17,
+   "content_chars": 3851,
+   "latest_age_days": 2,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 26,
+   "name": "وكالة الأنباء السعودية (واس)",
+   "primary_url": "https://www.spa.gov.sa/rss.xml",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.spa.gov.sa/rss.xml",
+   "items_count": 13,
+   "content_chars": 137029,
+   "latest_age_days": null,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 26,
+   "name": "وكالة الأنباء السعودية (واس)",
+   "primary_url": "https://www.spa.gov.sa/feed",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.spa.gov.sa/feed",
+   "items_count": 13,
+   "content_chars": 137029,
+   "latest_age_days": null,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 27,
+   "name": "وكالة الأنباء الكويتية (كونا)",
+   "primary_url": "https://www.kuna.net.kw",
+   "ok": true,
+   "via": "official-page:jina.ai/kuna",
+   "fetched_url": "https://r.jina.ai/https://www.kuna.net.kw",
+   "items_count": 60,
+   "content_chars": 14913,
+   "latest_age_days": null,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 28,
+   "name": "وكالة الأنباء العُمانية",
+   "primary_url": "https://omannews.gov.om/rss.ona",
+   "ok": true,
+   "via": "fallback:jina.ai/omannews-home",
+   "fetched_url": "https://r.jina.ai/http://omannews.gov.om/",
+   "items_count": 60,
+   "content_chars": 15423,
+   "latest_age_days": null,
+   "tls_verification": "disabled_source_28_only"
+  },
+  {
+   "num": 28,
+   "name": "وكالة الأنباء العُمانية",
+   "primary_url": "https://omannews.gov.om/rssinfo/",
+   "ok": true,
+   "via": "fallback:jina.ai/omannews-home",
+   "fetched_url": "https://r.jina.ai/http://omannews.gov.om/",
+   "items_count": 60,
+   "content_chars": 15423,
+   "latest_age_days": null,
+   "tls_verification": "disabled_source_28_only"
+  },
+  {
+   "num": 29,
+   "name": "البحرية الملكية البريطانية",
+   "primary_url": "https://www.royalnavy.mod.uk/news",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.royalnavy.mod.uk/news",
+   "items_count": 3,
+   "content_chars": 984,
+   "latest_age_days": null,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 30,
+   "name": "القيادة المركزية الأمريكية (سنتكوم)",
+   "primary_url": "https://www.centcom.mil/DesktopModules/ArticleCS/RSS.ashx?ContentType=1&Site=808&isdashboardselected=0&max=20",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.centcom.mil/DesktopModules/ArticleCS/RSS.ashx?ContentType=1&Site=808&isdashboardselected=0&max=20",
+   "items_count": 20,
+   "content_chars": 25675,
+   "latest_age_days": 276,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 31,
+   "name": "JMIC",
+   "primary_url": "https://combinedmaritimeforces.com/feed/",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://combinedmaritimeforces.com/feed/",
+   "items_count": 15,
+   "content_chars": 48660,
+   "latest_age_days": 19,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 32,
+   "name": "IMB/ICC — القرصنة",
+   "primary_url": "https://icc-ccs.org/feed/",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://icc-ccs.org/feed/",
+   "items_count": 10,
+   "content_chars": 50781,
+   "latest_age_days": 24,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 33,
+   "name": "MARAD/MSCI",
+   "primary_url": "https://www.maritime.dot.gov/rss.xml",
+   "ok": true,
+   "via": "fallback:jina.ai/marad-rss",
+   "fetched_url": "https://r.jina.ai/http://www.maritime.dot.gov/rss.xml",
+   "items_count": 11,
+   "content_chars": 2021,
+   "latest_age_days": null,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 34,
+   "name": "MSCIO",
+   "primary_url": "https://www.mscio.eu/alerts/",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.mscio.eu/alerts/",
+   "items_count": 3,
+   "content_chars": 1535,
+   "latest_age_days": null,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 35,
+   "name": "Splash 247",
+   "primary_url": "https://splash247.com/feed/",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://splash247.com/feed/",
+   "items_count": 10,
+   "content_chars": 7750,
+   "latest_age_days": 2,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 35,
+   "name": "Splash 247",
+   "primary_url": "https://splash247.com/feed/atom/",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://splash247.com/feed/atom/",
+   "items_count": 10,
+   "content_chars": 5272,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 36,
+   "name": "Lloyd's List",
+   "primary_url": "https://www.lloydslist.com/rss/lloyds-list",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.lloydslist.com/rss/lloyds-list",
+   "items_count": 20,
+   "content_chars": 16518,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 36,
+   "name": "Lloyd's List",
+   "primary_url": "https://www.lloydslist.com/rss-feeds",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.lloydslist.com/rss-feeds",
+   "items_count": 4,
+   "content_chars": 4787,
+   "latest_age_days": null,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 37,
+   "name": "MarineLink",
+   "primary_url": "https://www.marinelink.com/news/rss",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.marinelink.com/news/rss",
+   "items_count": 10,
+   "content_chars": 4519,
+   "latest_age_days": 2,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 37,
+   "name": "MarineLink",
+   "primary_url": "https://www.marinelink.com/blogs/rss?type=video",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.marinelink.com/blogs/rss?type=video",
+   "items_count": 10,
+   "content_chars": 7171,
+   "latest_age_days": 8,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 38,
+   "name": "Jerusalem Post",
+   "primary_url": "https://www.jpost.com/rss",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.jpost.com/rss",
+   "items_count": 3,
+   "content_chars": 9169,
+   "latest_age_days": null,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 38,
+   "name": "Jerusalem Post",
+   "primary_url": "https://www.jpost.com/rss/rssfeedsmiddleeastnews.aspx",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.jpost.com/rss/rssfeedsmiddleeastnews.aspx",
+   "items_count": 30,
+   "content_chars": 34012,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 40,
+   "name": "MarineTraffic",
+   "primary_url": "https://www.marinetraffic.com/en/maritime-news",
+   "ok": true,
+   "via": "official:marinetraffic-blog",
+   "fetched_url": "https://www.marinetraffic.com/blog/",
+   "items_count": 18,
+   "content_chars": 21273,
+   "latest_age_days": null,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 41,
+   "name": "USNI News",
+   "primary_url": "https://news.usni.org/feed",
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "latest_age_days": null,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | official-page:jina.ai/usni-news: derived items without real content (1) | browser: مسار المتصفح: مرئي: HTTP 403 · 44527B — تحدي قائم | مرئي: HTTP 403 · 44717B — تحدي قائم | مرئي: HTTP 403 · 44527B — تحدي قائم | مجرَّد: HTTP 403 · 44575B — تحدي قائم"
+  },
+  {
+   "num": 42,
+   "name": "Naval News",
+   "primary_url": "https://www.navalnews.com/feed/",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.navalnews.com/feed/",
+   "items_count": 10,
+   "content_chars": 46705,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 43,
+   "name": "The Maritime Executive",
+   "primary_url": "https://maritime-executive.com/",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://maritime-executive.com/",
+   "items_count": 31,
+   "content_chars": 19952,
+   "latest_age_days": null,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 44,
+   "name": "Windward",
+   "primary_url": "https://windward.ai/feed/",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://windward.ai/feed/",
+   "items_count": 12,
+   "content_chars": 76597,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 45,
+   "name": "IRIB News",
+   "primary_url": "https://www.iribnews.ir/fa/rss/allnews",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.iribnews.ir/fa/rss/allnews",
+   "items_count": 100,
+   "content_chars": 32818,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 46,
+   "name": "ISNA",
+   "primary_url": "https://www.isna.ir/rss",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.isna.ir/rss",
+   "items_count": 30,
+   "content_chars": 30962,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 46,
+   "name": "ISNA",
+   "primary_url": "https://en.isna.ir/rss",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://en.isna.ir/rss",
+   "items_count": 30,
+   "content_chars": 14038,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 47,
+   "name": "Mehr — العربي",
+   "primary_url": "https://ar.mehrnews.com/rss",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://ar.mehrnews.com/rss",
+   "items_count": 30,
+   "content_chars": 29149,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 47,
+   "name": "Mehr — العربي",
+   "primary_url": "https://en.mehrnews.com/rss",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://en.mehrnews.com/rss",
+   "items_count": 30,
+   "content_chars": 14462,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 48,
+   "name": "Institute for the Study of War",
+   "primary_url": "https://www.understandingwar.org/wp-json/wp/v2/posts?per_page=10",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.understandingwar.org/wp-json/wp/v2/posts?per_page=10",
+   "items_count": 10,
+   "content_chars": 307548,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 49,
+   "name": "Sanaa Center",
+   "primary_url": "https://sanaacenter.org/feed/",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://sanaacenter.org/feed/",
+   "items_count": 20,
+   "content_chars": 6108,
+   "latest_age_days": 3,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 50,
+   "name": "Navy Times",
+   "primary_url": "https://www.navytimes.com/feed/",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.navytimes.com/feed/",
+   "items_count": 10,
+   "content_chars": 60341,
+   "latest_age_days": 2,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 51,
+   "name": "Baird Maritime",
+   "primary_url": "https://www.bairdmaritime.com/feed/",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.bairdmaritime.com/feed/",
+   "items_count": 3,
+   "content_chars": 8438,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 53,
+   "name": "New York Times — الشرق الأوسط",
+   "primary_url": "https://rss.nytimes.com/services/xml/rss/nyt/MiddleEast.xml",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://rss.nytimes.com/services/xml/rss/nyt/MiddleEast.xml",
+   "items_count": 27,
+   "content_chars": 22837,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 54,
+   "name": "Bloomberg",
+   "primary_url": "https://feeds.bloomberg.com/markets/news.rss",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://feeds.bloomberg.com/markets/news.rss",
+   "items_count": 20,
+   "content_chars": 3237,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 54,
+   "name": "Bloomberg",
+   "primary_url": "https://feeds.bloomberg.com/politics/news.rss",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://feeds.bloomberg.com/politics/news.rss",
+   "items_count": 20,
+   "content_chars": 3356,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 55,
+   "name": "Axios",
+   "primary_url": "https://api.axios.com/feed/",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://api.axios.com/feed/",
+   "items_count": 100,
+   "content_chars": 840160,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 58,
+   "name": "المركز الإعلامي للقوات المسلحة اليمنية",
+   "primary_url": "https://yafm.net/",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://yafm.net/",
+   "items_count": 47,
+   "content_chars": 7281,
+   "latest_age_days": null,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 15,
+   "name": "حساب @UK_MTO على X",
+   "primary_url": "https://x.com/UK_MTO",
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "latest_age_days": null,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/UK_MTO\nCall log:\n  - navigating to \"https://x.com/UK_MTO\", waiting until \"domcontentl"
+  },
+  {
+   "num": 17,
+   "name": "حساب @bna_en على X",
+   "primary_url": "https://x.com/bna_en",
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "latest_age_days": null,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | official:bna-en-rss: حجب مصدر — human verification page (HTTP 405) | archive:bna-en-rss: حجب مصدر — رفض الخادم الطلب (HTTP 403)"
+  },
+  {
+   "num": 18,
+   "name": "حساب @bahdiplomatic على X",
+   "primary_url": "https://x.com/bahdiplomatic",
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "latest_age_days": null,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/bahdiplomatic\nCall log:\n  - navigating to \"https://x.com/bahdiplomatic\", waiting unti"
+  },
+  {
+   "num": 19,
+   "name": "حساب @US5thFleet على X",
+   "primary_url": "https://x.com/us5thfleet",
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "latest_age_days": null,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/us5thfleet\nCall log:\n  - navigating to \"https://x.com/us5thfleet\", waiting until \"dom"
+  },
+  {
+   "num": 56,
+   "name": "حساب @YemenResistanc1 على X",
+   "primary_url": "https://x.com/YemenResistanc1",
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "latest_age_days": null,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/YemenResistanc1\nCall log:\n  - navigating to \"https://x.com/YemenResistanc1\", waiting "
+  },
+  {
+   "num": 57,
+   "name": "حساب @spokespersonyem على X",
+   "primary_url": "https://x.com/spokespersonyem",
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "latest_age_days": null,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/spokespersonyem\nCall log:\n  - navigating to \"https://x.com/spokespersonyem\", waiting "
+  },
+  {
+   "num": 59,
+   "name": "المتحدث العسكري للطرف المقابل (تلغرام)",
+   "primary_url": "https://t.me/s/army21ye",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://t.me/s/army21ye",
+   "items_count": 13,
+   "content_chars": 16396,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 60,
+   "name": "حساب @CJFCSpox على X",
+   "primary_url": "https://x.com/CJFCSpox",
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "latest_age_days": null,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/CJFCSpox\nCall log:\n  - navigating to \"https://x.com/CJFCSpox\", waiting until \"domcont"
+  },
+  {
+   "num": 61,
+   "name": "حساب @ERYANIM على X",
+   "primary_url": "https://x.com/ERYANIM",
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "latest_age_days": null,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/ERYANIM\nCall log:\n  - navigating to \"https://x.com/ERYANIM\", waiting until \"domconten"
+  },
+  {
+   "num": 62,
+   "name": "حساب @Yemenarmyeng على X",
+   "primary_url": "https://x.com/Yemenarmyeng",
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "latest_age_days": null,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/Yemenarmyeng\nCall log:\n  - navigating to \"https://x.com/Yemenarmyeng\", waiting until "
+  },
+  {
+   "num": 14,
+   "name": "قناة العربية — الحساب الرسمي على X",
+   "primary_url": "https://x.com/AlArabiya",
+   "ok": true,
+   "via": "fallback:jina.ai/alarabiya-rss",
+   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
+   "items_count": 12,
+   "content_chars": 122017,
+   "latest_age_days": null,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 41,
+   "name": "USNI News — تغذية عبر وسيط قراءة",
+   "primary_url": "https://r.jina.ai/https://news.usni.org/feed",
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://r.jina.ai/https://news.usni.org/feed",
+   "items_count": 60,
+   "content_chars": 5905,
+   "latest_age_days": null,
+   "tls_verification": "verified"
+  },
+  {
+   "num": 42,
+   "name": "Naval News — الحساب الرسمي على X",
+   "primary_url": "https://x.com/navalnewscom",
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "latest_age_days": null,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>"
+  }
+ ],
+ "failed_feeds": [
+  {
+   "num": 17,
+   "name": "حساب @bna_en على X",
+   "primary_url": "https://web.archive.org/web/20260108135704/https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
+   "error": "حجب مصدر — human verification page (HTTP 405)",
+   "block_reason": "all routes failed: primary: حجب مصدر — رفض الخادم الطلب (HTTP 403) | official:bna-en-rss: حجب مصدر — human verification page (HTTP 405)",
+   "attempts": [
+    {
+     "url": "https://web.archive.org/web/20260108135704/https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
+     "via": "primary",
+     "ok": false,
+     "error": "حجب مصدر — رفض الخادم الطلب (HTTP 403)",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
+     "via": "official:bna-en-rss",
+     "ok": false,
+     "error": "حجب مصدر — human verification page (HTTP 405)",
+     "tls_verification": "verified"
+    }
+   ]
+  },
+  {
+   "num": 15,
+   "name": "حساب @UK_MTO على X",
+   "primary_url": "https://x.com/UK_MTO",
+   "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/UK_MTO\nCall log:\n  - navigating to \"https://x.com/UK_MTO\", waiting until \"domcontentl",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/UK_MTO\nCall log:\n  - navigating to \"https://x.com/UK_MTO\", waiting until \"domcontentl",
+   "attempts": [
+    {
+     "url": "https://x.com/UK_MTO",
+     "via": "primary",
+     "ok": false,
+     "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://x.com/UK_MTO",
+     "via": "browser",
+     "ok": false,
+     "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/UK_MTO\nCall log:\n  - navigating to \"https://x.com/UK_MTO\", waiting until \"domcontentl",
+     "tls_verification": "verified"
+    }
+   ]
+  },
+  {
+   "num": 18,
+   "name": "حساب @bahdiplomatic على X",
+   "primary_url": "https://x.com/bahdiplomatic",
+   "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/bahdiplomatic\nCall log:\n  - navigating to \"https://x.com/bahdiplomatic\", waiting unti",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/bahdiplomatic\nCall log:\n  - navigating to \"https://x.com/bahdiplomatic\", waiting unti",
+   "attempts": [
+    {
+     "url": "https://x.com/bahdiplomatic",
+     "via": "primary",
+     "ok": false,
+     "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://x.com/bahdiplomatic",
+     "via": "browser",
+     "ok": false,
+     "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/bahdiplomatic\nCall log:\n  - navigating to \"https://x.com/bahdiplomatic\", waiting unti",
+     "tls_verification": "verified"
+    }
+   ]
+  },
+  {
+   "num": 19,
+   "name": "حساب @US5thFleet على X",
+   "primary_url": "https://x.com/us5thfleet",
+   "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/us5thfleet\nCall log:\n  - navigating to \"https://x.com/us5thfleet\", waiting until \"dom",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/us5thfleet\nCall log:\n  - navigating to \"https://x.com/us5thfleet\", waiting until \"dom",
+   "attempts": [
+    {
+     "url": "https://x.com/us5thfleet",
+     "via": "primary",
+     "ok": false,
+     "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://x.com/us5thfleet",
+     "via": "browser",
+     "ok": false,
+     "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/us5thfleet\nCall log:\n  - navigating to \"https://x.com/us5thfleet\", waiting until \"dom",
+     "tls_verification": "verified"
+    }
+   ]
+  },
+  {
+   "num": 56,
+   "name": "حساب @YemenResistanc1 على X",
+   "primary_url": "https://x.com/YemenResistanc1",
+   "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/YemenResistanc1\nCall log:\n  - navigating to \"https://x.com/YemenResistanc1\", waiting ",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/YemenResistanc1\nCall log:\n  - navigating to \"https://x.com/YemenResistanc1\", waiting ",
+   "attempts": [
+    {
+     "url": "https://x.com/YemenResistanc1",
+     "via": "primary",
+     "ok": false,
+     "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://x.com/YemenResistanc1",
+     "via": "browser",
+     "ok": false,
+     "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/YemenResistanc1\nCall log:\n  - navigating to \"https://x.com/YemenResistanc1\", waiting ",
+     "tls_verification": "verified"
+    }
+   ]
+  },
+  {
+   "num": 57,
+   "name": "حساب @spokespersonyem على X",
+   "primary_url": "https://x.com/spokespersonyem",
+   "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/spokespersonyem\nCall log:\n  - navigating to \"https://x.com/spokespersonyem\", waiting ",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/spokespersonyem\nCall log:\n  - navigating to \"https://x.com/spokespersonyem\", waiting ",
+   "attempts": [
+    {
+     "url": "https://x.com/spokespersonyem",
+     "via": "primary",
+     "ok": false,
+     "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://x.com/spokespersonyem",
+     "via": "browser",
+     "ok": false,
+     "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/spokespersonyem\nCall log:\n  - navigating to \"https://x.com/spokespersonyem\", waiting ",
+     "tls_verification": "verified"
+    }
+   ]
+  },
+  {
+   "num": 60,
+   "name": "حساب @CJFCSpox على X",
+   "primary_url": "https://x.com/CJFCSpox",
+   "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/CJFCSpox\nCall log:\n  - navigating to \"https://x.com/CJFCSpox\", waiting until \"domcont",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/CJFCSpox\nCall log:\n  - navigating to \"https://x.com/CJFCSpox\", waiting until \"domcont",
+   "attempts": [
+    {
+     "url": "https://x.com/CJFCSpox",
+     "via": "primary",
+     "ok": false,
+     "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://x.com/CJFCSpox",
+     "via": "browser",
+     "ok": false,
+     "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/CJFCSpox\nCall log:\n  - navigating to \"https://x.com/CJFCSpox\", waiting until \"domcont",
+     "tls_verification": "verified"
+    }
+   ]
+  },
+  {
+   "num": 61,
+   "name": "حساب @ERYANIM على X",
+   "primary_url": "https://x.com/ERYANIM",
+   "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/ERYANIM\nCall log:\n  - navigating to \"https://x.com/ERYANIM\", waiting until \"domconten",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/ERYANIM\nCall log:\n  - navigating to \"https://x.com/ERYANIM\", waiting until \"domconten",
+   "attempts": [
+    {
+     "url": "https://x.com/ERYANIM",
+     "via": "primary",
+     "ok": false,
+     "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://x.com/ERYANIM",
+     "via": "browser",
+     "ok": false,
+     "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/ERYANIM\nCall log:\n  - navigating to \"https://x.com/ERYANIM\", waiting until \"domconten",
+     "tls_verification": "verified"
+    }
+   ]
+  },
+  {
+   "num": 62,
+   "name": "حساب @Yemenarmyeng على X",
+   "primary_url": "https://x.com/Yemenarmyeng",
+   "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/Yemenarmyeng\nCall log:\n  - navigating to \"https://x.com/Yemenarmyeng\", waiting until ",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/Yemenarmyeng\nCall log:\n  - navigating to \"https://x.com/Yemenarmyeng\", waiting until ",
+   "attempts": [
+    {
+     "url": "https://x.com/Yemenarmyeng",
+     "via": "primary",
+     "ok": false,
+     "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://x.com/Yemenarmyeng",
+     "via": "browser",
+     "ok": false,
+     "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/Yemenarmyeng\nCall log:\n  - navigating to \"https://x.com/Yemenarmyeng\", waiting until ",
+     "tls_verification": "verified"
+    }
+   ]
+  }
+ ],
+ "failed_attempts": [
+  {
+   "num": 17,
+   "name": "حساب @bna_en على X",
+   "via": null,
+   "error": "حجب مصدر — human verification page (HTTP 405)",
+   "block_reason": "all routes failed: primary: حجب مصدر — رفض الخادم الطلب (HTTP 403) | official:bna-en-rss: حجب مصدر — human verification page (HTTP 405)"
+  },
+  {
+   "num": 20,
+   "name": "جريدة الأيام",
+   "via": null,
+   "error": "blocked page: Attention Required",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Attention Required (HTTP 403) | fallback:jina.ai/alayam-home: blocked page: Attention Required | fallback:jina.ai/alayam-rss: blocked page: Attention Required"
+  },
+  {
+   "num": 24,
+   "name": "وكالة الأنباء القطرية (قنا)",
+   "via": null,
+   "error": "derived items without real content (2)",
+   "block_reason": "all routes failed: primary: derived items without real content (2)"
+  },
+  {
+   "num": 41,
+   "name": "USNI News",
+   "via": null,
+   "error": "مسار المتصفح: مرئي: HTTP 403 · 44527B — تحدي قائم | مرئي: HTTP 403 · 44717B — تحدي قائم | مرئي: HTTP 403 · 44527B — تحدي قائم | مجرَّد: HTTP 403 · 44575B — تحدي قائم",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | official-page:jina.ai/usni-news: derived items without real content (1) | browser: مسار المتصفح: مرئي: HTTP 403 · 44527B — تحدي قائم | مرئي: HTTP 403 · 44717B — تحدي قائم | مرئي: HTTP 403 · 44527B — تحدي قائم | مجرَّد: HTTP 403 · 44575B — تحدي قائم"
+  },
+  {
+   "num": 15,
+   "name": "حساب @UK_MTO على X",
+   "via": null,
+   "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/UK_MTO\nCall log:\n  - navigating to \"https://x.com/UK_MTO\", waiting until \"domcontentl",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/UK_MTO\nCall log:\n  - navigating to \"https://x.com/UK_MTO\", waiting until \"domcontentl"
+  },
+  {
+   "num": 17,
+   "name": "حساب @bna_en على X",
+   "via": null,
+   "error": "حجب مصدر — رفض الخادم الطلب (HTTP 403)",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | official:bna-en-rss: حجب مصدر — human verification page (HTTP 405) | archive:bna-en-rss: حجب مصدر — رفض الخادم الطلب (HTTP 403)"
+  },
+  {
+   "num": 18,
+   "name": "حساب @bahdiplomatic على X",
+   "via": null,
+   "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/bahdiplomatic\nCall log:\n  - navigating to \"https://x.com/bahdiplomatic\", waiting unti",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/bahdiplomatic\nCall log:\n  - navigating to \"https://x.com/bahdiplomatic\", waiting unti"
+  },
+  {
+   "num": 19,
+   "name": "حساب @US5thFleet على X",
+   "via": null,
+   "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/us5thfleet\nCall log:\n  - navigating to \"https://x.com/us5thfleet\", waiting until \"dom",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/us5thfleet\nCall log:\n  - navigating to \"https://x.com/us5thfleet\", waiting until \"dom"
+  },
+  {
+   "num": 56,
+   "name": "حساب @YemenResistanc1 على X",
+   "via": null,
+   "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/YemenResistanc1\nCall log:\n  - navigating to \"https://x.com/YemenResistanc1\", waiting ",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/YemenResistanc1\nCall log:\n  - navigating to \"https://x.com/YemenResistanc1\", waiting "
+  },
+  {
+   "num": 57,
+   "name": "حساب @spokespersonyem على X",
+   "via": null,
+   "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/spokespersonyem\nCall log:\n  - navigating to \"https://x.com/spokespersonyem\", waiting ",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/spokespersonyem\nCall log:\n  - navigating to \"https://x.com/spokespersonyem\", waiting "
+  },
+  {
+   "num": 60,
+   "name": "حساب @CJFCSpox على X",
+   "via": null,
+   "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/CJFCSpox\nCall log:\n  - navigating to \"https://x.com/CJFCSpox\", waiting until \"domcont",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/CJFCSpox\nCall log:\n  - navigating to \"https://x.com/CJFCSpox\", waiting until \"domcont"
+  },
+  {
+   "num": 61,
+   "name": "حساب @ERYANIM على X",
+   "via": null,
+   "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/ERYANIM\nCall log:\n  - navigating to \"https://x.com/ERYANIM\", waiting until \"domconten",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/ERYANIM\nCall log:\n  - navigating to \"https://x.com/ERYANIM\", waiting until \"domconten"
+  },
+  {
+   "num": 62,
+   "name": "حساب @Yemenarmyeng على X",
+   "via": null,
+   "error": "مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/Yemenarmyeng\nCall log:\n  - navigating to \"https://x.com/Yemenarmyeng\", waiting until ",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)> | browser: مسار المتصفح فشل — Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://x.com/Yemenarmyeng\nCall log:\n  - navigating to \"https://x.com/Yemenarmyeng\", waiting until "
+  },
+  {
+   "num": 42,
+   "name": "Naval News — الحساب الرسمي على X",
+   "via": null,
+   "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
+   "block_reason": "all routes failed: primary: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>"
+  }
+ ],
+ "written_utc": "2026-11-09T04:19:25Z"
+}
