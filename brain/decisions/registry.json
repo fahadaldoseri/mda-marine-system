@@ -11,7 +11,7 @@
   "decided_by": "المالك",
   "last_measured": "2026-11-10",
   "counts": {
-    "منفَّذ": 40,
+    "منفَّذ": 41,
     "منفَّذ جزئيًّا": 4,
     "يحتاج تحققًا": 3,
     "يحتاج قرارًا": 3
@@ -1063,6 +1063,36 @@
       ],
       "governing_file": "tests/run_checks.sh",
       "next_action_ar": "إعادة تشغيل G001 كاملة بمحيط صحيح في المرحلة (أ) وتثبيت نتيجتها."
+    },
+    {
+      "id": "D-0645",
+      "title_ar": "اعتماد مهارة pre-execution-plan-audit-ops في فهرس المشروع مع قياس أثرها",
+      "status": "منفَّذ",
+      "wording_ar": "المالك اعتمد صراحةً: «اعتمد المهارة الجديدة pre-execution-plan-audit-ops وأضفها إلى فهرس المشروع مع قياس أثرها». نُسخت إلى skills/ في المستودع (6 ملفات · تماثل بايت-ببايت)، وأُضيفت إلى OUR_SKILLS (38 مهارة) وSKILL_NAMES في مدقق المكتبات (المستهلك Q010)، وكُتب لها عقد قابل للاختبار في بوابة G001، وسطر اعتماد وقسم كامل في INDEX.md.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "../skills/pre-execution-plan-audit-ops/SKILL.md",
+          "note": "المهارة المعتمدة: SKILL.md + أداتان + مرجع + قالبان"
+        },
+        {
+          "kind": "file",
+          "ref": "INDEX.md",
+          "note": "سطر في جدول المهارات + قسم «المهارة المعتمدة» بحدود عدم التداخل"
+        },
+        {
+          "kind": "measurement",
+          "ref": "tests/test_pre_execution_plan_audit_skill_contract.py",
+          "note": "العقد: بنية · تماثل · ترويسة · تداخل موجب وسالب · ادعاءات موجب وسالب"
+        },
+        {
+          "kind": "measurement",
+          "ref": "validators/check_libraries_skills.py",
+          "note": "SKILL_NAMES صارت 4 مهارات — المستهلك Q010"
+        }
+      ],
+      "governing_file": "validators/check_libraries_skills.py",
+      "next_action_ar": "قياس الأثر كل ثلاث جولات: إن لم تُستهلك المهارة يُعاد فتح اعتمادها بندًا لا تُحذف صامتة."
     }
   ]
 }
