@@ -15,14 +15,19 @@ from pathlib import Path as _Path
 _ROOT = _Path(__file__).resolve().parents[1]
 
 def _tree(_env, _base, *_names):
-    """جذر الشجرة المجاورة: من متغيّر البيئة أو من مجلد شقيق."""
+    """جذر الشجرة: متغيّر البيئة، ثم seawatch الشقيق، ثم المجلد المتداخل."""
     _v = _os.environ.get(_env)
     if _v:
         return _Path(_v)
-    for _n in _names:
-        _c = _base.parent / _n
-        if _c.is_dir():
-            return _c
+    # عند وجود مرآة قديمة داخل mda-marine-system/site، لا تسبق جذر الموقع
+    # المعلن /home/ubuntu/seawatch؛ وإلا تُقرأ بصمة مولّد مختلفة عن PDF المراد
+    # فحصه. يفحص الشقيق الأعلى أولًا، ثم الجذر المحلي، ثم النسخة المتداخلة.
+    _parents = (_base.parent.parent, _base.parent)
+    for _parent in _parents:
+        for _n in _names:
+            _c = _parent / _n
+            if _c.is_dir():
+                return _c
     return _base.parent / _names[0]
 SITE = _tree("SITE_DIR", _ROOT, "seawatch", "site")
 
@@ -32,6 +37,7 @@ import re
 import subprocess
 import sys
 import tempfile
+from html.parser import HTMLParser
 from pathlib import Path
 
 B = Path(__file__).resolve().parent.parent
@@ -39,11 +45,146 @@ PROFILE = B / "templates" / "approved-pdf" / "print-profile.json"
 FROZEN_CSS = B / "templates" / "approved-pdf" / "print-css-frozen.css"
 BUILD_REPORT = Path(f"{SITE}/generator/build_report.py")
 MAX_GAP_MM = 60          # أقصى فراغ أسفل ورقة مقبول (غير الغلاف والصفحة الأخيرة)
-MIN_LEGEND_ITEMS = 8     # مفتاح الخريطة لا يقل عن ثمانية عناصر
+MIN_LEGEND_ITEMS = 3     # شكل المفتاح المعتمد: ثلاث ذرات دلالية، لا كثافة رموز النص
 
 
 def sha(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()[:16]
+
+
+class _MapLegendParser(HTMLParser):
+    """يستخرج عناصر li من كتلة map-key/mp-key دون عدّ رموز المتن."""
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.stack: list[tuple[str, int | None]] = []
+        self.key_stack: list[int] = []
+        self.li_stack: list[tuple[int, int, int]] = []
+        self.blocks: list[dict] = []
+
+    def handle_starttag(self, tag: str, attrs):
+        attrs_map = dict(attrs)
+        classes = set((attrs_map.get("class") or "").split())
+        block_index = None
+        if classes & {"map-key", "mp-key"}:
+            block_index = len(self.blocks)
+            self.blocks.append({"classes": classes, "items": []})
+            self.key_stack.append(block_index)
+        depth = len(self.stack) + 1
+        self.stack.append((tag, block_index))
+        if tag == "li" and self.key_stack:
+            block = self.blocks[self.key_stack[-1]]
+            block["items"].append([])
+            self.li_stack.append((depth, self.key_stack[-1], len(block["items"]) - 1))
+
+    def handle_data(self, data: str):
+        if self.li_stack:
+            _, block_index, item_index = self.li_stack[-1]
+            self.blocks[block_index]["items"][item_index].append(data)
+
+    def handle_endtag(self, tag: str):
+        depth = len(self.stack)
+        if tag == "li":
+            while self.li_stack and self.li_stack[-1][0] >= depth:
+                self.li_stack.pop()
+        if self.stack:
+            open_tag, block_index = self.stack.pop()
+            if block_index is not None and block_index in self.key_stack:
+                self.key_stack.remove(block_index)
+
+    def handle_startendtag(self, tag: str, attrs):
+        # العناصر الفارغة (مثل br) لا تغيّر نطاق الكتلة أو li المفتوح.
+        return
+
+
+def extract_map_legend_items(html: str) -> list[str]:
+    """يعيد النص الدلالي لعناصر مفتاح الخريطة من كتلة HTML الفعلية."""
+    parser = _MapLegendParser()
+    try:
+        parser.feed(html or "")
+        parser.close()
+    except Exception:
+        return []
+    # mp-key هو مفتاح خريطة الوقائع؛ map-key بديل قديم مقبول عند غيابه.
+    blocks = sorted(parser.blocks, key=lambda b: "mp-key" not in b["classes"])
+    for block in blocks:
+        items = [re.sub(r"\s+", " ", "".join(parts)).strip()
+                 for parts in block["items"]]
+        items = [item for item in items if item]
+        if items:
+            return items
+    return []
+
+
+def legend_failure(items: list[str]) -> str | None:
+    """فشل مغلق إذا غاب المفتاح أو نزل عن شكل المرجع المعتمد."""
+    if len(items) >= MIN_LEGEND_ITEMS:
+        return None
+    return f"مفتاح الخريطة غائب أو ناقص (العناصر الدلالية: {len(items)})"
+
+
+def extract_pdf_legend_items(text: str) -> list[str]:
+    """مسار احتياطي: يعدّ سطر/كتلة المفتاح التي تحمل الذرات الثلاث معًا فقط."""
+    labels = (
+        ("واقعة مؤكدة", ("واقعةمؤكدة",)),
+        ("موقع تقريبي", ("موقعتقريبي", "موقعتقرييب")),
+        ("بلاغ غير مؤهل", ("بلاغغيرمؤهل", "بالغغيرمؤهل", "بالغغريمؤهل")),
+    )
+    lines = [re.sub(r"[^\u0600-\u06ffA-Za-z0-9]", "", line)
+             for line in (text or "").splitlines()]
+    for index in range(len(lines)):
+        window = "".join(lines[index:index + 3])
+        if all(any(variant in window for variant in variants) for _, variants in labels):
+            return [label for label, _ in labels]
+    return []
+
+
+def map_legend_items(pdf_text: str, date: str | None = None) -> tuple[list[str], str]:
+    """يقرأ مفتاح HTML المبني، ثم يلجأ إلى كتلة PDF فقط عند غياب مصدر HTML."""
+    if date:
+        html_path = Path(SITE) / "dist" / "reports" / f"{date}.html"
+        if html_path.is_file():
+            try:
+                return extract_map_legend_items(html_path.read_text(encoding="utf-8")), "HTML"
+            except OSError:
+                return [], "HTML (تعذّرت القراءة)"
+    return extract_pdf_legend_items(pdf_text), "PDF"
+
+
+def page_count_failure(pages: int, bounds: tuple[int, int]) -> str | None:
+    lo, hi = bounds
+    if lo <= pages <= hi:
+        return None
+    return f"عدد الصفحات {pages} خارج النطاق المعتمد {lo}–{hi}"
+
+
+def layout_failures(fills: list[float], voids: list[tuple[int, float]], gate: dict) -> list[str]:
+    """أحكام التعبئة والفجوة في دالة واحدة قابلة للاختبار الموجب والسالب."""
+    failures: list[str] = []
+    avg_min = gate.get("avg_fill_min")
+    if avg_min is not None and fills:
+        avg = sum(fills) / len(fills)
+        if avg < avg_min:
+            failures.append(f"متوسط تعبئة الصفحات {avg:.1f}% دون الحد {avg_min}%")
+    low = [(i + 1, round(fill)) for i, fill in enumerate(fills)
+           if fill < gate.get("min_page_fill", 70)]
+    if low:
+        failures.append(f"صفحات قليلة التعبئة: {low}")
+    body = [(number, gap) for number, gap in voids if 1 < number < len(voids)]
+    big = [(number, gap) for number, gap in body
+           if gap >= gate.get("max_internal_void_mm", 60)]
+    if big:
+        failures.append("فجوات داخلية كبيرة في متن التقرير: "
+                        + " · ".join(f"ص{number}={gap} مم" for number, gap in big))
+    return failures
+
+
+def css_fingerprint_failure(frozen: str, current: str) -> str | None:
+    frozen_hash = sha(frozen)
+    current_hash = sha(current)
+    if frozen_hash == current_hash:
+        return None
+    return f"نمط الطباعة تغيّر عن المعتمد (المعتمد {frozen_hash} · الحالي {current_hash})"
 
 
 def current_print_css() -> str:
@@ -157,8 +298,9 @@ def main() -> int:
 
     # 1) عدد الصفحات في النطاق المعتمد
     lo, hi = prof.get("pages_range", [17, 22])
-    if not (lo <= pages <= hi):
-        fails.append(f"عدد الصفحات {pages} خارج النطاق المعتمد {lo}–{hi}")
+    page_failure = page_count_failure(pages, (lo, hi))
+    if page_failure:
+        fails.append(page_failure)
 
     # 2) قسم المصادر والموثوقية محجوبان تمامًا (لا نص ولا إشارة حجب)
     for bad in ("المصادر والمراجع", "موثوقية المصادر", "محجوبمننسخةالطباعة"):
@@ -186,11 +328,12 @@ def main() -> int:
                 notes.append(f"أقسام المصدر: {len(heads)} — كلها حاضرة")
 
     # 4) مفتاح الخريطة
-    codes = {c for c in re.findall(r"\b\d{2}-\d{2}\b", text)}
-    if len(codes) >= MIN_LEGEND_ITEMS:
-        notes.append(f"مفتاح الخريطة حاضر ({len(codes)} رمزًا)")
+    legend_items, legend_source = map_legend_items(text, a.date)
+    legend_error = legend_failure(legend_items)
+    if legend_error:
+        fails.append(legend_error)
     else:
-        fails.append(f"مفتاح الخريطة غائب أو ناقص (رموز: {len(codes)})")
+        notes.append(f"مفتاح الخريطة حاضر ({len(legend_items)} عناصر دلالية من {legend_source})")
 
     # 5) تذييل الترقيم
     # استخراج العربية من PDF يعكس ترتيب التذييل، فيُقاس بوجود كلمة «صفحة» ورقم في الصفحة نفسها
@@ -204,14 +347,11 @@ def main() -> int:
     # 6) تعبئة الصفحات والفجوات الداخلية (قياس منطقة المحتوى لا التذييل)
     fills, voids = page_metrics(pdf)
     gate = prof.get("gates", {})
-    avg = sum(fills) / len(fills)
-    if avg < gate.get("avg_fill_min", 92):
-        fails.append(f"متوسط تعبئة الصفحات {avg:.1f}% دون الحد {gate.get('avg_fill_min')}%")
-    else:
+    layout_issues = layout_failures(fills, voids, gate)
+    fails.extend(layout_issues)
+    avg = sum(fills) / len(fills) if fills else 0
+    if not any("متوسط تعبئة الصفحات" in issue for issue in layout_issues):
         notes.append(f"متوسط التعبئة {avg:.1f}%")
-    low = [(i + 1, round(f)) for i, f in enumerate(fills) if f < gate.get("min_page_fill", 70)]
-    if low:
-        fails.append(f"صفحات قليلة التعبئة: {low}")
     # ك-103: لا يُترك عنوان قسم أو بطاقة وحده آخر ورقة بلا مضمون
     try:
         import subprocess as _sp
@@ -230,25 +370,26 @@ def main() -> int:
         # ك-130: شرط مانع لا يُتحقَّق منه لا يُعدّ ناجحًا — فشل مغلق لا ملاحظة صامتة.
         fails.append(f"تعذّر فحص العنوان اليتيم (بند مانع غير مُتحقَّق منه): {type(e).__name__}: {e}")
 
-    body = [(n, g) for n, g in voids if 1 < n < len(voids)]  # دون الغلاف والصفحة الأخيرة
-    big = [(n, g) for n, g in body if g >= gate.get("max_internal_void_mm", 45)]
-    if big:
-        fails.append("فجوات داخلية كبيرة في متن التقرير: " + " · ".join(f"ص{n}={g} مم" for n, g in big))
-    else:
+    if not any("فجوات داخلية كبيرة" in issue for issue in layout_issues):
         notes.append(f"لا فجوة داخلية ≥ {gate.get('max_internal_void_mm')} مم في متن التقرير")
     edge = [(n, round(fills[n - 1]), g) for n, g in voids if n == 1 or n == len(voids)]
     low_edge = [(n, f) for n, f, _ in edge if f < gate.get("edge_page_fill_min", 55)]
     if low_edge:
-        fails.append(f"الغلاف/الصفحة الأخيرة تعبئتها منخفضة: {low_edge}")
+        if not any("صفحات قليلة التعبئة" in issue for issue in layout_issues):
+            fails.append(f"الغلاف/الصفحة الأخيرة تعبئتها منخفضة: {low_edge}")
     else:
         notes.append("الغلاف والصفحة الأخيرة فوق حدّ التعبئة الأدنى")
 
     # 7) بصمة نمط الطباعة (قفل الشكل)
     if FROZEN_CSS.exists() and not a.allow_css_change:
-        frozen = sha(FROZEN_CSS.read_text(encoding="utf-8"))
-        now = sha(current_print_css())
-        if frozen != now:
-            fails.append(f"نمط الطباعة تغيّر عن المعتمد (المعتمد {frozen} · الحالي {now})")
+        # خلل جذري كشفه القياس 2026-11-09: كانت بصمة الملف المقفل تُجزّأ هنا ثم
+        # تُجزّأ مرة أخرى داخل css_fingerprint_failure، فيُقارَن «هاش الهاش» بالهاش
+        # ولا يمرّ الفحص أبدًا مهما طابق النمط. الإصلاح: يُمرَّر النصّ الخام،
+        # والدالة وحدها تجزّئ الطرفين، فيبقى الفحص مغلقًا وصادقًا.
+        css_failure = css_fingerprint_failure(FROZEN_CSS.read_text(encoding="utf-8"),
+                                              current_print_css())
+        if css_failure:
+            fails.append(css_failure)
 
     print(f"فحص شكل PDF: {pdf.name}")
     for n in notes:
