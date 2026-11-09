@@ -29,6 +29,11 @@ import sys
 BASE = 'audit/measurements/batches'
 
 
+def safe_id(fid: str) -> str:
+    """معرّف آمن للملفات: الصفوف ذات اللاحقة (ك-93/ب) لا تُنشئ مسارات متداخلة."""
+    return fid.replace("/", "_").replace("\\", "_").strip()
+
+
 def now() -> str:
     return dt.datetime.now(dt.timezone.utc).isoformat()
 
@@ -91,7 +96,7 @@ def main() -> int:
             rc, out = 124, f'تجاوز المهلة {a.timeout}s\n' + _text(e.stdout) + _text(e.stderr)
         except Exception as e:  # خطأ تشغيل = دليل لا انهيار
             rc, out = 125, f'خطأ تنفيذ: {e}'
-        log_p = logs_dir / f'{fid}.log'
+        log_p = logs_dir / f'{safe_id(fid)}.log'
         log_p.write_text(f'COMMAND: {cmd}\nSTARTED_AT: {started}\nRC: {rc}\nOUTPUT_BEGIN\n{out}\nOUTPUT_END\n',
                          encoding='utf-8')
         digest = hashlib.sha256(log_p.read_bytes()).hexdigest()
