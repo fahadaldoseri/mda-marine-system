@@ -12,7 +12,19 @@ check(){ [ "$1" = "$2" ] && ok "$3 (=$1)" || bad "$3 — المتوقع $2 وا�
 
 # ك-247: فحوص الأسطح تحتاج صفحة مبنية. قبل البناء تُقاس على أحدث إصدار مبني،
 # ويبقى إنفاذ اليوم فشلًا مغلقًا في بوابات ما بعد البناء (G045 · G046 · G047).
-if [ -z "${SITE:-}" ]; then SITE="$(cd "$B/../seawatch" 2>/dev/null && pwd)"; fi
+# ك-598: اشتقاق جذر الموقع كان يسقط إلى مسار مُخمَّن بلا dist، فتفشل فحوص الأسطح
+# بأسباب كاذبة (مسارات غير موجودة) بدل الفشل المغلق. الآن: يُشتق من SITE أو SITE_DIR،
+# ثم من قائمة مرشّحين بشرط وجود dist، وإلا فشل مغلق برسالة صريحة.
+if [ -z "${SITE:-}" ]; then
+  for c in "${SITE_DIR:-}" "$B/../seawatch" "$B/../../seawatch" "/home/ubuntu/seawatch" "$HOME/seawatch"; do
+    [ -n "$c" ] && [ -d "$c/dist" ] && SITE="$(cd "$c" && pwd)" && break
+  done
+fi
+if [ -z "${SITE:-}" ] || [ ! -d "$SITE/dist" ]; then
+  printf '  ✘ محيط البوابة: جذر الموقع غير محدد (مرّر SITE أو SITE_DIR إلى مجلد فيه dist) — فشل مغلق\n'
+  exit 2
+fi
+export SITE_DIR="$SITE"
 BUILT_HTML="$(ls -1 "$SITE"/dist/reports/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9].html 2>/dev/null | sort | tail -1)"
 if [ -n "$BUILT_HTML" ]; then
   SURFACE_DATE="$(basename "$BUILT_HTML" .html)"
