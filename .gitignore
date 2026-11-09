@@ -23,3 +23,8 @@ brain/shots/
 # احتياطيات محلية لا تُتتبَّع
 *.bak
 *.bak-*
+
+# أسرار التشغيل: لا تُتبع أبدًا (D-0638)
+brain/secrets/secrets.env
+brain/secrets/*.env
+!brain/secrets/secrets.env.example
