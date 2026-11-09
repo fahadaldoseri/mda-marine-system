@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-09T05:18:07.245759+00:00",
+  "generated_at": "2026-11-09T05:30:54.530710+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -4314,6 +4314,13 @@
       "lesson_id": "ك-586",
       "barrier_id": "B-cd24eaeb",
       "run_evidence": "ياس حي: بصمة المعجم المخزّنة صارت eb7f368968a2ee55 وفحص المطابقة يعيد rc=0. أمر إعادة التشغيل: pyth"
+    },
+    {
+      "fault_id": "ك-587",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-587",
+      "barrier_id": "B-1fade417",
+      "run_evidence": "قياس حي: بوابة قابلية النقل rc=0 واختبار المواءمة نفسه rc"
     },
     {
       "fault_id": "ز-01/ب",
