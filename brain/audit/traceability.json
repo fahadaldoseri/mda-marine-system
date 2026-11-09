@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-09T00:28:16.373585+00:00",
+  "generated_at": "2026-11-09T00:45:39.347010+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -1421,8 +1421,8 @@
       "fault_id": "ك-162",
       "state": "موروث غير مثبت",
       "lesson_id": "ك-162",
-      "barrier_id": "B-df9e6bb0",
-      "run_evidence": "ياس مباشر: timeout 120 python3 validators/check_secrets.py --root . → rc=0 · بصمة cffa585e2a73"
+      "barrier_id": "B-2b0ca7c7",
+      "run_evidence": "ياس مباشر: timeout 120 python3 validators/check_secrets.py --root . → rc=0 · بصمة 7cd300a9671b"
     },
     {
       "fault_id": "ك-163",
@@ -1757,8 +1757,8 @@
       "fault_id": "ك-209",
       "state": "موروث غير مثبت",
       "lesson_id": "ك-209",
-      "barrier_id": "B-1da87d22",
-      "run_evidence": "fects.py --md reports/2026-11-08-sectioned.md --structured-registry → rc=0 · بصمة ddedf20f0cc7"
+      "barrier_id": "B-167b1fba",
+      "run_evidence": "fects.py --md reports/2026-11-08-sectioned.md --structured-registry → rc=0 · بصمة b713cb230a1f"
     },
     {
       "fault_id": "ك-210",
@@ -2030,8 +2030,8 @@
       "fault_id": "ك-255",
       "state": "بانتظار التحقق",
       "lesson_id": "ك-255",
-      "barrier_id": "B-c3548db5",
-      "run_evidence": " قياس مباشر: python3 validators/check_exceptions_burndown.py --json → rc=0 · بصمة 7f8503360667"
+      "barrier_id": "B-7b87b02b",
+      "run_evidence": " timeout 120 python3 validators/check_exceptions_burndown.py --json → rc=0 · بصمة 67cb36b76650"
     },
     {
       "fault_id": "ك-256",
@@ -2128,8 +2128,8 @@
       "fault_id": "ك-269",
       "state": "بانتظار التحقق",
       "lesson_id": "ك-269",
-      "barrier_id": "B-b8319238",
-      "run_evidence": "ابة تاريخ قياس مباشر: python3 -m pytest tests/test_sync_guard.py -q → rc=0 · بصمة aa34b5841acf"
+      "barrier_id": "B-646eb33e",
+      "run_evidence": "اس مباشر: timeout 120 python3 -m pytest tests/test_sync_guard.py -q → rc=0 · بصمة 8dfdc65b6a00"
     },
     {
       "fault_id": "ك-270",
@@ -2541,8 +2541,8 @@
       "fault_id": "ك-328",
       "state": "مغلق",
       "lesson_id": "ك-328",
-      "barrier_id": "B-8143b0d0",
-      "run_evidence": "ي الحزمة قياس مباشر: timeout 120 python3 tests/test_lexicon_gate.py → rc=0 · بصمة 7e3f45c45dd4"
+      "barrier_id": "B-92be8f72",
+      "run_evidence": "ي الحزمة قياس مباشر: timeout 120 python3 tests/test_lexicon_gate.py → rc=0 · بصمة 65ad89eb2702"
     },
     {
       "fault_id": "ك-329",
@@ -2812,9 +2812,9 @@
     },
     {
       "fault_id": "ك-367",
-      "state": "مفتوح",
+      "state": "مغلق",
       "lesson_id": "ك-367",
-      "barrier_id": "B-5cb076c7",
+      "barrier_id": "B-42dd6388",
       "run_evidence": "ools/causality_window.sh صراحة إلى G000A، وأضيفت قاعدة D005؛ handbook خرج 0 وverify خرج 0 وtest_mani"
     },
     {
@@ -2996,7 +2996,7 @@
       "fault_id": "ك-393",
       "state": "مغلق",
       "lesson_id": "ك-393",
-      "barrier_id": "B-d5fa83e6",
+      "barrier_id": "B-fc34aa02",
       "run_evidence": "لمسار الجذري إلى المواصفة وشُغّل الفحص؛ كل مسارات المرآة 6598 مصنفة · خرج 0 قياس مباشر: timeout 120 "
     },
     {
@@ -3178,8 +3178,8 @@
       "fault_id": "ك-419",
       "state": "مغلق",
       "lesson_id": "ك-419",
-      "barrier_id": "B-84d70b26",
-      "run_evidence": "tests/test_map_points_nonspatial.py tests/test_map_location_term.py → rc=0 · بصمة 8b2e8fd12988"
+      "barrier_id": "B-0e3ded2a",
+      "run_evidence": "tests/test_map_points_nonspatial.py tests/test_map_location_term.py → rc=0 · بصمة 2cfca73c470f"
     },
     {
       "fault_id": "ك-420",
@@ -3346,8 +3346,8 @@
       "fault_id": "ك-443",
       "state": "مغلق",
       "lesson_id": "ك-443",
-      "barrier_id": "B-baedbf9c",
-      "run_evidence": "اس مباشر: timeout 120 python3 tools/build_lexicon_corpus.py --check → rc=0 · بصمة 68eb23c51cb3"
+      "barrier_id": "B-faf0d2f7",
+      "run_evidence": "اس مباشر: timeout 120 python3 tools/build_lexicon_corpus.py --check → rc=0 · بصمة ecb965358d88"
     },
     {
       "fault_id": "ك-444",
@@ -3724,8 +3724,8 @@
       "fault_id": "ك-497",
       "state": "مغلق",
       "lesson_id": "ك-497",
-      "barrier_id": "B-70eaadc1",
-      "run_evidence": "اختبارات قياس مباشر: timeout 120 python3 tests/test_lexicon_gate.py → rc=0 · بصمة ec888b955693"
+      "barrier_id": "B-c400a938",
+      "run_evidence": "اختبارات قياس مباشر: timeout 120 python3 tests/test_lexicon_gate.py → rc=0 · بصمة fbed3af9e3bf"
     },
     {
       "fault_id": "ك-498",
@@ -4074,14 +4074,14 @@
       "fault_id": "ك-550",
       "state": "مغلق",
       "lesson_id": "ك-550",
-      "barrier_id": "B-ce77fa20",
+      "barrier_id": "B-cdf9d408",
       "run_evidence": "قيس: `python3 -m pytest tests/test_three_root_causes_20261107.py -q → rc=0 (8 passed)` قياس مباشر: "
     },
     {
       "fault_id": "ك-551",
       "state": "مغلق",
       "lesson_id": "ك-551",
-      "barrier_id": "B-cf731607",
+      "barrier_id": "B-69abb373",
       "run_evidence": "قيس: `python3 -m pytest tests/test_three_root_causes_20261107.py -q → rc=0 (8 passed)` قياس مباشر: "
     },
     {

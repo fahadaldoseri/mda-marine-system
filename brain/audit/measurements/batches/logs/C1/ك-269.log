@@ -1,0 +1,8 @@
+COMMAND: timeout 120 python3 -m pytest tests/test_sync_guard.py -q
+STARTED_AT: 2026-11-09T00:39:01.443437+00:00
+RC: 0
+OUTPUT_BEGIN
+.                                                                        [100%]
+1 passed in 0.22s
+
+OUTPUT_END
