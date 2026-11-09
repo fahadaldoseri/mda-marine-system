@@ -6042,7 +6042,8 @@
         ],
         "gates": [],
         "tests": [
-          "tests/test_closure_gate.py"
+          "tests/test_closure_gate.py",
+          "tests/test_batch_runner_safe_id.py"
         ]
       },
       "on_fail": "stop",
