@@ -34,7 +34,7 @@ def _skills_dir(brain: Path) -> Path:
     return brain.parent / "skills"
 
 SKILLS = _skills_dir(B)
-SKILL_NAMES = ("marine-news-brain", "military-arabic-editing", "owner-notes-measured-triage",
+SKILL_NAMES = ("marine-news-brain", "military-arabic-editing", "owner-approval-launch-gate-ops", "owner-notes-measured-triage",
                "pre-execution-plan-audit-ops")
 def _site_dir(brain: Path) -> Path:
     """اختيار جذر الموقع من البيئة أو من تخطيطات brain/site وbrain/../seawatch."""

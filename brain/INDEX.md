@@ -218,6 +218,7 @@
 | `fault-closure-and-learning-ops` | Use when closing a marine-awareness fault or defect, proving a before/after repair, normalizing … | معتمدة · `D-0614` |
 | `gate-lifecycle-ops` | Use when authoring, scoping, wiring, hardening, auditing, probing, or contract-checking a fail-c… | معتمدة · `D-0620` |
 | `multi-agent-audit-ops` | استخدم هذه المهارة عند تنفيذ تدقيق متعدد الوكلاء أو مراجعة تقرير عبر واجهة وطباعة ولغة وأسطح ورو… | معتمدة · `D-0626` |
+| `owner-approval-launch-gate-ops` | بوابة الانطلاق المحكوم: تسجيل موافقة المالك قرارًا مرقّمًا · قياس جاهزية الانطلاق (تغطية البنود · التداخل · قرار الاعتماد · المعلّق المعلن) · ومنع التوقف أثناء التنفيذ بحلّ العائق وتسجيله | معتمدة · `D-0647` |
 | `owner-notes-measured-triage` | > | معتمدة · `D-0623` |
 | `owner-ui-notes-contract-ops` | > | معتمدة · `D-0631` |
 | `parity-and-publish-ops` | Use when comparing marine-awareness server and repository trees, preparing a governed site publi… | معتمدة · `D-0627` |
@@ -352,3 +353,28 @@
 | `owner-notes-measured-triage` | تلك تفرز ملاحظات المالك على واجهة أو تقرير **بالقياس** وتُنتج جردًا؛ وهذه تدقّق **خطة تنفيذ** وادّعاءاتها وتُنتج قياسًا وقرارًا وخطة خالية من التداخل |
 | `gate-strictness-hardening-ops` | تلك تُصلح بوابة أو حارسًا (صرامة · فشل مغلق)؛ وهذه **تكتشف** الإخفاق الكاذب وتُعيد تشغيله بمحيط صحيح قبل الحكم، ولا تُعدّل الحارس |
 | `skill-adoption-governance-ops` | تلك تسجّل اعتماد مهارة في الفهرس والدفتر؛ وهذه تدقّق خطة مشروع ولا تعتمد مهارات |
+
+## المهارة المعتمدة: owner-approval-launch-gate-ops (قرار المالك 2026-11-10 · `D-0647`)
+
+> المالك اعتمد صراحةً: «اختر القرار الأول (أ): اعتماد المهارة الجديدة رسميًا في فهرس المشروع».
+> وظيفتها: **بوابة الانطلاق المحكوم** — لا انطلاق بلا قرار مرقّم يحفظ الموافقة، ثم قياس جاهزية
+> (تغطية كل بند إلى مرحلة · تداخل الخطة · قرار الاعتماد · المعلّق المعلن لا المخفي)، ثم تنفيذ لا يتوقف:
+> كل عائق يُحلّ أو يُستبدل بحلّ بديل ويُسجَّل بسبب ودليل، ولا يُترك معلّقًا صامتًا.
+
+| البند | التفصيل |
+| --- | --- |
+| الملفات المعتمدة | `skills/owner-approval-launch-gate-ops/SKILL.md` · `scripts/check_launch_readiness.py` · `scripts/record_obstacle.py` · `references/launch-protocol.md` · `templates/readiness-report.md` |
+| المستهلك الأول (الربط) | خطوة الكتيب `Q010` عبر `validators/check_libraries_skills.py` — الاسم مُدرج في `SKILL_NAMES` فيُفحص بناؤه ومراجعه وتماثله |
+| المستهلك الثاني (الربط) | بوابة `G001` عبر `tests/run_checks.sh` القسم **30** الذي يُشغّل عقد المهارة |
+| عقد قابل للاختبار | `tests/test_owner_approval_launch_gate_skill_contract.py`: بنية · تماثل بايت-ببايت · ترويسة · بلا شبكة · الجاهزية موجب (rc=0) وسالب (بند بلا مرحلة rc=2 · خطة غير موجودة rc=64) · تسجيل العائق موجب وسالب |
+| مصدر واحد للقائمة | `tools/restore_skills.sh` في `OUR_SKILLS` (39 مهارة) — فلا تفترق المزامنة والنسخ الاحتياطي |
+| حلقة التعلّم | كل عائق يُسجَّل في `audit/measurements/obstacles-<التاريخ>.jsonl` وفي `memory/learning-log.jsonl` بسبب ودليل؛ ومراجعة الاستهلاك بعد ثلاث جولات |
+
+### حدود عدم التداخل مع المهارات المجاورة
+
+| المهارة المجاورة | الحد الفاصل |
+| --- | --- |
+| `pre-execution-plan-audit-ops` | تلك تدقّق الخطة وادعاءاتها وتُنتج قياسًا؛ وهذه تُنتج **قرار الانطلاق** وتحرس التنفيذ بعده |
+| `owner-notes-measured-triage` | تلك تفرز ملاحظات المالك على الواجهة؛ وهذه تسجّل **موافقة المالك** على خطة وتقيس جاهزية الانطلاق |
+| `skill-adoption-governance-ops` | تلك تعتمد المهارات في الفهرس والدفتر؛ وهذه بوّابة انطلاق عمل لا اعتماد أصول |
+| `runbook-operations-ops` | تلك تشغّل جولة الكتيب وتفسّر رموزها؛ وهذه تحرس انطلاق خطة تغيير متعددة المراحل |

@@ -11,7 +11,7 @@
   "decided_by": "المالك",
   "last_measured": "2026-11-10",
   "counts": {
-    "منفَّذ": 42,
+    "منفَّذ": 43,
     "منفَّذ جزئيًّا": 5,
     "يحتاج تحققًا": 3,
     "يحتاج قرارًا": 2
@@ -1140,6 +1140,56 @@
       ],
       "governing_file": "../../seawatch/docs/خطة-العمل-ووكلاء-التنفيذ-2026-11-10.md",
       "next_action_ar": "تنفيذ المرحلة أ: الاختبار السلبي (منفَّذ) · إعادة تشغيل G001 كاملة بمحيط صحيح وتثبيت نتيجتها · أسلاك المانيفست مرة واحدة في المرحلة د."
+    },
+    {
+      "id": "D-0647",
+      "date": "2026-11-10",
+      "title_ar": "اعتماد مهارة بوابة الانطلاق المحكوم (owner-approval-launch-gate-ops) في فهرس المشروع وقواعده",
+      "decision_ar": "قرار المالك (اختيار أ): اعتماد المهارة الجديدة رسميًا في فهرس المشروع وربطها بخطوة؛ تُسجَّل الموافقة قرارًا مرقّمًا قبل العمل، وتُقاس الجاهزية، ويُمنع التوقف أثناء التنفيذ.",
+      "status": "منفَّذ",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "skills/owner-approval-launch-gate-ops/SKILL.md",
+          "note": "نسخة الدماغ (5 ملفات) ونسخة المستودع مطابقة بايت-ببايت"
+        },
+        {
+          "kind": "file",
+          "ref": "skills/owner-approval-launch-gate-ops/scripts/check_launch_readiness.py",
+          "note": "أداة الجاهزية: rc=0 جاهز · rc=2 مانع · rc=64 خطأ استعمال"
+        },
+        {
+          "kind": "file",
+          "ref": "skills/owner-approval-launch-gate-ops/scripts/record_obstacle.py",
+          "note": "تسجيل العائق بسبب ودليل وبديل"
+        },
+        {
+          "kind": "file",
+          "ref": "tests/test_owner_approval_launch_gate_skill_contract.py",
+          "note": "عقد قابل للاختبار: 21 فحصًا · إخفاقات 0"
+        },
+        {
+          "kind": "file",
+          "ref": "INDEX.md",
+          "note": "سطر الاعتماد وقسم المهارة في فهرس المشروع بتاريخ 2026-11-10"
+        },
+        {
+          "kind": "measure",
+          "ref": "validators/check_libraries_skills.py",
+          "note": "الاسم مُدرج في SKILL_NAMES ⇒ تُفحص في Q010"
+        },
+        {
+          "kind": "measure",
+          "ref": "tests/run_checks.sh",
+          "note": "القسم 30 يشغّل عقد المهارة داخل بوابة G001"
+        },
+        {
+          "kind": "measure",
+          "ref": "tools/restore_skills.sh",
+          "note": "مُدرجة في OUR_SKILLS (39 مهارة)"
+        }
+      ],
+      "governing_file": "INDEX.md"
     }
   ]
 }
