@@ -25,3 +25,4 @@
 {"step": "W040", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-09/W040.log", "attempt": 1, "ts": "2026-11-09T04:46:30Z"}
 {"step": "G000", "status": "done", "rc": 0, "outputs": {"evidence/merkle/snapshot.json": "9f4d3ddfa9a2af709790c95ade104b72e4cce64da7d81b7306f74857b18462bc", "evidence/merkle/ledger.jsonl": "daf0e685eeb47abce13a2997f0f0818184dfe24e55e7d1ea4024214782a93d59"}, "log": "logs/runbook/2026-11-09/G000.log", "attempt": 1, "ts": "2026-11-09T04:46:32Z"}
 {"step": "G000A", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-09/G000A.log", "ts": "2026-11-09T04:46:33Z"}
+{"step": "G000A", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-09/G000A.log", "ts": "2026-11-09T04:48:56Z"}

@@ -27,7 +27,11 @@ mkdir -p "$REPO"
 
 # ── 1) ملفات المستودع: تُقارن وتُنقل حسب الأحدث ──
 OUR_SKILLS="approved-output-change-ops bilingual-master-direction-ops macr-system marine-news-brain military-arabic-editing source-coverage-route-ops crossing-gate-ops report-build-export-ops owner-ui-notes-contract-ops secret-rotation-ops governing-assets-recovery-ops governed-cleanup-audit skill-adoption-governance-ops skill-coverage-audit-ops skill-ownership-merge-ops operation-to-skill-ops governed-rename-ops card-branch-integrity-ops decision-registry-backfill-ops source-ingest-ops official-ledger-backfill-ops threat-zone-card-ops writing-rules-wiring-ops vocabulary-guard-ops waw-density-control-ops multi-agent-audit-ops destructive-op-guard-ops project-evidence-and-coverage-ops gate-lifecycle-ops runbook-operations-ops fault-closure-and-learning-ops report-surface-and-print-ops map-clarity-ops parity-and-publish-ops superpowers-method"
-in_scope() {  # مهارات المشروع فقط، لا كل مهارات المنصة
+CANON_SCOPE="$B/skills"
+in_scope() {  # مهارات المشروع = كل ما هو موجود في المرجع brain/skills (مشتق لا ثابت)
+  case "$1" in */*) : ;; *) return 1 ;; esac
+  [ -d "$CANON_SCOPE/${1%%/*}" ] && return 0
+  # مهارات المشروع فقط، لا كل مهارات المنصة
   case "$1" in marine-news-brain/*|military-arabic-editing/*|macr-system/*|superpowers-method/*|self-learning-loop-ops/*|vocabulary-guard-ops/*|owner-ui-notes-contract-ops/*) return 0 ;; print-layout-gate-ops/*) return 0 ;; *) return 1 ;; esac
 }
 
