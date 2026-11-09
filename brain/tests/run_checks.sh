@@ -305,6 +305,8 @@ t "عقود الحراس الستة عشر" python3 "$B/tests/test_gate_guard_co
 
 t "لا وسيط خارجي في مسار الإرسال" python3 tests/test_no_external_relay_20261107.py
 t "تماثل الأرقام المرئية: موجب + سالب" python3 "$B/tests/test_en_parity_visible_numbers.py"
+echo "29) عقد مهارة فرز ملاحظات المالك بالقياس"
+t "بنية وتماثل وأداتان موجب وسالب" python3 "$B/tests/test_owner_notes_triage_skill_contract.py"
 echo "----- الحصيلة -----"
 printf '  نجح: %s · فشل: %s\n' "$PASS" "$FAIL"
 [ "$FAIL" -eq 0 ] || exit 1
