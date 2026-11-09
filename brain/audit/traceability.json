@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-09T02:37:57.805588+00:00",
+  "generated_at": "2026-11-09T05:06:34.047377+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -4244,6 +4244,62 @@
       "lesson_id": "ك-576",
       "barrier_id": "B-ac28a227",
       "run_evidence": "بوابة جودة الطباعة صارت rc=0 والخريطة مقيسة 149×99 مم"
+    },
+    {
+      "fault_id": "ك-577",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-577",
+      "barrier_id": "B-c8f54309",
+      "run_evidence": "قياس الجولة: وصلت W020 بعد وجود البطاقة، وخرج فحص الترتيب rc=0. أمر إعادة التشغيل: pyth"
+    },
+    {
+      "fault_id": "ك-578",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-578",
+      "barrier_id": "B-c4af3ed1",
+      "run_evidence": "قياس حي: مولّد القطاعات يعيد rc=0 ويكتب بطاقة اليوم بعد ال"
+    },
+    {
+      "fault_id": "ك-579",
+      "state": "مغلق",
+      "lesson_id": "ك-579",
+      "barrier_id": "B-5e9c1b33",
+      "run_evidence": "قياس حي: حارس مفردات الموقع على دفتر اليوم يعيد rc=0 بلا مخالفة، والاختبار يم"
+    },
+    {
+      "fault_id": "ك-580",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-580",
+      "barrier_id": "B-119e6034",
+      "run_evidence": "قياس حي: restore_skills.sh --check يعيد rc=0، وحارسا السلامة يعيدان r"
+    },
+    {
+      "fault_id": "ك-581",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-581",
+      "barrier_id": "B-f70e3cc8",
+      "run_evidence": "قياس حي: تشغيل اختبار عقود الحراس كاملًا يعيد rc=0 بعد تصحيح الحالة السالبة"
+    },
+    {
+      "fault_id": "ك-582",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-582",
+      "barrier_id": "B-12aa3fd1",
+      "run_evidence": "وابة التغطية بلا هوية تُعلن «مؤجلة معلنة: 1» والاختبارات الجديدة تعيد rc=0. أمر إعادة التشغيل: pyth"
+    },
+    {
+      "fault_id": "ك-583",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-583",
+      "barrier_id": "B-06920d3b",
+      "run_evidence": "قياس حي: tools/build_lexicon_corpus.py --check يعيد rc=0 وبصمة مخزّنة تساوي المحس"
+    },
+    {
+      "fault_id": "ك-584",
+      "state": "مغلق",
+      "lesson_id": "ك-584",
+      "barrier_id": "B-7bcee45e",
+      "run_evidence": "قياس حي: closure_round --apply ثم check_closure يعيدان rc=0 بلا صف مغلق بدليل غير قا"
     },
     {
       "fault_id": "ز-01/ب",
