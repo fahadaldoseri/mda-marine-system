@@ -3022,7 +3022,9 @@
           "validators/check_run_completeness.py"
         ],
         "gates": [],
-        "tests": []
+        "tests": [
+          "tests/test_disclosure_arabic_label.py"
+        ]
       },
       "on_fail": "stop",
       "command": [
@@ -3146,7 +3148,8 @@
         ],
         "gates": [],
         "tests": [
-          "tests/test_g036_vocabulary_contract.py"
+          "tests/test_g036_vocabulary_contract.py",
+          "tests/test_vocabulary_word_boundary.py"
         ]
       },
       "on_fail": "stop",
@@ -4341,7 +4344,8 @@
           "tests/test_forbidden_surface_terms.py",
           "tests/test_meta_style_normalizer.py",
           "tests/test_style_coverage_order.py",
-          "tests/test_surface_deferral_contract.py"
+          "tests/test_surface_deferral_contract.py",
+          "tests/test_threat_section_word_cap.py"
         ]
       },
       "deferred_surfaces": [
@@ -5000,6 +5004,57 @@
         1
       ],
       "gate_title": "دفتر القرارات"
+    },
+    {
+      "id": "G062R",
+      "title": "توليد مرجع آلية العمل من المانيفست",
+      "kind": "script",
+      "phase": "finalize",
+      "assert": [
+        {
+          "type": "cmd",
+          "command": [
+            "bash",
+            "-lc",
+            "test -s logs/runbook/{date}/G062R.log"
+          ]
+        },
+        {
+          "type": "cmd",
+          "command": [
+            "bash",
+            "-lc",
+            "grep -q 'مرجع-آلية-العمل.md' logs/runbook/{date}/G062R.log"
+          ]
+        }
+      ],
+      "links": {
+        "rules": [
+          "ف1–ف5 — بوابة التحقق"
+        ],
+        "files": [
+          "tools/build_workflow_reference.py",
+          "runbook/phases.json",
+          "audit/مرجع-آلية-العمل.md"
+        ],
+        "gates": [],
+        "tests": [
+          "tests/test_reference_generator.py"
+        ]
+      },
+      "on_fail": "stop",
+      "command": [
+        "bash",
+        "-lc",
+        "B=\"$PWD\"; export B SITE; python3 \"$B/tools/build_workflow_reference.py\" build --root \"$B\"; rc=$?; exit $rc"
+      ],
+      "ok_rc": [
+        0
+      ],
+      "warn_rc": [
+        1
+      ],
+      "gate_title": "توليد مرجع آلية العمل"
     },
     {
       "id": "G063",

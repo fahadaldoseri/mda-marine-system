@@ -20,6 +20,14 @@ B = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(B / "tools"))
 from known_faults import classify_component, degraded_components  # noqa: E402
 
+# ك-590: متن عربي لا يُطالَب بكتابة معرّف إنجليزي؛ تُقبل التسمية العربية للمكوّن مع لفظ الإفصاح.
+COMPONENT_LABELS_AR = {
+    "feeds": ("التغذية", "التغذيات", "المصادر"),
+    "ofac": ("العقوبات", "قوائم العقوبات"),
+    "originals": ("النصوص الأصلية", "الأصول"),
+    "ledger_merge": ("دفتر الأحداث", "الدفتر"),
+}
+
 
 def main() -> int:
     ap = argparse.ArgumentParser()

@@ -102,7 +102,7 @@ def test_numerals() -> None:
         good = Path(td) / "good.txt"
         bad = Path(td) / "bad.txt"
         good.write_text("العدد 12\n", encoding="utf-8")
-        # الحالة السالبة: أرقام عربية-هندية فعلية (٠١٢٣…) لا أرقام لاتينية مكرَّرة.
+        # الحالة السالبة: أرقام عربية-هندية فعلية (0123…) لا أرقام لاتينية مكرَّرة.
         bad.write_text("العدد \u0661\u0662\n", encoding="utf-8")
         check("numerals موجب: أرقام لاتينية", m.nums(good) == 0)
         check("numerals سالب: أرقام عربية هندية", m.nums(bad) > 0)

@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة e88a9b1e9f7c7010). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة 69b93d9d3ae3b5d0). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -108,6 +108,7 @@
 | G039 | مخطط العلامة الثابت | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G039.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_mark_schema.py | stop |
 | G061 | سياسة التسليم المتصل (قرار المالك: أ) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G061.log؛ cmd:bash -lc grep -q '✔ سياسة التسليم المتصل:' logs/runbook/{date}/G061.log | ف1–ف5 — بوابة التحقق | validators/check_delivery_policy.py، runbook/delivery-policy.json، tests/test_delivery_policy.py | stop |
 | G062 | دفتر القرارات (حالة كل قرار ودليله) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G062.log؛ cmd:bash -lc grep -q '✔ دفتر القرارات:' logs/runbook/{date}/G062.log | ف1–ف5 — بوابة التحقق | validators/check_decisions_registry.py، decisions/registry.json، tests/test_decisions_registry.py | stop |
+| G062R | توليد مرجع آلية العمل من المانيفست | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G062R.log؛ cmd:bash -lc grep -q 'مرجع-آلية-العمل.md' logs/runbook/{date}/G062R.log | ف1–ف5 — بوابة التحقق | tools/build_workflow_reference.py، runbook/phases.json، audit/مرجع-آلية-العمل.md | stop |
 | G063 | مرجع آلية العمل المولَّد (بنود مرقّمة وسقف جهد مشتق) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G063.log؛ cmd:bash -lc grep -q '✔ مرجع آلية العمل:' logs/runbook/{date}/G063.log | ف1–ف5 — بوابة التحقق | validators/check_reference_generated.py، tools/build_workflow_reference.py، runbook/phases.json، tests/test_reference_generator.py | stop |
 | G064 | الانحدار التراكمي وأدوات البوابة المانعة | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G064.log؛ cmd:bash -lc grep -q '✔ الانحدار:' logs/runbook/{date}/G064.log | ف1–ف5 — بوابة التحقق | tools/regression_gate.py، tools/surface_fingerprint.py، tools/number_fingerprint.py، tools/impact_matrix.py، tools/crossing_gate.py، tools/gate_coverage.py، runbook/regression-items.json، runbook/impact-map.json، validators/check_gate_readiness.py | stop |
 | G065 | القياس البصري الحي (قصّ · توافق · مراسٍ · بطاقة القرار) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G065.log؛ cmd:bash -lc grep -q '✔ القياس البصري' logs/runbook/{date}/G065.log | ف1–ف5 — بوابة التحقق | tools/browser_measure.py، runbook/readiness-questions.json، runbook/regression-items.json، audit/measurements، tools/regression_gate.py | stop |

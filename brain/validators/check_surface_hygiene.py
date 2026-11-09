@@ -11,6 +11,7 @@
 from __future__ import annotations
 
 import os
+import sys
 
 import argparse
 import json
@@ -21,12 +22,18 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 GATE_NAME = "نظافة أسطح الإصدار والإضافات"
-SEAWATCH_ROOT = Path(os.environ.get("SITE_DIR") or (Path(__file__).resolve().parents[2] / "seawatch"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
+from site_root import resolve_site_root  # noqa: E402  (ك-590: مصدر واحد لجذر الموقع)
+
+SEAWATCH_ROOT = resolve_site_root() or (Path(__file__).resolve().parents[2] / "seawatch")
 REPORT_NAME = re.compile(r"^\d{4}-\d{2}-\d{2}\.html$")
 THREAT_TITLE = "مستوى التهديد"
 NEWS_TITLE = "أهم الأخبار المتعلقة بالأمن البحري"
 TRACKING_TITLE = "تتبع الوقائع"
-THREAT_WORD_LIMIT = 110
+BASE_THREAT_WORD_LIMIT = 110  # سقف المالك (2026-11-04) لثلاثة قطاعات معلنة
+BASE_SECTORS = 3
+PER_SECTOR_WORDS = 18  # كلفة قياسية للقطاع الواجب: سطر إعلان مستواه + صفّه في الجدول
+THREAT_WORD_LIMIT = BASE_THREAT_WORD_LIMIT  # قيمة احتياطية عند تعذر قراءة عدد القطاعات
 
 _TOKEN_START = r"(?<![A-Za-z0-9_])"
 _TOKEN_END = r"(?![A-Za-z0-9_])"
@@ -177,6 +184,31 @@ def _parse(path: Path, label: str) -> Node:
     return parser.root
 
 
+
+def _zone_count(date: str | None) -> int | None:
+    """عدد القطاعات المعلنة لذلك التاريخ من بطاقتها الحاكمة (مصدر واحد)."""
+    if not date:
+        return None
+    brain = Path(__file__).resolve().parents[1]
+    for path in (brain / "web" / "zones" / f"{date}.json", brain / "web" / "zone-registry.json"):
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, ValueError):
+            continue
+        zones = data.get("zones")
+        if isinstance(zones, list) and zones:
+            return len(zones)
+    return None
+
+
+def _word_limit(date: str | None) -> tuple[int, int | None]:
+    """السقف = سقف المالك + كلفة كل قطاع زائد عن ثلاثة (يمنع سقفًا غير قابل للتحقق عند التوسع)."""
+    count = _zone_count(date)
+    if count is None:
+        return BASE_THREAT_WORD_LIMIT, None
+    extra = max(0, count - BASE_SECTORS)
+    return BASE_THREAT_WORD_LIMIT + PER_SECTOR_WORDS * extra, count
+
 def _latest_report() -> Path:
     reports_dir = SEAWATCH_ROOT / "dist" / "reports"
     if not reports_dir.is_dir():
@@ -295,11 +327,20 @@ def violations(report: str | Path | None = None, additions: str | Path | None = 
     if not threat_nodes:
         failures.append(f"صفحة الإصدار: قسم «{THREAT_TITLE}» غير موجود؛ تعذر قياس حد الكلمات")
     else:
+        report_date = re.search(r"(\d{4}-\d{2}-\d{2})", report_path.name)
+        date_value = report_date.group(1) if report_date else None
+        limit, zones_count = _word_limit(date_value)
         for node in threat_nodes:
             count = _word_count(_threat_body(node))
-            if count > THREAT_WORD_LIMIT:
+            if count > limit:
+                extra_note = (
+                    f" · قطاعات معلنة: {zones_count}"
+                    if zones_count is not None
+                    else " · تعذر قراءة عدد القطاعات؛ حُسب السقف الأساسي"
+                )
                 failures.append(
-                    f"صفحة الإصدار: متن قسم «{THREAT_TITLE}» يتجاوز السقف: {count} كلمة (الحد {THREAT_WORD_LIMIT})"
+                    f"صفحة الإصدار: متن قسم «{THREAT_TITLE}» يتجاوز السقف: {count} كلمة"
+                    f" (الحد {limit} = {BASE_THREAT_WORD_LIMIT} + {PER_SECTOR_WORDS}×القطاعات الزائدة عن {BASE_SECTORS}{extra_note})"
                 )
 
     # 5) عنوان تتبع الوقائع ممنوع على كلا السطحين.
