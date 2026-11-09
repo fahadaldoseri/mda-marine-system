@@ -15,8 +15,20 @@ import pathlib
 B = pathlib.Path(__file__).resolve().parents[1]
 FROZEN = B / "templates" / "approved-pdf" / "print-css-frozen.css"
 PROFILE = B / "templates" / "approved-pdf" / "print-profile.json"
-REF_PDF_NO_IMAGE = pathlib.Path("/home/ubuntu/seawatch/dist/reports/pdf/2026-10-30.pdf")
-TODAY_PDF = pathlib.Path("/home/ubuntu/seawatch/dist/reports/pdf/2026-11-08.pdf")
+def _site() -> pathlib.Path:
+    """جذر الموقع: SITE_DIR، ثم seawatch الشقيق، ثم النسخة المتداخلة — بلا مسار مطلق."""
+    import os
+    v = os.environ.get("SITE_DIR")
+    if v:
+        return pathlib.Path(v)
+    for cand in (B.parent / "seawatch", B / "site"):
+        if cand.is_dir():
+            return cand
+    return B.parent / "seawatch"
+
+
+REF_PDF_NO_IMAGE = _site() / "dist" / "reports" / "pdf" / "2026-10-30.pdf"
+TODAY_PDF = _site() / "dist" / "reports" / "pdf" / "2026-11-08.pdf"
 
 
 def _load(name: str, path: pathlib.Path):
