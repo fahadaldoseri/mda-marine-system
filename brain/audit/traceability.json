@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-09T05:06:34.047377+00:00",
+  "generated_at": "2026-11-09T05:18:07.245759+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -4300,6 +4300,20 @@
       "lesson_id": "ك-584",
       "barrier_id": "B-7bcee45e",
       "run_evidence": "قياس حي: closure_round --apply ثم check_closure يعيدان rc=0 بلا صف مغلق بدليل غير قا"
+    },
+    {
+      "fault_id": "ك-585",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-585",
+      "barrier_id": "B-0c6d2efc",
+      "run_evidence": "ة التغطية تعرض «مؤجلة معلنة: 1 · غير مغطاة: 0 · مانعة: 0» والاختبارات rc=0. أمر إعادة التشغيل: pyth"
+    },
+    {
+      "fault_id": "ك-586",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-586",
+      "barrier_id": "B-cd24eaeb",
+      "run_evidence": "ياس حي: بصمة المعجم المخزّنة صارت eb7f368968a2ee55 وفحص المطابقة يعيد rc=0. أمر إعادة التشغيل: pyth"
     },
     {
       "fault_id": "ز-01/ب",
