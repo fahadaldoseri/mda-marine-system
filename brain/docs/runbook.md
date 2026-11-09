@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة 46a9e258d7dbd934). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة 549e3708ff2eec27). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -69,7 +69,7 @@
 | G036 | المفردات المبسطة (تنبيهي حتى الموافقة) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G036.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_vocabulary.py، appendices/simplified-vocabulary.json | stop |
 | G044 | السجل الحاكم للمفردات ومُولَّده | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G044.log | ف1–ف5 — بوابة التحقق، ط15 — مدى بوابة الأسلوب | tools/final_gate.sh، tools/build_vocab_gate.py، appendices/simplified-vocabulary.json، tools/vocab_review.py، tools/lexicon_wiring.py، sections/20-lexicon.md | stop |
 | G044B | حارس سلسلة الاستبدال في المفردات (ك-479) | script | appendices/simplified-vocabulary.json، sections/20-lexicon.md |  | cmd:bash -lc test -s logs/runbook/{date}/G044B.log | ف1–ف5 — بوابة التحقق | validators/check_vocab_chain.py، tools/final_gate.sh، appendices/simplified-vocabulary.json، sections/20-lexicon.md | stop |
-| G048 | بوابة الإغلاق (الأعطال والاستثناءات) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G048.log | ف3 — إغلاق الأعطال | validators/check_closure.py | stop |
+| G048 | بوابة الإغلاق (الأعطال والاستثناءات) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G048.log | ف3 — إغلاق الأعطال | validators/check_closure.py، validators/check_ledger_matrix_parity.py | stop |
 | G048A | تغطية المصادر في دفتر الوقائع (اتحاد المصادر المسجّل) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G048A.log | ط9 — اتحاد المصادر | validators/check_source_daily_coverage.py | stop |
 | G040 | اختبارات المراجعة الثانية (أ · ب · ج · د · هـ · ز) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G040.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tests/test_review2.sh، validators/check_skills_parity.py، tools/browser_measure.py | stop |
 | G041 | اختبار انحدار المصلح (12→23) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G041.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tests/test_repair_regression.sh | stop |
@@ -126,7 +126,7 @@
 | D036 | اختبارات المدقّقات الجديدة (أسرار · استثناءات · إرسال · تتبّع · نطاق) | script |  |  | cmd:bash -lc test -s logs/checks/new-validators-{date}.json && test -s logs/checks/new-validators-{date}.txt && test -s logs/checks/parity-scope-{date}.txt | س2 — الإغلاق والدفع | tests/test_new_validators.py، tests/test_parity_scope.py، tests/test_preflight_guard.py، tests/test_telegram_digest_cards.py، tests/test_secret_documentation_scope.py، tests/test_en_parity_confidence_map.py، tests/test_github_backup_failure_output.py، tools/audit_broad_excepts.py، validators/check_secrets.py | stop |
 | D040 | النسخة الاحتياطية والتحقق من التماثل | script |  |  | cmd:bash -lc grep -q 'النتيجة: مطابق' logs/runbook/{date}/D040.log | س2 — الإغلاق والدفع | tools/github_backup.sh، validators/check_backup_tree_clean.py، validators/check_backup_parity.py، runbook/approved-skills.json، validators/check_skills_parity.py، tools/github_backup.py، tools/apply_from_github.sh، tools/apply_from_github.py، tools/code_paths.py، tools/repo_root.py، tests/test_secrets_generated_boundary.py | stop |
 | D045 | فهرس التقارير (المستودع مقابل الأرشيف الخاص) (اختيارية) | script |  |  | cmd:bash -lc grep -q '{date}' docs/reports-index.md | س2 — الإغلاق والدفع | tools/reports_index.py، appendices/reports-archive.json | continue |
-| D050 | التعلم الذاتي وتسجيل الدروس | script |  |  | file_exists:memory/learning-log.jsonl | س2 — الإغلاق والدفع | tools/self_improve.py، tools/skill_lessons.py، tools/self_test.py | stop |
+| D050 | التعلم الذاتي وتسجيل الدروس | script |  |  | file_exists:memory/learning-log.jsonl | س2 — الإغلاق والدفع | tools/self_improve.py، tools/skill_lessons.py، tools/self_test.py، validators/check_enforcer_coverage.py | stop |
 | D060 | تسجيل رموز التقدير والأحداث | script |  |  | cmd:bash -lc grep -q 'رمز تقدير مسجّل' logs/runbook/{date}/D060.log | ب2 — ترتيب الأقسام | tools/register_estimate.py | stop |
 | D071 | تتبّع ملفات الشيفرة على الخادم | script |  |  | cmd:bash -lc grep -q '✔ كل ملفات الشيفرة' logs/runbook/{date}/D071.log | س2 — الإغلاق والدفع | validators/check_secrets.py، tools/redact.py، tools/github_backup.sh | stop |
 | Q010 | تدقيق المكتبات والمهارات (أسبوعي) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/Q010.log | ف3 — بوابات المكتبات | validators/check_library_use.py، validators/check_libraries_skills.py | stop |
