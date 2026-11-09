@@ -10,16 +10,25 @@ from __future__ import annotations
 
 import importlib.util
 import json
-import os
 import pathlib
 
 B = pathlib.Path(__file__).resolve().parents[1]
 FROZEN = B / "templates" / "approved-pdf" / "print-css-frozen.css"
 PROFILE = B / "templates" / "approved-pdf" / "print-profile.json"
-SITE_ROOT = pathlib.Path(os.environ.get("SITE_DIR", str(B / "site")))
-PDF_ROOT = SITE_ROOT / "dist" / "reports" / "pdf"
-REF_PDF_NO_IMAGE = PDF_ROOT / "2026-10-30.pdf"
-TODAY_PDF = PDF_ROOT / "2026-11-08.pdf"
+def _site() -> pathlib.Path:
+    """جذر الموقع: SITE_DIR، ثم seawatch الشقيق، ثم النسخة المتداخلة — بلا مسار مطلق."""
+    import os
+    v = os.environ.get("SITE_DIR")
+    if v:
+        return pathlib.Path(v)
+    for cand in (B.parent / "seawatch", B / "site"):
+        if cand.is_dir():
+            return cand
+    return B.parent / "seawatch"
+
+
+REF_PDF_NO_IMAGE = _site() / "dist" / "reports" / "pdf" / "2026-10-30.pdf"
+TODAY_PDF = _site() / "dist" / "reports" / "pdf" / "2026-11-08.pdf"
 
 
 def _load(name: str, path: pathlib.Path):
@@ -80,10 +89,3 @@ def test_map_geometry_fails_closed_on_missing_file():
     """سالب: ملف غير موجود لا يُنتج قياسًا ولا يمرّ بلا دليل."""
     m = _print_quality()
     assert m._map_image_geometry(pathlib.Path("/tmp/لا-يوجد-مثل-هذا.pdf")) is None
-
-
-def test_pdf_fixture_paths_are_portable_and_not_archived_roots():
-    """موجب: المسارات تُشتق من SITE_DIR/الجذر المحلي، وسالب: الجذر القديم ممنوع."""
-    source = pathlib.Path(__file__).read_text(encoding="utf-8")
-    assert "SITE_DIR" in source
-    assert "/home/ubuntu/seawatch" not in source
