@@ -61,10 +61,10 @@
    "source": "web/zones/{date}.json · counter",
    "value": "1",
    "detail": "1 رواية · منها 1 مؤهلة · تُذكر ولا تُحتسب",
-   "cumulative": 29,
-   "updated": "2026-11-06",
+   "cumulative": 31,
+   "updated": "2026-11-07",
    "label": "روايات لم تتأكد",
-   "note": "1 رواية · منها 1 مؤهلة · تُذكر ولا تُحتسب؛ القراءة المؤرخة: 07/11/2026.",
+   "note": "1 رواية في الدفتر · منها 1 مؤهلة · تُذكر ولا تُحتسب",
    "accent": "warn"
   },
   {
@@ -371,7 +371,7 @@
   "cited": 9,
   "ok": 59,
   "failed": 1,
-  "stale": 0,
+  "stale": 6,
   "rows": [
    {
     "name": "UKMTO — الحوادث الأخيرة"
@@ -404,7 +404,8 @@
     "name": "TradeWinds"
    }
   ],
-  "approved": 62
+  "approved": 62,
+  "stale_days_limit": 14
  },
  "source_coverage": {
   "line": "فُحصت 60 تغذية، نجحت 59 منها، وتعذر مصدر واحد.",

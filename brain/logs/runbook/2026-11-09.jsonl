@@ -141,3 +141,15 @@
 {"step": "G068", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-09/G068.log", "attempt": 1, "ts": "2026-11-09T08:04:29Z"}
 {"step": "G067", "status": "done", "rc": 0, "outputs": {"audit/measurements/perf-budget-2026-11-09.json": "8b80685ac330fd209394a0c53ec7941da2a54d36234b48430b209c65ed36161f", "audit/measurements/perf-budget-2026-11-09.json.sha256": "72525dff5d406554495f01fb8b3ac03cab783d7769228e053da9c2a77d839103"}, "log": "logs/runbook/2026-11-09/G067.log", "attempt": 1, "ts": "2026-11-09T08:04:29Z"}
 {"step": "D005", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-09/D005.log", "ts": "2026-11-09T08:04:29Z"}
+{"step": "D005", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-09/D005.log", "attempt": 1, "ts": "2026-11-09T08:08:12Z"}
+{"step": "G011", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-09/G011.log", "attempt": 1, "ts": "2026-11-09T08:08:13Z"}
+{"step": "D010", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-09/D010.log", "attempt": 1, "ts": "2026-11-09T08:08:59Z"}
+{"step": "D020", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-09/D020.log", "attempt": 1, "ts": "2026-11-09T08:12:07Z"}
+{"step": "D021", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-09/D021.log", "attempt": 1, "ts": "2026-11-09T08:13:40Z"}
+{"step": "D016", "status": "failed", "rc": 1, "problems": ["فحص فشل (رمز 1): python3 tools/manus_channel_attempt.py --verify-only --date 2026-11-09"], "log": "logs/runbook/2026-11-09/D016.log", "ts": "2026-11-09T08:13:44Z"}
+{"step": "D030", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-09/D030.log", "ts": "2026-11-09T08:13:44Z"}
+{"step": "D031", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-09/D031.log", "ts": "2026-11-09T08:13:44Z"}
+{"step": "D032", "status": "skipped", "disabled": true, "reason": "خطوة معطلة صراحة", "rc": 0, "log": "logs/runbook/2026-11-09/D032.log", "ts": "2026-11-09T08:13:44Z"}
+{"step": "D033", "status": "done_warn", "rc": 1, "outputs": {}, "log": "logs/runbook/2026-11-09/D033.log", "attempt": 1, "ts": "2026-11-09T08:13:44Z"}
+{"step": "D035", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-09/D035.log", "attempt": 1, "ts": "2026-11-09T08:15:21Z"}
+{"step": "D036", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-09/D036.log", "attempt": 1, "ts": "2026-11-09T08:15:27Z"}
