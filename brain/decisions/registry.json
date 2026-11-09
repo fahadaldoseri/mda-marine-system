@@ -11,7 +11,7 @@
   "decided_by": "المالك",
   "last_measured": "2026-11-10",
   "counts": {
-    "منفَّذ": 38,
+    "منفَّذ": 40,
     "منفَّذ جزئيًّا": 4,
     "يحتاج تحققًا": 3,
     "يحتاج قرارًا": 3
@@ -1033,6 +1033,36 @@
       ],
       "governing_file": "seawatch/docs/تقرير-القياس-2026-11-10.md",
       "next_action_ar": "إصلاح اللفظ وحارس أسلوب الغائب — المرحلة (ج) و(د)."
+    },
+    {
+      "id": "D-0643",
+      "title_ar": "المعجم المشتق كان متأخرًا عن مصادره (خ-10) — أُعيد توليده بالمولّد الحاكم",
+      "status": "منفَّذ",
+      "wording_ar": "بوابة المعجم أبلغت: المخزّن=8019 كلمة ببصمة eb7f3689 والمحسوب=8035 ببصمة d4a19b79. السبب الجذري: تحرير يدوي لملف مشتق (glossary.json) خارج المولّد الحاكم. أُعيد التوليد بـ tools/build_lexicon_corpus.py --apply فأصبح 8035 كلمة وبصمة d4a19b79 وبوابة المعجم rc=0.",
+      "evidence": [
+        {
+          "kind": "measurement",
+          "ref": "tools/build_lexicon_corpus.py",
+          "note": "كُتب appendices/lexicon-corpus.json · كلمات=8035 · بصمة=d4a19b7927ed5d7d · وبوابة tests/test_lexicon_gate.py rc=0"
+        }
+      ],
+      "governing_file": "tools/build_lexicon_corpus.py",
+      "next_action_ar": "قاعدة: الملفات المشتقة لا تُحرَّر يدويًا، ويُعاد توليدها قبل بوابة G001."
+    },
+    {
+      "id": "D-0644",
+      "title_ar": "بوابة الاختبارات كانت تشتق جذر الموقع بمسار مُخمَّن فتُنتج إخفاقات كاذبة (خ-09)",
+      "status": "منفَّذ",
+      "wording_ar": "tests/run_checks.sh كان يسقط إلى \"$B/../seawatch\" غير الموجود، فتفشل فحوص الأسطح بأسباب كاذبة (4 من 5 إخفاقات في G001). أُصلح: يُشتق الجذر من SITE أو SITE_DIR ثم من قائمة مرشّحين بشرط وجود dist، وإلا فشل مغلق برسالة صريحة ورمز 2.",
+      "evidence": [
+        {
+          "kind": "measurement",
+          "ref": "tests/run_checks.sh",
+          "note": "الجذر المُشتق بلا SITE_DIR = /home/ubuntu/seawatch · والاختبار السلبي في مجلد بلا مرشّحين أعاد الفشل المغلق"
+        }
+      ],
+      "governing_file": "tests/run_checks.sh",
+      "next_action_ar": "إعادة تشغيل G001 كاملة بمحيط صحيح في المرحلة (أ) وتثبيت نتيجتها."
     }
   ]
 }
