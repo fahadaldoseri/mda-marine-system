@@ -9,9 +9,9 @@
     "يحتاج قرارًا"
   ],
   "decided_by": "المالك",
-  "last_measured": "2026-11-09",
+  "last_measured": "2026-11-10",
   "counts": {
-    "منفَّذ": 21,
+    "منفَّذ": 22,
     "منفَّذ جزئيًّا": 4,
     "يحتاج تحققًا": 3,
     "يحتاج قرارًا": 0
@@ -543,6 +543,56 @@
       ],
       "governing_file": "runbook/runbook.json",
       "next_action_ar": "مراجعة الاعتماد بعد ثلاث جولات: إن لم تُستهلك المهارة في جولة، يُعاد فتح الاعتماد بندًا لا يُحذف صامتًا."
+    },
+    {
+      "id": "D-0623",
+      "title_ar": "اعتماد مهارة فرز ملاحظات المالك بالقياس (owner-notes-measured-triage) في فهرس المشروع وقواعده",
+      "status": "منفَّذ",
+      "wording_ar": "«اعتمادها رسميًا وربطها بخطوة و تُعتمد بعد في فهرس المشروع وقواعده» — المالك، 2026-11-10.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "skills/owner-notes-measured-triage/SKILL.md",
+          "note": "المهارة المعتمدة: دورة استقبال ← قياس ← تصنيف ← عرض ← بوابة، وحدّ عدم التداخل مع owner-ui-notes-contract-ops"
+        },
+        {
+          "kind": "file",
+          "ref": "skills/owner-notes-measured-triage/scripts/audit_links.py",
+          "note": "أداة تدقيق الروابط والمعرّفات: موجب وrc=2 على الخلل"
+        },
+        {
+          "kind": "file",
+          "ref": "skills/owner-notes-measured-triage/scripts/probe_terms.py",
+          "note": "أداة مسح العبارات وحارسها (--forbid / --require)"
+        },
+        {
+          "kind": "file",
+          "ref": "INDEX.md",
+          "note": "سطر الاعتماد وقسم المهارة في فهرس المشروع بتاريخ 2026-11-10"
+        },
+        {
+          "kind": "file",
+          "ref": "validators/check_libraries_skills.py",
+          "note": "المستهلك: خطوة الكتيب Q010 تفحص سلامة المهارة وتماثلها مع نسخة المستودع"
+        },
+        {
+          "kind": "file",
+          "ref": "tests/run_checks.sh",
+          "note": "المستهلك الثاني: بوابة G001 تُشغّل عقد المهارة في القسم 29"
+        },
+        {
+          "kind": "file",
+          "ref": "tests/test_owner_notes_triage_skill_contract.py",
+          "note": "عقد قابل للاختبار: بنية · تماثل · أداتان موجب وسالب بلا شبكة"
+        },
+        {
+          "kind": "measurement",
+          "ref": "tests/test_owner_notes_triage_skill_contract.py",
+          "note": "24 فحصًا موجبًا وسالبًا · rc=0 · 2026-11-10"
+        }
+      ],
+      "governing_file": "runbook/runbook.json",
+      "next_action_ar": "مراجعة الاعتماد بعد ثلاث جولات: إن لم تُستهلك المهارة، يُعاد فتح اعتمادها بندًا لا يُحذف صامتًا."
     }
   ]
 }
