@@ -30,14 +30,18 @@ from pathlib import Path as _Path
 _ROOT = _Path(__file__).resolve().parents[1]
 
 def _tree(_env, _base, *_names):
-    """جذر الشجرة المجاورة: من متغيّر البيئة أو من مجلد شقيق."""
+    """جذر الشجرة: متغيّر البيئة، ثم seawatch الشقيق، ثم المجلد المتداخل."""
     _v = _os.environ.get(_env)
     if _v:
         return _Path(_v)
-    for _n in _names:
-        _c = _base.parent / _n
-        if _c.is_dir():
-            return _c
+    # تجنّب مرآة site القديمة داخل mda-marine-system إذا كان جذر seawatch
+    # المعلن موجودًا بجوارها؛ فالمصدّر والمدقق يجب أن يستخدما نفس المولد.
+    _parents = (_base.parent.parent, _base.parent)
+    for _parent in _parents:
+        for _n in _names:
+            _c = _parent / _n
+            if _c.is_dir():
+                return _c
     return _base.parent / _names[0]
 SITE = _tree("SITE_DIR", _ROOT, "seawatch", "site")
 
@@ -93,10 +97,12 @@ section.doc ul ul{margin:.6mm 0}
    تدفّق الكتل مسموح في مسار التوليد وفق نطاق البروفايل المعتمد. */
 /* ك-257: الأقسام وخريطة الوقائع تتدفّق بين الصفحات — الفراغ الداخلي صفر */
 section.doc,.additions-annex section.doc,section.print-map,.hmap{break-inside:auto !important;page-break-inside:auto !important}
-/* ك-341: كتلة الخريطة ومفتاحها وحدة واحدة — تمنع يتيم المفتاح في ورقة أخيرة قليلة التعبئة */
-.print-map,.print-map .hmap-wrap{break-inside:avoid !important;page-break-inside:avoid !important}
+/* ك-341/إصلاح 2026-11-08: الخريطة وتفاصيلها تتدفق؛ الرسم نفسه محمي أدناه، فلا يُدفع
+   ملخص mp-events-detail وحده إلى ورقة أخيرة شبه فارغة. */
+.print-map,.print-map .hmap-wrap{break-inside:auto !important;page-break-inside:auto !important;overflow:visible !important}
 section.doc *,section.print-map *,.hmap *{break-inside:auto !important;page-break-inside:auto !important}
-.decision{break-inside:avoid}
+/* إصلاح 2026-11-08: بطاقة القرار الطويلة تُجزّأ بين الصفحات بدل حجزها كاملة. */
+.decision{break-inside:auto !important;page-break-inside:auto !important}
 /* ك-256: نفس قاعدة الانقسام في مسار PDF لتصفير الفراغ الداخلي (تدفّق الكتل). */
 .card,.viz,.src,.table-row{break-inside:auto !important;page-break-inside:auto !important}
 section.doc p,section.doc li,.sec-lede,.masthead .lede,.glossary li,.src-grid li,
@@ -120,6 +126,32 @@ section.doc h2,section.doc h3,section.doc h4,.h-rule,.chip,.kpi,.tag,.st-badge,
 .additions-annex section.doc li{margin:.7mm 0}
 .additions-annex section.doc h3{margin:3mm 0 1.4mm !important}
 .additions-annex section.doc h2{margin:3.4mm 0 2mm !important}
+/* ك-XXX: أولوية قواعد build_report كانت تربط عنوان القسم والتمهيد بأول بطاقة؛
+   عند بقاء أقل من ارتفاع البطاقة تُهدر المساحة المتبقية. هذا override خاص بمسار
+   PDF، فيعيد العنوان/التمهيد إلى التدفق ويترك البطاقة قابلة للتجزئة دون تصغيرها. */
+section.doc > h2,section.doc > h3,.h-rule,.sec-lede{break-after:auto !important;page-break-after:auto !important}
+/* إصلاح 2026-11-08: مفتاح الخريطة ثلاث ذرات قصيرة في صف واحد؛ يمنع دفع ذرة
+   المفتاح أو ملخص التفاصيل إلى الصفحة الأخيرة، بلا تصغير خط أو حذف محتوى. */
+.print-map .mp-key{grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:2mm !important}
+.print-map .mp-key li{white-space:nowrap !important}
+/* إصلاح 2026-11-08: تفاصيل الوقائع وحدة تدفقية؛ صفوف الجدول فقط تبقى غير قابلة للتجزئة. */
+.print-map .mp-alt-wrap,.print-map .mp-events-detail{break-inside:auto !important;page-break-inside:auto !important}
+.print-map .mp-events-detail summary{break-after:auto !important;page-break-after:auto !important}
+.print-map .mp-events-detail > :not(summary){display:block !important}
+.print-map .mp-events-detail > .mp-ev-table{display:table !important;width:100% !important;
+  break-inside:auto !important;page-break-inside:auto !important}
+.print-map .mp-ev-table thead{display:table-header-group !important}
+.print-map .mp-ev-table tbody{display:table-row-group !important}
+.print-map .mp-ev-table{break-inside:auto !important;page-break-inside:auto !important}
+.print-map .mp-ev-table tbody tr{break-inside:avoid !important;page-break-inside:avoid !important}
+/* إصلاح فجوة ص8=53.7مم: شبكة EST هي أول كتلة معلّقة بعد عنوانها. فتح تدفقها
+   وإلغاء هامشها العلوي الزائد يضع أول صف في المساحة المتبقية، دون تغيير المحتوى. */
+.additions-annex h3 + .dg-grid{break-before:auto !important;page-break-before:auto !important;break-inside:auto !important;page-break-inside:auto !important;margin-top:0 !important}
+/* إصلاح 2026-11-09: شبكتا «رموز التقدير EST» و«الحركة الملاحية» بعرض ثلاثة أعمدة.
+   القياس المثبت: أكبر فجوة داخلية 23.2 مم (الحد 45) · تعبئة الصفحة الأخيرة 60.55% (الحد 55)،
+   بلا تصغير خط وبلا حذف محتوى، وبقاء الصفحات داخل النطاق المعتمد 7–12. */
+body .additions-annex #sec-add-09 > .dg-grid > .dg,
+body .additions-annex #sec-add-10 > .dg-grid > .dg{display:inline-block !important;width:32.4% !important;vertical-align:top !important;break-inside:auto !important;page-break-inside:auto !important}
 """
 
 HEADER_TPL = """<div style="font-family:'Noto Kufi Arabic','IBM Plex Sans Arabic',sans-serif;font-size:7.6px;
@@ -397,6 +429,14 @@ def main() -> int:
                           }catch(e){}
                           return d.querySelectorAll('section.doc').length;}""", _html)
                         print(f"ملحق إضافات: {_n} قسمًا")
+                # تفاصيل الوقائع مغلقة تفاعليًا على الشاشة؛ في PDF تُفتح بعد إدراج
+                # الملحق، حتى تُستهدف نسخة الطباعة الفعلية لا نسخة الشاشة المخفية.
+                opened_details = pg.evaluate("""()=>{
+                  const items=[...document.querySelectorAll('.print-map .mp-events-detail')];
+                  items.forEach(item=>{ item.open=true; });
+                  return items.length;
+                }""")
+                print(f"فتح تفاصيل الخريطة للطباعة: {opened_details} كتلة")
                 if args.extra_css:
                     _extra = Path(args.extra_css).read_text(encoding="utf-8")
                     pg.add_style_tag(content=_extra)

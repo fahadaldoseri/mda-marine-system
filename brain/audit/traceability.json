@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-09T00:13:10.019609+00:00",
+  "generated_at": "2026-11-09T00:28:16.373585+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -4230,6 +4230,20 @@
       "lesson_id": "ك-574",
       "barrier_id": "B-1c584a74",
       "run_evidence": "غلقًا برمز main نفسه في 50 مدقّقًا، ونسخ _guard.py في بيئة الاختبار · rc=0 اختبارات الفشل المغلق: p"
+    },
+    {
+      "fault_id": "ك-575",
+      "state": "مغلق",
+      "lesson_id": "ك-575",
+      "barrier_id": "B-d0160433",
+      "run_evidence": "قياس المدقق صار rc=0 «مطابق للشكل المعتمد (v3"
+    },
+    {
+      "fault_id": "ك-576",
+      "state": "مغلق",
+      "lesson_id": "ك-576",
+      "barrier_id": "B-ac28a227",
+      "run_evidence": "بوابة جودة الطباعة صارت rc=0 والخريطة مقيسة 149×99 مم"
     }
   ]
 }

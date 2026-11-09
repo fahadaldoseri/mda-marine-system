@@ -134,12 +134,63 @@ def _components(mask, min_cells: int):
     return out
 
 
+def _map_image_geometry(pdf: Path) -> dict | None:
+    """قياس هندسي لصورة الخريطة المضمَّنة في PDF: أبعادها كما وُضعت في الصفحة.
+
+    يُقرأ العرض والارتفاع بالبكسل ودقة البكسل لكل صورة في الملف (pdfimages -list)،
+    فيُحسب المقاس بالمليمتر بدقة لا تعتمد على اللون ولا على مضغوطية الصورة.
+    يُعيد أكبر صورة (بالمساحة) أو None إذا لم توجد صورة مضمَّنة.
+    """
+    try:
+        out = subprocess.run(["pdfimages", "-list", str(pdf)],
+                             capture_output=True, text=True, timeout=300).stdout
+    except Exception:
+        return None
+    page_w_mm, page_h_mm = 210.0, 297.0
+    try:
+        info = subprocess.run(["pdfinfo", str(pdf)], capture_output=True,
+                              text=True, timeout=120).stdout
+        m = re.search(r"Page size:\s+([\d.]+)\s+x\s+([\d.]+)", info)
+        if m:
+            page_w_mm = float(m.group(1)) / 72 * 25.4
+            page_h_mm = float(m.group(2)) / 72 * 25.4
+    except Exception:
+        pass
+    best = None
+    for line in out.splitlines():
+        parts = line.split()
+        if len(parts) < 15 or parts[2] != "image":
+            continue
+        try:
+            page_no = int(parts[0])
+            w_px, h_px = int(parts[3]), int(parts[4])
+            x_ppi, y_ppi = float(parts[12]), float(parts[13])
+        except (ValueError, IndexError):
+            continue
+        if x_ppi <= 0 or y_ppi <= 0 or w_px <= 0 or h_px <= 0:
+            continue
+        w_mm = w_px / x_ppi * 25.4
+        h_mm = h_px / y_ppi * 25.4
+        if best is None or w_mm * h_mm > best[0]:
+            best = (w_mm * h_mm, w_mm, h_mm, f"ص{page_no}")
+    if not best:
+        return None
+    return {"w_mm": best[1], "h_mm": best[2], "page": best[3], "share": 1.0,
+            "color": None, "extended": 0, "page_w": page_w_mm, "page_h": page_h_mm,
+            "method": "صورة الخريطة المضمَّنة (قياس هندسي)"}
+
+
 def map_block_report(pdf: Path, dpi: int = DPI) -> dict:
     """يقيس كتلة الخريطة هندسيًا بلا افتراض لون بحر.
 
     الخطوات: أكبر كتلة تعبئة مصمتة (بحر ملوّن أو يابسة)، ثم تمديد عرضها إلى حدّي
     الخريطة الرأسيين إن وُجدا قريبين — فيُقاس البحر الأبيض بحدود الخريطة لا بمساحة
     اليابسة وحدها. تعمل مع أي لوحة فاتحة أو داكنة (ك-122).
+
+    إصلاح جذري 2026-11-09: القياس الأول صار هندسيًا من صورة الخريطة المضمَّنة في
+    PDF نفسها (بكسل ÷ دقة البكسل)، لأن الكشف اللوني التقديري كان يسقط على خريطة
+    بلوحة فاتحة مضغوطة فيُعلن «لم تُعثر كتلة» وهو موجود. الكشف اللوني بقي مسارًا
+    احتياطيًا حين لا توجد صورة مضمَّنة، ويبقى الفشل مغلقًا عند غياب الخريطة.
     """
     try:
         import numpy as np
@@ -149,6 +200,10 @@ def map_block_report(pdf: Path, dpi: int = DPI) -> dict:
     mm = 25.4 / dpi
     res = {"w_mm": -1.0, "h_mm": -1.0, "page_w": 0.0, "page_h": 0.0, "page": "",
            "share": 0.0, "color": None, "pages": 0, "method": "", "extended": 0}
+    geo = _map_image_geometry(pdf)
+    if geo:
+        res.update(geo)
+        return res
     try:
         pages = _render_pages(pdf, dpi)
     except Exception as exc:
