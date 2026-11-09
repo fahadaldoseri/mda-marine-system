@@ -1,0 +1,10 @@
+COMMAND: timeout 120 python3 tools/mark_components.py
+STARTED_AT: 2026-11-09T02:37:30.915102+00:00
+RC: 2
+OUTPUT_BEGIN
+usage: mark_components.py [-h] --date DATE
+                          [--component {feeds,ofac,originals,ledger_merge}]
+                          [--verify]
+mark_components.py: error: the following arguments are required: --date
+
+OUTPUT_END

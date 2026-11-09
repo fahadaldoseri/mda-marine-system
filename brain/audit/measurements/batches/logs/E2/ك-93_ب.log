@@ -1,0 +1,8 @@
+COMMAND: timeout 120 python3 tools/qa_gates.py
+STARTED_AT: 2026-11-09T02:31:11.680768+00:00
+RC: 2
+OUTPUT_BEGIN
+usage: qa_gates.py [-h] --date DATE
+qa_gates.py: error: the following arguments are required: --date
+
+OUTPUT_END

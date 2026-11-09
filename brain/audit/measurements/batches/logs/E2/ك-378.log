@@ -1,0 +1,10 @@
+COMMAND: timeout 120 python3 tests/test_delivery_scripts.sh
+STARTED_AT: 2026-11-09T02:37:30.811957+00:00
+RC: 1
+OUTPUT_BEGIN
+  File "/home/ubuntu/mda-marine-system/brain/tests/test_delivery_scripts.sh", line 9
+    D=2099-01-01
+           ^
+SyntaxError: leading zeros in decimal integer literals are not permitted; use an 0o prefix for octal integers
+
+OUTPUT_END

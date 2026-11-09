@@ -1,0 +1,22 @@
+COMMAND: timeout 120 python3 tools/check_governing_assets.py
+STARTED_AT: 2026-11-09T02:37:28.725434+00:00
+RC: 2
+OUTPUT_BEGIN
+BLOCK · root 3270ee5c9afe109e8ec0bf6d9aa7fc1476260c04ca324d90f9d5fbd35aacdf99 · files 2664
+- snapshot root mismatch: current 3270ee5c9afe109e8ec0bf6d9aa7fc1476260c04ca324d90f9d5fbd35aacdf99 != recorded a06b2d380e8467889846eecb0f69b752e5924cbff58a3441c2bb356e5662da86
+- snapshot content mismatch: /home/ubuntu/skills/fault-closure-and-learning-ops/SKILL.md
+- snapshot missing recorded path: /home/ubuntu/skills/fault-evidence-arming-ops/SKILL.md
+- snapshot missing recorded path: /home/ubuntu/skills/fault-evidence-arming-ops/references/closure-evidence-contract.md
+- snapshot missing recorded path: /home/ubuntu/skills/fault-evidence-arming-ops/scripts/arm_evidence_from_log.py
+- snapshot missing recorded path: /home/ubuntu/skills/fault-ledger-matrix-parity-ops/SKILL.md
+- snapshot missing recorded path: /home/ubuntu/skills/fault-ledger-matrix-parity-ops/references/api_reference.md
+- snapshot missing recorded path: /home/ubuntu/skills/fault-ledger-matrix-parity-ops/references/parity-evidence.md
+- snapshot content mismatch: /home/ubuntu/skills/parity-and-publish-ops/SKILL.md
+- snapshot missing recorded path: /home/ubuntu/skills/rerun-step-to-live-parity-ops/SKILL.md
+- snapshot missing recorded path: /home/ubuntu/skills/rerun-step-to-live-parity-ops/references/closure-evidence-contract.md
+- snapshot missing recorded path: /home/ubuntu/skills/rerun-step-to-live-parity-ops/scripts/live_parity.py
+- mirror mismatch: fault-evidence-arming-ops/SKILL.md (local vs /home/ubuntu/mda-marine-system/skills/fault-evidence-arming-ops/SKILL.md)
+- mirror mismatch: fault-evidence-arming-ops/references/closure-evidence-contract.md (local vs /home/ubuntu/mda-marine-system/skills/fault-evidence-arming-ops/references/closure-evidence-contract.md)
+- mirror mismatch: fault-evidence-arming-ops/scripts/arm_evidence_from_log.py (local vs /home/ubuntu/mda-marine-system/skills/fault-evidence-arming-ops/scripts/arm_evidence_from_log.py)
+
+OUTPUT_END

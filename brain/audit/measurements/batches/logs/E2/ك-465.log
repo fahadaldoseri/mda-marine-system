@@ -1,0 +1,10 @@
+COMMAND: timeout 120 python3 tests/test_review2.sh
+STARTED_AT: 2026-11-09T02:37:55.774734+00:00
+RC: 1
+OUTPUT_BEGIN
+  File "/home/ubuntu/mda-marine-system/brain/tests/test_review2.sh", line 115
+    ، ثم فاصلة في بداية السطر التالي.
+    ^
+SyntaxError: invalid character '،' (U+060C)
+
+OUTPUT_END

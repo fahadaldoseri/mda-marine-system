@@ -1,0 +1,8 @@
+COMMAND: timeout 120 python3 validators/check_pdf_format.py
+STARTED_AT: 2026-11-09T02:34:36.193332+00:00
+RC: 2
+OUTPUT_BEGIN
+usage: check_pdf_format.py [-h] --pdf PDF [--date DATE] [--allow-css-change]
+check_pdf_format.py: error: the following arguments are required: --pdf
+
+OUTPUT_END

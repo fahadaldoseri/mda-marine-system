@@ -1,0 +1,11 @@
+COMMAND: timeout 120 python3 tools/runbook.py
+STARTED_AT: 2026-11-09T02:35:02.791090+00:00
+RC: 2
+OUTPUT_BEGIN
+usage: runbook.py [-h] [--date DATE] [--root ROOT] [--id ID] [--title TITLE]
+                  [--kind KIND] [--after AFTER] [--through THROUGH]
+                  [--only ONLY] [--redo REDO]
+                  cmd [step]
+runbook.py: error: the following arguments are required: cmd
+
+OUTPUT_END

@@ -1,0 +1,8 @@
+COMMAND: timeout 120 python3 validators/check_carryover.py
+STARTED_AT: 2026-11-09T02:32:36.121419+00:00
+RC: 2
+OUTPUT_BEGIN
+usage: check_carryover.py [-h] --date DATE [--window WINDOW] [--file FILE]
+check_carryover.py: error: the following arguments are required: --date
+
+OUTPUT_END
