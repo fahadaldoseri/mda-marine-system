@@ -316,6 +316,8 @@ t "لا وسيط خارجي في مسار الإرسال" python3 tests/test_no_
 t "تماثل الأرقام المرئية: موجب + سالب" python3 "$B/tests/test_en_parity_visible_numbers.py"
 echo "29) عقد مهارة فرز ملاحظات المالك بالقياس"
 t "بنية وتماثل وأداتان موجب وسالب" python3 "$B/tests/test_owner_notes_triage_skill_contract.py"
+echo "30) عقد مهارة بوابة الانطلاق المحكوم"
+t "بنية وتماثل وأداتان موجب وسالب" python3 "$B/tests/test_owner_approval_launch_gate_skill_contract.py"
 echo "----- الحصيلة -----"
 printf '  نجح: %s · فشل: %s\n' "$PASS" "$FAIL"
 [ "$FAIL" -eq 0 ] || exit 1
