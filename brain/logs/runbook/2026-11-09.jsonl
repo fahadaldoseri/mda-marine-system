@@ -1,3 +1,18 @@
 {"step": "S000", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-09/S000.log", "ts": "2026-11-09T04:02:54Z"}
 {"step": "S000", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-09/S000.log", "ts": "2026-11-09T04:07:00Z"}
 {"step": "S000", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-09/S000.log", "ts": "2026-11-09T04:09:18Z"}
+{"step": "S000", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-09/S000.log", "attempt": 1, "ts": "2026-11-09T04:11:23Z"}
+{"step": "S010", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-09/S010.log", "attempt": 1, "ts": "2026-11-09T04:11:25Z"}
+{"step": "S020", "status": "done_warn", "rc": 1, "outputs": {}, "log": "logs/runbook/2026-11-09/S020.log", "attempt": 1, "ts": "2026-11-09T04:19:25Z"}
+{"step": "S030", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-09/S030.log", "attempt": 1, "ts": "2026-11-09T04:19:26Z"}
+{"step": "S060", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-09/S060.log", "attempt": 1, "ts": "2026-11-09T04:19:34Z"}
+{"step": "S080", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-09/S080.log", "attempt": 1, "ts": "2026-11-09T04:22:07Z"}
+{"step": "S090", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-09/S090.log", "ts": "2026-11-09T04:22:07Z"}
+{"step": "W010", "status": "waiting_agent", "ts": "2026-11-09T04:22:07Z"}
+{"step": "W010", "status": "done", "outputs": {"reports/2026-11-09-sectioned.md": "782e0fc5a5f891c4f076184a36dd6533510f4faccef7f414094f1c312119ccd7"}, "ts": "2026-11-09T04:31:25Z"}
+{"step": "S090", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-09/S090.log", "attempt": 1, "ts": "2026-11-09T04:31:38Z"}
+{"step": "S040", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-09/S040.log", "attempt": 1, "ts": "2026-11-09T04:31:38Z"}
+{"step": "S050", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-09/S050.log", "attempt": 1, "ts": "2026-11-09T04:31:46Z"}
+{"step": "W030", "status": "waiting_agent", "ts": "2026-11-09T04:31:46Z"}
+{"step": "W030", "status": "done", "outputs": {"cumulative-2026/daily/2026-11-09.json": "e915e667153392bd0f0ca5a077fcbabda8b7059f85e356e4d3d3373bbb6faa1e"}, "ts": "2026-11-09T04:35:24Z"}
+{"step": "W020", "status": "waiting_agent", "ts": "2026-11-09T04:35:24Z"}

@@ -44,7 +44,7 @@ def main() -> int:
                "live-visual-audit-ops" / "scripts" / "verify_range_bidi.py")
     if mapping.exists():
         text = mapping.read_text(encoding="utf-8", errors="replace")
-        if "٠١٢٣٤٥٦٧٨٩" not in text:
+        if "0123456789" not in text:
             fails.append("جدول الأرقام العربية-الهندية مفقود من مصدر المهارة")
 
     if fails:

@@ -1028,6 +1028,40 @@
       "command": []
     },
     {
+      "id": "S065",
+      "title": "تصنيف القطاعات ومستوى التهديد قبل ملف الواجهة",
+      "phase": "write",
+      "command": [
+        "bash",
+        "-lc",
+        "B=\"$PWD\"; export B SITE; python3 \"$B/tools/classify_zones.py\" --date \"$D\" --write; rc=$?; exit $rc"
+      ],
+      "assert": [
+        {
+          "type": "cmd",
+          "command": [
+            "bash",
+            "-lc",
+            "test -s web/zones/{date}.json"
+          ]
+        }
+      ],
+      "ok_rc": [
+        0
+      ],
+      "on_fail": "stop",
+      "links": {
+        "rules": [],
+        "files": [
+          "tools/classify_zones.py"
+        ],
+        "gates": [],
+        "tests": [
+          "tests/test_classify_zones_damage_scope.py"
+        ]
+      }
+    },
+    {
       "id": "W020",
       "title": "بناء ملف واجهة التقرير",
       "kind": "agent",
