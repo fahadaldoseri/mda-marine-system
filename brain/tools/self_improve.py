@@ -11,6 +11,8 @@
 الاستخدام: python3 tools/self_improve.py [--date YYYY-MM-DD] [--window 7]
 رمز الخروج: 0 دائمًا (استشاري) — الترقية إلى مانع تكون بقرار مرحلي.
 """
+import re
+FAULT_ROW = re.compile(r'^\\|\\s*[\\u0621-\\u064A]{1,3}-\\d')
 from __future__ import annotations
 
 import argparse
@@ -34,7 +36,7 @@ def fault_rows() -> list[dict]:
         return []
     out = []
     for line in FAULTS.read_text(encoding="utf-8").splitlines():
-        if not line.startswith("| ك-"):
+        if not FAULT_ROW.match(line):
             continue
         cells = [c.strip() for c in line.strip("|").split("|")]
         if len(cells) >= 6:

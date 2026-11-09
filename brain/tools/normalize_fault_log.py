@@ -2,6 +2,8 @@
 """توحيد بنية سجل الأعطال وسجل التعلم: مخطط واحد · حالة صريحة لكل صف · إزالة الازدواج.
 لا يُحذف أي سجل: الصفوف المكرّرة تُوسم بلاحقة (ب) · النسخ الأصلية تُؤرشف.
 الاستخدام: python3 tools/normalize_fault_log.py [--apply]"""
+import re
+FAULT_ROW = re.compile(r'^\\|\\s*[\\u0621-\\u064A]{1,3}-\\d')
 import argparse, json, re, shutil, time
 from collections import Counter
 from pathlib import Path
@@ -43,7 +45,7 @@ def normalize_table(text: str):
     lines = text.splitlines()
     out, seen, fixed = [], Counter(), {'reorder': 0, 'merge': 0, 'dup': 0, 'status': Counter()}
     for line in lines:
-        if not line.startswith('| ك-'):
+        if not FAULT_ROW.match(line):
             out.append(line)
             continue
         cells = [c.strip() for c in line.strip('|').split('|')]
