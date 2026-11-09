@@ -1,0 +1,10 @@
+COMMAND: timeout 120 python3 tools/restore_skills.sh
+STARTED_AT: 2026-11-09T02:37:28.702796+00:00
+RC: 1
+OUTPUT_BEGIN
+  File "/home/ubuntu/mda-marine-system/brain/tools/restore_skills.sh", line 31
+    case "$1" in marine-news-brain/*|military-arabic-editing/*|macr-system/*|superpowers-method/*|self-learning-loop-ops/*|vocabulary-guard-ops/*|owner-ui-notes-contract-ops/*) return 0 ;; print-layout-gate-ops/*) return 0 ;; *) return 1 ;; esac
+                                                                                                                                                                               ^
+SyntaxError: closing parenthesis ')' does not match opening parenthesis '{' on line 30
+
+OUTPUT_END

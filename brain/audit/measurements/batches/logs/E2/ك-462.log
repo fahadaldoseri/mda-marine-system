@@ -1,0 +1,24 @@
+COMMAND: timeout 120 python3 tools/binding_coverage.py
+STARTED_AT: 2026-11-09T02:37:55.431514+00:00
+RC: 1
+OUTPUT_BEGIN
+   ══ تغطية الربط — brain ══
+   | الملفات المحكومة المفحوصة: 1545
+   | مالك مذكور صريحًا:        401
+   | مخرج معلن في المانيفست:   0
+   | مستثنى بسبب مكتوب:        1133
+   | يتيم بلا مالك ولا استثناء: 11
+   | ✘ tests/test_batch_runner_safe_id.py
+   | ✘ tests/test_event_card_rows.py
+   | ✘ tests/test_gate_coverage_reference.py
+   | ✘ tests/test_hero_kpi_presentation_contract.py
+   | ✘ tests/test_ledger_matrix_parity_guard.py
+   | ✘ tests/test_measurement_batch_runner_timeout.py
+   | ✘ tests/test_normalize_digits_scope.py
+   | ✘ tests/test_pdf_print_gates.py
+   | ✘ tests/test_regression_b03_dynamic_anchor.py
+   | ✘ tests/test_runbook_s090_order.py
+   | ✘ tests/test_surface_hygiene.py
+   النتيجة: تحذير — 11 يتيمًا
+
+OUTPUT_END

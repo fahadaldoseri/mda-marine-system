@@ -1,0 +1,8 @@
+COMMAND: timeout 120 python3 validators/check_print_quality.py
+STARTED_AT: 2026-11-09T02:37:30.743311+00:00
+RC: 2
+OUTPUT_BEGIN
+usage: check_print_quality.py [-h] --pdf PDF [--page PAGE] [--date DATE]
+check_print_quality.py: error: the following arguments are required: --pdf
+
+OUTPUT_END

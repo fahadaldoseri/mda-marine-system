@@ -1,0 +1,10 @@
+COMMAND: timeout 120 python3 tests/test_sync_guard.py
+STARTED_AT: 2026-11-09T02:35:03.599372+00:00
+RC: 2
+OUTPUT_BEGIN
+  ✔ ملف خارج النطاق بلا علم → مُنع (rc=2) والملف باقٍ
+  ✔ مع --allow-delete → نُفّذ (rc=0) والملف حُذف
+  ✔ حذف 25 ملفًا فوق السقف 20 → مُنع (rc=2)
+  ✔ التجربة تُظهر الخطة وتمنع التنفيذ (rc=2)
+
+OUTPUT_END

@@ -1,0 +1,8 @@
+COMMAND: timeout 120 python3 validators/check_exceptions_burndown.py
+STARTED_AT: 2026-11-09T02:35:03.398923+00:00
+RC: 0
+OUTPUT_BEGIN
+   الاستثناءات: 377 · خط الأساس: 438 · تنتهي قريبًا: 0
+   ✔ ميزانية الاستثناءات سليمة: لا زيادة ولا مهلة على وشك الانتهاء
+
+OUTPUT_END
