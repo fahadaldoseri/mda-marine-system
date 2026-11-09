@@ -1059,6 +1059,24 @@
         "tests": [
           "tests/test_classify_zones_damage_scope.py"
         ]
+      },
+      "kind": "script",
+      "reads": [
+        "cumulative-2026/daily/{date}.json",
+        "appendices/zone-registry.json",
+        "appendices/zone-overrides.json",
+        "appendices/threat-scale.json"
+      ],
+      "writes": [
+        "web/zones/{date}.json"
+      ],
+      "declares": {
+        "reads": [
+          "cumulative-2026/daily/*.json"
+        ],
+        "writes": [
+          "web/zones/{date}.json"
+        ]
       }
     },
     {
