@@ -15,6 +15,10 @@ import re
 FAULT_ROW = re.compile(r'^\\|\\s*[\\u0621-\\u064A]{1,3}-\\d')
 from __future__ import annotations
 
+import re
+
+FAULT_ROW = re.compile(r'^\|\s*[\u0621-\u064A]{1,3}-\d')
+
 import argparse
 import json
 import re
