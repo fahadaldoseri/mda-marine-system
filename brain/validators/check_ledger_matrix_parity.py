@@ -7,7 +7,11 @@ from __future__ import annotations
 
 import json
 import pathlib
+import re
 import sys
+
+
+FAULT_ROW = re.compile(r'^\|\s*[\u0621-\u064A]{1,3}-\d')
 
 
 def main() -> int:
@@ -16,7 +20,7 @@ def main() -> int:
     mat = root / 'audit/traceability.json'
     base_p = root / 'audit/measurements/ledger-baseline.json'
     ids = [l.strip().strip('|').split('|')[0].strip()
-           for l in log.read_text(encoding='utf-8').splitlines() if l.startswith('| ك-')]
+           for l in log.read_text(encoding='utf-8').splitlines() if FAULT_ROW.match(l)]
     rows = json.loads(mat.read_text(encoding='utf-8'))
     mids = [r['fault_id'] for r in (rows['rows'] if isinstance(rows, dict) else rows)]
     problems = []
