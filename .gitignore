@@ -28,3 +28,7 @@ brain/shots/
 brain/secrets/secrets.env
 brain/secrets/*.env
 !brain/secrets/secrets.env.example
+
+# ملف حالة سر الويب هوك (قيمة سرّية) — لا يُتبع
+brain/state/webhook-secret.txt
+brain/state/webhook-secret*.txt
