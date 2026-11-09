@@ -8,7 +8,8 @@
 #     site_root_resolve "$B" || exit 2
 #
 # المرشّحون: SITE (إن مُرِّر صريحًا) ← SITE_CANDIDATES (مرساة اختبار) ← SITE_DIR ←
-#            $B/../seawatch · $B/../../seawatch · /home/ubuntu/seawatch · $HOME/seawatch
+#            $B/../seawatch · $B/../../seawatch · $HOME/seawatch
+# لا مسار مطلق محفور: الجذور تُشتق من $B أو من $HOME أو تُمرَّر صريحة (حارس قابلية النقل).
 # الشرط: المجلد يحتوي `dist` فعليًا. ولا مسار مُخمَّن بلا dist.
 
 site_root_resolve() {
@@ -24,7 +25,7 @@ site_root_resolve() {
     # مرساة اختبار: تحلّ محل القائمة كلها (تُمكِّن إثبات الفشل المغلق بلا مرشّح موجود).
     candidates="$SITE_CANDIDATES"
   else
-    candidates="${SITE_DIR:-} $base/../seawatch $base/../../seawatch /home/ubuntu/seawatch $HOME/seawatch"
+    candidates="${SITE_DIR:-} $base/../seawatch $base/../../seawatch $HOME/seawatch"
   fi
   local c
   for c in $candidates; do

@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة 627beb4db5552098). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة 4050075df48a6153). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -21,7 +21,7 @@
 | S040 | توليد أهداف العقوبات من التقرير | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S040.log | أ1 — سلسلة التشغيل اليومي | tools/ofac_targets_from_report.py، sections/90-automation.md | stop |
 | S050 | فحص العقوبات (OFAC) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S050.log | أ1 — سلسلة التشغيل اليومي | tools/ofac_screen.py، sections/90-automation.md | stop |
 | W030 | بناء دفتر اليوم (وقائع ومقتطفات الأصل) | agent | reports/{date}-sectioned.md، feeds/feeds-{date}.json | cumulative-2026/daily/{date}.json | min_bytes:cumulative-2026/daily/{date}.json | ف1–ف5 — بوابة التحقق | tools/ledger_source_excerpt.py، cumulative-2026/daily/ | stop |
-| S065 | تصنيف القطاعات ومستوى التهديد قبل ملف الواجهة | script | cumulative-2026/daily/{date}.json، appendices/zone-registry.json، appendices/zone-overrides.json، appendices/threat-scale.json | web/zones/{date}.json | cmd:bash -lc test -s web/zones/{date}.json |  | tools/classify_zones.py | stop |
+| S065 | تصنيف القطاعات ومستوى التهديد قبل ملف الواجهة | script | cumulative-2026/daily/{date}.json، appendices/zone-registry.json، appendices/zone-overrides.json، appendices/threat-scale.json | web/zones/{date}.json | cmd:bash -lc test -s web/zones/{date}.json | ف4 — شريط نسب القطاعات | tools/classify_zones.py | stop |
 | W020 | بناء ملف واجهة التقرير | agent | reports/{date}-sectioned.md، templates/mark-schema.json | web/meta/{date}.json | min_bytes:web/meta/{date}.json | ب2 — ترتيب الأقسام | templates/mark-schema.json | stop |
 | S070 | دمج الذاكرة التراكمية (دفتر اليوم) | script | cumulative-2026/daily/{date}.json، appendices/zone-registry.json، appendices/zone-overrides.json، appendices/threat-scale.json | web/zones/{date}.json، web/meta/{date}.json | cmd:bash -lc test -s logs/runbook/{date}/S070.log | أ1 — سلسلة التشغيل اليومي | tools/merge_ledger_daily.py، tools/ledger_link_fields.py، sections/90-automation.md، tools/daily_pipeline.sh، tools/repair_ledger_prose.py، tools/derive_area_labels.py، tools/backfill_ukmto_archive.py، tools/refresh_imo_incidents.py | stop |
 | S071 | حارس استمرارية دفتر الوقائع | script | cumulative-2026/daily/{date}.json، cumulative-2026/event-ledger-master.json، cumulative-2026/no-material.json |  | cmd:python3 validators/check_ledger_continuity.py --date {date} | أ1 — سلسلة التشغيل اليومي | validators/check_ledger_continuity.py، cumulative-2026/daily/، cumulative-2026/event-ledger-master.json، cumulative-2026/no-material.json | stop |

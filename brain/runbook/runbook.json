@@ -272,7 +272,7 @@
     "templates/*",
     "appendices/*",
     "skills/*",
-    "tools/_oneoff/*",
+    "archive/oneoff-2026-11/*",
     "runbook/*",
     "design/*",
     "*.pdf",
@@ -369,7 +369,7 @@
     "templates/*": "قوالب: مرتبطة بالخطوات التي تستعملها",
     "appendices/*": "ملاحق مرجعية: مربوطة بالخطوات عبر links.files",
     "skills/*": "نسخة المهارات داخل المستودع",
-    "tools/_oneoff/*": "أدوات تاريخية لمرة واحدة (مُبقاة للسجل)",
+    "archive/oneoff-2026-11/*": "أدوات تاريخية لمرة واحدة (مُبقاة للسجل)",
     "runbook/runbook.json": "المصدر الوحيد للحقيقة (يستثني نفسه من التغطية)",
     "tools/runbook.py": "المحرّك نفسه",
     "docs/runbook.md": "الكتيب المولَّد من المانيفست",
@@ -1051,7 +1051,9 @@
       ],
       "on_fail": "stop",
       "links": {
-        "rules": [],
+        "rules": [
+          "ف4 — شريط نسب القطاعات"
+        ],
         "files": [
           "tools/classify_zones.py"
         ],
