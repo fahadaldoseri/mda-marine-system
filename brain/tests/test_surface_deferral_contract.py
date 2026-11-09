@@ -138,3 +138,33 @@ class SurfaceDeferralUnionTests(unittest.TestCase):
                 {"id": "G045", "phase": "build", "command": ["python3 tools/audit_style_coverage.py"]},
             ]
         }
+
+
+class DeferralResolutionTests(unittest.TestCase):
+    """الهوية المستدلة لا تُسقط إعلانًا معلَنًا؛ الضيق عند الهوية الصريحة فقط."""
+
+    def _manifest(self):
+        declaration = {
+            "label": "صفحة التقرير",
+            "producer": "B010",
+            "enforced_by": "G045",
+            "enforcement_contract": "surface-coverage",
+            "reason": "B010 يبني الصفحة بعد G001، وG045 يعيد فحص التغطية بعد البناء.",
+            "effective_from": "2026-11-07",
+        }
+        return {
+            "steps": [
+                {"id": "G001", "phase": "gates", "deferred_surfaces": [declaration]},
+                {"id": "B010", "phase": "build"},
+                {"id": "G045", "phase": "build", "command": ["python3 tools/audit_style_coverage.py"]},
+            ]
+        }
+
+    def test_inferred_gate_keeps_other_step_declaration(self):
+        module = load_module()
+        self.assertIn("B010", module.resolve_deferred(self._manifest(), "", "G045"))
+
+    def test_explicit_gate_restricts_to_that_step(self):
+        module = load_module()
+        self.assertEqual(module.resolve_deferred(self._manifest(), "G045", "G045"), {})
+        self.assertIn("B010", module.resolve_deferred(self._manifest(), "G001", "G001"))

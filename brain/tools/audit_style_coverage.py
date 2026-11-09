@@ -258,6 +258,17 @@ def classify_evaluated_surface(style_rc: int, prose_rc: int) -> dict[str, object
     return {"status": "مغطى" if covered else "مانع", "blocked": not covered}
 
 
+def resolve_deferred(manifest: dict, explicit_gate: str, current_gate: str | None) -> dict[str, dict]:
+    """قرار التأجيل: الضيق عند تمرير هوية صريحة فقط.
+
+    الهوية المستدلة (current_gate) لا تُسقط إعلانًا معلَنًا في خطوة أخرى؛ وكل إعلان
+    يبقى مشروطًا بترتيب منتجه بعد خطوة إعلانه وبوجود خطوة إنفاذ لاحقة حقيقية.
+    """
+    if explicit_gate:
+        return deferred_producer_ids(manifest, explicit_gate)
+    return deferred_producer_ids(manifest, None)
+
+
 def _current_step_id(manifest: dict) -> str | None:
     """يستدل على خطوة G045 من ذكر ملف الأداة في أمرها؛ لا يثبت هويةً صامتة."""
     steps = manifest.get("steps") if isinstance(manifest, dict) else None
@@ -370,7 +381,8 @@ def main() -> int:
     manifest = _load_manifest()
     gate_id = a.gate_id or _current_step_id(manifest)
     # غياب هوية البوابة لا يُلغي الإعلانات المعلَنة: تُحتسب بإعلانها وشرط إنفاذها.
-    deferred = deferred_producer_ids(manifest, gate_id) if gate_id else deferred_producer_ids(manifest, None)
+    explicit_gate = str(getattr(a, "gate_id", "") or "")
+    deferred = resolve_deferred(manifest, explicit_gate, gate_id)
     rows, blocked, uncovered, deferred_count = [], 0, 0, 0
     off = _disabled_producers()
     for i, s in enumerate(surfaces(a.date), 1):
