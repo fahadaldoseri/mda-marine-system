@@ -12,9 +12,9 @@
   "last_measured": "2026-11-10",
   "counts": {
     "منفَّذ": 42,
-    "منفَّذ جزئيًّا": 4,
+    "منفَّذ جزئيًّا": 5,
     "يحتاج تحققًا": 3,
-    "يحتاج قرارًا": 3
+    "يحتاج قرارًا": 2
   },
   "decisions": [
     {
@@ -952,17 +952,39 @@
     {
       "id": "D-0638",
       "title_ar": "ملف الأسرار متتبع في Git: قرار مالك مطلوب (خروج من التتبع وتدوير)",
-      "status": "يحتاج قرارًا",
+      "status": "منفَّذ جزئيًّا",
       "wording_ar": "القياس أثبت أن brain/secrets/secrets.env متتبع في Git وله قيمة فعلية في أربعة مفاتيح، وله تاريخ من خمسة التزامات، والمستودع خاص. الخيارات: (أ) خروج من التتبع + تدوير الآن · (ب) خروج الآن وتدوير لاحقًا · (ج) تأجيل.",
       "evidence": [
         {
-          "kind": "measurement",
+          "kind": "measure",
+          "ref": "git ls-files brain/secrets/secrets.env",
+          "note": "غير متتبع بعد الإخراج"
+        },
+        {
+          "kind": "file",
+          "ref": ".gitignore",
+          "note": "يستثني brain/secrets/*.env ويُبقي secrets.env.example"
+        },
+        {
+          "kind": "measure",
+          "ref": "tools/rotate_webhook_secret.py",
+          "note": "بصمة السر bb6dd0466c21 ← 4eaff9df2282"
+        },
+        {
+          "kind": "measure",
+          "ref": "api.telegram.org/getWebhookInfo",
+          "note": "مُسجَّل · 0 معلّق · بلا خطأ بعد التدوير"
+        },
+        {
+          "kind": "measure",
           "ref": "brain/secrets/secrets.env",
-          "note": "قيم فعلية: TELEGRAM_BOT_TOKEN · TELEGRAM_OWNER_CHAT_ID · TELEGRAM_WEBHOOK_SECRET · ANTHROPIC_API_KEY (بلا طباعة قيم)"
+          "note": "محلي 600 · 6 مفاتيح سليمة"
         }
       ],
       "governing_file": "brain/secrets/secrets.env",
-      "next_action_ar": "ينتظر قرار المالك، ثم يُنفَّذ بمهارة secret-rotation-ops وحارس D005."
+      "next_action_ar": "ينتظر قرار المالك، ثم يُنفَّذ بمهارة secret-rotation-ops وحارس D005.",
+      "decision_ar": "قرار المالك (س2 = أ): إخراج ملف السر من تتبع Git ثم تدوير المفاتيح الظاهرة. نُفِّذ الإخراج وتدوير سر الويب هوك، ويبقى تدوير مفاتيح خارجية تحتاج حساب المالك.",
+      "remaining_ar": "تدوير TELEGRAM_BOT_TOKEN (BotFather) · ANTHROPIC_API_KEY · وتنظيف تاريخ Git لا يُنفَّذ (سياسة الخيار أ). DATABASE_URL وOPENAI_API_KEY فارغان ⇒ لا تدوير."
     },
     {
       "id": "D-0639",
