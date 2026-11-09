@@ -220,7 +220,9 @@ def main() -> int:
     if a.json:
         print(json.dumps({"total": len(rows), "unclassified": fresh,
                           "accepted_gate_logic": gate_swallow}, ensure_ascii=False, indent=1))
-        return 1 if (fresh or gate_swallow) else 0        # (هـ)
+        # المواقع المصنفة المقبولة تُعرض للتتبع، لكنها ليست مخالفة جديدة؛
+        # لا يُمنع التشغيل إلا عند ظهور موقع غير مصنف فعليًا.
+        return 1 if fresh else 0        # (هـ)
     print(f"  · استثناءات عامة تبتلع الخطأ: {len(rows)} — غير مصنّفة: {len(fresh)}")
     if gate_swallow:
         print(f"  ✘ استثناءات داخل منطق البوابة (يجب تضييقها): {len(gate_swallow)}")

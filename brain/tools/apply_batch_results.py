@@ -71,10 +71,13 @@ def main() -> int:
     stats = {'closed_applied': 0, 'closed_skipped': 0, 'rejected': [], 'axis_applied': 0, 'missing_rows': []}
     axis_updates: dict[str, str] = {}
 
-    for tag in ('A', 'B'):
-        p = root / a.results / f'result-{tag}.json'
-        if not p.is_file():
-            continue
+    # نكتشف كل ملفات النتائج (result-A · result-B · result-A2 · result-B3 …) بدل قائمة ثابتة،
+    # حتى لا يفشل التطبيق عند إضافة دفعة جديدة في التوسّع المستقبلي.
+    result_files = sorted((root / a.results).glob('result-*.json'))
+    if not result_files:
+        print(f'✘ لا ملفات نتائج في {root / a.results}')
+        return 2
+    for p in result_files:
         data = json.loads(p.read_text(encoding='utf-8'))
         for r in data.get('results', []):
             fid, verdict = r.get('fault_id'), r.get('verdict')

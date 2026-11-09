@@ -149,7 +149,13 @@ python3 tools/text_hash_guard.py --date "$D" --stage record >/dev/null 2>&1
 if python3 tools/text_hash_guard.py --date "$D" --stage verify >/dev/null 2>&1; then
   bad "مخرجات أقدم من النص لم تُمنع (يجب إعادة البناء)"
 else ok "المخرجات الأقدم من النص تمنع حتى يُعاد البناء"; fi
-S="${SITE_DIR:-${SITE:-$B/../seawatch}}/dist"
+SITE_ROOT="${SITE_DIR:-${SITE:-}}"
+if [ -z "$SITE_ROOT" ] || [ ! -d "$SITE_ROOT/generator" ]; then
+  for candidate in "$B/../site" "$B/../seawatch" "$B/../../seawatch"; do
+    if [ -d "$candidate/generator" ]; then SITE_ROOT="$candidate"; break; fi
+  done
+fi
+S="$SITE_ROOT/dist"
 touch "$S/reports/$D.html" "$S/reports/pdf/$D.pdf" "reports/docx/التقرير-اليومي-$D-طبق-الأصل.docx" 2>/dev/null
 python3 tools/text_hash_guard.py --date "$D" --stage verify >/dev/null 2>&1 && ok "بعد إعادة البناء يمرّ الحارس" || bad "بعد إعادة البناء لا يمرّ"
 

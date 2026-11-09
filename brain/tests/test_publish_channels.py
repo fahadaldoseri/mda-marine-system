@@ -146,6 +146,11 @@ def test_successful_pages_push_is_recorded_with_hash_and_redirect_metadata(
                 json.dumps({"status": "ok", "rc": 0, "head": "pages-head"}), encoding="utf-8"
             )
             return 0, "pushed Pages"
+        if args[1].endswith("publish_fallback.sh"):
+            (logs / f"publish-{date}-fallback.json").write_text(
+                json.dumps({"status": "ok", "rc": 0, "head": "source-head"}), encoding="utf-8"
+            )
+            return 0, "pushed source"
         raise AssertionError(args)
 
     def fake_verify_live_url(url: str, checked_date: str, **kwargs: object) -> dict[str, object]:

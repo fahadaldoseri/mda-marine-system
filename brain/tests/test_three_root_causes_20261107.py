@@ -8,6 +8,7 @@ import os
 import subprocess
 import sys
 import tempfile
+import time
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -87,6 +88,7 @@ class TelegramTargetContractTests(unittest.TestCase):
             self.assertIn("غير رقمي", str(ctx.exception))
 
     def test_failure_log_contains_platform_error_fields(self):
+        date = time.strftime("%Y-%m-%d", time.gmtime())
         with tempfile.TemporaryDirectory() as td:
             targets = Path(td) / "targets.json"
             targets.write_text(json.dumps({"targets": [{
@@ -100,10 +102,10 @@ class TelegramTargetContractTests(unittest.TestCase):
                  patch.object(TELEGRAM, "curl", return_value='{"ok":false,"error_code":400,"description":"Bad Request"}'), \
                  patch.dict(os.environ, {"TELEGRAM_BOT_TOKEN": "test-token"}, clear=False):
                 with tempfile.NamedTemporaryFile("w", suffix=".html", delete=False, encoding="utf-8") as fh:
-                    fh.write("الفترة 2026-11-07 · و ب 1")
+                    fh.write(f"الفترة {date} · و ب 1")
                     digest = fh.name
                 try:
-                    rc = TELEGRAM.main(["--daily-report", "--date", "2026-11-07", "--file", digest])
+                    rc = TELEGRAM.main(["--daily-report", "--date", date, "--file", digest])
                 finally:
                     Path(digest).unlink(missing_ok=True)
             self.assertEqual(rc, 1)

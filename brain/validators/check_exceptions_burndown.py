@@ -25,6 +25,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description='حارس ميزانية الاستثناءات')
     ap.add_argument('--root', default='.')
     ap.add_argument('--baseline-write', action='store_true', help='تثبيت خط الأساس من القياس الحالي')
+    ap.add_argument('--json', action='store_true', help='إخراج ملخص JSON بدل السطور البشرية')
     a = ap.parse_args()
     root = pathlib.Path(a.root).resolve()
     exc_p = root / EXC
@@ -64,7 +65,12 @@ def main() -> int:
     if soon:
         fails.append(f'استثناءات تنتهي خلال {SOON_DAYS} يومًا بلا إغلاق: {len(soon)}')
 
-    print(f'   الاستثناءات: {count} · خط الأساس: {baseline.get("count") if baseline else "جديد"} · تنتهي قريبًا: {len(soon)}')
+    summary = {'count': count, 'baseline': baseline.get('count') if baseline else None,
+               'expiring_soon': len(soon), 'failures': fails}
+    if a.json:
+        print(json.dumps(summary, ensure_ascii=False, indent=2))
+    else:
+        print(f'   الاستثناءات: {count} · خط الأساس: {baseline.get("count") if baseline else "جديد"} · تنتهي قريبًا: {len(soon)}')
     if fails:
         for f in fails:
             print(f'   ✘ {f}')
@@ -76,4 +82,10 @@ def main() -> int:
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+    try:
+        from _guard import run
+    except ModuleNotFoundError:
+        def run(fn):
+            raise SystemExit(fn())
+    run(main)

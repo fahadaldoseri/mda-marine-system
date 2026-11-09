@@ -17,45 +17,48 @@ def run(brain, repo, *extra):
                           capture_output=True, text=True)
 
 
-ok = True
+def test_sync_guard_contract() -> None:
+    ok = True
+    with tempfile.TemporaryDirectory() as d:
+        src = Path(d) / "brain"
+        dst = Path(d) / "repo"
+        src.mkdir()
+        dst.mkdir()
+        (src / "a.md").write_text("نص" + NL, encoding="utf-8")
+        (dst / "skills").mkdir()
+        (dst / "skills" / "x.md").write_text("مهارة" + NL, encoding="utf-8")
 
-with tempfile.TemporaryDirectory() as d:
-    src = Path(d) / "brain"
-    dst = Path(d) / "repo"
-    src.mkdir()
-    dst.mkdir()
-    (src / "a.md").write_text("نص" + NL, encoding="utf-8")
-    (dst / "skills").mkdir()
-    (dst / "skills" / "x.md").write_text("مهارة" + NL, encoding="utf-8")
+        r = run(str(src), str(dst))
+        good = r.returncode == 2 and (dst / "skills" / "x.md").exists()
+        ok &= good
+        print(f"  {'✔' if good else '✘'} ملف خارج النطاق بلا علم → مُنع (rc={r.returncode}) والملف باقٍ")
 
-    r = run(str(src), str(dst))
-    good = r.returncode == 2 and (dst / "skills" / "x.md").exists()
-    ok &= good
-    print(f"  {'✔' if good else '✘'} ملف خارج النطاق بلا علم → مُنع (rc={r.returncode}) والملف باقٍ")
+        r = run(str(src), str(dst), "--allow-delete")
+        good = r.returncode == 0 and not (dst / "skills" / "x.md").exists()
+        ok &= good
+        print(f"  {'✔' if good else '✘'} مع --allow-delete → نُفّذ (rc={r.returncode}) والملف حُذف")
 
-    r = run(str(src), str(dst), "--allow-delete")
-    good = r.returncode == 0 and not (dst / "skills" / "x.md").exists()
-    ok &= good
-    print(f"  {'✔' if good else '✘'} مع --allow-delete → نُفّذ (rc={r.returncode}) والملف حُذف")
+    with tempfile.TemporaryDirectory() as d:
+        src = Path(d) / "brain"
+        dst = Path(d) / "repo"
+        src.mkdir()
+        dst.mkdir()
+        (src / "keep.md").write_text("نص" + NL, encoding="utf-8")
+        for i in range(25):
+            (dst / f"old{i}.md").write_text("قديم" + NL, encoding="utf-8")
 
-with tempfile.TemporaryDirectory() as d:
-    src = Path(d) / "brain"
-    dst = Path(d) / "repo"
-    src.mkdir()
-    dst.mkdir()
-    (src / "keep.md").write_text("نص" + NL, encoding="utf-8")
-    for i in range(25):
-        (dst / f"old{i}.md").write_text("قديم" + NL, encoding="utf-8")
+        r = run(str(src), str(dst))
+        good = r.returncode == 2 and (dst / "old0.md").exists()
+        ok &= good
+        print(f"  {'✔' if good else '✘'} حذف 25 ملفًا فوق السقف 20 → مُنع (rc={r.returncode})")
 
-    r = run(str(src), str(dst))
-    good = r.returncode == 2 and (dst / "old0.md").exists()
-    ok &= good
-    print(f"  {'✔' if good else '✘'} حذف 25 ملفًا فوق السقف 20 → مُنع (rc={r.returncode})")
+        r = run(str(src), str(dst), "--dry-run")
+        good = r.returncode == 2
+        ok &= good
+        print(f"  {'✔' if good else '✘'} التجربة تُظهر الخطة وتمنع التنفيذ (rc={r.returncode})")
 
-    r = run(str(src), str(dst), "--dry-run")
-    good = r.returncode == 2
-    ok &= good
-    print(f"  {'✔' if good else '✘'} التجربة تُظهر الخطة وتمنع التنفيذ (rc={r.returncode})")
+    assert ok, "فشل عقد حارس المزامنة"
 
-print("  الحصيلة:", "كل الاختبارات نجحت ✔" if ok else "فشل ✘")
-sys.exit(0 if ok else 2)
+
+if __name__ == "__main__":
+    raise SystemExit(0 if test_sync_guard_contract() else 2)

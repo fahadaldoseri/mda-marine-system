@@ -1,0 +1,18 @@
+{
+ "commands": {
+  "ك-01": "SITE_DIR=/home/ubuntu/seawatch timeout 120 python3 tools/export_report_assets.py --date 2026-11-08 --only pdf",
+  "ك-27": "timeout 120 python3 tools/audit_broad_excepts.py --json",
+  "ك-33": "timeout 120 bash -lc 'python3 tools/text_hash_guard.py --date 2026-11-08 --stage record && python3 tools/text_hash_guard.py --date 2026-11-08 --stage verify'",
+  "ك-57": "timeout 120 bash -lc 'bash -n tests/run_checks.sh && bash tests/run_checks.sh'",
+  "ك-58": "timeout 120 python3 validators/check_libraries_skills.py",
+  "ك-103": "timeout 120 python3 validators/check_pdf_format.py --pdf /home/ubuntu/seawatch/dist/reports/pdf/2026-10-29.pdf --date 2026-10-29",
+  "ك-132": "timeout 120 bash -lc 'bash -n tests/run_checks.sh && bash tests/run_checks.sh'",
+  "ك-143": "timeout 120 bash tests/test_review2.sh 2026-11-08",
+  "ك-151": "timeout 120 python3 tools/audit_broad_excepts.py --json",
+  "ك-162": "timeout 120 python3 validators/check_secrets.py --root .",
+  "ك-209": "timeout 120 python3 validators/check_prose_defects.py --md reports/2026-11-08-sectioned.md --structured-registry",
+  "ك-298": "timeout 120 bash -lc 'python3 validators/check_additions_surface.py --date 2026-10-29 --site /home/ubuntu/seawatch && python3 validators/check_code_policy.py /home/ubuntu/seawatch/dist'",
+  "ك-308": "timeout 120 python3 validators/check_pdf_format.py --pdf /home/ubuntu/seawatch/dist/reports/pdf/2026-10-29.pdf --date 2026-10-29",
+  "ك-310": "timeout 120 python3 tools/check_lang_switch_live.py --url file:///home/ubuntu/seawatch/dist --date 2026-10-29"
+ }
+}
