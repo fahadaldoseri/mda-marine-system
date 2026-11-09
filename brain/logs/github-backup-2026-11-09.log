@@ -302,3 +302,27 @@ remote:
   ✘ تعديل حاكم: brain/tools/site_root.py · sha256=3cb92bb69a057bbcdc7df3b0e72144a2df09defc649586a909ced4e6309e1f71
 ✘ فشل مغلق: توجد تعديلات شيفرة/بيانات حقيقية خارج سجلات التشغيل المعلنة
 ✘ فشل مغلق: حارس شجرة النسخ منع العملية؛ راجع تصنيف المسارات وبصمات SHA-256
+=== بدء النسخ الاحتياطي: 2026-11-09T08:21:33Z ===
+حارس شجرة النسخ: تغييرات Git=8 · سجلات تشغيل معلنة=8 · كتل مولَّدة=0 · تعديلات حاكمة=0
+  ✔ سجل تشغيل معلن: brain/logs/gate-verdict-2026-11-09.json · sha256=9cdc82054fb8364ec1165dd511070c84464de36f8233298f2ae409da5f1f3683
+  ✔ سجل تشغيل معلن: brain/logs/github-backup-2026-11-09.log · sha256=601e4144a363f1f531c17186f17f532c0e12ee4a4ae48ecef7863adbc7132e93
+  ✔ سجل تشغيل معلن: brain/logs/manus-channel/2026-11-09.jsonl · sha256=d8f5ca160c430b896b797f65354cb2938c89c787834db3314e2d53c2cecf6c71
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09.jsonl · sha256=e939f17edad63aa198399e3445f2dc40f974e30f9b7fe089daeebe969c137fbc
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D016.log · sha256=59d7fdc1f2de0959278c3bf868558391aae5bde8d0938c430ee70d4a14a69be4
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D030.log · sha256=e3d9928d54e0ee5dbf0d22b897d4cea3b35f35ebea1887c18e5d897688e55b69
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/D031.log · sha256=ca4db005c5fb0af02a40da844f12740bcc8c0896594a4a80488b64c48f34a767
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-09/G011.log · sha256=97302b62b95a77532fafb6586de8b21d67bf776559434d3bcc1baee17345b098
+✔ شجرة النسخ تمر: سجلات التشغيل المحلية لا تمنع النسخة الاحتياطية
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/blocks.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_report.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_site.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/derive_en_units.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/i18n_en.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/section_counts.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/sources/i18n/en/2026-11-07-sectioned.en.md
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/sources/i18n/en/glossary.json
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/tests/test_i18n_alignment.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): skills/.skill_versions.json
+⚠ تعارض (عُدّل على الخادم خارج GitHub): skills/superpowers-method/SKILL.md
+✘ 11 تعارض. لا شيء طُبّق. إن كان المستودع هو الصحيح: أعد التشغيل بـ --accept-repo (تُؤرشف نسخ الخادم أولًا).
+⚠ تعذّر/تعارض في تطبيق الشيفرة (تستمر نسخة البيانات بعد تسجيل التحذير)
