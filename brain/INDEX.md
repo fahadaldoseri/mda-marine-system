@@ -213,11 +213,51 @@
 ## المهارات المعتمدة في المشروع (محدَّث 2026-11-06)
 | المهارة | الوظيفة | الحالة |
 | --- | --- | --- |
-| `gate-lifecycle-ops` | تحصين الحراس: يمنع أو يفشل مغلقًا ولا ينهار | **معتمدة** (قرار المالك الصريح · `D-0616`) |
-| `skill-adoption-governance-ops` | عقد اعتماد مهارة في المشروع: موافقة ← سجل ← دليل ← ربط | **معتمدة** (`D-0617`) |
-| `report-surface-and-print-ops` | تحويل الفحص اليدوي إلى قياس آلي | معتمدة (`D-0614` نظيرها) |
-| `fault-closure-and-learning-ops` | إغلاق عيب مقيس بثلاثة مسارات | معتمدة (`D-0614`) |
-| `gate-lifecycle-ops` | تدقيق صرامة البوابات ومنع النسخ المكررة والأحكام القديمة والفشل الأخرس والاستثناءات غير المنضبطة والحلقات غير المتقاربة والبوابات غير المربوطة، عبر عشر فئات | **معتمدة** (طلب المالك الصريح 2026-11-06 · `D-0620`) |
+| `bilingual-surface-parity-ops` | تشخيص وإصلاح جذري لتسرّب النص أو الرموز الداخلية بين أسطح توليد ثنائية اللغة (عربي/إنجليزي)، ولم… | معتمدة · `D-0630` |
+| `crossing-gate-ops` | تشغيل انتقال مقيس بين مرحلتين أو إصدارين في مشروع تقارير أو موقع أو موجة إصلاح، بحيث لا يُعلن عب… | معتمدة · `D-0624` |
+| `fault-closure-and-learning-ops` | Use when closing a marine-awareness fault or defect, proving a before/after repair, normalizing … | معتمدة · `D-0614` |
+| `gate-lifecycle-ops` | Use when authoring, scoping, wiring, hardening, auditing, probing, or contract-checking a fail-c… | معتمدة · `D-0620` |
+| `multi-agent-audit-ops` | استخدم هذه المهارة عند تنفيذ تدقيق متعدد الوكلاء أو مراجعة تقرير عبر واجهة وطباعة ولغة وأسطح ورو… | معتمدة · `D-0626` |
+| `owner-notes-measured-triage` | > | معتمدة · `D-0623` |
+| `owner-ui-notes-contract-ops` | > | معتمدة · `D-0631` |
+| `parity-and-publish-ops` | Use when comparing marine-awareness server and repository trees, preparing a governed site publi… | معتمدة · `D-0627` |
+| `report-surface-and-print-ops` | Use when moving report sections between reader surfaces, proving content fidelity across web and… | معتمدة · `D-0614` نظيرها |
+| `rerun-step-to-live-parity-ops` | استئناف خطوة نشر معلنة واحدة في مشروع مركز الوعي بالمجال البحري بعد إصلاح جذرها، وإثبات أن القنا… | معتمدة · `D-0622` |
+| `runbook-operations-ops` | Use when executing a locked daily runbook, interpreting its exit codes, completing a round, repa… | معتمدة · `D-0628` |
+| `skill-adoption-governance-ops` | اعتماد مهارة جديدة داخل مشروع محكوم بعد موافقة المالك الصريحة، مع سجل يُثبت الاعتماد ودليله ومنع… | معتمدة · `D-0617` |
+| `skill-creator` | Guide for creating or updating skills that extend Manus via specialized knowledge, workflows, or… | معتمدة · `D-0629` |
+| `approved-output-change-ops` | ضبط أي تغيير يمس مخرجًا مقفلًا أو معتمدًا عبر قياس حي قبل/بعد، بوابات PDF والأسطح، اعتماد بصمة م… | مرجعية · `D-0635` |
+| `bilingual-master-direction-ops` | Govern the direction of truth in a bilingual report pipeline — declare one master language, rend… | مرجعية · `D-0635` |
+| `card-branch-integrity-ops` | حراسة نزاهة فروع بطاقات التقارير العربية والإنجليزية: عدّاد من القسم الهدف، مراسٍ مشتقة من العنو… | مرجعية · `D-0635` |
+| `decision-registry-backfill-ops` | ملء دفتر قرارات المالك رجعيًّا وتوثيقه — حالة لكل قرار ودليله وخطوته التالية، وإبراز القرارات ال… | مرجعية · `D-0635` |
+| `destructive-op-guard-ops` | استخدم هذه المهارة عند تشغيل أداة قد تحذف أو تستبدل ملفات، مثل مزامنة أو نسخ أو تطبيق من مستودع؛… | مرجعية · `D-0635` |
+| `enforcer-coverage-burndown-ops` | خفض عدد الأعطال والدروس بلا مُفعِّل (بوابة أو حارس أو اختبار) قبل موعد نهائي، بقياس حي وحارس يمن… | مرجعية · `D-0635` |
+| `fault-evidence-arming-ops` | تسليح صفوف سجل الأعطال بأوامر دليل حقيقية وتشغيلها حتى إغلاقها، مع منع الإغلاق الكاذب. استخدمها … | مرجعية · `D-0635` |
+| `fault-ledger-matrix-parity-ops` | حفظ تكامل المزامنة بين سجل الأعطال ومصفوفة التتبع واستعادة أي تباعد بينهما. استخدمها عند اختلاف … | مرجعية · `D-0635` |
+| `governed-cleanup-audit` | تدقيق محكوم للفوضى في مشروع كبير (أدوات وبوابات ميتة · ملفات مكررة · خردة · مجلدات فارغة · نسخ ت… | مرجعية · `D-0635` |
+| `governed-rename-ops` | إعادة تسمية محوكمة لعنصر مسجَّل في نظام تقارير أو موقع (قسم · رمز · وسم · حقل · اسم مصدر) بحيث ت… | مرجعية · `D-0635` |
+| `governing-assets-recovery-ops` | كشف تلف الأصول الحاكمة للمهارات واستعادتها بقياس قابل لإعادة التشغيل، ثم توثيق العطل وإغلاق حلقة… | مرجعية · `D-0635` |
+| `macr-system` | يوفر نظام MACR (Military Adaptive Command Report System) إطار عمل شاملاً لإعداد التقارير والدراس… | مرجعية · `D-0635` |
+| `map-clarity-ops` | Use when auditing or upgrading a marine-report map for readable labels, separated markers, sourc… | مرجعية · `D-0635` |
+| `marine-news-brain` | Use when preparing a recurring Arabic morning maritime-security report covering Gulf and adjacen… | مرجعية · `D-0635` |
+| `military-arabic-editing` | Use when Arabic military, maritime, intelligence, operational, or commander-facing text sounds t… | مرجعية · `D-0635` |
+| `official-ledger-backfill-ops` | ملء دفتر أحداث تراكمي مؤرَّخ من مصادر رسمية، وإثبات اكتماله بلا فراغ صامت. استخدم هذه المهارة عن… | مرجعية · `D-0635` |
+| `operation-to-skill-ops` | تحويل عملية نُفِّذت فعلًا في جولة عمل إلى مهارة قابلة لإعادة الاستخدام، مُثبتة بقياس حي ومُسلَّم… | مرجعية · `D-0635` |
+| `project-evidence-and-coverage-ops` | Use when a marine-awareness project round needs reproducible performance evidence, an owner-note… | مرجعية · `D-0635` |
+| `report-build-export-ops` | Use when a marine report must be built from its daily data, exported to PDF or Word, or checked … | مرجعية · `D-0635` |
+| `secret-rotation-ops` | دوّر سرًا مستهلكًا في المشروع مع جرد المستهلكين ونسخة احتياطية مقفلة وفحص سجل Git وتوثيق آمن ومن… | مرجعية · `D-0635` |
+| `skill-coverage-audit-ops` | Use when auditing a runbook against its installed skills, mapping steps and tools to owners, or … | مرجعية · `D-0635` |
+| `skill-ownership-merge-ops` | توحيد ملكية المهارات المتداخلة بإثبات قياس وتماثل صارم، مع إبقاء السكربتات والإحالات والأسماء سل… | مرجعية · `D-0635` |
+| `source-coverage-route-ops` | إغلاق فجوات تغطية المصادر في أي مشروع تقارير: قياس حالة كل مصدر مسجّل حيًّا، اكتشاف مسار آلي بدي… | مرجعية · `D-0635` |
+| `source-ingest-ops` | Use when collecting daily source feeds, normalizing source data, preserving official originals, … | مرجعية · `D-0635` |
+| `threat-zone-card-ops` | Use when تشغيل أو تعديل بطاقة مستوى التهديد بالقطاعات الخمسة، إضافة قطاع أو تغيير حدوده، ظهور تع… | مرجعية · `D-0635` |
+| `vocabulary-guard-ops` | إنشاء وتشغيل وإغلاق حارس مفردات عربي (سجل حاكم واحد + قائمة منع مُولَّدة آليًا) فوق أي مشروع نصو… | مرجعية · `D-0635` |
+| `waw-density-control-ops` | ضبط كثافة الجمل المبدوءة بحرف «و» في نص عربي طويل: قياس لكل قسم بأداة النص الحاكمة لا بالعين، تر… | مرجعية · `D-0635` |
+| `writing-rules-wiring-ops` | ربط قواعد الكتابة الحاكمة بمولّد النص — إحالة صريحة إلى المهارات الحاكمة داخل برومت الكتابة، وتو… | مرجعية · `D-0635` |
+| `live-visual-audit-ops` | مدموجة في `report-surface-and-print-ops` (legacy) | متقاعدة · `D-0625` |
+| `measured-defect-closure-ops` | مدموجة في `fault-closure-and-learning-ops` | متقاعدة · `D-0614` |
+| `fail-closed-guard-hardening-ops` | مدموجة في `gate-lifecycle-ops` | متقاعدة · `D-0616` |
+| `gate-strictness-hardening-ops` | مدموجة في `gate-lifecycle-ops` | متقاعدة · `D-0620` |
 
 ### اعتماد `gate-lifecycle-ops` — 2026-11-06
 

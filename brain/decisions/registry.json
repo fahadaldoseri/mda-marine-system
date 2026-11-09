@@ -11,7 +11,7 @@
   "decided_by": "المالك",
   "last_measured": "2026-11-10",
   "counts": {
-    "منفَّذ": 22,
+    "منفَّذ": 35,
     "منفَّذ جزئيًّا": 4,
     "يحتاج تحققًا": 3,
     "يحتاج قرارًا": 0
@@ -593,6 +593,331 @@
       ],
       "governing_file": "runbook/runbook.json",
       "next_action_ar": "مراجعة الاعتماد بعد ثلاث جولات: إن لم تُستهلك المهارة، يُعاد فتح اعتمادها بندًا لا يُحذف صامتًا."
+    },
+    {
+      "id": "D-0624",
+      "title_ar": "اعتماد مهارة مهارة عبور المراحل المقيس (crossing-gate-ops) في فهرس المشروع",
+      "status": "منفَّذ",
+      "wording_ar": "كانت مُستدعاة في الجولات بلا صف قرار — توثيق رجعي بأمر المالك 2026-11-10 «يتم اضافتها للقرارات مع الحل والاصلاح».",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "INDEX.md",
+          "note": "سطر المهارة في جدول المهارات المعتمدة"
+        },
+        {
+          "kind": "file",
+          "ref": "validators/check_skills_adoption_parity.py",
+          "note": "الحارس الذي يمنع عودة الفجوة: لا صف في الجدول بلا قرار منفَّذ"
+        },
+        {
+          "kind": "measurement",
+          "ref": "decisions/registry.json",
+          "note": "قياس 2026-11-10: الفهرس كان 12 صفًّا و5 قرارات اعتماد"
+        }
+      ],
+      "governing_file": "INDEX.md",
+      "next_action_ar": "مراجعة الاعتماد بعد ثلاث جولات؛ وإن لم تُستهلك المهارة يُفتح اعتمادها بندًا لا يُحذف."
+    },
+    {
+      "id": "D-0625",
+      "title_ar": "اعتماد مهارة توثيق دمج مهارة التدقيق البصري الحي (live-visual-audit-ops) في فهرس المشروع",
+      "status": "منفَّذ",
+      "wording_ar": "الصف في الفهرس كان يعدّها قائمة وهي مدموجة في report-surface-and-print-ops — توثيق رجعي بأمر المالك 2026-11-10 «يتم اضافتها للقرارات مع الحل والاصلاح».",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "INDEX.md",
+          "note": "سطر المهارة في جدول المهارات المعتمدة"
+        },
+        {
+          "kind": "file",
+          "ref": "validators/check_skills_adoption_parity.py",
+          "note": "الحارس الذي يمنع عودة الفجوة: لا صف في الجدول بلا قرار منفَّذ"
+        },
+        {
+          "kind": "measurement",
+          "ref": "decisions/registry.json",
+          "note": "قياس 2026-11-10: الفهرس كان 12 صفًّا و5 قرارات اعتماد"
+        }
+      ],
+      "governing_file": "INDEX.md",
+      "next_action_ar": "مراجعة الاعتماد بعد ثلاث جولات؛ وإن لم تُستهلك المهارة يُفتح اعتمادها بندًا لا يُحذف."
+    },
+    {
+      "id": "D-0626",
+      "title_ar": "اعتماد مهارة مهارة التدقيق متعدد الوكلاء (multi-agent-audit-ops) في فهرس المشروع",
+      "status": "منفَّذ",
+      "wording_ar": "مسجّلة في الفهرس بلا قرار — توثيق رجعي بأمر المالك 2026-11-10 «يتم اضافتها للقرارات مع الحل والاصلاح».",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "INDEX.md",
+          "note": "سطر المهارة في جدول المهارات المعتمدة"
+        },
+        {
+          "kind": "file",
+          "ref": "validators/check_skills_adoption_parity.py",
+          "note": "الحارس الذي يمنع عودة الفجوة: لا صف في الجدول بلا قرار منفَّذ"
+        },
+        {
+          "kind": "measurement",
+          "ref": "decisions/registry.json",
+          "note": "قياس 2026-11-10: الفهرس كان 12 صفًّا و5 قرارات اعتماد"
+        }
+      ],
+      "governing_file": "INDEX.md",
+      "next_action_ar": "مراجعة الاعتماد بعد ثلاث جولات؛ وإن لم تُستهلك المهارة يُفتح اعتمادها بندًا لا يُحذف."
+    },
+    {
+      "id": "D-0627",
+      "title_ar": "اعتماد مهارة مهارة التماثل والنشر (parity-and-publish-ops) في فهرس المشروع",
+      "status": "منفَّذ",
+      "wording_ar": "مسجّلة في الفهرس بلا قرار — توثيق رجعي بأمر المالك 2026-11-10 «يتم اضافتها للقرارات مع الحل والاصلاح».",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "INDEX.md",
+          "note": "سطر المهارة في جدول المهارات المعتمدة"
+        },
+        {
+          "kind": "file",
+          "ref": "validators/check_skills_adoption_parity.py",
+          "note": "الحارس الذي يمنع عودة الفجوة: لا صف في الجدول بلا قرار منفَّذ"
+        },
+        {
+          "kind": "measurement",
+          "ref": "decisions/registry.json",
+          "note": "قياس 2026-11-10: الفهرس كان 12 صفًّا و5 قرارات اعتماد"
+        }
+      ],
+      "governing_file": "INDEX.md",
+      "next_action_ar": "مراجعة الاعتماد بعد ثلاث جولات؛ وإن لم تُستهلك المهارة يُفتح اعتمادها بندًا لا يُحذف."
+    },
+    {
+      "id": "D-0628",
+      "title_ar": "اعتماد مهارة مهارة تشغيل الكتيب (runbook-operations-ops) في فهرس المشروع",
+      "status": "منفَّذ",
+      "wording_ar": "مسجّلة في الفهرس بلا قرار — توثيق رجعي بأمر المالك 2026-11-10 «يتم اضافتها للقرارات مع الحل والاصلاح».",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "INDEX.md",
+          "note": "سطر المهارة في جدول المهارات المعتمدة"
+        },
+        {
+          "kind": "file",
+          "ref": "validators/check_skills_adoption_parity.py",
+          "note": "الحارس الذي يمنع عودة الفجوة: لا صف في الجدول بلا قرار منفَّذ"
+        },
+        {
+          "kind": "measurement",
+          "ref": "decisions/registry.json",
+          "note": "قياس 2026-11-10: الفهرس كان 12 صفًّا و5 قرارات اعتماد"
+        }
+      ],
+      "governing_file": "INDEX.md",
+      "next_action_ar": "مراجعة الاعتماد بعد ثلاث جولات؛ وإن لم تُستهلك المهارة يُفتح اعتمادها بندًا لا يُحذف."
+    },
+    {
+      "id": "D-0629",
+      "title_ar": "اعتماد مهارة أداة المنصة لإنشاء المهارات وتحديثها (skill-creator) في فهرس المشروع",
+      "status": "منفَّذ",
+      "wording_ar": "أداة عامة تُستدعى ولا تُعتمد اعتمادًا مستقلًّا — توثيق رجعي بأمر المالك 2026-11-10 «يتم اضافتها للقرارات مع الحل والاصلاح».",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "INDEX.md",
+          "note": "سطر المهارة في جدول المهارات المعتمدة"
+        },
+        {
+          "kind": "file",
+          "ref": "validators/check_skills_adoption_parity.py",
+          "note": "الحارس الذي يمنع عودة الفجوة: لا صف في الجدول بلا قرار منفَّذ"
+        },
+        {
+          "kind": "measurement",
+          "ref": "decisions/registry.json",
+          "note": "قياس 2026-11-10: الفهرس كان 12 صفًّا و5 قرارات اعتماد"
+        }
+      ],
+      "governing_file": "INDEX.md",
+      "next_action_ar": "مراجعة الاعتماد بعد ثلاث جولات؛ وإن لم تُستهلك المهارة يُفتح اعتمادها بندًا لا يُحذف."
+    },
+    {
+      "id": "D-0630",
+      "title_ar": "اعتماد مهارة مهارة تماثل الأسطح ثنائية اللغة (bilingual-surface-parity-ops) في فهرس المشروع",
+      "status": "منفَّذ",
+      "wording_ar": "أُنشئت 2026-11-09 ولم تُسجَّل ولم تُنسخ إلى المستودع — توثيق رجعي بأمر المالك 2026-11-10 «يتم اضافتها للقرارات مع الحل والاصلاح».",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "INDEX.md",
+          "note": "سطر المهارة في جدول المهارات المعتمدة"
+        },
+        {
+          "kind": "file",
+          "ref": "validators/check_skills_adoption_parity.py",
+          "note": "الحارس الذي يمنع عودة الفجوة: لا صف في الجدول بلا قرار منفَّذ"
+        },
+        {
+          "kind": "measurement",
+          "ref": "decisions/registry.json",
+          "note": "قياس 2026-11-10: الفهرس كان 12 صفًّا و5 قرارات اعتماد"
+        }
+      ],
+      "governing_file": "INDEX.md",
+      "next_action_ar": "مراجعة الاعتماد بعد ثلاث جولات؛ وإن لم تُستهلك المهارة يُفتح اعتمادها بندًا لا يُحذف."
+    },
+    {
+      "id": "D-0631",
+      "title_ar": "اعتماد مهارة مهارة عقد ملاحظات المالك (owner-ui-notes-contract-ops) في فهرس المشروع",
+      "status": "منفَّذ",
+      "wording_ar": "مسجّلة في الفهرس بلا قرار باسمها — توثيق رجعي بأمر المالك 2026-11-10 «يتم اضافتها للقرارات مع الحل والاصلاح».",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "INDEX.md",
+          "note": "سطر المهارة في جدول المهارات المعتمدة"
+        },
+        {
+          "kind": "file",
+          "ref": "validators/check_skills_adoption_parity.py",
+          "note": "الحارس الذي يمنع عودة الفجوة: لا صف في الجدول بلا قرار منفَّذ"
+        },
+        {
+          "kind": "measurement",
+          "ref": "decisions/registry.json",
+          "note": "قياس 2026-11-10: الفهرس كان 12 صفًّا و5 قرارات اعتماد"
+        }
+      ],
+      "governing_file": "INDEX.md",
+      "next_action_ar": "مراجعة الاعتماد بعد ثلاث جولات؛ وإن لم تُستهلك المهارة يُفتح اعتمادها بندًا لا يُحذف."
+    },
+    {
+      "id": "D-0632",
+      "title_ar": "حراسة شجرة المهارات واعتمادها: حارسان يفشلان مغلقًا على الشجرة لا على قائمة منتقاة",
+      "status": "منفَّذ",
+      "wording_ar": "فجوة مقيسة: المدقق كان يفحص ثلاثة أسماء مكتوبة بيده، فمرّت مهارة حيّة غير منسوخة للمستودع وأحد عشر صفًّا في الفهرس بلا قرار.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "validators/check_skills_tree_parity.py",
+          "note": "الحي ↔ المستودع ↔ مهارات المشروع ↔ صفوف الفهرس · يفشل مغلقًا"
+        },
+        {
+          "kind": "file",
+          "ref": "validators/check_skills_adoption_parity.py",
+          "note": "لا صف في جدول المهارات بلا قرار منفَّذ يذكر اسمه"
+        },
+        {
+          "kind": "file",
+          "ref": "runbook/runbook.json",
+          "note": "الربط: خطوة Q010 تُشغّل الحارسين"
+        },
+        {
+          "kind": "measurement",
+          "ref": "validators/check_skills_tree_parity.py",
+          "note": "قبل الإصلاح: 3 عائق · بعده: صفر عائق"
+        }
+      ],
+      "governing_file": "runbook/runbook.json",
+      "next_action_ar": "إعادة القياس كل جولة؛ أي انحراف جديد يفتح صفًّا لا يُتجاوز."
+    },
+    {
+      "id": "D-0633",
+      "title_ar": "إصلاح سلسلة أوامر الخطوات التي تُخفي فشل مدقق سابق (Q010 نموذجًا)",
+      "status": "منفَّذ",
+      "wording_ar": "إثبات مقيس: `A; B; rc=$?` يُخفي فشل A؛ فخطوة Q010 كانت تمرّ بـ0 رغم فشل مدقق أول.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "runbook/runbook.json",
+          "note": "أمر Q010 صار: rc=0 ثم لكل مدقق || rc=$? ثم exit $rc"
+        },
+        {
+          "kind": "measurement",
+          "ref": "runbook/runbook.json",
+          "note": "false ثم true ⇒ 0 (مُخفى) · بالصيغة المُجمِّعة ⇒ 1 (ظاهر)"
+        }
+      ],
+      "governing_file": "runbook/runbook.json",
+      "next_action_ar": "مسح بقية الخطوات التي تجمع مدققين أو أكثر وتصحيح سلسلتها بالصيغة المُجمِّعة."
+    },
+    {
+      "id": "D-0634",
+      "title_ar": "اعتماد إصلاحات روابط الموقع: الربط الداخلي · الروابط الفارغة · الرابط غير المشفّر",
+      "status": "منفَّذ",
+      "wording_ar": "قياس 56 صفحة: 887 رابطًا داخليًا سليمًا · صفر مرساة مكسورة · 55 رابطًا فارغًا href=\"#\" · رابط http واحد يتكرر 4 مرات · الربط بين الأقسام معدوم (3 معرّفات من 8 عناوين · صفر مرساة داخلية).",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "INDEX.md",
+          "note": "البنود م-32 · م-33 · م-34 معتمدة في جرد الملاحظات"
+        },
+        {
+          "kind": "measurement",
+          "ref": "INDEX.md",
+          "note": "جرد 2026-11-10: 887 داخليًا · 415 خارجيًا · 55 فارغًا · 1 غير مشفّر"
+        }
+      ],
+      "governing_file": "runbook/runbook.json",
+      "next_action_ar": "التنفيذ في المرحلة الخامسة من خطة العمل (الربط وحارسه) بعد كلمة المالك."
+    },
+    {
+      "id": "D-0635",
+      "title_ar": "توثيق جدول المهارات المرجعي: 28 مهارة مشروع كانت بلا سطر في الفهرس",
+      "status": "منفَّذ",
+      "wording_ar": "أمر المالك 2026-11-10: «اريد التاكد انك كشفت كل الاقيام التي في المشروع وذلك للتأكد من عملية الربط». القرار يوثّق جدول المهارات كاملًا بصفوفه الأربعة والأربعين: approved-output-change-ops · bilingual-master-direction-ops · bilingual-surface-parity-ops · card-branch-integrity-ops · crossing-gate-ops · decision-registry-backfill-ops · destructive-op-guard-ops · enforcer-coverage-burndown-ops · fail-closed-guard-hardening-ops · fault-closure-and-learning-ops · fault-evidence-arming-ops · fault-ledger-matrix-parity-ops · gate-lifecycle-ops · gate-strictness-hardening-ops · governed-cleanup-audit · governed-rename-ops · governing-assets-recovery-ops · live-visual-audit-ops · macr-system · map-clarity-ops · marine-news-brain · measured-defect-closure-ops · military-arabic-editing · multi-agent-audit-ops · official-ledger-backfill-ops · operation-to-skill-ops · owner-notes-measured-triage · owner-ui-notes-contract-ops · parity-and-publish-ops · project-evidence-and-coverage-ops · report-build-export-ops · report-surface-and-print-ops · rerun-step-to-live-parity-ops · runbook-operations-ops · secret-rotation-ops · skill-adoption-governance-ops · skill-coverage-audit-ops · skill-creator · skill-ownership-merge-ops · source-coverage-route-ops · source-ingest-ops · threat-zone-card-ops · vocabulary-guard-ops · waw-density-control-ops · writing-rules-wiring-ops.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "INDEX.md",
+          "note": "أُدرجت 28 مهارة في جدول المهارات بوصفها مرجعية"
+        },
+        {
+          "kind": "file",
+          "ref": "validators/check_skills_tree_parity.py",
+          "note": "ينبّه على أي مهارة مشروع بلا سطر في الجدول"
+        },
+        {
+          "kind": "measurement",
+          "ref": "decisions/registry.json",
+          "note": "قبل الإصلاح: الفهرس 12 صفًّا بلا 28 مهارة · بعده: 45 صفًّا كلها موثّقة"
+        }
+      ],
+      "governing_file": "INDEX.md",
+      "next_action_ar": "عرض المهارات المرجعية على المالك لاعتمادها اعتمادًا صريحًا أو سحبها — بند في خطة التنفيذ."
+    },
+    {
+      "id": "D-0636",
+      "title_ar": "إصلاح جملة إفصاح قديمة في متن 09/11 وحراسة كل جملة إجمالي لا سطر واحد",
+      "status": "منفَّذ",
+      "wording_ar": "قياس حارس تماثل الترجمة كشف: المتن العربي يحمل 51/9/1875 في جملة الإفصاح بينما الحالة الحاكمة 59/1/1851 — والحارس كان يفحص سطر الأرقام وحده لا كل جملة إجمالي.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "tools/source_counts.py",
+          "note": "الحارس صار يفحص كل جملة إجمالي في المتن: نجحت · متعذّر · مجموع العناصر + منع مصطلح «فشلت»"
+        },
+        {
+          "kind": "file",
+          "ref": "reports/2026-11-09-sectioned.md",
+          "note": "جملة الإفصاح صارت 59/1/1851"
+        },
+        {
+          "kind": "measurement",
+          "ref": "tools/source_counts.py",
+          "note": "اختبار موجب rc=0 · اختبار سالب بحقن «نجحت 51» rc=2 مع رسالة مانعة"
+        },
+        {
+          "kind": "measurement",
+          "ref": "validators/check_en_parity.py",
+          "note": "حارس تماثل الترجمة صار يمرّ بعد الإصلاح (كان يفشل مغلقًا)"
+        }
+      ],
+      "governing_file": "tools/source_counts.py",
+      "next_action_ar": "إعادة بناء صفحة 09/11 ونشرها بالأرقام المصححة داخل جولة المانيفست."
     }
   ]
 }

@@ -270,6 +270,28 @@ def check(date: str, c: dict) -> list[str]:
     md = report_path(date)
     if md.exists() and line_ar(c).split("·")[0].strip() not in md.read_text(encoding="utf-8"):
         bad.append(f"متن التقرير لا يحمل سطر الأرقام المعتمد: {line_ar(c)}")
+    # كل جملة إجمالي داخل المتن تحمل الأرقام المعتمدة — لا موضع بلا رقابة
+    # (عطل 2026-11-10: جملة الإفصاح في المتن بقيت على 51/9/1875 بينما الحالة 59/1/1851)
+    if md.exists():
+        text = md.read_text(encoding="utf-8")
+        items = 0
+        sp = B / "feeds" / f"{date}.status.json"
+        if sp.exists():
+            try:
+                items = int(json.loads(sp.read_text(encoding="utf-8")).get("items") or 0)
+            except (OSError, ValueError, json.JSONDecodeError):
+                items = 0
+        pairs = [(r"نجحت\s+(\d+)", c["ok"], "نجحت"),
+                 (r"(\d+)\s*متعذّر", c["failed"], "متعذّر")]
+        if items:
+            pairs.append((r"مجموع العناصر(?:\s+المقروءة)?\s+(\d+)", items, "مجموع العناصر"))
+        for pat, want, label in pairs:
+            for found in re.findall(pat, text):
+                if int(found) != int(want):
+                    bad.append(f"جملة إجمالي في المتن تحمل رقمًا قديمًا: «{label} {found}» "
+                               f"والمعتمد {want} — أعد توليد الأرقام")
+        if re.search(r"فشلت\s+\d+", text):
+            bad.append("المتن يستعمل «فشلت» بدل المصطلح المعتمد «متعذّر» في جملة إجمالي")
     mp = B / "web" / "meta" / f"{date}.json"
     if mp.exists():
         d = json.loads(mp.read_text(encoding="utf-8"))
