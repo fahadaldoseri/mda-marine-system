@@ -1,0 +1,9 @@
+COMMAND: timeout 120 python3 validators/check_card_counters.py
+STARTED_AT: 2026-11-09T02:13:18.691142+00:00
+RC: 2
+OUTPUT_BEGIN
+usage: check_card_counters.py [-h] --date DATE [--dist-root DIST_ROOT]
+                              [--registry REGISTRY]
+check_card_counters.py: error: the following arguments are required: --date
+
+OUTPUT_END

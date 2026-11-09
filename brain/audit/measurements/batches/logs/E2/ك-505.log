@@ -1,0 +1,8 @@
+COMMAND: timeout 120 python3 validators/check_surface_hygiene.py
+STARTED_AT: 2026-11-09T02:13:45.305294+00:00
+RC: 2
+OUTPUT_BEGIN
+منع: نظافة أسطح الإصدار والإضافات
+  ✗ صفحة الإصدار الافتراضية: مجلد التقارير غير موجود: /home/ubuntu/mda-marine-system/seawatch/dist/reports
+
+OUTPUT_END

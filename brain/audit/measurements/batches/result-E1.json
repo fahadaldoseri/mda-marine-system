@@ -1,0 +1,47 @@
+{
+ "batch": "E1",
+ "measured_at": "2026-11-09T02:08:16.132292+00:00",
+ "results": [
+  {
+   "fault_id": "ك-225",
+   "command": "timeout 120 python3 validators/check_backup_parity.py",
+   "rc": 1,
+   "output_tail": "   ✘ زائد في المستودع: site/tests/test_missing_translation_batch.py\n   … و161 أخرى\n  النتيجة: انحراف (173) — تنبيه (الوضع التنبيهي قبل خطوة النسخ)",
+   "log_file": "audit/measurements/batches/logs/E1/ك-225.log",
+   "sha256": "2268b849131872f9d6618d2cb7c60f6eb0b88435739e789232a0edf44f24eb4d",
+   "verdict": "لم يُغلق",
+   "barrier_text": "قياس مباشر: timeout 120 python3 validators/check_backup_parity.py → rc=1 (لم يُغلق؛ السبب في السجل)",
+   "fix_applied": "",
+   "reason_if_not_closed": "rc=1:    ✘ زائد في المستودع: site/tests/test_missing_translation_batch.py\n   … و161 أخرى\n  النتيجة: انحراف (173) — تنبيه (الوضع التنبيهي قبل خطوة النسخ)"
+  },
+  {
+   "fault_id": "ك-228",
+   "command": "timeout 120 python3 tools/export_report_assets.py",
+   "rc": 2,
+   "output_tail": "                               [--no-toc] [--no-header] [--no-additions]\n                               [--extra-css EXTRA_CSS]\nexport_report_assets.py: error: the following arguments are required: --date",
+   "log_file": "audit/measurements/batches/logs/E1/ك-228.log",
+   "sha256": "d3c18fc590127dd9ecb11bae6aa1193ed99189e6765dfd798c5da552e57ce691",
+   "verdict": "لم يُغلق",
+   "barrier_text": "قياس مباشر: timeout 120 python3 tools/export_report_assets.py → rc=2 (لم يُغلق؛ السبب في السجل)",
+   "fix_applied": "",
+   "reason_if_not_closed": "rc=2: -no-header] [--no-additions]\n                               [--extra-css EXTRA_CSS]\nexport_report_assets.py: error: the following arguments are required: --date"
+  },
+  {
+   "fault_id": "ك-230",
+   "command": "timeout 120 python3 tests/test_sections_registry_vs_report.py",
+   "rc": 0,
+   "output_tail": "✔ السجل متسق مع 2026-11-08-sectioned.md (17 قسمًا)",
+   "log_file": "audit/measurements/batches/logs/E1/ك-230.log",
+   "sha256": "f8950f9219735bec3788fc45c28135ba8f95dde415183d5ecf96d2cf9857b6cc",
+   "verdict": "مغلق",
+   "barrier_text": "قياس مباشر: timeout 120 python3 tests/test_sections_registry_vs_report.py → rc=0 · بصمة f8950f921973",
+   "fix_applied": "",
+   "reason_if_not_closed": ""
+  }
+ ],
+ "summary": {
+  "closed": 1,
+  "not_closed": 2,
+  "total": 3
+ }
+}

@@ -28,6 +28,7 @@ HDR = '| ' + ' | '.join(CANON) + ' |'
 SEP = '|' + '---|' * len(CANON)
 ID = re.compile(r'^\|\s*([كزعثم])-(\d+)(/[بج])?')
 DATE = re.compile(r'^\d{4}-\d{2}-\d{2}$')
+SUCCESS = re.compile(r'(?i:\brc\s*=\s*0\b)|خرج\s*0|رمز\s*0|فاشل\s*0|صفر فاشل|بصمة\s*[0-9a-f]{6,}')
 OUTCOME = re.compile(r'(?i:\brc\s*=\s*(?:0|2|70))|خرج\s*(?:0|2|70)|رمز\s*(?:0|2|70)|exit\s*(?:0|2)|فاشل\s*(?:0|صفر)'
                      r'|\b(?:[1-9]|1[0-5])/(?:[1-9]|1[0-5])\b(?!\s*/)|صفر فاشل|مطابق تمامًا|بصمة\s*[0-9a-f]{6,}')
 OWNER = 'فهد الدوسري'
@@ -55,7 +56,7 @@ def derive(date, fix, barrier, status_raw) -> list:
     blob = f'{fix} {barrier}'   # الدليل من الإصلاح والحاجز فقط — لا من «الحالة الأصلية»
     f_fix, f_bar = pick(fix, POLICY['قاعدة_الإصلاح']), pick(barrier, POLICY['قاعدة_الحاجز'])
     f_ver = 'تحقق تشغيلي ناجح' if OUTCOME.search(blob) else pick(blob, POLICY['قاعدة_التحقق'])
-    if f_fix == 'منفَّذ' and f_bar in ('مطبَّق', 'فعّال') and f_ver == 'تحقق تشغيلي ناجح':
+    if f_fix == 'منفَّذ' and f_bar in ('مطبَّق', 'فعّال') and f_ver == 'تحقق تشغيلي ناجح' and SUCCESS.search(blob):
         state = 'مغلق'
     elif re.search(r'مفتوح|لم يُصلح|بانتظار قرار', status_raw + barrier):
         state = 'مفتوح'

@@ -1,0 +1,7 @@
+COMMAND: timeout 120 python3 tests/test_orphan_rule.py
+STARTED_AT: 2026-11-09T01:54:10.925602+00:00
+RC: 0
+OUTPUT_BEGIN
+  · اكتُشف 2 عنوانًا يتيمًا في الصفحتين 2 و3 · وتُجوهلت صفحتان سليمتان
+
+OUTPUT_END

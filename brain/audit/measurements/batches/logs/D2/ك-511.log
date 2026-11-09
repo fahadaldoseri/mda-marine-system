@@ -1,0 +1,8 @@
+COMMAND: python3 validators/check_en_parity.py --date 2026-11-04 ⇒ «النسخة الإنجليزية مطابقة للمتن ولصفحة الإصدار في البنية والأرقام والأكواد واللغة» مخالفة شكل
+STARTED_AT: 2026-11-09T02:06:07.951091+00:00
+RC: 2
+OUTPUT_BEGIN
+usage: check_en_parity.py [-h] --date DATE [--skip-pages]
+check_en_parity.py: error: unrecognized arguments: ⇒ «النسخة الإنجليزية مطابقة للمتن ولصفحة الإصدار في البنية والأرقام والأكواد واللغة» مخالفة شكل
+
+OUTPUT_END

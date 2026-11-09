@@ -1,0 +1,59 @@
+{
+ "batch": "D1",
+ "measured_at": "2026-11-09T01:54:13.381688+00:00",
+ "results": [
+  {
+   "fault_id": "ك-146",
+   "command": "timeout 120 python3 tests/test_feed_counters.py",
+   "rc": 0,
+   "output_tail": "· مفحوصة 4 = ناجحة 2 + متعذّرة 2 · والحساب المزدوج ممتنع",
+   "log_file": "audit/measurements/batches/logs/D1/ك-146.log",
+   "sha256": "27da142aa943bfe14d56694c9a6550c0a58886f1ea055fbfcc7f8eccf4926d35",
+   "verdict": "مغلق",
+   "barrier_text": "قياس مباشر: timeout 120 python3 tests/test_feed_counters.py → rc=0 · بصمة 27da142aa943",
+   "fix_applied": "",
+   "reason_if_not_closed": ""
+  },
+  {
+   "fault_id": "ك-147",
+   "command": "timeout 120 python3 tests/test_orphan_rule.py",
+   "rc": 0,
+   "output_tail": "· اكتُشف 2 عنوانًا يتيمًا في الصفحتين 2 و3 · وتُجوهلت صفحتان سليمتان",
+   "log_file": "audit/measurements/batches/logs/D1/ك-147.log",
+   "sha256": "c3cfbe4fb2ab8e84baa6d87fa2aa9013f7c6c522d95a8961590af2c9b23093d5",
+   "verdict": "مغلق",
+   "barrier_text": "قياس مباشر: timeout 120 python3 tests/test_orphan_rule.py → rc=0 · بصمة c3cfbe4fb2ab",
+   "fix_applied": "",
+   "reason_if_not_closed": ""
+  },
+  {
+   "fault_id": "ك-363",
+   "command": "python3 tools/check_governing_assets.py --json",
+   "rc": 2,
+   "output_tail": "    \"snapshot missing recorded path: /home/ubuntu/skills/rerun-step-to-live-parity-ops/scripts/live_parity.py\"\n  ]\n}",
+   "log_file": "audit/measurements/batches/logs/D1/ك-363.log",
+   "sha256": "b7df5ff48dff0bebc5367172f1666728d6960f61b07c95c25b048a29ff8755b6",
+   "verdict": "لم يُغلق",
+   "barrier_text": "قياس مباشر: python3 tools/check_governing_assets.py --json → rc=2 (لم يُغلق؛ السبب في السجل)",
+   "fix_applied": "",
+   "reason_if_not_closed": "rc=2:     \"snapshot missing recorded path: /home/ubuntu/skills/rerun-step-to-live-parity-ops/scripts/live_parity.py\"\n  ]\n}"
+  },
+  {
+   "fault_id": "ك-537",
+   "command": "python3 tests/test_g040_review2_contract.py",
+   "rc": 0,
+   "output_tail": "..                                                                       [100%]\n2 passed in 0.01s",
+   "log_file": "audit/measurements/batches/logs/D1/ك-537.log",
+   "sha256": "33e4242048fc21d40950fef0b43b56ea825e6c7953932871d850aa2096e102c6",
+   "verdict": "مغلق",
+   "barrier_text": "قياس مباشر: python3 tests/test_g040_review2_contract.py → rc=0 · بصمة 33e4242048fc",
+   "fix_applied": "",
+   "reason_if_not_closed": ""
+  }
+ ],
+ "summary": {
+  "closed": 3,
+  "not_closed": 1,
+  "total": 4
+ }
+}

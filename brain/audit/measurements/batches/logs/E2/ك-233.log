@@ -1,0 +1,9 @@
+COMMAND: timeout 120 python3 validators/check_additions_surface.py
+STARTED_AT: 2026-11-09T02:10:50.744144+00:00
+RC: 2
+OUTPUT_BEGIN
+سطح إضافات: 0 عنوانًا · المطلوب نقله: 14
+  × صفحة «إضافات» غير مبنية: /home/ubuntu/mda-marine-system/site/dist/additions.html
+النتيجة: مخالف — سطح «إضافات» لا يطابق السياسة (فشل مغلق)
+
+OUTPUT_END

@@ -1,0 +1,7 @@
+COMMAND: python3 tests/test_source_naming_gate.py && python3 validators/check_source_naming.py --root .'
+STARTED_AT: 2026-11-09T02:06:08.157561+00:00
+RC: 2
+OUTPUT_BEGIN
+bash: -c: line 1: unexpected EOF while looking for matching `''
+
+OUTPUT_END

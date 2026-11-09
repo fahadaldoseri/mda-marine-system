@@ -1,0 +1,9 @@
+COMMAND: timeout 120 python3 tools/edit_pass.py
+STARTED_AT: 2026-11-09T02:09:58.226681+00:00
+RC: 2
+OUTPUT_BEGIN
+usage: edit_pass.py [-h] --report REPORT [--out-dir OUT_DIR] [--model MODEL]
+                    [--workers WORKERS] [--apply] [--min-chars MIN_CHARS]
+edit_pass.py: error: the following arguments are required: --report
+
+OUTPUT_END

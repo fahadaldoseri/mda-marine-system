@@ -1,0 +1,7 @@
+{
+ "commands": {
+  "ك-225": "timeout 120 python3 validators/check_backup_parity.py",
+  "ك-228": "timeout 120 python3 tools/export_report_assets.py",
+  "ك-230": "timeout 120 python3 tests/test_sections_registry_vs_report.py"
+ }
+}

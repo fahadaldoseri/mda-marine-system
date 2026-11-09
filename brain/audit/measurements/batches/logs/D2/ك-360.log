@@ -1,0 +1,8 @@
+COMMAND: bash tools/restore_skills.sh ثم python3 validators/check_skills_integrity.py في بداية الجولة؛ تحقق حي: restore خرج 0 وintegrity خرج 0؛ نافذة inotify 600 ثانية رصدت 3277 MODIFY لـ .skill_versions.json ولم ترصد حدثًا للملفات الأربعة قياس مباشر: timeout 120 python3 validators/check_skills_integrity.py
+STARTED_AT: 2026-11-09T02:05:51.308034+00:00
+RC: 0
+OUTPUT_BEGIN
+  ملفات المستودع: 3345 · نُزّل: 0 · رُفع: 0 · مطابق: 27
+  ✔ التماثل سليم: المحلي = المستودع
+
+OUTPUT_END

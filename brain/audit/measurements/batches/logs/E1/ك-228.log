@@ -1,0 +1,10 @@
+COMMAND: timeout 120 python3 tools/export_report_assets.py
+STARTED_AT: 2026-11-09T02:08:14.926304+00:00
+RC: 2
+OUTPUT_BEGIN
+usage: export_report_assets.py [-h] --date DATE [--only {pdf,map,both}]
+                               [--no-toc] [--no-header] [--no-additions]
+                               [--extra-css EXTRA_CSS]
+export_report_assets.py: error: the following arguments are required: --date
+
+OUTPUT_END

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-09T00:45:39.347010+00:00",
+  "generated_at": "2026-11-09T02:13:46.244268+00:00",
   "chain": "fault_id ← lesson_id ← barrier_id ← run evidence",
   "rows": [
     {
@@ -21,8 +21,8 @@
       "fault_id": "ك-221",
       "state": "بانتظار التحقق",
       "lesson_id": "ك-221",
-      "barrier_id": "B-220bbde2",
-      "run_evidence": "meout 120 python3 validators/check_server_code_tracking.py --root . → rc=0. النتيجة الصريحة: اجتاز "
+      "barrier_id": "B-9f7f2f5a",
+      "run_evidence": "لدمج قياس مباشر: timeout 120 python3 tests/test_gate_suggestions.py → rc=0 · بصمة b79a370563c3"
     },
     {
       "fault_id": "ك-222",
@@ -68,14 +68,14 @@
     },
     {
       "fault_id": "م-01",
-      "state": "مغلق",
+      "state": "موروث غير مثبت",
       "lesson_id": "م-1",
       "barrier_id": "B-5f36040e",
       "run_evidence": "حقق حي 2026-10-28: عرض فقرة الترويسة في المخرج المبني → لا قيد 74ch · مطابق تمامًا · قياس حي قبل التسليم (`"
     },
     {
       "fault_id": "م-02",
-      "state": "مغلق",
+      "state": "موروث غير مثبت",
       "lesson_id": "م-2",
       "barrier_id": "B-f6353d45",
       "run_evidence": ": بنية بطاقة القرار في المخرج المبني → التسمية فوق القيمة بعرض كامل · مطابق تمامًا · قاعدة تصميم مكتوبة في "
@@ -173,7 +173,7 @@
     },
     {
       "fault_id": "ك-08",
-      "state": "مغلق",
+      "state": "موروث غير مثبت",
       "lesson_id": "ك-8",
       "barrier_id": "B-61173ebf",
       "run_evidence": "جلاته تحقق حي 2026-10-28: appendices/source-reliability-40.md موجود · مطابق تمامًا · قاعدة: **كل مرجع في مل"
@@ -348,7 +348,7 @@
     },
     {
       "fault_id": "ك-39",
-      "state": "موروث غير مثبت",
+      "state": "مغلق",
       "lesson_id": "ك-39",
       "barrier_id": "B-e5e2b3e5",
       "run_evidence": "s 30 --json-out /tmp/batch-A-k39.json --md-out /tmp/batch-A-k39.md` → rc=0. النتيجة الصريحة: اجتاز."
@@ -404,14 +404,14 @@
     },
     {
       "fault_id": "ك-48",
-      "state": "موروث غير مثبت",
+      "state": "مغلق",
       "lesson_id": "ك-48",
       "barrier_id": "B-b5516e00",
       "run_evidence": " الحالي: `timeout 120 python3 validators/check_skills_integrity.py` → rc=0. النتيجة الصريحة: اجتاز."
     },
     {
       "fault_id": "ك-49",
-      "state": "موروث غير مثبت",
+      "state": "مغلق",
       "lesson_id": "ك-49",
       "barrier_id": "B-73886373",
       "run_evidence": "seawatch --tag batch-A-k49 --out /tmp/batch-A-k49-fingerprint.json` → rc=0. النتيجة الصريحة: اجتاز."
@@ -453,7 +453,7 @@
     },
     {
       "fault_id": "ك-55",
-      "state": "موروث غير مثبت",
+      "state": "مغلق",
       "lesson_id": "ك-55",
       "barrier_id": "B-842a49f1",
       "run_evidence": "لي: `timeout 120 python3 tools/gate_coverage.py --root . --orphans` → rc=0. النتيجة الصريحة: اجتاز."
@@ -474,7 +474,7 @@
     },
     {
       "fault_id": "ك-58",
-      "state": "موروث غير مثبت",
+      "state": "مغلق",
       "lesson_id": "ك-58",
       "barrier_id": "B-e01ffb19",
       "run_evidence": "ياس مباشر: timeout 120 python3 validators/check_libraries_skills.py → rc=0 · بصمة f23f85651615"
@@ -950,7 +950,7 @@
     },
     {
       "fault_id": "ك-96",
-      "state": "موروث غير مثبت",
+      "state": "مغلق",
       "lesson_id": "ك-96",
       "barrier_id": "B-44c7ca71",
       "run_evidence": " الحالي: `timeout 120 python3 tests/test_final_gate_vs_manifest.py` → rc=0. النتيجة الصريحة: اجتاز."
@@ -999,14 +999,14 @@
     },
     {
       "fault_id": "ك-103",
-      "state": "موروث غير مثبت",
+      "state": "مغلق",
       "lesson_id": "ك-103",
       "barrier_id": "B-ac3f30ea",
       "run_evidence": "e/ubuntu/seawatch/dist/reports/pdf/2026-10-29.pdf --date 2026-10-29 → rc=0 · بصمة f932ad1b4fa2"
     },
     {
       "fault_id": "ك-104",
-      "state": "موروث غير مثبت",
+      "state": "مغلق",
       "lesson_id": "ك-104",
       "barrier_id": "B-fccb97e8",
       "run_evidence": "/ubuntu/seawatch/dist/reports/pdf/2026-10-29.pdf --date 2026-10-29` → rc=0. النتيجة الصريحة: اجتاز."
@@ -1097,7 +1097,7 @@
     },
     {
       "fault_id": "ك-117",
-      "state": "موروث غير مثبت",
+      "state": "مغلق",
       "lesson_id": "ك-117",
       "barrier_id": "B-fb8fe313",
       "run_evidence": "py --date 2026-11-08 && python3 validators/check_sources_count.py'` → rc=0. النتيجة الصريحة: اجتاز."
@@ -1111,10 +1111,10 @@
     },
     {
       "fault_id": "ك-119",
-      "state": "مفتوح",
+      "state": "مغلق",
       "lesson_id": "ك-119",
-      "barrier_id": "B-336b51eb",
-      "run_evidence": null
+      "barrier_id": "B-18b39eb8",
+      "run_evidence": "ources.py قياس مباشر: timeout 120 python3 tools/diagnose_sources.py → rc=0 · بصمة bda9d9e9c5b9"
     },
     {
       "fault_id": "ك-120",
@@ -1181,7 +1181,7 @@
     },
     {
       "fault_id": "ك-128",
-      "state": "موروث غير مثبت",
+      "state": "مغلق",
       "lesson_id": "ك-128",
       "barrier_id": "B-e7382715",
       "run_evidence": " — القياس الحالي: `timeout 120 python3 tools/merge_ledger_daily.py` → rc=0. النتيجة الصريحة: اجتاز."
@@ -1244,7 +1244,7 @@
     },
     {
       "fault_id": "ك-137",
-      "state": "موروث غير مثبت",
+      "state": "مغلق",
       "lesson_id": "ك-137",
       "barrier_id": "B-914e023e",
       "run_evidence": " — القياس الحالي: `timeout 120 python3 tests/test_feed_counters.py` → rc=0. النتيجة الصريحة: اجتاز."
@@ -1293,7 +1293,7 @@
     },
     {
       "fault_id": "ك-144",
-      "state": "موروث غير مثبت",
+      "state": "مغلق",
       "lesson_id": "ك-144",
       "barrier_id": "B-c60149aa",
       "run_evidence": "— القياس الحالي: `timeout 120 bash tests/test_repair_regression.sh` → rc=0. النتيجة الصريحة: اجتاز."
@@ -1307,17 +1307,17 @@
     },
     {
       "fault_id": "ك-146",
-      "state": "مفتوح",
+      "state": "مغلق",
       "lesson_id": "ك-146",
-      "barrier_id": "B-50614026",
-      "run_evidence": " — القياس الحالي: `timeout 120 python3 tests/test_feed_counters.py` → rc=0. النتيجة الصريحة: اجتاز."
+      "barrier_id": "B-5a506966",
+      "run_evidence": "ters.py قياس مباشر: timeout 120 python3 tests/test_feed_counters.py → rc=0 · بصمة 27da142aa943"
     },
     {
       "fault_id": "ك-147",
-      "state": "مفتوح",
+      "state": "مغلق",
       "lesson_id": "ك-147",
-      "barrier_id": "B-5f7cf683",
-      "run_evidence": "س. — القياس الحالي: `timeout 120 python3 tests/test_orphan_rule.py` → rc=0. النتيجة الصريحة: اجتاز."
+      "barrier_id": "B-fa39b71d",
+      "run_evidence": "n_rule.py قياس مباشر: timeout 120 python3 tests/test_orphan_rule.py → rc=0 · بصمة c3cfbe4fb2ab"
     },
     {
       "fault_id": "ك-148",
@@ -1328,7 +1328,7 @@
     },
     {
       "fault_id": "ك-149",
-      "state": "موروث غير مثبت",
+      "state": "مغلق",
       "lesson_id": "ك-149",
       "barrier_id": "B-2024492f",
       "run_evidence": " — القياس الحالي: `timeout 120 python3 tests/test_skill_lessons.py` → rc=0. النتيجة الصريحة: اجتاز."
@@ -1349,7 +1349,7 @@
     },
     {
       "fault_id": "ك-152",
-      "state": "موروث غير مثبت",
+      "state": "مغلق",
       "lesson_id": "ك-152",
       "barrier_id": "B-ec715e20",
       "run_evidence": "فة `from pathlib import Path`، وربط الفاحص بـ validators/_guard.py (الرمز 70 للانهيار) — القياس الحال"
@@ -1398,7 +1398,7 @@
     },
     {
       "fault_id": "ك-159",
-      "state": "موروث غير مثبت",
+      "state": "مغلق",
       "lesson_id": "ك-159",
       "barrier_id": "B-ab7f1e99",
       "run_evidence": "د الحارس من مساره الصحيح مع بديل احتياطي، وأي انهيار في المدققات يخرج رمز 70 فيمنع. — القياس الحالي: "
@@ -1419,7 +1419,7 @@
     },
     {
       "fault_id": "ك-162",
-      "state": "موروث غير مثبت",
+      "state": "مغلق",
       "lesson_id": "ك-162",
       "barrier_id": "B-2b0ca7c7",
       "run_evidence": "ياس مباشر: timeout 120 python3 validators/check_secrets.py --root . → rc=0 · بصمة 7cd300a9671b"
@@ -1454,7 +1454,7 @@
     },
     {
       "fault_id": "ك-167",
-      "state": "موروث غير مثبت",
+      "state": "مغلق",
       "lesson_id": "ك-167",
       "barrier_id": "B-faa5d917",
       "run_evidence": "ُزيل اللبس مع اسم الجهة MSI Defense في عناوين التغذية. الاختبار: G003 خرج 0 في نسخة معزولة بعد الإصل"
@@ -1636,7 +1636,7 @@
     },
     {
       "fault_id": "ك-191",
-      "state": "موروث غير مثبت",
+      "state": "مغلق",
       "lesson_id": "ك-191",
       "barrier_id": "B-c76ebeae",
       "run_evidence": "/ubuntu/seawatch/dist/reports/pdf/2026-10-29.pdf --date 2026-10-29` → rc=0. النتيجة الصريحة: اجتاز."
@@ -1741,21 +1741,21 @@
     },
     {
       "fault_id": "ك-207",
-      "state": "موروث غير مثبت",
+      "state": "مغلق",
       "lesson_id": "ك-207",
       "barrier_id": "B-935e9101",
       "run_evidence": "ياس الحالي: `timeout 120 python3 tools/build_vocab_gate.py --check` → rc=0. النتيجة الصريحة: اجتاز."
     },
     {
       "fault_id": "ك-208",
-      "state": "موروث غير مثبت",
+      "state": "مغلق",
       "lesson_id": "ك-208",
       "barrier_id": "B-302c56be",
       "run_evidence": "imeout 120 python3 tools/audit_style_coverage.py --date 2026-11-08` → rc=0. النتيجة الصريحة: اجتاز."
     },
     {
       "fault_id": "ك-209",
-      "state": "موروث غير مثبت",
+      "state": "مغلق",
       "lesson_id": "ك-209",
       "barrier_id": "B-167b1fba",
       "run_evidence": "fects.py --md reports/2026-11-08-sectioned.md --structured-registry → rc=0 · بصمة b713cb230a1f"
@@ -1841,8 +1841,8 @@
       "fault_id": "ك-227",
       "state": "بانتظار التحقق",
       "lesson_id": "ك-227",
-      "barrier_id": "B-90f6e5e2",
-      "run_evidence": "227: timeout 120 python3 -m pytest tests/test_build_atomicity.py -q → rc=0. النتيجة الصريحة: اجتاز "
+      "barrier_id": "B-04e09969",
+      "run_evidence": " مغلق قياس مباشر: timeout 120 python3 tests/test_build_atomicity.py → rc=0 · بصمة bcc4b7bdb0c5"
     },
     {
       "fault_id": "ك-228",
@@ -1862,8 +1862,8 @@
       "fault_id": "ك-230",
       "state": "بانتظار التحقق",
       "lesson_id": "ك-230",
-      "barrier_id": "B-187ec15c",
-      "run_evidence": null
+      "barrier_id": "B-6a0aa8fb",
+      "run_evidence": "باشر: timeout 120 python3 tests/test_sections_registry_vs_report.py → rc=0 · بصمة f200fefcb066"
     },
     {
       "fault_id": "ك-231",
@@ -1883,15 +1883,15 @@
       "fault_id": "ك-233",
       "state": "بانتظار التحقق",
       "lesson_id": "ك-233",
-      "barrier_id": "B-25e3898b",
-      "run_evidence": "additions_surface.py --date 2026-11-08 --site /home/ubuntu/seawatch → rc=0. النتيجة الصريحة: اجتاز "
+      "barrier_id": "B-77abedd5",
+      "run_evidence": "additions_surface.py --date 2026-11-08 --site /home/ubuntu/seawatch → rc=0 · بصمة 2b9a04ef8ac1"
     },
     {
       "fault_id": "ك-234",
       "state": "بانتظار التحقق",
       "lesson_id": "ك-234",
-      "barrier_id": "B-252a5560",
-      "run_evidence": "additions_surface.py --date 2026-11-08 --site /home/ubuntu/seawatch → rc=0. النتيجة الصريحة: اجتاز "
+      "barrier_id": "B-14c25cdd",
+      "run_evidence": "additions_surface.py --date 2026-11-08 --site /home/ubuntu/seawatch → rc=0 · بصمة db1aa9f37453"
     },
     {
       "fault_id": "ك-235",
@@ -1911,8 +1911,8 @@
       "fault_id": "ك-237",
       "state": "بانتظار التحقق",
       "lesson_id": "ك-237",
-      "barrier_id": "B-7391d2a8",
-      "run_evidence": "لقياس للصف ك-237: timeout 120 python3 tests/test_source_channels.py → rc=0. النتيجة الصريحة: اجتاز "
+      "barrier_id": "B-b39c00d2",
+      "run_evidence": " مغلق قياس مباشر: timeout 120 python3 tests/test_source_channels.py → rc=0 · بصمة 67e072eea05c"
     },
     {
       "fault_id": "ك-238",
@@ -1925,8 +1925,8 @@
       "fault_id": "ك-239",
       "state": "بانتظار التحقق",
       "lesson_id": "ك-239",
-      "barrier_id": "B-854ada6e",
-      "run_evidence": "out 120 python3 validators/check_decision_card.py --date 2026-11-08 → rc=0. النتيجة الصريحة: اجتاز "
+      "barrier_id": "B-e79a9915",
+      "run_evidence": "out 120 python3 validators/check_decision_card.py --date 2026-11-08 → rc=0 · بصمة e86723cc0ae6"
     },
     {
       "fault_id": "ك-241",
@@ -2030,8 +2030,8 @@
       "fault_id": "ك-255",
       "state": "بانتظار التحقق",
       "lesson_id": "ك-255",
-      "barrier_id": "B-7b87b02b",
-      "run_evidence": " timeout 120 python3 validators/check_exceptions_burndown.py --json → rc=0 · بصمة 67cb36b76650"
+      "barrier_id": "B-51e9e553",
+      "run_evidence": " مباشر: timeout 120 python3 validators/check_exceptions_burndown.py → rc=0 · بصمة a4b2be4cb21c"
     },
     {
       "fault_id": "ك-256",
@@ -2093,8 +2093,8 @@
       "fault_id": "ك-264",
       "state": "بانتظار التحقق",
       "lesson_id": "ك-264",
-      "barrier_id": "B-64991b08",
-      "run_evidence": " — القياس الحالي: `timeout 120 python3 tools/merge_ledger_daily.py` → rc=0. النتيجة الصريحة: اجتاز."
+      "barrier_id": "B-c9280b0d",
+      "run_evidence": "غيل منع قياس مباشر: timeout 120 python3 tools/merge_ledger_daily.py → rc=0 · بصمة 3926fde3a226"
     },
     {
       "fault_id": "ك-265",
@@ -2112,14 +2112,14 @@
     },
     {
       "fault_id": "ك-267",
-      "state": "مغلق",
+      "state": "بانتظار التحقق",
       "lesson_id": "ك-267",
       "barrier_id": "B-f82048df",
       "run_evidence": "_print.py — 5 حالات سلبيّة وإيجابيّة تمرّ، وفحص مضاد: PDF مفقود يمنع برمز 2"
     },
     {
       "fault_id": "ك-268",
-      "state": "مغلق",
+      "state": "بانتظار التحقق",
       "lesson_id": "ك-268",
       "barrier_id": "B-0917b4f4",
       "run_evidence": "اجهة كل بوابة قبل تشغيلها وتشغيلها بواجهتها الصحيحة مطبَّق: قاعدة: أي رمز 2 يُقرأ مع مخرجه الحرفي وي"
@@ -2128,8 +2128,8 @@
       "fault_id": "ك-269",
       "state": "بانتظار التحقق",
       "lesson_id": "ك-269",
-      "barrier_id": "B-646eb33e",
-      "run_evidence": "اس مباشر: timeout 120 python3 -m pytest tests/test_sync_guard.py -q → rc=0 · بصمة 8dfdc65b6a00"
+      "barrier_id": "B-d2bba862",
+      "run_evidence": "اس مباشر: timeout 120 python3 -m pytest tests/test_sync_guard.py -q → rc=0 · بصمة 3b89921a91db"
     },
     {
       "fault_id": "ك-270",
@@ -2765,7 +2765,7 @@
       "fault_id": "ك-360",
       "state": "مفتوح",
       "lesson_id": "ك-360",
-      "barrier_id": "B-4537ebec",
+      "barrier_id": "B-4fb529b8",
       "run_evidence": "alidators/check_skills_integrity.py في بداية الجولة؛ تحقق حي: restore خرج 0 وintegrity خرج 0؛ نافذة "
     },
     {
@@ -2884,15 +2884,15 @@
       "fault_id": "ك-377",
       "state": "بانتظار التحقق",
       "lesson_id": "ك-377",
-      "barrier_id": "B-24e3284f",
-      "run_evidence": "e/ubuntu/seawatch/dist/reports/pdf/2026-10-31.pdf --date 2026-10-31 → رمز 2؛ class=print-map في HTML"
+      "barrier_id": "B-2963b7e4",
+      "run_evidence": "e/ubuntu/seawatch/dist/reports/pdf/2026-10-31.pdf --date 2026-10-31 → rc=0 · بصمة 38bae2ef07d3"
     },
     {
       "fault_id": "ك-378",
       "state": "بانتظار التحقق",
       "lesson_id": "ك-378",
-      "barrier_id": "B-8fa36440",
-      "run_evidence": "نص عربي قياس مباشر: timeout 120 bash tests/test_delivery_scripts.sh → rc=0 · بصمة 67f28bf2a552"
+      "barrier_id": "B-d2d8ff6f",
+      "run_evidence": "نص عربي قياس مباشر: timeout 120 bash tests/test_delivery_scripts.sh → rc=0 · بصمة 439d522ab87e"
     },
     {
       "fault_id": "ك-379",
@@ -3064,7 +3064,7 @@
     },
     {
       "fault_id": "ك-403",
-      "state": "مغلق",
+      "state": "مفتوح",
       "lesson_id": "ك-403",
       "barrier_id": "B-4b1364bd",
       "run_evidence": "face الجديد؛ التشغيل النهائي يمرر السطح وتبقى مخالفات IMO منفصلة فقط؛ خرج 2 بسبب عقد IMO القديم"
@@ -3080,8 +3080,8 @@
       "fault_id": "ك-405",
       "state": "مفتوح",
       "lesson_id": "ك-405",
-      "barrier_id": "B-6008e75b",
-      "run_evidence": "ounters.py --date 2026-11-08 --dist-root /home/ubuntu/seawatch/dist → rc=0 · بصمة 833b930579cb"
+      "barrier_id": "B-2b83cdb4",
+      "run_evidence": "ounters.py --date 2026-11-08 --dist-root /home/ubuntu/seawatch/dist → rc=0 · بصمة f31f5139c95d"
     },
     {
       "fault_id": "ك-406",
@@ -3169,7 +3169,7 @@
     },
     {
       "fault_id": "ك-418",
-      "state": "مغلق",
+      "state": "مفتوح",
       "lesson_id": "ك-418",
       "barrier_id": "B-dbbce523",
       "run_evidence": "بوابة الصياغة على السطح المستخرج rc=1 و0 ألفاظ مصطنعة · تدقيق التغطية 8/8 مانعة 0"
@@ -3330,7 +3330,7 @@
     },
     {
       "fault_id": "ك-441",
-      "state": "مغلق",
+      "state": "بانتظار التحقق",
       "lesson_id": "ك-441",
       "barrier_id": "B-bad636e3",
       "run_evidence": "نيفست محفوظة في `backups-20261101/runbook.json.bak-sec8` قبل: الأسلوب rc=2 · verify «الكتيب لا يطاب"
@@ -3372,7 +3372,7 @@
     },
     {
       "fault_id": "ك-447",
-      "state": "مغلق",
+      "state": "مفتوح",
       "lesson_id": "ك-447",
       "barrier_id": "B-0af82335",
       "run_evidence": "ا (المخرج الإنجليزي بلا أي حرف عربي) وسالبًا (رُفض النشر قبل الإصلاح برمز 2)."
@@ -3407,7 +3407,7 @@
     },
     {
       "fault_id": "ك-452",
-      "state": "مغلق",
+      "state": "مفتوح",
       "lesson_id": "ك-452",
       "barrier_id": "B-7436c20f",
       "run_evidence": " الحكم ويشترط حكمًا واحدًا. اختبار التكامل `close_check_selftest.sh`: 7/7 (ست حالات عزل + فحص الحك"
@@ -3780,8 +3780,8 @@
       "fault_id": "ك-505",
       "state": "بانتظار التحقق",
       "lesson_id": "ك-505",
-      "barrier_id": "B-4c09fab2",
-      "run_evidence": "26-11-08.html --additions /home/ubuntu/seawatch/dist/additions.html → rc=0 · بصمة 223d1dac079a"
+      "barrier_id": "B-2f7a6e38",
+      "run_evidence": "26-11-08.html --additions /home/ubuntu/seawatch/dist/additions.html → rc=0 · بصمة fffc138dd4b1"
     },
     {
       "fault_id": "ك-506",
@@ -3836,8 +3836,8 @@
       "fault_id": "ك-513",
       "state": "مغلق",
       "lesson_id": "ك-513",
-      "barrier_id": "B-1865c288",
-      "run_evidence": "· JMIC) وتصحيح أسطح العرض من صفوف الدفتر check_source_naming.py ⇒ كان rc=2 بـ29 مخالفة، وصار يفحص ا"
+      "barrier_id": "B-18485d23",
+      "run_evidence": "ر قياس مباشر: timeout 120 python3 validators/check_source_naming.py → rc=0 · بصمة f4670a6c8887"
     },
     {
       "fault_id": "ك-514",
@@ -3904,7 +3904,7 @@
     },
     {
       "fault_id": "ك-523",
-      "state": "مغلق",
+      "state": "بانتظار التحقق",
       "lesson_id": "ك-523",
       "barrier_id": "B-12929125",
       "run_evidence": "y.py` ⇒ «صفر شيفرة غير متتبَّعة» · `check_classification_matrix.py` ⇒ 4/4 بلا اختلاف"
@@ -3918,7 +3918,7 @@
     },
     {
       "fault_id": "ك-525",
-      "state": "مغلق",
+      "state": "بانتظار التحقق",
       "lesson_id": "ك-525",
       "barrier_id": "B-259da6d4",
       "run_evidence": " ضمن المرسوم قبل مقارنة المجموعة بالمطلوب `tests/test_map_cluster.py` 4/4 ناجح · اختبار سالب مباشر"
@@ -3948,8 +3948,8 @@
       "fault_id": "ك-531",
       "state": "مفتوح",
       "lesson_id": "ك-531",
-      "barrier_id": "B-b7af2184",
-      "run_evidence": "ق قياس مباشر: timeout 120 python3 validators/check_skills_parity.py → rc=0 · بصمة 23d591b15829"
+      "barrier_id": "B-b2a82cfe",
+      "run_evidence": "ق قياس مباشر: timeout 120 python3 validators/check_skills_parity.py → rc=0 · بصمة e55aba9d70e1"
     },
     {
       "fault_id": "ك-532",
@@ -3988,17 +3988,17 @@
     },
     {
       "fault_id": "ك-537",
-      "state": "مفتوح",
+      "state": "مغلق",
       "lesson_id": "ك-537",
-      "barrier_id": "B-547df506",
-      "run_evidence": "831df584ec2624ba5e5c7d5c9b11711efffd879eec4b`) ثم GREEN: `2 passed` و`rc=0` (بصمة `/tmp/g040-contra"
+      "barrier_id": "B-0a17874c",
+      "run_evidence": "ارس الموحّد قياس مباشر: python3 tests/test_g040_review2_contract.py → rc=0 · بصمة 33e4242048fc"
     },
     {
       "fault_id": "ك-538",
       "state": "بانتظار التحقق",
       "lesson_id": "ك-538",
-      "barrier_id": "B-ba102c69",
-      "run_evidence": "ming_gate.py && python3 validators/check_source_naming.py --root .' → rc=0 · بصمة 6a738e7ccfd1"
+      "barrier_id": "B-01042d79",
+      "run_evidence": "فة قياس مباشر: timeout 120 python3 tests/test_source_naming_gate.py → rc=0 · بصمة ccdc5554cd29"
     },
     {
       "fault_id": "ك-539",
@@ -4244,6 +4244,13 @@
       "lesson_id": "ك-576",
       "barrier_id": "B-ac28a227",
       "run_evidence": "بوابة جودة الطباعة صارت rc=0 والخريطة مقيسة 149×99 مم"
+    },
+    {
+      "fault_id": "ك-577",
+      "state": "مفتوح",
+      "lesson_id": "ك-577",
+      "barrier_id": "B-d116b66a",
+      "run_evidence": null
     }
   ]
 }

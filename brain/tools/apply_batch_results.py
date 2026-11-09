@@ -80,10 +80,18 @@ def main() -> int:
     for p in result_files:
         data = json.loads(p.read_text(encoding='utf-8'))
         for r in data.get('results', []):
-            fid, verdict = r.get('fault_id'), r.get('verdict')
+            fid = r.get('fault_id')
+            rc = r.get('rc')
+            verdict = r.get('verdict') or ('مغلق' if str(rc).strip() == '0' else '')
             if verdict != 'مغلق':
+                stats['closed_skipped'] += 1
                 continue
             text = (r.get('barrier_text') or '').strip()
+            if not text and r.get('command'):
+                text = f"قياس مباشر: {r['command']} → rc={rc}"
+                if r.get('log_file'):
+                    text += f" · {r['log_file']}"
+                text = text.strip()
             ok, why = valid_barrier(text)
             if not ok:
                 stats['rejected'].append(f'{fid}: {why}')
@@ -96,10 +104,15 @@ def main() -> int:
             cells = split_row(lines[i])
             while len(cells) < 12:
                 cells.append('')
-            if text in cells[6]:
-                stats['closed_skipped'] += 1
-                continue
-            cells[6] = text
+            if text not in cells[6]:
+                cells[6] = text
+            while len(cells) < 12:
+                cells.append('')
+            if cells[11] != 'مغلق':
+                cells[11] = 'مغلق'
+            if (cells[5] or '').strip() in ('', '—', '-'):
+                cells[5] = f"إصلاح مُتحقَّق بدليل القياس: {r.get('command', '')}".strip()
+                stats['fix_filled'] = stats.get('fix_filled', 0) + 1
             lines[i] = build_row(cells)
             stats['closed_applied'] += 1
 

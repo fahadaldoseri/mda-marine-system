@@ -1,0 +1,9 @@
+COMMAND: timeout 120 python3 validators/check_server_code_tracking.py --root .
+STARTED_AT: 2026-11-09T02:01:18.002072+00:00
+RC: 70
+OUTPUT_BEGIN
+✘ ملفات شيفرة على الخادم غير متتبَّعة في المستودع: 1 — منع
+   · tests/test_batch_result_row_link.py
+   العلاج: انقل الملف إلى المستودع عبر فرع وطلب دمج، أو أدرجه في appendices/untracked-code-allowlist.json بسبب مكتوب.
+
+OUTPUT_END

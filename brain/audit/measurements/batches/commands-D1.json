@@ -1,0 +1,8 @@
+{
+ "commands": {
+  "ك-146": "timeout 120 python3 tests/test_feed_counters.py",
+  "ك-147": "timeout 120 python3 tests/test_orphan_rule.py",
+  "ك-363": "python3 tools/check_governing_assets.py --json",
+  "ك-537": "python3 tests/test_g040_review2_contract.py"
+ }
+}

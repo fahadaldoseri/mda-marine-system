@@ -1,0 +1,13 @@
+COMMAND: timeout 120 python3 tools/check_governing_assets.py
+STARTED_AT: 2026-11-09T02:13:16.615375+00:00
+RC: 2
+OUTPUT_BEGIN
+BLOCK · root 58a6830312ca22921373e611827c48e6726664fe29951ce8fe983db5814f45df · files 2658
+- snapshot root mismatch: current 58a6830312ca22921373e611827c48e6726664fe29951ce8fe983db5814f45df != recorded a06b2d380e8467889846eecb0f69b752e5924cbff58a3441c2bb356e5662da86
+- snapshot content mismatch: /home/ubuntu/skills/fault-closure-and-learning-ops/SKILL.md
+- snapshot content mismatch: /home/ubuntu/skills/parity-and-publish-ops/SKILL.md
+- snapshot missing recorded path: /home/ubuntu/skills/rerun-step-to-live-parity-ops/SKILL.md
+- snapshot missing recorded path: /home/ubuntu/skills/rerun-step-to-live-parity-ops/references/closure-evidence-contract.md
+- snapshot missing recorded path: /home/ubuntu/skills/rerun-step-to-live-parity-ops/scripts/live_parity.py
+
+OUTPUT_END

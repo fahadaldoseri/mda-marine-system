@@ -1,0 +1,8 @@
+COMMAND: python3 validators/check_backup_parity.py --mode strict ⇒ «مطابق — المستودع يعكس الشجرة المحلية كاملة» عطل كامن
+STARTED_AT: 2026-11-09T02:06:07.876565+00:00
+RC: 2
+OUTPUT_BEGIN
+usage: check_backup_parity.py [-h] [--mode {strict,advisory}]
+check_backup_parity.py: error: unrecognized arguments: ⇒ «مطابق — المستودع يعكس الشجرة المحلية كاملة» عطل كامن
+
+OUTPUT_END
