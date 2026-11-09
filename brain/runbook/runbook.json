@@ -6119,11 +6119,7 @@
       },
       "on_fail": "stop",
       "schedule": "weekly",
-      "command": [
-        "bash",
-        "-lc",
-        "B=\"$PWD\"; export B SITE; python3 validators/check_library_use.py --date {date}; python3 validators/check_libraries_skills.py; rc=$?; exit $rc"
-      ],
+      "command": "bash -lc B=\"$PWD\"; export B SITE; rc=0; python3 validators/check_library_use.py --date {date} || rc=$?; python3 validators/check_libraries_skills.py || rc=$?; python3 validators/check_skills_tree_parity.py || rc=$?; python3 validators/check_skills_adoption_parity.py || rc=$?; exit $rc",
       "ok_rc": [
         0
       ],
