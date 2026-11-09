@@ -100,3 +100,41 @@ class SurfaceDeferralContractTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SurfaceDeferralUnionTests(unittest.TestCase):
+    """ك-582: غياب هوية البوابة لا يجوز أن يُلغي إعلان تأجيل معلَنًا بشرط إنفاذه."""
+
+    def test_union_mode_honours_declaration_from_any_gate(self):
+        module = load_module()
+        deferred = module.deferred_producer_ids(
+            self._manifest(self._declaration()), None
+        )
+        self.assertIn("B010", deferred)
+
+    def test_union_mode_still_blocks_declaration_without_real_enforcement(self):
+        module = load_module()
+        decl = self._declaration()
+        decl.pop("enforced_by")
+        self.assertEqual(module.deferred_producer_ids(self._manifest(decl), None), {})
+
+    @staticmethod
+    def _declaration():
+        return {
+            "label": "صفحة التقرير",
+            "producer": "B010",
+            "enforced_by": "G045",
+            "enforcement_contract": "surface-coverage",
+            "reason": "B010 يبني الصفحة بعد G001، وG045 يعيد فحص تغطية الأسطح بعد البناء.",
+            "effective_from": "2026-11-07",
+        }
+
+    @staticmethod
+    def _manifest(declaration):
+        return {
+            "steps": [
+                {"id": "G001", "phase": "gates", "deferred_surfaces": [declaration]},
+                {"id": "B010", "phase": "build"},
+                {"id": "G045", "phase": "build", "command": ["python3 tools/audit_style_coverage.py"]},
+            ]
+        }

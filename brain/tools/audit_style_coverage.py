@@ -167,8 +167,10 @@ def deferred_producer_ids(manifest: dict, gate_id: str) -> dict[str, dict]:
         for index, step in enumerate(steps)
         if isinstance(step, dict) and step.get("id")
     }
-    if gate_id not in positions:
+    if gate_id is not None and gate_id not in positions:
         return {}
+    # gate_id=None ⇒ وضع الاتحاد: تُحتسب إعلانات كل الخطوات، وكل إعلان يبقى مشروطًا
+    # بترتيبه وبوجود خطوة إنفاذ لاحقة حقيقية (لا تخفيف للعقد).
     out: dict[str, dict] = {}
     step_by_id = {
         str(step.get("id")): step
@@ -176,7 +178,9 @@ def deferred_producer_ids(manifest: dict, gate_id: str) -> dict[str, dict]:
         if isinstance(step, dict) and step.get("id")
     }
     for step in steps:
-        if not isinstance(step, dict) or str(step.get("id")) != gate_id:
+        if not isinstance(step, dict):
+            continue
+        if gate_id is not None and str(step.get("id")) != gate_id:
             continue
         for declaration in step.get("deferred_surfaces") or []:
             if not isinstance(declaration, dict):
@@ -185,7 +189,7 @@ def deferred_producer_ids(manifest: dict, gate_id: str) -> dict[str, dict]:
             if not producer or producer not in positions:
                 continue
             producer_index = positions[producer]
-            gate_index = positions[gate_id]
+            gate_index = positions[str(step.get("id"))]
             if producer_index <= gate_index:
                 continue
             enforced_by = str(declaration.get("enforced_by") or "").strip()
@@ -365,7 +369,8 @@ def main() -> int:
 
     manifest = _load_manifest()
     gate_id = a.gate_id or _current_step_id(manifest)
-    deferred = deferred_producer_ids(manifest, gate_id) if gate_id else {}
+    # غياب هوية البوابة لا يُلغي الإعلانات المعلَنة: تُحتسب بإعلانها وشرط إنفاذها.
+    deferred = deferred_producer_ids(manifest, gate_id) if gate_id else deferred_producer_ids(manifest, None)
     rows, blocked, uncovered, deferred_count = [], 0, 0, 0
     off = _disabled_producers()
     for i, s in enumerate(surfaces(a.date), 1):

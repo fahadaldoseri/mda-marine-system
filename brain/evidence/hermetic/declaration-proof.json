@@ -10,8 +10,8 @@
   ],
   "changed_files_outside_isolation": 0,
   "changed_paths_outside_isolation": [],
-  "duration_ms": 199,
-  "duration_seconds": 0.199,
+  "duration_ms": 172,
+  "duration_seconds": 0.172,
   "evidence_files": {
     "impact_summary": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/raw/declaration-proof/impact-summary.json",
     "project_compare": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/raw/declaration-proof/project-compare.json",
@@ -34,7 +34,7 @@
   "impact_summary": {
     "connect_attempts": 1,
     "connect_lines": [
-      "2687007 connect(3, {sa_family=AF_INET, sin_port=htons(80), sin_addr=inet_addr(\"1.1.1.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)"
+      "2822939 connect(3, {sa_family=AF_INET, sin_port=htons(80), sin_addr=inet_addr(\"1.1.1.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)"
     ],
     "execve": [
       "/bin/sh",
@@ -43,23 +43,23 @@
       "/usr/bin/python3"
     ],
     "files_opened_for_write": [
-      "2687002 creat(\"/newroot/dev/full\", 0444) = 5",
-      "2687002 creat(\"/newroot/dev/null\", 0444) = 5",
-      "2687002 creat(\"/newroot/dev/random\", 0444) = 5",
-      "2687002 creat(\"/newroot/dev/tty\", 0444) = 5",
-      "2687002 creat(\"/newroot/dev/urandom\", 0444) = 5",
-      "2687002 creat(\"/newroot/dev/zero\", 0444) = 5",
-      "2687002 openat(5, \"gid_map\", O_RDWR|O_CLOEXEC) = 6",
-      "2687002 openat(5, \"setgroups\", O_RDWR|O_CLOEXEC) = 6",
-      "2687002 openat(5, \"uid_map\", O_RDWR|O_CLOEXEC) = 6",
-      "2687004 openat(AT_FDCWD, \"/var/tmp/hermetic-work.8YZlhb/.hermetic-net-20261108T044320Z-2686953.probe.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "2687004 openat(AT_FDCWD, \"/var/tmp/hermetic-work.8YZlhb/.hermetic-net-20261108T044320Z-2686953.probe.before\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "2687004 openat(AT_FDCWD, \"/var/tmp/hermetic-work.8YZlhb/.hermetic-net-20261108T044320Z-2686953.probe.out\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "2687004 openat(AT_FDCWD, \"/var/tmp/hermetic-work.8YZlhb/.hermetic-net-20261108T044320Z-2686953.probe.rc\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "2687004 openat(AT_FDCWD, \"/var/tmp/hermetic-work.8YZlhb/.hermetic-net-20261108T044320Z-2686953.run.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "2687005 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "2687008 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "2687011 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3"
+      "2822934 creat(\"/newroot/dev/full\", 0444) = 5",
+      "2822934 creat(\"/newroot/dev/null\", 0444) = 5",
+      "2822934 creat(\"/newroot/dev/random\", 0444) = 5",
+      "2822934 creat(\"/newroot/dev/tty\", 0444) = 5",
+      "2822934 creat(\"/newroot/dev/urandom\", 0444) = 5",
+      "2822934 creat(\"/newroot/dev/zero\", 0444) = 5",
+      "2822934 openat(5, \"gid_map\", O_RDWR|O_CLOEXEC) = 6",
+      "2822934 openat(5, \"setgroups\", O_RDWR|O_CLOEXEC) = 6",
+      "2822934 openat(5, \"uid_map\", O_RDWR|O_CLOEXEC) = 6",
+      "2822936 openat(AT_FDCWD, \"/var/tmp/hermetic-work.IgZZpX/.hermetic-net-20261109T045040Z-2822891.probe.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "2822936 openat(AT_FDCWD, \"/var/tmp/hermetic-work.IgZZpX/.hermetic-net-20261109T045040Z-2822891.probe.before\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "2822936 openat(AT_FDCWD, \"/var/tmp/hermetic-work.IgZZpX/.hermetic-net-20261109T045040Z-2822891.probe.out\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "2822936 openat(AT_FDCWD, \"/var/tmp/hermetic-work.IgZZpX/.hermetic-net-20261109T045040Z-2822891.probe.rc\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "2822936 openat(AT_FDCWD, \"/var/tmp/hermetic-work.IgZZpX/.hermetic-net-20261109T045040Z-2822891.run.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "2822937 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "2822940 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "2822943 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3"
     ]
   },
   "isolation": {
@@ -89,7 +89,7 @@
   "schema": "hermetic-run/v1",
   "timeout_enforced": false,
   "timeout_seconds": 10,
-  "timestamp_utc": "20261108T044320Z",
+  "timestamp_utc": "20261109T045040Z",
   "tool": "/usr/bin/python3",
   "tool_name": "declaration-proof",
   "trace": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/traces/declaration-proof.strace",
