@@ -3660,8 +3660,117 @@
       ]
     },
     {
+      "id": "B004",
+      "title": "تحرير الأصل الإنجليزي اليومي من التقرير العربي (فشل مغلق)",
+      "kind": "agent",
+      "phase": "build",
+      "prompt": "runbook/prompts/write-en-master.md",
+      "reads": [
+        "reports/{date}-sectioned.md",
+        "runbook/prompts/write-en-master.md"
+      ],
+      "writes": [
+        "../site/sources/i18n/en/{date}-sectioned.en.md"
+      ],
+      "assert": [
+        {
+          "type": "file_exists",
+          "path": "../site/sources/i18n/en/{date}-sectioned.en.md"
+        },
+        {
+          "type": "cmd",
+          "command": [
+            "python3",
+            "tools/validate_en_master.py",
+            "--arabic",
+            "reports/{date}-sectioned.md",
+            "--english",
+            "../site/sources/i18n/en/{date}-sectioned.en.md"
+          ]
+        }
+      ],
+      "links": {
+        "rules": [
+          "س1 — النشر"
+        ],
+        "files": [
+          "runbook/prompts/write-en-master.md",
+          "tools/validate_en_master.py",
+          "reports/{date}-sectioned.md",
+          "../site/sources/i18n/en/{date}-sectioned.en.md"
+        ],
+        "folders": [],
+        "gates": [],
+        "tests": [
+          "tests/test_en_source_assets.py"
+        ]
+      },
+      "on_fail": "stop"
+    },
+    {
+      "id": "B004A",
+      "title": "مزامنة الأصل الإنجليزي والمعجم إلى شجرة التشغيل (فشل مغلق)",
+      "kind": "script",
+      "phase": "build",
+      "reads": [
+        "{site}/sources/i18n/en/{date}-sectioned.en.md",
+        "{site}/sources/i18n/en/glossary.json",
+        "tools/i18n_assets_sync.py"
+      ],
+      "writes": [
+        "{site}/sources/i18n/en/{date}-sectioned.en.md",
+        "{site}/sources/i18n/en/glossary.json"
+      ],
+      "assert": [
+        {
+          "type": "file_exists",
+          "path": "{site}/sources/i18n/en/{date}-sectioned.en.md"
+        },
+        {
+          "type": "cmd",
+          "command": [
+            "python3",
+            "tools/i18n_assets_sync.py",
+            "--check",
+            "--brain",
+            "{brain}",
+            "--site",
+            "{site}",
+            "--date",
+            "{date}"
+          ]
+        }
+      ],
+      "links": {
+        "rules": [
+          "س1 — النشر"
+        ],
+        "files": [
+          "tools/i18n_assets_sync.py",
+          "{site}/sources/i18n/en/{date}-sectioned.en.md",
+          "{site}/sources/i18n/en/glossary.json",
+          "tests/test_en_source_assets.py"
+        ],
+        "folders": [],
+        "gates": [],
+        "tests": [
+          "tests/test_en_source_assets.py"
+        ]
+      },
+      "on_fail": "stop",
+      "command": [
+        "bash",
+        "-lc",
+        "B=\"$PWD\"; export B SITE; python3 \"$B/tools/i18n_assets_sync.py\" --sync --brain \"$B\" --site \"$SITE\" --date {date}"
+      ],
+      "ok_rc": [
+        0
+      ],
+      "warn_rc": []
+    },
+    {
       "id": "B005",
-      "title": "بوابة مُدخل الترجمة الإنجليزية قبل البناء (فشل مغلق)",
+      "title": "بوابة مُدخل الترجمة الإنجليزية قبل البناء (B004 المنتج · B009 المستهلك · فشل مغلق)",
       "kind": "script",
       "phase": "build",
       "reads": [
@@ -3704,7 +3813,7 @@
         0
       ],
       "warn_rc": [],
-      "gate_title": "بوابة مُدخل الترجمة الإنجليزية قبل البناء (فشل مغلق)"
+      "gate_title": "بوابة مُدخل الترجمة الإنجليزية قبل البناء (B004 المنتج · B009 المستهلك · فشل مغلق)"
     },
     {
       "id": "B006",
@@ -3859,7 +3968,9 @@
           "tests/test_en_advisory_id_matching.py",
           "tests/test_geo_table_selection.py",
           "tests/test_card_counters.py",
-          "tests/test_hero_kpi_schema.py"
+          "tests/test_hero_kpi_schema.py",
+          "{site}/tests/test_i18n_master_backed_dynamic_content.py",
+          "{site}/tests/test_i18n_ltr_tag_boundary.py"
         ]
       },
       "on_fail": "stop",

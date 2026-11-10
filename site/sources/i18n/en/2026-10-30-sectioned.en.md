@@ -72,8 +72,8 @@ Level in the Horn of Africa: Low. No qualifying incident within the period.
 | MN-2026-10-30-06 | UKMTO reported suspicious activity 25 nautical miles northeast of Khasab | UKMTO · Strait of Hormuz and Gulf of Oman · 29 October 2026 | Undetailed official report |
 | MN-2026-10-30-07 | A vessel fire 25 nautical miles northeast of Oman was reported, with the crew's status initially unknown | straits.live · Strait of Hormuz · 300102Z October 2026 | Professional reporting |
 | MN-2026-10-30-08 | Jerusalem Post reported that the fire subsided and that the crew was safe | Jerusalem Post · Strait of Hormuz · 300302Z October 2026 | Professional reporting |
-| MN-2026-10-30-09 | Four tankers were reported burning in the Strait of Hormuz, amid a U.S.-Iranian dispute over the waterways being free of mines | straits.live · Strait of Hormuz · 300134Z October 2026 | Media reporting |
-| MN-2026-10-30-10 | An Iranian source was reported as saying that three non-compliant tankers had exploded in the Strait of Hormuz | Mehr · Strait of Hormuz · 291103Z October 2026 | Official Iranian media reporting |
+| MN-2026-10-30-09 | 4 tankers were reported burning in the Strait of Hormuz, amid a U.S.-Iranian dispute over the waterways being free of mines | straits.live · Strait of Hormuz · 300134Z October 2026 | Media reporting |
+| MN-2026-10-30-10 | An Iranian source was reported as saying that 3 non-compliant tankers had exploded in the Strait of Hormuz | Mehr · Strait of Hormuz · 291103Z October 2026 | Official Iranian media reporting |
 | MN-2026-10-30-11 | An Iranian source was reported as saying that another non-compliant tanker had struck naval mines | Mehr · Strait of Hormuz · 291820Z October 2026 | Official Iranian media reporting |
 | MN-2026-10-30-12 | It was reported that signals from Iran-linked tankers over Gulf of Oman cables had been switched off after a threat | Windward · Gulf of Oman · 291224Z October 2026 | Professional report |
 | MN-2026-10-30-13 | The U.S. CENTCOM commander was briefed on a plan to blockade Iran | Axios · Arabian Gulf · 292247Z October 2026 | Media reporting |
@@ -168,7 +168,7 @@ The crew's final status has not been established in a complete official report; 
 
 The incident location has not been established with coordinate precision; the relayed information states 25 nautical miles northeast of Khasab.
 
-The actual number of affected vessels has not become clear: one report refers to a single vessel, while professional reporting refers to four tankers.
+The actual number of affected vessels has not become clear: one report refers to a single vessel, while professional reporting refers to 4 tankers.
 
 It has not been determined whether naval mines actually occurred along the transit route, in view of an official U.S. denial and contrary Iranian media reporting.
 
