@@ -11,8 +11,8 @@
   "decided_by": "المالك",
   "last_measured": "2026-11-10",
   "counts": {
-    "منفَّذ": 43,
     "منفَّذ جزئيًّا": 5,
+    "منفَّذ": 44,
     "يحتاج تحققًا": 3,
     "يحتاج قرارًا": 2
   },
@@ -1190,6 +1190,48 @@
         }
       ],
       "governing_file": "INDEX.md"
+    },
+    {
+      "id": "D-0648",
+      "date": "2026-11-10",
+      "title_ar": "اعتماد مهارة source-route-triage-ops لفرز مسارات المصادر وقياس حداثتها",
+      "decision_ar": "اعتماد المهارة الجديدة رسميًا في فهرس المشروع والمهارات المعتمدة وربطها بحارس المكتبات وعقد G001.",
+      "status": "منفَّذ",
+      "wording_ar": "عملية اليوم صنّفت فشل المصدر إلى تقني أو حماية أو عابر، وجرّبت السلّم الافتراضي ثم الرسمي البديل ثم BROWSER_ROUTES، ومنعت القارئ المدفوع عند الحماية، وأسقطت العدد غير الحديث، وسجلت قياس كل مسار بعدد العناصر والحروف والزمن والتاريخ.",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "skills/source-route-triage-ops/SKILL.md",
+          "note": "نسخة المهارة في الدماغ والمجلد الحي والمستودع مطابقة."
+        },
+        {
+          "kind": "file",
+          "ref": "INDEX.md",
+          "note": "صف الاعتماد وقسم المهارة وحد التداخل مع source-coverage-route-ops."
+        },
+        {
+          "kind": "file",
+          "ref": "runbook/approved-skills.json",
+          "note": "الاسم أضيف إلى جدول المهارات المعتمدة."
+        },
+        {
+          "kind": "measurement",
+          "ref": "tests/test_source_route_triage_skill_contract.py",
+          "note": "العقد يثبت موجب وسالب التصنيف وبوابة الحداثة، والعمر 1031 يومًا يُمنع."
+        },
+        {
+          "kind": "measurement",
+          "ref": "validators/check_libraries_skills.py",
+          "note": "الاسم أضيف إلى SKILL_NAMES كمستهلك Q010."
+        },
+        {
+          "kind": "measurement",
+          "ref": "tools/restore_skills.sh",
+          "note": "الاسم أضيف إلى OUR_SKILLS مصدر توحيد المهارات."
+        }
+      ],
+      "governing_file": "validators/check_libraries_skills.py",
+      "next_action_ar": "إعادة قياس الاستهلاك بعد 3 جولات؛ إذا لم تُستهلك المهارة يُعاد فتح الاعتماد بندًا لا تُحذف صامتة."
     }
   ]
 }
