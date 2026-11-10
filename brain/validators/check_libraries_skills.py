@@ -35,7 +35,7 @@ def _skills_dir(brain: Path) -> Path:
 
 SKILLS = _skills_dir(B)
 SKILL_NAMES = ("marine-news-brain", "military-arabic-editing", "owner-approval-launch-gate-ops", "owner-notes-measured-triage",
-               "pre-execution-plan-audit-ops")
+               "pre-execution-plan-audit-ops", "source-route-triage-ops")
 def _site_dir(brain: Path) -> Path:
     """اختيار جذر الموقع من البيئة أو من تخطيطات brain/site وbrain/../seawatch."""
     candidates = [os.environ.get("SITE_DIR"), os.environ.get("SITE"),
