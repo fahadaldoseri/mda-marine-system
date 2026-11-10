@@ -1,6 +1,6 @@
 {
   "schema": "governing-assets-merkle/v1",
-  "generated_at": "2026-11-09T04:46:31.962382+00:00",
+  "generated_at": "2026-11-10T06:46:03.562815+00:00",
   "config": "/home/ubuntu/mda-marine-system/brain/tools/governing-assets.txt",
   "selection": [
     "GLOB /home/ubuntu/skills/*/SKILL.md",
@@ -27,8 +27,8 @@
     "odd_level": "duplicate the final node",
     "root": "final single node, hexadecimal lowercase"
   },
-  "file_count": 2667,
-  "root": "8e6077c5ea1f9924a63ab63738e3f337457c3346c6fd5dafc2dfcf6493ccbb32",
+  "file_count": 2683,
+  "root": "0a5b8c37486ef9eb951138052e8ac523c10bd9b3b034d1c7670a14d7b07a5a6c",
   "files": [
     {
       "path": "/home/ubuntu/mda-marine-system/brain/{BRAIN}/INDEX.md",
@@ -1270,6 +1270,33 @@
       "size": 6387,
       "mtime": "2026-11-07T02:42:10.225606+00:00",
       "mtime_ns": 1794019330225606401,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/bilingual-surface-parity-ops/SKILL.md",
+      "lines": 91,
+      "sha256": "370778cff8ee9d4fd9a248995162f8d02dde4d579376a9072cd851a68d50a69b",
+      "size": 8277,
+      "mtime": "2026-11-09T19:31:54.731231+00:00",
+      "mtime_ns": 1794252714731231162,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/bilingual-surface-parity-ops/references/root-cause-catalog.md",
+      "lines": 57,
+      "sha256": "d788749c3b83863c511901668b6f4a6901a7aa45eae6dd7b155a17f75c412376",
+      "size": 5075,
+      "mtime": "2026-11-09T19:31:54.731579+00:00",
+      "mtime_ns": 1794252714731578813,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/bilingual-surface-parity-ops/scripts/scan_surface_leaks.py",
+      "lines": 163,
+      "sha256": "abcdad132d429d8473b39f18edb2ad6dee57340fad8275809820a6d152dd6a9e",
+      "size": 7180,
+      "mtime": "2026-11-09T19:31:54.731805+00:00",
+      "mtime_ns": 1794252714731805305,
       "exists": true
     },
     {
@@ -17293,6 +17320,87 @@
       "exists": true
     },
     {
+      "path": "/home/ubuntu/skills/owner-approval-launch-gate-ops/SKILL.md",
+      "lines": 74,
+      "sha256": "e6e5555d69091df13ac85243c60a0b5dd41a7402100230049d5e4e19db1241ce",
+      "size": 6588,
+      "mtime": "2026-11-09T23:47:21.602207+00:00",
+      "mtime_ns": 1794268041602207468,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/owner-approval-launch-gate-ops/references/launch-protocol.md",
+      "lines": 31,
+      "sha256": "c70a10e133581a79002498c75931fd4373b2b6b646888910a143a9a592818aa7",
+      "size": 3098,
+      "mtime": "2026-11-09T23:16:53.473957+00:00",
+      "mtime_ns": 1794266213473956550,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/owner-approval-launch-gate-ops/scripts/check_launch_readiness.py",
+      "lines": 152,
+      "sha256": "7a3eef7b9f9504b43dc238934e0c49ca5d8e2a2084004895fd040753b2ea612e",
+      "size": 7284,
+      "mtime": "2026-11-09T23:17:30.010349+00:00",
+      "mtime_ns": 1794266250010348996,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/owner-approval-launch-gate-ops/scripts/record_obstacle.py",
+      "lines": 71,
+      "sha256": "5488b88e34aca0cae2cfef5fbbf1d902543e8d62c0798f3c0e42b36735837201",
+      "size": 3123,
+      "mtime": "2026-11-09T23:16:45.777901+00:00",
+      "mtime_ns": 1794266205777901149,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/owner-notes-measured-triage/SKILL.md",
+      "lines": 97,
+      "sha256": "8ee21ed777e13738fda311b8e9a8c601bcc46b482ff49ffbd36d401705a29672",
+      "size": 7433,
+      "mtime": "2026-11-09T22:46:20.427934+00:00",
+      "mtime_ns": 1794264380427933980,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/owner-notes-measured-triage/references/intake-and-gates.md",
+      "lines": 50,
+      "sha256": "c903ed2c0347eb54925908f305255b3abde19024abaa2c9e4a721d21ad11a95a",
+      "size": 3869,
+      "mtime": "2026-11-09T22:46:20.428357+00:00",
+      "mtime_ns": 1794264380428356807,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/owner-notes-measured-triage/references/measurement-recipes.md",
+      "lines": 100,
+      "sha256": "13bad94da452fbfdc4f09debbe05300c9275cf2047cc4d934acef9fe0fce16d6",
+      "size": 4897,
+      "mtime": "2026-11-09T22:46:20.428502+00:00",
+      "mtime_ns": 1794264380428501859,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/owner-notes-measured-triage/scripts/audit_links.py",
+      "lines": 163,
+      "sha256": "5176d966202eb6e5097f0f5796612c526fb09232348f62b66df3404c08905afc",
+      "size": 7059,
+      "mtime": "2026-11-09T22:46:20.428702+00:00",
+      "mtime_ns": 1794264380428702153,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/owner-notes-measured-triage/scripts/probe_terms.py",
+      "lines": 118,
+      "sha256": "f8b9ebd5b4d20a3f9f99955942a7c9b4c5912eee2372fdda855c03ec1387e4df",
+      "size": 5579,
+      "mtime": "2026-11-09T22:46:20.428893+00:00",
+      "mtime_ns": 1794264380428892668,
+      "exists": true
+    },
+    {
       "path": "/home/ubuntu/skills/owner-ui-notes-contract-ops/SKILL.md",
       "lines": 90,
       "sha256": "f107f6803d9f272ebb02eb3077e5da4036df701fc1c7e7cc8613b9cee73e8f10",
@@ -18253,6 +18361,42 @@
       "size": 4307,
       "mtime": "2026-11-06T19:51:39.244107+00:00",
       "mtime_ns": 1793994699244106481,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/pre-execution-plan-audit-ops/SKILL.md",
+      "lines": 106,
+      "sha256": "234bc87f5497865730924179af6ba83ca7f4ee341c743838ba85e779b74a3524",
+      "size": 9545,
+      "mtime": "2026-11-09T23:09:46.704813+00:00",
+      "mtime_ns": 1794265786704812471,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/pre-execution-plan-audit-ops/references/measurement-discipline.md",
+      "lines": 65,
+      "sha256": "86178771034fc86bbb3df8ad6b17ead8217f4f99e5c0f5b21a79a3f455e9fdcc",
+      "size": 3805,
+      "mtime": "2026-11-09T23:09:46.705141+00:00",
+      "mtime_ns": 1794265786705140685,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/pre-execution-plan-audit-ops/scripts/audit_plan_duplication.py",
+      "lines": 186,
+      "sha256": "d7c18a21e6321613f4b9f34304bfccf8a4fc3b0b33f86a982ed13cd045732082",
+      "size": 7884,
+      "mtime": "2026-11-09T23:09:46.705266+00:00",
+      "mtime_ns": 1794265786705266198,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/pre-execution-plan-audit-ops/scripts/verify_claims.py",
+      "lines": 84,
+      "sha256": "12280745825a2d69bd35f8c3dd63949c9b862657596a9571ee94688bf441b91e",
+      "size": 3496,
+      "mtime": "2026-11-09T23:09:46.705384+00:00",
+      "mtime_ns": 1794265786705384125,
       "exists": true
     },
     {
@@ -20321,8 +20465,8 @@
       "lines": 116,
       "sha256": "f688190d31ae93dc1b11b2ae3031f2c757d675d6b7f24954fccef55c344f0d68",
       "size": 31177,
-      "mtime": "2026-11-06T19:51:49.255863+00:00",
-      "mtime_ns": 1793994709255863540,
+      "mtime": "2026-11-09T09:00:35.928592+00:00",
+      "mtime_ns": 1794214835928591922,
       "exists": true
     },
     {
@@ -21299,11 +21443,11 @@
     },
     {
       "path": "/home/ubuntu/skills/superpowers-method/SKILL.md",
-      "lines": 83,
-      "sha256": "365da16a13c5719eea3d1b0c9f35a582d7603f6853f5a1da8ff6b3e7b2e6249f",
-      "size": 8209,
-      "mtime": "2026-11-07T12:35:04.867358+00:00",
-      "mtime_ns": 1794054904867358026,
+      "lines": 85,
+      "sha256": "bf3379e3ac3bde08d3f918478f5a525bf6ad8649705dc518d6065bdf29029961",
+      "size": 8555,
+      "mtime": "2026-11-09T08:17:02.993500+00:00",
+      "mtime_ns": 1794212222993500051,
       "exists": true
     },
     {

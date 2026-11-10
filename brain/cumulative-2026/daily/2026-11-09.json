@@ -206,6 +206,8 @@
     "operational_effect": "لا تتخذوا قرارًا بإغلاق خط السير أو تفيدوا بإصابة ناقلة قبل ظهور تأكيد ملاحي مستقل.",
     "casualty_scope": "not_announced",
     "dedup_note": "لا تُعد عناوين المصادر الأربع وقائع مستقلة أو مطابقة لبلاغ UKMTO دون اسم سفينة أو رقم IMO.",
+    "incident_kind": "هجوم",
+    "incident_kind_basis": "ذكر صريح: «أصيبت»",
     "update_of": null,
     "parent_id": null,
     "duplicate_of": null,
@@ -213,9 +215,7 @@
     "link_basis": "لا دليل رابط",
     "link_evidence": "",
     "link_status": "غير مرتبط",
-    "counts_as_new": true,
-    "incident_kind": "هجوم",
-    "incident_kind_basis": "ذكر صريح: «أصيبت»"
+    "counts_as_new": true
   },
   {
     "code": "MN-2026-11-09-06",
@@ -267,6 +267,8 @@
     "operational_effect": "افصلوا بين واقعة سفينة البضائع وواقعة الناقلة المحترقة، ولا تعتمدوا عدد الإجلاء كإثبات لواقعة واحدة.",
     "casualty_scope": null,
     "dedup_note": "لا تُعد عناوين المصادر الستة واقعة واحدة؛ تفصلها اختلافات الفعل والسفينة والموقع، ولا يوجد رابط رسمي.",
+    "incident_kind": "حريق",
+    "incident_kind_basis": "ذكر صريح: «حريق»",
     "update_of": null,
     "parent_id": null,
     "duplicate_of": null,
@@ -274,8 +276,6 @@
     "link_basis": "لا دليل رابط",
     "link_evidence": "",
     "link_status": "غير مرتبط",
-    "counts_as_new": true,
-    "incident_kind": "حريق",
-    "incident_kind_basis": "ذكر صريح: «حريق»"
+    "counts_as_new": true
   }
 ]
