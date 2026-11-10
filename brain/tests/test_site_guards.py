@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import os
+import pathlib
 import shutil
 import subprocess
 import sys
@@ -19,7 +20,9 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 BRAIN = HERE.parent
 VALIDATORS = BRAIN / "validators"
-SITE = Path(os.environ.get("SITE_DIR") or os.environ.get("SITE") or "/home/ubuntu/seawatch")
+BRAIN = Path(__file__).resolve().parents[1]
+SITE = Path(os.environ.get("SITE_DIR") or os.environ.get("SITE")
+            or BRAIN.parent / "seawatch")
 
 
 def run(script: Path, *args) -> int:

@@ -95,6 +95,11 @@ BROWSER_ROUTES: dict[int, dict[str, str]] = {
     58: {"path": "browser", "url": "https://yafm.net/"},
     # 28 وكالة الأنباء العُمانية: المسار الآلي يسقط أحيانًا بخطأ TLS — القياس: HTTP 200 · 139424B · 23.89s عبر tools/browser_fetch.py
     28: {"path": "browser", "url": "https://omannews.gov.om/"},
+    # ك-628 (2026-11-10): قياس حي عبر tools/browser_fetch.py بعد فشل المسار الآلي:
+    # المصدر 20 على صفحة RSS ← 4 عناصر · 2204 حرفًا · 14.9 ثانية،
+    # والمصدر 24 على صفحة التغذيات ← 4 عناصر · 2660 حرفًا · 17.5 ثانية.
+    20: {"path": "browser", "url": "https://www.alayam.com/pages/rss"},
+    24: {"path": "browser", "url": "https://qna.org.qa/en/RSS-Feeds"},
 }
 
 # ── قناة المسار الرسمي البديل للجهة نفسها ──

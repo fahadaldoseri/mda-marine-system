@@ -19,11 +19,14 @@ from __future__ import annotations
 
 import argparse
 import os
+import pathlib
 import re
 import sys
 from pathlib import Path
 
-DEF_SITE = os.environ.get("SITE_DIR") or os.environ.get("SITE") or "/home/ubuntu/seawatch"
+_BRAIN = pathlib.Path(__file__).resolve().parents[1]
+DEF_SITE = (os.environ.get("SITE_DIR") or os.environ.get("SITE")
+            or str(_BRAIN.parent / "seawatch"))
 
 TAG_RE = re.compile(r"<(?:script|style)\b[^>]*>.*?</(?:script|style)>", re.S | re.I)
 A_RE = re.compile(r"<a\b[^>]*\bhref\s*=\s*\"([^\"]*)\"", re.I)
@@ -145,4 +148,6 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)

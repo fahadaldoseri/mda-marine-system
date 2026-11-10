@@ -20,12 +20,15 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import pathlib
 import re
 import sys
 from pathlib import Path
 
-DEF_BRAIN = os.environ.get("BRAIN_DIR") or "/home/ubuntu/mda-marine-system/brain"
-DEF_SITE = os.environ.get("SITE_DIR") or os.environ.get("SITE") or "/home/ubuntu/seawatch"
+_BRAIN = pathlib.Path(__file__).resolve().parents[1]
+DEF_BRAIN = os.environ.get("BRAIN_DIR") or str(_BRAIN)
+DEF_SITE = (os.environ.get("SITE_DIR") or os.environ.get("SITE")
+            or str(_BRAIN.parent / "seawatch"))
 
 # أنماط أوامر النشر الفعلية (لا ذِكرًا في نص أو تعليق)
 PUBLISH_PATTERNS = (
@@ -122,4 +125,6 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+    from _guard import run
+    run(main)
