@@ -25,6 +25,7 @@ ALLOWED_TOP_LEVEL = {
     "_directions",
     "_derived",
     "entries",
+    "exact_match_only_entries",
     "updated",
     "date_updated",
     "date_created",

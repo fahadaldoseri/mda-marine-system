@@ -64,7 +64,7 @@ This decision card is the sole source of the decision in this edition; the threa
 | MN-2026-10-31-03 | UKMTO reported a delayed report of an incident in the Strait of Hormuz | UKMTO · Z1 · 30/10/2026 | Delayed official report |
 | MN-2026-10-31-04 | A vessel fire near Hormuz and the evacuation of crew members were reported | gCaptain · TradeWinds · Z1 · 30/10/2026 | Professional reporting; probable |
 | MN-2026-10-31-05 | An account was relayed of a tanker being struck by an unidentified projectile while leaving Hormuz | straits.live · Z1 · 30/10/2026 | Media reporting; not independently confirmed |
-| MN-2026-10-31-06 | An account was relayed of four tankers catching fire after striking mines | straits.live · ISNA · Z1 · 30/10/2026 | One-sided and conflicting report; unconfirmed |
+| MN-2026-10-31-06 | An account was relayed of 4 tankers catching fire after striking mines | straits.live · ISNA · Z1 · 30/10/2026 | One-sided and conflicting report; unconfirmed |
 | MN-2026-10-31-07 | An account was relayed of a tanker carrying 27 Indian seafarers being struck by limpet mines | straits.live · Al Jazeera English · Z1 · 30/10/2026 | Media reporting; not independently confirmed |
 | MN-2026-10-31-08 | An Iranian announcement of damage to an unmanned surface vehicle was relayed | ISNA · Mehr · Z1 · 30/10/2026 | Party report; not independently confirmed |
 | MN-2026-10-31-09 | A U.S. denial of a report that a U.S. unmanned vehicle had been downed was relayed | straits.live · CENTCOM as reported | Relayed denial from an official source; does not establish a vessel incident |
@@ -92,7 +92,7 @@ The screened IMO record material did not add a new incident during the period. T
 ## Situation Assessment and Indicator Analysis
 Operational pressure in Z1 rose from a warning level to multiple official reports of incidents in and around Hormuz. However, more reports do not mean that every headline represents a separate incident: the delayed UKMTO report, professional coverage of the fire, and circulating mine accounts may refer to one incident or to different incidents, and the current material does not allow them to be finally merged or separated.
 
-The strongest information is the existence of official reports of incidents, not the identity of the actor or the type of weapon. The weakest information is the tally of four tankers or the mine accounts, which came from conflicting media reporting and party statements. The High judgement in Z1 therefore continues on the basis of exposure and navigational risk, not on an unsubstantiated tally.
+The strongest information is the existence of official reports of incidents, not the identity of the actor or the type of weapon. The weakest information is the tally of 4 tankers or the mine accounts, which came from conflicting media reporting and party statements. The High judgement in Z1 therefore continues on the basis of exposure and navigational risk, not on an unsubstantiated tally.
 
 ### Indicators of Change
 - An increase in the number of official reports attributed to UKMTO during the period.

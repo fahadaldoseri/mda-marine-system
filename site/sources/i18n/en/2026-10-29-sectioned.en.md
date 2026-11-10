@@ -14,13 +14,13 @@
 | Strait of Hormuz | Advice to transiting vessels not to remain in the area without necessity | gCaptain, citing a U.S. notice | Professional reporting of an official notice |
 | Arabian Gulf | Warning to neutral vessels of questioning and inspection | TradeWinds | Professional reporting |
 | Strait of Hormuz | Iranian threat to respond to vessel escorts | straits.live | Media reporting |
-| Strait of Hormuz | Discussion of a seven-day plan and proposal to reopen | straits.live | Media reporting citing the Foreign Minister |
+| Strait of Hormuz | Discussion of a 7-day plan and proposal to reopen | straits.live | Media reporting citing the Foreign Minister |
 | Strait of Hormuz | Denial that commercial vessels were struck by mines during transit | straits.live | Media reporting citing an official denial |
 | Strait of Hormuz | Transit of 3,000 commercial vessels and accusation of violations by an entity | straits.live | Professional report |
 | Gulf of Aden | Piracy warning with an update on Iran's blockade | Seatrade Maritime | Professional report (text unavailable) |
 | Aden | Government report of targeting Aden Airport and endangering civil aviation | Account @ERYANIM (official Yemeni) | Government reporting |
 | Taiz | Request for an investigation into reports of shells suspected of containing toxic substances | Account @ERYANIM (official Yemeni) | Local reporting |
-| Yemen | Warning that medicine and oxygen stocks are reaching critical levels | قناة العربية (official account), citing the Yemeni Ministry of Health | Official reporting |
+| Yemen | Warning that medicine and oxygen stocks are reaching critical levels | Al Arabiya (official account), citing the Yemeni Ministry of Health | Official reporting |
 
 Events during the period focused on the transit route through the Strait of Hormuz and the Arabian Gulf. Reports from the Gulf of Aden remained linked to piracy and Yemeni ports. No new official report of a vessel being struck by a projectile was issued during the period.
 
@@ -64,17 +64,17 @@ The threat level in the Eastern Mediterranean: persistently medium; the reviewed
 | MN-2026-10-29-03 | Transiting vessels unable to avoid transit were advised to remain outside the area | gCaptain, citing a U.S. notice · Strait of Hormuz · 281627Z October 2026 | Professional reporting of an official notice |
 | MN-2026-10-29-04 | Neutral vessels were warned that they could be questioned and inspected to state their intentions regarding the blockade | TradeWinds · Arabian Gulf · 281646Z October 2026 | Professional reporting |
 | MN-2026-10-29-05 | An Iranian threat to respond was reported after the U.S. President stated that Washington would direct vessels in Hormuz | straits.live · Strait of Hormuz · 282100Z October 2026 | Media reporting |
-| MN-2026-10-29-06 | Discussion of a seven-day plan to reopen the Strait of Hormuz was reported | straits.live · Strait of Hormuz · 282028Z October 2026 | Media reporting citing the Foreign Minister |
+| MN-2026-10-29-06 | Discussion of a 7-day plan to reopen the Strait of Hormuz was reported | straits.live · Strait of Hormuz · 282028Z October 2026 | Media reporting citing the Foreign Minister |
 | MN-2026-10-29-07 | A new Iranian proposal to reopen the strait was reported to be under review | straits.live · Strait of Hormuz · 281901Z October 2026 | Media reporting |
 | MN-2026-10-29-08 | It was reported that the Turkish President said Türkiye was undertaking diplomatic efforts concerning Hormuz and Yemen | straits.live · Strait of Hormuz and Yemen · 282033Z October 2026 | Media reporting |
 | MN-2026-10-29-09 | It was reported that Gulf states were negotiating a regional peace agreement covering Hormuz, Yemen, and Iran | straits.live · Arabian Gulf · 281738Z October 2026 | Media reporting |
 | MN-2026-10-29-10 | U.S. Central Command denied that commercial vessels were struck by mines while transiting the Strait of Hormuz | straits.live · Strait of Hormuz · 282000Z October 2026 | Media reporting citing an official denial |
 | MN-2026-10-29-11 | A Gulf authority announced the transit of 3,000 commercial vessels through the Strait of Hormuz and accused a maritime entity of violations | straits.live · Strait of Hormuz · 280957Z October 2026 | Professional report |
 | MN-2026-10-29-12 | A piracy warning in the Gulf of Aden was issued with an update on the Iranian blockade | Seatrade Maritime · Gulf of Aden · 281407Z October 2026 | Professional report (text unavailable) |
-| MN-2026-10-29-13 | A professional report conveyed an eight-month war toll: 121 vessels were attacked and 24 seafarers were killed | Seatrade Maritime · Area · 280443Z October 2026 | Professional report |
+| MN-2026-10-29-13 | A professional report conveyed an 8-month war toll: 121 vessels were attacked and 24 seafarers were killed | Seatrade Maritime · Area · 280443Z October 2026 | Professional report |
 | MN-2026-10-29-14 | The Yemeni government accused the Houthis of targeting Aden Airport and endangering civil aviation | Account @ERYANIM (official Yemeni) · Aden · 281847Z October 2026 | Government reporting |
 | MN-2026-10-29-15 | The local authority in Taiz called for an investigation into reports of shells suspected of containing toxic substances | Account @ERYANIM (official Yemeni) · Taiz · 282225Z October 2026 | Local reporting |
-| MN-2026-10-29-16 | A warning was reported that medicine and oxygen stocks were reaching critical levels | قناة العربية (official account), citing the Yemeni Ministry of Health · Yemen · 282349Z October 2026 | Official reporting |
+| MN-2026-10-29-16 | A warning was reported that medicine and oxygen stocks were reaching critical levels | Al Arabiya (official account), citing the Yemeni Ministry of Health · Yemen · 282349Z October 2026 | Official reporting |
 
 Events MN-2026-10-29-01 through MN-2026-10-29-04 concern the official transit route and blockade enforcement. Events MN-2026-10-29-05 through MN-2026-10-29-09 are media reporting of political positions not accompanied by confirmed field implementation. The Yemen events concern ports and civil aviation, not vessel movement.
 
@@ -91,7 +91,7 @@ Events MN-2026-10-29-05, MN-2026-10-29-06, MN-2026-10-29-07, MN-2026-10-29-08, M
 ## Situation Reading and Indicator Analysis
 During the period, the maritime situation moved from a professional warning to an official product. A blockade-enforcement advisory was issued. Avoiding unnecessary transit became an announced recommendation. This means that the restriction on transit became explicit rather than implicit.
 
-The Iranian threat to respond to vessel escorts raises the risk of friction along the transit route. However, media reporting does not establish a new field measure. At the same time, discussion of a seven-day plan and a proposal under review recurred. This is a negotiating track that has not become a navigational outcome.
+The Iranian threat to respond to vessel escorts raises the risk of friction along the transit route. However, media reporting does not establish a new field measure. At the same time, discussion of a 7-day plan and a proposal under review recurred. This is a negotiating track that has not become a navigational outcome.
 
 In the Gulf of Aden and Yemen, risks are shifting from vessels to civilian infrastructure. The targeting of Aden Airport and the Ministry of Health warning affect the access of aid and crews, not commercial transit alone.
 
@@ -112,7 +112,7 @@ In the Gulf of Aden and Yemen, risks are shifting from vessels to civilian infra
 ### Hypothesis Testing
 - Hypothesis of escalating transit restrictions in the Strait of Hormuz: supported by the blockade-enforcement notice and advice to avoid transit, weakened by the absence of a newly announced material measure.
 - Hypothesis of questioning and inspection of neutral vessels: supported by the notice explicitly mentioning questioning and inspection, weakened by the absence of a report of implementation during the period.
-- Hypothesis that the negotiating track will rapidly reduce the threat: supported by repeated discussion of a seven-day plan and a proposal under review, weakened by the absence of an announced date and guarantees.
+- Hypothesis that the negotiating track will rapidly reduce the threat: supported by repeated discussion of a 7-day plan and a proposal under review, weakened by the absence of an announced date and guarantees.
 - Hypothesis of continued targeting of civilian infrastructure in the Gulf of Aden: supported by the Aden Airport report, the Taiz report, and the Ministry of Health warning, weakened by the absence of independent international confirmation.
 
 EST-2026-10-29-01: Continued high threat level in the Strait of Hormuz and the Arabian Gulf during 24–72 hours — Likely (55–80%). Basis: MN-2026-10-29-01, MN-2026-10-29-03, and MN-2026-10-29-05, with continued blockade-enforcement operations.
@@ -125,9 +125,9 @@ EST-2026-10-29-04: Continued targeting of ports and civil aviation in the Gulf o
 
 Assessment of yesterday’s estimates (EST-2026-10-28-01 through EST-2026-10-28-04): EST-2026-10-28-01 was confirmed by the continued high threat level in the Strait of Hormuz and the Arabian Gulf, with issuance of a blockade-enforcement advisory during the period (MN-2026-10-29-01). EST-2026-10-28-02 was not confirmed because no official confirmation of the tanker incident or mine threat was issued. EST-2026-10-28-03 was not confirmed because no new missile development appeared along the Red Sea line. EST-2026-10-28-04 was partially confirmed by the appearance of a plan to reopen the Strait of Hormuz without immediate implementation (MN-2026-10-29-06, MN-2026-10-29-07, and MN-2026-10-29-09).
 
-Sources used and their categories in the source register: JMIC and UKMTO (official) · straits.live (professional and media) · gCaptain, TradeWinds, and Seatrade Maritime (professional) · Account @ERYANIM (official Yemeni) · قناة العربية (official reporting citing the Yemeni Ministry of Health).
+Sources used and their categories in the source register: JMIC and UKMTO (official) · straits.live (professional and media) · gCaptain, TradeWinds, and Seatrade Maritime (professional) · Account @ERYANIM (official Yemeni) · Al Arabiya (official reporting citing the Yemeni Ministry of Health).
 
-Attribution of the incident to an entity: Transit-related threats were attributed to Iranian positions as reported by straits.live, and no independent official confirmation was issued. Aden and Taiz reports were attributed to Account @ERYANIM (official Yemeni), and to قناة العربية citing the Yemeni Ministry of Health. This advisory does not attribute any incident to an executing entity without confirmation.
+Attribution of the incident to an entity: Transit-related threats were attributed to Iranian positions as reported by straits.live, and no independent official confirmation was issued. Aden and Taiz reports were attributed to Account @ERYANIM (official Yemeni), and to Al Arabiya citing the Yemeni Ministry of Health. This advisory does not attribute any incident to an executing entity without confirmation.
 
 Internal control: Separate events from estimates, link each estimate to its code and source, and do not publish any unverified external review.
 
@@ -136,7 +136,7 @@ The percentages below are estimates, collectively exhaustive, and total 100%. No
 - 30% — Pressure on transit through the Strait of Hormuz continues: a blockade-enforcement notice was issued and transit was advised against.
 - 25% — Questioning or inspection of a neutral vessel occurs: the notice explicitly mentions questioning and inspection.
 - 20% — Targeting of ports and civil aviation in the Gulf of Aden continues: government and local reports recurred.
-- 15% — Announcement of reopening the Strait of Hormuz without immediate implementation: a seven-day plan proposal under review appeared.
+- 15% — Announcement of reopening the Strait of Hormuz without immediate implementation: a 7-day plan proposal under review appeared.
 - 10% — Reports of vessels being struck by projectiles in the Strait of Hormuz decline: no new official report was issued during the period.
 
 ## Maritime Movement and Congestion
@@ -196,8 +196,8 @@ We are monitoring reports of attacks on ports and civil aviation in the Gulf of 
 ## Sources and References
 This advisory uses official reports to establish what is confirmed, and presents professional and media reports as unconfirmed reporting.
 
-The official sources mentioned are: JMIC, UKMTO, Account @ERYANIM (official Yemeni), and قناة العربية citing the Yemeni Ministry of Health.
+The official sources mentioned are: JMIC, UKMTO, Account @ERYANIM (official Yemeni), and Al Arabiya citing the Yemeni Ministry of Health.
 
 The professional and news sources mentioned are: straits.live, gCaptain, TradeWinds, and Seatrade Maritime.
 
-Total coded events: 16 events, with a total of 17 attributions (MN-2026-10-29-01 shared by JMIC and UKMTO). Sources used and number of events attributed to them: straits.live 7 events, UKMTO two events, Seatrade Maritime two events, Account @ERYANIM two events, JMIC one event, gCaptain one event, TradeWinds one event, and قناة العربية (official account) one event.
+Total coded events: 16 events, with a total of 17 attributions (MN-2026-10-29-01 shared by JMIC and UKMTO). Sources used and number of events attributed to them: straits.live 7 events, UKMTO two events, Seatrade Maritime two events, Account @ERYANIM two events, JMIC one event, gCaptain one event, TradeWinds one event, and Al Arabiya (official account) one event.
