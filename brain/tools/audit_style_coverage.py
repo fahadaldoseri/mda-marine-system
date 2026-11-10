@@ -16,6 +16,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import html
+import html.parser
 import unicodedata as _ud
 
 def norm_derived(t: str) -> str:
@@ -85,24 +86,113 @@ def _tag_mark_to_text(s: str) -> str:
     return s.replace(TAG_MARK, "\n")
 
 
-def strip_html(raw: str) -> str:
-    """يحوّل HTML إلى نص، ويحفظ كل صف جدول في سطر واحد بفواصل أنابيب.
+class _HtmlText(html.parser.HTMLParser):
+    """مستخرج نص من HTML بمحلّل حقيقي.
 
-    السبب: بوابة عيوب الصياغة تستثني أسطر الجداول من قياس «قالب الجملة المتكرر»،
-    لأن تكرار الخلية بنية جدول لا قالب جملة. فلو سطّحنا الجدول إلى أسطر منفصلة
-    لظهر كل مصدر بعينه كأنه «قالب جملة» — قياس خاطئ لا عيب في الصفحة.
+    السبب الجذري (ك-625): الاعتماد على تعبير نمطي لإزالة `<script>…</script>` ينكسر
+    إذا احتوى كود الصفحة تسلسل إغلاق أو تعليقًا داخليًا، فيتسرّب كود JS إلى نص القياس
+    فيُقرأ مصفوفة JS كأنها «جملة» طويلة، ويُمنع السطح خطأً. المحلّل الحقيقي يتجاهل
+    سكربتات وأنماط الصفحة دائمًا، ويحفظ كل صف جدول سطرًا واحدًا بفواصل أنابيب كما
+    يشترط عقد بوابة عيوب الصياغة (تكرار الخلية بنية جدول لا قالب جملة).
     """
-    raw = re.sub(r"(?is)<(script|style|noscript|template)[^>]*>.*?</\1>", " ", raw)
-    rows = []
-    for row in re.findall(r"(?is)<tr[^>]*>(.*?)</tr>", raw):
-        cells = [re.sub(r"(?s)<[^>]+>", _tag_to_mark, c) for c in re.findall(r"(?is)<t[dh][^>]*>(.*?)</t[dh]>", row)]
-        cells = [_tag_mark_to_text(c) for c in cells]
-        cells = [html.unescape(re.sub(r"\s+", " ", c)).strip() for c in cells]
-        rows.append(" | ".join(c for c in cells if c))
-    raw = re.sub(r"(?is)<(table|thead|tbody|tfoot)[^>]*>.*?</\1>", " ", raw)
-    raw = re.sub(r"(?s)<[^>]+>", _tag_to_mark, raw)
-    raw = _tag_mark_to_text(raw)
-    return html.unescape(raw) + "\n" + "\n".join(rows)
+
+    SKIP = {"script", "style", "noscript", "template"}
+    # عناصر الواجهة المتكررة في كل صفحة (شريط التنقل، الترويسة، التذييل، رابط التخطّي)
+    # ليست نصًا تحريريًا: قياسها في بوابة الأسلوب يجعل واجهة الصفحة «جملة» واحدة طويلة
+    # فيمنع السطح خطأً. تغطيتها موكلة إلى حراس التنقّل والروابط المستقلة.
+    CHROME_TAGS = {"nav", "footer", "header"}
+    # نطاق بوابة الأسلوب هو النثر التحريري. تُستبعد عناصر الواجهة المتكررة (شريط
+    # التنقّل · الترويسة · التذييل · شرائح البيانات الوصفية)، ومنطقتا الخريطة والسجل:
+    # الأولى رسوم وعلامات مواقع بلا ترقيم فتُقاس «جملة» طويلة، والثانية صفوف بيانات
+    # (تاريخ · تصنيف · ملخص) تتشابه بعد تطبيع الأرقام فتُقرأ «قالبًا متكررًا».
+    # كلتاهما محروستان بحراس مستقلة: حراس الخريطة وحراس عدّ الدفتر والأرشيف.
+    CHROME_HINT = ("skip", "topbar", "site-nav", "sn-foot", "foot", "chrome", "toolbar",
+                   "chip", "sb-code", "meta-strip", "kpi", "stat", "badge",
+                   "map", "legend", "mp-", "ar-row", "ar-extra", "registry", "month-rows")
+    BLOCK = {"li", "p", "h1", "h2", "h3", "h4", "h5", "h6", "div", "section",
+             "article", "ul", "ol", "blockquote", "figcaption", "br"}
+    CELL = {"td", "th"}
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.parts: list[str] = []
+        self.rows: list[str] = []
+        self._skips: list[str] = []
+        self._row: list[str] | None = None
+        self._cell: list[str] | None = None
+
+    @classmethod
+    def _is_chrome(cls, tag: str, attrs) -> bool:
+        if tag in cls.CHROME_TAGS:
+            return True
+        hints = " ".join(v for k, v in attrs if k in ("class", "id", "role") and v).lower()
+        return any(h in hints for h in cls.CHROME_HINT)
+
+    def _sep(self) -> None:
+        # فاصل مسافة فقط: النص الأصلي يحمل علامة قطعه، وإضافة علامة من الأداة تُنشئ
+        # ترقيمًا متجاورًا يخالف بوابة عيوب الصياغة. الفاصل ضروري لأن لصق «…خصب.» بـ
+        # «يطلب…» يمنع حارس الطول من تقسيم الجملتين فيقيسهما جملة واحدة.
+        if "".join(self.parts).rstrip():
+            self.parts.append("\n")
+
+    def handle_starttag(self, tag, attrs):
+        if tag in self.SKIP or self._is_chrome(tag, attrs):
+            self._skips.append(tag)
+            return
+        if self._skips:
+            return
+        if tag == "tr":
+            self._row = []
+        elif tag in self.CELL and self._row is not None:
+            self._cell = []
+
+    def handle_endtag(self, tag):
+        if tag in self._skips:
+            self._skips.remove(tag)
+            return
+        if self._skips:
+            return
+        if tag in self.CELL and self._cell is not None:
+            txt = re.sub(r"\s+", " ", "".join(self._cell)).strip()
+            if txt and self._row is not None:
+                self._row.append(txt)
+            self._cell = None
+        elif tag == "tr" and self._row is not None:
+            if self._row:
+                self.rows.append(" | ".join(self._row))
+            self._row = None
+        elif tag in self.BLOCK:
+            self._sep()
+
+    def handle_data(self, data):
+        if self._skips or not data.strip():
+            return
+        txt = re.sub(r"\s+", " ", data)
+        # لصق كتلتين بلا فاصل يدمج جملتين في واحدة (عيب ك-625): «…موقع محدد.» +
+        # «المسار المتأثر…» يُقاس جملة واحدة. تُضاف مسافة عند حدود كتل النص.
+        # ك-628: لا تُدرج مسافة قبل علامة ترقيم، وإلا نشأ «… » .» وهو عيب «مسافة قبل
+        # علامة ترقيم» الذي يمنع السطح في بوابة عيوب الصياغة.
+        PUNCT = ".!؟:؛,،؛؟٭٪٫٬»)]}"
+        if self._cell is not None:
+            if self._cell and not self._cell[-1].endswith(" ") and not txt.startswith(" ") \
+                    and txt[:1] not in PUNCT:
+                self._cell.append(" ")
+            self._cell.append(txt)
+        else:
+            cur = "".join(self.parts)
+            if cur and not cur.endswith((" ", "\n")) and not txt.startswith(" ") \
+                    and txt[:1] not in PUNCT:
+                self.parts.append(" ")
+            self.parts.append(txt)
+
+
+def strip_html(raw: str) -> str:
+    """يحوّل HTML إلى نص، ويحفظ كل صف جدول في سطر واحد بفواصل أنابيب."""
+    ex = _HtmlText()
+    ex.feed(raw)
+    ex.close()
+    body = re.sub(r"[ \t]{2,}", " ", "".join(ex.parts)).strip()
+    return body + "\n" + "\n".join(ex.rows)
 
 
 def flatten_json(obj, out: list[str]) -> None:

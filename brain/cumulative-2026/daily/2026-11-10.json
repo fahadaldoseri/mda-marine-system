@@ -1,0 +1,64 @@
+[
+  {
+    "code": "NI-2026-11-10",
+    "date": "2026-11-10",
+    "sector": "خارج القطاعات",
+    "class": "no_incident",
+    "no_incident": true,
+    "title": "لا واقعة مسجّلة في المصادر الرسمية المفحوصة",
+    "description": "لا واقعة أمنية جديدة مثبتة في المصادر الرسمية خلال فترة التقرير؛ تحديث WARNING 199-26 يظل تحديثًا لتحذير سابق.",
+    "source": "UKMTO — الحوادث الأخيرة؛ UKMTO — التحذيرات 2026؛ IMO — سجل الحوادث المؤكدة؛ MSCIO",
+    "confidence": "متوسطة",
+    "evidence_kind": "official_source",
+    "evidence_ref": "https://www.mscio.eu/alerts/",
+    "source_url": "https://www.mscio.eu/alerts/",
+    "source_excerpt": "Recent Incidents  (0)",
+    "source_excerpt_from": "feeds/feeds-2026-11-10.json · 34. MSCIO · item 1",
+    "retrieved_at": "2026-11-10T06:10:35Z",
+    "counted": false,
+    "sources_checked": [
+      {
+        "source_id": "ukmto_recent_incidents",
+        "source": "UKMTO — الحوادث الأخيرة",
+        "url": "https://www.ukmto.org/recent-incidents",
+        "invoked": true,
+        "result": "Recent Incidents",
+        "retrieved_at": "2026-11-10T06:10:35Z"
+      },
+      {
+        "source_id": "ukmto_warnings_2026",
+        "source": "UKMTO — التحذيرات 2026",
+        "url": "https://r.jina.ai/https://www.ukmto.org/ukmto-products/warnings/2026",
+        "invoked": true,
+        "result": "07/11/2026 Advisory:UKMTO has received a report of an incident involving a bulk carrier and military...؛ 08/11/2026 Attack:UKMTO has received a time-late report of an incident 8NM northwest of Khasab,...؛ 08/11/2026 Attack:UKMTO has received a time-late report of an incident in the Strait of Hormuz....",
+        "retrieved_at": "2026-11-10T06:10:35Z"
+      },
+      {
+        "source_id": "imo_confirmed_incidents",
+        "source": "IMO — سجل الحوادث المؤكدة",
+        "url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+        "invoked": true,
+        "result": "29 September",
+        "retrieved_at": "2026-11-10T06:10:35Z"
+      },
+      {
+        "source_id": "mscio_recent_incidents",
+        "source": "MSCIO",
+        "url": "https://www.mscio.eu/alerts/",
+        "invoked": true,
+        "result": "Recent Incidents  (0)",
+        "retrieved_at": "2026-11-10T06:10:35Z"
+      }
+    ],
+    "update_of": null,
+    "parent_id": null,
+    "duplicate_of": null,
+    "event_kind": "جديد",
+    "link_basis": "لا دليل رابط",
+    "link_evidence": "",
+    "link_status": "غير مرتبط",
+    "counts_as_new": true,
+    "official_ref": "UKMTO-199-26",
+    "official_ref_basis": "معرّف رسمي من نصّ المصدر: UKMTO-199-26"
+  }
+]
