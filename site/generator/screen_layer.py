@@ -3,9 +3,9 @@
 """
 طبقة الشاشة للتقرير اليومي: القرار والخريطة فوق، والأقسام تحتها قابلة للطي.
 
-قاعدة الأمان (قرار الشكل المجمّد v3): هذه الطبقة للشاشة فقط ولا تمسّ PDF ولا Word.
+قاعدة الأمان (قرار الشكل المجمّد v3): طبقة الشاشة لا تُعرض في PDF أو Word، مع استثناء طباعي محدود لضبط بطاقات hero-kpis.
   1. كل HTML هنا بصنف no-print، فيُحجب في الطباعة ويحذفه محوّل Word.
-  2. كل CSS هنا داخل @media screen، فلا أثر له على وسائط print.
+  2. CSS الشاشة داخل @media screen؛ واستثناء الطباعة يضبط شبكة hero-kpis والنصوص الثانوية وارتفاع البطاقة فقط.
   3. العناصر الأصلية (الترويسة وأهم الأخبار المتعلقة بالأمن البحري والمؤشرات) تبقى في الصفحة كما هي للطباعة،
      وتُخفى على الشاشة فقط.
   4. السكربت لا يعدّل إلا أصنافًا بالبادئة sc- وصنف sc-collapsed، وهذا الصنف لا يؤثر إلا داخل @media screen.
@@ -107,6 +107,17 @@ def _list_items(value):
 
 def _chip(label, value_html, extra=""):
     return f'<span class="sc-chip{extra}">{label} <b>{value_html}</b></span>'
+
+
+def _kpi_accent(k):
+    # نقص اللون يفشل مغلقًا كي لا يُعرض غياب البيانات كإشارة سلامة خضراء.
+    accent = k.get("accent")
+    if accent not in ("ok", "info", "warn", "danger"):
+        raise ValueError(
+            f"hero_kpis: accent مفقود أو غير معتمد للبطاقة {k.get('id', '')!r}; "
+            "القيم المعتمدة: ok/info/warn/danger"
+        )
+    return accent
 
 
 def news_card_block(meta, *, esc, inline, report_date, card_targets=None):
@@ -262,28 +273,40 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls,
                     or any(len(v) not in (2, 3, 4) for r, v in rows.items() if r != 1)):
                 raise ValueError("hero_kpis: الصف الأول 4 بطاقات والصفوف التالية 3 (أو 2 للبطاقتين الدائمتين)؛ فشل مغلق")
             def _screen_tile(k):
-                acc = k.get("accent", "ok")
-                if acc not in ("ok", "info", "warn", "danger"):
-                    acc = "ok"
+                acc = _kpi_accent(k)
                 title = k.get("title", "")
                 detail = k.get("detail", "")
                 tag = k.get("tag", "")
+                value = k.get("value", "")
+                value_class = " sc-kv-long" if len(str(value)) > 24 else ""
                 tag_html = f'<span class="sc-k-tag">{inline(tag)}</span>' if tag else ""
                 return (f'<div class="sc-kpi hero-kpi acc-{acc}" data-kpi-id="{esc(k.get("id", ""))}"><div class="sc-kl">{inline(title)}{tag_html}</div>'
-                        f'<div class="sc-kv bidi">{esc(k.get("value", ""))}</div>'
+                        f'<div class="sc-kv bidi{value_class}">{esc(value)}</div>'
                         f'<div class="sc-kn">{inline(detail)}</div></div>')
+            displayed_accents = {
+                _kpi_accent(k) for k in hero_kpis if k.get("row") in (1, 2)
+            }
+            key_labels = (
+                ("warn", "يحتاج تحققًا"),
+                ("info", "معلومة مرجعية"),
+                ("ok", "مثبت أو منخفض"),
+                ("danger", "خطر"),
+            )
+            key_items = "".join(
+                f'<span class="sc-kpi-key-item acc-{accent}"><span class="sc-kpi-key-dot" aria-hidden="true"></span>{label}</span>'
+                for accent, label in key_labels if accent in displayed_accents
+            )
+            color_key = f'<div class="sc-kpi-key">{key_items}</div>' if key_items else ""
             risk = meta.get("hero_risk_patterns") or []
             risk_html = ('<div class="sc-k-risk" aria-label="أنماط الخطر"><span class="sc-k-risk-label">أنماط الخطر</span>'
                          + "".join(f'<span class="sc-k-risk-tag">{inline(x)}</span>' for x in risk) + '</div>') if risk else ""
             row1 = "".join(_screen_tile(k) for k in hero_kpis if k.get("row") == 1)
             row2 = "".join(_screen_tile(k) for k in hero_kpis if k.get("row") == 2)
-            side.append(f'<div class="sc-kpis hero-kpis">{risk_html}<div class="sc-kpi-row sc-kpi-row-1">{row1}</div><div class="sc-kpi-row sc-kpi-row-2">{row2}</div></div>')
+            side.append(f'<div class="sc-kpis hero-kpis">{risk_html}{color_key}<div class="sc-kpi-row sc-kpi-row-1">{row1}</div><div class="sc-kpi-row sc-kpi-row-2">{row2}</div></div>')
         else:
             legacy_tiles = []
             for k in hero_kpis:
-                acc = k.get("accent", "ok")
-                if acc not in ("ok", "info", "warn", "danger"):
-                    acc = "ok"
+                acc = _kpi_accent(k)
                 delta = BLK.trend_html(k.get("delta")) if k.get("delta") else ""
                 note = inline(k.get("note", "")) if k.get("note") else ""
                 legacy_tiles.append(
@@ -406,16 +429,24 @@ body:has(.site-nav) .topbar{display:none}
 .sc-official-source{grid-column:1 / -1;color:var(--muted);font-size:12px;line-height:1.6}
 .sc-kpi-row{display:grid;gap:16px;direction:rtl}
 .sc-kpi-row-1{grid-template-columns:repeat(4,minmax(0,1fr))}
-.sc-kpi-row-2{grid-template-columns:repeat(4,minmax(0,1fr))}
+.sc-kpi-row-2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .sc-kpi{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;position:relative;overflow:hidden;height:auto;min-height:148px;text-align:right;direction:rtl;display:flex;flex-direction:column}
 .sc-kpi:before{content:"";position:absolute;inset-inline-start:0;top:0;bottom:0;width:3px;background:var(--accent)}
 .sc-kpi.acc-info:before{background:var(--info)}.sc-kpi.acc-warn:before{background:var(--warn)}
 .sc-kpi.acc-danger:before{background:var(--danger)}.sc-kpi.acc-ok:before{background:var(--ok)}
+.sc-kpi-key{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 2px;color:var(--ink-2);font-size:13px;line-height:1.4}
+.sc-kpi-key-item{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.sc-kpi-key-dot{display:inline-block;width:8px;height:8px;border-radius:50%;flex:0 0 8px;background:var(--muted)}
+.sc-kpi-key-item.acc-warn .sc-kpi-key-dot{background:var(--warn)}
+.sc-kpi-key-item.acc-info .sc-kpi-key-dot{background:var(--info)}
+.sc-kpi-key-item.acc-ok .sc-kpi-key-dot{background:var(--ok)}
+.sc-kpi-key-item.acc-danger .sc-kpi-key-dot{background:var(--danger)}
 .sc-kl{font-size:14px;color:var(--muted);line-height:1.6}
-.sc-k-tag{display:inline-block;margin-inline-start:6px;padding:1px 7px;border:1px solid var(--line-2);border-radius:999px;color:var(--ink-2);font-size:12px;line-height:1.4;white-space:nowrap}
+.sc-k-tag{display:inline-block;margin-inline-start:6px;padding:1px 7px;border:1px solid var(--line-2);border-radius:999px;color:var(--ink-2);font-size:13px;line-height:1.4;white-space:nowrap}
 .sc-kv{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:26px;line-height:1.3;text-align:right;direction:rtl}
+.sc-kv.sc-kv-long{font-size:20px;line-height:1.35;overflow-wrap:anywhere}
 .sc-kd{font-size:14px;color:var(--ink-2)}
-.sc-kn{font-size:13px;color:var(--muted);line-height:1.7;margin-top:3px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;flex:0 0 auto}
+.sc-kn{font-size:14px;color:var(--muted);line-height:1.7;margin-top:3px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;flex:0 0 auto}
 .sc-k-risk{display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:12px}
 .sc-k-risk-tag{border:1px solid var(--line-2);border-radius:999px;padding:1px 8px;color:var(--ink-2)}
 .sc-pointer{margin:10px 0 0;font-size:13px;color:var(--muted)}
@@ -506,6 +537,13 @@ body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,sys
 /* الحركة: عند طيّ الأقسام على الشاشة يبدأ الرسم المتحرّك لحظة التحويل إلى الطباعة فيلتقطه PDF ناقصًا
    (شريط الخط الزمني). الحالة النهائية هي المقصودة، وهي ما كانت تُلتقط قبل الطيّ. */
 @media print{.tl-fill{animation:none}}
+@media print{
+  .hero-kpis .sc-kpi-row-1{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .hero-kpis .sc-kpi-row-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero-kpis .sc-kl,.hero-kpis .sc-k-tag,.hero-kpis .sc-kn,.hero-kpis .sc-kd,
+  .hero-kpis .sc-k-risk,.hero-kpis .sc-k-risk-label,.hero-kpis .sc-k-risk-tag{font-size:10.5pt}
+  .hero-kpis .sc-kpi{height:auto;min-height:148px}
+}
 
 """
 

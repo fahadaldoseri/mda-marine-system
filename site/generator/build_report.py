@@ -3066,10 +3066,6 @@ def main():
     return 0
 
 
-if __name__ == "__main__":
-    sys.exit(main())
-
-
 def tighten_ltr_punct(html: str) -> str:
     """يلصق علامة الترقيم بالرمز اللاتيني/الرقمي السابق لها عبر حدود الوسوم.
 
@@ -3099,3 +3095,9 @@ def tighten_ltr_punct(html: str) -> str:
         out.append(chunk)
         out.append(next(pending, ""))
     return "".join(out)
+
+
+if __name__ == "__main__":
+    sys.exit(main())
+
+
