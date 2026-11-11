@@ -113,8 +113,25 @@ def zone_of(event: dict, reg: dict, day_overrides: dict) -> tuple[str | None, st
     return None, "بلا موقع بحري"
 
 
+
+def canonical_confirmed(event: dict) -> bool:
+    """حالة الدليل المؤكدة من المصدر الواحد؛ لا تُشتق من مفردات التصنيف."""
+    try:
+        import ledger_totals as _lt  # المصدر الواحد لقاعدة التأكيد
+    except ImportError:  # pragma: no cover
+        return False
+    status = _lt.resolved_evidence_status(event)
+    if status in _lt.COUNTED_EVIDENCE_STATUSES:
+        return True
+    kind = str(event.get("incident_kind") or "")
+    if kind and kind not in ("هجوم", "استهداف", "انفجار", "إصابة", "أضرار"):
+        return False
+    return False
+
+
 def is_qualifying(event: dict, reg: dict, day_overrides: dict) -> tuple[bool, str, str]:
     """يُعيد (مؤهّلة؟، درجة التأكيد، السبب)."""
+    demoted: list[str] = []
     code = event.get("code", "")
     ov = day_overrides.get(code) or {}
     conf_map = reg["counting"]["confirmation"]
@@ -126,6 +143,11 @@ def is_qualifying(event: dict, reg: dict, day_overrides: dict) -> tuple[bool, st
             break
     if "confirmation" in ov:
         conf = ov["confirmation"]
+    # عيب مُقاس (2026-11-11): «بلاغ رسمي» تعني وجود بلاغ، لا ثبوت أثر أو هجوم.
+    # التأكيد لا يُمنح إلا لحالة دليل مؤكدة معتمدة في المصدر الواحد (ledger_totals).
+    if conf == "confirmed" and not canonical_confirmed(event):
+        conf = "unconfirmed"
+        demoted.append(code or "?")
     hay = f"{event.get('title','')} {event.get('source_excerpt','')}"
     qual_hit = next((t for t in reg["counting"]["qualifying_types"] if t in hay), None)
     non_hit = next((t for t in reg["counting"]["non_qualifying_types"] if t in hay), None)
