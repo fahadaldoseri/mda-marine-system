@@ -622,6 +622,46 @@ STYLE_BLOCKS = STYLE_BLOCKS + """
 @media print{.rel-tbl{font-size:10.5px}.rel-tbl td,.rel-tbl th{padding:3px 5px}}
 """
 
+def _external_indicator_source(indicator):
+    """Return the external registry whose reading must be tied to daily evidence."""
+    source_text = " ".join(
+        str(indicator.get(key) or "")
+        for key in ("baseline", "name", "source")
+    ).casefold()
+    if "mscio" in source_text:
+        return "MSCIO"
+    if "imo" in source_text or "المنظمة البحرية الدولية" in source_text:
+        return "IMO"
+    return ""
+
+
+def _daily_external_indicator_evidence(indicator, report_date):
+    """Render a dated external reading only when date, check time, URL, and result exist."""
+    record = (indicator.get("daily_evidence") or indicator.get("evidence_record")
+              or indicator.get("evidence"))
+    if not isinstance(record, dict):
+        return None
+    evidence_date = str(record.get("date") or "").strip()
+    checked_at = str(record.get("checked_at") or record.get("check_time")
+                     or record.get("checked_at_utc") or "").strip()
+    url = str(record.get("url") or record.get("record_url") or "").strip()
+    result = record.get("result") if "result" in record else record.get("value")
+    if (not report_date or evidence_date != report_date
+            or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", evidence_date)
+            or not checked_at or result is None
+            or not re.fullmatch(r"https?://[^\s<>\"']+", url, flags=re.IGNORECASE)):
+        return None
+    safe_date = html.escape(evidence_date, quote=True)
+    safe_time = html.escape(checked_at, quote=True)
+    safe_url = html.escape(url, quote=True)
+    safe_result = html.escape(str(result), quote=True)
+    return Raw(
+        f'{safe_result}<br><small>وقت الفحص: {safe_time} · '
+        f'<a href="{safe_url}" target="_blank" rel="noopener noreferrer">'
+        f'سجل الدليل</a> ({safe_date})</small>'
+    )
+
+
 def intel_analysis(data, inline):
     """كتلة قسم «قراءة الموقف وتحليل المؤشرات» (ح1–ح12): وسم الأسلوب · الاحتمال · الثقة · سند المصدر · الافتراضات · المؤشرات · تقييم دقة الأمس."""
     if not data:
@@ -649,11 +689,28 @@ def intel_analysis(data, inline):
         # الشكل المعتمد في عقد الواجهة: name · current · previous · trend · meaning
         # (INDICATOR_FIELDS في validators/validate_report.py). كان القالب يقرأ أسماء
         # قديمة فيسقط بـAttributeError على أي يوم يحمل المؤشرات بالشكل المعتمد.
-        rws = [[i.get("name", ""), i.get("current", ""), i.get("previous", ""),
-                i.get("trend", ""), i.get("meaning", "")]
-               for i in inds if isinstance(i, dict)]
+        report_date = str(data.get("report_date") or data.get("date")
+                          or code_context().get("date") or "").strip()
+        rws = []
+        for i in inds:
+            if not isinstance(i, dict):
+                continue
+            if _external_indicator_source(i):
+                evidence = _daily_external_indicator_evidence(i, report_date)
+                if evidence is None:
+                    # لا تُعرض القيمة القديمة أو الاتجاه كقراءة حالية عند غياب
+                    # سجل دليل مؤرخ يثبت وقت الفحص والرابط والنتيجة (بما فيها 0).
+                    rws.append([i.get("name", ""), "غير قابل للتحقق",
+                                "غير قابل للتحقق", "غير قابل للتحقق", "غير قابل للتحقق"])
+                else:
+                    rws.append([i.get("name", ""), evidence, i.get("previous", ""),
+                                i.get("trend", ""), i.get("meaning", "")])
+            else:
+                rws.append([i.get("name", ""), i.get("current", ""),
+                            i.get("previous", ""), i.get("trend", ""),
+                            i.get("meaning", "")])
         out.append('<h3>علامات الإنذار المبكر</h3><p class="blk-lede">المؤشر · ما يؤكده · ما ينفيه · '
-                   + _table(["المؤشر", "القيمة الحالية", "القيمة السابقة", "الاتجاه", "المعنى"],
+                   + _table(["المؤشر", "القيمة المسجلة أو حالة التحقق", "القيمة السابقة", "الاتجاه", "المعنى"],
                             rws, inline))
 
     yr = data.get("yesterday_review") or []

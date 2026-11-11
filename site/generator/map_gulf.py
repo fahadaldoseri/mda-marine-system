@@ -628,15 +628,21 @@ CLUSTER_SEP = 46.0        # عتبة ضمّ العلامات المتقاربة 
 BADGE_FONT = 22.0          # حجم خط شارة المعرّف داخل viewBox
 
 
-def _badge(cx, cy, text, size=BADGE_FONT, dy=-26.0):
-    """شارة معرّف الواقعة: مستطيل داكن بحدّ بلون العلامة ونص معرّف واضح."""
+def _badge(cx, cy, text, size=BADGE_FONT, dy=-26.0, full_code=None):
+    """شارة معرّف الواقعة؛ يعلن وسم الاختصار ورمزه الكامل في وصف SVG."""
     w = 12.0 + len(str(text)) * size * 0.62
     h = size * 1.55
     x, y = cx - w / 2, cy + dy - h / 2
+    full = str(full_code or "").strip()
+    is_short = bool(full and full != str(text))
+    label = (f"اختصار: {text}؛ الرمز الكامل: {full}" if is_short else str(text))
+    a11y = f' role="img" aria-label="{_esc(label)}"' if is_short else ""
+    title = f"<title>{_esc(label)}</title>" if is_short else ""
     return (
+        f'<g{a11y}>{title}'
         f'<rect class="mp-badge-r" x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}" rx="{h/2:.1f}"/>'
         f'<text class="mp-badge-t" x="{cx:.1f}" y="{cy + dy + size*0.36:.1f}" '
-        f'style="font-size:{size}px;fill:#eaf6ff;font-weight:600;text-anchor:middle">{text}</text>'
+        f'style="font-size:{size}px;fill:#eaf6ff;font-weight:600;text-anchor:middle">{_esc(text)}</text></g>'
     )
 
 
@@ -853,13 +859,13 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
             cxs = sum(shown_xy[j][0] for j in grp) / len(grp)
             cys = sum(shown_xy[j][1] for j in grp) / len(grp)
             ids = "·".join(sids[j] for j in grp)
-            event_ids = "·".join(_esc(points[j].get("code") or sids[j]) for j in grp)
+            event_ids = "·".join(str(points[j].get("code") or sids[j]) for j in grp)
             marks.append(
-                f'<g class="mp-event mp-cluster" data-event-id="{event_ids}" transform="translate({cxs:.1f},{cys:.1f})" style="--mk:{color}">'
+                f'<g class="mp-event mp-cluster" data-event-id="{_esc(event_ids)}" transform="translate({cxs:.1f},{cys:.1f})" style="--mk:{color}">'
                 f'<circle class="mp-halo" r="26" style="fill:var(--mk);opacity:.22"/>'
                 f'<circle class="mp-dot" r="16" style="{_dot_style(p)}"/>'
                 f'<text class="mp-num" y="8" style="fill:#fff;font-size:26px;font-weight:700;text-anchor:middle">{len(grp)}</text>'
-                f'{_badge(cxs, cys, ids, dy=-34.0)}</g>'
+                f'{_badge(cxs, cys, ids, dy=-34.0, full_code=event_ids)}</g>'
             )
         else:
             event_id = _esc(code or sids[i - 1])
@@ -868,7 +874,7 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
                 f'<circle class="mp-halo" r="14" style="fill:var(--mk);opacity:.22"/>'
                 f'<circle class="mp-dot" r="7" style="{_dot_style(p)}"/>'
                 f'<text class="mp-num" y="5" style="fill:#fff;font-size:16px;font-weight:600;text-anchor:middle">{i}</text>'
-                f'{_badge(x, y, sids[i - 1])}</g>'
+                f'{_badge(x, y, sids[i - 1], full_code=code)}</g>'
             )
         txt = (p.get("label") or p.get("area") or "").strip()
         # ك-448: بند المفتاح يعرّف العلامة بالمنطقة لا بسرد الواقعة، فلا يتكرّر
@@ -884,7 +890,7 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
                 f'<span class="lg-st st-{st_key}">{st_ar}</span>',
                 f'<span class="lg-prec">{"موقع تقريبي" if p.get("precision") == "approximate" else "إحداثيات مذكورة"}</span>']
         if code:
-            bits.append(f'<bdi class="bidi ev-code">{short_code(code, REPORT_DATE)}</bdi>')
+            bits.append(f'<bdi class="bidi ev-code">{_esc(code)}</bdi>')
         if ref:
             bits.append(f'<bdi class="bidi">{_esc(_safe_map_text(ref))}</bdi>')
         legend.append(f'<li><span class="lg-num" style="--mk:{color}">{i:02d}</span><bdi class="bidi ev-code">{_esc(sids[i - 1])}</bdi>{" ".join(bits)}</li>')
@@ -893,6 +899,7 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
     ev_rows = []
     for i, p in enumerate(points, start=1):
         _sid = sids[i - 1]
+        _full_id = str(p.get("code") or _sid).strip()
         _src = str(p.get("source") or "").lower()
         _tl = [t for t in (_ACTIVE_TIMELINE or [])
                if any(tok.strip() and tok.strip() in _src
@@ -900,7 +907,7 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
         _tl_txt = "؛ ".join(f'{t.get("date")} ({t.get("count")} واقعة)' for t in _tl) or "غير متاح في المواد الحالية"
         _ves = p.get("vessel") or p.get("ship") or ""
         ev_rows.append(
-            f'<tr><td><bdi class="bidi">{_sid}</bdi></td>'
+            f'<tr><td><bdi class="bidi">{_esc(_full_id)}</bdi></td>'
             f'<td>{_esc(_safe_map_text(str(p.get("area") or "غير محددة")))}</td>'
             f'<td>{_esc(_safe_map_text(str(p.get("class") or "غير محددة")))} · {_esc(str(p.get("confirmation") or "غير محدد"))}</td>'
             f'<td>{_esc(_tl_txt)}</td>'

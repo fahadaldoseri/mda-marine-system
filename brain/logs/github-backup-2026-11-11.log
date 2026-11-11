@@ -2868,3 +2868,62 @@ remote:
   ✘ تعديل حاكم: brain/tools/classify_zones.py · sha256=ef59f0cb296e2db6e8a743abfa6c5808c37ebc9ef3843792440dad76ddc19eda
 ✘ فشل مغلق: توجد تعديلات شيفرة/بيانات حقيقية خارج سجلات التشغيل المعلنة
 ✘ فشل مغلق: حارس شجرة النسخ منع العملية؛ راجع تصنيف المسارات وبصمات SHA-256
+=== بدء النسخ الاحتياطي: 2026-11-11T19:07:58Z ===
+حارس شجرة النسخ: تغييرات Git=1 · سجلات تشغيل معلنة=1 · كتل مولَّدة=0 · تعديلات حاكمة=0
+  ✔ سجل تشغيل معلن: brain/logs/github-backup-2026-11-11.log · sha256=efdd5113615d7a880cf408fbc777645c804230e2562d70e01739cd0fc8e10f1a
+✔ شجرة النسخ تمر: سجلات التشغيل المحلية لا تمنع النسخة الاحتياطية
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_report_en.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_site.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_sources.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_special.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/derive_en_units.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/i18n_en.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/make_en_glossary.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/section_counts.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/sources/i18n/en/2026-11-10-sectioned.en.md
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/sources/i18n/en/2026-11-11-sectioned.en.md
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/tests/test_i18n_alignment.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): skills/.skill_versions.json
+⚠ تعارض (عُدّل على الخادم خارج GitHub): skills/webdev/SKILL.md
+✘ 13 تعارض. لا شيء طُبّق. إن كان المستودع هو الصحيح: أعد التشغيل بـ --accept-repo (تُؤرشف نسخ الخادم أولًا).
+⚠ تعذّر/تعارض في تطبيق الشيفرة (تستمر نسخة البيانات بعد تسجيل التحذير)
+الملفات: 10556 · الحجم: 352.7 م.ب · الفهرس: docs/فهرس-الملفات.tsv
+  استُثني: brain/reports/docx/التقرير-اليومي-2026-11-08-طبق-الأصل.docx — مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب
+  استُثني: brain/reports/docx/التقرير-اليومي-2026-11-08-طبق-الأصل.pdf — مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب
+  استُثني: brain/reports/docx/التقرير-اليومي-2026-11-09-طبق-الأصل.docx — مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب
+  استُثني: brain/reports/docx/التقرير-اليومي-2026-11-09-طبق-الأصل.pdf — مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب
+  استُثني: brain/reports/docx/التقرير-اليومي-2026-10-23-طبق-الأصل.docx — مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب
+  استُثني: brain/reports/docx/التقرير-اليومي-2026-11-10-طبق-الأصل.docx — مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب
+  استُثني: brain/reports/docx/التقرير-اليومي-2026-11-10-طبق-الأصل.pdf — مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب
+  استُثني: brain/reports/docx/التقرير-اليومي-2026-11-11-طبق-الأصل.docx — مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب
+  استُثني: brain/reports/docx/التقرير-اليومي-2026-11-11-طبق-الأصل.pdf — مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب
+  استُثني: brain/state/webhook-secret.txt — سرّي — لا يُنقل
+  انحراف شيفرة: site/generator/build_site.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/build_special.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/build_sources.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/section_counts.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/derive_en_units.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/build_report_en.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/i18n_en.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/make_en_glossary.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/sources/i18n/en/2026-11-10-sectioned.en.md — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/sources/i18n/en/2026-11-11-sectioned.en.md — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/tests/test_i18n_alignment.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  شيفرة جديدة من الخادم: site/generator/daily_title.py — نُسخت (غير موجودة في GitHub)
+  شيفرة جديدة من الخادم: site/generator/third_person.py — نُسخت (غير موجودة في GitHub)
+  شيفرة جديدة من الخادم: site/tests/test_brain_root_canonical.py — نُسخت (غير موجودة في GitHub)
+  شيفرة جديدة من الخادم: site/tests/test_i18n_ltr_prefix_digits.py — نُسخت (غير موجودة في GitHub)
+  شيفرة جديدة من الخادم: site/tests/test_daily_title_normalization.py — نُسخت (غير موجودة في GitHub)
+  شيفرة جديدة من الخادم: site/tests/test_glossary_year_invariant.py — نُسخت (غير موجودة في GitHub)
+  شيفرة جديدة من الخادم: site/tests/test_i18n_597_regressions.py — نُسخت (غير موجودة في GitHub)
+  شيفرة جديدة من الخادم: site/tests/test_reader_grade_labels.py — نُسخت (غير موجودة في GitHub)
+✔ بوابة الأسرار: لا سرّ في النطاق المفحوص
+✔ كل ملفات الشيفرة على الخادم متتبَّعة في المستودع (المستثنى المعلَّل: 0)
+✔ آمن: لا يوجد git push مباشر إلى main في /home/ubuntu/mda-marine-system/brain/tools/github_backup.sh
+remote: 
+remote: Create a pull request for 'backup/2026-11-11-190854-3126922' on GitHub by visiting:        
+remote:      https://github.com/fahadaldoseri/mda-marine-system/pull/new/backup/2026-11-11-190854-3126922        
+remote: 
+تم دفع الفرع فقط: backup/2026-11-11-190854-3126922
+تم إنشاء طلب الدمج: https://github.com/fahadaldoseri/mda-marine-system/pull/626
+=== انتهى: 2026-11-11T19:09:05Z ===

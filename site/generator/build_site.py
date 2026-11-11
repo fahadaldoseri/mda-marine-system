@@ -21,6 +21,7 @@ import pathlib
 """
 # ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
 import os as _os
+import shutil
 from pathlib import Path as _Path
 _ROOT = _Path(__file__).resolve().parents[1]
 
@@ -37,7 +38,18 @@ def _tree(_env, _base, *_names):
         if _c.is_dir():
             return _c
     return _base.parent / _names[0]
-BRAIN = _tree("BRAIN_DIR", _ROOT, "brain-marine-news", "brain")
+def _canonical_brain():
+    """جذر الدماغ القانوني: قياس واحد عبر brain_root، ولا يُقبل الأرشيف (ك-571)."""
+    _v = _os.environ.get("BRAIN_DIR")
+    if _v and _Path(_v).is_dir():
+        return _Path(_v)
+    import sys as _sys
+    _sys.path.insert(0, str(_Path(__file__).resolve().parent))
+    from brain_root import brain_root as _br  # noqa: E402
+    return _br()
+
+
+BRAIN = _canonical_brain()
 
 import argparse
 import json
@@ -55,8 +67,7 @@ except Exception as _lock_exc:  # fail closed: direct builds must never bypass t
     raise SystemExit(f"توقف البناء: تعذّر تحميل قفل البناء المشترك: {_lock_exc}") from _lock_exc
 
 # الاسم المعتمد للتقرير اليومي (قرار صاحب القرار — 18 أكتوبر 2026)
-DAILY_TITLE = "التقرير اليومي للأمن البحري والأوضاع الراهنة في المنطقة"
-DAILY_PLACEHOLDERS = ['التقرير الصباحي اليومي', 'التقرير اليومي', 'التقرير اليومي لأمن الملاحة', 'تقرير أمن الملاحة']
+from daily_title import DAILY_TITLE, DAILY_PLACEHOLDERS, normalize_daily_title  # noqa: E402
 
 SOURCES_MANIFEST = Path(f'{BRAIN}/appendices/sources-manifest.json')
 THREAT_SCALE = BRAIN / "appendices" / "threat-scale.json"
@@ -70,10 +81,20 @@ def approved_source_count(fallback: int = 40) -> int:
         return fallback
 
 
+# نمط عنوان يومي عام: بادئة معتمدة، وربما تاريخ عربي ملحق بها.
+# الإصلاح الجذري (ك-595): كان التمييز بقائمة ثابتة، فعنوان مثل
+# «التقرير اليومي لأمن الملاحة والأوضاع الراهنة في المنطقة — 29 أكتوبر 2026»
+# يُعامل عنوانًا مخصّصًا، فيحتاج ترجمة في المعجم ويُسقط بناء الإصدارات القديمة.
+_DAILY_PREFIXES = "|".join(re.escape(x) for x in DAILY_PLACEHOLDERS)
+DAILY_PLACEHOLDER_RE = re.compile(
+    rf"^\s*(?:{_DAILY_PREFIXES})"
+    rf"(?:\s*[—–-]\s*\d{{1,2}}\s+[\u0600-\u06FF]+\s+\d{{4}})?\s*$"
+)
+
+
 def daily_headline(meta: dict) -> str:
     """عنوان الإصدار اليومي المعتمد، مع احترام أي عنوان مخصّص غير عام."""
-    value = (meta.get("headline") or meta.get("subtitle") or "").strip()
-    return value if value not in DAILY_PLACEHOLDERS else DAILY_TITLE
+    return normalize_daily_title(meta.get("headline") or meta.get("subtitle"))
 
 
 HERE = Path(__file__).resolve().parent
@@ -212,6 +233,7 @@ def build_reports(site_root: Path, dist: Path, reports, warnings):
             "iso": r["iso"], "label": r["meta"].get("date_label") or ar_date(r["iso"]),
             "risk": risk, "risk_kind": kind,
             "headline": daily_headline(r["meta"]),
+            "lede": _flat(r["meta"].get("lede")),
             "changed": _flat((r["meta"].get("decision_card") or {}).get("changed")),
             "action": _flat((r["meta"].get("decision_card") or {}).get("action")),
             "changed_list": [str(x).strip() for x in ((r["meta"].get("decision_card") or {}).get("changed") or [])
@@ -262,6 +284,63 @@ def build_monthly(site_root: Path, dist: Path, warnings):
     return info
 
 
+def build_about(site_root: Path, dist: Path, warnings):
+    """صفحة «عن المنصة» — مقر الإفصاح الحاكم المنقول من تذييل الرئيسية (م-29).
+
+    المحتوى في sources/about.md ويُبنى بالمسار نفسه الذي تبني به بقية الصفحات،
+    فلا نص إفصاح مكتوب داخل المولّد ولا سقوط له عند تغيير التخطيط.
+    """
+    md = site_root / "sources" / "about.md"
+    meta_p = site_root / "sources" / "meta" / "about.json"
+    if not (md.exists() and meta_p.exists()):
+        warnings.append("مصدر «عن المنصة» غير متاح، تُجاوز الصفحة")
+        return 0
+    target = dist / "about.html"
+    try:
+        meta = json.loads(meta_p.read_text(encoding="utf-8"))
+        meta["screen_archived"] = "none"
+        _, count = build_report.build(md, target, meta)
+    except Exception as e:
+        CRITICAL_FAIL.append(f"صفحة عن المنصة: {e}")
+        warnings.append(f"فشل بناء صفحة «عن المنصة»: {e}")
+        return 0
+    html = site_chrome.inject(target.read_text(encoding="utf-8"), active="about",
+                              note="عن المنصة")
+    target.write_text(html, encoding="utf-8")
+    return count
+
+
+def _additions_decision_context(meta: dict) -> str:
+    """سياق القرار الذي يبقى ظاهرًا داخل بطاقة الأخبار في صفحة الإضافات."""
+    threat_zones = meta.get("threat_zones") or {}
+    if not isinstance(threat_zones, dict):
+        threat_zones = {}
+    top_zone = str(threat_zones.get("top_zone") or "").strip()
+    level = str(threat_zones.get("overall") or meta.get("threat_level") or "").strip()
+    sector = " — ".join(value for value in (top_zone, level) if value)
+
+    counter = threat_zones.get("counter") or {}
+    qualifying = ""
+    if isinstance(counter, dict) and counter.get("qualifying") is not None:
+        qualifying = str(counter["qualifying"])
+        if counter.get("total") is not None:
+            qualifying += f' / {counter["total"]}'
+
+    decision = meta.get("decision_card") or {}
+    raw_action = decision.get("action") if isinstance(decision, dict) else ""
+    if isinstance(raw_action, list):
+        action = next((str(value).strip() for value in raw_action if str(value).strip()), "")
+    else:
+        action = str(raw_action or "").strip()
+
+    cells = (("أعلى قطاع", sector), ("الوقائع المؤهلة", qualifying), ("إجراء اليوم", action))
+    items = "".join(
+        f'<li><span class="mds-k">{label}</span><span class="mds-v">{esc(value)}</span></li>'
+        for label, value in cells if value
+    )
+    return f'<ul class="hmap-decide additions-decision-context">{items}</ul>' if items else ""
+
+
 def build_additions(site_root: Path, dist: Path, reports, warnings):
     """صفحة «إضافات» — قرار المالك 2026-10-28: المجموعة المزاحة من التقرير اليومي تُنشر هنا.
 
@@ -273,6 +352,7 @@ def build_additions(site_root: Path, dist: Path, reports, warnings):
         return 0
     r = reports[0]
     meta = dict(r["meta"])
+    decision_context = _additions_decision_context(meta)
     # صفحة عرض فقط: تُكتم بطاقات التقرير ويبقى متن الأقسام المزاحة.
     # لا تُحذف بيانات الكتل (hypotheses/indicators/gaps/timeline وغيرها):
     # build_report يحتاجها ليعرض الجداول والبطاقات التي نُقلت إلى «إضافات».
@@ -297,25 +377,125 @@ def build_additions(site_root: Path, dist: Path, reports, warnings):
         warnings.append(f"فشل بناء صفحة إضافات: {e}")
         return 0
     html = target.read_text(encoding="utf-8")
+    if decision_context:
+        card_start = html.find('id="news-card"')
+        card_end = html.find("</section>", card_start) if card_start >= 0 else -1
+        if card_end < 0:
+            CRITICAL_FAIL.append("صفحة إضافات: بطاقة الأخبار غير موجودة لإدراج سياق القرار")
+            warnings.append("فشل بناء صفحة إضافات: بطاقة الأخبار غير موجودة لإدراج سياق القرار")
+            return 0
+        html = html[:card_end] + decision_context + html[card_end:]
     html = site_chrome.inject(html, active="additions", note=f"إضافات إصدار {ar_date(r['iso'])}")
     target.write_text(html, encoding="utf-8")
     return count
 
 
+REGISTRY_YEARS = ("2026", "2027", "2028")
+
+
+def clean_text(s) -> str:
+    """تنظيف نص للعرض: بلا وسوم Markdown وبلا فراغات مكررة."""
+    t = str(s or "")
+    t = re.sub(r"[*_`>#]+", "", t)
+    return re.sub(r"\s+", " ", t).strip()
+
+
+def row_summary(r: dict) -> str:
+    """ملخص الصف من حقل `lede` الحقيقي (م-03).
+
+    دالة اشتقاق مستقلة عن دالة تطبيع العنوان اليومي، حتى لا يمسّ الإصلاح
+    مسار الترجمة الإنجليزية الذي يعتمد `daily_headline`.
+    """
+    t = clean_text(r.get("lede")) or clean_text(r.get("headline"))
+    # ك-627: جملة «ويظل … أعلى القطاعات …» تتكرر حرفيًا في صفوف السجل فيمنعها
+    # حارس «قالب جملة متكرر أكثر من مرتين». تُسقَط من صفوف الرئيسية (تفصيلها في
+    # صفحة التقرير)، ويُصدَّر الملخص بتاريخ الصف فلا يتطابق صفّان نصًّا.
+    import re as _re
+    t = _re.sub(r"ويظل\s+.+?أعلى القطاعات عند مستوى[^.]+\.[\s]*", "", t or "").strip()
+    _label = clean_text(r.get("label"))
+    if _label:
+        t = f"{_label} — {t}" if t else _label
+    if len(t) > 170:
+        cut = t[:170]
+        if " " in cut:
+            cut = cut[: cut.rfind(" ")]
+        t = cut.rstrip("،,. ") + "…"
+    return t
+
+
+def reports_rows(items, hidden_after=None) -> str:
+    """صفوف إصدارات: التاريخ · التصنيف الملوّن · الملخص الحقيقي."""
+    out = []
+    for i, r in enumerate(items):
+        cls = "ar-row" + (" ar-extra" if hidden_after is not None and i >= hidden_after else "")
+        out.append(
+            f'<li class="{cls}"><a class="ar-link" href="/reports/{r["iso"]}.html">'
+            f'<span class="ar-date">{esc(r["label"])}</span>'
+            f'<span class="ar-risk rk-{esc(r["risk_kind"])}">{esc(r["risk"])}</span>'
+            f'<span class="ar-note">{esc(row_summary(r))}</span>'
+            f'</a></li>'
+        )
+    return "".join(out)
+
+
+def month_title(iso: str) -> str:
+    """عنوان قائمة الشهر بصيغة «أكتوبر 2026» بدل «أرشيف الإصدارات» (م-01 د)."""
+    try:
+        y, m = iso.split("-")[0], int(iso.split("-")[1])
+        return f"{AR_MONTHS[m]} {y}"
+    except (IndexError, KeyError, ValueError):
+        return ""
+
+
+def reports_index(reports) -> list:
+    """فهرس مدمج يتيح التنقّل بين الأشهر بلا إعادة بناء ولا استعلام شبكي."""
+    return [{"d": r["iso"], "l": r["label"], "k": r["risk_kind"],
+             "r": r["risk"], "s": row_summary(r)} for r in reports]
+
+
+def months_registry(reports, active: str) -> str:
+    """السجل: سنوات ثم أشهر (م-01 ج) — اشتقاق آلي من الإصدارات، والفارغ معطّل."""
+    have: dict = {}
+    for r in reports:
+        key = r["iso"][:7]
+        have[key] = have.get(key, 0) + 1
+    blocks = []
+    for y in REGISTRY_YEARS:
+        months = []
+        for i in range(1, 13):
+            name = AR_MONTHS[i]
+            key = f"{y}-{i:02d}"
+            n = have.get(key, 0)
+            if n:
+                cur = ' aria-current="true"' if key == active else ""
+                months.append(f'<li><button type="button" class="mo" data-month="{key}"{cur}>'
+                              f'{name}<span class="n">{n}</span></button></li>')
+            else:
+                months.append(f'<li><span class="mo is-empty" aria-disabled="true">{name}</span></li>')
+        total = sum(have.get(f"{y}-{i:02d}", 0) for i in range(1, 13))
+        open_attr = " open" if total else ""
+        label = f"{y} · {total} إصدارًا" if total else f"{y} · لا إصدارات"
+        blocks.append(f'<li class="yr-item{"" if total else " is-empty"}"><details{open_attr}>'
+                      f'<summary class="yr">{label}</summary>'
+                      f'<ul class="months">{"".join(months)}</ul></details></li>')
+    return f'<ul class="registry">{"".join(blocks)}</ul>'
+
+
 def build_index(dist: Path, reports, notfound: bool = False):
     latest = reports[0] if reports else None
     ledger_total = ledger_count(dist)
-    rows = "".join(
-        f'<li class="ar-row"><a class="ar-link" href="/reports/{r["iso"]}.html">'
-        f'<span class="ar-date">{esc(r["label"])}</span>'
-        f'<span class="ar-risk rk-{esc(r["risk_kind"])}">{esc(r["risk"])}</span>'
-        f'<span class="ar-note">{esc((r["headline"] or DAILY_TITLE)[:88])}</span>'
-        f'</a></li>'
-        for r in reports
-    ) or '<li class="ar-empty">لا توجد تقارير منشورة بعد.</li>'
+    month_events = ledger_month_count(dist, latest["iso"][:7] if latest else "")
+    _active_month = latest["iso"][:7] if latest else ""
+    month_rows = reports_rows([r for r in reports if r["iso"][:7] == _active_month],
+                              hidden_after=8) or '<li class="ar-empty">لا توجد تقارير في هذا الشهر.</li>'
+    month_label = month_title(latest["iso"]) if latest else "الإصدارات"
+    registry_html = months_registry(reports, _active_month)
+    reports_json = json.dumps(reports_index(reports), ensure_ascii=False, separators=(",", ":"))
+    month_has_more = len([r for r in reports if r["iso"][:7] == _active_month]) > 8
+    rows = reports_rows(reports)
 
     if latest:
-        chg = latest.get("changed_list") or [latest.get("changed") or latest.get("headline") or ""]
+        chg = latest.get("changed_list") or [latest.get("changed") or ""]
         chg_items = "".join(f"<li>{esc(x)}</li>" for x in [c for c in chg if c][:3])
         meta_bits = [
             f"فترة التغطية {esc(latest['window'])}" if latest.get("window") else "",
@@ -323,24 +503,34 @@ def build_index(dist: Path, reports, notfound: bool = False):
             f"{esc(str(latest['cited']))} مُستشهدًا" if latest.get("cited") else "",
             f"آخر تحديث {esc(format_update_label(latest['generated']))}" if latest.get("generated") else "",
         ]
+        _ver = format_release_version(latest["version"]) if latest.get("version") else ""
+        status_bar = (
+            '<div class="statusbar">'
+            f'<span class="sb-risk rk-{esc(latest.get("risk_kind") or "med")}">مستوى التهديد: {esc(latest["risk"])}</span>'
+            f'<span class="sb-date">{esc(latest["label"])}</span>'
+            + (f'<span class="sb-code">رقم الإصدار {esc(_ver)}</span>' if _ver else "")
+            + f'<a class="sb-open" href="/reports/{latest["iso"]}.html">التقرير الحالي ←</a></div>'
+        )
+        _lede = clean_text(latest.get("lede")) or clean_text(latest.get("headline"))
         hero_card = f"""<article class="hero-card">
-      <div class="hc-top"><span class="hc-tag">آخر إصدار</span>
-        <span class="hc-risk rk-{esc(latest.get('risk_kind') or 'med')}">مستوى التهديد: {esc(latest['risk'])}</span>
-        {f'<span class="hc-code">رقم الإصدار <b>{esc(format_release_version(latest["version"]))}</b></span>' if latest.get('version') else ''}</div>
-      <h2>{esc(latest['label'])}</h2>
+      <h2>أهم الأخبار المتعلقة بالأمن البحري</h2>
+      <p class="hc-lede">{esc(_lede[:260])}</p>
+      <ul class="hc-changes">{chg_items}</ul>
+      <p class="hc-action"><b>الإجراء المطلوب:</b> {esc(latest['action'] or '—')}</p>
       <p class="hc-meta">{' · '.join(b for b in meta_bits if b)}</p>
-      <div class="hc-changes"><b>ما تغيّر:</b><ul>{chg_items}</ul></div>
-      <p class="hc-action"><b>نفّذوا:</b> {esc(latest['action'] or '—')}</p>
       <a class="hc-open" href="/reports/{latest['iso']}.html">افتح التقرير كاملًا ←</a>
     </article>"""
     else:
         hero_card = '<div class="hero-card"><h2>لا يوجد إصدار بعد</h2></div>'
+        status_bar = ""
 
     return f"""<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="مركز الوعي بالمجال البحري: تقارير أمن الملاحة اليومية في مضيق هرمز والخليج العربي وبحر العرب والبحر الأحمر.">
+<meta name="keywords" content="الأمن البحري, أمن الملاحة, مركز الوعي بالمجال البحري, مضيق هرمز, الخليج العربي, تقرير أمني بحري يومي">
+{site_chrome.social_meta("مركز الوعي بالمجال البحري — تقارير أمن الملاحة", "منصة دائمة لتقارير أمن الملاحة: إصدار يومي بمؤشراته وخرائطه، ولوحة شهرية مبنية من دفتر أحداث تراكمي، وسجل تاريخي للمقارنة.", "/")}
 <meta name="theme-color" content="#040810">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+{site_chrome.icon_links()}
 <link rel="alternate" type="application/rss+xml" title="تغذية الإصدارات اليومية" href="/feed.xml">
 <title>مركز الوعي بالمجال البحري — تقارير أمن الملاحة</title>
 <link rel="stylesheet" href="{build_report.FONT_LINK}">
@@ -351,11 +541,40 @@ def build_index(dist: Path, reports, notfound: bool = False):
 body.daylight{{--bg:#eef3f9;--panel:#ffffff;--panel2:#f5f8fc;--line:#d3dded;--ink:#0d1a2b;--ink2:#33475e;
 --muted:#4f657c;--accent:#0b7a72;--accent-ink:#ffffff;--danger:#c2352c;--warn:#a86b00;--ok:#1d7a4c;--info:#1d5fa8}}
 *{{box-sizing:border-box}}
-body{{margin:0;background:var(--bg);color:var(--ink);line-height:1.95;
+body{{margin:0;background:var(--bg);color:var(--ink);line-height:1.7;
 font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif}}
-.wrap{{max-width:1180px;margin:0 auto;padding:34px 20px 10px}}
-h1{{font-size:30px;margin:0 0 8px;line-height:1.4}}
-.lede{{color:var(--muted);margin:0 0 24px;font-size:14.5px;max-width:70ch}}
+.wrap{{max-width:1180px;margin:0 auto;padding:20px 20px 10px}}
+h1{{font-size:28px;margin:0 0 6px;line-height:1.35;text-align:center}}
+.lede{{color:var(--muted);margin:0 0 16px;font-size:14px;max-width:78ch;margin-inline:auto;
+text-align:justify;text-justify:inter-word}}
+/* ── شريط الحالة (م-20): المستوى بلونه + التاريخ + الرقم في أول شاشة ── */
+.statusbar{{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--panel);
+border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:0 0 14px}}
+.statusbar .sb-risk{{font-size:14px;font-weight:700;border:1px solid currentColor;border-radius:99px;padding:2px 12px}}
+.statusbar .sb-date{{font-family:"IBM Plex Mono",monospace;font-size:14px;color:var(--ink);text-align:center}}
+.statusbar .sb-code{{font-size:12.5px;color:var(--muted)}}
+.statusbar .sb-open{{margin-inline-start:auto;color:var(--accent);font-size:13.5px;font-weight:600;text-decoration:none}}
+.statusbar .sb-open:hover{{border-bottom:1px solid var(--accent)}}
+@media(min-width:901px){{.statusbar{{position:sticky;top:62px;z-index:40}}}}
+/* ── السجل: سنوات ثم أشهر (م-01 ج) ── */
+.registry{{list-style:none;margin:0;padding:0}}
+.yr-item{{border-bottom:1px solid var(--line)}}
+.yr-item:last-child{{border-bottom:0}}
+.yr{{cursor:pointer;padding:11px 2px;font-size:14.5px;font-weight:600;color:var(--ink2);text-align:right}}
+.yr-item.is-empty .yr{{color:var(--muted)}}
+.months{{list-style:none;margin:0 0 10px;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:6px}}
+.months .mo{{display:flex;align-items:center;justify-content:space-between;gap:6px;width:100%;
+background:transparent;border:1px solid var(--line);border-radius:9px;padding:8px 10px;
+color:var(--ink2);font:inherit;font-size:13.5px;cursor:pointer;text-align:right;min-height:40px}}
+.months .mo:hover{{border-color:var(--accent);color:var(--ink)}}
+.months .mo[aria-current="true"]{{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}}
+.months .mo .n{{font-family:"IBM Plex Mono",monospace;font-size:12px;opacity:.85}}
+.months .mo.is-empty{{color:var(--muted);opacity:.55;cursor:default;border-style:dashed}}
+.ar-extra{{display:none}}
+.ar.open .ar-extra{{display:block}}
+.more{{margin-top:12px;background:transparent;border:1px solid var(--line);border-radius:10px;
+color:var(--ink2);font:inherit;font-size:13.5px;padding:9px 14px;cursor:pointer;min-height:40px}}
+.more:hover{{border-color:var(--accent);color:var(--ink)}}
 .hero-card{{display:block;background:linear-gradient(150deg,var(--panel2),var(--panel));border:1px solid var(--line);
 border-radius:14px;padding:22px;color:inherit;margin:0 0 22px}}
 .hc-top{{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}}
@@ -406,18 +625,19 @@ ul.ar{{list-style:none;margin:0;padding:0}}
 .tile b{{display:block;font-size:22px;font-family:"IBM Plex Mono",monospace}}
 .tile span{{color:var(--muted);font-size:13px}}
 .foot-note{{color:var(--muted);font-size:13px;margin:26px 0 0;border-top:1px solid var(--line);padding-top:14px}}
+@media print{{body{{background:#fff;color:#000}}.wrap{{padding:0}}
+.cont,.hero-card .hc-open{{display:none!important}}
+.card,.hero-card,.tile{{border-color:#bbb;background:#fff;break-inside:avoid}}
+.ar-link{{color:#000}}.ar-note,.hc-meta,.tile span{{color:#333}}}}
 </style>
 </head>NF_CSS_PLACEHOLDER<body>
 PREFS_EARLY_PLACEHOLDER
 NAV_PLACEHOLDER
-<div class="wrap" role="main">
+<div class="wrap" role="main" id="main" tabindex="-1">
+  <script type="application/json" id="reports-index">{reports_json}</script>
+  {status_bar}
   <h1>مركز الوعي بالمجال البحري</h1>
-  <p class="lede">منصة دائمة لتقارير أمن الملاحة: إصدار يومي بمؤشراته وخرائطه، ولوحة شهرية مبنية من دفتر أحداث تراكمي، وسجل تاريخي للمقارنة. كل إصدار يفصل الحقيقة عن التقدير ويربط الرقم بجهة قادرة على حسمه.</p>
-
-  <div class="cont" id="cont">
-    <a id="cont-link" href="/">تابع من حيث توقفت ←</a>
-    <span class="ct" id="cont-meta"></span>
-  </div>
+  <p class="lede">إصدار يومي لأمن الملاحة بمؤشراته وخرائطه، ولوحة شهرية مبنية من دفتر أحداث تراكمي، وسجل تاريخي للمقارنة. <a href="/about.html">الوصف الكامل في صفحة «عن المنصة»</a>.</p>
 
   {hero_card}
 
@@ -425,52 +645,25 @@ NAV_PLACEHOLDER
     <div class="tile"><b>{len(reports)}</b><span>إصدار يومي منشور</span></div>
     <div class="tile"><b>{ledger_total or "—"}</b><span>سجل في الدفتر التراكمي</span></div>
     <div class="tile"><b>{approved_source_count()}</b><span>مصدرًا معتمدًا في السجل</span></div>
-    <div class="tile"><b>07:00</b><span>توقيت الإصدار اليومي (البحرين)</span></div>
+    <div class="tile"><b>{month_events or "—"}</b><span>واقعة مصنّفة في الشهر الجاري</span></div>
   </div>
 
   <div class="grid">
-    <section class="card" id="archive">
-      <h3>أرشيف الإصدارات</h3>
-      <p class="hint">كل إصدار متاح بالرابط الخاص به، ومفتاح اللون يبيّن مستوى التهديد المسجل في أهم الأخبار المتعلقة بالأمن البحري.</p>
-      <ul class="ar">{rows}</ul>
+    <section class="card" id="month-card">
+      <h3 id="month-title">{month_label}</h3>
+      <p class="hint">إصدارات الشهر المختار. آخر ثمانية إصدارات افتراضيًا، وزر العرض يُظهر الشهر كاملًا. مفتاح اللون يبيّن مستوى التهديد المسجل في أهم الأخبار المتعلقة بالأمن البحري.</p>
+      <ul class="ar" id="month-rows">{month_rows}</ul>
+      <button type="button" class="more" id="show-all"{"" if month_has_more else " hidden"}>عرض كل إصدارات الشهر</button>
     </section>
-    <div>
-      <section class="card" style="margin-bottom:22px">
-        <h3>تفضيلات القراءة</h3>
-        <p class="hint">تُحفظ في متصفحك وتُطبَّق تلقائيًا في الزيارة القادمة، بلا حساب ولا تسجيل.</p>
-        <div class="pref-row"><span>مظهر الصفحة</span>
-          <div class="seg" id="p-theme">
-            <button type="button" data-theme="dark">ليلي</button>
-            <button type="button" data-theme="light">نهاري</button>
-          </div>
-        </div>
-        <div class="pref-row"><span>حجم الخط</span>
-          <div class="seg">
-            <button type="button" data-scale="1">أ</button>
-            <button type="button" data-scale="1.12">أ+</button>
-            <button type="button" data-scale="1.25">أ++</button>
-          </div>
-        </div>
-        <div class="pref-row"><span>تذكّر آخر تقرير فتحته</span>
-          <div class="seg"><button type="button" id="p-clear">مسح التفضيلات</button></div>
-        </div>
-      </section>
-      <section class="card">
-        <h3>صفحات مرجعية</h3>
-        <p class="hint">مبنية من دفتر الأحداث نفسه، لا من تقديرات منفصلة.</p>
-        <ul class="ar">
-          <li class="ar-row"><a class="ar-link" href="/reports/monthly-2026-10.html">
-            <span class="ar-date">اللوحة الشهرية</span><span class="ar-risk">مؤشرات</span>
-            <span class="ar-note">سجلات بحسب الشهر والتوزيع الجغرافي والتصنيف ودرجة الثقة</span></a></li>
-          <li class="ar-row"><a class="ar-link" href="/reports/cumulative-2026.html">
-            <span class="ar-date">السجل التراكمي</span><span class="ar-risk">مرجع</span>
-            <span class="ar-note">28 فبراير – 11 أكتوبر 2026 بحسب أقسام التقرير اليومي</span></a></li>
-        </ul>
+    <div class="side">
+      <section class="card" id="archive">
+        <h3>السجل</h3>
+        <p class="hint">اختر السنة ثم الشهر. الأشهر الباهتة بلا إصدارات، والقائمة تُبنى آليًا من الإصدارات المنشورة.</p>
+        {registry_html}
       </section>
     </div>
   </div>
 
-  <p class="foot-note">تصنيف الإصدار: عام · لا تُنشر الإصدارات المقيّدة أو الحساسة على هذا الموقع · المصادر الرسمية: بلاغ من · UKMTO — بمنتجاتها: البلاغات والتحذيرات والتنبيهات الإرشادية والتقارير الأسبوعية — وبلاغ من · IMO.</p>
 </div>
 NOTFOUND_PLACEHOLDER
 FOOT_PLACEHOLDER
@@ -505,24 +698,39 @@ document.querySelectorAll('[data-scale]').forEach(function(b){{
     document.body.style.zoom=(s===1?'':s); paintScale();
   }});
 }});
-var clear=document.getElementById('p-clear');
-if(clear) clear.addEventListener('click',function(){{
-  try{{LS.removeItem('mn-theme');LS.removeItem('mn-scale');LS.removeItem('mn-last');}}catch(e){{}}
-  document.body.classList.remove('daylight'); document.body.style.zoom='';
-  paintTheme(); paintScale(); document.getElementById('cont').classList.remove('on');
-}});
 paintTheme(); paintScale();
-var last=get('mn-last','');
-if(last){{
-  try{{
-    var o=JSON.parse(last);
-    if(o&&o.path){{
-      document.getElementById('cont-link').setAttribute('href',o.path);
-      document.getElementById('cont-meta').textContent=(o.title||'')+' · آخر فتح '+(o.at||'').slice(0,10);
-      document.getElementById('cont').classList.add('on');
-    }}
-  }}catch(e){{}}
+/* ── السجل: تبديل الشهر داخل الصفحة بلا إعادة تحميل (م-01 د) ── */
+var AR_M=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+var IDX=[];
+try{{IDX=JSON.parse(document.getElementById('reports-index').textContent)||[];}}catch(e){{IDX=[];}}
+function monthLabel(k){{var p=k.split('-');return AR_M[parseInt(p[1],10)-1]+' '+p[0];}}
+function rowHtml(o,extra){{
+  return '<li class="ar-row'+(extra?' ar-extra':'')+'"><a class="ar-link" href="/reports/'+o.d+'.html">'
+    +'<span class="ar-date">'+o.l+'</span>'
+    +'<span class="ar-risk rk-'+o.k+'">'+o.r+'</span>'
+    +'<span class="ar-note">'+o.s+'</span></a></li>';
 }}
+function renderMonth(k){{
+  var list=document.getElementById('month-rows'), t=document.getElementById('month-title'),
+      more=document.getElementById('show-all');
+  if(!list) return;
+  var items=IDX.filter(function(o){{return o.d.slice(0,7)===k;}});
+  list.classList.remove('open');
+  list.innerHTML=items.length?items.map(function(o,i){{return rowHtml(o,i>=8);}}).join('')
+                              :'<li class="ar-empty">لا توجد تقارير في هذا الشهر.</li>';
+  if(t) t.textContent=monthLabel(k);
+  if(more) more.hidden=items.length<=8;
+  document.querySelectorAll('.mo[data-month]').forEach(function(b){{
+    b.setAttribute('aria-current', b.getAttribute('data-month')===k ? 'true' : 'false');
+  }});
+}}
+document.querySelectorAll('.mo[data-month]').forEach(function(b){{
+  b.addEventListener('click',function(){{renderMonth(b.getAttribute('data-month'));}});
+}});
+var more=document.getElementById('show-all');
+if(more) more.addEventListener('click',function(){{
+  document.getElementById('month-rows').classList.add('open'); more.hidden=true;
+}});
 }})();
 </script>
 MOBILE_NAV_JS_PLACEHOLDER
@@ -558,6 +766,28 @@ def ledger_count(dist: Path) -> int:
         d = json.loads(f.read_text(encoding="utf-8"))
         ev = d.get("events") if isinstance(d, dict) else d
         return len(ev) if isinstance(ev, list) else 0
+    except Exception:
+        return 0
+
+
+def ledger_month_count(dist: Path, month: str) -> int:
+    """عدد الوقائع المصنّفة في الشهر الجاري من دفتر الأحداث (البطاقة الرابعة)."""
+    if not month:
+        return 0
+    f = dist.parent / "sources" / "ledger.json"
+    try:
+        d = json.loads(f.read_text(encoding="utf-8"))
+        ev = d.get("events") if isinstance(d, dict) else d
+        if not isinstance(ev, list):
+            return 0
+        n = 0
+        for e in ev:
+            if not isinstance(e, dict):
+                continue
+            ds = str(e.get("date") or e.get("iso") or e.get("event_date") or "")[:7]
+            if ds == month:
+                n += 1
+        return n
     except Exception:
         return 0
 
@@ -617,6 +847,7 @@ def build_routes(dist: Path, reports):
     routes.append({"path": "/reports/cumulative-2026.html", "title": "السجل التراكمي"})
     routes.append({"path": "/sources.html", "title": "المصادر والمراجع"})
     routes.append({"path": "/additions.html", "title": "إضافات"})
+    routes.append({"path": "/about.html", "title": "عن المنصة"})
     (dist / "manus-routes.json").write_text(
         json.dumps({"routes": routes}, ensure_ascii=False, indent=1), encoding="utf-8")
     return len(routes)
@@ -638,7 +869,7 @@ def notfound_panel(reports, visible: bool = False) -> str:
     ks = known_paths(reports)
     names = {"/": "الرئيسية والأرشيف", "/reports/cumulative-2026.html": "السجل التراكمي",
              "/reports/monthly-2026-10.html": "اللوحة الشهرية", "/sources.html": "المصادر والمراجع",
-             "/additions.html": "إضافات"}
+             "/additions.html": "إضافات", "/about.html": "عن المنصة"}
     names.update({f"/reports/{r['iso']}.html": f"التقرير اليومي — {r['label']}" for r in reports})
     items = "".join(f'<li><a href="{k}"><span class="nf-t">{esc(names.get(k, k))}</span>'
                     f'<span class="nf-p">{k}</span></a></li>' for k in ks)
@@ -699,10 +930,80 @@ def build_robots(dist: Path) -> None:
 
 def build_notfound(dist: Path, reports) -> None:
     html = build_index(dist, reports, notfound=True).replace(
-        '<div class="wrap" role="main">', '<div class="wrap" role="main" hidden>', 1).replace(
+        '<div class="wrap" role="main" id="main" tabindex="-1">', '<div class="wrap" role="main" id="main" tabindex="-1" hidden>', 1).replace(
         "<title>مركز الوعي بالمجال البحري — تقارير أمن الملاحة</title>",
         "<title>الصفحة غير موجودة — مركز الوعي بالمجال البحري</title>")
     (dist / "404.html").write_text(html, encoding="utf-8")
+
+
+ARCHIVE_INDEX_STYLE = """
+  :root{--bg:#050a12;--panel:#0c1626;--line:#1c2c47;--tx:#e8eef7;--mut:#9fb2cc;--acc:#4cc3ff}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,"Segoe UI",Tahoma,sans-serif;line-height:1.7}
+  .wrap{max-width:960px;margin:0 auto;padding:28px 18px 64px}
+  h1{font-size:1.5rem;margin:0 0 6px}
+  .sub{color:var(--mut);font-size:.95rem;margin:0 0 22px}
+  ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+  li a{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:baseline;
+       text-decoration:none;color:inherit;background:var(--panel);border:1px solid var(--line);
+       border-radius:12px;padding:12px 14px}
+  li a:hover{border-color:var(--acc)}
+  .d{color:var(--mut);font-variant-numeric:tabular-nums;font-size:.92rem}
+  .t{font-size:1rem}
+  .back{display:inline-block;margin-top:26px;color:var(--acc);text-decoration:none}
+  @media(max-width:520px){li a{grid-template-columns:1fr}.d{font-size:.85rem}}
+"""
+
+
+def _site_nav(dist: Path) -> str:
+    """ترويسة الموقع نفسها من الصفحة الرئيسية المبنية — لا نسخة موازية تتباعد مع الوقت."""
+    home = dist / "index.html"
+    if home.is_file():
+        m = re.search(r"<header\b[^>]*>.*?</header>", home.read_text(encoding="utf-8"), re.S)
+        if m and "site-nav" in m.group(0):
+            return m.group(0)
+    return ('<nav class="site-nav" aria-label="التنقل"><a href="/">الرئيسية</a>'
+            '<a href="/reports/">الأرشيف</a><a href="/sources.html">المصادر</a>'
+            '<a href="/additions.html">الإضافات</a></nav>')
+
+
+def build_reports_index(dist: Path, reports) -> int:
+    """فهرس مسار /reports/ — يمنع 404 على مسار الأرشيف ويسرد كل الإصدارات المنشورة."""
+    rows = []
+    for r in reports:
+        iso = r["iso"]
+        meta = r.get("meta") or {}
+        title = esc(daily_headline(meta) or "إصدار يومي")
+        rows.append(f'<li><a href="/reports/{iso}.html">'
+                    f'<span class="d">{ar_date(iso)}</span>'
+                    f'<span class="t">{title}</span></a></li>')
+    html = f"""<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>أرشيف الإصدارات اليومية — مركز الوعي بالمجال البحري</title>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<link rel="stylesheet" href="{build_report.FONT_LINK}">
+<style>{ARCHIVE_INDEX_STYLE}</style>
+</head>
+<body>
+{_site_nav(dist)}
+<div class="wrap">
+  <h1>أرشيف الإصدارات اليومية</h1>
+  <p class="sub">{len(rows)} إصدارًا منشورًا · الأحدث أولًا بحسب ترتيب السجل</p>
+  <ul>
+{chr(10).join(rows)}
+  </ul>
+  <a class="back" href="/">العودة إلى الصفحة الرئيسية ←</a>
+</div>
+</body>
+</html>
+"""
+    (dist / "reports").mkdir(parents=True, exist_ok=True)
+    (dist / "reports" / "index.html").write_text(html, encoding="utf-8")
+    return len(rows)
 
 
 def main():
@@ -716,8 +1017,17 @@ def main():
     site_root = Path(a.site_root).resolve()
     dist = site_root / "dist"
     (dist / "reports").mkdir(parents=True, exist_ok=True)
-
     warnings = []
+    # ── أصول الهوية (م-28): الشعار والأيقونات وصورة المشاركة ──
+    (dist / "assets").mkdir(parents=True, exist_ok=True)
+    for _a in ("logo-official.png", "logo-header.png", "icon-32.png", "icon-180.png",
+               "icon-512.png", "og-1200x630.png"):
+        _src = site_root / "assets" / _a
+        if _src.is_file():
+            shutil.copy2(_src, dist / "assets" / _a)
+        else:
+            warnings.append(f"أصل هوية مفقود: {_a}")
+
     reports, w = discover(site_root)
     warnings += w
     if not a.allow_restricted:
@@ -740,8 +1050,10 @@ def main():
     except Exception as e:
         CRITICAL_FAIL.append(f"صفحة المصادر والمراجع: {e}")
         warnings.append(f"تعذّر بناء صفحة المصادر والمراجع: {e}")
+    n_about = build_about(site_root, dist, warnings)
     n_add = build_additions(site_root, dist, reports, warnings)  # ك-227: يحتاج سجل الإصدار الأم (meta+md) لا قائمة البناء
     (dist / "index.html").write_text(build_index(dist, built), encoding="utf-8")
+    n_archive = build_reports_index(dist, built)
     (dist / "favicon.svg").write_text(FAVICON, encoding="utf-8")
     n_feed = build_feed(dist, built)
     n_routes = build_routes(dist, built)
@@ -772,7 +1084,8 @@ def main():
 
     print(f"الرئيسية: {len(built)} إصدار · السجل التراكمي: {'نعم' if cum else 'لا'} · "
           f"اللوحة الشهرية: {'نعم' if mon else 'لا'} · المسارات: {n_routes} · التغذية: {n_feed} · "
-          f"خريطة الموقع: {n_sitemap} · robots: نعم · 404: نعم · التقارير الخاصة: {n_sp_items}")
+          f"خريطة الموقع: {n_sitemap} · robots: نعم · 404: نعم · التقارير الخاصة: {n_sp_items} · "
+          f"فهرس الأرشيف: {n_archive}")
     for w_ in warnings:
         print(f"تنبيه: {w_}")
 
