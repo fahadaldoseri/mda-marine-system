@@ -238,9 +238,7 @@
         "source": {
           "kind": "meta_path",
           "path": [
-            "indicators",
-            0,
-            "current"
+            "event_count"
           ]
         },
         "presentation": {
@@ -251,8 +249,8 @@
           }
         },
         "detail": {
-          "ar": "داخل فترة التقرير",
-          "en": "Within the report period"
+          "ar": "201-26: Attack · 202-26: تحذير عن نشاط مشبوه؛ داخل فترة التقرير",
+          "en": "201-26: classified as an attack · 202-26: warning of suspicious activity; during the reporting period"
         },
         "layers": {
           "cumulative": {
@@ -308,8 +306,8 @@
         "row": 1,
         "title": "روايات لم تتأكد",
         "title_en": "Unconfirmed accounts",
-        "tag": "تُذكر ولا تُحتسب",
-        "tag_en": "Mentioned but not counted",
+        "tag": "التأهل للمعيار لا يعني الإثبات",
+        "tag_en": "Meeting the counting criterion does not establish confirmation",
         "source_label": "web/zones/{date}.json · counter",
         "source": {
           "kind": "zones_counter",
@@ -324,7 +322,7 @@
         },
         "detail": {
           "kind": "unconfirmed_split",
-          "en": "3 narratives · 2 qualifying · mentioned but not counted"
+          "en": "2 accounts · 1 meets the counting criterion · none is confirmed"
         },
         "number_format": {
           "singular": "رواية",
@@ -354,8 +352,8 @@
         "row": 1,
         "title": "وقائع مثبتة",
         "title_en": "Confirmed incidents",
-        "tag": "Z2–Z4",
-        "tag_en": "Z2–Z4",
+        "tag": "Z2 · Z3 · Z4",
+        "tag_en": "Z2 · Z3 · Z4",
         "source_label": "web/zones/{date}.json · Z2–Z4",
         "source": {
           "kind": "zones_sum",
@@ -370,12 +368,12 @@
           "label": "contract_title",
           "note": "scoped_value_with_source_date",
           "accent_rule": {
-            "kind": "positive_danger"
+            "kind": "neutral_info"
           }
         },
         "detail": {
-          "ar": "يظهر الصفر دائمًا",
-          "en": "Zero remains visible"
+          "ar": "لا توجد وقائع مثبتة في هذه القطاعات خلال الفترة",
+          "en": "No confirmed incidents were recorded in these sectors during the reporting period"
         }
       },
       {
@@ -400,8 +398,8 @@
           }
         },
         "detail": {
-          "ar": "عدد اليوم = فرق آخر تحديث رسمي",
-          "en": "Today = difference in the latest official update"
+          "ar": "لا زيادة بين التحديثين؛ الإجمالي 128 حادثة مؤكدة حتى 03/11/2026",
+          "en": "No increase between updates; 128 confirmed incidents in total as of 03/11/2026"
         },
         "layers": {
           "cumulative": {
@@ -419,8 +417,8 @@
       {
         "id": "imo-seafarer-deaths",
         "row": 2,
-        "title": "أعداد الوفيات من IMO",
-        "title_en": "IMO seafarer fatalities",
+        "title": "وفيات البحّارة لدى IMO",
+        "title_en": "Seafarer deaths recorded by IMO",
         "tag": "بطاقة دائمة",
         "tag_en": "Permanent card",
         "source_label": "appendices/imo-incidents.json + https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
@@ -438,8 +436,8 @@
           }
         },
         "detail": {
-          "ar": "عدد اليوم = فرق آخر تحديث رسمي",
-          "en": "Today = difference in the latest official update"
+          "ar": "لا زيادة بين التحديثين؛ الإجمالي 24 وفاة بحّار مؤكدة حتى 03/11/2026",
+          "en": "No increase between updates; 24 confirmed seafarer deaths in total as of 03/11/2026"
         },
         "layers": {
           "cumulative": {

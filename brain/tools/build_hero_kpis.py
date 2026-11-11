@@ -61,17 +61,38 @@ def hero_value(meta: dict, zones: dict, card: dict, kpis: dict):
     return None
 
 
-def hero_detail(meta: dict, zones: dict, card: dict) -> str:
+def hero_detail(meta: dict, zones: dict, card: dict, kpis: dict | None = None) -> str:
     detail = card.get("detail") or {}
     counter = zones.get("counter") or {}
+    cid = str(card.get("id") or "")
+    if cid in {"imo-confirmed-incidents", "imo-seafarer-deaths"}:
+        today = metric(kpis or {}, cid, "today")
+        cumulative = metric(kpis or {}, cid, "cumulative")
+        updated = _display_date(metric(kpis or {}, cid, "updated"))
+        try:
+            change_count = int(today)
+            total = int(cumulative)
+        except (TypeError, ValueError):
+            return ""
+        if not updated:
+            return ""
+        if change_count == 0:
+            change = "لا زيادة بين التحديثين"
+        elif change_count > 0:
+            change = f"زيادة {change_count} بين التحديثين"
+        else:
+            change = f"انخفاض {abs(change_count)} بين التحديثين"
+        unit = "حادثة مؤكدة" if cid == "imo-confirmed-incidents" else "وفاة بحّار مؤكدة"
+        return f"{change}؛ الإجمالي {total} {unit} حتى {updated}"
     if detail.get("kind") == "qualifying_composition":
         return (f"{counter.get('confirmed') or 0} مؤكدة + {counter.get('probable') or 0} مرجّحة + "
                 f"{counter.get('unconfirmed_qualifying') or 0} غير مؤكدة مؤهلة")
     if detail.get("kind") == "unconfirmed_split":
         total = counter.get("unconfirmed_total") or 0
         count = int(total)
+        qualifying = counter.get("unconfirmed_qualifying") or 0
         return (f"{format_arabic_count(count, card.get('number_format'))} · منها "
-                f"{counter.get('unconfirmed_qualifying') or 0} مؤهلة · تُذكر ولا تُحتسب")
+                f"{qualifying} مستوفية لمعيار الاحتساب · لم تثبت أيٌّ منها")
     if detail.get("kind") == "fire_split":
         fire = (meta.get("hero_sources") or {}).get("fire") or {}
         return (f"المؤكد: {fire.get('confirmed') or 0} · المرجّح: {fire.get('probable') or 0} · "
@@ -102,7 +123,7 @@ def hero_note(meta: dict, zones: dict, card: dict, kpis: dict, value) -> str:
     """ينشئ ملاحظة قابلة للتدقيق من التفصيل المشتق وتاريخ المصدر."""
     presentation = card.get("presentation") or {}
     kind = presentation.get("note")
-    detail = hero_detail(meta, zones, card)
+    detail = hero_detail(meta, zones, card, kpis)
     if kind == "scoped_value_with_source_date":
         tag = str(card.get("tag") or "").strip() or "النطاق المسجل"
         detail = f"{value} وقائع مثبتة في {tag} خلال فترة التقرير"
@@ -119,7 +140,9 @@ def hero_accent(zones: dict, card: dict, allowed: set[str]) -> str:
     rule = (card.get("presentation") or {}).get("accent_rule") or {}
     kind = rule.get("kind")
     counter = zones.get("counter") or {}
-    if kind == "explicit":
+    if kind == "neutral_info":
+        value = "info"
+    elif kind == "explicit":
         value = str(rule.get("value") or "")
     elif kind == "unconfirmed_or_probable_warn":
         value = "warn" if any(int(counter.get(key) or 0) > 0 for key in ("unconfirmed_qualifying", "probable")) else "ok"
@@ -256,16 +279,16 @@ def build(meta: dict, zones: dict, registry: dict, kpis: dict) -> list[dict]:
         card["source"] = item.get("source_label")
         value = hero_value(meta, zones, item, kpis)
         card["value"] = "" if value is None else str(value)
-        card["detail"] = hero_detail(meta, zones, item)
-        if not str(card.get("label") or "").strip():
+        card["detail"] = hero_detail(meta, zones, item, kpis)
+        previous_title = str((previous.get(cid) or {}).get("title") or "").strip()
+        existing_label = str(card.get("label") or "").strip()
+        if not existing_label or existing_label == previous_title:
             card["label"] = item.get("title") or ""
         if not str(card.get("note") or "").strip():
             card["note"] = hero_note(meta, zones, item, kpis, value)
-        existing_accent = str(card.get("accent") or "").strip()
-        if existing_accent not in allowed:
-            contract_card = dict(item)
-            contract_card["_derived_value"] = value
-            card["accent"] = hero_accent(zones, contract_card, allowed)
+        contract_card = dict(item)
+        contract_card["_derived_value"] = value
+        card["accent"] = hero_accent(zones, contract_card, allowed)
         source = item.get("source") or {}
         if source.get("kind") == "kpis_totals":
             metric_id = str(source.get("id") or "")

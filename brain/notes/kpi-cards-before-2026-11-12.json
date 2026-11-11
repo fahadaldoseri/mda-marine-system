@@ -1,0 +1,73 @@
+{
+ "date": "2026-11-11",
+ "ts": "2026-11-11 23:21",
+ "cards": [
+  {
+   "accent": "warn",
+   "label": "المواد الرسمية الظاهرة في الفترة",
+   "value": "بلاغ 201-26 مصنف Attack، وتحذير 202-26 عن نشاط مشبوه",
+   "detail": "داخل فترة التقرير",
+   "tag": "Z1"
+  },
+  {
+   "accent": "warn",
+   "label": "وقائع مستوفية لمعيار الاحتساب",
+   "value": "1",
+   "detail": "0 مؤكدة + 0 مرجّحة + 1 غير مؤكدة مؤهلة",
+   "tag": ""
+  },
+  {
+   "accent": "ok",
+   "label": "روايات لم تتأكد",
+   "value": "2",
+   "detail": "2 روايتان · منها 1 مؤهلة · تُذكر ولا تُحتسب",
+   "tag": "تُذكر ولا تُحتسب"
+  },
+  {
+   "accent": "ok",
+   "label": "وقائع مثبتة خارج Z1",
+   "value": "0",
+   "detail": "يظهر الصفر دائمًا",
+   "tag": "Z2–Z4"
+  },
+  {
+   "accent": "info",
+   "label": "سجل الحوادث المؤكدة من IMO",
+   "value": "0",
+   "detail": "عدد اليوم = فرق آخر تحديث رسمي",
+   "tag": "بطاقة دائمة"
+  },
+  {
+   "accent": "info",
+   "label": "أعداد الوفيات من IMO",
+   "value": "0",
+   "detail": "عدد اليوم = فرق آخر تحديث رسمي",
+   "tag": "بطاقة دائمة"
+  }
+ ],
+ "css": {
+  "sc-kpis": "display:contents",
+  "sc-kpi-row-1": "grid-template-columns:repeat(4,minmax(0,1fr))",
+  "sc-kpi-row-2": "grid-template-columns:repeat(4,minmax(0,1fr))",
+  "sc-kpi": "display:contents",
+  "sc-kl": "font-size:14px;color:var(--muted);line-height:1.6",
+  "sc-kv": "font-family:\"IBM Plex Mono\",monospace;font-weight:600;font-size:26px;line-height:1.3;text-align:right;direction:rtl",
+  "sc-kn": "font-size:13px;color:var(--muted);line-height:1.7;margin-top:3px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;flex:0 0 auto",
+  "sc-k-tag": "display:inline-block;margin-inline-start:6px;padding:1px 7px;border:1px solid var(--line-2);border-radius:999px;color:var(--ink-2);font-size:12px;line-height:1.4;white-space:nowrap",
+  "sc-kpi-tag": null
+ },
+ "legend_present": false,
+ "silent_fallback_ok": true,
+ "print_kpi_rules": [
+  ".masthead,.decision,.kpis{display:none}"
+ ],
+ "built_ukmto_value": true,
+ "built_imo_detail_count": 4,
+ "built_tag_daima": 4,
+ "built_accent_classes": {
+  "warn": 6,
+  "ok": 6,
+  "info": 6,
+  "danger": 2
+ }
+}
