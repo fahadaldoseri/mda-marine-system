@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -39,7 +40,8 @@ def approved_count() -> int:
 def feeds_state(date: str) -> dict:
     p = B / "feeds" / f"feeds-{date}.status.json"
     if not p.exists():
-        return {"checked": 0, "ok": 0, "failed": 0, "reasons": {}, "failed_names": [], "present": False}
+        return {"checked": 0, "ok": 0, "failed": 0, "items": 0,
+                "reasons": {}, "failed_names": [], "present": False}
     d = json.loads(p.read_text(encoding="utf-8"))
     failed = d.get("failed_feeds") or []
     failed_n = d.get("failed") if isinstance(d.get("failed"), int) else len(failed)
@@ -53,7 +55,7 @@ def feeds_state(date: str) -> dict:
         reasons.setdefault(reason, []).append(name)
         names.append(name)
     return {"checked": int(d.get("checked") or 0), "ok": int(d.get("ok") or 0),
-            "failed": failed_n, "manual_reference": manual,
+            "failed": failed_n, "items": int(d.get("items") or 0), "manual_reference": manual,
             "manual_reference_present": manual_present,
             "reasons": reasons, "failed_names": names, "present": True}
 
@@ -62,6 +64,7 @@ def counts(date: str) -> dict:
     fs = feeds_state(date)
     manual = fs.get("manual_reference") or []
     return {"date": date, "approved": approved_count(), "checked": fs["checked"], "ok": fs["ok"],
+            "items": fs.get("items", 0),
             "failed": fs["failed"], "manual_reference": manual,
             "manual_reference_present": fs.get("manual_reference_present", False),
             "manual_reference_count": len(manual), "failed_names": fs["failed_names"],
@@ -123,6 +126,84 @@ def line_ar(c: dict) -> str:
 
 def report_path(date: str) -> Path:
     return B / "reports" / f"{date}-sectioned.md"
+
+
+def feed_totals(date: str, c: dict, language: str) -> str:
+    """جملة إجمالي التغذيات والعناصر مشتقة من ملف الحالة، لا من نص يدوي."""
+    items = int(c["items"]) if "items" in c else int(feeds_state(date).get("items") or 0)
+    manual = int(c.get("manual_reference_count") or len(c.get("manual_reference") or []))
+    if language == "ar":
+        return (f"المصادر المعتمدة {c['approved']}؛ فُحصت {c['checked']} تغذية، ونجحت {c['ok']}، "
+                f"وتعذّر {c['failed']}، ومجموع العناصر المقروءة {items}؛ والمرجعية اليدوية {manual}.")
+    if language == "en":
+        return (f"Approved sources: {c['approved']}; {c['checked']} feeds were checked, "
+                f"{c['ok']} succeeded, {c['failed']} failed, and {items} items were read; "
+                f"{manual} under manual review.")
+    raise ValueError(f"لغة إجمالي غير معتمدة: {language}")
+
+
+def english_master_path(date: str) -> Path:
+    """أصل الإنجليزية في المستودع أولًا؛ وجهة SITE_DIR بديل لعقود الاختبار المؤقتة فقط."""
+    rel = Path("sources") / "i18n" / "en" / f"{date}-sectioned.en.md"
+    candidates = [B.parent / "site", Path(os.environ["SITE_DIR"]) if os.environ.get("SITE_DIR") else None]
+    roots = [root for root in candidates if root is not None]
+    for root in roots:
+        candidate = root / rel
+        if candidate.is_file():
+            return candidate
+    return (roots[0] if roots else B.parent / "site") / rel
+
+
+def _rewrite_feed_totals(text: str, date: str, c: dict, language: str) -> str:
+    """يستبدل جمل الإجمالي القديمة فقط ويحافظ على بقية الجمل والمحتوى."""
+    replacement = feed_totals(date, c, language)
+    rewritten: list[str] = []
+    for line in text.splitlines(keepends=True):
+        ending = "\n" if line.endswith("\n") else ""
+        body = line[:-1] if ending else line
+        sentences = re.split(r"(?<=\.)\s+", body)
+        for index, sentence in enumerate(sentences):
+            lower = sentence.lower()
+            if language == "ar":
+                has_source = bool(re.search(r"تغذي|مصدر", sentence))
+                has_checked = bool(re.search(r"فُ?حصت?", sentence))
+                has_result = bool(re.search(r"نجحت|فشلت|تعذّر|تعذر", sentence))
+            else:
+                has_source = bool(re.search(r"feeds?|sources?", lower))
+                has_checked = "checked" in lower
+                has_result = bool(re.search(r"succeeded|failed", lower))
+            if has_source and has_checked and has_result:
+                bullet = re.match(r"^(\s*(?:[-*]\s+)?)", sentence)
+                prefix = bullet.group(1) if bullet else ""
+                sentences[index] = prefix + replacement
+        rewritten.append(" ".join(sentences) + ending)
+    text = "".join(rewritten)
+
+    items = int(c["items"]) if "items" in c else int(feeds_state(date).get("items") or 0)
+    if language == "ar":
+        text = re.sub(r"(مجموع العناصر(?: المقروءة)?\s+)\d+(\s+عنصرًا)",
+                      lambda m: f"{m.group(1)}{items}{m.group(2)}", text)
+    else:
+        text = re.sub(r"(\bTotal items read:\s*)\d+", lambda m: f"{m.group(1)}{items}", text,
+                      flags=re.IGNORECASE)
+        text = re.sub(r"(\btotal number of items was\s*)\d+",
+                      lambda m: f"{m.group(1)}{items}", text, flags=re.IGNORECASE)
+    return text
+
+
+def sync_feed_totals(date: str, c: dict) -> list[str]:
+    """يحدّث الإجمالي اليدوي في التقرير والأصل الإنجليزي الموجودين؛ لا يكتب إلى feeds/."""
+    targets = [(report_path(date), "ar"), (english_master_path(date), "en")]
+    touched: list[str] = []
+    for path, language in targets:
+        if not path.is_file():
+            continue
+        before = path.read_text(encoding="utf-8")
+        after = _rewrite_feed_totals(before, date, c, language)
+        if after != before:
+            path.write_text(after, encoding="utf-8")
+            touched.append(str(path))
+    return touched
 
 
 def ledger_events_line(date: str) -> str:
@@ -268,30 +349,42 @@ def check(date: str, c: dict) -> list[str]:
         bad.append(f"قائمة المرجعية اليدوية في ملف الحالة {len(c.get('manual_reference') or [])} "
                    f"تخالف إعلان القنوات {len(ch['manual'])} — أعد تشغيل فحص التغذيات")
     md = report_path(date)
+    state = feeds_state(date)
+    items = int(c["items"]) if "items" in c else int(state.get("items") or 0)
+    has_feed_state = bool(c.get("feeds_status_file", state.get("present")))
     if md.exists() and line_ar(c).split("·")[0].strip() not in md.read_text(encoding="utf-8"):
         bad.append(f"متن التقرير لا يحمل سطر الأرقام المعتمد: {line_ar(c)}")
     # كل جملة إجمالي داخل المتن تحمل الأرقام المعتمدة — لا موضع بلا رقابة
     # (عطل 2026-11-10: جملة الإفصاح في المتن بقيت على 51/9/1875 بينما الحالة 59/1/1851)
     if md.exists():
         text = md.read_text(encoding="utf-8")
-        items = 0
-        sp = B / "feeds" / f"{date}.status.json"
-        if sp.exists():
-            try:
-                items = int(json.loads(sp.read_text(encoding="utf-8")).get("items") or 0)
-            except (OSError, ValueError, json.JSONDecodeError):
-                items = 0
         pairs = [(r"نجحت\s+(\d+)", c["ok"], "نجحت"),
-                 (r"(\d+)\s*متعذّر", c["failed"], "متعذّر")]
-        if items:
+                 (r"(\d+)\s*متعذّر", c["failed"], "متعذّر"),
+                 (r"(\d+)\s*متعذر", c["failed"], "متعذّر")]
+        if has_feed_state:
             pairs.append((r"مجموع العناصر(?:\s+المقروءة)?\s+(\d+)", items, "مجموع العناصر"))
         for pat, want, label in pairs:
             for found in re.findall(pat, text):
                 if int(found) != int(want):
-                    bad.append(f"جملة إجمالي في المتن تحمل رقمًا قديمًا: «{label} {found}» "
+                    bad.append(f"جملة إجمالي الفحص في المتن تحمل رقمًا قديمًا: «{label} {found}» "
                                f"والمعتمد {want} — أعد توليد الأرقام")
         if re.search(r"فشلت\s+\d+", text):
             bad.append("المتن يستعمل «فشلت» بدل المصطلح المعتمد «متعذّر» في جملة إجمالي")
+    en = english_master_path(date)
+    if has_feed_state and en.is_file():
+        text_en = en.read_text(encoding="utf-8")
+        en_pairs = [
+            (r"\b(\d+)\s+(?:feeds?|sources?)\s+were\s+checked\b", c["checked"], "checked"),
+            (r"\b(\d+)\s+succeeded\b", c["ok"], "succeeded"),
+            (r"\b(\d+)\s+failed\b", c["failed"], "failed"),
+            (r"\bTotal items read:\s*(\d+)", items, "items read"),
+            (r"\btotal number of items was\s*(\d+)", items, "items read"),
+            (r"\b(\d+)\s+items were read\b", items, "items read"),
+        ]
+        for pat, want, label in en_pairs:
+            for found in re.findall(pat, text_en, flags=re.IGNORECASE):
+                if int(found) != int(want):
+                    bad.append(f"جملة إجمالي الفحص بالنسخة الإنجليزية تحمل {label}={found}؛ المعتمد {want}")
     mp = B / "web" / "meta" / f"{date}.json"
     if mp.exists():
         d = json.loads(mp.read_text(encoding="utf-8"))
@@ -323,8 +416,10 @@ def main() -> int:
     if a.write:
         ok1, m1 = inject(a.date, c)
         ok2, m2 = write_meta(a.date, c)
+        touched = sync_feed_totals(a.date, c)
         print(f"  {'✔' if ok1 else '✘'} متن التقرير: {m1}")
         print(f"  {'✔' if ok2 else '✘'} ملف الواجهة: {m2}")
+        print(f"  ✔ إجماليات المتن/الأصل الإنجليزي من الحالة: {len(touched)} ملفًا محدّثًا")
         print(f"  · {line_ar(c)}")
         return 0 if (ok1 and ok2) else 2
     if a.check:

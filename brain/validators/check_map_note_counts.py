@@ -111,8 +111,19 @@ def main() -> int:
     points = mp.get("points") or []
     note = mp.get("points_note") or ""
     stats = mp.get("points_stats") or {}
-    if not points:
-        problems.append("لا نقاط في ملف الواجهة — لا يمكن التحقق من جملة الحالة")
+    # يوم بلا وقائع مخطّطة: لا جملة حالة تُبنى، وهي محذوفة من الأسطح بقرار المالك.
+    # لا يُخفَّف الفحص: تُشترط إحصاءات صفرية كاملة، ويُمنع ظهور جملة الحالات على السطحين.
+    zero_day = not points
+    if zero_day:
+        nonzero = {
+            k: int(stats.get(k, 0) or 0)
+            for k in list(KEYS) + ["drawn", "events", "with_area", "exact", "approximate", "off_map", "excluded"]
+            if int(stats.get(k, 0) or 0) != 0
+        }
+        if nonzero:
+            problems.append(f"يوم بلا نقاط لكن إحصاءاته غير صفرية: {nonzero}")
+        else:
+            print("  ✔ يوم بلا وقائع مخطّطة (0 نقطة) وإحصاءاته صفرية — الجملة محذوفة بقرار المالك")
     calc = compute(points)
 
     m = None
@@ -145,7 +156,13 @@ def main() -> int:
         html = ar_p.read_text(encoding="utf-8", errors="ignore")
         mm = re.search(r"aria-label=\"([^\"]*الحالات:[^\"]*)\"", html) or re.search(r"الحالات:([^\"<]{10,220})", html)
         if not mm:
-            problems.append("الصفحة العربية: جملة الحالات غير موجودة")
+            if zero_day:
+                ar_ok = True
+                print("  ✔ الصفحة العربية: لا جملة حالات — مطابق ليوم بلا وقائع مخطّطة")
+            else:
+                problems.append("الصفحة العربية: جملة الحالات غير موجودة")
+        elif zero_day:
+            problems.append("الصفحة العربية: ظهرت جملة حالات في يوم بلا وقائع مخطّطة بعد حذفها بقرار المالك")
         else:
             ar_ok = parse_segments(mm.group(1), AR_HINTS, "الصفحة العربية", calc, problems)
     else:
@@ -159,7 +176,13 @@ def main() -> int:
         me = re.search(r"aria-label=\"([^\"]*[Ss]tatus[^\"]*)\"", html) or \
              re.search(r"[Ss]tatuses?:([^\"<]{10,220})", html)
         if not me:
-            problems.append("الصفحة الإنجليزية: جملة الحالات غير موجودة")
+            if zero_day:
+                en_ok = True
+                print("  ✔ الصفحة الإنجليزية: لا جملة حالات — مطابق ليوم بلا وقائع مخطّطة")
+            else:
+                problems.append("الصفحة الإنجليزية: جملة الحالات غير موجودة")
+        elif zero_day:
+            problems.append("الصفحة الإنجليزية: ظهرت جملة حالات في يوم بلا وقائع مخطّطة بعد حذفها بقرار المالك")
         else:
             en_ok = parse_segments(me.group(1), EN_HINTS, "الصفحة الإنجليزية", calc, problems)
     else:

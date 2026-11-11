@@ -147,6 +147,16 @@ def derive_ledger(date: str) -> tuple[str, str, list[str], dict]:
     return status, detail["note"], [] if n else [detail["note"]], detail
 
 
+def derive_sources(date: str) -> dict:
+    """حقول المصادر في علامة pipeline تُشتق عند كل تحديث من الحالة الحاكمة الحالية."""
+    sys.path.insert(0, str(B / "tools"))
+    from source_counts import counts
+    c = counts(date)
+    return {"approved": c["approved"], "checked": c["checked"], "ok": c["ok"],
+            "failed": c["failed"], "failed_names": c["failed_names"],
+            "status_file": f"feeds/feeds-{date}.status.json"}
+
+
 DERIVERS = {"feeds": derive_feeds, "ofac": derive_ofac,
             "originals": derive_originals, "ledger_merge": derive_ledger}
 
@@ -169,8 +179,16 @@ def main() -> int:
         print(f"  ✘ لا علامة تشغيل: {mark_p}")
         return 2
 
-    comps = [a.component] if a.component else list(COMPONENTS)
     stale: list[str] = []
+    derived_sources = derive_sources(a.date)
+    current_sources = mark.get("sources") or {}
+    if a.verify:
+        if any(current_sources.get(key) != value for key, value in derived_sources.items()):
+            stale.append("sources: العلامة لا تطابق أرقام ملف حالة التغذيات الحالي")
+    else:
+        mark["sources"] = derived_sources
+
+    comps = [a.component] if a.component else list(COMPONENTS)
     for c in comps:
         status, note, items, detail = DERIVERS[c](a.date)
         cur = mark.get(c) or {}

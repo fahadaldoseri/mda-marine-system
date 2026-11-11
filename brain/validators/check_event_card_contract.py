@@ -37,7 +37,10 @@ CLASSIFICATION_VALUES = ("بلاغ رسمي", "تقرير مهني", "نقل إ�
                          "رواية غير مؤكدة من طرف واحد", "نفي رسمي", "غير مصنّف", "قيد التثبّت")
 RELIABILITY_VALUES = ("عالية", "متوسطة", "منخفضة", "غير مقيّمة")
 ROW_STATES = ("shown", "hidden-rule-arabic-source", "hidden-rule-no-excerpt",
-              "hidden-rule-no-official-link")
+              "hidden-rule-no-official-link",
+              # ملاحظة المالك 2026-11-02: التوقيت والموقع يُكتبان إن وُجدا،
+              # وإن غاب الموقع يُخفى الصف بهذه الحالة المعلنة (مولّد التقرير، صف 5).
+              "hidden-rule-no-location")
 SHORTLINK_RE = re.compile(r"https?://(?:t\.co|bit\.ly|lnkd\.in|tinyurl\.com|goo\.gl|ow\.ly|"
                           r"buff\.ly|is\.gd|cutt\.ly|rb\.gy)/")
 HASHTAG_RE = re.compile(r"(?<!\w)#[A-Za-z0-9_\u0600-\u06ff]{2,}")
@@ -383,7 +386,20 @@ def main() -> int:
     ar_errors, ar_codes = page_violations(ar_html, "العربية", ar_expected)
     errors.extend(ar_errors)
     records = [row for row in ledger_rows if isinstance(row, dict) and not row.get("no_incident")]
-    if len(ar_codes) != len(records):
+    no_incident_codes = [
+        str(row.get("code") or "").strip()
+        for row in ledger_rows
+        if isinstance(row, dict) and row.get("no_incident")
+    ]
+    if not records and no_incident_codes:
+        # يوم بلا وقائع: الدفتر يعلنها صراحةً (no_incident)، فتُقبل بطاقة «لا وقائع» وحدها
+        # بشرط مطابقة رموزها لسجل الدفتر حرفيًا؛ وأي بطاقة أخرى تبقى مانعة.
+        if ar_codes != no_incident_codes:
+            errors.append(
+                f"العربية: يوم بلا وقائع لكن بطاقات الصفحة {ar_codes} "
+                f"لا تطابق سجل «لا وقائع» {no_incident_codes}"
+            )
+    elif len(ar_codes) != len(records):
         errors.append(f"العربية: عدد البطاقات {len(ar_codes)} لا يساوي وقائع الدفتر {len(records)}")
     expected_codes = [str(row.get("code") or "").strip() for row in records]
     if ar_codes and expected_codes and ar_codes != expected_codes:

@@ -158,6 +158,9 @@ fi
 echo "6) أرقام المصادر الثلاثة (معتمدة · مفحوصة · ناجحة)"
 D=$(basename "$R" | sed 's/-sectioned.md//')
 if [ -n "$D" ] && [ -f "feeds/feeds-$D.status.json" ]; then
+  python3 -m pytest -q tests/test_source_totals_governed.py >"$TMP/source-totals.txt" 2>&1
+  check "$?" "0" "إجماليات المصدر تُشتق وتُحدّث في المتنين العربي والإنجليزي"
+  cat "$TMP/source-totals.txt"
   python3 tools/source_counts.py --date "$D" --write >"$TMP/sc.txt" 2>&1
   check "$?" "0" "كتابة سطر الأرقام في متن التقرير وملف الواجهة"
   python3 tools/source_counts.py --date "$D" --check >"$TMP/scc.txt" 2>&1
@@ -189,9 +192,14 @@ if [ -f "logs/pipeline-${D}.json" ]; then
   else
     python3 tools/write_mark.py --date "$D" --stage final >"$TMP/wm.txt" 2>&1
     check "$?" "70" "رفض كتابة علامة نهائية قبل تشغيل بوابة التسليم"
+    python3 tools/write_mark.py --date "$D" --stage pipeline >"$TMP/wmp.txt" 2>&1
+    check "$?" "0" "اشتقاق علامة مرحلة pipeline من حالة المصادر الحالية قبل البوابة"
   fi
   python3 validators/check_mark_schema.py --date "$D" >"$TMP/cms.txt" 2>&1
   check "$?" "0" "مخطط العلامة مطابق (حقول وأنواع وأرقام)"
+  python3 tests/test_mark_components_bootstrap.py >"$TMP/mcb.txt" 2>&1
+  check "$?" "0" "mark_components يحدّث مصادر علامة قديمة من الحالة الحاكمة"
+  cat "$TMP/mcb.txt"
   python3 -c "
 import json;d=json.load(open('logs/pipeline-${D}.json'))
 print('     الحقول:', len(d), '· نص التقرير موجود:', d.get('report_present_at_pipeline_end'), '· المصادر:', d.get('sources',{}).get('approved'),'/',d.get('sources',{}).get('checked'),'/',d.get('sources',{}).get('ok'))"
@@ -210,8 +218,10 @@ echo "12) قائمة المهارات موحّدة (ك-150): النسخ الاح
 python3 tests/test_backup_skills.py && ok "قائمة المهارات موحّدة" || bad "قائمتا المهارات مختلفتان"
 python3 tests/test_pre_execution_plan_audit_skill_contract.py && ok "عقد مهارة تدقيق الخطة والادعاءات" || bad "عقد مهارة تدقيق الخطة والادعاءات فاشل"
 python3 tests/test_gate_root_fail_closed.py && ok "الفشل المغلق في اشتقاق جذر الموقع" || bad "الفشل المغلق في اشتقاق جذر الموقع لا يعمل"
+python3 tests/test_en_master_build_site_root.py && ok "مسار بناء الإنجليزية موجب وسالب" || bad "مسار بناء الإنجليزية لا يشتق جذر الموقع أو لا يفشل مغلقًا"
+python3 tests/test_en_source_assets.py && ok "عقد الأصل الإنجليزي والمعجم وتسلسل B004/B004A/B005/B009" || bad "عقد الأصل الإنجليزي أو مزامنة الأصول أو ترتيب المنتج/المستهلك فاشل"
 
-# ── مرحلة 24 أكتوبر 2026: أدوات اللغة · المحرّك · التسليم · PDF · البنية على GitHub ─────────────
+# ── مرحلة 24 أكتوبر 2026: أدوات اللغة · المحرّك · التسليم · PDF · البنية على GitHub ─────────
 t() {  # t "الوصف" أمر...  — يمرّ إن كان رمز الخروج 0
   local name="$1"; shift
   if "$@" >"$TMP/t.out" 2>&1; then ok "$name"; else bad "$name"; sed 's/^/      /' "$TMP/t.out" | tail -6; fi
@@ -287,8 +297,11 @@ t "علاقات الدفتر: دليل حرفي ومكوّنات وفشل مغل
 echo "25) معجم المفردات المشتق (ك-328): تحذيرات كاذبة كانت تخفي العيوب الحقيقية"
 t "المعجم المشتق مطابق للمصادر + لفظ مصطنع يُكتشف" python3 tests/test_lexicon_gate.py
 t "شكل معجم النسخة الإنجليزية (ك-491)" python3 validators/check_glossary_shape.py
+t "عقد بيان exact-only مع بقاء الرفض المغلق للمفاتيح الجذرية" python3 tests/test_glossary_shape_contract.py
 t "مفردات حقل الموقع: أسماء المناطق البحرية وصيغة «الموقع - المنطقة» (ك-492)" python3 validators/check_area_vocabulary.py
 t "محاذاة متن التقرير العربي والإنجليزي (عدد ونوع كل سطر)" env BRAIN_DIR="$B" python3 "$SITE/tests/test_i18n_alignment.py"
+t "حدود وسوم LTR ومفاتيح المعجم السياقية" python3 "$B/../site/tests/test_i18n_ltr_tag_boundary.py"
+t "بقاء العناوين الديناميكية ذات المقابل المسند" python3 "$B/../site/tests/test_i18n_master_backed_dynamic_content.py"
 
 echo "26) أرضية الأصول الحاكمة (ك-483): أي نقص في أصل معتمد يمنع التسليم"
 t "أرضية الأصول: قصّ يمنع · نموّ يرفع · قبول بسبب يُدوَّن · حذف يمنع" python3 tests/test_asset_floor.py

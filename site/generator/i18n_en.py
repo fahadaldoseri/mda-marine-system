@@ -1940,7 +1940,65 @@ def _drop_latest_official_cards(page: str, date: str) -> tuple[str, int]:
     return page, updated
 
 
+_ELEMENT_RE = re.compile(
+    r"<(p|li|td|h3|h4|blockquote)\b([^>]*)>(.*?)</\1>", re.S | re.I)
+_INLINE_RE = re.compile(r"<(span|strong|b|em|bdi)\b([^>]*)>(.*?)</\1>", re.S | re.I)
+
+
+def _element_governed_overrides(html_text: str, tm: dict[str, str], gl: dict[str, str]) -> str:
+    """ك-603: عنصر كامل له مقابل معلَن تمامًا لكنه يتقطّع بوسم سطري داخلي.
+
+    العيب المقيس: بند الإضافات يُبنى داخل <p> مع <strong> و<span class="ltr">، فيتقطّع
+    عند المترجم إلى مقاطع لا مقابل لها، ويُرفض البناء مغلقًا على نص له مقابل معلَن.
+    القاعدة: إن كان نص العنصر كاملًا — بلا وسوم — مطابقًا لمقابل معلَن في ذاكرة الترجمة
+    أو المعجم، ويحفظ المقابل أرقامه ومعرّفاته، فلا يُبقى فيه نص عربي ولا يُسقط رقم،
+    وتُعاد الوسوم حول الرموز اللاتينية نفسها. المطابقة التامة وحدها تُقبل، ولا تخمين.
+    """
+
+    def replace(match: re.Match[str]) -> str:
+        tag, attrs, inner = match.group(1), match.group(2), match.group(3)
+        if _ELEMENT_RE.search(inner):
+            return match.group(0)
+        plain = norm(re.sub(r"<[^>]+>", " ", inner))
+        # حدّ الوسم قد يُدخل فراغًا قبل ترقيم عربي («JMIC ،» بدل «JMIC،»)،
+        # فيُطابَق النص بصيغتين: كما هو، وبلا فراغ قبل الترقيم.
+        keys = [plain, re.sub(r"\s+([،؛:.!؟])", r"\1", plain)]
+        lookup = next((k for k in keys if k in tm or k in gl), None)
+        if lookup is None:
+            return match.group(0)
+        plain = lookup
+        # ذاكرة الترجمة قد تحمل صيغة لا تحفظ الأرقام بينما المعجم يحفظها،
+        # فيُفحص المرشحان ويُقبل الصالح منهما، ولا يُقبل ما يُسقط رقمًا.
+        source_tokens = _numeric_tokens(plain)
+        target = next(
+            (candidate for candidate in (tm.get(plain), gl.get(plain))
+             if candidate and not ARABIC.search(candidate)
+             and all(token in _numeric_tokens(candidate) for token in source_tokens)),
+            None,
+        )
+        if not target:
+            return match.group(0)
+        rendered = target
+        for token_match in _INLINE_RE.finditer(inner):
+            start_inner, end_inner = token_match.start(3), token_match.end(3)
+            opening = token_match.group(0)[: start_inner - token_match.start(0)]
+            closing = token_match.group(0)[end_inner - token_match.start(0):]
+            token = norm(token_match.group(3))
+            if not token or ARABIC.search(token):
+                continue
+            pattern = re.compile(rf"(?<!\w){re.escape(token)}(?!\w)", re.IGNORECASE)
+            hit = pattern.search(rendered)
+            if hit:
+                escaped = (hit.group(0).replace("&", "&amp;")
+                           .replace("<", "&lt;").replace(">", "&gt;"))
+                rendered = rendered[: hit.start()] + opening + escaped + closing + rendered[hit.end():]
+        return f"<{tag}{attrs}>{rendered}</{tag}>"
+
+    return _ELEMENT_RE.sub(replace, html_text)
+
+
 def translate_page(html_text: str, date: str, tm: dict[str, str], gl: dict[str, str]):
+    html_text = _element_governed_overrides(html_text, tm, gl)
     latest_title_value = _latest_official_title_en(date)
     if latest_title_value:
         gl = dict(gl)

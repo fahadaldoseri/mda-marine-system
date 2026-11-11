@@ -161,7 +161,40 @@ def validate_zone_strip(page_html: str, source: dict) -> list[str]:
     errors: list[str] = []
     parser = _ZoneStripParser()
     parser.feed(page_html)
+def _no_qualifying_events(source: dict) -> bool:
+    """يوم بلا وقائع مؤهّلة: لا شريط نسب يُبنى، فيُعفى السطح بشرط صفري صارم.
+
+    لا يُخفَّف الفحص: تُشترط قائمة قطاعات موجودة، وعداد اليوم صفريًا في المؤهل،
+    وكل قطاع صفريًا في (مؤهل · مؤكد · مرجّح · مستثنى · إجمالي) وبلا رموز مؤهّلة.
+    """
+    if not isinstance(source, dict):
+        return False
+    zones = source.get("zones") or []
+    if not isinstance(zones, list) or not zones:
+        return False
+    counter = source.get("counter") or {}
+    if int(counter.get("qualifying") or 0) != 0:
+        return False
+    for zone in zones:
+        if not isinstance(zone, dict):
+            return False
+        for key in ("qualifying", "confirmed", "probable", "excluded", "events"):
+            if int(zone.get(key) or 0) != 0:
+                return False
+        if zone.get("qualifying_codes"):
+            return False
+    return True
+
+
+def validate_zone_strip(page_html: str, source: dict) -> list[str]:
+    """Return all contract violations; the CLI maps any non-empty result to 2."""
+    errors: list[str] = []
+    parser = _ZoneStripParser()
+    parser.feed(page_html)
     if parser.strip_count != 1:
+        if parser.strip_count == 0 and _no_qualifying_events(source):
+            print("  ✔ يوم بلا وقائع مؤهّلة (0 في كل قطاع) — لا يُبنى شريط نسب، وهو مطابق للسطح")
+            return errors
         errors.append(f"شريط نسب القطاعات غير قابل للتعيين: وُجد {parser.strip_count} بدل 1")
         return errors
     source_zones = source.get("zones") if isinstance(source, dict) else None
