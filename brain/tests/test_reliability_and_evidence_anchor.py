@@ -7,6 +7,7 @@
 """
 from __future__ import annotations
 
+import os
 import pathlib
 import re
 import sys
@@ -35,10 +36,16 @@ def check(html: str) -> list[str]:
 
 
 def main() -> int:
-    if len(sys.argv) > 1:
+    if len(sys.argv) > 1 and not sys.argv[1].startswith('-'):
         page = pathlib.Path(sys.argv[1])
     else:
-        page = pathlib.Path('/home/ubuntu/seawatch/dist/reports/2026-11-11.html')
+        site = pathlib.Path(os.environ.get('SITE', '/home/ubuntu/seawatch'))
+        cands = sorted(p for p in (site / 'dist' / 'reports').glob('20*.html')
+                       if p.is_file())
+        if not cands:
+            print(f"لا صفحة إصدار مبنية في {site}/dist/reports")
+            return 2
+        page = cands[-1]
     if not page.exists():
         print(f"مفقود: {page}")
         return 2
