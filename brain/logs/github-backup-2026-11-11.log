@@ -2631,3 +2631,30 @@ remote:
   ✘ تعديل حاكم: brain/skills/report-surface-and-print-ops/references/legacy/report-content-fidelity-ops/references/failure-classes.md · sha256=41e0bf27afac7ce05801d2bd7449a42e3ed07342094256390ef71ffb2eb401f4
 ✘ فشل مغلق: توجد تعديلات شيفرة/بيانات حقيقية خارج سجلات التشغيل المعلنة
 ✘ فشل مغلق: حارس شجرة النسخ منع العملية؛ راجع تصنيف المسارات وبصمات SHA-256
+=== بدء النسخ الاحتياطي: 2026-11-11T15:59:18Z ===
+حارس شجرة النسخ: تغييرات Git=6 · سجلات تشغيل معلنة=6 · كتل مولَّدة=0 · تعديلات حاكمة=0
+  ✔ سجل تشغيل معلن: brain/logs/github-backup-2026-11-11.log · sha256=2c1c18d642977739b2066014d646e85c55af5638875352bfeaddc9825ae28a91
+  ✔ سجل تشغيل معلن: brain/logs/publish-2026-11-11-telegram.json · sha256=ed5d56a9aa28e0059a9a68bcb32f52d8ca680ea7f7a37e47c937ea50902120dd
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-11.jsonl · sha256=9c1f4826097876b716e5c9e79a2f0632eb71181848a6694aa71b3db03f21d151
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-11/D030.log · sha256=7b8612408ce271104203f128ca4d022ce7a1bb7a56b46fcfa4a5ea20d711ccb2
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-11/D031.log · sha256=8908cc36230a1fd9178cd9b8c6af1966cdb877bcfed19c74f4cbbcc88bb12487
+  ✔ سجل تشغيل معلن: brain/logs/telegram-sends.jsonl · sha256=8fffaa56afb74969bf641a16f6d9c7c1c1664c19d7b3021be92b930312eec618
+✔ شجرة النسخ تمر: سجلات التشغيل المحلية لا تمنع النسخة الاحتياطية
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_report.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_report_en.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_site.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_sources.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_special.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/derive_en_units.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/i18n_en.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/make_en_glossary.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/section_counts.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/site_chrome.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/sources/i18n/en/2026-11-10-sectioned.en.md
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/sources/i18n/en/2026-11-11-sectioned.en.md
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/sources/i18n/en/glossary.json
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/tests/test_i18n_alignment.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): skills/.skill_versions.json
+⚠ تعارض (عُدّل على الخادم خارج GitHub): skills/webdev/SKILL.md
+✘ 16 تعارض. لا شيء طُبّق. إن كان المستودع هو الصحيح: أعد التشغيل بـ --accept-repo (تُؤرشف نسخ الخادم أولًا).
+⚠ تعذّر/تعارض في تطبيق الشيفرة (تستمر نسخة البيانات بعد تسجيل التحذير)
