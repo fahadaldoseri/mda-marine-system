@@ -41,8 +41,8 @@
     }
   ],
   "overall": {
-    "level": "مرتفع",
-    "rank": 3,
+    "level": "متوسط",
+    "rank": 2,
     "top_zone": "مضيق هرمز وخليج عُمان والخليج العربي",
     "top_zone_id": "Z1",
     "basis": "أعلى نطاق: مضيق هرمز وخليج عُمان والخليج العربي — وقائع مؤهّلة: نشاط مشبوه — ناقلة · تحذير UKMTO 202-26 · 11/11/2026"
@@ -51,9 +51,9 @@
     {
       "id": "Z1",
       "name": "مضيق هرمز وخليج عُمان والخليج العربي",
-      "level": "مرتفع",
-      "rank": 3,
-      "confirmed": 1,
+      "level": "متوسط",
+      "rank": 2,
+      "confirmed": 0,
       "probable": 0,
       "excluded": 0,
       "events": 1,
@@ -161,10 +161,10 @@
   "counter": {
     "total": 2,
     "qualifying": 1,
-    "confirmed": 1,
+    "confirmed": 0,
     "probable": 0,
-    "unconfirmed_qualifying": 0,
-    "unconfirmed_total": 0,
+    "unconfirmed_qualifying": 1,
+    "unconfirmed_total": 2,
     "excluded": 0,
     "nonspatial": 1
   },
@@ -179,7 +179,7 @@
       "nonspatial": true,
       "zone_reason": "بلا موقع بحري",
       "qualifying": false,
-      "confirmation": "confirmed",
+      "confirmation": "unconfirmed",
       "qualify_reason": "نوع مؤهّل «هجوم» بلا هدف بحري مثبت ⇒ يلزم بحث في المصادر",
       "incident_group": "MN-2026-11-11-01",
       "source_excerpt": "10/11/2026 Attack:UKMTO INCIDENT 201-26 UKMTO has received a report of an incident 19NM northeast...",
@@ -194,7 +194,7 @@
       "nonspatial": false,
       "zone_reason": "كلمة الموقع «مضيق هرمز»",
       "qualifying": true,
-      "confirmation": "confirmed",
+      "confirmation": "unconfirmed",
       "qualify_reason": "نوع مؤهّل: «نشاط مشبوه» وهدف بحري/ملاحي: «ناقلة»",
       "incident_group": "MN-2026-11-11-02",
       "source_excerpt": "11/11/2026 Suspicious Activity:UKMTO has received a report of an incident involving a tanker in the Strait of...",

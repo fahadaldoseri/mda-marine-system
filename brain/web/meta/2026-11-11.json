@@ -3,11 +3,11 @@
  "subtitle": "مركز الوعي البحري — مملكة البحرين",
  "date_label": "11/11/2026",
  "headline": "تحذير من نشاط مشبوه يشمل ناقلة في مضيق هرمز؛ وبلاغ مصنف هجومًا بلا اسم موقع كامل أو نتيجة.",
- "lede": "المستوى العام مرتفع. ويظل مضيق هرمز وخليج عُمان والخليج العربي القطاع الأعلى عند مستوى مرتفع.",
+ "lede": "المستوى العام متوسط. ويظل مضيق هرمز وخليج عُمان والخليج العربي أعلى القطاعات عند مستوى متوسط.",
  "window": "خلال 24 ساعة السابقة (UTC)",
  "version": "و ب 11/11/26",
  "generated_label": "2026-11-11T04:00:00Z",
- "threat_level": "مرتفع",
+ "threat_level": "متوسط",
  "sources_checked": 60,
  "sources_cited": 5,
  "description": "مركز الوعي البحري — مملكة البحرين · 11/11/2026 · فترة التقرير: 100400Z–110400Z NOV 26",
@@ -44,7 +44,7 @@
    "tag": "",
    "tag_en": "",
    "value": "1",
-   "detail": "1 مؤكدة + 0 مرجّحة + 0 غير مؤكدة مؤهلة",
+   "detail": "0 مؤكدة + 0 مرجّحة + 1 غير مؤكدة مؤهلة",
    "note": "تحذير 202-26 عن نشاط مشبوه يشمل ناقلة في مضيق هرمز هو الواقعة المؤهلة؛ بلاغ 201-26 بلا موضع محدد في المواد.",
    "source": "web/zones/{date}.json · counter",
    "accent": "warn",
@@ -59,8 +59,8 @@
    "label": "روايات لم تتأكد",
    "tag": "تُذكر ولا تُحتسب",
    "tag_en": "Mentioned but not counted",
-   "value": "0",
-   "detail": "0 روايات · منها 0 مؤهلة · تُذكر ولا تُحتسب",
+   "value": "2",
+   "detail": "2 روايتان · منها 1 مؤهلة · تُذكر ولا تُحتسب",
    "note": "عداد بطاقة القطاعات لا يسجل روايات غير مؤكدة في مادة اليوم.",
    "source": "web/zones/{date}.json · counter",
    "accent": "ok",
@@ -127,12 +127,18 @@
     "lon": 56.4,
     "precision": "approximate",
     "surface": "main",
-    "basis": "الموقع التقريبي لواقعة «نشاط مشبوه — ناقلة · تحذير UKMTO 202-26» المعلنة في مضيق هرمز، بلا إحداثيات رسمية منشورة."
+    "basis": "الموقع التقريبي لواقعة «نشاط مشبوه — ناقلة · تحذير UKMTO 202-26 · 11/11/2026» داخل منطقة مضيق هرمز وفق المِرساة المعتمدة",
+    "source": "IMO — Strait of Hormuz TSS chart (Ships' Routeing) · audit-2026-10-30/imo-tss/imo-tss-derived.json",
+    "label": "نشاط مشبوه — ناقلة · تحذير UKMTO 202-26 · 11/11/2026",
+    "confirmation": "unconfirmed",
+    "qualifying": true,
+    "zone": "Z1",
+    "class": "بلاغ رسمي"
    }
   ],
   "points_note": "",
   "points_stats": {
-   "events": 1,
+   "events": 2,
    "with_area": 1,
    "drawn": 1,
    "exact": 0,
@@ -141,9 +147,9 @@
    "excluded": 0,
    "confirmed": 0,
    "probable": 0,
-   "unconfirmed": 0,
+   "unconfirmed": 1,
    "not_qualifying": 0,
-   "status_unknown": 1
+   "status_unknown": 0
   }
  },
  "decision_card": {
@@ -153,8 +159,8 @@
    "لا تعرض مادة IMO إضافة أحدث من 29 سبتمبر، وتعرض صفحة MSCIO Recent Incidents (0).",
    "لا توفر المواد الرسمية رقمًا لحركة السفن أو التكدس، ولا يصدر عنها حكم بتغير العبور."
   ],
-  "risk": "مرتفع",
-  "risk_kind": "high",
+  "risk": "متوسط",
+  "risk_kind": "med",
   "risk_ref": "بطاقة الترويسة: مستوى التهديد",
   "action": [
    "تُراجع السفينة النص الكامل لتحذير UKMTO قبل اتخاذ قرار الإبحار أو تغيير خط السير؛ المادة المتاحة لا تعرض التفاصيل كاملة.",
@@ -370,17 +376,17 @@
   ]
  },
  "threat_zones": {
-  "overall": "مرتفع",
-  "rank": 3,
+  "overall": "متوسط",
+  "rank": 2,
   "top_zone": "مضيق هرمز وخليج عُمان والخليج العربي",
   "window": "خلال 24 ساعة السابقة",
   "counter": {
    "total": 2,
    "qualifying": 1,
-   "confirmed": 1,
+   "confirmed": 0,
    "probable": 0,
-   "unconfirmed_qualifying": 0,
-   "unconfirmed_total": 0,
+   "unconfirmed_qualifying": 1,
+   "unconfirmed_total": 2,
    "excluded": 0,
    "nonspatial": 1
   },
@@ -388,9 +394,9 @@
    {
     "id": "Z1",
     "name": "مضيق هرمز وخليج عُمان والخليج العربي",
-    "level": "مرتفع",
-    "rank": 3,
-    "confirmed": 1,
+    "level": "متوسط",
+    "rank": 2,
+    "confirmed": 0,
     "probable": 0,
     "qualifying": 1,
     "carry_over": false
@@ -451,7 +457,7 @@
   "IMO": "المنظمة البحرية الدولية: المرجع الرسمي لسجل الحوادث."
  },
  "threat_zone_levels": {
-  "Z1": "مرتفع",
+  "Z1": "متوسط",
   "Z2": "منخفض",
   "Z3": "منخفض",
   "Z4": "منخفض",
