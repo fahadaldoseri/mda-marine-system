@@ -172,7 +172,7 @@ class _HtmlText(html.parser.HTMLParser):
         # «المسار المتأثر…» يُقاس جملة واحدة. تُضاف مسافة عند حدود كتل النص.
         # ك-628: لا تُدرج مسافة قبل علامة ترقيم، وإلا نشأ «… » .» وهو عيب «مسافة قبل
         # علامة ترقيم» الذي يمنع السطح في بوابة عيوب الصياغة.
-        PUNCT = ".!؟:؛,،؛؟٭٪٫٬»)]}"
+        PUNCT = ".!؟:؛,،؛؟٭%.,»)]}"
         if self._cell is not None:
             if self._cell and not self._cell[-1].endswith(" ") and not txt.startswith(" ") \
                     and txt[:1] not in PUNCT:

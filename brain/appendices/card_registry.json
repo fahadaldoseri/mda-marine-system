@@ -35,7 +35,9 @@
         "IMO",
         "AIS",
         "Z",
-        "Update"
+        "Update",
+        "Attack",
+        "WARNING"
       ],
       "counters": [
         {
@@ -99,7 +101,7 @@
           }
         }
       ],
-      "latin_allowlist_note": "Z رمز التوقيت العالمي (UTC) المستخدم في نصوص التحذيرات الرسمية مثل «1855Z»؛ أُدرج بقرار 2026-11-03 بعد أن رصدت البوابة الرمز خارج المسموح. Update اسم منتج رسمي في JMIC؛ أُدرج بقرار 2026-11-06 بعد تحقق منشور UKMTO الرسمي ورابط PDF المنتج.",
+      "latin_allowlist_note": "Z رمز التوقيت العالمي (UTC) المستخدم في نصوص التحذيرات الرسمية مثل «1855Z»؛ أُدرج بقرار 2026-11-03 بعد أن رصدت البوابة الرمز خارج المسموح. Update اسم منتج رسمي في JMIC؛ أُدرج بقرار 2026-11-06 بعد تحقق منشور UKMTO الرسمي ورابط PDF المنتج. Attack وWARNING تصنيفان رسميان في منتجات UKMTO: «Attack» تصنيف الحادث في عناوينها الرسمية، و«WARNING 199-26» رقم التحذير الرسمي بصيغته كما تنشره الجهة. أُدرجا بقرار 2026-11-11 بعد أن رصدت بوابة عدادات البطاقات الوسمين في صف التحذيرات والتنبيهات النشطة، وهما واردان في المتن الحاكم sources/reports/2026-11-10-sectioned.md بالصيغة نفسها.",
       "latin_allowlist_evidence": [
         {
           "token": "Update",
@@ -107,7 +109,8 @@
           "source": "JMIC",
           "source_url": "https://www.ukmto.org/-/media/ukmto/products/jmic_advisory_update_111_05-nov.pdf?rev=de54e3b88ef24dd3a3c3cb0a215b1acf",
           "announced_reason": "Update 111 JMIC Advisory Note 5th Nov 2026؛ المنتج موزع رسميًا عبر UKMTO نيابة عن JMIC."
-        }
+        },
+        "sources/reports/2026-11-10-sectioned.md — «عناوين Attack» و«WARNING 199-26»"
       ]
     },
     {

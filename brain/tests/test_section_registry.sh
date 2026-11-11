@@ -2,13 +2,26 @@
 # إضافة قسم تجريبي ثم حذفه على نسخة مؤقتة من المشروع (لا الإنتاج) — بتأكيدات حقيقية لا عرض.
 set -u
 B="$(cd "$(dirname "$0")/.." && pwd)"
-C="$(mktemp -d)"; trap 'rm -rf "$C"' EXIT
+T="$(mktemp -d)"; C="$T/brain"; S="$T/site"; trap 'rm -rf "$T"' EXIT
+mkdir -p "$C" "$S"
 tar -C "$B" --exclude=.git --exclude=logs --exclude=design --exclude=reports --exclude='*.pdf' --exclude='*.docx' -cf - . | tar -C "$C" -xf -
-mkdir -p "$C/reports"; cp "$(ls "$B"/reports/*-sectioned.md | tail -1)" "$C/reports/"
-[ -d "$B/../site" ] && export SITE_DIR="$(cd "$B/../site" && pwd)" || export SITE_DIR="$(cd "$B/../seawatch" && pwd)"
-cd "$C" || exit 2
+tar -C "$B/../site" --exclude=.git --exclude=node_modules --exclude=__pycache__ --exclude=.pytest_cache --exclude=dist -cf - . | tar -C "$S" -xf -
+mkdir -p "$C/reports" "$S/dist"; cp "$(ls "$B"/reports/*-sectioned.md | tail -1)" "$C/reports/"
+unset SITE SITE_DIR SITE_CANDIDATES
+. "$C/tools/site_root.sh"
 PASS=0; FAIL=0
 ok() { if [ "$1" = 0 ]; then PASS=$((PASS+1)); echo "  ✔ $2"; else FAIL=$((FAIL+1)); echo "  ✘ $2"; fi; }
+if SITE= SITE_DIR= SITE_CANDIDATES="$T/site-missing" site_root_resolve "$C"; then
+  FAIL=$((FAIL+1)); echo "  ✘ جذر الموقع الغائب يمرّ بدل الفشل المغلق"
+else
+  root_rc=$?
+  if [ "$root_rc" = 2 ]; then PASS=$((PASS+1)); echo "  ✔ جذر الموقع الغائب يفشل مغلقًا (rc=2)"; else FAIL=$((FAIL+1)); echo "  ✘ رمز جذر الموقع الغائب غير متوقع: $root_rc"; fi
+fi
+export SITE_CANDIDATES="$S"
+if ! site_root_resolve "$C"; then site_root_message; exit 2; fi
+export SITE_DIR="$SITE"
+unset SITE_CANDIDATES
+cd "$C" || exit 2
 export BRAIN_DIR="$C"
 python3 tools/runbook.py verify >/dev/null 2>&1; ok $? "الأساس سليم قبل التجربة"
 python3 tools/runbook.py section-add --id next-notes --title "ملاحظات الغد" --after summary >/dev/null 2>&1

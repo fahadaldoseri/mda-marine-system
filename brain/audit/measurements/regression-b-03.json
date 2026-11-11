@@ -1,6 +1,6 @@
 {
-  "url": "file:///home/ubuntu/seawatch/dist/reports/2026-11-09.html",
-  "at": "2026-11-09T08:00:29+00:00",
+  "url": "file:///home/ubuntu/seawatch/dist/reports/2026-11-10.html",
+  "at": "2026-11-11T01:01:05+00:00",
   "widths": {
     "1440": {
       "compat": "CSS1Compat",
@@ -15,50 +15,10 @@
         {
           "id": "ev-01",
           "w": 354,
-          "h": 402,
+          "h": 374,
           "clip_loss": 0,
           "clips": [],
-          "top": 3463
-        },
-        {
-          "id": "ev-02",
-          "w": 354,
-          "h": 402,
-          "clip_loss": 0,
-          "clips": [],
-          "top": 3463
-        },
-        {
-          "id": "ev-03",
-          "w": 354,
-          "h": 402,
-          "clip_loss": 0,
-          "clips": [],
-          "top": 3463
-        },
-        {
-          "id": "ev-04",
-          "w": 354,
-          "h": 432,
-          "clip_loss": 0,
-          "clips": [],
-          "top": 3877
-        },
-        {
-          "id": "ev-05",
-          "w": 354,
-          "h": 432,
-          "clip_loss": 0,
-          "clips": [],
-          "top": 3877
-        },
-        {
-          "id": "ev-06",
-          "w": 354,
-          "h": 432,
-          "clip_loss": 0,
-          "clips": [],
-          "top": 3877
+          "top": 2246
         }
       ],
       "decision": {
@@ -68,13 +28,7 @@
         "height": 0,
         "lines": 0
       },
-      "map_decision": {
-        "sel": ".hmap-decide",
-        "top": 1987,
-        "in_first_screen": false,
-        "height": 119,
-        "lines": 4
-      },
+      "map_decision": null,
       "anchor": {
         "exists": false,
         "reached": false
@@ -90,7 +44,7 @@
         },
         {
           "q": "إجراء اليوم",
-          "found": true
+          "found": false
         },
         {
           "q": "الوقائع المستوفية",
@@ -124,8 +78,8 @@
       "phrases": [
         {
           "p": "هجمات مؤكدة",
-          "count": 1,
-          "context": "دة 0 · مرجّحة 0 · مؤهلة غير مؤكدة 0 · مستثناة 0 · إجمالي 0  هجمات مؤكدة على سفن (IMO): 128 · آخر تحديث 30 أكتوبر 2026  س"
+          "count": 0,
+          "context": null
         }
       ],
       "anchor_links": [
@@ -142,6 +96,62 @@
           "hash": "archive",
           "text": "الأرشيف",
           "same_page_exists": false
+        },
+        {
+          "href": "/additions.html#sec-00",
+          "page": "/additions.html",
+          "hash": "sec-00",
+          "text": "قسم «ما تغيّر»",
+          "same_page_exists": false
+        },
+        {
+          "href": "#sec-02",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-02",
+          "text": "التفصيل في بطاقة الترويسة",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-decision",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-decision",
+          "text": "قسم «التوصيات»",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-decision",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-decision",
+          "text": "أهم الأخبار",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-official",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-official",
+          "text": "المستجدات الرسمية",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-01",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-01",
+          "text": "سجل الأحداث",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-02",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-02",
+          "text": "مستوى التهديد",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-03",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-03",
+          "text": "مؤشرات الموقف",
+          "same_page_exists": true
         },
         {
           "href": "/additions.html#news-card",
@@ -170,54 +180,18 @@
           "hash": "sec-03",
           "text": "مؤشرات الموقف",
           "same_page_exists": true
-        },
-        {
-          "href": "https://www.ukmto.org/recent-incidents#c879ff7b-4927-4e7f-96b0-bb644675ad00",
-          "page": "https://www.ukmto.org/recent-incidents",
-          "hash": "c879ff7b-4927-4e7f-96b0-bb644675ad00",
-          "text": "UKMTO — التحذيرات 2026",
-          "same_page_exists": false
-        },
-        {
-          "href": "https://www.ukmto.org/recent-incidents#5151c481-8d2c-4a84-b2db-14ead1472ab1",
-          "page": "https://www.ukmto.org/recent-incidents",
-          "hash": "5151c481-8d2c-4a84-b2db-14ead1472ab1",
-          "text": "UKMTO — التحذيرات 2026",
-          "same_page_exists": false
-        },
-        {
-          "href": "https://www.ukmto.org/recent-incidents#ca074c7b-d99e-4c49-b285-6ebf6dd2a6b0",
-          "page": "https://www.ukmto.org/recent-incidents",
-          "hash": "ca074c7b-d99e-4c49-b285-6ebf6dd2a6b0",
-          "text": "UKMTO — التحذيرات 2026",
-          "same_page_exists": false
-        },
-        {
-          "href": "https://www.ukmto.org/recent-incidents#c8247796-a11e-4bb4-8588-ae997e9fea8c",
-          "page": "https://www.ukmto.org/recent-incidents",
-          "hash": "c8247796-a11e-4bb4-8588-ae997e9fea8c",
-          "text": "UKMTO — التحذيرات 2026",
-          "same_page_exists": false
-        },
-        {
-          "href": "/#archive",
-          "page": "/",
-          "hash": "archive",
-          "text": "الأرشيف الكامل",
-          "same_page_exists": false
         }
       ],
       "anchor_targets": {
         "#sn-main": true,
         "/#archive": true,
-        "/additions.html#news-card": true,
-        "#sec-01": true,
+        "/additions.html#sec-00": true,
         "#sec-02": true,
+        "#sec-decision": true,
+        "#sec-official": true,
+        "#sec-01": true,
         "#sec-03": true,
-        "https://www.ukmto.org/recent-incidents#c879ff7b-4927-4e7f-96b0-bb644675ad00": true,
-        "https://www.ukmto.org/recent-incidents#5151c481-8d2c-4a84-b2db-14ead1472ab1": true,
-        "https://www.ukmto.org/recent-incidents#ca074c7b-d99e-4c49-b285-6ebf6dd2a6b0": true,
-        "https://www.ukmto.org/recent-incidents#c8247796-a11e-4bb4-8588-ae997e9fea8c": true
+        "/additions.html#news-card": true
       },
       "anchor_target_details": {
         "#sn-main": {
@@ -230,17 +204,27 @@
           "dom_wait_ms": 15000,
           "exists": true
         },
-        "/additions.html#news-card": {
+        "/additions.html#sec-00": {
           "http_status": 200,
           "dom_wait_ms": 15000,
           "exists": true
         },
-        "#sec-01": {
+        "#sec-02": {
           "http_status": null,
           "dom_wait_ms": 0,
           "exists": true
         },
-        "#sec-02": {
+        "#sec-decision": {
+          "http_status": null,
+          "dom_wait_ms": 0,
+          "exists": true
+        },
+        "#sec-official": {
+          "http_status": null,
+          "dom_wait_ms": 0,
+          "exists": true
+        },
+        "#sec-01": {
           "http_status": null,
           "dom_wait_ms": 0,
           "exists": true
@@ -250,22 +234,7 @@
           "dom_wait_ms": 0,
           "exists": true
         },
-        "https://www.ukmto.org/recent-incidents#c879ff7b-4927-4e7f-96b0-bb644675ad00": {
-          "http_status": 200,
-          "dom_wait_ms": 15000,
-          "exists": true
-        },
-        "https://www.ukmto.org/recent-incidents#5151c481-8d2c-4a84-b2db-14ead1472ab1": {
-          "http_status": 200,
-          "dom_wait_ms": 15000,
-          "exists": true
-        },
-        "https://www.ukmto.org/recent-incidents#ca074c7b-d99e-4c49-b285-6ebf6dd2a6b0": {
-          "http_status": 200,
-          "dom_wait_ms": 15000,
-          "exists": true
-        },
-        "https://www.ukmto.org/recent-incidents#c8247796-a11e-4bb4-8588-ae997e9fea8c": {
+        "/additions.html#news-card": {
           "http_status": 200,
           "dom_wait_ms": 15000,
           "exists": true
@@ -285,50 +254,10 @@
         {
           "id": "ev-01",
           "w": 354,
-          "h": 402,
+          "h": 374,
           "clip_loss": 0,
           "clips": [],
-          "top": 3463
-        },
-        {
-          "id": "ev-02",
-          "w": 354,
-          "h": 402,
-          "clip_loss": 0,
-          "clips": [],
-          "top": 3463
-        },
-        {
-          "id": "ev-03",
-          "w": 354,
-          "h": 402,
-          "clip_loss": 0,
-          "clips": [],
-          "top": 3463
-        },
-        {
-          "id": "ev-04",
-          "w": 354,
-          "h": 432,
-          "clip_loss": 0,
-          "clips": [],
-          "top": 3877
-        },
-        {
-          "id": "ev-05",
-          "w": 354,
-          "h": 432,
-          "clip_loss": 0,
-          "clips": [],
-          "top": 3877
-        },
-        {
-          "id": "ev-06",
-          "w": 354,
-          "h": 432,
-          "clip_loss": 0,
-          "clips": [],
-          "top": 3877
+          "top": 2246
         }
       ],
       "decision": {
@@ -338,13 +267,7 @@
         "height": 0,
         "lines": 0
       },
-      "map_decision": {
-        "sel": ".hmap-decide",
-        "top": 1987,
-        "in_first_screen": false,
-        "height": 119,
-        "lines": 4
-      },
+      "map_decision": null,
       "anchor": {
         "exists": false,
         "reached": false
@@ -360,7 +283,7 @@
         },
         {
           "q": "إجراء اليوم",
-          "found": true
+          "found": false
         },
         {
           "q": "الوقائع المستوفية",
@@ -394,8 +317,8 @@
       "phrases": [
         {
           "p": "هجمات مؤكدة",
-          "count": 1,
-          "context": "دة 0 · مرجّحة 0 · مؤهلة غير مؤكدة 0 · مستثناة 0 · إجمالي 0  هجمات مؤكدة على سفن (IMO): 128 · آخر تحديث 30 أكتوبر 2026  س"
+          "count": 0,
+          "context": null
         }
       ],
       "anchor_links": [
@@ -412,6 +335,62 @@
           "hash": "archive",
           "text": "الأرشيف",
           "same_page_exists": false
+        },
+        {
+          "href": "/additions.html#sec-00",
+          "page": "/additions.html",
+          "hash": "sec-00",
+          "text": "قسم «ما تغيّر»",
+          "same_page_exists": false
+        },
+        {
+          "href": "#sec-02",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-02",
+          "text": "التفصيل في بطاقة الترويسة",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-decision",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-decision",
+          "text": "قسم «التوصيات»",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-decision",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-decision",
+          "text": "أهم الأخبار",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-official",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-official",
+          "text": "المستجدات الرسمية",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-01",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-01",
+          "text": "سجل الأحداث",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-02",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-02",
+          "text": "مستوى التهديد",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-03",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-03",
+          "text": "مؤشرات الموقف",
+          "same_page_exists": true
         },
         {
           "href": "/additions.html#news-card",
@@ -440,54 +419,18 @@
           "hash": "sec-03",
           "text": "مؤشرات الموقف",
           "same_page_exists": true
-        },
-        {
-          "href": "https://www.ukmto.org/recent-incidents#c879ff7b-4927-4e7f-96b0-bb644675ad00",
-          "page": "https://www.ukmto.org/recent-incidents",
-          "hash": "c879ff7b-4927-4e7f-96b0-bb644675ad00",
-          "text": "UKMTO — التحذيرات 2026",
-          "same_page_exists": false
-        },
-        {
-          "href": "https://www.ukmto.org/recent-incidents#5151c481-8d2c-4a84-b2db-14ead1472ab1",
-          "page": "https://www.ukmto.org/recent-incidents",
-          "hash": "5151c481-8d2c-4a84-b2db-14ead1472ab1",
-          "text": "UKMTO — التحذيرات 2026",
-          "same_page_exists": false
-        },
-        {
-          "href": "https://www.ukmto.org/recent-incidents#ca074c7b-d99e-4c49-b285-6ebf6dd2a6b0",
-          "page": "https://www.ukmto.org/recent-incidents",
-          "hash": "ca074c7b-d99e-4c49-b285-6ebf6dd2a6b0",
-          "text": "UKMTO — التحذيرات 2026",
-          "same_page_exists": false
-        },
-        {
-          "href": "https://www.ukmto.org/recent-incidents#c8247796-a11e-4bb4-8588-ae997e9fea8c",
-          "page": "https://www.ukmto.org/recent-incidents",
-          "hash": "c8247796-a11e-4bb4-8588-ae997e9fea8c",
-          "text": "UKMTO — التحذيرات 2026",
-          "same_page_exists": false
-        },
-        {
-          "href": "/#archive",
-          "page": "/",
-          "hash": "archive",
-          "text": "الأرشيف الكامل",
-          "same_page_exists": false
         }
       ],
       "anchor_targets": {
         "#sn-main": true,
         "/#archive": true,
-        "/additions.html#news-card": true,
-        "#sec-01": true,
+        "/additions.html#sec-00": true,
         "#sec-02": true,
+        "#sec-decision": true,
+        "#sec-official": true,
+        "#sec-01": true,
         "#sec-03": true,
-        "https://www.ukmto.org/recent-incidents#c879ff7b-4927-4e7f-96b0-bb644675ad00": true,
-        "https://www.ukmto.org/recent-incidents#5151c481-8d2c-4a84-b2db-14ead1472ab1": true,
-        "https://www.ukmto.org/recent-incidents#ca074c7b-d99e-4c49-b285-6ebf6dd2a6b0": true,
-        "https://www.ukmto.org/recent-incidents#c8247796-a11e-4bb4-8588-ae997e9fea8c": true
+        "/additions.html#news-card": true
       },
       "anchor_target_details": {
         "#sn-main": {
@@ -500,17 +443,27 @@
           "dom_wait_ms": 15000,
           "exists": true
         },
-        "/additions.html#news-card": {
+        "/additions.html#sec-00": {
           "http_status": 200,
           "dom_wait_ms": 15000,
           "exists": true
         },
-        "#sec-01": {
+        "#sec-02": {
           "http_status": null,
           "dom_wait_ms": 0,
           "exists": true
         },
-        "#sec-02": {
+        "#sec-decision": {
+          "http_status": null,
+          "dom_wait_ms": 0,
+          "exists": true
+        },
+        "#sec-official": {
+          "http_status": null,
+          "dom_wait_ms": 0,
+          "exists": true
+        },
+        "#sec-01": {
           "http_status": null,
           "dom_wait_ms": 0,
           "exists": true
@@ -520,22 +473,7 @@
           "dom_wait_ms": 0,
           "exists": true
         },
-        "https://www.ukmto.org/recent-incidents#c879ff7b-4927-4e7f-96b0-bb644675ad00": {
-          "http_status": 200,
-          "dom_wait_ms": 15000,
-          "exists": true
-        },
-        "https://www.ukmto.org/recent-incidents#5151c481-8d2c-4a84-b2db-14ead1472ab1": {
-          "http_status": 200,
-          "dom_wait_ms": 15000,
-          "exists": true
-        },
-        "https://www.ukmto.org/recent-incidents#ca074c7b-d99e-4c49-b285-6ebf6dd2a6b0": {
-          "http_status": 200,
-          "dom_wait_ms": 15000,
-          "exists": true
-        },
-        "https://www.ukmto.org/recent-incidents#c8247796-a11e-4bb4-8588-ae997e9fea8c": {
+        "/additions.html#news-card": {
           "http_status": 200,
           "dom_wait_ms": 15000,
           "exists": true
