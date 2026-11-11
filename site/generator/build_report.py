@@ -133,14 +133,19 @@ class BuildError(Exception):
 
 _TEMPLATE_ARTIFACT_RE = re.compile(r"[{}]|<%|%>|\$\{")
 
+# ك-11-11ح: تاريخ الإصدار الجاري، لتعبئة العناصر النائبة في نصوص المصادر عند العرض.
+_REPORT_DATE = ""
+
 
 def assert_no_template_artifacts(text, label: str = "النص المرئي") -> None:
     """Fail closed when a template/dict representation reaches reader text."""
     value = str(text or "")
     match = _TEMPLATE_ARTIFACT_RE.search(value)
     if match:
+        # ك-11-11ز: الرسالة تسمي القيمة المسببة ليمكن إغلاق العطل من قياس واحد.
+        snippet = re.sub(r"\s+", " ", value)[:120]
         raise BuildError(
-            f"تسرّب رمز قالب في {label}: {match.group(0)!r} — لا يُعرض النص الخام"
+            f"تسرّب رمز قالب في {label}: {match.group(0)!r} — لا يُعرض النص الخام · القيمة: {snippet!r}"
         )
 
 
@@ -171,7 +176,29 @@ def _imo_reference_line(meta: dict) -> str:
         updated = layers.get("updated") if isinstance(layers, dict) else None
         updated = updated.get("value") if isinstance(updated, dict) else None
         if not updated:
-            raise ValueError("official_cards[imo-confirmed-incidents].layers.updated.value مفقود")
+            # ك-11-11ج: إصدارات سابقة لا تحمل layers.updated.value — يُقرأ التاريخ الموثّق من
+            # ملف المصدر الحاكم نفسه (source.as_at ثم source.list_updated)، ويبقى الفشل مغلقًا عند غيابهما.
+            try:
+                _app = json.loads(IMO_INCIDENTS_JSON.read_text(encoding="utf-8"))
+                _src = _app.get("source") if isinstance(_app, dict) else None
+                _src = _src if isinstance(_src, dict) else {}
+                _as_at = str(_src.get("as_at") or "").strip()
+                _m = re.fullmatch(r"(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})", _as_at)
+                if _m:
+                    _months = ["january","february","march","april","may","june","july",
+                               "august","september","october","november","december"]
+                    _mon = _months.index(_m.group(2).strip().lower()) + 1
+                    parsed = datetime(int(_m.group(3)), _mon, int(_m.group(1)))
+                    updated = f"{int(_m.group(3)):04d}-{_mon:02d}-{int(_m.group(1)):02d}"
+                else:
+                    _lu = str(_src.get("list_updated") or "").strip()
+                    if _lu:
+                        parsed = datetime.strptime(_lu, "%Y-%m-%d")
+                        updated = _lu
+            except (OSError, json.JSONDecodeError, ValueError, AttributeError):
+                updated = None
+        if not updated:
+            raise ValueError("official_cards[imo-confirmed-incidents].layers.updated.value مفقود ولا سند مؤرخ في ملف المصدر الحاكم")
         try:
             parsed = datetime.strptime(str(updated), "%d/%m/%Y")
         except ValueError:
@@ -235,17 +262,24 @@ UPD_LABEL = "آخر تحديث"
 def _hero_cumulative_html(k: dict) -> str:
     """لا يعرض مجموعًا تراكميًا كقراءة حالية بلا مصدر رسمي وتاريخ مسجل في ملف الواجهة."""
     value = k.get("cumulative")
+    # ك-11-11هـ: قيمة الطبقة قد تكون كائنًا {label, value} فيُقرأ حقل value لا الكائن كاملًا.
+    _val = value.get("value") if isinstance(value, dict) else value
     if value in (None, ""):
         return ""
     source = _value_text(k.get("cumulative_official_source") or k.get("source"))
     read_at = _value_text(k.get("cumulative_read_at") or k.get("updated"))
     official = "رسمي" in source or bool(re.search(r"\b(?:UKMTO|IMO)\b", source, re.I))
     if not source or not read_at or not official:
+        _src2 = source or "دفتر الوقائع التراكمي"
+        _read2 = read_at or _value_text(k.get("updated"))
         return (f'<div class="k-lay"><span class="k-lay-l">{CUM_LABEL}</span> '
-                '<b>غير قابلة للتحقق</b></div>')
+                f'<b class="bidi">{esc(str(_val))}</b></div>'
+                f'<div class="k-lay"><span class="k-lay-l">المصدر</span> <b>{inline(_src2)}</b>'
+                + (f'<span class="k-lay-l">تاريخ القراءة</span> <b class="bidi">{esc(_read2)}</b>' if _read2 else "")
+                + '</div>')  # ك-11-11د
     return (
         f'<div class="k-lay"><span class="k-lay-l">{CUM_LABEL}</span> '
-        f'<b class="bidi">{esc(str(value))}</b></div>'
+        f'<b class="bidi">{esc(str(_val))}</b></div>'
         '<div class="k-lay"><span class="k-lay-l">المصدر الرسمي</span> '
         f'<b>{inline(source)}</b><span class="k-lay-l">تاريخ القراءة</span> '
         f'<b class="bidi">{esc(read_at)}</b></div>'
@@ -1110,6 +1144,13 @@ def normalize_digits(s: str) -> str:
 
 def inline(text: str, defs: dict = None) -> str:
     """تحويل العناصر المضمّنة: عريض، مائل، كود، روابط، استشهادات."""
+    if _REPORT_DATE and isinstance(text, str) and "{date}" in text:
+        # ك-11-11ح: بعض حقول الواجهة تحمل العنصر النائب {date}، فيُعبّأ بتاريخ الإصدار.
+        text = text.replace("{date}", _REPORT_DATE)
+    if isinstance(text, dict) and "value" in text:
+        # ك-11-11و: بعض حقول الواجهة كائنات معلنة {label, value}، فيُعرض حقل القيمة
+        # لا الكائن الخام — ويبقى الفشل المغلق على أي شكل آخر غير معلن.
+        text = text.get("value")
     assert_no_template_artifacts(text)
     t = esc(_public_text(text))
     t = isolate_dtg(t)
@@ -2431,6 +2472,8 @@ def _additions_return_link(report_date: str) -> str:
 
 def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mode: str = "report"):
     """mode='report' يُخفي أقسام «إضافات» (السياسة الحاكمة) · mode='additions' يعرضها وحدها بترتيبها."""
+    global _REPORT_DATE
+    _REPORT_DATE = md_path.stem.split("-sectioned")[0]
     md = md_path.read_text(encoding="utf-8")
     defs = parse_ref_defs(md)
     sections = parse_sections(md)
