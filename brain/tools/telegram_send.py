@@ -123,12 +123,12 @@ def guard(args, text: str, targets: list[dict]) -> tuple[bool, str]:
         allowed = [f"{args.date}.pdf", f"map-{args.date}.png", f"التقرير-اليومي-{args.date}.pdf"]
         if p.name not in allowed:
             return False, f"{kind} غير مسموح: {p.name} (المسموح: PDF تقرير اليوم أو خريطته)"
-    if getattr(args, "validate_only", False):
-        return True, "تحقق مطابق للسياسة (بلا إرسال)"
     for t in targets:
         if _sent_today(t.get("label", "?"), args.date):
             return False, (f"أُرسل تقرير {args.date} إلى «{t.get('label')}» سابقًا. "
                            "لا تكرار ولا تحديثات بعد الإرسال.")
+    if getattr(args, "validate_only", False):
+        return True, "تحقق مطابق للسياسة (بلا إرسال)"
     return True, "تقرير صباحي رسمي — مطابق للسياسة"
 
 
