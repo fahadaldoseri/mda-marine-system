@@ -134,14 +134,14 @@ def main():
                 except Exception as _e:
                     print("BUILD-ERR:", type(_e).__name__, _e, file=sys.stderr)
                     html = None
+            else:
+                print("   · تخطّي فحص المخرج: لا شجرة بناء هنا (متن المصدر غير موجود)")
             if html is None and _md.exists():
                 raise RuntimeError("تعذّر بناء الصفحة لقياس المخرج")
             html = html if isinstance(html, str) else json.dumps(html, ensure_ascii=False)
-            if _md.exists():
-                check(html.count("sc-kpi-row-2") >= 1, "صفّ ثانٍ مُخرَج في المخرج")
-                except Exception as exc:  # pragma: no cover
-            else:
-                print("   · تخطّي بندَي المخرج: لا شجرة بناء هنا")
+            check("sc-kpi-key" in html, "المفتاح يظهر في المخرج مع بطاقات مصنّفة")
+            check(html.count("sc-kpi-row-2") >= 1, "صفّ ثانٍ مُخرَج في المخرج")
+    except Exception as exc:  # pragma: no cover
         check(False, f"تعذّر استدعاء طبقة العرض: {type(exc).__name__}: {exc}")
 
     print("═══ النتيجة ═══")
