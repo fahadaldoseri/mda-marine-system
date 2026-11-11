@@ -198,7 +198,8 @@
       "brain/research/styles/sources/archive-reports.html"
     ],
     "protected": [
-      "brain/secrets/secrets.env"
+      "brain/secrets/secrets.env",
+      "brain/state/webhook-secret.txt"
     ],
     "symlink_views": [
       "brain/web/blocks.py",
