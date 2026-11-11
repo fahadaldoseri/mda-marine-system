@@ -121,22 +121,23 @@ def main():
             check(False, "دالة عرض بطاقات الشاشة متاحة")
         else:
             # مسار موثوق: بناء الصفحة الفعلي ثم قياس مخرجها
+            _md = pathlib.Path("sources/reports/%s-sectioned.md" % args.date)
             html = None
-            try:
-                sys.path.insert(0, "generator")
-                import build_report as _BR
-                _out = pathlib.Path("dist/reports/%s.html" % args.date)
-                _out.parent.mkdir(parents=True, exist_ok=True)
-                _BR.build(pathlib.Path("sources/reports/%s-sectioned.md" % args.date), _out,
-                          json.loads(pathlib.Path("sources/meta/%s.json" % args.date).read_text(encoding="utf-8")))
-                html = _out.read_text(encoding="utf-8")
-            except Exception as _e:
-                _SKIP = isinstance(_e, FileNotFoundError)
-                print("BUILD-ERR:", type(_e).__name__, _e, file=sys.stderr)
-                html = None
-            if html is None and not _SKIP:
+            if _md.exists():
+                try:
+                    sys.path.insert(0, "generator")
+                    import build_report as _BR
+                    _out = pathlib.Path("dist/reports/%s.html" % args.date)
+                    _out.parent.mkdir(parents=True, exist_ok=True)
+                    _BR.build(_md, _out, json.loads(pathlib.Path("sources/meta/%s.json" % args.date).read_text(encoding="utf-8")))
+                    html = _out.read_text(encoding="utf-8")
+                except Exception as _e:
+                    print("BUILD-ERR:", type(_e).__name__, _e, file=sys.stderr)
+                    html = None
+            else:
                 print("   · تخطّي فحص المخرج: لا شجرة بناء هنا (متن المصدر غير موجود)")
-                raise RuntimeError("تعذّر استدعاء دالة العرض: %s: %s" % (type(globals().get("_ERR")).__name__, globals().get("_ERR")))
+            if html is None and _md.exists():
+                raise RuntimeError("تعذّر بناء الصفحة لقياس المخرج")
             html = html if isinstance(html, str) else json.dumps(html, ensure_ascii=False)
             check("sc-kpi-key" in html, "المفتاح يظهر في المخرج مع بطاقات مصنّفة")
             check(html.count("sc-kpi-row-2") >= 1, "صفّ ثانٍ مُخرَج في المخرج")
