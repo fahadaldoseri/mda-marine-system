@@ -501,6 +501,24 @@ def _card_fragments_en(n: str, tr, tr_area) -> str | None:
 
 def localize_patterns(s: str) -> str | None:
     n = norm(s)
+    # ك-11-11ب: وحدات ديناميكية (وقت الواقعة · موثوقية المصدر برمزها) — تُبنى بنمط مع حفظ الرموز.
+    _m = re.fullmatch(r"(?P<d>[0-9]{4}-[0-9]{2}-[0-9]{2})\s*·\s*وقت الواقعة غير متاح", s.strip())
+    if _m:
+        return f"{_m.group('d')} · Incident time unavailable"
+    _m = re.fullmatch(r"موثوقية المصدر:\s*(?P<r>[A-F]\s*/\s*[0-9])", s.strip())
+    if _m:
+        return f"Source reliability: {_m.group('r').replace(' ', '')}"
+    _m = re.fullmatch(r"موثوقية المصدر:\s*(?P<r>[A-F]\s*/\s*[0-9])\s*·\s*(?P<d>.+)", s.strip())
+    if _m:
+        desc = _gl_term(_m.group('d').strip()) or tr(_m.group('d').strip())
+        if desc:
+            return f"Source reliability: {_m.group('r').replace(' ', '')} · {desc}"
+    # ك-11-11: سلسلة الاختصار الديناميكية وعبارة التمرير — تُبنى بنمط لا بمعجم، مع حفظ الرموز.
+    _m = re.fullmatch(r"اختصار:\s*(?P<a>[^؛]+)؛\s*الرمز الكامل:\s*(?P<b>[^؛]+?)\.?\s*", s)
+    if _m:
+        return f"Abbreviation: {_m.group('a').strip()}; full code: {_m.group('b').strip()}"
+    if s.strip() == "يمكن استعراض كامل الخريطة بالتمرير الأفقي.":
+        return "The full map can be viewed by horizontal scrolling."
     if n == "غير قابل للتحقق":
         return "Not verifiable"
     if n == "وقت الفحص:":
