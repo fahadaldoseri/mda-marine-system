@@ -120,15 +120,23 @@ def main():
         if fn is None:
             check(False, "دالة عرض بطاقات الشاشة متاحة")
         else:
+            # مسار موثوق: بناء الصفحة الفعلي ثم قياس مخرجها
             html = None
-            for arg in (str(meta_p), meta):
-                try:
-                    html = fn(arg)
-                    break
-                except Exception:
-                    continue
-            if html is None:
-                raise RuntimeError("تعذّر استدعاء دالة العرض بالمسار أو بالبيانات")
+            try:
+                sys.path.insert(0, "generator")
+                import build_report as _BR
+                _out = pathlib.Path("dist/reports/%s.html" % args.date)
+                _out.parent.mkdir(parents=True, exist_ok=True)
+                _BR.build(pathlib.Path("sources/reports/%s-sectioned.md" % args.date), _out,
+                          json.loads(pathlib.Path("sources/meta/%s.json" % args.date).read_text(encoding="utf-8")))
+                html = _out.read_text(encoding="utf-8")
+            except Exception as _e:
+                _SKIP = isinstance(_e, FileNotFoundError)
+                print("BUILD-ERR:", type(_e).__name__, _e, file=sys.stderr)
+                html = None
+            if html is None and not _SKIP:
+                print("   · تخطّي فحص المخرج: لا شجرة بناء هنا (متن المصدر غير موجود)")
+                raise RuntimeError("تعذّر استدعاء دالة العرض: %s: %s" % (type(globals().get("_ERR")).__name__, globals().get("_ERR")))
             html = html if isinstance(html, str) else json.dumps(html, ensure_ascii=False)
             check("sc-kpi-key" in html, "المفتاح يظهر في المخرج مع بطاقات مصنّفة")
             check(html.count("sc-kpi-row-2") >= 1, "صفّ ثانٍ مُخرَج في المخرج")
