@@ -2797,3 +2797,74 @@ remote:
 تم دفع الفرع فقط: backup/2026-11-11-160208-3113391
 تم إنشاء طلب الدمج: https://github.com/fahadaldoseri/mda-marine-system/pull/621
 === انتهى: 2026-11-11T16:02:16Z ===
+=== بدء النسخ الاحتياطي: 2026-11-11T18:46:15Z ===
+حارس شجرة النسخ: تغييرات Git=26 · سجلات تشغيل معلنة=14 · كتل مولَّدة=0 · تعديلات حاكمة=12
+  ✔ سجل تشغيل معلن: brain/logs/gate-verdict-2026-11-11.json · sha256=962093149e1dbf4919b9fa074cd97260181b791226149e707db346442971ee90
+  ✔ سجل تشغيل معلن: brain/logs/github-backup-2026-11-11.log · sha256=53ab5612e99f78fa6c5dbc9ff23f9e31c7360b81f3ea5e7cffd95aef2509e64b
+  ✔ سجل تشغيل معلن: brain/logs/publish-2026-11-11-telegram.json · sha256=c767bbb9dbdbb8b0442bcf930c576483938eb51c61846f01f4bcc5edfe94799a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-11.jsonl · sha256=0d71d308ed7571174b52b00b247274d3eb69f6f682365b84a1bb85baf5bc9c89
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-11/B010.log · sha256=077e55b2d7a55dbe19f8f6cb779c2aa2bb73c2beaf6f07e15991711788b2e810
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-11/D030.log · sha256=03289664d60c63811cd114b5fcbe49595e4647f5c766e513422b1072f1121d3f
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-11/D031.log · sha256=ba133828dbec1f0a041afe03e71bef3d97ca8b1948cf4a31a97346d3caeef727
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-11/G011.log · sha256=ac655155a8bc21a5c5e63aecca1bbbc2854458a4a6bfc7630441ae4db6fba523
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-11/S065.log · sha256=1711ae47c261602589d5df05bcd4dbf692c1a4f564eac6d9842841b5003a7ca3
+  ✔ سجل تشغيل معلن: brain/logs/telegram-archive/2026-11-11-2026-11-11T181623Z.html · sha256=492fe2f954859b915e5fa306e0aa13da4913900311e2b532d245a4dbf71fa3ad
+  ✔ سجل تشغيل معلن: brain/logs/telegram-archive/2026-11-11-2026-11-11T181631Z.html · sha256=492fe2f954859b915e5fa306e0aa13da4913900311e2b532d245a4dbf71fa3ad
+  ✔ سجل تشغيل معلن: brain/logs/telegram-sends.jsonl · sha256=319524cfef4d54494648fd483d5154e92bc2399cd1f20b6e1d468d9d3ac20567
+  ✔ سجل تشغيل معلن: brain/logs/tg-digest-2026-11-11.html · sha256=492fe2f954859b915e5fa306e0aa13da4913900311e2b532d245a4dbf71fa3ad
+  ✔ سجل تشغيل معلن: brain/state/telegram-resend-2026-11-11.json · sha256=c9e0d3c9427893a8ab3e3c323cc5e4030e1c6b2101932b3e9b091533203a9f36
+  ✘ تعديل حاكم: brain/notes/2026-11-11-round-state.md · sha256=7c4b2077415cc1def8338d693a76c08cbf00a2759c6049753d3a07de1f1796a0
+  ✘ تعديل حاكم: brain/notes/audit-report-2026-11-11.md · sha256=cddbdd58a49b731b75d8a0eaf062df125fa095daf9022e5cef1e4fa1c6966680
+  ✘ تعديل حاكم: brain/tools/classify_zones.py · sha256=ef59f0cb296e2db6e8a743abfa6c5808c37ebc9ef3843792440dad76ddc19eda
+  ✘ تعديل حاكم: brain/web/meta/2026-11-11.json · sha256=d3d8802643b581c556f2ba521366fd040da323cd5f6a4c46ff4d3c8a1c895b41
+  ✘ تعديل حاكم: brain/web/zones/2026-11-11.json · sha256=92bf3f1f29519773711aa03ce16b42782f64f32b58ceb0df5fe75d58650d4fba
+  ✘ تعديل حاكم: site/generator/build_report.py · sha256=4c19345cc4768086807e17cddc0eb81a9eddeedbd5db921e9aee221d9d5b3d6d
+  ✘ تعديل حاكم: site/generator/map_gulf.py · sha256=534e95b3f738d4d1476a2109afbeb871156318fe52f28a1f3aed827f5296859c
+  ✘ تعديل حاكم: site/generator/site_chrome.py · sha256=5c696ae96fdc8755de93f352f191609c0b0ad86ff9c15f482dcffdd088b843e3
+  ✘ تعديل حاكم: site/sources/i18n/en/glossary.json · sha256=8d96c3f14dbf3add35a06c360fee628d80acb7ae617e3035cad3702102e4b587
+  ✘ تعديل حاكم: site/tests/test_map_events_table.py · sha256=271222e4b6b3bc58eb82649751bcc11aa34d434fcd526ae1a7df07349d8f9af8
+  ✘ تعديل حاكم: skills/fault-closure-and-learning-ops/SKILL.md · sha256=a1183410b4f07e338e71011394fde3ec108aacc7cfbad1c65336678646d2369a
+  ✘ تعديل حاكم: skills/multi-agent-audit-ops/SKILL.md · sha256=88691d15301d5de44ee03654cef3fcdf5c1458975bf77cf906dd6249eca82899
+✘ فشل مغلق: توجد تعديلات شيفرة/بيانات حقيقية خارج سجلات التشغيل المعلنة
+✘ فشل مغلق: حارس شجرة النسخ منع العملية؛ راجع تصنيف المسارات وبصمات SHA-256
+=== بدء النسخ الاحتياطي: 2026-11-11T19:05:01Z ===
+حارس شجرة النسخ: تغييرات Git=18 · سجلات تشغيل معلنة=15 · كتل مولَّدة=0 · تعديلات حاكمة=3
+  ✔ سجل تشغيل معلن: brain/logs/gate-verdict-2026-11-11.json · sha256=962093149e1dbf4919b9fa074cd97260181b791226149e707db346442971ee90
+  ✔ سجل تشغيل معلن: brain/logs/github-backup-2026-11-11.log · sha256=c77445992755ede8715b973775da26c6a0f3ef0f83a5c5797907ccc041f16599
+  ✔ سجل تشغيل معلن: brain/logs/publish-2026-11-11-telegram.json · sha256=c767bbb9dbdbb8b0442bcf930c576483938eb51c61846f01f4bcc5edfe94799a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-11.jsonl · sha256=3f63f0feffe6c84c9dba9a8b9345ca82b9bdd2a7c2c407734591078c51a32c6e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-11/B010.log · sha256=2c6adc3255d10b8901a82d35b8f828bd2f1a2eb5c1716d993a5f8fa02393ab88
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-11/D005.log · sha256=fc9da14ba81b9024484c36e4793108d74ef5779693db4e82beb912cf90911576
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-11/D030.log · sha256=03289664d60c63811cd114b5fcbe49595e4647f5c766e513422b1072f1121d3f
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-11/D031.log · sha256=ba133828dbec1f0a041afe03e71bef3d97ca8b1948cf4a31a97346d3caeef727
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-11/G011.log · sha256=ac655155a8bc21a5c5e63aecca1bbbc2854458a4a6bfc7630441ae4db6fba523
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-11/S065.log · sha256=1711ae47c261602589d5df05bcd4dbf692c1a4f564eac6d9842841b5003a7ca3
+  ✔ سجل تشغيل معلن: brain/logs/telegram-archive/2026-11-11-2026-11-11T181623Z.html · sha256=492fe2f954859b915e5fa306e0aa13da4913900311e2b532d245a4dbf71fa3ad
+  ✔ سجل تشغيل معلن: brain/logs/telegram-archive/2026-11-11-2026-11-11T181631Z.html · sha256=492fe2f954859b915e5fa306e0aa13da4913900311e2b532d245a4dbf71fa3ad
+  ✔ سجل تشغيل معلن: brain/logs/telegram-sends.jsonl · sha256=319524cfef4d54494648fd483d5154e92bc2399cd1f20b6e1d468d9d3ac20567
+  ✔ سجل تشغيل معلن: brain/logs/tg-digest-2026-11-11.html · sha256=492fe2f954859b915e5fa306e0aa13da4913900311e2b532d245a4dbf71fa3ad
+  ✔ سجل تشغيل معلن: brain/state/telegram-resend-2026-11-11.json · sha256=c9e0d3c9427893a8ab3e3c323cc5e4030e1c6b2101932b3e9b091533203a9f36
+  ✘ تعديل حاكم: brain/tools/classify_zones.py · sha256=ef59f0cb296e2db6e8a743abfa6c5808c37ebc9ef3843792440dad76ddc19eda
+  ✘ تعديل حاكم: brain/web/meta/2026-11-11.json · sha256=d3d8802643b581c556f2ba521366fd040da323cd5f6a4c46ff4d3c8a1c895b41
+  ✘ تعديل حاكم: brain/web/zones/2026-11-11.json · sha256=92bf3f1f29519773711aa03ce16b42782f64f32b58ceb0df5fe75d58650d4fba
+✘ فشل مغلق: توجد تعديلات شيفرة/بيانات حقيقية خارج سجلات التشغيل المعلنة
+✘ فشل مغلق: حارس شجرة النسخ منع العملية؛ راجع تصنيف المسارات وبصمات SHA-256
+=== بدء النسخ الاحتياطي: 2026-11-11T19:06:29Z ===
+حارس شجرة النسخ: تغييرات Git=15 · سجلات تشغيل معلنة=14 · كتل مولَّدة=0 · تعديلات حاكمة=1
+  ✔ سجل تشغيل معلن: brain/logs/gate-verdict-2026-11-11.json · sha256=962093149e1dbf4919b9fa074cd97260181b791226149e707db346442971ee90
+  ✔ سجل تشغيل معلن: brain/logs/github-backup-2026-11-11.log · sha256=6f3ab11fddc729f38759468b44ce27d742bec0feb6174afa8da29b44e650b5b7
+  ✔ سجل تشغيل معلن: brain/logs/publish-2026-11-11-telegram.json · sha256=c767bbb9dbdbb8b0442bcf930c576483938eb51c61846f01f4bcc5edfe94799a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-11.jsonl · sha256=57b0055357cafb95cd6aa5c9cbb0b5ee29a9ca9016cf6ececf36da00e6d407e2
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-11/B010.log · sha256=2c6adc3255d10b8901a82d35b8f828bd2f1a2eb5c1716d993a5f8fa02393ab88
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-11/D005.log · sha256=816bf1927122135dbe0e3be2adebcfe9295bd809cfc05a266695b23fceb985b6
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-11/D030.log · sha256=03289664d60c63811cd114b5fcbe49595e4647f5c766e513422b1072f1121d3f
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-11/D031.log · sha256=ba133828dbec1f0a041afe03e71bef3d97ca8b1948cf4a31a97346d3caeef727
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-11/G011.log · sha256=ac655155a8bc21a5c5e63aecca1bbbc2854458a4a6bfc7630441ae4db6fba523
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-11/S065.log · sha256=1711ae47c261602589d5df05bcd4dbf692c1a4f564eac6d9842841b5003a7ca3
+  ✔ سجل تشغيل معلن: brain/logs/telegram-archive/2026-11-11-2026-11-11T181623Z.html · sha256=492fe2f954859b915e5fa306e0aa13da4913900311e2b532d245a4dbf71fa3ad
+  ✔ سجل تشغيل معلن: brain/logs/telegram-archive/2026-11-11-2026-11-11T181631Z.html · sha256=492fe2f954859b915e5fa306e0aa13da4913900311e2b532d245a4dbf71fa3ad
+  ✔ سجل تشغيل معلن: brain/logs/telegram-sends.jsonl · sha256=319524cfef4d54494648fd483d5154e92bc2399cd1f20b6e1d468d9d3ac20567
+  ✔ سجل تشغيل معلن: brain/logs/tg-digest-2026-11-11.html · sha256=492fe2f954859b915e5fa306e0aa13da4913900311e2b532d245a4dbf71fa3ad
+  ✘ تعديل حاكم: brain/tools/classify_zones.py · sha256=ef59f0cb296e2db6e8a743abfa6c5808c37ebc9ef3843792440dad76ddc19eda
+✘ فشل مغلق: توجد تعديلات شيفرة/بيانات حقيقية خارج سجلات التشغيل المعلنة
+✘ فشل مغلق: حارس شجرة النسخ منع العملية؛ راجع تصنيف المسارات وبصمات SHA-256
