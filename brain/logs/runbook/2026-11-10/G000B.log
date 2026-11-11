@@ -1,0 +1,16 @@
+usage: hermetic_run.sh [options] -- command [args...]
+
+Run an argv command inside a read-only bubblewrap sandbox with no network.
+
+options:
+  --timeout SEC       hard wall-clock timeout (default: 60)
+  --memory-mb MB      MemoryMax/ulimit virtual-memory ceiling (default: 512)
+  --cpu-quota PCT     CPUQuota for systemd-run (default: 50%)
+  --tasks-max N       TasksMax/ulimit process ceiling (default: 64)
+  --workdir DIR       isolated writable directory outside the project
+  --name NAME         evidence name (default: basename of command)
+  -h, --help          show this help
+
+The separator -- is mandatory. Unknown options exit 2. Every command run emits
+ evidence/hermetic/<name>.json and a raw strace file at a stable, overwriting path.
+elapsed_seconds=0.010470
