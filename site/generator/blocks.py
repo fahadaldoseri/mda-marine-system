@@ -11,6 +11,7 @@ import html
 import re
 import contextvars
 import json
+import os
 from pathlib import Path
 
 from codes import label as _code_label, demote as _demote  # سياسة عرض الرموز (2+5)
@@ -131,8 +132,21 @@ def _points(value: str):
     return None
 
 
-def decision_card(dc, inline):
-    """أهم الأخبار المتعلقة بالأمن البحري: ما تغيّر · الخطر · التوصيات · ما يُراقب."""
+def _sec_link(label, anchors) -> str:
+    """اسم القسم مع رابط داخلي حين يوجد مرساة معلنة (قرار المالك م-32)."""
+    name = esc(label)
+    anchor = (anchors or {}).get(label)
+    if not anchor:
+        return f"قسم «{name}»"
+    return f'قسم <a href="#{esc(str(anchor))}">{name}</a>'
+
+
+def decision_card(dc, inline, anchors=None):
+    """أهم الأخبار المتعلقة بالأمن البحري: ما تغيّر · الخطر · التوصيات · ما يُراقب.
+
+    ``anchors`` مراسي الأقسام في الصفحة نفسها؛ تُستعمل لربط كل إحالة باسم قسمها
+    برابط داخلي عامل بدل نص بلا رابط (عطل م-32).
+    """
     if not isinstance(dc, dict):
         return ""
     # سياسة منع التكرار (قرار المالك 2026-10-30): المستوى يُعرض مرة واحدة في بطاقة
@@ -153,7 +167,8 @@ def decision_card(dc, inline):
         if pts and label == "ما يُراقب خلال 24 ساعة":
             # صف المراقبة يُعرض عددًا وإحالة: النصوص الكاملة في قسم المؤشرات (منع التكرار الحرفي)
             n_watch = _sec_count((_CODE_CTX.get() or {}).get("date") or "", "علامات الإنذار المبكر", default=0) or len(pts)
-            body = (f'<p class="dc-note">عدد البنود: {n_watch} · وتفصيلها في قسم «علامات الإنذار المبكر».</p>')
+            body = (f'<p class="dc-note">عدد البنود: {n_watch} · وتفصيلها في '
+                    f'{_sec_link("علامات الإنذار المبكر", anchors)}.</p>')
         elif pts:
             # الاقتصار على بندين في البطاقة (الباقي في القسم الكامل) — يمنع التكرار الحرفي
             shown, extra = pts[:2], max(0, len(pts) - 2)
@@ -161,7 +176,7 @@ def decision_card(dc, inline):
                 f"<li>{inline(code_text(p))}</li>" for p in shown
             ) + "</ul>"
             if extra:
-                body += f'<p class="dc-note">و{extra} بنود أخرى في قسم «{label}».</p>'
+                body += f'<p class="dc-note">و{extra} بنود أخرى في {_sec_link(label, anchors)}.</p>'
         else:
             body = inline(code_text(value))
         cells.append(
@@ -283,9 +298,29 @@ def _public_gap_text(value: object) -> str:
     """طبّق بدائل السجل الحاكم على نص كتلة الإضافات قبل عرضه للقارئ."""
     global _PUBLIC_GAP_REPLACEMENTS
     if _PUBLIC_GAP_REPLACEMENTS is None:
-        candidates = (
-            Path(__file__).resolve().parents[2] / "brain-marine-news" / "appendices" / "forbidden-coinages.json",
-            Path(__file__).resolve().parents[1] / "appendices" / "forbidden-coinages.json",
+        # ك-572: السجل يُقاس من الجذر القانوني لا من مسار مثبَّت، وإلا خرجت
+        # البدائل فارغة فظهر لفظ ممنوع في صفحة الإضافات.
+        candidates: list[Path] = []
+        try:
+            from .brain_root import under_brain  # داخل الحزمة
+        except ImportError:
+            try:
+                from brain_root import under_brain  # وحدة مفردة في شجرة التشغيل
+            except ImportError:
+                under_brain = None  # type: ignore[assignment]
+        if under_brain is not None:
+            try:
+                candidates.append(under_brain("appendices", "forbidden-coinages.json"))
+            except (SystemExit, OSError):
+                pass
+        env_root = os.environ.get("BRAIN_DIR") or os.environ.get("BRAIN")
+        if env_root:
+            candidates.append(Path(env_root) / "appendices" / "forbidden-coinages.json")
+        candidates.extend(
+            (
+                Path(__file__).resolve().parents[2] / "brain" / "appendices" / "forbidden-coinages.json",
+                Path(__file__).resolve().parents[1] / "appendices" / "forbidden-coinages.json",
+            )
         )
         pairs: dict[str, str] = {}
         for path in candidates:
@@ -611,10 +646,15 @@ def intel_analysis(data, inline):
 
     inds = data.get("indicators") or []
     if inds:
-        rws = [[i.get("indicator", ""), i.get("confirms", ""), i.get("refutes", ""), i.get("state", "")]
-               for i in inds]
-        out.append('<h3>علامات الإنذار المبكر</h3><p class="blk-lede">المؤشر · ما يؤكده · ما ينفيه · الحالة.</p>'
-                   + _table(["المؤشر", "ما يؤكده", "ما ينفيه", "الحالة"], rws, inline))
+        # الشكل المعتمد في عقد الواجهة: name · current · previous · trend · meaning
+        # (INDICATOR_FIELDS في validators/validate_report.py). كان القالب يقرأ أسماء
+        # قديمة فيسقط بـAttributeError على أي يوم يحمل المؤشرات بالشكل المعتمد.
+        rws = [[i.get("name", ""), i.get("current", ""), i.get("previous", ""),
+                i.get("trend", ""), i.get("meaning", "")]
+               for i in inds if isinstance(i, dict)]
+        out.append('<h3>علامات الإنذار المبكر</h3><p class="blk-lede">المؤشر · ما يؤكده · ما ينفيه · '
+                   + _table(["المؤشر", "القيمة الحالية", "القيمة السابقة", "الاتجاه", "المعنى"],
+                            rws, inline))
 
     yr = data.get("yesterday_review") or []
     if yr:

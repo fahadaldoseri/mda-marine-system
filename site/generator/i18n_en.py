@@ -651,6 +651,18 @@ def localize_patterns(s: str) -> str | None:
     if m:
         return f"and {m.group(1)} further items in the «What changed» section."
 
+    # حافظ على مرساة رابط التوصيات عند ترجمة الملاحظة ذات البنية المعروفة.
+    m = re.fullmatch(
+        r'و(\d+)\s+بنود أخرى في\s*<a class="dc-jump" href="#sec-decision">قسم «التوصيات»</a>\.',
+        n,
+    )
+    if m:
+        return (f'and {m.group(1)} further items in '
+                f'<a class="dc-jump" href="#sec-decision">the Recommendations section</a>.')
+    m = re.fullmatch(r"و(\d+)\s+بنود أخرى في قسم «التوصيات»\.", n)
+    if m:
+        return f"and {m.group(1)} further items in the Recommendations section."
+
     # ترويسة بطاقة القطاعات: المستوى والاسم المركب يأتيان من السجل الحاكم.
     m = re.fullmatch(
         r"المستوى العام\s+(?P<level>حرج|مرتفع جدًا|مرتفع|متوسط|منخفض)\.\s+"
@@ -1960,6 +1972,16 @@ def _element_governed_overrides(html_text: str, tm: dict[str, str], gl: dict[str
         if _ELEMENT_RE.search(inner):
             return match.group(0)
         plain = norm(re.sub(r"<[^>]+>", " ", inner))
+        # تُترجم ملاحظة التوصيات من HTML الخام كي تبقى مرساتها ورابطها محفوظين.
+        if '<a class="dc-jump" href="#sec-decision">' in inner:
+            tagged = localize_patterns(norm(inner))
+            if (tagged and not ARABIC.search(tagged)
+                    and _preserves_numeric_tokens(plain, tagged)):
+                return f"<{tag}{attrs}>{tagged}</{tag}>"
+        # لا تسبق الترجمة التامة مخطط الوسوم السطرية؛ فهو يفرض حدود LTR
+        # ويحدّ تكرار الكيان بعد إعادته إلى موضعه الأصلي.
+        if _INLINE_RE.search(inner):
+            return match.group(0)
         # حدّ الوسم قد يُدخل فراغًا قبل ترقيم عربي («JMIC ،» بدل «JMIC،»)،
         # فيُطابَق النص بصيغتين: كما هو، وبلا فراغ قبل الترقيم.
         keys = [plain, re.sub(r"\s+([،؛:.!؟])", r"\1", plain)]
