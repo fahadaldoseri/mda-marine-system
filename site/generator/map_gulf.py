@@ -756,7 +756,7 @@ MAP_KEY_STYLE = """<style>
 
 
 def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lon, grid_lat,
-           extra_svg="", overlay=""):
+           extra_svg="", overlay="", extra_events=None):
     land_svg = "".join(
         f'<path d="{d}" style="fill:#264b68;stroke:#78b7cc;stroke-width:1.2;vector-effect:non-scaling-stroke"/>'
         for d in _land_paths())
@@ -905,6 +905,23 @@ def _panel(title, points, label_prefix, caption, seas, ports, countries, grid_lo
             f'<td>{_esc(_safe_map_text(str(p.get("class") or "غير محددة")))} · {_esc(str(p.get("confirmation") or "غير محدد"))}</td>'
             f'<td>{_esc(_tl_txt)}</td>'
             f'<td>{_esc(_ves or "غير محددة في المواد الحالية")}</td></tr>')
+    # ك-227 (2026-11-11): واقعة مؤهلة بلا إحداثيات كانت تُسقط من جدول التفاصيل
+    # لأن الجدول يُبنى من نقاط الخريطة وحدها، فيظهر الجدول ناقصًا صفًا مقابل سجل الوقائع.
+    # تُضاف صفوفها من سجل اليوم نفسه، بمفردات قائمة في المعجم كي لا يتوقف البناء المغلق.
+    for _e in (extra_events or []):
+        _ecode = str(_e.get("code") or "").strip()
+        if not _ecode:
+            continue
+        # لا يُكرّر صف واقعة لها علامة على الخريطة (الرمز الكامل مقابل رمز العلامة المختصر)
+        if _ecode in {str(p.get("code") or "").strip() for p in points}:
+            continue
+        _eclass = str(_e.get("class") or "").strip() or "بلاغ رسمي"
+        ev_rows.append(
+            f'<tr><td><bdi class="bidi">{_esc(_ecode)}</bdi></td>'
+            f'<td>غير محددة في المواد الحالية</td>'
+            f'<td>{_esc(_eclass)} · غير محدد</td>'
+            f'<td>{_esc(str(_e.get("date") or ""))}</td>'
+            f'<td>غير محددة في المواد الحالية</td></tr>')
     events_html = ('<details class="mp-events-detail"><summary>تفاصيل الوقائع: الخط الزمني وتفاصيل السفينة</summary>'
                    '<table class="mp-ev-table"><thead><tr><th>المعرّف</th><th>المنطقة</th><th>الصفة والإثبات</th>'
                    '<th>الخط الزمني</th><th>السفينة</th></tr></thead><tbody>'
@@ -1019,7 +1036,8 @@ def _dot_style(p: dict) -> str:
     return "fill:var(--mk);stroke:#081d31;stroke-width:3.4"
 
 
-def build_map(points=None, caption=None, inset=None, zoom=False, zones=None, timeline=None):
+def build_map(points=None, caption=None, inset=None, zoom=False, zones=None, timeline=None,
+              extra_events=None):
     """لوحة رئيسية + لوحة مصغّرة اختيارية لباب المندب."""
     global _ACTIVE_ZONES, _ACTIVE_TIMELINE
     _ACTIVE_ZONES = zones or []
@@ -1048,7 +1066,7 @@ def build_map(points=None, caption=None, inset=None, zoom=False, zones=None, tim
             map_label,
             caption,
             SEAS, PORTS + (SCREEN_ONLY_PORTS if zoom else []), COUNTRIES, GRID_LON, GRID_LAT,
-            extra_svg=zrect, overlay=zhtml,
+            extra_svg=zrect, overlay=zhtml, extra_events=extra_events,
         )
     ]
 

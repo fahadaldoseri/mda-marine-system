@@ -1,3 +1,4 @@
+from brain_root import under_brain as _brain
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -23,37 +24,68 @@
 import argparse
 import html
 import json
-import os
 import re
+import reader_grade_labels
 import threat_card as TC
 import sys
 from datetime import datetime, timezone
 from display_format import format_release_version, format_update_label
+from third_person import to_third_person
+
+# أقسام تُكتب بأسلوب الغائب (م-31): لا صيغة مخاطبة في التوجيهات والتوصيات.
+DIRECTIVE_SECTIONS = ("التوجيهات التشغيلية", "التوصيات", "التوجيهات", "الإجراءات المقترحة")
+
+# CSS فهرس المحتويات (م-32): شريط خفيف لا يدفع بطاقة القرار خارج الشاشة الأولى.
+TOC_CSS = """
+.toc{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:14px 0 4px;font-size:13px}
+.toc .toc-l{color:var(--muted);margin-inline-end:4px}
+.toc a{display:inline-block;padding:3px 9px;border:1px solid var(--line);border-radius:999px;
+  color:var(--ink2);text-decoration:none;background:var(--card)}
+.toc a:hover{border-color:var(--accent);color:var(--accent)}
+.dc-jump{color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px}
+.upd{margin:10px 0}
+.upd .upd-h{font-weight:700;margin:0 0 6px}
+.upd-list{margin:0;padding-inline-start:18px}
+.upd-list li{margin:4px 0}
+"""
+
+
+def _third_person_html(html: str) -> str:
+    """يطبّق أسلوب الغائب على النصوص خارج الوسوم فقط (لا يمسّ السمات)."""
+    parts = re.split(r"(<[^>]+>)", html)
+    return "".join(p if p.startswith("<") else to_third_person(p) for p in parts)
+
+
+def structure_update_paragraphs(html: str) -> str:
+    """م-16: فقرة «تحديث» الكثيفة تُقسَّم بنودًا مع تمييز العنوان وفواصل نصية.
+
+    تعمل على كل الإصدارات بلا قائمة تواريخ ثابتة: أي فقرة طويلة تبدأ بعلامة تحديث
+    تُحوَّل إلى قائمة بنود. الفقرات القصيرة أو غير المصنّفة تمرّ كما هي.
+    """
+    pat = re.compile(r"<p([^>]*)>((?:(?!</p>).){180,4000}?)</p>", re.S)
+
+    def repl(m):
+        attrs, inner = m.group(1), m.group(2)
+        text = re.sub(r"<[^>]+>", "", inner).strip()
+        head = re.match(r"^(تحديث|ما تغيّر|التقدّم|التقدم)\b[:：]?", text)
+        if not head:
+            return m.group(0)
+        parts = [p.strip() for p in re.split(r"\s*(?:؛|\.\s|•)\s*", text) if len(p.strip()) > 25]
+        if len(parts) < 2:
+            return m.group(0)
+        items = "".join(f"<li>{p}</li>" for p in parts)
+        label = head.group(1)
+        return (f'<div class="upd"{attrs}><p class="upd-h">{label}</p>'
+                f'<ul class="upd-list">{items}</ul></div>')
+
+    return pat.sub(repl, html)
+
 from html.parser import HTMLParser
 
 # الاسم المعتمد للتقرير اليومي
-DAILY_TITLE = "التقرير اليومي للأمن البحري والأوضاع الراهنة في المنطقة"
+from daily_title import DAILY_TITLE, normalize_daily_title  # noqa: E402
 HERO_KPI_MODERN_FROM = "2026-10-31"
 from pathlib import Path
-
-
-_REPO_ROOT = Path(__file__).resolve().parents[2]
-
-
-def _brain_root() -> Path:
-    """حل جذر brain من البيئة أو من الشجرة الحالية، لا من اسم قديم ثابت."""
-    configured = os.environ.get("BRAIN_DIR") or os.environ.get("BRAIN")
-    if configured:
-        return Path(configured)
-    candidates = (
-        _REPO_ROOT / "brain",
-        _REPO_ROOT / "brain-marine-news",
-        _REPO_ROOT.parent / "brain-marine-news",
-    )
-    return next((candidate for candidate in candidates if candidate.is_dir()), candidates[0])
-
-
-BRAIN_ROOT = _brain_root()
 
 
 # نمط وسم نوع البند في القوائم — مصدر واحد يخدم القائمة المنظّمة والمرقّمة، فلا يتكرر النمط
@@ -61,7 +93,7 @@ MARK_RE = re.compile(r"^\[(حقيقة|واقعة|تقدير تحليلي|تقد�
 
 # رموز الدرجات داخل المادة المصدرية مفيدة للتدقيق، لكنها ليست لغة قارئ في صفحة «إضافات».
 # تُقرأ الأوصاف من خريطة حاكمة مشتركة مع المولّد الإنجليزي وفاحص التماثل.
-_GRADE_MAP_PATH = BRAIN_ROOT / "appendices" / "confidence-grade-map.json"
+_GRADE_MAP_PATH = _brain("appendices", "confidence-grade-map.json")
 _GRADE_MAP = json.loads(_GRADE_MAP_PATH.read_text(encoding="utf-8"))["grades"]
 _INTERNAL_GRADE_LABELS = {code: entry["arabic"] for code, entry in _GRADE_MAP.items()}
 _INTERNAL_GRADE_RE = re.compile(
@@ -70,8 +102,12 @@ _INTERNAL_GRADE_RE = re.compile(
 
 
 def redact_internal_grade_codes(text: str) -> str:
-    """يحوّل رموز درجات الإسناد إلى أوصاف عربية في سطح القارئ فقط."""
-    return _INTERNAL_GRADE_RE.sub(lambda match: _INTERNAL_GRADE_LABELS[match.group(0)], text)
+    """يحوّل رموز درجات الإسناد إلى وسم القارئ العربي.
+
+    ك-599: الوسم يأتي من الوحدة المشتركة مع المولّد الإنجليزي، فلا يتسرّب رمز
+    داخلي إلى أي سطح، ولا يُحقن وسم عربي في سطح إنجليزي.
+    """
+    return reader_grade_labels.redact(text, "ar")
 
 
 def compact_threat_section_html(section_html: str) -> str:
@@ -113,7 +149,7 @@ import codes  # سياسة عرض رموز الأحداث (كامل مرة وا�
 import screen_layer as SCR  # طبقة الشاشة: القرار فوق الطيّ، للشاشة فقط (لا تمسّ الطباعة)
 from card_measurements import count_rendered_fragment
 
-IMO_INCIDENTS_JSON = BRAIN_ROOT / "appendices" / "imo-incidents.json"
+IMO_INCIDENTS_JSON = _brain("appendices", "imo-incidents.json")
 AR_MONTHS = {
     1: "يناير", 2: "فبراير", 3: "مارس", 4: "أبريل", 5: "مايو", 6: "يونيو",
     7: "يوليو", 8: "أغسطس", 9: "سبتمبر", 10: "أكتوبر", 11: "نوفمبر", 12: "ديسمبر",
@@ -1373,7 +1409,7 @@ def _public_status_replacements():
     if _PUBLIC_STATUS_REPLACEMENTS is not None:
         return _PUBLIC_STATUS_REPLACEMENTS
     candidates = [
-        BRAIN_ROOT / "appendices" / "forbidden-coinages.json",
+        _brain("appendices", "forbidden-coinages.json"),
         Path(__file__).resolve().parents[1] / "appendices" / "forbidden-coinages.json",
     ]
     pairs = {}
@@ -2399,9 +2435,17 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
             from map_gulf import build_map
 
             _cap = ((mp.get("caption") or "") + " " + (mp.get("points_note") or "")).strip()
+            # ك-227: جدول تفاصيل الوقائع كان يُبنى من نقاط الخريطة وحدها، فتُسقط واقعة
+            # مؤهلة بلا إحداثيات. تُمرَّر وقائع اليوم غير المكانية لتُضاف صفوفها.
+            _pcs = {str(p.get("code") or "") for p in (mp.get("points") or [])}
+            _extra_events = [e for e in (daily_events or [])
+                             if str(e.get("code") or "").strip()
+                             and str(e.get("code")) not in _pcs
+                             and not _is_cumulative_update(e)]
             map_html = build_map(mp["points"], _cap, mp.get("inset"),
                              zones=(meta.get("threat_zones") or {}).get("zones"),
-                             timeline=meta.get("timeline"))
+                             timeline=meta.get("timeline"),
+                             extra_events=_extra_events)
         except Exception as e:
             # فشل مغلق: وجود وقائع يعني أن الخريطة عقد إخراج لا عنصر تجميلي.
             if mp.get("points"):
@@ -2420,7 +2464,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
             _hero_map_source = _build_map_hero(
                 mp["points"], _cap_h, mp.get("inset"), zoom=True,
                 zones=(meta.get("threat_zones") or {}).get("zones"),
-                timeline=meta.get("timeline"))
+                timeline=meta.get("timeline"), extra_events=_extra_events)
             _strip = ""
             try:
                 import threat_card as _TC
@@ -2535,6 +2579,8 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
             section_html = render_section_body(t, sec["lines"], defs, doc_mode, section_id=f"sec-{idx + 1:02d}")
         if mode != "additions" and "مستوى التهديد" in t:
             section_html = compact_threat_section_html(section_html)
+        if any(k in t for k in DIRECTIVE_SECTIONS):
+            section_html = _third_person_html(section_html)
         if not codes.is_primary(t):
             section_html = codes.demote(section_html, report_date, official)
         if map_html and "التوزيع الجغرافي للوقائع" in t:
@@ -2598,7 +2644,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
                 '<p class="sec-lede">تعريفات الرموز والمصطلحات المستخدمة في هذا التقرير.</p>'
                 + glossary_html + "</section>")
 
-    title = meta.get("title") or DAILY_TITLE
+    title = normalize_daily_title(meta.get("title")) or DAILY_TITLE
     sub = meta.get("subtitle") or ""
     generated = meta.get("generated_label") or datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     generated_display = format_update_label(generated)
@@ -2636,7 +2682,14 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
 
     date_label = meta.get("date_label") or ""
     cls_html = BLK.classification_banner(meta.get("classification"))
-    decision_html = "" if mode == "additions" else BLK.decision_card(meta.get("decision_card"), inline)
+    anchors = {"مستوى التهديد": "sec-02", "ما تغيّر": "sec-00"}
+    for _i, _s in enumerate(sections):
+        anchors.setdefault(_s["title"], f"sec-{_i + 1:02d}")
+    anchors["أهم الأخبار المتعلقة بالأمن البحري"] = "sec-decision"
+    anchors["التوصيات"] = anchors.get("التوصيات") or anchors.get("التوجيهات التشغيلية", "sec-decision")
+    anchors["ما يُراقب خلال 24 ساعة"] = anchors.get("علامات الإنذار المبكر", "sec-decision")
+    decision_html = "" if mode == "additions" else BLK.decision_card(
+        meta.get("decision_card"), inline, anchors=anchors)
     # سياسة الأقسام 2026-10-28: «ما تغيّر» منقول إلى صفحة «إضافات»
     if mode == "additions":
         changes_html = BLK.changes_block(meta.get("changes"), inline)
@@ -2646,6 +2699,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
         changes_html = ("" if (_adds_live and _hidden("ما تغيّر"))
                         else BLK.changes_block(meta.get("changes"), inline))
     card_targets = _card_targets(source_sections, sections, meta, defs, report_date)
+    # خريطة مراسي الأقسام (م-32): تربط بنود البطاقة بأقسامها بلا نص مكرر.
     # قرار المالك 2026-11-04: كتلة «أهم الأخبار المتعلقة بالأمن البحري» انتقلت من
     # صفحة الإصدار إلى صفحة «إضافات»، ويبقى في الإصدار سطر إشارة واحد فقط.
     if mode == "additions":
@@ -2657,6 +2711,17 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
             threat_cls=tcls, doc_mode=doc_mode, news_card=False,
             archived=meta.get("screen_archived") or False, card_targets=card_targets)
         screen_hero_html += SCR.news_pointer()
+    # معرّف قسم المستجدات الرسمية (م-32): يدخل فهرس المحتويات والربط الداخلي.
+    if '<section class="sc-official-cards"' in screen_hero_html:
+        screen_hero_html = screen_hero_html.replace(
+            '<section class="sc-official-cards"',
+            '<section class="sc-official-cards" id="sec-official" aria-labelledby="h-official"', 1)
+        screen_hero_html = screen_hero_html.replace(
+            '<h2 class="sc-h2">المستجدات الرسمية</h2>',
+            '<h2 class="sc-h2" id="h-official">المستجدات الرسمية</h2>', 1)
+    if '<section class="print-map' in hero_map_html:
+        hero_map_html = hero_map_html.replace(
+            '<section class="print-map', '<section id="sec-map" class="print-map', 1)
     ledger_html = (
         f'<div class="glossary">السجل التراكمي: '
         f'<a class="bidi" href="{esc(meta["ledger_url"])}" target="_blank" rel="noopener noreferrer">{esc(meta["ledger_url"])}</a></div>'
@@ -2674,7 +2739,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
 <script>document.documentElement.className='js';</script>
 <script>(function(){{var f=function(){{var els=[document.querySelector('.topbar'),document.querySelector('.site-nav')].filter(Boolean);if(!els.length)return;var c=window.scrollY>140;els.forEach(function(e){{e.classList.toggle('is-compact',c)}})}};var g=function(){{f();window.addEventListener('scroll',f,{{passive:true}})}};if(document.readyState==='loading'){{document.addEventListener('DOMContentLoaded',g)}}else{{g()}}}})();</script>
 <link rel="stylesheet" href="{FONT_LINK}">
-<style>{DESIGN_TOKENS}{STYLE}{BLK.STYLE_BLOCKS}{DAYLIGHT}{LINK_RULE}</style>
+<style>{DESIGN_TOKENS}{STYLE}{TOC_CSS}{BLK.STYLE_BLOCKS}{DAYLIGHT}{LINK_RULE}</style>
 </head>
 <body>
 <div class="topbar no-print">
@@ -2695,7 +2760,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
 
 <div class="wrap">
   <header class="masthead">
-    <h1>{esc(meta.get("headline") or title)}</h1>
+    <h1>{esc(normalize_daily_title(meta.get("headline")) or title)}</h1>
     {threat_html}
     <div>
       <p class="lede">{codes.demote(esc(_public_text(meta.get("lede") or "")), report_date, official)}</p>
@@ -2705,6 +2770,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
 
   {cls_html}
   {decision_html}
+  @@TOC@@
   {kpi_html}
   {screen_hero_html}
   {hero_map_html}
@@ -2724,6 +2790,43 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
 <script>{SCRIPT}</script>
 </body>
 </html>"""
+    # فهرس المحتويات (م-32): يُشتق من الوثيقة المجمّعة فعليًا بعد الرسم، فيغطي كل
+    # قسم في أي نمط (تقرير · إضافات) ولا يتباعد عن الصفحة بأي قائمة ثابتة.
+    _toc = []
+    if decision_html:
+        _toc.append(("sec-decision", "أهم الأخبار"))
+    for _m in re.finditer(r'<section[^>]*\bid="(sec-[^"]+)"[^>]*>(.*?)</section>', doc, re.S):
+        _h = re.search(r"<h2[^>]*>(.*?)</h2>", _m.group(2), re.S)
+        if not _h:
+            continue
+        _tt = re.sub(r"<[^>]+>", "", _h.group(1)).strip()
+        if _tt and _m.group(1) not in [x[0] for x in _toc]:
+            _toc.append((_m.group(1), _tt))
+    for _sid, _lab in (("sec-official", "المستجدات الرسمية"), ("sec-map", "خريطة القطاعات"),
+                       ("sec-glossary", "قاموس الرموز والمصطلحات")):
+        if f'id="{_sid}"' in doc and _sid not in [x[0] for x in _toc]:
+            _toc.append((_sid, _lab))
+    _toc_html = ""
+    if len(_toc) > 2:
+        _toc_html = ('<nav class="toc no-print" aria-label="فهرس المحتويات">'
+                     '<span class="toc-l">المحتوى</span>'
+                     + "".join(f'<a href="#{_s}">{esc(_t)}</a>' for _s, _t in _toc) + "</nav>")
+    doc = doc.replace("@@TOC@@", _toc_html)
+
+    # لا مرساة مكسورة (عقد الربط): كل رابط داخلي يجب أن يجد عنصره في هذه الصفحة.
+    # وما نُقل إلى صفحة الإضافات (سياسة الأقسام 2026-10-28) يُوجَّه إليها صراحةً.
+    _ids = set(re.findall(r'id="([^"]+)"', doc))
+
+    def _href(m):
+        h = m.group(1)
+        if h.startswith("#") and h[1:] and h[1:] not in _ids:
+            if h == "#sec-00":
+                return 'href="/additions.html#sec-00"'
+            return 'data-no-anchor="1"'
+        return m.group(0)
+
+    doc = re.sub(r'href="(#[^"]+)"', _href, doc)
+
     # سياسة عرض الرموز (2+5): تبسيط شامل لكل ما هو خارج قسم الوقائع
     doc = codes.demote_page(doc, report_date, official)
     doc = _outside_special(_public_text, doc)
@@ -2733,6 +2836,8 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
     # ك-408: بعد عزل الرموز اللاتينية تبقى مسافة بين الرمز وعلامة الترقيم التالية («UKMTO ،» · «UTC .»)،
     # وهي مخالفة صياغة مانعة. التطبيع يلصق العلامة بالرمز مع عبور حدود الوسوم بلا مساس ببنية الصفحة.
     doc = _outside_special(tighten_ltr_punct, doc)
+    # م-16: تقسيم فقرة «تحديث» الكثيفة إلى بنود مع تمييز العنوان (كل الإصدارات).
+    doc = _outside_special(structure_update_paragraphs, doc)
     # طبقة الشاشة تُحقن بعد العزل: isolate_ltr يعمل على نص كل ما بين الوسوم فيفسد CSS وJS (مثل UTC وأسماء الخطوط)
     doc = doc.replace("</style>", SCR.SCREEN_CSS + "</style>", 1)
     # العنوان في وسم title نص صرف: isolate_ltr يلفّ الأسماء اللاتينية فيه بوسوم span فتظهر وسومًا في تبويب المتصفح
