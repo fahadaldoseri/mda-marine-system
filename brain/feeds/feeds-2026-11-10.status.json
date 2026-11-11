@@ -2,8 +2,8 @@
  "date": "2026-11-10",
  "status": "degraded",
  "checked": 60,
- "ok": 58,
- "failed": 2,
+ "ok": 59,
+ "failed": 1,
  "browser_only": [],
  "manual_reference": [
   39,
@@ -18,9 +18,9 @@
  ],
  "empty": [],
  "stale_days_limit": 14,
- "fail_ratio": 0.033,
+ "fail_ratio": 0.017,
  "fail_ratio_limit": 0.2,
- "items": 1821,
+ "items": 1828,
  "checked_feeds": [
   {
    "num": 1,
@@ -89,8 +89,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://straits.live/feed.xml",
-   "items_count": 47,
-   "content_chars": 23594,
+   "items_count": 48,
+   "content_chars": 23955,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -126,7 +126,7 @@
    "via": "primary",
    "fetched_url": "https://services.tradewindsnews.com/api/feed/rss",
    "items_count": 192,
-   "content_chars": 116029,
+   "content_chars": 115866,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -150,7 +150,7 @@
    "via": "primary",
    "fetched_url": "https://www.ajnet.me/rss",
    "items_count": 25,
-   "content_chars": 9970,
+   "content_chars": 10002,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -207,10 +207,10 @@
    "name": "قناة العربية",
    "primary_url": "https://www.alarabiya.net/feed/rss2/ar/arab-and-world.xml",
    "ok": true,
-   "via": "fallback:jina.ai/alarabiya-rss+curl",
-   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
-   "items_count": 58,
-   "content_chars": 131062,
+   "via": "fallback:jina.ai/alarabiya-home",
+   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/",
+   "items_count": 26,
+   "content_chars": 66656,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -283,7 +283,7 @@
    "via": "browser",
    "fetched_url": "https://www.alayam.com/pages/rss",
    "items_count": 4,
-   "content_chars": 2204,
+   "content_chars": 2233,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -295,7 +295,7 @@
    "via": "primary",
    "fetched_url": "https://akhbar-alkhaleej.com/",
    "items_count": 47,
-   "content_chars": 7512,
+   "content_chars": 7482,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -307,7 +307,7 @@
    "via": "primary",
    "fetched_url": "https://www.albiladpress.com/rss",
    "items_count": 100,
-   "content_chars": 16955,
+   "content_chars": 16873,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -316,10 +316,10 @@
    "name": "Gulf Daily News",
    "primary_url": "https://www.gdnonline.com",
    "ok": true,
-   "via": "primary",
-   "fetched_url": "https://www.gdnonline.com",
-   "items_count": 49,
-   "content_chars": 20671,
+   "via": "official-page:jina.ai/gdnonline",
+   "fetched_url": "https://r.jina.ai/https://www.gdnonline.com",
+   "items_count": 60,
+   "content_chars": 56363,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -387,27 +387,25 @@
    "num": 26,
    "name": "وكالة الأنباء السعودية (واس)",
    "primary_url": "https://www.spa.gov.sa/rss.xml",
-   "ok": false,
-   "via": null,
-   "fetched_url": null,
-   "items_count": 0,
-   "content_chars": 0,
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.spa.gov.sa/rss.xml",
+   "items_count": 13,
+   "content_chars": 137210,
    "latest_age_days": null,
-   "tls_verification": "verified",
-   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Attention Required (HTTP 403) | official:spa-next-data: حجب مصدر — blocked page: Attention Required (HTTP 403) | official:spa-home-next-data: حجب مصدر — blocked page: Attention Required (HTTP 403)"
+   "tls_verification": "verified"
   },
   {
    "num": 26,
    "name": "وكالة الأنباء السعودية (واس)",
    "primary_url": "https://www.spa.gov.sa/feed",
-   "ok": false,
-   "via": null,
-   "fetched_url": null,
-   "items_count": 0,
-   "content_chars": 0,
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.spa.gov.sa/feed",
+   "items_count": 13,
+   "content_chars": 137210,
    "latest_age_days": null,
-   "tls_verification": "verified",
-   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Attention Required (HTTP 403) | official:spa-next-data: حجب مصدر — blocked page: Attention Required (HTTP 403) | official:spa-home-next-data: حجب مصدر — blocked page: Attention Required (HTTP 403)"
+   "tls_verification": "verified"
   },
   {
    "num": 27,
@@ -442,7 +440,7 @@
    "via": "fallback:omannews-home",
    "fetched_url": "https://omannews.gov.om/",
    "items_count": 49,
-   "content_chars": 8402,
+   "content_chars": 8473,
    "latest_age_days": null,
    "tls_verification": "disabled_source_28_only"
   },
@@ -479,7 +477,7 @@
    "fetched_url": "https://combinedmaritimeforces.com/feed/",
    "items_count": 15,
    "content_chars": 47750,
-   "latest_age_days": 0,
+   "latest_age_days": 1,
    "tls_verification": "verified"
   },
   {
@@ -671,7 +669,7 @@
    "fetched_url": "https://windward.ai/feed/",
    "items_count": 12,
    "content_chars": 76597,
-   "latest_age_days": 1,
+   "latest_age_days": 2,
    "tls_verification": "verified"
   },
   {
@@ -682,7 +680,7 @@
    "via": "primary",
    "fetched_url": "https://www.iribnews.ir/fa/rss/allnews",
    "items_count": 100,
-   "content_chars": 35877,
+   "content_chars": 35627,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -694,7 +692,7 @@
    "via": "primary",
    "fetched_url": "https://www.isna.ir/rss",
    "items_count": 30,
-   "content_chars": 29437,
+   "content_chars": 29183,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -718,7 +716,7 @@
    "via": "primary",
    "fetched_url": "https://ar.mehrnews.com/rss",
    "items_count": 30,
-   "content_chars": 28685,
+   "content_chars": 28192,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -730,7 +728,7 @@
    "via": "primary",
    "fetched_url": "https://en.mehrnews.com/rss",
    "items_count": 30,
-   "content_chars": 15194,
+   "content_chars": 15165,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -789,8 +787,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://rss.nytimes.com/services/xml/rss/nyt/MiddleEast.xml",
-   "items_count": 23,
-   "content_chars": 19830,
+   "items_count": 24,
+   "content_chars": 20669,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -802,7 +800,7 @@
    "via": "primary",
    "fetched_url": "https://feeds.bloomberg.com/markets/news.rss",
    "items_count": 20,
-   "content_chars": 3366,
+   "content_chars": 3363,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -862,7 +860,7 @@
    "via": "primary",
    "fetched_url": "https://x.com/bna_en",
    "items_count": 5,
-   "content_chars": 1448,
+   "content_chars": 1326,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -922,7 +920,7 @@
    "via": "primary",
    "fetched_url": "https://t.me/s/army21ye",
    "items_count": 13,
-   "content_chars": 16383,
+   "content_chars": 16379,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -934,7 +932,7 @@
    "via": "primary",
    "fetched_url": "https://x.com/CJFCSpox",
    "items_count": 5,
-   "content_chars": 1766,
+   "content_chars": 1769,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -970,7 +968,7 @@
    "via": "primary",
    "fetched_url": "https://x.com/AlArabiya",
    "items_count": 5,
-   "content_chars": 1597,
+   "content_chars": 1743,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -994,42 +992,12 @@
    "via": "primary",
    "fetched_url": "https://x.com/navalnewscom",
    "items_count": 5,
-   "content_chars": 2370,
+   "content_chars": 2371,
    "latest_age_days": 0,
    "tls_verification": "verified"
   }
  ],
  "failed_feeds": [
-  {
-   "num": 26,
-   "name": "وكالة الأنباء السعودية (واس)",
-   "primary_url": "https://www.spa.gov.sa/rss.xml",
-   "error": "حجب مصدر — blocked page: Attention Required (HTTP 403)",
-   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Attention Required (HTTP 403) | official:spa-next-data: حجب مصدر — blocked page: Attention Required (HTTP 403) | official:spa-home-next-data: حجب مصدر — blocked page: Attention Required (HTTP 403)",
-   "attempts": [
-    {
-     "url": "https://www.spa.gov.sa/rss.xml",
-     "via": "primary",
-     "ok": false,
-     "error": "حجب مصدر — blocked page: Attention Required (HTTP 403)",
-     "tls_verification": "verified"
-    },
-    {
-     "url": "https://www.spa.gov.sa/ar",
-     "via": "official:spa-next-data",
-     "ok": false,
-     "error": "حجب مصدر — blocked page: Attention Required (HTTP 403)",
-     "tls_verification": "verified"
-    },
-    {
-     "url": "https://www.spa.gov.sa/",
-     "via": "official:spa-home-next-data",
-     "ok": false,
-     "error": "حجب مصدر — blocked page: Attention Required (HTTP 403)",
-     "tls_verification": "verified"
-    }
-   ]
-  },
   {
    "num": 27,
    "name": "وكالة الأنباء الكويتية (كونا)",
@@ -1070,20 +1038,6 @@
    "block_reason": "all routes failed: primary: حجب مصدر — رفض الخادم الطلب (HTTP 403) | official:bna-en-rss: حجب مصدر — human verification page (HTTP 405)"
   },
   {
-   "num": 26,
-   "name": "وكالة الأنباء السعودية (واس)",
-   "via": null,
-   "error": "حجب مصدر — blocked page: Attention Required (HTTP 403)",
-   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Attention Required (HTTP 403) | official:spa-next-data: حجب مصدر — blocked page: Attention Required (HTTP 403) | official:spa-home-next-data: حجب مصدر — blocked page: Attention Required (HTTP 403)"
-  },
-  {
-   "num": 26,
-   "name": "وكالة الأنباء السعودية (واس)",
-   "via": null,
-   "error": "حجب مصدر — blocked page: Attention Required (HTTP 403)",
-   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Attention Required (HTTP 403) | official:spa-next-data: حجب مصدر — blocked page: Attention Required (HTTP 403) | official:spa-home-next-data: حجب مصدر — blocked page: Attention Required (HTTP 403)"
-  },
-  {
    "num": 27,
    "name": "وكالة الأنباء الكويتية (كونا)",
    "via": null,
@@ -1091,5 +1045,5 @@
    "block_reason": "all routes failed: primary: timed out · curl: derived items without real content (1) · curl أعاد محتوى غير مقروء | official-page:jina.ai/kuna: derived items without real content (1) · curl: derived items without real content (1) · curl أعاد محتوى غير مقروء | browser: derived items without real content (1)"
   }
  ],
- "written_utc": "2026-11-10T12:37:37Z"
+ "written_utc": "2026-11-10T13:04:25Z"
 }

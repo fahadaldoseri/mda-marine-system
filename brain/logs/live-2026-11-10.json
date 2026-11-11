@@ -1,0 +1,37 @@
+{
+ "date": "2026-11-10",
+ "checked_at": "2026-11-11T01:17:00Z",
+ "release_paths": [
+  "/",
+  "/reports/2026-11-10.html",
+  "/sources.html"
+ ],
+ "propagation": {
+  "attempt": 1,
+  "elapsed_seconds": 0,
+  "max_wait_seconds": 225
+ },
+ "paths": {
+  "/": {
+   "code": 200,
+   "bytes": 83408,
+   "content_type": "text/html; charset=utf-8",
+   "content_type_ok": true
+  },
+  "/reports/2026-11-10.html": {
+   "code": 200,
+   "bytes": 163788,
+   "content_type": "text/html; charset=utf-8",
+   "content_type_ok": true,
+   "date_marker": true
+  },
+  "/sources.html": {
+   "code": 200,
+   "bytes": 161628,
+   "content_type": "text/html; charset=utf-8",
+   "content_type_ok": true
+  }
+ },
+ "status": "ok",
+ "bad": []
+}
