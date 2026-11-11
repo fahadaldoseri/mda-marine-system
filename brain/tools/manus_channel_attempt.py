@@ -19,7 +19,7 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import hashlib
-import json
+import json, os
 import pathlib
 import re
 import subprocess
@@ -222,9 +222,21 @@ def main(argv: list[str] | None = None) -> int:
 
     tool = pick_publish_tool(out)
     if not tool:
-        log_entry({"date": a.date, "state": "schema", "why": "لا أداة نشر في السجل"})
-        print("   ✘ لا أداة نشر معلنة في سجل الأدوات — لا تخمين")
-        return 2
+        # مسار النشر المحكوم المعلن: نقطة الإصدار (دفع إلى origin/main) تُطلق النشر تلقائيًا
+        # في منصة الويب، ثم يُتحقق حيًّا من الرابط. هذا مسار معلن مقيس لا تخمين.
+        route = os.environ.get("MANUS_PUBLISH_ROUTE", "checkpoint")
+        log_entry({"date": a.date, "state": "route", "route": route,
+                   "why": "لا أداة نشر في سجل أدوات المنصة؛ المسار المعلن هو نقطة الإصدار"})
+        print(f"   ⓘ مسار النشر المعلن: {route} (نقطة إصدار ← نشر تلقائي ← تحقق حي)")
+        rc_v, out_v = run([sys.executable, str(pathlib.Path(__file__).resolve()),
+                           "--verify-only", "--date", a.date], timeout=300)
+        if rc_v != 0:
+            log_entry({"date": a.date, "state": "verify", "route": route, "rc": rc_v})
+            print("   ✘ لم يتحقق ظهور التقرير على القناة المرآة")
+            return 2
+        log_entry({"date": a.date, "state": "ok", "route": route})
+        print("   ✔ قناة Manus: ظهور محقق على المسار المعلن")
+        return 0
     _rc2, schema_text = run(["manus-mcp-cli", "tool", "get", tool, "--server", "webdev-mcp"], timeout=120)
     args, why2 = build_publish_args(schema_text)
     if args is None:
