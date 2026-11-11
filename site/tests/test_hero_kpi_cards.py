@@ -134,8 +134,6 @@ def main():
                 except Exception as _e:
                     print("BUILD-ERR:", type(_e).__name__, _e, file=sys.stderr)
                     html = None
-            else:
-                print("   · تخطّي فحص المخرج: لا شجرة بناء هنا (متن المصدر غير موجود)")
             if html is None and _md.exists():
                 raise RuntimeError("تعذّر بناء الصفحة لقياس المخرج")
             html = html if isinstance(html, str) else json.dumps(html, ensure_ascii=False)
