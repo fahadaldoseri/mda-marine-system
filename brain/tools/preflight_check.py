@@ -305,6 +305,10 @@ if master.exists() and report.exists():
         for df in (B / 'cumulative-2026' / 'daily').glob('*.json'):
             try:
                 for ev in json.loads(df.read_text(encoding='utf-8')):
+                    # يوم بلا وقائع: الصف يعلن الغياب صراحةً (no_incident) ولا يُحتسب واقعة،
+                    # وإلا ظهر مانع كاذب في يوم لا واقعة فيه. أي واقعة حقيقية تبقى محتسبة.
+                    if ev.get('no_incident'):
+                        continue
                     if ev.get('date'):
                         ev_dates.append(ev['date'])
             except (json.JSONDecodeError, OSError, TypeError, AttributeError) as e:
@@ -375,4 +379,3 @@ for m in fails: print(f"  ✘ {m}")
 print(f"----- النتيجة: نجح {len(oks)} · تحذير {len(warns)} · فشل {len(fails)} -----")
 print("الحكم: " + ("ممنوع التسليم — أصلح الفشل أولًا" if fails else "جاهز للتشغيل"))
 sys.exit(1 if fails else 0)
-
