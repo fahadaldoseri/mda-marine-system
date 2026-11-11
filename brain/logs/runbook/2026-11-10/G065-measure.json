@@ -1,0 +1,495 @@
+{
+  "url": "file:///home/ubuntu/seawatch/dist/reports/2026-11-10.html",
+  "at": "2026-11-11T01:02:04+00:00",
+  "widths": {
+    "1440": {
+      "compat": "CSS1Compat",
+      "console": {
+        "errors": 0,
+        "warnings": 0,
+        "samples": []
+      },
+      "pageerrors": [],
+      "horizontal_scroll": 0,
+      "events": [
+        {
+          "id": "ev-01",
+          "w": 354,
+          "h": 374,
+          "clip_loss": 0,
+          "clips": [],
+          "top": 2246
+        }
+      ],
+      "decision": {
+        "sel": ".decision",
+        "top": 0,
+        "in_first_screen": true,
+        "height": 0,
+        "lines": 0
+      },
+      "map_decision": null,
+      "anchor": {
+        "exists": false,
+        "reached": false
+      },
+      "readiness": [
+        {
+          "q": "مستوى التهديد",
+          "found": true
+        },
+        {
+          "q": "أعلى قطاع",
+          "found": true
+        },
+        {
+          "q": "إجراء اليوم",
+          "found": false
+        },
+        {
+          "q": "الوقائع المستوفية",
+          "found": false
+        },
+        {
+          "q": "المصادر",
+          "found": true
+        },
+        {
+          "q": "آخر تحديث",
+          "found": true
+        },
+        {
+          "q": "التحذيرات",
+          "found": true
+        },
+        {
+          "q": "ما يُراقب",
+          "found": false
+        },
+        {
+          "q": "خلال 24 ساعة",
+          "found": true
+        },
+        {
+          "q": "المستجدات الرسمية",
+          "found": true
+        }
+      ],
+      "phrases": [
+        {
+          "p": "هجمات مؤكدة",
+          "count": 0,
+          "context": null
+        }
+      ],
+      "anchor_links": [
+        {
+          "href": "#sn-main",
+          "page": "(نفس الصفحة)",
+          "hash": "sn-main",
+          "text": "الانتقال إلى المحتوى",
+          "same_page_exists": true
+        },
+        {
+          "href": "/#archive",
+          "page": "/",
+          "hash": "archive",
+          "text": "الأرشيف",
+          "same_page_exists": false
+        },
+        {
+          "href": "/additions.html#sec-00",
+          "page": "/additions.html",
+          "hash": "sec-00",
+          "text": "قسم «ما تغيّر»",
+          "same_page_exists": false
+        },
+        {
+          "href": "#sec-02",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-02",
+          "text": "التفصيل في بطاقة الترويسة",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-decision",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-decision",
+          "text": "قسم «التوصيات»",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-decision",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-decision",
+          "text": "أهم الأخبار",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-official",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-official",
+          "text": "المستجدات الرسمية",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-01",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-01",
+          "text": "سجل الأحداث",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-02",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-02",
+          "text": "مستوى التهديد",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-03",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-03",
+          "text": "مؤشرات الموقف",
+          "same_page_exists": true
+        },
+        {
+          "href": "/additions.html#news-card",
+          "page": "/additions.html",
+          "hash": "news-card",
+          "text": "الإضافات",
+          "same_page_exists": false
+        },
+        {
+          "href": "#sec-01",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-01",
+          "text": "سجل الأحداث",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-02",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-02",
+          "text": "مستوى التهديد",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-03",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-03",
+          "text": "مؤشرات الموقف",
+          "same_page_exists": true
+        }
+      ],
+      "anchor_targets": {
+        "#sn-main": true,
+        "/#archive": true,
+        "/additions.html#sec-00": true,
+        "#sec-02": true,
+        "#sec-decision": true,
+        "#sec-official": true,
+        "#sec-01": true,
+        "#sec-03": true,
+        "/additions.html#news-card": true
+      },
+      "anchor_target_details": {
+        "#sn-main": {
+          "http_status": null,
+          "dom_wait_ms": 0,
+          "exists": true
+        },
+        "/#archive": {
+          "http_status": 200,
+          "dom_wait_ms": 15000,
+          "exists": true
+        },
+        "/additions.html#sec-00": {
+          "http_status": 200,
+          "dom_wait_ms": 15000,
+          "exists": true
+        },
+        "#sec-02": {
+          "http_status": null,
+          "dom_wait_ms": 0,
+          "exists": true
+        },
+        "#sec-decision": {
+          "http_status": null,
+          "dom_wait_ms": 0,
+          "exists": true
+        },
+        "#sec-official": {
+          "http_status": null,
+          "dom_wait_ms": 0,
+          "exists": true
+        },
+        "#sec-01": {
+          "http_status": null,
+          "dom_wait_ms": 0,
+          "exists": true
+        },
+        "#sec-03": {
+          "http_status": null,
+          "dom_wait_ms": 0,
+          "exists": true
+        },
+        "/additions.html#news-card": {
+          "http_status": 200,
+          "dom_wait_ms": 15000,
+          "exists": true
+        }
+      }
+    },
+    "1920": {
+      "compat": "CSS1Compat",
+      "console": {
+        "errors": 0,
+        "warnings": 0,
+        "samples": []
+      },
+      "pageerrors": [],
+      "horizontal_scroll": 0,
+      "events": [
+        {
+          "id": "ev-01",
+          "w": 354,
+          "h": 374,
+          "clip_loss": 0,
+          "clips": [],
+          "top": 2246
+        }
+      ],
+      "decision": {
+        "sel": ".decision",
+        "top": 0,
+        "in_first_screen": true,
+        "height": 0,
+        "lines": 0
+      },
+      "map_decision": null,
+      "anchor": {
+        "exists": false,
+        "reached": false
+      },
+      "readiness": [
+        {
+          "q": "مستوى التهديد",
+          "found": true
+        },
+        {
+          "q": "أعلى قطاع",
+          "found": true
+        },
+        {
+          "q": "إجراء اليوم",
+          "found": false
+        },
+        {
+          "q": "الوقائع المستوفية",
+          "found": false
+        },
+        {
+          "q": "المصادر",
+          "found": true
+        },
+        {
+          "q": "آخر تحديث",
+          "found": true
+        },
+        {
+          "q": "التحذيرات",
+          "found": true
+        },
+        {
+          "q": "ما يُراقب",
+          "found": false
+        },
+        {
+          "q": "خلال 24 ساعة",
+          "found": true
+        },
+        {
+          "q": "المستجدات الرسمية",
+          "found": true
+        }
+      ],
+      "phrases": [
+        {
+          "p": "هجمات مؤكدة",
+          "count": 0,
+          "context": null
+        }
+      ],
+      "anchor_links": [
+        {
+          "href": "#sn-main",
+          "page": "(نفس الصفحة)",
+          "hash": "sn-main",
+          "text": "الانتقال إلى المحتوى",
+          "same_page_exists": true
+        },
+        {
+          "href": "/#archive",
+          "page": "/",
+          "hash": "archive",
+          "text": "الأرشيف",
+          "same_page_exists": false
+        },
+        {
+          "href": "/additions.html#sec-00",
+          "page": "/additions.html",
+          "hash": "sec-00",
+          "text": "قسم «ما تغيّر»",
+          "same_page_exists": false
+        },
+        {
+          "href": "#sec-02",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-02",
+          "text": "التفصيل في بطاقة الترويسة",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-decision",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-decision",
+          "text": "قسم «التوصيات»",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-decision",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-decision",
+          "text": "أهم الأخبار",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-official",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-official",
+          "text": "المستجدات الرسمية",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-01",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-01",
+          "text": "سجل الأحداث",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-02",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-02",
+          "text": "مستوى التهديد",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-03",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-03",
+          "text": "مؤشرات الموقف",
+          "same_page_exists": true
+        },
+        {
+          "href": "/additions.html#news-card",
+          "page": "/additions.html",
+          "hash": "news-card",
+          "text": "الإضافات",
+          "same_page_exists": false
+        },
+        {
+          "href": "#sec-01",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-01",
+          "text": "سجل الأحداث",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-02",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-02",
+          "text": "مستوى التهديد",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-03",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-03",
+          "text": "مؤشرات الموقف",
+          "same_page_exists": true
+        }
+      ],
+      "anchor_targets": {
+        "#sn-main": true,
+        "/#archive": true,
+        "/additions.html#sec-00": true,
+        "#sec-02": true,
+        "#sec-decision": true,
+        "#sec-official": true,
+        "#sec-01": true,
+        "#sec-03": true,
+        "/additions.html#news-card": true
+      },
+      "anchor_target_details": {
+        "#sn-main": {
+          "http_status": null,
+          "dom_wait_ms": 0,
+          "exists": true
+        },
+        "/#archive": {
+          "http_status": 200,
+          "dom_wait_ms": 15000,
+          "exists": true
+        },
+        "/additions.html#sec-00": {
+          "http_status": 200,
+          "dom_wait_ms": 15000,
+          "exists": true
+        },
+        "#sec-02": {
+          "http_status": null,
+          "dom_wait_ms": 0,
+          "exists": true
+        },
+        "#sec-decision": {
+          "http_status": null,
+          "dom_wait_ms": 0,
+          "exists": true
+        },
+        "#sec-official": {
+          "http_status": null,
+          "dom_wait_ms": 0,
+          "exists": true
+        },
+        "#sec-01": {
+          "http_status": null,
+          "dom_wait_ms": 0,
+          "exists": true
+        },
+        "#sec-03": {
+          "http_status": null,
+          "dom_wait_ms": 0,
+          "exists": true
+        },
+        "/additions.html#news-card": {
+          "http_status": 200,
+          "dom_wait_ms": 15000,
+          "exists": true
+        }
+      }
+    }
+  },
+  "checks": [
+    "overflow",
+    "console",
+    "anchor",
+    "decision",
+    "readiness"
+  ],
+  "soft_checks": [
+    "readiness"
+  ],
+  "violations": []
+}

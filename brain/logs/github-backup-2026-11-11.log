@@ -1,0 +1,641 @@
+=== بدء النسخ الاحتياطي: 2026-11-11T01:02:12Z ===
+حارس شجرة النسخ: تغييرات Git=164 · سجلات تشغيل معلنة=140 · كتل مولَّدة=0 · تعديلات حاكمة=24
+  ✔ سجل تشغيل معلن: brain/audit/measurements/exceptions-triage-2026-11-11.json · sha256=35f3f8c043c812d7499014020c8d72bc1413663f641b98be40f5318c6c7ad2fc
+  ✔ سجل تشغيل معلن: brain/audit/measurements/gate-audit-2026-11-10.json · sha256=38cc55e8ab6085d0e23a05c2df416b674cac9492fc8d1f20211902cf6a8e6538
+  ✔ سجل تشغيل معلن: brain/audit/measurements/gate-audit-2026-11-10.json.sha256 · sha256=1143084f64ee2efc80691613044a0512fa0086b304b092f687388b5e3da30f2e
+  ✔ سجل تشغيل معلن: brain/audit/measurements/perf-budget-2026-11-10.json · sha256=1033d685a35d1d9668c1d928412b68b22a648346d3db51570ef764695d9480fa
+  ✔ سجل تشغيل معلن: brain/audit/measurements/perf-budget-2026-11-10.json.sha256 · sha256=b9416556e6ca575e993dc5b458cab9b4a2efc091262ac732e80f57ee0df2ec9c
+  ✔ سجل تشغيل معلن: brain/audit/measurements/regression-b-01.json · sha256=03ca764e4b8c372119986ede06523f72d473a99282122eb205a48f7f0a4a5358
+  ✔ سجل تشغيل معلن: brain/audit/measurements/regression-b-02.json · sha256=a37aed236367b8bcce858795e7edc0b2af2b317d9ea8d76bcdcd4877e9e47b68
+  ✔ سجل تشغيل معلن: brain/audit/measurements/regression-b-03.json · sha256=3ce678274fbc06481778b6e7e151f090067a67da4c6c5e5f5a01888802d1f587
+  ✔ سجل تشغيل معلن: brain/audit/measurements/regression-b-04.json · sha256=4b8d0555e02653291eb9a83ebe43b932d766cc70a9cd12aed4f8d49b6bfe32ed
+  ✔ سجل تشغيل معلن: brain/audit/measurements/regression-b-13.json · sha256=a0696d47574c140a239bc6c26046f8293d66f73ab0449e48c66565e40079f59b
+  ✔ سجل تشغيل معلن: brain/audit/measurements/regression-b-14.json · sha256=5fb3b0af854389e63e870062b9c6a4497f917ae915c4b7bb9d7ff7077943a388
+  ✔ سجل تشغيل معلن: brain/feeds/feeds-2026-11-10.json · sha256=b056220007b5dbcff49304939cf18aff9f84dd92ccd9dbd91e1c73420ffcec63
+  ✔ سجل تشغيل معلن: brain/feeds/feeds-2026-11-10.md · sha256=5f21efef6c3f3991bc431bc537a757a0f3a4154e3e642fe671cebb6d1514e0af
+  ✔ سجل تشغيل معلن: brain/feeds/feeds-2026-11-10.status.json · sha256=92525f6d9b737acf5db0ea835c38cab654f09cacbacd6e97a079f21cf16505a9
+  ✔ سجل تشغيل معلن: brain/logs/alerts/waw-2026-10-29.md · sha256=60ce3c193c71c744f9b828f7fbbd9e845837350e64e2525f47b97266383d34db
+  ✔ سجل تشغيل معلن: brain/logs/edit-pass-2026-11-10.json · sha256=8052059c8a4a891cadff3ad36ed0adf6e20ac3a70ca0bd69c89613586e3b5d05
+  ✔ سجل تشغيل معلن: brain/logs/gate-2026-10-23/.text-hash-2026-10-23.json · sha256=74b9eea9dca72772913ec021f851f8622738128c9a13e8dfce1fa99984c62913
+  ✔ سجل تشغيل معلن: brain/logs/gate-2026-11-10/.text-hash-2026-11-10.json · sha256=e2737a622def478d0beee36552ad3ef191ce43c4a9c72b57dd64e03f7574bde6
+  ✔ سجل تشغيل معلن: brain/logs/gate-2026-11-10/binding-coverage.json · sha256=0a01da5d02b7aa56ea952b27be043c2eb886c84c3c1836a6ba24a01e10942694
+  ✔ سجل تشغيل معلن: brain/logs/gate-2026-11-10/gate.json · sha256=f42b1bf33d34f3a44aca76cec4d6f4d20fc0faf865eada3a0774f3eb2696ecbd
+  ✔ سجل تشغيل معلن: brain/logs/github-backup-2026-11-11.log · sha256=fe64cf6d6e3e01828eb8025a31a7d6bcd69ba708b36f1ef688a2fc01bc0c8730
+  ✔ سجل تشغيل معلن: brain/logs/orthography-2026-10-31.json · sha256=6d2000a04878cdc9ec1b32f4c9e8e1ce32431612a3255b92d9a4040c20d9c16a
+  ✔ سجل تشغيل معلن: brain/logs/orthography-2026-11-10.json · sha256=4f58263d5f8292f6fb3f1635e58c31d6079c1b7e8f8d4e32e33049e6dc620f57
+  ✔ سجل تشغيل معلن: brain/logs/pipeline-2026-11-10.json · sha256=e1c89083bcf4ba729bb5d2a07b3caa5b4260593610fb161c785b4277f5922ec9
+  ✔ سجل تشغيل معلن: brain/logs/publish-channel-2026-11-10.json · sha256=b5437960468a69f55dde72102b3bd7d26cbad8223f07cfc44d29c8f1d4208bed
+  ✔ سجل تشغيل معلن: brain/logs/qa-2026-11-10.json · sha256=a39e60b6989c9bbf19640b839806e5887758ebc3dd2e274d5a7cccc0a332a345
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10.jsonl · sha256=d76767da81fbaa3260ddb5977bda14ba58acfb9955a1a3c19d46de3eb8ccfedb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B004A.log · sha256=344349c224db0bd4f1083a43224865b932b2771b914e53a26e9da97e06df98d8
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B005.log · sha256=6347739c796530bc4fdd7200614da58b97d7bbb06d24bdb25cc981d4fc9e3c8d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B006.log · sha256=a186fa3a86bb149a4c930ac57a96b9d40c074920c0ec5fd4b1c0847ea69ca128
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B009.log · sha256=3e44fba3497de65e157b8b374ed266debd2f466bcc309706a69a7a4b47a80f02
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B010.log · sha256=24f76aedce05f45b1c3a4f01188c2c160a98e130da8db826e8ffdc17da5bbe58
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B020.log · sha256=a19b3f58ca41fb95bbe68c8a83245c0f144cfd1e6073bd69ef568ff4cd8c6efb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B030.log · sha256=a19b3f58ca41fb95bbe68c8a83245c0f144cfd1e6073bd69ef568ff4cd8c6efb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B035.log · sha256=c6b941bb0abfc9037619bc0cf7e0df408246ba1c2de7df13ff2b1aadb9e83243
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B040.log · sha256=89c507982c651d7c2d7a071dc1229524f4ddafc9912a8755f25ad55e4f05dfc6
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G000.log · sha256=5c34e5675f2a32653873229297cb211653ae1ec5622c8f57880748370cd6b283
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G000A.log · sha256=5c0145db0b271833834e1146fe46a943b1fd4c82ecd0f39d3a5247625b68e0e7
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G000B.log · sha256=019bb1f6272eac2488e0f1e9570f9c932a24307e3e10bc9b5ca731043b30ad4d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G000C.log · sha256=e66f583742071deb382be60e7994e6c4882aa3f40e5f9a29b643e74db760fe16
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G000C2.log · sha256=b5d7b7e2a3eb749a918d94466e1cd8bd4406d897bee21613c119fb125f04fdfb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G000D.log · sha256=1da924f900d32707c4b0ba0598ec2eb6eb2d0b50fac51ca60270ae89d5f09280
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G001.log · sha256=64d72dce09564768ca54dc395afd9e09abbd239a5dafc237dc7c6d64f61455dc
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G002.log · sha256=5557fdb6b5539735aca4dcff02b8b0a7b6af91ace199f4b43303426ce4fd61d4
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G003.log · sha256=7594f36d1e1367b9289560f5ba01fa33a537341d2feb1b1df307a8b194737e1f
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G004.log · sha256=38098c2f0c1f069449e2b987b44604f7825177bd8953880d2f50df6352647ec1
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G005.log · sha256=fdd62c820d25d8a541d018eef387ce6c91ef02cb2351d406a3e667c265d1482e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G006.log · sha256=5fe466160eb603ad84e66739b2f1a9b6dc4ca3de5a31e299468956fd07821e4d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G007.log · sha256=9f143910378a9d4ca2b7950b1a798744188a80e58feafbf7c783f8ea04062dec
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G008.log · sha256=207e757b45b9ac90816575c3ed904c8dd65553cdccfba692b2e70833354c50b6
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G009.log · sha256=c37270fe5a4df15e827120a9a0510abba1d2be71c5c070d5268533057edcf41e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G010.log · sha256=8a999df18efe0a781d40d2e192e7fda31f4c6b30dfc6a0f2feb1f528580edefb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G011.log · sha256=472ae119e1b2d927170b80c2ef3782c531eafa3bc9abdd60bf6aa0aa30e7a470
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G011H.log · sha256=b2320bf5a2e4f0bf7dbb52be25bfee5e846a138d4e46f6af3501fb087ff35cc8
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G012.log · sha256=210a94d463229c2ffdfa32bb75834fb34570076c9e1b052ac1862704893223d3
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G013.log · sha256=4b10da052bfd3d2066b73b3accc294b29f354a6dde314d923661343a97ddf631
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G014.log · sha256=678e0874c1540614dd6c1a00e4584c3453843c3a70f976fe7b7a92f00c772310
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G015.log · sha256=f6c2528c2169c3355fa09956bcc4e7fd735622e29553ecbe1f09a7f5ed746733
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G016.log · sha256=4a535d529b346317f2e178b3bd639ef2527aa7ad8b386ebde637d0a76b22b379
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G017.log · sha256=1298e5783b5b328c658978ffb781832b7b4a1820b4ec620e3d41c184f13aadcd
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G018.log · sha256=d4f2400ec84906b2c2258545348be9050dfd11a89140908f2a045d42e9bc19b9
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G018A.log · sha256=2f56e16e689b1b80904f9829ec3e941a81d37f43136bbb8fe0f0d44630a00ed5
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G019.log · sha256=99ff4a6161aa74edd45f9387b8d17a8e2afc3ec8ea338e359cb0355f03880f3a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G020.log · sha256=b59b765c6369601ae67674e9d7471ebd795d4a836a0e30cf1644ac1a1c9d47a9
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G021.log · sha256=39cfefe8fc5afd25d64f0589628070f520a9a3ec36388603b4e30196091c2cf8
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G022.log · sha256=3d0b9efff509535abf055a6d6d9f9f3c5e10bb708d3ce8abd314cd6bdb92abe6
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G023.log · sha256=607eec3608d69fea7aefa36ac25e6bbbcedd72f5e3e0b048e32a2788292110a6
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G024.log · sha256=ea600822b1e039ee41b56e5e4efbad2eafa690c1bfc85552dda867a238c38865
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G025.log · sha256=70fb2c26f1840c48b87f6096b1066f5ea2313bfc3dcfdd3e92924cddaf1f4ece
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G026.log · sha256=d44a9097db9f9bd6d37f53fdbe707bfa68c0c2cc062bcd8dab912362d93563fd
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G027.log · sha256=497e3ed610d2becaccc0ee7d498617543d891a861b0a6fe2860e33a070f1d4f2
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G028.log · sha256=00de47f74a72df49571438673d572b5e4037b0cdec29cf300e0a6d29f31ef27a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G029.log · sha256=01d8a5cf2d8df186726caca555b496f92527d489550f1b68781399dc0f52ac69
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G030.log · sha256=a0e51f4698fef20eadf9ad25b82bb5197871047ec830d879bca43e2c88abd09c
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G031.log · sha256=443e13d2fce9401bc0c4b92e1a43de9b9bbf392f9b5edd3939cc610b8006d05e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G032.log · sha256=3ad7802a6fce00027110d20d403139750ef9d89e96abf9a4ece818c063086e17
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G033.log · sha256=97e030f1da61b214082753cd9b5b21f82652efb13ca3c14ded845f9aa92fd4cb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G034.log · sha256=fe7344ec2047ae1573b2c191bcda00ce7f3c9d1d02846f247adc53f76f7916d9
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G035.log · sha256=73484f92fbdf1872bd81e8addb820b9c42cbb49635494fe060a8b91d24e3d637
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G036.log · sha256=2d8cade49206f96c309ecbc3b67bdd570f7a33ebed958e39bd07cb1e27c3c8a0
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G037.log · sha256=c39a3193b3eba03b163f4301c816a2c0a9b6d42f5d344a42f5d922a8b165212b
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G038.log · sha256=1b130fcbbee7d7b8b1b144aa100783a491c225ea65f9ee9472cc30513fd24176
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G039.log · sha256=ee252663719475347f4e6a3b172d14041bcfe8d46dcbdf7a2c5511204c56101a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G040.log · sha256=62e35cb1c4a7e725e3a3e260b78450a97374b9fbf5e02a175ccafdbb5bd50c23
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G041.log · sha256=f930093bf39477b7a169caf37b7634f4d60375eeea57386f9ecc4682a047d729
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G042.log · sha256=f3a1d6f65e509be4f92a68c48592417e0dd6c5b6d3904dd9bc4a3ddd0ad4d8b4
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G043.log · sha256=9453f02572ea83be636c051fe8b38d86ebf24725e060dbfa6c893656b397d0e2
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G044.log · sha256=09da832c2fb0183771ed34f813975f0ef640ff86fb2bf8c6be4da0c8b2f04866
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G044B.log · sha256=2980b8885cb16d13da9afd6ca2b680028e9f216d81ba599b483bd3640dbffc94
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G045.log · sha256=82f07f8f769ee14aa2849f6a74c09b3f5dd97b12121cc1805a5ba30a3255272a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G046.log · sha256=82269d6a28c2add3d9ddaaad86d753026764b1dd378f5ab86abfe5edd8ab4fef
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G047.log · sha256=f3733a3cf87acce0d2fa3c0025b9163c5b4ab4e472cf4c5b393a6b0c692b7b3d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G048.log · sha256=990f4700367703ce9efc6a7eb83ff5556d691d2d28369ddbf12ea8eca0aceb71
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G048A-coverage.json · sha256=07164886a7bd2e47891d960cb44e0b680f564139ddf32987b1784bf27c4ddf9b
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G048A.log · sha256=69d65b0ae923e357bfdeae9c12d0a5f39f16b5a32eeaf86d6c75654949ac2780
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G049.log · sha256=44ee90ffcc716a91a93cc68b9094b6a4b391bf131ce882f4a8f56b7da90c32f7
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G050.log · sha256=93e3bf2ef2317ed80c55b6462da5645f1c2dc3e667db8a3d0dc5fc183b175b0b
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G051.log · sha256=07dd2473d73e10d0e6631238e2c2f86a1d174daa7a3d3e4b509f7837c1326335
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G052.log · sha256=639d71dd21e961bafc4bf3b898d542795a1d6e0299e42ee42edb85e08479a02a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G053.log · sha256=f90bf240d713eac86b5743b56bc295f9d24c994dd68feedc721447af2ffe3501
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G054.log · sha256=36787c165623239872e5d8fafc962f6264b81140260d52f712b80489fc0c8fa4
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G055.log · sha256=ea792c2b65e1d20fd636976aab78fcdfecaa723e7256056425c24fa7ac22bd38
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G056.log · sha256=ecdd7c3d661cec6ddeae64c379127c676b06724887a4bb11f2bd1d447c776adf
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G057.log · sha256=423e1e66f8fdf7cab8c5cf931c71be5ca8530dc0daffd67715aa28ac9bbf0872
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G058.log · sha256=68ec6cb8f0a338a766a2f7e7005fcad58fcbd9ea587d2849ef9ca230bdad8607
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G059.log · sha256=ccf89db9c3e664eec544271a61bf1ecd1ce89c64260a27a57144ed1f3acd3ef7
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G060.log · sha256=0ce83bce011729857eda9d284ee6a1a5734ccbd49f8fe780b1650c8e7c96c919
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G061.log · sha256=8a422631bc27ccaa7c693e7a01cd05d23026423aa40c69423ba082f39b01b8bd
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G062.log · sha256=a0f9725222497522a53bcb50c1391ac82a4a9ba74c2e1244d07049872845f03e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G062R.log · sha256=e1b7c02b99ca3be9b20665b1b1c443603f982986abe327b0f3a3bd49d6d236bb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G063.log · sha256=c41b8f1f829dff0c94030b28034e5a8be9f3a9b08104969241a21aa5dee089e4
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G064-regression.json · sha256=60fd59de835f38aa63f0ca1a16145cbaa0456bf1d93e9f1a207f00923a5114cb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G064.log · sha256=db23908eac577b681aa885eb0439a71d3f645a419899b4353e6e873f25059e70
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G065-measure.json · sha256=314f79c7f587a4505e2c31b49c25d42c216867dac771e5f2c2647dc0742a403a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G065.log · sha256=c564b0afad11b7f1d821e65f6987c21d91f41f7a3f8257fa5d2bd9af0b47b6cf
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G066.log · sha256=d4190301926c4282f994cff89e73d87465f9d1b8648096a5d8c1578db26898ce
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G067.log · sha256=59a43ba5d6df3c227dc2657cd6a612ed866d8de3a608c8e7b8e338609dba74eb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G068.log · sha256=86a139c4d0d4f0aae1d4367e31daf5520b0b8b45bf96b32b2228a9b62800b90d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S000.log · sha256=3ea803963fe454a33c6d0fed3bcc0dcd6005a95469fe201465909c4cfebf9e73
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S010.log · sha256=fa41b0ef4075d7eba08c9edce8cab625dbabb383d99703dff8b5f9b69ceb0d4d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S020.log · sha256=bc1a6bb23e0117840d0181099651d7d40e44e145f4d220c65937a85c1d7d46f6
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S030.log · sha256=37bc067dca1e4bc3c5751a569d8c840aa36506ad0379cb6eee91285d3fce1807
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S040.log · sha256=beacfc924f17580fb5c690b16d03cf5ffb0d42750f612bf820ab4977d14726f3
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S050.log · sha256=a622b8481b38f2da022082a3b533efd5130e458cecf99caed39ce658b98ad2c7
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S060.log · sha256=a1551ae059b9a1587e0ad670317a648841adecdeb6a5045783d6224f4c7de287
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S065.log · sha256=b0686372238bb26d379f874f0cf1d4fb74ea893b3b4b6a82051dd6b31321ef06
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S070.log · sha256=92c071ac2c717ede8cc1d9a7e77f120b4d0e2c7f5802c6d0782223796b2a8ca2
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S071.log · sha256=ca4e20e206a3622952d0f3d3c647dc619aa2f2d054b6c5394418e0e52943d17e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S072.log · sha256=fd2d3ba529eba58d3754d958abe4661910d501e5c92eecde3590eb11984c0991
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S080.log · sha256=44fb1079baf07a12a77e9216e96ff52044519262cf936ce549692153a1071a2e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S085.log · sha256=d3ca064f6bbaa82e927c38dbcebc3144a12621c2835ef2c1c028379d27d26de0
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S090.log · sha256=107ec73bb3cc05685d3b8e77659b2714aa6b90340468b03f6994efd1744085a5
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/W040.log · sha256=50f5e5bc1c892a38ed297c13b1e2bb374fc775900d2e4a33dca69b52857e40fa
+  ✔ سجل تشغيل معلن: brain/logs/scrub-2026-11-10.json · sha256=97d46b061e6fa7df3432879418bac64073d549fb54334c61d816d33cd9de1945
+  ✔ سجل تشغيل معلن: brain/logs/style-metrics-2026-10-31.json · sha256=b79bf175d81ffbc6aa19f1312a6298747bbc2fed7535054852886a7d8941cf54
+  ✔ سجل تشغيل معلن: brain/logs/style-metrics-2026-11-10.json · sha256=2d4696536a630385a22ca5a2654070895f3980d537749b0db093ecb836f51cf3
+  ✔ سجل تشغيل معلن: brain/logs/telegram-sends.jsonl · sha256=414b28d13b9c653797eaf1399623d8c2cad97a22303e966ccf8f517b57ae7101
+  ✔ سجل تشغيل معلن: brain/logs/tg-digest-2026-11-10.html · sha256=d483513c7d9a5e0efe7dbf09fb6c7a62f3d23351f5701c64269c8bc235fb52b1
+  ✔ سجل تشغيل معلن: brain/reports/docx/التقرير-اليومي-2026-11-10-طبق-الأصل.docx · sha256=7c4ec38fad9d4d126f13e494ec2697392d67c261bd8fd1bf59b4df2ebae76481
+  ✔ سجل تشغيل معلن: brain/reports/docx/التقرير-اليومي-2026-11-10-طبق-الأصل.pdf · sha256=21c21ea14dee7d59497f2c14f38d384c52b08fd8bdb46c1163a4573a2b30762a
+  ✘ تعديل حاكم: brain/OPERATING-RULES.md · sha256=dd3edf1ccc027e979900f7cfbd727fed9b7ed3254e1128c0f57c07f95e8d4ba8
+  ✘ تعديل حاكم: brain/appendices/card_registry.json · sha256=9634630d5b83be0ef9f0f7b8f05cc5890ddc69db223f3e1e3c97133a56a64b0e
+  ✘ تعديل حاكم: brain/appendices/lexicon-corpus.json · sha256=33dc2f37f0440dad30640eef42ae8886898cabef61e7e0f4f54c194416e0beb1
+  ✘ تعديل حاكم: brain/audit/خطة-معالجة-الاستثناءات.md · sha256=e48b25c6be34986f27f619649078a41df972320d40d80e76517aaf011333fc25
+  ✘ تعديل حاكم: brain/audit/مرجع-آلية-العمل.md · sha256=93df824e9715b7656ac7c1d663172c95071bd8d87be5d2c1b8b6b0c4e6147049
+  ✘ تعديل حاكم: brain/notes/2026-11-10-en-build-repair-plan.md · sha256=15b24996d6210333b1b87e31a5fa62d5660c06169f319fa24eed98f6eedcfbfe
+  ✘ تعديل حاكم: brain/notes/2026-11-10-inline-tag-sentence-plan.md · sha256=45294359aea3529475b5168a2b5465b948597be96b40130a7000d49892a46177
+  ✘ تعديل حاكم: brain/notes/2026-11-10-حالة-الجولة-النهائية.md · sha256=e2a377664415349aa9d19999f92f14ccbfb3fa4c8a6097227066aabbdbf4f02f
+  ✘ تعديل حاكم: brain/notes/2026-11-10-دفعة-المعجم-وحالة-B010.md · sha256=bcf7e877dd7c7e047f29670090f6926f70a6e1fe7a3efeb96ba2b343703acf36
+  ✘ تعديل حاكم: brain/reports/2026-11-10-sectioned.md · sha256=9c75a4f3acb9737bc9336c8982f57b8f195fb70aad34ac8a4b79250218d9acca
+  ✘ تعديل حاكم: brain/tests/run_checks.sh · sha256=ab17972bf53cf7f559e0823cca6244deb459dc4745368eb53c913f24237ea2db
+  ✘ تعديل حاكم: brain/tests/test_mark_components_bootstrap.py · sha256=44f2e38fe64470aacfc14570e87a87cb3dff51e1f4d7e377de9fdcea6c31637a
+  ✘ تعديل حاكم: brain/tests/test_section_registry.sh · sha256=22c54565cde1d2cd103cc9bb1fda588cd16c45c63f1f4cd82acdaa451ca4c386
+  ✘ تعديل حاكم: brain/tools/audit_style_coverage.py · sha256=ebf04bc028b7380a8c341d94e71e358dcfc19792b5725aa381f6c06385b9f1ba
+  ✘ تعديل حاكم: brain/tools/mark_components.py · sha256=6d8b99e3acf33b6611cf748c1e799b02fadd9a6a7dced36924703e46678dde0c
+  ✘ تعديل حاكم: brain/tools/source_counts.py · sha256=964ff6b8fd0ffd2b0bf1f84f031032922f0b87521bf3df1ba12f784bdf416db3
+  ✘ تعديل حاكم: brain/validators/check_event_card_contract.py · sha256=b98426314c1a4ab94c557979aa3ed5ef6df6870ae63dc3077a31b5158eb72674
+  ✘ تعديل حاكم: brain/validators/check_map_note_counts.py · sha256=5439f2fd02326fa353733d1ba3fe14e69055bd290e11d7f4c4e943eeed8ee8f8
+  ✘ تعديل حاكم: brain/validators/check_zone_strip.py · sha256=9c406f9dfcdcc071400865d6f84dc0aae326f7d42091286341ed365b1ace9ceb
+  ✘ تعديل حاكم: brain/web/meta/2026-11-10.json · sha256=e17fe9c284ab60f8c7f259e417cd2cfb4fee5a774accf7179c1baaadc21eaeb6
+  ✘ تعديل حاكم: site/generator/i18n_en.py · sha256=164971b23771400ef7a08d797484930f8cb6570f2eadd4731184f42d9b252051
+  ✘ تعديل حاكم: site/sources/card_registry.json · sha256=0e35da256b11b253d5d6791a6608ffe4d730060ba3fcd40ca95ad373c6b09a9a
+  ✘ تعديل حاكم: site/sources/i18n/en/glossary.json · sha256=a8a8c549cfa3abd3d0dbc24ed0f39b2b4b2fe2a1aba2f56382a9dc22a05e08df
+  ✘ تعديل حاكم: site/sources/meta/2026-10-31.json · sha256=a98fe3cc9c41ec774cdeb923cbbf882784f2dceaf815e3d0c7027b92e6547f0a
+✘ فشل مغلق: توجد تعديلات شيفرة/بيانات حقيقية خارج سجلات التشغيل المعلنة
+✘ فشل مغلق: حارس شجرة النسخ منع العملية؛ راجع تصنيف المسارات وبصمات SHA-256
+=== بدء النسخ الاحتياطي: 2026-11-11T01:04:08Z ===
+حارس شجرة النسخ: تغييرات Git=135 · سجلات تشغيل معلنة=130 · كتل مولَّدة=0 · تعديلات حاكمة=5
+  ✔ سجل تشغيل معلن: brain/feeds/feeds-2026-11-10.json · sha256=b056220007b5dbcff49304939cf18aff9f84dd92ccd9dbd91e1c73420ffcec63
+  ✔ سجل تشغيل معلن: brain/feeds/feeds-2026-11-10.md · sha256=5f21efef6c3f3991bc431bc537a757a0f3a4154e3e642fe671cebb6d1514e0af
+  ✔ سجل تشغيل معلن: brain/feeds/feeds-2026-11-10.status.json · sha256=92525f6d9b737acf5db0ea835c38cab654f09cacbacd6e97a079f21cf16505a9
+  ✔ سجل تشغيل معلن: brain/logs/alerts/waw-2026-10-29.md · sha256=60ce3c193c71c744f9b828f7fbbd9e845837350e64e2525f47b97266383d34db
+  ✔ سجل تشغيل معلن: brain/logs/edit-pass-2026-11-10.json · sha256=8052059c8a4a891cadff3ad36ed0adf6e20ac3a70ca0bd69c89613586e3b5d05
+  ✔ سجل تشغيل معلن: brain/logs/gate-2026-10-23/.text-hash-2026-10-23.json · sha256=74b9eea9dca72772913ec021f851f8622738128c9a13e8dfce1fa99984c62913
+  ✔ سجل تشغيل معلن: brain/logs/gate-2026-11-10/.text-hash-2026-11-10.json · sha256=e2737a622def478d0beee36552ad3ef191ce43c4a9c72b57dd64e03f7574bde6
+  ✔ سجل تشغيل معلن: brain/logs/gate-2026-11-10/binding-coverage.json · sha256=0a01da5d02b7aa56ea952b27be043c2eb886c84c3c1836a6ba24a01e10942694
+  ✔ سجل تشغيل معلن: brain/logs/gate-2026-11-10/gate.json · sha256=f42b1bf33d34f3a44aca76cec4d6f4d20fc0faf865eada3a0774f3eb2696ecbd
+  ✔ سجل تشغيل معلن: brain/logs/github-backup-2026-11-11.log · sha256=e6d34c7db16b40ed88f17fc9d87553231ce4a995b4114a831f54b604c4c627d0
+  ✔ سجل تشغيل معلن: brain/logs/orthography-2026-10-31.json · sha256=6d2000a04878cdc9ec1b32f4c9e8e1ce32431612a3255b92d9a4040c20d9c16a
+  ✔ سجل تشغيل معلن: brain/logs/orthography-2026-11-10.json · sha256=4f58263d5f8292f6fb3f1635e58c31d6079c1b7e8f8d4e32e33049e6dc620f57
+  ✔ سجل تشغيل معلن: brain/logs/pipeline-2026-11-10.json · sha256=e1c89083bcf4ba729bb5d2a07b3caa5b4260593610fb161c785b4277f5922ec9
+  ✔ سجل تشغيل معلن: brain/logs/publish-channel-2026-11-10.json · sha256=b5437960468a69f55dde72102b3bd7d26cbad8223f07cfc44d29c8f1d4208bed
+  ✔ سجل تشغيل معلن: brain/logs/qa-2026-11-10.json · sha256=a39e60b6989c9bbf19640b839806e5887758ebc3dd2e274d5a7cccc0a332a345
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10.jsonl · sha256=7a0f9a3a39bd5fcbc49904f4b981f827e0afb5642a284ae0efeab84d516b749e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B004A.log · sha256=344349c224db0bd4f1083a43224865b932b2771b914e53a26e9da97e06df98d8
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B005.log · sha256=6347739c796530bc4fdd7200614da58b97d7bbb06d24bdb25cc981d4fc9e3c8d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B006.log · sha256=a186fa3a86bb149a4c930ac57a96b9d40c074920c0ec5fd4b1c0847ea69ca128
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B009.log · sha256=3e44fba3497de65e157b8b374ed266debd2f466bcc309706a69a7a4b47a80f02
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B010.log · sha256=24f76aedce05f45b1c3a4f01188c2c160a98e130da8db826e8ffdc17da5bbe58
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B020.log · sha256=a19b3f58ca41fb95bbe68c8a83245c0f144cfd1e6073bd69ef568ff4cd8c6efb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B030.log · sha256=a19b3f58ca41fb95bbe68c8a83245c0f144cfd1e6073bd69ef568ff4cd8c6efb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B035.log · sha256=c6b941bb0abfc9037619bc0cf7e0df408246ba1c2de7df13ff2b1aadb9e83243
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B040.log · sha256=89c507982c651d7c2d7a071dc1229524f4ddafc9912a8755f25ad55e4f05dfc6
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/D005.log · sha256=99140d62e104568a00c56398a8bf396bacbd0ee1309b84e27fc962ee4d154bf2
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G000.log · sha256=5c34e5675f2a32653873229297cb211653ae1ec5622c8f57880748370cd6b283
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G000A.log · sha256=5c0145db0b271833834e1146fe46a943b1fd4c82ecd0f39d3a5247625b68e0e7
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G000B.log · sha256=019bb1f6272eac2488e0f1e9570f9c932a24307e3e10bc9b5ca731043b30ad4d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G000C.log · sha256=e66f583742071deb382be60e7994e6c4882aa3f40e5f9a29b643e74db760fe16
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G000C2.log · sha256=b5d7b7e2a3eb749a918d94466e1cd8bd4406d897bee21613c119fb125f04fdfb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G000D.log · sha256=1da924f900d32707c4b0ba0598ec2eb6eb2d0b50fac51ca60270ae89d5f09280
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G001.log · sha256=64d72dce09564768ca54dc395afd9e09abbd239a5dafc237dc7c6d64f61455dc
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G002.log · sha256=5557fdb6b5539735aca4dcff02b8b0a7b6af91ace199f4b43303426ce4fd61d4
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G003.log · sha256=7594f36d1e1367b9289560f5ba01fa33a537341d2feb1b1df307a8b194737e1f
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G004.log · sha256=38098c2f0c1f069449e2b987b44604f7825177bd8953880d2f50df6352647ec1
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G005.log · sha256=fdd62c820d25d8a541d018eef387ce6c91ef02cb2351d406a3e667c265d1482e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G006.log · sha256=5fe466160eb603ad84e66739b2f1a9b6dc4ca3de5a31e299468956fd07821e4d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G007.log · sha256=9f143910378a9d4ca2b7950b1a798744188a80e58feafbf7c783f8ea04062dec
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G008.log · sha256=207e757b45b9ac90816575c3ed904c8dd65553cdccfba692b2e70833354c50b6
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G009.log · sha256=c37270fe5a4df15e827120a9a0510abba1d2be71c5c070d5268533057edcf41e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G010.log · sha256=8a999df18efe0a781d40d2e192e7fda31f4c6b30dfc6a0f2feb1f528580edefb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G011.log · sha256=472ae119e1b2d927170b80c2ef3782c531eafa3bc9abdd60bf6aa0aa30e7a470
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G011H.log · sha256=b2320bf5a2e4f0bf7dbb52be25bfee5e846a138d4e46f6af3501fb087ff35cc8
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G012.log · sha256=210a94d463229c2ffdfa32bb75834fb34570076c9e1b052ac1862704893223d3
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G013.log · sha256=4b10da052bfd3d2066b73b3accc294b29f354a6dde314d923661343a97ddf631
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G014.log · sha256=678e0874c1540614dd6c1a00e4584c3453843c3a70f976fe7b7a92f00c772310
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G015.log · sha256=f6c2528c2169c3355fa09956bcc4e7fd735622e29553ecbe1f09a7f5ed746733
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G016.log · sha256=4a535d529b346317f2e178b3bd639ef2527aa7ad8b386ebde637d0a76b22b379
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G017.log · sha256=1298e5783b5b328c658978ffb781832b7b4a1820b4ec620e3d41c184f13aadcd
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G018.log · sha256=d4f2400ec84906b2c2258545348be9050dfd11a89140908f2a045d42e9bc19b9
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G018A.log · sha256=2f56e16e689b1b80904f9829ec3e941a81d37f43136bbb8fe0f0d44630a00ed5
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G019.log · sha256=99ff4a6161aa74edd45f9387b8d17a8e2afc3ec8ea338e359cb0355f03880f3a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G020.log · sha256=b59b765c6369601ae67674e9d7471ebd795d4a836a0e30cf1644ac1a1c9d47a9
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G021.log · sha256=39cfefe8fc5afd25d64f0589628070f520a9a3ec36388603b4e30196091c2cf8
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G022.log · sha256=3d0b9efff509535abf055a6d6d9f9f3c5e10bb708d3ce8abd314cd6bdb92abe6
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G023.log · sha256=607eec3608d69fea7aefa36ac25e6bbbcedd72f5e3e0b048e32a2788292110a6
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G024.log · sha256=ea600822b1e039ee41b56e5e4efbad2eafa690c1bfc85552dda867a238c38865
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G025.log · sha256=70fb2c26f1840c48b87f6096b1066f5ea2313bfc3dcfdd3e92924cddaf1f4ece
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G026.log · sha256=d44a9097db9f9bd6d37f53fdbe707bfa68c0c2cc062bcd8dab912362d93563fd
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G027.log · sha256=497e3ed610d2becaccc0ee7d498617543d891a861b0a6fe2860e33a070f1d4f2
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G028.log · sha256=00de47f74a72df49571438673d572b5e4037b0cdec29cf300e0a6d29f31ef27a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G029.log · sha256=01d8a5cf2d8df186726caca555b496f92527d489550f1b68781399dc0f52ac69
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G030.log · sha256=a0e51f4698fef20eadf9ad25b82bb5197871047ec830d879bca43e2c88abd09c
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G031.log · sha256=443e13d2fce9401bc0c4b92e1a43de9b9bbf392f9b5edd3939cc610b8006d05e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G032.log · sha256=3ad7802a6fce00027110d20d403139750ef9d89e96abf9a4ece818c063086e17
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G033.log · sha256=97e030f1da61b214082753cd9b5b21f82652efb13ca3c14ded845f9aa92fd4cb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G034.log · sha256=fe7344ec2047ae1573b2c191bcda00ce7f3c9d1d02846f247adc53f76f7916d9
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G035.log · sha256=73484f92fbdf1872bd81e8addb820b9c42cbb49635494fe060a8b91d24e3d637
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G036.log · sha256=2d8cade49206f96c309ecbc3b67bdd570f7a33ebed958e39bd07cb1e27c3c8a0
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G037.log · sha256=c39a3193b3eba03b163f4301c816a2c0a9b6d42f5d344a42f5d922a8b165212b
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G038.log · sha256=1b130fcbbee7d7b8b1b144aa100783a491c225ea65f9ee9472cc30513fd24176
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G039.log · sha256=ee252663719475347f4e6a3b172d14041bcfe8d46dcbdf7a2c5511204c56101a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G040.log · sha256=62e35cb1c4a7e725e3a3e260b78450a97374b9fbf5e02a175ccafdbb5bd50c23
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G041.log · sha256=f930093bf39477b7a169caf37b7634f4d60375eeea57386f9ecc4682a047d729
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G042.log · sha256=f3a1d6f65e509be4f92a68c48592417e0dd6c5b6d3904dd9bc4a3ddd0ad4d8b4
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G043.log · sha256=9453f02572ea83be636c051fe8b38d86ebf24725e060dbfa6c893656b397d0e2
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G044.log · sha256=09da832c2fb0183771ed34f813975f0ef640ff86fb2bf8c6be4da0c8b2f04866
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G044B.log · sha256=2980b8885cb16d13da9afd6ca2b680028e9f216d81ba599b483bd3640dbffc94
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G045.log · sha256=82f07f8f769ee14aa2849f6a74c09b3f5dd97b12121cc1805a5ba30a3255272a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G046.log · sha256=82269d6a28c2add3d9ddaaad86d753026764b1dd378f5ab86abfe5edd8ab4fef
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G047.log · sha256=f3733a3cf87acce0d2fa3c0025b9163c5b4ab4e472cf4c5b393a6b0c692b7b3d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G048.log · sha256=990f4700367703ce9efc6a7eb83ff5556d691d2d28369ddbf12ea8eca0aceb71
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G048A-coverage.json · sha256=07164886a7bd2e47891d960cb44e0b680f564139ddf32987b1784bf27c4ddf9b
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G048A.log · sha256=69d65b0ae923e357bfdeae9c12d0a5f39f16b5a32eeaf86d6c75654949ac2780
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G049.log · sha256=44ee90ffcc716a91a93cc68b9094b6a4b391bf131ce882f4a8f56b7da90c32f7
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G050.log · sha256=93e3bf2ef2317ed80c55b6462da5645f1c2dc3e667db8a3d0dc5fc183b175b0b
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G051.log · sha256=07dd2473d73e10d0e6631238e2c2f86a1d174daa7a3d3e4b509f7837c1326335
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G052.log · sha256=639d71dd21e961bafc4bf3b898d542795a1d6e0299e42ee42edb85e08479a02a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G053.log · sha256=f90bf240d713eac86b5743b56bc295f9d24c994dd68feedc721447af2ffe3501
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G054.log · sha256=36787c165623239872e5d8fafc962f6264b81140260d52f712b80489fc0c8fa4
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G055.log · sha256=ea792c2b65e1d20fd636976aab78fcdfecaa723e7256056425c24fa7ac22bd38
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G056.log · sha256=ecdd7c3d661cec6ddeae64c379127c676b06724887a4bb11f2bd1d447c776adf
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G057.log · sha256=423e1e66f8fdf7cab8c5cf931c71be5ca8530dc0daffd67715aa28ac9bbf0872
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G058.log · sha256=68ec6cb8f0a338a766a2f7e7005fcad58fcbd9ea587d2849ef9ca230bdad8607
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G059.log · sha256=ccf89db9c3e664eec544271a61bf1ecd1ce89c64260a27a57144ed1f3acd3ef7
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G060.log · sha256=0ce83bce011729857eda9d284ee6a1a5734ccbd49f8fe780b1650c8e7c96c919
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G061.log · sha256=8a422631bc27ccaa7c693e7a01cd05d23026423aa40c69423ba082f39b01b8bd
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G062.log · sha256=a0f9725222497522a53bcb50c1391ac82a4a9ba74c2e1244d07049872845f03e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G062R.log · sha256=e1b7c02b99ca3be9b20665b1b1c443603f982986abe327b0f3a3bd49d6d236bb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G063.log · sha256=c41b8f1f829dff0c94030b28034e5a8be9f3a9b08104969241a21aa5dee089e4
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G064-regression.json · sha256=60fd59de835f38aa63f0ca1a16145cbaa0456bf1d93e9f1a207f00923a5114cb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G064.log · sha256=db23908eac577b681aa885eb0439a71d3f645a419899b4353e6e873f25059e70
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G065-measure.json · sha256=314f79c7f587a4505e2c31b49c25d42c216867dac771e5f2c2647dc0742a403a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G065.log · sha256=c564b0afad11b7f1d821e65f6987c21d91f41f7a3f8257fa5d2bd9af0b47b6cf
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G066.log · sha256=d4190301926c4282f994cff89e73d87465f9d1b8648096a5d8c1578db26898ce
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G067.log · sha256=59a43ba5d6df3c227dc2657cd6a612ed866d8de3a608c8e7b8e338609dba74eb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G068.log · sha256=86a139c4d0d4f0aae1d4367e31daf5520b0b8b45bf96b32b2228a9b62800b90d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S000.log · sha256=3ea803963fe454a33c6d0fed3bcc0dcd6005a95469fe201465909c4cfebf9e73
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S010.log · sha256=fa41b0ef4075d7eba08c9edce8cab625dbabb383d99703dff8b5f9b69ceb0d4d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S020.log · sha256=bc1a6bb23e0117840d0181099651d7d40e44e145f4d220c65937a85c1d7d46f6
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S030.log · sha256=37bc067dca1e4bc3c5751a569d8c840aa36506ad0379cb6eee91285d3fce1807
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S040.log · sha256=beacfc924f17580fb5c690b16d03cf5ffb0d42750f612bf820ab4977d14726f3
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S050.log · sha256=a622b8481b38f2da022082a3b533efd5130e458cecf99caed39ce658b98ad2c7
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S060.log · sha256=a1551ae059b9a1587e0ad670317a648841adecdeb6a5045783d6224f4c7de287
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S065.log · sha256=b0686372238bb26d379f874f0cf1d4fb74ea893b3b4b6a82051dd6b31321ef06
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S070.log · sha256=92c071ac2c717ede8cc1d9a7e77f120b4d0e2c7f5802c6d0782223796b2a8ca2
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S071.log · sha256=ca4e20e206a3622952d0f3d3c647dc619aa2f2d054b6c5394418e0e52943d17e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S072.log · sha256=fd2d3ba529eba58d3754d958abe4661910d501e5c92eecde3590eb11984c0991
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S080.log · sha256=44fb1079baf07a12a77e9216e96ff52044519262cf936ce549692153a1071a2e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S085.log · sha256=d3ca064f6bbaa82e927c38dbcebc3144a12621c2835ef2c1c028379d27d26de0
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S090.log · sha256=107ec73bb3cc05685d3b8e77659b2714aa6b90340468b03f6994efd1744085a5
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/W040.log · sha256=50f5e5bc1c892a38ed297c13b1e2bb374fc775900d2e4a33dca69b52857e40fa
+  ✔ سجل تشغيل معلن: brain/logs/scrub-2026-11-10.json · sha256=97d46b061e6fa7df3432879418bac64073d549fb54334c61d816d33cd9de1945
+  ✔ سجل تشغيل معلن: brain/logs/style-metrics-2026-10-31.json · sha256=b79bf175d81ffbc6aa19f1312a6298747bbc2fed7535054852886a7d8941cf54
+  ✔ سجل تشغيل معلن: brain/logs/style-metrics-2026-11-10.json · sha256=2d4696536a630385a22ca5a2654070895f3980d537749b0db093ecb836f51cf3
+  ✔ سجل تشغيل معلن: brain/logs/telegram-sends.jsonl · sha256=414b28d13b9c653797eaf1399623d8c2cad97a22303e966ccf8f517b57ae7101
+  ✔ سجل تشغيل معلن: brain/logs/tg-digest-2026-11-10.html · sha256=d483513c7d9a5e0efe7dbf09fb6c7a62f3d23351f5701c64269c8bc235fb52b1
+  ✔ سجل تشغيل معلن: brain/reports/docx/التقرير-اليومي-2026-11-10-طبق-الأصل.docx · sha256=7c4ec38fad9d4d126f13e494ec2697392d67c261bd8fd1bf59b4df2ebae76481
+  ✔ سجل تشغيل معلن: brain/reports/docx/التقرير-اليومي-2026-11-10-طبق-الأصل.pdf · sha256=21c21ea14dee7d59497f2c14f38d384c52b08fd8bdb46c1163a4573a2b30762a
+  ✘ تعديل حاكم: brain/OPERATING-RULES.md · sha256=dd3edf1ccc027e979900f7cfbd727fed9b7ed3254e1128c0f57c07f95e8d4ba8
+  ✘ تعديل حاكم: brain/notes/2026-11-10-en-build-repair-plan.md · sha256=15b24996d6210333b1b87e31a5fa62d5660c06169f319fa24eed98f6eedcfbfe
+  ✘ تعديل حاكم: brain/notes/2026-11-10-inline-tag-sentence-plan.md · sha256=45294359aea3529475b5168a2b5465b948597be96b40130a7000d49892a46177
+  ✘ تعديل حاكم: brain/notes/2026-11-10-حالة-الجولة-النهائية.md · sha256=e2a377664415349aa9d19999f92f14ccbfb3fa4c8a6097227066aabbdbf4f02f
+  ✘ تعديل حاكم: brain/notes/2026-11-10-دفعة-المعجم-وحالة-B010.md · sha256=bcf7e877dd7c7e047f29670090f6926f70a6e1fe7a3efeb96ba2b343703acf36
+✘ فشل مغلق: توجد تعديلات شيفرة/بيانات حقيقية خارج سجلات التشغيل المعلنة
+✘ فشل مغلق: حارس شجرة النسخ منع العملية؛ راجع تصنيف المسارات وبصمات SHA-256
+=== بدء النسخ الاحتياطي: 2026-11-11T01:04:57Z ===
+حارس شجرة النسخ: تغييرات Git=128 · سجلات تشغيل معلنة=128 · كتل مولَّدة=0 · تعديلات حاكمة=0
+  ✔ سجل تشغيل معلن: brain/feeds/feeds-2026-11-10.json · sha256=b056220007b5dbcff49304939cf18aff9f84dd92ccd9dbd91e1c73420ffcec63
+  ✔ سجل تشغيل معلن: brain/feeds/feeds-2026-11-10.md · sha256=5f21efef6c3f3991bc431bc537a757a0f3a4154e3e642fe671cebb6d1514e0af
+  ✔ سجل تشغيل معلن: brain/feeds/feeds-2026-11-10.status.json · sha256=92525f6d9b737acf5db0ea835c38cab654f09cacbacd6e97a079f21cf16505a9
+  ✔ سجل تشغيل معلن: brain/logs/alerts/waw-2026-10-29.md · sha256=60ce3c193c71c744f9b828f7fbbd9e845837350e64e2525f47b97266383d34db
+  ✔ سجل تشغيل معلن: brain/logs/edit-pass-2026-11-10.json · sha256=8052059c8a4a891cadff3ad36ed0adf6e20ac3a70ca0bd69c89613586e3b5d05
+  ✔ سجل تشغيل معلن: brain/logs/gate-2026-10-23/.text-hash-2026-10-23.json · sha256=74b9eea9dca72772913ec021f851f8622738128c9a13e8dfce1fa99984c62913
+  ✔ سجل تشغيل معلن: brain/logs/gate-2026-11-10/.text-hash-2026-11-10.json · sha256=e2737a622def478d0beee36552ad3ef191ce43c4a9c72b57dd64e03f7574bde6
+  ✔ سجل تشغيل معلن: brain/logs/gate-2026-11-10/binding-coverage.json · sha256=0a01da5d02b7aa56ea952b27be043c2eb886c84c3c1836a6ba24a01e10942694
+  ✔ سجل تشغيل معلن: brain/logs/gate-2026-11-10/gate.json · sha256=f42b1bf33d34f3a44aca76cec4d6f4d20fc0faf865eada3a0774f3eb2696ecbd
+  ✔ سجل تشغيل معلن: brain/logs/github-backup-2026-11-11.log · sha256=f4693e65b929262e083cfc37aef21d5f864beada3c63e0b171d11d072a16a7d1
+  ✔ سجل تشغيل معلن: brain/logs/orthography-2026-10-31.json · sha256=6d2000a04878cdc9ec1b32f4c9e8e1ce32431612a3255b92d9a4040c20d9c16a
+  ✔ سجل تشغيل معلن: brain/logs/orthography-2026-11-10.json · sha256=4f58263d5f8292f6fb3f1635e58c31d6079c1b7e8f8d4e32e33049e6dc620f57
+  ✔ سجل تشغيل معلن: brain/logs/pipeline-2026-11-10.json · sha256=e1c89083bcf4ba729bb5d2a07b3caa5b4260593610fb161c785b4277f5922ec9
+  ✔ سجل تشغيل معلن: brain/logs/publish-channel-2026-11-10.json · sha256=b5437960468a69f55dde72102b3bd7d26cbad8223f07cfc44d29c8f1d4208bed
+  ✔ سجل تشغيل معلن: brain/logs/qa-2026-11-10.json · sha256=a39e60b6989c9bbf19640b839806e5887758ebc3dd2e274d5a7cccc0a332a345
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10.jsonl · sha256=5ac43f8556491410f3602a0334c84445a2fb766540aa2e188135210351c9b4ec
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B004A.log · sha256=344349c224db0bd4f1083a43224865b932b2771b914e53a26e9da97e06df98d8
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B005.log · sha256=6347739c796530bc4fdd7200614da58b97d7bbb06d24bdb25cc981d4fc9e3c8d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B006.log · sha256=a186fa3a86bb149a4c930ac57a96b9d40c074920c0ec5fd4b1c0847ea69ca128
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B009.log · sha256=3e44fba3497de65e157b8b374ed266debd2f466bcc309706a69a7a4b47a80f02
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B010.log · sha256=24f76aedce05f45b1c3a4f01188c2c160a98e130da8db826e8ffdc17da5bbe58
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B020.log · sha256=a19b3f58ca41fb95bbe68c8a83245c0f144cfd1e6073bd69ef568ff4cd8c6efb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B030.log · sha256=a19b3f58ca41fb95bbe68c8a83245c0f144cfd1e6073bd69ef568ff4cd8c6efb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B035.log · sha256=c6b941bb0abfc9037619bc0cf7e0df408246ba1c2de7df13ff2b1aadb9e83243
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B040.log · sha256=89c507982c651d7c2d7a071dc1229524f4ddafc9912a8755f25ad55e4f05dfc6
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/D005.log · sha256=45acede0a4e81342ba02eeb7ec43901e90e275ae60b1b4fd7e7c41d885bc1934
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G000.log · sha256=5c34e5675f2a32653873229297cb211653ae1ec5622c8f57880748370cd6b283
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G000A.log · sha256=5c0145db0b271833834e1146fe46a943b1fd4c82ecd0f39d3a5247625b68e0e7
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G000B.log · sha256=019bb1f6272eac2488e0f1e9570f9c932a24307e3e10bc9b5ca731043b30ad4d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G000C.log · sha256=e66f583742071deb382be60e7994e6c4882aa3f40e5f9a29b643e74db760fe16
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G000C2.log · sha256=b5d7b7e2a3eb749a918d94466e1cd8bd4406d897bee21613c119fb125f04fdfb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G000D.log · sha256=1da924f900d32707c4b0ba0598ec2eb6eb2d0b50fac51ca60270ae89d5f09280
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G001.log · sha256=64d72dce09564768ca54dc395afd9e09abbd239a5dafc237dc7c6d64f61455dc
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G002.log · sha256=5557fdb6b5539735aca4dcff02b8b0a7b6af91ace199f4b43303426ce4fd61d4
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G003.log · sha256=7594f36d1e1367b9289560f5ba01fa33a537341d2feb1b1df307a8b194737e1f
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G004.log · sha256=38098c2f0c1f069449e2b987b44604f7825177bd8953880d2f50df6352647ec1
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G005.log · sha256=fdd62c820d25d8a541d018eef387ce6c91ef02cb2351d406a3e667c265d1482e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G006.log · sha256=5fe466160eb603ad84e66739b2f1a9b6dc4ca3de5a31e299468956fd07821e4d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G007.log · sha256=9f143910378a9d4ca2b7950b1a798744188a80e58feafbf7c783f8ea04062dec
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G008.log · sha256=207e757b45b9ac90816575c3ed904c8dd65553cdccfba692b2e70833354c50b6
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G009.log · sha256=c37270fe5a4df15e827120a9a0510abba1d2be71c5c070d5268533057edcf41e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G010.log · sha256=8a999df18efe0a781d40d2e192e7fda31f4c6b30dfc6a0f2feb1f528580edefb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G011.log · sha256=472ae119e1b2d927170b80c2ef3782c531eafa3bc9abdd60bf6aa0aa30e7a470
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G011H.log · sha256=b2320bf5a2e4f0bf7dbb52be25bfee5e846a138d4e46f6af3501fb087ff35cc8
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G012.log · sha256=210a94d463229c2ffdfa32bb75834fb34570076c9e1b052ac1862704893223d3
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G013.log · sha256=4b10da052bfd3d2066b73b3accc294b29f354a6dde314d923661343a97ddf631
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G014.log · sha256=678e0874c1540614dd6c1a00e4584c3453843c3a70f976fe7b7a92f00c772310
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G015.log · sha256=f6c2528c2169c3355fa09956bcc4e7fd735622e29553ecbe1f09a7f5ed746733
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G016.log · sha256=4a535d529b346317f2e178b3bd639ef2527aa7ad8b386ebde637d0a76b22b379
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G017.log · sha256=1298e5783b5b328c658978ffb781832b7b4a1820b4ec620e3d41c184f13aadcd
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G018.log · sha256=d4f2400ec84906b2c2258545348be9050dfd11a89140908f2a045d42e9bc19b9
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G018A.log · sha256=2f56e16e689b1b80904f9829ec3e941a81d37f43136bbb8fe0f0d44630a00ed5
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G019.log · sha256=99ff4a6161aa74edd45f9387b8d17a8e2afc3ec8ea338e359cb0355f03880f3a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G020.log · sha256=b59b765c6369601ae67674e9d7471ebd795d4a836a0e30cf1644ac1a1c9d47a9
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G021.log · sha256=39cfefe8fc5afd25d64f0589628070f520a9a3ec36388603b4e30196091c2cf8
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G022.log · sha256=3d0b9efff509535abf055a6d6d9f9f3c5e10bb708d3ce8abd314cd6bdb92abe6
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G023.log · sha256=607eec3608d69fea7aefa36ac25e6bbbcedd72f5e3e0b048e32a2788292110a6
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G024.log · sha256=ea600822b1e039ee41b56e5e4efbad2eafa690c1bfc85552dda867a238c38865
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G025.log · sha256=70fb2c26f1840c48b87f6096b1066f5ea2313bfc3dcfdd3e92924cddaf1f4ece
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G026.log · sha256=d44a9097db9f9bd6d37f53fdbe707bfa68c0c2cc062bcd8dab912362d93563fd
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G027.log · sha256=497e3ed610d2becaccc0ee7d498617543d891a861b0a6fe2860e33a070f1d4f2
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G028.log · sha256=00de47f74a72df49571438673d572b5e4037b0cdec29cf300e0a6d29f31ef27a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G029.log · sha256=01d8a5cf2d8df186726caca555b496f92527d489550f1b68781399dc0f52ac69
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G030.log · sha256=a0e51f4698fef20eadf9ad25b82bb5197871047ec830d879bca43e2c88abd09c
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G031.log · sha256=443e13d2fce9401bc0c4b92e1a43de9b9bbf392f9b5edd3939cc610b8006d05e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G032.log · sha256=3ad7802a6fce00027110d20d403139750ef9d89e96abf9a4ece818c063086e17
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G033.log · sha256=97e030f1da61b214082753cd9b5b21f82652efb13ca3c14ded845f9aa92fd4cb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G034.log · sha256=fe7344ec2047ae1573b2c191bcda00ce7f3c9d1d02846f247adc53f76f7916d9
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G035.log · sha256=73484f92fbdf1872bd81e8addb820b9c42cbb49635494fe060a8b91d24e3d637
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G036.log · sha256=2d8cade49206f96c309ecbc3b67bdd570f7a33ebed958e39bd07cb1e27c3c8a0
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G037.log · sha256=c39a3193b3eba03b163f4301c816a2c0a9b6d42f5d344a42f5d922a8b165212b
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G038.log · sha256=1b130fcbbee7d7b8b1b144aa100783a491c225ea65f9ee9472cc30513fd24176
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G039.log · sha256=ee252663719475347f4e6a3b172d14041bcfe8d46dcbdf7a2c5511204c56101a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G040.log · sha256=62e35cb1c4a7e725e3a3e260b78450a97374b9fbf5e02a175ccafdbb5bd50c23
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G041.log · sha256=f930093bf39477b7a169caf37b7634f4d60375eeea57386f9ecc4682a047d729
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G042.log · sha256=f3a1d6f65e509be4f92a68c48592417e0dd6c5b6d3904dd9bc4a3ddd0ad4d8b4
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G043.log · sha256=9453f02572ea83be636c051fe8b38d86ebf24725e060dbfa6c893656b397d0e2
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G044.log · sha256=09da832c2fb0183771ed34f813975f0ef640ff86fb2bf8c6be4da0c8b2f04866
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G044B.log · sha256=2980b8885cb16d13da9afd6ca2b680028e9f216d81ba599b483bd3640dbffc94
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G045.log · sha256=82f07f8f769ee14aa2849f6a74c09b3f5dd97b12121cc1805a5ba30a3255272a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G046.log · sha256=82269d6a28c2add3d9ddaaad86d753026764b1dd378f5ab86abfe5edd8ab4fef
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G047.log · sha256=f3733a3cf87acce0d2fa3c0025b9163c5b4ab4e472cf4c5b393a6b0c692b7b3d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G048.log · sha256=990f4700367703ce9efc6a7eb83ff5556d691d2d28369ddbf12ea8eca0aceb71
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G048A-coverage.json · sha256=07164886a7bd2e47891d960cb44e0b680f564139ddf32987b1784bf27c4ddf9b
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G048A.log · sha256=69d65b0ae923e357bfdeae9c12d0a5f39f16b5a32eeaf86d6c75654949ac2780
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G049.log · sha256=44ee90ffcc716a91a93cc68b9094b6a4b391bf131ce882f4a8f56b7da90c32f7
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G050.log · sha256=93e3bf2ef2317ed80c55b6462da5645f1c2dc3e667db8a3d0dc5fc183b175b0b
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G051.log · sha256=07dd2473d73e10d0e6631238e2c2f86a1d174daa7a3d3e4b509f7837c1326335
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G052.log · sha256=639d71dd21e961bafc4bf3b898d542795a1d6e0299e42ee42edb85e08479a02a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G053.log · sha256=f90bf240d713eac86b5743b56bc295f9d24c994dd68feedc721447af2ffe3501
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G054.log · sha256=36787c165623239872e5d8fafc962f6264b81140260d52f712b80489fc0c8fa4
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G055.log · sha256=ea792c2b65e1d20fd636976aab78fcdfecaa723e7256056425c24fa7ac22bd38
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G056.log · sha256=ecdd7c3d661cec6ddeae64c379127c676b06724887a4bb11f2bd1d447c776adf
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G057.log · sha256=423e1e66f8fdf7cab8c5cf931c71be5ca8530dc0daffd67715aa28ac9bbf0872
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G058.log · sha256=68ec6cb8f0a338a766a2f7e7005fcad58fcbd9ea587d2849ef9ca230bdad8607
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G059.log · sha256=ccf89db9c3e664eec544271a61bf1ecd1ce89c64260a27a57144ed1f3acd3ef7
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G060.log · sha256=0ce83bce011729857eda9d284ee6a1a5734ccbd49f8fe780b1650c8e7c96c919
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G061.log · sha256=8a422631bc27ccaa7c693e7a01cd05d23026423aa40c69423ba082f39b01b8bd
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G062.log · sha256=a0f9725222497522a53bcb50c1391ac82a4a9ba74c2e1244d07049872845f03e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G062R.log · sha256=e1b7c02b99ca3be9b20665b1b1c443603f982986abe327b0f3a3bd49d6d236bb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G063.log · sha256=c41b8f1f829dff0c94030b28034e5a8be9f3a9b08104969241a21aa5dee089e4
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G064-regression.json · sha256=60fd59de835f38aa63f0ca1a16145cbaa0456bf1d93e9f1a207f00923a5114cb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G064.log · sha256=db23908eac577b681aa885eb0439a71d3f645a419899b4353e6e873f25059e70
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G065-measure.json · sha256=314f79c7f587a4505e2c31b49c25d42c216867dac771e5f2c2647dc0742a403a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G065.log · sha256=c564b0afad11b7f1d821e65f6987c21d91f41f7a3f8257fa5d2bd9af0b47b6cf
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G066.log · sha256=d4190301926c4282f994cff89e73d87465f9d1b8648096a5d8c1578db26898ce
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G067.log · sha256=59a43ba5d6df3c227dc2657cd6a612ed866d8de3a608c8e7b8e338609dba74eb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G068.log · sha256=86a139c4d0d4f0aae1d4367e31daf5520b0b8b45bf96b32b2228a9b62800b90d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S000.log · sha256=3ea803963fe454a33c6d0fed3bcc0dcd6005a95469fe201465909c4cfebf9e73
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S010.log · sha256=fa41b0ef4075d7eba08c9edce8cab625dbabb383d99703dff8b5f9b69ceb0d4d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S020.log · sha256=bc1a6bb23e0117840d0181099651d7d40e44e145f4d220c65937a85c1d7d46f6
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S030.log · sha256=37bc067dca1e4bc3c5751a569d8c840aa36506ad0379cb6eee91285d3fce1807
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S040.log · sha256=beacfc924f17580fb5c690b16d03cf5ffb0d42750f612bf820ab4977d14726f3
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S050.log · sha256=a622b8481b38f2da022082a3b533efd5130e458cecf99caed39ce658b98ad2c7
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S060.log · sha256=a1551ae059b9a1587e0ad670317a648841adecdeb6a5045783d6224f4c7de287
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S065.log · sha256=b0686372238bb26d379f874f0cf1d4fb74ea893b3b4b6a82051dd6b31321ef06
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S070.log · sha256=92c071ac2c717ede8cc1d9a7e77f120b4d0e2c7f5802c6d0782223796b2a8ca2
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S071.log · sha256=ca4e20e206a3622952d0f3d3c647dc619aa2f2d054b6c5394418e0e52943d17e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S072.log · sha256=fd2d3ba529eba58d3754d958abe4661910d501e5c92eecde3590eb11984c0991
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S080.log · sha256=44fb1079baf07a12a77e9216e96ff52044519262cf936ce549692153a1071a2e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S085.log · sha256=d3ca064f6bbaa82e927c38dbcebc3144a12621c2835ef2c1c028379d27d26de0
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S090.log · sha256=107ec73bb3cc05685d3b8e77659b2714aa6b90340468b03f6994efd1744085a5
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/W040.log · sha256=50f5e5bc1c892a38ed297c13b1e2bb374fc775900d2e4a33dca69b52857e40fa
+  ✔ سجل تشغيل معلن: brain/logs/scrub-2026-11-10.json · sha256=97d46b061e6fa7df3432879418bac64073d549fb54334c61d816d33cd9de1945
+  ✔ سجل تشغيل معلن: brain/logs/style-metrics-2026-10-31.json · sha256=b79bf175d81ffbc6aa19f1312a6298747bbc2fed7535054852886a7d8941cf54
+  ✔ سجل تشغيل معلن: brain/logs/style-metrics-2026-11-10.json · sha256=2d4696536a630385a22ca5a2654070895f3980d537749b0db093ecb836f51cf3
+  ✔ سجل تشغيل معلن: brain/logs/telegram-sends.jsonl · sha256=414b28d13b9c653797eaf1399623d8c2cad97a22303e966ccf8f517b57ae7101
+  ✔ سجل تشغيل معلن: brain/logs/tg-digest-2026-11-10.html · sha256=d483513c7d9a5e0efe7dbf09fb6c7a62f3d23351f5701c64269c8bc235fb52b1
+✔ شجرة النسخ تمر: سجلات التشغيل المحلية لا تمنع النسخة الاحتياطية
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/blocks.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_report.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_report_en.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_site.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_sources.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_special.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/derive_en_units.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/make_en_glossary.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/section_counts.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/site_chrome.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/sources/i18n/en/2026-11-10-sectioned.en.md
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/tests/test_i18n_alignment.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): skills/.skill_versions.json
+⚠ تعارض (عُدّل على الخادم خارج GitHub): skills/slides/html-syntax.md
+✘ 14 تعارض. لا شيء طُبّق. إن كان المستودع هو الصحيح: أعد التشغيل بـ --accept-repo (تُؤرشف نسخ الخادم أولًا).
+⚠ تعذّر/تعارض في تطبيق الشيفرة (تستمر نسخة البيانات بعد تسجيل التحذير)
+الملفات: 10324 · الحجم: 346.7 م.ب · الفهرس: docs/فهرس-الملفات.tsv
+  استُثني: brain/reports/docx/التقرير-اليومي-2026-11-08-طبق-الأصل.docx — مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب
+  استُثني: brain/reports/docx/التقرير-اليومي-2026-11-08-طبق-الأصل.pdf — مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب
+  استُثني: brain/reports/docx/التقرير-اليومي-2026-11-09-طبق-الأصل.docx — مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب
+  استُثني: brain/reports/docx/التقرير-اليومي-2026-11-09-طبق-الأصل.pdf — مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب
+  استُثني: brain/reports/docx/التقرير-اليومي-2026-10-23-طبق-الأصل.docx — مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب
+  استُثني: brain/reports/docx/التقرير-اليومي-2026-11-10-طبق-الأصل.docx — مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب
+  استُثني: brain/reports/docx/التقرير-اليومي-2026-11-10-طبق-الأصل.pdf — مُولَّد آليًا — يُعاد توليده ولا يُتعقَّب
+  استُثني: brain/state/webhook-secret.txt — سرّي — لا يُنقل
+  انحراف شيفرة: site/generator/blocks.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/site_chrome.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/build_site.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/build_special.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/build_sources.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/build_report.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/section_counts.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/derive_en_units.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/build_report_en.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/generator/make_en_glossary.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/sources/i18n/en/2026-11-10-sectioned.en.md — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  انحراف شيفرة: site/tests/test_i18n_alignment.py — نسخة الخادم تختلف عن GitHub ولم تُنسخ (طبّق apply_from_github أو انقل التعديل إلى GitHub)
+  شيفرة جديدة من الخادم: site/generator/daily_title.py — نُسخت (غير موجودة في GitHub)
+  شيفرة جديدة من الخادم: site/generator/third_person.py — نُسخت (غير موجودة في GitHub)
+  شيفرة جديدة من الخادم: site/tests/test_brain_root_canonical.py — نُسخت (غير موجودة في GitHub)
+  شيفرة جديدة من الخادم: site/tests/test_i18n_ltr_prefix_digits.py — نُسخت (غير موجودة في GitHub)
+  شيفرة جديدة من الخادم: site/tests/test_daily_title_normalization.py — نُسخت (غير موجودة في GitHub)
+  شيفرة جديدة من الخادم: site/tests/test_glossary_year_invariant.py — نُسخت (غير موجودة في GitHub)
+  شيفرة جديدة من الخادم: site/tests/test_i18n_597_regressions.py — نُسخت (غير موجودة في GitHub)
+  شيفرة جديدة من الخادم: site/tests/test_reader_grade_labels.py — نُسخت (غير موجودة في GitHub)
+✔ بوابة الأسرار: لا سرّ في النطاق المفحوص
+✔ كل ملفات الشيفرة على الخادم متتبَّعة في المستودع (المستثنى المعلَّل: 0)
+✔ آمن: لا يوجد git push مباشر إلى main في /home/ubuntu/mda-marine-system/brain/tools/github_backup.sh
+remote: 
+remote: Create a pull request for 'backup/2026-11-11-010548-3033029' on GitHub by visiting:        
+remote:      https://github.com/fahadaldoseri/mda-marine-system/pull/new/backup/2026-11-11-010548-3033029        
+remote: 
+تم دفع الفرع فقط: backup/2026-11-11-010548-3033029
+تم إنشاء طلب الدمج: https://github.com/fahadaldoseri/mda-marine-system/pull/607
+=== انتهى: 2026-11-11T01:05:57Z ===
+=== بدء النسخ الاحتياطي: 2026-11-11T01:08:11Z ===
+حارس شجرة النسخ: تغييرات Git=129 · سجلات تشغيل معلنة=129 · كتل مولَّدة=0 · تعديلات حاكمة=0
+  ✔ سجل تشغيل معلن: brain/feeds/feeds-2026-11-10.json · sha256=b056220007b5dbcff49304939cf18aff9f84dd92ccd9dbd91e1c73420ffcec63
+  ✔ سجل تشغيل معلن: brain/feeds/feeds-2026-11-10.md · sha256=5f21efef6c3f3991bc431bc537a757a0f3a4154e3e642fe671cebb6d1514e0af
+  ✔ سجل تشغيل معلن: brain/feeds/feeds-2026-11-10.status.json · sha256=92525f6d9b737acf5db0ea835c38cab654f09cacbacd6e97a079f21cf16505a9
+  ✔ سجل تشغيل معلن: brain/logs/alerts/code-drift-2026-11-11.txt · sha256=71bcd7bd52351b1979d2db5e5c41c23a24cfa4cb38bcefb39571b410e1d1af83
+  ✔ سجل تشغيل معلن: brain/logs/alerts/waw-2026-10-29.md · sha256=60ce3c193c71c744f9b828f7fbbd9e845837350e64e2525f47b97266383d34db
+  ✔ سجل تشغيل معلن: brain/logs/edit-pass-2026-11-10.json · sha256=8052059c8a4a891cadff3ad36ed0adf6e20ac3a70ca0bd69c89613586e3b5d05
+  ✔ سجل تشغيل معلن: brain/logs/gate-2026-10-23/.text-hash-2026-10-23.json · sha256=74b9eea9dca72772913ec021f851f8622738128c9a13e8dfce1fa99984c62913
+  ✔ سجل تشغيل معلن: brain/logs/gate-2026-11-10/.text-hash-2026-11-10.json · sha256=e2737a622def478d0beee36552ad3ef191ce43c4a9c72b57dd64e03f7574bde6
+  ✔ سجل تشغيل معلن: brain/logs/gate-2026-11-10/binding-coverage.json · sha256=0a01da5d02b7aa56ea952b27be043c2eb886c84c3c1836a6ba24a01e10942694
+  ✔ سجل تشغيل معلن: brain/logs/gate-2026-11-10/gate.json · sha256=f42b1bf33d34f3a44aca76cec4d6f4d20fc0faf865eada3a0774f3eb2696ecbd
+  ✔ سجل تشغيل معلن: brain/logs/github-backup-2026-11-11.log · sha256=260c1ab20d6c8c10220ef66fe16e9dea0eb9e22312a742c2c5b3d460c268227f
+  ✔ سجل تشغيل معلن: brain/logs/orthography-2026-10-31.json · sha256=6d2000a04878cdc9ec1b32f4c9e8e1ce32431612a3255b92d9a4040c20d9c16a
+  ✔ سجل تشغيل معلن: brain/logs/orthography-2026-11-10.json · sha256=4f58263d5f8292f6fb3f1635e58c31d6079c1b7e8f8d4e32e33049e6dc620f57
+  ✔ سجل تشغيل معلن: brain/logs/pipeline-2026-11-10.json · sha256=e1c89083bcf4ba729bb5d2a07b3caa5b4260593610fb161c785b4277f5922ec9
+  ✔ سجل تشغيل معلن: brain/logs/publish-channel-2026-11-10.json · sha256=b5437960468a69f55dde72102b3bd7d26cbad8223f07cfc44d29c8f1d4208bed
+  ✔ سجل تشغيل معلن: brain/logs/qa-2026-11-10.json · sha256=a39e60b6989c9bbf19640b839806e5887758ebc3dd2e274d5a7cccc0a332a345
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10.jsonl · sha256=58aa6dd210d22fd04782b89e04d50d973fb78cd381073eab3aafe5064632165d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B004A.log · sha256=344349c224db0bd4f1083a43224865b932b2771b914e53a26e9da97e06df98d8
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B005.log · sha256=6347739c796530bc4fdd7200614da58b97d7bbb06d24bdb25cc981d4fc9e3c8d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B006.log · sha256=a186fa3a86bb149a4c930ac57a96b9d40c074920c0ec5fd4b1c0847ea69ca128
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B009.log · sha256=3e44fba3497de65e157b8b374ed266debd2f466bcc309706a69a7a4b47a80f02
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B010.log · sha256=24f76aedce05f45b1c3a4f01188c2c160a98e130da8db826e8ffdc17da5bbe58
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B020.log · sha256=a19b3f58ca41fb95bbe68c8a83245c0f144cfd1e6073bd69ef568ff4cd8c6efb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B030.log · sha256=a19b3f58ca41fb95bbe68c8a83245c0f144cfd1e6073bd69ef568ff4cd8c6efb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B035.log · sha256=c6b941bb0abfc9037619bc0cf7e0df408246ba1c2de7df13ff2b1aadb9e83243
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/B040.log · sha256=89c507982c651d7c2d7a071dc1229524f4ddafc9912a8755f25ad55e4f05dfc6
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/D005.log · sha256=9a678b980792b1b8a16e7fbb9563ef29e87a4d400783774f4eda56600aaa8723
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G000.log · sha256=5c34e5675f2a32653873229297cb211653ae1ec5622c8f57880748370cd6b283
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G000A.log · sha256=5c0145db0b271833834e1146fe46a943b1fd4c82ecd0f39d3a5247625b68e0e7
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G000B.log · sha256=019bb1f6272eac2488e0f1e9570f9c932a24307e3e10bc9b5ca731043b30ad4d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G000C.log · sha256=e66f583742071deb382be60e7994e6c4882aa3f40e5f9a29b643e74db760fe16
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G000C2.log · sha256=b5d7b7e2a3eb749a918d94466e1cd8bd4406d897bee21613c119fb125f04fdfb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G000D.log · sha256=1da924f900d32707c4b0ba0598ec2eb6eb2d0b50fac51ca60270ae89d5f09280
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G001.log · sha256=64d72dce09564768ca54dc395afd9e09abbd239a5dafc237dc7c6d64f61455dc
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G002.log · sha256=5557fdb6b5539735aca4dcff02b8b0a7b6af91ace199f4b43303426ce4fd61d4
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G003.log · sha256=7594f36d1e1367b9289560f5ba01fa33a537341d2feb1b1df307a8b194737e1f
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G004.log · sha256=38098c2f0c1f069449e2b987b44604f7825177bd8953880d2f50df6352647ec1
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G005.log · sha256=fdd62c820d25d8a541d018eef387ce6c91ef02cb2351d406a3e667c265d1482e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G006.log · sha256=5fe466160eb603ad84e66739b2f1a9b6dc4ca3de5a31e299468956fd07821e4d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G007.log · sha256=9f143910378a9d4ca2b7950b1a798744188a80e58feafbf7c783f8ea04062dec
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G008.log · sha256=207e757b45b9ac90816575c3ed904c8dd65553cdccfba692b2e70833354c50b6
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G009.log · sha256=c37270fe5a4df15e827120a9a0510abba1d2be71c5c070d5268533057edcf41e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G010.log · sha256=8a999df18efe0a781d40d2e192e7fda31f4c6b30dfc6a0f2feb1f528580edefb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G011.log · sha256=472ae119e1b2d927170b80c2ef3782c531eafa3bc9abdd60bf6aa0aa30e7a470
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G011H.log · sha256=b2320bf5a2e4f0bf7dbb52be25bfee5e846a138d4e46f6af3501fb087ff35cc8
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G012.log · sha256=210a94d463229c2ffdfa32bb75834fb34570076c9e1b052ac1862704893223d3
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G013.log · sha256=4b10da052bfd3d2066b73b3accc294b29f354a6dde314d923661343a97ddf631
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G014.log · sha256=678e0874c1540614dd6c1a00e4584c3453843c3a70f976fe7b7a92f00c772310
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G015.log · sha256=f6c2528c2169c3355fa09956bcc4e7fd735622e29553ecbe1f09a7f5ed746733
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G016.log · sha256=4a535d529b346317f2e178b3bd639ef2527aa7ad8b386ebde637d0a76b22b379
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G017.log · sha256=1298e5783b5b328c658978ffb781832b7b4a1820b4ec620e3d41c184f13aadcd
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G018.log · sha256=d4f2400ec84906b2c2258545348be9050dfd11a89140908f2a045d42e9bc19b9
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G018A.log · sha256=2f56e16e689b1b80904f9829ec3e941a81d37f43136bbb8fe0f0d44630a00ed5
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G019.log · sha256=99ff4a6161aa74edd45f9387b8d17a8e2afc3ec8ea338e359cb0355f03880f3a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G020.log · sha256=b59b765c6369601ae67674e9d7471ebd795d4a836a0e30cf1644ac1a1c9d47a9
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G021.log · sha256=39cfefe8fc5afd25d64f0589628070f520a9a3ec36388603b4e30196091c2cf8
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G022.log · sha256=3d0b9efff509535abf055a6d6d9f9f3c5e10bb708d3ce8abd314cd6bdb92abe6
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G023.log · sha256=607eec3608d69fea7aefa36ac25e6bbbcedd72f5e3e0b048e32a2788292110a6
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G024.log · sha256=ea600822b1e039ee41b56e5e4efbad2eafa690c1bfc85552dda867a238c38865
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G025.log · sha256=70fb2c26f1840c48b87f6096b1066f5ea2313bfc3dcfdd3e92924cddaf1f4ece
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G026.log · sha256=d44a9097db9f9bd6d37f53fdbe707bfa68c0c2cc062bcd8dab912362d93563fd
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G027.log · sha256=497e3ed610d2becaccc0ee7d498617543d891a861b0a6fe2860e33a070f1d4f2
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G028.log · sha256=00de47f74a72df49571438673d572b5e4037b0cdec29cf300e0a6d29f31ef27a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G029.log · sha256=01d8a5cf2d8df186726caca555b496f92527d489550f1b68781399dc0f52ac69
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G030.log · sha256=a0e51f4698fef20eadf9ad25b82bb5197871047ec830d879bca43e2c88abd09c
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G031.log · sha256=443e13d2fce9401bc0c4b92e1a43de9b9bbf392f9b5edd3939cc610b8006d05e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G032.log · sha256=3ad7802a6fce00027110d20d403139750ef9d89e96abf9a4ece818c063086e17
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G033.log · sha256=97e030f1da61b214082753cd9b5b21f82652efb13ca3c14ded845f9aa92fd4cb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G034.log · sha256=fe7344ec2047ae1573b2c191bcda00ce7f3c9d1d02846f247adc53f76f7916d9
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G035.log · sha256=73484f92fbdf1872bd81e8addb820b9c42cbb49635494fe060a8b91d24e3d637
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G036.log · sha256=2d8cade49206f96c309ecbc3b67bdd570f7a33ebed958e39bd07cb1e27c3c8a0
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G037.log · sha256=c39a3193b3eba03b163f4301c816a2c0a9b6d42f5d344a42f5d922a8b165212b
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G038.log · sha256=1b130fcbbee7d7b8b1b144aa100783a491c225ea65f9ee9472cc30513fd24176
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G039.log · sha256=ee252663719475347f4e6a3b172d14041bcfe8d46dcbdf7a2c5511204c56101a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G040.log · sha256=62e35cb1c4a7e725e3a3e260b78450a97374b9fbf5e02a175ccafdbb5bd50c23
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G041.log · sha256=f930093bf39477b7a169caf37b7634f4d60375eeea57386f9ecc4682a047d729
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G042.log · sha256=f3a1d6f65e509be4f92a68c48592417e0dd6c5b6d3904dd9bc4a3ddd0ad4d8b4
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G043.log · sha256=9453f02572ea83be636c051fe8b38d86ebf24725e060dbfa6c893656b397d0e2
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G044.log · sha256=09da832c2fb0183771ed34f813975f0ef640ff86fb2bf8c6be4da0c8b2f04866
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G044B.log · sha256=2980b8885cb16d13da9afd6ca2b680028e9f216d81ba599b483bd3640dbffc94
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G045.log · sha256=82f07f8f769ee14aa2849f6a74c09b3f5dd97b12121cc1805a5ba30a3255272a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G046.log · sha256=82269d6a28c2add3d9ddaaad86d753026764b1dd378f5ab86abfe5edd8ab4fef
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G047.log · sha256=f3733a3cf87acce0d2fa3c0025b9163c5b4ab4e472cf4c5b393a6b0c692b7b3d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G048.log · sha256=990f4700367703ce9efc6a7eb83ff5556d691d2d28369ddbf12ea8eca0aceb71
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G048A-coverage.json · sha256=07164886a7bd2e47891d960cb44e0b680f564139ddf32987b1784bf27c4ddf9b
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G048A.log · sha256=69d65b0ae923e357bfdeae9c12d0a5f39f16b5a32eeaf86d6c75654949ac2780
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G049.log · sha256=44ee90ffcc716a91a93cc68b9094b6a4b391bf131ce882f4a8f56b7da90c32f7
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G050.log · sha256=93e3bf2ef2317ed80c55b6462da5645f1c2dc3e667db8a3d0dc5fc183b175b0b
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G051.log · sha256=07dd2473d73e10d0e6631238e2c2f86a1d174daa7a3d3e4b509f7837c1326335
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G052.log · sha256=639d71dd21e961bafc4bf3b898d542795a1d6e0299e42ee42edb85e08479a02a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G053.log · sha256=f90bf240d713eac86b5743b56bc295f9d24c994dd68feedc721447af2ffe3501
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G054.log · sha256=36787c165623239872e5d8fafc962f6264b81140260d52f712b80489fc0c8fa4
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G055.log · sha256=ea792c2b65e1d20fd636976aab78fcdfecaa723e7256056425c24fa7ac22bd38
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G056.log · sha256=ecdd7c3d661cec6ddeae64c379127c676b06724887a4bb11f2bd1d447c776adf
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G057.log · sha256=423e1e66f8fdf7cab8c5cf931c71be5ca8530dc0daffd67715aa28ac9bbf0872
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G058.log · sha256=68ec6cb8f0a338a766a2f7e7005fcad58fcbd9ea587d2849ef9ca230bdad8607
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G059.log · sha256=ccf89db9c3e664eec544271a61bf1ecd1ce89c64260a27a57144ed1f3acd3ef7
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G060.log · sha256=0ce83bce011729857eda9d284ee6a1a5734ccbd49f8fe780b1650c8e7c96c919
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G061.log · sha256=8a422631bc27ccaa7c693e7a01cd05d23026423aa40c69423ba082f39b01b8bd
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G062.log · sha256=a0f9725222497522a53bcb50c1391ac82a4a9ba74c2e1244d07049872845f03e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G062R.log · sha256=e1b7c02b99ca3be9b20665b1b1c443603f982986abe327b0f3a3bd49d6d236bb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G063.log · sha256=c41b8f1f829dff0c94030b28034e5a8be9f3a9b08104969241a21aa5dee089e4
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G064-regression.json · sha256=60fd59de835f38aa63f0ca1a16145cbaa0456bf1d93e9f1a207f00923a5114cb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G064.log · sha256=db23908eac577b681aa885eb0439a71d3f645a419899b4353e6e873f25059e70
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G065-measure.json · sha256=314f79c7f587a4505e2c31b49c25d42c216867dac771e5f2c2647dc0742a403a
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G065.log · sha256=c564b0afad11b7f1d821e65f6987c21d91f41f7a3f8257fa5d2bd9af0b47b6cf
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G066.log · sha256=d4190301926c4282f994cff89e73d87465f9d1b8648096a5d8c1578db26898ce
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G067.log · sha256=59a43ba5d6df3c227dc2657cd6a612ed866d8de3a608c8e7b8e338609dba74eb
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/G068.log · sha256=86a139c4d0d4f0aae1d4367e31daf5520b0b8b45bf96b32b2228a9b62800b90d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S000.log · sha256=3ea803963fe454a33c6d0fed3bcc0dcd6005a95469fe201465909c4cfebf9e73
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S010.log · sha256=fa41b0ef4075d7eba08c9edce8cab625dbabb383d99703dff8b5f9b69ceb0d4d
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S020.log · sha256=bc1a6bb23e0117840d0181099651d7d40e44e145f4d220c65937a85c1d7d46f6
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S030.log · sha256=37bc067dca1e4bc3c5751a569d8c840aa36506ad0379cb6eee91285d3fce1807
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S040.log · sha256=beacfc924f17580fb5c690b16d03cf5ffb0d42750f612bf820ab4977d14726f3
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S050.log · sha256=a622b8481b38f2da022082a3b533efd5130e458cecf99caed39ce658b98ad2c7
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S060.log · sha256=a1551ae059b9a1587e0ad670317a648841adecdeb6a5045783d6224f4c7de287
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S065.log · sha256=b0686372238bb26d379f874f0cf1d4fb74ea893b3b4b6a82051dd6b31321ef06
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S070.log · sha256=92c071ac2c717ede8cc1d9a7e77f120b4d0e2c7f5802c6d0782223796b2a8ca2
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S071.log · sha256=ca4e20e206a3622952d0f3d3c647dc619aa2f2d054b6c5394418e0e52943d17e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S072.log · sha256=fd2d3ba529eba58d3754d958abe4661910d501e5c92eecde3590eb11984c0991
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S080.log · sha256=44fb1079baf07a12a77e9216e96ff52044519262cf936ce549692153a1071a2e
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S085.log · sha256=d3ca064f6bbaa82e927c38dbcebc3144a12621c2835ef2c1c028379d27d26de0
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/S090.log · sha256=107ec73bb3cc05685d3b8e77659b2714aa6b90340468b03f6994efd1744085a5
+  ✔ سجل تشغيل معلن: brain/logs/runbook/2026-11-10/W040.log · sha256=50f5e5bc1c892a38ed297c13b1e2bb374fc775900d2e4a33dca69b52857e40fa
+  ✔ سجل تشغيل معلن: brain/logs/scrub-2026-11-10.json · sha256=97d46b061e6fa7df3432879418bac64073d549fb54334c61d816d33cd9de1945
+  ✔ سجل تشغيل معلن: brain/logs/style-metrics-2026-10-31.json · sha256=b79bf175d81ffbc6aa19f1312a6298747bbc2fed7535054852886a7d8941cf54
+  ✔ سجل تشغيل معلن: brain/logs/style-metrics-2026-11-10.json · sha256=2d4696536a630385a22ca5a2654070895f3980d537749b0db093ecb836f51cf3
+  ✔ سجل تشغيل معلن: brain/logs/telegram-sends.jsonl · sha256=414b28d13b9c653797eaf1399623d8c2cad97a22303e966ccf8f517b57ae7101
+  ✔ سجل تشغيل معلن: brain/logs/tg-digest-2026-11-10.html · sha256=d483513c7d9a5e0efe7dbf09fb6c7a62f3d23351f5701c64269c8bc235fb52b1
+✔ شجرة النسخ تمر: سجلات التشغيل المحلية لا تمنع النسخة الاحتياطية
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/blocks.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_report.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_report_en.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_site.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_sources.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/build_special.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/derive_en_units.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/make_en_glossary.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/section_counts.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/generator/site_chrome.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/sources/i18n/en/2026-11-10-sectioned.en.md
+⚠ تعارض (عُدّل على الخادم خارج GitHub): site/tests/test_i18n_alignment.py
+⚠ تعارض (عُدّل على الخادم خارج GitHub): skills/.skill_versions.json
+⚠ تعارض (عُدّل على الخادم خارج GitHub): skills/slides/html-syntax.md
+✘ 14 تعارض. لا شيء طُبّق. إن كان المستودع هو الصحيح: أعد التشغيل بـ --accept-repo (تُؤرشف نسخ الخادم أولًا).
+⚠ تعذّر/تعارض في تطبيق الشيفرة (تستمر نسخة البيانات بعد تسجيل التحذير)
