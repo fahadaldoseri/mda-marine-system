@@ -124,7 +124,9 @@ def build(meta, date, base, detail=True, delivery_note=""):
     cut = dt.datetime.strptime(meta["generated_label"], "%Y-%m-%dT%H:%M:%SZ")
     start = cut - dt.timedelta(hours=24)
     bh = cut + dt.timedelta(hours=3)
-    codes = {e["code"]: e for e in meta.get("event_keys", [])}
+    event_keys = meta.get("event_keys") or []
+    codes = {str(e["code"]): e for e in event_keys
+             if isinstance(e, dict) and e.get("code")}
     lines = ["<b>مركز الوعي بالمجال البحري</b>", "",
              f"<b>{meta['title']}</b>",
              f"تقرير رقم: «{meta['version']}»",

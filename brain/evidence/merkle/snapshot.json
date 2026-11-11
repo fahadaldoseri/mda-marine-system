@@ -1,6 +1,6 @@
 {
   "schema": "governing-assets-merkle/v1",
-  "generated_at": "2026-11-10T06:46:03.562815+00:00",
+  "generated_at": "2026-11-11T05:30:30.263007+00:00",
   "config": "/home/ubuntu/mda-marine-system/brain/tools/governing-assets.txt",
   "selection": [
     "GLOB /home/ubuntu/skills/*/SKILL.md",
@@ -27,8 +27,8 @@
     "odd_level": "duplicate the final node",
     "root": "final single node, hexadecimal lowercase"
   },
-  "file_count": 2683,
-  "root": "0a5b8c37486ef9eb951138052e8ac523c10bd9b3b034d1c7670a14d7b07a5a6c",
+  "file_count": 2689,
+  "root": "fc790ef8d4455b41ad0c222749443241641896e6f1984a589dbcb5946e47a68b",
   "files": [
     {
       "path": "/home/ubuntu/mda-marine-system/brain/{BRAIN}/INDEX.md",
@@ -19187,8 +19187,8 @@
       "lines": 79,
       "sha256": "0559e115ddc207f6c3a739d718eb1c6d77c846da174b658c707f531d338fb492",
       "size": 7936,
-      "mtime": "2026-11-08T21:58:24.998134+00:00",
-      "mtime_ns": 1794175104998133714,
+      "mtime": "2026-11-11T04:54:35.275106+00:00",
+      "mtime_ns": 1794372875275106106,
       "exists": true
     },
     {
@@ -19196,8 +19196,17 @@
       "lines": 81,
       "sha256": "ead490af9520b957bdce85bde0c40c4ec0956fdf80542dd956325dec66720529",
       "size": 7770,
-      "mtime": "2026-11-08T22:10:48.507575+00:00",
-      "mtime_ns": 1794175848507574694,
+      "mtime": "2026-11-11T04:50:40.273427+00:00",
+      "mtime_ns": 1794372640273427017,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/rerun-step-to-live-parity-ops/references/measured-recovery-2026-11-10.md",
+      "lines": 31,
+      "sha256": "61e5b8bb639c703cad58a5ebe62a9dab23e5e566e33eab30ed262b42842533a8",
+      "size": 3807,
+      "mtime": "2026-11-11T04:50:40.273605+00:00",
+      "mtime_ns": 1794372640273604835,
       "exists": true
     },
     {
@@ -19205,8 +19214,17 @@
       "lines": 81,
       "sha256": "c043233c8606bf58a46c9eecbcc66b207bd03671193f1ca32a379afe8d717859",
       "size": 3528,
-      "mtime": "2026-11-08T22:10:48.507360+00:00",
-      "mtime_ns": 1794175848507359607,
+      "mtime": "2026-11-11T04:50:40.273944+00:00",
+      "mtime_ns": 1794372640273944266,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/rerun-step-to-live-parity-ops/scripts/read_step_rejection.py",
+      "lines": 50,
+      "sha256": "c2a845e983c563dbaac31338d61eef0fd17b5862437e83181439d5ec346ffb8e",
+      "size": 1595,
+      "mtime": "2026-11-11T04:50:40.274046+00:00",
+      "mtime_ns": 1794372640274045860,
       "exists": true
     },
     {
@@ -19463,11 +19481,11 @@
     },
     {
       "path": "/home/ubuntu/skills/runbook-operations-ops/SKILL.md",
-      "lines": 47,
-      "sha256": "40767a254010aaba8a718e9380f4ad4fb02195073baf6172b6b45976d919ba8c",
-      "size": 5254,
-      "mtime": "2026-11-06T22:25:07.349066+00:00",
-      "mtime_ns": 1794003907349065644,
+      "lines": 73,
+      "sha256": "6deb82f22963144037cec1c33b7a2a80d426973eed8372a1850077791d620574",
+      "size": 8831,
+      "mtime": "2026-11-11T05:30:18.630588+00:00",
+      "mtime_ns": 1794375018630587882,
       "exists": true
     },
     {
@@ -20602,6 +20620,42 @@
       "size": 5734,
       "mtime": "2026-11-06T19:51:30.659972+00:00",
       "mtime_ns": 1793994690659972073,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/source-route-triage-ops/SKILL.md",
+      "lines": 48,
+      "sha256": "ed99f226b81c55c2721ecc01d6103cc467d18064ef71abf26f7a1027e0682ab4",
+      "size": 7580,
+      "mtime": "2026-11-11T04:50:40.205400+00:00",
+      "mtime_ns": 1794372640205399542,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/source-route-triage-ops/references/candidate-ladder.md",
+      "lines": 26,
+      "sha256": "d632c8e90359a2020ca9ac667f88458a61819c84d2c70df19efcb490507173af",
+      "size": 2900,
+      "mtime": "2026-11-11T04:50:40.205699+00:00",
+      "mtime_ns": 1794372640205698886,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/source-route-triage-ops/scripts/check_freshness_gate.py",
+      "lines": 100,
+      "sha256": "5b7d597d54e6896b8c4cac578ebfa5b35e23bd34fc715644ad2fd99a98ff17fd",
+      "size": 4366,
+      "mtime": "2026-11-11T04:50:40.205851+00:00",
+      "mtime_ns": 1794372640205850607,
+      "exists": true
+    },
+    {
+      "path": "/home/ubuntu/skills/source-route-triage-ops/scripts/triage_source_route.py",
+      "lines": 134,
+      "sha256": "da1ef753e1c060bb6e683635e58747abed1d92e7c83df892737e9dc51c26e65c",
+      "size": 5409,
+      "mtime": "2026-11-11T04:50:40.205972+00:00",
+      "mtime_ns": 1794372640205971804,
       "exists": true
     },
     {

@@ -28,6 +28,8 @@ from tools.hypothesis_distribution import (  # noqa: E402
     DistributionError,
     POINT_FROM_RANGE_KIND,
     RULE as DISTRIBUTION_RULE,
+    NO_ESTIMATE_KIND,
+    NO_ESTIMATE_RULE,
     calculate_distribution,
     parse_point,
     parse_range,
@@ -160,6 +162,17 @@ def check_hypotheses(d):
 
     errs = []
     kinds = [h.get("likelihood_kind") for h in hs]
+    # إعلان معلن بديل التوزيع: يوم لا تصدر فيه المادة الرسمية تقديرًا رقميًا.
+    # لا يخفف ذلك فحصًا: النسب الرقمية تُرفض، والقاعدة المعتمدة تُشترط نصًّا.
+    if set(kinds) == {NO_ESTIMATE_KIND}:
+        if d.get("distribution_rule") != NO_ESTIMATE_RULE:
+            errs.append("[ف4.3] إعلان عدم التقدير يتطلب distribution_rule المعتمد نصًّا")
+        for h in hs:
+            for key in ("likelihood", "likelihood_range"):
+                value = h.get(key)
+                if isinstance(value, str) and re.search(r"\d+\s*%", value):
+                    errs.append(f"[ف4.3] إعلان عدم التقدير لا يقبل نسبة رقمية في {key}")
+        return errs
     if any(kind != POINT_FROM_RANGE_KIND for kind in kinds):
         if len(set(kinds)) > 1:
             errs.append(f"[ف4.3] خلط أنواع الاحتمال غير مسموح: {kinds}")
@@ -198,17 +211,36 @@ def check_hypotheses(d):
     return errs
 
 
+def _event_title(entry: object) -> str:
+    """اقرأ عنوان الواقعة إن كانت كائنًا؛ السلسلة لا تحمل عنوانًا فلا تُحتسب."""
+    if isinstance(entry, dict):
+        return str(entry.get("title") or "")
+    return ""
+
+
+def _event_code(entry: object) -> str:
+    """اقرأ رمز الواقعة من صيغتيه المعتمدتين: سلسلة الرمز أو كائن بحقل code.
+
+    ملفات الواجهة تقدم ``event_keys`` كسلاسل في بعض الأيام وككائنات في أخرى،
+    فكان المدقق ينهار بـAttributeError بدل أن يقيس. القبول هنا لا يخفف فحصًا:
+    الصيغة غير المعيارية تُرفض كما كانت.
+    """
+    if isinstance(entry, dict):
+        return str(entry.get("code") or "")
+    return str(entry or "")
+
+
 def check_events(d):
     """ف4.5 و ف4.7 — رموز الأحداث والخريطة وعدم المبالغة."""
     errs, warns = [], []
-    keys = {e.get("code") for e in (d.get("event_keys") or [])}
+    keys = {_event_code(e) for e in (d.get("event_keys") or [])}
     text_codes = {c for _, s in strings_of(d) for c in CODE_RE.findall(s)}
     unknown = sorted(text_codes - keys)
     if unknown:
         errs.append(f"[ف4.5] رموز أحداث في النص بلا سجل في event_keys: {unknown}")
     for i, e in enumerate(d.get("event_keys") or []):
-        if not CODE_RE.fullmatch(str(e.get("code", ""))):
-            errs.append(f"[ف4.5] صيغة رمز غير معيارية في event_keys[{i}]: {e.get('code')}")
+        if not CODE_RE.fullmatch(_event_code(e)):
+            errs.append(f"[ف4.5] صيغة رمز غير معيارية في event_keys[{i}]: {_event_code(e)}")
     for p in (d.get("map") or {}).get("points") or []:
         if p.get("code") and p["code"] not in keys:
             errs.append(f"[ف4.5] نقطة خريطة برمز غير مسجّل: {p['code']}")
@@ -226,7 +258,7 @@ def check_events(d):
     # واقعة مصنفة هجومًا: هجوم أو إصابة أو استهداف أو اعتراض
     ATK = ("هجوم", "إصابة", "استهداف", "اعتراض", "إطلاق")
     confirmed = sum(1 for e in (d.get("event_keys") or [])
-                    if any(w in str(e.get("title", "")) for w in ATK))
+                    if any(w in _event_title(e) for w in ATK))
     if attack is not None and attack > confirmed:
         errs.append(f"[ف4.7] مؤشر الهجمات المؤكدة ({attack}) يتجاوز الوقائع المصنفة هجومًا ({confirmed})")
     return errs, warns

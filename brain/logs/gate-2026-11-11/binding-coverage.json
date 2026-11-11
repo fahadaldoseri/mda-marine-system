@@ -1,0 +1,86 @@
+{
+ "brain": "/home/ubuntu/mda-marine-system/brain",
+ "total": 1534,
+ "bound": 429,
+ "declared_output": 0,
+ "exempt": 1095,
+ "orphans": [
+  "tests/test_area_separator_normalization.py",
+  "tests/test_event_card_rows.py",
+  "tests/test_gate_coverage_reference.py",
+  "tests/test_hero_kpi_presentation_contract.py",
+  "tests/test_measurement_batch_runner_timeout.py",
+  "tests/test_normalize_digits_scope.py",
+  "tests/test_pdf_print_gates.py",
+  "tests/test_regression_b03_dynamic_anchor.py",
+  "tests/test_runbook_s090_order.py",
+  "tests/test_surface_hygiene.py"
+ ],
+ "verdict": 1,
+ "samples": {
+  "bound": [
+   "validators/_guard.py",
+   "validators/check_additions_surface.py",
+   "validators/check_area_vocabulary.py",
+   "validators/check_asset_floor.py",
+   "validators/check_backup_parity.py",
+   "validators/check_backup_push_safety.py",
+   "validators/check_backup_tree_clean.py",
+   "validators/check_card_counters.py",
+   "validators/check_card_registry_pairs.py",
+   "validators/check_carryover.py",
+   "validators/check_closure.py",
+   "validators/check_code_policy.py",
+   "validators/check_code_spaces.py",
+   "validators/check_comprehension.py",
+   "validators/check_content_fidelity.py",
+   "validators/check_daily_event_surface.py",
+   "validators/check_daily_events_schema.py",
+   "validators/check_day_coverage.py",
+   "validators/check_decision_card.py",
+   "validators/check_decisions_registry.py"
+  ],
+  "exempt": [
+   [
+    "validators/__pycache__/_guard.cpython-312.pyc",
+    "ذاكرة ترجمة مؤقتة"
+   ],
+   [
+    "validators/__pycache__/check_additions_surface.cpython-312.pyc",
+    "ذاكرة ترجمة مؤقتة"
+   ],
+   [
+    "validators/__pycache__/check_area_vocabulary.cpython-312.pyc",
+    "ذاكرة ترجمة مؤقتة"
+   ],
+   [
+    "validators/__pycache__/check_asset_floor.cpython-312.pyc",
+    "ذاكرة ترجمة مؤقتة"
+   ],
+   [
+    "validators/__pycache__/check_backup_parity.cpython-312.pyc",
+    "ذاكرة ترجمة مؤقتة"
+   ],
+   [
+    "validators/__pycache__/check_backup_push_safety.cpython-312.pyc",
+    "ذاكرة ترجمة مؤقتة"
+   ],
+   [
+    "validators/__pycache__/check_backup_tree_clean.cpython-312.pyc",
+    "ذاكرة ترجمة مؤقتة"
+   ],
+   [
+    "validators/__pycache__/check_card_counters.cpython-312.pyc",
+    "ذاكرة ترجمة مؤقتة"
+   ],
+   [
+    "validators/__pycache__/check_card_registry_pairs.cpython-312.pyc",
+    "ذاكرة ترجمة مؤقتة"
+   ],
+   [
+    "validators/__pycache__/check_carryover.cpython-312.pyc",
+    "ذاكرة ترجمة مؤقتة"
+   ]
+  ]
+ }
+}

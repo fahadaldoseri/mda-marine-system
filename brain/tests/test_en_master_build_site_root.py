@@ -10,7 +10,10 @@ import tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "tools" / "en_master_build.sh"
-REAL_SITE = pathlib.Path("/home/ubuntu/seawatch")
+# جذر الموقع يُقاس من البيئة أو من الشقيق الافتراضي، لا من مسار مطلق مثبَّت (بوابة G026).
+REAL_SITE = pathlib.Path(
+    os.environ.get("SITE_DIR") or os.environ.get("SITE") or (ROOT.parent / "seawatch")
+)
 
 
 def _fake_python(bin_dir: pathlib.Path) -> None:

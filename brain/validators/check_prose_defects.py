@@ -93,12 +93,13 @@ def strip_markup(text: str) -> str:
     text = (text.replace("&nbsp;", " ").replace("&amp;", "&").replace("&lt;", "<")
                 .replace("&gt;", ">").replace("&quot;", '"').replace("&#39;", "'"))
     text = re.sub(r"`[^`]*`", " ", text)
-    text = re.sub(r"!?(?:\[[^\]]*\])\([^)]*\)", " ", text)
+    text = re.sub(r"!?\[([^\]]*)\]\([^)]*\)", r"\1", text)
     # ك-409: كانت علامات التمييز في Markdown تُستبدل بفراغ، فتصير «**مرتفع**؛» → «مرتفع  ؛»
     # وتُحتسب «مسافة قبل علامة ترقيم» كاذبة. علامات التمييز تُنزع بلا فراغ، وتبقى
     # العلامات البنيوية (العنوان والاقتباس والجدول) فراغًا.
     text = text.replace("*", "")
-    text = re.sub(r"[>#|]", " ", text)
+    # Keep table delimiters: find_repeated_templates uses them to exclude structured rows.
+    text = re.sub(r"[>#]", " ", text)
     return text
 
 

@@ -1,6 +1,6 @@
 {
-  "url": "file:///home/ubuntu/seawatch/dist/reports/2026-11-10.html",
-  "at": "2026-11-11T01:00:54+00:00",
+  "url": "file:///home/ubuntu/seawatch/dist/reports/2026-11-11.html",
+  "at": "2026-11-11T12:21:26+00:00",
   "widths": {
     "1440": {
       "compat": "CSS1Compat",
@@ -15,10 +15,18 @@
         {
           "id": "ev-01",
           "w": 354,
-          "h": 374,
+          "h": 424,
           "clip_loss": 0,
           "clips": [],
-          "top": 2246
+          "top": 3551
+        },
+        {
+          "id": "ev-02",
+          "w": 354,
+          "h": 424,
+          "clip_loss": 0,
+          "clips": [],
+          "top": 3551
         }
       ],
       "decision": {
@@ -28,7 +36,13 @@
         "height": 0,
         "lines": 0
       },
-      "map_decision": null,
+      "map_decision": {
+        "sel": ".hmap-decide",
+        "top": 2054,
+        "in_first_screen": false,
+        "height": 139,
+        "lines": 4
+      },
       "anchor": {
         "exists": false,
         "reached": false
@@ -44,7 +58,7 @@
         },
         {
           "q": "إجراء اليوم",
-          "found": false
+          "found": true
         },
         {
           "q": "الوقائع المستوفية",
@@ -78,8 +92,8 @@
       "phrases": [
         {
           "p": "هجمات مؤكدة",
-          "count": 0,
-          "context": null
+          "count": 1,
+          "context": "دة 0 · مرجّحة 0 · مؤهلة غير مؤكدة 0 · مستثناة 0 · إجمالي 0  هجمات مؤكدة على سفن (IMO): 128 · آخر تحديث 30 أكتوبر 2026  س"
         }
       ],
       "anchor_links": [
@@ -101,29 +115,8 @@
           "href": "/additions.html#sec-00",
           "page": "/additions.html",
           "hash": "sec-00",
-          "text": "قسم «ما تغيّر»",
+          "text": "ما تغيّر",
           "same_page_exists": false
-        },
-        {
-          "href": "#sec-02",
-          "page": "(نفس الصفحة)",
-          "hash": "sec-02",
-          "text": "التفصيل في بطاقة الترويسة",
-          "same_page_exists": true
-        },
-        {
-          "href": "#sec-decision",
-          "page": "(نفس الصفحة)",
-          "hash": "sec-decision",
-          "text": "قسم «التوصيات»",
-          "same_page_exists": true
-        },
-        {
-          "href": "#sec-decision",
-          "page": "(نفس الصفحة)",
-          "hash": "sec-decision",
-          "text": "أهم الأخبار",
-          "same_page_exists": true
         },
         {
           "href": "#sec-official",
@@ -151,6 +144,13 @@
           "page": "(نفس الصفحة)",
           "hash": "sec-03",
           "text": "مؤشرات الموقف",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-map",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-map",
+          "text": "خريطة القطاعات",
           "same_page_exists": true
         },
         {
@@ -186,11 +186,11 @@
         "#sn-main": true,
         "/#archive": true,
         "/additions.html#sec-00": true,
-        "#sec-02": true,
-        "#sec-decision": true,
         "#sec-official": true,
         "#sec-01": true,
+        "#sec-02": true,
         "#sec-03": true,
+        "#sec-map": true,
         "/additions.html#news-card": true
       },
       "anchor_target_details": {
@@ -209,16 +209,6 @@
           "dom_wait_ms": 15000,
           "exists": true
         },
-        "#sec-02": {
-          "http_status": null,
-          "dom_wait_ms": 0,
-          "exists": true
-        },
-        "#sec-decision": {
-          "http_status": null,
-          "dom_wait_ms": 0,
-          "exists": true
-        },
         "#sec-official": {
           "http_status": null,
           "dom_wait_ms": 0,
@@ -229,7 +219,17 @@
           "dom_wait_ms": 0,
           "exists": true
         },
+        "#sec-02": {
+          "http_status": null,
+          "dom_wait_ms": 0,
+          "exists": true
+        },
         "#sec-03": {
+          "http_status": null,
+          "dom_wait_ms": 0,
+          "exists": true
+        },
+        "#sec-map": {
           "http_status": null,
           "dom_wait_ms": 0,
           "exists": true
@@ -254,10 +254,18 @@
         {
           "id": "ev-01",
           "w": 354,
-          "h": 374,
+          "h": 424,
           "clip_loss": 0,
           "clips": [],
-          "top": 2246
+          "top": 3551
+        },
+        {
+          "id": "ev-02",
+          "w": 354,
+          "h": 424,
+          "clip_loss": 0,
+          "clips": [],
+          "top": 3551
         }
       ],
       "decision": {
@@ -267,7 +275,13 @@
         "height": 0,
         "lines": 0
       },
-      "map_decision": null,
+      "map_decision": {
+        "sel": ".hmap-decide",
+        "top": 2054,
+        "in_first_screen": false,
+        "height": 139,
+        "lines": 4
+      },
       "anchor": {
         "exists": false,
         "reached": false
@@ -283,7 +297,7 @@
         },
         {
           "q": "إجراء اليوم",
-          "found": false
+          "found": true
         },
         {
           "q": "الوقائع المستوفية",
@@ -317,8 +331,8 @@
       "phrases": [
         {
           "p": "هجمات مؤكدة",
-          "count": 0,
-          "context": null
+          "count": 1,
+          "context": "دة 0 · مرجّحة 0 · مؤهلة غير مؤكدة 0 · مستثناة 0 · إجمالي 0  هجمات مؤكدة على سفن (IMO): 128 · آخر تحديث 30 أكتوبر 2026  س"
         }
       ],
       "anchor_links": [
@@ -340,29 +354,8 @@
           "href": "/additions.html#sec-00",
           "page": "/additions.html",
           "hash": "sec-00",
-          "text": "قسم «ما تغيّر»",
+          "text": "ما تغيّر",
           "same_page_exists": false
-        },
-        {
-          "href": "#sec-02",
-          "page": "(نفس الصفحة)",
-          "hash": "sec-02",
-          "text": "التفصيل في بطاقة الترويسة",
-          "same_page_exists": true
-        },
-        {
-          "href": "#sec-decision",
-          "page": "(نفس الصفحة)",
-          "hash": "sec-decision",
-          "text": "قسم «التوصيات»",
-          "same_page_exists": true
-        },
-        {
-          "href": "#sec-decision",
-          "page": "(نفس الصفحة)",
-          "hash": "sec-decision",
-          "text": "أهم الأخبار",
-          "same_page_exists": true
         },
         {
           "href": "#sec-official",
@@ -390,6 +383,13 @@
           "page": "(نفس الصفحة)",
           "hash": "sec-03",
           "text": "مؤشرات الموقف",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-map",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-map",
+          "text": "خريطة القطاعات",
           "same_page_exists": true
         },
         {
@@ -425,11 +425,11 @@
         "#sn-main": true,
         "/#archive": true,
         "/additions.html#sec-00": true,
-        "#sec-02": true,
-        "#sec-decision": true,
         "#sec-official": true,
         "#sec-01": true,
+        "#sec-02": true,
         "#sec-03": true,
+        "#sec-map": true,
         "/additions.html#news-card": true
       },
       "anchor_target_details": {
@@ -448,16 +448,6 @@
           "dom_wait_ms": 15000,
           "exists": true
         },
-        "#sec-02": {
-          "http_status": null,
-          "dom_wait_ms": 0,
-          "exists": true
-        },
-        "#sec-decision": {
-          "http_status": null,
-          "dom_wait_ms": 0,
-          "exists": true
-        },
         "#sec-official": {
           "http_status": null,
           "dom_wait_ms": 0,
@@ -468,7 +458,17 @@
           "dom_wait_ms": 0,
           "exists": true
         },
+        "#sec-02": {
+          "http_status": null,
+          "dom_wait_ms": 0,
+          "exists": true
+        },
         "#sec-03": {
+          "http_status": null,
+          "dom_wait_ms": 0,
+          "exists": true
+        },
+        "#sec-map": {
           "http_status": null,
           "dom_wait_ms": 0,
           "exists": true

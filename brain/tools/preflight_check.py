@@ -317,8 +317,9 @@ if master.exists() and report.exists():
         newest = max(ev_dates) if ev_dates else DATE
         check(pe >= newest, f"الدفتر الجامع يغطي أحدث واقعة مسجّلة ({pe})",
               f"الدفتر الجامع لا يغطي أحدث واقعة في ملفات اليوم ({pe} < {newest}) — دمج ملف اليوم لم يُنفَّذ")
-    except Exception as e:
-        fails.append(f"تعذّر قراءة الدفتر الجامع: {e}")
+    except (json.JSONDecodeError, OSError, TypeError, KeyError, AttributeError) as e:
+        # الدفتر الجامع غير مقروء = لا يُثبت تغطيته ⇒ مانع، والسبب مكتوب لا مُبتلَع.
+        fails.append(f"تعذّر قراءة الدفتر الجامع ({type(e).__name__}): {e}")
 if cmap.exists() and report.exists():
     try:
         known = set(json.loads(cmap.read_text(encoding='utf-8')).get('codes', {})) | \

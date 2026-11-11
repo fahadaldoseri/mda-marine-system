@@ -1,0 +1,55 @@
+بوابة عقد عدّادات بطاقة أهم الأخبار — اختبار موجب وسالبان قبل البناء
+نتيجة بوابة العقد: rc=0
+سياسة الأقسام: /home/ubuntu/seawatch/sources/report-sections-policy.json · محذوف 15 · كتل 5
+test_arabic_counter_forms_remain_strict (tests.test_card_counters.CardCounterGateTests.test_arabic_counter_forms_remain_strict) ... ok
+test_english_threat_counter_is_generated_from_all_registered_labels (tests.test_card_counters.CardCounterGateTests.test_english_threat_counter_is_generated_from_all_registered_labels) ... ok
+test_monitoring_anchor_to_unrelated_section_fails_closed (tests.test_card_counters.CardCounterGateTests.test_monitoring_anchor_to_unrelated_section_fails_closed) ... ok
+test_monitoring_counter_accepts_full_section_anchor_and_visible_paragraph (tests.test_card_counters.CardCounterGateTests.test_monitoring_counter_accepts_full_section_anchor_and_visible_paragraph) ... ok
+test_negative_anchor_rule_rejects_section_id_that_lands_on_other_heading (tests.test_card_counters.CardCounterGateTests.test_negative_anchor_rule_rejects_section_id_that_lands_on_other_heading) ... ok
+test_negative_anchor_title_change_fails_closed (tests.test_card_counters.CardCounterGateTests.test_negative_anchor_title_change_fails_closed) ... ok
+test_negative_arabic_card_latin_outside_allowlist_fails_closed (tests.test_card_counters.CardCounterGateTests.test_negative_arabic_card_latin_outside_allowlist_fails_closed) ... ok
+test_negative_arabic_counter_grammar_fails_closed (tests.test_card_counters.CardCounterGateTests.test_negative_arabic_counter_grammar_fails_closed) ... ok
+test_negative_counter_change_fails_closed (tests.test_card_counters.CardCounterGateTests.test_negative_counter_change_fails_closed) ... ok
+test_news_card_missing_from_declared_additions_surface_fails_closed (tests.test_card_counters.CardCounterGateTests.test_news_card_missing_from_declared_additions_surface_fails_closed) ... ok
+test_policy_surface_is_used_for_counter_targets (tests.test_card_counters.CardCounterGateTests.test_policy_surface_is_used_for_counter_targets) ... ok
+test_policy_surface_maps_translated_english_targets_after_section_move (tests.test_card_counters.CardCounterGateTests.test_policy_surface_maps_translated_english_targets_after_section_move) ... ok
+test_positive_registry_matches_both_enabled_cards (tests.test_card_counters.CardCounterGateTests.test_positive_registry_matches_both_enabled_cards) ... ok
+test_registered_card_missing_required_counter_fails_closed (tests.test_card_counters.CardCounterGateTests.test_registered_card_missing_required_counter_fails_closed) ... ok
+test_registry_contains_two_enabled_cards (tests.test_card_counters.CardCounterGateTests.test_registry_contains_two_enabled_cards) ... ok
+test_rendered_additions_targets_measure_section_content_and_use_actual_ids (tests.test_card_counters.CardCounterGateTests.test_rendered_additions_targets_measure_section_content_and_use_actual_ids)
+قياس البطاقة يجب أن يساوي ما في المصدر نفسه، والمرساة تُشير إلى معرّف قسم حقيقي. ... ok
+test_shared_measurement_function_counts_rendered_target_structures (tests.test_card_counters.CardCounterGateTests.test_shared_measurement_function_counts_rendered_target_structures) ... ok
+test_stale_fragment_uses_policy_surface_and_data_goto_title (tests.test_card_counters.CardCounterGateTests.test_stale_fragment_uses_policy_surface_and_data_goto_title) ... ok
+test_unregistered_card_fails_closed (tests.test_card_counters.CardCounterGateTests.test_unregistered_card_fails_closed) ... ok
+test_zone_component_outside_target_section_fails_closed (tests.test_card_counters.CardCounterGateTests.test_zone_component_outside_target_section_fails_closed) ... ok
+test_zone_counter_drift_fails_closed (tests.test_card_counters.CardCounterGateTests.test_zone_counter_drift_fails_closed) ... ok
+test_zone_internal_label_is_not_anchor (tests.test_card_counters.CardCounterGateTests.test_zone_internal_label_is_not_anchor) ... ok
+test_arabic_narrative_counter_forms_cover_zero_one_two_few_many_and_hundred (tests.test_card_counters.HeroKpiGateTests.test_arabic_narrative_counter_forms_cover_zero_one_two_few_many_and_hundred) ... ok
+test_arabic_narrative_counter_rejects_plural_for_one (tests.test_card_counters.HeroKpiGateTests.test_arabic_narrative_counter_rejects_plural_for_one) ... ok
+test_current_day_hero_kpis_match_source_contract (tests.test_card_counters.HeroKpiGateTests.test_current_day_hero_kpis_match_source_contract) ... ok
+test_merged_imo_card_matches_official_list (tests.test_card_counters.HeroKpiGateTests.test_merged_imo_card_matches_official_list)
+قرار المالك: دُمجت بطاقة «هجمات مؤكدة على سفن» في «سجل الحوادث المؤكدة من IMO»، ... ok
+test_merged_imo_card_value_drift_fails_closed (tests.test_card_counters.HeroKpiGateTests.test_merged_imo_card_value_drift_fails_closed)
+ضبط سالب: انحراف قيمة البطاقة المدمجة عن القائمة الرسمية يُمنع. ... ok
+test_negative_detail_composition_fails_closed (tests.test_card_counters.HeroKpiGateTests.test_negative_detail_composition_fails_closed) ... ok
+test_negative_duplicate_hero_container_within_same_surface_fails_closed (tests.test_card_counters.HeroKpiGateTests.test_negative_duplicate_hero_container_within_same_surface_fails_closed) ... ok
+test_negative_fixed_title_change_fails_closed (tests.test_card_counters.HeroKpiGateTests.test_negative_fixed_title_change_fails_closed) ... ok
+test_negative_missing_card_fails_closed (tests.test_card_counters.HeroKpiGateTests.test_negative_missing_card_fails_closed) ... ok
+test_rendered_hero_kpis_allow_one_container_per_surface (tests.test_card_counters.HeroKpiGateTests.test_rendered_hero_kpis_allow_one_container_per_surface) ... ok
+test_unconfirmed_card_keeps_total_and_qualifying_dimensions (tests.test_card_counters.HeroKpiGateTests.test_unconfirmed_card_keeps_total_and_qualifying_dimensions) ... ok
+test_unconfirmed_detail_uses_singular_for_one_narrative (tests.test_card_counters.HeroKpiGateTests.test_unconfirmed_detail_uses_singular_for_one_narrative)
+الرواية الواحدة تُصرف بالمفرد وفق عقد البطاقة نفسه. ... ok
+test_false_zero_death_card_fails_closed (tests.test_card_counters.OfficialCardGateTests.test_false_zero_death_card_fails_closed) ... ok
+test_official_cards_have_three_layers_and_source_basis (tests.test_card_counters.OfficialCardGateTests.test_official_cards_have_three_layers_and_source_basis) ... ok
+test_transit_without_reading_uses_no_coverage_not_zero (tests.test_card_counters.OfficialCardGateTests.test_transit_without_reading_uses_no_coverage_not_zero) ... ok
+test_live_registry_is_clean (tests.test_card_registry_pairs.CardRegistryPairs.test_live_registry_is_clean) ... ok
+test_negative_list_length_mismatch (tests.test_card_registry_pairs.CardRegistryPairs.test_negative_list_length_mismatch) ... ok
+test_negative_missing_date_in_english (tests.test_card_registry_pairs.CardRegistryPairs.test_negative_missing_date_in_english) ... ok
+test_negative_missing_year_in_english (tests.test_card_registry_pairs.CardRegistryPairs.test_negative_missing_year_in_english) ... ok
+test_positive_matching_pairs (tests.test_card_registry_pairs.CardRegistryPairs.test_positive_matching_pairs) ... ok
+
+----------------------------------------------------------------------
+Ran 42 tests in 0.168s
+
+OK
+elapsed_seconds=0.266734

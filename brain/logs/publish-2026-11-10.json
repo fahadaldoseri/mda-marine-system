@@ -1,0 +1,166 @@
+{
+  "date": "2026-11-10",
+  "channel": "cloudflare-pages",
+  "url": "https://seawatch-live.pages.dev/reports/2026-11-10",
+  "successful_url": null,
+  "head": "0fff381b79d163e0140a705b951dc53baf3a08e3",
+  "rc": 2,
+  "status": "failed",
+  "live": {
+    "ok": true,
+    "status": 200,
+    "bytes": 163788,
+    "min_bytes": 100000,
+    "size_ok": true,
+    "date_marker": true,
+    "content_type": "text/html; charset=utf-8",
+    "content_type_normalized": "text/html",
+    "content_type_ok": true,
+    "presentation_eligible": true,
+    "sha256": "5b37c42e66b693e981d57fb6e2c8a1e74d3e4cb6ba690862b554fd407e4a8aed",
+    "expected_sha256": "5b37c42e66b693e981d57fb6e2c8a1e74d3e4cb6ba690862b554fd407e4a8aed",
+    "sha256_match": true,
+    "requested_url": "https://seawatch-live.pages.dev/reports/2026-11-10",
+    "final_url": "https://seawatch-live.pages.dev/reports/2026-11-10",
+    "redirected": false,
+    "redirects": [],
+    "reason": "ok",
+    "url": "https://seawatch-live.pages.dev/reports/2026-11-10",
+    "attempts": 1,
+    "elapsed_seconds": 2.667
+  },
+  "at": "2026-11-11T03:59:18Z",
+  "content_sha256": "5b37c42e66b693e981d57fb6e2c8a1e74d3e4cb6ba690862b554fd407e4a8aed",
+  "publish_output_tail": "لقوائم: عربي 30 · إنجليزي 30\n   ✔ أكواد الوقائع/التقديرات: إجمالي عربي 3 · إنجليزي 3\n   ✔ تحذيرات NAVAREA/UKMTO: إجمالي عربي 0 · إنجليزي 0\n   ✔ الحسابات: إجمالي عربي 3 · إنجليزي 3\n   ✔ النسب المئوية: إجمالي عربي 4 · إنجليزي 4\n   ✔ المديات الرقمية: إجمالي عربي 4 · إنجليزي 4\n   ✔ درجات الثقة: إجمالي عربي 1 · إنجليزي 1\n   ✔ التواريخ والأوقات: إجمالي عربي 4 · إنجليزي 4\n   ✔ كل الأرقام: إجمالي عربي 185 · إنجليزي 185\n   ── الصفحتان المبنيتان ──\n   ✔ h1: عربي 1 · إنجليزي 1\n   ✔ h2: عربي 6 · إنجليزي 6\n   ✔ h3: عربي 1 · إنجليزي 1\n   ✔ tables: عربي 0 · إنجليزي 0\n   ✔ rows: عربي 0 · إنجليزي 0\n   ✔ svg: عربي 8 · إنجليزي 8\n   ✔ buttons: عربي 4 · إنجليزي 4\n   ✔ list_items: عربي 26 · إنجليزي 26\n   ✘ links: عربي 20 · إنجليزي 19\n   ✔ collapsed: عربي 0 · إنجليزي 0\n   ✔ أرقام الصفحة المرئية: عربي 34 قيمة · إنجليزي 34 قيمة\n   ✔ لغة الصفحة الإنجليزية: lang=en dir=ltr\n   ✔ نصوص عربية متبقية في الصفحة الإنجليزية: 0\n   ✘ النتيجة: مخالف — بنية:links\n✘ رُفض publish: النسخة الإنجليزية غير مطابقة للعربية. لا نشر.",
+  "channel_role": "primary-presentation",
+  "pages_source_push": {
+    "rc": 10,
+    "head": "",
+    "repo": "fahadaldoseri/seawatch-live",
+    "output_tail": "✘ fallback: gh auth status فشل"
+  },
+  "channels": {
+    "cloudflare-pages": {
+      "state": "down",
+      "reason": "ok",
+      "live": {
+        "ok": true,
+        "status": 200,
+        "bytes": 163788,
+        "min_bytes": 100000,
+        "size_ok": true,
+        "date_marker": true,
+        "content_type": "text/html; charset=utf-8",
+        "content_type_normalized": "text/html",
+        "content_type_ok": true,
+        "presentation_eligible": true,
+        "sha256": "5b37c42e66b693e981d57fb6e2c8a1e74d3e4cb6ba690862b554fd407e4a8aed",
+        "expected_sha256": "5b37c42e66b693e981d57fb6e2c8a1e74d3e4cb6ba690862b554fd407e4a8aed",
+        "sha256_match": true,
+        "requested_url": "https://seawatch-live.pages.dev/reports/2026-11-10",
+        "final_url": "https://seawatch-live.pages.dev/reports/2026-11-10",
+        "redirected": false,
+        "redirects": [],
+        "reason": "ok",
+        "url": "https://seawatch-live.pages.dev/reports/2026-11-10",
+        "attempts": 1,
+        "elapsed_seconds": 2.667
+      },
+      "presentation_eligible": true
+    },
+    "raw-githack": {
+      "state": "down",
+      "reason": "gh auth status rc=1: github.com\n  X Failed to log in to github.com using token (GH_TOKEN)\n  - Active account: true\n  - The token in GH_TOKEN is invalid.\n\n  ✓ Logged in to github.com account fahadaldoseri (/home/ubuntu/.config/gh/hosts.yml)\n  - Active account: false\n  - Git operations protocol: https\n  - Token: ghu_************************************",
+      "presentation_eligible": true
+    },
+    "raw.githubusercontent": {
+      "state": "verification-only",
+      "reason": "raw.githubusercontent.com يعيد text/plain؛ ممنوع كقناة عرض",
+      "presentation_eligible": false
+    }
+  },
+  "attempts": [
+    {
+      "date": "2026-11-10",
+      "channel": "cloudflare-pages",
+      "url": "https://seawatch-live.pages.dev/reports/2026-11-10",
+      "successful_url": null,
+      "head": "0fff381b79d163e0140a705b951dc53baf3a08e3",
+      "rc": 2,
+      "status": "failed",
+      "live": {
+        "ok": true,
+        "status": 200,
+        "bytes": 163788,
+        "min_bytes": 100000,
+        "size_ok": true,
+        "date_marker": true,
+        "content_type": "text/html; charset=utf-8",
+        "content_type_normalized": "text/html",
+        "content_type_ok": true,
+        "presentation_eligible": true,
+        "sha256": "5b37c42e66b693e981d57fb6e2c8a1e74d3e4cb6ba690862b554fd407e4a8aed",
+        "expected_sha256": "5b37c42e66b693e981d57fb6e2c8a1e74d3e4cb6ba690862b554fd407e4a8aed",
+        "sha256_match": true,
+        "requested_url": "https://seawatch-live.pages.dev/reports/2026-11-10",
+        "final_url": "https://seawatch-live.pages.dev/reports/2026-11-10",
+        "redirected": false,
+        "redirects": [],
+        "reason": "ok",
+        "url": "https://seawatch-live.pages.dev/reports/2026-11-10",
+        "attempts": 1,
+        "elapsed_seconds": 2.667
+      },
+      "at": "2026-11-11T03:59:18Z",
+      "content_sha256": "5b37c42e66b693e981d57fb6e2c8a1e74d3e4cb6ba690862b554fd407e4a8aed",
+      "publish_output_tail": "لقوائم: عربي 30 · إنجليزي 30\n   ✔ أكواد الوقائع/التقديرات: إجمالي عربي 3 · إنجليزي 3\n   ✔ تحذيرات NAVAREA/UKMTO: إجمالي عربي 0 · إنجليزي 0\n   ✔ الحسابات: إجمالي عربي 3 · إنجليزي 3\n   ✔ النسب المئوية: إجمالي عربي 4 · إنجليزي 4\n   ✔ المديات الرقمية: إجمالي عربي 4 · إنجليزي 4\n   ✔ درجات الثقة: إجمالي عربي 1 · إنجليزي 1\n   ✔ التواريخ والأوقات: إجمالي عربي 4 · إنجليزي 4\n   ✔ كل الأرقام: إجمالي عربي 185 · إنجليزي 185\n   ── الصفحتان المبنيتان ──\n   ✔ h1: عربي 1 · إنجليزي 1\n   ✔ h2: عربي 6 · إنجليزي 6\n   ✔ h3: عربي 1 · إنجليزي 1\n   ✔ tables: عربي 0 · إنجليزي 0\n   ✔ rows: عربي 0 · إنجليزي 0\n   ✔ svg: عربي 8 · إنجليزي 8\n   ✔ buttons: عربي 4 · إنجليزي 4\n   ✔ list_items: عربي 26 · إنجليزي 26\n   ✘ links: عربي 20 · إنجليزي 19\n   ✔ collapsed: عربي 0 · إنجليزي 0\n   ✔ أرقام الصفحة المرئية: عربي 34 قيمة · إنجليزي 34 قيمة\n   ✔ لغة الصفحة الإنجليزية: lang=en dir=ltr\n   ✔ نصوص عربية متبقية في الصفحة الإنجليزية: 0\n   ✘ النتيجة: مخالف — بنية:links\n✘ رُفض publish: النسخة الإنجليزية غير مطابقة للعربية. لا نشر.",
+      "channel_role": "primary-presentation",
+      "pages_source_push": {
+        "rc": 10,
+        "head": "",
+        "repo": "fahadaldoseri/seawatch-live",
+        "output_tail": "✘ fallback: gh auth status فشل"
+      },
+      "channels": {
+        "cloudflare-pages": {
+          "state": "down",
+          "reason": "ok",
+          "live": {
+            "ok": true,
+            "status": 200,
+            "bytes": 163788,
+            "min_bytes": 100000,
+            "size_ok": true,
+            "date_marker": true,
+            "content_type": "text/html; charset=utf-8",
+            "content_type_normalized": "text/html",
+            "content_type_ok": true,
+            "presentation_eligible": true,
+            "sha256": "5b37c42e66b693e981d57fb6e2c8a1e74d3e4cb6ba690862b554fd407e4a8aed",
+            "expected_sha256": "5b37c42e66b693e981d57fb6e2c8a1e74d3e4cb6ba690862b554fd407e4a8aed",
+            "sha256_match": true,
+            "requested_url": "https://seawatch-live.pages.dev/reports/2026-11-10",
+            "final_url": "https://seawatch-live.pages.dev/reports/2026-11-10",
+            "redirected": false,
+            "redirects": [],
+            "reason": "ok",
+            "url": "https://seawatch-live.pages.dev/reports/2026-11-10",
+            "attempts": 1,
+            "elapsed_seconds": 2.667
+          },
+          "presentation_eligible": true
+        },
+        "raw-githack": {
+          "state": "down",
+          "reason": "gh auth status rc=1: github.com\n  X Failed to log in to github.com using token (GH_TOKEN)\n  - Active account: true\n  - The token in GH_TOKEN is invalid.\n\n  ✓ Logged in to github.com account fahadaldoseri (/home/ubuntu/.config/gh/hosts.yml)\n  - Active account: false\n  - Git operations protocol: https\n  - Token: ghu_************************************",
+          "presentation_eligible": true
+        },
+        "raw.githubusercontent": {
+          "state": "verification-only",
+          "reason": "raw.githubusercontent.com يعيد text/plain؛ ممنوع كقناة عرض",
+          "presentation_eligible": false
+        }
+      }
+    }
+  ]
+}

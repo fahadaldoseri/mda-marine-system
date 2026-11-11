@@ -1,0 +1,17 @@
+  تغذيات مرصودة: 81
+  نجح: 59 مصدرًا (79 مسارًا) · فشل: 1 مصدرًا · يُفحص بالمتصفح: 0 · عناصر مقروءة: 1866
+  ◻ مرجعية تُراجع يدويًا: 2 مصدرًا · الأرقام: [39, 52]
+   ✘ 27 وكالة الأنباء الكويتية (كونا): all routes failed: primary: Remote end closed connection without response · curl: derived items without real content (1) · curl أعاد محتوى غير مقروء | official-page:jina.ai/kuna: derived items without real content (1) · curl: derived items without real content (1) · curl أعاد محتوى غير مقروء | browser: derived items without real content (1)
+   ◐ 12 OFAC — الإجراءات الأخيرة: محتوى متقادم — عمر أحدث مادة 636 يومًا
+   ◐ 13 ShipNext — التحقق من السفن: محتوى متقادم — عمر أحدث مادة 86 يومًا
+   ◐ 20 جريدة الأيام: محتوى متقادم — عمر أحدث مادة 1032 يومًا
+   ◐ 20 جريدة الأيام: محتوى متقادم — عمر أحدث مادة 1032 يومًا
+   ◐ 30 القيادة المركزية الأمريكية (سنتكوم: محتوى متقادم — عمر أحدث مادة 278 يومًا
+   ◐ 32 IMB/ICC — القرصنة: محتوى متقادم — عمر أحدث مادة 26 يومًا
+  ✔ حُفظ: feeds-2026-11-11.json / .md / .status.json — الحالة: degraded
+  · لا علامة تشغيل: /home/ubuntu/mda-marine-system/brain/logs/pipeline-2026-11-11.json — إنشاء علامة pipeline عبر write_mark
+  ✔ العلامة (pipeline): /home/ubuntu/mda-marine-system/brain/logs/pipeline-2026-11-11.json · المخطط v1 · نص التقرير موجود: False · المصادر: 62/60/59 · البوابة: not_run
+  · أضيف أثر الإنشاء: created_by=mark_components
+  ✔ حُدّثت المكوّنات ['feeds'] من المخرجات · الحالة العامة: degraded
+     feeds: {"status": "degraded", "checked": 60, "ok": 59, "failed": 1, "failed_feeds": [{"num": 27, "name": "وكالة الأنباء الكويتية (كونا)",
+elapsed_seconds=139.533789

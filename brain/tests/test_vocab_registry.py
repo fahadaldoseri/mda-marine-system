@@ -28,6 +28,10 @@ B = pathlib.Path(__file__).resolve().parent.parent
 SITE = pathlib.Path(os.environ.get("SITE") or os.environ.get("SITE_DIR") or (pathlib.Path.home() / "seawatch"))
 REG = B / "appendices" / "simplified-vocabulary.json"
 GEN = B / "appendices" / "forbidden-coinages.json"
+sys.path.insert(0, str(B / "tools"))
+sys.path.insert(0, str(B / "validators"))
+import make_tg_digest
+import check_prose_defects
 fails: list[str] = []
 skips: list[str] = []
 
@@ -39,6 +43,48 @@ def ok(name: str) -> None:
 def bad(name: str, why: str) -> None:
     fails.append(name)
     print(f"  ✘ {name} — {why}")
+
+
+# Markdown source is not rendered prose: links retain their visible label, and
+# repeated table cells remain structured data; repeated free prose stays blocking.
+link_findings = check_prose_defects.find_punctuation_defects(
+    "المصدر: [UKMTO](https://example.test/report)."
+)
+table_rows = "\n".join(
+    f"| {i} | {name} | جلب ناجح؛ غير رسمي، لا يستخدم لإثبات الوقائع. |"
+    for i, name in enumerate(("Source A", "Source B", "Source C"), 1)
+)
+free_prose = "\n".join(["جلب ناجح؛ غير رسمي، لا يستخدم لإثبات الوقائع."] * 3)
+table_templates = check_prose_defects.find_repeated_templates(table_rows)
+prose_templates = check_prose_defects.find_repeated_templates(free_prose)
+if not link_findings and not table_templates and prose_templates:
+    ok("تفسير Markdown يحفظ نص الرابط وحدود الجدول ويبقي النثر الحر مانعًا")
+else:
+    bad("تفسير Markdown يحفظ نص الرابط وحدود الجدول ويبقي النثر الحر مانعًا",
+        f"link={len(link_findings)} · table={len(table_templates)} · prose={len(prose_templates)}")
+
+# Current metadata uses event_keys as strings; legacy object-shaped keys remain supported.
+digest_base = {
+    "title": "تقرير اختبار",
+    "version": "و ب 11/11/26",
+    "generated_label": "2026-11-11T04:00:00Z",
+    "threat_level": "مرتفع",
+    "changes": [{"code": "MN-2026-11-11-01", "text": "نص ظاهر للاختبار"}],
+}
+try:
+    current_digest = make_tg_digest.build(
+        {**digest_base, "event_keys": ["MN-2026-11-11-01"]}, "2026-11-11", "https://example.test"
+    )
+    legacy_digest = make_tg_digest.build(
+        {**digest_base, "event_keys": [{"code": "MN-2026-11-11-01", "title": "عنوان الحدث"}]},
+        "2026-11-11", "https://example.test",
+    )
+    if "نص ظاهر للاختبار" in current_digest and "عنوان الحدث" in legacy_digest:
+        ok("بناء رسالة تلغرام يقبل event_keys النصية والقاموسية")
+    else:
+        bad("بناء رسالة تلغرام يقبل event_keys النصية والقاموسية", "نص digest غير متوقع")
+except Exception as exc:
+    bad("بناء رسالة تلغرام يقبل event_keys النصية والقاموسية", f"{type(exc).__name__}: {exc}")
 
 
 def run(args: list[str]) -> subprocess.CompletedProcess:

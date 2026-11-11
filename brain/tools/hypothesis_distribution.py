@@ -22,6 +22,8 @@ RULE = "منتصف كل نطاق ثم إعادة تسوية إلى 100 بأكب�
 RANGE_KIND = "range"
 POINT_FROM_RANGE_KIND = "point_from_range"
 SUPPORTED_OUTPUT_KIND = POINT_FROM_RANGE_KIND
+NO_ESTIMATE_KIND = "unmeasurable"
+NO_ESTIMATE_RULE = "لا تقدير احتمالي رقمي: المادة الرسمية لا تسمّي فاعلًا ولا تصرّح بوجود صلة"
 RANGE_RE = re.compile(r"^(\d+(?:\.\d+)?)\s*–\s*(\d+(?:\.\d+)?)\s*%$")
 POINT_RE = re.compile(r"^(\d+)%$")
 
@@ -124,7 +126,31 @@ def _source_ranges(hypotheses: list[dict[str, Any]]) -> list[str]:
     return [str(value) for value in values]
 
 
+def _is_declared_no_estimate(data: dict[str, Any]) -> bool:
+    """حالة معلنة بديل التوزيع: يوم لا تصدر فيه المادة الرسمية تقديرًا رقميًا.
+
+    لا تُقبل الحالة إلا بإعلان كامل: نوع موحّد ``unmeasurable`` لكل الفرضيات،
+    وقاعدة ``NO_ESTIMATE_RULE`` نصًّا، ولا نسبة ولا نطاق رقمي في أي فرضية.
+    """
+    hypotheses = _hypotheses(data)
+    kinds = _kind_set(hypotheses)
+    if kinds != {NO_ESTIMATE_KIND}:
+        if NO_ESTIMATE_KIND in kinds:
+            raise DistributionError(f"خلط أنواع الاحتمال غير مسموح: {sorted(map(str, kinds))}")
+        return False
+    if data.get("distribution_rule") != NO_ESTIMATE_RULE:
+        raise DistributionError("إعلان عدم التقدير يتطلب distribution_rule المعتمد نصًّا")
+    for item in hypotheses:
+        for key in ("likelihood", "likelihood_range"):
+            value = item.get(key)
+            if isinstance(value, str) and (RANGE_RE.fullmatch(value.strip()) or POINT_RE.fullmatch(value.strip())):
+                raise DistributionError(f"إعلان عدم التقدير لا يقبل نسبة رقمية في {key}")
+    return True
+
+
 def _validate_stored(data: dict[str, Any]) -> list[int]:
+    if _is_declared_no_estimate(data):
+        return []
     hypotheses = _hypotheses(data)
     kinds = _kind_set(hypotheses)
     if kinds != {SUPPORTED_OUTPUT_KIND}:
@@ -153,6 +179,8 @@ def check_data(data: dict[str, Any]) -> list[int]:
 
 def write_data(data: dict[str, Any]) -> list[int]:
     """حوّل نطاقات المصدر إلى تمثيل نقطي مشتق، أو أعد اشتقاق تمثيل قائم."""
+    if _is_declared_no_estimate(data):
+        return []
     hypotheses = _hypotheses(data)
     ranges = _source_ranges(hypotheses)
     points = calculate_distribution(ranges)
@@ -189,11 +217,17 @@ def main(argv: list[str] | None = None) -> int:
         if args.write:
             points = write_data(data)
             path.write_text(json.dumps(data, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-            print(f"✔ اشتُق توزيع الفرضيات: {', '.join(f'{point}%' for point in points)} · المجموع=100")
-            print(f"   القاعدة: {RULE}")
+            if points:
+                print(f"✔ اشتُق توزيع الفرضيات: {', '.join(f'{point}%' for point in points)} · المجموع=100")
+                print(f"   القاعدة: {RULE}")
+            else:
+                print("✔ إعلان عدم التقدير الرقمي مثبَّت: لا توزيع كمي لهذا اليوم · القاعدة المعلنة محفوظة")
             return 0
         points = check_data(data)
-        print(f"✔ توزيع الفرضيات مطابق للاشتقاق: {', '.join(f'{point}%' for point in points)} · المجموع=100")
+        if points:
+            print(f"✔ توزيع الفرضيات مطابق للاشتقاق: {', '.join(f'{point}%' for point in points)} · المجموع=100")
+        else:
+            print("✔ إعلان عدم التقدير الرقمي مطابق: لا توزيع كمي معلن ولا نسبة رقمية")
         return 0
     except DistributionError as exc:
         print(f"✘ فشل مغلق: {exc}", file=sys.stderr)

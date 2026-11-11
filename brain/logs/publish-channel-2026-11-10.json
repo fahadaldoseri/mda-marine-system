@@ -1,0 +1,50 @@
+{
+  "date": "2026-11-10",
+  "at": "2026-11-11T04:00:22Z",
+  "measurement_scope": "readiness-only; D020 owns live status, redirects, bytes and sha256",
+  "release_today_checked": false,
+  "release_today_note": "S085 يثبت الربط فقط؛ D020 يثبت 200 بعد التحويل وtext/html والحجم والبصمة.",
+  "channel_order": [
+    "cloudflare-pages",
+    "raw-githack",
+    "raw.githubusercontent-verify-only"
+  ],
+  "channels": {
+    "cloudflare-pages": {
+      "state": "ready",
+      "reason": "Cloudflare Pages مرتبط بـfahadaldoseri/seawatch-live@main؛ القياس الحي داخل D020",
+      "enabled": true,
+      "primary": true,
+      "presentation_eligible": true,
+      "url": "https://seawatch-live.pages.dev",
+      "report_url": "https://seawatch-live.pages.dev/reports/2026-11-10",
+      "repo": "fahadaldoseri/seawatch-live",
+      "branch": "main",
+      "min_bytes": 100000,
+      "expected_sha256": "5b37c42e66b693e981d57fb6e2c8a1e74d3e4cb6ba690862b554fd407e4a8aed",
+      "auto_deploy": true
+    },
+    "raw-githack": {
+      "state": "ready",
+      "reason": "raw.githack fallback repository is public; jsDelivr is an intermediate transport",
+      "auth_rc": 0,
+      "repo_rc": 0,
+      "visibility": "PUBLIC",
+      "branch": "main",
+      "repo": "fahadaldoseri/seawatch-live",
+      "presentation_eligible": true,
+      "transport": "raw.githack"
+    },
+    "raw.githubusercontent": {
+      "state": "verification-only",
+      "reason": "raw.githubusercontent.com يعيد text/plain؛ ممنوع كقناة عرض",
+      "enabled": true,
+      "primary": false,
+      "presentation_eligible": false,
+      "transport": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/fahadaldoseri/seawatch-live/main"
+    }
+  },
+  "status": "ready",
+  "rc": 0
+}

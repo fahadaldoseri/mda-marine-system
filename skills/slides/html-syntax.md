@@ -36,7 +36,7 @@ Reference for HTML-mode Slides decks. Read this file BEFORE writing any `<id>.ht
 - Google Fonts stylesheets (`fonts.googleapis.com`) for the font families named in the design brief that exist on Google Fonts. Use any other family the brief names exactly as written, with no stylesheet and no look-alike substitute, and end its `font-family` with the matching generic family (`sans-serif`, `serif`, or `monospace`).
 - Tailwind CSS: `<script src="https://cdn.tailwindcss.com"></script>` — REQUIRED on any slide that uses Tailwind classes; utility classes carry no styling without it. Native CSS remains the default choice.
 
-Include a library only on slides that use it. Everything else — scripts, styles, fonts, assets — must be inline or a local absolute path.
+Include a library only on slides that use it. Any other script or style must be inline in the slide's `<script>` / `<style>`. Local files are only for images, SVG, and fonts: reference them by absolute path inside the workspace (Slides uploads nothing else, and present rejects other local files the slide would load).
 
 ## Not allowed
 - No external references beyond the approved CDN list, no inline SVG, `<deck-stage>`, `@keyframes`, animations, transitions, hover-only behavior, or placeholders.

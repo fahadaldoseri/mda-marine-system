@@ -1,6 +1,6 @@
 {
-  "url": "file:///home/ubuntu/seawatch/dist/reports/en/2026-11-10.html",
-  "at": "2026-11-11T01:01:00+00:00",
+  "url": "file:///home/ubuntu/seawatch/dist/reports/en/2026-11-11.html",
+  "at": "2026-11-11T12:21:32+00:00",
   "widths": {
     "1440": {
       "compat": "CSS1Compat",
@@ -15,10 +15,18 @@
         {
           "id": "ev-01",
           "w": 354,
-          "h": 396,
+          "h": 424,
           "clip_loss": 0,
           "clips": [],
-          "top": 2371
+          "top": 3862
+        },
+        {
+          "id": "ev-02",
+          "w": 354,
+          "h": 424,
+          "clip_loss": 0,
+          "clips": [],
+          "top": 3862
         }
       ],
       "decision": {
@@ -28,7 +36,13 @@
         "height": 0,
         "lines": 0
       },
-      "map_decision": null,
+      "map_decision": {
+        "sel": ".hmap-decide",
+        "top": 2280,
+        "in_first_screen": false,
+        "height": 160,
+        "lines": 5
+      },
       "anchor": {
         "exists": false,
         "reached": false
@@ -101,22 +115,8 @@
           "href": "/reports/en/additions.html#sec-00",
           "page": "/reports/en/additions.html",
           "hash": "sec-00",
-          "text": "the “What Changed” section",
+          "text": "What changed",
           "same_page_exists": false
-        },
-        {
-          "href": "#sec-02",
-          "page": "(نفس الصفحة)",
-          "hash": "sec-02",
-          "text": "Details in the header card",
-          "same_page_exists": true
-        },
-        {
-          "href": "#sec-decision",
-          "page": "(نفس الصفحة)",
-          "hash": "sec-decision",
-          "text": "Top maritime security news",
-          "same_page_exists": true
         },
         {
           "href": "#sec-official",
@@ -144,6 +144,13 @@
           "page": "(نفس الصفحة)",
           "hash": "sec-03",
           "text": "Situation Indicators",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-map",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-map",
+          "text": "Sector map",
           "same_page_exists": true
         },
         {
@@ -179,11 +186,11 @@
         "#sn-main": true,
         "/#archive": true,
         "/reports/en/additions.html#sec-00": true,
-        "#sec-02": true,
-        "#sec-decision": true,
         "#sec-official": true,
         "#sec-01": true,
+        "#sec-02": true,
         "#sec-03": true,
+        "#sec-map": true,
         "/reports/en/additions.html#news-card": true
       },
       "anchor_target_details": {
@@ -202,16 +209,6 @@
           "dom_wait_ms": 15000,
           "exists": true
         },
-        "#sec-02": {
-          "http_status": null,
-          "dom_wait_ms": 0,
-          "exists": true
-        },
-        "#sec-decision": {
-          "http_status": null,
-          "dom_wait_ms": 0,
-          "exists": true
-        },
         "#sec-official": {
           "http_status": null,
           "dom_wait_ms": 0,
@@ -222,7 +219,17 @@
           "dom_wait_ms": 0,
           "exists": true
         },
+        "#sec-02": {
+          "http_status": null,
+          "dom_wait_ms": 0,
+          "exists": true
+        },
         "#sec-03": {
+          "http_status": null,
+          "dom_wait_ms": 0,
+          "exists": true
+        },
+        "#sec-map": {
           "http_status": null,
           "dom_wait_ms": 0,
           "exists": true
@@ -247,10 +254,18 @@
         {
           "id": "ev-01",
           "w": 354,
-          "h": 396,
+          "h": 424,
           "clip_loss": 0,
           "clips": [],
-          "top": 2371
+          "top": 3862
+        },
+        {
+          "id": "ev-02",
+          "w": 354,
+          "h": 424,
+          "clip_loss": 0,
+          "clips": [],
+          "top": 3862
         }
       ],
       "decision": {
@@ -260,7 +275,13 @@
         "height": 0,
         "lines": 0
       },
-      "map_decision": null,
+      "map_decision": {
+        "sel": ".hmap-decide",
+        "top": 2280,
+        "in_first_screen": false,
+        "height": 160,
+        "lines": 5
+      },
       "anchor": {
         "exists": false,
         "reached": false
@@ -333,22 +354,8 @@
           "href": "/reports/en/additions.html#sec-00",
           "page": "/reports/en/additions.html",
           "hash": "sec-00",
-          "text": "the “What Changed” section",
+          "text": "What changed",
           "same_page_exists": false
-        },
-        {
-          "href": "#sec-02",
-          "page": "(نفس الصفحة)",
-          "hash": "sec-02",
-          "text": "Details in the header card",
-          "same_page_exists": true
-        },
-        {
-          "href": "#sec-decision",
-          "page": "(نفس الصفحة)",
-          "hash": "sec-decision",
-          "text": "Top maritime security news",
-          "same_page_exists": true
         },
         {
           "href": "#sec-official",
@@ -376,6 +383,13 @@
           "page": "(نفس الصفحة)",
           "hash": "sec-03",
           "text": "Situation Indicators",
+          "same_page_exists": true
+        },
+        {
+          "href": "#sec-map",
+          "page": "(نفس الصفحة)",
+          "hash": "sec-map",
+          "text": "Sector map",
           "same_page_exists": true
         },
         {
@@ -411,11 +425,11 @@
         "#sn-main": true,
         "/#archive": true,
         "/reports/en/additions.html#sec-00": true,
-        "#sec-02": true,
-        "#sec-decision": true,
         "#sec-official": true,
         "#sec-01": true,
+        "#sec-02": true,
         "#sec-03": true,
+        "#sec-map": true,
         "/reports/en/additions.html#news-card": true
       },
       "anchor_target_details": {
@@ -434,16 +448,6 @@
           "dom_wait_ms": 15000,
           "exists": true
         },
-        "#sec-02": {
-          "http_status": null,
-          "dom_wait_ms": 0,
-          "exists": true
-        },
-        "#sec-decision": {
-          "http_status": null,
-          "dom_wait_ms": 0,
-          "exists": true
-        },
         "#sec-official": {
           "http_status": null,
           "dom_wait_ms": 0,
@@ -454,7 +458,17 @@
           "dom_wait_ms": 0,
           "exists": true
         },
+        "#sec-02": {
+          "http_status": null,
+          "dom_wait_ms": 0,
+          "exists": true
+        },
         "#sec-03": {
+          "http_status": null,
+          "dom_wait_ms": 0,
+          "exists": true
+        },
+        "#sec-map": {
           "http_status": null,
           "dom_wait_ms": 0,
           "exists": true

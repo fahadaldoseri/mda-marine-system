@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "date": "2026-11-11",
+  "measured_at_utc": "2026-11-11T12:22:48+00:00",
+  "status": "pass",
+  "steps": {
+    "G000C": {
+      "log": "logs/runbook/2026-11-11/G000C.log",
+      "max_seconds": 45.18,
+      "basis": "أعلى قياس فعلي 36.14s في logs/runbook/2026-11-06/G000C.log؛ +25% = 45.175s مقربة إلى 45.18s",
+      "measured_seconds": 35.080553,
+      "status": "pass"
+    },
+    "G057": {
+      "log": "logs/runbook/2026-11-11/G057.log",
+      "max_seconds": 0.89,
+      "basis": "قياس حي كامل 0.710127s في 2026-11-07؛ +25% = 0.887659s، مقربة إلى 0.89s (قياس pytest الجزئي القديم 0.01s مستبعد)",
+      "measured_seconds": 0.719943,
+      "status": "pass"
+    },
+    "G058": {
+      "log": "logs/runbook/2026-11-11/G058.log",
+      "max_seconds": 0.8,
+      "basis": "قياس حي كامل 0.639615s في 2026-11-07؛ +25% = 0.799519s، مقربة إلى 0.80s (قياس pytest الجزئي القديم 0.01s مستبعد)",
+      "measured_seconds": 0.619691,
+      "status": "pass"
+    },
+    "G059": {
+      "log": "logs/runbook/2026-11-11/G059.log",
+      "max_seconds": 1.9,
+      "basis": "قياس حي كامل 1.513656s في 2026-11-07؛ +25% = 1.892070s، مقربة إلى 1.90s (قياس pytest الجزئي القديم 0.03s مستبعد)",
+      "measured_seconds": 1.744041,
+      "status": "pass"
+    },
+    "G060": {
+      "log": "logs/runbook/2026-11-11/G060.log",
+      "max_seconds": 0.86,
+      "basis": "قياس حي كامل 0.682928s في 2026-11-07؛ +25% = 0.853660s، مقربة إلى 0.86s (قياس pytest الجزئي القديم 0.02s مستبعد)",
+      "measured_seconds": 0.109778,
+      "status": "pass"
+    },
+    "G066": {
+      "log": "logs/runbook/2026-11-11/G066.log",
+      "max_seconds": 1.76,
+      "basis": "قياس حي 1.400638s لأداة gate_audit.py في 2026-11-07؛ +25% = 1.750798s، مقربة إلى 1.76s",
+      "measured_seconds": 1.560429,
+      "status": "pass"
+    }
+  },
+  "violations": []
+}
