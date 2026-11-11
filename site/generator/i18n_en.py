@@ -17,7 +17,7 @@
 """
 from __future__ import annotations
 import os
-import argparse, json, pathlib, re, sys
+import argparse, html as _html, json, pathlib, re, sys
 
 import reader_grade_labels
 from html.parser import HTMLParser
@@ -501,6 +501,12 @@ def _card_fragments_en(n: str, tr, tr_area) -> str | None:
 
 def localize_patterns(s: str) -> str | None:
     n = norm(s)
+    if n == "غير قابل للتحقق":
+        return "Not verifiable"
+    if n == "وقت الفحص:":
+        return "Checked at:"
+    if n == "سجل الدليل":
+        return "Evidence record"
     # ك-595: عبارات تاريخية عامة في ترويسات تقارير تاريخية — تُبنى بنمط لا بمعجم.
     # «آخر تحديث سبتمبر 2026» و«الفترة: سبتمبر 2026 · المتوسط:» كانت تُسقط البناء
     # في الصفحات القديمة؛ والقاعدة تقبل تاريخًا معروف الشهر فقط ولا تخمّن نصًا حرًا.
@@ -1625,6 +1631,43 @@ def _master_document_heading(date: str) -> str | None:
     return None
 
 
+def _master_top_sector_label(date: str) -> str | None:
+    """Read the dated English-master value for the dynamic highest sector."""
+    path = I18N / f"{date}-sectioned.en.md"
+    try:
+        lines = path.read_text(encoding="utf-8").splitlines()
+    except (OSError, UnicodeError):
+        return None
+    for line in lines:
+        match = re.fullmatch(
+            r"\s*Overall level:\s*[^—]+—\s*highest sector:\s*(?P<sector>.+?)\s*",
+            line.strip(), re.IGNORECASE,
+        )
+        if match:
+            sector = match.group("sector").strip().rstrip(".").strip()
+            return sector or None
+    return None
+
+
+def _preserve_master_dynamic_fields(html_text: str, date: str) -> str:
+    """Replace only dated-master-backed sector text and keep UTC punctuation intact."""
+    sector = _master_top_sector_label(date)
+    if sector:
+        sector_html = _html.escape(sector, quote=False)
+        html_text = re.sub(
+            r'(<p class="tz-sub">)\s*أعلى نطاق:\s*[^<]*(</p>)',
+            lambda match: f"{match.group(1)}Highest sector: {sector_html}{match.group(2)}",
+            html_text,
+            count=1,
+        )
+    html_text = re.sub(
+        r'خلال 24 ساعة السابقة\s*\(\s*(?:<span\b[^>]*class="[^"]*\bltr\b[^"]*"[^>]*>\s*UTC\s*</span>|UTC)\s*\)',
+        "During the previous 24 hours (UTC)",
+        html_text,
+    )
+    return html_text
+
+
 def _master_dynamic_title_components(date: str) -> tuple[str, str, str] | None:
     """Read the incident indicator, sector label, and decision basis from the English master."""
     path = I18N / f"{date}-sectioned.en.md"
@@ -2020,6 +2063,7 @@ def _element_governed_overrides(html_text: str, tm: dict[str, str], gl: dict[str
 
 
 def translate_page(html_text: str, date: str, tm: dict[str, str], gl: dict[str, str]):
+    html_text = _preserve_master_dynamic_fields(html_text, date)
     html_text = _element_governed_overrides(html_text, tm, gl)
     latest_title_value = _latest_official_title_en(date)
     if latest_title_value:
@@ -2110,8 +2154,15 @@ def translate_page(html_text: str, date: str, tm: dict[str, str], gl: dict[str, 
             a = a + ' class="lang-en"'
         out = out[: m.start(1)] + a + out[m.end(1):]
     out = re.sub(r"<title>.*?</title>", f"<title>Daily Maritime Security Report — {date} (English edition)</title>", out, flags=re.S)
-    out = re.sub(r'<meta name="description" content="[^"]*"',
-                 '<meta name="description" content="Daily Maritime Security Report — English edition, translated and governed against the Arabic source.">', out)
+    _description = (
+        "Daily Maritime Security Report — English edition, translated and governed against the Arabic source."
+    )
+    out = re.sub(
+        r'(<meta\b(?=[^>]*\bname="description")[^>]*\bcontent=")[^"]*("[^>]*>)',
+        lambda match: match.group(1) + _description + match.group(2),
+        out,
+        count=1,
+    )
     def _unit_ok(orig: str, translated: str) -> bool:
         """الوحدة مترجمة إذا نجحت الترجمة أو نجح محرك الأنماط عليها.
 
@@ -2163,6 +2214,35 @@ def translate_page(html_text: str, date: str, tm: dict[str, str], gl: dict[str, 
         source for source, translated in ltr_checks
         if not _unit_ok(source, translated)
     )
+    # ك-611: تمريرة حاكمة أخيرة — وحدة نصية بقي نصها عربيًا وعندها مقابل معلَن تمامًا
+    # في المعجم أو ذاكرة الترجمة تُستبدل بالمقابل نفسه، لأن المخططات السابقة (المقاطع
+    # والوسوم السطرية والتركيب) قد تتجاوزها فتوقف البناء مغلقًا على نص له مقابل.
+    # المطابقة تامة وحدها، ويُحفظ كل رقم ومعرّف، ولا يُخمَّن مقابل غير معلَن.
+    fixed: list[str] = []
+    for _x in remaining:
+        _key = norm(_x)
+        _target = gl.get(_key) or (tm.get(_key) if _key in tm else None)
+        if not _target or ARABIC.search(norm(_target)):
+            fixed.append(_x)
+            continue
+        _od, _td = _numeric_tokens(_x), _numeric_tokens(_target)
+        _pool = list(_td)
+        _missing_num = False
+        for _d in _od:
+            if _d in _pool:
+                _pool.remove(_d)
+            else:
+                _missing_num = True
+                break
+        if _missing_num or _x not in out:
+            fixed.append(_x)
+            continue
+        out = out.replace(_x, _target)
+    remaining = fixed
+    if os.environ.get("I18N_DEBUG_MISSING"):
+        for _x in remaining:
+            if ARABIC.search(_x):
+                print("   DEBUG missing:", repr(_x), "· tm:", _x in tm, "· gl:", _x in gl)
     return out, [norm(x) for x in remaining], len(c.units)
 
 

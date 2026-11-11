@@ -373,15 +373,9 @@ def lang_group(active_lang: str = "ar", en_href: str = "", ar_href: str = "") ->
             f'{ar}{en}</div>')
 
 
-def en_edition_href(html: str) -> str:
-    """مسار النسخة الإنجليزية للتاريخ نفسه إن كانت منشورة، وإلا فراغ (م-25)."""
+def _page_report_date(html: str) -> str:
+    """اشتقاق تاريخ الإصدار من ترويسة الصفحة فقط، لا من تواريخ المتن."""
     import re as _re
-    # ك-630 (تكملة): الاشتقاق من مسار الرابط داخل المتن لم يكن يصيب صفحة التقرير،
-    # لأن جسم الصفحة يحمل تاريخها لا مسار نسختها الإنجليزية. المرجع الصحيح: تاريخ
-    # الإصدار الظاهر في الصفحة نفسها (عنوانها وترويسة بياناتها).
-    # صيغة الترويسة أولًا (DD/MM/YYYY) لأنها تاريخ الإصدار نفسه، ثم الصيغة الدولية
-    # يُقرأ تاريخ الإصدار من ترويسة الصفحة وحدها (أول 4000 محرف) لا من متنها،
-    # لأن المتن يذكر تواريخ أخرى قد تُنتج رابطًا إلى نسخة إنجليزية ليست لهذا الإصدار.
     head = (html or "")[:4000]
     m = _re.search(r"(\d{2})/(\d{2})/(\d{4})", head)
     AR_MONTHS = {"يناير": "01", "فبراير": "02", "مارس": "03", "أبريل": "04", "مايو": "05",
@@ -397,6 +391,14 @@ def en_edition_href(html: str) -> str:
         if not m2:
             return ""
         date = m2.group(1)
+    return date
+
+
+def en_edition_href(html: str) -> str:
+    """مسار النسخة الإنجليزية للتاريخ نفسه إن كانت منشورة، وإلا فراغ (م-25)."""
+    date = _page_report_date(html)
+    if not date:
+        return ""
     # ك-630: الاشتقاق من مخرج البناء وحده كان يُخفق في صفحات تُبنى قبل صفحاتها
     # الإنجليزية، فيُعرض مفتاح اللغة معطّلًا (span) في العربية وزرًّا في الإنجليزية
     # فيختل تماثل البنية. المرجع الصحيح: مخرج البناء أو الماستر الإنجليزي، وكلاهما
@@ -407,7 +409,7 @@ def en_edition_href(html: str) -> str:
     return ""
 
 
-def nav_html(active: str = "", en_href: str = "") -> str:
+def nav_html(active: str = "", en_href: str = "", report_date: str = "") -> str:
     """شريط التنقّل الموحّد. active: home | monthly | cumulative | report | additions | sources"""
     def link(href, label, key):
         cur = ' aria-current="page"' if key == active else ""
@@ -422,6 +424,21 @@ def nav_html(active: str = "", en_href: str = "") -> str:
                  '<span class="sn-vh">الطباعة غير مفعّلة حاليًا</span></span>') \
         if not PRINT_ENABLED else ""
     lang_group_html = lang_group("en" if active == "report-en" else "ar", en_href=en_href)
+    report_return_links = ""
+    if active == "additions":
+        import re as _re
+        en_match = _re.fullmatch(r"/reports/en/(\d{4}-\d{2}-\d{2})\.html", en_href or "")
+        date = report_date or (en_match.group(1) if en_match else "")
+        if _re.fullmatch(r"\d{4}-\d{2}-\d{2}", date or ""):
+            report_return_links = (
+                f'<a href="/reports/{date}.html" lang="ar" hreflang="ar" '
+                'data-report-return="ar">التقرير العربي الموافق</a>'
+            )
+            if en_match and en_match.group(1) == date:
+                report_return_links += (
+                    f'<a href="{en_href}" lang="en" hreflang="en" '
+                    'data-report-return="en">Matching English report</a>'
+                )
     return f"""<nav class="site-nav no-print" aria-label="تنقل الموقع">
   <a class="sn-skip" href="#main" id="sn-skip" data-i18n="skip">الانتقال إلى المحتوى</a>
   {print_brand_html()}
@@ -442,6 +459,7 @@ def nav_html(active: str = "", en_href: str = "") -> str:
       {link('/reports/cumulative-2026.html', 'السجل التراكمي', 'cumulative')}
       {link('/sources.html', 'المصادر والمراجع', 'sources')}
       {link('/additions.html', 'الإضافات', 'additions')}
+      {report_return_links}
     </div>
     <div class="sn-tools">
       {lang_group_html}
@@ -492,7 +510,7 @@ def inject(html: str, active: str, note: str = "") -> str:
             html = html.replace(_c, _c[:-1] + ' id="main" tabindex="-1">', 1)
             break
     # شريط التنقل بعد عنصر الشريط العلوي للصفحة إن وُجد، وإلا بعد الجسم
-    nav = nav_html(active, en_edition_href(html))
+    nav = nav_html(active, en_edition_href(html), report_date=_page_report_date(html))
     topbar_end = html.find("</div>\n</div>\n<div class=\"wrap\"")
     if topbar_end > 0:
         # إدراج الشريط قبل الحاوية الرئيسية

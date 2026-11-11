@@ -156,17 +156,26 @@ AR_MONTHS = {
 }
 
 
-def _imo_reference_line() -> str:
+def _imo_reference_line(meta: dict) -> str:
     """سطر مرجعي لا يُعرض بلا قراءة ناجحة من سجل IMO الحاكم."""
     try:
         raw = json.loads(IMO_INCIDENTS_JSON.read_text(encoding="utf-8"))
         totals = raw.get("totals") if isinstance(raw, dict) else None
-        source = raw.get("source") if isinstance(raw, dict) else None
         confirmed = totals.get("confirmed_incidents") if isinstance(totals, dict) else None
-        updated = source.get("list_updated") if isinstance(source, dict) else None
         if isinstance(confirmed, bool) or not isinstance(confirmed, int) or confirmed < 0:
             raise ValueError("totals.confirmed_incidents ليس عددًا صحيحًا غير سالبًا")
-        parsed = datetime.strptime(str(updated), "%Y-%m-%d")
+        cards = meta.get("official_cards") if isinstance(meta, dict) else None
+        card = next((row for row in cards or []
+                     if isinstance(row, dict) and row.get("id") == "imo-confirmed-incidents"), None)
+        layers = card.get("layers") if isinstance(card, dict) else None
+        updated = layers.get("updated") if isinstance(layers, dict) else None
+        updated = updated.get("value") if isinstance(updated, dict) else None
+        if not updated:
+            raise ValueError("official_cards[imo-confirmed-incidents].layers.updated.value مفقود")
+        try:
+            parsed = datetime.strptime(str(updated), "%d/%m/%Y")
+        except ValueError:
+            parsed = datetime.strptime(str(updated), "%Y-%m-%d")
     except (OSError, json.JSONDecodeError, TypeError, ValueError, AttributeError) as exc:
         raise BuildError(f"مصدر IMO الحاكم غير قابل للقراءة لسطر المرجع: {IMO_INCIDENTS_JSON}: {exc}") from exc
     date_label = f"{parsed.day} {AR_MONTHS[parsed.month]} {parsed.year}"
@@ -221,6 +230,27 @@ FONT_LINK = "/assets/fonts/fonts.css"
 # وسوم طبقات بطاقات المؤشرات (مصدر واحد مع بوابة check_kpi_layers)
 CUM_LABEL = "المجموع من 28 فبراير 2026"
 UPD_LABEL = "آخر تحديث"
+
+
+def _hero_cumulative_html(k: dict) -> str:
+    """لا يعرض مجموعًا تراكميًا كقراءة حالية بلا مصدر رسمي وتاريخ مسجل في ملف الواجهة."""
+    value = k.get("cumulative")
+    if value in (None, ""):
+        return ""
+    source = _value_text(k.get("cumulative_official_source") or k.get("source"))
+    read_at = _value_text(k.get("cumulative_read_at") or k.get("updated"))
+    official = "رسمي" in source or bool(re.search(r"\b(?:UKMTO|IMO)\b", source, re.I))
+    if not source or not read_at or not official:
+        return (f'<div class="k-lay"><span class="k-lay-l">{CUM_LABEL}</span> '
+                '<b>غير قابلة للتحقق</b></div>')
+    return (
+        f'<div class="k-lay"><span class="k-lay-l">{CUM_LABEL}</span> '
+        f'<b class="bidi">{esc(str(value))}</b></div>'
+        '<div class="k-lay"><span class="k-lay-l">المصدر الرسمي</span> '
+        f'<b>{inline(source)}</b><span class="k-lay-l">تاريخ القراءة</span> '
+        f'<b class="bidi">{esc(read_at)}</b></div>'
+    )
+
 
 SECTION_ICONS = {
     "الخلاصة": "flag",
@@ -672,8 +702,8 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .ev.b-media .ev-badge{border-color:rgba(217,164,65,.5);color:#e0b45f}
 .ev.b-deny .ev-badge{border-color:rgba(214,86,86,.45);color:#e88}
 .ev-reliability{margin-inline-start:6px;font-size:12.5px;line-height:1;padding:4px 10px;border-radius:999px;white-space:normal;overflow-wrap:anywhere;max-width:100%;display:inline-block;border:1px solid var(--line-2);color:var(--ink-2);white-space:nowrap}
-.ev-reliability[data-reliability="عالية"]{border-color:rgba(34,195,182,.4);color:#7fd7cf}
-.ev-reliability[data-reliability="منخفضة"]{border-color:rgba(214,86,86,.35);color:#e0a0a0}
+.ev-reliability[data-analytic-confidence="عالية"]{border-color:rgba(34,195,182,.4);color:#7fd7cf}
+.ev-reliability[data-analytic-confidence="منخفضة"]{border-color:rgba(214,86,86,.35);color:#e0a0a0}
 .ev-fold{margin-top:5px;font-size:12px;line-height:1.7;color:var(--muted)}
 .ev-fold>summary{cursor:pointer;color:var(--info);font-size:12.5px}
 .ev-fold>span{display:block;margin-top:3px;color:var(--ink-2);word-break:break-word}
@@ -1498,9 +1528,30 @@ def event_classification(raw) -> str:
     return "غير مصنّف"
 
 
-def reliability_label(event: dict) -> str:
+def confidence_label(event: dict) -> str:
     value = _value_text(event.get("confidence"))
     return value if value in RELIABILITY_VALUES else ABSENCE["reliability"]
+
+
+def reliability_label(event: dict, meta: dict | None = None) -> str:
+    """موثوقية المصادر المصرح بها في meta، مستقلة عن الثقة التحليلية للواقعة."""
+    source_names = {
+        part.strip() for part in re.split(r"\s*[؛;]\s*", _join_sources(event)) if part.strip()
+    }
+    reliability = (meta or {}).get("source_reliability") or {}
+    rows = reliability.get("rows") if isinstance(reliability, dict) else None
+    grades, seen = [], set()
+    for row in rows if isinstance(rows, list) else []:
+        if not isinstance(row, dict) or _value_text(row.get("name")) not in source_names:
+            continue
+        rel = _value_text(row.get("source_reliability") or row.get("rel")).upper()
+        cred = _value_text(row.get("information_credibility") or row.get("cred"))
+        if re.fullmatch(r"[A-F]", rel) and cred in set("123456"):
+            grade = f"{rel}/{cred}"
+            if grade not in seen:
+                grades.append(grade)
+                seen.add(grade)
+    return " · ".join(grades) or ABSENCE["reliability"]
 
 
 def _looks_arabic(text) -> bool:
@@ -1738,8 +1789,13 @@ def _event_fields_html(event: dict, defs) -> tuple[str, bool]:
     date_text = _event_date(event) or "غير متاح"
     time_text = _value_text(event.get("time"))
     has_time = bool(time_text and _TIME_RE.match(time_text))
-    # ملاحظة المالك 2026-11-02: التوقيت يُكتب إن وُجد، وإن غاب لا يُكتب أي نصّ بديل.
-    date_line = f"{date_text} · {time_text}" if has_time else date_text
+    time_kind = _value_text(event.get("time_kind")).lower()
+    if has_time:
+        date_line = f"{date_text} · {time_text}"
+    elif time_kind in {"نشر", "نشر فقط", "published", "publication"}:
+        date_line = f"{date_text} · وقت الواقعة غير متاح"
+    else:
+        date_line = date_text
     rows = [_field_row(4, "التاريخ والوقت", date_line, defs)]
 
     place = _event_location(event)
@@ -1749,7 +1805,9 @@ def _event_fields_html(event: dict, defs) -> tuple[str, bool]:
         rows.append(_field_row(5, "الموقع", "", defs, state="hidden-rule-no-location"))
 
     source_text = _event_sources(event) or ABSENCE["source"]
-    source_url = _value_text(event.get("source_url"))
+    evidence_ref = _value_text(event.get("evidence_ref"))
+    source_url = (evidence_ref if evidence_ref.startswith("http")
+                  else _value_text(event.get("source_url")))
     if source_url.startswith("http"):
         # ملاحظة المالك 2026-11-02: اسم المصدر رابطٌ يُدخل القارئ إلى مادة المصدر نفسها.
         link = (f'<a class="ev-link" href="{esc(source_url)}" target="_blank" rel="noopener">'
@@ -1775,17 +1833,19 @@ def _event_fields_html(event: dict, defs) -> tuple[str, bool]:
 
     cleaned = clean_excerpt(excerpt_raw)
     if cleaned:
+        excerpt_label = ("مقتطف المصدر" if re.search(r"(?:…|\.{3,})\s*$", excerpt_raw)
+                         else "النص الأصلي كما في المصدر")
         inner = ('<details class="ev-fold" data-fold="original-text">'
-                 '<summary>النص الأصلي كما في المصدر</summary>'
+                 f'<summary>{excerpt_label}</summary>'
                  f'<span>{inline(cleaned, defs)}</span></details>')
-        rows.append(_field_row(8, "النص الأصلي", ABSENCE["excerpt_open"], defs, extra=inner))
+        rows.append(_field_row(8, excerpt_label, ABSENCE["excerpt_open"], defs, extra=inner))
     else:
         rows.append(_field_row(8, "النص الأصلي", ABSENCE["excerpt"], defs,
                                state="hidden-rule-no-excerpt"))
     return "".join(rows), has_time
 
 
-def render_ledger_events(events, defs, md_path: Path):
+def render_ledger_events(events, defs, md_path: Path, *, meta: dict | None = None):
     """يصيّر جميع سجلات دفتر الفترة، مع فرع موثق فقط عند وجود حقل ربط."""
     renderable_events = [event for event in events if not _is_cumulative_update(event)]
     known = _all_event_records(md_path, renderable_events)
@@ -1796,11 +1856,11 @@ def render_ledger_events(events, defs, md_path: Path):
     for idx, event in enumerate(renderable_events, 1):
         code = _event_code(event)
         cls, label = event_badge(event.get("class"))
-        reliability = reliability_label(event)
-        # قرار المالك 2026-11-04 (المعتمد): درجة الإثبات الدقيقة تُعرض داخل صف
-        # «درجة الموثوقية» بعد حذف جدول «تتبع الوقائع» الذي كان يحملها وحده.
+        reliability = reliability_label(event, meta)
+        confidence = confidence_label(event)
         proof_degree = _value_text(event.get("proof_degree"))
-        reliability_line = f"{reliability} — {proof_degree}" if proof_degree else reliability
+        proof_html = (f'<span class="ev-reliability" data-row="3" data-proof-degree="{esc(proof_degree)}">'
+                      f'درجة الإثبات: {esc(proof_degree)}</span>' if proof_degree else "")
         fields_html, has_time = _event_fields_html(event, defs)
         relation = _relation_display(event, known)
         relation_key = relation[0] if relation else ""
@@ -1826,8 +1886,10 @@ def render_ledger_events(events, defs, md_path: Path):
             f'<div class="ev-top"><span class="ev-idx bidi">{idx:02d}</span>'
             f'<span class="ev-code ltr">{esc(code)}</span>'
             f'<span class="ev-badge" data-row="2" data-classification="{esc(label)}">{esc(label)}</span>'
-            f'<span class="ev-reliability" data-row="3" data-reliability="{esc(reliability)}">'
-            f'درجة الموثوقية: {esc(reliability_line)}</span></div>'
+            f'<span class="ev-reliability" data-row="3" data-source-reliability="{esc(reliability)}">'
+            f'موثوقية المصدر: {esc(reliability)}</span>'
+            f'<span class="ev-reliability" data-row="3" data-analytic-confidence="{esc(confidence)}">'
+            f'درجة الثقة التحليلية: {esc(confidence)}</span>{proof_html}</div>'
             f'<p class="ev-what" data-row="1">{inline(_event_description(event), defs)}</p>'
             f'<div class="ev-meta">{fields_html}</div>{branch_html}</article>'
         )
@@ -2161,7 +2223,7 @@ def hero_map(map_html: str, *, print_mode: bool = False, extra_html: str = "", t
         h = head + extra_html + "</div>" + tail
     if print_mode:
         return f'<section class="print-map" aria-label="خريطة الوقائع ومفتاحها">{h}</section>'
-    _hint = '<p class="hmap-scroll-hint">اسحب أفقيًا لاستعراض كامل الخريطة.</p>'
+    _hint = '<p class="hmap-scroll-hint">يمكن استعراض كامل الخريطة بالتمرير الأفقي.</p>'
     return (f'<section class="print-map hero-map no-print" aria-label="خريطة سياق القطاعات للشاشة">'
             f'{top_html}{h}{_hint}</section>')
 
@@ -2180,14 +2242,15 @@ def _map_decision_strip(meta: dict) -> str:
         act = str(_a[0]) if isinstance(_a, list) and _a else (str(_a) if isinstance(_a, str) else "")
         upd = meta.get("updated") or meta.get("generated_at") or ""
         cells = [
-            ("أعلى قطاع", f'{top.get("name", "")} — {top.get("level_ar", "")}'.strip(" —")),
-            ("الوقائع المؤهلة", f'{cnt.get("qualifying", 0)} / {cnt.get("total", 0)}'),
-            ("إجراء اليوم", act),
-            ("آخر تحديث", str(upd)),
+            ("أعلى قطاع", f'{top.get("name", "")} — {top.get("level_ar", "")}'.strip(" —"), False),
+            ("الوقائع المؤهلة",
+             f'<bdi dir="ltr">{_esc(cnt.get("qualifying", 0))} / {_esc(cnt.get("total", 0))}</bdi>', True),
+            ("إجراء اليوم", act, False),
+            ("آخر تحديث", str(upd), False),
         ]
         items = "".join(
-            f'<li><span class="mds-k">{_esc(k)}</span><span class="mds-v">{_esc(v)}</span></li>'
-            for k, v in cells if v)
+            f'<li><span class="mds-k">{_esc(k)}</span><span class="mds-v">{v if raw else _esc(v)}</span></li>'
+            for k, v, raw in cells if v)
         return f'<ul class="hmap-decide">{items}</ul>'
     except Exception as e:  # لا يُسقط فشل الشريط بناء التقرير
         print(f"تنبيه: تعذر توليد شريط قرار الخريطة ({e})", file=sys.stderr)
@@ -2354,6 +2417,18 @@ def _card_targets(all_sections, report_sections, meta, defs, report_date):
         "watch_title": watch_title,
     }
 
+
+def _additions_return_link(report_date: str) -> str:
+    """رابط عودة إلى صفحة إصدار التقرير المقابل، ولا يُنشأ لتاريخ غير صالح."""
+    try:
+        parsed = datetime.strptime(str(report_date), "%Y-%m-%d")
+    except (TypeError, ValueError):
+        return ""
+    date = parsed.strftime("%Y-%m-%d")
+    return (f'<a class="chip additions-return" href="/reports/{date}.html">'
+            "العودة إلى إصدار التقرير</a>")
+
+
 def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mode: str = "report"):
     """mode='report' يُخفي أقسام «إضافات» (السياسة الحاكمة) · mode='additions' يعرضها وحدها بترتيبها."""
     md = md_path.read_text(encoding="utf-8")
@@ -2456,7 +2531,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
     hero_map_html = ""
     print_map_html = ""
     if map_html and not doc_mode:
-        _imo_line = _imo_reference_line()
+        _imo_line = _imo_reference_line(meta)
         try:
             from map_gulf import build_map as _build_map_hero
 
@@ -2508,9 +2583,9 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
                 tag_html = f'<span class="k-tag">{inline(tag)}</span>' if tag else ""
                 # طبقات البطاقة (قرار المالك 2026-10-31): القيمة اليومية · المجموع من 28 فبراير 2026 · آخر تحديث المصدر
                 _lay = []
-                if k.get("cumulative") not in (None, ""):
-                    _lay.append(f'<div class="k-lay"><span class="k-lay-l">{CUM_LABEL}</span> '
-                                f'<b class="bidi">{esc(str(k["cumulative"]))}</b></div>')
+                _cumulative_html = _hero_cumulative_html(k)
+                if _cumulative_html:
+                    _lay.append(_cumulative_html)
                 if k.get("updated"):
                     _lay.append(f'<div class="k-lay"><span class="k-lay-l">{UPD_LABEL}</span> '
                                 f'<b class="bidi">{esc(str(k["updated"]))}</b></div>')
@@ -2574,7 +2649,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
             + (f'<p class="sec-lede">{esc(SECTION_HINTS[t])}</p>' if SECTION_HINTS.get(t) else "")
         )
         if "سجل الأحداث" in t and daily_events is not None and not doc_mode:
-            section_html = render_ledger_events(daily_events, defs, md_path)
+            section_html = render_ledger_events(daily_events, defs, md_path, meta=meta)
         else:
             section_html = render_section_body(t, sec["lines"], defs, doc_mode, section_id=f"sec-{idx + 1:02d}")
         if mode != "additions" and "مستوى التهديد" in t:
@@ -2754,6 +2829,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
     <div class="topbar-spacer"></div>
     <div class="tb-meta">
       {f'<span class="chip">{esc(date_label)}</span>' if date_label else ''}
+      {_additions_return_link(report_date) if mode == "additions" else ''}
     </div>
   </div>
 </div>
