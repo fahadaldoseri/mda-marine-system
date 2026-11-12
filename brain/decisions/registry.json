@@ -12,7 +12,7 @@
   "last_measured": "2026-11-12",
   "counts": {
     "منفَّذ جزئيًّا": 6,
-    "منفَّذ": 46,
+    "منفَّذ": 47,
     "يحتاج تحققًا": 3,
     "يحتاج قرارًا": 2
   },
@@ -1318,6 +1318,43 @@
       ],
       "governing_file": "runbook/runbook.json",
       "next_action_ar": "إثبات إيقاف النشر التلقائي؛ دمج الإصلاح؛ استئناف المحرك والتحقق من التسليم"
+    },
+    {
+      "id": "D-0652",
+      "date": "2026-11-12",
+      "title_ar": "اعتماد مهارة portable-paths-repair-ops وربطها ببوابة G026",
+      "wording_ar": "ابدأ بتحويل هذه العملية الفورية إلى مهارة معتمدة قابلة لإعادة الاستخدام باستخدام /skill-creator.",
+      "decision_ar": "اعتماد مهارة إصلاح اختيار جذور الأدوات والاختبارات ونقلها؛ الفهرس وG026 وقائمة الاستعادة تستهلكها. لا تغيير لأمر البوابة أو نطاقها ولا للنشر.",
+      "status": "منفَّذ",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "skills/portable-paths-repair-ops/SKILL.md",
+          "note": "المهارة وحدود الاختصاص وقاعدة القياس والأقل كلفة"
+        },
+        {
+          "kind": "file",
+          "ref": "INDEX.md",
+          "note": "سطر الاعتماد المؤرخ"
+        },
+        {
+          "kind": "file",
+          "ref": "runbook/runbook.json",
+          "note": "مستهلك G026 دون تغيير تسلسله"
+        },
+        {
+          "kind": "file",
+          "ref": "tests/test_portable_paths_skill_adoption.py",
+          "note": "حارس ربط موجب وسالب"
+        },
+        {
+          "kind": "file",
+          "ref": "notes/portable-paths-skill-adoption-2026-11-12.md",
+          "note": "خط الأساس والنطاق وقياس الأثر"
+        }
+      ],
+      "governing_file": "INDEX.md",
+      "next_action_ar": "يُراجع استهلاك المهارة بعد ثلاث جولات؛ لا يثبت اعتمادها تسليم التقرير أو دمج PR #7."
     }
   ]
 }

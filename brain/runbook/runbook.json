@@ -2817,11 +2817,13 @@
         "files": [
           "tools/final_gate.sh",
           "validators/check_portable_paths.py",
-          "tools/portable_paths.py"
+          "tools/portable_paths.py",
+          "skills/portable-paths-repair-ops/SKILL.md"
         ],
         "gates": [],
         "tests": [
-          "tests/test_g026_portable_paths.py"
+          "tests/test_g026_portable_paths.py",
+          "tests/test_portable_paths_skill_adoption.py"
         ]
       },
       "on_fail": "stop",

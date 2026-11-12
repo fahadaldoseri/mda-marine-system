@@ -1,0 +1,135 @@
+=== RED قبل الاعتماد ===
+SOURCE: /tmp/portable-skill-red.txt
+SHA256: 036f09199a9f7bc9ab96f8c1d45fa4a763dc88ec65b3e6c7ce316e5fcd25de60
+test_missing_gate_reference_is_rejected (__main__.SkillAdoptionTest.test_missing_gate_reference_is_rejected) ... ok
+test_project_wiring_passes (__main__.SkillAdoptionTest.test_project_wiring_passes) ... FAIL
+test_unsubstantiated_adoption_is_rejected (__main__.SkillAdoptionTest.test_unsubstantiated_adoption_is_rejected) ... ok
+
+======================================================================
+FAIL: test_project_wiring_passes (__main__.SkillAdoptionTest.test_project_wiring_passes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/mda-marine-system-skill/brain/tests/test_portable_paths_skill_adoption.py", line 54, in test_project_wiring_passes
+    self.assertEqual([], wiring_errors(ROOT, self.manifest, self.registry))
+AssertionError: Lists differ: [] != ['ملف المهارة مفقود: /home/ubuntu/mda-mari[299 chars]ارة']
+
+Second list contains 6 additional elements.
+First extra element 0:
+'ملف المهارة مفقود: /home/ubuntu/mda-marine-system-skill/brain/skills/portable-paths-repair-ops/SKILL.md'
+
+- []
++ ['ملف المهارة مفقود: '
++  '/home/ubuntu/mda-marine-system-skill/brain/skills/portable-paths-repair-ops/SKILL.md',
++  'ملف المهارة مفقود: '
++  '/home/ubuntu/mda-marine-system-skill/skills/portable-paths-repair-ops/SKILL.md',
++  'المهارة غير مدرجة في جدول الفهرس',
++  'G026 لا يستهلك مرجع المهارة',
++  'المهارة غير مسجلة في قائمة الاستعادة',
++  'لا قرار اعتماد وحيد للمهارة']
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.010s
+
+FAILED (failures=1)
+
+=== GREEN بعد إدراج الربط ===
+SOURCE: /tmp/portable-skill-green.txt
+SHA256: 7964209beabfd7b56e8ecbc1e138ed575eb8f15155b49bddd32f20f12b213f81
+test_missing_gate_reference_is_rejected (__main__.SkillAdoptionTest.test_missing_gate_reference_is_rejected) ... ok
+test_project_wiring_passes (__main__.SkillAdoptionTest.test_project_wiring_passes) ... ok
+test_unsubstantiated_adoption_is_rejected (__main__.SkillAdoptionTest.test_unsubstantiated_adoption_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.009s
+
+OK
+
+=== الفحوص النهائية بعد ربط المشغل ===
+SOURCE: /tmp/portable-skill-final-checks.txt
+SHA256: dd390e147ef91ab14626de64f796f3d1d0122397c82117a58e5a9a42ef719f95
+test_missing_gate_reference_is_rejected (__main__.SkillAdoptionTest.test_missing_gate_reference_is_rejected) ... ok
+test_project_wiring_passes (__main__.SkillAdoptionTest.test_project_wiring_passes) ... ok
+test_unsubstantiated_adoption_is_rejected (__main__.SkillAdoptionTest.test_unsubstantiated_adoption_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.010s
+
+OK
+adoption_rc=0
+runner_syntax_rc=0
+test_current_runtime_trees_pass_real_scanner (__main__.PortablePathContractTest.test_current_runtime_trees_pass_real_scanner) ... ok
+test_fixed_root_is_rejected_and_environment_root_passes (__main__.PortablePathContractTest.test_fixed_root_is_rejected_and_environment_root_passes) ... ok
+test_relocated_evidence_checker_selects_local_page_without_env (__main__.PortablePathContractTest.test_relocated_evidence_checker_selects_local_page_without_env) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.234s
+
+OK
+portable_tests_rc=0
+بوابة قابلية النقل — المسار المطلق في الشيفرة
+  الجذور المفحوصة: /home/ubuntu/mda-marine-system-skill/brain · /home/ubuntu/seawatch
+  ✔ لا مسار مطلق في أي ملف تنفيذي — النظام يعمل من أي مسار.
+scanner_rc=0
+=== سلامة مهارات المشروع — مقارنة مصدرية عبر 4 أسطح ===
+النطاق الحاكم: /home/ubuntu/mda-marine-system-skill/brain/skills
+الأسطح: server=/home/ubuntu/skills · brain=/home/ubuntu/mda-marine-system-skill/brain/skills · mirror=/home/ubuntu/mda-marine-system-skill/skills · mirror_brain=/home/ubuntu/mda-marine-system-skill/brain/skills
+  ✔ approved-output-change-ops · ملفات المصدر=8
+  ✔ bilingual-master-direction-ops · ملفات المصدر=3
+  ✔ bilingual-surface-parity-ops · ملفات المصدر=3
+  ✔ card-branch-integrity-ops · ملفات المصدر=2
+  ✔ crossing-gate-ops · ملفات المصدر=1
+  ✔ decision-registry-backfill-ops · ملفات المصدر=1
+  ✔ destructive-op-guard-ops · ملفات المصدر=6
+  ✔ enforcer-coverage-burndown-ops · ملفات المصدر=4
+  ✔ fault-closure-and-learning-ops · ملفات المصدر=23
+  ✔ fault-evidence-arming-ops · ملفات المصدر=4
+  ✔ fault-ledger-matrix-parity-ops · ملفات المصدر=4
+  ✔ gate-lifecycle-ops · ملفات المصدر=38
+  ✔ governed-cleanup-audit · ملفات المصدر=5
+  ✔ governed-rename-ops · ملفات المصدر=3
+  ✔ governing-assets-recovery-ops · ملفات المصدر=2
+  ✔ macr-system · ملفات المصدر=4
+  ✔ map-clarity-ops · ملفات المصدر=7
+  ✔ marine-news-brain · ملفات المصدر=5
+  ✔ military-arabic-editing · ملفات المصدر=5
+  ✔ multi-agent-audit-ops · ملفات المصدر=9
+  ✔ official-ledger-backfill-ops · ملفات المصدر=4
+  ✔ operation-to-skill-ops · ملفات المصدر=2
+  ✔ owner-approval-launch-gate-ops · ملفات المصدر=5
+  ✔ owner-notes-measured-triage · ملفات المصدر=7
+  ✔ owner-ui-notes-contract-ops · ملفات المصدر=5
+  ✔ parity-and-publish-ops · ملفات المصدر=19
+  ✔ portable-paths-repair-ops · ملفات المصدر=1
+  ✔ pre-execution-plan-audit-ops · ملفات المصدر=6
+  ✔ project-evidence-and-coverage-ops · ملفات المصدر=1
+  ✔ report-build-export-ops · ملفات المصدر=2
+  ✔ report-surface-and-print-ops · ملفات المصدر=37
+  ✔ rerun-step-to-live-parity-ops · ملفات المصدر=5
+  ✔ runbook-operations-ops · ملفات المصدر=20
+  ✔ secret-rotation-ops · ملفات المصدر=8
+  ✔ skill-adoption-governance-ops · ملفات المصدر=1
+  ✔ skill-coverage-audit-ops · ملفات المصدر=2
+  ✔ skill-creator · ملفات المصدر=8
+  ✔ skill-ownership-merge-ops · ملفات المصدر=2
+  ✔ source-coverage-route-ops · ملفات المصدر=8
+  ✔ source-ingest-ops · ملفات المصدر=2
+  ✔ source-route-triage-ops · ملفات المصدر=5
+  ✔ threat-zone-card-ops · ملفات المصدر=2
+  ✔ vocabulary-guard-ops · ملفات المصدر=7
+  ✔ waw-density-control-ops · ملفات المصدر=4
+  ✔ writing-rules-wiring-ops · ملفات المصدر=2
+المهارات المشروعية المفحوصة: 45 · ملفات المصدر المفحوصة: 302 · العوائق: 0
+  ✔ كل مهارات المشروع مكتملة ومتطابقة عبر الأسطح الأربعة
+project_skills_rc=0
+✔ دفتر القرارات: 16 قرارًا بحالة ودليل · صفر «منفَّذ» بلا سند
+   القياس الأخير: 2026-11-12 · القرارات: 58
+   التوزيع: منفَّذ جزئيًّا 6 · منفَّذ 47 · يحتاج تحققًا 3 · يحتاج قرارًا 2
+decisions_rc=0
+Validating skill at: /home/ubuntu/mda-marine-system-skill/brain/skills/portable-paths-repair-ops
+Skill is valid!
+skill_validate_rc=0
+
+=== تحقق المانيفست ===
+SOURCE: /tmp/portable-skill-verify.txt
+SHA256: 6211e45398bcee7938d095ee01cbc37abdc09a190935e9792785716c0f08bf1c
+✔ المانيفست متسق: كل خطوة مربوطة، وكل ملف متصل بخطوة أو قسم أو وثيقة، وكل أداة يستدعيها كود أو مسجَّلة يدوية بسبب
