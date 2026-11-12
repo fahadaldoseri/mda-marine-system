@@ -6,17 +6,29 @@ import os
 _P = Path(__file__).resolve()
 _CAND = [_P.parents[i] for i in range(1, min(5, len(_P.parents)))]
 def _brain_root() -> Path:
-    env = os.environ.get("BRAIN_DIR")
-    if env and Path(env).is_dir():
-        return Path(env)
-    for r in _CAND:
-        c = r / "brain-marine-news"
-        if (c / "reports").is_dir():
-            return c
-    for r in _CAND:
-        if (r / "reports").is_dir():
-            return r
-    return _CAND[0] / "brain-marine-news"
+    """الجذر القانوني: env ثم mda-marine-system/brain ثم brain — والأرشيف مرفوض (ك-571)."""
+    import sys as _sys
+    _sys.path.insert(0, str(_P.parent))
+    try:
+        from brain_root import brain_root as _br  # noqa: E402
+        return _br()
+    except SystemExit:
+        raise
+    except Exception:
+        env = os.environ.get("BRAIN_DIR")
+        if env and Path(env).is_dir():
+            return Path(env)
+        for r in _CAND:
+            c = r / "mda-marine-system" / "brain"
+            if (c / "reports").is_dir():
+                return c
+        for r in _CAND:
+            c = r / "brain"
+            if (c / "reports").is_dir():
+                return c
+        return _CAND[0] / "mda-marine-system" / "brain"
+
+
 BRAIN = _brain_root()
 
 def counts(date: str) -> dict:

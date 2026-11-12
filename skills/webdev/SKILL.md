@@ -121,6 +121,9 @@ Relative paths and temporary signed URLs are invalid; failed sync keeps the old 
 
 **Default to `manus-upload-file --webdev <file>`.** Upload website images and attachments to
 project storage, and use the returned `/manus-storage/<key>` path in the website.
+Also upload any browser-loaded file over 30 MiB, including package files such as `.wasm`,
+and re-upload it when that package's version changes: published containers return HTTP 500
+for responses of 32 MiB or more.
 
 Use `manus-upload-file <file>` without `--webdev` only when the consumer requires an absolute
 public URL, such as platform `logoUrl` or Shopify media ingestion. It returns a public CDN URL

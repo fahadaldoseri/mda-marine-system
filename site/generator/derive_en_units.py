@@ -11,6 +11,13 @@
     python3 generator/derive_en_units.py --date 2026-11-02 --apply    # كتابة
 """
 from __future__ import annotations
+
+import sys as _sys
+from pathlib import Path as _Path
+
+_sys.path.insert(0, str(_Path(__file__).resolve().parent))
+from brain_root import under_brain as _brain  # noqa: E402
+
 import argparse, json, pathlib, re, sys
 from difflib import SequenceMatcher
 from datetime import date as _date
@@ -19,9 +26,9 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import i18n_en  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-AR_MD = ROOT.parent / "brain-marine-news" / "reports"
+AR_MD = _brain("reports")
 I18N = ROOT / "sources" / "i18n" / "en"
-MANIFEST = ROOT.parent / "brain-marine-news" / "runbook" / "runbook.json"
+MANIFEST = _brain("runbook", "runbook.json")
 
 
 def i18n_policy() -> dict[str, str]:

@@ -1,0 +1,21 @@
+  تغذيات مرصودة: 81
+  نجح: 55 مصدرًا (72 مسارًا) · فشل: 5 مصدرًا · يُفحص بالمتصفح: 0 · عناصر مقروءة: 1729
+  ◻ مرجعية تُراجع يدويًا: 2 مصدرًا · الأرقام: [39, 52]
+   ✘ 2 UKMTO — التحذيرات 2026: all routes failed: primary: حجب مصدر — رفض الخادم الطلب (HTTP 401)
+   ✘ 3 UKMTO — النشرات الاستشارية 2026: all routes failed: primary: حجب مصدر — رفض الخادم الطلب (HTTP 401)
+   ✘ 5 IMO — سجل الحوادث المؤكدة: all routes failed: primary: derived items without real content (2) · curl: derived items without real content (2) · curl أعاد محتوى غير مقروء | official-page:jina.ai/imo-middle-east-incidents: حجب مصدر — رفض الخادم الطلب (HTTP 401) | browser: derived items without real content (2)
+   ✘ 27 وكالة الأنباء الكويتية (كونا): all routes failed: primary: timed out · curl: derived items without real content (1) · curl أعاد محتوى غير مقروء | official-page:jina.ai/kuna: derived items without real content (1) · curl: derived items without real content (1) · curl أعاد محتوى غير مقروء | browser: derived items without real content (1)
+   ✘ 33 MARAD/MSCI: all routes failed: primary: حجب مصدر — blocked page: Access Denied (HTTP 403) | fallback:jina.ai/marad-rss: حجب مصدر — رفض الخادم الطلب (HTTP 401) | fallback:jina.ai/msci: حجب مصدر — رفض الخادم الطلب (HTTP 401)
+   ◐ 12 OFAC — الإجراءات الأخيرة: محتوى متقادم — عمر أحدث مادة 637 يومًا
+   ◐ 13 ShipNext — التحقق من السفن: محتوى متقادم — عمر أحدث مادة 87 يومًا
+   ◐ 20 جريدة الأيام: محتوى متقادم — عمر أحدث مادة 1033 يومًا
+   ◐ 20 جريدة الأيام: محتوى متقادم — عمر أحدث مادة 1033 يومًا
+   ◐ 30 القيادة المركزية الأمريكية (سنتكوم: محتوى متقادم — عمر أحدث مادة 279 يومًا
+   ◐ 32 IMB/ICC — القرصنة: محتوى متقادم — عمر أحدث مادة 27 يومًا
+  ✔ حُفظ: feeds-2026-11-12.json / .md / .status.json — الحالة: degraded
+  · لا علامة تشغيل: /home/ubuntu/mda-marine-system/brain/logs/pipeline-2026-11-12.json — إنشاء علامة pipeline عبر write_mark
+  ✔ العلامة (pipeline): /home/ubuntu/mda-marine-system/brain/logs/pipeline-2026-11-12.json · المخطط v1 · نص التقرير موجود: False · المصادر: 62/60/55 · البوابة: not_run
+  · أضيف أثر الإنشاء: created_by=mark_components
+  ✔ حُدّثت المكوّنات ['feeds'] من المخرجات · الحالة العامة: degraded
+     feeds: {"status": "degraded", "checked": 60, "ok": 55, "failed": 5, "failed_feeds": [{"num": 2, "name": "UKMTO — التحذيرات 2026", "error"
+elapsed_seconds=201.495967
