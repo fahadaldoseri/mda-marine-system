@@ -4433,6 +4433,13 @@
       "lesson_id": "ك-621",
       "barrier_id": "B-g026move",
       "run_evidence": "تحقق حي 2026-11-12: python3 tests/test_g026_portable_paths.py → خرج 0؛ 3 اختبارات؛ المدقق خرج 0؛ تشغيل المحرك بعد الدمج لم يُثبت بعد"
+    },
+    {
+      "fault_id": "ك-622",
+      "state": "بانتظار التحقق",
+      "lesson_id": "L-2026-11-12-g034-self-reference",
+      "barrier_id": "B-vocab-no-self-reference",
+      "run_evidence": "تحقق حي 2026-11-12: python3 validators/check_prose_defects.py --md reports/2026-11-12-sectioned.md → خرج 0؛ المخالفة المزروعة تتحفظ → خرج 2؛ notes/g034-self-conflicting-vocabulary-2026-11-12.md؛ إعادة G034 عبر المحرك بانتظار التنفيذ"
     }
   ]
 }

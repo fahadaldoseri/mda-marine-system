@@ -23,8 +23,10 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 import traceback
+import unicodedata
 from datetime import date
 from pathlib import Path
 
@@ -80,6 +82,20 @@ def validate(reg: dict) -> list[str]:
         if not isinstance(plain, list) or not [p for p in plain if str(p).strip()]:
             errs.append(f"البند {i} ({e.get('term')}): «plain» قائمة بدائل غير فارغة")
         term = str(e.get("term") or "").strip()
+        if st == "approved" and isinstance(plain, list):
+            def normalized(value: str) -> str:
+                value = unicodedata.normalize("NFC", value)
+                value = re.sub(r"[\u064B-\u065F\u0670\u0640]", "", value)
+                return " ".join(value.split())
+
+            alternatives = {
+                normalized(part)
+                for value in plain
+                for part in re.split(r"[،,·]", str(value))
+                if part.strip()
+            }
+            if normalized(term) in alternatives:
+                errs.append(f"البند {i} ({term}): تناقض ذاتي — البديل المعتمد هو اللفظ الممنوع نفسه")
         if term in seen and seen[term] != st:
             errs.append(f"اللفظ «{term}» بحالتين مختلفتين: {seen[term]} و{st}")
         seen[term] = st
