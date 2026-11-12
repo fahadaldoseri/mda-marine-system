@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة 335ee6669867112f). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة 988b03e529ccd0ab). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -59,7 +59,7 @@
 | G023 | تغطية فحص العقوبات | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G023.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_ofac_coverage.py | stop |
 | G024 | استعمال المكتبات (المعجم والبنك والفجوات) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G024.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh | stop |
 | G025 | عدد المصادر (مصدر واحد) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G025.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/sources_count_sync.py، tools/measure_source_ledger_coverage.py، tests/test_source_daily_coverage.py | stop |
-| G026 | قابلية النقل (مسارات) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G026.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_portable_paths.py، tools/portable_paths.py | stop |
+| G026 | قابلية النقل (مسارات) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G026.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_portable_paths.py، tools/portable_paths.py، skills/portable-paths-repair-ops/SKILL.md | stop |
 | G028 | حصاد الألفاظ الجديدة | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G028.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، tools/harvest_terms.py | stop |
 | G030 | فصل فضاءات الرموز MN-/EST- | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G030.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh، validators/check_code_spaces.py، tools/register_estimate.py، appendices/estimate-code-map.json | stop |
 | G031 | قاعدة النقاط في المصدر | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/G031.log | ف1–ف5 — بوابة التحقق | tools/final_gate.sh | stop |
