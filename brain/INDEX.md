@@ -224,7 +224,7 @@
 | `parity-and-publish-ops` | Use when comparing marine-awareness server and repository trees, preparing a governed site publi… | معتمدة · `D-0627` |
 | `report-surface-and-print-ops` | Use when moving report sections between reader surfaces, proving content fidelity across web and… | معتمدة · `D-0614` نظيرها |
 | `rerun-step-to-live-parity-ops` | استئناف خطوة نشر معلنة واحدة في مشروع مركز الوعي بالمجال البحري بعد إصلاح جذرها، وإثبات أن القنا… | معتمدة · `D-0622` |
-| `runbook-operations-ops` | Use when executing a locked daily runbook, interpreting its exit codes, completing a round, repa… | معتمدة · `D-0628` |
+| `runbook-operations-ops` | تشغيل الجولة واسترداد التوقف؛ إجراء G030 لتسجيل EST قبل إتمام W010 واختباره في G001 | معتمدة · `D-0628` · توسعة 2026-11-12 `D-0653` |
 | `portable-paths-repair-ops` | إصلاح جذور الأدوات والاختبارات الثابتة وإثبات النقل دون إضعاف الكاشف؛ المستهلك G026 | معتمدة · 2026-11-12 · `D-0652` |
 | `skill-adoption-governance-ops` | اعتماد مهارة جديدة داخل مشروع محكوم بعد موافقة المالك الصريحة، مع سجل يُثبت الاعتماد ودليله ومنع… | معتمدة · `D-0617` |
 | `skill-creator` | Guide for creating or updating skills that extend Manus via specialized knowledge, workflows, or… | معتمدة · `D-0629` |
