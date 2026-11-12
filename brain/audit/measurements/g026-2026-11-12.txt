@@ -1,0 +1,104 @@
+ملاحظة: حُذفت الفراغات النهائية فقط عند تجميع الأسطر؛ بصمات السجلات الأصلية محفوظة أدناه.
+G026 — أدلة تشغيل كاملة — 2026-11-12
+
+══ /tmp/g026-red.txt ══
+test_current_runtime_trees_pass_real_scanner (__main__.PortablePathContractTest.test_current_runtime_trees_pass_real_scanner) ... FAIL
+test_fixed_root_is_rejected_and_environment_root_passes (__main__.PortablePathContractTest.test_fixed_root_is_rejected_and_environment_root_passes) ... ok
+test_relocated_evidence_checker_selects_local_page_without_env (__main__.PortablePathContractTest.test_relocated_evidence_checker_selects_local_page_without_env) ...
+  test_relocated_evidence_checker_selects_local_page_without_env (__main__.PortablePathContractTest.test_relocated_evidence_checker_selects_local_page_without_env) (source='/home/ubuntu/mda-marine-system/brain/tests/test_reliability_and_evidence_anchor.py') ... FAIL
+  test_relocated_evidence_checker_selects_local_page_without_env (__main__.PortablePathContractTest.test_relocated_evidence_checker_selects_local_page_without_env) (source='/home/ubuntu/seawatch/tests/test_reliability_and_evidence_anchor.py') ... FAIL
+
+======================================================================
+FAIL: test_current_runtime_trees_pass_real_scanner (__main__.PortablePathContractTest.test_current_runtime_trees_pass_real_scanner)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/mda-marine-system/brain/tests/test_g026_portable_paths.py", line 40, in test_current_runtime_trees_pass_real_scanner
+    self.assertEqual([], gate.scan(), "جذور ثابتة في أشجار التشغيل")
+AssertionError: Lists differ: [] != ['brain/tools/runbook.py:99', 'brain/tests[233 chars]:42']
+
+Second list contains 6 additional elements.
+First extra element 0:
+'brain/tools/runbook.py:99'
+
+- []
++ ['brain/tools/runbook.py:99',
++  'brain/tests/test_reliability_and_evidence_anchor.py:42',
++  'seawatch/tests/test_hero_kpi_cards.py:15',
++  'seawatch/tests/test_hero_kpi_cards.py:41',
++  'seawatch/tests/test_hero_kpi_cards.py:42',
++  'seawatch/tests/test_reliability_and_evidence_anchor.py:42'] : جذور ثابتة في أشجار التشغيل
+
+======================================================================
+FAIL: test_relocated_evidence_checker_selects_local_page_without_env (__main__.PortablePathContractTest.test_relocated_evidence_checker_selects_local_page_without_env) (source='/home/ubuntu/mda-marine-system/brain/tests/test_reliability_and_evidence_anchor.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/mda-marine-system/brain/tests/test_g026_portable_paths.py", line 74, in test_relocated_evidence_checker_selects_local_page_without_env
+    self.assertIn(str(page), result.stdout)
+AssertionError: '/tmp/tmp0ojow4ox/site/dist/reports/2026-11-12.html' not found in '   الصفحة: /home/ubuntu/seawatch/dist/reports/2026-11-11.html\n   موثوقية المصدر: 2 · الثقة التحليلية: 4 · روابط الدليل: 2\n   ✔ فصل الوسمين قائم وكل روابط الدليل تحمل مرساة عميقة\n   ✔ الحالة السالبة رُفضت بثلاثة أسباب (4)\n'
+
+======================================================================
+FAIL: test_relocated_evidence_checker_selects_local_page_without_env (__main__.PortablePathContractTest.test_relocated_evidence_checker_selects_local_page_without_env) (source='/home/ubuntu/seawatch/tests/test_reliability_and_evidence_anchor.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/mda-marine-system/brain/tests/test_g026_portable_paths.py", line 74, in test_relocated_evidence_checker_selects_local_page_without_env
+    self.assertIn(str(page), result.stdout)
+AssertionError: '/tmp/tmpalmu9nck/site/dist/reports/2026-11-12.html' not found in '   الصفحة: /home/ubuntu/seawatch/dist/reports/2026-11-11.html\n   موثوقية المصدر: 2 · الثقة التحليلية: 4 · روابط الدليل: 2\n   ✔ فصل الوسمين قائم وكل روابط الدليل تحمل مرساة عميقة\n   ✔ الحالة السالبة رُفضت بثلاثة أسباب (4)\n'
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.268s
+
+FAILED (failures=3)
+181a4d3d6442f4c79ca9b6adc343d858354449cde6728ddfe5eac49d38e8b584  /tmp/g026-red.txt
+
+══ /tmp/g026-green.txt ══
+test_current_runtime_trees_pass_real_scanner (__main__.PortablePathContractTest.test_current_runtime_trees_pass_real_scanner) ... ok
+test_fixed_root_is_rejected_and_environment_root_passes (__main__.PortablePathContractTest.test_fixed_root_is_rejected_and_environment_root_passes) ... ok
+test_relocated_evidence_checker_selects_local_page_without_env (__main__.PortablePathContractTest.test_relocated_evidence_checker_selects_local_page_without_env) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.273s
+
+OK
+214d0a37a2053eb880df64f7f0412b6e90c4f3c6b70fbe9bdf9f0b50b63fc39b  /tmp/g026-green.txt
+
+══ /tmp/g026-after.txt ══
+بوابة قابلية النقل — المسار المطلق في الشيفرة
+  الجذور المفحوصة: /home/ubuntu/mda-marine-system/brain · /home/ubuntu/seawatch
+  ✔ لا مسار مطلق في أي ملف تنفيذي — النظام يعمل من أي مسار.
+6e644542fdf4ea36c89995ded202ff39183fb4bc47622ae86ef0cd3a9a44c2b7  /tmp/g026-after.txt
+
+══ /tmp/g026-hardening.txt ══
+test_env_and_placeholders
+  ✔ الأمر يرى D وSITE_DIR وBRAIN_DIR ويحل {site}
+  ✔ سجل الخطوة يثبت المتغيرات
+  ✔ verify يحل {site} في الروابط (مجلد الموقع seawatch)
+  ✔ verify يكتشف مجلد الموقع الشقيق باسم site أيضًا
+test_include
+  ✔ برومت الوكيل يعرض نص الملف المضمَّن
+  ✔ verify يرفض تضمينًا يحيل إلى ملف غائب
+test_sections_token
+  ✔ {{sections}} يعرض أقسام السجل بترتيبها
+  ✔ {{sections}} يضمّن مقتطف كل قسم
+test_reachability
+  ✔ ملف يتيم داخل appendices يُكشف (لا استثناء شامل للمجلد)
+  ✔ أداة يتيمة تُكشف
+  ✔ ما تصل إليه خطوة عبر سلسلة إحالات يُعدّ متصلًا (قابلية الوصول)
+test_phase_order
+  ✔ خطوة بوابة بعد خطوة بناء تُرفض (ترتيب المراحل)
+  ✔ الترتيب gates ثم build ثم outputs مقبول
+test_trivial_assert
+  ✔ شرط إتمام تافه (true) يُرفض
+test_declared_runtime_output_is_not_static_requirement
+  ✔ المخرج الديناميكي المعلن لا يُعامل كملف ثابت قبل البناء
+test_gates_status_covers_gate_phases
+  ✔ gates-status يعدّ مرحلة outputs بوابة ويمنع إن لم تكتمل
+test_gates_run_covers_gate_phases
+  ✔ gates ينفذ كل gate_phases بما فيها finalize
+test_gate_json_from_ledger
+  ✔ gate-json يكتب gate.json من السجل لا من الذاكرة
+  ✔ gate-json يحفظ أسماء البوابات وترتيبها
+  ✔ gate-json يسجّل الخطوات المانعة
+  ✔ gate-json --through يحسب حتى الخطوة المحددة فقط
+
+الحصيلة: نجح 21 · فشل 0
+92bf248be16b07030705c531d3a69c78feb67464d37f0072bf2545843004b39a  /tmp/g026-hardening.txt

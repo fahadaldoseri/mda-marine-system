@@ -12,7 +12,7 @@
   7) شارة نطاق تفقد قطاعًا (Z2–Z4 تسقط Z3).
 
 الاستخدام:
-    SITE_DIR=/home/ubuntu/seawatch BRAIN_DIR=/home/ubuntu/mda-marine-system/brain \
+    SITE_DIR=<site-root> BRAIN_DIR=<brain-root> \
         python3 tests/test_hero_kpi_cards.py [--date 2026-11-11]
 """
 import argparse
@@ -38,8 +38,9 @@ def main():
     ap.add_argument("--date", default=os.environ.get("CHECK_DATE", "2026-11-11"))
     args = ap.parse_args()
 
-    site = pathlib.Path(os.environ.get("SITE_DIR", "/home/ubuntu/seawatch"))
-    brain = pathlib.Path(os.environ.get("BRAIN_DIR", "/home/ubuntu/mda-marine-system/brain"))
+    local = pathlib.Path(__file__).resolve().parents[1]
+    site = pathlib.Path(os.environ.get("SITE_DIR") or local)
+    brain = pathlib.Path(os.environ.get("BRAIN_DIR") or site.parent / "brain")
     os.environ.setdefault("BRAIN_DIR", str(brain))
 
     print("═══ حارس بطاقات الأرقام ═══")

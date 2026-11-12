@@ -39,7 +39,10 @@ def main() -> int:
     if len(sys.argv) > 1 and not sys.argv[1].startswith('-'):
         page = pathlib.Path(sys.argv[1])
     else:
-        site = pathlib.Path(os.environ.get('SITE', '/home/ubuntu/seawatch'))
+        local = pathlib.Path(__file__).resolve().parents[1]
+        if local.name == 'brain':
+            local = local.parent / 'site'
+        site = pathlib.Path(os.environ.get('SITE_DIR') or os.environ.get('SITE') or local)
         cands = sorted(p for p in (site / 'dist' / 'reports').glob('20*.html')
                        if p.is_file())
         if not cands:
