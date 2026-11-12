@@ -3981,10 +3981,10 @@
     },
     {
       "fault_id": "ك-536",
-      "state": "مغلق",
-      "lesson_id": "ك-536",
-      "barrier_id": "B-59ae4e44",
-      "run_evidence": "700ae7f245e5b6cb55632e0d4d282ed580402cf`)؛ بعد الإصلاح → `3 passed` و`rc=0` (GREEN؛ `/tmp/g030-test"
+      "state": "بانتظار التحقق",
+      "lesson_id": "L-2026-11-12-g030-writer-contract",
+      "barrier_id": "B-W010-EST-registration",
+      "run_evidence": "notes/g030-estimate-registration-repair-2026-11-12.md"
     },
     {
       "fault_id": "ك-537",
@@ -4426,6 +4426,13 @@
       "lesson_id": "م-372",
       "barrier_id": "B-b0cd1561",
       "run_evidence": null
+    },
+    {
+      "fault_id": "ك-621",
+      "state": "بانتظار التحقق",
+      "lesson_id": "ك-621",
+      "barrier_id": "B-g026move",
+      "run_evidence": "تحقق حي 2026-11-12: python3 tests/test_g026_portable_paths.py → خرج 0؛ 3 اختبارات؛ المدقق خرج 0؛ تشغيل المحرك بعد الدمج لم يُثبت بعد"
     }
   ]
 }

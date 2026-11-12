@@ -11,7 +11,7 @@
   "decided_by": "المالك",
   "last_measured": "2026-11-12",
   "counts": {
-    "منفَّذ جزئيًّا": 6,
+    "منفَّذ جزئيًّا": 7,
     "منفَّذ": 47,
     "يحتاج تحققًا": 3,
     "يحتاج قرارًا": 2
@@ -1355,6 +1355,30 @@
       ],
       "governing_file": "INDEX.md",
       "next_action_ar": "يُراجع استهلاك المهارة بعد ثلاث جولات؛ لا يثبت اعتمادها تسليم التقرير أو دمج PR #7."
+    },
+    {
+      "id": "D-0653",
+      "date": "2026-11-12",
+      "title_ar": "إصلاح G030 في عقد الكاتب وتوسيع مهارة التشغيل القائمة",
+      "wording_ar": "قم بتشخيص سبب عدم تسجيل EST-2026-11-12-01 و EST-2026-11-12-02 وأصلحه جذرياً؛ حوّل العملية إلى مهارة قابلة لإعادة الاستخدام.",
+      "decision_ar": "يمنع إتمام W010 قبل التسجيل، ويستهلك G001 اختبار تاريخ الجولة؛ توسعة runbook-operations-ops بدل مهارة مكررة.",
+      "status": "منفَّذ جزئيًّا",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "notes/g030-estimate-registration-repair-2026-11-12.md"
+        },
+        {
+          "kind": "file",
+          "ref": "skills/runbook-operations-ops/SKILL.md"
+        },
+        {
+          "kind": "file",
+          "ref": "tests/test_g030_code_spaces.py"
+        }
+      ],
+      "governing_file": "runbook/runbook.json",
+      "next_action_ar": "دمج عادي ثم استئناف G030 بالمحرك؛ لا ادعاء نشر أو إرسال قبل سجلاتها الحية."
     }
   ]
 }

@@ -876,6 +876,16 @@
       "phase": "write",
       "assert": [
         {
+          "type": "cmd",
+          "command": [
+            "python3",
+            "tools/register_estimate.py",
+            "--check",
+            "--date",
+            "{date}"
+          ]
+        },
+        {
           "type": "min_bytes",
           "path": "reports/{date}-sectioned.md",
           "n": 6000
@@ -895,12 +905,17 @@
           "sections/20-writing-brief.md",
           "sections/20-lexicon.md",
           "sections/20-examples.md",
-          "runbook/prompts/write-report.md"
+          "runbook/prompts/write-report.md",
+          "web/meta/{date}.json",
+          "appendices/estimate-code-map.json",
+          "tools/register_estimate.py",
+          "skills/runbook-operations-ops/SKILL.md"
         ],
         "gates": [],
         "tests": [
           "tests/test_runbook_engine.sh",
-          "tests/test_write_prompt.py"
+          "tests/test_write_prompt.py",
+          "tests/test_g030_code_spaces.py"
         ]
       },
       "on_fail": "stop",
@@ -910,10 +925,15 @@
         "sections/20-lexicon.md",
         "sections/20-examples.md",
         "cumulative-2026/daily/{date}.json",
-        "feeds/feeds-{date}.md"
+        "feeds/feeds-{date}.md",
+        "web/meta/{date}.json",
+        "appendices/estimate-code-map.json",
+        "tools/register_estimate.py",
+        "skills/runbook-operations-ops/SKILL.md"
       ],
       "writes": [
-        "reports/{date}-sectioned.md"
+        "reports/{date}-sectioned.md",
+        "appendices/estimate-code-map.json"
       ],
       "command": []
     },
@@ -1747,7 +1767,9 @@
           "tests/test_final_gate_vs_manifest.py",
           "tests/test_manifest_commands.py",
           "tests/test_gate_verdict.py",
-          "tests/test_content_fidelity_units.py"
+          "tests/test_content_fidelity_units.py",
+          "tests/test_write_prompt.py",
+          "tests/test_g030_code_spaces.py"
         ]
       },
       "on_fail": "stop",

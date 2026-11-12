@@ -1,0 +1,211 @@
+=== /tmp/g030-red-2026-11-12/g030-test-scoped-v2.txt ===
+SHA256=ff5ed5377877dedbed46ab7085736803f5f4c67b5b6f3637d69b29a9b9bf8c0e
+FF.F                                                                     [100%]
+=================================== FAILURES ===================================
+_________________ test_current_report_has_registered_estimates _________________
+
+    def test_current_report_has_registered_estimates() -> None:
+        result = run_validator()
+>       assert result.returncode in (0, 1), result.stdout + result.stderr
+E       AssertionError: === بوابة فصل فضاءات الرموز — 2026-11-12 ===
+E           EST- في النص: 4 · مسجَّل: 93
+E           MN- في النص: 3 · مسجَّل: 425
+E           ✘ رموز تقديرات غير مسجَّلة في estimate-code-map: ['EST-2026-11-12-01', 'EST-2026-11-12-02']
+E           النتيجة: مخالفة مانعة — لا تسليم حتى الإصلاح.
+E
+E       assert 2 in (0, 1)
+E        +  where 2 = CompletedProcess(args=['/usr/bin/python3', '/home/ubuntu/mda-marine-system/brain/validators/check_code_spaces.py', '--...te-code-map: ['EST-2026-11-12-01', 'EST-2026-11-12-02']\n  النتيجة: مخالفة مانعة — لا تسليم حتى الإصلاح.\n", stderr='').returncode
+
+tests/test_g030_code_spaces.py:32: AssertionError
+______________ test_current_estimates_have_one_registered_meaning ______________
+
+    def test_current_estimates_have_one_registered_meaning() -> None:
+        report = REPORT.read_text(encoding="utf-8")
+        meta = json.loads(META.read_text(encoding="utf-8"))
+        code_map = json.loads(CODE_MAP.read_text(encoding="utf-8"))["codes"]
+        used = sorted(
+            code
+            for code in set(re.findall(r"EST-\d{4}-\d{2}-\d{2}-\d{2}", report))
+            if code.startswith(f"EST-{DATE}-")
+        )
+        assert used, f"لا توجد رموز EST في تقرير {DATE}"
+        for code in used:
+>           assert code in code_map, f"غير مسجل: {code}"
+E           AssertionError: غير مسجل: EST-2026-11-12-01
+E           assert 'EST-2026-11-12-01' in {'EST-2026-10-19-01': {'confidence': 'مرجّح (55–80%)', 'first_seen': '2026-10-19', 'reliability': 'UKMTO A/2 · NAVAREA...een': '2026-10-19', 'reliability': 'منصة (يُذكر اسم المصدر) C/3', 'section': 'قراءة الموقف وتحليل المؤشرات', ...}, ...}
+
+tests/test_g030_code_spaces.py:47: AssertionError
+______________ test_g030_is_connected_to_manifest_and_g001_runner ______________
+
+    def test_g030_is_connected_to_manifest_and_g001_runner() -> None:
+        manifest = json.loads((ROOT / "runbook" / "runbook.json").read_text(encoding="utf-8"))
+        step = next(item for item in manifest["steps"] if item["id"] == "G030")
+        assert "tests/test_g030_code_spaces.py" in step["links"]["tests"]
+        assert "validators/check_code_spaces.py" in step["links"]["files"]
+        assert "appendices/estimate-code-map.json" in step["links"]["files"]
+        runner = (ROOT / "tests" / "run_checks.sh").read_text(encoding="utf-8")
+>       assert "tests/test_g030_code_spaces.py" in runner, "اختبار G030 ليس موصولًا فعليًا ببوابة G001"
+E       AssertionError: اختبار G030 ليس موصولًا فعليًا ببوابة G001
+E       assert 'tests/test_g030_code_spaces.py' in '#!/usr/bin/env bash\n# اختبارات البوابات — تُشغَّل بعد كل إصلاح: bash tests/run_checks.sh\n# الغرض: إثبات أن سلوك الب...\necho "----- الحصيلة -----"\nprintf \'  نجح: %s · فشل: %s\\n\' "$PASS" "$FAIL"\n[ "$FAIL" -eq 0 ] || exit 1\nexit 0\n'
+
+tests/test_g030_code_spaces.py:73: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_g030_code_spaces.py::test_current_report_has_registered_estimates
+FAILED tests/test_g030_code_spaces.py::test_current_estimates_have_one_registered_meaning
+FAILED tests/test_g030_code_spaces.py::test_g030_is_connected_to_manifest_and_g001_runner
+3 failed, 1 passed in 0.16s
+
+=== /tmp/g030-red-2026-11-12/write-prompt-scoped.txt ===
+SHA256=3a1f27ab27d8b991714be60667603c7bcb7fae569e8ae33688cebf31ca61408a
+  ✔ مختصر الكتابة مضمَّن نصًّا
+  ✔ المعجم مضمَّن نصًّا (أول سطر وآخره)
+  ✔ الأمثلة مضمَّنة نصًّا
+  ✔ كل عناوين الأقسام المكتوبة (15) في البرومت
+  ✔ لا رمز {{...}} متروك بلا تصيير
+  ✔ برومت المحرر الآلي ليس من قراءات الكاتب
+  ✔ التاريخ مُستبدَل
+  ✘ W010 يقرأ ملف الواجهة وخريطة الرموز وأداة التسجيل
+  ✘ W010 يعلن خريطة التقديرات ضمن مخرجاته
+  ✘ إتمام W010 يفشل مغلقًا حتى تنجح أداة تسجيل EST
+  ✘ برومت W010 يطلب التسجيل والتحقق قبل الإتمام
+  ✘ اختبار G030 الفعلي موصول بمشغل G001
+
+=== /tmp/g030-register-before-2026-11-12.txt ===
+SHA256=8f01c5e6d41995d76ed4180e9d74a3778f6bfda40df1e4ac9a6d6431704e2019
+✘ رمز تقدير غير مسجَّل: EST-2026-11-12-01
+✘ رمز تقدير غير مسجَّل: EST-2026-11-12-02
+
+=== /home/ubuntu/terminal_full_output/2026-11-12_19-26-50_451758_3225256.txt ===
+SHA256=823e4c8d8348282d7736716b6686263886d47bb804aead7e853a0e139f5dbb41
+# Terminal Full Output
+# Terminal: g030-green-tests-correct-runners
+# Command: set -euo pipefail
+B=/home/ubuntu/mda-marine-system/brain
+cd "$B"
+export PYTHONDONTWRITEBYTECODE=1 BRAIN_DIR="$B" D=2026-11-12
+python3 -B -m pytest -p no:cacheprovider -q tests/test_g030_code_spaces.py tests/test_runbook_hardening.py
+python3 -B tests/test_write_prompt.py
+python3 -B tests/test_register_estimate_check.py
+bash tests/test_runbook_engine.sh
+python3 -B tests/test_manifest_commands.py
+python3 -B tools/runbook.py verify
+printf '\nFINAL_TEST_ARTIFACTS\n'
+printf 'current_map_check='; python3 -B tools/register_estimate.py --check --date 2026-11-12
+sha256sum runbook/runbook.json docs/runbook.md runbook/prompts/write-report.md \
+  tests/run_checks.sh tests/test_g030_code_spaces.py tests/test_write_prompt.py \
+  reports/2026-11-12-sectioned.md appendices/estimate-code-map.json
+# PID: 3225256
+# Timestamp: 2026-11-12_19-26-50.451758
+# Original Length: 5074 characters
+# ----------------------------------------
+
+[32mubuntu@sandbox:~$ [0mset -euo pipefail
+B=/home/ubuntu/mda-marine-system/brain
+cd "$B"
+export PYTHONDONTWRITEBYTECODE=1 BRAIN_DIR="$B" D=2026-11-12
+python3 -B -m pytest -p no:cacheprovider -q tests/test_g030_code_spaces.py tests/test_runbook_hardening.py
+python3 -B tests/test_write_prompt.py
+python3 -B tests/test_register_estimate_check.py
+bash tests/test_runbook_engine.sh
+python3 -B tests/test_manifest_commands.py
+python3 -B tools/runbook.py verify
+printf '\nFINAL_TEST_ARTIFACTS\n'
+printf 'current_map_check='; python3 -B tools/register_estimate.py --check --date 2026-11-12
+sha256sum runbook/runbook.json docs/runbook.md runbook/prompts/write-report.md \
+  tests/run_checks.sh tests/test_g030_code_spaces.py tests/test_write_prompt.py \
+  reports/2026-11-12-sectioned.md appendices/estimate-code-map.json
+[32m.[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31m                                                          [100%]
+[0m=================================== FAILURES ===================================
+[31m[1m______________ test_current_estimates_have_one_registered_meaning ______________
+[0m    [94mdef[39;49;00m [92mtest_current_estimates_have_one_registered_meaning[39;49;00m() -> [94mNone[39;49;00m:
+[90m[39;49;00m        report = REPORT.read_text(encoding=[33m"[39;49;00m[33mutf-8[39;49;00m[33m"[39;49;00m)
+[90m[39;49;00m        meta = json.loads(META.read_text(encoding=[33m"[39;49;00m[33mutf-8[39;49;00m[33m"[39;49;00m))
+[90m[39;49;00m        code_map = json.loads(CODE_MAP.read_text(encoding=[33m"[39;49;00m[33mutf-8[39;49;00m[33m"[39;49;00m))[[33m"[39;49;00m[33mcodes[39;49;00m[33m"[39;49;00m]
+[90m[39;49;00m        used = [96msorted[39;49;00m(
+[90m[39;49;00m            code
+[90m[39;49;00m            [94mfor[39;49;00m code [95min[39;49;00m [96mset[39;49;00m(re.findall([33mr[39;49;00m[33m"[39;49;00m[33mEST-[39;49;00m[33m\[39;49;00m[33md[39;49;00m[33m{4}[39;49;00m[33m-[39;49;00m[33m\[39;49;00m[33md[39;49;00m[33m{2}[39;49;00m[33m-[39;49;00m[33m\[39;49;00m[33md[39;49;00m[33m{2}[39;49;00m[33m-[39;49;00m[33m\[39;49;00m[33md[39;49;00m[33m{2}[39;49;00m[33m"[39;49;00m, report))
+[90m[39;49;00m            [94mif[39;49;00m code.startswith([33mf[39;49;00m[33m"[39;49;00m[33mEST-[39;49;00m[33m{[39;49;00mDATE[33m}[39;49;00m[33m-[39;49;00m[33m"[39;49;00m)
+[90m[39;49;00m        )
+[90m[39;49;00m        [94massert[39;49;00m used, [33mf[39;49;00m[33m"[39;49;00m[33mلا توجد رموز EST في تقرير [39;49;00m[33m{[39;49;00mDATE[33m}[39;49;00m[33m"
+[39;49;00m[90m[39;49;00m        [94mfor[39;49;00m code [95min[39;49;00m used:
+[90m[39;49;00m            [94massert[39;49;00m code [95min[39;49;00m code_map, [33mf[39;49;00m[33m"[39;49;00m[33mغير مسجل: [39;49;00m[33m{[39;49;00mcode[33m}[39;49;00m[33m"
+[39;49;00m[90m[39;49;00m            lines = [line [94mfor[39;49;00m line [95min[39;49;00m report.splitlines() [94mif[39;49;00m code [95min[39;49;00m line]
+[90m[39;49;00m            [94massert[39;49;00m [96mlen[39;49;00m(lines) == [94m1[39;49;00m, [33mf[39;49;00m[33m"[39;49;00m[33mمعانٍ/مواضع متعددة للرمز [39;49;00m[33m{[39;49;00mcode[33m}[39;49;00m[33m: [39;49;00m[33m{[39;49;00mlines[33m}[39;49;00m[33m"
+[39;49;00m[90m[39;49;00m            statement = [96mstr[39;49;00m(code_map[code].get([33m"[39;49;00m[33mstatement[39;49;00m[33m"[39;49;00m, [33m"[39;49;00m[33m"[39;49;00m)).strip()
+[90m[39;49;00m>           [94massert[39;49;00m statement [95mand[39;49;00m statement [95min[39;49;00m lines[[94m0[39;49;00m], [33mf[39;49;00m[33m"[39;49;00m[33mمعنى السجل لا يطابق موضع [39;49;00m[33m{[39;49;00mcode[33m}[39;49;00m[33m: [39;49;00m[33m{[39;49;00mstatement[33m!r}[39;49;00m[33m"
+[39;49;00m[90m[39;49;00m[1m[31mE           AssertionError: معنى السجل لا يطابق موضع EST-2026-11-12-02: 'البلاغان عن واقعتين منفصلتين.'
+[0m[1m[31mE           assert ('البلاغان عن واقعتين منفصلتين.' and 'البلاغان عن واقعتين منفصلتين.' in '| البلاغان عن واقعتين منفصلتين | اختلاف التاريخ والتصنيف ورقم البلاغ. | لا يظهر النص الكامل الذي يحسم تفاصيل كل واقعة. | EST-2026-11-12-02 — لا يمكن قياس الاحتمال من المقتطفات. |')
+[0m[1m[31mtests/test_g030_code_spaces.py[0m:53: AssertionError
+[36m[1m=========================== short test summary info ============================
+[0m[31mFAILED[0m tests/test_g030_code_spaces.py::[1mtest_current_estimates_have_one_registered_meaning[0m - AssertionError: معنى السجل لا يطابق موضع EST-2026-11-12-02: 'البلاغان عن وا...
+[31m[31m[1m1 failed[0m, [32m14 passed[0m[31m in 2.56s
+
+=== /tmp/g030-precommit-current.txt ===
+SHA256=b7efc528d643d4975ea2183bfaab2809aee7a17cdb8fafabcb7deb40be36fcde
+...............                                                          [100%]
+15 passed in 2.41s
+  ✔ مختصر الكتابة مضمَّن نصًّا
+  ✔ المعجم مضمَّن نصًّا (أول سطر وآخره)
+  ✔ الأمثلة مضمَّنة نصًّا
+  ✔ كل عناوين الأقسام المكتوبة (15) في البرومت
+  ✔ لا رمز {{...}} متروك بلا تصيير
+  ✔ برومت المحرر الآلي ليس من قراءات الكاتب
+  ✔ التاريخ مُستبدَل
+  ✔ W010 يقرأ ملف الواجهة وخريطة الرموز وأداة التسجيل
+  ✔ W010 يعلن خريطة التقديرات ضمن مخرجاته
+  ✔ إتمام W010 يفشل مغلقًا حتى تنجح أداة تسجيل EST
+  ✔ برومت W010 يطلب التسجيل والتحقق قبل الإتمام
+  ✔ اختبار G030 الفعلي موصول بمشغل G001
+  ✔ رمز مسجَّل يُقبل
+  ✔ رمز غير مسجَّل يُرفض
+  ✔ تقرير بلا تقديرات يمرّ
+✔ 4 رمز تقدير مسجّل في تقرير 2026-11-12
+=== بوابة فصل فضاءات الرموز — 2026-11-12 ===
+  EST- في النص: 4 · مسجَّل: 95
+  MN- في النص: 3 · مسجَّل: 425
+  النتيجة: اجتياز — الفضاءان مفصولان ولا رمز بلا سجل.
+✔ المانيفست متسق: كل خطوة مربوطة، وكل ملف متصل بخطوة أو قسم أو وثيقة، وكل أداة يستدعيها كود أو مسجَّلة يدوية بسبب
+
+=== /tmp/g030-verify-final.txt ===
+SHA256=6211e45398bcee7938d095ee01cbc37abdc09a190935e9792785716c0f08bf1c
+✔ المانيفست متسق: كل خطوة مربوطة، وكل ملف متصل بخطوة أو قسم أو وثيقة، وكل أداة يستدعيها كود أو مسجَّلة يدوية بسبب
+
+=== /tmp/g030-empty-estimates-red.txt ===
+SHA256=c64cd7f2166d59141c1242ca79723ba6f1461b390f60ff192a8b874ea08d7277
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___________________ test_day_without_new_estimates_is_valid ____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-327/test_day_without_new_estimates0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f0635747d10>
+
+    def test_day_without_new_estimates_is_valid(tmp_path: Path, monkeypatch) -> None:
+        report, meta, code_map = [tmp_path / name for name in ("report.md", "meta.json", "map.json")]
+        report.write_text("# تقرير بلا تقدير جديد\n", encoding="utf-8")
+        meta.write_text('{"hypotheses": []}', encoding="utf-8")
+        code_map.write_text('{"codes": {}}', encoding="utf-8")
+        monkeypatch.setitem(globals(), "REPORT", report)
+        monkeypatch.setitem(globals(), "META", meta)
+        monkeypatch.setitem(globals(), "CODE_MAP", code_map)
+>       test_current_estimates_have_one_registered_meaning()
+
+tests/test_g030_code_spaces.py:68:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def test_current_estimates_have_one_registered_meaning() -> None:
+        report = REPORT.read_text(encoding="utf-8")
+        meta = json.loads(META.read_text(encoding="utf-8"))
+        code_map = json.loads(CODE_MAP.read_text(encoding="utf-8"))["codes"]
+        used = sorted(
+            code
+            for code in set(re.findall(r"EST-\d{4}-\d{2}-\d{2}-\d{2}", report))
+            if code.startswith(f"EST-{DATE}-")
+        )
+>       assert used, f"لا توجد رموز EST في تقرير {DATE}"
+E       AssertionError: لا توجد رموز EST في تقرير 2026-11-12
+E       assert []
+
+tests/test_g030_code_spaces.py:47: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_g030_code_spaces.py::test_day_without_new_estimates_is_valid
+1 failed, 5 deselected in 0.04s

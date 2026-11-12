@@ -254,6 +254,7 @@ echo "15) التسليم: النشر وتلغرام والتقدير"
 t "سكربتات التسليم (بلا إرسال)" bash tests/test_delivery_scripts.sh
 t "لا نشر خارج المحرّك" bash tests/test_no_publish_without_runbook.sh
 t "رموز EST- مسجَّلة" python3 tests/test_register_estimate_check.py
+t "G030: رموز EST الحالية ومعناها واختبار المنع السالب" python3 tests/test_g030_code_spaces.py
 
 echo "16) مطابقة عناوين PDF (قلب لام-ألف)"
 t "heading_present" python3 tests/test_pdf_heading_match.py
