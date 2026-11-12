@@ -26,13 +26,14 @@
    "label": "البلاغات الرسمية الظاهرة في متن اليوم",
    "tag": "Z1",
    "value": "2",
-   "detail": "201-26: مصنف هجومًا · 202-26: نشاط مشبوه يشمل ناقلة؛ البلاغان مؤرخان في 10 و11/11.",
+   "detail": "201-26: Attack · 202-26: تحذير عن نشاط مشبوه؛ داخل فترة التقرير",
    "note": "دفتر 12/11 يسجل لا واقعة جديدة. لا تظهر هوية السفينة أو نتيجة أي من البلاغين.",
-   "source": "UKMTO — الحوادث الأخيرة؛ UKMTO — التحذيرات 2026؛ حساب UKMTO الرسمي على X",
-   "accent": "warn",
+   "source": "سجل الوقائع الرسمي UKMTO",
+   "accent": "ok",
    "updated": "2026-11-11",
    "title_en": "Monitored UKMTO reports",
-   "tag_en": "Z1"
+   "tag_en": "Z1",
+   "cumulative": 222
   },
   {
    "id": "qualifying-incidents",
@@ -47,7 +48,8 @@
    "note": "لا يسجل دفتر اليوم واقعة مؤهلة بتاريخ وقوع 12/11.",
    "source": "web/zones/{date}.json · counter",
    "accent": "ok",
-   "updated": "2026-11-12"
+   "updated": "2026-11-11",
+   "cumulative": 168
   },
   {
    "id": "unconfirmed-narratives",
@@ -55,14 +57,15 @@
    "title": "روايات لم تتأكد",
    "title_en": "Unconfirmed accounts",
    "label": "روايات لم تتأكد",
-   "tag": "تُذكر ولا تُحتسب",
-   "tag_en": "Mentioned but not counted",
+   "tag": "التأهل للمعيار لا يعني الإثبات",
+   "tag_en": "Meeting the counting criterion does not establish confirmation",
    "value": "0",
-   "detail": "لا روايات عن واقعة جديدة مسجلة في دفتر 12/11.",
+   "detail": "0 روايات · منها 0 مستوفية لمعيار الاحتساب · لم تثبت أيٌّ منها",
    "note": "سجل الحالة «لا واقعة» ليس رواية عن حادث ولا يُحتسب واقعة.",
-   "source": "cumulative-2026/daily/2026-11-12.json · سجل اليوم",
-   "accent": "ok",
-   "updated": "2026-11-12"
+   "source": "web/zones/{date}.json · counter",
+   "accent": "info",
+   "updated": "2026-11-09",
+   "cumulative": 33
   },
   {
    "id": "proven-zones",
@@ -73,7 +76,7 @@
    "tag": "Z2 · Z3 · Z4",
    "tag_en": "Z2 · Z3 · Z4",
    "value": "0",
-   "detail": "لا توجد وقائع مثبتة في هذه القطاعات خلال الفترة.",
+   "detail": "لا توجد وقائع مثبتة في هذه القطاعات خلال الفترة",
    "note": "مستويات القطاعات Z2–Z5 منخفضة وفق بطاقة القطاعات المحسوبة لليوم.",
    "source": "web/zones/{date}.json · Z2–Z4",
    "accent": "info",
@@ -87,8 +90,8 @@
    "label": "سجل الحوادث المؤكدة من IMO",
    "tag": "بطاقة دائمة",
    "tag_en": "Permanent card",
-   "value": "غير متاح",
-   "detail": "الرصيد المحفوظ 128 حادثة مؤكدة حتى 03/11/2026؛ ليس حصيلة 12/11.",
+   "value": "0",
+   "detail": "لا زيادة بين التحديثين؛ الإجمالي 128 حادثة مؤكدة حتى 03/11/2026",
    "note": "تعذّر تحديث سجل IMO اليوم؛ لا يُطابق الرصيد ببلاغي UKMTO دون إضافة رسمية ظاهر.",
    "source": "appendices/imo-incidents.json + https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
    "source_url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
@@ -99,13 +102,13 @@
   {
    "id": "imo-seafarer-deaths",
    "row": 2,
-   "title": "وفيات البحّارة لدى IMO",
+   "title": "أعداد الوفيات من IMO",
    "title_en": "Seafarer deaths recorded by IMO",
-   "label": "وفيات البحّارة لدى IMO",
+   "label": "أعداد الوفيات من IMO",
    "tag": "بطاقة دائمة",
    "tag_en": "Permanent card",
-   "value": "غير متاح",
-   "detail": "الرصيد المحفوظ 24 وفاة بحّار مؤكدة حتى 03/11/2026؛ ليس حصيلة 12/11.",
+   "value": "0",
+   "detail": "لا زيادة بين التحديثين؛ الإجمالي 24 وفاة بحّار مؤكدة حتى 03/11/2026",
    "note": "تعذّر تحديث سجل IMO اليوم؛ لا تُستنتج زيادة أو عدمها من تعذّر الوصول.",
    "source": "appendices/imo-incidents.json + https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
    "source_url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
@@ -498,5 +501,131 @@
     "delta": "0"
    }
   ]
- }
+ },
+ "official_cards": [
+  {
+   "id": "imo-seafarer-deaths",
+   "title": "أعداد الوفيات من IMO",
+   "title_en": "IMO seafarer fatalities",
+   "basis": "رسمي — قائمة IMO للوقائع المؤكدة",
+   "basis_en": "Official — IMO confirmed incidents list",
+   "source_label": "appendices/imo-incidents.json + https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+   "source_label_en": "IMO — confirmed incidents list",
+   "layers": {
+    "daily": {
+     "label": "عدد اليوم",
+     "label_en": "Today",
+     "state": "shown",
+     "value": "0",
+     "value_en": "0",
+     "source": "قائمة IMO الرسمية؛ الفرق بين القراءة الحالية والسابقة = 0",
+     "source_en": "Official IMO list; difference from the previous reading = 0"
+    },
+    "cumulative": {
+     "label": "المجموع منذ 28 فبراير 2026",
+     "label_en": "Total since 28 February 2026",
+     "value": "24",
+     "value_en": "24",
+     "source": "IMO — 24 وفاة بحّار مؤكدة حتى 03/11/2026",
+     "source_en": "IMO — 24 confirmed seafarer deaths as at 03/11/2026"
+    },
+    "updated": {
+     "label": "آخر تحديث للمصدر",
+     "label_en": "Source last updated",
+     "value": "03/11/2026",
+     "value_en": "03/11/2026",
+     "source": "القائمة الرسمية بتاريخ بيانات 03/11/2026",
+     "source_en": "Official list as at 03/11/2026"
+    }
+   },
+   "source_url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx"
+  },
+  {
+   "id": "imo-transit-september-2026",
+   "title": "العبور اليومي عبر مضيق هرمز",
+   "title_en": "Daily transits through the Strait of Hormuz",
+   "basis": "رسمي — بيانات IMO الشهرية للعبور",
+   "basis_en": "Official — IMO monthly transit data",
+   "source_label": "IMO — بيانات العبور الرسمية",
+   "source_label_en": "IMO — official transit data",
+   "badges": [
+    "آخر تحديث سبتمبر 2026"
+   ],
+   "badges_en": [
+    "Last updated September 2026"
+   ],
+   "constraint": "أوقفت المنظمة تجميع بيانات العبور اليومية",
+   "constraint_en": "IMO no longer compiles data on daily ship transits",
+   "layers": {
+    "daily": {
+     "label": "عدد اليوم",
+     "label_en": "Today",
+     "state": "no_coverage",
+     "value": "لا تغطية",
+     "value_en": "No coverage",
+     "source": "لا قراءة رسمية ليوم 31 أكتوبر 2026",
+     "source_en": "No official reading for 31 October 2026"
+    },
+    "cumulative": {
+     "label": "المجموع منذ 28 فبراير 2026",
+     "label_en": "Total since 28 February 2026",
+     "state": "no_coverage",
+     "value": "لا تغطية",
+     "value_en": "No coverage",
+     "source": "المنظمة أوقفت تجميع البيانات اليومية؛ لا يُحسب مجموع تراكمي",
+     "source_en": "IMO stopped compiling daily data; no cumulative total is calculated"
+    },
+    "updated": {
+     "label": "آخر تحديث للمصدر",
+     "label_en": "Source last updated",
+     "value": "سبتمبر 2026",
+     "value_en": "September 2026",
+     "source": "الرسم الرسمي المتاح لشهر سبتمبر 2026",
+     "source_en": "Official chart available for September 2026"
+    }
+   },
+   "period": "سبتمبر 2026",
+   "period_en": "September 2026",
+   "average": "15.6",
+   "average_en": "15.6",
+   "high": "25.8 (23 سبتمبر)",
+   "high_en": "25.8 (23 September)",
+   "low": "8.0 (3 سبتمبر)",
+   "low_en": "8.0 (3 September)"
+  },
+  {
+   "id": "imo-confirmed-incidents",
+   "title": "سجل الحوادث المؤكدة من IMO",
+   "title_en": "IMO confirmed incidents log",
+   "basis": "رسمي — قائمة IMO للحوادث المؤكدة على سفن تجارية",
+   "basis_en": "Official — IMO confirmed incidents on commercial ships",
+   "source_label": "appendices/imo-incidents.json + https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+   "source_label_en": "IMO — confirmed incidents log",
+   "layers": {
+    "daily": {
+     "label": "عدد اليوم",
+     "value": "0",
+     "source": "قائمة IMO الرسمية؛ الفرق بين القراءة الحالية والسابقة = 0",
+     "state": "shown",
+     "value_en": "0",
+     "source_en": "Official IMO list; difference from the previous reading = 0"
+    },
+    "cumulative": {
+     "label": "المجموع منذ 28 فبراير 2026",
+     "value": "128",
+     "source": "IMO — 128 حادثة مؤكدة حتى 03/11/2026",
+     "value_en": "128",
+     "source_en": "IMO — 128 confirmed incidents as at 03/11/2026"
+    },
+    "updated": {
+     "label": "آخر تحديث للمصدر",
+     "value": "03/11/2026",
+     "source": "القائمة الرسمية بتاريخ بيانات 03/11/2026",
+     "value_en": "03/11/2026",
+     "source_en": "Official list as at 03/11/2026"
+    }
+   },
+   "source_url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx"
+  }
+ ]
 }
