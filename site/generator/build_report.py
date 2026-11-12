@@ -2219,7 +2219,7 @@ def render_intel_review_notes(meta: dict, inline) -> str:
     if not isinstance(meta.get("intel_analysis"), dict):
         return ""
     return (
-        '<p class="rmk"><strong>التحقق المستقل من المصادر:</strong> '
+        '<p class="rmk"><strong>التحقق من المصادر:</strong> '
         + inline("الفصل بين الوقائع والتقديرات وربط التقديرات بسند المصدر.")
         + "</p>"
     )
