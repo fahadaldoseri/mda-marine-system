@@ -1,0 +1,156 @@
+=== g036-red-before.txt SHA256 d371bb2879d8507c9679a1c58bc0007b7a7eaed2f926a63a48aa79c1fb262b7c ===
+  • «لا تؤكد» → البديل اليومي: «لا تؤكد، لم تؤكد»
+النتيجة: 1 لفظًا يحتاج تبديلًا — مانع (القائمة معتمدة)
+elapsed_seconds=0.129212
+
+=== g036-tests-red.txt SHA256 b22d1077af399ee2b9a54c1403e3adb43d2ef4b8413fe547f9ac3c5b902eedda ===
+F..FFF.F                                                                 [100%]
+=================================== FAILURES ===================================
+______________ test_g036_current_report_uses_approved_daily_term _______________
+
+    def test_g036_current_report_uses_approved_daily_term() -> None:
+        result = run_validator(REPORT)
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError:   • «لا تؤكد» → البديل اليومي: «لا تؤكد، لم تؤكد»
+E         النتيجة: 1 لفظًا يحتاج تبديلًا — مانع (القائمة معتمدة)
+E
+E       assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['/usr/bin/python3', '/home/ubuntu/mda-marine-system/brain/validators/check_vocabulary.py', '--m... • «لا تؤكد» → البديل اليومي: «لا تؤكد، لم تؤكد»\nالنتيجة: 1 لفظًا يحتاج تبديلًا — مانع (القائمة معتمدة)\n', stderr='').returncode
+
+tests/test_g036_vocabulary_contract.py:32: AssertionError
+____________ test_g036_respects_individual_entry_status[rejected-0] ____________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-329/test_g036_respects_individual_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe54cf34680>
+capsys = <_pytest.capture.CaptureFixture object at 0x7fe54cf34770>
+state = 'rejected', expected = 0
+
+    @pytest.mark.parametrize("state,expected", [
+        ("rejected", 0), ("watch", 1), ("proposed", 1), ("approved", 2), ("unknown", 2),
+    ])
+    def test_g036_respects_individual_entry_status(tmp_path, monkeypatch, capsys, state, expected):
+        spec = importlib.util.spec_from_file_location("g036_status_probe", VALIDATOR)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        registry = tmp_path / "registry.json"
+        registry.write_text(json.dumps({"status": "canonical", "entries": [
+            {"term": "لا تؤكد", "plain": ["لم تؤكد"], "status": state},
+        ]}, ensure_ascii=False), encoding="utf-8")
+        report = tmp_path / "report.md"
+        report.write_text("لا تؤكد المادة وقوع الحادث.\n", encoding="utf-8")
+        monkeypatch.setattr(module, "VOCAB", registry)
+        monkeypatch.setattr(sys, "argv", [str(VALIDATOR), "--md", str(report)])
+>       assert module.main() == expected
+E       AssertionError: assert 2 == 0
+E        +  where 2 = <function main at 0x7fe54cf7e660>()
+E        +    where <function main at 0x7fe54cf7e660> = <module 'g036_status_probe' from '/home/ubuntu/mda-marine-system/brain/validators/check_vocabulary.py'>.main
+
+tests/test_g036_vocabulary_contract.py:66: AssertionError
+----------------------------- Captured stdout call -----------------------------
+  • «لا تؤكد» → البديل اليومي: «لم تؤكد»
+النتيجة: 1 لفظًا يحتاج تبديلًا — مانع (القائمة معتمدة)
+_____________ test_g036_respects_individual_entry_status[watch-1] ______________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-329/test_g036_respects_individual_1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe54cf36e40>
+capsys = <_pytest.capture.CaptureFixture object at 0x7fe54cf36bd0>
+state = 'watch', expected = 1
+
+    @pytest.mark.parametrize("state,expected", [
+        ("rejected", 0), ("watch", 1), ("proposed", 1), ("approved", 2), ("unknown", 2),
+    ])
+    def test_g036_respects_individual_entry_status(tmp_path, monkeypatch, capsys, state, expected):
+        spec = importlib.util.spec_from_file_location("g036_status_probe", VALIDATOR)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        registry = tmp_path / "registry.json"
+        registry.write_text(json.dumps({"status": "canonical", "entries": [
+            {"term": "لا تؤكد", "plain": ["لم تؤكد"], "status": state},
+        ]}, ensure_ascii=False), encoding="utf-8")
+        report = tmp_path / "report.md"
+        report.write_text("لا تؤكد المادة وقوع الحادث.\n", encoding="utf-8")
+        monkeypatch.setattr(module, "VOCAB", registry)
+        monkeypatch.setattr(sys, "argv", [str(VALIDATOR), "--md", str(report)])
+>       assert module.main() == expected
+E       AssertionError: assert 2 == 1
+E        +  where 2 = <function main at 0x7fe54cf7f240>()
+E        +    where <function main at 0x7fe54cf7f240> = <module 'g036_status_probe' from '/home/ubuntu/mda-marine-system/brain/validators/check_vocabulary.py'>.main
+
+tests/test_g036_vocabulary_contract.py:66: AssertionError
+----------------------------- Captured stdout call -----------------------------
+  • «لا تؤكد» → البديل اليومي: «لم تؤكد»
+النتيجة: 1 لفظًا يحتاج تبديلًا — مانع (القائمة معتمدة)
+____________ test_g036_respects_individual_entry_status[proposed-1] ____________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-329/test_g036_respects_individual_2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe54cf37740>
+capsys = <_pytest.capture.CaptureFixture object at 0x7fe54cf37050>
+state = 'proposed', expected = 1
+
+    @pytest.mark.parametrize("state,expected", [
+        ("rejected", 0), ("watch", 1), ("proposed", 1), ("approved", 2), ("unknown", 2),
+    ])
+    def test_g036_respects_individual_entry_status(tmp_path, monkeypatch, capsys, state, expected):
+        spec = importlib.util.spec_from_file_location("g036_status_probe", VALIDATOR)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        registry = tmp_path / "registry.json"
+        registry.write_text(json.dumps({"status": "canonical", "entries": [
+            {"term": "لا تؤكد", "plain": ["لم تؤكد"], "status": state},
+        ]}, ensure_ascii=False), encoding="utf-8")
+        report = tmp_path / "report.md"
+        report.write_text("لا تؤكد المادة وقوع الحادث.\n", encoding="utf-8")
+        monkeypatch.setattr(module, "VOCAB", registry)
+        monkeypatch.setattr(sys, "argv", [str(VALIDATOR), "--md", str(report)])
+>       assert module.main() == expected
+E       AssertionError: assert 2 == 1
+E        +  where 2 = <function main at 0x7fe54cf7f6a0>()
+E        +    where <function main at 0x7fe54cf7f6a0> = <module 'g036_status_probe' from '/home/ubuntu/mda-marine-system/brain/validators/check_vocabulary.py'>.main
+
+tests/test_g036_vocabulary_contract.py:66: AssertionError
+----------------------------- Captured stdout call -----------------------------
+  • «لا تؤكد» → البديل اليومي: «لم تؤكد»
+النتيجة: 1 لفظًا يحتاج تبديلًا — مانع (القائمة معتمدة)
+____________ test_g036_respects_individual_entry_status[unknown-2] _____________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-329/test_g036_respects_individual_4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fe54cf371d0>
+capsys = <_pytest.capture.CaptureFixture object at 0x7fe54cf35460>
+state = 'unknown', expected = 2
+
+    @pytest.mark.parametrize("state,expected", [
+        ("rejected", 0), ("watch", 1), ("proposed", 1), ("approved", 2), ("unknown", 2),
+    ])
+    def test_g036_respects_individual_entry_status(tmp_path, monkeypatch, capsys, state, expected):
+        spec = importlib.util.spec_from_file_location("g036_status_probe", VALIDATOR)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        registry = tmp_path / "registry.json"
+        registry.write_text(json.dumps({"status": "canonical", "entries": [
+            {"term": "لا تؤكد", "plain": ["لم تؤكد"], "status": state},
+        ]}, ensure_ascii=False), encoding="utf-8")
+        report = tmp_path / "report.md"
+        report.write_text("لا تؤكد المادة وقوع الحادث.\n", encoding="utf-8")
+        monkeypatch.setattr(module, "VOCAB", registry)
+        monkeypatch.setattr(sys, "argv", [str(VALIDATOR), "--md", str(report)])
+        assert module.main() == expected
+        output = capsys.readouterr().out
+        if state == "unknown":
+>           assert "حالة غير معروفة" in output
+E           AssertionError: assert 'حالة غير معروفة' in '  • «لا تؤكد» → البديل اليومي: «لم تؤكد»\nالنتيجة: 1 لفظًا يحتاج تبديلًا — مانع (القائمة معتمدة)\n'
+
+tests/test_g036_vocabulary_contract.py:69: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_g036_vocabulary_contract.py::test_g036_current_report_uses_approved_daily_term
+FAILED tests/test_g036_vocabulary_contract.py::test_g036_respects_individual_entry_status[rejected-0]
+FAILED tests/test_g036_vocabulary_contract.py::test_g036_respects_individual_entry_status[watch-1]
+FAILED tests/test_g036_vocabulary_contract.py::test_g036_respects_individual_entry_status[proposed-1]
+FAILED tests/test_g036_vocabulary_contract.py::test_g036_respects_individual_entry_status[unknown-2]
+5 failed, 3 passed in 0.29s
+
+=== g036-tests-green.txt SHA256 10451cf472a048760cedde8c99bb5ac550eae84b228e24f6cdb24451efbc21fe ===
+...........                                                              [100%]
+11 passed in 0.25s
+
+=== g036-gate-green.txt SHA256 82ef8dfc23ac2b748a1cfc16fa5be1acb457751d51c0addda80da4f2b679973b ===
+  ✓ لا لفظ صعب من القائمة المبسطة في المتن (144 بندًا فعّالًا · الحكم بحالة كل بند)

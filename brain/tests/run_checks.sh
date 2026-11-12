@@ -276,6 +276,7 @@ t "منع التركيب المعلّق (ك-173)" python3 tests/test_hanging_ope
 
 echo "19) السجل الحاكم للمفردات وتغطية الأسطح (طلب فهد 2026-10-27)"
 t "السجل الحاكم: صلاحية · إنفاذ كل بند · سبب ومصدر · منع التعديل اليدوي · تغطية الأسطح" python3 tests/test_vocab_registry.py
+t "G036: حالات كل مدخل وموجب وسالب وحدود الكلمات" python3 -m pytest -q tests/test_g036_vocabulary_contract.py tests/test_vocabulary_word_boundary.py
 t "حاجز ألفاظ مولّد الإضافات: موجب + سالب" python3 "$SITE/tests/test_g001_forbidden_terms.py"
 echo "20) قنوات المصادر (ك-237): الفحص كان يُشغَّل بلا احتساب رمز خروجه"
 t "قنوات المصادر: الهوية والمسارات والفجوة وعدم التراجع" python3 validators/check_closure.py --brain "$B" || bad "بوابة الإغلاق: الحلقة غير مغلقة"
