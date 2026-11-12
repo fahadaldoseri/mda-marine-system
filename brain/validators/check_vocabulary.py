@@ -71,23 +71,32 @@ def main() -> int:
         print("  · لا قائمة مفردات مبسطة بعد — لا فحص")
         return 0
 
-    hits: list[tuple[str, str]] = []
+    hits: list[tuple[str, str, str]] = []
+    active_count = 0
     for it in items:
+        entry_status = str(it["status"]) if "status" in it else status
+        if entry_status == "rejected":
+            continue
+        if entry_status not in {"approved", "watch", "proposed"}:
+            print(f"  ✘ حالة غير معروفة في سجل المفردات: {it.get('term', '')} — {entry_status}")
+            return 2
+        active_count += 1
         hard = it.get("as_written") or it.get("term") or it.get("hard") or ""
         easy = _alternative(it)
         if hard and _word_hit(hard, text):
-            hits.append((hard, easy))
+            hits.append((hard, easy, entry_status))
 
     if not hits:
-        print(f"  ✓ لا لفظ صعب من القائمة المبسطة في المتن ({len(items)} بندًا · الحالة {status})")
+        print(f"  ✓ لا لفظ صعب من القائمة المبسطة في المتن ({active_count} بندًا فعّالًا · الحكم بحالة كل بند)")
         return 0
 
-    for hard, easy in hits:
-        print(f"  • «{hard}» → البديل اليومي: «{easy}»")
-    if status == "approved":
-        print(f"النتيجة: {len(hits)} لفظًا يحتاج تبديلًا — مانع (القائمة معتمدة)")
+    for hard, easy, entry_status in hits:
+        print(f"  • «{hard}» → البديل اليومي: «{easy}» [{entry_status}]")
+    blocking = sum(entry_status == "approved" for _, _, entry_status in hits)
+    if blocking:
+        print(f"النتيجة: {blocking} لفظًا يحتاج تبديلًا — مانع (بنود معتمدة)")
         return 2
-    print(f"النتيجة: {len(hits)} لفظًا يحتاج تبديلًا — تنبيهي (القائمة لم تُعتمد بعد)")
+    print(f"النتيجة: {len(hits)} لفظًا يحتاج تبديلًا — تنبيهي (بنود مراقبة أو مقترحة)")
     return 1
 
 
