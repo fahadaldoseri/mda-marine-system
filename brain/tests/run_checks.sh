@@ -336,6 +336,9 @@ t "بنية وتماثل وتصنيف موجب وسالب وبوابة حداث�
 echo "32) فصل موثوقية المصدر عن الثقة التحليلية ومرساة الدليل"
 t "وسمان منفصلان ومرساة دليل عميقة" python3 "$B/tests/test_reliability_and_evidence_anchor.py"
 
+echo "33) نطاق قياس بنية التماثل: بنود القوائم في المتن لا في هيكل الصفحة (ك-617)"
+t "موجب يمرّ وسالبان يُمنعان" python3 "$B/tests/test_en_parity_structure_scope.py"
+
 echo "----- الحصيلة -----"
 printf '  نجح: %s · فشل: %s\n' "$PASS" "$FAIL"
 [ "$FAIL" -eq 0 ] || exit 1

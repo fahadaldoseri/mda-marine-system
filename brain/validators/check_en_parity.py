@@ -138,12 +138,23 @@ TOKENS = [
     ("كل الأرقام", r"(?<![\d.])\d+(?:[.,]\d+)?(?![\d])"),
 ]
 
-PAGE_KEYS = ("h1", "h2", "h3", "tables", "rows", "svg", "buttons", "list_items", "links", "collapsed")
+# ك-617: بنود القوائم في الصفحة المبنية تقيس اختيار وسم في الودجات (شرائح/مفتاح/بطاقة قرار)
+# ولا تقيس المحتوى؛ قياس 2026-11-11: العربي 43 والإنجليزي 70 بلا فقد محتوى (المتن 38=38،
+# والأرقام المرئية 42=42). لذلك يبقى قياس بنود القوائم في مستوى المتن وحده، وتُقاس الصفحة
+# بالعناوين والجداول والصفوف والرسوم والروابط والأرقام المرئية — وكلها تفشل مغلقًا عند الفقد.
+PAGE_KEYS = ("h1", "h2", "h3", "tables", "rows", "svg", "buttons", "links", "collapsed")
 
 _HTML_HIDDEN_BLOCK_RE = re.compile(
     r"<(?:script|style)\b[^>]*>.*?</(?:script|style)>", re.IGNORECASE | re.DOTALL
 )
 _HTML_COMMENT_RE = re.compile(r"<!--.*?-->", re.DOTALL)
+
+# ك-617: عدّ البنية يقاس على محتوى التقرير لا على هيكل الموقع (تنقّل/ترويسة/تذييل).
+# السبب المقيس: هيكل النسخة الإنجليزية يحمل بنود قوائم أكثر من العربي، فيُعلن التماثل
+# مخالفًا بلا فقد محتوى. الإعفاء محصور في هذه الوسوم ولا يشمل أي عنصر داخل المتن.
+_CHROME_BLOCK_RE = re.compile(
+    r"<(?:nav|header|footer)\b[^>]*>.*?</(?:nav|header|footer)>", re.IGNORECASE | re.DOTALL
+)
 _HTML_TAG_RE = re.compile(r"<[^>]+>")
 
 
@@ -181,6 +192,8 @@ def counts(p: pathlib.Path):
 def page_stats(p: pathlib.Path) -> dict:
     h = p.read_text(encoding="utf-8")
     body = _HTML_HIDDEN_BLOCK_RE.sub("", h.split("</head>", 1)[-1])
+    # ك-617: استثناء هيكل الموقع من عدّ بنية المحتوى
+    body = _CHROME_BLOCK_RE.sub("", body)
     text = visible_text(h)
     m_lang = re.search(r'<html[^>]*lang="([^"]+)"', h)
     m_dir = re.search(r'<html[^>]*dir="([^"]+)"', h)
