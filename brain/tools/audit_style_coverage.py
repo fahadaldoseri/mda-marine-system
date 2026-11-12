@@ -421,7 +421,13 @@ def extract(s: dict, idx: int) -> tuple[Path | None, str]:
         flatten_json(json.loads(p.read_text(encoding="utf-8")), vals)
         tgt.write_text("\n".join(vals), encoding="utf-8")
     elif s["kind"] == "html":
-        tgt.write_text(strip_html(p.read_text(encoding="utf-8", errors="replace")), encoding="utf-8")
+        _raw = p.read_text(encoding="utf-8", errors="replace")
+        # وسم حقول البطاقات قبل التجريد: قيمة البطاقة حقل مُهيكل لا قالب جملة (قرار 2026-11-12).
+        _raw = re.sub(
+            r'<(?:div|span|p)[^>]*class="[^"]*\bk-(?:n|v|lay-l)\b[^"]*"[^>]*>(.*?)</(?:div|span|p)>',
+            lambda mm: "\n[بطاقة] " + re.sub(r"<[^>]+>", "", mm.group(1)) + "\n",
+            _raw, flags=re.S)
+        tgt.write_text(strip_html(_raw), encoding="utf-8")
     else:
         r = subprocess.run(["pdftotext", "-layout", str(p), str(tgt)], capture_output=True, text=True)
         if r.returncode != 0:
