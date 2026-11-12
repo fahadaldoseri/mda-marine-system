@@ -13,11 +13,46 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 GL = ROOT / "sources" / "i18n" / "en" / "glossary.json"
 
 
+def year_violation(key: str, value: str) -> bool:
+    """هل تحمل القيمةُ سنةَ المفتاح؟
+
+    ك-596: قاعدة الاشتقاق تأخذ أول جملة من مفتاح أطول، وقد تُسند إلى وحدة
+    تاريخية ترجمةَ جزء آخر من الجملة. الحالة المقيسة: «آخر تحديث سبتمبر 2026»
+    أُسند إليها «For public information» — ترجمة عبارة أخرى — فصار المفتاح
+    يُترجم بلا سنة، وأوقف مسار الترجمة بفقد الرقم (حارس ك-592).
+    القاعدة: كل سنة في المفتاح يجب أن تظهر في القيمة؛ وإلا فالمدخل مرفوض.
+    """
+    want = set(re.findall(r"\b20\d{2}\b", key))
+    if not want:
+        return False
+    have = set(re.findall(r"\b20\d{2}\b", value or ""))
+    return not want.issubset(have)
+
+
+def prune(d: dict) -> list[str]:
+    """يحذف من المعجم كل مدخل يخالف قاعدة السنة، ويعيد قائمة المفاتيح المحذوفة."""
+    ent = d.get("entries", {})
+    bad = [k for k, v in ent.items() if isinstance(v, str) and year_violation(k, v)]
+    for k in bad:
+        ent.pop(k, None)
+        d.get("_derived", {}).pop(k, None)
+    return bad
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", required=True)
     ap.add_argument("--apply", action="store_true")
+    ap.add_argument("--prune", action="store_true", help="حذف مدخلات مخالفة لقاعدة السنة وحدها")
     a = ap.parse_args()
+    if a.prune:
+        d = json.loads(GL.read_text(encoding="utf-8"))
+        bad = prune(d)
+        GL.write_text(json.dumps(d, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+        print(f"   ✔ حُذف {len(bad)} مدخلًا مخالفًا لقاعدة السنة")
+        for k in bad:
+            print(f"      · {k[:110]}")
+        return 0
     tm = T.build_tm(a.date)
     gl = T.load_glossary()
     page = (ROOT / "dist" / "reports" / f"{a.date}.html").read_text(encoding="utf-8")
@@ -48,11 +83,24 @@ def main() -> int:
                 derived[n] = sentence
                 continue
         hard.append(n)
+    # ك-596: لا يُقبل اشتقاق يُسقط سنة المفتاح، فيبقى النص «يحتاج يدويًا» بدل
+    # أن يُقيَّد ترجمةً خاطئة تُلوّث المعجم وتوقف البناء لاحقًا.
+    rejected = [k for k, v in derived.items() if year_violation(k, v)]
+    for k in rejected:
+        derived.pop(k, None)
+        hard.append(k)
     print(f"   عقود النصوص: {total} · ناقص: {len(miss)} · مشتق آليًا: {len(derived)} · يحتاج يدويًا: {len(hard)}")
+    if rejected:
+        print(f"   ✘ رُفض {len(rejected)} اشتقاقًا مخالفًا لقاعدة السنة:")
+        for k in rejected:
+            print(f"      · {k[:110]}")
     for h in hard:
         print(f"      · {h[:110]}")
     if a.apply and derived:
         d = json.loads(GL.read_text(encoding="utf-8"))
+        dropped = prune(d)
+        if dropped:
+            print(f"   ✔ حُذف {len(dropped)} مدخلًا قائمًا مخالفًا لقاعدة السنة")
         d.setdefault("entries", {}).update(derived)
         d.setdefault("_derived", {}).update({k: "اشتقاق آلي بمحاذاة ذاكرة الترجمة" for k in derived})
         GL.write_text(json.dumps(d, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")

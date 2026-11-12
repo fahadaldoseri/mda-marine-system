@@ -1,6 +1,6 @@
 {
   "schema": "governing-assets-merkle/v1",
-  "generated_at": "2026-11-11T23:35:50.683002+00:00",
+  "generated_at": "2026-11-12T04:42:29.325086+00:00",
   "config": "/home/ubuntu/mda-marine-system/brain/tools/governing-assets.txt",
   "selection": [
     "GLOB /home/ubuntu/skills/*/SKILL.md",
@@ -28,10 +28,10 @@
     "root": "final single node, hexadecimal lowercase"
   },
   "file_count": 2702,
-  "root": "463fd73a7a8ff1a39b66719630c0e578843e9e40b5b975819afc92e4cace0f18",
+  "root": "d84a9d8dae69f474057a8794924e303d2ce555ec24e27945f3ffb09e1cbf47d6",
   "files": [
     {
-      "path": "/home/ubuntu/mda-marine-system/{BRAIN}/INDEX.md",
+      "path": "/home/ubuntu/mda-marine-system/brain/{BRAIN}/INDEX.md",
       "lines": null,
       "sha256": null,
       "size": null,
@@ -40,7 +40,7 @@
       "exists": false
     },
     {
-      "path": "/home/ubuntu/mda-marine-system/{BRAIN}/appendices/threat-scale.json",
+      "path": "/home/ubuntu/mda-marine-system/brain/{BRAIN}/appendices/threat-scale.json",
       "lines": null,
       "sha256": null,
       "size": null,
@@ -49,7 +49,7 @@
       "exists": false
     },
     {
-      "path": "/home/ubuntu/mda-marine-system/{BRAIN}/appendices/zone-registry.json",
+      "path": "/home/ubuntu/mda-marine-system/brain/{BRAIN}/appendices/zone-registry.json",
       "lines": null,
       "sha256": null,
       "size": null,
@@ -58,7 +58,7 @@
       "exists": false
     },
     {
-      "path": "/home/ubuntu/mda-marine-system/{BRAIN}/audit/asset-floor.json",
+      "path": "/home/ubuntu/mda-marine-system/brain/{BRAIN}/audit/asset-floor.json",
       "lines": null,
       "sha256": null,
       "size": null,
@@ -67,7 +67,7 @@
       "exists": false
     },
     {
-      "path": "/home/ubuntu/mda-marine-system/{BRAIN}/runbook/runbook.json",
+      "path": "/home/ubuntu/mda-marine-system/brain/{BRAIN}/runbook/runbook.json",
       "lines": null,
       "sha256": null,
       "size": null,
@@ -4154,11 +4154,11 @@
     },
     {
       "path": "/home/ubuntu/skills/fault-closure-and-learning-ops/SKILL.md",
-      "lines": 71,
-      "sha256": "a1183410b4f07e338e71011394fde3ec108aacc7cfbad1c65336678646d2369a",
-      "size": 7879,
-      "mtime": "2026-11-11T17:59:46.886585+00:00",
-      "mtime_ns": 1794419986886585098,
+      "lines": 62,
+      "sha256": "70ffad15de6f250eddcdbbcefb619dfa1d3ec81160ef1f590f01e9e90e24f5d5",
+      "size": 6230,
+      "mtime": "2026-11-12T04:02:52.920609+00:00",
+      "mtime_ns": 1794456172920609505,
       "exists": true
     },
     {
@@ -16898,11 +16898,11 @@
     },
     {
       "path": "/home/ubuntu/skills/multi-agent-audit-ops/SKILL.md",
-      "lines": 103,
-      "sha256": "27de85b57b95626d111b3cc4923f15ce14502009913849ff267e7178f4f597e2",
-      "size": 10204,
-      "mtime": "2026-11-11T19:47:39.817695+00:00",
-      "mtime_ns": 1794426459817695112,
+      "lines": 63,
+      "sha256": "27847e4538a8605730bea630bc3b2b59c808dafc9185225a8cb167527a7bf9b5",
+      "size": 5061,
+      "mtime": "2026-11-12T04:02:53.434362+00:00",
+      "mtime_ns": 1794456173434362337,
       "exists": true
     },
     {

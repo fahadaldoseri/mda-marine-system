@@ -345,7 +345,6 @@ def build(dist: Path, quiet: bool = False) -> dict:
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="المصادر والمراجع — مركز الوعي بالمجال البحري: حالة المصادر المفحوصة، والمراجع الرسمية، ودرجات الموثوقية والمصداقية.">
 <meta name="theme-color" content="#040810">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <title>المصادر والمراجع — {esc(CH.BRAND)}</title>
 <link rel="stylesheet" href="{BR.FONT_LINK}">
 <style>{BR.DESIGN_TOKENS}{BR.STYLE}{BR.DAYLIGHT}{CSS}</style>

@@ -19,6 +19,7 @@ import argparse, json, pathlib, sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import i18n_en  # noqa: E402
+import site_chrome  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "dist" / "reports" / "en"
@@ -50,6 +51,13 @@ def _translate_page(ar_page: pathlib.Path, date: str, dst: pathlib.Path, tm, gl)
     # الروابط داخل النسخة الإنجليزية يجب أن تبقى على السطح الإنجليزي نفسه.
     page = page.replace(f'/reports/{date}.html#', f'/reports/en/{date}.html#')
     page = page.replace('/additions.html#', '/reports/en/additions.html#')
+    # م-25 (ب): في النسخة الإنجليزية يصبح «ع» رابطًا إلى النسخة العربية للتاريخ نفسه.
+    import re as _re
+    page = _re.sub(
+        r'<div class="sn-lang".*?</div>',
+        site_chrome.lang_group("en", ar_href=f"/reports/{date}.html"),
+        page, count=1, flags=_re.S,
+    )
     OUT.mkdir(parents=True, exist_ok=True)
     dst.write_text(page, encoding="utf-8")
     return dst

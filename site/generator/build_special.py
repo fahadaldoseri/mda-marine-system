@@ -140,7 +140,6 @@ def build_index(items: list, dist: Path) -> Path:
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="التقارير الخاصة — مركز الوعي بالمجال البحري: تقارير موضوعية مستقلة عن الإصدار اليومي، مبنية على مصادر رسمية موثقة.">
 <meta name="theme-color" content="#040810">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <title>التقارير الخاصة — {esc(CH.BRAND)}</title>
 <link rel="stylesheet" href="{BR.FONT_LINK}">
 <style>{BR.DESIGN_TOKENS}{BR.STYLE}{BR.DAYLIGHT}{INDEX_CSS}</style>
