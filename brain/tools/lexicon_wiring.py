@@ -25,6 +25,7 @@ import re
 import sys
 from datetime import date
 from pathlib import Path
+from build_vocab_gate import validate
 
 ROOT = Path(__file__).resolve().parent.parent
 LEXICON = ROOT / "sections" / "20-lexicon.md"
@@ -165,6 +166,10 @@ def note(reg: dict) -> str:
 def check() -> int:
     text = LEXICON.read_text(encoding="utf-8")
     reg = load()
+    errors = validate(reg)
+    if errors:
+        print("  ✘ السجل الحاكم غير صالح: " + " · ".join(errors))
+        return 2
     _, _, tail = parse_lexicon(text)
     want = render(reg, tail, note(reg))
     if want != text:
@@ -194,6 +199,10 @@ def apply() -> int:
     reg = load()
     _, rows, tail = parse_lexicon(text)
     changes = merge_curated_into_registry(reg, rows)
+    errors = validate(reg)
+    if errors:
+        print("  ✘ لا كتابة لسجل متناقض: " + " · ".join(errors))
+        return 2
     if changes:
         dump(reg)
         for c in changes[:12]:

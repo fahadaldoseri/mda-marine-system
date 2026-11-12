@@ -31,6 +31,8 @@ GEN = B / "appendices" / "forbidden-coinages.json"
 sys.path.insert(0, str(B / "tools"))
 sys.path.insert(0, str(B / "validators"))
 import make_tg_digest
+import build_vocab_gate
+import lexicon_wiring
 import check_prose_defects
 fails: list[str] = []
 skips: list[str] = []
@@ -89,6 +91,45 @@ except Exception as exc:
 
 def run(args: list[str]) -> subprocess.CompletedProcess:
     return subprocess.run([sys.executable] + args, capture_output=True, text=True, cwd=B)
+
+
+# G034: السجل لا يوصي باللفظ الذي يمنعه، ولو جاء بين بدائل أو بتشكيل.
+base_entry = {
+    "term": "لا تؤكد", "plain": ["لم تؤكد"], "status": "approved",
+    "source": "اختبار بنيوي", "reason": "اختبار", "since": "2026-11-12",
+}
+valid = build_vocab_gate.validate({"entries": [base_entry]})
+self_conflicts = [
+    build_vocab_gate.validate({"entries": [{**base_entry, "plain": [replacement]}]})
+    for replacement in ("لا تؤكد", "لم تؤكد، لا تؤكد", "لا تُؤكّد، لم تؤكد")
+]
+rejected = build_vocab_gate.validate({"entries": [{**base_entry, "plain": ["لا تؤكد"], "status": "rejected"}]})
+if not valid and not rejected and all(any("تناقض ذاتي" in error for error in errors) for errors in self_conflicts):
+    ok("صلاحية السجل ترفض البديل الذاتي المباشر والمفصول والمشكّل وتقبل البديل السليم والمدخل المرفوض")
+else:
+    bad("حارس البديل الذاتي", f"valid={valid} · conflicts={self_conflicts} · rejected={rejected}")
+
+
+with tempfile.TemporaryDirectory() as temp:
+    original_paths = lexicon_wiring.REGISTRY, lexicon_wiring.LEXICON
+    try:
+        lexicon_wiring.REGISTRY = pathlib.Path(temp) / "registry.json"
+        lexicon_wiring.LEXICON = pathlib.Path(temp) / "lexicon.md"
+        lexicon_wiring.REGISTRY.write_text(json.dumps({"entries": [base_entry]}, ensure_ascii=False), encoding="utf-8")
+        lexicon_wiring.LEXICON.write_text(
+            "# المعجم الموحّد\n## أ)\n| المعنى | اكتب | لا تكتب |\n"
+            "| لا تؤكد | لا تؤكد، لم تؤكد | لا تؤكد |\n## ب)\nنص محفوظ.\n",
+            encoding="utf-8",
+        )
+        before = tuple(path.read_bytes() for path in (lexicon_wiring.REGISTRY, lexicon_wiring.LEXICON))
+        code = lexicon_wiring.apply()
+        after = tuple(path.read_bytes() for path in (lexicon_wiring.REGISTRY, lexicon_wiring.LEXICON))
+        if code == 2 and before == after:
+            ok("مولد المعجم يرفض صفًا ذاتيًا متناقضًا قبل أي كتابة")
+        else:
+            bad("رفض كتابة سجل متناقض", f"code={code} · unchanged={before == after}")
+    finally:
+        lexicon_wiring.REGISTRY, lexicon_wiring.LEXICON = original_paths
 
 
 # 1) السجل صالح والمُولَّد مطابق
