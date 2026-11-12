@@ -119,6 +119,16 @@ def main() -> int:
         mds = sorted((BRAIN / "reports").glob("*-sectioned.md"))
         rep_date = mds[-1].name.replace("-sectioned.md", "") if mds else ""
     rep = dist / "reports" / f"{rep_date}.html" if rep_date else None
+    # ك-619: بوابة G001 تعمل قبل خطوة البناء، فلا وجود لصفحة اليوم بعد. كان الحارس
+    # يفشل مغلقًا بسبب غياب صفحة لم تُبنَ بعد («صفحة التقرير غير مبنية») لا بسبب عيب
+    # سطح. الإصلاح: يقيس أحدث إصدار مبنيّ فعلًا، ويفشل مغلقًا فقط إذا لم يوجد أي إصدار.
+    if rep is not None and not rep.is_file():
+        built = sorted((dist / "reports").glob("20??-??-??.html"))
+        if built:
+            print(f"   • صفحة {rep_date} غير مبنية بعد — يُقاس أحدث إصدار مبنيّ: {built[-1].stem}")
+            rep = built[-1]
+        else:
+            print(f"   × لا إصدار مبنيّ في {dist / 'reports'} — فشل مغلق")
     if rep is not None and not rep.is_file():
         errs.append(f"صفحة التقرير غير مبنية: {rep}")
     elif rep is not None:

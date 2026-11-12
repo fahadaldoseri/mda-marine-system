@@ -92,26 +92,36 @@ def sha(path):
 
 
 def site_dir(root):
-    """مجلد الموقع: override صريح، ثم أقرب جذر يحوي dist، ثم مرشح شقيق."""
+    """مجلد الموقع: override صريح، ثم الموقع المنشور، ثم أي جذر شقيق يحوي dist.
+
+    ك-618 (2026-11-12): كان الفحص يجمع المرشّحين بمستويات الأب فيختار مرآة المستودع
+    `mda-marine-system/site` (فيها `dist/reports` جزئيًا) قبل الموقع المنشور
+    `/home/ubuntu/seawatch`، فتظهر إنذارات كاذبة في فحوص الأسطح. الإصلاح: مرور أول
+    على الأسماء المنشورة (`seawatch`) في كل المستويات، ثم مرور ثانٍ على بقية الأسماء
+    (`site`) — فيبقى كشف الجذر الشقيق كما كان، ويتقدّم الموقع المنشور دائمًا.
+    """
     if os.environ.get("SITE_DIR"):
         return os.environ["SITE_DIR"]
     parent = os.path.dirname(os.path.abspath(root))
-    candidates = []
+    levels = []
     for _ in range(4):
-        for name in ("seawatch", "site"):
-            candidate = os.path.join(parent, name)
-            if os.path.isdir(candidate) and candidate not in candidates:
-                candidates.append(candidate)
+        levels.append(parent)
         next_parent = os.path.dirname(parent)
         if next_parent == parent:
             break
         parent = next_parent
-    for candidate in candidates:
-        if os.path.isdir(os.path.join(candidate, "dist")):
+    for names in (("seawatch",), ("site",)):
+        for level in levels:
+            for name in names:
+                candidate = os.path.join(level, name)
+                if os.path.isdir(os.path.join(candidate, "dist")):
+                    return candidate
+    if levels:
+        candidate = os.path.join(levels[0], "site")
+        if os.path.isdir(candidate):
             return candidate
-    if candidates:
-        return candidates[0]
-    return os.path.join(parent, "seawatch")
+        return os.path.join(levels[0], "seawatch")
+    return os.path.join(os.path.dirname(os.path.abspath(root)), "seawatch")
 
 
 def sub(s, date, root=None):
