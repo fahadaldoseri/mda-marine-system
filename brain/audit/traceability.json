@@ -3981,10 +3981,10 @@
     },
     {
       "fault_id": "ك-536",
-      "state": "بانتظار التحقق",
-      "lesson_id": "L-2026-11-12-g030-writer-contract",
-      "barrier_id": "B-W010-EST-registration",
-      "run_evidence": "notes/g030-estimate-registration-repair-2026-11-12.md"
+      "state": "مغلق",
+      "lesson_id": "ك-536",
+      "barrier_id": "B-7000f844",
+      "run_evidence": "تحقق حي 2026-11-12: python3 tools/runbook.py run --date 2026-11-12 → G030 done رمز 0؛ logs/runbook/2026-11-12/G030.log؛ SHA256 087564b0c3bd0e6e7a82516baa15cf1adeb3d02ecb9964ba83b2eaa11360bdb4؛ اختبار موجب وسالب محفوظ في مذكرة الإصلاح"
     },
     {
       "fault_id": "ك-537",
@@ -4429,24 +4429,24 @@
     },
     {
       "fault_id": "ك-621",
-      "state": "بانتظار التحقق",
+      "state": "مغلق",
       "lesson_id": "ك-621",
-      "barrier_id": "B-g026move",
-      "run_evidence": "تحقق حي 2026-11-12: python3 tests/test_g026_portable_paths.py → خرج 0؛ 3 اختبارات؛ المدقق خرج 0؛ تشغيل المحرك بعد الدمج لم يُثبت بعد"
+      "barrier_id": "B-6391d8b9",
+      "run_evidence": "تحقق حي 2026-11-12: python3 tools/runbook.py run --date 2026-11-12 → G026 done رمز 0؛ logs/runbook/2026-11-12/G026.log؛ SHA256 2d81f5b0448751b1285ea69fb0fffabb47cb18a1dd719c6c4b3560465ee0454f؛ اختبار موجب وسالب محفوظ في مذكرة الإصلاح"
     },
     {
       "fault_id": "ك-622",
-      "state": "بانتظار التحقق",
-      "lesson_id": "L-2026-11-12-g034-self-reference",
-      "barrier_id": "B-vocab-no-self-reference",
-      "run_evidence": "تحقق حي 2026-11-12: python3 validators/check_prose_defects.py --md reports/2026-11-12-sectioned.md → خرج 0؛ المخالفة المزروعة تتحفظ → خرج 2؛ notes/g034-self-conflicting-vocabulary-2026-11-12.md؛ إعادة G034 عبر المحرك بانتظار التنفيذ"
+      "state": "مغلق",
+      "lesson_id": "ك-622",
+      "barrier_id": "B-310483c5",
+      "run_evidence": "تحقق حي 2026-11-12: python3 tools/runbook.py run --date 2026-11-12 → G034 done رمز 0؛ logs/runbook/2026-11-12/G034.log؛ SHA256 1da29619cb3e26dafbd3a2a2fbe53c9cb527545f1e3f9efa1b956ea57a5ead49؛ اختبار موجب وسالب محفوظ في مذكرة الإصلاح"
     },
     {
       "fault_id": "ك-623",
-      "state": "بانتظار التحقق",
-      "lesson_id": "L-2026-11-12-g036-entry-state",
-      "barrier_id": "B-G036-entry-state",
-      "run_evidence": "تحقق حي 2026-11-12: python3 -m pytest -q tests/test_g036_vocabulary_contract.py tests/test_vocabulary_word_boundary.py → خرج 0؛ 11 نجاحًا؛ البوابة المباشرة → خرج 0؛ إعادة المحرك بانتظار التحقق"
+      "state": "مغلق",
+      "lesson_id": "ك-623",
+      "barrier_id": "B-ae7df936",
+      "run_evidence": "تحقق حي 2026-11-12: python3 tools/runbook.py run --date 2026-11-12 → G036 done رمز 0؛ logs/runbook/2026-11-12/G036.log؛ SHA256 95ba95d55be8cf10c345db254582fffa48ba9f48ac40a9066e6166188a25977f؛ اختبار موجب وسالب محفوظ في مذكرة الإصلاح"
     }
   ]
 }
