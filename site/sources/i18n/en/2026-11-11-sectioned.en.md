@@ -44,8 +44,8 @@ event_keys:
 - MN-2026-11-11-01
 - MN-2026-11-11-02
 
-- [Fact | MN-2026-11-11-01] **Attack — UKMTO report 201-26 · 10/11/2026:** The UKMTO feed classified the report as Attack and stated a distance of 19 nautical miles northeast of a location not named in the excerpt. No vessel name or outcome appears in the available text. Source: [UKMTO — Recent Incidents](https://www.ukmto.org/recent-incidents#c151e68e-75d0-4014-b192-491812e31aac). Source reliability A/2.
-- [Fact | MN-2026-11-11-02] **Suspicious activity — tanker · UKMTO Warning 202-26 · 11/11/2026:** The official feed describes suspicious activity involving a tanker in the Strait of Hormuz; the official UKMTO account posted the warning number at 03:11Z. The tanker's name, precise location, and report outcome do not appear. Sources: [UKMTO — Warnings 2026](https://www.ukmto.org/ukmto-products/warnings/2026); [UKMTO official account on X](https://x.com/UK_MTO/status/2120353588933165514). Source reliability A/2; publishing channel B/2.
+- [Fact | MN-2026-11-11-01] **Attack — UKMTO 201-26 report · 10/11/2026:** The UKMTO feed classified the report as Attack and stated a distance of 19 nautical miles northeast of a location not named in the excerpt. No vessel name or outcome appears in the available text. Source: [UKMTO — Recent Incidents](https://www.ukmto.org/recent-incidents#c151e68e-75d0-4014-b192-491812e31aac). Source reliability A/2.
+- [Fact | MN-2026-11-11-02] **Suspicious activity — tanker · UKMTO 202-26 Warning · 11/11/2026:** The official feed describes suspicious activity involving a tanker in the Strait of Hormuz; the official UKMTO account posted the warning number at 03:11Z. The tanker's name, precise location, and report outcome do not appear. Sources: [UKMTO — Warnings 2026](https://www.ukmto.org/ukmto-products/warnings/2026); [UKMTO official account on X](https://x.com/UK_MTO/status/2120353588933165514). Source reliability A/2; publishing channel B/2.
 
 ## Active warnings and advisories
 | Agency | Warning or alert | Official information | Validity status |

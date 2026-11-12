@@ -13,7 +13,7 @@
 |---:|---|---|---|
 | 1 | UKMTO | https://www.ukmto.org/recent-incidents | الحوادث الأخيرة — فُتحت مباشرة هذا التشغيل عبر Playwright (حجب Cloudflare عابر في أول محاولة، نجحت الثانية بمتصفح بهوية مستخدم واقعية)؛ 59 تقريراً، أحدثها Attack #162 |
 | 2 | UKMTO | https://www.ukmto.org/ukmto-products/warnings/2026 | التحذيرات 2026 — أُعيدت مباشرة؛ 14 تحذيراً لأكتوبر (+1 عن الأمس) |
-| 3 | UKMTO | https://www.ukmto.org/ukmto-products/advisories/2026 | النشرات الاستشارية 2026 — أُعيدت مباشرة؛ 3 نشرات لأكتوبر (+2 عن الأمس): 161-26 و163-26 جديدتان |
+| 3 | UKMTO | https://www.ukmto.org/ukmto-products/advisories/2026 | التنبيهات الإرشادية 2026 — أُعيدت مباشرة؛ 3 نشرات لأكتوبر (+2 عن الأمس): 161-26 و163-26 جديدتان |
 | 4 | UKMTO | https://www.ukmto.org/ukmto-products/weekly-reports/2026 | التقارير الأسبوعية 2026 — أُعيدت مباشرة؛ لا تقرير أسبوعي جديد (آخره 9 أكتوبر) |
 | 5 | المنظمة البحرية الدولية (IMO) | https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx | سجل الحوادث المؤكدة — أُعيدت مباشرة؛ 100 حادثة و24 وفاة حتى 9 أكتوبر، دون تغيير |
 | 6 | straits.live | https://straits.live/ | أُعيد فتحه مباشرة؛ تصنيف «مغلق» تأمينياً لا يزال سارياً، تحديث 10 أكتوبر 07:21 غرينتش: 101-109 سفينة منتظرة (تراجع من 149-159) |
@@ -158,7 +158,7 @@
 |---:|---|---|
 | 1 | UKMTO — الحوادث الأخيرة | https://www.ukmto.org/recent-incidents |
 | 2 | UKMTO — التحذيرات 2026 | https://r.jina.ai/https://www.ukmto.org/ukmto-products/warnings/2026 |
-| 3 | UKMTO — النشرات الاستشارية 2026 | https://r.jina.ai/https://www.ukmto.org/ukmto-products/advisories/2026 |
+| 3 | UKMTO — التنبيهات الإرشادية 2026 | https://r.jina.ai/https://www.ukmto.org/ukmto-products/advisories/2026 |
 | 4 | UKMTO — التقارير الأسبوعية 2026 | https://r.jina.ai/https://www.ukmto.org/ukmto-products/weekly-reports/2026 |
 | 5 | IMO — سجل الحوادث المؤكدة | https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx |
 | 6 | straits.live | https://straits.live/feed.xml |
