@@ -23,7 +23,10 @@
         "url": "https://www.ukmto.org/recent-incidents",
         "invoked": true,
         "result": "نجح الجلب وفق status.json: عنصر واحد، 14282 محرفًا؛ عنوان العنصر Recent Incidents وتاريخه فارغ في التغذية، ولا يثبت حدثًا بتاريخ وقوع 2026-11-12.",
-        "retrieved_at": "2026-11-12T04:06:17Z"
+        "retrieved_at": "2026-11-12T04:06:17Z",
+        "http_status": 200,
+        "http_status_derived": true,
+        "http_status_basis": "مشتق بقرار المالك 2026-11-17 من feeds/feeds-2026-11-12.status.json (رقم 1 · ok=true)"
       },
       {
         "source_id": "ukmto_weekly_reports_2026",
@@ -31,7 +34,10 @@
         "url": "https://r.jina.ai/https://www.ukmto.org/ukmto-products/weekly-reports/2026",
         "invoked": true,
         "result": "نجح الجلب: 8 عناصر. آخر عنصرين في التغذية: UKMTO 201-26 مؤرخ 10/11/2026 وUKMTO 202-26 مؤرخ 11/11/2026؛ لا يظهر عنصر بواقعة مؤرخة 12/11.",
-        "retrieved_at": "2026-11-12T04:06:17Z"
+        "retrieved_at": "2026-11-12T04:06:17Z",
+        "http_status": 200,
+        "http_status_derived": true,
+        "http_status_basis": "مشتق بقرار المالك 2026-11-17 من feeds/feeds-2026-11-12.status.json (رقم 4 · ok=true)"
       },
       {
         "source_id": "ukmto_x",
@@ -39,7 +45,10 @@
         "url": "https://x.com/UK_MTO",
         "invoked": true,
         "result": "نجح الجلب: 5 منشورات؛ أحدثها WARNING 202-26 منشور 2026-11-11T03:11:04Z، واللاحق له WARNING 201-26 منشور 2026-11-10T15:54:49Z. لا منشور مؤرخ في التغذية بتاريخ 12/11.",
-        "retrieved_at": "2026-11-12T04:06:17Z"
+        "retrieved_at": "2026-11-12T04:06:17Z",
+        "http_status": 200,
+        "http_status_derived": true,
+        "http_status_basis": "مشتق بقرار المالك 2026-11-17 من feeds/feeds-2026-11-12.status.json (رقم 15 · ok=true)"
       },
       {
         "source_id": "mscio_recent_incidents",
@@ -47,7 +56,10 @@
         "url": "https://www.mscio.eu/alerts/",
         "invoked": true,
         "result": "نجح الجلب: 3 عناصر؛ العنصر الأول نصه Recent Incidents  (0). هذه حالة القائمة الظاهرة، وليست قياسًا شاملًا أو دليلًا مستقلًا على عدم وقوع حادث.",
-        "retrieved_at": "2026-11-12T04:06:17Z"
+        "retrieved_at": "2026-11-12T04:06:17Z",
+        "http_status": 200,
+        "http_status_derived": true,
+        "http_status_basis": "مشتق بقرار المالك 2026-11-17 من feeds/feeds-2026-11-12.status.json (رقم 34 · ok=true)"
       },
       {
         "source_id": "jmic",
@@ -55,7 +67,10 @@
         "url": "https://combinedmaritimeforces.com/feed/",
         "invoked": true,
         "result": "نجح الجلب: 15 عنصرًا؛ أحدث مادة مؤرخة 09/11/2026، ولا يتضمن سجل التغذية عنصرًا مؤرخًا بتاريخ وقوع 12/11.",
-        "retrieved_at": "2026-11-12T04:06:17Z"
+        "retrieved_at": "2026-11-12T04:06:17Z",
+        "http_status": 200,
+        "http_status_derived": true,
+        "http_status_basis": "مشتق بقرار المالك 2026-11-17 من feeds/feeds-2026-11-12.status.json (رقم 31 · ok=true)"
       },
       {
         "source_id": "straits_live",
@@ -63,7 +78,10 @@
         "url": "https://straits.live/feed.xml",
         "invoked": true,
         "result": "نجح الجلب: 59 عنصرًا. بعض الأخبار منشور في 12/11 لكن تاريخ النشر لا يثبت تاريخ الواقعة؛ عنصر NCC Fajr Tanker في التغذية مؤرخ بالنشر 11/11/2026 21:43:33 GMT، ولا يثبت وقوعًا جديدًا في 12/11.",
-        "retrieved_at": "2026-11-12T04:06:17Z"
+        "retrieved_at": "2026-11-12T04:06:17Z",
+        "http_status": 200,
+        "http_status_derived": true,
+        "http_status_basis": "مشتق بقرار المالك 2026-11-17 من feeds/feeds-2026-11-12.status.json (رقم 6 · ok=true)"
       },
       {
         "source_id": "seatrade_maritime",
@@ -71,7 +89,10 @@
         "url": "https://www.seatrade-maritime.com/rss.xml",
         "invoked": true,
         "result": "نجح الجلب: 50 عنصرًا. العنصر Four injured on Sinokor VLCC as multiple tankers attacked in Hormuz منشور Thu, 12 Nov 2026 03:14:44 GMT، لكن عنصر التغذية لا يحدد تاريخ وقوع الحادث؛ لذلك لا يُنسب إلى 12/11.",
-        "retrieved_at": "2026-11-12T04:06:17Z"
+        "retrieved_at": "2026-11-12T04:06:17Z",
+        "http_status": 200,
+        "http_status_derived": true,
+        "http_status_basis": "مشتق بقرار المالك 2026-11-17 من feeds/feeds-2026-11-12.status.json (رقم 9 · ok=true)"
       },
       {
         "source_id": "ukmto_warnings_2026",
@@ -79,7 +100,11 @@
         "url": "https://r.jina.ai/https://www.ukmto.org/ukmto-products/warnings/2026",
         "invoked": true,
         "result": "تعذر التحديث؛ فشلت جميع المسارات: حجب مصدر ورفض الخادم HTTP 401؛ صفر عناصر.",
-        "retrieved_at": "2026-11-12T04:06:17Z"
+        "retrieved_at": "2026-11-12T04:06:17Z",
+        "http_status": 401,
+        "http_status_derived": true,
+        "http_status_basis": "مشتق بقرار المالك 2026-11-17 من feeds/feeds-2026-11-12.status.json (رقم 2 · ok=false)",
+        "block_reason": "all routes failed: primary: حجب مصدر — رفض الخادم الطلب (HTTP 401)"
       },
       {
         "source_id": "ukmto_advisories_2026",
@@ -87,7 +112,11 @@
         "url": "https://r.jina.ai/https://www.ukmto.org/ukmto-products/advisories/2026",
         "invoked": true,
         "result": "تعذر التحديث؛ فشلت جميع المسارات: حجب مصدر ورفض الخادم HTTP 401؛ صفر عناصر.",
-        "retrieved_at": "2026-11-12T04:06:17Z"
+        "retrieved_at": "2026-11-12T04:06:17Z",
+        "http_status": 401,
+        "http_status_derived": true,
+        "http_status_basis": "مشتق بقرار المالك 2026-11-17 من feeds/feeds-2026-11-12.status.json (رقم 3 · ok=false)",
+        "block_reason": "all routes failed: primary: حجب مصدر — رفض الخادم الطلب (HTTP 401)"
       },
       {
         "source_id": "imo_confirmed_incidents",
@@ -95,7 +124,11 @@
         "url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
         "invoked": true,
         "result": "تعذر تحديث السجل؛ الجلب أعاد derived items without real content (2)، ومسار Jina.ai رُفض HTTP 401؛ صفر عناصر. لا يُعامل ذلك نفيًا لإدراج جديد.",
-        "retrieved_at": "2026-11-12T04:06:17Z"
+        "retrieved_at": "2026-11-12T04:06:17Z",
+        "http_status": 401,
+        "http_status_derived": true,
+        "http_status_basis": "مشتق بقرار المالك 2026-11-17 من feeds/feeds-2026-11-12.status.json (رقم 5 · ok=false)",
+        "block_reason": "all routes failed: primary: derived items without real content (2) · curl: derived items without real content (2) · curl أعاد محتوى غير مقروء | official-page:jina.ai/imo-middle-east-incidents: حجب مصدر — رفض الخادم الطلب (HTTP 401) | browser: derived items without real content (2)"
       },
       {
         "source_id": "kuna",
@@ -103,7 +136,11 @@
         "url": "https://www.kuna.net.kw",
         "invoked": true,
         "result": "تعذر تحديث المصدر؛ انتهى المسار الأساسي بمهلة، وأعادت المسارات البديلة derived items without real content (1)؛ صفر عناصر.",
-        "retrieved_at": "2026-11-12T04:06:17Z"
+        "retrieved_at": "2026-11-12T04:06:17Z",
+        "http_status": 0,
+        "http_status_derived": true,
+        "http_status_basis": "مشتق بقرار المالك 2026-11-17 من feeds/feeds-2026-11-12.status.json (رقم 27 · ok=false)",
+        "block_reason": "all routes failed: primary: timed out · curl: derived items without real content (1) · curl أعاد محتوى غير مقروء | official-page:jina.ai/kuna: derived items without real content (1) · curl: derived items without real content (1) · curl أعاد محتوى غير مقروء | browser: derived items without real content (1)"
       },
       {
         "source_id": "marad_msci",
@@ -111,7 +148,11 @@
         "url": "https://www.maritime.dot.gov/rss.xml",
         "invoked": true,
         "result": "تعذر التحديث؛ Access Denied HTTP 403 في المسار الأساسي ورفض HTTP 401 للمسارات البديلة؛ صفر عناصر.",
-        "retrieved_at": "2026-11-12T04:06:17Z"
+        "retrieved_at": "2026-11-12T04:06:17Z",
+        "http_status": 403,
+        "http_status_derived": true,
+        "http_status_basis": "مشتق بقرار المالك 2026-11-17 من feeds/feeds-2026-11-12.status.json (رقم 33 · ok=false)",
+        "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Access Denied (HTTP 403) | fallback:jina.ai/marad-rss: حجب مصدر — رفض الخادم الطلب (HTTP 401) | fallback:jina.ai/msci: حجب مصدر — رفض الخادم الطلب (HTTP 401)"
       }
     ],
     "official_ref": null,
