@@ -44,7 +44,7 @@ STATE = B / "state" / "telegram-offset.json"
 SUBS = B / "appendices" / "telegram-subscriptions.json"
 TARGETS = B / "appendices" / "telegram-targets.json"
 LOG = B / "logs" / "telegram-bot.log"
-SITE = "https://seawatch-xp4qirmr.manus.space"
+SITE = "https://seawatch-live.pages.dev"
 
 
 def token() -> str:
@@ -165,7 +165,7 @@ def handle(tok: str, upd: dict) -> None:
             entry["approved_utc"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%MZ")
             s["approved"].append(entry)
             save_json(SUBS, s)
-            api("sendMessage", {"chat_id": tgt, "text": "تم اعتماد اشتراكك. سيصلك التقرير اليومي في 07:00 بتوقيت البحرين."}, tok)
+            api("sendMessage", {"chat_id": tgt, "text": "تم اعتماد اشتراكك. سيصلك التقرير اليومي في 06:40 بتوقيت البحرين."}, tok)
             api("sendMessage", {"chat_id": own, "text": f"تم اعتماد الجهة {tgt} ✓"}, tok)
             log(f"اعتماد جهة {tgt}")
         else:
@@ -216,7 +216,7 @@ def handle(tok: str, upd: dict) -> None:
     if low.startswith("/start"):
         if is_approved(cid, s) or cid == own:
             api("sendMessage", {"chat_id": cid, "text":
-                "التسجيل قائم. يصلك التقرير اليومي في 07:00 بتوقيت البحرين، ويمكنك استخدام /report و /pdf."}, tok)
+                "التسجيل قائم. يصلك التقرير اليومي في 06:40 بتوقيت البحرين، ويمكنك استخدام /report و /pdf."}, tok)
             return
         if any(str(p.get("chat_id")) == cid for p in s.get("pending", [])):
             api("sendMessage", {"chat_id": cid, "text": "طلبك مسجّل وبانتظار موافقة المركز."}, tok)

@@ -293,4 +293,4 @@ CRITICAL · SEVERE · SUBSTANTIAL · SIGNIFICANT · MODERATE هي **مستويا
 | خرطوم عائم | خرطوم مرن ينقل المنتج بين عوامة الرباط والناقلة.
 | سفينة شبه غاطسة | سفينة تعمل بغمر جزئي لهيكلها | semi-submersible |
 | غارقة جزئيًا | غمر جزئي مع بقاء جزء ظاهر | partially submerged |
-| فترة التقرير | آخر 24 ساعة حتى 0400Z | reporting window |
+| فترة التقرير | آخر 24 ساعة حتى 0340Z | reporting window |

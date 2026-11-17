@@ -2,6 +2,16 @@
 
 كل بند يذكر ما أُثبت بالتشغيل. ما لم يُختبر يُذكر صراحةً.
 
+## 17 نوفمبر 2026 — تطبيق قرارات المالك: إيقاف النشر والإرسال، موعد 06:40، نطاق pages.dev
+
+- **إيقاف النشر والإرسال التلقائيين:** عُطّلت في `runbook/runbook.json` الخطوات D010 وD016 وD020 وD021 وD030 وD031 وD033 (`"disabled": true` مع السبب)، حتى يحدد المالك الوضع المعتمد بقرار مكتوب. لم يُغيَّر `runbook/delivery-policy.json`، فتغيير الوضع «أ» قرار المالك وحده. أُعيد توليد `docs/runbook.md`.
+- **موعد الجدولة 06:40 بتوقيت البحرين (03:40 UTC):** في `sections/90-automation.md` و`sections/70-delivery.md` و`appendices/telegram-delivery.md` ورسائل `tools/telegram_bot.py` و`README.md`. لم يُغيَّر وقت القطع `0400Z` في ترويسة التقارير، ولم تُغيَّر التقارير السابقة.
+- **نطاق النشر pages.dev:** استُبدل `seawatch-xp4qirmr.manus.space` بـ`seawatch-live.pages.dev` في `appendices/web-delivery.md` و`schedule/detail-v7.txt` و`tools/telegram_bot.py` وقيم `--base` الافتراضية في أدوات التدقيق البصري. بقيت قناة Manus المرآة (D016 و`tools/manus_channel_attempt.py`) والأوامر القديمة v4 وv6 كما هي.
+- **وقت القطع 0340Z (06:40 بتوقيت البحرين)** بقرار المالك في 2026-11-17، ليطابق موعد التشغيل الجديد: في `appendices/telegram-delivery.md` (صيغة الفترة ومثال سطر الوقت) و`appendices/terminology.md` و`appendices/glossary-standard.json` و`appendices/style-blacklist.json` و`sections/20-lexicon.md` و`sections/20-examples.md`. لم تُغيَّر التقارير والبيانات السابقة، ولم يُعثر في الأدوات على ساعة قطع ثابتة في الشيفرة.
+- **ما أُثبت بالتشغيل:** `runbook.py verify` متسق، و`check_delivery_policy.py` خرج 0، و`test_runbook_disabled_steps` وtest_delivery_policy وtest_gate_verdict وtest_site_guards وtest_no_publish_without_runbook وtest_runbook_engine نجحت. فشلان موجودان في main قبل التعديل بالنتيجة نفسها: `test_d020_uses_live_urls_not_file_urls` و«الملخص يمرّ فحص سياسة الإرسال» في test_delivery_scripts.
+- **المجموعة الكاملة `tests/run_checks.sh`:** نجح 82 وفشل 9 على main وعلى الفرع، وكذلك بعد تعديل وقت القطع (`run_checks-branch-cutoff.txt`)، والإخفاقات التسعة نفسها، وهي سابقة للتعديل وتتعلق ببيئة السحابة والمعجم والأسرار. المخرجات الخام وبصماتها في `audit/measurements/owner-decisions-2026-11-17/`.
+- **ما لم يُختبر:** لم يُشغَّل الخط على الخادم، ولم تُطبَّق التعديلات عليه، ولم تُغيَّر المهمة المجدولة الخارجية ولا الأسرار.
+
 ## 12 نوفمبر 2026 — اعتماد مهارة إصلاح قابلية النقل
 
 - سُجل اعتماد `portable-paths-repair-ops` بقرار `D-0652`، مع مستهلك G026 وحارس ربط يُشغّل فعليًا من G001.
