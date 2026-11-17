@@ -1,0 +1,29 @@
+✔ المانيفست متسق: كل خطوة مربوطة، وكل ملف متصل بخطوة أو قسم أو وثيقة، وكل أداة يستدعيها كود أو مسجَّلة يدوية بسبب
+rc=0
+✔ سياسة التسليم المتصل: الوضع أ · سلسلة ثمانية عناصر · ستة حراس · خطوات المانيفست حاضرة
+   النطاق: all · دائمة: True · القرار: 2026-11-06
+   السلسلة: branch ← pr ← merge ← push ← publish ← live_verify ← telegram ← report
+   الممنوعات: force_push · direct_push_main · merge_without_step · publish_without_step · telegram_outside_step · silent_close
+   خطوات المانيفست: D005 · D010 · D020 · D021 · D016 · D030 · D031 · D032 · D033 · D035 · D036 · D040 · D045 · D050 · D060 · D071
+rc=0
+SKIPPED_LEDGER_ENTRIES=2
+DISABLED_STEPS_TEST=PASS
+tests/test_runbook_disabled_steps.py rc=0
+
+OK
+tests/test_delivery_policy.py rc=0
+  ✔ سجل G011 الحديث بعد B010/D005 لا يُمنع بقدم السجل
+  الحصيلة: كل الحالات صحيحة
+tests/test_gate_verdict.py rc=0
+
+OK (skipped=2)
+tests/test_site_guards.py rc=0
+  ✔ النشر خارج المحرّك مرفوض (رمز 2)
+tests/test_no_publish_without_runbook.sh rc=0
+  ✔ verify نجح بعد إعادة الربط
+  الحصيلة: نجح 12 · فشل 0
+tests/test_runbook_engine.sh rc=0
+  ✔ D030 يلتقط رمز Telegram API قبل تحديث حالة المرفق
+الحصيلة: نجح 10 · فشل 1
+tests/test_delivery_scripts.sh rc=1
+1 failed, 6 passed in 0.68s

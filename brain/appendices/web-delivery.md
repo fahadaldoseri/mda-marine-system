@@ -35,11 +35,11 @@
 `content-disposition: attachment`، فيُنزّل المتصفح الملف بدل عرضه، وينتهي الأمر
 بفتح شيفرة HTML في محرر نصوص. لذلك **لا يُستخدم الرفع السحابي كرابط رئيسي**.
 
-**التوصيل المعتمد: الموقع الدائم** على استضافة Manus (`https://seawatch-xp4qirmr.manus.space`)؛
+**التوصيل المعتمد: الموقع الدائم** على Cloudflare Pages (`https://seawatch-live.pages.dev`)، وقناة Manus مرآة غير ملزمة؛
 يُخدَّم بالنوع `text/html` وبلا `content-disposition`، وروابطه دائمة لا تنتهي بانتهاء مساحة العمل.
 
-- رابط التقرير: `https://seawatch-xp4qirmr.manus.space/reports/<التاريخ>.html`
-- صفحة الأرشيف: `https://seawatch-xp4qirmr.manus.space/`
+- رابط التقرير: `https://seawatch-live.pages.dev/reports/<التاريخ>.html`
+- صفحة الأرشيف: `https://seawatch-live.pages.dev/`
 - اسم الملف في الرابط يكون لاتينيًا بصيغة `YYYY-MM-DD.html` لتجنب مشكلات الأسماء العربية في الروابط.
 - **ممنوع تسليم أي رابط مؤقت** يبدأ بـ`8080-` أو يحتوي `manus.computer` أو `localhost`؛ ويفحصه المدقق في القاعدة **ف4.10**.
 - داخل ملف الواجهة يُكتب `ledger_url` **مسارًا نسبيًا** (`/reports/cumulative-2026.html`)، ويبنيه المولّد على الموقع الدائم.
@@ -181,7 +181,7 @@ python3 /home/ubuntu/seawatch/generator/build_site.py [--allow-restricted]
 
 ## التسليم الدائم على الموقع المنشور (معتمد 12 أكتوبر 2026)
 
-**الرابط الدائم:** https://seawatch-xp4qirmr.manus.space
+**الرابط الدائم:** https://seawatch-live.pages.dev
 **مشروع الموقع:** wdp_5c2c28191f64a1c0d4b4e154 — مجلد العمل `/home/ubuntu/seawatch`
 
 مسار كل تشغيل صباحي بعد بناء التقرير:
@@ -302,10 +302,10 @@ cd /home/ubuntu/seawatch && git add -A && git commit -m "إصدار <التار�
 ## قواعد الروابط في التسليم (اعتُمدت 13 أكتوبر 2026 — بعد حادثة توقف الخادم)
 | الحالة | ما يُسلَّم |
 |---|---|
-| الرابط الأساسي | الموقع الدائم فقط: `https://seawatch-xp4qirmr.manus.space/reports/<YYYY-MM-DD>.html` |
+| الرابط الأساسي | الموقع الدائم فقط: `https://seawatch-live.pages.dev/reports/<YYYY-MM-DD>.html` |
 | رابط المعاينة (`*.manus.computer` أو `localhost`) | **لا يُسلَّم للقرار أبدًا** — للفحص الداخلي فقط، لأنه ينتهي بانتهاء الجلسة/مساحة العمل |
 | الروابط المرفوعة (`files.manuscdn.com`) | لا تُستخدم كرابط عرض (تُخدَّم بتنزيل لا بعرض)؛ نسخة احتياطية فقط |
 | مسارات داخل مساحة العمل (`/home/ubuntu/...`) | **ليست روابط** — تُرفَق الملفات كمرفقات بدل كتابة مساراتها في نص التسليم |
 | مسار اللوحة الشهرية | `/reports/monthly-YYYY-MM.html` (لا `/monthly-YYYY-MM.html`) |
 **سبب القاعدة:** خادم المعاينة عملية مرتبطة بالجلسة؛ عند انتهاء الجلسة يُقتل الخادم فتفشل نسخة المتصفح. لذلك (أ) يُسلَّم الرابط الدائم وحده، (ب) يُعاد تشغيل الخادم في بداية كل تشغيل بـ`tools/ensure_devserver.sh`، (ج) يُذكر في التسليم أن نسخة المتصفح معتمدة على الموقع الدائم.
-**فحص قبل التسليم:** تحقّق أن كل رابط في نص التسليم يستجيب `200` ويبدأ بـ`https://seawatch-xp4qirmr.manus.space`.
+**فحص قبل التسليم:** تحقّق أن كل رابط في نص التسليم يستجيب `200` ويبدأ بـ`https://seawatch-live.pages.dev`.

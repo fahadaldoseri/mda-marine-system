@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """التدقيق البصري الحي للموقع الدائم — يشمل صفحات 404 وrobots وsitemap والمسار غير الموجود.
 
-الاستخدام: python3 tools/visual_audit.py [--base https://seawatch-xp4qirmr.manus.space]
+الاستخدام: python3 tools/visual_audit.py [--base https://seawatch-live.pages.dev]
 """
 # ── مسارات النظام: محمولة (تُقرأ من BRAIN_DIR / SITE_DIR، والافتراضي جذر الشجرة) ──
 import os as _os
@@ -30,7 +30,7 @@ TEMP = ("manus.computer", "localhost", "8080-")
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--base", default="https://seawatch-xp4qirmr.manus.space")
+    ap.add_argument("--base", default="https://seawatch-live.pages.dev")
     a = ap.parse_args()
     OUT.mkdir(parents=True, exist_ok=True)
     findings = []
