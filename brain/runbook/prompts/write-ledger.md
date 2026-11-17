@@ -19,3 +19,9 @@
 - `target`: القيمة المسموحة الوحيدة «سفينة». لا تُكتب في هذا الحقل أنواع السفن (ناقلة · سفينة بضائع سائبة · سفينة حاويات)؛ يبقى نوع السفينة في عنوان الواقعة ونصّها.
 - `sector_id` · `event_kind` · `evidence_kind` · `classification` · `casualty_scope` · `time_kind` · `reliability_flag` · `incident_kind`: تُقرأ قيمها من `schemas/daily-events.schema.json` فقط، ولا تُصاغ من الذاكرة.
 - المخالفة عطل مغلق: بوابة G060 تمنع التسليم.
+
+## يوم بلا واقعة (`no_incident`)
+- إن خلا التقرير من وقائع جديدة يُكتب صف واحد `"no_incident": true` بالعبارة المعتمدة «لا واقعة مسجّلة في المصادر الرسمية المفحوصة» في `title`، مع `retrieved_at`.
+- `sources_checked` قائمة إلزامية، ولكل مصدر: `source_id` · `source` · `url` · `invoked` · `result` · `retrieved_at` · `http_status`.
+- `http_status` يُنقل من نتيجة الجلب الفعلية في `feeds/feeds-{date}.status.json` (عنصر المصدر نفسه). لا يُترك فارغًا ولا يُخمَّن. وإن تعذر الجلب يُكتب سبب التعذر في `block_reason`.
+- بوابة G058 (`validators/check_day_coverage.py`) تمنع سجلًا بلا `http_status`، وتمنع سجلًا كل مصادره محجوبة.

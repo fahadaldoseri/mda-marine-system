@@ -13,6 +13,9 @@ import json
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from _migration_gaps import load_gap_dates  # noqa: E402
+
 DEFAULT_START = dt.date(2026, 2, 28)
 NO_INCIDENT_TEXT = "لا واقعة مسجّلة في المصادر الرسمية المفحوصة"
 
@@ -161,26 +164,31 @@ def main(argv: list[str] | None = None) -> int:
     try:
         material, no_incident = daily_coverage(args.root)
         exempt = no_material_dates(args.root)
+        gaps = load_gap_dates(args.root)
     except (RuntimeError, ValueError) as exc:
         print(f"✘ فشل مغلق: {exc}")
         return 2
     covered_by_daily = material | no_incident
     conflicts = sorted(material & exempt)
+    gap_conflicts = sorted(gaps & (covered_by_daily | exempt))
     expected = {day.isoformat() for day in expected_dates(args.start, args.date)}
-    missing = sorted(expected - covered_by_daily)
-    out_of_range = sorted((covered_by_daily | exempt) - expected)
+    missing = sorted(expected - covered_by_daily - gaps)
+    out_of_range = sorted((covered_by_daily | exempt | gaps) - expected)
     if conflicts:
         print("✘ فشل مغلق: يوم موسوم no_material وله مادة أيضًا: " + ", ".join(conflicts))
+    if gap_conflicts:
+        print("✘ فشل مغلق: يوم في فجوة نقل وله سجل يومي أيضًا (أزل الفجوة): " + ", ".join(gap_conflicts))
     if missing:
         print("✘ فشل مغلق: أيام بلا سجل يومي موثق:")
         print("  " + ", ".join(missing))
     if out_of_range:
         print("✘ فشل مغلق: تواريخ خارج المدى المعلن: " + ", ".join(out_of_range))
-    if conflicts or missing or out_of_range:
+    if conflicts or gap_conflicts or missing or out_of_range:
         return 2
     print(
         f"✔ استمرارية الدفتر مكتملة: {len(expected)} يومًا · "
         f"مادة {len(material & expected)} · no_incident موثق {len(no_incident & expected)}"
+        + (f" · فجوة نقل {len(gaps & expected)} (أيام لم تُفحص، بقرار المالك)" if gaps & expected else "")
     )
     return 0
 
