@@ -70,6 +70,44 @@ def test_continuity_negative_no_incident_without_sources(tmp_path: Path) -> None
     assert "بلا قائمة مصادر مفحوصة" in result.stdout
 
 
+def write_gaps(root: Path, gaps: list[dict]) -> None:
+    (root / "cumulative-2026" / "migration-gaps.json").write_text(
+        json.dumps({"migration_gaps": gaps}, ensure_ascii=False), encoding="utf-8"
+    )
+
+
+def gap(**over) -> dict:
+    row = {"from": "2026-03-01", "to": "2026-03-01",
+           "reason": "بيانات اليوم بقيت على الخادم القديم ولم تُنقل",
+           "decided_by": "owner", "decision_date": "2026-11-17"}
+    row.update(over)
+    return row
+
+
+def test_migration_gap_positive(tmp_path: Path) -> None:
+    root = make_root(tmp_path, missing_day=True)
+    write_gaps(root, [gap()])
+    result = run(root, "--date", "2026-03-02")
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert "فجوة نقل 1" in result.stdout
+
+
+def test_migration_gap_negative_without_reason(tmp_path: Path) -> None:
+    root = make_root(tmp_path, missing_day=True)
+    write_gaps(root, [gap(reason="")])
+    result = run(root, "--date", "2026-03-02")
+    assert result.returncode != 0
+    assert "فجوة نقل" in result.stdout
+
+
+def test_migration_gap_negative_overlaps_daily_file(tmp_path: Path) -> None:
+    root = make_root(tmp_path)
+    write_gaps(root, [gap(**{"from": "2026-03-01", "to": "2026-03-02"})])
+    result = run(root, "--date", "2026-03-02")
+    assert result.returncode != 0
+    assert "فجوة نقل" in result.stdout
+
+
 if __name__ == "__main__":
     import pytest
     raise SystemExit(pytest.main([__file__, "-q"]))

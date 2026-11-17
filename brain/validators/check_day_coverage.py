@@ -15,6 +15,9 @@ import sys
 from pathlib import Path
 from typing import Any
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from _migration_gaps import load_gap_dates  # noqa: E402
+
 ROOT = Path(__file__).resolve().parents[1]
 START_DATE = dt.date(2026, 2, 28)
 BLACKLIST_REL = Path("appendices/source-label-blacklist.json")
@@ -133,10 +136,19 @@ def check_coverage(root: Path | str = ROOT, *, start_date: str = "2026-02-28") -
         labels = _load_labels(root)
     except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as exc:
         return errors + [f"تعذر قراءة قائمة أسماء المصادر: {exc}"]
+    try:
+        gaps = load_gap_dates(root)
+    except RuntimeError as exc:
+        return errors + [str(exc)]
     day = start
     while day <= end:
         path = files.get(day)
         label = day.isoformat()
+        if label in gaps:
+            if path is not None:
+                errors.append(f"{label}: يوم في فجوة نقل وله ملف يومي أيضًا (أزل الفجوة)")
+            day += dt.timedelta(days=1)
+            continue
         if path is None:
             errors.append(f"{label}: ملف يومي مفقود")
             day += dt.timedelta(days=1)

@@ -83,3 +83,29 @@ def test_missing_evidence_and_blocked_only_source_fail(tmp_path: Path) -> None:
 
 if __name__ == "__main__":
     raise SystemExit(0)
+
+
+def write_gaps(root: Path, gaps: list[dict]) -> None:
+    (root / "cumulative-2026").mkdir(parents=True, exist_ok=True)
+    (root / "cumulative-2026" / "migration-gaps.json").write_text(
+        json.dumps({"migration_gaps": gaps}, ensure_ascii=False), encoding="utf-8"
+    )
+
+
+def test_migration_gap_covers_missing_day(tmp_path: Path) -> None:
+    gate = load_gate()
+    write_day(tmp_path, "2026-02-28", [material()])
+    write_day(tmp_path, "2026-03-02", [material()])
+    assert any("2026-03-01" in e for e in gate.check_coverage(tmp_path, start_date="2026-02-28"))
+    write_gaps(tmp_path, [{"from": "2026-03-01", "to": "2026-03-01",
+                           "reason": "بيانات اليوم بقيت على الخادم القديم",
+                           "decided_by": "owner", "decision_date": "2026-11-17"}])
+    assert gate.check_coverage(tmp_path, start_date="2026-02-28") == []
+
+
+def test_migration_gap_overlapping_file_fails(tmp_path: Path) -> None:
+    gate = load_gate()
+    write_day(tmp_path, "2026-02-28", [material()])
+    write_gaps(tmp_path, [{"from": "2026-02-28", "to": "2026-02-28",
+                           "reason": "سبب", "decided_by": "owner", "decision_date": "2026-11-17"}])
+    assert any("فجوة نقل" in e for e in gate.check_coverage(tmp_path, start_date="2026-02-28"))
