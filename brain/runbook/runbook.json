@@ -1166,7 +1166,8 @@
         "gates": [],
         "tests": [
           "tests/test_classify_zones_damage_scope.py",
-          "tests/test_map_points_nonspatial.py"
+          "tests/test_map_points_nonspatial.py",
+          "tests/test_ledger_totals_migration_gaps.py"
         ]
       },
       "on_fail": "stop",
