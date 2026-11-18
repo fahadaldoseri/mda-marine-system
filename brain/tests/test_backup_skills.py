@@ -30,7 +30,7 @@ if 'OUR_SKILLS' not in backup and 'restore_skills.sh' not in backup:
 
 import os
 SKILLS = Path(os.environ['SKILLS_DIR']) if os.environ.get('SKILLS_DIR') else (
-    Path('/home/ubuntu/skills') if Path('/home/ubuntu/skills').is_dir() else Path(__file__).resolve().parent.parent.parent / 'skills')
+    Path('/home/ubuntu/skills') if (os.access('/home/ubuntu/skills', os.R_OK | os.X_OK) and Path('/home/ubuntu/skills').is_dir()) else Path(__file__).resolve().parent.parent.parent / 'skills')
 # 2) كل مهارة في المزامنة موجودة فعلًا في مجلد المهارات
 for sk in sorted(sync_skills):
     if not (SKILLS / sk).is_dir():
