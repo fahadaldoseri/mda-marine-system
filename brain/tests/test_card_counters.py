@@ -521,7 +521,8 @@ class HeroKpiGateTests(unittest.TestCase):
         self.assertEqual(card["value"], str(total))
         self.assertIn(str(total), card["detail"])
         self.assertIn(str(qualifying), card["detail"])
-        self.assertIn("تُذكر ولا تُحتسب", card["detail"])
+        # الصياغة المعتمدة منذ ef0145d7 (إصلاح بطاقات الأرقام 2026-11-11): التأهل لا يعني الإثبات.
+        self.assertIn("لم تثبت أيٌّ منها", card["detail"])
 
     def test_unconfirmed_detail_uses_singular_for_one_narrative(self):
         """الرواية الواحدة تُصرف بالمفرد وفق عقد البطاقة نفسه.

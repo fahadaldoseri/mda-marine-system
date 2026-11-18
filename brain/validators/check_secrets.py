@@ -29,6 +29,7 @@ ALLOWLIST = {
     "secrets/README.md",
     "tests/fixtures/dummy-secrets.txt",
     "tests/test_new_validators.py",   # اختبار زرع صناعي: قيم وهمية لا حقيقية
+    "tests/test_delivery_scripts.sh", # قرار المالك 2026-11-18: معرّف محادثة وهمي (-100123456789) لاختبار مسار الإرسال المرفوض
 }
 
 # إعفاء واحد مكتوب السبب (قرار المالك 2026-10-24: «تُحفظ الأسرار نصًّا صريحًا في المستودع الخاص»

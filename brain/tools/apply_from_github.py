@@ -50,7 +50,7 @@ def main():
     repo = Path(a.repo)
     brain = Path(a.brain) if a.brain else (repo / "brain")
     site = Path(a.site) if a.site else repo.parent / "seawatch"
-    skills = Path(a.skills) if a.skills else (Path("/home/ubuntu/skills") if Path("/home/ubuntu/skills").is_dir() else repo / "skills")
+    skills = Path(a.skills) if a.skills else (Path("/home/ubuntu/skills") if (os.access("/home/ubuntu/skills", os.R_OK | os.X_OK) and Path("/home/ubuntu/skills").is_dir()) else repo / "skills")
     roots = {"brain": brain, "site": site, "skills": skills}
     spec = code_paths.load_spec(repo)
     state_p = brain / "logs" / "applied-code.json"
