@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-18T03:51:18Z",
+  "generated_utc": "2026-11-18T12:25:12Z",
   "rule": "رموز التقديرات «EST-YYYY-MM-DD-NN» تُمنح مرة واحدة ومعناها ثابت: كل تقدير أو احتمال أو فرضية في أقسام التحليل والاحتمالات يُوسَم برمزه، ويُمنع استخدام EST- لوصف واقعة أو MN- لتقدير. الرمز لا يُعاد إسناده ولا يُستخدم في أكثر من معنى.",
   "spaces": {
     "MN-": "وقائع مُثبتة أو مبلَّغة (قسم الوقائع الجديدة وما يُدرج في الخريطة والدفتر)",
@@ -848,6 +848,51 @@
       "support": "بلاغات UKMTO الرسمية 203-26 و204-26 و208-26 وبلاغات 13 و15 و16 نوفمبر 2026 — https://www.ukmto.org/recent-incidents (استُرجعت 2026-11-18T03:47Z)",
       "status": "قائم",
       "first_seen": "2026-11-18"
+    },
+    "EST-2026-11-13-01": {
+      "section": "قراءة الموقف وتحليل المؤشرات",
+      "statement": "لا تتيح المادة الرسمية قياس احتمال وقوع حادث غير مُبلغ عنه في 12/11.",
+      "confidence": "منخفضة",
+      "reliability": "A/2",
+      "support": "صفحة UKMTO للحوادث الأخيرة بلا بند بتاريخ 12/11 — https://www.ukmto.org/recent-incidents (استُرجعت 2026-11-18T03:47Z)",
+      "status": "قائم",
+      "first_seen": "2026-11-13"
+    },
+    "EST-2026-11-14-01": {
+      "section": "قراءة الموقف وتحليل المؤشرات",
+      "statement": "لا تتيح المادة الرسمية قياس احتمال أن يخص البلاغ والصف السفينة نفسها.",
+      "confidence": "متوسطة",
+      "reliability": "A/2",
+      "support": "بلاغ UKMTO بتاريخ 13/11 — https://www.ukmto.org/recent-incidents (استُرجعت 2026-11-18T03:47Z)؛ صف IMO للناقلة DAR SALWA — https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx (استُرجعت 2026-11-18T03:48Z)",
+      "status": "قائم",
+      "first_seen": "2026-11-14"
+    },
+    "EST-2026-11-15-01": {
+      "section": "قراءة الموقف وتحليل المؤشرات",
+      "statement": "لا تتيح المادة الرسمية قياس احتمال وقوع حادث غير مُبلغ عنه في 14/11.",
+      "confidence": "منخفضة",
+      "reliability": "A/2",
+      "support": "صفحة UKMTO للحوادث الأخيرة بلا بند بتاريخ 14/11 — https://www.ukmto.org/recent-incidents (استُرجعت 2026-11-18T03:47Z)",
+      "status": "قائم",
+      "first_seen": "2026-11-15"
+    },
+    "EST-2026-11-16-01": {
+      "section": "قراءة الموقف وتحليل المؤشرات",
+      "statement": "لا تتيح المادة الرسمية قياس احتمال أن يخص البلاغ والصف السفينة نفسها.",
+      "confidence": "متوسطة",
+      "reliability": "A/2",
+      "support": "بلاغ UKMTO بتاريخ 15/11 — https://www.ukmto.org/recent-incidents (استُرجعت 2026-11-18T03:47Z)؛ صف IMO للناقلة AL DHANNAH — https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx (استُرجعت 2026-11-18T03:48Z)",
+      "status": "قائم",
+      "first_seen": "2026-11-16"
+    },
+    "EST-2026-11-17-01": {
+      "section": "قراءة الموقف وتحليل المؤشرات",
+      "statement": "لا تتيح المادة الرسمية قياس احتمال استمرار إصابة الناقلات في مضيق هرمز خلال 72 ساعة القادمة.",
+      "confidence": "متوسطة",
+      "reliability": "A/2",
+      "support": "بلاغات UKMTO بتاريخ 16/11 و208-26 — https://www.ukmto.org/recent-incidents (استُرجعت 2026-11-18T03:47Z)",
+      "status": "قائم",
+      "first_seen": "2026-11-17"
     }
   },
   "notes": [

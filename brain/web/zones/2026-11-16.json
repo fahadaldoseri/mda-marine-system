@@ -1,0 +1,204 @@
+{
+  "date": "2026-11-16",
+  "window": "خلال 24 ساعة السابقة",
+  "scale_version": 1,
+  "registry_version": 1,
+  "scale_levels": [
+    {
+      "ar": "حرج",
+      "rank": 5,
+      "token": "critical",
+      "color": "#FFA3A3",
+      "marker": "■ ■ ■ ■ ■"
+    },
+    {
+      "ar": "مرتفع جدًا",
+      "rank": 4,
+      "token": "severe",
+      "color": "#FFA96B",
+      "marker": "▲ ▲ ▲ ▲"
+    },
+    {
+      "ar": "مرتفع",
+      "rank": 3,
+      "token": "high",
+      "color": "#FFC24D",
+      "marker": "▲ ▲ ▲"
+    },
+    {
+      "ar": "متوسط",
+      "rank": 2,
+      "token": "med",
+      "color": "#d29119",
+      "marker": "▲ ▲"
+    },
+    {
+      "ar": "منخفض",
+      "rank": 1,
+      "token": "low",
+      "color": "#28b45a",
+      "marker": "▲"
+    }
+  ],
+  "overall": {
+    "level": "متوسط",
+    "rank": 2,
+    "top_zone": "مضيق هرمز وخليج عُمان والخليج العربي",
+    "top_zone_id": "Z1",
+    "basis": "أعلى نطاق: مضيق هرمز وخليج عُمان والخليج العربي — وقائع مؤهّلة: هجوم — بلاغ UKMTO نقلًا عن سلطات الملاحة الهندية عن هجوم على ناقلة في الخليج العربي · 15/11/2026"
+  },
+  "zones": [
+    {
+      "id": "Z1",
+      "name": "مضيق هرمز وخليج عُمان والخليج العربي",
+      "level": "متوسط",
+      "rank": 2,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 1,
+      "events": 2,
+      "qualifying_codes": [
+        "MN-2026-11-16-01"
+      ],
+      "categories": [
+        "هجوم على سفينة"
+      ],
+      "basis": "وقائع مؤهّلة: هجوم — بلاغ UKMTO نقلًا عن سلطات الملاحة الهندية عن هجوم على ناقلة في الخليج العربي · 15/11/2026",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-16"
+    },
+    {
+      "id": "Z2",
+      "name": "باب المندب والبحر الأحمر",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-16"
+    },
+    {
+      "id": "Z3",
+      "name": "بحر العرب",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-16"
+    },
+    {
+      "id": "Z4",
+      "name": "القرن الأفريقي",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-16"
+    },
+    {
+      "id": "Z5",
+      "name": "المحيط الهندي",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-16"
+    }
+  ],
+  "counter": {
+    "total": 2,
+    "qualifying": 1,
+    "confirmed": 0,
+    "probable": 0,
+    "unconfirmed_qualifying": 1,
+    "unconfirmed_total": 1,
+    "excluded": 1,
+    "nonspatial": 0
+  },
+  "generated_from": "cumulative-2026/daily/2026-11-16.json",
+  "events": [
+    {
+      "code": "MN-2026-11-16-01",
+      "title": "هجوم — بلاغ UKMTO نقلًا عن سلطات الملاحة الهندية عن هجوم على ناقلة في الخليج العربي · 15/11/2026",
+      "area": "الخليج العربي",
+      "class": "بلاغ رسمي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «الخليج العربي»",
+      "qualifying": true,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "نوع مؤهّل: «هجوم» وهدف بحري/ملاحي: «ناقلة»",
+      "incident_group": "MN-2026-11-16-01",
+      "source_excerpt": "UKMTO is aware of a report by Indian Shipping Authorities of an attack on a Tanker while transiting through the Arabian Gulf eastbound prior to entering the Strait of Hormuz. The crew are accounted for and safe.",
+      "category": "هجوم على سفينة"
+    },
+    {
+      "code": "MN-2026-11-16-02",
+      "title": "تحديث بيانات IMO: إضافة حادثة مؤكدة للناقلة AL DHANNAH في الخليج العربي بتاريخ 15/11/2026",
+      "area": "الخليج العربي",
+      "class": "سجل دولي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «الخليج العربي»",
+      "qualifying": false,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-16-02",
+      "source_excerpt": "| 15 November | AL DHANNAH (IMO 9783734) | Arabian Gulf | Damaged. No pollution. |",
+      "category": ""
+    }
+  ]
+}
