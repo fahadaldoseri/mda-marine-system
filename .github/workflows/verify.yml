@@ -13,13 +13,16 @@ jobs:
       SITE_DIR: ${{ github.workspace }}/site
     steps:
       - uses: actions/checkout@v4
+      # الشيفرة تستعمل صياغة Python 3.12 (شرطة مائلة داخل تعبير f-string في 9 ملفات)،
+      # فكان 3.11 يُسقط البناء بخطأ صياغة قبل أي اختبار.
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.12"
       - name: حزم النظام
         run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
       - name: حزم بايثون
-        run: pip install -r brain/requirements.txt
+        # pytest تستدعيه run_checks.sh (python3 -m pytest) وليس في متطلبات التشغيل.
+        run: pip install -r brain/requirements.txt pytest
       - name: متصفح Chromium (تدقيق الطباعة)
         run: python3 -m playwright install --with-deps chromium
       - name: اتساق المانيفست والكتيب
