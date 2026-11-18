@@ -581,6 +581,11 @@ def localize_patterns(s: str) -> str | None:
     if m:
         return (f"{m.group(1)} narratives · {m.group(2)} of them qualifying · "
                 "reported but not counted")
+    # الصيغة التي يكتبها build_hero_kpis.py حاليًا لبطاقة الروايات غير المؤكدة
+    m = re.fullmatch(r"(\d+)\s*(?:روايات|رواية)\s*·\s*منها\s*(\d+)\s*مستوفية لمعيار الاحتساب\s*·\s*لم تثبت أي\S*\s*منها", n)
+    if m:
+        return (f"{m.group(1)} narratives · {m.group(2)} of them meet the counting criterion · "
+                "none of them confirmed")
 
     _G = None
     try:

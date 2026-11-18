@@ -63,7 +63,14 @@ ROW_STATE_RE = re.compile(r'\bdata-row-state\s*=\s*"([a-z\-]+)"')
 EV_LABEL_RE = re.compile(r'<span\s+class="ev-k">([^<]*)</span>')
 BRANCH_TITLE_RE = re.compile(r'<span\s+class="ev-branch-title">([^<]*)</span>')
 BADGE_RE = re.compile(r'data-classification="([^"]*)"')
-RELIABILITY_RE = re.compile(r'data-reliability="([^"]*)"')
+# منذ فصل موثوقية المصدر عن الثقة التحليلية (ef0145d7، 2026-11-11) يكتب المولّد data-source-reliability بترميز Admiralty
+RELIABILITY_RE = re.compile(r'data-(?:source-)?reliability="([^"]*)"')
+ADMIRALTY_RE = re.compile(r'^[A-F]/[1-6](?![0-9])')
+# الصف 3 يحمل منذ ef0145d7 ثلاث شارات: موثوقية المصدر والثقة التحليلية ودرجة الإثبات
+MULTI_SPAN_ROWS = (3,)
+# وسم الصف 8 يذكر حالة النص: كاملًا أو مقتطفًا
+ROW8_LABEL_VARIANTS = ("النص الأصلي", "النص الأصلي كما في المصدر", "مقتطف المصدر",
+                       "Original text", "Original text as in the source", "Source excerpt")
 CONTRACT_ROW_RE = re.compile(r'^\s*\|\s*(\d+)\s*\|\s*([^|]+?)\s*\|', re.M)
 
 
@@ -232,7 +239,8 @@ def card_violations(
     missing = [str(number) for number in range(1, CARD_ROWS + 1) if number not in rows]
     if missing:
         errors.append(f"{where}: صفوف غائبة: {', '.join(missing)}")
-    duplicates = sorted({number for number in numbers if numbers.count(number) > 1})
+    duplicates = sorted({number for number in numbers
+                         if numbers.count(number) > 1 and number not in MULTI_SPAN_ROWS})
     if duplicates:
         errors.append(f"{where}: صفوف مكررة: {', '.join(map(str, duplicates))}")
 
@@ -255,7 +263,8 @@ def card_violations(
         actual = EV_LABEL_RE.search(row.inner_html)
         if actual is None:
             errors.append(f"{where}: وسم الصف {number} مفقود (المتوقع «{label}»)")
-        elif actual.group(1).strip() != label:
+        elif actual.group(1).strip() != label and not (
+                number == 8 and label in ROW8_LABEL_VARIANTS and actual.group(1).strip() in ROW8_LABEL_VARIANTS):
             errors.append(f"{where}: وسم الصف {number} لا يطابق العقد («{label}»)")
 
     expected_branch = labels.get(9)
@@ -283,7 +292,9 @@ def card_violations(
     reliability = RELIABILITY_RE.search(card_html)
     if not reliability:
         errors.append(f"{where}: شارة درجة الموثوقية غائبة")
-    elif reliability.group(1) not in RELIABILITY_VALUES:
+    elif (reliability.group(1) not in RELIABILITY_VALUES
+          and not ADMIRALTY_RE.match(reliability.group(1))
+          and not reliability.group(1).startswith("موثوقية ")):
         errors.append(f"{where}: درجة موثوقية خارج القائمة المغلقة: {reliability.group(1)}")
 
     text = visible_text(card_html)

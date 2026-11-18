@@ -310,7 +310,7 @@ def to_markdown(r: dict) -> str:
 async def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", required=True)
-    ap.add_argument("--base", default=os.environ.get("SITE_BASE_URL", "https://seawatch-live.pages.dev"))
+    ap.add_argument("--base", default=os.environ.get("SITE_BASE_URL", "https://mda-bh.pages.dev"))
     ap.add_argument("--video", action="store_true")
     a = ap.parse_args()
     r = await run(a.base.rstrip("/"), a.date, a.video)

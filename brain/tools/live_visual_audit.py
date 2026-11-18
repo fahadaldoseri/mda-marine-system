@@ -19,7 +19,7 @@ from pathlib import Path
 
 B = Path(os.environ.get("BRAIN_DIR") or Path(__file__).resolve().parents[1])
 S = Path(os.environ.get("SITE_DIR") or B.parent / "seawatch")
-BASE = os.environ.get("SITE_BASE_URL", "https://seawatch-live.pages.dev")
+BASE = os.environ.get("SITE_BASE_URL", "https://mda-bh.pages.dev")
 OUT = B / "audit"
 
 ARABIC_DIGITS = re.compile(r"[\u0660-\u0669\u06F0-\u06F9]")

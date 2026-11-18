@@ -1,11 +1,25 @@
 {
-  "migration_gaps": [
+  "migration_gaps": [],
+  "filled_gaps": [
     {
       "from": "2026-11-13",
       "to": "2026-11-17",
       "reason": "بيانات هذه الأيام بقيت على خادم Manus ولم تُنقل إلى المستودع عند الانتقال إلى التشغيل عبر Claude. لم تُفحص المصادر لهذه الأيام في هذا النظام، ولا يُستنتج منها غياب وقائع.",
       "decided_by": "owner",
-      "decision_date": "2026-11-17"
+      "decision_date": "2026-11-17",
+      "filled": {
+        "by": "إصدارات استدراكية كُتبت في 2026-11-18",
+        "decided_by": "owner",
+        "decision_date": "2026-11-18",
+        "reports": [
+          "reports/2026-11-13-sectioned.md",
+          "reports/2026-11-14-sectioned.md",
+          "reports/2026-11-15-sectioned.md",
+          "reports/2026-11-16-sectioned.md",
+          "reports/2026-11-17-sectioned.md"
+        ],
+        "note": "مُلئت الأيام بتقارير استدراكية من أصول جلب 18/11؛ المصادر لم تُجلب في الأيام نفسها، فيبقى هذا القيد قائمًا ولا تُحذف الفجوة."
+      }
     }
   ]
 }

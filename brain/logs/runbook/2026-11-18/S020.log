@@ -1,0 +1,21 @@
+  تغذيات مرصودة: 81
+  نجح: 54 مصدرًا (71 مسارًا) · فشل: 6 مصدرًا · يُفحص بالمتصفح: 0 · عناصر مقروءة: 1523
+  ◻ مرجعية تُراجع يدويًا: 2 مصدرًا · الأرقام: [39, 52]
+   ✘ 27 وكالة الأنباء الكويتية (كونا): all routes failed: primary: HTTP Error 503: Service Unavailable · curl: derived items without real content (1) · curl أعاد محتوى غير مقروء | official-page:jina.ai/kuna: derived items without real content (0) · curl: derived items without real content (0) · curl أعاد محتوى غير مقروء | browser: derived items without real content (1)
+   ✘ 30 القيادة المركزية الأمريكية (سنتكوم: all routes failed: primary: derived items without real content (1) · curl: derived items without real content (1) · curl أعاد محتوى غير مقروء
+   ✘ 36 Lloyd's List: all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403)
+   ✘ 45 IRIB News: all routes failed: primary: <urlopen error [Errno 104] Connection reset by peer> · curl رمز 35
+   ✘ 46 ISNA: all routes failed: primary: <urlopen error [Errno 104] Connection reset by peer> · curl رمز 35
+   ✘ 47 Mehr — العربي: all routes failed: primary: <urlopen error [Errno 104] Connection reset by peer> · curl رمز 35
+   ◐ 12 OFAC — الإجراءات الأخيرة: محتوى متقادم — عمر أحدث مادة 643 يومًا
+   ◐ 13 ShipNext — التحقق من السفن: محتوى متقادم — عمر أحدث مادة 93 يومًا
+   ◐ 20 جريدة الأيام: محتوى متقادم — عمر أحدث مادة 1039 يومًا
+   ◐ 20 جريدة الأيام: محتوى متقادم — عمر أحدث مادة 1039 يومًا
+   ◐ 32 IMB/ICC — القرصنة: محتوى متقادم — عمر أحدث مادة 33 يومًا
+  ✔ حُفظ: feeds-2026-11-18.json / .md / .status.json — الحالة: degraded
+  · لا علامة تشغيل: /home/user/mda-marine-system/brain/logs/pipeline-2026-11-18.json — إنشاء علامة pipeline عبر write_mark
+  ✔ العلامة (pipeline): /home/user/mda-marine-system/brain/logs/pipeline-2026-11-18.json · المخطط v1 · نص التقرير موجود: False · المصادر: 62/60/54 · البوابة: not_run
+  · أضيف أثر الإنشاء: created_by=mark_components
+  ✔ حُدّثت المكوّنات ['feeds'] من المخرجات · الحالة العامة: degraded
+     feeds: {"status": "degraded", "checked": 60, "ok": 54, "failed": 6, "failed_feeds": [{"num": 27, "name": "وكالة الأنباء الكويتية (كونا)",
+elapsed_seconds=192.521513

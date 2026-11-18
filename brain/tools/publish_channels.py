@@ -22,7 +22,7 @@ from typing import Any, Callable
 
 DEFAULT_REPO = "fahadaldoseri/seawatch-live"
 DEFAULT_BRANCH = "main"
-PAGES_BASE_URL = "https://seawatch-live.pages.dev"
+PAGES_BASE_URL = "https://mda-bh.pages.dev"
 PAGES_REPO = DEFAULT_REPO
 PAGES_BRANCH = DEFAULT_BRANCH
 PAGES_PROPAGATION_DELAYS = (15, 20, 25, 30, 40, 50)  # مهلة انتشار بناء القناة الأساسية قبل الحكم بالفشل (ثوانٍ)

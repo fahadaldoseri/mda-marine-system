@@ -136,7 +136,7 @@ JS_MEASURE = r"""
 def measure(url: str, widths: list[int], questions: list[str], phrases: list[str],
             base: str | None = None) -> dict:
     from playwright.sync_api import Error as PlaywrightError, sync_playwright  # استيراد مؤجَّل
-    from urllib.parse import urljoin
+    from urllib.parse import unquote, urljoin
 
     result = {"url": url, "at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "widths": {}}
     with sync_playwright() as pw:
@@ -189,11 +189,17 @@ def measure(url: str, widths: list[int], questions: list[str], phrases: list[str
                         wait_until="load", timeout=45000,
                     )
                     status = response.status if response is not None else None
-                    aux.wait_for_function(
-                        "(h) => !!document.getElementById(h)",
-                        arg=link["hash"], timeout=ANCHOR_DOM_WAIT_MS,
-                    )
-                    targets[key] = bool(aux.evaluate("(h) => !!document.getElementById(h)", link["hash"]))
+                    if link["hash"].startswith(":~:text="):
+                        # مرساة نص (Text Fragment) لا معرّف عنصر: الهدف أن يظهر النص نفسه في الصفحة الهدف
+                        frag = unquote(link["hash"][len(":~:text="):].split("&")[0].split(",")[0])
+                        targets[key] = bool(aux.evaluate(
+                            "(t) => (document.documentElement.textContent || '').includes(t)", frag))
+                    else:
+                        aux.wait_for_function(
+                            "(h) => !!document.getElementById(h)",
+                            arg=link["hash"], timeout=ANCHOR_DOM_WAIT_MS,
+                        )
+                        targets[key] = bool(aux.evaluate("(h) => !!document.getElementById(h)", link["hash"]))
                     if not targets[key]:
                         if status is not None and not (200 <= status < 400):
                             raise PlaywrightError(f"anchor target HTTP {status}; DOM target absent")
