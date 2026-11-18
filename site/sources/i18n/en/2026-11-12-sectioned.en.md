@@ -43,9 +43,11 @@ What would raise or lower it: A complete official report establishing damage or 
 - [Fact | MN-2026-11-11-02] **Warning UKMTO 202-26 — 11/11/2026:** The official material reported suspicious activity involving a tanker in the Strait of Hormuz. The official account posted the warning number at 03:11Z, without showing the tanker's name, precise location, or report outcome. Source: [UKMTO official account on X](https://x.com/UK_MTO/status/2120353588933165514); [UKMTO — Warnings 2026](https://www.ukmto.org/ukmto-products/warnings/2026).
 
 ## Active Warnings and Advisories
-- The latest visible UKMTO warning in the feed is 202-26, issued on 11/11, concerning suspicious activity involving a tanker in the Strait of Hormuz. The feed does not show its validity period or a cancellation, so its current status cannot be established.
-- The official feed showed UKMTO's distribution of update 112, issued by the Joint Maritime Information Center (JMIC) on 8/11. The excerpt contains no update text, so no threat level or operational scope can be inferred.
-- The full UKMTO warnings list and advisory notices could not be retrieved in today's feed; the official source must be consulted before relying on a comprehensive active list.
+| Agency | Warning or alert | Official information | Validity status |
+|---|---|---|---|
+| UKMTO | Latest warning visible in the feed: 202-26, issued on 11/11 | Suspicious activity involving a tanker in the Strait of Hormuz. | The feed does not show its validity period or a cancellation, so its current status cannot be established. |
+| UKMTO | Update 112 from JMIC on 8/11 | Distributed by UKMTO; the excerpt contains no update text. | No threat level or operational scope can be inferred from it. |
+| UKMTO | Warnings list and advisory notices | Could not be retrieved in full in today's feed. | The official source must be consulted before relying on a comprehensive active list. |
 
 ## IMO Register and Confirmed Incidents
 [Fact | MN-2026-11-03-04] The cumulative ledger preserves an official update from the International Maritime Organization (IMO) dated 03/11/2026. It reported 128 confirmed incidents and 24 confirmed seafarer deaths as of that date. The IMO page could not be updated from the live feed on 12/11. Therefore, this balance is not presented as today's tally, and it is not matched against UKMTO reports unless an official entry is visible. Source: [International Maritime Organization register of confirmed incidents](https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx).

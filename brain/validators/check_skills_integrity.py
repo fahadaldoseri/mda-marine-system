@@ -10,6 +10,7 @@
 الرمز: 0 سليم · 2 فقد قاعدة معتمدة
 """
 from __future__ import annotations
+import os
 import sys
 from pathlib import Path
 
@@ -18,7 +19,7 @@ def _skills_dir(brain: Path) -> Path:
     import os
     if os.environ.get("SKILLS_DIR"):
         return Path(os.environ["SKILLS_DIR"])
-    if Path("/home/ubuntu/skills").is_dir():
+    if (os.access("/home/ubuntu/skills", os.R_OK | os.X_OK) and Path("/home/ubuntu/skills").is_dir()):
         return Path("/home/ubuntu/skills")
     return brain.parent / "skills"
 

@@ -20,7 +20,7 @@ from pathlib import Path
 B = Path(__file__).resolve().parents[1]
 SKILL = "source-route-triage-ops"
 LIVE = (Path(os.environ["SKILLS_DIR"]) if os.environ.get("SKILLS_DIR")
-        else Path("/home/ubuntu/skills") if Path("/home/ubuntu/skills").is_dir()
+        else Path("/home/ubuntu/skills") if (os.access("/home/ubuntu/skills", os.R_OK | os.X_OK) and Path("/home/ubuntu/skills").is_dir())
         else B.parent / "skills") / SKILL
 REPO_ROOT = Path(os.environ.get("BACKUP_REPO_DIR", B.parent))
 REPO = REPO_ROOT / "skills" / SKILL

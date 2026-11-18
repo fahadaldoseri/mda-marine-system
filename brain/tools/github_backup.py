@@ -23,7 +23,7 @@ HOME = BRAIN.parent
 OUT = Path(os.environ.get("BACKUP_REPO_DIR") or HOME / "mda-marine-system")
 # مصدر المهارات: SKILLS_DIR ← مسار الخادم إن وُجد ← skills/ في جذر المستودع
 SKILLS_SRC = (Path(os.environ["SKILLS_DIR"]) if os.environ.get("SKILLS_DIR")
-              else Path("/home/ubuntu/skills") if Path("/home/ubuntu/skills").is_dir() else OUT / "skills")
+              else Path("/home/ubuntu/skills") if (os.access("/home/ubuntu/skills", os.R_OK | os.X_OK) and Path("/home/ubuntu/skills").is_dir()) else OUT / "skills")
 
 # مجلدات لا تُنقل (نسبةً إلى جذر كل شجرة)
 BRAIN_SKIP_DIRS = {"__pycache__", ".git", "shots", "node_modules", ".pytest_cache", "backup-repo"}
