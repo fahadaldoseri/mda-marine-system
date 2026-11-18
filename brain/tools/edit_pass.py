@@ -105,7 +105,11 @@ def run_batch(texts, system, model, workers, tmpdir):
            '--template', 'حرّر هذا القسم تحريرًا لغويًا فقط، وأعد JSON:\n{input}',
            '--system', system, '--schema', str(sch),
            '--model', model, '--workers', str(workers), '--max-tokens', '6000']
-    p = subprocess.run(cmd, capture_output=True, text=True)
+    try:
+        p = subprocess.run(cmd, capture_output=True, text=True)
+    except FileNotFoundError:
+        print(f'  ⚠ عميل النموذج غير مثبّت في هذه البيئة ({CLIENT_CMD[0]}) — لم يُجرَ التحرير الآلي؛ اضبط LLM_CLIENT_CMD')
+        return None
     if p.returncode != 0:
         print('  ✘ فشل النداء:', (p.stderr or p.stdout).strip()[:300])
         return None

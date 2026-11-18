@@ -348,7 +348,7 @@ check(not _old_ports, "لا خوادم معاينة قديمة معلّقة (808
       f"خوادم قديمة لا يزالت تعمل على: {_old_ports} — أوقفها لتجنّب مهام خدمية عالقة في لوحة المهام")
 check(_listening(3000), "خادم المعاينة يعمل على المنفذ المعتمد (3000)",
       "خادم المعاينة غير مستمع على 3000 — شغّل tools/ensure_devserver.sh 3000")
-_chr = int(_sp.run(['bash', '-lc', "pgrep -c chromium 2>/dev/null || echo 0"], capture_output=True, text=True).stdout.strip() or 0)
+_chr = int((_sp.run(['bash', '-lc', "pgrep -c chromium 2>/dev/null || echo 0"], capture_output=True, text=True).stdout.strip().splitlines() or ['0'])[0].strip() or 0)
 if _chr > 25:
     warns.append(f"عدد عمليات المتصفح مرتفع ({_chr}) — أغلق جلسات المتصفح غير المستخدمة")
 else:

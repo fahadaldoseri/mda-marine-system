@@ -79,6 +79,43 @@ step_strict() {     # خطوة اختبار: أي فشل يمنع (مراجعة 
   STRICT_LOCAL=0
 }
 
+# نتيجة البوابة تُكتب في gate.json. النداء «provisional» قبل write_mark يحمل أسوأ حالة حتى تلك اللحظة
+# (فشل مغلق: أي مانع سابق يُكتب block)، والنداء النهائي بعد كل الخطوات يستبدله.
+# عطل 2026-11-18: كانت write_mark --stage final تُستدعى قبل وجود gate.json فتنهار برمز 70 في أول تشغيل.
+write_gate_json() {
+python3 - "$D" "$WORST" "$LOGDIR" "$B" "${1:-final}" <<'PY'
+import json, sys, datetime
+from pathlib import Path
+d, worst, logdir = sys.argv[1], int(sys.argv[2]), Path(sys.argv[3])
+B = Path(sys.argv[4])
+stage = sys.argv[5] if len(sys.argv) > 5 else 'final'
+status = {0: 'ok', 1: 'warn', 2: 'block'}[worst]
+steps = []
+for line in (logdir / 'report.txt').read_text(encoding='utf-8').splitlines():
+    parts = line.split()
+    idx = next((i for i, t in enumerate(parts) if t in ('ok', 'warn', 'block', 'crash', 'disabled')), None)
+    if idx:  # اسم الفحص قد يحوي مسافات — الموضع يُحدَّد بأول رمز حالة
+        steps.append({'step': ' '.join(parts[:idx]), 'status': parts[idx],
+                      'exit_code': (lambda x: int(x) if x and x.isdigit() else None)(
+                          (parts[idx + 2].rstrip(')') if len(parts) > idx + 2 and parts[idx + 1] == '(رمز' else None)),
+                      'log': parts[-1]})
+result = {'date': d, 'status': status, 'exit_code': worst, 'steps': steps,
+          'log_dir': str(logdir), 'stage': stage, 'finished_utc': datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')}
+(logdir / 'gate.json').write_text(json.dumps(result, ensure_ascii=False, indent=1), encoding='utf-8')
+mark = B / f'logs/pipeline-{d}.json'
+if stage == 'final' and mark.exists():
+    try:
+        m = json.loads(mark.read_text(encoding='utf-8'))
+        m['final_gate'] = {'status': status, 'exit_code': worst, 'dir': f'logs/gate-{d}',
+                           'blocked_steps': [s['step'] for s in steps if s['status'] == 'block'],
+                           'note': 'نتيجة بوابة التسليم النهائية — مسجّلة بعد كتابة التقرير.'}
+        mark.write_text(json.dumps(m, ensure_ascii=False, indent=2), encoding='utf-8')
+        print(f"  · سُجّلت نتيجة البوابة في العلامة: logs/pipeline-{d}.json")
+    except Exception as e:
+        print(f"  · تعذر تحديث العلامة ({e}) — النتيجة محفوظة في gate.json")
+PY
+}
+
 step() {            # step "<اسم الفحص>" <رمز المانع عند الفشل> <الأمر...>
   local name="$1"; shift
   local blockrc="$1"; shift
@@ -254,6 +291,7 @@ fi
 step "بوابات المخرج العشر" 2 python3 "$B/tools/qa_gates.py" --date "$D"
 
 # العلامة تُكتب قبل الخلاصة كي تدخل خطواتها في gate.json وفي تنبيه الإيقاف (البند ح)
+write_gate_json provisional
 step "كتابة العلامة بعد البوابة" 2 python3 "$B/tools/write_mark.py" --date "$D" --stage final
 step "مخطط العلامة الثابت" 2 python3 "$B/validators/check_mark_schema.py" --date "$D"
 # ── بصمة النص بعد البناء: تثبت أن المنشور بُني من النص النهائي (البند أ) ──────
@@ -267,36 +305,7 @@ step "تغطية المصادر في دفتر الوقائع" 2 python3 "$B/vali
   --brain "$B" --date "$D" --days 30 --json-out "$LOGDIR/source-daily-coverage.json"
 echo "----- الخلاصة -----" | tee -a "$REP"
 cat "$REP" | tail -14
-python3 - "$D" "$WORST" "$LOGDIR" "$B" <<'PY'
-import json, sys, datetime
-from pathlib import Path
-d, worst, logdir = sys.argv[1], int(sys.argv[2]), Path(sys.argv[3])
-B = Path(sys.argv[4])
-status = {0: 'ok', 1: 'warn', 2: 'block'}[worst]
-steps = []
-for line in (logdir / 'report.txt').read_text(encoding='utf-8').splitlines():
-    parts = line.split()
-    idx = next((i for i, t in enumerate(parts) if t in ('ok', 'warn', 'block', 'crash', 'disabled')), None)
-    if idx:  # اسم الفحص قد يحوي مسافات — الموضع يُحدَّد بأول رمز حالة
-        steps.append({'step': ' '.join(parts[:idx]), 'status': parts[idx],
-                      'exit_code': (lambda x: int(x) if x and x.isdigit() else None)(
-                          (parts[idx + 2].rstrip(')') if len(parts) > idx + 2 and parts[idx + 1] == '(رمز' else None)),
-                      'log': parts[-1]})
-result = {'date': d, 'status': status, 'exit_code': worst, 'steps': steps,
-          'log_dir': str(logdir), 'finished_utc': datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')}
-(logdir / 'gate.json').write_text(json.dumps(result, ensure_ascii=False, indent=1), encoding='utf-8')
-mark = B / f'logs/pipeline-{d}.json'
-if mark.exists():
-    try:
-        m = json.loads(mark.read_text(encoding='utf-8'))
-        m['final_gate'] = {'status': status, 'exit_code': worst, 'dir': f'logs/gate-{d}',
-                           'blocked_steps': [s['step'] for s in steps if s['status'] == 'block'],
-                           'note': 'نتيجة بوابة التسليم النهائية — مسجّلة بعد كتابة التقرير.'}
-        mark.write_text(json.dumps(m, ensure_ascii=False, indent=2), encoding='utf-8')
-        print(f"  · سُجّلت نتيجة البوابة في العلامة: logs/pipeline-{d}.json")
-    except Exception as e:
-        print(f"  · تعذر تحديث العلامة ({e}) — النتيجة محفوظة في gate.json")
-PY
+write_gate_json final
 # ── تنبيه إيقاف التسليم (طلب صاحب القرار — البند 8) ───────────────────────
 if [ "$WORST" = "2" ]; then
   mkdir -p "$B/logs/alerts"

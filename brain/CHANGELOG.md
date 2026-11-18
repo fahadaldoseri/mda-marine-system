@@ -11,7 +11,13 @@
 - **سجل البطاقات:** «خلال الفترة» صارت «خلال فترة التقرير» وفق المعجم، وأعيد توليد بطاقات 12 بـ`build_hero_kpis.py --apply`.
 - **متن 12:** قسم «التحذيرات والتنبيهات النشطة» صار جدولًا (كان قائمة) كما يشترط عقد البطاقة، بالوقائع نفسها، مع مطابقة الأصل الإنجليزي ومداخل المعجم.
 - **المثبت بالتشغيل:** المحرّك `runbook.py` اجتاز G001 إلى G060 (تحذيرات فقط) قبل تحويل الجدول. بعده: `validate_report` و`check_style` و`check_language` و`validate_en_master` و`check_card_counters` و`check_kpi_layers` و`check_map_note_counts` و`check_ledger_links` تجتاز، و`en_master_build.sh 2026-11-12` يخرج 0.
-- **لم يجتز في السحابة (بيئة لا محتوى):** G000 (الأصول الحاكمة تقيس مسارات خادم Manus)، وفي `final_gate.sh`: بوابة الأسرار (معرّف وهمي في `tests/test_delivery_scripts.sh`)، و`edit_pass.py` (يحتاج `manus-node`)، و`preflight_check.py` (قراءة مخرج `pgrep`)، و`write_mark.py` (يسبق `gate.json`).
+- **إصلاح البيئة (بطاقة قرار المالك «أصلح البيئة أولًا»):**
+  - `check_secrets.py`: أُعفي `tests/test_delivery_scripts.sh` بالاسم، لأن فيه معرّف محادثة وهميًا (-100123456789) لاختبار مسار الإرسال المرفوض. أي سرّ في ملف آخر يبقى مانعًا.
+  - `edit_pass.py`: غياب عميل النموذج (`manus-node`) يطبع «غير مثبّت» ويخرج 1 (تحذير) بدل الانهيار.
+  - `preflight_check.py`: مخرج `pgrep -c ... || echo 0` قد يكون سطرين «0» فكان يرمي ValueError؛ صار يُقرأ السطر الأول.
+  - `final_gate.sh`: `write_mark.py --stage final` كان يُستدعى قبل كتابة `gate.json` فيخرج 70 في أول تشغيل. صار `gate.json` يُكتب مؤقتًا (`stage: provisional`) بأسوأ حالة حتى تلك اللحظة قبل العلامة، ثم يُستبدل بالنهائي. الرفض المغلق في `write_mark.py` باقٍ كما هو.
+  - مسار `/home/ubuntu/skills` في 10 ملفات: يُفحص بـ`os.access` قبل `is_dir()`، لأن عدّاء GitHub يرمي PermissionError عليه. وأعيد توليد `appendices/lexicon-corpus.json`.
+- **يبقى خارج الخادم:** G000 (الأصول الحاكمة تقيس مسارات `/home/ubuntu`)، ويُثبت على الخادم وحده.
 
 ## 18 نوفمبر 2026 — بلاغ UKMTO الرسمي عن هجوم يُحتسب إصابة مؤكدة في سلّم التهديد
 

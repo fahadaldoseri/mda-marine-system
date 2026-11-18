@@ -375,7 +375,7 @@ def main() -> int:
     local.update(manifest(S, site_skip_dirs, site_skip_files, "site", junk_files))
     # عطل ك-60: المقارنة أغفلت جذر المهارات، فظهرت ملفات المستودع «زائدة» كذبًا.
     # القاعدة: كل جذر ينسخه github_backup يجب أن تدخله المقارنة بالنفس.
-    sk_root = Path(os.environ["SKILLS_DIR"]) if os.environ.get("SKILLS_DIR") else (Path("/home/ubuntu/skills") if Path("/home/ubuntu/skills").is_dir() else B.parent / "skills")
+    sk_root = Path(os.environ["SKILLS_DIR"]) if os.environ.get("SKILLS_DIR") else (Path("/home/ubuntu/skills") if (os.access("/home/ubuntu/skills", os.R_OK | os.X_OK) and Path("/home/ubuntu/skills").is_dir()) else B.parent / "skills")
     try:
         _sk_names = approved_skill_names()
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, TypeError, ValueError) as exc:
