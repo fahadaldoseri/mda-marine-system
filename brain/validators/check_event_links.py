@@ -74,7 +74,10 @@ def main() -> int:
             val = str(r.get(field) or "").strip()
             if val and val not in known:
                 problems.append(f"معرّف معلّق في {field}: {code} ← {val}")
-        if str(r.get("update_of") or "") and not str(r.get("parent_id") or ""):
+        # عقد الحقول (ledger_link_fields.py وcheck_ledger_links.py) يمنع parent_id مع event_kind «تحديث»؛
+        # فجذر التحديث هو هدف update_of نفسه، وقد فُحص وجوده في الدفتر أعلاه.
+        if str(r.get("update_of") or "") and str(r.get("update_of")).strip() not in known \
+                and not str(r.get("parent_id") or ""):
             problems.append(f"تحديث بلا جذر: {code}")
 
     total = len(recs)

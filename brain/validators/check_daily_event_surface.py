@@ -220,7 +220,8 @@ def validate_documents(*, daily: list[dict], report: str, additions: str, site: 
             errors.append(f"الحدث {code} معلّم كتحديث/امتداد بلا مرجع حاكم")
         elif not re.search(r'data-branch-status="shown"', card):
             errors.append(f"الحدث {code} لا يعرض فرعه السابق الموثق")
-        elif not re.search(rf'data-parent-ref="{re.escape(html.escape(ref))}"', card):
+        # المولّد يكتب data-relation-ref منذ 1c385dbb (2026-11-10)؛ تُقبل السمة القديمة أيضًا
+        elif not re.search(rf'data-(?:parent|relation)-ref="{re.escape(html.escape(ref))}"', card):
             errors.append(f"مرجع فرع الحدث {code} لا يطابق {ref}")
         elif ref not in known:
             errors.append(f"مرجع فرع الحدث {code} لا يملك هدفًا في الدفتر: {ref}")

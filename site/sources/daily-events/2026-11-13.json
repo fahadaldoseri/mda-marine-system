@@ -1,0 +1,64 @@
+[
+  {
+    "code": "NI-2026-11-13",
+    "date": "2026-11-13",
+    "sector": "خارج القطاعات",
+    "class": "no_incident",
+    "no_incident": true,
+    "title": "لا واقعة مسجّلة في المصادر الرسمية المفحوصة",
+    "description": "إصدار استدراكي: لا واقعة أمنية جديدة بتاريخ وقوع 12/11 في صفحة UKMTO وسجل IMO المحفوظين في 18/11. الصفحة تعرض تاريخ الواقعة لا تاريخ النشر، فلا يُعرف إن كان البلاغان المتأخران 203-26 و204-26 منشورين صباح 13/11.",
+    "source": "UKMTO — الحوادث الأخيرة؛ IMO — سجل الحوادث المؤكدة؛ حساب UKMTO الرسمي على X",
+    "confidence": "منخفضة",
+    "evidence_kind": "official_source",
+    "evidence_ref": "https://www.ukmto.org/recent-incidents",
+    "source_url": "https://www.ukmto.org/recent-incidents",
+    "source_excerpt": "لا عنصر بتاريخ وقوع 2026-11-12 في صفحة UKMTO المحفوظة.",
+    "source_excerpt_from": "archive/originals/2026-11-13/ukmto-recent-incidents.md (نسخة جلب 2026-11-18)",
+    "retrieved_at": "2026-11-18T03:46:44Z",
+    "counted": false,
+    "retrospective": true,
+    "sources_checked": [
+      {
+        "source_id": "ukmto_recent_incidents",
+        "source": "UKMTO — الحوادث الأخيرة",
+        "url": "https://www.ukmto.org/recent-incidents",
+        "invoked": true,
+        "result": "جُلب المصدر في 2026-11-18 لا في يوم الإصدار؛ لا يظهر فيه عنصر بتاريخ وقوع 2026-11-12.",
+        "retrieved_at": "2026-11-18T03:46:44Z",
+        "http_status": 200,
+        "http_status_derived": true,
+        "http_status_basis": "مشتق من feeds/feeds-2026-11-18.status.json (رقم 1 · ok=true)؛ يوم 2026-11-13 داخل فجوة النقل فلا status.json له."
+      },
+      {
+        "source_id": "imo_confirmed",
+        "source": "IMO — سجل الحوادث المؤكدة",
+        "url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+        "invoked": true,
+        "result": "جُلب المصدر في 2026-11-18 لا في يوم الإصدار؛ لا يظهر فيه عنصر بتاريخ وقوع 2026-11-12.",
+        "retrieved_at": "2026-11-18T03:46:44Z",
+        "http_status": 200,
+        "http_status_derived": true,
+        "http_status_basis": "مشتق من feeds/feeds-2026-11-18.status.json (رقم 5 · ok=true)؛ يوم 2026-11-13 داخل فجوة النقل فلا status.json له."
+      },
+      {
+        "source_id": "ukmto_x",
+        "source": "حساب UKMTO الرسمي على X",
+        "url": "https://x.com/UK_MTO",
+        "invoked": true,
+        "result": "جُلب المصدر في 2026-11-18 لا في يوم الإصدار؛ لا يظهر فيه عنصر بتاريخ وقوع 2026-11-12.",
+        "retrieved_at": "2026-11-18T03:46:44Z",
+        "http_status": 200,
+        "http_status_derived": true,
+        "http_status_basis": "مشتق من feeds/feeds-2026-11-18.status.json (رقم 15 · ok=true)؛ يوم 2026-11-13 داخل فجوة النقل فلا status.json له."
+      }
+    ],
+    "update_of": null,
+    "parent_id": null,
+    "duplicate_of": null,
+    "event_kind": "جديد",
+    "link_basis": "لا دليل رابط",
+    "link_evidence": "",
+    "link_status": "غير مرتبط",
+    "counts_as_new": true
+  }
+]

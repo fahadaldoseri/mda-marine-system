@@ -1,0 +1,241 @@
+{
+  "date": "2026-11-17",
+  "window": "خلال 24 ساعة السابقة",
+  "scale_version": 1,
+  "registry_version": 1,
+  "scale_levels": [
+    {
+      "ar": "حرج",
+      "rank": 5,
+      "token": "critical",
+      "color": "#FFA3A3",
+      "marker": "■ ■ ■ ■ ■"
+    },
+    {
+      "ar": "مرتفع جدًا",
+      "rank": 4,
+      "token": "severe",
+      "color": "#FFA96B",
+      "marker": "▲ ▲ ▲ ▲"
+    },
+    {
+      "ar": "مرتفع",
+      "rank": 3,
+      "token": "high",
+      "color": "#FFC24D",
+      "marker": "▲ ▲ ▲"
+    },
+    {
+      "ar": "متوسط",
+      "rank": 2,
+      "token": "med",
+      "color": "#d29119",
+      "marker": "▲ ▲"
+    },
+    {
+      "ar": "منخفض",
+      "rank": 1,
+      "token": "low",
+      "color": "#28b45a",
+      "marker": "▲"
+    }
+  ],
+  "overall": {
+    "level": "متوسط",
+    "rank": 2,
+    "top_zone": "مضيق هرمز وخليج عُمان والخليج العربي",
+    "top_zone_id": "Z1",
+    "basis": "أعلى نطاق: مضيق هرمز وخليج عُمان والخليج العربي — وقائع مؤهّلة: هجوم — إصابة ناقلة بمقذوف أثناء خروجها من مضيق هرمز وحريق في غرفة المحركات · 16/11/2026 · هجوم — تعطل ناقلة وحريق في غرفة المحركات 7 أميال بحرية شمال خصب · تحذير UKMTO 208-26 · 16/11/2026 · بلاغ غير مؤكد — روايات إيرانية نقلتها وسائل إعلام عن ارتطام ناقلات بألغام في مضيق هرمز · 16/11/2026"
+  },
+  "zones": [
+    {
+      "id": "Z1",
+      "name": "مضيق هرمز وخليج عُمان والخليج العربي",
+      "level": "متوسط",
+      "rank": 2,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 3,
+      "qualifying_codes": [
+        "MN-2026-11-17-02",
+        "MN-2026-11-17-03",
+        "MN-2026-11-17-04"
+      ],
+      "categories": [
+        "هجوم على سفينة",
+        "تهديد ألغام"
+      ],
+      "basis": "وقائع مؤهّلة: هجوم — إصابة ناقلة بمقذوف أثناء خروجها من مضيق هرمز وحريق في غرفة المحركات · 16/11/2026 · هجوم — تعطل ناقلة وحريق في غرفة المحركات 7 أميال بحرية شمال خصب · تحذير UKMTO 208-26 · 16/11/2026 · بلاغ غير مؤكد — روايات إيرانية نقلتها وسائل إعلام عن ارتطام ناقلات بألغام في مضيق هرمز · 16/11/2026",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-17"
+    },
+    {
+      "id": "Z2",
+      "name": "باب المندب والبحر الأحمر",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-17"
+    },
+    {
+      "id": "Z3",
+      "name": "بحر العرب",
+      "level": "متوسط",
+      "rank": 2,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 1,
+      "qualifying_codes": [
+        "MN-2026-11-17-01"
+      ],
+      "categories": [
+        "نشاط مشبوه"
+      ],
+      "basis": "وقائع مؤهّلة: نشاط مشبوه — اقتراب سفينة أم وزورق مسلح من ناقلة شرق سقطرى · تحذير UKMTO 206-26 · 16/11/2026",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-17"
+    },
+    {
+      "id": "Z4",
+      "name": "القرن الأفريقي",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-17"
+    },
+    {
+      "id": "Z5",
+      "name": "المحيط الهندي",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-17"
+    }
+  ],
+  "counter": {
+    "total": 4,
+    "qualifying": 4,
+    "confirmed": 0,
+    "probable": 0,
+    "unconfirmed_qualifying": 4,
+    "unconfirmed_total": 4,
+    "excluded": 0,
+    "nonspatial": 0
+  },
+  "generated_from": "cumulative-2026/daily/2026-11-17.json",
+  "events": [
+    {
+      "code": "MN-2026-11-17-01",
+      "title": "نشاط مشبوه — اقتراب سفينة أم وزورق مسلح من ناقلة شرق سقطرى · تحذير UKMTO 206-26 · 16/11/2026",
+      "area": "بحر العرب",
+      "class": "بلاغ رسمي",
+      "zone": "Z3",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «بحر العرب»",
+      "qualifying": true,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "نوع مؤهّل: «نشاط مشبوه» وهدف بحري/ملاحي: «سفينة»",
+      "incident_group": "MN-2026-11-17-01",
+      "source_excerpt": "UKMTO WARNING 206-26 - SUSPICIOUS ACTIVITY Incident Date: 16 Nov 26 Incident Time: 0330UTC UKMTO has received a report of an incident 430NM east of Socotra, Yemen. The Master of a tanker has reported being approached by a possible mothership and skiff in position 1202N 06147E.",
+      "category": "نشاط مشبوه"
+    },
+    {
+      "code": "MN-2026-11-17-02",
+      "title": "هجوم — إصابة ناقلة بمقذوف أثناء خروجها من مضيق هرمز وحريق في غرفة المحركات · 16/11/2026",
+      "area": "مضيق هرمز",
+      "class": "بلاغ رسمي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": true,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "نوع مؤهّل: «هجوم» وهدف بحري/ملاحي: «ناقلة»",
+      "incident_group": "MN-2026-11-17-02",
+      "source_excerpt": "The Company Security Officer of a Tanker has reported the vessel being struck by an unknown projectile whilst transiting outbound. This resulted in a fire in the engine room. No casualties have been reported and all crew have been accounted for.",
+      "category": "هجوم على سفينة"
+    },
+    {
+      "code": "MN-2026-11-17-03",
+      "title": "هجوم — تعطل ناقلة وحريق في غرفة المحركات 7 أميال بحرية شمال خصب · تحذير UKMTO 208-26 · 16/11/2026",
+      "area": "مضيق هرمز",
+      "class": "بلاغ رسمي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": true,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "نوع مؤهّل: «هجوم» وهدف بحري/ملاحي: «ناقلة»",
+      "incident_group": "MN-2026-11-17-03",
+      "source_excerpt": "UKMTO has received a report of an incident 7NM north of Khasab, Oman. A third-party has reported an attack involving a tanker transiting the Strait of Hormuz, disabling the vessel and resulting in an engine room fire. The crew have been reported safe.",
+      "category": "هجوم على سفينة"
+    },
+    {
+      "code": "MN-2026-11-17-04",
+      "title": "بلاغ غير مؤكد — روايات إيرانية نقلتها وسائل إعلام عن ارتطام ناقلات بألغام في مضيق هرمز · 16/11/2026",
+      "area": "مضيق هرمز",
+      "class": "نقل إعلامي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": true,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "نوع مؤهّل: «ألغام» وهدف بحري/ملاحي: «ناقلات»",
+      "incident_group": "MN-2026-11-17-04",
+      "source_excerpt": "Two oil tankers hit mines in the Strait of Hormuz, IRGC says",
+      "category": "تهديد ألغام"
+    }
+  ]
+}

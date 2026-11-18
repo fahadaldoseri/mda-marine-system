@@ -4,14 +4,14 @@
     "print('second')"
   ],
   "argv": [
-    "/usr/bin/python3",
+    "/usr/local/bin/python3",
     "-c",
     "print('second')"
   ],
   "changed_files_outside_isolation": 0,
   "changed_paths_outside_isolation": [],
-  "duration_ms": 171,
-  "duration_seconds": 0.171,
+  "duration_ms": 170,
+  "duration_seconds": 0.17,
   "evidence_files": {
     "impact_summary": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/raw/declaration-proof/impact-summary.json",
     "project_compare": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/raw/declaration-proof/project-compare.json",
@@ -29,37 +29,37 @@
     "project_root": "/home/ubuntu/mda-marine-system/brain",
     "seawatch_after": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/fingerprints/declaration-proof/seawatch-after.json",
     "seawatch_before": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/fingerprints/declaration-proof/seawatch-before.json",
-    "seawatch_root": "/home/ubuntu/seawatch"
+    "seawatch_root": "/home/ubuntu/mda-marine-system/site"
   },
   "impact_summary": {
     "connect_attempts": 1,
     "connect_lines": [
-      "3168537 connect(3, {sa_family=AF_INET, sin_port=htons(80), sin_addr=inet_addr(\"1.1.1.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)"
+      "11199 connect(3, {sa_family=AF_INET, sin_port=htons(80), sin_addr=inet_addr(\"1.1.1.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)"
     ],
     "execve": [
       "/bin/sh",
       "/usr/bin/awk",
       "/usr/bin/bwrap",
-      "/usr/bin/python3"
+      "/usr/local/bin/python3"
     ],
     "files_opened_for_write": [
-      "3168532 creat(\"/newroot/dev/full\", 0444) = 5",
-      "3168532 creat(\"/newroot/dev/null\", 0444) = 5",
-      "3168532 creat(\"/newroot/dev/random\", 0444) = 5",
-      "3168532 creat(\"/newroot/dev/tty\", 0444) = 5",
-      "3168532 creat(\"/newroot/dev/urandom\", 0444) = 5",
-      "3168532 creat(\"/newroot/dev/zero\", 0444) = 5",
-      "3168532 openat(5, \"gid_map\", O_RDWR|O_CLOEXEC) = 6",
-      "3168532 openat(5, \"setgroups\", O_RDWR|O_CLOEXEC) = 6",
-      "3168532 openat(5, \"uid_map\", O_RDWR|O_CLOEXEC) = 6",
-      "3168534 openat(AT_FDCWD, \"/var/tmp/hermetic-work.kqXps7/.hermetic-net-20261112T044256Z-3168489.probe.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "3168534 openat(AT_FDCWD, \"/var/tmp/hermetic-work.kqXps7/.hermetic-net-20261112T044256Z-3168489.probe.before\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "3168534 openat(AT_FDCWD, \"/var/tmp/hermetic-work.kqXps7/.hermetic-net-20261112T044256Z-3168489.probe.out\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "3168534 openat(AT_FDCWD, \"/var/tmp/hermetic-work.kqXps7/.hermetic-net-20261112T044256Z-3168489.probe.rc\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "3168534 openat(AT_FDCWD, \"/var/tmp/hermetic-work.kqXps7/.hermetic-net-20261112T044256Z-3168489.run.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "3168535 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "3168538 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "3168550 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3"
+      "11195 creat(\"/newroot/dev/full\", 0444)  = 5",
+      "11195 creat(\"/newroot/dev/null\", 0444)  = 5",
+      "11195 creat(\"/newroot/dev/random\", 0444) = 5",
+      "11195 creat(\"/newroot/dev/tty\", 0444)   = 5",
+      "11195 creat(\"/newroot/dev/urandom\", 0444) = 5",
+      "11195 creat(\"/newroot/dev/zero\", 0444)  = 5",
+      "11195 openat(5, \"gid_map\", O_RDWR|O_CLOEXEC) = 6",
+      "11195 openat(5, \"setgroups\", O_RDWR|O_CLOEXEC) = 6",
+      "11195 openat(5, \"uid_map\", O_RDWR|O_CLOEXEC) = 6",
+      "11196 openat(AT_FDCWD, \"/var/tmp/hermetic-work.y56g7h/.hermetic-net-20261118T201413Z-11155.probe.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "11196 openat(AT_FDCWD, \"/var/tmp/hermetic-work.y56g7h/.hermetic-net-20261118T201413Z-11155.probe.before\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "11196 openat(AT_FDCWD, \"/var/tmp/hermetic-work.y56g7h/.hermetic-net-20261118T201413Z-11155.probe.out\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "11196 openat(AT_FDCWD, \"/var/tmp/hermetic-work.y56g7h/.hermetic-net-20261118T201413Z-11155.probe.rc\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "11196 openat(AT_FDCWD, \"/var/tmp/hermetic-work.y56g7h/.hermetic-net-20261118T201413Z-11155.run.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "11197 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "11200 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "11203 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3"
     ]
   },
   "isolation": {
@@ -74,7 +74,7 @@
     "command": "python3 -c 'import socket; socket.create_connection((\"1.1.1.1\",80),3)'",
     "exit_code": 1,
     "failed_as_expected": true,
-    "output": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n  File \"/usr/lib/python3.12/socket.py\", line 852, in create_connection\n    raise exceptions[0]\n  File \"/usr/lib/python3.12/socket.py\", line 837, in create_connection\n    sock.connect(sa)\nOSError: [Errno 101] Network is unreachable",
+    "output": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import socket; socket.create_connection((\"1.1.1.1\", 80), 3)\n                   ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/socket.py\", line 868, in create_connection\n    raise exceptions[0]\n  File \"/usr/local/lib/python3.13/socket.py\", line 853, in create_connection\n    sock.connect(sa)\n    ~~~~~~~~~~~~^^^^\nOSError: [Errno 101] Network is unreachable",
     "packets_after_command": 0,
     "packets_after_probe": 0,
     "packets_before": 0
@@ -89,14 +89,14 @@
   "schema": "hermetic-run/v1",
   "timeout_enforced": false,
   "timeout_seconds": 10,
-  "timestamp_utc": "20261112T044256Z",
-  "tool": "/usr/bin/python3",
+  "timestamp_utc": "20261118T201413Z",
+  "tool": "/usr/local/bin/python3",
   "tool_name": "declaration-proof",
   "trace": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/traces/declaration-proof.strace",
   "versions": {
     "bubblewrap": "bubblewrap 0.9.0",
     "strace": "strace -- version 6.8",
-    "systemd_run": "systemd 255 (255.4-1ubuntu8.17)",
+    "systemd_run": "systemd 255 (255.4-1ubuntu8.18)",
     "unshare": "unshare from util-linux 2.39.3"
   }
 }
