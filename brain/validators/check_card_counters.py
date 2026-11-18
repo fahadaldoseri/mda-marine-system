@@ -714,7 +714,7 @@ def _hero_detail(meta: dict, zones_data: dict, card: dict) -> str:
         c = zones_data.get("counter") or {}
         total = int(c.get("unconfirmed_total") or 0)
         return (f"{format_arabic_count(total, card.get('number_format'))} · منها "
-                f"{c.get('unconfirmed_qualifying') or 0} مؤهلة · تُذكر ولا تُحتسب")
+                f"{c.get('unconfirmed_qualifying') or 0} مستوفية لمعيار الاحتساب · لم تثبت أيٌّ منها")
     if detail.get("kind") == "fire_split":
         fire = (meta.get("hero_sources") or {}).get("fire") or {}
         return (f"المؤكد: {fire.get('confirmed') or 0} · "
