@@ -13,7 +13,14 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(os.environ.get("BRAIN_DIR") or Path(__file__).resolve().parents[1])
-DATE = os.environ.get("D") or datetime.now(timezone.utc).date().isoformat()
+# اليوم إن وُجد متنه (تشغيل الخادم بعد كتابة التقرير)، وإلا أحدث متن محفوظ؛ كان الاختبار
+# يفشل في كل بيئة لا تحمل تقرير اليوم (GitHub Actions والجلسات السحابية) لا لعيب في الرموز.
+_TODAY = datetime.now(timezone.utc).date().isoformat()
+_REPORTS = Path(__file__).resolve().parents[1] / "reports"
+DATE = os.environ.get("D") or (
+    _TODAY if (_REPORTS / f"{_TODAY}-sectioned.md").is_file()
+    else sorted(p.name[:10] for p in _REPORTS.glob("????-??-??-sectioned.md"))[-1]
+)
 VALIDATOR = ROOT / "validators" / "check_code_spaces.py"
 REPORT = ROOT / "reports" / f"{DATE}-sectioned.md"
 META = ROOT / "web" / "meta" / f"{DATE}.json"

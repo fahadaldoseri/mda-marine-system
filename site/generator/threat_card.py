@@ -24,7 +24,14 @@ def _brain_default() -> pathlib.Path:
     env = os.environ.get("BRAIN") or os.environ.get("BRAIN_DIR")
     if env:
         return pathlib.Path(env)
-    return pathlib.Path(__file__).resolve().parents[2] / "brain-marine-news"
+    # ك-571: الجذر من القياس الموحّد (brain_root)، لا من الأرشيف brain-marine-news؛ كان
+    # المسار الثابت يُسقط بطاقة القطاعات صامتًا في أي بيئة بلا BRAIN_DIR (GitHub Actions).
+    import sys
+    here = str(pathlib.Path(__file__).resolve().parent)
+    if here not in sys.path:
+        sys.path.insert(0, here)
+    from brain_root import brain_root
+    return brain_root()
 
 
 BRAIN_DEFAULT = _brain_default()

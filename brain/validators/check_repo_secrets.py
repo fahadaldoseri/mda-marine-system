@@ -6,7 +6,7 @@
 يتحقق من المرآة بعد المزامنة. هذه البوابة تفحص الملفات المتتبَّعة في المرآة وتفشل مغلقًا
 إذا وجدت نمط سرّ، بلا طباعة أي قيمة.
 
-الاستعمال: python3 validators/check_repo_secrets.py [--repo /home/ubuntu/mda-marine-system]
+الاستعمال: python3 validators/check_repo_secrets.py [--repo <جذر المستودع>]
 """
 from __future__ import annotations
 
@@ -32,7 +32,9 @@ PATTERNS = (
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--repo", default="/home/ubuntu/mda-marine-system")
+    # جذر المستودع يُشتق من موضع الملف (brain/validators/ ← الجذر)، لا من مسار خادم ثابت؛
+    # كان المسار المحفور يفشل في أي بيئة غير خادم Manus (GitHub Actions والجلسات السحابية).
+    ap.add_argument("--repo", default=str(pathlib.Path(__file__).resolve().parents[2]))
     a = ap.parse_args()
     repo = pathlib.Path(a.repo)
     if not (repo / ".git").exists():
