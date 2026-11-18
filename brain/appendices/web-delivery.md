@@ -182,6 +182,11 @@ python3 /home/ubuntu/seawatch/generator/build_site.py [--allow-restricted]
 ## التسليم الدائم على الموقع المنشور (معتمد 12 أكتوبر 2026)
 
 **الرابط الدائم:** https://seawatch-live.pages.dev
+**الرابط الثابت للمالك (معتمد 18 نوفمبر 2026):** https://mda-bh.pages.dev
+— مشروع Cloudflare Pages باسم `mda-bh` مربوط بالمستودع نفسه `fahadaldoseri/seawatch-live` والفرع `main`،
+فكل دفع إلى `main` ينشر على الرابطين معًا. يبقى `seawatch-live.pages.dev` النطاق المرجعي للمدققات وروابط التسليم،
+و`mda-bh.pages.dev` الرابط الذي يُعطى للمالك ليفتح الموقع وآخر تقرير من أي جهاز. إن لم يُبنَ أحد المشروعين تلقائيًا بعد الدفع،
+يُطلق النشر يدويًا: `POST /accounts/{id}/pages/projects/<seawatch-live|mda-bh>/deployments -F branch=main`.
 **مشروع الموقع:** wdp_5c2c28191f64a1c0d4b4e154 — مجلد العمل `/home/ubuntu/seawatch`
 
 مسار كل تشغيل صباحي بعد بناء التقرير:
