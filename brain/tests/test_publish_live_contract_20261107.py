@@ -119,10 +119,10 @@ class LiveContractTests(unittest.TestCase):
         manifest = json.loads((ROOT / "runbook" / "runbook.json").read_text(encoding="utf-8"))
         text = json.dumps(manifest, ensure_ascii=False)
         self.assertIn("cloudflare-pages", text)
-        self.assertIn("seawatch-live.pages.dev", text)
+        self.assertIn("mda-bh.pages.dev", text)
         channel = next(item for item in manifest.get("publish_channels", []) if item.get("name") == "cloudflare-pages")
         self.assertTrue(channel["enabled"])
-        self.assertEqual(channel["base_url"], "https://seawatch-live.pages.dev")
+        self.assertEqual(channel["base_url"], "https://mda-bh.pages.dev")
         self.assertEqual(manifest.get("publish_channel_order"), ["cloudflare-pages", "raw-githack", "raw.githubusercontent-verify-only"])
 
 if __name__ == "__main__":

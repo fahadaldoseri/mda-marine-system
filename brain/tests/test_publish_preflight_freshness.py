@@ -19,7 +19,7 @@ pc = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(pc)
 
 READY = {'cloudflare-pages': {'state': 'ready', 'presentation_eligible': True,
-                              'url': 'https://seawatch-live.pages.dev', 'reason': 'جاهزة'}}
+                              'url': 'https://mda-bh.pages.dev', 'reason': 'جاهزة'}}
 NOT_READY = {'cloudflare-pages': {'state': 'down', 'presentation_eligible': True, 'reason': 'متوقفة'},
              'raw-githack': {'state': 'down', 'presentation_eligible': True, 'reason': 'متوقفة'}}
 
