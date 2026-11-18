@@ -1,0 +1,6 @@
+✔ سياسة التسليم المتصل: الوضع أ · سلسلة ثمانية عناصر · ستة حراس · خطوات المانيفست حاضرة
+   النطاق: all · دائمة: True · القرار: 2026-11-06
+   السلسلة: branch ← pr ← merge ← push ← publish ← live_verify ← telegram ← report
+   الممنوعات: force_push · direct_push_main · merge_without_step · publish_without_step · telegram_outside_step · silent_close
+   خطوات المانيفست: D005 · D010 · D020 · D021 · D016 · D030 · D031 · D032 · D033 · D035 · D036 · D040 · D045 · D050 · D060 · D071
+elapsed_seconds=0.035806
