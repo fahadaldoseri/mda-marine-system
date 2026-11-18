@@ -1,0 +1,137 @@
+{
+  "date": "2026-11-18",
+  "range": {
+    "from": "2026-02-28",
+    "to": "2026-11-18",
+    "days_covered": 264,
+    "days_total": 264
+  },
+  "metrics": [
+    {
+      "id": "ukmto-reports",
+      "title": "بلاغات UKMTO المرصودة",
+      "today": 8,
+      "cumulative": 235,
+      "updated": "2026-11-18",
+      "definition": "عدد السجلات الفريدة التي يذكر مصدرها UKMTO أو رابط ukmto.org.",
+      "basis": "عدّ مباشر من source(s)؛ صف JMIC · UKMTO يُحسب صفًا واحدًا، والتاريخ يُسند إلى date_start. قاعدة updated: أعلى تاريخ من published_at أو retrieved_at أو date_start، مع استخدام تاريخ الواقعة عند غياب الحقلين الأولين.",
+      "sources": [
+        "cumulative-2026/daily/*.json",
+        "cumulative-2026/event-ledger-master.json#events"
+      ],
+      "confidence": "عالية"
+    },
+    {
+      "id": "qualifying-incidents",
+      "title": "وقائع مستوفية لمعيار الاحتساب",
+      "today": 9,
+      "cumulative": 183,
+      "updated": "2026-11-18",
+      "definition": "واقعة بحرية لها نوع مؤهل (هجوم/استهداف/إطلاق/انفجار/ألغام/اختطاف/حريق/غرق/إعاقة/تعطيل ملاحي/نشاط مشبوه) وهدف بحري أو ملاحي.",
+      "basis": "تطبيق علامات النوع والهدف على description/classification/outcome بعد استبعاد صفوف لا واقعة؛ لا تُستخرج أرقام من عناوين الملخصات. قاعدة updated: أعلى تاريخ من published_at أو retrieved_at أو date_start، مع استخدام تاريخ الواقعة عند غياب الحقلين الأولين.",
+      "sources": [
+        "cumulative-2026/daily/*.json",
+        "cumulative-2026/event-ledger-master.json#events"
+      ],
+      "confidence": "متوسطة"
+    },
+    {
+      "id": "unconfirmed-narratives",
+      "title": "روايات لم تتأكد",
+      "today": 0,
+      "cumulative": 33,
+      "updated": "2026-11-09",
+      "definition": "رواية يصفها السجل صراحةً بأنها رواية أو يصنفها كذلك، مع evidence_status غير محسوم.",
+      "basis": "الوصف يبدأ بـ«رواية» أو classification يحمل وسم الرواية؛ تُذكر الرواية ولا تُرفع إلى واقعة مؤكدة. قاعدة updated: أعلى تاريخ من published_at أو retrieved_at أو date_start، مع استخدام تاريخ الواقعة عند غياب الحقلين الأولين.",
+      "sources": [
+        "cumulative-2026/daily/*.json",
+        "cumulative-2026/event-ledger-master.json#events"
+      ],
+      "confidence": "متوسطة"
+    },
+    {
+      "id": "confirmed-incidents",
+      "title": "وقائع مؤكدة",
+      "today": 1,
+      "cumulative": 213,
+      "updated": "2026-11-18",
+      "definition": "واقعة evidence_status لها confirmed_effect_or_attack في قائمة events الحاكمة.",
+      "basis": "حالة الدفتر الرئيسي وحدها هي أساس التأكيد؛ لا تُحوّل تقارير IMO التراكمية أو العناوين إلى وقائع إضافية. قاعدة updated: أعلى تاريخ من published_at أو retrieved_at أو date_start، مع استخدام تاريخ الواقعة عند غياب الحقلين الأولين.",
+      "sources": [
+        "cumulative-2026/daily/*.json",
+        "cumulative-2026/event-ledger-master.json#events"
+      ],
+      "confidence": "عالية"
+    },
+    {
+      "id": "deaths",
+      "title": "الوفيات المسجّلة",
+      "today": null,
+      "cumulative": 24,
+      "updated": "2026-10-31",
+      "definition": "مجموع الوفيات التي يثبتها الحقل الرقمي deaths_confirmed في واقعة فريدة.",
+      "basis": "المجموع هو جمع deaths_confirmed الموجب والمعلن فقط بعد استبعاد سجل counted=false/duplicate_of؛ لا تُقرأ الأرقام من العناوين أو الملخصات التراكمية، وتُستبعد وفيات غير البحارة بحسب casualty_scope. لا يوجد صف في تاريخ اليوم يحمل deaths_confirmed رقميًا؛ today=null ولا يُستنتج الصفر من غياب الحقل. استُبعدت 2 صفوف غير بحارة من القياس. قاعدة updated: أعلى تاريخ من published_at أو retrieved_at أو date_start، مع استخدام تاريخ الواقعة عند غياب الحقلين الأولين.",
+      "sources": [
+        "cumulative-2026/daily/*.json",
+        "cumulative-2026/event-ledger-master.json#events"
+      ],
+      "confidence": "متوسطة"
+    },
+    {
+      "id": "imo-confirmed-incidents",
+      "title": "سجل الحوادث المؤكدة من IMO",
+      "today": 0,
+      "cumulative": 128,
+      "updated": "2026-11-03",
+      "definition": "واقعة مؤكدة على سفينة تجارية مدرجة في قائمة IMO الرسمية؛ القائمة مرجع الحوادث المؤكدة ولا تُرفع فيها الروايات.",
+      "basis": "عدّ مباشر من القائمة الرسمية للمنظمة البحرية الدولية (appendices/imo-incidents.json)؛ لا تُرفع فيها الروايات ولا تُحتسب غير المؤكدة. قاعدة today: الفرق بين totals الحالية وprevious.totals، ويُحتسب صفرًا في أي يوم لا يوجد فيه تحديث للمصدر (لا يُنقل فرق يوم سابق إلى يوم جديد)؛ قاعدة updated: source.as_at في الصفحة الرسمية. الرقم 122 معياره قائمة IMO الرسمية؛ لا يُقارن بعدد سجلات المشروع الداخلية لأن المعيارين مختلفان.",
+      "sources": [
+        "appendices/imo-incidents.json",
+        "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx"
+      ],
+      "confidence": "عالية"
+    },
+    {
+      "id": "imo-seafarer-deaths",
+      "title": "أعداد الوفيات من IMO",
+      "today": 0,
+      "cumulative": 24,
+      "updated": "2026-11-03",
+      "definition": "عدد وفيات البحارة المؤكد في القائمة الرسمية للمنظمة البحرية الدولية.",
+      "basis": "عدّ مباشر من القائمة الرسمية للمنظمة البحرية الدولية (appendices/imo-incidents.json)؛ لا يُستنتج من دفتر المشروع. قاعدة today: الفرق بين totals الحالية وprevious.totals، ويُحتسب صفرًا في أي يوم لا يوجد فيه تحديث للمصدر؛ قاعدة updated: source.as_at في الصفحة الرسمية.",
+      "sources": [
+        "appendices/imo-incidents.json",
+        "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx"
+      ],
+      "confidence": "عالية"
+    },
+    {
+      "id": "fire-incidents",
+      "title": "حرائق السفن",
+      "today": 3,
+      "cumulative": 60,
+      "updated": "2026-11-18",
+      "definition": "واقعة سفينة يتضمن outcome حريقًا أو نصها وصفًا صريحًا لحريق/اشتعال/إخماد حريق.",
+      "basis": "بحث محافظ في outcome والنص داخل حالات واقعة مسجلة؛ لا تُحتسب نشرات التحذير أو ملخصات القرصنة بلا واقعة سفينة. قاعدة updated: أعلى تاريخ من published_at أو retrieved_at أو date_start، مع استخدام تاريخ الواقعة عند غياب الحقلين الأولين.",
+      "sources": [
+        "cumulative-2026/daily/*.json",
+        "cumulative-2026/event-ledger-master.json#events"
+      ],
+      "confidence": "متوسطة"
+    },
+    {
+      "id": "official-products",
+      "title": "منتجات UKMTO وJMIC المرصودة",
+      "today": 8,
+      "cumulative": 242,
+      "updated": "2026-11-18",
+      "definition": "سجل مصدره UKMTO أو JMIC؛ كل code/identity يُحسب مرة واحدة حتى إن جمع الجهتين.",
+      "basis": "مطابقة اسم المصدر أو رابط المصدر مباشرة؛ لا تُدّعى جدة المنتج، بل رصده في السجل. قاعدة updated: أعلى تاريخ من published_at أو retrieved_at أو date_start، مع استخدام تاريخ الواقعة عند غياب الحقلين الأولين.",
+      "sources": [
+        "cumulative-2026/daily/*.json",
+        "cumulative-2026/event-ledger-master.json#events"
+      ],
+      "confidence": "عالية"
+    }
+  ]
+}
