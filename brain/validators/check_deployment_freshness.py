@@ -29,7 +29,7 @@ PROBE_FILES = [
     "sources.html",
     "additions.html",
 ]
-BASE_DEFAULT = "https://seawatch-live.pages.dev"
+BASE_DEFAULT = "https://mda-bh.pages.dev"
 MIN_HTML_BYTES = 3000
 
 

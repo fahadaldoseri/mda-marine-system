@@ -44,7 +44,7 @@ STATE = B / "state" / "telegram-offset.json"
 SUBS = B / "appendices" / "telegram-subscriptions.json"
 TARGETS = B / "appendices" / "telegram-targets.json"
 LOG = B / "logs" / "telegram-bot.log"
-SITE = "https://seawatch-live.pages.dev"
+SITE = "https://mda-bh.pages.dev"
 
 
 def token() -> str:

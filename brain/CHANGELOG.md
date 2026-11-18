@@ -39,6 +39,18 @@
 - طُبّق تصحيح الصياغة d0418a55 من طلب 643 كما هو: تعديل ألفاظ فقط، بلا تغيير في واقعة أو مصدر أو وقت، وEST-2026-11-18-01 بنصه ومداه.
 - أُعيد توليد `appendices/lexicon-corpus.json` بـ`build_lexicon_corpus.py --apply`: 8192 كلمة، و`--check` مطابق.
 - المجموعة الكاملة ببيئة GitHub بعد بناء الموقع: نجح 91 وفشل 0. أثرها الجانبي في `logs/` ومتن 18 (سطران فارغان) أُرجع.
+## 2026-11-18 — اعتماد mda-bh.pages.dev رابطًا رسميًا وحيدًا (قرار المالك)
+- استُبدل `seawatch-live.pages.dev` بـ`mda-bh.pages.dev` في: `site/sources/site.json` و`site/generator/site_chrome.py` (أصل الروابط المطلقة وog وfeed وsitemap) و`runbook/runbook.json` و`tools/publish_channels.py` و`tools/telegram_bot.py` و`validators/check_deployment_freshness.py` وأدوات التدقيق البصري و`schedule/detail-v7.txt` و`appendices/web-delivery.md` ودليل التشغيل اليومي، والاختباران المرتبطان.
+- اسم المستودع `fahadaldoseri/seawatch-live` لم يتغير، فهو مصدر البناء للمشروع الجديد.
+- ثبت بالتشغيل: الملفات JSON صالحة، والشيفرة تُترجم، و`test_publish_preflight_freshness` و`test_publish_live_contract_20261107` بنتيجة 8 ناجح و1 فاشل قبل التغيير وبعده (الفاشل `test_d020` سابق ولا علاقة له بالنطاق).
+- أُعيد توليد `docs/runbook.md` من المانيفست (`tools/runbook.py handbook`)، و`runbook.py verify` يمر.
+- لم يُختبر: بناء الموقع الكامل بالنطاق الجديد، فيظهر أثره في الصفحات المنشورة مع أول نشر قادم.
+
+## 2026-11-18 — رابط ثابت للمالك mda-bh.pages.dev
+- أُنشئ مشروع Cloudflare Pages `mda-bh` مربوطًا بـ`fahadaldoseri/seawatch-live` فرع `main` بلا أمر بناء (مثل `seawatch-live`).
+- أول نشر يدوي 30798998 من الإيداع 905df2a نجح. ثبت بالتشغيل: `/` يرجع 200 ويعرض تقرير 2026-11-18، و`/reports/2026-11-18` يرجع 200.
+- وُثّق في `appendices/web-delivery.md`. لم يُغيَّر النطاق المرجعي للمدققات. البناء التلقائي عند الدفع لم يُختبر بعد (يُختبر مع أول نشر قادم).
+
 ## 18 نوفمبر 2026 — اعتماد تقرير 12 نوفمبر للنشر
 
 - **قرار المالك (بطاقة قرار):** إصلاح المانعين ثم النشر، ونشر يوم 12 وحده.
