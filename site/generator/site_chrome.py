@@ -20,7 +20,7 @@ PRINT_ENABLED = False
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 
 # ── هوية بصرية (م-28): ذهبي للهوية · تركوازي للبيانات · ألوان التهديد دلالية ──
-SITE_ORIGIN = "https://seawatch-live.pages.dev"
+SITE_ORIGIN = "https://mda-bh.pages.dev"
 LOGO_HEADER = "/assets/logo-header.png"
 LOGO_ALT = "شعار مركز الوعي بالمجال البحري — مملكة البحرين"
 LOGO_ALT_EN = "Maritime Domain Awareness Center logo — Kingdom of Bahrain"
