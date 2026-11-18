@@ -105,9 +105,13 @@ def copy_sources(date_iso: str, brain: Path) -> list:
     else:
         log.append(f"تحذير: ملف قطاعات اليوم غير موجود: {src_zones}")
 
+    # الدفتر الرئيسي له اسم ثابت؛ زمن التعديل لا يصلح معيارًا لأن نسخة git
+    # تعطي كل الملفات زمنًا واحدًا، فكان يُنسخ دفتر قديم منتهٍ في 10-11 بدل الرئيسي.
+    master_ledger = brain / "cumulative-2026" / "event-ledger-master.json"
     ledger_candidates = sorted((brain / "cumulative-2026").glob("event-ledger*.json"))
-    if ledger_candidates:
-        newest = max(ledger_candidates, key=lambda p: p.stat().st_mtime)
+    if master_ledger.is_file() or ledger_candidates:
+        newest = master_ledger if master_ledger.is_file() else max(
+            ledger_candidates, key=lambda p: p.stat().st_mtime)
         shutil.copy2(newest, SITE / "sources" / "ledger.json")
         log.append(f"حُدّث دفتر الأحداث: {newest.name}")
 

@@ -39,12 +39,6 @@ Why the level has not risen further: official sources have not shown a newly doc
 
 What would raise or lower it: an official report confirming damage or disruption to navigation would raise it; closure of the current warnings and the absence of new confirmed incidents would lower it.
 
-### Sector-Level Declaration
-Level in the Strait of Hormuz, Gulf of Oman and the Arabian Gulf: Very High
-Level in Bab al-Mandab and the Red Sea: Low
-Level in the Arabian Sea: Low
-Level in the Horn of Africa: Moderate
-Level in the Indian Ocean: Low
 
 ## Operational Directives
 - Raise readiness before entering the Strait of Hormuz and the Gulf of Oman, and review the latest UKMTO warnings.
