@@ -37,6 +37,31 @@ def approved_count() -> int:
     return int(m["approved_source_count"])
 
 
+def registry_names() -> dict[int, str]:
+    """أسماء التغذيات الحالية بأرقامها من sections/10-sources.md (المصدر الذي يقرؤه check_feeds).
+
+    لقطة الفحص تحفظ الاسم وقت الجلب؛ وإذا عُدّل اسم في السجل بعدها (لفظ ممنوع مثلًا) أعاد
+    `--write` الاسم القديم إلى المتن. الرقم ثابت، فالاسم يُقرأ من السجل الحالي.
+    رقم بأكثر من اسم أو غائب عن السجل يبقى على اسم اللقطة.
+    """
+    src = B / "sections" / "10-sources.md"
+    if not src.exists():
+        return {}
+    seen: dict[int, set[str]] = {}
+    grab = False
+    for ln in src.read_text(encoding="utf-8").splitlines():
+        if ln.startswith("## تغذيات RSS"):
+            grab = True
+            continue
+        if grab and ln.startswith("## "):
+            break
+        if grab:
+            m = re.match(r"^\|\s*(\d+)\s*\|\s*(.+?)\s*\|\s*(\S+)\s*\|$", ln.strip())
+            if m:
+                seen.setdefault(int(m.group(1)), set()).add(m.group(2))
+    return {n: next(iter(v)) for n, v in seen.items() if len(v) == 1}
+
+
 def feeds_state(date: str) -> dict:
     p = B / "feeds" / f"feeds-{date}.status.json"
     if not p.exists():
@@ -49,8 +74,11 @@ def feeds_state(date: str) -> dict:
     manual = d.get("manual_reference") or []
     reasons: dict[str, list[str]] = {}
     names: list[str] = []
+    current = registry_names()
     for f in failed:
-        name = (f.get("name") or f.get("source") or str(f.get("num", ""))).strip()
+        num = f.get("num")
+        name = (current.get(num) if isinstance(num, int) else None) or \
+            (f.get("name") or f.get("source") or str(f.get("num", ""))).strip()
         reason = (f.get("block_reason") or f.get("reason") or "سبب غير مسجّل").strip()
         reasons.setdefault(reason, []).append(name)
         names.append(name)

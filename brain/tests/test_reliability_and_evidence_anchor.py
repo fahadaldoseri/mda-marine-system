@@ -29,7 +29,14 @@ def check(html: str) -> list[str]:
     links = EV_LINK.findall(html)
     if not links:
         errs.append("لا روابط دليل (ev-link) في الصفحة")
-    for h in links:
+    for m in EV_LINK.finditer(html):
+        h = m.group(1)
+        # بطاقة «لا واقعة» (رمز NI-) دليلها حالة القائمة الرسمية نفسها، ولا عنصر فيها
+        # يُرسى عليه؛ فلا تُطالب بمرساة. كل بطاقة واقعة غيرها تبقى مطالبة بها.
+        art = html.rfind("<article", 0, m.start())
+        code = re.search(r'data-event-code="([^"]*)"', html[art:m.start()]) if art >= 0 else None
+        if code and code.group(1).startswith("NI-"):
+            continue
         if "#" not in h or h.rstrip().endswith("#"):
             errs.append(f"رابط دليل بلا مرساة عميقة: {h[:80]}")
     return errs
@@ -67,6 +74,14 @@ def main() -> int:
         print("   ✘ الحالة السالبة لم تُرفض كما يجب:", neg_errs)
         return 1
     print(f"   ✔ الحالة السالبة رُفضت بثلاثة أسباب ({len(neg_errs)})")
+    # سالب ثانٍ: بطاقة واقعة عادية بلا مرساة تُرفض، وبطاقة NI- بلا مرساة تُقبل.
+    inc = ('<span data-source-reliability="a"></span><span data-analytic-confidence="b"></span>'
+           '<article class="ev" data-event-code="MN-2099-01-01-01"><a class="ev-link" href="https://example.org/page">س</a></article>')
+    ni = inc.replace("MN-2099-01-01-01", "NI-2099-01-01")
+    if not any("مرساة" in e for e in check(inc)) or check(ni):
+        print("   ✘ إعفاء بطاقة «لا واقعة» غير محكوم:", check(inc), check(ni))
+        return 1
+    print("   ✔ بطاقة واقعة بلا مرساة تُرفض، وبطاقة «لا واقعة» تُقبل")
     return 0
 
 

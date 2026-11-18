@@ -63,6 +63,8 @@ CATEGORY_OF_TYPE = {
 }
 FULL_DISRUPTION_MARKERS = ("إغلاق الممر", "تعليق الملاحة", "توقف كامل", "إغلاق المضيق")
 CASUALTY_MARKERS = ("قتلى", "خسائر بشرية", "إصابات بشرية", "مفقودين")
+OFFICIAL_REPORT_CLASSES = ("بلاغ رسمي", "بلاغ رسمي متعدد")
+UKMTO_CONFIRMED_KINDS = ("هجوم", "استهداف", "انفجار", "إصابة", "أضرار")
 
 
 class FailClosed(Exception):
@@ -116,17 +118,22 @@ def zone_of(event: dict, reg: dict, day_overrides: dict) -> tuple[str | None, st
 
 def canonical_confirmed(event: dict) -> bool:
     """حالة الدليل المؤكدة من المصدر الواحد؛ لا تُشتق من مفردات التصنيف."""
+    tools_dir = str(pathlib.Path(__file__).resolve().parent)
+    if tools_dir not in sys.path:
+        sys.path.insert(0, tools_dir)
     try:
         import ledger_totals as _lt  # المصدر الواحد لقاعدة التأكيد
-    except ImportError:  # pragma: no cover
-        return False
+    except ImportError as exc:  # كان يُرجع False صامتًا فيُنزَّل كل تأكيد عند الاستيراد كحزمة
+        raise FailClosed(f"تعذّر تحميل قاعدة التأكيد من ledger_totals: {exc}") from exc
     status = _lt.resolved_evidence_status(event)
     if status in _lt.COUNTED_EVIDENCE_STATUSES:
         return True
+    # قرار المالك (2026-11-18): بلاغ UKMTO الرسمي عن هجوم يُحتسب إصابة مؤكدة في سلّم
+    # التهديد. لا يشمل بلاغات النشاط المشبوه، ولا البلاغ الرسمي من جهة أخرى.
     kind = str(event.get("incident_kind") or "")
-    if kind and kind not in ("هجوم", "استهداف", "انفجار", "إصابة", "أضرار"):
-        return False
-    return False
+    cls = str(event.get("class") or "")
+    return (cls in OFFICIAL_REPORT_CLASSES and kind in UKMTO_CONFIRMED_KINDS
+            and _lt.direct_ukmto(event))
 
 
 def is_qualifying(event: dict, reg: dict, day_overrides: dict) -> tuple[bool, str, str]:

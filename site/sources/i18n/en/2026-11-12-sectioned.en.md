@@ -39,8 +39,8 @@ What would raise or lower it: A complete official report establishing damage or 
 - Route changes or loss estimates should not be based on brief headlines; official information should be reviewed, and the report classified as Attack should be kept distinct from suspicious activity.
 
 ## Event Log
-- [Fact | MN-2026-11-11-01] **UKMTO report 201-26 — 10/11/2026:** UKMTO classified the report as Attack. It stated a distance of 19 nautical miles northeast of a location whose name does not appear in full in the excerpt. No vessel identity or report outcome is shown. Source: [UKMTO — Recent Incidents](https://www.ukmto.org/recent-incidents#c151e68e-75d0-4014-b192-491812e31aac).
-- [Fact | MN-2026-11-11-02] **UKMTO Warning 202-26 — 11/11/2026:** The official material reported suspicious activity involving a tanker in the Strait of Hormuz. The official account posted the warning number at 03:11Z, without showing the tanker's name, precise location, or report outcome. Source: [UKMTO official account on X](https://x.com/UK_MTO/status/2120353588933165514); [UKMTO — Warnings 2026](https://www.ukmto.org/ukmto-products/warnings/2026).
+- [Fact | MN-2026-11-11-01] **Report UKMTO 201-26 — 10/11/2026:** UKMTO classified the report as Attack. It stated a distance of 19 nautical miles northeast of a location whose name does not appear in full in the excerpt. No vessel identity or report outcome is shown. Source: [UKMTO — Recent Incidents](https://www.ukmto.org/recent-incidents#c151e68e-75d0-4014-b192-491812e31aac).
+- [Fact | MN-2026-11-11-02] **Warning UKMTO 202-26 — 11/11/2026:** The official material reported suspicious activity involving a tanker in the Strait of Hormuz. The official account posted the warning number at 03:11Z, without showing the tanker's name, precise location, or report outcome. Source: [UKMTO official account on X](https://x.com/UK_MTO/status/2120353588933165514); [UKMTO — Warnings 2026](https://www.ukmto.org/ukmto-products/warnings/2026).
 
 ## Active Warnings and Advisories
 - The latest visible UKMTO warning in the feed is 202-26, issued on 11/11, concerning suspicious activity involving a tanker in the Strait of Hormuz. The feed does not show its validity period or a cancellation, so its current status cannot be established.
@@ -62,7 +62,7 @@ What would raise or lower it: A complete official report establishing damage or 
 **Comparison of possible interpretations:**
 | Interpretation | Supporting evidence | Weakening evidence | Assessment |
 |---|---|---|---|
-| The reports describe two separate incidents | Different dates, classifications, and report numbers. | No full text establishes the details of each incident. | EST-2026-11-12-02 — likelihood cannot be measured from the excerpts. |
+| The reports describe two separate incidents. | Different dates, classifications, and report numbers. | No full text establishes the details of each incident. | EST-2026-11-12-02 — likelihood cannot be measured from the excerpts. |
 | The reports relate to one incident | The available material does not provide full information on either report. | No official statement links them, and their classifications and dates differ. | There is no official basis for favoring this interpretation. |
 | Attribution of an incident to an actor | Neither excerpt officially identifies an actor. | The absence of official naming prevents attribution. | The incident is not attributed to an actor. |
 
@@ -75,12 +75,12 @@ What would raise or lower it: A complete official report establishing damage or 
 - EST-2026-11-08-01 — Partially confirmed: UKMTO indicators of security activity remained visible, but there is no recent official assessment of the threat level or full details of the two reports.
 - EST-2026-11-08-02 — Not yet confirmed: neither excerpt establishes the tanker's identity or a link between the reports, and neither provides a basis for attribution.
 
-EST-2026-11-12-01 — [Assessment] The threat level in the Strait of Hormuz is moderate as an operational estimate, not as an official assessment published today. Confidence is low because details are incomplete and traffic data are absent.
+EST-2026-11-12-01 — [Assessment] The threat level in the Strait of Hormuz, Gulf of Oman and Arabian Gulf sector is moderate as an operational estimate, not as an official assessment published today. Confidence is low because details are incomplete and traffic data are absent.
 
 Confidence level: Low — the official source is known, but the location, identity, outcome, and warning status are incomplete in the available material.
 
 ## Probabilities and Incident Attribution
-- [Assessment | EST-2026-11-12-02] It is not possible to measure whether report 201-26 is linked to Warning 202-26 from the excerpts; differences in date and classification alone do not prove that the incidents are separate.
+- [Evidence limit] The excerpts do not settle whether report 201-26 is linked to Warning 202-26; the difference in date and classification alone does not prove that the incidents are separate.
 - [Fact] Neither report names an actor. There is no official basis for attributing either incident to a state or group.
 - [Fact] No entry in the IMO register updated today can be matched to the two UKMTO reports; inability to access the page does not establish whether an entry is present or absent.
 
@@ -98,8 +98,11 @@ The phrase “Recent Incidents (0)” on the MSCIO page should not be read as a 
 | Latest balance of confirmed incidents and deaths | IMO | An updated tally as of 12/11 cannot be presented. |
 | Number of transiting and waiting vessels and direction of traffic | An official source providing a comparable time-series measurement | Congestion cannot be measured or improvement reported. |
 
+- Sources: 62 approved = 60 on automated routes + 2 manual references. Check: 55 successful. 5 unavailable: UKMTO — Warnings 2026 — source blocked · UKMTO — Advisories 2026 — source blocked · IMO — Confirmed Incidents Register — source blocked · Kuwait News Agency (KUNA) — temporary connection failure · MARAD/MSCI — source blocked. Manual references: 2 checked manually.
+- Declared incomplete run: feeds: an official source blocks automated fetching — fault reference K-63 · valid through 2026-12-31.
+
 ## Continuous Monitoring
-- The full text or any official update to UKMTO warnings 201-26 and 202-26 will be tracked.
+- Publication of the full text, or any official update, of the UKMTO 201-26 and 202-26 warnings will be tracked.
 - Any cancellation or change in the status of Warning 202-26 will be reviewed before it is described as current or expired.
 - The IMO register will be checked again when access is restored, keeping the update date separate from the incident date.
 - Press headlines or relayed claims will not be converted into facts unless a reviewable official source appears.
@@ -107,7 +110,23 @@ The phrase “Recent Incidents (0)” on the MSCIO page should not be read as a 
 ## Background
 The available official sources in today's feed add no earlier incident directly related to the warnings. The background remains outside the body of this edition unless a link to recent official information is established.
 
+## Source Status and Disclosure
+60 of 60 feeds were checked.
+
+The total number of readable items was 1729.
+
+5 of 60 feeds were unavailable.
+
+Manual references were recorded for sources 39, 52 — total 2.
+
+Sources marked stale under the 14-day threshold: 12, 13, 20, 30, 32 — total 5; they were not used alone to substantiate a new incident.
+
+Failures of source routes 2, 3, 5, 14, 17, 27, 33 were recorded in sub-attempts, while the overall feed status remained successful through approved alternative routes.
+
+No empty feed; no limitation is concealed from the reader.
+
 ## Sources and References
+Total coded incidents: 1 incident, with 1 attribution in total. Sources used and number of incidents attributed to them: UKMTO — Recent Incidents; UKMTO — Weekly Reports 2026; IMO — Confirmed Incidents Register; MSCIO; JMIC; Seatrade Maritime, one incident.
 Approved sources: 62; 60 feeds were checked, 55 succeeded, 5 failed, and 1729 items were read; 2 under manual review. Unavailable feeds included the UKMTO warnings list, its advisory notices, the IMO register, Kuwait News Agency, and MARAD/MSCI. These statistics do not mean that maritime incidents were absent; they describe source access.
 
 | Source used | Information used | Material status in the 12/11/2026 feed |

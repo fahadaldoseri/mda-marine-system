@@ -46,7 +46,8 @@
       "value": "2",
       "detail": "1 مؤكدة + 0 مرجّحة + 1 غير مؤكدة مؤهلة",
       "cumulative": 158,
-      "updated": "2026-11-06"
+      "updated": "2026-11-06",
+      "accent": "warn"
     },
     {
       "id": "unconfirmed-narratives",
@@ -59,7 +60,8 @@
       "value": "2",
       "detail": "2 روايات · منها 1 مؤهلة · تُذكر ولا تُحتسب",
       "cumulative": 29,
-      "updated": "2026-11-06"
+      "updated": "2026-11-06",
+      "accent": "warn"
     },
     {
       "id": "proven-zones",
@@ -70,7 +72,8 @@
       "tag_en": "Z2–Z4",
       "source": "web/zones/{date}.json · Z2–Z4",
       "value": "0",
-      "detail": "يظهر الصفر دائمًا"
+      "detail": "يظهر الصفر دائمًا",
+      "accent": "info"
     },
     {
       "id": "imo-confirmed-incidents",
