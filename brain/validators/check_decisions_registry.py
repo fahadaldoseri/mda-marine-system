@@ -25,7 +25,24 @@ REQUIRED_IDS = [f"D-{n:02d}" for n in range(1, 17)]
 DONE = {"منفَّذ", "منفَّذ جزئيًّا"}
 
 
-def check(root: Path) -> list[str]:
+def _active_waivers(reg: dict, today: str | None = None) -> dict[str, dict]:
+    """استثناءات أدلة الملفات بقرار المالك (evidence_waivers): مؤقتة ومؤرخة ومسمّاة.
+
+    البند بلا expires أو بلا decided_by أو المنتهي صلاحيته لا يُقبل، فيعود الدليل الغائب مانعًا.
+    """
+    import datetime as _dt
+    d = today or _dt.datetime.now(_dt.timezone.utc).strftime("%Y-%m-%d")
+    out: dict[str, dict] = {}
+    for w in reg.get("evidence_waivers") or []:
+        if not isinstance(w, dict):
+            continue
+        ref, exp, who = str(w.get("ref") or ""), str(w.get("expires") or ""), str(w.get("decided_by") or "")
+        if ref and exp and who.strip() and exp >= d:
+            out[ref] = w
+    return out
+
+
+def check(root: Path, warnings: list[str] | None = None, today: str | None = None) -> list[str]:
     errs: list[str] = []
     path = root / "decisions" / "registry.json"
     if not path.is_file():
@@ -35,6 +52,7 @@ def check(root: Path) -> list[str]:
     except (OSError, UnicodeError, json.JSONDecodeError) as exc:
         return [f"دفتر القرارات غير قابل للقراءة: {exc}"]
 
+    waivers = _active_waivers(reg, today)
     allowed = set(reg.get("status_values_ar") or [])
     if allowed != {"منفَّذ", "منفَّذ جزئيًّا", "يحتاج تحققًا", "يحتاج قرارًا"}:
         errs.append(f"قيم الحالة المعلنة غير مطابقة: {sorted(allowed)}")
@@ -75,6 +93,12 @@ def check(root: Path) -> list[str]:
                     errs.append(f"{did}: دليل ناقص (kind/ref)")
                     continue
                 if e.get("kind") == "file" and not (root / str(e["ref"])).exists():
+                    w = waivers.get(str(e["ref"]))
+                    if w is not None:
+                        if warnings is not None:
+                            warnings.append(f"{did}: دليل ملف غائب مستثنى بقرار {w.get('decided_by')} "
+                                            f"({w.get('decided_at', '')}) حتى {w.get('expires')}: {e['ref']}")
+                        continue
                     errs.append(f"{did}: دليل ملف غير موجود: {e['ref']}")
         else:
             if not str(d.get("next_action_ar", "")).strip():
@@ -96,7 +120,8 @@ def main() -> int:
     args = ap.parse_args()
     root = Path(args.root).resolve()
 
-    errs = check(root)
+    warns: list[str] = []
+    errs = check(root, warns)
     if errs:
         print("✘ دفتر القرارات: خلل يمنع الاعتماد")
         for e in errs:
@@ -104,13 +129,18 @@ def main() -> int:
         return 2
 
     if args.summary:
-        print(OK_LINE)
-        return 0
+        print(OK_LINE + (f" · ⚠ {len(warns)} دليل مستثنى مؤقتًا" if warns else ""))
+        return 1 if warns else 0
 
     reg = json.loads((root / "decisions" / "registry.json").read_text(encoding="utf-8"))
     print(OK_LINE)
     print(f"   القياس الأخير: {reg.get('last_measured')} · القرارات: {len(reg['decisions'])}")
     print("   التوزيع: " + " · ".join(f"{k} {v}" for k, v in reg.get("counts", {}).items()))
+    if warns:
+        for w in warns:
+            print(f"   ⚠ {w}")
+        print(f"   ⚠ أدلة مستثناة مؤقتًا: {len(warns)} — تحذير يُفصح عنه، لا نجاح كامل")
+        return 1
     return 0
 
 
