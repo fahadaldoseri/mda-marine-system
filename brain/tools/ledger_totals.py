@@ -171,10 +171,28 @@ def expected_dates(target: dt.date) -> list[dt.date]:
     return [START_DATE + dt.timedelta(days=i) for i in range(days)]
 
 
-def load_daily(target: dt.date) -> tuple[list[dict[str, Any]], int, list[str]]:
+def load_gap_days(target: dt.date) -> set[str]:
+    """أيام فجوة النقل الموثقة بقرار المالك حتى التاريخ المطلوب (فشل مغلق عند خلل الملف)."""
+    validators_dir = str(Path(__file__).resolve().parents[1] / "validators")
+    if validators_dir not in sys.path:
+        sys.path.insert(0, validators_dir)
+    from _migration_gaps import load_gap_dates
+
+    try:
+        gaps = load_gap_dates(ROOT)
+    except (RuntimeError, ValueError) as exc:
+        fail(str(exc))
+    return {day for day in gaps if day <= target.isoformat()}
+
+
+def load_daily(target: dt.date) -> tuple[list[dict[str, Any]], int, list[str], list[str]]:
     if not DAILY_DIR.exists() or not DAILY_DIR.is_dir():
         fail(f"مجلد اليوميات غير موجود أو غير قابل للقراءة: {DAILY_DIR}")
-    dates = expected_dates(target)
+    gap_days = load_gap_days(target)
+    dates = [day for day in expected_dates(target) if day.isoformat() not in gap_days]
+    conflicts = sorted(d for d in gap_days if (DAILY_DIR / f"{d}.json").exists())
+    if conflicts:
+        fail(f"يوم موثق فجوةَ نقل وله دفتر يومي (حدّث ملف الفجوة أو احذف الدفتر): {conflicts}")
     rows: list[dict[str, Any]] = []
     duplicate_codes: list[str] = []
     seen_codes: dict[str, dict[str, Any]] = {}
@@ -200,7 +218,7 @@ def load_daily(target: dt.date) -> tuple[list[dict[str, Any]], int, list[str]]:
                 continue
             seen_codes[code] = row
             rows.append(row)
-    return rows, len(dates), duplicate_codes
+    return rows, len(dates), duplicate_codes, sorted(gap_days)
 
 
 def load_master() -> tuple[list[dict[str, Any]], list[str]]:
@@ -588,7 +606,7 @@ def make_deaths(rows: list[dict[str, Any]], today: dt.date) -> dict[str, Any]:
 
 
 def build_payload(target: dt.date) -> tuple[dict[str, Any], dict[str, Any]]:
-    daily_rows, days_total, daily_duplicate_codes = load_daily(target)
+    daily_rows, days_total, daily_duplicate_codes, gap_days = load_daily(target)
     master_rows, excluded_master = load_master()
     # daily_rows is intentionally retained as a validated input and its
     # coverage is reported.  Metrics use the canonical master events list.
@@ -665,6 +683,7 @@ def build_payload(target: dt.date) -> tuple[dict[str, Any], dict[str, Any]]:
             "to": target_iso,
             "days_covered": days_total,
             "days_total": days_total,
+            "migration_gap_days": gap_days,
         },
         "metrics": metrics,
     }

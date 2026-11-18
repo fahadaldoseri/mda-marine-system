@@ -86,5 +86,30 @@ def test_check_blocks_divergent_totals(tmp_path: pathlib.Path) -> None:
     assert "جملة إجمالي الفحص" in joined, joined
 
 
+def test_failed_names_follow_current_registry(tmp_path: pathlib.Path) -> None:
+    """اسم المصدر المتعذّر يُقرأ من السجل الحالي (sections/10-sources.md) لا من لقطة الفحص.
+
+    العطل: لقطة فحص 11-12 حملت الاسم القديم «النشرات الاستشارية» بعد اعتماد «التنبيهات
+    الإرشادية»، فأعاد `--write` اللفظ الممنوع إلى المتن والواجهة في كل تشغيل للفحوص.
+    """
+    mod = load_module()
+    (tmp_path / "sections").mkdir(parents=True)
+    (tmp_path / "sections" / "10-sources.md").write_text(
+        "## تغذيات RSS/Atom المكتشفة\n\n| # | المصدر | التغذية |\n|---:|---|---|\n"
+        "| 3 | UKMTO — التنبيهات الإرشادية 2026 | https://example.org/a |\n\n## قسم آخر\n",
+        encoding="utf-8")
+    (tmp_path / "feeds").mkdir(parents=True)
+    state = governed_state()
+    state["failed_feeds"] = [
+        {"num": 3, "name": "UKMTO — النشرات الاستشارية 2026", "block_reason": "HTTP 401"},
+        {"num": 99, "name": "مصدر خارج السجل", "block_reason": "HTTP 403"},
+    ]
+    (tmp_path / "feeds" / "feeds-2026-11-09.status.json").write_text(
+        json.dumps(state, ensure_ascii=False), encoding="utf-8")
+    mod.B = tmp_path
+    names = mod.feeds_state("2026-11-09")["failed_names"]
+    assert names == ["UKMTO — التنبيهات الإرشادية 2026", "مصدر خارج السجل"], names
+
+
 if __name__ == "__main__":
     sys.exit("شغّله عبر pytest")

@@ -31,6 +31,9 @@ BRAIN_DIR="$T/brain" python3 "$T/brain/tools/make_tg_digest.py" --date "$D" --ou
 n=$(python3 -c "import re,sys;print(len(re.sub(r'<[^>]+>','',open(sys.argv[1],encoding='utf-8').read())))" "$T/d.html")
 [ "$rc" = 0 ] && [ "$n" -le 900 ]; ok $? "الملخص ($n حرفًا) تحت السقف 900"
 grep -q "الإجراء المطلوب" "$T/d.html" && grep -q "reports/$D.html" "$T/d.html"; ok $? "الملخص يحوي الإجراء والرابط الكامل"
+# معرّف المحادثة منقّح في المستودع («[محجوب]»)، فيُمرَّر معرّف اختبار وهمي حتى يُقاس فحص
+# السياسة نفسه في أي بيئة؛ --validate-only لا يرسل شيئًا.
+export TELEGRAM_OWNER_CHAT_ID=-100123456789
 python3 "$B/tools/telegram_send.py" --file "$T/d.html" --daily-report --date "$D" --validate-only >/dev/null 2>&1 || TELEGRAM_BOT_TOKEN=x python3 "$B/tools/telegram_send.py" --file "$T/d.html" --daily-report --date "$D" --validate-only 2>&1 | grep -q "صالح"
 ok $? "الملخص يمرّ فحص سياسة الإرسال (بلا إرسال)"
 

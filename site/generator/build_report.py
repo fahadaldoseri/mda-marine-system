@@ -2219,7 +2219,9 @@ def render_intel_review_notes(meta: dict, inline) -> str:
     if not isinstance(meta.get("intel_analysis"), dict):
         return ""
     return (
-        '<p class="rmk"><strong>التحقق من المصادر:</strong> '
+        # «التحقق من المصادر» لفظ مصطنع ممنوع (forbidden-coinages · 2026-10-29) وكان يمنع صفحة
+        # الإضافات؛ يُعاد الوسم المعتمد قبل جولة 11-12.
+        '<p class="rmk"><strong>التحقق المستقل من المصادر:</strong> '
         + inline("الفصل بين الوقائع والتقديرات وربط التقديرات بسند المصدر.")
         + "</p>"
     )

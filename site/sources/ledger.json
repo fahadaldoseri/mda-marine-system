@@ -1,8 +1,8 @@
 {
   "document_id": "marine-events-ledger-master",
-  "title": "دفتر الأحداث التراكمي — من 2026-02-28 إلى 2026-11-07",
+  "title": "دفتر الأحداث التراكمي — من 2026-02-28 إلى 2026-11-11",
   "period_start": "2026-02-28",
-  "period_end": "2026-11-07",
+  "period_end": "2026-11-11",
   "time_basis": "UTC عندما يورده المصدر؛ يفصل السجل بين تاريخ الواقعة وتاريخ النشر عند توفرهما.",
   "calendar_note": "2026-02-29 غير موجود تقويميًا؛ لا توجد وقائع مستقلة لذلك اليوم ولا أُدخلت وقائع 1 مارس في سجل فبراير.",
   "method": "دُمجت التقارير الشهرية المقدمة مع الدفتر التاريخي المهيكل. أزيلت النسخ الواضحة للواقعة نفسها، وحُفظت المصادر والتعارضات داخل السجل. السجل الذري يضم وقائع أمنية ونشرات وتفاعلات وخلفية؛ لا يمثل عدد هجمات.",
@@ -40,7 +40,7 @@
       "unresolved_or_advisory": 34
     },
     "unique_source_urls_in_ledger": 155,
-    "total_records": 557,
+    "total_records": 569,
     "by_month": {
       "2026-02": 4,
       "2026-03": 58,
@@ -51,7 +51,7 @@
       "2026-08": 40,
       "2026-09": 33,
       "2026-10": 231,
-      "2026-11": 50
+      "2026-11": 62
     },
     "by_evidence_status": {
       "background": 1,
@@ -60,7 +60,7 @@
       "piracy": 3,
       "recorded_security_event": 49,
       "suspicious_activity": 15,
-      "unresolved_incident": 233,
+      "unresolved_incident": 245,
       "unresolved_or_advisory": 34
     },
     "by_classification": {
@@ -83,7 +83,7 @@
       "استهداف": 2,
       "بلاغ أولي أُسقط أمنيًا بعد التحقيق": 1,
       "بلاغ تحالف": 3,
-      "بلاغ رسمي": 38,
+      "بلاغ رسمي": 45,
       "بلاغ رسمي متأخر": 1,
       "بلاغ غير مؤكد": 2,
       "بلاغ مؤسسي": 1,
@@ -123,7 +123,7 @@
       "رسمي": 1,
       "رواية": 17,
       "رواية غير مؤكدة من طرف واحد": 3,
-      "رواية من طرف واحد": 4,
+      "رواية من طرف واحد": 6,
       "سجل دولي": 4,
       "سجل رسمي": 1,
       "سجل مصدر مهني": 3,
@@ -164,7 +164,7 @@
       "نشرة/تنظيم مرور وإنقاذ": 1,
       "نفي رسمي": 1,
       "نفي رسمي منقول": 1,
-      "نقل إعلامي": 28,
+      "نقل إعلامي": 29,
       "نقل إعلامي رسمي إيراني": 4,
       "نقل إعلامي عن نفي رسمي": 1,
       "نقل إعلامي متعارض": 1,
@@ -175,7 +175,7 @@
       "نقل طرف": 1,
       "نقل غير رسمي": 1,
       "نقل محلي": 2,
-      "نقل مهني": 15,
+      "نقل مهني": 17,
       "نقل مهني عن إشعار رسمي": 1,
       "هجمات على ناقلات": 1,
       "هجوم": 39,
@@ -229,18 +229,18 @@
       "وسم إعلامي": 1
     },
     "by_area_top10": {
-      "مضيق هرمز": 110,
-      "غير محدّد": 69,
+      "مضيق هرمز": 114,
+      "غير محدّد": 70,
       "Strait of Hormuz": 30,
       "الخليج العربي": 18,
       "المنطقة كاملة": 16,
-      "خليج عُمان": 8,
+      "خليج عُمان": 11,
       "الإمارات - الخليج العربي": 7,
       "Gulf of Oman": 6,
       "البحر الأحمر": 6,
       "خليج عدن": 6
     },
-    "_rebuilt_utc": "2026-11-06T23:25:21Z"
+    "_rebuilt_utc": "2026-11-12T04:41:36Z"
   },
   "sections": {
     "الخلاصة القيادية": [],
@@ -518,7 +518,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-01.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "STENA IMPERATIVE",
       "vessel_source": "STENA IMPERATIVE (9666077)",
       "imo_number": "9666077",
@@ -564,7 +564,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-01.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "HERCULES STAR",
       "vessel_source": "HERCULES STAR (9916135)",
       "imo_number": "9916135",
@@ -610,7 +610,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-01.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "MKD VYOM",
       "vessel_source": "MKD VYOM (9284386)",
       "imo_number": "9284386",
@@ -656,7 +656,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-01.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "SKYLIGHT",
       "vessel_source": "SKYLIGHT (9330020)",
       "imo_number": "9330020",
@@ -805,7 +805,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-02.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -846,7 +846,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-03.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "GOLD OAK",
       "vessel_source": "GOLD OAK (9806342)",
       "imo_number": "9806342",
@@ -892,7 +892,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-03.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "LIBRA TRADER",
       "vessel_source": "LIBRA TRADER (9562673)",
       "imo_number": "9562673",
@@ -999,7 +999,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-04.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "SAFEEN PRESTIGE",
       "vessel_source": "SAFEEN PRESTIGE (9593517)",
       "imo_number": "9593517",
@@ -1106,7 +1106,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-05.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "SONANGOL NAMIBE",
       "vessel_source": "SONANGOL NAMIBE (9325049)",
       "imo_number": "9325049",
@@ -1152,7 +1152,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-06.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "MUSSAFAH 2",
       "vessel_source": "MUSSAFAH 2 (9522051)",
       "imo_number": "9522051",
@@ -1238,7 +1238,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-07.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "ARABIA III",
       "vessel_source": "ARABIA III (8771332)",
       "imo_number": "8771332",
@@ -1305,7 +1305,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-10.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «arabian gulf» في نص المنتج الرسمي",
@@ -1385,7 +1385,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-11.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "ZEFYROS",
       "vessel_source": "ZEFYROS (9515917)",
       "imo_number": "9515917",
@@ -1431,7 +1431,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-11.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "SAFESEA VISHNU",
       "vessel_source": "SAFESEA VISHNU (9327009)",
       "imo_number": "9327009",
@@ -1477,7 +1477,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-11.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "STAR GWYNETH",
       "vessel_source": "STAR GWYNETH (9301031)",
       "imo_number": "9301031",
@@ -1523,7 +1523,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-11.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "MAYUREE NAREE",
       "vessel_source": "MAYUREE NAREE (9323649)",
       "imo_number": "9323649",
@@ -1569,7 +1569,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-11.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "ONE MAJESTY",
       "vessel_source": "ONE MAJESTY (9424912)",
       "imo_number": "9424912",
@@ -1699,7 +1699,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-12.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "SOURCE BLESSING",
       "vessel_source": "SOURCE BLESSING (9243198)",
       "imo_number": "9243198",
@@ -1766,7 +1766,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-16.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "GAS AL AHMADIAH",
       "vessel_source": "GAS AL AHMADIAH (9849629)",
       "imo_number": "9849629",
@@ -1833,7 +1833,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-17.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «gulf of oman» في نص المنتج الرسمي",
@@ -1893,7 +1893,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-18.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «gulf of oman» في نص المنتج الرسمي",
@@ -1952,7 +1952,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-19.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "HALUL 50",
       "vessel_source": "HALUL 50 (9602796)",
       "imo_number": "9602796",
@@ -2038,7 +2038,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-22.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «strait of hormuz» في نص المنتج الرسمي",
@@ -2117,7 +2117,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-28.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "SUNNY 77",
       "vessel_source": "SUNNY 77 (8357368)",
       "imo_number": "8357368",
@@ -2185,7 +2185,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-29.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -2226,7 +2226,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-03-30.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "AL SALMI",
       "vessel_source": "AL SALMI (9534793)",
       "imo_number": "9534793",
@@ -2332,7 +2332,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-01.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "AQUA 1",
       "vessel_source": "AQUA 1 (9573660)",
       "imo_number": "9573660",
@@ -2419,7 +2419,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-05.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «gulf of oman» في نص المنتج الرسمي",
@@ -2479,7 +2479,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-07.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "GOLD AUTUMN",
       "vessel_source": "GOLD AUTUMN (9220483)",
       "imo_number": "9220483",
@@ -2525,7 +2525,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-07.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "QINGDAO STAR",
       "vessel_source": "QINGDAO STAR (9318163)",
       "imo_number": "9318163",
@@ -2614,7 +2614,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-12.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z2 — باب المندب والبحر الأحمر",
       "sector_id": "Z2",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «red sea» في نص المنتج الرسمي",
@@ -2714,7 +2714,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-14.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "sector_basis": "نص المنتج الرسمي UKMTO #036: \"Ras Al Hadd, Oman\" (ويتضمن \"Hadd, Oman\")؛ سجل المناطق يربط عُمان بخليج عُمان.",
@@ -2775,7 +2775,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-18.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "CMA CGM EVERGLADE",
       "vessel_source": "CMA CGM EVERGLADE (9894985)",
       "imo_number": "9894985",
@@ -2821,7 +2821,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-18.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "SANMAR HERALD",
       "vessel_source": "SANMAR HERALD (9330563)",
       "imo_number": "9330563",
@@ -2912,7 +2912,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-19.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "TOUSKA",
       "vessel_source": "TOUSKA (9328900)",
       "imo_number": "9328900",
@@ -3001,7 +3001,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-22.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "EUPHORIA",
       "vessel_source": "EUPHORIA (9235828)",
       "imo_number": "9235828",
@@ -3047,7 +3047,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-22.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "MSC FRANCESCA",
       "vessel_source": "MSC FRANCESCA (9401116)",
       "imo_number": "9401116",
@@ -3093,7 +3093,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-22.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "EPAMINONDAS",
       "vessel_source": "EPAMINONDAS (9153862)",
       "imo_number": "9153862",
@@ -3206,7 +3206,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-23.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «somalia» في نص المنتج الرسمي",
@@ -3266,7 +3266,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-25.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «somalia» في نص المنتج الرسمي",
@@ -3325,7 +3325,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «somalia» في نص المنتج الرسمي",
@@ -3385,7 +3385,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-04-28.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «mogadishu» في نص المنتج الرسمي",
@@ -3444,7 +3444,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-01.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "sector_basis": "نص المنتج الرسمي UKMTO #048: \"within the IRTC, 92NM southwest of Al Mukalla, Yemen\"؛ سجل المناطق يربط اليمن بخليج عدن.",
@@ -3505,7 +3505,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-02.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "VOLANS / BADR (BARGE)",
       "vessel_source": "VOLANS (9298856) / BADR (BARGE)",
       "imo_number": "9298856",
@@ -3572,7 +3572,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-03.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "TMO BARAKAH",
       "vessel_source": "TMO BARAKAH (9902615)",
       "imo_number": "9902615",
@@ -3618,7 +3618,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-03.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "MINOAN FALCON",
       "vessel_source": "MINOAN FALCON (9605841)",
       "imo_number": "9605841",
@@ -3707,7 +3707,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-04.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "HMM NAMU",
       "vessel_source": "HMM NAMU (1039292)",
       "imo_number": "1039292",
@@ -3753,7 +3753,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-04.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "JV INNOVATION",
       "vessel_source": "JV INNOVATION (9276688)",
       "imo_number": "9276688",
@@ -3840,7 +3840,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-05.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "CMA CGM SAN ANTONIO",
       "vessel_source": "CMA CGM SAN ANTONIO (9294173)",
       "imo_number": "9294173",
@@ -3906,7 +3906,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-06.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "HASNA",
       "vessel_source": "HASNA (9212917)",
       "imo_number": "9212917",
@@ -3952,7 +3952,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-08.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "SEVDA",
       "vessel_source": "SEVDA (9172040)",
       "imo_number": "9172040",
@@ -3998,7 +3998,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-08.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "SEA STAR III",
       "vessel_source": "SEA STAR III (9569205)",
       "imo_number": "9569205",
@@ -4086,7 +4086,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-10.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "SAFESEA NEHA",
       "vessel_source": "SAFESEA NEHA (9563392)",
       "imo_number": "9563392",
@@ -4132,7 +4132,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-14.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «gulf of oman» في نص المنتج الرسمي",
@@ -4233,7 +4233,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-22.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «gulf of aden» في نص المنتج الرسمي",
@@ -4292,7 +4292,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-23.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «within the irtc» في نص المنتج الرسمي",
@@ -4351,7 +4351,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "OLYMPIC LIFE",
       "vessel_source": "OLYMPIC LIFE (9844277)",
       "imo_number": "9844277",
@@ -4418,7 +4418,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-05-29.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "LIAN STAR",
       "vessel_source": "LIAN STAR (9072692)",
       "imo_number": "9072692",
@@ -4505,7 +4505,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-06-01.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "MSC SARISKA V",
       "vessel_source": "MSC SARISKA V (8715857)",
       "imo_number": "8715857",
@@ -4573,7 +4573,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-06-02.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "LEXIE",
       "vessel_source": "LEXIE (9203277)",
       "imo_number": "9203277",
@@ -4659,7 +4659,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-06-08.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "MARIVEX",
       "vessel_source": "MARIVEX (9464156)",
       "imo_number": "9464156",
@@ -4726,7 +4726,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-06-09.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "SETTEBELLO",
       "vessel_source": "SETTEBELLO (9162916)",
       "imo_number": "9162916",
@@ -4772,7 +4772,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-06-10.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "JALVEER",
       "vessel_source": "JALVEER (9486283)",
       "imo_number": "9486283",
@@ -4861,7 +4861,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-06-11.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «gulf of oman» في نص المنتج الرسمي",
@@ -4921,7 +4921,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-06-12.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "BOCHEM MARENGO",
       "vessel_source": "BOCHEM MARENGO (9749025)",
       "imo_number": "9749025",
@@ -4987,7 +4987,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-06-13.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "sector_basis": "نص المنتج الرسمي UKMTO #068: \"6NM east of Oman\"؛ وسوم المنتج الرسمية تشير إلى Oman، وسجل المناطق يربط عُمان بخليج عُمان.",
@@ -5047,7 +5047,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-06-15.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «gulf of aden» في نص المنتج الرسمي",
@@ -5086,7 +5086,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-06-15.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "sector_basis": "نص المنتج الرسمي UKMTO #069: \"14NM south off the coast of Yemen\"؛ وسوم المنتج الرسمية تشير إلى Aden, Yemen، وسجل المناطق يربط اليمن بخليج عدن.",
@@ -5167,7 +5167,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-06-17.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «gulf of aden» في نص المنتج الرسمي",
@@ -5247,7 +5247,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-06-21.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «gulf of aden» في نص المنتج الرسمي",
@@ -5329,7 +5329,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-06-25.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "EVER LOVELY",
       "vessel_source": "EVER LOVELY (9629110)",
       "imo_number": "9629110",
@@ -5398,7 +5398,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-06-27.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "KIKU",
       "vessel_source": "KIKU (9329796)",
       "imo_number": "9329796",
@@ -5466,7 +5466,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-01.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «gulf of aden» في نص المنتج الرسمي",
@@ -5505,7 +5505,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-01.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «gulf of aden» في نص المنتج الرسمي",
@@ -5586,7 +5586,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-05.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z2 — باب المندب والبحر الأحمر",
       "sector_id": "Z2",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «red sea» في نص المنتج الرسمي",
@@ -5646,7 +5646,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-06.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "WEDYAN",
       "vessel_source": "WEDYAN (9524970)",
       "imo_number": "9524970",
@@ -5692,7 +5692,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-06.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "AL REKAYYAT",
       "vessel_source": "AL REKAYYAT (9397339)",
       "imo_number": "9397339",
@@ -5760,7 +5760,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-07.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "CYPRUS PROSPERITY",
       "vessel_source": "CYPRUS PROSPERITY (9595216)",
       "imo_number": "9595216",
@@ -5798,7 +5798,7 @@
       "operational_effect": "",
       "sources": [
         "https://www.ukmto.org/-/media/ukmto/products/update-068-jmic-advisory-note-07-july.pdf?rev=274817fc31674a1296b6ea6b3dd6ac7d",
-        "http://www.ukmto.org/-/media/ukmto/products/update-077-jmic-advisory-note-28-july.pdf?rev=e67e4e8590e6466ca88c957486f31de0"
+        "https://www.ukmto.org/-/media/ukmto/products/update-077-jmic-advisory-note-28-july.pdf?rev=e67e4e8590e6466ca88c957486f31de0"
       ],
       "source_count": 2,
       "deduplication_note": "المصادر المتعددة في هذا السجل حُفظت تحت واقعة واحدة؛ لا تُعد نسخ المصدر الواحد وقائع مستقلة.",
@@ -5820,7 +5820,7 @@
       "sources": [
         "https://www.ukmto.org/-/media/ukmto/products/20260707-ukmto_warning_82-26.pdf?rev=53a764c7ffc74a0a9581bd2c52f9e00a",
         "https://www.mscio.eu/alerts/102",
-        "http://www.ukmto.org/-/media/ukmto/products/update-077-jmic-advisory-note-28-july.pdf?rev=e67e4e8590e6466ca88c957486f31de0"
+        "https://www.ukmto.org/-/media/ukmto/products/update-077-jmic-advisory-note-28-july.pdf?rev=e67e4e8590e6466ca88c957486f31de0"
       ],
       "source_count": 3,
       "deduplication_note": "المصادر المتعددة في هذا السجل حُفظت تحت واقعة واحدة؛ لا تُعد نسخ المصدر الواحد وقائع مستقلة.",
@@ -5849,7 +5849,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-11.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "GFS GALAXY",
       "vessel_source": "GFS GALAXY (9401271)",
       "imo_number": "9401271",
@@ -5917,7 +5917,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-13.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "STOLT MAGNESIUM",
       "vessel_source": "STOLT MAGNESIUM (9739317)",
       "imo_number": "9739317",
@@ -5955,7 +5955,7 @@
       "operational_effect": "",
       "sources": [
         "https://www.ukmto.org/-/media/ukmto/products/20260713--ukmto_warning_085_26.pdf?rev=2595be19ba4848649f2f10f0df55597a",
-        "http://www.ukmto.org/-/media/ukmto/products/update-077-jmic-advisory-note-28-july.pdf?rev=e67e4e8590e6466ca88c957486f31de0"
+        "https://www.ukmto.org/-/media/ukmto/products/update-077-jmic-advisory-note-28-july.pdf?rev=e67e4e8590e6466ca88c957486f31de0"
       ],
       "source_count": 2,
       "deduplication_note": "المصادر المتعددة في هذا السجل حُفظت تحت واقعة واحدة؛ لا تُعد نسخ المصدر الواحد وقائع مستقلة.",
@@ -6006,7 +6006,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-14.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "AL BAHYAH",
       "vessel_source": "AL BAHYAH (9937799)",
       "imo_number": "9937799",
@@ -6052,7 +6052,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-14.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "MOMBASA B",
       "vessel_source": "MOMBASA B (9739501)",
       "imo_number": "9739501",
@@ -6098,7 +6098,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-15.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "BELMA",
       "vessel_source": "BELMA (9289491)",
       "imo_number": "9289491",
@@ -6165,7 +6165,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-16.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "IDI",
       "vessel_source": "IDI (9307982)",
       "imo_number": "9307982",
@@ -6211,7 +6211,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-17.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «gulf of aden» في نص المنتج الرسمي",
@@ -6250,7 +6250,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-17.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «strait of hormuz» في نص المنتج الرسمي",
@@ -6280,7 +6280,7 @@
       "description": "",
       "operational_effect": "",
       "sources": [
-        "http://www.ukmto.org/-/media/ukmto/products/update-077-jmic-advisory-note-28-july.pdf?rev=e67e4e8590e6466ca88c957486f31de0",
+        "https://www.ukmto.org/-/media/ukmto/products/update-077-jmic-advisory-note-28-july.pdf?rev=e67e4e8590e6466ca88c957486f31de0",
         "https://www.ukmto.org/-/media/ukmto/products/update-079-jmic-advisory-note-02-august-1.pdf?rev=aa782729b9164a74b4da43d7be1ecf26"
       ],
       "source_count": 2,
@@ -6310,7 +6310,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-19.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "ACHELOOS",
       "vessel_source": "ACHELOOS (1087524)",
       "imo_number": "1087524",
@@ -6356,7 +6356,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-19.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "KAVOMALEAS",
       "vessel_source": "KAVOMALEAS (1042823)",
       "imo_number": "1042823",
@@ -6423,7 +6423,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-20.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "KAIFAN",
       "vessel_source": "KAIFAN (9656046)",
       "imo_number": "9656046",
@@ -6460,7 +6460,7 @@
       "description": "",
       "operational_effect": "",
       "sources": [
-        "http://www.ukmto.org/-/media/ukmto/products/update-077-jmic-advisory-note-28-july.pdf?rev=e67e4e8590e6466ca88c957486f31de0",
+        "https://www.ukmto.org/-/media/ukmto/products/update-077-jmic-advisory-note-28-july.pdf?rev=e67e4e8590e6466ca88c957486f31de0",
         "https://www.ukmto.org/-/media/ukmto/products/update-079-jmic-advisory-note-02-august-1.pdf?rev=aa782729b9164a74b4da43d7be1ecf26"
       ],
       "source_count": 2,
@@ -6511,7 +6511,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-22.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «saudi» في نص المنتج الرسمي",
@@ -6563,7 +6563,7 @@
       "description": "",
       "operational_effect": "",
       "sources": [
-        "http://www.ukmto.org/-/media/ukmto/products/update-077-jmic-advisory-note-28-july.pdf?rev=e67e4e8590e6466ca88c957486f31de0",
+        "https://www.ukmto.org/-/media/ukmto/products/update-077-jmic-advisory-note-28-july.pdf?rev=e67e4e8590e6466ca88c957486f31de0",
         "https://www.ukmto.org/-/media/ukmto/products/update-079-jmic-advisory-note-02-august-1.pdf?rev=aa782729b9164a74b4da43d7be1ecf26"
       ],
       "source_count": 2,
@@ -6593,7 +6593,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-24.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "LAVINE",
       "vessel_source": "LAVINE (8818219)",
       "imo_number": "8818219",
@@ -6630,7 +6630,7 @@
       "description": "",
       "operational_effect": "",
       "sources": [
-        "http://www.ukmto.org/-/media/ukmto/products/update-077-jmic-advisory-note-28-july.pdf?rev=e67e4e8590e6466ca88c957486f31de0",
+        "https://www.ukmto.org/-/media/ukmto/products/update-077-jmic-advisory-note-28-july.pdf?rev=e67e4e8590e6466ca88c957486f31de0",
         "https://www.ukmto.org/-/media/ukmto/products/update-079-jmic-advisory-note-02-august-1.pdf?rev=aa782729b9164a74b4da43d7be1ecf26"
       ],
       "source_count": 2,
@@ -6660,7 +6660,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z2 — باب المندب والبحر الأحمر",
       "sector_id": "Z2",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «red sea» في نص المنتج الرسمي",
@@ -6719,7 +6719,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-07-31.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "GASLOG SHANGHAI",
       "vessel_source": "GASLOG SHANGHAI (9600528)",
       "imo_number": "9600528",
@@ -6807,7 +6807,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-01.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «strait of hormuz» في نص المنتج الرسمي",
@@ -6846,7 +6846,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-01.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «strait of hormuz» في نص المنتج الرسمي",
@@ -6885,7 +6885,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-03.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "MINOAN PIONEER",
       "vessel_source": "MINOAN PIONEER (9471630)",
       "imo_number": "9471630",
@@ -6973,7 +6973,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-05.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «strait of hormuz» في نص المنتج الرسمي",
@@ -7012,7 +7012,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-05.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «gulf of aden» في نص المنتج الرسمي",
@@ -7051,7 +7051,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-05.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z2 — باب المندب والبحر الأحمر",
       "sector_id": "Z2",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «bab el mandeb» في نص المنتج الرسمي",
@@ -7090,7 +7090,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-08.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «strait of hormuz» في نص المنتج الرسمي",
@@ -7152,7 +7152,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-09.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "AL JABRIYAH II",
       "vessel_source": "AL JABRIYAH II (9329708)",
       "imo_number": "9329708",
@@ -7198,7 +7198,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-11.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "VELA NOVA",
       "vessel_source": "VELA NOVA (9136228)",
       "imo_number": "9136228",
@@ -7288,7 +7288,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-13.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "NAVIG8 MESSI",
       "vessel_source": "NAVIG8 MESSI (9482859)",
       "imo_number": "9482859",
@@ -7357,7 +7357,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-14.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "AL WATAN",
       "vessel_source": "AL WATAN (9615030)",
       "imo_number": "9615030",
@@ -7403,7 +7403,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-15.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "RIYAN STAR",
       "vessel_source": "RIYAN STAR (9156761)",
       "imo_number": "9156761",
@@ -7471,7 +7471,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-17.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "MINOAN DIGNITY",
       "vessel_source": "MINOAN DIGNITY (9294484)",
       "imo_number": "9294484",
@@ -7539,7 +7539,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-18.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z2 — باب المندب والبحر الأحمر",
       "sector_id": "Z2",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «bab el mandeb» في نص المنتج الرسمي",
@@ -7578,7 +7578,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-18.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «strait of hormuz» في نص المنتج الرسمي",
@@ -7617,7 +7617,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-18.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «strait of hormuz» في نص المنتج الرسمي",
@@ -7656,7 +7656,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-20.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «gulf of aden» في نص المنتج الرسمي",
@@ -7717,7 +7717,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-24.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "METRO VENETIAN",
       "vessel_source": "METRO VENETIAN (1013391)",
       "imo_number": "1013391",
@@ -7808,7 +7808,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-25.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "AL SALAM II",
       "vessel_source": "AL SALAM II (9328168)",
       "imo_number": "9328168",
@@ -7875,7 +7875,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-27.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «strait of hormuz» في نص المنتج الرسمي",
@@ -7914,7 +7914,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-28.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "AL YARMOUK",
       "vessel_source": "AL YARMOUK (9653422)",
       "imo_number": "9653422",
@@ -7960,7 +7960,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-29.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "BURGAN",
       "vessel_source": "BURGAN (9656022)",
       "imo_number": "9656022",
@@ -8027,7 +8027,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-30.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «strait of hormuz» في نص المنتج الرسمي",
@@ -8110,7 +8110,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-31.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "SIDR",
       "vessel_source": "SIDR (9854715)",
       "imo_number": "9854715",
@@ -8156,7 +8156,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-08-31.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "SENEGAL PROSPERITY",
       "vessel_source": "SENEGAL PROSPERITY (9532757)",
       "imo_number": "9532757",
@@ -8202,7 +8202,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-02.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «strait of hormuz» في نص المنتج الرسمي",
@@ -8283,7 +8283,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-07.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "AL DASMA",
       "vessel_source": "AL DASMA (9653446)",
       "imo_number": "9653446",
@@ -8329,7 +8329,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-08.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "HORIZON 1",
       "vessel_source": "HORIZON 1 (9130456)",
       "imo_number": "9130456",
@@ -8396,7 +8396,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-09.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "HERCULES STAR",
       "vessel_source": "HERCULES STAR (9916135)",
       "imo_number": "9916135",
@@ -8442,7 +8442,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-09.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "NEW ANDROS",
       "vessel_source": "NEW ANDROS (9294252)",
       "imo_number": "9294252",
@@ -8509,7 +8509,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-10.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "ROMANCE",
       "vessel_source": "ROMANCE (9468815)",
       "imo_number": "9468815",
@@ -8575,7 +8575,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-12.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "EL GAIA",
       "vessel_source": "EL GAIA (9325336)",
       "imo_number": "9325336",
@@ -8641,7 +8641,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-13.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «strait of hormuz» في نص المنتج الرسمي",
@@ -8680,7 +8680,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-15.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "sector_basis": "جدول إسناد الملء الرجعي: تطابق «strait of hormuz» في نص المنتج الرسمي",
@@ -8739,7 +8739,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-17.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "TREND",
       "vessel_source": "TREND (9477177)",
       "imo_number": "9477177",
@@ -8805,7 +8805,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-18.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "STI STEADFAST",
       "vessel_source": "STI STEADFAST (9719719)",
       "imo_number": "9719719",
@@ -8851,7 +8851,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-21.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "AL MARYAH",
       "vessel_source": "AL MARYAH (9393682)",
       "imo_number": "9393682",
@@ -8897,7 +8897,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-21.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "LR STEPHANIE",
       "vessel_source": "LR STEPHANIE (9282625)",
       "imo_number": "9282625",
@@ -8964,7 +8964,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-23.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "CAPE DAO",
       "vessel_source": "CAPE DAO (9219020)",
       "imo_number": "9219020",
@@ -9032,7 +9032,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-28.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "AL FUNTAS",
       "vessel_source": "AL FUNTAS (9653408)",
       "imo_number": "9653408",
@@ -9099,7 +9099,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-29.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "AL RUWAIS",
       "vessel_source": "AL RUWAIS (9828405)",
       "imo_number": "9828405",
@@ -9145,7 +9145,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-29.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "SINBAD",
       "vessel_source": "SINBAD (9413688)",
       "imo_number": "9413688",
@@ -9191,7 +9191,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-29.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "MERSIN PROSPERITY",
       "vessel_source": "MERSIN PROSPERITY (9327554)",
       "imo_number": "9327554",
@@ -9237,7 +9237,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-30.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -9277,7 +9277,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-30.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -9317,7 +9317,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-30.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -9357,7 +9357,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-09-30.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z5 — المحيط الهندي",
       "sector_id": "Z5",
       "event_kind": "جديد",
@@ -9397,7 +9397,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-01.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "KAZIMAH III",
       "vessel_source": "KAZIMAH III (9329693)",
       "imo_number": "9329693",
@@ -9464,7 +9464,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-02.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "UHUD",
       "vessel_source": "UHUD (9254939)",
       "imo_number": "9254939",
@@ -9510,7 +9510,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-02.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "PROMISE",
       "vessel_source": "PROMISE (1038896)",
       "imo_number": "1038896",
@@ -9556,7 +9556,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-03.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "GHANA PROSPERITY",
       "vessel_source": "GHANA PROSPERITY (9732541)",
       "imo_number": "9732541",
@@ -9602,7 +9602,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-04.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "GAS VELA",
       "vessel_source": "GAS VELA (9969845)",
       "imo_number": "9969845",
@@ -9648,7 +9648,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-04.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "CAMEROON PROSPERITY",
       "vessel_source": "CAMEROON PROSPERITY (93151598)",
       "imo_number": "93151598",
@@ -9694,7 +9694,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-04.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "LIPSI",
       "vessel_source": "LIPSI (1025033)",
       "imo_number": "1025033",
@@ -9782,7 +9782,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-05.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "MARAN GAS MYSTRAS",
       "vessel_source": "MARAN GAS MYSTRAS (9658238)",
       "imo_number": "9658238",
@@ -9828,7 +9828,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-05.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "ON PEACE",
       "vessel_source": "ON PEACE (9893204)",
       "imo_number": "9893204",
@@ -9896,7 +9896,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-06.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "ST1",
       "vessel_source": "ST1 (9256999)",
       "imo_number": "9256999",
@@ -9962,7 +9962,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-07.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "ACERS",
       "vessel_source": "ACERS (9301902)",
       "imo_number": "9301902",
@@ -10030,7 +10030,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-09.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "GEM NO. 2",
       "vessel_source": "GEM NO. 2 (9735373)",
       "imo_number": "9735373",
@@ -10097,7 +10097,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-10.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "AKIRA SUN (OCEAN MOLICA)",
       "vessel_source": "AKIRA SUN (OCEAN MOLICA) (9139270)",
       "imo_number": "9139270",
@@ -10143,7 +10143,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-10.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "VALTHERA",
       "vessel_source": "VALTHERA (9296389)",
       "imo_number": "9296389",
@@ -10209,7 +10209,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-11.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "AL MAQAM",
       "vessel_source": "AL MAQAM (9732577)",
       "imo_number": "9732577",
@@ -10255,7 +10255,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-11.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "DP WORLD KAVERI",
       "vessel_source": "DP WORLD KAVERI (9363429)",
       "imo_number": "9363429",
@@ -10301,7 +10301,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-11.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "KITION M",
       "vessel_source": "KITION M (9321160)",
       "imo_number": "9321160",
@@ -10347,7 +10347,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-11.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "EVER VICT",
       "vessel_source": "EVER VICT (9266774)",
       "imo_number": "9266774",
@@ -10393,7 +10393,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-11.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "ANGOLA PROSPERITY",
       "vessel_source": "ANGOLA PROSPERITY (9896414)",
       "imo_number": "9896414",
@@ -10439,7 +10439,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-11.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "PETRO DOLPHIN",
       "vessel_source": "PETRO DOLPHIN (1072294)",
       "imo_number": "1072294",
@@ -10485,7 +10485,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-12.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -10513,7 +10513,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -10564,7 +10564,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -10592,7 +10592,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -10620,7 +10620,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -10648,7 +10648,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -10676,7 +10676,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z5 — المحيط الهندي",
       "sector_id": "Z5",
       "event_kind": "جديد",
@@ -10704,7 +10704,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -10733,7 +10733,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z2 — باب المندب والبحر الأحمر",
       "sector_id": "Z2",
       "event_kind": "جديد",
@@ -10761,7 +10761,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "GFS PRIDE",
       "vessel_source": "GFS PRIDE (9349045)",
       "imo_number": "9349045",
@@ -10807,7 +10807,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "GFS GISELLE",
       "vessel_source": "GFS GISELLE (9704661)",
       "imo_number": "9704661",
@@ -10853,7 +10853,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-13.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "AL SAADIYAT",
       "vessel_source": "AL SAADIYAT (9760598)",
       "imo_number": "9760598",
@@ -10899,7 +10899,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-14.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -10927,7 +10927,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-14.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -10955,7 +10955,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-14.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z2 — باب المندب والبحر الأحمر",
       "sector_id": "Z2",
       "event_kind": "جديد",
@@ -10983,7 +10983,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-14.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -11011,7 +11011,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-14.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -11039,7 +11039,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-14.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "evidence_ref": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
       "retrieved_at": "2026-10-14T03:43:19Z"
@@ -11065,7 +11065,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-15.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -11093,7 +11093,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-14.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -11121,7 +11121,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-15.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "تكرار",
@@ -11149,7 +11149,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-15.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -11177,7 +11177,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-15.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -11205,7 +11205,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-15.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -11233,7 +11233,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-15.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "evidence_ref": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
       "retrieved_at": "2026-10-15T03:44:38Z"
@@ -11259,7 +11259,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-15.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -11287,7 +11287,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-15.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z2 — باب المندب والبحر الأحمر",
       "sector_id": "Z2",
       "event_kind": "جديد",
@@ -11315,7 +11315,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-15.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "event_kind": "جديد",
@@ -11343,7 +11343,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-18.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "event_kind": "جديد",
@@ -11371,7 +11371,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-16.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -11400,7 +11400,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-16.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -11429,7 +11429,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-16.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "تكرار",
@@ -11457,7 +11457,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-16.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "target": "سفينة",
       "evidence_ref": "https://combinedmaritimeforces.com/jmic/",
@@ -11484,7 +11484,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-16.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "LOYALTY",
       "vessel_source": "LOYALTY (9182306)",
       "imo_number": "9182306",
@@ -11530,7 +11530,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-16.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "ST3",
       "vessel_source": "ST3 (9220964)",
       "imo_number": "9220964",
@@ -11576,7 +11576,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-17.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "تكرار",
@@ -11604,7 +11604,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-17.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -11632,7 +11632,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-17.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z2 — باب المندب والبحر الأحمر",
       "sector_id": "Z2",
       "event_kind": "جديد",
@@ -11660,7 +11660,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-17.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "event_kind": "جديد",
@@ -11688,7 +11688,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-18.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -11716,7 +11716,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-18.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -11744,7 +11744,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-18.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -11772,7 +11772,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-17.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -11801,7 +11801,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-17.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "evidence_ref": "https://www.ukmto.org/recent-incidents",
       "retrieved_at": "2026-10-17T03:42:06Z"
@@ -11827,7 +11827,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-18.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z3 — بحر العرب",
       "sector_id": "Z3",
       "event_kind": "جديد",
@@ -11855,7 +11855,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-18.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -11883,7 +11883,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-18.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -11911,7 +11911,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-18.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -11939,7 +11939,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-18.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -11967,7 +11967,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-20.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "event_kind": "جديد",
@@ -11995,7 +11995,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-18.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "target": "سفينة",
       "evidence_ref": "https://www.kpler.com/",
@@ -12022,7 +12022,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-18.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "evidence_ref": "https://www.ukmto.org/recent-incidents",
       "retrieved_at": "2026-10-18T03:42:46Z"
@@ -12048,7 +12048,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-18.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "JIF BARRACUDA",
       "vessel_source": "JIF BARRACUDA (9345506)",
       "imo_number": "9345506",
@@ -12094,7 +12094,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-19.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -12122,7 +12122,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-19.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -12150,7 +12150,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-19.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -12178,7 +12178,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-19.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "evidence_ref": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
       "retrieved_at": "2026-10-19T22:48:08Z"
@@ -12204,7 +12204,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-19.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z2 — باب المندب والبحر الأحمر",
       "sector_id": "Z2",
       "event_kind": "جديد",
@@ -12232,7 +12232,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-19.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "event_kind": "جديد",
@@ -12260,7 +12260,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-20.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -12288,7 +12288,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-19.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "target": "سفينة",
       "evidence_ref": "https://portwatch.imf.org/",
@@ -12315,7 +12315,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-19.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "evidence_ref": "https://www.jpost.com/",
       "retrieved_at": "2026-10-19T22:48:08Z"
@@ -12341,7 +12341,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-19.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "evidence_ref": "https://hydrography.paknavy.gov.pk/navarea-ix-warnings/",
       "retrieved_at": "2026-10-19T22:48:08Z"
@@ -12367,7 +12367,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-19.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "CHLOE (MIVERVA V)",
       "vessel_source": "CHLOE (MIVERVA V) (9315367)",
       "imo_number": "9315367",
@@ -12413,7 +12413,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-20.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "تكرار",
@@ -12441,7 +12441,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-20.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -12469,7 +12469,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-20.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -12497,7 +12497,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-20.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -12526,7 +12526,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-20.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "target": "سفينة",
       "evidence_ref": "https://portwatch.imf.org/",
@@ -12553,7 +12553,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-20.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "تكرار",
       "evidence_ref": "https://www.ukmto.org/recent-incidents",
       "retrieved_at": "2026-10-20T22:04:52Z"
@@ -12579,7 +12579,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-20.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "SOYIA",
       "vessel_source": "SOYIA (9263916)",
       "imo_number": "9263916",
@@ -12625,7 +12625,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-20.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "AL DASMA",
       "vessel_source": "AL DASMA (9653446)",
       "imo_number": "9653446",
@@ -12671,7 +12671,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-21.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -12699,7 +12699,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-21.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "تكرار",
@@ -12727,7 +12727,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-21.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -12755,7 +12755,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-21.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "evidence_ref": "https://hydrography.paknavy.gov.pk/navarea-ix-warnings/",
       "retrieved_at": "2026-10-21T18:04:51Z"
@@ -12781,7 +12781,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-22.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -12809,7 +12809,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-22.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -12837,7 +12837,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-22.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "فرع تابع",
@@ -12865,7 +12865,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-22.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "event_kind": "جديد",
@@ -12893,7 +12893,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-22.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -12921,7 +12921,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-23.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -12949,7 +12949,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-23.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -12977,7 +12977,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-23.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -13005,7 +13005,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-23.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "evidence_ref": "https://news.usni.org/",
       "retrieved_at": "2026-10-23T22:57:51Z"
@@ -13031,7 +13031,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-23.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -13059,7 +13059,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-23.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "evidence_ref": "https://straits.live/briefs/2026-10-23",
       "retrieved_at": "2026-10-23T22:57:51Z"
@@ -13085,7 +13085,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-23.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "target": "سفينة",
       "evidence_ref": "https://straits.live/briefs/2026-10-23",
@@ -13112,7 +13112,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-23.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "GHANA PROSPERITY",
       "vessel_source": "GHANA PROSPERITY (9732541)",
       "imo_number": "9732541",
@@ -13158,7 +13158,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-23.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "vessel_name": "LEONORA KOSAN",
       "vessel_source": "LEONORA KOSAN (9390953)",
       "imo_number": "9390953",
@@ -13204,7 +13204,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-24.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -13232,7 +13232,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-24.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -13260,7 +13260,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-24.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -13288,7 +13288,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-24.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -13316,7 +13316,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-25.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -13344,7 +13344,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-25.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -13372,7 +13372,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-25.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -13400,7 +13400,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-25.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -13428,7 +13428,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-25.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -13456,7 +13456,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-25.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -13484,7 +13484,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-25.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z2 — باب المندب والبحر الأحمر",
       "sector_id": "Z2",
       "event_kind": "جديد",
@@ -13512,7 +13512,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -13540,7 +13540,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -13569,7 +13569,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -13598,7 +13598,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -13626,7 +13626,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -13654,7 +13654,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -13683,7 +13683,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "event_kind": "جديد",
@@ -13711,7 +13711,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "event_kind": "جديد",
@@ -13739,7 +13739,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "event_kind": "جديد",
@@ -13767,7 +13767,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -13795,7 +13795,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -13823,7 +13823,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "evidence_ref": "https://gcaptain.com",
       "retrieved_at": "2026-10-26T13:08:41Z"
@@ -13849,7 +13849,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -13877,7 +13877,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -13905,7 +13905,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "",
       "sector_id": "",
       "event_kind": "جديد",
@@ -13933,7 +13933,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "",
       "sector_id": "",
       "event_kind": "جديد",
@@ -13961,7 +13961,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "",
       "sector_id": "",
       "event_kind": "جديد",
@@ -13990,7 +13990,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -14018,7 +14018,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "",
       "sector_id": "",
       "event_kind": "جديد",
@@ -14046,7 +14046,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "",
       "sector_id": "",
       "event_kind": "جديد",
@@ -14074,7 +14074,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "",
       "sector_id": "",
       "event_kind": "جديد",
@@ -14102,7 +14102,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "event_kind": "جديد",
@@ -14130,7 +14130,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "",
       "sector_id": "",
       "event_kind": "جديد",
@@ -14158,7 +14158,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-26.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "",
       "sector_id": "",
       "event_kind": "جديد",
@@ -14187,7 +14187,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -14216,7 +14216,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "",
       "sector_id": "",
       "event_kind": "جديد",
@@ -14244,7 +14244,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "event_kind": "جديد",
@@ -14272,7 +14272,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -14300,7 +14300,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "",
       "sector_id": "",
       "event_kind": "جديد",
@@ -14328,7 +14328,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "event_kind": "جديد",
@@ -14356,7 +14356,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -14384,7 +14384,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -14413,7 +14413,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -14441,7 +14441,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -14470,7 +14470,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -14498,7 +14498,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -14527,7 +14527,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "",
       "sector_id": "",
       "event_kind": "جديد",
@@ -14556,7 +14556,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-27.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "target": "سفينة",
       "evidence_ref": "https://www.tradewindsnews.com/casualties/russia-claims-more-attacks-on-black-sea-dry-cargo-vessels/2-1-2064292",
@@ -14583,7 +14583,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -14612,7 +14612,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -14641,7 +14641,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -14670,7 +14670,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -14699,7 +14699,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -14727,7 +14727,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -14756,7 +14756,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z2 — باب المندب والبحر الأحمر",
       "sector_id": "Z2",
       "event_kind": "جديد",
@@ -14784,7 +14784,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -14812,7 +14812,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -14840,7 +14840,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -14868,7 +14868,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -14896,7 +14896,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -14924,7 +14924,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -14952,7 +14952,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z2 — باب المندب والبحر الأحمر",
       "sector_id": "Z2",
       "event_kind": "جديد",
@@ -14980,7 +14980,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-28.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z2 — باب المندب والبحر الأحمر",
       "sector_id": "Z2",
       "event_kind": "جديد",
@@ -15008,7 +15008,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15036,7 +15036,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15064,7 +15064,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15092,7 +15092,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15121,7 +15121,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15150,7 +15150,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15178,7 +15178,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15206,7 +15206,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15234,7 +15234,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15262,7 +15262,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15291,7 +15291,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15320,7 +15320,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "event_kind": "جديد",
@@ -15348,7 +15348,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15377,7 +15377,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "event_kind": "جديد",
@@ -15405,7 +15405,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "",
       "sector_id": "",
       "event_kind": "جديد",
@@ -15433,7 +15433,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-29.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "event_kind": "جديد",
@@ -15461,7 +15461,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15489,7 +15489,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15517,7 +15517,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15545,7 +15545,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15573,7 +15573,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15602,7 +15602,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15630,7 +15630,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15659,7 +15659,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15687,7 +15687,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15715,7 +15715,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15743,7 +15743,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15772,7 +15772,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15800,7 +15800,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15828,7 +15828,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15856,7 +15856,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z5 — المحيط الهندي",
       "sector_id": "Z5",
       "event_kind": "جديد",
@@ -15885,7 +15885,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-30.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15913,7 +15913,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15942,7 +15942,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15970,7 +15970,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -15998,7 +15998,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -16027,7 +16027,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -16056,7 +16056,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -16084,7 +16084,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -16113,7 +16113,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -16141,7 +16141,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -16169,7 +16169,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -16197,7 +16197,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -16225,7 +16225,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "",
       "sector_id": "",
       "event_kind": "جديد",
@@ -16253,7 +16253,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "evidence_ref": "https://www.mscio.eu/alerts/",
       "retrieved_at": "2026-10-31T06:01:34Z"
@@ -16279,7 +16279,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "evidence_ref": "https://www.mscio.eu/alerts/",
       "retrieved_at": "2026-10-31T06:01:34Z"
@@ -16305,7 +16305,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "evidence_ref": "https://www.mscio.eu/alerts/",
       "retrieved_at": "2026-10-31T06:01:34Z"
@@ -16331,7 +16331,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-10-31.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -16359,7 +16359,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-01.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -16387,7 +16387,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-01.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -16415,7 +16415,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-01.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -16443,7 +16443,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-01.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -16471,7 +16471,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-01.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -16500,7 +16500,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-01.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -16529,7 +16529,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-02.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "",
       "sector_id": "",
       "event_kind": "جديد",
@@ -16557,7 +16557,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-02.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "تحديث",
@@ -16585,7 +16585,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-02.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "",
       "sector_id": "",
       "event_kind": "جديد",
@@ -16613,7 +16613,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-02.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -16641,7 +16641,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-02.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -16669,7 +16669,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-02.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -16697,7 +16697,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-02.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -16725,7 +16725,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-02.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z3 — بحر العرب",
       "sector_id": "Z3",
       "event_kind": "جديد",
@@ -16753,7 +16753,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-02.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z2 — باب المندب والبحر الأحمر",
       "sector_id": "Z2",
       "event_kind": "جديد",
@@ -16781,7 +16781,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-02.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -16809,7 +16809,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-02.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "",
       "sector_id": "",
       "event_kind": "جديد",
@@ -16837,7 +16837,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-02.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -16865,7 +16865,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-02.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -16893,7 +16893,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-02.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "",
       "sector_id": "",
       "event_kind": "جديد",
@@ -16921,7 +16921,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-02.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -16950,7 +16950,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-02.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -16978,7 +16978,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-03.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -17006,7 +17006,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-03.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -17035,7 +17035,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-03.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -17064,7 +17064,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-03.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "",
       "sector_id": "",
       "event_kind": "جديد",
@@ -17092,7 +17092,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-03.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -17120,7 +17120,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-03.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -17149,7 +17149,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-03.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -17177,7 +17177,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-03.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -17205,7 +17205,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-03.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "event_kind": "جديد",
@@ -17234,7 +17234,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-03.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -17262,7 +17262,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-03.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z4 — القرن الأفريقي",
       "sector_id": "Z4",
       "event_kind": "جديد",
@@ -17290,7 +17290,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-03.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z5 — المحيط الهندي",
       "sector_id": "Z5",
       "event_kind": "جديد",
@@ -17319,7 +17319,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-03.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "sector": "Z1 — مضيق هرمز وخليج عُمان والخليج العربي",
       "sector_id": "Z1",
       "event_kind": "جديد",
@@ -17348,7 +17348,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-04.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "evidence_ref": "https://www.ukmto.org/-/media/ukmto/products/20261103-ukmto_warning-194-26.pdf?rev=c098958c69da492084f0995fa3dee6bc",
       "retrieved_at": "2026-11-04T03:48:13Z"
@@ -17374,7 +17374,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-04.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "evidence_ref": "https://www.ukmto.org/-/media/ukmto/products/20261103-ukmto_warning_195_26.pdf?rev=dfe3b496b4e94b1888ee80cb23a0aaeb",
       "retrieved_at": "2026-11-04T03:48:13Z"
@@ -17400,7 +17400,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-04.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "evidence_ref": "https://www.seatrade-maritime.com/security/indian-seafarer-killed-in-hormuz-dhow-strike",
       "retrieved_at": "2026-11-04T03:48:13Z"
@@ -17426,7 +17426,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-04.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "target": "سفينة",
       "evidence_ref": "https://www.seatrade-maritime.com/security/vlcc-engine-room-struck-in-latest-hormuz-attack",
@@ -17453,7 +17453,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-04.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "evidence_ref": "https://ar.mehrnews.com/news/1975231/%D8%A7%D9%84%D9%85%D8%AA%D8%AD%D8%AF%D8%AB-%D8%A8%D8%A7%D8%B3%D9%85-%D8%A7%D9%84%D8%AC%D9%8A%D8%B4-%D8%A7%D9%84%D8%A5%D9%8A%D8%B1%D8%A7%D9%86%D9%8A-%D8%A5%D8%B0%D8%A7-%D8%A7%D9%86%D8%AF%D9%84%D8%B9%D8%AA-%D8%AD%D8%B1%D8%A8-%D8%AC%D8%AF%D9%8A%D8%AF%D8%A9-%D9%81%D9%84%D9%86-%D9%8A%D9%82%D8%AA%D8%B5%D8%B1-%D9%85%D8%B3%D8%B1%D8%AD",
       "retrieved_at": "2026-11-04T03:48:13Z"
@@ -17479,7 +17479,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-05.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "evidence_ref": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQQnR0R19venZrc1RseEV0cDRGeEk4OE5pSTJsMjFVUkp1X0tLM1EtajVOS09OQUh4THl0MnFzbjg2RVdKUW9iWWtYRjBLeXdCSlgwYUNaZWtwQjFrNnY2Rmo4R29QbGt6ajNjRGNOVGc3Q3lBTS13bjl0NXUzSWRnT2NQVVBhRXNrSnlTbDhEVkpvNUR4aVQ3X25OWjNCdExyN2JQeGJneHFicEFiV0hN?oc=5",
       "retrieved_at": "2026-11-05T03:45:38Z"
@@ -17505,7 +17505,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-05.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "evidence_ref": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxPeUhiN1hZWE5IV1RnLUU2REViakoxWGVJb0pWNWRkQUtSWGtDMFdXYV82QTNMYWdiekNBdE5oeE9vRUdkTVI5eGVoaG1jeWJHd1cxNjUzejc1VkdFVTFYT2R1Yk93VzI1Z1Zpa3BDZENjbm11dmgyNFJTNEl4SjhVVUZXYko3UGxZR09zODd3eXRYTzZ4dGU4eERzWUtBZ0JhYkRVZzRqaFU2NlR2Mnd5Q2xNUDFkSldzZVE4OFRseGd2RUt6eEtLb2dEZy1LYmZjT0FQZVppVE93SFZF?oc=5",
       "retrieved_at": "2026-11-05T03:45:38Z"
@@ -17531,7 +17531,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-05.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "target": "سفينة",
       "evidence_ref": "https://www.tradewindsnews.com/tankers/two-projectiles-hit-vlcc-blacklisted-by-iran-this-week/2-1-2068715",
@@ -17558,7 +17558,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-05.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "target": "سفينة",
       "evidence_ref": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNVUYzTmV2M1NYdnFOeDRWdnctMloxRmZ4VXZ2bWt1SEgybFc1MklNWG9EWGhkZnRrR2lwbWRlODlUTGNpR1ZLVElJd2FJYTZmVHR1N3d3OWEyLU9hZjR6bGlhcEduV1JMYlpuUExnTlcyVVEwRFNRN1hZck9tZVFTdldBVlc2djBkd01FVEI2b0VSVWFRMXFPTzFFNE5PM01hZlhKa20wVjVyUzdYcTJQZGV3RUliYlFQVkxkb19wb2E4XzlxUmfSAcsBQVVfeXFMUDNtUktfell5RFQ5TS1SU1R6ZTNLY2kwMndmVmtxVUprR3otbmI5QXd3OTQyTEFSaU10cVZDWHRpelNSQnhyc2pwV3lmMW1PWFhKVjJ4WmJLMUtiUU9CSnA5MEdudmVCcEpBYUM3SVpFMzdpTmNnM1Frc18zcjZCclV3RmR4VEppQkhVMGV3alpweUVQcUV1SkN1TGZnbTRfVFdRbG1fRkh3RmVZM0VKeDdCYXl1dDA5d001MDhuNGRyQTR3WDRyX1ZwZnM?oc=5",
@@ -17585,7 +17585,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-05.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "target": "سفينة",
       "evidence_ref": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxOQXhFWTBxMXpESE5CanE2ZExkdWpqbDAzTnJEdDhOMjdkTjNqc2ZmRWZ6S3ZyaHc1WWFhQ2hIZkhncFBiV0Ewc1NMNl9GVGphVXFRSThELUpXR1J0NGZqc0JwcW9DM0NqNE1tQ2hIMnQ4RGFOeVhRVTRobVA3VFdHMGQxbW9LUHZPMktkTGJGLTFLTXExRzJCNlBWS1UzOXhkaFRnaVpMelNXMTFRMDgyTU5tRUpiWVpuRi1Pa0dtQThHSW5DMUZuaVRPeU1kWFV5bEdES012ZHhSQXpfTnlaV2VnUQ?oc=5",
@@ -17612,7 +17612,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-06.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "evidence_ref": "https://www.ukmto.org/recent-incidents#f4b3cb09-5015-4102-b2a6-9982a7b9f7ec",
       "retrieved_at": "2026-11-06T07:05:10Z"
@@ -17638,7 +17638,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-06.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "target": "سفينة",
       "evidence_ref": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQLXpDTDY4blNpOFllS05JOGlGNG0tbVg4U0RsdXRpQlRGXzFOZzBRSWVfYUltSEo1Ylk1TXl1Q3dIbDZwZHBhb2dTRUFFRmtxbllLaWlxQlJWVEc5YnlBd1JkcjQxNFltaC1pdUM0bG02ZFVmR3FpMWlvcWVuaFpCUnA5Z0czNFFYdFBwOU54dWFYMG15Y1hhcnhsbnhnVUduNFN4U3N2OA?oc=5",
@@ -17665,7 +17665,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-06.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "evidence_ref": "https://www.tradewindsnews.com/casualties/tankers-burn-off-hormuz-as-south-korea-readies-navy-assets-for-gulf-of-oman-mission/2-1-2070296",
       "retrieved_at": "2026-11-06T07:05:10Z"
@@ -17691,7 +17691,7 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-07.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "target": "سفينة",
       "outcome": "تفاصيل الضرر وحالة الطاقم غير متاحة في المادة المقروءة.",
@@ -17719,13 +17719,362 @@
         "سجل الأحداث"
       ],
       "merged_from": "2026-11-07.json",
-      "merged_utc": "2026-11-06T23:25:21Z",
+      "merged_utc": "2026-11-12T04:41:36Z",
       "event_kind": "جديد",
       "casualty_scope": "not_announced",
       "target": "سفينة",
       "outcome": "أضرار أو حرائق محتملة؛ لا تثبتها مادة UKMTO الكاملة في هذا التشغيل.",
       "evidence_ref": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPQkhydUFWRnZ0N2l1TUc5LTNrTDVfTkhvSWFNOG1VYS1QYWdPMTNTM3ZKTTcxSTNpdUxGVEN4NjdpaFpaMThQcVFIeFNkaWFWWFVUSS00dlVTNFB1cnRBYVN2cGNRemRHc2xnVlhZWDFvVjZTaVR3eDVJbzFDcDljS1ZSdmJyNlhPbEFZcjhGaFFTaWpQa2c?oc=5",
       "retrieved_at": "2026-11-06T23:08:09Z"
+    },
+    {
+      "event_id": "EV-2026-11-08-001-6f0f95d5",
+      "display_code": "MN-2026-11-08-01",
+      "date_start": "2026-11-08",
+      "date_label": "8 نوفمبر",
+      "location": "شرق خورفكان - خليج عُمان",
+      "classification": "بلاغ رسمي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "medium",
+      "confidence": "متوسطة",
+      "description": "بلاغ UKMTO عن واقعة تشمل سفينة بضائع سائبة وقوات عسكرية شرق خورفكان",
+      "operational_effect": "",
+      "sources": [
+        "UKMTO — التحذيرات 2026؛ قناة العربية — الحساب الرسمي على X"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-08.json",
+      "merged_utc": "2026-11-12T04:41:36Z",
+      "event_kind": "جديد",
+      "casualty_scope": null,
+      "target": "سفينة",
+      "outcome": "تفاصيل الضرر وحالة الطاقم غير متاحة في المادة المقروءة.",
+      "evidence_ref": "https://www.ukmto.org/recent-incidents#c8247796-a11e-4bb4-8588-ae997e9fea8c",
+      "retrieved_at": "2026-11-08T04:28:37Z"
+    },
+    {
+      "event_id": "EV-2026-11-08-002-a9ff713f",
+      "display_code": "MN-2026-11-08-02",
+      "date_start": "2026-11-08",
+      "date_label": "8 نوفمبر",
+      "location": "مضيق هرمز",
+      "classification": "رواية من طرف واحد",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "low",
+      "confidence": "منخفضة",
+      "description": "رواية عن اصطدام ناقلتين بألغام بحرية واندلاع النار قرب مضيق هرمز",
+      "operational_effect": "",
+      "sources": [
+        "straits.live؛ قناة العربية — الحساب الرسمي على X"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-08.json",
+      "merged_utc": "2026-11-12T04:41:36Z",
+      "event_kind": "جديد",
+      "casualty_scope": "not_announced",
+      "target": "سفينة",
+      "outcome": "اندلاع النار في ناقلتين بحسب العناوين؛ لا يثبت الضرر رسميًا.",
+      "evidence_ref": "https://en.mehrnews.com/news/249226/Two-tankers-explode-burn-in-Strait-of-Hormuz",
+      "retrieved_at": "2026-11-08T04:28:37Z"
+    },
+    {
+      "event_id": "EV-2026-11-08-003-d0ac5187",
+      "display_code": "MN-2026-11-08-03",
+      "date_start": "2026-11-08",
+      "date_label": "8 نوفمبر",
+      "location": "خليج عُمان",
+      "classification": "نقل مهني",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "low",
+      "confidence": "منخفضة",
+      "description": "نقل gCaptain قول الجيش الأمريكي إنه عطّل سفينة شحن في خليج عُمان",
+      "operational_effect": "",
+      "sources": [
+        "gCaptain؛ قناة العربية — الحساب الرسمي على X"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-08.json",
+      "merged_utc": "2026-11-12T04:41:36Z",
+      "event_kind": "جديد",
+      "casualty_scope": null,
+      "target": "سفينة",
+      "outcome": "تعطيل سفينة شحن بحسب النقل؛ تفاصيل الضرر وهوية السفينة غير متاحة.",
+      "evidence_ref": "https://gcaptain.com/us-military-says-it-disabled-cargo-vessel-in-gulf-of-oman/",
+      "retrieved_at": "2026-11-08T04:28:37Z"
+    },
+    {
+      "event_id": "EV-2026-11-08-004-3488d3eb",
+      "display_code": "MN-2026-11-08-04",
+      "date_start": "2026-11-08",
+      "date_label": "8 نوفمبر",
+      "location": "ساحل الإمارات - خليج عُمان",
+      "classification": "نقل إعلامي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "low",
+      "confidence": "منخفضة",
+      "description": "عنوان عن حادث بحري قريبًا من ساحل الإمارات وبلاغ إنقاذ 22 شخصًا من حريق في بحر عُمان",
+      "operational_effect": "",
+      "sources": [
+        "straits.live؛ قناة العربية — الحساب الرسمي على X"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-08.json",
+      "merged_utc": "2026-11-12T04:41:36Z",
+      "event_kind": "جديد",
+      "casualty_scope": null,
+      "target": null,
+      "outcome": "إنقاذ 22 شخصًا من حريق بحري بحسب قناة العربية؛ السفينة وسبب الحريق غير محددين.",
+      "evidence_ref": "https://en.mehrnews.com/news/249227/Another-maritime-incident-reported-off-UAE-coast",
+      "retrieved_at": "2026-11-08T04:28:37Z"
+    },
+    {
+      "event_id": "EV-2026-11-09-001-979cb287",
+      "display_code": "MN-2026-11-09-01",
+      "date_start": "2026-11-09",
+      "date_label": "9 نوفمبر",
+      "location": "مقابل خصب - خليج عُمان",
+      "classification": "بلاغ رسمي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "medium",
+      "confidence": "متوسطة",
+      "description": "عنوان UKMTO عن نشاط مشبوه على بعد 8 أميال بحرية شمال غرب خصب",
+      "operational_effect": "",
+      "sources": [
+        "UKMTO — التحذيرات 2026"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-09.json",
+      "merged_utc": "2026-11-12T04:41:36Z",
+      "event_kind": "جديد",
+      "casualty_scope": null,
+      "target": null,
+      "outcome": "الهدف والضرر وحالة الطاقم غير مذكورة في العنوان.",
+      "evidence_ref": "https://www.ukmto.org/recent-incidents#c879ff7b-4927-4e7f-96b0-bb644675ad00",
+      "retrieved_at": "2026-11-09T04:19:34Z"
+    },
+    {
+      "event_id": "EV-2026-11-09-002-725a22fe",
+      "display_code": "MN-2026-11-09-02",
+      "date_start": "2026-11-09",
+      "date_label": "9 نوفمبر",
+      "location": "مضيق هرمز",
+      "classification": "بلاغ رسمي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "medium",
+      "confidence": "متوسطة",
+      "description": "عنوان UKMTO عن واقعة متأخرة الإبلاغ مصنفة هجومًا في مضيق هرمز",
+      "operational_effect": "",
+      "sources": [
+        "UKMTO — التحذيرات 2026"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-09.json",
+      "merged_utc": "2026-11-12T04:41:36Z",
+      "event_kind": "جديد",
+      "casualty_scope": null,
+      "target": "سفينة",
+      "outcome": "لا يظهر في العنوان اسم سفينة أو نوع سلاح أو نتيجة أو جهة منفذة.",
+      "evidence_ref": "https://www.ukmto.org/recent-incidents#5151c481-8d2c-4a84-b2db-14ead1472ab1",
+      "retrieved_at": "2026-11-09T04:19:34Z"
+    },
+    {
+      "event_id": "EV-2026-11-09-003-e7ad82e3",
+      "display_code": "MN-2026-11-09-03",
+      "date_start": "2026-11-09",
+      "date_label": "9 نوفمبر",
+      "location": "مقابل خصب - خليج عُمان",
+      "classification": "بلاغ رسمي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "medium",
+      "confidence": "متوسطة",
+      "description": "تحديث عنوان UKMTO عن واقعة هجوم متأخرة الإبلاغ على بعد 16 ميلًا بحريًا شرق خصب",
+      "operational_effect": "",
+      "sources": [
+        "UKMTO — التحذيرات 2026"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-09.json",
+      "merged_utc": "2026-11-12T04:41:36Z",
+      "event_kind": "جديد",
+      "casualty_scope": null,
+      "target": "سفينة",
+      "outcome": "تفاصيل الضرر والهدف وحالة الطاقم غير متاحة في المادة المقروءة.",
+      "evidence_ref": "https://www.ukmto.org/recent-incidents#ca074c7b-d99e-4c49-b285-6ebf6dd2a6b0",
+      "retrieved_at": "2026-11-09T04:19:34Z"
+    },
+    {
+      "event_id": "EV-2026-11-09-004-9416da9a",
+      "display_code": "MN-2026-11-09-04",
+      "date_start": "2026-11-09",
+      "date_label": "9 نوفمبر",
+      "location": "خليج عُمان",
+      "classification": "بلاغ رسمي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "medium",
+      "confidence": "متوسطة",
+      "description": "تحديث عنوان UKMTO عن واقعة تشمل سفينة بضائع سائبة وقوات عسكرية",
+      "operational_effect": "",
+      "sources": [
+        "UKMTO — التحذيرات 2026"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-09.json",
+      "merged_utc": "2026-11-12T04:41:36Z",
+      "event_kind": "جديد",
+      "casualty_scope": null,
+      "target": "سفينة",
+      "outcome": "لا يثبت العنوان وحده اشتباكًا أو إصابة أو جهة منفذة أو حالة للطاقم.",
+      "evidence_ref": "https://www.ukmto.org/recent-incidents#c8247796-a11e-4bb4-8588-ae997e9fea8c",
+      "retrieved_at": "2026-11-09T04:19:34Z"
+    },
+    {
+      "event_id": "EV-2026-11-09-005-a25c575b",
+      "display_code": "MN-2026-11-09-05",
+      "date_start": "2026-11-09",
+      "date_label": "9 نوفمبر",
+      "location": "مضيق هرمز",
+      "classification": "رواية من طرف واحد",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "low",
+      "confidence": "منخفضة",
+      "description": "عناوين إعلامية عن ناقلة أو ناقلات احترقت أو أصيبت بألغام في مضيق هرمز",
+      "operational_effect": "",
+      "sources": [
+        "straits.live؛ ISNA؛ Mehr — العربي؛ Jerusalem Post"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-09.json",
+      "merged_utc": "2026-11-12T04:41:36Z",
+      "event_kind": "جديد",
+      "casualty_scope": "not_announced",
+      "target": "سفينة",
+      "outcome": "احتراق أو إصابة ناقلة/ناقلات بحسب العناوين؛ لا يثبتها مصدر ملاحي مستقل.",
+      "evidence_ref": "https://en.mehrnews.com/news/249226/Two-tankers-explode-burn-in-Strait-of-Hormuz",
+      "retrieved_at": "2026-11-09T04:19:34Z"
+    },
+    {
+      "event_id": "EV-2026-11-09-006-7890adc6",
+      "display_code": "MN-2026-11-09-06",
+      "date_start": "2026-11-09",
+      "date_label": "9 نوفمبر",
+      "location": "خليج عُمان",
+      "classification": "نقل مهني",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "low",
+      "confidence": "منخفضة",
+      "description": "عناوين مهنية عن تعطيل أو إصابة سفينة بضائع وحريق ناقلة وإجلاء 22 شخصًا",
+      "operational_effect": "",
+      "sources": [
+        "gCaptain؛ TradeWinds؛ Seatrade Maritime؛ Lloyd's List؛ The Maritime Executive؛ MarineLink"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-09.json",
+      "merged_utc": "2026-11-12T04:41:36Z",
+      "event_kind": "جديد",
+      "casualty_scope": null,
+      "target": "سفينة",
+      "outcome": "تعطيل أو إصابة سفينة بضائع وحريق ناقلة وإجلاء 22 شخصًا بحسب عناوين مختلفة؛ لا يثبت أنها واقعة واحدة.",
+      "evidence_ref": "https://www.tradewindsnews.com/casualties/us-navy-hits-bulker-as-uae-evacuates-22-from-burning-tanker/2-1-2071087",
+      "retrieved_at": "2026-11-09T04:19:34Z"
+    },
+    {
+      "event_id": "EV-2026-11-11-001-09c4578b",
+      "display_code": "MN-2026-11-11-01",
+      "date_start": "2026-11-11",
+      "date_label": "11 نوفمبر",
+      "location": null,
+      "classification": "بلاغ رسمي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "low",
+      "confidence": "منخفضة",
+      "description": "هجوم — بلاغ UKMTO 201-26 · 10/11/2026",
+      "operational_effect": "",
+      "sources": [
+        "UKMTO — الحوادث الأخيرة"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-11.json",
+      "merged_utc": "2026-11-12T04:41:36Z",
+      "event_kind": "جديد",
+      "casualty_scope": "not_announced",
+      "target": "سفينة",
+      "evidence_kind": "official_source",
+      "evidence_ref": "https://www.ukmto.org/recent-incidents#c151e68e-75d0-4014-b192-491812e31aac",
+      "retrieved_at": "2026-11-11T04:56:57Z"
+    },
+    {
+      "event_id": "EV-2026-11-11-002-a48d6895",
+      "display_code": "MN-2026-11-11-02",
+      "date_start": "2026-11-11",
+      "date_label": "11 نوفمبر",
+      "location": "مضيق هرمز",
+      "classification": "بلاغ رسمي",
+      "evidence_status": "unresolved_incident",
+      "confidence_level": "low",
+      "confidence": "منخفضة",
+      "description": "نشاط مشبوه — ناقلة · تحذير UKMTO 202-26 · 11/11/2026",
+      "operational_effect": "",
+      "sources": [
+        "UKMTO — التحذيرات 2026؛ حساب UKMTO الرسمي على X"
+      ],
+      "source_count": 1,
+      "deduplication_note": "مُدمج من ملف اليوم التراكمي — لا تكرار مع سجلات سابقة",
+      "report_sections": [
+        "سجل الأحداث"
+      ],
+      "merged_from": "2026-11-11.json",
+      "merged_utc": "2026-11-12T04:41:36Z",
+      "sector_id": "Z1",
+      "event_kind": "جديد",
+      "casualty_scope": "not_announced",
+      "target": "سفينة",
+      "evidence_kind": "official_source",
+      "evidence_ref": "https://www.ukmto.org/recent-incidents#a748d412-b74a-4982-8107-15beb5ffe5ed",
+      "retrieved_at": "2026-11-11T04:56:57Z"
     }
   ],
   "imo_summary": {
@@ -17809,8 +18158,8 @@
     ],
     "approved_source_count_source": "appendices/sources-manifest.json (مصدر واحد للحقيقة)",
     "approved_source_count_note": "كان 37 وصار 62 بموجب ملف المصدر الواحد.",
-    "unique_source_strings_in_ledger": 339,
-    "_rebuilt_utc": "2026-11-06T23:25:21Z"
+    "unique_source_strings_in_ledger": 346,
+    "_rebuilt_utc": "2026-11-12T04:41:36Z"
   },
   "limitations": [
     "لا يوجد رقم موحد للتكدس الملاحي أو طوابير الانتظار أو معدل العبور لكل الفترة؛ AIS قد يتأثر بالإطفاء أو التشويش ولا يرى العبور الصامت.",
@@ -17821,7 +18170,7 @@
   ],
   "schema_note": "قائمة السجلات الوحيدة هي `events`. أُزيل المفتاح المكرر `records` في 19 أكتوبر 2026 (بند 10 من التدقيق المستقل).",
   "vertical_rebuild": {
-    "rebuilt_utc": "2026-11-06T23:25:21Z",
+    "rebuilt_utc": "2026-11-12T04:41:36Z",
     "rebuilt_keys": [
       "counts",
       "source_audit"
@@ -17851,10 +18200,10 @@
     "rule": "كل قسم رأسي إمّا مُعاد بناؤه من السجلات، أو موسوم بتاريخه (`_state: point_in_time` + `_as_of`). لا قسم يبدو حديثًا بلا سند."
   },
   "merge_log": {
-    "merged_utc": "2026-11-06T23:25:21Z",
+    "merged_utc": "2026-11-12T04:41:36Z",
     "frozen_source": "event-ledger-sectioned-2026-02-28-to-2026-10-11.json",
-    "records_total": 557,
-    "records_from_daily_files": 412,
+    "records_total": 569,
+    "records_from_daily_files": 424,
     "added_this_run": [],
     "added_this_run_count": 0,
     "removed_this_run": [],
@@ -18430,17 +18779,29 @@
       {
         "file": "2026-11-07.json",
         "added": 2
+      },
+      {
+        "file": "2026-11-08.json",
+        "added": 4
+      },
+      {
+        "file": "2026-11-09.json",
+        "added": 6
+      },
+      {
+        "file": "2026-11-11.json",
+        "added": 2
       }
     ],
-    "added_total_since_frozen": 412,
-    "added_total_since_frozen_codes": 413,
-    "previous_merged_utc": "2026-11-06T23:23:58Z",
+    "added_total_since_frozen": 424,
+    "added_total_since_frozen_codes": 425,
+    "previous_merged_utc": "2026-11-12T04:40:31Z",
     "aliased": [
       "MN-2026-10-11-02 → EV-2026-10-11-148-5ced58be"
     ],
     "skipped": [],
     "code_conflicts": [],
-    "coverage_only_skipped": 110,
+    "coverage_only_skipped": 112,
     "note": "added_this_run = ما أضافته هذه الجولة فقط · added_total_since_frozen = كل ما دخل الدفتر بعد التجميد."
   }
 }
