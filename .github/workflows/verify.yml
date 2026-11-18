@@ -26,5 +26,9 @@ jobs:
         run: python3 brain/tools/runbook.py verify --root brain
       - name: تصنيف مسارات المستودع
         run: python3 brain/tools/code_paths.py check --root .
+      # الفحوص تشترط موقعًا مبنيًا في site/dist، والمجلد مستبعد من git، فيُبنى هنا من المصادر.
+      - name: بناء الموقع
+        working-directory: site
+        run: python3 generator/build_site.py --check
       - name: الاختبارات
         run: bash brain/tests/run_checks.sh
