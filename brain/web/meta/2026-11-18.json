@@ -1,0 +1,934 @@
+{
+ "title": "التقرير اليومي لأمن الملاحة",
+ "subtitle": "مركز الوعي بالمجال البحري — مملكة البحرين",
+ "date_label": "18/11/2026",
+ "headline": "بلاغات UKMTO عن إصابة ست ناقلات بين 10 و16 نوفمبر في الخليج العربي ومضيق هرمز، وأخبار غير مؤكدة عن ألغام.",
+ "lede": "المستوى العام متوسط. ويظل مضيق هرمز وخليج عُمان والخليج العربي أعلى القطاعات عند مستوى متوسط.",
+ "window": "خلال 24 ساعة السابقة (UTC)",
+ "version": "و ب 18/11/26",
+ "generated_label": "2026-11-18T04:00:00Z",
+ "threat_level": "متوسط",
+ "sources_checked": 60,
+ "sources_cited": 7,
+ "description": "مركز الوعي البحري — مملكة البحرين · 18/11/2026 · فترة التقرير: 120400Z–180340Z NOV 26",
+ "notice": "نسخة ويب من التقرير اليومي. المصادر المعتمدة 62 مصدرًا؛ 60 مرصودة آليًا، 54 ناجحة، 6 متعذّر، و2 يُفحص يدويًا.",
+ "footer_note": "يعرض سجل IMO أحدث إضافة مؤرخة 15/11/2026، ولم تظهر فيه بعد واقعتا 16/11 في مضيق هرمز. أخبار الألغام في 18/11 منقولة إعلاميًا ولا يؤكدها بلاغ رسمي.",
+ "classification": "عام",
+ "ledger_url": "/reports/cumulative-2026.html",
+ "report_schema_version": "2.1",
+ "event_count": 10,
+ "report_path": "/reports/2026-11-18-sectioned.md",
+ "hero_kpis": [
+  {
+   "id": "ukmto-reports",
+   "row": 1,
+   "title": "بلاغات UKMTO المرصودة",
+   "label": "البلاغات الرسمية الظاهرة في متن اليوم",
+   "tag": "Z1",
+   "value": "8",
+   "detail": "203-26 · 204-26 · 206-26 · 208-26 وأربعة بلاغات بلا رقم ظاهر، بين 10 و17 نوفمبر",
+   "note": "ست بلاغات عن إصابة ناقلات، وبلاغان عن زوارق مسلحة في بحر العرب.",
+   "source": "سجل الوقائع الرسمي UKMTO",
+   "accent": "ok",
+   "updated": "2026-11-18",
+   "title_en": "Monitored UKMTO reports",
+   "tag_en": "Z1"
+  },
+  {
+   "id": "qualifying-incidents",
+   "row": 1,
+   "title": "وقائع مستوفية لمعيار الاحتساب",
+   "title_en": "Incidents meeting the counting criterion",
+   "label": "وقائع مستوفية لمعيار الاحتساب",
+   "tag": "",
+   "tag_en": "",
+   "value": "9",
+   "detail": "0 مؤكدة + 0 مرجّحة + 9 غير مؤكدة مؤهلة",
+   "note": "بلاغات UKMTO تُحتسب مؤهلة، ولا تُعد مؤكدة الأثر حتى يثبت الضرر.",
+   "source": "web/zones/{date}.json · counter",
+   "accent": "ok",
+   "updated": "2026-11-18"
+  },
+  {
+   "id": "unconfirmed-narratives",
+   "row": 1,
+   "title": "روايات لم تتأكد",
+   "title_en": "Unconfirmed accounts",
+   "label": "روايات لم تتأكد",
+   "tag": "التأهل للمعيار لا يعني الإثبات",
+   "tag_en": "Meeting the counting criterion does not establish confirmation",
+   "value": "9",
+   "detail": "9 روايات · منها 9 مستوفية لمعيار الاحتساب · لم تثبت أيٌّ منها رسميًا الأثر",
+   "note": "أخبار الألغام في 18/11 نقل إعلامي غير مؤكد.",
+   "source": "web/zones/{date}.json · counter",
+   "accent": "info",
+   "updated": "2026-11-18"
+  },
+  {
+   "id": "proven-zones",
+   "row": 1,
+   "title": "وقائع مثبتة",
+   "title_en": "Confirmed incidents",
+   "label": "وقائع مثبتة خارج Z1",
+   "tag": "Z2 · Z3 · Z4",
+   "tag_en": "Z2 · Z3 · Z4",
+   "value": "0",
+   "detail": "لا توجد وقائع مثبتة الأثر في هذه القطاعات خلال الفترة",
+   "note": "بحر العرب عند مستوى متوسط بسبب بلاغين عن زوارق مسلحة.",
+   "source": "web/zones/{date}.json · Z2–Z4",
+   "accent": "info",
+   "updated": "2026-11-18"
+  },
+  {
+   "id": "imo-confirmed-incidents",
+   "row": 2,
+   "title": "سجل الحوادث المؤكدة من IMO",
+   "title_en": "IMO confirmed incidents log",
+   "label": "سجل الحوادث المؤكدة من IMO",
+   "tag": "بطاقة دائمة",
+   "tag_en": "Permanent card",
+   "value": "4",
+   "detail": "4 إضافات مؤرخة بين 10 و15 نوفمبر؛ الجدول يعرض 138 صفًا",
+   "note": "لم تظهر واقعتا 16/11 في السجل بعد.",
+   "source": "appendices/imo-incidents.json + https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+   "source_url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+   "accent": "info",
+   "updated": "2026-11-18",
+   "cumulative": "128"
+  },
+  {
+   "id": "imo-seafarer-deaths",
+   "row": 2,
+   "title": "أعداد الوفيات من IMO",
+   "title_en": "Seafarer deaths recorded by IMO",
+   "label": "أعداد الوفيات من IMO",
+   "tag": "بطاقة دائمة",
+   "tag_en": "Permanent card",
+   "value": "0",
+   "detail": "لا زيادة بين التحديثين؛ الإجمالي 24 وفاة بحّار مؤكدة حتى 03/11/2026",
+   "note": "تعذّر تحديث سجل IMO اليوم؛ لا تُستنتج زيادة أو عدمها من تعذّر الوصول.",
+   "source": "appendices/imo-incidents.json + https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+   "source_url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+   "accent": "info",
+   "updated": "2026-11-03",
+   "cumulative": "24"
+  }
+ ],
+ "map": {
+  "caption": "",
+  "points": [
+   {
+    "code": "MN-2026-11-18-01",
+    "area": "الخليج العربي",
+    "lat": 26.45,
+    "lon": 51.3,
+    "precision": "approximate",
+    "surface": "main",
+    "basis": "الموقع التقريبي لواقعة «هجوم — بلاغ UKMTO 203-26 عن إصابة ناقلة بمقذوف في الخليج العربي ونقل مصابين إلى البر · 10/11/2026» داخل منطقة الخليج العربي وفق المِرساة المعتمدة",
+    "source": "generator/map_gulf.py — SEAS",
+    "label": "هجوم — بلاغ UKMTO 203-26 عن إصابة ناقلة بمقذوف في الخليج العربي ونقل مصابين إلى البر · 10/11/2026",
+    "confirmation": "unconfirmed",
+    "qualifying": true,
+    "zone": "Z1",
+    "class": "بلاغ رسمي"
+   },
+   {
+    "code": "MN-2026-11-18-02",
+    "area": "الخليج العربي",
+    "lat": 26.45,
+    "lon": 51.3,
+    "precision": "approximate",
+    "surface": "main",
+    "basis": "الموقع التقريبي لواقعة «هجوم — بلاغ UKMTO 204-26 عن إصابة ناقلة بمقذوف في غرفة المحركات على بعد 14 ميلًا بحريًا شمال غرب رأس الخيمة · 11/11/2026» داخل منطقة الخليج العربي وفق المِرساة المعتمدة",
+    "source": "generator/map_gulf.py — SEAS",
+    "label": "هجوم — بلاغ UKMTO 204-26 عن إصابة ناقلة بمقذوف في غرفة المحركات على بعد 14 ميلًا بحريًا شمال غرب رأس الخيمة · 11/11/2026",
+    "confirmation": "unconfirmed",
+    "qualifying": true,
+    "zone": "Z1",
+    "class": "بلاغ رسمي"
+   },
+   {
+    "code": "MN-2026-11-18-03",
+    "area": "الخليج العربي",
+    "lat": 26.45,
+    "lon": 51.3,
+    "precision": "approximate",
+    "surface": "main",
+    "basis": "الموقع التقريبي لواقعة «هجوم — بلاغ UKMTO متأخر عن إصابة ناقلة بمقذوف في الخليج العربي قبل دخول مضيق هرمز · 13/11/2026» داخل منطقة الخليج العربي وفق المِرساة المعتمدة",
+    "source": "generator/map_gulf.py — SEAS",
+    "label": "هجوم — بلاغ UKMTO متأخر عن إصابة ناقلة بمقذوف في الخليج العربي قبل دخول مضيق هرمز · 13/11/2026",
+    "confirmation": "unconfirmed",
+    "qualifying": true,
+    "zone": "Z1",
+    "class": "بلاغ رسمي"
+   },
+   {
+    "code": "MN-2026-11-18-04",
+    "area": "الخليج العربي",
+    "lat": 26.45,
+    "lon": 51.3,
+    "precision": "approximate",
+    "surface": "main",
+    "basis": "الموقع التقريبي لواقعة «هجوم — بلاغ UKMTO نقلًا عن سلطات الملاحة الهندية عن هجوم على ناقلة في الخليج العربي · 15/11/2026» داخل منطقة الخليج العربي وفق المِرساة المعتمدة",
+    "source": "generator/map_gulf.py — SEAS",
+    "label": "هجوم — بلاغ UKMTO نقلًا عن سلطات الملاحة الهندية عن هجوم على ناقلة في الخليج العربي · 15/11/2026",
+    "confirmation": "unconfirmed",
+    "qualifying": true,
+    "zone": "Z1",
+    "class": "بلاغ رسمي"
+   },
+   {
+    "code": "MN-2026-11-18-05",
+    "area": "مضيق هرمز",
+    "lat": 26.56,
+    "lon": 56.4,
+    "precision": "approximate",
+    "surface": "main",
+    "basis": "الموقع التقريبي لواقعة «هجوم — بلاغ UKMTO عن إصابة ناقلة بمقذوف أثناء خروجها من مضيق هرمز واندلاع حريق في غرفة المحركات · 16/11/2026» داخل منطقة مضيق هرمز وفق المِرساة المعتمدة",
+    "source": "IMO — Strait of Hormuz TSS chart (Ships' Routeing) · audit-2026-10-30/imo-tss/imo-tss-derived.json",
+    "label": "هجوم — بلاغ UKMTO عن إصابة ناقلة بمقذوف أثناء خروجها من مضيق هرمز واندلاع حريق في غرفة المحركات · 16/11/2026",
+    "confirmation": "unconfirmed",
+    "qualifying": true,
+    "zone": "Z1",
+    "class": "بلاغ رسمي"
+   },
+   {
+    "code": "MN-2026-11-18-06",
+    "area": "بحر العرب",
+    "lat": 21.4,
+    "lon": 61.0,
+    "precision": "approximate",
+    "surface": "main",
+    "basis": "الموقع التقريبي لواقعة «نشاط مشبوه — بلاغ UKMTO 206-26 عن اقتراب سفينة أم وزورق عليه مسلحون من ناقلة على بعد 430 ميلًا بحريًا شرق سقطرى · 16/11/2026» داخل منطقة بحر العرب وفق المِرساة المعتمدة",
+    "source": "generator/map_gulf.py — SEAS",
+    "label": "نشاط مشبوه — بلاغ UKMTO 206-26 عن اقتراب سفينة أم وزورق عليه مسلحون من ناقلة على بعد 430 ميلًا بحريًا شرق سقطرى · 16/11/2026",
+    "confirmation": "unconfirmed",
+    "qualifying": true,
+    "zone": "Z3",
+    "class": "بلاغ رسمي"
+   },
+   {
+    "code": "MN-2026-11-18-07",
+    "area": "مضيق هرمز",
+    "lat": 26.56,
+    "lon": 56.4,
+    "precision": "approximate",
+    "surface": "main",
+    "basis": "الموقع التقريبي لواقعة «هجوم — بلاغ UKMTO 208-26 عن هجوم على ناقلة عابرة على بعد 7 أميال بحرية شمال خصب وتعطلها، ثم إصابة ثانية · 16/11/2026» داخل منطقة مضيق هرمز وفق المِرساة المعتمدة",
+    "source": "IMO — Strait of Hormuz TSS chart (Ships' Routeing) · audit-2026-10-30/imo-tss/imo-tss-derived.json",
+    "label": "هجوم — بلاغ UKMTO 208-26 عن هجوم على ناقلة عابرة على بعد 7 أميال بحرية شمال خصب وتعطلها، ثم إصابة ثانية · 16/11/2026",
+    "confirmation": "unconfirmed",
+    "qualifying": true,
+    "zone": "Z1",
+    "class": "بلاغ رسمي"
+   },
+   {
+    "code": "MN-2026-11-18-08",
+    "area": "بحر العرب",
+    "lat": 21.4,
+    "lon": 61.0,
+    "precision": "approximate",
+    "surface": "main",
+    "basis": "الموقع التقريبي لواقعة «نشاط مشبوه — محاولة صعود في بلاغ UKMTO عن زورق مسلح حاول الصعود إلى سفينة بضائع على بعد 50 ميلًا بحريًا جنوب غرب المكلا · 17/11/2026» داخل منطقة بحر العرب وفق المِرساة المعتمدة",
+    "source": "generator/map_gulf.py — SEAS",
+    "label": "نشاط مشبوه — محاولة صعود في بلاغ UKMTO عن زورق مسلح حاول الصعود إلى سفينة بضائع على بعد 50 ميلًا بحريًا جنوب غرب المكلا · 17/11/2026",
+    "confirmation": "unconfirmed",
+    "qualifying": true,
+    "zone": "Z3",
+    "class": "بلاغ رسمي"
+   },
+   {
+    "code": "MN-2026-11-18-09",
+    "area": "الخليج العربي",
+    "lat": 26.45,
+    "lon": 51.3,
+    "precision": "approximate",
+    "surface": "main",
+    "basis": "الموقع التقريبي لواقعة «تحديث بيانات IMO: إضافة أربع حوادث مؤكدة مؤرخة بين 10 و15 نوفمبر 2026 في الخليج العربي ومضيق هرمز» داخل منطقة الخليج العربي وفق المِرساة المعتمدة",
+    "source": "generator/map_gulf.py — SEAS",
+    "label": "تحديث بيانات IMO: إضافة أربع حوادث مؤكدة مؤرخة بين 10 و15 نوفمبر 2026 في الخليج العربي ومضيق هرمز",
+    "confirmation": "unconfirmed",
+    "qualifying": false,
+    "zone": "Z1",
+    "class": "سجل دولي"
+   },
+   {
+    "code": "MN-2026-11-18-10",
+    "area": "مضيق هرمز",
+    "lat": 26.56,
+    "lon": 56.4,
+    "precision": "approximate",
+    "surface": "main",
+    "basis": "الموقع التقريبي لواقعة «بلاغ غير مؤكد — أخبار إعلامية عن ارتطام ناقلات بألغام بحرية في مضيق هرمز · 18/11/2026» داخل منطقة مضيق هرمز وفق المِرساة المعتمدة",
+    "source": "IMO — Strait of Hormuz TSS chart (Ships' Routeing) · audit-2026-10-30/imo-tss/imo-tss-derived.json",
+    "label": "بلاغ غير مؤكد — أخبار إعلامية عن ارتطام ناقلات بألغام بحرية في مضيق هرمز · 18/11/2026",
+    "confirmation": "unconfirmed",
+    "qualifying": true,
+    "zone": "Z1",
+    "class": "نقل إعلامي"
+   }
+  ],
+  "points_note": "",
+  "points_stats": {
+   "events": 10,
+   "with_area": 10,
+   "drawn": 10,
+   "exact": 0,
+   "approximate": 10,
+   "off_map": 0,
+   "excluded": 0,
+   "confirmed": 0,
+   "probable": 0,
+   "unconfirmed": 9,
+   "not_qualifying": 1,
+   "status_unknown": 0
+  }
+ },
+ "decision_card": {
+  "changed": [
+   "نشر UKMTO بلاغات عن إصابة ست ناقلات بين 10 و16 نوفمبر في الخليج العربي ومضيق هرمز.",
+   "أفاد تحديث البلاغ 208-26 بإصابة ثانية للناقلة قرب خصب، وبأن طاقمها لم يتم حصره.",
+   "صدر بلاغان عن زوارق مسلحة شرق سقطرى وجنوب غرب المكلا في 16 و17 نوفمبر.",
+   "أضاف سجل IMO أربع حوادث مؤكدة مؤرخة بين 10 و15 نوفمبر.",
+   "تتحدث وسائل إعلام عن ألغام في مضيق هرمز فجر 18/11، ولا بلاغ رسميًا يؤكد ذلك."
+  ],
+  "risk": "متوسط",
+  "risk_kind": "med",
+  "risk_ref": "بطاقة الترويسة: مستوى التهديد",
+  "action": [
+   "ارفعوا التأهب عند عبور مضيق هرمز، وخاصة بين خصب ورأس الخيمة.",
+   "راجعوا آخر بلاغات UKMTO قبل كل عبور، وأبلغوا فورًا عن أي إصابة أو جسم عائم.",
+   "عزّزوا المراقبة في بحر العرب ضد الزوارق المسلحة."
+  ],
+  "watch": [
+   "بلاغ رسمي عن ألغام في مضيق هرمز؛ الحالة: لم يصدر بعد.",
+   "تحديث عن طاقم الناقلة في 208-26؛ الحالة: لم يتم التوضيح.",
+   "إضافة واقعتي 16/11 إلى سجل IMO؛ الحالة: لم تُضف بعد."
+  ],
+  "basis": "المستوى العام متوسط وأعلى القطاعات Z1 وفق بطاقة القطاعات المحسوبة. البلاغات الرسمية تصف إصابات بمقذوفات، لكنها لا تحدد حجم الضرر في أغلبها، ولم يُعلن رسميًا غرق سفينة أو توقف المرور."
+ },
+ "changes": [
+  {
+   "kind": "new",
+   "code": "MN-2026-11-18-01",
+   "ref": "UKMTO — الحوادث الأخيرة",
+   "text": "هجوم — بلاغ UKMTO 203-26 عن إصابة ناقلة بمقذوف في الخليج العربي ونقل مصابين إلى البر · 10/11/2026"
+  },
+  {
+   "kind": "new",
+   "code": "MN-2026-11-18-02",
+   "ref": "UKMTO — الحوادث الأخيرة",
+   "text": "هجوم — بلاغ UKMTO 204-26 عن إصابة ناقلة بمقذوف في غرفة المحركات على بعد 14 ميلًا بحريًا شمال غرب رأس الخيمة · 11/11/2026"
+  },
+  {
+   "kind": "new",
+   "code": "MN-2026-11-18-03",
+   "ref": "UKMTO — التحذيرات 2026",
+   "text": "هجوم — بلاغ UKMTO متأخر عن إصابة ناقلة بمقذوف في الخليج العربي قبل دخول مضيق هرمز · 13/11/2026"
+  },
+  {
+   "kind": "new",
+   "code": "MN-2026-11-18-04",
+   "ref": "UKMTO — التحذيرات 2026",
+   "text": "هجوم — بلاغ UKMTO نقلًا عن سلطات الملاحة الهندية عن هجوم على ناقلة في الخليج العربي · 15/11/2026"
+  },
+  {
+   "kind": "new",
+   "code": "MN-2026-11-18-05",
+   "ref": "UKMTO — التحذيرات 2026",
+   "text": "هجوم — بلاغ UKMTO عن إصابة ناقلة بمقذوف أثناء خروجها من مضيق هرمز واندلاع حريق في غرفة المحركات · 16/11/2026"
+  },
+  {
+   "kind": "new",
+   "code": "MN-2026-11-18-06",
+   "ref": "UKMTO — الحوادث الأخيرة",
+   "text": "نشاط مشبوه — بلاغ UKMTO 206-26 عن اقتراب سفينة أم وزورق عليه مسلحون من ناقلة على بعد 430 ميلًا بحريًا شرق سقطرى · 16/11/2026"
+  },
+  {
+   "kind": "new",
+   "code": "MN-2026-11-18-07",
+   "ref": "UKMTO — الحوادث الأخيرة",
+   "text": "هجوم — بلاغ UKMTO 208-26 عن هجوم على ناقلة عابرة على بعد 7 أميال بحرية شمال خصب وتعطلها، ثم إصابة ثانية · 16/11/2026"
+  },
+  {
+   "kind": "new",
+   "code": "MN-2026-11-18-08",
+   "ref": "UKMTO — التحذيرات 2026",
+   "text": "نشاط مشبوه — محاولة صعود في بلاغ UKMTO عن زورق مسلح حاول الصعود إلى سفينة بضائع على بعد 50 ميلًا بحريًا جنوب غرب المكلا · 17/11/2026"
+  },
+  {
+   "kind": "new",
+   "code": "MN-2026-11-18-09",
+   "ref": "IMO — سجل الحوادث المؤكدة",
+   "text": "تحديث بيانات IMO: إضافة أربع حوادث مؤكدة مؤرخة بين 10 و15 نوفمبر 2026 في الخليج العربي ومضيق هرمز"
+  },
+  {
+   "kind": "new",
+   "code": "MN-2026-11-18-10",
+   "ref": "straits.live",
+   "text": "بلاغ غير مؤكد — أخبار إعلامية عن ارتطام ناقلات بألغام بحرية في مضيق هرمز · 18/11/2026"
+  }
+ ],
+ "indicators": [
+  {
+   "name": "بلاغات UKMTO عن إصابة ناقلات",
+   "current": "6 ناقلات بين 10 و16 نوفمبر",
+   "previous": "بلاغان في تقرير 12/11",
+   "trend": "ارتفاع",
+   "delta": null,
+   "meaning": "الزيادة تشمل بلاغات متأخرة صدرت بعد 12/11؛ المصدر: UKMTO.",
+   "baseline": null
+  },
+  {
+   "name": "سجل IMO للحوادث المؤكدة",
+   "current": "138 صفًا، أحدثها 15/11",
+   "previous": "تعذّر التحديث في 12/11",
+   "trend": "4 إضافات",
+   "delta": null,
+   "meaning": "السجل يتأخر عن البلاغات؛ المصدر: IMO.",
+   "baseline": null
+  },
+  {
+   "name": "بلاغات الصعود والاقتراب المسلح",
+   "current": "بلاغان في بحر العرب",
+   "previous": "لا بلاغ في تقرير 12/11",
+   "trend": "ارتفاع",
+   "delta": null,
+   "meaning": "لا يثبت البلاغان جهة واحدة؛ المصدر: UKMTO.",
+   "baseline": null
+  },
+  {
+   "name": "الحركة والتكدس",
+   "current": "لا رقم رسمي",
+   "previous": "لا رقم رسمي",
+   "trend": "لا يمكن قياس الاتجاه",
+   "delta": null,
+   "meaning": "عدد البلاغات ليس مقياسًا لحجم الحركة.",
+   "baseline": null
+  }
+ ],
+ "hypotheses": [
+  {
+   "est": "EST-2026-11-18-01",
+   "statement": "يُرجَّح (55–80%) أن تستمر إصابة الناقلات في مضيق هرمز والخليج العربي خلال 72 ساعة القادمة.",
+   "support": "ست إصابات رسمية في سبعة أيام.",
+   "against": "لا يسمّي أي بلاغ جهة منفذة.",
+   "likelihood": "يُرجَّح (55–80%)",
+   "likelihood_kind": "ranged"
+  },
+  {
+   "statement": "إضافة ألغام بحرية إلى أساليب الاستهداف.",
+   "support": "أخبار إعلامية متعددة فجر 18/11.",
+   "against": "لا بلاغ رسميًا يؤكدها حتى 0340Z.",
+   "likelihood": "لا أساس رسميًا لترجيحه.",
+   "likelihood_kind": "unmeasurable"
+  },
+  {
+   "statement": "أحداث بحر العرب قرصنة لا صلة لها بالخليج.",
+   "support": "الزوارق المسلحة والسلالم في البلاغين.",
+   "against": "لا يحدد UKMTO الجهة.",
+   "likelihood": "لا يمكن ترجيحه من المادة.",
+   "likelihood_kind": "unmeasurable"
+  }
+ ],
+ "gaps": [
+  {
+   "gap": "مصير طاقم الناقلة في البلاغ 208-26",
+   "owner": "UKMTO أو الدولة التي ترفع السفينة علمها",
+   "impact": "يحدد الخسائر البشرية ومستوى التهديد."
+  },
+  {
+   "gap": "صحة أخبار الألغام في مضيق هرمز",
+   "owner": "UKMTO أو IMO أو JMIC",
+   "impact": "تأكيدها يغير أسلوب الحماية المطلوب."
+  },
+  {
+   "gap": "نص التحذيرين 209-26 و210-26",
+   "owner": "UKMTO",
+   "impact": "لا يُعرف إن كانا عن وقائع جديدة."
+  },
+  {
+   "gap": "أسماء الناقلات في بلاغات 15 و16 نوفمبر",
+   "owner": "IMO أو UKMTO",
+   "impact": "يلزم لفحص العقوبات وربط البلاغات بالسجل."
+  },
+  {
+   "gap": "عدد السفن العابرة يوميًا",
+   "owner": "مصدر رسمي بقياس زمني قابل للمقارنة",
+   "impact": "لا يمكن قياس التكدس أو أثر الإصابات على المرور."
+  }
+ ],
+ "blocks": {
+  "مؤشرات الموقف": "indicators",
+  "قراءة الموقف وتحليل المؤشرات": "intel_analysis",
+  "الاحتمالات ونسبة الحوادث إلى جهات": "hypotheses",
+  "الحركة الملاحية والتكدس": "timeline",
+  "ما لم يُحسم": "gaps",
+  "المصادر والمراجع": "source_reliability"
+ },
+ "event_keys": [
+  {
+   "code": "MN-2026-11-18-01",
+   "title": "هجوم — بلاغ UKMTO 203-26 عن إصابة ناقلة بمقذوف في الخليج العربي ونقل مصابين إلى البر · 10/11/2026",
+   "area": "الخليج العربي",
+   "status": "بلاغ رسمي",
+   "ref": "UKMTO — الحوادث الأخيرة",
+   "note": "نُقل عدد من المصابين إلى البر، وبقية الطاقم سالمون؛ الضرر غير معلن.",
+   "area_basis": "نص البلاغ يذكر الخليج العربي دون موقع أدق."
+  },
+  {
+   "code": "MN-2026-11-18-02",
+   "title": "هجوم — بلاغ UKMTO 204-26 عن إصابة ناقلة بمقذوف في غرفة المحركات على بعد 14 ميلًا بحريًا شمال غرب رأس الخيمة · 11/11/2026",
+   "area": "الخليج العربي",
+   "status": "بلاغ رسمي",
+   "ref": "UKMTO — الحوادث الأخيرة",
+   "note": "أُخلي الطاقم بلا إصابات معلنة، واستمرت مكافحة الحريق وقت البلاغ.",
+   "area_basis": "نص البلاغ: 14NM northwest of Ra’s al Khaymah, UAE."
+  },
+  {
+   "code": "MN-2026-11-18-03",
+   "title": "هجوم — بلاغ UKMTO متأخر عن إصابة ناقلة بمقذوف في الخليج العربي قبل دخول مضيق هرمز · 13/11/2026",
+   "area": "الخليج العربي",
+   "status": "بلاغ رسمي",
+   "ref": "UKMTO — التحذيرات 2026",
+   "note": "الطاقم كله سالم؛ الضرر غير معلن.",
+   "area_basis": "نص البلاغ يذكر الخليج العربي قبل دخول المضيق شرقًا."
+  },
+  {
+   "code": "MN-2026-11-18-04",
+   "title": "هجوم — بلاغ UKMTO نقلًا عن سلطات الملاحة الهندية عن هجوم على ناقلة في الخليج العربي · 15/11/2026",
+   "area": "الخليج العربي",
+   "status": "بلاغ رسمي",
+   "ref": "UKMTO — التحذيرات 2026",
+   "note": "الطاقم سالم؛ الضرر غير معلن.",
+   "area_basis": "نص البلاغ يذكر الخليج العربي قبل دخول المضيق شرقًا."
+  },
+  {
+   "code": "MN-2026-11-18-05",
+   "title": "هجوم — بلاغ UKMTO عن إصابة ناقلة بمقذوف أثناء خروجها من مضيق هرمز واندلاع حريق في غرفة المحركات · 16/11/2026",
+   "area": "مضيق هرمز",
+   "status": "بلاغ رسمي",
+   "ref": "UKMTO — التحذيرات 2026",
+   "note": "حريق في غرفة المحركات، ولا إصابات معلنة.",
+   "area_basis": "نص البلاغ يذكر مضيق هرمز."
+  },
+  {
+   "code": "MN-2026-11-18-06",
+   "title": "نشاط مشبوه — بلاغ UKMTO 206-26 عن اقتراب سفينة أم وزورق عليه مسلحون من ناقلة على بعد 430 ميلًا بحريًا شرق سقطرى · 16/11/2026",
+   "area": "بحر العرب",
+   "status": "بلاغ رسمي",
+   "ref": "UKMTO — الحوادث الأخيرة",
+   "note": "لا صعود ولا ضرر معلن.",
+   "area_basis": "نص البلاغ: 430NM east of Socotra, Yemen، الموقع 1202N 06147E."
+  },
+  {
+   "code": "MN-2026-11-18-07",
+   "title": "هجوم — بلاغ UKMTO 208-26 عن هجوم على ناقلة عابرة على بعد 7 أميال بحرية شمال خصب وتعطلها، ثم إصابة ثانية · 16/11/2026",
+   "area": "مضيق هرمز",
+   "status": "بلاغ رسمي",
+   "ref": "UKMTO — الحوادث الأخيرة",
+   "note": "تعطلت الناقلة واندلع حريق في غرفة المحركات؛ التحديث 001 يفيد بإصابة ثانية وبأن الطاقم لم يتم حصره.",
+   "area_basis": "نص البلاغ: 7NM north of Khasab, Oman، أثناء عبور مضيق هرمز."
+  },
+  {
+   "code": "MN-2026-11-18-08",
+   "title": "نشاط مشبوه — محاولة صعود في بلاغ UKMTO عن زورق مسلح حاول الصعود إلى سفينة بضائع على بعد 50 ميلًا بحريًا جنوب غرب المكلا · 17/11/2026",
+   "area": "بحر العرب",
+   "status": "بلاغ رسمي",
+   "ref": "UKMTO — التحذيرات 2026",
+   "note": "أطلق فريق الحماية طلقة تحذيرية وعاد الزورق إلى السفينة الأم؛ لا ضرر معلن.",
+   "area_basis": "نص البلاغ: 50NM southwest of Al Mukalla, Yemen."
+  },
+  {
+   "code": "MN-2026-11-18-09",
+   "title": "تحديث بيانات IMO: إضافة أربع حوادث مؤكدة مؤرخة بين 10 و15 نوفمبر 2026 في الخليج العربي ومضيق هرمز",
+   "area": "الخليج العربي",
+   "status": "سجل دولي",
+   "ref": "IMO — سجل الحوادث المؤكدة",
+   "note": "أضرار بلا تلوث، وإصابة بحار واحد على FUJAIRAH ENERGY.",
+   "area_basis": "السجل يذكر Arabian Gulf وStrait of Hormuz و14NM northwest of Ra’s al Khaymah."
+  },
+  {
+   "code": "MN-2026-11-18-10",
+   "title": "بلاغ غير مؤكد — أخبار إعلامية عن ارتطام ناقلات بألغام بحرية في مضيق هرمز · 18/11/2026",
+   "area": "مضيق هرمز",
+   "status": "نقل إعلامي",
+   "ref": "straits.live",
+   "note": "لا بلاغ رسمي يؤكد الخبر حتى 0340Z.",
+   "area_basis": "عنوان الخبر يذكر Hormuz."
+  }
+ ],
+ "timeline": [
+  {
+   "date": "10/11/2026",
+   "count": 1,
+   "kind": "incident",
+   "label": "بلاغ UKMTO 203-26: إصابة ناقلة في الخليج العربي ونقل مصابين إلى البر.",
+   "source": "UKMTO — الحوادث الأخيرة"
+  },
+  {
+   "date": "11/11/2026",
+   "count": 1,
+   "kind": "incident",
+   "label": "بلاغ UKMTO 204-26: إصابة ناقلة شمال غرب رأس الخيمة.",
+   "source": "UKMTO — الحوادث الأخيرة"
+  },
+  {
+   "date": "13/11/2026",
+   "count": 1,
+   "kind": "incident",
+   "label": "بلاغ UKMTO متأخر: إصابة ناقلة في الخليج العربي.",
+   "source": "UKMTO — الحوادث الأخيرة"
+  },
+  {
+   "date": "15/11/2026",
+   "count": 1,
+   "kind": "incident",
+   "label": "بلاغ UKMTO عن سلطات الملاحة الهندية: هجوم على ناقلة في الخليج العربي.",
+   "source": "UKMTO — الحوادث الأخيرة"
+  },
+  {
+   "date": "16/11/2026",
+   "count": 3,
+   "kind": "incident",
+   "label": "إصابة ناقلتين في مضيق هرمز (منها 208-26)، واقتراب زورق مسلح شرق سقطرى (206-26).",
+   "source": "UKMTO — الحوادث الأخيرة"
+  },
+  {
+   "date": "17/11/2026",
+   "count": 1,
+   "kind": "incident",
+   "label": "محاولة صعود إلى سفينة بضائع جنوب غرب المكلا.",
+   "source": "UKMTO — الحوادث الأخيرة"
+  },
+  {
+   "date": "18/11/2026",
+   "count": 1,
+   "kind": "claim",
+   "label": "أخبار إعلامية غير مؤكدة عن ألغام في مضيق هرمز.",
+   "source": "straits.live"
+  }
+ ],
+ "source_reliability": {
+  "checked": 60,
+  "cited": 7,
+  "ok": 54,
+  "failed": 6,
+  "stale": 4,
+  "rows": [
+   {
+    "name": "UKMTO — الحوادث الأخيرة",
+    "source_reliability": "A",
+    "information_credibility": 2
+   },
+   {
+    "name": "UKMTO — التحذيرات 2026",
+    "source_reliability": "A",
+    "information_credibility": 2
+   },
+   {
+    "name": "حساب @UK_MTO على X",
+    "source_reliability": "B",
+    "information_credibility": 2
+   },
+   {
+    "name": "IMO — سجل الحوادث المؤكدة",
+    "source_reliability": "A",
+    "information_credibility": 1
+   },
+   {
+    "name": "حساب @bahdiplomatic على X",
+    "source_reliability": "A",
+    "information_credibility": 2
+   },
+   {
+    "name": "straits.live",
+    "source_reliability": "C",
+    "information_credibility": 4
+   },
+   {
+    "name": "gCaptain",
+    "source_reliability": "C",
+    "information_credibility": 3
+   }
+  ],
+  "approved": 62,
+  "stale_days_limit": 14
+ },
+ "source_coverage": {
+  "line": "فُحص 60 مسارًا آليًا؛ نجح 54 وتعذّر 6؛ 4 مصادر متقادمة؛ ومصدران مرجعيان يدويان. المصادر المتقادمة محسوبة ضمن الناجحة.",
+  "attempted": 60,
+  "successful": 54,
+  "blocked_count": null,
+  "stale_count": 4,
+  "basis": {
+   "unique_checked": 60,
+   "unique_successful": 54,
+   "unique_failed": 6
+  }
+ },
+ "intel_analysis": {
+  "method": "مقارنة نصوص بلاغات UKMTO بسجل IMO، مع فصل البلاغ الرسمي عن الخبر الإعلامي. تركّزت الإصابات في الخليج العربي ومضيق هرمز، ولا يحدد أي بلاغ رسمي الجهة المنفذة.",
+  "indicators": [
+   "صدور بلاغ UKMTO عن ألغام في مضيق هرمز؛ يؤكد الأخبار الإعلامية إن صدر؛ المصدر UKMTO؛ الحالة: لم يصدر بعد.",
+   "نشر نص التحذيرين 209-26 و210-26؛ يوضح موضوعهما؛ المصدر UKMTO؛ الحالة: النص غير متاح.",
+   "إضافة واقعتي 16/11 إلى سجل IMO؛ يؤكد الضرر رسميًا؛ المصدر IMO؛ الحالة: لم تُضف بعد.",
+   "تحديث عن طاقم الناقلة في 208-26؛ يحدد الخسائر البشرية؛ المصدر UKMTO؛ الحالة: لم يتم التوضيح."
+  ]
+ },
+ "threat_zones": {
+  "overall": "متوسط",
+  "rank": 2,
+  "top_zone": "مضيق هرمز وخليج عُمان والخليج العربي",
+  "window": "خلال 24 ساعة السابقة",
+  "counter": {
+   "total": 10,
+   "qualifying": 9,
+   "confirmed": 0,
+   "probable": 0,
+   "unconfirmed_qualifying": 9,
+   "unconfirmed_total": 9,
+   "excluded": 1,
+   "nonspatial": 0
+  },
+  "zones": [
+   {
+    "id": "Z1",
+    "name": "مضيق هرمز وخليج عُمان والخليج العربي",
+    "level": "متوسط",
+    "rank": 2,
+    "confirmed": 0,
+    "probable": 0,
+    "qualifying": 7,
+    "carry_over": false
+   },
+   {
+    "id": "Z2",
+    "name": "باب المندب والبحر الأحمر",
+    "level": "منخفض",
+    "rank": 1,
+    "confirmed": 0,
+    "probable": 0,
+    "qualifying": 0,
+    "carry_over": false
+   },
+   {
+    "id": "Z3",
+    "name": "بحر العرب",
+    "level": "متوسط",
+    "rank": 2,
+    "confirmed": 0,
+    "probable": 0,
+    "qualifying": 2,
+    "carry_over": false
+   },
+   {
+    "id": "Z4",
+    "name": "القرن الأفريقي",
+    "level": "منخفض",
+    "rank": 1,
+    "confirmed": 0,
+    "probable": 0,
+    "qualifying": 0,
+    "carry_over": false
+   },
+   {
+    "id": "Z5",
+    "name": "المحيط الهندي",
+    "level": "منخفض",
+    "rank": 1,
+    "confirmed": 0,
+    "probable": 0,
+    "qualifying": 0,
+    "carry_over": false
+   }
+  ]
+ },
+ "threat_zone_levels": {
+  "Z1": "متوسط",
+  "Z2": "منخفض",
+  "Z3": "متوسط",
+  "Z4": "منخفض",
+  "Z5": "منخفض"
+ },
+ "distribution_rule": "لا تقدير احتمالي رقمي للفاعل: المادة الرسمية لا تسمّي جهة منفذة",
+ "glossary": {
+  "UKMTO": "مركز التجارة البحرية البريطاني: بلاغات الحوادث في المنطقة.",
+  "JMIC": "مركز المعلومات البحرية المشترك بالقوات البحرية المشتركة.",
+  "MSCIO": "مركز أمن المعلومات البحرية: صفحة التنبيهات.",
+  "MN-": "رمز الواقعة الداخلي: MN-YYYY-MM-DD-NN.",
+  "EST-": "رمز التقدير التحليلي: EST-YYYY-MM-DD-NN.",
+  "A–F / 1–6": "موثوقية المصدر بحرف A–F، ومصداقية المعلومة برقم 1–6.",
+  "معدل معتاد قبل الأزمة": "القيمة المرجعية التي يُقاس بها التغير.",
+  "نسبة الحادث إلى جهة": "نسبة الواقعة إلى جهة أو مصدر بدليل معلن.",
+  "الهجوم": "فعل مؤكد بإصابة أو ضرر موثّق من مصدر رسمي.",
+  "الواقعة": "بلاغ أمني لم يثبت كونه هجومًا بعد.",
+  "درجة الثقة": "قوة نسبة الحادث إلى جهة: عالية أو متوسطة أو منخفضة.",
+  "IMO": "المنظمة البحرية الدولية: المرجع الرسمي لسجل الحوادث."
+ },
+ "sources_approved": 62,
+ "sources_ok": 54,
+ "sources_failed": 6,
+ "sources_manual_reference": [
+  39,
+  52
+ ],
+ "sources_manual_reference_count": 2,
+ "sources_line": "المصادر: 62 معتمدة = 60 بالمسار الآلي + 2 بالمرجعية اليدوية. الفحص: 54 ناجحة. 6 متعذّر: وكالة الأنباء الكويتية (كونا) — تغذية معطوبة · القيادة المركزية الأمريكية (سنتكوم) — تغذية معطوبة · Lloyd's List — حجب المصدر · IRIB News — عطل اتصال مؤقت · ISNA — عطل اتصال مؤقت · Mehr — العربي — عطل اتصال مؤقت. المرجعية اليدوية: 2 يُفحص يدويًا.",
+ "distribution_rule_note": "لا تُنشر احتمالات رقمية؛ لا يقدّم المصدر الرسمي أساسًا لقياس الصلة أو نسبة الوقائع إلى جهة.",
+ "hero_risk_patterns": [
+  "هجوم",
+  "حريق",
+  "ألغام"
+ ],
+ "report_classes": {
+  "rows": [
+   {
+    "class": "no_incident",
+    "count": 0,
+    "delta": "-1"
+   },
+   {
+    "class": "بلاغ رسمي",
+    "count": 8,
+    "delta": "+8"
+   },
+   {
+    "class": "سجل دولي",
+    "count": 1,
+    "delta": "+1"
+   },
+   {
+    "class": "نقل إعلامي",
+    "count": 1,
+    "delta": "+1"
+   }
+  ]
+ },
+ "official_cards": [
+  {
+   "id": "imo-seafarer-deaths",
+   "title": "أعداد الوفيات من IMO",
+   "title_en": "IMO seafarer fatalities",
+   "basis": "رسمي — قائمة IMO للوقائع المؤكدة",
+   "basis_en": "Official — IMO confirmed incidents list",
+   "source_label": "appendices/imo-incidents.json + https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+   "source_label_en": "IMO — confirmed incidents list",
+   "layers": {
+    "daily": {
+     "label": "عدد اليوم",
+     "label_en": "Today",
+     "state": "no_coverage",
+     "value": "لا تغطية",
+     "value_en": "No coverage",
+     "source": "لا يعرض جدول IMO رقمًا إجماليًا للوفيات؛ لم يُقس الفرق في 18/11",
+     "source_en": "The IMO table shows no fatality total; the difference was not measured on 18/11"
+    },
+    "cumulative": {
+     "label": "المجموع منذ 28 فبراير 2026",
+     "label_en": "Total since 28 February 2026",
+     "value": "24",
+     "value_en": "24",
+     "source": "IMO — 24 وفاة بحّار مؤكدة حتى 03/11/2026",
+     "source_en": "IMO — 24 confirmed seafarer deaths as at 03/11/2026"
+    },
+    "updated": {
+     "label": "آخر تحديث للمصدر",
+     "label_en": "Source last updated",
+     "value": "03/11/2026",
+     "value_en": "03/11/2026",
+     "source": "القائمة الرسمية بتاريخ بيانات 03/11/2026",
+     "source_en": "Official list as at 03/11/2026"
+    }
+   },
+   "source_url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx"
+  },
+  {
+   "id": "imo-transit-september-2026",
+   "title": "العبور اليومي عبر مضيق هرمز",
+   "title_en": "Daily transits through the Strait of Hormuz",
+   "basis": "رسمي — بيانات IMO الشهرية للعبور",
+   "basis_en": "Official — IMO monthly transit data",
+   "source_label": "IMO — بيانات العبور الرسمية",
+   "source_label_en": "IMO — official transit data",
+   "badges": [
+    "آخر تحديث سبتمبر 2026"
+   ],
+   "badges_en": [
+    "Last updated September 2026"
+   ],
+   "constraint": "أوقفت المنظمة تجميع بيانات العبور اليومية",
+   "constraint_en": "IMO no longer compiles data on daily ship transits",
+   "layers": {
+    "daily": {
+     "label": "عدد اليوم",
+     "label_en": "Today",
+     "state": "no_coverage",
+     "value": "لا تغطية",
+     "value_en": "No coverage",
+     "source": "لا قراءة رسمية ليوم 31 أكتوبر 2026",
+     "source_en": "No official reading for 31 October 2026"
+    },
+    "cumulative": {
+     "label": "المجموع منذ 28 فبراير 2026",
+     "label_en": "Total since 28 February 2026",
+     "state": "no_coverage",
+     "value": "لا تغطية",
+     "value_en": "No coverage",
+     "source": "المنظمة أوقفت تجميع البيانات اليومية؛ لا يُحسب مجموع تراكمي",
+     "source_en": "IMO stopped compiling daily data; no cumulative total is calculated"
+    },
+    "updated": {
+     "label": "آخر تحديث للمصدر",
+     "label_en": "Source last updated",
+     "value": "سبتمبر 2026",
+     "value_en": "September 2026",
+     "source": "الرسم الرسمي المتاح لشهر سبتمبر 2026",
+     "source_en": "Official chart available for September 2026"
+    }
+   },
+   "period": "سبتمبر 2026",
+   "period_en": "September 2026",
+   "average": "15.6",
+   "average_en": "15.6",
+   "high": "25.8 (23 سبتمبر)",
+   "high_en": "25.8 (23 September)",
+   "low": "8.0 (3 سبتمبر)",
+   "low_en": "8.0 (3 September)"
+  },
+  {
+   "id": "imo-confirmed-incidents",
+   "title": "سجل الحوادث المؤكدة من IMO",
+   "title_en": "IMO confirmed incidents log",
+   "basis": "رسمي — قائمة IMO للحوادث المؤكدة على سفن تجارية",
+   "basis_en": "Official — IMO confirmed incidents on commercial ships",
+   "source_label": "appendices/imo-incidents.json + https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+   "source_label_en": "IMO — confirmed incidents log",
+   "layers": {
+    "daily": {
+     "label": "عدد اليوم",
+     "value": "0",
+     "source": "قائمة IMO الرسمية؛ الفرق بين القراءة الحالية والسابقة = 0",
+     "state": "shown",
+     "value_en": "0",
+     "source_en": "Official IMO list; difference from the previous reading = 0"
+    },
+    "cumulative": {
+     "label": "المجموع منذ 28 فبراير 2026",
+     "value": "128",
+     "source": "IMO — 128 حادثة مؤكدة حتى 03/11/2026",
+     "value_en": "128",
+     "source_en": "IMO — 128 confirmed incidents as at 03/11/2026"
+    },
+    "updated": {
+     "label": "آخر تحديث للمصدر",
+     "value": "03/11/2026",
+     "source": "القائمة الرسمية بتاريخ بيانات 03/11/2026",
+     "value_en": "03/11/2026",
+     "source_en": "Official list as at 03/11/2026"
+    }
+   },
+   "source_url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx"
+  }
+ ]
+}

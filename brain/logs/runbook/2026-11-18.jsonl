@@ -1,0 +1,23 @@
+{"step": "S000", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-18/S000.log", "attempt": 1, "ts": "2026-11-18T03:43:17Z"}
+{"step": "S010", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-18/S010.log", "attempt": 1, "ts": "2026-11-18T03:43:32Z"}
+{"step": "S020", "status": "done_warn", "rc": 1, "outputs": {}, "log": "logs/runbook/2026-11-18/S020.log", "attempt": 1, "ts": "2026-11-18T03:46:44Z"}
+{"step": "S030", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-18/S030.log", "attempt": 1, "ts": "2026-11-18T03:46:45Z"}
+{"step": "S060", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-18/S060.log", "attempt": 1, "ts": "2026-11-18T03:46:46Z"}
+{"step": "S080", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-18/S080.log", "ts": "2026-11-18T03:46:46Z"}
+{"step": "S090", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-18/S090.log", "ts": "2026-11-18T03:46:46Z"}
+{"step": "W010", "status": "waiting_agent", "ts": "2026-11-18T03:46:46Z"}
+{"step": "W010", "status": "done", "outputs": {"reports/2026-11-18-sectioned.md": "042104a403ccb834cee1dfe8fddbe62768b1f44d4139edd4b3f224b07cf13305", "appendices/estimate-code-map.json": "fc9f6b352543a432b5f6643530a3a7469735feb9ccb2a919eca511a39a86bfcf"}, "ts": "2026-11-18T03:51:23Z"}
+{"step": "S080", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-18/S080.log", "ts": "2026-11-18T03:51:23Z"}
+{"step": "S090", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-18/S090.log", "ts": "2026-11-18T03:51:23Z"}
+{"step": "S040", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-18/S040.log", "attempt": 1, "ts": "2026-11-18T03:51:23Z"}
+{"step": "S050", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-18/S050.log", "attempt": 1, "ts": "2026-11-18T03:51:30Z"}
+{"step": "W030", "status": "waiting_agent", "ts": "2026-11-18T03:51:30Z"}
+{"step": "W030", "status": "done", "outputs": {"cumulative-2026/daily/2026-11-18.json": "760829be0467eb6f908ce07b1dfea980cea001c703a1cf5e4357a39da630578c"}, "ts": "2026-11-18T03:54:18Z"}
+{"step": "S080", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-18/S080.log", "ts": "2026-11-18T03:54:22Z"}
+{"step": "S090", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-18/S090.log", "ts": "2026-11-18T03:54:23Z"}
+{"step": "S065", "status": "done", "rc": 0, "outputs": {"web/zones/2026-11-18.json": "acf43b049685eacf3f9183c8e61f688dc589aeb1413d333db02ececbe0d03acd"}, "log": "logs/runbook/2026-11-18/S065.log", "attempt": 1, "ts": "2026-11-18T03:54:23Z"}
+{"step": "W020", "status": "waiting_agent", "ts": "2026-11-18T03:54:23Z"}
+{"step": "W020", "status": "done", "outputs": {"web/meta/2026-11-18.json": "a97a484e2dfa5c52326e76d17c641ac552c82e0f3dfb0061ead22e21ec4a94fc"}, "ts": "2026-11-18T03:55:55Z"}
+{"step": "S080", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-18/S080.log", "ts": "2026-11-18T03:55:55Z"}
+{"step": "S090", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-18/S090.log", "ts": "2026-11-18T03:55:55Z"}
+{"step": "S070", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-18/S070.log", "ts": "2026-11-18T03:55:56Z"}
