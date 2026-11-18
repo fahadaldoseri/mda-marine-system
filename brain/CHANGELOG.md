@@ -6,6 +6,7 @@
 - استُبدل `seawatch-live.pages.dev` بـ`mda-bh.pages.dev` في: `site/sources/site.json` و`site/generator/site_chrome.py` (أصل الروابط المطلقة وog وfeed وsitemap) و`runbook/runbook.json` و`tools/publish_channels.py` و`tools/telegram_bot.py` و`validators/check_deployment_freshness.py` وأدوات التدقيق البصري و`schedule/detail-v7.txt` و`appendices/web-delivery.md` ودليل التشغيل اليومي، والاختباران المرتبطان.
 - اسم المستودع `fahadaldoseri/seawatch-live` لم يتغير، فهو مصدر البناء للمشروع الجديد.
 - ثبت بالتشغيل: الملفات JSON صالحة، والشيفرة تُترجم، و`test_publish_preflight_freshness` و`test_publish_live_contract_20261107` بنتيجة 8 ناجح و1 فاشل قبل التغيير وبعده (الفاشل `test_d020` سابق ولا علاقة له بالنطاق).
+- أُعيد توليد `docs/runbook.md` من المانيفست (`tools/runbook.py handbook`)، و`runbook.py verify` يمر.
 - لم يُختبر: بناء الموقع الكامل بالنطاق الجديد، فيظهر أثره في الصفحات المنشورة مع أول نشر قادم.
 
 ## 2026-11-18 — رابط ثابت للمالك mda-bh.pages.dev
