@@ -5546,6 +5546,57 @@
       "gate_title": "ميزانية أداء البوابات"
     },
     {
+      "id": "G069",
+      "title": "الحكم النهائي من سجل المحرّك (بوابة واحدة بلا إعادة final_gate.sh)",
+      "kind": "script",
+      "phase": "finalize",
+      "assert": [
+        {
+          "type": "cmd",
+          "command": [
+            "bash",
+            "-lc",
+            "grep -q '\"stage\": \"final\"' logs/gate-{date}/gate.json"
+          ]
+        }
+      ],
+      "links": {
+        "rules": [
+          "ف1–ف5 — بوابة التحقق"
+        ],
+        "files": [
+          "tools/runbook.py",
+          "tools/write_mark.py",
+          "validators/check_mark_schema.py",
+          "tools/publish_verdict.py"
+        ],
+        "gates": [
+          "tools/publish_verdict.py"
+        ],
+        "tests": [
+          "tests/test_single_gate_verdict.py"
+        ]
+      },
+      "writes": [
+        "logs/gate-{date}/gate.json",
+        "logs/pipeline-{date}.json"
+      ],
+      "note_ar": "قرار المالك 2026-11-19 («نفّذه في طلب جديد»): كل بوابات المانيفست تُحسب من سجل المحرّك نفسه، فلا تُعاد final_gate.sh بعد الخط. حكم النشر 0 سليم يُسجَّل 0، و3 منقوص مُفصح يُسجَّل تحذيرًا 1، وغيرهما يمنع 2.",
+      "on_fail": "stop",
+      "command": [
+        "bash",
+        "-lc",
+        "B=\"$PWD\"; export B SITE; python3 \"$B/tools/runbook.py\" gate-json --date \"$D\" --through G067 --final --root \"$B\" || exit 2; python3 \"$B/tools/write_mark.py\" --date \"$D\" --stage final || exit 2; python3 \"$B/validators/check_mark_schema.py\" --date \"$D\" || exit 2; python3 \"$B/tools/publish_verdict.py\" --date \"$D\" --brain \"$B\"; v=$?; case $v in 0) exit 0;; 3) exit 1;; *) exit 2;; esac"
+      ],
+      "ok_rc": [
+        0
+      ],
+      "warn_rc": [
+        1
+      ],
+      "gate_title": "الحكم النهائي من سجل المحرّك"
+    },
+    {
       "id": "D005",
       "title": "تحديث النسخة الاحتياطية قبل النشر (شرط بوابة ما قبل التشغيل)",
       "kind": "script",

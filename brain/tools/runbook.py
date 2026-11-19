@@ -436,11 +436,30 @@ def gates_status(root, date):
     return 0
 
 
-def gate_json(root, date, through=None):
-    """يكتب logs/gate-<date>/gate.json من سجل المحرّك (يقرؤه write_mark وskill_lessons) — لا من الذاكرة."""
+def gate_json(root, date, through=None, final=False):
+    """يكتب logs/gate-<date>/gate.json من سجل المحرّك (يقرؤه write_mark وskill_lessons) — لا من الذاكرة.
+
+    final=True (2026-11-19، بوابة واحدة): الحكم النهائي من سجل المحرّك نفسه بعد آخر بوابة،
+    فلا تُعاد final_gate.sh بعد الخط (كانت تعيد البناء والاختبارات وتعدّل النص بعد البناء).
+    يلزم through (آخر بوابة قبل خطوة الحكم)، ويفشل مغلقًا إن بقيت بوابة بعده لم تُحسب."""
     import datetime
     m = load(root)
     ledger = read_ledger(root, m, date)
+    if final:
+        if not through:
+            print("✘ gate-json --final يلزمه --through (آخر بوابة قبل خطوة الحكم)")
+            return 2
+        ids = [s["id"] for s in m["steps"]]
+        if through not in ids:
+            print(f"✘ --through {through} ليست خطوة في المانيفست")
+            return 2
+        phases = m.get("gate_phases", ["gates"])
+        after = [s["id"] for s in m["steps"][ids.index(through) + 1:]
+                 if s.get("phase") in phases and not s.get("disabled")
+                 and "gate-json" not in " ".join(s.get("command") or [])]
+        if after:
+            print(f"✘ بوابات بعد {through} لن تدخل الحكم النهائي: {'، '.join(after)}")
+            return 2
     steps, blocked, worst = [], [], 0
     for s in m["steps"]:
         if s.get("phase") not in m.get("gate_phases", ["gates"]):
@@ -468,6 +487,7 @@ def gate_json(root, date, through=None):
             break
     out = {"date": date, "status": {0: "ok", 1: "warn", 2: "block"}[worst], "exit_code": worst, "steps": steps,
            "blocked_steps": blocked, "source": "runbook-ledger", "dir": f"logs/gate-{date}", "log_dir": f"logs/gate-{date}",
+           "stage": "final" if final else "provisional",
            "finished_utc": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}
     d = os.path.join(root, "logs", f"gate-{date}")
     os.makedirs(d, exist_ok=True)
@@ -891,6 +911,7 @@ def main():
     ap.add_argument("--kind")
     ap.add_argument("--after", default="START")
     ap.add_argument("--through", help="gate-json: آخر خطوة تُحسب (ما بعدها لم يحن وقته)")
+    ap.add_argument("--final", action="store_true", help="gate-json: الحكم النهائي من سجل المحرّك (يلزمه --through)")
     ap.add_argument("--only", default="", help="معرّفات خطوات تُنفَّذ وحدها ثم يتوقف المحرّك (ك-568)، مفصولة بفاصلة")
     ap.add_argument("--redo", default="", help="معرّفات خطوات تُعاد للتحقق بعد تغيّر مدخلاتها، مفصولة بفاصلة (ك-321)")
     a = ap.parse_args()
@@ -908,7 +929,7 @@ def main():
     if c == "gates":
         return run(root, a.date, only_phase="gates", redo=[x for x in a.redo.split(",") if x.strip()])
     if c == "gate-json":
-        return gate_json(root, a.date, a.through)
+        return gate_json(root, a.date, a.through, final=a.final)
     if c == "gates-status":
         return gates_status(root, a.date)
     if c == "complete":
