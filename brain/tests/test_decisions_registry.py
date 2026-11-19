@@ -125,6 +125,32 @@ class Negative(unittest.TestCase):
             errs = MOD.check(_mutate(_stage(Path(t)), edit))
             self.assertTrue(any("غير موجود" in e for e in errs), errs)
 
+    def _waive(self, waiver: dict) -> tuple[list[str], list[str]]:
+        def edit(d):
+            for x in d["decisions"]:
+                if x["status"] in ("منفَّذ", "منفَّذ جزئيًّا"):
+                    x["evidence"] = [{"kind": "file", "ref": "لا/يوجد.md"}]
+                    break
+            d["evidence_waivers"] = [dict(waiver, ref="لا/يوجد.md")]
+        warns: list[str] = []
+        with tempfile.TemporaryDirectory() as t:
+            errs = MOD.check(_mutate(_stage(Path(t)), edit), warns, today="2026-11-20")
+        return [e for e in errs if "لا/يوجد.md" in e], warns
+
+    def test_active_owner_waiver_turns_missing_file_into_warning(self):
+        errs, warns = self._waive({"decided_by": "فهد الدوسري", "decided_at": "2026-11-18", "expires": "2026-11-25"})
+        self.assertEqual(errs, [])
+        self.assertTrue(any("مستثنى" in w for w in warns), warns)
+
+    def test_expired_waiver_blocks(self):
+        errs, warns = self._waive({"decided_by": "فهد الدوسري", "expires": "2026-11-19"})
+        self.assertTrue(errs, "انتهاء الاستثناء يعيد الدليل الغائب مانعًا")
+        self.assertEqual(warns, [])
+
+    def test_waiver_without_owner_or_expiry_blocks(self):
+        self.assertTrue(self._waive({"expires": "2026-11-25"})[0])
+        self.assertTrue(self._waive({"decided_by": "فهد الدوسري"})[0])
+
     def test_absent_registry_fails(self):
         with tempfile.TemporaryDirectory() as t:
             self.assertTrue(MOD.check(Path(t)))
