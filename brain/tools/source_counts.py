@@ -266,7 +266,7 @@ def faults_line(date: str) -> str:
     mark = json.loads(mp.read_text(encoding="utf-8"))
     parts: list[str] = []
     for comp, st, text, items in degraded_components(mark):
-        r = classify_component(comp, st, text, items)
+        r = classify_component(comp, st, text, items, today=date)
         label = {"feeds": "التغذيات", "ofac": "فحص العقوبات", "originals": "الأصول الرسمية",
                  "ledger_merge": "دمج الدفتر", "builtin_llm": "المراجعة الآلية",
                  "attachment": "إرفاق الملف"}.get(comp, comp)

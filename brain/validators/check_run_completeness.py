@@ -72,7 +72,7 @@ def main() -> int:
     blockers: list[str] = []
     allowed: list[str] = []
     for comp, st, text, items in comps:
-        r = classify_component(comp, st, text, items)
+        r = classify_component(comp, st, text, items, today=a.date)
         if not r["allowed"]:
             blockers.append(f"{comp} ({st}): " + "؛ ".join(r["uncovered"])[:200])
             continue
