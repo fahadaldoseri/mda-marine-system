@@ -28,8 +28,10 @@ def load() -> dict:
     return json.loads(CONFIG.read_text(encoding="utf-8"))
 
 
-def _match(entry: dict, component: str, text: str) -> bool:
-    if expired(entry):
+def _match(entry: dict, component: str, text: str, today: str | None = None) -> bool:
+    # today = تاريخ التقرير المُصنَّف لا تاريخ التشغيل: إعادة توليد تقرير قديم
+    # يجب أن تعطي الإفصاح نفسه الذي صدر به، لا إفصاح البند النافذ اليوم.
+    if expired(entry, today):
         return False  # البند المنتهي صلاحيته لا يُفصح عنه ⇒ يبقى العطل غير مسموح فيمنع
     if component not in (entry.get("applies_to") or []):
         return False
@@ -43,7 +45,8 @@ def _match(entry: dict, component: str, text: str) -> bool:
     return False
 
 
-def classify_component(component: str, status: str, text: str, items: list[str] | None = None) -> dict:
+def classify_component(component: str, status: str, text: str, items: list[str] | None = None,
+                       today: str | None = None) -> dict:
     """يصنّف عطل مكوّن واحد.
 
     items: قائمة نصوص الأعطال المفردة (مثل أسباب تعذّر التغذيات) — تُصنَّف فردًا فردًا.
@@ -62,7 +65,7 @@ def classify_component(component: str, status: str, text: str, items: list[str] 
         reason_ar = ""
         per_entry: dict[str, int] = {}
         for it in items:
-            hit = next((e for e in cfg["allowed"] if _match(e, component, it)), None)
+            hit = next((e for e in cfg["allowed"] if _match(e, component, it, today)), None)
             if not hit:
                 uncovered.append(it)
                 continue
@@ -82,7 +85,7 @@ def classify_component(component: str, status: str, text: str, items: list[str] 
                 "reason_ar_full": (hit0.get("reason_ar_full") if hit0 else reason_ar) or reason_ar,
                 "uncovered": uncovered, "covered": covered}
 
-    hit = next((e for e in cfg["allowed"] if _match(e, component, f"{status} {text}")), None)
+    hit = next((e for e in cfg["allowed"] if _match(e, component, f"{status} {text}", today)), None)
     if hit:
         return {"allowed": True, "entry_id": hit["id"], "reason_ar": hit["reason_ar"],
                 "reason_ar_full": hit.get("reason_ar_full") or hit["reason_ar"],
