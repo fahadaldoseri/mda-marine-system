@@ -109,6 +109,20 @@ def test_imo_map_reference_uses_interface_updated_value(tmp_path: Path, monkeypa
     assert "30 أكتوبر 2026" not in html
 
 
+def test_imo_reference_uses_value_in_force_on_report_day(tmp_path, monkeypatch) -> None:
+    """صفحة إصدار قديم لا تعرض عدد المالك الحي بجوار تاريخ إصدارها (2026-11-19)."""
+    source_path = tmp_path / "imo-incidents.json"
+    source_path.write_text(json.dumps({"totals": {"confirmed_incidents": 138},
+                                       "source": {"as_at": "17 November 2026"}}), encoding="utf-8")
+    monkeypatch.setattr(build_report, "IMO_INCIDENTS_JSON", source_path)
+    old = {"official_cards": [{"id": "imo-confirmed-incidents", "layers": {
+        "cumulative": {"value": "128"}, "updated": {"value": "03/11/2026"}}}]}
+    html = build_report._imo_reference_line(old)
+    assert ">128<" in html and ">138<" not in html and "3 نوفمبر 2026" in html
+    bare = {"official_cards": [{"id": "imo-confirmed-incidents", "layers": {"updated": {"value": "17/11/2026"}}}]}
+    assert ">138<" in build_report._imo_reference_line(bare)
+
+
 def test_unverified_cumulative_is_not_rendered_as_a_current_number() -> None:
     kpi = {
         "cumulative": 168,
