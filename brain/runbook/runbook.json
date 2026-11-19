@@ -4865,7 +4865,7 @@
       "command": [
         "bash",
         "-lc",
-        "B=\"$PWD\"; export B SITE; python3 \"$B/validators/check_number_bindings.py\" --date \"$D\"; rc=$?; exit $rc; python3 \"$B/validators/check_published_counters.py\" --brain \"$B\" --date \"$D\"; rc2=$?; if [ $rc -eq 0 ] && [ $rc2 -ne 0 ]; then exit $rc2; fi; exit $rc"
+        "B=\"$PWD\"; export B SITE; python3 \"$B/validators/check_number_bindings.py\" --date \"$D\"; rc=$?; python3 \"$B/validators/check_published_counters.py\" --brain \"$B\" --date \"$D\"; rc2=$?; if [ $rc -eq 0 ] && [ $rc2 -ne 0 ]; then exit $rc2; fi; exit $rc"
       ],
       "ok_rc": [
         0

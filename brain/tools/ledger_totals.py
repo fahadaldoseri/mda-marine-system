@@ -360,7 +360,9 @@ def unconfirmed_narrative(event: dict[str, Any]) -> bool:
         return False
     description = str(event.get("description") or event.get("title") or "").lstrip()
     classification = " ".join(str(event.get(k, "")) for k in ("classification", "class", "class_raw"))
-    return (description.startswith(("رواية", "روايات"))
+    # «بلاغ غير مؤكد» وسم الكاتب نفسه للرواية في المتن ([بلاغ غير مؤكد | MN-…])؛ كان العدّاد
+    # لا يعرف إلا «رواية» فصار صفرًا في 18 نوفمبر والمتن يعلن رواية الألغام (قيس 2026-11-19).
+    return (description.startswith(("رواية", "روايات", "بلاغ غير مؤكد"))
             or any(marker in classification for marker in NARRATIVE_CLASS_MARKERS))
 
 

@@ -234,12 +234,11 @@
         "title_en": "Monitored UKMTO reports",
         "tag": "Z1",
         "tag_en": "Z1",
-        "source_label": "سجل الوقائع الرسمي UKMTO",
+        "source_label": "web/kpis-totals/{date}.json · ukmto-reports",
         "source": {
-          "kind": "meta_path",
-          "path": [
-            "event_count"
-          ]
+          "kind": "kpis_totals",
+          "id": "ukmto-reports",
+          "field": "today"
         },
         "presentation": {
           "label": "contract_title",
@@ -249,8 +248,8 @@
           }
         },
         "detail": {
-          "ar": "201-26: Attack · 202-26: تحذير عن نشاط مشبوه؛ داخل فترة التقرير",
-          "en": "201-26: classified as an attack · 202-26: warning of suspicious activity; during the reporting period"
+          "kind": "kpis_ukmto",
+          "en": "unique ledger records citing UKMTO on the report day"
         },
         "layers": {
           "cumulative": {
@@ -308,10 +307,11 @@
         "title_en": "Unconfirmed accounts",
         "tag": "التأهل للمعيار لا يعني الإثبات",
         "tag_en": "Meeting the counting criterion does not establish confirmation",
-        "source_label": "web/zones/{date}.json · counter",
+        "source_label": "web/kpis-totals/{date}.json · unconfirmed-narratives",
         "source": {
-          "kind": "zones_counter",
-          "key": "unconfirmed_total"
+          "kind": "kpis_totals",
+          "id": "unconfirmed-narratives",
+          "field": "today"
         },
         "presentation": {
           "label": "contract_title",
@@ -321,8 +321,8 @@
           }
         },
         "detail": {
-          "kind": "unconfirmed_split",
-          "en": "2 accounts · 1 meets the counting criterion · none is confirmed"
+          "kind": "kpis_narratives",
+          "en": "accounts recorded on the report day · none is confirmed"
         },
         "number_format": {
           "singular": "رواية",

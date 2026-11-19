@@ -36,7 +36,7 @@ def test_detector_catches_the_b010_pattern():
 # ذيل ميت مقيس ينتظر قرار المالك، لا يُفعَّل خفية: ذيل G054 (check_published_counters.py)
 # يُرجع 2 على تقريري 2026-11-12 و2026-11-18 المنشورين (قيس 2026-11-19)، فتفعيله يمنع النشر.
 # كل مدخل هنا مؤرخ ومسبَّب، وأي ذيل ميت جديد خارجها يُسقط الاختبار.
-PENDING_OWNER_DECISION = {"G054": "2026-11-19 · حارس الأرقام المنشورة يمنع تقارير منشورة · قرار المالك"}
+PENDING_OWNER_DECISION: dict[str, str] = {}  # G054 فُعِّل بقرار المالك 2026-11-19 بعد إصلاح الأرقام
 
 
 def test_no_manifest_command_has_code_after_exit():
