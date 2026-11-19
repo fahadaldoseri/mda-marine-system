@@ -137,7 +137,9 @@ def build(meta, date, base, detail=True, delivery_note="", max_items=3):
         title = clean((codes.get(c["code"]) or {}).get("title") or c["text"])
         body = clean(c["text"])
         show_body = detail and body and body != title
-        lines += [f"{i}) {title} ({c['code']})" + (":" if show_body else "")]
+        # نقطة في آخر البند الخالي من التفاصيل: كل بند جملة مستقلة، وإلا دمج مدقق
+        # الأسلوب البنود الثلاثة في جملة واحدة تتجاوز 35 كلمة (G045، 19 نوفمبر).
+        lines += [f"{i}) {title} ({c['code']})" + (":" if show_body else ".")]
         if show_body:
             lines.append(body)
     if len(changes) > max_items:
