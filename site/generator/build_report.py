@@ -173,6 +173,12 @@ def _imo_reference_line(meta: dict) -> str:
         card = next((row for row in cards or []
                      if isinstance(row, dict) and row.get("id") == "imo-confirmed-incidents"), None)
         layers = card.get("layers") if isinstance(card, dict) else None
+        # 2026-11-19: العدد والتاريخ من بطاقة الإصدار نفسه (القيمة النافذة يوم التقرير)،
+        # فلا يُعرض عدد المالك الحي بجوار تاريخ إصدار قديم (138 · 3 نوفمبر على صفحة 12 نوفمبر).
+        cum = layers.get("cumulative") if isinstance(layers, dict) else None
+        cum = str(cum.get("value") or "").strip() if isinstance(cum, dict) else ""
+        if cum.isdigit():
+            confirmed = int(cum)
         updated = layers.get("updated") if isinstance(layers, dict) else None
         updated = updated.get("value") if isinstance(updated, dict) else None
         if not updated:
