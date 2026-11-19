@@ -141,9 +141,31 @@ def _hero_kpi_line(card: dict, registry: dict[str, dict]) -> str:
         {},
         ("value", "current", "count", "total", "number", "amount"),
     )
+    label = KPI_SHORT_LABELS.get(card_id) or label
     if not label:
         label = card_id or "مؤشر"
-    return f"{label} {value}".strip()
+    return f"{label}: {value}" if str(value).strip() else label
+
+
+# أسماء مختصرة للمؤشرات في رسالة تلغرام (اختيار فهد، 19 نوفمبر): «الاسم: العدد».
+KPI_SHORT_LABELS = {
+    "ukmto-reports": "البلاغات الرسمية",
+    "qualifying-incidents": "الوقائع المحتسبة",
+    "unconfirmed-narratives": "روايات غير مؤكدة",
+}
+
+_NUM_DATE_TAIL = re.compile(r"\s*·\s*(\d{1,2})/(\d{1,2})/(\d{4})\s*$")
+
+
+def date_in_letters(title):
+    """«… · 18/11/2026» ← «… في 18 نوفمبر» (اختيار فهد، 19 نوفمبر)."""
+    m = _NUM_DATE_TAIL.search(title)
+    if not m:
+        return title
+    d, mo = int(m.group(1)), int(m.group(2))
+    if not 1 <= mo <= 12:
+        return title
+    return title[:m.start()] + f" في {d} {MONTHS[mo - 1]}"
 
 
 def more_line(n):
@@ -157,7 +179,7 @@ def more_line(n):
     return f"و{n} واقعة أخرى في التقرير الكامل."
 
 
-def build(meta, date, base, detail=True, delivery_note="", max_items=3):
+def build(meta, date, base, detail=True, delivery_note="", max_items=3, max_actions=3):
     cut = dt.datetime.strptime(meta["generated_label"], "%Y-%m-%dT%H:%M:%SZ")
     start = cut - dt.timedelta(hours=24)
     bh = cut + dt.timedelta(hours=3)
@@ -173,7 +195,7 @@ def build(meta, date, base, detail=True, delivery_note="", max_items=3):
              f"<b>مستوى التهديد:</b> {meta['threat_level']}", "", "<b>ما تغيّر عن التقرير السابق:</b>"]
     changes = meta.get("changes", [])[:3]
     for i, c in enumerate(changes[:max_items], 1):
-        title = clean((codes.get(c["code"]) or {}).get("title") or c["text"])
+        title = date_in_letters(clean((codes.get(c["code"]) or {}).get("title") or c["text"]))
         body = clean(c["text"])
         show_body = detail and body and body != title
         # نقطة في آخر البند الخالي من التفاصيل: كل بند جملة مستقلة، وإلا دمج مدقق
@@ -191,8 +213,13 @@ def build(meta, date, base, detail=True, delivery_note="", max_items=3):
     )
     if kp:
         lines += ["", "<b>المؤشرات:</b>", kp]
-    act = (meta.get("decision_card", {}).get("action") or [""])[0]
-    lines += ["", "<b>الإجراء المطلوب:</b>", action_line(act)]
+    # الإجراءات كلها لا الأول وحده (اختيار فهد، 19 نوفمبر)، كل بند بصيغة الغائب.
+    acts = [a for a in (meta.get("decision_card", {}).get("action") or []) if clean(a)][:max_actions]
+    lines += ["", "<b>الإجراء المطلوب:</b>"]
+    if len(acts) <= 1:
+        lines.append(action_line(acts[0] if acts else ""))
+    else:
+        lines += [f"{i}) {action_line(x)}" for i, x in enumerate(acts, 1)]
     if delivery_note:
         lines += ["", "<b>قناة التسليم:</b>", delivery_note]
     lines += ["", "<b>التقرير الكامل:</b>", f"{base.rstrip('/')}/reports/{date}.html"]
@@ -230,8 +257,11 @@ def main():
     if miss or not base:
         print(f"✘ حقول ناقصة: {miss or ''} {'base_url' if not base else ''}")
         return 2
-    for detail, max_items in ((True, 3), (False, 3), (False, 2), (False, 1)):
-        text = build(meta, a.date, base, detail, delivery_note, max_items)
+    # ضبط الطول: تُسقط التفاصيل، ثم البنود، ثم الإجراءات الزائدة، ولا يُقص نص.
+    steps = ((True, 3, 3), (False, 3, 3), (False, 2, 3), (False, 2, 2),
+             (False, 1, 2), (False, 1, 1))
+    for detail, max_items, max_actions in steps:
+        text = build(meta, a.date, base, detail, delivery_note, max_items, max_actions)
         visible = re.sub(r"<[^>]+>", "", text)
         if len(visible) <= CAP:
             break

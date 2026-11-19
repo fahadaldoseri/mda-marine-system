@@ -39,6 +39,8 @@ def test_fallback_delivery_note_contains_verified_url_and_manus_outage():
 
 
 def main() -> int:
+    # المعرّفات المعروفة تأخذ الاسم المختصر «الاسم: العدد» (اختيار فهد، 19 نوفمبر)؛
+    # والاختبار يثبت أن القيمة تُقرأ من كل أشكال البطاقة.
     cases = [
         (
             "شكل اليوم: title/value مع بطاقة بلا label",
@@ -46,7 +48,7 @@ def main() -> int:
                 {"id": "qualifying-incidents", "title": "وقائع مستوفية", "value": "2"},
                 {"id": "unconfirmed-narratives", "title": "روايات لم تتأكد", "value": "2"},
             ],
-            ("وقائع مستوفية 2", "روايات لم تتأكد 2"),
+            ("الوقائع المحتسبة: 2", "روايات غير مؤكدة: 2"),
         ),
         (
             "شكل مستقبلي: display_label/current",
@@ -54,7 +56,7 @@ def main() -> int:
                 {"id": "ukmto-reports", "display_label": "بلاغات جديدة", "current": 3},
                 {"id": "qualifying-incidents", "display_label": "وقائع مؤهلة", "current": 4},
             ],
-            ("بلاغات جديدة 3", "وقائع مؤهلة 4"),
+            ("البلاغات الرسمية: 3", "الوقائع المحتسبة: 4"),
         ),
         (
             "حاوية بطاقات مستقبلية مع fallback من السجل الحاكم",
@@ -62,7 +64,7 @@ def main() -> int:
                 {"id": "qualifying-incidents", "value": "5"},
                 {"id": "unconfirmed-narratives", "count": 6},
             ]},
-            ("وقائع مستوفية لمعيار الاحتساب 5", "روايات لم تتأكد 6"),
+            ("الوقائع المحتسبة: 5", "روايات غير مؤكدة: 6"),
         ),
     ]
     failures = []
