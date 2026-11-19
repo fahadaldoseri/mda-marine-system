@@ -39,9 +39,9 @@
     {
       "id": "unconfirmed-narratives",
       "title": "روايات لم تتأكد",
-      "today": 0,
-      "cumulative": 33,
-      "updated": "2026-11-09",
+      "today": 1,
+      "cumulative": 35,
+      "updated": "2026-11-18",
       "definition": "رواية يصفها السجل صراحةً بأنها رواية أو يصنفها كذلك، مع evidence_status غير محسوم.",
       "basis": "الوصف يبدأ بـ«رواية» أو classification يحمل وسم الرواية؛ تُذكر الرواية ولا تُرفع إلى واقعة مؤكدة. قاعدة updated: أعلى تاريخ من published_at أو retrieved_at أو date_start، مع استخدام تاريخ الواقعة عند غياب الحقلين الأولين.",
       "sources": [

@@ -31,7 +31,16 @@ from validators.check_daily_event_surface import validate_documents  # noqa: E40
 
 class Owner9ImoCardsTests(unittest.TestCase):
     def test_imo_metric_uses_single_incidents_identifier(self):
-        metric = make_imo_attacks(dt.date(2026, 11, 3))
+        # لقطة المالك كما كانت يوم 3 نوفمبر (128 حاليًا · 122 سابقًا)، لا الملف الحي الذي
+        # يحدّثه S060 يوميًا من الصفحة الرسمية؛ فالاختبار يثبت القاعدة لا رقم اليوم.
+        import tools.ledger_totals as lt
+        snapshot = json.loads((ROOT / "tests/fixtures/imo-incidents-2026-11-04.json").read_text(encoding="utf-8"))
+        original = lt._load_imo_source
+        lt._load_imo_source = lambda: snapshot
+        try:
+            metric = make_imo_attacks(dt.date(2026, 11, 3))
+        finally:
+            lt._load_imo_source = original
         self.assertEqual(metric["id"], "imo-confirmed-incidents")
         self.assertEqual(metric["today"], 6)
         self.assertEqual(metric["cumulative"], 128)

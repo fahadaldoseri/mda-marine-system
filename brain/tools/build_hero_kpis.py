@@ -93,6 +93,16 @@ def hero_detail(meta: dict, zones: dict, card: dict, kpis: dict | None = None) -
         qualifying = counter.get("unconfirmed_qualifying") or 0
         return (f"{format_arabic_count(count, card.get('number_format'))} · منها "
                 f"{qualifying} مستوفية لمعيار الاحتساب · لم تثبت أيٌّ منها")
+    # قرار المالك 2026-11-19: بطاقتا UKMTO والروايات تُقرآن من العدّاد الحاكم
+    # (web/kpis-totals) لا من event_count ولا من نص ثابت في العقد. كان نص «201-26 · 202-26»
+    # ثابتًا في العقد فيظهر في كل يوم، وكانت القيمة عدد كل وقائع اليوم لا بلاغات UKMTO.
+    if detail.get("kind") == "kpis_ukmto":
+        today = metric(kpis or {}, cid, "today")
+        return f"سجلات فريدة مصدرها UKMTO في سجل اليوم: {today if today is not None else 0}"
+    if detail.get("kind") == "kpis_narratives":
+        today = metric(kpis or {}, cid, "today")
+        count = int(today or 0)
+        return f"{format_arabic_count(count, card.get('number_format'))} في سجل اليوم · لم تثبت أيٌّ منها"
     if detail.get("kind") == "fire_split":
         fire = (meta.get("hero_sources") or {}).get("fire") or {}
         return (f"المؤكد: {fire.get('confirmed') or 0} · المرجّح: {fire.get('probable') or 0} · "

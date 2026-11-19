@@ -681,6 +681,16 @@ def localize_patterns(s: str) -> str | None:
     if m:
         k = int(m.group(1))
         return f"and {k} more item{'' if k == 1 else 's'} under"
+    # تفاصيل بطاقتي العدّاد الحاكم (قرار المالك 2026-11-19): UKMTO والروايات غير المؤكدة.
+    if n == "سجلات فريدة مصدرها":
+        return "Unique records sourced from"
+    m = re.fullmatch(r"في سجل اليوم:\s*(\d+)", n)
+    if m:
+        return f"in today's log: {m.group(1)}"
+    m = re.fullmatch(r"(\d+\s+)?(رواية|روايتان|روايات)\s+في سجل اليوم\s*·\s*لم تثبت أيٌّ منها", n)
+    if m:
+        k = int(m.group(1)) if m.group(1) else (2 if m.group(2) == "روايتان" else 1)
+        return f"{k} account{'' if k == 1 else 's'} in today's log · none is confirmed"
     # عدد البنود الأخرى في قسم «ما تغيّر»
     m = re.fullmatch(r"و(\d+)\s+بنود أخرى في قسم «ما تغيّر»\.", n)
     if m:

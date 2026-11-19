@@ -25,15 +25,15 @@
    "title": "بلاغات UKMTO المرصودة",
    "label": "البلاغات الرسمية الظاهرة في متن اليوم",
    "tag": "Z1",
-   "value": "2",
-   "detail": "201-26: Attack · 202-26: تحذير عن نشاط مشبوه؛ داخل فترة التقرير",
+   "value": "0",
+   "detail": "سجلات فريدة مصدرها UKMTO في سجل اليوم: 0",
    "note": "دفتر 12/11 يسجل لا واقعة جديدة. لا تظهر هوية السفينة أو نتيجة أي من البلاغين.",
-   "source": "سجل الوقائع الرسمي UKMTO",
+   "source": "web/kpis-totals/{date}.json · ukmto-reports",
    "accent": "ok",
    "updated": "2026-11-11",
    "title_en": "Monitored UKMTO reports",
    "tag_en": "Z1",
-   "cumulative": 222
+   "cumulative": "222"
   },
   {
    "id": "qualifying-incidents",
@@ -60,12 +60,12 @@
    "tag": "التأهل للمعيار لا يعني الإثبات",
    "tag_en": "Meeting the counting criterion does not establish confirmation",
    "value": "0",
-   "detail": "0 روايات · منها 0 مستوفية لمعيار الاحتساب · لم تثبت أيٌّ منها",
+   "detail": "0 روايات في سجل اليوم · لم تثبت أيٌّ منها",
    "note": "سجل الحالة «لا واقعة» ليس رواية عن حادث ولا يُحتسب واقعة.",
-   "source": "web/zones/{date}.json · counter",
+   "source": "web/kpis-totals/{date}.json · unconfirmed-narratives",
    "accent": "info",
    "updated": "2026-11-09",
-   "cumulative": 33
+   "cumulative": "33"
   },
   {
    "id": "proven-zones",

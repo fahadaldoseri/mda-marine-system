@@ -776,7 +776,8 @@
         ],
         "files": [
           "tools/archive_originals.py",
-          "sections/90-automation.md"
+          "sections/90-automation.md",
+          "tools/refresh_imo_incidents.py"
         ],
         "gates": [],
         "tests": []
@@ -785,7 +786,7 @@
       "command": [
         "bash",
         "-lc",
-        "B=\"$PWD\"; export B SITE; if [ ! -f watchlist/original-sources.txt ]; then echo \"· لا ينطبق: لا قائمة أصول لليوم — لا توقف التسليم\"; exit 0; fi; python3 tools/archive_originals.py {date} watchlist/original-sources.txt; rc=$?; if [ $rc -gt 1 ]; then exit $rc; fi; python3 \"$B/tools/mark_components.py\" --date \"{date}\" --component originals; rc2=$?; if [ $rc2 -gt $rc ]; then exit $rc2; fi; exit $rc"
+        "B=\"$PWD\"; export B SITE; python3 tools/refresh_imo_incidents.py --apply; ri=$?; if [ $ri -eq 2 ]; then echo \"✘ سجل IMO: العدّاد المعلن يخالف الصفوف — لا يُكتب مالك مضلّل\"; exit 2; fi; if [ $ri -ne 0 ]; then echo \"⚠ تعذّر جلب سجل IMO (رمز $ri) — يبقى المالك السابق ويُفصح عنه\"; fi; if [ ! -f watchlist/original-sources.txt ]; then echo \"· لا ينطبق: لا قائمة أصول لليوم — لا توقف التسليم\"; [ $ri -eq 0 ] || exit 1; exit 0; fi; python3 tools/archive_originals.py {date} watchlist/original-sources.txt; rc=$?; if [ $rc -gt 1 ]; then exit $rc; fi; python3 \"$B/tools/mark_components.py\" --date \"{date}\" --component originals; rc2=$?; if [ $rc2 -gt $rc ]; then exit $rc2; fi; if [ $rc -eq 0 ] && [ $ri -ne 0 ]; then exit 1; fi; exit $rc"
       ],
       "ok_rc": [
         0
@@ -4864,7 +4865,7 @@
       "command": [
         "bash",
         "-lc",
-        "B=\"$PWD\"; export B SITE; python3 \"$B/validators/check_number_bindings.py\" --date \"$D\"; rc=$?; exit $rc; python3 \"$B/validators/check_published_counters.py\" --brain \"$B\" --date \"$D\"; rc2=$?; if [ $rc -eq 0 ] && [ $rc2 -ne 0 ]; then exit $rc2; fi; exit $rc"
+        "B=\"$PWD\"; export B SITE; python3 \"$B/validators/check_number_bindings.py\" --date \"$D\"; rc=$?; python3 \"$B/validators/check_published_counters.py\" --brain \"$B\" --date \"$D\"; rc2=$?; if [ $rc -eq 0 ] && [ $rc2 -ne 0 ]; then exit $rc2; fi; exit $rc"
       ],
       "ok_rc": [
         0

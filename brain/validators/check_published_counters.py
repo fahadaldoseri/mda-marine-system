@@ -44,6 +44,18 @@ def text(p: pathlib.Path) -> str:
 
 # ────────────────────────────── الفحوص ──────────────────────────────
 
+def _imo_as_at(d: dict) -> str:
+    """تاريخ القائمة الرسمية ISO من source.as_at («17 November 2026»)، أو فارغ."""
+    import datetime as _dt
+    raw = str((d.get('source') or {}).get('as_at') or '').strip()
+    for fmt in ('%d %B %Y', '%Y-%m-%d'):
+        try:
+            return _dt.datetime.strptime(raw, fmt).date().isoformat()
+        except ValueError:
+            continue
+    return ''
+
+
 def check_imo_historical(brain: pathlib.Path, date: str, out: list, blockers: list) -> None:
     """لا يجوز أن ينشر أي سطح الرقم التاريخي المعلن في حقل previous."""
     owner = brain / 'appendices' / 'imo-incidents.json'
@@ -61,6 +73,22 @@ def check_imo_historical(brain: pathlib.Path, date: str, out: list, blockers: li
 
     report = brain / 'reports' / f'{date}-sectioned.md'
     lines = text(report).splitlines()
+    # الحارس يقرأ المالك الحي، والمالك يُحدَّث يوميًا (S060). تقرير يوم سابق لتاريخ القائمة
+    # الرسمية (source.as_at) يُقاس بالقيمة التي كانت نافذة يومه (previous)، لا بقيمة لاحقة
+    # لم تكن قد صدرت؛ وإلا مُنع كل تقرير منشور قديم عند أول تحديث رسمي (قيس 2026-11-19).
+    as_at = _imo_as_at(d)
+    prev_retrieved = str((d.get('previous') or {}).get('retrieved') or '')[:10]
+    if as_at and date < as_at:
+        if prev_retrieved and prev_retrieved <= date:
+            if any('IMO' in l and str(prev) in l for l in lines):
+                out.append(('سجل IMO — المتن', prev, 'reports/%s-sectioned.md' % date,
+                            'القيمة النافذة يوم التقرير (previous)', 'مطابق'))
+            else:
+                blockers.append('المتن لا ينشر قيمة IMO النافذة يومه %s (القائمة الحالية بتاريخ %s)' % (prev, as_at))
+        else:
+            out.append(('سجل IMO — المتن', '—', 'reports/%s-sectioned.md' % date,
+                        'لا لقطة للمالك نافذة يوم التقرير', 'غير مقيس'))
+        return
     offenders = [f'{i + 1}: {l.strip()[:90]}' for i, l in enumerate(lines)
                  if ('IMO' in l or 'المنظمة البحرية' in l) and str(prev) in l]
     if offenders:
@@ -174,6 +202,21 @@ def check_probability(brain: pathlib.Path, date: str, out: list, blockers: list)
     hyps = [h for h in (meta.get('hypotheses') or []) if isinstance(h, dict)]
     if not hyps:
         blockers.append('لا فرضيات في واجهة اليوم لفحص النسب')
+        return
+    # يوم لا تصدر فيه المادة الرسمية تقديرًا رقميًا: الحالة المعلنة في الأداة الحاكمة
+    # (`tools/hypothesis_distribution.py`) بنوع موحّد unmeasurable وقاعدة نصية، بلا أي نسبة.
+    # كان الحارس يقرأ النص «لا يمكن قياس الاحتمال» نسبةً مفقودة فيمنع إعلانًا معتمدًا.
+    # الإعلان الناقص أو المخلوط يبقى مانعًا برسالة الأداة الحاكمة نفسها.
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / 'tools'))
+    import hypothesis_distribution as _hd
+    try:
+        declared = _hd._is_declared_no_estimate(meta)
+    except _hd.DistributionError as exc:
+        blockers.append('إعلان الفرضيات غير صالح: %s' % exc)
+        return
+    if declared:
+        out.append(('الفرضيات', len(hyps), 'web/meta/%s.json' % date,
+                    'إعلان عدم تقدير معتمد', 'معلن'))
         return
     shares = []
     for h in hyps:

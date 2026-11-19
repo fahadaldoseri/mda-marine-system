@@ -46,6 +46,9 @@ def sandbox(tmp_path):
         dst = tmp_path / rel
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src, dst)
+    # مالك IMO كما كان يوم التقرير (128 · السابق 122)، لا الملف الحي الذي يحدّثه S060 يوميًا.
+    shutil.copy2(BRAIN / 'tests/fixtures/imo-incidents-2026-11-04.json',
+                 tmp_path / 'appendices/imo-incidents.json')
     return tmp_path
 
 
@@ -137,3 +140,54 @@ def test_zones_count_mismatch_is_blocked(sandbox):
     mutate_json(sandbox / f'web/meta/{DATE}.json', drop_zone)
     _, blockers = gate.collect(sandbox, DATE)
     assert any('عدد القطاعات' in b for b in blockers), blockers
+
+def _declare_no_estimate(d):
+    import hypothesis_distribution as hd
+    d['distribution_rule'] = hd.NO_ESTIMATE_RULE
+    for h in d['hypotheses']:
+        h['likelihood'] = 'لا يمكن قياس الاحتمال من المادة الرسمية.'
+        h['likelihood_kind'] = hd.NO_ESTIMATE_KIND
+        h.pop('likelihood_range', None)
+
+
+def test_declared_no_estimate_is_accepted(sandbox):
+    """إعلان عدم التقدير المعتمد (2026-11-12 و2026-11-18) لا يُقرأ نسبة مفقودة."""
+    sys.path.insert(0, str(BRAIN / 'tools'))
+    mutate_json(sandbox / f'web/meta/{DATE}.json', _declare_no_estimate)
+    out, blockers = gate.collect(sandbox, DATE)
+    assert not any('فرضية' in b or 'الفرضيات' in b or 'النسب' in b for b in blockers), blockers
+    assert any(row[0] == 'الفرضيات' and row[-1] == 'معلن' for row in out)
+
+
+def test_mixed_no_estimate_declaration_is_blocked(sandbox):
+    sys.path.insert(0, str(BRAIN / 'tools'))
+
+    def mixed(d):
+        _declare_no_estimate(d)
+        d['hypotheses'][0]['likelihood_kind'] = 'point_from_range'
+    mutate_json(sandbox / f'web/meta/{DATE}.json', mixed)
+    _, blockers = gate.collect(sandbox, DATE)
+    assert any('إعلان الفرضيات غير صالح' in b for b in blockers), blockers
+
+
+def _owner_updated_after_report(d):
+    """القائمة الرسمية تحدّثت بعد يوم التقرير: 138 حاليًا (17 نوفمبر) · 128 سابقًا (4 نوفمبر)."""
+    d['previous'] = {'totals': dict(d['totals']), 'retrieved': '2026-11-04', 'incidents_count': 128}
+    d['totals'] = {'confirmed_incidents': 138, 'confirmed_seafarer_deaths': 25}
+    d.setdefault('source', {})['as_at'] = '17 November 2026'
+
+
+def test_past_report_is_measured_against_value_in_force_that_day(sandbox):
+    """تقرير 7 نوفمبر نشر 128 وهو النافذ يومه؛ تحديث 17 نوفمبر إلى 138 لا يجعله مخالفًا."""
+    mutate_json(sandbox / 'appendices/imo-incidents.json', _owner_updated_after_report)
+    out, blockers = gate.collect(sandbox, DATE)
+    assert not any('IMO' in b for b in blockers), blockers
+    assert any('النافذة يوم التقرير' in str(row[3]) for row in out)
+
+
+def test_past_report_missing_value_in_force_is_blocked(sandbox):
+    mutate_json(sandbox / 'appendices/imo-incidents.json', _owner_updated_after_report)
+    report = sandbox / f'reports/{DATE}-sectioned.md'
+    report.write_text(report.read_text(encoding='utf-8').replace('128', '١٢٨'), encoding='utf-8')
+    _, blockers = gate.collect(sandbox, DATE)
+    assert any('النافذة يومه' in b for b in blockers), blockers

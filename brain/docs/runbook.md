@@ -1,6 +1,6 @@
 # كتيب الإجراءات التشغيلية
 
-<!-- مولَّد آليًا من runbook/runbook.json (بصمة 2fffca6010c0cefe). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
+<!-- مولَّد آليًا من runbook/runbook.json (بصمة ffc14e2f5afd42ec). لا تعدّله يدويًا: عدّل المانيفست ثم شغّل handbook. -->
 
 لا يعتمد التشغيل على ذاكرة الوكيل: المحرّك ينفّذ الخطوات بالترتيب، ولا تبدأ خطوة قبل اكتمال ما قبلها بدليل.
 
@@ -14,7 +14,7 @@
 | S010 | استعادة المهارات وفحص التماثل | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S010.log | أ1 — سلسلة التشغيل اليومي | tools/restore_skills.sh، sections/90-automation.md، evidence/resume-20261031/restore_skills.exit، evidence/resume-20261031/restore_skills.stdout، evidence/resume-20261031/check_skills_integrity.exit، evidence/resume-20261031/check_skills_integrity.stdout | stop |
 | S020 | فحص التغذيات (كل المصادر المسجّلة) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S020.log | أ1 — سلسلة التشغيل اليومي | tools/check_feeds.py، sections/90-automation.md، evidence/resume-20261031/check_feeds-2026-10-31.exit، evidence/resume-20261031/check_feeds-2026-10-31.stdout، evidence/resume-20261031/runbook-redo-S020.exit، evidence/resume-20261031/runbook-redo-S020.stdout، evidence/resume-20261031/usni-browser-live.exit، evidence/resume-20261031/usni-browser-live.stdout | stop |
 | S030 | ترقيم التغذيات (أرقام لاتينية) | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S030.log | أ1 — سلسلة التشغيل اليومي | tools/normalize_digits.py، sections/90-automation.md، tools/normalize_terms.py | stop |
-| S060 | حفظ الأصول الرسمية | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S060.log | أ1 — سلسلة التشغيل اليومي | tools/archive_originals.py، sections/90-automation.md | stop |
+| S060 | حفظ الأصول الرسمية | script |  |  | cmd:bash -lc test -s logs/runbook/{date}/S060.log | أ1 — سلسلة التشغيل اليومي | tools/archive_originals.py، sections/90-automation.md، tools/refresh_imo_incidents.py | stop |
 | S080 | فرز التغذيات بالنموذج (اختياري) (اختيارية) | script |  |  | cmd:bash -lc test -e logs/runbook/{date}/S080.log | أ1 — سلسلة التشغيل اليومي | tools/llm_triage.py، sections/90-automation.md | continue |
 | S090 | مراجعة التقرير بالنموذج (اختياري) (اختيارية) | script |  |  | cmd:bash -lc test -e logs/runbook/{date}/S090.log | أ1 — سلسلة التشغيل اليومي | tools/llm_review.py، sections/90-automation.md | continue |
 | W010 | كتابة التقرير اليومي | agent | sections/20-writing-brief.md، sections/20-lexicon.md، sections/20-examples.md، cumulative-2026/daily/{date}.json، feeds/feeds-{date}.md، web/meta/{date}.json، appendices/estimate-code-map.json، tools/register_estimate.py، skills/runbook-operations-ops/SKILL.md | reports/{date}-sectioned.md، appendices/estimate-code-map.json | cmd:python3 tools/register_estimate.py --check --date {date}؛ min_bytes:reports/{date}-sectioned.md؛ contains:reports/{date}-sectioned.md | أ2 — قواعد الكتابة، ل1 — أسلوب اللغة | sections/20-writing-brief.md، sections/20-lexicon.md، sections/20-examples.md، runbook/prompts/write-report.md، web/meta/{date}.json، appendices/estimate-code-map.json، tools/register_estimate.py، skills/runbook-operations-ops/SKILL.md | stop |

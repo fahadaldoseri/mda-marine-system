@@ -122,6 +122,10 @@ def main() -> int:
         "previous": {"totals": old.get("totals"), "retrieved": old.get("retrieved"),
                      "incidents_count": len(old.get("incidents", []))},
     })
+    # متساوي القوى: جلب ثانٍ بلا تغيير في العدّادين لا يجعل «السابق» نسخة من «الحالي».
+    # لو كُتب السابق = الحالي لصار حارس الأرقام المنشورة يمنع نشر الرقم الحالي نفسه.
+    if old.get("totals") == new["totals"] and isinstance(old.get("previous"), dict):
+        new["previous"] = old["previous"]
     if args.apply:
         OUT.write_text(json.dumps(new, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         print(f"   ✔ كُتب {OUT.relative_to(ROOT)} بعدد {len(uniq)} حادثة")
