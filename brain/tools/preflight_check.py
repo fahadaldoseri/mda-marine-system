@@ -242,7 +242,7 @@ if report.exists():
                 _reasons = [(f.get("block_reason") or f.get("reason") or "") for f in
                             ((st.get("feeds") or {}).get("failed_feeds") or [])]
                 _r = _cls("feeds", (st.get("feeds") or {}).get("status") or "degraded",
-                          " ".join(_reasons), _reasons) if _reasons else {"allowed": True}
+                          " ".join(_reasons), _reasons, today=DATE) if _reasons else {"allowed": True}
                 only_known = bool(_r.get("allowed"))
             except ImportError:  # المرجع الواحد غير متاح: لا نتجاهل، نمنع (فشل مغلق)
                 only_known = False
