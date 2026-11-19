@@ -42,6 +42,34 @@ def site_base_url():
     return ""
 
 
+def _third_person_unit():
+    """وحدة أسلوب الغائب من مشروع الموقع (مصدر واحد لمعجم أفعال الأمر)."""
+    import importlib.util
+    for cand in (os.environ.get("SITE_DIR"), os.environ.get("SITE"), B.parent / "seawatch", B.parent / "site"):
+        p = Path(cand) / "generator" / "third_person.py" if cand else None
+        if p and p.is_file():
+            spec = importlib.util.spec_from_file_location("site_third_person", p)
+            mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(mod)
+            if hasattr(mod, "to_masdar"):
+                return mod
+    return None
+
+
+def action_line(text):
+    """سطر «الإجراء المطلوب» بصيغة المصدر لا الأمر (قرار المالك، 19 نوفمبر 2026):
+    «ارفعوا التأهب…» ← «رفع التأهب…». تغيب الوحدة = فشل مغلق، فلا تخرج رسالة بصيغة الأمر."""
+    unit = _third_person_unit()
+    if unit is None:
+        raise SystemExit("✘ وحدة generator/third_person.py (to_masdar) غير موجودة — لا تُبنى الرسالة")
+    return unit.to_masdar(clean(text))
+
+
+def imperative_violations(text):
+    unit = _third_person_unit()
+    return unit.violations(text) if unit else []
+
+
 def dtg(t):
     return f"{t.day:02d}{t.hour:02d}{t.minute:02d}Z"
 
@@ -151,7 +179,7 @@ def build(meta, date, base, detail=True, delivery_note="", max_items=3):
     if kp:
         lines += ["", "<b>المؤشرات:</b>", kp]
     act = (meta.get("decision_card", {}).get("action") or [""])[0]
-    lines += ["", "<b>الإجراء المطلوب:</b>", f"نفّذوا — {clean(act)}"]
+    lines += ["", "<b>الإجراء المطلوب:</b>", action_line(act)]
     if delivery_note:
         lines += ["", "<b>قناة التسليم:</b>", delivery_note]
     lines += ["", "<b>التقرير الكامل:</b>", f"{base.rstrip('/')}/reports/{date}.html"]
@@ -194,6 +222,10 @@ def main():
         visible = re.sub(r"<[^>]+>", "", text)
         if len(visible) <= CAP:
             break
+    bad = imperative_violations(visible)
+    if bad:
+        print(f"✘ صيغة أمر في الرسالة: {' · '.join(bad)} — قاعدة المشروع أسلوب الغائب")
+        return 2
     out = Path(a.out) if a.out else B / "logs" / f"tg-digest-{a.date}.html"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(text, encoding="utf-8")
