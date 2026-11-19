@@ -103,7 +103,17 @@ def strip_markup(text: str) -> str:
     return text
 
 
+_PROJECT_DICT_CACHE: set[str] | None = None
+
+
 def load_project_dictionary() -> set[str]:
+    global _PROJECT_DICT_CACHE
+    if _PROJECT_DICT_CACHE is None:
+        _PROJECT_DICT_CACHE = _load_project_dictionary_uncached()
+    return set(_PROJECT_DICT_CACHE)
+
+
+def _load_project_dictionary_uncached() -> set[str]:
     """يبني قاموسًا من الملفات الموجودة فعليًا، لا من قائمة مخترعة."""
     paths = [ROOT / "appendices" / "terminology.md", ROOT / "appendices" / "style-blacklist.json"]
     paths.extend(sorted((ROOT / "appendices" / "libraries").rglob("*")))

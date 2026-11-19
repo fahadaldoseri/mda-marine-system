@@ -675,6 +675,12 @@ def localize_patterns(s: str) -> str | None:
     m = re.fullmatch(r"بالرمز\s+(\d{2}-\d{2})\s*\((\d{2}-\d{2})\)\.", n)
     if m:
         return f"under reference {m.group(1)} ({m.group(2)})."
+    # الملاحظة نفسها حين يكون اسم القسم رابطًا مستقلًا (<a>ما تغيّر</a> أو <a>التوصيات</a>):
+    # العقدة النصية تنتهي عند «قسم»، والقسم يُترجم من نص الرابط نفسه، فلا يُخمَّن هنا.
+    m = re.fullmatch(r"و(\d+)\s+بنود أخرى في قسم", n)
+    if m:
+        k = int(m.group(1))
+        return f"and {k} more item{'' if k == 1 else 's'} under"
     # عدد البنود الأخرى في قسم «ما تغيّر»
     m = re.fullmatch(r"و(\d+)\s+بنود أخرى في قسم «ما تغيّر»\.", n)
     if m:
@@ -1134,7 +1140,10 @@ def _zone_level_en(n: str):
 
 def make_translator(tm: dict[str, str], gl: dict[str, str]):
     exact_only = {norm(k) for k in getattr(gl, "exact_match_only_entries", ())}
-    keys = sorted((set(tm) | set(gl)) - exact_only, key=len, reverse=True)
+    # الترتيب حتمي: الأطول أولًا ثم أبجديًا. كان `key=len` وحده يترك المفاتيح المتساوية الطول
+    # بترتيب المجموعة، وهو يتغير مع بذرة التجزئة في كل عملية، فتختلف الصفحة الإنجليزية
+    # بين بناءين من الشيفرة والمدخلات نفسها (قيس 2026-11-19: 12 صفحة اختلفت).
+    keys = sorted((set(tm) | set(gl)) - exact_only, key=lambda k: (-len(k), k))
 
     def _val(k: str) -> str:
         """قيمة الترجمة لمفتاح، والمعجم المعتمد يسبق ذاكرة الترجمة الناقصة.
@@ -1377,7 +1386,7 @@ def _collapse_inline_source_duplicates(out: str) -> str:
     an exact suffix repetition; never use a broad substring replacement.
     """
     pattern = re.compile(
-        r'(?P<before>[^<>]*\b(?P<org>UKMTO|JMIC|IMO|VLIZ|Marine Regions|Natural Earth)\b[^<>]*)'
+        r'(?<![^<>])(?P<before>[^<>]*\b(?P<org>UKMTO|JMIC|IMO|VLIZ|Marine Regions|Natural Earth)\b[^<>]*)'
         r'(?P<span><span\b[^>]*\bclass="ltr"[^>]*>\s*(?P=org)\s*</span>)'
         r'(?P<after>[^<>]*)',
         re.IGNORECASE,

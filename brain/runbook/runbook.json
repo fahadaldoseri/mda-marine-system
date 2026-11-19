@@ -4618,7 +4618,7 @@
       "command": [
         "bash",
         "-lc",
-        "B=\"$PWD\"; export B SITE; python3 \"$B/tools/source_counts.py\" --date \"$D\" --check; rc=$?; [ $rc -eq 0 ] || exit $rc; python3 -m pytest -q tests/test_source_totals_governed.py tests/test_source_counts_idempotent.py; exit $?"
+        "B=\"$PWD\"; export B SITE; python3 \"$B/tools/source_counts.py\" --date \"$D\" --check; rc=$?; [ $rc -eq 0 ] || exit $rc; python3 -m pytest -q tests/test_source_totals_governed.py tests/test_source_counts_idempotent.py tests/test_en_translator_deterministic.py; exit $?"
       ],
       "ok_rc": [
         0
