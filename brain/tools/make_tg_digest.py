@@ -46,12 +46,10 @@ def dtg(t):
     return f"{t.day:02d}{t.hour:02d}{t.minute:02d}Z"
 
 
-def short(text, n):
-    text = re.sub(r"\s+", " ", text).strip()
-    if len(text) <= n:
-        return text
-    cut = text[:n].rsplit(" ", 1)[0]
-    return cut.rstrip("،,:؛ ") + "…"
+def clean(text):
+    """نص البند كاملًا بلا قصّ: الرسالة لا تقطع جملة في منتصفها بنقاط «…».
+    ضبط الطول يجري بإسقاط التفاصيل ثم عدد البنود (انظر main) لا بقصّ الكلمات."""
+    return re.sub(r"\s+", " ", text or "").strip()
 
 
 def _hero_kpi_registry() -> dict[str, dict]:
@@ -120,7 +118,7 @@ def _hero_kpi_line(card: dict, registry: dict[str, dict]) -> str:
     return f"{label} {value}".strip()
 
 
-def build(meta, date, base, detail=True, delivery_note=""):
+def build(meta, date, base, detail=True, delivery_note="", max_items=3):
     cut = dt.datetime.strptime(meta["generated_label"], "%Y-%m-%dT%H:%M:%SZ")
     start = cut - dt.timedelta(hours=24)
     bh = cut + dt.timedelta(hours=3)
@@ -134,11 +132,16 @@ def build(meta, date, base, detail=True, delivery_note=""):
              f"الفترة: {dtg(start)}–{dtg(cut)} {MONTHS[cut.month - 1]} {cut.year}",
              f"الوقت: {cut.hour:02d}{cut.minute:02d}Z ({bh.hour:02d}{bh.minute:02d}C بتوقيت البحرين)", "",
              f"<b>مستوى التهديد:</b> {meta['threat_level']}", "", "<b>ما تغيّر عن التقرير السابق:</b>"]
-    for i, c in enumerate(meta.get("changes", [])[:3], 1):
-        title = (codes.get(c["code"]) or {}).get("title") or short(c["text"], 70)
-        lines += [f"{i}) {short(title, 70)} ({c['code']})" + (":" if detail else "")]
-        if detail:
-            lines.append(short(c["text"], 90))
+    changes = meta.get("changes", [])[:3]
+    for i, c in enumerate(changes[:max_items], 1):
+        title = clean((codes.get(c["code"]) or {}).get("title") or c["text"])
+        body = clean(c["text"])
+        show_body = detail and body and body != title
+        lines += [f"{i}) {title} ({c['code']})" + (":" if show_body else "")]
+        if show_body:
+            lines.append(body)
+    if len(changes) > max_items:
+        lines.append(f"(و{len(changes) - max_items} غيرها في التقرير الكامل)")
     registry = _hero_kpi_registry()
     kp = " · ".join(
         _hero_kpi_line(card, registry) for card in _hero_kpi_items(meta)[:3]
@@ -146,7 +149,7 @@ def build(meta, date, base, detail=True, delivery_note=""):
     if kp:
         lines += ["", "<b>المؤشرات:</b>", kp]
     act = (meta.get("decision_card", {}).get("action") or [""])[0]
-    lines += ["", "<b>الإجراء المطلوب:</b>", f"نفّذوا — {short(act, 110)}"]
+    lines += ["", "<b>الإجراء المطلوب:</b>", f"نفّذوا — {clean(act)}"]
     if delivery_note:
         lines += ["", "<b>قناة التسليم:</b>", delivery_note]
     lines += ["", "<b>التقرير الكامل:</b>", f"{base.rstrip('/')}/reports/{date}.html"]
@@ -184,8 +187,8 @@ def main():
     if miss or not base:
         print(f"✘ حقول ناقصة: {miss or ''} {'base_url' if not base else ''}")
         return 2
-    for detail in (True, False):
-        text = build(meta, a.date, base, detail, delivery_note)
+    for detail, max_items in ((True, 3), (False, 3), (False, 2), (False, 1)):
+        text = build(meta, a.date, base, detail, delivery_note, max_items)
         visible = re.sub(r"<[^>]+>", "", text)
         if len(visible) <= CAP:
             break
