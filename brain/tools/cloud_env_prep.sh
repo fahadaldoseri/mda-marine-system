@@ -49,6 +49,15 @@ if ! command -v bwrap >/dev/null 2>&1; then
 fi
 echo "✔ bubblewrap: $(command -v bwrap)"
 
+# 3ب) G011 يفحص خادم المعاينة على 3000 بـ`ss`، وحاوية السحابة بلا iproute2؛ فيُكتب «ممنوع التسليم»
+# في سجله فيمنع gate_verdict إرسال تلغرام (D030) يوميًا. قيس في 19 نوفمبر 2026 على نسخة 19 نوفمبر.
+if ! command -v ss >/dev/null 2>&1; then
+  { apt-get install -y -q iproute2 >/dev/null 2>&1 \
+    || { apt-get update -q >/dev/null 2>&1 && apt-get install -y -q iproute2 >/dev/null 2>&1; }; } \
+    || fail "تعذّر تثبيت iproute2 (ss)"
+fi
+echo "✔ ss: $(command -v ss)"
+
 # 4) حزم Python المثبّتة الإصدار في المستودع (لا تُعاد إن كانت مثبّتة).
 if ! python3 - "$CANON/brain/requirements.txt" <<'PY' >/dev/null 2>&1
 import sys, re

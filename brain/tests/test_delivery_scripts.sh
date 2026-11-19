@@ -15,6 +15,9 @@ cat > "$T/brain/runbook/runbook.json" <<'J'
  "steps":[{"id":"G1","title":"بوابة","kind":"script","phase":"gates","command":["echo","x"],"assert":[{"type":"cmd","command":["bash","-lc","test -s logs/runbook/{date}/G1.log"]}],"links":{"rules":["ق"],"files":[],"folders":[],"gates":[],"tests":[]},"on_fail":"stop"}]}
 J
 echo '{"base_url":"http://127.0.0.1:9"}' > "$T/seawatch/sources/site.json"
+# وحدة أسلوب الغائب من الموقع: make_tg_digest يفشل مغلقًا بدونها (سطر الإجراء بصيغة المصدر).
+mkdir -p "$T/seawatch/generator"
+cp "${SITE_DIR:-$B/../site}/generator/third_person.py" "$T/seawatch/generator/" 2>/dev/null || cp "$B/../site/generator/third_person.py" "$T/seawatch/generator/"
 cp "$B/web/meta/2026-10-23.json" "$T/brain/web/meta/$D.json"
 
 grep -q '"id": "B005"' "$B/runbook/runbook.json" && grep -q 'مُدخل EN مفقود' "$B/runbook/runbook.json" && grep -q 'table_rows=' "$B/runbook/runbook.json"; ok $? "B005 معلن بفحص مدخل EN وعدّ صفوفه"
