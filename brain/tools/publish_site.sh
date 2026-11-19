@@ -70,6 +70,16 @@ if [ "$MODE" = telegram ]; then
   DIG="$B/logs/tg-digest-$D.html"
   PDF="$SITE/dist/reports/pdf/$D.pdf"
   python3 "$B/tools/make_tg_digest.py" --date "$D" --out "$DIG" || { record "$OUT" failed 2 '{"why":"digest"}'; exit 2; }
+  # الرسالة لا تسبق النشر (19 نوفمبر 2026): رابط التقرير في الرسالة يجب أن يعيد 200 حيًّا،
+  # وإلا فلا إرسال (فشل مغلق). يُعاد تشغيل D030 وحده بعد النشر: runbook.py run --only D030.
+  LINK="$(grep -o "https://[^<\" ]*/reports/$D\.html" "$DIG" | tail -1)"
+  [ -n "$LINK" ] || { record "$OUT" failed 2 '{"why":"no-report-link"}'; echo "✘ لا رابط تقرير في الرسالة"; exit 2; }
+  CODE="$(curl -s -o /dev/null -w '%{http_code}' -L --max-time 30 "$LINK" || true)"
+  if [ "$CODE" != "200" ]; then
+    record "$OUT" failed 2 "{\"why\":\"report-not-live\",\"http\":\"$CODE\"}"
+    echo "✘ صفحة التقرير غير منشورة بعد ($CODE): $LINK — لا إرسال قبل النشر"
+    exit 2
+  fi
   # الطباعة معطلة بأمر المالك (2026-11-03)؛ فيُرسل الملخص نصًّا بلا مرفق PDF.
   if [ -s "$PDF" ]; then
     python3 "$B/tools/telegram_send.py" --daily-report --date "$D" --file "$DIG" --document "$PDF" 2>&1 | tee "$B/logs/telegram-$D.out" | tail -3
