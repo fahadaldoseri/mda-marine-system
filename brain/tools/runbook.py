@@ -343,6 +343,14 @@ def run(root, date, only_phase=None, redo=None, only_steps=None):
             logdir = os.path.join(root, "logs/runbook", date)
             os.makedirs(logdir, exist_ok=True)
             logf = os.path.join(logdir, f"{s['id']}.log")
+            # 2026-11-19: كل محاولة كانت تكتب فوق سجل المحاولة السابقة، فضاع سبب أربع محاولات
+            # فاشلة لـB010 في يوم واحد. السجل الحالي يبقى باسمه (تقرؤه الشروط)، والسابق يُحفظ
+            # باسم مؤرخ قبل الكتابة، فلا يُقرأ سطر محاولة قديمة على أنه الحالي.
+            if os.path.exists(logf):
+                stamp = time.strftime("%Y%m%dT%H%M%SZ", time.gmtime(os.path.getmtime(logf)))
+                kept = os.path.join(logdir, f"{s['id']}.{stamp}.log")
+                if not os.path.exists(kept):
+                    os.replace(logf, kept)
             # ك-162 (طلب فهد 2026-10-24): لا يُكتب سرّ في أي سجل خطوة.
             # المخرج يمرّ على مرشّح الإخفاء tools/redact.py قبل الكتابة.
             try:
@@ -523,15 +531,34 @@ class RefIndex:
             self.by_name.setdefault(parts[-1], []).append(f)
             if f.endswith(".py"):
                 self.by_stem.setdefault(parts[-1][:-3], []).append(f)
+        self.unique_names = [(n, fs[0]) for n, fs in self.by_name.items() if len(fs) == 1 and len(n) >= 6]
+        # فهرس دقيق مكافئ لـ «name in text»: كل اسم ينتهي بامتداده، فيُبحث عن الامتداد ثم تُقارن الشرائح.
+        self.names_by_tail, self.untailed_names = {}, []
+        for n, f in self.unique_names:
+            if "." in n[1:]:
+                tail = "." + n.rsplit(".", 1)[1]
+                self.names_by_tail.setdefault(tail, {}).setdefault(len(n), {})[n] = f
+            else:
+                self.untailed_names.append((n, f))
 
     def refs(self, text, src):
         found = set()
         for m in PATH_RE.finditer(text):
             for h in self.suffix.get(m.group(1).lstrip("./"), []):
                 found.add(h)
-        for name, fs in self.by_name.items():
-            if len(fs) == 1 and len(name) >= 6 and name in text:
-                found.add(fs[0])
+        for tail, by_len in self.names_by_tail.items():
+            pos = text.find(tail)
+            while pos != -1:
+                end = pos + len(tail)
+                for n_len, names in by_len.items():
+                    if n_len <= end:
+                        hit = names.get(text[end - n_len:end])
+                        if hit:
+                            found.add(hit)
+                pos = text.find(tail, pos + 1)
+        for name, f in self.untailed_names:
+            if name in text:
+                found.add(f)
         if src.endswith(".py"):
             for m in re.finditer(r"^\s*(?:from|import)\s+([A-Za-z_][\w]*)", text, re.M):
                 fs = self.by_stem.get(m.group(1), [])
@@ -600,6 +627,13 @@ def reachability(root, m, files):
             if to_rel(p) in idx.files:
                 seeds.add(to_rel(p))
 
+    _memo = {}
+
+    def _refs_of(cur):
+        if cur not in _memo:
+            _memo[cur] = idx.refs(read_text(root, cur), cur)
+        return _memo[cur]
+
     def bfs(start, code_only):
         seen, queue = set(start), list(start)
         while queue:
@@ -609,7 +643,7 @@ def reachability(root, m, files):
                 continue
             if code_only and ext in (".md",) and not cur.startswith("runbook/prompts/"):
                 continue  # الوثائق لا تُعدّ «استدعاءً» في المرحلة الأولى
-            for h in idx.refs(read_text(root, cur), cur):
+            for h in _refs_of(cur):
                 if h not in seen:
                     seen.add(h)
                     queue.append(h)

@@ -144,13 +144,21 @@ approved = [e for e in reg["entries"] if e.get("status") == "approved"]
 
 # 2) كل بند معتمد يمنع فعلًا
 blocked_ok, not_blocking = [], []
-probe = pathlib.Path(tempfile.gettempdir()) / "vocab_probe.md"
-for e in approved:
-    term = str(e["term"])
+import concurrent.futures as _cf, os as _os
+_probe_dir = pathlib.Path(tempfile.mkdtemp(prefix="vocab_probe_"))
+
+
+def _probe_rc(i_term):
+    i, term = i_term
+    probe = _probe_dir / f"vocab_probe_{i}.md"
     probe.write_text(f"# عنوان\n## قسم\n- {term} اختبار الإنفاذ.\n", encoding="utf-8")
-    rc = subprocess.run([sys.executable, str(B / "validators" / "check_prose_defects.py"), "--md", str(probe)],
-                        capture_output=True, text=True).returncode
-    (blocked_ok if rc == 2 else not_blocking).append(term)
+    return term, subprocess.run([sys.executable, str(B / "validators" / "check_prose_defects.py"), "--md", str(probe)],
+                                capture_output=True, text=True).returncode
+
+
+with _cf.ThreadPoolExecutor(max_workers=_os.cpu_count() or 1) as _ex:
+    for term, rc in _ex.map(_probe_rc, enumerate(str(e["term"]) for e in approved)):
+        (blocked_ok if rc == 2 else not_blocking).append(term)
 if not approved:
     bad("إنفاذ البنود المعتمدة", "لا بنود معتمدة في السجل")
 elif not not_blocking:

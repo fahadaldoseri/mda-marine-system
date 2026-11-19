@@ -583,7 +583,8 @@
           "tools/alert_monitor.sh",
           "tools/derive_event_links.py",
           "backups/macr-system-old-2026-10-15/scripts/example.py",
-          "tools/sync_server_to_repo.py"
+          "tools/sync_server_to_repo.py",
+          "tools/cloud_env_prep.sh"
         ],
         "gates": [],
         "tests": [
@@ -1771,7 +1772,8 @@
           "tests/test_gate_verdict.py",
           "tests/test_content_fidelity_units.py",
           "tests/test_write_prompt.py",
-          "tests/test_g030_code_spaces.py"
+          "tests/test_g030_code_spaces.py",
+          "tests/test_no_dead_gate_commands.py"
         ]
       },
       "on_fail": "stop",
@@ -4003,7 +4005,7 @@
       "command": [
         "bash",
         "-lc",
-        "B=\"$PWD\"; export B SITE; cd \"$SITE\" && python3 \"$B/tools/sync_card_layers.py\" --date \"$D\" && python3 \"$B/tools/build_hero_kpis.py\" --date \"$D\" --apply && python3 generator/sync_from_brain.py --date {date} && python3 generator/build_site.py && python3 \"$B/validators/check_card_counters.py\" --date \"$D\" --dist-root \"$SITE/dist\" && python3 \"$B/validators/check_kpi_layers.py\" --date \"$D\" --dist-root \"$SITE/dist\" --brain \"$B\" && python3 \"$B/validators/check_map_note_counts.py\" --date \"$D\" --site \"$SITE\"; rc=$?; exit $rc && python3 \"$B/tests/test_map_location_term.py\" --date \"$D\" && python3 \"$B/tests/test_map_cluster.py\""
+        "B=\"$PWD\"; export B SITE; cd \"$SITE\" && python3 \"$B/tools/sync_card_layers.py\" --date \"$D\" && python3 \"$B/tools/build_hero_kpis.py\" --date \"$D\" --apply && python3 generator/sync_from_brain.py --date {date} && python3 generator/build_site.py && python3 \"$B/validators/check_card_counters.py\" --date \"$D\" --dist-root \"$SITE/dist\" && python3 \"$B/validators/check_kpi_layers.py\" --date \"$D\" --dist-root \"$SITE/dist\" --brain \"$B\" && python3 \"$B/validators/check_map_note_counts.py\" --date \"$D\" --site \"$SITE\" && python3 \"$B/tests/test_map_location_term.py\" --date \"$D\" && python3 \"$B/tests/test_map_cluster.py\"; rc=$?; exit $rc"
       ],
       "ok_rc": [
         0
@@ -4604,16 +4606,19 @@
           "ف1–ف5 — بوابة التحقق"
         ],
         "files": [
-          "tools/final_gate.sh"
+          "tools/final_gate.sh",
+          "tools/source_counts.py"
         ],
         "gates": [],
-        "tests": []
+        "tests": [
+          "tests/test_source_counts_idempotent.py"
+        ]
       },
       "on_fail": "stop",
       "command": [
         "bash",
         "-lc",
-        "B=\"$PWD\"; export B SITE; python3 \"$B/tools/source_counts.py\" --date \"$D\" --check; rc=$?; [ $rc -eq 0 ] || exit $rc; python3 -m pytest -q tests/test_source_totals_governed.py; exit $?"
+        "B=\"$PWD\"; export B SITE; python3 \"$B/tools/source_counts.py\" --date \"$D\" --check; rc=$?; [ $rc -eq 0 ] || exit $rc; python3 -m pytest -q tests/test_source_totals_governed.py tests/test_source_counts_idempotent.py tests/test_en_translator_deterministic.py; exit $?"
       ],
       "ok_rc": [
         0
@@ -5300,7 +5305,7 @@
       "command": [
         "bash",
         "-lc",
-        "B=\"$PWD\"; export B SITE; mkdir -p \"$B/logs/runbook/{date}\"; python3 \"$B/tools/regression_gate.py\" --root \"$B\" --until الكل --out \"$B/logs/runbook/{date}/G064-regression.json\"; rc=$?; exit $rc ; python3 - <<'PY'\nimport pathlib\nok = all(\"CMD_SHAPE_V1\" in pathlib.Path(f).read_text(encoding=\"utf-8\") for f in (\"tools/runbook.py\",))\nprint(\"CMD_SHAPE_V1: \" + (\"مرتبط\" if ok else \"غائب\"))\nraise SystemExit(0 if ok else 2)\nPY"
+        "B=\"$PWD\"; export B SITE; mkdir -p \"$B/logs/runbook/{date}\"; python3 \"$B/tools/regression_gate.py\" --root \"$B\" --until الكل --out \"$B/logs/runbook/{date}/G064-regression.json\"; rc=$?; [ $rc -eq 0 ] || exit $rc; python3 - <<'PY'\nimport pathlib\nok = all(\"CMD_SHAPE_V1\" in pathlib.Path(f).read_text(encoding=\"utf-8\") for f in (\"tools/runbook.py\",))\nprint(\"CMD_SHAPE_V1: \" + (\"مرتبط\" if ok else \"غائب\"))\nraise SystemExit(0 if ok else 2)\nPY"
       ],
       "ok_rc": [
         0
@@ -5597,7 +5602,8 @@
           "tools/publish_fallback.sh",
           "tools/publish_site.sh",
           "validators/check_en_parity.py",
-          "tests/test_publish_preflight_freshness.py"
+          "tests/test_publish_preflight_freshness.py",
+          "tools/publish_verdict.py"
         ],
         "gates": [],
         "tests": [
@@ -5605,7 +5611,8 @@
           "tests/test_no_publish_without_runbook.sh",
           "tests/test_publish_channels.py",
           "tests/test_publish_contract.py",
-          "tests/test_delivery_gate_refresh.py"
+          "tests/test_delivery_gate_refresh.py",
+          "tests/test_publish_verdict.py"
         ]
       },
       "on_fail": "stop",

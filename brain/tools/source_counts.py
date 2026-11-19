@@ -295,6 +295,10 @@ def inject(date: str, c: dict) -> tuple[bool, str]:
     gen = [f"- {line_ar(c)}"] + ([f"- {fl}"] if fl else [])
     # إزالة النسخ المُولَّدة سابقًا في كل الملف، سواء كانت بنقطة أو بلا نقطة.
     t = re.sub(r"^-?\s*(?:المصادر:|تشغيل منقوص مُفصح:).*\n?", "", t, flags=re.M)
+    # ك-جديد (2026-11-19): السطر يُحقن بعد فاصل «\n\n»، فإزالته وحده كانت تُبقي الفاصل
+    # فيزيد سطرًا فارغًا في كل تشغيل (الكتابة غير متساوية القوى)، فتتغيّر بصمة النص بعد
+    # تسجيلها. الإزالة الآن تشمل الفاصل المحقون معه، فالكتابة المتكررة تعطي البايتات نفسها.
+    t = re.sub(r"\n\n^إجمالي الوقائع المرمزة:[^\n]*", "", t, flags=re.M)
     t = re.sub(r"^إجمالي الوقائع المرمزة:.*\n?", "", t, flags=re.M)
     if c.get("manual_reference_present"):
         manual_n = int(c.get("manual_reference_count") or len(c.get("manual_reference") or []))
@@ -302,7 +306,7 @@ def inject(date: str, c: dict) -> tuple[bool, str]:
                    f"الناجحة: {c['ok']} · المتعذّر: {c['failed']} · المرجعية اليدوية: {manual_n}.\n")
         t = re.sub(r"^- إجمالي المصادر المعتمدة:.*\n?", summary, t, flags=re.M)
     t = re.sub(r"^.*<!--\s*/?مصادر-تلقائي\s*-->.*\n?", "", t, flags=re.M)
-    m = re.search(r"^##\s+ما لم يُحسم\s*$", t, re.M)
+    m = re.search(r"^##\s+ما لم يُحسم[ \t]*$", t, re.M)
     if not m:
         return False, "قسم «ما لم يُحسم» غير موجود — لا يُكتب الرقم في مكان غير معتمد"
     nxt = re.search(r"^##\s+", t[m.end():], re.M)
@@ -315,7 +319,7 @@ def inject(date: str, c: dict) -> tuple[bool, str]:
     t = (t[:m.end()] + ("\n\n" + body if body else "") + "\n\n" + "\n".join(gen)
          + "\n\n" + t[end:].lstrip("\n"))
     if el:
-        sm = re.search(r"^##\s+المصادر والمراجع\s*$", t, re.M)
+        sm = re.search(r"^##\s+المصادر والمراجع[ \t]*$", t, re.M)
         if sm:
             t = t[:sm.end()] + "\n\n" + el + t[sm.end():]
         else:

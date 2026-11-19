@@ -15,6 +15,9 @@ esac
 set -uo pipefail
 B="${BRAIN_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 SITE="${SITE_DIR:-$(dirname "$B")/seawatch}"
+# 2026-11-19: البوابة تستدعي validators/ وtools/ بمسارات نسبية؛ تشغيلها من جذر المستودع
+# كان يُسقط أربع بوابات بـ«No such file». الدليل العامل يُثبَّت على brain أيًا كان مكان الاستدعاء.
+cd "$B" || { echo "✘ تعذّر دخول دليل brain: $B" >&2; exit 2; }
 D="${1:-$(date -u +%F)}"
 BUILD=1
 for a in "$@"; do [ "$a" = "--no-build" ] && BUILD=0; done
@@ -303,6 +306,9 @@ step "تطابق النص المبني مع النص النهائي" 2 python3 "
 step "تغطية مسارات المصادر" 2 python3 "$B/validators/check_source_route_coverage.py" --brain "$B" --date "$D"
 step "تغطية المصادر في دفتر الوقائع" 2 python3 "$B/validators/check_source_daily_coverage.py" \
   --brain "$B" --date "$D" --days 30 --json-out "$LOGDIR/source-daily-coverage.json"
+# ك-449: مدقّق ترجمة الشيفرة كان قائمًا بلا استدعاء في بوابة التسليم، فأوقف التدقيق
+# الأسبوعي بتحذير إنفاذ حقيقي («مدقّق غير مُستدعى»). القاعدة: مدقّق بلا بوابة = معطّل.
+step "ترجمة الشيفرة (لا ملف Python معطوب)" 2 python3 "$B/validators/check_python_syntax.py"
 echo "----- الخلاصة -----" | tee -a "$REP"
 cat "$REP" | tail -14
 write_gate_json final
@@ -332,6 +338,3 @@ echo "السجلات: $LOGDIR"
 # ── حلقة التعلم الذاتي (مهارة superpowers-method) — لا تمنع، وتسجّل في كل تشغيل ──
 python3 "$B/tools/skill_lessons.py" --date "$D" || true
 exit "$WORST"
-# ك-449: مدقّق ترجمة الشيفرة كان قائمًا بلا استدعاء في بوابة التسليم، فأوقف التدقيق
-# الأسبوعي بتحذير إنفاذ حقيقي («مدقّق غير مُستدعى»). القاعدة: مدقّق بلا بوابة = معطّل.
-step "ترجمة الشيفرة (لا ملف Python معطوب)" 2 python3 "$B/validators/check_python_syntax.py"
