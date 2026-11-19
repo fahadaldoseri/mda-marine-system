@@ -146,6 +146,17 @@ def _hero_kpi_line(card: dict, registry: dict[str, dict]) -> str:
     return f"{label} {value}".strip()
 
 
+def more_line(n):
+    """سطر الوقائع الباقية بعبارة عربية سليمة بدل «(و1 غيرها …)» (فهد، 19 نوفمبر)."""
+    if n == 1:
+        return "وواقعة أخرى في التقرير الكامل."
+    if n == 2:
+        return "وواقعتان أخريان في التقرير الكامل."
+    if 3 <= n <= 10:
+        return f"و{n} وقائع أخرى في التقرير الكامل."
+    return f"و{n} واقعة أخرى في التقرير الكامل."
+
+
 def build(meta, date, base, detail=True, delivery_note="", max_items=3):
     cut = dt.datetime.strptime(meta["generated_label"], "%Y-%m-%dT%H:%M:%SZ")
     start = cut - dt.timedelta(hours=24)
@@ -167,11 +178,13 @@ def build(meta, date, base, detail=True, delivery_note="", max_items=3):
         show_body = detail and body and body != title
         # نقطة في آخر البند الخالي من التفاصيل: كل بند جملة مستقلة، وإلا دمج مدقق
         # الأسلوب البنود الثلاثة في جملة واحدة تتجاوز 35 كلمة (G045، 19 نوفمبر).
-        lines += [f"{i}) {title} ({c['code']})" + (":" if show_body else ".")]
+        # الرمز بلا أقواس بعد كلمة عربية: القوس بعد رمز لاتيني في سطر عربي يُقلب في
+        # تلغرام فيظهر «(MN-… 18/11/2026 ·» (لقطة فهد، 19 نوفمبر).
+        lines += [f"{i}) {title}، الرمز {c['code']}" + (":" if show_body else ".")]
         if show_body:
             lines.append(body)
     if len(changes) > max_items:
-        lines.append(f"(و{len(changes) - max_items} غيرها في التقرير الكامل)")
+        lines.append(more_line(len(changes) - max_items))
     registry = _hero_kpi_registry()
     kp = " · ".join(
         _hero_kpi_line(card, registry) for card in _hero_kpi_items(meta)[:3]
