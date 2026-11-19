@@ -175,6 +175,21 @@ def check_probability(brain: pathlib.Path, date: str, out: list, blockers: list)
     if not hyps:
         blockers.append('لا فرضيات في واجهة اليوم لفحص النسب')
         return
+    # يوم لا تصدر فيه المادة الرسمية تقديرًا رقميًا: الحالة المعلنة في الأداة الحاكمة
+    # (`tools/hypothesis_distribution.py`) بنوع موحّد unmeasurable وقاعدة نصية، بلا أي نسبة.
+    # كان الحارس يقرأ النص «لا يمكن قياس الاحتمال» نسبةً مفقودة فيمنع إعلانًا معتمدًا.
+    # الإعلان الناقص أو المخلوط يبقى مانعًا برسالة الأداة الحاكمة نفسها.
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / 'tools'))
+    import hypothesis_distribution as _hd
+    try:
+        declared = _hd._is_declared_no_estimate(meta)
+    except _hd.DistributionError as exc:
+        blockers.append('إعلان الفرضيات غير صالح: %s' % exc)
+        return
+    if declared:
+        out.append(('الفرضيات', len(hyps), 'web/meta/%s.json' % date,
+                    'إعلان عدم تقدير معتمد', 'معلن'))
+        return
     shares = []
     for h in hyps:
         m = re.match(r'(\d+)', str(h.get('likelihood') or ''))

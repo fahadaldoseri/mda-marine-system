@@ -137,3 +137,31 @@ def test_zones_count_mismatch_is_blocked(sandbox):
     mutate_json(sandbox / f'web/meta/{DATE}.json', drop_zone)
     _, blockers = gate.collect(sandbox, DATE)
     assert any('عدد القطاعات' in b for b in blockers), blockers
+
+def _declare_no_estimate(d):
+    import hypothesis_distribution as hd
+    d['distribution_rule'] = hd.NO_ESTIMATE_RULE
+    for h in d['hypotheses']:
+        h['likelihood'] = 'لا يمكن قياس الاحتمال من المادة الرسمية.'
+        h['likelihood_kind'] = hd.NO_ESTIMATE_KIND
+        h.pop('likelihood_range', None)
+
+
+def test_declared_no_estimate_is_accepted(sandbox):
+    """إعلان عدم التقدير المعتمد (2026-11-12 و2026-11-18) لا يُقرأ نسبة مفقودة."""
+    sys.path.insert(0, str(BRAIN / 'tools'))
+    mutate_json(sandbox / f'web/meta/{DATE}.json', _declare_no_estimate)
+    out, blockers = gate.collect(sandbox, DATE)
+    assert not any('فرضية' in b or 'الفرضيات' in b or 'النسب' in b for b in blockers), blockers
+    assert any(row[0] == 'الفرضيات' and row[-1] == 'معلن' for row in out)
+
+
+def test_mixed_no_estimate_declaration_is_blocked(sandbox):
+    sys.path.insert(0, str(BRAIN / 'tools'))
+
+    def mixed(d):
+        _declare_no_estimate(d)
+        d['hypotheses'][0]['likelihood_kind'] = 'point_from_range'
+    mutate_json(sandbox / f'web/meta/{DATE}.json', mixed)
+    _, blockers = gate.collect(sandbox, DATE)
+    assert any('إعلان الفرضيات غير صالح' in b for b in blockers), blockers
