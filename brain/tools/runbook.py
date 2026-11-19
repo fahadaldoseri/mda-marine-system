@@ -343,6 +343,14 @@ def run(root, date, only_phase=None, redo=None, only_steps=None):
             logdir = os.path.join(root, "logs/runbook", date)
             os.makedirs(logdir, exist_ok=True)
             logf = os.path.join(logdir, f"{s['id']}.log")
+            # 2026-11-19: كل محاولة كانت تكتب فوق سجل المحاولة السابقة، فضاع سبب أربع محاولات
+            # فاشلة لـB010 في يوم واحد. السجل الحالي يبقى باسمه (تقرؤه الشروط)، والسابق يُحفظ
+            # باسم مؤرخ قبل الكتابة، فلا يُقرأ سطر محاولة قديمة على أنه الحالي.
+            if os.path.exists(logf):
+                stamp = time.strftime("%Y%m%dT%H%M%SZ", time.gmtime(os.path.getmtime(logf)))
+                kept = os.path.join(logdir, f"{s['id']}.{stamp}.log")
+                if not os.path.exists(kept):
+                    os.replace(logf, kept)
             # ك-162 (طلب فهد 2026-10-24): لا يُكتب سرّ في أي سجل خطوة.
             # المخرج يمرّ على مرشّح الإخفاء tools/redact.py قبل الكتابة.
             try:
