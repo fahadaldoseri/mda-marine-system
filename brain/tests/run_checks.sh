@@ -237,6 +237,7 @@ t "فاحص الإملاء بلا إنذار كاذب" python3 tests/test_orthog
 t "التحرير الآلي يحفظ التمهيد ويرفض تغيّر الأرقام" python3 tests/test_edit_pass.py
 t "استخراج نص الأسطح بمحرك العرض بلا عيوب وهمية" python3 tests/test_audit_extract_no_phantom.py
 t "قرار 9: بطاقات IMO الدائمة وسجل التحديثات" python3 tests/test_owner9_imo_cards.py
+t "تسميات مصدر البطاقات خالية من العبارات الداخلية (ف4.8)" python3 tests/test_card_registry_reader_labels.py
 
 echo "14) محرّك الكتيب والمانيفست"
 t "عقد الجذر الصريح: موجب من /tmp وسالب للمفقود/المخالف" python3 tests/test_root_contract_phase1.py
