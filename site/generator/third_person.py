@@ -36,7 +36,6 @@ IMPERATIVES = {
     "انشروا": "يُنشر", "احفظوا": "يُحفظ", "ارصدوا": "يُرصد",
     "انتظروا": "يُنتظر", "ضاعفوا": "يُضاعف", "اعتمدوا": "يُعتمد",
     "توقفوا": "يُتوقف",
-    "عزّزوا": "يُعزَّز", "عززوا": "يُعزَّز",
 }
 
 # صيغة المصدر لسطر «الإجراء المطلوب» في رسالة تلغرام (قرار المالك، 19 نوفمبر 2026):
@@ -73,10 +72,16 @@ MASDAR = {
 }
 
 _KEYS = sorted(IMPERATIVES, key=len, reverse=True)
-# الفعل قد يسبقه حرف عطف ملتصق («وأبلغوا»، «فراجعوا»)؛ يبقى الحرف ويُحوَّل الفعل.
 _PATTERNS = [
-    (re.compile(r"(?<![\u0621-\u064A])([وف]?)" + re.escape(k) + r"(?![\u0621-\u064A])"), IMPERATIVES[k])
+    (re.compile(r"(?<![\u0621-\u064A])" + re.escape(k) + r"(?![\u0621-\u064A])"), IMPERATIVES[k])
     for k in _KEYS
+]
+
+# أنماط المصدر: الفعل قد يسبقه حرف عطف ملتصق («وأبلغوا»، «فراجعوا»).
+# مستقلة عن _PATTERNS حتى لا يتغير نص الموقع (ولا ترجمته) بهذا التحويل.
+_MASDAR_PATTERNS = [
+    (re.compile(r"(?<![\u0621-\u064A])([وف]?)" + re.escape(k) + r"(?![\u0621-\u064A])"), MASDAR[k])
+    for k in sorted(MASDAR, key=len, reverse=True)
 ]
 
 
@@ -86,7 +91,7 @@ def to_third_person(text):
         return text
     out = text
     for pat, rep in _PATTERNS:
-        out = pat.sub(lambda m, r=rep: m.group(1) + r, out)
+        out = pat.sub(rep, out)
     return out
 
 
@@ -96,13 +101,8 @@ def to_masdar(text):
     if not text or not isinstance(text, str):
         return text
     out = text
-    for k in _KEYS:
-        m_word = MASDAR.get(k)
-        if not m_word:
-            continue
-        pat = re.compile(r"(?<![\u0621-\u064A])([وف]?)" + re.escape(k) + r"(?![\u0621-\u064A])")
-
-        def rep(m, w=m_word):
+    for pat, word in _MASDAR_PATTERNS:
+        def rep(m, w=word):
             pre = m.group(1)
             if pre and not w.startswith("ال"):
                 return pre + "ال" + w
@@ -111,11 +111,19 @@ def to_masdar(text):
     return to_third_person(out)
 
 
+def masdar_leftovers(text):
+    """أفعال أمر باقية بعد التحويل، ومنها المسبوقة بحرف عطف (حارس رسالة تلغرام)."""
+    if not text:
+        return []
+    found = [m.group(0) for pat, _w in _MASDAR_PATTERNS for m in pat.finditer(text)]
+    return sorted(set(found + violations(text)))
+
+
 def violations(text):
     """أفعال الأمر المخاطبة الموجودة في النص (للحارس والقياس)."""
     if not text:
         return []
     found = []
     for pat, _rep in _PATTERNS:
-        found += [m.group(0) for m in pat.finditer(text)]
+        found += pat.findall(text)
     return sorted(set(found))

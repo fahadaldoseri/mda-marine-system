@@ -43,9 +43,9 @@ def main() -> int:
         got = dig.action_line(src)
         if got != want:
             fails.append(f"المصدر: «{got}» ≠ «{want}»")
-        if tp.violations(got):
-            fails.append(f"بقي فعل أمر: {tp.violations(got)}")
-    if "وأبلغوا" not in tp.violations("راجعوا البلاغ، وأبلغوا فورًا"):
+        if tp.masdar_leftovers(got):
+            fails.append(f"بقي فعل أمر: {tp.masdar_leftovers(got)}")
+    if "وأبلغوا" not in tp.masdar_leftovers("راجعوا البلاغ، وأبلغوا فورًا"):
         fails.append("الحارس لا يكشف «وأبلغوا»")
     meta = {"title": "ت", "version": "و ب 1", "generated_label": "2026-11-19T03:40:00Z", "threat_level": "متوسط",
             "changes": [], "decision_card": {"action": ["ارفعوا التأهب عند عبور مضيق هرمز."]}}
