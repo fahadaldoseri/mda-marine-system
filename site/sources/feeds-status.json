@@ -1,9 +1,9 @@
 {
- "date": "2026-11-18",
+ "date": "2026-11-19",
  "status": "degraded",
  "checked": 60,
- "ok": 54,
- "failed": 6,
+ "ok": 55,
+ "failed": 5,
  "browser_only": [],
  "manual_reference": [
   39,
@@ -17,9 +17,9 @@
  ],
  "empty": [],
  "stale_days_limit": 14,
- "fail_ratio": 0.1,
+ "fail_ratio": 0.083,
  "fail_ratio_limit": 0.2,
- "items": 1523,
+ "items": 1527,
  "checked_feeds": [
   {
    "num": 1,
@@ -40,8 +40,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://r.jina.ai/https://www.ukmto.org/ukmto-products/warnings/2026",
-   "items_count": 10,
-   "content_chars": 1418,
+   "items_count": 11,
+   "content_chars": 1503,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -52,8 +52,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://r.jina.ai/https://www.ukmto.org/ukmto-products/advisories/2026",
-   "items_count": 5,
-   "content_chars": 1028,
+   "items_count": 6,
+   "content_chars": 1136,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -64,8 +64,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://r.jina.ai/https://www.ukmto.org/ukmto-products/weekly-reports/2026",
-   "items_count": 5,
-   "content_chars": 1183,
+   "items_count": 6,
+   "content_chars": 1291,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -88,8 +88,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://straits.live/feed.xml",
-   "items_count": 51,
-   "content_chars": 24456,
+   "items_count": 52,
+   "content_chars": 24785,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -101,7 +101,7 @@
    "via": "primary",
    "fetched_url": "https://straits.live/briefs/feed.xml",
    "items_count": 60,
-   "content_chars": 110929,
+   "content_chars": 110409,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -113,7 +113,7 @@
    "via": "primary",
    "fetched_url": "https://gcaptain.com/feed/",
    "items_count": 12,
-   "content_chars": 2930,
+   "content_chars": 3159,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -124,8 +124,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://services.tradewindsnews.com/api/feed/rss",
-   "items_count": 184,
-   "content_chars": 112316,
+   "items_count": 186,
+   "content_chars": 113865,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -137,7 +137,7 @@
    "via": "primary",
    "fetched_url": "https://www.seatrade-maritime.com/rss.xml",
    "items_count": 50,
-   "content_chars": 4167,
+   "content_chars": 4175,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -149,7 +149,7 @@
    "via": "primary",
    "fetched_url": "https://www.ajnet.me/rss",
    "items_count": 25,
-   "content_chars": 10033,
+   "content_chars": 10119,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -161,7 +161,7 @@
    "via": "primary",
    "fetched_url": "https://www.aljazeera.com/xml/rss/all.xml",
    "items_count": 25,
-   "content_chars": 7485,
+   "content_chars": 7647,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -174,7 +174,7 @@
    "fetched_url": "https://ofac.treasury.gov/rss.xml",
    "items_count": 10,
    "content_chars": 206298,
-   "latest_age_days": 643,
+   "latest_age_days": 644,
    "tls_verification": "verified"
   },
   {
@@ -186,7 +186,7 @@
    "fetched_url": "https://shipnext.com/api/v2/fleet/public/9315159",
    "items_count": 1,
    "content_chars": 3093,
-   "latest_age_days": 93,
+   "latest_age_days": 94,
    "tls_verification": "verified"
   },
   {
@@ -196,8 +196,8 @@
    "ok": true,
    "via": "fallback:jina.ai/alarabiya-rss",
    "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
-   "items_count": 5,
-   "content_chars": 108099,
+   "items_count": 16,
+   "content_chars": 124399,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -208,8 +208,8 @@
    "ok": true,
    "via": "fallback:jina.ai/alarabiya-rss",
    "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
-   "items_count": 5,
-   "content_chars": 108099,
+   "items_count": 16,
+   "content_chars": 124399,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -218,10 +218,10 @@
    "name": "قناة العربية",
    "primary_url": "https://www.alarabiya.net/feed/rss2/ar/aswaq.xml",
    "ok": true,
-   "via": "fallback:jina.ai/alarabiya-rss",
+   "via": "fallback:jina.ai/alarabiya-rss+curl",
    "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
-   "items_count": 5,
-   "content_chars": 108099,
+   "items_count": 16,
+   "content_chars": 124399,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -233,7 +233,7 @@
    "via": "primary",
    "fetched_url": "https://www.bahrain.bh/wps/portal/en/BNP/RssFeedReader",
    "items_count": 8,
-   "content_chars": 3161,
+   "content_chars": 3160,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -259,7 +259,7 @@
    "fetched_url": "http://feeds.feedburner.com/alayam-news-list-all",
    "items_count": 15,
    "content_chars": 7042,
-   "latest_age_days": 1039,
+   "latest_age_days": 1040,
    "tls_verification": "verified"
   },
   {
@@ -271,7 +271,7 @@
    "fetched_url": "http://feeds.feedburner.com/alayam-online-international-news",
    "items_count": 8,
    "content_chars": 3675,
-   "latest_age_days": 1039,
+   "latest_age_days": 1040,
    "tls_verification": "verified"
   },
   {
@@ -282,7 +282,7 @@
    "via": "browser",
    "fetched_url": "https://www.alayam.com/pages/rss",
    "items_count": 4,
-   "content_chars": 2225,
+   "content_chars": 2205,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -294,7 +294,7 @@
    "via": "primary",
    "fetched_url": "https://akhbar-alkhaleej.com/",
    "items_count": 47,
-   "content_chars": 6997,
+   "content_chars": 6783,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -306,7 +306,7 @@
    "via": "primary",
    "fetched_url": "https://www.albiladpress.com/rss",
    "items_count": 100,
-   "content_chars": 16958,
+   "content_chars": 16962,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -318,7 +318,7 @@
    "via": "primary",
    "fetched_url": "https://www.gdnonline.com",
    "items_count": 49,
-   "content_chars": 20554,
+   "content_chars": 20362,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -330,7 +330,7 @@
    "via": "browser",
    "fetched_url": "https://qna.org.qa/en/RSS-Feeds",
    "items_count": 4,
-   "content_chars": 2902,
+   "content_chars": 2901,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -341,9 +341,9 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://qna.org.qa/en/Pages/RSS-Feeds/Analysis-and-Reports",
-   "items_count": 49,
-   "content_chars": 30361,
-   "latest_age_days": 1,
+   "items_count": 50,
+   "content_chars": 30911,
+   "latest_age_days": 0,
    "tls_verification": "verified"
   },
   {
@@ -354,7 +354,7 @@
    "via": "primary",
    "fetched_url": "https://qna.org.qa/en/Pages/RSS-Feeds/Qatar",
    "items_count": 50,
-   "content_chars": 28054,
+   "content_chars": 27485,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -366,7 +366,7 @@
    "via": "official-telegram:wamnews_en",
    "fetched_url": "https://t.me/s/wamnews_en",
    "items_count": 20,
-   "content_chars": 3769,
+   "content_chars": 3565,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -378,7 +378,7 @@
    "via": "official-telegram:wamnews_en",
    "fetched_url": "https://t.me/s/wamnews_en",
    "items_count": 20,
-   "content_chars": 3769,
+   "content_chars": 3565,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -389,8 +389,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://www.spa.gov.sa/rss.xml",
-   "items_count": 12,
-   "content_chars": 135626,
+   "items_count": 10,
+   "content_chars": 135047,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -401,8 +401,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://www.spa.gov.sa/feed",
-   "items_count": 12,
-   "content_chars": 135626,
+   "items_count": 10,
+   "content_chars": 135047,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -410,14 +410,13 @@
    "num": 27,
    "name": "وكالة الأنباء الكويتية (كونا)",
    "primary_url": "https://www.kuna.net.kw",
-   "ok": false,
-   "via": null,
-   "fetched_url": null,
-   "items_count": 0,
-   "content_chars": 0,
+   "ok": true,
+   "via": "official-page:jina.ai/kuna",
+   "fetched_url": "https://r.jina.ai/https://www.kuna.net.kw",
+   "items_count": 8,
+   "content_chars": 757,
    "latest_age_days": null,
-   "tls_verification": "verified",
-   "block_reason": "all routes failed: primary: HTTP Error 503: Service Unavailable · curl: derived items without real content (1) · curl أعاد محتوى غير مقروء | official-page:jina.ai/kuna: derived items without real content (0) · curl: derived items without real content (0) · curl أعاد محتوى غير مقروء | browser: derived items without real content (1)"
+   "tls_verification": "verified"
   },
   {
    "num": 28,
@@ -439,7 +438,7 @@
    "via": "fallback:omannews-home",
    "fetched_url": "https://omannews.gov.om/",
    "items_count": 49,
-   "content_chars": 8371,
+   "content_chars": 8179,
    "latest_age_days": null,
    "tls_verification": "disabled_source_28_only"
   },
@@ -477,7 +476,7 @@
    "fetched_url": "https://combinedmaritimeforces.com/feed/",
    "items_count": 15,
    "content_chars": 47682,
-   "latest_age_days": 5,
+   "latest_age_days": 6,
    "tls_verification": "verified"
   },
   {
@@ -489,7 +488,7 @@
    "fetched_url": "https://icc-ccs.org/feed/",
    "items_count": 10,
    "content_chars": 50781,
-   "latest_age_days": 33,
+   "latest_age_days": 34,
    "tls_verification": "verified"
   },
   {
@@ -524,7 +523,7 @@
    "via": "primary",
    "fetched_url": "https://splash247.com/feed/",
    "items_count": 10,
-   "content_chars": 7908,
+   "content_chars": 8026,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -536,7 +535,7 @@
    "via": "primary",
    "fetched_url": "https://splash247.com/feed/atom/",
    "items_count": 10,
-   "content_chars": 5198,
+   "content_chars": 5184,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -574,7 +573,7 @@
    "via": "primary",
    "fetched_url": "https://www.marinelink.com/news/rss",
    "items_count": 10,
-   "content_chars": 4400,
+   "content_chars": 4410,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -587,7 +586,7 @@
    "fetched_url": "https://www.marinelink.com/blogs/rss?type=video",
    "items_count": 10,
    "content_chars": 7038,
-   "latest_age_days": 4,
+   "latest_age_days": 5,
    "tls_verification": "verified"
   },
   {
@@ -598,7 +597,7 @@
    "via": "primary",
    "fetched_url": "https://www.jpost.com/rss",
    "items_count": 3,
-   "content_chars": 9169,
+   "content_chars": 9180,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -610,8 +609,8 @@
    "via": "primary",
    "fetched_url": "https://www.jpost.com/rss/rssfeedsmiddleeastnews.aspx",
    "items_count": 30,
-   "content_chars": 34534,
-   "latest_age_days": 0,
+   "content_chars": 33966,
+   "latest_age_days": -1,
    "tls_verification": "verified"
   },
   {
@@ -634,7 +633,7 @@
    "via": "primary",
    "fetched_url": "https://news.usni.org/feed",
    "items_count": 30,
-   "content_chars": 190242,
+   "content_chars": 179045,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -646,7 +645,7 @@
    "via": "primary",
    "fetched_url": "https://www.navalnews.com/feed/",
    "items_count": 10,
-   "content_chars": 50276,
+   "content_chars": 53021,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -657,8 +656,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://maritime-executive.com/",
-   "items_count": 33,
-   "content_chars": 19528,
+   "items_count": 28,
+   "content_chars": 19700,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -670,8 +669,8 @@
    "via": "primary",
    "fetched_url": "https://windward.ai/feed/",
    "items_count": 12,
-   "content_chars": 75078,
-   "latest_age_days": 0,
+   "content_chars": 75038,
+   "latest_age_days": 1,
    "tls_verification": "verified"
   },
   {
@@ -747,7 +746,7 @@
    "via": "primary",
    "fetched_url": "https://www.understandingwar.org/wp-json/wp/v2/posts?per_page=10",
    "items_count": 10,
-   "content_chars": 289802,
+   "content_chars": 303380,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -760,7 +759,7 @@
    "fetched_url": "https://sanaacenter.org/feed/",
    "items_count": 20,
    "content_chars": 6158,
-   "latest_age_days": 1,
+   "latest_age_days": 2,
    "tls_verification": "verified"
   },
   {
@@ -771,7 +770,7 @@
    "via": "primary",
    "fetched_url": "https://www.navytimes.com/feed/",
    "items_count": 10,
-   "content_chars": 50021,
+   "content_chars": 45558,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -782,8 +781,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://www.bairdmaritime.com/feed/",
-   "items_count": 7,
-   "content_chars": 20324,
+   "items_count": 2,
+   "content_chars": 4132,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -795,7 +794,7 @@
    "via": "primary",
    "fetched_url": "https://rss.nytimes.com/services/xml/rss/nyt/MiddleEast.xml",
    "items_count": 20,
-   "content_chars": 16084,
+   "content_chars": 15804,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -807,7 +806,7 @@
    "via": "primary",
    "fetched_url": "https://feeds.bloomberg.com/markets/news.rss",
    "items_count": 20,
-   "content_chars": 3293,
+   "content_chars": 3256,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -819,7 +818,7 @@
    "via": "primary",
    "fetched_url": "https://feeds.bloomberg.com/politics/news.rss",
    "items_count": 20,
-   "content_chars": 3473,
+   "content_chars": 3249,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -831,7 +830,7 @@
    "via": "primary",
    "fetched_url": "https://api.axios.com/feed/",
    "items_count": 100,
-   "content_chars": 860063,
+   "content_chars": 830752,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -855,7 +854,7 @@
    "via": "primary",
    "fetched_url": "https://x.com/UK_MTO",
    "items_count": 5,
-   "content_chars": 1394,
+   "content_chars": 1489,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -867,7 +866,7 @@
    "via": "primary",
    "fetched_url": "https://x.com/bna_en",
    "items_count": 5,
-   "content_chars": 1419,
+   "content_chars": 1267,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -879,7 +878,7 @@
    "via": "primary",
    "fetched_url": "https://x.com/bahdiplomatic",
    "items_count": 5,
-   "content_chars": 1655,
+   "content_chars": 1643,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -891,7 +890,7 @@
    "via": "primary",
    "fetched_url": "https://x.com/us5thfleet",
    "items_count": 5,
-   "content_chars": 2305,
+   "content_chars": 2211,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -903,8 +902,8 @@
    "via": "primary",
    "fetched_url": "https://x.com/YemenResistanc1",
    "items_count": 4,
-   "content_chars": 1986,
-   "latest_age_days": 1,
+   "content_chars": 1988,
+   "latest_age_days": 2,
    "tls_verification": "verified"
   },
   {
@@ -915,7 +914,7 @@
    "via": "primary",
    "fetched_url": "https://x.com/spokespersonyem",
    "items_count": 5,
-   "content_chars": 2321,
+   "content_chars": 2322,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -927,7 +926,7 @@
    "via": "primary",
    "fetched_url": "https://t.me/s/army21ye",
    "items_count": 19,
-   "content_chars": 12259,
+   "content_chars": 12995,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -939,7 +938,7 @@
    "via": "primary",
    "fetched_url": "https://x.com/CJFCSpox",
    "items_count": 5,
-   "content_chars": 1651,
+   "content_chars": 1578,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -951,8 +950,8 @@
    "via": "primary",
    "fetched_url": "https://x.com/ERYANIM",
    "items_count": 5,
-   "content_chars": 1649,
-   "latest_age_days": 1,
+   "content_chars": 1675,
+   "latest_age_days": 0,
    "tls_verification": "verified"
   },
   {
@@ -975,7 +974,7 @@
    "via": "primary",
    "fetched_url": "https://x.com/AlArabiya",
    "items_count": 5,
-   "content_chars": 1333,
+   "content_chars": 1767,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -984,11 +983,11 @@
    "name": "USNI News — تغذية عبر وسيط قراءة",
    "primary_url": "https://r.jina.ai/https://news.usni.org/feed",
    "ok": true,
-   "via": "primary",
-   "fetched_url": "https://r.jina.ai/https://news.usni.org/feed",
-   "items_count": 60,
-   "content_chars": 6066,
-   "latest_age_days": null,
+   "via": "browser",
+   "fetched_url": "https://news.usni.org/feed",
+   "items_count": 30,
+   "content_chars": 179045,
+   "latest_age_days": 0,
    "tls_verification": "verified"
   },
   {
@@ -999,42 +998,12 @@
    "via": "primary",
    "fetched_url": "https://x.com/navalnewscom",
    "items_count": 5,
-   "content_chars": 2501,
+   "content_chars": 2451,
    "latest_age_days": 0,
    "tls_verification": "verified"
   }
  ],
  "failed_feeds": [
-  {
-   "num": 27,
-   "name": "وكالة الأنباء الكويتية (كونا)",
-   "primary_url": "https://www.kuna.net.kw",
-   "error": "derived items without real content (1)",
-   "block_reason": "all routes failed: primary: HTTP Error 503: Service Unavailable · curl: derived items without real content (1) · curl أعاد محتوى غير مقروء | official-page:jina.ai/kuna: derived items without real content (0) · curl: derived items without real content (0) · curl أعاد محتوى غير مقروء | browser: derived items without real content (1)",
-   "attempts": [
-    {
-     "url": "https://www.kuna.net.kw",
-     "via": "primary",
-     "ok": false,
-     "error": "HTTP Error 503: Service Unavailable · curl: derived items without real content (1) · curl أعاد محتوى غير مقروء",
-     "tls_verification": "verified"
-    },
-    {
-     "url": "https://r.jina.ai/https://www.kuna.net.kw",
-     "via": "official-page:jina.ai/kuna",
-     "ok": false,
-     "error": "derived items without real content (0) · curl: derived items without real content (0) · curl أعاد محتوى غير مقروء",
-     "tls_verification": "verified"
-    },
-    {
-     "url": "https://www.kuna.net.kw",
-     "via": "browser",
-     "ok": false,
-     "error": "derived items without real content (1)",
-     "tls_verification": "verified"
-    }
-   ]
-  },
   {
    "num": 30,
    "name": "القيادة المركزية الأمريكية (سنتكوم)",
@@ -1125,13 +1094,6 @@
    "block_reason": "all routes failed: primary: <urlopen error [Errno 104] Connection reset by peer> · curl رمز 35 | official:bna-en-rss: حجب مصدر — human verification page (HTTP 405)"
   },
   {
-   "num": 27,
-   "name": "وكالة الأنباء الكويتية (كونا)",
-   "via": null,
-   "error": "derived items without real content (1)",
-   "block_reason": "all routes failed: primary: HTTP Error 503: Service Unavailable · curl: derived items without real content (1) · curl أعاد محتوى غير مقروء | official-page:jina.ai/kuna: derived items without real content (0) · curl: derived items without real content (0) · curl أعاد محتوى غير مقروء | browser: derived items without real content (1)"
-  },
-  {
    "num": 30,
    "name": "القيادة المركزية الأمريكية (سنتكوم)",
    "via": null,
@@ -1188,5 +1150,5 @@
    "block_reason": "all routes failed: primary: <urlopen error [Errno 104] Connection reset by peer> · curl رمز 35"
   }
  ],
- "written_utc": "2026-11-18T03:46:44Z"
+ "written_utc": "2026-11-19T01:47:11Z"
 }
