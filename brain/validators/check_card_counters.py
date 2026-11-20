@@ -705,8 +705,13 @@ def _hero_value(meta: dict, zones_data: dict, card: dict, kpis_totals: dict | No
     return None
 
 
-def _hero_detail(meta: dict, zones_data: dict, card: dict) -> str:
+def _hero_detail(meta: dict, zones_data: dict, card: dict, kpis_totals: dict | None = None) -> str:
     detail = card.get("detail") or {}
+    # بطاقتا IMO: التفصيل يُشتق من العدّاد الحاكم (web/kpis-totals) بقاعدة البنّاء نفسها،
+    # لا من نص ثابت في السجل يتقادم مع كل تحديث لقائمة IMO (عطل 2026-11-20: 128/24 حتى 03/11).
+    if str(card.get("id") or "") in {"imo-confirmed-incidents", "imo-seafarer-deaths"}:
+        from tools.build_hero_kpis import hero_detail as _builder_hero_detail
+        return _builder_hero_detail(meta, zones_data, card, kpis_totals or _default_kpis_totals())
     if detail.get("kind") == "qualifying_composition":
         c = zones_data.get("counter") or {}
         return f"{c.get('confirmed') or 0} مؤكدة + {c.get('probable') or 0} مرجّحة + {c.get('unconfirmed_qualifying') or 0} غير مؤكدة مؤهلة"
@@ -770,7 +775,7 @@ def validate_hero_kpis(meta: dict, zones_data: dict, registry: dict, *, rendered
         expected_value = _hero_value(meta, zones_data, item, kpis_totals)
         if expected_value is not None and str(card.get("value")) != str(expected_value):
             errors.append(f"حاجز تفصيل البطاقة: {cid} قيمة البطاقة={card.get('value')} والمصدر={expected_value}")
-        expected_detail = _hero_detail(meta, zones_data, item)
+        expected_detail = _hero_detail(meta, zones_data, item, kpis_totals)
         if expected_detail and card.get("detail") != expected_detail:
             errors.append(f"حاجز تفصيل البطاقة: {cid} تفصيل البطاقة={card.get('detail')} والمصدر={expected_detail}")
         if item.get("source_label") and card.get("source") != item.get("source_label"):

@@ -956,6 +956,21 @@ def localize_patterns(s: str) -> str | None:
         return (f"· Warning {m.group('id')}: an attack on a tanker {m.group('d')} "
                 f"nautical miles east of {m.group('place')}…")
 
+    # تفصيل بطاقتي IMO في الواجهة: يُشتق يوميًا من العدّاد الحاكم (tools/build_hero_kpis.py)،
+    # فيُترجم بقالب لأي أرقام وتاريخ بدل مدخل معجمي من نص السجل الثابت (عطل 2026-11-20).
+    m = re.fullmatch(
+        r"(?P<chg>لا زيادة|زيادة (?P<up>\d+)|انخفاض (?P<down>\d+)) بين التحديثين؛ الإجمالي "
+        r"(?P<n>\d+) (?P<unit>حادثة مؤكدة|وفاة بحّار مؤكدة) حتى (?P<d>\d{2}/\d{2}/\d{4})", n)
+    if m:
+        if m.group("up"):
+            chg = f"An increase of {m.group('up')} between updates"
+        elif m.group("down"):
+            chg = f"A decrease of {m.group('down')} between updates"
+        else:
+            chg = "No increase between updates"
+        unit = "confirmed incidents" if m.group("unit") == "حادثة مؤكدة" else "confirmed seafarer deaths"
+        return f"{chg}; {m.group('n')} {unit} in total as of {m.group('d')}"
+
     # ك-497: عائلات بطاقة سجل الحوادث المؤكدة من IMO
     m = re.fullmatch(r"—\s*(?P<n>\d+)\s+حادثة مؤكدة على سفن تجارية", n)
     if m:
