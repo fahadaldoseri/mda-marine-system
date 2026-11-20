@@ -91,6 +91,30 @@ def extract(text: str) -> list[str]:
     return [c for c, _ in sorted(out.items(), key=lambda kv: (-kv[1], kv[0]))]
 
 
+def from_ledger(day: str) -> list[str]:
+    """أسماء السفن من حقل vessel_name في دفتر اليوم: مرجع منظَّم قاطع يُفحص مهما قصر الاسم.
+
+    الاستخراج من النص يشترط مقطعين فأكثر، فيسقط اسم ذو مقطع واحد مثل «ST3» من فحص العقوبات
+    (seawatch-brain #6). الدفتر لا يحتاج استدلالًا بالنمط، فكل اسم فيه يُضاف كما هو.
+    """
+    path = B / 'cumulative-2026' / 'daily' / f'{day}.json'
+    if not path.exists():
+        return []
+    try:
+        recs = json.loads(path.read_text(encoding='utf-8'))
+    except (OSError, json.JSONDecodeError):
+        return []
+    if not isinstance(recs, list):
+        return []
+    out = []
+    for r in recs:
+        if isinstance(r, dict):
+            n = str(r.get('vessel_name') or '').strip()
+            if n and n not in ('—', '-', 'غير معلن', 'غير محدد'):
+                out.append(n)
+    return out
+
+
 def from_report(day: str) -> list[str]:
     """يجمع السفن من نص التقرير وملف الواجهة معًا."""
     names: list[str] = []
@@ -106,6 +130,7 @@ def from_report(day: str) -> list[str]:
             names += extract(json.dumps(data, ensure_ascii=False))
         except json.JSONDecodeError:
             pass
+    names += from_ledger(day)
     seen, out = set(), []
     for n in names:
         if n not in seen:

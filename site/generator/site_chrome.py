@@ -574,7 +574,7 @@ MOBILE_NAV_CSS = """
   .topbar .brand-title{font-size:13.5px;line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
   .topbar .tb-meta{display:flex;gap:6px;flex:0 0 auto}
   .topbar .btn{min-height:40px;padding:6px 10px}
-}
+  /* كان هنا قوس زائد يغلق الاستعلام مبكرًا فيسري السطر التالي على سطح المكتب (seawatch-web #9) */
   .topbar .btn{min-width:44px;display:inline-flex;align-items:center;justify-content:center}
 }
 /* أهداف لمس على سطح المكتب — الشاشة فقط (قياس 2026-10-29: 34×35.3 و93.9×39.3) */

@@ -1959,7 +1959,8 @@
         ],
         "gates": [],
         "tests": [
-          "tests/test_sources_state_counts.py"
+          "tests/test_sources_state_counts.py",
+          "tests/test_old_repo_gaps.py"
         ]
       },
       "on_fail": "stop",

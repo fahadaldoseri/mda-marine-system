@@ -226,14 +226,28 @@ class _GlossaryEntries(dict[str, str]):
         self.exact_match_only_entries = frozenset(norm(k) for k in exact_match_only_entries)
 
 
+def _no_duplicate_keys(pairs):
+    """مفتاح مكرر في المعجم كان يتجاوز قيمة سابقة بصمت؛ يُرفض الآن (seawatch-web #10، ك-إ2)."""
+    seen: dict = {}
+    for key, value in pairs:
+        if key in seen:
+            raise ValueError(f"glossary: duplicate key {key!r}")
+        seen[key] = value
+    return seen
+
+
 def load_glossary() -> _GlossaryEntries:
     p = I18N / "glossary.json"
     data = {}
     if p.exists():
-        data = json.loads(p.read_text(encoding="utf-8"))
+        data = json.loads(p.read_text(encoding="utf-8"), object_pairs_hook=_no_duplicate_keys)
     raw_entries = data.get("entries") or {}
     if not isinstance(raw_entries, dict):
         raise ValueError("glossary entries must be an object")
+    # قيمة غير نصية أو فارغة كانت تُسقط البناء بـ TypeError أو تمرّ فراغًا (seawatch-web #10، ك-إ1)
+    non_text = sorted(k for k, v in raw_entries.items() if not isinstance(v, str) or not v.strip())
+    if non_text:
+        raise ValueError("glossary entries must be non-empty strings: " + ", ".join(non_text[:10]))
     raw_exact_only = data.get("exact_match_only_entries", [])
     if not isinstance(raw_exact_only, list) or any(
         not isinstance(key, str) or not norm(key) for key in raw_exact_only
