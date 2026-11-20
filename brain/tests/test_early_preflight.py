@@ -57,7 +57,9 @@ def main() -> int:
         # مفاتيح الأرضية مسارات مطلقة في المسار القانوني (/home/ubuntu)؛ في بيئة أخرى (مثل GitHub Actions)
         # يُقاس الموجب على الأصول الموجودة فعلًا، ويبقى الحكم الكامل لـ G000 في بيئة التشغيل.
         floor = json.loads((B / "audit" / "asset-floor.json").read_text(encoding="utf-8"))
-        present = {k: v for k, v in floor["files"].items() if Path(k).is_file()}
+        canon, here = "/home/ubuntu/mda-marine-system/", str(B.parent) + "/"
+        remapped = {(here + k[len(canon):] if k.startswith(canon) else k): v for k, v in floor["files"].items()}
+        present = {k: v for k, v in remapped.items() if Path(k).is_file()}
         if len(present) < len(floor["files"]):
             print(f"  • بيئة خارج المسار القانوني: الموجب على {len(present)} من {len(floor['files'])} أصلًا موجودًا")
         floor["files"] = present
@@ -65,6 +67,9 @@ def main() -> int:
         base.write_text(json.dumps(floor, ensure_ascii=False), encoding="utf-8")
         expect(bool(present) and run({"SITE": str(site), "ASSET_FLOOR": str(base)}, after) == 0,
                "موجب: الشجرة الحالية تمرّ")
+        if not present:
+            print("  ✘ لا أصل حاكم موجود لقياس الموجب والسالب")
+            return 1
         path = sorted(present)[0]
         floor["files"][path]["lines"] = int(floor["files"][path].get("lines") or 0) + 100000
         fp = Path(d) / "floor.json"
