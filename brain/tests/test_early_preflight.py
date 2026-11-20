@@ -26,6 +26,14 @@ def expect(cond, msg):
         FAILS.append(msg)
 
 
+def _readable(path: str) -> bool:
+    # في GitHub Actions يوجد /home/ubuntu لكنه غير مقروء: PermissionError = أصل غير متاح هنا
+    try:
+        return Path(path).is_file() and os.access(path, os.R_OK)
+    except OSError:
+        return False
+
+
 def run(env_extra: dict, date: str) -> int:
     env = dict(os.environ, **env_extra)
     env.pop("D", None)
@@ -59,7 +67,7 @@ def main() -> int:
         floor = json.loads((B / "audit" / "asset-floor.json").read_text(encoding="utf-8"))
         canon, here = "/home/ubuntu/mda-marine-system/", str(B.parent) + "/"
         remapped = {(here + k[len(canon):] if k.startswith(canon) else k): v for k, v in floor["files"].items()}
-        present = {k: v for k, v in remapped.items() if Path(k).is_file()}
+        present = {k: v for k, v in remapped.items() if _readable(k)}
         if len(present) < len(floor["files"]):
             print(f"  • بيئة خارج المسار القانوني: الموجب على {len(present)} من {len(floor['files'])} أصلًا موجودًا")
         floor["files"] = present
