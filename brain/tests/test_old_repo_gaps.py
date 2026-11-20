@@ -3,6 +3,7 @@
 
 1. seawatch-web #9: أقواس MOBILE_NAV_CSS متوازنة ولا يُغلق الاستعلام قبل آخر قواعده.
 2. seawatch-web #10 (ك-إ1، ك-إ2): المعجم يرفض المفتاح المكرر والقيمة غير النصية أو الفارغة.
+   (ك-إ4): لا سمة مقروءة عربية في الصفحة الإنجليزية، ووسوم المشاركة تُشتق من رأسها الإنجليزي.
 3. seawatch-brain #6: اسم سفينة ذو مقطع واحد في دفتر اليوم («ST3») يدخل قائمة فحص العقوبات.
 """
 import json
@@ -60,6 +61,27 @@ def main() -> int:
         i18n_en.I18N = old
     i18n_en.load_glossary()
     expect(True, "المعجم الحقيقي يجتاز الحاجزين")
+
+    page = ('<html><head><title>Daily Report — 2030-01-01</title>'
+            '<meta name="description" content="English description">'
+            '<meta property="og:site_name" content="مركز الوعي بالمجال البحري">'
+            '<meta property="og:locale" content="ar_BH">'
+            '<meta property="og:title" content="التقرير اليومي">'
+            '<meta name="twitter:description" content="وصف عربي"></head>'
+            '<body><span data-classification="بلاغ رسمي">Official report</span></body></html>')
+    expect(len(i18n_en.arabic_reader_attributes(page)) == 3, "سالب ك-إ4: وسوم المشاركة العربية تُكشف")
+    fixed = i18n_en.localize_social_meta(page)
+    expect(i18n_en.arabic_reader_attributes(fixed) == [], "وسوم المشاركة تُشتق من الرأس الإنجليزي")
+    expect('content="Daily Report — 2030-01-01"' in fixed and 'content="en_US"' in fixed,
+           "العنوان من <title> واللغة en_US")
+    expect('data-classification="بلاغ رسمي"' in fixed, "مفتاح data-* التعاقدي يبقى كما هو")
+    expect(i18n_en.arabic_reader_attributes('<b aria-label="زر">x</b>') == ["زر"], "سالب: aria-label عربية تُكشف")
+    built = sorted((SITE / "dist" / "reports" / "en").glob("*.html"))
+    if built:
+        bad = [p.name for p in built if i18n_en.arabic_reader_attributes(p.read_text(encoding="utf-8"))]
+        expect(not bad, f"الصفحات الإنجليزية المبنية بلا سمة مقروءة عربية ({len(built)} صفحة)")
+    else:
+        print("  • تخطٍّ معلن: لا صفحات إنجليزية مبنية")
 
     import vessel_names
     old_b = vessel_names.B

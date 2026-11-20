@@ -145,6 +145,49 @@ def normalize_document_head(page: str) -> str:
     return re.sub(r"^(?:\ufeff)?\s*(?:<!doctype[^>]*>)?\s*", "<!DOCTYPE html>\n", page, count=1, flags=re.I)
 
 
+EN_BRAND = "Maritime Domain Awareness Center"
+# سمات يقرؤها القارئ أو تعرضها المنصات (المشاركة ومحركات البحث وقارئ الشاشة): لا يبقى فيها نص عربي
+# في النسخة الإنجليزية. سمات data-* التعاقدية (data-classification وdata-zone-id وأمثالها) مفاتيح آلة
+# تقرؤها المدققات والأنماط بقيمها العربية في السطحين، فلا تُترجم ولا تدخل الحاجز.
+READER_ATTRS = TR_ATTRS + ("content",)
+_META_RE = re.compile(r'<meta\b[^>]*>', re.I)
+
+
+def localize_social_meta(page: str) -> str:
+    """وسوم المشاركة في الصفحة الإنجليزية تُشتق من رأسها الإنجليزي نفسه (seawatch-web #10، ك-إ4).
+
+    كانت og:title وog:description وtwitter:* وog:site_name تُكتب بالعربية في المولّد وتنتقل كما هي
+    إلى النسخة الإنجليزية، فتظهر المشاركة بعنوان عربي. لا تخمين: العنوان من <title> والوصف من
+    meta description بعد ترجمتهما، والاسم ثابت، واللغة en_US.
+    """
+    import html as _h
+    t = re.search(r"<title>(.*?)</title>", page, re.S)
+    d = re.search(r'<meta\s+name="description"\s+content="([^"]*)"', page)
+    title = _h.unescape(t.group(1).strip()) if t else ""
+    desc = _h.unescape(d.group(1)) if d else ""
+    want = {"og:site_name": EN_BRAND, "og:locale": "en_US"}
+    if title and not ARABIC.search(title):
+        want.update({"og:title": title, "twitter:title": title})
+    if desc and not ARABIC.search(desc):
+        want.update({"og:description": desc, "twitter:description": desc})
+
+    def fix(m: re.Match) -> str:
+        tag = m.group(0)
+        k = re.search(r'(?:property|name)="([^"]+)"', tag)
+        if not k or k.group(1) not in want:
+            return tag
+        return re.sub(r'content="[^"]*"', 'content="' + _h.escape(want[k.group(1)], quote=True) + '"', tag, count=1)
+
+    return _META_RE.sub(fix, page)
+
+
+def arabic_reader_attributes(page: str) -> list[str]:
+    """قيم السمات المقروءة التي بقيت عربية خارج script وstyle (seawatch-web #10، ك-إ4)."""
+    body = re.sub(r"<(script|style)\b.*?</\1>", "", page, flags=re.S | re.I)
+    return [norm(v) for k, v in re.findall(r'\s([a-zA-Z:-]+)="([^"]*)"', body)
+            if k in READER_ATTRS and ARABIC.search(v)]
+
+
 def build_tm(
 date: str) -> dict[str, str]:
     ar = (AR_MD / f"{date}-sectioned.md").read_text(encoding="utf-8")
@@ -2286,6 +2329,7 @@ def translate_page(html_text: str, date: str, tm: dict[str, str], gl: dict[str, 
     out = _apply_governed_event_card_labels(out, gl)
     out = _apply_card_row_labels(out)
     out = normalize_document_head(out)
+    out = localize_social_meta(out)
     # ك-599: وسم رموز الدرجات بلغة السطح، فلا يظهر رمز داخلي في النسخة الإنجليزية.
     out = reader_grade_labels.redact(out, "en")
     remaining = [
@@ -2326,6 +2370,8 @@ def translate_page(html_text: str, date: str, tm: dict[str, str], gl: dict[str, 
             continue
         out = out.replace(_x, _target)
     remaining = fixed
+    # ك-إ4: البوابة كانت تفحص النصوص المرئية وحدها؛ سمة مقروءة بقيت عربية تُعدّ نقصًا يوقف البناء.
+    remaining.extend(v for v in arabic_reader_attributes(out) if v not in remaining)
     if os.environ.get("I18N_DEBUG_MISSING"):
         for _x in remaining:
             if ARABIC.search(_x):
