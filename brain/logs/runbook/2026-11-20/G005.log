@@ -46,7 +46,7 @@ tools/normalize_digits.py:17: ImportError
 
 The above exception was the direct cause of the following exception:
 
-tmp_path = PosixPath('/tmp/pytest-of-root/pytest-30/test_check_blocks_divergent_to0')
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-44/test_check_blocks_divergent_to0')
 
     def test_check_blocks_divergent_totals(tmp_path: pathlib.Path) -> None:
         mod = load_module()
@@ -136,7 +136,7 @@ tools/normalize_digits.py:17: ImportError
 
 The above exception was the direct cause of the following exception:
 
-tmp_path = PosixPath('/tmp/pytest-of-root/pytest-30/test_repeated_write_is_byte_id0')
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-44/test_repeated_write_is_byte_id0')
 
     def test_repeated_write_is_byte_identical(tmp_path: pathlib.Path) -> None:
         mod = load_module()
@@ -232,7 +232,7 @@ tools/normalize_digits.py:17: ImportError
 
 The above exception was the direct cause of the following exception:
 
-tmp_path = PosixPath('/tmp/pytest-of-root/pytest-30/test_accumulated_blank_lines_c0')
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-44/test_accumulated_blank_lines_c0')
 
     def test_accumulated_blank_lines_collapse_without_losing_content(tmp_path: pathlib.Path) -> None:
         mod = load_module()
@@ -287,5 +287,5 @@ tools/source_channels.py:126: ChannelsUnavailable
 FAILED tests/test_source_totals_governed.py::test_check_blocks_divergent_totals
 FAILED tests/test_source_counts_idempotent.py::test_repeated_write_is_byte_identical
 FAILED tests/test_source_counts_idempotent.py::test_accumulated_blank_lines_collapse_without_losing_content
-3 failed, 5 passed in 0.71s
-elapsed_seconds=1.088257
+3 failed, 5 passed in 0.73s
+elapsed_seconds=1.073545

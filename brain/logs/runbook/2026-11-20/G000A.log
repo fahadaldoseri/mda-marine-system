@@ -9,26 +9,26 @@
   ✔ التماثل سليم: المحلي = المستودع
 === سلامة المهارات — 16 شاهدًا ===
   ✔ كل القواعد المعتمدة مثبتة
-verify: OK · entries 34
+verify: OK · entries 37
 {
   "status": "PASS",
-  "checked_at": "2026-11-20T02:20:59.754453+00:00",
+  "checked_at": "2026-11-20T05:15:23.485523+00:00",
   "date": null,
-  "current_root": "1664a8a7a029004f9f4c347344e19515524b53440764364842f077fb16eedb29",
+  "current_root": "ba925a306acb0c22a0993539d39e5d57ba5f7999f945780c21d159bd19868330",
   "current_files": 2703,
   "ledger": "/home/ubuntu/mda-marine-system/brain/evidence/merkle/ledger.jsonl",
   "ledger_verified": true,
   "snapshot_entry": {
-    "seq": 34,
-    "ts": "2026-11-20T02:20:54.286111+00:00",
+    "seq": 37,
+    "ts": "2026-11-20T05:15:17.992924+00:00",
     "kind": "snapshot",
-    "root": "1664a8a7a029004f9f4c347344e19515524b53440764364842f077fb16eedb29",
+    "root": "ba925a306acb0c22a0993539d39e5d57ba5f7999f945780c21d159bd19868330",
     "files": 2703,
-    "prev_hash": "2993a7cdc40ab320b2784344fc09ff1d6b8faad7c6c996133daacb665d4077ff",
-    "hash": "88ddd44bf1b5e0871bf72e855dfec4b82c78902ea4bf9b31e65faecdc7af993e"
+    "prev_hash": "fd30bc4943850cfd4f9949a45a9b26f3e85e888a9cc378cc46cdf98b822b4407",
+    "hash": "a3c8ef31ef912fb4228957fdee51ba0d57c3f279920597543128df2310d4534b"
   },
   "snapshot_file": "/home/ubuntu/mda-marine-system/brain/evidence/merkle/snapshot.json",
   "mirror": "/home/ubuntu/mda-marine-system/skills",
   "violations": []
 }
-elapsed_seconds=5.467518
+elapsed_seconds=5.491823

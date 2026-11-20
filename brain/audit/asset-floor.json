@@ -9,12 +9,22 @@
    "size": 52063
   },
   "/home/ubuntu/mda-marine-system/brain/appendices/threat-scale.json": {
-   "accepted_reductions": [],
+   "accepted_reductions": [
+    {
+     "date": "2026-11-20",
+     "from_lines": 67,
+     "from_size": 2735,
+     "note": "تدقيق المعجم العسكري (PR 658)",
+     "reason": "تعديل مقيس مدموج في main بقرار المالك: تدقيق المعجم العسكري (PR 658، 9868339f) صحّح صياغات في سجل المصطلحات وسلّم التهديد فانكمش الملف أسطرًا أو بايتات. لا حذف لأصل.",
+     "to_lines": 67,
+     "to_size": 2719
+    }
+   ],
    "first_seen": "2026-11-08",
    "last_seen": "2026-11-20",
    "lines": 67,
-   "sha256": "59c8b45529077a488fece61965c240b912f4ddbaac5c69d5a5809bb56ba7c4c4",
-   "size": 2735
+   "sha256": "d6a0258b99bbd662ae2d0029adba46feed500366fb1d97812c28ec017cd1d5f4",
+   "size": 2719
   },
   "/home/ubuntu/mda-marine-system/brain/appendices/zone-registry.json": {
    "accepted_reductions": [],
@@ -63,16 +73,16 @@
    "first_seen": "2026-11-08",
    "last_seen": "2026-11-20",
    "lines": 143,
-   "sha256": "93b13753fcc5f75ea17cc6256139c5c21df38e70cd80ca359b8dbd4f1fb0c0b3",
-   "size": 11200
+   "sha256": "44f187b164e98da5435fb76276a02e03e29068526d8ba6f19d99a79bf79a6285",
+   "size": 11226
   },
   "/home/ubuntu/mda-marine-system/brain/sections/20-language.md": {
    "accepted_reductions": [],
    "first_seen": "2026-11-08",
    "last_seen": "2026-11-20",
    "lines": 85,
-   "sha256": "092dabc87e6217cc52a482bb43028acc3df5914782490705d7c1a1296c6d581f",
-   "size": 9460
+   "sha256": "7a1a5fbcdecc8f48a6045e740e87cd4c16570183cffa93b7cd4a3def71a295b2",
+   "size": 9533
   },
   "/home/ubuntu/mda-marine-system/brain/sections/20-lexicon.md": {
    "accepted_reductions": [
@@ -84,13 +94,22 @@
      "reason": "نقص ناتج عن قرارات المالك 2026-11-17 المدمجة (PR 638): نطاق seawatch-live.pages.dev بدل manus.space، وموعد 06:40، ومعجم v11",
      "to_lines": 262,
      "to_size": 23167
+    },
+    {
+     "date": "2026-11-20",
+     "from_lines": 262,
+     "from_size": 23167,
+     "note": "تدقيق المعجم العسكري (PR 658)",
+     "reason": "تعديل مقيس مدموج في main بقرار المالك: تدقيق المعجم العسكري (PR 658، 9868339f) صحّح صياغات في سجل المصطلحات وسلّم التهديد فانكمش الملف أسطرًا أو بايتات. لا حذف لأصل.",
+     "to_lines": 261,
+     "to_size": 23302
     }
    ],
    "first_seen": "2026-11-08",
    "last_seen": "2026-11-20",
-   "lines": 262,
-   "sha256": "8ac747c2aa5d3beb8d76a851941068c55d2e01b678ea5a7637d8cb117981f4a0",
-   "size": 23167
+   "lines": 261,
+   "sha256": "ff868c4cb9f77deaa94476c0f6ea123422a81f029168da41f691586e92fff9b9",
+   "size": 23302
   },
   "/home/ubuntu/mda-marine-system/brain/sections/20-writing-brief.md": {
    "accepted_reductions": [],
@@ -145,16 +164,16 @@
    "first_seen": "2026-11-08",
    "last_seen": "2026-11-20",
    "lines": 144,
-   "sha256": "a09dd668a6c8e09f2cdc49dc7c91a1bda5122f79dd36158b4cf1152466f12835",
-   "size": 16859
+   "sha256": "c9d5c6e3220653cc922e0cd6e5566ce3c08384fb00baf1d2cc5c07a8b6223507",
+   "size": 16936
   },
   "/home/ubuntu/mda-marine-system/brain/sections/75-style.md": {
    "accepted_reductions": [],
    "first_seen": "2026-11-08",
    "last_seen": "2026-11-20",
-   "lines": 317,
-   "sha256": "048e0f2711d7a2f51b9c8a68585c7fa5cf99c294f3fced41f91fdda029e920b0",
-   "size": 24808
+   "lines": 320,
+   "sha256": "b98898c4a7157867e41edf4959bbfdaaa62df28b288c3aa3d7eb84ea0ed06bd4",
+   "size": 25131
   },
   "/home/ubuntu/mda-marine-system/brain/sections/80-learning.md": {
    "accepted_reductions": [],
@@ -1332,9 +1351,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-08",
    "last_seen": "2026-11-20",
-   "lines": 140,
-   "sha256": "a60e94dae3bb22b04e5acc48408f1e7dd1a5b407b715ac5c5edf14f01dc125e1",
-   "size": 5359
+   "lines": 219,
+   "sha256": "3d9d60c7216b160b60b0e3dea1f4059dc4c3816d4df0494d433a71981a0b8c01",
+   "size": 9070
   },
   "/home/ubuntu/mda-marine-system/brain/tests/test_reliability_and_evidence_anchor.py": {
    "accepted_reductions": [],
@@ -1924,9 +1943,9 @@
    "accepted_reductions": [],
    "first_seen": "2026-11-08",
    "last_seen": "2026-11-20",
-   "lines": 354,
-   "sha256": "ff881c37061fc517a076f752cfec721ba9d7c7e1c532c815003168cb9b974c06",
-   "size": 19602
+   "lines": 424,
+   "sha256": "8d7f1beb37088824fb9d010c5ccd13912fa79ccc3cbec224a047ad5a674daf33",
+   "size": 23495
   },
   "/home/ubuntu/mda-marine-system/brain/tools/build_ambiguity_map.py": {
    "accepted_reductions": [],
@@ -2544,8 +2563,8 @@
    "first_seen": "2026-11-08",
    "last_seen": "2026-11-20",
    "lines": 165,
-   "sha256": "9f1991d598a93424191758ced2b611925ef332175700edbcbd49a6be3542ac9b",
-   "size": 8549
+   "sha256": "aaad1ddf356e382b50dc0211e7147e2bd36c69d4666e712e4c4c8f15b96a33bc",
+   "size": 8551
   },
   "/home/ubuntu/mda-marine-system/brain/tools/llm_triage.py": {
    "accepted_reductions": [],
@@ -17362,8 +17381,8 @@
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-20",
    "lines": 54,
-   "sha256": "51a9375e101a603535741eee9a4e8713a9a518f2413e6211f65c08dc208a0611",
-   "size": 5048
+   "sha256": "83a3bd87714f5c26fd8c2ef9f99b1eaba2e4195804bf4462916b940e887069cb",
+   "size": 5155
   },
   "/home/ubuntu/skills/marine-news-brain/references/adaptive-learning.md": {
    "accepted_reductions": [],
@@ -17386,8 +17405,8 @@
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-20",
    "lines": 29,
-   "sha256": "5f1bec0f0d9cf6df796f5118fb66e8274f63e87244bf2ebc283d80c4ee9e73d2",
-   "size": 2015
+   "sha256": "73ef69d6a5f27c811a850846bd28e7e1499713281b6b17a0bb959ccc5b3f71c1",
+   "size": 2055
   },
   "/home/ubuntu/skills/marine-news-brain/references/validation.md": {
    "accepted_reductions": [],
@@ -18396,8 +18415,8 @@
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-20",
    "lines": 52,
-   "sha256": "7dbd8e7b756731a4082c5e81e9312c4247e0df06507f137d5e395295271a3c8b",
-   "size": 4476
+   "sha256": "60deeaaf8108619a96300342af1823adb981b12827ed080ac00365ef10244d14",
+   "size": 4485
   },
   "/home/ubuntu/skills/military-arabic-editing/references/adaptive-learning.md": {
    "accepted_reductions": [],
@@ -18430,16 +18449,26 @@
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-20",
    "lines": 11,
-   "sha256": "5ab9d3b11fed5014b447a3e41ad15e1abf5a5ef77bdb938c792f7fc521a9ab0e",
-   "size": 1093
+   "sha256": "a65f5086a59cac07f637b7f5d46700dc1ff21c63e0d0cbe31a011e8cbc8a61ab",
+   "size": 1094
   },
   "/home/ubuntu/skills/military-arabic-editing/references/terminology-map.md": {
-   "accepted_reductions": [],
+   "accepted_reductions": [
+    {
+     "date": "2026-11-20",
+     "from_lines": 21,
+     "from_size": 1660,
+     "note": "تدقيق المعجم العسكري (PR 658)",
+     "reason": "تعديل مقيس مدموج في main بقرار المالك: تدقيق المعجم العسكري (PR 658، 9868339f) صحّح صياغات في سجل المصطلحات وسلّم التهديد فانكمش الملف أسطرًا أو بايتات. لا حذف لأصل.",
+     "to_lines": 20,
+     "to_size": 1592
+    }
+   ],
    "first_seen": "2026-11-03",
    "last_seen": "2026-11-20",
-   "lines": 21,
-   "sha256": "0415d6bb14b115901adda987f39383e0cb790f802e1e79bc43d1993f4b42be13",
-   "size": 1660
+   "lines": 20,
+   "sha256": "92a7c978938c238078b1fdf2fe605efffcaa61a31b606905d500fe82155988f5",
+   "size": 1592
   },
   "/home/ubuntu/skills/ml-pipeline/SKILL.md": {
    "accepted_reductions": [],
@@ -31513,6 +31542,6 @@
    "sha256": "9fa6f61bbde1dc76a8936ff50aa8cad0de9568d5ba4c224a4964c3a63bb47307"
   }
  ],
- "updated_at": "2026-11-20T02:20:53.948125+00:00",
+ "updated_at": "2026-11-20T05:15:17.587928+00:00",
  "version": 1
 }

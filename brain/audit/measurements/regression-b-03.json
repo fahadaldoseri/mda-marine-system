@@ -1,6 +1,6 @@
 {
   "url": "file:///home/ubuntu/mda-marine-system/site/dist/reports/2026-11-20.html",
-  "at": "2026-11-20T02:26:28+00:00",
+  "at": "2026-11-20T05:20:59+00:00",
   "widths": {
     "1440": {
       "compat": "CSS1Compat",
@@ -236,9 +236,9 @@
         "#sec-03": true,
         "#sec-map": true,
         "/additions.html#news-card": true,
-        "https://x.com/UK_MTO/status/2123425162758619611#:~:text=JMIC%20Advisory%20Note%20Update%20115": false,
+        "https://x.com/UK_MTO/status/2123425162758619611#:~:text=JMIC%20Advisory%20Note%20Update%20115": true,
         "https://en.irna.ir/news/86326732/Two-more-violating-supertankers-catch-fire-in-Strait-of-Hormuz#:~:text=Two%20more%20violating%20supertankers%20catch%20fire": false,
-        "https://x.com/bahdiplomatic/status/2123521856678371365#:~:text=%D9%85%D9%85%D9%84%D9%83%D8%A9%20%D8%A7%D9%84%D8%A8%D8%AD%D8%B1%D9%8A%D9%86%20%D8%AA%D8%AF%D9%8A%D9%86%20%D8%A8%D8%B4%D8%AF%D8%A9%20%D8%A7%D8%B3%D8%AA%D9%85%D8%B1%D8%A7%D8%B1%20%D8%A7%D9%84%D8%A7%D8%B9%D8%AA%D8%AF%D8%A7%D8%A1%D8%A7%D8%AA": false,
+        "https://x.com/bahdiplomatic/status/2123521856678371365#:~:text=%D9%85%D9%85%D9%84%D9%83%D8%A9%20%D8%A7%D9%84%D8%A8%D8%AD%D8%B1%D9%8A%D9%86%20%D8%AA%D8%AF%D9%8A%D9%86%20%D8%A8%D8%B4%D8%AF%D8%A9%20%D8%A7%D8%B3%D8%AA%D9%85%D8%B1%D8%A7%D8%B1%20%D8%A7%D9%84%D8%A7%D8%B9%D8%AA%D8%AF%D8%A7%D8%A1%D8%A7%D8%AA": true,
         "https://www.tradewindsnews.com/casualties/houthis-gain-positions-to-target-shipping-amid-advance-towards-aden-us-led-coalition-warns/2-1-2076994#:~:text=Houthis%20gain%20positions%20to%20target%20shipping": true
       },
       "anchor_target_details": {
@@ -288,10 +288,12 @@
           "exists": true
         },
         "https://x.com/UK_MTO/status/2123425162758619611#:~:text=JMIC%20Advisory%20Note%20Update%20115": {
-          "http_status": null,
-          "dom_wait_ms": 15000,
-          "exists": false,
-          "error": "anchor target HTTP 403; DOM target absent"
+          "method": "x_oembed",
+          "oembed": "https://publish.twitter.com/oembed?url=https%3A%2F%2Fx.com%2FUK_MTO%2Fstatus%2F2123425162758619611&omit_script=1&dnt=true",
+          "http_status": 200,
+          "exists": true,
+          "author_name": "UKMTO Operations Centre",
+          "text_chars": 277
         },
         "https://en.irna.ir/news/86326732/Two-more-violating-supertankers-catch-fire-in-Strait-of-Hormuz#:~:text=Two%20more%20violating%20supertankers%20catch%20fire": {
           "http_status": null,
@@ -300,10 +302,12 @@
           "error": "anchor target HTTP 502; DOM target absent"
         },
         "https://x.com/bahdiplomatic/status/2123521856678371365#:~:text=%D9%85%D9%85%D9%84%D9%83%D8%A9%20%D8%A7%D9%84%D8%A8%D8%AD%D8%B1%D9%8A%D9%86%20%D8%AA%D8%AF%D9%8A%D9%86%20%D8%A8%D8%B4%D8%AF%D8%A9%20%D8%A7%D8%B3%D8%AA%D9%85%D8%B1%D8%A7%D8%B1%20%D8%A7%D9%84%D8%A7%D8%B9%D8%AA%D8%AF%D8%A7%D8%A1%D8%A7%D8%AA": {
-          "http_status": null,
-          "dom_wait_ms": 15000,
-          "exists": false,
-          "error": "anchor target HTTP 403; DOM target absent"
+          "method": "x_oembed",
+          "oembed": "https://publish.twitter.com/oembed?url=https%3A%2F%2Fx.com%2Fbahdiplomatic%2Fstatus%2F2123521856678371365&omit_script=1&dnt=true",
+          "http_status": 200,
+          "exists": true,
+          "author_name": "وزارة الخارجية 🇧🇭",
+          "text_chars": 226
         },
         "https://www.tradewindsnews.com/casualties/houthis-gain-positions-to-target-shipping-amid-advance-towards-aden-us-led-coalition-warns/2-1-2076994#:~:text=Houthis%20gain%20positions%20to%20target%20shipping": {
           "http_status": 200,
@@ -546,9 +550,9 @@
         "#sec-03": true,
         "#sec-map": true,
         "/additions.html#news-card": true,
-        "https://x.com/UK_MTO/status/2123425162758619611#:~:text=JMIC%20Advisory%20Note%20Update%20115": false,
+        "https://x.com/UK_MTO/status/2123425162758619611#:~:text=JMIC%20Advisory%20Note%20Update%20115": true,
         "https://en.irna.ir/news/86326732/Two-more-violating-supertankers-catch-fire-in-Strait-of-Hormuz#:~:text=Two%20more%20violating%20supertankers%20catch%20fire": false,
-        "https://x.com/bahdiplomatic/status/2123521856678371365#:~:text=%D9%85%D9%85%D9%84%D9%83%D8%A9%20%D8%A7%D9%84%D8%A8%D8%AD%D8%B1%D9%8A%D9%86%20%D8%AA%D8%AF%D9%8A%D9%86%20%D8%A8%D8%B4%D8%AF%D8%A9%20%D8%A7%D8%B3%D8%AA%D9%85%D8%B1%D8%A7%D8%B1%20%D8%A7%D9%84%D8%A7%D8%B9%D8%AA%D8%AF%D8%A7%D8%A1%D8%A7%D8%AA": false,
+        "https://x.com/bahdiplomatic/status/2123521856678371365#:~:text=%D9%85%D9%85%D9%84%D9%83%D8%A9%20%D8%A7%D9%84%D8%A8%D8%AD%D8%B1%D9%8A%D9%86%20%D8%AA%D8%AF%D9%8A%D9%86%20%D8%A8%D8%B4%D8%AF%D8%A9%20%D8%A7%D8%B3%D8%AA%D9%85%D8%B1%D8%A7%D8%B1%20%D8%A7%D9%84%D8%A7%D8%B9%D8%AA%D8%AF%D8%A7%D8%A1%D8%A7%D8%AA": true,
         "https://www.tradewindsnews.com/casualties/houthis-gain-positions-to-target-shipping-amid-advance-towards-aden-us-led-coalition-warns/2-1-2076994#:~:text=Houthis%20gain%20positions%20to%20target%20shipping": true
       },
       "anchor_target_details": {
@@ -598,10 +602,12 @@
           "exists": true
         },
         "https://x.com/UK_MTO/status/2123425162758619611#:~:text=JMIC%20Advisory%20Note%20Update%20115": {
-          "http_status": null,
-          "dom_wait_ms": 15000,
-          "exists": false,
-          "error": "anchor target HTTP 403; DOM target absent"
+          "method": "x_oembed",
+          "oembed": "https://publish.twitter.com/oembed?url=https%3A%2F%2Fx.com%2FUK_MTO%2Fstatus%2F2123425162758619611&omit_script=1&dnt=true",
+          "http_status": 200,
+          "exists": true,
+          "author_name": "UKMTO Operations Centre",
+          "text_chars": 277
         },
         "https://en.irna.ir/news/86326732/Two-more-violating-supertankers-catch-fire-in-Strait-of-Hormuz#:~:text=Two%20more%20violating%20supertankers%20catch%20fire": {
           "http_status": null,
@@ -610,10 +616,12 @@
           "error": "anchor target HTTP 502; DOM target absent"
         },
         "https://x.com/bahdiplomatic/status/2123521856678371365#:~:text=%D9%85%D9%85%D9%84%D9%83%D8%A9%20%D8%A7%D9%84%D8%A8%D8%AD%D8%B1%D9%8A%D9%86%20%D8%AA%D8%AF%D9%8A%D9%86%20%D8%A8%D8%B4%D8%AF%D8%A9%20%D8%A7%D8%B3%D8%AA%D9%85%D8%B1%D8%A7%D8%B1%20%D8%A7%D9%84%D8%A7%D8%B9%D8%AA%D8%AF%D8%A7%D8%A1%D8%A7%D8%AA": {
-          "http_status": null,
-          "dom_wait_ms": 15000,
-          "exists": false,
-          "error": "anchor target HTTP 403; DOM target absent"
+          "method": "x_oembed",
+          "oembed": "https://publish.twitter.com/oembed?url=https%3A%2F%2Fx.com%2Fbahdiplomatic%2Fstatus%2F2123521856678371365&omit_script=1&dnt=true",
+          "http_status": 200,
+          "exists": true,
+          "author_name": "وزارة الخارجية 🇧🇭",
+          "text_chars": 226
         },
         "https://www.tradewindsnews.com/casualties/houthis-gain-positions-to-target-shipping-amid-advance-towards-aden-us-led-coalition-warns/2-1-2076994#:~:text=Houthis%20gain%20positions%20to%20target%20shipping": {
           "http_status": 200,
@@ -628,11 +636,7 @@
   ],
   "soft_checks": [],
   "violations": [
-    "@1440 مرساة مكسورة: https://x.com/UK_MTO/status/2123425162758619611#:~:text=JMIC%20Advisory%20Note%20Update%20115 («حساب @UK_MTO على X») لا هدف لها",
     "@1440 مرساة مكسورة: https://en.irna.ir/news/86326732/Two-more-violating-supertankers-catch-fire-in-Strait-of-Hormuz#:~:text=Two%20more%20violating%20supertankers%20catch%20fire («straits.live») لا هدف لها",
-    "@1440 مرساة مكسورة: https://x.com/bahdiplomatic/status/2123521856678371365#:~:text=%D9%85%D9%85%D9%84%D9%83%D8%A9%20%D8%A7%D9%84%D8%A8%D8%AD%D8%B1%D9%8A%D9%86%20%D8%AA%D8%AF%D9%8A%D9%86%20%D8%A8%D8%B4%D8%AF%D8%A9%20%D8%A7%D8%B3%D8%AA%D9%85%D8%B1%D8%A7%D8%B1%20%D8%A7%D9%84%D8%A7%D8%B9%D8%AA%D8%AF%D8%A7%D8%A1%D8%A7%D8%AA («حساب @bahdiplomatic على X») لا هدف لها",
-    "@1920 مرساة مكسورة: https://x.com/UK_MTO/status/2123425162758619611#:~:text=JMIC%20Advisory%20Note%20Update%20115 («حساب @UK_MTO على X») لا هدف لها",
-    "@1920 مرساة مكسورة: https://en.irna.ir/news/86326732/Two-more-violating-supertankers-catch-fire-in-Strait-of-Hormuz#:~:text=Two%20more%20violating%20supertankers%20catch%20fire («straits.live») لا هدف لها",
-    "@1920 مرساة مكسورة: https://x.com/bahdiplomatic/status/2123521856678371365#:~:text=%D9%85%D9%85%D9%84%D9%83%D8%A9%20%D8%A7%D9%84%D8%A8%D8%AD%D8%B1%D9%8A%D9%86%20%D8%AA%D8%AF%D9%8A%D9%86%20%D8%A8%D8%B4%D8%AF%D8%A9%20%D8%A7%D8%B3%D8%AA%D9%85%D8%B1%D8%A7%D8%B1%20%D8%A7%D9%84%D8%A7%D8%B9%D8%AA%D8%AF%D8%A7%D8%A1%D8%A7%D8%AA («حساب @bahdiplomatic على X») لا هدف لها"
+    "@1920 مرساة مكسورة: https://en.irna.ir/news/86326732/Two-more-violating-supertankers-catch-fire-in-Strait-of-Hormuz#:~:text=Two%20more%20violating%20supertankers%20catch%20fire («straits.live») لا هدف لها"
   ]
 }
