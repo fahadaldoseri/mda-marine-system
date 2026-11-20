@@ -227,9 +227,27 @@ python3 tests/test_en_master_build_site_root.py && ok "مسار بناء الإ�
 python3 tests/test_en_source_assets.py && ok "عقد الأصل الإنجليزي والمعجم وتسلسل B004/B004A/B005/B009" || bad "عقد الأصل الإنجليزي أو مزامنة الأصول أو ترتيب المنتج/المستهلك فاشل"
 
 # ── مرحلة 24 أكتوبر 2026: أدوات اللغة · المحرّك · التسليم · PDF · البنية على GitHub ─────────
+# المقترح ١ (اعتماد فهد 20 نوفمبر 2026): عند إعادة G001 لا يُعاد إلا الفحص الذي تغيّرت مدخلاته.
+# الذاكرة تعمل فقط حين يمرّر المستدعي RUN_CHECKS_CACHE (أمر G001 وحده)، وحكمها في tools/run_checks_cache.py:
+# نجاح سابق في اليوم نفسه + بصمة كل ما قرأه الفحص لم تتغير + تتبع كامل؛ وإلا يُعاد الفحص.
+CACHED=0
+[ -z "${RUN_CHECKS_CACHE:-}" ] || mkdir -p "$(dirname "$RUN_CHECKS_CACHE")" || RUN_CHECKS_CACHE=""
 t() {  # t "الوصف" أمر...  — يمرّ إن كان رمز الخروج 0
   local name="$1"; shift
-  if "$@" >"$TMP/t.out" 2>&1; then ok "$name"; else bad "$name"; sed 's/^/      /' "$TMP/t.out" | tail -6; fi
+  if [ -z "${RUN_CHECKS_CACHE:-}" ]; then
+    if "$@" >"$TMP/t.out" 2>&1; then ok "$name"; else bad "$name"; sed 's/^/      /' "$TMP/t.out" | tail -6; fi
+    return
+  fi
+  { printf '%s\0' "$name" "$PWD" "$(date -u +%F)" "${B:-}" "${SITE:-}" "${SURFACE_DATE:-}" "${D:-}" "${LIVE_URL:-}" "${BRAIN_DIR:-}"
+    printf '%s\0' "$@"; } > "$TMP/t.key"
+  if python3 "$B/tools/run_checks_cache.py" lookup "$RUN_CHECKS_CACHE" "$TMP/t.key" 2>/dev/null; then
+    CACHED=$((CACHED+1)); ok "$name · نتيجة مخزّنة (لم تتغير مدخلاته منذ آخر نجاح)"; return
+  fi
+  : > "$TMP/t.trace"
+  local rc=0
+  CHECKS_TRACE="$TMP/t.trace" PYTHONPATH="$B/tools/checks_trace${PYTHONPATH:+:$PYTHONPATH}" "$@" >"$TMP/t.out" 2>&1 || rc=$?
+  { printf "%s\t" "$name"; python3 "$B/tools/run_checks_cache.py" record "$RUN_CHECKS_CACHE" "$TMP/t.key" "$TMP/t.trace" "$rc" 2>&1 || true; echo; } >>"$RUN_CHECKS_CACHE.log"
+  if [ "$rc" -eq 0 ]; then ok "$name"; else bad "$name"; sed 's/^/      /' "$TMP/t.out" | tail -6; fi
 }
 cd "$B" || exit 1
 echo "13) أدوات اللغة: حارس الحفظ · الإملاء · التحرير الآلي"
@@ -256,6 +274,10 @@ t "نطاق فحص الحجب (المتن مقابل الملحق والفهرس
 t "final_gate.sh متسق مع المانيفست" python3 tests/test_final_gate_vs_manifest.py
 t "أوامر المانيفست: سكربتات وخيارات موجودة" python3 tests/test_manifest_commands.py
 t "verify على المانيفست الحقيقي" python3 tools/runbook.py verify
+t "ذاكرة فحوص G001: لا نتيجة مخزّنة إلا بلا تغيّر أي مدخل (موجب + سوالب)" python3 tests/test_run_checks_cache.py
+t "الفحص المسبق المبكر S015: موجب وسالبا G000 وG049" python3 tests/test_early_preflight.py
+t "جدول أزمنة المراحل: elapsed_s لكل سطر وجدول تلقائي بعد كل run" python3 tests/test_runbook_timings.py
+t "قاعدة العدد في حالة المصادر: المعدود يوافق العدد والرقم باقٍ ولكل سطر مقابل إنجليزي" python3 tests/test_sources_state_counts.py
 
 echo "15) التسليم: النشر وتلغرام والتقدير"
 t "سكربتات التسليم (بلا إرسال)" bash tests/test_delivery_scripts.sh
@@ -351,5 +373,6 @@ t "موجب يمرّ وسالبان يُمنعان" python3 "$B/tests/test_en_pa
 
 echo "----- الحصيلة -----"
 printf '  نجح: %s · فشل: %s\n' "$PASS" "$FAIL"
+[ "$CACHED" -eq 0 ] || printf '  منها نتائج مخزّنة لم تتغير مدخلاتها: %s (RUN_CHECKS_CACHE)\n' "$CACHED"
 [ "$FAIL" -eq 0 ] || exit 1
 exit 0

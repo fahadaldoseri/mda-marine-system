@@ -129,8 +129,11 @@ def zones_css(zj: dict) -> str:
 @media (max-width:640px){{
   .tz{{padding:12px}}
   .tz-badge{{font-size:1.3rem}}
-  .tz-z{{grid-template-columns:auto minmax(0,1fr) auto;gap:6px}}
-  .tz-z .tz-c{{grid-column:2 / -1}}
+  /* 20 نوفمبر 2026 (الاختبار الحي): عمود الاسم كان auto فيأخذ عرض النص كاملًا، فتجاوز اسم
+     «Strait of Hormuz, Gulf of Oman and the Arabian Gulf» عرض الجوال بـ24 بكسلًا عند 390 وانضغط
+     المستوى إلى صفر. الاسم الآن يلتف داخل المساحة المتبقية، والمستوى بعرض محتواه، والعدد سطر كامل. */
+  .tz-z{{grid-template-columns:minmax(0,1fr) auto;gap:6px 10px}}
+  .tz-z .tz-c{{grid-column:1 / -1}}
   .tz-top{{grid-template-columns:minmax(0,1fr)}}
   .tz-chips{{justify-content:flex-start}}
 }}
