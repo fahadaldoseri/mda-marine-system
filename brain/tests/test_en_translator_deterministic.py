@@ -75,6 +75,27 @@ def test_full_note_keeps_its_glossary_entry() -> None:
     assert _translate([B, A], A) == GL[A]
 
 
+def test_imo_card_detail_translates_for_any_numbers() -> None:
+    """العطل المقيس (2026-11-20): ترجمة تفصيل بطاقتي IMO كانت مدخلًا معجميًا من نص السجل
+    الثابت، فأي رقم أو تاريخ جديد يبقى عربيًا في الصفحة الإنجليزية. القالب يُترجم لأي أرقام."""
+    cases = {
+        "زيادة 1 بين التحديثين؛ الإجمالي 139 حادثة مؤكدة حتى 20/11/2026":
+            "An increase of 1 between updates; 139 confirmed incidents in total as of 20/11/2026",
+        "انخفاض 2 بين التحديثين؛ الإجمالي 136 حادثة مؤكدة حتى 21/11/2026":
+            "A decrease of 2 between updates; 136 confirmed incidents in total as of 21/11/2026",
+        "لا زيادة بين التحديثين؛ الإجمالي 26 وفاة بحّار مؤكدة حتى 20/11/2026":
+            "No increase between updates; 26 confirmed seafarer deaths in total as of 20/11/2026",
+        "زيادة 2 بين التحديثين؛ الإجمالي 27 وفاة بحّار مؤكدة حتى 20/11/2026":
+            "An increase of 2 between updates; 27 confirmed seafarer deaths in total as of 20/11/2026",
+    }
+    for ar, en in cases.items():
+        assert I18N.localize_patterns(ar) == en, (ar, I18N.localize_patterns(ar))
+    tr = I18N.make_translator({}, I18N.load_glossary())
+    for ar, en in cases.items():
+        out = tr(ar) if callable(tr) else tr[0](ar)
+        assert out == en, (ar, out)
+
+
 if __name__ == "__main__":
     test_equal_length_keys_do_not_depend_on_hash_seed()
     test_split_note_does_not_guess_the_section()
