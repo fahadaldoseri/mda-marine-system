@@ -217,3 +217,76 @@ def test_b03_x_post_rejects_missing_post_and_wrong_account():
     _m, d = _run_x('<a href="http://127.0.0.1:{port}/UK_MTO/status/1#:~:text=JMIC">a</a>'
                    '<a href="http://127.0.0.1:{port}/other/status/2123425162758619611#:~:text=JMIC">b</a>')
     assert d["anchor_targets"] and not any(d["anchor_targets"].values())
+
+
+# ── موقع متعذر من الشبكة (خطأ اتصال أو 5xx): يُثبت من النسخة المحفوظة وقت الجمع ──
+# قياس 2026-11-20: en.irna.ir لا يُوصل إليه من السحابة (502 من الوكيل)، والخبر محفوظ
+# في feeds/feeds-D.json بعنوانه ورابطه وقت الجمع. 403 و404 لا يستفيدان من هذا المسار.
+class UnreachableHandler(BaseHTTPRequestHandler):
+    code = 502
+
+    def do_GET(self):  # noqa: N802 - واجهة BaseHTTPRequestHandler
+        if self.path.split("?", 1)[0].endswith("2026-11-20.html"):
+            port = self.server.server_port
+            body = (f'<!doctype html><html><body><a href="http://127.0.0.1:{port}/news/1'
+                    f'#:~:text={self.server.frag}">IRNA</a></body></html>')
+            code = 200
+        else:
+            body, code = "<html><body>bad gateway</body></html>", self.server.code
+        payload = body.encode("utf-8")
+        self.send_response(code)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Length", str(len(payload)))
+        self.end_headers()
+        self.wfile.write(payload)
+
+    def log_message(self, *_args):
+        return
+
+
+def _run_capture(tmp_path, code, frag, with_feed=True):
+    import json as _json
+    module = load_measure_module()
+    server = ThreadingHTTPServer(("127.0.0.1", 0), UnreachableHandler)
+    server.code, server.frag = code, frag
+    port = server.server_port
+    if with_feed:
+        (tmp_path / "feeds").mkdir()
+        feeds = [{"num": 6, "name": "straits.live", "ok": True, "fetched_url": "https://straits.live/feed.xml",
+                  "items": [{"title": "Two more violating supertankers catch fire in Strait of Hormuz",
+                             "link": f"http://127.0.0.1:{port}/news/1", "date": "Thu, 19 Nov 2026"}]}]
+        (tmp_path / "feeds" / "feeds-2026-11-20.json").write_text(_json.dumps(feeds), encoding="utf-8")
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        result = module.measure(f"http://127.0.0.1:{port}/reports/2026-11-20.html", [800], [], [],
+                                root=str(tmp_path))
+    finally:
+        server.shutdown()
+        server.server_close()
+        thread.join(timeout=2)
+    d = result["widths"]["800"]
+    (key, ok), = d["anchor_targets"].items()
+    return ok, d["anchor_target_details"][key]
+
+
+def test_b03_unreachable_site_verified_from_collection_capture(tmp_path):
+    ok, det = _run_capture(tmp_path, 502, "Two%20more%20violating%20supertankers%20catch%20fire")
+    assert ok is True
+    assert det["method"] == "collection_capture"
+    assert det["capture_file"].endswith("feeds-2026-11-20.json") and len(det["capture_sha256"]) == 64
+
+
+def test_b03_capture_rejects_fragment_absent(tmp_path):
+    ok, det = _run_capture(tmp_path, 502, "fabricated%20text")
+    assert ok is False
+
+
+def test_b03_capture_not_used_for_404(tmp_path):
+    ok, det = _run_capture(tmp_path, 404, "Two%20more%20violating%20supertankers%20catch%20fire")
+    assert ok is False and det.get("method") != "collection_capture"
+
+
+def test_b03_capture_requires_saved_original(tmp_path):
+    ok, _det = _run_capture(tmp_path, 502, "Two%20more%20violating%20supertankers%20catch%20fire", with_feed=False)
+    assert ok is False

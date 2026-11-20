@@ -102,6 +102,66 @@ def verify_x_post(page_url: str, fragment: str | None) -> dict:
     return detail
 
 
+def _report_date(url: str) -> str | None:
+    import re
+    m = re.search(r"(\d{4}-\d{2}-\d{2})\.html", url)
+    return m.group(1) if m else None
+
+
+def verify_from_capture(root: str | Path | None, date: str | None, target_url: str,
+                        fragment: str | None) -> dict | None:
+    """يثبت رابطًا متعذرًا من الشبكة من النسخة المحفوظة وقت الجمع (مقيس 2026-11-20: IRNA).
+
+    يُقبل فقط إذا وُجد الرابط نفسه (بلا الجزء بعد #) في ملف محفوظ لليوم نفسه، وظهر نص
+    المرساة في النص المحفوظ: بند تغذية في feeds/feeds-D.json جُلبت تغذيته بنجاح، أو أصل
+    محفوظ في archive/originals/D/manifest.json تطابق بصمته الملف. غير ذلك None (مانع).
+    """
+    import hashlib
+    import html as _html
+    import re
+    if not (root and date and fragment):
+        return None
+    root = Path(root)
+    want = target_url.split("#", 1)[0]
+    frag = _norm_text(fragment)
+    feeds = root / "feeds" / f"feeds-{date}.json"
+    if feeds.is_file():
+        raw = feeds.read_bytes()
+        for feed in json.loads(raw.decode("utf-8")):
+            if not isinstance(feed, dict) or not feed.get("ok"):
+                continue
+            for item in feed.get("items") or []:
+                if not isinstance(item, dict) or str(item.get("link") or "").split("#", 1)[0] != want:
+                    continue
+                text = _norm_text(" ".join(str(item.get(k) or "") for k in ("title", "summary", "description")))
+                if frag in text:
+                    return {"method": "collection_capture", "exists": True,
+                            "capture_file": str(feeds.relative_to(root)),
+                            "capture_sha256": hashlib.sha256(raw).hexdigest(),
+                            "capture_feed": feed.get("fetched_url") or feed.get("url") or feed.get("name"),
+                            "capture_item_date": item.get("date")}
+    manifest = root / "archive" / "originals" / date / "manifest.json"
+    if manifest.is_file():
+        for ent in json.loads(manifest.read_text(encoding="utf-8")):
+            if not isinstance(ent, dict) or ent.get("status") != "saved" or not ent.get("file"):
+                continue
+            if str(ent.get("url") or "").split("#", 1)[0] != want:
+                continue
+            f = manifest.parent / ent["file"]
+            if not f.is_file():
+                continue
+            raw = f.read_bytes()
+            digest = hashlib.sha256(raw).hexdigest()
+            if digest != ent.get("sha256"):
+                continue
+            text = _norm_text(_html.unescape(re.sub(r"<[^>]+>", " ", raw.decode("utf-8", "replace"))))
+            if frag in text:
+                return {"method": "collection_capture", "exists": True,
+                        "capture_file": str(f.relative_to(root)), "capture_sha256": digest,
+                        "capture_utc": ent.get("utc")}
+    return None
+
+
 def load_readiness(root: Path, url: str) -> list[str]:
     """يقرأ الأسئلة من المصدر الواحد، ويختار نمط اللغة بحسب الصفحة المقيسة."""
     p = Path(root) / READINESS_FILE
@@ -192,7 +252,7 @@ JS_MEASURE = r"""
 
 
 def measure(url: str, widths: list[int], questions: list[str], phrases: list[str],
-            base: str | None = None) -> dict:
+            base: str | None = None, root: str | Path | None = None) -> dict:
     from playwright.sync_api import Error as PlaywrightError, sync_playwright  # استيراد مؤجَّل
     from urllib.parse import unquote, urljoin
 
@@ -247,6 +307,7 @@ def measure(url: str, widths: list[int], questions: list[str], phrases: list[str
                     targets[key] = bool(detail["exists"])
                     target_details[key] = detail
                     continue
+                status = None
                 try:
                     aux = context.new_page()
                     target_page = link["page"]
@@ -283,11 +344,22 @@ def measure(url: str, widths: list[int], questions: list[str], phrases: list[str
                 except PlaywrightError as exc:
                     targets[key] = False
                     target_details[key] = {
-                        "http_status": None,
+                        "http_status": status,
                         "dom_wait_ms": ANCHOR_DOM_WAIT_MS,
                         "exists": False,
                         "error": str(exc)[:200],
                     }
+                    # تعذر شبكة فقط (لا رد، أو 5xx): يُثبت من النسخة المحفوظة وقت الجمع.
+                    # 403 و404 وغيرها لا تمر من هنا وتبقى مانعة.
+                    if status is None or status >= 500:
+                        frag = None
+                        if link["hash"].startswith(":~:text="):
+                            frag = unquote(link["hash"][len(":~:text="):].split("&")[0].split(",")[0])
+                        cap = verify_from_capture(root, _report_date(url), urljoin(url, link["page"]), frag)
+                        if cap:
+                            cap.update(http_status=status, live_error=str(exc)[:200])
+                            targets[key] = True
+                            target_details[key] = cap
                     # أخطاء الإغلاق غير المتوقعة تُترك للحارس الموحّد؛ لا تُبتلع.
                     if aux is not None:
                         aux.close()
@@ -382,7 +454,7 @@ def main() -> int:
     widths = [int(w) for w in args.widths.split(",") if w.strip()]
 
     data = measure(args.url, widths, load_readiness(args.root, args.url), args.phrase,
-                   base=args.base_file)
+                   base=args.base_file, root=args.root)
     bad = judge(data, hard)
     data["checks"] = checks
     data["soft_checks"] = soft
