@@ -21,6 +21,11 @@ MONTHS_AR = {1: "يناير", 2: "فبراير", 3: "مارس", 4: "أبريل",
              7: "يوليو", 8: "أغسطس", 9: "سبتمبر", 10: "أكتوبر", 11: "نوفمبر", 12: "ديسمبر"}
 
 
+# مفاتيح برمجية في الدفتر تُعرض بتسميتها العربية (ظهر «imo_confirmed_incidents» خامًا، تدقيق 20 نوفمبر)
+CLASS_LABELS = {
+    "imo_confirmed_incidents": "حوادث مؤكدة في سجل المنظمة البحرية الدولية",
+}
+
 def esc(t):
     return html.escape(str(t or ""), quote=True)
 
@@ -47,7 +52,8 @@ def build(ledger_path, out_path, title):
         a = area_of(str(e.get("location") or ""))
         per_month[ds] += 1
         per_area[a] += 1
-        per_class[str(e.get("classification") or "غير مصنف")] += 1
+        _cls = str(e.get("classification") or "غير مصنف")
+        per_class[CLASS_LABELS.get(_cls, _cls)] += 1
         per_area_month[ds][a] += 1
         lvl = str(e.get("confidence_level") or "غير محدد")
         conf[lvl] += 1
@@ -94,7 +100,7 @@ h1{{font-size:26px;margin:0 0 6px}}h2{{font-size:18px;color:var(--accent);margin
 p.lede{{color:var(--muted);margin:0 0 20px;font-size:14px}}
 .kpis{{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:22px 0}}
 .k{{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}}
-.k b{{display:block;font-size:24px;font-family:"IBM Plex Mono",monospace}}
+.k b{{display:block;font-size:24px;font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace}}
 .k span{{color:var(--muted);font-size:13px}}
 .row{{display:grid;grid-template-columns:150px 1fr 54px;gap:12px;align-items:center;margin:8px 0}}
 .lbl{{font-size:13.5px;color:var(--ink2)}}
@@ -103,11 +109,11 @@ p.lede{{color:var(--muted);margin:0 0 20px;font-size:14px}}
 .bar::after{{content:"";position:absolute;inset:0;background:linear-gradient(to right,transparent 24.6%,rgba(255,255,255,.16) 24.6%,rgba(255,255,255,.16) 25.2%,transparent 25.2%,transparent 49.7%,rgba(255,255,255,.16) 49.7%,rgba(255,255,255,.16) 50.3%,transparent 50.3%,transparent 74.8%,rgba(255,255,255,.16) 74.8%,rgba(255,255,255,.16) 75.4%,transparent 75.4%);pointer-events:none}}
 .bar i{{display:block;height:100%;background:var(--accent)}}
 .bar.alt i{{background:#4d9dff}}
-.num{{font-family:"IBM Plex Mono",monospace;font-size:13px;text-align:end}}
+.num{{font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace;font-size:13px;text-align:end}}
 table{{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}}
 th,td{{padding:9px 12px;border-bottom:1px solid var(--line);font-size:14px;text-align:start}}
 th{{background:#0f1d33;color:var(--ink2);font-weight:600}}
-td.num{{text-align:end;font-family:"IBM Plex Mono",monospace}}
+td.num{{text-align:end;font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace}}
 .foot{{color:var(--muted);font-size:13px;margin-top:26px;border-top:1px solid var(--line);padding-top:14px}}
 /* المظهر النهاري: كانت الصفحة تبقى داكنة مع شريط فاتح */
 body.daylight{{--bg:#eef3f9;--panel:#ffffff;--line:#d3dded;--ink:#0d1a2b;--ink2:#33475e;--muted:#4f657c;--accent:#0b7a72}}

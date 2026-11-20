@@ -30,8 +30,8 @@ The incidents with a known location cluster off the approaches to the Strait of 
 | Change in the confirmed IMO figure | 6+ | Current reading of 4/11/2026: 128 incidents · previous snapshot of 31/10/2026: 122 incidents |
 The figures above represent the items that could be identified from the headlines and text supplied; they do not represent the number of attacks. 60 feeds succeeded and their items totalled 1912.
 ## Threat Level
-Overall level: moderate — highest zone: Strait of Hormuz, Gulf of Oman and the Persian Gulf.
-- Zone level in the Strait of Hormuz, Gulf of Oman and the Persian Gulf: Moderate — one unconfirmed trade report and two official warnings, with no confirmed incident.
+Overall level: moderate — highest zone: Strait of Hormuz, Gulf of Oman and the Arabian Gulf.
+- Zone level in the Strait of Hormuz, Gulf of Oman and the Arabian Gulf: Moderate — one unconfirmed trade report and two official warnings, with no confirmed incident.
 - Zone level in the Horn of Africa: Moderate — carried over from the previous period with no new incident.
 - Zone level in Bab al-Mandab and the Red Sea: Low — no new qualifying incident during the period.
 - Zone level in the Arabian Sea: Low — no new qualifying incident during the period.
@@ -42,7 +42,7 @@ What would raise or lower it: official confirmation inside the Strait would rais
 **Take the following actions:**
 - Increase visual and radio watchkeeping before entering the Strait of Hormuz and throughout transit.
 - Request the full text of warnings 194-26 and 195-26 from UKMTO before changing a routing plan.
-- Report immediately to the maritime reporting centre any injury, explosion or floating object in the Persian Gulf and the Strait of Hormuz.
+- Report immediately to the maritime reporting centre any injury, explosion or floating object in the Arabian Gulf and the Strait of Hormuz.
 ## Event Log
 - **MN-2026-11-04-01** — **What happened:** UKMTO 194-26 was issued from the @UK_MTO account on X at 031313Z NOV 26. The material carries the warning number only and contains no location, vessel name or description of damage. **Source:** @UK_MTO account on X. **Date:** 03/11/2026. **Location:** not available in the material supplied. **Status:** maritime security warning; it does not by itself establish a number of attacks.
 - **MN-2026-11-04-02** — **What happened:** UKMTO 195-26 was issued from the @UK_MTO account on X at 032043Z NOV 26. The headline mentions an incident 14 nautical miles north-east of a point whose name is incomplete in the material supplied. **Source:** @UK_MTO account on X. **Date:** 03/11/2026. **Location:** 14 nautical miles north-east of a position that is not available in the text. **Status:** brief official report; the incident details have not been established.

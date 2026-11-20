@@ -502,9 +502,10 @@ def _card_fragments_en(n: str, tr, tr_area) -> str | None:
 def localize_patterns(s: str) -> str | None:
     n = norm(s)
     # ك-11-11ب: وحدات ديناميكية (وقت الواقعة · موثوقية المصدر برمزها) — تُبنى بنمط مع حفظ الرموز.
-    _m = re.fullmatch(r"(?P<d>[0-9]{4}-[0-9]{2}-[0-9]{2})\s*·\s*وقت الواقعة غير متاح", s.strip())
+    _m = re.fullmatch(r"(?P<d>[0-9]{4}-[0-9]{2}-[0-9]{2})\s*(?P<p>\(تاريخ النشر\))?\s*·\s*وقت الواقعة غير متاح", s.strip())
     if _m:
-        return f"{_m.group('d')} · Incident time unavailable"
+        _pub = " (publication date)" if _m.group("p") else ""
+        return f"{_m.group('d')}{_pub} · Incident time unavailable"
     _m = re.fullmatch(r"موثوقية المصدر:\s*(?P<r>[A-F]\s*/\s*[0-9])", s.strip())
     if _m:
         return f"Source reliability: {_m.group('r').replace(' ', '')}"
@@ -677,9 +678,10 @@ def localize_patterns(s: str) -> str | None:
         return f"under reference {m.group(1)} ({m.group(2)})."
     # الملاحظة نفسها حين يكون اسم القسم رابطًا مستقلًا (<a>ما تغيّر</a> أو <a>التوصيات</a>):
     # العقدة النصية تنتهي عند «قسم»، والقسم يُترجم من نص الرابط نفسه، فلا يُخمَّن هنا.
-    m = re.fullmatch(r"و(\d+)\s+بنود أخرى في قسم", n)
+    # الصيغ العربية الصحيحة للعدد (بند واحد · بندان · 3–10 بنود · 11+ بندًا) والصيغة القديمة «و1 بنود»
+    m = re.fullmatch(r"(?:وبند واحد آخر|وبندان آخران|و(\d+)\s+بنود أخرى|و(\d+)\s+بندًا آخر)\s+في قسم", n)
     if m:
-        k = int(m.group(1))
+        k = int(m.group(1) or m.group(2) or (2 if "بندان" in n else 1))
         return f"and {k} more item{'' if k == 1 else 's'} under"
     # تفاصيل بطاقتي العدّاد الحاكم (قرار المالك 2026-11-19): UKMTO والروايات غير المؤكدة.
     if n == "سجلات فريدة مصدرها":
@@ -856,9 +858,11 @@ def localize_patterns(s: str) -> str | None:
     m = re.fullmatch(r"لا تغذية فارغة، ولا يُستَتَر أي قيد عن القارئ\.", n)
     if m:
         return "No feed is empty, and no constraint is concealed from the reader."
-    m = re.fullmatch(r"(\d{1,2})\s+(" + "|".join(MONTHS) + r")\s+(\d{4})\s+·\s+(\d{2}:\d{2})\s+حسب التوقيت العالمي", n)
+    m = re.fullmatch(r"(\d{1,2})\s+(" + "|".join(MONTHS) + r")\s+(\d{4})\s+·\s+(\d{2}:\d{2})\s+حسب التوقيت العالمي"
+                     r"(?:\s*\((\d{2}:\d{2})\s+بتوقيت البحرين\))?", n)
     if m:
-        return f"{m.group(1)} {MONTHS[m.group(2)]} {m.group(3)} · {m.group(4)} UTC"
+        bh = f" ({m.group(5)} Bahrain time)" if m.group(5) else ""
+        return f"{m.group(1)} {MONTHS[m.group(2)]} {m.group(3)} · {m.group(4)} UTC{bh}"
     m = re.fullmatch(r"(\d{1,2})\s+(" + "|".join(MONTHS) + r")\s+(\d{4})", n)
     if m:
         return f"{m.group(1)} {MONTHS[m.group(2)]} {m.group(3)}"
@@ -1709,13 +1713,24 @@ def _master_top_sector_label(date: str) -> str | None:
 def _preserve_master_dynamic_fields(html_text: str, date: str) -> str:
     """Replace only dated-master-backed sector text and keep UTC punctuation intact."""
     sector = _master_top_sector_label(date)
+    if not sector:
+        # بلا سطر حاكم في المتن الإنجليزي: يُترجم اسم القطاع العربي من المعجم ترجمة تامة،
+        # وإلا كانت المطابقة الجزئية تُبقي «Highest zone» وحدها بلا اسم (تدقيق 20 نوفمبر).
+        _m = re.search(r'<p class="tz-sub">\s*أعلى نطاق:\s*([^<]+?)\s*</p>', html_text)
+        if _m:
+            try:
+                sector = (load_glossary().get(norm(_m.group(1))) or "").strip() or None
+            except (OSError, ValueError):  # المعجم غير متاح: يبقى المسار السابق والفشل المغلق قائم
+                sector = None
+            if sector and ARABIC.search(sector):
+                sector = None
     if sector:
         sector_html = _html.escape(sector, quote=False)
         html_text = re.sub(
             r'(<p class="tz-sub">)\s*أعلى نطاق:\s*[^<]*(</p>)',
             lambda match: f"{match.group(1)}Highest sector: {sector_html}{match.group(2)}",
             html_text,
-            count=1,
+            count=0,  # بطاقة الشاشة وبطاقة الطباعة كلتاهما (كانت الثانية تبقى «Highest zone» بلا اسم)
         )
     html_text = re.sub(
         r'خلال 24 ساعة السابقة\s*\(\s*(?:<span\b[^>]*class="[^"]*\bltr\b[^"]*"[^>]*>\s*UTC\s*</span>|UTC)\s*\)',
