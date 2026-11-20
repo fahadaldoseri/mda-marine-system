@@ -1,0 +1,117 @@
+{
+  "created_by": "mark_components",
+  "created_reason": "bootstrap قبل اشتقاق أول مكوّن في خط اليوم",
+  "date": "2026-11-20",
+  "feeds": {
+    "browser_only": [],
+    "checked": 60,
+    "derived_from": "feeds/feeds-2026-11-20.status.json",
+    "empty": [],
+    "fail_ratio": 0.083,
+    "failed": 5,
+    "failed_feeds": [
+      {
+        "block_reason": "all routes failed: primary: derived items without real content (1) · curl: derived items without real content (1) · curl أعاد محتوى غير مقروء",
+        "error": "derived items without real content (1) · curl: derived items without real content (1) · curl أعاد محتوى غير مقروء",
+        "name": "القيادة المركزية الأمريكية (سنتكوم)",
+        "num": 30
+      },
+      {
+        "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403)",
+        "error": "حجب مصدر — blocked page: Just a moment (HTTP 403)",
+        "name": "Lloyd's List",
+        "num": 36
+      },
+      {
+        "block_reason": "all routes failed: primary: <urlopen error [Errno 104] Connection reset by peer> · curl رمز 35",
+        "error": "<urlopen error [Errno 104] Connection reset by peer> · curl رمز 35",
+        "name": "IRIB News",
+        "num": 45
+      },
+      {
+        "block_reason": "all routes failed: primary: <urlopen error [Errno 104] Connection reset by peer> · curl رمز 35",
+        "error": "<urlopen error [Errno 104] Connection reset by peer> · curl رمز 35",
+        "name": "ISNA",
+        "num": 46
+      },
+      {
+        "block_reason": "all routes failed: primary: <urlopen error [Errno 104] Connection reset by peer> · curl رمز 35",
+        "error": "<urlopen error [Errno 104] Connection reset by peer> · curl رمز 35",
+        "name": "Mehr — العربي",
+        "num": 47
+      }
+    ],
+    "note": "مصدر نجح على مسار وفشل على آخر لا يُحسب متعذّرًا (عطل ك-137)",
+    "ok": 55,
+    "stale": [
+      12,
+      13,
+      20,
+      32
+    ],
+    "status": "degraded"
+  },
+  "final_gate": {
+    "blocked_steps": [],
+    "dir": "logs/gate-2026-11-20",
+    "exit_code": 1,
+    "note": "نتيجة بوابة التسليم النهائية — كُتبت العلامة بعدها.",
+    "status": "warn"
+  },
+  "finished_utc": "2026-11-20T01:45:36Z",
+  "gate_finished_utc": "2026-11-20T05:30:13Z",
+  "gate_note": "علامة مرحلة الخط اليومي — بوابة التسليم لم تُشغَّل بعد.",
+  "gate_state": "not_run",
+  "language": {
+    "banned_terms": 0,
+    "edit_pass": null,
+    "long_sentences": 6,
+    "orthography_errors": 0,
+    "waw_pct": 1.3,
+    "waw_runs3": 0
+  },
+  "ledger_merge": {
+    "added_this_run_count": 4,
+    "derived_from": "cumulative-2026/daily/2026-11-20.json",
+    "merged_before_marker": true,
+    "note": "دُمج ملف اليوم في الدفتر الجامع (4 واقعة)",
+    "status": "ok"
+  },
+  "ofac": {
+    "derived_from": "watchlist/ofac-targets.txt + archive/ofac-screen-latest.json",
+    "list": "https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/SDN.CSV",
+    "matches": [],
+    "note": "فُحص 14 مستهدفًا — الحالة: ok",
+    "results_file": "archive/ofac-screen-latest.json",
+    "status": "ok",
+    "targets": 14
+  },
+  "originals": {
+    "derived_from": "archive/originals/2026-11-20/",
+    "empty_shell": 0,
+    "failed": 0,
+    "healthy": 3,
+    "manifest": "archive/originals/2026-11-20/manifest.json",
+    "note": "حُفظت الأصول في archive/originals/2026-11-20",
+    "status": "ok"
+  },
+  "overall": "degraded",
+  "pipeline_version": 4,
+  "report_present_at_pipeline_end": true,
+  "schema_version": 1,
+  "sources": {
+    "approved": 62,
+    "checked": 60,
+    "failed": 5,
+    "failed_names": [
+      "القيادة المركزية الأمريكية (سنتكوم)",
+      "Lloyd's List",
+      "IRIB News",
+      "ISNA",
+      "Mehr — العربي"
+    ],
+    "ok": 55,
+    "status_file": "feeds/feeds-2026-11-20.status.json"
+  },
+  "written_stage": "final"
+}

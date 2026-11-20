@@ -103,11 +103,14 @@ def wait_deploy(sha: str, timeout: int) -> dict:
 
 
 def live_check(rel_html: str, expect_sha: str, tries: int = 8) -> dict:
-    """يقرأ الصفحة من الموقع الحي بلا ذاكرة مؤقتة ويقارن بصمتها ببصمة المبني."""
+    """يقرأ الصفحة من الموقع الحي بلا ذاكرة مؤقتة ويقارن بصمتها ببصمة المبني.
+
+    وكيل مستخدم باسم الأداة: Cloudflare يرد 403 على وكيل Python-urllib الافتراضي (قيس 2026-11-20).
+    """
     url = f"{BASE_URL}/{rel_html[:-5] if rel_html.endswith('.html') else rel_html}"
     last = {}
     for _ in range(tries):
-        req = urllib.request.Request(f"{url}?v={int(time.time())}", headers={"Cache-Control": "no-cache"})
+        req = urllib.request.Request(f"{url}?v={int(time.time())}", headers={"Cache-Control": "no-cache", "User-Agent": "seawatch-cloud-deliver/1.0"})
         try:
             with urllib.request.urlopen(req, timeout=30) as r:
                 body = r.read()

@@ -1,7 +1,7 @@
 {
   "connect_attempts": 1,
   "connect_lines": [
-    "11199 connect(3, {sa_family=AF_INET, sin_port=htons(80), sin_addr=inet_addr(\"1.1.1.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)"
+    "7997  connect(3, {sa_family=AF_INET, sin_port=htons(80), sin_addr=inet_addr(\"1.1.1.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)"
   ],
   "execve": [
     "/bin/sh",
@@ -10,22 +10,22 @@
     "/usr/local/bin/python3"
   ],
   "files_opened_for_write": [
-    "11195 creat(\"/newroot/dev/full\", 0444)  = 5",
-    "11195 creat(\"/newroot/dev/null\", 0444)  = 5",
-    "11195 creat(\"/newroot/dev/random\", 0444) = 5",
-    "11195 creat(\"/newroot/dev/tty\", 0444)   = 5",
-    "11195 creat(\"/newroot/dev/urandom\", 0444) = 5",
-    "11195 creat(\"/newroot/dev/zero\", 0444)  = 5",
-    "11195 openat(5, \"gid_map\", O_RDWR|O_CLOEXEC) = 6",
-    "11195 openat(5, \"setgroups\", O_RDWR|O_CLOEXEC) = 6",
-    "11195 openat(5, \"uid_map\", O_RDWR|O_CLOEXEC) = 6",
-    "11196 openat(AT_FDCWD, \"/var/tmp/hermetic-work.y56g7h/.hermetic-net-20261118T201413Z-11155.probe.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-    "11196 openat(AT_FDCWD, \"/var/tmp/hermetic-work.y56g7h/.hermetic-net-20261118T201413Z-11155.probe.before\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-    "11196 openat(AT_FDCWD, \"/var/tmp/hermetic-work.y56g7h/.hermetic-net-20261118T201413Z-11155.probe.out\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-    "11196 openat(AT_FDCWD, \"/var/tmp/hermetic-work.y56g7h/.hermetic-net-20261118T201413Z-11155.probe.rc\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-    "11196 openat(AT_FDCWD, \"/var/tmp/hermetic-work.y56g7h/.hermetic-net-20261118T201413Z-11155.run.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-    "11197 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-    "11200 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-    "11203 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3"
+    "7993  creat(\"/newroot/dev/full\", 0444)  = 5",
+    "7993  creat(\"/newroot/dev/null\", 0444)  = 5",
+    "7993  creat(\"/newroot/dev/random\", 0444) = 5",
+    "7993  creat(\"/newroot/dev/tty\", 0444)   = 5",
+    "7993  creat(\"/newroot/dev/urandom\", 0444) = 5",
+    "7993  creat(\"/newroot/dev/zero\", 0444)  = 5",
+    "7993  openat(5, \"gid_map\", O_RDWR|O_CLOEXEC) = 6",
+    "7993  openat(5, \"setgroups\", O_RDWR|O_CLOEXEC) = 6",
+    "7993  openat(5, \"uid_map\", O_RDWR|O_CLOEXEC) = 6",
+    "7994  openat(AT_FDCWD, \"/var/tmp/hermetic-work.mYQnDM/.hermetic-net-20261120T051532Z-7953.probe.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+    "7994  openat(AT_FDCWD, \"/var/tmp/hermetic-work.mYQnDM/.hermetic-net-20261120T051532Z-7953.probe.before\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+    "7994  openat(AT_FDCWD, \"/var/tmp/hermetic-work.mYQnDM/.hermetic-net-20261120T051532Z-7953.probe.out\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+    "7994  openat(AT_FDCWD, \"/var/tmp/hermetic-work.mYQnDM/.hermetic-net-20261120T051532Z-7953.probe.rc\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+    "7994  openat(AT_FDCWD, \"/var/tmp/hermetic-work.mYQnDM/.hermetic-net-20261120T051532Z-7953.run.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+    "7995  openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+    "7998  openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+    "8001  openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3"
   ]
 }

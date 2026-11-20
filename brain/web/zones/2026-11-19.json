@@ -1,0 +1,254 @@
+{
+  "date": "2026-11-19",
+  "window": "خلال 24 ساعة السابقة",
+  "scale_version": 1,
+  "registry_version": 1,
+  "scale_levels": [
+    {
+      "ar": "حرج",
+      "rank": 5,
+      "token": "critical",
+      "color": "#FFA3A3",
+      "marker": "■ ■ ■ ■ ■"
+    },
+    {
+      "ar": "مرتفع جدًا",
+      "rank": 4,
+      "token": "severe",
+      "color": "#FFA96B",
+      "marker": "▲ ▲ ▲ ▲"
+    },
+    {
+      "ar": "مرتفع",
+      "rank": 3,
+      "token": "high",
+      "color": "#FFC24D",
+      "marker": "▲ ▲ ▲"
+    },
+    {
+      "ar": "متوسط",
+      "rank": 2,
+      "token": "med",
+      "color": "#d29119",
+      "marker": "▲ ▲"
+    },
+    {
+      "ar": "منخفض",
+      "rank": 1,
+      "token": "low",
+      "color": "#28b45a",
+      "marker": "▲"
+    }
+  ],
+  "overall": {
+    "level": "مرتفع جدًا",
+    "rank": 4,
+    "top_zone": "مضيق هرمز وخليج عُمان والخليج العربي",
+    "top_zone_id": "Z1",
+    "basis": "أعلى نطاق: مضيق هرمز وخليج عُمان والخليج العربي — وقائع مؤهّلة: هجوم — بلاغ UKMTO 211-26 عن إصابة ناقلة بمقذوف على بعد 13 ميلًا بحريًا شمال خصب وبحار مفقود · 18/11/2026 · هجوم — بلاغ UKMTO متأخر عن إصابة ناقلة بمقذوف في غرفة المحركات على بعد 6 أميال بحرية شمال خصب · 18/11/2026 · بيان — وزارة الخارجية البحرينية تدين الهجوم على سفينة تابعة لشركة وتجدد الهجمات الإيرانية "
+  },
+  "zones": [
+    {
+      "id": "Z1",
+      "name": "مضيق هرمز وخليج عُمان والخليج العربي",
+      "level": "مرتفع جدًا",
+      "rank": 4,
+      "confirmed": 2,
+      "probable": 0,
+      "excluded": 1,
+      "events": 5,
+      "qualifying_codes": [
+        "MN-2026-11-19-01",
+        "MN-2026-11-19-02",
+        "MN-2026-11-19-03",
+        "MN-2026-11-19-05"
+      ],
+      "categories": [
+        "هجوم على سفينة",
+        "تهديد ألغام"
+      ],
+      "basis": "وقائع مؤهّلة: هجوم — بلاغ UKMTO 211-26 عن إصابة ناقلة بمقذوف على بعد 13 ميلًا بحريًا شمال خصب وبحار مفقود · 18/11/2026 · هجوم — بلاغ UKMTO متأخر عن إصابة ناقلة بمقذوف في غرفة المحركات على بعد 6 أميال بحرية شمال خصب · 18/11/2026 · بيان — وزارة الخارجية البحرينية تدين الهجوم على سفينة تابعة لشركة وتجدد الهجمات الإيرانية ",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-19"
+    },
+    {
+      "id": "Z2",
+      "name": "باب المندب والبحر الأحمر",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-19"
+    },
+    {
+      "id": "Z3",
+      "name": "بحر العرب",
+      "level": "متوسط",
+      "rank": 2,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "استمراري — آخر واقعة مؤهّلة في هذا القطاع بتاريخ 2026-11-18.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": true,
+      "last_change": "2026-11-18",
+      "carry_from": "2026-11-18"
+    },
+    {
+      "id": "Z4",
+      "name": "القرن الأفريقي",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-19"
+    },
+    {
+      "id": "Z5",
+      "name": "المحيط الهندي",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-19"
+    }
+  ],
+  "counter": {
+    "total": 5,
+    "qualifying": 4,
+    "confirmed": 2,
+    "probable": 0,
+    "unconfirmed_qualifying": 2,
+    "unconfirmed_total": 2,
+    "excluded": 1,
+    "nonspatial": 0
+  },
+  "generated_from": "cumulative-2026/daily/2026-11-19.json",
+  "events": [
+    {
+      "code": "MN-2026-11-19-01",
+      "title": "هجوم — بلاغ UKMTO 211-26 عن إصابة ناقلة بمقذوف على بعد 13 ميلًا بحريًا شمال خصب وبحار مفقود · 18/11/2026",
+      "area": "مضيق هرمز",
+      "class": "بلاغ رسمي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": true,
+      "confirmation": "confirmed",
+      "qualify_reason": "نوع مؤهّل: «هجوم» وهدف بحري/ملاحي: «ناقلة»",
+      "incident_group": "MN-2026-11-19-01",
+      "source_excerpt": "UKMTO WARNING 211-26 - UKMTO has received a time-late report of an incident 13NM north of Khasab, Oman. Local authorities report a tanker was struck by an unknown projectile within the Strait of Hormuz. A fire occurred onboard, which has since been extinguished. Search and rescue efforts are underway for a missing crew member, currently unaccounted for. Vessel damage assessment and environmental i",
+      "category": "هجوم على سفينة"
+    },
+    {
+      "code": "MN-2026-11-19-02",
+      "title": "هجوم — بلاغ UKMTO متأخر عن إصابة ناقلة بمقذوف في غرفة المحركات على بعد 6 أميال بحرية شمال خصب · 18/11/2026",
+      "area": "مضيق هرمز",
+      "class": "بلاغ رسمي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": true,
+      "confirmation": "confirmed",
+      "qualify_reason": "نوع مؤهّل: «هجوم» وهدف بحري/ملاحي: «ناقلة»",
+      "incident_group": "MN-2026-11-19-02",
+      "source_excerpt": "UKMTO has received a time-late report of an incident 6NM north of Khasab, Oman. A tanker was struck by an unknown projectile in the engine room while transiting outbound through the Strait of Hormuz. The crew are safe and accounted for. Damage assessment, and environmental impact are unknown at the time of this report. Vessels are advised to transit with caution and report any suspicious activity ",
+      "category": "هجوم على سفينة"
+    },
+    {
+      "code": "MN-2026-11-19-03",
+      "title": "بيان — وزارة الخارجية البحرينية تدين الهجوم على سفينة تابعة لشركة وتجدد الهجمات الإيرانية على المملكة والكويت · 18/11/2026",
+      "area": "الخليج العربي",
+      "class": "بيان رسمي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «الخليج العربي»",
+      "qualifying": true,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "نوع مؤهّل: «هجوم» وهدف بحري/ملاحي: «سفينة»",
+      "incident_group": "MN-2026-11-19-03",
+      "source_excerpt": "مملكة البحرين تُدين الهجوم الذي استهدف سفينة تابعة لشركة",
+      "category": "هجوم على سفينة"
+    },
+    {
+      "code": "MN-2026-11-19-04",
+      "title": "بلاغ غير مؤكد — موقع gCaptain ينقل عن ADNOC L&S إصابة سفينة تديرها في مضيق هرمز وبحارًا مفقودًا · 18/11/2026",
+      "area": "مضيق هرمز",
+      "class": "نقل مهني",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": false,
+      "confirmation": "probable",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-19-04",
+      "source_excerpt": "UAE’s ADNOC L&S Says One Crew Member Missing After Attack on Its Vessel in Hormuz",
+      "category": ""
+    },
+    {
+      "code": "MN-2026-11-19-05",
+      "title": "بلاغ غير مؤكد — رواية إيرانية نقلها موقع straits.live عن ارتطام ثلاث ناقلات بألغام شرق مضيق هرمز · 18/11/2026",
+      "area": "مضيق هرمز",
+      "class": "نقل إعلامي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": true,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "نوع مؤهّل: «ألغام» وهدف بحري/ملاحي: «ناقلات»",
+      "incident_group": "MN-2026-11-19-05",
+      "source_excerpt": "3 oil tankers disabled by mine blasts in Strait of Hormuz: Iranian army",
+      "category": "تهديد ألغام"
+    }
+  ]
+}

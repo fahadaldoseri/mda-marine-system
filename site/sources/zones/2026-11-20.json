@@ -1,0 +1,235 @@
+{
+  "date": "2026-11-20",
+  "window": "خلال 24 ساعة السابقة",
+  "scale_version": 1,
+  "registry_version": 1,
+  "scale_levels": [
+    {
+      "ar": "حرج",
+      "rank": 5,
+      "token": "critical",
+      "color": "#FFA3A3",
+      "marker": "■ ■ ■ ■ ■"
+    },
+    {
+      "ar": "مرتفع جدًا",
+      "rank": 4,
+      "token": "severe",
+      "color": "#FFA96B",
+      "marker": "▲ ▲ ▲ ▲"
+    },
+    {
+      "ar": "مرتفع",
+      "rank": 3,
+      "token": "high",
+      "color": "#FFC24D",
+      "marker": "▲ ▲ ▲"
+    },
+    {
+      "ar": "متوسط",
+      "rank": 2,
+      "token": "med",
+      "color": "#d29119",
+      "marker": "▲ ▲"
+    },
+    {
+      "ar": "منخفض",
+      "rank": 1,
+      "token": "low",
+      "color": "#28b45a",
+      "marker": "▲"
+    }
+  ],
+  "overall": {
+    "level": "متوسط",
+    "rank": 2,
+    "top_zone": "مضيق هرمز وخليج عُمان والخليج العربي",
+    "top_zone_id": "Z1",
+    "basis": "أعلى نطاق: مضيق هرمز وخليج عُمان والخليج العربي — وقائع مؤهّلة: بلاغ غير مؤكد — إرنا تنقل عن الحرس الثوري اندلاع حريق في ناقلتين عملاقتين في مضيق هرمز · 19/11/2026"
+  },
+  "zones": [
+    {
+      "id": "Z1",
+      "name": "مضيق هرمز وخليج عُمان والخليج العربي",
+      "level": "متوسط",
+      "rank": 2,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 2,
+      "events": 3,
+      "qualifying_codes": [
+        "MN-2026-11-20-02"
+      ],
+      "categories": [
+        "حريق على متن سفينة"
+      ],
+      "basis": "وقائع مؤهّلة: بلاغ غير مؤكد — إرنا تنقل عن الحرس الثوري اندلاع حريق في ناقلتين عملاقتين في مضيق هرمز · 19/11/2026",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-20"
+    },
+    {
+      "id": "Z2",
+      "name": "باب المندب والبحر الأحمر",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-20"
+    },
+    {
+      "id": "Z3",
+      "name": "بحر العرب",
+      "level": "متوسط",
+      "rank": 2,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "استمراري — آخر واقعة مؤهّلة في هذا القطاع بتاريخ 2026-11-18.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": true,
+      "last_change": "2026-11-18",
+      "carry_from": "2026-11-18"
+    },
+    {
+      "id": "Z4",
+      "name": "القرن الأفريقي",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 1,
+      "events": 1,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-20"
+    },
+    {
+      "id": "Z5",
+      "name": "المحيط الهندي",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-20"
+    }
+  ],
+  "counter": {
+    "total": 4,
+    "qualifying": 1,
+    "confirmed": 0,
+    "probable": 0,
+    "unconfirmed_qualifying": 1,
+    "unconfirmed_total": 1,
+    "excluded": 3,
+    "nonspatial": 0
+  },
+  "generated_from": "cumulative-2026/daily/2026-11-20.json",
+  "events": [
+    {
+      "code": "MN-2026-11-20-01",
+      "title": "تنبيه — UKMTO يوزّع التحديث 115 من تنبيه JMIC الإرشادي، والنص غير متاح · 19/11/2026",
+      "area": "مضيق هرمز",
+      "class": "تنبيه رسمي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": false,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-20-01",
+      "source_excerpt": "JMIC Advisory Note Update 115 Distributed by UKMTO on behalf of the Joint Maritime Information Centre.",
+      "category": ""
+    },
+    {
+      "code": "MN-2026-11-20-02",
+      "title": "بلاغ غير مؤكد — إرنا تنقل عن الحرس الثوري اندلاع حريق في ناقلتين عملاقتين في مضيق هرمز · 19/11/2026",
+      "area": "مضيق هرمز",
+      "class": "نقل إعلامي رسمي إيراني",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": true,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "نوع مؤهّل: «حريق» وهدف بحري/ملاحي: «مضيق»",
+      "incident_group": "MN-2026-11-20-02",
+      "source_excerpt": "Two more violating supertankers catch fire in Strait of Hormuz: IRGC Navy",
+      "category": "حريق على متن سفينة"
+    },
+    {
+      "code": "MN-2026-11-20-03",
+      "title": "بيان — وزارة الخارجية البحرينية تدين استمرار هجمات الحوثيين على المنشآت المدنية والاقتصادية في السعودية · 19/11/2026",
+      "area": "الخليج العربي",
+      "class": "بيان سياسي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «الخليج العربي»",
+      "qualifying": false,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-20-03",
+      "source_excerpt": "مملكة البحرين تدين بشدة استمرار الاعتداءات الإرهابية الحوثية على المنشآت المدنية والاقتصادية في المملكة العربية السعودية",
+      "category": ""
+    },
+    {
+      "code": "MN-2026-11-20-04",
+      "title": "بلاغ غير مؤكد — موقع TradeWinds ينقل تحذير التحالف من مواقع حوثية تتيح استهداف السفن قرب عدن · 19/11/2026",
+      "area": "خليج عدن",
+      "class": "نقل مهني",
+      "zone": "Z4",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «خليج عدن»",
+      "qualifying": false,
+      "confirmation": "probable",
+      "qualify_reason": "تحذير التحالف بقيادة الولايات المتحدة (منقول عبر TradeWinds) عن مواقع حوثية قرب عدن تتيح استهداف السفن؛ تحذير لا واقعة، ولا هجوم معلن في المصدر. يُذكر مؤشرًا ولا يُحتسب، وفق العدّاد المحوكم في ledger_totals.",
+      "incident_group": "MN-2026-11-20-04",
+      "source_excerpt": "Houthis gain positions to target shipping amid advance towards Aden, US-led coalition warns",
+      "category": "استهداف سفينة"
+    }
+  ]
+}

@@ -247,6 +247,11 @@ def load_day(date: str) -> list[dict] | None:
 
 
 ABSENCE_CLASSES = {"no_incident", "سجل دولي", "سجل مصدر مهني"}
+# عطل مُقاس (2026-11-20): تحديث نشرة إرشادية رسمية (JMIC/UKMTO) بلا واقعة جديدة
+# كان يُعدّ «رواية لم تتأكد» في عدّاد القطاعات (3) بينما العدّاد المحوكم في
+# ledger_totals لا يعدّه رواية (1)، فتعارضت بطاقة «روايات لم تتأكد» مع عدّاد القطاعات.
+# التنبيه الرسمي ليس رواية عن واقعة بحرية، فيُستبعد كما تُستبعد سجلات انعدام الواقعة.
+NON_NARRATIVE_CLASSES = {"تنبيه رسمي"}
 
 
 def is_unconfirmed_narrative(row: dict) -> bool:
@@ -259,7 +264,7 @@ def is_unconfirmed_narrative(row: dict) -> bool:
     if row.get("confirmation") != "unconfirmed":
         return False
     cls = str(row.get("class", "")).strip()
-    if cls in ABSENCE_CLASSES:
+    if cls in ABSENCE_CLASSES or cls in NON_NARRATIVE_CLASSES:
         return False
     if "سياسي" in cls:
         return False
