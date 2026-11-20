@@ -589,6 +589,7 @@
         "gates": [],
         "tests": [
           "tests/test_runbook_engine.sh",
+          "tests/test_runbook_timings.py",
           "tests/test_ofac.sh",
           "tests/test_language.sh",
           "tests/test_feed_counters.py",
@@ -664,6 +665,48 @@
         "bash",
         "-lc",
         "B=\"$PWD\"; export B SITE; bash tools/restore_skills.sh; rc=$?; exit $rc"
+      ],
+      "ok_rc": [
+        0
+      ],
+      "warn_rc": []
+    },
+    {
+      "id": "S015",
+      "title": "فحص مسبق مبكر لعطلي G000 وG049 (الدقيقة الأولى)",
+      "kind": "script",
+      "phase": "ingest",
+      "assert": [
+        {
+          "type": "cmd",
+          "command": [
+            "bash",
+            "-lc",
+            "test -s logs/runbook/{date}/S015.log"
+          ]
+        }
+      ],
+      "links": {
+        "rules": [
+          "المقترح ٢ (اعتماد فهد 20 نوفمبر 2026): كشف العطل الرخيص في الدقيقة الأولى، وتبقى G000 وG049 مانعتين في مكانهما"
+        ],
+        "files": [
+          "tools/early_preflight.sh",
+          "validators/check_asset_floor.py",
+          "validators/check_zone_strip.py"
+        ],
+        "gates": [],
+        "tests": [
+          "tests/test_early_preflight.py",
+          "tests/test_asset_floor.py",
+          "tests/test_zone_strip.py"
+        ]
+      },
+      "on_fail": "stop",
+      "command": [
+        "bash",
+        "-lc",
+        "B=\"$PWD\"; export B SITE; bash \"$B/tools/early_preflight.sh\" \"$D\"; rc=$?; exit $rc"
       ],
       "ok_rc": [
         0
@@ -1764,10 +1807,13 @@
           "validators/check_content_fidelity.py",
           "validators/check_en_parity.py",
           "tools/source_count_units.py",
-          "tests/test_content_fidelity_units.py"
+          "tests/test_content_fidelity_units.py",
+          "tools/run_checks_cache.py",
+          "tools/checks_trace/sitecustomize.py"
         ],
         "gates": [],
         "tests": [
+          "tests/test_run_checks_cache.py",
           "tests/test_final_gate_vs_manifest.py",
           "tests/test_manifest_commands.py",
           "tests/test_gate_verdict.py",
@@ -1781,7 +1827,7 @@
       "command": [
         "bash",
         "-lc",
-        "B=\"$PWD\"; export B SITE; bash \"$B/tests/run_checks.sh\"; rc=$?; exit $rc"
+        "B=\"$PWD\"; export B SITE; RUN_CHECKS_CACHE=\"${TMPDIR:-/tmp}/seawatch-g001-cache/$D.json\" bash \"$B/tests/run_checks.sh\"; rc=$?; exit $rc"
       ],
       "ok_rc": [
         0
@@ -1912,7 +1958,9 @@
           "tools/patch_owner_notes.py"
         ],
         "gates": [],
-        "tests": []
+        "tests": [
+          "tests/test_sources_state_counts.py"
+        ]
       },
       "on_fail": "stop",
       "command": [

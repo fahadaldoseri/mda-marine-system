@@ -470,6 +470,16 @@ def main() -> int:
     return 0
 
 
+def feeds_word(n: int) -> str:
+    """تمييز العدد بالرقم: 3–10 جمع («تغذيات»)، وما عداها مفرد («تغذية»)."""
+    return "تغذيات" if 3 <= n % 100 <= 10 else "تغذية"
+
+
+def sources_word(n: int) -> str:
+    """«للمصدر» لواحد و«للمصدرين» لاثنين و«للمصادر» لما فوقهما (كانت «للمصدرين» لكل عدد)."""
+    return "للمصدر" if n == 1 else "للمصدرين" if n == 2 else "للمصادر"
+
+
 def sources_state_section(date: str, c: dict) -> str:
     """قسم «حالة المصادر والإفصاح» — مُولَّد من ملف حالة التغذيات ومن العدّاد الحاكم.
 
@@ -492,20 +502,23 @@ def sources_state_section(date: str, c: dict) -> str:
     def ar_list(xs):
         return "، ".join(xs)
 
-    parts = [f"فُحصت **{c['checked']}/{c['checked']} تغذية** بجملة **{items} عنصرًا**."]
-    parts = [f"فُحصت {c['checked']} تغذية من {c['checked']} تغذية.",
+    parts = [f"فُحصت {c['checked']} {feeds_word(c['checked'])} من {c['checked']} {feeds_word(c['checked'])}.",
              f"بلغ مجموع العناصر المقروءة {items} عنصرًا."]
     if c["failed"] == 0:
         parts.append("نجحت التغذية على مستوى المصدر كله.")
     else:
-        parts.append(f"تعذّرت {c['failed']} تغذية من أصل {c['checked']}.")
+        # 20 نوفمبر 2026 (الاختبار الحي): «تعذّرت 1 تغذية» و«تعذّرت 5 تغذية» تخالفان قاعدة العدد.
+        # المعدود يتبع إجمالي التغذيات وحده، ويبقى الرقم مكتوبًا لتماثل الأرقام مع النسخة الإنجليزية.
+        parts.append(f"تعذّرت {c['failed']} من أصل {c['checked']} {feeds_word(c['checked'])}.")
     if manual:
-        parts.append(f"سُجلت مرجعية يدوية للمصدرين {ar_list(manual)} — العدد {len(manual)}.")
+        parts.append(f"سُجلت مرجعية يدوية {sources_word(len(manual))} {ar_list(manual)} — العدد {len(manual)}.")
     if stale:
         parts.append(f"وُسمت مصادر متقادمة وفق حد {limit} يومًا: {ar_list(stale)} — العدد {len(stale)}؛ "
                      "لم يُستند إليها وحدها في إثبات واقعة جديدة.")
     if nums:
-        parts.append(f"سُجل تعذر مساري المصدرين {ar_list(nums)} في محاولات فرعية، مع بقاء حالة التغذية "
+        k = len(nums)
+        paths = {1: "مسار المصدر", 2: "مساري المصدرين"}.get(k, "مسارات المصادر")
+        parts.append(f"سُجل تعذر {paths} {ar_list(nums)} في محاولات فرعية، مع بقاء حالة التغذية "
                      "الكلية ناجحة عبر المسارات المعتمدة البديلة.")
     if not d.get("empty"):
         parts.append("لا تغذية فارغة، ولا يُخفى أي قيد عن القارئ.")

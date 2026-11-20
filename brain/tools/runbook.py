@@ -13,6 +13,7 @@
   runbook.py complete STEP --date D [--root .]    يعلن الوكيل إتمام خطوته؛ يُقبل فقط إن تحققت شروطها بالدليل
   runbook.py status --date D [--root .]           حالة كل خطوة
   runbook.py handbook [--root .]                  يولّد docs/runbook.md
+  runbook.py timings --date D                     جدول أزمنة المراحل والخطوات (logs/runbook/D/timings.md)
   runbook.py section-add --id ID --title T --after ID2 [--root .]      يسجّل قسمًا جديدًا في السجل
   runbook.py section-remove --id ID [--root .]
   runbook.py step-add --id ID --title T --kind script|llm|agent --after ID2 [--root .]   يسجّل خطوة جديدة
@@ -501,7 +502,10 @@ def run_auto(root, date, only_phase=None, redo=None, only_steps=None, auto_redo=
     منذ آخر توقف ويعيدها وحدها، بدل إعادة السلسلة كاملة بقائمة يدوية (tools/runbook_stale.py).
     """
     if not auto_redo or not date:
-        return run(root, date, only_phase, redo, only_steps)
+        try:
+            return run(root, date, only_phase, redo, only_steps)
+        finally:
+            report_timings(root, date)
     rs = _StaleAPI
     m = load(root)
     roots = rs.watch_roots(root, site_dir(root))
@@ -523,6 +527,117 @@ def run_auto(root, date, only_phase=None, redo=None, only_steps=None, auto_redo=
         return run(root, date, only_phase, set(redo or ()) | stale, only_steps, auto=state)
     finally:
         rs.save_snapshot(root, date, rs.snapshot(roots, state["snap"]))
+        report_timings(root, date)
+
+
+# ───────────────────────── جدول أزمنة المراحل (المقترح ٤) ─────────────────────────
+import calendar  # noqa: E402
+
+TIMINGS_NAME = "timings.md"
+
+
+def _ts(e: dict) -> float | None:
+    try:
+        return float(calendar.timegm(time.strptime(e["ts"], "%Y-%m-%dT%H:%M:%SZ")))
+    except (KeyError, TypeError, ValueError):
+        return None
+
+
+def timings(root, date) -> str:
+    """جدول زمن كل مرحلة وكل خطوة من سجل المحرّك (logs/runbook/DATE.jsonl).
+
+    اعتماد فهد 20 نوفمبر 2026 (المقترح ٤): يُكتب تلقائيًا في نهاية كل `run` إلى
+    logs/runbook/DATE/timings.md فيظهر أي تباطؤ فور حدوثه، بلا رسالة تلغرام إضافية.
+    زمن خطوة السكربت = مجموع elapsed_s لكل تشغيلاتها (الإعادة تُحسب منفصلة)؛ وخطوة الوكيل =
+    من تسليمها إلى إتمامها. السطور القديمة بلا elapsed_s تُعلَّم «غير مقيس» ولا تُقدَّر."""
+    m = load(root)
+    p = ledger_path(root, m, date)
+    entries = []
+    if os.path.exists(p):
+        for line in open(p, encoding="utf-8"):
+            if line.strip():
+                try:
+                    entries.append(json.loads(line))
+                except ValueError:
+                    continue
+    phase_of = {s["id"]: s.get("phase", "") for s in m["steps"]}
+    order = {s["id"]: i for i, s in enumerate(m["steps"])}
+    per: dict = {}
+    waiting: dict = {}
+    for e in entries:
+        sid = e.get("step")
+        if sid not in phase_of:
+            continue
+        r = per.setdefault(sid, {"runs": 0, "first": 0.0, "redo": 0.0, "unmeasured": 0, "failed": 0, "agent": 0.0})
+        st = e.get("status")
+        if st == "waiting_agent":
+            waiting.setdefault(sid, _ts(e))
+            continue
+        if st not in ("done", "done_warn", "failed"):
+            continue
+        if sid in waiting and "elapsed_s" not in e:
+            t0, t1 = waiting.pop(sid), _ts(e)
+            if t0 is not None and t1 is not None:
+                r["agent"] += max(0.0, t1 - t0)
+            r["runs"] += 1
+            continue
+        r["runs"] += 1
+        r["failed"] += st == "failed"
+        if "elapsed_s" not in e:
+            r["unmeasured"] += 1
+            continue
+        if r["runs"] == 1:
+            r["first"] = float(e["elapsed_s"])
+        else:
+            r["redo"] += float(e["elapsed_s"])
+    stamps = [t for t in (_ts(e) for e in entries) if t is not None]
+    wall = (max(stamps) - min(stamps)) if stamps else 0.0
+
+    def fmt(x: float) -> str:
+        return f"{x:.0f} ث" if x < 120 else f"{x / 60:.1f} د"
+
+    phases: dict = {}
+    for sid, r in per.items():
+        ph = phases.setdefault(phase_of[sid], [0, 0.0, 0.0, 0.0, 0])
+        ph[0] += 1
+        ph[1] += r["first"]
+        ph[2] += r["redo"]
+        ph[3] += r["agent"]
+        ph[4] += r["unmeasured"]
+    ph_order = [x for x in m.get("phase_order", []) if x in phases] + sorted(set(phases) - set(m.get("phase_order", [])))
+    out = [f"# أزمنة التشغيل — {date}", "",
+           f"الزمن الكلي من أول خطوة إلى آخرها: {fmt(wall)} · المصدر: {os.path.relpath(p, root)}", "",
+           "| المرحلة | خطوات | زمن الآلة (أول تشغيل) | زمن الإعادات | زمن الوكيل | غير مقيس |", "|---|---|---|---|---|---|"]
+    tot = [0, 0.0, 0.0, 0.0, 0]
+    for ph in ph_order:
+        v = phases[ph]
+        tot = [a + b for a, b in zip(tot, v)]
+        out.append(f"| {ph} | {v[0]} | {fmt(v[1])} | {fmt(v[2])} | {fmt(v[3])} | {v[4]} |")
+    out.append(f"| **المجموع** | {tot[0]} | {fmt(tot[1])} | {fmt(tot[2])} | {fmt(tot[3])} | {tot[4]} |")
+    slow = sorted(per.items(), key=lambda kv: -(kv[1]["first"] + kv[1]["redo"] + kv[1]["agent"]))[:12]
+    out += ["", "## أبطأ الخطوات", "", "| الخطوة | المرحلة | التشغيلات | أول تشغيل | الإعادات | الوكيل | فشل |",
+            "|---|---|---|---|---|---|---|"]
+    for sid, r in sorted(slow, key=lambda kv: order[kv[0]]):
+        out.append(f"| {sid} | {phase_of[sid]} | {r['runs']} | {fmt(r['first'])} | {fmt(r['redo'])} | "
+                   f"{fmt(r['agent'])} | {r['failed']} |")
+    return "\n".join(out) + "\n"
+
+
+def report_timings(root, date) -> None:
+    """يكتب الجدول ويطبع سطر المجموع؛ تعذّر الكتابة لا يغيّر رمز خروج التشغيل ويُعلن."""
+    if not date:
+        return
+    text = timings(root, date)
+    path = os.path.join(root, "logs", "runbook", date, TIMINGS_NAME)
+    try:
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(text)
+    except OSError as exc:
+        print(f"⚠ تعذّرت كتابة جدول الأزمنة: {exc}")
+        return
+    total = next((ln for ln in text.splitlines() if ln.startswith("| **المجموع**")), "")
+    print(f"⏱ جدول الأزمنة: {os.path.relpath(path, root)} {total}")
 
 
 def run(root, date, only_phase=None, redo=None, only_steps=None, auto=None):
@@ -622,12 +737,14 @@ def run(root, date, only_phase=None, redo=None, only_steps=None, auto=None):
             if not probs:
                 st = "done" if r.returncode in ok_rc else "done_warn"
                 append(root, m, date, {"step": s["id"], "status": st, "rc": r.returncode, "outputs": outputs_hash(root, s, date),
-                                       "log": os.path.relpath(logf, root), "attempt": n})
+                                       "log": os.path.relpath(logf, root), "attempt": n,
+                                       "elapsed_s": round(elapsed_seconds, 3)})
                 print(f"  ✔ {st} (رمز {r.returncode})")
                 break
             print(f"  ✘ محاولة {n}: {'; '.join(probs)}")
         else:
-            append(root, m, date, {"step": s["id"], "status": "failed", "rc": r.returncode, "problems": probs, "log": os.path.relpath(logf, root)})
+            append(root, m, date, {"step": s["id"], "status": "failed", "rc": r.returncode, "problems": probs, "log": os.path.relpath(logf, root),
+                                   "elapsed_s": round(elapsed_seconds, 3)})
             if s.get("on_fail") == "continue":
                 print("  ⚠ فشل مع المتابعة (مسموح في المانيفست)")
                 continue
@@ -1213,6 +1330,13 @@ def main():
         return complete(root, a.step, a.date)
     if c == "status":
         return status(root, a.date)
+    if c == "timings":
+        if not a.date:
+            print("✘ timings يحتاج --date")
+            return 2
+        report_timings(root, a.date)
+        print(timings(root, a.date))
+        return 0
     if c == "handbook":
         return handbook(root)
     if c == "section-add":
