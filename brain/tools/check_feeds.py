@@ -150,6 +150,26 @@ FALLBACK_ROUTES = {
         {'url': 'https://www.understandingwar.org/wp-json/wp/v2/posts?per_page=10',
          'via': 'official-api:isw-wp-json'},
     ],
+    # جولة 2026-11-20 (حل G033 الجذري): منذ انتقال التشغيل إلى السحابة (18 نوفمبر) تقطع المواقع
+    # الإيرانية الاتصال (curl رمز 35)، وتغذية سنتكوم ContentType=1 تعود قناة فارغة بلا عنصر.
+    # المسارات أدناه قنوات النشر الرسمية للجهة نفسها (لا وسيط ولا تجاوز حجب)، قيست حيًا من السحابة:
+    #   30 ← DVIDS وحدة 72 «U.S. Central Command Public Affairs» (منصة وزارة الحرب الرسمية) · 44 عنصرًا.
+    #   45 ← t.me/s/iribnews «کانال رسمی خبرگزاری صداوسیما» · 20 عنصرًا.
+    #   46 ← t.me/s/isna94 قناة موثقة «کانال رسمی خبرگزاری ایسنا» (أعلنها isna.ir 2015) · 16 عنصرًا.
+    #   47 ← t.me/s/mehrnews (مدرجة في الملف الرسمي لمهر على روبيكا وإيتا) · 20 عنصرًا.
+    30: [
+        {'url': 'https://www.dvidshub.net/rss/unit/72',
+         'via': 'official:dvids-centcom-public-affairs'},
+    ],
+    45: [
+        {'url': 'https://t.me/s/iribnews', 'via': 'official-channel:telegram/iribnews'},
+    ],
+    46: [
+        {'url': 'https://t.me/s/isna94', 'via': 'official-channel:telegram/isna94'},
+    ],
+    47: [
+        {'url': 'https://t.me/s/mehrnews', 'via': 'official-channel:telegram/mehrnews'},
+    ],
     58: [
         # جولة 2026-11-06: yafm.net يعيد صفحة Account Suspended (8126B، عنصر مشتق واحد)،
         # ومسار المتصفح يعيد الصفحة نفسها (8031B، عنصر واحد). نسخة Wayback الرسمية
