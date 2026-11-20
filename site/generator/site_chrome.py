@@ -192,7 +192,7 @@ var reportBtn=document.getElementById('btn-theme'), siteBtn=document.getElementB
 // إزالة مستمع الزر الأصلي داخل التقرير بمضاعفة العقدة لمنع الازدواج
 if(reportBtn){var clone=reportBtn.cloneNode(true);reportBtn.parentNode.replaceChild(clone,reportBtn);reportBtn=clone;}
 function isLight(){return body.classList.contains('daylight');}
-var SCALES=[1,1.12,1.25], SCALE_NAMES=['حجم الخط: عادي','حجم الخط: أكبر','حجم الخط: أكبر حجم'];
+var SCALES=[1,1.12,1.25], SCALE_NAMES=((document.documentElement.getAttribute('lang')||'').indexOf('en')===0)?['Font size: normal','Font size: larger','Font size: largest']:['حجم الخط: عادي','حجم الخط: أكبر','حجم الخط: أكبر حجم'];
 function currentScale(){var s=parseFloat(LS.getItem('mn-scale')||'1');return (s&&s>0)?s:1;}
 function scaleIdx(){var i=SCALES.indexOf(currentScale());return i<0?0:i;}
 function paintScaleBtn(){

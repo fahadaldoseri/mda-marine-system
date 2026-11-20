@@ -28,6 +28,21 @@ HERO_KPI_MODERN_FROM = "2026-10-31"
 DAILY_TITLE_FIXED = "التقرير اليومي للأمن البحري والأوضاع الراهنة في المنطقة"
 
 
+
+def _template_cutover() -> str:
+    """تاريخ سريان القالب الحالي (additions_effective_from في سياسة الأقسام).
+
+    الإصدارات الأقدم منشورة بالقالب السابق (فهرس 15–19 زرًا)، فيُوسم ذلك في شارة الأرشيف
+    كي لا يُظن التفاوت خللًا (تدقيق 20 نوفمبر).
+    """
+    import json as _json
+    from pathlib import Path as _P
+    p = _P(__file__).resolve().parent.parent / "sources" / "report-sections-policy.json"
+    try:
+        return str(_json.loads(p.read_text(encoding="utf-8")).get("additions_effective_from") or "")
+    except (OSError, ValueError):
+        return ""
+
 def first_sentence(text: str) -> str:
     """أول جملة من الفقرة التمهيدية: حتى أول نقطة يليها فراغ أو نهاية النص."""
     t = (text or "").strip()
@@ -85,14 +100,14 @@ def _arabic_count(count: int, noun: str) -> str:
             return "تحذير واحد"
         if count == 2:
             return "تحذيران"
-        return f"{count} تحذيرات"
+        return f"{count} تحذيرات" if count <= 10 else f"{count} تحذيرًا"
     if count == 0:
         return "لا بنود"
     if count == 1:
         return "بند واحد"
     if count == 2:
         return "بندان"
-    return f"{count} بنود"
+    return f"{count} بنود" if count <= 10 else f"{count} بندًا"
 
 
 def _list_items(value):
@@ -234,7 +249,9 @@ def screen_hero(meta, *, esc, inline, report_date, official, threat_cls,
     if gen and archived == "none":
         pass  # السجل التراكمي: لا عمر إصدار يُقاس، وشريحة «آخر تحديث» تكفي
     elif gen and archived:
-        chips.append(f'<span class="sc-chip sc-arch">إصدار أرشيفي · صدر <b>{esc(gen_display)}</b></span>')
+        _old_tpl = bool(report_date and _template_cutover() and str(report_date) < _template_cutover())
+        _arch_lbl = "إصدار أرشيفي بالقالب السابق" if _old_tpl else "إصدار أرشيفي"
+        chips.append(f'<span class="sc-chip sc-arch">{_arch_lbl} · صدر <b>{esc(gen_display)}</b></span>')
     elif gen and not doc_mode:
         chips.append(f'<span class="sc-chip sc-fresh" data-gen="{esc(gen)}" hidden>عمر الإصدار <b class="sc-age"></b></span>')
     if meta.get("version"):
@@ -412,14 +429,14 @@ body:has(.site-nav) .topbar{display:none}
 .sc-basis p{margin:6px 0 0;line-height:1.8}
 .sc-kpis{display:grid;gap:16px;direction:rtl;order:3}
 .sc-official-cards{order:4;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;min-width:0}
-.sc-official-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.sc-official-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
 .sc-official-card{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;text-align:right;direction:rtl;min-width:0}
 .sc-official-card h3{font-family:"Noto Kufi Arabic",sans-serif;font-size:16px;line-height:1.55;margin:0 0 5px;color:var(--accent)}
 .sc-official-basis,.sc-official-extra{font-size:12.5px;line-height:1.65;color:var(--muted);margin:3px 0}
 .sc-official-layers{display:grid;gap:7px;margin-top:10px}
 .sc-official-layer{display:grid;grid-template-columns:145px minmax(75px,auto) minmax(0,1fr);gap:8px;align-items:baseline;border-top:1px solid var(--line);padding-top:7px}
 .sc-official-label{font-size:12.5px;color:var(--muted)}
-.sc-official-value{font-family:"IBM Plex Mono",monospace;font-size:18px;line-height:1.35;text-align:right;direction:rtl;color:var(--ink)}
+.sc-official-value{font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace;font-size:18px;line-height:1.35;text-align:right;direction:rtl;color:var(--ink)}
 .sc-official-source{font-size:12.5px;line-height:1.5;color:var(--muted);overflow-wrap:anywhere}
 /* تنسيق مضغوط مقروء لبطاقات المستجدات (قرار المالك 2026-10-31: خفض الاكتظاظ) */
 .sc-official-layer{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:2px 10px;align-items:baseline;padding:6px 0;border-top:1px dashed var(--line)}
@@ -443,7 +460,7 @@ body:has(.site-nav) .topbar{display:none}
 .sc-kpi-key-item.acc-danger .sc-kpi-key-dot{background:var(--danger)}
 .sc-kl{font-size:14px;color:var(--muted);line-height:1.6}
 .sc-k-tag{display:inline-block;margin-inline-start:6px;padding:1px 7px;border:1px solid var(--line-2);border-radius:999px;color:var(--ink-2);font-size:13px;line-height:1.4;white-space:nowrap}
-.sc-kv{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:26px;line-height:1.3;text-align:right;direction:rtl}
+.sc-kv{font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace;font-weight:600;font-size:26px;line-height:1.3;text-align:right;direction:rtl}
 .sc-kv.sc-kv-long{font-size:20px;line-height:1.35;overflow-wrap:anywhere}
 .sc-kd{font-size:14px;color:var(--ink-2)}
 .sc-kn{font-size:14px;color:var(--muted);line-height:1.7;margin-top:3px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;flex:0 0 auto}
@@ -459,11 +476,11 @@ body:has(.site-nav) .topbar{display:none}
 .sc-v{font-size:15.5px;color:var(--ink);min-width:0}
 .sc-list,.sc-acts,.sc-watch{list-style:none;margin:0;padding:0}
 .sc-list li{display:grid;grid-template-columns:118px minmax(0,1fr);gap:12px;padding:6px 0;line-height:1.8}
-.sc-code{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--accent);background:rgba(34,195,182,.10);border:1px solid rgba(34,195,182,.32);border-radius:6px;padding:0 6px;white-space:nowrap;height:fit-content;text-align:center}
+.sc-code{font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace;font-size:13px;color:var(--accent);background:rgba(34,195,182,.10);border:1px solid rgba(34,195,182,.32);border-radius:6px;padding:0 6px;white-space:nowrap;height:fit-content;text-align:center}
 .sc-nocode{visibility:hidden}
 .sc-tag{display:inline-block;font-size:13px;border-radius:999px;padding:0 9px;border:1px solid var(--line-2);color:var(--ink-2);background:var(--panel-3);margin-inline-end:4px;line-height:1.7}
 .sc-acts li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px;padding:5px 0;line-height:1.8}
-.sc-acts li i{font-style:normal;font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:12.5px;background:var(--accent);color:var(--accent-ink);border-radius:6px;width:24px;height:24px;display:grid;place-items:center;margin-top:4px}
+.sc-acts li i{font-style:normal;font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace;font-weight:600;font-size:12.5px;background:var(--accent);color:var(--accent-ink);border-radius:6px;width:24px;height:24px;display:grid;place-items:center;margin-top:4px}
 .sc-watch li{padding:5px 0;line-height:1.8}
 .sc-gist{font-size:15.5px;line-height:1.75;color:var(--ink);margin:0 0 4px}
 .sc-plain{color:var(--accent);display:inline-block;padding:3px 0;min-height:24px}
@@ -500,7 +517,7 @@ body.daylight .sc-acts li i{color:#ffffff}
 body.daylight .sc-tag{color:#31465c}
 /* إصلاح الخطوط على الشاشة: isolate_ltr يلفّ IBM داخل CSS فيبطل الإعلان ويسقط النص إلى Times New Roman */
 body{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic","Segoe UI",Tahoma,system-ui,sans-serif}
-.kpi .k-v,section.doc code,td.num,th.num,.bar-row .bv,.mp-grid-lbl,.mp-events .mp-num,.lg-num,.cite-ref,.ev-code,.kpi .k-d,.tl-date,.tl-num,.rel-tbl td.rel{font-family:"IBM Plex Mono",ui-monospace,monospace}
+.kpi .k-v,section.doc code,td.num,th.num,.bar-row .bv,.mp-grid-lbl,.mp-events .mp-num,.lg-num,.cite-ref,.ev-code,.kpi .k-d,.tl-date,.tl-num,.rel-tbl td.rel{font-family:"IBM Plex Mono","IBM Plex Sans Arabic",ui-monospace,monospace}
 .mp-places text{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic",sans-serif}
 /* قراءة أوضح بكثافة معتدلة */
 .chip,.tag,.ev-code,.conf,.kstrip,.chg-tag,.st-badge{font-size:13.5px}
@@ -570,7 +587,11 @@ SCREEN_JS = r"""
       if (h <= 30) { cls = 'f-ok'; word = T.fresh; }
       else if (h <= 54) { cls = 'f-warn'; word = T.late; }
       else { cls = 'f-old'; word = T.old; }
-      txt = h < 1 ? T.ltHour : (h < 48 ? Math.round(h) + T.hour : Math.round(h / 24) + T.day);
+      // صيغة العدد والمعدود العربية: 1 ساعة · 2 ساعتان · 3–10 ساعات · 11+ ساعة
+      function arN(n, one, two, few, many){ return n === 1 ? one : (n === 2 ? two : (n <= 10 ? n + ' ' + few : n + ' ' + many)); }
+      var hh = Math.round(h), dd = Math.round(h / 24);
+      txt = h < 1 ? T.ltHour : (EN ? (h < 48 ? hh + T.hour : dd + T.day)
+            : (h < 48 ? arN(hh, 'ساعة', 'ساعتين', 'ساعات', 'ساعة') : arN(dd, 'يوم', 'يومين', 'أيام', 'يومًا')));
       f.querySelector('.sc-age').textContent = word + T.before + txt;
       f.className += ' ' + cls; f.hidden = false;
     }
@@ -607,7 +628,7 @@ SCREEN_JS = r"""
     if (t && t.length > 58) { t = t.slice(0, 57).replace(/\s+\S*$/, '') + '\u2026'; }
     if (!n && !t) return null;
     var el = d.createElement('div'); el.className = 'sc-peek no-print';
-    if (n > 1) { var b = d.createElement('b'); b.textContent = n === 2 ? T.two : (n + T.many); el.appendChild(b); }
+    if (n > 1) { var b = d.createElement('b'); b.textContent = n === 2 ? T.two : (n + ((!EN && n > 10) ? ' بندًا' : T.many)); el.appendChild(b); }
     if (t) { var sp = d.createElement('span'); sp.textContent = t; el.appendChild(sp); }
     return el;
   }

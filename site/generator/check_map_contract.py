@@ -37,7 +37,8 @@ POLICY_FROM = "2026-11-03"   # قرار المالك 2026-11-04: يسري على
 def verify(html: str, meta: dict, date: str = "") -> list:
     v = []
     check_no_map_note(meta.get("map") or {})
-    points = ((meta.get("map") or {}).get("points")) or []
+    from map_gulf import drawable_points
+    points = drawable_points(((meta.get("map") or {}).get("points")) or [])
     n = len(points)
     ap = sum(1 for p in points if p.get("precision") == "approximate")
 

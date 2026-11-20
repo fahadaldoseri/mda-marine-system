@@ -547,11 +547,12 @@ font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif}}
 h1{{font-size:28px;margin:0 0 6px;line-height:1.35;text-align:center}}
 .lede{{color:var(--muted);margin:0 0 16px;font-size:14px;max-width:78ch;margin-inline:auto;
 text-align:justify;text-justify:inter-word}}
+.lede a{{color:var(--accent);text-decoration:underline;text-underline-offset:3px}}
 /* ── شريط الحالة (م-20): المستوى بلونه + التاريخ + الرقم في أول شاشة ── */
 .statusbar{{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--panel);
 border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:0 0 14px}}
 .statusbar .sb-risk{{font-size:14px;font-weight:700;border:1px solid currentColor;border-radius:99px;padding:2px 12px}}
-.statusbar .sb-date{{font-family:"IBM Plex Mono",monospace;font-size:14px;color:var(--ink);text-align:center}}
+.statusbar .sb-date{{font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace;font-size:14px;color:var(--ink);text-align:center}}
 .statusbar .sb-code{{font-size:12.5px;color:var(--muted)}}
 .statusbar .sb-open{{margin-inline-start:auto;color:var(--accent);font-size:13.5px;font-weight:600;text-decoration:none}}
 .statusbar .sb-open:hover{{border-bottom:1px solid var(--accent)}}
@@ -568,7 +569,7 @@ background:transparent;border:1px solid var(--line);border-radius:9px;padding:8p
 color:var(--ink2);font:inherit;font-size:13.5px;cursor:pointer;text-align:right;min-height:40px}}
 .months .mo:hover{{border-color:var(--accent);color:var(--ink)}}
 .months .mo[aria-current="true"]{{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}}
-.months .mo .n{{font-family:"IBM Plex Mono",monospace;font-size:12px;opacity:.85}}
+.months .mo .n{{font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace;font-size:12px;opacity:.85}}
 .months .mo.is-empty{{color:var(--muted);opacity:.55;cursor:default;border-style:dashed}}
 .ar-extra{{display:none}}
 .ar.open .ar-extra{{display:block}}
@@ -581,7 +582,7 @@ border-radius:14px;padding:22px;color:inherit;margin:0 0 22px}}
 .hc-tag{{font-size:13px;background:var(--accent);color:var(--accent-ink);padding:3px 10px;border-radius:99px;font-weight:700}}
 .hc-risk{{font-size:12.5px;border:1px solid var(--line);padding:3px 10px;border-radius:99px}}
 .hc-code{{font-size:12.5px;color:var(--muted)}}
-.hc-code b{{color:var(--ink2);font-family:"IBM Plex Mono",monospace}}
+.hc-code b{{color:var(--ink2);font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace}}
 .hero-card h2{{margin:0 0 8px;font-size:20px}}
 .hc-meta{{color:var(--muted);font-size:13px;margin:0 0 14px}}
 .hc-changes{{border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:0 0 12px}}
@@ -622,7 +623,7 @@ ul.ar{{list-style:none;margin:0;padding:0}}
 .rk-low{{color:var(--ok);border-color:var(--ok)}}
 .tiles{{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 22px}}
 .tile{{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}}
-.tile b{{display:block;font-size:22px;font-family:"IBM Plex Mono",monospace}}
+.tile b{{display:block;font-size:22px;font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace}}
 .tile span{{color:var(--muted);font-size:13px}}
 .foot-note{{color:var(--muted);font-size:13px;margin:26px 0 0;border-top:1px solid var(--line);padding-top:14px}}
 @media print{{body{{background:#fff;color:#000}}.wrap{{padding:0}}
@@ -678,7 +679,8 @@ function paintTheme(){{
   document.querySelectorAll('#p-theme button').forEach(function(b){{
     b.classList.toggle('on', (b.getAttribute('data-theme')==='light')===light);
   }});
-  var sb=document.getElementById('sn-theme'); if(sb) sb.textContent = light?'المظهر: نهاري':'المظهر: ليلي';
+  // الزر يحمل أيقونة ونصًا مخفيًا بصريًا؛ يُحدَّث النص المخفي وحده فلا تُمحى الأيقونة ولا يخرج النص عن الزر
+  var st=document.getElementById('sn-theme-text'); if(st) st.textContent = light?'المظهر: نهاري':'المظهر: ليلي';
 }}
 function paintScale(){{
   var s=parseFloat(get('mn-scale','1'));
@@ -784,7 +786,8 @@ def ledger_month_count(dist: Path, month: str) -> int:
         for e in ev:
             if not isinstance(e, dict):
                 continue
-            ds = str(e.get("date") or e.get("iso") or e.get("event_date") or "")[:7]
+            # حقل التاريخ في الدفتر الحالي date_start؛ الحقول الأخرى للنسخ القديمة
+            ds = str(e.get("date_start") or e.get("date") or e.get("iso") or e.get("event_date") or "")[:7]
             if ds == month:
                 n += 1
         return n
@@ -901,7 +904,7 @@ NF_STYLE = """<style>
 .nf-list a{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:10px 14px;
   border:1px solid var(--line,#2b3b4e);border-radius:8px;text-decoration:none;color:inherit;min-height:44px}
 .nf-t{font-weight:600}
-.nf-p{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--muted,#7f95ae);direction:ltr;
+.nf-p{font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace;font-size:12.5px;color:var(--muted,#7f95ae);direction:ltr;
   unicode-bidi:isolate;overflow-wrap:anywhere}
 .nf-list a:hover{border-color:var(--accent,#2fd6c3)}
 .nf-back{display:inline-block;margin-top:6px;font-weight:700;text-decoration:none;color:var(--accent,#2fd6c3)}
