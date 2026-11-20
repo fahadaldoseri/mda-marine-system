@@ -102,7 +102,7 @@ def hero_detail(meta: dict, zones: dict, card: dict, kpis: dict | None = None) -
     if detail.get("kind") == "kpis_narratives":
         today = metric(kpis or {}, cid, "today")
         count = int(today or 0)
-        return f"{format_arabic_count(count, card.get('number_format'))} في سجل اليوم · لم تثبت أيٌّ منها"
+        return f"{format_arabic_count(count, card.get('number_format'))} في سجل اليوم · لم تثبت أيٌّ منها"
     if detail.get("kind") == "fire_split":
         fire = (meta.get("hero_sources") or {}).get("fire") or {}
         return (f"المؤكد: {fire.get('confirmed') or 0} · المرجّح: {fire.get('probable') or 0} · "

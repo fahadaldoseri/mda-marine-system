@@ -1,0 +1,46 @@
+{
+  "date": "2026-11-20",
+  "at": "2026-11-20T02:23:03Z",
+  "measurement_scope": "readiness-only; D020 owns live status, redirects, bytes and sha256",
+  "release_today_checked": false,
+  "release_today_note": "S085 يثبت الربط فقط؛ D020 يثبت 200 بعد التحويل وtext/html والحجم والبصمة.",
+  "channel_order": [
+    "cloudflare-pages",
+    "raw-githack",
+    "raw.githubusercontent-verify-only"
+  ],
+  "channels": {
+    "cloudflare-pages": {
+      "state": "ready",
+      "reason": "Cloudflare Pages مرتبط بـfahadaldoseri/seawatch-live@main؛ القياس الحي داخل D020",
+      "enabled": true,
+      "primary": true,
+      "presentation_eligible": true,
+      "url": "https://mda-bh.pages.dev",
+      "report_url": "https://mda-bh.pages.dev/reports/2026-11-20",
+      "repo": "fahadaldoseri/seawatch-live",
+      "branch": "main",
+      "min_bytes": 100000,
+      "expected_sha256": "9b57537066299658494f59b7e7a1ae35479f3945bf0a5f5a224235ae8da5fc80",
+      "auto_deploy": true
+    },
+    "raw-githack": {
+      "state": "down",
+      "reason": "gh auth status rc=1: fake gh: blocked during run",
+      "auth_rc": 1,
+      "presentation_eligible": true,
+      "transport": "raw.githack"
+    },
+    "raw.githubusercontent": {
+      "state": "verification-only",
+      "reason": "raw.githubusercontent.com يعيد text/plain؛ ممنوع كقناة عرض",
+      "enabled": true,
+      "primary": false,
+      "presentation_eligible": false,
+      "transport": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/fahadaldoseri/seawatch-live/main"
+    }
+  },
+  "status": "ready",
+  "rc": 0
+}

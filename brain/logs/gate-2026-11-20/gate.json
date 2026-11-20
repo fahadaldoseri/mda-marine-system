@@ -1,0 +1,544 @@
+{
+ "date": "2026-11-20",
+ "status": "warn",
+ "exit_code": 1,
+ "steps": [
+  {
+   "step": "لقطة الأصول الحاكمة وإلحاق السجل قبل البوابات",
+   "id": "G000",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G000.log"
+  },
+  {
+   "step": "بوابة الأصول الحاكمة — ledger والمرآة (فشل مغلق)",
+   "id": "G000A",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G000A.log"
+  },
+  {
+   "step": "مالك أدوات التشغيل المحكمة والمراقب",
+   "id": "G000B",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G000B.log"
+  },
+  {
+   "step": "اختبارات التشغيل داخل الحاوية المحكمة",
+   "id": "G000C",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G000C.log"
+  },
+  {
+   "step": "التسليم",
+   "id": "G000C2",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G000C2.log"
+  },
+  {
+   "step": "اتساق المعجم المشتق — فحص مصدر واحد",
+   "id": "G000D",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G000D.log"
+  },
+  {
+   "step": "اختبارات البوابات (tests)",
+   "id": "G001",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G001.log"
+  },
+  {
+   "step": "تنظيف المحتوى الداخلي",
+   "id": "G002",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G002.log"
+  },
+  {
+   "step": "دمج بنك التعريفات",
+   "id": "G003",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G003.log"
+  },
+  {
+   "step": "أرقام المصادر (معتمدة/مفحوصة/ناجحة)",
+   "id": "G004",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G004.log"
+  },
+  {
+   "step": "إصلاح الصياغة الآلي (خطوة واحدة)",
+   "id": "G006",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G006.log"
+  },
+  {
+   "step": "تحرير لغوي آلي (قبل/بعد لكل قسم)",
+   "id": "G007",
+   "status": "warn",
+   "exit_code": 1,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G007.log"
+  },
+  {
+   "step": "بوابات اللغة المتدرجة (إملاء ونحو وأسلوب)",
+   "id": "G008",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G008.log"
+  },
+  {
+   "step": "أصل نص كل واقعة (للفحص العكسي)",
+   "id": "G009",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G009.log"
+  },
+  {
+   "step": "بصمة النص قبل البناء",
+   "id": "G010",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G010.log"
+  },
+  {
+   "step": "فحص ما قبل التشغيل",
+   "id": "G011",
+   "status": "warn",
+   "exit_code": 1,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G011.log"
+  },
+  {
+   "step": "اشتقاق توزيع احتمالات الفرضيات",
+   "id": "G011H",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G011H.log"
+  },
+  {
+   "step": "مدقق التقرير (الواجهة)",
+   "id": "G012",
+   "status": "warn",
+   "exit_code": 1,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G012.log"
+  },
+  {
+   "step": "بوابة الأسلوب",
+   "id": "G013",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G013.log"
+  },
+  {
+   "step": "بوابة اللغة",
+   "id": "G014",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G014.log"
+  },
+  {
+   "step": "بوابة إغلاق المكتبات",
+   "id": "G015",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G015.log"
+  },
+  {
+   "step": "ترابط المكتبات والمهارات",
+   "id": "G016",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G016.log"
+  },
+  {
+   "step": "تماثل المهارات والمكتبات (مزامنة فورية)",
+   "id": "G017",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G017.log"
+  },
+  {
+   "step": "سلامة المهارات",
+   "id": "G018",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G018.log"
+  },
+  {
+   "step": "سلامة مهارات المشروع عبر الأسطح",
+   "id": "G018A",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G018A.log"
+  },
+  {
+   "step": "بوابة الفهم (مرحلة $COMP_STAGE)",
+   "id": "G019",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G019.log"
+  },
+  {
+   "step": "بوابة قراءة الموقف وتحليل المؤشرات",
+   "id": "G020",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G020.log"
+  },
+  {
+   "step": "استخراج أهداف OFAC",
+   "id": "G021",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G021.log"
+  },
+  {
+   "step": "فحص OFAC",
+   "id": "G022",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G022.log"
+  },
+  {
+   "step": "تغطية فحص العقوبات",
+   "id": "G023",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G023.log"
+  },
+  {
+   "step": "استعمال المكتبات (المعجم والبنك والفجوات)",
+   "id": "G024",
+   "status": "warn",
+   "exit_code": 1,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G024.log"
+  },
+  {
+   "step": "عدد المصادر (مصدر واحد)",
+   "id": "G025",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G025.log"
+  },
+  {
+   "step": "قابلية النقل (مسارات)",
+   "id": "G026",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G026.log"
+  },
+  {
+   "step": "حصاد الألفاظ الجديدة",
+   "id": "G028",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G028.log"
+  },
+  {
+   "step": "فصل فضاءات الرموز MN-/EST-",
+   "id": "G030",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G030.log"
+  },
+  {
+   "step": "قاعدة النقاط في المصدر",
+   "id": "G031",
+   "status": "warn",
+   "exit_code": 1,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G031.log"
+  },
+  {
+   "step": "فاحص النقل بين الإصدارات",
+   "id": "G032",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G032.log"
+  },
+  {
+   "step": "اكتمال التشغيل (الأعطال المعروفة)",
+   "id": "G033",
+   "status": "warn",
+   "exit_code": 1,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G033.log"
+  },
+  {
+   "step": "عيوب الكتابة (الصياغة والترقيم)",
+   "id": "G034",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G034.log"
+  },
+  {
+   "step": "تسرّب المحتوى الداخلي إلى المتن",
+   "id": "G035",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G035.log"
+  },
+  {
+   "step": "المفردات المبسطة (تنبيهي حتى الموافقة)",
+   "id": "G036",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G036.log"
+  },
+  {
+   "step": "التسليم",
+   "id": "G044",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G044.log"
+  },
+  {
+   "step": "التسليم",
+   "id": "G044B",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G044B.log"
+  },
+  {
+   "step": "بوابة الإغلاق (الأعطال والاستثناءات)",
+   "id": "G048",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G048.log"
+  },
+  {
+   "step": "تغطية المصادر في دفتر الوقائع (اتحاد المصادر المسجّل)",
+   "id": "G048A",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G048A.log"
+  },
+  {
+   "step": "اختبارات المراجعة الثانية (أ · ب · ج · د · هـ · ز)",
+   "id": "G040",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G040.log"
+  },
+  {
+   "step": "اختبار انحدار المصلح (12→23)",
+   "id": "G041",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G041.log"
+  },
+  {
+   "step": "حارس اسم المصدر الحقيقي (فشل مغلق)",
+   "id": "G057",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G057.log"
+  },
+  {
+   "step": "حارس تغطية الأيام والأدلة (فشل مغلق)",
+   "id": "G058",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G058.log"
+  },
+  {
+   "step": "حارس مفردات الموقع وغياب area (فشل مغلق)",
+   "id": "G059",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G059.log"
+  },
+  {
+   "step": "حارس مخطط الدفتر وحقول الدليل (فشل مغلق)",
+   "id": "G060",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G060.log"
+  },
+  {
+   "step": "تطابق أرقام المصادر في كل المواضع",
+   "id": "G005",
+   "status": "warn",
+   "exit_code": 1,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G005.log"
+  },
+  {
+   "step": "الأرقام (0-9 لاتينية)",
+   "id": "G027",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G027.log"
+  },
+  {
+   "step": "سياسة الرموز في المخرجات",
+   "id": "G029",
+   "status": "warn",
+   "exit_code": 1,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G029.log"
+  },
+  {
+   "step": "بوابات المخرج العشر",
+   "id": "G037",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G037.log"
+  },
+  {
+   "step": "بوابة ترجمة الشيفرة (صياغة بايثون)",
+   "id": "G056",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G056.log"
+  },
+  {
+   "step": "بوابة تغطية الربط الشامل",
+   "id": "G055",
+   "status": "warn",
+   "exit_code": 1,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G055.log"
+  },
+  {
+   "step": "بوابة ربط الأرقام بمصادرها",
+   "id": "G054",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G054.log"
+  },
+  {
+   "step": "تطابق النص المبني مع النص النهائي",
+   "id": "G042",
+   "status": "ok",
+   "exit_code": 0,
+   "disabled": false,
+   "reason": null,
+   "log": "logs/runbook/2026-11-20/G042.log"
+  }
+ ],
+ "blocked_steps": [],
+ "source": "runbook-ledger",
+ "dir": "logs/gate-2026-11-20",
+ "log_dir": "logs/gate-2026-11-20",
+ "stage": "provisional",
+ "finished_utc": "2026-11-20T02:25:22Z"
+}

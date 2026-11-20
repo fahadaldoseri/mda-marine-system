@@ -735,12 +735,12 @@
   {
    "file": "tools/preflight_check.py",
    "func": "<module>",
-   "fingerprint": "e0cc70f4",
+   "fingerprint": "9290699e",
    "line_at_generation": 231,
    "snippet": "st = json.loads(mark.read_text(encoding='utf-8'))",
    "handler_kind": "تجاهل",
    "category": "تنظيف ثانوي",
-   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
+   "reason": "الكتلة تغيّرت في 793dbfb1 (الاستثناء يُختار بتاريخ التقرير)؛ المعالج يضيف «علامة الخط غير صالحة» إلى قائمة الإخفاقات فيمنع (فشل مغلق). أُعيد تصنيفه 2026-11-20."
   },
   {
    "file": "tools/pro_audit.py",
@@ -1031,6 +1031,16 @@
    "handler_kind": "تجاهل",
    "category": "تنظيف ثانوي",
    "reason": ""
+  },
+  {
+   "file": "tools/cloud_deliver.py",
+   "func": "live_check",
+   "fingerprint": "ffbf64cd",
+   "line_at_generation": 111,
+   "snippet": "with urllib.request.urlopen(req, timeout=30) as r:",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "يُسجَّل سبب تعذّر قراءة الصفحة الحية ثم تُعاد المحاولة؛ إن لم تطابق البصمة بعد كل المحاولات ترجع الأداة بالرمز 2 ولا يُعلن النشر (فشل مغلق). صُنّف 2026-11-20."
   }
  ],
  "unclassified": []
