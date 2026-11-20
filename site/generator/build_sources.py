@@ -38,6 +38,7 @@ CSS = """
 .sx-note{background:var(--panel);border:1px solid var(--line);border-radius:12px;
   padding:10px 14px;margin:14px 0;font-size:13.5px;color:var(--ink2)}
 .sx-h2{font-size:17px;margin:26px 0 10px;padding-inline-start:10px;border-inline-start:3px solid var(--accent)}
+.sx-fold>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px}.sx-fold>summary::-webkit-details-marker{display:none}.sx-fold>summary::after{content:"▾";color:var(--muted,#7f95ae);font-size:14px;margin-top:16px}.sx-fold:not([open])>summary::after{content:"◂"}.sx-fold>summary .sx-h2{flex:1}@media print{.sx-fold>summary::after{display:none}}
 .sx-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:9px;margin:10px 0}
 .sx-card{background:var(--panel);border:1px solid var(--line);border-radius:11px;
   padding:9px 11px;display:flex;flex-direction:column;gap:5px;position:relative;overflow:hidden}
@@ -73,6 +74,18 @@ CSS = """
 @media(max-width:760px){.sx-grid{grid-template-columns:1fr}.sx-tbl{display:block;overflow-x:auto}}
 """
 
+
+
+def _n_bad(n: int) -> str:
+    """العدد والمعدود: مصدر واحد · مصدران · 3–10 مصادر · 11+ مصدرًا."""
+    return {0: "لا مصادر متعذّرة", 1: "مصدر واحد متعذّر", 2: "مصدران متعذّران"}.get(
+        n, f"{n} مصادر متعذّرة" if n <= 10 else f"{n} مصدرًا متعذّرًا")
+
+
+def _n_needs(n: int) -> str:
+    return {0: "لا مصادر ذات مسار آلي تحتاج إجراءً", 1: "مصدر واحد ذو مسار آلي يحتاج إجراءً",
+            2: "مصدران ذوا مسار آلي يحتاجان إجراءً"}.get(
+        n, f"{n} مصادر ذات مسار آلي تحتاج إجراءً" if n <= 10 else f"{n} مصدرًا ذا مسار آلي يحتاج إجراءً")
 
 def esc(value) -> str:
     return html.escape(str(value if value is not None else ''), quote=True)
@@ -205,7 +218,7 @@ def diagnosis_live(cards: list, status: dict, esc) -> str:
     stamp = status.get('date') or ''
     total = len(cards)
     return f"""
-  <h2 class="sx-h2">التشخيص الحي: {len(bad)} مصدرًا متعذّرًا و{len(manual)} بلا مسار آلي، من أصل {total} معتمدة</h2>
+  <h2 class="sx-h2">التشخيص الحي: {_n_bad(len(bad))} و{len(manual)} بلا مسار آلي، من أصل {total} معتمدة</h2>
   <div class="dx-tiles">{tiles}</div>
   <div class="sx-note">هذا القسم يُبنى من قياس فحص التغذيات نفسه{(' بتاريخ ' + esc(stamp)) if stamp else ''}، لا من لقطة محفوظة.
   «ناجحة آليًا» يعني أن المسار قرأ محتوى حقيقيًا (عنوان مادة أو نصّ منشور) لا روابط صور أو قوائم تنقّل.
@@ -244,7 +257,7 @@ def diagnosis_section(diag: list, esc) -> str:
         body = '<tr><td colspan="4">كل المصادر تعمل بلا إجراء مطلوب.</td></tr>'
     stamp = _dt.datetime.utcnow().strftime('%Y-%m-%d')
     return f"""
-  <h2 class="sx-h2">التشخيص الحي: {len(needs)} مصدرًا ذات مسار آلي تحتاج إجراءً من أصل {total_approved} معتمدة</h2>
+  <h2 class="sx-h2">التشخيص الحي: {_n_needs(len(needs))} من أصل {total_approved} معتمدة</h2>
   <div class="dx-tiles">{tiles}</div>
   <div class="sx-note">الجدول أدناه يعرض المصادر التي تحتاج إجراءً فقط، والتوزيع الكامل في المربعات أعلاه. التشخيص يقيس لكل مصدر مسار التغذية وحداثتها، وقراءة الصفحة المباشرة، ثم يصنّف المسار الفعلي.
   «يعمل آليًا» يعني قراءة المادة فعلًا داخل حدّ الحداثة المعتمد (14 يومًا). و«يحتاج متصفح» يعني أن الحجب أو بنية الصفحة تمنع القراءة الآلية.
@@ -368,7 +381,7 @@ def build(dist: Path, quiet: bool = False) -> dict:
   {(' بصمة ملف الفحص: <code>' + esc(status_hash) + '</code> — تُعاد الأرقام بحساب sha256 للملف sources/feeds-status.json.') if status_hash else ''}</div>
 
 {diagnosis_live(cards, status, esc)}
-  <h2 class="sx-h2">حالة المصادر المفحوصة</h2>
+  <details class="sx-fold" open><summary><h2 class="sx-h2">حالة المصادر المفحوصة</h2></summary>
   <div class="sx-legend">
     <span><b style="background:#1f9d6b"></b>نجح الفحص ({ok_c})</span>
     <span><b style="background:#c8402f"></b>متعذّر ({bad_c})</span>
@@ -380,14 +393,16 @@ def build(dist: Path, quiet: bool = False) -> dict:
   <div class="sx-grid">
 {chr(10).join(card_html(c) for c in cards) if cards else '<div class="sx-note">لا بيانات فحص بعد.</div>'}
   </div>
+  </details>
 
-  <h2 class="sx-h2">المراجع الرسمية</h2>
+  <details class="sx-fold" open><summary><h2 class="sx-h2">المراجع الرسمية</h2></summary>
   <div class="sx-refs">
 {refs_html if refs_html else '<div class="sx-note">لا مراجع مسجّلة بعد.</div>'}
   </div>
   <p class="sx-map-attribution">{map_attribution}</p>
+  </details>
 
-  <h2 class="sx-h2">موثوقية المصادر ومصداقيتها</h2>
+  <details class="sx-fold" open><summary><h2 class="sx-h2">موثوقية المصادر ومصداقيتها</h2></summary>
   <div class="sx-note">الموثوقية تقيس الجهة (A مطلق · B جيد · C متوسط · D غير موثوق · E غير مؤكد · F لا يمكن الحكم).
   والمصداقية تقيس درجة التصديق (1 مؤكد من مصدر آخر · 2 يُرجَّح · 3 يُحتمل · 4 مشكوك · 5 غير مُرجَّح · 6 لا يمكن الحكم).</div>
 {NATIONAL_AGENCY_NOTE}
@@ -397,7 +412,14 @@ def build(dist: Path, quiet: bool = False) -> dict:
 {table_html if table_html else '<tr><td colspan="6">لا سجل موثوقية بعد.</td></tr>'}
     </tbody>
   </table></div>
+  </details>
 </div>
+<script>
+/* الصفحة تبلغ قرابة 30 ألف بكسل على الجوال: تُطوى الأقسام الثلاثة الطويلة على الشاشات الضيقة،
+   وتبقى مفتوحة على الحاسوب وفي الطباعة وبلا سكربت (تدقيق 20 نوفمبر). */
+(function(){{if(window.matchMedia&&matchMedia('(max-width:700px)').matches){{
+document.querySelectorAll('details.sx-fold').forEach(function(d){{d.removeAttribute('open');}});}}}})();
+</script>
 </body></html>
 """
     target = dist / 'sources.html'

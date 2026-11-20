@@ -40,6 +40,9 @@ class FailClosed(Exception):
     """خطأ مانع: لا يُكتب شيء ويُعاد الرمز 2."""
 
 
+# علامات «ليست واقعة» — مطابقة لقائمة check_intel ح13
+NON_INCIDENT_MARKERS = ("لا يُحتسب", "لا يحتسب", "موقف سياسي", "بيان سياسي")
+
 def norm_area(s: str) -> str:
     """توحيد اسم المنطقة: بلا تشكيل، وتوحيد الألف والياء والتاء والهمزات."""
     s = unicodedata.normalize("NFKC", str(s or "")).strip()
@@ -195,6 +198,12 @@ def derive(date: str) -> dict:
         if not area:
             continue
         stats["with_area"] += 1
+        # البيان أو الموقف السياسي ليس واقعة مكانية: لا علامة له على الخريطة (السياسة نفسها في
+        # check_intel ح13). كان يُرسم على مِرساة اسم البحر فيبدو واقعة (تدقيق 20 نوفمبر، MN-2026-11-20-03).
+        _cls = str((zstat.get(code) or {}).get("class") or "")
+        if any(m in _cls or m in str(e.get("status") or "") for m in NON_INCIDENT_MARKERS):
+            stats["excluded"] += 1
+            continue
         key = norm_area(area)
         res_key, a, exc = resolve_area(key, anchors, excluded)
         if exc is not None:

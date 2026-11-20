@@ -45,7 +45,7 @@ INDEX_CSS = """
 .sp-top{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
 .sp-tag{font-size:12.5px;border-radius:999px;padding:3px 10px;border:1px solid var(--line-2);background:var(--panel2);color:var(--ink2)}
 .sp-tag.sp-hot{color:#ffd7d3;background:rgba(255,93,82,.16);border-color:rgba(255,93,82,.42)}
-.sp-tag.sp-code{font-family:"IBM Plex Mono",monospace;direction:ltr;unicode-bidi:isolate}
+.sp-tag.sp-code{font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace;direction:ltr;unicode-bidi:isolate}
 .sp-card h2{font-family:"Noto Kufi Arabic",sans-serif;font-size:19px;font-weight:600;margin:0 0 6px;line-height:1.55}
 .sp-card p{margin:6px 0 0;color:var(--ink2);font-size:14.5px;line-height:1.85}
 .sp-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;color:var(--faint);font-size:12.5px}

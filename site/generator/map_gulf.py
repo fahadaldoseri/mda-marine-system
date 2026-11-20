@@ -37,6 +37,17 @@ HEIGHT = WIDTH * (BBOX[3] - BBOX[1]) / ((BBOX[2] - BBOX[0]) * ASPECT)
 BOX = box(*BBOX)
 _SX = _SY = 1.0
 
+# البيان أو الموقف السياسي ليس واقعة مكانية فلا يُرسم (السياسة نفسها في
+# brain/tools/derive_map_points.py وcheck_intel ح13). مصدر واحد للمولّد وحارس عقد الخريطة.
+NON_SPATIAL_MARKERS = ("لا يُحتسب", "لا يحتسب", "موقف سياسي", "بيان سياسي")
+
+
+def drawable_points(points):
+    """نقاط الخريطة التي تُرسم: كل نقطة عدا ما صنفه بيان/موقف سياسي."""
+    return [p for p in (points or [])
+            if not any(m in str(p.get("class") or "") for m in NON_SPATIAL_MARKERS)]
+
+
 SEAS = [
     ("الخليج العربي", 26.45, 51.30, "lg"),
     ("خليج عمان", 23.95, 59.60, "lg"),
@@ -97,6 +108,12 @@ SECTOR_BBOX = {
     "Z2": (32.0, 11.6, 44.6, 22.6),
     "Z3": (52.0, 7.6, 68.6, 22.6),
     "Z4": (39.6, -0.4, 52.0, 12.0),
+}
+# مرسى اسم القطاع داخل البحر (خط الطول، خط العرض). الزاوية العليا اليسرى للمستطيل الإرشادي
+# تقع على اليابسة في Z1 (الكويت) وZ3 (الربع الخالي)، فظهر «بحر العرب» فوق السعودية (تدقيق 20 نوفمبر).
+SECTOR_LABEL_AT = {
+    "Z1": (52.35, 27.35),  # وسط الخليج العربي بين ساحلي السعودية (49.4°) وإيران (52.5°)
+    "Z3": (61.7, 22.4),   # بحر العرب شرق رأس الحد
 }
 SECTOR_FILL = {
     "critical": "rgba(214,69,69,.20)",
@@ -197,6 +214,10 @@ def _sector_svg(zones):
             f'vector-effect:non-scaling-stroke"/></g>')
         lvl = SECTOR_LEVEL_AR.get(str(z.get("level") or "").strip(), "")
         lx, ly = ax + 12.0, ay + 26.0
+        _anchor = SECTOR_LABEL_AT.get(zid)
+        if _anchor and BBOX[0] <= _anchor[0] <= BBOX[2] and BBOX[1] <= _anchor[1] <= BBOX[3]:
+            lx, ly = pt(*_anchor)
+            lx -= 12.0  # السطر الثاني يُزاح 12 يمينًا؛ يبقى السطران داخل البحر
         name = _safe_map_text(str(z.get("name") or "").strip())
         labels.append(
             f'<g class="mp-sector-lbl">'
@@ -213,8 +234,12 @@ def _tss_main_svg(points):
     """طبقة نظام فصل الملاحة + المسار المتأثر + المسافة التقريبية بالكيلومتر."""
     if not points:
         return "", ""
-    lon_c = sum(float(p["lon"]) for p in points) / len(points)
-    lat_c = sum(float(p["lat"]) for p in points) / len(points)
+    lon_t0 = sum(l for l, _ in TSS_MAIN) / len(TSS_MAIN)
+    lat_t0 = sum(a for _, a in TSS_MAIN) / len(TSS_MAIN)
+    # يبدأ الخط من أقرب واقعة إلى نظام فصل الملاحة. كان يبدأ من متوسط مواقع وقائع اليوم،
+    # فإذا تباعدت الوقائع وقع المتوسط على اليابسة (تدقيق 20 نوفمبر: بداية الخط في الصحراء).
+    _near = min(points, key=lambda p: _haversine_km(float(p["lon"]), float(p["lat"]), lon_t0, lat_t0))
+    lon_c, lat_c = float(_near["lon"]), float(_near["lat"])
     cx, cy = pt(lon_c, lat_c)
     poly = " ".join(f"{pt(lo, la)[0]:.1f},{pt(lo, la)[1]:.1f}" for lo, la in TSS_MAIN)
     px = [pt(lo, la) for lo, la in TSS_MAIN]
@@ -228,7 +253,8 @@ def _tss_main_svg(points):
            f'stroke-width:1.6;stroke-dasharray:12 7;vector-effect:non-scaling-stroke"/>'
            f'<line x1="{cx:.1f}" y1="{cy:.1f}" x2="{tx:.1f}" y2="{ty:.1f}" '
            f'style="stroke:#ffd479;stroke-width:1.6;stroke-dasharray:7 5;vector-effect:non-scaling-stroke"/>'
-           f'<text x="{(cx + tx) / 2:.1f}" y="{(cy + ty) / 2 - 8:.1f}" text-anchor="middle" '
+           # الوسم تحت مضلع نظام فصل الملاحة: في منتصف الخط كان يغطي علامة الواقعة حين يقصر الخط
+           f'<text x="{tx:.1f}" y="{max(p[1] for p in px) + 18:.1f}" text-anchor="middle" '
            f'style="fill:#ffe3a6;font-size:15px;paint-order:stroke;stroke:#061726;stroke-width:4px;'
            f'stroke-linejoin:round">المسار المتأثر ≈ {km:.0f} كم</text></g>')
     note = (f'طبقة نظام فصل الملاحة: الرسم التفصيلي للمسارين المعتمدين داخل لوحة التكبير، '
@@ -1004,7 +1030,8 @@ def _frame_svg() -> str:
     target = target or 500
     bar = target / km_per_unit
     nm = target / 1.852
-    x0, y0 = 14.0, HEIGHT - 24.0
+    # فوق صف وسوم خطوط الطول (كانت كتابة المقياس تتداخل مع «48°E»)
+    x0, y0 = 14.0, HEIGHT - 42.0
     half = bar / 2.0
     ticks = (f'<line x1="{x0 + half:.1f}" y1="{y0 - 5:.1f}" x2="{x0 + half:.1f}" y2="{y0 + 5:.1f}" '
              f'style="stroke:#cfe3f2;stroke-width:1.2"/>')
@@ -1015,7 +1042,9 @@ def _frame_svg() -> str:
         f'<line x1="{x0:.1f}" y1="{y0 - 5:.1f}" x2="{x0:.1f}" y2="{y0 + 5:.1f}" style="stroke:#cfe3f2;stroke-width:1.2"/>'
         f'{ticks}'
         f'<line x1="{x0 + bar:.1f}" y1="{y0 - 5:.1f}" x2="{x0 + bar:.1f}" y2="{y0 + 5:.1f}" style="stroke:#cfe3f2;stroke-width:1.2"/>'
-        f'<text x="{x0 + bar + 8:.1f}" y="{y0 + 4:.1f}" style="fill:#cfe3f2;font-size:13px;direction:rtl;unicode-bidi:isolate">'
+        # text-anchor=end في سياق rtl يجعل النص يمتد يمين المسطرة لا فوقها
+        f'<text x="{x0 + bar + 10:.1f}" y="{y0 + 4:.1f}" text-anchor="end" style="fill:#cfe3f2;font-size:13px;direction:rtl;'
+        f'unicode-bidi:isolate;paint-order:stroke;stroke:#081d31;stroke-width:3px;stroke-linejoin:round">'
         f'{target:g} كيلومتر · {nm:.0f} ميل بحري</text>'
     )
     nx, ny = WIDTH - 26.0, 34.0

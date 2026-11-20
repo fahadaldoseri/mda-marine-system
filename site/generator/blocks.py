@@ -176,7 +176,9 @@ def decision_card(dc, inline, anchors=None):
                 f"<li>{inline(code_text(p))}</li>" for p in shown
             ) + "</ul>"
             if extra:
-                body += f'<p class="dc-note">و{extra} بنود أخرى في {_sec_link(label, anchors)}.</p>'
+                _more = ('وبند واحد آخر' if extra == 1 else 'وبندان آخران' if extra == 2
+                         else f'و{extra} بنود أخرى' if extra <= 10 else f'و{extra} بندًا آخر')
+                body += f'<p class="dc-note">{_more} في {_sec_link(label, anchors)}.</p>'
         else:
             body = inline(code_text(value))
         cells.append(
@@ -543,7 +545,7 @@ ul.changes{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 .chg.c-ongoing .chg-tag{color:#cfd8e3;background:rgba(148,163,184,.14);border-color:rgba(148,163,184,.38)}
 
 /* ---------- رموز الأحداث والحالات ---------- */
-.ev-code{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--accent);background:rgba(34,195,182,.10);border:1px solid rgba(34,195,182,.32);border-radius:6px;padding:0 5px}
+.ev-code{font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace;font-size:12.5px;color:var(--accent);background:rgba(34,195,182,.10);border:1px solid rgba(34,195,182,.32);border-radius:6px;padding:0 5px}
 .st-badge{font-size:12.5px;border-radius:999px;padding:2px 10px;border:1px solid var(--line-2);color:var(--ink-2);white-space:nowrap}
 .st-badge.s-active{color:#ffd9d5;background:rgba(255,93,82,.14);border-color:rgba(255,93,82,.38)}
 .st-badge.s-stable{color:#cdf6e2;background:rgba(51,208,122,.14);border-color:rgba(51,208,122,.38)}
@@ -552,11 +554,11 @@ ul.changes{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 .trend.t-up{color:var(--danger)}
 .trend.t-down{color:var(--ok)}
 .trend.t-flat{color:var(--muted)}
-.kpi .k-d{font-size:12px;margin-top:2px;font-family:"IBM Plex Mono",monospace}
+.kpi .k-d{font-size:12px;margin-top:2px;font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace}
 
 /* ---------- الخط الزمني ---------- */
 .tl-viz .tl-row{display:grid;grid-template-columns:96px 1fr 46px minmax(180px,1.4fr);gap:12px;align-items:center;margin:9px 0}
-.tl-date{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted)}
+.tl-date{font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace;font-size:12px;color:var(--muted)}
 .tl-track{height:9px;border-radius:999px;background:var(--panel-3);overflow:hidden}
 .tl-fill{height:100%;border-radius:999px;width:var(--w,0);animation:tl-grow 1s cubic-bezier(.22,.8,.28,1) both}
 @keyframes tl-grow{from{width:0}to{width:var(--w,0)}}
@@ -564,7 +566,7 @@ ul.changes{list-style:none;padding:0;margin:0;display:grid;gap:9px}
 .tl-fill.k-inter{background:var(--info)}
 .tl-fill.k-suspect{background:var(--warn)}
 .tl-fill.k-bg{background:var(--muted)}
-.tl-num{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--ink);text-align:end}
+.tl-num{font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace;font-size:13px;color:var(--ink);text-align:end}
 .tl-lbl{font-size:13px;color:var(--ink-2)}
 
 /* ---------- بانر التصنيف والتعريفات ---------- */
@@ -617,7 +619,7 @@ STYLE_BLOCKS = STYLE_BLOCKS + """
 .rel-tbl td:nth-child(5){max-width:420px}
 @media print{.tbl-scroll{overflow:visible}.tbl-scroll .rel-tbl{min-width:0}}
 .rel-tbl td.rel{
-  font-family:"IBM Plex Mono",monospace;font-weight:600;text-align:center;color:var(--accent)
+  font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace;font-weight:600;text-align:center;color:var(--accent)
 }
 @media print{.rel-tbl{font-size:10.5px}.rel-tbl td,.rel-tbl th{padding:3px 5px}}
 """

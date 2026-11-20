@@ -99,7 +99,8 @@ def _colors(zj: dict) -> dict:
 def zones_css(zj: dict) -> str:
     c = _colors(zj)
     rules = "\n".join(
-        f".tz-badge.t-{k},.tz-lv.t-{k},.tz-dot.t-{k}{{color:{v};border-color:{v}}}"
+        # .zs-lv: شريط «نسب التهديد» يأخذ لون المستوى نفسه (كانت الدائرة رمادية فيه)
+        f".tz-badge.t-{k},.tz-lv.t-{k},.tz-dot.t-{k},.hmap-zstrip .zs-lv.t-{k}{{color:{v};border-color:{v}}}"
         for k, v in c.items()
     )
     return f"""
@@ -271,11 +272,11 @@ def zones_strip(zj: dict) -> str:
             f'<span class="zs-nm">{z.get("name","")}</span>'
             f'<span class="zs-lv t-{tok}"><span aria-hidden="true">{MARKERS[tok]}</span> {z.get("level","")}</span>'
             '<span class="zs-c">'
-            f'<span class="zs-p"><span class="zs-lab">{T_CONF}</span> <bdi class="bidi">{confirmed}</bdi></span> · '
-            f'<span class="zs-p"><span class="zs-lab">{T_PROB}</span> <bdi class="bidi">{probable}</bdi></span> · '
-            f'<span class="zs-p"><span class="zs-lab">{T_UNCONFIRMED_QUAL}</span> <bdi class="bidi">{unconfirmed_qualifying}</bdi></span> · '
-            f'<span class="zs-p"><span class="zs-lab">{T_EXCL}</span> <bdi class="bidi">{excluded}</bdi></span> · '
-            f'<span class="zs-p"><span class="zs-lab">{T_TOTAL}</span> <bdi class="bidi">{events}</bdi></span>'
+            f'<span class="zs-p"><span class="zs-lab">{T_CONF}</span> <bdi class="bidi">{confirmed}</bdi></span> '
+            f'<span class="zs-p">· <span class="zs-lab">{T_PROB}</span> <bdi class="bidi">{probable}</bdi></span> '
+            f'<span class="zs-p">· <span class="zs-lab">{T_UNCONFIRMED_QUAL}</span> <bdi class="bidi">{unconfirmed_qualifying}</bdi></span> '
+            f'<span class="zs-p">· <span class="zs-lab">{T_EXCL}</span> <bdi class="bidi">{excluded}</bdi></span> '
+            f'<span class="zs-p">· <span class="zs-lab">{T_TOTAL}</span> <bdi class="bidi">{events}</bdi></span>'
             "</span>"
             "</li>"
         )

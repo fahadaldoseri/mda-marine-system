@@ -41,6 +41,11 @@ def _translate_page(ar_page: pathlib.Path, date: str, dst: pathlib.Path, tm, gl)
     page, missing, total = i18n_en.translate_page(ar_page.read_text(encoding="utf-8"), date, tm, gl)
     if missing:
         raise SystemExit(missing_translation_error(ar_page.name, missing))
+    # التسمية الرسمية «الخليج العربي» حاكمة: أي «Persian Gulf» في النسخة الإنجليزية فشل مغلق،
+    # عدا الاسم العلم «Persian Gulf Strait Authority» (تدقيق 20 نوفمبر: ظهرت في سطر الملخص).
+    import re as _re_pg
+    if _re_pg.search(r"Persian Gulf(?! Strait Authority)", page):
+        raise SystemExit(f"فشل مغلق: «Persian Gulf» في {ar_page.name} — التسمية المعتمدة Arabian Gulf")
     # عناوين بطاقة الأخبار عقد واجهة، وتُطابقها بوابة العدّاد حرفيًا.
     page = page.replace("Official Warnings and Advisories", "Official warnings and advisories")
     # توحيد تسمية صف البطاقة مع السجل الحاكم (تعديلات 2026-11-01: «التحذيرات والتنبيهات النشطة»)

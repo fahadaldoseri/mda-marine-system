@@ -509,7 +509,7 @@ a.bidi{white-space:normal}
 .kpi.acc-ok em{background:var(--ok)}
 .kpi .k-l{font-size:12.5px;color:var(--muted);line-height:1.6;min-height:2.6em}
 .kpi .k-tag{display:inline-block;margin-inline-start:6px;padding:1px 7px;border:1px solid var(--line-2);border-radius:999px;color:var(--ink-2);font-size:12px;line-height:1.4;white-space:nowrap}
-.kpi .k-v{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:30px;line-height:1.25;margin-top:3px;font-variant-numeric:tabular-nums;text-align:right;direction:rtl}
+.kpi .k-v{font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace;font-weight:600;font-size:30px;line-height:1.25;margin-top:3px;font-variant-numeric:tabular-nums;text-align:right;direction:rtl}
 .kpi .k-lays{display:flex;flex-wrap:wrap;gap:4px 10px;margin:4px 0 0;font-size:12.5px;color:var(--muted)}
 .k-lay{display:inline-flex;gap:4px;align-items:baseline}
 .k-lay-l{color:var(--muted)}
@@ -546,7 +546,7 @@ section.doc h3{
 }
 section.doc p{margin:10px 0;color:var(--ink-2)}
 section.doc strong{color:var(--ink);font-weight:600}
-section.doc code{font-family:"IBM Plex Mono",monospace;font-size:.92em;color:var(--ink);background:var(--panel-3);padding:1px 5px;border-radius:4px}
+section.doc code{font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace;font-size:.92em;color:var(--ink);background:var(--panel-3);padding:1px 5px;border-radius:4px}
 ul,ol{margin:10px 0;padding-inline-start:22px;color:var(--ink-2)}
 li{margin:7px 0}
 section.doc ul ul{margin:6px 0;padding-inline-start:18px}
@@ -581,7 +581,7 @@ tbody td{padding:10px 13px;border-bottom:1px solid var(--line);color:var(--ink-2
 tbody tr:last-child td{border-bottom:0}
 tbody tr:nth-child(even){background:rgba(255,255,255,.015)}
 tbody tr:hover{background:rgba(34,195,182,.05)}
-td.num,th.num{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;text-align:end;white-space:nowrap;color:var(--ink)}
+td.num,th.num{font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace;font-variant-numeric:tabular-nums;text-align:end;white-space:nowrap;color:var(--ink)}
 tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:600}
 
 /* ---------- المخططات ---------- */
@@ -595,7 +595,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .bar-track{height:9px;border-radius:999px;background:var(--panel-3);overflow:hidden}
 .bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#1fbfb2,#5ad6c8);width:var(--w,0);animation:grow 1s cubic-bezier(.22,.8,.28,1) both}
 @keyframes grow{from{width:0}}
-.bar-row .bv{font-family:"IBM Plex Mono",monospace;font-size:12.5px;text-align:end;color:var(--ink);font-variant-numeric:tabular-nums}
+.bar-row .bv{font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace;font-size:12.5px;text-align:end;color:var(--ink);font-variant-numeric:tabular-nums}
 .viz .src-note{font-size:12.5px;color:var(--muted);margin:12px 0 0}
 
 /* ---------- خريطة الوقائع ---------- */
@@ -603,7 +603,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .map-svg{display:block;width:100%;height:auto;max-width:100%}
 .mp-sea-bg{fill:var(--map-sea)}
 .mp-grid line{stroke:var(--map-grid);stroke-width:.7;vector-effect:non-scaling-stroke}
-.mp-grid-lbl{font-family:"IBM Plex Mono",monospace;font-size:12px;fill:var(--map-grid-lbl);direction:ltr;unicode-bidi:isolate}
+.mp-grid-lbl{font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace;font-size:12px;fill:var(--map-grid-lbl);direction:ltr;unicode-bidi:isolate}
 .mp-land path{fill:var(--map-land);stroke:var(--map-coast);stroke-width:1.2;vector-effect:non-scaling-stroke}
 .mp-borders path{fill:none;stroke:var(--map-border);stroke-width:.9;stroke-dasharray:6 5;vector-effect:non-scaling-stroke}
 .mp-places text{font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic",sans-serif;dominant-baseline:middle;text-anchor:middle}
@@ -628,9 +628,9 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .mp-key .lg-none{grid-column:1 / -1;color:var(--ink-2)}
 .hmap-zstrip{margin:14px 0 0;border-top:1px solid var(--line-2);padding-top:12px}
 .hmap-zstrip h4{margin:0 0 10px;font-size:13px;color:var(--ink-2)}
-.hmap-zstrip ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.hmap-zstrip ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
 .hmap-zstrip li{border:1px solid var(--line-2);border-radius:var(--radius-sm);padding:10px;background:var(--panel-2);display:grid;gap:6px}
-.hmap-zstrip .zs-id{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--faint)}
+.hmap-zstrip .zs-id{font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace;font-size:12px;color:var(--faint)}
 .hmap-zstrip .zs-nm{font-size:12.5px;color:var(--ink-2);line-height:1.5}
 .hmap-zstrip .zs-lv{font-size:12.5px;font-weight:600}
 .hmap-zstrip .zs-c{font-size:12px;color:var(--faint)}
@@ -641,11 +641,11 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .mp-events .mp-halo{fill:var(--mk);opacity:.22}
 .mp-events .mp-dot{fill:var(--mk);stroke:var(--bg);stroke-width:2.2;vector-effect:non-scaling-stroke}
 .mp-approx .mp-dot{fill:none !important;stroke:var(--mk);stroke-width:2.4;stroke-dasharray:3.5 2.5}
-.mp-events .mp-num{font-family:"IBM Plex Mono",monospace;font-size:9.5px;font-weight:600;fill:#fff;text-anchor:middle}
+.mp-events .mp-num{font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace;font-size:9.5px;font-weight:600;fill:#fff;text-anchor:middle}
 .map-keys{font-size:12.5px;color:var(--faint);margin:12px 0 0}
 .map-legend{list-style:none;display:grid;gap:7px;margin:14px 0 0;padding:0}
 .map-legend li{display:flex;gap:10px;align-items:baseline;font-size:13.5px;color:var(--ink-2);margin:0}
-.lg-num{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:#fff;background:var(--mk);border-radius:999px;width:19px;height:19px;flex:0 0 auto;display:grid;place-items:center;flex:0 0 auto}
+.lg-num{font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace;font-size:12px;font-weight:600;color:#fff;background:var(--mk);border-radius:999px;width:19px;height:19px;flex:0 0 auto;display:grid;place-items:center;flex:0 0 auto}
 /* ---------- خريطة الشاشة العليا: للشاشة فقط، تُحجب في الطباعة وWord بصنف no-print ---------- */
 .hero-map{margin:22px 0 6px}
 .hmap,.hmap-panel{margin:0;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel-2);padding:18px}
@@ -662,7 +662,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .hmap-zsvg{display:block;width:100%;height:auto}
 .hz-cap{font-size:13px;color:var(--ink-2);background:var(--panel);padding:4px 10px;border-top:1px solid var(--line-2);margin-top:auto}
 .hmap-imo-reference{margin:7px 0 0;padding-top:6px;border-top:1px solid var(--line-2);font-size:12px;line-height:1.5;color:var(--muted)}
-.hmap-imo-reference .bidi{font-family:"IBM Plex Mono",monospace;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.hmap-imo-reference .bidi{font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace;color:var(--ink-2);font-variant-numeric:tabular-nums}
 @media (max-width:1000px){.hmap-wrap,.hmap-wrap:has(> .hmap-zoom){grid-template-columns:minmax(0,1fr)}.hmap-zoom{border-inline-start:0;border-top:1.5px solid var(--accent)}}
 .hmap-svg{display:block;width:100%;height:auto;max-width:100%}
 /* خريطة الشاشة: علامات وتسميات أكبر قليلًا للقراءة من مسافة */
@@ -670,9 +670,9 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 .hmap-svg .mp-halo{r:24px}
 .hmap-svg .mp-events .mp-num{font-size:24px}
 .hmap-svg .mp-badge-r{fill:rgba(6,11,20,.88);stroke:var(--mk);stroke-width:1.6}
-.hmap-svg .mp-badge-t{font-family:"IBM Plex Mono",monospace;direction:ltr;unicode-bidi:isolate}
+.hmap-svg .mp-badge-t{font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace;direction:ltr;unicode-bidi:isolate}
 .hmap-scroll-hint{display:none;font-size:12.5px;color:var(--muted);margin:6px 0 0}
-.hmap-decide{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0 0 12px;padding:0}
+.hmap-decide{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:0 0 12px;padding:0}
 .hmap-decide li{border:1px solid var(--line-2);border-radius:var(--radius-sm);background:var(--panel);padding:8px 11px;display:grid;gap:3px}
 .hmap-decide .mds-k{font-size:12px;color:var(--muted)}
 .hmap-decide .mds-v{font-size:13.5px;color:var(--ink);font-weight:600;line-height:1.5}
@@ -713,7 +713,7 @@ tbody tr.total td{background:rgba(34,195,182,.09);color:var(--ink);font-weight:6
 }
 /* ---------- الاستشهادات ---------- */
 .cite-ref{
-  display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:12.5px;
+  display:inline-block;font-family:"IBM Plex Mono","IBM Plex Sans Arabic",monospace;font-size:12.5px;
   color:var(--accent);background:rgba(34,195,182,.10);border:1px solid rgba(34,195,182,.34);
   border-radius:6px;padding:0 5px;margin-inline-start:3px;vertical-align:1px
 }
@@ -1841,7 +1841,8 @@ def _event_fields_html(event: dict, defs) -> tuple[str, bool]:
     if has_time:
         date_line = f"{date_text} · {time_text}"
     elif time_kind in {"نشر", "نشر فقط", "published", "publication"}:
-        date_line = f"{date_text} · وقت الواقعة غير متاح"
+        # التاريخ هنا تاريخ النشر لا تاريخ الواقعة؛ يُسمّى صراحة كي لا يناقض تاريخ العنوان
+        date_line = f"{date_text} (تاريخ النشر) · وقت الواقعة غير متاح"
     else:
         date_line = date_text
     rows = [_field_row(4, "التاريخ والوقت", date_line, defs)]
@@ -2564,12 +2565,16 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
             _cap = ((mp.get("caption") or "") + " " + (mp.get("points_note") or "")).strip()
             # ك-227: جدول تفاصيل الوقائع كان يُبنى من نقاط الخريطة وحدها، فتُسقط واقعة
             # مؤهلة بلا إحداثيات. تُمرَّر وقائع اليوم غير المكانية لتُضاف صفوفها.
-            _pcs = {str(p.get("code") or "") for p in (mp.get("points") or [])}
+            # البيان/الموقف السياسي ليس واقعة مكانية: لا يُرسم، ويبقى صفًّا في جدول التفاصيل
+            # (السياسة نفسها في derive_map_points وcheck_intel ح13؛ يصلح الأرشيف المنشور قبلها).
+            from map_gulf import drawable_points
+            _draw = drawable_points(mp.get("points"))
+            _pcs = {str(p.get("code") or "") for p in _draw}
             _extra_events = [e for e in (daily_events or [])
                              if str(e.get("code") or "").strip()
                              and str(e.get("code")) not in _pcs
                              and not _is_cumulative_update(e)]
-            map_html = build_map(mp["points"], _cap, mp.get("inset"),
+            map_html = build_map(_draw, _cap, mp.get("inset"),
                              zones=(meta.get("threat_zones") or {}).get("zones"),
                              timeline=meta.get("timeline"),
                              extra_events=_extra_events)
@@ -2589,7 +2594,7 @@ def build(md_path: Path, out_path: Path, meta: dict, doc_mode: bool = False, mod
 
             _cap_h = ((mp.get("caption") or "") + " " + (mp.get("points_note") or "")).strip()
             _hero_map_source = _build_map_hero(
-                mp["points"], _cap_h, mp.get("inset"), zoom=True,
+                _draw, _cap_h, mp.get("inset"), zoom=True,
                 zones=(meta.get("threat_zones") or {}).get("zones"),
                 timeline=meta.get("timeline"), extra_events=_extra_events)
             _strip = ""
