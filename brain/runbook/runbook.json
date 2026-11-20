@@ -4944,7 +4944,8 @@
         ],
         "gates": [],
         "tests": [
-          "tests/test_runbook_hardening.py"
+          "tests/test_runbook_hardening.py",
+          "tests/test_runbook_auto_redo.py"
         ]
       },
       "on_fail": "stop",
@@ -5307,7 +5308,7 @@
       "command": [
         "bash",
         "-lc",
-        "B=\"$PWD\"; export B SITE; mkdir -p \"$B/logs/runbook/{date}\"; python3 \"$B/tools/regression_gate.py\" --root \"$B\" --until الكل --out \"$B/logs/runbook/{date}/G064-regression.json\"; rc=$?; [ $rc -eq 0 ] || exit $rc; python3 - <<'PY'\nimport pathlib\nok = all(\"CMD_SHAPE_V1\" in pathlib.Path(f).read_text(encoding=\"utf-8\") for f in (\"tools/runbook.py\",))\nprint(\"CMD_SHAPE_V1: \" + (\"مرتبط\" if ok else \"غائب\"))\nraise SystemExit(0 if ok else 2)\nPY"
+        "B=\"$PWD\"; export B SITE; mkdir -p \"$B/logs/runbook/{date}\"; python3 \"$B/tools/regression_gate.py\" --root \"$B\" --until الكل --out \"$B/logs/runbook/{date}/G064-regression.json\" --share-dir \"$B/logs/runbook/{date}\"; rc=$?; [ $rc -eq 0 ] || exit $rc; python3 - <<'PY'\nimport pathlib\nok = all(\"CMD_SHAPE_V1\" in pathlib.Path(f).read_text(encoding=\"utf-8\") for f in (\"tools/runbook.py\",))\nprint(\"CMD_SHAPE_V1: \" + (\"مرتبط\" if ok else \"غائب\"))\nraise SystemExit(0 if ok else 2)\nPY"
       ],
       "ok_rc": [
         0
@@ -5325,7 +5326,7 @@
       "command": [
         "bash",
         "-lc",
-        "B=\"$PWD\"; SITE=\"${SITE:-/home/ubuntu/seawatch}\"; export B SITE; mkdir -p \"$B/logs/runbook/{date}\"; python3 \"$B/tools/browser_measure.py\" --root \"$B\" --site-root \"$SITE/dist\" --check overflow --check console --check anchor --check decision --check readiness --soft readiness --out \"$B/logs/runbook/{date}/G065-measure.json\""
+        "B=\"$PWD\"; SITE=\"${SITE:-/home/ubuntu/seawatch}\"; export B SITE; mkdir -p \"$B/logs/runbook/{date}\"; python3 \"$B/tools/browser_measure.py\" --root \"$B\" --site-root \"$SITE/dist\" --check overflow --check console --check anchor --check decision --check readiness --soft readiness --out \"$B/logs/runbook/{date}/G065-measure.json\" --reuse \"$B/logs/runbook/{date}/shared-measure-ar.json\""
       ],
       "assert": [
         {

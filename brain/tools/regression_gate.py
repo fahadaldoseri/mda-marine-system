@@ -97,7 +97,8 @@ def parse_measure(argv: list[str]) -> dict | None:
     return spec
 
 
-def shared_measure(root: Path, site: Path, group: list[tuple[dict, dict]], env: dict) -> dict[str, tuple[str, str]]:
+def shared_measure(root: Path, site: Path, group: list[tuple[dict, dict]], env: dict,
+                   share_dir: str | None = None) -> dict[str, tuple[str, str]]:
     """قياس واحد بمتصفح لسطح واحد يجمع فحوص بنوده، ثم يُحكم كل بند بفحوصه هو.
 
     السبب المقيس (20 نوفمبر 2026): كلفة فتح المتصفح وتحميل الصفحة ثابتة (~31 ثانية) مهما قلّت الفحوص،
@@ -108,7 +109,15 @@ def shared_measure(root: Path, site: Path, group: list[tuple[dict, dict]], env: 
     checks = sorted({c for _, s in group for c in s["checks"]})
     import tempfile
     with tempfile.TemporaryDirectory(prefix="regression-shared-") as tdir:
-        return _shared_measure(root, group, env, checks, first, Path(tdir) / "measure.json")
+        dst = Path(share_dir) / f"shared-measure-{'en' if first['en'] else 'ar'}.json" if share_dir else None
+        if dst:
+            dst.unlink(missing_ok=True)  # لا يبقى قياس قديم يُعاد استعماله إن تعذّر القياس الآن
+        res = _shared_measure(root, group, env, checks, first, Path(tdir) / "measure.json")
+        src = Path(tdir) / "measure.json"
+        if dst and src.is_file():
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            dst.write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
+        return res
 
 
 def _shared_measure(root: Path, group: list[tuple[dict, dict]], env: dict, checks: list[str], first: dict,
@@ -161,6 +170,7 @@ def main() -> int:
     ap.add_argument("--item", help="بند واحد بمعرّفه")
     ap.add_argument("--require-manual", action="store_true", help="عدّ البنود اليدوية ساقطة")
     ap.add_argument("--out", help="ملف النتيجة JSON")
+    ap.add_argument("--share-dir", help="يحفظ القياس المشترك لكل سطح هنا (shared-measure-ar|en.json) لتعيد G065 استعماله")
     args = ap.parse_args()
     root = Path(args.root).resolve()
     site = resolve_site(root)
@@ -185,7 +195,7 @@ def main() -> int:
             groups.setdefault((spec["script"], spec["en"], tuple(spec["fixed"])), []).append((it, spec))
     shared: dict[str, tuple[str, str]] = {}
     for group in groups.values():
-        shared.update(shared_measure(root, site, group, env))
+        shared.update(shared_measure(root, site, group, env, args.share_dir))
 
     rows, blockers, exceptions = [], [], []
     for it in items:

@@ -128,5 +128,57 @@ class CoverageSpeed(unittest.TestCase):
         self.assertLess(took, 5.0, f"تغطية البوابات استغرقت {took:.1f} ثانية")
 
 
+class G065Reuse(unittest.TestCase):
+    """G065 تعيد قياس G064 المشترك فقط إن طابق تمامًا؛ وإلا تقيس حيًّا (السبب: تكرار ~31 ثانية)."""
+
+    def setUp(self):
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("bm_under_test", ROOT / "tools" / "browser_measure.py")
+        self.bm = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(self.bm)
+        self._d = tempfile.TemporaryDirectory()
+        self.d = Path(self._d.name)
+        (self.d / "dist").mkdir()
+        (self.d / "dist" / "a.html").write_text("x", encoding="utf-8")
+        from datetime import datetime, timezone
+        self.fp = self.bm.dist_fingerprint(str(self.d / "dist"))
+        self.data = {"url": "file:///p.html", "at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                     "checks": ["overflow", "console", "anchor", "decision", "readiness"],
+                     "dist_fingerprint": self.fp,
+                     "widths": {"1440": {"readiness": [{"q": "س1", "found": True}], "phrases": [{"p": "هجمات مؤكدة"}]},
+                                "1920": {"readiness": [{"q": "س1", "found": True}], "phrases": [{"p": "هجمات مؤكدة"}]}}}
+        self.f = self.d / "shared.json"
+        self.f.write_text(json.dumps(self.data, ensure_ascii=False), encoding="utf-8")
+
+    def tearDown(self):
+        self._d.cleanup()
+
+    def call(self, **kw):
+        a = dict(path=str(self.f), url="file:///p.html", widths=[1440, 1920], questions=["س1"],
+                 phrases=["هجمات مؤكدة"], checks=["overflow", "anchor"], fingerprint=self.fp)
+        a.update(kw)
+        return self.bm.reusable(**a)[0]
+
+    def test_exact_match_is_reused(self):
+        self.assertIsNotNone(self.call())
+
+    def test_rebuilt_site_is_measured_live(self):
+        (self.d / "dist" / "a.html").write_text("changed", encoding="utf-8")
+        self.assertIsNone(self.call(fingerprint=self.bm.dist_fingerprint(str(self.d / "dist"))))
+
+    def test_other_page_checks_or_questions_are_measured_live(self):
+        self.assertIsNone(self.call(url="file:///other.html"))
+        self.assertIsNone(self.call(checks=["phrases"]))
+        self.assertIsNone(self.call(questions=["س2"]))
+        self.assertIsNone(self.call(widths=[1440]))
+        self.assertIsNone(self.call(fingerprint=None))
+
+    def test_old_or_missing_measure_is_measured_live(self):
+        self.data["at"] = "2020-01-01T00:00:00+00:00"
+        self.f.write_text(json.dumps(self.data, ensure_ascii=False), encoding="utf-8")
+        self.assertIsNone(self.call())
+        self.assertIsNone(self.call(path=str(self.d / "none.json")))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
