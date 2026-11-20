@@ -145,6 +145,49 @@ def normalize_document_head(page: str) -> str:
     return re.sub(r"^(?:\ufeff)?\s*(?:<!doctype[^>]*>)?\s*", "<!DOCTYPE html>\n", page, count=1, flags=re.I)
 
 
+EN_BRAND = "Maritime Domain Awareness Center"
+# سمات يقرؤها القارئ أو تعرضها المنصات (المشاركة ومحركات البحث وقارئ الشاشة): لا يبقى فيها نص عربي
+# في النسخة الإنجليزية. سمات data-* التعاقدية (data-classification وdata-zone-id وأمثالها) مفاتيح آلة
+# تقرؤها المدققات والأنماط بقيمها العربية في السطحين، فلا تُترجم ولا تدخل الحاجز.
+READER_ATTRS = TR_ATTRS + ("content",)
+_META_RE = re.compile(r'<meta\b[^>]*>', re.I)
+
+
+def localize_social_meta(page: str) -> str:
+    """وسوم المشاركة في الصفحة الإنجليزية تُشتق من رأسها الإنجليزي نفسه (seawatch-web #10، ك-إ4).
+
+    كانت og:title وog:description وtwitter:* وog:site_name تُكتب بالعربية في المولّد وتنتقل كما هي
+    إلى النسخة الإنجليزية، فتظهر المشاركة بعنوان عربي. لا تخمين: العنوان من <title> والوصف من
+    meta description بعد ترجمتهما، والاسم ثابت، واللغة en_US.
+    """
+    import html as _h
+    t = re.search(r"<title>(.*?)</title>", page, re.S)
+    d = re.search(r'<meta\s+name="description"\s+content="([^"]*)"', page)
+    title = _h.unescape(t.group(1).strip()) if t else ""
+    desc = _h.unescape(d.group(1)) if d else ""
+    want = {"og:site_name": EN_BRAND, "og:locale": "en_US"}
+    if title and not ARABIC.search(title):
+        want.update({"og:title": title, "twitter:title": title})
+    if desc and not ARABIC.search(desc):
+        want.update({"og:description": desc, "twitter:description": desc})
+
+    def fix(m: re.Match) -> str:
+        tag = m.group(0)
+        k = re.search(r'(?:property|name)="([^"]+)"', tag)
+        if not k or k.group(1) not in want:
+            return tag
+        return re.sub(r'content="[^"]*"', 'content="' + _h.escape(want[k.group(1)], quote=True) + '"', tag, count=1)
+
+    return _META_RE.sub(fix, page)
+
+
+def arabic_reader_attributes(page: str) -> list[str]:
+    """قيم السمات المقروءة التي بقيت عربية خارج script وstyle (seawatch-web #10، ك-إ4)."""
+    body = re.sub(r"<(script|style)\b.*?</\1>", "", page, flags=re.S | re.I)
+    return [norm(v) for k, v in re.findall(r'\s([a-zA-Z:-]+)="([^"]*)"', body)
+            if k in READER_ATTRS and ARABIC.search(v)]
+
+
 def build_tm(
 date: str) -> dict[str, str]:
     ar = (AR_MD / f"{date}-sectioned.md").read_text(encoding="utf-8")
@@ -226,14 +269,28 @@ class _GlossaryEntries(dict[str, str]):
         self.exact_match_only_entries = frozenset(norm(k) for k in exact_match_only_entries)
 
 
+def _no_duplicate_keys(pairs):
+    """مفتاح مكرر في المعجم كان يتجاوز قيمة سابقة بصمت؛ يُرفض الآن (seawatch-web #10، ك-إ2)."""
+    seen: dict = {}
+    for key, value in pairs:
+        if key in seen:
+            raise ValueError(f"glossary: duplicate key {key!r}")
+        seen[key] = value
+    return seen
+
+
 def load_glossary() -> _GlossaryEntries:
     p = I18N / "glossary.json"
     data = {}
     if p.exists():
-        data = json.loads(p.read_text(encoding="utf-8"))
+        data = json.loads(p.read_text(encoding="utf-8"), object_pairs_hook=_no_duplicate_keys)
     raw_entries = data.get("entries") or {}
     if not isinstance(raw_entries, dict):
         raise ValueError("glossary entries must be an object")
+    # قيمة غير نصية أو فارغة كانت تُسقط البناء بـ TypeError أو تمرّ فراغًا (seawatch-web #10، ك-إ1)
+    non_text = sorted(k for k, v in raw_entries.items() if not isinstance(v, str) or not v.strip())
+    if non_text:
+        raise ValueError("glossary entries must be non-empty strings: " + ", ".join(non_text[:10]))
     raw_exact_only = data.get("exact_match_only_entries", [])
     if not isinstance(raw_exact_only, list) or any(
         not isinstance(key, str) or not norm(key) for key in raw_exact_only
@@ -1161,11 +1218,67 @@ def _zone_level_en(n: str):
     """
     m = _ZONE_LEVEL_RE.fullmatch(n)
     if not m:
-        return None
+        return _zone_label_forms_en(n)
     tail_en = TAILS_EN.get(norm(m.group(3)))
     if tail_en is None:
         return None
     return f"Level in {ZONES_EN[m.group(1)]}: {LEVELS_EN[m.group(2)]}.{tail_en}"
+
+
+# ك-إ3: صيغ أسطر القطاع الأخرى التي يولّدها القالب. كانت تمرّ بالمطابقة الجزئية فتُقتطع إلى
+# اسم القطاع وحده («Arabian Sea») ويسقط المستوى. كلها مفردات مغلقة (قطاع · مستوى · ذيل معروف)،
+# فتُترجم بالمعنى، وأي ذيل غير معروف يعيد None فيفشل البناء مغلقًا.
+_DASH_TAILS_RAW = {
+    'لا جديد.': 'no new item.',
+    'لا جديد مؤهل خلال الفترة.': 'no new qualifying incident during the period.',
+    'مُرحّل.': 'carried over.',
+    'مُرحّل من الفترة السابقة بلا واقعة جديدة.': 'carried over from the previous period with no new incident.',
+}
+DASH_TAILS_EN = {norm(k): v for k, v in _DASH_TAILS_RAW.items()}
+_ZONE_ALT = "|".join(map(re.escape, sorted(ZONES_EN, key=len, reverse=True)))
+_LEVEL_ALT = "|".join(map(re.escape, sorted(LEVELS_EN, key=len, reverse=True)))
+_ZONE_PAIR_RE = re.compile(rf"({_ZONE_ALT}): ({_LEVEL_ALT})")
+
+
+def _zone_label(zone: str) -> str:
+    """اسم القطاع في موضع العنوان: بلا أداة التعريف في أوله وبحرف كبير."""
+    value = ZONES_EN[zone]
+    return _cap_first(value[4:] if value.startswith("the ") else value)
+
+
+def _zone_sequence_en(raw: str) -> str | None:
+    """«Z: L Z: L …» كما تُسطَّح بطاقة القطاعات؛ يجب أن يغطي النمط النص كله."""
+    raw = raw.strip()
+    pairs = list(_ZONE_PAIR_RE.finditer(raw))
+    if not pairs or _ZONE_PAIR_RE.sub("", raw).strip(" ·"):
+        return None
+    return " · ".join(f"{_zone_label(z.group(1))}: {LEVELS_EN[z.group(2)]}" for z in pairs)
+
+
+def _zone_label_forms_en(n: str) -> str | None:
+    m = re.fullmatch(rf"({_ZONE_ALT}) — مستواه ({_LEVEL_ALT})\.", n)
+    if m:
+        return f"{_zone_label(m.group(1))} — level: {LEVELS_EN[m.group(2)]}."
+    m = re.fullmatch(rf"({_ZONE_ALT}): ({_LEVEL_ALT})(\.?)", n)
+    if m:
+        return f"{_zone_label(m.group(1))}: {LEVELS_EN[m.group(2)]}{m.group(3)}"
+    m = re.fullmatch(rf"({_ZONE_ALT}): ({_LEVEL_ALT})\.( .+)", n)
+    if m and norm(m.group(3)) in TAILS_EN:
+        return f"{_zone_label(m.group(1))}: {LEVELS_EN[m.group(2)]}.{TAILS_EN[norm(m.group(3))]}"
+    m = re.fullmatch(rf"({_ZONE_ALT}): ({_LEVEL_ALT}) — (.+)", n)
+    if m and norm(m.group(3)) in DASH_TAILS_EN:
+        return f"{_zone_label(m.group(1))}: {LEVELS_EN[m.group(2)]} — {DASH_TAILS_EN[norm(m.group(3))]}"
+    m = re.fullmatch(rf"لا واقعة بحرية جديدة مثبتة في ({_ZONE_ALT})", n)
+    if m:
+        return f"No new confirmed maritime incident in {ZONES_EN[m.group(1)]}"
+    m = re.fullmatch(rf"المستوى العام: ({_LEVEL_ALT}) — أعلى قطاع: ({_ZONE_ALT})\. (.+)", n)
+    if m:
+        seq = _zone_sequence_en(m.group(3))
+        if seq:
+            return (f"Overall level: {LEVELS_EN[m.group(1)]} — highest sector: "
+                    f"{ZONES_EN[m.group(2)]}. {seq}")
+        return None
+    return _zone_sequence_en(n)
 
 
 def make_translator(tm: dict[str, str], gl: dict[str, str]):
@@ -1228,21 +1341,11 @@ def make_translator(tm: dict[str, str], gl: dict[str, str]):
                     outs.append(localize_patterns(pk) or "")
             if all(o and not ARABIC.search(o) for o in outs):
                 return " — ".join(o.strip() for o in outs)
-        # معرفات التحذير حساسة للهوية: لا تُقبل المطابقة الجزئية إلا إذا كانت
-        # كل معرفات المفتاح موجودة حرفيًا في العقدة نفسها؛ فلا يتسرّب 186-26
-        # إلى عقدة ev-01 التي لا تحمل إلا موقعها.
-        starts = [k for k in keys if k.startswith(t) and _partial_key_safe(t, k)
-                  and not _crosses_ltr_boundary(t, k, ltr_tokens)
-                  and not norm(t).endswith(("·", "…"))]
-        if starts:
-            k = min(starts, key=len)
-            return _val(k)
-        within = [k for k in keys if t.startswith(k) and _partial_key_safe(t, k)
-                  and not _crosses_ltr_boundary(t, k, ltr_tokens)
-                  and not ADVISORY_ID.search(t)]
-        if within:
-            k = max(within, key=len)
-            return _val(k)
+        # ك-إ3 (seawatch-web #10، اعتماد فهد 20 نوفمبر 2026 «إصلاح جذري»): لا مطابقة جزئية.
+        # كانت الوحدة القصيرة تُكمَّل بمقابل مفتاح أطول يبدأ بها (نص لم يرد)، والطويلة تُقتطع إلى
+        # مقابل أطول مفتاح تبدأ به (يسقط باقي الجملة). قياس بناء كامل: 926 مرة في 184 وحدة، ومنها
+        # جملة «أساس التقدير» في بطاقة الحكم التي ظهرت «Basis of assessment:» وحدها. الآن تُعاد None
+        # فتفشل الصفحة مغلقة وتُذكر الوحدة، ويُضاف مقابلها التام إلى المعجم.
         return None
 
     def translate(
@@ -1342,13 +1445,8 @@ def make_translator(tm: dict[str, str], gl: dict[str, str]):
                     outs.append(p); continue
                 hit = lookup(pn, ltr_tokens)
                 if hit is None:
-                    cand = [k for k in keys if k and k in pn
-                            and _partial_key_safe(pn, k)
-                            and not _crosses_ltr_boundary(pn, k, ltr_tokens)]
-                    if cand:
-                        hit = tm.get(max(cand, key=len)) or gl.get(max(cand, key=len))
-                    else:
-                        allok = False; outs.append(p); continue
+                    # ك-إ3: لا يُستبدل بالجملة كلها مقابلُ مفتاح أقصر داخلها (كان يُسقط باقيها).
+                    allok = False; outs.append(p); continue
                 outs.append(p.replace(pn, hit))
             joined = " ".join(outs)
             if allok or not ARABIC.search(joined):
@@ -1645,13 +1743,26 @@ def _inline_tag_groups(c: _Collector, positions: list[int]) -> list[dict[str, ob
             continue
         before_pos, start = before[-1] if before else (open_index, inside[0])
         after_pos, end = after[0] if after else (close_index, inside[-1])
+
+        def _crosses_block(lo: int, hi: int) -> bool:
+            return any(
+                tag_match and tag_match.group(2).lower() in _LTR_GROUP_BLOCKS
+                for fragment in c.parts[lo + 1 : hi]
+                for tag_match in [_HTML_PART_TAG.fullmatch(fragment)]
+            )
+
+        # ك-إ3: جانب يعبر حدًّا كتليًا يُقصَر على الوسم نفسه بدل إسقاط السجل كله؛ كان
+        # «سجل IMO» في عنوان البطاقة (تليه فقرة) يسقط فتُترجم «سجل» وحدها جزءًا.
+        # ك-إ3: الجار الذي يفصله عن الوسم وسمٌ آخر (عنوان ينتهي، شارة مجاورة، فقرة تالية) ليس
+        # من الجملة نفسها، فيُقصَر ذلك الجانب على الوسم بدل ضمّه أو إسقاط السجل كله؛ كان «سجل IMO»
+        # في عنوان البطاقة (تليه فقرة) يسقط فتُترجم «سجل» وحدها جزءًا.
+        if any(_HTML_PART_TAG.fullmatch(f) for f in c.parts[before_pos + 1 : open_index]):
+            before_pos, start = open_index, inside[0]
+        if any(_HTML_PART_TAG.fullmatch(f) for f in c.parts[close_index + 1 : after_pos]):
+            after_pos, end = close_index, inside[-1]
         if start >= end:
             continue
-        if any(
-            tag_match and tag_match.group(2).lower() in _LTR_GROUP_BLOCKS
-            for fragment in c.parts[before_pos + 1 : after_pos]
-            for tag_match in [_HTML_PART_TAG.fullmatch(fragment)]
-        ):
+        if _crosses_block(before_pos, after_pos):
             continue
         token = norm("".join(c.units[index] for index in inside))
         if not token:
@@ -1675,8 +1786,10 @@ def _inline_tag_groups(c: _Collector, positions: list[int]) -> list[dict[str, ob
             groups[-1]["end"] = max(groups[-1]["end"], record["end"])
             groups[-1]["spans"].extend(record["spans"])
             groups[-1]["tag_parts"].extend(record["tag_parts"])
+            groups[-1]["records"].append(record)
         else:
-            groups.append(record)
+            groups.append({**record, "spans": list(record["spans"]),
+                           "tag_parts": list(record["tag_parts"]), "records": [record]})
     return groups
 
 
@@ -1915,7 +2028,7 @@ def _plan_ltr_translations(
     unmatched: list[tuple[int, int, str]] = []
     placeholders: dict[str, str] = {}
     consumed_tag_parts: set[int] = set()
-    for group in groups:
+    def _attempt(group: dict[str, object]) -> str:
         start, end = int(group["start"]), int(group["end"])
         source_raw = "".join(c.units[start : end + 1])
         source = norm(source_raw)
@@ -1931,12 +2044,12 @@ def _plan_ltr_translations(
             if composed_target is None:
                 # Keep unmatched title content in place; the normal missing-text
                 # check will fail closed rather than discarding visible content.
-                continue
+                return "skip"
             exact_key = True
         # A full master sentence may cross an inline LTR tag; a short nominal
         # phrase may cross only when its complete label is in the governed glossary.
         if exact_key and not (sentence_like or governed_label):
-            continue
+            return "skip"
         target = composed_target or (tr(source) if source else "")
         rendered = target
         group_placeholders: dict[str, str] = {}
@@ -2007,10 +2120,22 @@ def _plan_ltr_translations(
                     consumed_tag_parts.update((int(opening_index), int(closing_index)))
                 covered.update(range(start, end + 1))
                 translated_checks.append((source, target))
-                continue
+                return "ok"
 
         covered.update(range(start, end + 1))
         unmatched.append((start, end, source))
+        return "fail"
+
+    for group in groups:
+        # ك-إ3: المجموعة المدمجة (سجلات متجاورة كوسم وشارته) قد لا تكون مفتاحًا تامًا بينما
+        # جملة أحد سجلاتها مفتاح معلَن؛ فتُجرَّب السجلات منفردة قبل ترك الوحدات أجزاءً.
+        if _attempt(group) != "skip" or len(group.get("records", ())) < 2:
+            continue
+        for record in group["records"]:
+            span = set(range(int(record["start"]), int(record["end"]) + 1))
+            if span & covered:
+                continue
+            _attempt(record)
     return overrides, covered, translated_checks, unmatched, placeholders, consumed_tag_parts
 
 
@@ -2272,6 +2397,7 @@ def translate_page(html_text: str, date: str, tm: dict[str, str], gl: dict[str, 
     out = _apply_governed_event_card_labels(out, gl)
     out = _apply_card_row_labels(out)
     out = normalize_document_head(out)
+    out = localize_social_meta(out)
     # ك-599: وسم رموز الدرجات بلغة السطح، فلا يظهر رمز داخلي في النسخة الإنجليزية.
     out = reader_grade_labels.redact(out, "en")
     remaining = [
@@ -2312,6 +2438,8 @@ def translate_page(html_text: str, date: str, tm: dict[str, str], gl: dict[str, 
             continue
         out = out.replace(_x, _target)
     remaining = fixed
+    # ك-إ4: البوابة كانت تفحص النصوص المرئية وحدها؛ سمة مقروءة بقيت عربية تُعدّ نقصًا يوقف البناء.
+    remaining.extend(v for v in arabic_reader_attributes(out) if v not in remaining)
     if os.environ.get("I18N_DEBUG_MISSING"):
         for _x in remaining:
             if ARABIC.search(_x):

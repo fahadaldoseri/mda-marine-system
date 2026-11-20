@@ -278,6 +278,7 @@ t "ذاكرة فحوص G001: لا نتيجة مخزّنة إلا بلا تغيّ
 t "الفحص المسبق المبكر S015: موجب وسالبا G000 وG049" python3 tests/test_early_preflight.py
 t "جدول أزمنة المراحل: elapsed_s لكل سطر وجدول تلقائي بعد كل run" python3 tests/test_runbook_timings.py
 t "قاعدة العدد في حالة المصادر: المعدود يوافق العدد والرقم باقٍ ولكل سطر مقابل إنجليزي" python3 tests/test_sources_state_counts.py
+t "فجوات الطلبات القديمة: قوس CSS الجوال · حاجزا المعجم · أسماء السفن ذات المقطع الواحد من الدفتر" python3 tests/test_old_repo_gaps.py
 
 echo "15) التسليم: النشر وتلغرام والتقدير"
 t "سكربتات التسليم (بلا إرسال)" bash tests/test_delivery_scripts.sh
