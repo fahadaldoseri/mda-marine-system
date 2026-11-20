@@ -23,7 +23,10 @@ SKIP_DIRS = {"__pycache__", ".git", "node_modules", ".pytest_cache", "shots", "l
              "terminal_full_output", "backup-repo", "web",
              # ك-562: مصادر المهارات ليست سطح نصّ للقارئ؛ بعضها يحمل جداول تحويل
              # مقصودة (أرقام عربية-هندية داخل خرائط تطبيع)، فتحويلها يُفسد المنطق.
-             "skills", "references"}
+             "skills", "references",
+             # ك-563: ملفات الاختبار ليست سطح نصّ للقارئ؛ بعضها يحمل أرقامًا عربية-هندية
+             # مقصودة بوصفها مدخلات اختبار، فتحويلها يُسقط أرضية الأصول G000 كل تشغيل.
+             "tests"}
 SKIP_FILES = {"tools/normalize_digits.py", "validators/check_numerals.py"}
 BINARY = {".pdf", ".docx", ".png", ".jpg", ".jpeg", ".webp", ".zip", ".gz", ".tgz", ".woff", ".woff2",
           ".ttf", ".mp4", ".ico", ".xlsx", ".db", ".pyc"}

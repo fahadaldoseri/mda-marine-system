@@ -119,6 +119,8 @@ class _ZoneStripParser:
     def _add_metric(self, text: str) -> None:
         if self.current is None:
             return
+        # ك-564: المولّد يضع الفاصل «·» داخل وسم العدّاد (PR 666)؛ يُنزع قبل مطابقة التسمية.
+        text = text.lstrip("·• ").strip()
         for label, key in LABELS.items():
             if not text.startswith(label):
                 continue

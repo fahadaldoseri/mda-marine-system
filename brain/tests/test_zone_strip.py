@@ -44,11 +44,12 @@ def strip_html(source: dict = SOURCE) -> str:
             "<li>"
             f"<span class=\"zs-id\">{zone['id']}</span>"
             "<span class=\"zs-c\">"
-            f"<span class=\"zs-p\"><span class=\"zs-lab\">مؤكدة</span> <bdi>{zone['confirmed']}</bdi></span> · "
-            f"<span class=\"zs-p\"><span class=\"zs-lab\">مرجّحة</span> <bdi>{zone['probable']}</bdi></span> · "
-            f"<span class=\"zs-p\"><span class=\"zs-lab\">مؤهلة غير مؤكدة</span> <bdi>{unconfirmed}</bdi></span> · "
-            f"<span class=\"zs-p\"><span class=\"zs-lab\">مستثناة</span> <bdi>{zone['excluded']}</bdi></span> · "
-            f"<span class=\"zs-p\"><span class=\"zs-lab\">إجمالي</span> <bdi>{zone['events']}</bdi></span>"
+            # ك-564: الفاصل «·» داخل وسم العدّاد كما يبنيه المولّد بعد إصلاح التدقيق البصري (PR 666)
+            f"<span class=\"zs-p\"><span class=\"zs-lab\">مؤكدة</span> <bdi>{zone['confirmed']}</bdi></span> "
+            f"<span class=\"zs-p\">· <span class=\"zs-lab\">مرجّحة</span> <bdi>{zone['probable']}</bdi></span> "
+            f"<span class=\"zs-p\">· <span class=\"zs-lab\">مؤهلة غير مؤكدة</span> <bdi>{unconfirmed}</bdi></span> "
+            f"<span class=\"zs-p\">· <span class=\"zs-lab\">مستثناة</span> <bdi>{zone['excluded']}</bdi></span> "
+            f"<span class=\"zs-p\">· <span class=\"zs-lab\">إجمالي</span> <bdi>{zone['events']}</bdi></span>"
             "</span></li>"
         )
     return f'<div class="hmap-zstrip"><h4>نسب التهديد</h4><ul>{"".join(rows)}</ul></div>'
