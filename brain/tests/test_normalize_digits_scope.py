@@ -33,6 +33,11 @@ def main() -> int:
     leaked = [p for p in scanned if "/skills/" in p]
     if leaked:
         fails.append(f"نطاق التطبيع يزحف على مصادر المهارات: {leaked[:3]}")
+    site = BRAIN.parent / "site"
+    scanned_all = scanned + [p.as_posix() for p in mod.targets([str(site)])] if site.exists() else scanned
+    leaked_tests = [p for p in scanned_all if "/tests/" in p]
+    if leaked_tests:
+        fails.append(f"نطاق التطبيع يزحف على ملفات الاختبار (ك-563): {leaked_tests[:3]}")
 
     # موجب: سطح نص القارئ داخل النطاق (تقرير اليوم)
     report = BRAIN / "reports" / "2026-11-08-sectioned.md"
