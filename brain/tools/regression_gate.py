@@ -71,6 +71,89 @@ def run_item(root: Path, item: dict, site: Path) -> tuple[str, str]:
     return ("ناجح" if ok else "ساقط"), (note[-1][:110] if note else f"rc={r.returncode}")
 
 
+MEASURE_TOOL = "tools/browser_measure.py"
+
+
+def parse_measure(argv: list[str]) -> dict | None:
+    """بند قياس بصري بصيغة الأداة المعروفة، أو None إن خرج عن الصيغة (فيُشغَّل وحده كما كان)."""
+    if len(argv) < 2 or argv[0] != "python3" or not argv[1].endswith(MEASURE_TOOL):
+        return None
+    spec = {"script": argv[1], "checks": [], "soft": [], "en": False, "out": None, "fixed": []}
+    i = 2
+    while i < len(argv):
+        a = argv[i]
+        if a == "--en":
+            spec["en"] = True; i += 1; continue
+        if a in ("--check", "--soft", "--out", "--root", "--site-root") and i + 1 < len(argv):
+            v = argv[i + 1]
+            if a == "--check": spec["checks"].append(v)
+            elif a == "--soft": spec["soft"].append(v)
+            elif a == "--out": spec["out"] = v
+            else: spec["fixed"] += [a, v]
+            i += 2; continue
+        return None  # خيار غير معروف (--url · --widths · --phrase ...) ⇒ تشغيل منفرد
+    if not spec["checks"]:
+        return None
+    return spec
+
+
+def shared_measure(root: Path, site: Path, group: list[tuple[dict, dict]], env: dict) -> dict[str, tuple[str, str]]:
+    """قياس واحد بمتصفح لسطح واحد يجمع فحوص بنوده، ثم يُحكم كل بند بفحوصه هو.
+
+    السبب المقيس (20 نوفمبر 2026): كلفة فتح المتصفح وتحميل الصفحة ثابتة (~31 ثانية) مهما قلّت الفحوص،
+    وكانت البوابة تدفعها ست مرات. الحكم يبقى لكل بند: `judge` نفسها من الأداة نفسها على فحوصه المانعة.
+    فشل مغلق: أي انهيار أو غياب ملف القياس ⇒ كل بنود السطح ساقطة.
+    """
+    first = group[0][1]
+    checks = sorted({c for _, s in group for c in s["checks"]})
+    import tempfile
+    with tempfile.TemporaryDirectory(prefix="regression-shared-") as tdir:
+        return _shared_measure(root, group, env, checks, first, Path(tdir) / "measure.json")
+
+
+def _shared_measure(root: Path, group: list[tuple[dict, dict]], env: dict, checks: list[str], first: dict,
+                    tmp: Path) -> dict[str, tuple[str, str]]:
+    argv = ["python3", first["script"], *first["fixed"], *(["--en"] if first["en"] else [])]
+    for c in checks:
+        argv += ["--check", c, "--soft", c]  # كل الفحوص إعلامية هنا؛ الحكم المانع لكل بند أدناه
+    argv += ["--out", str(tmp)]
+    ids = [it["id"] for it, _ in group]
+    try:
+        r = subprocess.run(argv, cwd=root, env=env, capture_output=True, text=True, timeout=900)
+        rc = r.returncode
+        data = json.loads(tmp.read_text(encoding="utf-8")) if rc == 0 and tmp.is_file() else None
+    except (OSError, subprocess.TimeoutExpired, ValueError) as exc:
+        return {i: ("ساقط", f"تعذّر القياس المشترك: {exc}"[:110]) for i in ids}
+    if data is None:
+        tail = (r.stdout or r.stderr or "").strip().splitlines()
+        return {i: ("ساقط", f"القياس المشترك rc={rc}: {tail[-1][:80] if tail else ''}") for i in ids}
+    import importlib.util
+    script = Path(first["script"]) if Path(first["script"]).is_absolute() else root / first["script"]
+    try:
+        mod_spec = importlib.util.spec_from_file_location("browser_measure_shared", script)
+        mod = importlib.util.module_from_spec(mod_spec)
+        mod_spec.loader.exec_module(mod)
+        judge = mod.judge
+    except (OSError, SyntaxError, ImportError, AttributeError) as exc:  # فشل مغلق: لا حكم بلا دالة الحكم
+        return {i: ("ساقط", f"تعذّر تحميل دالة الحكم: {exc}"[:110]) for i in ids}
+    out: dict[str, tuple[str, str]] = {}
+    for it, s in group:
+        hard = [c for c in s["checks"] if c not in s["soft"]]
+        soft = [c for c in s["checks"] if c in s["soft"]]
+        item_data = json.loads(json.dumps(data, ensure_ascii=False))
+        bad = judge(item_data, hard)
+        item_data["checks"] = s["checks"]
+        item_data["soft_checks"] = soft
+        item_data["violations"] = bad
+        if s["out"]:
+            p = Path(s["out"]) if Path(s["out"]).is_absolute() else root / s["out"]
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text(json.dumps(item_data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        out[it["id"]] = (("ساقط", f"✘ القياس البصري: {len(bad)} مخالفة مانعة — {bad[0][:60]}") if bad
+                         else ("ناجح", "✔ القياس البصري: صفر مخالفة في الفحوص المطلوبة"))
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="مدير الانحدار التراكمي")
     ap.add_argument("--root", default=".", help="جذر النظام")
@@ -89,10 +172,27 @@ def main() -> int:
     if args.item:
         items = [i for i in items if i["id"] == args.item]
 
+    # بنود القياس البصري تُجمع حسب السطح (عربي/إنجليزي وجذراه) فيُفتح المتصفح مرة لكل سطح
+    env = dict(os.environ, B=str(root), SITE=str(site), SITE_DIR=str(site))
+    groups: dict[tuple, list[tuple[dict, dict]]] = {}
+    for it in items:
+        if it["kind"] == "manual":
+            continue
+        argv = [str(a).replace("{root}", str(root)).replace("{site}", str(site)).replace("{dist}", str(site / "dist"))
+                for a in it["argv"]]
+        spec = parse_measure(argv)
+        if spec and it.get("expect", 0) == 0:
+            groups.setdefault((spec["script"], spec["en"], tuple(spec["fixed"])), []).append((it, spec))
+    shared: dict[str, tuple[str, str]] = {}
+    for group in groups.values():
+        shared.update(shared_measure(root, site, group, env))
+
     rows, blockers, exceptions = [], [], []
     for it in items:
         if it["kind"] == "manual":
             state, note = ("ساقط" if args.require_manual else "يدوي"), it.get("how", "قياس بمتصفح")
+        elif it["id"] in shared:
+            state, note = shared[it["id"]]
         else:
             state, note = run_item(root, it, site)
         open_until = it.get("open_until")

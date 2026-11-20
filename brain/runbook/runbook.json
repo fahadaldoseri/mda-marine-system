@@ -5299,7 +5299,8 @@
         ],
         "gates": [],
         "tests": [
-          "tests/test_gate_tools.py"
+          "tests/test_gate_tools.py",
+          "tests/test_regression_shared_measure.py"
         ]
       },
       "on_fail": "stop",
