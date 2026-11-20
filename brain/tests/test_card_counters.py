@@ -605,5 +605,52 @@ class OfficialCardGateTests(unittest.TestCase):
         self.assertTrue(any("لا تغطية" in error or "الصفر" in error for error in errors), errors)
 
 
+class ImoDetailDerivedTests(unittest.TestCase):
+    """العطل المقيس (2026-11-20): البنّاء يشتق تفصيل بطاقتي IMO من العدّاد الحاكم
+    (web/kpis-totals)، والحاجز كان يقارنه بنص ثابت في card_registry.json (128/24 حتى 03/11).
+    فكل تحديث لقائمة IMO كان يُفشل الحاجز حتى يُعدَّل السجل يدويًا. الحكم الآن من المصدر نفسه."""
+
+    import copy
+
+    def setUp(self):
+        self.registry = json.loads((ROOT / "appendices" / "card_registry.json").read_text(encoding="utf-8"))
+        self.kpis = {"metrics": [
+            {"id": "imo-confirmed-incidents", "today": 1, "cumulative": 139, "updated": "2026-11-19"},
+            {"id": "imo-seafarer-deaths", "today": 0, "cumulative": 25, "updated": "2026-11-19"}]}
+        self.cards = {c["id"]: c for c in self.registry["hero_kpis"]["cards"]}
+
+    def _expected(self, cid):
+        return card_counter_module._hero_detail({}, {}, self.cards[cid], self.kpis)
+
+    def test_detail_derives_from_governed_counter_not_registry_text(self):
+        stale = self.copy.deepcopy(self.cards["imo-confirmed-incidents"])
+        stale["detail"]["ar"] = "لا زيادة بين التحديثين؛ الإجمالي 128 حادثة مؤكدة حتى 03/11/2026"
+        got = card_counter_module._hero_detail({}, {}, stale, self.kpis)
+        self.assertEqual(got, "زيادة 1 بين التحديثين؛ الإجمالي 139 حادثة مؤكدة حتى 19/11/2026")
+        self.assertEqual(self._expected("imo-seafarer-deaths"),
+                         "لا زيادة بين التحديثين؛ الإجمالي 25 وفاة بحّار مؤكدة حتى 19/11/2026")
+
+    def test_validator_and_builder_share_one_rule(self):
+        from tools.build_hero_kpis import hero_detail as builder_detail
+        for cid in ("imo-confirmed-incidents", "imo-seafarer-deaths"):
+            self.assertEqual(self._expected(cid), builder_detail({}, {}, self.cards[cid], self.kpis))
+
+    def test_wrong_detail_on_card_still_blocks(self):
+        meta = json.loads((ROOT / "web" / "meta" / "2026-11-20.json").read_text(encoding="utf-8"))
+        zones = json.loads((ROOT / "web" / "zones" / "2026-11-20.json").read_text(encoding="utf-8"))
+        kpis = json.loads((ROOT / "web" / "kpis-totals" / "2026-11-20.json").read_text(encoding="utf-8"))
+        stale_registry = self.copy.deepcopy(self.registry)
+        for card in stale_registry["hero_kpis"]["cards"]:
+            if card["id"] == "imo-confirmed-incidents":
+                card["detail"]["ar"] = "لا زيادة بين التحديثين؛ الإجمالي 128 حادثة مؤكدة حتى 03/11/2026"
+        self.assertEqual([e for e in validate_hero_kpis(meta, zones, stale_registry, kpis_totals=kpis)
+                          if "imo" in e], [])
+        changed = self.copy.deepcopy(meta)
+        card = next(c for c in changed["hero_kpis"] if c["id"] == "imo-confirmed-incidents")
+        card["detail"] = "لا زيادة بين التحديثين؛ الإجمالي 128 حادثة مؤكدة حتى 03/11/2026"
+        errors = validate_hero_kpis(changed, zones, self.registry, kpis_totals=kpis)
+        self.assertTrue(any("تفصيل البطاقة: imo-confirmed-incidents" in e for e in errors), errors)
+
+
 if __name__ == "__main__":
     unittest.main()
