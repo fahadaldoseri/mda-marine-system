@@ -1,0 +1,8 @@
+E       AttributeError: module 'browser_measure_regression' has no attribute 'X_HOSTS'
+
+tests/test_regression_b03_dynamic_anchor.py:186: AttributeError
+=========================== short test summary info ============================
+FAILED tests/test_regression_b03_dynamic_anchor.py::test_b03_x_post_verified_by_official_oembed_despite_browser_403
+FAILED tests/test_regression_b03_dynamic_anchor.py::test_b03_x_post_rejects_fragment_absent_from_post
+FAILED tests/test_regression_b03_dynamic_anchor.py::test_b03_x_post_rejects_missing_post_and_wrong_account
+3 failed, 3 passed in 8.22s

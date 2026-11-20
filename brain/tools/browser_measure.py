@@ -43,6 +43,64 @@ ANCHOR_BROWSER_USER_AGENT = (
 )
 ANCHOR_DOM_WAIT_MS = 15000
 
+# منشورات X ترد 403 على المتصفح الآلي (قيس 2026-11-20). يُثبت المنشور عبر واجهة
+# oEmbed الرسمية من X (https://docs.x.com/x-for-websites/oembed-api: لا تتطلب
+# مصادقة)، وهي تعيد نص المنشور وحسابه وتاريخه. الشرط نفسه: المنشور موجود، وحسابه
+# هو حساب الرابط، ونص المرساة ظاهر في نصه. أي خلل غير ذلك يبقى مخالفة مانعة.
+X_HOSTS = {"x.com", "www.x.com", "twitter.com", "www.twitter.com", "mobile.twitter.com", "mobile.x.com"}
+X_OEMBED_ENDPOINT = os.environ.get("X_OEMBED_ENDPOINT", "https://publish.twitter.com/oembed")
+X_OEMBED_TIMEOUT_S = 25
+
+
+def _norm_text(t: str) -> str:
+    return " ".join((t or "").split())
+
+
+def x_status_parts(url: str) -> tuple[str, str] | None:
+    """يرجع (الحساب، رقم المنشور) لرابط منشور على X، أو None لغيره."""
+    from urllib.parse import urlsplit
+    sp = urlsplit(url)
+    if (sp.hostname or "").lower() not in X_HOSTS:
+        return None
+    parts = [x for x in sp.path.split("/") if x]
+    if len(parts) >= 3 and parts[1] == "status" and parts[2].isdigit():
+        return parts[0], parts[2]
+    return None
+
+
+def verify_x_post(page_url: str, fragment: str | None) -> dict:
+    """يثبت منشور X ونص مرساته عبر oEmbed الرسمي. يفشل مغلقًا."""
+    import html as _html
+    import re
+    import urllib.request
+    from urllib.parse import quote, urlsplit
+    handle, status_id = x_status_parts(page_url) or ("", "")
+    canonical = f"https://x.com/{handle}/status/{status_id}"
+    q = f"{X_OEMBED_ENDPOINT}?url={quote(canonical, safe='')}&omit_script=1&dnt=true"
+    detail = {"method": "x_oembed", "oembed": q, "http_status": None, "exists": False}
+    try:
+        with urllib.request.urlopen(urllib.request.Request(q), timeout=X_OEMBED_TIMEOUT_S) as r:
+            detail["http_status"] = r.status
+            data = json.loads(r.read().decode("utf-8"))
+    except (OSError, ValueError) as exc:  # شبكة/HTTP/مهلة/JSON تالف = غير مثبت (مانع)
+        code = getattr(exc, "code", None)
+        detail["http_status"] = code
+        detail["error"] = f"oEmbed: {type(exc).__name__} {code or ''} {str(exc)[:120]}".strip()
+        return detail
+    got = urlsplit(str(data.get("url") or "")).path.strip("/").split("/")
+    if len(got) < 3 or got[0].lower() != handle.lower() or got[2] != status_id:
+        detail["error"] = f"oEmbed: المنشور المُعاد لا يطابق الرابط ({data.get('url')})"
+        return detail
+    body = re.sub(r"<br\s*/?>", " ", str(data.get("html") or ""))
+    text = _norm_text(_html.unescape(re.sub(r"<[^>]+>", " ", body)))
+    detail["author_name"] = data.get("author_name")
+    detail["text_chars"] = len(text)
+    if fragment is not None and _norm_text(fragment) not in text:
+        detail["error"] = "oEmbed: نص المرساة غير موجود في نص المنشور"
+        return detail
+    detail["exists"] = True
+    return detail
+
 
 def load_readiness(root: Path, url: str) -> list[str]:
     """يقرأ الأسئلة من المصدر الواحد، ويختار نمط اللغة بحسب الصفحة المقيسة."""
@@ -177,6 +235,18 @@ def measure(url: str, widths: list[int], questions: list[str], phrases: list[str
                 if key in targets:
                     continue
                 aux = None
+                target_abs = urljoin(url, link["page"])
+                if x_status_parts(target_abs):
+                    frag = None
+                    if link["hash"].startswith(":~:text="):
+                        frag = unquote(link["hash"][len(":~:text="):].split("&")[0].split(",")[0])
+                    detail = verify_x_post(target_abs, frag)
+                    if not frag and detail["exists"]:
+                        # مرساة معرّف عنصر لا تُقاس في نص منشور: لا تُعدّ مثبتة.
+                        detail.update(exists=False, error="oEmbed: مرساة غير نصية على منشور X")
+                    targets[key] = bool(detail["exists"])
+                    target_details[key] = detail
+                    continue
                 try:
                     aux = context.new_page()
                     target_page = link["page"]
