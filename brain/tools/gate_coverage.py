@@ -92,7 +92,9 @@ def collect(root: Path, steps: list[dict]):
         if not d.is_dir():
             continue
         for f in sorted(d.glob("*.py")):
-            if corpus.count(f.name) == 0:
+            # `in` يقف عند أول ظهور؛ و`count() == 0` كان يمسح النص كله لكل ملف (~12 ثانية).
+            # المعنى واحد: لا ظهور ⇔ عدد الظهور صفر.
+            if f.name not in corpus:
                 orphans.append(f"{sub}/{f.name}")
     return dead, declared, covered, missing, coverage, orphans
 

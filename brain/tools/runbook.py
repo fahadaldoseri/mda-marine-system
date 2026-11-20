@@ -8,6 +8,8 @@
 الأوامر:
   runbook.py verify [--root .]                    فحص المانيفست والارتباطات (يخرج 2 عند أي خلل)
   runbook.py run --date D [--root .]              ينفّذ الخطوات بالترتيب؛ يتوقف عند خطوة وكيل (رمز 10) أو فشل (رمز 2)
+                                                  بعد إصلاح خطأ يُستأنف بالأمر نفسه بلا --redo واسع: المحرّك يعيد آليًّا
+                                                  المكتمل الذي تغيّرت مدخلاته منذ آخر توقف (--no-auto-redo يوقفها)
   runbook.py complete STEP --date D [--root .]    يعلن الوكيل إتمام خطوته؛ يُقبل فقط إن تحققت شروطها بالدليل
   runbook.py status --date D [--root .]           حالة كل خطوة
   runbook.py handbook [--root .]                  يولّد docs/runbook.md
@@ -268,9 +270,264 @@ def prior_ok(m, ledger, idx):
     return None
 
 
+# ───────────────────────── الإعادة الآلية للخطوات المتأثرة ─────────────────────────
+
+import ast  # noqa: E402
+
+ELIGIBLE_PHASES = {"write", "gates", "build", "outputs", "finalize"}
+STALE_CODE_EXT = {".py", ".sh"}
+STALE_SKIP_DIRS = SKIP_DIRS
+STALE_CASCADE_SKIP = ("evidence", "audit")
+STALE_PATH_RE = re.compile(r"(?:[\w.\-]+/)*[\w.\-]+\.(?:py|sh|json|jsonl|md|txt|js|css|html)\b")
+SNAPSHOT_NAME = "stale-snapshot.json"
+
+
+def watch_roots(root: str, site: str) -> list[str]:
+    roots = [os.path.realpath(root)]
+    s = os.path.realpath(site)
+    if os.path.isdir(s) and not s.startswith(roots[0] + os.sep):
+        roots.append(s)
+    return roots
+
+
+def _sha(path: str) -> str:
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def snapshot(roots: list[str], prev: dict | None = None) -> dict:
+    """{مسار: [حجم, mtime_ns, sha256]}؛ البصمة تُعاد من اللقطة السابقة إن لم يتغير الحجم والوقت."""
+    prev = prev or {}
+    out: dict = {}
+    for base in roots:
+        for dp, dn, fn in os.walk(base):
+            dn[:] = sorted(d for d in dn if d not in STALE_SKIP_DIRS)
+            for f in fn:
+                p = os.path.join(dp, f)
+                try:
+                    st = os.stat(p)
+                except OSError:
+                    continue
+                if not os.path.isfile(p):
+                    continue
+                old = prev.get(p)
+                if old and old[0] == st.st_size and old[1] == st.st_mtime_ns:
+                    out[p] = old
+                    continue
+                try:
+                    out[p] = [st.st_size, st.st_mtime_ns, _sha(p)]
+                except OSError:
+                    out[p] = [st.st_size, st.st_mtime_ns, "unreadable"]
+    return out
+
+
+def snap_diff(a: dict, b: dict) -> set[str]:
+    return {p for p in set(a) | set(b) if (a.get(p) or [None, None, None])[2] != (b.get(p) or [None, None, None])[2]}
+
+
+def snapshot_path(root: str, date: str) -> str:
+    return os.path.join(root, "logs", "runbook", date, SNAPSHOT_NAME)
+
+
+def load_snapshot(root: str, date: str) -> dict | None:
+    p = snapshot_path(root, date)
+    try:
+        with open(p, encoding="utf-8") as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return None
+
+
+def save_snapshot(root: str, date: str, snap: dict) -> None:
+    p = snapshot_path(root, date)
+    os.makedirs(os.path.dirname(p), exist_ok=True)
+    tmp = p + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(snap, f, ensure_ascii=False)
+    os.replace(tmp, p)
+
+
+def eligible(step: dict) -> bool:
+    return step.get("kind") == "script" and step.get("phase") in ELIGIBLE_PHASES and not step.get("disabled")
+
+
+class Closure:
+    """سلسلة ملفات كل خطوة: ما يذكره أمرها وشروطها وروابطها، ثم ما تستورده أو تذكره هذه الملفات."""
+
+    def __init__(self, root: str, site: str):
+        self.root = os.path.realpath(root)
+        self.site = os.path.realpath(site)
+        self.top = os.path.dirname(self.root)
+        self.bases = [self.root, self.site, self.top]
+        self._file_refs: dict[str, set[str]] = {}
+        self._steps: dict = {}
+
+    def _resolve(self, token: str, here: str | None = None) -> set[str]:
+        parts = token.split("/")
+        found: set[str] = set()
+        for i in range(len(parts)):
+            rel = "/".join(parts[i:])
+            bases = ([here] if here else []) + self.bases
+            for b in bases:
+                p = os.path.realpath(os.path.join(b, rel))
+                if os.path.isfile(p) and p.startswith(self.top + os.sep):
+                    found.add(p)
+            if found:
+                return found
+        return found
+
+    def _refs_of_text(self, text: str, here: str | None, code_only: bool = True) -> set[str]:
+        out: set[str] = set()
+        for tok in set(STALE_PATH_RE.findall(text)):
+            if code_only and os.path.splitext(tok)[1] not in STALE_CODE_EXT:
+                continue
+            out |= self._resolve(tok, here)
+        return out
+
+    def _read(self, path: str) -> str:
+        try:
+            if os.path.getsize(path) > 2_000_000:
+                return ""
+            return open(path, encoding="utf-8", errors="replace").read()
+        except OSError:
+            return ""
+
+    def _refs_of_file(self, path: str) -> set[str]:
+        """ملفات الشيفرة التي يستوردها ملف شيفرة أو يذكر مسارها (تبعيات البيانات لا تُتتبع: تغيّرها يعيد الكل)."""
+        if path in self._file_refs:
+            return self._file_refs[path]
+        refs: set[str] = set()
+        self._file_refs[path] = refs
+        text = self._read(path)
+        here = os.path.dirname(path)
+        refs |= self._refs_of_text(text, here)
+        if path.endswith(".py"):
+            try:
+                tree = ast.parse(text)
+            except (SyntaxError, ValueError):
+                tree = None
+            names: set[str] = set()
+            for node in ast.walk(tree) if tree else ():
+                if isinstance(node, ast.Import):
+                    names |= {a.name for a in node.names}
+                elif isinstance(node, ast.ImportFrom) and node.module:
+                    names.add(node.module)
+            dirs = [here, os.path.join(self.root, "tools"), os.path.join(self.root, "validators"),
+                    os.path.join(self.root, "tests"), os.path.join(self.site, "generator"),
+                    os.path.join(self.site, "tests"), self.root, self.site]
+            for n in names:
+                rel = n.replace(".", "/")
+                for d in dirs:
+                    for cand in (os.path.join(d, rel + ".py"), os.path.join(d, rel, "__init__.py"),
+                                 os.path.join(d, rel.split("/")[0] + ".py")):
+                        if os.path.isfile(cand):
+                            refs.add(os.path.realpath(cand))
+        refs.discard(path)
+        return refs
+
+    def of_step(self, step: dict, date: str, sub) -> set[str]:
+        key = (step.get("id"), date)
+        if key not in self._steps:
+            self._steps[key] = self._of_step(step, date, sub)
+        return self._steps[key]
+
+    def _of_step(self, step: dict, date: str, sub) -> set[str]:
+        """سلسلة ملفات الشيفرة لخطوة: المذكورة في أمرها وشروطها وروابطها، والمذكورة في ملفات
+        البيانات التي تذكرها الخطوة مباشرة (مثل سجل بنود الانحدار)، ثم ما تستورده أو تستدعيه."""
+        text = sub(json.dumps({k: step.get(k) for k in ("command", "assert", "links", "writes", "prompt")},
+                              ensure_ascii=False), date)
+        seeds = self._refs_of_text(text, None)
+        for data in self._refs_of_text(text, None, code_only=False) - seeds:
+            seeds |= self._refs_of_text(self._read(data), os.path.dirname(data))
+        seen: set[str] = set()
+        todo = list(seeds)
+        while todo:
+            p = todo.pop()
+            if p in seen:
+                continue
+            seen.add(p)
+            todo.extend(r for r in self._refs_of_file(p) if r not in seen)
+        return seen
+
+
+def stale_after(changed: set[str], steps: list[dict], done: set[str], closure: Closure, date: str, sub,
+                ) -> tuple[set[str], str]:
+    """الخطوات المكتملة المؤهلة التي صارت قديمة بسبب الملفات المتغيرة، مع سبب مختصر."""
+    cands = [s for s in steps if s["id"] in done and eligible(s)]
+    if not changed or not cands:
+        return set(), ""
+    data = sorted(p for p in changed if os.path.splitext(p)[1] not in STALE_CODE_EXT)
+    if data:
+        return {s["id"] for s in cands}, f"تغيّر ملف بيانات/محتوى: {os.path.relpath(data[0], closure.top)}" + (
+            f" و{len(data) - 1} غيره" if len(data) > 1 else "")
+    code = sorted(changed)
+    hit: set[str] = set()
+    covered: set[str] = set()
+    for s in steps:
+        if not eligible(s):
+            continue
+        deps = closure.of_step(s, date, sub)
+        inter = deps & set(code)
+        covered |= inter
+        if inter and s["id"] in done:
+            hit.add(s["id"])
+    unknown = [p for p in code if p not in covered]
+    if unknown:
+        return {s["id"] for s in cands}, (f"شيفرة لا تقع في سلسلة أي خطوة: "
+                                         f"{os.path.relpath(unknown[0], closure.top)} — إعادة شاملة احتياطًا")
+    return hit, "شيفرة متغيرة: " + " · ".join(os.path.relpath(p, closure.top) for p in code[:4])
+
+
+class _StaleAPI:
+    """واجهة واحدة لدوال الإعادة الآلية داخل المحرّك نفسه (لا ملف مستقل يغيب عند النسخ)."""
+    watch_roots = staticmethod(watch_roots)
+    snapshot = staticmethod(snapshot)
+    diff = staticmethod(snap_diff)
+    load_snapshot = staticmethod(load_snapshot)
+    save_snapshot = staticmethod(save_snapshot)
+    eligible = staticmethod(eligible)
+    stale_after = staticmethod(stale_after)
+    Closure = Closure
+
+
 # ───────────────────────── run / complete ─────────────────────────
-def run(root, date, only_phase=None, redo=None, only_steps=None):
-    """redo: معرّفات خطوات تُعاد للتحقق لأن مدخلاتها تغيّرت (ك-321) — لا تُقبل خطوة مكتملة قديمة."""
+def run_auto(root, date, only_phase=None, redo=None, only_steps=None, auto_redo=True):
+    """redo: معرّفات خطوات تُعاد للتحقق لأن مدخلاتها تغيّرت (ك-321) — لا تُقبل خطوة مكتملة قديمة.
+
+    auto_redo (اعتماد فهد 20 نوفمبر 2026): المحرّك يحسب بنفسه الخطوات المكتملة التي تغيّرت مدخلاتها
+    منذ آخر توقف ويعيدها وحدها، بدل إعادة السلسلة كاملة بقائمة يدوية (tools/runbook_stale.py).
+    """
+    if not auto_redo or not date:
+        return run(root, date, only_phase, redo, only_steps)
+    rs = _StaleAPI
+    m = load(root)
+    roots = rs.watch_roots(root, site_dir(root))
+    prev = rs.load_snapshot(root, date)
+    now = rs.snapshot(roots, prev)
+    ledger = read_ledger(root, m, date)
+    done = {k for k, e in ledger.items() if entry_allows_progress(next((s for s in m["steps"] if s["id"] == k), {}), e)}
+    closure = rs.Closure(root, site_dir(root))
+    subf = lambda t, d: sub(t, d, root)  # noqa: E731
+    if prev is None:
+        stale = {s["id"] for s in m["steps"] if s["id"] in done and rs.eligible(s)}
+        why = "لا لقطة سابقة لهذا اليوم — إعادة شاملة احتياطًا" if stale else ""
+    else:
+        stale, why = rs.stale_after(rs.diff(prev, now), m["steps"], done, closure, date, subf)
+    if stale:
+        print(f"↻ إعادة آلية لـ {len(stale)} خطوة مكتملة تغيّرت مدخلاتها — {why}")
+    state = {"rs": rs, "roots": roots, "snap": now, "closure": closure, "sub": subf}
+    try:
+        return run(root, date, only_phase, set(redo or ()) | stale, only_steps, auto=state)
+    finally:
+        rs.save_snapshot(root, date, rs.snapshot(roots, state["snap"]))
+
+
+def run(root, date, only_phase=None, redo=None, only_steps=None, auto=None):
+    """redo: معرّفات خطوات تُعاد للتحقق لأن مدخلاتها تغيّرت (ك-321) — لا تُقبل خطوة مكتملة قديمة.
+    auto: حالة الإعادة الآلية من run_auto (None = بلا تسلسل آلي)."""
     redo = set(redo or ())
     # ك-568: تشغيل محصور بخطوات معلومة ثم توقّف — يمنع الاستدعاء الدائري عندما
     # تُجدَّد بوابةٌ داخل خطوة نشر تستدعي بدورها الخطوة نفسها.
@@ -377,6 +634,21 @@ def run(root, date, only_phase=None, redo=None, only_steps=None):
             print(f"✘ توقف عند {s['id']}: {'; '.join(probs)}")
             return 2
         ledger = read_ledger(root, m, date)
+        if auto is not None:
+            rs = auto["rs"]
+            after = rs.snapshot(auto["roots"], auto["snap"])
+            # سجلات الأدلة التي تكتبها البوابة عن نفسها (بصمات بوقت التشغيل) لا تُسلسل الإعادة؛
+            # ما عداها من محتوى وبناء وبيانات يُسلسلها. قيس: إعادة G000C وحدها تكتب 18 ملفًا في evidence/.
+            changed = {p for p in rs.diff(auto["snap"], after)
+                       if not any(p.startswith(os.path.join(os.path.realpath(root), d) + os.sep)
+                                  for d in STALE_CASCADE_SKIP)}
+            auto["snap"] = after
+            later_done = {x["id"] for x in m["steps"][i + 1:]
+                          if x["id"] not in redo and entry_allows_progress(x, ledger.get(x["id"]))}
+            more, why = rs.stale_after(changed, m["steps"], later_done, auto["closure"], date, auto["sub"])
+            if more:
+                print(f"  ↻ {s['id']} غيّرت مدخلات {len(more)} خطوة مكتملة بعدها فتُعاد — {why}")
+                redo |= more
     print("✔ اكتملت كل الخطوات")
     return 0
 
@@ -914,6 +1186,8 @@ def main():
     ap.add_argument("--final", action="store_true", help="gate-json: الحكم النهائي من سجل المحرّك (يلزمه --through)")
     ap.add_argument("--only", default="", help="معرّفات خطوات تُنفَّذ وحدها ثم يتوقف المحرّك (ك-568)، مفصولة بفاصلة")
     ap.add_argument("--redo", default="", help="معرّفات خطوات تُعاد للتحقق بعد تغيّر مدخلاتها، مفصولة بفاصلة (ك-321)")
+    ap.add_argument("--no-auto-redo", action="store_true",
+                    help="إيقاف الإعادة الآلية للخطوات المتأثرة (الافتراضي: مفعّلة، tools/runbook_stale.py)")
     a = ap.parse_args()
     c = a.cmd
     try:
@@ -924,10 +1198,13 @@ def main():
     if c == "verify":
         return verify(root)
     if c == "run":
-        return run(root, a.date, redo=[x for x in a.redo.split(",") if x.strip()],
-                   only_steps=[x for x in getattr(a, "only", "").split(",") if x.strip()])
+        only = [x for x in getattr(a, "only", "").split(",") if x.strip()]
+        # --only (ك-568) تشغيل محصور بخطوات معلومة يُستدعى من داخل خطوة أخرى؛ لا إعادة آلية فيه
+        return run_auto(root, a.date, redo=[x for x in a.redo.split(",") if x.strip()],
+                        only_steps=only, auto_redo=not (a.no_auto_redo or only))
     if c == "gates":
-        return run(root, a.date, only_phase="gates", redo=[x for x in a.redo.split(",") if x.strip()])
+        return run_auto(root, a.date, only_phase="gates", redo=[x for x in a.redo.split(",") if x.strip()],
+                        auto_redo=not a.no_auto_redo)
     if c == "gate-json":
         return gate_json(root, a.date, a.through, final=a.final)
     if c == "gates-status":

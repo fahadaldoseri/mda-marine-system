@@ -420,6 +420,52 @@ def judge(data: dict, checks: list[str]) -> list[str]:
     return bad
 
 
+def dist_fingerprint(base: str | None) -> str | None:
+    """بصمة الموقع المبني كله (المسار · الحجم · وقت التعديل) — أي إعادة بناء تغيّرها."""
+    if not base or not os.path.isdir(base):
+        return None
+    import hashlib
+    h = hashlib.sha256()
+    for dp, dn, fn in os.walk(base):
+        dn.sort()
+        for f in sorted(fn):
+            q = os.path.join(dp, f)
+            st = os.stat(q)
+            h.update(f"{os.path.relpath(q, base)}|{st.st_size}|{st.st_mtime_ns}\n".encode("utf-8"))
+    return h.hexdigest()
+
+
+REUSE_MAX_AGE_SECONDS = 1800
+
+
+def reusable(path: str | None, url: str, widths: list[int], questions: list[str], phrases: list[str],
+             checks: list[str], fingerprint: str | None) -> tuple[dict | None, str]:
+    """قياس سابق يُعاد استعماله فقط إن طابق الصفحة والعروض والأسئلة والعبارات والفحوص وبصمة الموقع المبني
+    وكان عمره أقل من 30 دقيقة؛ وإلا يُقاس من جديد (السبب المقيس: G065 كانت تكرر قياس G064 نفسه، ~31 ثانية)."""
+    if not path:
+        return None, ""
+    try:
+        data = json.loads(Path(path).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None, "لا قياس سابق صالح"
+    try:
+        age = (datetime.now(timezone.utc) - datetime.fromisoformat(data["at"])).total_seconds()
+        first = data["widths"][str(widths[0])]
+        same = (data.get("url") == url
+                and sorted(data["widths"]) == sorted(str(w) for w in widths)
+                and [q["q"] for q in first["readiness"]] == list(questions)
+                and [x["p"] for x in first["phrases"]] == list(phrases)
+                and set(checks) <= set(data.get("checks") or [])
+                and fingerprint is not None and data.get("dist_fingerprint") == fingerprint)
+    except (KeyError, TypeError, ValueError, IndexError):
+        return None, "قياس سابق بصيغة غير معروفة"
+    if not same:
+        return None, "القياس السابق لا يطابق الصفحة أو الفحوص أو الموقع المبني"
+    if not 0 <= age <= REUSE_MAX_AGE_SECONDS:
+        return None, f"القياس السابق أقدم من {REUSE_MAX_AGE_SECONDS // 60} دقيقة"
+    return data, f"مُعاد من {path} (نفس الموقع المبني، عمره {int(age)} ثانية)"
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="القياس البصري الحي بمتصفح حقيقي")
     ap.add_argument("--url", help="رابط الصفحة")
@@ -436,6 +482,7 @@ def main() -> int:
                     help="يتكرر؛ الافتراضي: الكل")
     ap.add_argument("--phrase", action="append", default=["هجمات مؤكدة"], help="عبارة تُفحَص بقاياها")
     ap.add_argument("--out", help="ملف النتيجة JSON")
+    ap.add_argument("--reuse", help="قياس سابق يُعاد استعماله إن طابق تمامًا (وإلا يُقاس من جديد)")
     args = ap.parse_args()
     if not args.url:
         if not args.site_root:
@@ -453,8 +500,17 @@ def main() -> int:
     soft = [c for c in checks if c in (args.soft or [])]
     widths = [int(w) for w in args.widths.split(",") if w.strip()]
 
-    data = measure(args.url, widths, load_readiness(args.root, args.url), args.phrase,
-                   base=args.base_file, root=args.root)
+    questions = load_readiness(args.root, args.url)
+    fingerprint = dist_fingerprint(args.base_file)
+    data, why = reusable(args.reuse, args.url, widths, questions, args.phrase, checks, fingerprint)
+    if data is None:
+        if args.reuse:
+            print(f"   قياس حي: {why}")
+        data = measure(args.url, widths, questions, args.phrase, base=args.base_file, root=args.root)
+        data["dist_fingerprint"] = fingerprint
+    else:
+        data["reused_from"] = args.reuse
+        print(f"   ↻ {why}")
     bad = judge(data, hard)
     data["checks"] = checks
     data["soft_checks"] = soft
