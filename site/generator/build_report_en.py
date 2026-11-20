@@ -30,7 +30,10 @@ def missing_translation_error(page_name: str, missing: list[str]) -> str:
     unique = sorted({str(item).strip() for item in missing if str(item).strip()})
     return (
         f"فشل مغلق: نصوص عربية بلا ترجمة في {page_name} — أضفها إلى "
-        "sources/i18n/en/glossary.json\n  - "
+        "sources/i18n/en/glossary.json\n"
+        # ك-إ3: لا مطابقة جزئية؛ الجزء الذي يقطعه رمز لاتيني لا يُترجم وحده، فالمفتاح هو الجملة كاملة.
+        "  (المفتاح هو الجملة كاملة برموزها اللاتينية كما يطبعها: "
+        "python3 generator/en_missing_report.py --date DATE)\n  - "
         + "\n  - ".join(unique)
     )
 

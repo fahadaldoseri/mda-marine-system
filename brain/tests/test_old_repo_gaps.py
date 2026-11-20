@@ -4,6 +4,7 @@
 1. seawatch-web #9: أقواس MOBILE_NAV_CSS متوازنة ولا يُغلق الاستعلام قبل آخر قواعده.
 2. seawatch-web #10 (ك-إ1، ك-إ2): المعجم يرفض المفتاح المكرر والقيمة غير النصية أو الفارغة.
    (ك-إ4): لا سمة مقروءة عربية في الصفحة الإنجليزية، ووسوم المشاركة تُشتق من رأسها الإنجليزي.
+   (ك-إ3): لا مطابقة جزئية — لا تُكمَّل وحدة قصيرة بمقابل مفتاح أطول، ولا تُقتطع جملة إلى مقابل أولها.
 3. seawatch-brain #6: اسم سفينة ذو مقطع واحد في دفتر اليوم («ST3») يدخل قائمة فحص العقوبات.
 """
 import json
@@ -82,6 +83,26 @@ def main() -> int:
         expect(not bad, f"الصفحات الإنجليزية المبنية بلا سمة مقروءة عربية ({len(built)} صفحة)")
     else:
         print("  • تخطٍّ معلن: لا صفحات إنجليزية مبنية")
+
+    gl_small = {"أساس التقدير:": "Basis of assessment:", "مضيق هرمز": "the Strait of Hormuz"}
+    tr = i18n_en.make_translator({}, gl_small)
+    arabic = lambda v: bool(re.search(r"[\u0600-\u06FF]", v or ""))
+    expect(tr("مضيق هرمز") == "the Strait of Hormuz", "موجب ك-إ3: المفتاح التام يُترجم")
+    expect(arabic(tr("أساس التقدير: أثبتت الجهة نشاطًا مشبوهًا فقط.")),
+           "سالب ك-إ3: جملة تبدأ بمفتاح لا تُقتطع إلى «Basis of assessment:» فتبقى ناقصة معلنة")
+    expect(arabic(tr("مضيق")), "سالب ك-إ3: وحدة قصيرة لا تُكمَّل بمقابل مفتاح أطول")
+    expect(i18n_en.localize_patterns("بحر العرب — مستواه منخفض.") == "Arabian Sea — level: Low.",
+           "نمط سطر القطاع يحفظ المستوى (كان يُقتطع إلى اسم القطاع)")
+    expect(i18n_en.localize_patterns("بحر العرب: منخفض — ذيل حر غير معروف.") is None,
+           "سالب: ذيل غير معروف لا يُترجم بالتخمين")
+    latest = sorted((SITE / "dist" / "reports" / "en").glob("2026-11-2*.html"))
+    card = SITE / "dist" / "reports" / "en" / "2026-11-20.html"
+    if card.is_file():
+        text = card.read_text(encoding="utf-8")
+        expect("Basis of assessment: the overall level is Moderate" in text,
+               "جملة «أساس التقدير» في بطاقة الحكم 20 نوفمبر كاملة لا «Basis of assessment:» وحدها")
+    else:
+        print(f"  • تخطٍّ معلن: صفحة 20 نوفمبر الإنجليزية غير مبنية ({len(latest)} صفحة)")
 
     import vessel_names
     old_b = vessel_names.B

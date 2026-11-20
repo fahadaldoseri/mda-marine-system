@@ -22,26 +22,38 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 ARABIC = re.compile(r"[\u0600-\u06FF]")
 
 
-def collect(date: str) -> list[dict]:
-    page = (ROOT / "dist" / "reports" / f"{date}.html").read_text(encoding="utf-8")
-    # استثناء كتل الأنماط والسكربتات: تعليقات CSS العربية ليست نصًا معروضًا
-    page = re.sub(r"<style[^>]*>.*?</style>", " ", page, flags=re.S | re.I)
-    page = re.sub(r"<script[^>]*>.*?</script>", " ", page, flags=re.S | re.I)
+def collect(date: str, page_path: pathlib.Path | None = None) -> list[dict]:
+    """كل نص ناقص بالمفتاح الذي يُضاف إلى المعجم كما هو (ك-إ3).
+
+    بعد منع المطابقة الجزئية لا يُكمَّل جزء ولا يُقتطع، فالمفتاح الصحيح للجملة التي يقطعها
+    رمز لاتيني («أبلغت <UKMTO> عن…») هو الجملة كلها برموزها، وقيمتها الإنجليزية تحمل الرموز
+    حرفيًا. تُستعمل هنا مسارات المترجم نفسه، فما تذكره الأداة هو ما يرفضه البناء.
+    """
+    path = page_path or (ROOT / "dist" / "reports" / f"{date}.html")
+    html = path.read_text(encoding="utf-8")
     tm = I.build_tm(date)
     gl = I.load_glossary()
-    tr = I.make_translator(tm, gl)
-    found: dict[str, str] = {}
-    for m in re.finditer(r">([^<>]*[\u0600-\u06FF][^<>]*)<", page):
-        raw = m.group(1)
-        if not ARABIC.search(raw):
+    _, missing, _ = I.translate_page(html, date, tm, gl)
+    missing_set = {I.norm(m) for m in missing}
+    prepared = I._element_governed_overrides(I._preserve_master_dynamic_fields(html, date), tm, gl)
+    c = I._Collector()
+    c.feed(prepared)
+    _, positions = I._html_unit_contexts(c)
+    rows: dict[str, dict] = {}
+    used: set[str] = set()
+    for group in I._inline_tag_groups(c, positions):
+        start, end = int(group["start"]), int(group["end"])
+        parts = [I.norm(c.units[i]) for i in range(start, end + 1)]
+        hit = [u for u in parts if u in missing_set]
+        if not hit:
             continue
-        out = tr(raw)
-        if ARABIC.search(out):
-            # اطبع الجزء العربي المتبقي فقط، مع سياقه
-            left = " ".join(re.findall(r"[\u0600-\u06FF][\u0600-\u06FF\s،؛:.…«»()0-9A-Za-z\-]*", out))
-            key = I.norm(raw)
-            found.setdefault(key, left.strip() or I.norm(raw))
-    return [{"text": k, "remaining": v} for k, v in found.items()]
+        key = I.norm("".join(c.units[start : end + 1]))
+        tokens = [I.norm(t) for t, _, _ in group["spans"]]
+        rows.setdefault(key, {"text": key, "kind": "sentence", "keep_tokens": tokens, "fragments": hit})
+        used.update(hit)
+    for unit in sorted(missing_set - used):
+        rows.setdefault(unit, {"text": unit, "kind": "unit", "keep_tokens": [], "fragments": [unit]})
+    return list(rows.values())
 
 
 def main() -> int:
@@ -52,9 +64,10 @@ def main() -> int:
     rows = collect(a.date)
     if a.json:
         pathlib.Path(a.json).write_text(json.dumps(rows, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"── نصوص بلا ترجمة: {len(rows)} ──")
+    print(f"── نصوص بلا ترجمة: {len(rows)} (المفتاح الكامل الذي يُضاف إلى glossary.json) ──")
     for r in rows:
-        print("   - " + r["text"][:220])
+        tokens = f"  [رموز تبقى حرفيًا: {' · '.join(r['keep_tokens'])}]" if r["keep_tokens"] else ""
+        print("   - " + r["text"][:400] + tokens)
     return 0 if not rows else 2
 
 
