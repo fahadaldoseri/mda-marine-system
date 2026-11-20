@@ -14,9 +14,44 @@ import derive_en_units as D  # noqa: E402
 
 def test_arabic_and_persian_digits_normalize_to_latin() -> None:
     assert hasattr(D, "_build_arabic_digits")
-    assert D._canonical_identifier_text("0123456789 ۰۱۲۳۴۵۶۷۸۹") == (
+    assert D._canonical_identifier_text("٠١٢٣٤٥٦٧٨٩ ۰۱۲۳۴۵۶۷۸۹") == (
         "0123456789 0123456789"
     )
+
+
+def _assert_single_derive_source(repo_root: Path) -> None:
+    """يمنع نسخة اشتقاق ثانية؛ مصدر الشيفرة هو site/generator فقط."""
+    canonical = repo_root / "site" / "generator" / "derive_en_units.py"
+    assert canonical.is_file(), f"مصدر الاشتقاق الحاكم مفقود: {canonical}"
+    parallel = repo_root / "brain" / "web" / "derive_en_units.py"
+    if not parallel.exists():
+        return
+    assert parallel.is_symlink(), (
+        "نسخة اشتقاق موازية تحت brain/web؛ يجب أن يبقى المنطق في "
+        "site/generator/derive_en_units.py فقط"
+    )
+    assert parallel.resolve() == canonical.resolve(), (
+        "رابط derive_en_units.py لا يشير إلى المصدر الحاكم"
+    )
+
+
+def test_derive_uses_one_governing_source() -> None:
+    _assert_single_derive_source(Path(__file__).resolve().parents[2])
+
+
+def test_parallel_derive_source_is_rejected(tmp_path: Path) -> None:
+    repo = tmp_path / "repo"
+    canonical = repo / "site" / "generator" / "derive_en_units.py"
+    canonical.parent.mkdir(parents=True)
+    canonical.write_text("# canonical\n", encoding="utf-8")
+    duplicate = repo / "brain" / "web" / "derive_en_units.py"
+    duplicate.parent.mkdir(parents=True)
+    duplicate.write_text("# duplicate\n", encoding="utf-8")
+    try:
+        _assert_single_derive_source(repo)
+    except AssertionError:
+        return
+    raise AssertionError("الحارس لم يمنع نسخة اشتقاق موازية")
 
 
 def test_short_incident_ids_normalize_before_body_alignment() -> None:
