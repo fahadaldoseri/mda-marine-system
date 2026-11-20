@@ -53,11 +53,19 @@ def main() -> int:
     else:
         prev = built[-1]
     after = "9999-12-31"
-    expect(run({"SITE": str(site)}, after) == 0, "موجب: الشجرة الحالية تمرّ")
-
     with tempfile.TemporaryDirectory() as d:
+        # مفاتيح الأرضية مسارات مطلقة في المسار القانوني (/home/ubuntu)؛ في بيئة أخرى (مثل GitHub Actions)
+        # يُقاس الموجب على الأصول الموجودة فعلًا، ويبقى الحكم الكامل لـ G000 في بيئة التشغيل.
         floor = json.loads((B / "audit" / "asset-floor.json").read_text(encoding="utf-8"))
-        path = sorted(floor["files"])[0]
+        present = {k: v for k, v in floor["files"].items() if Path(k).is_file()}
+        if len(present) < len(floor["files"]):
+            print(f"  • بيئة خارج المسار القانوني: الموجب على {len(present)} من {len(floor['files'])} أصلًا موجودًا")
+        floor["files"] = present
+        base = Path(d) / "present.json"
+        base.write_text(json.dumps(floor, ensure_ascii=False), encoding="utf-8")
+        expect(bool(present) and run({"SITE": str(site), "ASSET_FLOOR": str(base)}, after) == 0,
+               "موجب: الشجرة الحالية تمرّ")
+        path = sorted(present)[0]
         floor["files"][path]["lines"] = int(floor["files"][path].get("lines") or 0) + 100000
         fp = Path(d) / "floor.json"
         fp.write_text(json.dumps(floor, ensure_ascii=False), encoding="utf-8")
