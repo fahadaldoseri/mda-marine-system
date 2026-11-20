@@ -369,3 +369,13 @@
 {"step": "G055", "status": "done_warn", "rc": 1, "outputs": {}, "log": "logs/runbook/2026-11-20/G055.log", "attempt": 1, "ts": "2026-11-20T05:19:56Z"}
 {"step": "G054", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-20/G054.log", "attempt": 1, "ts": "2026-11-20T05:19:56Z"}
 {"step": "G064", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-20/G064.log", "ts": "2026-11-20T05:24:01Z"}
+{"step": "S080", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-20/S080.log", "ts": "2026-11-20T05:25:36Z"}
+{"step": "S090", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-20/S090.log", "ts": "2026-11-20T05:25:36Z"}
+{"step": "G064", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-20/G064.log", "attempt": 1, "ts": "2026-11-20T05:29:42Z"}
+{"step": "G065", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-20/G065.log", "attempt": 1, "ts": "2026-11-20T05:30:12Z"}
+{"step": "G066", "status": "done_warn", "rc": 1, "outputs": {"audit/measurements/gate-audit-2026-11-20.json": "da3242ceb1ecebcf9927db4406f030affdf0659c5103ad480b25ac1ef61db30d", "audit/measurements/gate-audit-2026-11-20.json.sha256": "2c60fb4c43eb2866ba253d807936749cc06a5722d20bf800272963739caadd84"}, "log": "logs/runbook/2026-11-20/G066.log", "attempt": 1, "ts": "2026-11-20T05:30:13Z"}
+{"step": "G068", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-20/G068.log", "attempt": 1, "ts": "2026-11-20T05:30:13Z"}
+{"step": "G067", "status": "done", "rc": 0, "outputs": {"audit/measurements/perf-budget-2026-11-20.json": "5ae0274c2c6b24d11a2be4634ebc1a3d4533992e25ccb7b1dae88ba45174baff", "audit/measurements/perf-budget-2026-11-20.json.sha256": "a33b49e8177338f6604dcdc94b44ff099e25727c78d34a78f0229b21fad17559"}, "log": "logs/runbook/2026-11-20/G067.log", "attempt": 1, "ts": "2026-11-20T05:30:13Z"}
+{"step": "G069", "status": "done_warn", "rc": 1, "outputs": {"logs/gate-2026-11-20/gate.json": "e4ae1ec3a5459779fc5d5dd8ce079afff48c2fe547a1e903ce1b90d41402667e", "logs/pipeline-2026-11-20.json": "76d7db442e2052059069e091575d97719d081cdee7c1364134b7abb96e57a186"}, "log": "logs/runbook/2026-11-20/G069.log", "attempt": 1, "ts": "2026-11-20T05:30:14Z"}
+{"step": "D005", "status": "failed", "rc": 2, "problems": ["رمز الخروج 2"], "log": "logs/runbook/2026-11-20/D005.log", "ts": "2026-11-20T05:30:14Z"}
+{"step": "G011", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-20/G011.log", "attempt": 1, "ts": "2026-11-20T05:33:36Z"}

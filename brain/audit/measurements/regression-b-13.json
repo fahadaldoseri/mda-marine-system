@@ -1,6 +1,6 @@
 {
   "url": "file:///home/ubuntu/mda-marine-system/site/dist/reports/2026-11-20.html",
-  "at": "2026-11-20T05:22:45+00:00",
+  "at": "2026-11-20T05:28:23+00:00",
   "widths": {
     "1440": {
       "compat": "CSS1Compat",
@@ -237,7 +237,7 @@
         "#sec-map": true,
         "/additions.html#news-card": true,
         "https://x.com/UK_MTO/status/2123425162758619611#:~:text=JMIC%20Advisory%20Note%20Update%20115": true,
-        "https://en.irna.ir/news/86326732/Two-more-violating-supertankers-catch-fire-in-Strait-of-Hormuz#:~:text=Two%20more%20violating%20supertankers%20catch%20fire": false,
+        "https://en.irna.ir/news/86326732/Two-more-violating-supertankers-catch-fire-in-Strait-of-Hormuz#:~:text=Two%20more%20violating%20supertankers%20catch%20fire": true,
         "https://x.com/bahdiplomatic/status/2123521856678371365#:~:text=%D9%85%D9%85%D9%84%D9%83%D8%A9%20%D8%A7%D9%84%D8%A8%D8%AD%D8%B1%D9%8A%D9%86%20%D8%AA%D8%AF%D9%8A%D9%86%20%D8%A8%D8%B4%D8%AF%D8%A9%20%D8%A7%D8%B3%D8%AA%D9%85%D8%B1%D8%A7%D8%B1%20%D8%A7%D9%84%D8%A7%D8%B9%D8%AA%D8%AF%D8%A7%D8%A1%D8%A7%D8%AA": true,
         "https://www.tradewindsnews.com/casualties/houthis-gain-positions-to-target-shipping-amid-advance-towards-aden-us-led-coalition-warns/2-1-2076994#:~:text=Houthis%20gain%20positions%20to%20target%20shipping": true
       },
@@ -296,10 +296,14 @@
           "text_chars": 277
         },
         "https://en.irna.ir/news/86326732/Two-more-violating-supertankers-catch-fire-in-Strait-of-Hormuz#:~:text=Two%20more%20violating%20supertankers%20catch%20fire": {
-          "http_status": null,
-          "dom_wait_ms": 15000,
-          "exists": false,
-          "error": "anchor target HTTP 502; DOM target absent"
+          "method": "collection_capture",
+          "exists": true,
+          "capture_file": "feeds/feeds-2026-11-20.json",
+          "capture_sha256": "693ed68f662990b64cff357b98fe2c92087b8be6dcbd200b091861597c397629",
+          "capture_feed": "https://straits.live/feed.xml",
+          "capture_item_date": "Thu, 19 Nov 2026 11:06:26 GMT",
+          "http_status": 502,
+          "live_error": "anchor target HTTP 502; DOM target absent"
         },
         "https://x.com/bahdiplomatic/status/2123521856678371365#:~:text=%D9%85%D9%85%D9%84%D9%83%D8%A9%20%D8%A7%D9%84%D8%A8%D8%AD%D8%B1%D9%8A%D9%86%20%D8%AA%D8%AF%D9%8A%D9%86%20%D8%A8%D8%B4%D8%AF%D8%A9%20%D8%A7%D8%B3%D8%AA%D9%85%D8%B1%D8%A7%D8%B1%20%D8%A7%D9%84%D8%A7%D8%B9%D8%AA%D8%AF%D8%A7%D8%A1%D8%A7%D8%AA": {
           "method": "x_oembed",
@@ -554,7 +558,7 @@
         "#sec-map": true,
         "/additions.html#news-card": true,
         "https://x.com/UK_MTO/status/2123425162758619611#:~:text=JMIC%20Advisory%20Note%20Update%20115": true,
-        "https://en.irna.ir/news/86326732/Two-more-violating-supertankers-catch-fire-in-Strait-of-Hormuz#:~:text=Two%20more%20violating%20supertankers%20catch%20fire": false,
+        "https://en.irna.ir/news/86326732/Two-more-violating-supertankers-catch-fire-in-Strait-of-Hormuz#:~:text=Two%20more%20violating%20supertankers%20catch%20fire": true,
         "https://x.com/bahdiplomatic/status/2123521856678371365#:~:text=%D9%85%D9%85%D9%84%D9%83%D8%A9%20%D8%A7%D9%84%D8%A8%D8%AD%D8%B1%D9%8A%D9%86%20%D8%AA%D8%AF%D9%8A%D9%86%20%D8%A8%D8%B4%D8%AF%D8%A9%20%D8%A7%D8%B3%D8%AA%D9%85%D8%B1%D8%A7%D8%B1%20%D8%A7%D9%84%D8%A7%D8%B9%D8%AA%D8%AF%D8%A7%D8%A1%D8%A7%D8%AA": true,
         "https://www.tradewindsnews.com/casualties/houthis-gain-positions-to-target-shipping-amid-advance-towards-aden-us-led-coalition-warns/2-1-2076994#:~:text=Houthis%20gain%20positions%20to%20target%20shipping": true
       },
@@ -613,10 +617,14 @@
           "text_chars": 277
         },
         "https://en.irna.ir/news/86326732/Two-more-violating-supertankers-catch-fire-in-Strait-of-Hormuz#:~:text=Two%20more%20violating%20supertankers%20catch%20fire": {
-          "http_status": null,
-          "dom_wait_ms": 15000,
-          "exists": false,
-          "error": "anchor target HTTP 502; DOM target absent"
+          "method": "collection_capture",
+          "exists": true,
+          "capture_file": "feeds/feeds-2026-11-20.json",
+          "capture_sha256": "693ed68f662990b64cff357b98fe2c92087b8be6dcbd200b091861597c397629",
+          "capture_feed": "https://straits.live/feed.xml",
+          "capture_item_date": "Thu, 19 Nov 2026 11:06:26 GMT",
+          "http_status": 502,
+          "live_error": "anchor target HTTP 502; DOM target absent"
         },
         "https://x.com/bahdiplomatic/status/2123521856678371365#:~:text=%D9%85%D9%85%D9%84%D9%83%D8%A9%20%D8%A7%D9%84%D8%A8%D8%AD%D8%B1%D9%8A%D9%86%20%D8%AA%D8%AF%D9%8A%D9%86%20%D8%A8%D8%B4%D8%AF%D8%A9%20%D8%A7%D8%B3%D8%AA%D9%85%D8%B1%D8%A7%D8%B1%20%D8%A7%D9%84%D8%A7%D8%B9%D8%AA%D8%AF%D8%A7%D8%A1%D8%A7%D8%AA": {
           "method": "x_oembed",

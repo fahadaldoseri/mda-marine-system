@@ -24,10 +24,10 @@
       "id": "ب-03",
       "title": "المرساة #news-card",
       "phase": "1",
-      "state": "ساقط",
+      "state": "ناجح",
       "blocking": true,
       "open_until": null,
-      "note": "   ! @1920 مرساة مكسورة: https://en.irna.ir/news/86326732/Two-more-violating-supertankers-catch-fire-in-Strait"
+      "note": "✔ القياس البصري: صفر مخالفة في الفحوص المطلوبة"
     },
     {
       "id": "ب-04",
@@ -138,11 +138,9 @@
       "note": "✔ تغطية البوابات: 100.0% (7/7) · مراجع ميتة 0/— · وحدات شاردة 0"
     }
   ],
-  "passed": 14,
-  "failed": 1,
+  "passed": 15,
+  "failed": 0,
   "manual": 0,
-  "blockers": [
-    "ب-03"
-  ],
+  "blockers": [],
   "exceptions": []
 }
