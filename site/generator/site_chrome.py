@@ -403,10 +403,31 @@ def en_edition_href(html: str) -> str:
     # الإنجليزية، فيُعرض مفتاح اللغة معطّلًا (span) في العربية وزرًّا في الإنجليزية
     # فيختل تماثل البنية. المرجع الصحيح: مخرج البناء أو الماستر الإنجليزي، وكلاهما
     # يثبت أن النسخة الإنجليزية ستُنشر للتاريخ نفسه.
+    if en_isolated(date):
+        return ""  # النسخة الإنجليزية معزولة اليوم: لا رابط إلى صفحة لم تُبنَ
     if (ROOT / "dist" / "reports" / "en" / f"{date}.html").is_file() or \
        (ROOT / "sources" / "i18n" / "en" / f"{date}-sectioned.en.md").is_file():
         return f"/reports/en/{date}.html"
     return ""
+
+
+def en_isolated(date: str) -> bool:
+    """النسخة الإنجليزية لهذا التاريخ معزولة بقاعدة إصلاح ذاتي (brain/logs/auto-heal/D.json)؟
+
+    اعتماد فهد 21 نوفمبر 2026: عطل الترجمة لا يُنشر، ولا يوقف التقرير العربي السليم، ولا يبقى
+    رابط إلى صفحة إنجليزية لم تُبنَ. ملف غير مقروء = لا عزل، فيبقى فشل الترجمة مانعًا (فشل مغلق).
+    """
+    import json as _json
+    import os as _os
+    brain = _os.environ.get("BRAIN_DIR")
+    if not (brain and pathlib.Path(brain).is_dir()):
+        from brain_root import brain_root as _br
+        brain = str(_br())
+    try:
+        state = _json.loads((pathlib.Path(brain) / "logs" / "auto-heal" / f"{date}.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return False
+    return isinstance(state, dict) and "en" in (state.get("isolated") or {})
 
 
 def nav_html(active: str = "", en_href: str = "", report_date: str = "") -> str:

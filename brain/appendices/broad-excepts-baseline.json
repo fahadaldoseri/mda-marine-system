@@ -1041,6 +1041,16 @@
    "handler_kind": "تجاهل",
    "category": "تنظيف ثانوي",
    "reason": "يُسجَّل سبب تعذّر قراءة الصفحة الحية ثم تُعاد المحاولة؛ إن لم تطابق البصمة بعد كل المحاولات ترجع الأداة بالرمز 2 ولا يُعلن النشر (فشل مغلق). صُنّف 2026-11-20."
+  },
+  {
+   "file": "tools/runbook.py",
+   "func": "_heal",
+   "fingerprint": "bd8b3546",
+   "line_at_generation": 808,
+   "snippet": "tools = os.path.join(os.path.abspath(root), \"tools\")",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": "الإصلاح الذاتي إضافة لا تخفف مانعًا: تعذّر الأداة = لا إصلاح ولا عزل، فيبقى الفشل الأصلي مانعًا وتُنفَّذ الخطوة وتُحكم كالمعتاد (اختبار tests/test_auto_heal.py: test_broken_heal_tool_never_lifts_a_block)."
   }
  ],
  "unclassified": []

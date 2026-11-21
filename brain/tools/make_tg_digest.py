@@ -179,7 +179,7 @@ def more_line(n):
     return f"و{n} واقعة أخرى في التقرير الكامل."
 
 
-def build(meta, date, base, detail=True, delivery_note="", max_items=3, max_actions=3):
+def build(meta, date, base, detail=True, delivery_note="", max_items=3, max_actions=3, heal_note=""):
     cut = dt.datetime.strptime(meta["generated_label"], "%Y-%m-%dT%H:%M:%SZ")
     start = cut - dt.timedelta(hours=24)
     bh = cut + dt.timedelta(hours=3)
@@ -222,6 +222,9 @@ def build(meta, date, base, detail=True, delivery_note="", max_items=3, max_acti
         lines += [f"{i}) {action_line(x)}" for i, x in enumerate(acts, 1)]
     if delivery_note:
         lines += ["", "<b>قناة التسليم:</b>", delivery_note]
+    if heal_note:
+        # الإصلاح الذاتي (اعتماد فهد 21 نوفمبر): تنبيه المالك بالسطح المعزول في رسالة اليوم نفسها.
+        lines += ["", "<b>تنبيه:</b>", heal_note]
     lines += ["", "<b>التقرير الكامل:</b>", f"{base.rstrip('/')}/reports/{date}.html"]
     return "\n".join(lines)
 
@@ -254,6 +257,25 @@ def main():
             "القناة الأساسية (منصة Manus) معطّلة مؤقتًا؛ "
             "أُرسل التقرير عبر القناة البديلة."
         )
+    # الإصلاح الذاتي (اعتماد فهد 21 نوفمبر): سطح معزول اليوم يُنبَّه إليه المالك في الرسالة نفسها.
+    heal_note = ""
+    heal_path = B / "logs" / "auto-heal" / f"{a.date}.json"
+    if heal_path.exists():
+        try:
+            isolated = json.loads(heal_path.read_text(encoding="utf-8")).get("isolated") or {}
+        except (OSError, ValueError, AttributeError) as exc:
+            print(f"✘ حالة الإصلاح الذاتي غير مقروءة ({heal_path.name}): {exc}")
+            return 2  # فشل مغلق: لا تُرسل رسالة قد تُخفي عزلًا
+        if isolated:
+            try:
+                sys.path.insert(0, str(B / "tools"))
+                import auto_heal  # noqa: E402
+                heal_note = auto_heal.owner_note(B, a.date)
+            except (ImportError, OSError, ValueError):
+                heal_note = ""
+            labels = {"en": "النسخة الإنجليزية"}
+            heal_note = heal_note or ("عُزلت " + "، ".join(labels.get(k, k) for k in sorted(isolated)) +
+                                      " لعطل في سلامة المحتوى، ونُشر التقرير العربي وحده بعد اجتياز بواباته.")
     if miss or not base:
         print(f"✘ حقول ناقصة: {miss or ''} {'base_url' if not base else ''}")
         return 2
@@ -261,7 +283,7 @@ def main():
     steps = ((True, 3, 3), (False, 3, 3), (False, 2, 3), (False, 2, 2),
              (False, 1, 2), (False, 1, 1))
     for detail, max_items, max_actions in steps:
-        text = build(meta, a.date, base, detail, delivery_note, max_items, max_actions)
+        text = build(meta, a.date, base, detail, delivery_note, max_items, max_actions, heal_note)
         visible = re.sub(r"<[^>]+>", "", text)
         if len(visible) <= CAP:
             break

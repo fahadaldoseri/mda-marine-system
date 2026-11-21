@@ -1123,11 +1123,20 @@ def main():
 
 
 def _build_en_editions() -> None:
-    """يبني نسخ الإصدارات الإنجليزية عند وجود ترجمة معتمدة."""
+    """يبني نسخ الإصدارات الإنجليزية عند وجود ترجمة معتمدة، عدا التاريخ المعزول."""
     try:
         import build_report_en
-        for _f in sorted(pathlib.Path("sources/i18n/en").glob("*-sectioned.en.md")):
-            build_report_en.build(_f.name.split("-sectioned")[0])
+        _dates = [_f.name.split("-sectioned")[0]
+                  for _f in sorted(pathlib.Path("sources/i18n/en").glob("*-sectioned.en.md"))]
+        _isolated = {_d for _d in _dates if site_chrome.en_isolated(_d)}
+        for _d in sorted(_isolated):
+            # قبل أي بناء: لا تبقى صفحة إنجليزية من محاولة سابقة فتُنشر، والفهرس (index.json) يُكتب
+            # من الصفحات الموجودة عند بناء كل نسخة، فيجب أن تغيب قبل الحلقة لا بعدها.
+            (pathlib.Path("dist") / "reports" / "en" / f"{_d}.html").unlink(missing_ok=True)
+            print(f"   ⏭ النسخة الإنجليزية لـ {_d} معزولة (الإصلاح الذاتي) — لا تُبنى ولا تُنشر")
+        for _d in _dates:
+            if _d not in _isolated:
+                build_report_en.build(_d)
     except Exception as _e:  # ك-316: النسخة الإنجليزية مخرج منشور = فشل مغلق
         CRITICAL_FAIL.append(f"النسخة الإنجليزية: {_e}")
         print("   تنبيه: لم تُبنَ نسخة إنجليزية:", _e)
