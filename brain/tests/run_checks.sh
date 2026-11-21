@@ -279,6 +279,7 @@ t "الفحص المسبق المبكر S015: موجب وسالبا G000 وG049"
 t "جدول أزمنة المراحل: elapsed_s لكل سطر وجدول تلقائي بعد كل run" python3 tests/test_runbook_timings.py
 t "قاعدة العدد في حالة المصادر: المعدود يوافق العدد والرقم باقٍ ولكل سطر مقابل إنجليزي" python3 tests/test_sources_state_counts.py
 t "فجوات الطلبات القديمة: قوس CSS الجوال · حاجزا المعجم · أسماء السفن ذات المقطع الواحد من الدفتر" python3 tests/test_old_repo_gaps.py
+t "رقم الحادث ورقم البلاغ: تعيين بالدليل · لا إعادة ترقيم · مخالفات مانعة · العرض من display_from" python3 tests/test_incident_ids.py
 
 echo "15) التسليم: النشر وتلغرام والتقدير"
 t "سكربتات التسليم (بلا إرسال)" bash tests/test_delivery_scripts.sh
