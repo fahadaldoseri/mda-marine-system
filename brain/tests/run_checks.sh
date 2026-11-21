@@ -287,6 +287,7 @@ t "الإصلاح الذاتي: إعادة الخطوة المتأثرة وحد�
 t "رقم الحادث ورقم البلاغ: تعيين بالدليل · لا إعادة ترقيم · مخالفات مانعة · العرض من display_from" python3 tests/test_incident_ids.py
 t "التكرار لا يُحتسب ومصادره تُدمج في واقعته (S072 + S074)" python3 tests/test_duplicate_not_counted.py
 t "مسار Lloyd's List الرسمي وحارس أسماء السفن من آثار الجلب" python3 tests/test_lloyds_route_and_ofac_junk.py
+t "مدققات B010 تحترم عزل النسخة الإنجليزية (اختبار العطل المصطنع)" python3 tests/test_isolation_validators.py
 
 echo "15) التسليم: النشر وتلغرام والتقدير"
 t "سكربتات التسليم (بلا إرسال)" bash tests/test_delivery_scripts.sh

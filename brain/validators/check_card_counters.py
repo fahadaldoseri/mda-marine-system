@@ -1015,6 +1015,15 @@ def validate_one(report_html: str, additions_html: str, *, ar_report_html: str |
     return errors
 
 
+def _en_isolated(date: str) -> bool:
+    try:
+        sys.path.insert(0, str(ROOT / "tools"))
+        from auto_heal import en_isolated_safe  # noqa: PLC0415
+    except Exception:  # أداة العزل معطوبة = لا عزل
+        return False
+    return en_isolated_safe(ROOT, date)
+
+
 def validate_card_documents(*, ar_report: str, ar_additions: str, en_report: str | None = None,
                              en_additions: str | None = None, glossary_path: Path | None = None,
                              registry_path: Path | None = None, zones_data: dict | None = None,
@@ -1064,7 +1073,11 @@ def main(argv=None) -> int:
     dist = Path(args.dist_root)
     paths = [dist / "reports" / f"{args.date}.html", dist / "additions.html",
              dist / "reports" / "en" / f"{args.date}.html", dist / "reports" / "en" / "additions.html"]
-    for path in paths:
+    # بعد عزل النسخة الإنجليزية (AH-C1) لا تُبنى صفحتها لليوم: تُفحص العربية وحدها (auto_heal.en_isolated_safe).
+    en_isolated = _en_isolated(args.date)
+    if en_isolated:
+        print(f"· النسخة الإنجليزية لليوم {args.date} معزولة بالإصلاح الذاتي: تُفحص الصفحات العربية وحدها")
+    for path in (paths[:2] if en_isolated else paths):
         if not path.is_file():
             print(f"✘ ملف مطلوب مفقود: {path}")
             return 2
@@ -1081,7 +1094,8 @@ def main(argv=None) -> int:
         return 2
     errors = validate_card_documents(
         ar_report=paths[0].read_text(encoding="utf-8"), ar_additions=paths[1].read_text(encoding="utf-8"),
-        en_report=paths[2].read_text(encoding="utf-8"), en_additions=paths[3].read_text(encoding="utf-8"),
+        en_report=None if en_isolated else paths[2].read_text(encoding="utf-8"),
+        en_additions=None if en_isolated else paths[3].read_text(encoding="utf-8"),
         glossary_path=dist.parent / "sources" / "i18n" / "en" / "glossary.json",
         registry_path=Path(args.registry), zones_data=zones_data, meta_data=meta_data,
         sections_policy=sections_policy, kpis_totals_data=kpis_totals_data,

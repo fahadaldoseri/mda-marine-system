@@ -20,6 +20,16 @@ import pathlib
 import argparse, json, pathlib, re, sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
+import sys as _sys, pathlib as _pl
+
+def _en_isolated(date: str) -> bool:
+    """النسخة الإنجليزية معزولة بالإصلاح الذاتي (auto_heal.en_isolated_safe)؟ عطل القراءة = لا عزل."""
+    try:
+        _sys.path.insert(0, str(_pl.Path(__file__).resolve().parents[1] / "tools"))
+        from auto_heal import en_isolated_safe  # noqa: PLC0415
+    except Exception:  # noqa: BLE001
+        return False
+    return en_isolated_safe(_pl.Path(__file__).resolve().parents[1], date)
 KEYS = ("confirmed", "probable", "unconfirmed", "not_qualifying", "status_unknown")
 
 # صيغة المصدر المعتمدة في ملف الواجهة
@@ -171,7 +181,10 @@ def main() -> int:
     # 4) الصفحة الإنجليزية
     en_ok = False
     en_p = pathlib.Path(args.site) / "dist" / "reports" / "en" / f"{args.date}.html"
-    if en_p.exists():
+    if _en_isolated(args.date):
+        en_ok = True
+        print("  · النسخة الإنجليزية معزولة بالإصلاح الذاتي لهذا اليوم: لا تُفحص")
+    elif en_p.exists():
         html = en_p.read_text(encoding="utf-8", errors="ignore")
         me = re.search(r"aria-label=\"([^\"]*[Ss]tatus[^\"]*)\"", html) or \
              re.search(r"[Ss]tatuses?:([^\"<]{10,220})", html)
