@@ -285,6 +285,8 @@ t "فجوات الطلبات القديمة: قوس CSS الجوال · حاجز
 t "جدول الإصلاح الذاتي سليم: صنف وإجراء معروفان ولا عطل محتوى بإجراء تقني" python3 tools/auto_heal.py check
 t "الإصلاح الذاتي: إعادة الخطوة المتأثرة وحدها · عزل الإنجليزية · احتجاز المتن · قبول المدموج فقط" python3 -W ignore tests/test_auto_heal.py
 t "رقم الحادث ورقم البلاغ: تعيين بالدليل · لا إعادة ترقيم · مخالفات مانعة · العرض من display_from" python3 tests/test_incident_ids.py
+t "التكرار لا يُحتسب ومصادره تُدمج في واقعته (S072 + S074)" python3 tests/test_duplicate_not_counted.py
+t "مسار Lloyd's List الرسمي وحارس أسماء السفن من آثار الجلب" python3 tests/test_lloyds_route_and_ofac_junk.py
 
 echo "15) التسليم: النشر وتلغرام والتقدير"
 t "سكربتات التسليم (بلا إرسال)" bash tests/test_delivery_scripts.sh

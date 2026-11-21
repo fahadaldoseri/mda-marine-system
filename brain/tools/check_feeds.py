@@ -58,6 +58,15 @@ UNVERIFIED_TLS_CONTEXT = ssl._create_unverified_context()
 FALLBACK_ROUTES = {
     # عطل ك-65: وام (25) وواس (26) مواقع JS بلا تغذية RSS، فتُسجَّلان فشلًا كل يوم.
     # وام لها قناة رسمية معلنة على تلغرام (t.me/wamnews_en) — قناة مملوكة للجهة، لا تجاوز حماية.
+    # 21 نوفمبر 2026: Lloyd's List (36) يرد 403 من Cloudflare على الموقع وكل تغذياته
+    # (lloydslist.com والنطاق البديل maritimeintelligence.informa.com). قناته الرسمية
+    # الوحيدة المقروءة بلا تجاوز حماية: تغذية بودكاست الجهة المسجّلة باسمها في دليل
+    # Apple (id1388378983 ← feedUrl)، والمؤلف فيها «Lloyd's List» ورابطها lloydslist.com.
+    # تغطية أسبوعية (حلقات تحليل) لا تعوّض عناوين الأخبار اليومية، ويُفصح عن ذلك في السجل.
+    36: [
+        {'url': 'https://feeds.soundcloud.com/users/soundcloud:users:435085245/sounds.rss',
+         'via': 'official-podcast-rss:lloydslist', 'max_items': 20},
+    ],
     25: [
         {'url': 'https://t.me/s/wamnews_en',
          'via': 'official-telegram:wamnews_en'},
@@ -439,6 +448,8 @@ def fetch(f):
             with urllib.request.urlopen(request, timeout=25, context=context) as response:
                 payload = response.read()
             items, content_chars = _payload_items(payload, route['url'])
+            if route.get('max_items'):  # تغذية أرشيفية كاملة (بودكاست 36): الأحدث فقط
+                items = items[:route['max_items']]
             attempts.append({
                 'url': route['url'], 'via': route['via'], 'ok': True,
                 'items_count': len(items), 'content_chars': content_chars,
