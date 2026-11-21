@@ -1,0 +1,223 @@
+{
+  "date": "2026-11-21",
+  "window": "خلال 24 ساعة السابقة",
+  "scale_version": 1,
+  "registry_version": 1,
+  "scale_levels": [
+    {
+      "ar": "حرج",
+      "rank": 5,
+      "token": "critical",
+      "color": "#FFA3A3",
+      "marker": "■ ■ ■ ■ ■"
+    },
+    {
+      "ar": "مرتفع جدًا",
+      "rank": 4,
+      "token": "severe",
+      "color": "#FFA96B",
+      "marker": "▲ ▲ ▲ ▲"
+    },
+    {
+      "ar": "مرتفع",
+      "rank": 3,
+      "token": "high",
+      "color": "#FFC24D",
+      "marker": "▲ ▲ ▲"
+    },
+    {
+      "ar": "متوسط",
+      "rank": 2,
+      "token": "med",
+      "color": "#d29119",
+      "marker": "▲ ▲"
+    },
+    {
+      "ar": "منخفض",
+      "rank": 1,
+      "token": "low",
+      "color": "#28b45a",
+      "marker": "▲"
+    }
+  ],
+  "overall": {
+    "level": "مرتفع جدًا",
+    "rank": 4,
+    "top_zone": "مضيق هرمز وخليج عُمان والخليج العربي",
+    "top_zone_id": "Z1",
+    "basis": "أعلى نطاق: مضيق هرمز وخليج عُمان والخليج العربي — وقائع مؤهّلة: هجوم — بلاغ UKMTO 214-26 عن إصابة ناقلة بمقذوف على بعد 8 أميال بحرية شمال خصب وحريق على متنها · 20/11/2026"
+  },
+  "zones": [
+    {
+      "id": "Z1",
+      "name": "مضيق هرمز وخليج عُمان والخليج العربي",
+      "level": "مرتفع جدًا",
+      "rank": 4,
+      "confirmed": 1,
+      "probable": 0,
+      "excluded": 0,
+      "events": 1,
+      "qualifying_codes": [
+        "MN-2026-11-21-01"
+      ],
+      "categories": [
+        "هجوم على سفينة"
+      ],
+      "basis": "وقائع مؤهّلة: هجوم — بلاغ UKMTO 214-26 عن إصابة ناقلة بمقذوف على بعد 8 أميال بحرية شمال خصب وحريق على متنها · 20/11/2026",
+      "flags": {
+        "attack_with_damage": true,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-21"
+    },
+    {
+      "id": "Z2",
+      "name": "باب المندب والبحر الأحمر",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 1,
+      "events": 1,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-21"
+    },
+    {
+      "id": "Z3",
+      "name": "بحر العرب",
+      "level": "متوسط",
+      "rank": 2,
+      "confirmed": 0,
+      "probable": 1,
+      "excluded": 0,
+      "events": 1,
+      "qualifying_codes": [
+        "MN-2026-11-21-02"
+      ],
+      "categories": [
+        "نشاط مشبوه"
+      ],
+      "basis": "وقائع مؤهّلة: نشاط مشبوه — بلاغ UKMTO 213-26 عن اقتراب قارب فيه 6 مسلحين من سفينة بضائع على بعد 95 ميلًا بحريًا جنوب غرب المكلا · 20/11/2026",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-21"
+    },
+    {
+      "id": "Z4",
+      "name": "القرن الأفريقي",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-21"
+    },
+    {
+      "id": "Z5",
+      "name": "المحيط الهندي",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-21"
+    }
+  ],
+  "counter": {
+    "total": 3,
+    "qualifying": 2,
+    "confirmed": 1,
+    "probable": 1,
+    "unconfirmed_qualifying": 0,
+    "unconfirmed_total": 0,
+    "excluded": 1,
+    "nonspatial": 0
+  },
+  "generated_from": "cumulative-2026/daily/2026-11-21.json",
+  "events": [
+    {
+      "code": "MN-2026-11-21-01",
+      "title": "هجوم — بلاغ UKMTO 214-26 عن إصابة ناقلة بمقذوف على بعد 8 أميال بحرية شمال خصب وحريق على متنها · 20/11/2026",
+      "area": "مضيق هرمز",
+      "class": "بلاغ رسمي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": true,
+      "confirmation": "confirmed",
+      "qualify_reason": "نوع مؤهّل: «هجوم» وهدف بحري/ملاحي: «ناقلة»",
+      "incident_group": "MN-2026-11-21-01",
+      "source_excerpt": "UKMTO WARNING 214-26 - ATTACK Incident Date: 20 Nov 2026 Incident Time: 1500UTC UKMTO has received a report of an incident 8NM north of Khasab, Oman. A Tanker on an outbound transit of the Strait of Hormuz has been struck on the port bow by an unknown projectile. The CSO has reported a fire onboard the vessel. No casualties have been reported at this time. No environmental impact reported.",
+      "category": "هجوم على سفينة"
+    },
+    {
+      "code": "MN-2026-11-21-02",
+      "title": "نشاط مشبوه — بلاغ UKMTO 213-26 عن اقتراب قارب فيه 6 مسلحين من سفينة بضائع على بعد 95 ميلًا بحريًا جنوب غرب المكلا · 20/11/2026",
+      "area": "بحر العرب",
+      "class": "بلاغ رسمي",
+      "zone": "Z3",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «بحر العرب»",
+      "qualifying": true,
+      "confirmation": "probable",
+      "qualify_reason": "بلاغ رسمي من UKMTO (التحذير 213-26) عن اقتراب قارب مسلح من سفينة بضائع وإطلاق 4 طلقات على 95 ميلًا بحريًا جنوب غرب المكلا (20/11/2026). بلاغ رسمي مباشر لا رواية، فلا يُعد في «روايات لم تتأكد»؛ ولا ضرر مثبت، فلا يُرفع إلى «مؤكدة» (قرار المالك 2026-11-18: النشاط المشبوه لا يُحتسب إصابة مؤكدة).",
+      "incident_group": "MN-2026-11-21-02",
+      "source_excerpt": "UKMTO WARNING 213-26 - SUSPICIOUS ACTIVITY Incident Date: 20 Nov 2026 Incident Time: 1102UTC UKMTO has received a report of an incident 95NM southwest of Al Mukalla, Yemen. A Bulk Carrier travelling eastbound in the IRTC was approached on the port side by a dark blue skiff with 6 unidentified, armed persons on board. Four shots were fired in quick succession from the skiff and warning shots were returned by the armed security team onboard the Bulk Carrier.",
+      "category": "نشاط مشبوه"
+    },
+    {
+      "code": "MN-2026-11-21-03",
+      "title": "بلاغ غير مؤكد — موقع gCaptain ينقل عن رويترز تحذير الحوثيين لشركات الشحن بإخراج سفنها من الموانئ السعودية على البحر الأحمر · 20/11/2026",
+      "area": "البحر الأحمر",
+      "class": "نقل مهني",
+      "zone": "Z2",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «البحر الأحمر»",
+      "qualifying": false,
+      "confirmation": "probable",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-21-03",
+      "source_excerpt": "Houthis Order Ships to Leave Saudi Red Sea Ports After Hodeidah Airstrikes",
+      "category": ""
+    }
+  ]
+}

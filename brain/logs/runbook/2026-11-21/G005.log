@@ -1,0 +1,291 @@
+  ✓ أرقام المصادر متطابقة في كل المواضع · المصادر: 62 معتمدة = 60 بالمسار الآلي + 2 بالمرجعية اليدوية. الفحص: 59 ناجحة. 1 متعذّر: Lloyd's List — حجب المصدر. المرجعية اليدوية: 2 يُفحص يدويًا.
+.F.FF....                                                                [100%]
+=================================== FAILURES ===================================
+______________________ test_check_blocks_divergent_totals ______________________
+
+    def rss_numbers() -> set[int]:
+        """أرقام المصادر ذات المسار الآلي — تُشتق من جدول المسارات الحقيقي في check_feeds.
+    
+        المصدر الوحيد للحقيقة هو جدول المسارات المستعمل في التشغيل اليومي، لا نسخ نصّية منه،
+        فإضافة مسار جديد تدخل العدّاد تلقائيًا (توسّع بلا إعادة بناء).
+        """
+        try:
+            import sys
+            sys.path.insert(0, str(Path(__file__).resolve().parent))
+>           import check_feeds  # noqa: WPS433
+            ^^^^^^^^^^^^^^^^^^
+
+tools/source_channels.py:121: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/check_feeds.py:27: in <module>
+    from normalize_digits import to_latin  # الأرقام عند المصدر: المولَّد يُكتب لاتينيًا
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    #!/usr/bin/env python3
+    # -*- coding: utf-8 -*-
+    """توحيد الأرقام: تحويل الأرقام العربية الهندية (U+0660..U+0669) والفواصل العربية إلى إنجليزية.
+    قرار صاحب القرار — 20 أكتوبر 2026: اعتماد الأرقام الإنجليزية (0-9) في المشروع بشكل كامل.
+    المحارف مكتوبة بأكواد \\u كي لا تتأثر بترميز التحرير أو النسخ.
+    الاستخدام: python3 tools/normalize_digits.py [--check] [جذور...]
+    """
+    from __future__ import annotations
+    import argparse
+    import os
+    import sys
+    from pathlib import Path
+    
+    HERE = Path(__file__).resolve().parent.parent          # مجلد brain
+    BASE = HERE.parent                                      # جذر مساحة العمل
+    sys.path.insert(0, str(HERE / "tools"))
+>   from brain_root import canonical_brain_root  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ImportError: cannot import name 'canonical_brain_root' from 'brain_root' (/home/ubuntu/mda-marine-system/site/generator/brain_root.py)
+
+tools/normalize_digits.py:17: ImportError
+
+The above exception was the direct cause of the following exception:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-75/test_check_blocks_divergent_to0')
+
+    def test_check_blocks_divergent_totals(tmp_path: pathlib.Path) -> None:
+        mod = load_module()
+        ar = "- المصادر: 62 معتمدة = 60 بالمسار الآلي + 2 بالمرجعية اليدوية. الفحص: 59 ناجحة. 1 متعذّر: @Yemenarmyeng — عطل اتصال مؤقت. المرجعية اليدوية: 2 يُفحص يدويًا.\nفُحصت 60 تغذية، نجحت 51 منها، وفشلت 9، وبلغ مجموع العناصر 1875 عنصرًا."
+        build_tree(tmp_path, ar, "nothing here", governed_state())
+        mod.B = tmp_path
+        mod.os.environ["SITE_DIR"] = str(tmp_path / "site")
+        c = {"approved": 62, "checked": 60, "ok": 59, "failed": 1, "reasons": {"timeout": ["حساب @Yemenarmyeng على X"]},
+             "manual_reference_present": True, "manual_reference": ["a", "b"], "manual_reference_count": 2}
+>       bad = mod.check("2026-11-09", c)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_source_totals_governed.py:84: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/source_counts.py:372: in check
+    ch = channels_declared()
+         ^^^^^^^^^^^^^^^^^^^
+tools/source_counts.py:118: in channels_declared
+    ch = source_channels.channels()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/source_channels.py:132: in channels
+    auto = rss_numbers() - set(MANUAL_REFERENCE)
+           ^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def rss_numbers() -> set[int]:
+        """أرقام المصادر ذات المسار الآلي — تُشتق من جدول المسارات الحقيقي في check_feeds.
+    
+        المصدر الوحيد للحقيقة هو جدول المسارات المستعمل في التشغيل اليومي، لا نسخ نصّية منه،
+        فإضافة مسار جديد تدخل العدّاد تلقائيًا (توسّع بلا إعادة بناء).
+        """
+        try:
+            import sys
+            sys.path.insert(0, str(Path(__file__).resolve().parent))
+            import check_feeds  # noqa: WPS433
+            return {int(x["num"]) for x in check_feeds.feeds()}
+        except (ImportError, AttributeError, KeyError, ValueError, OSError) as e:
+            # ك-: لا ابتلاع صامت. تعذّر جدول المسارات يُعلن مانعًا صريحًا بدل إرجاع مجموعة فارغة
+            # تُسقط كل المصادر من العدّاد بلا سبب ظاهر.
+>           raise ChannelsUnavailable(
+                f"تعذّر تحميل جدول مسارات الفحص: {type(e).__name__}: {e}") from e
+E           source_channels.ChannelsUnavailable: تعذّر تحميل جدول مسارات الفحص: ImportError: cannot import name 'canonical_brain_root' from 'brain_root' (/home/ubuntu/mda-marine-system/site/generator/brain_root.py)
+
+tools/source_channels.py:126: ChannelsUnavailable
+____________________ test_repeated_write_is_byte_identical _____________________
+
+    def rss_numbers() -> set[int]:
+        """أرقام المصادر ذات المسار الآلي — تُشتق من جدول المسارات الحقيقي في check_feeds.
+    
+        المصدر الوحيد للحقيقة هو جدول المسارات المستعمل في التشغيل اليومي، لا نسخ نصّية منه،
+        فإضافة مسار جديد تدخل العدّاد تلقائيًا (توسّع بلا إعادة بناء).
+        """
+        try:
+            import sys
+            sys.path.insert(0, str(Path(__file__).resolve().parent))
+>           import check_feeds  # noqa: WPS433
+            ^^^^^^^^^^^^^^^^^^
+
+tools/source_channels.py:121: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/check_feeds.py:27: in <module>
+    from normalize_digits import to_latin  # الأرقام عند المصدر: المولَّد يُكتب لاتينيًا
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    #!/usr/bin/env python3
+    # -*- coding: utf-8 -*-
+    """توحيد الأرقام: تحويل الأرقام العربية الهندية (U+0660..U+0669) والفواصل العربية إلى إنجليزية.
+    قرار صاحب القرار — 20 أكتوبر 2026: اعتماد الأرقام الإنجليزية (0-9) في المشروع بشكل كامل.
+    المحارف مكتوبة بأكواد \\u كي لا تتأثر بترميز التحرير أو النسخ.
+    الاستخدام: python3 tools/normalize_digits.py [--check] [جذور...]
+    """
+    from __future__ import annotations
+    import argparse
+    import os
+    import sys
+    from pathlib import Path
+    
+    HERE = Path(__file__).resolve().parent.parent          # مجلد brain
+    BASE = HERE.parent                                      # جذر مساحة العمل
+    sys.path.insert(0, str(HERE / "tools"))
+>   from brain_root import canonical_brain_root  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ImportError: cannot import name 'canonical_brain_root' from 'brain_root' (/home/ubuntu/mda-marine-system/site/generator/brain_root.py)
+
+tools/normalize_digits.py:17: ImportError
+
+The above exception was the direct cause of the following exception:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-75/test_repeated_write_is_byte_id0')
+
+    def test_repeated_write_is_byte_identical(tmp_path: pathlib.Path) -> None:
+        mod = load_module()
+        report = build_tree(tmp_path)
+        mod.B = tmp_path
+        mod.approved_count = lambda: 62
+>       first = _write(mod, report)
+                ^^^^^^^^^^^^^^^^^^^
+
+tests/test_source_counts_idempotent.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_source_counts_idempotent.py:62: in _write
+    ok, msg = mod.inject(DATE, c)
+              ^^^^^^^^^^^^^^^^^^^
+tools/source_counts.py:295: in inject
+    gen = [f"- {line_ar(c)}"] + ([f"- {fl}"] if fl else [])
+                ^^^^^^^^^^
+tools/source_counts.py:138: in line_ar
+    parts = [identity_ar(c), f"الفحص: {c['ok']} ناجحة"]
+             ^^^^^^^^^^^^^^
+tools/source_counts.py:124: in identity_ar
+    ch = channels_declared()
+         ^^^^^^^^^^^^^^^^^^^
+tools/source_counts.py:118: in channels_declared
+    ch = source_channels.channels()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/source_channels.py:132: in channels
+    auto = rss_numbers() - set(MANUAL_REFERENCE)
+           ^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def rss_numbers() -> set[int]:
+        """أرقام المصادر ذات المسار الآلي — تُشتق من جدول المسارات الحقيقي في check_feeds.
+    
+        المصدر الوحيد للحقيقة هو جدول المسارات المستعمل في التشغيل اليومي، لا نسخ نصّية منه،
+        فإضافة مسار جديد تدخل العدّاد تلقائيًا (توسّع بلا إعادة بناء).
+        """
+        try:
+            import sys
+            sys.path.insert(0, str(Path(__file__).resolve().parent))
+            import check_feeds  # noqa: WPS433
+            return {int(x["num"]) for x in check_feeds.feeds()}
+        except (ImportError, AttributeError, KeyError, ValueError, OSError) as e:
+            # ك-: لا ابتلاع صامت. تعذّر جدول المسارات يُعلن مانعًا صريحًا بدل إرجاع مجموعة فارغة
+            # تُسقط كل المصادر من العدّاد بلا سبب ظاهر.
+>           raise ChannelsUnavailable(
+                f"تعذّر تحميل جدول مسارات الفحص: {type(e).__name__}: {e}") from e
+E           source_channels.ChannelsUnavailable: تعذّر تحميل جدول مسارات الفحص: ImportError: cannot import name 'canonical_brain_root' from 'brain_root' (/home/ubuntu/mda-marine-system/site/generator/brain_root.py)
+
+tools/source_channels.py:126: ChannelsUnavailable
+_________ test_accumulated_blank_lines_collapse_without_losing_content _________
+
+    def rss_numbers() -> set[int]:
+        """أرقام المصادر ذات المسار الآلي — تُشتق من جدول المسارات الحقيقي في check_feeds.
+    
+        المصدر الوحيد للحقيقة هو جدول المسارات المستعمل في التشغيل اليومي، لا نسخ نصّية منه،
+        فإضافة مسار جديد تدخل العدّاد تلقائيًا (توسّع بلا إعادة بناء).
+        """
+        try:
+            import sys
+            sys.path.insert(0, str(Path(__file__).resolve().parent))
+>           import check_feeds  # noqa: WPS433
+            ^^^^^^^^^^^^^^^^^^
+
+tools/source_channels.py:121: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tools/check_feeds.py:27: in <module>
+    from normalize_digits import to_latin  # الأرقام عند المصدر: المولَّد يُكتب لاتينيًا
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    #!/usr/bin/env python3
+    # -*- coding: utf-8 -*-
+    """توحيد الأرقام: تحويل الأرقام العربية الهندية (U+0660..U+0669) والفواصل العربية إلى إنجليزية.
+    قرار صاحب القرار — 20 أكتوبر 2026: اعتماد الأرقام الإنجليزية (0-9) في المشروع بشكل كامل.
+    المحارف مكتوبة بأكواد \\u كي لا تتأثر بترميز التحرير أو النسخ.
+    الاستخدام: python3 tools/normalize_digits.py [--check] [جذور...]
+    """
+    from __future__ import annotations
+    import argparse
+    import os
+    import sys
+    from pathlib import Path
+    
+    HERE = Path(__file__).resolve().parent.parent          # مجلد brain
+    BASE = HERE.parent                                      # جذر مساحة العمل
+    sys.path.insert(0, str(HERE / "tools"))
+>   from brain_root import canonical_brain_root  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ImportError: cannot import name 'canonical_brain_root' from 'brain_root' (/home/ubuntu/mda-marine-system/site/generator/brain_root.py)
+
+tools/normalize_digits.py:17: ImportError
+
+The above exception was the direct cause of the following exception:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-75/test_accumulated_blank_lines_c0')
+
+    def test_accumulated_blank_lines_collapse_without_losing_content(tmp_path: pathlib.Path) -> None:
+        mod = load_module()
+        report = build_tree(tmp_path)
+        mod.B = tmp_path
+        mod.approved_count = lambda: 62
+        before = [line for line in REPORT.splitlines() if line.strip()]
+>       _write(mod, report)
+
+tests/test_source_counts_idempotent.py:84: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_source_counts_idempotent.py:62: in _write
+    ok, msg = mod.inject(DATE, c)
+              ^^^^^^^^^^^^^^^^^^^
+tools/source_counts.py:295: in inject
+    gen = [f"- {line_ar(c)}"] + ([f"- {fl}"] if fl else [])
+                ^^^^^^^^^^
+tools/source_counts.py:138: in line_ar
+    parts = [identity_ar(c), f"الفحص: {c['ok']} ناجحة"]
+             ^^^^^^^^^^^^^^
+tools/source_counts.py:124: in identity_ar
+    ch = channels_declared()
+         ^^^^^^^^^^^^^^^^^^^
+tools/source_counts.py:118: in channels_declared
+    ch = source_channels.channels()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools/source_channels.py:132: in channels
+    auto = rss_numbers() - set(MANUAL_REFERENCE)
+           ^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def rss_numbers() -> set[int]:
+        """أرقام المصادر ذات المسار الآلي — تُشتق من جدول المسارات الحقيقي في check_feeds.
+    
+        المصدر الوحيد للحقيقة هو جدول المسارات المستعمل في التشغيل اليومي، لا نسخ نصّية منه،
+        فإضافة مسار جديد تدخل العدّاد تلقائيًا (توسّع بلا إعادة بناء).
+        """
+        try:
+            import sys
+            sys.path.insert(0, str(Path(__file__).resolve().parent))
+            import check_feeds  # noqa: WPS433
+            return {int(x["num"]) for x in check_feeds.feeds()}
+        except (ImportError, AttributeError, KeyError, ValueError, OSError) as e:
+            # ك-: لا ابتلاع صامت. تعذّر جدول المسارات يُعلن مانعًا صريحًا بدل إرجاع مجموعة فارغة
+            # تُسقط كل المصادر من العدّاد بلا سبب ظاهر.
+>           raise ChannelsUnavailable(
+                f"تعذّر تحميل جدول مسارات الفحص: {type(e).__name__}: {e}") from e
+E           source_channels.ChannelsUnavailable: تعذّر تحميل جدول مسارات الفحص: ImportError: cannot import name 'canonical_brain_root' from 'brain_root' (/home/ubuntu/mda-marine-system/site/generator/brain_root.py)
+
+tools/source_channels.py:126: ChannelsUnavailable
+=========================== short test summary info ============================
+FAILED tests/test_source_totals_governed.py::test_check_blocks_divergent_totals
+FAILED tests/test_source_counts_idempotent.py::test_repeated_write_is_byte_identical
+FAILED tests/test_source_counts_idempotent.py::test_accumulated_blank_lines_collapse_without_losing_content
+3 failed, 6 passed in 1.10s
+elapsed_seconds=1.464565
