@@ -1918,7 +1918,7 @@ def _incident_map(md_path: Path) -> dict:
 
 
 def _incident_chip(event: dict, md_path: Path) -> str:
-    """شارة رقم البلاغ H-YYYY-NNNN/k؛ فارغة قبل تاريخ بدء العرض أو عند غياب الرقم."""
+    """شارة رقم البلاغ YY-NNNN/k؛ فارغة قبل تاريخ بدء العرض أو عند غياب الرقم."""
     reg = _incident_map(md_path)
     start = str(reg.get("display_from") or "")
     date = _event_date(event)

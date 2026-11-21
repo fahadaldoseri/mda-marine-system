@@ -5,8 +5,9 @@
 تنقله عدة مصادر أو تُحدِّثه الجهة نفسها بعد أيام يأخذ عدة رموز بلا رقم يجمعها.
 
 الصيغة المعتمدة (الصيغة أ):
-  · رقم الحادث  `H-YYYY-NNNN`   تسلسل سنوي، والسنة سنة أول بلاغ عن الحادث.
-  · رقم البلاغ  `H-YYYY-NNNN/k` البلاغ رقم k عن الحادث نفسه، بترتيب ورود البلاغات.
+  · رقم الحادث  `YY-NNNN`   آخر رقمين من السنة ثم تسلسل سنوي، والسنة سنة أول بلاغ (مثال 26-0417).
+  · رقم البلاغ  `YY-NNNN/k` البلاغ رقم k عن الحادث نفسه، بترتيب ورود البلاغات (مثال 26-0417/1).
+  الصيغة المختصرة باقتراح فهد 21 نوفمبر 2026 (بدل H-YYYY-NNNN).
 
 القواعد:
   1. رمز الواقعة القديم لا يُمس ولا يتغير معناه (القاعدة 3 في CLAUDE.md)؛ الرقم الجديد
@@ -38,14 +39,14 @@ BRAIN = Path(os.environ.get("BRAIN_DIR") or Path(__file__).resolve().parents[1])
 REGISTRY_REL = Path("appendices") / "incident-id-map.json"
 DAILY_REL = Path("cumulative-2026") / "daily"
 LINK_FIELDS = ("update_of", "parent_id", "duplicate_of")
-INCIDENT_RE = re.compile(r"^H-(\d{4})-(\d{4})$")
-REPORT_RE = re.compile(r"^(H-\d{4}-\d{4})/([1-9]\d*)$")
+INCIDENT_RE = re.compile(r"^(\d{2})-(\d{4})$")
+REPORT_RE = re.compile(r"^(\d{2}-\d{4})/([1-9]\d*)$")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 # أول تقرير يعرض الرقم في بطاقة الواقعة؛ الصفحات الأقدم المنشورة لا تتغير.
 DISPLAY_FROM = "2026-11-21"
 
 FORMAT_NOTE = (
-    "رقم الحادث H-YYYY-NNNN تسلسل سنوي بسنة أول بلاغ؛ ورقم البلاغ H-YYYY-NNNN/k بترتيب ورود "
+    "رقم الحادث YY-NNNN (آخر رقمين من السنة ثم تسلسل سنوي) بسنة أول بلاغ؛ ورقم البلاغ YY-NNNN/k بترتيب ورود "
     "البلاغات عن الحادث نفسه. يُربط البلاغ بحادث سابق فقط بعلاقة مثبتة في الدفتر "
     "(update_of أو parent_id أو duplicate_of). الأرقام الصادرة لا يُعاد ترقيمها. قرار فهد 21 نوفمبر 2026."
 )
@@ -161,11 +162,11 @@ def assign(rows: list[dict[str, Any]], registry: dict[str, Any]) -> tuple[dict[s
         if root != code and root in codes:
             incident = codes[root]["incident_id"]
         else:
-            year = row["_date"][:4]
+            year = row["_date"][2:4]
             serials[year] = serials.get(year, 0) + 1
             if serials[year] > 9999:
                 raise IncidentIdError(f"تجاوز التسلسل السنوي 9999 في {year}")
-            incident = f"H-{year}-{serials[year]:04d}"
+            incident = f"{year}-{serials[year]:04d}"
         suffixes[incident] = suffixes.get(incident, 0) + 1
         codes[code] = {"incident_id": incident, "report_id": f"{incident}/{suffixes[incident]}"}
         added.append(code)

@@ -66,12 +66,12 @@ print("1-2) التعيين")
 root = make_root(DAYS)
 expect(run(root, "--apply") == 0, "--apply على دفتر سليم يرجع 0")
 codes = registry(root)["codes"]
-expect(codes["MN-2026-11-17-01"] == {"incident_id": "H-2026-0001", "report_id": "H-2026-0001/1"},
-       "أول بلاغ = H-2026-0001/1")
-expect(codes["MN-2026-11-17-02"]["incident_id"] == "H-2026-0002", "بلاغ غير مرتبط = حادث جديد H-2026-0002")
-expect(codes["MN-2026-11-18-01"]["report_id"] == "H-2026-0001/2", "تحديث بعد يوم = البلاغ 2 من الحادث نفسه")
-expect(codes["MN-2026-11-20-01"]["report_id"] == "H-2026-0001/3", "تكرار لتحديث بعد يومين = البلاغ 3 (سلسلة الأصل)")
-expect(codes["MN-2026-11-20-02"]["incident_id"] == "H-2026-0003", "التسلسل السنوي يستمر")
+expect(codes["MN-2026-11-17-01"] == {"incident_id": "26-0001", "report_id": "26-0001/1"},
+       "أول بلاغ = 26-0001/1")
+expect(codes["MN-2026-11-17-02"]["incident_id"] == "26-0002", "بلاغ غير مرتبط = حادث جديد 26-0002")
+expect(codes["MN-2026-11-18-01"]["report_id"] == "26-0001/2", "تحديث بعد يوم = البلاغ 2 من الحادث نفسه")
+expect(codes["MN-2026-11-20-01"]["report_id"] == "26-0001/3", "تكرار لتحديث بعد يومين = البلاغ 3 (سلسلة الأصل)")
+expect(codes["MN-2026-11-20-02"]["incident_id"] == "26-0003", "التسلسل السنوي يستمر")
 expect("NI-2026-11-18" not in codes, "«لا واقعة» بلا رقم")
 expect(registry(root).get("display_from") == aii.DISPLAY_FROM, "display_from محفوظ في السجل")
 
@@ -83,30 +83,30 @@ days2["2026-11-20"][1]["parent_id"] = "MN-2026-11-17-02"
 root2 = make_root(days2)
 (root2 / "appendices" / "incident-id-map.json").write_text(json.dumps(before, ensure_ascii=False), encoding="utf-8")
 expect(run(root2, "--apply") == 3, "رابط لاحق يخالف رقمًا صادرًا = تحذير 3")
-expect(registry(root2)["codes"]["MN-2026-11-20-02"]["incident_id"] == "H-2026-0003", "والرقم الصادر لم يتغير")
+expect(registry(root2)["codes"]["MN-2026-11-20-02"]["incident_id"] == "26-0003", "والرقم الصادر لم يتغير")
 days3 = copy.deepcopy(DAYS)
 days3["2026-11-21"] = [row("MN-2026-11-21-01", "2026-11-21", update_of="MN-2026-11-17-02")]
 root3 = make_root(days3)
 (root3 / "appendices" / "incident-id-map.json").write_text(json.dumps(before, ensure_ascii=False), encoding="utf-8")
 expect(run(root3, "--apply") == 0, "واقعة جديدة مرتبطة بحادث قديم")
 c3 = registry(root3)["codes"]
-expect(c3["MN-2026-11-21-01"]["report_id"] == "H-2026-0002/2", "تأخذ اللاحقة التالية للحادث القديم")
+expect(c3["MN-2026-11-21-01"]["report_id"] == "26-0002/2", "تأخذ اللاحقة التالية للحادث القديم")
 expect(all(c3[k] == v for k, v in before["codes"].items()), "ولا يتغير أي رقم صادر")
 
 print("4) مخالفات مانعة")
 root4 = make_root(DAYS)
 expect(run(root4, "--check") == 2, "--check بلا سجل = 2 (وقائع بلا رقم)")
 bad = copy.deepcopy(before)
-bad["codes"]["MN-2026-11-17-02"]["report_id"] = "H-2026-0001/1"
-bad["codes"]["MN-2026-11-17-02"]["incident_id"] = "H-2026-0001"
+bad["codes"]["MN-2026-11-17-02"]["report_id"] = "26-0001/1"
+bad["codes"]["MN-2026-11-17-02"]["incident_id"] = "26-0001"
 (root4 / "appendices" / "incident-id-map.json").write_text(json.dumps(bad, ensure_ascii=False), encoding="utf-8")
 expect(run(root4, "--check") == 2, "رقم بلاغ مكرر = 2")
 gone = copy.deepcopy(before)
-gone["codes"]["MN-2099-01-01-01"] = {"incident_id": "H-2099-0001", "report_id": "H-2099-0001/1"}
+gone["codes"]["MN-2099-01-01-01"] = {"incident_id": "99-0001", "report_id": "99-0001/1"}
 (root4 / "appendices" / "incident-id-map.json").write_text(json.dumps(gone, ensure_ascii=False), encoding="utf-8")
 expect(run(root4, "--check") == 2, "رمز في السجل غائب عن الدفتر = 2")
 fmt = copy.deepcopy(before)
-fmt["codes"]["MN-2026-11-17-01"]["report_id"] = "H-2026-1/1"
+fmt["codes"]["MN-2026-11-17-01"]["report_id"] = "26-1/1"
 (root4 / "appendices" / "incident-id-map.json").write_text(json.dumps(fmt, ensure_ascii=False), encoding="utf-8")
 expect(run(root4, "--check") == 2, "صيغة غير معتمدة = 2")
 days5 = copy.deepcopy(DAYS)
@@ -126,11 +126,11 @@ if br is not None:
     (site / "sources" / "reports").mkdir(parents=True)
     md = site / "sources" / "reports" / "x.md"
     reg = {"display_from": "2026-11-21", "codes": {
-        "MN-2026-11-21-01": {"incident_id": "H-2026-0439", "report_id": "H-2026-0439/1"},
-        "MN-2026-11-20-01": {"incident_id": "H-2026-0435", "report_id": "H-2026-0435/1"}}}
+        "MN-2026-11-21-01": {"incident_id": "26-0439", "report_id": "26-0439/1"},
+        "MN-2026-11-20-01": {"incident_id": "26-0435", "report_id": "26-0435/1"}}}
     (site / "sources" / "incident-id-map.json").write_text(json.dumps(reg), encoding="utf-8")
     chip = br._incident_chip({"code": "MN-2026-11-21-01", "date": "2026-11-21"}, md)
-    expect('data-report-id="H-2026-0439/1"' in chip and ">H-2026-0439/1<" in chip, "يوم العرض: الشارة تحمل رقم البلاغ")
+    expect('data-report-id="26-0439/1"' in chip and ">26-0439/1<" in chip, "يوم العرض: الشارة تحمل رقم البلاغ")
     expect(br._incident_chip({"code": "MN-2026-11-20-01", "date": "2026-11-20"}, md) == "",
            "قبل display_from: لا شارة (الصفحات المنشورة لا تتغير)")
     expect(br._incident_chip({"code": "MN-2026-11-21-09", "date": "2026-11-21"}, md) == "", "رمز بلا رقم: لا شارة")
