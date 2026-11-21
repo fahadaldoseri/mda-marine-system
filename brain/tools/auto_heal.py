@@ -94,6 +94,18 @@ def isolated(root, date: str, surface: str) -> bool:
     return surface in load_state(root, date)["isolated"]
 
 
+def en_isolated_safe(root, date: str) -> bool:
+    """للمدققات بعد البناء: هل النسخة الإنجليزية معزولة؟ أي عطل في القراءة = لا عزل (فشل مغلق).
+
+    اختبار العطل المصطنع (21 نوفمبر 2026): بعد AH-C1 لا تُبنى صفحة اليوم الإنجليزية عمدًا، فكانت
+    مدققات B010 تطلبها فتوقف إعادة الخطوة. المعزول يُفحص عربيًا وحده.
+    """
+    try:
+        return isolated(root, date, "en")
+    except Exception:  # noqa: BLE001
+        return False
+
+
 def isolated_steps(root, date: str) -> dict[str, str]:
     """الخطوات التي تُتخطّى لأن سطحها معزول: {معرّف الخطوة: السطح}."""
     state = load_state(root, date)

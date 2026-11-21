@@ -41,6 +41,8 @@ DENY = {
     'CH-', 'REV', 'NO', 'WARNING', 'SUMMARY', 'ANNEX', 'NATO', 'EUCENTCOM', 'CPI',
     # رموز ومصطلحات تحليلية تُكتب لاتينية في القاموس فلا تُقرأ أسماء سفن
     'ICD', 'DTG', 'EST', 'ACH', 'UTC', 'TZ', 'MDA', 'RTL',
+    # آثار جلب ونشرات لا أسماء سفن: «HTTP 403» من سطر تغطية المصادر أوقف G054 يوم 21 نوفمبر
+    'HTTP', 'HTTPS', 'ADVISORY', 'UPDATE', 'ISNA',
 }
 
 _TOKEN = r'[A-Z][A-Z0-9]*(?:[- ][A-Z0-9]+){0,3}'

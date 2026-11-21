@@ -318,6 +318,30 @@ def derive(days) -> tuple[dict, dict]:
                                               {"duplicate_of", "update_of", "parent_id"})
                 report.setdefault("dangling_cleared", []).append({"code": code, "was": ref})
 
+    # 5) اتساق التكرار مع العدّ (سبب جذري، 21 نوفمبر 2026): S070 تعيد اشتقاق الحقول من الصفر
+    # فتكتب «جديد» و`counts_as_new=true`، ثم تضيف هذه الخطوة `duplicate_of` فوقها، فكان صف
+    # التكرار يُحتسب واقعة جديدة (MN-2026-11-18-03 و-04 وNI-2026-11-12 و-15). كل صف ينتهي
+    # بـ`duplicate_of` يصير «تكرار» غير محتسب، بحقل علاقة واحد كما يشترط العقد.
+    for date, code, r in index:
+        pending = edits.get(date, {}).get(code, {})
+        deleted = set(pending.get("__delete__") or [])
+        dup = pending.get("duplicate_of") or ("" if "duplicate_of" in deleted else r.get("duplicate_of"))
+        if not dup:
+            continue
+        want = {"event_kind": "تكرار", "counts_as_new": False, "link_status": "مرتبط",
+                "update_of": None, "parent_id": None}
+        if all(r.get(k) == v and k not in pending for k, v in want.items()):
+            continue
+        fields = edits[date][code]
+        fields["event_kind"] = "تكرار"
+        fields["counts_as_new"] = False
+        fields["link_status"] = "مرتبط"
+        fields["update_of"] = None
+        fields["parent_id"] = None
+        if not str(fields.get("link_evidence") or r.get("link_evidence") or "").strip():
+            fields["link_evidence"] = str(r.get("source_url") or dup)
+        report.setdefault("duplicates_uncounted", []).append({"code": code, "of": dup})
+
     report["skipped_no_evidence"] = sum(
         1 for _d, _c, r in index
         if not official_ref(r)
