@@ -1344,6 +1344,56 @@
       ]
     },
     {
+      "id": "S073",
+      "title": "رقم الحادث ورقم البلاغ (سجل ثابت لا يُعاد ترقيمه)",
+      "kind": "script",
+      "phase": "write",
+      "assert": [
+        {
+          "type": "cmd",
+          "command": [
+            "python3",
+            "tools/assign_incident_ids.py",
+            "--check"
+          ]
+        }
+      ],
+      "links": {
+        "rules": [
+          "قرار فهد 21 نوفمبر 2026 (الصيغة أ): رقم للحادث YY-NNNN وتحته رقم للبلاغ YY-NNNN/k، ورمز الواقعة القديم باقٍ بلا تغيير"
+        ],
+        "files": [
+          "tools/assign_incident_ids.py",
+          "appendices/incident-id-map.json",
+          "appendices/event-link-contract.md"
+        ],
+        "folders": [],
+        "gates": [],
+        "tests": [
+          "tests/test_incident_ids.py"
+        ]
+      },
+      "on_fail": "stop",
+      "command": [
+        "python3",
+        "tools/assign_incident_ids.py",
+        "--apply"
+      ],
+      "ok_rc": [
+        0
+      ],
+      "warn_rc": [
+        3
+      ],
+      "writes": [
+        "appendices/incident-id-map.json"
+      ],
+      "reads": [
+        "cumulative-2026/daily/",
+        "appendices/incident-id-map.json"
+      ]
+    },
+    {
       "id": "W040",
       "title": "علامة التشغيل اليومية (pipeline mark)",
       "kind": "script",
