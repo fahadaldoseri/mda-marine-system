@@ -258,6 +258,8 @@ def entry_allows_progress(step, entry):
         return False
     if entry.get("status") in ("done", "done_warn"):
         return True
+    if entry.get("status") == "skipped" and entry.get("isolated"):
+        return True  # سطح معزول بالإصلاح الذاتي (runbook/auto-heal.json): لا يُبنى ولا يُنشر، والحكم منقوص مُفصح
     return bool(step.get("disabled")) and entry.get("status") == "skipped"
 
 
@@ -665,6 +667,14 @@ def run(root, date, only_phase=None, redo=None, only_steps=None, auto=None):
             print(f"✘ لا يجوز تنفيذ {s['id']} قبل اكتمال {blocker}")
             return 2
         print(f"▶ {s['id']} — {s['title']}  [{s['kind']}]")
+        iso = (_heal("isolated_steps", root, date, default={}) or {}).get(s["id"]) if date else None
+        if iso:
+            # سطح معزول بقاعدة إصلاح ذاتي (runbook/auto-heal.json): خطوته لا تُنفَّذ ولا تُنشر.
+            append(root, m, date, {"step": s["id"], "status": "skipped", "isolated": iso, "rc": 0,
+                                   "reason": f"السطح {iso} معزول لهذا اليوم (الإصلاح الذاتي)"})
+            print(f"  ⏭ تُخطّيت: السطح {iso} معزول لهذا اليوم — logs/auto-heal/{date}.md")
+            ledger = read_ledger(root, m, date)
+            continue
         if s.get("disabled"):
             reason = str(s.get("reason") or "خطوة معطلة صراحة").strip()
             logdir = os.path.join(root, "logs/runbook", date)
@@ -708,7 +718,9 @@ def run(root, date, only_phase=None, redo=None, only_steps=None, auto=None):
         # script / llm: ينفّذ الأمر
         cmd = [sub(c, date, root) for c in s["command"]]
         attempts = 1 + (int(s["on_fail"].split(":")[1]) if str(s.get("on_fail", "")).startswith("retry:") else 0)
-        for n in range(1, attempts + 1):
+        n, heal = 0, None
+        while n < attempts:
+            n += 1
             started = time.perf_counter()
             r = subprocess.run(cmd, cwd=root, capture_output=True, text=True, env=step_env(root, date))
             elapsed_seconds = time.perf_counter() - started
@@ -736,12 +748,32 @@ def run(root, date, only_phase=None, redo=None, only_steps=None, auto=None):
             probs = check_asserts(root, s, date) if (r.returncode in ok_rc or r.returncode in warn_rc) else [f"رمز الخروج {r.returncode}"]
             if not probs:
                 st = "done" if r.returncode in ok_rc else "done_warn"
-                append(root, m, date, {"step": s["id"], "status": st, "rc": r.returncode, "outputs": outputs_hash(root, s, date),
-                                       "log": os.path.relpath(logf, root), "attempt": n,
-                                       "elapsed_s": round(elapsed_seconds, 3)})
+                entry = {"step": s["id"], "status": st, "rc": r.returncode, "outputs": outputs_hash(root, s, date),
+                         "log": os.path.relpath(logf, root), "attempt": n,
+                         "elapsed_s": round(elapsed_seconds, 3)}
+                if heal and heal.get("rule"):
+                    entry["healed"] = heal["rule"]
+                append(root, m, date, entry)
+                _heal("resolve_holds", root, date, s["id"])  # نجاح بعد تصحيح المتن يرفع احتجاز هذه الخطوة
                 print(f"  ✔ {st} (رمز {r.returncode})")
                 break
             print(f"  ✘ محاولة {n}: {'; '.join(probs)}")
+            if n == attempts:
+                # الإصلاح الذاتي (اعتماد فهد 21 نوفمبر): قاعدة ثابتة من الجدول، ثم إعادة هذه الخطوة وحدها.
+                heal = _heal("decide", root, date, s["id"], r.returncode, output, default={"then": "none"})
+                if heal.get("then") == "retry":
+                    print(f"  ⟳ إصلاح ذاتي {heal['rule']}: {heal.get('note', '')} — تُعاد {s['id']} وحدها")
+                    attempts += 1
+                    continue
+                if heal.get("then") == "skip":
+                    append(root, m, date, {"step": s["id"], "status": "skipped", "isolated": heal.get("surface"),
+                                           "rc": r.returncode, "healed": heal["rule"],
+                                           "log": os.path.relpath(logf, root),
+                                           "reason": f"السطح {heal.get('surface')} معزول (الإصلاح الذاتي)"})
+                    print(f"  ⏭ إصلاح ذاتي {heal['rule']}: {heal.get('note', '')} — تُخطّى {s['id']}")
+                    break
+                if heal.get("then") == "stop":
+                    probs = probs + [f"احتجاز ذاتي {heal['rule']}: {heal.get('note', '')}"]
         else:
             append(root, m, date, {"step": s["id"], "status": "failed", "rc": r.returncode, "problems": probs, "log": os.path.relpath(logf, root),
                                    "elapsed_s": round(elapsed_seconds, 3)})
@@ -768,6 +800,20 @@ def run(root, date, only_phase=None, redo=None, only_steps=None, auto=None):
                 redo |= more
     print("✔ اكتملت كل الخطوات")
     return 0
+
+
+def _heal(fn, root, *args, default=None):
+    """استدعاء أداة الإصلاح الذاتي (tools/auto_heal.py). أي عطل فيها = لا إصلاح ولا عزل:
+    يبقى الفشل الأصلي مانعًا، وتُنفَّذ الخطوة وتُحكم بواباتها كالمعتاد (الأحوط)."""
+    try:
+        tools = os.path.join(os.path.abspath(root), "tools")
+        if tools not in sys.path:
+            sys.path.insert(0, tools)
+        import auto_heal  # type: ignore
+        return getattr(auto_heal, fn)(root, *args)
+    except Exception as exc:  # noqa: BLE001 — الإصلاح إضافة لا تُسقط الخط ولا تخفف مانعًا
+        print(f"  ⚠ الإصلاح الذاتي غير متاح ({fn}): {exc}")
+        return default
 
 
 def complete(root, step_id, date):
@@ -861,6 +907,8 @@ def gate_json(root, date, through=None, final=False):
             st, rc = "warn", 1
         elif e and e["status"] == "skipped" and s.get("disabled"):
             st, rc = "skipped", 0
+        elif e and e["status"] == "skipped" and e.get("isolated"):
+            st, rc = "warn", 1  # عزل سطح بالإصلاح الذاتي: لا يُحكم سليمًا أبدًا
         else:
             st = "block"
             rc = 2

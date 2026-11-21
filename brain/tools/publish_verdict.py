@@ -91,9 +91,16 @@ def verdict(brain: Path, date: str) -> dict:
     elif stamp is None or stamp.get("sha256") != current:
         reasons.append("النص تغيّر بعد بوابة التسليم أو بصمته غائبة؛ أعد البوابة قبل النشر")
 
+    # الإصلاح الذاتي (اعتماد فهد 21 نوفمبر): سطح معزول أو تشغيل محتجز لا يُحكم سليمًا أبدًا.
+    heal = _load(brain / "logs" / "auto-heal" / f"{date}.json") or {}
+    isolated = sorted((heal.get("isolated") or {}).keys())
+    if heal.get("holds"):
+        reasons.append("احتجاز ذاتي لعطل محتوى لم يُرفع: " + " · ".join(
+            str(h.get("step")) for h in heal["holds"]) + f" (logs/auto-heal/{date}.md)")
+
     if reasons:
         code = BLOCKED
-    elif gate_rc == 0 and overall == "ok":
+    elif gate_rc == 0 and overall == "ok" and not isolated:
         code = SOUND
     else:
         code = DISCLOSED
@@ -106,6 +113,7 @@ def verdict(brain: Path, date: str) -> dict:
         "mark_overall": overall,
         "report_sha256": current,
         "reasons": reasons,
+        "isolated": isolated,
     }
 
 
@@ -123,6 +131,8 @@ def main(argv: list[str] | None = None) -> int:
         print(f"حكم النشر {args.date}: {result['label']} (رمز {result['verdict']}) · النشر {state}")
         for reason in result["reasons"]:
             print(f"  ✘ {reason}")
+        for surface in result["isolated"]:
+            print(f"  ⚠ سطح معزول بالإصلاح الذاتي: {surface} (منقوص مُفصح)")
     return result["verdict"]
 
 

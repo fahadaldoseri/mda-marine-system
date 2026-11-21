@@ -41,7 +41,10 @@ fi
 
 # بوابة تماثل النسخة الإنجليزية مع المتن (تفشل مغلقًا إن أُسقط رقم أو كود)
 ENMD="$SITE/sources/i18n/en/${SURFACE_DATE}-sectioned.en.md"
-if [ -f "$ENMD" ]; then
+# الإصلاح الذاتي (21 نوفمبر): نسخة إنجليزية معزولة لا تُبنى ولا تُنشر، فلا يُقاس تماثلها.
+if python3 "$B/tools/auto_heal.py" isolated --date "$SURFACE_DATE" --surface en >/dev/null 2>&1; then
+  ok "EN-parity-${SURFACE_DATE} — النسخة الإنجليزية معزولة لهذا اليوم (logs/auto-heal)"
+elif [ -f "$ENMD" ]; then
   if python3 "$B/validators/check_en_parity.py" --date "$SURFACE_DATE" >/dev/null 2>&1; then
     ok "EN-parity-${SURFACE_DATE}"
   else
@@ -279,6 +282,8 @@ t "الفحص المسبق المبكر S015: موجب وسالبا G000 وG049"
 t "جدول أزمنة المراحل: elapsed_s لكل سطر وجدول تلقائي بعد كل run" python3 tests/test_runbook_timings.py
 t "قاعدة العدد في حالة المصادر: المعدود يوافق العدد والرقم باقٍ ولكل سطر مقابل إنجليزي" python3 tests/test_sources_state_counts.py
 t "فجوات الطلبات القديمة: قوس CSS الجوال · حاجزا المعجم · أسماء السفن ذات المقطع الواحد من الدفتر" python3 tests/test_old_repo_gaps.py
+t "جدول الإصلاح الذاتي سليم: صنف وإجراء معروفان ولا عطل محتوى بإجراء تقني" python3 tools/auto_heal.py check
+t "الإصلاح الذاتي: إعادة الخطوة المتأثرة وحدها · عزل الإنجليزية · احتجاز المتن · قبول المدموج فقط" python3 -W ignore tests/test_auto_heal.py
 
 echo "15) التسليم: النشر وتلغرام والتقدير"
 t "سكربتات التسليم (بلا إرسال)" bash tests/test_delivery_scripts.sh
