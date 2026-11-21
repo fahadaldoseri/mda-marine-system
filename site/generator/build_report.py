@@ -1894,6 +1894,43 @@ def _event_fields_html(event: dict, defs) -> tuple[str, bool]:
     return "".join(rows), has_time
 
 
+# ── رقم الحادث ورقم البلاغ (قرار فهد 21 نوفمبر 2026، الصيغة أ) ─────────────
+# السجل الحاكم brain/appendices/incident-id-map.json يُنسخ إلى sources/ بـ sync_from_brain.
+# يُعرض الرقم من تاريخ display_from فصاعدًا فقط، فلا تتغير صفحات الأيام المنشورة سابقًا.
+_INCIDENT_MAPS: dict = {}
+
+
+def _incident_map(md_path: Path) -> dict:
+    path = Path(md_path).resolve().parents[2] / "sources" / "incident-id-map.json"
+    key = str(path)
+    if key not in _INCIDENT_MAPS:
+        if not path.is_file():
+            _INCIDENT_MAPS[key] = {}
+        else:
+            try:
+                value = json.loads(path.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError) as exc:
+                raise BuildError(f"سجل أرقام الحوادث غير صالح: {path.name}: {exc}") from exc
+            if not isinstance(value, dict) or not isinstance(value.get("codes"), dict):
+                raise BuildError(f"سجل أرقام الحوادث بلا codes: {path.name}")
+            _INCIDENT_MAPS[key] = value
+    return _INCIDENT_MAPS[key]
+
+
+def _incident_chip(event: dict, md_path: Path) -> str:
+    """شارة رقم البلاغ YY-NNNN/k؛ فارغة قبل تاريخ بدء العرض أو عند غياب الرقم."""
+    reg = _incident_map(md_path)
+    start = str(reg.get("display_from") or "")
+    date = _event_date(event)
+    if not start or not date or date < start:
+        return ""
+    entry = reg["codes"].get(_event_code(event))
+    if not isinstance(entry, dict) or not entry.get("report_id"):
+        return ""
+    return (f'<span class="ev-code ev-incident ltr" data-incident-id="{esc(entry.get("incident_id", ""))}" '
+            f'data-report-id="{esc(entry["report_id"])}">{esc(entry["report_id"])}</span>')
+
+
 def render_ledger_events(events, defs, md_path: Path, *, meta: dict | None = None):
     """يصيّر جميع سجلات دفتر الفترة، مع فرع موثق فقط عند وجود حقل ربط."""
     renderable_events = [event for event in events if not _is_cumulative_update(event)]
@@ -1933,7 +1970,7 @@ def render_ledger_events(events, defs, md_path: Path, *, meta: dict | None = Non
             f'data-event-date="{esc(_event_date(event))}" data-event-has-time="{"1" if has_time else "0"}" '
             f'data-relation-key="{esc(relation_key)}" data-event-rows="{CARD_ROWS}">'
             f'<div class="ev-top"><span class="ev-idx bidi">{idx:02d}</span>'
-            f'<span class="ev-code ltr">{esc(code)}</span>'
+            f'{_incident_chip(event, md_path)}<span class="ev-code ltr">{esc(code)}</span>'
             f'<span class="ev-badge" data-row="2" data-classification="{esc(label)}">{esc(label)}</span>'
             f'<span class="ev-reliability" data-row="3" data-source-reliability="{esc(reliability)}">'
             f'موثوقية المصدر: {esc(reliability)}</span>'

@@ -1,0 +1,16 @@
+  تغذيات مرصودة: 81
+  نجح: 59 مصدرًا (77 مسارًا) · فشل: 1 مصدرًا · يُفحص بالمتصفح: 0 · عناصر مقروءة: 1733
+  ◻ مرجعية تُراجع يدويًا: 2 مصدرًا · الأرقام: [39, 52]
+   ✘ 36 Lloyd's List: all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403)
+   ◐ 12 OFAC — الإجراءات الأخيرة: محتوى متقادم — عمر أحدث مادة 646 يومًا
+   ◐ 13 ShipNext — التحقق من السفن: محتوى متقادم — عمر أحدث مادة 96 يومًا
+   ◐ 20 جريدة الأيام: محتوى متقادم — عمر أحدث مادة 1042 يومًا
+   ◐ 20 جريدة الأيام: محتوى متقادم — عمر أحدث مادة 1042 يومًا
+   ◐ 32 IMB/ICC — القرصنة: محتوى متقادم — عمر أحدث مادة 36 يومًا
+  ✔ حُفظ: feeds-2026-11-21.json / .md / .status.json — الحالة: degraded
+  · لا علامة تشغيل: /home/ubuntu/mda-marine-system/brain/logs/pipeline-2026-11-21.json — إنشاء علامة pipeline عبر write_mark
+  ✔ العلامة (pipeline): /home/ubuntu/mda-marine-system/brain/logs/pipeline-2026-11-21.json · المخطط v1 · نص التقرير موجود: False · المصادر: 62/60/59 · البوابة: not_run
+  · أضيف أثر الإنشاء: created_by=mark_components
+  ✔ حُدّثت المكوّنات ['feeds'] من المخرجات · الحالة العامة: degraded
+     feeds: {"status": "degraded", "checked": 60, "ok": 59, "failed": 1, "failed_feeds": [{"num": 36, "name": "Lloyd's List", "error": "حجب مص
+elapsed_seconds=49.694867

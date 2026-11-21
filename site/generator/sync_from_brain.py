@@ -133,6 +133,14 @@ def copy_sources(date_iso: str, brain: Path) -> list:
     else:
         log.append(f"تحذير: دفتر اليوم غير موجود: {daily_src}")
 
+    # سجل رقم الحادث ورقم البلاغ (قرار فهد 21 نوفمبر 2026) يُقرأ في بطاقات سجل الأحداث.
+    incident_src = brain / "appendices" / "incident-id-map.json"
+    if incident_src.is_file():
+        shutil.copy2(incident_src, SITE / "sources" / "incident-id-map.json")
+        log.append("حُدّث سجل أرقام الحوادث")
+    else:
+        log.append(f"تحذير: سجل أرقام الحوادث غير موجود: {incident_src}")
+
     cum_md = sorted((brain / "cumulative-2026").glob("*تراكمي*.md"))
     if cum_md:
         newest = max(cum_md, key=lambda p: p.stat().st_mtime)

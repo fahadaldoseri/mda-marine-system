@@ -318,6 +318,29 @@
         "tests/test_gate_coverage_reference.py",
         "tests/test_publish_live_contract_20261107.py"
       ]
+    },
+    {
+      "match": [
+        "tools/assign_incident_ids.py",
+        "assign_incident_ids.py",
+        "appendices/incident-id-map.json",
+        "incident-id-map.json",
+        "tests/test_incident_ids.py",
+        "test_incident_ids.py",
+        "site/generator/sync_from_brain.py",
+        "sync_from_brain.py"
+      ],
+      "surfaces": [
+        "أحدث إصدار",
+        "صفحة الإصدار",
+        "دفتر اليوم"
+      ],
+      "gates": [
+        "tools/assign_incident_ids.py"
+      ],
+      "tests": [
+        "tests/test_incident_ids.py"
+      ]
     }
   ]
 }

@@ -688,7 +688,7 @@
       ],
       "links": {
         "rules": [
-          "المقترح ٢ (اعتماد فهد 20 نوفمبر 2026): كشف العطل الرخيص في الدقيقة الأولى، وتبقى G000 وG049 مانعتين في مكانهما"
+          "المقترح 2 (اعتماد فهد 20 نوفمبر 2026): كشف العطل الرخيص في الدقيقة الأولى، وتبقى G000 وG049 مانعتين في مكانهما"
         ],
         "files": [
           "tools/early_preflight.sh",
@@ -1341,6 +1341,56 @@
         "cumulative-2026/daily/",
         "cumulative-2026/event-ledger-sectioned-2026-02-28-to-2026-10-11.json",
         "schemas/daily-events.schema.json"
+      ]
+    },
+    {
+      "id": "S073",
+      "title": "رقم الحادث ورقم البلاغ (سجل ثابت لا يُعاد ترقيمه)",
+      "kind": "script",
+      "phase": "write",
+      "assert": [
+        {
+          "type": "cmd",
+          "command": [
+            "python3",
+            "tools/assign_incident_ids.py",
+            "--check"
+          ]
+        }
+      ],
+      "links": {
+        "rules": [
+          "قرار فهد 21 نوفمبر 2026 (الصيغة أ): رقم للحادث YY-NNNN وتحته رقم للبلاغ YY-NNNN/k، ورمز الواقعة القديم باقٍ بلا تغيير"
+        ],
+        "files": [
+          "tools/assign_incident_ids.py",
+          "appendices/incident-id-map.json",
+          "appendices/event-link-contract.md"
+        ],
+        "folders": [],
+        "gates": [],
+        "tests": [
+          "tests/test_incident_ids.py"
+        ]
+      },
+      "on_fail": "stop",
+      "command": [
+        "python3",
+        "tools/assign_incident_ids.py",
+        "--apply"
+      ],
+      "ok_rc": [
+        0
+      ],
+      "warn_rc": [
+        3
+      ],
+      "writes": [
+        "appendices/incident-id-map.json"
+      ],
+      "reads": [
+        "cumulative-2026/daily/",
+        "appendices/incident-id-map.json"
       ]
     },
     {
