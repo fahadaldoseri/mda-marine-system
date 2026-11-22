@@ -1,0 +1,628 @@
+{
+ "title": "التقرير اليومي لأمن الملاحة",
+ "subtitle": "مركز الوعي بالمجال البحري — مملكة البحرين",
+ "date_label": "22/11/2026",
+ "headline": "أعلن UKMTO إصابة ناقلتين خارجتين من مضيق هرمز بمقذوفات من جهة غير معلومة قرب خصب في 21/11، دون إصابات.",
+ "lede": "المستوى العام مرتفع جدًا. ويظل مضيق هرمز وخليج عُمان والخليج العربي أعلى القطاعات عند مستوى مرتفع جدًا.",
+ "window": "خلال 24 ساعة السابقة (UTC)",
+ "version": "و ب 22/11/26",
+ "generated_label": "2026-11-22T04:00:00Z",
+ "threat_level": "مرتفع جدًا",
+ "sources_checked": 60,
+ "sources_cited": 3,
+ "description": "مركز الوعي البحري — مملكة البحرين · 22/11/2026 · فترة التقرير: 210340Z–220340Z NOV 26",
+ "notice": "نسخة ويب من التقرير اليومي. المصادر المعتمدة 62 مصدرًا؛ 60 مرصودة آليًا، 59 ناجحة، 1 متعذّر، و2 يُفحص يدويًا.",
+ "footer_note": "يعرض سجل IMO 138 صفًا، ولم تظهر فيه بعد وقائع 16 و18 و20 و21 نوفمبر. رواية اللغم شرق مضيق هرمز منقولة إعلاميًا ولا يؤكدها مصدر رسمي.",
+ "classification": "عام",
+ "ledger_url": "/reports/cumulative-2026.html",
+ "report_schema_version": "2.1",
+ "event_count": 2,
+ "report_path": "/reports/2026-11-22-sectioned.md",
+ "hero_kpis": [
+  {
+   "id": "ukmto-reports",
+   "row": 1,
+   "title": "بلاغات UKMTO المرصودة",
+   "label": "البلاغات الرسمية الظاهرة في متن اليوم",
+   "tag": "Z1",
+   "value": "2",
+   "detail": "سجلات فريدة مصدرها UKMTO في سجل اليوم: 2",
+   "note": "بلاغان عن إصابة ناقلتين قرب خصب في 21/11.",
+   "source": "سجل الوقائع الرسمي UKMTO",
+   "accent": "ok",
+   "updated": "2026-11-22",
+   "title_en": "Monitored UKMTO reports",
+   "tag_en": "Z1",
+   "cumulative": "242"
+  },
+  {
+   "id": "qualifying-incidents",
+   "row": 1,
+   "title": "وقائع مستوفية لمعيار الاحتساب",
+   "title_en": "Incidents meeting the counting criterion",
+   "label": "وقائع مستوفية لمعيار الاحتساب",
+   "tag": "",
+   "tag_en": "",
+   "value": "2",
+   "detail": "2 مؤكدة + 0 مرجّحة + 0 غير مؤكدة مؤهلة",
+   "note": "بلاغات UKMTO تُحتسب مؤهلة، ولا تُعد مؤكدة الأثر حتى يثبت الضرر.",
+   "source": "web/zones/{date}.json · counter",
+   "accent": "ok",
+   "updated": "2026-11-22",
+   "cumulative": 192
+  },
+  {
+   "id": "unconfirmed-narratives",
+   "row": 1,
+   "title": "روايات لم تتأكد",
+   "title_en": "Unconfirmed accounts",
+   "label": "روايات لم تتأكد",
+   "tag": "التأهل للمعيار لا يعني الإثبات",
+   "tag_en": "Meeting the counting criterion does not establish confirmation",
+   "value": "0",
+   "detail": "0 روايات في سجل اليوم · لم تثبت أيٌّ منها",
+   "note": "أخبار الألغام في 18/11 نقل إعلامي غير مؤكد.",
+   "source": "سجل الوقائع الرسمي · روايات لم تثبت",
+   "accent": "info",
+   "updated": "2026-11-20",
+   "cumulative": "38"
+  },
+  {
+   "id": "proven-zones",
+   "row": 1,
+   "title": "وقائع مثبتة",
+   "title_en": "Confirmed incidents",
+   "label": "وقائع مثبتة خارج Z1",
+   "tag": "Z2 · Z3 · Z4",
+   "tag_en": "Z2 · Z3 · Z4",
+   "value": "0",
+   "detail": "لا توجد وقائع مثبتة في هذه القطاعات خلال فترة التقرير",
+   "note": "بحر العرب عند مستوى متوسط بسبب بلاغين عن زوارق مسلحة.",
+   "source": "web/zones/{date}.json · Z2–Z4",
+   "accent": "info",
+   "updated": "2026-11-18"
+  },
+  {
+   "id": "imo-confirmed-incidents",
+   "row": 2,
+   "title": "سجل الحوادث المؤكدة من IMO",
+   "title_en": "IMO confirmed incidents log",
+   "label": "سجل الحوادث المؤكدة من IMO",
+   "tag": "بطاقة دائمة",
+   "tag_en": "Permanent card",
+   "value": "0",
+   "detail": "لا زيادة بين التحديثين؛ الإجمالي 138 حادثة مؤكدة حتى 17/11/2026",
+   "note": "لم تظهر واقعتا 16/11 في السجل بعد.",
+   "source": "appendices/imo-incidents.json + https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+   "source_url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+   "accent": "info",
+   "updated": "2026-11-17",
+   "cumulative": "138"
+  },
+  {
+   "id": "imo-seafarer-deaths",
+   "row": 2,
+   "title": "أعداد الوفيات من IMO",
+   "title_en": "Seafarer deaths recorded by IMO",
+   "label": "أعداد الوفيات من IMO",
+   "tag": "بطاقة دائمة",
+   "tag_en": "Permanent card",
+   "value": "0",
+   "detail": "لا زيادة بين التحديثين؛ الإجمالي 25 وفاة بحّار مؤكدة حتى 17/11/2026",
+   "note": "تعذّر تحديث سجل IMO اليوم؛ لا تُستنتج زيادة أو عدمها من تعذّر الوصول.",
+   "source": "appendices/imo-incidents.json + https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+   "source_url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+   "accent": "info",
+   "updated": "2026-11-17",
+   "cumulative": "25"
+  }
+ ],
+ "map": {
+  "caption": "",
+  "points": [
+   {
+    "code": "MN-2026-11-22-01",
+    "area": "مضيق هرمز",
+    "lat": 26.56,
+    "lon": 56.4,
+    "precision": "approximate",
+    "surface": "main",
+    "basis": "الموقع التقريبي لواقعة «هجوم — بلاغ UKMTO 215-26 عن إصابة ناقلة بمقذوف في مؤخرتها على بعد 11 ميلًا بحريًا شمال خصب · 21/11/2026» داخل منطقة مضيق هرمز وفق المِرساة المعتمدة",
+    "source": "IMO — Strait of Hormuz TSS chart (Ships' Routeing) · audit-2026-10-30/imo-tss/imo-tss-derived.json",
+    "label": "هجوم — بلاغ UKMTO 215-26 عن إصابة ناقلة بمقذوف في مؤخرتها على بعد 11 ميلًا بحريًا شمال خصب · 21/11/2026",
+    "confirmation": "confirmed",
+    "qualifying": true,
+    "zone": "Z1",
+    "class": "بلاغ رسمي"
+   },
+   {
+    "code": "MN-2026-11-22-02",
+    "area": "مضيق هرمز",
+    "lat": 26.56,
+    "lon": 56.4,
+    "precision": "approximate",
+    "surface": "main",
+    "basis": "الموقع التقريبي لواقعة «هجوم — بلاغ UKMTO 216-26 عن إصابة ناقلة بمقذوف في غرفة المحركات على بعد 17 ميلًا بحريًا شرق خصب · 21/11/2026» داخل منطقة مضيق هرمز وفق المِرساة المعتمدة",
+    "source": "IMO — Strait of Hormuz TSS chart (Ships' Routeing) · audit-2026-10-30/imo-tss/imo-tss-derived.json",
+    "label": "هجوم — بلاغ UKMTO 216-26 عن إصابة ناقلة بمقذوف في غرفة المحركات على بعد 17 ميلًا بحريًا شرق خصب · 21/11/2026",
+    "confirmation": "confirmed",
+    "qualifying": true,
+    "zone": "Z1",
+    "class": "بلاغ رسمي"
+   }
+  ],
+  "points_note": "",
+  "points_stats": {
+   "events": 2,
+   "with_area": 2,
+   "drawn": 2,
+   "exact": 0,
+   "approximate": 2,
+   "off_map": 0,
+   "excluded": 0,
+   "confirmed": 2,
+   "probable": 0,
+   "unconfirmed": 0,
+   "not_qualifying": 0,
+   "status_unknown": 0
+  }
+ },
+ "decision_card": {
+  "changed": [
+   "أعلن UKMTO في التحذير 215-26 إصابة ناقلة في مؤخرتها بمقذوف على بعد 11 ميلًا بحريًا شمال خصب دون إصابات.",
+   "أعلن UKMTO في التحذير 216-26 إصابة ناقلة في غرفة المحركات بمقذوف على بعد 17 ميلًا بحريًا شرق خصب دون إصابات."
+  ],
+  "risk": "مرتفع جدًا",
+  "risk_kind": "severe",
+  "risk_ref": "بطاقة الترويسة: مستوى التهديد",
+  "action": [
+   "رفع التأهب عند عبور مضيق هرمز، وخاصة في المسافة بين 6 و17 ميلًا بحريًا شمال خصب وشرقها حيث تكررت الإصابات.",
+   "مراجعة آخر بلاغات UKMTO قبل كل عبور، وعدم الاعتماد على العناوين الإعلامية وحدها.",
+   "تجهيز وسائل مكافحة الحريق والسيطرة على الأضرار في غرف المحركات قبل دخول المضيق."
+  ],
+  "watch": [
+   "بلاغ UKMTO جديد عن إصابة سفينة قرب خصب؛ لم يصدر بعد.",
+   "تحديث عن الأثر البيئي في البلاغين 215-26 و216-26؛ لم يتم التوضيح.",
+   "بلاغ رسمي عن هجوم على سفينة في البحر الأحمر أو بحر العرب؛ لم يصدر بعد."
+  ],
+  "basis": "المستوى العام مرتفع جدًا وأعلى القطاعات Z1 وفق بطاقة القطاعات المحسوبة. صدر خلال الفترة بلاغان رسميان عن إصابة ناقلتين قرب خصب."
+ },
+ "changes": [
+  {
+   "kind": "new",
+   "code": "MN-2026-11-22-01",
+   "ref": "UKMTO — الحوادث الأخيرة",
+   "text": "هجوم — بلاغ UKMTO 215-26 عن إصابة ناقلة بمقذوف في مؤخرتها على بعد 11 ميلًا بحريًا شمال خصب · 21/11/2026"
+  },
+  {
+   "kind": "new",
+   "code": "MN-2026-11-22-02",
+   "ref": "UKMTO — الحوادث الأخيرة",
+   "text": "هجوم — بلاغ UKMTO 216-26 عن إصابة ناقلة بمقذوف في غرفة المحركات على بعد 17 ميلًا بحريًا شرق خصب · 21/11/2026"
+  }
+ ],
+ "indicators": [
+  {
+   "name": "بلاغات UKMTO الجديدة عن إصابة سفن",
+   "current": "بلاغان عن إصابة ناقلتين قرب خصب في 21/11",
+   "previous": "بلاغ واحد في تقرير 21/11",
+   "trend": "ارتفاع",
+   "delta": null,
+   "meaning": "تكررت الإصابات قرب خصب لليوم الثاني على التوالي؛ المصدر: UKMTO.",
+   "baseline": null
+  },
+  {
+   "name": "بلاغات النشاط المشبوه في بحر العرب",
+   "current": "لم يصدر بلاغ جديد في 21/11",
+   "previous": "بلاغ واحد في تقرير 21/11",
+   "trend": "انخفاض",
+   "delta": null,
+   "meaning": "غياب البلاغ ليس دليلًا على زوال الخطر؛ المصدر: UKMTO.",
+   "baseline": null
+  },
+  {
+   "name": "سجل IMO للحوادث المؤكدة",
+   "current": "138 صفًا",
+   "previous": "138 صفًا في تقرير 21/11",
+   "trend": "بلا تغيير",
+   "delta": null,
+   "meaning": "السجل يتأخر عن البلاغات؛ المصدر: IMO.",
+   "baseline": null
+  },
+  {
+   "name": "الحركة والتكدس",
+   "current": "لا رقم رسمي في مصادر اليوم",
+   "previous": "لا رقم رسمي",
+   "trend": "غير قابل للقياس",
+   "delta": null,
+   "meaning": "عدد البلاغات ليس مقياسًا لحجم الحركة.",
+   "baseline": null
+  }
+ ],
+ "hypotheses": [
+  {
+   "est": "EST-2026-11-22-01",
+   "statement": "يُرجَّح (55–80%) أن يصدر بلاغ رسمي جديد عن إصابة سفينة في مضيق هرمز خلال 72 ساعة القادمة.",
+   "support": "ست إصابات رسمية بين 16 و21 نوفمبر قرب خصب.",
+   "against": "لا يحدد أي بلاغ رسمي الجهة المنفذة.",
+   "likelihood": "تقدير نطاقي مستقل في EST-2026-11-22-01، ولا يدخل توزيع الفرضيات.",
+   "likelihood_kind": "unmeasurable"
+  }
+ ],
+ "gaps": [
+  {
+   "gap": "اسما الناقلتين المصابتين في البلاغين 215-26 و216-26 وحجم الضرر",
+   "owner": "UKMTO أو الدولة التي ترفع السفينة علمها",
+   "impact": "يحدد خطورة الإصابة."
+  },
+  {
+   "gap": "نوع المقذوف والجهة المنفذة قرب خصب",
+   "owner": "UKMTO أو JMIC",
+   "impact": "يغير أسلوب الحماية المطلوب."
+  },
+  {
+   "gap": "الأثر البيئي للإصابتين",
+   "owner": "UKMTO أو سلطات سلطنة عُمان",
+   "impact": "يحدد خطر التلوث في المضيق."
+  },
+  {
+   "gap": "عدد السفن العابرة يوميًا",
+   "owner": "مصدر رسمي بقياس زمني قابل للمقارنة",
+   "impact": "لا يمكن قياس التكدس أو أثر الإصابات على المرور."
+  }
+ ],
+ "blocks": {
+  "مؤشرات الموقف": "indicators",
+  "قراءة الموقف وتحليل المؤشرات": "intel_analysis",
+  "الاحتمالات ونسبة الحوادث إلى جهات": "hypotheses",
+  "الحركة الملاحية والتكدس": "timeline",
+  "ما لم يُحسم": "gaps",
+  "المصادر والمراجع": "source_reliability"
+ },
+ "event_keys": [
+  {
+   "code": "MN-2026-11-22-01",
+   "title": "هجوم — بلاغ UKMTO 215-26 عن إصابة ناقلة بمقذوف في مؤخرتها على بعد 11 ميلًا بحريًا شمال خصب · 21/11/2026",
+   "area": "مضيق هرمز",
+   "status": "بلاغ رسمي",
+   "ref": "UKMTO — الحوادث الأخيرة",
+   "note": "إصابة في مؤخرة الناقلة؛ لا إصابات، والأثر البيئي غير مؤكد.",
+   "area_basis": "نص البلاغ: 11NM north of Khasab, Oman، في عبور خارج من مضيق هرمز."
+  },
+  {
+   "code": "MN-2026-11-22-02",
+   "title": "هجوم — بلاغ UKMTO 216-26 عن إصابة ناقلة بمقذوف في غرفة المحركات على بعد 17 ميلًا بحريًا شرق خصب · 21/11/2026",
+   "area": "مضيق هرمز",
+   "status": "بلاغ رسمي",
+   "ref": "UKMTO — الحوادث الأخيرة",
+   "note": "إصابة في غرفة المحركات؛ لا إصابات، والأثر البيئي غير مؤكد.",
+   "area_basis": "نص البلاغ: 17NM east of Khasab, Oman، في عبور خارج من مضيق هرمز."
+  }
+ ],
+ "timeline": [
+  {
+   "date": "21/11/2026",
+   "count": 2,
+   "kind": "incident",
+   "label": "بلاغان من UKMTO: إصابة ناقلتين بمقذوفات شمال خصب وشرقها.",
+   "source": "UKMTO — الحوادث الأخيرة"
+  }
+ ],
+ "source_reliability": {
+  "checked": 60,
+  "cited": 3,
+  "ok": 59,
+  "failed": 1,
+  "stale": 4,
+  "rows": [
+   {
+    "name": "UKMTO — الحوادث الأخيرة",
+    "source_reliability": "A",
+    "information_credibility": 2
+   },
+   {
+    "name": "IMO — سجل الحوادث المؤكدة",
+    "source_reliability": "A",
+    "information_credibility": 1
+   },
+   {
+    "name": "gCaptain",
+    "source_reliability": "C",
+    "information_credibility": 3
+   }
+  ],
+  "approved": 62,
+  "stale_days_limit": 14
+ },
+ "source_coverage": {
+  "line": "فُحص 60 مسارًا آليًا؛ نجح 59 وتعذّر 1؛ 4 مصادر متقادمة؛ ومصدران مرجعيان يدويان. المصادر المتقادمة محسوبة ضمن الناجحة.",
+  "attempted": 60,
+  "successful": 59,
+  "blocked_count": null,
+  "stale_count": 4,
+  "basis": {
+   "unique_checked": 60,
+   "unique_successful": 59,
+   "unique_failed": 1
+  }
+ },
+ "intel_analysis": {
+  "method": "مقارنة صفحة حوادث UKMTO وسجل IMO بما نشرته المصادر الأخرى، مع فصل البلاغ الرسمي عن الخبر الإعلامي. أضافت صفحة UKMTO بلاغين مؤرخين 21/11، ولا يحدد أي بلاغ رسمي الجهة المنفذة.",
+  "indicators": [
+   "صدور بلاغ UKMTO جديد عن إصابة سفينة قرب خصب؛ يؤكد استمرار الاستهداف؛ المصدر UKMTO؛ الحالة: لم يصدر بعد.",
+   "تحديث عن الأثر البيئي في البلاغين 215-26 و216-26؛ يحدد حجم الضرر؛ المصدر UKMTO؛ الحالة: لم يتم التوضيح.",
+   "صدور بلاغ رسمي عن هجوم على سفينة في البحر الأحمر أو بحر العرب؛ يرفع مستوى التهديد هناك؛ المصدر UKMTO أو JMIC؛ الحالة: لم يصدر بعد."
+  ]
+ },
+ "threat_zones": {
+  "overall": "مرتفع جدًا",
+  "rank": 4,
+  "top_zone": "مضيق هرمز وخليج عُمان والخليج العربي",
+  "window": "خلال 24 ساعة السابقة",
+  "counter": {
+   "total": 2,
+   "qualifying": 2,
+   "confirmed": 2,
+   "probable": 0,
+   "unconfirmed_qualifying": 0,
+   "unconfirmed_total": 0,
+   "excluded": 0,
+   "nonspatial": 0
+  },
+  "zones": [
+   {
+    "id": "Z1",
+    "name": "مضيق هرمز وخليج عُمان والخليج العربي",
+    "level": "مرتفع جدًا",
+    "rank": 4,
+    "confirmed": 2,
+    "probable": 0,
+    "qualifying": 2,
+    "carry_over": false
+   },
+   {
+    "id": "Z2",
+    "name": "باب المندب والبحر الأحمر",
+    "level": "منخفض",
+    "rank": 1,
+    "confirmed": 0,
+    "probable": 0,
+    "qualifying": 0,
+    "carry_over": false
+   },
+   {
+    "id": "Z3",
+    "name": "بحر العرب",
+    "level": "متوسط",
+    "rank": 2,
+    "confirmed": 0,
+    "probable": 0,
+    "qualifying": 0,
+    "carry_over": true
+   },
+   {
+    "id": "Z4",
+    "name": "القرن الأفريقي",
+    "level": "منخفض",
+    "rank": 1,
+    "confirmed": 0,
+    "probable": 0,
+    "qualifying": 0,
+    "carry_over": false
+   },
+   {
+    "id": "Z5",
+    "name": "المحيط الهندي",
+    "level": "منخفض",
+    "rank": 1,
+    "confirmed": 0,
+    "probable": 0,
+    "qualifying": 0,
+    "carry_over": false
+   }
+  ]
+ },
+ "threat_zone_levels": {
+  "Z1": "مرتفع جدًا",
+  "Z2": "منخفض",
+  "Z3": "متوسط",
+  "Z4": "منخفض",
+  "Z5": "منخفض"
+ },
+ "distribution_rule": "لا تقدير احتمالي رقمي: المادة الرسمية لا تسمّي فاعلًا ولا تصرّح بوجود صلة",
+ "glossary": {
+  "UKMTO": "مركز التجارة البحرية البريطاني: بلاغات الحوادث في المنطقة.",
+  "JMIC": "مركز المعلومات البحرية المشترك بالقوات البحرية المشتركة.",
+  "MSCIO": "مركز أمن المعلومات البحرية: صفحة التنبيهات.",
+  "MN-": "رمز الواقعة الداخلي: MN-YYYY-MM-DD-NN.",
+  "EST-": "رمز التقدير التحليلي: EST-YYYY-MM-DD-NN.",
+  "A–F / 1–6": "موثوقية المصدر بحرف A–F، ومصداقية المعلومة برقم 1–6.",
+  "معدل معتاد قبل الأزمة": "القيمة المرجعية التي يُقاس بها التغير.",
+  "نسبة الحادث إلى جهة": "نسبة الواقعة إلى جهة أو مصدر بدليل معلن.",
+  "الهجوم": "فعل مؤكد بإصابة أو ضرر موثّق من مصدر رسمي.",
+  "الواقعة": "بلاغ أمني لم يثبت كونه هجومًا بعد.",
+  "درجة الثقة": "قوة نسبة الحادث إلى جهة: عالية أو متوسطة أو منخفضة.",
+  "IMO": "المنظمة البحرية الدولية: المرجع الرسمي لسجل الحوادث.",
+  "OFAC": "مكتب مراقبة الأصول الأجنبية الأمريكي: قائمة العقوبات."
+ },
+ "sources_approved": 62,
+ "sources_ok": 59,
+ "sources_failed": 1,
+ "sources_manual_reference": [
+  39,
+  52
+ ],
+ "sources_manual_reference_count": 2,
+ "sources_line": "المصادر: 62 معتمدة = 60 بالمسار الآلي + 2 بالمرجعية اليدوية. الفحص: 59 ناجحة. 1 متعذّر: Lloyd's List — حجب المصدر. المرجعية اليدوية: 2 يُفحص يدويًا.",
+ "distribution_rule_note": "لا تُنشر احتمالات رقمية؛ لا يقدّم المصدر الرسمي أساسًا لقياس الصلة أو نسبة الوقائع إلى جهة.",
+ "hero_risk_patterns": [
+  "هجوم",
+  "حريق",
+  "ألغام"
+ ],
+ "report_classes": {
+  "rows": [
+   {
+    "class": "no_incident",
+    "count": 0,
+    "delta": "0"
+   },
+   {
+    "class": "بلاغ رسمي",
+    "count": 2,
+    "delta": "+2"
+   },
+   {
+    "class": "تنبيه رسمي",
+    "count": 0,
+    "delta": "-1"
+   },
+   {
+    "class": "بيان سياسي",
+    "count": 0,
+    "delta": "-1"
+   },
+   {
+    "class": "نقل إعلامي",
+    "count": 0,
+    "delta": "0"
+   },
+   {
+    "class": "نقل إعلامي رسمي إيراني",
+    "count": 0,
+    "delta": "-1"
+   },
+   {
+    "class": "نقل مهني",
+    "count": 1,
+    "delta": "0"
+   }
+  ]
+ },
+ "official_cards": [
+  {
+   "id": "imo-seafarer-deaths",
+   "title": "أعداد الوفيات من IMO",
+   "title_en": "IMO seafarer fatalities",
+   "basis": "رسمي — قائمة IMO للوقائع المؤكدة",
+   "basis_en": "Official — IMO confirmed incidents list",
+   "source_label": "appendices/imo-incidents.json + https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+   "source_label_en": "IMO — confirmed incidents list",
+   "layers": {
+    "daily": {
+     "label": "عدد اليوم",
+     "label_en": "Today",
+     "state": "shown",
+     "value": "0",
+     "value_en": "0",
+     "source": "قائمة IMO الرسمية؛ الفرق بين القراءة الحالية والسابقة = 0",
+     "source_en": "Official IMO list; difference from the previous reading = 0"
+    },
+    "cumulative": {
+     "label": "المجموع منذ 28 فبراير 2026",
+     "label_en": "Total since 28 February 2026",
+     "value": "25",
+     "value_en": "25",
+     "source": "IMO — 25 وفاة بحّار مؤكدة حتى 17/11/2026",
+     "source_en": "IMO — 25 confirmed seafarer deaths as at 17/11/2026"
+    },
+    "updated": {
+     "label": "آخر تحديث للمصدر",
+     "label_en": "Source last updated",
+     "value": "17/11/2026",
+     "value_en": "17/11/2026",
+     "source": "القائمة الرسمية بتاريخ بيانات 17/11/2026",
+     "source_en": "Official list as at 17/11/2026"
+    }
+   },
+   "source_url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx"
+  },
+  {
+   "id": "imo-transit-september-2026",
+   "title": "العبور اليومي عبر مضيق هرمز",
+   "title_en": "Daily transits through the Strait of Hormuz",
+   "basis": "رسمي — بيانات IMO الشهرية للعبور",
+   "basis_en": "Official — IMO monthly transit data",
+   "source_label": "IMO — بيانات العبور الرسمية",
+   "source_label_en": "IMO — official transit data",
+   "badges": [
+    "آخر تحديث سبتمبر 2026"
+   ],
+   "badges_en": [
+    "Last updated September 2026"
+   ],
+   "constraint": "أوقفت المنظمة تجميع بيانات العبور اليومية",
+   "constraint_en": "IMO no longer compiles data on daily ship transits",
+   "layers": {
+    "daily": {
+     "label": "عدد اليوم",
+     "label_en": "Today",
+     "state": "no_coverage",
+     "value": "لا تغطية",
+     "value_en": "No coverage",
+     "source": "لا قراءة رسمية ليوم 31 أكتوبر 2026",
+     "source_en": "No official reading for 31 October 2026"
+    },
+    "cumulative": {
+     "label": "المجموع منذ 28 فبراير 2026",
+     "label_en": "Total since 28 February 2026",
+     "state": "no_coverage",
+     "value": "لا تغطية",
+     "value_en": "No coverage",
+     "source": "المنظمة أوقفت تجميع البيانات اليومية؛ لا يُحسب مجموع تراكمي",
+     "source_en": "IMO stopped compiling daily data; no cumulative total is calculated"
+    },
+    "updated": {
+     "label": "آخر تحديث للمصدر",
+     "label_en": "Source last updated",
+     "value": "سبتمبر 2026",
+     "value_en": "September 2026",
+     "source": "الرسم الرسمي المتاح لشهر سبتمبر 2026",
+     "source_en": "Official chart available for September 2026"
+    }
+   },
+   "period": "سبتمبر 2026",
+   "period_en": "September 2026",
+   "average": "15.6",
+   "average_en": "15.6",
+   "high": "25.8 (23 سبتمبر)",
+   "high_en": "25.8 (23 September)",
+   "low": "8.0 (3 سبتمبر)",
+   "low_en": "8.0 (3 September)"
+  },
+  {
+   "id": "imo-confirmed-incidents",
+   "title": "سجل الحوادث المؤكدة من IMO",
+   "title_en": "IMO confirmed incidents log",
+   "basis": "رسمي — قائمة IMO للحوادث المؤكدة على سفن تجارية",
+   "basis_en": "Official — IMO confirmed incidents on commercial ships",
+   "source_label": "appendices/imo-incidents.json + https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
+   "source_label_en": "IMO — confirmed incidents log",
+   "layers": {
+    "daily": {
+     "label": "عدد اليوم",
+     "value": "0",
+     "source": "قائمة IMO الرسمية؛ الفرق بين القراءة الحالية والسابقة = 0",
+     "state": "shown",
+     "value_en": "0",
+     "source_en": "Official IMO list; difference from the previous reading = 0"
+    },
+    "cumulative": {
+     "label": "المجموع منذ 28 فبراير 2026",
+     "value": "138",
+     "source": "IMO — 138 حادثة مؤكدة حتى 17/11/2026",
+     "value_en": "138",
+     "source_en": "IMO — 138 confirmed incidents as at 17/11/2026"
+    },
+    "updated": {
+     "label": "آخر تحديث للمصدر",
+     "value": "17/11/2026",
+     "source": "القائمة الرسمية بتاريخ بيانات 17/11/2026",
+     "value_en": "17/11/2026",
+     "source_en": "Official list as at 17/11/2026"
+    }
+   },
+   "source_url": "https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx"
+  }
+ ]
+}
