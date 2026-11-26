@@ -71,34 +71,52 @@ def build_prompt(s: dict, date: str, problems: str = "") -> str:
     return "\n".join(parts)
 
 
-def chat(prompt: str) -> str:
-    base = os.environ.get("LLM_BASE_URL", "").rstrip("/")
-    key = os.environ.get("LLM_API_KEY", "")
-    if not base or not key:
-        raise RuntimeError("LLM_BASE_URL أو LLM_API_KEY غير مضبوط")
-    body = json.dumps({"model": os.environ.get("LLM_MODEL", "auto"), "temperature": 0.2, "max_tokens": int(os.environ.get("LLM_MAX_TOKENS", "32000")),
-                       "messages": [{"role": "user", "content": prompt}]}).encode()
+def _post(url: str, headers: dict, body: bytes, secret: str) -> dict:
+    """نداء JSON مع إعادة محاولة عند 429 وأخطاء الخادم المؤقتة؛ لا يطبع المفتاح أبدًا."""
     last: Exception | None = None
-    for i, wait in enumerate((0, 30, 90)):  # أخطاء مؤقتة (429/5xx) لدى المزوّد المجاني
+    for i, wait in enumerate((0, 30, 90)):
         if wait:
             time.sleep(wait)
-        req = urllib.request.Request(f"{base}/chat/completions", data=body, method="POST",
-                                     headers={"content-type": "application/json", "authorization": f"Bearer {key}"})
+        req = urllib.request.Request(url, data=body, method="POST", headers=headers)
         try:
             with urllib.request.urlopen(req, timeout=900) as r:
-                resp = json.load(r)
-            c = resp["choices"][0]["message"]["content"]
-            return "".join(x.get("text", "") for x in c) if isinstance(c, list) else (c or "")
+                return json.load(r)
         except urllib.error.HTTPError as exc:
-            detail = exc.read().decode("utf-8", "replace")[:400].replace(key, "***")
-            print(f"  ⚠ HTTP {exc.code} (حجم البرومت {len(prompt)} حرفًا، محاولة {i + 1}/3): {detail}")
+            detail = exc.read().decode("utf-8", "replace")[:400].replace(secret, "***")
+            print(f"  ⚠ HTTP {exc.code} (حجم البرومت {len(body)} بايت، محاولة {i + 1}/3): {detail}")
             last = exc
-            if exc.code not in (429, 500, 502, 503, 504):
+            if exc.code not in (429, 500, 502, 503, 504, 529):
                 break
         except Exception as exc:  # انقطاع أو مهلة
             print(f"  ⚠ {type(exc).__name__}: {str(exc)[:200]}")
             last = exc
     raise last  # type: ignore[misc]
+
+
+def chat(prompt: str) -> str:
+    """Anthropic إن وُجد ANTHROPIC_API_KEY، وإلا واجهة متوافقة مع OpenAI (freellmapi)."""
+    akey = os.environ.get("ANTHROPIC_API_KEY", "").strip()
+    if akey:
+        body = json.dumps({"model": os.environ.get("ANTHROPIC_MODEL", "claude-haiku-5-5"),
+                           "max_tokens": int(os.environ.get("LLM_MAX_TOKENS", "16000")),
+                           "messages": [{"role": "user", "content": prompt}]}).encode()
+        resp = _post("https://api.anthropic.com/v1/messages",
+                     {"content-type": "application/json", "x-api-key": akey,
+                      "anthropic-version": "2023-06-01"}, body, akey)
+        u = resp.get("usage", {})
+        print(f"  ℹ رموز الإدخال {u.get('input_tokens')} والإخراج {u.get('output_tokens')} · سبب التوقف {resp.get('stop_reason')}")
+        return "".join(b.get("text", "") for b in resp.get("content", []) if b.get("type") == "text")
+    base = os.environ.get("LLM_BASE_URL", "").rstrip("/")
+    key = os.environ.get("LLM_API_KEY", "")
+    if not base or not key:
+        raise RuntimeError("لا ANTHROPIC_API_KEY ولا LLM_BASE_URL/LLM_API_KEY")
+    body = json.dumps({"model": os.environ.get("LLM_MODEL", "auto"), "temperature": 0.2,
+                       "max_tokens": int(os.environ.get("LLM_MAX_TOKENS", "32000")),
+                       "messages": [{"role": "user", "content": prompt}]}).encode()
+    resp = _post(f"{base}/chat/completions",
+                 {"content-type": "application/json", "authorization": f"Bearer {key}"}, body, key)
+    c = resp["choices"][0]["message"]["content"]
+    return "".join(x.get("text", "") for x in c) if isinstance(c, list) else (c or "")
 
 
 def _norm(path: str) -> str:

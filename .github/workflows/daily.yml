@@ -1,6 +1,6 @@
 # التشغيل اليومي بلا جلسة Claude (قرار فهد 2026-11-26): 04:40 بتوقيت البحرين = 01:40Z.
 # الخط الحتمي كما هو (runbook.py حتى G069 ← cloud_deliver.py ← publish_site.sh --telegram)،
-# وخطوات الوكيل الأربع يكتبها نموذج مجاني عبر freellmapi (tools/agent_write_llm.py).
+# وخطوات الوكيل الأربع يكتبها نموذج عبر tools/agent_write_llm.py: Anthropic API إن وُجد السر ANTHROPIC_API_KEY (خارج باقة Claude)، وإلا freellmapi المجاني.
 # الضمانات: لا تجاوز لبوابة، النشر فقط بحكم 0 أو 3 (cloud_deliver يرفض غيرهما)،
 # تلغرام مرة واحدة بعد نشر متحقق (telegram_send يمنع التكرار)، لا دمج في main لهذا المستودع.
 # عند الفشل: يفشل المهمة فيصل إشعار GitHub، ويُستدعى Claude يدويًا للإصلاح فقط.
@@ -66,18 +66,23 @@ jobs:
           git config --global user.name "seawatch-daily"
           git config --global user.email "seawatch-daily@users.noreply.github.com"
 
-      - name: النموذج المجاني (freellmapi)
+      # للخطوتين الاختياريتين S080 وS090 فقط؛ فشله لا يوقف الخط (كتابة الخطوات الأربع بـ Anthropic).
+      - name: النموذج المجاني (freellmapi) — اختياري
+        continue-on-error: true
         env:
           FREELLMAPI_GOOGLE_KEY: ${{ secrets.FREELLMAPI_GOOGLE_KEY }}
           FREELLMAPI_GROQ_KEY: ${{ secrets.FREELLMAPI_GROQ_KEY }}
         run: |
           bash "$CANON/brain/tools/freellmapi_up.sh"
+          [ -f "$HOME/.freellmapi.env" ] || exit 0
           cat "$HOME/.freellmapi.env" | sed -n 's/^export \(LLM_BASE_URL\|LLM_NODE\)=\(.*\)/\1=\2/p' >> "$GITHUB_ENV"
           k=$(sed -n 's/^export LLM_API_KEY=//p' "$HOME/.freellmapi.env"); echo "::add-mask::$k"; echo "LLM_API_KEY=$k" >> "$GITHUB_ENV"
 
       - name: الخط حتى G069 (خطوات الوكيل بالنموذج المجاني)
         working-directory: /home/ubuntu/mda-marine-system/brain
         env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL: ${{ vars.ANTHROPIC_MODEL || 'claude-haiku-5-5' }}
           LLM_MODEL: ${{ vars.LLM_MODEL || 'auto' }}
         run: |
           set +e
