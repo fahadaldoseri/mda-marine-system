@@ -11,7 +11,12 @@ import { pathToFileURL } from 'node:url'
 import { readFile, writeFile } from 'node:fs/promises'
 
 const SKILL = '/home/ubuntu/skills/builtin-llm-models'
-const { LlmClient, messageText, mapLimit } = await import(pathToFileURL(`${SKILL}/lib/llm.mjs`).href)
+// خارج Manus: عند ضبط LLM_BASE_URL يُستعمل أي خادم متوافق مع واجهة OpenAI
+// (مثل FreeLLMAPI المحلي عبر tools/freellmapi_up.sh). المفتاح من LLM_API_KEY ولا يُطبع.
+const COMPAT = Boolean(process.env.LLM_BASE_URL)
+const { LlmClient, messageText, mapLimit } = COMPAT
+  ? await import(pathToFileURL(new URL('./llm_compat.mjs', import.meta.url).pathname).href)
+  : await import(pathToFileURL(`${SKILL}/lib/llm.mjs`).href)
 
 const argv = process.argv.slice(2)
 const cmd = argv[0]
@@ -23,7 +28,7 @@ const arg = (n, d = null) => {
   return v === undefined || v.startsWith('--') ? true : v
 }
 
-const MODEL = String(arg('model', 'gpt-5-mini'))
+const MODEL = COMPAT ? String(process.env.LLM_MODEL || 'auto') : String(arg('model', 'gpt-5-mini'))
 const isGemini = MODEL.startsWith('gemini')
 const llm = new LlmClient({ timeoutMs: 300000, maxRetries: 3 })
 
@@ -32,6 +37,10 @@ const llm = new LlmClient({ timeoutMs: 300000, maxRetries: 3 })
  *  وحدّ أدنى للرموز، لأن النماذج التي «تفكّر» تستهلك الرموز قبل الناتج فيصير فارغاً. */
 function budget(body, n) {
   const want = Number(n) || 0
+  if (COMPAT) {
+    body.max_tokens = Math.max(want, 1024)
+    return body
+  }
   if (isGemini) {
     body.max_tokens = Math.max(want, 1024)
     const eff = arg('reasoning-effort')

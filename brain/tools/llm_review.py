@@ -6,6 +6,8 @@
 لا يُعدّل النص تلقائياً؛ يُخرج ملاحظات ليُعتمد التعديل بعد المراجعة.
 """
 import argparse
+import os
+import shutil
 import json
 import re
 import subprocess
@@ -14,7 +16,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 
 ROOT = Path(__file__).resolve().parent.parent
-NODE = 'manus-node'
+NODE = os.environ.get('LLM_NODE') or ('manus-node' if shutil.which('manus-node') else 'node')
 CLIENT = str(ROOT / 'tools' / 'llm.mjs')
 
 RULES = """أنت ناقد لغوي عسكري بحري خبير في العربية الفصحى المبسّطة.
