@@ -39,6 +39,7 @@ jobs:
       CANON: /home/ubuntu/mda-marine-system
       BRAIN_DIR: /home/ubuntu/mda-marine-system/brain
       SITE_DIR: /home/ubuntu/mda-marine-system/site
+      FALLBACK_DIR: /home/ubuntu/fallback
       # النشر في التشغيل المجدول أمر فهد الدائم؛ في التشغيل اليدوي بالاختيار.
       PUBLISH: ${{ github.event_name == 'schedule' || github.event_name == 'push' || inputs.publish }}
     steps:
@@ -91,8 +92,11 @@ jobs:
       - name: إجابات Claude الاحتياطية (إن وُجدت)
         working-directory: /home/ubuntu/mda-marine-system
         run: |
-          git fetch -q origin "fallback/$D" 2>/dev/null && git checkout -q FETCH_HEAD -- "brain/fallback/$D" 2>/dev/null \
-            && echo "استُعيدت إجابات احتياطية: $(ls brain/fallback/$D | tr '\n' ' ')" || echo "لا إجابات احتياطية"
+          # خارج brain كي لا يرفضها فحص المانيفست (ملف غير متصل بخطوة).
+          mkdir -p "$FALLBACK_DIR/$D"
+          if git fetch -q origin "fallback/$D" 2>/dev/null && git archive FETCH_HEAD "brain/fallback/$D" 2>/dev/null | tar -x -C "$FALLBACK_DIR/$D" --strip-components=3; then
+            echo "استُعيدت إجابات احتياطية: $(ls "$FALLBACK_DIR/$D" | tr '\n' ' ')"
+          else echo "لا إجابات احتياطية"; fi
 
       - name: الخط حتى G069 (خطوات الوكيل بالنموذج المجاني)
         working-directory: /home/ubuntu/mda-marine-system/brain
@@ -113,8 +117,10 @@ jobs:
         if: failure()
         working-directory: /home/ubuntu/mda-marine-system
         run: |
-          ls "brain/fallback/$D"/*.prompt.md >/dev/null 2>&1 || exit 0
+          ls "$FALLBACK_DIR/$D"/*.prompt.md >/dev/null 2>&1 || exit 0
+          mkdir -p "/tmp/fbsave" && cp "$FALLBACK_DIR/$D"/* /tmp/fbsave/
           git checkout -q -B "fallback/$D"
+          mkdir -p "brain/fallback/$D" && cp /tmp/fbsave/* "brain/fallback/$D/"
           git add -f "brain/fallback/$D"
           git commit -q -m "برومت احتياطي $D" && git push -q -f origin "fallback/$D" && echo "حُفظ: fallback/$D"
 
@@ -159,7 +165,8 @@ jobs:
           git commit -q -m "تقرير $D: حكم ${VERDICT:-?} (تشغيل GitHub Actions)" || exit 0
           git push -q -f origin "daily/$D"
           gh pr view "daily/$D" >/dev/null 2>&1 || gh pr create --draft --base main --head "daily/$D" \
-            --title "تقرير $D (تشغيل آلي)" --body "حكم النشر: ${VERDICT:-?}. سجل التشغيل: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            --title "تقرير $D (تشغيل آلي)" --body "حكم النشر: ${VERDICT:-?}. سجل التشغيل: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" \
+            || echo "::warning::تعذّر إنشاء طلب الدمج (إعداد Actions لا يسمح)؛ الفرع daily/$D محفوظ"
 
       - name: سجلات التشغيل
         if: always()

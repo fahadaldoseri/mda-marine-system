@@ -182,7 +182,7 @@ def main() -> int:
             print("✘ المحرّك أرجع 10 بلا خطوة وكيل معلّقة")
             return 2
         problems = ""
-        fb_dir = ROOT / "fallback" / a.date
+        fb_dir = Path(os.environ.get("FALLBACK_DIR") or ROOT / "fallback") / a.date
         answer = fb_dir / f"{s['id']}.answer.txt"
         for t in range(1, a.tries + 1):
             print(f"▶ {s['id']}: محاولة {t} عبر " + ("إجابة Claude الاحتياطية" if answer.is_file() else "النموذج"))
@@ -207,7 +207,7 @@ def main() -> int:
         else:
             fb_dir.mkdir(parents=True, exist_ok=True)
             (fb_dir / f"{s['id']}.prompt.md").write_text(build_prompt(s, a.date), encoding="utf-8")
-            print(f"✘ تعذّر إتمام {s['id']} بعد {a.tries} محاولات — حُفظ البرومت الكامل في fallback/{a.date}/{s['id']}.prompt.md "
+            print(f"✘ تعذّر إتمام {s['id']} بعد {a.tries} محاولات — حُفظ البرومت الكامل في {fb_dir}/{s['id']}.prompt.md "
                   f"ليكتب Claude الإجابة في {s['id']}.answer.txt بصيغة <<<FILE>>> نفسها")
             return 2
     print("✘ تجاوز الحد الأعلى لخطوات الوكيل")
