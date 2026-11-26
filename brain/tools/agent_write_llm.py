@@ -19,6 +19,8 @@ import os
 import re
 import subprocess
 import sys
+import time
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -76,12 +78,27 @@ def chat(prompt: str) -> str:
         raise RuntimeError("LLM_BASE_URL أو LLM_API_KEY غير مضبوط")
     body = json.dumps({"model": os.environ.get("LLM_MODEL", "auto"), "temperature": 0.2,
                        "messages": [{"role": "user", "content": prompt}]}).encode()
-    req = urllib.request.Request(f"{base}/chat/completions", data=body, method="POST",
-                                 headers={"content-type": "application/json", "authorization": f"Bearer {key}"})
-    with urllib.request.urlopen(req, timeout=900) as r:
-        resp = json.load(r)
-    c = resp["choices"][0]["message"]["content"]
-    return "".join(x.get("text", "") for x in c) if isinstance(c, list) else (c or "")
+    last: Exception | None = None
+    for i, wait in enumerate((0, 30, 90)):  # أخطاء مؤقتة (429/5xx) لدى المزوّد المجاني
+        if wait:
+            time.sleep(wait)
+        req = urllib.request.Request(f"{base}/chat/completions", data=body, method="POST",
+                                     headers={"content-type": "application/json", "authorization": f"Bearer {key}"})
+        try:
+            with urllib.request.urlopen(req, timeout=900) as r:
+                resp = json.load(r)
+            c = resp["choices"][0]["message"]["content"]
+            return "".join(x.get("text", "") for x in c) if isinstance(c, list) else (c or "")
+        except urllib.error.HTTPError as exc:
+            detail = exc.read().decode("utf-8", "replace")[:400].replace(key, "***")
+            print(f"  ⚠ HTTP {exc.code} (حجم البرومت {len(prompt)} حرفًا، محاولة {i + 1}/3): {detail}")
+            last = exc
+            if exc.code not in (429, 500, 502, 503, 504):
+                break
+        except Exception as exc:  # انقطاع أو مهلة
+            print(f"  ⚠ {type(exc).__name__}: {str(exc)[:200]}")
+            last = exc
+    raise last  # type: ignore[misc]
 
 
 def write_outputs(s: dict, date: str, text: str) -> list[str]:

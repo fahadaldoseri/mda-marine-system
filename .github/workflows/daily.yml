@@ -88,6 +88,10 @@ jobs:
           # المحرّك يقف عند D005 (خطوة خادم Manus) بعد G069، وهذا متوقع؛ الحاكم هو الحكم.
           [ "$v" = 0 ] || [ "$v" = 3 ] || exit 1
 
+      - name: سجل freellmapi (عند الفشل فقط)
+        if: failure()
+        run: tail -n 60 "$HOME/freellmapi/server.log" 2>/dev/null | sed -E 's/(key|token|authorization)[^ ]*[ =:]+[^ ]+/\1=***/Ig' || true
+
       - name: النشر على mda-bh.pages.dev
         if: env.PUBLISH == 'true'
         working-directory: /home/ubuntu/mda-marine-system/brain
