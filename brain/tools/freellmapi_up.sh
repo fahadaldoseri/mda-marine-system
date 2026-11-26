@@ -40,8 +40,27 @@ fi
 curl -s -o /dev/null "http://127.0.0.1:$PORT/v1/models" || { echo "freellmapi: الخادم لم يبدأ"; exit 1; }
 
 # يُطفأ كل مزوّد لم يُضف بمفتاح SeaWatch، ومنها المزوّدون بلا مفتاح (aihorde وkilo وovh وparallel)
-# التي تفعّلها الأداة تلقائيًا في التثبيت الجديد، لأن بعضها شبكات متطوعين يرون نص الطلب.
-key=$(cd "$DIR" && node -e "const D=require('./node_modules/better-sqlite3');const d=new D('server/data/freeapi.db');d.prepare(\"update api_keys set enabled=0 where label<>'seawatch'\").run();process.stdout.write(d.prepare(\"select value from settings where key='unified_api_key'\").get().value)")
+# التي تفعّلها الأداة تلقائيًا بعد أول مزامنة للكتالوج (بعد بدء الخادم بثوانٍ)، لأن بعضها شبكات متطوعين
+# يرون نص الطلب. أثبت تشغيل GitHub الأول (26 نوفمبر) أن UPDATE واحدًا بعد البدء يسبقها فيُلغى أثره
+# وتُوجَّه الطلبات إلى kilo وaihorde. لذلك: علامة keyless_defaults=skip، ثم تكرار الإطفاء حتى انتهاء
+# المزامنة، ثم تحقق مغلق: أي مفتاح مفعّل بغير وسم seawatch يُفشل الإعداد (لا يُرسل أي نص).
+guard() {
+  (cd "$DIR" && node -e "const D=require('./node_modules/better-sqlite3');const d=new D('server/data/freeapi.db');
+d.prepare(\"INSERT INTO settings(key,value) VALUES('keyless_defaults','skip') ON CONFLICT(key) DO UPDATE SET value='skip'\").run();
+d.prepare(\"update api_keys set enabled=0 where label<>'seawatch'\").run();
+const left=d.prepare(\"select count(*) c from api_keys where enabled=1 and label<>'seawatch'\").get().c;
+const synced=d.prepare(\"select count(*) c from settings where key='catalog_applied_json'\").get().c;
+console.log(left+' '+synced)")
+}
+for _ in $(seq 1 45); do
+  read -r left synced < <(guard)
+  [ "${synced:-0}" != "0" ] && break
+  sleep 2
+done
+sleep 3
+read -r left _ < <(guard)
+[ "${left:-1}" = "0" ] || { echo "freellmapi: بقي مزوّد غير مفتاح SeaWatch مفعّلًا ($left) — إيقاف"; exit 1; }
+key=$(cd "$DIR" && node -e "const D=require('./node_modules/better-sqlite3');const d=new D('server/data/freeapi.db');process.stdout.write(d.prepare(\"select value from settings where key='unified_api_key'\").get().value)")
 [ -n "$key" ] || { echo "freellmapi: تعذّر قراءة المفتاح الموحّد"; exit 1; }
 umask 077
 printf 'export LLM_BASE_URL=http://127.0.0.1:%s/v1\nexport LLM_API_KEY=%s\nexport LLM_NODE=node\n' "$PORT" "$key" > "$ENV_OUT"

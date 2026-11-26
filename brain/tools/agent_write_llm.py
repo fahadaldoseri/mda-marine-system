@@ -76,7 +76,7 @@ def chat(prompt: str) -> str:
     key = os.environ.get("LLM_API_KEY", "")
     if not base or not key:
         raise RuntimeError("LLM_BASE_URL أو LLM_API_KEY غير مضبوط")
-    body = json.dumps({"model": os.environ.get("LLM_MODEL", "auto"), "temperature": 0.2,
+    body = json.dumps({"model": os.environ.get("LLM_MODEL", "auto"), "temperature": 0.2, "max_tokens": int(os.environ.get("LLM_MAX_TOKENS", "32000")),
                        "messages": [{"role": "user", "content": prompt}]}).encode()
     last: Exception | None = None
     for i, wait in enumerate((0, 30, 90)):  # أخطاء مؤقتة (429/5xx) لدى المزوّد المجاني

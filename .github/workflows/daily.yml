@@ -81,7 +81,7 @@ jobs:
           LLM_MODEL: ${{ vars.LLM_MODEL || 'auto' }}
         run: |
           set +e
-          python3 tools/agent_write_llm.py --date "$D"; rc=$?
+          python3 tools/agent_write_llm.py --date "$D" 2>&1 | tee /tmp/agent_loop.log; rc=${PIPESTATUS[0]}
           python3 tools/publish_verdict.py --date "$D"; v=$?
           echo "VERDICT=$v" >> "$GITHUB_ENV"
           echo "### حكم النشر $D: $v (خط $rc)" >> "$GITHUB_STEP_SUMMARY"
@@ -90,7 +90,9 @@ jobs:
 
       - name: سجل freellmapi (عند الفشل فقط)
         if: failure()
-        run: tail -n 60 "$HOME/freellmapi/server.log" 2>/dev/null | sed -E 's/(key|token|authorization)[^ ]*[ =:]+[^ ]+/\1=***/Ig' || true
+        run: |
+          grep -E "▶|✘|⚠|✔" /tmp/agent_loop.log 2>/dev/null | tail -25 || true
+          tail -n 40 "$HOME/freellmapi/server.log" 2>/dev/null | sed -E 's/(key|token|authorization)[^ ]*[ =:]+[^ ]+/\1=***/Ig' || true
 
       - name: النشر على mda-bh.pages.dev
         if: env.PUBLISH == 'true'
