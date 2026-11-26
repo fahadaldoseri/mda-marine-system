@@ -166,31 +166,41 @@ def write_outputs(s: dict, date: str, text: str) -> list[str]:
     return done
 
 
-def heal_downstream(date: str, out: str, healed: set) -> bool:
+def heal_downstream(date: str, out: str, healed: list) -> bool:
     """بوابة لاحقة رفضت ما أنتجه نموذج مجاني (مثل مفردات الموقع في الدفتر): يُعاد طلب الخطوة المسؤولة
     مع نص الرفض، ثم يستأنف المحرّك (الإعادة الآلية تحسب المتأثر). مرتان كحد أقصى."""
     import re as _re
     m = _re.search(r"توقف عند (\w+)", out)
-    if not m or len(healed) >= 2:
+    if not m or len(healed) >= 3:
         return False
     log = ROOT / "logs" / "runbook" / date / f"{m.group(1)}.log"
     if not log.is_file():
         return False
     text = log.read_text(encoding="utf-8", errors="replace")[-2500:]
     mf = runbook.load(str(ROOT))
+    failing = next((x for x in mf["steps"] if x["id"] == m.group(1)), {})
+    freads = {r.replace("{date}", date).lstrip("./") for r in failing.get("reads", [])}
+    cands = []
     for s in mf["steps"]:
-        if s.get("kind") != "agent" or s["id"] in healed:
+        if s.get("kind") != "agent" or healed.count(s["id"]) >= 2:
             continue
-        if not any(w.replace("{date}", date).lstrip("./") in text for w in s.get("writes", [])):
-            continue
+        ws = {w.replace("{date}", date).lstrip("./") for w in s.get("writes", [])}
+        if any(w in text for w in ws):
+            cands.insert(0, s)       # ذُكر ملفه في نص الرفض: الأولى
+        elif ws & freads:
+            cands.append(s)          # الخطوة الفاشلة تقرأ ملفه
+    for s in cands:
         extra = ""
         if "قيمة خارج السجل" in text:
             import check_area_vocabulary as cav  # noqa: PLC0415
             names, _ = cav.load_allowed(ROOT)
             extra = ("\nقيم حقل area المسموحة حرفيًا (قيمة واحدة أو عدة قيم مفصولة بـ « · »، ولا شيء غيرها): "
                      + " | ".join(sorted(names)) + " | المنطقة كاملة | سياق إقليمي")
+        if "بلا نوع مؤهّل" in text:
+            extra += ("\nإن كان target «سفينة» فيجب أن يحمل عنوان الواقعة نوع السفينة (ناقلة · سفينة بضائع سائبة · سفينة حاويات …)؛ "
+                      "وإن لم تكن الواقعة تستهدف سفينة في مصدرها (مثل اعتراض مسيّرات) فصحّح قيمة target وفق مخطط daily-events.")
         print(f"▶ إصلاح لاحق: {s['id']} بعد رفض {m.group(1)}")
-        healed.add(s["id"])
+        healed.append(s["id"])
         try:
             time.sleep(int(os.environ.get("LLM_GAP_SECONDS", "20")))
             files = write_outputs(s, date, chat(build_prompt(s, date, "رفضت بوابة لاحقة الملف الذي كتبته:\n" + text + extra)))
@@ -207,7 +217,7 @@ def main() -> int:
     ap.add_argument("--max-steps", type=int, default=8)
     ap.add_argument("--tries", type=int, default=2)
     a = ap.parse_args()
-    healed: set = set()
+    healed: list = []
     sys.path.insert(0, str(ROOT / "validators"))
     for _ in range(a.max_steps):
         r = sh(["run", "--date", a.date])
