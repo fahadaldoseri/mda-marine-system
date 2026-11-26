@@ -239,7 +239,8 @@ def main() -> int:
                 problems = "لم تُرجَع أي ملفات بالصيغة المطلوبة."
                 continue
             c = sh(["complete", s["id"], "--date", a.date])
-            print("\n".join("✘ رفض: " + ln for ln in c.stdout[-1500:].splitlines() if ln.strip()))
+            pre = "  " if c.returncode == 0 else "✘ رفض: "
+            print("\n".join(pre + ln for ln in c.stdout[-1500:].splitlines() if ln.strip()))
             if c.returncode == 0:
                 break
             problems = c.stdout[-1500:]
