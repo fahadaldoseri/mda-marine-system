@@ -6,6 +6,8 @@
 وحالة التحقق المطلوبة، ثم يكتب JSONL + ملخصاً Markdown.
 """
 import argparse
+import os
+import shutil
 import json
 import subprocess
 import sys
@@ -13,7 +15,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 
 ROOT = Path(__file__).resolve().parent.parent
-NODE = 'manus-node'
+NODE = os.environ.get('LLM_NODE') or ('manus-node' if shutil.which('manus-node') else 'node')
 CLIENT = str(ROOT / 'tools' / 'llm.mjs')
 
 RULES = """أنت محلّل أمن بحري. نطاق العمل: الخليج العربي، مضيق هرمز، خليج عُمان، بحر العرب،
