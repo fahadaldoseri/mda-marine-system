@@ -9,7 +9,7 @@ name: daily
 on:
   schedule:
     - cron: "40 1 * * *"
-  # مؤقت للتجربة الأولى (لا نشر ولا تلغرام ولا فرع daily): يُزال قبل الدمج.
+  # مؤقت: الدفع إلى هذا الفرع يشغّل تشغيلًا حقيقيًا بنشر وتلغرام (أمر فهد 26 نوفمبر)؛ يُزال قبل الدمج.
   push:
     branches: [claude/project-thread-7ch11e]
     paths: [.github/workflows/daily.yml]
@@ -40,7 +40,7 @@ jobs:
       BRAIN_DIR: /home/ubuntu/mda-marine-system/brain
       SITE_DIR: /home/ubuntu/mda-marine-system/site
       # النشر في التشغيل المجدول أمر فهد الدائم؛ في التشغيل اليدوي بالاختيار.
-      PUBLISH: ${{ github.event_name == 'schedule' || inputs.publish }}
+      PUBLISH: ${{ github.event_name == 'schedule' || github.event_name == 'push' || inputs.publish }}
     steps:
       - uses: actions/checkout@v4
         with:
