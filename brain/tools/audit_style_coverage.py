@@ -195,15 +195,17 @@ def strip_html(raw: str) -> str:
     return body + "\n" + "\n".join(ex.rows)
 
 
-def flatten_json(obj, out: list[str]) -> None:
+def flatten_json(obj, out: list[str], card: bool = False) -> None:
+    # قيم بطاقات المؤشرات (hero_kpis وofficial_cards) حقول مُهيكلة لا صياغة إنشائية: تُوسم بـ«[بطاقة]»
+    # كما في سطح HTML (قرار 2026-11-12)، فلا يُحسب تكرار «آخر تحديث المصدر» قالب جملة مانعًا.
     if isinstance(obj, str):
-        out.append(obj)
+        out.append(("[بطاقة] " + obj) if card else obj)
     elif isinstance(obj, dict):
-        for v in obj.values():
-            flatten_json(v, out)
+        for k, v in obj.items():
+            flatten_json(v, out, card or k in ("hero_kpis", "official_cards"))
     elif isinstance(obj, list):
         for v in obj:
-            flatten_json(v, out)
+            flatten_json(v, out, card)
 
 
 def _disabled_producers() -> dict:

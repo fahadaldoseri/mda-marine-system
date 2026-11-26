@@ -78,6 +78,18 @@ def build_prompt(s: dict, date: str, problems: str = "") -> str:
             if len(txt) > MAX_FILE:
                 txt = txt[:MAX_FILE] + "\n…[اقتُطع]"
             parts.append(f"\n## الملف: {rel}\n```\n{txt}\n```")
+    if s.get("id") == "W020":
+        # قالب ملف الواجهة هو ملف آخر يوم سابق (لا مخطط العلامة): بنية الواجهة الفعلية بمفاتيحها.
+        prev = sorted(q for q in (ROOT / "web" / "meta").glob("2???-??-??.json") if q.stem < date)
+        if prev:
+            try:
+                tpl = json.loads(prev[-1].read_text(encoding="utf-8"))
+                for k in ("hero_kpis", "official_cards", "map"):
+                    tpl.pop(k, None)
+                parts.append(f"\n## قالب ملف الواجهة: web/meta/{prev[-1].name} (احتفظ بالمفاتيح نفسها؛ تُشتق البطاقات والخريطة بأدوات الخط)\n```\n"
+                             + json.dumps(tpl, ensure_ascii=False, indent=1)[:MAX_FILE] + "\n```")
+            except (OSError, ValueError):
+                pass
     writes = [w.replace("{date}", date) for w in s.get("writes", [])]
     parts.append(
         "\n## صيغة الإخراج (إلزامية)\n"
