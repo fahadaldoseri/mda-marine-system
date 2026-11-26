@@ -127,6 +127,7 @@ jobs:
       - name: سجل freellmapi (عند الفشل فقط)
         if: failure()
         run: |
+          for f in $(ls -t /home/ubuntu/mda-marine-system/brain/logs/runbook/$D/*.log 2>/dev/null | head -1); do echo "== آخر سجل خطوة: $f"; tail -n 25 "$f" | cut -c1-300; done
           grep -E "▶|✘|⚠|✔" /tmp/agent_loop.log 2>/dev/null | cut -c1-260 | tail -30 || true
           tail -n 12 "$HOME/freellmapi/server.log" 2>/dev/null | sed -E 's/(key|token|authorization)[^ ]*[ =:]+[^ ]+/\1=***/Ig' || true
 
