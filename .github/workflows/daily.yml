@@ -9,6 +9,10 @@ name: daily
 on:
   schedule:
     - cron: "40 1 * * *"
+  # مؤقت للتجربة الأولى (لا نشر ولا تلغرام ولا فرع daily): يُزال قبل الدمج.
+  push:
+    branches: [claude/project-thread-7ch11e]
+    paths: [.github/workflows/daily.yml]
   workflow_dispatch:
     inputs:
       date:
@@ -108,7 +112,7 @@ jobs:
           bash tools/publish_site.sh --telegram "$D"
 
       - name: حفظ مخرجات اليوم في فرع daily/D وطلب دمج مسودة
-        if: always()
+        if: always() && env.PUBLISH == 'true'
         working-directory: /home/ubuntu/mda-marine-system
         env:
           GH_TOKEN: ${{ github.token }}
