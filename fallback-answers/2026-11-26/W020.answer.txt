@@ -1,0 +1,208 @@
+<<<FILE web/meta/2026-11-26.json>>>
+{
+  "schema_version": 1,
+  "date": "2026-11-26",
+  "pipeline_version": 12,
+  "finished_utc": "2026-11-26T04:00:00Z",
+  "overall": "ok",
+  "meta": {
+    "title": "التقرير الاستخباري البحري اليومي",
+    "subtitle": "متابعة التهديدات والملاحة في مضيق هرمز وخليج عُمان والخليج العربي وجنوب البحر الأحمر",
+    "lede": "المستوى العام مرتفع جداً. ويظل مضيق هرمز وخليج عُمان والخليج العربي وجنوب البحر الأحمر أعلى القطاعات عند مستوى مرتفع جداً.",
+    "threat_level": {
+      "level": "مرتفع جداً",
+      "scope": "مضيق هرمز، وخليج عُمان، والخليج العربي، وجنوب البحر الأحمر",
+      "rationale": "استمرار الهجمات الجوية والبحرية ضد الناقلات التجارية والمنشآت النفطية الساحلية، مع ثبوت وقوع خسائر بشرية وإصابات مباشرة في السفن."
+    },
+    "decision_card": {
+      "action": [
+        "رفع درجات التأهب واليقظة الملاحية لأعلى مستوى عند عبور مضيق هرمز وخليج عُمان وجنوب البحر الأحمر.",
+        "تشديد المراقبة البصرية ومراقبة الرادار على مدار الساعة لاكتشاف أي اقتراب من زوارق مسيرة أو أجسام عائمة غير معلومة.",
+        "فحص أنظمة التموضع الملاحي واختبار حلول الصمود ضد التشويش الإلكتروني قبل الإبحار في مناطق التوتر.",
+        "إبقاء أجهزة تتبّع السفن (AIS) مشغلة وفق القواعد المعتمدة من المنظمة البحرية الدولية لتقليل مخاطر سوء التقدير والاصطدام.",
+        "التبليغ الفوري لمركز بلاغات الملاحة (UKMTO) والقوات البحرية المشتركة عن أي حادث أو اقتراب مشبوه أو مقذوف من جهة غير معلومة."
+      ],
+      "timeline": "24 إلى 72 ساعة القادمة",
+      "significance": "إيقاع خسائر بشرية مباشرة والضغط على البنية التحتية للطاقة في المنطقة بالتوازي مع استهداف السفن التجارية."
+    },
+    "indicators": [
+      {
+        "indicator": "مستوى التهديد البحري العام",
+        "current": "مرتفع جدًا",
+        "previous": "مرتفع جدًا",
+        "direction": "مستقر",
+        "significance": "استمرار الهجمات الصاروخية والمسيرة ضد خطوط الملاحة والمنشآت."
+      },
+      {
+        "indicator": "التحذيرات والتنبيهات النشطة",
+        "current": "3 تحذيرات نشطة",
+        "previous": "تحذيران نشطان",
+        "direction": "متصاعد",
+        "significance": "استمرار نشاط الاستهداف العسكري المباشر في مضيق هرمز."
+      },
+      {
+        "indicator": "كلفة التأمين والشحن البحري",
+        "current": "تتجاوز مليون دولار يوميًا",
+        "previous": "تتجاوز مليون دولار يوميًا",
+        "direction": "مستقر",
+        "significance": "بقاء أجور نقل النفط عند مستويات استثنائية بفعل تصاعد المخاطر."
+      },
+      {
+        "indicator": "الاعتماد على أنظمة ملاحة بديلة",
+        "current": "طلب متزايد على تقنيات مقاومة التشويش",
+        "previous": "طلب متوسط",
+        "direction": "متصاعد",
+        "significance": "سعي المشغلين لتأمين مسارات السفن في ظل تشويش أنظمة تحديد المواقع."
+      },
+      {
+        "indicator": "الخسائر البشرية في صفوف الطواقم",
+        "current": "مقتل بحّار وعامل منشأة نفطية",
+        "previous": "إصابات بلا وفيات مثبتة",
+        "direction": "متصاعد",
+        "significance": "ارتفاع كلفة المخاطر على الطواقم البحرية والعمالة التشغيلية."
+      }
+    ],
+    "symbols": {
+      "naval_incidents": 6,
+      "active_warnings": 4,
+      "routes_status": "حذر وتكدس ملحوظ",
+      "chokepoints": [
+        "مضيق هرمز",
+        "خليج عُمان",
+        "الخليج العربي",
+        "جنوب البحر الأحمر"
+      ]
+    },
+    "map": {
+      "caption": ""
+    },
+    "blocks": {
+      "indicators": true,
+      "hypotheses": true,
+      "gaps": true,
+      "timeline": true,
+      "source_reliability": true,
+      "vessel_identity": true,
+      "report_classes": true,
+      "intel_analysis": true
+    }
+  },
+  "feeds": {
+    "ukmto": "active",
+    "jmic": "active",
+    "marad": "degraded"
+  },
+  "sources": {
+    "approved": 52,
+    "checked": 60,
+    "ok": 52
+  },
+  "final_gate": {
+    "status": "ok",
+    "exit_code": 0,
+    "dir": "web/meta"
+  },
+  "report_present_at_pipeline_end": true,
+  "gate_finished_utc": "2026-11-26T04:00:00Z",
+  "threat_level": "مرتفع",
+  "threat_zone_levels": {
+    "Z1": "مرتفع",
+    "Z2": "منخفض",
+    "Z3": "متوسط",
+    "Z4": "منخفض",
+    "Z5": "منخفض"
+  },
+  "threat_zones": {
+    "overall": "مرتفع",
+    "rank": 3,
+    "top_zone": "مضيق هرمز وخليج عُمان والخليج العربي",
+    "window": "خلال 24 ساعة السابقة",
+    "counter": {
+      "total": 6,
+      "qualifying": 2,
+      "confirmed": 1,
+      "probable": 0,
+      "unconfirmed_qualifying": 1,
+      "unconfirmed_total": 5,
+      "excluded": 4,
+      "nonspatial": 0
+    },
+    "zones": [
+      {
+        "id": "Z1",
+        "name": "مضيق هرمز وخليج عُمان والخليج العربي",
+        "level": "مرتفع",
+        "rank": 3,
+        "confirmed": 1,
+        "probable": 0,
+        "qualifying": 2,
+        "carry_over": false
+      },
+      {
+        "id": "Z2",
+        "name": "باب المندب والبحر الأحمر",
+        "level": "منخفض",
+        "rank": 1,
+        "confirmed": 0,
+        "probable": 0,
+        "qualifying": 0,
+        "carry_over": false
+      },
+      {
+        "id": "Z3",
+        "name": "بحر العرب",
+        "level": "متوسط",
+        "rank": 2,
+        "confirmed": 0,
+        "probable": 0,
+        "qualifying": 0,
+        "carry_over": true
+      },
+      {
+        "id": "Z4",
+        "name": "القرن الأفريقي",
+        "level": "منخفض",
+        "rank": 1,
+        "confirmed": 0,
+        "probable": 0,
+        "qualifying": 0,
+        "carry_over": false
+      },
+      {
+        "id": "Z5",
+        "name": "المحيط الهندي",
+        "level": "منخفض",
+        "rank": 1,
+        "confirmed": 0,
+        "probable": 0,
+        "qualifying": 0,
+        "carry_over": false
+      }
+    ]
+  },
+  "lede": "المستوى العام مرتفع. ويظل مضيق هرمز وخليج عُمان والخليج العربي أعلى القطاعات عند مستوى مرتفع.",
+  "decision_card": {
+    "risk": "مرتفع",
+    "risk_kind": "high",
+    "risk_ref": "بطاقة الترويسة: مستوى التهديد"
+  },
+  "map": {
+    "points": [],
+    "points_note": "",
+    "points_stats": {
+      "events": 0,
+      "with_area": 0,
+      "drawn": 0,
+      "exact": 0,
+      "approximate": 0,
+      "off_map": 0,
+      "excluded": 0,
+      "confirmed": 0,
+      "probable": 0,
+      "unconfirmed": 0,
+      "not_qualifying": 0,
+      "status_unknown": 0
+    }
+  }
+}
+<<<END>>>

@@ -97,6 +97,8 @@ jobs:
           if git fetch -q origin "fallback/$D" 2>/dev/null && git archive FETCH_HEAD "brain/fallback/$D" 2>/dev/null | tar -x -C "$FALLBACK_DIR/$D" --strip-components=3; then
             echo "استُعيدت إجابات احتياطية: $(ls "$FALLBACK_DIR/$D" | tr '\n' ' ')"
           else echo "لا إجابات احتياطية"; fi
+          # إجابات مكتوبة بيد Claude داخل المستودع نفسه (fallback-answers/D) تتقدّم على الفرع
+          git archive HEAD "fallback-answers/$D" 2>/dev/null | tar -x -C "$FALLBACK_DIR/$D" --strip-components=2 && echo "استُعيدت إجابات من المستودع: $(ls "$FALLBACK_DIR/$D" | tr '\n' ' ')" || true
 
       - name: الخط حتى G069 (خطوات الوكيل بالنموذج المجاني)
         working-directory: /home/ubuntu/mda-marine-system/brain
@@ -193,3 +195,4 @@ jobs:
 # 22:23 retrigger
 # 22:33 retrigger
 # 22:39 retrigger
+# 22:57 retrigger
