@@ -73,10 +73,15 @@ def run(cmd: list[str], cwd: Path | None = None, check: bool = True) -> subproce
 def cf_api(path: str, method: str = "GET", form: dict | None = None) -> dict:
     """واجهة Cloudflare عبر curl (الوكيل يحقن المفتاح على مسارات /accounts/ فقط)."""
     url = f"https://api.cloudflare.com/client/v4/accounts/{ACCOUNT}/pages/projects/{PROJECT}/{path}"
-    cmd = ["curl", "-sS", "-m", "30", "-X", method, "-H", "Authorization: Bearer dummy", url]
+    # في GitHub Actions لا وكيل: يُقرأ CLOUDFLARE_API_TOKEN ويُمرَّر عبر stdin لا سطر الأوامر.
+    token = os.environ.get("CLOUDFLARE_API_TOKEN", "").strip() or "dummy"
+    cmd = ["curl", "-sS", "-m", "30", "-X", method, "-H", "@-", url]
     for k, v in (form or {}).items():
         cmd += ["--form-string", f"{k}={v}"]
-    out = run(cmd).stdout
+    res = subprocess.run(cmd, input=f"Authorization: Bearer {token}\n", capture_output=True, text=True)
+    if res.returncode != 0:
+        raise RuntimeError(f"curl…: {res.stderr.strip()[-400:]}")
+    out = res.stdout
     return json.loads(out or "{}")
 
 

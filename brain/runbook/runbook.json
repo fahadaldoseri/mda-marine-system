@@ -954,13 +954,15 @@
           "web/meta/{date}.json",
           "appendices/estimate-code-map.json",
           "tools/register_estimate.py",
-          "skills/runbook-operations-ops/SKILL.md"
+          "skills/runbook-operations-ops/SKILL.md",
+          "tools/agent_write_llm.py"
         ],
         "gates": [],
         "tests": [
           "tests/test_runbook_engine.sh",
           "tests/test_write_prompt.py",
-          "tests/test_g030_code_spaces.py"
+          "tests/test_g030_code_spaces.py",
+          "tests/test_agent_write_llm.py"
         ]
       },
       "on_fail": "stop",
@@ -1076,7 +1078,8 @@
         ],
         "files": [
           "tools/ledger_source_excerpt.py",
-          "cumulative-2026/daily/"
+          "cumulative-2026/daily/",
+          "tools/agent_write_llm.py"
         ],
         "gates": [],
         "tests": []
@@ -1164,7 +1167,8 @@
           "ب2 — ترتيب الأقسام"
         ],
         "files": [
-          "templates/mark-schema.json"
+          "templates/mark-schema.json",
+          "tools/agent_write_llm.py"
         ],
         "gates": [],
         "tests": []
@@ -3879,7 +3883,8 @@
           "runbook/prompts/write-en-master.md",
           "tools/validate_en_master.py",
           "reports/{date}-sectioned.md",
-          "../site/sources/i18n/en/{date}-sectioned.en.md"
+          "../site/sources/i18n/en/{date}-sectioned.en.md",
+          "tools/agent_write_llm.py"
         ],
         "folders": [],
         "gates": [],
