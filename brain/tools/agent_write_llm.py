@@ -29,7 +29,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 import runbook  # noqa: E402
 
 MAX_FILE = 60_000  # حدّ كل ملف قراءة داخل البرومت (حرفًا)
-FILE_RE = re.compile(r"<<<\s*FILE:?\s*(.+?)\s*>>>[ \t]*\r?\n(.*?)\r?\n[ \t]*<<<\s*END\s*>{0,3}[ \t]*(?=\r?\n|$)", re.S)
+FILE_RE = re.compile(r"<<<\s*FILE:?[ \t]*([^\n>]+?)[ \t]*(?:>{1,3})?[ \t]*\r?\n(.*?)\r?\n[ \t]*<<<\s*END\s*>{0,3}[ \t]*(?=\r?\n|$)", re.S)
 
 
 def sh(args: list[str]) -> subprocess.CompletedProcess:
