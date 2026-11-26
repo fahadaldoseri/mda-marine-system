@@ -29,7 +29,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 import runbook  # noqa: E402
 
 MAX_FILE = 150_000  # حدّ كل ملف قراءة داخل البرومت (بايت)
-FILE_RE = re.compile(r"<<<FILE (.+?)>>>\n(.*?)\n<<<END>>>", re.S)
+FILE_RE = re.compile(r"<<<\s*FILE:?\s*(.+?)\s*>>>[ \t]*\r?\n(.*?)\r?\n[ \t]*<<<\s*END\s*>{0,3}[ \t]*(?=\r?\n|$)", re.S)
 
 
 def sh(args: list[str]) -> subprocess.CompletedProcess:
@@ -101,18 +101,24 @@ def chat(prompt: str) -> str:
     raise last  # type: ignore[misc]
 
 
+def _norm(path: str) -> str:
+    return path.strip().strip("`\"' ").removeprefix("./")
+
+
 def write_outputs(s: dict, date: str, text: str) -> list[str]:
-    allowed = {w.replace("{date}", date) for w in s.get("writes", [])}
+    allowed = {_norm(w.replace("{date}", date)) for w in s.get("writes", [])}
     done = []
     for path, content in FILE_RE.findall(text):
-        path = path.strip()
+        path = _norm(path)
         if path not in allowed:
-            print(f"  ⚠ تجاهل مسار غير معلن للخطوة: {path}")
+            print(f"  ⚠ تجاهل مسار غير معلن للخطوة: {path!r} (المسموح: {sorted(allowed)})")
             continue
         out = (ROOT / path)
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(content.rstrip("\n") + "\n", encoding="utf-8")
         done.append(path)
+    if not done:
+        print(f"  ⚠ لا ملفات بالصيغة المطلوبة؛ طول الرد {len(text)} وبدايته: {text[:160]!r}")
     return done
 
 
@@ -134,6 +140,7 @@ def main() -> int:
         problems = ""
         for t in range(1, a.tries + 1):
             print(f"▶ {s['id']}: محاولة {t} عبر النموذج")
+            time.sleep(int(os.environ.get("LLM_GAP_SECONDS", "20")))  # تخفيف حد الدقيقة للمزوّد المجاني
             try:
                 files = write_outputs(s, a.date, chat(build_prompt(s, a.date, problems)))
             except Exception as exc:  # الشبكة أو المزوّد
@@ -143,7 +150,7 @@ def main() -> int:
                 problems = "لم تُرجَع أي ملفات بالصيغة المطلوبة."
                 continue
             c = sh(["complete", s["id"], "--date", a.date])
-            print(c.stdout[-1500:])
+            print("\n".join("✘ رفض: " + ln for ln in c.stdout[-1500:].splitlines() if ln.strip()))
             if c.returncode == 0:
                 break
             problems = c.stdout[-1500:]

@@ -33,7 +33,7 @@ if [ ! -f "$DIR/.env" ]; then
 fi
 
 if ! curl -s -o /dev/null "http://127.0.0.1:$PORT/v1/models"; then
-  (cd "$DIR/server" && set -a && . ../.env && set +a && FREEAPI_CONFIG_JSON="$keys_json" \
+  (cd "$DIR/server" && set -a && . ../.env && set +a && FREEAPI_CONFIG_JSON="$keys_json" PROVIDER_TIMEOUT_GOOGLE=240000 PROVIDER_TIMEOUT_GROQ=120000 FALLBACK_TIME_BUDGET_MS=300000 \
      nohup npx tsx src/index.ts > "$DIR/server.log" 2>&1 &)
   for _ in $(seq 1 60); do curl -s -o /dev/null "http://127.0.0.1:$PORT/v1/models" && break; sleep 1; done
 fi
