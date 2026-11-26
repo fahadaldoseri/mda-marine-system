@@ -28,13 +28,15 @@ ROOT = Path(os.environ.get("BRAIN_DIR") or Path(__file__).resolve().parents[1])
 sys.path.insert(0, str(ROOT / "tools"))
 import runbook  # noqa: E402
 
-MAX_FILE = 150_000  # حدّ كل ملف قراءة داخل البرومت (بايت)
+MAX_FILE = 60_000  # حدّ كل ملف قراءة داخل البرومت (حرفًا)
 FILE_RE = re.compile(r"<<<\s*FILE:?\s*(.+?)\s*>>>[ \t]*\r?\n(.*?)\r?\n[ \t]*<<<\s*END\s*>{0,3}[ \t]*(?=\r?\n|$)", re.S)
 
 
 def sh(args: list[str]) -> subprocess.CompletedProcess:
+    # الخطوتان الاختياريتان S080 وS090 تستعملان LLM_BASE_URL؛ تُحجب عنهما كي لا تستهلكا حصة المزوّد المجاني.
+    env = {k: v for k, v in os.environ.items() if k not in ("LLM_BASE_URL", "LLM_API_KEY", "ANTHROPIC_API_KEY")}
     return subprocess.run([sys.executable, "tools/runbook.py", *args, "--root", str(ROOT)],
-                          cwd=ROOT, capture_output=True, text=True)
+                          cwd=ROOT, capture_output=True, text=True, env=env)
 
 
 def waiting_step(date: str) -> dict | None:
@@ -47,17 +49,34 @@ def waiting_step(date: str) -> dict | None:
     return None
 
 
+def compact_estimates(raw: str) -> str:
+    """سجل رموز EST- مختصرًا: آخر 25 رمزًا بمعناها فقط (الأصل 40 ألف حرف ولا يحتاجه النموذج كله)."""
+    try:
+        codes = json.loads(raw)["codes"]
+    except Exception:
+        return raw
+    keys = sorted(codes)[-25:]
+    lines = [f"{k}: {str(codes[k].get('statement', ''))[:110]}" for k in keys]
+    return ("رموز تقديرات قائمة (لا تُعد إسناد رمز لمعنى آخر، ولا تُنشئ رمز EST- جديدًا لأنك لا تشغّل أداة التسجيل؛ "
+            "عبّر عن التقدير الجديد بنص احتمالي بلا رمز، أو أعد ذكر رمز قائم بمعناه حرفيًا):\n" + "\n".join(lines))
+
+
 def build_prompt(s: dict, date: str, problems: str = "") -> str:
+    prompt_src = (ROOT / s["prompt"]).read_text(encoding="utf-8")
+    included = {runbook.sub(i, date, None).lstrip("./") for i in runbook.INCLUDE_RE.findall(prompt_src)}
     parts = [runbook.render_prompt(str(ROOT), s["prompt"], date)]
     for rel in s.get("reads", []):
         rel = rel.replace("{date}", date)
-        if rel == s["prompt"]:
+        # لا تكرار لما ضُمّن في البرومت، ولا أدوات ولا مهارات (النموذج لا يشغّلها).
+        if rel == s["prompt"] or rel in included or rel.startswith("tools/") or rel.endswith("SKILL.md"):
             continue
         p = ROOT / rel
         if p.is_file():
             txt = p.read_text(encoding="utf-8", errors="replace")
-            if len(txt.encode()) > MAX_FILE:
-                txt = txt.encode()[:MAX_FILE].decode("utf-8", "ignore") + "\n…[اقتُطع]"
+            if rel.endswith("estimate-code-map.json"):
+                txt = compact_estimates(txt)
+            if len(txt) > MAX_FILE:
+                txt = txt[:MAX_FILE] + "\n…[اقتُطع]"
             parts.append(f"\n## الملف: {rel}\n```\n{txt}\n```")
     writes = [w.replace("{date}", date) for w in s.get("writes", [])]
     parts.append(
@@ -74,7 +93,7 @@ def build_prompt(s: dict, date: str, problems: str = "") -> str:
 def _post(url: str, headers: dict, body: bytes, secret: str) -> dict:
     """نداء JSON مع إعادة محاولة عند 429 وأخطاء الخادم المؤقتة؛ لا يطبع المفتاح أبدًا."""
     last: Exception | None = None
-    for i, wait in enumerate((0, 30, 90)):
+    for i, wait in enumerate((0, 30, 90, 90)):
         if wait:
             time.sleep(wait)
         req = urllib.request.Request(url, data=body, method="POST", headers=headers)
@@ -82,11 +101,18 @@ def _post(url: str, headers: dict, body: bytes, secret: str) -> dict:
             with urllib.request.urlopen(req, timeout=900) as r:
                 return json.load(r)
         except urllib.error.HTTPError as exc:
-            detail = exc.read().decode("utf-8", "replace")[:400].replace(secret, "***")
-            print(f"  ⚠ HTTP {exc.code} (حجم البرومت {len(body)} بايت، محاولة {i + 1}/3): {detail}")
+            detail_full = exc.read().decode("utf-8", "replace").replace(secret, "***")
+            detail = detail_full[:400]
+            print(f"  ⚠ HTTP {exc.code} (حجم البرومت {len(body)} بايت، محاولة {i + 1}/4): {detail}")
             last = exc
             if exc.code not in (429, 500, 502, 503, 504, 529):
                 break
+            if exc.code == 429:  # حدّ المزوّد: انتظر موعد الإتاحة المعلن (حتى 5.5 دقيقة)
+                try:
+                    at = json.loads(detail_full)["error"]["retryAtMs"] / 1000
+                    time.sleep(max(15, min(at - time.time(), 330)))
+                except Exception:
+                    pass
         except Exception as exc:  # انقطاع أو مهلة
             print(f"  ⚠ {type(exc).__name__}: {str(exc)[:200]}")
             last = exc
@@ -156,14 +182,20 @@ def main() -> int:
             print("✘ المحرّك أرجع 10 بلا خطوة وكيل معلّقة")
             return 2
         problems = ""
+        fb_dir = ROOT / "fallback" / a.date
+        answer = fb_dir / f"{s['id']}.answer.txt"
         for t in range(1, a.tries + 1):
-            print(f"▶ {s['id']}: محاولة {t} عبر النموذج")
-            time.sleep(int(os.environ.get("LLM_GAP_SECONDS", "20")))  # تخفيف حد الدقيقة للمزوّد المجاني
-            try:
-                files = write_outputs(s, a.date, chat(build_prompt(s, a.date, problems)))
-            except Exception as exc:  # الشبكة أو المزوّد
-                print(f"✘ نداء النموذج فشل: {type(exc).__name__}: {str(exc)[:300]}")
-                files = []
+            print(f"▶ {s['id']}: محاولة {t} عبر " + ("إجابة Claude الاحتياطية" if answer.is_file() else "النموذج"))
+            prompt = build_prompt(s, a.date, problems)
+            if answer.is_file():
+                files = write_outputs(s, a.date, answer.read_text(encoding="utf-8"))
+            else:
+                time.sleep(int(os.environ.get("LLM_GAP_SECONDS", "20")))  # تخفيف حد الدقيقة للمزوّد المجاني
+                try:
+                    files = write_outputs(s, a.date, chat(prompt))
+                except Exception as exc:  # الشبكة أو المزوّد
+                    print(f"✘ نداء النموذج فشل: {type(exc).__name__}: {str(exc)[:300]}")
+                    files = []
             if not files:
                 problems = "لم تُرجَع أي ملفات بالصيغة المطلوبة."
                 continue
@@ -173,7 +205,10 @@ def main() -> int:
                 break
             problems = c.stdout[-1500:]
         else:
-            print(f"✘ تعذّر إتمام {s['id']} بعد {a.tries} محاولات — يلزم تدخّل")
+            fb_dir.mkdir(parents=True, exist_ok=True)
+            (fb_dir / f"{s['id']}.prompt.md").write_text(build_prompt(s, a.date), encoding="utf-8")
+            print(f"✘ تعذّر إتمام {s['id']} بعد {a.tries} محاولات — حُفظ البرومت الكامل في fallback/{a.date}/{s['id']}.prompt.md "
+                  f"ليكتب Claude الإجابة في {s['id']}.answer.txt بصيغة <<<FILE>>> نفسها")
             return 2
     print("✘ تجاوز الحد الأعلى لخطوات الوكيل")
     return 2

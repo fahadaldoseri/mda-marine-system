@@ -72,11 +72,27 @@ jobs:
         env:
           FREELLMAPI_GOOGLE_KEY: ${{ secrets.FREELLMAPI_GOOGLE_KEY }}
           FREELLMAPI_GROQ_KEY: ${{ secrets.FREELLMAPI_GROQ_KEY }}
+          FREELLMAPI_OPENROUTER_KEY: ${{ secrets.FREELLMAPI_OPENROUTER_KEY }}
+          FREELLMAPI_CEREBRAS_KEY: ${{ secrets.FREELLMAPI_CEREBRAS_KEY }}
+          FREELLMAPI_MISTRAL_KEY: ${{ secrets.FREELLMAPI_MISTRAL_KEY }}
+          FREELLMAPI_NVIDIA_KEY: ${{ secrets.FREELLMAPI_NVIDIA_KEY }}
+          FREELLMAPI_COHERE_KEY: ${{ secrets.FREELLMAPI_COHERE_KEY }}
+          FREELLMAPI_CLOUDFLARE_KEY: ${{ secrets.FREELLMAPI_CLOUDFLARE_KEY }}
+          FREELLMAPI_ZHIPU_KEY: ${{ secrets.FREELLMAPI_ZHIPU_KEY }}
+          FREELLMAPI_AION_KEY: ${{ secrets.FREELLMAPI_AION_KEY }}
+          FREELLMAPI_MODELSCOPE_KEY: ${{ secrets.FREELLMAPI_MODELSCOPE_KEY }}
+          FREELLMAPI_SILICONFLOW_KEY: ${{ secrets.FREELLMAPI_SILICONFLOW_KEY }}
         run: |
           bash "$CANON/brain/tools/freellmapi_up.sh"
           [ -f "$HOME/.freellmapi.env" ] || exit 0
           cat "$HOME/.freellmapi.env" | sed -n 's/^export \(LLM_BASE_URL\|LLM_NODE\)=\(.*\)/\1=\2/p' >> "$GITHUB_ENV"
           k=$(sed -n 's/^export LLM_API_KEY=//p' "$HOME/.freellmapi.env"); echo "::add-mask::$k"; echo "LLM_API_KEY=$k" >> "$GITHUB_ENV"
+
+      - name: إجابات Claude الاحتياطية (إن وُجدت)
+        working-directory: /home/ubuntu/mda-marine-system
+        run: |
+          git fetch -q origin "fallback/$D" 2>/dev/null && git checkout -q FETCH_HEAD -- "brain/fallback/$D" 2>/dev/null \
+            && echo "استُعيدت إجابات احتياطية: $(ls brain/fallback/$D | tr '\n' ' ')" || echo "لا إجابات احتياطية"
 
       - name: الخط حتى G069 (خطوات الوكيل بالنموذج المجاني)
         working-directory: /home/ubuntu/mda-marine-system/brain
@@ -92,6 +108,15 @@ jobs:
           echo "### حكم النشر $D: $v (خط $rc)" >> "$GITHUB_STEP_SUMMARY"
           # المحرّك يقف عند D005 (خطوة خادم Manus) بعد G069، وهذا متوقع؛ الحاكم هو الحكم.
           [ "$v" = 0 ] || [ "$v" = 3 ] || exit 1
+
+      - name: حفظ برومت الخطوة الفاشلة للاحتياط (فرع fallback/D)
+        if: failure()
+        working-directory: /home/ubuntu/mda-marine-system
+        run: |
+          ls "brain/fallback/$D"/*.prompt.md >/dev/null 2>&1 || exit 0
+          git checkout -q -B "fallback/$D"
+          git add -f "brain/fallback/$D"
+          git commit -q -m "برومت احتياطي $D" && git push -q -f origin "fallback/$D" && echo "حُفظ: fallback/$D"
 
       - name: سجل freellmapi (عند الفشل فقط)
         if: failure()

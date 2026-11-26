@@ -3,6 +3,7 @@
 # الإصدار مثبّت على التزام راجعه Claude في 2026-11-26.
 # مفاتيح المزوّدين تُقرأ من متغيرات البيئة السرية ولا تُطبع:
 #   FREELLMAPI_GROQ_KEY  FREELLMAPI_GOOGLE_KEY  FREELLMAPI_OPENROUTER_KEY  FREELLMAPI_CEREBRAS_KEY  FREELLMAPI_MISTRAL_KEY
+#   FREELLMAPI_NVIDIA_KEY FREELLMAPI_COHERE_KEY FREELLMAPI_CLOUDFLARE_KEY(account_id:token) FREELLMAPI_ZHIPU_KEY FREELLMAPI_AION_KEY FREELLMAPI_MODELSCOPE_KEY FREELLMAPI_SILICONFLOW_KEY
 # الناتج: ملف بيئة (0600) يُحمَّل قبل الخطوتين:  . "$FREELLMAPI_ENV_FILE"
 # رمز الخروج: 0 جاهز، 3 لا مفاتيح مزوّدين (تبقى الخطوتان اختياريتين وتفشلان بأمان)، 1 عطل.
 set -uo pipefail
@@ -13,7 +14,7 @@ PORT="${FREELLMAPI_PORT:-3001}"
 ENV_OUT="${FREELLMAPI_ENV_FILE:-$HOME/.freellmapi.env}"
 
 keys_json=$(node -e '
-const m={groq:"FREELLMAPI_GROQ_KEY",google:"FREELLMAPI_GOOGLE_KEY",openrouter:"FREELLMAPI_OPENROUTER_KEY",cerebras:"FREELLMAPI_CEREBRAS_KEY",mistral:"FREELLMAPI_MISTRAL_KEY"};
+const m={groq:"FREELLMAPI_GROQ_KEY",google:"FREELLMAPI_GOOGLE_KEY",openrouter:"FREELLMAPI_OPENROUTER_KEY",cerebras:"FREELLMAPI_CEREBRAS_KEY",mistral:"FREELLMAPI_MISTRAL_KEY",nvidia:"FREELLMAPI_NVIDIA_KEY",cohere:"FREELLMAPI_COHERE_KEY",cloudflare:"FREELLMAPI_CLOUDFLARE_KEY",zhipu:"FREELLMAPI_ZHIPU_KEY",aion:"FREELLMAPI_AION_KEY",modelscope:"FREELLMAPI_MODELSCOPE_KEY",siliconflow:"FREELLMAPI_SILICONFLOW_KEY"};
 const keys=Object.entries(m).filter(([,v])=>process.env[v]).map(([p,v])=>({platform:p,key:process.env[v],label:"seawatch"}));
 process.stdout.write(JSON.stringify({keys}));')
 nkeys=$(node -e 'console.log(JSON.parse(process.argv[1]).keys.length)' "$keys_json")
