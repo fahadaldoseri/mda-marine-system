@@ -1,0 +1,206 @@
+{
+  "date": "2026-11-22",
+  "window": "خلال 24 ساعة السابقة",
+  "scale_version": 1,
+  "registry_version": 1,
+  "scale_levels": [
+    {
+      "ar": "حرج",
+      "rank": 5,
+      "token": "critical",
+      "color": "#FFA3A3",
+      "marker": "■ ■ ■ ■ ■"
+    },
+    {
+      "ar": "مرتفع جدًا",
+      "rank": 4,
+      "token": "severe",
+      "color": "#FFA96B",
+      "marker": "▲ ▲ ▲ ▲"
+    },
+    {
+      "ar": "مرتفع",
+      "rank": 3,
+      "token": "high",
+      "color": "#FFC24D",
+      "marker": "▲ ▲ ▲"
+    },
+    {
+      "ar": "متوسط",
+      "rank": 2,
+      "token": "med",
+      "color": "#d29119",
+      "marker": "▲ ▲"
+    },
+    {
+      "ar": "منخفض",
+      "rank": 1,
+      "token": "low",
+      "color": "#28b45a",
+      "marker": "▲"
+    }
+  ],
+  "overall": {
+    "level": "مرتفع جدًا",
+    "rank": 4,
+    "top_zone": "مضيق هرمز وخليج عُمان والخليج العربي",
+    "top_zone_id": "Z1",
+    "basis": "أعلى نطاق: مضيق هرمز وخليج عُمان والخليج العربي — وقائع مؤهّلة: هجوم — بلاغ UKMTO 215-26 عن إصابة ناقلة بمقذوف في مؤخرتها على بعد 11 ميلًا بحريًا شمال خصب · 21/11/2026 · هجوم — بلاغ UKMTO 216-26 عن إصابة ناقلة بمقذوف في غرفة المحركات على بعد 17 ميلًا بحريًا شرق خصب · 21/11/2026"
+  },
+  "zones": [
+    {
+      "id": "Z1",
+      "name": "مضيق هرمز وخليج عُمان والخليج العربي",
+      "level": "مرتفع جدًا",
+      "rank": 4,
+      "confirmed": 2,
+      "probable": 0,
+      "excluded": 0,
+      "events": 2,
+      "qualifying_codes": [
+        "MN-2026-11-22-01",
+        "MN-2026-11-22-02"
+      ],
+      "categories": [
+        "هجوم على سفينة"
+      ],
+      "basis": "وقائع مؤهّلة: هجوم — بلاغ UKMTO 215-26 عن إصابة ناقلة بمقذوف في مؤخرتها على بعد 11 ميلًا بحريًا شمال خصب · 21/11/2026 · هجوم — بلاغ UKMTO 216-26 عن إصابة ناقلة بمقذوف في غرفة المحركات على بعد 17 ميلًا بحريًا شرق خصب · 21/11/2026",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-22"
+    },
+    {
+      "id": "Z2",
+      "name": "باب المندب والبحر الأحمر",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-22"
+    },
+    {
+      "id": "Z3",
+      "name": "بحر العرب",
+      "level": "متوسط",
+      "rank": 2,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "استمراري — آخر واقعة مؤهّلة في هذا القطاع بتاريخ 2026-11-21.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": true,
+      "last_change": "2026-11-21",
+      "carry_from": "2026-11-21"
+    },
+    {
+      "id": "Z4",
+      "name": "القرن الأفريقي",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-22"
+    },
+    {
+      "id": "Z5",
+      "name": "المحيط الهندي",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-22"
+    }
+  ],
+  "counter": {
+    "total": 2,
+    "qualifying": 2,
+    "confirmed": 2,
+    "probable": 0,
+    "unconfirmed_qualifying": 0,
+    "unconfirmed_total": 0,
+    "excluded": 0,
+    "nonspatial": 0
+  },
+  "generated_from": "cumulative-2026/daily/2026-11-22.json",
+  "events": [
+    {
+      "code": "MN-2026-11-22-01",
+      "title": "هجوم — بلاغ UKMTO 215-26 عن إصابة ناقلة بمقذوف في مؤخرتها على بعد 11 ميلًا بحريًا شمال خصب · 21/11/2026",
+      "area": "مضيق هرمز",
+      "class": "بلاغ رسمي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": true,
+      "confirmation": "confirmed",
+      "qualify_reason": "نوع مؤهّل: «هجوم» وهدف بحري/ملاحي: «ناقلة»",
+      "incident_group": "MN-2026-11-22-01",
+      "source_excerpt": "UKMTO WARNING 215-26 - ATTACK Incident Date 21 Nov 2026 Incident Time: 0500UTC UKMTO has received a report of an incident 11NM north of Khasab, Oman. A Tanker transiting outbound in the Strait of Hormuz has been hit on the stern by an unknown projectile. There are no reported casualties at this time. Environmental impact is currently unconfirmed.",
+      "category": "هجوم على سفينة"
+    },
+    {
+      "code": "MN-2026-11-22-02",
+      "title": "هجوم — بلاغ UKMTO 216-26 عن إصابة ناقلة بمقذوف في غرفة المحركات على بعد 17 ميلًا بحريًا شرق خصب · 21/11/2026",
+      "area": "مضيق هرمز",
+      "class": "بلاغ رسمي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": true,
+      "confirmation": "confirmed",
+      "qualify_reason": "نوع مؤهّل: «هجوم» وهدف بحري/ملاحي: «ناقلة»",
+      "incident_group": "MN-2026-11-22-02",
+      "source_excerpt": "UKMTO WARNING 216-26 - ATTACK Incident Date: 21 Nov 2026 Incident Time: 0550UTC UKMTO has received a report of an incident 17NM east of Khasab, Oman. A Tanker transiting outbound in the Strait of Hormuz has been hit in the engine room by an unknown projectile. There are no reported casualties at this time. Environmental impact is currently unconfirmed.",
+      "category": "هجوم على سفينة"
+    }
+  ]
+}
