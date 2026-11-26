@@ -166,15 +166,54 @@ def write_outputs(s: dict, date: str, text: str) -> list[str]:
     return done
 
 
+def heal_downstream(date: str, out: str, healed: set) -> bool:
+    """بوابة لاحقة رفضت ما أنتجه نموذج مجاني (مثل مفردات الموقع في الدفتر): يُعاد طلب الخطوة المسؤولة
+    مع نص الرفض، ثم يستأنف المحرّك (الإعادة الآلية تحسب المتأثر). مرتان كحد أقصى."""
+    import re as _re
+    m = _re.search(r"توقف عند (\w+)", out)
+    if not m or len(healed) >= 2:
+        return False
+    log = ROOT / "logs" / "runbook" / date / f"{m.group(1)}.log"
+    if not log.is_file():
+        return False
+    text = log.read_text(encoding="utf-8", errors="replace")[-2500:]
+    mf = runbook.load(str(ROOT))
+    for s in mf["steps"]:
+        if s.get("kind") != "agent" or s["id"] in healed:
+            continue
+        if not any(w.replace("{date}", date).lstrip("./") in text for w in s.get("writes", [])):
+            continue
+        extra = ""
+        if "قيمة خارج السجل" in text:
+            import check_area_vocabulary as cav  # noqa: PLC0415
+            names, _ = cav.load_allowed(ROOT)
+            extra = ("\nقيم حقل area المسموحة حرفيًا (قيمة واحدة أو عدة قيم مفصولة بـ « · »، ولا شيء غيرها): "
+                     + " | ".join(sorted(names)) + " | المنطقة كاملة | سياق إقليمي")
+        print(f"▶ إصلاح لاحق: {s['id']} بعد رفض {m.group(1)}")
+        healed.add(s["id"])
+        try:
+            time.sleep(int(os.environ.get("LLM_GAP_SECONDS", "20")))
+            files = write_outputs(s, date, chat(build_prompt(s, date, "رفضت بوابة لاحقة الملف الذي كتبته:\n" + text + extra)))
+        except Exception as exc:
+            print(f"✘ نداء الإصلاح فشل: {type(exc).__name__}: {str(exc)[:300]}")
+            return False
+        return bool(files)
+    return False
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", required=True)
     ap.add_argument("--max-steps", type=int, default=8)
     ap.add_argument("--tries", type=int, default=2)
     a = ap.parse_args()
+    healed: set = set()
+    sys.path.insert(0, str(ROOT / "validators"))
     for _ in range(a.max_steps):
         r = sh(["run", "--date", a.date])
         print(r.stdout[-3000:])
+        if r.returncode not in (0, 10) and heal_downstream(a.date, r.stdout, healed):
+            continue
         if r.returncode != 10:
             return r.returncode
         s = waiting_step(a.date)
