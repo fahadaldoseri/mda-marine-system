@@ -1394,6 +1394,60 @@
       ]
     },
     {
+      "id": "S074",
+      "title": "دمج مصادر الواقعة الواحدة وإعادة العدّ بعد الربط",
+      "kind": "script",
+      "phase": "write",
+      "assert": [
+        {
+          "type": "cmd",
+          "command": [
+            "bash",
+            "-lc",
+            "test -s logs/runbook/{date}/S074.log"
+          ]
+        }
+      ],
+      "links": {
+        "rules": [
+          "القاعدة 6 في sections/10-sources.md: إكمال الواقعة من عدة مصادر",
+          "قرار فهد 21 نوفمبر 2026: تشغيل أداة الدمج وتصحيح العدّ"
+        ],
+        "files": [
+          "tools/merge_event_sources.py",
+          "tools/classify_zones.py",
+          "tools/ledger_totals.py",
+          "tools/derive_event_links.py"
+        ],
+        "folders": [],
+        "gates": [],
+        "tests": [
+          "tests/test_merge_event_sources.py",
+          "tests/test_duplicate_not_counted.py"
+        ]
+      },
+      "on_fail": "stop",
+      "command": [
+        "bash",
+        "-lc",
+        "B=\"$PWD\"; export B SITE; python3 tools/merge_event_sources.py --ledger cumulative-2026/daily --apply; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; python3 \"$B/tools/classify_zones.py\" --date \"$D\" --write; rc=$?; if [ $rc -ne 0 ]; then exit $rc; fi; python3 \"$B/tools/ledger_totals.py\" --date \"$D\" --write; exit $?"
+      ],
+      "ok_rc": [
+        0
+      ],
+      "warn_rc": [],
+      "writes": [
+        "cumulative-2026/daily/",
+        "web/zones/{date}.json",
+        "web/kpis-totals/{date}.json"
+      ],
+      "reads": [
+        "cumulative-2026/daily/",
+        "appendices/zone-registry.json",
+        "appendices/zone-overrides.json"
+      ]
+    },
+    {
       "id": "W040",
       "title": "علامة التشغيل اليومية (pipeline mark)",
       "kind": "script",

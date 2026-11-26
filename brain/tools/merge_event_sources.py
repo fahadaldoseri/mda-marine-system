@@ -156,11 +156,92 @@ def merge_event_records(rows: list[dict[str, Any]]) -> tuple[list[dict[str, Any]
 merge_event_sources = merge_event_records
 
 
+def _indent_of(text: str) -> int:
+    for line in text.splitlines()[1:3]:
+        stripped = line.lstrip(" ")
+        if stripped and len(line) != len(stripped):
+            return len(line) - len(stripped)
+    return 2
+
+
+def merge_ledger(daily_dir: Path, apply: bool) -> dict[str, Any]:
+    """الدمج على الدفتر اليومي كله (S074): مجموعات duplicate_of تعبر الأيام.
+
+    لا يُلمس إلا صف جذر له تكرار واحد على الأقل، ولا يُكتب فيه إلا `sources`
+    و`sources_basis`. الحقل `source` يبقى كما هو لأن مدققات سجل المصادر تقرؤه.
+    """
+    files: list[tuple[Path, str, list[dict[str, Any]]]] = []
+    rows: list[dict[str, Any]] = []
+    for f in sorted(daily_dir.glob("*.json")):
+        text = f.read_text(encoding="utf-8")
+        data = json.loads(text)
+        if not isinstance(data, list):
+            continue
+        data = [r for r in data if isinstance(r, dict)]
+        files.append((f, text, data))
+        rows.extend(r for r in data if r.get("code"))
+    seen: set[str] = set()
+    unique = []
+    for r in rows:  # رمز مكرر عبر ملفين لا يُسقط الدمج كله: الأول يحكم
+        if r["code"] in seen:
+            continue
+        seen.add(r["code"])
+        unique.append(r)
+    codes = {r["code"] for r in unique}
+    usable = [r for r in unique if not r.get("duplicate_of") or r["duplicate_of"] in codes]
+    # تكرار يشير إلى الدفتر المجمّد أو سجل IMO خارج اليومي: يبقى بلا دمج
+    usable_codes = {r["code"] for r in usable}
+    usable = [dict(r, duplicate_of=r.get("duplicate_of") if r.get("duplicate_of") in usable_codes else None)
+              for r in usable]
+    roots = _root_map(usable)
+    grouped = {roots[c] for c in roots if roots[c] != c}
+    new_sources: dict[str, list[dict[str, str]]] = {}
+    skipped: list[dict[str, str]] = []
+    titles: list[str] = []
+    for root in sorted(grouped):  # كل مجموعة وحدها: صف بلا مقتطف يُسجَّل ولا يُسقط بقية الدفتر
+        members = [r for r in usable if roots[r["code"]] == root]
+        try:
+            merged, report = merge_event_records(members)
+        except MergeEventSourcesError as exc:
+            skipped.append({"root": root, "reason": str(exc)})
+            continue
+        new_sources[root] = next(r["sources"] for r in merged if r["code"] == root)
+        titles += report["title_regeneration_required_codes"]
+    changed_files = []
+    for f, text, data in files:
+        touched = False
+        for r in data:
+            code = r.get("code")
+            if code in new_sources and r.get("sources") != new_sources[code]:
+                members = sorted(c for c in roots if roots[c] == code and c != code)
+                r["sources"] = new_sources[code]
+                r["sources_basis"] = "دمج مصادر الواقعة من صفوف duplicate_of: " + "، ".join(members)
+                touched = True
+        if touched:
+            changed_files.append(f.name)
+            if apply:
+                f.write_text(json.dumps(data, ensure_ascii=False, indent=_indent_of(text)) + "\n",
+                             encoding="utf-8")
+    return {"groups": len(grouped), "roots": sorted(new_sources), "changed_files": changed_files,
+            "skipped": skipped, "applied": apply, "title_regeneration_required_codes": titles}
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--input", required=True, type=Path, help="ملف JSON للقائمة")
-    parser.add_argument("--output", required=True, type=Path, help="ملف JSON الناتج")
+    parser.add_argument("--input", type=Path, help="ملف JSON للقائمة")
+    parser.add_argument("--output", type=Path, help="ملف JSON الناتج")
+    parser.add_argument("--ledger", type=Path, help="مجلد الدفتر اليومي cumulative-2026/daily (وضع S074)")
+    parser.add_argument("--apply", action="store_true", help="مع --ledger: اكتب الصفوف الجذر")
     args = parser.parse_args(argv)
+    if args.ledger:
+        try:
+            print(json.dumps(merge_ledger(args.ledger, args.apply), ensure_ascii=False))
+            return 0
+        except (OSError, json.JSONDecodeError, MergeEventSourcesError) as exc:
+            print(f"فشل دمج مصادر الدفتر: {exc}", file=sys.stderr)
+            return 2
+    if not (args.input and args.output):
+        parser.error("--input و--output مطلوبان بلا --ledger")
     try:
         payload = json.loads(args.input.read_text(encoding="utf-8"))
         if not isinstance(payload, list):

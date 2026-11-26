@@ -22,6 +22,16 @@ LABELS = {
     'en': {'cumulative': 'Total since 28 February 2026', 'updated': 'Last updated'},
 }
 PAGES = {'ar': ('reports', '{date}.html'), 'en': ('reports/en', '{date}.html')}
+import sys as _sys, pathlib as _pl
+
+def _en_isolated(date: str) -> bool:
+    """النسخة الإنجليزية معزولة بالإصلاح الذاتي (auto_heal.en_isolated_safe)؟ عطل القراءة = لا عزل."""
+    try:
+        _sys.path.insert(0, str(_pl.Path(__file__).resolve().parents[1] / "tools"))
+        from auto_heal import en_isolated_safe  # noqa: PLC0415
+    except Exception:  # noqa: BLE001
+        return False
+    return en_isolated_safe(_pl.Path(__file__).resolve().parents[1], date)
 
 
 def _load(path: pathlib.Path):
@@ -73,6 +83,9 @@ def check(date: str, dist_root: pathlib.Path, brain: pathlib.Path) -> list[str]:
         problems.append('لا بطاقة معلنة بطبقات في سجل البطاقات')
     pages = {}
     for lang, (sub, pat) in PAGES.items():
+        if lang == 'en' and _en_isolated(date):
+            print(f'· النسخة الإنجليزية لليوم {date} معزولة بالإصلاح الذاتي: تُفحص الصفحة العربية وحدها')
+            continue
         p = dist_root / sub / pat.format(date=date)
         pages[lang] = p.read_text(encoding='utf-8') if p.exists() else None
         if pages[lang] is None:

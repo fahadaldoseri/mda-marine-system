@@ -161,6 +161,10 @@ def is_qualifying(event: dict, reg: dict, day_overrides: dict) -> tuple[bool, st
     if "qualifying" in ov:
         reason = ov.get("reason", "حكم محوكم")
         return bool(ov["qualifying"]), conf, reason
+    # 21 نوفمبر 2026: صف التكرار (duplicate_of، counts_as_new=false) لا يُحتسب واقعة
+    # مؤهّلة ثانية؛ واقعته الأصلية محتسبة في يومها، ومصادره مدموجة فيها (S074).
+    if event.get("counts_as_new") is False and event.get("duplicate_of"):
+        return False, conf, f"تكرار للواقعة {event.get('duplicate_of')} — لا يُحتسب مرة ثانية"
     if non_hit and not qual_hit:
         return False, conf, f"نوع غير مؤهّل: «{non_hit}»"
     if qual_hit:
