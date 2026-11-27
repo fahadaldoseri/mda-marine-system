@@ -14,6 +14,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -27,6 +28,7 @@ from pathlib import Path
 ROOT = Path(os.environ.get("BRAIN_DIR") or Path(__file__).resolve().parents[1])
 sys.path.insert(0, str(ROOT / "tools"))
 import runbook  # noqa: E402
+import w010_split  # noqa: E402
 
 MAX_FILE = 60_000  # حدّ كل ملف قراءة داخل البرومت (حرفًا)
 FILE_RE = re.compile(r"<<<\s*FILE:?[ \t]*([^\n>]+?)[ \t]*(?:>{1,3})?[ \t]*\r?\n(.*?)\r?\n[ \t]*<<<\s*END\s*>{0,3}[ \t]*(?=\r?\n|$)", re.S)
@@ -61,14 +63,15 @@ def compact_estimates(raw: str) -> str:
             "عبّر عن التقدير الجديد بنص احتمالي بلا رمز، أو أعد ذكر رمز قائم بمعناه حرفيًا):\n" + "\n".join(lines))
 
 
-def build_prompt(s: dict, date: str, problems: str = "") -> str:
-    prompt_src = (ROOT / s["prompt"]).read_text(encoding="utf-8")
-    included = {runbook.sub(i, date, None).lstrip("./") for i in runbook.INCLUDE_RE.findall(prompt_src)}
-    parts = [runbook.render_prompt(str(ROOT), s["prompt"], date)]
+def _reads(s: dict, date: str, included: set, kinds: list | None = None) -> list[str]:
+    """ملفات القراءة مضمّنة نصًّا. kinds: أنواع w010_split.read_kind المسموحة (None = كلها كما كان)."""
+    out = []
     for rel in s.get("reads", []):
         rel = rel.replace("{date}", date)
         # لا تكرار لما ضُمّن في البرومت، ولا أدوات ولا مهارات (النموذج لا يشغّلها).
         if rel == s["prompt"] or rel in included or rel.startswith("tools/") or rel.endswith("SKILL.md"):
+            continue
+        if kinds is not None and w010_split.read_kind(rel) not in kinds:
             continue
         p = ROOT / rel
         if p.is_file():
@@ -77,7 +80,15 @@ def build_prompt(s: dict, date: str, problems: str = "") -> str:
                 txt = compact_estimates(txt)
             if len(txt) > MAX_FILE:
                 txt = txt[:MAX_FILE] + "\n…[اقتُطع]"
-            parts.append(f"\n## الملف: {rel}\n```\n{txt}\n```")
+            out.append(f"\n## الملف: {rel}\n```\n{txt}\n```")
+    return out
+
+
+def build_prompt(s: dict, date: str, problems: str = "") -> str:
+    prompt_src = (ROOT / s["prompt"]).read_text(encoding="utf-8")
+    included = {runbook.sub(i, date, None).lstrip("./") for i in runbook.INCLUDE_RE.findall(prompt_src)}
+    parts = [runbook.render_prompt(str(ROOT), s["prompt"], date)]
+    parts += _reads(s, date, included)
     if s.get("id") == "W020":
         # قالب ملف الواجهة هو ملف آخر يوم سابق (لا مخطط العلامة): بنية الواجهة الفعلية بمفاتيحها.
         prev = sorted(q for q in (ROOT / "web" / "meta").glob("2???-??-??.json") if q.stem < date)
@@ -202,6 +213,142 @@ def write_outputs(s: dict, date: str, text: str) -> list[str]:
     return done
 
 
+# ───────────────────────── W010 على خمس مجموعات ─────────────────────────
+NO_FILES = "لم تُرجَع أي ملفات بالصيغة المطلوبة."
+
+
+def split_on() -> bool:
+    return os.environ.get("W010_SPLIT", "1") != "0"
+
+
+def parts_dir(date: str) -> Path:
+    return ROOT / "logs" / "runbook" / date / "W010-parts"
+
+
+def build_group_prompt(s: dict, date: str, g: str, problems: str = "", digest: str = "") -> str:
+    """برومت مجموعة واحدة: القالب نفسه بأمثلة المجموعة وأقسامها وقراءاتها فقط، وصيغة إخراج جزء واحد."""
+    cfg = w010_split.GROUPS[g]
+    m = runbook.load(str(ROOT))
+    secs = {x["id"]: x for x in m["sections"]}
+    orders = {secs[i]["order"] for i in cfg["sections"]}
+    src = runbook.sub((ROOT / s["prompt"]).read_text(encoding="utf-8"), date, None)
+    included = {runbook.sub(i, date, None).lstrip("./") for i in runbook.INCLUDE_RE.findall(src)}
+    reads = _reads(s, date, included, cfg["reads"])
+    ex_txt = w010_split.examples_subset(
+        runbook.render_prompt(str(ROOT), "sections/20-examples.md", date, 1), cfg["examples"])
+    sec_txt = w010_split.sections_subset(runbook.render_sections(str(ROOT), date), orders)
+    lex_mode = os.environ.get("W010_LEXICON", "full")  # filtered فقط بعد اجتياز G044 على تشغيل حقيقي
+
+    def inc(mt):
+        target = mt.group(1).strip()
+        if target.endswith("20-examples.md"):
+            return ex_txt
+        txt = runbook.render_prompt(str(ROOT), target, date, 1).rstrip("\n")
+        if target.endswith("20-lexicon.md") and lex_mode == "filtered":
+            return w010_split.filter_lexicon(txt, "\n".join(reads) + ex_txt + sec_txt)
+        return txt
+
+    out = []
+    for b in w010_split.split_blocks(src):
+        if not w010_split.keep_block(b, g):
+            continue
+        out.append(runbook.INCLUDE_RE.sub(inc, b).replace("{{sections}}", sec_txt))
+    part = f"logs/runbook/{date}/W010-parts/{g}.md"
+    names = "، ".join(secs[i]["heading"] for i in cfg["sections"])
+    out.append(
+        f"\n## نطاق هذا الطلب (جزء من خمسة)\n"
+        f"يُكتب التقرير على أجزاء مستقلة، وهذا الجزء «{g}». اكتب الأقسام التالية فقط، كلًّا تحت عنوانه `## <العنوان>` حرفيًا: {names}. "
+        "لا تكتب سطر العنوان الرئيسي ولا سطر الاقتباس ولا أي قسم آخر؛ تُركَّب بالشيفرة.")
+    if digest:
+        out.append("\n## موجز بقية الأقسام المكتوبة اليوم (مادة الخلاصة والتوجيهات؛ لا تنقل منه ما لا يسنده المصدر)\n" + digest)
+    out.extend(reads)
+    out.append(
+        "\n## صيغة الإخراج (إلزامية)\n"
+        "أرجع أقسام هذا الجزء كلها بالمحتوى الكامل بين علامتين حرفيًا، ولا شيء خارجهما:\n"
+        f"<<<FILE {part}>>>\nالمحتوى\n<<<END>>>\n"
+        f"المسار المسموح فقط: {part}. لا تختلق وقائع ولا مصادر ولا أوقات استرجاع؛ "
+        "خذ كل واقعة من الملفات المضمّنة أعلاه.")
+    if problems:
+        out.append(f"\n## رفض المحرّك المحاولة السابقة لهذه الأسباب، فأصلحها:\n{problems}")
+    return "\n".join(out)
+
+
+def _part_ok(g: str, text: str, manifest: dict) -> bool:
+    return bool(text) and not w010_split.missing_headings(text, g, manifest)
+
+
+def write_w010(s: dict, date: str, problems: str = "") -> list[str] | None:
+    """W010 بخمسة طلبات. None = التقسيم غير مدعوم للمانيفست الحالي (يُستعمل الطلب الواحد).
+
+    - الجزء الصالح المحفوظ (ببصمة برومته) لا يُعاد؛ ما فشل يُعاد وحده (مرتان كحد أقصى لكل جزء).
+    - رفض المحرّك يُنسب إلى المجموعات التي ذُكرت عناوين أقسامها في النص؛ تعذّر النسب = إعادة الكل.
+    - الأجزاء تبقى في logs/runbook/DATE/W010-parts ليستأنف منها التشغيل التالي."""
+    m = runbook.load(str(ROOT))
+    if not w010_split.supported(m):
+        print("  ⚠ مجموعات W010 لا تغطي أقسام المانيفست الحالية؛ يُستعمل الطلب الواحد")
+        return None
+    pd = parts_dir(date)
+    pd.mkdir(parents=True, exist_ok=True)
+    engine = bool(problems) and problems != NO_FILES
+    blamed = (w010_split.blame(problems, m) or set(w010_split.GROUPS)) if engine else set()
+    texts: dict[str, str] = {}
+    failed = []
+    called = 0
+    for g in w010_split.ORDER:
+        dig = w010_split.digest(texts, m) if g == "A" else ""
+        base = build_group_prompt(s, date, g, "", dig)
+        fp = hashlib.sha256(base.encode()).hexdigest()
+        f, meta = pd / f"{g}.md", pd / f"{g}.sha256"
+        if g not in blamed and f.is_file() and meta.is_file() and meta.read_text().strip() == fp:
+            old = f.read_text(encoding="utf-8")
+            if _part_ok(g, old, m):
+                texts[g] = old
+                print(f"  · W010 {g}: جزء محفوظ صالح، بلا إعادة")
+                continue
+        prob = problems if g in blamed else ""
+        ok = False
+        for t in range(1, 3):
+            if called:
+                time.sleep(int(os.environ.get("LLM_GAP_SECONDS", "20")))
+            called += 1
+            print(f"▶ W010 {g}: محاولة {t}")
+            try:
+                got = chat(build_group_prompt(s, date, g, prob, dig))
+            except Exception as exc:
+                print(f"✘ نداء النموذج فشل: {type(exc).__name__}: {str(exc)[:300]}")
+                prob = "تعذّر النداء"
+                continue
+            hit = {_norm(p): c for p, c in FILE_RE.findall(got)}
+            body = hit.get(f"logs/runbook/{date}/W010-parts/{g}.md", "")
+            miss = w010_split.missing_headings(body, g, m) if body else ["(لا ملف بالصيغة المطلوبة)"]
+            if miss:
+                prob = "أقسام ناقصة أو فارغة في هذا الجزء: " + "، ".join(miss)
+                print("  ✘ " + prob)
+                continue
+            texts[g] = body.rstrip("\n") + "\n"
+            f.write_text(texts[g], encoding="utf-8")
+            meta.write_text(fp, encoding="utf-8")
+            ok = True
+            break
+        if not ok:
+            failed.append(g)
+    if failed:
+        print(f"✘ W010: أجزاء فاشلة {failed}؛ الأجزاء الصالحة محفوظة في {pd} وتُعاد الفاشلة وحدها")
+        return []
+    out = ROOT / "reports" / f"{date}-sectioned.md"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(w010_split.assemble(date, texts, m), encoding="utf-8")
+    return [f"reports/{date}-sectioned.md"]
+
+
+def write_step(s: dict, date: str, problems: str = "") -> list[str]:
+    if s.get("id") == "W010" and split_on():
+        files = write_w010(s, date, problems)
+        if files is not None:
+            return files
+    return write_outputs(s, date, chat(build_prompt(s, date, problems)))
+
+
 def heal_downstream(date: str, out: str, healed: list) -> bool:
     """بوابة لاحقة رفضت ما أنتجه نموذج مجاني (مثل مفردات الموقع في الدفتر): يُعاد طلب الخطوة المسؤولة
     مع نص الرفض، ثم يستأنف المحرّك (الإعادة الآلية تحسب المتأثر). مرتان كحد أقصى."""
@@ -242,7 +389,7 @@ def heal_downstream(date: str, out: str, healed: list) -> bool:
         healed.append(s["id"])
         try:
             time.sleep(int(os.environ.get("LLM_GAP_SECONDS", "20")))
-            files = write_outputs(s, date, chat(build_prompt(s, date, "رفضت بوابة لاحقة الملف الذي كتبته:\n" + text + extra)))
+            files = write_step(s, date, "رفضت بوابة لاحقة الملف الذي كتبته:\n" + text + extra)
         except Exception as exc:
             print(f"✘ نداء الإصلاح فشل: {type(exc).__name__}: {str(exc)[:300]}")
             return False
@@ -274,18 +421,17 @@ def main() -> int:
         answer = fb_dir / f"{s['id']}.answer.txt"
         for t in range(1, a.tries + 1):
             print(f"▶ {s['id']}: محاولة {t} عبر " + ("إجابة Claude الاحتياطية" if answer.is_file() else "النموذج"))
-            prompt = build_prompt(s, a.date, problems)
             if answer.is_file():
                 files = write_outputs(s, a.date, answer.read_text(encoding="utf-8"))
             else:
                 time.sleep(int(os.environ.get("LLM_GAP_SECONDS", "20")))  # تخفيف حد الدقيقة للمزوّد المجاني
                 try:
-                    files = write_outputs(s, a.date, chat(prompt))
+                    files = write_step(s, a.date, problems)
                 except Exception as exc:  # الشبكة أو المزوّد
                     print(f"✘ نداء النموذج فشل: {type(exc).__name__}: {str(exc)[:300]}")
                     files = []
             if not files:
-                problems = "لم تُرجَع أي ملفات بالصيغة المطلوبة."
+                problems = NO_FILES
                 continue
             c = sh(["complete", s["id"], "--date", a.date])
             pre = "  " if c.returncode == 0 else "✘ رفض: "
