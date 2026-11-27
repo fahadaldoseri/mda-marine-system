@@ -1,0 +1,20 @@
+name: token-count-dry
+# تجربة جافة لعدّ الرموز بعدّاد Gemini. لا نشر ولا تلغرام ولا توليد. تُحذف بعد القياس.
+on:
+  push:
+    branches: [claude/project-thread-tlrmu2]
+    paths: [.github/workflows/token-count.yml, brain/tools/count_tokens_dry.py]
+permissions:
+  contents: read
+jobs:
+  count:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: count
+        env:
+          FREELLMAPI_GOOGLE_KEY: ${{ secrets.FREELLMAPI_GOOGLE_KEY }}
+        run: python3 brain/tools/count_tokens_dry.py 2026-11-26
