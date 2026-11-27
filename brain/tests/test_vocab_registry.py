@@ -215,6 +215,14 @@ else:
         ok(f"تغطية الأسطح كاملة ({day}) — لا سطح خارج البوابة")
     else:
         bad("تغطية الأسطح", (r.stdout or "").strip().splitlines()[-1:] or r.returncode)
+        # تشخيص: السطح المانع وما وجدته البوابة فيه (لا يغيّر الحكم، يكشف السبب في سجل G001)
+        for _ln in (r.stdout or "").splitlines():
+            if "مانع" in _ln or "منع (" in _ln:
+                print("        · تشخيص السطح:", _ln.strip()[:300])
+        _tail = [x for x in (r.stdout or "").splitlines() if x.strip().startswith(("·", "-", "•"))]
+        for _ln in _tail[:40]:
+            print("        · ", _ln.strip()[:300])
+        print("        · stderr:", (r.stderr or "")[-300:].replace("\n", " "))
 
 print(f"── الاختبارات: {len(fails)} فشل · {len(skips)} تخطٍّ موثَّق")
 for s in skips:
