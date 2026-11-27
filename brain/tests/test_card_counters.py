@@ -530,7 +530,9 @@ class HeroKpiGateTests(unittest.TestCase):
         self.assertEqual(card["value"], str(today))
         self.assertIn(str(today), card["detail"])
         # الصياغة المعتمدة منذ ef0145d7 (إصلاح بطاقات الأرقام 2026-11-11): التأهل لا يعني الإثبات.
-        self.assertIn("لم تثبت أيٌّ منها", card["detail"])
+        import unicodedata  # ترتيب الشدّة والتنوين يختلف بين المصدرين؛ التطبيع القانوني يوحّده
+        self.assertIn(unicodedata.normalize("NFC", "لم تثبت أيٌّ منها"),
+                      unicodedata.normalize("NFC", card["detail"]))
         self.assertEqual(validate_hero_kpis(self.meta, self.zones, self.registry), [])
 
     def test_unconfirmed_detail_uses_singular_for_one_narrative(self):
