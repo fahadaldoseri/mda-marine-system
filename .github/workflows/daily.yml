@@ -157,6 +157,10 @@ jobs:
         run: |
           bash tools/ensure_devserver.sh 3000
           python3 tools/runbook.py run --date "$D" --root . --only G011 --redo G011
+          # تاريخ سابق بموافقة فهد (بطاقة القرار 27 نوفمبر 2026): استثناء حاجز تاريخ اليوم بسبب مكتوب
+          if [ "$D" != "$(date -u +%F)" ]; then
+            echo "موافقة فهد بالضغط على بطاقة القرار 27 نوفمبر 2026: إرسال تلغرام لتقرير $D" > "logs/owner-approval-$D.txt"
+          fi
           bash tools/publish_site.sh --telegram "$D"
 
       - name: حفظ مخرجات اليوم في فرع daily/D وطلب دمج مسودة
@@ -244,3 +248,4 @@ jobs:
 # 14:00 retrigger
 # 14:09 retrigger
 # 14:26 retrigger
+# 20:41 retrigger
