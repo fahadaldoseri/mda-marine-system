@@ -35,6 +35,7 @@ sys.path.insert(0, str(ROOT))
 
 from validators import check_card_counters as card_counter_module  # noqa: E402
 from tools.arabic_counter import format_arabic_count  # noqa: E402
+from tools.build_hero_kpis import metric  # noqa: E402
 from validators.check_card_counters import (_counter, validate_card_documents,
                                              validate_hero_kpis, validate_official_cards,
                                              _measure_rendered_target)  # noqa: E402
@@ -513,16 +514,26 @@ class HeroKpiGateTests(unittest.TestCase):
         self.assertTrue(any("سطح التقرير/الطباعة" in e and "2" in e for e in errors), errors)
 
     def test_unconfirmed_card_keeps_total_and_qualifying_dimensions(self):
+        """بطاقة الروايات تُقرأ من العدّاد الحاكم (kpis-totals) بقرار المالك 2026-11-19،
+        لا من عدّاد المناطق: قيمتها عدد روايات سجل اليوم، والتأهل لا يعني الإثبات.
+
+        كان الاختبار يقارن بـ zones.unconfirmed_total، وهو عدّاد آخر (مجموعات حوادث المناطق)،
+        فيسقط في أي يوم يختلف فيه العدّادان رغم سلامة العقد؛ والمحكّ الفعلي لاتساق العدّادين
+        هو validate_hero_kpis أدناه."""
         counter = self.zones["counter"]
         total = int(counter["unconfirmed_total"])
         qualifying = int(counter["unconfirmed_qualifying"])
         self.assertGreaterEqual(total, qualifying)
         card = next(c for c in self.meta["hero_kpis"] if c["id"] == "unconfirmed-narratives")
-        self.assertEqual(card["value"], str(total))
-        self.assertIn(str(total), card["detail"])
-        self.assertIn(str(qualifying), card["detail"])
+        kpis = json.loads((ROOT / f"web/kpis-totals/{DAY}.json").read_text(encoding="utf-8"))
+        today = int(metric(kpis, "unconfirmed-narratives", "today") or 0)
+        self.assertEqual(card["value"], str(today))
+        self.assertIn(str(today), card["detail"])
         # الصياغة المعتمدة منذ ef0145d7 (إصلاح بطاقات الأرقام 2026-11-11): التأهل لا يعني الإثبات.
-        self.assertIn("لم تثبت أيٌّ منها", card["detail"])
+        import unicodedata  # ترتيب الشدّة والتنوين يختلف بين المصدرين؛ التطبيع القانوني يوحّده
+        self.assertIn(unicodedata.normalize("NFC", "لم تثبت أيٌّ منها"),
+                      unicodedata.normalize("NFC", card["detail"]))
+        self.assertEqual(validate_hero_kpis(self.meta, self.zones, self.registry), [])
 
     def test_unconfirmed_detail_uses_singular_for_one_narrative(self):
         """الرواية الواحدة تُصرف بالمفرد وفق عقد البطاقة نفسه.

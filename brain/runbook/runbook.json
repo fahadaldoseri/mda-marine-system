@@ -954,13 +954,15 @@
           "web/meta/{date}.json",
           "appendices/estimate-code-map.json",
           "tools/register_estimate.py",
-          "skills/runbook-operations-ops/SKILL.md"
+          "skills/runbook-operations-ops/SKILL.md",
+          "tools/agent_write_llm.py"
         ],
         "gates": [],
         "tests": [
           "tests/test_runbook_engine.sh",
           "tests/test_write_prompt.py",
-          "tests/test_g030_code_spaces.py"
+          "tests/test_g030_code_spaces.py",
+          "tests/test_agent_write_llm.py"
         ]
       },
       "on_fail": "stop",
@@ -1076,7 +1078,8 @@
         ],
         "files": [
           "tools/ledger_source_excerpt.py",
-          "cumulative-2026/daily/"
+          "cumulative-2026/daily/",
+          "tools/agent_write_llm.py"
         ],
         "gates": [],
         "tests": []
@@ -1164,7 +1167,8 @@
           "ب2 — ترتيب الأقسام"
         ],
         "files": [
-          "templates/mark-schema.json"
+          "templates/mark-schema.json",
+          "tools/agent_write_llm.py"
         ],
         "gates": [],
         "tests": []
@@ -1821,7 +1825,7 @@
       "command": [
         "bash",
         "-lc",
-        "B=\"$PWD\"; export B SITE; python3 \"$B/tools/build_lexicon_corpus.py\" --apply; rc=$?; [ $rc -eq 0 ] || exit $rc; python3 \"$B/tools/build_lexicon_corpus.py\" --check; rc=$?; exit $rc"
+        "B=\"$PWD\"; export B SITE; if [ -f \"feeds/feeds-$D.status.json\" ]; then python3 \"$B/tools/source_counts.py\" --date \"$D\" --write || exit $?; fi; python3 \"$B/tools/build_lexicon_corpus.py\" --apply; rc=$?; [ $rc -eq 0 ] || exit $rc; python3 \"$B/tools/build_lexicon_corpus.py\" --check; rc=$?; exit $rc"
       ],
       "ok_rc": [
         0
@@ -3879,7 +3883,8 @@
           "runbook/prompts/write-en-master.md",
           "tools/validate_en_master.py",
           "reports/{date}-sectioned.md",
-          "../site/sources/i18n/en/{date}-sectioned.en.md"
+          "../site/sources/i18n/en/{date}-sectioned.en.md",
+          "tools/agent_write_llm.py"
         ],
         "folders": [],
         "gates": [],
@@ -4044,7 +4049,7 @@
       "command": [
         "bash",
         "-lc",
-        "B=\"$PWD\"; export B SITE; printf 'بوابة عقد عدّادات بطاقة أهم الأخبار — اختبار موجب وسالبان قبل البناء\\n'; python3 -m unittest -v tests/test_card_counters.py tests/test_card_registry_pairs.py; rc=$?; printf 'نتيجة بوابة العقد: rc=%s\\n' \"$rc\"; exit $rc"
+        "B=\"$PWD\"; export B SITE; (cd \"$SITE\" && python3 \"$B/tools/sync_card_layers.py\" --date \"$D\" && python3 \"$B/tools/build_hero_kpis.py\" --date \"$D\" --apply && python3 generator/sync_from_brain.py --date \"$D\") || exit $?; printf 'بوابة عقد عدّادات بطاقة أهم الأخبار — اختبار موجب وسالبان قبل البناء\\n'; python3 -m unittest -v tests/test_card_counters.py tests/test_card_registry_pairs.py; rc=$?; printf 'نتيجة بوابة العقد: rc=%s\\n' \"$rc\"; exit $rc"
       ],
       "ok_rc": [
         0

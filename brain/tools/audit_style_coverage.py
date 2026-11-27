@@ -195,15 +195,17 @@ def strip_html(raw: str) -> str:
     return body + "\n" + "\n".join(ex.rows)
 
 
-def flatten_json(obj, out: list[str]) -> None:
+def flatten_json(obj, out: list[str], card: bool = False) -> None:
+    # قيم بطاقات المؤشرات (hero_kpis وofficial_cards) حقول مُهيكلة لا صياغة إنشائية: تُوسم بـ«[بطاقة]»
+    # كما في سطح HTML (قرار 2026-11-12)، فلا يُحسب تكرار «آخر تحديث المصدر» قالب جملة مانعًا.
     if isinstance(obj, str):
-        out.append(obj)
+        out.append(("[بطاقة] " + obj) if card else obj)
     elif isinstance(obj, dict):
-        for v in obj.values():
-            flatten_json(v, out)
+        for k, v in obj.items():
+            flatten_json(v, out, card or k in ("hero_kpis", "official_cards"))
     elif isinstance(obj, list):
         for v in obj:
-            flatten_json(v, out)
+            flatten_json(v, out, card)
 
 
 def _disabled_producers() -> dict:
@@ -382,6 +384,17 @@ def run_gate(cmd: list[str], text_file: Path) -> tuple[int, list[str]]:
     return r.returncode, keys[:6]
 
 
+def _blocked_findings(pc: int, sc: int, tgt: Path, surface: dict, extra: list[str]) -> list[str]:
+    """سبب المنع الفعلي لسطح مانع: أسطر البوابة الخام لا المرشَّحة (تشخيص لا يغيّر الحكم)."""
+    cmd = ["python3", str(BASE / "validators" / ("check_prose_defects.py" if pc not in (0, 1) else "check_style.py"))]
+    if pc not in (0, 1):
+        cmd += (extra or ["--md"])
+    r = subprocess.run(cmd + [str(tgt)], capture_output=True, text=True)
+    lines = [ln.strip() for ln in ((r.stdout or "") + (r.stderr or "")).splitlines() if ln.strip()]
+    keep = [ln for ln in lines if not ln.startswith(("✔", "مقبول", "|", "===", "الملف:"))]
+    return [ln[:260] for ln in keep[:30]]
+
+
 def surfaces(day: str) -> list[dict]:
     _tg = BASE / "tools" / "make_tg_digest.py"
     if _tg.exists():      # سطح مشتقٌّ من المتن والواجهة: يُبنى من المصدر قبل الفحص، فلا يُحكم على نسخة قديمة
@@ -535,7 +548,7 @@ def main() -> int:
             "note": note,
             "style": "مقبول" if sc == 0 else f"منع ({sc})",
             "prose": "مقبول" if pc == 0 else ("تحذير (1)" if pc == 1 else f"منع ({pc})"),
-            "findings": (s_out + p_out)[:6],
+            "findings": ((s_out + p_out)[:6] if ok else _blocked_findings(pc, sc, tgt, s, _extra)),
             "text_sha256": hashlib.sha256(tgt.read_bytes()).hexdigest()[:16],
         })
 
@@ -546,7 +559,7 @@ def main() -> int:
         print(f"{'السطح':<42} {'النتيجة':<14} {'الأسلوب':<10} {'المصطنعة':<10}")
         for r in rows:
             print(f"{r['label'][:41]:<42} {r['status']:<14} {r['style']:<10} {r['prose']:<10}  {r['note']}")
-            for f in r.get("findings", [])[:3]:
+            for f in r.get("findings", [])[:(30 if r["status"] == "مانع" else 3)]:
                 print(f"      · {f}")
         print(f"── الأسطح: {len(rows)} · مغطاة: {len(rows) - uncovered - blocked - deferred_count} · "
               f"مؤجلة معلنة: {deferred_count} · غير مغطاة: {uncovered} · مانعة: {blocked}")
