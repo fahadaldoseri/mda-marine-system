@@ -9,10 +9,6 @@ name: daily
 on:
   schedule:
     - cron: "40 1 * * *"
-  # مؤقت: الدفع إلى هذا الفرع يشغّل تشغيلًا حقيقيًا بنشر وتلغرام (أمر فهد 26 نوفمبر)؛ يُزال قبل الدمج.
-  push:
-    branches: [claude/project-thread-7ch11e]
-    paths: [.github/workflows/daily.yml]
   workflow_dispatch:
     inputs:
       date:
@@ -41,7 +37,7 @@ jobs:
       SITE_DIR: /home/ubuntu/mda-marine-system/site
       FALLBACK_DIR: /home/ubuntu/fallback
       # النشر في التشغيل المجدول أمر فهد الدائم؛ في التشغيل اليدوي بالاختيار.
-      PUBLISH: ${{ github.event_name == 'schedule' || github.event_name == 'push' || inputs.publish }}
+      PUBLISH: ${{ github.event_name == 'schedule' || inputs.publish }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -54,7 +50,7 @@ jobs:
           node-version: "20"
 
       - name: التاريخ
-        run: echo "D=${{ inputs.date || (github.event_name == 'push' && '2026-11-26') || '' }}" | sed 's/=$/='"$(date -u +%F)"'/' >> "$GITHUB_ENV"
+        run: echo "D=${{ inputs.date || '' }}" | sed 's/=$/='"$(date -u +%F)"'/' >> "$GITHUB_ENV"
 
       - name: حزم النظام والمسار القانوني
         run: |
@@ -157,10 +153,6 @@ jobs:
         run: |
           bash tools/ensure_devserver.sh 3000
           python3 tools/runbook.py run --date "$D" --root . --only G011 --redo G011
-          # تاريخ سابق بموافقة فهد (بطاقة القرار 27 نوفمبر 2026): استثناء حاجز تاريخ اليوم بسبب مكتوب
-          if [ "$D" != "$(date -u +%F)" ]; then
-            echo "موافقة فهد بالضغط على بطاقة القرار 27 نوفمبر 2026: إرسال تلغرام لتقرير $D" > "logs/owner-approval-$D.txt"
-          fi
           bash tools/publish_site.sh --telegram "$D"
 
       - name: حفظ مخرجات اليوم في فرع daily/D وطلب دمج مسودة
@@ -197,55 +189,3 @@ jobs:
           retention-days: 14
 # تشغيل 26 نوفمبر بعد ضم 22 وفجوة 23-25
 # + ترجمات 22 نوفمبر
-# 21:58 retrigger
-# 22:12 retrigger
-# 22:23 retrigger
-# 22:33 retrigger
-# 22:39 retrigger
-# 22:57 retrigger
-# 23:05 retrigger
-# 23:32 retrigger
-# 23:38 retrigger
-# 23:46 retrigger
-# 00:02 retrigger
-# 00:15 retrigger
-# 00:29 retrigger
-# 00:45 retrigger
-# 01:01 retrigger
-# 01:21 retrigger
-# 01:36 retrigger
-# 02:05 retrigger
-# 02:17 retrigger
-# 02:40 retrigger
-# 02:56 retrigger
-# 03:14 retrigger
-# 03:14 retrigger
-# 03:45 retrigger
-# 04:40 retrigger
-# 04:35 retrigger
-# 04:55 retrigger
-# 05:15 retrigger
-# 05:50 retrigger
-# 06:20 retrigger
-# 06:45 retrigger
-# 07:10 retrigger
-# 07:45 retrigger
-# 08:15 retrigger
-# 09:10 retrigger
-# 09:50 retrigger
-# 09:50 retrigger b
-# 09:55 retrigger
-# 10:05 retrigger
-# 10:40 retrigger
-# 11:05 retrigger
-# 11:15 retrigger
-# 11:40 retrigger
-# 12:05 retrigger
-# 12:17 retrigger
-# 12:52 retrigger
-# 13:30 retrigger
-# 13:37 retrigger
-# 14:00 retrigger
-# 14:09 retrigger
-# 14:26 retrigger
-# 20:41 retrigger
