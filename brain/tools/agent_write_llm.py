@@ -178,21 +178,32 @@ def _sync_en_dynamic(date: str) -> None:
                            capture_output=True, text=True)
         d = ROOT / "logs" / "runbook"
         d.mkdir(parents=True, exist_ok=True)
-        extra = ""
-        if r.returncode != 0:  # السطران المتقابلان عند الرفض: يُقرآن من artifact التشغيل بلا إعادة تشغيل
-            try:
-                import re as _re
-                m = _re.search(r"aligned_line=(\d+)", r.stdout + r.stderr)
-                if m:
-                    k = int(m.group(1))
-                    ar = [x for x in (ROOT / "reports" / f"{date}-sectioned.md").read_text(encoding="utf-8").splitlines() if x.strip()]
-                    en = [x for x in source_counts.english_master_path(date).read_text(encoding="utf-8").splitlines() if x.strip()]
-                    extra = f"\nAR[{k}]={ar[k - 1] if k <= len(ar) else ''}\nEN[{k}]={en[k - 1] if k <= len(en) else ''}\n"
-            except Exception as exc:  # noqa: BLE001
-                extra = f"\n(تعذّر استخراج السطرين: {type(exc).__name__})\n"
-        (d / "diag-en-master.txt").write_text(f"rc={r.returncode}\n{r.stdout}\n{r.stderr}{extra}", encoding="utf-8")
+        (d / "diag-en-master.txt").write_text(f"rc={r.returncode}\n{r.stdout}\n{r.stderr}", encoding="utf-8")
     except Exception as exc:  # التشخيص لا يوقف الخطوة؛ المدقق الحاكم يفصل
         print(f"  ⚠ تعذرت مزامنة الأصل الإنجليزي: {type(exc).__name__}: {str(exc)[:200]}")
+    _diag_pair(date)
+
+
+def _diag_pair(date: str) -> None:
+    """عند رفض validate_en_master يُلحق بملف التشخيص السطرين المتقابلين (يُقرآن من artifact التشغيل بلا إعادة تشغيل)."""
+    diag = ROOT / "logs" / "runbook" / "diag-en-master.txt"
+    try:
+        txt = diag.read_text(encoding="utf-8")
+        m = re.search(r"aligned_line=(\d+)", txt)
+        if not txt.startswith("rc=0") and m:
+            k = int(m.group(1))
+            ar = [x for x in (ROOT / "reports" / f"{date}-sectioned.md").read_text(encoding="utf-8").splitlines() if x.strip()]
+            en = [x for x in _en_master_path(date).read_text(encoding="utf-8").splitlines() if x.strip()]
+            diag.write_text(txt + f"\nAR[{k}]={ar[k - 1] if k <= len(ar) else ''}\nEN[{k}]={en[k - 1] if k <= len(en) else ''}\n",
+                            encoding="utf-8")
+    except (OSError, ValueError, IndexError):
+        return
+
+
+def _en_master_path(date: str) -> Path:
+    sys.path.insert(0, str(ROOT / "tools"))
+    import source_counts  # noqa: WPS433
+    return source_counts.english_master_path(date)
 
 
 def write_outputs(s: dict, date: str, text: str) -> list[str]:
