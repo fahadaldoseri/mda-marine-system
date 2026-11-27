@@ -30,6 +30,16 @@ def main() -> int:
     rc, out = run([str(CORPUS_TOOL), "--check"])
     if rc != 0:
         failures.append(f"معجم المفردات غير مطابق للمصادر (رمز {rc}): {out.strip()[-160:]}")
+        try:  # تشخيص: الكلمات الزائدة/الناقصة والمصادر الحاضرة (يظهر في سجل G001)
+            sys.path.insert(0, str(ROOT / "tools"))
+            import json as _j
+            import build_lexicon_corpus as _b
+            _stored = set(_j.loads((ROOT / "appendices" / "lexicon-corpus.json").read_text(encoding="utf-8"))["words"])
+            _fresh = set(_b.build()["words"])
+            print("   تشخيص المعجم · زائدة:", sorted(_fresh - _stored)[:20], "· ناقصة:", sorted(_stored - _fresh)[:20])
+            print("   تشخيص المصادر:", [str(p.relative_to(ROOT)) for p in _b.source_paths() if "sectioned" in p.name][-4:])
+        except Exception as e:  # noqa: BLE001
+            print("   تعذّر التشخيص:", e)
     else:
         print(f"   ✔ المعجم المشتق مطابق: {out.strip().splitlines()[-1][:110]}")
 
