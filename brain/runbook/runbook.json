@@ -4049,7 +4049,7 @@
       "command": [
         "bash",
         "-lc",
-        "B=\"$PWD\"; export B SITE; printf 'بوابة عقد عدّادات بطاقة أهم الأخبار — اختبار موجب وسالبان قبل البناء\\n'; python3 -m unittest -v tests/test_card_counters.py tests/test_card_registry_pairs.py; rc=$?; printf 'نتيجة بوابة العقد: rc=%s\\n' \"$rc\"; exit $rc"
+        "B=\"$PWD\"; export B SITE; (cd \"$SITE\" && python3 \"$B/tools/sync_card_layers.py\" --date \"$D\" && python3 \"$B/tools/build_hero_kpis.py\" --date \"$D\" --apply && python3 generator/sync_from_brain.py --date \"$D\") || exit $?; printf 'بوابة عقد عدّادات بطاقة أهم الأخبار — اختبار موجب وسالبان قبل البناء\\n'; python3 -m unittest -v tests/test_card_counters.py tests/test_card_registry_pairs.py; rc=$?; printf 'نتيجة بوابة العقد: rc=%s\\n' \"$rc\"; exit $rc"
       ],
       "ok_rc": [
         0
