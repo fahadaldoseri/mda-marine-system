@@ -1825,7 +1825,7 @@
       "command": [
         "bash",
         "-lc",
-        "B=\"$PWD\"; export B SITE; python3 \"$B/tools/build_lexicon_corpus.py\" --apply; rc=$?; [ $rc -eq 0 ] || exit $rc; python3 \"$B/tools/build_lexicon_corpus.py\" --check; rc=$?; exit $rc"
+        "B=\"$PWD\"; export B SITE; if [ -f \"feeds/feeds-$D.status.json\" ]; then python3 \"$B/tools/source_counts.py\" --date \"$D\" --write || exit $?; fi; python3 \"$B/tools/build_lexicon_corpus.py\" --apply; rc=$?; [ $rc -eq 0 ] || exit $rc; python3 \"$B/tools/build_lexicon_corpus.py\" --check; rc=$?; exit $rc"
       ],
       "ok_rc": [
         0
