@@ -1,0 +1,130 @@
+{
+  "created_by": "mark_components",
+  "created_reason": "bootstrap قبل اشتقاق أول مكوّن في خط اليوم",
+  "date": "2026-11-27",
+  "feeds": {
+    "status": "degraded",
+    "checked": 60,
+    "ok": 50,
+    "failed": 10,
+    "failed_feeds": [
+      {
+        "num": 17,
+        "name": "حساب @bna_en على X",
+        "error": "حجب مصدر — human verification page (HTTP 405)",
+        "block_reason": "all routes failed: primary: حجب مصدر — رفض الخادم الطلب (HTTP 403) | official:bna-en-rss: حجب مصدر — human verification page (HTTP 405)"
+      },
+      {
+        "num": 27,
+        "name": "وكالة الأنباء الكويتية (كونا)",
+        "error": "derived items without real content (1)",
+        "block_reason": "all routes failed: primary: <urlopen error timed out> · curl: derived items without real content (1) · curl أعاد محتوى غير مقروء | official-page:jina.ai/kuna: derived items without real content (0) · curl: derived items without real content (0) · curl أعاد محتوى غير مقروء | browser: derived items without real content (1)"
+      },
+      {
+        "num": 15,
+        "name": "حساب @UK_MTO على X",
+        "error": "مسار المتصفح: مرئي: HTTP 403 · 44695B — تحدي قائم | مرئي: HTTP 403 · 44695B — تحدي قائم | مرئي: HTTP 403 · 44695B — تحدي قائم | مجرَّد: HTTP 403 · 44716B — تحدي قائم",
+        "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44695B — تحدي قائم | مرئي: HTTP 403 · 44695B — تحدي قائم | مرئي: HTTP 403 · 44695B — تحدي قائم | مجرَّد: HTTP 403 · 44716B — تحدي قائم"
+      },
+      {
+        "num": 18,
+        "name": "حساب @bahdiplomatic على X",
+        "error": "مسار المتصفح: مرئي: HTTP 403 · 44716B — تحدي قائم | مرئي: HTTP 403 · 44716B — تحدي قائم | مرئي: HTTP 403 · 44716B — تحدي قائم | مجرَّد: HTTP 403 · 44737B — تحدي قائم",
+        "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44716B — تحدي قائم | مرئي: HTTP 403 · 44716B — تحدي قائم | مرئي: HTTP 403 · 44716B — تحدي قائم | مجرَّد: HTTP 403 · 44737B — تحدي قائم"
+      },
+      {
+        "num": 19,
+        "name": "حساب @US5thFleet على X",
+        "error": "مسار المتصفح: مرئي: HTTP 403 · 44707B — تحدي قائم | مرئي: HTTP 403 · 44707B — تحدي قائم | مرئي: HTTP 403 · 44707B — تحدي قائم | مجرَّد: HTTP 403 · 44728B — تحدي قائم",
+        "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44707B — تحدي قائم | مرئي: HTTP 403 · 44707B — تحدي قائم | مرئي: HTTP 403 · 44707B — تحدي قائم | مجرَّد: HTTP 403 · 44728B — تحدي قائم"
+      },
+      {
+        "num": 56,
+        "name": "حساب @YemenResistanc1 على X",
+        "error": "مسار المتصفح: مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مجرَّد: HTTP 403 · 44765B — تحدي قائم",
+        "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مجرَّد: HTTP 403 · 44765B — تحدي قائم"
+      },
+      {
+        "num": 57,
+        "name": "حساب @spokespersonyem على X",
+        "error": "مسار المتصفح: مرئي: HTTP 403 · 44743B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مجرَّد: HTTP 403 · 44765B — تحدي قائم",
+        "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44743B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مجرَّد: HTTP 403 · 44765B — تحدي قائم"
+      },
+      {
+        "num": 60,
+        "name": "حساب @CJFCSpox على X",
+        "error": "مسار المتصفح: مرئي: HTTP 403 · 44701B — تحدي قائم | مرئي: HTTP 403 · 44701B — تحدي قائم | مرئي: HTTP 403 · 44701B — تحدي قائم | مجرَّد: HTTP 403 · 44722B — تحدي قائم",
+        "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44701B — تحدي قائم | مرئي: HTTP 403 · 44701B — تحدي قائم | مرئي: HTTP 403 · 44701B — تحدي قائم | مجرَّد: HTTP 403 · 44722B — تحدي قائم"
+      },
+      {
+        "num": 61,
+        "name": "حساب @ERYANIM على X",
+        "error": "مسار المتصفح: مرئي: HTTP 403 · 44698B — تحدي قائم | مرئي: HTTP 403 · 44698B — تحدي قائم | مرئي: HTTP 403 · 44698B — تحدي قائم | مجرَّد: HTTP 403 · 44719B — تحدي قائم",
+        "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44698B — تحدي قائم | مرئي: HTTP 403 · 44698B — تحدي قائم | مرئي: HTTP 403 · 44698B — تحدي قائم | مجرَّد: HTTP 403 · 44719B — تحدي قائم"
+      },
+      {
+        "num": 62,
+        "name": "حساب @Yemenarmyeng على X",
+        "error": "مسار المتصفح: مرئي: HTTP 403 · 44713B — تحدي قائم | مرئي: HTTP 403 · 44713B — تحدي قائم | مرئي: HTTP 403 · 44713B — تحدي قائم | مجرَّد: HTTP 403 · 44756B — تحدي قائم",
+        "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44713B — تحدي قائم | مرئي: HTTP 403 · 44713B — تحدي قائم | مرئي: HTTP 403 · 44713B — تحدي قائم | مجرَّد: HTTP 403 · 44756B — تحدي قائم"
+      }
+    ],
+    "fail_ratio": 0.167,
+    "stale": [
+      12,
+      13,
+      20,
+      31,
+      32
+    ],
+    "empty": [],
+    "browser_only": [],
+    "note": "مصدر نجح على مسار وفشل على آخر لا يُحسب متعذّرًا (عطل ك-137)",
+    "derived_from": "feeds/feeds-2026-11-27.status.json"
+  },
+  "finished_utc": "2026-11-27T21:12:23Z",
+  "gate_finished_utc": "",
+  "gate_note": "علامة مرحلة الخط اليومي — بوابة التسليم لم تُشغَّل بعد.",
+  "gate_state": "not_run",
+  "language": {
+    "banned_terms": null,
+    "edit_pass": null,
+    "long_sentences": null,
+    "orthography_errors": null,
+    "waw_pct": null,
+    "waw_runs3": null
+  },
+  "overall": "degraded",
+  "pipeline_version": 4,
+  "report_present_at_pipeline_end": false,
+  "schema_version": 1,
+  "sources": {
+    "approved": 62,
+    "checked": 60,
+    "ok": 50,
+    "failed": 10,
+    "failed_names": [
+      "حساب @bna_en على X",
+      "وكالة الأنباء الكويتية (كونا)",
+      "حساب @UK_MTO على X",
+      "حساب @bahdiplomatic على X",
+      "حساب @US5thFleet على X",
+      "حساب @YemenResistanc1 على X",
+      "حساب @spokespersonyem على X",
+      "حساب @CJFCSpox على X",
+      "حساب @ERYANIM على X",
+      "حساب @Yemenarmyeng على X"
+    ],
+    "status_file": "feeds/feeds-2026-11-27.status.json"
+  },
+  "written_stage": "pipeline",
+  "originals": {
+    "status": "ok",
+    "healthy": 3,
+    "failed": 0,
+    "empty_shell": 0,
+    "manifest": "archive/originals/2026-11-27/manifest.json",
+    "note": "حُفظت الأصول في archive/originals/2026-11-27",
+    "derived_from": "archive/originals/2026-11-27/"
+  }
+}

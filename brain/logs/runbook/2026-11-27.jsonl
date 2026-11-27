@@ -1,0 +1,11 @@
+{"step": "S000", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-27/S000.log", "attempt": 1, "elapsed_s": 3.375, "ts": "2026-11-27T21:04:32Z"}
+{"step": "S010", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-27/S010.log", "attempt": 1, "elapsed_s": 8.672, "ts": "2026-11-27T21:04:41Z"}
+{"step": "S015", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-27/S015.log", "attempt": 1, "elapsed_s": 1.222, "ts": "2026-11-27T21:04:43Z"}
+{"step": "S020", "status": "done_warn", "rc": 1, "outputs": {}, "log": "logs/runbook/2026-11-27/S020.log", "attempt": 1, "elapsed_s": 460.284, "ts": "2026-11-27T21:12:23Z"}
+{"step": "S030", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-27/S030.log", "attempt": 1, "elapsed_s": 1.051, "ts": "2026-11-27T21:12:24Z"}
+{"step": "S060", "status": "done", "rc": 0, "outputs": {}, "log": "logs/runbook/2026-11-27/S060.log", "attempt": 1, "elapsed_s": 1.357, "ts": "2026-11-27T21:12:26Z"}
+{"step": "S080", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-27/S080.log", "elapsed_s": 0.211, "ts": "2026-11-27T21:12:26Z"}
+{"step": "S090", "status": "failed", "rc": 1, "problems": ["رمز الخروج 1"], "log": "logs/runbook/2026-11-27/S090.log", "elapsed_s": 0.189, "ts": "2026-11-27T21:12:26Z"}
+{"step": "W010", "status": "waiting_agent", "ts": "2026-11-27T21:12:26Z"}
+{"step": "W010", "status": "waiting_agent", "problems": ["فحص فشل (رمز 2): python3 tools/register_estimate.py --check --date 2026-11-27"], "ts": "2026-11-27T21:13:28Z"}
+{"step": "W010", "status": "waiting_agent", "problems": ["فحص فشل (رمز 2): python3 tools/register_estimate.py --check --date 2026-11-27"], "ts": "2026-11-27T21:14:29Z"}
