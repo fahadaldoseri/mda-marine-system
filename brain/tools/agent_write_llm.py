@@ -237,7 +237,7 @@ def build_group_prompt(s: dict, date: str, g: str, problems: str = "", digest: s
     ex_txt = w010_split.examples_subset(
         runbook.render_prompt(str(ROOT), "sections/20-examples.md", date, 1), cfg["examples"])
     sec_txt = w010_split.sections_subset(runbook.render_sections(str(ROOT), date), orders)
-    lex_mode = os.environ.get("W010_LEXICON", "full")  # filtered فقط بعد اجتياز G044 على تشغيل حقيقي
+    lex_mode = os.environ.get("W010_LEXICON", "filtered")  # full يعيد المعجم الكامل؛ الافتراضي مصفّى بأمر فهد (27 نوفمبر) لتشغيل جاف، ويُثبَّت بعد اجتياز G044
 
     def inc(mt):
         target = mt.group(1).strip()
