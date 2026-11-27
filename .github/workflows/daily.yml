@@ -132,6 +132,7 @@ jobs:
         if: failure()
         run: |
           for f in $(ls -t /home/ubuntu/mda-marine-system/brain/logs/runbook/$D/*.log 2>/dev/null | head -1); do echo "== آخر سجل خطوة: $f"; tail -n 25 "$f" | cut -c1-300; done
+          grep -hE "✘" /home/ubuntu/mda-marine-system/brain/logs/gate-$D/*.log 2>/dev/null | cut -c1-300 | head -30 || true
           grep -E "▶|✘|⚠|✔" /tmp/agent_loop.log 2>/dev/null | cut -c1-260 | tail -30 || true
           tail -n 12 "$HOME/freellmapi/server.log" 2>/dev/null | sed -E 's/(key|token|authorization)[^ ]*[ =:]+[^ ]+/\1=***/Ig' || true
 
@@ -184,6 +185,8 @@ jobs:
           name: logs-${{ env.D }}
           path: |
             /home/ubuntu/mda-marine-system/brain/logs/runbook/
+            /home/ubuntu/mda-marine-system/brain/logs/gate-*/
+            /home/ubuntu/mda-marine-system/brain/logs/auto-heal/
             /home/ubuntu/mda-marine-system/brain/logs/pipeline-*.json
             /home/ubuntu/mda-marine-system/brain/logs/deliver-*.json
             /home/ubuntu/mda-marine-system/brain/logs/publish-*-telegram.json
@@ -238,3 +241,4 @@ jobs:
 # 12:52 retrigger
 # 13:30 retrigger
 # 13:37 retrigger
+# 14:00 retrigger
