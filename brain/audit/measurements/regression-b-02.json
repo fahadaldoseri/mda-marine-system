@@ -1,6 +1,6 @@
 {
-  "url": "file:///home/ubuntu/mda-marine-system/site/dist/reports/en/2026-11-21.html",
-  "at": "2026-11-21T02:42:21+00:00",
+  "url": "file:///home/ubuntu/mda-marine-system/site/dist/reports/en/2026-11-26.html",
+  "at": "2026-11-27T21:00:47+00:00",
   "widths": {
     "1440": {
       "compat": "CSS1Compat",
@@ -15,26 +15,50 @@
         {
           "id": "ev-01",
           "w": 354,
-          "h": 599,
+          "h": 568,
           "clip_loss": 0,
           "clips": [],
-          "top": 3508
+          "top": 3509
         },
         {
           "id": "ev-02",
           "w": 354,
-          "h": 599,
+          "h": 568,
           "clip_loss": 0,
           "clips": [],
-          "top": 3508
+          "top": 3509
         },
         {
           "id": "ev-03",
           "w": 354,
-          "h": 599,
+          "h": 568,
           "clip_loss": 0,
           "clips": [],
-          "top": 3508
+          "top": 3509
+        },
+        {
+          "id": "ev-04",
+          "w": 354,
+          "h": 571,
+          "clip_loss": 0,
+          "clips": [],
+          "top": 4090
+        },
+        {
+          "id": "ev-05",
+          "w": 354,
+          "h": 571,
+          "clip_loss": 0,
+          "clips": [],
+          "top": 4090
+        },
+        {
+          "id": "ev-06",
+          "w": 354,
+          "h": 571,
+          "clip_loss": 0,
+          "clips": [],
+          "top": 4090
         }
       ],
       "decision": {
@@ -46,7 +70,7 @@
       },
       "map_decision": {
         "sel": ".hmap-decide",
-        "top": 2138,
+        "top": 2139,
         "in_first_screen": false,
         "height": 119,
         "lines": 4
@@ -82,7 +106,7 @@
         },
         {
           "q": "Warnings",
-          "found": false
+          "found": true
         },
         {
           "q": "Watch",
@@ -190,24 +214,45 @@
           "same_page_exists": true
         },
         {
-          "href": "https://www.ukmto.org/recent-incidents#a9279ed0-9fba-45aa-8139-29871a936e20",
+          "href": "https://www.ukmto.org/recent-incidents#4ce57504-a4f0-409f-af2e-e0e8c4415c8e",
           "page": "https://www.ukmto.org/recent-incidents",
-          "hash": "a9279ed0-9fba-45aa-8139-29871a936e20",
-          "text": "UKMTO — Recent Incidents",
+          "hash": "4ce57504-a4f0-409f-af2e-e0e8c4415c8e",
+          "text": "UKMTO — Warnings 2026",
           "same_page_exists": false
         },
         {
-          "href": "https://www.ukmto.org/recent-incidents#a4bc99f3-ccc2-469c-ab05-53d2009c8974",
+          "href": "https://www.ukmto.org/recent-incidents#0963af1c-f976-4448-98e2-a7c7c476548b",
           "page": "https://www.ukmto.org/recent-incidents",
-          "hash": "a4bc99f3-ccc2-469c-ab05-53d2009c8974",
-          "text": "UKMTO — Recent Incidents",
+          "hash": "0963af1c-f976-4448-98e2-a7c7c476548b",
+          "text": "UKMTO — Warnings 2026",
           "same_page_exists": false
         },
         {
-          "href": "https://gcaptain.com/houthis-order-ships-to-leave-saudi-red-sea-ports-after-hodeidah-airstrikes/#:~:text=urge%20all%20shipping%20companies%20to%20immediately%20evacuate%20their%20ships",
-          "page": "https://gcaptain.com/houthis-order-ships-to-leave-saudi-red-sea-ports-after-hodeidah-airstrikes/",
-          "hash": ":~:text=urge%20all%20shipping%20companies%20to%20immediately%20evacuate%20their%20ships",
-          "text": "gCaptain",
+          "href": "https://t.me/wamnews_en/32399#:~:text=confirms%20missing%20Jordanian%20crew%20member%20found%20dead",
+          "page": "https://t.me/wamnews_en/32399",
+          "hash": ":~:text=confirms%20missing%20Jordanian%20crew%20member%20found%20dead",
+          "text": "Emirates News Agency (WAM)",
+          "same_page_exists": false
+        },
+        {
+          "href": "https://www.seatrade-maritime.com/security/seafarer-seriously-injured-in-hormuz-tanker-attack#:~:text=Seafarer%20seriously%20injured%20in%20Hormuz%20tanker%20attack",
+          "page": "https://www.seatrade-maritime.com/security/seafarer-seriously-injured-in-hormuz-tanker-attack",
+          "hash": ":~:text=Seafarer%20seriously%20injured%20in%20Hormuz%20tanker%20attack",
+          "text": "Seatrade Maritime",
+          "same_page_exists": false
+        },
+        {
+          "href": "https://www.bairdmaritime.com/security/incidents/piracy/iraqi-navy-tug-fuel-smuggling#:~:text=Iraqi%20Navy%20seizes%20two%20tugs%2C%20detains%20eight%20crew",
+          "page": "https://www.bairdmaritime.com/security/incidents/piracy/iraqi-navy-tug-fuel-smuggling",
+          "hash": ":~:text=Iraqi%20Navy%20seizes%20two%20tugs%2C%20detains%20eight%20crew",
+          "text": "Baird Maritime",
+          "same_page_exists": false
+        },
+        {
+          "href": "https://en.mehrnews.com/news/249713/Two-oil-tankers-explode-in-Strait-of-Hormuz#:~:text=Two%20oil%20tankers%20explode%20in%20Strait%20of%20Hormuz",
+          "page": "https://en.mehrnews.com/news/249713/Two-oil-tankers-explode-in-Strait-of-Hormuz",
+          "hash": ":~:text=Two%20oil%20tankers%20explode%20in%20Strait%20of%20Hormuz",
+          "text": "Mehr — Arabic",
           "same_page_exists": false
         }
       ],
@@ -221,9 +266,12 @@
         "#sec-03": true,
         "#sec-map": true,
         "/reports/en/additions.html#news-card": true,
-        "https://www.ukmto.org/recent-incidents#a9279ed0-9fba-45aa-8139-29871a936e20": true,
-        "https://www.ukmto.org/recent-incidents#a4bc99f3-ccc2-469c-ab05-53d2009c8974": true,
-        "https://gcaptain.com/houthis-order-ships-to-leave-saudi-red-sea-ports-after-hodeidah-airstrikes/#:~:text=urge%20all%20shipping%20companies%20to%20immediately%20evacuate%20their%20ships": true
+        "https://www.ukmto.org/recent-incidents#4ce57504-a4f0-409f-af2e-e0e8c4415c8e": true,
+        "https://www.ukmto.org/recent-incidents#0963af1c-f976-4448-98e2-a7c7c476548b": true,
+        "https://t.me/wamnews_en/32399#:~:text=confirms%20missing%20Jordanian%20crew%20member%20found%20dead": true,
+        "https://www.seatrade-maritime.com/security/seafarer-seriously-injured-in-hormuz-tanker-attack#:~:text=Seafarer%20seriously%20injured%20in%20Hormuz%20tanker%20attack": true,
+        "https://www.bairdmaritime.com/security/incidents/piracy/iraqi-navy-tug-fuel-smuggling#:~:text=Iraqi%20Navy%20seizes%20two%20tugs%2C%20detains%20eight%20crew": true,
+        "https://en.mehrnews.com/news/249713/Two-oil-tankers-explode-in-Strait-of-Hormuz#:~:text=Two%20oil%20tankers%20explode%20in%20Strait%20of%20Hormuz": true
       },
       "anchor_target_details": {
         "#sn-main": {
@@ -271,17 +319,37 @@
           "dom_wait_ms": 15000,
           "exists": true
         },
-        "https://www.ukmto.org/recent-incidents#a9279ed0-9fba-45aa-8139-29871a936e20": {
+        "https://www.ukmto.org/recent-incidents#4ce57504-a4f0-409f-af2e-e0e8c4415c8e": {
           "http_status": 200,
           "dom_wait_ms": 15000,
           "exists": true
         },
-        "https://www.ukmto.org/recent-incidents#a4bc99f3-ccc2-469c-ab05-53d2009c8974": {
+        "https://www.ukmto.org/recent-incidents#0963af1c-f976-4448-98e2-a7c7c476548b": {
           "http_status": 200,
           "dom_wait_ms": 15000,
           "exists": true
         },
-        "https://gcaptain.com/houthis-order-ships-to-leave-saudi-red-sea-ports-after-hodeidah-airstrikes/#:~:text=urge%20all%20shipping%20companies%20to%20immediately%20evacuate%20their%20ships": {
+        "https://t.me/wamnews_en/32399#:~:text=confirms%20missing%20Jordanian%20crew%20member%20found%20dead": {
+          "http_status": 200,
+          "dom_wait_ms": 15000,
+          "exists": true
+        },
+        "https://www.seatrade-maritime.com/security/seafarer-seriously-injured-in-hormuz-tanker-attack#:~:text=Seafarer%20seriously%20injured%20in%20Hormuz%20tanker%20attack": {
+          "method": "collection_capture",
+          "exists": true,
+          "capture_file": "feeds/feeds-2026-11-26.json",
+          "capture_sha256": "887892e78e807c899429a0ae8fe25a14af5670d81c6de84c9648e0167f8692fa",
+          "capture_feed": "https://www.seatrade-maritime.com/rss.xml",
+          "capture_item_date": "Thu, 26 Nov 2026 16:06:15 GMT",
+          "http_status": 403,
+          "live_error": "anchor target HTTP 403; DOM target absent"
+        },
+        "https://www.bairdmaritime.com/security/incidents/piracy/iraqi-navy-tug-fuel-smuggling#:~:text=Iraqi%20Navy%20seizes%20two%20tugs%2C%20detains%20eight%20crew": {
+          "http_status": 200,
+          "dom_wait_ms": 15000,
+          "exists": true
+        },
+        "https://en.mehrnews.com/news/249713/Two-oil-tankers-explode-in-Strait-of-Hormuz#:~:text=Two%20oil%20tankers%20explode%20in%20Strait%20of%20Hormuz": {
           "http_status": 200,
           "dom_wait_ms": 15000,
           "exists": true
@@ -301,26 +369,50 @@
         {
           "id": "ev-01",
           "w": 354,
-          "h": 599,
+          "h": 568,
           "clip_loss": 0,
           "clips": [],
-          "top": 3508
+          "top": 3509
         },
         {
           "id": "ev-02",
           "w": 354,
-          "h": 599,
+          "h": 568,
           "clip_loss": 0,
           "clips": [],
-          "top": 3508
+          "top": 3509
         },
         {
           "id": "ev-03",
           "w": 354,
-          "h": 599,
+          "h": 568,
           "clip_loss": 0,
           "clips": [],
-          "top": 3508
+          "top": 3509
+        },
+        {
+          "id": "ev-04",
+          "w": 354,
+          "h": 571,
+          "clip_loss": 0,
+          "clips": [],
+          "top": 4090
+        },
+        {
+          "id": "ev-05",
+          "w": 354,
+          "h": 571,
+          "clip_loss": 0,
+          "clips": [],
+          "top": 4090
+        },
+        {
+          "id": "ev-06",
+          "w": 354,
+          "h": 571,
+          "clip_loss": 0,
+          "clips": [],
+          "top": 4090
         }
       ],
       "decision": {
@@ -332,7 +424,7 @@
       },
       "map_decision": {
         "sel": ".hmap-decide",
-        "top": 2138,
+        "top": 2139,
         "in_first_screen": false,
         "height": 119,
         "lines": 4
@@ -368,7 +460,7 @@
         },
         {
           "q": "Warnings",
-          "found": false
+          "found": true
         },
         {
           "q": "Watch",
@@ -476,24 +568,45 @@
           "same_page_exists": true
         },
         {
-          "href": "https://www.ukmto.org/recent-incidents#a9279ed0-9fba-45aa-8139-29871a936e20",
+          "href": "https://www.ukmto.org/recent-incidents#4ce57504-a4f0-409f-af2e-e0e8c4415c8e",
           "page": "https://www.ukmto.org/recent-incidents",
-          "hash": "a9279ed0-9fba-45aa-8139-29871a936e20",
-          "text": "UKMTO — Recent Incidents",
+          "hash": "4ce57504-a4f0-409f-af2e-e0e8c4415c8e",
+          "text": "UKMTO — Warnings 2026",
           "same_page_exists": false
         },
         {
-          "href": "https://www.ukmto.org/recent-incidents#a4bc99f3-ccc2-469c-ab05-53d2009c8974",
+          "href": "https://www.ukmto.org/recent-incidents#0963af1c-f976-4448-98e2-a7c7c476548b",
           "page": "https://www.ukmto.org/recent-incidents",
-          "hash": "a4bc99f3-ccc2-469c-ab05-53d2009c8974",
-          "text": "UKMTO — Recent Incidents",
+          "hash": "0963af1c-f976-4448-98e2-a7c7c476548b",
+          "text": "UKMTO — Warnings 2026",
           "same_page_exists": false
         },
         {
-          "href": "https://gcaptain.com/houthis-order-ships-to-leave-saudi-red-sea-ports-after-hodeidah-airstrikes/#:~:text=urge%20all%20shipping%20companies%20to%20immediately%20evacuate%20their%20ships",
-          "page": "https://gcaptain.com/houthis-order-ships-to-leave-saudi-red-sea-ports-after-hodeidah-airstrikes/",
-          "hash": ":~:text=urge%20all%20shipping%20companies%20to%20immediately%20evacuate%20their%20ships",
-          "text": "gCaptain",
+          "href": "https://t.me/wamnews_en/32399#:~:text=confirms%20missing%20Jordanian%20crew%20member%20found%20dead",
+          "page": "https://t.me/wamnews_en/32399",
+          "hash": ":~:text=confirms%20missing%20Jordanian%20crew%20member%20found%20dead",
+          "text": "Emirates News Agency (WAM)",
+          "same_page_exists": false
+        },
+        {
+          "href": "https://www.seatrade-maritime.com/security/seafarer-seriously-injured-in-hormuz-tanker-attack#:~:text=Seafarer%20seriously%20injured%20in%20Hormuz%20tanker%20attack",
+          "page": "https://www.seatrade-maritime.com/security/seafarer-seriously-injured-in-hormuz-tanker-attack",
+          "hash": ":~:text=Seafarer%20seriously%20injured%20in%20Hormuz%20tanker%20attack",
+          "text": "Seatrade Maritime",
+          "same_page_exists": false
+        },
+        {
+          "href": "https://www.bairdmaritime.com/security/incidents/piracy/iraqi-navy-tug-fuel-smuggling#:~:text=Iraqi%20Navy%20seizes%20two%20tugs%2C%20detains%20eight%20crew",
+          "page": "https://www.bairdmaritime.com/security/incidents/piracy/iraqi-navy-tug-fuel-smuggling",
+          "hash": ":~:text=Iraqi%20Navy%20seizes%20two%20tugs%2C%20detains%20eight%20crew",
+          "text": "Baird Maritime",
+          "same_page_exists": false
+        },
+        {
+          "href": "https://en.mehrnews.com/news/249713/Two-oil-tankers-explode-in-Strait-of-Hormuz#:~:text=Two%20oil%20tankers%20explode%20in%20Strait%20of%20Hormuz",
+          "page": "https://en.mehrnews.com/news/249713/Two-oil-tankers-explode-in-Strait-of-Hormuz",
+          "hash": ":~:text=Two%20oil%20tankers%20explode%20in%20Strait%20of%20Hormuz",
+          "text": "Mehr — Arabic",
           "same_page_exists": false
         }
       ],
@@ -507,9 +620,12 @@
         "#sec-03": true,
         "#sec-map": true,
         "/reports/en/additions.html#news-card": true,
-        "https://www.ukmto.org/recent-incidents#a9279ed0-9fba-45aa-8139-29871a936e20": true,
-        "https://www.ukmto.org/recent-incidents#a4bc99f3-ccc2-469c-ab05-53d2009c8974": true,
-        "https://gcaptain.com/houthis-order-ships-to-leave-saudi-red-sea-ports-after-hodeidah-airstrikes/#:~:text=urge%20all%20shipping%20companies%20to%20immediately%20evacuate%20their%20ships": true
+        "https://www.ukmto.org/recent-incidents#4ce57504-a4f0-409f-af2e-e0e8c4415c8e": true,
+        "https://www.ukmto.org/recent-incidents#0963af1c-f976-4448-98e2-a7c7c476548b": true,
+        "https://t.me/wamnews_en/32399#:~:text=confirms%20missing%20Jordanian%20crew%20member%20found%20dead": true,
+        "https://www.seatrade-maritime.com/security/seafarer-seriously-injured-in-hormuz-tanker-attack#:~:text=Seafarer%20seriously%20injured%20in%20Hormuz%20tanker%20attack": true,
+        "https://www.bairdmaritime.com/security/incidents/piracy/iraqi-navy-tug-fuel-smuggling#:~:text=Iraqi%20Navy%20seizes%20two%20tugs%2C%20detains%20eight%20crew": true,
+        "https://en.mehrnews.com/news/249713/Two-oil-tankers-explode-in-Strait-of-Hormuz#:~:text=Two%20oil%20tankers%20explode%20in%20Strait%20of%20Hormuz": true
       },
       "anchor_target_details": {
         "#sn-main": {
@@ -557,17 +673,37 @@
           "dom_wait_ms": 15000,
           "exists": true
         },
-        "https://www.ukmto.org/recent-incidents#a9279ed0-9fba-45aa-8139-29871a936e20": {
+        "https://www.ukmto.org/recent-incidents#4ce57504-a4f0-409f-af2e-e0e8c4415c8e": {
           "http_status": 200,
           "dom_wait_ms": 15000,
           "exists": true
         },
-        "https://www.ukmto.org/recent-incidents#a4bc99f3-ccc2-469c-ab05-53d2009c8974": {
+        "https://www.ukmto.org/recent-incidents#0963af1c-f976-4448-98e2-a7c7c476548b": {
           "http_status": 200,
           "dom_wait_ms": 15000,
           "exists": true
         },
-        "https://gcaptain.com/houthis-order-ships-to-leave-saudi-red-sea-ports-after-hodeidah-airstrikes/#:~:text=urge%20all%20shipping%20companies%20to%20immediately%20evacuate%20their%20ships": {
+        "https://t.me/wamnews_en/32399#:~:text=confirms%20missing%20Jordanian%20crew%20member%20found%20dead": {
+          "http_status": 200,
+          "dom_wait_ms": 15000,
+          "exists": true
+        },
+        "https://www.seatrade-maritime.com/security/seafarer-seriously-injured-in-hormuz-tanker-attack#:~:text=Seafarer%20seriously%20injured%20in%20Hormuz%20tanker%20attack": {
+          "method": "collection_capture",
+          "exists": true,
+          "capture_file": "feeds/feeds-2026-11-26.json",
+          "capture_sha256": "887892e78e807c899429a0ae8fe25a14af5670d81c6de84c9648e0167f8692fa",
+          "capture_feed": "https://www.seatrade-maritime.com/rss.xml",
+          "capture_item_date": "Thu, 26 Nov 2026 16:06:15 GMT",
+          "http_status": 403,
+          "live_error": "anchor target HTTP 403; DOM target absent"
+        },
+        "https://www.bairdmaritime.com/security/incidents/piracy/iraqi-navy-tug-fuel-smuggling#:~:text=Iraqi%20Navy%20seizes%20two%20tugs%2C%20detains%20eight%20crew": {
+          "http_status": 200,
+          "dom_wait_ms": 15000,
+          "exists": true
+        },
+        "https://en.mehrnews.com/news/249713/Two-oil-tankers-explode-in-Strait-of-Hormuz#:~:text=Two%20oil%20tankers%20explode%20in%20Strait%20of%20Hormuz": {
           "http_status": 200,
           "dom_wait_ms": 15000,
           "exists": true
@@ -575,7 +711,7 @@
       }
     }
   },
-  "dist_fingerprint": "2544f38e40fd17b2d36ea7c48717222a0bd7aa3c75bb569b35df72ef1f26885b",
+  "dist_fingerprint": "b9d6c45faf31e6b27dcefc859a72b46a216dff9979b9af1c17fcec8a6a136817",
   "checks": [
     "overflow"
   ],

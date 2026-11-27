@@ -1,9 +1,9 @@
 {
- "date": "2026-11-21",
+ "date": "2026-11-26",
  "status": "degraded",
  "checked": 60,
- "ok": 59,
- "failed": 1,
+ "ok": 51,
+ "failed": 9,
  "browser_only": [],
  "manual_reference": [
   39,
@@ -13,13 +13,14 @@
   12,
   13,
   20,
+  31,
   32
  ],
  "empty": [],
  "stale_days_limit": 14,
- "fail_ratio": 0.017,
+ "fail_ratio": 0.15,
  "fail_ratio_limit": 0.2,
- "items": 1733,
+ "items": 1772,
  "checked_feeds": [
   {
    "num": 1,
@@ -29,7 +30,7 @@
    "via": "primary",
    "fetched_url": "https://www.ukmto.org/recent-incidents",
    "items_count": 1,
-   "content_chars": 14282,
+   "content_chars": 13808,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -40,8 +41,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://r.jina.ai/https://www.ukmto.org/ukmto-products/warnings/2026",
-   "items_count": 10,
-   "content_chars": 1408,
+   "items_count": 8,
+   "content_chars": 1219,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -52,8 +53,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://r.jina.ai/https://www.ukmto.org/ukmto-products/advisories/2026",
-   "items_count": 5,
-   "content_chars": 1041,
+   "items_count": 3,
+   "content_chars": 829,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -64,8 +65,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://r.jina.ai/https://www.ukmto.org/ukmto-products/weekly-reports/2026",
-   "items_count": 5,
-   "content_chars": 518,
+   "items_count": 3,
+   "content_chars": 984,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -77,7 +78,7 @@
    "via": "official-page:jina.ai/imo-middle-east-incidents",
    "fetched_url": "https://r.jina.ai/https://www.imo.org/en/mediacentre/hottopics/pages/middle-east-highlighted-incidents.aspx",
    "items_count": 8,
-   "content_chars": 14631,
+   "content_chars": 15403,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -88,8 +89,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://straits.live/feed.xml",
-   "items_count": 55,
-   "content_chars": 25487,
+   "items_count": 50,
+   "content_chars": 23527,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -101,7 +102,7 @@
    "via": "primary",
    "fetched_url": "https://straits.live/briefs/feed.xml",
    "items_count": 60,
-   "content_chars": 109846,
+   "content_chars": 108641,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -113,7 +114,7 @@
    "via": "primary",
    "fetched_url": "https://gcaptain.com/feed/",
    "items_count": 12,
-   "content_chars": 2956,
+   "content_chars": 2974,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -124,8 +125,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://services.tradewindsnews.com/api/feed/rss",
-   "items_count": 190,
-   "content_chars": 116398,
+   "items_count": 184,
+   "content_chars": 112266,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -137,8 +138,8 @@
    "via": "primary",
    "fetched_url": "https://www.seatrade-maritime.com/rss.xml",
    "items_count": 50,
-   "content_chars": 4299,
-   "latest_age_days": -330,
+   "content_chars": 4250,
+   "latest_age_days": -323,
    "tls_verification": "verified"
   },
   {
@@ -149,7 +150,7 @@
    "via": "primary",
    "fetched_url": "https://www.ajnet.me/rss",
    "items_count": 25,
-   "content_chars": 10169,
+   "content_chars": 10296,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -161,7 +162,7 @@
    "via": "primary",
    "fetched_url": "https://www.aljazeera.com/xml/rss/all.xml",
    "items_count": 25,
-   "content_chars": 7618,
+   "content_chars": 7602,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -174,7 +175,7 @@
    "fetched_url": "https://ofac.treasury.gov/rss.xml",
    "items_count": 10,
    "content_chars": 206299,
-   "latest_age_days": 646,
+   "latest_age_days": 653,
    "tls_verification": "verified"
   },
   {
@@ -186,31 +187,30 @@
    "fetched_url": "https://shipnext.com/api/v2/fleet/public/9315159",
    "items_count": 1,
    "content_chars": 3093,
-   "latest_age_days": 96,
+   "latest_age_days": 103,
    "tls_verification": "verified"
   },
   {
    "num": 14,
    "name": "قناة العربية",
    "primary_url": "https://www.alarabiya.net/feed/rss2/ar.xml",
-   "ok": false,
-   "via": null,
-   "fetched_url": null,
-   "items_count": 0,
-   "content_chars": 0,
+   "ok": true,
+   "via": "fallback:jina.ai/alarabiya-rss",
+   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
+   "items_count": 14,
+   "content_chars": 105518,
    "latest_age_days": null,
-   "tls_verification": "verified",
-   "block_reason": "all routes failed: primary: حجب مصدر — رفض الخادم الطلب (HTTP 403) | fallback:jina.ai/alarabiya-rss: blocked page: Just a moment · curl: blocked page: Just a moment · curl أعاد محتوى غير مقروء | fallback:jina.ai/alarabiya-home: proxy reported target error · curl: proxy reported target error · curl أعاد محتوى غير مقروء"
+   "tls_verification": "verified"
   },
   {
    "num": 14,
    "name": "قناة العربية",
    "primary_url": "https://www.alarabiya.net/feed/rss2/ar/arab-and-world.xml",
    "ok": true,
-   "via": "fallback:jina.ai/alarabiya-rss+curl",
-   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
-   "items_count": 60,
-   "content_chars": 128281,
+   "via": "fallback:jina.ai/alarabiya-home",
+   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/",
+   "items_count": 26,
+   "content_chars": 64312,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -218,13 +218,14 @@
    "num": 14,
    "name": "قناة العربية",
    "primary_url": "https://www.alarabiya.net/feed/rss2/ar/aswaq.xml",
-   "ok": true,
-   "via": "fallback:jina.ai/alarabiya-rss",
-   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/feed/rss2/ar.xml",
-   "items_count": 60,
-   "content_chars": 128281,
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
    "latest_age_days": null,
-   "tls_verification": "verified"
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: حجب مصدر — رفض الخادم الطلب (HTTP 403) | fallback:jina.ai/alarabiya-rss: blocked page: Just a moment · curl: blocked page: Just a moment · curl أعاد محتوى غير مقروء | fallback:jina.ai/alarabiya-home: proxy reported target error · curl: blocked page: Just a moment · curl أعاد محتوى غير مقروء"
   },
   {
    "num": 16,
@@ -234,7 +235,7 @@
    "via": "primary",
    "fetched_url": "https://www.bahrain.bh/wps/portal/en/BNP/RssFeedReader",
    "items_count": 8,
-   "content_chars": 3160,
+   "content_chars": 3158,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -260,7 +261,7 @@
    "fetched_url": "http://feeds.feedburner.com/alayam-news-list-all",
    "items_count": 15,
    "content_chars": 7042,
-   "latest_age_days": 1042,
+   "latest_age_days": 1048,
    "tls_verification": "verified"
   },
   {
@@ -272,7 +273,7 @@
    "fetched_url": "http://feeds.feedburner.com/alayam-online-international-news",
    "items_count": 8,
    "content_chars": 3675,
-   "latest_age_days": 1042,
+   "latest_age_days": 1048,
    "tls_verification": "verified"
   },
   {
@@ -282,8 +283,8 @@
    "ok": true,
    "via": "browser",
    "fetched_url": "https://www.alayam.com/pages/rss",
-   "items_count": 4,
-   "content_chars": 2203,
+   "items_count": 6,
+   "content_chars": 2669,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -295,7 +296,7 @@
    "via": "primary",
    "fetched_url": "https://akhbar-alkhaleej.com/",
    "items_count": 47,
-   "content_chars": 5991,
+   "content_chars": 6724,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -307,7 +308,7 @@
    "via": "primary",
    "fetched_url": "https://www.albiladpress.com/rss",
    "items_count": 100,
-   "content_chars": 17081,
+   "content_chars": 17033,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -319,7 +320,7 @@
    "via": "primary",
    "fetched_url": "https://www.gdnonline.com",
    "items_count": 49,
-   "content_chars": 20367,
+   "content_chars": 20779,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -331,7 +332,7 @@
    "via": "browser",
    "fetched_url": "https://qna.org.qa/en/RSS-Feeds",
    "items_count": 4,
-   "content_chars": 2946,
+   "content_chars": 2860,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -343,8 +344,8 @@
    "via": "primary",
    "fetched_url": "https://qna.org.qa/en/Pages/RSS-Feeds/Analysis-and-Reports",
    "items_count": 50,
-   "content_chars": 31089,
-   "latest_age_days": 0,
+   "content_chars": 31354,
+   "latest_age_days": 2,
    "tls_verification": "verified"
   },
   {
@@ -355,8 +356,8 @@
    "via": "primary",
    "fetched_url": "https://qna.org.qa/en/Pages/RSS-Feeds/Qatar",
    "items_count": 50,
-   "content_chars": 27994,
-   "latest_age_days": 0,
+   "content_chars": 28039,
+   "latest_age_days": -1,
    "tls_verification": "verified"
   },
   {
@@ -366,8 +367,8 @@
    "ok": true,
    "via": "official-telegram:wamnews_en",
    "fetched_url": "https://t.me/s/wamnews_en",
-   "items_count": 20,
-   "content_chars": 3716,
+   "items_count": 19,
+   "content_chars": 3327,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -378,8 +379,8 @@
    "ok": true,
    "via": "official-telegram:wamnews_en",
    "fetched_url": "https://t.me/s/wamnews_en",
-   "items_count": 20,
-   "content_chars": 3716,
+   "items_count": 19,
+   "content_chars": 3327,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -390,8 +391,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://www.spa.gov.sa/rss.xml",
-   "items_count": 9,
-   "content_chars": 134532,
+   "items_count": 10,
+   "content_chars": 134674,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -402,8 +403,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://www.spa.gov.sa/feed",
-   "items_count": 9,
-   "content_chars": 134532,
+   "items_count": 10,
+   "content_chars": 134674,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -415,7 +416,7 @@
    "via": "official-page:jina.ai/kuna+curl",
    "fetched_url": "https://r.jina.ai/https://www.kuna.net.kw",
    "items_count": 8,
-   "content_chars": 748,
+   "content_chars": 770,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -439,7 +440,7 @@
    "via": "fallback:omannews-home",
    "fetched_url": "https://omannews.gov.om/",
    "items_count": 48,
-   "content_chars": 7980,
+   "content_chars": 7959,
    "latest_age_days": null,
    "tls_verification": "disabled_source_28_only"
   },
@@ -463,8 +464,8 @@
    "via": "official:dvids-centcom-public-affairs",
    "fetched_url": "https://www.dvidshub.net/rss/unit/72",
    "items_count": 44,
-   "content_chars": 9587,
-   "latest_age_days": 13,
+   "content_chars": 9694,
+   "latest_age_days": 0,
    "tls_verification": "verified"
   },
   {
@@ -476,7 +477,7 @@
    "fetched_url": "https://combinedmaritimeforces.com/feed/",
    "items_count": 15,
    "content_chars": 47682,
-   "latest_age_days": 8,
+   "latest_age_days": 15,
    "tls_verification": "verified"
   },
   {
@@ -488,7 +489,7 @@
    "fetched_url": "https://icc-ccs.org/feed/",
    "items_count": 10,
    "content_chars": 50781,
-   "latest_age_days": 36,
+   "latest_age_days": 43,
    "tls_verification": "verified"
   },
   {
@@ -523,7 +524,7 @@
    "via": "primary",
    "fetched_url": "https://splash247.com/feed/",
    "items_count": 10,
-   "content_chars": 7682,
+   "content_chars": 7881,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -535,7 +536,7 @@
    "via": "primary",
    "fetched_url": "https://splash247.com/feed/atom/",
    "items_count": 10,
-   "content_chars": 5112,
+   "content_chars": 5322,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -543,27 +544,25 @@
    "num": 36,
    "name": "Lloyd's List",
    "primary_url": "https://www.lloydslist.com/rss/lloyds-list",
-   "ok": false,
-   "via": null,
-   "fetched_url": null,
-   "items_count": 0,
-   "content_chars": 0,
-   "latest_age_days": null,
-   "tls_verification": "verified",
-   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403)"
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.lloydslist.com/rss/lloyds-list",
+   "items_count": 20,
+   "content_chars": 16609,
+   "latest_age_days": 0,
+   "tls_verification": "verified"
   },
   {
    "num": 36,
    "name": "Lloyd's List",
    "primary_url": "https://www.lloydslist.com/rss-feeds",
-   "ok": false,
-   "via": null,
-   "fetched_url": null,
-   "items_count": 0,
-   "content_chars": 0,
+   "ok": true,
+   "via": "primary",
+   "fetched_url": "https://www.lloydslist.com/rss-feeds",
+   "items_count": 4,
+   "content_chars": 4787,
    "latest_age_days": null,
-   "tls_verification": "verified",
-   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403)"
+   "tls_verification": "verified"
   },
   {
    "num": 37,
@@ -573,7 +572,7 @@
    "via": "primary",
    "fetched_url": "https://www.marinelink.com/news/rss",
    "items_count": 10,
-   "content_chars": 4457,
+   "content_chars": 4504,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -582,11 +581,11 @@
    "name": "MarineLink",
    "primary_url": "https://www.marinelink.com/blogs/rss?type=video",
    "ok": true,
-   "via": "primary+curl",
+   "via": "primary",
    "fetched_url": "https://www.marinelink.com/blogs/rss?type=video",
    "items_count": 10,
    "content_chars": 7038,
-   "latest_age_days": 7,
+   "latest_age_days": 14,
    "tls_verification": "verified"
   },
   {
@@ -609,8 +608,8 @@
    "via": "primary",
    "fetched_url": "https://www.jpost.com/rss/rssfeedsmiddleeastnews.aspx",
    "items_count": 30,
-   "content_chars": 34364,
-   "latest_age_days": -1,
+   "content_chars": 35940,
+   "latest_age_days": 0,
    "tls_verification": "verified"
   },
   {
@@ -621,7 +620,7 @@
    "via": "official:marinetraffic-blog",
    "fetched_url": "https://www.marinetraffic.com/blog/",
    "items_count": 18,
-   "content_chars": 21230,
+   "content_chars": 21221,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -633,7 +632,7 @@
    "via": "primary",
    "fetched_url": "https://news.usni.org/feed",
    "items_count": 30,
-   "content_chars": 167007,
+   "content_chars": 149362,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -645,7 +644,7 @@
    "via": "primary",
    "fetched_url": "https://www.navalnews.com/feed/",
    "items_count": 10,
-   "content_chars": 81151,
+   "content_chars": 60742,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -656,8 +655,8 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://maritime-executive.com/",
-   "items_count": 30,
-   "content_chars": 19729,
+   "items_count": 31,
+   "content_chars": 19625,
    "latest_age_days": null,
    "tls_verification": "verified"
   },
@@ -669,7 +668,7 @@
    "via": "primary",
    "fetched_url": "https://windward.ai/feed/",
    "items_count": 12,
-   "content_chars": 76467,
+   "content_chars": 89358,
    "latest_age_days": 1,
    "tls_verification": "verified"
   },
@@ -678,10 +677,10 @@
    "name": "IRIB News",
    "primary_url": "https://www.iribnews.ir/fa/rss/allnews",
    "ok": true,
-   "via": "official-channel:telegram/iribnews",
-   "fetched_url": "https://t.me/s/iribnews",
-   "items_count": 16,
-   "content_chars": 9426,
+   "via": "primary",
+   "fetched_url": "https://www.iribnews.ir/fa/rss/allnews",
+   "items_count": 100,
+   "content_chars": 32654,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -690,10 +689,10 @@
    "name": "ISNA",
    "primary_url": "https://www.isna.ir/rss",
    "ok": true,
-   "via": "official-channel:telegram/isna94",
-   "fetched_url": "https://t.me/s/isna94",
-   "items_count": 16,
-   "content_chars": 5112,
+   "via": "primary",
+   "fetched_url": "https://www.isna.ir/rss",
+   "items_count": 30,
+   "content_chars": 27500,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -702,10 +701,10 @@
    "name": "ISNA",
    "primary_url": "https://en.isna.ir/rss",
    "ok": true,
-   "via": "official-channel:telegram/isna94",
-   "fetched_url": "https://t.me/s/isna94",
-   "items_count": 16,
-   "content_chars": 5112,
+   "via": "primary",
+   "fetched_url": "https://en.isna.ir/rss",
+   "items_count": 30,
+   "content_chars": 13416,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -714,10 +713,10 @@
    "name": "Mehr — العربي",
    "primary_url": "https://ar.mehrnews.com/rss",
    "ok": true,
-   "via": "official-channel:telegram/mehrnews",
-   "fetched_url": "https://t.me/s/mehrnews",
-   "items_count": 9,
-   "content_chars": 3876,
+   "via": "primary",
+   "fetched_url": "https://ar.mehrnews.com/rss",
+   "items_count": 30,
+   "content_chars": 27333,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -726,10 +725,10 @@
    "name": "Mehr — العربي",
    "primary_url": "https://en.mehrnews.com/rss",
    "ok": true,
-   "via": "official-channel:telegram/mehrnews",
-   "fetched_url": "https://t.me/s/mehrnews",
-   "items_count": 9,
-   "content_chars": 3876,
+   "via": "primary",
+   "fetched_url": "https://en.mehrnews.com/rss",
+   "items_count": 30,
+   "content_chars": 15140,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -741,8 +740,8 @@
    "via": "primary",
    "fetched_url": "https://www.understandingwar.org/wp-json/wp/v2/posts?per_page=10",
    "items_count": 10,
-   "content_chars": 330387,
-   "latest_age_days": 0,
+   "content_chars": 302108,
+   "latest_age_days": 1,
    "tls_verification": "verified"
   },
   {
@@ -754,7 +753,7 @@
    "fetched_url": "https://sanaacenter.org/feed/",
    "items_count": 20,
    "content_chars": 6158,
-   "latest_age_days": 4,
+   "latest_age_days": 11,
    "tls_verification": "verified"
   },
   {
@@ -765,7 +764,7 @@
    "via": "primary",
    "fetched_url": "https://www.navytimes.com/feed/",
    "items_count": 10,
-   "content_chars": 75673,
+   "content_chars": 29248,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -776,9 +775,9 @@
    "ok": true,
    "via": "primary",
    "fetched_url": "https://www.bairdmaritime.com/feed/",
-   "items_count": 1,
-   "content_chars": 1709,
-   "latest_age_days": 4,
+   "items_count": 12,
+   "content_chars": 27747,
+   "latest_age_days": 0,
    "tls_verification": "verified"
   },
   {
@@ -789,7 +788,7 @@
    "via": "primary",
    "fetched_url": "https://rss.nytimes.com/services/xml/rss/nyt/MiddleEast.xml",
    "items_count": 20,
-   "content_chars": 15779,
+   "content_chars": 15802,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -801,7 +800,7 @@
    "via": "primary",
    "fetched_url": "https://feeds.bloomberg.com/markets/news.rss",
    "items_count": 20,
-   "content_chars": 3211,
+   "content_chars": 3327,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -813,7 +812,7 @@
    "via": "primary",
    "fetched_url": "https://feeds.bloomberg.com/politics/news.rss",
    "items_count": 20,
-   "content_chars": 3202,
+   "content_chars": 3373,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -825,7 +824,7 @@
    "via": "primary",
    "fetched_url": "https://api.axios.com/feed/",
    "items_count": 100,
-   "content_chars": 800796,
+   "content_chars": 840659,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -845,73 +844,79 @@
    "num": 15,
    "name": "حساب @UK_MTO على X",
    "primary_url": "https://x.com/UK_MTO",
-   "ok": true,
-   "via": "primary",
-   "fetched_url": "https://x.com/UK_MTO",
-   "items_count": 5,
-   "content_chars": 1624,
-   "latest_age_days": 0,
-   "tls_verification": "verified"
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "latest_age_days": null,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44695B — تحدي قائم | مرئي: HTTP 403 · 44695B — تحدي قائم | مرئي: HTTP 403 · 44695B — تحدي قائم | مجرَّد: HTTP 403 · 44716B — تحدي قائم"
   },
   {
    "num": 17,
    "name": "حساب @bna_en على X",
    "primary_url": "https://x.com/bna_en",
-   "ok": true,
-   "via": "primary",
-   "fetched_url": "https://x.com/bna_en",
-   "items_count": 5,
-   "content_chars": 1459,
-   "latest_age_days": 0,
-   "tls_verification": "verified"
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "latest_age_days": null,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | official:bna-en-rss: حجب مصدر — human verification page (HTTP 405) | archive:bna-en-rss: حجب مصدر — رفض الخادم الطلب (HTTP 403)"
   },
   {
    "num": 18,
    "name": "حساب @bahdiplomatic على X",
    "primary_url": "https://x.com/bahdiplomatic",
-   "ok": true,
-   "via": "primary",
-   "fetched_url": "https://x.com/bahdiplomatic",
-   "items_count": 5,
-   "content_chars": 1675,
-   "latest_age_days": 0,
-   "tls_verification": "verified"
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "latest_age_days": null,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44716B — تحدي قائم | مرئي: HTTP 403 · 44716B — تحدي قائم | مرئي: HTTP 403 · 44716B — تحدي قائم | مجرَّد: HTTP 403 · 44737B — تحدي قائم"
   },
   {
    "num": 19,
    "name": "حساب @US5thFleet على X",
    "primary_url": "https://x.com/us5thfleet",
-   "ok": true,
-   "via": "primary",
-   "fetched_url": "https://x.com/us5thfleet",
-   "items_count": 5,
-   "content_chars": 2179,
-   "latest_age_days": 0,
-   "tls_verification": "verified"
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "latest_age_days": null,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44707B — تحدي قائم | مرئي: HTTP 403 · 44707B — تحدي قائم | مرئي: HTTP 403 · 44707B — تحدي قائم | مجرَّد: HTTP 403 · 44728B — تحدي قائم"
   },
   {
    "num": 56,
    "name": "حساب @YemenResistanc1 على X",
    "primary_url": "https://x.com/YemenResistanc1",
-   "ok": true,
-   "via": "primary",
-   "fetched_url": "https://x.com/YemenResistanc1",
-   "items_count": 5,
-   "content_chars": 1680,
-   "latest_age_days": 0,
-   "tls_verification": "verified"
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "latest_age_days": null,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مجرَّد: HTTP 403 · 44743B — تحدي قائم"
   },
   {
    "num": 57,
    "name": "حساب @spokespersonyem على X",
    "primary_url": "https://x.com/spokespersonyem",
-   "ok": true,
-   "via": "primary",
-   "fetched_url": "https://x.com/spokespersonyem",
-   "items_count": 4,
-   "content_chars": 2617,
-   "latest_age_days": 0,
-   "tls_verification": "verified"
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "latest_age_days": null,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44743B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مجرَّد: HTTP 403 · 44765B — تحدي قائم"
   },
   {
    "num": 59,
@@ -921,7 +926,7 @@
    "via": "primary",
    "fetched_url": "https://t.me/s/army21ye",
    "items_count": 12,
-   "content_chars": 8424,
+   "content_chars": 11049,
    "latest_age_days": 0,
    "tls_verification": "verified"
   },
@@ -929,48 +934,51 @@
    "num": 60,
    "name": "حساب @CJFCSpox على X",
    "primary_url": "https://x.com/CJFCSpox",
-   "ok": true,
-   "via": "primary",
-   "fetched_url": "https://x.com/CJFCSpox",
-   "items_count": 5,
-   "content_chars": 1605,
-   "latest_age_days": 0,
-   "tls_verification": "verified"
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "latest_age_days": null,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44701B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مجرَّد: HTTP 403 · 44722B — تحدي قائم"
   },
   {
    "num": 61,
    "name": "حساب @ERYANIM على X",
    "primary_url": "https://x.com/ERYANIM",
-   "ok": true,
-   "via": "primary",
-   "fetched_url": "https://x.com/ERYANIM",
-   "items_count": 5,
-   "content_chars": 1678,
-   "latest_age_days": 2,
-   "tls_verification": "verified"
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "latest_age_days": null,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44698B — تحدي قائم | مرئي: HTTP 403 · 44698B — تحدي قائم | مرئي: HTTP 403 · 44698B — تحدي قائم | مجرَّد: HTTP 403 · 44719B — تحدي قائم"
   },
   {
    "num": 62,
    "name": "حساب @Yemenarmyeng على X",
    "primary_url": "https://x.com/Yemenarmyeng",
-   "ok": true,
-   "via": "browser",
-   "fetched_url": "https://x.com/Yemenarmyeng",
-   "items_count": 4,
-   "content_chars": 596,
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
    "latest_age_days": null,
-   "tls_verification": "verified"
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44713B — تحدي قائم | مرئي: HTTP 403 · 44713B — تحدي قائم | مرئي: HTTP 403 · 44713B — تحدي قائم | مجرَّد: HTTP 403 · 44756B — تحدي قائم"
   },
   {
    "num": 14,
    "name": "قناة العربية — الحساب الرسمي على X",
    "primary_url": "https://x.com/AlArabiya",
    "ok": true,
-   "via": "primary",
-   "fetched_url": "https://x.com/AlArabiya",
-   "items_count": 4,
-   "content_chars": 1633,
-   "latest_age_days": 0,
+   "via": "fallback:jina.ai/alarabiya-home",
+   "fetched_url": "https://r.jina.ai/http://www.alarabiya.net/",
+   "items_count": 26,
+   "content_chars": 64358,
+   "latest_age_days": null,
    "tls_verification": "verified"
   },
   {
@@ -978,39 +986,231 @@
    "name": "USNI News — تغذية عبر وسيط قراءة",
    "primary_url": "https://r.jina.ai/https://news.usni.org/feed",
    "ok": true,
-   "via": "primary",
-   "fetched_url": "https://r.jina.ai/https://news.usni.org/feed",
-   "items_count": 60,
-   "content_chars": 5974,
-   "latest_age_days": null,
+   "via": "browser",
+   "fetched_url": "https://news.usni.org/feed",
+   "items_count": 30,
+   "content_chars": 149362,
+   "latest_age_days": 0,
    "tls_verification": "verified"
   },
   {
    "num": 42,
    "name": "Naval News — الحساب الرسمي على X",
    "primary_url": "https://x.com/navalnewscom",
-   "ok": true,
-   "via": "primary",
-   "fetched_url": "https://x.com/navalnewscom",
-   "items_count": 5,
-   "content_chars": 2523,
-   "latest_age_days": 0,
-   "tls_verification": "verified"
+   "ok": false,
+   "via": null,
+   "fetched_url": null,
+   "items_count": 0,
+   "content_chars": 0,
+   "latest_age_days": null,
+   "tls_verification": "verified",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403)"
   }
  ],
  "failed_feeds": [
   {
-   "num": 36,
-   "name": "Lloyd's List",
-   "primary_url": "https://www.lloydslist.com/rss/lloyds-list",
-   "error": "حجب مصدر — blocked page: Just a moment (HTTP 403)",
-   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403)",
+   "num": 17,
+   "name": "حساب @bna_en على X",
+   "primary_url": "https://web.archive.org/web/20260108135704/https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
+   "error": "حجب مصدر — human verification page (HTTP 405)",
+   "block_reason": "all routes failed: primary: حجب مصدر — رفض الخادم الطلب (HTTP 403) | official:bna-en-rss: حجب مصدر — human verification page (HTTP 405)",
    "attempts": [
     {
-     "url": "https://www.lloydslist.com/rss/lloyds-list",
+     "url": "https://web.archive.org/web/20260108135704/https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
+     "via": "primary",
+     "ok": false,
+     "error": "حجب مصدر — رفض الخادم الطلب (HTTP 403)",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://www.bna.bh/en/RSSFeeds.aspx?cms=iQRpheuphYtJ6pyXUGiNqqtA5DItoRVa",
+     "via": "official:bna-en-rss",
+     "ok": false,
+     "error": "حجب مصدر — human verification page (HTTP 405)",
+     "tls_verification": "verified"
+    }
+   ]
+  },
+  {
+   "num": 15,
+   "name": "حساب @UK_MTO على X",
+   "primary_url": "https://x.com/UK_MTO",
+   "error": "مسار المتصفح: مرئي: HTTP 403 · 44695B — تحدي قائم | مرئي: HTTP 403 · 44695B — تحدي قائم | مرئي: HTTP 403 · 44695B — تحدي قائم | مجرَّد: HTTP 403 · 44716B — تحدي قائم",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44695B — تحدي قائم | مرئي: HTTP 403 · 44695B — تحدي قائم | مرئي: HTTP 403 · 44695B — تحدي قائم | مجرَّد: HTTP 403 · 44716B — تحدي قائم",
+   "attempts": [
+    {
+     "url": "https://x.com/UK_MTO",
      "via": "primary",
      "ok": false,
      "error": "حجب مصدر — blocked page: Just a moment (HTTP 403)",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://x.com/UK_MTO",
+     "via": "browser",
+     "ok": false,
+     "error": "مسار المتصفح: مرئي: HTTP 403 · 44695B — تحدي قائم | مرئي: HTTP 403 · 44695B — تحدي قائم | مرئي: HTTP 403 · 44695B — تحدي قائم | مجرَّد: HTTP 403 · 44716B — تحدي قائم",
+     "tls_verification": "verified"
+    }
+   ]
+  },
+  {
+   "num": 18,
+   "name": "حساب @bahdiplomatic على X",
+   "primary_url": "https://x.com/bahdiplomatic",
+   "error": "مسار المتصفح: مرئي: HTTP 403 · 44716B — تحدي قائم | مرئي: HTTP 403 · 44716B — تحدي قائم | مرئي: HTTP 403 · 44716B — تحدي قائم | مجرَّد: HTTP 403 · 44737B — تحدي قائم",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44716B — تحدي قائم | مرئي: HTTP 403 · 44716B — تحدي قائم | مرئي: HTTP 403 · 44716B — تحدي قائم | مجرَّد: HTTP 403 · 44737B — تحدي قائم",
+   "attempts": [
+    {
+     "url": "https://x.com/bahdiplomatic",
+     "via": "primary",
+     "ok": false,
+     "error": "حجب مصدر — blocked page: Just a moment (HTTP 403)",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://x.com/bahdiplomatic",
+     "via": "browser",
+     "ok": false,
+     "error": "مسار المتصفح: مرئي: HTTP 403 · 44716B — تحدي قائم | مرئي: HTTP 403 · 44716B — تحدي قائم | مرئي: HTTP 403 · 44716B — تحدي قائم | مجرَّد: HTTP 403 · 44737B — تحدي قائم",
+     "tls_verification": "verified"
+    }
+   ]
+  },
+  {
+   "num": 19,
+   "name": "حساب @US5thFleet على X",
+   "primary_url": "https://x.com/us5thfleet",
+   "error": "مسار المتصفح: مرئي: HTTP 403 · 44707B — تحدي قائم | مرئي: HTTP 403 · 44707B — تحدي قائم | مرئي: HTTP 403 · 44707B — تحدي قائم | مجرَّد: HTTP 403 · 44728B — تحدي قائم",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44707B — تحدي قائم | مرئي: HTTP 403 · 44707B — تحدي قائم | مرئي: HTTP 403 · 44707B — تحدي قائم | مجرَّد: HTTP 403 · 44728B — تحدي قائم",
+   "attempts": [
+    {
+     "url": "https://x.com/us5thfleet",
+     "via": "primary",
+     "ok": false,
+     "error": "حجب مصدر — blocked page: Just a moment (HTTP 403)",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://x.com/us5thfleet",
+     "via": "browser",
+     "ok": false,
+     "error": "مسار المتصفح: مرئي: HTTP 403 · 44707B — تحدي قائم | مرئي: HTTP 403 · 44707B — تحدي قائم | مرئي: HTTP 403 · 44707B — تحدي قائم | مجرَّد: HTTP 403 · 44728B — تحدي قائم",
+     "tls_verification": "verified"
+    }
+   ]
+  },
+  {
+   "num": 56,
+   "name": "حساب @YemenResistanc1 على X",
+   "primary_url": "https://x.com/YemenResistanc1",
+   "error": "مسار المتصفح: مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مجرَّد: HTTP 403 · 44743B — تحدي قائم",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مجرَّد: HTTP 403 · 44743B — تحدي قائم",
+   "attempts": [
+    {
+     "url": "https://x.com/YemenResistanc1",
+     "via": "primary",
+     "ok": false,
+     "error": "حجب مصدر — blocked page: Just a moment (HTTP 403)",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://x.com/YemenResistanc1",
+     "via": "browser",
+     "ok": false,
+     "error": "مسار المتصفح: مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مجرَّد: HTTP 403 · 44743B — تحدي قائم",
+     "tls_verification": "verified"
+    }
+   ]
+  },
+  {
+   "num": 57,
+   "name": "حساب @spokespersonyem على X",
+   "primary_url": "https://x.com/spokespersonyem",
+   "error": "مسار المتصفح: مرئي: HTTP 403 · 44743B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مجرَّد: HTTP 403 · 44765B — تحدي قائم",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44743B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مجرَّد: HTTP 403 · 44765B — تحدي قائم",
+   "attempts": [
+    {
+     "url": "https://x.com/spokespersonyem",
+     "via": "primary",
+     "ok": false,
+     "error": "حجب مصدر — blocked page: Just a moment (HTTP 403)",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://x.com/spokespersonyem",
+     "via": "browser",
+     "ok": false,
+     "error": "مسار المتصفح: مرئي: HTTP 403 · 44743B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مجرَّد: HTTP 403 · 44765B — تحدي قائم",
+     "tls_verification": "verified"
+    }
+   ]
+  },
+  {
+   "num": 60,
+   "name": "حساب @CJFCSpox على X",
+   "primary_url": "https://x.com/CJFCSpox",
+   "error": "مسار المتصفح: مرئي: HTTP 403 · 44701B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مجرَّد: HTTP 403 · 44722B — تحدي قائم",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44701B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مجرَّد: HTTP 403 · 44722B — تحدي قائم",
+   "attempts": [
+    {
+     "url": "https://x.com/CJFCSpox",
+     "via": "primary",
+     "ok": false,
+     "error": "حجب مصدر — blocked page: Just a moment (HTTP 403)",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://x.com/CJFCSpox",
+     "via": "browser",
+     "ok": false,
+     "error": "مسار المتصفح: مرئي: HTTP 403 · 44701B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مجرَّد: HTTP 403 · 44722B — تحدي قائم",
+     "tls_verification": "verified"
+    }
+   ]
+  },
+  {
+   "num": 61,
+   "name": "حساب @ERYANIM على X",
+   "primary_url": "https://x.com/ERYANIM",
+   "error": "مسار المتصفح: مرئي: HTTP 403 · 44698B — تحدي قائم | مرئي: HTTP 403 · 44698B — تحدي قائم | مرئي: HTTP 403 · 44698B — تحدي قائم | مجرَّد: HTTP 403 · 44719B — تحدي قائم",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44698B — تحدي قائم | مرئي: HTTP 403 · 44698B — تحدي قائم | مرئي: HTTP 403 · 44698B — تحدي قائم | مجرَّد: HTTP 403 · 44719B — تحدي قائم",
+   "attempts": [
+    {
+     "url": "https://x.com/ERYANIM",
+     "via": "primary",
+     "ok": false,
+     "error": "حجب مصدر — blocked page: Just a moment (HTTP 403)",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://x.com/ERYANIM",
+     "via": "browser",
+     "ok": false,
+     "error": "مسار المتصفح: مرئي: HTTP 403 · 44698B — تحدي قائم | مرئي: HTTP 403 · 44698B — تحدي قائم | مرئي: HTTP 403 · 44698B — تحدي قائم | مجرَّد: HTTP 403 · 44719B — تحدي قائم",
+     "tls_verification": "verified"
+    }
+   ]
+  },
+  {
+   "num": 62,
+   "name": "حساب @Yemenarmyeng على X",
+   "primary_url": "https://x.com/Yemenarmyeng",
+   "error": "مسار المتصفح: مرئي: HTTP 403 · 44713B — تحدي قائم | مرئي: HTTP 403 · 44713B — تحدي قائم | مرئي: HTTP 403 · 44713B — تحدي قائم | مجرَّد: HTTP 403 · 44756B — تحدي قائم",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44713B — تحدي قائم | مرئي: HTTP 403 · 44713B — تحدي قائم | مرئي: HTTP 403 · 44713B — تحدي قائم | مجرَّد: HTTP 403 · 44756B — تحدي قائم",
+   "attempts": [
+    {
+     "url": "https://x.com/Yemenarmyeng",
+     "via": "primary",
+     "ok": false,
+     "error": "حجب مصدر — blocked page: Just a moment (HTTP 403)",
+     "tls_verification": "verified"
+    },
+    {
+     "url": "https://x.com/Yemenarmyeng",
+     "via": "browser",
+     "ok": false,
+     "error": "مسار المتصفح: مرئي: HTTP 403 · 44713B — تحدي قائم | مرئي: HTTP 403 · 44713B — تحدي قائم | مرئي: HTTP 403 · 44713B — تحدي قائم | مجرَّد: HTTP 403 · 44756B — تحدي قائم",
      "tls_verification": "verified"
     }
    ]
@@ -1021,8 +1221,8 @@
    "num": 14,
    "name": "قناة العربية",
    "via": null,
-   "error": "proxy reported target error · curl: proxy reported target error · curl أعاد محتوى غير مقروء",
-   "block_reason": "all routes failed: primary: حجب مصدر — رفض الخادم الطلب (HTTP 403) | fallback:jina.ai/alarabiya-rss: blocked page: Just a moment · curl: blocked page: Just a moment · curl أعاد محتوى غير مقروء | fallback:jina.ai/alarabiya-home: proxy reported target error · curl: proxy reported target error · curl أعاد محتوى غير مقروء"
+   "error": "proxy reported target error · curl: blocked page: Just a moment · curl أعاد محتوى غير مقروء",
+   "block_reason": "all routes failed: primary: حجب مصدر — رفض الخادم الطلب (HTTP 403) | fallback:jina.ai/alarabiya-rss: blocked page: Just a moment · curl: blocked page: Just a moment · curl أعاد محتوى غير مقروء | fallback:jina.ai/alarabiya-home: proxy reported target error · curl: blocked page: Just a moment · curl أعاد محتوى غير مقروء"
   },
   {
    "num": 17,
@@ -1032,19 +1232,75 @@
    "block_reason": "all routes failed: primary: حجب مصدر — رفض الخادم الطلب (HTTP 403) | official:bna-en-rss: حجب مصدر — human verification page (HTTP 405)"
   },
   {
-   "num": 36,
-   "name": "Lloyd's List",
+   "num": 15,
+   "name": "حساب @UK_MTO على X",
    "via": null,
-   "error": "حجب مصدر — blocked page: Just a moment (HTTP 403)",
-   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403)"
+   "error": "مسار المتصفح: مرئي: HTTP 403 · 44695B — تحدي قائم | مرئي: HTTP 403 · 44695B — تحدي قائم | مرئي: HTTP 403 · 44695B — تحدي قائم | مجرَّد: HTTP 403 · 44716B — تحدي قائم",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44695B — تحدي قائم | مرئي: HTTP 403 · 44695B — تحدي قائم | مرئي: HTTP 403 · 44695B — تحدي قائم | مجرَّد: HTTP 403 · 44716B — تحدي قائم"
   },
   {
-   "num": 36,
-   "name": "Lloyd's List",
+   "num": 17,
+   "name": "حساب @bna_en على X",
+   "via": null,
+   "error": "حجب مصدر — رفض الخادم الطلب (HTTP 403)",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | official:bna-en-rss: حجب مصدر — human verification page (HTTP 405) | archive:bna-en-rss: حجب مصدر — رفض الخادم الطلب (HTTP 403)"
+  },
+  {
+   "num": 18,
+   "name": "حساب @bahdiplomatic على X",
+   "via": null,
+   "error": "مسار المتصفح: مرئي: HTTP 403 · 44716B — تحدي قائم | مرئي: HTTP 403 · 44716B — تحدي قائم | مرئي: HTTP 403 · 44716B — تحدي قائم | مجرَّد: HTTP 403 · 44737B — تحدي قائم",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44716B — تحدي قائم | مرئي: HTTP 403 · 44716B — تحدي قائم | مرئي: HTTP 403 · 44716B — تحدي قائم | مجرَّد: HTTP 403 · 44737B — تحدي قائم"
+  },
+  {
+   "num": 19,
+   "name": "حساب @US5thFleet على X",
+   "via": null,
+   "error": "مسار المتصفح: مرئي: HTTP 403 · 44707B — تحدي قائم | مرئي: HTTP 403 · 44707B — تحدي قائم | مرئي: HTTP 403 · 44707B — تحدي قائم | مجرَّد: HTTP 403 · 44728B — تحدي قائم",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44707B — تحدي قائم | مرئي: HTTP 403 · 44707B — تحدي قائم | مرئي: HTTP 403 · 44707B — تحدي قائم | مجرَّد: HTTP 403 · 44728B — تحدي قائم"
+  },
+  {
+   "num": 56,
+   "name": "حساب @YemenResistanc1 على X",
+   "via": null,
+   "error": "مسار المتصفح: مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مجرَّد: HTTP 403 · 44743B — تحدي قائم",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مجرَّد: HTTP 403 · 44743B — تحدي قائم"
+  },
+  {
+   "num": 57,
+   "name": "حساب @spokespersonyem على X",
+   "via": null,
+   "error": "مسار المتصفح: مرئي: HTTP 403 · 44743B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مجرَّد: HTTP 403 · 44765B — تحدي قائم",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44743B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مجرَّد: HTTP 403 · 44765B — تحدي قائم"
+  },
+  {
+   "num": 60,
+   "name": "حساب @CJFCSpox على X",
+   "via": null,
+   "error": "مسار المتصفح: مرئي: HTTP 403 · 44701B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مجرَّد: HTTP 403 · 44722B — تحدي قائم",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44701B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مرئي: HTTP 403 · 44722B — تحدي قائم | مجرَّد: HTTP 403 · 44722B — تحدي قائم"
+  },
+  {
+   "num": 61,
+   "name": "حساب @ERYANIM على X",
+   "via": null,
+   "error": "مسار المتصفح: مرئي: HTTP 403 · 44698B — تحدي قائم | مرئي: HTTP 403 · 44698B — تحدي قائم | مرئي: HTTP 403 · 44698B — تحدي قائم | مجرَّد: HTTP 403 · 44719B — تحدي قائم",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44698B — تحدي قائم | مرئي: HTTP 403 · 44698B — تحدي قائم | مرئي: HTTP 403 · 44698B — تحدي قائم | مجرَّد: HTTP 403 · 44719B — تحدي قائم"
+  },
+  {
+   "num": 62,
+   "name": "حساب @Yemenarmyeng على X",
+   "via": null,
+   "error": "مسار المتصفح: مرئي: HTTP 403 · 44713B — تحدي قائم | مرئي: HTTP 403 · 44713B — تحدي قائم | مرئي: HTTP 403 · 44713B — تحدي قائم | مجرَّد: HTTP 403 · 44756B — تحدي قائم",
+   "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403) | browser: مسار المتصفح: مرئي: HTTP 403 · 44713B — تحدي قائم | مرئي: HTTP 403 · 44713B — تحدي قائم | مرئي: HTTP 403 · 44713B — تحدي قائم | مجرَّد: HTTP 403 · 44756B — تحدي قائم"
+  },
+  {
+   "num": 42,
+   "name": "Naval News — الحساب الرسمي على X",
    "via": null,
    "error": "حجب مصدر — blocked page: Just a moment (HTTP 403)",
    "block_reason": "all routes failed: primary: حجب مصدر — blocked page: Just a moment (HTTP 403)"
   }
  ],
- "written_utc": "2026-11-21T01:42:56Z"
+ "written_utc": "2026-11-27T20:49:48Z"
 }

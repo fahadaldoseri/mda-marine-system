@@ -4,14 +4,14 @@
     "while True: pass"
   ],
   "argv": [
-    "/usr/local/bin/python3",
+    "/opt/hostedtoolcache/Python/3.12.16/x64/bin/python3",
     "-c",
     "while True: pass"
   ],
   "changed_files_outside_isolation": 0,
   "changed_paths_outside_isolation": [],
-  "duration_ms": 1025,
-  "duration_seconds": 1.025,
+  "duration_ms": 1032,
+  "duration_seconds": 1.032,
   "evidence_files": {
     "impact_summary": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/raw/python3/impact-summary.json",
     "project_compare": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/raw/python3/project-compare.json",
@@ -32,32 +32,37 @@
     "seawatch_root": "/home/ubuntu/mda-marine-system/site"
   },
   "impact_summary": {
-    "connect_attempts": 1,
+    "connect_attempts": 5,
     "connect_lines": [
-      "818   connect(3, {sa_family=AF_INET, sin_port=htons(80), sin_addr=inet_addr(\"1.1.1.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)"
+      "59284 connect(3, {sa_family=AF_INET, sin_port=htons(80), sin_addr=inet_addr(\"1.1.1.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "59284 connect(4, {sa_family=AF_UNIX, sun_path=\"/var/run/nscd/socket\"}, 110) = -1 ENOENT (No such file or directory)",
+      "59284 connect(4, {sa_family=AF_UNIX, sun_path=\"/var/run/nscd/socket\"}, 110) = -1 ENOENT (No such file or directory)",
+      "59284 connect(6, {sa_family=AF_UNIX, sun_path=\"/run/systemd/userdb/io.systemd.DynamicUser\"}, 45) = 0",
+      "59284 connect(6, {sa_family=AF_UNIX, sun_path=\"/run/systemd/userdb/io.systemd.DynamicUser\"}, 45) = 0"
     ],
     "execve": [
       "/bin/sh",
+      "/opt/hostedtoolcache/Python/3.12.16/x64/bin/python3",
       "/usr/bin/awk",
       "/usr/bin/bwrap",
-      "/usr/local/bin/python3"
+      "/usr/bin/python3"
     ],
     "files_opened_for_write": [
-      "814   creat(\"/newroot/dev/full\", 0444)  = 5",
-      "814   creat(\"/newroot/dev/null\", 0444)  = 5",
-      "814   creat(\"/newroot/dev/random\", 0444) = 5",
-      "814   creat(\"/newroot/dev/tty\", 0444)   = 5",
-      "814   creat(\"/newroot/dev/urandom\", 0444) = 5",
-      "814   creat(\"/newroot/dev/zero\", 0444)  = 5",
-      "814   openat(5, \"gid_map\", O_RDWR|O_CLOEXEC) = 6",
-      "814   openat(5, \"setgroups\", O_RDWR|O_CLOEXEC) = 6",
-      "814   openat(5, \"uid_map\", O_RDWR|O_CLOEXEC) = 6",
-      "815   openat(AT_FDCWD, \"/var/tmp/hermetic-work.yByo3t/.hermetic-net-20261121T023641Z-773.probe.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "815   openat(AT_FDCWD, \"/var/tmp/hermetic-work.yByo3t/.hermetic-net-20261121T023641Z-773.probe.before\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "815   openat(AT_FDCWD, \"/var/tmp/hermetic-work.yByo3t/.hermetic-net-20261121T023641Z-773.probe.out\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "815   openat(AT_FDCWD, \"/var/tmp/hermetic-work.yByo3t/.hermetic-net-20261121T023641Z-773.probe.rc\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "816   openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
-      "819   openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3"
+      "59280 creat(\"/newroot/dev/full\", 0444)  = 5",
+      "59280 creat(\"/newroot/dev/null\", 0444)  = 5",
+      "59280 creat(\"/newroot/dev/random\", 0444) = 5",
+      "59280 creat(\"/newroot/dev/tty\", 0444)   = 5",
+      "59280 creat(\"/newroot/dev/urandom\", 0444) = 5",
+      "59280 creat(\"/newroot/dev/zero\", 0444)  = 5",
+      "59280 openat(5, \"gid_map\", O_RDWR|O_CLOEXEC) = 6",
+      "59280 openat(5, \"setgroups\", O_RDWR|O_CLOEXEC) = 6",
+      "59280 openat(5, \"uid_map\", O_RDWR|O_CLOEXEC) = 6",
+      "59281 openat(AT_FDCWD, \"/var/tmp/hermetic-work.x5rJ3y/.hermetic-net-20261127T205357Z-59239.probe.after\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "59281 openat(AT_FDCWD, \"/var/tmp/hermetic-work.x5rJ3y/.hermetic-net-20261127T205357Z-59239.probe.before\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "59281 openat(AT_FDCWD, \"/var/tmp/hermetic-work.x5rJ3y/.hermetic-net-20261127T205357Z-59239.probe.out\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "59281 openat(AT_FDCWD, \"/var/tmp/hermetic-work.x5rJ3y/.hermetic-net-20261127T205357Z-59239.probe.rc\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "59282 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3",
+      "59285 openat(AT_FDCWD, \"/dev/null\", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3"
     ]
   },
   "isolation": {
@@ -72,7 +77,7 @@
     "command": "python3 -c 'import socket; socket.create_connection((\"1.1.1.1\",80),3)'",
     "exit_code": 1,
     "failed_as_expected": true,
-    "output": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import socket; socket.create_connection((\"1.1.1.1\", 80), 3)\n                   ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/socket.py\", line 868, in create_connection\n    raise exceptions[0]\n  File \"/usr/local/lib/python3.13/socket.py\", line 853, in create_connection\n    sock.connect(sa)\n    ~~~~~~~~~~~~^^^^\nOSError: [Errno 101] Network is unreachable",
+    "output": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import socket; socket.create_connection((\"1.1.1.1\", 80), 3)\n                   ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.14/socket.py\", line 870, in create_connection\n    raise exceptions[0]\n  File \"/usr/lib/python3.14/socket.py\", line 855, in create_connection\n    sock.connect(sa)\n    ~~~~~~~~~~~~^^^^\nOSError: [Errno 101] Network is unreachable\nError in sys.excepthook:\nTraceback (most recent call last):\n  File \"/usr/lib/python3/dist-packages/apport_python_hook.py\", line 238, in partial_apport_excepthook\n    return apport_excepthook(binary, exc_type, exc_obj, exc_tb)\n  File \"/usr/lib/python3/dist-packages/apport_python_hook.py\", line 122, in apport_excepthook\n    report[\"ExecutableTimestamp\"] = str(int(os.stat(binary).st_mtime))\n                                            ~~~~~~~^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/var/tmp/hermetic-work.x5rJ3y/-c'\n\nOri",
     "packets_after_command": 0,
     "packets_after_probe": 0,
     "packets_before": 0
@@ -87,14 +92,14 @@
   "schema": "hermetic-run/v1",
   "timeout_enforced": true,
   "timeout_seconds": 1,
-  "timestamp_utc": "20261121T023641Z",
-  "tool": "/usr/local/bin/python3",
+  "timestamp_utc": "20261127T205357Z",
+  "tool": "/opt/hostedtoolcache/Python/3.12.16/x64/bin/python3",
   "tool_name": "python3",
   "trace": "/home/ubuntu/mda-marine-system/brain/evidence/hermetic/traces/python3.strace",
   "versions": {
-    "bubblewrap": "bubblewrap 0.9.0",
-    "strace": "strace -- version 6.8",
-    "systemd_run": "systemd 255 (255.4-1ubuntu8.18)",
-    "unshare": "unshare from util-linux 2.39.3"
+    "bubblewrap": "bubblewrap 0.11.1",
+    "strace": "strace -- version 6.19",
+    "systemd_run": "systemd 259 (259.9-0ubuntu0.1)",
+    "unshare": "unshare from util-linux 2.41.3"
   }
 }
