@@ -538,7 +538,13 @@ def _name_en(name: str) -> str:
     n = name.replace("حساب ", "").replace(" على X", "").strip()
     if not _AR.search(n):
         return n
-    return NAME_EN.get(n, "Arabic-language source")
+    mapped = NAME_EN.get(n)
+    if mapped:
+        return mapped
+    # اسم عربي غير مسجّل: تُحفظ أرقامه بترتيبها كي يطابق السطر الإنجليزي العربيَّ في validate_en_master
+    # (قيس 27 نوفمبر: ثلاثة أسماء بأرقام فُقدت فاختل الرقم المقابل وتوقف B004).
+    nums = re.findall(r"\d+(?:[.,]\d+)*", n)
+    return "Arabic-language source" + (f" ({' '.join(nums)})" if nums else "")
 
 
 def line_en(c: dict) -> str:

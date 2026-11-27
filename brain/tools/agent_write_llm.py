@@ -178,7 +178,19 @@ def _sync_en_dynamic(date: str) -> None:
                            capture_output=True, text=True)
         d = ROOT / "logs" / "runbook"
         d.mkdir(parents=True, exist_ok=True)
-        (d / "diag-en-master.txt").write_text(f"rc={r.returncode}\n{r.stdout}\n{r.stderr}", encoding="utf-8")
+        extra = ""
+        if r.returncode != 0:  # السطران المتقابلان عند الرفض: يُقرآن من artifact التشغيل بلا إعادة تشغيل
+            try:
+                import re as _re
+                m = _re.search(r"aligned_line=(\d+)", r.stdout + r.stderr)
+                if m:
+                    k = int(m.group(1))
+                    ar = [x for x in (ROOT / "reports" / f"{date}-sectioned.md").read_text(encoding="utf-8").splitlines() if x.strip()]
+                    en = [x for x in source_counts.english_master_path(date).read_text(encoding="utf-8").splitlines() if x.strip()]
+                    extra = f"\nAR[{k}]={ar[k - 1] if k <= len(ar) else ''}\nEN[{k}]={en[k - 1] if k <= len(en) else ''}\n"
+            except Exception as exc:  # noqa: BLE001
+                extra = f"\n(تعذّر استخراج السطرين: {type(exc).__name__})\n"
+        (d / "diag-en-master.txt").write_text(f"rc={r.returncode}\n{r.stdout}\n{r.stderr}{extra}", encoding="utf-8")
     except Exception as exc:  # التشخيص لا يوقف الخطوة؛ المدقق الحاكم يفصل
         print(f"  ⚠ تعذرت مزامنة الأصل الإنجليزي: {type(exc).__name__}: {str(exc)[:200]}")
 
