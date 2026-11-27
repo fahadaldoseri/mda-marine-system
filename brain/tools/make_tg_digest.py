@@ -196,6 +196,8 @@ def build(meta, date, base, detail=True, delivery_note="", max_items=3, max_acti
     changes = meta.get("changes", [])[:3]
     for i, c in enumerate(changes[:max_items], 1):
         title = date_in_letters(clean((codes.get(c["code"]) or {}).get("title") or c["text"]))
+        # العنوان قد ينتهي بنقطة أو فاصلة (نص حر): تُزال قبل إلحاق «، الرمز» حتى لا تتجاور علامتان.
+        title = title.rstrip(" .،؛:")
         body = clean(c["text"])
         show_body = detail and body and body != title
         # نقطة في آخر البند الخالي من التفاصيل: كل بند جملة مستقلة، وإلا دمج مدقق
