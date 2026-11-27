@@ -622,7 +622,7 @@ def sync_english_dynamic(date: str) -> bool:
     t = re.sub(r"^-?\s*(?:Sources:|Degraded run disclosed:).*\n?", "", t, flags=re.M)
     fl = faults_line_en(date)
     gen = "- " + line_en(c) + ("\n- " + fl if fl else "")
-    m = re.search(r"^##\s+Unresolved Matters[ \t]*$", t, re.M)
+    m = re.search(r"^##\s+What Remains Unresolved[ \t]*$", t, re.M)
     if not m:
         return False
     nxt = re.search(r"^##\s+", t[m.end():], re.M)
