@@ -54,7 +54,7 @@ jobs:
           node-version: "20"
 
       - name: التاريخ
-        run: echo "D=${{ inputs.date }}" | sed 's/=$/='"$(date -u +%F)"'/' >> "$GITHUB_ENV"
+        run: echo "D=${{ inputs.date || (github.event_name == 'push' && '2026-11-26') || '' }}" | sed 's/=$/='"$(date -u +%F)"'/' >> "$GITHUB_ENV"
 
       - name: حزم النظام والمسار القانوني
         run: |
@@ -201,4 +201,4 @@ jobs:
 # 23:38 retrigger
 # 23:46 retrigger
 # 00:02 retrigger
-# 00:09 retrigger
+# 00:15 retrigger
