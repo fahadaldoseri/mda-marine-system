@@ -161,6 +161,28 @@ def _norm(path: str) -> str:
     return path.strip().strip("`\"' ").removeprefix("./")
 
 
+def _sync_en_dynamic(date: str) -> None:
+    """الأسطر المشتقة من حالة التغذيات تُعاد من الحالة بعد كتابة الأصل الإنجليزي (لا يكتبها النموذج ولا Claude بيده).
+
+    السبب: جلب اليوم يغيّر أعداد الفحص والتعذّر بعد كتابة الإجابة الاحتياطية، فيختلف رقم السطر المقابل
+    عن العربية. يُسجَّل مخرج المدقق في logs/runbook/diag-en-master.txt ليُقرأ من artifact التشغيل.
+    """
+    try:
+        sys.path.insert(0, str(ROOT / "tools"))
+        import source_counts  # noqa: WPS433
+        changed = source_counts.sync_english_dynamic(date)
+        print(f"  · مزامنة أسطر الأصل الإنجليزي المشتقة من الحالة: {'تمت' if changed else 'لا تغيير'}")
+        r = subprocess.run([sys.executable, str(ROOT / "tools" / "validate_en_master.py"),
+                            "--arabic", str(ROOT / "reports" / f"{date}-sectioned.md"),
+                            "--english", str(source_counts.english_master_path(date))],
+                           capture_output=True, text=True)
+        d = ROOT / "logs" / "runbook"
+        d.mkdir(parents=True, exist_ok=True)
+        (d / "diag-en-master.txt").write_text(f"rc={r.returncode}\n{r.stdout}\n{r.stderr}", encoding="utf-8")
+    except Exception as exc:  # التشخيص لا يوقف الخطوة؛ المدقق الحاكم يفصل
+        print(f"  ⚠ تعذرت مزامنة الأصل الإنجليزي: {type(exc).__name__}: {str(exc)[:200]}")
+
+
 def write_outputs(s: dict, date: str, text: str) -> list[str]:
     allowed = {_norm(w.replace("{date}", date)) for w in s.get("writes", [])}
     done = []
@@ -173,6 +195,8 @@ def write_outputs(s: dict, date: str, text: str) -> list[str]:
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(content.rstrip("\n") + "\n", encoding="utf-8")
         done.append(path)
+    if done and s.get("id") == "B004":
+        _sync_en_dynamic(date)
     if not done:
         print(f"  ⚠ لا ملفات بالصيغة المطلوبة؛ طول الرد {len(text)} وبدايته: {text[:160]!r}")
     return done
