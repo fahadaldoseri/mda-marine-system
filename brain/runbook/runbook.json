@@ -955,14 +955,16 @@
           "appendices/estimate-code-map.json",
           "tools/register_estimate.py",
           "skills/runbook-operations-ops/SKILL.md",
-          "tools/agent_write_llm.py"
+          "tools/agent_write_llm.py",
+          "tools/w010_split.py"
         ],
         "gates": [],
         "tests": [
           "tests/test_runbook_engine.sh",
           "tests/test_write_prompt.py",
           "tests/test_g030_code_spaces.py",
-          "tests/test_agent_write_llm.py"
+          "tests/test_agent_write_llm.py",
+          "tests/test_w010_split.py"
         ]
       },
       "on_fail": "stop",
