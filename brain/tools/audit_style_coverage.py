@@ -391,8 +391,8 @@ def _blocked_findings(pc: int, sc: int, tgt: Path, surface: dict, extra: list[st
         cmd += (extra or ["--md"])
     r = subprocess.run(cmd + [str(tgt)], capture_output=True, text=True)
     lines = [ln.strip() for ln in ((r.stdout or "") + (r.stderr or "")).splitlines() if ln.strip()]
-    keep = [ln for ln in lines if not ln.startswith(("✔", "مقبول"))]
-    return keep[:8]
+    keep = [ln for ln in lines if not ln.startswith(("✔", "مقبول", "|", "===", "الملف:"))]
+    return [ln[:260] for ln in keep[:30]]
 
 
 def surfaces(day: str) -> list[dict]:
@@ -559,7 +559,7 @@ def main() -> int:
         print(f"{'السطح':<42} {'النتيجة':<14} {'الأسلوب':<10} {'المصطنعة':<10}")
         for r in rows:
             print(f"{r['label'][:41]:<42} {r['status']:<14} {r['style']:<10} {r['prose']:<10}  {r['note']}")
-            for f in r.get("findings", [])[:(8 if r["status"] == "مانع" else 3)]:
+            for f in r.get("findings", [])[:(30 if r["status"] == "مانع" else 3)]:
                 print(f"      · {f}")
         print(f"── الأسطح: {len(rows)} · مغطاة: {len(rows) - uncovered - blocked - deferred_count} · "
               f"مؤجلة معلنة: {deferred_count} · غير مغطاة: {uncovered} · مانعة: {blocked}")

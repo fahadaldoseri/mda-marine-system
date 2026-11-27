@@ -226,7 +226,7 @@ else:
                 _cur = [_ln.strip()] if " مانع " in (_ln + " ") else None
                 if _cur is not None:
                     _rows.append(_cur)
-        print("        · تشخيص السطح:", " || ".join(" ; ".join(x)[:700] for x in _rows) or (r.stderr or "")[-300:])
+        print("        · تشخيص السطح:", " || ".join(" ; ".join(x)[:4000] for x in _rows) or (r.stderr or "")[-300:])
 
 print(f"── الاختبارات: {len(fails)} فشل · {len(skips)} تخطٍّ موثَّق")
 for s in skips:
