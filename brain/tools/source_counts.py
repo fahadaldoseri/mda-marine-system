@@ -525,6 +525,124 @@ def sources_state_section(date: str, c: dict) -> str:
     return "## حالة المصادر والإفصاح\n" + "\n\n".join(parts)
 
 
+# ---- النسخة الإنجليزية للأسطر المُولَّدة (تُقرأ كلها من حالة التغذيات، لا تُكتب بيد) ----
+REASON_EN = {"حجب المصدر": "source blocked", "عطل اتصال مؤقت": "temporary connection fault",
+             "تغذية معطوبة": "malformed feed"}
+NAME_EN = {"قناة العربية": "Al Arabiya channel", "وكالة الأنباء الكويتية (كونا)": "Kuwait News Agency (KUNA)",
+           "جريدة الأيام": "Al Ayam newspaper", "القيادة المركزية الأمريكية (سنتكوم)": "US Central Command (CENTCOM)",
+           "وكالة أنباء الإمارات (وام)": "Emirates News Agency (WAM)"}
+_AR = re.compile(r"[\u0600-\u06ff\u0750-\u077f\u08a0-\u08ff\ufb50-\ufdff\ufe70-\ufeff]")
+
+
+def _name_en(name: str) -> str:
+    n = name.replace("حساب ", "").replace(" على X", "").strip()
+    if not _AR.search(n):
+        return n
+    mapped = NAME_EN.get(n)
+    if mapped:
+        return mapped
+    # اسم عربي غير مسجّل: تُحفظ أرقامه بترتيبها كي يطابق السطر الإنجليزي العربيَّ في validate_en_master
+    # (قيس 27 نوفمبر: ثلاثة أسماء بأرقام فُقدت فاختل الرقم المقابل وتوقف B004).
+    nums = re.findall(r"\d+(?:[.,]\d+)*", n)
+    return "Arabic-language source" + (f" ({' '.join(nums)})" if nums else "")
+
+
+def line_en(c: dict) -> str:
+    """نظير line_ar بالإنجليزية: الأرقام نفسها بالترتيب نفسه (يفحصها validate_en_master)."""
+    ch = channels_declared()
+    parts = [f"Sources: {c['approved']} approved = {len(ch['rss'])} by the automated path + "
+             f"{len(ch['manual'])} by manual reference"
+             + (f" + {len(ch['proxy'])} by an alternative official path" if ch["proxy"] else ""),
+             f"Check: {c['ok']} succeeded"]
+    if c["failed"]:
+        pairs = [f"{_name_en(n)} — {REASON_EN[reason_label(r)] if reason_label(r) in REASON_EN else 'malformed feed'}"
+                 for r, ns in c["reasons"].items() for n in ns]
+        if c.get("manual_reference_present"):
+            parts.append(f"{c['failed']} unavailable: " + " · ".join(pairs))
+        else:
+            parts.append(f"{c['failed']} failed: " + " · ".join(pairs))
+    if c.get("manual_reference_present"):
+        manual_n = int(c.get("manual_reference_count") or len(c.get("manual_reference") or []))
+        parts.append(f"Manual reference: {manual_n} checked manually")
+    return ". ".join(parts) + "."
+
+
+def faults_line_en(date: str) -> str:
+    fl = faults_line(date)
+    if not fl:
+        return ""
+    en = ""
+    try:
+        data = json.loads((B / "appendices" / "known-faults.json").read_text(encoding="utf-8"))
+        for e in data.get("allowed", []):
+            full = str(e.get("reason_ar_full") or e.get("reason_ar") or "")
+            if full and full in fl and e.get("reason_en_full"):
+                en = str(e["reason_en_full"])
+                break
+    except (OSError, ValueError):
+        en = ""
+    if not en:
+        nums = re.findall(r"\d+(?:[.,]\d+)*", fl)
+        en = "Known fault disclosed (details in the Arabic original) " + " ".join(nums)
+    return f"Degraded run disclosed: Feeds: {en}."
+
+
+def sources_state_section_en(date: str, c: dict) -> str:
+    p = B / "feeds" / f"feeds-{date}.status.json"
+    d = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+    items = int(d.get("items") or 0)
+    limit = int(d.get("stale_days_limit") or 14)
+    stale = [str(x) for x in (d.get("stale") or [])]
+    manual = [str(x) for x in (d.get("manual_reference") or [])]
+    nums = []
+    for a in d.get("failed_attempts") or []:
+        n = a.get("num")
+        if n is not None and str(n) not in nums:
+            nums.append(str(n))
+    parts = [f"{c['checked']} feeds out of {c['checked']} feeds were checked.",
+             f"The total of items read reached {items} items."]
+    if c["failed"] == 0:
+        parts.append("The feed succeeded at the level of the whole source.")
+    else:
+        parts.append(f"{c['failed']} out of {c['checked']} feeds were unavailable.")
+    if manual:
+        parts.append(f"A manual reference was recorded for sources {', '.join(manual)} — count {len(manual)}.")
+    if stale:
+        parts.append(f"Stale sources were flagged under the {limit}-day threshold: {', '.join(stale)} — "
+                     f"count {len(stale)}; they were not relied upon alone to establish a new incident.")
+    if nums:
+        parts.append(f"Path failures were recorded for sources {', '.join(nums)} in secondary attempts, while the "
+                     "overall feed status remained successful through the approved alternative paths.")
+    if not d.get("empty"):
+        parts.append("No feed is empty, and no limitation is hidden from the reader.")
+    return "## Source Status and Disclosure\n" + "\n\n".join(parts)
+
+
+def sync_english_dynamic(date: str) -> bool:
+    """يعيد توليد الأسطر المشتقة من حالة التغذيات في الأصل الإنجليزي (سطر المصادر وسطر العطل وقسم الإفصاح)."""
+    path = english_master_path(date)
+    if not path.is_file():
+        return False
+    c = counts(date)
+    t = path.read_text(encoding="utf-8")
+    t = re.sub(r"^-?\s*(?:Sources:|Degraded run disclosed:).*\n?", "", t, flags=re.M)
+    fl = faults_line_en(date)
+    gen = "- " + line_en(c) + ("\n- " + fl if fl else "")
+    m = re.search(r"^##\s+What Remains Unresolved[ \t]*$", t, re.M)
+    if not m:
+        return False
+    nxt = re.search(r"^##\s+", t[m.end():], re.M)
+    end = m.end() + (nxt.start() if nxt else len(t[m.end():]))
+    body = re.sub(r"\n{3,}", "\n\n", t[m.end():end].strip("\n"))
+    t = t[:m.end()] + ("\n\n" + body if body else "") + "\n\n" + gen + "\n\n" + t[end:].lstrip("\n")
+    block = sources_state_section_en(date, c)
+    pat = re.compile(r"^##\s+Source Status and Disclosure\s*$.*?(?=^##\s+Sources and References\s*$)", re.M | re.S)
+    if pat.search(t):
+        t = pat.sub(lambda _m: block + "\n\n", t, count=1)
+    path.write_text(t, encoding="utf-8")
+    return True
+
+
 def inject_sources_state(date: str, c: dict) -> tuple[bool, str]:
     """يكتب/يستبدل قسم «حالة المصادر والإفصاح» قبل «المصادر والمراجع» بلا تكرار."""
     p = report_path(date)

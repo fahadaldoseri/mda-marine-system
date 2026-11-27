@@ -47,3 +47,7 @@
 ## سجل 12 نوفمبر
 
 حارس تغطية الأيام G058 كان يرفض سجل 2026-11-12 على `main`، لأن `http_status` غائب عن مصادره الاثني عشر. **قرار المالك (2026-11-17): يُشتق الرمز من ملف حالة التغذيات لذلك اليوم.** اشتُق بـ`tools/derive_http_status.py --date 2026-11-12 --apply` من `feeds/feeds-2026-11-12.status.json`، ووُسمت كل قيمة بـ`http_status_derived` و`http_status_basis`. وأُلزم كاتب الدفتر في `runbook/prompts/write-ledger.md` بأن ينقل الرمز من الجلب مباشرة من الآن.
+
+## التشغيل بلا جلسة Claude (GitHub Actions)
+
+منذ 26 نوفمبر 2026 يمكن تشغيل اليوم كاملًا في `.github/workflows/daily.yml`: خطوات الوكيل يكتبها `tools/agent_write_llm.py` بنموذج مجاني عبر freellmapi، والبوابات والنشر وتلغرام كما في الخطوات أعلاه بلا تغيير. الأسرار في إعدادات المستودع: `FREELLMAPI_GOOGLE_KEY` (أو `FREELLMAPI_GROQ_KEY`) و`CLOUDFLARE_API_TOKEN` و`SEAWATCH_LIVE_TOKEN` و`TELEGRAM_BOT_TOKEN` و`TELEGRAM_OWNER_CHAT_ID`. Claude يُستدعى عند الفشل فقط.

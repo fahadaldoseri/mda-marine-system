@@ -1,0 +1,191 @@
+# التشغيل اليومي بلا جلسة Claude (قرار فهد 2026-11-26): 04:40 بتوقيت البحرين = 01:40Z.
+# الخط الحتمي كما هو (runbook.py حتى G069 ← cloud_deliver.py ← publish_site.sh --telegram)،
+# وخطوات الوكيل الأربع يكتبها نموذج عبر tools/agent_write_llm.py: Anthropic API إن وُجد السر ANTHROPIC_API_KEY (خارج باقة Claude)، وإلا freellmapi المجاني.
+# الضمانات: لا تجاوز لبوابة، النشر فقط بحكم 0 أو 3 (cloud_deliver يرفض غيرهما)،
+# تلغرام مرة واحدة بعد نشر متحقق (telegram_send يمنع التكرار)، لا دمج في main لهذا المستودع.
+# عند الفشل: يفشل المهمة فيصل إشعار GitHub، ويُستدعى Claude يدويًا للإصلاح فقط.
+name: daily
+
+on:
+  schedule:
+    - cron: "40 1 * * *"
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "التاريخ YYYY-MM-DD (فارغ = اليوم UTC)"
+        required: false
+      publish:
+        description: "نشر وإرسال تلغرام (لا = تشغيل جاف حتى G069)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: daily
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 140
+    env:
+      CANON: /home/ubuntu/mda-marine-system
+      BRAIN_DIR: /home/ubuntu/mda-marine-system/brain
+      SITE_DIR: /home/ubuntu/mda-marine-system/site
+      FALLBACK_DIR: /home/ubuntu/fallback
+      # النشر في التشغيل المجدول أمر فهد الدائم؛ في التشغيل اليدوي بالاختيار.
+      PUBLISH: ${{ github.event_name == 'schedule' || inputs.publish }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: التاريخ
+        run: echo "D=${{ inputs.date || '' }}" | sed 's/=$/='"$(date -u +%F)"'/' >> "$GITHUB_ENV"
+
+      - name: حزم النظام والمسار القانوني
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils bubblewrap iproute2 libreoffice-writer-nogui >/dev/null
+          sudo mkdir -p /home/ubuntu && sudo chown "$USER" /home/ubuntu
+          pip install -q -r brain/requirements.txt pytest
+          python3 -m playwright install --with-deps chromium >/dev/null
+          bash brain/tools/cloud_env_prep.sh
+          git config --global user.name "seawatch-daily"
+          git config --global user.email "seawatch-daily@users.noreply.github.com"
+
+      # للخطوتين الاختياريتين S080 وS090 فقط؛ فشله لا يوقف الخط (كتابة الخطوات الأربع بـ Anthropic).
+      - name: النموذج المجاني (freellmapi) — اختياري
+        continue-on-error: true
+        env:
+          FREELLMAPI_GOOGLE_KEY: ${{ secrets.FREELLMAPI_GOOGLE_KEY }}
+          FREELLMAPI_GROQ_KEY: ${{ secrets.FREELLMAPI_GROQ_KEY }}
+          FREELLMAPI_OPENROUTER_KEY: ${{ secrets.FREELLMAPI_OPENROUTER_KEY }}
+          FREELLMAPI_CEREBRAS_KEY: ${{ secrets.FREELLMAPI_CEREBRAS_KEY }}
+          FREELLMAPI_MISTRAL_KEY: ${{ secrets.FREELLMAPI_MISTRAL_KEY }}
+          FREELLMAPI_NVIDIA_KEY: ${{ secrets.FREELLMAPI_NVIDIA_KEY }}
+          FREELLMAPI_COHERE_KEY: ${{ secrets.FREELLMAPI_COHERE_KEY }}
+          FREELLMAPI_CLOUDFLARE_KEY: ${{ secrets.FREELLMAPI_CLOUDFLARE_KEY }}
+          FREELLMAPI_ZHIPU_KEY: ${{ secrets.FREELLMAPI_ZHIPU_KEY }}
+          FREELLMAPI_AION_KEY: ${{ secrets.FREELLMAPI_AION_KEY }}
+          FREELLMAPI_MODELSCOPE_KEY: ${{ secrets.FREELLMAPI_MODELSCOPE_KEY }}
+          FREELLMAPI_SILICONFLOW_KEY: ${{ secrets.FREELLMAPI_SILICONFLOW_KEY }}
+        run: |
+          bash "$CANON/brain/tools/freellmapi_up.sh"
+          [ -f "$HOME/.freellmapi.env" ] || exit 0
+          cat "$HOME/.freellmapi.env" | sed -n 's/^export \(LLM_BASE_URL\|LLM_NODE\)=\(.*\)/\1=\2/p' >> "$GITHUB_ENV"
+          k=$(sed -n 's/^export LLM_API_KEY=//p' "$HOME/.freellmapi.env"); echo "::add-mask::$k"; echo "LLM_API_KEY=$k" >> "$GITHUB_ENV"
+
+      - name: إجابات Claude الاحتياطية (إن وُجدت)
+        working-directory: /home/ubuntu/mda-marine-system
+        run: |
+          # خارج brain كي لا يرفضها فحص المانيفست (ملف غير متصل بخطوة).
+          mkdir -p "$FALLBACK_DIR/$D"
+          if git fetch -q origin "fallback/$D" 2>/dev/null && git archive FETCH_HEAD "brain/fallback/$D" 2>/dev/null | tar -x -C "$FALLBACK_DIR/$D" --strip-components=3; then
+            echo "استُعيدت إجابات احتياطية: $(ls "$FALLBACK_DIR/$D" | tr '\n' ' ')"
+          else echo "لا إجابات احتياطية"; fi
+          # إجابات مكتوبة بيد Claude داخل المستودع نفسه (fallback-answers/D) تتقدّم على الفرع
+          git archive HEAD "fallback-answers/$D" 2>/dev/null | tar -x -C "$FALLBACK_DIR/$D" --strip-components=2 && echo "استُعيدت إجابات من المستودع: $(ls "$FALLBACK_DIR/$D" | tr '\n' ' ')" || true
+
+      - name: الخط حتى G069 (خطوات الوكيل بالنموذج المجاني)
+        working-directory: /home/ubuntu/mda-marine-system/brain
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL: ${{ vars.ANTHROPIC_MODEL || 'claude-haiku-5-5' }}
+          LLM_MODEL: ${{ vars.LLM_MODEL || 'auto' }}
+        run: |
+          set +e
+          python3 tools/agent_write_llm.py --date "$D" 2>&1 | tee /tmp/agent_loop.log; rc=${PIPESTATUS[0]}
+          python3 tools/publish_verdict.py --date "$D"; v=$?
+          echo "VERDICT=$v" >> "$GITHUB_ENV"
+          echo "### حكم النشر $D: $v (خط $rc)" >> "$GITHUB_STEP_SUMMARY"
+          # المحرّك يقف عند D005 (خطوة خادم Manus) بعد G069، وهذا متوقع؛ الحاكم هو الحكم.
+          [ "$v" = 0 ] || [ "$v" = 3 ] || exit 1
+
+      - name: حفظ برومت الخطوة الفاشلة للاحتياط (فرع fallback/D)
+        if: failure()
+        working-directory: /home/ubuntu/mda-marine-system
+        run: |
+          ls "$FALLBACK_DIR/$D"/*.prompt.md >/dev/null 2>&1 || exit 0
+          mkdir -p "/tmp/fbsave" && cp "$FALLBACK_DIR/$D"/* /tmp/fbsave/
+          # الفرع يُبنى من main لا من فرع الاختبار: GitHub يمنع تطبيقه من دفع تعديلات ملفات سير العمل
+          git fetch -q origin main
+          git checkout -q -f -B "fallback/$D" origin/main
+          mkdir -p "brain/fallback/$D" && cp /tmp/fbsave/* "brain/fallback/$D/"
+          git add -f "brain/fallback/$D"
+          git commit -q -m "برومت احتياطي $D" && git push -q -f origin "fallback/$D" && echo "حُفظ: fallback/$D"
+
+      - name: سجل freellmapi (عند الفشل فقط)
+        if: failure()
+        run: |
+          for f in $(ls -t /home/ubuntu/mda-marine-system/brain/logs/runbook/$D/*.log 2>/dev/null | head -1); do echo "== آخر سجل خطوة: $f"; tail -n 25 "$f" | cut -c1-300; done
+          grep -hE "✘" /home/ubuntu/mda-marine-system/brain/logs/gate-$D/*.log 2>/dev/null | cut -c1-300 | head -30 || true
+          grep -E "▶|✘|⚠|✔" /tmp/agent_loop.log 2>/dev/null | cut -c1-260 | tail -30 || true
+          tail -n 12 "$HOME/freellmapi/server.log" 2>/dev/null | sed -E 's/(key|token|authorization)[^ ]*[ =:]+[^ ]+/\1=***/Ig' || true
+
+      - name: النشر على mda-bh.pages.dev
+        if: env.PUBLISH == 'true'
+        working-directory: /home/ubuntu/mda-marine-system/brain
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          LIVE_TOKEN: ${{ secrets.SEAWATCH_LIVE_TOKEN }}
+        run: |
+          git config --global url."https://x-access-token:${LIVE_TOKEN}@github.com/fahadaldoseri/seawatch-live".insteadOf "https://github.com/fahadaldoseri/seawatch-live"
+          python3 tools/cloud_deliver.py --date "$D"
+          python3 tools/cloud_deliver.py --date "$D" --push
+          echo "نُشر: https://mda-bh.pages.dev/reports/$D" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: ملخص تلغرام (مرة واحدة)
+        if: env.PUBLISH == 'true'
+        working-directory: /home/ubuntu/mda-marine-system/brain
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_OWNER_CHAT_ID: ${{ secrets.TELEGRAM_OWNER_CHAT_ID }}
+        run: |
+          bash tools/ensure_devserver.sh 3000
+          python3 tools/runbook.py run --date "$D" --root . --only G011 --redo G011
+          bash tools/publish_site.sh --telegram "$D"
+
+      - name: حفظ مخرجات اليوم في فرع daily/D وطلب دمج مسودة
+        if: always() && env.PUBLISH == 'true'
+        working-directory: /home/ubuntu/mda-marine-system
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git add -A brain site/sources
+          git diff --cached --name-only --diff-filter=AMR -z | tar --null -T - -cf /tmp/daily-out.tar
+          git fetch -q origin main
+          git checkout -q -f -B "daily/$D" origin/main   # من main: لا تعديلات على ملفات سير العمل في الدفع
+          tar -xf /tmp/daily-out.tar
+          git add -A brain site/sources
+          python3 brain/validators/check_repo_secrets.py || { echo "✘ فحص الأسرار منع الإيداع"; exit 1; }
+          git commit -q -m "تقرير $D: حكم ${VERDICT:-?} (تشغيل GitHub Actions)" || exit 0
+          git push -q -f origin "daily/$D"
+          gh pr view "daily/$D" >/dev/null 2>&1 || gh pr create --draft --base main --head "daily/$D" \
+            --title "تقرير $D (تشغيل آلي)" --body "حكم النشر: ${VERDICT:-?}. سجل التشغيل: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" \
+            || echo "::warning::تعذّر إنشاء طلب الدمج (إعداد Actions لا يسمح)؛ الفرع daily/$D محفوظ"
+
+      - name: سجلات التشغيل
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs-${{ env.D }}
+          path: |
+            /home/ubuntu/mda-marine-system/brain/logs/runbook/
+            /home/ubuntu/mda-marine-system/brain/logs/gate-*/
+            /home/ubuntu/mda-marine-system/brain/logs/auto-heal/
+            /home/ubuntu/mda-marine-system/brain/logs/pipeline-*.json
+            /home/ubuntu/mda-marine-system/brain/logs/deliver-*.json
+            /home/ubuntu/mda-marine-system/brain/logs/publish-*-telegram.json
+          retention-days: 14
+# تشغيل 26 نوفمبر بعد ضم 22 وفجوة 23-25
+# + ترجمات 22 نوفمبر

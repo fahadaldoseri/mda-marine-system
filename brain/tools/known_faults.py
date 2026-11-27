@@ -17,11 +17,15 @@ CONFIG = B / "appendices" / "known-faults.json"
 def expired(item: dict, today: str | None = None) -> bool:
     """البند المنتهي صلاحيته لا يُفصح عنه: يصير عطلًا غير مسموح فيمنع التسليم."""
     exp = (item or {}).get("expires")
-    if not exp:
+    only_on = (item or {}).get("only_on")
+    if not exp and not only_on:
         return False
     import datetime as _dt
     d = today or _dt.datetime.now(_dt.timezone.utc).strftime("%Y-%m-%d")
-    return exp < d
+    # «only_on»: إعلان ليوم واحد بعينه (قرار المالك اليومي) لا يسري على تقرير يوم آخر، لا قبله ولا بعده.
+    if only_on and d != only_on:
+        return True
+    return bool(exp) and exp < d
 
 
 def load() -> dict:

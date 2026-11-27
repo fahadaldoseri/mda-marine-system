@@ -215,6 +215,18 @@ else:
         ok(f"تغطية الأسطح كاملة ({day}) — لا سطح خارج البوابة")
     else:
         bad("تغطية الأسطح", (r.stdout or "").strip().splitlines()[-1:] or r.returncode)
+        # تشخيص (سطر واحد في آخر المخرج حتى يظهر في ذيل السجل): السطح المانع وما وجدته البوابة فيه
+        _rows, _cur = [], None
+        for _ln in (r.stdout or "").splitlines():
+            if _ln.startswith("      · ") and _cur is not None:
+                _cur.append(_ln.strip()[2:])
+            elif _ln.startswith("── ") or _ln.startswith("==="):
+                _cur = None
+            else:
+                _cur = [_ln.strip()] if " مانع " in (_ln + " ") else None
+                if _cur is not None:
+                    _rows.append(_cur)
+        print("        · تشخيص السطح:", " || ".join(" ; ".join(x)[:4000] for x in _rows) or (r.stderr or "")[-300:])
 
 print(f"── الاختبارات: {len(fails)} فشل · {len(skips)} تخطٍّ موثَّق")
 for s in skips:

@@ -73,18 +73,32 @@ def run(cmd: list[str], cwd: Path | None = None, check: bool = True) -> subproce
 def cf_api(path: str, method: str = "GET", form: dict | None = None) -> dict:
     """واجهة Cloudflare عبر curl (الوكيل يحقن المفتاح على مسارات /accounts/ فقط)."""
     url = f"https://api.cloudflare.com/client/v4/accounts/{ACCOUNT}/pages/projects/{PROJECT}/{path}"
-    cmd = ["curl", "-sS", "-m", "30", "-X", method, "-H", "Authorization: Bearer dummy", url]
+    # في GitHub Actions لا وكيل: يُقرأ CLOUDFLARE_API_TOKEN ويُمرَّر عبر stdin لا سطر الأوامر.
+    token = os.environ.get("CLOUDFLARE_API_TOKEN", "").strip() or "dummy"
+    cmd = ["curl", "-sS", "-m", "30", "-X", method, "-H", "@-", url]
     for k, v in (form or {}).items():
         cmd += ["--form-string", f"{k}={v}"]
-    out = run(cmd).stdout
+    res = subprocess.run(cmd, input=f"Authorization: Bearer {token}\n", capture_output=True, text=True)
+    if res.returncode != 0:
+        raise RuntimeError(f"curl…: {res.stderr.strip()[-400:]}")
+    out = res.stdout
     return json.loads(out or "{}")
 
 
 def wait_deploy(sha: str, timeout: int) -> dict:
     """ينتظر نشرًا ناجحًا لبصمة الإيداع نفسها؛ إن لم يبدأ بناء تلقائي خلال 3 دقائق يطلبه يدويًا."""
-    start, triggered = time.time(), False
+    start, triggered, unreadable = time.time(), False, 0
     while time.time() - start < timeout:
-        rows = cf_api("deployments?per_page=5").get("result") or []
+        resp = cf_api("deployments?per_page=5")
+        rows = resp.get("result") or []
+        # واجهة Cloudflare غير مقروءة (مفتاح Actions بلا صلاحية القراءة أو خطأ مصادقة): لا حكم من الواجهة.
+        # يُترك الحكم للتحقق الحي ببصمة الصفحة (live_check)، وهو الإثبات الفعلي لا استدلالًا من جدول النشر.
+        if not rows and (resp.get("errors") or resp.get("success") is False):
+            unreadable += 1
+            if unreadable >= 3:
+                return {"status": "api_unreadable", "errors": str(resp.get("errors"))[:200]}
+            time.sleep(5)
+            continue
         for d in rows:
             meta = (d.get("deployment_trigger") or {}).get("metadata") or {}
             if str(meta.get("commit_hash", "")).startswith(sha[:7]):
@@ -187,9 +201,11 @@ def main(argv: list[str] | None = None) -> int:
         if remote != sha:
             return finish(2, f"فرع main البعيد ({remote[:7]}) ليس الإيداع المنشور ({sha[:7]})")
         out["deploy"] = wait_deploy(sha, a.timeout)
-        if out["deploy"].get("status") != "success":
+        if out["deploy"].get("status") not in ("success", "api_unreadable"):
             return finish(2, f"نشر Cloudflare لم ينجح للبصمة {sha[:7]}: {out['deploy']}")
-        out["live"] = live_check(f"reports/{a.date}.html", _sha(page))
+        # api_unreadable: التحقق الحي يُمدَّد إلى مهلة البناء كاملة بدل 8 محاولات.
+        tries = max(8, a.timeout // 15) if out["deploy"].get("status") == "api_unreadable" else 8
+        out["live"] = live_check(f"reports/{a.date}.html", _sha(page), tries=tries)
         if out["live"].get("http") != 200 or not out["live"].get("sha_match"):
             return finish(2, f"الصفحة الحية لا تطابق المبني: {out['live']}")
     except (RuntimeError, OSError, json.JSONDecodeError) as exc:

@@ -13,6 +13,16 @@
    "reason": ""
   },
   {
+   "file": "validators/check_card_counters.py",
+   "func": "_en_isolated",
+   "fingerprint": "b1426eb9",
+   "line_at_generation": 1019,
+   "snippet": "sys.path.insert(0, str(ROOT / \"tools\"))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": "استيراد اختياري لعزل الإنجليزية؛ بغيابه يعود المدقق بقيمة صريحة تحكمها البوابة."
+  },
+  {
    "file": "validators/check_code_spaces.py",
    "func": "load",
    "fingerprint": "6940bb4b",
@@ -73,10 +83,20 @@
    "reason": "قراءة سياسة الأقسام داخل الفحص — الميل فشل مغلق."
   },
   {
+   "file": "validators/check_kpi_layers.py",
+   "func": "_en_isolated",
+   "fingerprint": "f5ee1510",
+   "line_at_generation": 29,
+   "snippet": "_sys.path.insert(0, str(_pl.Path(__file__).resolve().parents[1] / \"tools\"))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": "استيراد اختياري لعزل الإنجليزية؛ بغيابه يعود المدقق بقيمة صريحة تحكمها البوابة."
+  },
+  {
    "file": "validators/check_libraries_skills.py",
    "func": "check_portability",
    "fingerprint": "247d663c",
-   "line_at_generation": 278,
+   "line_at_generation": 279,
    "snippet": "import importlib.util",
    "handler_kind": "تجاهل",
    "category": "منطق البوابة",
@@ -86,7 +106,7 @@
    "file": "validators/check_libraries_skills.py",
    "func": "check_libs",
    "fingerprint": "a21f54c9",
-   "line_at_generation": 76,
+   "line_at_generation": 77,
    "snippet": "text = f.read_text(encoding=\"utf-8\")",
    "handler_kind": "متابعة",
    "category": "منطق البوابة",
@@ -96,7 +116,7 @@
    "file": "validators/check_libraries_skills.py",
    "func": "check_libs",
    "fingerprint": "35aa1fc4",
-   "line_at_generation": 83,
+   "line_at_generation": 84,
    "snippet": "data = json.loads(text)",
    "handler_kind": "متابعة",
    "category": "منطق البوابة",
@@ -121,6 +141,16 @@
    "handler_kind": "إرجاع قيمة",
    "category": "منطق البوابة",
    "reason": ""
+  },
+  {
+   "file": "validators/check_map_note_counts.py",
+   "func": "_en_isolated",
+   "fingerprint": "f5ee1510",
+   "line_at_generation": 27,
+   "snippet": "_sys.path.insert(0, str(_pl.Path(__file__).resolve().parents[1] / \"tools\"))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "منطق البوابة",
+   "reason": "استيراد اختياري لعزل الإنجليزية؛ بغيابه يعود المدقق بقيمة صريحة تحكمها البوابة."
   },
   {
    "file": "validators/check_pdf_format.py",
@@ -216,7 +246,7 @@
    "file": "validators/check_published_counters.py",
    "func": "collect",
    "fingerprint": "3b390f30",
-   "line_at_generation": 246,
+   "line_at_generation": 289,
    "snippet": "fn(brain, date, out, blockers)",
    "handler_kind": "تجاهل",
    "category": "تنظيف ثانوي",
@@ -236,7 +266,7 @@
    "file": "validators/check_secrets.py",
    "func": "iter_tree",
    "fingerprint": "bcfef964",
-   "line_at_generation": 96,
+   "line_at_generation": 97,
    "snippet": "tracked = subprocess.run([\"git\", \"-C\", str(root), \"ls-files\"],",
    "handler_kind": "تجاهل",
    "category": "تنظيف ثانوي",
@@ -266,7 +296,7 @@
    "file": "validators/validate_report.py",
    "func": "check_time",
    "fingerprint": "0d525b33",
-   "line_at_generation": 140,
+   "line_at_generation": 142,
    "snippet": "dt = datetime.fromisoformat(str(d[\"generated_label\"]).replace(\"Z\", \"+00:00\"))",
    "handler_kind": "تجاهل",
    "category": "منطق البوابة",
@@ -276,10 +306,60 @@
    "file": "validators/validate_report.py",
    "func": "main",
    "fingerprint": "733ce997",
-   "line_at_generation": 308,
+   "line_at_generation": 340,
    "snippet": "d = json.loads(path.read_text(encoding=\"utf-8\"))",
    "handler_kind": "إرجاع قيمة",
    "category": "منطق البوابة",
+   "reason": ""
+  },
+  {
+   "file": "tools/agent_write_llm.py",
+   "func": "compact_estimates",
+   "fingerprint": "8692318b",
+   "line_at_generation": 54,
+   "snippet": "codes = json.loads(raw)[\"codes\"]",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": "مسار كاتب النموذج المجاني في السحابة: الفشل يرجع إلى إعادة المحاولة أو إلى الإجابة الاحتياطية، ونتيجة الخط النهائية تحكمها المدققات اللاحقة (26 نوفمبر 2026)."
+  },
+  {
+   "file": "tools/agent_write_llm.py",
+   "func": "_sync_en_dynamic",
+   "fingerprint": "0ab4c421",
+   "line_at_generation": 170,
+   "snippet": "sys.path.insert(0, str(ROOT / \"tools\"))",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "تشخيص ومزامنة ثانوية بعد كتابة الأصل الإنجليزي: يطبع الخطأ ولا يخفيه، والفصل للمدقق الحاكم validate_en_master في تأكيد الخطوة B004 (فشل مغلق هناك)."
+  },
+  {
+   "file": "tools/agent_write_llm.py",
+   "func": "heal_downstream",
+   "fingerprint": "0cbd85d5",
+   "line_at_generation": 243,
+   "snippet": "time.sleep(int(os.environ.get(\"LLM_GAP_SECONDS\", \"20\")))",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": "مسار كاتب النموذج المجاني في السحابة: الفشل يرجع إلى إعادة المحاولة أو إلى الإجابة الاحتياطية، ونتيجة الخط النهائية تحكمها المدققات اللاحقة (26 نوفمبر 2026)."
+  },
+  {
+   "file": "tools/agent_write_llm.py",
+   "func": "main",
+   "fingerprint": "15f63f25",
+   "line_at_generation": 282,
+   "snippet": "files = write_outputs(s, a.date, chat(prompt))",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": ""
+  },
+  {
+   "file": "tools/agent_write_llm.py",
+   "func": "_post",
+   "fingerprint": "45e4e90e",
+   "line_at_generation": 123,
+   "snippet": "at = json.loads(detail_full)[\"error\"][\"retryAtMs\"] / 1000",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
    "reason": ""
   },
   {
@@ -353,6 +433,16 @@
    "reason": ""
   },
   {
+   "file": "tools/auto_heal.py",
+   "func": "en_isolated_safe",
+   "fingerprint": "2c4fa557",
+   "line_at_generation": 103,
+   "snippet": "return isolated(root, date, \"en\")",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": "الإصلاح الذاتي: فشل عزل الإنجليزية يُعاد كقيمة ويُحكم عليه بالمدقق نفسه لاحقًا."
+  },
+  {
    "file": "tools/build_report_docx_exact.py",
    "func": "main",
    "fingerprint": "2d72b901",
@@ -366,27 +456,27 @@
    "file": "tools/check_feeds.py",
    "func": "_next_data_items",
    "fingerprint": "78e92f34",
-   "line_at_generation": 227,
+   "line_at_generation": 256,
    "snippet": "data = json.loads(match.group(1))",
    "handler_kind": "إرجاع قيمة",
    "category": "تنظيف ثانوي",
-   "reason": ""
+   "reason": "جلب مصدر واحد: الفشل يُسجَّل في حالة التغذية ويُحصى منقوصًا ولا يُخفى."
   },
   {
    "file": "tools/check_feeds.py",
    "func": "_try_curl",
    "fingerprint": "310bc652",
-   "line_at_generation": 370,
+   "line_at_generation": 399,
    "snippet": "done = subprocess.run(cmd, capture_output=True, timeout=60)",
    "handler_kind": "إرجاع قيمة",
    "category": "تنظيف ثانوي",
-   "reason": ""
+   "reason": "جلب مصدر واحد: الفشل يُسجَّل في حالة التغذية ويُحصى منقوصًا ولا يُخفى."
   },
   {
    "file": "tools/check_feeds.py",
    "func": "_parse_date",
    "fingerprint": "eca720bf",
-   "line_at_generation": 517,
+   "line_at_generation": 548,
    "snippet": "parsed = _eu.parsedate_to_datetime(text)",
    "handler_kind": "تجاهل",
    "category": "تنظيف ثانوي",
@@ -396,27 +486,27 @@
    "file": "tools/check_feeds.py",
    "func": "_parse_date",
    "fingerprint": "954682a8",
-   "line_at_generation": 523,
+   "line_at_generation": 554,
    "snippet": "parsed = dt.datetime.fromisoformat(text.replace('Z', '+00:00'))",
    "handler_kind": "إرجاع قيمة",
    "category": "تنظيف ثانوي",
-   "reason": ""
+   "reason": "جلب مصدر واحد: الفشل يُسجَّل في حالة التغذية ويُحصى منقوصًا ولا يُخفى."
   },
   {
    "file": "tools/check_feeds.py",
    "func": "fetch",
-   "fingerprint": "e093cbb0",
-   "line_at_generation": 411,
+   "fingerprint": "824cf4de",
+   "line_at_generation": 440,
    "snippet": "headers = {**HEADERS, 'Referer': f['url']}",
    "handler_kind": "إرجاع قيمة",
    "category": "تنظيف ثانوي",
-   "reason": ""
+   "reason": "جلب مصدر واحد: الفشل يُسجَّل في حالة التغذية ويُحصى منقوصًا ولا يُخفى."
   },
   {
    "file": "tools/check_feeds.py",
    "func": "fetch",
    "fingerprint": "05c69e21",
-   "line_at_generation": 440,
+   "line_at_generation": 471,
    "snippet": "body_text = error.read().decode(\"utf-8\", \"replace\")[:4000]",
    "handler_kind": "تجاهل",
    "category": "تنظيف ثانوي",
@@ -426,11 +516,21 @@
    "file": "tools/check_feeds.py",
    "func": "fetch",
    "fingerprint": "fa97c040",
-   "line_at_generation": 453,
+   "line_at_generation": 484,
    "snippet": "items, content_chars = _payload_items(payload_c, route['url'])",
    "handler_kind": "تجاهل",
    "category": "تنظيف ثانوي",
    "reason": ""
+  },
+  {
+   "file": "tools/cloud_deliver.py",
+   "func": "live_check",
+   "fingerprint": "ffbf64cd",
+   "line_at_generation": 119,
+   "snippet": "with urllib.request.urlopen(req, timeout=30) as r:",
+   "handler_kind": "تجاهل",
+   "category": "تنظيف ثانوي",
+   "reason": "يُسجَّل سبب تعذّر قراءة الصفحة الحية ثم تُعاد المحاولة؛ إن لم تطابق البصمة بعد كل المحاولات ترجع الأداة بالرمز 2 ولا يُعلن النشر (فشل مغلق). صُنّف 2026-11-20."
   },
   {
    "file": "tools/diagnose_sources.py",
@@ -586,7 +686,7 @@
    "file": "tools/llm_review.py",
    "func": "main",
    "fingerprint": "12b68a52",
-   "line_at_generation": 132,
+   "line_at_generation": 134,
    "snippet": "data = json.loads(r['output'])",
    "handler_kind": "متابعة",
    "category": "تنظيف ثانوي",
@@ -596,7 +696,7 @@
    "file": "tools/llm_triage.py",
    "func": "main",
    "fingerprint": "725d1186",
-   "line_at_generation": 85,
+   "line_at_generation": 87,
    "snippet": "d = json.loads(r['output'])",
    "handler_kind": "متابعة",
    "category": "تنظيف ثانوي",
@@ -705,18 +805,8 @@
   {
    "file": "tools/preflight_check.py",
    "func": "<module>",
-   "fingerprint": "b3049a16",
-   "line_at_generation": 300,
-   "snippet": "md = json.loads(master.read_text(encoding='utf-8'))",
-   "handler_kind": "تجاهل",
-   "category": "تنظيف ثانوي",
-   "reason": "خارج المدققات المانعة (أداة مساندة) — يُحصر ولا يحكم التسليم."
-  },
-  {
-   "file": "tools/preflight_check.py",
-   "func": "<module>",
    "fingerprint": "5d731a55",
-   "line_at_generation": 319,
+   "line_at_generation": 324,
    "snippet": "known = set(json.loads(cmap.read_text(encoding='utf-8')).get('codes', {})) | \\",
    "handler_kind": "تجاهل",
    "category": "تنظيف ثانوي",
@@ -726,7 +816,7 @@
    "file": "tools/preflight_check.py",
    "func": "_listening",
    "fingerprint": "d5f6023b",
-   "line_at_generation": 336,
+   "line_at_generation": 341,
    "snippet": "return int((r.stdout or '0').strip().splitlines()[-1]) > 0",
    "handler_kind": "إرجاع قيمة",
    "category": "تنظيف ثانوي",
@@ -824,9 +914,19 @@
   },
   {
    "file": "tools/runbook.py",
+   "func": "_heal",
+   "fingerprint": "bd8b3546",
+   "line_at_generation": 808,
+   "snippet": "tools = os.path.join(os.path.abspath(root), \"tools\")",
+   "handler_kind": "إرجاع قيمة",
+   "category": "تنظيف ثانوي",
+   "reason": "الإصلاح الذاتي إضافة لا تخفف مانعًا: تعذّر الأداة = لا إصلاح ولا عزل، فيبقى الفشل الأصلي مانعًا وتُنفَّذ الخطوة وتُحكم كالمعتاد (اختبار tests/test_auto_heal.py: test_broken_heal_tool_never_lifts_a_block)."
+  },
+  {
+   "file": "tools/runbook.py",
    "func": "run",
    "fingerprint": "361fb9f5",
-   "line_at_generation": 338,
+   "line_at_generation": 740,
    "snippet": "from redact import redact  # type: ignore",
    "handler_kind": "إرجاع قيمة",
    "category": "تنظيف ثانوي",
@@ -1031,26 +1131,6 @@
    "handler_kind": "تجاهل",
    "category": "تنظيف ثانوي",
    "reason": ""
-  },
-  {
-   "file": "tools/cloud_deliver.py",
-   "func": "live_check",
-   "fingerprint": "ffbf64cd",
-   "line_at_generation": 111,
-   "snippet": "with urllib.request.urlopen(req, timeout=30) as r:",
-   "handler_kind": "تجاهل",
-   "category": "تنظيف ثانوي",
-   "reason": "يُسجَّل سبب تعذّر قراءة الصفحة الحية ثم تُعاد المحاولة؛ إن لم تطابق البصمة بعد كل المحاولات ترجع الأداة بالرمز 2 ولا يُعلن النشر (فشل مغلق). صُنّف 2026-11-20."
-  },
-  {
-   "file": "tools/runbook.py",
-   "func": "_heal",
-   "fingerprint": "bd8b3546",
-   "line_at_generation": 808,
-   "snippet": "tools = os.path.join(os.path.abspath(root), \"tools\")",
-   "handler_kind": "إرجاع قيمة",
-   "category": "تنظيف ثانوي",
-   "reason": "الإصلاح الذاتي إضافة لا تخفف مانعًا: تعذّر الأداة = لا إصلاح ولا عزل، فيبقى الفشل الأصلي مانعًا وتُنفَّذ الخطوة وتُحكم كالمعتاد (اختبار tests/test_auto_heal.py: test_broken_heal_tool_never_lifts_a_block)."
   }
  ],
  "unclassified": []

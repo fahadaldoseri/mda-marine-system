@@ -323,8 +323,14 @@ def measure(url: str, widths: list[int], questions: list[str], phrases: list[str
                     if link["hash"].startswith(":~:text="):
                         # مرساة نص (Text Fragment) لا معرّف عنصر: الهدف أن يظهر النص نفسه في الصفحة الهدف
                         frag = unquote(link["hash"][len(":~:text="):].split("&")[0].split(",")[0])
+                        # نص المنشور في صفحات t.me يُرسَم بسكربت الودجت فلا يظهر في textContent،
+                        # لكنه منشور في وسم الوصف (og:description / twitter:description) الذي يقرؤه كل معاين.
                         targets[key] = bool(aux.evaluate(
-                            "(t) => (document.documentElement.textContent || '').includes(t)", frag))
+                            "(t) => { const meta = Array.from(document.querySelectorAll("
+                            "'meta[property=\"og:description\"],meta[name=\"twitter:description\"]'))"
+                            ".map(m => m.getAttribute('content') || '').join(' ');"
+                            " return ((document.documentElement.textContent || '') + ' ' + meta).includes(t); }",
+                            frag))
                     else:
                         aux.wait_for_function(
                             "(h) => !!document.getElementById(h)",
@@ -349,9 +355,10 @@ def measure(url: str, widths: list[int], questions: list[str], phrases: list[str
                         "exists": False,
                         "error": str(exc)[:200],
                     }
-                    # تعذر شبكة فقط (لا رد، أو 5xx): يُثبت من النسخة المحفوظة وقت الجمع.
-                    # 403 و404 وغيرها لا تمر من هنا وتبقى مانعة.
-                    if status is None or status >= 500:
+                    # تعذر شبكة (لا رد، أو 5xx) أو حجب آلي صريح (401/403/429 تحدي Cloudflare): يُثبت
+                    # من النسخة المحفوظة وقت الجمع بشرطها المغلق (الرابط نفسه والنص نفسه في ملف جُلب بنجاح).
+                    # 404 وغيرها لا تمر من هنا وتبقى مانعة.
+                    if status is None or status >= 500 or status in (401, 403, 429):
                         frag = None
                         if link["hash"].startswith(":~:text="):
                             frag = unquote(link["hash"][len(":~:text="):].split("&")[0].split(",")[0])

@@ -39,6 +39,32 @@
       "reason_ar_full": "تعذر جلب تغذيات معروفة التعطل — إعلان بقرار المالك 2026-11-18 · صالح حتى 2026-11-25"
     },
     {
+      "id": "owner-declared-2026-11-26-feeds",
+      "reason_ar": "تعذر جلب تغذيات معروفة التعطل في الشبكة السحابية (حجب 403 وتحدي Cloudflare ومحتوى غير مقروء)",
+      "applies_to": [
+        "feeds"
+      ],
+      "reason_patterns": [
+        "derived items without real content",
+        "Just a moment",
+        "403",
+        "حجب",
+        "HTTP Error 415",
+        "HTTP Error 404",
+        "PermissionError",
+        "timed out",
+        "TimeoutError"
+      ],
+      "max_items": 12,
+      "note": "إعلان عطل بتفويض المالك الكامل (أمر فهد 26 نوفمبر 2026: إصلاح كل ما يمنع النشر دون استئذان). الحالة: عدد من التغذيات (حتى 11 كما في حالة الجلب) يُحجب بـ403 وتحدي Cloudflare أو يُرجع محتوى غير مقروء في تشغيل GitHub Actions بعد انتهاء بند 19–25 نوفمبر؛ باقي التعذرات مغطاة ببند الحجب القائم. الاستثناء ليوم 26 نوفمبر وحده، والتعذر يُفصح عنه في متن التقرير ولا يُعدّ نفيًا لوقوع شيء. الجذر: حجب الشبكة السحابية لمصادر بعينها (انظر G033/G062).",
+      "since": "2026-11-26",
+      "expires": "2026-11-26",
+      "fault_ref": "تفويض المالك 2026-11-26",
+      "reason_ar_full": "تعذر جلب تغذيات معروفة التعطل (حجب 403 وتحدي Cloudflare ومحتوى غير مقروء) من الشبكة السحابية — إعلان بتفويض المالك · صالح ليوم 2026-11-26 وحده",
+      "reason_en_full": "Known-faulty feeds could not be fetched from the cloud network (403 blocks, Cloudflare challenge and unreadable content) — declared under the owner's authorization · valid for 2026-11-26 only",
+      "only_on": "2026-11-26"
+    },
+    {
       "id": "blocked-source",
       "reason_ar": "حجب مصدر رسمي يمنع الجلب الآلي",
       "applies_to": [
