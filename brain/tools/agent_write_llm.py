@@ -206,6 +206,48 @@ def _en_master_path(date: str) -> Path:
     return source_counts.english_master_path(date)
 
 
+
+def _register_new_estimates(date: str) -> None:
+    """النموذج لا يستطيع تشغيل أداة التسجيل. كل رمز EST- جديد في التقرير يُثبَّت من جملته قبل فحص الإتمام، بلا إعادة إسناد."""
+    import register_estimate as estimates  # noqa: WPS433
+
+    md = ROOT / "reports" / f"{date}-sectioned.md"
+    if not md.is_file():
+        print("  ⚠ لا تقرير لتسجيل رموز التقدير")
+        return
+    text = md.read_text(encoding="utf-8")
+    data = estimates.load()
+    codes = data.setdefault("codes", {})
+    used = sorted(set(re.findall(r"EST-\d{4}-\d{2}-\d{2}-\d{2}", text)))
+    fresh = [c for c in used if c not in codes]
+    if not fresh:
+        print(f"  · رموز التقدير مسجّلة ({len(used)})")
+        return
+    lines = text.splitlines()
+    for code in fresh:
+        statement = code
+        section = "قراءة الموقف وتحليل المؤشرات"
+        for i, line in enumerate(lines):
+            if code not in line:
+                continue
+            statement = re.sub(r"\s+", " ", line).strip()[:400] or code
+            for prev in reversed(lines[:i]):
+                if prev.startswith("#"):
+                    section = prev.lstrip("#").strip()[:120] or section
+                    break
+            break
+        codes[code] = {
+            "section": section,
+            "statement": statement,
+            "confidence": "كما ورد في التقرير",
+            "reliability": "متن التقرير اليومي",
+            "support": f"reports/{date}-sectioned.md",
+            "status": "قائم",
+            "first_seen": date,
+        }
+        print(f"  ✔ سُجّل من المتن {code}")
+    estimates.save(data)
+
 def write_outputs(s: dict, date: str, text: str) -> list[str]:
     allowed = {_norm(w.replace("{date}", date)) for w in s.get("writes", [])}
     done = []
@@ -218,6 +260,8 @@ def write_outputs(s: dict, date: str, text: str) -> list[str]:
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(content.rstrip("\n") + "\n", encoding="utf-8")
         done.append(path)
+    if done and s.get("id") == "W010":
+        _register_new_estimates(date)
     if done and s.get("id") == "B004":
         _sync_en_dynamic(date)
     if not done:
@@ -311,11 +355,12 @@ def main() -> int:
                 problems = "لم تُرجَع أي ملفات بالصيغة المطلوبة."
                 continue
             c = sh(["complete", s["id"], "--date", a.date])
+            shown = (c.stdout or "") + ("\n" + c.stderr if c.stderr else "")
             pre = "  " if c.returncode == 0 else "✘ رفض: "
-            print("\n".join(pre + ln for ln in c.stdout[-1500:].splitlines() if ln.strip()))
+            print("\n".join(pre + ln for ln in shown[-2500:].splitlines() if ln.strip()))
             if c.returncode == 0:
                 break
-            problems = c.stdout[-1500:]
+            problems = shown[-2500:]
         else:
             fb_dir.mkdir(parents=True, exist_ok=True)
             (fb_dir / f"{s['id']}.prompt.md").write_text(build_prompt(s, a.date), encoding="utf-8")
