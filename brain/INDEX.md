@@ -5,7 +5,11 @@
 
 - `skills/fault-ledger-matrix-parity-ops` — حارس تكامل السجل والمصفوفة واستعادة التباعد.
 
-- `skills/enforcer-coverage-burndown-ops` — خفض الأعطال والدروس بلا مُفعِّل بحارس يمنع انحدار التغطية.
+- `skills/enforcer-coverage-burndown-ops`
+- `skills/graphify-code-graph-ops` — استعلام رسم الكود المحلي قبل فتح الملفات. اعتُمدت 2026-11-28.
+- `skills/superpowers-method` — منهج تغيير الكود فقط، والكتيب حاكم عند التعارض. اعتُمدت 2026-11-28.
+- `skills/agent-browser-ops` — قراءة صفحة عامة ثم إغلاق المتصفح. اعتُمدت 2026-11-28.
+ — خفض الأعطال والدروس بلا مُفعِّل بحارس يمنع انحدار التغطية.
 
 ## القاعدة الحاكمة
 
