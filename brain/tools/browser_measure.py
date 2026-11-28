@@ -162,6 +162,25 @@ def verify_from_capture(root: str | Path | None, date: str | None, target_url: s
     return None
 
 
+def owner_waiver(root: str | Path | None, date: str | None, target_url: str) -> dict | None:
+    """استثناء مؤرخ بقرار المالك لرابط واحد تعذّر فحصه من شبكة السحابة (لا حجب البند كله).
+
+    appendices/anchor-waivers.json: [{url, date, reason, approved_by}]. يُقبل فقط إذا طابق الرابط
+    (بلا الجزء بعد #) واليوم معًا؛ وتبقى الحالة مسجّلة في القياس لتُفصح في التقرير.
+    """
+    if not (root and date):
+        return None
+    f = Path(root) / "appendices" / "anchor-waivers.json"
+    if not f.is_file():
+        return None
+    want = target_url.split("#", 1)[0]
+    for w in json.loads(f.read_text(encoding="utf-8")):
+        if isinstance(w, dict) and w.get("date") == date and str(w.get("url") or "").split("#", 1)[0] == want:
+            return {"method": "owner_waiver", "exists": True, "waiver_reason": w.get("reason"),
+                    "waiver_approved_by": w.get("approved_by")}
+    return None
+
+
 def load_readiness(root: Path, url: str) -> list[str]:
     """يقرأ الأسئلة من المصدر الواحد، ويختار نمط اللغة بحسب الصفحة المقيسة."""
     p = Path(root) / READINESS_FILE
@@ -363,6 +382,8 @@ def measure(url: str, widths: list[int], questions: list[str], phrases: list[str
                         if link["hash"].startswith(":~:text="):
                             frag = unquote(link["hash"][len(":~:text="):].split("&")[0].split(",")[0])
                         cap = verify_from_capture(root, _report_date(url), urljoin(url, link["page"]), frag)
+                        if not cap:
+                            cap = owner_waiver(root, _report_date(url), urljoin(url, link["page"]))
                         if cap:
                             cap.update(http_status=status, live_error=str(exc)[:200])
                             targets[key] = True

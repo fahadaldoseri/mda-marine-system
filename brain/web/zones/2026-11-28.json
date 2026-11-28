@@ -1,0 +1,232 @@
+{
+  "date": "2026-11-28",
+  "window": "خلال 24 ساعة السابقة",
+  "scale_version": 1,
+  "registry_version": 1,
+  "scale_levels": [
+    {
+      "ar": "حرج",
+      "rank": 5,
+      "token": "critical",
+      "color": "#FFA3A3",
+      "marker": "■ ■ ■ ■ ■"
+    },
+    {
+      "ar": "مرتفع جدًا",
+      "rank": 4,
+      "token": "severe",
+      "color": "#FFA96B",
+      "marker": "▲ ▲ ▲ ▲"
+    },
+    {
+      "ar": "مرتفع",
+      "rank": 3,
+      "token": "high",
+      "color": "#FFC24D",
+      "marker": "▲ ▲ ▲"
+    },
+    {
+      "ar": "متوسط",
+      "rank": 2,
+      "token": "med",
+      "color": "#d29119",
+      "marker": "▲ ▲"
+    },
+    {
+      "ar": "منخفض",
+      "rank": 1,
+      "token": "low",
+      "color": "#28b45a",
+      "marker": "▲"
+    }
+  ],
+  "overall": {
+    "level": "مرتفع",
+    "rank": 3,
+    "top_zone": "مضيق هرمز وخليج عُمان والخليج العربي",
+    "top_zone_id": "Z1",
+    "basis": "أعلى نطاق: مضيق هرمز وخليج عُمان والخليج العربي — استمراري — آخر واقعة مؤهّلة في هذا القطاع بتاريخ 2026-11-26."
+  },
+  "zones": [
+    {
+      "id": "Z1",
+      "name": "مضيق هرمز وخليج عُمان والخليج العربي",
+      "level": "مرتفع",
+      "rank": 3,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 3,
+      "events": 3,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "استمراري — آخر واقعة مؤهّلة في هذا القطاع بتاريخ 2026-11-26.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": true,
+      "last_change": "2026-11-26",
+      "carry_from": "2026-11-26"
+    },
+    {
+      "id": "Z2",
+      "name": "باب المندب والبحر الأحمر",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-28"
+    },
+    {
+      "id": "Z3",
+      "name": "بحر العرب",
+      "level": "متوسط",
+      "rank": 2,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "استمراري — آخر واقعة مؤهّلة في هذا القطاع بتاريخ 2026-11-21.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": true,
+      "last_change": "2026-11-21",
+      "carry_from": "2026-11-21"
+    },
+    {
+      "id": "Z4",
+      "name": "القرن الأفريقي",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-28"
+    },
+    {
+      "id": "Z5",
+      "name": "المحيط الهندي",
+      "level": "منخفض",
+      "rank": 1,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": false,
+      "last_change": "2026-11-28"
+    }
+  ],
+  "counter": {
+    "total": 4,
+    "qualifying": 0,
+    "confirmed": 0,
+    "probable": 0,
+    "unconfirmed_qualifying": 0,
+    "unconfirmed_total": 2,
+    "excluded": 3,
+    "nonspatial": 1
+  },
+  "generated_from": "cumulative-2026/daily/2026-11-28.json",
+  "events": [
+    {
+      "code": "MN-2026-11-28-01",
+      "title": "نص إعلان القيادة المركزية الأمريكية في 27/11 عن تعطيل «Pacific Archer» في خليج عُمان · 26/11/2026",
+      "area": "خليج عُمان",
+      "class": "بيان رسمي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «خليج عُمان»",
+      "qualifying": false,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-28-01",
+      "source_excerpt": "A U.S. military aircraft launched precision munitions that struck the stern of Palau-flagged M/V Pacific Archer. The ship’s propulsion was ultimately disabled and the civilian crew was unharmed.",
+      "category": "تعطيل ملاحي"
+    },
+    {
+      "code": "MN-2026-11-28-02",
+      "title": "نص التنبيه الإرشادي من UKMTO عن واقعة بين سفينة بضائع وقوات عسكرية في خليج عُمان · 26/11/2026",
+      "area": "خليج عُمان",
+      "class": "تنبيه رسمي",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «خليج عُمان»",
+      "qualifying": false,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-28-02",
+      "source_excerpt": "UKMTO has received a report of an incident involving a cargo vessel and military forces in the Gulf of Oman.",
+      "category": ""
+    },
+    {
+      "code": "MN-2026-11-28-03",
+      "title": "بلاغ غير مؤكد — وكالة مهر تنقل اصطدام ناقلة نفط بلغم جنوب مضيق هرمز، وتتابع روايات الحرس الثوري عن ناقلتين · 27 و28/11/2026",
+      "area": "مضيق هرمز",
+      "class": "نقل إعلامي رسمي إيراني",
+      "zone": "Z1",
+      "nonspatial": false,
+      "zone_reason": "كلمة الموقع «مضيق هرمز»",
+      "qualifying": false,
+      "confirmation": "unconfirmed",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-28-03",
+      "source_excerpt": "Oil tanker strikes mine in south of Strait of Hormuz",
+      "category": ""
+    },
+    {
+      "code": "MN-2026-11-28-04",
+      "title": "بلاغ غير مؤكد رسميًا — موقع TradeWinds ينقل إصابة ناقلة للمرة الثانية، مرتبطة بأول وفيات بحّارين في الحرب · 27/11/2026",
+      "area": "المنطقة كاملة",
+      "class": "نقل مهني",
+      "zone": null,
+      "nonspatial": true,
+      "zone_reason": "بلا موقع بحري",
+      "qualifying": false,
+      "confirmation": "probable",
+      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "incident_group": "MN-2026-11-28-04",
+      "source_excerpt": "Tanker linked to first Middle East war seafarer deaths ‘struck for second time’",
+      "category": ""
+    }
+  ]
+}
