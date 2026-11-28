@@ -182,6 +182,13 @@ jobs:
           LIVE_TOKEN: ${{ secrets.SEAWATCH_LIVE_TOKEN }}
         run: |
           git config --global url."https://x-access-token:${LIVE_TOKEN}@github.com/fahadaldoseri/seawatch-live".insteadOf "https://github.com/fahadaldoseri/seawatch-live"
+          PAGE="$SITE_DIR/dist/reports/$D.html"
+          if [ ! -s "$PAGE" ]; then
+            rm -rf /tmp/seawatch-live-seed
+            git clone -q --depth 1 https://github.com/fahadaldoseri/seawatch-live.git /tmp/seawatch-live-seed
+            mkdir -p "$(dirname "$PAGE")"
+            cp "/tmp/seawatch-live-seed/reports/$D.html" "$PAGE"
+          fi
           python3 tools/cloud_deliver.py --date "$D"
           python3 tools/cloud_deliver.py --date "$D" --push
           echo "نُشر: https://mda-bh.pages.dev/reports/$D" >> "$GITHUB_STEP_SUMMARY"
