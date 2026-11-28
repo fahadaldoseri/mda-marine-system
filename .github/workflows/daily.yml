@@ -149,6 +149,9 @@ jobs:
           AGENT_STEPS="${{ inputs.agent_steps || '8' }}"
           echo "خطوات الوكيل: $AGENT_STEPS (0 = النصوص مكتوبة، تُعاد الخطوات المتأثرة بلا نموذج)"
           if [ "$AGENT_STEPS" = "0" ]; then
+            python3 tools/i18n_assets_sync.py --sync --brain "$BRAIN_DIR" --site "$SITE_DIR" --date "$D"
+            bash tools/en_master_build.sh "$D" "$SITE_DIR"
+            (cd "$SITE_DIR" && python3 "$BRAIN_DIR/tools/sync_card_layers.py" --date "$D" && python3 "$BRAIN_DIR/tools/build_hero_kpis.py" --date "$D" --apply && python3 generator/sync_from_brain.py --date "$D" && python3 generator/build_site.py)
             python3 tools/runbook.py run --date "$D"; rc=$?
           else
             python3 tools/agent_write_llm.py --date "$D" --max-steps "$AGENT_STEPS" 2>&1 | tee /tmp/agent_loop.log; rc=${PIPESTATUS[0]}

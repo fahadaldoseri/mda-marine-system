@@ -9,13 +9,13 @@
 ## Geographic distribution of incidents
 | Sector or position | What the material establishes | What the material does not establish | Source |
 |---|---|---|---|
-| Gulf of Oman | On 26/11 the dry cargo vessel Pacific Archer was disabled by precision munitions that struck its stern; propulsion was disabled and the crew was unharmed. | Strike coordinates, and whether this is the same incident as UKMTO advisory 224-26. | [U.S. Central Command (DVIDS)](https://www.dvidshub.net/news/580348/us-forces-disable-commercial-vessel-during-blockade-enforcement-against-iran) |
+| Gulf of Oman | On 26/11 the dry cargo vessel Pacific Archer was disabled by precision munitions that struck its stern; propulsion was disabled and the crew was unharmed. | Strike coordinates, and whether this is the same incident as UKMTO 224-26. | [U.S. Central Command (DVIDS)](https://www.dvidshub.net/news/580348/us-forces-disable-commercial-vessel-during-blockade-enforcement-against-iran) |
 | Gulf of Oman | On 26/11 UKMTO issued an advisory on an incident between a cargo vessel and military forces. | The vessel name, the force involved, and the outcome. | [UKMTO](https://www.ukmto.org/recent-incidents) |
 | Strait of Hormuz — east of Khasab | The 25/11 report text is now complete: an unknown projectile struck an outbound tanker, the crew was accounted for, and no environmental effect was reported. | The extent of damage and the actor. | [UKMTO](https://www.ukmto.org/recent-incidents) |
 | Arabian Gulf — west of Dubai | The 25/11 report text is now complete: an unknown projectile exploded near a tanker 50 nautical miles west of Dubai; the crew was unharmed and there was no damage. | The actor. | [UKMTO](https://www.ukmto.org/recent-incidents) |
 | Strait of Hormuz | An Iranian account says two tankers exploded after striking mines. | An official navigational report that mentions mines or names the two vessels. | [Mehr](https://en.mehrnews.com/news/249728/Oil-tanker-strikes-mine-in-south-of-Strait-of-Hormuz) |
 
-Official sources checked for this period do not assign a new incident in Bab el-Mandeb and the Red Sea, the Arabian Sea, the Horn of Africa, or the Indian Ocean.
+No new incident was recorded in Bab el-Mandeb, the Red Sea, the Arabian Sea, the Horn of Africa, or the Indian Ocean.
 
 ## Situation indicators
 | Indicator | Current state | Comparison and trend | Meaning and limits |
@@ -89,7 +89,7 @@ EST-2026-11-28-01 — [Assessment] it is likely (55–80%) that a new official r
 Confidence: medium — between 16/11 and 25/11 UKMTO recorded attacks on 6 days, and no attack report was issued after 25/11.
 
 ## Probabilities and attribution
-- [Fact] UKMTO advisory 224-26 names neither a party nor a vessel, and the two 25/11 reports name no actor.
+- [Fact] UKMTO 224-26 names neither a party nor a vessel, and the two 25/11 reports name no actor.
 - [Fact] U.S. Central Command stated that it disabled Pacific Archer while enforcing the blockade.
 - [Evidence-limited] Mehr, Press TV, and IRNA quoted the IRGC as saying tankers struck mines. No official report mentions a mine, so the account is graded D/4.
 
@@ -110,7 +110,7 @@ No official source checked today states the number of vessels transiting or stop
 - Disclosed partial run: feeds: the KUNA feed could not be fetched (unreadable content) — owner declaration 2026-11-28 · valid through 2026-12-05.
 
 ## Continuing watch
-- Any update to UKMTO advisory 224-26 that states the outcome or the vessel name.
+- Any update to UKMTO 224-26 that states the outcome or the vessel name.
 - Any official confirmation or denial of the mine account near the Strait of Hormuz.
 - Iranian attacks on facilities in Kuwait. Bahrain, the UAE, and Qatar condemned them on 26/11, and Kuwait summoned the Iranian ambassador on 27/11 according to Al-Bilad.
 - The escalation between the Houthis and Saudi Arabia. On 28/11 the coalition announced it intercepted a cruise missile fired toward Riyadh, and on 26/11 it announced destruction of a missile platform in Hodeidah.
