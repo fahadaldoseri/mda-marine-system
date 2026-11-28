@@ -147,8 +147,12 @@ jobs:
         run: |
           set +e
           AGENT_STEPS="${{ inputs.agent_steps || '8' }}"
-          echo "خطوات الوكيل: $AGENT_STEPS (1 = W010 فقط، بلا تقسيم)"
-          python3 tools/agent_write_llm.py --date "$D" --max-steps "$AGENT_STEPS" 2>&1 | tee /tmp/agent_loop.log; rc=${PIPESTATUS[0]}
+          echo "خطوات الوكيل: $AGENT_STEPS (0 = النصوص مكتوبة، تُعاد الخطوات المتأثرة بلا نموذج)"
+          if [ "$AGENT_STEPS" = "0" ]; then
+            python3 tools/runbook.py run --date "$D"; rc=$?
+          else
+            python3 tools/agent_write_llm.py --date "$D" --max-steps "$AGENT_STEPS" 2>&1 | tee /tmp/agent_loop.log; rc=${PIPESTATUS[0]}
+          fi
           python3 tools/publish_verdict.py --date "$D"; v=$?
           echo "VERDICT=$v" >> "$GITHUB_ENV"
           echo "### حكم النشر $D: $v (خط $rc)" >> "$GITHUB_STEP_SUMMARY"
