@@ -20,6 +20,10 @@ on:
         description: "خطوات الوكيل. 8 عادي. 1 = W010 كاملة بلا تقسيم"
         required: false
         default: "8"
+      resume:
+        description: "استئناف من مخرجات daily/D المحفوظة. لا يعيد الخطوات المنجزة."
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -93,6 +97,38 @@ jobs:
             echo "استُعيدت إجابات احتياطية: $(ls "$FALLBACK_DIR/$D" | tr '\n' ' ')"
           else echo "لا إجابات احتياطية"; fi
           git archive HEAD "fallback-answers/$D" 2>/dev/null | tar -x -C "$FALLBACK_DIR/$D" --strip-components=2 && echo "استُعيدت إجابات من المستودع: $(ls "$FALLBACK_DIR/$D" | tr '\n' ' ')" || true
+
+      - name: استئناف المخرجات المحفوظة بلا إعادة الكتابة
+        if: inputs.resume
+        working-directory: /home/ubuntu/mda-marine-system
+        run: |
+          set -euo pipefail
+          git fetch -q origin "daily/$D"
+          git checkout FETCH_HEAD -- \
+            "brain/appendices/estimate-code-map.json" \
+            "brain/archive/originals/$D" \
+            "brain/cumulative-2026/daily/$D.json" \
+            "brain/feeds/feeds-$D.json" \
+            "brain/feeds/feeds-$D.md" \
+            "brain/feeds/feeds-$D.status.json" \
+            "brain/logs/pipeline-$D.json" \
+            "brain/logs/runbook/$D.jsonl" \
+            "brain/logs/runbook/$D" \
+            "brain/reports/$D-sectioned.md" \
+            "brain/web/meta/$D.json" \
+            "brain/web/zones/$D.json"
+          echo "استُئنفت مخرجات $D. الخطوات المنجزة لن تُعاد إلى النموذج."
+          python3 - "$D" << 'PY'
+          import json, sys
+          date = sys.argv[1]
+          last = {}
+          for line in open(f"brain/logs/runbook/{date}.jsonl", encoding="utf-8"):
+              if line.strip():
+                  e = json.loads(line)
+                  last[e["step"]] = e["status"]
+          for k, v in last.items():
+              print(k, v)
+          PY
 
       - name: الخط حتى G069 (خطوات الوكيل بالنموذج المجاني)
         working-directory: /home/ubuntu/mda-marine-system/brain
