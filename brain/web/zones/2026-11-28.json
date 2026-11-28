@@ -41,47 +41,29 @@
     }
   ],
   "overall": {
-    "level": "مرتفع",
-    "rank": 3,
+    "level": "متوسط",
+    "rank": 2,
     "top_zone": "مضيق هرمز وخليج عُمان والخليج العربي",
     "top_zone_id": "Z1",
-    "basis": "أعلى نطاق: مضيق هرمز وخليج عُمان والخليج العربي — استمراري — آخر واقعة مؤهّلة في هذا القطاع بتاريخ 2026-11-26."
+    "basis": "أعلى نطاق: مضيق هرمز وخليج عُمان والخليج العربي — وقائع مؤهّلة: رواية انفجار ناقلتين بألغام قرب مضيق هرمز — 27 و28/11/2026"
   },
   "zones": [
     {
       "id": "Z1",
       "name": "مضيق هرمز وخليج عُمان والخليج العربي",
-      "level": "مرتفع",
-      "rank": 3,
+      "level": "متوسط",
+      "rank": 2,
       "confirmed": 0,
       "probable": 0,
-      "excluded": 3,
+      "excluded": 2,
       "events": 3,
-      "qualifying_codes": [],
-      "categories": [],
-      "basis": "استمراري — آخر واقعة مؤهّلة في هذا القطاع بتاريخ 2026-11-26.",
-      "flags": {
-        "attack_with_damage": false,
-        "full_disruption": false,
-        "casualties": false,
-        "sinking": false
-      },
-      "carry_over": true,
-      "last_change": "2026-11-26",
-      "carry_from": "2026-11-26"
-    },
-    {
-      "id": "Z2",
-      "name": "باب المندب والبحر الأحمر",
-      "level": "منخفض",
-      "rank": 1,
-      "confirmed": 0,
-      "probable": 0,
-      "excluded": 0,
-      "events": 0,
-      "qualifying_codes": [],
-      "categories": [],
-      "basis": "لا واقعة مؤهّلة داخل الفترة.",
+      "qualifying_codes": [
+        "MN-2026-11-28-03"
+      ],
+      "categories": [
+        "انفجار قرب سفينة"
+      ],
+      "basis": "وقائع مؤهّلة: رواية انفجار ناقلتين بألغام قرب مضيق هرمز — 27 و28/11/2026",
       "flags": {
         "attack_with_damage": false,
         "full_disruption": false,
@@ -90,6 +72,28 @@
       },
       "carry_over": false,
       "last_change": "2026-11-28"
+    },
+    {
+      "id": "Z2",
+      "name": "باب المندب والبحر الأحمر",
+      "level": "متوسط",
+      "rank": 2,
+      "confirmed": 0,
+      "probable": 0,
+      "excluded": 0,
+      "events": 0,
+      "qualifying_codes": [],
+      "categories": [],
+      "basis": "استمراري — آخر واقعة مؤهّلة في هذا القطاع بتاريخ 2026-11-21.",
+      "flags": {
+        "attack_with_damage": false,
+        "full_disruption": false,
+        "casualties": false,
+        "sinking": false
+      },
+      "carry_over": true,
+      "last_change": "2026-11-21",
+      "carry_from": "2026-11-21"
     },
     {
       "id": "Z3",
@@ -158,19 +162,19 @@
   ],
   "counter": {
     "total": 4,
-    "qualifying": 0,
+    "qualifying": 1,
     "confirmed": 0,
     "probable": 0,
-    "unconfirmed_qualifying": 0,
+    "unconfirmed_qualifying": 1,
     "unconfirmed_total": 2,
-    "excluded": 3,
+    "excluded": 2,
     "nonspatial": 1
   },
   "generated_from": "cumulative-2026/daily/2026-11-28.json",
   "events": [
     {
       "code": "MN-2026-11-28-01",
-      "title": "نص إعلان القيادة المركزية الأمريكية في 27/11 عن تعطيل «Pacific Archer» في خليج عُمان · 26/11/2026",
+      "title": "تعطيل سفينة بضائع جافة في خليج عُمان بعد ذخيرة دقيقة على مؤخرتها — 26/11/2026",
       "area": "خليج عُمان",
       "class": "بيان رسمي",
       "zone": "Z1",
@@ -185,7 +189,7 @@
     },
     {
       "code": "MN-2026-11-28-02",
-      "title": "نص التنبيه الإرشادي من UKMTO عن واقعة بين سفينة بضائع وقوات عسكرية في خليج عُمان · 26/11/2026",
+      "title": "تنبيه إرشادي عن واقعة بين سفينة بضائع وقوات عسكرية في خليج عُمان — 26/11/2026",
       "area": "خليج عُمان",
       "class": "تنبيه رسمي",
       "zone": "Z1",
@@ -200,22 +204,22 @@
     },
     {
       "code": "MN-2026-11-28-03",
-      "title": "بلاغ غير مؤكد — وكالة مهر تنقل اصطدام ناقلة نفط بلغم جنوب مضيق هرمز، وتتابع روايات الحرس الثوري عن ناقلتين · 27 و28/11/2026",
+      "title": "رواية انفجار ناقلتين بألغام قرب مضيق هرمز — 27 و28/11/2026",
       "area": "مضيق هرمز",
       "class": "نقل إعلامي رسمي إيراني",
       "zone": "Z1",
       "nonspatial": false,
       "zone_reason": "كلمة الموقع «مضيق هرمز»",
-      "qualifying": false,
+      "qualifying": true,
       "confirmation": "unconfirmed",
-      "qualify_reason": "لا نوع مؤهّل في العنوان",
+      "qualify_reason": "نوع مؤهّل: «انفجار» وهدف بحري/ملاحي: «سفينة»",
       "incident_group": "MN-2026-11-28-03",
       "source_excerpt": "Oil tanker strikes mine in south of Strait of Hormuz",
-      "category": ""
+      "category": "انفجار قرب سفينة"
     },
     {
       "code": "MN-2026-11-28-04",
-      "title": "بلاغ غير مؤكد رسميًا — موقع TradeWinds ينقل إصابة ناقلة للمرة الثانية، مرتبطة بأول وفيات بحّارين في الحرب · 27/11/2026",
+      "title": "ناقلة أصيبت للمرة الثانية بحسب عنوان TradeWinds — 27/11/2026",
       "area": "المنطقة كاملة",
       "class": "نقل مهني",
       "zone": null,

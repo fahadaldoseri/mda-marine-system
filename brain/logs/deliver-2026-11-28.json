@@ -1,7 +1,7 @@
 {
  "date": "2026-11-28",
  "push": true,
- "started_utc": "2026-11-28T10:44:33+00:00",
+ "started_utc": "2026-11-28T13:44:21+00:00",
  "verdict": {
   "date": "2026-11-28",
   "verdict": 3,
@@ -9,7 +9,7 @@
   "publish_allowed": true,
   "final_gate_exit_code": 1,
   "mark_overall": "degraded",
-  "report_sha256": "2b4f78a403b191e9ed7846e5f442d5fd86ad460a83190786d5e2535a562509d5",
+  "report_sha256": "83e31974624cf9a57b28e6976a4878d69ec5e4abac7d38c1f9525247bd0d267f",
   "reasons": [],
   "isolated": []
  },
@@ -19,14 +19,8 @@
    "additions.html",
    "feed.xml",
    "index.html",
-   "manus-routes.json",
    "reports/2026-11-28.html",
-   "reports/en/2026-11-28.html",
-   "reports/en/additions.html",
-   "reports/en/index.json",
-   "reports/index.html",
-   "sitemap.xml",
-   "sources.html"
+   "reports/en/index.json"
   ],
   "drift": [
    "reports/2026-10-12.html",
@@ -101,13 +95,13 @@
    "reports/special-gfs-pride-giselle-2026-10-15.html",
    "reports/special.html"
   ],
-  "unchanged": 2
+  "unchanged": 6
  },
- "commit": "6c4530d8fdcfe63c15ca37d176e60ccf5c67d5cb",
- "remote_main": "6c4530d8fdcfe63c15ca37d176e60ccf5c67d5cb",
+ "commit": "cc131523fd5b77a98c2bec20175ac5573d47dfd0",
+ "remote_main": "cc131523fd5b77a98c2bec20175ac5573d47dfd0",
  "deploy": {
-  "id": "7d686440-a39c-4018-8a72-fb8b2799a05d",
-  "status": "success"
+  "status": "api_unreadable",
+  "errors": "[{'code': 10000, 'message': 'Authentication error'}]"
  },
  "live": {
   "url": "https://mda-bh.pages.dev/reports/2026-11-28",
@@ -115,6 +109,6 @@
   "sha_match": true
  },
  "rc": 0,
- "message": "نُشر 2026-11-28 (6c4530d) وتطابقت الصفحة الحية مع المبني: https://mda-bh.pages.dev/reports/2026-11-28",
- "finished_utc": "2026-11-28T10:44:52+00:00"
+ "message": "نُشر 2026-11-28 (cc13152) وتطابقت الصفحة الحية مع المبني: https://mda-bh.pages.dev/reports/2026-11-28",
+ "finished_utc": "2026-11-28T13:44:49+00:00"
 }
