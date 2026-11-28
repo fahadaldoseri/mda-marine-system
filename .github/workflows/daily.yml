@@ -1,4 +1,6 @@
-# التشغيل اليومي بلا جلسة Claude (قرار فهد 2026-11-26): 04:40 بتوقيت البحرين = 01:40Z.
+# التشغيل اليومي بلا جلسة Claude (قرار فهد 2026-11-26).
+# موقوف بأمر المالك 2026-11-28 05:02 توقيت البحرين: لا تشغيل مجدول ولا نشر عند 04:40
+# حتى يجهز غروك ويأمر المالك بالاستئناف. الاستئناف يعيد cron: "40 1 * * *".
 # الخط الحتمي كما هو (runbook.py حتى G069 ← cloud_deliver.py ← publish_site.sh --telegram)،
 # وخطوات الوكيل الأربع يكتبها نموذج عبر tools/agent_write_llm.py: Anthropic API إن وُجد السر ANTHROPIC_API_KEY (خارج باقة Claude)، وإلا freellmapi المجاني.
 # الضمانات: لا تجاوز لبوابة، النشر فقط بحكم 0 أو 3 (cloud_deliver يرفض غيرهما)،
@@ -7,8 +9,6 @@
 name: daily
 
 on:
-  schedule:
-    - cron: "40 1 * * *"
   workflow_dispatch:
     inputs:
       date:
@@ -36,7 +36,7 @@ jobs:
       BRAIN_DIR: /home/ubuntu/mda-marine-system/brain
       SITE_DIR: /home/ubuntu/mda-marine-system/site
       FALLBACK_DIR: /home/ubuntu/fallback
-      # النشر في التشغيل المجدول أمر فهد الدائم؛ في التشغيل اليدوي بالاختيار.
+      # النشر في التشغيل المجدول أمر فهد الدائم؛ في التشغيل اليدوي بالاختيار. الجدولة موقوفة 2026-11-28.
       PUBLISH: ${{ github.event_name == 'schedule' || inputs.publish }}
     steps:
       - uses: actions/checkout@v4
