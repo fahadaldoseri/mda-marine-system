@@ -1,11 +1,8 @@
 # التشغيل اليومي بلا جلسة Claude (قرار فهد 2026-11-26).
-# موقوف بأمر المالك 2026-11-28 05:02 توقيت البحرين: لا تشغيل مجدول ولا نشر عند 04:40
-# حتى يجهز غروك ويأمر المالك بالاستئناف. الاستئناف يعيد cron: "40 1 * * *".
-# الخط الحتمي كما هو (runbook.py حتى G069 ← cloud_deliver.py ← publish_site.sh --telegram)،
-# وخطوات الوكيل الأربع يكتبها نموذج عبر tools/agent_write_llm.py: Anthropic API إن وُجد السر ANTHROPIC_API_KEY (خارج باقة Claude)، وإلا freellmapi المجاني.
-# الضمانات: لا تجاوز لبوابة، النشر فقط بحكم 0 أو 3 (cloud_deliver يرفض غيرهما)،
-# تلغرام مرة واحدة بعد نشر متحقق (telegram_send يمنع التكرار)، لا دمج في main لهذا المستودع.
-# عند الفشل: يفشل المهمة فيصل إشعار GitHub، ويُستدعى Claude يدويًا للإصلاح فقط.
+# الجدولة موقوفة. لا cron. الاستئناف المجدول يعيد cron: "40 1 * * *" بأمر لاحق.
+# 2026-11-28 09:28 البحرين: أمر المالك بتشغيل حقيقي ونشر لتاريخ 2026-11-28.
+# تلغرام ملغى بأمر المالك. لا إرسال.
+# النشر فقط بحكم 0 أو 3.
 name: daily
 
 on:
@@ -15,7 +12,7 @@ on:
         description: "التاريخ YYYY-MM-DD (فارغ = اليوم UTC)"
         required: false
       publish:
-        description: "نشر وإرسال تلغرام (لا = تشغيل جاف حتى G069)"
+        description: "نشر الموقع (لا = تشغيل جاف حتى G069). تلغرام لا يُرسل."
         type: boolean
         default: false
 
@@ -36,7 +33,6 @@ jobs:
       BRAIN_DIR: /home/ubuntu/mda-marine-system/brain
       SITE_DIR: /home/ubuntu/mda-marine-system/site
       FALLBACK_DIR: /home/ubuntu/fallback
-      # النشر في التشغيل المجدول أمر فهد الدائم؛ في التشغيل اليدوي بالاختيار. الجدولة موقوفة 2026-11-28.
       PUBLISH: ${{ github.event_name == 'schedule' || inputs.publish }}
     steps:
       - uses: actions/checkout@v4
@@ -63,7 +59,6 @@ jobs:
           git config --global user.name "seawatch-daily"
           git config --global user.email "seawatch-daily@users.noreply.github.com"
 
-      # للخطوتين الاختياريتين S080 وS090 فقط؛ فشله لا يوقف الخط (كتابة الخطوات الأربع بـ Anthropic).
       - name: النموذج المجاني (freellmapi) — اختياري
         continue-on-error: true
         env:
@@ -88,12 +83,10 @@ jobs:
       - name: إجابات Claude الاحتياطية (إن وُجدت)
         working-directory: /home/ubuntu/mda-marine-system
         run: |
-          # خارج brain كي لا يرفضها فحص المانيفست (ملف غير متصل بخطوة).
           mkdir -p "$FALLBACK_DIR/$D"
           if git fetch -q origin "fallback/$D" 2>/dev/null && git archive FETCH_HEAD "brain/fallback/$D" 2>/dev/null | tar -x -C "$FALLBACK_DIR/$D" --strip-components=3; then
             echo "استُعيدت إجابات احتياطية: $(ls "$FALLBACK_DIR/$D" | tr '\n' ' ')"
           else echo "لا إجابات احتياطية"; fi
-          # إجابات مكتوبة بيد Claude داخل المستودع نفسه (fallback-answers/D) تتقدّم على الفرع
           git archive HEAD "fallback-answers/$D" 2>/dev/null | tar -x -C "$FALLBACK_DIR/$D" --strip-components=2 && echo "استُعيدت إجابات من المستودع: $(ls "$FALLBACK_DIR/$D" | tr '\n' ' ')" || true
 
       - name: الخط حتى G069 (خطوات الوكيل بالنموذج المجاني)
@@ -108,7 +101,6 @@ jobs:
           python3 tools/publish_verdict.py --date "$D"; v=$?
           echo "VERDICT=$v" >> "$GITHUB_ENV"
           echo "### حكم النشر $D: $v (خط $rc)" >> "$GITHUB_STEP_SUMMARY"
-          # المحرّك يقف عند D005 (خطوة خادم Manus) بعد G069، وهذا متوقع؛ الحاكم هو الحكم.
           [ "$v" = 0 ] || [ "$v" = 3 ] || exit 1
 
       - name: حفظ برومت الخطوة الفاشلة للاحتياط (فرع fallback/D)
@@ -117,7 +109,6 @@ jobs:
         run: |
           ls "$FALLBACK_DIR/$D"/*.prompt.md >/dev/null 2>&1 || exit 0
           mkdir -p "/tmp/fbsave" && cp "$FALLBACK_DIR/$D"/* /tmp/fbsave/
-          # الفرع يُبنى من main لا من فرع الاختبار: GitHub يمنع تطبيقه من دفع تعديلات ملفات سير العمل
           git fetch -q origin main
           git checkout -q -f -B "fallback/$D" origin/main
           mkdir -p "brain/fallback/$D" && cp /tmp/fbsave/* "brain/fallback/$D/"
@@ -144,16 +135,9 @@ jobs:
           python3 tools/cloud_deliver.py --date "$D" --push
           echo "نُشر: https://mda-bh.pages.dev/reports/$D" >> "$GITHUB_STEP_SUMMARY"
 
-      - name: ملخص تلغرام (مرة واحدة)
+      - name: تلغرام ملغى بأمر المالك
         if: env.PUBLISH == 'true'
-        working-directory: /home/ubuntu/mda-marine-system/brain
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_OWNER_CHAT_ID: ${{ secrets.TELEGRAM_OWNER_CHAT_ID }}
-        run: |
-          bash tools/ensure_devserver.sh 3000
-          python3 tools/runbook.py run --date "$D" --root . --only G011 --redo G011
-          bash tools/publish_site.sh --telegram "$D"
+        run: echo "تلغرام ملغى بأمر المالك 2026-11-28. لا إرسال."
 
       - name: حفظ مخرجات اليوم في فرع daily/D وطلب دمج مسودة
         if: always() && env.PUBLISH == 'true'
@@ -164,7 +148,7 @@ jobs:
           git add -A brain site/sources
           git diff --cached --name-only --diff-filter=AMR -z | tar --null -T - -cf /tmp/daily-out.tar
           git fetch -q origin main
-          git checkout -q -f -B "daily/$D" origin/main   # من main: لا تعديلات على ملفات سير العمل في الدفع
+          git checkout -q -f -B "daily/$D" origin/main
           tar -xf /tmp/daily-out.tar
           git add -A brain site/sources
           python3 brain/validators/check_repo_secrets.py || { echo "✘ فحص الأسرار منع الإيداع"; exit 1; }
@@ -187,5 +171,3 @@ jobs:
             /home/ubuntu/mda-marine-system/brain/logs/deliver-*.json
             /home/ubuntu/mda-marine-system/brain/logs/publish-*-telegram.json
           retention-days: 14
-# تشغيل 26 نوفمبر بعد ضم 22 وفجوة 23-25
-# + ترجمات 22 نوفمبر
