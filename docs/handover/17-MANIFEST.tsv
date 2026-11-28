@@ -1,0 +1,718 @@
+# تاريخ الكتابة: 2026-11-28 (البحرين)
+# الفرع: handover/grok-2026-11-28
+# الالتزام الأب: 66f16c9364e744db4697c622dec508ac16248e67
+# المشغّل المنتهية مهمته: Claude
+المسار	النوع	مصدر_حقيقة	آخر_تعديل	الوظيفة
+.devcontainer/Dockerfile	شيفرة	نعم	2026-11-11	ملف تشغيلي
+.devcontainer/devcontainer.json	قاعدة	نعم	2026-11-11	ملف تشغيلي
+.github/workflows/daily.yml	شيفرة	نعم	2026-11-28	ملف تشغيلي
+.github/workflows/docker-image.yml	شيفرة	نعم	2026-11-27	ملف تشغيلي
+.github/workflows/jekyll-docker.yml	شيفرة	نعم	2026-11-27	ملف تشغيلي
+.github/workflows/verify.yml	شيفرة	نعم	2026-11-18	ملف تشغيلي
+.gitignore	شيفرة	نعم	2026-11-11	ملف تشغيلي
+AGENTS.md	قاعدة	نعم	2026-11-11	دليل أي وكيل ذكاء اصطناعي يعمل على هذا المستودع
+README.md	قاعدة	نعم	2026-11-17	مركز الوعي بالمجال البحري — النظام الاحتياطي الكامل
+brain/.env.example	بيانات	لا	2026-11-11	ملف جذر brain
+brain/.gitignore	بيانات	لا	2026-11-11	ملف جذر brain
+brain/CHANGELOG.md	قاعدة	نعم	2026-11-28	سجل التغييرات
+brain/CLAUDE.md	قاعدة	نعم	2026-11-11	CLAUDE.md — الأوامر المستديمة لنظام «مركز الوعي بالمجال البحري»
+brain/INDEX.md	قاعدة	نعم	2026-11-12	INDEX — فهرس الأوامر والتعليمات الملزم
+brain/PROJECT-DELTA.md	قاعدة	نعم	2026-11-11	PROJECT-DELTA — الجولة الثالثة · 23 أكتوبر 2026
+brain/SETUP.md	قاعدة	نعم	2026-11-11	دليل التهيئة والتشغيل — مركز الوعي بالمجال البحري
+brain/appendices/ach-hormuz-targeting-2026-10-16.md	قاعدة	نعم	2026-11-11	مصفوفة اختبار الفرضيات المتنافسة (ACH) — نمط الاستهداف في مضيق هرمز
+brain/appendices/ach-hormuz-targeting-v2-2026-10-16.md	قاعدة	نعم	2026-11-11	مصفوفة اختبار الفرضيات المتنافسة (ACH) — نسخة 2
+brain/appendices/ach-hormuz-targeting-v3-2026-10-16.md	قاعدة	نعم	2026-11-11	مصفوفة اختبار الفرضيات المتنافسة (ACH) — نسخة 3: ترجيح كمّي موزون
+brain/appendices/ach-v3-model.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/appendices/area-coordinates.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/appendices/broad-excepts-baseline.json	قاعدة	نعم	2026-11-28	غير موصوف في رأس الملف
+brain/appendices/card_registry.json	قاعدة	نعم	2026-11-20	غير موصوف في رأس الملف
+brain/appendices/code-paths.json	قاعدة	نعم	2026-11-28	غير موصوف في رأس الملف
+brain/appendices/commander-style.md	قاعدة	نعم	2026-11-11	ملحق — أسلوب القائد والملخص التنفيذي
+brain/appendices/comprehension-stages.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/appendices/confidence-grade-map.json	بيانات	لا (الخادم)	2026-11-11	غير موصوف في رأس الملف
+brain/appendices/credibility-promotions.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/appendices/doubled-letters.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/appendices/editor-prompt.md	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/appendices/estimate-accuracy-log.md	بيانات	لا (الخادم)	2026-11-11	سجل قياس دقة التقديرات (ربع سنوي) — القاعدة ح10
+brain/appendices/estimate-code-map.json	بيانات	لا (الخادم)	2026-11-28	غير موصوف في رأس الملف
+brain/appendices/event-card-contract.md	قاعدة	نعم	2026-11-11	عقد بطاقة «سجل الأحداث» — الصياغة النهائية
+brain/appendices/event-code-map.json	بيانات	لا (الخادم)	2026-11-21	غير موصوف في رأس الملف
+brain/appendices/event-link-contract.md	قاعدة	نعم	2026-11-21	عقد ربط الوقائع في دفتر الأحداث
+brain/appendices/exposure-denominator-2026-10-16.md	قاعدة	نعم	2026-11-11	مقام التعرّض بحسب الانتماء — هل ارتفاع إصابات الأسطول الإماراتي استهداف أم تعرّض؟
+brain/appendices/feed-limitations.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/appendices/forbidden-coinages.json	قاعدة	نعم	2026-11-20	غير موصوف في رأس الملف
+brain/appendices/glossary-standard.json	قاعدة	نعم	2026-11-20	غير موصوف في رأس الملف
+brain/appendices/historical-baseline.md	قاعدة	نعم	2026-11-11	ملحق — historical-baseline
+brain/appendices/imo-incidents.json	بيانات	لا (الخادم)	2026-11-21	غير موصوف في رأس الملف
+brain/appendices/incident-id-map.json	بيانات	لا (الخادم)	2026-11-28	غير موصوف في رأس الملف
+brain/appendices/jmic-105-extract-2026-10-17.md	قاعدة	نعم	2026-11-11	استخراج منظم — JMIC Update 105 لملاحظة JMIC الاستشارية (مسودة)
+brain/appendices/known-faults.json	قاعدة	نعم	2026-11-28	غير موصوف في رأس الملف
+brain/appendices/language-gates.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/appendices/lexicon-candidates.md	قاعدة	نعم	2026-11-11	مرشحات المعجم (تنتظر اعتماد المالك)
+brain/appendices/lexicon-corpus.json	قاعدة	نعم	2026-11-28	غير موصوف في رأس الملف
+brain/appendices/libraries/	بيانات	نعم	2026-11-21	مجلد فرعي (31 ملفًا)
+brain/appendices/navarea-373-381-coordinates.md	قاعدة	نعم	2026-11-11	إحداثيات حطام «GFS PRIDE» والحاويات الطافية — التحذيران الرسميان NAVAREA IX 373/26 و381/26
+brain/appendices/owner-notes-log.json	بيانات	لا (الخادم)	2026-11-11	غير موصوف في رأس الملف
+brain/appendices/owner-style-samples.md	قاعدة	نعم	2026-11-11	تفضيلات المالك اللغوية: قبل/بعد
+brain/appendices/red-team-log.md	بيانات	لا (الخادم)	2026-11-11	سجل التحدي الدوري — الفريق الأحمر (القاعدة ح9)
+brain/appendices/reliability-review-log.md	بيانات	لا (الخادم)	2026-11-11	سجل مراجعة الدرجات — ربع سنوي
+brain/appendices/removable-latin.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/appendices/report-blocks.md	قاعدة	نعم	2026-11-11	ملحق — report-blocks
+brain/appendices/report-sections-policy.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/appendices/reports-archive.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/appendices/security-notes.md	قاعدة	نعم	2026-11-11	ملاحظات أمنية — قناة تلغرام وخدمة الويب هوك
+brain/appendices/simplified-vocabulary.json	قاعدة	نعم	2026-11-20	غير موصوف في رأس الملف
+brain/appendices/source-count-historical-exemptions.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/appendices/source-label-blacklist.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/appendices/source-reliability-40.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/appendices/source-reliability-40.md	قاعدة	نعم	2026-11-11	سجل الموثوقية والمصداقية — 62 مصدرًا
+brain/appendices/sources-manifest.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/appendices/style-blacklist.json	قاعدة	نعم	2026-11-20	غير موصوف في رأس الملف
+brain/appendices/support-sources.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/appendices/support-sources.md	قاعدة	نعم	2026-11-11	ملحق — مصادر الدعم (المفحوصة فعليًا)
+brain/appendices/telegram-chat.json	بيانات	لا (الخادم)	2026-11-11	غير موصوف في رأس الملف
+brain/appendices/telegram-delivery.md	قاعدة	نعم	2026-11-20	قناة التسليم على تلغرام — الدليل الملزم
+brain/appendices/telegram-policy.md	قاعدة	نعم	2026-11-11	سياسة قناة تلغرام — ملزمة
+brain/appendices/telegram-subscriptions.json	بيانات	لا (الخادم)	2026-11-11	غير موصوف في رأس الملف
+brain/appendices/telegram-targets.json	بيانات	لا (الخادم)	2026-11-11	غير موصوف في رأس الملف
+brain/appendices/terminology.md	بيانات	لا (الخادم)	2026-11-20	ملحق — terminology
+brain/appendices/threat-scale.json	قاعدة	نعم	2026-11-20	غير موصوف في رأس الملف
+brain/appendices/ui-contract.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/appendices/ukmto-vra-11-extract-2026-10-16.md	قاعدة	نعم	2026-11-11	استخراج منظم — UKMTO Voluntary Reporting Area: Weekly Overview No. 11
+brain/appendices/untracked-code-allowlist.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/appendices/version-numbering.md	قاعدة	نعم	2026-11-11	رقم الإصدار — الاصطلاح المعتمد
+brain/appendices/vessel-register-2026-10-16.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/appendices/web-delivery.md	قاعدة	نعم	2026-11-18	ملحق — web-delivery
+brain/appendices/writing-rules.json	قاعدة	نعم	2026-11-20	غير موصوف في رأس الملف
+brain/appendices/zone-overrides.json	قاعدة	نعم	2026-11-28	غير موصوف في رأس الملف
+brain/appendices/zone-registry.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/archive/	بيانات	لا (الخادم)	2026-11-28	أصول البلاغات الرسمية المحفوظة وأرشيف تاريخي؛ لا تُعدَّل (464 ملفًا)
+brain/assets/	بيانات	لا	2026-11-11	أصول ثابتة (4 ملفًا)
+brain/audit/	بيانات	نعم (سجل الأعطال فقط)	2026-11-21	سجل الأعطال وتقارير التدقيق؛ الملف الحاكم audit/سجل-الأعطال-والثغرات.md (1415 ملفًا)
+brain/backups/	مهمل	لا	2026-11-11	نسخ احتياطية قديمة؛ لا تشغّل (4 ملفًا)
+brain/bootstrap.sh	قاعدة	نعم	2026-11-11	تهيئة نظام «مركز الوعي بالمجال البحري» على جهاز أو بيئة سحابية جديدة — بأمر واحد.
+brain/brain/	مهمل	لا	2026-11-11	مجلد متداخل بلا وصف؛ غير مسند (10 ملفًا)
+brain/cumulative-2026/	بيانات	لا (الخادم)	2026-11-28	دفتر الأحداث التراكمي والملفات اليومية (282 ملفًا)
+brain/decisions/	قاعدة	نعم	2026-11-20	دفتر قرارات المالك registry.json (1 ملفًا)
+brain/design/	بيانات	لا	2026-11-11	مواد تصميم (45 ملفًا)
+brain/docs/	بيانات	نعم (الدلائل)	2026-11-28	دلائل ووثائق؛ runbook.md مولَّد من runbook.json فلا يُعدَّل يدويًا (68 ملفًا)
+brain/evidence/	بيانات	لا (الخادم)	2026-11-21	أدلة التشغيل والسلسلة الحاكمة (Merkle) والاختبارات المحكمة (120 ملفًا)
+brain/feeds/	بيانات	لا (الخادم)	2026-11-28	خلاصات المصادر اليومية (105 ملفًا)
+brain/historical/	بيانات	لا	2026-11-11	مواد تاريخية (10 ملفًا)
+brain/logs/	بيانات	لا (الخادم)	2026-11-28	سجلات التشغيل (runbook وgate وpipeline) (4624 ملفًا)
+brain/memory/	بيانات	لا (الخادم)	2026-11-19	سجل التعلم والتكيّف التحليلي (7 ملفًا)
+brain/notes/	بيانات	لا	2026-11-12	ملاحظات مشروع (159 ملفًا)
+brain/reports/	بيانات	لا (الخادم)	2026-11-28	التقارير المولّدة (Markdown وDOCX وPDF)؛ يكتبها التشغيل اليومي (125 ملفًا)
+brain/requirements.txt	قاعدة	نعم	2026-11-11	ملف جذر brain
+brain/research/	بيانات	لا	2026-11-11	أبحاث (10 ملفًا)
+brain/runbook-result.md	قاعدة	نعم	2026-11-11	تقرير نتيجة: الأمر التنفيذي — كتيب الإجراءات التشغيلية (23 أكتوبر 2026)
+brain/runbook/approved-skills.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/runbook/auto-heal.json	قاعدة	نعم	2026-11-21	غير موصوف في رأس الملف
+brain/runbook/delivery-policy.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/runbook/impact-map.json	قاعدة	نعم	2026-11-21	غير موصوف في رأس الملف
+brain/runbook/parity-scope.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/runbook/perf-budget.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/runbook/phases.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/runbook/prompts/	بيانات	نعم	2026-11-28	مجلد فرعي (21 ملفًا)
+brain/runbook/readiness-questions.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/runbook/reference-manifest.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/runbook/reference/	بيانات	نعم	2026-11-11	مجلد فرعي (33 ملفًا)
+brain/runbook/regression-items.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/runbook/runbook.json	قاعدة	نعم	2026-11-28	غير موصوف في رأس الملف
+brain/runbook/skill-aliases.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/schedule/	مهمل	لا	2026-11-18	تفاصيل أوامر قديمة (v4 وv6 وv7) (5 ملفًا)
+brain/schemas/daily-events.schema.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/schemas/daily-report-v2.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/secrets/	سرّ	لا (أسماء فقط)	2026-11-11	README وقالب الأسماء؛ ملف القيم غير موجود في main (2 ملفًا)
+brain/sections/00-identity.md	قاعدة	نعم	2026-11-11	00-identity — الهوية والمهمة والمخرج
+brain/sections/10-sources.md	قاعدة	نعم	2026-11-12	10-sources — المصادر وطرق الوصول
+brain/sections/20-examples.md	قاعدة	نعم	2026-11-20	أمثلة «قبل/بعد» من تقاريرنا (للأسلوب فقط — المعنى يؤخذ من المصدر)
+brain/sections/20-language.md	قاعدة	نعم	2026-11-20	20-language — اللغة والمصطلحات
+brain/sections/20-lexicon.md	قاعدة	نعم	2026-11-20	المعجم الموحّد — اكتب العمود الثاني ولا تكتب الثالث
+brain/sections/20-writing-brief.md	قاعدة	نعم	2026-11-11	مختصر الكتابة — اقرأه كاملًا قبل أول سطر، وهو يغني عن بقية ملفات الأسلوب أثناء الكتابة
+brain/sections/30-structure.md	قاعدة	نعم	2026-11-11	30-structure — أقسام التقرير وترتيبها
+brain/sections/40-blocks.md	قاعدة	نعم	2026-11-11	40-blocks — كتل العرض وقواعد الصياغة
+brain/sections/50-analysis.md	قاعدة	نعم	2026-11-11	50-analysis — التحليل والمؤشرات والزمن
+brain/sections/55-intelligence.md	قاعدة	نعم	2026-11-11	55-intelligence — قراءة الموقف وتحليل المؤشرات: الأساليب واللغة والتحقق
+brain/sections/60-validation.md	قاعدة	نعم	2026-11-11	60-validation — بوابة التحقق
+brain/sections/70-delivery.md	قاعدة	نعم	2026-11-20	70-delivery — التسليم والنشر والتصنيف
+brain/sections/75-style.md	قاعدة	نعم	2026-11-20	75 — الأسلوب الكتابي للتقارير العملياتية
+brain/sections/80-learning.md	قاعدة	نعم	2026-11-11	80-learning — التعلم التكيفي
+brain/sections/90-automation.md	قاعدة	نعم	2026-11-17	90-automation — سلسلة التشغيل اليومي
+brain/skills/	قاعدة	نعم	2026-11-20	مهارات النظام المحلية (45 مجلدًا؛ المشغّلة منها مدرجة في tools/restore_skills.sh) (302 ملفًا)
+brain/special-reports/	بيانات	لا (الخادم)		تقارير خاصة (2 ملفًا)
+brain/state/	بيانات	لا (الخادم)	2026-11-11	حالة تلغرام والقناة المرآة (8 ملفًا)
+brain/templates/	قاعدة	نعم	2026-11-11	قوالب (الشكل المعتمد approved-pdf وmark-schema وغيرها) (12 ملفًا)
+brain/templates/approved-pdf/	بيانات	نعم	2026-11-11	مجلد فرعي (2 ملفًا)
+brain/templates/mark-schema.json	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/tests/demo_prod_copy.sh	اختبار	نعم	2026-11-11	إثبات السلسلة كاملة على نسخة مؤقتة من الإنتاج: تشغيل → خطوة وكيل → إتمام → بوابات → بناء.
+brain/tests/fixtures/	بيانات	نعم	2026-11-19	مجلد فرعي (2 ملفًا)
+brain/tests/run_checks.sh	اختبار	نعم	2026-11-21	اختبارات البوابات — تُشغَّل بعد كل إصلاح: bash tests/run_checks.sh
+brain/tests/sections/	بيانات	نعم	2026-11-11	مجلد فرعي (17 ملفًا)
+brain/tests/test_agent_write_llm.py	اختبار	نعم	2026-11-28	agent_write_llm: البرومت يضمّ صيغة الإخراج، ولا يُكتب إلا مسار معلن للخطوة.
+brain/tests/test_apply_archive_policy.py	اختبار	نعم	2026-11-11	حارس أرشيفات apply: لا تُتبع في المرآة ولا تُعاد مزامنتها، ولا تُؤرشف skills.
+brain/tests/test_apply_from_github.py	اختبار	نعم	2026-11-11	apply_from_github.py على مستودع git مؤقت: تعارض يمنع · --accept-repo يطبّق مع أرشفة · تحديث نظيف بلا تعارض ·
+brain/tests/test_area_absence.py	اختبار	نعم	2026-11-11	اختبار موجبة/سالبة لغياب area مع area_basis، باستخدام شجرة مؤقتة.
+brain/tests/test_area_separator_normalization.py	اختبار	نعم	2026-11-11	اختبار انحدار: فاصل قيمة الموقع يُطبّع إلى « - » قبل المطابقة، والمخالف يبقى مانعًا في الحارس.
+brain/tests/test_asset_floor.py	اختبار	نعم	2026-11-11	اختبار حاجز أرضية الأصول الحاكمة (ك-483) — سلوك حقيقي على مجلد مؤقت.
+brain/tests/test_audit_extract_no_phantom.py	اختبار	نعم	2026-11-11	اختبار موجب وسالب لدالة استخراج النص في أداة تدقيق تغطية الأسلوب.
+brain/tests/test_auto_heal.py	اختبار	نعم	2026-11-21	اختبار الإصلاح الذاتي (اعتماد فهد 21 نوفمبر 2026) على جذر مؤقت لا يلمس المشروع الحقيقي.
+brain/tests/test_backup_code_safety.py	اختبار	نعم	2026-11-11	github_backup.py لا يكتب الشيفرة فوق المستودع (GitHub مصدرها): ملف شيفرة مختلف على الخادم يبقى كما في المستودع
+brain/tests/test_backup_push_safety.py	اختبار	نعم	2026-11-11	اختبار حاجز النسخ الاحتياطي: الدفع إلى فرع مسموح، وإلى main ممنوع.
+brain/tests/test_backup_skills.py	اختبار	نعم	2026-11-18	اختبار وحدة لتكامل قائمة المهارات بين المزامنة والنسخ الاحتياطي.
+brain/tests/test_backup_tree_clean.py	اختبار	نعم	2026-11-11	اختبار حارس D040: سجلات التشغيل المحلية لا توقف النسخ، والشيفرة تبقى مانعة.
+brain/tests/test_batch_runner_safe_id.py	اختبار	نعم	2026-11-11	انحدار: معرّف الصف ذو اللاحقة لا يُنشئ مسارًا متداخلًا في سجل الدفعة.
+brain/tests/test_binding_coverage_cli.py	اختبار	نعم	2026-11-11	عقد CLI: binding_coverage يقبل --root كما في أوامر التشغيل المعتمدة.
+brain/tests/test_build_atomicity.py	اختبار	نعم	2026-11-11	اختبارات منع عيب البناء: بصمة ذرية وقفل single-flight.
+brain/tests/test_canonical_brain_root.py	اختبار	نعم	2026-11-11	اختبار انحدار: جذر brain يُشتق بالقياس لا بالاسم، ويفشل مغلقًا.
+brain/tests/test_card_counters.py	اختبار	نعم	2026-11-28	اختبارات ثابتة لسجل بطاقات العدادات الفعّال.
+brain/tests/test_card_registry_pairs.py	اختبار	نعم	2026-11-11	اختبار انحدار لحارس أزواج سجل البطاقات (ك-596) — يعمل بـunittest.
+brain/tests/test_card_registry_reader_labels.py	اختبار	نعم	2026-11-19	حارس تسميات مصدر البطاقات (2026-11-19).
+brain/tests/test_classify_zones_damage_scope.py	اختبار	نعم	2026-11-11	اختبار قاعدة سلم التهديد: الضرر يجب أن يخص واقعة الهجوم المؤكدة نفسها.
+brain/tests/test_closure_gate.py	اختبار	نعم	2026-11-11	اختبار سلبي/إيجابي لبوابة الإغلاق: يثبت أنها تمنع فعلًا ولا تمرّ بلا فحص.
+brain/tests/test_cloud_deliver_api_unreadable.py	اختبار	نعم	2026-11-28	wait_deploy: واجهة Cloudflare غير مقروءة (مفتاح Actions) لا تُعلَّق عشر دقائق بل تُحال إلى التحقق الحي.
+brain/tests/test_code_paths_ignore.py	اختبار	نعم	2026-11-11	اختبار انحدار: مخلفات بايثون المولَّدة ليست شيفرة ولا بيانات (ك-516).
+brain/tests/test_content_fidelity_units.py	اختبار	نعم	2026-11-11	اختبار انحدار لوحدات إسناد المصدر المشتركة بين المولّد والحاجز.
+brain/tests/test_d035_repo_root.py	اختبار	نعم	2026-11-11	حارس عقد D035: لا يُضاعف جذر المرآة عند تمرير --repo.
+brain/tests/test_daily_event_surface.py	اختبار	نعم	2026-11-11	اختبار موجب وسالب لبوابة سجل الأحداث الحي وسطح الأقسام المنقولة.
+brain/tests/test_daily_events_schema.py	اختبار	نعم	2026-11-11	اختبار بوابة مخطط دفتر الوقائع: موجب · سالب · مفقود (فشل مغلق).
+brain/tests/test_day_coverage_gate.py	اختبار	نعم	2026-11-17	اختبار موجبة/سالبة لحارس تغطية الأيام، باستخدام ملفات مؤقتة فقط.
+brain/tests/test_decisions_registry.py	اختبار	نعم	2026-11-18	اختبار موجب وسالب لحارس دفتر القرارات.
+brain/tests/test_delivery_gate_refresh.py	اختبار	نعم	2026-11-11	اختبار انحدار لعقد تجديد البوابة المتقادمة عند حدّ خطوة التسليم (ك-591).
+brain/tests/test_delivery_policy.py	اختبار	نعم	2026-11-11	اختبار موجب وسالب لحارس سياسة التسليم المتصل (قرار المالك «أ»).
+brain/tests/test_delivery_scripts.sh	اختبار	نعم	2026-11-19	اختبار سكربتات التسليم: لا نشر بلا بوابات · ملخص تلغرام تحت السقف ويمرّ سياسة الإرسال · check_live يفشل فعلًا 
+brain/tests/test_deployment_freshness.py	اختبار	نعم	2026-11-11	اختبار انحدار: حارس حداثة النشر يفشل مغلقًا عند بناء أقدم، ولا يقبل قياسًا ناقصًا.
+brain/tests/test_derive_http_status.py	اختبار	نعم	2026-11-17	اشتقاق http_status لسجل لا واقعة من ملف حالة التغذيات (قرار المالك 2026-11-17).
+brain/tests/test_desktop_readability_contract.py	اختبار	نعم	2026-11-11	عقد متصفح حي لحارس وضوح سطح الحاسوب: موجب وسالب.
+brain/tests/test_disclosure_arabic_label.py	اختبار	نعم	2026-11-11	عقد الإفصاح: متن عربي يُقبل بتسميته العربية للمكوّن، والرموز اللاتينية ليست شرطًا.
+brain/tests/test_duplicate_not_counted.py	اختبار	نعم	2026-11-21	صف التكرار لا يُحتسب، ومصادره تُدمج في واقعته الأصلية (S072 + S074، 21 نوفمبر 2026).
+brain/tests/test_early_preflight.py	اختبار	نعم	2026-11-20	عقد الفحص المسبق المبكر S015 (المقترح ٢، 20 نوفمبر 2026).
+brain/tests/test_edit_pass.py	اختبار	نعم	2026-11-11	tools/edit_pass.py بعميل نموذج وهمي (بلا شبكة): يحفظ ما قبل أول عنوان `##` عند --apply · يرفض قسمًا غُيّر رقمه
+brain/tests/test_en_advisory_id_matching.py	اختبار	نعم	2026-11-11	حارس ع-370: لا يسرّب مترجم الإنجليزية معرف تحذير من عقدة مجاورة.
+brain/tests/test_en_master_build_site_root.py	اختبار	نعم	2026-11-11	عقد جذر الموقع في en_master_build.sh: موجب بلا SITE_DIR وسالب بفشل مغلق.
+brain/tests/test_en_parity_confidence_map.py	اختبار	نعم	2026-11-11	اختبار انحدار لتماثل درجات الإسناد عبر الخريطة الحاكمة.
+brain/tests/test_en_parity_structure_scope.py	اختبار	نعم	2026-11-12	حارس نطاق قياس بنية التماثل بين المتن العربي والإنجليزي (ك-617).
+brain/tests/test_en_parity_visible_numbers.py	اختبار	نعم	2026-11-11	اختبارات عدّ الأرقام المرئية في صفحات التماثل الإنجليزي.
+brain/tests/test_en_source_assets.py	اختبار	نعم	2026-11-11	عقود الأصل الإنجليزي ومعجم الواجهة ذي المصدر الواحد: موجب وسوالب.
+brain/tests/test_en_translator_deterministic.py	اختبار	نعم	2026-11-20	حارس الحتمية في مترجم الإنجليزية (2026-11-19).
+brain/tests/test_event_card_contract.py	اختبار	نعم	2026-11-11	اختبار بوابة عقد بطاقة سجل الأحداث: موجب · سالب · مفقود (فشل مغلق).
+brain/tests/test_event_card_rows.py	اختبار	نعم	2026-11-11	اختبارات عقد صفوف بطاقة سجل الأحداث (اشتقاق المصدر وفشل مغلق).
+brain/tests/test_feed_counters.py	اختبار	نعم	2026-11-11	ك-146: عدّ المصادر بلا شبكة — يثبت الثابت (مفحوصة = ناجحة + متعذّرة) وعدم الحساب المزدوج.
+brain/tests/test_final_gate_vs_manifest.py	اختبار	نعم	2026-11-11	اتساق البوابة القديمة (tools/final_gate.sh) مع المانيفست: كل سكربت تستدعيه خطوة فيها يجب أن تستدعيه خطوة في ال
+brain/tests/test_forbidden_surface_terms.py	اختبار	نعم	2026-11-11	اختبار حاجز الألفاظ المانعة على المتن والواجهة والصفحة.
+brain/tests/test_g026_portable_paths.py	اختبار	نعم	2026-11-12	انحدار G026: النقل الفعلي يمر، وجذر التشغيل الثابت يُمنع.
+brain/tests/test_g030_code_spaces.py	اختبار	نعم	2026-11-18	حاجز G030: رموز EST في تقرير التشغيل مسجلة، ذات معنى موحد، والرموز المجهولة تُمنع.
+brain/tests/test_g036_vocabulary_contract.py	اختبار	نعم	2026-11-12	حاجز G036: الصياغة اليومية المعتمدة تمرّ وعودة اللفظ المرفوض تُمنع.
+brain/tests/test_g040_review2_contract.py	اختبار	نعم	2026-11-11	عقود تمنع عودة عطلَي المراجعة الثانية في G040.
+brain/tests/test_gate_audit_triage.py	اختبار	نعم	2026-11-11	اختبارات فرز gate_audit: الحالة الحقيقية تُكتشف، والبنية السليمة لا تُرفع كمرشح.
+brain/tests/test_gate_coverage_reference.py	اختبار	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/tests/test_gate_guard_contracts.py	اختبار	نعم	2026-11-11	عقود اختبار للحراس التي كشفها gate_audit.
+brain/tests/test_gate_root_fail_closed.py	اختبار	نعم	2026-11-11	اختبار سلبي وموجب لفرع الفشل المغلق في اشتقاق جذر الموقع (بند المرحلة أ · خ-09).
+brain/tests/test_gate_suggestions.py	اختبار	نعم	2026-11-11	حاجز: لا تقترح بوابة اقتراحات تخصها ألفاظًا تحظرها قوائم المالك.
+brain/tests/test_gate_tools.py	اختبار	نعم	2026-11-11	اختبار موجب وسالب لأدوات بوابة العبور.
+brain/tests/test_gate_verdict.py	اختبار	نعم	2026-11-11	اختبار حكم البوابات (ك-325): الحكم يُقرأ سطرًا لا ذِكرًا داخل وصف اختبار.
+brain/tests/test_geo_table_selection.py	اختبار	نعم	2026-11-11	اختبار B010: لا يُعامل جدول مستوى التهديد كجدول توزيع جغرافي.
+brain/tests/test_github_backup_failure_output.py	اختبار	نعم	2026-11-11	Regression test for github_backup.sh's fail-closed caller-visible output.
+brain/tests/test_glossary_shape_contract.py	اختبار	نعم	2026-11-11	Regression contract for the English glossary shape guard.
+brain/tests/test_hanging_opener.py	اختبار	نعم	2026-11-11	اختبار منع التركيب المعلّق (ك-173): القاعدة في القسم + البوابة تمنع وتمرّ بعد الإصلاح.
+brain/tests/test_hermetic_run.py	اختبار	نعم	2026-11-11	Live regression tests for the hermetic command runner.
+brain/tests/test_hero_kpi_presentation_contract.py	اختبار	نعم	2026-11-11	حاجز عرض بطاقات hero_kpis: الكامل يُقبل والناقص/المخالف يُرفض.
+brain/tests/test_hero_kpi_schema.py	اختبار	نعم	2026-11-11	اختبار عقد بناء hero_kpis: مخطط قديم تاريخي ومخطط صفين حديث.
+brain/tests/test_hidden_scope.py	اختبار	نعم	2026-11-11	اختبار دائم لنطاق فحص الحجب في بوابة المخرج 6 (qa_gates.gate_hidden).
+brain/tests/test_incident_ids.py	اختبار	نعم	2026-11-21	رقم الحادث ورقم البلاغ (قرار فهد 21 نوفمبر 2026، الصيغة أ).
+brain/tests/test_isolation_validators.py	اختبار	نعم	2026-11-21	مدققات B010 تحترم عزل النسخة الإنجليزية (اختبار العطل المصطنع، 21 نوفمبر 2026).
+brain/tests/test_known_faults_report_date.py	اختبار	نعم	2026-11-19	الاستثناء يُختار بتاريخ التقرير لا بتاريخ التشغيل (19 نوفمبر 2026).
+brain/tests/test_kpi_layers.py	اختبار	نعم	2026-11-11	اختبارات بوابة طبقات البطاقات: موجب على المخرج الحقيقي، وسالب بتغيير رقم في نسخة معزولة.
+brain/tests/test_language.sh	اختبار	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/tests/test_language_tools.py	اختبار	نعم	2026-11-11	اختبارات دائمة لأدوات محور اللغة (أمر 23 أكتوبر 2026).
+brain/tests/test_ledger_continuity.py	اختبار	نعم	2026-11-17	اختبارات موجب وسالب للحارس المغلق لاستمرارية السجلات اليومية.
+brain/tests/test_ledger_link_contract.py	اختبار	نعم	2026-11-11	اختبار عقد علاقة الدفتر: موجب + خمس حالات منع فشل مغلق.
+brain/tests/test_ledger_matrix_parity_guard.py	اختبار	نعم	2026-11-11	انحدار: الحارس يعدّ كل عائلات المعرّفات ويفشل مغلقًا على التباعد.
+brain/tests/test_ledger_proof_degree.py	اختبار	نعم	2026-11-11	اختبار نقل proof_degree من event_keys إلى دفتر اليوم بلا اختلاق.
+brain/tests/test_ledger_totals_migration_gaps.py	اختبار	نعم	2026-11-18	ledger_totals يحترم فجوة النقل الموثقة بقرار المالك (2026-11-17).
+brain/tests/test_lexicon_gate.py	اختبار	نعم	2026-11-28	اختبار بوابة العيوب اللغوية ومعجمها المشتق (ك-328).
+brain/tests/test_live_dom_dup_scope.py	اختبار	نعم	2026-11-11	اختبار انحدار (موجب/سالب) لنطاق كاشف التكرار النصّي في tools/live_dom_audit.py.
+brain/tests/test_live_parity_skill_contract.py	اختبار	نعم	2026-11-11	عقد مهارة استئناف الخطوة إلى المزامنة الحية (rerun-step-to-live-parity-ops).
+brain/tests/test_lloyds_route_and_ofac_junk.py	اختبار	نعم	2026-11-21	مسار Lloyd's List الرسمي (36) وحارس أسماء السفن من آثار الجلب (21 نوفمبر 2026).
+brain/tests/test_manifest_commands.py	اختبار	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/tests/test_manifest_output_contract.py	اختبار	نعم	2026-11-11	حارس عقد المانيفست↔الأداة: كل سطر نجاح يطلبه B010 يجب أن يصدره منتجه الفعلي.
+brain/tests/test_manus_channel_verify.py	اختبار	نعم	2026-11-11	اختبار انحدار: شرط تحقق قناة Manus المرآة يفشل مغلقًا ولا يُصدّق ادعاءً بلا قياس.
+brain/tests/test_map_cluster.py	اختبار	نعم	2026-11-11	اختبار انحدار لوحدة العنقود والتفكيك والترقيم الموحّد.
+brain/tests/test_map_location_term.py	اختبار	نعم	2026-11-11	اختبار تجميد لفظ «الموقع» على أسطح الخريطة (شديد على عطل ك-480).
+brain/tests/test_map_points_nonspatial.py	اختبار	نعم	2026-11-11	اختبار انحدار: الواقعة «غير مكانية» لا تُرسم ولا تُسقط مشتق نقاط الخريطة.
+brain/tests/test_mark_components_bootstrap.py	اختبار	نعم	2026-11-11	اختبار bootstrap لعلامة pipeline.
+brain/tests/test_measurement_batch_runner_timeout.py	اختبار	نعم	2026-11-11	اختبار انحدار: مشغّل الدفعات لا ينهار عند تجاوز المهلة ويسجّل rc=124.
+brain/tests/test_merge_event_sources.py	اختبار	نعم	2026-11-11	اختبار قرار جمع مصادر الواقعة: موجب، منع التكرار، ومنع المقتطف الناقص.
+brain/tests/test_meta_style_normalizer.py	اختبار	نعم	2026-11-11	اختبار انحدار لصياغة ملف الواجهة (G045 / hanging_yabqa).
+brain/tests/test_new_validators.py	اختبار	نعم	2026-11-11	اختبارات المدقّقات الجديدة وأدواتها — أمر فهد 2026-10-24 (البنود 1 و4 و7 و10).
+brain/tests/test_no_dead_gate_commands.py	اختبار	نعم	2026-11-19	حارس الأوامر الميتة: لا فحص يُكتب بعد أمر خروج فلا يُنفَّذ أبدًا (2026-11-19).
+brain/tests/test_no_external_relay_20261107.py	اختبار	نعم	2026-11-11	حاجز فشل مغلق: لا وسيط خارجي يحمل رمز البوت في مسار إرسال تلغرام.
+brain/tests/test_no_publish_without_runbook.sh	اختبار	نعم	2026-11-11	اختبار 10: محاولة نشر مباشر دون المرور بالمحرّك (سجل بوابات ناقص) → رفض.
+brain/tests/test_non_spatial_term.py	اختبار	نعم	2026-11-11	اختبار موجبة/سالبة للفظ «غير مكانية» و«غير مكاني».
+brain/tests/test_normalize_digits_scope.py	اختبار	نعم	2026-11-20	اختبار نطاق تطبيع الأرقام (ك-562).
+brain/tests/test_ofac.sh	اختبار	نعم	2026-11-11	اختبار مستقل لإصلاحات OFAC — لا يتصل بالشبكة ولا يكتب أسرارًا.
+brain/tests/test_old_repo_gaps.py	اختبار	نعم	2026-11-20	الفجوات الثلاث المنقولة من الطلبات القديمة (فرز 20 نوفمبر 2026، اعتماد فهد).
+brain/tests/test_orphan_rule.py	اختبار	نعم	2026-11-11	ك-148: اختبار وحدة لقاعدة العنوان اليتيم على صفحة نصية، بعد أن عجز بناء تجريبي عن إنتاج عنوان يتيم حقيقي.
+brain/tests/test_orthography.py	اختبار	نعم	2026-11-11	فاحص الإملاء: يلتقط الخطأ الحقيقي ولا ينذر كذبًا على «قُبل علنًا» (فعل ماضٍ لا حرف جر).
+brain/tests/test_owner9_imo_cards.py	اختبار	نعم	2026-11-19	اختبارات القرار 9: بطاقات IMO الدائمة وفصل تحديثات الدفتر عن سجل الأحداث.
+brain/tests/test_owner_approval_launch_gate_skill_contract.py	اختبار	نعم	2026-11-18	عقد قابل للاختبار لمهارة `owner-approval-launch-gate-ops` (قرار المالك 2026-11-10 · D-0647).
+brain/tests/test_owner_notes_triage_skill_contract.py	اختبار	نعم	2026-11-18	عقد قابل للاختبار لمهارة `owner-notes-measured-triage` (قرار المالك 2026-11-10 · D-0623).
+brain/tests/test_parity_committed_state.py	اختبار	نعم	2026-11-11	عقد التماثل: اللقطة الملتزمة مانعة، والعمل غير الملتزم معلوماتي.
+brain/tests/test_parity_runtime_artifacts.py	اختبار	نعم	2026-11-11	حارس مخرجات التشغيل: يستثني نسخة restore_skills المؤقتة فقط، لا السجلات العامة.
+brain/tests/test_parity_scope.py	اختبار	نعم	2026-11-11	عقد سجل نطاق التماثل: سبب مكتوب، تصنيف شامل، وفشل مغلق.
+brain/tests/test_parity_skills_canon_local_only.py	اختبار	نعم	2026-11-11	اختبار انحدار: نسخ المهارات القانونية المؤقتة لا تُحسب انحرافًا في التماثل — عطل ك-524.
+brain/tests/test_pdf_heading_match.py	اختبار	نعم	2026-11-11	اختبار مطابقة عناوين الأقسام في نص PDF المستخرج: يجب أن تصمد أمام قلب «لا» إلى «ال» الذي ينتجه pdftotext
+brain/tests/test_pdf_live_parity_en_guard.py	اختبار	نعم	2026-11-11	اختبار فشل مغلق: يرفض اختلاف بصمة PDF أو ظهور العربية في HTML الإنجليزي.
+brain/tests/test_pdf_page_range_guard.py	اختبار	نعم	2026-11-11	اختبار فشل مغلق: يرفض PDF خارج نطاق 7–12 صفحة.
+brain/tests/test_pdf_print_gates.py	اختبار	نعم	2026-11-11	اختبار انحدار لبوابتي الطباعة: بصمة النمط المقفل وقياس كتلة الخريطة.
+brain/tests/test_perf_budget.py	اختبار	نعم	2026-11-11	اختبارات عقد ميزانية زمن البوابات: موجب وسالب وفشل مغلق للزمن المفقود.
+brain/tests/test_portable_paths_skill_adoption.py	اختبار	نعم	2026-11-12	حراسة اعتماد مهارة النقل: ملفات، مستهلك G026، قرار بدليل وحالة سالبة.
+brain/tests/test_pre_execution_plan_audit_skill_contract.py	اختبار	نعم	2026-11-18	عقد قابل للاختبار لمهارة `pre-execution-plan-audit-ops` (قرار المالك 2026-11-10 · D-0645).
+brain/tests/test_preflight_guard.py	اختبار	نعم	2026-11-11	اختبار انحدار لحارس preflight مع استثناءات النسخ الحقيقية.
+brain/tests/test_preserve_check.py	اختبار	نعم	2026-11-11	حارس حفظ الحقائق (tools/preserve_check.py): لا إنذار كاذب على علامات الترقيم الملاصقة للاتيني، وتغيّر نص العنو
+brain/tests/test_print_alignment_hidden.py	اختبار	نعم	2026-11-11	تدقيق المحاذاة في وسائط الطباعة يتجاهل العناصر المحجوبة في الطباعة (no-print: display:none) ولا يتجاهل المرئي 
+brain/tests/test_publish_channels.py	اختبار	نعم	2026-11-11	عقد قنوات النشر: Pages أساسي، raw.githack عرض بديل، وraw.githubusercontent تحقق فقط.
+brain/tests/test_publish_contract.py	اختبار	نعم	2026-11-11	عقد النشر: رأس النسخة المقصودة إلى main والتحقق المغلق من 404.
+brain/tests/test_publish_live_contract_20261107.py	اختبار	نعم	2026-11-18	غير موصوف في رأس الملف
+brain/tests/test_publish_preflight_freshness.py	اختبار	نعم	2026-11-18	اختبار انحدار: قرار النشر على قياس جهوزية جديد لا على لقطة مخزّنة (عطل ك-555).
+brain/tests/test_publish_verdict.py	اختبار	نعم	2026-11-19	حكم النشر الموحّد (tools/publish_verdict.py) — اختبار موجب وسالب.
+brain/tests/test_published_counters.py	اختبار	نعم	2026-11-19	اختبار انحدار لحارس الأرقام المنشورة (ك-554).
+brain/tests/test_reference_generator.py	اختبار	نعم	2026-11-11	اختبار موجب وسالب لمولّد مرجع آلية العمل وحارسه.
+brain/tests/test_register_estimate_check.py	اختبار	نعم	2026-11-11	`register_estimate.py --check --date D` يمنع تقريرًا فيه رمز EST- غير مسجَّل ويقبل المسجَّل (D060 كان يستدعي خ
+brain/tests/test_regression_b03_dynamic_anchor.py	اختبار	نعم	2026-11-20	اختبار انحدار ب-03: المرساة التي تُضاف بعد تحميل HTML يجب أن تُثبت حيًا.
+brain/tests/test_regression_shared_measure.py	اختبار	نعم	2026-11-20	مدير الانحدار يقيس كل سطح بمتصفح مرة واحدة، ويحكم كل بند بفحوصه هو.
+brain/tests/test_reliability_and_evidence_anchor.py	اختبار	نعم	2026-11-18	حارس دائم: فصل موثوقية المصدر عن درجة الثقة التحليلية، ومرساة الدليل العميقة.
+brain/tests/test_repair_regression.sh	اختبار	نعم	2026-11-11	اختبار انحدار دائم: المصلح لا يغيّر شيئًا في تقارير 12→23 إلا «معلنةة» (مراجعة 23 أكتوبر ثالثًا-1)
+brain/tests/test_repeated_template_field_labels.py	اختبار	نعم	2026-11-11	حارس استثناء وسم الصف المُهيكل في قياس القوالب المتكررة (عطل ك-564).
+brain/tests/test_reports_index.py	اختبار	نعم	2026-11-11	reports_index.py: يفهرس الأيام ويفرّق بين ما في المستودع وما تجاوز مدة الاحتفاظ، ويذكر مسار الأرشيف الخاص.
+brain/tests/test_review2.sh	اختبار	نعم	2026-11-11	اختبارات مراجعة صاحب القرار الثانية (23 أكتوبر 2026) — بنود: أ · ب · ج · د · هـ · ز
+brain/tests/test_root_contract_phase1.py	اختبار	نعم	2026-11-11	عقد الجذر الصريح: موجب مع --root، وسالب للجذر المفقود أو المخالف.
+brain/tests/test_run_checks_cache.py	اختبار	نعم	2026-11-20	عقد ذاكرة فحوص G001 (المقترح ١، 20 نوفمبر 2026): لا تُعاد نتيجة مخزّنة إلا إن لم يتغير أي مدخل.
+brain/tests/test_runbook_auto_redo.py	اختبار	نعم	2026-11-20	المحرّك يعيد بعد التوقف الخطوات التي تغيّرت مدخلاتها وحدها، ولا يتخطى خطوة قديمة (اعتماد فهد 20 نوفمبر 2026).
+brain/tests/test_runbook_disabled_steps.py	اختبار	نعم	2026-11-11	اختبار تخطي الخطوات المعطلة: لا يلمس المشروع الحقيقي ولا يشغّل الطباعة.
+brain/tests/test_runbook_engine.sh	اختبار	نعم	2026-11-11	اختبارات قبول محرّك الكتيب على نسخة مؤقتة من المشروع (لا الإنتاج).
+brain/tests/test_runbook_evidence_tracking.py	اختبار	نعم	2026-11-11	Regression test for closed tracking of evidence files.
+brain/tests/test_runbook_hardening.py	اختبار	نعم	2026-11-11	اختبارات تقوية محرّك الكتيب (مرحلة 24 أكتوبر 2026): مسارات محمولة · تضمين البرومت · ربط حقيقي ·
+brain/tests/test_runbook_s090_order.py	اختبار	نعم	2026-11-11	Regression guard: report review must run after the daily report is written.
+brain/tests/test_runbook_timings.py	اختبار	نعم	2026-11-20	عقد جدول أزمنة المراحل (المقترح ٤، 20 نوفمبر 2026) على نسخة مؤقتة من المحرّك.
+brain/tests/test_secret_documentation_scope.py	اختبار	نعم	2026-11-11	اختبار نطاق D035: أمثلة الفحص في التوثيق ليست قيمًا، والسر المصطنع يبقى مانعًا.
+brain/tests/test_secrets_file.py	اختبار	نعم	2026-11-11	telegram_send يقرأ الرمز من secrets/secrets.env عند غيابه من البيئة، وقالب الأسرار بلا قيم، وسجل code-paths يص
+brain/tests/test_secrets_generated_boundary.py	اختبار	نعم	2026-11-11	اختبار انحدار: حدّ الأصل المولَّد في فحص تسرّب الأسرار (ك-552).
+brain/tests/test_secrets_history_guard.py	اختبار	نعم	2026-11-11	اختبارات حارس الأسرار: فلترة البدائل، استثناء المرجع العاري، وتزايد فحص التاريخ.
+brain/tests/test_section_registry.sh	اختبار	نعم	2026-11-11	إضافة قسم تجريبي ثم حذفه على نسخة مؤقتة من المشروع (لا الإنتاج) — بتأكيدات حقيقية لا عرض.
+brain/tests/test_sections_registry_vs_report.py	اختبار	نعم	2026-11-11	اتساق سجل الأقسام (runbook/runbook.json) مع نص التقرير وسياسة الأقسام — بديل اختبارات tests/sections/test_*.sh
+brain/tests/test_sections_single_source.py	اختبار	نعم	2026-11-11	اختبار: لا يُكتب عنوان قسم أو ترتيبه حرفيًا خارج سجل الأقسام في المانيفست.
+brain/tests/test_single_gate_verdict.py	اختبار	نعم	2026-11-19	البوابة الواحدة والتسليم السحابي (2026-11-19، قرار المالك «نفّذه في طلب جديد»).
+brain/tests/test_site_guards.py	اختبار	نعم	2026-11-11	اختبارات موجب/سالب لحراس المرحلة (د): الروابط والفهرس · أسلوب الغائب · عقد النشر.
+brain/tests/test_skill_lessons.py	اختبار	نعم	2026-11-11	اختبار وحدة لحلقة التعلم الذاتي (tools/skill_lessons.py).
+brain/tests/test_skills_parity.py	اختبار	نعم	2026-11-11	عقد تماثل ملفات المهارات: نسخ متطابقة تمر، والاختلاف أو الفقد يمنع.
+brain/tests/test_source_alternatives.py	اختبار	نعم	2026-11-11	اختبار محلي لتصنيف نتيجة المسار البديل: 403 فشل و200 المحتوى الحقيقي نجاح.
+brain/tests/test_source_channels.py	اختبار	نعم	2026-11-11	اختبار خريطة قنوات المصادر (ك-212): كل معتمد له قناة واحدة، والمجموع = المعتمد.
+brain/tests/test_source_counts_idempotent.py	اختبار	نعم	2026-11-19	اختبار انحدار: كتابة أرقام المصادر في المتن متساوية القوى (2026-11-19).
+brain/tests/test_source_counts_name_en_digits.py	اختبار	نعم	2026-11-28	_name_en يحفظ أرقام الاسم العربي غير المسجّل كي لا يختل تطابق الأرقام في الأصل الإنجليزي.
+brain/tests/test_source_coverage_line.py	اختبار	نعم	2026-11-11	اختبار سطر تغطية التغذيات: عدّ الصفوف ودليل الفشل المغلق.
+brain/tests/test_source_coverage_transient.py	اختبار	نعم	2026-11-11	اختبار انحدار لبوابة تغطية المصادر: لا يُقبل المصدر المعطّل إلا بإعلان عطل عابر مُهَل.
+brain/tests/test_source_daily_coverage.py	اختبار	نعم	2026-11-11	اختبار البوابة: المصدر الساقط يجب أن يمنع، والحالة الكاملة تمر.
+brain/tests/test_source_naming_gate.py	اختبار	نعم	2026-11-11	اختبار موجبة/سالبة لحارس أسماء المصادر، باستخدام شجرة مؤقتة فقط.
+brain/tests/test_source_route_triage_skill_contract.py	اختبار	نعم	2026-11-18	عقد مهارة فرز مسارات المصادر (قرار المالك 2026-11-10).
+brain/tests/test_source_totals_governed.py	اختبار	نعم	2026-11-18	اختبار انحدار: جملة إجمالي الفحص تُشتق من حالة التغذيات الحاكمة (ك-593 · ك-594).
+brain/tests/test_sources_state_counts.py	اختبار	نعم	2026-11-20	قاعدة العدد في قسم «حالة المصادر والإفصاح» (ملاحظة الاختبار الحي، 20 نوفمبر 2026).
+brain/tests/test_style_chain_no_self_ban.py	اختبار	نعم	2026-11-11	حارس سلسلة الاستبدال في أنماط الأسلوب (عطل ك-488).
+brain/tests/test_style_coverage_order.py	اختبار	نعم	2026-11-11	اختبار عقد السطوح المؤجلة في G045.
+brain/tests/test_surface_deferral_contract.py	اختبار	نعم	2026-11-11	عقد تأجيل أسطح التقرير: إعلان حاكم + إنفاذ لاحق حقيقي.
+brain/tests/test_surface_hygiene.py	اختبار	نعم	2026-11-11	اختبار بوابة نظافة أسطح الإصدار والإضافات.
+brain/tests/test_sync_guard.py	اختبار	نعم	2026-11-11	اختبار سلبي/إيجابي لحارس الحذف في sync_to_repo.py (ك-269).
+brain/tests/test_telegram_digest_cards.py	اختبار	نعم	2026-11-20	اختبار عقد بطاقات ملخص تلغرام: RED قبل إصلاح D030 ثم GREEN بعده.
+brain/tests/test_telegram_resend_authorization.py	اختبار	نعم	2026-11-11	اختبار انحدار: إعادة إرسال تلغرام لا تعمل إلا بتفويض مكتوب ومؤرّخ.
+brain/tests/test_tg_after_publish.py	اختبار	نعم	2026-11-19	رسالة تلغرام اليومية لا تسبق النشر (قرار المالك بفتح D030، 19 نوفمبر 2026).
+brain/tests/test_tg_digest_layout.py	اختبار	نعم	2026-11-20	شكل رسالة تلغرام بعد ملاحظات المالك على رسالة التجربة (19 نوفمبر 2026).
+brain/tests/test_tg_digest_masdar.py	اختبار	نعم	2026-11-19	سطر «الإجراء المطلوب» في رسالة تلغرام بصيغة المصدر لا الأمر (قرار المالك، 19 نوفمبر 2026).
+brain/tests/test_tg_digest_style.py	اختبار	نعم	2026-11-19	رسالة تلغرام: جمل مكتملة بلا «…» وتجتاز مدقق الأسلوب (19 نوفمبر 2026).
+brain/tests/test_threat_section_word_cap.py	اختبار	نعم	2026-11-11	عقد سقف كلمات قسم «مستوى التهديد»: سقف المالك + كلفة كل قطاع زائد عن ثلاثة.
+brain/tests/test_three_root_causes_20261107.py	اختبار	نعم	2026-11-11	حواجز ك-549/ك-550/ك-551: الجذر، تلغرام، واكتشاف جذر runbook.
+brain/tests/test_traceability_completeness.py	اختبار	نعم	2026-11-11	حاجز G048: لا يجوز أن تتأخر مصفوفة التتبع عن سجل الأعطال.
+brain/tests/test_ukmto_official_confirmed.py	اختبار	نعم	2026-11-18	قرار المالك (2026-11-18): بلاغ UKMTO الرسمي عن هجوم يُحتسب إصابة مؤكدة في سلّم التهديد.
+brain/tests/test_validate_report_ranges.py	اختبار	نعم	2026-11-11	اختبار عقد توزيع ف4.3 والاشتقاق القابل لإعادة التشغيل من النطاقات.
+brain/tests/test_vocab_registry.py	اختبار	نعم	2026-11-28	اختبارات السجل الحاكم للمفردات وعدم التراجع وتغطية الأسطح.
+brain/tests/test_vocabulary_word_boundary.py	اختبار	نعم	2026-11-11	ك-591: حدود الكلمة العربية — «سند» لا تُطابق داخل «تُسند»، والبديل يُقرأ من plain.
+brain/tests/test_write_prompt.py	اختبار	نعم	2026-11-12	اختبار عقد كتابة W010: المصادر الخام، المعجم، التسجيل، وحاجز الإتمام.
+brain/tests/test_zone_strip.py	اختبار	نعم	2026-11-20	اختبارات عقد شريط نسب القطاعات: موجب وفشل مكوّن وفشل مغلق.
+brain/tools/_publish_v3.py	مهمل	نعم	2026-11-11	نشر صفحة ACH نسخة 3 على الموقع الدائم + ربط النسخة 2 بالنسخة 3.
+brain/tools/ach_v3_model.py	شيفرة	نعم	2026-11-11	نموذج الترجيح الكمّي لمصفوفة ACH — نسخة 3.
+brain/tools/add_source.py	شيفرة	نعم	2026-11-11	يضيف مصدرًا جديدًا بعد مسحه: السجل + الموثوقية + الفهرس (الأسلوب المعتمد).
+brain/tools/agent_write_llm.py	شيفرة	نعم	2026-11-28	يكتب خطوات الوكيل (W010 وW030 وW020 وB004) بنموذج متوافق مع واجهة OpenAI بلا جلسة Claude.
+brain/tools/alert_monitor.sh	شيفرة	نعم	2026-11-11	مراقب مستقل: يفحص سجل المحرّك لليوم، وإن لم تكتمل الخطوات كتب تنبيهًا في logs/alerts/ باسم الخطوة العالقة.
+brain/tools/append_only_ledger.py	شيفرة	نعم	2026-11-11	سجل ملحق: hash = SHA-256 للحقول السابقة بما فيها prev_hash.
+brain/tools/apply_audit_gfs_docx.py	شيفرة	نعم	2026-11-11	تطبيق التدقيق الشامل على تقرير GFS PRIDE / GFS GISELLE (ملف Word).
+brain/tools/apply_batch_results.py	شيفرة	نعم	2026-11-11	تطبيق مركزي لنتائج دفعات الوكلاء على سجل الأعطال — بحاجز تحقق مسبق.
+brain/tools/apply_from_github.py	شيفرة	نعم	2026-11-18	تطبيق الشيفرة والقواعد من نسخة المستودع (GitHub) على الخادم — GitHub مصدر الحقيقة للشيفرة (قرار المالك 2026-10
+brain/tools/apply_from_github.sh	شيفرة	نعم	2026-11-11	يجلب أحدث main من المستودع ويطبّق الشيفرة والقواعد على الخادم (انظر tools/apply_from_github.py).
+brain/tools/apply_jmic_ukmto_to_gfs.py	شيفرة	نعم	2026-11-11	تطبيق مادة UKMTO VRA No.11 وJMIC 105 على تقرير سفينتي الحاويات (ملف المستخدم).
+brain/tools/arabic_counter.py	شيفرة	نعم	2026-11-11	تصريف العدادات العربية من مواصفة واحدة في سجل البطاقة.
+brain/tools/archive_originals.py	شيفرة	نعم	2026-11-11	يحفظ نسخة الأصل الرسمي: HTML/PDF + بصمة sha256 + بيان manifest.json.
+brain/tools/archive_tg_digest.py	شيفرة	نعم	2026-11-11	أرشفة نص ملخص تلغرام (طلب فهد 2026-10-24، البند 13).
+brain/tools/assign_incident_ids.py	شيفرة	نعم	2026-11-21	رقم الحادث ورقم البلاغ — طبقة هوية فوق رمز الواقعة الثابت (قرار فهد 21 نوفمبر 2026).
+brain/tools/audit_broad_excepts.py	شيفرة	نعم	2026-11-11	حصر الاستثناءات العامة التي تبتلع الخطأ — البند (د) من مراجعة 23 أكتوبر، ومُوسَّع بأمر فهد 2026-10-24 (البند 7
+brain/tools/audit_corpus.py	شيفرة	نعم	2026-11-11	تدقيق شامل لكل إصدارات نظام مركز الوعي بالمجال البحري.
+brain/tools/audit_pagination.py	شيفرة	نعم	2026-11-11	فحص توزيع الصفحات والفراغات واكتمال النص في ملف PDF مقابل مصدره.
+brain/tools/audit_pdf_layout.py	شيفرة	نعم	2026-11-11	تدقيق طباعي آلي لملف PDF: المقاس، الهوامش، كثافة النص، الفراغات، أحجام الخطوط، الألوان.
+brain/tools/audit_style_coverage.py	شيفرة	نعم	2026-11-28	قياس تغطية بوابة الأسلوب على كل سطح يقرأه القارئ.
+brain/tools/auto_heal.py	شيفرة	نعم	2026-11-21	الإصلاح الذاتي للخط اليومي: جدول قواعد ثابت (runbook/auto-heal.json) يُطبَّق عند فشل خطوة.
+brain/tools/backfill_ukmto_archive.py	شيفرة	نعم	2026-11-11	دفعة الملء الرجعي للدفتر من أرشيف UKMTO الرسمي (فشل مغلق).
+brain/tools/binding_coverage.py	شيفرة	نعم	2026-11-11	قياس تغطية الربط: كل ملف في الشجرة المحكومة له مالك معلن أو استثناء مكتوب.
+brain/tools/brain_root.py	شيفرة	نعم	2026-11-11	اشتقاق جذر brain القانوني بالقياس لا بالاسم — وفشل مغلق.
+brain/tools/browser_fetch.py	شيفرة	نعم	2026-11-11	مسار المتصفح الثابت — يجلب مصدرًا محجوبًا على الطلب الآلي عبر Chromium حقيقي.
+brain/tools/browser_measure.py	شيفرة	نعم	2026-11-28	القياس البصري الحي — يحوّل الفحص اليدوي بالعين إلى قياس آليّ قابل للمنع.
+brain/tools/build_ambiguity_map.py	شيفرة	نعم	2026-11-11	يبني `references/ambiguity-map.md` لمهارة التدقيق العربي العسكري.
+brain/tools/build_audit_report.py	شيفرة	نعم	2026-11-11	يبني مكتبات البيانات الدائمة وتقرير التدقيق الشامل من ملف نتائج التدقيق.
+brain/tools/build_hero_kpis.py	شيفرة	نعم	2026-11-20	يبني بطاقات صفّي المؤشرات (hero_kpis) من عقدها الحاكم والعدّادات — مصدر واحد بلا كتابة يدوية.
+brain/tools/build_instructions_doc.py	شيفرة	نعم	2026-11-11	تجميع «الأوامر والتعليمات» الكاملة لنظام Brain في وثيقة واحدة (Markdown + DOCX + PDF).
+brain/tools/build_lexicon_corpus.py	شيفرة	نعم	2026-11-11	مولّد معجم المفردات العربية من المتن المعتمد.
+brain/tools/build_lock.py	شيفرة	نعم	2026-11-11	قفل بناء single-flight مشترك بين مغلف البناء ومولّد الموقع.
+brain/tools/build_macr_docx.py	شيفرة	نعم	2026-11-11	مولّد ملفات MACR (Word/PDF) من تقرير Markdown.
+brain/tools/build_provenance.py	شيفرة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/tools/build_report_docx.py	شيفرة	نعم	2026-11-11	توليد نسخة Word (RTL) من مصدر التقرير اليومي.
+brain/tools/build_report_docx_exact.py	شيفرة	نعم	2026-11-11	توليد نسخة Word «طبق الأصل» من نسخة PDF المعتمدة (v3).
+brain/tools/build_source_reliability.py	شيفرة	نعم	2026-11-11	يبني بيانات ملحق موثوقية المصادر من جدول مصادر التقرير + سجل الموثوقية الثابت.
+brain/tools/build_styles_docx.py	شيفرة	نعم	2026-11-11	مولّد ملف Word/PDF لتقرير الأساليب التحريرية، باتجاه RTL إلزامي.
+brain/tools/build_transaction.py	شيفرة	نعم	2026-11-11	معاملة بناء واحدة: سجّل بصمة النص، ابنِ HTML، ثم تحقّق قبل تحرير القفل.
+brain/tools/build_vocab_gate.py	شيفرة	نعم	2026-11-12	بناء بوابة المفردات من السجل الحاكم — مصدر حكم واحد لا سجلين.
+brain/tools/build_workflow_reference.py	شيفرة	نعم	2026-11-11	مولّد مرجع آلية العمل من مصدر واحد.
+brain/tools/causality_window.sh	شيفرة	نعم	2026-11-11	نافذة رصد سببية طويلة: تراقب الأصول الحاكمة وكاتب .skill_versions عبر auditd
+brain/tools/channel_base.py	شيفرة	نعم	2026-11-11	يطبع رابط القناة الأساسية المعلَنة في المانيفست (أو قناة بالاسم).
+brain/tools/check_api_keys.py	شيفرة	نعم	2026-11-11	فحص مفاتيح الواجهات البرمجية: وجودها وصلاحية مصادقتها وحالة الرصيد.
+brain/tools/check_baseline.py	شيفرة	نعم	2026-11-11	فاحص الانحراف عن خط الأساس الرسمي (virgin).
+brain/tools/check_builtin_llm.sh	شيفرة	نعم	2026-11-11	فحص النموذج المدمج في Manus: المشغّل + الكتالوج الحي + نداء توليد فعلي (بلا كلفة تُذكر).
+brain/tools/check_feeds.py	شيفرة	نعم	2026-11-21	يقرأ تغذيات RSS/Atom من sections/10-sources.md ويجلب مستجدات آخر 24/48/72 ساعة.
+brain/tools/check_governing_assets.py	شيفرة	نعم	2026-11-11	بوابة فشل مغلق لسلامة الأصول الحاكمة.
+brain/tools/check_lang_switch_live.py	شيفرة	نعم	2026-11-11	تحقق حي قابل لإعادة التشغيل من زرّي اللغة (ع/EN) على الموقع المنشور.
+brain/tools/check_live.sh	شيفرة	نعم	2026-11-11	تحقق حي (قراءة فقط) من النسخة المنشورة: الرئيسية · صفحة التقرير · PDF · المصادر.
+brain/tools/checks_trace/	شيفرة	نعم	2026-11-21	مجلد فرعي للأدوات (1 ملفًا)
+brain/tools/classify_zones.py	شيفرة	نعم	2026-11-21	تصنيف وقائع اليوم على القطاعات الأربعة وحساب مستوى تهديد لكل قطاع.
+brain/tools/claude_check.py	شيفرة	نعم	2026-11-11	فحص مفتاح Claude: الكتالوج + هوية المنظمة + توليد فعلي — دون كشف المفتاح.
+brain/tools/close_fault_evidence_round.py	شيفرة	نعم	2026-11-11	جولة إغلاق موانع الحوكمة — 2026-11-07.
+brain/tools/closure_round.py	شيفرة	نعم	2026-11-11	جولة الإغلاق المهني — التصميم المصحّح على سجلي الأعطال والتعلم.
+brain/tools/cloud_deliver.py	شيفرة	نعم	2026-11-28	تسليم سحابي محكوم لتقرير يوم واحد إلى الموقع الثابت (قرار المالك 2026-11-19: «نفّذه في طلب جديد»).
+brain/tools/cloud_env_prep.sh	شيفرة	نعم	2026-11-19	تجهيز بيئة التشغيل السحابية قبل الخط اليومي — متساوي القوى (يُعاد بلا ضرر).
+brain/tools/code_paths.py	شيفرة	نعم	2026-11-11	تصنيف مسارات المستودع إلى «شيفرة وقواعد» (مصدرها GitHub) و«بيانات» (مصدرها الخادم) — appendices/code-paths.jso
+brain/tools/content_extractors.py	شيفرة	نعم	2026-11-11	مستخرجات محتوى للمسارات الآلية — مصدر واحد لكل استخراج (عطل ك-2xx).
+brain/tools/crossing_gate.py	شيفرة	نعم	2026-11-11	بوابة العبور — تحويل إجراء مكتوب إلى تنفيذ قابل للقياس.
+brain/tools/daily_pipeline.sh	شيفرة	نعم	2026-11-11	خط التشغيل الصباحي الموحّد — الإصدار 4 (19 أكتوبر 2026)
+brain/tools/derive_area_labels.py	شيفرة	نعم	2026-11-11	اشتقاق وسم «الموقع» في دفتر الأحداث من سجل المناطق البحرية الحاكم.
+brain/tools/derive_event_links.py	شيفرة	نعم	2026-11-21	اشتقاق روابط الوقائع في الدفتر التراكمي — بالدليل فقط، بلا تشابه نصي.
+brain/tools/derive_http_status.py	شيفرة	نعم	2026-11-17	اشتقاق http_status لمصادر سجل «لا واقعة» من ملف حالة التغذيات لليوم نفسه.
+brain/tools/derive_map_points.py	شيفرة	نعم	2026-11-20	مشتق نقاط الخريطة — مواضع الوقائع على الخريطة التشغيلية.
+brain/tools/diagnose_print_layout.py	شيفرة	نعم	2026-11-11	تشخيص أخطاء الطباعة بمسارين مستقلين:
+brain/tools/diagnose_sources.py	شيفرة	نعم	2026-11-11	تشخيص شامل لكل مصادر القائمة المعتمدة — مسح حي مباشر.
+brain/tools/early_preflight.sh	شيفرة	نعم	2026-11-21	فحص مسبق مبكر (المقترح 2، اعتماد فهد 20 نوفمبر 2026) — خطوة S015 بعد استعادة المهارات مباشرة.
+brain/tools/edit_pass.py	شيفرة	نعم	2026-11-18	تحرير لغوي آلي لكل قسم — الخطوة 4 من الأمر التنفيذي (23 أكتوبر 2026).
+brain/tools/en_master_build.sh	شيفرة	نعم	2026-11-11	خط البناء باتجاه «النسخة الإنجليزية أصل».
+brain/tools/ensure_devserver.sh	شيفرة	نعم	2026-11-11	ضمان عمل خادم المعاينة (المنفذ 3000) — الإصدار المعتمد 13 أكتوبر 2026
+brain/tools/estimate_accuracy.py	شيفرة	نعم	2026-11-11	قياس دقة تقديرات قسم «قراءة الموقف وتحليل المؤشرات» — القاعدة ح10.
+brain/tools/export_report_assets.py	شيفرة	نعم	2026-11-11	تصدير أصول الإصدار اليومي: ملف PDF للطباعة + صورة الخريطة التشغيلية.
+brain/tools/extract_ui_strings.py	شيفرة	نعم	2026-11-11	يستخرج كل النصوص العربية الظاهرة للقارئ من شيفرة المولّد والقوالب (للقراءة فقط).
+brain/tools/fetch_primary.py	شيفرة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/tools/final_gate.sh	شيفرة	نعم	2026-11-19	حارس صيغة التاريخ — يمنع إنشاء مخرجات باسم «--date» عند استدعاء خاطئ (فشل مغلق)
+brain/tools/fix_legacy_reports.py	شيفرة	نعم	2026-11-11	تصحيح بنود المنع في الإصدارات الخاصة والتقرير التراكمي.
+brain/tools/freellmapi_up.sh	شيفرة	نعم	2026-11-28	يشغّل FreeLLMAPI محليًا (127.0.0.1 فقط) لخطوتي S080 وS090 خارج Manus.
+brain/tools/full_chain_audit.py	شيفرة	نعم	2026-11-11	فحص شامل لسلسلة التشغيل الصباحي — يكشف كل ما تعطّل لا لوحة المعاينة فقط.
+brain/tools/gate_coverage.py	شيفرة	نعم	2026-11-20	تغطية البوابات · المراجع الحيّة · الوحدات الشاردة.
+brain/tools/gate_verdict.py	شيفرة	نعم	2026-11-11	حكم البوابات — يمنع النشر عند حكم مانع (ك-312).
+brain/tools/github_backup.py	شيفرة	نعم	2026-11-18	بناء شجرة النسخة الاحتياطية النظيفة لمشروع مركز الوعي بالمجال البحري.
+brain/tools/github_backup.sh	شيفرة	نعم	2026-11-11	نسخة احتياطية للبيانات على GitHub — مركز الوعي بالمجال البحري.
+brain/tools/governing-assets.txt	شيفرة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/tools/governing_assets_merkle.py	شيفرة	نعم	2026-11-11	حساب شجرة Merkle قابلة لإعادة التشغيل للأصول الحاكمة.
+brain/tools/harvest_terms.py	شيفرة	نعم	2026-11-11	حاصد الألفاظ الجديدة — قاعدة دائمة تُنفَّذ قبل كل تسليم.
+brain/tools/hermetic_run.sh	شيفرة	نعم	2026-11-11	Hermetic command runner for the marine-awareness project.
+brain/tools/hypothesis_distribution.py	شيفرة	نعم	2026-11-11	اشتقاق توزيع نقطي للفرضيات من نطاقات احتمالات معلنة.
+brain/tools/i18n_assets_sync.py	شيفرة	نعم	2026-11-11	اجعل site/ مرجعًا وحيدًا لأصول الإنجليزية، وزامن نسخة التشغيل ذريًا ثم قارن SHA-256.
+brain/tools/impact_matrix.py	شيفرة	نعم	2026-11-11	مصفوفة الأثر — تجيب سؤال: إذا تغيّر هذا الملف، ما الذي قد ينكسر؟
+brain/tools/install_macr_skill.sh	شيفرة	نعم	2026-11-11	يعيد تثبيت مهارة MACR المعتمدة (النسخة المرفقة 2026-10-15) بعد أي تزامن من المنصة.
+brain/tools/intel_self_review.py	شيفرة	نعم	2026-11-11	التعلم والتطوير الذاتي لقسم «قراءة الموقف وتحليل المؤشرات» — تنفّذ القاعدة ح12.
+brain/tools/known_faults.py	شيفرة	نعم	2026-11-28	تصنيف الأعطال المعروفة — قاعدة آلية لا حكم بشري (قرار صاحب القرار 2026-10-23 · ح-4).
+brain/tools/language_gates.py	شيفرة	نعم	2026-11-11	بوابات اللغة المتدرجة — الخطوة 4.3 من الأمر التنفيذي (23 أكتوبر 2026).
+brain/tools/ledger_link_fields.py	شيفرة	نعم	2026-11-11	Derive strict, evidence-backed links between cumulative ledger rows.
+brain/tools/ledger_proof_degree.py	شيفرة	نعم	2026-11-11	انقل درجة الإثبات من event_keys في الواجهة إلى دفتر اليوم بلا اختلاق.
+brain/tools/ledger_source_excerpt.py	شيفرة	نعم	2026-11-11	أصل نص كل واقعة — الخطوة 4.1 من الأمر التنفيذي (23 أكتوبر 2026).
+brain/tools/ledger_totals.py	شيفرة	نعم	2026-11-19	Build auditable cumulative metrics from the marine event ledger.
+brain/tools/lexicon_wiring.py	شيفرة	نعم	2026-11-12	المعجم المحوكم: مصدر واحد للحقيقة بين المهارتين والسجل الحاكم وبرومت الكتابة.
+brain/tools/live_dom_audit.py	شيفرة	نعم	2026-11-11	تدقيق بصري حي بقياس DOM حقيقي (بديل مسار regex في live_visual_audit.py).
+brain/tools/live_visual_audit.py	شيفرة	نعم	2026-11-18	تدقيق بصري حي للموقع كاملًا ومقارنته بالكود — فشل مغلق على المخالفات المانعة.
+brain/tools/llm.mjs	شيفرة	نعم	2026-11-26	غير موصوف في رأس الملف
+brain/tools/llm.sh	شيفرة	نعم	2026-11-11	غلاف تشغيل النموذج المدمج في Manus — بلا مفاتيح خارجية ولا رصيد منفصل.
+brain/tools/llm_compat.mjs	شيفرة	نعم	2026-11-26	غير موصوف في رأس الملف
+brain/tools/llm_review.py	شيفرة	نعم	2026-11-26	ناقد لغوي ومصطلحي لمتن التقارير — يعمل بالنموذج المدمج في Manus (بلا مفاتيح خارجية).
+brain/tools/llm_triage.py	شيفرة	نعم	2026-11-26	ترشيح بنود التغذيات قبل المعالجة (ط0) بالنموذج المدمج في Manus — بلا مفاتيح خارجية.
+brain/tools/make_baseline.py	شيفرة	نعم	2026-11-11	يُجدِّد بيان خط الأساس الرسمي (virgin) من الشجرة الحالية.
+brain/tools/make_tg_digest.py	شيفرة	نعم	2026-11-28	يولّد ملخص تلغرام (HTML) من `web/meta/<التاريخ>.json` وفق قالب `appendices/telegram-delivery.md` (القسم 4).
+brain/tools/manus_channel_attempt.py	شيفرة	نعم	2026-11-11	قناة Manus المرآة — محاولة نشر محكومة وشرط تحقق خاص بها.
+brain/tools/map_docx_changes.py	شيفرة	نعم	2026-11-11	يبني خريطة حرفية لتغييرات المصطلحات في تقرير GFS: القسم ← الفقرة/الصف ← النص الحالي ← النص الجديد.
+brain/tools/mark_components.py	شيفرة	نعم	2026-11-11	تحديث مكوّنات علامة الخط من المخرجات نفسها — مصدر واحد للحقيقة.
+brain/tools/meaning_compare.py	شيفرة	نعم	2026-11-11	مقارنة استخراجين مستقلين لواقعة واحدة: واحد من الأصل الإنجليزي وواحد من النص العربي.
+brain/tools/measure_filter_savings.py	شيفرة	نعم	2026-11-11	قياس الوفر المتوقع من ترشيح بنود التغذيات واستخلاص مقاطع الصفحات.
+brain/tools/measure_source_ledger_coverage.py	شيفرة	نعم	2026-11-11	قياس وصول المصادر المسجّلة إلى دفتر الوقائع اليومي.
+brain/tools/measurement_batch_runner.py	شيفرة	نعم	2026-11-11	مشغّل دفعات القياس: يُنفّذ أوامر معلنة لكل صف عطل ويُثبّت الدليل تدريجيًا.
+brain/tools/merge_event_sources.py	شيفرة	نعم	2026-11-21	دمج مصادر السجل المرتبطة بالواقعة نفسها دون إسقاط مقتطف أي مصدر.
+brain/tools/merge_glossary.py	شيفرة	نعم	2026-11-11	يدمج بنك التعريفات المعياري في قاموس الإصدار.
+brain/tools/merge_ledger_daily.py	شيفرة	نعم	2026-11-11	دمج ملفات اليوم في الدفتر التراكمي + بناء خريطة رموز الأحداث.
+brain/tools/migrate_daily_events_schema.py	شيفرة	نعم	2026-11-11	ترحيل دفتر الوقائع إلى مخطط `schemas/daily-events.schema.json` — تجفيف افتراضي.
+brain/tools/next_version.py	شيفرة	نعم	2026-11-11	رقم الإصدار — توليد وتحقق.
+brain/tools/normalize_digits.py	شيفرة	نعم	2026-11-20	توحيد الأرقام: تحويل الأرقام العربية الهندية (U+0660..U+0669) والفواصل العربية إلى إنجليزية.
+brain/tools/normalize_fault_log.py	شيفرة	نعم	2026-11-11	توحيد بنية سجل الأعطال وسجل التعلم: مخطط واحد · حالة صريحة لكل صف · إزالة الازدواج.
+brain/tools/normalize_meta_style.py	شيفرة	نعم	2026-11-11	تطبيع صياغة ملفات واجهة التقارير قبل عرضها.
+brain/tools/normalize_terms.py	شيفرة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/tools/number_fingerprint.py	شيفرة	نعم	2026-11-11	بصمة الأرقام — كل رقم معروض للقارئ مع سياقه وموضعه.
+brain/tools/ofac_screen.py	شيفرة	نعم	2026-11-11	فحص أسماء السفن والوسطاء مقابل قائمة OFAC SDN.
+brain/tools/ofac_targets_from_report.py	شيفرة	نعم	2026-11-11	يبني/يحدّث قائمة فحص OFAC من السفن المذكورة في إصدار اليوم.
+brain/tools/page_budget.py	شيفرة	نعم	2026-11-11	ميزانية الصفحات بهامش أمان — تقيس المساحة المتبقية قبل أي تعديل نصي.
+brain/tools/patch_owner_notes.py	شيفرة	نعم	2026-11-11	ترقيع واجهة اليوم وفق قرارات المالك — قابل لإعادة التشغيل بلا أثر مزدوج.
+brain/tools/pdf_change_guard.py	شيفرة	نعم	2026-11-11	حارس تغيّر PDF — يُعلن صراحةً إن لم يتغيّر الملف بعد تعديل.
+brain/tools/perf_budget.py	شيفرة	نعم	2026-11-11	قِس أزمنة خطوات البوابات من سجلات المحرّك وقارنها بميزانية حاكمة.
+brain/tools/portable_paths.py	شيفرة	نعم	2026-11-11	تحويل المسارات المطلقة المثبّتة إلى مسارات محمولة (تعمل من أي جهاز).
+brain/tools/preflight_check.py	شيفرة	نعم	2026-11-19	فحص ما قبل التشغيل (Preflight) — يُشغَّل قبل أي بناء أو تسليم.
+brain/tools/preserve_check.py	شيفرة	نعم	2026-11-11	فحص حفظ الحقائق والبنية بين نصين (قبل التحرير وبعده). يمنع إذا تغيّر ما لا يجوز تغييره.
+brain/tools/pro_audit.py	شيفرة	نعم	2026-11-18	تدقيق احترافي شامل للموقع المنشور — بمتصفح حقيقي وأدوات مستقلة.
+brain/tools/publish_changes.sh	شيفرة	نعم	2026-11-11	═══ أمر الإغلاق الدائم — كل جلسة تطوير أو إصدار ينتهي بهذا الأمر ═══
+brain/tools/publish_channels.py	شيفرة	نعم	2026-11-18	عقد نشر Seawatch: Pages أولًا، ثم النقل العام مع تحقق حي صارم.
+brain/tools/publish_fallback.sh	شيفرة	نعم	2026-11-11	قناة المحتوى العامة البديلة — raw.githack ثم jsDelivr ثم raw.githubusercontent.
+brain/tools/publish_site.sh	شيفرة	نعم	2026-11-19	النشر وتلغرام: لا يعملان إلا بخطوة في المانيفست وبسجل بوابات مكتمل في المحرّك.
+brain/tools/publish_verdict.py	شيفرة	نعم	2026-11-21	حكم النشر الموحّد: يقرأ نتيجة بوابة التسليم والعلامة اليومية ويُخرج قرارًا واحدًا.
+brain/tools/qa_gates.py	شيفرة	نعم	2026-11-11	خط فحص الجودة العشري — فشل مغلق.
+brain/tools/read_user_docx.py	شيفرة	نعم	2026-11-11	قراءة ملف وورد للمستخدم: النص + التظليل (الأصفر) + التعديلات المتتبّعة — بلا أي كتابة عليه.
+brain/tools/rebuild_report.sh	شيفرة	نعم	2026-11-11	═══ إعادة بناء التقرير بالتسلسل الإلزامي + تحقق أن المخرج تغيّر فعلًا ═══
+brain/tools/redact.py	شيفرة	نعم	2026-11-11	إخفاء الأسرار من أي نص يُكتب في سجل أو يُدفع أو يُرسل.
+brain/tools/refresh_imo_incidents.py	شيفرة	نعم	2026-11-19	تحديث قائمة IMO الرسمية للوقائع المؤكدة من صفحتها الرسمية (فشل مغلق).
+brain/tools/refresh_stale_gates.py	شيفرة	نعم	2026-11-11	يُجدّد البوابات المتقادمة قبل النشر بدل رفض النشر بسببها.
+brain/tools/register_estimate.py	شيفرة	نعم	2026-11-11	تسجيل رمز تقدير جديد في فضاء EST- (appendices/estimate-code-map.json).
+brain/tools/regression_gate.py	شيفرة	نعم	2026-11-20	مدير الانحدار التراكمي — يعيد قياس بنود سجل الانحدار كلها في تشغيل واحد.
+brain/tools/reorder_sections.py	شيفرة	نعم	2026-11-11	إعادة ترتيب أقسام التقرير اليومي وفق الأهمية (القرار والصورة ← الوقائع ← التحليل ← الدعم).
+brain/tools/repair_ledger_prose.py	شيفرة	نعم	2026-11-11	إصلاح صياغة سطور الدفتر التراكمي (ك-301).
+brain/tools/repair_prose.py	شيفرة	نعم	2026-11-11	الإصلاح الآلي الواحد للصياغة — البند (ز) من مراجعة 23 أكتوبر 2026.
+brain/tools/repo_root.py	شيفرة	نعم	2026-11-11	اشتقاق جذر Git من القياس الفعلي، لا من اسم المجلد.
+brain/tools/reports_index.py	شيفرة	نعم	2026-11-11	فهرس التقارير: ما في المستودع وما يجب أن يكون في الأرشيف الخاص على جهاز المالك (appendices/reports-archive.jso
+brain/tools/resolve_source_links.py	شيفرة	نعم	2026-11-11	حلّ روابط المصادر في دفتر اليوم — ملاحظة المالك 2026-11-02.
+brain/tools/restore_skills.sh	شيفرة	نعم	2026-11-12	مزامنة المهارات ثنائية الاتجاه — إصلاح عطل ك-86.
+brain/tools/rotate_webhook_secret.py	شيفرة	نعم	2026-11-11	تدوير TELEGRAM_WEBHOOK_SECRET بأمان: توليد · تحديث المخزن · إعادة تسجيل الويب هوك · تحقق.
+brain/tools/run_checks_cache.py	شيفرة	نعم	2026-11-20	ذاكرة نتائج فحوص G001 — لا يُعاد عند إعادة G001 إلا الفحص الذي تغيّرت مدخلاته (اعتماد فهد 20 نوفمبر 2026).
+brain/tools/runbook.py	شيفرة	نعم	2026-11-21	محرّك كتيب الإجراءات التشغيلية (مرجع تنفيذ، مكتبة معيارية فقط).
+brain/tools/scrub_internal.py	شيفرة	نعم	2026-11-11	المُنظّف الآلي للمحتوى الداخلي — يضمن ألا يتوقف النشر بسبب صنف معروف.
+brain/tools/self_improve.py	شيفرة	نعم	2026-11-11	محرّك التعلّم الذاتي — يُشغَّل بعد كل إصدار، لا بعد كل جولة يدوية.
+brain/tools/self_test.py	شيفرة	نعم	2026-11-11	اختبار تشغيل شامل لنظام مركز الوعي بالمجال البحري.
+brain/tools/shorten_sentences.py	شيفرة	نعم	2026-11-11	يقصّر الجمل الطويلة في تقرير Markdown عند حدود الفواصل، دون المساس بالجداول والاقتباسات.
+brain/tools/site_root.py	شيفرة	نعم	2026-11-11	حلّ جذر الموقع (seawatch) من مصدر واحد معلن.
+brain/tools/site_root.sh	شيفرة	نعم	2026-11-18	اشتقاق جذر الموقع — مصدر واحد يستهلكه أي فحص يحتاج `dist`.
+brain/tools/skill_lessons.py	شيفرة	نعم	2026-11-11	حلقة التعلم الذاتي لمهارة superpowers-method.
+brain/tools/source_alternatives.py	شيفرة	نعم	2026-11-11	جرّب مسارًا رسميًا معلنًا بديلًا لكل مصدر محجوب وسجّل الدليل.
+brain/tools/source_channels.py	شيفرة	نعم	2026-11-11	قنوات المصادر — مصدر واحد للحقيقة لقناة كل مصدر معتمد (ك-212).
+brain/tools/source_count_units.py	شيفرة	نعم	2026-11-11	تعريف واحد لعبارات وحدات إسناد المصدر.
+brain/tools/source_counts.py	شيفرة	نعم	2026-11-28	أرقام المصادر الثلاثة — مصدر واحد للحقيقة (ح-3 · قرار صاحب القرار 2026-10-23).
+brain/tools/source_coverage_line.py	شيفرة	نعم	2026-11-11	احسب سطر تغطية محاولات التغذية من ملفات المصدر الفعلية.
+brain/tools/sources_count_sync.py	شيفرة	نعم	2026-11-11	مزامنة أعداد المصادر في قسم البنية من السجل الحاكم.
+brain/tools/style_learn.py	شيفرة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/tools/style_metrics.py	شيفرة	نعم	2026-11-11	مقياس أسلوب التقرير العربي (للقراءة فقط — لا يعدّل شيئًا).
+brain/tools/surface_fingerprint.py	شيفرة	نعم	2026-11-11	بصمة الأسطح الحاكمة — تُقاس على النص الذي يراه القارئ لا على الملف الخام.
+brain/tools/sync_backup.sh	شيفرة	نعم	2026-11-11	الاسم محفوظ للتوافق الخلفي فقط: النسخة الاحتياطية صارت على GitHub في المستودع الخاص.
+brain/tools/sync_card_layers.py	شيفرة	نعم	2026-11-11	مواءمة طبقات بطاقات المؤشرات في ملف الواجهة مع مصدرها الحاكم.
+brain/tools/sync_profile_hash.py	شيفرة	نعم	2026-11-11	يزامن بصمة نمط الطباعة في الملف التعريفي مع المولّد الحالي (للمعايرة فقط).
+brain/tools/sync_server_to_repo.py	شيفرة	نعم	2026-11-11	مزامنة محكومة من الخادم إلى مستودع المرآة — عطل ك-493.
+brain/tools/sync_to_repo.py	شيفرة	نعم	2026-11-11	مزامنة أصول المشروع إلى مرآة المستودع بلا أي أداة خارجية (بديل rsync الدائم).
+brain/tools/telegram_bot.py	شيفرة	نعم	2026-11-18	معالج أوامر بوت تلغرام — مركز الوعي بالمجال البحري.
+brain/tools/telegram_resend.py	شيفرة	نعم	2026-11-11	إعادة إرسال ملخص التقرير على تلغرام — مسار محكوم بأمر صاحب القرار.
+brain/tools/telegram_send.py	شيفرة	نعم	2026-11-11	إرسال رسالة تلغرام (ومرفقاتها) إلى جهة أو أكثر — أداة التسليم المعتمدة.
+brain/tools/text_hash_guard.py	شيفرة	نعم	2026-11-11	حارس بصمة النص — البند (أ) من مراجعة صاحب القرار 2026-10-23.
+brain/tools/triage_closure_exceptions.py	شيفرة	نعم	2026-11-11	فرز الاستثناءات المؤقتة في حلقة الإغلاق وبناء خطة معالجة قبل المهلة.
+brain/tools/validate_en_master.py	شيفرة	نعم	2026-11-11	تحقق fail-closed من تطابق بنية الأصل الإنجليزي وأرقامه مع التقرير العربي.
+brain/tools/verify_codespace.sh	شيفرة	نعم	2026-11-11	تحقّق وظيفي كامل من النظام داخل بيئة جديدة (GitHub Codespaces أو أي جهاز آخر).
+brain/tools/vessel_names.py	شيفرة	نعم	2026-11-21	وحدة موحّدة لاستخراج أسماء السفن من نص التقرير وملف الواجهة.
+brain/tools/visual_audit.py	شيفرة	نعم	2026-11-18	التدقيق البصري الحي للموقع الدائم — يشمل صفحات 404 وrobots وsitemap والمسار غير الموجود.
+brain/tools/vocab_review.py	شيفرة	نعم	2026-11-11	حصاد المفردات ودفعة القرار — من واقع القراءة لا من الخيال.
+brain/tools/watch_governing_assets.sh	شيفرة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/tools/write_mark.py	شيفرة	نعم	2026-11-11	كتابة العلامة اليومية بعد البوابة بمخطط ثابت (ع-1 · قرار 2026-10-23).
+brain/validators/_guard.py	شيفرة	نعم	2026-11-11	حارس الانهيار الموحّد لكل مدققات النظام — ك-133.
+brain/validators/_migration_gaps.py	شيفرة	نعم	2026-11-17	فجوات النقل الموثقة بقرار المالك (قرار 2026-11-17).
+brain/validators/check_additions_surface.py	شيفرة	نعم	2026-11-12	بوابة سطح «إضافات» (ك-234).
+brain/validators/check_area_vocabulary.py	شيفرة	نعم	2026-11-11	حارس مفردات حقل «الموقع» — يفشل مغلقًا على أي قيمة خارج السجل.
+brain/validators/check_asset_floor.py	شيفرة	نعم	2026-11-11	حاجز أرضية الأصول الحاكمة — يمنع أي نقص في أصل معتمد (عطل ك-483).
+brain/validators/check_backup_parity.py	شيفرة	نعم	2026-11-18	بوابة مطابقة النسخة الاحتياطية: تحرس أن المستودع المدفوع = الشجرة المحلية.
+brain/validators/check_backup_push_safety.py	شيفرة	نعم	2026-11-11	حاجز فشل مغلق يمنع دفع النسخة الاحتياطية مباشرة إلى main.
+brain/validators/check_backup_tree_clean.py	شيفرة	نعم	2026-11-11	حارس شجرة النسخ الاحتياطي: سجلات التشغيل لا تمنع، والشيفرة/البيانات تمنع.
+brain/validators/check_card_counters.py	شيفرة	نعم	2026-11-21	بوابة أمانة بطاقات العدادات: السجل هو مصدر العقد الوحيد والفشل مغلق.
+brain/validators/check_card_registry_pairs.py	شيفرة	نعم	2026-11-11	حارس أزواج العربية والإنجليزية في سجل البطاقات الحاكم (ك-596).
+brain/validators/check_carryover.py	شيفرة	نعم	2026-11-11	فاحص النقل بين الإصدارات — يمنع نقل وصف حادث من فترة أخرى.
+brain/validators/check_closure.py	شيفرة	نعم	2026-11-11	بوابة إغلاق حلقة التعلم — فشل مغلق حقيقي.
+brain/validators/check_code_policy.py	شيفرة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/validators/check_code_spaces.py	شيفرة	نعم	2026-11-11	بوابة فصل فضاءات الرموز: MN- للوقائع · EST- للتقديرات — ومنع إعادة الإسناد.
+brain/validators/check_comprehension.py	شيفرة	نعم	2026-11-11	بوابة الفهم — تقيس فهم القارئ، لا شكل الكتابة.
+brain/validators/check_content_fidelity.py	شيفرة	نعم	2026-11-11	حاجز أمانة المحتوى — يمنع تكرار ك-303 وك-306.
+brain/validators/check_daily_event_surface.py	شيفرة	نعم	2026-11-18	بوابة سجل الأحداث الحي وسطح الأقسام المنقولة.
+brain/validators/check_daily_events_schema.py	شيفرة	نعم	2026-11-11	بوابة مخطط دفتر الوقائع (فشل مغلق).
+brain/validators/check_day_coverage.py	شيفرة	نعم	2026-11-17	حارس تغطية الأيام — فشل مغلق عند غياب ملف أو دليل قابل للتدقيق.
+brain/validators/check_decision_card.py	شيفرة	نعم	2026-11-11	بوابة أهم الأخبار المتعلقة بالأمن البحري — تمنع إفراغ صفوف البطاقة على أي سطح قارئ (عطل ك-239).
+brain/validators/check_decisions_registry.py	شيفرة	نعم	2026-11-18	حارس دفتر القرارات — يمنع أن يُكتب «منفَّذ» بلا دليل، وأن يضيع قرار.
+brain/validators/check_delivery_policy.py	شيفرة	نعم	2026-11-11	حارس سياسة التسليم المتصل — قرار المالك «أ» (دائم، لكل المراحل والدفعات والجولات).
+brain/validators/check_deployment_freshness.py	شيفرة	نعم	2026-11-18	حارس حداثة النشر — يقيس أن المتن المخدوم هو البناء الحالي نفسه، لا بناء أقدم.
+brain/validators/check_desktop_readability.py	شيفرة	نعم	2026-11-11	بوابة وضوح سطح الحاسوب (فشل مغلق):
+brain/validators/check_en_parity.py	شيفرة	نعم	2026-11-12	بوابة تماثل النسخة الإنجليزية مع المتن العربي (تفشل مغلقًا).
+brain/validators/check_enforcer_coverage.py	شيفرة	نعم	2026-11-11	حارس تغطية المُفعِّلات: يمنع انحدار نسبة الأعطال ذات المُفعِّل، ويحفظ خط الأساس.
+brain/validators/check_event_card_contract.py	شيفرة	نعم	2026-11-18	بوابة عقد بطاقة «سجل الأحداث» (فشل مغلق).
+brain/validators/check_event_links.py	شيفرة	نعم	2026-11-18	بوابة روابط الوقائع — تفشل مغلقًا على أي رابط بلا سند أو معرّف معلّق.
+brain/validators/check_exceptions_burndown.py	شيفرة	نعم	2026-11-11	حارس ميزانية الاستثناءات: يمنع الزيادة ويُنبّه قبل انتهاء المهلة.
+brain/validators/check_findings_closed.py	شيفرة	نعم	2026-11-11	بوابة إغلاق المخرجات ومكتبات التدقيق — تربط مكتبات التقارير ببوابة تُنفَّذ فعلًا.
+brain/validators/check_forbidden_surface_terms.py	شيفرة	نعم	2026-11-11	حاجز ألفاظ الأسطح — يمنع تسرب البنود المانعة إلى مخرجات القارئ.
+brain/validators/check_gate_readiness.py	شيفرة	نعم	2026-11-11	حارس جاهزية أدوات بوابة العبور — يفشل مغلقًا.
+brain/validators/check_glossary_shape.py	شيفرة	نعم	2026-11-11	حارس شكل معجم النسخة الإنجليزية (عطل ك-491).
+brain/validators/check_imperative_style.py	شيفرة	نعم	2026-11-11	حارس أسلوب الغائب — فشل مغلق.
+brain/validators/check_intel.py	شيفرة	نعم	2026-11-11	بوابة التحقق من قسم «قراءة الموقف وتحليل المؤشرات» — تنفّذ القاعدة ف5 وقواعد ح1–ح12.
+brain/validators/check_internal_leak.py	شيفرة	نعم	2026-11-11	بوابة مانعة لتسرب عمل التحرير الداخلي إلى التقرير أو واجهة الموقع.
+brain/validators/check_kpi_layers.py	شيفرة	نعم	2026-11-21	بوابة طبقات بطاقات المؤشرات: اليوم · المجموع من 28 فبراير 2026 · آخر تحديث المصدر.
+brain/validators/check_language.py	شيفرة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/validators/check_ledger_continuity.py	شيفرة	نعم	2026-11-17	حارس استمرارية الدفتر، يفشل مغلقًا عند غياب أي سجل يومي.
+brain/validators/check_ledger_links.py	شيفرة	نعم	2026-11-11	بوابة حقول علاقة دفتر الوقائع — فشل مغلق.
+brain/validators/check_ledger_matrix_parity.py	شيفرة	نعم	2026-11-11	حارس تكامل المزامنة: لا صفّ في المصفوفة خارج السجل، ولا تكرار، ولا انحدار في العدّ.
+brain/validators/check_libraries_skills.py	شيفرة	نعم	2026-11-18	مدقّق سلامة المكتبات والمهارات والترابط بينها وبين الأوامر.
+brain/validators/check_library_use.py	شيفرة	نعم	2026-11-11	بوابة استعمال المكتبات: تربط مكتبات المراجع بالإصدار المطلوب تسليمه.
+brain/validators/check_map_note_counts.py	شيفرة	نعم	2026-11-21	حارس جملة «حالات الخريطة»: العدّادات المعلنة = العدّادات المحسوبة من نقاط الخريطة.
+brain/validators/check_mark_schema.py	شيفرة	نعم	2026-11-11	بوابة مخطط العلامة اليومية — شكل ثابت مُتحقَّق (ع-1 · قرار 2026-10-23).
+brain/validators/check_number_bindings.py	شيفرة	نعم	2026-11-11	بوابة ربط الأرقام: كل رقم منشور يُعاد حسابه من ملفه المالك ويُقارن.
+brain/validators/check_numerals.py	شيفرة	نعم	2026-11-11	بوابة الأرقام: تمنع الأرقام العربية الهندية (U+0660..U+0669) والفواصل العربية (\\u066B \\u066C \\u066A).
+brain/validators/check_ofac_coverage.py	شيفرة	نعم	2026-11-11	بوابة تغطية فحص العقوبات: كل سفينة مذكورة في الإصدار لها نتيجة فحص OFAC.
+brain/validators/check_orthography.py	شيفرة	نعم	2026-11-11	فاحص إملاء وتركيب أساسي للتقرير العربي (للقراءة فقط).
+brain/validators/check_pdf_format.py	شيفرة	نعم	2026-11-11	بوابة مطابقة شكل PDF المعتمد (v3 — 18 أكتوبر 2026).
+brain/validators/check_points_rule.py	شيفرة	نعم	2026-11-11	بوابة قاعدة النقاط في المصدر — 19 أكتوبر 2026.
+brain/validators/check_portable_paths.py	شيفرة	نعم	2026-11-11	بوابة قابلية النقل — فشل مغلق.
+brain/validators/check_print_quality.py	شيفرة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/validators/check_project_skills.py	شيفرة	نعم	2026-11-11	مدقق سلامة مهارات المشروع عبر الأسطح الحاكمة.
+brain/validators/check_prose_defects.py	شيفرة	نعم	2026-11-19	بوابة عيوب الصياغة العربية في تقرير واحد.
+brain/validators/check_publish_contract.py	شيفرة	نعم	2026-11-11	حارس عقد النشر — فشل مغلق.
+brain/validators/check_published_counters.py	شيفرة	نعم	2026-11-19	حارس الأرقام المنشورة — يمنع تباعد الرقم عن ملفه المالك (ك-554).
+brain/validators/check_python_syntax.py	شيفرة	نعم	2026-11-11	حارس ترجمة الشيفرة: يمنع أي ملف Python معطوب صياغيًا من دخول المشروع.
+brain/validators/check_reference_generated.py	شيفرة	نعم	2026-11-11	حارس مرجع آلية العمل المولَّد — يفشل مغلقًا.
+brain/validators/check_repo_secrets.py	شيفرة	نعم	2026-11-18	بوابة أمنية (ك-338): لا سرّ غير منقّح في شجرة المستودع.
+brain/validators/check_run_completeness.py	شيفرة	نعم	2026-11-19	بوابة اكتمال التشغيل — التشغيل المنقوص قاعدة آلية لا حكم (ح-4 · قرار 2026-10-23).
+brain/validators/check_secrets.py	شيفرة	نعم	2026-11-18	بوابة الأسرار: تمنع أي سرّ في الشجرة أو في أي ملف قبل النسخ الاحتياطي أو الدفع.
+brain/validators/check_server_code_tracking.py	شيفرة	نعم	2026-11-11	فحص مكمّل لفاحص التماثل (طلب فهد 2026-10-24، البند 6):
+brain/validators/check_site_links.py	شيفرة	نعم	2026-11-11	حارس روابط الموقع وفهرس المحتويات — فشل مغلق.
+brain/validators/check_skills_adoption_parity.py	شيفرة	نعم	2026-11-11	حارس اعتماد المهارات: كل مهارة في جدول فهرس المشروع لها قرار اعتماد مُنفَّذ يذكر اسمها في دفتر القرارات.
+brain/validators/check_skills_integrity.py	شيفرة	نعم	2026-11-18	مدقق سلامة المهارات — يمنع ضياع القواعد المعتمدة.
+brain/validators/check_skills_parity.py	شيفرة	نعم	2026-11-11	فحص تماثل ملفات المهارات المعتمدة بين المصدر ومرآة brain.
+brain/validators/check_skills_tree_parity.py	شيفرة	نعم	2026-11-18	حارس تماثل شجرة المهارات: المجلد الحي ↔ المستودع ↔ مهارات المشروع في الدماغ ↔ فهرس المشروع.
+brain/validators/check_source_daily_coverage.py	شيفرة	نعم	2026-11-11	بوابة فحص اتحاد المصادر في التشغيل اليومي.
+brain/validators/check_source_naming.py	شيفرة	نعم	2026-11-11	حارس أسماء المصادر — يمنع أوصاف المصدر العامة على الأسطح المقروءة.
+brain/validators/check_source_route_coverage.py	شيفرة	نعم	2026-11-11	بوابة تغطية مسارات المصادر — تفشل مغلقًا.
+brain/validators/check_sources_count.py	شيفرة	نعم	2026-11-11	بوابة عدد المصادر: رقم واحد معتمد يقرأه كل شيء من ملف واحد.
+brain/validators/check_style.py	شيفرة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/validators/check_surface_hygiene.py	شيفرة	نعم	2026-11-11	بوابة نظافة أسطح صفحة الإصدار وصفحة الإضافات.
+brain/validators/check_telegram_delivery.py	شيفرة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/validators/check_threat_consistency.py	شيفرة	نعم	2026-11-11	بوابة اتساق مستوى التهديد ومصدر الحكم الواحد (تصميم معتمد 2026-10-30).
+brain/validators/check_vocab_chain.py	شيفرة	نعم	2026-11-11	حارس سلسلة الاستبدال (ك-470 ← ك-487) — يمنع أن يكون بديل آليّ لفظًا ممنوعًا.
+brain/validators/check_vocabulary.py	شيفرة	نعم	2026-11-12	بوابة المفردات المبسطة — تنبيهية حتى الموافقة الصريحة (قرار صاحب القرار 2026-10-23).
+brain/validators/check_zone_strip.py	شيفرة	نعم	2026-11-20	حارس شريط نسب القطاعات أسفل الخريطة.
+brain/validators/sources-37-browser.json	شيفرة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/validators/sources-37-result.json	شيفرة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/validators/sources-retry.json	شيفرة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/validators/validate_report.py	شيفرة	نعم	2026-11-11	غير موصوف في رأس الملف
+brain/watchlist/	بيانات	لا (الخادم)	2026-11-18	قوائم المراقبة (أهداف العقوبات وروابط الأصول) (2 ملفًا)
+brain/web/	بيانات	لا (الخادم)	2026-11-28	ملفات الواجهة اليومية (meta وzones وkpis-totals) (94 ملفًا)
+brain/تحليل-ترجمة-حرفية.md	قاعدة	نعم		تحليل الترجمة الحرفية — الجولة الثانية (23 أكتوبر 2026)
+brain/تحليل-لغة-مرشحات-المفردات.md	قاعدة	نعم		تحليل لغة: مرشحات المفردات
+brain/تقرير-محور-اللغة-23-10-2026.md	قاعدة	نعم		تقرير تنفيذ جولة محور اللغة — 23 أكتوبر 2026
+brain/جولة-23-10-2026-الجولة-الثانية.zip	بيانات	لا		ملف جذر brain
+brain/حزمة-الشيفرة-الجولة-2-23-10-2026.md	قاعدة	نعم		حزمة الشيفرة — الجولة الثانية (23 أكتوبر 2026)
+brain/حزمة-الشيفرة-الجولة-2-23-10-2026.zip	بيانات	لا		ملف جذر brain
+brain/رد-مانوس-2026-10-23.md	قاعدة	نعم		ردّ مانوس على مراجعة PROJECT-DELTA — 23 أكتوبر 2026
+brain/رد-مانوس-الجولة-2-23-10-2026.md	قاعدة	نعم		رد مانوس — الجولة الثانية (23 أكتوبر 2026)
+brain/شيفرة-الجولة-23-10-2026.md	قاعدة	نعم		شيفرة الجولة — 23 أكتوبر 2026
+brain/فرق-تصحيح-تقرير-23.md	قاعدة	نعم		فرق تصحيح تقرير 23 أكتوبر 2026 (لغة فقط)
+brain/مخرجات-الجولة-23-10-2026-الثالثة.md	قاعدة	نعم		مخرجات الجولة الثالثة — 23 أكتوبر 2026
+brain/مخرجات-الجولة-23-10-2026.md	قاعدة	نعم		مخرجات الجولة — 23 أكتوبر 2026 (نصًّا كاملًا بلا تلخيص)
+brain/معايرة-البوابات-11-تقريرًا.md	قاعدة	نعم		معايرة بوابتي الكتابة والتسرب على التقارير الإحدى عشر السابقة (بعد إصلاح قاعدة الجداول)
+brain/مقتطف-قسم-الترجمة-بالمعنى.md	قاعدة	نعم		قواعد الترجمة بالمعنى
+docs/superpowers/	مهمل	لا	2026-11-11	مواد منهجية (1 ملفًا)
+docs/حالة-الجلسة-2026-10-28.md	قاعدة	نعم		حالة الجلسة — 2026-10-28 (مرجع سريع بعد أي ضغط سياق)
+docs/فهرس-الملفات.tsv	قاعدة	لا		ملف تشغيلي
+docs/نقل-إلى-جيت-هب.md	قاعدة	نعم		ملاحظات النقل إلى GitHub
+fallback-answers/	بيانات	نعم	2026-11-28	إجابات احتياطية لخطوات الوكيل بتاريخ (تقدّم على فرع fallback/D) (4 ملفًا)
+site/.env.example	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+site/.gitignore	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+site/Dockerfile	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+site/README.md	قاعدة	نعم	2026-11-11	مركز الوعي بالمجال البحري — الموقع الدائم
+site/app.config.ts	قاعدة	نعم	2026-11-11	غير موصوف في رأس الملف
+site/audit/	بيانات	لا	2026-11-11	لقطات تدقيق بصري (6 ملفًا)
+site/docs/	بيانات	لا	2026-11-11	وثائق الموقع (1 ملفًا)
+site/generator/blocks.py	مولّد	نعم	2026-11-20	غير موصوف في رأس الملف
+site/generator/brain_root.py	مولّد	نعم	2026-11-11	جذر brain القانوني لمولّد الموقع — قياس واحد بدل مسارات مثبَّتة (ك-571).
+site/generator/build_report.py	مولّد	نعم	2026-11-21	غير موصوف في رأس الملف
+site/generator/build_report_en.py	مولّد	نعم	2026-11-20	بناء النسخة الإنجليزية لإصدار يومي بترجمة صفحة الإصدار العربية نفسها.
+site/generator/build_site.py	مولّد	نعم	2026-11-21	غير موصوف في رأس الملف
+site/generator/build_sources.py	مولّد	نعم	2026-11-20	صفحة «المصادر والمراجع» — مرجع دائم في الشريط العلوي.
+site/generator/build_special.py	مولّد	نعم	2026-11-20	غير موصوف في رأس الملف
+site/generator/card_measurements.py	مولّد	نعم	2026-11-11	قياس واحد للبنود الظاهرة في HTML المرسوم.
+site/generator/check_map_contract.py	مولّد	نعم	2026-11-20	حارس عقد قسم الخريطة — يفحص الصفحة المبنية مقابل بيانات الواجهة ويفشل مغلقًا (رمز 2).
+site/generator/codes.py	مولّد	نعم	2026-11-11	غير موصوف في رأس الملف
+site/generator/daily_title.py	مولّد	نعم	2026-11-12	تطبيع عنوان الإصدار اليومي — مصدر واحد للحقيقة (إصلاح ك-595).
+site/generator/data/	بيانات	لا	2026-11-11	مجلد فرعي (3 ملفًا)
+site/generator/derive_en_units.py	مولّد	نعم	2026-11-12	اشتقاق الوحدات الإنجليزية من المتن الإنجليزي الحاكم وتسجيلها في المعجم.
+site/generator/display_format.py	مولّد	نعم	2026-11-20	تنسيق حقول البيانات الخام إلى نصوص عرض مفهومة دون تغيير المصدر.
+site/generator/en_missing_report.py	مولّد	نعم	2026-11-20	يجمع كل نص عربي في صفحة الإصدار العربية لا يجد له المترجم ترجمة — بلا سقف.
+site/generator/i18n_en.py	مولّد	نعم	2026-11-20	ترجمة صفحة إصدار عربية مبنية إلى إنجليزية مع الحفاظ على الوسم والهيئة حرفيًا.
+site/generator/make_en_glossary.py	مولّد	نعم	2026-11-12	يشتقّ مدخلات المعجم الإنجليزية آليًا من ذاكرة الترجمة، ويحصر ما يحتاج صياغة يدوية.
+site/generator/map_cluster.py	مولّد	نعم	2026-11-11	عنقود علامات الخريطة والتفكيك الشعاعي والترقيم الموحّد.
+site/generator/map_gulf.py	مولّد	نعم	2026-11-20	غير موصوف في رأس الملف
+site/generator/monthly_dashboard.py	مولّد	نعم	2026-11-20	غير موصوف في رأس الملف
+site/generator/postprocess.py	مولّد	نعم	2026-11-11	postprocess.py — طبقة إصلاح مخرجات الموقع (تعمل قبل النشر، وتبقى دائمة).
+site/generator/reader_grade_labels.py	مولّد	نعم	2026-11-11	وسم رموز درجات الإسناد في سطح القارئ — مصدر واحد للعربية والإنجليزية.
+site/generator/screen_layer.py	مولّد	نعم	2026-11-20	غير موصوف في رأس الملف
+site/generator/section_counts.py	مولّد	نعم	2026-11-12	مصدر واحد لعدّ بنود الأقسام — يُقرأ من متن التقرير المعتمد (ك-251).
+site/generator/site_chrome.py	مولّد	نعم	2026-11-21	غير موصوف في رأس الملف
+site/generator/sync_from_brain.py	مولّد	نعم	2026-11-21	غير موصوف في رأس الملف
+site/generator/third_person.py	مولّد	نعم	2026-11-19	تحويل صيغة الأمر إلى أسلوب الغائب — عقد المشروع.
+site/generator/threat_card.py	مولّد	نعم	2026-11-20	بطاقة مستوى التهديد بالقطاعات — مصدر رسم واحد للشاشة والطباعة.
+site/generator/verify.py	مولّد	نعم	2026-11-11	غير موصوف في رأس الملف
+site/notes/	بيانات	لا	2026-11-11	مجلد فرعي (13 ملفًا)
+site/plan.md	قاعدة	نعم	2026-11-11	خطة الموقع الدائم — مركز الوعي بالمجال البحري
+site/public/	بيانات	نعم	2026-11-11	manus-routes.json فقط (1 ملفًا)
+site/server/app.py	شيفرة	نعم	2026-11-11	خدمة ويب هوك بوت تلغرام — مركز الوعي بالمجال البحري (MDA).
+site/sources/	بيانات	لا (الخادم)	2026-11-28	مصادر الصفحات (تقارير وخاصة وتراكمي) (175 ملفًا)
+site/tests/	بيانات	لا	2026-11-20	مجلد فرعي (23 ملفًا)
+skills/* (ما عدا المجلدات المدرجة أعلاه؛ نمط لا مسار)	مهمل	لا	2026-11-12	مهارات عامة غير مستعملة في الخط اليومي — لا تشغّل (3100 ملفًا)
+skills/approved-output-change-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (8 ملفًا)
+skills/bilingual-master-direction-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (3 ملفًا)
+skills/bilingual-surface-parity-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (3 ملفًا)
+skills/card-branch-integrity-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (2 ملفًا)
+skills/crossing-gate-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (1 ملفًا)
+skills/decision-registry-backfill-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (1 ملفًا)
+skills/destructive-op-guard-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (6 ملفًا)
+skills/fault-closure-and-learning-ops/	قاعدة	نعم	2026-11-12	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (23 ملفًا)
+skills/gate-lifecycle-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (38 ملفًا)
+skills/governed-cleanup-audit/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (5 ملفًا)
+skills/governed-rename-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (3 ملفًا)
+skills/governing-assets-recovery-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (2 ملفًا)
+skills/macr-system/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (4 ملفًا)
+skills/map-clarity-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (7 ملفًا)
+skills/marine-news-brain/	قاعدة	نعم	2026-11-20	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (5 ملفًا)
+skills/military-arabic-editing/	قاعدة	نعم	2026-11-20	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (5 ملفًا)
+skills/multi-agent-audit-ops/	قاعدة	نعم	2026-11-12	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (9 ملفًا)
+skills/official-ledger-backfill-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (4 ملفًا)
+skills/operation-to-skill-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (2 ملفًا)
+skills/owner-approval-launch-gate-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (5 ملفًا)
+skills/owner-notes-measured-triage/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (7 ملفًا)
+skills/owner-ui-notes-contract-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (5 ملفًا)
+skills/parity-and-publish-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (19 ملفًا)
+skills/portable-paths-repair-ops/	قاعدة	نعم	2026-11-12	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (1 ملفًا)
+skills/pre-execution-plan-audit-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (6 ملفًا)
+skills/project-evidence-and-coverage-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (1 ملفًا)
+skills/report-build-export-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (2 ملفًا)
+skills/report-surface-and-print-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (37 ملفًا)
+skills/runbook-operations-ops/	قاعدة	نعم	2026-11-12	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (20 ملفًا)
+skills/secret-rotation-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (8 ملفًا)
+skills/skill-adoption-governance-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (1 ملفًا)
+skills/skill-coverage-audit-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (2 ملفًا)
+skills/skill-ownership-merge-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (2 ملفًا)
+skills/source-coverage-route-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (8 ملفًا)
+skills/source-ingest-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (2 ملفًا)
+skills/source-route-triage-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (5 ملفًا)
+skills/superpowers-method/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (1 ملفًا)
+skills/threat-zone-card-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (2 ملفًا)
+skills/vocabulary-guard-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (7 ملفًا)
+skills/waw-density-control-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (4 ملفًا)
+skills/writing-rules-wiring-ops/	قاعدة	نعم	2026-11-11	مهارة تشغيلية (مدرجة في tools/restore_skills.sh) (2 ملفًا)
