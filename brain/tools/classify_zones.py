@@ -45,6 +45,12 @@ NAV_MARKERS = (
     "ميلًا بحريًا", "ميل بحري", "بحريًا",
 )
 LAND_ONLY_TARGETS = ("مطار", "منشأة", "مصفاة", "قاعدة عسكرية", "مدينة", "قرية", "مخيم", "مبنى")
+# عنوان المصدر الإنجليزي لا يُسقط واقعة سفينة رسمية إن كان لفظه معادلًا لنوع معتمد.
+EN_TYPE_ALIASES = (
+    ("hijack", "اختطاف"),
+    ("strike", "هجوم"),
+    ("attack", "هجوم"),
+)
 
 # تصنيف ثابت لكل واقعة ⇒ نص البطاقة يُبنى من معجم مغلق قابل للترجمة آليًا
 CATEGORY_OF_TYPE = {
@@ -157,6 +163,9 @@ def is_qualifying(event: dict, reg: dict, day_overrides: dict) -> tuple[bool, st
         demoted.append(code or "?")
     hay = f"{event.get('title','')} {event.get('source_excerpt','')}"
     qual_hit = next((t for t in reg["counting"]["qualifying_types"] if t in hay), None)
+    if qual_hit is None:
+        low = hay.lower()
+        qual_hit = next((ar for en, ar in EN_TYPE_ALIASES if en in low), None)
     non_hit = next((t for t in reg["counting"]["non_qualifying_types"] if t in hay), None)
     if "qualifying" in ov:
         reason = ov.get("reason", "حكم محوكم")
@@ -169,6 +178,8 @@ def is_qualifying(event: dict, reg: dict, day_overrides: dict) -> tuple[bool, st
         return False, conf, f"نوع غير مؤهّل: «{non_hit}»"
     if qual_hit:
         maritime = next((t for t in MARITIME_TARGETS if t in hay), None)
+        if maritime is None and event.get("target") in MARITIME_TARGETS:
+            maritime = event.get("target")
         nav = next((t for t in NAV_MARKERS if t in hay), None)
         if maritime or nav:
             tag = maritime or nav
