@@ -9,10 +9,10 @@
     "يحتاج قرارًا"
   ],
   "decided_by": "المالك",
-  "last_measured": "2026-11-12",
+  "last_measured": "2026-11-28",
   "counts": {
     "منفَّذ جزئيًّا": 9,
-    "منفَّذ": 47,
+    "منفَّذ": 48,
     "يحتاج تحققًا": 3,
     "يحتاج قرارًا": 2
   },
@@ -1415,6 +1415,33 @@
       ],
       "governing_file": "validators/check_vocabulary.py",
       "next_action_ar": "دمج عادي ثم إعادة G036 عبر المحرك دون تجاوز النشر والإرسال."
+    },
+    {
+      "id": "D-0656",
+      "date": "2026-11-28",
+      "title_ar": "اعتماد Graphify وSuperpowers وagent-browser",
+      "wording_ar": "أمر المالك في 2026-11-28: ثبّت الثلاث وشغّلها واعتمدها. الاعتماد مهارات رقيقة. الكتيب يبقى حاكمًا إذا تعارض مع Superpowers.",
+      "status": "منفَّذ",
+      "evidence": [
+        {
+          "kind": "file",
+          "ref": "notes/adopt-external-skills-2026-11-28.md"
+        },
+        {
+          "kind": "file",
+          "ref": "skills/graphify-code-graph-ops/SKILL.md"
+        },
+        {
+          "kind": "file",
+          "ref": "skills/superpowers-method/SKILL.md"
+        },
+        {
+          "kind": "file",
+          "ref": "skills/agent-browser-ops/SKILL.md"
+        }
+      ],
+      "governing_file": "runbook/approved-skills.json",
+      "next_action_ar": "لا خطوة يومية جديدة. تُستدعى عند قراءة الكود أو صفحة عامة أو تعديل أداة فقط."
     }
   ],
   "evidence_waivers": []
