@@ -133,6 +133,16 @@ def load_anchors() -> tuple[dict, dict, dict]:
     return d.get("surfaces", {}), by_key, excluded
 
 
+def _match_named(key: str, table: dict):
+    if key in table:
+        return key, table[key]
+    hay = f" {key} "
+    for cand in sorted(table, key=len, reverse=True):
+        if f" {cand} " in hay:
+            return cand, table[cand]
+    return None, None
+
+
 def resolve_area(key: str, anchors: dict, excluded: dict) -> tuple[str | None, dict | None, dict | None]:
     """يحلّ اسم المنطقة إلى مِرساة معتمدة، ويدعم الاسم المركّب «البلد - البحر».
 
@@ -140,21 +150,33 @@ def resolve_area(key: str, anchors: dict, excluded: dict) -> tuple[str | None, d
     فيبقى الاسم المعروض «الصومال - المحيط الهندي» والمِرساة تُؤخذ من الجزء البحري.
     المطابقة الطويلة تُرجَّح عند التزاحم (المادة 5). وإذا لم يُحلّ الجزء البحري
     يبقى الاسم بلا مِرساة فيفشل الرسم مغلقًا، ولا يُخترع موضع.
+
+    الاسم المركّب بحرف العطف يُفصَل. إن وُجد جزء بحري مُرسى يُستخدم. وإن لم يوجد
+    ووُجد جزء مستثنى (يابسة كـ«العمق السعودي») يُستثنى الكل من الرسم ولا يُوقف النشر.
     """
-    if key in excluded:
-        return key, None, excluded[key]
-    if key in anchors:
-        return key, anchors[key], None
-    # تطبيع الاسم يحذف الشرطة والفواصل، فيُبحث عن أطول اسم مسجَّل يحتويه الاسم المركّب
-    # بحدّ كلمة صريح («الصومال - المحيط الهندي» ← «المحيط الهندي»).
-    hay = f" {key} "
-    for cand in sorted(anchors, key=len, reverse=True):
-        if f" {cand} " in hay:
-            return cand, anchors[cand], None
-    for cand in sorted(excluded, key=len, reverse=True):
-        if f" {cand} " in hay:
-            return cand, None, excluded[cand]
+    hit, val = _match_named(key, anchors)
+    if hit:
+        return hit, val, None
+    hit, val = _match_named(key, excluded)
+    if hit:
+        return hit, None, val
+    parts = [part.strip() for part in re.split(r"\sو", key) if part.strip()]
+    if len(parts) > 1:
+        found_anchor = None
+        found_excluded = None
+        for part in parts:
+            h, v = _match_named(part, anchors)
+            if h and (found_anchor is None or len(h) > len(found_anchor[0])):
+                found_anchor = (h, v)
+            h, v = _match_named(part, excluded)
+            if h:
+                found_excluded = (h, v)
+        if found_anchor:
+            return found_anchor[0], found_anchor[1], None
+        if found_excluded:
+            return found_excluded[0], None, found_excluded[1]
     return None, None, None
+
 
 
 def in_surface(lat: float, lon: float, surf: dict) -> bool:
