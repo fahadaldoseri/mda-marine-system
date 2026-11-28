@@ -2,6 +2,7 @@
 # الجدولة موقوفة. لا cron. الاستئناف المجدول يعيد cron: "40 1 * * *" بأمر لاحق.
 # 2026-11-28 09:28 البحرين: أمر المالك بتشغيل حقيقي ونشر لتاريخ 2026-11-28.
 # تلغرام ملغى بأمر المالك. لا إرسال.
+# W010 تُشغَّل ببرومتها الكاملة. لا تقسيم. التقسيم ليس على هذا الفرع.
 # النشر فقط بحكم 0 أو 3.
 name: daily
 
@@ -15,6 +16,10 @@ on:
         description: "نشر الموقع (لا = تشغيل جاف حتى G069). تلغرام لا يُرسل."
         type: boolean
         default: false
+      agent_steps:
+        description: "خطوات الوكيل. 8 عادي. 1 = W010 كاملة بلا تقسيم"
+        required: false
+        default: "8"
 
 permissions:
   contents: write
@@ -97,7 +102,9 @@ jobs:
           LLM_MODEL: ${{ vars.LLM_MODEL || 'auto' }}
         run: |
           set +e
-          python3 tools/agent_write_llm.py --date "$D" 2>&1 | tee /tmp/agent_loop.log; rc=${PIPESTATUS[0]}
+          AGENT_STEPS="${{ inputs.agent_steps || '8' }}"
+          echo "خطوات الوكيل: $AGENT_STEPS (1 = W010 فقط، بلا تقسيم)"
+          python3 tools/agent_write_llm.py --date "$D" --max-steps "$AGENT_STEPS" 2>&1 | tee /tmp/agent_loop.log; rc=${PIPESTATUS[0]}
           python3 tools/publish_verdict.py --date "$D"; v=$?
           echo "VERDICT=$v" >> "$GITHUB_ENV"
           echo "### حكم النشر $D: $v (خط $rc)" >> "$GITHUB_STEP_SUMMARY"
