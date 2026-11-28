@@ -1,6 +1,6 @@
 {
-  "url": "file:///home/ubuntu/mda-marine-system/site/dist/reports/2026-11-21.html",
-  "at": "2026-11-21T02:41:49+00:00",
+  "url": "file:///home/ubuntu/mda-marine-system/site/dist/reports/2026-11-28.html",
+  "at": "2026-11-28T10:40:45+00:00",
   "widths": {
     "1440": {
       "compat": "CSS1Compat",
@@ -15,7 +15,7 @@
         {
           "id": "ev-01",
           "w": 354,
-          "h": 491,
+          "h": 521,
           "clip_loss": 0,
           "clips": [],
           "top": 3414
@@ -23,7 +23,7 @@
         {
           "id": "ev-02",
           "w": 354,
-          "h": 491,
+          "h": 521,
           "clip_loss": 0,
           "clips": [],
           "top": 3414
@@ -31,10 +31,18 @@
         {
           "id": "ev-03",
           "w": 354,
-          "h": 491,
+          "h": 521,
           "clip_loss": 0,
           "clips": [],
           "top": 3414
+        },
+        {
+          "id": "ev-04",
+          "w": 354,
+          "h": 521,
+          "clip_loss": 0,
+          "clips": [],
+          "top": 3947
         }
       ],
       "decision": {
@@ -82,7 +90,7 @@
         },
         {
           "q": "التحذيرات",
-          "found": false
+          "found": true
         },
         {
           "q": "ما يُراقب",
@@ -101,7 +109,7 @@
         {
           "p": "هجمات مؤكدة",
           "count": 1,
-          "context": "دة 0 · مرجّحة 0 · مؤهلة غير مؤكدة 0 · مستثناة 0 · إجمالي 0  هجمات مؤكدة على سفن (IMO): 138 · آخر تحديث 17 نوفمبر 2026  س"
+          "context": "دة 0 · مرجّحة 0 · مؤهلة غير مؤكدة 0 · مستثناة 0 · إجمالي 0  هجمات مؤكدة على سفن (IMO): 146 · آخر تحديث 27 نوفمبر 2026  س"
         }
       ],
       "anchor_links": [
@@ -190,24 +198,31 @@
           "same_page_exists": true
         },
         {
-          "href": "https://www.ukmto.org/recent-incidents#a9279ed0-9fba-45aa-8139-29871a936e20",
-          "page": "https://www.ukmto.org/recent-incidents",
-          "hash": "a9279ed0-9fba-45aa-8139-29871a936e20",
-          "text": "UKMTO — الحوادث الأخيرة",
+          "href": "https://www.dvidshub.net/news/580348/us-forces-disable-commercial-vessel-during-blockade-enforcement-against-iran#:~:text=precision%20munitions%20that%20struck%20the%20stern",
+          "page": "https://www.dvidshub.net/news/580348/us-forces-disable-commercial-vessel-during-blockade-enforcement-against-iran",
+          "hash": ":~:text=precision%20munitions%20that%20struck%20the%20stern",
+          "text": "القيادة المركزية الأمريكية (سن",
           "same_page_exists": false
         },
         {
-          "href": "https://www.ukmto.org/recent-incidents#a4bc99f3-ccc2-469c-ab05-53d2009c8974",
+          "href": "https://www.ukmto.org/recent-incidents#:~:text=UKMTO%20has%20received%20a%20report%20of%20an%20incident%20involving%20a%20cargo%20vessel",
           "page": "https://www.ukmto.org/recent-incidents",
-          "hash": "a4bc99f3-ccc2-469c-ab05-53d2009c8974",
-          "text": "UKMTO — الحوادث الأخيرة",
+          "hash": ":~:text=UKMTO%20has%20received%20a%20report%20of%20an%20incident%20involving%20a%20cargo%20vessel",
+          "text": "UKMTO — التحذيرات 2026",
           "same_page_exists": false
         },
         {
-          "href": "https://gcaptain.com/houthis-order-ships-to-leave-saudi-red-sea-ports-after-hodeidah-airstrikes/#:~:text=urge%20all%20shipping%20companies%20to%20immediately%20evacuate%20their%20ships",
-          "page": "https://gcaptain.com/houthis-order-ships-to-leave-saudi-red-sea-ports-after-hodeidah-airstrikes/",
-          "hash": ":~:text=urge%20all%20shipping%20companies%20to%20immediately%20evacuate%20their%20ships",
-          "text": "gCaptain",
+          "href": "https://en.mehrnews.com/news/249728/Oil-tanker-strikes-mine-in-south-of-Strait-of-Hormuz#:~:text=Oil%20tanker%20strikes%20mine%20in%20south%20of%20Strait%20of%20Hormuz",
+          "page": "https://en.mehrnews.com/news/249728/Oil-tanker-strikes-mine-in-south-of-Strait-of-Hormuz",
+          "hash": ":~:text=Oil%20tanker%20strikes%20mine%20in%20south%20of%20Strait%20of%20Hormuz",
+          "text": "Mehr — العربي",
+          "same_page_exists": false
+        },
+        {
+          "href": "https://www.tradewindsnews.com/tankers/tanker-linked-to-first-middle-east-war-seafarer-deaths-struck-for-second-time-/2-1-2081106#:~:text=struck%20for%20second%20time",
+          "page": "https://www.tradewindsnews.com/tankers/tanker-linked-to-first-middle-east-war-seafarer-deaths-struck-for-second-time-/2-1-2081106",
+          "hash": ":~:text=struck%20for%20second%20time",
+          "text": "TradeWinds",
           "same_page_exists": false
         }
       ],
@@ -221,9 +236,10 @@
         "#sec-03": true,
         "#sec-map": true,
         "/additions.html#news-card": true,
-        "https://www.ukmto.org/recent-incidents#a9279ed0-9fba-45aa-8139-29871a936e20": true,
-        "https://www.ukmto.org/recent-incidents#a4bc99f3-ccc2-469c-ab05-53d2009c8974": true,
-        "https://gcaptain.com/houthis-order-ships-to-leave-saudi-red-sea-ports-after-hodeidah-airstrikes/#:~:text=urge%20all%20shipping%20companies%20to%20immediately%20evacuate%20their%20ships": true
+        "https://www.dvidshub.net/news/580348/us-forces-disable-commercial-vessel-during-blockade-enforcement-against-iran#:~:text=precision%20munitions%20that%20struck%20the%20stern": true,
+        "https://www.ukmto.org/recent-incidents#:~:text=UKMTO%20has%20received%20a%20report%20of%20an%20incident%20involving%20a%20cargo%20vessel": true,
+        "https://en.mehrnews.com/news/249728/Oil-tanker-strikes-mine-in-south-of-Strait-of-Hormuz#:~:text=Oil%20tanker%20strikes%20mine%20in%20south%20of%20Strait%20of%20Hormuz": true,
+        "https://www.tradewindsnews.com/tankers/tanker-linked-to-first-middle-east-war-seafarer-deaths-struck-for-second-time-/2-1-2081106#:~:text=struck%20for%20second%20time": true
       },
       "anchor_target_details": {
         "#sn-main": {
@@ -271,17 +287,25 @@
           "dom_wait_ms": 15000,
           "exists": true
         },
-        "https://www.ukmto.org/recent-incidents#a9279ed0-9fba-45aa-8139-29871a936e20": {
+        "https://www.dvidshub.net/news/580348/us-forces-disable-commercial-vessel-during-blockade-enforcement-against-iran#:~:text=precision%20munitions%20that%20struck%20the%20stern": {
           "http_status": 200,
           "dom_wait_ms": 15000,
           "exists": true
         },
-        "https://www.ukmto.org/recent-incidents#a4bc99f3-ccc2-469c-ab05-53d2009c8974": {
+        "https://www.ukmto.org/recent-incidents#:~:text=UKMTO%20has%20received%20a%20report%20of%20an%20incident%20involving%20a%20cargo%20vessel": {
           "http_status": 200,
           "dom_wait_ms": 15000,
           "exists": true
         },
-        "https://gcaptain.com/houthis-order-ships-to-leave-saudi-red-sea-ports-after-hodeidah-airstrikes/#:~:text=urge%20all%20shipping%20companies%20to%20immediately%20evacuate%20their%20ships": {
+        "https://en.mehrnews.com/news/249728/Oil-tanker-strikes-mine-in-south-of-Strait-of-Hormuz#:~:text=Oil%20tanker%20strikes%20mine%20in%20south%20of%20Strait%20of%20Hormuz": {
+          "method": "owner_waiver",
+          "exists": true,
+          "waiver_reason": "الموقع يردّ من شبكة السحابة بخطأ 502 وانقطاع الاتصال، ولا نسخة محفوظة وقت الجمع (التغذية عبر وسيط)",
+          "waiver_approved_by": "فهد الدوسري، بطاقة قرار 2026-11-28",
+          "http_status": 502,
+          "live_error": "anchor target HTTP 502; DOM target absent"
+        },
+        "https://www.tradewindsnews.com/tankers/tanker-linked-to-first-middle-east-war-seafarer-deaths-struck-for-second-time-/2-1-2081106#:~:text=struck%20for%20second%20time": {
           "http_status": 200,
           "dom_wait_ms": 15000,
           "exists": true
@@ -304,7 +328,7 @@
         {
           "id": "ev-01",
           "w": 354,
-          "h": 491,
+          "h": 521,
           "clip_loss": 0,
           "clips": [],
           "top": 3414
@@ -312,7 +336,7 @@
         {
           "id": "ev-02",
           "w": 354,
-          "h": 491,
+          "h": 521,
           "clip_loss": 0,
           "clips": [],
           "top": 3414
@@ -320,10 +344,18 @@
         {
           "id": "ev-03",
           "w": 354,
-          "h": 491,
+          "h": 521,
           "clip_loss": 0,
           "clips": [],
           "top": 3414
+        },
+        {
+          "id": "ev-04",
+          "w": 354,
+          "h": 521,
+          "clip_loss": 0,
+          "clips": [],
+          "top": 3947
         }
       ],
       "decision": {
@@ -371,7 +403,7 @@
         },
         {
           "q": "التحذيرات",
-          "found": false
+          "found": true
         },
         {
           "q": "ما يُراقب",
@@ -390,7 +422,7 @@
         {
           "p": "هجمات مؤكدة",
           "count": 1,
-          "context": "دة 0 · مرجّحة 0 · مؤهلة غير مؤكدة 0 · مستثناة 0 · إجمالي 0  هجمات مؤكدة على سفن (IMO): 138 · آخر تحديث 17 نوفمبر 2026  س"
+          "context": "دة 0 · مرجّحة 0 · مؤهلة غير مؤكدة 0 · مستثناة 0 · إجمالي 0  هجمات مؤكدة على سفن (IMO): 146 · آخر تحديث 27 نوفمبر 2026  س"
         }
       ],
       "anchor_links": [
@@ -479,24 +511,31 @@
           "same_page_exists": true
         },
         {
-          "href": "https://www.ukmto.org/recent-incidents#a9279ed0-9fba-45aa-8139-29871a936e20",
-          "page": "https://www.ukmto.org/recent-incidents",
-          "hash": "a9279ed0-9fba-45aa-8139-29871a936e20",
-          "text": "UKMTO — الحوادث الأخيرة",
+          "href": "https://www.dvidshub.net/news/580348/us-forces-disable-commercial-vessel-during-blockade-enforcement-against-iran#:~:text=precision%20munitions%20that%20struck%20the%20stern",
+          "page": "https://www.dvidshub.net/news/580348/us-forces-disable-commercial-vessel-during-blockade-enforcement-against-iran",
+          "hash": ":~:text=precision%20munitions%20that%20struck%20the%20stern",
+          "text": "القيادة المركزية الأمريكية (سن",
           "same_page_exists": false
         },
         {
-          "href": "https://www.ukmto.org/recent-incidents#a4bc99f3-ccc2-469c-ab05-53d2009c8974",
+          "href": "https://www.ukmto.org/recent-incidents#:~:text=UKMTO%20has%20received%20a%20report%20of%20an%20incident%20involving%20a%20cargo%20vessel",
           "page": "https://www.ukmto.org/recent-incidents",
-          "hash": "a4bc99f3-ccc2-469c-ab05-53d2009c8974",
-          "text": "UKMTO — الحوادث الأخيرة",
+          "hash": ":~:text=UKMTO%20has%20received%20a%20report%20of%20an%20incident%20involving%20a%20cargo%20vessel",
+          "text": "UKMTO — التحذيرات 2026",
           "same_page_exists": false
         },
         {
-          "href": "https://gcaptain.com/houthis-order-ships-to-leave-saudi-red-sea-ports-after-hodeidah-airstrikes/#:~:text=urge%20all%20shipping%20companies%20to%20immediately%20evacuate%20their%20ships",
-          "page": "https://gcaptain.com/houthis-order-ships-to-leave-saudi-red-sea-ports-after-hodeidah-airstrikes/",
-          "hash": ":~:text=urge%20all%20shipping%20companies%20to%20immediately%20evacuate%20their%20ships",
-          "text": "gCaptain",
+          "href": "https://en.mehrnews.com/news/249728/Oil-tanker-strikes-mine-in-south-of-Strait-of-Hormuz#:~:text=Oil%20tanker%20strikes%20mine%20in%20south%20of%20Strait%20of%20Hormuz",
+          "page": "https://en.mehrnews.com/news/249728/Oil-tanker-strikes-mine-in-south-of-Strait-of-Hormuz",
+          "hash": ":~:text=Oil%20tanker%20strikes%20mine%20in%20south%20of%20Strait%20of%20Hormuz",
+          "text": "Mehr — العربي",
+          "same_page_exists": false
+        },
+        {
+          "href": "https://www.tradewindsnews.com/tankers/tanker-linked-to-first-middle-east-war-seafarer-deaths-struck-for-second-time-/2-1-2081106#:~:text=struck%20for%20second%20time",
+          "page": "https://www.tradewindsnews.com/tankers/tanker-linked-to-first-middle-east-war-seafarer-deaths-struck-for-second-time-/2-1-2081106",
+          "hash": ":~:text=struck%20for%20second%20time",
+          "text": "TradeWinds",
           "same_page_exists": false
         }
       ],
@@ -510,9 +549,10 @@
         "#sec-03": true,
         "#sec-map": true,
         "/additions.html#news-card": true,
-        "https://www.ukmto.org/recent-incidents#a9279ed0-9fba-45aa-8139-29871a936e20": true,
-        "https://www.ukmto.org/recent-incidents#a4bc99f3-ccc2-469c-ab05-53d2009c8974": true,
-        "https://gcaptain.com/houthis-order-ships-to-leave-saudi-red-sea-ports-after-hodeidah-airstrikes/#:~:text=urge%20all%20shipping%20companies%20to%20immediately%20evacuate%20their%20ships": true
+        "https://www.dvidshub.net/news/580348/us-forces-disable-commercial-vessel-during-blockade-enforcement-against-iran#:~:text=precision%20munitions%20that%20struck%20the%20stern": true,
+        "https://www.ukmto.org/recent-incidents#:~:text=UKMTO%20has%20received%20a%20report%20of%20an%20incident%20involving%20a%20cargo%20vessel": true,
+        "https://en.mehrnews.com/news/249728/Oil-tanker-strikes-mine-in-south-of-Strait-of-Hormuz#:~:text=Oil%20tanker%20strikes%20mine%20in%20south%20of%20Strait%20of%20Hormuz": true,
+        "https://www.tradewindsnews.com/tankers/tanker-linked-to-first-middle-east-war-seafarer-deaths-struck-for-second-time-/2-1-2081106#:~:text=struck%20for%20second%20time": true
       },
       "anchor_target_details": {
         "#sn-main": {
@@ -560,17 +600,25 @@
           "dom_wait_ms": 15000,
           "exists": true
         },
-        "https://www.ukmto.org/recent-incidents#a9279ed0-9fba-45aa-8139-29871a936e20": {
+        "https://www.dvidshub.net/news/580348/us-forces-disable-commercial-vessel-during-blockade-enforcement-against-iran#:~:text=precision%20munitions%20that%20struck%20the%20stern": {
           "http_status": 200,
           "dom_wait_ms": 15000,
           "exists": true
         },
-        "https://www.ukmto.org/recent-incidents#a4bc99f3-ccc2-469c-ab05-53d2009c8974": {
+        "https://www.ukmto.org/recent-incidents#:~:text=UKMTO%20has%20received%20a%20report%20of%20an%20incident%20involving%20a%20cargo%20vessel": {
           "http_status": 200,
           "dom_wait_ms": 15000,
           "exists": true
         },
-        "https://gcaptain.com/houthis-order-ships-to-leave-saudi-red-sea-ports-after-hodeidah-airstrikes/#:~:text=urge%20all%20shipping%20companies%20to%20immediately%20evacuate%20their%20ships": {
+        "https://en.mehrnews.com/news/249728/Oil-tanker-strikes-mine-in-south-of-Strait-of-Hormuz#:~:text=Oil%20tanker%20strikes%20mine%20in%20south%20of%20Strait%20of%20Hormuz": {
+          "method": "owner_waiver",
+          "exists": true,
+          "waiver_reason": "الموقع يردّ من شبكة السحابة بخطأ 502 وانقطاع الاتصال، ولا نسخة محفوظة وقت الجمع (التغذية عبر وسيط)",
+          "waiver_approved_by": "فهد الدوسري، بطاقة قرار 2026-11-28",
+          "http_status": 502,
+          "live_error": "anchor target HTTP 502; DOM target absent"
+        },
+        "https://www.tradewindsnews.com/tankers/tanker-linked-to-first-middle-east-war-seafarer-deaths-struck-for-second-time-/2-1-2081106#:~:text=struck%20for%20second%20time": {
           "http_status": 200,
           "dom_wait_ms": 15000,
           "exists": true
@@ -581,7 +629,7 @@
       ]
     }
   },
-  "dist_fingerprint": "2544f38e40fd17b2d36ea7c48717222a0bd7aa3c75bb569b35df72ef1f26885b",
+  "dist_fingerprint": "770e9670074551be93ecdbc281ef2c739ff27795151510c530b96b095495c3e8",
   "checks": [
     "decision"
   ],
